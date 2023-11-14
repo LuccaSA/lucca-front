@@ -2,7 +2,7 @@ import { CheckboxfieldComponent, SwitchfieldComponent } from '@lucca-front/ng/fo
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { cleanupTemplate } from 'stories/helpers/stories';
+import { cleanupTemplate, generateInputs } from 'stories/helpers/stories';
 
 export default {
 	title: 'Documentation/Forms/Fields/SwitchField/Angular',
@@ -12,21 +12,12 @@ export default {
 			imports: [SwitchfieldComponent, FormsModule, ReactiveFormsModule],
 		}),
 	],
-} as Meta;
-
-export const Basic: StoryObj<SwitchfieldComponent> = {
-	render: ({ label, required, hiddenLabel, inlineMessage, size, inlineMessageState, tooltip }) => {
+	render: (inputs, { argTypes }) => {
 		return {
 			props: {
 				example: false,
 			},
-			template: cleanupTemplate(`<lu-switchfield label="${label}"
-	required="${required}"
-	${hiddenLabel ? 'hiddenLabel' : ''}
-	tooltip="${tooltip}"
-	inlineMessage="${inlineMessage}"
-	inlineMessageState="${inlineMessageState}"
-	size="${size}"
+			template: cleanupTemplate(`<lu-switchfield ${generateInputs(inputs, argTypes)}
 	[(ngModel)]="example">
 </lu-switchfield>
 
@@ -36,6 +27,9 @@ export const Basic: StoryObj<SwitchfieldComponent> = {
 			},
 		};
 	},
+} as Meta;
+
+export const Basic: StoryObj<SwitchfieldComponent> = {
 	args: {
 		label: 'Label',
 		hiddenLabel: false,

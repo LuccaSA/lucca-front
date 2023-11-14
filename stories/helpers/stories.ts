@@ -1,4 +1,5 @@
 import { StoryObj } from '@storybook/angular';
+import { StrictArgTypes } from '@storybook/types';
 
 export interface StoryGeneratorArgs<TComponent> {
 	name: string;
@@ -83,4 +84,37 @@ export function cleanupTemplate(template: string): string {
 		.replace(/^\n+/, '')
 		.replace(/\n{2,}\t/gm, '')
 		.replace(/ {2,}/gm, ' ');
+}
+
+export function generateInputs(inputs: Record<string, unknown>, argTypes: StrictArgTypes, disableBooleanAttributes = false): string {
+	return Object.entries(inputs).reduce((acc, [name, value]) => {
+		const argType = argTypes[name];
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+		if (argType['table'] && argType['table'].category !== 'inputs') {
+			return acc;
+		}
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+		const defaultValue: unknown = argType['table']?.defaultValue?.summary;
+		if (value === defaultValue || value === null || value === undefined) {
+			return acc;
+		}
+		// Let's treat boolean inputs as booleanAttributes for stories
+		if (!disableBooleanAttributes && typeof value === 'boolean') {
+			if (value) {
+				return `${acc} ${name}`;
+			}
+			return acc;
+		}
+		return `${acc} ${name}="${value.toString()}"`;
+	}, '');
+}
+
+export function storyInput<T>(inputName: string, currentValue: T, defaultValue: T, booleanAttribute = false): string {
+	if (currentValue === defaultValue) {
+		return '';
+	}
+	if (booleanAttribute) {
+		return inputName;
+	}
+	return `${inputName}="${currentValue.toString()}"`;
 }

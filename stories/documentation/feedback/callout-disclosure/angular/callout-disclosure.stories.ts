@@ -1,6 +1,7 @@
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { CalloutDisclosureComponent, CalloutFeedbackItemComponent, CalloutFeedbackListComponent } from '@lucca-front/ng/callout';
 import { ButtonComponent } from '@lucca-front/ng/button';
+import { generateInputs } from 'stories/helpers/stories';
 
 export default {
 	title: 'Documentation/Feedback/Callout Disclosure/Angular',
@@ -10,14 +11,9 @@ export default {
 			imports: [CalloutFeedbackItemComponent, CalloutFeedbackListComponent, ButtonComponent],
 		}),
 	],
-	render: (args: CalloutDisclosureComponent & { iconless: boolean }) => {
-		const { heading, icon, iconless, palette, size } = args;
-		const iconStr = iconless ? '[icon]="null"' : `icon="${icon}"`;
-		// TODO build something to generate these instead of always applying the same logic
-		const paletteStr = palette ? ` palette="${palette}"` : '';
-		const sizeStr = size ? ` size="${size}"` : '';
+	render: (args, { argTypes }) => {
 		return {
-			template: `<lu-callout-disclosure heading="${heading}"${paletteStr}${sizeStr} ${iconStr}>
+			template: `<lu-callout-disclosure ${generateInputs(args, argTypes)}>
 		<ul lu-callout-feedback-list palette="grey">
 			<li lu-callout-feedback-item>
 				<lu-feedback-item-description>
@@ -37,17 +33,24 @@ export default {
 		};
 	},
 	argTypes: {
-		iconless: {
-			control: 'boolean',
-			description: 'This is not a real input, it just sets icon to null because storybook cannot do it',
+		icon: {
+			options: [null, 'info', 'success', 'warning', 'error', 'help'],
+			control: {
+				type: 'select',
+			},
+		},
+		state: {
+			options: [null, 'success', 'warning', 'error'],
+			control: {
+				type: 'select',
+			},
 		},
 	},
 } as Meta;
 
-export const Template: StoryObj<CalloutDisclosureComponent & { iconless: boolean }> = {
+export const Template: StoryObj<CalloutDisclosureComponent> = {
 	args: {
 		icon: 'signInfo',
 		heading: 'List title',
-		iconless: false,
 	},
 };
