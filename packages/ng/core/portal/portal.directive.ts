@@ -11,7 +11,7 @@ export class PortalDirective<T = unknown> implements OnChanges {
 	private templateRef = inject(TemplateRef);
 
 	@Input({ required: true })
-	private luPortal: PortalContent<T> = null;
+	public luPortal: PortalContent<T> = null;
 
 	private render(): void {
 		this.viewContainerRef.clear();
