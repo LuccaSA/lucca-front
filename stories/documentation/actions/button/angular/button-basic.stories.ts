@@ -6,7 +6,7 @@ export default {
 	component: ButtonComponent,
 	render: ({ size, block, palette, state, luButton }) => {
 		return {
-			template: `<button luButton${luButton !== 'default' ? `="${luButton}"` : ''} 
+			template: `<button luButton${luButton !== '' ? `="${luButton}"` : ''} 
 ${size !== 'M' ? `size=${size}` : ''}
 ${block ? 'block' : ''}
 ${palette !== 'none' ? `palette=${palette}` : ''}
@@ -22,6 +22,6 @@ export const Basic: StoryObj<ButtonComponent> = {
 		block: false,
 		palette: 'none',
 		state: 'default',
-		luButton: 'default',
+		luButton: '',
 	},
 };
