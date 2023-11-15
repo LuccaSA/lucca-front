@@ -12,6 +12,10 @@
 		}
 	}
 
+	&.mod-XXS {
+		@include XXS;
+	}
+
 	&.mod-XS {
 		@include XS;
 	}

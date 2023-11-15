@@ -1,0 +1,10 @@
+@use 'exports' as *;
+
+.calloutFeedbackList {
+	@include vars;
+	@include component;
+
+	&.mod-S {
+		@include S;
+	}
+}

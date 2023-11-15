@@ -1,0 +1,14 @@
+@use 'exports' as *;
+
+.calloutAccordion {
+	@include vars;
+	@include component;
+
+	&[open] {
+		@include open;
+	}
+
+	&.mod-S {
+		@include S;
+	}
+}

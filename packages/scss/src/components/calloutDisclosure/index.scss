@@ -1,0 +1,18 @@
+@use 'exports' as *;
+
+.calloutDisclosure {
+	@include vars;
+	@include component;
+
+	&[open] {
+		@include open;
+	}
+
+	&.mod-S {
+		@include S;
+	}
+
+	&.mod-iconless {
+		@include iconless;
+	}
+}
