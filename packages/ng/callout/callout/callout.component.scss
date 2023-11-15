@@ -1,7 +1,1 @@
 @use '@lucca-front/scss/src/components/callout';
-
-:host {
-  &:not([hidden]) {
-    display: block;
-  }
-}

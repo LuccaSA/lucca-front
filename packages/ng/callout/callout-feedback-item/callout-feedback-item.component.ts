@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 
 @Component({
 	// eslint-disable-next-line @angular-eslint/component-selector
@@ -11,5 +11,6 @@ import { Component } from '@angular/core';
 	host: {
 		class: 'calloutFeedbackList-item',
 	},
+	encapsulation: ViewEncapsulation.None,
 })
 export class CalloutFeedbackItemComponent {}

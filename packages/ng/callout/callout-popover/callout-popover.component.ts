@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ElementRef, inject, Input, numberAttribute, OnDestroy, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, inject, Input, numberAttribute, OnDestroy, TemplateRef, ViewChild, ViewContainerRef, ViewEncapsulation } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { Overlay, OverlayRef } from '@angular/cdk/overlay';
@@ -35,6 +35,7 @@ import { CalloutState, CalloutStateMap } from '../callout-state';
 	templateUrl: './callout-popover.component.html',
 	styleUrls: ['./callout-popover.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
+	encapsulation: ViewEncapsulation.None,
 })
 export class CalloutPopoverComponent implements OnDestroy {
 	#overlay = inject(Overlay);

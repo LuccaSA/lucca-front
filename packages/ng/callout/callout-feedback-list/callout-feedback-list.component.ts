@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, Input, OnChanges } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, Input, OnChanges, ViewEncapsulation } from '@angular/core';
 import { NgClazz, Palette } from '@lucca-front/ng/core';
 
 @Component({
@@ -12,6 +12,7 @@ import { NgClazz, Palette } from '@lucca-front/ng/core';
 		class: 'calloutFeedbackList',
 	},
 	hostDirectives: [NgClazz],
+	encapsulation: ViewEncapsulation.None,
 })
 export class CalloutFeedbackListComponent implements OnChanges {
 	#ngClass = inject(NgClazz);
@@ -20,7 +21,7 @@ export class CalloutFeedbackListComponent implements OnChanges {
 	palette: Palette;
 
 	@Input()
-	size: 'M' | 'S' = 'M';
+	size: 'M' | 'S';
 
 	ngOnChanges(): void {
 		this.#ngClass.ngClass = [`palette-${this.palette}`, `mod-${this.size}`];

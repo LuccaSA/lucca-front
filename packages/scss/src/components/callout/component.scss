@@ -7,13 +7,16 @@
 	border-radius: var(--commons-borderRadius-L);
 	background-color: var(--palettes-50, var(--palettes-grey-50));
 	color: var(--palettes-grey-800);
-	display: flex;
 	border-color: var(--palettes-300, var(--palettes-grey-300));
 	border-style: solid;
 	border-width: var(--commons-divider-width);
 	gap: 0.75rem;
 	padding: var(--spacings-XS) 0.75rem;
 	position: relative;
+
+	&:not([hidden]) {
+		display: flex;
+	}
 
 	a,
 	.link {
