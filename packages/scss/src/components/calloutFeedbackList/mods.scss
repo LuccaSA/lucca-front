@@ -1,0 +1,10 @@
+@use '@lucca-front/scss/src/components/button/exports' as button;
+
+@mixin S {
+  font-size: var(--sizes-S-fontSize);
+  line-height: var(--sizes-S-lineHeight);
+
+  .button {
+    @include button.XS;
+  }
+}

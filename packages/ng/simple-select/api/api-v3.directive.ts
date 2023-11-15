@@ -43,14 +43,21 @@ export class LuSimpleSelectApiV3Directive<T extends ILuApiItem> extends ALuSimpl
 			...filters,
 			fields,
 			...(orderBy ? { orderBy } : {}),
-			...(clue ? { name: `like,${encodeURIComponent(clue)}` } : {}),
+			...(clue ? { name: `like,${clue}` } : {}),
 		})),
 	);
 
 	protected override getOptions(params: Record<string, string | number | boolean>, page: number): Observable<T[]> {
 		return this.url$.pipe(
 			take(1),
-			switchMap((url) => this.httpClient.get<ILuApiCollectionResponse<T>>(url, { params: { ...params, paging: `${page * this.pageSize},${this.pageSize}` } })),
+			switchMap((url) =>
+				this.httpClient.get<ILuApiCollectionResponse<T>>(url, {
+					params: {
+						...params,
+						paging: `${page * this.pageSize},${this.pageSize}`,
+					},
+				}),
+			),
 			map((res) => res.data.items),
 		);
 	}

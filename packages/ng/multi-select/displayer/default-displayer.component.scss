@@ -6,6 +6,7 @@
 	height: var(--sizes-M-lineHeight);
 	position: relative;
 	padding-right: var(--hidden-option-count-width);
+	overflow: hidden;
 }
 
 :host-context(.textfield.mod-S) {

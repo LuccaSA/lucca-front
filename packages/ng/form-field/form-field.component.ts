@@ -8,13 +8,14 @@ import { SafeHtml } from '@angular/platform-browser';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 import { NgClazz } from '@lucca-front/ng/core';
 import { ReactiveFormsModule } from '@angular/forms';
+import { IconComponent } from '@lucca-front/ng/icon';
 
 let nextId = 0;
 
 @Component({
 	selector: 'lu-form-field',
 	standalone: true,
-	imports: [NgIf, NgSwitch, NgSwitchCase, NgTemplateOutlet, InlineMessageComponent, LuTooltipModule, ReactiveFormsModule],
+	imports: [NgIf, NgSwitch, NgSwitchCase, NgTemplateOutlet, InlineMessageComponent, LuTooltipModule, ReactiveFormsModule, IconComponent],
 	templateUrl: './form-field.component.html',
 	styleUrls: ['./form-field.component.scss'],
 	hostDirectives: [NgClazz],
@@ -58,7 +59,7 @@ export class FormFieldComponent implements OnChanges, OnDestroy, AfterViewInit {
 	inlineMessageState: InlineMessageState;
 
 	@Input()
-	size: FormFieldSize = 'M';
+	size: FormFieldSize;
 
 	@Input()
 	layout: 'default' | 'checkbox' = 'default';

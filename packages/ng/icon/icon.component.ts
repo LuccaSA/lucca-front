@@ -14,11 +14,11 @@ export class IconComponent {
 	@Input({ required: true })
 	icon: LuccaIcon;
 
-	@Input({ required: true })
+	@Input()
 	alt: string;
 
 	@Input()
-	size: 'XS' | 'S' | 'M' | 'L' | 'XL' | 'XXL' = 'M';
+	size: 'XS' | 'S' | 'M' | 'L' | 'XL' | 'XXL';
 
 	@Input()
 	color: 'primary' | 'secondary' | 'error' | 'warning' | 'success' | 'light' | 'placeholder' | 'inherit' = 'inherit';

@@ -1,0 +1,59 @@
+@use '@lucca-front/scss/src/commons/utils/a11y';
+@use '@lucca-front/scss/src/components/title/exports' as title;
+@use '@lucca-front/icons/src/icon/exports' as icon;
+
+@mixin component($atRoot: 'without: rule') {
+	display: inline-flex;
+	gap: 0.375rem;
+	align-items: center;
+	padding: var(--spacings-XS);
+	border-radius: var(--commons-borderRadius-L);
+	background-color: var(--palettes-50, var(--palettes-grey-50));
+	border-color: var(--palettes-300, var(--palettes-grey-300));
+	border-style: solid;
+	border-width: var(--commons-divider-width);
+	cursor: pointer;
+
+	&:hover {
+		background-color: var(--palettes-100, var(--palettes-grey-100));
+	}
+
+	&:focus-visible {
+		@include a11y.focusVisible();
+	}
+
+	@at-root ($atRoot) {
+		.calloutPopover-icon {
+			--icon-size: 1.5rem;
+			color: var(--palettes-700, var(--palettes-grey-700));
+		}
+
+		.calloutPopover-overlay {
+		  width: var(--components-calloutPopover-width);
+			max-width: 100vw;
+		}
+
+		.calloutPopover-overlay-head {
+		  display: flex;
+		  gap: var(--spacings-XS);
+		}
+
+		.calloutPopover-overlay-head-title {
+			@include title.component;
+			@include title.h4;
+			margin: 0;
+			padding: 0;
+		}
+
+		.calloutPopover-overlay-head-icon {
+			@include icon.M;
+		  color: var(--palettes-700, var(--palettes-grey-700));
+		}
+
+		.calloutPopover-overlay-content {
+			margin: var(--spacings-XS) 0.75rem var(--spacings-XS) var(--components-calloutPopover-content-margin);
+			padding-top: var(--spacings-XS);
+			border-top: var(--commons-divider-width) solid var(--palettes-grey-200);
+		}
+	}
+}

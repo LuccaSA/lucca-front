@@ -27,7 +27,9 @@ function getTemplate(args: ChipBasicStory): string {
 	return `
 	<div class="chip ${primary} ${disabled}">
 		Label
-		<button type="button" class="chip-kill"></button>
+		<button type="button" class="chip-kill">
+			<span class="u-mask">delete</span>
+		</button>
 	</div>
 	<div class="chip ${primary} ${disabled}">
 		Label
@@ -41,4 +43,4 @@ const Template: StoryFn<ChipBasicStory> = (args: ChipBasicStory) => ({
 });
 
 export const Basic = Template.bind({});
-Basic.args = { primary: false, disabled: false};
+Basic.args = { primary: false, disabled: false };

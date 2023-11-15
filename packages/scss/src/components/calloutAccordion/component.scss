@@ -1,0 +1,52 @@
+@use '@lucca-front/icons/src/commons/utils/icon';
+@use '@lucca-front/scss/src/commons/utils/reset';
+@use '@lucca-front/scss/src/commons/utils/a11y';
+
+@mixin component($atRoot: 'without: rule') {
+	border-radius: var(--commons-borderRadius-L);
+	background-color: var(--palettes-50, var(--palettes-grey-50));
+	color: var(--palettes-grey-800);
+	border-color: var(--palettes-300, var(--palettes-grey-300));
+	border-style: solid;
+	border-width: var(--commons-divider-width);
+
+	a,
+	.link {
+		--commons-text-link-color: var(--palettes-grey-800);
+		--commons-text-link-hover: var(--palettes-grey-700);
+	}
+
+	@at-root ($atRoot) {
+		.calloutAccordion-summary {
+			display: flex;
+			gap: 0.75rem;
+			padding: var(--spacings-XS) 0.75rem;
+			cursor: pointer;
+
+			&:focus-visible {
+				@include a11y.focusVisible($offset: 3px, $borderRadius: 6px);
+			}
+		}
+
+		.calloutAccordion-summary-title {
+			font-weight: 600;
+		}
+
+		.calloutAccordion-summary-icon {
+			--icon-size: 1.5rem;
+			color: var(--palettes-700, var(--palettes-grey-700));
+		}
+
+		.calloutAccordion-summary-chevron {
+				--icon-size: 1.5rem;
+				color: var(--palettes-grey-700);
+				margin-left: auto;
+		}
+
+		.calloutAccordion-details {
+			margin: 0 3rem;
+			padding: var(--spacings-XS) 0 var(--spacings-S);
+			border-top: 1px solid var(--palettes-200, var(--palettes-grey-200));
+		}
+	}
+}

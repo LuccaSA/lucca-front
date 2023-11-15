@@ -1,5 +1,6 @@
 @use '@lucca-front/scss/src/commons/utils/loading';
 @use '@lucca-front/scss/src/commons/utils/a11y';
+@use '@lucca-front/icons/src/icon/exports' as icon;
 
 @mixin component($atRoot: 'without: rule') {
 	bottom: 0;
@@ -12,6 +13,10 @@
 	background-color: var(--components-navSide-fullwidth-palette-bg-color);
 	padding-top: var(--components-navSide-padding-top);
 	width: var(--commons-navSide-width);
+
+	.numericBadge {
+		margin-left: auto;
+	}
 
 	@at-root ($atRoot) {
 		.navSide-wrapper {
@@ -107,10 +112,6 @@
 			font-weight: 600;
 		}
 
-		.numericBadge {
-			margin-left: auto;
-		}
-
 		.navSide-item-alert { // deprecated
 			font-size: var(--sizes-XS-fontSize);
 			font-weight: 600;
@@ -137,11 +138,10 @@
 			display: grid;
 			place-items: center;
 			transform: rotate(0);
-			font-size: var(--sizes-L-fontSize);
 			flex-shrink: 0;
-			width: 1rem;
-			height: 1rem;
 			transform-origin: 50% 50%;
+			transform: rotate(90deg);
+			@include icon.S;
 		}
 
 		.navSide-item-subMenu {

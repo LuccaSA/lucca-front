@@ -1,0 +1,35 @@
+@use '@lucca-front/icons/src/icon/exports' as icon;
+@use '@lucca-front/scss/src/components/calloutFeedbackList/exports' as calloutFeedbackList;
+
+@mixin S {
+  .calloutDisclosure-summary-title {
+    font-size: var(--sizes-S-fontSize);
+    line-height: var(--sizes-S-lineHeight);
+  }
+
+  .calloutDisclosure-summary-icon {
+  	@include icon.S;
+  }
+
+  .calloutDisclosure-summary-chevron {
+  	@include icon.S;
+  }
+
+  .calloutDisclosure-details {
+    margin-left: calc(var(--components-calloutDisclosure-paddingHorizontal) + 2rem);
+  }
+
+  .calloutFeedbackList {
+    @include calloutFeedbackList.S;
+  }
+}
+
+@mixin iconless {
+  .calloutDisclosure-summary-icon {
+    display: none;
+  }
+
+  .calloutDisclosure-details {
+    margin-left: var(--components-calloutDisclosure-paddingHorizontal);
+  }
+}

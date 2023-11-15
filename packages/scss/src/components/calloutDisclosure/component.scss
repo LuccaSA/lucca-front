@@ -1,0 +1,65 @@
+@use '@lucca-front/icons/src/commons/utils/icon';
+@use '@lucca-front/scss/src/commons/utils/reset';
+@use '@lucca-front/scss/src/commons/utils/a11y';
+
+@mixin component($atRoot: 'without: rule') {
+	border-radius: var(--commons-borderRadius-L);
+	background-color: var(--palettes-50, var(--palettes-grey-50));
+	color: var(--palettes-grey-800);
+	border-color: var(--palettes-300, var(--palettes-grey-300));
+	border-style: solid;
+	border-width: var(--commons-divider-width);
+
+	a,
+	.link {
+		--commons-text-link-color: var(--palettes-grey-800);
+		--commons-text-link-hover: var(--palettes-grey-700);
+	}
+
+	@at-root ($atRoot) {
+		.calloutDisclosure-summary {
+			display: flex;
+			gap: 0.75rem;
+			padding: var(--spacings-XS) var(--components-calloutDisclosure-paddingHorizontal);
+			border-radius: var(--commons-borderRadius-L);
+			transition: background-color var(--commons-animations-durations-fast) ease;
+			cursor: pointer;
+			z-index: 1;
+			position: relative;
+
+			&:hover {
+				background-color: var(--palettes-100, var(--palettes-grey-100));
+			}
+
+			&:focus-visible {
+				@include a11y.focusVisible($offset: 3px, $borderRadius: 6px);
+
+				~ .calloutDisclosure-details {
+					box-shadow: none
+				}
+			}
+		}
+
+		.calloutDisclosure-summary-icon {
+			--icon-size: 1.5rem;
+			color: var(--palettes-700, var(--palettes-grey-700));
+		}
+
+		.calloutDisclosure-summary-title {
+			font-weight: 600;
+		}
+
+		.calloutDisclosure-summary-chevron {
+			--icon-size: 1.5rem;
+			color: var(--palettes-grey-700);
+			margin-left: auto;
+			transition: transform var(--commons-animations-durations-standard) ease;
+		}
+
+		.calloutDisclosure-details {
+			margin: 0 calc(var(--components-calloutDisclosure-paddingHorizontal) + 2.25rem);
+			padding: var(--spacings-XS) 0 var(--spacings-S);
+			box-shadow: 0 -1px 0 0 var(--palettes-200, var(--palettes-grey-200));
+		}
+	}
+}
