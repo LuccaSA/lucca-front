@@ -38,7 +38,7 @@ function getTemplate(args: MenuSecondaryBasicStory): string {
 				<div class="navSide-item mod-mobileToggle">
 					<button type="button" class="navSide-item-link" [attr.aria-expanded]="open">
 						<span class="navSide-item-link-title">Menu</span>
-						<span aria-hidden="true" class="navSide-item-arrow lucca-icon icon-arrowChevronBottom"></span>
+						<span aria-hidden="true" class="navSide-item-arrow lucca-icon icon-arrowChevronRight"></span>
 					</button>
 				</div>
 				<ul class="navSide-scrollWrapper">
@@ -46,7 +46,7 @@ function getTemplate(args: MenuSecondaryBasicStory): string {
 						<button type="button" class="navSide-item-link">
 							<span aria-hidden="true" class="lucca-icon icon-heart"></span>
 							<span class="navSide-item-link-title">Section 1</span>
-							<span aria-hidden="true" class="navSide-item-arrow lucca-icon icon-arrowChevronBottom"></span>
+							<span aria-hidden="true" class="navSide-item-arrow lucca-icon icon-arrowChevronRight"></span>
 						</button>
 						<ul class="navSide-item-subMenu">
 							<li class="navSide-item-subMenu-item">
@@ -63,7 +63,7 @@ function getTemplate(args: MenuSecondaryBasicStory): string {
 						<button type="button" class="navSide-item-link" aria-expanded="true">
 							<span aria-hidden="true" class="lucca-icon icon-peoplePerson"></span>
 							<span class="navSide-item-link-title">Section#2 with a larger name</span>
-							<span aria-hidden="true" class="navSide-item-arrow lucca-icon icon-arrowChevronBottom"></span>
+							<span aria-hidden="true" class="navSide-item-arrow lucca-icon icon-arrowChevronRight"></span>
 						</button>
 						<ul class="navSide-item-subMenu">
 							<li class="navSide-item-subMenu-item">

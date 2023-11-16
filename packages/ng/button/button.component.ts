@@ -31,7 +31,11 @@ export class ButtonComponent implements OnChanges {
 	state: 'default' | 'loading' | 'error' | 'success' = 'default';
 
 	@Input()
-	luButton: 'default' | 'outlined' | 'text' | 'text-invert' = 'default';
+	/**
+	 * '' is the default value when you just set the `luButton` directive without a value attached to it.
+	 * We just make this explicit here.
+	 */
+	luButton: '' | 'outlined' | 'text' | 'text-invert' = '';
 
 	ngOnChanges(): void {
 		const ngClassConfig = {
@@ -40,7 +44,7 @@ export class ButtonComponent implements OnChanges {
 			[`palette-${this.palette}`]: true,
 			[`is-${this.state}`]: true,
 		};
-		if (this.luButton !== 'default') {
+		if (this.luButton !== '') {
 			if (this.luButton === 'text-invert') {
 				ngClassConfig['mod-text'] = true;
 				ngClassConfig['mod-invert'] = true;
