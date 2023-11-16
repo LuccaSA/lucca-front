@@ -1,7 +1,7 @@
 import { OverlayModule } from '@angular/cdk/overlay';
 import { AsyncPipe, NgIf } from '@angular/common';
 import { ChangeDetectionStrategy, Component, forwardRef, inject } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { getIntl } from '@lucca-front/ng/core';
 import { ALuSelectInputComponent, LuSelectPanelRef, provideLuSelectLabelsAndIds, provideLuSelectOverlayContainer, ɵLuOptionOutletDirective } from '@lucca-front/ng/core-select';
 import { LU_SIMPLE_SELECT_TRANSLATIONS } from '../select.translate';
@@ -14,7 +14,7 @@ import { IconComponent } from '@lucca-front/ng/icon';
 	styleUrls: ['./select-input.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	standalone: true,
-	imports: [AsyncPipe, ɵLuOptionOutletDirective, NgIf, OverlayModule, IconComponent],
+	imports: [AsyncPipe, ɵLuOptionOutletDirective, NgIf, OverlayModule, IconComponent, FormsModule],
 	providers: [
 		{
 			provide: NG_VALUE_ACCESSOR,

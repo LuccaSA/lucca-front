@@ -34,14 +34,10 @@ export class LuSelectPanelComponent<T> implements AfterViewInit {
 		if (!input) {
 			return;
 		}
-
-		setTimeout(() => input.nativeElement.focus());
 	}
 
 	@ViewChildren(ɵLuOptionComponent) optionsQL: QueryList<ɵLuOptionComponent<T>>;
 	private keyManager: ActiveDescendantKeyManager<ɵLuOptionComponent<T>>;
-
-	search: string | null = null;
 
 	public get selected(): T | undefined {
 		return this.keyManager?.activeItem?.option;
@@ -101,10 +97,10 @@ export class LuSelectPanelComponent<T> implements AfterViewInit {
 		}
 	}
 
-	updateClue(clue: string | null): void {
-		this.search = clue;
-		this.panelRef.clueChanged.emit(clue);
-
-		setTimeout(() => this.keyManager.setFirstItemActive());
-	}
+	// updateClue(clue: string | null): void {
+	// 	this.search = clue;
+	// 	this.panelRef.clueChanged.emit(clue);
+	//
+	// 	setTimeout(() => this.keyManager.setFirstItemActive());
+	// }
 }

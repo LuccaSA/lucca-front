@@ -1,4 +1,6 @@
-<div class="lu-select-placeholder">{{ placeholder }}</div>
+<div class="lu-select-placeholder">
+	<input type="text" placeholder="{{inputPlaceholder}}" [(ngModel)]="clue" (ngModelChange)="clueChange.emit($event)" #inputElement />
+</div>
 <div class="lu-select-value">
 	<div class="lu-select-display-wrapper">
 		<ng-container *luOptionOutlet="valueTpl || optionTpl; value: value"></ng-container>

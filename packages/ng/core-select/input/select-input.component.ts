@@ -1,6 +1,6 @@
 /* eslint-disable @angular-eslint/no-output-on-prefix */
 import { OverlayConfig, OverlayContainer } from '@angular/cdk/overlay';
-import { ChangeDetectorRef, Directive, EventEmitter, HostBinding, HostListener, Input, OnDestroy, OnInit, Output, TemplateRef, Type, inject } from '@angular/core';
+import { ChangeDetectorRef, Directive, ElementRef, EventEmitter, HostBinding, HostListener, inject, Input, OnDestroy, OnInit, Output, TemplateRef, Type, ViewChild } from '@angular/core';
 import { BehaviorSubject, ReplaySubject, Subject } from 'rxjs';
 import { LuSimpleSelectDefaultOptionComponent } from '../option';
 import { LuSelectPanelRef } from '../panel';
@@ -8,9 +8,19 @@ import { LuOptionContext, SELECT_LABEL, SELECT_LABEL_ID } from '../select.model'
 
 @Directive()
 export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDestroy, OnInit {
+	@ViewChild('inputElement')
+	private inputElementRef: ElementRef<HTMLInputElement>;
+
 	@HostBinding('tabindex') tabindex = 0;
 
 	@Input() placeholder = '';
+
+	/**
+	 * Placeholder used for the input, can be either this.placeholder if clue is empty, or this.clue because you're overwriting the value.
+	 */
+	get inputPlaceholder(): string {
+		return this.clue || this.placeholder;
+	}
 
 	@Input()
 	@HostBinding('class.is-clearable')
@@ -36,6 +46,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	public get isPanelOpen(): boolean {
 		return this.isPanelOpen$.value;
 	}
+
 	public isPanelOpen$ = new BehaviorSubject(false);
 
 	@HostBinding('attr.role')
@@ -104,6 +115,9 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	onKeydown($event: KeyboardEvent) {
 		if (!this.isPanelOpen) {
 			this.openPanel();
+			if (this.inputElementRef) {
+				setTimeout(() => this.inputElementRef.nativeElement.focus());
+			}
 			$event.stopPropagation();
 			$event.preventDefault();
 		}
@@ -164,10 +178,6 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 		this.panelRef.valueChanged.subscribe((value) => this.updateValue(value));
 		this.panelRef.nextPage.subscribe(() => this.nextPage.emit());
 		this.panelRef.previousPage.subscribe(() => this.previousPage.emit());
-		this.panelRef.clueChanged.subscribe((clue) => {
-			this.clueChange.emit(clue);
-			this.clue = clue;
-		});
 		this.panelRef.activeOptionIdChanged.subscribe((optionId) => {
 			this.activeDescendant = optionId;
 			this.changeDetectorRef.markForCheck();

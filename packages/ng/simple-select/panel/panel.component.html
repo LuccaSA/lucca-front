@@ -6,16 +6,16 @@
 	[cdkTrapFocusAutoCapture]="true"
 >
 	<div class="lu-picker-content" [class.is-loading]="loading$ | async" tabindex="0" (scroll)="onScroll($event)">
-		<ng-container *ngIf="searchable">
-			<div class="panel-search textfield mod-search">
-				<input #searchInput class="textfield-input" [ngModel]="search" (ngModelChange)="updateClue($event)" />
-			</div>
+		<!--		<ng-container *ngIf="searchable">-->
+		<!--			<div class="panel-search textfield mod-search">-->
+		<!--				<input #searchInput class="textfield-input" [ngModel]="search" (ngModelChange)="updateClue($event)" />-->
+		<!--			</div>-->
 
-			<div class="optionPlaceholder" *ngIf="search && !ctx.options?.length">
-				<p class="optionPlaceholder-content u-marginBottom0">{{ intl.emptyResults }}</p>
-				<button type="button" class="link" (click)="updateClue(null); searchInput.focus()">{{ intl.clearSearch }}</button>
-			</div>
-		</ng-container>
+		<!--			<div class="optionPlaceholder" *ngIf="search && !ctx.options?.length">-->
+		<!--				<p class="optionPlaceholder-content u-marginBottom0">{{ intl.emptyResults }}</p>-->
+		<!--				<button type="button" class="link" (click)="updateClue(null); searchInput.focus()">{{ intl.clearSearch }}</button>-->
+		<!--			</div>-->
+		<!--		</ng-container>-->
 		<div class="lu-picker-content-option">
 			<lu-select-option
 				*ngFor="let option of ctx.options; let index = index"
