@@ -61,6 +61,14 @@ class MultiSelectPanelRef<T> extends LuMultiSelectPanelRef<T> {
 		this.panelRef.destroy();
 		this.overlayRef.detach();
 	}
+
+	handleKeyManagerEvent(_event: KeyboardEvent) {
+		// TODO
+	}
+
+	selectCurrentlHiglightedValue(): void {
+		// TODO
+	}
 }
 
 @Injectable()

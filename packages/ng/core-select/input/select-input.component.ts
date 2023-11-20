@@ -112,7 +112,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	@HostListener('keydown.enter', ['$event'])
 	@HostListener('keydown.arrowDown', ['$event'])
 	@HostListener('click', ['$event'])
-	onKeydown($event: KeyboardEvent) {
+	onKeydownOpenPanel($event: KeyboardEvent) {
 		if (!this.isPanelOpen) {
 			this.openPanel();
 			if (this.inputElementRef) {
@@ -120,6 +120,19 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 			}
 			$event.stopPropagation();
 			$event.preventDefault();
+		}
+	}
+
+	@HostListener('keydown', ['$event'])
+	onKeyDownNavigation($event: KeyboardEvent): void {
+		switch ($event.key) {
+			case 'Escape':
+			case 'Tab':
+				return this.panelRef.close();
+			case 'Enter':
+				return this.panelRef.selectCurrentlHiglightedValue();
+			default:
+				this.panelRef.handleKeyManagerEvent($event);
 		}
 	}
 

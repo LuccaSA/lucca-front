@@ -37,10 +37,18 @@ class SelectPanelRef<T> extends LuSelectPanelRef<T, T> {
 		this.close();
 	}
 
+	override handleKeyManagerEvent(event: KeyboardEvent) {
+		this.instance.keyManager.onKeydown(event);
+	}
+
 	override close(): void {
 		super.close();
 		this.panelRef.destroy();
 		this.overlayRef.detach();
+	}
+
+	selectCurrentlHiglightedValue(): void {
+		this.emitValue(this.instance.selected);
 	}
 }
 

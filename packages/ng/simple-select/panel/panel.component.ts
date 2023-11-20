@@ -1,6 +1,6 @@
 import { A11yModule, ActiveDescendantKeyManager } from '@angular/cdk/a11y';
 import { AsyncPipe, NgFor, NgIf } from '@angular/common';
-import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, HostListener, inject, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, inject, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { getIntl } from '@lucca-front/ng/core';
 import { LuSelectPanelRef, SELECT_ID, ɵLuOptionComponent } from '@lucca-front/ng/core-select';
@@ -37,7 +37,11 @@ export class LuSelectPanelComponent<T> implements AfterViewInit {
 	}
 
 	@ViewChildren(ɵLuOptionComponent) optionsQL: QueryList<ɵLuOptionComponent<T>>;
-	private keyManager: ActiveDescendantKeyManager<ɵLuOptionComponent<T>>;
+	private _keyManager: ActiveDescendantKeyManager<ɵLuOptionComponent<T>>;
+
+	public get keyManager(): ActiveDescendantKeyManager<ɵLuOptionComponent<T>> {
+		return this._keyManager;
+	}
 
 	public get selected(): T | undefined {
 		return this.keyManager?.activeItem?.option;
@@ -62,7 +66,7 @@ export class LuSelectPanelComponent<T> implements AfterViewInit {
 			return;
 		}
 
-		this.keyManager = new ActiveDescendantKeyManager(this.optionsQL).withHomeAndEnd();
+		this._keyManager = new ActiveDescendantKeyManager(this.optionsQL).withHomeAndEnd();
 
 		if (this.initialValue) {
 			this.options$
@@ -76,6 +80,11 @@ export class LuSelectPanelComponent<T> implements AfterViewInit {
 				.subscribe((selectedIndex) => this.keyManager.setActiveItem(selectedIndex));
 		}
 
+		/**
+		 * On new options, we want to select the first element with key manager
+		 */
+		this.options$?.pipe(observeOn(asyncScheduler), takeUntil(this.panelRef.closed)).subscribe(() => this.keyManager.setFirstItemActive());
+
 		this.keyManager.change
 			.pipe(
 				map(() => this.keyManager.activeItem?.id),
@@ -83,24 +92,4 @@ export class LuSelectPanelComponent<T> implements AfterViewInit {
 			)
 			.subscribe((activeDescendant) => this.panelRef.activeOptionIdChanged.emit(activeDescendant));
 	}
-
-	@HostListener('keydown', ['$event'])
-	onKeyDown($event: KeyboardEvent): void {
-		switch ($event.key) {
-			case 'Escape':
-			case 'Tab':
-				return this.panelRef.close();
-			case 'Enter':
-				return this.panelRef.emitValue(this.selected);
-			default:
-				this.keyManager?.onKeydown($event);
-		}
-	}
-
-	// updateClue(clue: string | null): void {
-	// 	this.search = clue;
-	// 	this.panelRef.clueChanged.emit(clue);
-	//
-	// 	setTimeout(() => this.keyManager.setFirstItemActive());
-	// }
 }
