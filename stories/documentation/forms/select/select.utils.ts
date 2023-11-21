@@ -43,7 +43,7 @@ export const allLegumes = [
 	{ name: 'Panais', index: 24 },
 	{ name: 'Petits pois', index: 25 },
 	{ name: 'Poivron', index: 26 },
-	{ name: 'Pomme de terre', index: 27 },
+	{ name: 'Pomme de terre terre terre terre terre', index: 27 },
 	{ name: 'Potimarron', index: 28 },
 	{ name: 'Radis', index: 29 },
 	{ name: 'Tomate', index: 30 },

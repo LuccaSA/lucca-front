@@ -1,11 +1,8 @@
-<div class="lu-select-placeholder">
-	<input type="text" placeholder="{{inputPlaceholder}}" [(ngModel)]="clue" (ngModelChange)="clueChange.emit($event)" #inputElement />
+<input class="simpleSelect-input" type="text" placeholder="{{inputPlaceholder}}" [(ngModel)]="clue" (ngModelChange)="clueChange.emit($event)" #inputElement />
+<div class="simpleSelect-value">
+	<ng-container *luOptionOutlet="valueTpl || optionTpl; value: value"></ng-container>
 </div>
-<div class="lu-select-value">
-	<div class="lu-select-display-wrapper">
-		<ng-container *luOptionOutlet="valueTpl || optionTpl; value: value"></ng-container>
-	</div>
-</div>
-<a *ngIf="clearable && hasValue" class="clear lu-select-clearer" role="button" (click)="clearValue($event)">
+<button *ngIf="clearable && hasValue" class="simpleSelect-clear clear" role="button" (click)="clearValue($event)">
 	<span class="u-mask">{{intl.clear}}</span>
-</a>
+</button>
+<span aria-hidden="true" class="simpleSelect-arrow lucca-icon icon-arrowChevronBottom mod-M"></span>

@@ -1,0 +1,14 @@
+@use 'exports' as *;
+
+.simpleSelect {
+	@include vars;
+	@include component;
+
+	&.is-filled:not(.is-focused) {
+		@include filled;
+	}
+
+	&.is-focused, &:focus-visible {
+		@include focused;
+	}
+}

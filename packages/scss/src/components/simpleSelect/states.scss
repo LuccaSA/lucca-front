@@ -1,0 +1,15 @@
+@use '@lucca-front/scss/src/commons/utils/a11y';
+
+@mixin focused {
+  @include a11y.focusVisible($offset: 3px);
+}
+
+@mixin filled {
+  .simpleSelect-input {
+    display: none;
+  }
+
+  .simpleSelect-value {
+    display: block;
+  }
+}
