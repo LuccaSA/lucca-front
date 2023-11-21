@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Meta, StoryFn } from '@storybook/angular';
 
 @Component({
@@ -6,19 +6,7 @@ import { Meta, StoryFn } from '@storybook/angular';
 	selector: 'empty-state-section-stories',
 	templateUrl: './empty-state-section.stories.html',
 })
-class EmptyStateSectionStory implements OnInit {
-	ngOnInit(): void {
-		fetch('https://assets.codepen.io/158224/icon.svg')
-			.then((res) => res.text())
-			.then((svgText) => {
-				let svgContainer = Object.assign(document.createElement('div'), {
-					innerHTML: svgText,
-				});
-				Object.assign(svgContainer, { hidden: 'hidden' });
-				document.body.append(svgContainer);
-			});
-	}
-}
+class EmptyStateSectionStory {}
 
 export default {
 	title: 'QA/Empty State/Section',
