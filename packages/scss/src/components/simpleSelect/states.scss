@@ -2,14 +2,38 @@
 
 @mixin focused {
   @include a11y.focusVisible($offset: 3px);
+
+  .simpleSelect-value {
+    color: var(--palettes-grey-200);
+  }
 }
 
-@mixin filled {
-  .simpleSelect-input {
+@mixin searchFilled {
+  .simpleSelect-value {
     display: none;
+  }
+}
+
+@mixin selected {
+  .simpleSelect-input {
+    &::placeholder {
+      color: transparent;
+    }
   }
 
   .simpleSelect-value {
     display: block;
+  }
+}
+
+@mixin selectedSearchFilled {
+  .simpleSelect-input {
+    &::placeholder {
+      color: transparent;
+    }
+  }
+
+  .simpleSelect-value {
+    display: none;
   }
 }

@@ -32,7 +32,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 		return this.hasValue;
 	}
 
-	@HostBinding('class.is-search-filled')
+	@HostBinding('class.is-searchFilled')
 	protected get isSearchFilledClass(): boolean {
 		return this.clue?.length > 0;
 	}

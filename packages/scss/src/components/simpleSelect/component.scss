@@ -1,7 +1,8 @@
 @use '@lucca-front/scss/src/commons/utils/reset';
 
 @mixin component($atRoot: 'without: rule') {
-	display: flex;
+	display: grid;
+	grid-template-columns: 1fr auto auto;
 	box-shadow: 0 0 0 1px var(--components-selectSimple-border-color);
 	border-radius: var(--commons-borderRadius-M);
 	overflow: hidden;
@@ -16,6 +17,8 @@
 
 	@at-root ($atRoot) {
 		.simpleSelect-input {
+			grid-column-start: 1;
+			grid-row-start: 1;
 			border: 0;
 			line-height: var(--sizes-M-lineHeight);
 			display: flex;
@@ -23,14 +26,18 @@
 			outline: none;
 			color: var(--palettes-grey-800);
 			padding: 0;
+			cursor: pointer;
+			background-color: transparent;
 
 			&::placeholder {
-				color: var(--palettes-grey-400);
+				color: var(--palettes-grey-600);
 			}
 		}
 
 		.simpleSelect-value {
-			display: none;
+			grid-column-start: 1;
+			grid-row-start: 1;
+			//display: none;
 			width: 100%;
 			color: var(--palettes-grey-800);
 			white-space: nowrap;
@@ -39,7 +46,12 @@
 			margin-right: var(--spacings-XS);
 		}
 
+		.simpleSelect-clear {
+			grid-column-start: -2;
+		}
+
 		.simpleSelect-arrow {
+			grid-column-start: -1;
 			color: var(--palettes-grey-600);
 		}
 	}
