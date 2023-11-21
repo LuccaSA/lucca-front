@@ -49,6 +49,10 @@
             ]
           }
         ],
+        // Would be nice to have these three but requires refactoring of old code
+        "@typescript-eslint/no-redundant-type-constituents": "off",
+        "@typescript-eslint/no-base-to-string": "off",
+        "@typescript-eslint/no-unsafe-enum-comparison": "off",
         "@typescript-eslint/explicit-function-return-type": "off",
         // on aimerait bien dire oui sauf pour void
         "@typescript-eslint/explicit-module-boundary-types": "off",
