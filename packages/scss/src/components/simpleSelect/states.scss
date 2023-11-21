@@ -4,7 +4,7 @@
   @include a11y.focusVisible($offset: 3px);
 
   .simpleSelect-value {
-    color: var(--palettes-grey-200);
+    color: var(--components-selectSimple-placeholder);
   }
 }
 
