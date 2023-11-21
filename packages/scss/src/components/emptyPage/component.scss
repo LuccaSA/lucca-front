@@ -17,17 +17,16 @@
 			width: var(--components-container-max-width);
 		}
 		.emptyPage-content {
-			background-color: var(--components-emptyPage-background-color);
+			background-color: var(--components-emptyState-background-color);
 			border-radius: var(--commons-borderRadius-L);
-			box-shadow: 0 0 8px 4px var(--components-emptyPage-background-color);
+			box-shadow: 0 0 8px 4px var(--components-emptyState-background-color);
 			max-width: 100%;
 			padding: var(--spacings-XXS);
 			width: calc(22.5rem + var(--spacings-XXS) * 2); // content max width
 		}
 		.emptyPage-content-icon {
-			// Todo rename as components and handle assets
-			--iconColorBackground: var(--palettes-100, var(--palettes-primary-100));
-			--iconColorProduct: var(--palettes-600, var(--palettes-primary-600));
+			--components-emptyState-icon-background-color: var(--palettes-100, var(--palettes-primary-100));
+			--components-emptyState-icon-action-color: var(--palettes-600, var(--palettes-primary-600));
 		}
 		.emptyPage-content-heading {
 			margin-bottom: 0;
