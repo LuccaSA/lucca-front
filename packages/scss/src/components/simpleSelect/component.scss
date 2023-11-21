@@ -3,12 +3,12 @@
 @mixin component($atRoot: 'without: rule') {
 	display: grid;
 	grid-template-columns: 1fr auto auto;
+	align-items: center;
 	box-shadow: 0 0 0 1px var(--components-selectSimple-border-color);
 	border-radius: var(--commons-borderRadius-M);
+	padding: var(--spacings-XS);
 	overflow: hidden;
 	outline: none;
-	align-items: center;
-	padding: var(--spacings-XS);
 	cursor: pointer;
 
 	&:hover {
@@ -19,15 +19,17 @@
 		.simpleSelect-input {
 			grid-column-start: 1;
 			grid-row-start: 1;
-			border: 0;
-			line-height: var(--sizes-M-lineHeight);
 			display: flex;
 			flex: 1;
-			outline: none;
-			color: var(--palettes-grey-800);
 			padding: 0;
-			cursor: pointer;
 			background-color: transparent;
+			color: var(--palettes-grey-800);
+			line-height: var(--sizes-M-lineHeight);
+			border: 0;
+			outline: none;
+			position: relative;
+			z-index: 1;
+			cursor: pointer;
 
 			&::placeholder {
 				color: var(--components-selectSimple-placeholder);
@@ -37,13 +39,12 @@
 		.simpleSelect-value {
 			grid-column-start: 1;
 			grid-row-start: 1;
-			//display: none;
 			width: 100%;
 			color: var(--palettes-grey-800);
+			margin-right: var(--spacings-XS);
 			white-space: nowrap;
 		  overflow: hidden;
 		  text-overflow: ellipsis;
-			margin-right: var(--spacings-XS);
 		}
 
 		.simpleSelect-clear {

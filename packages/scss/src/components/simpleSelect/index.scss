@@ -4,7 +4,6 @@
 	@include vars;
 	@include component;
 
-
 	&.is-focused {
 		@include focused;
 	}
