@@ -15,13 +15,6 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 
 	@Input() placeholder = '';
 
-	/**
-	 * Placeholder used for the input, can be either this.placeholder if clue is empty, or this.clue because you're overwriting the value.
-	 */
-	get inputPlaceholder(): string {
-		return this.clue || this.placeholder;
-	}
-
 	@Input()
 	@HostBinding('class.is-clearable')
 	clearable = false;
@@ -34,9 +27,14 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	@HostBinding('class.is-disabled')
 	disabled = false;
 
-	@HostBinding('class.is-filled')
-	protected get isFilledClass(): boolean {
+	@HostBinding('class.is-selected')
+	protected get isSelectedClass(): boolean {
 		return this.hasValue;
+	}
+
+	@HostBinding('class.is-search-filled')
+	protected get isSearchFilledClass(): boolean {
+		return this.clue?.length > 0;
 	}
 
 	protected abstract readonly hasValue: boolean;

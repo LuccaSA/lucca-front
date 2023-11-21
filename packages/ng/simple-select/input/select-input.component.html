@@ -1,4 +1,11 @@
-<input class="simpleSelect-input" type="text" placeholder="{{inputPlaceholder}}" [(ngModel)]="clue" (ngModelChange)="clueChange.emit($event)" #inputElement />
+<input
+	class="simpleSelect-input"
+	type="text"
+	placeholder="{{placeholder}}"
+	[(ngModel)]="clue"
+	(ngModelChange)="clueChange.emit($event)"
+	#inputElement
+/>
 <div class="simpleSelect-value">
 	<ng-container *luOptionOutlet="valueTpl || optionTpl; value: value"></ng-container>
 </div>
