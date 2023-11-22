@@ -1,12 +1,14 @@
 @use '@lucca-front/scss/src/commons/utils/reset';
+@use '@lucca-front/icons/src/icon/exports' as icon;
 
 @mixin component($atRoot: 'without: rule') {
 	display: grid;
 	grid-template-columns: 1fr auto auto;
 	align-items: center;
 	box-shadow: 0 0 0 1px var(--components-selectSimple-border-color);
+	background-color: var(--components-selectSimple-background);
 	border-radius: var(--commons-borderRadius-M);
-	padding: var(--spacings-XS);
+	padding: var(--components-selectSimple-padding);
 	overflow: hidden;
 	outline: none;
 	cursor: pointer;
@@ -21,10 +23,11 @@
 			grid-row-start: 1;
 			display: flex;
 			flex: 1;
+			font-size: var(--components-selectSimple-fontSize);
+			line-height: var(--components-selectSimple-lineHeight);
 			padding: 0;
 			background-color: transparent;
-			color: var(--palettes-grey-800);
-			line-height: var(--sizes-M-lineHeight);
+			color: var(--components-selectSimple-value-color);
 			border: 0;
 			outline: none;
 			position: relative;
@@ -40,7 +43,9 @@
 			grid-column-start: 1;
 			grid-row-start: 1;
 			width: 100%;
-			color: var(--palettes-grey-800);
+			font-size: var(--components-selectSimple-fontSize);
+			line-height: var(--components-selectSimple-lineHeight);
+			color: var(--components-selectSimple-value-color);
 			margin-right: var(--spacings-XS);
 			white-space: nowrap;
 		  overflow: hidden;
@@ -53,7 +58,8 @@
 
 		.simpleSelect-arrow {
 			grid-column-start: -1;
-			color: var(--palettes-grey-600);
+			color: var(--components-selectSimple-arrow-color);
+			@include icon.M;
 		}
 	}
 }

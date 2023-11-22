@@ -1,4 +1,10 @@
 @mixin vars {
+  --components-selectSimple-fontSize: var(--sizes-M-fontSize);
+  --components-selectSimple-lineHeight: var(--sizes-M-lineHeight);
+  --components-selectSimple-padding: var(--spacings-XS);
+  --components-selectSimple-background: var(--colors-white-color);
+  --components-selectSimple-value-color: var(--palettes-grey-800);
   --components-selectSimple-border-color: var(--palettes-grey-300);
   --components-selectSimple-placeholder: var(--palettes-grey-400);
+  --components-selectSimple-arrow-color: var(--palettes-grey-600);
 }
