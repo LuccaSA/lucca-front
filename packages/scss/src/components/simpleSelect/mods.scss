@@ -5,6 +5,7 @@
   --components-selectSimple-fontSize: var(--sizes-S-fontSize);
   --components-selectSimple-lineHeight: var(--sizes-S-lineHeight);
   --components-selectSimple-padding: 0.375rem;
+  --components-selectSimple-gap: 0.375rem;
 
   .simpleSelect-arrow {
     @include icon.S;
@@ -19,6 +20,7 @@
   --components-selectSimple-fontSize: var(--sizes-XS-fontSize);
   --components-selectSimple-lineHeight: var(--sizes-XS-lineHeight);
   --components-selectSimple-padding: var(--spacings-XXS);
+  --components-selectSimple-gap: var(--spacings-XXS);
 
   .simpleSelect-arrow {
     @include icon.XS;

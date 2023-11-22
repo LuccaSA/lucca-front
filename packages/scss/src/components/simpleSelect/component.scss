@@ -21,11 +21,10 @@
 		.simpleSelect-input {
 			grid-column-start: 1;
 			grid-row-start: 1;
-			display: flex;
-			flex: 1;
 			font-size: var(--components-selectSimple-fontSize);
 			line-height: var(--components-selectSimple-lineHeight);
 			padding: 0;
+			min-width: fit-content;
 			background-color: transparent;
 			color: var(--components-selectSimple-value-color);
 			border: 0;
@@ -46,7 +45,6 @@
 			font-size: var(--components-selectSimple-fontSize);
 			line-height: var(--components-selectSimple-lineHeight);
 			color: var(--components-selectSimple-value-color);
-			margin-right: var(--spacings-XS);
 			white-space: nowrap;
 		  overflow: hidden;
 		  text-overflow: ellipsis;
@@ -54,10 +52,12 @@
 
 		.simpleSelect-clear {
 			grid-column-start: -2;
+			margin-left: var(--components-selectSimple-gap);
 		}
 
 		.simpleSelect-arrow {
 			grid-column-start: -1;
+			margin-left: var(--components-selectSimple-gap);
 			color: var(--components-selectSimple-arrow-color);
 			@include icon.M;
 		}
