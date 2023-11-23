@@ -39,11 +39,13 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 
 	protected abstract readonly hasValue: boolean;
 
-	@HostBinding('class.is-focused')
 	@HostBinding('attr.aria-expanded')
 	public get isPanelOpen(): boolean {
 		return this.isPanelOpen$.value;
 	}
+
+	@HostBinding('attr.tabindex')
+	public tabindexAttr = -1;
 
 	public isPanelOpen$ = new BehaviorSubject(false);
 
@@ -107,15 +109,11 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	protected destroyed$ = new Subject<void>();
 
 	@HostListener('keydown.space', ['$event'])
-	@HostListener('keydown.enter', ['$event'])
 	@HostListener('keydown.arrowDown', ['$event'])
 	@HostListener('click', ['$event'])
 	onKeydownOpenPanel($event: KeyboardEvent) {
 		if (!this.isPanelOpen) {
 			this.openPanel();
-			if (this.inputElementRef) {
-				setTimeout(() => this.inputElementRef.nativeElement.focus());
-			}
 			$event.stopPropagation();
 			$event.preventDefault();
 		}
@@ -126,11 +124,22 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 		switch ($event.key) {
 			case 'Escape':
 			case 'Tab':
-				return this.panelRef.close();
+				return this.panelRef?.close();
 			case 'Enter':
-				return this.panelRef.selectCurrentlHiglightedValue();
+				if (this.isPanelOpen) {
+					return this.panelRef.selectCurrentlHiglightedValue();
+				}
+				return this.openPanel();
+			case 'Space':
+			case 'ArrowDown':
+			case 'ArrowUp':
+				if (this.isPanelOpen) {
+					return this.panelRef?.handleKeyManagerEvent($event);
+				} else {
+					return this.openPanel();
+				}
 			default:
-				this.panelRef.handleKeyManagerEvent($event);
+				this.panelRef?.handleKeyManagerEvent($event);
 		}
 	}
 
@@ -164,7 +173,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 		}
 	}
 
-	clearValue(event: MouseEvent): void {
+	clearValue(event: MouseEvent | KeyboardEvent): void {
 		event.stopPropagation();
 		this.updateValue(null);
 	}
@@ -177,6 +186,9 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 		this.isPanelOpen$.next(true);
 		this._panelRef = this.buildPanelRef();
 		this.bindInputToPanelRefEvents();
+		if (this.inputElementRef) {
+			setTimeout(() => this.inputElementRef.nativeElement.focus());
+		}
 	}
 
 	protected abstract buildPanelRef(): this['panelRef'];
@@ -212,6 +224,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 
 	public updateValue(value: TValue): void {
 		this.value = value;
+		this.clue = '';
 		this.onChange?.(value);
 		this.onTouched?.();
 	}
