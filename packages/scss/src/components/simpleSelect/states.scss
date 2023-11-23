@@ -4,6 +4,12 @@
   @include a11y.focusVisible($offset: 3px);
 
   .simpleSelect-value {
+    color: var(--components-simpleSelect-value-color);
+  }
+}
+
+@mixin focusedExpanded {
+  .simpleSelect-value {
     color: var(--components-simpleSelect-placeholder);
   }
 }

@@ -12,8 +12,12 @@
 		@include XS;
 	}
 
-	&.is-focused {
+	&:has(.simpleSelect-input:focus) {
 		@include focused;
+
+		&[aria-expanded="true"] {
+			@include focusedExpanded;
+		}
 	}
 
 	&.is-searchFilled {
