@@ -1,7 +1,11 @@
 <section class="emptyPage" [style.--components-emptyState-background-color]="'var(--colors-white-color)'">
 	<div class="emptyPage-container">
 		<div class="emptyPage-content">
-			<div class="emptyPage-content-icon" aria-hidden="true"></div>
+			<div
+				class="emptyPage-content-icon"
+				aria-hidden="true"
+				[innerHtml]="'https://cdn.lucca.fr/lucca-front/assets/empty-states/icons/iconCalendar.svg' | luSafeExternalSvg"
+			></div>
 			<h1 class="emptyPage-content-heading">Empty State</h1>
 			<p>Flatus obsequiorum potest inanes pomerium obsequiorum credi homines vero caelibes orbos potest vile diversitate flatus.</p>
 			<div class="emptyPage-actions">
@@ -16,7 +20,7 @@
 	<div class="emptyPage-container">
 		<div class="emptyPage-content">
 			<div
-				class="emptyPage-content-icon"
+				class="emptyPage-content-icon palette-error"
 				aria-hidden="true"
 				[innerHtml]="'https://cdn.lucca.fr/lucca-front/assets/empty-states/icons/iconBanknote.svg' | luSafeExternalSvg"
 			></div>
