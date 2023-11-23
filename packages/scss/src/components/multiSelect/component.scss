@@ -8,7 +8,7 @@
 	border-radius: var(--commons-borderRadius-M);
 	padding: var(--components-multiSelect-padding);
 	align-items: flex-end;
-	gap: var(--spacings-XS);
+	gap: var(--components-multiSelect-gap);
 
 	@at-root ($atRoot) {
 		.multipleSelect-value {
@@ -26,8 +26,8 @@
 			padding: 0;
 			outline: none;
 			color: var(--palettes-grey-800);
-			line-height: var(--sizes-M-lineHeight);
-			font-size: var(--sizes-M-fontSize);
+			font-size: var(--components-multipleSimple-fontSize);
+			line-height: var(--components-multipleSimple-lineHeight);
 		}
 
 		.multipleSelect-clear {
@@ -35,8 +35,8 @@
 		}
 
 		.multipleSelect-arrow {
-			color: var(--components-simpleSelect-arrow-color);
 			@include icon.M;
+			color: var(--palettes-grey-600);
 		}
 	}
 }

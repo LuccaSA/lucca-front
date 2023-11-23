@@ -4,14 +4,10 @@
 	@include vars;
 	@include component;
 
-	// &.mod-S {
-	// 	@include S;
-	// }
-	//
-	// &.mod-XS {
-	// 	@include XS;
-	// }
-	//
+	&.mod-S {
+		@include S;
+	}
+
 	// &.is-focused {
 	// 	@include focused;
 	// }
