@@ -1,32 +1,31 @@
-@use '@lucca-front/scss/src/commons/utils/reset';
 @use '@lucca-front/icons/src/icon/exports' as icon;
 
 @mixin component($atRoot: 'without: rule') {
 	display: grid;
 	grid-template-columns: 1fr auto auto;
 	align-items: center;
-	box-shadow: 0 0 0 1px var(--components-selectSimple-border-color);
-	background-color: var(--components-selectSimple-background);
+	box-shadow: 0 0 0 1px var(--components-simpleSelect-border-color);
+	background-color: var(--components-simpleSelect-background);
 	border-radius: var(--commons-borderRadius-M);
-	padding: var(--components-selectSimple-padding);
+	padding: var(--components-simpleSelect-padding);
 	overflow: hidden;
 	outline: none;
 	cursor: pointer;
 
 	&:hover {
-		--components-selectSimple-border-color: var(--palettes-grey-400);
+		--components-simpleSelect-border-color: var(--palettes-grey-400);
 	}
 
 	@at-root ($atRoot) {
 		.simpleSelect-input {
 			grid-column-start: 1;
 			grid-row-start: 1;
-			font-size: var(--components-selectSimple-fontSize);
-			line-height: var(--components-selectSimple-lineHeight);
+			font-size: var(--components-simpleSelect-fontSize);
+			line-height: var(--components-simpleSelect-lineHeight);
 			padding: 0;
 			min-width: fit-content;
 			background-color: transparent;
-			color: var(--components-selectSimple-value-color);
+			color: var(--components-simpleSelect-value-color);
 			border: 0;
 			outline: none;
 			position: relative;
@@ -34,7 +33,7 @@
 			cursor: pointer;
 
 			&::placeholder {
-				color: var(--components-selectSimple-placeholder);
+				color: var(--components-simpleSelect-placeholder);
 			}
 		}
 
@@ -42,9 +41,9 @@
 			grid-column-start: 1;
 			grid-row-start: 1;
 			width: 100%;
-			font-size: var(--components-selectSimple-fontSize);
-			line-height: var(--components-selectSimple-lineHeight);
-			color: var(--components-selectSimple-value-color);
+			font-size: var(--components-simpleSelect-fontSize);
+			line-height: var(--components-simpleSelect-lineHeight);
+			color: var(--components-simpleSelect-value-color);
 			white-space: nowrap;
 		  overflow: hidden;
 		  text-overflow: ellipsis;
@@ -52,13 +51,13 @@
 
 		.simpleSelect-clear {
 			grid-column-start: -2;
-			margin-left: var(--components-selectSimple-gap);
+			margin-left: var(--components-simpleSelect-gap);
 		}
 
 		.simpleSelect-arrow {
 			grid-column-start: -1;
-			margin-left: var(--components-selectSimple-gap);
-			color: var(--components-selectSimple-arrow-color);
+			margin-left: var(--components-simpleSelect-gap);
+			color: var(--components-simpleSelect-arrow-color);
 			@include icon.M;
 		}
 	}

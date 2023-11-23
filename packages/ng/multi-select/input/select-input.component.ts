@@ -37,7 +37,7 @@ import { IconComponent } from '@lucca-front/ng/icon';
 export class LuMultiSelectInputComponent<T> extends ALuSelectInputComponent<T, T[]> implements ControlValueAccessor {
 	intl = getIntl(LU_MULTI_SELECT_TRANSLATIONS);
 
-	@HostBinding('class.mod-multiple') modMultipleClass = true;
+	//@HostBinding('class.mod-multiple') modMultipleClass = true;
 
 	@Input() valuesTpl?: TemplateRef<LuOptionContext<T[]>> | Type<unknown> = LuMultiSelectDefaultDisplayerComponent;
 

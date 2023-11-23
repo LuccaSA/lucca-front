@@ -1,11 +1,11 @@
 @mixin vars {
-  --components-selectSimple-fontSize: var(--sizes-M-fontSize);
-  --components-selectSimple-lineHeight: var(--sizes-M-lineHeight);
-  --components-selectSimple-padding: var(--spacings-XS);
-  --components-selectSimple-gap: var(--spacings-XS);
-  --components-selectSimple-background: var(--colors-white-color);
-  --components-selectSimple-value-color: var(--palettes-grey-800);
-  --components-selectSimple-border-color: var(--palettes-grey-300);
-  --components-selectSimple-placeholder: var(--palettes-grey-400);
-  --components-selectSimple-arrow-color: var(--palettes-grey-600);
+  --components-simpleSelect-fontSize: var(--sizes-M-fontSize);
+  --components-simpleSelect-lineHeight: var(--sizes-M-lineHeight);
+  --components-simpleSelect-padding: var(--spacings-XS);
+  --components-simpleSelect-gap: var(--spacings-XS);
+  --components-simpleSelect-background: var(--colors-white-color);
+  --components-simpleSelect-value-color: var(--palettes-grey-800);
+  --components-simpleSelect-border-color: var(--palettes-grey-300);
+  --components-simpleSelect-placeholder: var(--palettes-grey-400);
+  --components-simpleSelect-arrow-color: var(--palettes-grey-600);
 }

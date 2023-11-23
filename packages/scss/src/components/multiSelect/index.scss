@@ -1,0 +1,38 @@
+@use 'exports' as *;
+
+.multiSelect {
+	@include vars;
+	@include component;
+
+	// &.mod-S {
+	// 	@include S;
+	// }
+	//
+	// &.mod-XS {
+	// 	@include XS;
+	// }
+	//
+	// &.is-focused {
+	// 	@include focused;
+	// }
+	//
+	// &.is-searchFilled {
+	// 	@include searchFilled;
+	// }
+	//
+	// &.is-selected {
+	// 	@include selected;
+	//
+	// 	&.is-searchFilled {
+	// 		@include selectedSearchFilled;
+	// 	}
+	// }
+	//
+	// &.is-invalid {
+	// 	@include invalid;
+	// }
+	//
+	// &.is-disabled {
+	// 	@include disabled;
+	// }
+}

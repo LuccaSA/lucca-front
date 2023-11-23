@@ -1,0 +1,42 @@
+@use '@lucca-front/scss/src/commons/utils/reset';
+@use '@lucca-front/icons/src/icon/exports' as icon;
+
+@mixin component($atRoot: 'without: rule') {
+	display: flex;
+	box-shadow: 0 0 0 1px var(--components-multiSelect-border-color);
+	background-color: var(--components-multiSelect-background);
+	border-radius: var(--commons-borderRadius-M);
+	padding: var(--components-multiSelect-padding);
+	align-items: flex-end;
+	gap: var(--spacings-XS);
+
+	@at-root ($atRoot) {
+		.multipleSelect-value {
+			display: flex;
+			gap: var(--spacings-XXS);
+			flex-wrap: wrap;
+		}
+
+		.multipleSelect-value-search {
+			display: block;
+			min-width: 3rem;
+			width: auto;
+			flex: 1;
+			border: 0;
+			padding: 0;
+			outline: none;
+			color: var(--palettes-grey-800);
+			line-height: var(--sizes-M-lineHeight);
+			font-size: var(--sizes-M-fontSize);
+		}
+
+		.multipleSelect-clear {
+			margin-bottom: var(--spacings-XXS);
+		}
+
+		.multipleSelect-arrow {
+			color: var(--components-simpleSelect-arrow-color);
+			@include icon.M;
+		}
+	}
+}

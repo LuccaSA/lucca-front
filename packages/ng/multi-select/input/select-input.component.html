@@ -1,4 +1,33 @@
-<div class="lu-select-placeholder">{{ placeholder }}</div>
+
+<div class="multipleSelect-value">
+	<!--<ng-container *luOptionOutlet="valuesTpl; value: value"></ng-container>-->
+	<div class="chip">Shortbread<a href type="button" class="chip-kill"></a></div>
+	<div class="chip">Dessert<a href type="button" class="chip-kill"></a></div>
+	<div class="chip">Pudding<a href type="button" class="chip-kill"></a></div>
+	<div class="chip">Ice<a href type="button" class="chip-kill"></a></div>
+	<div class="chip">Cream<a href type="button" class="chip-kill"></a></div>
+	<div class="chip">Danish<a href type="button" class="chip-kill"></a></div>
+	<div class="chip">Candy<a href type="button" class="chip-kill"></a></div>
+	<div class="chip">Jelly<a href type="button" class="chip-kill"></a></div>
+	<div class="chip">Beans<a href type="button" class="chip-kill"></a></div>
+	<div class="chip">Pudding<a href type="button" class="chip-kill"></a></div>
+	<div class="chip">Jelly<a href type="button" class="chip-kill"></a></div>
+	<div class="chip">Icing<a href type="button" class="chip-kill"></a></div>
+	<div class="chip">Biscuit<a href type="button" class="chip-kill"></a></div>
+	<div class="chip">Cookie<a href type="button" class="chip-kill"></a></div>
+	<div class="chip">Apple<a href type="button" class="chip-kill"></a></div>
+	<div class="chip">Pie<a href type="button" class="chip-kill"></a></div>
+	<div class="chip">+4</div>
+	<input class="multipleSelect-value-search" type="text" />
+</div>
+
+<button  *ngIf="hasValue && clearable" role="button" class="multipleSelect-clear clear"role="button" (click)="clearValue($event)">
+	<span class="u-mask">{{intl.clear}}</span>
+</button>
+<span aria-hidden="true" class="multipleSelect-arrow lucca-icon icon-arrowChevronBottom"></span>
+
+
+<!--<div class="lu-select-placeholder">{{ placeholder }}</div>
 <div class="lu-select-value">
 	<div class="lu-select-display-wrapper">
 		<ng-container *luOptionOutlet="valuesTpl; value: value"></ng-container>
@@ -8,4 +37,4 @@
 	<a *ngIf="hasValue && clearable" role="button" class="clear" (click)="clearValue($event)">
 		<span class="u-mask">{{intl.clear}}</span>
 	</a>
-</div>
+</div>-->

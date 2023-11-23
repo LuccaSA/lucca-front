@@ -1,12 +1,12 @@
-@import '_definitions';
-@include selectInputStyle;
-
-:host {
-	&[aria-expanded="true"] {
-		outline: none;
-	}
-}
-
-.lu-select-value {
-	padding-right: 2rem;
-}
+// @import '_definitions';
+// @include selectInputStyle;
+//
+// :host {
+// 	&[aria-expanded="true"] {
+// 		outline: none;
+// 	}
+// }
+//
+// .lu-select-value {
+// 	padding-right: 2rem;
+// }

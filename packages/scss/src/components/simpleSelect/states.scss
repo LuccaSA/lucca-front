@@ -4,7 +4,7 @@
   @include a11y.focusVisible($offset: 3px);
 
   .simpleSelect-value {
-    color: var(--components-selectSimple-placeholder);
+    color: var(--components-simpleSelect-placeholder);
   }
 }
 
@@ -39,16 +39,16 @@
 }
 
 @mixin invalid {
-  --components-selectSimple-border-color: var(--palettes-error-400);
-  --components-selectSimple-background: var(--palettes-error-50);
-  --components-selectSimple-placeholder: var(--palettes-error-400);
+  --components-simpleSelect-border-color: var(--palettes-error-400);
+  --components-simpleSelect-background: var(--palettes-error-50);
+  --components-simpleSelect-placeholder: var(--palettes-error-400);
 }
 
 @mixin disabled {
-  --components-selectSimple-border-color: var(--palettes-grey-300);
-  --components-selectSimple-background: var(--palettes-grey-100);
-  --components-selectSimple-placeholder: var(--palettes-grey-400);
-  --components-selectSimple-value-color: var(--palettes-grey-600);
-  --components-selectSimple-arrow-color: var(--palettes-grey-500);
+  --components-simpleSelect-border-color: var(--palettes-grey-300);
+  --components-simpleSelect-background: var(--palettes-grey-100);
+  --components-simpleSelect-placeholder: var(--palettes-grey-400);
+  --components-simpleSelect-value-color: var(--palettes-grey-600);
+  --components-simpleSelect-arrow-color: var(--palettes-grey-500);
   pointer-events: none;
 }

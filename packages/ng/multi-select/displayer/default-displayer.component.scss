@@ -1,44 +1,44 @@
 @use '@lucca-front/scss/src/commons/utils/a11y';
 @use '@lucca-front/scss/src/components/chip/exports' as chip;
-
-:host {
-	display: flex;
-	height: var(--sizes-M-lineHeight);
-	position: relative;
-	padding-right: var(--hidden-option-count-width);
-	overflow: hidden;
-}
-
-:host-context(.textfield.mod-S) {
-	height: var(--sizes-S-lineHeight);
-}
-
-:host-context(lu-multi-select.is-disabled) {
-	.chip {
-			@include chip.disabled;
-	}
-}
-
-.lu-multiselect-counter {
-	position: absolute;
-	top: 0;
-	left: calc(var(--hidden-option-count-offset-left) + var(--spacings-XXS));
-}
-
-.lu-multiselect-counter-chip {
-	&:focus-visible {
-		@include a11y.focusVisible();
-	}
-}
-
-.lu-multiselect-chip {
-	&[aria-hidden] {
-		visibility: hidden;
-	}
-}
-
-.lu-multiselect-chip-value {
-	max-width: 4rem;
-	text-overflow: ellipsis;
-	overflow: hidden;
-}
+//
+// :host {
+// 	display: flex;
+// 	height: var(--sizes-M-lineHeight);
+// 	position: relative;
+// 	padding-right: var(--hidden-option-count-width);
+// 	overflow: hidden;
+// }
+//
+// :host-context(.textfield.mod-S) {
+// 	height: var(--sizes-S-lineHeight);
+// }
+//
+// :host-context(lu-multi-select.is-disabled) {
+// 	.chip {
+// 			@include chip.disabled;
+// 	}
+// }
+//
+// .lu-multiselect-counter {
+// 	position: absolute;
+// 	top: 0;
+// 	left: calc(var(--hidden-option-count-offset-left) + var(--spacings-XXS));
+// }
+//
+// .lu-multiselect-counter-chip {
+// 	&:focus-visible {
+// 		@include a11y.focusVisible();
+// 	}
+// }
+//
+// .lu-multiselect-chip {
+// 	&[aria-hidden] {
+// 		visibility: hidden;
+// 	}
+// }
+//
+// .lu-multiselect-chip-value {
+// 	max-width: 4rem;
+// 	text-overflow: ellipsis;
+// 	overflow: hidden;
+// }
