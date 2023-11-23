@@ -103,6 +103,8 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	options$ = new ReplaySubject<TOption[]>(1);
 	loading$ = new ReplaySubject<boolean>(1);
 	clue: string | null = null;
+	// This is the clue stored after we selected an option to know if we shoudl emit an empty clue on open or not
+	previousClue: string | null = null;
 
 	protected onChange?: (value: TValue | null) => void;
 	protected onTouched?: () => void;
@@ -191,6 +193,10 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 		}
 
 		this.isPanelOpen$.next(true);
+		if (this.previousClue) {
+			this.clueChanged('');
+			this.previousClue = null;
+		}
 		this._panelRef = this.buildPanelRef();
 		this.bindInputToPanelRefEvents();
 		if (this.inputElementRef) {
@@ -231,7 +237,8 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 
 	public updateValue(value: TValue): void {
 		this.value = value;
-		this.clue = '';
+		this.previousClue = this.clue;
+		this.clue = null;
 		this.onChange?.(value);
 		this.onTouched?.();
 	}
