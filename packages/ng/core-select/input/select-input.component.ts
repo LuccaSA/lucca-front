@@ -91,6 +91,13 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 		this.changeDetectorRef.markForCheck();
 	}
 
+	public clueChanged(clue: string): void {
+		this.clueChange.emit(clue);
+		if (!this.isPanelOpen) {
+			this.openPanel();
+		}
+	}
+
 	protected _value?: TValue;
 
 	options$ = new ReplaySubject<TOption[]>(1);

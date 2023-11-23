@@ -3,7 +3,7 @@
 	type="text"
 	placeholder="{{placeholder}}"
 	[(ngModel)]="clue"
-	(ngModelChange)="clueChange.emit($event)"
+	(ngModelChange)="clueChanged($event)"
 	#inputElement
 />
 <div class="simpleSelect-value">
