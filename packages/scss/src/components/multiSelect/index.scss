@@ -8,27 +8,15 @@
 		@include S;
 	}
 
-	// &.is-focused {
-	// 	@include focused;
-	// }
-	//
-	// &.is-searchFilled {
-	// 	@include searchFilled;
-	// }
-	//
-	// &.is-selected {
-	// 	@include selected;
-	//
-	// 	&.is-searchFilled {
-	// 		@include selectedSearchFilled;
-	// 	}
-	// }
-	//
-	// &.is-invalid {
-	// 	@include invalid;
-	// }
-	//
-	// &.is-disabled {
-	// 	@include disabled;
-	// }
+	&.is-focused {
+		@include focused;
+	}
+
+	&.is-invalid {
+		@include invalid;
+	}
+
+	&.is-disabled {
+		@include disabled;
+	}
 }

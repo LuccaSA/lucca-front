@@ -3,8 +3,8 @@
 @use '@lucca-front/scss/src/components/chip/exports' as chip;
 
 @mixin S {
-  --components-multipleSimple-fontSize: var(--sizes-S-fontSize);
-  --components-multipleSimple-lineHeight: var(--sizes-S-lineHeight);
+  --components-multiSelect-fontSize: var(--sizes-S-fontSize);
+  --components-multiSelect-lineHeight: var(--sizes-S-lineHeight);
   --components-multiSelect-gap: 0.375rem;
 
   .multipleSelect-arrow {

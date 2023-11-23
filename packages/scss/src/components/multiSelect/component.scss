@@ -26,8 +26,9 @@
 			padding: 0;
 			outline: none;
 			color: var(--palettes-grey-800);
-			font-size: var(--components-multipleSimple-fontSize);
-			line-height: var(--components-multipleSimple-lineHeight);
+			font-size: var(--components-multiSelect-fontSize);
+			line-height: var(--components-multiSelect-lineHeight);
+			background-color: transparent;
 		}
 
 		.multipleSelect-clear {
@@ -36,7 +37,7 @@
 
 		.multipleSelect-arrow {
 			@include icon.M;
-			color: var(--palettes-grey-600);
+			color: var(--components-multiSelect-arrow-color);
 		}
 	}
 }
