@@ -12,6 +12,10 @@
   .simpleSelect-value {
     color: var(--components-simpleSelect-placeholder);
   }
+
+  .simpleSelect-arrow {
+    transform: rotate(-180deg);
+  }
 }
 
 @mixin searchFilled {
