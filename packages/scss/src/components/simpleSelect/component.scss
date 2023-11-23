@@ -47,6 +47,7 @@
 			white-space: nowrap;
 		  overflow: hidden;
 		  text-overflow: ellipsis;
+			transition: color var(--commons-animations-durations-fast) ease;
 		}
 
 		.simpleSelect-clear {
