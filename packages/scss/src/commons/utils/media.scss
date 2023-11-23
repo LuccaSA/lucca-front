@@ -4,32 +4,88 @@
 
 @use '@lucca-front/scss/src/commons/config';
 
-@mixin min($breakpoint, $reversed: false) {
-	$reverse: '';
-
-	@if $reversed {
-		$reverse: string.unquote('not all and');
+@function getBreakpoint($breakpoint) {
+	@if map.get(config.$breakpoints, $breakpoint) {
+		@return (map.get(config.$breakpoints, $breakpoint) / 16px) * 1em;
 	} @else {
-		$reverse: string.unquote('');
-	}
-
-	$breakpointInPx: map.get(config.$breakpoints, $breakpoint);
-
-	@if $breakpointInPx {
-		$breakpointInEm: math.div($breakpointInPx, 16px) * 1em;
-
-		@media #{$reverse '(min-width:' $breakpointInEm ')'} {
-			@content;
-		}
-	} @else {
-		@media #{$reverse '(min-width:' $breakpoint')'} {
-			@content;
-		}
+		@return false;
 	}
 }
 
-@mixin max($breakpoint) {
-	@include min($breakpoint, $reversed: true) {
+@mixin min($breakpoint, $dimension: 'width', $reversed: false, $query: 'media', $container: '') {
+	$operator: '>=';
+
+	@if $reversed {
+		$operator: '<';
+	}
+
+	@if getBreakpoint($breakpoint) {
+		$breakpoint: getBreakpoint($breakpoint);
+	}
+
+	@#{$query} #{$container} (#{$dimension} #{$operator} #{$breakpoint}) {
 		@content;
 	}
+}
+
+@mixin between($breakpoint1, $breakpoint2, $dimension: 'width', $query: 'media', $container: '') {
+	@if getBreakpoint($breakpoint1) {
+		$breakpoint1: getBreakpoint($breakpoint1);
+	}
+
+	@if getBreakpoint($breakpoint2) {
+		$breakpoint2: getBreakpoint($breakpoint2);
+	}
+
+	@if ($breakpoint2 < $breakpoint1) {
+		$breakpointTmp: $breakpoint2;
+		$breakpoint2: $breakpoint1;
+		$breakpoint1: $breakpointTmp;
+	}
+
+	@#{$query} #{$container} (#{$breakpoint1} <= #{$dimension} < #{$breakpoint2}) {
+		@content;
+	}
+}
+
+@mixin max($breakpoint, $dimension: 'width', $query: 'media', $container: '') {
+	@include min($breakpoint, $dimension: $dimension, $reversed: true, $query: $query) {
+		@content;
+	}
+}
+
+@mixin minWidth($breakpoint, $query: 'media', $container: '') {
+	@include min($breakpoint, $query: $query) {
+		@content;
+	}
+}
+
+@mixin maxWidth($breakpoint, $query: 'media', $container: '') {
+	@include min($breakpoint, $reversed: true, $query: $query) {
+		@content;
+	}
+}
+
+@mixin minHeight($breakpoint, $query: 'media', $container: '') {
+	@include min($breakpoint, 'height', $query: $query) {
+		@content;
+	}
+}
+
+@mixin maxHeight($breakpoint, $query: 'media', $container: '') {
+	@include min($breakpoint, $reversed: true, $dimension: 'height', $query: $query) {
+		@content;
+	}
+}
+
+@mixin betweenWidths($breakpoint1, $breakpoint2, $query: 'media', $container: '') {
+    @include between($breakpoint1, $breakpoint2, $query: $query) {
+        @content;
+    }
+}
+
+@mixin betweenHeights($breakpoint1, $breakpoint2, $query: 'media', $container: '') {
+    @include between($breakpoint1, $breakpoint2, $dimension: 'height', $query: $query) {
+        @content;
+    }
 }

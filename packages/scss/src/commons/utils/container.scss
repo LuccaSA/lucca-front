@@ -1,0 +1,55 @@
+@use '@lucca-front/scss/src/commons/utils/media';
+
+@mixin min($breakpoint, $container: '') {
+	@include media.min($breakpoint: $breakpoint, $query: 'container', $container: $container) {
+		@content;
+	}
+}
+
+@mixin max($breakpoint, $container: '') {
+	@include media.min($breakpoint, $reversed: true, $query: 'container', $container: $container) {
+		@content;
+	}
+}
+
+@mixin minWidth($breakpoint, $container: '') {
+	@include media.min($breakpoint, $query: 'container', $container: $container) {
+		@content;
+	}
+}
+
+@mixin maxWidth($breakpoint, $container: '') {
+	@include media.min($breakpoint, $reversed: true, $query: 'container', $container: $container) {
+		@content;
+	}
+}
+
+@mixin minHeight($breakpoint, $container: '') {
+	@include media.min($breakpoint, 'height', $query: 'container', $container: $container) {
+		@content;
+	}
+}
+
+@mixin maxHeight($breakpoint, $container: '') {
+	@include media.min($breakpoint, $reversed: true, $dimension: 'height', $query: 'container', $container: $container) {
+		@content;
+	}
+}
+
+@mixin between($breakpoint1, $breakpoint2, $container: '') {
+	@include media.between($breakpoint1, $breakpoint2, $query: 'container', $container: $container) {
+		@content;
+	}
+}
+
+@mixin betweenWidths($breakpoint1, $breakpoint2, $container: '') {
+	@include media.between($breakpoint1, $breakpoint2, $query: 'container', $container: $container) {
+		@content;
+	}
+}
+
+@mixin betweenHeights($breakpoint1, $breakpoint2, $container: '') {
+	@include media.between($breakpoint1, $breakpoint2, $dimension: 'height', $query: 'container', $container: $container) {
+		@content;
+	}
+}
