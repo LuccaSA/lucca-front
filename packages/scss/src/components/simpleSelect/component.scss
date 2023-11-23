@@ -31,7 +31,6 @@
 			position: relative;
 			z-index: 1;
 			cursor: pointer;
-			pointer-events: none;
 
 			&::placeholder {
 				color: var(--components-simpleSelect-placeholder);
