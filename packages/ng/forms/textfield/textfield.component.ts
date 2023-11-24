@@ -12,6 +12,8 @@ import { SafeHtml } from '@angular/platform-browser';
 import { getIntl } from '@lucca-front/ng/core';
 import { LU_TEXTFIELD_TRANSLATIONS } from './textfield.translate';
 
+type TextFieldType = 'text' | 'email' | 'password' | 'number';
+
 @Component({
 	selector: 'lu-textfield',
 	standalone: true,
@@ -47,6 +49,9 @@ export class TextfieldComponent extends AbstractFieldComponent {
 	@Input({ transform: booleanAttribute })
 	hasSearchIcon = false;
 
+	@Input({ transform: booleanAttribute })
+	hasTogglePasswordVisibilityIcon = false;
+
 	@ViewChild('inputElement', { static: true })
 	inputElementRef: ElementRef<HTMLInputElement>;
 
@@ -57,7 +62,12 @@ export class TextfieldComponent extends AbstractFieldComponent {
 	suffix: TextfieldAddon;
 
 	@Input()
-	type: 'text' | 'email' | 'password' | 'number' = 'text';
+	get type(): TextFieldType {
+		return this.showPassword ? 'text' : this._type;
+	};
+	set type(type: TextFieldType) {
+		this._type = type;
+	}
 
 	@Input()
 	/**
@@ -65,10 +75,18 @@ export class TextfieldComponent extends AbstractFieldComponent {
 	 */
 	searchIcon: LuccaIcon = 'search';
 
+	showPassword: boolean = false;
+
+	private _type: TextFieldType = 'text';
+
 	intl = getIntl(LU_TEXTFIELD_TRANSLATIONS);
 
 	clearValue(): void {
 		this.ngControl.reset();
 		this.inputElementRef.nativeElement.focus();
+	}
+
+	togglePasswordVisibility() {
+		this.showPassword = !this.showPassword;
 	}
 }

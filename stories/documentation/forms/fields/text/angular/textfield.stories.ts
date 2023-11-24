@@ -20,7 +20,7 @@ export default {
 } as Meta;
 
 export const Basic: StoryObj<TextfieldComponent & { disabled: boolean }> = {
-	render: ({ label, required, hiddenLabel, inlineMessage, size, placeholder, prefix, suffix, inlineMessageState, hasClearer, disabled, tooltip, hasSearchIcon, searchIcon }) => {
+	render: ({ label, required, hiddenLabel, inlineMessage, size, placeholder, prefix, suffix, inlineMessageState, hasClearer, disabled, tooltip, hasSearchIcon, searchIcon, hasTogglePasswordVisibilityIcon, type }) => {
 		return {
 			props: {
 				prefix,
@@ -31,6 +31,7 @@ export const Basic: StoryObj<TextfieldComponent & { disabled: boolean }> = {
 	${hiddenLabel ? 'hiddenLabel' : ''}
 	${hasClearer ? 'hasClearer' : ''}
 	${hasSearchIcon ? 'hasSearchIcon' : ''}
+	${hasTogglePasswordVisibilityIcon ? 'hasTogglePasswordVisibilityIcon' : ''}
 	${disabled ? 'disabled' : ''}
 	[prefix]="prefix"
 	[suffix]="suffix"
@@ -40,6 +41,7 @@ export const Basic: StoryObj<TextfieldComponent & { disabled: boolean }> = {
 	searchIcon="${searchIcon}"
 	placeholder="${placeholder}"
 	tooltip="${tooltip}"
+	type="${type}"
 	[(ngModel)]="example">
 </lu-textfield>
 
@@ -55,6 +57,7 @@ export const Basic: StoryObj<TextfieldComponent & { disabled: boolean }> = {
 		hiddenLabel: false,
 		hasClearer: true,
 		hasSearchIcon: false,
+		hasTogglePasswordVisibilityIcon: false,
 		searchIcon: 'search',
 		disabled: false,
 		inlineMessage: 'Helper Text',
