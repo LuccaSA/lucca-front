@@ -12,7 +12,7 @@
 	}
 }
 
-@mixin query($breakpoint, $dimension: 'width', $reversed: false, $base: 'media', $container: '') {
+@mixin query($breakpoint, $dimension: 'width', $reversed: false, $at: 'media', $container: '') {
 	$operator: '>=';
 
 	@if $reversed {
@@ -23,12 +23,12 @@
 		$breakpoint: getBreakpoint($breakpoint);
 	}
 
-	@#{$base} #{$container} (#{$dimension} #{$operator} #{$breakpoint}) {
+	@#{$at} #{$container} (#{$dimension} #{$operator} #{$breakpoint}) {
 		@content;
 	}
 }
 
-@mixin between($breakpoint1, $breakpoint2, $dimension: 'width', $base: 'media', $container: '') {
+@mixin between($breakpoint1, $breakpoint2, $dimension: 'width', $at: 'media', $container: '') {
 	@if getBreakpoint($breakpoint1) {
 		$breakpoint1: getBreakpoint($breakpoint1);
 	}
@@ -43,55 +43,55 @@
 		$breakpoint1: $breakpointTmp;
 	}
 
-	@#{$base} #{$container} (#{$breakpoint1} <= #{$dimension} < #{$breakpoint2}) {
+	@#{$at} #{$container} (#{$breakpoint1} <= #{$dimension} < #{$breakpoint2}) {
 		@content;
 	}
 }
 
-@mixin min($breakpoint, $dimension: 'width', $base: 'media') {
-	@include query($breakpoint, $dimension: $dimension, $base: $base) {
+@mixin min($breakpoint, $dimension: 'width', $at: 'media') {
+	@include query($breakpoint, $dimension: $dimension, $at: $at) {
 		@content;
 	}
 }
 
-@mixin max($breakpoint, $dimension: 'width', $base: 'media') {
-	@include query($breakpoint, $dimension: $dimension, $reversed: true, $base: $base) {
+@mixin max($breakpoint, $dimension: 'width', $at: 'media') {
+	@include query($breakpoint, $dimension: $dimension, $reversed: true, $at: $at) {
 		@content;
 	}
 }
 
-@mixin minWidth($breakpoint, $base: 'media') {
-	@include query($breakpoint, $base: $base) {
+@mixin minWidth($breakpoint, $at: 'media') {
+	@include query($breakpoint, $at: $at) {
 		@content;
 	}
 }
 
-@mixin maxWidth($breakpoint, $base: 'media') {
-	@include query($breakpoint, $reversed: true, $base: $base) {
+@mixin maxWidth($breakpoint, $at: 'media') {
+	@include query($breakpoint, $reversed: true, $at: $at) {
 		@content;
 	}
 }
 
-@mixin minHeight($breakpoint, $base: 'media') {
-	@include query($breakpoint, 'height', $base: $base) {
+@mixin minHeight($breakpoint, $at: 'media') {
+	@include query($breakpoint, 'height', $at: $at) {
 		@content;
 	}
 }
 
-@mixin maxHeight($breakpoint, $base: 'media') {
-	@include query($breakpoint, $reversed: true, $dimension: 'height', $base: $base) {
+@mixin maxHeight($breakpoint, $at: 'media') {
+	@include query($breakpoint, $reversed: true, $dimension: 'height', $at: $at) {
 		@content;
 	}
 }
 
-@mixin betweenWidths($breakpoint1, $breakpoint2, $base: 'media') {
-    @include between($breakpoint1, $breakpoint2, $base: $base) {
+@mixin betweenWidths($breakpoint1, $breakpoint2, $at: 'media') {
+    @include between($breakpoint1, $breakpoint2, $at: $at) {
         @content;
     }
 }
 
-@mixin betweenHeights($breakpoint1, $breakpoint2, $base: 'media') {
-    @include between($breakpoint1, $breakpoint2, $dimension: 'height', $base: $base) {
+@mixin betweenHeights($breakpoint1, $breakpoint2, $at: 'media') {
+    @include between($breakpoint1, $breakpoint2, $dimension: 'height', $at: $at) {
         @content;
     }
 }
