@@ -1,7 +1,7 @@
 @use '@lucca-front/scss/src/commons/utils/media';
 
-@mixin query($breakpoint, $dimension: 'width', $reversed: false, $container: '') {
-	@include media.query($breakpoint: $breakpoint, $dimension: $dimension, $reversed: $reversed, $at: 'container', $container: $container);
+@mixin query($breakpoint, $dimension: 'width', $max: false, $container: '') {
+	@include media.query($breakpoint: $breakpoint, $dimension: $dimension, $max: $max, $at: 'container', $container: $container);
 }
 
 @mixin min($breakpoint, $container: '') {
@@ -11,7 +11,7 @@
 }
 
 @mixin max($breakpoint, $container: '') {
-	@include media.query($breakpoint, $reversed: true, $at: 'container', $container: $container) {
+	@include media.query($breakpoint, $max: true, $at: 'container', $container: $container) {
 		@content;
 	}
 }
@@ -23,7 +23,7 @@
 }
 
 @mixin maxWidth($breakpoint, $container: '') {
-	@include media.query($breakpoint, $reversed: true, $at: 'container', $container: $container) {
+	@include media.query($breakpoint, $max: true, $at: 'container', $container: $container) {
 		@content;
 	}
 }
@@ -35,7 +35,7 @@
 }
 
 @mixin maxHeight($breakpoint, $container: '') {
-	@include media.query($breakpoint, $reversed: true, $dimension: 'height', $at: 'container', $container: $container) {
+	@include media.query($breakpoint, $max: true, $dimension: 'height', $at: 'container', $container: $container) {
 		@content;
 	}
 }

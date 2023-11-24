@@ -12,10 +12,10 @@
 	}
 }
 
-@mixin query($breakpoint, $dimension: 'width', $reversed: false, $at: 'media', $container: '') {
+@mixin query($breakpoint, $dimension: 'width', $max: false, $at: 'media', $container: '') {
 	$operator: '>=';
 
-	@if $reversed {
+	@if $max {
 		$operator: '<';
 	}
 
@@ -55,7 +55,7 @@
 }
 
 @mixin max($breakpoint, $dimension: 'width', $at: 'media') {
-	@include query($breakpoint, $dimension: $dimension, $reversed: true, $at: $at) {
+	@include query($breakpoint, $dimension: $dimension, $max: true, $at: $at) {
 		@content;
 	}
 }
@@ -67,7 +67,7 @@
 }
 
 @mixin maxWidth($breakpoint, $at: 'media') {
-	@include query($breakpoint, $reversed: true, $at: $at) {
+	@include query($breakpoint, $max: true, $at: $at) {
 		@content;
 	}
 }
@@ -79,7 +79,7 @@
 }
 
 @mixin maxHeight($breakpoint, $at: 'media') {
-	@include query($breakpoint, $reversed: true, $dimension: 'height', $at: $at) {
+	@include query($breakpoint, $max: true, $dimension: 'height', $at: $at) {
 		@content;
 	}
 }
