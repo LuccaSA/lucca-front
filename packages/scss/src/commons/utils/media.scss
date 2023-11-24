@@ -12,7 +12,7 @@
 	}
 }
 
-@mixin query($breakpoint, $dimension: 'width', $max: false, $at: 'media', $container: '') {
+@mixin query($breakpoint, $property: 'width', $max: false, $at: 'media', $container: '') {
 	$operator: '>=';
 
 	@if $max {
@@ -23,12 +23,12 @@
 		$breakpoint: getBreakpoint($breakpoint);
 	}
 
-	@#{$at} #{$container} (#{$dimension} #{$operator} #{$breakpoint}) {
+	@#{$at} #{$container} (#{$property} #{$operator} #{$breakpoint}) {
 		@content;
 	}
 }
 
-@mixin between($breakpoint1, $breakpoint2, $dimension: 'width', $at: 'media', $container: '') {
+@mixin between($breakpoint1, $breakpoint2, $property: 'width', $at: 'media', $container: '') {
 	@if getBreakpoint($breakpoint1) {
 		$breakpoint1: getBreakpoint($breakpoint1);
 	}
@@ -43,22 +43,24 @@
 		$breakpoint1: $breakpointTmp;
 	}
 
-	@#{$at} #{$container} (#{$breakpoint1} <= #{$dimension} < #{$breakpoint2}) {
+	@#{$at} #{$container} (#{$breakpoint1} <= #{$property} < #{$breakpoint2}) {
 		@content;
 	}
 }
 
-@mixin min($breakpoint, $dimension: 'width', $at: 'media') {
-	@include query($breakpoint, $dimension: $dimension, $at: $at) {
+@mixin min($breakpoint, $property: 'width', $at: 'media') {
+	@include query($breakpoint, $property: $property, $at: $at) {
 		@content;
 	}
 }
 
-@mixin max($breakpoint, $dimension: 'width', $at: 'media') {
-	@include query($breakpoint, $dimension: $dimension, $max: true, $at: $at) {
+@mixin max($breakpoint, $property: 'width', $at: 'media') {
+	@include query($breakpoint, $property: $property, $max: true, $at: $at) {
 		@content;
 	}
 }
+
+// alias
 
 @mixin minWidth($breakpoint, $at: 'media') {
 	@include query($breakpoint, $at: $at) {
@@ -79,7 +81,7 @@
 }
 
 @mixin maxHeight($breakpoint, $at: 'media') {
-	@include query($breakpoint, $max: true, $dimension: 'height', $at: $at) {
+	@include query($breakpoint, $max: true, $property: 'height', $at: $at) {
 		@content;
 	}
 }
@@ -91,7 +93,7 @@
 }
 
 @mixin betweenHeights($breakpoint1, $breakpoint2, $at: 'media') {
-    @include between($breakpoint1, $breakpoint2, $dimension: 'height', $at: $at) {
+    @include between($breakpoint1, $breakpoint2, $property: 'height', $at: $at) {
         @content;
     }
 }
