@@ -1,61 +1,77 @@
 @use '@lucca-front/scss/src/commons/utils/media';
 
-@mixin query($breakpoint, $property: 'width', $max: false, $container: '') {
-	@include media.query($breakpoint: $breakpoint, $property: $property, $max: $max, $at: 'container', $container: $container);
-}
+// dans cette page tous les mixins sont des raccourcis vers media.query et media.queries
 
-@mixin min($breakpoint, $container: '') {
-	@include media.query($breakpoint: $breakpoint, $at: 'container', $container: $container) {
+// les raccourcis des requêtes simples et multiples
+
+@mixin query($breakpoint, $property: 'width', $max: false, $name: '') {
+	@include media.query($breakpoint: $breakpoint, $property: $property, $max: $max, $at: 'container', $name: $name) {
 		@content;
 	}
 }
 
-@mixin max($breakpoint, $container: '') {
-	@include media.query($breakpoint, $max: true, $at: 'container', $container: $container) {
+@mixin queries($breakpoint1, $breakpoint2, $property: 'width', $name: '') {
+	@include media.queries($breakpoint1, $breakpoint2, $property: $property, $at: 'container', $name: $name) {
 		@content;
 	}
 }
 
-@mixin between($breakpoint1, $breakpoint2, $container: '') {
-	@include media.between($breakpoint1, $breakpoint2, $at: 'container', $container: $container) {
+// les raccourcis pour min/max/between
+
+@mixin min($breakpoint, $property: 'width', $name: '') {
+	@include media.query($breakpoint: $breakpoint, $property: $property, $at: 'container', $name: $name) {
 		@content;
 	}
 }
 
-// alias
-
-@mixin minWidth($breakpoint, $container: '') {
-	@include media.query($breakpoint, $at: 'container', $container: $container) {
+@mixin max($breakpoint, $property: 'width', $name: '') {
+	@include media.query($breakpoint, $property: $property, $max: true, $at: 'container', $name: $name) {
 		@content;
 	}
 }
 
-@mixin maxWidth($breakpoint, $container: '') {
-	@include media.query($breakpoint, $max: true, $at: 'container', $container: $container) {
+@mixin between($breakpoint1, $breakpoint2, $property: 'width', $name: '') {
+	@include media.queries($breakpoint1, $breakpoint2, $property: $property, $at: 'container', $name: $name) {
 		@content;
 	}
 }
 
-@mixin minHeight($breakpoint, $container: '') {
-	@include media.query($breakpoint, 'height', $at: 'container', $container: $container) {
+// les raccourcis pour minWidth/maxWidth/betweenWidths
+
+@mixin minWidth($breakpoint, $name: '') {
+	@include media.query($breakpoint, $at: 'container', $name: $name) {
 		@content;
 	}
 }
 
-@mixin maxHeight($breakpoint, $container: '') {
-	@include media.query($breakpoint, $max: true, $property: 'height', $at: 'container', $container: $container) {
+@mixin maxWidth($breakpoint, $name: '') {
+	@include media.query($breakpoint, $max: true, $at: 'container', $name: $name) {
 		@content;
 	}
 }
 
-@mixin betweenWidths($breakpoint1, $breakpoint2, $container: '') {
-	@include media.between($breakpoint1, $breakpoint2, $at: 'container', $container: $container) {
+@mixin betweenWidths($breakpoint1, $breakpoint2, $name: '') {
+	@include media.queries($breakpoint1, $breakpoint2, $at: 'container', $name: $name) {
 		@content;
 	}
 }
 
-@mixin betweenHeights($breakpoint1, $breakpoint2, $container: '') {
-	@include media.between($breakpoint1, $breakpoint2, $property: 'height', $at: 'container', $container: $container) {
+// les raccourcis pour minHeight/maxHeight/betweenHeights
+
+@mixin minHeight($breakpoint, $name: '') {
+	@include media.query($breakpoint, $property: 'height', $at: 'container', $name: $name) {
+		@content;
+	}
+}
+
+@mixin maxHeight($breakpoint, $name: '') {
+	@include media.query($breakpoint, $max: true, $property: 'height', $at: 'container', $name: $name) {
+		@content;
+	}
+}
+
+@mixin betweenHeights($breakpoint1, $breakpoint2, $name: '') {
+	@include media.queries($breakpoint1, $breakpoint2, $property: 'height', $at: 'container', $name: $name) {
 		@content;
 	}
 }

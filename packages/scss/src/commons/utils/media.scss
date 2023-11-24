@@ -4,6 +4,9 @@
 
 @use '@lucca-front/scss/src/commons/config';
 
+// pour tester si le breakpoint existe dans la configuration
+// et pour retourner sa valeur convertie en ems (ou false)
+
 @function getBreakpoint($breakpoint) {
 	@if map.get(config.$breakpoints, $breakpoint) {
 		@return (map.get(config.$breakpoints, $breakpoint) / 16px) * 1em;
@@ -12,7 +15,9 @@
 	}
 }
 
-@mixin query($breakpoint, $property: 'width', $max: false, $at: 'media', $container: '') {
+// les requêtes simples et multiples
+
+@mixin query($breakpoint, $property: 'width', $max: false, $at: 'media', $name: '') {
 	$operator: '>=';
 
 	@if $max {
@@ -23,12 +28,12 @@
 		$breakpoint: getBreakpoint($breakpoint);
 	}
 
-	@#{$at} #{$container} (#{$property} #{$operator} #{$breakpoint}) {
+	@#{$at} #{$name} (#{$property} #{$operator} #{$breakpoint}) {
 		@content;
 	}
 }
 
-@mixin between($breakpoint1, $breakpoint2, $property: 'width', $at: 'media', $container: '') {
+@mixin queries($breakpoint1, $breakpoint2, $property: 'width', $at: 'media', $name: '') {
 	@if getBreakpoint($breakpoint1) {
 		$breakpoint1: getBreakpoint($breakpoint1);
 	}
@@ -37,16 +42,19 @@
 		$breakpoint2: getBreakpoint($breakpoint2);
 	}
 
+	// si le breakpoint2 est plus petit que le breakpoint1, on les inverse
 	@if ($breakpoint2 < $breakpoint1) {
 		$breakpointTmp: $breakpoint2;
 		$breakpoint2: $breakpoint1;
 		$breakpoint1: $breakpointTmp;
 	}
 
-	@#{$at} #{$container} (#{$breakpoint1} <= #{$property} < #{$breakpoint2}) {
+	@#{$at} #{$name} (#{$breakpoint1} <= #{$property} < #{$breakpoint2}) {
 		@content;
 	}
 }
+
+// les raccourcis vers les requêtes pour min/max/between
 
 @mixin min($breakpoint, $property: 'width', $at: 'media') {
 	@include query($breakpoint, $property: $property, $at: $at) {
@@ -60,7 +68,13 @@
 	}
 }
 
-// alias
+@mixin between($breakpoint1, $breakpoint2, $property: 'width', $at: 'media') {
+	@include queries($breakpoint1, $breakpoint2, $property: $property, $at: $at) {
+		@content;
+	}
+}
+
+// les raccourcis vers les requêtes pour minWidth/maxWidth/betweenWidths
 
 @mixin minWidth($breakpoint, $at: 'media') {
 	@include query($breakpoint, $at: $at) {
@@ -74,6 +88,14 @@
 	}
 }
 
+@mixin betweenWidths($breakpoint1, $breakpoint2, $at: 'media') {
+    @include queries($breakpoint1, $breakpoint2, $at: $at) {
+        @content;
+    }
+}
+
+// les raccourcis vers les requêtes pour minHeight/maxHeight/betweenHeights
+
 @mixin minHeight($breakpoint, $at: 'media') {
 	@include query($breakpoint, 'height', $at: $at) {
 		@content;
@@ -86,14 +108,8 @@
 	}
 }
 
-@mixin betweenWidths($breakpoint1, $breakpoint2, $at: 'media') {
-    @include between($breakpoint1, $breakpoint2, $at: $at) {
-        @content;
-    }
-}
-
 @mixin betweenHeights($breakpoint1, $breakpoint2, $at: 'media') {
-    @include between($breakpoint1, $breakpoint2, $property: 'height', $at: $at) {
+    @include queries($breakpoint1, $breakpoint2, $property: 'height', $at: $at) {
         @content;
     }
 }
