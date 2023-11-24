@@ -4,6 +4,8 @@
  ***********************************************/
 
 export const IconsList = [
+	{ icon: 'deviceVideo', deprecated: false },
+	{ icon: 'chartSpider', deprecated: false },
 	{ icon: 'bookmark', deprecated: false },
 	{ icon: 'bookmarkFilled', deprecated: false },
 	{ icon: 'app', deprecated: false },
