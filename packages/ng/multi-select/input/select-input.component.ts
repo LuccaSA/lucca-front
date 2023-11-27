@@ -1,6 +1,6 @@
 import { PositionStrategy } from '@angular/cdk/overlay';
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, forwardRef, HostBinding, inject, Input, TemplateRef, Type } from '@angular/core';
+import { ChangeDetectionStrategy, Component, forwardRef, inject, Input, TemplateRef, Type } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { getIntl } from '@lucca-front/ng/core';
 import { ALuSelectInputComponent, LuOptionContext, provideLuSelectLabelsAndIds, provideLuSelectOverlayContainer, ɵLuOptionOutletDirective } from '@lucca-front/ng/core-select';
@@ -37,20 +37,10 @@ import { IconComponent } from '@lucca-front/ng/icon';
 export class LuMultiSelectInputComponent<T> extends ALuSelectInputComponent<T, T[]> implements ControlValueAccessor {
 	intl = getIntl(LU_MULTI_SELECT_TRANSLATIONS);
 
-	//@HostBinding('class.mod-multiple') modMultipleClass = true;
-
 	@Input() valuesTpl?: TemplateRef<LuOptionContext<T[]>> | Type<unknown> = LuMultiSelectDefaultDisplayerComponent;
-
-	// TODO This is for select all
-	// @Input() set areAllOptionsSelected(selected: boolean | undefined) {
-	// 	this.areAllOptionsSelected$.next(selected);
-	// }
 
 	@Input()
 	expandedPositionStrategy?: PositionStrategy;
-
-	// TODO this is for select all
-	// @Output() selectAll = new EventEmitter<void>();
 
 	@Input()
 	expanded = false;
@@ -95,8 +85,6 @@ export class LuMultiSelectInputComponent<T> extends ALuSelectInputComponent<T, T
 		}
 
 		super.bindInputToPanelRefEvents();
-		// TODO This is for select all
-		// this.panelRef.selectAll.subscribe(() => this.selectAll.emit());
 	}
 
 	protected override get hasValue(): boolean {
