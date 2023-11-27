@@ -4,12 +4,12 @@
 		var(--components-emptyState-illustration-background-top-right);
 	background-repeat: no-repeat;
 	background-position: bottom left, bottom left, top left var(--components-emptyState-illustration-top-right-offset-left),
-		top -1rem left var(--components-emptyState-illustration-top-right-offset-left);
+		top left var(--components-emptyState-illustration-top-right-offset-left);
 }
 
 @mixin pageS {
 	background-position: bottom left, bottom left, top left var(--components-emptyState-illustration-top-right-offset-left-S),
-		top -0.25rem left var(--components-emptyState-illustration-top-right-offset-left-S);
+		top left var(--components-emptyState-illustration-top-right-offset-left-S);
 	background-size: auto 10.875rem;
 }
 
