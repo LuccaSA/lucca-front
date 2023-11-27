@@ -1,7 +1,7 @@
 @mixin page {
-	background-image: var(--components-emptyState-background-foreground-bottom-left),
-		var(--components-emptyState-background-background-bottom-left), var(--components-emptyState-background-foreground-top-right),
-		var(--components-emptyState-background-background-top-right);
+	background-image: var(--components-emptyState-illustration-foreground-bottom-left),
+		var(--components-emptyState-illustration-background-bottom-left), var(--components-emptyState-illustration-foreground-top-right),
+		var(--components-emptyState-illustration-background-top-right);
 	background-repeat: no-repeat;
 	background-position: bottom left, bottom left, top left var(--components-emptyState-illustration-top-right-offset-left),
 		top -1rem left var(--components-emptyState-illustration-top-right-offset-left);
