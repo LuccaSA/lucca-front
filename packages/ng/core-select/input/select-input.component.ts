@@ -24,7 +24,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	}
 
 	@Input()
-	@HostBinding('class.is-disabled')
+	@HostBinding('attr.disabled')
 	disabled = false;
 
 	@HostBinding('class.is-selected')
@@ -49,10 +49,6 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 
 	public isPanelOpen$ = new BehaviorSubject(false);
 
-	@HostBinding('attr.role')
-	public role = 'combobox';
-
-	@HostBinding('attr.aria-activedescendant')
 	public activeDescendant: string | undefined;
 
 	@HostBinding('attr.aria-controls')
@@ -138,7 +134,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 				if (this.isPanelOpen) {
 					return this.panelRef.selectCurrentlHiglightedValue();
 				}
-				return this.openPanel();
+				return this.panelRef?.handleKeyManagerEvent($event);
 			case 'Space':
 			case 'ArrowDown':
 			case 'ArrowUp':

@@ -3,7 +3,7 @@
 	type="text"
 	role="combobox"
 	aria-haspopup="listbox"
-	aria-activedescendant=""
+	[attr.aria-activedescendant]="activeDescendant"
 	placeholder="{{placeholder}}"
 	[(ngModel)]="clue"
 	(ngModelChange)="clueChanged($event)"

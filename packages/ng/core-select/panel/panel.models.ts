@@ -24,7 +24,6 @@ export abstract class LuSelectPanelRef<TOption, TValue> {
 		this.valueChanged.complete();
 		this.clueChanged.emit('');
 		this.clueChanged.complete();
-		this.activeOptionIdChanged.emit(undefined);
 		this.activeOptionIdChanged.complete();
 	}
 }
