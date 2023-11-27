@@ -1,6 +1,9 @@
 <input
 	class="simpleSelect-input"
 	type="text"
+	role="combobox"
+	aria-haspopup="listbox"
+	aria-activedescendant=""
 	placeholder="{{placeholder}}"
 	[(ngModel)]="clue"
 	(ngModelChange)="clueChanged($event)"

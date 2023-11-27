@@ -16,7 +16,7 @@
 		<!--				<button type="button" class="link" (click)="updateClue(null); searchInput.focus()">{{ intl.clearSearch }}</button>-->
 		<!--			</div>-->
 		<!--		</ng-container>-->
-		<div class="lu-picker-content-option">
+		<div class="lu-picker-content-option" role="listbox">
 			<lu-select-option
 				*ngFor="let option of ctx.options; let index = index"
 				[option]="option"

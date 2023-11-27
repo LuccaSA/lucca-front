@@ -3,7 +3,7 @@
 .simpleSelect {
 	@include vars;
 	@include component;
-	
+
 	&.mod-S {
 		@include S;
 	}
@@ -32,11 +32,11 @@
 		}
 	}
 
-	&.is-invalid {
+	&:has(.simpleSelect-input[aria-invalid="true"]) {
 		@include invalid;
 	}
 
-	&.is-disabled {
+	&:has(.simpleSelect-input:disabled) {
 		@include disabled;
 	}
 }
