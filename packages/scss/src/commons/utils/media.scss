@@ -32,7 +32,7 @@
 	}
 
 	@if map.get(config.$breakpoints, $breakpoint2) {
-		$breakpoint1: pxToEm(map.get(config.$breakpoints, $breakpoint2));
+		$breakpoint2: pxToEm(map.get(config.$breakpoints, $breakpoint2));
 	}
 
 	// si le breakpoint2 est plus petit que le breakpoint1, on les inverse
