@@ -7,6 +7,7 @@ import { LuSelectPanelRef, SELECT_ID, ɵLuOptionComponent } from '@lucca-front/n
 import { asyncScheduler, filter, map, observeOn, take, takeUntil } from 'rxjs';
 import { ILuSimpleSelectPanelData, SIMPLE_SELECT_PANEL_DATA } from '../select.model';
 import { LU_SIMPLE_SELECT_TRANSLATIONS } from '../select.translate';
+import { skip } from 'rxjs/operators';
 
 @Component({
 	selector: 'lu-select-panel',
@@ -78,12 +79,22 @@ export class LuSelectPanelComponent<T> implements AfterViewInit {
 					takeUntil(this.panelRef.closed),
 				)
 				.subscribe((selectedIndex) => this.keyManager.setActiveItem(selectedIndex));
+		} else {
+			// If no initial Value, set first as active
+			setTimeout(() => this.keyManager.setFirstItemActive());
 		}
 
 		/**
 		 * On new options, we want to select the first element with key manager
 		 */
-		this.options$?.pipe(observeOn(asyncScheduler), takeUntil(this.panelRef.closed)).subscribe(() => this.keyManager.setFirstItemActive());
+		this.options$
+			?.pipe(
+				observeOn(asyncScheduler),
+				// Skip first so we don't override "select currently active", we only want new options anyways
+				skip(1),
+				takeUntil(this.panelRef.closed),
+			)
+			.subscribe(() => this.keyManager.setFirstItemActive());
 
 		this.keyManager.change
 			.pipe(
