@@ -4,15 +4,8 @@
 
 @use '@lucca-front/scss/src/commons/config';
 
-// pour tester si le breakpoint existe dans la configuration
-// et pour retourner sa valeur convertie en ems (ou false)
-
-@function getBreakpoint($breakpoint) {
-	@if map.get(config.$breakpoints, $breakpoint) {
-		@return (map.get(config.$breakpoints, $breakpoint) / 16px) * 1em;
-	} @else {
-		@return false;
-	}
+@function pxToEm($value) {
+	@return $value / 16px * 1em;
 }
 
 // les requêtes simples et multiples
@@ -24,8 +17,8 @@
 		$operator: '<';
 	}
 
-	@if getBreakpoint($breakpoint) {
-		$breakpoint: getBreakpoint($breakpoint);
+	@if map.get(config.$breakpoints, $breakpoint) {
+		$breakpoint: pxToEm(map.get(config.$breakpoints, $breakpoint));
 	}
 
 	@#{$at} #{$name} (#{$property} #{$operator} #{$breakpoint}) {
@@ -34,12 +27,12 @@
 }
 
 @mixin queries($breakpoint1, $breakpoint2, $property: 'width', $at: 'media', $name: '') {
-	@if getBreakpoint($breakpoint1) {
-		$breakpoint1: getBreakpoint($breakpoint1);
+	@if map.get(config.$breakpoints, $breakpoint1) {
+		$breakpoint1: pxToEm(map.get(config.$breakpoints, $breakpoint1));
 	}
 
-	@if getBreakpoint($breakpoint2) {
-		$breakpoint2: getBreakpoint($breakpoint2);
+	@if map.get(config.$breakpoints, $breakpoint2) {
+		$breakpoint1: pxToEm(map.get(config.$breakpoints, $breakpoint2));
 	}
 
 	// si le breakpoint2 est plus petit que le breakpoint1, on les inverse
