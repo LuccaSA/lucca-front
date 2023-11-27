@@ -44,7 +44,7 @@ export class LuOptionOutletDirective<T> implements OnChanges, OnDestroy {
 	}
 
 	private createComponent(): void {
-		if (!this.luOptionOutlet || !this.luOptionOutletValue) {
+		if (!this.luOptionOutlet) {
 			return;
 		}
 
@@ -57,9 +57,6 @@ export class LuOptionOutletDirective<T> implements OnChanges, OnDestroy {
 	}
 
 	private updateRefValue(): void {
-		if (!this.luOptionOutletValue) {
-			return;
-		}
 		if (this.embeddedViewRef) {
 			this.embeddedViewRef.context = { $implicit: this.luOptionOutletValue };
 		} else if (this.componentRef) {
