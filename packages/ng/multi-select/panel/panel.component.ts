@@ -28,12 +28,9 @@ export class LuMultiSelectPanelComponent<T> implements AfterViewInit {
 
 	options$ = this.panelData.options$;
 	loading$ = this.panelData.loading$;
-	areAllOptionsSelected$ = this.panelData.areAllOptionsSelected$;
-	canSelectAll = false; // TODO connect to panel options when we'll be ok on designing select all
 	optionComparer = this.panelData.optionComparer;
 	selectedOptions: T[] = this.panelData.initialValue || [];
 	optionTpl = this.panelData.optionTpl;
-	searchable = this.panelData.searchable;
 
 	@ViewChild('searchInput')
 	searchInput: ElementRef<HTMLInputElement> | undefined;

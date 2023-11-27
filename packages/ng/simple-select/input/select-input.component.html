@@ -7,6 +7,8 @@
 	placeholder="{{placeholder}}"
 	[(ngModel)]="clue"
 	(ngModelChange)="clueChanged($event)"
+	[readonly]="!searchable"
+	[disabled]="disabled"
 	#inputElement
 />
 <div class="simpleSelect-value">

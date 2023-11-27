@@ -21,7 +21,7 @@
 	[class.is-expanded]="isExpanded"
 	[attr.aria-expanded]="isExpanded ? 'true' : undefined"
 >
-	<div class="lu-multiselect-panel-form" *ngIf="searchable && !isExpanded">
+	<div class="lu-multiselect-panel-form" *ngIf="!isExpanded">
 		<ng-container *ngTemplateOutlet="searchInputTpl"></ng-container>
 		<!--		<button class="button mod-text mod-icon lu-multiselect-expandbutton" type="button" (click)="toggleExpansion()">-->
 		<!--			<span aria-hidden="true" class="lucca-icon" [class.icon-fullscreen]="!isExpanded" [class.icon-fullscreenExit]="isExpanded"></span>-->
@@ -30,7 +30,7 @@
 	</div>
 	<div class="lu-multiselect-panel-columns">
 		<div class="lu-multiselect-panel-columns-col1" (keydown)="onLeftColumnKeydown($event)">
-			<div class="lu-multiselect-panel-form" *ngIf="searchable && isExpanded">
+			<div class="lu-multiselect-panel-form" *ngIf="isExpanded">
 				<ng-container *ngTemplateOutlet="searchInputTpl"></ng-container>
 			</div>
 			<div
@@ -42,27 +42,6 @@
 				aria-multiselectable="true"
 				(scroll)="onScroll($event)"
 			>
-				<ng-container *ngIf="searchable">
-					<div class="optionPlaceholder" *ngIf="search && !ctx.options?.length">
-						<p class="optionPlaceholder-content u-marginBottom0">{{ intl.emptyResults }}</p>
-						<button type="button" class="link" (click)="updateClue(null); searchInput.nativeElement.focus()">{{ intl.clearSearch }}</button>
-					</div>
-				</ng-container>
-
-				<!--				<ng-container *ngIf="canSelectAll">-->
-				<!--					<label class="checkbox lu-multiselect-selectall" role="option" [for]="selectId + '-select-all'">-->
-				<!--						<input-->
-				<!--							class="checkbox-input"-->
-				<!--							type="checkbox"-->
-				<!--							[class.is-incomplete]="(areAllOptionsSelected$ | async) !== true && selectedOptions.length"-->
-				<!--							[id]="selectId + '-select-all'"-->
-				<!--							[ngModel]="(areAllOptionsSelected$ | async) === true || !!selectedOptions.length"-->
-				<!--							(ngModelChange)="toggleAll($event)"-->
-				<!--						/>-->
-				<!--						<span class="checkbox-label">{{ intl.selectAll }}</span>-->
-				<!--					</label>-->
-				<!--				</ng-container>-->
-
 				<div class="lu-picker-content-option">
 					<lu-select-option
 						*ngFor="let option of ctx.options; let index = index"

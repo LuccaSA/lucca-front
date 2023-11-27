@@ -28,7 +28,6 @@ export class LuSelectPanelComponent<T> implements AfterViewInit {
 	optionComparer = this.panelData.optionComparer;
 	initialValue: T | undefined = this.panelData.initialValue;
 	optionTpl = this.panelData.optionTpl;
-	searchable = this.panelData.searchable;
 
 	@ViewChild('searchInput')
 	public set searchInput(input: ElementRef<HTMLInputElement> | undefined) {
@@ -69,6 +68,13 @@ export class LuSelectPanelComponent<T> implements AfterViewInit {
 
 		this._keyManager = new ActiveDescendantKeyManager(this.optionsQL).withHomeAndEnd();
 
+		this.keyManager.change
+			.pipe(
+				map(() => this.keyManager.activeItem?.id),
+				takeUntil(this.panelRef.closed),
+			)
+			.subscribe((activeDescendant) => this.panelRef.activeOptionIdChanged.emit(activeDescendant));
+
 		if (this.initialValue) {
 			this.options$
 				?.pipe(
@@ -95,12 +101,5 @@ export class LuSelectPanelComponent<T> implements AfterViewInit {
 				takeUntil(this.panelRef.closed),
 			)
 			.subscribe(() => this.keyManager.setFirstItemActive());
-
-		this.keyManager.change
-			.pipe(
-				map(() => this.keyManager.activeItem?.id),
-				takeUntil(this.panelRef.closed),
-			)
-			.subscribe((activeDescendant) => this.panelRef.activeOptionIdChanged.emit(activeDescendant));
 	}
 }

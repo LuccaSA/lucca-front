@@ -24,7 +24,6 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	}
 
 	@Input()
-	@HostBinding('attr.disabled')
 	disabled = false;
 
 	@HostBinding('class.is-selected')

@@ -68,10 +68,7 @@ export class LuMultiSelectInputComponent<T> extends ALuSelectInputComponent<T, T
 				optionComparer: this.optionComparer,
 				options$: this.options$,
 				loading$: this.loading$,
-				searchable: this.searchable,
 				optionTpl: this.optionTpl,
-				canSelectAll: false, // TODO Connect this to this.selectAll.observed when we'll be fixed on how to implement select all
-				areAllOptionsSelected$: this.areAllOptionsSelected$,
 				expanded: this.expanded,
 			},
 			this.overlayConfig,
