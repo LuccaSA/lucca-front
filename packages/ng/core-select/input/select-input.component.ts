@@ -11,8 +11,6 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	@ViewChild('inputElement')
 	private inputElementRef: ElementRef<HTMLInputElement>;
 
-	@HostBinding('tabindex') tabindex = 0;
-
 	@Input() placeholder = '';
 
 	@Input()
@@ -42,9 +40,6 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	public get isPanelOpen(): boolean {
 		return this.isPanelOpen$.value;
 	}
-
-	@HostBinding('attr.tabindex')
-	public tabindexAttr = -1;
 
 	public isPanelOpen$ = new BehaviorSubject(false);
 

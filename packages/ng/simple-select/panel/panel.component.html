@@ -5,8 +5,8 @@
 	*ngIf="{ options: options$ | async } as ctx"
 	[cdkTrapFocusAutoCapture]="true"
 >
-	<div class="lu-picker-content" [class.is-loading]="loading$ | async" tabindex="0" (scroll)="onScroll($event)">
-		<div class="lu-picker-content-option">
+	<div class="lu-picker-content" [class.is-loading]="loading$ | async" (scroll)="onScroll($event)">
+		<div class="lu-picker-content-option" role="listbox">
 			<lu-select-option
 				*ngFor="let option of ctx.options; let index = index"
 				[option]="option"
