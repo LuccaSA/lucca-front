@@ -34,6 +34,10 @@
 			font-size: var(--components-multiSelect-fontSize);
 			line-height: var(--components-multiSelect-lineHeight);
 			background-color: transparent;
+
+			&::placeholder {
+				color: var(--palettes-grey-400);
+			}
 		}
 
 		.multipleSelect-clear {
