@@ -1,16 +1,15 @@
-import { PositionStrategy } from '@angular/cdk/overlay';
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, forwardRef, inject, Input, TemplateRef, Type } from '@angular/core';
+import { ChangeDetectionStrategy, Component, forwardRef, inject, Input, numberAttribute, OnDestroy, TemplateRef, Type } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { getIntl } from '@lucca-front/ng/core';
 import { ALuSelectInputComponent, LuOptionContext, provideLuSelectLabelsAndIds, provideLuSelectOverlayContainer, ɵLuOptionOutletDirective } from '@lucca-front/ng/core-select';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
-import { ReplaySubject } from 'rxjs';
 import { LuMultiSelectDefaultDisplayerComponent } from '../displayer/index';
 import { LU_MULTI_SELECT_TRANSLATIONS } from '../select.translate';
 import { LuMultiSelectPanelRefFactory } from './panel-ref.factory';
 import { LuMultiSelectPanelRef } from './panel.model';
 import { IconComponent } from '@lucca-front/ng/icon';
+import { Subject } from 'rxjs';
 
 @Component({
 	selector: 'lu-multi-select',
@@ -34,27 +33,32 @@ import { IconComponent } from '@lucca-front/ng/icon';
 		LuMultiSelectPanelRefFactory,
 	],
 })
-export class LuMultiSelectInputComponent<T> extends ALuSelectInputComponent<T, T[]> implements ControlValueAccessor {
+export class LuMultiSelectInputComponent<T> extends ALuSelectInputComponent<T, T[]> implements ControlValueAccessor, OnDestroy {
 	intl = getIntl(LU_MULTI_SELECT_TRANSLATIONS);
 
-	@Input() valuesTpl?: TemplateRef<LuOptionContext<T[]>> | Type<unknown> = LuMultiSelectDefaultDisplayerComponent;
-
 	@Input()
-	expandedPositionStrategy?: PositionStrategy;
+	valuesTpl?: TemplateRef<LuOptionContext<T[]>> | Type<unknown> = LuMultiSelectDefaultDisplayerComponent;
 
-	@Input()
-	expanded = false;
+	@Input({ transform: numberAttribute })
+	maxValuesShown = Infinity;
 
 	@Input()
 	public override get panelRef(): LuMultiSelectPanelRef<T> | undefined {
 		return this._panelRef;
 	}
 
-	protected areAllOptionsSelected$ = new ReplaySubject<boolean | undefined>(1);
-
 	protected override _panelRef?: LuMultiSelectPanelRef<T>;
 
 	protected panelRefFactory = inject(LuMultiSelectPanelRefFactory);
+
+	/**
+	 * This is used to tell the displayer to focus on the input element
+	 */
+	public readonly focusInput$ = new Subject<void>();
+
+	public override focusInput(): void {
+		this.focusInput$.next();
+	}
 
 	public override writeValue(value: T[]): void {
 		super.writeValue(value);
@@ -69,10 +73,8 @@ export class LuMultiSelectInputComponent<T> extends ALuSelectInputComponent<T, T
 				options$: this.options$,
 				loading$: this.loading$,
 				optionTpl: this.optionTpl,
-				expanded: this.expanded,
 			},
 			this.overlayConfig,
-			this.expandedPositionStrategy,
 		);
 	}
 
@@ -92,5 +94,10 @@ export class LuMultiSelectInputComponent<T> extends ALuSelectInputComponent<T, T
 		event.stopPropagation();
 		this.onChange?.([]);
 		this.value = [];
+	}
+
+	override ngOnDestroy() {
+		super.ngOnDestroy();
+		this.focusInput$.complete();
 	}
 }

@@ -14,7 +14,7 @@ export abstract class LuSelectPanelRef<TOption, TValue> {
 
 	abstract emitValue(value: TValue): void;
 
-	abstract selectCurrentlHiglightedValue(): void;
+	abstract selectCurrentlyHighlightedValue(): void;
 
 	close(): void {
 		this.closed.next();

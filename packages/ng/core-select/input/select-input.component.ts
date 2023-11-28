@@ -126,7 +126,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 				return this.panelRef?.close();
 			case 'Enter':
 				if (this.isPanelOpen) {
-					return this.panelRef.selectCurrentlHiglightedValue();
+					return this.panelRef.selectCurrentlyHighlightedValue();
 				}
 				return this.panelRef?.handleKeyManagerEvent($event);
 			case 'Space':
@@ -189,9 +189,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 		}
 		this._panelRef = this.buildPanelRef();
 		this.bindInputToPanelRefEvents();
-		if (this.inputElementRef) {
-			setTimeout(() => this.inputElementRef.nativeElement.focus());
-		}
+		setTimeout(() => this.focusInput());
 	}
 
 	protected abstract buildPanelRef(): this['panelRef'];
@@ -209,6 +207,12 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 			this.changeDetectorRef.markForCheck();
 		});
 		this.panelRef.closed.subscribe(() => this.closePanel());
+	}
+
+	protected focusInput(): void {
+		if (this.inputElementRef) {
+			this.inputElementRef.nativeElement.focus();
+		}
 	}
 
 	public closePanel(): void {

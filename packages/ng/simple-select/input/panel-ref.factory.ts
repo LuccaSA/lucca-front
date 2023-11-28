@@ -47,7 +47,7 @@ class SelectPanelRef<T> extends LuSelectPanelRef<T, T> {
 		this.overlayRef.detach();
 	}
 
-	selectCurrentlHiglightedValue(): void {
+	selectCurrentlyHighlightedValue(): void {
 		this.emitValue(this.instance.selected);
 		this.close();
 	}

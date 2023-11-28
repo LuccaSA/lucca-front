@@ -1,6 +1,6 @@
 import { A11yModule, ActiveDescendantKeyManager } from '@angular/cdk/a11y';
 import { AsyncPipe, NgFor, NgIf } from '@angular/common';
-import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, inject, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, inject, QueryList, ViewChildren } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { getIntl } from '@lucca-front/ng/core';
 import { LuSelectPanelRef, SELECT_ID, ɵLuOptionComponent } from '@lucca-front/ng/core-select';
@@ -28,13 +28,6 @@ export class LuSelectPanelComponent<T> implements AfterViewInit {
 	optionComparer = this.panelData.optionComparer;
 	initialValue: T | undefined = this.panelData.initialValue;
 	optionTpl = this.panelData.optionTpl;
-
-	@ViewChild('searchInput')
-	public set searchInput(input: ElementRef<HTMLInputElement> | undefined) {
-		if (!input) {
-			return;
-		}
-	}
 
 	@ViewChildren(ɵLuOptionComponent) optionsQL: QueryList<ɵLuOptionComponent<T>>;
 	private _keyManager: ActiveDescendantKeyManager<ɵLuOptionComponent<T>>;
