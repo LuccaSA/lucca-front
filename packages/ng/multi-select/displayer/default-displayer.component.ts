@@ -14,13 +14,13 @@ import { map } from 'rxjs/operators';
 	standalone: true,
 	imports: [AsyncPipe, LuTooltipModule, NgIf, NgFor, NgPlural, NgPluralCase, ɵLuOptionOutletDirective, FormsModule],
 	template: `
-		<div class="multipleSelect-value">
+		<div class="multipleSelect-displayer">
 			<div *ngFor="let option of displayedOptions$ | async; let index = index" class="chip" [class.mod-unkillable]="disabled">
 				<ng-container *luOptionOutlet="select.valueTpl || select.optionTpl; value: option"></ng-container>
 				<a href *ngIf="!disabled" type="button" class="chip-kill" (click)="unselectOption(option, $event)"></a>
 			</div>
 			<div class="chip" *ngIf="overflowOptions$ | async as overflow">+ {{ overflow }}</div>
-			<input class="multipleSelect-value-search" type="text" #inputElement ngModel (ngModelChange)="select.clueChanged($event)" />
+			<input class="multipleSelect-displayer-search" type="text" #inputElement ngModel (ngModelChange)="select.clueChanged($event)" />
 		</div>
 	`,
 	styleUrls: ['./default-displayer.component.scss'],

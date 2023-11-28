@@ -1,5 +1,8 @@
-@use '@lucca-front/scss/src/commons/utils/a11y';
-@use '@lucca-front/scss/src/components/chip/exports' as chip;
+:host {
+    display: block;
+    width: 100%;
+}
+
 //
 // :host {
 // 	display: flex;
