@@ -10,6 +10,7 @@ import { ILuMultiSelectPanelData, MULTI_SELECT_PANEL_DATA } from '../select.mode
 import { LU_MULTI_SELECT_TRANSLATIONS } from '../select.translate';
 import { LuIsOptionSelectedPipe } from './option-selected.pipe';
 import { ɵLuMultiSelectSelectedChipDirective } from './selected-chip.directive';
+import { skip } from 'rxjs/operators';
 
 @Component({
 	selector: 'lu-select-panel',
@@ -89,5 +90,17 @@ export class LuMultiSelectPanelComponent<T> implements AfterViewInit {
 				takeUntil(this.panelRef.closed),
 			)
 			.subscribe((activeDescendant) => this.panelRef.activeOptionIdChanged.emit(activeDescendant));
+
+		/**
+		 * On new options, we want to select the first element with key manager
+		 */
+		this.options$
+			?.pipe(
+				observeOn(asyncScheduler),
+				// Skip first so we don't override "select currently active", we only want new options anyways
+				skip(1),
+				takeUntil(this.panelRef.closed),
+			)
+			.subscribe(() => this.keyManager.setFirstItemActive());
 	}
 }

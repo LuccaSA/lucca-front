@@ -64,6 +64,10 @@ export class LuMultiSelectDefaultDisplayerComponent<T> implements OnInit {
 
 	ngOnInit(): void {
 		this.select.focusInput$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {
+			// Everytime we want to focus, we need to reset the input
+			// This is done when a value is selected and when panel is opened.
+			this.inputElementRef.nativeElement.value = '';
+			this.select.clueChanged('');
 			this.inputElementRef.nativeElement.focus();
 		});
 	}
