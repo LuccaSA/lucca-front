@@ -7,7 +7,7 @@
 	&:empty {
 		border-top-color: var(--commons-divider-color);
 		border-top-width: var(--commons-divider-width);
-		border-top-style: solid;
+		border-top: var(--commons-divider-border);
 		margin-top: var(--spacings-M);
 		margin-bottom: var(--spacings-M);
 	}
@@ -28,7 +28,7 @@
 		&::after {
 			border-top-color: var(--commons-divider-color);
 			border-top-width: var(--commons-divider-width);
-			border-top-style: solid;
+			border-top: var(--commons-divider-border);
 			flex-grow: 1;
 			min-width: var(--spacings-M);
 			content: '';
