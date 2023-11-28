@@ -3,4 +3,8 @@
 .divider {
 	@include vars;
 	@include component;
+
+	&.mod-S {
+		@include S;
+	}
 }
