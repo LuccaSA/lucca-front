@@ -1,6 +1,3 @@
-@use '@lucca-front/scss/src/components/button/exports' as button;
-@use '@lucca-front/scss/src/components/actionIcon/exports' as actionIcon;
-
 @mixin component($atRoot: 'without: rule') {
 	border: 0;
 
@@ -32,22 +29,6 @@
 			flex-grow: 1;
 			min-width: var(--spacings-M);
 			content: '';
-		}
-	}
-
-	@at-root ($atRoot) {
-		.divider-button {
-			@include button.vars;
-			@include button.component;
-
-			&.divider-button {
-				@include button.outlined;
-			}
-		}
-
-		.divider-actionIcon {
-			@include actionIcon.vars;
-			@include actionIcon.component;
 		}
 	}
 }
