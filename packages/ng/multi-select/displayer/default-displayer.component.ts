@@ -20,7 +20,15 @@ import { map } from 'rxjs/operators';
 				<a href *ngIf="!disabled" type="button" class="chip-kill" (click)="unselectOption(option, $event)"></a>
 			</div>
 			<div class="chip" *ngIf="overflowOptions$ | async as overflow">+ {{ overflow }}</div>
-			<input class="multipleSelect-displayer-search" type="text" #inputElement ngModel (ngModelChange)="select.clueChanged($event)" />
+			<input
+				class="multipleSelect-displayer-search"
+				type="text"
+				#inputElement
+				ngModel
+				(ngModelChange)="select.clueChanged($event)"
+				[placeholder]="placeholder$ | async"
+				(keydown.backspace)="inputBackspace()"
+			/>
 		</div>
 	`,
 	styleUrls: ['./default-displayer.component.scss'],
@@ -41,6 +49,15 @@ export class LuMultiSelectDefaultDisplayerComponent<T> implements OnInit {
 
 	context = inject<ILuOptionContext<T[]>>(LU_OPTION_CONTEXT);
 
+	placeholder$ = this.context.option$.pipe(
+		map((options) => {
+			if (options.length > 0) {
+				return '';
+			}
+			return this.select.placeholder;
+		}),
+	);
+
 	displayedOptions$ = this.context.option$.pipe(
 		map((options) => {
 			if (this.select.maxValuesShown !== Infinity) {
@@ -56,10 +73,19 @@ export class LuMultiSelectDefaultDisplayerComponent<T> implements OnInit {
 		}),
 	);
 
-	unselectOption(option: T, $event: Event): void {
-		$event.stopPropagation();
-		$event.preventDefault();
+	unselectOption(option: T, $event?: Event): void {
+		if ($event) {
+			$event.stopPropagation();
+			$event.preventDefault();
+		}
 		this.select.updateValue(this.select.value.filter((o) => o !== option));
+	}
+
+	inputBackspace(): void {
+		if (this.select.value.length > 0 && this.inputElementRef.nativeElement.value.length === 0) {
+			this.unselectOption(this.select.value[this.select.value.length - 1]);
+			//TODO Tell panel to update display
+		}
 	}
 
 	ngOnInit(): void {

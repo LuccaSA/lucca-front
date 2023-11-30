@@ -66,6 +66,7 @@ export class LuMultiSelectPanelComponent<T> implements AfterViewInit {
 		const selectedOption = this.selectedOptions.find((o) => this.optionComparer(o, option));
 		this.selectedOptions = selectedOption ? this.selectedOptions.filter((o) => o !== selectedOption) : [...this.selectedOptions, option];
 		this.panelRef.emitValue(this.selectedOptions);
+		setTimeout(() => this.panelRef.updatePosition());
 		this._keyManager?.setActiveItem(this.optionsQL.toArray().findIndex((o) => o.option === option));
 	}
 

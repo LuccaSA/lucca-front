@@ -46,6 +46,10 @@ class MultiSelectPanelRef<T> extends LuMultiSelectPanelRef<T> {
 		this.overlayRef.updatePositionStrategy(this.defaultPositionStrategy);
 	}
 
+	updatePosition(): void {
+		this.overlayRef.updatePosition();
+	}
+
 	override close(): void {
 		super.close();
 		this.panelRef.destroy();
