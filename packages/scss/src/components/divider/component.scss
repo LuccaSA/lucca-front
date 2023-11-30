@@ -39,7 +39,6 @@
 		.divider-button {
 			@include button.vars;
 			@include button.component;
-			@include button.S;
 
 			&.divider-button {
 				@include button.outlined;
