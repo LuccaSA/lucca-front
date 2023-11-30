@@ -15,11 +15,6 @@ import { map } from 'rxjs/operators';
 	imports: [AsyncPipe, LuTooltipModule, NgIf, NgFor, NgPlural, NgPluralCase, ɵLuOptionOutletDirective, FormsModule],
 	template: `
 		<div class="multipleSelect-displayer">
-			<div *ngFor="let option of displayedOptions$ | async; let index = index" class="chip" [class.mod-unkillable]="disabled">
-				<ng-container *luOptionOutlet="select.valueTpl || select.optionTpl; value: option"></ng-container>
-				<a href *ngIf="!disabled" type="button" class="chip-kill" (click)="unselectOption(option, $event)"></a>
-			</div>
-			<div class="chip" *ngIf="overflowOptions$ | async as overflow">+ {{ overflow }}</div>
 			<input
 				class="multipleSelect-displayer-search"
 				type="text"
@@ -29,6 +24,11 @@ import { map } from 'rxjs/operators';
 				[placeholder]="placeholder$ | async"
 				(keydown.backspace)="inputBackspace()"
 			/>
+			<div *ngFor="let option of displayedOptions$ | async; let index = index" class="chip" [class.mod-unkillable]="disabled">
+				<ng-container *luOptionOutlet="select.valueTpl || select.optionTpl; value: option"></ng-container>
+				<a href *ngIf="!disabled" type="button" class="chip-kill" (click)="unselectOption(option, $event)"></a>
+			</div>
+			<div class="chip" *ngIf="overflowOptions$ | async as overflow">+ {{ overflow }}</div>
 		</div>
 	`,
 	styleUrls: ['./default-displayer.component.scss'],

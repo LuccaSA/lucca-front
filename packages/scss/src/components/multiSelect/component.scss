@@ -10,6 +10,7 @@
 	padding: var(--components-multiSelect-padding);
 	align-items: flex-end;
 	gap: var(--components-multiSelect-gap);
+	cursor: pointer;
 
 	&:has(.multipleSelect-displayer-search:focus-visible) {
 		@include a11y.focusVisible($offset: 3px);
@@ -27,6 +28,7 @@
 			min-width: 2rem;
 			width: auto;
 			flex: 1;
+			order: 1;
 			border: 0;
 			padding: 0;
 			outline: none;
@@ -34,6 +36,7 @@
 			font-size: var(--components-multiSelect-fontSize);
 			line-height: var(--components-multiSelect-lineHeight);
 			background-color: transparent;
+			cursor: pointer;
 
 			&::placeholder {
 				color: var(--palettes-grey-400);
