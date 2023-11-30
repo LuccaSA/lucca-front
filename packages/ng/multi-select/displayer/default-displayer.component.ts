@@ -82,6 +82,7 @@ export class LuMultiSelectDefaultDisplayerComponent<T> implements OnInit {
 			this.select.value.filter((o) => o !== option),
 			true,
 		);
+		setTimeout(() => this.select.panelRef.updatePosition());
 	}
 
 	inputBackspace(): void {
