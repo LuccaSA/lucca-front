@@ -1,32 +1,27 @@
 <div
-	class="lu-picker-panel lu-option-picker-panel lu-multiselect-panel mod-multiple"
+	class="lu-picker-panel lu-option-picker-panel mod-multiple"
 	role="dialog"
 	*ngIf="{ options: options$ | async } as ctx"
 >
-	<div class="lu-multiselect-panel-columns">
-		<div class="lu-multiselect-panel-columns-col1">
-			<div
-				class="lu-picker-content lu-multiselect-panel-columns-col1-content"
-				[class.is-loading]="loading$ | async"
-				tabindex="0"
-				role="list"
-				aria-multiselectable="true"
-				(scroll)="onScroll($event)"
-			>
-				<div class="lu-picker-content-option">
-					<lu-select-option
-						*ngFor="let option of ctx.options; let index = index"
-						[option]="option"
-						[optionTpl]="optionTpl"
-						[optionIndex]="index"
-						[scrollIntoViewOptions]="{ block: 'nearest' }"
-						[isSelected]="option | luIsOptionSelected:optionComparer:selectedOptions"
-						(click)="toggleOption(option)"
-					></lu-select-option>
-				</div>
-
-				<div *ngIf="loading$ | async" class="panel-loading loading lu-picker-loading"></div>
-			</div>
+	<div
+		class="lu-picker-content"
+		[class.is-loading]="loading$ | async"
+		tabindex="0"
+		role="list"
+		aria-multiselectable="true"
+		(scroll)="onScroll($event)"
+	>
+		<div class="lu-picker-content-option">
+			<lu-select-option
+				*ngFor="let option of ctx.options; let index = index"
+				[option]="option"
+				[optionTpl]="optionTpl"
+				[optionIndex]="index"
+				[scrollIntoViewOptions]="{ block: 'nearest' }"
+				[isSelected]="option | luIsOptionSelected:optionComparer:selectedOptions"
+				(click)="toggleOption(option)"
+			></lu-select-option>
 		</div>
+		<div *ngIf="loading$ | async" class="panel-loading loading lu-picker-loading"></div>
 	</div>
 </div>
