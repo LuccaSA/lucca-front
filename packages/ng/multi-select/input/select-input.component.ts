@@ -65,9 +65,11 @@ export class LuMultiSelectInputComponent<T> extends ALuSelectInputComponent<T, T
 		this.panelRef?.updateSelectedOptions(value);
 	}
 
-	public override updateValue(value: T[]): void {
+	public override updateValue(value: T[], skipFocus = false): void {
 		super.updateValue(value);
-		this.focusInput();
+		if (!skipFocus) {
+			this.focusInput();
+		}
 	}
 
 	protected override buildPanelRef(): LuMultiSelectPanelRef<T> {

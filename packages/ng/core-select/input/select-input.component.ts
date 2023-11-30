@@ -107,10 +107,8 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 
 	protected destroyed$ = new Subject<void>();
 
-	@HostListener('keydown.space', ['$event'])
-	@HostListener('keydown.arrowDown', ['$event'])
 	@HostListener('click', ['$event'])
-	onKeydownOpenPanel($event: KeyboardEvent) {
+	onClickOpenPanel($event: KeyboardEvent) {
 		if (!this.isPanelOpen) {
 			this.openPanel();
 			$event.stopPropagation();

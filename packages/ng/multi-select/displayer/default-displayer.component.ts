@@ -78,13 +78,16 @@ export class LuMultiSelectDefaultDisplayerComponent<T> implements OnInit {
 			$event.stopPropagation();
 			$event.preventDefault();
 		}
-		this.select.updateValue(this.select.value.filter((o) => o !== option));
+		this.select.updateValue(
+			this.select.value.filter((o) => o !== option),
+			true,
+		);
 	}
 
 	inputBackspace(): void {
 		if (this.select.value.length > 0 && this.inputElementRef.nativeElement.value.length === 0) {
 			this.unselectOption(this.select.value[this.select.value.length - 1]);
-			//TODO Tell panel to update display
+			this.select.panelRef.updateSelectedOptions(this.select.value);
 		}
 	}
 
