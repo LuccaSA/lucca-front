@@ -7,7 +7,7 @@ interface ButtonGroupStory {
 }
 
 export default {
-	title: 'Documentation/Actions/Button/Group',
+	title: 'Documentation/Actions/Button/HTML&CSS/Group',
 	argTypes: {
 		outlined: {
 			control: {

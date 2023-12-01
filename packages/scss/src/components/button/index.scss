@@ -50,6 +50,18 @@
 		}
 	}
 
+	&.mod-onlyIcon {
+		@include onlyIcon;
+
+		&.mod-S {
+			@include onlyIconS;
+		}
+
+		&.mod-XS {
+			@include onlyIconXS;
+		}
+	}
+
 	&.mod-invert {
 		@include invert;
 	}

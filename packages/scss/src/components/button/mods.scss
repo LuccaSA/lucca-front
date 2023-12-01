@@ -60,12 +60,28 @@
 		&:active {
 			background-color: var(--palettes-200, var(--palettes-grey-200));
 		}
+
+		&:focus-visible {
+			@include a11y.focusVisible($offset: 3px);
+		}
 	}
 
 	.button-counter { // deprecated
 		background-color: var(--palettes-300, var(--palettes-grey-300));
 		color: var(--palettes-800, var(--palettes-grey-800));
 	}
+}
+
+@mixin onlyIcon {
+	padding: var(--spacings-XS);
+}
+
+@mixin onlyIconS {
+	padding: 0.375rem;
+}
+
+@mixin onlyIconXS {
+	padding: var(--spacings-XXS);
 }
 
 @mixin block {
