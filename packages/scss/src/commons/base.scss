@@ -96,7 +96,7 @@
 
 		@each $palette in list.join(config.$palettes, config.$states) {
 			.palette-#{$palette} {
-				@each $shade in map.keys(config.$primary) {
+				@each $shade in config.$shades {
 					--palettes-#{$shade}: var(--palettes-#{$palette}-#{$shade});
 				}
 			}
