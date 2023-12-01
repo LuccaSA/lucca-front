@@ -3,6 +3,10 @@
 .verticalNavigation {
 	@include vars;
 	@include component;
+
+	&.mod-iconless {
+		@include iconless;
+	}
 }
 
 .verticalNavigation-list {

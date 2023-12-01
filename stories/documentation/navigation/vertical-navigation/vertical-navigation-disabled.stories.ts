@@ -34,15 +34,6 @@ function getTemplate(args: VerticalNavigationDisabledStory): string {
 			</ul>
 		</li>
 	</ul>
-	<h3 class="verticalNavigation-sectionTitle">Section title</h3>
-	<ul class="verticalNavigation-list">
-		<li class="verticalNavigation-list-item">
-			<span class="verticalNavigation-list-item-link">Item</span>
-		</li>
-		<li class="verticalNavigation-list-item">
-			<span class="verticalNavigation-list-item-link">Item</span>
-		</li>
-	</ul>
 </nav>`;
 }
 
