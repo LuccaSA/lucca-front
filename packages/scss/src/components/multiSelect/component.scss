@@ -21,6 +21,7 @@
 			display: flex;
 			gap: var(--spacings-XXS);
 			flex-wrap: wrap;
+			flex: 1;
 		}
 
 		.multipleSelect-displayer-search {
@@ -41,6 +42,11 @@
 			&::placeholder {
 				color: var(--palettes-grey-400);
 			}
+		}
+
+		.multipleSelect-displayer-label {
+			font-size: var(--components-multiSelect-fontSize);
+			line-height: var(--components-multiSelect-lineHeight);
 		}
 
 		.multipleSelect-clear {

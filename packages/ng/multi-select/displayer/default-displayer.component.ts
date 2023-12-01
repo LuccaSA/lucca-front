@@ -24,7 +24,7 @@ import { map } from 'rxjs/operators';
 				[placeholder]="placeholder$ | async"
 				(keydown.backspace)="inputBackspace()"
 			/>
-			<div *ngFor="let option of displayedOptions$ | async; let index = index" class="chip" [class.mod-unkillable]="disabled">
+			<div *ngFor="let option of displayedOptions$ | async; let index = index" class="multipleSelect-displayer-chip chip" [class.mod-unkillable]="disabled">
 				<ng-container *luOptionOutlet="select.valueTpl || select.optionTpl; value: option"></ng-container>
 				<a href *ngIf="!disabled" type="button" class="chip-kill" (click)="unselectOption(option, $event)"></a>
 			</div>

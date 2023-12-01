@@ -1,6 +1,7 @@
 @use '@lucca-front/icons/src/icon/exports' as icon;
 @use '@lucca-front/scss/src/components/clear/exports' as clear;
 @use '@lucca-front/scss/src/components/chip/exports' as chip;
+@use '@lucca-front/scss/src/components/numericBadge/exports' as numericBadge;
 
 @mixin S {
   --components-multiSelect-fontSize: var(--sizes-S-fontSize);
@@ -15,7 +16,11 @@
     @include clear.S;
   }
 
-  .chip {
+  .multipleSelect-displayer-chip {
     @include chip.S;
+  }
+
+  .multipleSelect-displayer-numericBadge {
+    @include numericBadge.S;
   }
 }
