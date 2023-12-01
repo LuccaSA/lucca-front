@@ -2,7 +2,7 @@
 
 @mixin component {
 	font-weight: 400;
-	font-size: var(--icon-size, 1.25rem);
+	font-size: var(--icon-size, 1.5rem);
 	direction: ltr;
 	display: inline-block;
 	font-family: config.$font-name;
