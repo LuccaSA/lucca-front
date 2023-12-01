@@ -73,15 +73,15 @@
 }
 
 @mixin onlyIcon {
-	padding: var(--spacings-XS);
+	--components-button-padding: var(--spacings-XS);
 }
 
 @mixin onlyIconS {
-	padding: 0.375rem;
+	--components-button-padding: 0.375rem;
 }
 
 @mixin onlyIconXS {
-	padding: var(--spacings-XXS);
+	--components-button-padding: var(--spacings-XXS);
 }
 
 @mixin block {
