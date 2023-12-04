@@ -3,7 +3,7 @@ import { Meta, StoryFn } from '@storybook/angular';
 interface ButtonIconStory {}
 
 export default {
-	title: 'Documentation/Actions/Button/HTML&CSS/Icon',
+	title: 'Documentation/Actions/Button/HTML&CSS/Only icon',
 } as Meta;
 
 function getTemplate(args: ButtonIconStory): string {

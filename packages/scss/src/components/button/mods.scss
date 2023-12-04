@@ -88,15 +88,15 @@
 	width: 100%;
 }
 
-@mixin icon($atRoot: 'without: rule') {
+@mixin withIcon($atRoot: 'without: rule') {
 	--components-button-padding: var(--spacings-XS) calc(var(--spacings-XS) + var(--spacings-XXS));
 }
 
-@mixin iconS {
+@mixin withIconS {
 	--components-button-padding: calc(var(--spacings-XXS) + var(--spacings-XXS)/2) calc(var(--spacings-XS) + var(--spacings-XXS));
 }
 
-@mixin iconXS {
+@mixin withIconXS {
 	--components-button-padding: var(--spacings-XXS) var(--spacings-XS);
 }
 

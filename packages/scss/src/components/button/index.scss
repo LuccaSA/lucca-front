@@ -38,15 +38,15 @@
 		}
 	}
 
-	&.mod-icon {
-		@include icon;
+	&.mod-icon, &.mod-withIcon { // mod-icon deprecated
+		@include withIcon;
 
 		&.mod-S {
-			@include iconS;
+			@include withIconS;
 		}
 
 		&.mod-XS {
-			@include iconXS;
+			@include withIconXS;
 		}
 	}
 
