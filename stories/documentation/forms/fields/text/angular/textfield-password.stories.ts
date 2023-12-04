@@ -20,7 +20,7 @@ export default {
 } as Meta;
 
 export const Password: StoryObj<TextfieldComponent & { disabled: boolean }> = {
-	render: ({ label, required, hiddenLabel, inlineMessage, size, placeholder, prefix, suffix, inlineMessageState, hasClearer, disabled, tooltip, hasSearchIcon, searchIcon, hasTogglePasswordVisibilityIcon, type }) => {
+	render: ({ label, required, hiddenLabel, inlineMessage, size, placeholder, prefix, suffix, inlineMessageState, hasClearer, disabled, tooltip, hasSearchIcon, searchIcon, type }) => {
 		return {
 			props: {
 				prefix,
@@ -31,7 +31,6 @@ export const Password: StoryObj<TextfieldComponent & { disabled: boolean }> = {
 	${hiddenLabel ? 'hiddenLabel' : ''}
 	${hasClearer ? 'hasClearer' : ''}
 	${hasSearchIcon ? 'hasSearchIcon' : ''}
-	${hasTogglePasswordVisibilityIcon ? 'hasTogglePasswordVisibilityIcon' : ''}
 	${disabled ? 'disabled' : ''}
 	[prefix]="prefix"
 	[suffix]="suffix"
@@ -57,7 +56,6 @@ export const Password: StoryObj<TextfieldComponent & { disabled: boolean }> = {
 		hiddenLabel: false,
 		hasClearer: false,
 		hasSearchIcon: false,
-		hasTogglePasswordVisibilityIcon: true,
 		type: 'password',
 		searchIcon: 'search',
 		disabled: false,

@@ -49,9 +49,6 @@ export class TextfieldComponent extends AbstractFieldComponent {
 	@Input({ transform: booleanAttribute })
 	hasSearchIcon = false;
 
-	@Input({ transform: booleanAttribute })
-	hasTogglePasswordVisibilityIcon = false;
-
 	@ViewChild('inputElement', { static: true })
 	inputElementRef: ElementRef<HTMLInputElement>;
 
@@ -78,6 +75,10 @@ export class TextfieldComponent extends AbstractFieldComponent {
 	showPassword: boolean = false;
 
 	private _type: TextFieldType = 'text';
+
+	protected hasTogglePasswordVisibilityIcon() {
+		return this._type === 'password';
+	}
 
 	intl = getIntl(LU_TEXTFIELD_TRANSLATIONS);
 
