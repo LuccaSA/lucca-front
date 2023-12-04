@@ -95,9 +95,15 @@
 		}
 
 		@each $palette in list.join(config.$palettes, config.$states) {
-			.palette-#{$palette} {
-				@each $shade in map.keys(config.$primary) {
-					--palettes-#{$shade}: var(--palettes-#{$palette}-#{$shade});
+			$paletteExists: map.get(config.$palettesInterpolation, $palette);
+
+			@if $paletteExists {
+				.palette-#{$palette} {
+					@each $shade in config.$shades {
+						@if map.get($paletteExists, $shade) {
+							--palettes-#{$shade}: var(--palettes-#{$palette}-#{$shade});
+						}
+					}
 				}
 			}
 		}
