@@ -1,6 +1,6 @@
 @use 'sass:list';
 
-$shades: text, 50, 100, 200, 300, 400, 500, 600, 700, 800, 900;
+$shades: text, 25, 50, 100, 200, 300, 400, 500, 600, 700, 800, 900;
 $states: 'error', 'warning', 'success';
 $palettes: 'lucca', 'primary', 'secondary', 'grey', 'navigation';
 $newPalettes: 'brand', 'product', 'neutral' !default;
