@@ -5,6 +5,6 @@
 	--components-inlineMessage-lineHeight: var(--sizes-XS-lineHeight);
 
 	.lucca-icon {
-		font-size: 0.75rem;
+    @include icon.XXS;
 	}
 }
