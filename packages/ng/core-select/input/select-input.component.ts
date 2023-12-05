@@ -36,7 +36,6 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 
 	protected abstract readonly hasValue: boolean;
 
-	@HostBinding('attr.aria-expanded')
 	public get isPanelOpen(): boolean {
 		return this.isPanelOpen$.value;
 	}
@@ -45,7 +44,6 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 
 	public activeDescendant: string | undefined;
 
-	@HostBinding('attr.aria-controls')
 	get ariaControls(): string {
 		return this.overlayContainerRef.id;
 	}
@@ -79,6 +77,10 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	protected set value(value: TValue) {
 		this._value = value;
 		this.changeDetectorRef.markForCheck();
+	}
+
+	public get inputPlaceholder(): string | null {
+		return this.value ? null : this.placeholder;
 	}
 
 	public clueChanged(clue: string): void {
@@ -173,6 +175,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	clearValue(event: MouseEvent | KeyboardEvent): void {
 		event.stopPropagation();
 		this.updateValue(null);
+		this.inputElementRef.nativeElement.focus();
 	}
 
 	openPanel(): void {
@@ -214,6 +217,10 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	}
 
 	public closePanel(): void {
+		this.previousClue = this.clue;
+		this.clue = null;
+		this.activeDescendant = null;
+		this.changeDetectorRef.markForCheck();
 		if (!this.isPanelOpen) {
 			return;
 		}
