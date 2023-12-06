@@ -62,7 +62,7 @@ export class FormFieldComponent implements OnChanges, OnDestroy, AfterViewInit {
 	size: FormFieldSize;
 
 	@Input()
-	layout: 'default' | 'checkbox' = 'default';
+	layout: 'default' | 'checkable' = 'default';
 
 	@ContentChild(InputDirective)
 	input: InputDirective;
@@ -97,6 +97,7 @@ export class FormFieldComponent implements OnChanges, OnDestroy, AfterViewInit {
 	ngOnChanges(): void {
 		this.#ngClass.ngClass = {
 			[`mod-${this.size}`]: true,
+			[`mod-checkable`]: this.layout === 'checkable',
 		};
 		if (this.#nativeInputRef) {
 			this.updateAria();

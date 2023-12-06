@@ -30,6 +30,9 @@ import { IconComponent } from '@lucca-front/ng/icon';
 		provideLuSelectLabelsAndIds(),
 	],
 	encapsulation: ViewEncapsulation.None,
+	host: {
+		class: 'simpleSelect',
+	},
 })
 export class LuSimpleSelectInputComponent<T> extends ALuSelectInputComponent<T, T> implements ControlValueAccessor {
 	intl = getIntl(LU_SIMPLE_SELECT_TRANSLATIONS);

@@ -1,4 +1,4 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, EventEmitter, Input, Output, TemplateRef, Type } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, EventEmitter, Input, Output, TemplateRef, Type, ViewEncapsulation } from '@angular/core';
 import { AbstractFieldComponent } from '../abstract-field-component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SafeHtml } from '@angular/platform-browser';
@@ -17,6 +17,7 @@ import { LuSimpleSelectDefaultOptionComponent } from '../../core-select/option';
 	templateUrl: './simple-select-field.component.html',
 	hostDirectives: [NoopValueAccessorDirective],
 	changeDetection: ChangeDetectionStrategy.OnPush,
+	encapsulation: ViewEncapsulation.None,
 })
 export class SimpleSelectFieldComponent<TOption> extends AbstractFieldComponent {
 	@Input({ required: true })

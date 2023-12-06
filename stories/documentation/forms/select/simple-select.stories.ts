@@ -23,7 +23,6 @@ export const Basic = generateStory({
 	template: `
 	<lu-simple-select
 		#selectRef
-		class="simpleSelect"
 		[placeholder]="placeholder"
 		[options]="legumes"
 		[clearable]="clearable"
@@ -46,7 +45,6 @@ export const Minimal = generateStory({
 	description: "Pas besoin systématiquement de `*luOption`, le simple-select affiche par défaut la propriété `name` ou l'option elle-même.",
 	template: `
 	<lu-simple-select
-		class="simpleSelect"
 		placeholder="Placeholder..."
 		[options]="legumes"
 		[(ngModel)]="value"
@@ -63,7 +61,6 @@ export const WithDisplayer = generateStory({
 	template: `
 	<lu-simple-select
 		#selectRef
-		class="simpleSelect"
 		placeholder="Placeholder..."
 		[(ngModel)]="value"
 		[options]="legumes"
@@ -88,7 +85,6 @@ export const WithClearer = generateStory({
 	template: `
 	<lu-simple-select
 		#selectRef
-		class="simpleSelect"
 		placeholder="Placeholder..."
 		[(ngModel)]="value"
 		[options]="legumes"
@@ -113,7 +109,6 @@ export const WithClue = generateStory({
 	template: `
 	<lu-simple-select
 		#selectRef
-		class="simpleSelect"
 		placeholder="Placeholder..."
 		[(ngModel)]="value"
 		[options]="legumes | filterLegumes:clue"
@@ -133,7 +128,6 @@ export const WithPagination = generateStory({
 	template: `
 	<lu-simple-select
 		#selectRef
-		class="simpleSelect"
 		placeholder="Placeholder..."
 		[(ngModel)]="value"
 		[options]="legumes.slice(0, page * 10)"
@@ -153,7 +147,6 @@ export const Disabled = generateStory({
 	template: `
 	<lu-simple-select
 		#selectRef
-		class="simpleSelect"
 		placeholder="Placeholder..."
 		[(ngModel)]="value"
 		[options]="legumes"
@@ -173,7 +166,6 @@ export const WithDisabledOptions = generateStory({
 	template: `
 	<lu-simple-select
 		#selectRef
-		class="simpleSelect"
 		placeholder="Placeholder..."
 		[(ngModel)]="value"
 		[options]="legumes"
@@ -191,7 +183,6 @@ export const ApiV3 = generateStory({
 	description: "Pour récupérer automatiquement les options depuis une api V3 avec pagination et recherche, il suffit d'utiliser la directive `apiV3`.",
 	template: `
 	<lu-simple-select
-		class="simpleSelect"
 		placeholder="Placeholder..."
 		apiV3="/api/v3/axisSections"
 		[(ngModel)]="selectedAxisSection"
@@ -208,7 +199,6 @@ export const ApiV4 = generateStory({
 	description: "Pour récupérer automatiquement les options depuis une api V4 avec pagination et recherche, il suffit d'utiliser la directive `apiV4`.",
 	template: `
 	<lu-simple-select
-		class="simpleSelect"
 		placeholder="Placeholder..."
 		apiV4="/organization/structure/api/establishments"
 		[(ngModel)]="selectedEstablishment"
