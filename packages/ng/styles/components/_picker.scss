@@ -22,6 +22,11 @@
 	gap: var(--spacings-XXS);
 }
 
+.lu-picker-content-option-emptyState {
+	color: var(--palettes-grey-600);
+	text-align: center;
+}
+
 .lu-picker-loading {
 	position: absolute;
 	left: 50%;

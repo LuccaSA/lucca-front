@@ -16,7 +16,7 @@
 				[isSelected]="option === selected"
 				(click)="panelRef.emitValue(option)"
 			></lu-select-option>
-			<div *ngIf="ctx.options.length === 0">{{intl.emptyResults}}</div>
+			<div class="lu-picker-content-option-emptyState" *ngIf="ctx.options.length === 0">{{intl.emptyResults}}</div>
 		</div>
 
 		<div *ngIf="loading$ | async" class="panel-loading loading lu-picker-loading"></div>
