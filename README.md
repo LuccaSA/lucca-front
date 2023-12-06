@@ -137,6 +137,12 @@ To check available options:
 lucca angular update --help
 ```
 
+To update a specific version of Lucca Front : 
+
+```
+npx ng update @lucca-front/ng@16.5.0
+```
+
 ## Storybook
 In order to work on Lucca Front, we use Storybook to display components.
 
