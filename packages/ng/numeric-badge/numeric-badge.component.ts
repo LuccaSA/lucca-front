@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, Input, numberAttribute, OnChanges, SimpleChanges } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, Input, numberAttribute, OnChanges, SimpleChanges, ViewEncapsulation } from '@angular/core';
 import { NgClazz, Palette } from '@lucca-front/ng/core';
 
 @Component({
@@ -8,6 +8,7 @@ import { NgClazz, Palette } from '@lucca-front/ng/core';
 	styleUrls: ['./numeric-badge.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	hostDirectives: [NgClazz],
+	encapsulation: ViewEncapsulation.None,
 })
 export class NumericBadgeComponent implements OnChanges {
 	#ngClass = inject(NgClazz);
