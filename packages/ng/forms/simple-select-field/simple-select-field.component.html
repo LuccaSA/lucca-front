@@ -7,5 +7,21 @@
 	[size]="size"
 	[invalid]="ngControl.control.touched && ngControl.control.invalid"
 >
-	<lu-simple-select></lu-simple-select>
+	<lu-simple-select
+		[placeholder]="placeholder"
+		[clearable]="clearable"
+		[disabled]="disabled"
+		[overlayConfig]="overlayConfig"
+		[loading]="loading"
+		[options]="options"
+		[optionComparer]="optionComparer"
+		[optionTpl]="optionTpl"
+		[valueTpl]="valueTpl"
+		(clueChange)="clueChange.emit($event)"
+		(nextPage)="nextPage.emit($event)"
+		(previousPage)="previousPage.emit($event)"
+		luInput
+	>
+		<ng-content></ng-content>
+	</lu-simple-select>
 </lu-form-field>
