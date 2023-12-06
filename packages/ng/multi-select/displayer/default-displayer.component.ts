@@ -23,10 +23,14 @@ import { map } from 'rxjs/operators';
 				(ngModelChange)="select.clueChanged($event)"
 				[placeholder]="placeholder$ | async"
 				(keydown.backspace)="inputBackspace()"
+				role="combobox"
+				aria-control="MULTIPLEID"
+				aria-expanded="true"
+				aria-haspopup="listbox"
 			/>
 			<div *ngFor="let option of displayedOptions$ | async; let index = index" class="multipleSelect-displayer-chip chip" [class.mod-unkillable]="disabled">
 				<ng-container *luOptionOutlet="select.valueTpl || select.optionTpl; value: option"></ng-container>
-				<a href *ngIf="!disabled" type="button" class="chip-kill" (click)="unselectOption(option, $event)"></a>
+				<button *ngIf="!disabled" type="button" class="chip-kill" (click)="unselectOption(option, $event)"><span class="u-mask">Supprimer l'option</span></button>
 			</div>
 			<div class="chip" *ngIf="overflowOptions$ | async as overflow">+ {{ overflow }}</div>
 		</div>
