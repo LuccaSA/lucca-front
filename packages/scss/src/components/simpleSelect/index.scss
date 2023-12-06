@@ -12,7 +12,7 @@
 		@include XS;
 	}
 
-	&:has(.simpleSelect-input:focus) {
+	&:has(.simpleSelect-input:focus-visible) {
 		@include focused;
 
 		&[aria-expanded="true"] {
