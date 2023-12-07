@@ -1,8 +1,4 @@
-<div
-	class="lu-picker-panel lu-option-picker-panel mod-multiple"
-	role="dialog"
-	*ngIf="{ options: options$ | async } as ctx"
->
+<div class="lu-picker-panel lu-option-picker-panel mod-multiple" role="dialog" *ngIf="{ options: options$ | async } as ctx">
 	<div
 		class="lu-picker-content"
 		[class.is-loading]="loading$ | async"
@@ -21,6 +17,7 @@
 				[isSelected]="option | luIsOptionSelected:optionComparer:selectedOptions"
 				(click)="toggleOption(option)"
 			></lu-select-option>
+			<div class="lu-picker-content-option-emptyState" *ngIf="ctx.options.length === 0">{{intl.emptyResults}}</div>
 		</div>
 		<div *ngIf="loading$ | async" class="panel-loading loading lu-picker-loading"></div>
 	</div>

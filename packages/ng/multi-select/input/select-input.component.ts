@@ -32,6 +32,9 @@ import { Subject } from 'rxjs';
 		provideLuSelectLabelsAndIds(),
 		LuMultiSelectPanelRefFactory,
 	],
+	host: {
+		class: 'multiSelect',
+	},
 })
 export class LuMultiSelectInputComponent<T> extends ALuSelectInputComponent<T, T[]> implements ControlValueAccessor, OnDestroy {
 	intl = getIntl(LU_MULTI_SELECT_TRANSLATIONS);
@@ -42,7 +45,6 @@ export class LuMultiSelectInputComponent<T> extends ALuSelectInputComponent<T, T
 	@Input({ transform: numberAttribute })
 	maxValuesShown = Infinity;
 
-	@Input()
 	public override get panelRef(): LuMultiSelectPanelRef<T> | undefined {
 		return this._panelRef;
 	}
@@ -56,8 +58,14 @@ export class LuMultiSelectInputComponent<T> extends ALuSelectInputComponent<T, T
 	 */
 	public readonly focusInput$ = new Subject<void>();
 
+	public readonly emptyClue$ = new Subject<void>();
+
 	public override focusInput(): void {
 		this.focusInput$.next();
+	}
+
+	public override emptyClue(): void {
+		this.emptyClue$.next();
 	}
 
 	public override writeValue(value: T[]): void {

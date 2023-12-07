@@ -216,14 +216,18 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 		}
 	}
 
-	public closePanel(): void {
-		if (!this.isPanelOpen) {
-			return;
-		}
+	protected emptyClue(): void {
 		if (this.clue) {
 			this.previousClue = this.clue;
 			this.clue = null;
 		}
+	}
+
+	public closePanel(): void {
+		if (!this.isPanelOpen) {
+			return;
+		}
+		this.emptyClue();
 		this.activeDescendant = '';
 		this.changeDetectorRef.markForCheck();
 		this.onTouched?.();
@@ -238,10 +242,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 
 	public updateValue(value: TValue): void {
 		this.value = value;
-		if (this.clue) {
-			this.previousClue = this.clue;
-			this.clue = null;
-		}
+		this.emptyClue();
 		this.onChange?.(value);
 		this.onTouched?.();
 	}

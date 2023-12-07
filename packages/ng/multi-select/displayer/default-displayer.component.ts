@@ -18,6 +18,9 @@ import { map } from 'rxjs/operators';
 			<input
 				class="multipleSelect-displayer-search"
 				type="text"
+				[attr.aria-expanded]="select.isPanelOpen"
+				[attr.aria-activedescendant]="select.activeDescendant"
+				[disabled]="select.disabled"
 				#inputElement
 				ngModel
 				(ngModelChange)="select.clueChanged($event)"
@@ -103,6 +106,9 @@ export class LuMultiSelectDefaultDisplayerComponent<T> implements OnInit {
 			this.inputElementRef.nativeElement.value = '';
 			this.select.clueChanged('');
 			this.inputElementRef.nativeElement.focus();
+		});
+		this.select.emptyClue$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {
+			this.inputElementRef.nativeElement.value = '';
 		});
 	}
 }
