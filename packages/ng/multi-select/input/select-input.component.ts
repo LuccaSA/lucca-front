@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, forwardRef, inject, Input, numberAttribute, OnDestroy, TemplateRef, Type } from '@angular/core';
+import { ChangeDetectionStrategy, Component, forwardRef, inject, Input, numberAttribute, OnDestroy, OnInit, TemplateRef, Type } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { getIntl } from '@lucca-front/ng/core';
 import { ALuSelectInputComponent, LuOptionContext, provideLuSelectLabelsAndIds, provideLuSelectOverlayContainer, ɵLuOptionOutletDirective } from '@lucca-front/ng/core-select';
@@ -36,7 +36,7 @@ import { Subject } from 'rxjs';
 		class: 'multiSelect',
 	},
 })
-export class LuMultiSelectInputComponent<T> extends ALuSelectInputComponent<T, T[]> implements ControlValueAccessor, OnDestroy {
+export class LuMultiSelectInputComponent<T> extends ALuSelectInputComponent<T, T[]> implements ControlValueAccessor, OnDestroy, OnInit {
 	intl = getIntl(LU_MULTI_SELECT_TRANSLATIONS);
 
 	@Input()
@@ -44,6 +44,8 @@ export class LuMultiSelectInputComponent<T> extends ALuSelectInputComponent<T, T
 
 	@Input({ transform: numberAttribute })
 	maxValuesShown = Infinity;
+
+	override _value: T[] = [];
 
 	public override get panelRef(): LuMultiSelectPanelRef<T> | undefined {
 		return this._panelRef;

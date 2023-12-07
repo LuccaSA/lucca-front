@@ -7,6 +7,7 @@ import { ALuSelectInputComponent, LuSelectPanelRef, provideLuSelectLabelsAndIds,
 import { LU_SIMPLE_SELECT_TRANSLATIONS } from '../select.translate';
 import { LuSimpleSelectPanelRefFactory } from './panel-ref.factory';
 import { IconComponent } from '@lucca-front/ng/icon';
+import { InputDirective } from '../../form-field/input.directive';
 
 @Component({
 	selector: 'lu-simple-select',
@@ -14,7 +15,7 @@ import { IconComponent } from '@lucca-front/ng/icon';
 	styleUrls: ['./select-input.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	standalone: true,
-	imports: [AsyncPipe, ɵLuOptionOutletDirective, NgIf, OverlayModule, IconComponent, FormsModule],
+	imports: [AsyncPipe, ɵLuOptionOutletDirective, NgIf, OverlayModule, IconComponent, FormsModule, InputDirective],
 	providers: [
 		{
 			provide: NG_VALUE_ACCESSOR,

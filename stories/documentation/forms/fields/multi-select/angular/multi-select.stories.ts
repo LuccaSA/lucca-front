@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LuOptionDirective } from '@lucca-front/ng/core-select';
 import { allLegumes, FilterLegumesPipe } from '@/stories/forms/select/select.utils';
+import { HiddenArgType } from '../../../../../helpers/common-arg-types';
 
 export default {
 	title: 'Documentation/Forms/Fields/Multi Select/Angular',
@@ -17,13 +18,16 @@ export default {
 		tooltip: {
 			type: 'string',
 		},
+		clueChange: HiddenArgType,
+		nextPage: HiddenArgType,
+		previousPage: HiddenArgType,
 	},
 } as Meta;
 
 export const Basic: StoryObj<MultiSelectFieldComponent<unknown>> = {
 	render: ({ label, required, hiddenLabel, inlineMessage, size, placeholder, inlineMessageState, disabled, tooltip }) => {
 		return {
-			props: { legumes: allLegumes },
+			props: { legumes: allLegumes, example: [] },
 			// TODO use generateStoryArgs here once merged
 			template: `<lu-multi-select-field label="${label}"
 	required="${required}"
@@ -39,7 +43,7 @@ export const Basic: StoryObj<MultiSelectFieldComponent<unknown>> = {
 	[(ngModel)]="example">
 </lu-multi-select-field>
 
-{{example}}`,
+{{example | json}}`,
 			moduleMetadata: {
 				imports: [MultiSelectFieldComponent, FormsModule, BrowserAnimationsModule],
 			},
@@ -50,6 +54,8 @@ export const Basic: StoryObj<MultiSelectFieldComponent<unknown>> = {
 		required: true,
 		hiddenLabel: false,
 		disabled: false,
+		clearable: true,
+		loading: false,
 		inlineMessage: 'Helper Text',
 		inlineMessageState: 'default',
 		size: 'M',

@@ -8,11 +8,12 @@ import { LU_MULTI_SELECT_DISPLAYER_TRANSLATIONS } from './default-displayer.tran
 import { FormsModule } from '@angular/forms';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { map } from 'rxjs/operators';
+import { InputDirective } from '../../form-field/input.directive';
 
 @Component({
 	selector: 'lu-multi-select-default-displayer',
 	standalone: true,
-	imports: [AsyncPipe, LuTooltipModule, NgIf, NgFor, NgPlural, NgPluralCase, ɵLuOptionOutletDirective, FormsModule],
+	imports: [AsyncPipe, LuTooltipModule, NgIf, NgFor, NgPlural, NgPluralCase, ɵLuOptionOutletDirective, FormsModule, InputDirective],
 	template: `
 		<div class="multipleSelect-displayer">
 			<input
@@ -20,6 +21,7 @@ import { map } from 'rxjs/operators';
 				type="text"
 				[attr.aria-expanded]="select.isPanelOpen"
 				[attr.aria-activedescendant]="select.activeDescendant"
+				[attr.aria-controls]="ariaControls"
 				[disabled]="select.disabled"
 				#inputElement
 				ngModel
@@ -27,13 +29,14 @@ import { map } from 'rxjs/operators';
 				[placeholder]="placeholder$ | async"
 				(keydown.backspace)="inputBackspace()"
 				role="combobox"
-				aria-control="MULTIPLEID"
-				aria-expanded="true"
 				aria-haspopup="listbox"
+				luInput
 			/>
 			<div *ngFor="let option of displayedOptions$ | async; let index = index" class="multipleSelect-displayer-chip chip" [class.mod-unkillable]="disabled">
 				<ng-container *luOptionOutlet="select.valueTpl || select.optionTpl; value: option"></ng-container>
-				<button *ngIf="!disabled" type="button" class="chip-kill" (click)="unselectOption(option, $event)"><span class="u-mask">Supprimer l'option</span></button>
+				<button *ngIf="!disabled" type="button" class="chip-kill" (click)="unselectOption(option, $event)">
+					<span class="u-mask">{{ intl.removeOption }}</span>
+				</button>
 			</div>
 			<div class="chip" *ngIf="overflowOptions$ | async as overflow">+ {{ overflow }}</div>
 		</div>
@@ -54,11 +57,19 @@ export class LuMultiSelectDefaultDisplayerComponent<T> implements OnInit {
 		return this.select.disabled;
 	}
 
+	get value(): T[] {
+		return this.select.value || [];
+	}
+
+	get ariaControls() {
+		return this.select.ariaControls;
+	}
+
 	context = inject<ILuOptionContext<T[]>>(LU_OPTION_CONTEXT);
 
 	placeholder$ = this.context.option$.pipe(
 		map((options) => {
-			if (options.length > 0) {
+			if ((options || []).length > 0) {
 				return '';
 			}
 			return this.select.placeholder;
@@ -68,7 +79,7 @@ export class LuMultiSelectDefaultDisplayerComponent<T> implements OnInit {
 	displayedOptions$ = this.context.option$.pipe(
 		map((options) => {
 			if (this.select.maxValuesShown !== Infinity) {
-				return options.slice(0, this.select.maxValuesShown);
+				return (options || []).slice(0, this.select.maxValuesShown);
 			}
 			return options;
 		}),
@@ -76,7 +87,7 @@ export class LuMultiSelectDefaultDisplayerComponent<T> implements OnInit {
 
 	overflowOptions$ = this.context.option$.pipe(
 		map((options) => {
-			return Math.max(0, options.length - this.select.maxValuesShown);
+			return Math.max(0, (options || []).length - this.select.maxValuesShown);
 		}),
 	);
 
@@ -86,16 +97,16 @@ export class LuMultiSelectDefaultDisplayerComponent<T> implements OnInit {
 			$event.preventDefault();
 		}
 		this.select.updateValue(
-			this.select.value.filter((o) => o !== option),
+			this.value.filter((o) => o !== option),
 			true,
 		);
-		setTimeout(() => this.select.panelRef.updatePosition());
+		setTimeout(() => this.select.panelRef?.updatePosition());
 	}
 
 	inputBackspace(): void {
-		if (this.select.value.length > 0 && this.inputElementRef.nativeElement.value.length === 0) {
-			this.unselectOption(this.select.value[this.select.value.length - 1]);
-			this.select.panelRef.updateSelectedOptions(this.select.value);
+		if (this.value.length > 0 && this.inputElementRef.nativeElement.value.length === 0) {
+			this.unselectOption(this.value[this.value.length - 1]);
+			this.select.panelRef.updateSelectedOptions(this.value);
 		}
 	}
 

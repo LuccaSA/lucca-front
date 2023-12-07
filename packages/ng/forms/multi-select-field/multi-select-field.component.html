@@ -7,7 +7,7 @@
 	[size]="size"
 	[invalid]="ngControl.control.touched && ngControl.control.invalid"
 >
-	<lu-simple-select
+	<lu-multi-select
 		[placeholder]="placeholder"
 		[clearable]="clearable"
 		[disabled]="disabled"
@@ -20,8 +20,10 @@
 		(clueChange)="clueChange.emit($event)"
 		(nextPage)="nextPage.emit($event)"
 		(previousPage)="previousPage.emit($event)"
+		[maxValuesShown]="maxValuesShown"
+		[valuesTpl]="valuesTpl"
 		[formControl]="ngControl.control"
 	>
 		<ng-content></ng-content>
-	</lu-simple-select>
+	</lu-multi-select>
 </lu-form-field>

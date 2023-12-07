@@ -1,8 +1,8 @@
-import { SimpleSelectFieldComponent, TextfieldComponent } from '@lucca-front/ng/forms';
+import { SimpleSelectFieldComponent } from '@lucca-front/ng/forms';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { LuDisabledOptionDirective, LuDisplayerDirective, LuOptionDirective } from '@lucca-front/ng/core-select';
+import { LuOptionDirective } from '@lucca-front/ng/core-select';
 import { allLegumes, FilterLegumesPipe } from '@/stories/forms/select/select.utils';
 
 export default {
@@ -39,7 +39,7 @@ export const Basic: StoryObj<SimpleSelectFieldComponent<unknown>> = {
 	[(ngModel)]="example">
 </lu-simple-select-field>
 
-{{example}}`,
+{{example | json}}`,
 			moduleMetadata: {
 				imports: [SimpleSelectFieldComponent, FormsModule, BrowserAnimationsModule],
 			},

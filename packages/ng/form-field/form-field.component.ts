@@ -1,4 +1,4 @@
-import { AfterViewInit, booleanAttribute, Component, ContentChild, HostBinding, inject, Input, OnChanges, OnDestroy } from '@angular/core';
+import { booleanAttribute, Component, forwardRef, HostBinding, inject, Input, OnChanges, OnDestroy } from '@angular/core';
 import { NgIf, NgSwitch, NgSwitchCase, NgTemplateOutlet } from '@angular/common';
 import { InputDirective } from './input.directive';
 import { FormFieldSize } from './form-field-size';
@@ -9,6 +9,7 @@ import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 import { NgClazz } from '@lucca-front/ng/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { IconComponent } from '@lucca-front/ng/icon';
+import { FORM_FIELD_INSTANCE } from './form-field.token';
 
 let nextId = 0;
 
@@ -19,8 +20,14 @@ let nextId = 0;
 	templateUrl: './form-field.component.html',
 	styleUrls: ['./form-field.component.scss'],
 	hostDirectives: [NgClazz],
+	providers: [
+		{
+			provide: FORM_FIELD_INSTANCE,
+			useExisting: forwardRef(() => FormFieldComponent),
+		},
+	],
 })
-export class FormFieldComponent implements OnChanges, OnDestroy, AfterViewInit {
+export class FormFieldComponent implements OnChanges, OnDestroy {
 	#ngClass = inject(NgClazz);
 
 	@HostBinding('class')
@@ -64,8 +71,17 @@ export class FormFieldComponent implements OnChanges, OnDestroy, AfterViewInit {
 	@Input()
 	layout: 'default' | 'checkable' = 'default';
 
-	@ContentChild(InputDirective)
-	input: InputDirective;
+	private _input: InputDirective;
+
+	public set input(input: InputDirective) {
+		this._input = input;
+		console.log('SET INPUT WORKS');
+		this.prepareInput();
+	}
+
+	public get input(): InputDirective {
+		return this._input;
+	}
 
 	id: string;
 
@@ -104,7 +120,7 @@ export class FormFieldComponent implements OnChanges, OnDestroy, AfterViewInit {
 		}
 	}
 
-	ngAfterViewInit(): void {
+	prepareInput(): void {
 		if (!this.input) {
 			throw new Error('Missing input for form field, make sure to set `luInput` to your input inside lu-form-field');
 		}

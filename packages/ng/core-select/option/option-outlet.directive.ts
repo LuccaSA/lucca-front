@@ -44,7 +44,7 @@ export class LuOptionOutletDirective<T> implements OnChanges, OnDestroy {
 	}
 
 	private createComponent(): void {
-		if (!this.luOptionOutlet || this.luOptionOutletValue === null || this.luOptionOutletValue === undefined) {
+		if (!this.luOptionOutlet) {
 			return;
 		}
 
