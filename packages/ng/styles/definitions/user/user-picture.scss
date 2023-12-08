@@ -41,6 +41,8 @@
 		font-weight: 600;
 		line-height: 1;
 		justify-content: center;
+		object-fit: cover;
+		object-position: center;
 		width: var(--components-user-picture-image-size, var(--components-userPicture-M-image));
 	}
 
