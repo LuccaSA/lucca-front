@@ -8,9 +8,12 @@ import { FORM_FIELD_INSTANCE } from './form-field.token';
 export class InputDirective implements OnInit {
 	public readonly host = inject<ElementRef<HTMLElement>>(ElementRef);
 
-	public readonly formFieldRef = inject(FORM_FIELD_INSTANCE);
+	public readonly formFieldRef = inject(FORM_FIELD_INSTANCE, { optional: true });
 
 	ngOnInit(): void {
-		this.formFieldRef.input = this;
+		// If the field is used as standalone, we won't have the ref provided so it'll crash
+		if (this.formFieldRef) {
+			this.formFieldRef.input = this;
+		}
 	}
 }
