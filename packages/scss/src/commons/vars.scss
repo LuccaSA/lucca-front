@@ -4,6 +4,15 @@
 @use '@lucca-front/scss/src/commons/core';
 
 @mixin vars {
+
+	// TOKENS
+
+	@each $key, $map in config.$elevation {
+		@include core.cssvars('pr-elevation-#{$key}', $map);
+	}
+
+	// VARIABLES
+
 	@include core.cssvars('commons-borderRadius', config.$borderRadius);
 	@include core.cssvars('commons-animations', config.$animations);
 	@include core.cssvars('commons-animations-durations', config.$durations);
