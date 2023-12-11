@@ -1,0 +1,38 @@
+<h2>Elevation</h2>
+<h3>Surface</h3>
+<section class="contentSection">
+	<div class="demo-block">
+		<div class="demo-surface" style="background-color: var(--pr-elevation-surface-sunken);">Sunken</div>
+		<div class="demo-surface" style="background-color: var(--pr-elevation-surface-default);">Default</div>
+		<div class="demo-surface" style="background-color: var(--pr-elevation-surface-raised);">Raised</div>
+	</div>
+</section>
+<h3>Shadow</h3>
+<section class="contentSection">
+	<div class="demo-block">
+		<div class="demo-surface" style="background-color: var(--pr-elevation-surface-raised); box-shadow: var(--pr-elevation-shadow-raised);">Raised</div>
+		<div class="demo-surface" style="background-color: var(--pr-elevation-surface-raised); box-shadow: var(--pr-elevation-shadow-overflow);">Overflow</div>
+		<div class="demo-surface" style="background-color: var(--pr-elevation-surface-raised); box-shadow: var(--pr-elevation-shadow-overlay);">Overlay</div>
+	</div>
+</section>
+
+<style>
+.demo-block {
+	display: flex;
+	background: var(--palettes-grey-25);
+	padding: var(--spacings-S);
+	gap: var(--spacings-XS);
+}
+
+.demo-surface {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 5rem;
+	width: 5rem;
+	border-radius: var(--commons-borderRadius-L);
+}
+</style>
+
+<!-- To tell the ui-diff tool that the page has finished rendering -->
+<span id="ready"></span>
