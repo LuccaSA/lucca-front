@@ -3,6 +3,7 @@
 @mixin component($atRoot: 'without: rule') {
 	display: flex;
 	height: 100%;
+	padding: var(--spacings-S);
 
 	@at-root ($atRoot) {
 		.emptyPage-container {
@@ -14,7 +15,7 @@
 			justify-content: center;
 			max-width: 100%;
 			padding: 0;
-			width: var(--components-container-max-width);
+			width: var(--components-emptyState-container-width);
 		}
 		.emptyPage-content {
 			background-color: var(--components-emptyState-background-color);
@@ -28,8 +29,19 @@
 			--components-emptyState-icon-background-color: var(--palettes-100, var(--palettes-primary-100));
 			--components-emptyState-icon-action-color: var(--palettes-600, var(--palettes-primary-600));
 		}
+		.emptyPage-content-text {
+			padding: 0 var(--spacings-XXS);
+		}
 		.emptyPage-content-heading {
 			margin-bottom: 0;
+		}
+		.emptyPage-actions {
+			display: flex;
+			flex-wrap: wrap;
+			gap: var(--spacings-XS);
+			.button {
+				margin: 0;
+			}
 		}
 	}
 }
