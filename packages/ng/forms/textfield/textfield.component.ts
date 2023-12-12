@@ -61,7 +61,7 @@ export class TextfieldComponent extends AbstractFieldComponent {
 	@Input()
 	get type(): TextFieldType {
 		return this.showPassword ? 'text' : this._type;
-	};
+	}
 	set type(type: TextFieldType) {
 		this._type = type;
 	}
