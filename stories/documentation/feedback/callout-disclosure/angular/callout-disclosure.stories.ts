@@ -1,6 +1,6 @@
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { CalloutDisclosureComponent, CalloutFeedbackItemComponent, CalloutFeedbackListComponent } from '@lucca-front/ng/callout';
 import { ButtonComponent } from '@lucca-front/ng/button';
+import { CalloutDisclosureComponent, CalloutFeedbackItemComponent, CalloutFeedbackListComponent } from '@lucca-front/ng/callout';
+import { Meta, StoryObj, moduleMetadata } from '@storybook/angular';
 
 export default {
 	title: 'Documentation/Feedback/Callout Disclosure/Angular',
@@ -11,13 +11,14 @@ export default {
 		}),
 	],
 	render: (args: CalloutDisclosureComponent & { iconless: boolean }) => {
-		const { heading, icon, iconless, palette, size } = args;
+		const { heading, icon, iconless, palette, size, open } = args;
+		const openStr = `[open]="${open}"`;
 		const iconStr = iconless ? '[icon]="null"' : `icon="${icon}"`;
 		// TODO build something to generate these instead of always applying the same logic
 		const paletteStr = palette ? ` palette="${palette}"` : '';
 		const sizeStr = size ? ` size="${size}"` : '';
 		return {
-			template: `<lu-callout-disclosure heading="${heading}"${paletteStr}${sizeStr} ${iconStr}>
+			template: `<lu-callout-disclosure heading="${heading}"${paletteStr}${sizeStr} ${iconStr} ${openStr}>
 		<ul lu-callout-feedback-list palette="grey">
 			<li lu-callout-feedback-item>
 				<lu-feedback-item-description>
