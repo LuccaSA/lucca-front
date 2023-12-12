@@ -1,5 +1,5 @@
 @mixin component($atRoot: 'without: rule') {
-	background-color: var(--colors-white-color);
+	background-color: var(--pr-elevation-surface-raised);
 	box-shadow: var(--commons-elevations-elevation-1);
 	margin-bottom: var(--components-list-margin-bottom);
 	list-style: none;

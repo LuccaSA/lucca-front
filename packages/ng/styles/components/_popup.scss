@@ -1,7 +1,6 @@
 @use '@lucca-front/scss/src/commons/utils/media';
 
 :root {
-	--components-popup-panel-background-color: var(--colors-white-color);
 	--components-popup-XS: 25rem;
 	--components-popup-S: 30rem;
 	--components-popup-M: 40rem;
@@ -14,7 +13,7 @@
 .lu-popup-panel {
 	box-shadow: var(--commons-boxShadow-M);
 	position: relative;
-	background-color: var(--components-popup-panel-background-color);
+	background-color: var(--pr-elevation-surface-raised);
 	border-radius: var(--commons-borderRadius-L);
 	width: var(--components-popup-M);
 	max-width: 95%;
@@ -55,7 +54,7 @@
 	position: sticky;
 	top: 0;
 	z-index: 5;
-	background-color: var(--colors-white-color);
+	background-color: var(--pr-elevation-surface-raised);
 	padding: var(--components-popup-padding-vertical) var(--spacings-XXL) var(--components-popup-padding-vertical)
 		var(--components-popup-padding-horizontal);
 	border-bottom: 1px solid var(--commons-border-100);
@@ -95,7 +94,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: flex-end;
-	background-color: var(--colors-white-color);
+	background-color: var(--pr-elevation-surface-raised);
 	box-shadow: var(--commons-boxShadow-L);
 	margin-top: auto;
 	padding: var(--components-popup-padding-vertical) var(--components-popup-padding-horizontal);

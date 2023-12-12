@@ -1,7 +1,7 @@
 @use '@lucca-front/scss/src/commons/utils/a11y';
 
 @mixin grey {
-	--components-card-background: var(--palettes-grey-50);
+	--components-card-background: var(--pr-elevation-surface-sunken);
 }
 
 @mixin clickable {
