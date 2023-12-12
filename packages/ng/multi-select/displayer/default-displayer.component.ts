@@ -20,7 +20,7 @@ import { InputDirective } from '../../form-field/input.directive';
 				class="multipleSelect-displayer-search"
 				type="text"
 				[attr.aria-expanded]="select.isPanelOpen"
-				[attr.aria-activedescendant]="select.activeDescendant"
+				[attr.aria-activedescendant]="select.activeDescendant$ | async"
 				[attr.aria-controls]="ariaControls"
 				[disabled]="select.disabled"
 				#inputElement

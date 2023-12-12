@@ -1,10 +1,11 @@
 import { Directive, Input, TemplateRef } from '@angular/core';
-import { LuOptionContext } from '@lucca-front/ng/core-select';
+import { LuOptionContext, provideOptionContext } from '@lucca-front/ng/core-select';
 import { LuMultiSelectInputComponent } from '../input';
 
 @Directive({
 	selector: '[luMultiDisplayer]',
 	standalone: true,
+	providers: [provideOptionContext()],
 })
 export class LuMultiDisplayerDirective<T> {
 	@Input('luMultiDisplayerSelect') set select(select: LuMultiSelectInputComponent<T>) {

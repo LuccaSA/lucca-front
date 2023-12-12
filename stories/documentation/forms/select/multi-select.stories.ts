@@ -2,7 +2,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { LuDisabledOptionDirective, LuDisplayerDirective, LuOptionDirective } from '@lucca-front/ng/core-select';
-import { LuMultiDisplayerDirective, LuMultiSelectInputComponent } from '@lucca-front/ng/multi-select';
+import { LuMultiDisplayerDirective, LuMultiSelectInputComponent, LuMultiSelectDisplayerInputDirective } from '@lucca-front/ng/multi-select';
 import { LuSimpleSelectApiV3Directive, LuSimpleSelectApiV4Directive } from '@lucca-front/ng/simple-select/api';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 import { applicationConfig, Meta, moduleMetadata } from '@storybook/angular';
@@ -56,19 +56,29 @@ export const WithMultiDisplayer = generateStory({
 	<lu-multi-select
 		#selectRef
 		class="multiSelect"
-		[placeholder]="placeholder"
-		[options]="legumes"
 		[clearable]="clearable"
 		[disabled]="disabled"
 		[loading]="loading"
 		[(ngModel)]="selectedLegumes"
+		placeholder="Placeholder..."
+		[options]="legumes | filterLegumes:clue"
+		(clueChange)="clue = $event"
 	>
 		<ng-container *luMultiDisplayer="let legumes; select: selectRef">
-			<div class="multipleSelect-displayer"><span class="multipleSelect-displayer-numericBadge numericBadge">{{ legumes.length }}</span><span class="multipleSelect-displayer-label">légumes sélectionnés</span></div>
+			<div class="multipleSelect-displayer">
+				<input
+					type="text"
+					luInput
+					luMultiSelectDisplayerInput
+					ngModel
+					(ngModelChange)="selectRef.clueChanged($event)"
+				/>
+				<span class="multipleSelect-displayer-numericBadge numericBadge">{{ legumes?.length }}</span><span class="multipleSelect-displayer-label">légumes sélectionnés</span>
+			</div>
 		</ng-container>
 	</lu-multi-select>`,
 	neededImports: {
-		'@lucca-front/ng/multi-select': ['LuMultiSelectInputComponent', 'LuMultiDisplayerDirective'],
+		'@lucca-front/ng/multi-select': ['LuMultiSelectInputComponent', 'LuMultiDisplayerDirective', 'MultiSelectDisplayerInputDirective'],
 	},
 	storyPartial: {
 		args: {
@@ -359,6 +369,7 @@ const meta: Meta<LuSelectInputStoryComponent> = {
 				LuSimpleSelectApiV3Directive,
 				LuSimpleSelectApiV4Directive,
 				LuDisabledOptionDirective,
+				LuMultiSelectDisplayerInputDirective,
 			],
 		}),
 		applicationConfig({

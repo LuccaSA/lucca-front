@@ -3,7 +3,7 @@
 	type="text"
 	role="combobox"
 	aria-haspopup="listbox"
-	[attr.aria-activedescendant]="activeDescendant"
+	[attr.aria-activedescendant]="activeDescendant$ | async"
 	[attr.aria-expanded]="isPanelOpen"
 	[attr.aria-controls]="ariaControls"
 	placeholder="{{inputPlaceholder}}"

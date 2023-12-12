@@ -42,7 +42,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 
 	public isPanelOpen$ = new BehaviorSubject(false);
 
-	public activeDescendant = '';
+	public activeDescendant$ = new BehaviorSubject('');
 
 	get ariaControls(): string {
 		return this.overlayContainerRef.id;
@@ -172,7 +172,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 		}
 	}
 
-	clearValue(event: MouseEvent | KeyboardEvent): void {
+	clearValue(event: Event): void {
 		event.stopPropagation();
 		this.updateValue(null);
 		this.inputElementRef.nativeElement.focus();
@@ -204,7 +204,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 		this.panelRef.nextPage.subscribe(() => this.nextPage.emit());
 		this.panelRef.previousPage.subscribe(() => this.previousPage.emit());
 		this.panelRef.activeOptionIdChanged.subscribe((optionId) => {
-			this.activeDescendant = optionId;
+			this.activeDescendant$.next(optionId);
 			this.changeDetectorRef.markForCheck();
 		});
 		this.panelRef.closed.subscribe(() => this.closePanel());
@@ -228,7 +228,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 			return;
 		}
 		this.emptyClue();
-		this.activeDescendant = '';
+		this.activeDescendant$.next('');
 		this.changeDetectorRef.markForCheck();
 		this.onTouched?.();
 		this.isPanelOpen$.next(false);
