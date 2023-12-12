@@ -16,3 +16,9 @@
 @mixin textAlignCenter {
 	text-align: center;
 }
+
+@mixin actionsCenter {
+	.emptyPage-actions {
+		justify-content: center;
+	}
+}
