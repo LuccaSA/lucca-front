@@ -8,6 +8,9 @@ import { NgClazz, Palette } from '@lucca-front/ng/core';
 	styleUrls: ['./numeric-badge.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	hostDirectives: [NgClazz],
+	host: {
+		class: 'numericBadge',
+	},
 	encapsulation: ViewEncapsulation.None,
 })
 export class NumericBadgeComponent implements OnChanges {
@@ -33,7 +36,7 @@ export class NumericBadgeComponent implements OnChanges {
 
 	ngOnChanges(changes: SimpleChanges): void {
 		if (changes['palette']?.currentValue || changes['size']?.currentValue) {
-			this.#ngClass.ngClass = ['numericBadge', `palette-${this.palette}`, `mod-${this.size}`];
+			this.#ngClass.ngClass = [`palette-${this.palette}`, `mod-${this.size}`];
 		}
 	}
 }
