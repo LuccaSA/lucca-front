@@ -1,9 +1,10 @@
 @mixin vars {
 	--components-emptyState-background-color: var(--commons-background-base);
+	--components-emptyState-container-width: var(--components-container-max-width);
 	--components-emptyState-illustration-top-right-offset-left: min(calc(100% + 5rem), 91.5rem);
 	--components-emptyState-illustration-top-right-offset-left-S: min(calc(100% + 3.5rem), 91.5rem);
-	--components-emptyState-illustration-background-bottom-left: url(https://assets.codepen.io/158224/bubbles-bottom-left.svg);
-	--components-emptyState-illustration-foreground-bottom-left: url(https://assets.codepen.io/158224/illustration-bottom-left.svg);
-	--components-emptyState-illustration-background-top-right: url(https://assets.codepen.io/158224/bubbles-top-right.svg);
-	--components-emptyState-illustration-foreground-top-right: url(https://assets.codepen.io/158224/illustration-top-right.svg);
+	--components-emptyState-illustration-background-bottom-left: url('https://cdn.lucca.fr/lucca-front/assets/empty-states/lucca/bubbles-bottom-left-01.svg');
+	--components-emptyState-illustration-foreground-bottom-left: url('https://cdn.lucca.fr/lucca-front/assets/empty-states/lucca/lucca-01.svg');
+	--components-emptyState-illustration-background-top-right: url('https://cdn.lucca.fr/lucca-front/assets/empty-states/lucca/bubbles-top-right-01.svg');
+	--components-emptyState-illustration-foreground-top-right: url('https://cdn.lucca.fr/lucca-front/assets/empty-states/generic/coffee-01.svg');
 }
