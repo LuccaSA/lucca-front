@@ -43,7 +43,7 @@
 		.layout-banner {
 			grid-area: banner;
 			height: var(--commons-banner-height);
-			background-color: var(--colors-white-color);
+			background-color: var(--pr-elevation-surface-raised);
 			position: sticky;
 			top: 0;
 			z-index: 2;
@@ -64,7 +64,7 @@
 		.layout-content-headers,
 		.layout-content-headers-subheader,
 		.layout-content-headers-header {
-			background-color: var(--colors-white-color);
+			background-color: var(--pr-elevation-surface-raised);
 			top: var(--commons-banner-height);
 			position: sticky;
 
@@ -82,7 +82,7 @@
 		}
 
 		.layout-content-footer {
-			background-color: var(--colors-white-color);
+			background-color: var(--pr-elevation-surface-raised);
 			position: sticky;
 			bottom: 0;
 
@@ -130,7 +130,7 @@
 		.layout-aside-footer {
 			position: sticky;
 			bottom: 0;
-			background-color: var(--colors-white-color);
+			background-color: var(--pr-elevation-surface-raised);
 
 			@include media.max('S') {
 				margin-top: 0;
@@ -139,7 +139,7 @@
 		}
 
 		.layout-navside-toggle {
-			background-color: var(--colors-white-color);
+			background-color: var(--pr-elevation-surface-raised);
 			border: 0;
 			margin: 0;
 			padding: 0;

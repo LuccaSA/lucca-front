@@ -8,7 +8,7 @@
 	flex-direction: column;
 	width: 100%;
 	border-radius: var(--commons-borderRadius-M);
-	background-color: var(--colors-white-color);
+	background-color: var(--pr-elevation-surface-raised);
 	box-shadow: var(--commons-boxShadow-M);
 	transition-property: width, min-width, margin-top, margin-left;
 	transition-duration: var(--commons-animations-durations-fast);
