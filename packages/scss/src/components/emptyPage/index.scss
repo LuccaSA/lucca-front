@@ -12,5 +12,6 @@
 	}
 	&.mod-textAlignCenter {
 		@include textAlignCenter;
+		@include actionsCenter;
 	}
 }
