@@ -1,0 +1,28 @@
+<form class="u-displayFlex u-flexDirectionColumn u-gapXS u-paddingXS">
+	@for (translation of translations; track translation.cultureCode){
+	<label class="textfield mod-longer mod-noLabel mod-withSuffix">
+		<input
+			class="textfield-input"
+			[(ngModel)]="translation.value"
+			(ngModelChange)="onChange(translations)"
+			(blur)="onTouched()"
+			[disabled]="isDisabled"
+			[required]="translation.required"
+			[name]="translation.cultureCode"
+		/>
+		<label class="textfield-label u-mask">{{ translation.cultureName }}</label>
+		@if (translation.cultureIcon){
+		<lu-icon
+			[icon]="translation.cultureIcon"
+			class="textfield-suffix i18n-suffix-icon"
+			[alt]="translation.cultureName"
+			size="M"
+			[luTooltip]="translation.cultureName"
+		>
+		</lu-icon>
+		} @else {
+		<span class="textfield-suffix">{{ translation.cultureName }}</span>
+		}
+	</label>
+	}
+</form>

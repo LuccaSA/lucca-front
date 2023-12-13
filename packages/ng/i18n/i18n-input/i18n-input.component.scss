@@ -1,0 +1,13 @@
+.i18n-lu-popover-content {
+	padding: 0;
+
+	.i18n-panel-container {
+		display: grid;
+		max-height: 25rem;
+		grid-template-rows: minmax(auto, 1fr) auto;
+
+		.i18n-panel-content {
+			overflow: auto;
+		}
+	}
+}
