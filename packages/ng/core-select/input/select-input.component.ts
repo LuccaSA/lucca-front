@@ -123,22 +123,27 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 		switch ($event.key) {
 			case 'Escape':
 			case 'Tab':
-				return this.panelRef?.close();
+				this.panelRef?.close();
+				break;
 			case 'Enter':
 				if (this.isPanelOpen) {
-					return this.panelRef.selectCurrentlyHighlightedValue();
+					this.panelRef.selectCurrentlyHighlightedValue();
+				} else {
+					this.panelRef?.handleKeyManagerEvent($event);
 				}
-				return this.panelRef?.handleKeyManagerEvent($event);
+				break;
 			case 'Space':
 			case 'ArrowDown':
 			case 'ArrowUp':
 				if (this.isPanelOpen) {
-					return this.panelRef?.handleKeyManagerEvent($event);
+					this.panelRef?.handleKeyManagerEvent($event);
 				} else {
-					return this.openPanel();
+					this.openPanel();
 				}
+				break;
 			default:
 				this.panelRef?.handleKeyManagerEvent($event);
+				break;
 		}
 	}
 

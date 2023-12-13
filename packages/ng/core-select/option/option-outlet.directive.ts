@@ -10,6 +10,7 @@ import { LU_OPTION_CONTEXT, provideOptionContext } from './option.token';
 export class LuOptionOutletDirective<T> implements OnChanges, OnDestroy {
 	@Input() luOptionOutlet?: Type<unknown> | TemplateRef<LuOptionContext<T>>;
 	@Input() luOptionOutletValue: T | undefined;
+	@Input() luOptionShowNull = false;
 
 	private viewContainerRef = inject(ViewContainerRef);
 	private injector = inject(Injector);
@@ -24,8 +25,11 @@ export class LuOptionOutletDirective<T> implements OnChanges, OnDestroy {
 
 		const hasRef = this.embeddedViewRef || this.componentRef;
 
-		if (changes['luOptionOutlet'] || (changes['luOptionOutletValue'] && !hasRef)) {
-			this.createComponent();
+		if (changes['luOptionOutlet'] || (changes['luOptionOutletValue'].currentValue && !hasRef)) {
+			const newValue = changes['luOptionOutletValue'].currentValue as T | undefined;
+			if (newValue !== null && newValue !== undefined) {
+				this.createComponent();
+			}
 		} else if (changes['luOptionOutletValue']) {
 			this.updateRefValue();
 		}
