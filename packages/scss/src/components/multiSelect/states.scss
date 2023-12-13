@@ -17,3 +17,17 @@
   --components-multiSelect-arrow-color: var(--palettes-grey-500);
   pointer-events: none;
 }
+
+@mixin displayerFilterExpended {
+  .multipleSelect-displayer-numericBadge {
+    display: none;
+  }
+
+  .multipleSelect-displayer-label {
+    display: none;
+  }
+
+  .multipleSelect-displayer-search {
+    display: block;
+  }
+}

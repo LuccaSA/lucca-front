@@ -65,7 +65,7 @@ export const WithMultiDisplayer = generateStory({
 		(clueChange)="clue = $event"
 	>
 		<ng-container *luMultiDisplayer="let legumes; select: selectRef">
-			<div class="multipleSelect-displayer">
+			<div class="multipleSelect-displayer mod-filter">
 				<input
 					type="text"
 					luInput

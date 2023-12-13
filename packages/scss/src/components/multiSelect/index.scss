@@ -19,4 +19,16 @@
 	&:has(.multipleSelect-displayer-search:disabled) {
 		@include disabled;
 	}
+
+}
+
+.multipleSelect-displayer {
+	&.mod-filter {
+
+		@include displayerFilter;
+
+		&:has([aria-expanded="true"]) {
+			@include displayerFilterExpended;
+		}
+	}
 }

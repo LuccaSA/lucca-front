@@ -24,3 +24,9 @@
     @include numericBadge.S;
   }
 }
+
+@mixin displayerFilter {
+  .multipleSelect-displayer-search {
+    display: none;
+  }
+}
