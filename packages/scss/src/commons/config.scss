@@ -1,9 +1,31 @@
-$states: 'error', 'warning', 'success' !default;
-$palettes: 'lucca', 'primary', 'secondary', 'grey', 'navigation' !default;
+@use 'sass:list';
 
-// Colors : Lucca
+$shades: text, 25, 50, 100, 200, 300, 400, 500, 600, 700, 800, 900;
+$states: 'error', 'warning', 'success';
+$palettes: 'lucca', 'primary', 'secondary', 'grey', 'navigation';
+$newPalettes: 'brand', 'product', 'neutral' !default;
+$decoratives: 'kiwi', 'lime', 'cucumber', 'mint', 'glacier', 'lagoon', 'blueberry', 'lavender', 'grape', 'watermelon', 'pumpkin',
+	'pineapple' !default;
 
-$lucca: (
+$palettes: list.join($palettes, $newPalettes);
+$allPalettes: list.join($palettes, $states);
+$allPalettes: list.join($allPalettes, $decoratives);
+
+$brand: (
+	text: #ffffff,
+	50: #fff1eb,
+	100: #ffe0d1,
+	200: #ffccb3,
+	300: #ffbe9e,
+	400: #ffaa80,
+	500: #ff9361,
+	600: #ff7b3d,
+	700: #e06029,
+	800: #b43409,
+	900: #611405,
+);
+
+$product: (
 	text: #ffffff,
 	50: #fff1eb,
 	100: #ffe0d1,
@@ -17,44 +39,29 @@ $lucca: (
 	900: #611405,
 ) !default;
 
-// Colors : Product
-
-$primary: (
+$neutral: (
 	text: #ffffff,
-	50: #fff1eb,
-	100: #ffe0d1,
-	200: #ffccb3,
-	300: #ffbe9e,
-	400: #ffaa80,
-	500: #ff9361,
-	600: #ff7b3d,
-	700: #e06029,
-	800: #b43409,
-	900: #611405,
-) !default;
-
-$secondary: (
-	text: #ffffff,
-	50: #fff1eb,
-	100: #ffe0d1,
-	200: #ffccb3,
-	300: #ffbe9e,
-	400: #ffaa80,
-	500: #ff9361,
-	600: #ff7b3d,
-	700: #e06029,
-	800: #b43409,
-	900: #611405,
-) !default;
+	25: #f3f6fc,
+	50: #e7edf9,
+	100: #dbe3f5,
+	200: #ced9ee,
+	300: #becbe4,
+	400: #acbbd7,
+	500: #96a6c5,
+	600: #667799,
+	700: #445473,
+	800: #2a3551,
+	900: #0b1732,
+);
 
 $navigation: (
 	text: #ffffff,
 	700: #313972,
 	800: #192157,
 	900: #12183f,
-) !default;
+);
 
-// Colors : Semantics
+// Colors: states
 
 $success: (
 	text: #ffffff,
@@ -68,7 +75,7 @@ $success: (
 	700: #279b42,
 	800: #0a762e,
 	900: #004d20,
-) !default;
+);
 
 $warning: (
 	text: #ffffff,
@@ -82,7 +89,7 @@ $warning: (
 	700: #f08800,
 	800: #c25100,
 	900: #802a00,
-) !default;
+);
 
 $error: (
 	text: #ffffff,
@@ -96,120 +103,130 @@ $error: (
 	700: #da2f2f,
 	800: #aa0e0e,
 	900: #630303,
-) !default;
+);
 
-// Colors : Neutral
-
-$grey: (
-	text: #ffffff,
-	25: #f3f6fc,
-	50: #e7edf9,
-	100: #dbe3f5,
-	200: #ced9ee,
-	300: #becbe4,
-	400: #acbbd7,
-	500: #96a6c5,
-	600: #667799,
-	700: #445473,
-	800: #2a3551,
-	900: #0b1732,
-) !default;
-
-// Colors : Decoratives
+// Colors: Decoratives
 
 $kiwi: (
 	200: #c7e79c,
 	400: #96c856,
 	600: #68a716,
 	800: #3e6808,
-) !default;
+);
 
 $lime: (
 	200: #a7e69e,
 	400: #74cb67,
 	600: #45a437,
 	800: #16600b,
-) !default;
+);
 
 $cucumber: (
 	200: #98ecc2,
 	400: #54c98f,
 	600: #12a55c,
 	800: #006b36,
-) !default;
+);
 
 $mint: (
 	200: #99ebda,
 	400: #31c4a6,
 	600: #089b7e,
 	800: #006b56,
-) !default;
+);
 
 $glacier: (
 	200: #a1e3e3,
 	400: #4dc7c7,
 	600: #08a0a0,
 	800: #006b6b,
-) !default;
+);
 
 $lagoon: (
 	200: #9fdaf4,
 	400: #49b5e4,
 	600: #148ec2,
 	800: #065374,
-) !default;
+);
 
 $blueberry: (
 	200: #b1c8f6,
 	400: #769be5,
 	600: #4777d7,
 	800: #1b4498,
-) !default;
+);
 
 $lavender: (
 	200: #d9c4f8,
 	400: #b493e6,
 	600: #9165d2,
 	800: #5f369b,
-) !default;
+);
 
 $grape: (
 	200: #e9c2f9,
 	400: #ba86d0,
 	600: #9a57b7,
 	800: #620f85,
-) !default;
+);
 
 $watermelon: (
 	200: #eaa4b5,
 	400: #db6683,
 	600: #be2d51,
 	800: #8d0729,
-) !default;
+);
 
 $pumpkin: (
 	200: #f9cf9f,
 	400: #ef9c3e,
 	600: #db7500,
 	800: #8f4c00,
-) !default;
+);
 
 $pineapple: (
 	200: #f8eaa5,
 	400: #f8dc4f,
 	600: #d6b300,
 	800: #a88900,
-) !default;
+);
 
 $colors: (
 	'white': #ffffff,
 	'black': #121212,
-) !default;
+);
 
 $colorsRgb: (
 	'white': '255, 255, 255',
 	'grey-900': '19, 29, 53',
-) !default;
+);
+
+// https://sass-lang.com/documentation/variables/#advanced-variable-functions
+$palettesInterpolation: (
+	'lucca': $brand,
+	'brand': $brand,
+	'grey': $neutral,
+	'neutral': $neutral,
+	'primary': $product,
+	'secondary': $product,
+	'product': $product,
+	'navigation': $navigation,
+	'success': $success,
+	'error': $error,
+	'warning': $warning,
+	'kiwi': $kiwi,
+	'lime': $lime,
+	'cucumber': $cucumber,
+	'mint': $mint,
+	'glacier': $glacier,
+	'lagoon': $lagoon,
+	'blueberry': $blueberry,
+	'lavender': $lavender,
+	'grape': $grape,
+	'watermelon': $watermelon,
+	'pumpkin': $pumpkin,
+	'pineapple': $pineapple,
+);
 
 $breakpoints: (
 	XXXS: 320px,
@@ -232,7 +249,7 @@ $spacings: (
 	L: 2rem,
 	XL: 3rem,
 	XXL: 4rem,
-);
+) !default;
 
 $sizes: (
 	XS: (
@@ -275,7 +292,7 @@ $sizes: (
 $borderRadius: (
 	'M': 4px,
 	'L': 8px,
-);
+) !default;
 
 $elevations: (
 	// deprecated
