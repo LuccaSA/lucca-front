@@ -11,8 +11,8 @@
 }
 
 .lu-popup-panel {
-	box-shadow: var(--commons-boxShadow-M);
 	position: relative;
+	box-shadow: var(--pr-elevation-shadow-overlay);
 	background-color: var(--pr-elevation-surface-raised);
 	border-radius: var(--commons-borderRadius-L);
 	width: var(--components-popup-M);
@@ -95,7 +95,7 @@
 	align-items: center;
 	justify-content: flex-end;
 	background-color: var(--pr-elevation-surface-raised);
-	box-shadow: var(--commons-boxShadow-L);
+	box-shadow: var(--pr-elevation-shadow-overflow);
 	margin-top: auto;
 	padding: var(--components-popup-padding-vertical) var(--components-popup-padding-horizontal);
 }

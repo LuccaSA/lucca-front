@@ -4,7 +4,7 @@
 @mixin component($atRoot: 'without: rule') {
 	background-color: var(--pr-elevation-surface-raised);
 	bottom: 0;
-	box-shadow: var(--commons-boxShadow-S);
+	box-shadow: var(--pr-elevation-shadow-overflow);
 	padding: 0 var(--spacings-XS);
 	position: sticky;
 

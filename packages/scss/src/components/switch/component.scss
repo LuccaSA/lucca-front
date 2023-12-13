@@ -45,7 +45,7 @@
 
 			&::after {
 				background-color: var(--colors-white-color);
-				box-shadow: var(--commons-boxShadow-XXS);
+				box-shadow: var(--pr-elevation-shadow-overflow);
 				border-radius: 50%;
 				content: '';
 				display: block;
