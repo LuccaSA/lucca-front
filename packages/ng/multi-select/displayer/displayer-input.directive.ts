@@ -59,7 +59,12 @@ export class LuMultiSelectDisplayerInputDirective<T> implements OnInit {
 			this.disabled = disabled;
 		});
 		this.select.focusInput$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {
+			this.elementRef.nativeElement.value = '';
+			this.select.clueChanged('');
 			this.elementRef.nativeElement.focus();
+		});
+		this.select.emptyClue$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {
+			this.elementRef.nativeElement.value = '';
 		});
 	}
 }
