@@ -24,8 +24,11 @@
 
 .multipleSelect-displayer {
 	&.mod-filter {
-
 		@include displayerFilter;
+
+		&.is-filled {
+			@include displayerFilterFilled;
+		}
 
 		&:has([aria-expanded="true"]) {
 			@include displayerFilterExpended;

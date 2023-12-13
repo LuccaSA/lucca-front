@@ -66,7 +66,7 @@ export const WithMultiDisplayer = generateStory({
 		(clueChange)="clue = $event"
 	>
 		<ng-container *luMultiDisplayer="let legumes; select: selectRef">
-			<div class="multipleSelect-displayer mod-filter">
+			<div class="multipleSelect-displayer mod-filter" [ngClass]="{'is-filled' : legumes?.length}">
 				<input
 					type="text"
 					luInput
@@ -74,8 +74,10 @@ export const WithMultiDisplayer = generateStory({
 					ngModel
 					(ngModelChange)="selectRef.clueChanged($event)"
 				/>
-				<div class="multipleSelect-displayer-chip chip mod-unkillable" *ngIf="legumes?.length === 1">{{legumes[0]?.name}}</div>
-				<ng-container *ngIf="legumes?.length > 1"><span class="multipleSelect-displayer-numericBadge numericBadge">{{ legumes?.length }}</span><span class="multipleSelect-displayer-label">légumes sélectionnés</span></ng-container>
+				<div class="multipleSelect-displayer-filter">
+					<div class="multipleSelect-displayer-chip chip mod-unkillable" *ngIf="legumes?.length === 1">{{legumes[0]?.name}}</div>
+					<ng-container *ngIf="legumes?.length > 1"><span class="multipleSelect-displayer-numericBadge numericBadge">{{ legumes?.length }}</span><span class="multipleSelect-displayer-label">légumes sélectionnés</span></ng-container>
+				</div>
 			</div>
 		</ng-container>
 	</lu-multi-select>`,

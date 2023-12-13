@@ -18,16 +18,22 @@
   pointer-events: none;
 }
 
-@mixin displayerFilterExpended {
-  .multipleSelect-displayer-numericBadge {
-    display: none;
+@mixin displayerFilterFilled {
+  // .multipleSelect-displayer-filter {
+  //   display: block;
+  // }
+  //
+  .multipleSelect-displayer-search {
+    opacity: 0;
   }
+}
 
-  .multipleSelect-displayer-label {
+@mixin displayerFilterExpended {
+  .multipleSelect-displayer-filter {
     display: none;
   }
 
   .multipleSelect-displayer-search {
-    display: block;
+    opacity: 1;
   }
 }

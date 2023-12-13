@@ -26,7 +26,17 @@
 }
 
 @mixin displayerFilter {
+  display: grid;
+
+  .multipleSelect-displayer-filter {
+    grid-column-start: 1;
+    grid-row-start: 1;
+    display: flex;
+    gap: var(--spacings-XXS);
+  }
+
   .multipleSelect-displayer-search {
-    display: none;
+    grid-column-start: 1;
+    grid-row-start: 1;
   }
 }
