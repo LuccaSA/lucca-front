@@ -1,8 +1,8 @@
 import { DestroyRef, Directive, ElementRef, HostBinding, inject, OnInit } from '@angular/core';
-import { LuMultiSelectInputComponent } from '../input';
-import { ILuOptionContext, LU_OPTION_CONTEXT } from '../../core-select/option';
-import { map } from 'rxjs/operators';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { ILuOptionContext, LU_OPTION_CONTEXT } from '@lucca-front/ng/core-select';
+import { map } from 'rxjs/operators';
+import { LuMultiSelectInputComponent } from '../input/select-input.component';
 
 @Directive({
 	selector: '[luMultiSelectDisplayerInput]',

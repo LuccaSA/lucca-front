@@ -1,14 +1,13 @@
+import { OverlayConfig } from '@angular/cdk/overlay';
 import { booleanAttribute, ChangeDetectionStrategy, Component, EventEmitter, Input, Output, TemplateRef, Type, ViewEncapsulation } from '@angular/core';
-import { AbstractFieldComponent } from '../abstract-field-component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SafeHtml } from '@angular/platform-browser';
-import { InlineMessageState } from '@lucca-front/ng/inline-message';
+import { LuOptionContext, LuSimpleSelectDefaultOptionComponent } from '@lucca-front/ng/core-select';
 import { FormFieldComponent, FormFieldSize, InputDirective } from '@lucca-front/ng/form-field';
-import { LuSimpleSelectInputComponent } from '../../simple-select/input';
-import { OverlayConfig } from '@angular/cdk/overlay';
-import { LuOptionContext } from '../../core-select/select.model';
+import { InlineMessageState } from '@lucca-front/ng/inline-message';
+import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
+import { AbstractFieldComponent } from '../abstract-field-component';
 import { NoopValueAccessorDirective } from '../noop-value-accessor.directive';
-import { LuSimpleSelectDefaultOptionComponent } from '../../core-select/option';
 
 @Component({
 	selector: 'lu-simple-select-field',
