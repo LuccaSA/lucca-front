@@ -30,7 +30,7 @@
 			@include displayerFilterFilled;
 		}
 
-		&:has([aria-expanded="true"]) {
+		&:has([aria-expanded="true"]):not(:has(:placeholder-shown)) {
 			@include displayerFilterExpended;
 		}
 	}
