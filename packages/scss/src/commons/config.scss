@@ -9,7 +9,7 @@ $decoratives: 'kiwi', 'lime', 'cucumber', 'mint', 'glacier', 'lagoon', 'blueberr
 
 $palettes: list.join($palettes, $newPalettes);
 $allPalettes: list.join($palettes, $states);
-$allPalettes: list.join($palettes, $decoratives);
+$allPalettes: list.join($allPalettes, $decoratives);
 
 $brand: (
 	text: #ffffff,
