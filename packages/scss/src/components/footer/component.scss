@@ -6,7 +6,7 @@
 	display: flex;
 	gap: var(--spacings-S);
 	align-items: center;
-	box-shadow: var(--commons-boxShadow-L);
+	box-shadow: var(--pr-elevation-shadow-overflow);
 
 	@include media.max("XXS") {
 		flex-direction: column;

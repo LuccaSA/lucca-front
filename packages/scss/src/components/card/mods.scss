@@ -21,12 +21,12 @@
 }
 
 @mixin elevated {
-	box-shadow: var(--commons-boxShadow-S);
+	box-shadow: var(--pr-elevation-shadow-raised);
 	border: 0;
 }
 
 @mixin action {
-	box-shadow: var(--commons-boxShadow-S);
+	box-shadow: var(--pr-elevation-shadow-raised);
 	border: 0;
 	cursor: pointer;
 	padding: var(--components-card-content-padding);
@@ -35,7 +35,7 @@
 	row-gap: var(--spacings-S);
 
 	&:hover {
-		box-shadow: var(--commons-boxShadow-L);
+		box-shadow: var(--pr-elevation-shadow-overlay);
 	}
 
 	.card-content {

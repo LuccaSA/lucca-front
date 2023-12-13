@@ -41,7 +41,7 @@
 				transition-property: left;
 				transition-duration: var(--commons-animations-durations-fast);
 				transition-timing-function: cubic-bezier(0.5, 1, 0.5, 1.5);
-				box-shadow: var(--commons-boxShadow-XS);
+				box-shadow: var(--pr-elevation-shadow-overflow);
 			}
 		}
 
