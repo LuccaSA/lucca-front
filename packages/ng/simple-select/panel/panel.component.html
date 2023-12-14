@@ -26,6 +26,9 @@
 			</div>
 		</div>
 
-		<div *ngIf="loading$ | async" class="panel-loading loading lu-picker-loading"></div>
+		<div *ngIf="loading$ | async" class="lu-picker-content-loading">
+			<div class="panel-loading loading lu-picker-loading"></div>
+			<span>{{intl.loading}}</span>
+		</div>
 	</div>
 </div>
