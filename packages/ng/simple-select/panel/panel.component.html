@@ -5,7 +5,12 @@
 	*ngIf="{ options: options$ | async } as ctx"
 	[cdkTrapFocusAutoCapture]="true"
 >
-	<div class="lu-picker-content" [class.is-loading]="loading$ | async" (scroll)="onScroll($event)">
+	<div
+		class="lu-picker-content"
+		[class.is-loading]="loading$ | async"
+		[class.has-options]="ctx.options.length > 0"
+		(scroll)="onScroll($event)"
+	>
 		<div class="lu-picker-content-option" role="listbox">
 			<lu-select-option
 				*ngFor="let option of ctx.options; let index = index"
@@ -16,7 +21,9 @@
 				[isSelected]="option === selected"
 				(click)="panelRef.emitValue(option)"
 			></lu-select-option>
-			<div class="lu-picker-content-option-emptyState" *ngIf="ctx.options.length === 0">{{intl.emptyResults}}</div>
+			<div class="lu-picker-content-option-emptyState" *ngIf="ctx.options.length === 0 && (loading$ | async) === false">
+				{{intl.emptyResults}}
+			</div>
 		</div>
 
 		<div *ngIf="loading$ | async" class="panel-loading loading lu-picker-loading"></div>

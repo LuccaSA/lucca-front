@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LuOptionDirective } from '@lucca-front/ng/core-select';
 import { allLegumes, FilterLegumesPipe } from '@/stories/forms/select/select.utils';
+import { HiddenArgType } from '../../../../../helpers/common-arg-types';
 
 export default {
 	title: 'Documentation/Forms/Fields/Simple Select/Angular',
@@ -17,11 +18,19 @@ export default {
 		tooltip: {
 			type: 'string',
 		},
+		optionComparer: HiddenArgType,
+		options: HiddenArgType,
+		optionTpl: HiddenArgType,
+		overlayConfig: HiddenArgType,
+		valueTpl: HiddenArgType,
+		clueChange: HiddenArgType,
+		nextPage: HiddenArgType,
+		previousPage: HiddenArgType,
 	},
 } as Meta;
 
 export const Basic: StoryObj<SimpleSelectFieldComponent<unknown>> = {
-	render: ({ label, required, hiddenLabel, inlineMessage, size, placeholder, inlineMessageState, disabled, tooltip }) => {
+	render: ({ label, required, clearable, loading, hiddenLabel, inlineMessage, size, placeholder, inlineMessageState, disabled, tooltip }) => {
 		return {
 			props: { legumes: allLegumes },
 			// TODO use generateStoryArgs here once merged
@@ -29,6 +38,8 @@ export const Basic: StoryObj<SimpleSelectFieldComponent<unknown>> = {
 	required="${required}"
 	${hiddenLabel ? 'hiddenLabel' : ''}
 	${disabled ? 'disabled' : ''}
+	${clearable ? 'clearable' : ''}
+	${loading ? 'loading' : ''}
 	inlineMessage="${inlineMessage}"
 	inlineMessageState="${inlineMessageState}"
 	size="${size}"
@@ -55,5 +66,7 @@ export const Basic: StoryObj<SimpleSelectFieldComponent<unknown>> = {
 		size: 'M',
 		placeholder: 'Placeholder',
 		tooltip: "Je suis un message d'aide",
+		clearable: false,
+		loading: false,
 	},
 };
