@@ -1,16 +1,16 @@
 import { A11yModule, ActiveDescendantKeyManager } from '@angular/cdk/a11y';
 import { AsyncPipe, NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
-import { AfterViewInit, ChangeDetectionStrategy, Component, inject, QueryList, ViewChildren } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, QueryList, ViewChildren, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { getIntl } from '@lucca-front/ng/core';
-import { SELECT_ID, ɵLuOptionComponent, ɵLuOptionOutletDirective } from '@lucca-front/ng/core-select';
-import { asyncScheduler, filter, map, observeOn, take, takeUntil } from 'rxjs';
+import { SELECT_ID, ɵLuOptionComponent, ɵLuOptionOutletDirective, ɵgenerateGroups } from '@lucca-front/ng/core-select';
+import { EMPTY, asyncScheduler, filter, map, observeOn, take, takeUntil } from 'rxjs';
+import { skip } from 'rxjs/operators';
 import { LuMultiSelectPanelRef } from '../input/panel.model';
 import { ILuMultiSelectPanelData, MULTI_SELECT_PANEL_DATA } from '../select.model';
 import { LU_MULTI_SELECT_TRANSLATIONS } from '../select.translate';
 import { LuIsOptionSelectedPipe } from './option-selected.pipe';
 import { ɵLuMultiSelectSelectedChipDirective } from './selected-chip.directive';
-import { skip } from 'rxjs/operators';
 
 @Component({
 	selector: 'lu-select-panel',
@@ -27,6 +27,8 @@ export class LuMultiSelectPanelComponent<T> implements AfterViewInit {
 	intl = getIntl(LU_MULTI_SELECT_TRANSLATIONS);
 
 	options$ = this.panelData.options$;
+	groups$ = this.panelData.grouping ? this.panelData.options$.pipe(map((options) => ɵgenerateGroups(options, this.panelData.grouping.selector))) : EMPTY;
+	grouping = this.panelData.grouping;
 	loading$ = this.panelData.loading$;
 	optionComparer = this.panelData.optionComparer;
 	selectedOptions: T[] = this.panelData.initialValue || [];

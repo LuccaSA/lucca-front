@@ -1,15 +1,13 @@
+import { OverlayConfig } from '@angular/cdk/overlay';
 import { booleanAttribute, ChangeDetectionStrategy, Component, EventEmitter, Input, numberAttribute, Output, TemplateRef, Type, ViewEncapsulation } from '@angular/core';
-import { AbstractFieldComponent } from '../abstract-field-component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SafeHtml } from '@angular/platform-browser';
-import { InlineMessageState } from '@lucca-front/ng/inline-message';
+import { LuOptionContext, LuSimpleSelectDefaultOptionComponent } from '@lucca-front/ng/core-select';
 import { FormFieldComponent, FormFieldSize, InputDirective } from '@lucca-front/ng/form-field';
-import { OverlayConfig } from '@angular/cdk/overlay';
-import { LuOptionContext } from '../../core-select/select.model';
+import { InlineMessageState } from '@lucca-front/ng/inline-message';
+import { LuMultiSelectDefaultDisplayerComponent, LuMultiSelectInputComponent } from '@lucca-front/ng/multi-select';
+import { AbstractFieldComponent } from '../abstract-field-component';
 import { NoopValueAccessorDirective } from '../noop-value-accessor.directive';
-import { LuSimpleSelectDefaultOptionComponent } from '../../core-select/option';
-import { LuMultiSelectInputComponent } from '../../multi-select/input';
-import { LuMultiSelectDefaultDisplayerComponent } from '../../multi-select/displayer';
 
 @Component({
 	selector: 'lu-multi-select-field',

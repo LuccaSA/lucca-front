@@ -1,14 +1,14 @@
 import { AsyncPipe, NgFor, NgIf, NgPlural, NgPluralCase } from '@angular/common';
-import { ChangeDetectionStrategy, Component, DestroyRef, ElementRef, inject, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, ElementRef, OnInit, ViewChild, inject } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { FormsModule } from '@angular/forms';
 import { getIntl } from '@lucca-front/ng/core';
 import { ILuOptionContext, LU_OPTION_CONTEXT, ɵLuOptionOutletDirective } from '@lucca-front/ng/core-select';
+import { InputDirective } from '@lucca-front/ng/form-field';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
-import { LuMultiSelectInputComponent } from '../input';
-import { LU_MULTI_SELECT_DISPLAYER_TRANSLATIONS } from './default-displayer.translate';
-import { FormsModule } from '@angular/forms';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { map } from 'rxjs/operators';
-import { InputDirective } from '../../form-field/input.directive';
+import { LuMultiSelectInputComponent } from '../input/select-input.component';
+import { LU_MULTI_SELECT_DISPLAYER_TRANSLATIONS } from './default-displayer.translate';
 
 @Component({
 	selector: 'lu-multi-select-default-displayer',

@@ -1,13 +1,13 @@
 import { A11yModule, ActiveDescendantKeyManager } from '@angular/cdk/a11y';
-import { AsyncPipe, NgFor, NgIf } from '@angular/common';
-import { AfterViewInit, ChangeDetectionStrategy, Component, inject, QueryList, ViewChildren } from '@angular/core';
+import { AsyncPipe, NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
+import { AfterViewInit, ChangeDetectionStrategy, Component, QueryList, ViewChildren, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { getIntl } from '@lucca-front/ng/core';
-import { LuSelectPanelRef, SELECT_ID, ɵLuOptionComponent } from '@lucca-front/ng/core-select';
-import { asyncScheduler, filter, map, observeOn, take, takeUntil } from 'rxjs';
+import { LuSelectPanelRef, SELECT_ID, ɵLuOptionComponent, ɵgenerateGroups } from '@lucca-front/ng/core-select';
+import { EMPTY, asyncScheduler, filter, map, observeOn, take, takeUntil } from 'rxjs';
+import { skip } from 'rxjs/operators';
 import { ILuSimpleSelectPanelData, SIMPLE_SELECT_PANEL_DATA } from '../select.model';
 import { LU_SIMPLE_SELECT_TRANSLATIONS } from '../select.translate';
-import { skip } from 'rxjs/operators';
 
 @Component({
 	selector: 'lu-select-panel',
@@ -15,7 +15,7 @@ import { skip } from 'rxjs/operators';
 	styleUrls: ['./panel.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	standalone: true,
-	imports: [A11yModule, AsyncPipe, FormsModule, NgIf, NgFor, ɵLuOptionComponent],
+	imports: [A11yModule, AsyncPipe, FormsModule, NgIf, NgFor, NgTemplateOutlet, ɵLuOptionComponent],
 })
 export class LuSelectPanelComponent<T> implements AfterViewInit {
 	protected panelData = inject<ILuSimpleSelectPanelData<T>>(SIMPLE_SELECT_PANEL_DATA);
@@ -24,8 +24,10 @@ export class LuSelectPanelComponent<T> implements AfterViewInit {
 	public intl = getIntl(LU_SIMPLE_SELECT_TRANSLATIONS);
 
 	options$ = this.panelData.options$;
+	groups$ = this.panelData.grouping ? this.panelData.options$.pipe(map((options) => ɵgenerateGroups(options, this.panelData.grouping.selector))) : EMPTY;
 	loading$ = this.panelData.loading$;
 	optionComparer = this.panelData.optionComparer;
+	grouping = this.panelData.grouping;
 	initialValue: T | undefined = this.panelData.initialValue;
 	optionTpl = this.panelData.optionTpl;
 
