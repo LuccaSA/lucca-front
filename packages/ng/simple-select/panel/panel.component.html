@@ -8,7 +8,7 @@
 	<div
 		class="lu-picker-content"
 		[class.is-loading]="loading$ | async"
-		[class.has-options]="ctx.options.length > 0"
+		[class.is-filled]="ctx.options.length > 0"
 		(scroll)="onScroll($event)"
 	>
 		<div class="lu-picker-content-option" role="listbox">

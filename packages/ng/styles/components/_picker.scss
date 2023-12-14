@@ -14,6 +14,12 @@
 	&.is-loading {
 		height: 17.5rem;
 	}
+
+	&.is-filled {
+		.lu-picker-loading {
+			margin: var(--spacings-XXS) auto;
+		}
+	}
 }
 
 .lu-picker-content-option {
@@ -28,14 +34,8 @@
 }
 
 .lu-picker-loading {
-	// position: absolute;
-	// left: 50%;
-	// top: 50%;
-	// transform: translateX(-50%) translateY(-50%);
-
-
   display: block;
-  margin: var(--spacings-XXS) auto;
+  margin: 5rem auto var(--spacings-XXS) auto;
   width: 1.5rem;
 }
 
