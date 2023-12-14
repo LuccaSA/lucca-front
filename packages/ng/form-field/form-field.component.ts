@@ -75,7 +75,6 @@ export class FormFieldComponent implements OnChanges, OnDestroy {
 
 	public set input(input: InputDirective) {
 		this._input = input;
-		console.log('SET INPUT WORKS');
 		this.prepareInput();
 	}
 
