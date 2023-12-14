@@ -2,6 +2,7 @@
 	<div
 		class="lu-picker-content"
 		[class.is-loading]="loading$ | async"
+		[class.is-filled]="ctx.options.length > 0"
 		tabindex="0"
 		role="listbox"
 		aria-multiselectable="true"
