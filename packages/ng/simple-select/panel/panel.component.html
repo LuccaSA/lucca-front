@@ -24,10 +24,12 @@
 				{{intl.emptyResults}}
 			</div>
 		</div>
-
 		<div *ngIf="loading$ | async" class="lu-picker-content-loading">
 			<div class="loading"></div>
 			<span>{{intl.loading}}</span>
 		</div>
+	</div>
+	<div class="lu-picker-content-add">
+		<button class="button mod-text mod-icon palette-primary" type="button"><span aria-hidden="true" class="lucca-icon icon-mathsPlus"></span>Add a new supplier</button>
 	</div>
 </div>

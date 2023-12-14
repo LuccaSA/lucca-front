@@ -27,6 +27,14 @@
 	text-align: center;
 }
 
+.lu-picker-content-add {
+	position: sticky;
+	bottom: 0;
+	background: white;
+	box-shadow: var(--commons-boxShadow-S);
+	padding: var(--spacings-XS);
+}
+
 .lu-picker-content-loading {
 	padding: var(--spacings-XXS);
 	display: flex;
