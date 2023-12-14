@@ -28,10 +28,15 @@
 }
 
 .lu-picker-loading {
-	position: absolute;
-	left: 50%;
-	top: 50%;
-	transform: translateX(-50%) translateY(-50%);
+	// position: absolute;
+	// left: 50%;
+	// top: 50%;
+	// transform: translateX(-50%) translateY(-50%);
+
+
+  display: block;
+  margin: var(--spacings-XXS) auto;
+  width: 1.5rem;
 }
 
 .lu-picker-header {

@@ -1,15 +1,3 @@
 @import "_definitions";
 @include optionSearcherStyle;
 @include optionPlaceholderStyle;
-
-.panel-search {
-  position: sticky;
-  top: 0;
-  box-shadow: 0 -4px 0 var(--spacings-XS) var(--colors-white-color); // Avoid showing options list while scrolling due to header sticky potisionning
-}
-
-.panel-loading {
-  &:after {
-    box-shadow: 0 0 0 .25rem var(--colors-white-color), inset 0 0 0 .5rem var(--colors-white-color);
-  }
-}
