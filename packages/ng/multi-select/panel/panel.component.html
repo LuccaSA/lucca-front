@@ -2,6 +2,7 @@
 	<div
 		class="lu-picker-content"
 		[class.is-loading]="loading$ | async"
+		[class.is-filled]="ctx.options.length > 0"
 		tabindex="0"
 		role="listbox"
 		aria-multiselectable="true"
@@ -19,6 +20,10 @@
 			></lu-select-option>
 			<div class="lu-picker-content-option-emptyState" *ngIf="ctx.options.length === 0">{{intl.emptyResults}}</div>
 		</div>
-		<div *ngIf="loading$ | async" class="panel-loading loading lu-picker-loading"></div>
+
+		<div *ngIf="loading$ | async" class="lu-picker-content-loading">
+			<div class="panel-loading loading lu-picker-loading"></div>
+			<span>{{intl.loading}}</span>
+		</div>
 	</div>
 </div>
