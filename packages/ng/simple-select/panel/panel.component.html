@@ -8,7 +8,6 @@
 	<div
 		class="lu-picker-content"
 		[class.is-loading]="loading$ | async"
-		[class.is-filled]="ctx.options.length > 0"
 		(scroll)="onScroll($event)"
 	>
 		<div class="lu-picker-content-option" role="listbox">
@@ -27,7 +26,7 @@
 		</div>
 
 		<div *ngIf="loading$ | async" class="lu-picker-content-loading">
-			<div class="panel-loading loading lu-picker-loading"></div>
+			<div class="loading"></div>
 			<span>{{intl.loading}}</span>
 		</div>
 	</div>

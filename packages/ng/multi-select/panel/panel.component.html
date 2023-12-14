@@ -19,6 +19,9 @@
 			></lu-select-option>
 			<div class="lu-picker-content-option-emptyState" *ngIf="ctx.options.length === 0">{{intl.emptyResults}}</div>
 		</div>
-		<div *ngIf="loading$ | async" class="panel-loading loading lu-picker-loading"></div>
+		<div *ngIf="loading$ | async" class="lu-picker-content-loading">
+			<div class="loading"></div>
+			<span>{{intl.loading}}</span>
+		</div>
 	</div>
 </div>

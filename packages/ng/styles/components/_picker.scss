@@ -12,13 +12,7 @@
 	animation: scaleIn 150ms cubic-bezier(0.25, 0.8, 0.25, 1);
 
 	&.is-loading {
-		height: 17.5rem;
-	}
-
-	&.is-filled {
-		.lu-picker-loading {
-			margin: var(--spacings-XXS) auto;
-		}
+		//height: 17.5rem;
 	}
 }
 
@@ -33,10 +27,17 @@
 	text-align: center;
 }
 
-.lu-picker-loading {
-  display: block;
-  margin: 5rem auto var(--spacings-XXS) auto;
-  width: 1.5rem;
+.lu-picker-content-loading {
+	padding: var(--spacings-XXS);
+	display: flex;
+	color: var(--palettes-grey-600)
+}
+
+.lu-picker-loading { // deprecated
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translateX(-50%) translateY(-50%);
 }
 
 .lu-picker-header {
