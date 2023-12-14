@@ -1,6 +1,6 @@
-<ng-container *luOptionOutlet="valuesTpl; value: value"></ng-container>
+<ng-container *luOptionOutlet="valuesTpl; value: value || []"></ng-container>
 
-<button *ngIf="hasValue && clearable" role="button" class="multipleSelect-clear clear" role="button" (click)="clearValue($event)">
+<button *ngIf="hasValue && clearable" role="button" class="multipleSelect-clear clear" (click)="clearValue($event)">
 	<span class="u-mask">{{intl.clear}}</span>
 </button>
 <span aria-hidden="true" class="multipleSelect-arrow lucca-icon icon-arrowChevronBottom"></span>
