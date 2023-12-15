@@ -25,6 +25,7 @@
 	}
 
 	.optionItem-value {
+		position: relative;
 		border-radius: var(--commons-borderRadius-M);
 		display: block;
 		padding: var(--components-options-item-padding-vertical) var(--components-options-item-padding-horizontal);
@@ -44,6 +45,18 @@
 
 			&.is-highlighted {
 				background-color: var(--palettes-primary-100);
+
+				&:before {
+					content: '';
+					position: absolute;
+					top: 0;
+					bottom: 0;
+					left: calc(var(--spacings-XXS) * -1);
+					width: 2px;
+					background-color: var(--palettes-primary-700);
+					border-top-right-radius: var(--commons-borderRadius-M);
+					border-bottom-right-radius: var(--commons-borderRadius-M);
+				}
 
 				&:hover {
 					background-color: var(--palettes-primary-200);

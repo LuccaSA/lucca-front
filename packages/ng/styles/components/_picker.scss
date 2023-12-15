@@ -6,10 +6,12 @@
 	@extend %popover-content;
 
 	max-height: 17.5rem;
-	padding: var(--spacings-XS);
+	padding: var(--spacings-XXS);
 	overflow-y: auto;
 	display: block;
 	animation: scaleIn 150ms cubic-bezier(0.25, 0.8, 0.25, 1);
+	margin-left: calc(var(--spacings-XXS) * -1);
+	margin-right: calc(var(--spacings-XXS) * -1);
 
 	&.is-loading {
 		//height: 17.5rem;
@@ -81,7 +83,7 @@
 }
 
 .lu-date-picker-panel {
-	width: calc(var(--components-calendar-width) + var(--spacings-XS) * 2);
+	width: var(--components-calendar-width);
 
 	.lu-picker-content {
 		max-height: none;

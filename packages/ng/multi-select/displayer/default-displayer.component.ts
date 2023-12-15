@@ -33,7 +33,7 @@ import { LU_MULTI_SELECT_DISPLAYER_TRANSLATIONS } from './default-displayer.tran
 				luInput
 			/>
 			<div *ngFor="let option of displayedOptions$ | async; let index = index" class="multipleSelect-displayer-chip chip" [class.mod-unkillable]="disabled">
-				<ng-container *luOptionOutlet="select.valueTpl || select.optionTpl; value: option"></ng-container>
+				<span class="multipleSelect-displayer-chip-value"><ng-container *luOptionOutlet="select.valueTpl || select.optionTpl; value: option"></ng-container></span>
 				<button *ngIf="!disabled" type="button" class="chip-kill" (click)="unselectOption(option, $event)">
 					<span class="u-mask">{{ intl.removeOption }}</span>
 				</button>

@@ -24,6 +24,13 @@
 			flex: 1;
 		}
 
+		.multipleSelect-displayer-chip-value {
+			max-width: 8rem;
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
+		}
+
 		.multipleSelect-displayer-search {
 			display: block;
 			min-width: 2rem;

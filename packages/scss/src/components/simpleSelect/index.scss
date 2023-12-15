@@ -15,7 +15,7 @@
 	&:has(.simpleSelect-input:focus-visible) {
 		@include focused;
 
-		&[aria-expanded="true"] {
+		&:has(.simpleSelect-input[aria-expanded="true"]) {
 			@include focusedExpanded;
 		}
 	}

@@ -48,7 +48,7 @@ export const allLegumes: ILegume[] = [
 	{ name: 'Panais', index: 24, color: 'white' },
 	{ name: 'Petits pois', index: 25, color: 'green' },
 	{ name: 'Poivron', index: 26, color: 'red' },
-	{ name: 'Pomme de terre terre terre terre terre', index: 27, color: 'brown' },
+	{ name: 'Pomme de terre', index: 27, color: 'brown' },
 	{ name: 'Potimarron', index: 28, color: 'orange' },
 	{ name: 'Radis', index: 29, color: 'red' },
 	{ name: 'Tomate', index: 30, color: 'red' },
