@@ -41,10 +41,6 @@
 
 			&:active {
 				background-color: var(--palettes-primary-200);
-			}
-
-			&.is-highlighted {
-				background-color: var(--palettes-primary-100);
 
 				&:before {
 					content: '';
@@ -57,6 +53,10 @@
 					border-top-right-radius: var(--commons-borderRadius-M);
 					border-bottom-right-radius: var(--commons-borderRadius-M);
 				}
+			}
+
+			&.is-highlighted {
+				background-color: var(--palettes-primary-100);
 
 				&:hover {
 					background-color: var(--palettes-primary-200);

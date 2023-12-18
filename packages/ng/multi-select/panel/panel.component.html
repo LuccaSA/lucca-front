@@ -10,8 +10,8 @@
 	>
 		<div class="lu-picker-content-option">
 			<ng-container *ngIf="grouping">
-				<div *ngFor="let group of groups$ | async" role="group" [attr.aria-labelledby]="selectId + '-group-' + group.key">
-					<span class="optionItem-groupKey" role="presentation" [id]="selectId + '-group-' + group.key">
+				<div *ngFor="let group of groups$ | async" class="lu-picker-content-group" role="group" [attr.aria-labelledby]="selectId + '-group-' + group.key">
+					<span class="lu-picker-content-option-group-title" role="presentation" [id]="selectId + '-group-' + group.key">
 						<ng-template [ngTemplateOutlet]="grouping.templateRef" [ngTemplateOutletContext]="{ $implicit: group }"></ng-template>
 					</span>
 					<ng-template [ngTemplateOutlet]="optionsList" [ngTemplateOutletContext]="{ $implicit: group.options }"></ng-template>

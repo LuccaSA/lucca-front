@@ -29,6 +29,20 @@
 	text-align: center;
 }
 
+.lu-picker-content-option-group-title {
+	font-size: var(--sizes-S-fontSize);
+	line-height: var(--sizes-S-lineHeight);
+	font-weight: 600;
+	padding: var(--components-options-item-padding-vertical) var(--components-options-item-padding-horizontal);
+	color: var(--palettes-grey-600);
+	position: sticky;
+	top: 0;
+	background-color: var(--colors-white-color);
+	z-index: 1;
+	display: block;
+	box-shadow: 0 calc(var(--spacings-XXS) * -1) 0 var(--spacings-XXS) var(--colors-white-color); // Mask background options scrolling behind
+}
+
 .lu-picker-content-add {
 	position: sticky;
 	bottom: 0;
