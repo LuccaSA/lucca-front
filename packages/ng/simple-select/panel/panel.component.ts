@@ -39,7 +39,7 @@ export class LuSelectPanelComponent<T> implements AfterViewInit {
 	}
 
 	public get selected(): T | undefined {
-		return this.keyManager?.activeItem?.option;
+		return this.initialValue;
 	}
 
 	onScroll(evt: Event): void {

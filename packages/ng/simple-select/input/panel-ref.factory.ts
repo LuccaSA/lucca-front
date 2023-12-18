@@ -48,7 +48,7 @@ class SelectPanelRef<T> extends LuSelectPanelRef<T, T> {
 	}
 
 	selectCurrentlyHighlightedValue(): void {
-		this.emitValue(this.instance.selected);
+		this.emitValue(this.instance.keyManager.activeItem?.option);
 		this.close();
 	}
 }
