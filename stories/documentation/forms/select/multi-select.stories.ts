@@ -91,32 +91,6 @@ export const WithMultiDisplayer = generateStory({
 	},
 });
 
-export const WithMaxValuesShown = generateStory({
-	name: 'With Max Values Shown',
-	description: 'Il est possible de modifier le nombre de chips affichés dans le composant (la valeur par défaut étant Infinity).',
-	template: `
-	<lu-multi-select
-		#selectRef
-		class="multiSelect"
-		[placeholder]="placeholder"
-		[options]="legumes"
-		[clearable]="clearable"
-		[disabled]="disabled"
-		[loading]="loading"
-		[maxValuesShown]="5"
-		[(ngModel)]="selectedLegumes"
-	>
-	</lu-multi-select>`,
-	neededImports: {
-		'@lucca-front/ng/multi-select': ['LuMultiSelectInputComponent'],
-	},
-	storyPartial: {
-		args: {
-			selectedLegumes: allLegumes.slice(0, 12),
-		},
-	},
-});
-
 export const WithDisplayer = generateStory({
 	name: 'With Displayer',
 	description:
@@ -147,53 +121,6 @@ export const WithDisplayer = generateStory({
 	},
 });
 
-export const WithClearer = generateStory({
-	name: 'Clearer',
-	description: "Il est possible d'afficher un bouton pour vider la sélection via l'attribut `clearable`.",
-	template: `
-	<lu-multi-select
-		#selectRef
-		class="multiSelect"
-		placeholder="Placeholder..."
-		[(ngModel)]="selectedLegumes"
-		[options]="legumes"
-		[clearable]="true"
-	>
-		<ng-container *luOption="let legume; select: selectRef">{{ legume.name }}</ng-container>
-	</lu-multi-select>
-`,
-	neededImports: {
-		'@lucca-front/ng/core-select': ['LuOptionDirective'],
-		'@lucca-front/ng/multi-select': ['LuMultiSelectInputComponent'],
-	},
-	storyPartial: {
-		args: {
-			selectedLegumes: allLegumes.slice(0, 5),
-		},
-	},
-});
-
-export const WithClue = generateStory({
-	name: 'Clue',
-	description: "Il est possible d'afficher une barre de recherche pour filtrer les options en écoutant l'évènement `(clueChange)`.",
-	template: `
-	<lu-multi-select
-		#selectRef
-		class="multiSelect"
-		placeholder="Placeholder..."
-		[(ngModel)]="selectedLegumes"
-		[options]="legumes | filterLegumes:clue"
-		(clueChange)="clue = $event"
-	>
-		<ng-container *luOption="let legume; select: selectRef">{{ legume.name }}</ng-container>
-	</lu-multi-select>
-`,
-	neededImports: {
-		'@lucca-front/ng/core-select': ['LuOptionDirective'],
-		'@lucca-front/ng/multi-select': ['LuMultiSelectInputComponent'],
-	},
-});
-
 export const WithPagination = generateStory({
 	name: 'Pagination',
 	description: "Il est possible de charger les options au fur et à mesure en écoutant l'évènement `(nextPage)`.",
@@ -212,32 +139,6 @@ export const WithPagination = generateStory({
 	neededImports: {
 		'@lucca-front/ng/core-select': ['LuOptionDirective'],
 		'@lucca-front/ng/multi-select': ['LuMultiSelectInputComponent'],
-	},
-});
-
-export const Disabled = generateStory({
-	name: 'Disabled',
-	description: "Il est possible de désactiver le multi-select en utilisant l'attribut `disabled` ou via un FormControl.",
-	template: `
-	<lu-multi-select
-		#selectRef
-		class="multiSelect"
-		placeholder="Placeholder..."
-		[(ngModel)]="selectedLegumes"
-		[options]="legumes"
-		[disabled]="true"
-	>
-		<ng-container *luOption="let legume; select: selectRef">{{ legume.name }}</ng-container>
-	</lu-multi-select>
-`,
-	neededImports: {
-		'@lucca-front/ng/core-select': ['LuOptionDirective'],
-		'@lucca-front/ng/multi-select': ['LuMultiSelectInputComponent'],
-	},
-	storyPartial: {
-		args: {
-			selectedLegumes: allLegumes.slice(0, 5),
-		},
 	},
 });
 
@@ -288,67 +189,6 @@ export const ApiV4 = generateStory({
 		apiV4="/organization/structure/api/establishments"
 		[(ngModel)]="selectedEstablishment"
 	></lu-multi-select>
-	`,
-	neededImports: {
-		'@lucca-front/ng/multi-select': ['LuMultiSelectInputComponent'],
-		'@lucca-front/ng/simple-select/api': ['LuSimpleSelectApiV4Directive'],
-	},
-});
-
-export const Responsive = generateStory({
-	name: 'Responsive',
-	description: "Le panel s'ouvre en dessous du select quand il a assez de place, sinon il s'ouvre au dessus.",
-	template: `
-<div class="grid" style="height: 100vh;">
-	<div class="grid-6@mediaMinXS" style="height: 75vh;">
-		<label class="textfield mod-long">
-			<lu-multi-select
-				class="textfield-input"
-				[placeholder]="placeholder"
-				[options]="legumes"
-				[(ngModel)]="selectedLegumes"
-			>
-			</lu-multi-select>
-			<span class="textfield-label">Label</span>
-		</label>
-	</div>
-	<div class="grid-6@mediaMinXS" style="height: 75vh;">
-		<label class="textfield mod-long">
-			<lu-multi-select
-				class="textfield-input"
-				[placeholder]="placeholder"
-				[options]="legumes"
-				[(ngModel)]="selectedLegumes"
-			>
-			</lu-multi-select>
-			<span class="textfield-label">Label</span>
-		</label>
-	</div>
-	<div class="grid-6@mediaMinXS" style="height: 25vh;">
-		<label class="textfield mod-long">
-			<lu-multi-select
-				class="textfield-input"
-				[placeholder]="placeholder"
-				[options]="legumes"
-				[(ngModel)]="selectedLegumes"
-			>
-			</lu-multi-select>
-			<span class="textfield-label">Label</span>
-		</label>
-	</div>
-	<div class="grid-6@mediaMinXS" style="height: 25vh;">
-		<label class="textfield mod-long">
-			<lu-multi-select
-				class="multiSelect"
-				[placeholder]="placeholder"
-				[options]="legumes"
-				[(ngModel)]="selectedLegumes"
-			>
-			</lu-multi-select>
-			<span class="textfield-label">Label</span>
-		</label>
-	</div>
-</div>
 	`,
 	neededImports: {
 		'@lucca-front/ng/multi-select': ['LuMultiSelectInputComponent'],
@@ -424,10 +264,10 @@ const meta: Meta<LuSelectInputStoryComponent> = {
 	args: {
 		placeholder: 'Placeholder...',
 		legumes: allLegumes,
-		clearable: false,
+		clearable: true,
 		disabled: false,
 		loading: false,
-		expanded: true,
+		maxValuesShown: 500,
 		selectedLegumes: [],
 		page: 1,
 	},

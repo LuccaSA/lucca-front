@@ -43,7 +43,7 @@ export class LuMultiSelectInputComponent<T> extends ALuSelectInputComponent<T, T
 	valuesTpl?: TemplateRef<LuOptionContext<T[]>> | Type<unknown> = LuMultiSelectDefaultDisplayerComponent;
 
 	@Input({ transform: numberAttribute })
-	maxValuesShown = Infinity;
+	maxValuesShown = 500;
 
 	override _value: T[] = [];
 

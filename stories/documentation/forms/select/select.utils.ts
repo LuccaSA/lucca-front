@@ -16,7 +16,7 @@ export interface LuSelectInputStoryComponent extends ALuSelectInputComponent<ILe
 	page: number;
 	selectedLegume: ILegume | null;
 	selectedLegumes: ILegume[];
-	expanded: boolean;
+	maxValuesShown: number;
 	legumeColor: (legume: ILegume) => LegumeColor;
 	colorNameByColor: Record<LegumeColor, string>;
 }

@@ -82,31 +82,6 @@ export const WithDisplayer = generateStory({
 	},
 });
 
-export const WithClearer = generateStory({
-	name: 'Clearer',
-	description: "Il est possible d'afficher un bouton pour vider la sélection via l'attribut `clearable`.",
-	template: `
-	<lu-simple-select
-		#selectRef
-		placeholder="Placeholder..."
-		[(ngModel)]="value"
-		[options]="legumes"
-		[clearable]="true"
-	>
-		<ng-container *luOption="let legume; select: selectRef">{{ legume.name }}</ng-container>
-	</lu-simple-select>
-`,
-	neededImports: {
-		'@lucca-front/ng/core-select': ['LuOptionDirective'],
-		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent'],
-	},
-	storyPartial: {
-		args: {
-			value: allLegumes[4],
-		},
-	},
-});
-
 export const WithClue = generateStory({
 	name: 'Clue',
 	description: "Il est possible d'afficher une barre de recherche pour filtrer les options en écoutant l'évènement `(clueChange)`.",
@@ -137,26 +112,6 @@ export const WithPagination = generateStory({
 		[(ngModel)]="value"
 		[options]="legumes.slice(0, page * 10)"
 		(nextPage)="page = page + 1"
-	>
-		<ng-container *luOption="let legume; select: selectRef">{{ legume.name }}</ng-container>
-	</lu-simple-select>
-`,
-	neededImports: {
-		'@lucca-front/ng/core-select': ['LuOptionDirective'],
-		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent'],
-	},
-});
-
-export const Disabled = generateStory({
-	name: 'Disabled',
-	description: "Il est possible de désactiver le simple-select en utilisant l'attribut `disabled` ou via un FormControl.",
-	template: `
-	<lu-simple-select
-		#selectRef
-		placeholder="Placeholder..."
-		[(ngModel)]="value"
-		[options]="legumes"
-		[disabled]="true"
 	>
 		<ng-container *luOption="let legume; select: selectRef">{{ legume.name }}</ng-container>
 	</lu-simple-select>
@@ -285,7 +240,7 @@ const meta: Meta<LuSelectInputStoryComponent> = {
 	args: {
 		placeholder: 'Placeholder...',
 		legumes: allLegumes,
-		clearable: false,
+		clearable: true,
 		disabled: false,
 		loading: false,
 		page: 1,
