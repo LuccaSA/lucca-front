@@ -3,7 +3,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 import { HttpClientModule } from '@angular/common/http';
 import { discardPeriodicTasks, fakeAsync, tick } from '@angular/core/testing';
-import { fireEvent, render, screen } from '@testing-library/angular';
+import { RenderTemplateOptions, fireEvent, render, screen } from '@testing-library/angular';
 import { createMock } from '@testing-library/angular/jest-utils';
 import '@testing-library/jest-dom';
 import userEvent from '@testing-library/user-event';
@@ -55,13 +55,25 @@ describe('establishment select', () => {
 	<span class="textfield-label">Establishment Multiple Select</span>
 </label>`;
 
+	const rendererTemplateOptions: RenderTemplateOptions<LuEstablishmentSelectInputComponent> = {
+		imports: [LuEstablishmentSelectInputComponent, HttpClientModule],
+		componentProviders: [
+			{
+				provide: ALuEstablishmentService,
+				useValue: mockEstablishment,
+			},
+			{
+				provide: ALuLegalUnitService,
+				useValue: mockLegalUnit,
+			},
+		],
+	};
+
 	describe('Basic', () => {
 		it('should display dialog with a click on a lu select ', async () => {
 			// eslint-disable-next-line @typescript-eslint/no-explicit-any
 
-			await render(testingStoryTemplate, {
-				imports: [LuEstablishmentSelectInputComponent, HttpClientModule],
-			});
+			await render(testingStoryTemplate, rendererTemplateOptions);
 
 			const luSelectElement = screen.getByTestId('lu-select');
 			await userEvent.click(luSelectElement);
@@ -74,19 +86,7 @@ describe('establishment select', () => {
 			discardPeriodicTasks();
 
 			// eslint-disable-next-line @typescript-eslint/no-explicit-any
-			await render(testingStoryTemplate, {
-				imports: [LuEstablishmentSelectInputComponent, HttpClientModule],
-				componentProviders: [
-					{
-						provide: ALuEstablishmentService,
-						useValue: mockEstablishment,
-					},
-					{
-						provide: ALuLegalUnitService,
-						useValue: mockLegalUnit,
-					},
-				],
-			});
+			await render(testingStoryTemplate, rendererTemplateOptions);
 			const luSelectElement = await screen.findByTestId('lu-select');
 
 			expect(luSelectElement).toBeInTheDocument();
@@ -101,9 +101,7 @@ describe('establishment select', () => {
 		}));
 
 		it('should check a11y', async () => {
-			await render(testingStoryTemplate, {
-				imports: [LuEstablishmentSelectInputComponent, HttpClientModule],
-			});
+			await render(testingStoryTemplate, rendererTemplateOptions);
 			const luSelectElement = screen.getByTestId('lu-select');
 
 			const results = await axe(luSelectElement);
@@ -114,9 +112,7 @@ describe('establishment select', () => {
 	describe('multiple', () => {
 		it('should display dialog with a click on a lu select ', async () => {
 			// eslint-disable-next-line @typescript-eslint/no-explicit-any
-			await render(testingStoryTemplate, {
-				imports: [LuEstablishmentSelectInputComponent, HttpClientModule],
-			});
+			await render(testingStoryTemplate, rendererTemplateOptions);
 			const luSelectElement = screen.getByTestId('lu-select-multiple');
 			await userEvent.click(luSelectElement);
 			const dial = screen.getByRole('dialog');
@@ -125,19 +121,7 @@ describe('establishment select', () => {
 
 		it('should select all establishment', fakeAsync(async () => {
 			// eslint-disable-next-line @typescript-eslint/no-explicit-any
-			await render(testingStoryTemplate, {
-				imports: [LuEstablishmentSelectInputComponent, HttpClientModule],
-				componentProviders: [
-					{
-						provide: ALuEstablishmentService,
-						useValue: mockEstablishment,
-					},
-					{
-						provide: ALuLegalUnitService,
-						useValue: mockLegalUnit,
-					},
-				],
-			});
+			await render(testingStoryTemplate, rendererTemplateOptions);
 
 			const luSelectElement = await screen.findByTestId('lu-select-multiple');
 			expect(luSelectElement).toBeInTheDocument();
@@ -153,19 +137,7 @@ describe('establishment select', () => {
 
 		it('should deselect all establishment', fakeAsync(async () => {
 			// eslint-disable-next-line @typescript-eslint/no-explicit-any
-			await render(testingStoryTemplate, {
-				imports: [LuEstablishmentSelectInputComponent, HttpClientModule],
-				componentProviders: [
-					{
-						provide: ALuEstablishmentService,
-						useValue: mockEstablishment,
-					},
-					{
-						provide: ALuLegalUnitService,
-						useValue: mockLegalUnit,
-					},
-				],
-			});
+			await render(testingStoryTemplate, rendererTemplateOptions);
 			const luSelectElement = await screen.findByTestId('lu-select-multiple');
 			fireEvent.click(luSelectElement);
 			tick(300); // debouncetime du composant
@@ -181,9 +153,7 @@ describe('establishment select', () => {
 		}));
 
 		it('should check a11y', async () => {
-			await render(testingStoryTemplate, {
-				imports: [LuEstablishmentSelectInputComponent, HttpClientModule],
-			});
+			await render(testingStoryTemplate, rendererTemplateOptions);
 			const luSelectElement = screen.getByTestId('lu-select-multiple');
 			const results = await axe(luSelectElement);
 			expect(results).toHaveNoViolations(); // of course not

@@ -179,6 +179,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 		if (!this.isPanelOpen) {
 			return;
 		}
+		this.onTouched?.();
 		this.isPanelOpen$.next(false);
 		this.panelRef.close();
 		this._panelRef = undefined;

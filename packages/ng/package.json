@@ -1,38 +1,38 @@
 {
-	"name": "@lucca-front/ng",
-	"version": "0.0.0",
-	"description": "A library of icons made by the team @Lucca",
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/LuccaSA/lucca-front.git"
-	},
-	"schematics": "./schematics/collection.json",
-	"ng-update": {
-		"migrations": "./schematics/migrations.json",
-		"packageGroup": [
-			"@lucca-front/ng",
-			"@lucca-front/scss",
-			"@lucca-front/icons"
-		]
-	},
-	"license": "MIT",
-	"public": true,
-	"keywords": [
-		"lucca",
-		"angular"
-	],
-	"author": "Guilde Front Lucca <guilde-front@lucca.fr>",
-	"peerDependencies": {
-		"@angular/common": "^16.0.0",
-		"@angular/core": "^16.0.0",
-		"@angular/cdk": "^16.0.0",
-		"@lucca-front/icons": "*",
-		"@lucca-front/scss": "*",
-		"@types/dompurify": "^3.0.0",
-		"dompurify": "^3.0.0",
-		"rxjs": "^6.0.0 || ^7.0.0"
-	},
-	"bugs": {
-		"url": "https://github.com/LuccaSA/lucca-front/issues"
-	}
+  "name": "@lucca-front/ng",
+  "version": "0.0.0",
+  "description": "A library of icons made by the team @Lucca",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LuccaSA/lucca-front.git"
+  },
+  "schematics": "./schematics/collection.json",
+  "ng-update": {
+    "migrations": "./schematics/migrations.json",
+    "packageGroup": [
+      "@lucca-front/ng",
+      "@lucca-front/scss",
+      "@lucca-front/icons"
+    ]
+  },
+  "license": "MIT",
+  "public": true,
+  "keywords": [
+    "lucca",
+    "angular"
+  ],
+  "author": "Guilde Front Lucca <guilde-front@lucca.fr>",
+  "peerDependencies": {
+    "@angular/common": "^17.0.2",
+    "@angular/core": "^17.0.2",
+    "@angular/cdk": "^17.0.0",
+    "@lucca-front/icons": "*",
+    "@lucca-front/scss": "*",
+    "@types/dompurify": "^3.0.0",
+    "dompurify": "^3.0.0",
+    "rxjs": "^7.8.1"
+  },
+  "bugs": {
+    "url": "https://github.com/LuccaSA/lucca-front/issues"
+  }
 }

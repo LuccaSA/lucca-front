@@ -1,6 +1,6 @@
 <label class="formLabel" id="{{id}}-label" for="{{id}}" [class.u-mask]="hiddenLabel" attr.aria-hidden="{{hiddenLabel}}">
 	{{label}}<sup class="formLabel-required" aria-hidden="true" *ngIf="required">*</sup>
-	<span aria-hidden="true" class="lucca-icon icon-helpOutline" *ngIf="tooltip" [luTooltip]="tooltip"></span>
+	<lu-icon icon="helpOutline" alt="" *ngIf="tooltip" [luTooltip]="tooltip"></lu-icon>
 </label>
 <ng-container [ngSwitch]="layout">
 	<div class="textField" *ngSwitchCase="'default'">

@@ -1,2 +1,4 @@
 @mixin vars {
+	--components-divider-fontSize: var(--sizes-S-fontSize);
+	--components-divider-lineHeight: var(--sizes-S-lineHeight);
 }

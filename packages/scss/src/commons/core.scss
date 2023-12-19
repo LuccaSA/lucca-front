@@ -5,22 +5,22 @@
 @use '@lucca-front/scss/src/commons/config';
 @use '@lucca-front/icons/src/commons/core' as transform;
 
-$contents: '0';
+$contents: '100\\%', 'fit-content';
 $boxModel: 'margin', 'padding', 'border';
 $boxDirection: '', 'top', 'bottom', 'left', 'right', 'inline', 'block';
 $corners: '', 'top-left-', 'top-right-', 'bottom-left-', 'bottom-right-';
 $gaps: 'column-gap', 'row-gap', 'gap';
-$displays: 'block', 'flex', 'inline', 'inline-flex', 'inline-block', 'none';
+$displays: 'block', 'flex', 'inline', 'inline-flex', 'inline-block', 'contents', 'none';
 $direction: 'column', 'column-reverse', 'row', 'row-reverse';
 $wrap: 'wrap', 'nowrap', 'wrap-reverse';
 $justify: 'flex-start', 'flex-end', 'space-around', 'space-between', 'space-evenly', 'center';
 $align: 'flex-start', 'flex-end', 'baseline', 'stretch', 'center';
-$flex: '0', '1', 'auto';
+$flex: '0', '1';
 $basis: '0', 'auto';
 $order: '-1', '1';
 $textAlign: 'left', 'center', 'right';
 $visibility: 'visible', 'hidden', 'collapse';
-$fontWeight: '400', '600', '700', '900', 'normal', 'semibold', 'bold', 'black';
+$fontWeight: '400', '600', '700', '900', 'normal', 'bold';
 $fontStyle: 'normal', 'italic';
 $pointerEvents: 'none', 'auto';
 $scrollBehavior: 'auto', 'smooth';
@@ -41,11 +41,11 @@ $overflow: 'hidden', 'auto', 'visible', 'scroll';
 	@each $property in $properties {
 		@if $prefix == '' {
 			.u-#{transform.camelize($name)}#{if(string.slice($property, 1, 1) == '-', 'Minus', '')}#{transform.capitalize(transform.camelize($property))} {
-				#{$name}: #{$property} #{$suffix};
+				#{$name}: #{transform.replace($property, '\\', '')} #{$suffix};
 			}
 		} @else {
 			.u-#{$prefix}#{transform.capitalize(transform.camelize($name))}#{if(string.slice($property, 1, 1) == '-', 'Minus', '')}#{transform.capitalize(transform.camelize($property))} {
-				#{$name}: #{$property} #{$suffix};
+				#{$name}: #{transform.replace($property, '\\', '')} #{$suffix};
 			}
 		}
 	}

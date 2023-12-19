@@ -137,6 +137,28 @@ To check available options:
 lucca angular update --help
 ```
 
+To update a specific version of Lucca Front (@ points either to a specific version or a npm release channel): 
+
+```
+npx ng update @lucca-front/ng@16.5.0
+```
+
+For release:
+
+```
+npx ng update @lucca-front/ng@rc
+```
+
+If you want the latest version you can run this equivalent functions:  
+
+```
+npx ng update @lucca-front/ng
+```
+or
+```
+npx ng update @lucca-front/ng@latest
+```
+
 ## Storybook
 In order to work on Lucca Front, we use Storybook to display components.
 

@@ -1,13 +1,13 @@
 @mixin active {
-	--components-verticalNavigation-link-background: var(--palettes-primary-50);
+	--components-verticalNavigation-link-background: var(--palettes-primary-100);
 	color: var(--components-verticalNavigation-link-color);
 
   &:hover {
-  	--components-verticalNavigation-link-background: var(--palettes-primary-100);
+  	--components-verticalNavigation-link-background: var(--palettes-primary-200);
   }
 
 	&:active {
-		--components-verticalNavigation-link-background: var(--palettes-primary-200);
+		--components-verticalNavigation-link-background: var(--palettes-primary-300);
 	}
 }
 

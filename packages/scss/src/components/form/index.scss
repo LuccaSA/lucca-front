@@ -14,6 +14,15 @@
 		@include XS;
 	}
 
+	&.mod-withArrow {
+		@include withArrow;
+
+
+		&.mod-S {
+			@include withArrowS;
+		}
+	}
+
 	&.mod-checkable,
 	&:has(.checkboxField),
 	&:has(.switchField) {

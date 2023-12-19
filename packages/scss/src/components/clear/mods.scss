@@ -1,17 +1,17 @@
 @mixin primary {
-  background-color: var(--colors-white-color);
-  color: var(--palettes-primary-700);
+	--components-clear-cross-color: var(--palettes-primary-700);
+	--components-clear-background: var(--colors-white-color);
 
-  &:hover {
-    background-color: var(--palettes-primary-50);
-  }
+	&:hover {
+		--components-clear-background: var(--palettes-primary-50);
+	}
 
-  &:active {
-    background-color: var(--palettes-primary-50);
-  }
+	&:active {
+		--components-clear-background: var(--palettes-primary-50);
+	}
 }
 
 @mixin S {
-  --components-clear-size: .75rem;
-  --components-clear-icon-size: .75rem;
+	--components-clear-size: 0.75rem;
+	--icon-size: 0.75rem;
 }

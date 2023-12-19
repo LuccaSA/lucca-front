@@ -169,7 +169,8 @@
 					<input class="textfield-input" type="password" placeholder="Placeholder" value="azerty12345#@!%;" />
 					<span class="textfield-label">Password</span>
 					<span class="textfield-suffix">
-						<a href="#" onClick="event.preventDefault()" role="button" aria-pressed="false" class="textfield-suffix-action">
+						<a href="#" onClick="event.preventDefault()" role="button" aria-pressed="false"
+							class="textfield-suffix-action">
 							<span aria-hidden="true" class="lucca-icon icon-eye"></span>
 							<span aria-hidden="true" class="lucca-icon icon-eyeStrikethrough"></span>
 							<span class="u-mask">Show password</span>
@@ -184,7 +185,8 @@
 					<input class="textfield-input" type="text" placeholder="Placeholder" value="azerty12345#@!%;" />
 					<span class="textfield-label">Password</span>
 					<span class="textfield-suffix">
-						<a href="#" onClick="event.preventDefault()" role="button" aria-pressed="true" class="textfield-suffix-action">
+						<a href="#" onClick="event.preventDefault()" role="button" aria-pressed="true"
+							class="textfield-suffix-action">
 							<span aria-hidden="true" class="lucca-icon icon-eye"></span>
 							<span aria-hidden="true" class="lucca-icon icon-eyeStrikethrough"></span>
 							<span class="u-mask">Show password</span>
@@ -195,12 +197,13 @@
 		</div>
 	</div>
 
-	<em><strong>Tip:</strong> Use <code class="code">&lt;label class="textfield mod-block"&gt;</code> for a 100% width input.</em><br />
-	<em
-		><strong>Tip:</strong> Use <code class="code">&lt;input class="textfield-input is-filled"&gt;</code> to let the label on the upper state
-		with <code class="code">mod-material</code>.</em
-	><br />
-	<em><strong>Tip:</strong> You can use <code class="code">placeholder="…"</code> on <code class="code">textfield-input</code>.</em>
+	<em><strong>Tip:</strong> Use <code class="code">&lt;label class="textfield mod-block"&gt;</code> for a 100% width
+		input.</em><br />
+	<em><strong>Tip:</strong> Use <code class="code">&lt;input class="textfield-input is-filled"&gt;</code> to let the
+		label on the upper state
+		with <code class="code">mod-material</code>.</em><br />
+	<em><strong>Tip:</strong> You can use <code class="code">placeholder="…"</code> on <code
+			class="code">textfield-input</code>.</em>
 </section>
 
 <!-- Helpers & Errors -->
@@ -236,21 +239,24 @@
 				<input class="textfield-input is-error" type="text" placeholder="Placeholder" />
 				<span class="textfield-label">Label</span>
 				<span class="textfield-messages">
-					<span class="textfield-messages-error"><span aria-hidden="true" class="lucca-icon icon-signError"></span> Helper message</span>
+					<span class="textfield-messages-error"><span aria-hidden="true"
+							class="lucca-icon icon-signError"></span> Helper message</span>
 				</span>
 			</label>
 			<label class="textfield mod-block mod-S u-marginBottomXS">
 				<input class="textfield-input is-error" type="text" placeholder="Placeholder" />
 				<span class="textfield-label">Label</span>
 				<span class="textfield-messages">
-					<span class="textfield-messages-error"><span aria-hidden="true" class="lucca-icon icon-signError"></span> Helper message</span>
+					<span class="textfield-messages-error"><span aria-hidden="true"
+							class="lucca-icon icon-signError"></span> Helper message</span>
 				</span>
 			</label>
 			<label class="textfield mod-block mod-XS">
 				<input class="textfield-input is-error" type="text" placeholder="Placeholder" />
 				<span class="textfield-label">Label</span>
 				<span class="textfield-messages">
-					<span class="textfield-messages-error"><span aria-hidden="true" class="lucca-icon icon-signError"></span> Helper message</span>
+					<span class="textfield-messages-error"><span aria-hidden="true"
+							class="lucca-icon icon-signError"></span> Helper message</span>
 				</span>
 			</label>
 		</div>
@@ -274,7 +280,8 @@
 					<input class="textfield-input is-error" type="text" placeholder="Placeholder" />
 					<span class="textfield-label">Label</span>
 					<span class="textfield-messages">
-						<span class="textfield-messages-error"><span aria-hidden="true" class="lucca-icon icon-signError"></span> Helper message</span>
+						<span class="textfield-messages-error"><span aria-hidden="true"
+								class="lucca-icon icon-signError"></span> Helper message</span>
 					</span>
 				</label>
 			</div>
@@ -301,7 +308,8 @@
 				<input class="textfield-input is-error" type="text" placeholder="Placeholder" />
 				<span class="textfield-label">Label</span>
 				<span class="textfield-messages">
-					<span class="textfield-messages-error"><span aria-hidden="true" class="lucca-icon icon-signError"></span> Helper message</span>
+					<span class="textfield-messages-error"><span aria-hidden="true"
+							class="lucca-icon icon-signError"></span> Helper message</span>
 				</span>
 			</label>
 			<label class="textfield mod-compact mod-block">
@@ -317,7 +325,8 @@
 
 <h2>Inline validation</h2>
 <p>
-	You can add a <code class="code">is-loading</code> and a <code class="code">is-valid</code> or <code class="code">is-invalid</code> class
+	You can add a <code class="code">is-loading</code> and a <code class="code">is-valid</code> or <code
+		class="code">is-invalid</code> class
 	on <code class="code">&lt;label class="textfield"&gt;</code> for your inline validation.
 </p>
 
@@ -326,13 +335,15 @@
 	<div class="grid mod-XSBottom">
 		<div class="grid-column" style="--grid-colspan: 4">
 			<label class="textfield mod-block">
-				<input class="textfield-input" type="text" placeholder="Focus / Unfocus me" onblur="validationFocus(this)" />
+				<input class="textfield-input" type="text" placeholder="Focus / Unfocus me"
+					onblur="validationFocus(this)" />
 				<span class="textfield-label">Loading > valid</span>
 			</label>
 		</div>
 		<div class="grid-column" style="--grid-colspan: 4">
 			<label class="textfield mod-block">
-				<input class="textfield-input" type="text" placeholder="Focus / Unfocus me" onblur="unvalidationFocus(this)" />
+				<input class="textfield-input" type="text" placeholder="Focus / Unfocus me"
+					onblur="unvalidationFocus(this)" />
 				<span class="textfield-label">Loading > invalid</span>
 			</label>
 		</div>
@@ -377,16 +388,15 @@
 	&lt;span class="textfield-label"&gt;Label&lt;/span&gt;
 	&lt;span class="textfield-suffix"&gt;€&lt;/span&gt;
 &lt;/label&gt;</code> -->
-	<em
-		><strong>Tip:</strong> If you are using a classic textfield without label, you'll need to add a
-		<code class="code">mod-noLabel</code> class.</em
-	>
+	<em><strong>Tip:</strong> If you are using a classic textfield without label, you'll need to add a
+		<code class="code">mod-noLabel</code> class.</em>
 </section>
 
 <!-- Inline inputs -->
 <section class="contentSection">
 	<h2>Inline</h2>
-	<p>Inline textfields works well with <code class="code">mod-material</code>, but you can also use it with standard style.</p>
+	<p>Inline textfields works well with <code class="code">mod-material</code>, but you can also use it with standard
+		style.</p>
 	<label class="textfield mod-inline mod-material mod-shortest">
 		<input class="textfield-input" type="text" />
 		<span class="textfield-label">Label</span>
@@ -424,11 +434,10 @@
 </section>
 
 <section class="contentSection">
-	<em
-		><strong>Tip:</strong> You can change the input lenght with <code class="code">mod-longest</code>,<code class="code">mod-longer</code
-		>,<code class="code">mod-long</code>, <code class="code">mod-short</code>,<code class="code">mod-shorter</code> or
-		<code class="code">mod-shortest</code>.</em
-	><br />
+	<em><strong>Tip:</strong> You can change the input lenght with <code class="code">mod-longest</code>,<code
+			class="code">mod-longer</code>,<code class="code">mod-long</code>, <code class="code">mod-short</code>,<code
+			class="code">mod-shorter</code> or
+		<code class="code">mod-shortest</code>.</em><br />
 	<em><strong>Tip:</strong> You can use inline input inside standard text:</em>
 	<div>
 		Hello I’m
@@ -467,10 +476,8 @@
 			</label>
 		</div>
 	</div>
-	<em
-		><strong>Tip:</strong> You can change the input style using <code class="code">mod-material</code> &
-		<code class="code">mod-compact</code></em
-	>
+	<em><strong>Tip:</strong> You can change the input style using <code class="code">mod-material</code> &
+		<code class="code">mod-compact</code></em>
 </section>
 
 <!-- Clearable Inputs -->
@@ -482,7 +489,6 @@
 				<input class="textfield-input" type="text" placeholder="Placeholder" />
 				<span class="textfield-label">Label</span>
 				<a href="#" onClick="event.preventDefault()" role="button" class="clear textfield-clear">
-					<span aria-hidden="true" class="lucca-icon">thin_cross</span>
 					<span class="u-mask">Clear</span>
 				</a>
 			</label>
@@ -490,7 +496,6 @@
 				<input class="textfield-input" type="text" placeholder="Placeholder" />
 				<span class="textfield-label">Label</span>
 				<a href="#" onClick="event.preventDefault()" role="button" class="clear textfield-clear">
-					<span aria-hidden="true" class="lucca-icon">thin_cross</span>
 					<span class="u-mask">Clear</span>
 				</a>
 			</label>
@@ -498,32 +503,31 @@
 				<input class="textfield-input" type="text" placeholder="Placeholder" />
 				<span class="textfield-label">Label</span>
 				<a href="#" onClick="event.preventDefault()" role="button" class="clear textfield-clear">
-					<span aria-hidden="true" class="lucca-icon icon-signClose"></span>
 					<span class="u-mask">Clear</span>
 				</a>
 			</label>
 
 			<h3>Legacy clearer</h3>
 			<label class="textfield mod-block mod-search mod-clearable">
-			  <input class="textfield-input" type="text" placeholder="Placeholder" />
-			  <span class="textfield-label">Label</span>
-			  <a role="button" href="#" class="actionIcon textfield-actionClear">
+				<input class="textfield-input" type="text" placeholder="Placeholder" />
+				<span class="textfield-label">Label</span>
+				<a role="button" href="#" class="actionIcon textfield-actionClear">
 			    <span aria-hidden="true" class="lucca-icon icon-thinCross"></span>
 			    <span class="u-mask">Clear</span>
 			  </a>
 			</label>
 			<label class="textfield mod-block mod-search mod-clearable mod-S">
-			  <input class="textfield-input" type="text" placeholder="Placeholder" />
-			  <span class="textfield-label">Label</span>
-			  <a role="button" href="#" class="actionIcon textfield-actionClear">
+				<input class="textfield-input" type="text" placeholder="Placeholder" />
+				<span class="textfield-label">Label</span>
+				<a role="button" href="#" class="actionIcon textfield-actionClear">
 			    <span aria-hidden="true" class="lucca-icon icon-thinCross"></span>
 			    <span class="u-mask">Clear</span>
 			  </a>
 			</label>
 			<label class="textfield mod-block mod-search mod-clearable mod-XS">
-			  <input class="textfield-input" type="text" placeholder="Placeholder" />
-			  <span class="textfield-label">Label</span>
-			  <a role="button" href="#" class="actionIcon textfield-actionClear">
+				<input class="textfield-input" type="text" placeholder="Placeholder" />
+				<span class="textfield-label">Label</span>
+				<a role="button" href="#" class="actionIcon textfield-actionClear">
 			    <span aria-hidden="true" class="lucca-icon icon-thinCross"></span>
 			    <span class="u-mask">Clear</span>
 			  </a>
@@ -536,7 +540,6 @@
 				<input class="textfield-input" type="text" placeholder="Placeholder" />
 				<label class="textfield-label">Search</label>
 				<a href="#" onClick="event.preventDefault()" role="button" class="clear textfield-clear">
-					<span aria-hidden="true" class="lucca-icon icon-signClose"></span>
 					<span class="u-mask">Clear</span>
 				</a>
 			</label>
@@ -546,7 +549,6 @@
 				<input class="textfield-input" type="text" placeholder="Placeholder" />
 				<span class="textfield-label">Label</span>
 				<a href="#" onClick="event.preventDefault()" role="button" class="clear textfield-clear">
-					<span aria-hidden="true" class="lucca-icon icon-signClose"></span>
 					<span class="u-mask">Clear</span>
 				</a>
 			</label>
@@ -556,7 +558,6 @@
 				<input class="textfield-input" type="text" />
 				<span class="textfield-label">Label</span>
 				<a href="#" onClick="event.preventDefault()" role="button" class="clear textfield-clear">
-					<span aria-hidden="true" class="lucca-icon icon-signClose"></span>
 					<span class="u-mask">Clear</span>
 				</a>
 			</label>
@@ -601,8 +602,7 @@
 				<div class="form-group">
 					<label class="textfield mod-multiline mod-block">
 						<textarea class="textfield-input is-filled" disabled>
-Disabled textarea ø Disabled textarea ø Disabled textarea ø Disabled textarea ø</textarea
-						>
+Disabled textarea ø Disabled textarea ø Disabled textarea ø Disabled textarea ø</textarea>
 						<span class="textfield-label">Label</span>
 					</label>
 				</div>
@@ -621,8 +621,7 @@ Disabled textarea ø Disabled textarea ø Disabled textarea ø Disabled textarea
 				<div class="form-group">
 					<label class="textfield mod-material mod-multiline mod-block">
 						<textarea class="textfield-input is-filled" disabled>
-Disabled textarea ø Disabled textarea ø Disabled textarea ø Disabled textarea ø</textarea
-						>
+Disabled textarea ø Disabled textarea ø Disabled textarea ø Disabled textarea ø</textarea>
 						<span class="textfield-label">Label</span>
 					</label>
 				</div>
@@ -641,19 +640,18 @@ Disabled textarea ø Disabled textarea ø Disabled textarea ø Disabled textarea
 				<div class="form-group">
 					<label class="textfield mod-multiline mod-compact mod-block">
 						<textarea class="textfield-input is-filled" disabled>
-Disabled textarea ø Disabled textarea ø Disabled textarea ø Disabled textarea ø</textarea
-						>
+Disabled textarea ø Disabled textarea ø Disabled textarea ø Disabled textarea ø</textarea>
 						<span class="textfield-label">Label</span>
 					</label>
 				</div>
 			</div>
 		</div>
 	</div>
-	<em><strong>Tip:</strong> Use <code class="code">&lt;label class="textfield mod-block"&gt;</code> for a 100% width textarea.</em><br />
-	<em
-		><strong>Tip:</strong> Use <code class="code">&lt;label class="textfield-input is-filled"&gt;</code> to let the label on the upper state
-		with <code class="code">mod-material</code>.</em
-	>
+	<em><strong>Tip:</strong> Use <code class="code">&lt;label class="textfield mod-block"&gt;</code> for a 100% width
+		textarea.</em><br />
+	<em><strong>Tip:</strong> Use <code class="code">&lt;label class="textfield-input is-filled"&gt;</code> to let the
+		label on the upper state
+		with <code class="code">mod-material</code>.</em>
 </section>
 
 <h2>Radio label</h2>

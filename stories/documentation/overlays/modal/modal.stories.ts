@@ -99,7 +99,7 @@ class ModalStories {
 	@Input() position: 'left' | 'right' = 'right';
 	@Input() panelClass: string;
 	@Input() undismissable: boolean;
-	@Input() size: 'XS' | 'S' | 'M' | 'L' | 'XL' | 'XXL' = 'M';
+	@Input() size: 'XS' | 'S' | 'M' | 'L' | 'XL' = 'M';
 	@Input() noBackdrop: boolean;
 
 	@Input() useDynamicContent: boolean;

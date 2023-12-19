@@ -45,6 +45,16 @@
 				<span class="u-mask">{{intl.clear}}</span>
 			</button>
 			<span aria-hidden="true" class="textField-input-affix-icon lucca-icon icon-{{searchIcon}}" *ngIf="hasSearchIcon"></span>
+			<button
+				[attr.aria-pressed]="showPassword"
+				type="button"
+				class="actionIcon textField-input-affix-passwordToggle"
+				(click)="togglePasswordVisibility()"
+				*ngIf="hasTogglePasswordVisibilityIcon()"
+			>
+				<span aria-hidden="true" class="lucca-icon icon-{{showPassword ? 'unwatch' : 'watch'}}"></span>
+				<span class="u-mask">{{intl.togglePasswordVisibility}}</span>
+			</button>
 		</div>
 	</div>
 </lu-form-field>

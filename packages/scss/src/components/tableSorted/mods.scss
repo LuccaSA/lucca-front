@@ -8,7 +8,7 @@
 	cursor: pointer;
 
 	&::after {
-		@include icon.generate('arrow_top');
+		@include icon.generate('arrow_bottom');
 
 		border-radius: var(--commons-borderRadius-M);
 		opacity: 0;
@@ -61,7 +61,7 @@
 	}
 
 	&::before {
-		@include icon.generate('arrow_top');
+		@include icon.generate('arrow_bottom');
 
 		border-radius: var(--commons-borderRadius-M);
 		opacity: 0;

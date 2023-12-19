@@ -27,7 +27,7 @@ export class LuSimpleSelectApiV4Directive<T extends ILuApiItem> extends ALuSimpl
 	}
 
 	protected url$ = new ReplaySubject<string>(1);
-	protected sort$ = new BehaviorSubject<string | null>('name,asc');
+	protected sort$ = new BehaviorSubject<string | null>('+name');
 	protected filters$ = new BehaviorSubject<Record<string, string | number | boolean>>({});
 
 	protected httpClient = inject(HttpClient);
@@ -36,14 +36,22 @@ export class LuSimpleSelectApiV4Directive<T extends ILuApiItem> extends ALuSimpl
 		map(([filters, sort, clue]) => ({
 			...filters,
 			...(sort ? { sort } : {}),
-			...(clue ? { search: encodeURIComponent(clue) } : {}),
+			...(clue ? { search: clue } : {}),
 		})),
 	);
 
 	protected override getOptions(params: Record<string, string | number | boolean>, page: number): Observable<T[]> {
 		return this.url$.pipe(
 			take(1),
-			switchMap((url) => this.httpClient.get<T[] | { items: T[] }>(url, { params: { ...params, page: page + 1, limit: this.pageSize } })),
+			switchMap((url) =>
+				this.httpClient.get<T[] | { items: T[] }>(url, {
+					params: {
+						...params,
+						page: page + 1,
+						limit: this.pageSize,
+					},
+				}),
+			),
 			map((res) => (Array.isArray(res) ? res : res?.items) ?? []),
 		);
 	}

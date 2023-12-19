@@ -1,3 +1,5 @@
+@use '@lucca-front/scss/src/components/numericBadge/exports' as numericBadge;
+
 @mixin active {
 	color: var(--palettes-700, var(--palettes-primary-700));
 
@@ -18,8 +20,7 @@
 	}
 
 	.numericBadge {
-		--components-numericBadge-background: var(--palettes-primary-200);
-		--components-numericBadge-color: var(--palettes-primary-800);
+		@include numericBadge.primary;
 	}
 }
 
@@ -31,7 +32,6 @@
 	}
 
 	.numericBadge {
-		--components-numericBadge-background: var(--palettes-grey-200);
-		--components-numericBadge-color: var(--palettes-grey-500);
+		@include numericBadge.disabled;
 	}
 }

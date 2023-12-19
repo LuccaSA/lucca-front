@@ -3,7 +3,8 @@
 	color: var(--components-navSide-fullwidth-palette-selected-text);
 	opacity: 1;
 
-	.navSide-item-alert { // deprecated
+	.navSide-item-alert {
+		// deprecated
 		background-color: var(--components-navSide-fullwidth-palette-selected-alert-text);
 		color: var(--components-navSide-fullwidth-palette-selected-alert-color);
 	}
@@ -11,7 +12,7 @@
 
 @mixin expanded {
 	.navSide-item-arrow {
-		transform: rotate(-0.25turn);
+		transform: rotate(-90deg);
 	}
 }
 

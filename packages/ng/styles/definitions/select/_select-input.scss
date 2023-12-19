@@ -31,6 +31,7 @@
 			pointer-events: none;
 			position: absolute;
 			right: var(--components-select-input-padding-horizontal);
+			transition: transform var(--commons-animations-durations-standard) ease;
 		}
 
 		&[disabled], &.is-disabled {
@@ -40,10 +41,10 @@
 	}
 
 	.lu-select-display-wrapper {
-		display: flex;
+		display: block;
 		text-overflow: ellipsis;
 		white-space: nowrap;
-		gap: var(--spacings-XXS);
+		overflow: hidden;
 	}
 
 	.lu-select-value {
@@ -80,12 +81,6 @@
 	}
 
 	::ng-deep .lu-select-value {
-
-		lu-simple-select-default-option {
-			max-width: 5rem;
-			text-overflow: ellipsis;
-			overflow: hidden;
-		}
 
 		.label {
 			padding: var(--spacings-XXS) var(--spacings-XS);
@@ -152,7 +147,7 @@
 			}
 
 			.numericBadge {
-				@include numericBadge.s;
+				@include numericBadge.S;
 			}
 		}
 	}
@@ -288,6 +283,13 @@
 		.lu-select-value {
 			display: flex;
 			align-items: flex-start;
+		}
+	}
+
+	// Focused
+	:host-context(.textfield .textfield-input.is-focused) {
+		&::after {
+			transform: rotate(-180deg);
 		}
 	}
 

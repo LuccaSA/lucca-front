@@ -1,3 +1,5 @@
+@use '@lucca-front/icons/src/icon/exports' as icon;
+
 @mixin component {
   display: flex;
   gap: var(--components-inlineMessage-gap);
@@ -6,7 +8,7 @@
   color: var(--components-inlineMessage-color);
 
   .lucca-icon {
-    font-size: var(--components-inlineMessage-icon-fontSize);
+    @include icon.XS;
     color: var(--components-inlineMessage-icon-color);
     margin-top: 2px;
   }

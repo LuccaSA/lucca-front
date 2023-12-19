@@ -1,7 +1,11 @@
 @use '@lucca-front/icons/src/main';
 
-.icon-color-success {
-  color: var(--palettes-success-700);
+:host {
+  display: inline-flex;
+}
+
+.icon-color-primary {
+  color: var(--palettes-primary-700);
 }
 
 .icon-color-secondary {
@@ -15,7 +19,6 @@
 .icon-color-warning {
   color: var(--palettes-warning-700);
 }
-
 
 .icon-color-success {
   color: var(--palettes-success-700);

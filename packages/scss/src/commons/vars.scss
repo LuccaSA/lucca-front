@@ -1,3 +1,5 @@
+@use 'sass:map';
+
 @use '@lucca-front/scss/src/commons/config';
 @use '@lucca-front/scss/src/commons/core';
 
@@ -9,26 +11,9 @@
 	@include core.cssvars('commons-loading', config.$loading);
 	@include core.cssvars('commons-text-link', config.$textLink);
 
-	@include core.cssvars('palettes-lucca', config.$lucca);
-	@include core.cssvars('palettes-primary', config.$primary);
-	@include core.cssvars('palettes-secondary', config.$secondary);
-	@include core.cssvars('palettes-grey', config.$grey);
-	@include core.cssvars('palettes-navigation', config.$navigation);
-	@include core.cssvars('palettes-success', config.$success);
-	@include core.cssvars('palettes-warning', config.$warning);
-	@include core.cssvars('palettes-error', config.$error);
-	@include core.cssvars('palettes-kiwi', config.$kiwi);
-	@include core.cssvars('palettes-lime', config.$lime);
-	@include core.cssvars('palettes-cucumber', config.$cucumber);
-	@include core.cssvars('palettes-mint', config.$mint);
-	@include core.cssvars('palettes-glacier', config.$glacier);
-	@include core.cssvars('palettes-lagoon', config.$lagoon);
-	@include core.cssvars('palettes-blueberry', config.$blueberry);
-	@include core.cssvars('palettes-lavender', config.$lavender);
-	@include core.cssvars('palettes-grape', config.$grape);
-	@include core.cssvars('palettes-watermelon', config.$watermelon);
-	@include core.cssvars('palettes-pumpkin', config.$pumpkin);
-	@include core.cssvars('palettes-pineapple', config.$pineapple);
+	@each $palette in config.$allPalettes {
+		@include core.cssvars('palettes-#{$palette}', map.get(config.$palettesInterpolation, $palette));
+	}
 
 	@include core.cssvars('breakpoints', config.$breakpoints, '-breakAt');
 	@include core.cssvars('spacings', config.$spacings);

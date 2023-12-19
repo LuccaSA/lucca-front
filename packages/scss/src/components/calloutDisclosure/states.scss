@@ -1,0 +1,5 @@
+@mixin open {
+  .calloutDisclosure-summary-chevron {
+    transform: rotate(-180deg);
+  }
+}
