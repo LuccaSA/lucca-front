@@ -1,2 +1,21 @@
+@use '@lucca-front/scss/src/components/container/exports' as container;
+
 @mixin vars {
+	@include container.vars;
+	--components-emptyState-background-color: var(--commons-background-base);
+	--components-emptyState-max-width: var(--components-container-max-width);
+	--components-emptyState-illustration-top-right-offset-left: min(calc(100% + 5rem), calc(var(--components-emptyState-max-width) - 8.5rem));
+	--components-emptyState-illustration-top-right-offset-left-S: min(
+		calc(100% + 3.5rem),
+		calc(var(--components-emptyState-max-width) - 8.5rem)
+	);
+	--background-left-01: url('https://cdn.lucca.fr/lucca-front/assets/empty-states/poplee/bubbles-bottom-left-01.svg');
+	--foreground-left-01: url('https://cdn.lucca.fr/lucca-front/assets/empty-states/poplee/core-hr-01.svg');
+	--background-right-01: url('https://cdn.lucca.fr/lucca-front/assets/empty-states/poplee/bubbles-top-right-01.svg');
+	--foreground-right-01: url('https://cdn.lucca.fr/lucca-front/assets/empty-states/generic/coffee-01.svg');
+
+	--components-emptyState-illustration-background-bottom-left: var(--background-left-01);
+	--components-emptyState-illustration-foreground-bottom-left: var(--foreground-left-01);
+	--components-emptyState-illustration-background-top-right: var(--background-right-01);
+	--components-emptyState-illustration-foreground-top-right: var(--foreground-right-01);
 }
