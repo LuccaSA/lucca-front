@@ -19,7 +19,7 @@ export default {
 	},
 } as Meta;
 
-export const Basic: StoryObj<TextfieldComponent & { disabled: boolean }> = {
+export const Password: StoryObj<TextfieldComponent & { disabled: boolean }> = {
 	render: ({ label, required, hiddenLabel, inlineMessage, size, placeholder, prefix, suffix, inlineMessageState, hasClearer, disabled, tooltip, hasSearchIcon, searchIcon, type }) => {
 		return {
 			props: {
@@ -51,25 +51,22 @@ export const Basic: StoryObj<TextfieldComponent & { disabled: boolean }> = {
 		};
 	},
 	args: {
-		label: 'Label',
-		required: true,
+		label: 'Password',
+		required: false,
 		hiddenLabel: false,
-		hasClearer: true,
+		hasClearer: false,
 		hasSearchIcon: false,
+		type: 'password',
 		searchIcon: 'search',
 		disabled: false,
-		inlineMessage: 'Helper Text',
+		inlineMessage: '',
 		inlineMessageState: 'default',
 		size: 'M',
-		placeholder: 'Placeholder',
-		tooltip: "Je suis un message d'aide",
-		prefix: {
-			icon: 'dollar',
-			ariaLabel: 'Dollar',
-		},
+		placeholder: '',
+		tooltip: '',
 		suffix: {
-			content: '€/j',
-			ariaLabel: 'euros par jour',
+			content: '',
+			ariaLabel: '',
 		},
 	},
 };

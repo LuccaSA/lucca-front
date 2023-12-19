@@ -61,7 +61,7 @@
     "@angular-eslint/template-parser": "^17.0.1",
     "@angular/cli": "^17.0.0",
     "@angular/compiler-cli": "^17.0.2",
-    "@compodoc/compodoc": "^1.1.22",
+    "@compodoc/compodoc": "^1.1.23",
     "@ngneat/spectator": "^15.0.1",
     "@storybook/addon-a11y": "^7.6.3",
     "@storybook/addon-docs": "^7.6.3",
