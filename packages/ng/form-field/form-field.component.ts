@@ -26,6 +26,7 @@ let nextId = 0;
 			useExisting: forwardRef(() => FormFieldComponent),
 		},
 	],
+	encapsulation: ViewEncapsulation.None,
 })
 export class FormFieldComponent implements OnChanges, OnDestroy {
 	#ngClass = inject(NgClazz);
