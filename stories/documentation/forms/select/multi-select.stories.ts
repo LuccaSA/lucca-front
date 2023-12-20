@@ -29,11 +29,13 @@ export const Basic = generateStory({
 		#selectRef
 		class="multiSelect"
 		[placeholder]="placeholder"
-		[options]="legumes"
 		[clearable]="clearable"
 		[disabled]="disabled"
 		[loading]="loading"
 		[(ngModel)]="selectedLegumes"
+		[options]="legumes | filterLegumes:clue"
+		(clueChange)="clue = $event"
+		[maxValuesShown]="maxValuesShown"
 	>
 	</lu-multi-select>
 `,
@@ -64,6 +66,7 @@ export const WithMultiDisplayer = generateStory({
 		placeholder="Placeholder..."
 		[options]="legumes | filterLegumes:clue"
 		(clueChange)="clue = $event"
+		[maxValuesShown]="maxValuesShown"
 	>
 		<ng-container *luMultiDisplayer="let legumes; select: selectRef">
 			<div class="multipleSelect-displayer mod-filter" [class.is-filled]="legumes?.length > 0">
@@ -100,11 +103,13 @@ export const WithDisplayer = generateStory({
 		#selectRef
 		class="multiSelect"
 		[placeholder]="placeholder"
-		[options]="legumes"
+		[options]="legumes | filterLegumes:clue"
+		(clueChange)="clue = $event"
 		[clearable]="clearable"
 		[disabled]="disabled"
 		[loading]="loading"
 		[(ngModel)]="selectedLegumes"
+		[maxValuesShown]="maxValuesShown"
 	>
 		<span *luDisplayer="let legume; select: selectRef" [luTooltip]="'Vive les ' + legume.name + '!'">
 			🥔 {{ legume.name }} 🥔
@@ -132,6 +137,7 @@ export const WithPagination = generateStory({
 		[(ngModel)]="selectedLegumes"
 		[options]="legumes.slice(0, page * 10)"
 		(nextPage)="page = page + 1"
+		[maxValuesShown]="maxValuesShown"
 	>
 		<ng-container *luOption="let legume; select: selectRef">{{ legume.name }}</ng-container>
 	</lu-multi-select>
@@ -151,7 +157,9 @@ export const WithDisabledOptions = generateStory({
 		class="multiSelect"
 		placeholder="Placeholder..."
 		[(ngModel)]="selectedLegumes"
-		[options]="legumes"
+		[options]="legumes | filterLegumes:clue"
+		(clueChange)="clue = $event"
+		[maxValuesShown]="maxValuesShown"
 	>
 		<ng-container *luOption="let legume; select: selectRef" [luDisabledOption]="legume.index % 2 === 0">{{ legume.name }}</ng-container>
 	</lu-multi-select>
@@ -171,6 +179,7 @@ export const ApiV3 = generateStory({
 		placeholder="Placeholder..."
 		apiV3="/api/v3/axisSections"
 		[(ngModel)]="selectedAxisSection"
+		[maxValuesShown]="maxValuesShown"
 	></lu-multi-select>
 	`,
 	neededImports: {
@@ -188,6 +197,7 @@ export const ApiV4 = generateStory({
 		placeholder="Placeholder..."
 		apiV4="/organization/structure/api/establishments"
 		[(ngModel)]="selectedEstablishment"
+		[maxValuesShown]="maxValuesShown"
 	></lu-multi-select>
 	`,
 	neededImports: {
@@ -207,6 +217,7 @@ export const GroupBy = generateStory({
 		[(ngModel)]="selectedLegumes"
 		[options]="legumes | filterLegumes:clue"
 		(clueChange)="clue = $event"
+		[maxValuesShown]="maxValuesShown"
 	>
 		<ng-container *luOptionGroup="let group by legumeColor; select: selectRef">
 			Légume {{colorNameByColor[group.key]}}{{group.options.length > 1 ? 's' : ''}}

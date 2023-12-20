@@ -78,7 +78,7 @@ export class LuMultiSelectDefaultDisplayerComponent<T> implements OnInit {
 
 	displayedOptions$ = this.context.option$.pipe(
 		map((options) => {
-			if (this.select.maxValuesShown !== Infinity) {
+			if (this.select.maxValuesShown) {
 				return (options || []).slice(0, this.select.maxValuesShown);
 			}
 			return options;

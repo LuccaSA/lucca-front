@@ -1,4 +1,4 @@
-import { booleanAttribute, Component, forwardRef, HostBinding, inject, Input, OnChanges, OnDestroy } from '@angular/core';
+import { booleanAttribute, Component, forwardRef, HostBinding, inject, Input, OnChanges, OnDestroy, ViewEncapsulation } from '@angular/core';
 import { NgIf, NgSwitch, NgSwitchCase, NgTemplateOutlet } from '@angular/common';
 import { InputDirective } from './input.directive';
 import { FormFieldSize } from './form-field-size';

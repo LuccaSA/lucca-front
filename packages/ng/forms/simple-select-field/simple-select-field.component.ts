@@ -35,7 +35,7 @@ export class SimpleSelectFieldComponent<TOption> extends AbstractFieldComponent 
 	inlineMessageState: InlineMessageState;
 
 	@Input()
-	size: FormFieldSize = 'M';
+	size: 'S' | 'M';
 
 	/**
 	 * This is all proxy inputs from LuSimpleSelectInputComponent

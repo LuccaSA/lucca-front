@@ -7,6 +7,8 @@
 @use '@lucca-front/scss/src/components/textField/exports' as textField;
 @use '@lucca-front/scss/src/components/switchField/exports' as switchField;
 @use '@lucca-front/scss/src/components/checkboxField/exports' as checkboxField;
+@use '@lucca-front/scss/src/components/simpleSelect/exports' as simpleSelect;
+@use '@lucca-front/scss/src/components/multiSelect/exports' as multiSelect;
 @use '@lucca-front/scss/src/components/box/exports' as box;
 
 @mixin S {
@@ -25,6 +27,14 @@
 	.switchField {
 		@include switchField.S;
 	}
+
+	.simpleSelect {
+		@include simpleSelect.S;
+	}
+
+	.multiSelect {
+		@include multiSelect.S;
+	}
 }
 
 @mixin XS {
@@ -38,6 +48,10 @@
 
 	.inlineMessage {
 		@include inlineMessage.S;
+	}
+
+	.simpleSelect {
+		@include simpleSelect.XS;
 	}
 }
 
@@ -133,8 +147,7 @@
 			bottom: 0;
 			right: 0;
 			z-index: 10;
-			padding: var(--components-field-framed-label-top-offset) var(--components-field-framed-side-padding)
-				var(--components-field-framed-bottom-padding);
+			padding: var(--components-field-framed-label-top-offset) var(--components-field-framed-side-padding) var(--components-field-framed-bottom-padding);
 		}
 	}
 }

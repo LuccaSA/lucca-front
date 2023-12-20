@@ -3,7 +3,7 @@ import { booleanAttribute, ChangeDetectionStrategy, Component, EventEmitter, Inp
 import { ReactiveFormsModule } from '@angular/forms';
 import { SafeHtml } from '@angular/platform-browser';
 import { LuOptionContext, LuSimpleSelectDefaultOptionComponent } from '@lucca-front/ng/core-select';
-import { FormFieldComponent, FormFieldSize, InputDirective } from '@lucca-front/ng/form-field';
+import { FormFieldComponent, InputDirective } from '@lucca-front/ng/form-field';
 import { InlineMessageState } from '@lucca-front/ng/inline-message';
 import { LuMultiSelectDefaultDisplayerComponent, LuMultiSelectInputComponent } from '@lucca-front/ng/multi-select';
 import { AbstractFieldComponent } from '../abstract-field-component';
@@ -35,7 +35,7 @@ export class MultiSelectFieldComponent<TOption> extends AbstractFieldComponent {
 	inlineMessageState: InlineMessageState;
 
 	@Input()
-	size: FormFieldSize = 'M';
+	size: 'S' | 'M';
 
 	/**
 	 * This is all proxy inputs from LuMultiSelectInputComponent
