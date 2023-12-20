@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { getIntl } from '@lucca-front/ng/core';
 import { SELECT_ID, ɵLuOptionComponent, ɵLuOptionOutletDirective, ɵgenerateGroups } from '@lucca-front/ng/core-select';
 import { EMPTY, asyncScheduler, filter, map, observeOn, take, takeUntil } from 'rxjs';
-import { shareReplay, skip } from 'rxjs/operators';
+import { skip } from 'rxjs/operators';
 import { LuMultiSelectPanelRef } from '../input/panel.model';
 import { ILuMultiSelectPanelData, MULTI_SELECT_PANEL_DATA } from '../select.model';
 import { LU_MULTI_SELECT_TRANSLATIONS } from '../select.translate';
