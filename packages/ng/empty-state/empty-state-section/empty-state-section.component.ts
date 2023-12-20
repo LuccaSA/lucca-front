@@ -1,8 +1,7 @@
 import { booleanAttribute, ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { LuSafeExternalSvgPipe } from '../../safe-content/safe-external-svg.pipe';
-import { PortalContent, PortalDirective } from '../../core/portal';
-import { Palette } from '../../core/type';
+import { LuSafeExternalSvgPipe } from '@lucca-front/ng/safe-content';
+import { PortalContent, PortalDirective, Palette } from '@lucca-front/ng/core';
 
 @Component({
 	selector: 'lu-empty-state-section',
