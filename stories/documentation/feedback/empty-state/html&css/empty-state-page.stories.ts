@@ -4,7 +4,7 @@ import { EmptyStatePageComponent } from '@lucca-front/ng/empty-state';
 import { HttpClientModule } from '@angular/common/http';
 
 export default {
-	title: 'Documentation/Feedback/EmptyState/Page',
+	title: 'Documentation/Feedback/EmptyState/HTML&CSS',
 	component: EmptyStatePageComponent,
 	decorators: [
 		moduleMetadata({
@@ -31,7 +31,7 @@ export default {
 	argTypes: {},
 } as Meta;
 
-export const Template: StoryObj<EmptyStatePageComponent> = {
+export const Page: StoryObj<EmptyStatePageComponent> = {
 	args: {
 		title: 'Empty state page',
 		description: 'Description can be a string or a ng-template',

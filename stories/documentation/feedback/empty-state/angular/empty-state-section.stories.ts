@@ -2,10 +2,10 @@ import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { EmptyStateSectionComponent } from '@lucca-front/ng/empty-state';
 import { HttpClientModule } from '@angular/common/http';
-import { PaletteArgType } from '../../../helpers/common-arg-types';
+import { PaletteArgType } from '../../../../helpers/common-arg-types';
 
 export default {
-	title: 'Documentation/Feedback/EmptyState/Section',
+	title: 'Documentation/Feedback/EmptyState/Angular',
 	component: EmptyStateSectionComponent,
 	decorators: [
 		moduleMetadata({
@@ -26,7 +26,7 @@ export default {
 	},
 } as Meta;
 
-export const Template: StoryObj<EmptyStateSectionComponent> = {
+export const Section: StoryObj<EmptyStateSectionComponent> = {
 	args: {
 		title: 'Empty state section',
 		description: 'Description can be a string or a ng-template',
