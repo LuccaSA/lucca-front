@@ -113,6 +113,7 @@ export class LuMultiSelectInputComponent<T> extends ALuSelectInputComponent<T, T
 		event.stopPropagation();
 		this.onChange?.([]);
 		this.value = [];
+		this.focusInput$.next();
 	}
 
 	override ngOnDestroy() {

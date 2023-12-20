@@ -30,7 +30,7 @@ export default {
 } as Meta;
 
 export const Basic: StoryObj<MultiSelectFieldComponent<unknown>> = {
-	render: ({ label, required, hiddenLabel, inlineMessage, size, placeholder, inlineMessageState, disabled, tooltip }) => {
+	render: ({ label, required, hiddenLabel, inlineMessage, size, placeholder, inlineMessageState, disabled, tooltip, clearable }) => {
 		return {
 			props: { legumes: allLegumes, example: [] },
 			// TODO use generateStoryArgs here once merged
@@ -38,6 +38,7 @@ export const Basic: StoryObj<MultiSelectFieldComponent<unknown>> = {
 	required="${required}"
 	${hiddenLabel ? 'hiddenLabel' : ''}
 	${disabled ? 'disabled' : ''}
+	${clearable ? 'clearable' : ''}
 	inlineMessage="${inlineMessage}"
 	inlineMessageState="${inlineMessageState}"
 	size="${size}"
