@@ -4,7 +4,7 @@ import { EmptyStatePageComponent } from '@lucca-front/ng/empty-state';
 import { HttpClientModule } from '@angular/common/http';
 
 export default {
-	title: 'Documentation/Feedback/EmptyState/Angular',
+	title: 'Documentation/Feedback/Empty State/Angular',
 	component: EmptyStatePageComponent,
 	decorators: [
 		moduleMetadata({

@@ -5,16 +5,15 @@ import { Meta, StoryFn, applicationConfig } from '@storybook/angular';
 
 @Component({
 	standalone: true,
-	selector: 'empty-state-page-stories',
-	styleUrls: ['empty-state-page.stories.scss'],
-	templateUrl: './empty-state-page.stories.html',
+	selector: 'empty-state-section-palette-stories',
+	templateUrl: './empty-state-section-palette.stories.html',
 	imports: [LuSafeExternalSvgPipe],
 })
-class EmptyStatePageStory {}
+class EmptyStateSectionStory {}
 
 export default {
 	title: 'Documentation/Feedback/Empty State/HTML&CSS',
-	component: EmptyStatePageStory,
+	component: EmptyStateSectionStory,
 	decorators: [
 		applicationConfig({
 			providers: [provideHttpClient()],
@@ -22,6 +21,6 @@ export default {
 	],
 } as Meta;
 
-const template: StoryFn<EmptyStatePageStory> = () => ({});
+const template: StoryFn<EmptyStateSectionStory> = () => ({});
 
-export const page = template.bind({});
+export const sectionPalette = template.bind({});

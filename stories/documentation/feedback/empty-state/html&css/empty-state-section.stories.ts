@@ -1,36 +1,26 @@
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { ButtonComponent } from '@lucca-front/ng/button';
-import { EmptyStateSectionComponent } from '@lucca-front/ng/empty-state';
-import { HttpClientModule } from '@angular/common/http';
-import { PaletteArgType } from '../../../../helpers/common-arg-types';
+import { provideHttpClient } from '@angular/common/http';
+import { Component } from '@angular/core';
+import { LuSafeExternalSvgPipe } from '@lucca-front/ng/safe-content';
+import { Meta, StoryFn, applicationConfig } from '@storybook/angular';
+
+@Component({
+	standalone: true,
+	selector: 'empty-state-section-stories',
+	templateUrl: './empty-state-section.stories.html',
+	imports: [LuSafeExternalSvgPipe],
+})
+class EmptyStateSectionStory {}
 
 export default {
-	title: 'Documentation/Feedback/EmptyState/HTML&CSS',
-	component: EmptyStateSectionComponent,
+	title: 'Documentation/Feedback/Empty State/HTML&CSS',
+	component: EmptyStateSectionStory,
 	decorators: [
-		moduleMetadata({
-			imports: [EmptyStateSectionComponent, ButtonComponent, HttpClientModule],
+		applicationConfig({
+			providers: [provideHttpClient()],
 		}),
 	],
-	render: (args: EmptyStateSectionComponent) => {
-		const { title, description, center, palette } = args;
-		return {
-			template: `<lu-empty-state-section title="${title}" description="${description}" palette="${palette}"${center ? ' center' : ''}>
-	<button luButton type="button" palette="primary">Button</button>
-	<button luButton="outlined" type="button" palette="primary">Button</button>
-</lu-empty-state-section>`,
-		};
-	},
-	argTypes: {
-		palette: PaletteArgType,
-	},
 } as Meta;
 
-export const Section: StoryObj<EmptyStateSectionComponent> = {
-	args: {
-		title: 'Empty state section',
-		description: 'Description can be a string or a ng-template',
-		center: false,
-		palette: 'none',
-	},
-};
+const template: StoryFn<EmptyStateSectionStory> = () => ({});
+
+export const section = template.bind({});

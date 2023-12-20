@@ -5,7 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { PaletteArgType } from '../../../../helpers/common-arg-types';
 
 export default {
-	title: 'Documentation/Feedback/EmptyState/Angular',
+	title: 'Documentation/Feedback/Empty State/Angular',
 	component: EmptyStateSectionComponent,
 	decorators: [
 		moduleMetadata({
