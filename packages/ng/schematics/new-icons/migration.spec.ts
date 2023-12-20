@@ -30,9 +30,9 @@ describe('New icons Migration', () => {
 		// Arrange
 		const lfRoot = path.normalize(path.join(__dirname, '..', '..', '..', '..'));
 		const lfFiles = [
-			...glob.sync('icons/**/*.scss', { cwd: lfRoot, nodir: true }),
-			...glob.sync('scss/**/*.scss', { cwd: lfRoot, nodir: true }),
-			...glob.sync('ng/**/*', { cwd: lfRoot, nodir: true, ignore: ['**/schematics/**'] }),
+			...glob.sync('packages/icons/**/*.scss', { cwd: lfRoot, nodir: true }),
+			...glob.sync('packages/scss/**/*.scss', { cwd: lfRoot, nodir: true }),
+			...glob.sync('packages/ng/**/*', { cwd: lfRoot, nodir: true, ignore: ['**/schematics/**'] }),
 			...glob.sync('stories/**', { cwd: lfRoot, nodir: true }),
 		];
 
