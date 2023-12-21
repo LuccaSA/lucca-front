@@ -23,11 +23,15 @@ export default {
 	},
 	argTypes: {
 		palette: PaletteArgType,
+		icon: {
+			control: 'text',
+		},
 	},
 } as Meta;
 
 export const Section: StoryObj<EmptyStateSectionComponent> = {
 	args: {
+		icon: 'https://cdn.lucca.fr/lucca-front/assets/empty-states/icons/iconBanknote.svg',
 		title: 'Empty state section',
 		description: 'Description can be a string or a ng-template',
 		center: false,

@@ -14,17 +14,33 @@ import { PortalContent, PortalDirective } from '@lucca-front/ng/core';
 })
 export class EmptyStatePageComponent {
 	@Input()
+
+	/**
+	 * Icon image (URL)
+	 */
 	icon = 'https://cdn.lucca.fr/lucca-front/assets/empty-states/message/medal-01.svg';
 
+	/**
+	 * Top right background image (URL)
+	 */
 	@Input()
 	topRightBackground = 'https://cdn.lucca.fr/lucca-front/assets/empty-states/poplee/bubbles-top-right-01.svg';
 
+	/**
+	 * Top right foreground image (URL)
+	 */
 	@Input()
 	topRightForeground = 'https://cdn.lucca.fr/lucca-front/assets/empty-states/generic/coffee-01.svg';
 
+	/**
+	 * Bottom left background image (URL)
+	 */
 	@Input()
 	bottomLeftBackground = 'https://cdn.lucca.fr/lucca-front/assets/empty-states/poplee/bubbles-bottom-left-01.svg';
 
+	/**
+	 * Bottom left foreground image (URL)
+	 */
 	@Input()
 	bottomLeftForeground = 'https://cdn.lucca.fr/lucca-front/assets/empty-states/poplee/core-hr-01.svg';
 

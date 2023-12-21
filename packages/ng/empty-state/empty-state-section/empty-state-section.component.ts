@@ -13,6 +13,9 @@ import { PortalContent, PortalDirective, Palette } from '@lucca-front/ng/core';
 	encapsulation: ViewEncapsulation.None,
 })
 export class EmptyStateSectionComponent {
+	/**
+	 * Icon URL
+	 */
 	@Input()
 	icon = 'https://cdn.lucca.fr/lucca-front/assets/empty-states/icons/iconBanknote.svg';
 

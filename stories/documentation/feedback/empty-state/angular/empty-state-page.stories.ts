@@ -28,12 +28,30 @@ export default {
 </lu-empty-state-page>`,
 		};
 	},
-	argTypes: {},
+	argTypes: {
+		topRightBackground: {
+			control: 'text',
+		},
+		topRightForeground: {
+			control: 'text',
+		},
+		bottomLeftBackground: {
+			control: 'text',
+		},
+		bottomLeftForeground: {
+			control: 'text',
+		},
+	},
 } as Meta;
 
 export const Page: StoryObj<EmptyStatePageComponent> = {
 	args: {
 		title: 'Empty state page',
 		description: 'Description can be a string or a ng-template',
+		icon: 'https://cdn.lucca.fr/lucca-front/assets/empty-states/message/medal-01.svg',
+		topRightBackground: 'https://cdn.lucca.fr/lucca-front/assets/empty-states/poplee/bubbles-top-right-01.svg',
+		topRightForeground: 'https://cdn.lucca.fr/lucca-front/assets/empty-states/generic/coffee-01.svg',
+		bottomLeftBackground: 'https://cdn.lucca.fr/lucca-front/assets/empty-states/poplee/bubbles-bottom-left-01.svg',
+		bottomLeftForeground: 'https://cdn.lucca.fr/lucca-front/assets/empty-states/poplee/core-hr-01.svg',
 	},
 };
