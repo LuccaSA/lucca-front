@@ -38,6 +38,16 @@
 		box-shadow: var(--commons-boxShadow-L);
 	}
 
+	// Remove actionIcon reference when button & action icon will be merged as a single component
+	&:has(.card-action .actionIcon:focus-visible, .card-action .button:focus-visible) {
+		@include a11y.focusVisible($offset: 3px);
+
+		.actionIcon, .button {
+			outline: none;
+			background: inherit;
+		}
+	}
+
 	.card-content {
 		flex: 1;
 		padding: 0;
