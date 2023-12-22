@@ -17,7 +17,7 @@ export const outsideIconByProp = {
 
 @Component({
 	selector: 'lu-test2',
-	templateUrl: './test.component.html',
+	templateUrl: './template.input.html',
 })
 export class Test2Component {
 	@HostBinding('class.icon-app') a = true;
