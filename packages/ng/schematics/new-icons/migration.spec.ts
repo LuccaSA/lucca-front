@@ -1,13 +1,13 @@
 import * as fs from 'fs';
-import glob from 'glob';
+import * as glob from 'glob';
 import * as path from 'path';
-import { createTreeFromFiles, expectTree, runMigration } from '../../lib/migration-test.js';
+import { createTreeFromFiles, expectTree, runSchematic } from '../lib/migration-test.js';
 
-const collectionPath = path.normalize(path.join(__dirname, '..', '../migrations.json'));
+const collectionPath = path.normalize(path.join(__dirname, '..', 'collection.json'));
 const testsRoot = path.join(__dirname, 'tests');
 const files = fs.readdirSync(testsRoot);
 
-describe('TShirt Migration', () => {
+describe('New icons Migration', () => {
 	it('should update files', async () => {
 		// Arrange
 		const tree = createTreeFromFiles(testsRoot, files, '.input.');
@@ -15,7 +15,7 @@ describe('TShirt Migration', () => {
 
 		// Act
 		try {
-			await runMigration(collectionPath, 'migration-v15-tshirt-size', { skipInstallation: true }, tree);
+			await runSchematic('collection', collectionPath, 'new-icons', { skipInstallation: true }, tree);
 		} catch (error) {
 			// eslint-disable-next-line no-console
 			console.log(error);
@@ -30,16 +30,17 @@ describe('TShirt Migration', () => {
 		// Arrange
 		const lfRoot = path.normalize(path.join(__dirname, '..', '..', '..', '..'));
 		const lfFiles = [
-			...glob.sync('icons/**/*.scss', { cwd: lfRoot, nodir: true }),
-			...glob.sync('scss/**/*.scss', { cwd: lfRoot, nodir: true }),
-			...glob.sync('ng/**/*', { cwd: lfRoot, nodir: true, ignore: ['**/schematics/**'] }),
+			...glob.sync('packages/icons/**/*.scss', { cwd: lfRoot, nodir: true }),
+			...glob.sync('packages/scss/**/*.scss', { cwd: lfRoot, nodir: true }),
+			...glob.sync('packages/ng/**/*', { cwd: lfRoot, nodir: true, ignore: ['**/schematics/**'] }),
+			...glob.sync('stories/**', { cwd: lfRoot, nodir: true }),
 		];
 
 		const treeOriginalTree = createTreeFromFiles(lfRoot, lfFiles, '.');
 		const tree = createTreeFromFiles(lfRoot, lfFiles, '.');
 
 		// Act
-		await runMigration(collectionPath, 'migration-v15-tshirt-size', { skipInstallation: true }, tree);
+		await runSchematic('collection', collectionPath, 'new-icons', { skipInstallation: true }, tree);
 
 		// Assert
 		tree.visit((p, entry) => {

@@ -13,6 +13,10 @@ export function applyUpdates(content: string, updates: FileUpdate[]): string {
 	let updatedOffset = 0;
 
 	for (const update of sortedUpdated) {
+		if (update.oldContent === update.newContent) {
+			continue;
+		}
+
 		const from = update.position + updatedOffset;
 		const to = from + update.oldContent.length;
 		content = content.slice(0, from) + update.newContent + content.slice(to);
@@ -20,4 +24,10 @@ export function applyUpdates(content: string, updates: FileUpdate[]): string {
 	}
 
 	return content;
+}
+
+export function updateContent(content: string, builder: (updates: FileUpdate[]) => void): string {
+	const updates: FileUpdate[] = [];
+	builder(updates);
+	return applyUpdates(content, updates);
 }
