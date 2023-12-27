@@ -10,19 +10,19 @@ function getTemplate(args: GridsLegacyAutoWidthStory): string {
 	return `
 	<div class="grid">
 		<div class="grid@mediaMinM">
-			<div class="grid-demo">grid @mediaMinM</div>
+			<div class="grid-demo">1</div>
 		</div>
 		<div class="grid@mediaMinM">
-			<div class="grid-demo">grid @mediaMinM</div>
+			<div class="grid-demo">2</div>
 		</div>
 		<div class="grid@mediaMinM">
-			<div class="grid-demo">grid @mediaMinM</div>
+			<div class="grid-demo">3</div>
 		</div>
 		<div class="grid@mediaMinM">
-			<div class="grid-demo">grid @mediaMinM</div>
+			<div class="grid-demo">4</div>
 		</div>
 		<div class="grid@mediaMinM">
-			<div class="grid-demo">grid @mediaMinM</div>
+			<div class="grid-demo">5</div>
 		</div>
 	</div>
 	`;
@@ -34,10 +34,10 @@ const Template: StoryFn<GridsLegacyAutoWidthStory> = (args: GridsLegacyAutoWidth
 	styles: [
 		`
 		.grid-demo {
-			background: #F3F5FC;
+			background-color: var(--palettes-grey-200);
 			margin-bottom: var(--spacings-S);
 			padding: var(--spacings-S);
-			border-radius: 1rem;
+			border-radius: 9999px;
 		}`,
 	],
 });

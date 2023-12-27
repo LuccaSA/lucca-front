@@ -10,17 +10,17 @@ function getTemplate(args: GridsLegacyHorizontalAlignmentStory): string {
 	return `
 	<div class="grid mod-start@mediaMinXS">
 		<div class="grid-6@mediaMinXS">
-			<div class="grid-demo">Start</div>
+			<div class="grid-demo">1</div>
 		</div>
 	</div>
 	<div class="grid mod-center@mediaMinXS">
 		<div class="grid-6@mediaMinXS">
-			<div class="grid-demo">Center</div>
+			<div class="grid-demo">2</div>
 		</div>
 	</div>
 	<div class="grid mod-end@mediaMinXS">
 		<div class="grid-6@mediaMinXS">
-			<div class="grid-demo">End</div>
+			<div class="grid-demo">3</div>
 		</div>
 	</div>
 	`;
@@ -32,10 +32,10 @@ const Template: StoryFn<GridsLegacyHorizontalAlignmentStory> = (args: GridsLegac
 	styles: [
 		`
 		.grid-demo {
-			background: #F3F5FC;
+			background-color: var(--palettes-grey-200);
 			margin-bottom: var(--spacings-S);
 			padding: var(--spacings-S);
-			border-radius: 1rem;
+			border-radius: 9999px;
 		}`,
 	],
 });
