@@ -3,15 +3,19 @@ import { FormsModule } from '@angular/forms';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { applicationConfig, Meta, StoryFn } from '@storybook/angular';
 import { I18nTranslation, LuI18nInputComponent } from '@lucca-front/ng/i18n';
+import { JsonPipe } from '@angular/common';
+import { TextfieldComponent } from '../../../../packages/ng/forms/textfield/textfield.component';
 
 @Component({
 	selector: 'i18n-input-stories',
 	standalone: true,
-	imports: [LuI18nInputComponent, FormsModule],
+	imports: [LuI18nInputComponent, FormsModule, JsonPipe, TextfieldComponent],
 	template: `
-		<div class="u-displayFlex">
-			<button type="button" class="button" luI18nInput submitLabel="Submit" cancelLabel="Cancel" [(ngModel)]="translations">{{ translations[0].value }}</button>
-		</div>
+		<form class="u-displayFlex u-flexDirectionColumn" #form="ngForm">
+			<lu-i18n-textfield [(ngModel)]="translations" label="Label" placeholder="Placeholder" name="i18n"> </lu-i18n-textfield>
+			<p>Valid : {{ form.valid }}</p>
+			<p>Value : {{ translations | json }}</p>
+		</form>
 	`,
 })
 class I18nInputStory {
@@ -22,24 +26,24 @@ class I18nInputStory {
 			value: 'Tomato',
 			required: true,
 			cultureIcon: 'mapGlobe',
+			current: true,
 		},
 		{
 			cultureCode: 'fr-fr',
 			cultureName: 'fr-FR',
+			required: true,
 			value: 'Tomate',
-			required: false,
 		},
 		{
 			cultureCode: 'en-us',
 			cultureName: 'en-US',
 			value: 'Tomato',
-			required: false,
 		},
 		{
 			cultureCode: 'es-es',
 			cultureName: 'es-ES',
+			required: true,
 			value: '',
-			required: false,
 		},
 	];
 }
@@ -61,41 +65,41 @@ import { LuI18nInputComponent } from '@lucca-front/ng/i18n';
 @Component({
  selector: 'i18n-input-stories',
  standalone: true,
- imports: [LuI18nInputComponent, LuInputDisplayerDirective, FormsModule],
+ imports: [LuI18nInputDirective, LuInputDisplayerDirective, FormsModule],
  template: \`
-  <div class="u-displayFlex">
-   <button type="button" class="button" luI18nInput submitLabel="Submit" cancelLabel="Cancel" [(ngModel)]="translations">{{ translations[0].value }}</button>
-  </div>
+		<div class="u-displayFlex u-flexDirectionColumn">
+			<lu-i18n-textfield [(ngModel)]="translations" label="Label" placeholder="Placeholder" name="i18n"> </lu-i18n-textfield>
+			{{ translations | json }}
+		</div>
  \`,
 })
 class I18nInputStory {
- translations: I18nTranslation[] = [
-  {
-   cultureCode: 'invariant',
-   cultureName: 'Default value',
-   value: 'Tomato',
-   required: true,
-   cultureIcon: 'mapGlobe',
-  },
-  {
-   cultureCode: 'fr-fr',
-   cultureName: 'fr-FR',
-   value: 'Tomate',
-   required: false,
-  },
-  {
-   cultureCode: 'en-us',
-   cultureName: 'en-US',
-   value: 'Tomato',
-   required: false,
-  },
-  {
-   cultureCode: 'es-es',
-   cultureName: 'es-ES',
-   value: '',
-   required: false,
-  },
- ];
+  translations: I18nTranslation[] = [
+    {
+      cultureCode: 'invariant',
+      cultureName: 'Default value',
+      value: 'Tomato',
+      required: true,
+      cultureIcon: 'mapGlobe',
+      current: true,
+    },
+    {
+      cultureCode: 'fr-fr',
+      cultureName: 'fr-FR',
+      value: 'Tomate',
+    },
+    {
+      cultureCode: 'en-us',
+      cultureName: 'en-US',
+      value: 'Tomato',
+    },
+    {
+      cultureCode: 'es-es',
+      cultureName: 'es-ES',
+      required: true,
+      value: '',
+    },
+  ];
 }`;
 
 export const Basic = template.bind({});

@@ -1,14 +1,43 @@
-<ng-content></ng-content>
-<lu-popover [trap-focus]="true" content-classes="i18n-lu-popover-content">
-	@if (translations && translations.length) {
-	<div class="i18n-panel-container">
-		<lu-i18n-panel [formControl]="formControl" class="i18n-panel-content"></lu-i18n-panel>
-		<div class="u-displayFlex u-gapXXS u-justifyContentFlexEnd u-paddingXS">
-			<button luButton type="button" (click)="closePopover(true)" [disabled]="!formControl.dirty || formControl.invalid">
-				{{submitLabel}}
-			</button>
-			<button luButton type="button" class="mod-text" (click)="closePopover()">{{cancelLabel}}</button>
-		</div>
-	</div>
-	}
-</lu-popover>
+@if (currentTranslation) {
+<ng-container [formGroup]="formGroup">
+	<label class="textfield mod-withSuffix" [class.mod-noLabel]="!label">
+		<input
+			class="textfield-input"
+			type="text"
+			[placeholder]="placeholder"
+			formControlName="currentTranslation"
+			cdkOverlayOrigin
+			#overlayOrigin="cdkOverlayOrigin"
+			[attr.aria-required]="currentTranslation.required"
+			(focus)="onTouched()"
+		/>
+		@if(label){
+		<span class="textfield-label">{{label}}</span>
+		}
+		<span class="textfield-suffix i18n-suffix" role="button" (click)="openPopover($event)" (keyup.enter)="openPopover($event)">
+			@if (currentTranslation.cultureIcon) {
+			<lu-icon
+				[icon]="currentTranslation.cultureIcon"
+				[alt]="currentTranslation.cultureName"
+				size="M"
+				[luTooltip]="currentTranslation.cultureName"
+				[luTooltipDisabled]="showPopover"
+			>
+			</lu-icon>
+			} @else { {{ currentTranslation.cultureName }} }
+		</span>
+	</label>
+
+	<ng-template
+		cdkConnectedOverlay
+		[cdkConnectedOverlayOpen]="showPopover"
+		[cdkConnectedOverlayOrigin]="overlayOrigin"
+		cdkConnectedOverlayPanelClass="lu-popover-panel"
+		[cdkConnectedOverlayWidth]="overlayOrigin.elementRef.nativeElement.offsetWidth"
+		[cdkConnectedOverlayPush]="true"
+		(overlayOutsideClick)="closePopover($event)"
+	>
+		<lu-i18n-panel formControlName="translations" class="lu-popover-content" cdkTrapFocus [cdkTrapFocusAutoCapture]="true"></lu-i18n-panel>
+	</ng-template>
+</ng-container>
+}

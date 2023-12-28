@@ -5,5 +5,6 @@ export interface I18nTranslation {
 	cultureIcon?: LuccaIcon;
 	cultureName: string;
 	value: string;
-	required: boolean;
+	required?: boolean;
+	current?: boolean;
 }

@@ -3,7 +3,8 @@ import { ControlValueAccessor, FormsModule, NG_VALIDATORS, NG_VALUE_ACCESSOR, Va
 import { I18nTranslation } from './i18n-translation.model';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { CommonModule } from '@angular/common';
-import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
+import { LuTooltipModule } from '@lucca-front/ng/tooltip';
+import { translationsValidator } from './i18n-translation.validator';
 
 @Component({
 	selector: 'lu-i18n-panel',
@@ -23,7 +24,7 @@ import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
 			multi: true,
 		},
 	],
-	imports: [IconComponent, CommonModule, FormsModule, LuTooltipTriggerDirective],
+	imports: [IconComponent, CommonModule, FormsModule, LuTooltipModule],
 })
 export class LuI18nPanelComponent implements ControlValueAccessor, Validator {
 	public translations: I18nTranslation[] = [];
@@ -52,10 +53,6 @@ export class LuI18nPanelComponent implements ControlValueAccessor, Validator {
 	}
 
 	validate(): ValidationErrors | null {
-		return this.translations.some((t) => t.required && !t.value)
-			? {
-					required: true,
-			  }
-			: null;
+		return translationsValidator(this.translations);
 	}
 }

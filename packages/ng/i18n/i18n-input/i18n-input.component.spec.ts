@@ -10,7 +10,7 @@ import spyOn = jest.spyOn;
 
 @Component({
 	selector: 'lu-test',
-	template: ` <button luI18nInput id="test" cancelLabel="Cancel" submitLabel="Submit" [(ngModel)]="translations"></button>`,
+	template: ` <lu-i18n-textfield [(ngModel)]="translations" label="Label"> </lu-i18n-textfield>`,
 	standalone: true,
 	imports: [FormsModule, LuI18nInputComponent],
 })
@@ -45,26 +45,74 @@ describe('LuI18nInputComponent', () => {
 			expect(component).toBeDefined();
 		});
 
-		it(`should init target`, () => {
-			expect(component.target).toBeDefined();
-			expect(component.target.overlap).toEqual(true);
-			expect(component.target.position).toEqual('below');
-			expect(component.target.alignment).toEqual('left');
-			expect(component.target.elementRef).toBeDefined();
-		});
-
-		it(`should init click event listener to open popover`, () => {
-			const spy = spyOn(component, 'openPopover');
-
-			const element = document.getElementById('test');
-			element.click();
-			expect(spy).toHaveBeenCalled();
-		});
+		it(`should listen to internal value changes`, waitForAsync(() => {
+			const spy = jest.fn();
+			component.registerOnChange(spy);
+			const translations = [
+				{
+					value: 'value1',
+					current: true,
+					cultureCode: 'cultureCode1',
+					required: false,
+					cultureName: 'cultureName1',
+				},
+				{
+					value: 'value2',
+					current: false,
+					cultureCode: 'cultureCode2',
+					required: false,
+					cultureName: 'cultureName2',
+				},
+			];
+			component.writeValue(translations);
+			component.formGroup.patchValue({
+				currentTranslation: null,
+			});
+			expect(spy).toHaveBeenCalledWith([translations[1], { ...translations[0], value: null }]);
+		}));
 
 		it(`should init listener if no parent formcontrol`, () => {
-			const fixture = TestBed.createComponent(LuI18nInputComponent);
-			expect(() => fixture.componentInstance.closePopover(true)).not.toThrow();
-			expect(() => fixture.componentInstance.closePopover()).not.toThrow();
+			const compFixture = TestBed.createComponent(LuI18nInputComponent);
+			const compInstance = compFixture.componentInstance;
+			compFixture.detectChanges();
+			compInstance.formGroup.patchValue({
+				currentTranslation: 'test',
+			});
+			expect(() => compInstance.closePopover(new Event('click'))).not.toThrow();
+		});
+	});
+
+	describe(`#openPopover`, () => {
+		it(`should show the popover`, () => {
+			component.showPopover = false;
+			const event = new Event('click');
+			component.openPopover(event);
+			expect(component.showPopover).toBe(true);
+		});
+
+		it(`should call event.preventDefault`, () => {
+			const event = new Event('click');
+			const spy = spyOn(event, 'preventDefault');
+
+			component.openPopover(event);
+			expect(spy).toHaveBeenCalled();
+		});
+	});
+
+	describe(`#closePopover`, () => {
+		it(`should hide the popover`, () => {
+			component.showPopover = true;
+			const event = new Event('click');
+			component.closePopover(event);
+			expect(component.showPopover).toBe(false);
+		});
+
+		it(`should call event.stopImmediatePropagation`, () => {
+			const event = new Event('click');
+			const spy = spyOn(event, 'stopImmediatePropagation');
+
+			component.closePopover(event);
+			expect(spy).toHaveBeenCalled();
 		});
 	});
 
@@ -78,116 +126,85 @@ describe('LuI18nInputComponent', () => {
 					cultureName: 'cultureName1',
 					required: true,
 					cultureCode: 'cultureCode1',
-					cultureIcon: 'filter',
 				},
 				{
 					value: 'value2',
 					cultureName: 'cultureName2',
 					required: true,
 					cultureCode: 'cultureCode2',
-					cultureIcon: 'filter',
+					current: true,
+				},
+				{
+					value: 'value3',
+					cultureName: 'cultureName3',
+					required: true,
+					cultureCode: 'cultureCode3',
 				},
 			];
+		});
+
+		it(`should assign translations and single current translation`, () => {
 			component.writeValue(inputValues);
+			expect(component.formGroup.value.currentTranslation).toEqual(inputValues[1].value);
+			expect(component.formGroup.value.translations).toEqual(inputValues.filter((t) => !t.current));
 		});
 
-		it(`should copy translations into component`, () => {
-			expect(component.translations).toEqual(inputValues);
+		it(`should assign first current translation if multiple are provided`, () => {
+			inputValues[0].current = true;
+			component.writeValue(inputValues);
+			expect(component.formGroup.value.currentTranslation).toEqual(inputValues[0].value);
+			expect(component.formGroup.value.translations).toEqual(inputValues.filter((t) => !t.current));
 		});
 
-		it(`should assign form control values`, () => {
-			expect(component.formControl.value).toEqual(inputValues);
+		it(`should assign empty values if no translation is provided`, () => {
+			component.writeValue();
+			expect(component.formGroup.value.currentTranslation).toEqual('');
+			expect(component.formGroup.value.translations).toEqual([]);
 		});
 	});
 
-	describe(`#submit`, () => {
-		let formValue: I18nTranslation[];
+	describe(`#validate`, () => {
+		let inputValues: I18nTranslation[];
+
 		beforeEach(() => {
-			formValue = [
+			inputValues = [
 				{
-					value: 'value',
-					cultureName: 'cultureName',
+					value: 'value1',
+					cultureName: 'cultureName1',
 					required: true,
-					cultureCode: 'cultureCode',
-					cultureIcon: 'filter',
+					cultureCode: 'cultureCode1',
 				},
-			];
-			component.formControl.setValue(formValue);
-		});
-
-		it(`should assign panel values`, () => {
-			component.closePopover(true);
-			expect(component.translations).toEqual(formValue);
-		});
-
-		it(`should call change listener`, () => {
-			const mockChange = jest.fn();
-			component.registerOnChange(mockChange);
-			component.closePopover(true);
-			expect(mockChange).toHaveBeenCalledWith(formValue);
-		});
-
-		it(`should mark form as pristine`, () => {
-			component.closePopover(true);
-			expect(component.formControl.dirty).toBe(false);
-		});
-	});
-
-	describe(`#dismiss`, () => {
-		let formValue: I18nTranslation[];
-		beforeEach(() => {
-			component.translations = [
 				{
-					value: '',
-					cultureName: 'cultureName',
+					value: 'value2',
+					cultureName: 'cultureName2',
 					required: true,
-					cultureCode: 'cultureCode',
-					cultureIcon: 'filter',
+					cultureCode: 'cultureCode2',
+					current: true,
 				},
-			];
-
-			formValue = [
 				{
-					...component.translations[0],
-					value: '',
+					value: 'value3',
+					cultureName: 'cultureName3',
+					required: false,
+					cultureCode: 'cultureCode3',
 				},
 			];
-			component.formControl.setValue(formValue);
 		});
 
-		it(`should reset panel values`, () => {
-			component.closePopover();
-			expect(component.formControl.value).toEqual(component.translations);
+		it(`should return validation errors if currentTranslation is required and not defined`, () => {
+			inputValues[1].value = '';
+			component.writeValue(inputValues);
+			expect(component.validate()).toEqual({
+				required: true,
+			});
 		});
 
-		it(`should call touch listener`, () => {
-			const mockTouched = jest.fn();
-			component.registerOnTouched(mockTouched);
-			component.closePopover();
-			expect(mockTouched).toHaveBeenCalled();
+		it(`should return validation errors if any other translation is required and not defined`, () => {
+			inputValues[0].value = '';
+			component.writeValue(inputValues);
+			component.openPopover(new Event('click'));
+			expect(component.validate()).toEqual({
+				required: true,
+			});
 		});
-
-		it(`should mark form as pristine`, () => {
-			component.closePopover();
-			expect(component.formControl.dirty).toBe(false);
-		});
-	});
-
-	describe(`#_emitOpen`, () => {
-		it(`should emit open event`, () => {
-			const spy = spyOn(component.onOpen, 'emit');
-			component.openPopover();
-			expect(spy).toHaveBeenCalled();
-		});
-	});
-
-	describe(`#_emitClose`, () => {
-		it(`should emit close event`, waitForAsync(() => {
-			const spy = spyOn(component.onClose, 'emit');
-			// can't seem to be able to check close emission when calling closePopover(). Timing issue?
-			// eslint-disable-next-line @typescript-eslint/no-unsafe-call,@typescript-eslint/no-unsafe-member-access,@typescript-eslint/no-explicit-any
-			(component as any)._emitClose();
-			expect(spy).toHaveBeenCalled();
-		}));
 	});
 });

@@ -109,6 +109,11 @@ describe('LuI18nPanelComponent', () => {
 	});
 
 	describe(`#validate`, () => {
+		it('should return null if no translation is provided', () => {
+			component.translations = undefined;
+			expect(component.validate()).toEqual(null);
+		});
+
 		it('should return null if all required fields are filled', () => {
 			component.translations = [
 				{
