@@ -42,9 +42,13 @@
 	&:has(.card-action .actionIcon:focus-visible, .card-action .button:focus-visible) {
 		@include a11y.focusVisible($offset: 3px);
 
-		.actionIcon, .button {
+		.actionIcon,
+		.button {
 			outline: none;
-			background: inherit;
+
+			&:not(:hover) {
+				background-color: inherit;
+			}
 		}
 	}
 
