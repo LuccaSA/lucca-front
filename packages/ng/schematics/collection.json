@@ -1,9 +1,13 @@
 {
-  "$schema": "../../../node_modules/@angular-devkit/schematics/collection-schema.json",
-  "schematics": {
-    "ng-add": {
-      "description": "Add my lucca-front to the project.",
-      "factory": "./ng-add/index#ngAdd"
-    }
-  }
+	"$schema": "../../../node_modules/@angular-devkit/schematics/collection-schema.json",
+	"schematics": {
+		"ng-add": {
+			"description": "Add my lucca-front to the project.",
+			"factory": "./ng-add/index#ngAdd"
+		},
+		"new-icons": {
+			"description": "Replace old icon names with new ones.",
+			"factory": "./new-icons/index"
+		}
+	}
 }

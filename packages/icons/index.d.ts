@@ -4,6 +4,8 @@
  ***********************************************/
 
 export type LuccaIcon =
+	| 'deviceVideo'
+	| 'chartSpider'
 	| 'bookmark'
 	| 'bookmarkFilled'
 	| 'app'

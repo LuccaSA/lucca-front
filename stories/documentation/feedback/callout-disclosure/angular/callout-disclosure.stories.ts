@@ -1,6 +1,6 @@
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { CalloutDisclosureComponent, CalloutFeedbackItemComponent, CalloutFeedbackListComponent } from '@lucca-front/ng/callout';
 import { ButtonComponent } from '@lucca-front/ng/button';
+import { CalloutDisclosureComponent, CalloutFeedbackItemComponent, CalloutFeedbackListComponent } from '@lucca-front/ng/callout';
+import { Meta, StoryObj, moduleMetadata } from '@storybook/angular';
 import { generateInputs } from 'stories/helpers/stories';
 
 export default {
@@ -13,7 +13,7 @@ export default {
 	],
 	render: (args, { argTypes }) => {
 		return {
-			template: `<lu-callout-disclosure ${generateInputs(args, argTypes)}>
+			template: `<lu-callout-disclosure ${generateInputs(args, argTypes)} ${openStr}>
 		<ul lu-callout-feedback-list palette="grey">
 			<li lu-callout-feedback-item>
 				<lu-feedback-item-description>

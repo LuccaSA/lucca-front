@@ -1,7 +1,7 @@
 import type { Rule } from '@angular-devkit/schematics';
 import { spawnSync } from 'child_process';
 import * as path from 'path';
-import { migrateFile } from '../../lib/schematics.js';
+import { migrateFile } from '../lib/schematics.js';
 import { migrateHTMLFile, migrateScssFile, migrateTsFile } from './migration.js';
 
 export default (options?: { skipInstallation?: boolean }): Rule => {
@@ -22,10 +22,10 @@ export default (options?: { skipInstallation?: boolean }): Rule => {
 			}
 		}
 
-		const postCssScss = await import('../../lib/local-deps/postcss-scss.js');
+		const postCssScss = await import('../lib/local-deps/postcss-scss.js');
 		const angularCompiler = await import('@angular/compiler');
-		const { postcssValueParser } = await import('../../lib/local-deps/postcss-value-parser.js');
-		const { postcssSelectorParser } = await import('../../lib/local-deps/postcss-selector-parser.js');
+		const { postcssValueParser } = await import('../lib/local-deps/postcss-value-parser.js');
+		const { postcssSelectorParser } = await import('../lib/local-deps/postcss-selector-parser.js');
 
 		tree.visit((path, entry) => {
 			if (path.includes('node_modules') || !entry) {

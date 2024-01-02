@@ -15,7 +15,11 @@ export function createTreeFromFiles(testsRoot: string, files: string[], filePart
 }
 
 export async function runMigration(collectionPath: string, migrationName: string, migrationOptions: object, tree: Tree) {
-	const schematicRunner = new SchematicTestRunner('migrations', collectionPath);
+	await runSchematic(collectionPath, 'migrations', migrationName, migrationOptions, tree);
+}
+
+export async function runSchematic(collectionName: string, collectionPath: string, migrationName: string, migrationOptions: object, tree: Tree) {
+	const schematicRunner = new SchematicTestRunner(collectionName, collectionPath);
 	await schematicRunner.runSchematic(migrationName, migrationOptions, tree);
 }
 

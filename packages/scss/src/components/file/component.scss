@@ -79,7 +79,12 @@
 		height: 100%;
 		opacity: 0.001;
 		z-index: 1;
+		font-size: 0;
 		cursor: pointer;
+
+		&:not(:disabled)::file-selector-button {
+			cursor: pointer;
+		}
 
 		~ .file-content {
 			&::before {
@@ -96,6 +101,10 @@
 				~ .file-content {
 					&::before {
 						border: 1px dashed var(--palettes-primary-400);
+					}
+
+					.file-button {
+						background-color: var(--palettes-100, var(--palettes-grey-100));
 					}
 				}
 			}
