@@ -108,13 +108,3 @@ export function generateInputs(inputs: Record<string, unknown>, argTypes: Strict
 		return `${acc} ${name}="${value.toString()}"`;
 	}, '');
 }
-
-export function storyInput<T>(inputName: string, currentValue: T, defaultValue: T, booleanAttribute = false): string {
-	if (currentValue === defaultValue) {
-		return '';
-	}
-	if (booleanAttribute) {
-		return inputName;
-	}
-	return `${inputName}="${currentValue.toString()}"`;
-}
