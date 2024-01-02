@@ -7,18 +7,26 @@ export default {
 	component: ButtonComponent,
 	render: ({ luButton, ...inputs }, { argTypes }) => {
 		return {
-			template: `<button luButton${luButton !== 'default' ? `="${luButton}"` : ''}  ${generateInputs(inputs, argTypes)}
+			template: `<button luButton${luButton !== '' ? `="${luButton}"` : ''}  ${generateInputs(inputs, argTypes)}
 >Click me !</button>`,
 		};
 	},
 } as Meta;
 
 export const Basic: StoryObj<ButtonComponent> = {
+	argTypes: {
+		luButton: {
+			options: ['', 'outlined', 'text', 'text-invert'],
+			control: {
+				type: 'select',
+			},
+		},
+	},
 	args: {
 		size: 'M',
 		block: false,
 		palette: 'none',
 		state: 'default',
-		luButton: 'default',
+		luButton: '',
 	},
 };

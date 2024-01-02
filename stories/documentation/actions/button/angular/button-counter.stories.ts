@@ -13,20 +13,25 @@ export default {
 	],
 	render: ({ luButton, ...inputs }, { argTypes }) => {
 		return {
-			template: `<button luButton${luButton !== 'default' ? `="${luButton}"` : ''} ${generateInputs(
-				inputs,
-				argTypes,
-			)}>Click me ! <lu-numeric-badge value="7" palette="primary"></lu-numeric-badge></button>`,
+			template: `<button luButton${luButton !== '' ? `="${luButton}"` : ''} ${generateInputs(inputs, argTypes)}>Click me ! <lu-numeric-badge value="7" palette="primary"></lu-numeric-badge></button>`,
 		};
 	},
 } as Meta;
 
 export const Basic: StoryObj<ButtonComponent> = {
+	argTypes: {
+		luButton: {
+			options: ['', 'outlined', 'text', 'text-invert'],
+			control: {
+				type: 'select',
+			},
+		},
+	},
 	args: {
 		size: 'M',
 		block: false,
 		palette: 'none',
 		state: 'default',
-		luButton: 'default',
+		luButton: '',
 	},
 };

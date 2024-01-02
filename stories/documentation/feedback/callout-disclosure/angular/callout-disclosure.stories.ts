@@ -13,7 +13,7 @@ export default {
 	],
 	render: (args, { argTypes }) => {
 		return {
-			template: `<lu-callout-disclosure ${generateInputs(args, argTypes)} ${openStr}>
+			template: `<lu-callout-disclosure ${generateInputs(args, argTypes)}>
 		<ul lu-callout-feedback-list palette="grey">
 			<li lu-callout-feedback-item>
 				<lu-feedback-item-description>
