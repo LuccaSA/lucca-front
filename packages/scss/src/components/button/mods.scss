@@ -7,7 +7,7 @@
 	--components-button-font-size: var(--sizes-S-fontSize);
 	--components-button-line-height: var(--sizes-S-lineHeight);
 	--components-button-padding: 0.375rem 0.75rem;
-	--components-button-gap: .375rem;
+	--components-button-gap: 0.375rem;
 	@include icons.S;
 
 	.numericBadge {
@@ -66,7 +66,8 @@
 		}
 	}
 
-	.button-counter { // deprecated
+	.button-counter {
+		// deprecated
 		background-color: var(--palettes-300, var(--palettes-grey-300));
 		color: var(--palettes-800, var(--palettes-grey-800));
 	}
@@ -88,12 +89,12 @@
 	width: 100%;
 }
 
-@mixin withIcon($atRoot: 'without: rule') {
+@mixin withIcon {
 	--components-button-padding: var(--spacings-XS) calc(var(--spacings-XS) + var(--spacings-XXS));
 }
 
 @mixin withIconS {
-	--components-button-padding: calc(var(--spacings-XXS) + var(--spacings-XXS)/2) calc(var(--spacings-XS) + var(--spacings-XXS));
+	--components-button-padding: calc(var(--spacings-XXS) + var(--spacings-XXS) / 2) calc(var(--spacings-XS) + var(--spacings-XXS));
 }
 
 @mixin withIconXS {
@@ -138,7 +139,8 @@
 	--components-button-padding: var(--spacings-XS) calc(var(--spacings-XS) + var(--spacings-XXS)) var(--spacings-XS) var(--spacings-S);
 
 	@at-root ($atRoot) {
-		.button-counter { // deprecated
+		.button-counter {
+			// deprecated
 			background-color: var(--palettes-600, var(--palettes-primary-600));
 			border-radius: 1rem;
 			display: flex;
@@ -151,7 +153,8 @@
 		}
 
 		&:hover {
-			.button-counter { // deprecated
+			.button-counter {
+				// deprecated
 				background-color: var(--palettes-500, var(--palettes-primary-500));
 			}
 		}
@@ -161,7 +164,8 @@
 @mixin counterS {
 	--components-button-padding: 0.375rem calc(var(--spacings-XS) + var(--spacings-XXS)) 0.375rem var(--spacings-S);
 
-	.button-counter { // deprecated
+	.button-counter {
+		// deprecated
 		height: 1.25rem;
 		min-width: 1.25rem;
 	}
@@ -170,7 +174,8 @@
 @mixin counterXS {
 	--components-button-padding: var(--spacings-XXS) var(--spacings-XS) var(--spacings-XXS) calc(var(--spacings-XS) + var(--spacings-XXS));
 
-	.button-counter { // deprecated
+	.button-counter {
+		// deprecated
 		height: 1rem;
 		min-width: 1rem;
 	}
