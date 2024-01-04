@@ -17,13 +17,13 @@
 	&.mod-withArrow {
 		@include withArrow;
 
-
 		&.mod-S {
 			@include withArrowS;
 		}
 	}
 
 	&.mod-checkable,
+	&:has(.radioField),
 	&:has(.checkboxField),
 	&:has(.switchField) {
 		@include checkable;
@@ -33,6 +33,7 @@
 		@include invalid;
 	}
 
+	&:has(.radioField-input:disabled),
 	&:has(.checkboxField-input:disabled) {
 		.formLabel {
 			@include formLabel.disabled;
