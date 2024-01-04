@@ -12,7 +12,7 @@ export default {
 function getTemplate(args: TableStickyColumnsAndHeaderWithBreakpointsStory): string {
 	return `
 	<div class="demo-wrapper">
-		<table class="table mod-layoutFixedV2@mediaMinS mod-stickyColumnV2@mediaMinS mod-stickyHeaderV2" style="--table-sticky-header-shadow-offset: 73px">
+		<table class="table mod-layoutFixedV2@mediaMinS mod-stickyColumnV2@mediaMinS mod-stickyHeaderV2" style="--table-sticky-header-shadow-offset: 56px">
 			<thead class="table-head">
 				<tr class="table-head-row">
 					<th class="table-head-row-cell mod-stickyColumn-left" style="--table-layout-fixed-width: 8; --table-sticky-column-offset: 0">
