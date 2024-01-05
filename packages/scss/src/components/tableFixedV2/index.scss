@@ -1,5 +1,0 @@
-@use 'exports' as *;
-
-[class*='mod-layoutFixedV2'] {
-	@include layoutFixed;
-}

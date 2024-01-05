@@ -55,10 +55,14 @@
 @forward 'grid';
 // @forward 'gridLegacy'; // 40 Ko
 
-@forward 'tableFixed'; // 33 Ko
-@forward 'tableFixedV2'; //2 ko
-@forward 'tableSticked'; // 67 Ko
-@forward 'tableStickedV2'; //8 Ko
+// caution: the two components cannot be loaded at the same time
+//@forward 'tableFixedLegacy'; // 33 Ko
+@forward 'tableFixed'; //2 ko
+
+// caution: the two components cannot be loaded at the same time
+//@forward 'tableStickedLegacy'; // 67 Ko
+@forward 'tableSticked'; //8 Ko
+
 @forward 'timepicker';
 @forward 'notchBox';
 @forward 'statusBadge';

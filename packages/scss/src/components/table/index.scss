@@ -24,13 +24,11 @@
 		@include S;
 	}
 
-	&.mod-layoutFixed,
-	&.mod-layoutFixedV2 {
+	&.mod-layoutFixed {
 		@include layoutFixed;
 	}
 
-	&[class*="mod-layoutFixed@"],
-	&[class*="mod-layoutFixedV2@"] {
+	&[class*='mod-layoutFixed@'] {
 		@include layoutFixedWithBreakpoint;
 	}
 

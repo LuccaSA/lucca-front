@@ -1,13 +1,13 @@
 import { Meta, StoryFn } from '@storybook/angular';
 
-interface TableStickyColumnsStory {}
+interface TableLegacyStickyColumnsStory {}
 
 export default {
-	title: 'Documentation/Listings/Table/Sticky Columns',
+	title: 'Documentation/Listings/Table/Legacy/Sticky Columns',
 	argTypes: {},
 } as Meta;
 
-function getTemplate(args: TableStickyColumnsStory): string {
+function getTemplate(args: TableLegacyStickyColumnsStory): string {
 	return `
 	<div class="demo-wrapper">
 		<table class="table mod-layoutFixed mod-stickyColumn">
@@ -134,7 +134,7 @@ function getTemplate(args: TableStickyColumnsStory): string {
 	`;
 }
 
-const Template: StoryFn<TableStickyColumnsStory> = (args: TableStickyColumnsStory) => ({
+const Template: StoryFn<TableLegacyStickyColumnsStory> = (args: TableLegacyStickyColumnsStory) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [`.demo-wrapper {overflow: auto;}`],
