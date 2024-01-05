@@ -10,7 +10,7 @@
 		@include stickyColumn;
 	}
 
-	.mod-stickyColumn {
+	&.mod-stickyColumn {
 		@include stickyColumnOffset;
 	}
 
