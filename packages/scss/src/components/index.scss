@@ -50,19 +50,9 @@
 @forward 'util'; // 14 Ko
 @forward 'navside'; // 15 Ko
 @forward 'form'; // 25 Ko
-
-// caution: the two components cannot be loaded at the same time
+@forward 'tableFixed'; // 2 Ko
 @forward 'grid';
-// @forward 'gridLegacy'; // 40 Ko
-
-// caution: the two components cannot be loaded at the same time
-//@forward 'tableFixedLegacy'; // 33 Ko
-@forward 'tableFixed'; //2 ko
-
-// caution: the two components cannot be loaded at the same time
-//@forward 'tableStickedLegacy'; // 67 Ko
-@forward 'tableSticked'; //8 Ko
-
+@forward 'tableSticked'; // 8 Ko
 @forward 'timepicker';
 @forward 'notchBox';
 @forward 'statusBadge';
@@ -84,5 +74,7 @@
 @forward 'emptyState';
 
 // Deprecated CSS components
-// @forward 'gridLegacy'; // 40 Ko
 // @forward 'emptyStateDeprecated';
+// @forward 'gridLegacy'; // 40 Ko
+// @forward 'tableFixedLegacy'; // 33 Ko
+// @forward 'tableStickedLegacy'; // 67 Ko
