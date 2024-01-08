@@ -3,12 +3,4 @@
 .emptyState {
 	@include vars;
 	@include component;
-
-	&.mod-page {
-		@include page;
-	}
-
-	&.mod-center {
-		@include center;
-	}
 }

@@ -14,7 +14,6 @@
 @forward 'collapse'; // 1 Ko
 @forward 'container'; // 1 Ko
 @forward 'errorPage'; // 1 Ko
-@forward 'emptyState'; // 1 Ko
 @forward 'pageHeader'; // 1 Ko
 @forward 'pagination'; // 1 Ko
 @forward 'titleSection'; // 1 Ko
@@ -52,11 +51,7 @@
 @forward 'navside'; // 15 Ko
 @forward 'form'; // 25 Ko
 @forward 'tableFixed'; // 33 Ko
-
-// caution: the two components cannot be loaded at the same time
 @forward 'grid';
-// @forward 'gridLegacy'; // 40 Ko
-
 @forward 'tableSticked'; // 67 Ko
 @forward 'timepicker'; //
 @forward 'notchBox';
@@ -76,3 +71,8 @@
 @forward 'calloutDisclosure';
 @forward 'calloutPopover';
 @forward 'calloutFeedbackList';
+@forward 'emptyState';
+
+// Deprecated CSS components
+// @forward 'gridLegacy'; // 40 Ko
+// @forward 'emptyStateDeprecated';
