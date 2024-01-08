@@ -7,7 +7,7 @@ import { LuInputClearerComponent, LuInputDisplayerDirective } from '@lucca-front
 import { LuForOptionsDirective, LuOptionComparer, LuOptionItemComponent, LuOptionPickerAdvancedComponent } from '@lucca-front/ng/option';
 import { ILuInputWithPicker } from '@lucca-front/ng/picker';
 import { ALuSelectInputComponent } from '@lucca-front/ng/select';
-import { LuDisplayFullname, LuUserDisplayPipe } from '../../display/index';
+import { LuDisplayFullname, LuUserDisplayPipe } from '../../display';
 import { LuUserHomonymsComponent } from '../homonyms';
 import { LuUserMeOptionDirective } from '../me';
 import { LuUserPagedSearcherComponent } from '../searcher';
@@ -61,6 +61,7 @@ export class LuUserSelectInputComponent<U extends import('../../user.model').ILu
 	@Input() appInstanceId: number | string;
 	@Input() operations: number[];
 	@Input() enableFormerEmployees = false;
+	@Input() disablePrincipal = false;
 
 	clue = '';
 
