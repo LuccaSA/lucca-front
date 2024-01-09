@@ -16,7 +16,7 @@ function getTemplate(args: GridsLegacySortStory): string {
 			<div class="grid-demo">2</div>
 		</div>
 		<div class="grid-3@mediaMinXS u-first@mediaMinXS">
-			<div class="grid-demo">3 u-first@mediaMinXS</div>
+			<div class="grid-demo">3</div>
 		</div>
 		<div class="grid-3@mediaMinXS">
 			<div class="grid-demo">4</div>
@@ -27,7 +27,7 @@ function getTemplate(args: GridsLegacySortStory): string {
 			<div class="grid-demo">1</div>
 		</div>
 		<div class="grid-3@mediaMinXS u-last@mediaMinXS">
-			<div class="grid-demo">2 u-last@mediaMinXS</div>
+			<div class="grid-demo">2</div>
 		</div>
 		<div class="grid-3@mediaMinXS">
 			<div class="grid-demo">3</div>
@@ -46,10 +46,10 @@ const Template: StoryFn<GridsLegacySortStory> = (args: GridsLegacySortStory) => 
 	styles: [
 		`
 		.grid-demo {
-			background: #F3F5FC;
+			background-color: var(--palettes-grey-200);
 			margin-bottom: var(--spacings-S);
 			padding: var(--spacings-S);
-			border-radius: 1rem;
+			border-radius: 9999px;
 		}`,
 	],
 });

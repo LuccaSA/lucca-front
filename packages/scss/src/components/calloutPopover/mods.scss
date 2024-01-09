@@ -17,9 +17,10 @@
   line-height: var(--sizes-XS-lineHeight);
   padding: 0.125rem var(--spacings-XXS);
   gap: var(--spacings-XXS);
+  border-radius: var(--commons-borderRadius-M);
 
   .calloutPopover-icon {
-    @include icon.XXS;
+    @include icon.XS;
   }
 }
 

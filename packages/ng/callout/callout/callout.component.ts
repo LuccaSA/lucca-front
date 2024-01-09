@@ -1,4 +1,4 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, EventEmitter, HostBinding, Input, Output } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, EventEmitter, HostBinding, Input, Output, ViewEncapsulation } from '@angular/core';
 import { NgIf } from '@angular/common';
 import { getIntl, Palette, PortalContent, PortalDirective } from '@lucca-front/ng/core';
 import { LU_CALLOUT_TRANSLATIONS } from '../callout.translate';
@@ -12,6 +12,7 @@ import { CalloutState, CalloutStateMap } from '../callout-state';
 	templateUrl: './callout.component.html',
 	styleUrls: ['./callout.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
+	encapsulation: ViewEncapsulation.None,
 })
 export class CalloutComponent {
 	@Input()

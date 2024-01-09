@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, HostBinding, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostBinding, Input, ViewEncapsulation } from '@angular/core';
 
 @Component({
 	selector: 'lu-new-badge',
@@ -6,6 +6,7 @@ import { ChangeDetectionStrategy, Component, HostBinding, Input } from '@angular
 	templateUrl: './new-badge.component.html',
 	styleUrls: ['./new-badge.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
+	encapsulation: ViewEncapsulation.None,
 })
 export class NewBadgeComponent {
 	@Input({ required: true })

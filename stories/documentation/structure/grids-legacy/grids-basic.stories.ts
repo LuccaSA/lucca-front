@@ -21,43 +21,43 @@ function getTemplate(args: GridsLegacyBasicStory): string {
 	return `
 	<div class="grid ${reverse}">
 		<div class="grid-6@mediaMinXS">
-			<div class="demo">grid-6@mediaMinXS</div>
+			<div class="demo">1</div>
 		</div>
 		<div class="grid-6@mediaMinXS">
-			<div class="demo">grid-6@mediaMinXS</div>
+			<div class="demo">2</div>
 		</div>
 	</div>
 
 	<div class="grid ${reverse}">
 		<div class="grid-4@mediaMinS">
-			<div class="demo">grid-4@mediaMinS</div>
+			<div class="demo">1</div>
 		</div>
 		<div class="grid-8@mediaMinS">
-			<div class="demo">grid-8@mediaMinS</div>
+			<div class="demo">2</div>
 		</div>
 	</div>
 
 	<div class="grid ${reverse}">
 		<div class="grid-7@mediaMinM">
-			<div class="demo">grid-7@mediaMinM</div>
+			<div class="demo">1</div>
 		</div>
 		<div class="grid-5@mediaMinM">
-			<div class="demo">grid-5@mediaMinM</div>
+			<div class="demo">2</div>
 		</div>
 	</div>
 
 	<div class="grid ${reverse}">
 		<div class="grid-3@mediaMinL grid-6@mediaMinM">
-			<div class="demo">grid-3@mediaMinL grid-6@mediaMinM</div>
+			<div class="demo">1</div>
 		</div>
 		<div class="grid-3@mediaMinL grid-6@mediaMinM">
-			<div class="demo">grid-3@mediaMinL grid-6@mediaMinM</div>
+			<div class="demo">2</div>
 		</div>
 		<div class="grid-3@mediaMinL grid-6@mediaMinM">
-			<div class="demo">grid-3@mediaMinL grid-6@mediaMinM</div>
+			<div class="demo">3</div>
 		</div>
 		<div class="grid-3@mediaMinL grid-6@mediaMinM">
-			<div class="demo">grid-3@mediaMinL grid-6@mediaMinM</div>
+			<div class="demo">4</div>
 		</div>
 	</div>
 	`;
@@ -69,10 +69,10 @@ const Template: Story<GridsLegacyBasicStory> = (args: GridsLegacyBasicStory) => 
 	styles: [
 		`
 		.demo {
-			background: #F3F5FC;
+			background-color: var(--palettes-grey-200);
 			margin-bottom: var(--spacings-S);
 			padding: var(--spacings-S);
-			border-radius: 1rem;
+			border-radius: 9999px;
 		}`,
 	],
 });

@@ -19,7 +19,7 @@ export class IconComponent {
 	alt: string;
 
 	@Input()
-	size: 'XS' | 'S' | 'M' | 'L' | 'XL' | 'XXL';
+	size: 'XXS' | 'XS' | 'S' | 'M' | 'L' | 'XL' | 'XXL';
 
 	@Input()
 	color: 'primary' | 'secondary' | 'error' | 'warning' | 'success' | 'light' | 'placeholder' | 'inherit' = 'inherit';
