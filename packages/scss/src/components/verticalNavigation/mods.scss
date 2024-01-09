@@ -1,9 +1,21 @@
 @mixin child {
-  display: none;
-  margin: 0;
+	display: none;
+	margin: 0;
 
-  .verticalNavigation-list-item-link {
-    font-weight: 400;
-    padding-left: calc(2rem + var(--components-verticalNavigation-horizontalPadding));
-  }
+	.verticalNavigation-list-item-link {
+		font-weight: 400;
+		padding-left: calc(2rem + var(--components-verticalNavigation-horizontalPadding));
+	}
+}
+
+@mixin iconless {
+	.verticalNavigation-list.mod-child {
+		.verticalNavigation-list-item-link {
+			padding-left: var(--components-verticalNavigation-horizontalPadding);
+		}
+	}
+
+	.verticalNavigation-list-item-link-icon {
+		display: none;
+	}
 }
