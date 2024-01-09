@@ -1,0 +1,69 @@
+@mixin component($atRoot: 'without: rule') {
+	padding: 0;
+	margin: 0;
+	list-style-type: none;
+	display: flex;
+	flex-wrap: wrap;
+	width: var(--components-tabs-width);
+	flex-direction: var(--components-tabs-direction);
+	box-shadow: 0 0 0 var(--commons-divider-width) var(--palettes-grey-300);
+	border-radius: var(--components-tabs-borderRadius);
+	background-color: var(--colors-white-color);
+	font-size: var(--components-tabs-fontSize);
+	line-height: var(--components-tabs-lineHeight);
+
+	@at-root ($atRoot) {
+		.tablist-item {
+			flex-grow: 1;
+			position: relative;
+
+			&::before,
+			&::after {
+				content: '';
+				border-width: 0;
+				inset: var(--components-tabs-dividerInset);
+				border-color: var(--palettes-grey-300);
+				position: absolute;
+				border-style: solid;
+			}
+
+			&::before {
+				right: calc(var(--commons-divider-width) * -1);
+				border-left-width: var(--commons-divider-width);
+				left: auto;
+			}
+
+			&::after {
+				bottom: calc(var(--commons-divider-width) * -1);
+				border-top-width: var(--commons-divider-width);
+				top: auto;
+			}
+		}
+
+		.tablist-item-tab {
+			width: 100%;
+			border: 0;
+			margin: 0;
+			padding: var(--components-tabs-padding);
+			background-color: var(--components-tabs-background);
+			box-shadow: 0 0 0 var(--commons-divider-width) var(--components-tabs-shadow);
+			border-radius: var(--components-tabs-borderRadius);
+			gap: var(--spacings-XS);
+			color: var(--components-tabs-color);
+			text-align: center;
+			justify-content: center;
+			display: flex;
+			align-items: center;
+
+			position: relative;
+			z-index: 1;
+			cursor: var(--components-tabs-cursor);
+			font: inherit;
+		}
+
+		.tabpanel {
+			display: var(--components-tabs-display, block);
+			border-radius: var(--commons-borderRadius-M);
+		}
+	}
+}

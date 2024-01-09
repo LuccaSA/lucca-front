@@ -1,0 +1,29 @@
+@use '@lucca-front/scss/src/components/numericBadge/exports' as numericBadge;
+
+@mixin S {
+	--components-tabs-padding: 0.375rem calc(var(--spacings-XS) + var(--spacings-XXS));
+	--components-tabs-fontSize: var(--sizes-S-fontSize);
+	--components-tabs-lineHeight: var(--sizes-S-lineHeight);
+	--components-tabs-dividerInset: 0.375rem;
+
+	.numericBadge {
+		@include numericBadge.S;
+	}
+}
+
+@mixin XS {
+	--components-tabs-padding: var(--spacings-XXS) var(--spacings-XS);
+	--components-tabs-borderRadius: var(--commons-borderRadius-M);
+	--components-tabs-fontSize: var(--sizes-XS-fontSize);
+	--components-tabs-lineHeight: var(--sizes-XS-lineHeight);
+	--components-tabs-dividerInset: var(--spacings-XXS);
+
+	.numericBadge {
+		@include numericBadge.XS;
+	}
+}
+
+@mixin vertical {
+	--components-tabs-direction: column;
+	--components-tabs-width: auto;
+}

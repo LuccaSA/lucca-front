@@ -1,0 +1,13 @@
+@mixin vars {
+	--components-tabs-borderRadius: var(--commons-borderRadius-L);
+	--components-tabs-padding: var(--spacings-XS) calc(var(--spacings-XS) + var(--spacings-XXS));
+	--components-tabs-fontSize: var(--sizes-M-fontSize);
+	--components-tabs-lineHeight: var(--sizes-M-lineHeight);
+	--components-tabs-background: transparent;
+	--components-tabs-shadow: transparent;
+	--components-tabs-color: var(--palettes-grey-700);
+	--components-tabs-cursor: pointer;
+	--components-tabs-dividerInset: var(--spacings-XS);
+	--components-tabs-direction: row;
+	--components-tabs-width: fit-content;
+}

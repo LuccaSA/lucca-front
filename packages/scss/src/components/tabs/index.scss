@@ -1,0 +1,38 @@
+@use 'exports' as *;
+
+.tablist {
+	@include vars;
+	@include component;
+
+	&.mod-S {
+		@include S;
+	}
+
+	&.mod-XS {
+		@include XS;
+	}
+
+	&.mod-vertical {
+		@include vertical;
+	}
+}
+
+.tablist-item-tab {
+	&[aria-selected='true'] {
+		@include tabSelected;
+	}
+
+	&:focus-visible {
+		@include tabFocused;
+	}
+}
+
+.tabpanel {
+	&:not(.active) {
+		@include tabpanelInactive;
+	}
+
+	&:focus-visible {
+		@include tabpanelFocused;
+	}
+}
