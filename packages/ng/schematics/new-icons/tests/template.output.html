@@ -1,0 +1,22 @@
+<!-- lu-icon -->
+<lu-icon icon="app" />
+<lu-icon icon="app"></lu-icon>
+<lu-icon [icon]="'app'" />
+<lu-icon [icon]="isExternalLink ? 'arrowExternal' : 'app'" />
+
+<!-- Regular classes -->
+<div class="lucca-icon icon-app"></div>
+
+<!-- Legacy -->
+<i class="lucca-icon icon-app"></i>
+
+<!-- NgClass -->
+<span
+	aria-hidden="true"
+	class="lucca-icon"
+	[ngClass]="{ 'icon-arrowChevronBottom': showBillingInfos, 'icon-arrowChevronTop': !showBillingInfos }"
+></span>
+<span aria-hidden="true" class="lucca-icon" [ngClass]="event.expanded ? 'icon-arrowChevronBottom' : 'icon-arrowChevronRight'"></span>
+
+<!-- Class bound attribute -->
+<span [class.icon-arrowChevronBottom]="!showDetails"></span>

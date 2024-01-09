@@ -20,7 +20,7 @@ export default {
 } as Meta;
 
 export const Basic: StoryObj<TextfieldComponent & { disabled: boolean }> = {
-	render: ({ label, required, hiddenLabel, inlineMessage, size, placeholder, prefix, suffix, inlineMessageState, hasClearer, disabled, tooltip, hasSearchIcon, searchIcon }) => {
+	render: ({ label, required, hiddenLabel, inlineMessage, size, placeholder, prefix, suffix, inlineMessageState, hasClearer, disabled, tooltip, hasSearchIcon, searchIcon, type }) => {
 		return {
 			props: {
 				prefix,
@@ -40,6 +40,7 @@ export const Basic: StoryObj<TextfieldComponent & { disabled: boolean }> = {
 	searchIcon="${searchIcon}"
 	placeholder="${placeholder}"
 	tooltip="${tooltip}"
+	type="${type}"
 	[(ngModel)]="example">
 </lu-textfield>
 

@@ -4,32 +4,105 @@
 
 @use '@lucca-front/scss/src/commons/config';
 
-@mixin min($breakpoint, $reversed: false) {
-	$reverse: '';
+@function pxToEm($value) {
+	@return $value / 16px * 1em;
+}
 
-	@if $reversed {
-		$reverse: string.unquote('not all and');
-	} @else {
-		$reverse: string.unquote('');
+// les requêtes simples et multiples
+
+@mixin query($breakpoint, $property: 'width', $max: false, $at: 'media', $name: '') {
+	$operator: '>=';
+
+	@if $max {
+		$operator: '<';
 	}
 
-	$breakpointInPx: map.get(config.$breakpoints, $breakpoint);
+	@if map.get(config.$breakpoints, $breakpoint) {
+		$breakpoint: pxToEm(map.get(config.$breakpoints, $breakpoint));
+	}
 
-	@if $breakpointInPx {
-		$breakpointInEm: math.div($breakpointInPx, 16px) * 1em;
-
-		@media #{$reverse '(min-width:' $breakpointInEm ')'} {
-			@content;
-		}
-	} @else {
-		@media #{$reverse '(min-width:' $breakpoint')'} {
-			@content;
-		}
+	@#{$at} #{$name} (#{$property} #{$operator} #{$breakpoint}) {
+		@content;
 	}
 }
 
-@mixin max($breakpoint) {
-	@include min($breakpoint, $reversed: true) {
+@mixin queries($breakpoint1, $breakpoint2, $property: 'width', $at: 'media', $name: '') {
+	@if map.get(config.$breakpoints, $breakpoint1) {
+		$breakpoint1: pxToEm(map.get(config.$breakpoints, $breakpoint1));
+	}
+
+	@if map.get(config.$breakpoints, $breakpoint2) {
+		$breakpoint2: pxToEm(map.get(config.$breakpoints, $breakpoint2));
+	}
+
+	// si le breakpoint2 est plus petit que le breakpoint1, on les inverse
+	@if ($breakpoint2 < $breakpoint1) {
+		$breakpointTmp: $breakpoint2;
+		$breakpoint2: $breakpoint1;
+		$breakpoint1: $breakpointTmp;
+	}
+
+	@#{$at} #{$name} (#{$breakpoint1} <= #{$property} < #{$breakpoint2}) {
 		@content;
 	}
+}
+
+// les raccourcis vers les requêtes pour min/max/between
+
+@mixin min($breakpoint, $property: 'width', $at: 'media') {
+	@include query($breakpoint, $property: $property, $at: $at) {
+		@content;
+	}
+}
+
+@mixin max($breakpoint, $property: 'width', $at: 'media') {
+	@include query($breakpoint, $property: $property, $max: true, $at: $at) {
+		@content;
+	}
+}
+
+@mixin between($breakpoint1, $breakpoint2, $property: 'width', $at: 'media') {
+	@include queries($breakpoint1, $breakpoint2, $property: $property, $at: $at) {
+		@content;
+	}
+}
+
+// les raccourcis vers les requêtes pour minWidth/maxWidth/betweenWidths
+
+@mixin minWidth($breakpoint, $at: 'media') {
+	@include query($breakpoint, $at: $at) {
+		@content;
+	}
+}
+
+@mixin maxWidth($breakpoint, $at: 'media') {
+	@include query($breakpoint, $max: true, $at: $at) {
+		@content;
+	}
+}
+
+@mixin betweenWidths($breakpoint1, $breakpoint2, $at: 'media') {
+    @include queries($breakpoint1, $breakpoint2, $at: $at) {
+        @content;
+    }
+}
+
+// les raccourcis vers les requêtes pour minHeight/maxHeight/betweenHeights
+
+@mixin minHeight($breakpoint, $at: 'media') {
+	@include query($breakpoint, 'height', $at: $at) {
+		@content;
+	}
+}
+
+@mixin maxHeight($breakpoint, $at: 'media') {
+	@include query($breakpoint, $max: true, $property: 'height', $at: $at) {
+		@content;
+	}
+}
+
+@mixin betweenHeights($breakpoint1, $breakpoint2, $at: 'media') {
+    @include queries($breakpoint1, $breakpoint2, $property: 'height', $at: $at) {
+        @content;
+    }
 }

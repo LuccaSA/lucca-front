@@ -16,9 +16,9 @@ import { Meta, StoryFn } from '@storybook/angular';
 			<button type="button" class="actionIcon" luTooltip="Modifier"><span aria-hidden="true" class="lucca-icon icon-bell"></span></button>
 		</div>
 		<div id="navSide">
-			<button type="button" class="button mod-icon palette-secondary"><span aria-hidden="true" class="lucca-icon icon-mailPaperPlane"></span>Internal navigation</button>
-			<button type="button" class="button mod-icon palette-secondary"><span aria-hidden="true" class="lucca-icon icon-timeClock"></span>Internal navigation</button>
-			<button type="button" class="button mod-icon palette-secondary"><span aria-hidden="true" class="lucca-icon icon-eye"></span>Internal navigation</button>
+			<button type="button" class="button mod-withIcon palette-secondary"><span aria-hidden="true" class="lucca-icon icon-mailPaperPlane"></span>Internal navigation</button>
+			<button type="button" class="button mod-withIcon palette-secondary"><span aria-hidden="true" class="lucca-icon icon-timeClock"></span>Internal navigation</button>
+			<button type="button" class="button mod-withIcon palette-secondary"><span aria-hidden="true" class="lucca-icon icon-eye"></span>Internal navigation</button>
 		</div>
 		<div id="main-content">
 			<a href="#" class="link">Content link</a>

@@ -4,7 +4,7 @@ import { Config, sanitize } from 'dompurify';
 
 type SanitizerConfig = Config & { RETURN_DOM_FRAGMENT?: false | undefined; RETURN_DOM?: false | undefined };
 
-@Pipe({ name: 'luSafeHtml' })
+@Pipe({ name: 'luSafeHtml', standalone: true })
 export class LuSafeHtmlPipe implements PipeTransform {
 	constructor(protected sanitizer: DomSanitizer) {}
 

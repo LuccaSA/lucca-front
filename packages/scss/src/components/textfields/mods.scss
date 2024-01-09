@@ -44,6 +44,11 @@
 		padding: 0;
 		line-height: 0;
 		border-radius: 50%;
+		background-color: var(--palettes-grey-700);
+
+		&:hover {
+			background-color: var(--palettes-grey-600);
+		}
 
 		.lucca-icon {
 			font-size: var(--sizes-XS-lineHeight);

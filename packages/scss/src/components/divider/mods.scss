@@ -1,0 +1,37 @@
+@use '@lucca-front/scss/src/components/button/exports' as button;
+@use '@lucca-front/scss/src/components/actionIcon/exports' as actionIcon;
+
+@mixin S {
+	--components-divider-fontSize: var(--sizes-XS-fontSize);
+	--components-divider-lineHeight: var(--sizes-XS-lineHeight);
+}
+
+@mixin button {
+	.divider-action {
+		@include button.vars;
+		@include button.component;
+
+		&.divider-action {
+			@include button.outlined;
+		}
+	}
+}
+
+@mixin actionIcon {
+	.divider-action {
+		@include actionIcon.vars;
+		@include actionIcon.component;
+	}
+}
+
+@mixin buttonS {
+	.divider-action {
+		@include button.S;
+	}
+}
+
+@mixin actionIconS {
+	.divider-action {
+		@include actionIcon.S;
+	}
+}

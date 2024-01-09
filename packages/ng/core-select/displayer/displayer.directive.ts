@@ -6,14 +6,14 @@ import { LuOptionContext } from '../select.model';
 	selector: '[luDisplayer]',
 	standalone: true,
 })
-export class LuDisplayerDirective<T> {
-	@Input('luDisplayerSelect') set select(select: ALuSelectInputComponent<T, unknown>) {
+export class LuDisplayerDirective<TOption, TValue> {
+	@Input('luDisplayerSelect') set select(select: ALuSelectInputComponent<TOption, TValue>) {
 		select.valueTpl = this.templateRef;
 	}
 
-	public constructor(private templateRef: TemplateRef<LuOptionContext<T>>) {}
+	public constructor(private templateRef: TemplateRef<LuOptionContext<TOption>>) {}
 
-	public static ngTemplateContextGuard<T>(_dir: LuDisplayerDirective<T>, ctx: unknown): ctx is LuOptionContext<T> {
+	public static ngTemplateContextGuard<TOption, TValue>(_dir: LuDisplayerDirective<TOption, TValue>, ctx: unknown): ctx is LuOptionContext<TOption> {
 		return true;
 	}
 }
