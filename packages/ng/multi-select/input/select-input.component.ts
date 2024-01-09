@@ -58,8 +58,10 @@ export class LuMultiSelectInputComponent<T> extends ALuSelectInputComponent<T, T
 
 	/**
 	 * This is used to tell the displayer to focus on the input element
+	 * keepClue is used to avoid triggering an update which would open the panel,
+	 * mainly for when we want to focus without opening the panel
 	 */
-	public readonly focusInput$ = new Subject<void>();
+	public readonly focusInput$ = new Subject<void | { keepClue: boolean }>();
 
 	public readonly emptyClue$ = new Subject<void>();
 
@@ -113,7 +115,7 @@ export class LuMultiSelectInputComponent<T> extends ALuSelectInputComponent<T, T
 		event.stopPropagation();
 		this.onChange?.([]);
 		this.value = [];
-		this.focusInput$.next();
+		this.focusInput$.next({ keepClue: true });
 	}
 
 	override ngOnDestroy() {
