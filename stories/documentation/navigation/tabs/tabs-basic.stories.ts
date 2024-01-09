@@ -36,27 +36,29 @@ export default {
 } as Meta;
 
 function getTemplate(args: TabsBasicStory): string {
+	const vertical = args.modVertical ? 'mod-vertical' : '';
+
 	return `
-<ul class="tablist ${args.size} ${args.modVertical ? 'mod-vertical' : null}" role="tablist">
+<ul class="tablist ${args.size} ${vertical}" role="tablist">
 	<li class="tablist-item" role="presentation">
-		<button class="tablist-item-tab" type="button" role="tab" id="tab1" [attr.aria-selected]="tabActive === 1" aria-controls="panel1" [attr.tabindex]="tabActive === 1 ? null : '-1'">
+		<button class="tablist-item-tab" type="button" role="tab" id="tab1" aria-controls="panel1" [attr.aria-selected]="tabActive === 1" [attr.tabindex]="tabActive === 1 ? null : '-1'">
 			Lorem
 		</button>
 	</li>
 	<li class="tablist-item" role="presentation">
-		<button class="tablist-item-tab" type="button" role="tab" id="tab2" [attr.aria-selected]="tabActive === 2" aria-controls="panel2" [attr.tabindex]="tabActive === 2 ? null : '-1'">
+		<button class="tablist-item-tab" type="button" role="tab" id="tab2" aria-controls="panel2" [attr.aria-selected]="tabActive === 2" [attr.tabindex]="tabActive === 2 ? null : '-1'">
 			Ipsum
 			<span class="numericBadge" *ngIf="withNumericBadge">8</span>
 		</button>
 	</li>
 	<li class="tablist-item" role="presentation">
-		<button class="tablist-item-tab" type="button" role="tab" id="tab3" [attr.aria-selected]="tabActive === 3" aria-controls="panel3" [attr.tabindex]="tabActive === 3 ? null : '-1'">
+		<button class="tablist-item-tab" type="button" role="tab" id="tab3" aria-controls="panel3" [attr.aria-selected]="tabActive === 3" [attr.tabindex]="tabActive === 3 ? null : '-1'">
 			Dolor sit amet
 			<span class="numericBadge" *ngIf="withNumericBadge">88</span>
 		</button>
 	</li>
 	<li class="tablist-item" role="presentation">
-		<button class="tablist-item-tab" type="button" role="tab" id="tab4" [attr.aria-selected]="tabActive === 4" aria-controls="panel4" [attr.tabindex]="tabActive === 4 ? null : '-1'">
+		<button class="tablist-item-tab" type="button" role="tab" id="tab4" aria-controls="panel4" [attr.aria-selected]="tabActive === 4" [attr.tabindex]="tabActive === 4 ? null : '-1'">
 			Consectetur adipisicing elit
 		</button>
 	</li>
