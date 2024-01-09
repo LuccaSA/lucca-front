@@ -1,122 +1,110 @@
-@use '@lucca-front/scss/src/components/inlineMessage/exports' as inlineMessage;
-@use '@lucca-front/scss/src/components/formLabel/exports' as formLabel;
+@use '@lucca-front/icons/src/commons/utils/icon';
+@use '@lucca-front/scss/src/commons/utils/form';
+@use '@lucca-front/scss/src/commons/utils/a11y';
 
 @mixin checked {
-  ~ .radioField-label {
-    .radioField-label-input {
-      border-color: var(--palettes-primary-700);
-    }
+	~ .radioField-icon {
+		background-color: var(--palettes-primary-700);
+		border-color: var(--palettes-primary-700);
 
-    .radioField-label-input-icon {
-      transform: scale(1);
-      opacity: 1;
-      transition-timing-function: cubic-bezier(0.5, 1, 0.5, 1.5);
-    }
-  }
-
-  &:hover {
-    ~ .radioField-label {
-      .radioField-label-input {
-        border-color: var(--palettes-primary-600);
-      }
-
-      .radioField-label-input-icon {
-        background-color: var(--palettes-primary-600);
-      }
-    }
-  }
-
-  &:active {
-    ~ .radioField-label {
-      .radioField-label-input {
-        border-color: var(--palettes-primary-800);
-      }
-
-      .radioField-label-input-icon {
-        background-color: var(--palettes-primary-800);
-      }
-    }
-  }
+		.radioField-icon-check {
+			transform: scale(1);
+		}
+	}
 }
 
-@mixin disabled {
-  ~ .radioField-label {
-    color: var(--palettes-grey-500);
+@mixin hover {
+	~ .radioField-icon {
+		border-color: var(--palettes-grey-600);
+	}
+}
 
-    .formLabel {
-			@include formLabel.disabled;
-		}
-  }
+@mixin checkedHover {
+	~ .radioField-icon {
+		background-color: var(--palettes-primary-600);
+		border-color: var(--palettes-primary-600);
+	}
+}
 
-  ~ .radioField-label {
-    .radioField-label-input {
-      border-color: var(--palettes-grey-500);
-    }
-
-    .radioField-label-input,
-    .formLabel {
-      cursor: default;
-    }
-  }
-
-  ~ .inlineMessage {
-    @include inlineMessage.disabled;
-  }
+@mixin checkedActive {
+	~ .radioField-icon {
+		background-color: var(--palettes-primary-800);
+		border-color: var(--palettes-primary-800);
+	}
 }
 
 @mixin checkedDisabled {
-  ~ .radioField-label {
-    .radioField-label-input {
-      border-color: var(--palettes-grey-500);
-      color: var(--palettes-grey-500);
-    }
-
-    .radioField-label-input-icon {
-      background-color: var(--palettes-grey-500);
-    }
-  }
+	~ .radioField-icon {
+		background-color: var(--palettes-grey-500);
+		border-color: var(--palettes-grey-500);
+		color: var(--palettes-grey-500);
+	}
 }
 
-@mixin invalid {
-  ~ .radioField-label {
-    .radioField-label-input {
-      border-color: var(--palettes-error-700) !important;
-    }
-
-    .formLabel {
-      @include formLabel.error;
-    }
-  }
-
-  &:hover {
-    ~ .radioField-label {
-      .radioField-label-input {
-        border-color: var(--palettes-error-600);
-      }
-
-      .radioField-label-input-icon {
-        background-color: var(--palettes-error-600);
-      }
-    }
-  }
-
-  &:active {
-    ~ .radioField-label {
-      .radioField-label-input {
-        border-color: var(--palettes-error-800);
-      }
-
-      .radioField-label-input-icon {
-        background-color: var(--palettes-error-800);
-      }
-    }
-  }
+@mixin checkedHover {
+	~ .radioField-icon {
+		background-color: var(--palettes-primary-600);
+		border-color: var(--palettes-primary-600);
+	}
 }
 
 @mixin checkedInvalid {
-  ~ .radioField-label {
-    .radioField-label-input-icon {
-      background-color: var(--palettes-error-700);
-    }
-  }
+	~ .radioField-icon {
+		background-color: var(--palettes-error-700);
+		border-color: var(--palettes-error-700);
+	}
+}
+
+@mixin active {
+	~ .radioField-icon {
+		border-color: var(--palettes-grey-800);
+	}
+}
+
+@mixin disabled {
+	cursor: default;
+
+	~ .radioField-icon {
+		border-color: var(--palettes-grey-500);
+	}
+}
+
+@mixin focusVisible {
+	~ .radioField-icon {
+		&::after {
+			@include a11y.focusVisible();
+		}
+	}
+}
+
+@mixin invalid {
+	~ .radioField-icon {
+		border-color: var(--palettes-error-700);
+	}
+}
+
+@mixin invalidHover {
+	~ .radioField-icon {
+		border-color: var(--palettes-error-600);
+	}
+}
+
+@mixin invalidActive {
+	~ .radioField-icon {
+		border-color: var(--palettes-error-800);
+	}
+}
+
+@mixin checkedInvalidHover {
+	~ .radioField-icon {
+		background-color: var(--palettes-error-600);
+		border-color: var(--palettes-error-600);
+	}
+}
+
+@mixin checkedInvalidActive {
+	~ .radioField-icon {
+		background-color: var(--palettes-error-800);
+		border-color: var(--palettes-error-800);
+	}
 }

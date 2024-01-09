@@ -1,5 +1,3 @@
-@use '@lucca-front/scss/src/components/box/exports' as box;
-
 @mixin S {
 	--component-checkboxField-size: 1rem;
 	--component-checkboxField-borderRadius: var(--commons-borderRadius-M);

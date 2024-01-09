@@ -1,15 +1,17 @@
 @use '@lucca-front/icons/src/icon/exports' as icon;
 
 @mixin component {
-  display: flex;
-  gap: var(--components-inlineMessage-gap);
-  font-size: var(--components-inlineMessage-fontSize);
-  line-height: var(--components-inlineMessage-lineHeight);
-  color: var(--components-inlineMessage-color);
+	display: flex;
+	gap: var(--components-inlineMessage-gap);
+	font-size: var(--components-inlineMessage-fontSize);
+	line-height: var(--components-inlineMessage-lineHeight);
+	color: var(--components-inlineMessage-color);
+	grid-column: 2;
 
-  .lucca-icon {
-    @include icon.XS;
-    color: var(--components-inlineMessage-icon-color);
-    margin-top: 2px;
-  }
+	.lucca-icon {
+		@include icon.XS;
+
+		color: var(--components-inlineMessage-icon-color);
+		margin-top: 2px;
+	}
 }
