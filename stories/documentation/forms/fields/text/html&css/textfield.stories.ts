@@ -8,7 +8,8 @@ export default {
 } as Meta;
 
 function getTemplate(args: TextfieldBasicStory): string {
-	return `<div class="form-field">
+	return `
+<div class="form-field">
 	<label class="formLabel" id="IDlabel" for="ID">Label</label>
 	<div class="textField">
 		<div class="textField-input">
@@ -16,7 +17,8 @@ function getTemplate(args: TextfieldBasicStory): string {
 		</div>
 	</div>
 	<div class="inlineMessage" id="IDmessage"><span aria-hidden="true" class="lucca-icon"></span>Helper text</div>
-</div>`;
+</div>
+`;
 }
 
 const Template: StoryFn<TextfieldBasicStory> = (args) => ({

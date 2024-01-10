@@ -3,10 +3,12 @@
 	display: inline-flex;
 	font-size: var(--components-formLabel-fontSize);
 	line-height: var(--components-formLabel-lineHeight);
-	width: fit-content;
+	width: var(--components-formLabel-width);
+	align-items: baseline;
+	cursor: var(--components-formLabel-cursor);
 
 	.lucca-icon {
-		color: var(--palettes-neutral-600);
+		color: var(--palettes-grey-600);
 		font-size: var(--components-formLabel-help-fontSize);
 		line-height: var(--components-formLabel-help-lineHeight);
 		margin-left: 0.125rem;
@@ -18,6 +20,12 @@
 			color: var(--palettes-error-700);
 			line-height: normal;
 			top: 0;
+		}
+
+		.formLabel-counter {
+			margin-left: auto;
+			font-size: var(--sizes-XS-fontSize);
+			line-height: var(--sizes-XS-lineHeight);
 		}
 	}
 }
