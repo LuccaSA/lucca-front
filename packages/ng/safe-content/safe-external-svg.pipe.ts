@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
-import { ChangeDetectorRef, Pipe, PipeTransform, inject } from '@angular/core';
+import { ChangeDetectorRef, inject, Pipe, PipeTransform } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
-import { sanitize } from 'dompurify';
-import { Subscription, map } from 'rxjs';
+import { sanitize } from 'isomorphic-dompurify';
+import { map, Subscription } from 'rxjs';
 
 @Pipe({
 	name: 'luSafeExternalSvg',
