@@ -51,7 +51,7 @@
 				position: absolute;
 				inset: 0;
 				background-color: transparent;
-				border-radius: 9999px;
+				border-radius: var(--borderRadius-XXXL);
 				border: 2px solid white;
 			}
 		}

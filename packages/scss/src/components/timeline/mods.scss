@@ -75,7 +75,7 @@
 		min-width: 0;
 
 		&:before {
-			top: .75rem;
+			top: 0.75rem;
 		}
 	}
 
@@ -252,7 +252,7 @@
 			display: flex;
 			align-items: center;
 			justify-content: center;
-			border-radius: 50%;
+			border-radius: var(--borderRadius-XXXL);
 			background-color: var(--palettes-primary-700);
 			position: absolute;
 			left: var(--spacings-XXS);

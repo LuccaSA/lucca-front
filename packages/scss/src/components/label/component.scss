@@ -6,7 +6,7 @@
 	justify-content: center;
 	align-items: center;
 	white-space: nowrap;
-	border-radius: 9999px;
+	border-radius: var(--borderRadius-XXXL);
 	font-size: var(--sizes-S-fontSize);
 	line-height: var(--sizes-XS-lineHeight);
 	font-weight: 600;

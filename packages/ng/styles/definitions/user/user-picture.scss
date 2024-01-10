@@ -30,7 +30,7 @@
 	.picture {
 		align-items: center;
 		aspect-ratio: 1;
-		border-radius: 50%;
+		border-radius: var(--borderRadius-XXXL);
 		background-color: var(--palettes-grey-50);
 		background-position: center;
 		background-size: cover;

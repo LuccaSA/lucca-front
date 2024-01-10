@@ -1,5 +1,5 @@
 @mixin vars {
 	--component-radioField-size: 1.25rem;
 	--component-radioField-top: 0.125rem;
-	--component-radioField-borderRadius: 9999px;
+	--component-radioField-borderRadius: var(--borderRadius-XXXL);
 }
