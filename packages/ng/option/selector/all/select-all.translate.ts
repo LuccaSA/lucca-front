@@ -17,7 +17,7 @@ export const luOptionSelectAllTranslations: ILuTranslation<ILuOptionSelectAllLab
 	},
 	fr: {
 		select: 'Tout sélectionner',
-		deselect: 'Tout Déselectionner',
+		deselect: 'Tout déselectionner',
 	},
 	de: {
 		select: 'Alle auswählen',

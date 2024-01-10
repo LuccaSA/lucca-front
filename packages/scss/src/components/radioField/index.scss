@@ -7,34 +7,62 @@
 	&.mod-S {
 		@include S;
 	}
-
-	&.mod-withArrow {
-		@include withArrow;
-
-		&.mod-S {
-			@include withArrowS;
-		}
-	}
 }
 
 .radioField-input {
-	&:checked {
-		@include checked;
+	&:focus-visible {
+		@include focusVisible;
+	}
+
+	&:hover {
+		@include hover;
+	}
+
+	&:active {
+		@include active;
 	}
 
 	&:disabled {
 		@include disabled;
-
-		&:checked {
-			@include checkedDisabled;
-		}
 	}
 
 	&[aria-invalid='true'] {
 		@include invalid;
 
-		&:checked {
+		&:hover {
+			@include invalidHover;
+		}
+
+		&:active {
+			@include invalidActive;
+		}
+	}
+
+	&:checked {
+		@include checked;
+
+		&:hover {
+			@include checkedHover;
+		}
+
+		&:active {
+			@include checkedActive;
+		}
+
+		&:disabled {
+			@include checkedDisabled;
+		}
+
+		&[aria-invalid='true'] {
 			@include checkedInvalid;
+
+			&:hover {
+				@include checkedInvalidHover;
+			}
+
+			&:active {
+				@include checkedInvalidActive;
+			}
 		}
 	}
 }

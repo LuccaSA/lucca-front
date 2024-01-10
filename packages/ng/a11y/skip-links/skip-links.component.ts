@@ -1,5 +1,5 @@
 import { DOCUMENT } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { getIntl } from '@lucca-front/ng/core';
 import { LU_SKIP_LINKS_TRANSLATIONS } from './skip-links.translate';
 
@@ -11,13 +11,13 @@ import { LU_SKIP_LINKS_TRANSLATIONS } from './skip-links.translate';
 	standalone: true,
 })
 export class LuSkipLinksComponent {
-	protected intl = getIntl(LU_SKIP_LINKS_TRANSLATIONS);
+	#document = inject(DOCUMENT);
 
-	constructor(@Inject(DOCUMENT) protected document: Document) {}
+	protected intl = getIntl(LU_SKIP_LINKS_TRANSLATIONS);
 
 	anchor(hash: string, e: Event) {
 		e.preventDefault();
-		this.document.location.hash = '';
-		this.document.location.hash = hash;
+		this.#document.location.hash = '';
+		this.#document.location.hash = hash;
 	}
 }

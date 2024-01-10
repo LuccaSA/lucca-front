@@ -2,6 +2,7 @@ import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { CalloutComponent, CalloutFeedbackItemComponent, CalloutFeedbackListComponent } from '@lucca-front/ng/callout';
 import { HiddenArgType, PaletteArgType } from 'stories/helpers/common-arg-types';
 import { ButtonComponent } from '@lucca-front/ng/button';
+import { generateInputs } from 'stories/helpers/stories';
 
 export default {
 	title: 'Documentation/Feedback/Callout/Angular/Basic',
@@ -11,10 +12,10 @@ export default {
 			imports: [CalloutFeedbackItemComponent, CalloutFeedbackListComponent, ButtonComponent],
 		}),
 	],
-	render: (args: CalloutComponent & { description: string }) => {
-		const { description, heading, palette, size, removable, icon, removed } = args;
+	render: (args: CalloutComponent & { description: string }, context) => {
+		const { description, ...inputs } = args;
 		return {
-			template: `<lu-callout heading="${heading}" palette="${palette}" size="${size}" ${removable ? 'removable ' : ''} icon="${icon}" ${removed ? 'removed' : ''}>
+			template: `<lu-callout ${generateInputs(inputs, context.argTypes)}>
 	${description}
 </lu-callout>`,
 		};
@@ -25,7 +26,13 @@ export default {
 			description: 'Supports two-ways binding',
 		},
 		icon: {
-			options: ['info', 'success', 'warning', 'error', 'help'],
+			options: [null, 'info', 'success', 'warning', 'error', 'help'],
+			control: {
+				type: 'select',
+			},
+		},
+		state: {
+			options: [null, 'success', 'warning', 'error'],
 			control: {
 				type: 'select',
 			},

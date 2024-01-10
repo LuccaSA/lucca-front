@@ -22,7 +22,7 @@ export default {
 			},
 		},
 		icon: {
-			options: ['icon-help', 'icon-success', 'icon-warning', 'icon-error'],
+			options: ['icon-signHelp', 'icon-signSuccess', 'icon-signWarning', 'icon-signError'],
 			control: {
 				type: 'select',
 			},
@@ -67,4 +67,4 @@ const Template: Story<CalloutIconStory> = (args: CalloutIconStory) => ({
 });
 
 export const Icon = Template.bind({});
-Icon.args = { s: false, icon: 'icon-help', palette: '' };
+Icon.args = { s: false, icon: 'icon-signHelp', palette: '' };

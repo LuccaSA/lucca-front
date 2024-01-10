@@ -5,7 +5,7 @@
 @use '@lucca-front/scss/src/commons/config';
 
 @function pxToEm($value) {
-	@return $value / 16px * 1em;
+	@return math.div($value, 16px) * 1em;
 }
 
 // les requêtes simples et multiples

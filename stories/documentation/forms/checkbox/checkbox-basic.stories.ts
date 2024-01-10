@@ -92,7 +92,7 @@ function getTemplate(args: CheckboxBasicStory): string {
 
 	return `<div class="form-field${s} u-marginBottomS">
 	<label class="formLabel" for="${id}">
-		Label<sup class="formLabel-required" *ngIf="required" aria-hidden="true">*</sup><span *ngIf="help" aria-hidden="true" class="lucca-icon icon-helpOutline"></span>
+		Label<sup class="formLabel-required" *ngIf="required" aria-hidden="true">*</sup><span *ngIf="help" aria-hidden="true" class="lucca-icon icon-signHelp"></span>
 	</label>
 	<span class="checkboxField">
 		<input type="checkbox" class="checkboxField-input" id="${id}" aria-labelledby="${id}label" aria-describedby="${id}message"${checked}${mixed}${disabled}${required}${invalid} />

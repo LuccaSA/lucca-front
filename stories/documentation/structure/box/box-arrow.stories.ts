@@ -2,7 +2,6 @@ import { Meta, Story } from '@storybook/angular';
 
 interface ArrowBasicStory {
 	s: boolean;
-	label: Text;
 	grey: boolean;
 	field: string;
 	checked: boolean;
@@ -22,11 +21,6 @@ export default {
 				type: 'boolean',
 			},
 		},
-		label: {
-			control: {
-				type: 'text',
-			},
-		},
 		grey: {
 			control: {
 				type: 'boolean',
@@ -43,36 +37,44 @@ export default {
 } as Meta;
 
 function getTemplate(args: ArrowBasicStory): string {
-	const label = args.label;
 	const s = args.s ? ' mod-S' : '';
 	const grey = args.grey ? ' mod-grey' : ' ';
 	const checked = args.checked ? ' checked' : '';
 
 	if (args.field === 'radio') {
 		return `<div class="u-displayFlex u-gapS">
-	<div class="radioField${s} mod-withArrow">
-		<input type="radio" class="radioField-input" id="fieldA" name="field" aria-labelledby="fieldALabel"${checked} />
-		<label class="radioField-label" for="fieldA">
-			<span class="radioField-label-input">
-				<span class="radioField-label-input-icon" aria-hidden="true"></span>
-			</span>
-			<span class="formLabel" id="fieldAlabel">
-				${label}
-			</span>
-		</label>
-		<div class="radioField-arrow${grey}"></div>
+	<div class="form-field mod-withArrow${s}">
+	  <label class="formLabel" for="IDradioA">Label A</label>
+	  <span class="radioField">
+	    <input
+	      type="radio"
+	      class="radioField-input"
+	      id="IDradioA"
+	      name="radioName1"
+	      aria-describedby="IDmessageRadioA"
+	      checked
+	    />
+	    <span class="radioField-icon" aria-hidden="true">
+	      <span class="radioField-icon-check"></span>
+	    </span>
+	  </span>
+	  <div class="form-field-arrow${grey}"></div>
 	</div>
-	<div class="radioField${s} mod-withArrow">
-		<input type="radio" class="radioField-input" id="fieldB" name="field" aria-labelledby="fieldBLabel" />
-		<label class="radioField-label" for="fieldB">
-			<span class="radioField-label-input">
-				<span class="radioField-label-input-icon" aria-hidden="true"></span>
-			</span>
-			<span class="formLabel" id="fieldBlabel">
-				Label
-			</span>
-		</label>
-		<div class="radioField-arrow${grey}"></div>
+	<div class="form-field mod-withArrow${s}">
+	  <label class="formLabel" for="IDradioB">Label B</label>
+	  <span class="radioField">
+	    <input
+	      type="radio"
+	      class="radioField-input"
+	      id="IDradioB"
+	      name="radioName1"
+	      aria-describedby="IDmessageRadioB"
+	    />
+	    <span class="radioField-icon" aria-hidden="true">
+	      <span class="radioField-icon-check"></span>
+	    </span>
+	  </span>
+	  <div class="form-field-arrow${grey}"></div>
 	</div>
 </div>
 <div class="box mod-withArrow${grey}">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam illo nostrum tenetur expedita. Accusantium cumque nisi excepturi eius corporis, iusto quaerat temporibus dolorum necessitatibus laboriosam quidem quibusdam quae aperiam! Vitae!</div>`;
@@ -105,4 +107,4 @@ const Template: Story<ArrowBasicStory> = (args: ArrowBasicStory) => ({
 });
 
 export const Basic = Template.bind({});
-Basic.args = { s: false, label: 'Label', grey: true, field: 'radio', checked: true };
+Basic.args = { s: false, grey: true, field: 'radio', checked: true };

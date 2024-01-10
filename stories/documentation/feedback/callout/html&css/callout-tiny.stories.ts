@@ -22,7 +22,7 @@ export default {
 			},
 		},
 		icon: {
-			options: ['icon-help', 'icon-success', 'icon-warning', 'icon-error'],
+			options: ['icon-signHelp', 'icon-signSuccess', 'icon-signWarning', 'icon-signError'],
 			control: {
 				type: 'select',
 			},
@@ -66,4 +66,4 @@ const Template: Story<CalloutTinyStory> = (args: CalloutTinyStory) => ({
 });
 
 export const Tiny = Template.bind({});
-Tiny.args = { s: false, icon: 'icon-help', palette: '' };
+Tiny.args = { s: false, icon: 'icon-signHelp', palette: '' };

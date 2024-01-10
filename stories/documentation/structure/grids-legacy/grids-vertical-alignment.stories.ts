@@ -41,10 +41,10 @@ const Template: StoryFn<GridsLegacyVerticalAlignmentStory> = (args: GridsLegacyV
 	styles: [
 		`
 		.grid-demo {
-			background: #F3F5FC;
+			background-color: var(--palettes-grey-200);
 			margin-bottom: var(--spacings-S);
 			padding: var(--spacings-S);
-			border-radius: 1rem;
+			border-radius: 9999px;
 		}`,
 	],
 });

@@ -1,7 +1,6 @@
 @use '@lucca-front/scss/src/commons/config';
 @use '@lucca-front/scss/src/components/formLabel/exports' as formLabel;
 @use '@lucca-front/scss/src/components/inlineMessage/exports' as inlineMessage;
-@use '@lucca-front/scss/src/components/textField/exports' as textField;
 
 @use 'exports' as *;
 
@@ -17,13 +16,13 @@
 	&.mod-withArrow {
 		@include withArrow;
 
-
 		&.mod-S {
 			@include withArrowS;
 		}
 	}
 
 	&.mod-checkable,
+	&:has(.radioField),
 	&:has(.checkboxField),
 	&:has(.switchField) {
 		@include checkable;
@@ -33,6 +32,7 @@
 		@include invalid;
 	}
 
+	&:has(.radioField-input:disabled),
 	&:has(.checkboxField-input:disabled) {
 		.formLabel {
 			@include formLabel.disabled;

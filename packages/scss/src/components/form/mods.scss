@@ -9,6 +9,7 @@
 @use '@lucca-front/scss/src/components/checkboxField/exports' as checkboxField;
 @use '@lucca-front/scss/src/components/simpleSelect/exports' as simpleSelect;
 @use '@lucca-front/scss/src/components/multiSelect/exports' as multiSelect;
+@use '@lucca-front/scss/src/components/radioField/exports' as radioField;
 @use '@lucca-front/scss/src/components/box/exports' as box;
 
 @mixin S {
@@ -18,6 +19,10 @@
 
 	.textField {
 		@include textField.S;
+	}
+
+	.radioField {
+		@include radioField.S;
 	}
 
 	.checkboxField {
@@ -60,13 +65,18 @@
 	grid-template-columns: auto 1fr;
 	gap: 0 var(--spacings-XS);
 
-	.checkboxField {
+	.radioField,
+	.checkboxField,
+	.switchField {
 		order: -1;
+	}
+
+	.checkboxField {
 		top: var(--component-checkboxField-top);
 	}
 
-	.switchField {
-		order: -1;
+	.radioField {
+		top: var(--component-radioField-top);
 	}
 }
 

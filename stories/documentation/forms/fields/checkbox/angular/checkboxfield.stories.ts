@@ -2,7 +2,7 @@ import { CheckboxfieldComponent } from '@lucca-front/ng/forms';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { cleanupTemplate } from 'stories/helpers/stories';
+import { cleanupTemplate, generateInputs } from 'stories/helpers/stories';
 
 export default {
 	title: 'Documentation/Forms/Fields/CheckboxField/Angular',
@@ -12,21 +12,12 @@ export default {
 			imports: [CheckboxfieldComponent, FormsModule, ReactiveFormsModule],
 		}),
 	],
-} as Meta;
-
-export const Basic: StoryObj<CheckboxfieldComponent> = {
-	render: ({ label, required, hiddenLabel, inlineMessage, size, inlineMessageState, tooltip }) => {
+	render: (inputs, { argTypes }) => {
 		return {
 			props: {
 				example: false,
 			},
-			template: cleanupTemplate(`<lu-checkboxfield label="${label}"
-	required="${required}"
-	${hiddenLabel ? 'hiddenLabel' : ''}
-	tooltip="${tooltip}"
-	inlineMessage="${inlineMessage}"
-	inlineMessageState="${inlineMessageState}"
-	size="${size}"
+			template: cleanupTemplate(`<lu-checkboxfield ${generateInputs(inputs, argTypes)}
 	[(ngModel)]="example">
 </lu-checkboxfield>
 
@@ -36,6 +27,9 @@ export const Basic: StoryObj<CheckboxfieldComponent> = {
 			},
 		};
 	},
+} as Meta;
+
+export const Basic: StoryObj<CheckboxfieldComponent> = {
 	args: {
 		label: 'Label',
 		hiddenLabel: false,
