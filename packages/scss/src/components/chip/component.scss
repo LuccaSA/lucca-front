@@ -25,7 +25,7 @@
 			align-items: normal;
 			width: var(--components-chip-kill-size);
 			height: var(--components-chip-kill-size);
-			border-radius: 50% !important;
+			border-radius: var(--commons-borderRadius-full) !important;
 			cursor: pointer;
 
 			&::before,
@@ -35,7 +35,7 @@
 			}
 
 			&::before {
-				border-radius: 50%;
+				border-radius: var(--commons-borderRadius-full);
 				background-color: var(--components-chip-kill-disk-color, var(--palettes-grey-700));
 			}
 
@@ -52,8 +52,9 @@
 			}
 
 			&:focus-visible {
-				border-radius: 50%;
 				@include a11y.focusVisible();
+
+				border-radius: var(--commons-borderRadius-full);
 			}
 
 			&:active {

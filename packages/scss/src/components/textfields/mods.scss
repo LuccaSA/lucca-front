@@ -43,7 +43,7 @@
 		height: 1rem;
 		padding: 0;
 		line-height: 0;
-		border-radius: 50%;
+		border-radius: var(--commons-borderRadius-full);
 		background-color: var(--palettes-grey-700);
 
 		&:hover {
