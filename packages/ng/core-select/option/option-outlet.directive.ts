@@ -10,7 +10,6 @@ import { LU_OPTION_CONTEXT, provideOptionContext } from './option.token';
 export class LuOptionOutletDirective<T> implements OnChanges, OnDestroy {
 	@Input() luOptionOutlet?: Type<unknown> | TemplateRef<LuOptionContext<T>>;
 	@Input() luOptionOutletValue: T | undefined;
-	@Input() luOptionShowNull = false;
 
 	private viewContainerRef = inject(ViewContainerRef);
 	private injector = inject(Injector);
