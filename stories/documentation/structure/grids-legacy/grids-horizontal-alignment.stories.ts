@@ -35,7 +35,7 @@ const Template: StoryFn<GridsLegacyHorizontalAlignmentStory> = (args: GridsLegac
 			background-color: var(--palettes-grey-200);
 			margin-bottom: var(--spacings-S);
 			padding: var(--spacings-S);
-			border-radius: var(--borderRadius-XXXL);
+			border-radius: var(--borderRadius-full);
 		}`,
 	],
 });

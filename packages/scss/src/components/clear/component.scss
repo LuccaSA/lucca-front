@@ -12,7 +12,7 @@
 	flex-shrink: 0;
 	width: var(--components-clear-size);
 	height: var(--components-clear-size);
-	border-radius: var(--borderRadius-XXXL);
+	border-radius: var(--borderRadius-full);
 
 	&::before,
 	&::after {
@@ -21,7 +21,7 @@
 	}
 
 	&::before {
-		border-radius: var(--borderRadius-XXXL);
+		border-radius: var(--borderRadius-full);
 		background-color: var(--components-clear-background);
 	}
 

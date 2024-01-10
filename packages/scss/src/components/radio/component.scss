@@ -67,7 +67,7 @@
 			transition-duration: var(--commons-animations-durations-fast);
 			transition-property: background-color, color, transform, border;
 			position: absolute;
-			border-radius: var(--borderRadius-XXXL);
+			border-radius: var(--borderRadius-full);
 			left: 0;
 			content: '';
 		}
