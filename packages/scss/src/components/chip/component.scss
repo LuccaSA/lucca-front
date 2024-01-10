@@ -6,15 +6,14 @@
 	background-color: var(--palettes-700, var(--palettes-grey-200));
 	border-radius: var(--commons-borderRadius-M);
 	color: var(--palettes-text, var(--palettes-grey-800));
-
 	display: inline-flex;
 	align-items: center;
 	gap: var(--spacings-XS);
 	position: relative;
 	vertical-align: middle;
 	padding: calc(var(--spacings-XXS) / 2) var(--spacings-XS);
-	font-size: var(--sizes-S-fontSize);
-	line-height: var(--sizes-S-lineHeight);
+	font-size: var(--components-chip-fontSize);
+	line-height: var(--components-chip-lineHeight);
 
 	@at-root ($atRoot) {
 		.chip-kill {

@@ -24,8 +24,11 @@ export class LuOptionOutletDirective<T> implements OnChanges, OnDestroy {
 
 		const hasRef = this.embeddedViewRef || this.componentRef;
 
-		if (changes['luOptionOutlet'] || (changes['luOptionOutletValue'] && !hasRef)) {
-			this.createComponent();
+		if (changes['luOptionOutlet'] || (changes['luOptionOutletValue'].currentValue && !hasRef)) {
+			const newValue = changes['luOptionOutletValue'].currentValue as T | undefined;
+			if (newValue !== null && newValue !== undefined) {
+				this.createComponent();
+			}
 		} else if (changes['luOptionOutletValue']) {
 			this.updateRefValue();
 		}
@@ -44,7 +47,7 @@ export class LuOptionOutletDirective<T> implements OnChanges, OnDestroy {
 	}
 
 	private createComponent(): void {
-		if (!this.luOptionOutlet || !this.luOptionOutletValue) {
+		if (!this.luOptionOutlet) {
 			return;
 		}
 
@@ -57,9 +60,6 @@ export class LuOptionOutletDirective<T> implements OnChanges, OnDestroy {
 	}
 
 	private updateRefValue(): void {
-		if (!this.luOptionOutletValue) {
-			return;
-		}
 		if (this.embeddedViewRef) {
 			this.embeddedViewRef.context = { $implicit: this.luOptionOutletValue };
 		} else if (this.componentRef) {

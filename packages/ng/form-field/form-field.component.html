@@ -2,16 +2,5 @@
 	{{label}}<sup class="formLabel-required" aria-hidden="true" *ngIf="required">*</sup>
 	<lu-icon icon="signHelp" alt="" *ngIf="tooltip" [luTooltip]="tooltip"></lu-icon>
 </label>
-<ng-container [ngSwitch]="layout">
-	<div class="textField" *ngSwitchCase="'default'">
-		<ng-container *ngTemplateOutlet="contentTpl"></ng-container>
-	</div>
-	<ng-container *ngSwitchCase="'checkbox'">
-		<ng-container *ngTemplateOutlet="contentTpl"></ng-container>
-	</ng-container>
-</ng-container>
+<ng-content></ng-content>
 <lu-inline-message id="{{id}}-message" *ngIf="inlineMessage" [label]="inlineMessage" [state]="inlineMessageState"></lu-inline-message>
-<!--We have to do this because multiple ng-content in the same template leads to weird behaviors-->
-<ng-template #contentTpl>
-	<ng-content></ng-content>
-</ng-template>

@@ -1,0 +1,66 @@
+@use '@lucca-front/icons/src/icon/exports' as icon;
+
+@mixin component($atRoot: 'without: rule') {
+	display: grid;
+	grid-template-columns: 1fr auto auto;
+	align-items: center;
+	box-shadow: 0 0 0 1px var(--components-simpleSelect-border-color);
+	background-color: var(--components-simpleSelect-background);
+	border-radius: var(--commons-borderRadius-M);
+	padding: var(--components-simpleSelect-padding);
+	overflow: hidden;
+	outline: none;
+	cursor: pointer;
+
+	&:hover {
+		--components-simpleSelect-border-color: var(--palettes-grey-400);
+	}
+
+	@at-root ($atRoot) {
+		.simpleSelect-input {
+			grid-column-start: 1;
+			grid-row-start: 1;
+			font-size: var(--components-simpleSelect-fontSize);
+			line-height: var(--components-simpleSelect-lineHeight);
+			padding: 0;
+			min-width: fit-content;
+			background-color: transparent;
+			color: var(--components-simpleSelect-value-color);
+			border: 0;
+			outline: none;
+			position: relative;
+			z-index: 1;
+			cursor: pointer;
+
+			&::placeholder {
+				color: var(--components-simpleSelect-placeholder);
+			}
+		}
+
+		.simpleSelect-value {
+			grid-column-start: 1;
+			grid-row-start: 1;
+			width: 100%;
+			font-size: var(--components-simpleSelect-fontSize);
+			line-height: var(--components-simpleSelect-lineHeight);
+			color: var(--components-simpleSelect-value-color);
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			transition: color var(--commons-animations-durations-fast) ease;
+		}
+
+		.simpleSelect-clear {
+			grid-column-start: -2;
+			margin-left: var(--components-simpleSelect-gap);
+		}
+
+		.simpleSelect-arrow {
+			grid-column-start: -1;
+			margin-left: var(--components-simpleSelect-gap);
+			color: var(--components-simpleSelect-arrow-color);
+			transition: transform var(--commons-animations-durations-standard) ease;
+			@include icon.M;
+		}
+	}
+}

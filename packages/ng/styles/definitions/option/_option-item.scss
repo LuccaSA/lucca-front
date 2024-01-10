@@ -2,7 +2,7 @@
 @use '@lucca-front/scss/src/commons/utils/a11y';
 
 :root {
-	--components-options-item-padding-vertical: var(--spacings-XS);
+	--components-options-item-padding-vertical: var(--spacings-XXS);
 	--components-options-item-padding-horizontal: var(--spacings-XS);
 	--components-options-item-multiple-padding: 2.25rem;
 	--components-options-item-icon-color: var(--palettes-grey-800);
@@ -25,6 +25,7 @@
 	}
 
 	.optionItem-value {
+		position: relative;
 		border-radius: var(--commons-borderRadius-M);
 		display: block;
 		padding: var(--components-options-item-padding-vertical) var(--components-options-item-padding-horizontal);
@@ -33,6 +34,18 @@
 
 		&.is-selected {
 			background-color: var(--palettes-primary-50);
+
+			&:before {
+				content: '';
+				position: absolute;
+				top: 0;
+				bottom: 0;
+				left: calc(var(--spacings-XXS) * -1);
+				width: 2px;
+				background-color: var(--palettes-primary-700);
+				border-top-right-radius: var(--commons-borderRadius-M);
+				border-bottom-right-radius: var(--commons-borderRadius-M);
+			}
 
 			&:hover {
 				background-color: var(--palettes-primary-100);
