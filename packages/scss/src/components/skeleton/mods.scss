@@ -21,7 +21,7 @@
 
 @mixin circle {
 	@include skeletonShapeSizing('XS', 'S', 'L', 'XL', 'XXL');
-	border-radius: var(--borderRadius-full);
+	border-radius: var(--commons-borderRadius-full);
 	height: var(--components-skeleton-shape-height);
 	width: var(--components-skeleton-shape-width);
 }

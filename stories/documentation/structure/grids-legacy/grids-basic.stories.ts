@@ -72,7 +72,7 @@ const Template: Story<GridsLegacyBasicStory> = (args: GridsLegacyBasicStory) => 
 			background-color: var(--palettes-grey-200);
 			margin-bottom: var(--spacings-S);
 			padding: var(--spacings-S);
-			border-radius: var(--borderRadius-full);
+			border-radius: var(--commons-borderRadius-full);
 		}`,
 	],
 });
