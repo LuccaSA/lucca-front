@@ -55,7 +55,7 @@ export default {
 	decorators: [applicationConfig({ providers: [provideAnimations()] })],
 } as Meta;
 
-const template: StoryFn<SlideAnimationStory> = (args: SlideAnimationStory) => ({
+const template: StoryFn<SlideAnimationStory> = (args) => ({
 	props: args,
 });
 

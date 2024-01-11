@@ -20,7 +20,7 @@ export default {
 	component: NumbersStory,
 } as Meta;
 
-const template: StoryFn<NumbersStory> = (args: NumbersStory) => ({
+const template: StoryFn<NumbersStory> = (args) => ({
 	props: args,
 });
 

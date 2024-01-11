@@ -41,7 +41,7 @@ export default {
 	],
 } as Meta;
 
-const template: StoryFn<CalendarStory> = (args: CalendarStory) => ({
+const template: StoryFn<CalendarStory> = (args) => ({
 	props: args,
 });
 

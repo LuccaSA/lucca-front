@@ -13,7 +13,7 @@ function getTemplate(args: ButtonSizeStory): string {
 <button type="button" class="button mod-XS">Button</button>`;
 }
 
-const Template: StoryFn<ButtonSizeStory> = (args: ButtonSizeStory) => ({
+const Template: StoryFn<ButtonSizeStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 });

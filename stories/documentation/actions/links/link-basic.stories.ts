@@ -30,7 +30,7 @@ function getTemplate(args: LinkBasicStory): string {
 <a class="link mod-icon ${decorationHover} ${disabled}" href="#" target="_blank">Lien externe<span aria-hidden="true" class="lucca-icon icon-arrowExternal"></span><span class="u-mask">Ouvrir dans une nouvelle fenêtre</span></a>`;
 }
 
-const Template: StoryFn<LinkBasicStory> = (args: LinkBasicStory) => ({
+const Template: StoryFn<LinkBasicStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [

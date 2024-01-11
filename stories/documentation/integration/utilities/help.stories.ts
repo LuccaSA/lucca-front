@@ -12,7 +12,7 @@ function getTemplate(args: HelpStory): string {
 	`;
 }
 
-const Template: StoryFn<HelpStory> = (args: HelpStory) => ({
+const Template: StoryFn<HelpStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [

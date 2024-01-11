@@ -60,7 +60,7 @@ function getTemplate(args: PageHeaderBasicStory): string {
 	`;
 }
 
-const Template: StoryFn<PageHeaderBasicStory> = (args: PageHeaderBasicStory) => ({
+const Template: StoryFn<PageHeaderBasicStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 });

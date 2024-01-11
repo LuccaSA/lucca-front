@@ -28,7 +28,7 @@ function getTemplate(args: RadioDisabledStory): string {
 	`;
 }
 
-const Template: StoryFn<RadioDisabledStory> = (args: RadioDisabledStory) => ({
+const Template: StoryFn<RadioDisabledStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 });

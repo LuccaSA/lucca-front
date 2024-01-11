@@ -51,7 +51,7 @@ function getTemplate(args: TableSelectableStory): string {
 	`;
 }
 
-const Template: StoryFn<TableSelectableStory> = (args: TableSelectableStory) => ({
+const Template: StoryFn<TableSelectableStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 });

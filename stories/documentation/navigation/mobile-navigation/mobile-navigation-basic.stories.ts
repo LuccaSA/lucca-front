@@ -1,12 +1,10 @@
-import { Meta, Story } from '@storybook/angular';
+import { Meta, StoryFn } from '@storybook/angular';
 
-interface MobileNavigationBasicStory {
-}
+interface MobileNavigationBasicStory {}
 
 export default {
 	title: 'Documentation/Navigation/MobileNavigation/Basic',
-	argTypes: {
-	},
+	argTypes: {},
 } as Meta;
 
 function getTemplate(args: MobileNavigationBasicStory): string {
@@ -41,7 +39,7 @@ function getTemplate(args: MobileNavigationBasicStory): string {
 </nav>`;
 }
 
-const Template: Story<MobileNavigationBasicStory> = (args: MobileNavigationBasicStory) => ({
+const Template: StoryFn<MobileNavigationBasicStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 });

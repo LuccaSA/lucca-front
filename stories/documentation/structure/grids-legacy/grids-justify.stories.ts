@@ -33,7 +33,7 @@ function getTemplate(args: GridsLegacyJustifyStory): string {
 	`;
 }
 
-const Template: StoryFn<GridsLegacyJustifyStory> = (args: GridsLegacyJustifyStory) => ({
+const Template: StoryFn<GridsLegacyJustifyStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [

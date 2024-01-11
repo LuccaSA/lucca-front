@@ -1,19 +1,17 @@
-import { Meta, Story } from '@storybook/angular';
+import { Meta, StoryFn } from '@storybook/angular';
 
-interface InlineMessageSizeStory {
-}
+interface InlineMessageSizeStory {}
 
 export default {
 	title: 'Documentation/Forms/InlineMessage/HTML & CSS/Size',
-	argTypes: {
-	},
+	argTypes: {},
 } as Meta;
 
 function getTemplate(args: InlineMessageSizeStory): string {
 	return `<div class="inlineMessage mod-S">Inline message</div>`;
 }
 
-const Template: Story<InlineMessageSizeStory> = (args: InlineMessageSizeStory) => ({
+const Template: StoryFn<InlineMessageSizeStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 });

@@ -37,7 +37,7 @@ function getTemplate(args: TimelinesCheckedStory): string {
 	`;
 }
 
-const Template: StoryFn<TimelinesCheckedStory> = (args: TimelinesCheckedStory) => ({
+const Template: StoryFn<TimelinesCheckedStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 });

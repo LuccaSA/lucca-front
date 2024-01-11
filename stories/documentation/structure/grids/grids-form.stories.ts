@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/angular';
+import { Meta, StoryFn } from '@storybook/angular';
 
 interface GridsFormStory {
 	reverse: boolean;
@@ -21,7 +21,7 @@ function getTemplate(args: GridsFormStory): string {
 </div>`;
 }
 
-const Template: Story<GridsFormStory> = (args: GridsFormStory) => ({
+const Template: StoryFn<GridsFormStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [

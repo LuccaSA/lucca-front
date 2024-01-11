@@ -65,7 +65,7 @@ function getTemplate(args: LoadingsBasicStory): string {
 	`;
 }
 
-const Template: StoryFn<LoadingsBasicStory> = (args: LoadingsBasicStory) => ({
+const Template: StoryFn<LoadingsBasicStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [

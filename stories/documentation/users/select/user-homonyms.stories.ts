@@ -37,7 +37,7 @@ export default {
 	decorators: [applicationConfig({ providers: [provideAnimations(), provideHttpClient()] })],
 } as Meta;
 
-const template: StoryFn<UserHomonymsStory> = (args: UserHomonymsStory) => ({
+const template: StoryFn<UserHomonymsStory> = (args) => ({
 	props: args,
 });
 

@@ -13,7 +13,7 @@ function getTemplate(args: ButtonStyleStory): string {
 <button type="button" class="button mod-text">Button</button>`;
 }
 
-const Template: StoryFn<ButtonStyleStory> = (args: ButtonStyleStory) => ({
+const Template: StoryFn<ButtonStyleStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 });

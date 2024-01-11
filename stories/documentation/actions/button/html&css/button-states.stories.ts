@@ -12,8 +12,7 @@ function getTemplate(args: ButtonStatesStory): string {
 <button type="button" class="button is-error">Button</button>`;
 }
 
-
-const Template: StoryFn<ButtonStatesStory> = (args: ButtonStatesStory) => ({
+const Template: StoryFn<ButtonStatesStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 });

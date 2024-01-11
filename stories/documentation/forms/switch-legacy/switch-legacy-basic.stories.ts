@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/angular';
+import { Meta, StoryFn } from '@storybook/angular';
 
 interface SwitchLegacyBasicStory {
 	disabled: boolean;
@@ -42,7 +42,7 @@ function getTemplate(args: SwitchLegacyBasicStory): string {
 </label>`;
 }
 
-const Template: Story<SwitchLegacyBasicStory> = (args: SwitchLegacyBasicStory) => ({
+const Template: StoryFn<SwitchLegacyBasicStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 });

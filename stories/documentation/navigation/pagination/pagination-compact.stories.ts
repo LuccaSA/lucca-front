@@ -24,7 +24,7 @@ function getTemplate(args: PaginationCompactStory): string {
 	`;
 }
 
-const Template: StoryFn<PaginationCompactStory> = (args: PaginationCompactStory) => ({
+const Template: StoryFn<PaginationCompactStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 });

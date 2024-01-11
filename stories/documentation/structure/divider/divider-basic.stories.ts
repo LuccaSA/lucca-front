@@ -37,7 +37,7 @@ function getTemplate(args: DividerBasicStory): string {
 	`;
 }
 
-const Template: StoryFn<DividerBasicStory> = (args: DividerBasicStory) => ({
+const Template: StoryFn<DividerBasicStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 });

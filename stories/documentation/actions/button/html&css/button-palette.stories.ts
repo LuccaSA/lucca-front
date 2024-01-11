@@ -12,8 +12,7 @@ function getTemplate(args: ButtonPaletteStory): string {
 <button type="button" class="button palette-error">Button</button>`;
 }
 
-
-const Template: StoryFn<ButtonPaletteStory> = (args: ButtonPaletteStory) => ({
+const Template: StoryFn<ButtonPaletteStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 });

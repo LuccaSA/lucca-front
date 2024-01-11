@@ -68,7 +68,7 @@ function getTemplate(args: PageHeaderBreadcrumbStory): string {
 	`;
 }
 
-const Template: StoryFn<PageHeaderBreadcrumbStory> = (args: PageHeaderBreadcrumbStory) => ({
+const Template: StoryFn<PageHeaderBreadcrumbStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 });

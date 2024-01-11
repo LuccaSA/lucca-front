@@ -13,7 +13,7 @@ function getTemplate(args: FloatStory): string {
 	`;
 }
 
-const Template: StoryFn<FloatStory> = (args: FloatStory) => ({
+const Template: StoryFn<FloatStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [
