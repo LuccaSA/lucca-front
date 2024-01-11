@@ -45,8 +45,8 @@
 			line-height: var(--components-simpleSelect-lineHeight);
 			color: var(--components-simpleSelect-value-color);
 			white-space: nowrap;
-			overflow: hidden;
-			text-overflow: ellipsis;
+		  overflow: hidden;
+		  text-overflow: ellipsis;
 			transition: color var(--commons-animations-durations-fast) ease;
 		}
 

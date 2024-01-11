@@ -10,4 +10,4 @@ export type TextfieldTextAddon = {
 	ariaLabel: string;
 };
 
-export type TextfieldAddon = TextfieldIconAddon | TextfieldTextAddon;
+export type TextInputAddon = TextfieldIconAddon | TextfieldTextAddon;

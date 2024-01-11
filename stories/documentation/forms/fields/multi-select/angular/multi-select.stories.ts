@@ -1,17 +1,17 @@
-import { MultiSelectFieldComponent, SimpleSelectFieldComponent } from '@lucca-front/ng/forms';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LuOptionDirective } from '@lucca-front/ng/core-select';
 import { allLegumes, FilterLegumesPipe } from '@/stories/forms/select/select.utils';
 import { HiddenArgType } from '../../../../../helpers/common-arg-types';
+import { LuMultiSelectInputComponent } from '@lucca-front/ng/multi-select';
+import { FormFieldComponent } from '@lucca-front/ng/form-field';
 
 export default {
 	title: 'Documentation/Forms/Fields/Multi Select/Angular',
-	component: SimpleSelectFieldComponent,
 	decorators: [
 		moduleMetadata({
-			imports: [MultiSelectFieldComponent, FormsModule, BrowserAnimationsModule, LuOptionDirective, FilterLegumesPipe],
+			imports: [LuMultiSelectInputComponent, FormsModule, BrowserAnimationsModule, LuOptionDirective, FilterLegumesPipe],
 		}),
 	],
 	argTypes: {
@@ -29,29 +29,33 @@ export default {
 	},
 } as Meta;
 
-export const Basic: StoryObj<MultiSelectFieldComponent<unknown>> = {
+export const Basic: StoryObj<LuMultiSelectInputComponent<unknown> & FormFieldComponent> = {
 	render: ({ label, required, hiddenLabel, inlineMessage, size, placeholder, inlineMessageState, disabled, tooltip, clearable }) => {
 		return {
 			props: { legumes: allLegumes, example: [] },
-			// TODO use generateStoryArgs here once merged
-			template: `<lu-multi-select-field label="${label}"
-	required="${required}"
+			template: `
+<lu-form-field
+	label="${label}"
 	${hiddenLabel ? 'hiddenLabel' : ''}
-	${disabled ? 'disabled' : ''}
-	${clearable ? 'clearable' : ''}
 	inlineMessage="${inlineMessage}"
 	inlineMessageState="${inlineMessageState}"
 	size="${size}"
-	placeholder="${placeholder}"
-	[options]="legumes | filterLegumes:clue"
-	(clueChange)="clue = $event"
 	tooltip="${tooltip}"
-	[(ngModel)]="example">
-</lu-multi-select-field>
+>
+	<lu-multi-select
+		${disabled ? 'disabled' : ''}
+		${clearable ? 'clearable' : ''}
+		[options]="legumes | filterLegumes:clue"
+		(clueChange)="clue = $event"
+		placeholder="${placeholder}"
+		required="${required}"
+		[(ngModel)]="example">
+	</lu-multi-select>
+</lu-form-field>
 
 {{example | json}}`,
 			moduleMetadata: {
-				imports: [MultiSelectFieldComponent, FormsModule, BrowserAnimationsModule],
+				imports: [LuMultiSelectInputComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule],
 			},
 		};
 	},

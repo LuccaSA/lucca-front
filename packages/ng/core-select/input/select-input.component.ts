@@ -168,7 +168,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	protected changeDetectorRef = inject(ChangeDetectorRef);
 	protected overlayContainerRef: HTMLElement = inject(OverlayContainer).getContainerElement();
 
-	protected label: HTMLElement | undefined = inject(SELECT_LABEL);
+	protected labelElement: HTMLElement | undefined = inject(SELECT_LABEL);
 	protected labelId: string = inject(SELECT_LABEL_ID);
 
 	registerOnChange(onChange: (value: TValue) => void): void {
@@ -190,8 +190,8 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	}
 
 	ngOnInit(): void {
-		if (this.label) {
-			this.label.id = this.labelId;
+		if (this.labelElement) {
+			this.labelElement.id = this.labelId;
 		}
 	}
 

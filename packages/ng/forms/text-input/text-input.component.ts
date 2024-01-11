@@ -1,47 +1,29 @@
 import { booleanAttribute, Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { FormFieldComponent, FormFieldSize, InputDirective } from '@lucca-front/ng/form-field';
+import { FormFieldComponent, InputDirective } from '@lucca-front/ng/form-field';
 import { NoopValueAccessorDirective } from '../noop-value-accessor.directive';
 import { NgIf, NgTemplateOutlet } from '@angular/common';
 import { FormFieldIdDirective } from '../form-field-id.directive';
-import { TextfieldAddon } from './textfield-addon';
-import { InlineMessageState } from '@lucca-front/ng/inline-message';
+import { TextInputAddon } from './text-input-addon';
 import { LuccaIcon } from '@lucca-front/icons';
-import { AbstractFieldComponent } from '../abstract-field-component';
-import { SafeHtml } from '@angular/platform-browser';
 import { getIntl } from '@lucca-front/ng/core';
-import { LU_TEXTFIELD_TRANSLATIONS } from './textfield.translate';
+import { LU_TEXTFIELD_TRANSLATIONS } from './text-input.translate';
+import { injectNgControl } from '../inject-ng-control';
 
 type TextFieldType = 'text' | 'email' | 'password' | 'number';
 
 @Component({
-	selector: 'lu-textfield',
+	selector: 'lu-text-input',
 	standalone: true,
 	imports: [FormFieldComponent, InputDirective, NgIf, ReactiveFormsModule, FormFieldIdDirective, NgTemplateOutlet],
-	templateUrl: './textfield.component.html',
+	templateUrl: './text-input.component.html',
 	hostDirectives: [NoopValueAccessorDirective],
 })
-export class TextfieldComponent extends AbstractFieldComponent {
-	@Input({ required: true })
-	label: string;
+export class TextInputComponent {
+	ngControl = injectNgControl();
 
 	@Input()
 	placeholder: string;
-
-	@Input({ transform: booleanAttribute })
-	hiddenLabel = false;
-
-	@Input()
-	tooltip: string | SafeHtml;
-
-	@Input()
-	inlineMessage: string;
-
-	@Input()
-	inlineMessageState: InlineMessageState;
-
-	@Input()
-	size: FormFieldSize;
 
 	@Input({ transform: booleanAttribute })
 	hasClearer = false;
@@ -53,15 +35,16 @@ export class TextfieldComponent extends AbstractFieldComponent {
 	inputElementRef: ElementRef<HTMLInputElement>;
 
 	@Input()
-	prefix: TextfieldAddon;
+	prefix: TextInputAddon;
 
 	@Input()
-	suffix: TextfieldAddon;
+	suffix: TextInputAddon;
 
 	@Input()
 	get type(): TextFieldType {
 		return this.showPassword ? 'text' : this._type;
 	}
+
 	set type(type: TextFieldType) {
 		this._type = type;
 	}
