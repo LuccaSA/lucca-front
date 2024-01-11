@@ -60,8 +60,10 @@ function getTemplate(args: PageHeaderBreadcrumbStory): string {
 			</div>
 		</div>
 		<div class="pageHeader-description">
-			<p class="u-marginBottom0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac justo scelerisque, blandit nibh quis, imperdiet justo.
-				Nullam condimentum nulla et neque ultricies bibendum <a target="_blank">Lien<span aria-hidden="true" class="lucca-icon icon-arrowExternal mod-XS u-marginLeftXXS"></span></a>.
+			<p class="u-marginBottom0">
+				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac justo scelerisque, blandit nibh quis, imperdiet justo.
+				Nullam condimentum nulla et neque ultricies bibendum
+				<a target="_blank">Lien<span aria-hidden="true" class="lucca-icon icon-arrowExternal mod-XS u-marginLeftXXS"></span></a>.
 			</p>
 		</div>
 	</header>
