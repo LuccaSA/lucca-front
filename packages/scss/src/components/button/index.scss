@@ -62,6 +62,16 @@
 		}
 	}
 
+	&.mod-delete {
+		&:not([disabled], .is-disabled) {
+			@include delete;
+
+			&.mod-outlined {
+				@include outlinedDelete;
+			}
+		}
+	}
+
 	&.mod-invert {
 		@include invert;
 	}
