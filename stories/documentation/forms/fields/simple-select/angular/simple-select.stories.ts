@@ -1,17 +1,17 @@
-import { SimpleSelectFieldComponent } from '@lucca-front/ng/forms';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LuOptionDirective } from '@lucca-front/ng/core-select';
 import { allLegumes, FilterLegumesPipe } from '@/stories/forms/select/select.utils';
 import { HiddenArgType } from '../../../../../helpers/common-arg-types';
+import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
+import { FormFieldComponent } from '@lucca-front/ng/form-field';
 
 export default {
 	title: 'Documentation/Forms/Fields/Simple Select/Angular',
-	component: SimpleSelectFieldComponent,
 	decorators: [
 		moduleMetadata({
-			imports: [SimpleSelectFieldComponent, FormsModule, BrowserAnimationsModule, LuOptionDirective, FilterLegumesPipe],
+			imports: [LuSimpleSelectInputComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule, LuOptionDirective, FilterLegumesPipe],
 		}),
 	],
 	argTypes: {
@@ -29,30 +29,34 @@ export default {
 	},
 } as Meta;
 
-export const Basic: StoryObj<SimpleSelectFieldComponent<unknown>> = {
+export const Basic: StoryObj<LuSimpleSelectInputComponent<unknown> & FormFieldComponent> = {
 	render: ({ label, required, clearable, loading, hiddenLabel, inlineMessage, size, placeholder, inlineMessageState, disabled, tooltip }) => {
 		return {
 			props: { legumes: allLegumes },
-			// TODO use generateStoryArgs here once merged
-			template: `<lu-simple-select-field label="${label}"
-	required="${required}"
+			template: `
+<lu-form-field
+	label="${label}"
 	${hiddenLabel ? 'hiddenLabel' : ''}
-	${disabled ? 'disabled' : ''}
-	${clearable ? 'clearable' : ''}
-	${loading ? 'loading' : ''}
 	inlineMessage="${inlineMessage}"
 	inlineMessageState="${inlineMessageState}"
 	size="${size}"
-	placeholder="${placeholder}"
-	[options]="legumes | filterLegumes:clue"
-	(clueChange)="clue = $event"
 	tooltip="${tooltip}"
-	[(ngModel)]="example">
-</lu-simple-select-field>
+>
+	<lu-simple-select
+		${loading ? 'loading' : ''}
+		${disabled ? 'disabled' : ''}
+		${clearable ? 'clearable' : ''}
+		[options]="legumes | filterLegumes:clue"
+		(clueChange)="clue = $event"
+		placeholder="${placeholder}"
+		required="${required}"
+		[(ngModel)]="example">
+	</lu-simple-select>
+</lu-form-field>
 
 {{example | json}}`,
 			moduleMetadata: {
-				imports: [SimpleSelectFieldComponent, FormsModule, BrowserAnimationsModule],
+				imports: [LuSimpleSelectInputComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule],
 			},
 		};
 	},

@@ -1,5 +1,5 @@
 import { AsyncPipe, NgFor, NgIf, NgPlural, NgPluralCase } from '@angular/common';
-import { ChangeDetectionStrategy, Component, DestroyRef, ElementRef, inject, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, ElementRef, OnInit, ViewChild, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { getIntl } from '@lucca-front/ng/core';
@@ -112,7 +112,6 @@ export class LuMultiSelectDefaultDisplayerComponent<T> implements OnInit {
 			this.select.panelRef.updateSelectedOptions(this.value);
 		}
 	}
-
 	ngOnInit(): void {
 		this.select.focusInput$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((data?: { keepClue: true }) => {
 			// Everytime we want to focus, we need to reset the input
