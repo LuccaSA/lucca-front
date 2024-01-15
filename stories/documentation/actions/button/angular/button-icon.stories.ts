@@ -13,7 +13,7 @@ export default {
 	],
 	render: ({ luButton, ...inputs }, { argTypes }) => {
 		return {
-			template: `<button luButton${luButton !== '' ? `="${luButton}"` : ''} ${generateInputs(inputs, argTypes)}><lu-icon icon="signInfo"></lu-icon> Click me !</button>`,
+			template: `<button luButton${luButton !== '' ? `="${luButton}"` : ''} ${generateInputs(inputs, argTypes)}><lu-icon icon="signInfo"></lu-icon></button>`,
 		};
 	},
 } as Meta;
