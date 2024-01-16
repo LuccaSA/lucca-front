@@ -31,19 +31,19 @@ export const parameters = {
 		default: 'Grey 25',
 		values: [
 			{
-				name: 'White',
+				name: 'Raised',
 				value: '#ffffff',
 			},
 			{
-				name: 'Grey 25',
+				name: 'Default',
 				value: '#f3f6fc',
 			},
 			{
-				name: 'Grey 50',
+				name: 'Sunken',
 				value: '#e7edf9',
 			},
 			{
-				name: 'Grey 900',
+				name: 'Inverted',
 				value: '#0b1732',
 			},
 		],
