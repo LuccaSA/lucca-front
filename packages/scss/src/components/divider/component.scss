@@ -1,8 +1,34 @@
-@mixin component {
+@mixin component($atRoot: 'without: rule') {
 	border: 0;
-	border-top-color: var(--commons-divider-color);
-	border-top-width: var(--commons-divider-width);
-	border-top-style: solid;
-	margin-top: var(--spacings-M);
-	margin-bottom: var(--spacings-M);
+
+	&:empty {
+		border-top-color: var(--commons-divider-color);
+		border-top-width: var(--commons-divider-width);
+		border-top: var(--commons-divider-border);
+		margin-top: var(--spacings-M);
+		margin-bottom: var(--spacings-M);
+	}
+
+	&:not(:empty) {
+		display: flex;
+		align-items: center;
+		gap: var(--spacings-XS);
+		margin-top: calc(var(--spacings-XS) + var(--spacings-XXS));
+		margin-bottom: calc(var(--spacings-XS) + var(--spacings-XXS));
+		text-wrap: balance;
+		text-align: center;
+		font-size: var(--components-divider-fontSize);
+		line-height: var(--components-divider-lineHeight);
+		color: var(--palettes-grey-600);
+
+		&::before,
+		&::after {
+			border-top-color: var(--commons-divider-color);
+			border-top-width: var(--commons-divider-width);
+			border-top: var(--commons-divider-border);
+			flex-grow: 1;
+			min-width: var(--spacings-M);
+			content: '';
+		}
+	}
 }

@@ -1,38 +1,41 @@
-import { CheckboxfieldComponent, SwitchfieldComponent } from '@lucca-front/ng/forms';
+import { CheckboxInputComponent, SwitchInputComponent } from '@lucca-front/ng/forms';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { cleanupTemplate } from 'stories/helpers/stories';
+import { FormFieldComponent } from '@lucca-front/ng/form-field';
 
 export default {
 	title: 'Documentation/Forms/Fields/SwitchField/Angular',
-	component: SwitchfieldComponent,
 	decorators: [
 		moduleMetadata({
-			imports: [SwitchfieldComponent, FormsModule, ReactiveFormsModule],
+			imports: [SwitchInputComponent, FormFieldComponent, FormsModule],
 		}),
 	],
 } as Meta;
 
-export const Basic: StoryObj<SwitchfieldComponent> = {
+export const Basic: StoryObj<SwitchInputComponent & FormFieldComponent> = {
 	render: ({ label, required, hiddenLabel, inlineMessage, size, inlineMessageState, tooltip }) => {
 		return {
 			props: {
 				example: false,
 			},
-			template: cleanupTemplate(`<lu-switchfield label="${label}"
-	required="${required}"
+			template: cleanupTemplate(`<lu-form-field label="${label}"
 	${hiddenLabel ? 'hiddenLabel' : ''}
 	tooltip="${tooltip}"
 	inlineMessage="${inlineMessage}"
 	inlineMessageState="${inlineMessageState}"
-	size="${size}"
-	[(ngModel)]="example">
-</lu-switchfield>
+	size="${size}">
+
+	<lu-switch-input
+	required="${required}"
+	[(ngModel)]="example"/>
+
+</lu-form-field>
 
 {{example}}`),
 			moduleMetadata: {
-				imports: [CheckboxfieldComponent, FormsModule, BrowserAnimationsModule],
+				imports: [CheckboxInputComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule],
 			},
 		};
 	},

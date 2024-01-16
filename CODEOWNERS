@@ -1,5 +1,5 @@
 # Code is owned by dev team
-*                     @LuccaSA/guilde-front
+*                     @LuccaSA/ux-admins
 
 # dependencies are handled by admins
 **/package.json       @LuccaSA/ux-admins
@@ -10,7 +10,7 @@ Jenkinsfile           @LuccaSA/ux-admins
 .cd                   @LuccaSA/ux-admins
 
 #
-packages/ng           @LuccaSA/guilde-front
+packages/ng           @LuccaSA/ux-admins @LuccaSA/guilde-front
 packages/ng/**/*.scss @LuccaSA/ux-devs
 packages/icons        @LuccaSA/ux-devs
 packages/scss         @LuccaSA/ux-devs

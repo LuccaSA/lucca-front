@@ -1,4 +1,7 @@
 import {
+	ScriptTarget,
+	SourceFile,
+	Node as TsNode,
 	createSourceFile,
 	forEachChild,
 	isCallExpression,
@@ -8,10 +11,10 @@ import {
 	isObjectLiteralExpression,
 	isPropertyAssignment,
 	isStringLiteral,
-	Node as TsNode,
-	ScriptTarget,
-	SourceFile,
 } from 'typescript';
+import { updateContent } from './file-update';
+import { AngularCompilerLib, HtmlAst, HtmlAstVisitor } from './html-ast';
+import { replaceStringLiterals } from './typescript-ast';
 
 export interface AngularTemplate {
 	offsetStart: number;
@@ -72,6 +75,39 @@ export function createVisitor<TNode extends TsNode>(predicate: (node: TsNode) =>
 	};
 }
 
-function orGuard<T, T1 extends T, T2 extends T>(guard1: (item: T) => item is T1, guard2: (item: T) => item is T2): (item: T) => item is T1 | T2 {
+export function orGuard<T, T1 extends T, T2 extends T>(guard1: (item: T) => item is T1, guard2: (item: T) => item is T2): (item: T) => item is T1 | T2 {
 	return (item): item is T1 | T2 => guard1(item) || guard2(item);
+}
+
+export function replaceComponentInput(componentName: string, inputName: string, oldStringToNewString: Record<string, string>, template: string, angularCompiler: AngularCompilerLib): string {
+	return updateContent(template, (updates) => {
+		const htmlAst = new HtmlAst(template, angularCompiler);
+		htmlAst.visitElements(componentName, (el) => {
+			const elAst = new HtmlAstVisitor(el, angularCompiler);
+
+			elAst.visitAttribute(inputName, (attr) => {
+				if (attr.valueSpan && attr.value in oldStringToNewString) {
+					updates.push({
+						position: attr.valueSpan.start.offset,
+						oldContent: attr.value,
+						newContent: oldStringToNewString[attr.value],
+					});
+				}
+			});
+
+			elAst.visitBoundAttribute('icon', (attr) => {
+				if (attr.valueSpan && attr.value instanceof angularCompiler.ASTWithSource) {
+					const attrValue = attr.value.source || '';
+					const sourcefile = createSourceFile('', attrValue, ScriptTarget.ESNext);
+
+					updates.push(
+						...replaceStringLiterals(sourcefile, oldStringToNewString).map((update) => ({
+							...update,
+							position: (attr.valueSpan?.start.offset ?? 0) + update.position,
+						})),
+					);
+				}
+			});
+		});
+	});
 }

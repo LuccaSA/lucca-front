@@ -1,16 +1,50 @@
 @mixin component($atRoot: 'without: rule') {
-	margin: 6rem auto var(--spacings-XXL);
-	text-align: center;
-	max-width: 30rem;
+	display: flex;
+	flex-direction: column;
+	flex-grow: 1;
+	padding: var(--spacings-S);
 
 	@at-root ($atRoot) {
-		.emptyState-title {
-			color: var(--palettes-grey-600);
+		.emptyState-container {
+			align-items: center;
+			display: flex;
+			flex-grow: 1;
+			justify-content: center;
+			max-width: var(--components-emptyState-max-width);
+			padding: 0;
+			width: 100%;
 		}
 
-		.emptyState-description {
-			color: var(--palettes-grey-600);
-			margin-bottom: var(--spacings-L);
+		.emptyState-content {
+			background-color: var(--components-emptyState-background-color);
+			border-radius: var(--commons-borderRadius-L);
+			box-shadow: 0 0 8px 4px var(--components-emptyState-background-color);
+			max-width: 100%;
+			padding: var(--spacings-XXS);
+			width: calc(25rem + var(--spacings-XXS) * 2); // content max width
+		}
+
+		.emptyState-content-icon {
+			--components-emptyState-icon-background-color: var(--palettes-100, var(--palettes-primary-100));
+			--components-emptyState-icon-action-color: var(--palettes-600, var(--palettes-primary-600));
+		}
+
+		.emptyState-content-text {
+			padding: 0 var(--spacings-XXS);
+		}
+
+		.emptyState-content-heading {
+			margin-bottom: 0;
+		}
+
+		.emptyState-actions {
+			display: flex;
+			flex-wrap: wrap;
+			gap: var(--spacings-XS);
+
+			.button {
+				margin: 0;
+			}
 		}
 	}
 }

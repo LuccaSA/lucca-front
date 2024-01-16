@@ -1,33 +1,51 @@
 <div
 	class="lu-picker-panel lu-option-picker-panel"
-	role="dialog"
 	cdkTrapFocus
 	*ngIf="{ options: options$ | async } as ctx"
 	[cdkTrapFocusAutoCapture]="true"
 >
-	<div class="lu-picker-content" [class.is-loading]="loading$ | async" tabindex="0" (scroll)="onScroll($event)">
-		<ng-container *ngIf="searchable">
-			<div class="panel-search textfield mod-search">
-				<input #searchInput class="textfield-input" [ngModel]="search" (ngModelChange)="updateClue($event)" />
-			</div>
+	<div class="lu-picker-content" [class.is-loading]="loading$ | async" (scroll)="onScroll($event)">
+		<div class="lu-picker-content-option" role="listbox">
+			<ng-container *ngIf="grouping">
+				<div
+					*ngFor="let group of groups$ | async"
+					class="lu-picker-content-option-group"
+					role="group"
+					[attr.aria-labelledby]="selectId + '-group-' + group.key"
+				>
+					<span class="lu-picker-content-option-group-title" role="presentation" [id]="selectId + '-group-' + group.key">
+						<ng-template [ngTemplateOutlet]="grouping.templateRef" [ngTemplateOutletContext]="{ $implicit: group }"></ng-template>
+					</span>
+					<ng-template [ngTemplateOutlet]="optionsList" [ngTemplateOutletContext]="{ $implicit: group.options }"></ng-template>
+				</div>
+			</ng-container>
+			<ng-container *ngIf="!grouping">
+				<ng-template [ngTemplateOutlet]="optionsList" [ngTemplateOutletContext]="{ $implicit: ctx.options }"></ng-template>
+			</ng-container>
 
-			<div class="optionPlaceholder" *ngIf="search && !ctx.options?.length">
-				<p class="optionPlaceholder-content u-marginBottom0">{{ intl.emptyResults }}</p>
-				<button type="button" class="link" (click)="updateClue(null); searchInput.focus()">{{ intl.clearSearch }}</button>
+			<ng-template #optionsList let-options>
+				<lu-select-option
+					*ngFor="let option of options; let index = index"
+					[option]="option"
+					[optionTpl]="optionTpl"
+					[optionIndex]="index"
+					[scrollIntoViewOptions]="{ block: 'center' }"
+					[isSelected]="option === selected"
+					(click)="panelRef.emitValue(option)"
+				></lu-select-option>
+			</ng-template>
+			<div class="lu-picker-content-option-emptyState" *ngIf="ctx.options.length === 0 && (loading$ | async) === false">
+				{{intl.emptyResults}}
 			</div>
-		</ng-container>
-		<div class="lu-picker-content-option">
-			<lu-select-option
-				*ngFor="let option of ctx.options; let index = index"
-				[option]="option"
-				[optionTpl]="optionTpl"
-				[optionIndex]="index"
-				[scrollIntoViewOptions]="{ block: 'center' }"
-				[isSelected]="option === selected"
-				(click)="panelRef.emitValue(option)"
-			></lu-select-option>
 		</div>
-
-		<div *ngIf="loading$ | async" class="panel-loading loading lu-picker-loading"></div>
+		<div *ngIf="loading$ | async" class="lu-picker-content-loading">
+			<div class="loading"></div>
+			<span>{{intl.loading}}</span>
+		</div>
 	</div>
+	<!--<div class="lu-picker-content-add">
+		<button class="button mod-text mod-icon palette-primary" type="button">
+			<span aria-hidden="true" class="lucca-icon icon-mathsPlus"></span>Add a new supplier
+		</button>
+	</div>-->
 </div>

@@ -1,6 +1,7 @@
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { IconComponent } from '@lucca-front/ng/icon';
+import { generateInputs } from 'stories/helpers/stories';
 
 export default {
 	title: 'Documentation/Actions/Button/Angular/Icon',
@@ -10,19 +11,22 @@ export default {
 			imports: [IconComponent],
 		}),
 	],
-	render: ({ size, block, palette, state, luButton }) => {
+	render: ({ luButton, ...inputs }, { argTypes }) => {
 		return {
-			template: `<button luButton${luButton !== '' ? `="${luButton}"` : ''} 
-${size !== 'M' ? `size=${size}` : ''}
-${block ? 'block' : ''}
-${palette !== 'none' ? `palette=${palette}` : ''}
-${state !== 'default' ? `state=${state}` : ''}
-><lu-icon icon="signInfo"></lu-icon> Click me !</button>`,
+			template: `<button luButton${luButton !== '' ? `="${luButton}"` : ''} ${generateInputs(inputs, argTypes)}><lu-icon icon="signInfo"></lu-icon> Click me !</button>`,
 		};
 	},
 } as Meta;
 
 export const Basic: StoryObj<ButtonComponent> = {
+	argTypes: {
+		luButton: {
+			options: ['', 'outlined', 'text', 'text-invert'],
+			control: {
+				type: 'select',
+			},
+		},
+	},
 	args: {
 		size: 'M',
 		block: false,

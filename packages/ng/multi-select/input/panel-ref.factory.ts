@@ -1,8 +1,8 @@
 import { ConnectedPosition, Overlay, OverlayConfig, OverlayPositionBuilder, OverlayRef, PositionStrategy, ScrollStrategyOptions } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
-import { ChangeDetectorRef, ComponentRef, ElementRef, inject, Injectable, Injector } from '@angular/core';
+import { ChangeDetectorRef, ComponentRef, ElementRef, Injectable, Injector, inject } from '@angular/core';
 import { takeUntil } from 'rxjs';
-import { LuMultiSelectPanelComponent } from '../panel';
+import { LuMultiSelectPanelComponent } from '../panel/index';
 import { ILuMultiSelectPanelData, MULTI_SELECT_PANEL_DATA } from '../select.model';
 import { LuMultiSelectPanelRef } from './panel.model';
 
@@ -11,13 +11,7 @@ class MultiSelectPanelRef<T> extends LuMultiSelectPanelRef<T> {
 	private panelRef: ComponentRef<LuMultiSelectPanelComponent<T>>;
 	private portalRef: ComponentPortal<LuMultiSelectPanelComponent<T>>;
 
-	constructor(
-		private overlayRef: OverlayRef,
-		parentInjector: Injector,
-		panelData: ILuMultiSelectPanelData<T>,
-		protected defaultPositionStrategy: PositionStrategy,
-		protected expandedPositionStrategy: PositionStrategy,
-	) {
+	constructor(private overlayRef: OverlayRef, parentInjector: Injector, panelData: ILuMultiSelectPanelData<T>, protected defaultPositionStrategy: PositionStrategy) {
 		super();
 
 		const injector = Injector.create({
@@ -48,18 +42,26 @@ class MultiSelectPanelRef<T> extends LuMultiSelectPanelRef<T> {
 		this.panelRef.injector.get(ChangeDetectorRef).markForCheck();
 	}
 
-	useExpandedPosition(): void {
-		this.overlayRef.updatePositionStrategy(this.expandedPositionStrategy);
-	}
-
 	useDefaultPosition(): void {
 		this.overlayRef.updatePositionStrategy(this.defaultPositionStrategy);
+	}
+
+	updatePosition(): void {
+		this.overlayRef.updatePosition();
 	}
 
 	override close(): void {
 		super.close();
 		this.panelRef.destroy();
 		this.overlayRef.detach();
+	}
+
+	handleKeyManagerEvent(event: KeyboardEvent) {
+		this.instance.keyManager.onKeydown(event);
+	}
+
+	selectCurrentlyHighlightedValue(): void {
+		this.instance.toggleOption(this.instance.keyManager?.activeItem?.option);
 	}
 }
 
@@ -71,16 +73,15 @@ export class LuMultiSelectPanelRefFactory {
 	protected scrollStrategies = inject(ScrollStrategyOptions);
 	protected parentInjector = inject(Injector);
 
-	buildPanelRef<T>(panelData: ILuMultiSelectPanelData<T>, defaultOverlayConfigOverride: OverlayConfig = {}, expandedPositionStrategy?: PositionStrategy): LuMultiSelectPanelRef<T> {
+	buildPanelRef<T>(panelData: ILuMultiSelectPanelData<T>, defaultOverlayConfigOverride: OverlayConfig = {}): LuMultiSelectPanelRef<T> {
 		const defaultOverlayConfig = this.buildDefaultOverlayConfig(defaultOverlayConfigOverride);
-		expandedPositionStrategy ??= this.buildExpandedPositionStrategy();
 
 		const overlayRef = this.overlay.create(defaultOverlayConfig);
 
 		overlayRef.hostElement.style.transitionProperty = 'height';
 		overlayRef.hostElement.style.transitionDuration = 'var(--commons-animations-durations-standard)';
 
-		return new MultiSelectPanelRef(overlayRef, this.parentInjector, panelData, defaultOverlayConfig.positionStrategy, expandedPositionStrategy);
+		return new MultiSelectPanelRef(overlayRef, this.parentInjector, panelData, defaultOverlayConfig.positionStrategy);
 	}
 
 	protected buildDefaultOverlayConfig(overlayConfigOverride: OverlayConfig = {}): OverlayConfig {
@@ -101,19 +102,6 @@ export class LuMultiSelectPanelRefFactory {
 		overlayConfig.maxWidth = '100vw';
 
 		return overlayConfig;
-	}
-
-	buildExpandedPositionStrategy(): PositionStrategy {
-		const config = { overlapInput: true, offsetX: -4, offsetY: -4 };
-		return this.positionBuilder
-			.flexibleConnectedTo(this.elementRef)
-			.withViewportMargin(10)
-			.withPositions([
-				this.buildPosition('top', 'right', config),
-				this.buildPosition('top', 'left', config),
-				this.buildPosition('bottom', 'right', config),
-				this.buildPosition('bottom', 'left', config),
-			]);
 	}
 
 	protected buildPosition(

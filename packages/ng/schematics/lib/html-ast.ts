@@ -1,19 +1,20 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import { ParsedTemplate, TmplAstBoundAttribute, TmplAstElement, TmplAstNode, TmplAstTextAttribute } from '@angular/compiler';
-import { cssClassesToUpdate } from '../migrations/tshirt-size/mapping.js';
-import { applyUpdates, FileUpdate } from './file-update.js';
+import { ScriptTarget, createSourceFile } from 'typescript';
+import { applyUpdates, updateContent } from './file-update.js';
+import { replaceStringLiterals } from './typescript-ast.js';
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 export type AngularCompilerLib = typeof import('@angular/compiler');
 export type TemplateNode = ParsedTemplate['nodes'] extends Array<infer S> ? S : never;
 
-export class HtmlAst {
-	private parsed: ParsedTemplate;
+export class HtmlAstVisitor<TNode extends TemplateNode> {
+	private nodes: TNode[];
 
-	public constructor(content: string, private lib: AngularCompilerLib) {
-		this.parsed = lib.parseTemplate(content, 'migration.html', { preserveWhitespaces: true });
+	public constructor(nodes: TNode[] | TNode, private lib: AngularCompilerLib) {
+		this.nodes = Array.isArray(nodes) ? nodes : [nodes];
 	}
 
 	public visitElements(elementFilter: string | RegExp, cb: (attr: TmplAstElement) => void): void {
@@ -38,6 +39,20 @@ export class HtmlAst {
 		});
 	}
 
+	public visitElementWithAttribute(elementFilter: string | RegExp, attributeFilter: string | RegExp, cb: (elem: TmplAstElement, attr: TmplAstTextAttribute) => void): void {
+		this.visitNodes((node) => {
+			if (node instanceof this.lib.TmplAstElement) {
+				if (this.matchFilter(node.name, elementFilter)) {
+					for (const attr of node.attributes) {
+						if (this.matchFilter(attr.name, attributeFilter)) {
+							cb(node, attr);
+						}
+					}
+				}
+			}
+		});
+	}
+
 	public visitBoundAttribute(attributeFilter: string | RegExp, cb: (attr: TmplAstBoundAttribute) => void): void {
 		this.visitNodes((node) => {
 			if (node instanceof this.lib.TmplAstElement || node instanceof this.lib.TmplAstTemplate) {
@@ -51,7 +66,7 @@ export class HtmlAst {
 	}
 
 	public visitNodes(cb: (node: TemplateNode) => void): void {
-		this.visit(cb, this.parsed.nodes);
+		this.visit(cb, this.nodes);
 	}
 
 	private visit(cb: (node: TemplateNode) => void, nodes: TemplateNode[]): void {
@@ -69,78 +84,79 @@ export class HtmlAst {
 	}
 }
 
+export class HtmlAst extends HtmlAstVisitor<TemplateNode> {
+	public constructor(content: string, lib: AngularCompilerLib) {
+		super(lib.parseTemplate(content, 'migration.html', { preserveWhitespaces: true }).nodes, lib);
+	}
+}
+
 export function updateCssClassNames(content: string, oldClassToNewClass: Record<string, string>, lib: AngularCompilerLib): string {
-	const updates: FileUpdate[] = [];
-	const root = new HtmlAst(content, lib);
-	const visitedAttributes = new Set<TmplAstNode>();
+	return updateContent(content, (updates) => {
+		const root = new HtmlAst(content, lib);
+		const visitedAttributes = new WeakSet<TmplAstNode>();
+		const cssClassesToUpdate = new Set(Object.keys(oldClassToNewClass));
 
-	root.visitAttribute('class', (classAttr) => {
-		const offset = classAttr.valueSpan?.start.offset;
+		root.visitAttribute('class', (classAttr) => {
+			const offset = classAttr.valueSpan?.start.offset;
 
-		if (visitedAttributes.has(classAttr)) {
-			return;
-		}
+			if (visitedAttributes.has(classAttr)) {
+				return;
+			}
 
-		visitedAttributes.add(classAttr);
-		const classes: string[] = classAttr.value.split(' ');
+			visitedAttributes.add(classAttr);
+			const classes: string[] = classAttr.value.split(' ');
 
-		if (classes.some((cl) => cssClassesToUpdate.has(cl)) && offset !== undefined) {
+			if (classes.some((cl) => cssClassesToUpdate.has(cl)) && offset !== undefined) {
+				updates.push({
+					position: offset,
+					oldContent: classAttr.value,
+					newContent: classes.map((cl) => oldClassToNewClass[cl] || cl).join(' '),
+				});
+			}
+		});
+
+		root.visitBoundAttribute(/.*/, (boundAttr) => {
+			if (visitedAttributes.has(boundAttr)) {
+				return;
+			}
+
+			const cl = boundAttr.name;
+			if (!cssClassesToUpdate.has(cl)) {
+				return;
+			}
+
+			visitedAttributes.add(boundAttr);
+
 			updates.push({
-				position: offset,
-				oldContent: classAttr.value,
-				newContent: classes.map((cl) => oldClassToNewClass[cl] || cl).join(' '),
+				position: boundAttr.keySpan.start.offset,
+				oldContent: boundAttr.keySpan.details || '',
+				newContent: boundAttr.keySpan.details?.replace(`class.${cl}`, `class.${oldClassToNewClass[cl]}`) || '',
 			});
-		}
-	});
+		});
 
-	root.visitBoundAttribute(/.*/, (boundAttr) => {
-		if (visitedAttributes.has(boundAttr)) {
-			return;
-		}
+		root.visitBoundAttribute('ngClass', (boundAttr) => {
+			if (!(boundAttr.value instanceof lib.ASTWithSource)) {
+				return;
+			}
 
-		const cl = boundAttr.name;
-		if (!cssClassesToUpdate.has(cl)) {
-			return;
-		}
+			if (visitedAttributes.has(boundAttr)) {
+				return;
+			}
 
-		visitedAttributes.add(boundAttr);
+			visitedAttributes.add(boundAttr);
 
-		updates.push({
-			position: boundAttr.keySpan.start.offset,
-			oldContent: boundAttr.keySpan.details || '',
-			newContent: boundAttr.keySpan.details?.replace(`class.${cl}`, `class.${oldClassToNewClass[cl]}`) || '',
+			if (boundAttr.valueSpan && boundAttr.value instanceof lib.ASTWithSource) {
+				const attrValue = boundAttr.value.source || '';
+				const sourcefile = createSourceFile('', attrValue, ScriptTarget.ESNext);
+
+				updates.push({
+					position: boundAttr.valueSpan.start.offset,
+					oldContent: attrValue,
+					newContent: applyUpdates(attrValue, replaceStringLiterals(sourcefile, oldClassToNewClass)),
+				});
+			}
 		});
 	});
-
-	root.visitBoundAttribute('ngClass', (boundAttr) => {
-		if (!(boundAttr.value instanceof lib.ASTWithSource)) {
-			return;
-		}
-
-		if (visitedAttributes.has(boundAttr)) {
-			return;
-		}
-
-		visitedAttributes.add(boundAttr);
-
-		const { source } = boundAttr.value;
-
-		const oldContent = boundAttr.value.source || '';
-		const newContent = (source || '').replace(
-			/(["']?)([\w\-_]*?)(["']?):/g,
-			(_fullMatch, before: string, middle: string, after: string) => `${before + (oldClassToNewClass[middle] || middle) + after}:`,
-		);
-
-		if (oldContent !== newContent) {
-			updates.push({
-				position: boundAttr.value.sourceSpan.start,
-				oldContent,
-				newContent,
-			});
-		}
-	});
-
-	return applyUpdates(content, updates);
 }
 
 export function extractAllCssClassNames(content: string, lib: AngularCompilerLib): string[] {

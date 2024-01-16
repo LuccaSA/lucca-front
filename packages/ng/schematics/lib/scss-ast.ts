@@ -1,4 +1,4 @@
-import { AtRule, Container, Declaration, Node, Root } from 'postcss';
+import type { AtRule, Container, Declaration, Node, Root } from 'postcss';
 import type { Node as ValueNode, ValueParser } from 'postcss-value-parser';
 import { ScssValueAst } from './scss-value-ast.js';
 

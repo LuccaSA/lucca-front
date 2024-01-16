@@ -1,5 +1,10 @@
 @use '@lucca-front/scss/src/commons/utils/a11y';
 
+@mixin S {
+	--components-chip-fontSize: var(--sizes-XS-fontSize);
+	--components-chip-lineHeight: var(--sizes-XS-lineHeight);
+}
+
 @mixin primary {
 	.chip-kill {
 		--components-chip-kill-cross-color: var(--palettes-primary-700);

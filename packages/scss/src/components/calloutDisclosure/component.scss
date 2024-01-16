@@ -39,7 +39,6 @@
 		}
 
 		.calloutDisclosure-summary-icon {
-			--icon-size: 1.5rem;
 			color: var(--palettes-700, var(--palettes-grey-700));
 		}
 
@@ -48,7 +47,6 @@
 		}
 
 		.calloutDisclosure-summary-chevron {
-			--icon-size: 1.5rem;
 			color: var(--palettes-grey-700);
 			margin-left: auto;
 			transition: transform var(--commons-animations-durations-standard) ease;

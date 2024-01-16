@@ -9,7 +9,7 @@
 	border-radius: var(--commons-borderRadius-M);
 	background-color: var(--component-textField-background);
 
-	&:focus-within:not(:has(.textField-input-affix-clear:focus)) {
+	&:has(.textField-input-value:focus-visible) {
 		@include a11y.focusVisible($offset: 3px);
 	}
 
@@ -72,6 +72,12 @@
 
 		.textField-input-affix-clear {
 			pointer-events: auto;
+		}
+
+		.textField-input-affix-passwordToggle {
+			pointer-events: auto;
+			width: 1.75rem;
+			height: 1.75rem;
 		}
 
 		.textField-prefix {

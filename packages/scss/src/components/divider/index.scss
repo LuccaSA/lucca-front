@@ -3,4 +3,24 @@
 .divider {
 	@include vars;
 	@include component;
+
+	&.mod-button {
+		@include button;
+	}
+
+	&.mod-actionIcon {
+		@include actionIcon;
+	}
+
+	&.mod-S {
+		@include S;
+
+		&.mod-button {
+			@include buttonS;
+		}
+
+		&.mod-actionIcon {
+			@include actionIconS;
+		}
+	}
 }

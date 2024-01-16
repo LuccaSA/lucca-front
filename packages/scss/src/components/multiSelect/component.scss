@@ -1,0 +1,68 @@
+@use '@lucca-front/scss/src/commons/utils/reset';
+@use '@lucca-front/scss/src/commons/utils/a11y';
+@use '@lucca-front/icons/src/icon/exports' as icon;
+
+@mixin component($atRoot: 'without: rule') {
+	display: flex;
+	box-shadow: 0 0 0 1px var(--components-multiSelect-border-color);
+	background-color: var(--components-multiSelect-background);
+	border-radius: var(--commons-borderRadius-M);
+	padding: var(--components-multiSelect-padding);
+	align-items: flex-end;
+	gap: var(--components-multiSelect-gap);
+	cursor: pointer;
+
+	&:has(.multipleSelect-displayer-search:focus-visible) {
+		@include a11y.focusVisible($offset: 3px);
+	}
+
+	@at-root ($atRoot) {
+		.multipleSelect-displayer {
+			display: flex;
+			gap: var(--spacings-XXS);
+			flex-wrap: wrap;
+			flex: 1;
+		}
+
+		.multipleSelect-displayer-chip-value {
+			max-width: 8rem;
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
+		}
+
+		.multipleSelect-displayer-search {
+			display: block;
+			min-width: 2rem;
+			width: auto;
+			flex: 1;
+			order: 1;
+			border: 0;
+			padding: 0;
+			outline: none;
+			color: var(--palettes-grey-800);
+			font-size: var(--components-multiSelect-fontSize);
+			line-height: var(--components-multiSelect-lineHeight);
+			background-color: transparent;
+			cursor: pointer;
+
+			&::placeholder {
+				color: var(--palettes-grey-400);
+			}
+		}
+
+		.multipleSelect-displayer-label {
+			font-size: var(--components-multiSelect-fontSize);
+			line-height: var(--components-multiSelect-lineHeight);
+		}
+
+		.multipleSelect-clear {
+			margin-bottom: var(--spacings-XXS);
+		}
+
+		.multipleSelect-arrow {
+			@include icon.M;
+			color: var(--components-multiSelect-arrow-color);
+		}
+	}
+}

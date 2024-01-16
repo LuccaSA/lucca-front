@@ -1,0 +1,77 @@
+@use '@lucca-front/scss/src/commons/utils/media';
+
+// dans cette page tous les mixins sont des raccourcis vers media.query et media.queries
+
+// les raccourcis des requêtes simples et multiples
+
+@mixin query($breakpoint, $property: 'width', $max: false, $name: '') {
+	@include media.query($breakpoint: $breakpoint, $property: $property, $max: $max, $at: 'container', $name: $name) {
+		@content;
+	}
+}
+
+@mixin queries($breakpoint1, $breakpoint2, $property: 'width', $name: '') {
+	@include media.queries($breakpoint1, $breakpoint2, $property: $property, $at: 'container', $name: $name) {
+		@content;
+	}
+}
+
+// les raccourcis pour min/max/between
+
+@mixin min($breakpoint, $property: 'width', $name: '') {
+	@include media.query($breakpoint: $breakpoint, $property: $property, $at: 'container', $name: $name) {
+		@content;
+	}
+}
+
+@mixin max($breakpoint, $property: 'width', $name: '') {
+	@include media.query($breakpoint, $property: $property, $max: true, $at: 'container', $name: $name) {
+		@content;
+	}
+}
+
+@mixin between($breakpoint1, $breakpoint2, $property: 'width', $name: '') {
+	@include media.queries($breakpoint1, $breakpoint2, $property: $property, $at: 'container', $name: $name) {
+		@content;
+	}
+}
+
+// les raccourcis pour minWidth/maxWidth/betweenWidths
+
+@mixin minWidth($breakpoint, $name: '') {
+	@include media.query($breakpoint, $at: 'container', $name: $name) {
+		@content;
+	}
+}
+
+@mixin maxWidth($breakpoint, $name: '') {
+	@include media.query($breakpoint, $max: true, $at: 'container', $name: $name) {
+		@content;
+	}
+}
+
+@mixin betweenWidths($breakpoint1, $breakpoint2, $name: '') {
+	@include media.queries($breakpoint1, $breakpoint2, $at: 'container', $name: $name) {
+		@content;
+	}
+}
+
+// les raccourcis pour minHeight/maxHeight/betweenHeights
+
+@mixin minHeight($breakpoint, $name: '') {
+	@include media.query($breakpoint, $property: 'height', $at: 'container', $name: $name) {
+		@content;
+	}
+}
+
+@mixin maxHeight($breakpoint, $name: '') {
+	@include media.query($breakpoint, $max: true, $property: 'height', $at: 'container', $name: $name) {
+		@content;
+	}
+}
+
+@mixin betweenHeights($breakpoint1, $breakpoint2, $name: '') {
+	@include media.queries($breakpoint1, $breakpoint2, $property: 'height', $at: 'container', $name: $name) {
+		@content;
+	}
+}

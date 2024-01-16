@@ -1,12 +1,19 @@
-import { Directive, ElementRef, HostBinding, inject } from '@angular/core';
+import { Directive, ElementRef, inject, OnInit } from '@angular/core';
+import { FORM_FIELD_INSTANCE } from './form-field.token';
 
 @Directive({
 	selector: '[luInput]',
 	standalone: true,
 })
-export class InputDirective {
-	@HostBinding('class')
-	clazz = 'textField-input-value';
+export class InputDirective implements OnInit {
+	public readonly host = inject<ElementRef<HTMLElement>>(ElementRef);
 
-	public host = inject<ElementRef<HTMLElement>>(ElementRef);
+	public readonly formFieldRef = inject(FORM_FIELD_INSTANCE, { optional: true });
+
+	ngOnInit(): void {
+		// If the field is used as standalone, we won't have the ref provided so it'll crash
+		if (this.formFieldRef) {
+			this.formFieldRef.input = this;
+		}
+	}
 }

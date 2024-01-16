@@ -12,7 +12,7 @@ function getTemplate(args: VerticalNavigationDisabledStory): string {
 	<h3 class="verticalNavigation-sectionTitle">Section title</h3>
 	<ul class="verticalNavigation-list">
 		<li class="verticalNavigation-list-item">
-			<button class="verticalNavigation-list-item-link" aria-expanded="false"><span aria-hidden="true" class="verticalNavigation-list-item-link-icon lucca-icon icon-heart"></span>Item<span aria-hidden="true" class="lucca-icon icon-southArrow verticalNavigation-list-item-link-arrow"></span></button>
+			<button class="verticalNavigation-list-item-link" aria-expanded="false"><span aria-hidden="true" class="verticalNavigation-list-item-link-icon lucca-icon icon-heart"></span>Item<span aria-hidden="true" class="lucca-icon icon-arrowChevronBottom verticalNavigation-list-item-link-arrow"></span></button>
 			<ul class="verticalNavigation-list mod-child">
 				<li class="verticalNavigation-list-item">
 					<span class="verticalNavigation-list-item-link">Item</span>
@@ -23,7 +23,7 @@ function getTemplate(args: VerticalNavigationDisabledStory): string {
 			</ul>
 		</li>
 		<li class="verticalNavigation-list-item">
-			<button class="verticalNavigation-list-item-link" aria-expanded="true"><span aria-hidden="true" class="verticalNavigation-list-item-link-icon lucca-icon icon-heart"></span>Item<span aria-hidden="true" class="lucca-icon icon-southArrow verticalNavigation-list-item-link-arrow"></span></button>
+			<button class="verticalNavigation-list-item-link" aria-expanded="true"><span aria-hidden="true" class="verticalNavigation-list-item-link-icon lucca-icon icon-heart"></span>Item<span aria-hidden="true" class="lucca-icon icon-arrowChevronBottom verticalNavigation-list-item-link-arrow"></span></button>
 			<ul class="verticalNavigation-list mod-child">
 				<li class="verticalNavigation-list-item">
 					<span class="verticalNavigation-list-item-link">Item</span>
@@ -32,15 +32,6 @@ function getTemplate(args: VerticalNavigationDisabledStory): string {
 					<span class="verticalNavigation-list-item-link">Item</span>
 				</li>
 			</ul>
-		</li>
-	</ul>
-	<h3 class="verticalNavigation-sectionTitle">Section title</h3>
-	<ul class="verticalNavigation-list">
-		<li class="verticalNavigation-list-item">
-			<span class="verticalNavigation-list-item-link">Item</span>
-		</li>
-		<li class="verticalNavigation-list-item">
-			<span class="verticalNavigation-list-item-link">Item</span>
 		</li>
 	</ul>
 </nav>`;

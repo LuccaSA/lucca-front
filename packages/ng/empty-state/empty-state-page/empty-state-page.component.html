@@ -1,0 +1,23 @@
+<section
+	class="emptyState mod-page"
+	[style.--components-emptyState-background-color]="contentBackgroundColor"
+	style.--components-emptyState-illustration-background-bottom-left="url({{bottomLeftBackground}})"
+	style.--components-emptyState-illustration-foreground-bottom-left="url({{bottomLeftForeground}})"
+	style.--components-emptyState-illustration-background-top-right="url({{topRightBackground}})"
+	style.--components-emptyState-illustration-foreground-top-right="url({{topRightForeground}})"
+>
+	<div class="emptyState-container">
+		<div class="emptyState-content">
+			<div class="emptyState-content-icon" aria-hidden="true" [innerHtml]="icon | luSafeExternalSvg"></div>
+			<div class="emptyState-content-text">
+				<h1 class="emptyState-content-heading">{{title}}</h1>
+				<p>
+					<ng-container *luPortal="description"></ng-container>
+				</p>
+				<div class="emptyState-actions">
+					<ng-content></ng-content>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
