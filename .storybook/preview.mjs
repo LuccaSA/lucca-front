@@ -28,7 +28,7 @@ export const parameters = {
 		},
 	},
 	backgrounds: {
-		default: 'Grey 25',
+		default: 'Default',
 		values: [
 			{
 				name: 'Raised',
