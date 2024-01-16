@@ -2,6 +2,7 @@
 
 @mixin vars {
 	@include container.vars;
+
 	--components-emptyState-background-color: var(--commons-background-base);
 	--components-emptyState-max-width: var(--components-container-max-width);
 	--components-emptyState-illustration-top-right-offset-left: min(calc(100% + 5rem), calc(var(--components-emptyState-max-width) - 8.5rem));
