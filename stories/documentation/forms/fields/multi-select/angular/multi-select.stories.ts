@@ -18,6 +18,18 @@ export default {
 		tooltip: {
 			type: 'string',
 		},
+		size: {
+			options: ['M', 'S'],
+			control: {
+				type: 'radio',
+			},
+		},
+		inlineMessageState: {
+			options: ['default', 'success', 'warning', 'error'],
+			control: {
+				type: 'select',
+			},
+		},
 		clueChange: HiddenArgType,
 		nextPage: HiddenArgType,
 		previousPage: HiddenArgType,
@@ -60,16 +72,16 @@ export const Basic: StoryObj<LuMultiSelectInputComponent<unknown> & FormFieldCom
 		};
 	},
 	args: {
-		label: 'Label',
-		required: true,
-		hiddenLabel: false,
-		disabled: false,
-		clearable: true,
-		loading: false,
-		inlineMessage: 'Helper Text',
-		inlineMessageState: 'default',
 		size: 'M',
+		label: 'Label',
+		tooltip: "Plus d'information",
+		hiddenLabel: false,
+		required: false,
 		placeholder: 'Placeholder',
-		tooltip: "Je suis un message d'aide",
+		clearable: true,
+		disabled: false,
+		inlineMessage: 'Message d\'aide',
+		inlineMessageState: 'default',
+		loading: false,
 	},
 };
