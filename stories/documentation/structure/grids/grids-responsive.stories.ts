@@ -24,7 +24,7 @@ const Template: Story<GridsResponsiveStory> = (args: GridsResponsiveStory) => ({
 	styles: [
 		`
 		.demo {
-			background-color: #FFFFFF;
+			background-color: var(--colors-white-color);
 			padding: var(--spacings-S);
 			border-radius: 1rem;
 			text-align: center;

@@ -22,7 +22,7 @@ const Template: StoryFn<BorderStory> = (args: BorderStory) => ({
 	styles: [
 		`
 		div {
-			background-color: #FFFFFF;
+			background-color: var(--colors-white-color);
 			float: left;
 			text-align: center;
 			padding: var(--spacings-S);
