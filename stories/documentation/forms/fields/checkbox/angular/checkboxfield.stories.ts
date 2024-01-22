@@ -54,10 +54,10 @@ export const Basic: StoryObj<CheckboxInputComponent & FormFieldComponent> = {
 	args: {
 		size: 'M',
 		label: 'Label',
-		tooltip: "Plus d'information",
+		tooltip: "Tooltip message",
 		hiddenLabel: false,
 		required: true,
-		inlineMessage: 'Message d\'aide',
+		inlineMessage: 'Helper Text',
 		inlineMessageState: 'default',
 	},
 };

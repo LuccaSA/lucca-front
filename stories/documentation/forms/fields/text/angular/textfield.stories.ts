@@ -76,7 +76,7 @@ export const Basic: StoryObj<TextInputComponent & { disabled: boolean } & FormFi
 	args: {
 		size: 'M',
 		label: 'Label',
-		tooltip: "Plus d'information",
+		tooltip: "Tooltip message",
 		hiddenLabel: false,
 		required: true,
 		type: 'text',
@@ -93,7 +93,7 @@ export const Basic: StoryObj<TextInputComponent & { disabled: boolean } & FormFi
 			content: '€/j',
 			ariaLabel: 'euros par jour',
 		},
-		inlineMessage: 'Message d\'aide',
+		inlineMessage: 'Helper Text',
 		inlineMessageState: 'default',
 	},
 };

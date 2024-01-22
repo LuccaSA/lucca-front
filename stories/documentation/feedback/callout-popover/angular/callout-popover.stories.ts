@@ -46,13 +46,21 @@ export default {
 				type: 'select',
 			},
 		},
+		buttonLabel : {
+			control: {
+				type: 'number',
+			}
+		}
 	},
 } as Meta;
 
 export const Template: StoryObj<CalloutPopoverComponent> = {
 	args: {
+		size: 'M',
+		state: null,
 		buttonLabel: '1',
-		heading: 'More details',
-		icon: 'info',
+		heading: 'List title',
+		icon: 'signInfo',
+		palette: 'none',
 	},
 };
