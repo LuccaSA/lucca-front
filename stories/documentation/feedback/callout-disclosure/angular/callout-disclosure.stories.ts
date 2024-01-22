@@ -50,7 +50,10 @@ export default {
 
 export const Template: StoryObj<CalloutDisclosureComponent> = {
 	args: {
-		icon: 'signInfo',
+		size: 'M',
+		state: null,
 		heading: 'List title',
+		icon: 'signInfo',
+		palette: 'none',
 	},
 };

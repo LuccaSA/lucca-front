@@ -12,6 +12,20 @@ export default {
 			imports: [CheckboxInputComponent, FormFieldComponent, FormsModule],
 		}),
 	],
+	argTypes: {
+		size: {
+			options: ['M', 'S'],
+			control: {
+				type: 'radio',
+			},
+		},
+		inlineMessageState: {
+			options: ['default', 'success', 'warning', 'error'],
+			control: {
+				type: 'select',
+			},
+		},
+	}
 } as Meta;
 
 export const Basic: StoryObj<CheckboxInputComponent & FormFieldComponent> = {
@@ -26,11 +40,9 @@ export const Basic: StoryObj<CheckboxInputComponent & FormFieldComponent> = {
 	inlineMessage="${inlineMessage}"
 	inlineMessageState="${inlineMessageState}"
 	size="${size}">
-
 	<lu-checkbox-input
 	required="${required}"
 	[(ngModel)]="example"/>
-
 </lu-form-field>
 
 {{example}}`),
@@ -40,12 +52,12 @@ export const Basic: StoryObj<CheckboxInputComponent & FormFieldComponent> = {
 		};
 	},
 	args: {
+		size: 'M',
 		label: 'Label',
+		tooltip: "Tooltip message",
 		hiddenLabel: false,
 		required: true,
 		inlineMessage: 'Helper Text',
 		inlineMessageState: 'default',
-		size: 'M',
-		tooltip: "Je suis un message d'aide",
 	},
 };

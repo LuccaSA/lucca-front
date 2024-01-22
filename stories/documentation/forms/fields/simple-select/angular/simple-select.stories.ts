@@ -18,6 +18,18 @@ export default {
 		tooltip: {
 			type: 'string',
 		},
+		size: {
+			options: ['M', 'S', 'XS'],
+			control: {
+				type: 'radio',
+			},
+		},
+		inlineMessageState: {
+			options: ['default', 'success', 'warning', 'error'],
+			control: {
+				type: 'select',
+			},
+		},
 		optionComparer: HiddenArgType,
 		options: HiddenArgType,
 		optionTpl: HiddenArgType,
@@ -61,16 +73,16 @@ export const Basic: StoryObj<LuSimpleSelectInputComponent<unknown> & FormFieldCo
 		};
 	},
 	args: {
+		size: 'M',
 		label: 'Label',
-		required: true,
+		tooltip: "Tooltip message",
 		hiddenLabel: false,
+		required: false,
+		placeholder: 'Placeholder',
+		clearable: true,
 		disabled: false,
 		inlineMessage: 'Helper Text',
 		inlineMessageState: 'default',
-		size: 'M',
-		placeholder: 'Placeholder',
-		tooltip: "Je suis un message d'aide",
-		clearable: false,
 		loading: false,
 	},
 };
