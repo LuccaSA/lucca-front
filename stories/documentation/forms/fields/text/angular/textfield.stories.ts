@@ -16,6 +16,24 @@ export default {
 		tooltip: {
 			type: 'string',
 		},
+		size: {
+			options: ['M', 'S', 'XS'],
+			control: {
+				type: 'radio',
+			},
+		},
+		inlineMessageState: {
+			options: ['default', 'success', 'warning', 'error'],
+			control: {
+				type: 'select',
+			},
+		},
+		type: {
+			options: ['text', 'number', 'password', 'search'],
+			control: {
+				type: 'select',
+			},
+		},
 	},
 } as Meta;
 
@@ -56,19 +74,17 @@ export const Basic: StoryObj<TextInputComponent & { disabled: boolean } & FormFi
 		};
 	},
 	args: {
-		label: 'Label',
-		required: true,
-		hiddenLabel: false,
-		hasClearer: true,
-		hasSearchIcon: false,
-		searchIcon: 'search',
-		disabled: false,
-		inlineMessage: 'Helper Text',
-		inlineMessageState: 'default',
 		size: 'M',
+		label: 'Label',
+		tooltip: "Plus d'information",
+		hiddenLabel: false,
+		required: true,
 		type: 'text',
 		placeholder: 'Placeholder',
-		tooltip: "Je suis un message d'aide",
+		disabled: false,
+		hasClearer: false,
+		hasSearchIcon: false,
+		searchIcon: 'search',
 		prefix: {
 			icon: 'dollar',
 			ariaLabel: 'Dollar',
@@ -77,5 +93,7 @@ export const Basic: StoryObj<TextInputComponent & { disabled: boolean } & FormFi
 			content: '€/j',
 			ariaLabel: 'euros par jour',
 		},
+		inlineMessage: 'Message d\'aide',
+		inlineMessageState: 'default',
 	},
 };
