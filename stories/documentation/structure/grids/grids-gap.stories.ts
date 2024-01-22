@@ -45,7 +45,7 @@ const Template: Story<GridsGapsStory> = (args: GridsGapsStory) => ({
 	styles: [
 		`
 		.demo {
-			background-color: #F3F5FC;
+			background-color: #FFFFFF;
 			padding: var(--spacings-S);
 			border-radius: 1rem;
 			text-align: center;

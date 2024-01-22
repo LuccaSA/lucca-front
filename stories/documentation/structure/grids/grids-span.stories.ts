@@ -32,7 +32,7 @@ const Template: Story<GridsSpanStory> = (args: GridsSpanStory) => ({
 	styles: [
 		`
 		.demo {
-			background-color: #F3F5FC;
+			background-color: #FFFFFF;
 			padding: var(--spacings-S);
 			border-radius: 1rem;
 			text-align: center;

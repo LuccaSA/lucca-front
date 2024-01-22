@@ -27,10 +27,11 @@ const Template: StoryFn<BorderRadiusStory> = (args: BorderRadiusStory) => ({
 	styles: [
 		`
 		div {
+			background-color: #FFFFFF;
 			float: left;
       text-align: center;
       padding: var(--spacings-S);
-      border: 1px solid #D6D6D6;
+      border: 1px solid var(--palettes-grey-200);
       margin: 0 var(--spacings-S) var(--spacings-S) 0;
 		}`,
 	],

@@ -33,7 +33,7 @@ const Template: StoryFn<BoxBasicStory> = (args: BoxBasicStory) => ({
 		:host {
 			display: block;
 		}`,
-		args.grey === false ? ':host { background-color: #F3F5FC; margin: -15px -15px; padding: 15px 15px; }' : '',
+		args.grey === true ? ':host { background-color: white; margin: -15px -15px; padding: 15px 15px; }' : '',
 	],
 });
 

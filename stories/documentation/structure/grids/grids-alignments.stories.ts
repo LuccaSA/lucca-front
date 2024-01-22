@@ -22,7 +22,7 @@ function getTemplate(args: GridsAlignmentsStory): string {
 	<div class="grid-column" style="--grid-justify: start"><div class="demo">start</div></div>
 	<div class="grid-column" style="--grid-justify: center"><div class="demo">center</div></div>
 	<div class="grid-column" style="--grid-justify: end"><div class="demo">end</div></div>
-	<div class="grid-column"><div class="demo">auto</div></div>	
+	<div class="grid-column"><div class="demo">auto</div></div>
 	<div class="grid-column"><div class="demo">a large col</div></div>
 </div>`;
 }
@@ -33,7 +33,7 @@ const Template: Story<GridsAlignmentsStory> = (args: GridsAlignmentsStory) => ({
 	styles: [
 		`
 		.demo {
-			background-color: #F3F5FC;
+			background-color: #FFFFFF;
 			padding: var(--spacings-S);
 			border-radius: 1rem;
 			text-align: center;
