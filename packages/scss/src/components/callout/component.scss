@@ -23,6 +23,10 @@
 	}
 
 	@at-root ($atRoot) {
+		.link-icon {
+			white-space: nowrap;
+		}
+
 		.callout-content {
 			flex: 1;
 			display: flex;
