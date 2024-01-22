@@ -27,7 +27,7 @@ const Template: Story<GridsPositionStory> = (args: GridsPositionStory) => ({
 	styles: [
 		`
 		.demo {
-			background-color: #F3F5FC;
+			background-color: var(--colors-white-color);
 			padding: var(--spacings-S);
 			border-radius: 1rem;
 			text-align: center;
