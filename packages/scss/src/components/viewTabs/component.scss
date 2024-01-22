@@ -4,16 +4,16 @@
 	list-style-type: none;
 	display: flex;
 	flex-wrap: wrap;
-	width: var(--components-tabs-width);
-	flex-direction: var(--components-tabs-direction);
+	width: var(--components-viewTabs-width);
+	flex-direction: var(--components-viewTabs-direction);
 	box-shadow: 0 0 0 var(--commons-divider-width) var(--palettes-grey-300);
-	border-radius: var(--components-tabs-borderRadius);
+	border-radius: var(--components-viewTabs-borderRadius);
 	background-color: var(--colors-white-color);
-	font-size: var(--components-tabs-fontSize);
-	line-height: var(--components-tabs-lineHeight);
+	font-size: var(--components-viewTabs-fontSize);
+	line-height: var(--components-viewTabs-lineHeight);
 
 	@at-root ($atRoot) {
-		.tablist-item {
+		.viewTabs-item {
 			flex-grow: 1;
 			position: relative;
 
@@ -21,7 +21,7 @@
 			&::after {
 				content: '';
 				border-width: 0;
-				inset: var(--components-tabs-dividerInset);
+				inset: var(--components-viewTabs-dividerInset);
 				border-color: var(--palettes-grey-300);
 				position: absolute;
 				border-style: solid;
@@ -40,16 +40,16 @@
 			}
 		}
 
-		.tablist-item-tab {
+		.viewTabs-item-tab {
 			width: 100%;
 			border: 0;
 			margin: 0;
-			padding: var(--components-tabs-padding);
-			background-color: var(--components-tabs-background);
-			box-shadow: 0 0 0 var(--commons-divider-width) var(--components-tabs-shadow);
-			border-radius: var(--components-tabs-borderRadius);
+			padding: var(--components-viewTabs-padding);
+			background-color: var(--components-viewTabs-background);
+			box-shadow: 0 0 0 var(--commons-divider-width) var(--components-viewTabs-shadow);
+			border-radius: var(--components-viewTabs-borderRadius);
 			gap: var(--spacings-XS);
-			color: var(--components-tabs-color);
+			color: var(--components-viewTabs-color);
 			text-align: center;
 			justify-content: center;
 			display: flex;
@@ -57,12 +57,12 @@
 
 			position: relative;
 			z-index: 1;
-			cursor: var(--components-tabs-cursor);
+			cursor: var(--components-viewTabs-cursor);
 			font: inherit;
 		}
 
-		.tabpanel {
-			display: var(--components-tabs-display, block);
+		.viewTabsPanel {
+			display: var(--components-viewTabs-display, block);
 			border-radius: var(--commons-borderRadius-M);
 		}
 	}

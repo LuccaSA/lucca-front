@@ -2,24 +2,24 @@
 @use '@lucca-front/scss/src/commons/utils/a11y';
 
 @mixin tabSelected {
-	--components-tabs-background: var(--palettes-primary-100);
-	--components-tabs-shadow: var(--palettes-primary-500);
-	--components-tabs-color: var(--palettes-primary-800);
-	--components-tabs-cursor: default;
+	--components-viewTabs-background: var(--palettes-primary-100);
+	--components-viewTabs-shadow: var(--palettes-primary-500);
+	--components-viewTabs-color: var(--palettes-primary-800);
+	--components-viewTabs-cursor: default;
 
 	.numericBadge {
 		@include numericBadge.primary;
 	}
 }
 
-@mixin tabpanelInactive {
-	--components-tabs-display: none;
+@mixin panelInactive {
+	--components-viewTabs-display: none;
 }
 
 @mixin tabFocused {
 	@include a11y.focusVisible($offset: 3px);
 }
 
-@mixin tabpanelFocused {
+@mixin panelFocused {
 	@include a11y.focusVisible;
 }

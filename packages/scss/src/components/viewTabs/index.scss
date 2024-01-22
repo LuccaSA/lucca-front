@@ -1,6 +1,6 @@
 @use 'exports' as *;
 
-.tablist {
+.viewTabs {
 	@include vars;
 	@include component;
 
@@ -17,7 +17,7 @@
 	}
 }
 
-.tablist-item-tab {
+.viewTabs-item-tab {
 	&[aria-selected='true'] {
 		@include tabSelected;
 	}
@@ -27,12 +27,12 @@
 	}
 }
 
-.tabpanel {
+.viewTabsPanel {
 	&:not(.active) {
-		@include tabpanelInactive;
+		@include panelInactive;
 	}
 
 	&:focus-visible {
-		@include tabpanelFocused;
+		@include panelFocused;
 	}
 }
