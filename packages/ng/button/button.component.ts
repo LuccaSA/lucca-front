@@ -5,7 +5,7 @@ import { LuClass, Palette } from '@lucca-front/ng/core';
 	// eslint-disable-next-line @angular-eslint/component-selector
 	selector: 'button[luButton],a[luButton]',
 	standalone: true,
-	providers:[LuClass],
+	providers: [LuClass],
 	template: '<ng-content></ng-content>',
 	styleUrls: ['./button.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,

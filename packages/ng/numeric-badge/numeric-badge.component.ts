@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, inject, Input, numberAttribute, OnChanges, SimpleChanges, ViewEncapsulation } from '@angular/core';
-import {LuClass, Palette} from '@lucca-front/ng/core';
+import { LuClass, Palette } from '@lucca-front/ng/core';
 
 @Component({
 	selector: 'lu-numeric-badge',
