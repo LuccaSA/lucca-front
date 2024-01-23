@@ -1,21 +1,27 @@
 @mixin component($atRoot: 'without: rule') {
-  color: var(--components-formLabel-color);
-  display: inline-block;
-  font-size: var(--components-formLabel-fontSize);
-  line-height: var(--components-formLabel-lineHeight);
-  width: fit-content;
+	color: var(--components-formLabel-color);
+	display: inline-block;
+	font-size: var(--components-formLabel-fontSize);
+	line-height: var(--components-formLabel-lineHeight);
+	width: fit-content;
 
-  .lucca-icon {
-    color: var(--palettes-grey-600);
-    font-size: var(--components-formLabel-help-fontSize);
-    line-height: var(--components-formLabel-help-lineHeight);
-    margin-left: .125rem;
-    vertical-align: top;
-  }
+	.lucca-icon {
+		color: var(--palettes-grey-600);
+		font-size: var(--components-formLabel-help-fontSize);
+		line-height: var(--components-formLabel-help-lineHeight);
+		margin-left: 0.125rem;
+		vertical-align: top;
+	}
 
 	@at-root ($atRoot) {
-    .formLabel-required {
-      color: var(--palettes-error-700);
-    }
-  }
+		.formLabel-required {
+			color: var(--palettes-error-700);
+		}
+
+		.formLabel-wrapper {
+			border: 0;
+			padding: 0;
+			margin: 0;
+		}
+	}
 }
