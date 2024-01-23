@@ -25,6 +25,10 @@
 	@at-root ($atRoot) {
 		.link-icon {
 			white-space: nowrap;
+
+			&::before {
+				content: '\a0';
+			}
 		}
 
 		.callout-content {

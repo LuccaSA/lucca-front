@@ -32,7 +32,8 @@ function getTemplate(args: LinkBasicStory): string {
 <a class="link mod-icon ${decorationHover} ${disabled}" href="#" target="_blank">Lien externe <span aria-hidden="true" class="lucca-icon icon-arrowExternal"></span><span class="u-mask">Ouvrir dans une nouvelle fenêtre</span></a>
 <br />
 <a class="link mod-icon ${decorationHover} ${disabled}" href="#" target="_blank">
-	<span class="link-text">Lien externe sans retour à la ligne possible avant l’icône</span><span class="link-icon">&nbsp;<span aria-hidden="true" class="lucca-icon icon-arrowExternal"></span></span><span class="u-mask">Ouvrir dans une nouvelle fenêtre</span>
+	Lien externe sans retour à la ligne possible avant l’icône<!--
+ --><span class="link-icon"><span aria-hidden="true" class="lucca-icon icon-arrowExternal"></span></span><span class="u-mask">Ouvrir dans une nouvelle fenêtre</span>
 </a>
 `;
 }
