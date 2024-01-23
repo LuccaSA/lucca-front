@@ -1,11 +1,11 @@
 import { booleanAttribute, ChangeDetectionStrategy, Component, inject, Input, OnChanges } from '@angular/core';
-import { NgClazz, Palette } from '@lucca-front/ng/core';
+import { LuClass, Palette } from '@lucca-front/ng/core';
 
 @Component({
 	// eslint-disable-next-line @angular-eslint/component-selector
 	selector: 'button[luButton],a[luButton]',
 	standalone: true,
-	hostDirectives: [NgClazz],
+	providers: [LuClass],
 	template: '<ng-content></ng-content>',
 	styleUrls: ['./button.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
@@ -14,7 +14,7 @@ import { NgClazz, Palette } from '@lucca-front/ng/core';
 	},
 })
 export class ButtonComponent implements OnChanges {
-	#ngClazz = inject(NgClazz);
+	#luClass = inject(LuClass);
 
 	@Input()
 	size: 'M' | 'S' | 'XS';
@@ -52,6 +52,6 @@ export class ButtonComponent implements OnChanges {
 				ngClassConfig[`mod-${this.luButton}`] = true;
 			}
 		}
-		this.#ngClazz.ngClass = ngClassConfig;
+		this.#luClass.setState(ngClassConfig);
 	}
 }
