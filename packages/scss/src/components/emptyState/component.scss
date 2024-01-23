@@ -16,9 +16,7 @@
 		}
 
 		.emptyState-content {
-			background-color: var(--components-emptyState-background-color);
 			border-radius: var(--commons-borderRadius-L);
-			box-shadow: 0 0 8px 4px var(--components-emptyState-background-color);
 			max-width: 100%;
 			padding: var(--spacings-XXS);
 			width: calc(25rem + var(--spacings-XXS) * 2); // content max width

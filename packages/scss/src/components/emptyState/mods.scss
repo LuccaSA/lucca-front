@@ -13,6 +13,11 @@
 			top left var(--components-emptyState-illustration-top-right-offset-left-S);
 		background-size: auto 10.875rem;
 	}
+
+	.emptyState-content {
+		background-color: var(--components-emptyState-background-color);
+		box-shadow: 0 0 8px 4px var(--components-emptyState-background-color);
+	}
 }
 
 @mixin center {
