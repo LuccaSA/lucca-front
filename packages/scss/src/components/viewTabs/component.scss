@@ -54,7 +54,6 @@
 			justify-content: center;
 			display: flex;
 			align-items: center;
-
 			position: relative;
 			z-index: 1;
 			cursor: var(--components-viewTabs-cursor);
@@ -63,7 +62,6 @@
 
 		.viewTabsPanel {
 			display: var(--components-viewTabs-display, block);
-			border-radius: var(--commons-borderRadius-M);
 		}
 	}
 }
