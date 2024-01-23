@@ -9,9 +9,18 @@
 	width: calc(100% - (2 * var(--components-cdk-textarea-input-padding-horizontal)));
 }
 
-.cdk-textarea-autosize-measuring {
-	height: auto !important;
-	overflow: hidden !important;
+@mixin cdk-textarea-autosize-measuring-base {
 	padding: 2px 0 !important;
 	box-sizing: content-box !important;
+}
+
+.cdk-textarea-autosize-measuring {
+	@include cdk-textarea-autosize-measuring-base;
+	height: auto !important;
+	overflow: hidden !important;
+}
+
+.cdk-textarea-autosize-measuring-firefox {
+	@include cdk-textarea-autosize-measuring-base;
+	height: 0 !important;
 }
