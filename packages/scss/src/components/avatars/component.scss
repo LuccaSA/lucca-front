@@ -1,0 +1,47 @@
+@use '@lucca-front/scss/src/commons/utils/reset';
+
+@mixin component($atRoot: 'without: rule') {
+	@include reset.list;
+
+	display: flex;
+	flex-wrap: wrap;
+	align-content: flex-start;
+
+	@at-root ($atRoot) {
+		.avatars-item {
+			margin-block: calc(var(--components-avatars-overlap) / 2);
+
+			&:not(:last-child) {
+				margin-right: calc(var(--components-avatars-overlap) * -1);
+			}
+		}
+
+		.avatars-item-action-more,
+		.avatars-item-userPicture {
+			box-shadow: 0 0 0 var(--components-avatars-border) var(--components-avatars-background);
+			border-radius: var(--commons-borderRadius-full);
+		}
+
+		.avatars-item-action {
+			@include reset.button;
+
+			display: flex;
+			text-decoration: none;
+			color: var(--palettes-grey-800);
+			transition: transform var(--commons-animations-durations-fast);
+			transform: scale(--components-avatars-scale);
+			color: currentColor;
+		}
+
+		.avatars-item-action-more {
+			box-sizing: content-box;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			background-color: var(--palettes-grey-200);
+			width: var(--components-avatars-size);
+			height: var(--components-avatars-size);
+			font-size: var(--components-avatars-fontSize);
+		}
+	}
+}

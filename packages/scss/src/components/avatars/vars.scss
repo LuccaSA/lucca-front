@@ -1,0 +1,8 @@
+@mixin vars {
+	--components-avatars-size: 2.5rem;
+	--components-avatars-overlap: var(--spacings-XS);
+	--components-avatars-border: calc(var(--spacings-XXS) / 2);
+	--components-avatars-background: var(--commons-background-base);
+	--components-avatars-fontSize: var(--sizes-M-fontSize);
+	--components-avatars-scale: 1;
+}

@@ -1,0 +1,33 @@
+@use 'exports' as *;
+
+.avatars {
+	@include vars;
+	@include component;
+
+	&.mod-XL {
+		@include XL;
+	}
+
+	&.mod-L {
+		@include L;
+	}
+
+	&.mod-S {
+		@include S;
+	}
+
+	&.mod-XS {
+		@include XS;
+	}
+}
+
+.avatars-item-action {
+	&:hover,
+	&:focus {
+		@include hover;
+	}
+
+	&:focus-visible {
+		@include focus;
+	}
+}

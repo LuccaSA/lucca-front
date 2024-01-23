@@ -1,0 +1,12 @@
+@use '@lucca-front/scss/src/commons/utils/a11y';
+
+@mixin hover {
+	--components-avatars-scale: 1.1;
+}
+
+@mixin focus {
+	@include a11y.focusVisible;
+
+	border-radius: var(--commons-borderRadius-full);
+	outline-offset: 0;
+}
