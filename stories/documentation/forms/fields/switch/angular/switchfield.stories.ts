@@ -2,7 +2,7 @@ import { CheckboxInputComponent, SwitchInputComponent } from '@lucca-front/ng/fo
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { cleanupTemplate } from 'stories/helpers/stories';
+import { cleanupTemplate, generateInputs } from 'stories/helpers/stories';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 
 export default {
@@ -29,20 +29,25 @@ export default {
 } as Meta;
 
 export const Basic: StoryObj<SwitchInputComponent & FormFieldComponent> = {
-	render: ({ label, required, hiddenLabel, inlineMessage, size, inlineMessageState, tooltip }) => {
+	render: (args, { argTypes }) => {
+		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, ...inputArgs } = args;
 		return {
 			props: {
 				example: false,
 			},
-			template: cleanupTemplate(`<lu-form-field label="${label}"
-	${hiddenLabel ? 'hiddenLabel' : ''}
-	tooltip="${tooltip}"
-	inlineMessage="${inlineMessage}"
-	inlineMessageState="${inlineMessageState}"
-	size="${size}">
+			template: cleanupTemplate(`<lu-form-field ${generateInputs(
+				{
+					label,
+					hiddenLabel,
+					tooltip,
+					inlineMessage,
+					inlineMessageState,
+					size,
+				},
+				argTypes,
+			)}>
 
-	<lu-switch-input
-	required="${required}"
+	<lu-switch-input ${generateInputs(inputArgs, argTypes)}
 	[(ngModel)]="example"/>
 
 </lu-form-field>

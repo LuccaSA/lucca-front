@@ -6,6 +6,7 @@ import { allLegumes, FilterLegumesPipe } from '@/stories/forms/select/select.uti
 import { HiddenArgType } from '../../../../../helpers/common-arg-types';
 import { LuMultiSelectInputComponent } from '@lucca-front/ng/multi-select';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
+import { generateInputs } from '../../../../../helpers/stories';
 
 export default {
 	title: 'Documentation/Forms/Fields/Multi Select/Angular',
@@ -42,25 +43,26 @@ export default {
 } as Meta;
 
 export const Basic: StoryObj<LuMultiSelectInputComponent<unknown> & FormFieldComponent> = {
-	render: ({ label, required, hiddenLabel, inlineMessage, size, placeholder, inlineMessageState, disabled, tooltip, clearable }) => {
+	render: (args, { argTypes }) => {
+		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, ...inputArgs } = args;
 		return {
 			props: { legumes: allLegumes, example: [] },
 			template: `
-<lu-form-field
-	label="${label}"
-	${hiddenLabel ? 'hiddenLabel' : ''}
-	inlineMessage="${inlineMessage}"
-	inlineMessageState="${inlineMessageState}"
-	size="${size}"
-	tooltip="${tooltip}"
->
+<lu-form-field ${generateInputs(
+				{
+					label,
+					hiddenLabel,
+					tooltip,
+					inlineMessage,
+					inlineMessageState,
+					size,
+				},
+				argTypes,
+			)}>
 	<lu-multi-select
-		${disabled ? 'disabled' : ''}
-		${clearable ? 'clearable' : ''}
+		${generateInputs(inputArgs, argTypes)}
 		[options]="legumes | filterLegumes:clue"
 		(clueChange)="clue = $event"
-		placeholder="${placeholder}"
-		required="${required}"
 		[(ngModel)]="example">
 	</lu-multi-select>
 </lu-form-field>

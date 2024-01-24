@@ -57,7 +57,9 @@ class UserSelectStoriesModule {}
 `;
 
 export const basic = template.bind({});
-basic.args = {};
+basic.args = {
+	disablePrincipal: false,
+};
 
 basic.parameters = {
 	docs: {

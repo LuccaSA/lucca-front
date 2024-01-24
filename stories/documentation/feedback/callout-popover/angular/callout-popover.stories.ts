@@ -62,5 +62,7 @@ export const Template: StoryObj<CalloutPopoverComponent> = {
 		heading: 'List title',
 		icon: 'signInfo',
 		palette: 'none',
+		closeDelay: 500,
+		openDelay: 50,
 	},
 };
