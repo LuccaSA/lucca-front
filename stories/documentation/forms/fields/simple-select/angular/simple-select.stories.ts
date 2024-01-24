@@ -6,6 +6,7 @@ import { allLegumes, FilterLegumesPipe } from '@/stories/forms/select/select.uti
 import { HiddenArgType } from '../../../../../helpers/common-arg-types';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
+import { generateInputs } from '../../../../../helpers/stories';
 
 export default {
 	title: 'Documentation/Forms/Fields/Simple Select/Angular',
@@ -42,26 +43,25 @@ export default {
 } as Meta;
 
 export const Basic: StoryObj<LuSimpleSelectInputComponent<unknown> & FormFieldComponent> = {
-	render: ({ label, required, clearable, loading, hiddenLabel, inlineMessage, size, placeholder, inlineMessageState, disabled, tooltip }) => {
+	render: (args, { argTypes }) => {
+		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, ...inputArgs } = args;
 		return {
 			props: { legumes: allLegumes },
-			template: `
-<lu-form-field
-	label="${label}"
-	${hiddenLabel ? 'hiddenLabel' : ''}
-	inlineMessage="${inlineMessage}"
-	inlineMessageState="${inlineMessageState}"
-	size="${size}"
-	tooltip="${tooltip}"
->
+			template: `<lu-form-field ${generateInputs(
+				{
+					label,
+					hiddenLabel,
+					tooltip,
+					inlineMessage,
+					inlineMessageState,
+					size,
+				},
+				argTypes,
+			)}>
 	<lu-simple-select
-		${loading ? 'loading' : ''}
-		${disabled ? 'disabled' : ''}
-		${clearable ? 'clearable' : ''}
+		${generateInputs(inputArgs, argTypes)}
 		[options]="legumes | filterLegumes:clue"
 		(clueChange)="clue = $event"
-		placeholder="${placeholder}"
-		required="${required}"
 		[(ngModel)]="example">
 	</lu-simple-select>
 </lu-form-field>

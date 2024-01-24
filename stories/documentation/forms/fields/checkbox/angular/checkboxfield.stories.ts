@@ -1,8 +1,8 @@
 import { CheckboxInputComponent } from '@lucca-front/ng/forms';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { cleanupTemplate } from 'stories/helpers/stories';
+import { cleanupTemplate, generateInputs } from 'stories/helpers/stories';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 
 export default {
@@ -29,19 +29,25 @@ export default {
 } as Meta;
 
 export const Basic: StoryObj<CheckboxInputComponent & FormFieldComponent> = {
-	render: ({ label, required, hiddenLabel, inlineMessage, size, inlineMessageState, tooltip }) => {
+	render: (args, { argTypes }) => {
+		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, ...inputArgs } = args;
 		return {
 			props: {
 				example: false,
 			},
-			template: cleanupTemplate(`<lu-form-field label="${label}"
-	${hiddenLabel ? 'hiddenLabel' : ''}
-	tooltip="${tooltip}"
-	inlineMessage="${inlineMessage}"
-	inlineMessageState="${inlineMessageState}"
-	size="${size}">
+			template: cleanupTemplate(`<lu-form-field ${generateInputs(
+				{
+					label,
+					hiddenLabel,
+					tooltip,
+					inlineMessage,
+					inlineMessageState,
+					size,
+				},
+				argTypes,
+			)}>
 	<lu-checkbox-input
-	required="${required}"
+		${generateInputs(inputArgs, argTypes)}
 	[(ngModel)]="example"/>
 </lu-form-field>
 

@@ -17,6 +17,13 @@ const hiddenArgTypes = {
 	optionTpl: HiddenArgType,
 	overlayConfig: HiddenArgType,
 	valueTpl: HiddenArgType,
+	previousPage: HiddenArgType,
+	nextPage: HiddenArgType,
+	clueChange: HiddenArgType,
+	legumes: HiddenArgType,
+	legumeColor: HiddenArgType,
+	page: HiddenArgType,
+	colorNameByColor: HiddenArgType,
 };
 export const Basic = generateStory({
 	name: 'Basic',
