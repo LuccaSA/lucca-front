@@ -32,15 +32,15 @@
 		@include outlined;
 
 		&:hover {
-			@include outlineHover;
+			@include outlinedHover;
 		}
 
 		&:active {
-			@include outlineActive;
+			@include outlinedActive;
 		}
 
 		&:focus-visible {
-			@include outlineFocusVisible;
+			@include outlinedFocusVisible;
 		}
 	}
 
@@ -133,6 +133,10 @@
 
 		&.mod-S {
 			@include moreS;
+		}
+
+		&.mod-XS {
+			@include moreXS;
 		}
 	}
 

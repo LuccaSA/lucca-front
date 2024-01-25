@@ -95,6 +95,10 @@
 	--components-button-minWidth: 1.75rem;
 }
 
+@mixin moreXS {
+	--components-button-minWidth: 1.5rem;
+}
+
 // deprecated
 @mixin counter {
 	--components-button-padding: var(--spacings-XS) calc(var(--spacings-XS) + var(--spacings-XXS)) var(--spacings-XS) var(--spacings-S);

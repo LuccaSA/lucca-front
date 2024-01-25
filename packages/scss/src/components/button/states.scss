@@ -164,19 +164,20 @@
 	}
 }
 
-@mixin outlineHover {
+@mixin outlinedHover {
 	&:not([disabled], .is-disabled) {
+		--components-button-color: var(--palettes-700, var(--palettes-grey-700));
 		--components-button-backgroundColor: var(--palettes-100, var(--palettes-grey-100));
 	}
 }
 
-@mixin outlineActive {
+@mixin outlinedActive {
 	&:not([disabled], .is-disabled) {
 		--components-button-backgroundColor: var(--palettes-200, var(--palettes-grey-200));
 	}
 }
 
-@mixin outlineFocusVisible {
+@mixin outlinedFocusVisible {
 	&:not([disabled], .is-disabled) {
 		@include a11y.focusVisible($offset: 3px);
 	}
