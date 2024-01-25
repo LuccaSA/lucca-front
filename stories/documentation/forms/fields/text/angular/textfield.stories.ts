@@ -29,7 +29,8 @@ export default {
 			},
 		},
 		type: {
-			options: ['text', 'number', 'password', 'search'],
+			options: ['text', 'number', 'password'],
+			description: 'Le type password ajoute automatiquement un bouton pour afficher la valeur du champ.',
 			control: {
 				type: 'select',
 			},
