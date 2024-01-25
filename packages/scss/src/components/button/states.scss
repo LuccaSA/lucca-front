@@ -1,13 +1,16 @@
-@use '@lucca-front/icons/src/commons/utils/icon';
-@use '@lucca-front/scss/src/commons/utils/loading';
 @use '@lucca-front/scss/src/commons/config';
 @use '@lucca-front/scss/src/commons/core';
+
+@use '@lucca-front/icons/src/commons/utils/icon';
+@use '@lucca-front/scss/src/commons/utils/loading';
+@use '@lucca-front/scss/src/commons/utils/a11y';
+
 @use '@lucca-front/scss/src/components/numericBadge/exports' as numericBadge;
 
 @mixin disabled {
-	background-color: var(--commons-disabled-background);
-	color: var(--palettes-grey-500);
-	cursor: default;
+	--components-button-cursor: default;
+	--components-button-color: var(--palettes-grey-500);
+	--components-button-backgroundColor: var(--commons-disabled-background);
 
 	.numericBadge {
 		@include numericBadge.disabled;
@@ -15,27 +18,23 @@
 }
 
 @mixin disabledOutlined {
-	background-color: var(--colors-white-color);
-	box-shadow: 0 0 0 1px var(--palettes-grey-400);
-	color: var(--palettes-grey-500);
-	cursor: default;
+	--components-button-backgroundColor: var(--colors-white-color);
+	--components-button-boxShadow: 0 0 0 1px var(--palettes-grey-400);
 }
 
 @mixin disabledText {
-	color: var(--palettes-grey-500);
-	background-color: transparent;
-	cursor: default;
+	--components-button-backgroundColor: transparent;
 }
 
 @mixin loading {
-	opacity: var(--commons-disabled-opacity);
+	--components-button-opacity: var(--commons-disabled-opacity);
 
 	&:not(.mod-more) {
 		@include loading.spinner(var(--components-button-font-size));
 
-		color: transparent !important;
-		pointer-events: none;
-		user-select: none;
+		--components-button-pointerEvents: none;
+		--components-button-color: transparent;
+		--components-button-userSelect: none;
 	}
 }
 
@@ -46,10 +45,9 @@
 }
 
 @mixin state {
-	background-color: var(--palettes-700) !important;
-	color: transparent !important;
-	pointer-events: none;
-	user-select: none;
+	--components-button-color: transparent;
+	--components-button-pointerEvents: none;
+	--components-button-userSelect: none;
 
 	&::after {
 		color: var(--colors-white-color);
@@ -62,11 +60,11 @@
 
 	&:not([disabled], .is-disabled) {
 		&:hover {
-			background-color: var(--palettes-600);
+			--components-button-backgroundColor: var(--palettes-600);
 		}
 
 		&:active {
-			background-color: var(--palettes-800);
+			--components-button-backgroundColor: var(--palettes-800);
 		}
 	}
 }
@@ -92,5 +90,113 @@
 		&::after {
 			@include icon.generate('sign_close');
 		}
+	}
+}
+
+@mixin hover {
+	&:not([disabled], .is-disabled) {
+		--components-button-color: var(--palettes-text, var(--palettes-primary-text));
+		--components-button-backgroundColor: var(--palettes-600, var(--palettes-primary-600));
+	}
+}
+
+@mixin focusVisible {
+	&:not([disabled], .is-disabled) {
+		@include a11y.focusVisible;
+	}
+}
+
+@mixin active {
+	&:not([disabled], .is-disabled) {
+		--components-button-backgroundColor: var(--palettes-800, var(--palettes-primary-800));
+	}
+}
+
+@mixin textHover {
+	&:not([disabled], .is-disabled) {
+		--components-button-color: var(--palettes-700, var(--palettes-grey-700));
+		--components-button-backgroundColor: var(--palettes-100, var(--palettes-grey-100));
+	}
+}
+
+@mixin textActive {
+	&:not([disabled], .is-disabled) {
+		--components-button-backgroundColor: var(--palettes-200, var(--palettes-grey-200));
+	}
+}
+
+@mixin textFocusVisible {
+	&:not([disabled], .is-disabled) {
+		--components-button-backgroundColor: var(--palettes-100, var(--palettes-grey-100));
+	}
+}
+
+@mixin deleteHover {
+	&:not([disabled], .is-disabled) {
+		--components-button-color: var(--palettes-error-700);
+		--components-button-backgroundColor: var(--palettes-error-100);
+	}
+}
+
+@mixin deleteActive {
+	&:not([disabled], .is-disabled) {
+		--components-button-color: var(--palettes-error-700);
+		--components-button-backgroundColor: var(--palettes-error-200);
+	}
+}
+
+@mixin deleteOutlined {
+	&:not([disabled], .is-disabled) {
+		&:hover {
+			--components-button-boxShadow: 0 0 0 var(--commons-divider-width) var(--palettes-error-400), var(--commons-boxShadow-XS);
+		}
+
+		&:focus-visible {
+			--components-button-color: var(--palettes-error-700);
+			--components-button-backgroundColor: var(--palettes-error-100);
+			--components-button-boxShadow: 0 0 0 var(--commons-divider-width) var(--palettes-error-400), var(--commons-boxShadow-XS);
+		}
+
+		&:active {
+			--components-button-color: var(--palettes-error-700);
+			--components-button-backgroundColor: var(--palettes-error-200);
+		}
+	}
+}
+
+@mixin outlineHover {
+	&:not([disabled], .is-disabled) {
+		--components-button-backgroundColor: var(--palettes-100, var(--palettes-grey-100));
+	}
+}
+
+@mixin outlineActive {
+	&:not([disabled], .is-disabled) {
+		--components-button-backgroundColor: var(--palettes-200, var(--palettes-grey-200));
+	}
+}
+
+@mixin outlineFocusVisible {
+	&:not([disabled], .is-disabled) {
+		@include a11y.focusVisible($offset: 3px);
+	}
+}
+
+@mixin inverHover {
+	&:not([disabled], .is-disabled) {
+		--components-button-backgroundColor: rgba(255, 255, 255, 0.2);
+	}
+}
+
+@mixin inverFocusVisible {
+	&:not([disabled], .is-disabled) {
+		--components-button-color: var(--colors-white-color);
+		--components-button-backgroundColor: rgba(255, 255, 255, 0.2);
+	}
+}
+
+@mixin counterHover {
+	.button-counter {
+		--components-button-backgroundColor: var(--palettes-500, var(--palettes-primary-500));
 	}
 }

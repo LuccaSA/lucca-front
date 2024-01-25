@@ -4,16 +4,6 @@
 	@include vars;
 	@include component;
 
-	&.mod-outline,
-	&.mod-outlined {
-		@include outlined;
-	}
-
-	&.mod-text,
-	&.mod-link {
-		@include text;
-	}
-
 	&.mod-block {
 		@include block;
 	}
@@ -26,7 +16,52 @@
 		@include XS;
 	}
 
-	&.mod-counter { // deprecated
+	&:hover {
+		@include hover;
+	}
+
+	&:focus-visible {
+		@include focusVisible;
+	}
+
+	&:active {
+		@include active;
+	}
+
+	&:is(.mod-outline, .mod-outlined) {
+		@include outlined;
+
+		&:hover {
+			@include outlineHover;
+		}
+
+		&:active {
+			@include outlineActive;
+		}
+
+		&:focus-visible {
+			@include outlineFocusVisible;
+		}
+	}
+
+	&:is(.mod-text, .mod-link) {
+		@include text;
+
+		&:hover {
+			@include textHover;
+		}
+
+		&:active {
+			@include textActive;
+		}
+
+		&:focus-visible {
+			@include textFocusVisible;
+		}
+	}
+
+	// .mod-counter deprecated
+	&.mod-counter {
 		@include counter;
 
 		&.mod-S {
@@ -36,9 +71,14 @@
 		&.mod-XS {
 			@include counterXS;
 		}
+
+		&:hover {
+			@include counterHover;
+		}
 	}
 
-	&.mod-icon, &.mod-withIcon { // mod-icon deprecated
+	// .mod-icon is deprecated
+	&:is(.mod-icon, .mod-withIcon) {
 		@include withIcon;
 
 		&.mod-S {
@@ -63,17 +103,29 @@
 	}
 
 	&.mod-delete {
-		&:not([disabled], .is-disabled) {
-			@include delete;
+		&.mod-outlined {
+			@include deleteOutlined;
+		}
 
-			&.mod-outlined {
-				@include outlinedDelete;
-			}
+		&:hover {
+			@include deleteHover;
+		}
+
+		&:active {
+			@include deleteActive;
 		}
 	}
 
 	&.mod-invert {
 		@include invert;
+
+		&:hover {
+			@include inverHover;
+		}
+
+		&:focus-visible {
+			@include inverFocusVisible;
+		}
 	}
 
 	&.mod-more {
@@ -103,13 +155,11 @@
 	&:is(.is-disabled, .disabled, [disabled]) {
 		@include disabled;
 
-		&.mod-outlined,
-		&.mod-outline {
+		&:is(.mod-outlined, .mod-outline) {
 			@include disabledOutlined;
 		}
 
-		&.mod-text,
-		&.mod-link {
+		&:is(.mod-text, .mod-link) {
 			@include disabledText;
 		}
 	}

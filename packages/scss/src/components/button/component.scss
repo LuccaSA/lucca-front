@@ -3,52 +3,44 @@
 @use '@lucca-front/scss/src/commons/utils/a11y';
 
 @mixin component {
+	@include icon.M;
+
+	color: var(--components-button-color);
+	background-color: var(--components-button-backgroundColor);
+	box-shadow: var(--components-button-boxShadow);
 	border-radius: var(--commons-borderRadius-M);
-	font-family: inherit;
-	font-size: var(--components-button-font-size);
-	font-weight: 600;
 	line-height: var(--components-button-line-height);
 	margin: var(--components-button-margin);
 	padding: var(--components-button-padding);
 	transition-property: background-color, color, border-color, box-shadow;
 	transition-duration: var(--commons-animations-durations-fast);
+	width: var(--components-button-width);
+	min-width: var(--components-button-minWidth);
+	font-size: var(--components-button-font-size);
+	gap: var(--components-button-gap);
+	pointer-events: var(--components-button-pointerEvents);
+	user-select: var(--components-button-userSelect);
+	opacity: var(--components-button-opacity);
+	cursor: var(--components-button-cursor);
 	transition-timing-function: ease;
-	border: 0;
+	font-family: inherit;
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
-	gap: var(--components-button-gap);
 	position: relative;
 	text-decoration: none;
 	vertical-align: middle;
 	white-space: nowrap;
 	text-align: center;
-	background-color: var(--palettes-700, var(--palettes-primary-700));
-	color: var(--palettes-text, var(--palettes-primary-text));
-	cursor: pointer;
-	@include icon.M;
+	font-weight: 600;
+	border: 0;
 
 	&:last-of-type {
-		margin-right: 0;
+		--components-button-margin: 0;
 	}
 
-	&:not([disabled], .is-disabled) {
-		&:hover {
-			background-color: var(--palettes-600, var(--palettes-primary-600));
-			color: var(--palettes-text, var(--palettes-primary-text));
-		}
-
-		&:focus-visible {
-			@include a11y.focusVisible;
-		}
-
-		&:active {
-			background-color: var(--palettes-800, var(--palettes-primary-800));
-		}
-	}
-
+	// deprecated
 	.button-icon {
-		// deprecated
 		@include icon.M;
 	}
 
