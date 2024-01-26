@@ -16,7 +16,7 @@
 		@include XS;
 	}
 
-	&:is(:hover, :focus) {
+	&:hover {
 		@include hover;
 	}
 
@@ -31,7 +31,7 @@
 	&:is(.mod-outline, .mod-outlined) {
 		@include outlined;
 
-		&:is(:hover, :focus) {
+		&:hover {
 			@include outlinedHover;
 		}
 
@@ -47,7 +47,7 @@
 	&:is(.mod-text, .mod-link) {
 		@include text;
 
-		&:is(:hover, :focus) {
+		&:is(:hover, :focus-visible) {
 			@include textHover;
 		}
 
@@ -68,7 +68,7 @@
 			@include counterXS;
 		}
 
-		&:is(:hover, :focus) {
+		&:hover {
 			@include counterHover;
 		}
 	}
@@ -103,7 +103,7 @@
 			@include deleteOutlined;
 		}
 
-		&:is(:hover, :focus) {
+		&:hover {
 			@include deleteHover;
 		}
 
@@ -115,7 +115,7 @@
 	&.mod-invert {
 		@include invert;
 
-		&:is(:hover, :focus) {
+		&:is(:hover, :focus-visible) {
 			@include invertHover;
 		}
 
@@ -158,7 +158,7 @@
 		&:is(.mod-outlined, .mod-outline) {
 			@include disabledOutlined;
 
-			&:is(:hover, :focus) {
+			&:hover {
 				@include disabledHover;
 			}
 		}
@@ -166,7 +166,7 @@
 		&:is(.mod-text, .mod-link) {
 			@include disabledText;
 
-			&:is(:hover, :focus) {
+			&:is(:hover, :focus-visible) {
 				@include disabledHover;
 			}
 		}
