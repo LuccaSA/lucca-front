@@ -1,7 +1,7 @@
 @mixin list($suffix: '', $list: 'ul') {
 	margin: 0 #{$suffix};
 
-	@if $list == 'ul' or 'ol' {
+	@if $list == 'ul' or $list == 'ol' {
 		padding: 0 #{$suffix};
 		list-style-type: none #{$suffix};
 	}
