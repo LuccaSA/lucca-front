@@ -8,7 +8,7 @@ export default {
 
 function getTemplate(args: LinkDisabledStory): string {
 	return `
-<a href="#" class="link is-disabled">Lorem ipsum dolor</a>
+<span class="link is-disabled">Lorem ipsum dolor</span>
 `;
 }
 
