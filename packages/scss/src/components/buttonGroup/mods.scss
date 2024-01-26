@@ -17,9 +17,11 @@
 			}
 
 			&:focus-within {
-				@include a11y.focusVisible($offset: 3px);
-
 				box-shadow: none;
+			}
+
+			&:focus-visible {
+				@include a11y.focusVisible($offset: 3px);
 			}
 
 			&:is([disabled], .is-disabled) {
