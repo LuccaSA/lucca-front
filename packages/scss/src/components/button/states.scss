@@ -117,10 +117,6 @@
 	--components-button-backgroundColor: var(--palettes-200, var(--palettes-grey-200));
 }
 
-@mixin textFocusVisible {
-	--components-button-backgroundColor: var(--palettes-100, var(--palettes-grey-100));
-}
-
 @mixin deleteHover {
 	--components-button-color: var(--palettes-error-700);
 	--components-button-backgroundColor: var(--palettes-error-100);
@@ -166,9 +162,8 @@
 	--components-button-backgroundColor: rgba(255, 255, 255, 0.2);
 }
 
-@mixin invertFocusVisible {
-	--components-button-color: var(--colors-white-color);
-	--components-button-backgroundColor: rgba(255, 255, 255, 0.2);
+@mixin invertActive {
+	--components-button-backgroundColor: rgba(255, 255, 255, 0.25);
 }
 
 @mixin counterHover {
