@@ -120,11 +120,11 @@
 		@include invert;
 
 		&:hover {
-			@include inverHover;
+			@include invertHover;
 		}
 
 		&:focus-visible {
-			@include inverFocusVisible;
+			@include invertFocusVisible;
 		}
 	}
 
@@ -156,15 +156,23 @@
 		@include success;
 	}
 
-	&:is(.is-disabled, .disabled, [disabled]) {
+	&:is(.is-disabled, .disabled, :disabled) {
 		@include disabled;
 
 		&:is(.mod-outlined, .mod-outline) {
 			@include disabledOutlined;
+
+			&:hover {
+				@include disabledHover;
+			}
 		}
 
 		&:is(.mod-text, .mod-link) {
 			@include disabledText;
+
+			&:hover {
+				@include disabledHover;
+			}
 		}
 	}
 }

@@ -22,6 +22,10 @@
 	--components-button-boxShadow: 0 0 0 1px var(--palettes-grey-400);
 }
 
+@mixin disabledHover {
+	--components-button-color: var(--palettes-grey-500);
+}
+
 @mixin disabledText {
 	--components-button-backgroundColor: transparent;
 }
@@ -58,14 +62,12 @@
 		position: absolute;
 	}
 
-	&:not([disabled], .is-disabled) {
-		&:hover {
-			--components-button-backgroundColor: var(--palettes-600);
-		}
+	&:hover {
+		--components-button-backgroundColor: var(--palettes-600);
+	}
 
-		&:active {
-			--components-button-backgroundColor: var(--palettes-800);
-		}
+	&:active {
+		--components-button-backgroundColor: var(--palettes-800);
 	}
 }
 
@@ -94,106 +96,79 @@
 }
 
 @mixin hover {
-	&:not([disabled], .is-disabled) {
-		--components-button-color: var(--palettes-text, var(--palettes-primary-text));
-		--components-button-backgroundColor: var(--palettes-600, var(--palettes-primary-600));
-	}
+	--components-button-color: var(--palettes-text, var(--palettes-primary-text));
+	--components-button-backgroundColor: var(--palettes-600, var(--palettes-primary-600));
 }
 
 @mixin focusVisible {
-	&:not([disabled], .is-disabled) {
-		@include a11y.focusVisible;
-	}
+	@include a11y.focusVisible;
 }
 
 @mixin active {
-	&:not([disabled], .is-disabled) {
-		--components-button-backgroundColor: var(--palettes-800, var(--palettes-primary-800));
-	}
+	--components-button-backgroundColor: var(--palettes-800, var(--palettes-primary-800));
 }
 
 @mixin textHover {
-	&:not([disabled], .is-disabled) {
-		--components-button-color: var(--palettes-700, var(--palettes-grey-700));
-		--components-button-backgroundColor: var(--palettes-100, var(--palettes-grey-100));
-	}
+	--components-button-color: var(--palettes-700, var(--palettes-grey-700));
+	--components-button-backgroundColor: var(--palettes-100, var(--palettes-grey-100));
 }
 
 @mixin textActive {
-	&:not([disabled], .is-disabled) {
-		--components-button-backgroundColor: var(--palettes-200, var(--palettes-grey-200));
-	}
+	--components-button-backgroundColor: var(--palettes-200, var(--palettes-grey-200));
 }
 
 @mixin textFocusVisible {
-	&:not([disabled], .is-disabled) {
-		--components-button-backgroundColor: var(--palettes-100, var(--palettes-grey-100));
-	}
+	--components-button-backgroundColor: var(--palettes-100, var(--palettes-grey-100));
 }
 
 @mixin deleteHover {
-	&:not([disabled], .is-disabled) {
-		--components-button-color: var(--palettes-error-700);
-		--components-button-backgroundColor: var(--palettes-error-100);
-	}
+	--components-button-color: var(--palettes-error-700);
+	--components-button-backgroundColor: var(--palettes-error-100);
 }
 
 @mixin deleteActive {
-	&:not([disabled], .is-disabled) {
+	--components-button-color: var(--palettes-error-700);
+	--components-button-backgroundColor: var(--palettes-error-200);
+}
+
+@mixin deleteOutlined {
+	&:hover {
+		--components-button-boxShadow: 0 0 0 var(--commons-divider-width) var(--palettes-error-400), var(--commons-boxShadow-XS);
+	}
+
+	&:focus-visible {
+		--components-button-color: var(--palettes-error-700);
+		--components-button-backgroundColor: var(--palettes-error-100);
+		--components-button-boxShadow: 0 0 0 var(--commons-divider-width) var(--palettes-error-400), var(--commons-boxShadow-XS);
+	}
+
+	&:active {
 		--components-button-color: var(--palettes-error-700);
 		--components-button-backgroundColor: var(--palettes-error-200);
 	}
 }
 
-@mixin deleteOutlined {
-	&:not([disabled], .is-disabled) {
-		&:hover {
-			--components-button-boxShadow: 0 0 0 var(--commons-divider-width) var(--palettes-error-400), var(--commons-boxShadow-XS);
-		}
-
-		&:focus-visible {
-			--components-button-color: var(--palettes-error-700);
-			--components-button-backgroundColor: var(--palettes-error-100);
-			--components-button-boxShadow: 0 0 0 var(--commons-divider-width) var(--palettes-error-400), var(--commons-boxShadow-XS);
-		}
-
-		&:active {
-			--components-button-color: var(--palettes-error-700);
-			--components-button-backgroundColor: var(--palettes-error-200);
-		}
-	}
-}
-
 @mixin outlinedHover {
-	&:not([disabled], .is-disabled) {
-		--components-button-color: var(--palettes-700, var(--palettes-grey-700));
-		--components-button-backgroundColor: var(--palettes-100, var(--palettes-grey-100));
-	}
+	--components-button-color: var(--palettes-700, var(--palettes-grey-700));
+	--components-button-backgroundColor: var(--palettes-100, var(--palettes-grey-100));
 }
 
 @mixin outlinedActive {
-	&:not([disabled], .is-disabled) {
-		--components-button-backgroundColor: var(--palettes-200, var(--palettes-grey-200));
-	}
+	--components-button-backgroundColor: var(--palettes-200, var(--palettes-grey-200));
 }
 
 @mixin outlinedFocusVisible {
-	&:not([disabled], .is-disabled) {
-		@include a11y.focusVisible($offset: 3px);
-	}
+	@include a11y.focusVisible($offset: 3px);
 }
 
-@mixin inverHover {
-	&:not([disabled], .is-disabled) {
-		--components-button-backgroundColor: rgba(255, 255, 255, 0.2);
-	}
+@mixin invertHover {
+	--components-button-color: var(--colors-white-color);
+	--components-button-backgroundColor: rgba(255, 255, 255, 0.2);
 }
 
-@mixin inverFocusVisible {
-	&:not([disabled], .is-disabled) {
-		--components-button-color: var(--colors-white-color);
-		--components-button-backgroundColor: rgba(255, 255, 255, 0.2);
-	}
+@mixin invertFocusVisible {
+	--components-button-color: var(--colors-white-color);
+	--components-button-backgroundColor: rgba(255, 255, 255, 0.2);
 }
 
 @mixin counterHover {

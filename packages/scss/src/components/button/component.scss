@@ -5,12 +5,10 @@
 @mixin component {
 	@include icon.M;
 
-	color: var(--components-button-color);
 	background-color: var(--components-button-backgroundColor);
 	box-shadow: var(--components-button-boxShadow);
 	border-radius: var(--commons-borderRadius-M);
 	line-height: var(--components-button-line-height);
-	margin: var(--components-button-margin);
 	padding: var(--components-button-padding);
 	transition-property: background-color, color, border-color, box-shadow;
 	transition-duration: var(--commons-animations-durations-fast);
@@ -35,8 +33,9 @@
 	font-weight: 600;
 	border: 0;
 
-	&:last-of-type {
-		--components-button-margin: 0;
+	&,
+	&:is(a) {
+		color: var(--components-button-color);
 	}
 
 	// deprecated
