@@ -159,11 +159,11 @@
 
 @mixin invertHover {
 	--components-button-color: var(--colors-white-color);
-	--components-button-backgroundColor: var(--palettes-800, var(--palettes-grey-900));
+	--components-button-backgroundColor: var(--palettes-800, var(--palettes-grey-800));
 }
 
 @mixin invertActive {
-	--components-button-backgroundColor: var(--palettes-800, var(--palettes-grey-800));
+	--components-button-backgroundColor: var(--palettes-700, var(--palettes-grey-700));
 }
 
 @mixin counterHover {
