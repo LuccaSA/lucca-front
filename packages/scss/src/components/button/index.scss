@@ -99,16 +99,36 @@
 	}
 
 	&.mod-delete {
-		&.mod-outlined {
-			@include deleteOutlined;
-		}
-
 		&:hover {
 			@include deleteHover;
 		}
 
 		&:active {
 			@include deleteActive;
+		}
+
+		&.mod-text {
+			&:is(:hover, :focus-visible) {
+				@include deleteHover;
+			}
+
+			&:active {
+				@include deleteActive;
+			}
+		}
+
+		&.mod-outlined {
+			&:hover {
+				@include deleteOutlinedHover;
+			}
+
+			&:focus-visible {
+				@include deleteOutlinedFocusVisible;
+			}
+
+			&:active {
+				@include deleteActive;
+			}
 		}
 	}
 

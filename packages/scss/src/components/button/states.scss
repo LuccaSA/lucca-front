@@ -61,14 +61,6 @@
 		margin: auto;
 		position: absolute;
 	}
-
-	&:hover {
-		--components-button-backgroundColor: var(--palettes-600);
-	}
-
-	&:active {
-		--components-button-backgroundColor: var(--palettes-800);
-	}
 }
 
 @mixin success {
@@ -127,21 +119,15 @@
 	--components-button-backgroundColor: var(--palettes-error-200);
 }
 
-@mixin deleteOutlined {
-	&:hover {
-		--components-button-boxShadow: 0 0 0 var(--commons-divider-width) var(--palettes-error-400), var(--commons-boxShadow-XS);
-	}
+@mixin deleteOutlinedHover {
+	--components-button-boxShadow: 0 0 0 var(--commons-divider-width) var(--palettes-error-400), var(--commons-boxShadow-XS);
+	--components-button-color: var(--palettes-error-700);
+	--components-button-backgroundColor: var(--palettes-error-100);
+}
 
-	&:focus-visible {
-		--components-button-color: var(--palettes-error-700);
-		--components-button-backgroundColor: var(--palettes-error-100);
-		--components-button-boxShadow: 0 0 0 var(--commons-divider-width) var(--palettes-error-400), var(--commons-boxShadow-XS);
-	}
-
-	&:active {
-		--components-button-color: var(--palettes-error-700);
-		--components-button-backgroundColor: var(--palettes-error-200);
-	}
+@mixin deleteOutlinedFocusVisible {
+	--components-button-boxShadow: 0 0 0 var(--commons-divider-width) var(--palettes-error-400), var(--commons-boxShadow-XS);
+	--components-button-color: var(--palettes-error-700);
 }
 
 @mixin outlinedHover {
