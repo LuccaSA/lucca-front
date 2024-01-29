@@ -1,14 +1,20 @@
 @use 'exports' as *;
 
-.numericBadge {
-	@include vars;
-	@include component;
+@layer components {
+	.numericBadge {
+		@layer core {
+			@include vars;
+			@include component;
+		}
 
-	&.mod-S {
-		@include S;
-	}
+		@layer mods {
+			&.mod-S {
+				@include S;
+			}
 
-	&.mod-XS {
-		@include XS;
+			&.mod-XS {
+				@include XS;
+			}
+		}
 	}
 }

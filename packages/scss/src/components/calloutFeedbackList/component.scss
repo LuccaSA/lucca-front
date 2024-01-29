@@ -1,8 +1,8 @@
 @use '@lucca-front/scss/src/commons/utils/reset';
-@use '@lucca-front/scss/src/components/button/exports' as button;
 
 @mixin component($atRoot: 'without: rule') {
 	@include reset.list;
+
 	display: flex;
 	flex-direction: column;
 	gap: var(--spacings-S);
@@ -17,11 +17,6 @@
 		.calloutFeedbackList-item-actions {
 			display: inline-flex;
 			gap: var(--spacings-XS);
-
-			.button {
-				@include button.S;
-				margin: 0;
-			}
 		}
 	}
 }

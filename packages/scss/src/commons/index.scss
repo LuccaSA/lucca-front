@@ -1,6 +1,8 @@
 @use 'exports' as *;
 
 :root {
-	@include vars;
-	@include base;
+	@layer base {
+		@include vars;
+		@include base;
+	}
 }

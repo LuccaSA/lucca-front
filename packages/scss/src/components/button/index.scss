@@ -1,186 +1,206 @@
 @use 'exports' as *;
 
-.button {
-	@include vars;
-	@include component;
-
-	&.mod-block {
-		@include block;
-	}
-
-	&.mod-S {
-		@include S;
-	}
-
-	&.mod-XS {
-		@include XS;
-	}
-
-	&:hover {
-		@include hover;
-	}
-
-	&:focus-visible {
-		@include focusVisible;
-	}
-
-	&:active {
-		@include active;
-	}
-
-	&:is(.mod-outline, .mod-outlined) {
-		@include outlined;
-
-		&:hover {
-			@include outlinedHover;
+@layer components {
+	.button {
+		@layer core {
+			@include vars;
+			@include component;
 		}
 
-		&:active {
-			@include outlinedActive;
-		}
-
-		&:focus-visible {
-			@include outlinedFocusVisible;
-		}
-	}
-
-	&:is(.mod-text, .mod-link) {
-		@include text;
-
-		&:is(:hover, :focus-visible) {
-			@include textHover;
-		}
-
-		&:active {
-			@include textActive;
-		}
-	}
-
-	// .mod-counter deprecated
-	&.mod-counter {
-		@include counter;
-
-		&.mod-S {
-			@include counterS;
-		}
-
-		&.mod-XS {
-			@include counterXS;
-		}
-
-		&:hover {
-			@include counterHover;
-		}
-	}
-
-	// .mod-icon is deprecated
-	&:is(.mod-icon, .mod-withIcon) {
-		@include withIcon;
-
-		&.mod-S {
-			@include withIconS;
-		}
-
-		&.mod-XS {
-			@include withIconXS;
-		}
-	}
-
-	&.mod-onlyIcon {
-		@include onlyIcon;
-
-		&.mod-S {
-			@include onlyIconS;
-		}
-
-		&.mod-XS {
-			@include onlyIconXS;
-		}
-	}
-
-	&.mod-delete {
-		&:hover {
-			@include deleteHover;
-		}
-
-		&:active {
-			@include deleteActive;
-		}
-
-		&.mod-text {
-			&:is(:hover, :focus-visible) {
-				@include deleteHover;
+		@layer mods {
+			&.mod-block {
+				@include block;
 			}
 
-			&:active {
-				@include deleteActive;
+			&.mod-S {
+				@include S;
+			}
+
+			&.mod-XS {
+				@include XS;
+			}
+
+			// .mod-counter deprecated
+			&.mod-counter {
+				@include counter;
+
+				&.mod-S {
+					@include counterS;
+				}
+
+				&.mod-XS {
+					@include counterXS;
+				}
+
+				&:hover {
+					@include counterHover;
+				}
+			}
+
+			// .mod-icon is deprecated
+			&:is(.mod-icon, .mod-withIcon) {
+				@include withIcon;
+
+				&.mod-S {
+					@include withIconS;
+				}
+
+				&.mod-XS {
+					@include withIconXS;
+				}
+			}
+
+			&.mod-onlyIcon {
+				@include onlyIcon;
+
+				&.mod-S {
+					@include onlyIconS;
+				}
+
+				&.mod-XS {
+					@include onlyIconXS;
+				}
+			}
+
+			&.mod-more {
+				@include more;
+
+				&.mod-S {
+					@include moreS;
+				}
+
+				&.mod-XS {
+					@include moreXS;
+				}
 			}
 		}
 
-		&.mod-outlined {
+		@layer states {
 			&:hover {
-				@include deleteOutlinedHover;
+				@include hover;
 			}
 
 			&:focus-visible {
-				@include deleteOutlinedFocusVisible;
+				@include focusVisible;
 			}
 
 			&:active {
-				@include deleteActive;
+				@include active;
+			}
+
+			&:is(.is-loading, .loading) {
+				@include loading;
+
+				&.mod-S {
+					@include loadingS;
+				}
+			}
+
+			&.mod-delete {
+				&:hover {
+					@include deleteHover;
+				}
+
+				&:active {
+					@include deleteActive;
+				}
+
+				&.mod-text {
+					&:is(:hover, :focus-visible) {
+						@include deleteHover;
+					}
+
+					&:active {
+						@include deleteActive;
+					}
+				}
+
+				&.mod-outlined {
+					&:hover {
+						@include deleteOutlinedHover;
+					}
+
+					&:focus-visible {
+						@include deleteOutlinedFocusVisible;
+					}
+
+					&:active {
+						@include deleteActive;
+					}
+				}
+			}
+
+			&:is(.is-error, .error) {
+				@include error;
+			}
+
+			&:is(.is-success, .success) {
+				@include success;
+			}
+
+			&:is(.is-disabled, .disabled, :disabled) {
+				@include disabled;
+
+				&:is(.mod-outlined, .mod-outline) {
+					@include disabledOutlined;
+				}
+
+				&:is(.mod-text, .mod-link) {
+					@include disabledText;
+				}
 			}
 		}
-	}
 
-	&.mod-invert {
-		@include invert;
+		&:is(.mod-outline, .mod-outlined) {
+			@layer mods {
+				@include outlined;
+			}
 
-		&:is(:hover, :focus-visible) {
-			@include invertHover;
-		}
+			@layer states {
+				&:hover {
+					@include outlinedHover;
+				}
 
-		&:active {
-			@include invertActive;
-		}
-	}
+				&:active {
+					@include outlinedActive;
+				}
 
-	&.mod-more {
-		@include more;
-
-		&.mod-S {
-			@include moreS;
-		}
-
-		&.mod-XS {
-			@include moreXS;
-		}
-	}
-
-	&:is(.is-loading, .loading) {
-		@include loading;
-
-		&.mod-S {
-			@include loadingS;
-		}
-	}
-
-	&:is(.is-error, .error) {
-		@include error;
-	}
-
-	&:is(.is-success, .success) {
-		@include success;
-	}
-
-	&:is(.is-disabled, .disabled, :disabled) {
-		@include disabled;
-
-		&:is(.mod-outlined, .mod-outline) {
-			@include disabledOutlined;
+				&:focus-visible {
+					@include outlinedFocusVisible;
+				}
+			}
 		}
 
 		&:is(.mod-text, .mod-link) {
-			@include disabledText;
+			@layer mods {
+				@include text;
+			}
+
+			@layer states {
+				&:is(:hover, :focus-visible) {
+					@include textHover;
+				}
+
+				&:active {
+					@include textActive;
+				}
+			}
+		}
+
+		&.mod-invert {
+			@layer mods {
+				@include invert;
+			}
+
+			@layer states {
+				&:is(:hover, :focus-visible) {
+					@include invertHover;
+				}
+
+				&:active {
+					@include invertActive;
+				}
+			}
 		}
 	}
 }
