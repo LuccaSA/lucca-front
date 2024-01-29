@@ -177,18 +177,10 @@
 
 		&:is(.mod-outlined, .mod-outline) {
 			@include disabledOutlined;
-
-			&:hover {
-				@include disabledHover;
-			}
 		}
 
 		&:is(.mod-text, .mod-link) {
 			@include disabledText;
-
-			&:is(:hover, :focus-visible) {
-				@include disabledHover;
-			}
 		}
 	}
 }
