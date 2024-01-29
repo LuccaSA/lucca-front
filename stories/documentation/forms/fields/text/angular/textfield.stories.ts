@@ -88,7 +88,7 @@ export const PasswordVisiblity: StoryObj<TextInputComponent & { disabled: boolea
 	render: (args, { argTypes }) => {
 		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, ...inputArgs } = args;
 		return {
-			template: cleanupTemplate(`
+			template: `
 <lu-form-field ${generateInputs(
 				{
 					label,
@@ -108,7 +108,7 @@ export const PasswordVisiblity: StoryObj<TextInputComponent & { disabled: boolea
 
 </lu-form-field>
 
-{{example}}`),
+{{example}}`,
 			moduleMetadata: {
 				imports: [TextInputComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule],
 			},
@@ -168,7 +168,7 @@ export const WithPrefixAndSuffix: StoryObj<TextInputComponent & { disabled: bool
 	args: {
 		size: 'M',
 		label: 'Label',
-		tooltip: "Tooltip message",
+		tooltip: 'Tooltip message',
 		hiddenLabel: false,
 		required: true,
 		type: 'text',

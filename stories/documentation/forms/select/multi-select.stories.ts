@@ -54,10 +54,9 @@ export const Basic = generateStory({
 		args: {
 			selectedLegumes: allLegumes.slice(0, 15),
 		},
+		argTypes: hiddenArgTypes,
 	},
 });
-// Override argTypes to display loading/clearable/disabled/placeholder controls
-Basic.argTypes = hiddenArgTypes;
 
 export const WithMultiDisplayer = generateStory({
 	name: 'With MultiDisplayer',
@@ -99,6 +98,7 @@ export const WithMultiDisplayer = generateStory({
 		args: {
 			selectedLegumes: allLegumes.slice(0, 5),
 		},
+		argTypes: hiddenArgTypes,
 	},
 });
 
@@ -131,6 +131,7 @@ export const WithDisplayer = generateStory({
 		args: {
 			selectedLegumes: allLegumes.slice(0, 5),
 		},
+		argTypes: hiddenArgTypes,
 	},
 });
 
@@ -154,6 +155,9 @@ export const WithPagination = generateStory({
 		'@lucca-front/ng/core-select': ['LuOptionDirective'],
 		'@lucca-front/ng/multi-select': ['LuMultiSelectInputComponent'],
 	},
+	storyPartial: {
+		argTypes: hiddenArgTypes,
+	},
 });
 
 export const WithDisabledOptions = generateStory({
@@ -176,6 +180,9 @@ export const WithDisabledOptions = generateStory({
 		'@lucca-front/ng/core-select': ['LuOptionDirective', 'LuDisabledOptionDirective'],
 		'@lucca-front/ng/multi-select': ['LuMultiSelectInputComponent'],
 	},
+	storyPartial: {
+		argTypes: hiddenArgTypes,
+	},
 });
 
 export const ApiV3 = generateStory({
@@ -194,6 +201,9 @@ export const ApiV3 = generateStory({
 		'@lucca-front/ng/multi-select': ['LuMultiSelectInputComponent'],
 		'@lucca-front/ng/simple-select/api': ['LuSimpleSelectApiV3Directive'],
 	},
+	storyPartial: {
+		argTypes: hiddenArgTypes,
+	},
 });
 
 export const ApiV4 = generateStory({
@@ -211,6 +221,9 @@ export const ApiV4 = generateStory({
 	neededImports: {
 		'@lucca-front/ng/multi-select': ['LuMultiSelectInputComponent'],
 		'@lucca-front/ng/simple-select/api': ['LuSimpleSelectApiV4Directive'],
+	},
+	storyPartial: {
+		argTypes: hiddenArgTypes,
 	},
 });
 
@@ -250,6 +263,7 @@ export const GroupBy = generateStory({
 				brown: 'marron',
 			},
 		},
+		argTypes: hiddenArgTypes,
 	},
 });
 
@@ -290,20 +304,7 @@ const meta: Meta<LuSelectInputStoryComponent> = {
 		selectedLegumes: [],
 		page: 1,
 	},
-	argTypes: {
-		options: { control: false },
-		optionTpl: { control: false },
-		overlayConfig: { control: false },
-		valueTpl: { control: false },
-		optionComparer: { control: false },
-		clueChange: { control: false },
-		nextPage: { control: false },
-		previousPage: { control: false },
-		legumes: { control: false },
-		selectedLegumes: { control: false },
-		legumeColor: { control: false },
-		colorNameByColor: { control: false },
-	},
+	argTypes: hiddenArgTypes,
 	parameters: {
 		docs: {
 			description: {

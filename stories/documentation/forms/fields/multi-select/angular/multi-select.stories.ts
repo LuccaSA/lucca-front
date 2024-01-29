@@ -47,8 +47,7 @@ export const Basic: StoryObj<LuMultiSelectInputComponent<unknown> & FormFieldCom
 		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, ...inputArgs } = args;
 		return {
 			props: { legumes: allLegumes, example: [] },
-			template: `
-<lu-form-field ${generateInputs(
+			template: `<lu-form-field ${generateInputs(
 				{
 					label,
 					hiddenLabel,
@@ -59,8 +58,7 @@ export const Basic: StoryObj<LuMultiSelectInputComponent<unknown> & FormFieldCom
 				},
 				argTypes,
 			)}>
-	<lu-multi-select
-		${generateInputs(inputArgs, argTypes)}
+	<lu-multi-select ${generateInputs(inputArgs, argTypes)}
 		[options]="legumes | filterLegumes:clue"
 		(clueChange)="clue = $event"
 		[(ngModel)]="example">
@@ -76,7 +74,7 @@ export const Basic: StoryObj<LuMultiSelectInputComponent<unknown> & FormFieldCom
 	args: {
 		size: 'M',
 		label: 'Label',
-		tooltip: "Tooltip message",
+		tooltip: 'Tooltip message',
 		hiddenLabel: false,
 		required: false,
 		placeholder: 'Placeholder',

@@ -25,7 +25,7 @@ export default {
 				type: 'select',
 			},
 		},
-	}
+	},
 } as Meta;
 
 export const Basic: StoryObj<CheckboxInputComponent & FormFieldComponent> = {
@@ -46,8 +46,7 @@ export const Basic: StoryObj<CheckboxInputComponent & FormFieldComponent> = {
 				},
 				argTypes,
 			)}>
-	<lu-checkbox-input
-		${generateInputs(inputArgs, argTypes)}
+	<lu-checkbox-input ${generateInputs(inputArgs, argTypes)}
 	[(ngModel)]="example"/>
 </lu-form-field>
 
@@ -60,7 +59,7 @@ export const Basic: StoryObj<CheckboxInputComponent & FormFieldComponent> = {
 	args: {
 		size: 'M',
 		label: 'Label',
-		tooltip: "Tooltip message",
+		tooltip: 'Tooltip message',
 		hiddenLabel: false,
 		required: true,
 		inlineMessage: 'Helper Text',

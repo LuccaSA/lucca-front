@@ -58,8 +58,7 @@ export const Basic: StoryObj<LuSimpleSelectInputComponent<unknown> & FormFieldCo
 				},
 				argTypes,
 			)}>
-	<lu-simple-select
-		${generateInputs(inputArgs, argTypes)}
+	<lu-simple-select	${generateInputs(inputArgs, argTypes)}
 		[options]="legumes | filterLegumes:clue"
 		(clueChange)="clue = $event"
 		[(ngModel)]="example">
@@ -75,7 +74,7 @@ export const Basic: StoryObj<LuSimpleSelectInputComponent<unknown> & FormFieldCo
 	args: {
 		size: 'M',
 		label: 'Label',
-		tooltip: "Tooltip message",
+		tooltip: 'Tooltip message',
 		hiddenLabel: false,
 		required: false,
 		placeholder: 'Placeholder',
