@@ -13,10 +13,10 @@ function getTemplate(args: TableSelectableStory): string {
 	  <thead class="table-head">
 	    <tr class="table-head-row mod-selectable">
 	      <th class="table-head-row-cell">
-					<label class="checkbox">
-						<input class="checkbox-input" type="checkbox" />
-						<span class="checkbox-label"></span>
-					</label>
+				<span class="checkboxField">
+					<input type="checkbox" class="checkboxField-input" id="CB1" aria-describedby="CB1message" aria-required="true" />
+					<span class="checkboxField-icon" aria-hidden="true"><span class="checkboxField-icon-check"></span></span>
+				</span>
 				</th>
 	      <th class="table-head-row-cell">Label</th>
 	      <th class="table-head-row-cell">Label</th>
@@ -26,10 +26,10 @@ function getTemplate(args: TableSelectableStory): string {
 	  <tbody class="table-body">
 	    <tr class="table-body-row mod-selectable">
 	      <td class="table-body-row-cell">
-					<label class="checkbox">
-						<input class="checkbox-input" type="checkbox" />
-						<span class="checkbox-label"></span>
-					</label>
+				<span class="checkboxField">
+					<input type="checkbox" class="checkboxField-input" id="CB2" aria-describedby="CB2message" aria-required="true" />
+					<span class="checkboxField-icon" aria-hidden="true"><span class="checkboxField-icon-check"></span></span>
+				</span>
 				</td>
 	      <td class="table-body-row-cell">Contenu</td>
 	      <td class="table-body-row-cell">Contenu</td>
@@ -37,10 +37,10 @@ function getTemplate(args: TableSelectableStory): string {
 	    </tr>
 	    <tr class="table-body-row mod-selectable">
 	      <td class="table-body-row-cell">
-					<label class="checkbox">
-						<input class="checkbox-input" type="checkbox" />
-						<span class="checkbox-label"></span>
-					</label>
+				<span class="checkboxField">
+					<input type="checkbox" class="checkboxField-input" id="CB3" aria-describedby="CB3message" aria-required="true" />
+					<span class="checkboxField-icon" aria-hidden="true"><span class="checkboxField-icon-check"></span></span>
+				</span>
 				</td>
 	      <td class="table-body-row-cell">Contenu</td>
 	      <td class="table-body-row-cell">Contenu</td>
