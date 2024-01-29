@@ -25,7 +25,7 @@ export default {
 				type: 'select',
 			},
 		},
-	}
+	},
 } as Meta;
 
 export const Basic: StoryObj<SwitchInputComponent & FormFieldComponent> = {
@@ -35,7 +35,7 @@ export const Basic: StoryObj<SwitchInputComponent & FormFieldComponent> = {
 			props: {
 				example: false,
 			},
-			template: cleanupTemplate(`<lu-form-field ${generateInputs(
+			template: `<lu-form-field ${generateInputs(
 				{
 					label,
 					hiddenLabel,
@@ -52,7 +52,7 @@ export const Basic: StoryObj<SwitchInputComponent & FormFieldComponent> = {
 
 </lu-form-field>
 
-{{example}}`),
+{{example}}`,
 			moduleMetadata: {
 				imports: [CheckboxInputComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule],
 			},
@@ -61,7 +61,7 @@ export const Basic: StoryObj<SwitchInputComponent & FormFieldComponent> = {
 	args: {
 		size: 'M',
 		label: 'Label',
-		tooltip: "Tooltip message",
+		tooltip: 'Tooltip message',
 		hiddenLabel: false,
 		required: true,
 		inlineMessage: 'Helper Text',
