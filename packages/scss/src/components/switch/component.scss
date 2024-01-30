@@ -27,7 +27,7 @@
 
 				align-items: center;
 				background-color: var(--palettes-grey-500);
-				border-radius: 9999px;
+				border-radius: var(--commons-borderRadius-full);
 				color: var(--colors-white-color);
 				display: flex;
 				font-size: var(--components-switch-icon-size);
@@ -46,7 +46,7 @@
 			&::after {
 				background-color: var(--colors-white-color);
 				box-shadow: var(--pr-elevation-shadow-overflow);
-				border-radius: 50%;
+				box-shadow: var(--commons-boxShadow-XXS);
 				content: '';
 				display: block;
 				height: var(--components-switch-slider-size);

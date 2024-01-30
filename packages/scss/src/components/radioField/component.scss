@@ -3,97 +3,66 @@
 
 @mixin component($atRoot: 'without: rule') {
 	position: relative;
-	display: grid;
-	grid-template-columns: auto 1fr;
-	grid-column-gap: var(--spacings-XS);
 
 	@at-root ($atRoot) {
+		.radioField-icon {
+			width: var(--component-radioField-size);
+			height: var(--component-radioField-size);
+			border: 2px solid var(--palettes-grey-700);
+			border-radius: var(--component-radioField-borderRadius);
+			position: relative;
+			color: var(--colors-white-color);
+			transition-property: color, border-color, background-color;
+			transition-duration: var(--commons-animations-durations-fast);
+			background-color: var(--colors-white-color);
+			display: block;
+			cursor: pointer;
 
-		.radioField-label {
-			display: contents;
+			@media (prefers-reduced-motion: reduce) {
+				transition-property: none;
+			}
+
+			&::after {
+				content: '';
+				position: absolute;
+				inset: -2px;
+				outline-offset: 2px;
+				border-radius: 6px;
+			}
 		}
 
-		.radioField-label-input {
-		  width: var(--component-radioField-label-input-size);
-		  height: var(--component-radioField-label-input-size);
-		  border: 2px solid var(--palettes-grey-700);
-		  border-radius: 50%;
-		  position: relative;
-		  top: .125rem;
-		  color: var(--colors-white-color);
-		  transition-property: color, border-color;
-		  transition-duration: var(--commons-animations-durations-fast);
-		  margin: var(--component-radioField-label-input-margin);
-		  display: flex;
-		  align-items: center;
-		  justify-content: center;
-		  background-color: var(--colors-white-color);
-		  cursor: pointer;
+		.radioField-icon-check {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			width: 100%;
+			height: 100%;
+			transform: scale(0);
+			transition-property: transform;
+			transition-duration: var(--commons-animations-durations-fast);
+			// transition-timing-function: cubic-bezier(0.5, -0.5, 0.5, 0);
 
-		  @media (prefers-reduced-motion: reduce) {
-		    transition-property: none;
-		  }
+			@media (prefers-reduced-motion: reduce) {
+				transition-property: none;
+			}
 
-		  &::after {
-		    content: '';
-		    position: absolute;
-		    inset: -2px;
-		    outline-offset: 2px;
-		    border-radius: var(--component-radioField-label-input-borderRadius);
-		  }
-		}
-
-		.radioField-label-input-icon {
-		  display: flex;
-		  align-items: center;
-		  justify-content: center;
-		  width: calc(100% - 4px);
-		  height: calc(100% - 4px);
-			opacity: 0;
-		  transform: scale(0);
-		  transition-property: transform, background-color;
-		  transition-duration: var(--commons-animations-durations-fast);
-			transition-timing-function: cubic-bezier(0.5, -0.5, 0.5, 0);
-		  border-radius: 50%;
-		  background-color: var(--palettes-primary-700);
-
-		  @media (prefers-reduced-motion: reduce) {
-		    transition-property: none;
-		  }
+			&::before {
+				content: '';
+				position: absolute;
+				inset: 0;
+				background-color: transparent;
+				border-radius: var(--commons-borderRadius-full);
+				border: 2px solid white;
+			}
 		}
 
 		.radioField-input {
-		  @include a11y.mask;
-
-		  &:focus-visible {
-		    ~ .radioField-label {
-		      .radioField-label-input {
-		        &::after {
-		          @include a11y.focusVisible();
-		        }
-		      }
-		    }
-		  }
-
-		  &:hover {
-		    ~ .radioField-label {
-		      .radioField-label-input {
-		        border-color: var(--palettes-grey-600);
-		      }
-		    }
-		  }
-
-		  &:active {
-		    ~ .radioField-label {
-		      .radioField-label-input {
-		        border-color: var(--palettes-grey-800);
-		      }
-		    }
-		  }
-		}
-
-		.inlineMessage {
-			grid-column: 2;
+			position: absolute;
+			z-index: 1;
+			width: var(--component-radioField-size);
+			height: var(--component-radioField-size);
+			opacity: 0;
+			cursor: pointer;
 		}
 	}
 }

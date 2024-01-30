@@ -1,16 +1,15 @@
-import { PositionStrategy } from '@angular/cdk/overlay';
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, forwardRef, HostBinding, inject, Input, TemplateRef, Type } from '@angular/core';
+import { ChangeDetectionStrategy, Component, forwardRef, inject, Input, numberAttribute, OnDestroy, OnInit, TemplateRef, Type, ViewEncapsulation } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { getIntl } from '@lucca-front/ng/core';
 import { ALuSelectInputComponent, LuOptionContext, provideLuSelectLabelsAndIds, provideLuSelectOverlayContainer, ɵLuOptionOutletDirective } from '@lucca-front/ng/core-select';
+import { IconComponent } from '@lucca-front/ng/icon';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
-import { ReplaySubject } from 'rxjs';
+import { Subject } from 'rxjs';
 import { LuMultiSelectDefaultDisplayerComponent } from '../displayer/index';
 import { LU_MULTI_SELECT_TRANSLATIONS } from '../select.translate';
 import { LuMultiSelectPanelRefFactory } from './panel-ref.factory';
 import { LuMultiSelectPanelRef } from './panel.model';
-import { IconComponent } from '@lucca-front/ng/icon';
 
 @Component({
 	selector: 'lu-multi-select',
@@ -33,42 +32,57 @@ import { IconComponent } from '@lucca-front/ng/icon';
 		provideLuSelectLabelsAndIds(),
 		LuMultiSelectPanelRefFactory,
 	],
+	host: {
+		class: 'multiSelect',
+	},
+	encapsulation: ViewEncapsulation.None,
 })
-export class LuMultiSelectInputComponent<T> extends ALuSelectInputComponent<T, T[]> implements ControlValueAccessor {
+export class LuMultiSelectInputComponent<T> extends ALuSelectInputComponent<T, T[]> implements ControlValueAccessor, OnDestroy, OnInit {
 	intl = getIntl(LU_MULTI_SELECT_TRANSLATIONS);
 
-	@HostBinding('class.mod-multiple') modMultipleClass = true;
-
-	@Input() valuesTpl?: TemplateRef<LuOptionContext<T[]>> | Type<unknown> = LuMultiSelectDefaultDisplayerComponent;
-
-	// TODO This is for select all
-	// @Input() set areAllOptionsSelected(selected: boolean | undefined) {
-	// 	this.areAllOptionsSelected$.next(selected);
-	// }
-
 	@Input()
-	expandedPositionStrategy?: PositionStrategy;
+	valuesTpl?: TemplateRef<LuOptionContext<T[]>> | Type<unknown> = LuMultiSelectDefaultDisplayerComponent;
 
-	// TODO this is for select all
-	// @Output() selectAll = new EventEmitter<void>();
+	@Input({ transform: numberAttribute })
+	maxValuesShown = 500;
 
-	@Input()
-	expanded = false;
+	override _value: T[] = [];
 
-	@Input()
 	public override get panelRef(): LuMultiSelectPanelRef<T> | undefined {
 		return this._panelRef;
 	}
-
-	protected areAllOptionsSelected$ = new ReplaySubject<boolean | undefined>(1);
 
 	protected override _panelRef?: LuMultiSelectPanelRef<T>;
 
 	protected panelRefFactory = inject(LuMultiSelectPanelRefFactory);
 
+	/**
+	 * This is used to tell the displayer to focus on the input element
+	 * keepClue is used to avoid triggering an update which would open the panel,
+	 * mainly for when we want to focus without opening the panel
+	 */
+	public readonly focusInput$ = new Subject<void | { keepClue: boolean }>();
+
+	public readonly emptyClue$ = new Subject<void>();
+
+	public override focusInput(): void {
+		this.focusInput$.next();
+	}
+
+	public override emptyClue(): void {
+		this.emptyClue$.next();
+	}
+
 	public override writeValue(value: T[]): void {
 		super.writeValue(value);
 		this.panelRef?.updateSelectedOptions(value);
+	}
+
+	public override updateValue(value: T[], skipFocus = false): void {
+		super.updateValue(value);
+		if (!skipFocus) {
+			this.focusInput();
+		}
 	}
 
 	protected override buildPanelRef(): LuMultiSelectPanelRef<T> {
@@ -78,14 +92,10 @@ export class LuMultiSelectInputComponent<T> extends ALuSelectInputComponent<T, T
 				optionComparer: this.optionComparer,
 				options$: this.options$,
 				loading$: this.loading$,
-				searchable: this.searchable,
 				optionTpl: this.optionTpl,
-				canSelectAll: false, // TODO Connect this to this.selectAll.observed when we'll be fixed on how to implement select all
-				areAllOptionsSelected$: this.areAllOptionsSelected$,
-				expanded: this.expanded,
+				grouping: this.grouping,
 			},
 			this.overlayConfig,
-			this.expandedPositionStrategy,
 		);
 	}
 
@@ -95,8 +105,6 @@ export class LuMultiSelectInputComponent<T> extends ALuSelectInputComponent<T, T
 		}
 
 		super.bindInputToPanelRefEvents();
-		// TODO This is for select all
-		// this.panelRef.selectAll.subscribe(() => this.selectAll.emit());
 	}
 
 	protected override get hasValue(): boolean {
@@ -107,5 +115,11 @@ export class LuMultiSelectInputComponent<T> extends ALuSelectInputComponent<T, T
 		event.stopPropagation();
 		this.onChange?.([]);
 		this.value = [];
+		this.focusInput$.next({ keepClue: true });
+	}
+
+	override ngOnDestroy() {
+		super.ngOnDestroy();
+		this.focusInput$.complete();
 	}
 }

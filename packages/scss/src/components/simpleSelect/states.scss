@@ -1,0 +1,64 @@
+@use '@lucca-front/scss/src/commons/utils/a11y';
+
+@mixin focused {
+  @include a11y.focusVisible($offset: 3px);
+
+  .simpleSelect-value {
+    color: var(--components-simpleSelect-value-color);
+  }
+}
+
+@mixin focusedExpanded {
+  .simpleSelect-value {
+    color: var(--components-simpleSelect-placeholder);
+  }
+
+  .simpleSelect-arrow {
+    transform: rotate(-180deg);
+  }
+}
+
+@mixin searchFilled {
+  .simpleSelect-value {
+    display: none;
+  }
+}
+
+@mixin selected {
+  .simpleSelect-input {
+    &::placeholder {
+      color: transparent;
+    }
+  }
+
+  .simpleSelect-value {
+    display: block;
+  }
+}
+
+@mixin selectedSearchFilled {
+  .simpleSelect-input {
+    &::placeholder {
+      color: transparent;
+    }
+  }
+
+  .simpleSelect-value {
+    display: none;
+  }
+}
+
+@mixin invalid {
+  --components-simpleSelect-border-color: var(--palettes-error-400);
+  --components-simpleSelect-background: var(--palettes-error-50);
+  --components-simpleSelect-placeholder: var(--palettes-error-400);
+}
+
+@mixin disabled {
+  --components-simpleSelect-border-color: var(--palettes-grey-300);
+  --components-simpleSelect-background: var(--palettes-grey-100);
+  --components-simpleSelect-placeholder: var(--palettes-grey-400);
+  --components-simpleSelect-value-color: var(--palettes-grey-600);
+  --components-simpleSelect-arrow-color: var(--palettes-grey-500);
+  pointer-events: none;
+}

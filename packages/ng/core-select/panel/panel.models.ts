@@ -10,7 +10,12 @@ export abstract class LuSelectPanelRef<TOption, TValue> {
 	activeOptionIdChanged = new EventEmitter<string>();
 	options$: Observable<TOption>;
 
+	abstract handleKeyManagerEvent(event: KeyboardEvent): void;
+
 	abstract emitValue(value: TValue): void;
+
+	abstract selectCurrentlyHighlightedValue(): void;
+
 	close(): void {
 		this.closed.next();
 		this.closed.complete();
@@ -19,7 +24,6 @@ export abstract class LuSelectPanelRef<TOption, TValue> {
 		this.valueChanged.complete();
 		this.clueChanged.emit('');
 		this.clueChanged.complete();
-		this.activeOptionIdChanged.emit(undefined);
 		this.activeOptionIdChanged.complete();
 	}
 }

@@ -2,7 +2,7 @@ import { provideHttpClient } from '@angular/common/http';
 import { Component, Input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { provideAnimations } from '@angular/platform-browser/animations';
-import { LuUserSelectModule } from '@lucca-front/ng/user';
+import { ILuUser, LuUserSelectModule } from '@lucca-front/ng/user';
 import { Meta, StoryFn, applicationConfig } from '@storybook/angular';
 
 @Component({
@@ -12,7 +12,8 @@ import { Meta, StoryFn, applicationConfig } from '@storybook/angular';
 	imports: [LuUserSelectModule, FormsModule],
 })
 class UserSelectStory {
-	@Input() public model;
+	model: ILuUser;
+	@Input() disablePrincipal = false;
 }
 
 export default {
@@ -59,7 +60,6 @@ export const basic = template.bind({});
 basic.args = {};
 
 basic.parameters = {
-	controls: { include: [] },
 	docs: {
 		source: {
 			language: 'ts',

@@ -1,12 +1,1 @@
-@import '_definitions';
-@include selectInputStyle;
-
-:host {
-	&[aria-expanded="true"] {
-		outline: none;
-	}
-}
-
-.lu-select-value {
-	padding-right: 2rem;
-}
+@use '@lucca-front/scss/src/components/multiSelect';

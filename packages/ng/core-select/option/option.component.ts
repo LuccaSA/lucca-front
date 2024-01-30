@@ -70,7 +70,11 @@ export class LuOptionComponent<T> implements Highlightable, AfterViewInit, OnDes
 
 	setActiveStyles(): void {
 		this.isHighlighted$.next(true);
-		this.elementRef.nativeElement.scrollIntoView(this.scrollIntoViewOptions);
+		// Somehow, adding this small delay works, even tho 0ms delay doesn't, I think there's
+		// a race condition somewhere that I can't find so this will just fix it for now.
+		setTimeout(() => {
+			this.elementRef.nativeElement.scrollIntoView(this.scrollIntoViewOptions);
+		}, 15);
 	}
 
 	setInactiveStyles(): void {

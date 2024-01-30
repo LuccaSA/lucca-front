@@ -13,7 +13,8 @@
 		}
 	}
 
-	background-color: var(--palettes-grey-25);
+	background-color: var(--components-progress-background);
+	border-radius: var(--commons-borderRadius-full);
 	height: var(--components-progress-height);
 	margin: var(--components-progress-margin-vertical) var(--components-progress-margin-horizontal);
 	position: relative;

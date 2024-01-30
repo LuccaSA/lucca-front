@@ -1,13 +1,13 @@
 import { provideHttpClient } from '@angular/common/http';
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { EventEmitter } from '@angular/core';
-import { fakeAsync, TestBed, tick } from '@angular/core/testing';
+import { TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { ILuApiItem } from '@lucca-front/ng/api';
+import { ALuSelectInputComponent } from '@lucca-front/ng/core-select';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
-import { BehaviorSubject, first, ReplaySubject } from 'rxjs';
+import { BehaviorSubject, ReplaySubject, first } from 'rxjs';
 import { LuSimpleSelectApiV3Directive } from './api-v3.directive';
 import { MAGIC_DEBOUNCE_DURATION, MAGIC_PAGE_SIZE } from './api.directive';
-import { ALuSelectInputComponent } from '../../core-select/input';
 
 const itemsMocks = Array.from({ length: MAGIC_PAGE_SIZE * 2 + 5 }, (_, i) => ({ id: i, name: `item ${i}` }));
 

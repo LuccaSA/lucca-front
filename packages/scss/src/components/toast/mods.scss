@@ -69,13 +69,13 @@
 				width: calc(100% - 4px);
 				height: calc(100% - 4px);
 				z-index: 1;
-				border-radius: 50%;
+				border-radius: var(--commons-borderRadius-full);
 				content: '';
 			}
 
 			svg {
 				transform: rotate(-90deg);
-				border-radius: 50%;
+				border-radius: var(--commons-borderRadius-full);
 				width: 100%;
 				height: auto;
 				display: block;

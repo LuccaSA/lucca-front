@@ -9,9 +9,8 @@
 	padding: var(--spacings-XS);
 	border-radius: var(--commons-borderRadius-L);
 	background-color: var(--palettes-50, var(--palettes-grey-50));
-	border-color: var(--palettes-300, var(--palettes-grey-300));
-	border-style: solid;
-	border-width: var(--commons-divider-width);
+	border: 0;
+	box-shadow: 0 0 0 var(--commons-divider-width) var(--palettes-300, var(--palettes-grey-300));
 	cursor: pointer;
 
 	&:hover {

@@ -1,18 +1,36 @@
 /* eslint-disable @angular-eslint/no-output-on-prefix */
 import { OverlayConfig, OverlayContainer } from '@angular/cdk/overlay';
-import { ChangeDetectorRef, Directive, EventEmitter, HostBinding, HostListener, Input, OnDestroy, OnInit, Output, TemplateRef, Type, inject } from '@angular/core';
+import {
+	ChangeDetectorRef,
+	ContentChild,
+	Directive,
+	ElementRef,
+	EventEmitter,
+	HostBinding,
+	HostListener,
+	Input,
+	OnDestroy,
+	OnInit,
+	Output,
+	TemplateRef,
+	Type,
+	ViewChild,
+	booleanAttribute,
+	inject,
+} from '@angular/core';
 import { BehaviorSubject, ReplaySubject, Subject } from 'rxjs';
-import { LuSimpleSelectDefaultOptionComponent } from '../option';
+import { LuOptionGroupDirective, LuSimpleSelectDefaultOptionComponent } from '../option';
 import { LuSelectPanelRef } from '../panel';
 import { LuOptionContext, SELECT_LABEL, SELECT_LABEL_ID } from '../select.model';
 
 @Directive()
 export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDestroy, OnInit {
-	@HostBinding('tabindex') tabindex = 0;
+	@ViewChild('inputElement')
+	private inputElementRef: ElementRef<HTMLInputElement>;
 
 	@Input() placeholder = '';
 
-	@Input()
+	@Input({ transform: booleanAttribute })
 	@HostBinding('class.is-clearable')
 	clearable = false;
 
@@ -20,31 +38,29 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 		return this.clueChange.observed;
 	}
 
-	@Input()
-	@HostBinding('class.is-disabled')
+	@Input({ transform: booleanAttribute })
 	disabled = false;
 
-	@HostBinding('class.is-filled')
-	protected get isFilledClass(): boolean {
+	@HostBinding('class.is-selected')
+	protected get isSelectedClass(): boolean {
 		return this.hasValue;
+	}
+
+	@HostBinding('class.is-searchFilled')
+	protected get isSearchFilledClass(): boolean {
+		return this.clue?.length > 0;
 	}
 
 	protected abstract readonly hasValue: boolean;
 
-	@HostBinding('class.is-focused')
-	@HostBinding('attr.aria-expanded')
 	public get isPanelOpen(): boolean {
 		return this.isPanelOpen$.value;
 	}
+
 	public isPanelOpen$ = new BehaviorSubject(false);
 
-	@HostBinding('attr.role')
-	public role = 'combobox';
+	public activeDescendant$ = new BehaviorSubject('');
 
-	@HostBinding('attr.aria-activedescendant')
-	public activeDescendant: string | undefined;
-
-	@HostBinding('attr.aria-controls')
 	get ariaControls(): string {
 		return this.overlayContainerRef.id;
 	}
@@ -66,6 +82,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	@Input() optionComparer: (option1: TOption, option2: TOption) => boolean = (option1, option2) => JSON.stringify(option1) === JSON.stringify(option2);
 	@Input() optionTpl?: TemplateRef<LuOptionContext<TOption>> | Type<unknown> = LuSimpleSelectDefaultOptionComponent;
 	@Input() valueTpl?: TemplateRef<LuOptionContext<TOption>> | Type<unknown>;
+	@ContentChild(LuOptionGroupDirective) grouping?: LuOptionGroupDirective<TOption, TValue, unknown>;
 
 	@Output() clueChange = new EventEmitter<string>();
 	@Output() nextPage = new EventEmitter<void>();
@@ -80,11 +97,24 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 		this.changeDetectorRef.markForCheck();
 	}
 
+	public get inputPlaceholder(): string | null {
+		return this.value ? null : this.placeholder;
+	}
+
+	public clueChanged(clue: string): void {
+		this.clueChange.emit(clue);
+		if (!this.isPanelOpen) {
+			this.openPanel();
+		}
+	}
+
 	protected _value?: TValue;
 
 	options$ = new ReplaySubject<TOption[]>(1);
 	loading$ = new ReplaySubject<boolean>(1);
 	clue: string | null = null;
+	// This is the clue stored after we selected an option to know if we should emit an empty clue on open or not
+	previousClue: string | null = null;
 
 	protected onChange?: (value: TValue | null) => void;
 	protected onTouched?: () => void;
@@ -97,11 +127,8 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 
 	protected destroyed$ = new Subject<void>();
 
-	@HostListener('keydown.space', ['$event'])
-	@HostListener('keydown.enter', ['$event'])
-	@HostListener('keydown.arrowDown', ['$event'])
 	@HostListener('click', ['$event'])
-	onKeydown($event: KeyboardEvent) {
+	onClickOpenPanel($event: KeyboardEvent) {
 		if (!this.isPanelOpen) {
 			this.openPanel();
 			$event.stopPropagation();
@@ -109,10 +136,39 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 		}
 	}
 
+	@HostListener('keydown', ['$event'])
+	onKeyDownNavigation($event: KeyboardEvent): void {
+		switch ($event.key) {
+			case 'Escape':
+			case 'Tab':
+				this.panelRef?.close();
+				break;
+			case 'Enter':
+				if (this.isPanelOpen) {
+					this.panelRef.selectCurrentlyHighlightedValue();
+				} else {
+					this.panelRef?.handleKeyManagerEvent($event);
+				}
+				break;
+			case 'Space':
+			case 'ArrowDown':
+			case 'ArrowUp':
+				if (this.isPanelOpen) {
+					this.panelRef?.handleKeyManagerEvent($event);
+				} else {
+					this.openPanel();
+				}
+				break;
+			default:
+				this.panelRef?.handleKeyManagerEvent($event);
+				break;
+		}
+	}
+
 	protected changeDetectorRef = inject(ChangeDetectorRef);
 	protected overlayContainerRef: HTMLElement = inject(OverlayContainer).getContainerElement();
 
-	protected label: HTMLElement | undefined = inject(SELECT_LABEL);
+	protected labelElement: HTMLElement | undefined = inject(SELECT_LABEL);
 	protected labelId: string = inject(SELECT_LABEL_ID);
 
 	registerOnChange(onChange: (value: TValue) => void): void {
@@ -134,14 +190,15 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	}
 
 	ngOnInit(): void {
-		if (this.label) {
-			this.label.id = this.labelId;
+		if (this.labelElement) {
+			this.labelElement.id = this.labelId;
 		}
 	}
 
-	clearValue(event: MouseEvent): void {
+	clearValue(event: Event): void {
 		event.stopPropagation();
 		this.updateValue(null);
+		this.inputElementRef.nativeElement.focus();
 	}
 
 	openPanel(): void {
@@ -150,8 +207,13 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 		}
 
 		this.isPanelOpen$.next(true);
+		if (this.previousClue) {
+			this.clueChanged('');
+			this.previousClue = null;
+		}
 		this._panelRef = this.buildPanelRef();
 		this.bindInputToPanelRefEvents();
+		setTimeout(() => this.focusInput());
 	}
 
 	protected abstract buildPanelRef(): this['panelRef'];
@@ -164,21 +226,33 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 		this.panelRef.valueChanged.subscribe((value) => this.updateValue(value));
 		this.panelRef.nextPage.subscribe(() => this.nextPage.emit());
 		this.panelRef.previousPage.subscribe(() => this.previousPage.emit());
-		this.panelRef.clueChanged.subscribe((clue) => {
-			this.clueChange.emit(clue);
-			this.clue = clue;
-		});
 		this.panelRef.activeOptionIdChanged.subscribe((optionId) => {
-			this.activeDescendant = optionId;
+			this.activeDescendant$.next(optionId);
 			this.changeDetectorRef.markForCheck();
 		});
 		this.panelRef.closed.subscribe(() => this.closePanel());
+	}
+
+	protected focusInput(): void {
+		if (this.inputElementRef) {
+			this.inputElementRef.nativeElement.focus();
+		}
+	}
+
+	protected emptyClue(): void {
+		if (this.clue) {
+			this.previousClue = this.clue;
+			this.clue = null;
+		}
 	}
 
 	public closePanel(): void {
 		if (!this.isPanelOpen) {
 			return;
 		}
+		this.emptyClue();
+		this.activeDescendant$.next('');
+		this.changeDetectorRef.markForCheck();
 		this.onTouched?.();
 		this.isPanelOpen$.next(false);
 		this.panelRef.close();
@@ -191,6 +265,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 
 	public updateValue(value: TValue): void {
 		this.value = value;
+		this.emptyClue();
 		this.onChange?.(value);
 		this.onTouched?.();
 	}

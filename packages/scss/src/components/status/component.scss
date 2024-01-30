@@ -7,7 +7,7 @@
 		.status-dot {
 			aspect-ratio: 1;
 			width: var(--spacings-XS);
-			border-radius: 50%;
+			border-radius: var(--commons-borderRadius-full);
 			background-color: currentColor;
 			margin: calc(var(--spacings-XXS) / 2);
 			margin-right: var(--spacings-XS);
@@ -34,7 +34,7 @@
 
 			inset: 0;
 			position: absolute;
-			border-radius: 50%;
+			border-radius: var(--commons-borderRadius-full);
 			animation: status 2s infinite;
 			background-color: currentColor;
 		}

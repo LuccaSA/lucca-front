@@ -1,9 +1,30 @@
-<div class="lu-select-placeholder">{{ placeholder }}</div>
-<div class="lu-select-value">
-	<div class="lu-select-display-wrapper">
-		<ng-container *luOptionOutlet="valueTpl || optionTpl; value: value"></ng-container>
-	</div>
+<input
+	class="simpleSelect-input"
+	type="text"
+	role="combobox"
+	aria-haspopup="listbox"
+	[attr.aria-activedescendant]="activeDescendant$ | async"
+	[attr.aria-expanded]="isPanelOpen"
+	[attr.aria-controls]="ariaControls"
+	placeholder="{{inputPlaceholder}}"
+	[(ngModel)]="clue"
+	(ngModelChange)="clueChanged($event)"
+	[readonly]="!searchable"
+	[disabled]="disabled"
+	luInput
+	#inputElement
+/>
+<div class="simpleSelect-value">
+	<ng-container *luOptionOutlet="valueTpl || optionTpl; value: value"></ng-container>
 </div>
-<a *ngIf="clearable && hasValue" class="clear lu-select-clearer" role="button" (click)="clearValue($event)">
+<button
+	*ngIf="clearable && hasValue"
+	class="simpleSelect-clear clear"
+	role="button"
+	type="button"
+	(click)="clearValue($event)"
+	(keydown.space)="clearValue($event)"
+>
 	<span class="u-mask">{{intl.clear}}</span>
-</a>
+</button>
+<span aria-hidden="true" class="simpleSelect-arrow lucca-icon icon-arrowChevronBottom"></span>

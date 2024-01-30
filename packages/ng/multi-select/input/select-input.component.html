@@ -1,11 +1,6 @@
-<div class="lu-select-placeholder">{{ placeholder }}</div>
-<div class="lu-select-value">
-	<div class="lu-select-display-wrapper">
-		<ng-container *luOptionOutlet="valuesTpl; value: value"></ng-container>
-	</div>
-</div>
-<div class="lu-select-suffix">
-	<a *ngIf="hasValue && clearable" role="button" class="clear" (click)="clearValue($event)">
-		<span class="u-mask">{{intl.clear}}</span>
-	</a>
-</div>
+<ng-container *luOptionOutlet="valuesTpl; value: value || []"></ng-container>
+
+<button *ngIf="hasValue && clearable" role="button" class="multipleSelect-clear clear" (click)="clearValue($event)">
+	<span class="u-mask">{{intl.clear}}</span>
+</button>
+<span aria-hidden="true" class="multipleSelect-arrow lucca-icon icon-arrowChevronBottom"></span>

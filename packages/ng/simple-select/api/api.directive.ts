@@ -36,6 +36,7 @@ export abstract class ALuSimpleSelectApiDirective<TOption, TParams = Record<stri
 	protected abstract getOptions(params: TParams, page: number): Observable<TOption[]>;
 
 	protected loading$ = new BehaviorSubject(false);
+
 	public ngOnInit(): void {
 		this.select.optionComparer = this.optionComparer;
 		this.buildOptions().pipe(takeUntil(this.destroy$)).subscribe(this.select.options$);

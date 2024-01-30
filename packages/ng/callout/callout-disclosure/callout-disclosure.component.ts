@@ -1,8 +1,8 @@
-import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { IconComponent } from '@lucca-front/ng/icon';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, ViewEncapsulation, booleanAttribute } from '@angular/core';
 import { LuccaIcon } from '@lucca-front/icons';
 import { Palette, PortalContent, PortalDirective } from '@lucca-front/ng/core';
+import { IconComponent } from '@lucca-front/ng/icon';
 import { CalloutState, CalloutStateMap } from '../callout-state';
 
 @Component({
@@ -42,6 +42,16 @@ export class CalloutDisclosureComponent {
 		}
 		if (!this.icon) {
 			this.icon = icon;
+		}
+	}
+
+	@Input({ transform: booleanAttribute }) open = false;
+
+	@Output() openChange = new EventEmitter<boolean>();
+
+	public onToggle(event: Event) {
+		if (event.target instanceof HTMLDetailsElement) {
+			this.openChange.emit(event.target.open);
 		}
 	}
 }

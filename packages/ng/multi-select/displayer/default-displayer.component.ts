@@ -1,177 +1,130 @@
 import { AsyncPipe, NgFor, NgIf, NgPlural, NgPluralCase } from '@angular/common';
-import {
-	AfterViewInit,
-	ChangeDetectionStrategy,
-	ChangeDetectorRef,
-	Component,
-	DestroyRef,
-	ElementRef,
-	HostBinding,
-	NgZone,
-	OnDestroy,
-	OnInit,
-	QueryList,
-	ViewChild,
-	ViewChildren,
-	inject,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, ElementRef, OnInit, ViewChild, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { FormsModule } from '@angular/forms';
 import { getIntl } from '@lucca-front/ng/core';
 import { ILuOptionContext, LU_OPTION_CONTEXT, ɵLuOptionOutletDirective } from '@lucca-front/ng/core-select';
+import { InputDirective } from '@lucca-front/ng/form-field';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
-import { Observable, ReplaySubject, combineLatest, concatMap, debounceTime, distinctUntilChanged, map, startWith } from 'rxjs';
-import { LuMultiSelectInputComponent } from '../input';
+import { map } from 'rxjs/operators';
+import { LuMultiSelectInputComponent } from '../input/select-input.component';
 import { LU_MULTI_SELECT_DISPLAYER_TRANSLATIONS } from './default-displayer.translate';
-
-function fromElementWidth(el: HTMLElement): Observable<number> {
-	return new Observable<number>((observer) => {
-		// Emit the initial width
-		observer.next(el.getBoundingClientRect().width);
-
-		// Emit the new width whenever the element is resized
-		const resizeObserver = new ResizeObserver((entries) => observer.next(entries[0].contentRect.width));
-		resizeObserver.observe(el);
-
-		// Cleanup observer on cancellation
-		return () => resizeObserver.disconnect();
-	}).pipe(distinctUntilChanged());
-}
 
 @Component({
 	selector: 'lu-multi-select-default-displayer',
 	standalone: true,
-	imports: [AsyncPipe, LuTooltipModule, NgIf, NgFor, NgPlural, NgPluralCase, ɵLuOptionOutletDirective],
+	imports: [AsyncPipe, LuTooltipModule, NgIf, NgFor, NgPlural, NgPluralCase, ɵLuOptionOutletDirective, FormsModule, InputDirective],
 	template: `
-		<div class="chips-container" #chipsContainer>
-			<div
-				#chip
-				*ngFor="let option of context.option$ | async; let index = index"
-				class="chip lu-multiselect-chip"
-				[class.mod-unkillable]="disabled"
-				[attr.aria-hidden]="index >= ((visibleChipsCount$ | async) || 0) ? 'true' : undefined"
-			>
-				<span class="lu-multiselect-chip-value"><ng-container *luOptionOutlet="select.valueTpl || select.optionTpl; value: option"></ng-container></span>
-				<a href *ngIf="!disabled" type="button" class="chip-kill" (click)="unselectOption(option, $event)" [attr.tabindex]="index >= ((visibleChipsCount$ | async) || 0) ? -1 : undefined"></a>
+		<div class="multipleSelect-displayer">
+			<input
+				class="multipleSelect-displayer-search"
+				type="text"
+				[attr.aria-expanded]="select.isPanelOpen"
+				[attr.aria-activedescendant]="select.activeDescendant$ | async"
+				[attr.aria-controls]="ariaControls"
+				[disabled]="select.disabled"
+				#inputElement
+				ngModel
+				(ngModelChange)="select.clueChanged($event)"
+				[placeholder]="placeholder$ | async"
+				(keydown.backspace)="inputBackspace()"
+				role="combobox"
+				aria-haspopup="listbox"
+				luInput
+			/>
+			<div *ngFor="let option of displayedOptions$ | async; let index = index" class="multipleSelect-displayer-chip chip" [class.mod-unkillable]="disabled">
+				<span class="multipleSelect-displayer-chip-value"><ng-container *luOptionOutlet="select.valueTpl || select.optionTpl; value: option"></ng-container></span>
+				<button *ngIf="!disabled" type="button" class="chip-kill" (click)="unselectOption(option, $event)">
+					<span class="u-mask">{{ intl.removeOption }}</span>
+				</button>
 			</div>
-		</div>
-		<div class="lu-multiselect-counter" #overflow>
-			<ng-container *ngIf="hiddenChipsCount$ | async as count">
-				<div class="chip mod-unkillable lu-multiselect-counter-chip" aria-hidden="true">+ {{ count }}</div>
-				<span class="u-mask" [ngPlural]="count">
-					<ng-template ngPluralCase="=1">{{ intl.otherResult }}</ng-template>
-					<ng-template ngPluralCase="other">{{ intl.otherResults }}</ng-template>
-				</span>
-			</ng-container>
+			<div class="chip" *ngIf="overflowOptions$ | async as overflow">+ {{ overflow }}</div>
 		</div>
 	`,
 	styleUrls: ['./default-displayer.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class LuMultiSelectDefaultDisplayerComponent<T> implements AfterViewInit, OnInit, OnDestroy {
+export class LuMultiSelectDefaultDisplayerComponent<T> implements OnInit {
 	select = inject<LuMultiSelectInputComponent<T>>(LuMultiSelectInputComponent);
-	elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
-	cdr = inject(ChangeDetectorRef);
 	intl = getIntl(LU_MULTI_SELECT_DISPLAYER_TRANSLATIONS);
 
 	protected destroyRef = inject(DestroyRef);
-	protected zone = inject(NgZone);
+
+	@ViewChild('inputElement')
+	inputElementRef: ElementRef<HTMLInputElement>;
 
 	get disabled() {
 		return this.select.disabled;
 	}
 
-	@ViewChild('overflow', { static: true })
-	overflowCountContainer: ElementRef<HTMLElement>;
+	get value(): T[] {
+		return this.select.value || [];
+	}
 
-	@ViewChild('chipsContainer', { static: true })
-	chipsContainer: ElementRef<HTMLElement>;
-
-	@ViewChildren('chip')
-	chipsQL: QueryList<ElementRef<HTMLElement>>;
-
-	protected ngAfterViewInit$ = new ReplaySubject<void>(1);
-
-	chips$: Observable<HTMLElement[]> = this.ngAfterViewInit$.pipe(
-		concatMap(() => this.chipsQL.changes.pipe(startWith(undefined))),
-		map(() => this.chipsQL.toArray().map((chip) => chip.nativeElement)),
-	);
+	get ariaControls() {
+		return this.select.ariaControls;
+	}
 
 	context = inject<ILuOptionContext<T[]>>(LU_OPTION_CONTEXT);
 
-	protected visibleChips$ = new ReplaySubject<HTMLElement[]>(1);
-	protected hiddenChips$ = new ReplaySubject<HTMLElement[]>(1);
-
-	visibleChipsCount$ = this.visibleChips$.pipe(
-		map((chips) => chips.length),
-		distinctUntilChanged(),
-	);
-	hiddenChipsCount$ = this.hiddenChips$.pipe(
-		map((chips) => chips.length),
-		distinctUntilChanged(),
+	placeholder$ = this.context.option$.pipe(
+		map((options) => {
+			if ((options || []).length > 0) {
+				return '';
+			}
+			return this.select.placeholder;
+		}),
 	);
 
-	@HostBinding('style.--hidden-option-count-width.px')
-	hiddenOptionCountWidthCssVar = 0;
+	displayedOptions$ = this.context.option$.pipe(
+		map((options) => {
+			if (this.select.maxValuesShown) {
+				return (options || []).slice(0, this.select.maxValuesShown);
+			}
+			return options;
+		}),
+	);
 
-	@HostBinding('style.--hidden-option-count-offset-left.px')
-	hiddenOptionCountOffsetLeftCssVar = 0;
+	overflowOptions$ = this.context.option$.pipe(
+		map((options) => {
+			return Math.max(0, (options || []).length - this.select.maxValuesShown);
+		}),
+	);
 
+	unselectOption(option: T, $event?: Event): void {
+		if ($event) {
+			$event.stopPropagation();
+			$event.preventDefault();
+		}
+		this.select.updateValue(
+			this.value.filter((o) => o !== option),
+			true,
+		);
+		setTimeout(() => {
+			this.select.panelRef?.updatePosition();
+			this.inputElementRef.nativeElement.focus();
+		});
+	}
+
+	inputBackspace(): void {
+		if (this.value.length > 0 && this.inputElementRef.nativeElement.value.length === 0) {
+			this.unselectOption(this.value[this.value.length - 1]);
+			this.select.panelRef.updateSelectedOptions(this.value);
+		}
+	}
 	ngOnInit(): void {
-		this.visibleChips$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((visible) => {
-			this.hiddenOptionCountOffsetLeftCssVar = visible.length ? visible[visible.length - 1].offsetLeft + visible[visible.length - 1].offsetWidth : 0;
-			this.cdr.markForCheck();
+		this.select.focusInput$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((data?: { keepClue: true }) => {
+			// Everytime we want to focus, we need to reset the input
+			// This is done when a value is selected and when panel is opened.
+			if (!data?.keepClue) {
+				this.inputElementRef.nativeElement.value = '';
+				this.select.clueChanged('');
+			}
+
+			this.inputElementRef.nativeElement.focus();
 		});
-
-		this.hiddenChipsCount$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((hidden) => {
-			this.hiddenOptionCountWidthCssVar = hidden;
-			this.cdr.markForCheck();
+		this.select.emptyClue$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {
+			this.inputElementRef.nativeElement.value = '';
 		});
-
-		combineLatest([fromElementWidth(this.chipsContainer.nativeElement), fromElementWidth(this.overflowCountContainer.nativeElement), this.chips$])
-			.pipe(
-				debounceTime(0),
-				map(([containerWidth, counterWidth, chips]) => {
-					const baseOffsetTop = this.elementRef.nativeElement.offsetTop;
-
-					const isOutOfContainer = (chip: HTMLElement, allowedWidth: number) => chip.offsetTop > baseOffsetTop || chip.offsetLeft + chip.offsetWidth > allowedWidth;
-
-					const needsCounterSpace = !!chips.length && isOutOfContainer(chips[chips.length - 1], containerWidth);
-					const availableWidth = needsCounterSpace ? containerWidth - counterWidth : containerWidth;
-
-					// First on next line or first out of container
-					const firstHiddenIndex = chips.findIndex((chip) => isOutOfContainer(chip, availableWidth));
-
-					return firstHiddenIndex !== -1
-						? {
-								visible: chips.slice(0, firstHiddenIndex),
-								hidden: chips.slice(firstHiddenIndex),
-						  }
-						: {
-								visible: chips,
-								hidden: [],
-						  };
-				}),
-				takeUntilDestroyed(this.destroyRef),
-			)
-			.subscribe(({ visible, hidden }) => {
-				this.zone.run(() => {
-					this.visibleChips$.next(visible);
-					this.hiddenChips$.next(hidden);
-				});
-			});
-	}
-
-	unselectOption(option: T, $event: Event): void {
-		$event.stopPropagation();
-		$event.preventDefault();
-		this.select.updateValue(this.select.value.filter((o) => o !== option));
-	}
-
-	ngOnDestroy(): void {
-		this.ngAfterViewInit$.complete();
-	}
-
-	ngAfterViewInit() {
-		this.ngAfterViewInit$.next();
 	}
 }

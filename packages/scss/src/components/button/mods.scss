@@ -1,14 +1,14 @@
 @use '@lucca-front/icons/src/commons/utils/icon';
 @use '@lucca-front/icons/src/icon/exports' as icons;
 @use '@lucca-front/scss/src/components/numericBadge/exports' as numericBadge;
-@use '@lucca-front/scss/src/commons/utils/a11y';
 
 @mixin S {
+	@include icons.S;
+
 	--components-button-font-size: var(--sizes-S-fontSize);
 	--components-button-line-height: var(--sizes-S-lineHeight);
 	--components-button-padding: 0.375rem 0.75rem;
-	--components-button-gap: .375rem;
-	@include icons.S;
+	--components-button-gap: 0.375rem;
 
 	.numericBadge {
 		@include numericBadge.S;
@@ -16,95 +16,70 @@
 }
 
 @mixin XS {
+	@include icons.XS;
+
 	--components-button-font-size: var(--sizes-XS-fontSize);
 	--components-button-line-height: var(--sizes-XS-lineHeight);
 	--components-button-padding: var(--spacings-XXS) var(--spacings-XS);
 	--components-button-gap: var(--spacings-XXS);
-	@include icons.XS;
 
 	.numericBadge {
 		@include numericBadge.XS;
 	}
 }
 
-@mixin text {
-	background-color: transparent;
-	color: var(--palettes-700, var(--palettes-grey-700));
-
-	&:not([disabled], .is-disabled) {
-		&:hover {
-			background-color: var(--palettes-100, var(--palettes-grey-100));
-			color: var(--palettes-700, var(--palettes-grey-700));
-		}
-
-		&:active {
-			background-color: var(--palettes-200, var(--palettes-grey-200));
-		}
-	}
-
-	&:focus-visible {
-		background-color: var(--palettes-100, var(--palettes-grey-100));
-	}
+@mixin onlyIcon {
+	--components-button-padding: var(--spacings-XS);
 }
 
-@mixin outlined {
-	&:not([disabled], .is-disabled) {
-		color: var(--palettes-700, var(--palettes-grey-700));
-		box-shadow: 0 0 0 var(--commons-divider-width) var(--palettes-400, var(--palettes-grey-400));
-		background-color: var(--colors-white-color);
+@mixin onlyIconS {
+	--components-button-padding: 0.375rem;
+}
 
-		&:hover {
-			background-color: var(--palettes-100, var(--palettes-grey-100));
-		}
-
-		&:active {
-			background-color: var(--palettes-200, var(--palettes-grey-200));
-		}
-	}
-
-	.button-counter { // deprecated
-		background-color: var(--palettes-300, var(--palettes-grey-300));
-		color: var(--palettes-800, var(--palettes-grey-800));
-	}
+@mixin onlyIconXS {
+	--components-button-padding: var(--spacings-XXS);
 }
 
 @mixin block {
-	width: 100%;
+	--components-button-width: 100%;
 }
 
-@mixin icon($atRoot: 'without: rule') {
+@mixin withIcon {
 	--components-button-padding: var(--spacings-XS) calc(var(--spacings-XS) + var(--spacings-XXS));
 }
 
-@mixin iconS {
-	--components-button-padding: calc(var(--spacings-XXS) + var(--spacings-XXS)/2) calc(var(--spacings-XS) + var(--spacings-XXS));
+@mixin withIconS {
+	--components-button-padding: calc(var(--spacings-XXS) + var(--spacings-XXS) / 2) calc(var(--spacings-XS) + var(--spacings-XXS));
 }
 
-@mixin iconXS {
+@mixin withIconXS {
 	--components-button-padding: var(--spacings-XXS) var(--spacings-XS);
 }
 
-@mixin invert {
-	color: var(--colors-white-color);
+@mixin text {
+	--components-button-backgroundColor: transparent;
+	--components-button-color: var(--palettes-700, var(--palettes-grey-700));
+}
 
-	&:not([disabled], .is-disabled) {
-		&:hover {
-			background-color: rgba(255, 255, 255, 0.2);
-		}
+@mixin outlined {
+	--components-button-backgroundColor: var(--colors-white-color);
+	--components-button-color: var(--palettes-700, var(--palettes-grey-700));
+	--components-button-boxShadow: 0 0 0 var(--commons-divider-width) var(--palettes-400, var(--palettes-grey-400));
 
-		&:focus-visible {
-			background-color: rgba(255, 255, 255, 0.2);
-			color: var(--colors-white-color);
-		}
+	// deprecated
+	.button-counter {
+		color: var(--palettes-800, var(--palettes-grey-800));
+		background-color: var(--palettes-300, var(--palettes-grey-300));
 	}
 }
 
+@mixin invert {
+	--components-button-color: var(--colors-white-color);
+}
+
 @mixin more {
-	padding: 0 !important;
-	text-align: center;
-	min-width: 2rem;
-	border-top-right-radius: var(--commons-borderRadius-M);
-	border-bottom-right-radius: var(--commons-borderRadius-M);
+	--components-button-minWidth: 2rem;
+	--components-button-padding: 0;
 
 	&::before {
 		@include icon.generate('arrow_chevron_bottom');
@@ -115,46 +90,45 @@
 }
 
 @mixin moreS {
-	min-width: 1.75rem;
+	--components-button-minWidth: 1.75rem;
 }
 
-@mixin counter($atRoot: 'without: rule') {
+@mixin moreXS {
+	--components-button-minWidth: 1.5rem;
+}
+
+// deprecated
+@mixin counter {
 	--components-button-padding: var(--spacings-XS) calc(var(--spacings-XS) + var(--spacings-XXS)) var(--spacings-XS) var(--spacings-S);
 
-	@at-root ($atRoot) {
-		.button-counter { // deprecated
-			background-color: var(--palettes-600, var(--palettes-primary-600));
-			border-radius: 1rem;
-			display: flex;
-			font-size: var(--sizes-XS-fontSize);
-			height: 1.5rem;
-			min-width: 1.5rem;
-			align-items: center;
-			justify-content: center;
-			transition: background-color var(--commons-animations-durations-fast) ease;
-		}
-
-		&:hover {
-			.button-counter { // deprecated
-				background-color: var(--palettes-500, var(--palettes-primary-500));
-			}
-		}
+	.button-counter {
+		background-color: var(--palettes-600, var(--palettes-primary-600));
+		border-radius: 1rem;
+		display: flex;
+		font-size: var(--sizes-XS-fontSize);
+		height: 1.5rem;
+		min-width: 1.5rem;
+		align-items: center;
+		justify-content: center;
+		transition: background-color var(--commons-animations-durations-fast) ease;
 	}
 }
 
+// deprecated
 @mixin counterS {
 	--components-button-padding: 0.375rem calc(var(--spacings-XS) + var(--spacings-XXS)) 0.375rem var(--spacings-S);
 
-	.button-counter { // deprecated
+	.button-counter {
 		height: 1.25rem;
 		min-width: 1.25rem;
 	}
 }
 
+// deprecated
 @mixin counterXS {
 	--components-button-padding: var(--spacings-XXS) var(--spacings-XS) var(--spacings-XXS) calc(var(--spacings-XS) + var(--spacings-XXS));
 
-	.button-counter { // deprecated
+	.button-counter {
 		height: 1rem;
 		min-width: 1rem;
 	}
