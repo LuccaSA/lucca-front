@@ -8,7 +8,7 @@
 	// TOKENS
 
 	@each $key, $map in config.$elevation {
-		@include core.cssvars('pr-elevation-#{$key}', $map);
+		@include core.cssvars('pr-t-elevation-#{$key}', $map);
 	}
 
 	// VARIABLES

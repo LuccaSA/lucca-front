@@ -37,10 +37,10 @@
 	color: var(--palettes-grey-600);
 	position: sticky;
 	top: 0;
-	background-color: var(--colors-white-color);
+	background-color: var(--pr-t-elevation-surface-raised);
 	z-index: 1;
 	display: block;
-	box-shadow: 0 calc(var(--spacings-XXS) * -1) 0 var(--spacings-XXS) var(--colors-white-color); // Mask background options scrolling behind
+	box-shadow: 0 calc(var(--spacings-XXS) * -1) 0 var(--spacings-XXS) var(--pr-t-elevation-surface-raised); // Mask background options scrolling behind
 }
 
 .lu-picker-content-add {
