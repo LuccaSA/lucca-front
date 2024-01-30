@@ -3,8 +3,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { LuDisabledOptionDirective, LuDisplayerDirective, LuOptionDirective, LuOptionGroupDirective } from '@lucca-front/ng/core-select';
+import { LuCoreSelectApiV3Directive, LuCoreSelectApiV4Directive } from '@lucca-front/ng/core-select/api';
 import { LuMultiDisplayerDirective, LuMultiSelectDisplayerInputDirective, LuMultiSelectInputComponent } from '@lucca-front/ng/multi-select';
-import { LuSimpleSelectApiV3Directive, LuSimpleSelectApiV4Directive } from '@lucca-front/ng/simple-select/api';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 import { Meta, applicationConfig, moduleMetadata } from '@storybook/angular';
 import { HiddenArgType } from 'stories/helpers/common-arg-types';
@@ -199,7 +199,7 @@ export const ApiV3 = generateStory({
 	`,
 	neededImports: {
 		'@lucca-front/ng/multi-select': ['LuMultiSelectInputComponent'],
-		'@lucca-front/ng/simple-select/api': ['LuSimpleSelectApiV3Directive'],
+		'@lucca-front/ng/core-select/api': ['LuCoreSelectApiV3Directive'],
 	},
 	storyPartial: {
 		argTypes: hiddenArgTypes,
@@ -220,7 +220,7 @@ export const ApiV4 = generateStory({
 	`,
 	neededImports: {
 		'@lucca-front/ng/multi-select': ['LuMultiSelectInputComponent'],
-		'@lucca-front/ng/simple-select/api': ['LuSimpleSelectApiV4Directive'],
+		'@lucca-front/ng/core-select/api': ['LuCoreSelectApiV4Directive'],
 	},
 	storyPartial: {
 		argTypes: hiddenArgTypes,
@@ -283,8 +283,8 @@ const meta: Meta<LuSelectInputStoryComponent> = {
 				LuOptionGroupDirective,
 				LuDisplayerDirective,
 				LuTooltipModule,
-				LuSimpleSelectApiV3Directive,
-				LuSimpleSelectApiV4Directive,
+				LuCoreSelectApiV3Directive,
+				LuCoreSelectApiV4Directive,
 				LuDisabledOptionDirective,
 				LuMultiSelectDisplayerInputDirective,
 				CommonModule,

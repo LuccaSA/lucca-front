@@ -3,8 +3,8 @@ import { provideHttpClient } from '@angular/common/http';
 import { Pipe, PipeTransform } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { LuDisabledOptionDirective, LuDisplayerDirective, LuOptionDirective, LuOptionGroupDirective } from '@lucca-front/ng/core-select';
+import { LuCoreSelectApiV3Directive, LuCoreSelectApiV4Directive } from '@lucca-front/ng/core-select/api';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
-import { LuSimpleSelectApiV3Directive, LuSimpleSelectApiV4Directive } from '@lucca-front/ng/simple-select/api';
 import { Meta, applicationConfig, moduleMetadata } from '@storybook/angular';
 import { HiddenArgType } from 'stories/helpers/common-arg-types';
 import { useDocumentationStory } from 'stories/helpers/stories';
@@ -163,7 +163,7 @@ export const ApiV3 = generateStory({
 	`,
 	neededImports: {
 		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent'],
-		'@lucca-front/ng/simple-select/api': ['LuSimpleSelectApiV3Directive'],
+		'@lucca-front/ng/core-select/api': ['LuCoreSelectApiV3Directive'],
 	},
 });
 
@@ -179,7 +179,7 @@ export const ApiV4 = generateStory({
 	`,
 	neededImports: {
 		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent'],
-		'@lucca-front/ng/simple-select/api': ['LuSimpleSelectApiV4Directive'],
+		'@lucca-front/ng/core-select/api': ['LuCoreSelectApiV4Directive'],
 	},
 });
 
@@ -239,8 +239,8 @@ const meta: Meta<LuSelectInputStoryComponent> = {
 				LuDisplayerDirective,
 				LuOptionDirective,
 				FilterLegumesPipe,
-				LuSimpleSelectApiV3Directive,
-				LuSimpleSelectApiV4Directive,
+				LuCoreSelectApiV3Directive,
+				LuCoreSelectApiV4Directive,
 				LuDisabledOptionDirective,
 				LuOptionGroupDirective,
 			],

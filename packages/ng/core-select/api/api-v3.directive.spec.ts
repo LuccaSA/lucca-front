@@ -6,13 +6,13 @@ import { ILuApiItem } from '@lucca-front/ng/api';
 import { ALuSelectInputComponent } from '@lucca-front/ng/core-select';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 import { BehaviorSubject, ReplaySubject, first } from 'rxjs';
-import { LuSimpleSelectApiV3Directive } from './api-v3.directive';
+import { LuCoreSelectApiV3Directive } from './api-v3.directive';
 import { MAGIC_DEBOUNCE_DURATION, MAGIC_PAGE_SIZE } from './api.directive';
 
 const itemsMocks = Array.from({ length: MAGIC_PAGE_SIZE * 2 + 5 }, (_, i) => ({ id: i, name: `item ${i}` }));
 
-describe('SimpleSelectApiV3Directive', () => {
-	let directive: LuSimpleSelectApiV3Directive<ILuApiItem>;
+describe('CoreSelectApiV3Directive', () => {
+	let directive: LuCoreSelectApiV3Directive<ILuApiItem>;
 	let selectMock: LuSimpleSelectInputComponent<ILuApiItem>;
 	let httpTestingController: HttpTestingController;
 
@@ -27,7 +27,7 @@ describe('SimpleSelectApiV3Directive', () => {
 
 		TestBed.configureTestingModule({
 			providers: [
-				LuSimpleSelectApiV3Directive,
+				LuCoreSelectApiV3Directive,
 				{
 					provide: ALuSelectInputComponent,
 					useValue: selectMock,
@@ -37,7 +37,7 @@ describe('SimpleSelectApiV3Directive', () => {
 			],
 		});
 
-		directive = TestBed.inject<LuSimpleSelectApiV3Directive<ILuApiItem>>(LuSimpleSelectApiV3Directive);
+		directive = TestBed.inject<LuCoreSelectApiV3Directive<ILuApiItem>>(LuCoreSelectApiV3Directive);
 		httpTestingController = TestBed.inject(HttpTestingController);
 	});
 
