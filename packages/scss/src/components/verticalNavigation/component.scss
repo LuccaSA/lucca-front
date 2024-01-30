@@ -13,7 +13,7 @@
 
 		.verticalNavigation-list {
 			@include reset.list;
-			background-color: var(--pr-elevation-surface-raised);
+			background-color: var(--pr-t-elevation-surface-raised);
 			margin-bottom: var(--spacings-S);
 		}
 

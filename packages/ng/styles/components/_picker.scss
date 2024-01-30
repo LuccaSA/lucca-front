@@ -65,7 +65,7 @@
 }
 
 .lu-picker-header {
-	background-color: var(--pr-elevation-surface-raised);
+	background-color: var(--pr-t-elevation-surface-raised);
 	position: sticky;
 	top: 0;
 	left: 0;
@@ -73,7 +73,7 @@
 	display: block;
 	z-index: 1;
 	margin-bottom: var(--spacings-XXS);
-	box-shadow: 0 -4px 0 var(--spacings-XS) var(--pr-elevation-surface-raised); // Avoid showing options list while scrolling due to header sticky potisionning
+	box-shadow: 0 -4px 0 var(--spacings-XS) var(--pr-t-elevation-surface-raised); // Avoid showing options list while scrolling due to header sticky potisionning
 }
 
 .lu-picker-textfield {
@@ -87,7 +87,7 @@
 }
 
 .lu-picker-footer {
-	background-color: var(--pr-elevation-surface-raised);
+	background-color: var(--pr-t-elevation-surface-raised);
 	position: sticky;
 	bottom: 0;
 	left: 0;

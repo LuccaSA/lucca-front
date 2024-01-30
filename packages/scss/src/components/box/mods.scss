@@ -10,7 +10,7 @@
 		border-color: transparent;
 		border-style: solid;
 		border-width: var(--components-box-toggle-arrow-size);
-		border-bottom-color: var(--components-box-background, var(--pr-elevation-surface-raised));
+		border-bottom-color: var(--components-box-background, var(--pr-t-elevation-surface-raised));
 		border-top: 0;
 		height: 0;
 		bottom: 100%;
@@ -21,7 +21,7 @@
 }
 
 @mixin arrow {
-	--components-box-arrow-background: var(--pr-elevation-surface-raised);
+	--components-box-arrow-background: var(--pr-t-elevation-surface-raised);
 	--components-box-arrow-horizontalMargin: var(--commons-borderRadius-M);
 	--components-box-arrow-left: 0;
 	--components-box-arrow-bottom: 0;

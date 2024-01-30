@@ -1,12 +1,12 @@
 @use '@lucca-front/scss/src/commons/utils/media';
 
 @mixin component($atRoot: 'without: rule') {
-	background-color: var(--pr-elevation-surface-raised);
+	background-color: var(--pr-t-elevation-surface-raised);
 	padding: var(--spacings-S) var(--spacings-M);
 	display: flex;
 	gap: var(--spacings-S);
 	align-items: center;
-	box-shadow: var(--pr-elevation-shadow-overflow);
+	box-shadow: var(--pr-t-elevation-shadow-overflow);
 
 	@include media.max("XXS") {
 		flex-direction: column;
