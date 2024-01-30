@@ -117,13 +117,13 @@
 }
 
 @mixin deleteOutlinedHover {
-	--components-button-boxShadow: 0 0 0 var(--commons-divider-width) var(--palettes-error-400), var(--commons-boxShadow-XS);
+	--components-button-boxShadow: 0 0 0 var(--commons-divider-width) var(--palettes-error-400);
 	--components-button-color: var(--palettes-error-700);
 	--components-button-backgroundColor: var(--palettes-error-100);
 }
 
 @mixin deleteOutlinedFocusVisible {
-	--components-button-boxShadow: 0 0 0 var(--commons-divider-width) var(--palettes-error-400), var(--commons-boxShadow-XS);
+	--components-button-boxShadow: 0 0 0 var(--commons-divider-width) var(--palettes-error-400);
 	--components-button-color: var(--palettes-error-700);
 }
 
