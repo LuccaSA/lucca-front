@@ -1,6 +1,6 @@
 import { Meta, StoryFn } from '@storybook/angular';
 
-interface TableStickyHeaderStory {}
+interface TableStickyHeaderStory { }
 
 export default {
 	title: 'Documentation/Listings/Table/Sticky Header',
@@ -19,7 +19,7 @@ function getTemplate(args: TableStickyHeaderStory): string {
 				</tr>
 			</thead>
 			<tbody class="table-body">
-				<tr class="table-body-row mod-stickyHeader-shadow" style="--sticky-header-shadow-offset-top: 36px" >
+				<tr class="table-body-row mod-stickyHeader-shadow" style="--sticky-header-shadow-offset-top: 53px" >
 					<td class="table-body-row-cell" colspan="3" role="presentation">
 						<div class="stickyHeader-shadow-wrapper"></div>
 					</td>

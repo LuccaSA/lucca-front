@@ -1,4 +1,6 @@
 @use '@lucca-front/icons/src/commons/utils/icon';
+@use '@lucca-front/scss/src/commons/config';
+@use '@lucca-front/scss/src/commons/utils/media';
 
 @mixin S {
 	font-size: var(--sizes-S-fontSize);
@@ -295,6 +297,16 @@
 
 @mixin layoutFixed {
 	table-layout: fixed;
+}
+
+@mixin layoutFixedWithBreakpoint {
+	@each $breakpoint, $value in config.$breakpoints {
+		@include media.min($breakpoint) {
+			&.mod-layoutFixed\@mediaMin#{$breakpoint} {
+				table-layout: fixed;
+			}
+		}
+	}
 }
 
 @mixin noOffset {

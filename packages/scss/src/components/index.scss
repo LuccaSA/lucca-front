@@ -50,10 +50,10 @@
 @forward 'util'; // 14 Ko
 @forward 'navside'; // 15 Ko
 @forward 'form'; // 25 Ko
-@forward 'tableFixed'; // 33 Ko
+@forward 'tableFixed'; // 2 Ko
 @forward 'grid';
-@forward 'tableSticked'; // 67 Ko
-@forward 'timepicker'; //
+@forward 'tableSticked'; // 8 Ko
+@forward 'timepicker';
 @forward 'notchBox';
 @forward 'statusBadge';
 @forward 'mobileHeader';
@@ -76,5 +76,7 @@
 @forward 'emptyState';
 
 // Deprecated CSS components
-// @forward 'gridLegacy'; // 40 Ko
 // @forward 'emptyStateDeprecated';
+// @forward 'gridLegacy'; // 40 Ko
+// @forward 'tableFixedLegacy'; // 33 Ko
+// @forward 'tableStickedLegacy'; // 67 Ko

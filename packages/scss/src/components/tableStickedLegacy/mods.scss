@@ -1,0 +1,173 @@
+@use 'sass:color';
+
+@use '@lucca-front/icons/src/commons/utils/icon';
+@use '@lucca-front/scss/src/commons/utils/reset';
+
+@mixin stickyColumn($shadowColor: #2a3551) {
+	width: auto;
+	min-width: 100%;
+	background-color: var(--colors-white-color);
+
+	[class*='mod-stickyColumn-'] {
+		position: sticky;
+		background-color: var(--colors-white-color);
+		z-index: 3;
+	}
+
+	.mod-stickyColumn-shadow {
+		width: 0;
+		min-width: 0;
+		padding: 0;
+	}
+
+	.stickyColumn-shadow-wrapper {
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		display: grid;
+		grid-template-columns: calc(var(--components-table-fixed-column-sticky-shadow-width) * 2);
+		grid-template-areas: 'cell';
+		width: calc(var(--components-table-fixed-column-sticky-shadow-width) * 2);
+
+		&::before,
+		&::after {
+			content: '';
+			position: sticky;
+			grid-area: cell;
+		}
+		&::after {
+			width: var(--components-table-fixed-column-sticky-shadow-width);
+		}
+		&::before {
+			z-index: 1;
+			width: var(--components-table-fixed-column-sticky-shadow-width);
+			background-color: var(--colors-white-color);
+		}
+	}
+
+	[class*='mod-stickyColumn-left'] {
+		left: var(--components-table-fixed-column-sticky-offset);
+		&.mod-stickyColumn-shadow,
+		.stickyColumn-shadow-wrapper::before {
+			left: calc(
+				var(--components-table-fixed-column-sticky-offset) -
+					var(--components-table-fixed-column-sticky-shadow-width)
+			);
+		}
+		.stickyColumn-shadow-wrapper::after {
+			left: var(--components-table-fixed-column-sticky-offset);
+			background-image: linear-gradient(
+				to right,
+				color.adjust($shadowColor, $alpha: -0.75),
+				color.adjust($shadowColor, $alpha: -1)
+			);
+		}
+	}
+
+	[class*='mod-stickyColumn-right'] {
+		right: var(--components-table-fixed-column-sticky-offset);
+		.stickyColumn-shadow-wrapper {
+			justify-items: end;
+			width: calc(var(--components-table-fixed-column-sticky-shadow-width) * 3);
+			right: calc(var(--components-table-fixed-column-sticky-shadow-width) * -1);
+		}
+		&.mod-stickyColumn-shadow,
+		.stickyColumn-shadow-wrapper::before {
+			right: calc(
+				var(--components-table-fixed-column-sticky-offset) -
+					var(--components-table-fixed-column-sticky-shadow-width)
+			);
+		}
+		.stickyColumn-shadow-wrapper::after {
+			right: var(--components-table-fixed-column-sticky-offset);
+			background-image: linear-gradient(
+				to left,
+				color.adjust($shadowColor, $alpha: -0.75),
+				color.adjust($shadowColor, $alpha: -1)
+			);
+		}
+	}
+}
+
+@mixin stickyOffset($i) {
+	--components-table-fixed-column-sticky-offset: #{$i * 1rem};
+}
+
+@mixin stickyHeaderCommon {
+	margin-top: var(--components-table-fixed-column-sticky-shadow-width);
+	.table-head-row-cell {
+		background-color: var(--colors-white-color);
+		position: sticky;
+		z-index: 5;
+		&[class*='mod-stickyColumn'] {
+			z-index: 7;
+		}
+	}
+}
+
+@mixin stickyColumnBreakpoint {
+	.table-head-row-cell {
+		left: auto !important;
+		right: auto !important;
+	}
+}
+
+@mixin stickyHeaderShadow($shadowColor: #2a3551) {
+	[class*='row-cell'] {
+		position: sticky;
+		top: var(--sticky-header-shadow-offset-top);
+		z-index: 4;
+		height: 0;
+		padding: 0;
+		border: 0;
+		background: transparent;
+	}
+
+	.stickyHeader-shadow-wrapper {
+		position: absolute;
+		top: calc(var(--components-table-fixed-column-sticky-shadow-width) * -1);
+		width: 100%;
+		height: 0;
+		border: 0;
+
+		&::after {
+			content: '';
+			display: block;
+			height: var(--components-table-fixed-column-sticky-shadow-width);
+			width: 100%;
+			background-image: linear-gradient(
+				to bottom,
+				color.adjust($shadowColor, $alpha: -0.75),
+				color.adjust($shadowColor, $alpha: -1)
+			);
+			opacity: 0.5;
+		}
+	}
+
+	+ .table-body-row,
+	+ .table-foot-row {
+		[class*='row-cell'] {
+			border-top: 0;
+		}
+	}
+}
+
+@mixin stickyHeader {
+	.table-head-row-cell {
+		top: calc(var(--components-table-fixed-column-sticky-shadow-width) * -1);
+	}
+}
+
+@mixin stickyHeaderBanner {
+	[class*='row-cell'] {
+		top: var(--commons-banner-height);
+	}
+	.mod-stickyHeader-shadow {
+		[class*='row-cell'] {
+			top: calc(
+				var(--table-sticky-header-shadow-offset) + var(--commons-banner-height) +
+					var(--components-table-sticked-column-sticky-shadow-width)
+			);
+		}
+	}
+}
