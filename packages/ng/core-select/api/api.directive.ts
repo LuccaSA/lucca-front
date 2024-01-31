@@ -1,6 +1,6 @@
 import { Directive, inject, OnDestroy, OnInit } from '@angular/core';
 import { ALuSelectInputComponent } from '@lucca-front/ng/core-select';
-import { BehaviorSubject, catchError, combineLatest, concatMap, debounceTime, Observable, of, scan, startWith, Subject, switchMap, takeUntil, takeWhile, tap } from 'rxjs';
+import { catchError, combineLatest, concatMap, debounceTime, distinctUntilChanged, map, merge, Observable, of, pairwise, scan, startWith, Subject, switchMap, takeUntil, takeWhile, tap } from 'rxjs';
 
 export const MAGIC_PAGE_SIZE = 20;
 export const MAGIC_DEBOUNCE_DURATION = 250;
@@ -18,7 +18,7 @@ export abstract class ALuCoreSelectApiDirective<TOption, TParams = Record<string
 		startWith(0),
 	);
 
-	protected clue$ = this.select.clueChange.pipe(startWith(''), debounceTime(this.debounceDuration));
+	protected clue$ = this.select.clueChange.pipe(debounceTime(this.debounceDuration), startWith(''));
 
 	/**
 	 * Create an object that will be used as params for the api call
@@ -35,24 +35,30 @@ export abstract class ALuCoreSelectApiDirective<TOption, TParams = Record<string
 	 */
 	protected abstract getOptions(params: TParams, page: number): Observable<TOption[]>;
 
-	protected loading$ = new BehaviorSubject(false);
-
 	public ngOnInit(): void {
 		this.select.optionComparer = this.optionComparer;
 		this.buildOptions().pipe(takeUntil(this.destroy$)).subscribe(this.select.options$);
-		this.loading$.pipe(debounceTime(0), takeUntil(this.destroy$)).subscribe(this.select.loading$);
 	}
 
 	protected buildOptions(): Observable<TOption[]> {
-		return combineLatest([this.params$.pipe(debounceTime(0)), this.select.isPanelOpen$]).pipe(
+		// Prevent a double call to getOptions when the clue is changed while the panel is closed
+		const clueIsPendingDebounce$ = merge(this.select.clueChange.pipe(map(() => true)), this.clue$.pipe(map(() => false))).pipe(distinctUntilChanged());
+		const isOpen$ = combineLatest([this.select.isPanelOpen$, clueIsPendingDebounce$]).pipe(
+			startWith([false, false]),
+			pairwise(),
+			map(([[wasOpen], [isOpen, clueIsPendingDebounce]]) => (isOpen && !wasOpen ? !clueIsPendingDebounce : isOpen)),
+			distinctUntilChanged(),
+		);
+
+		return combineLatest([this.params$, isOpen$]).pipe(
 			switchMap(([params, isOpened]) =>
 				isOpened
 					? this.page$.pipe(
 							concatMap((page) => {
-								this.loading$.next(true);
+								this.select.loading = true;
 								return this.getOptions(params, page).pipe(
 									catchError(() => of([] as TOption[])),
-									tap(() => this.loading$.next(false)),
+									tap(() => (this.select.loading = false)),
 								);
 							}),
 							takeWhile((items) => items.length === this.pageSize, true),

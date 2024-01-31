@@ -72,7 +72,9 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	};
 
 	@Input() set loading(value: boolean) {
-		this.loading$.next(value);
+		if (value !== this.loading) {
+			this.loading$.next(value);
+		}
 	}
 
 	@Input() set options(options: TOption[]) {

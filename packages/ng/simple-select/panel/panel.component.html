@@ -1,7 +1,7 @@
 <div
 	class="lu-picker-panel lu-option-picker-panel"
 	cdkTrapFocus
-	*ngIf="{ options: options$ | async } as ctx"
+	*ngIf="{ options: (options$ | async) || [] } as ctx"
 	[cdkTrapFocusAutoCapture]="true"
 >
 	<div class="lu-picker-content" [class.is-loading]="loading$ | async" (scroll)="onScroll($event)">

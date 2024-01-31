@@ -1,4 +1,4 @@
-import { I18nPluralPipe } from '@angular/common';
+import { I18nPluralPipe, SlicePipe } from '@angular/common';
 import { provideHttpClient } from '@angular/common/http';
 import { Pipe, PipeTransform } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -120,7 +120,7 @@ export const WithPagination = generateStory({
 		#selectRef
 		placeholder="Placeholder..."
 		[(ngModel)]="value"
-		[options]="legumes.slice(0, page * 10)"
+		[options]="legumes | slice : 0 : page * 10"
 		(nextPage)="page = page + 1"
 	>
 		<ng-container *luOption="let legume; select: selectRef">{{ legume.name }}</ng-container>
@@ -129,6 +129,28 @@ export const WithPagination = generateStory({
 	neededImports: {
 		'@lucca-front/ng/core-select': ['LuOptionDirective'],
 		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent'],
+	},
+});
+
+export const WithClearer = generateStory({
+	name: 'Clearer',
+	description: "Il est possible vider le contenu du select via l'input clearable",
+	template: `
+	<lu-simple-select
+		#selectRef
+		placeholder="Placeholder..."
+		[(ngModel)]="value"
+		[options]="legumes"
+		clearable
+	/>
+`,
+	neededImports: {
+		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent'],
+	},
+	storyPartial: {
+		args: {
+			value: allLegumes[15],
+		},
 	},
 });
 
@@ -239,6 +261,7 @@ const meta: Meta<LuSelectInputStoryComponent> = {
 				LuDisplayerDirective,
 				LuOptionDirective,
 				FilterLegumesPipe,
+				SlicePipe,
 				LuCoreSelectApiV3Directive,
 				LuCoreSelectApiV4Directive,
 				LuDisabledOptionDirective,
