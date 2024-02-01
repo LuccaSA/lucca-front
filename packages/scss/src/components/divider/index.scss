@@ -1,26 +1,70 @@
 @use 'exports' as *;
+@use '@lucca-front/scss/src/components/button/exports' as button;
 
 .divider {
 	@include vars;
 	@include component;
 
-	&.mod-button {
-		@include button;
-	}
-
-	&.mod-actionIcon {
-		@include actionIcon;
-	}
-
 	&.mod-S {
 		@include S;
+	}
 
-		&.mod-button {
-			@include buttonS;
+	&.mod-button {
+		.button {
+			@include button.outlined;
 		}
 
-		&.mod-actionIcon {
-			@include actionIconS;
+		&.mod-S {
+			.button {
+				@include button.S;
+			}
+		}
+	}
+
+	// .mod-actionIcon is deprecated
+	&:is(.mod-actionIcon, .mod-onlyIcon) {
+		.button {
+			@include button.text;
+			@include button.onlyIcon;
+		}
+
+		.button {
+			@include button.text;
+			@include button.onlyIcon;
+		}
+
+		&.mod-S {
+			.button {
+				@include button.S;
+				@include button.onlyIconS;
+			}
+		}
+	}
+
+	&.mod-button {
+		.button {
+			&:hover {
+				@include button.outlinedHover;
+			}
+
+			&:active {
+				@include button.outlinedActive;
+			}
+
+			&:focus-visible {
+				@include button.outlinedFocusVisible;
+			}
+		}
+	}
+	&:is(.mod-actionIcon, .mod-onlyIcon) {
+		.button {
+			&:is(:hover, :focus-visible) {
+				@include button.textHover;
+			}
+
+			&:active {
+				@include button.textActive;
+			}
 		}
 	}
 }
