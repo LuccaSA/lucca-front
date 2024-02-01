@@ -63,17 +63,15 @@
 		--components-dialog-insideHeaderLinkDisplay: block;
 	}
 
-	@at-root {
-		.dialog-inside-header {
-			--components-dialog-insideHeaderAreas: 'close title more';
-			--components-dialog-insideHeaderColumns: 1fr auto 1fr;
-		}
+	.dialog-inside-header {
+		--components-dialog-insideHeaderAreas: 'close title more';
+		--components-dialog-insideHeaderColumns: 1fr auto 1fr;
+	}
 
-		.dialog-inside-header-title {
-			@include title.h4;
+	.dialog-inside-header-title {
+		@include title.h4;
 
-			--components-dialog-insideHeaderTitlePadding: 0;
-			--components-dialog-insideHeaderTitleAlign: center;
-		}
+		--components-dialog-insideHeaderTitlePadding: 0;
+		--components-dialog-insideHeaderTitleAlign: center;
 	}
 }
