@@ -1,5 +1,6 @@
 @use 'exports' as *;
 @use '@lucca-front/scss/src/components/button/exports' as button;
+@use '@lucca-front/icons/src/icon/exports' as icon;
 
 .divider {
 	@include vars;
@@ -7,64 +8,30 @@
 
 	&.mod-S {
 		@include S;
-	}
 
-	&.mod-button {
 		.button {
-			@include button.outlined;
+			@include button.S;
 		}
 
-		&.mod-S {
-			.button {
-				@include button.S;
-			}
+		.lucca-icon {
+			@include icon.S
 		}
 	}
 
-	// .mod-actionIcon is deprecated
-	&:is(.mod-actionIcon, .mod-onlyIcon) {
-		.button {
-			@include button.text;
-			@include button.onlyIcon;
+	.button {
+		@include button.outlined;
+
+		// Need to be refactored on button side to reduce import to one mixin
+		&:hover {
+			@include button.outlinedHover;
 		}
 
-		.button {
-			@include button.text;
-			@include button.onlyIcon;
+		&:active {
+			@include button.outlinedActive;
 		}
 
-		&.mod-S {
-			.button {
-				@include button.S;
-				@include button.onlyIconS;
-			}
-		}
-	}
-
-	&.mod-button {
-		.button {
-			&:hover {
-				@include button.outlinedHover;
-			}
-
-			&:active {
-				@include button.outlinedActive;
-			}
-
-			&:focus-visible {
-				@include button.outlinedFocusVisible;
-			}
-		}
-	}
-	&:is(.mod-actionIcon, .mod-onlyIcon) {
-		.button {
-			&:is(:hover, :focus-visible) {
-				@include button.textHover;
-			}
-
-			&:active {
-				@include button.textActive;
-			}
+		&:focus-visible {
+			@include button.outlinedFocusVisible;
 		}
 	}
 }
