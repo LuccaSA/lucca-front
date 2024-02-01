@@ -113,7 +113,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	protected _value?: TValue;
 
 	options$ = new ReplaySubject<TOption[]>(1);
-	loading$ = new ReplaySubject<boolean>(1);
+	loading$ = new BehaviorSubject(false);
 	clue: string | null = null;
 	// This is the clue stored after we selected an option to know if we should emit an empty clue on open or not
 	previousClue: string | null = null;
