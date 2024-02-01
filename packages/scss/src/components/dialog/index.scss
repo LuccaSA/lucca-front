@@ -26,15 +26,15 @@
 		@include XL;
 	}
 
-	@include media.max('S') {
-		@include titleCenter;
-	}
-
 	&.mod-drawer {
 		@include drawer;
 
 		&:where(.mod-fromBottom) {
 			@include fromBottom;
+		}
+
+		@include media.max('S') {
+			@include titleCenter;
 		}
 	}
 
