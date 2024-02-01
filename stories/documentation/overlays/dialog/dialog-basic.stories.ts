@@ -20,7 +20,7 @@ function getTemplate(args: DialogBasicStory): string {
 		<div class="dialog-inside-content">dialog</div>
 		<footer class="dialog-inside-footer footer">
 			<div class="footer-actions">
-				<button type="button" class="button">Action</button>
+				<button type="submit" class="button">Action</button>
 				<button type="button" class="button mod-text">Action</button>
 			</div>
 		</footer>
