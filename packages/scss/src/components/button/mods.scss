@@ -1,6 +1,7 @@
 @use '@lucca-front/icons/src/commons/utils/icon';
 @use '@lucca-front/icons/src/icon/exports' as icons;
 @use '@lucca-front/scss/src/components/numericBadge/exports' as numericBadge;
+@use 'states';
 
 @mixin S {
 	@include icons.S;
@@ -59,6 +60,19 @@
 @mixin text {
 	--components-button-backgroundColor: transparent;
 	--components-button-color: var(--palettes-700, var(--palettes-grey-700));
+
+	&:hover,
+	&:focus-visible {
+		@include states.textHover;
+	}
+
+	&:active {
+		@include states.textActive;
+	}
+
+	&:disabled {
+		@include states.textDisabled;
+	}
 }
 
 @mixin outlined {
@@ -71,10 +85,35 @@
 		color: var(--palettes-800, var(--palettes-grey-800));
 		background-color: var(--palettes-300, var(--palettes-grey-300));
 	}
+
+	&:hover {
+		@include states.outlinedHover;
+	}
+
+	&:active {
+		@include states.outlinedActive;
+	}
+
+	&:focus-visible {
+		@include states.outlinedFocusVisible;
+	}
+
+	&:disabled {
+		@include states.outlinedDisabled;
+	}
 }
 
-@mixin invert {
+@mixin inverted {
 	--components-button-color: var(--colors-white-color);
+
+	&:hover,
+	&:focus-visible {
+		@include states.invertedHover;
+	}
+
+	&:active {
+		@include states.invertedActive;
+	}
 }
 
 @mixin more {
@@ -97,6 +136,41 @@
 	--components-button-minWidth: 1.5rem;
 }
 
+@mixin deleted {
+	&:hover {
+		@include states.deletedHover;
+	}
+
+	&:active {
+		@include states.deletedActive;
+	}
+}
+
+@mixin deletedText {
+	&:hover,
+	&:focus-visible {
+		@include states.deletedHover;
+	}
+
+	&:active {
+		@include states.deletedActive;
+	}
+}
+
+@mixin deletedOutlined {
+	&:hover {
+		@include states.deletedOutlinedHover;
+	}
+
+	&:focus-visible {
+		@include states.deletedOutlinedFocusVisible;
+	}
+
+	&:active {
+		@include states.deletedActive;
+	}
+}
+
 // deprecated
 @mixin counter {
 	--components-button-padding: var(--spacings-XS) calc(var(--spacings-XS) + var(--spacings-XXS)) var(--spacings-XS) var(--spacings-S);
@@ -111,6 +185,10 @@
 		align-items: center;
 		justify-content: center;
 		transition: background-color var(--commons-animations-durations-fast) ease;
+	}
+
+	&:hover {
+		@include states.counterHover;
 	}
 }
 

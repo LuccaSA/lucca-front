@@ -1,6 +1,7 @@
 @use '@lucca-front/icons/src/icon/exports' as icon;
 @use '@lucca-front/scss/src/components/numericBadge/exports' as numericBadge;
 @use '@lucca-front/scss/src/commons/utils/a11y';
+@use 'states';
 
 @mixin component {
 	@include icon.M;
@@ -43,9 +44,26 @@
 		@include icon.M;
 	}
 
-	&:not(.mod-outlined) {
+	// .mod-outline is deprecated
+	&:not(.mod-outlined, .mod-outline) {
 		.numericBadge {
 			@include numericBadge.primary;
 		}
+	}
+
+	&:hover {
+		@include states.hover;
+	}
+
+	&:focus-visible {
+		@include states.focusVisible;
+	}
+
+	&:active {
+		@include states.active;
+	}
+
+	&:disabled {
+		@include states.disabled;
 	}
 }

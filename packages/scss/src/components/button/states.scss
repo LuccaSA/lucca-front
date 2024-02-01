@@ -18,31 +18,29 @@
 	}
 }
 
-@mixin disabledOutlined {
+@mixin outlinedDisabled {
 	--components-button-backgroundColor: var(--colors-white-color);
 	--components-button-boxShadow: 0 0 0 1px var(--palettes-grey-400);
+	--components-button-color: var(--palettes-grey-500);
 }
 
-@mixin disabledText {
+@mixin textDisabled {
 	--components-button-backgroundColor: transparent;
+	--components-button-color: var(--palettes-grey-500);
 }
 
 @mixin loading {
 	--components-button-opacity: var(--commons-disabled-opacity);
 
-	&:not(.mod-more) {
-		@include loading.spinner(var(--components-button-font-size));
+	@include loading.spinner(var(--components-button-font-size));
 
-		--components-button-pointerEvents: none;
-		--components-button-color: transparent;
-		--components-button-userSelect: none;
-	}
+	--components-button-pointerEvents: none;
+	--components-button-color: transparent;
+	--components-button-userSelect: none;
 }
 
 @mixin loadingS {
-	&:not(.mod-more) {
-		@include loading.spinner(var(--sizes-S-fontSize));
-	}
+	@include loading.spinner(var(--sizes-S-fontSize));
 }
 
 @mixin state {
@@ -63,24 +61,20 @@
 @mixin success {
 	@include core.cssvars('palettes', config.$success);
 
-	&:not(.mod-more) {
-		@include state;
+	@include state;
 
-		&::after {
-			@include icon.generate('sign_confirm');
-		}
+	&::after {
+		@include icon.generate('sign_confirm');
 	}
 }
 
 @mixin error {
 	@include core.cssvars('palettes', config.$error);
 
-	&:not(.mod-more) {
-		@include state;
+	@include state;
 
-		&::after {
-			@include icon.generate('sign_close');
-		}
+	&::after {
+		@include icon.generate('sign_close');
 	}
 }
 
@@ -106,23 +100,23 @@
 	--components-button-backgroundColor: var(--palettes-200, var(--palettes-grey-200));
 }
 
-@mixin deleteHover {
+@mixin deletedHover {
 	--components-button-color: var(--palettes-error-700);
 	--components-button-backgroundColor: var(--palettes-error-100);
 }
 
-@mixin deleteActive {
+@mixin deletedActive {
 	--components-button-color: var(--palettes-error-700);
 	--components-button-backgroundColor: var(--palettes-error-200);
 }
 
-@mixin deleteOutlinedHover {
+@mixin deletedOutlinedHover {
 	--components-button-boxShadow: 0 0 0 var(--commons-divider-width) var(--palettes-error-400), var(--commons-boxShadow-XS);
 	--components-button-color: var(--palettes-error-700);
 	--components-button-backgroundColor: var(--palettes-error-100);
 }
 
-@mixin deleteOutlinedFocusVisible {
+@mixin deletedOutlinedFocusVisible {
 	--components-button-boxShadow: 0 0 0 var(--commons-divider-width) var(--palettes-error-400), var(--commons-boxShadow-XS);
 	--components-button-color: var(--palettes-error-700);
 }
@@ -140,15 +134,16 @@
 	@include a11y.focusVisible($offset: 3px);
 }
 
-@mixin invertHover {
+@mixin invertedHover {
 	--components-button-color: var(--colors-white-color);
 	--components-button-backgroundColor: var(--palettes-800, var(--palettes-grey-800));
 }
 
-@mixin invertActive {
+@mixin invertedActive {
 	--components-button-backgroundColor: var(--palettes-700, var(--palettes-grey-700));
 }
 
+// deprecated
 @mixin counterHover {
 	.button-counter {
 		--components-button-backgroundColor: var(--palettes-500, var(--palettes-primary-500));
