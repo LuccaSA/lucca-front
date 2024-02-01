@@ -9,11 +9,11 @@ import { Meta, StoryFn } from '@storybook/angular';
 	template: `
 		<lu-skip-links></lu-skip-links>
 		<div id="lucca-banner-solutions-container">
-			<button type="button" class="actionIcon" luTooltip="Modifier"><span aria-hidden="true" class="lucca-icon icon-app"></span></button>
-			<button type="button" class="actionIcon" luTooltip="Modifier"><span aria-hidden="true" class="lucca-icon icon-peopleGroup"></span></button>
-			<button type="button" class="actionIcon" luTooltip="Modifier"><span aria-hidden="true" class="lucca-icon icon-transportRocket"></span></button>
-			<button type="button" class="actionIcon" luTooltip="Modifier"><span aria-hidden="true" class="lucca-icon icon-signInfo"></span></button>
-			<button type="button" class="actionIcon" luTooltip="Modifier"><span aria-hidden="true" class="lucca-icon icon-bell"></span></button>
+			<button type="button" class="button mod-onlyIcon mod-text" luTooltip="Modifier"><span aria-hidden="true" class="lucca-icon icon-app"></span></button>
+			<button type="button" class="button mod-onlyIcon mod-text" luTooltip="Modifier"><span aria-hidden="true" class="lucca-icon icon-peopleGroup"></span></button>
+			<button type="button" class="button mod-onlyIcon mod-text" luTooltip="Modifier"><span aria-hidden="true" class="lucca-icon icon-transportRocket"></span></button>
+			<button type="button" class="button mod-onlyIcon mod-text" luTooltip="Modifier"><span aria-hidden="true" class="lucca-icon icon-signInfo"></span></button>
+			<button type="button" class="button mod-onlyIcon mod-text" luTooltip="Modifier"><span aria-hidden="true" class="lucca-icon icon-bell"></span></button>
 		</div>
 		<div id="navSide">
 			<button type="button" class="button mod-withIcon palette-secondary"><span aria-hidden="true" class="lucca-icon icon-mailPaperPlane"></span>Internal navigation</button>

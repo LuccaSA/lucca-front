@@ -1,19 +1,10 @@
 @use 'exports' as *;
-@use '@lucca-front/scss/src/components/button/exports' as button;
 
 .calloutFeedbackList {
 	@include vars;
 	@include component;
 
-	.button {
-		@include button.S;
-	}
-
 	&.mod-S {
 		@include S;
-
-		.button {
-			@include button.XS;
-		}
 	}
 }
