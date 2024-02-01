@@ -24,11 +24,17 @@
 	flex-direction: column;
 
 	@at-root ($atRoot) {
-		.dialog-header {
+		.dialog-inside {
+			display: flex;
+			flex-direction: column;
+			flex-grow: 1;
+		}
+
+		.dialog-inside-header {
 			padding: var(--spacings-S) var(--spacings-M);
 			background-color: var(--colors-white-color);
-			grid-template-areas: var(--components-dialog-headerAreas);
-			grid-template-columns: var(--components-dialog-headerColumns);
+			grid-template-areas: var(--components-dialog-insideHeaderAreas);
+			grid-template-columns: var(--components-dialog-insideHeaderColumns);
 			box-shadow: 0 1px 0 0 var(--palettes-grey-100);
 			gap: var(--spacings-S);
 			position: sticky;
@@ -36,7 +42,7 @@
 			top: 0;
 		}
 
-		.dialog-header-close {
+		.dialog-inside-header-close {
 			&.button {
 				@include button.text;
 				@include button.S;
@@ -45,7 +51,7 @@
 				align-self: start;
 				justify-self: end;
 				grid-area: close;
-				display: var(--components-dialog-headerButtonDisplay);
+				display: var(--components-dialog-insideHeaderButtonDisplay);
 			}
 
 			&.link {
@@ -55,25 +61,25 @@
 				align-self: start;
 				grid-area: close;
 				line-height: var(--sizes-L-lineHeight);
-				display: var(--components-dialog-headerLinkDisplay);
+				display: var(--components-dialog-insideHeaderLinkDisplay);
 			}
 		}
 
-		.dialog-content {
+		.dialog-inside-content {
 			padding: var(--spacings-S) var(--spacings-M);
 			flex-grow: 1;
 		}
 
-		.dialog-header-title {
+		.dialog-inside-header-title {
 			@include title.h2;
 
-			padding: var(--components-dialog-headerTitlePadding);
-			text-align: var(--components-dialog-headerTitleAlign);
+			padding: var(--components-dialog-insideHeaderTitlePadding);
+			text-align: var(--components-dialog-insideHeaderTitleAlign);
 			margin: 0;
 			grid-area: title;
 		}
 
-		.dialog-footer {
+		.dialog-inside-footer {
 			@include footer.sticky;
 		}
 

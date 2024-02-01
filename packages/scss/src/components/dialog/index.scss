@@ -43,7 +43,7 @@
 	}
 }
 
-.dialog-header-close {
+.dialog-inside-header-close {
 	&.button {
 		&:is(:hover, :focus-visible) {
 			@include button.textHover;

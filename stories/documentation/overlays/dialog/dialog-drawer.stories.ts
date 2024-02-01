@@ -9,22 +9,24 @@ function getTemplate(args: DialogDrawerStory): string {
 	const fromBottom = args.fromBottom ? 'mod-fromBottom' : '';
 	return `
 <div class="backdrop-dialog"></div>
-<div role="dialog" aria-modal="true" aria-labelledby="dialogHeaderTitle1" class="dialog mod-drawer ${args.size} ${fromBottom}">
-	<header class="dialog-header">
-		<button type="button" class="dialog-header-close button">
-			<span class="lucca-icon icon-signClose" aria-hidden="true"></span>
-			<span class="u-mask">Fermer</span>
-		</button>
-		<button type="button" class="dialog-header-close link">Fermer</button>
-		<h1 class="dialog-header-title" id="dialogHeaderTitle1">Title</h1>
-	</header>
-	<div class="dialog-content">dialog</div>
-	<footer class="dialog-footer footer">
-		<div class="footer-actions">
-			<button type="button" class="button">Action</button>
-			<button type="button" class="button mod-text">Action</button>
-		</div>
-	</footer>
+<div role="dialog" aria-modal="true" aria-labelledby="dialogInsideHeaderTitle1" class="dialog mod-drawer ${args.size} ${fromBottom}">
+	<form class="dialog-inside">
+		<header class="dialog-inside-header">
+			<button type="button" class="dialog-inside-header-close button">
+				<span class="lucca-icon icon-signClose" aria-hidden="true"></span>
+				<span class="u-mask">Fermer</span>
+			</button>
+			<button type="button" class="dialog-inside-header-close link">Fermer</button>
+			<h1 class="dialog-inside-header-title" id="dialogInsideHeaderTitle1">Title</h1>
+		</header>
+		<div class="dialog-inside-content">dialog</div>
+		<footer class="dialog-inside-footer footer">
+			<div class="footer-actions">
+				<button type="button" class="button">Action</button>
+				<button type="button" class="button mod-text">Action</button>
+			</div>
+		</footer>
+	</form>
 </div>
 	`;
 }

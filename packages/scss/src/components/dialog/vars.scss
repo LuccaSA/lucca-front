@@ -5,11 +5,11 @@
 	--components-dialog-maxHeight: calc(100dvh - (var(--spacings-S) * 2));
 	--components-dialog-borderRadius: var(--commons-borderRadius-L);
 	--components-dialog-inset: 0;
-	--components-dialog-headerAreas: 'title title close';
-	--components-dialog-headerTitleAlign: left;
-	--components-dialog-headerTitlePadding: calc(var(--spacings-XXS) / 2) 0;
-	--components-dialog-headerButtonDisplay: block;
-	--components-dialog-headerLinkDisplay: none;
-	--components-dialog-headerColumns: auto 1fr;
 	--components-dialog-animationOpening: scaleIn;
+	--components-dialog-insideHeaderAreas: 'title title close';
+	--components-dialog-insideHeaderTitleAlign: left;
+	--components-dialog-insideHeaderTitlePadding: calc(var(--spacings-XXS) / 2) 0;
+	--components-dialog-insideHeaderButtonDisplay: block;
+	--components-dialog-insideHeaderLinkDisplay: none;
+	--components-dialog-insideHeaderColumns: auto 1fr;
 }

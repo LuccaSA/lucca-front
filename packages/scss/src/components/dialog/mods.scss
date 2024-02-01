@@ -56,24 +56,24 @@
 
 @mixin titleCenter {
 	.button {
-		--components-dialog-headerButtonDisplay: none;
+		--components-dialog-insideHeaderButtonDisplay: none;
 	}
 
 	.link {
-		--components-dialog-headerLinkDisplay: block;
+		--components-dialog-insideHeaderLinkDisplay: block;
 	}
 
 	@at-root {
-		.dialog-header {
-			--components-dialog-headerAreas: 'close title more';
-			--components-dialog-headerColumns: 1fr auto 1fr;
+		.dialog-inside-header {
+			--components-dialog-insideHeaderAreas: 'close title more';
+			--components-dialog-insideHeaderColumns: 1fr auto 1fr;
 		}
 
-		.dialog-header-title {
+		.dialog-inside-header-title {
 			@include title.h4;
 
-			--components-dialog-headerTitlePadding: 0;
-			--components-dialog-headerTitleAlign: center;
+			--components-dialog-insideHeaderTitlePadding: 0;
+			--components-dialog-insideHeaderTitleAlign: center;
 		}
 	}
 }
