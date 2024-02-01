@@ -1,0 +1,56 @@
+@use 'exports' as *;
+@use '@lucca-front/scss/src/commons/utils/media';
+@use '@lucca-front/scss/src/components/button/exports' as button;
+
+.dialog {
+	@include vars;
+	@include component;
+
+	&.mod-XS {
+		@include XS;
+	}
+
+	&.mod-S {
+		@include S;
+	}
+
+	&.mod-fitContent {
+		@include fitContent;
+	}
+
+	&.mod-L {
+		@include L;
+	}
+
+	&.mod-XL {
+		@include XL;
+	}
+
+	@include media.max('S') {
+		@include titleCenter;
+	}
+
+	&.mod-drawer {
+		@include drawer;
+
+		&:where(.mod-fromBottom) {
+			@include fromBottom;
+		}
+	}
+
+	&.mod-fullScreen {
+		@include fullScreen;
+	}
+}
+
+.dialog-header-close {
+	&.button {
+		&:is(:hover, :focus-visible) {
+			@include button.textHover;
+		}
+
+		&:active {
+			@include button.textActive;
+		}
+	}
+}
