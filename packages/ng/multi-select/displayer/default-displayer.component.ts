@@ -23,6 +23,7 @@ import { LU_MULTI_SELECT_DISPLAYER_TRANSLATIONS } from './default-displayer.tran
 				[attr.aria-activedescendant]="select.activeDescendant$ | async"
 				[attr.aria-controls]="ariaControls"
 				[disabled]="select.disabled"
+				[readonly]="!select.searchable"
 				#inputElement
 				ngModel
 				(ngModelChange)="select.clueChanged($event)"
