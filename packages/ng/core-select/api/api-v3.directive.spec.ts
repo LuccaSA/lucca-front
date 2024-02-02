@@ -22,7 +22,7 @@ describe('CoreSelectApiV3Directive', () => {
 			nextPage: new EventEmitter<void>(),
 			clueChange: new EventEmitter<string>(),
 			options$: new ReplaySubject(1),
-			loading$: new ReplaySubject(1),
+			loading$: new BehaviorSubject(false),
 		} as LuSimpleSelectInputComponent<ILuApiItem>;
 
 		TestBed.configureTestingModule({

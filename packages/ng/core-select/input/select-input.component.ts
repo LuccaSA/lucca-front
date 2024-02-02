@@ -104,9 +104,14 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	}
 
 	public clueChanged(clue: string): void {
-		this.clueChange.emit(clue);
+		if (this.lastEmittedClue === clue) {
+			return;
+		}
 		if (!this.isPanelOpen) {
-			this.openPanel();
+			this.openPanel(clue);
+		} else {
+			this.clueChange.emit(clue);
+			this.lastEmittedClue = clue;
 		}
 	}
 
@@ -116,7 +121,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	loading$ = new BehaviorSubject(false);
 	clue: string | null = null;
 	// This is the clue stored after we selected an option to know if we should emit an empty clue on open or not
-	previousClue: string | null = null;
+	lastEmittedClue: string | null = null;
 
 	protected onChange?: (value: TValue | null) => void;
 	protected onTouched?: () => void;
@@ -203,16 +208,13 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 		this.inputElementRef.nativeElement.focus();
 	}
 
-	openPanel(): void {
+	openPanel(clue: string = ''): void {
 		if (this.isPanelOpen || this.disabled) {
 			return;
 		}
 
 		this.isPanelOpen$.next(true);
-		if (this.previousClue) {
-			this.clueChanged('');
-			this.previousClue = null;
-		}
+		this.clueChanged(clue);
 		this._panelRef = this.buildPanelRef();
 		this.bindInputToPanelRefEvents();
 		setTimeout(() => this.focusInput());
@@ -243,7 +245,6 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 
 	protected emptyClue(): void {
 		if (this.clue) {
-			this.previousClue = this.clue;
 			this.clue = null;
 		}
 	}

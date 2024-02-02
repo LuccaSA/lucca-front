@@ -44,6 +44,7 @@ export abstract class ALuCoreSelectApiDirective<TOption, TParams = Record<string
 		// Prevent a double call to getOptions when the clue is changed while the panel is closed
 		const clueIsPendingDebounce$ = merge(this.select.clueChange.pipe(map(() => true)), this.clue$.pipe(map(() => false))).pipe(distinctUntilChanged());
 		const isOpen$ = combineLatest([this.select.isPanelOpen$, clueIsPendingDebounce$]).pipe(
+			debounceTime(0),
 			startWith([false, false]),
 			pairwise(),
 			map(([[wasOpen], [isOpen, clueIsPendingDebounce]]) => (isOpen && !wasOpen ? !clueIsPendingDebounce : isOpen)),
