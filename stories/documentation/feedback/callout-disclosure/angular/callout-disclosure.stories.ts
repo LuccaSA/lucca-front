@@ -45,6 +45,9 @@ export default {
 				type: 'select',
 			},
 		},
+		open: {
+			description: '[v17.2]'
+		},
 	},
 } as Meta;
 
@@ -55,5 +58,6 @@ export const Template: StoryObj<CalloutDisclosureComponent> = {
 		heading: 'List title',
 		icon: 'signInfo',
 		palette: 'none',
+		open: false,
 	},
 };

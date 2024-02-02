@@ -11,7 +11,7 @@ export default {
 
 function getTemplate(args: GridsPositionStory): string {
 	return `
-<div class="grid mod-autoAtMediaMinM">
+<div class="grid mod-autoAtMediaMinS">
 	<div class="grid-column"><div class="demo">1</div></div>
 	<div class="grid-column"><div class="demo">2</div></div>
 	<div class="grid-column"><div class="demo">3</div></div>
