@@ -6,6 +6,6 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class LuIsOptionSelectedPipe implements PipeTransform {
 	transform<T>(option: T, comparer: (option1: T, option2: T) => boolean, selectedOption: T): boolean {
-		return comparer(option, selectedOption);
+		return !!selectedOption && comparer(option, selectedOption);
 	}
 }
