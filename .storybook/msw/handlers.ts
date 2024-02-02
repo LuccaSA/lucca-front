@@ -1,10 +1,27 @@
 import { delay, http, HttpResponse } from 'msw';
-import { mockAxisSectionsV3, mockDepartmentsTree, mockEstablishments, mockEstablishmentsCount, mockGenericCount, mockJobQualifications, mockMe, mockProjectUsers, mockUsers } from './mocks';
+import {
+	mockAxisSectionsV3,
+	mockDepartmentsTree,
+	mockEstablishments,
+	mockEstablishmentsCount,
+	mockGenericCount,
+	mockJobQualifications,
+	mockLegalUnits,
+	mockMe,
+	mockProjectUsers,
+	mockUsers,
+} from './mocks';
 
 export const handlers = [
-	http.get('/organization/structure/api/legal-units', async () => {
+	http.get('/organization/structure/api/legal-units', async ({ request }) => {
+		const url = new URL(request.url);
 		await delay(300);
-		return HttpResponse.json(mockGenericCount);
+		if (url.searchParams.get('fields.root') === 'count') {
+			// Need to cast so the type inference won't screw up
+			return HttpResponse.json(mockGenericCount) as any;
+		}
+
+		return HttpResponse.json({ items: mockLegalUnits });
 	}),
 
 	http.get('/organization/structure/api/establishments', async ({ request }) => {

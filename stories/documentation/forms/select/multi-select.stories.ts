@@ -1,13 +1,31 @@
 import { CommonModule, I18nPluralPipe } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { LuDisabledOptionDirective, LuDisplayerDirective, LuOptionDirective, LuOptionGroupDirective } from '@lucca-front/ng/core-select';
 import { LuCoreSelectApiV3Directive, LuCoreSelectApiV4Directive } from '@lucca-front/ng/core-select/api';
+import { LuCoreSelectEstablishmentsApiDirective } from '@lucca-front/ng/core-select/etablishment';
 import { LuMultiDisplayerDirective, LuMultiSelectDisplayerInputDirective, LuMultiSelectInputComponent } from '@lucca-front/ng/multi-select';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 import { Meta, applicationConfig, moduleMetadata } from '@storybook/angular';
-import { FilterLegumesPipe, ILegume, LuSelectInputStoryComponent, allLegumes, colorNameByColor, generateStory } from './select.utils';
+import { HiddenArgType } from 'stories/helpers/common-arg-types';
+import { getStoryGenerator } from 'stories/helpers/stories';
+import { FilterLegumesPipe, ILegume, LuCoreSelectInputStoryComponent, allLegumes, colorNameByColor, coreSelectStory } from './select.utils';
+
+type LuMultiSelectInputStoryComponent = LuCoreSelectInputStoryComponent & {
+	selectedLegumes: ILegume[];
+	maxValuesShown: number;
+} & LuMultiSelectInputComponent<ILegume>;
+
+const generateStory = getStoryGenerator<LuMultiSelectInputStoryComponent>({
+	...coreSelectStory,
+	argTypes: {
+		...coreSelectStory.argTypes,
+		selectedLegumes: HiddenArgType,
+		valuesTpl: HiddenArgType,
+		maxValuesShown: HiddenArgType,
+	},
+});
 
 export const Basic = generateStory({
 	name: 'Basic',
@@ -198,6 +216,23 @@ export const ApiV4 = generateStory({
 	},
 });
 
+export const Establishment = generateStory({
+	name: 'Establishment Select',
+	description: "Pour saisir un établissement, il suffit d'utiliser la directive `establishmentsApi`",
+	template: `
+	<lu-multi-select
+		class="multiSelect"
+		placeholder="Placeholder..."
+		establishmentsApi
+		[(ngModel)]="selectedEstablishment"
+	></lu-multi-select>
+	`,
+	neededImports: {
+		'@lucca-front/ng/multi-select': ['LuMultiSelectInputComponent'],
+		'@lucca-front/ng/core-select/establishment': ['LuCoreSelectEstablishmentsApiDirective'],
+	},
+});
+
 export const GroupBy = generateStory({
 	name: 'Group options',
 	description: "Pour grouper les options, il suffit d'utiliser la directive `luOptionGroup`.",
@@ -229,7 +264,7 @@ export const GroupBy = generateStory({
 	},
 });
 
-const meta: Meta<LuSelectInputStoryComponent> = {
+const meta: Meta<LuMultiSelectInputStoryComponent> = {
 	title: 'Documentation/Forms/MultiSelect',
 	component: LuMultiSelectInputComponent,
 	decorators: [
@@ -238,7 +273,6 @@ const meta: Meta<LuSelectInputStoryComponent> = {
 				I18nPluralPipe,
 				FormsModule,
 				FilterLegumesPipe,
-				HttpClientModule,
 				LuMultiSelectInputComponent,
 				LuMultiDisplayerDirective,
 				LuOptionDirective,
@@ -247,13 +281,14 @@ const meta: Meta<LuSelectInputStoryComponent> = {
 				LuTooltipModule,
 				LuCoreSelectApiV3Directive,
 				LuCoreSelectApiV4Directive,
+				LuCoreSelectEstablishmentsApiDirective,
 				LuDisabledOptionDirective,
 				LuMultiSelectDisplayerInputDirective,
 				CommonModule,
 			],
 		}),
 		applicationConfig({
-			providers: [provideAnimations()],
+			providers: [provideAnimations(), provideHttpClient()],
 		}),
 	],
 	args: {

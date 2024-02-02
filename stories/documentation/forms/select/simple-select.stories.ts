@@ -4,10 +4,24 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { LuDisabledOptionDirective, LuDisplayerDirective, LuOptionDirective, LuOptionGroupDirective } from '@lucca-front/ng/core-select';
 import { LuCoreSelectApiV3Directive, LuCoreSelectApiV4Directive } from '@lucca-front/ng/core-select/api';
+import { LuCoreSelectEstablishmentsApiDirective } from '@lucca-front/ng/core-select/etablishment';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 import { Meta, applicationConfig, moduleMetadata } from '@storybook/angular';
-import { useDocumentationStory } from 'stories/helpers/stories';
-import { ILegume, LuSelectInputStoryComponent, allLegumes, colorNameByColor, generateStory } from './select.utils';
+import { HiddenArgType } from 'stories/helpers/common-arg-types';
+import { getStoryGenerator, useDocumentationStory } from 'stories/helpers/stories';
+import { ILegume, LuCoreSelectInputStoryComponent, allLegumes, colorNameByColor, coreSelectStory } from './select.utils';
+
+export type LuSimpleSelectInputStoryComponent = LuCoreSelectInputStoryComponent & {
+	selectedLegume: ILegume | null;
+} & LuSimpleSelectInputComponent<ILegume>;
+
+const generateStory = getStoryGenerator<LuSimpleSelectInputStoryComponent>({
+	...coreSelectStory,
+	argTypes: {
+		...coreSelectStory.argTypes,
+		selectedLegume: HiddenArgType,
+	},
+});
 
 export const Basic = generateStory({
 	name: 'Basic',
@@ -194,6 +208,27 @@ export const ApiV4 = generateStory({
 	},
 });
 
+export const Establishment = generateStory({
+	name: 'Establishment Select',
+	description: "Pour saisir un établissement, il suffit d'utiliser la directive `establishmentsApi`",
+	template: `
+	<lu-simple-select
+		placeholder="Placeholder..."
+		establishmentsApi
+		[(ngModel)]="selectedEstablishment"
+	></lu-simple-select>
+	`,
+	neededImports: {
+		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent'],
+		'@lucca-front/ng/core-select/establishment': ['LuCoreSelectEstablishmentsApiDirective'],
+	},
+	storyPartial: {
+		args: {
+			selectedLegume: allLegumes[4],
+		},
+	},
+});
+
 export const GroupBy = generateStory({
 	name: 'Group options',
 	description: "Pour grouper les options, il suffit d'utiliser la directive `luOptionGroup`.",
@@ -231,7 +266,7 @@ class FilterLegumesPipe implements PipeTransform {
 	}
 }
 
-const meta: Meta<LuSelectInputStoryComponent> = {
+const meta: Meta<LuSimpleSelectInputStoryComponent> = {
 	title: 'Documentation/Forms/SimpleSelect',
 	component: LuSimpleSelectInputComponent,
 	decorators: [
@@ -245,6 +280,7 @@ const meta: Meta<LuSelectInputStoryComponent> = {
 				SlicePipe,
 				LuCoreSelectApiV3Directive,
 				LuCoreSelectApiV4Directive,
+				LuCoreSelectEstablishmentsApiDirective,
 				LuDisabledOptionDirective,
 				LuOptionGroupDirective,
 			],

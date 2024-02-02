@@ -1,7 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { LuMultiSelectInputComponent } from '@lucca-front/ng/multi-select';
-import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
-import { getStoryGenerator } from 'stories/helpers/stories';
+import { ALuSelectInputComponent } from '@lucca-front/ng/core-select';
+import { StoryObj } from '@storybook/angular';
 import { HiddenArgType } from '../../../helpers/common-arg-types';
 
 export type LegumeColor = 'green' | 'purple' | 'red' | 'orange' | 'white' | 'yellow' | 'brown';
@@ -12,16 +11,12 @@ export interface ILegume {
 	color: LegumeColor;
 }
 
-export type LuSelectInputStoryComponent = {
+export type LuCoreSelectInputStoryComponent = {
 	page: number;
 	legumes: ILegume[];
-	selectedLegume: ILegume | null;
-	selectedLegumes: ILegume[];
-	maxValuesShown: number;
 	legumeColor: (legume: ILegume) => LegumeColor;
 	colorNameByColor: Record<LegumeColor, string>;
-} & LuSimpleSelectInputComponent<ILegume> &
-	LuMultiSelectInputComponent<ILegume>;
+} & ALuSelectInputComponent<ILegume, ILegume | ILegume[]>;
 
 export const allLegumes: ILegume[] = [
 	{ name: 'Artichaut', index: 1, color: 'green' },
@@ -67,7 +62,7 @@ export const colorNameByColor: Record<LegumeColor, string> = {
 	brown: 'marron',
 };
 
-export const generateStory = getStoryGenerator<LuSelectInputStoryComponent>({
+export const coreSelectStory = {
 	argTypes: {
 		clearable: HiddenArgType,
 		clueChange: HiddenArgType,
@@ -77,7 +72,6 @@ export const generateStory = getStoryGenerator<LuSelectInputStoryComponent>({
 		legumeColor: HiddenArgType,
 		legumes: HiddenArgType,
 		loading: HiddenArgType,
-		maxValuesShown: HiddenArgType,
 		nextPage: HiddenArgType,
 		optionComparer: HiddenArgType,
 		options: HiddenArgType,
@@ -86,12 +80,9 @@ export const generateStory = getStoryGenerator<LuSelectInputStoryComponent>({
 		page: HiddenArgType,
 		placeholder: HiddenArgType,
 		previousPage: HiddenArgType,
-		selectedLegume: HiddenArgType,
-		selectedLegumes: HiddenArgType,
-		valuesTpl: HiddenArgType,
 		valueTpl: HiddenArgType,
 	},
-});
+} satisfies StoryObj<LuCoreSelectInputStoryComponent>;
 
 @Pipe({ name: 'filterLegumes', standalone: true })
 export class FilterLegumesPipe implements PipeTransform {

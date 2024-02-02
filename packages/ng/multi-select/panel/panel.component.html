@@ -1,4 +1,4 @@
-<div class="lu-picker-panel lu-option-picker-panel mod-multiple" role="dialog" *ngIf="{ options: options$ | async } as ctx">
+<div class="lu-picker-panel lu-option-picker-panel mod-multiple" role="dialog" *ngIf="{ options: (options$ | async) || [] } as ctx">
 	<div
 		class="lu-picker-content"
 		[class.is-loading]="loading$ | async"
@@ -16,9 +16,14 @@
 					role="group"
 					[attr.aria-labelledby]="selectId + '-group-' + group.key"
 				>
-					<span class="lu-picker-content-option-group-title" role="presentation" [id]="selectId + '-group-' + group.key">
+					<button
+						class="lu-picker-content-option-group-title button mod-text"
+						role="presentation"
+						[id]="selectId + '-group-' + group.key"
+						(click)="toggleOptions(group.options)"
+					>
 						<ng-container *luPortal="grouping.content; context: { $implicit: group }" />
-					</span>
+					</button>
 					<ng-template [ngTemplateOutlet]="optionsList" [ngTemplateOutletContext]="{ $implicit: group.options }" />
 				</div>
 			</ng-container>

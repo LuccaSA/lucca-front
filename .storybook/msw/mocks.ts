@@ -36,6 +36,26 @@ export const mockEstablishments = [
 		isArchived: false,
 	})),
 ];
+export const mockLegalUnits = [
+	{
+		id: 1,
+		name: 'Lucca FR',
+		code: 'LUCCA_FR',
+		countryId: 1,
+	},
+	{
+		id: 2,
+		name: 'Lucca US',
+		code: 'LUCCA_US',
+		countryId: 2,
+	},
+	{
+		id: 3,
+		name: 'Lucca UK',
+		code: 'LUCCA_UK',
+		countryId: 3,
+	},
+];
 export const mockJobQualifications = [
 	{
 		id: 19,

@@ -78,11 +78,26 @@ export class LuMultiSelectPanelComponent<T> implements AfterViewInit {
 	}
 
 	toggleOption(option: T): void {
-		const selectedOption = this.selectedOptions.find((o) => this.optionComparer(o, option));
-		this.selectedOptions = selectedOption ? this.selectedOptions.filter((o) => o !== selectedOption) : [...this.selectedOptions, option];
+		const matchingOption = this.selectedOptions.find((o) => this.optionComparer(o, option));
+		this.selectedOptions = matchingOption ? this.selectedOptions.filter((o) => o !== matchingOption) : [...this.selectedOptions, option];
 		this.panelRef.emitValue(this.selectedOptions);
 		setTimeout(() => this.panelRef.updatePosition());
 		this._keyManager?.setActiveItem(this.optionsQL.toArray().findIndex((o) => o.option === option));
+	}
+
+	toggleOptions(options: T[]): void {
+		const notSelected = options.filter((o) => !this.selectedOptions.some((so) => this.optionComparer(so, o)));
+
+		if (notSelected.length) {
+			// If some options are not selected, select them all
+			this.selectedOptions = [...this.selectedOptions, ...notSelected];
+		} else {
+			// If all options are already selected, unselect them all
+			this.selectedOptions = this.selectedOptions.filter((o) => !options.some((so) => this.optionComparer(so, o)));
+		}
+
+		this.panelRef.emitValue(this.selectedOptions);
+		setTimeout(() => this.panelRef.updatePosition());
 	}
 
 	protected initKeyManager(): void {
