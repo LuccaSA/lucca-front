@@ -110,7 +110,7 @@ export class LuMultiSelectDefaultDisplayerComponent<T> implements OnInit {
 	inputBackspace(): void {
 		if (this.value.length > 0 && this.inputElementRef.nativeElement.value.length === 0) {
 			this.unselectOption(this.value[this.value.length - 1]);
-			this.select.panelRef.updateSelectedOptions(this.value);
+			this.select.panelRef?.updateSelectedOptions(this.value);
 		}
 	}
 	ngOnInit(): void {

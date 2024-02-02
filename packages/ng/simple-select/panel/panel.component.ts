@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { getIntl } from '@lucca-front/ng/core';
 import { LuSelectPanelRef, SELECT_ID, ɵLuOptionComponent, ɵgenerateGroups } from '@lucca-front/ng/core-select';
 import { EMPTY, asyncScheduler, filter, map, observeOn, take, takeUntil } from 'rxjs';
-import { skip, switchMap } from 'rxjs/operators';
+import { debounceTime, switchMap } from 'rxjs/operators';
 import { LuSimpleSelectInputComponent } from '../input/select-input.component';
 import { SIMPLE_SELECT_INPUT } from '../select.model';
 import { LU_SIMPLE_SELECT_TRANSLATIONS } from '../select.translate';
@@ -72,7 +72,7 @@ export class LuSelectPanelComponent<T> implements AfterViewInit {
 			)
 			.subscribe((activeDescendant) => this.panelRef.activeOptionIdChanged.emit(activeDescendant));
 
-		if (this.initialValue) {
+		if (this.initialValue && !this.selectInput.clue) {
 			this.options$
 				?.pipe(
 					observeOn(asyncScheduler),
@@ -93,7 +93,8 @@ export class LuSelectPanelComponent<T> implements AfterViewInit {
 		if (this.selectInput.searchable) {
 			this.selectInput.clueChange
 				.pipe(
-					switchMap(() => this.options$.pipe(skip(1), take(1))),
+					switchMap(() => this.optionsQL.changes.pipe(take(1))),
+					debounceTime(0),
 					takeUntil(this.panelRef.closed),
 				)
 				.subscribe(() => this.keyManager.setFirstItemActive());
