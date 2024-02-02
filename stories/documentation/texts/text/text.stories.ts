@@ -16,9 +16,9 @@ function getTemplate(args: TextBasicStory): string {
 <p>Body 1 : Portez ce vieux whisky au juge blond qui fume</p>
 <p class="u-textS">Body 2 : Portez ce vieux whisky au juge blond qui fume</p>
 <p class="u-textXS">Body 3 : Portez ce vieux whisky au juge blond qui fume</p>
-<p><i>Caption 1 : Portez ce vieux whisky au juge blond qui fume</i></p>
-<p class="u-textS"><i>Caption 2 : Portez ce vieux whisky au juge blond qui fume</i></p>
-<p class="u-textXS"><i>Caption 3 : Portez ce vieux whisky au juge blond qui fume</i></p>`;
+<p class="u-fontStyleItalic">Caption 1 : Portez ce vieux whisky au juge blond qui fume</p>
+<p class="u-fontStyleItalic u-textS">Caption 2 : Portez ce vieux whisky au juge blond qui fume</p>
+<p class="u-fontStyleItalic u-textXS">Caption 3 : Portez ce vieux whisky au juge blond qui fume</p>`;
 }
 
 const Template: StoryFn<TextBasicStory> = (args: TextBasicStory) => ({
