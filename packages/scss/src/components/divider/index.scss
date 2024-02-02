@@ -20,18 +20,5 @@
 
 	.button {
 		@include button.outlined;
-
-		// Need to be refactored on button side to reduce import to one mixin
-		&:hover {
-			@include button.outlinedHover;
-		}
-
-		&:active {
-			@include button.outlinedActive;
-		}
-
-		&:focus-visible {
-			@include button.outlinedFocusVisible;
-		}
 	}
 }
