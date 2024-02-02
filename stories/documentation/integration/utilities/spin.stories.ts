@@ -7,14 +7,12 @@ export default {
 } as Meta;
 
 function getTemplate(args: SpinStory): string {
-	return `
-	<label class="textfield">
-		<input class="textfield-input" type="number" placeholder="Avec spin" />
-	</label>
-	<label class="textfield">
-		<input class="textfield-input u-noSpinButtons" type="number" placeholder="Sans spin" />
-	</label>
-	`;
+	return `<label class="textfield">
+	<input class="textfield-input" type="number" placeholder="Avec spin" />
+</label>
+<label class="textfield">
+	<input class="textfield-input u-noSpinButtons" type="number" placeholder="Sans spin" />
+</label>`;
 }
 
 const Template: StoryFn<SpinStory> = (args: SpinStory) => ({
