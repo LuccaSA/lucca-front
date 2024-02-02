@@ -10,11 +10,11 @@ function getTemplate(args: DialogBasicStory): string {
 <div role="dialog" aria-modal="true" aria-labelledby="dialogInsideHeaderTitle1" class="dialog ${args.size}">
 	<form class="dialog-inside">
 		<header class="dialog-inside-header">
-			<button type="button" class="dialog-inside-header-close button">
+			<button type="button" class="button">
 				<span class="lucca-icon icon-signClose" aria-hidden="true"></span>
 				<span class="u-mask">Fermer</span>
 			</button>
-			<button type="button" class="dialog-inside-header-close link">Fermer</button>
+			<button type="button" class="link">Fermer</button>
 			<h1 class="dialog-inside-header-title" id="dialogInsideHeaderTitle1">Title</h1>
 		</header>
 		<div class="dialog-inside-content">dialog</div>

@@ -40,10 +40,8 @@
 			position: sticky;
 			display: grid;
 			top: 0;
-		}
 
-		.dialog-inside-header-close {
-			&.button {
+			> .button {
 				@include button.text;
 				@include button.S;
 				@include button.onlyIconS;
@@ -54,7 +52,7 @@
 				display: var(--components-dialog-insideHeaderButtonDisplay);
 			}
 
-			&.link {
+			> .link {
 				@include link.decorationHover;
 
 				justify-self: start;

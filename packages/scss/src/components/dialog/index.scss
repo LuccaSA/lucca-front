@@ -42,15 +42,3 @@
 		@include fullScreen;
 	}
 }
-
-.dialog-inside-header-close {
-	&.button {
-		&:is(:hover, :focus-visible) {
-			@include button.textHover;
-		}
-
-		&:active {
-			@include button.textActive;
-		}
-	}
-}
