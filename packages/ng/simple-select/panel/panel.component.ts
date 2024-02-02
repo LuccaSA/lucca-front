@@ -9,6 +9,7 @@ import { skip, switchMap } from 'rxjs/operators';
 import { LuSimpleSelectInputComponent } from '../input/select-input.component';
 import { SIMPLE_SELECT_INPUT } from '../select.model';
 import { LU_SIMPLE_SELECT_TRANSLATIONS } from '../select.translate';
+import { LuIsOptionSelectedPipe } from './option-selected.pipe';
 
 @Component({
 	selector: 'lu-select-panel',
@@ -16,7 +17,7 @@ import { LU_SIMPLE_SELECT_TRANSLATIONS } from '../select.translate';
 	styleUrls: ['./panel.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	standalone: true,
-	imports: [A11yModule, AsyncPipe, FormsModule, NgIf, NgFor, NgTemplateOutlet, ɵLuOptionComponent],
+	imports: [A11yModule, AsyncPipe, FormsModule, NgIf, NgFor, NgTemplateOutlet, ɵLuOptionComponent, LuIsOptionSelectedPipe],
 })
 export class LuSelectPanelComponent<T> implements AfterViewInit {
 	public selectInput = inject<LuSimpleSelectInputComponent<T>>(SIMPLE_SELECT_INPUT);

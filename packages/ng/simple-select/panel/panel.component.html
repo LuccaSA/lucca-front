@@ -30,7 +30,7 @@
 					[optionTpl]="optionTpl"
 					[optionIndex]="index"
 					[scrollIntoViewOptions]="{ block: 'center' }"
-					[isSelected]="option === selected"
+					[isSelected]="option | luIsOptionSelected:optionComparer:selected"
 					(click)="panelRef.emitValue(option)"
 				></lu-select-option>
 			</ng-template>
