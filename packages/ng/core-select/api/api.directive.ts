@@ -47,6 +47,12 @@ export abstract class ALuCoreSelectApiDirective<TOption, TParams = Record<string
 			debounceTime(0),
 			startWith([false, false]),
 			pairwise(),
+			tap(([[wasOpen], [isOpen, clueIsPendingDebounce]]) => {
+				// Start the loader as soon as the panel is opened to avoid a short display of the "no result" message
+				if (!wasOpen && isOpen && clueIsPendingDebounce) {
+					this.select.loading = true;
+				}
+			}),
 			map(([[wasOpen], [isOpen, clueIsPendingDebounce]]) => (isOpen && !wasOpen ? !clueIsPendingDebounce : isOpen)),
 			distinctUntilChanged(),
 		);
