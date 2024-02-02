@@ -79,21 +79,19 @@
 		}
 	}
 
-	// .mod-delete is deprecated
-	&.mod-deleted,
 	&.mod-delete {
-		@include deleted;
+		@include delete;
 
 		// .mod-link is deprecated
 		&.mod-text,
 		&.mod-link {
-			@include deletedText;
+			@include deleteText;
 		}
 
 		// .mod-outline is deprecated
 		&.mod-outlined,
 		&.mod-outline {
-			@include deletedOutlined;
+			@include deleteOutlined;
 		}
 	}
 

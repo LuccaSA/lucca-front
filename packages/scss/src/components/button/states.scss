@@ -18,22 +18,10 @@
 	}
 }
 
-@mixin outlinedDisabled {
-	--components-button-backgroundColor: var(--colors-white-color);
-	--components-button-boxShadow: 0 0 0 1px var(--palettes-grey-400);
-	--components-button-color: var(--palettes-grey-500);
-}
-
-@mixin textDisabled {
-	--components-button-backgroundColor: transparent;
-	--components-button-color: var(--palettes-grey-500);
-}
-
 @mixin loading {
-	--components-button-opacity: var(--commons-disabled-opacity);
-
 	@include loading.spinner(var(--components-button-font-size));
 
+	--components-button-opacity: var(--commons-disabled-opacity);
 	--components-button-pointerEvents: none;
 	--components-button-color: transparent;
 	--components-button-userSelect: none;
@@ -75,77 +63,5 @@
 
 	&::after {
 		@include icon.generate('sign_close');
-	}
-}
-
-@mixin hover {
-	--components-button-color: var(--palettes-text, var(--palettes-primary-text));
-	--components-button-backgroundColor: var(--palettes-600, var(--palettes-primary-600));
-}
-
-@mixin focusVisible {
-	@include a11y.focusVisible;
-}
-
-@mixin active {
-	--components-button-backgroundColor: var(--palettes-800, var(--palettes-primary-800));
-}
-
-@mixin textHover {
-	--components-button-color: var(--palettes-700, var(--palettes-grey-700));
-	--components-button-backgroundColor: var(--palettes-100, var(--palettes-grey-100));
-}
-
-@mixin textActive {
-	--components-button-backgroundColor: var(--palettes-200, var(--palettes-grey-200));
-}
-
-@mixin deletedHover {
-	--components-button-color: var(--palettes-error-700);
-	--components-button-backgroundColor: var(--palettes-error-100);
-}
-
-@mixin deletedActive {
-	--components-button-color: var(--palettes-error-700);
-	--components-button-backgroundColor: var(--palettes-error-200);
-}
-
-@mixin deletedOutlinedHover {
-	--components-button-boxShadow: 0 0 0 var(--commons-divider-width) var(--palettes-error-400), var(--commons-boxShadow-XS);
-	--components-button-color: var(--palettes-error-700);
-	--components-button-backgroundColor: var(--palettes-error-100);
-}
-
-@mixin deletedOutlinedFocusVisible {
-	--components-button-boxShadow: 0 0 0 var(--commons-divider-width) var(--palettes-error-400), var(--commons-boxShadow-XS);
-	--components-button-color: var(--palettes-error-700);
-}
-
-@mixin outlinedHover {
-	--components-button-color: var(--palettes-700, var(--palettes-grey-700));
-	--components-button-backgroundColor: var(--palettes-100, var(--palettes-grey-100));
-}
-
-@mixin outlinedActive {
-	--components-button-backgroundColor: var(--palettes-200, var(--palettes-grey-200));
-}
-
-@mixin outlinedFocusVisible {
-	@include a11y.focusVisible($offset: 3px);
-}
-
-@mixin invertedHover {
-	--components-button-color: var(--colors-white-color);
-	--components-button-backgroundColor: var(--palettes-800, var(--palettes-grey-800));
-}
-
-@mixin invertedActive {
-	--components-button-backgroundColor: var(--palettes-700, var(--palettes-grey-700));
-}
-
-// deprecated
-@mixin counterHover {
-	.button-counter {
-		--components-button-backgroundColor: var(--palettes-500, var(--palettes-primary-500));
 	}
 }

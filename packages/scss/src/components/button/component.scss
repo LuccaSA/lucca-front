@@ -1,7 +1,6 @@
 @use '@lucca-front/icons/src/icon/exports' as icon;
-@use '@lucca-front/scss/src/components/numericBadge/exports' as numericBadge;
 @use '@lucca-front/scss/src/commons/utils/a11y';
-@use 'states';
+@use '@lucca-front/scss/src/components/numericBadge/exports' as numericBadge;
 
 @mixin component {
 	@include icon.M;
@@ -52,18 +51,26 @@
 	}
 
 	&:hover {
-		@include states.hover;
+		--components-button-color: var(--palettes-text, var(--palettes-primary-text));
+		--components-button-backgroundColor: var(--palettes-600, var(--palettes-primary-600));
 	}
 
 	&:focus-visible {
-		@include states.focusVisible;
+		@include a11y.focusVisible;
 	}
 
 	&:active {
-		@include states.active;
+		--components-button-backgroundColor: var(--palettes-800, var(--palettes-primary-800));
 	}
 
 	&:disabled {
-		@include states.disabled;
+		--components-button-cursor: default;
+		--components-button-color: var(--palettes-grey-500);
+		--components-button-backgroundColor: var(--commons-disabled-background);
+		--components-button-pointerEvents: none;
+
+		.numericBadge {
+			@include numericBadge.disabled;
+		}
 	}
 }

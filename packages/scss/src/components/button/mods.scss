@@ -1,7 +1,7 @@
-@use '@lucca-front/icons/src/commons/utils/icon';
 @use '@lucca-front/icons/src/icon/exports' as icons;
+@use '@lucca-front/icons/src/commons/utils/icon';
+@use '@lucca-front/scss/src/commons/utils/a11y';
 @use '@lucca-front/scss/src/components/numericBadge/exports' as numericBadge;
-@use 'states';
 
 @mixin S {
 	@include icons.S;
@@ -57,22 +57,34 @@
 	--components-button-padding: var(--spacings-XXS) var(--spacings-XS);
 }
 
+@mixin textDisabled {
+	--components-button-backgroundColor: transparent;
+	--components-button-color: var(--palettes-grey-500);
+}
+
 @mixin text {
 	--components-button-backgroundColor: transparent;
 	--components-button-color: var(--palettes-700, var(--palettes-grey-700));
 
 	&:hover,
 	&:focus-visible {
-		@include states.textHover;
+		--components-button-color: var(--palettes-700, var(--palettes-grey-700));
+		--components-button-backgroundColor: var(--palettes-100, var(--palettes-grey-100));
 	}
 
 	&:active {
-		@include states.textActive;
+		--components-button-backgroundColor: var(--palettes-200, var(--palettes-grey-200));
 	}
 
 	&:disabled {
-		@include states.textDisabled;
+		@include textDisabled;
 	}
+}
+
+@mixin outlinedDisabled {
+	--components-button-backgroundColor: var(--colors-white-color);
+	--components-button-boxShadow: 0 0 0 1px var(--palettes-grey-400);
+	--components-button-color: var(--palettes-grey-500);
 }
 
 @mixin outlined {
@@ -87,19 +99,20 @@
 	}
 
 	&:hover {
-		@include states.outlinedHover;
+		--components-button-color: var(--palettes-700, var(--palettes-grey-700));
+		--components-button-backgroundColor: var(--palettes-100, var(--palettes-grey-100));
 	}
 
 	&:active {
-		@include states.outlinedActive;
+		--components-button-backgroundColor: var(--palettes-200, var(--palettes-grey-200));
 	}
 
 	&:focus-visible {
-		@include states.outlinedFocusVisible;
+		@include a11y.focusVisible($offset: 3px);
 	}
 
 	&:disabled {
-		@include states.outlinedDisabled;
+		@include outlinedDisabled;
 	}
 }
 
@@ -108,11 +121,12 @@
 
 	&:hover,
 	&:focus-visible {
-		@include states.invertedHover;
+		--components-button-color: var(--colors-white-color);
+		--components-button-backgroundColor: var(--palettes-800, var(--palettes-grey-800));
 	}
 
 	&:active {
-		@include states.invertedActive;
+		--components-button-backgroundColor: var(--palettes-700, var(--palettes-grey-700));
 	}
 }
 
@@ -136,38 +150,46 @@
 	--components-button-minWidth: 1.5rem;
 }
 
-@mixin deleted {
+@mixin delete {
 	&:hover {
-		@include states.deletedHover;
+		--components-button-color: var(--palettes-error-700);
+		--components-button-backgroundColor: var(--palettes-error-100);
 	}
 
 	&:active {
-		@include states.deletedActive;
+		--components-button-color: var(--palettes-error-700);
+		--components-button-backgroundColor: var(--palettes-error-200);
 	}
 }
 
-@mixin deletedText {
+@mixin deleteText {
 	&:hover,
 	&:focus-visible {
-		@include states.deletedHover;
+		--components-button-color: var(--palettes-error-700);
+		--components-button-backgroundColor: var(--palettes-error-100);
 	}
 
 	&:active {
-		@include states.deletedActive;
+		--components-button-color: var(--palettes-error-700);
+		--components-button-backgroundColor: var(--palettes-error-200);
 	}
 }
 
-@mixin deletedOutlined {
+@mixin deleteOutlined {
 	&:hover {
-		@include states.deletedOutlinedHover;
+		--components-button-boxShadow: 0 0 0 var(--commons-divider-width) var(--palettes-error-400), var(--commons-boxShadow-XS);
+		--components-button-color: var(--palettes-error-700);
+		--components-button-backgroundColor: var(--palettes-error-100);
 	}
 
 	&:focus-visible {
-		@include states.deletedOutlinedFocusVisible;
+		--components-button-boxShadow: 0 0 0 var(--commons-divider-width) var(--palettes-error-400), var(--commons-boxShadow-XS);
+		--components-button-color: var(--palettes-error-700);
 	}
 
 	&:active {
-		@include states.deletedActive;
+		--components-button-color: var(--palettes-error-700);
+		--components-button-backgroundColor: var(--palettes-error-200);
 	}
 }
 
@@ -188,7 +210,9 @@
 	}
 
 	&:hover {
-		@include states.counterHover;
+		.button-counter {
+			--components-button-backgroundColor: var(--palettes-500, var(--palettes-primary-500));
+		}
 	}
 }
 
