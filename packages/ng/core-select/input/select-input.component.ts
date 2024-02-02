@@ -121,7 +121,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	loading$ = new BehaviorSubject(false);
 	clue: string | null = null;
 	// This is the clue stored after we selected an option to know if we should emit an empty clue on open or not
-	lastEmittedClue: string | null = null;
+	lastEmittedClue: string = '';
 
 	protected onChange?: (value: TValue | null) => void;
 	protected onTouched?: () => void;

@@ -73,6 +73,7 @@ describe('ALuCoreSelectApiDirective', () => {
 		spectator.tick(); // Component initialization uses a setTimeout :see_no_evil:
 		select.clueChanged('test');
 		spectator.tick(MAGIC_DEBOUNCE_DURATION);
+		spectator.tick();
 
 		expect(testApi.getOptions).toHaveBeenCalledTimes(1);
 		expect(testApi.getOptions).toHaveBeenCalledWith({ clue: 'test' }, 0);
@@ -89,6 +90,7 @@ describe('ALuCoreSelectApiDirective', () => {
 		spectator.tick(MAGIC_DEBOUNCE_DURATION - 1);
 		select.clueChanged('hey');
 		spectator.tick(MAGIC_DEBOUNCE_DURATION);
+		spectator.tick();
 
 		expect(testApi.getOptions).toHaveBeenCalledTimes(1);
 		expect(testApi.getOptions).toHaveBeenCalledWith({ clue: 'hey' }, 0);
