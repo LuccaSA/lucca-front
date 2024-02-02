@@ -2,7 +2,7 @@ import { A11yModule, ActiveDescendantKeyManager } from '@angular/cdk/a11y';
 import { AsyncPipe, NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
 import { AfterViewInit, ChangeDetectionStrategy, Component, QueryList, ViewChildren, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { getIntl } from '@lucca-front/ng/core';
+import { PortalDirective, getIntl } from '@lucca-front/ng/core';
 import { SELECT_ID, ɵLuOptionComponent, ɵLuOptionOutletDirective, ɵgenerateGroups } from '@lucca-front/ng/core-select';
 import { EMPTY, asyncScheduler, filter, map, observeOn, take, takeUntil } from 'rxjs';
 import { skip, switchMap } from 'rxjs/operators';
@@ -19,7 +19,19 @@ import { ɵLuMultiSelectSelectedChipDirective } from './selected-chip.directive'
 	styleUrls: ['./panel.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	standalone: true,
-	imports: [A11yModule, AsyncPipe, FormsModule, LuIsOptionSelectedPipe, NgIf, NgFor, ɵLuOptionComponent, ɵLuOptionOutletDirective, ɵLuMultiSelectSelectedChipDirective, NgTemplateOutlet],
+	imports: [
+		A11yModule,
+		AsyncPipe,
+		FormsModule,
+		LuIsOptionSelectedPipe,
+		NgIf,
+		NgFor,
+		ɵLuOptionComponent,
+		ɵLuOptionOutletDirective,
+		ɵLuMultiSelectSelectedChipDirective,
+		NgTemplateOutlet,
+		PortalDirective,
+	],
 })
 export class LuMultiSelectPanelComponent<T> implements AfterViewInit {
 	protected selectInput = inject<LuMultiSelectInputComponent<T>>(MULTI_SELECT_INPUT);
