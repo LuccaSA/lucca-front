@@ -66,7 +66,7 @@ export class LuMultiSelectInputComponent<T> extends ALuSelectInputComponent<T, T
 	public readonly emptyClue$ = new Subject<void>();
 
 	public override focusInput(): void {
-		this.focusInput$.next();
+		this.focusInput$.next({ keepClue: true });
 	}
 
 	public override emptyClue(): void {
