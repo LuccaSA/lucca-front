@@ -1,6 +1,8 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { ALuSelectInputComponent } from '@lucca-front/ng/core-select';
+import { LuMultiSelectInputComponent } from '@lucca-front/ng/multi-select';
+import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 import { getStoryGenerator } from 'stories/helpers/stories';
+import { HiddenArgType } from '../../../helpers/common-arg-types';
 
 export type LegumeColor = 'green' | 'purple' | 'red' | 'orange' | 'white' | 'yellow' | 'brown';
 
@@ -10,16 +12,16 @@ export interface ILegume {
 	color: LegumeColor;
 }
 
-export interface LuSelectInputStoryComponent extends ALuSelectInputComponent<ILegume, ILegume> {
-	legumes: ILegume[];
-	clue: string;
+export type LuSelectInputStoryComponent = {
 	page: number;
+	legumes: ILegume[];
 	selectedLegume: ILegume | null;
 	selectedLegumes: ILegume[];
 	maxValuesShown: number;
 	legumeColor: (legume: ILegume) => LegumeColor;
 	colorNameByColor: Record<LegumeColor, string>;
-}
+} & LuSimpleSelectInputComponent<ILegume> &
+	LuMultiSelectInputComponent<ILegume>;
 
 export const allLegumes: ILegume[] = [
 	{ name: 'Artichaut', index: 1, color: 'green' },
@@ -67,10 +69,27 @@ export const colorNameByColor: Record<LegumeColor, string> = {
 
 export const generateStory = getStoryGenerator<LuSelectInputStoryComponent>({
 	argTypes: {
-		clearable: { control: false },
-		disabled: { control: false },
-		loading: { control: false },
-		placeholder: { control: false },
+		clearable: HiddenArgType,
+		clueChange: HiddenArgType,
+		colorNameByColor: HiddenArgType,
+		disabled: HiddenArgType,
+		grouping: HiddenArgType,
+		legumeColor: HiddenArgType,
+		legumes: HiddenArgType,
+		loading: HiddenArgType,
+		maxValuesShown: HiddenArgType,
+		nextPage: HiddenArgType,
+		optionComparer: HiddenArgType,
+		options: HiddenArgType,
+		optionTpl: HiddenArgType,
+		overlayConfig: HiddenArgType,
+		page: HiddenArgType,
+		placeholder: HiddenArgType,
+		previousPage: HiddenArgType,
+		selectedLegume: HiddenArgType,
+		selectedLegumes: HiddenArgType,
+		valuesTpl: HiddenArgType,
+		valueTpl: HiddenArgType,
 	},
 });
 
