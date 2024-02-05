@@ -31,28 +31,10 @@ $position: 'absolute', 'relative', 'static', 'fixed', 'sticky';
 $decoration: 'underline', 'line-through', 'none';
 $overflow: 'hidden', 'auto', 'visible', 'scroll';
 
-@mixin cssvars($name, $properties, $after: '') {
-	@each $key, $value in $properties {
-		--#{$name}#{if($key == '', '', '-')}#{$key}#{$after}: #{$value};
-	}
-}
-
-@mixin classes($name, $properties, $suffix: '!important', $prefix: '') {
-	@each $property in $properties {
-		@if $prefix == '' {
-			.u-#{transform.camelize($name)}#{if(string.slice($property, 1, 1) == '-', 'Minus', '')}#{transform.capitalize(transform.camelize($property))} {
-				#{$name}: #{transform.replace($property, '\\', '')} #{$suffix};
-			}
-		} @else {
-			.u-#{$prefix}#{transform.capitalize(transform.camelize($name))}#{if(string.slice($property, 1, 1) == '-', 'Minus', '')}#{transform.capitalize(transform.camelize($property))} {
-				#{$name}: #{transform.replace($property, '\\', '')} #{$suffix};
-			}
-		}
-	}
-}
+/* Tokens */
 
 @mixin spacing($boxModel, $boxDirection, $key, $value, $suffix: '!important') {
-	.u-#{transform.camelize($boxModel)}#{transform.capitalize($boxDirection)}#{transform.capitalize($key)} {
+	.pr-u-#{transform.camelize($boxModel)}#{transform.capitalize($boxDirection)}#{transform.capitalize($key)} {
 		#{$boxModel}#{if($boxDirection == '', '', '-')}#{$boxDirection}: $value #{$suffix};
 	}
 }
@@ -75,6 +57,56 @@ $overflow: 'hidden', 'auto', 'visible', 'scroll';
 	@each $gap in $gaps {
 		@each $key, $value in config.$spacings {
 			@include spacing($gap, $boxDirection: '', $key: $key, $value: $value);
+		}
+	}
+}
+
+/* Variables */
+
+@mixin cssvars($name, $properties, $after: '') {
+	@each $key, $value in $properties {
+		--#{$name}#{if($key == '', '', '-')}#{$key}#{$after}: #{$value};
+	}
+}
+
+@mixin classes($name, $properties, $suffix: '!important', $prefix: '') {
+	@each $property in $properties {
+		@if $prefix == '' {
+			.u-#{transform.camelize($name)}#{if(string.slice($property, 1, 1) == '-', 'Minus', '')}#{transform.capitalize(transform.camelize($property))} {
+				#{$name}: #{transform.replace($property, '\\', '')} #{$suffix};
+			}
+		} @else {
+			.u-#{$prefix}#{transform.capitalize(transform.camelize($name))}#{if(string.slice($property, 1, 1) == '-', 'Minus', '')}#{transform.capitalize(transform.camelize($property))} {
+				#{$name}: #{transform.replace($property, '\\', '')} #{$suffix};
+			}
+		}
+	}
+}
+
+@mixin spacingDeprecated($boxModel, $boxDirection, $key, $value, $suffix: '!important') {
+	.u-#{transform.camelize($boxModel)}#{transform.capitalize($boxDirection)}#{transform.capitalize($key)} {
+		#{$boxModel}#{if($boxDirection == '', '', '-')}#{$boxDirection}: $value #{$suffix};
+	}
+}
+
+@mixin spacingsDeprecated {
+	@each $boxModel in $boxModel {
+		@each $boxDirection in $boxDirection {
+			@each $key, $value in config.$spacingsDeprecated {
+				@if $boxModel != 'border' or $value == 0 {
+					@include spacingDeprecated($boxModel, $boxDirection, $key, $value);
+				}
+			}
+
+			@if $boxModel == 'margin' {
+				@include spacingDeprecated($boxModel, $boxDirection, $key: 'auto', $value: auto);
+			}
+		}
+	}
+
+	@each $gap in $gaps {
+		@each $key, $value in config.$spacingsDeprecated {
+			@include spacingDeprecated($gap, $boxDirection: '', $key: $key, $value: $value);
 		}
 	}
 }

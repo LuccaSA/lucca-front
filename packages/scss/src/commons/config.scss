@@ -315,6 +315,19 @@ $breakpoints: (
 
 $spacings: (
 	'0': 0,
+	XXXS: 0.25rem,
+	XXS: 0.375rem,
+	XS: 0.5rem,
+	S: 0.75rem,
+	M: 1rem,
+	L: 1.5rem,
+	XL: 2rem,
+	XXL: 3rem,
+	XXXL: 4rem,
+) !default;
+
+$spacingsDeprecated: (
+	'0': 0,
 	XXS: 0.25rem,
 	XS: 0.5rem,
 	S: 1rem,

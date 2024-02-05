@@ -104,6 +104,7 @@
 }
 
 @include core.spacings;
+@include core.spacingsDeprecated;
 @include core.sizes;
 @include core.borderRadius;
 @include core.palettes;

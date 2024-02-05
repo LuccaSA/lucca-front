@@ -3,8 +3,8 @@
 	--components-skeleton-gradient-step-two: var(--palettes-grey-500);
 }
 
-@mixin skeletonShapeSizing($spacings...) {
-	@each $spacing in $spacings {
+@mixin skeletonShapeSizing($spacingsDeprecated...) {
+	@each $spacing in $spacingsDeprecated {
 		&.mod-#{$spacing} {
 			--components-skeleton-shape-height: var(--spacings-#{$spacing});
 			--components-skeleton-shape-width: var(--spacings-#{$spacing});
