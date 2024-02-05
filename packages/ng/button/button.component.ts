@@ -1,4 +1,4 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, inject, Input, OnChanges } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, inject, Input, OnChanges, ViewEncapsulation } from '@angular/core';
 import { NgClazz, Palette } from '@lucca-front/ng/core';
 
 @Component({
@@ -9,6 +9,7 @@ import { NgClazz, Palette } from '@lucca-front/ng/core';
 	template: '<ng-content></ng-content>',
 	styleUrls: ['./button.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
+	encapsulation: ViewEncapsulation.None,
 	host: {
 		class: 'button',
 	},

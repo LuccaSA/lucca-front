@@ -1,14 +1,28 @@
-import { LuDialogComponent } from './dialog-component';
 import { TemplateRef } from '@angular/core';
 import { Observable } from 'rxjs';
-import { DialogPartial } from './types';
 import { ComponentType } from '@angular/cdk/overlay';
+import { DialogConfig } from '@angular/cdk/dialog';
 
-export interface LuDialogConfig<C extends LuDialogComponent> {
+export const dialogData = Symbol.for('luDialogData');
+export const dialogResult = Symbol.for('luDialogResult');
+
+export type LuDialogData<T> = {
+	[K in keyof T]: T[K] extends { [dialogData]: infer D } ? D : never;
+}[keyof T];
+
+export type LuDialogResult<C> = {
+	[K in keyof C]: C[K] extends { [dialogResult]: infer R } ? R : never;
+}[keyof C];
+
+interface BaseLuDialogConfig<C> {
+	component: ComponentType<C> | TemplateRef<C>;
+	data: LuDialogData<C>;
+
 	backdrop?: boolean;
 	dismissible?: boolean;
-	component: ComponentType<C> | TemplateRef<C>;
-	params?: DialogPartial<C>;
-	dialogData?: C['dialogData'];
+	ariaLabel?: string;
+	cdkConfigOverride?: DialogConfig<C>;
 	canClose?: (comp: C) => boolean | Observable<boolean>;
 }
+
+export type LuDialogConfig<T> = LuDialogData<T> extends never ? Omit<BaseLuDialogConfig<T>, 'data'> : BaseLuDialogConfig<T>;

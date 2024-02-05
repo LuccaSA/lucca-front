@@ -1,3 +1,3 @@
-export * from './dialog-component';
 export * from './dialog-ref';
-export * from './types';
+export { LuDialogResult, LuDialogData, LuDialogConfig } from './dialog-config';
+export * from './injectors';
