@@ -1,9 +1,30 @@
-@mixin icon {
-	.lucca-icon {
+@mixin icon($atRoot: 'without: rule') {
+	&:has(.link-text) {
 		text-decoration: none;
-		margin-left: var(--spacings-XXS);
-		font-size: var(--sizes-M-fontSize);
-		line-height: var(--sizes-XS-lineHeight);
+	}
+
+	@at-root ($atRoot) {
+		.link-text {
+			text-decoration: underline;
+		}
+
+		.link-icon {
+			white-space: nowrap;
+
+			&::before {
+				content: '\a0';
+			}
+		}
+
+		.lucca-icon {
+			text-decoration: none;
+			font-size: var(--sizes-M-fontSize);
+			line-height: var(--sizes-XS-lineHeight);
+		}
+
+		& > .lucca-icon {
+			margin-left: var(--spacings-XXS);
+		}
 	}
 }
 
