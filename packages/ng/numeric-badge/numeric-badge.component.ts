@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, Input, numberAttribute, OnChanges, SimpleChanges, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, Input, OnChanges, SimpleChanges, ViewEncapsulation } from '@angular/core';
 import { NgClazz, Palette } from '@lucca-front/ng/core';
 
 @Component({
@@ -16,11 +16,11 @@ import { NgClazz, Palette } from '@lucca-front/ng/core';
 export class NumericBadgeComponent implements OnChanges {
 	#ngClass = inject(NgClazz);
 
-	@Input({ required: true, transform: numberAttribute })
+	@Input({ required: true })
 	/**
-	 * The value to display, number only.
+	 * The value to display, number or string contains number only.
 	 */
-	value!: number;
+	value!: number | string;
 
 	@Input()
 	/**
