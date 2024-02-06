@@ -22,11 +22,11 @@ function getTemplate(args: MobileHeaderBasicStory): string {
 			<div class="mobileHeader-title-sub">Subtitle</div>
 		</div>
 		<div class="mobileHeader-actions">
-			<button type="button" class="actionIcon palette-primary" luTooltip="Action">
+			<button type="button" class="button mod-onlyIcon mod-text palette-primary" luTooltip="Action">
 				<span aria-hidden="true" class="lucca-icon icon-heart"></span>
 				<span class="u-mask">Action</span>
 			</button>
-			<button type="button" class="actionIcon palette-primary" luTooltip="Action">
+			<button type="button" class="button mod-onlyIcon mod-text palette-primary" luTooltip="Action">
 			  <span aria-hidden="true" class="lucca-icon icon-heart"></span>
 			  <span class="u-mask">Action</span>
 			</button>

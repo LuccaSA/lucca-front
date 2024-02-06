@@ -11,11 +11,11 @@ function getTemplate(args: PaginationCompactStory): string {
 	return `
 	<nav class="pagination mod-compact" role="navigation" aria-labelledby="pagination-count">
 		<div class="pagination-scrolling">
-			<button type="button" class="actionIcon mod-S" disabled>
+			<button type="button" class="button mod-onlyIcon mod-text mod-S" disabled>
 				<span aria-hidden="true" class="lucca-icon icon-arrowChevronLeft"></span>
 				<span class="u-mask">Précédent</span>
 			</button>
-			<button type="button" class="actionIcon mod-S">
+			<button type="button" class="button mod-onlyIcon mod-text mod-S">
 				<span aria-hidden="true" class="lucca-icon icon-arrowChevronRight"></span>
 				<span class="u-mask">Suivant</span>
 			</button>

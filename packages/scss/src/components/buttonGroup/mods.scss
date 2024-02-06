@@ -1,14 +1,15 @@
+@use '@lucca-front/scss/src/commons/utils/a11y';
+
 @mixin outlined {
 	background-color: var(--palettes-400, var(--palettes-grey-400));
 	box-shadow: 0 0 0 1px var(--palettes-400, var(--palettes-grey-400));
 
-	&:is([disabled], .is-disabled) {
+	&:is(.is-disabled, .disabled) {
 		box-shadow: 0 0 0 1px var(--palettes-grey-200);
 	}
 
 	.button {
-		&.mod-outline,
-		&.mod-outlined {
+		&:is(.mod-outline, .mod-outlined) {
 			box-shadow: none;
 
 			&:hover {
@@ -17,6 +18,10 @@
 
 			&:focus-within {
 				box-shadow: none;
+			}
+
+			&:focus-visible {
+				@include a11y.focusVisible($offset: 3px);
 			}
 
 			&:is([disabled], .is-disabled) {
@@ -28,7 +33,7 @@
 
 @mixin text {
 	.button {
-		&.mod-text, &.mod-link {
+		&:is(.mod-text, .mod-link) {
 			box-shadow: none;
 
 			&:hover {

@@ -7,9 +7,11 @@ export default {
 } as Meta;
 
 function getTemplate(args: ButtonStatesStory): string {
-	return `<button type="button" class="button is-loading">Button</button>
-<button type="button" class="button is-success">Button</button>
-<button type="button" class="button is-error">Button</button>`;
+	return `<div class="u-displayFlex u-gapXS u-alignItemsCenter">
+	<button type="button" class="button is-loading">Button</button>
+	<button type="button" class="button is-success">Button</button>
+	<button type="button" class="button is-error">Button</button>
+</div>`;
 }
 
 const Template: StoryFn<ButtonStatesStory> = (args) => ({

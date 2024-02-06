@@ -1,55 +1,40 @@
-@use '@lucca-front/icons/src/commons/utils/icon';
-@use '@lucca-front/scss/src/commons/utils/loading';
 @use '@lucca-front/scss/src/commons/config';
 @use '@lucca-front/scss/src/commons/core';
+
+@use '@lucca-front/icons/src/commons/utils/icon';
+@use '@lucca-front/scss/src/commons/utils/loading';
+@use '@lucca-front/scss/src/commons/utils/a11y';
+
 @use '@lucca-front/scss/src/components/numericBadge/exports' as numericBadge;
 
 @mixin disabled {
-	background-color: var(--commons-disabled-background);
-	color: var(--palettes-grey-500);
-	cursor: default;
+	--components-button-cursor: default;
+	--components-button-color: var(--palettes-grey-500);
+	--components-button-backgroundColor: var(--commons-disabled-background);
+	--components-button-pointerEvents: none;
 
 	.numericBadge {
 		@include numericBadge.disabled;
 	}
 }
 
-@mixin disabledOutlined {
-	background-color: var(--colors-white-color);
-	box-shadow: 0 0 0 1px var(--palettes-grey-400);
-	color: var(--palettes-grey-500);
-	cursor: default;
-}
-
-@mixin disabledText {
-	color: var(--palettes-grey-500);
-	background-color: transparent;
-	cursor: default;
-}
-
 @mixin loading {
-	opacity: var(--commons-disabled-opacity);
+	@include loading.spinner(var(--components-button-font-size));
 
-	&:not(.mod-more) {
-		@include loading.spinner(var(--components-button-font-size));
-
-		color: transparent !important;
-		pointer-events: none;
-		user-select: none;
-	}
+	--components-button-opacity: var(--commons-disabled-opacity);
+	--components-button-pointerEvents: none;
+	--components-button-color: transparent;
+	--components-button-userSelect: none;
 }
 
 @mixin loadingS {
-	&:not(.mod-more) {
-		@include loading.spinner(var(--sizes-S-fontSize));
-	}
+	@include loading.spinner(var(--sizes-S-fontSize));
 }
 
 @mixin state {
-	background-color: var(--palettes-700) !important;
-	color: transparent !important;
-	pointer-events: none;
-	user-select: none;
+	--components-button-color: transparent;
+	--components-button-pointerEvents: none;
+	--components-button-userSelect: none;
 
 	&::after {
 		color: var(--colors-white-color);
@@ -59,38 +44,24 @@
 		margin: auto;
 		position: absolute;
 	}
-
-	&:not([disabled], .is-disabled) {
-		&:hover {
-			background-color: var(--palettes-600);
-		}
-
-		&:active {
-			background-color: var(--palettes-800);
-		}
-	}
 }
 
 @mixin success {
 	@include core.cssvars('palettes', config.$success);
 
-	&:not(.mod-more) {
-		@include state;
+	@include state;
 
-		&::after {
-			@include icon.generate('sign_confirm');
-		}
+	&::after {
+		@include icon.generate('sign_confirm');
 	}
 }
 
 @mixin error {
 	@include core.cssvars('palettes', config.$error);
 
-	&:not(.mod-more) {
-		@include state;
+	@include state;
 
-		&::after {
-			@include icon.generate('sign_close');
-		}
+	&::after {
+		@include icon.generate('sign_close');
 	}
 }

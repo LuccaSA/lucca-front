@@ -12,6 +12,8 @@
 
 	@each $breakpoint, $value in config.$breakpoints {
 		&.mod-autoAtMediaMin#{$breakpoint} {
+			@include autoAt;
+
 			@include media.min($breakpoint) {
 				@include auto;
 			}

@@ -28,19 +28,23 @@ export const parameters = {
 		},
 	},
 	backgrounds: {
-		default: 'white',
+		default: 'Default',
 		values: [
 			{
-				name: 'white',
-				value: '#fff',
+				name: 'Raised',
+				value: '#ffffff',
 			},
 			{
-				name: 'light',
-				value: '#F3F5FC',
+				name: 'Default',
+				value: '#f3f6fc',
 			},
 			{
-				name: 'dark',
-				value: '#333333',
+				name: 'Sunken',
+				value: '#e7edf9',
+			},
+			{
+				name: 'Inverted',
+				value: '#0b1732',
 			},
 		],
 	},

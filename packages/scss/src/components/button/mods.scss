@@ -1,14 +1,15 @@
-@use '@lucca-front/icons/src/commons/utils/icon';
 @use '@lucca-front/icons/src/icon/exports' as icons;
-@use '@lucca-front/scss/src/components/numericBadge/exports' as numericBadge;
+@use '@lucca-front/icons/src/commons/utils/icon';
 @use '@lucca-front/scss/src/commons/utils/a11y';
+@use '@lucca-front/scss/src/components/numericBadge/exports' as numericBadge;
 
 @mixin S {
+	@include icons.S;
+
 	--components-button-font-size: var(--sizes-S-fontSize);
 	--components-button-line-height: var(--sizes-S-lineHeight);
 	--components-button-padding: 0.375rem 0.75rem;
 	--components-button-gap: 0.375rem;
-	@include icons.S;
 
 	.numericBadge {
 		@include numericBadge.S;
@@ -16,60 +17,15 @@
 }
 
 @mixin XS {
+	@include icons.XS;
+
 	--components-button-font-size: var(--sizes-XS-fontSize);
 	--components-button-line-height: var(--sizes-XS-lineHeight);
 	--components-button-padding: var(--spacings-XXS) var(--spacings-XS);
 	--components-button-gap: var(--spacings-XXS);
-	@include icons.XS;
 
 	.numericBadge {
 		@include numericBadge.XS;
-	}
-}
-
-@mixin text {
-	background-color: transparent;
-	color: var(--palettes-700, var(--palettes-grey-700));
-
-	&:not([disabled], .is-disabled) {
-		&:hover {
-			background-color: var(--palettes-100, var(--palettes-grey-100));
-			color: var(--palettes-700, var(--palettes-grey-700));
-		}
-
-		&:active {
-			background-color: var(--palettes-200, var(--palettes-grey-200));
-		}
-	}
-
-	&:focus-visible {
-		background-color: var(--palettes-100, var(--palettes-grey-100));
-	}
-}
-
-@mixin outlined {
-	&:not([disabled], .is-disabled) {
-		color: var(--palettes-700, var(--palettes-grey-700));
-		box-shadow: 0 0 0 var(--commons-divider-width) var(--palettes-400, var(--palettes-grey-400));
-		background-color: var(--colors-white-color);
-
-		&:hover {
-			background-color: var(--palettes-100, var(--palettes-grey-100));
-		}
-
-		&:active {
-			background-color: var(--palettes-200, var(--palettes-grey-200));
-		}
-
-		&:focus-visible {
-			@include a11y.focusVisible($offset: 3px);
-		}
-	}
-
-	.button-counter {
-		// deprecated
-		background-color: var(--palettes-300, var(--palettes-grey-300));
-		color: var(--palettes-800, var(--palettes-grey-800));
 	}
 }
 
@@ -86,7 +42,7 @@
 }
 
 @mixin block {
-	width: 100%;
+	--components-button-width: 100%;
 }
 
 @mixin withIcon {
@@ -101,27 +57,82 @@
 	--components-button-padding: var(--spacings-XXS) var(--spacings-XS);
 }
 
-@mixin invert {
-	color: var(--colors-white-color);
+@mixin textDisabled {
+	--components-button-backgroundColor: transparent;
+	--components-button-color: var(--palettes-grey-500);
+}
 
-	&:not([disabled], .is-disabled) {
-		&:hover {
-			background-color: rgba(255, 255, 255, 0.2);
-		}
+@mixin text {
+	--components-button-backgroundColor: transparent;
+	--components-button-color: var(--palettes-700, var(--palettes-grey-700));
 
-		&:focus-visible {
-			background-color: rgba(255, 255, 255, 0.2);
-			color: var(--colors-white-color);
-		}
+	&:hover,
+	&:focus-visible {
+		--components-button-color: var(--palettes-700, var(--palettes-grey-700));
+		--components-button-backgroundColor: var(--palettes-100, var(--palettes-grey-100));
+	}
+
+	&:active {
+		--components-button-backgroundColor: var(--palettes-200, var(--palettes-grey-200));
+	}
+
+	&:disabled {
+		@include textDisabled;
+	}
+}
+
+@mixin outlinedDisabled {
+	--components-button-backgroundColor: var(--colors-white-color);
+	--components-button-boxShadow: 0 0 0 1px var(--palettes-grey-400);
+	--components-button-color: var(--palettes-grey-500);
+}
+
+@mixin outlined {
+	--components-button-backgroundColor: var(--colors-white-color);
+	--components-button-color: var(--palettes-700, var(--palettes-grey-700));
+	--components-button-boxShadow: 0 0 0 var(--commons-divider-width) var(--palettes-400, var(--palettes-grey-400));
+
+	// deprecated
+	.button-counter {
+		color: var(--palettes-800, var(--palettes-grey-800));
+		background-color: var(--palettes-300, var(--palettes-grey-300));
+	}
+
+	&:hover {
+		--components-button-color: var(--palettes-700, var(--palettes-grey-700));
+		--components-button-backgroundColor: var(--palettes-100, var(--palettes-grey-100));
+	}
+
+	&:active {
+		--components-button-backgroundColor: var(--palettes-200, var(--palettes-grey-200));
+	}
+
+	&:focus-visible {
+		@include a11y.focusVisible($offset: 3px);
+	}
+
+	&:disabled {
+		@include outlinedDisabled;
+	}
+}
+
+@mixin inverted {
+	--components-button-color: var(--colors-white-color);
+
+	&:hover,
+	&:focus-visible {
+		--components-button-color: var(--colors-white-color);
+		--components-button-backgroundColor: var(--palettes-800, var(--palettes-grey-800));
+	}
+
+	&:active {
+		--components-button-backgroundColor: var(--palettes-700, var(--palettes-grey-700));
 	}
 }
 
 @mixin more {
-	padding: 0 !important;
-	text-align: center;
-	min-width: 2rem;
-	border-top-right-radius: var(--commons-borderRadius-M);
-	border-bottom-right-radius: var(--commons-borderRadius-M);
+	--components-button-minWidth: 2rem;
+	--components-button-padding: 0;
 
 	&::before {
 		@include icon.generate('arrow_chevron_bottom');
@@ -132,50 +143,94 @@
 }
 
 @mixin moreS {
-	min-width: 1.75rem;
+	--components-button-minWidth: 1.75rem;
 }
 
-@mixin counter($atRoot: 'without: rule') {
+@mixin moreXS {
+	--components-button-minWidth: 1.5rem;
+}
+
+@mixin delete {
+	&:hover {
+		--components-button-color: var(--palettes-error-700);
+		--components-button-backgroundColor: var(--palettes-error-100);
+	}
+
+	&:active {
+		--components-button-color: var(--palettes-error-700);
+		--components-button-backgroundColor: var(--palettes-error-200);
+	}
+}
+
+@mixin deleteText {
+	&:hover,
+	&:focus-visible {
+		--components-button-color: var(--palettes-error-700);
+		--components-button-backgroundColor: var(--palettes-error-100);
+	}
+
+	&:active {
+		--components-button-color: var(--palettes-error-700);
+		--components-button-backgroundColor: var(--palettes-error-200);
+	}
+}
+
+@mixin deleteOutlined {
+	&:hover {
+		--components-button-boxShadow: 0 0 0 var(--commons-divider-width) var(--palettes-error-400), var(--commons-boxShadow-XS);
+		--components-button-color: var(--palettes-error-700);
+		--components-button-backgroundColor: var(--palettes-error-100);
+	}
+
+	&:focus-visible {
+		--components-button-boxShadow: 0 0 0 var(--commons-divider-width) var(--palettes-error-400), var(--commons-boxShadow-XS);
+		--components-button-color: var(--palettes-error-700);
+	}
+
+	&:active {
+		--components-button-color: var(--palettes-error-700);
+		--components-button-backgroundColor: var(--palettes-error-200);
+	}
+}
+
+// deprecated
+@mixin counter {
 	--components-button-padding: var(--spacings-XS) calc(var(--spacings-XS) + var(--spacings-XXS)) var(--spacings-XS) var(--spacings-S);
 
-	@at-root ($atRoot) {
-		.button-counter {
-			// deprecated
-			background-color: var(--palettes-600, var(--palettes-primary-600));
-			border-radius: 1rem;
-			display: flex;
-			font-size: var(--sizes-XS-fontSize);
-			height: 1.5rem;
-			min-width: 1.5rem;
-			align-items: center;
-			justify-content: center;
-			transition: background-color var(--commons-animations-durations-fast) ease;
-		}
+	.button-counter {
+		background-color: var(--palettes-600, var(--palettes-primary-600));
+		border-radius: 1rem;
+		display: flex;
+		font-size: var(--sizes-XS-fontSize);
+		height: 1.5rem;
+		min-width: 1.5rem;
+		align-items: center;
+		justify-content: center;
+		transition: background-color var(--commons-animations-durations-fast) ease;
+	}
 
-		&:hover {
-			.button-counter {
-				// deprecated
-				background-color: var(--palettes-500, var(--palettes-primary-500));
-			}
+	&:hover {
+		.button-counter {
+			--components-button-backgroundColor: var(--palettes-500, var(--palettes-primary-500));
 		}
 	}
 }
 
+// deprecated
 @mixin counterS {
 	--components-button-padding: 0.375rem calc(var(--spacings-XS) + var(--spacings-XXS)) 0.375rem var(--spacings-S);
 
 	.button-counter {
-		// deprecated
 		height: 1.25rem;
 		min-width: 1.25rem;
 	}
 }
 
+// deprecated
 @mixin counterXS {
 	--components-button-padding: var(--spacings-XXS) var(--spacings-XS) var(--spacings-XXS) calc(var(--spacings-XS) + var(--spacings-XXS));
 
 	.button-counter {
-		// deprecated
 		height: 1rem;
 		min-width: 1rem;
 	}

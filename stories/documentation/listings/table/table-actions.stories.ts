@@ -8,8 +8,7 @@ export default {
 } as Meta;
 
 function getTemplate(args: TableActionsStory): string {
-	return `
-	<table class="table">
+	return `<table class="table">
 	<thead class="table-head">
 		<tr class="table-head-row">
 			<th class="table-head-row-cell">Label</th>
@@ -24,10 +23,10 @@ function getTemplate(args: TableActionsStory): string {
 			<td class="table-body-row-cell">Contenu</td>
 			<td class="table-body-row-cell">Contenu</td>
 			<td class="table-body-row-cell mod-actions">
-				<button type="button" class="actionIcon mod-S">
+				<button type="button" class="button mod-text mod-onlyIcon mod-S">
 					<span aria-hidden="true" class="lucca-icon icon-officePen"></span>
 				</button>
-				<button type="button" class="actionIcon mod-S">
+				<button type="button" class="button mod-text mod-onlyIcon mod-S">
 					<span aria-hidden="true" class="lucca-icon icon-trashDelete"></span>
 				</button>
 			</td>
@@ -37,8 +36,8 @@ function getTemplate(args: TableActionsStory): string {
 			<td class="table-body-row-cell">Contenu</td>
 			<td class="table-body-row-cell">Contenu</td>
 			<td class="table-body-row-cell mod-actions">
-				<button type="button" class="actionIcon mod-S"><span aria-hidden="true" class="lucca-icon icon-officePen"></span></button>
-				<button type="button" class="actionIcon mod-S"><span aria-hidden="true" class="lucca-icon icon-trashDelete"></span></button>
+				<button type="button" class="button mod-text mod-onlyIcon mod-S"><span aria-hidden="true" class="lucca-icon icon-officePen"></span></button>
+				<button type="button" class="button mod-text mod-onlyIcon mod-S"><span aria-hidden="true" class="lucca-icon icon-trashDelete"></span></button>
 			</td>
 		</tr>
 		<tr class="table-body-row">
@@ -46,13 +45,12 @@ function getTemplate(args: TableActionsStory): string {
 			<td class="table-body-row-cell">Contenu</td>
 			<td class="table-body-row-cell">Contenu</td>
 			<td class="table-body-row-cell mod-actions">
-				<button type="button" class="actionIcon mod-S"><span aria-hidden="true" class="lucca-icon icon-officePen"></span></button>
-				<button type="button" class="actionIcon mod-S"><span aria-hidden="true" class="lucca-icon icon-trashDelete"></span></button>
+				<button type="button" class="button mod-text mod-onlyIcon mod-S"><span aria-hidden="true" class="lucca-icon icon-officePen"></span></button>
+				<button type="button" class="button mod-text mod-onlyIcon mod-S"><span aria-hidden="true" class="lucca-icon icon-trashDelete"></span></button>
 			</td>
 		</tr>
 	</tbody>
-</table>
-	`;
+</table>`;
 }
 
 const Template: StoryFn<TableActionsStory> = (args) => ({

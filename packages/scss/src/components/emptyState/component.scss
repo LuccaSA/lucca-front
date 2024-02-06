@@ -1,6 +1,7 @@
 @mixin component($atRoot: 'without: rule') {
 	display: flex;
-	height: 100%;
+	flex-direction: column;
+	flex-grow: 1;
 	padding: var(--spacings-S);
 
 	@at-root ($atRoot) {

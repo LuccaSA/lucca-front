@@ -24,15 +24,15 @@ function getTemplate(args: PageHeaderBasicStory): string {
 			<div class="pageHeader-content-title">
 				<h1 class="u-margin0">H1. Page title</h1>
 				<div>
-					<button type="button" class="actionIcon" luTooltip="Modifier">
+					<button type="button" class="button mod-onlyIcon mod-text" luTooltip="Modifier">
 						<span aria-hidden="true" class="lucca-icon icon-officePen"></span>
 						<span class="u-mask">Modifier</span>
 					</button>
-					<button type="button" class="actionIcon" luTooltip="Copier">
+					<button type="button" class="button mod-onlyIcon mod-text" luTooltip="Copier">
 						<span aria-hidden="true" class="lucca-icon icon-fileCopy"></span>
 						<span class="u-mask">Copier</span>
 					</button>
-					<button type="button" class="actionIcon" luTooltip="Supprimer">
+					<button type="button" class="button mod-onlyIcon mod-text" luTooltip="Supprimer">
 						<span aria-hidden="true" class="lucca-icon icon-trashDelete"></span>
 						<span class="u-mask">Supprimer</span>
 					</button>
@@ -45,7 +45,7 @@ function getTemplate(args: PageHeaderBasicStory): string {
 				</label>
 				<button type="button" class="button">Button</button>
 				<button type="button" class="button mod-outline">Button</button>
-				<button type="button" class="actionIcon">
+				<button type="button" class="button mod-onlyIcon mod-text">
 					<span aria-hidden="true" class="lucca-icon icon-menuDots"></span>
 					<span class="u-mask">voir plus</span>
 				</button>
