@@ -48,7 +48,7 @@ function getTemplate(args: FilesErrorStory): string {
 	`;
 }
 
-const Template: StoryFn<FilesErrorStory> = (args: FilesErrorStory) => ({
+const Template: StoryFn<FilesErrorStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [

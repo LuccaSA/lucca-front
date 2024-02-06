@@ -47,7 +47,7 @@ function getTemplate(args: ButtonGroupStory): string {
 </ul>`;
 }
 
-const Template: StoryFn<ButtonGroupStory> = (args: ButtonGroupStory) => ({
+const Template: StoryFn<ButtonGroupStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 });

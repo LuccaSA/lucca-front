@@ -1,12 +1,10 @@
 import { Meta, StoryFn } from '@storybook/angular';
 
-interface TextfieldSearchClearStory {
-}
+interface TextfieldSearchClearStory {}
 
 export default {
 	title: 'Documentation/Forms/Fields/TextField/HTML&CSS',
-	argTypes: {
-	},
+	argTypes: {},
 } as Meta;
 
 function getTemplate(args: TextfieldSearchClearStory): string {
@@ -27,7 +25,7 @@ function getTemplate(args: TextfieldSearchClearStory): string {
 </div>`;
 }
 
-const Template: StoryFn<TextfieldSearchClearStory> = (args: TextfieldSearchClearStory) => ({
+const Template: StoryFn<TextfieldSearchClearStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 });

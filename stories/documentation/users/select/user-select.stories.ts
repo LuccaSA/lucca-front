@@ -22,7 +22,7 @@ export default {
 	decorators: [applicationConfig({ providers: [provideAnimations(), provideHttpClient()] })],
 } as Meta;
 
-const template: StoryFn<UserSelectStory> = (args: UserSelectStory) => ({
+const template: StoryFn<UserSelectStory> = (args) => ({
 	props: args,
 });
 

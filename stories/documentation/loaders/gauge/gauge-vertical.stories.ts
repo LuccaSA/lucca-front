@@ -34,7 +34,7 @@ function getTemplate(args: GaugeVerticalStory): string {
 	`;
 }
 
-const Template: StoryFn<GaugeVerticalStory> = (args: GaugeVerticalStory) => ({
+const Template: StoryFn<GaugeVerticalStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 });

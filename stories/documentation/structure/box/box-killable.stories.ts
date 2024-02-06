@@ -31,7 +31,7 @@ function getTemplate(args: BoxKillableStory): string {
 	`;
 }
 
-const Template: StoryFn<BoxKillableStory> = (args: BoxKillableStory) => ({
+const Template: StoryFn<BoxKillableStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [

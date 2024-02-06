@@ -121,7 +121,7 @@ function getTemplate(args: NotchBoxAdvancedStory): string {
 	`;
 }
 
-const Template: StoryFn<NotchBoxAdvancedStory> = (args: NotchBoxAdvancedStory) => ({
+const Template: StoryFn<NotchBoxAdvancedStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [
@@ -133,4 +133,15 @@ const Template: StoryFn<NotchBoxAdvancedStory> = (args: NotchBoxAdvancedStory) =
 });
 
 export const Advanced = Template.bind({});
-Advanced.args = { direction: 'mod-notchTop', notchPosition: 50, notchWidth: 56, notchHeight: 24, notchInnerRadius: 18, notchOuterRadius: 8, badgeWidth: 48, badgeHeight: 48, badgeRadius: 14, badgeOffset: 17 };
+Advanced.args = {
+	direction: 'mod-notchTop',
+	notchPosition: 50,
+	notchWidth: 56,
+	notchHeight: 24,
+	notchInnerRadius: 18,
+	notchOuterRadius: 8,
+	badgeWidth: 48,
+	badgeHeight: 48,
+	badgeRadius: 14,
+	badgeOffset: 17,
+};

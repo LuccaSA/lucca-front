@@ -19,7 +19,7 @@ export default {
 	decorators: [applicationConfig({ providers: [provideAnimations()] })],
 } as Meta;
 
-const Template: StoryFn<DropdownComponentStories> = (args: DropdownComponentStories) => ({
+const Template: StoryFn<DropdownComponentStories> = (args) => ({
 	props: args,
 });
 

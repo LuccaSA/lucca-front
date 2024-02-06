@@ -37,7 +37,7 @@ function getTemplate(args: LinkBasicStory): string {
 `;
 }
 
-const Template: StoryFn<LinkBasicStory> = (args: LinkBasicStory) => ({
+const Template: StoryFn<LinkBasicStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [

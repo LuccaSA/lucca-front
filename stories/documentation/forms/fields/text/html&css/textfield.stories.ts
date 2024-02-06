@@ -1,12 +1,10 @@
 import { Meta, StoryFn } from '@storybook/angular';
 
-interface TextfieldBasicStory {
-}
+interface TextfieldBasicStory {}
 
 export default {
 	title: 'Documentation/Forms/Fields/TextField/HTML&CSS',
-	argTypes: {
-	},
+	argTypes: {},
 } as Meta;
 
 function getTemplate(args: TextfieldBasicStory): string {
@@ -21,10 +19,10 @@ function getTemplate(args: TextfieldBasicStory): string {
 </div>`;
 }
 
-const Template: StoryFn<TextfieldBasicStory> = (args: TextfieldBasicStory) => ({
+const Template: StoryFn<TextfieldBasicStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
 export const Basic = Template.bind({});
-Basic.args = { };
+Basic.args = {};

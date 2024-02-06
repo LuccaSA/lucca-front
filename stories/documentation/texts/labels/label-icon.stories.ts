@@ -11,7 +11,7 @@ function getTemplate(args: LabelIconStory): string {
 	return `<span class="label"><span aria-hidden="true" class="label-icon lucca-icon icon-signInfo"></span>Label</span>`;
 }
 
-const Template: StoryFn<LabelIconStory> = (args: LabelIconStory) => ({
+const Template: StoryFn<LabelIconStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 });

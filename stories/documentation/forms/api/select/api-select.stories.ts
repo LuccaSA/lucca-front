@@ -36,7 +36,7 @@ export default {
 	decorators: [applicationConfig({ providers: [provideAnimations(), provideHttpClient()] })],
 } as Meta;
 
-const Template: StoryFn<ApiSelectStory> = (args: ApiSelectStory) => ({
+const Template: StoryFn<ApiSelectStory> = (args) => ({
 	props: args,
 });
 

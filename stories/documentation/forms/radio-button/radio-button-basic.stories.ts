@@ -43,7 +43,7 @@ function getTemplate(args: RadiosButtonsBasicStory): string {
 	`;
 }
 
-const Template: StoryFn<RadiosButtonsBasicStory> = (args: RadiosButtonsBasicStory) => ({
+const Template: StoryFn<RadiosButtonsBasicStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 });

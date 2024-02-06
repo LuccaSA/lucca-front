@@ -91,7 +91,7 @@ function getTemplate(args: PageHeaderMenuStory): string {
 	`;
 }
 
-const Template: StoryFn<PageHeaderMenuStory> = (args: PageHeaderMenuStory) => ({
+const Template: StoryFn<PageHeaderMenuStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 });

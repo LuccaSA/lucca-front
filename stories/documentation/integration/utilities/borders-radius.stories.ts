@@ -21,7 +21,7 @@ function getTemplate(args: BorderRadiusStory): string {
 	`;
 }
 
-const Template: StoryFn<BorderRadiusStory> = (args: BorderRadiusStory) => ({
+const Template: StoryFn<BorderRadiusStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [

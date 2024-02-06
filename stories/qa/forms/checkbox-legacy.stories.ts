@@ -1,22 +1,23 @@
 import { Component } from '@angular/core';
-import { Story, Meta, moduleMetadata } from '@storybook/angular';
+import { Meta, StoryFn, moduleMetadata } from '@storybook/angular';
 
 @Component({
 	standalone: true,
 	selector: 'forms-checkbox-legacy-stories',
-	templateUrl: './checkbox-legacy.stories.html'
-}) class CheckboxLegacyStory {}
+	templateUrl: './checkbox-legacy.stories.html',
+})
+class CheckboxLegacyStory {}
 
 export default {
-  title: 'QA/Forms/Checkbox Legacy',
-  component: CheckboxLegacyStory,
+	title: 'QA/Forms/Checkbox Legacy',
+	component: CheckboxLegacyStory,
 	decorators: [
 		moduleMetadata({
-			entryComponents: [CheckboxLegacyStory]
-		})
-	]
+			entryComponents: [CheckboxLegacyStory],
+		}),
+	],
 } as Meta;
 
-const template: Story<CheckboxLegacyStory> = () => ({});
+const template: StoryFn<CheckboxLegacyStory> = () => ({});
 
 export const basic = template.bind({});
