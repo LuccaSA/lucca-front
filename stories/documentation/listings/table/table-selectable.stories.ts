@@ -13,10 +13,11 @@ function getTemplate(args: TableSelectableStory): string {
 	  <thead class="table-head">
 	    <tr class="table-head-row mod-selectable">
 	      <th class="table-head-row-cell">
-					<label class="checkbox">
-						<input class="checkbox-input" type="checkbox" />
-						<span class="checkbox-label"></span>
-					</label>
+					<span class="checkboxField">
+						<input type="checkbox" class="checkboxField-input" id="CBall" />
+						<span class="checkboxField-icon" aria-hidden="true"><span class="checkboxField-icon-check"></span></span>
+					</span>
+					<label class="u-mask" for="CBall">Label</label>
 				</th>
 	      <th class="table-head-row-cell">Label</th>
 	      <th class="table-head-row-cell">Label</th>
@@ -26,10 +27,11 @@ function getTemplate(args: TableSelectableStory): string {
 	  <tbody class="table-body">
 	    <tr class="table-body-row mod-selectable">
 	      <td class="table-body-row-cell">
-					<label class="checkbox">
-						<input class="checkbox-input" type="checkbox" />
-						<span class="checkbox-label"></span>
-					</label>
+					<span class="checkboxField">
+						<input type="checkbox" class="checkboxField-input" id="CB1" />
+						<span class="checkboxField-icon" aria-hidden="true"><span class="checkboxField-icon-check"></span></span>
+					</span>
+					<label class="u-mask" for="CB1">Label</label>
 				</td>
 	      <td class="table-body-row-cell">Contenu</td>
 	      <td class="table-body-row-cell">Contenu</td>
@@ -37,10 +39,11 @@ function getTemplate(args: TableSelectableStory): string {
 	    </tr>
 	    <tr class="table-body-row mod-selectable">
 	      <td class="table-body-row-cell">
-					<label class="checkbox">
-						<input class="checkbox-input" type="checkbox" />
-						<span class="checkbox-label"></span>
-					</label>
+					<span class="checkboxField">
+						<input type="checkbox" class="checkboxField-input" id="CB2" />
+						<span class="checkboxField-icon" aria-hidden="true"><span class="checkboxField-icon-check"></span></span>
+					</span>
+					<label class="u-mask" for="CB2">Label</label>
 				</td>
 	      <td class="table-body-row-cell">Contenu</td>
 	      <td class="table-body-row-cell">Contenu</td>
