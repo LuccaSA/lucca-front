@@ -22,12 +22,12 @@ describe('lu-api-select', () => {
 			<span class="textfield-label">Api V3 Select</span>
 		</label>
 
-		<label class="textfield u-marginTopM">
+		<label class="textfield pr-u-marginTopL">
 			<lu-api-select class="textfield-input" standard="v4" [api]="apiV4" sort="job.name,level.position"> </lu-api-select>
 			<span class="textfield-label">Api V4 Select</span>
 		</label>
 
-		<label class="textfield u-marginTopM">
+		<label class="textfield pr-u-marginTopL">
 			<lu-api-select class="textfield-input" [disabled]="true" standard="v4" [api]="apiV4" sort="job.name,level.position"> </lu-api-select>
 			<span class="textfield-label">Api V4 Select</span>
 		</label>`;

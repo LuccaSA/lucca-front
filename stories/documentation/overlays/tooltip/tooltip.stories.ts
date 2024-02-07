@@ -10,7 +10,7 @@ import { Meta, StoryFn, applicationConfig } from '@storybook/angular';
 	imports: [LuTooltipModule],
 	template: `<button
 		type="button"
-		class="button u-marginL"
+		class="button pr-u-marginXL"
 		luTooltip="so you can see me"
 		[luTooltipEnterDelay]="luTooltipEnterDelay"
 		[luTooltipLeaveDelay]="luTooltipLeaveDelay"

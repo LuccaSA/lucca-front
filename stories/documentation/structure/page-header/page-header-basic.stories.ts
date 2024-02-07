@@ -22,7 +22,7 @@ function getTemplate(args: PageHeaderBasicStory): string {
 	<header class="pageHeader ${sticky}">
 		<div class="pageHeader-content">
 			<div class="pageHeader-content-title">
-				<h1 class="u-margin0">H1. Page title</h1>
+				<h1 class="pr-u-margin0">H1. Page title</h1>
 				<div>
 					<button type="button" class="actionIcon" luTooltip="Modifier">
 						<span aria-hidden="true" class="lucca-icon icon-officePen"></span>
@@ -52,8 +52,8 @@ function getTemplate(args: PageHeaderBasicStory): string {
 			</div>
 		</div>
 		<section class="pageHeader-description">
-			<p class="u-marginBottom0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac justo scelerisque, blandit nibh quis, imperdiet justo.
-				Nullam condimentum nulla et neque ultricies bibendum <a target="_blank">Lien<span aria-hidden="true" class="lucca-icon icon-arrowExternal mod-XS u-marginLeftXXS"></span></a>.
+			<p class="pr-u-marginBottom0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac justo scelerisque, blandit nibh quis, imperdiet justo.
+				Nullam condimentum nulla et neque ultricies bibendum <a target="_blank">Lien<span aria-hidden="true" class="lucca-icon icon-arrowExternal mod-XS pr-u-marginLeftXXXS"></span></a>.
 			</p>
 		</section>
 	</header>

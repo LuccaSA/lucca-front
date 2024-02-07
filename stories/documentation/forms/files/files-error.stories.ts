@@ -15,9 +15,9 @@ function getTemplate(args: FilesErrorStory): string {
 			<span aria-hidden="true" class="file-icon lucca-icon icon-signSuccess u-textSuccess"></span>
 			<span aria-hidden="true" class="file-icon lucca-icon icon-signError u-textError"></span>
 			<span class="file-titleName">
-				<span class="file-title u-marginBottom0">File not supported</span>
+				<span class="file-title pr-u-marginBottom0">File not supported</span>
 				<span class="file-name">filename.xls</span>
-				<span class="file-formats u-marginTopXS">Supported file formats: .xls, .xlsx .csv</span>
+				<span class="file-formats pr-u-marginTopXS">Supported file formats: .xls, .xlsx .csv</span>
 			</span>
 			<span class="file-or">It’s the wrong file?</span>
 			<span class="file-button button mod-outlined">Select another file</span>
@@ -34,7 +34,7 @@ function getTemplate(args: FilesErrorStory): string {
 			<span aria-hidden="true" class="file-icon lucca-icon icon-signSuccess u-textSuccess"></span>
 			<span aria-hidden="true" class="file-icon lucca-icon icon-signError u-textError"></span>
 			<span class="file-titleName">
-				<span class="file-title u-marginBottom0">File not supported</span>
+				<span class="file-title pr-u-marginBottom0">File not supported</span>
 				<span class="file-formats">Supported file formats: .xls, .xlsx .csv</span>
 				<span class="file-name">filename.xls</span>
 			</span>

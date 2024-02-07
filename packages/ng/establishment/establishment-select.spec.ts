@@ -46,7 +46,7 @@ mockLegalUnit.getAll = jest.fn(() => of([]));
 mockLegalUnit.count = jest.fn(() => of(0));
 
 describe('establishment select', () => {
-	const testingStoryTemplate = `<label class="textfield mod-inline u-marginRightS">
+	const testingStoryTemplate = `<label class="textfield mod-inline pr-u-marginRightM">
 	<lu-establishment-select class="textfield-input" placeholder="Select an establishment" data-testid="lu-select"></lu-establishment-select>
 	<span class="textfield-label">Establishment Select</span>
 </label>

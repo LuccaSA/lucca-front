@@ -44,7 +44,7 @@ const template: StoryFn<UserHomonymsStory> = (args: UserHomonymsStory) => ({
 const code = `
 /* Afin de créer une sélection d'utilisateur custom avec gestion des homonymes */
 /* Ajouter un lu-select ainsi qu'un lu-option-picker-advanced */
-<label class="textfield mod-block u-marginTopL">
+<label class="textfield mod-block pr-u-marginTopXL">
   <lu-select class="textfield-input">
     <span *luDisplayer="let user">{{ user | luUserDisplay }}</span>
 
