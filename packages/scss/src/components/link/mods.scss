@@ -1,7 +1,7 @@
 @mixin icon {
 	.lucca-icon {
 		text-decoration: none;
-		margin-left: var(--spacings-XXS);
+		margin-left: var(--pr-t-spacings-XXXS);
 		font-size: var(--sizes-M-fontSize);
 		line-height: var(--sizes-XS-lineHeight);
 	}

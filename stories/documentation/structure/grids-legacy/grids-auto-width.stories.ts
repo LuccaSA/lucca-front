@@ -35,8 +35,8 @@ const Template: StoryFn<GridsLegacyAutoWidthStory> = (args: GridsLegacyAutoWidth
 		`
 		.grid-demo {
 			background-color: var(--palettes-grey-200);
-			margin-bottom: var(--spacings-S);
-			padding: var(--spacings-S);
+			margin-bottom: var(--pr-t-spacings-M);
+			padding: var(--pr-t-spacings-M);
 			border-radius: var(--commons-borderRadius-full);
 		}`,
 	],

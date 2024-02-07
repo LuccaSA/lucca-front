@@ -75,7 +75,7 @@
 	&::before,
 	&::after {
 		content: '' !important;
-		right: var(--spacings-XS) !important;
+		right: var(--pr-t-spacings-XS) !important;
 		bottom: 0.7rem !important;
 		z-index: 2 !important;
 		left: inherit !important;
@@ -86,7 +86,7 @@
 	.textfield-input,
 	.radiosfield-input,
 	.checkboxesfield-input {
-		padding-right: var(--spacings-L);
+		padding-right: var(--pr-t-spacings-XL);
 	}
 }
 
@@ -142,7 +142,7 @@
 	.textfield-input,
 	.radiosfield-input,
 	.checkboxesfield-input {
-		padding-right: var(--spacings-L);
+		padding-right: var(--pr-t-spacings-XL);
 	}
 }
 

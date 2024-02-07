@@ -30,15 +30,15 @@ import { Meta, StoryFn } from '@storybook/angular';
 	styles: [
 		`
 			#navSide {
-				margin-top: var(--spacings-XS);
+				margin-top: var(--pr-t-spacings-XS);
 			}
 
 			#main-content {
-				margin-top: var(--spacings-XS);
+				margin-top: var(--pr-t-spacings-XS);
 			}
 
 			.link {
-				margin-right: var(--spacings-XS);
+				margin-right: var(--pr-t-spacings-XS);
 			}
 		`,
 	],

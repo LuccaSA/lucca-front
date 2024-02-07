@@ -26,7 +26,7 @@ const Template: Story<GridsSpanStory> = (args: GridsSpanStory) => ({
 		`
 		.demo {
 			background-color: #F3F5FC;
-			padding: var(--spacings-S);
+			padding: var(--pr-t-spacings-M);
 			border-radius: 1rem;
 			text-align: center;
 			height: 100%;
@@ -36,7 +36,7 @@ const Template: Story<GridsSpanStory> = (args: GridsSpanStory) => ({
 		}
 
 		.grid + .grid {
-			margin-top: var(--spacings-L);
+			margin-top: var(--pr-t-spacings-XL);
 		}
 		`,
 	],

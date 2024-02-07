@@ -19,7 +19,7 @@
 	@at-root ($atRoot) {
 		.multipleSelect-displayer {
 			display: flex;
-			gap: var(--spacings-XXS);
+			gap: var(--pr-t-spacings-XXXS);
 			flex-wrap: wrap;
 			flex: 1;
 		}
@@ -57,7 +57,7 @@
 		}
 
 		.multipleSelect-clear {
-			margin-bottom: var(--spacings-XXS);
+			margin-bottom: var(--pr-t-spacings-XXXS);
 		}
 
 		.multipleSelect-arrow {

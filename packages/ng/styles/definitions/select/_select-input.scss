@@ -4,17 +4,17 @@
 
 @mixin selectInputStyle {
 	:host {
-		--components-select-input-padding-horizontal: var(--spacings-XS);
-		--components-select-input-padding-vertical: var(--spacings-XS);
+		--components-select-input-padding-horizontal: var(--pr-t-spacings-XS);
+		--components-select-input-padding-vertical: var(--pr-t-spacings-XS);
 		--components-select-framed-color: var(--palettes-grey-500);
 		--components-select-framed-color50: var(--palettes-grey-50);
 		--components-select-framed-see-through: var(--palettes-grey-50);
 		--components-select-framed-text: var(--palettes-grey-800);
 		--components-select-framed-placeholder: #cccccc;
-		--components-select-framed-side-padding: var(--spacings-S);
-		--components-select-framed-top-padding: var(--spacings-L);
-		--components-select-framed-bottom-padding: var(--spacings-S);
-		--components-select-framed-label-top-offset: var(--spacings-XS);
+		--components-select-framed-side-padding: var(--pr-t-spacings-M);
+		--components-select-framed-top-padding: var(--pr-t-spacings-XL);
+		--components-select-framed-bottom-padding: var(--pr-t-spacings-M);
+		--components-select-framed-label-top-offset: var(--pr-t-spacings-XS);
 
 		cursor: pointer;
 		outline: none;
@@ -70,27 +70,27 @@
 
 	.lu-select-suffix {
 		position: absolute;
-		bottom: 0.75rem;
+		bottom: var(--pr-t-spacings-S);
 		right: 2.25rem;
 	}
 
 	.lu-select-clearer {
 		position: absolute;
-		bottom: 0.75rem;
+		bottom: var(--pr-t-spacings-S);
 		right: 2.25rem;
 	}
 
 	::ng-deep .lu-select-value {
 
 		.label {
-			padding: var(--spacings-XXS) var(--spacings-XS);
+			padding: var(--pr-t-spacings-XXXS) var(--pr-t-spacings-XS);
 			margin-left: 0;
 		}
 
 		.chip {
 			vertical-align: baseline;
 			max-width: 100%;
-			margin: 0 var(--spacings-XXS) var(--spacings-XXS) 0;
+			margin: 0 var(--pr-t-spacings-XXXS) var(--pr-t-spacings-XXXS) 0;
 			text-overflow: ellipsis;
 			overflow: hidden;
 			vertical-align: top;
@@ -113,7 +113,7 @@
 		}
 
 		.lu-select-clearer {
-			bottom: var(--spacings-XS);
+			bottom: var(--pr-t-spacings-XS);
 		}
 
 		&::after {
@@ -141,9 +141,9 @@
 				height: var(--sizes-XS-lineHeight);
 				line-height: var(--sizes-XS-lineHeight);
 				font-size: var(--sizes-XS-fontSize);
-				padding-left: var(--spacings-XXS);
-				padding-right: var(--spacings-XXS);
-				gap: var(--spacings-XXS);
+				padding-left: var(--pr-t-spacings-XXXS);
+				padding-right: var(--pr-t-spacings-XXXS);
+				gap: var(--pr-t-spacings-XXXS);
 			}
 
 			.numericBadge {
@@ -161,7 +161,7 @@
 			&::after {
 				color: var(--palettes-grey-500);
 				bottom: var(--components-select-framed-bottom-padding);
-				right: var(--spacings-XS);
+				right: var(--pr-t-spacings-XS);
 			}
 
 			.lu-select-value {
@@ -188,7 +188,7 @@
 		.lu-select-placeholder {
 			padding: 0;
 			height: auto;
-			padding-top: var(--spacings-S);
+			padding-top: var(--pr-t-spacings-M);
 			color: var(--palettes-grey-800);
 		}
 	}
@@ -244,7 +244,7 @@
 		.lu-select-display-wrapper {
 			overflow: visible;
 			white-space: normal;
-			margin-bottom: calc(var(--spacings-XXS) * -1);
+			margin-bottom: calc(var(--pr-t-spacings-XXXS) * -1);
 		}
 	}
 

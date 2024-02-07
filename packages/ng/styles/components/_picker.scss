@@ -6,12 +6,12 @@
 	@extend %popover-content;
 
 	max-height: 20rem;
-	padding: var(--spacings-XXS);
+	padding: var(--pr-t-spacings-XXXS);
 	overflow-y: auto;
 	display: block;
 	animation: scaleIn 150ms cubic-bezier(0.25, 0.8, 0.25, 1);
-	margin-left: calc(var(--spacings-XXS) * -1);
-	margin-right: calc(var(--spacings-XXS) * -1);
+	margin-left: calc(var(--pr-t-spacings-XXXS) * -1);
+	margin-right: calc(var(--pr-t-spacings-XXXS) * -1);
 
 	&.is-loading {
 		//height: 17.5rem;
@@ -21,7 +21,7 @@
 .lu-picker-content-option {
 	display: flex;
 	flex-direction: column;
-	gap: var(--spacings-XXS);
+	gap: var(--pr-t-spacings-XXXS);
 }
 
 .lu-picker-content-option-emptyState {
@@ -40,7 +40,7 @@
 	background-color: var(--pr-t-elevation-surface-raised);
 	z-index: 1;
 	display: block;
-	box-shadow: 0 calc(var(--spacings-XXS) * -1) 0 var(--spacings-XXS) var(--pr-t-elevation-surface-raised); // Mask background options scrolling behind
+	box-shadow: 0 calc(var(--pr-t-spacings-XXXS) * -1) 0 var(--pr-t-spacings-XXXS) var(--pr-t-elevation-surface-raised); // Mask background options scrolling behind
 }
 
 .lu-picker-content-add {
@@ -48,11 +48,11 @@
 	bottom: 0;
 	background: white;
 	box-shadow: var(--pr-t-elevation-shadow-overflow);
-	padding: var(--spacings-XS);
+	padding: var(--pr-t-spacings-XS);
 }
 
 .lu-picker-content-loading {
-	padding: var(--spacings-XXS);
+	padding: var(--pr-t-spacings-XXXS);
 	display: flex;
 	color: var(--palettes-grey-600)
 }
@@ -72,13 +72,13 @@
 	right: 0;
 	display: block;
 	z-index: 1;
-	margin-bottom: var(--spacings-XXS);
-	box-shadow: 0 -4px 0 var(--spacings-XS) var(--pr-t-elevation-surface-raised); // Avoid showing options list while scrolling due to header sticky potisionning
+	margin-bottom: var(--pr-t-spacings-XXXS);
+	box-shadow: 0 -4px 0 var(--pr-t-spacings-XS) var(--pr-t-elevation-surface-raised); // Avoid showing options list while scrolling due to header sticky potisionning
 }
 
 .lu-picker-textfield {
 	width: 100%;
-	padding-bottom: var(--spacings-XS);
+	padding-bottom: var(--pr-t-spacings-XS);
 
 	.textfield-input {
 		background-color: var(--colors-white-color);

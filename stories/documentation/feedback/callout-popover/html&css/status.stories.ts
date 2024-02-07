@@ -6,7 +6,7 @@ export default {
 		return {
 			styles: [`
 				.calloutPopover {
-					margin-right: var(--spacings-XXS);
+					margin-right: var(--pr-t-spacings-XXXS);
 				}
 			`],
 			template: `	<button type="button" class="calloutPopover palette-success"><span aria-hidden="true" class="calloutPopover-icon lucca-icon icon-signSuccess"></span>1</button>

@@ -5,7 +5,7 @@
 
 	@at-root ($atRoot) {
 		.collapse-title {
-			margin-bottom: var(--spacings-XXS);
+			margin-bottom: var(--pr-t-spacings-XXXS);
 			display: inline-flex;
 			overflow: hidden;
 			cursor: pointer;
@@ -23,7 +23,7 @@
 				@include icon.generate('arrow_chevron_right');
 
 				font-size: var(--sizes-XS-fontSize);
-				margin-right: var(--spacings-XXS);
+				margin-right: var(--pr-t-spacings-XXXS);
 				transition-duration: var(--commons-animations-durations-fast);
 				transition-property: transform;
 				vertical-align: middle;

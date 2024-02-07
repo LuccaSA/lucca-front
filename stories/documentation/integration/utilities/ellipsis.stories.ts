@@ -18,7 +18,7 @@ const Template: StoryFn<EllipsisStory> = (args: EllipsisStory) => ({
 	styles: [
 		`
 		span {
-			padding-right: var(--spacings-S);
+			padding-right: var(--pr-t-spacings-M);
 		}
 		}`,
 	],

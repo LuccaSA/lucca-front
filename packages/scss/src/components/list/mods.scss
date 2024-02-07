@@ -19,7 +19,7 @@
 }
 
 @mixin draggable {
-	padding-left: var(--spacings-S);
+	padding-left: var(--pr-t-spacings-M);
 
 	.list-item-handler {
 		color: var(--palettes-grey-400);

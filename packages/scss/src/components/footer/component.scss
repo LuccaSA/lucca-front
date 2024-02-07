@@ -2,9 +2,9 @@
 
 @mixin component($atRoot: 'without: rule') {
 	background-color: var(--pr-t-elevation-surface-raised);
-	padding: var(--spacings-S) var(--spacings-M);
+	padding: var(--pr-t-spacings-M) var(--pr-t-spacings-L);
 	display: flex;
-	gap: var(--spacings-S);
+	gap: var(--pr-t-spacings-M);
 	align-items: center;
 	box-shadow: var(--pr-t-elevation-shadow-overflow);
 
@@ -16,7 +16,7 @@
 		.footer-actions {
 			display: flex;
 			margin-left: auto;
-			gap: var(--spacings-S);
+			gap: var(--pr-t-spacings-M);
 
 			.button {
 				margin: 0;

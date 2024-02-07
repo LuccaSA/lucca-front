@@ -36,7 +36,7 @@ const Template: StoryFn<LabelBasicStory> = (args: LabelBasicStory) => ({
 	styles: [
 		`
 		.label {
-			margin-right: var(--spacings-XXS);
+			margin-right: var(--pr-t-spacings-XXXS);
 		}`,
 	],
 });

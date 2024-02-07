@@ -31,7 +31,7 @@ function getTemplate(args: GridsGapsStory): string {
 	<div class="grid-column"><div class="demo">4</div></div>
 </div>
 
-<div class="grid" style="--grid-columns: 2; --grid-gap: var(--spacings-XS)">
+<div class="grid" style="--grid-columns: 2; --grid-gap: var(--pr-t-spacings-XS)">
 	<div class="grid-column"><div class="demo">1</div></div>
 	<div class="grid-column"><div class="demo">2</div></div>
 	<div class="grid-column"><div class="demo">3</div></div>
@@ -46,7 +46,7 @@ const Template: Story<GridsGapsStory> = (args: GridsGapsStory) => ({
 		`
 		.demo {
 			background-color: #F3F5FC;
-			padding: var(--spacings-S);
+			padding: var(--pr-t-spacings-M);
 			border-radius: 1rem;
 			text-align: center;
 			height: 100%;
@@ -56,7 +56,7 @@ const Template: Story<GridsGapsStory> = (args: GridsGapsStory) => ({
 		}
 
 		.grid + .grid {
-			margin-top: var(--spacings-L);
+			margin-top: var(--pr-t-spacings-XL);
 		}
 		`,
 	],

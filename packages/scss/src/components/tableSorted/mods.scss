@@ -13,8 +13,8 @@
 		border-radius: var(--commons-borderRadius-M);
 		opacity: 0;
 		margin: 0;
-		margin-left: var(--spacings-XXS);
-		transform: translateY(var(--spacings-XXS));
+		margin-left: var(--pr-t-spacings-XXXS);
+		transform: translateY(var(--pr-t-spacings-XXXS));
 		transition-duration: var(--commons-animations-durations-fast);
 		transition-property: opacity, transform;
 	}
@@ -66,8 +66,8 @@
 		border-radius: var(--commons-borderRadius-M);
 		opacity: 0;
 		margin: 0;
-		margin-right: var(--spacings-XXS);
-		transform: translateY(var(--spacings-XXS));
+		margin-right: var(--pr-t-spacings-XXXS);
+		transform: translateY(var(--pr-t-spacings-XXXS));
 		transition-duration: var(--commons-animations-durations-fast);
 		transition-property: opacity, transform;
 	}

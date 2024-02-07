@@ -5,7 +5,7 @@
 	background-color: var(--pr-t-elevation-surface-raised);
 	bottom: 0;
 	box-shadow: var(--pr-t-elevation-shadow-overflow);
-	padding: 0 var(--spacings-XS);
+	padding: 0 var(--pr-t-spacings-XS);
 	position: sticky;
 
 	@at-root ($atRoot) {
@@ -24,9 +24,9 @@
 			display: flex;
 			flex-direction: column;
 			font-size: var(--sizes-XS-fontSize);
-			gap: var(--spacings-XXS);
+			gap: var(--pr-t-spacings-XXXS);
 			line-height: var(--sizes-XS-lineHeight);
-			padding: var(--spacings-XS) var(--spacings-XXS);
+			padding: var(--pr-t-spacings-XS) var(--pr-t-spacings-XXXS);
 			position: relative;
 			text-decoration: none;
 

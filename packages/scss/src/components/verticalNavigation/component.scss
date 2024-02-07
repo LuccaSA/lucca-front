@@ -8,24 +8,24 @@
 			@include title.h5;
 			color: var(--palettes-grey-600);
 			padding: 0 var(--components-verticalNavigation-horizontalPadding);
-			margin-bottom: var(--spacings-XS);
+			margin-bottom: var(--pr-t-spacings-XS);
 		}
 
 		.verticalNavigation-list {
 			@include reset.list;
 			background-color: var(--pr-t-elevation-surface-raised);
-			margin-bottom: var(--spacings-S);
+			margin-bottom: var(--pr-t-spacings-M);
 		}
 
 		.verticalNavigation-list-item-link-icon {
 			font-size: var(--sizes-M-lineHeight);
-			margin-right: var(--spacings-XS);
+			margin-right: var(--pr-t-spacings-XS);
 		}
 
 		.verticalNavigation-list-item-link {
 			@include reset.button;
 			display: flex;
-			padding: var(--spacings-XS) var(--components-verticalNavigation-horizontalPadding);
+			padding: var(--pr-t-spacings-XS) var(--components-verticalNavigation-horizontalPadding);
 			border-radius: var(--commons-borderRadius-M);
 			color: var(--components-verticalNavigation-link-color);
 			text-decoration: none;

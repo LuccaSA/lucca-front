@@ -1,10 +1,10 @@
 @mixin component($atRoot: 'without: rule') {
 	display: flex;
 	align-items: center;
-	gap: var(--spacings-XS);
+	gap: var(--pr-t-spacings-XS);
 	background-color: var(--pr-t-elevation-surface-raised);
 	box-shadow: 0 1px 0 var(--commons-border-100);
-	padding: .375rem .75rem;
+	padding: var(--pr-t-spacings-XXS) var(--pr-t-spacings-S);
 	min-height: 3.5rem;
 
 	@at-root ($atRoot) {

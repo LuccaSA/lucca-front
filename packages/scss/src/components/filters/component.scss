@@ -11,14 +11,14 @@
 		.filters-sectionLeft {
 			align-items: center;
 			display: flex;
-			padding-right: var(--spacings-L);
+			padding-right: var(--pr-t-spacings-XL);
 		}
 
 		.filters-sectionRight {
 			align-items: center;
 			display: flex;
 			margin-left: auto;
-			padding-left: var(--spacings-L);
+			padding-left: var(--pr-t-spacings-XL);
 
 			.textfield.mod-framed {
 				border-left: var(--commons-divider-width) solid var(--commons-divider-color);

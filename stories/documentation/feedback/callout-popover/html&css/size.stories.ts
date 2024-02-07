@@ -8,7 +8,7 @@ export default {
 				:host {
 					display: inline-flex;
 					align-items: center;
-					gap: var(--spacings-XXS);
+					gap: var(--pr-t-spacings-XXXS);
 				}
 			`],
 			template: `<button type="button" class="calloutPopover mod-S"><span aria-hidden="true" class="calloutPopover-icon lucca-icon icon-signInfo"></span>1</button>

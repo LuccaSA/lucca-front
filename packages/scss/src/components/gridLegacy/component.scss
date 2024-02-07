@@ -5,16 +5,16 @@
 	flex: 0 1 auto;
 	flex-direction: row;
 	flex-wrap: wrap;
-	margin-left: calc(var(--spacings-XS) * -1);
-	margin-right: calc(var(--spacings-XS) * -1);
+	margin-left: calc(var(--pr-t-spacings-XS) * -1);
+	margin-right: calc(var(--pr-t-spacings-XS) * -1);
 }
 
 @mixin column {
 	flex: 0 0 auto;
 	flex-basis: 100%;
 	max-width: 100%;
-	padding-left: var(--spacings-XS);
-	padding-right: var(--spacings-XS);
+	padding-left: var(--pr-t-spacings-XS);
+	padding-right: var(--pr-t-spacings-XS);
 	position: relative;
 }
 

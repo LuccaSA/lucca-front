@@ -25,7 +25,7 @@ const Template: StoryFn<TextColorStory> = (args: TextColorStory) => ({
 	styles: [
 		`
 		span {
-			padding-right: var(--spacings-S);
+			padding-right: var(--pr-t-spacings-M);
 		}
 		}`,
 	],

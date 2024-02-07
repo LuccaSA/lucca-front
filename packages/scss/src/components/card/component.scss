@@ -4,7 +4,7 @@
 	border-color: var(--components-card-border-color);
 	border-width: 1px;
 	display: block;
-	margin-bottom: var(--spacings-S);
+	margin-bottom: var(--pr-t-spacings-M);
 	border-style: solid;
 	position: relative;
 	transition-duration: var(--commons-animations-durations-fast);
@@ -17,7 +17,7 @@
 
 		.card-title {
 			padding: 0;
-			margin-bottom: var(--spacings-XS);
+			margin-bottom: var(--pr-t-spacings-XS);
 		}
 
 		.card-action {
@@ -25,8 +25,8 @@
 			align-items: center;
 			justify-content: center;
 			border-left: 1px solid var(--commons-border-200);
-			padding-left: var(--spacings-S);
-			margin-left: var(--spacings-S);
+			padding-left: var(--pr-t-spacings-M);
+			margin-left: var(--pr-t-spacings-M);
 		}
 
 		.card-footer {

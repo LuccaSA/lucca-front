@@ -1,10 +1,10 @@
 @use '@lucca-front/scss/src/commons/utils/media';
 
 @mixin component($atRoot: 'without: rule') {
-	padding: var(--spacings-L) 2.5rem var(--spacings-M);
+	padding: var(--pr-t-spacings-XL) 2.5rem var(--pr-t-spacings-L);
 
 	.menu {
-		margin-top: var(--spacings-XS);
+		margin-top: var(--pr-t-spacings-XS);
 	}
 
 	@at-root ($atRoot) {
@@ -13,12 +13,12 @@
 			justify-content: space-between;
 			align-items: flex-start;
 			flex-wrap: wrap;
-			row-gap: var(--spacings-XS);
+			row-gap: var(--pr-t-spacings-XS);
 		}
 
 		.pageHeader-content-title {
 			display: flex;
-			column-gap: var(--spacings-S);
+			column-gap: var(--pr-t-spacings-M);
 			align-items: center;
 			flex-wrap: wrap;
 		}
@@ -27,11 +27,11 @@
 			display: flex;
 			align-items: center;
 			flex-wrap: wrap;
-			row-gap: var(--spacings-S);
+			row-gap: var(--pr-t-spacings-M);
 		}
 
 		.pageHeader-content-actions {
-			gap: var(--spacings-S);
+			gap: var(--pr-t-spacings-M);
 
 			.button {
 				margin: 0;
@@ -51,7 +51,7 @@
 
 		.pageHeader-description {
 			max-width: var(--components-pageHeader-description-max-width);
-			margin-top: var(--spacings-XS);
+			margin-top: var(--pr-t-spacings-XS);
 			color: var(--palettes-grey-700);
 		}
 	}

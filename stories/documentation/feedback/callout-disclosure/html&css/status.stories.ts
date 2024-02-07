@@ -6,7 +6,7 @@ export default {
 		return {
 			styles: [`
 				.calloutDisclosure {
-					margin-bottom: var(--spacings-XS);
+					margin-bottom: var(--pr-t-spacings-XS);
 				}
 			`],
 			template: `<details class="calloutDisclosure palette-success">

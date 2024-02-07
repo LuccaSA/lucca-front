@@ -1,7 +1,7 @@
 @mixin inline {
 	vertical-align: middle;
 	display: inline-block;
-	margin-right: var(--spacings-M);
+	margin-right: var(--pr-t-spacings-L);
 }
 
 @mixin S {

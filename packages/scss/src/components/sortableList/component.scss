@@ -16,7 +16,7 @@
 			display: flex;
 			position: relative;
 			text-decoration: none;
-			gap: var(--spacings-XS);
+			gap: var(--pr-t-spacings-XS);
 			padding: var(--components-sortableList-padding);
 
 			&:last-child {
@@ -62,7 +62,7 @@
 		}
 
 		.sortableList-clear {
-			margin-top: var(--spacings-XXS);
+			margin-top: var(--pr-t-spacings-XXXS);
 		}
 	}
 }

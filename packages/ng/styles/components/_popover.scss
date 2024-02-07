@@ -54,5 +54,5 @@
 .lu-popover-content {
 	@extend %popover-content;
 
-	padding: var(--spacings-XS) .75rem;
+	padding: var(--pr-t-spacings-XS) var(--pr-t-spacings-S);
 }

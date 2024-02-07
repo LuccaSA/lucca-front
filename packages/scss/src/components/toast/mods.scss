@@ -1,6 +1,6 @@
 @mixin bottom {
 	top: auto;
-	bottom: var(--spacings-M);
+	bottom: var(--pr-t-spacings-L);
 }
 
 @mixin circularGauge {

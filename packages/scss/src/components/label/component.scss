@@ -2,7 +2,7 @@
 	background-color: var(--palettes-100, var(--components-label-default-palette-100));
 	color: var(--palettes-900, var(--components-label-default-palette-900));
 	display: inline-flex;
-	gap: 0 var(--spacings-XXS);
+	gap: 0 var(--pr-t-spacings-XXXS);
 	justify-content: center;
 	align-items: center;
 	white-space: nowrap;
@@ -10,7 +10,7 @@
 	font-size: var(--sizes-S-fontSize);
 	line-height: var(--sizes-XS-lineHeight);
 	font-weight: 600;
-	padding: var(--spacings-XXS) var(--spacings-XS);
+	padding: var(--pr-t-spacings-XXXS) var(--pr-t-spacings-XS);
 
 	.label-icon {
 		margin: 0;
