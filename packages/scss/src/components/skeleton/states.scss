@@ -2,13 +2,13 @@
 	@each $size in $sizes {
 		&.u-text#{$size} {
 			@if ($size == 'XS') {
-				--components-skeleton-text-offset: 0.25rem;
+				--components-skeleton-text-offset: var(--pr-t-spacings-XXXS);
 			}
 			@if ($size == 'S' or $size == 'L') {
-				--components-skeleton-text-offset: 0.375rem;
+				--components-skeleton-text-offset: var(--pr-t-spacings-XXS);
 			}
 			@if ($size == 'XXL') {
-				--components-skeleton-text-offset: 0.5rem;
+				--components-skeleton-text-offset: var(--pr-t-spacings-XS);
 			}
 			height: var(--sizes-#{$size}-lineHeight);
 		}
@@ -22,13 +22,13 @@
 			line-height: var(--sizes-lineHeight);
 			min-height: var(--sizes-lineHeight);
 			@if ($title == 'h1') {
-				--components-skeleton-text-offset: 0.5rem;
+				--components-skeleton-text-offset: var(--pr-t-spacings-XS);
 			}
 			@if ($title == 'h2' or $title == 'h3' or $title == 'h4' or $title == 'h5') {
-				--components-skeleton-text-offset: 0.375rem;
+				--components-skeleton-text-offset: var(--pr-t-spacings-XXS);
 			}
 			@if ($title == 'h6') {
-				--components-skeleton-text-offset: 0.25rem;
+				--components-skeleton-text-offset: var(--pr-t-spacings-XXXS);
 			}
 		}
 	}
