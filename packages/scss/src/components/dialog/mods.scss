@@ -23,27 +23,33 @@
 }
 
 @mixin drawer {
-	@include keyframe.slideInRight;
+	@include keyframe.slideFromRight;
 
-	--components-dialog-animationOpening: slideInRight;
+	--components-dialog-animationOpening: slideFromRight;
 	--components-dialog-maxHeight: none;
 	--components-dialog-height: 100%;
 	--components-dialog-maxWidth: calc(100vw - var(--spacings-S));
-	--components-dialog-borderRadius: 0;
+	--components-dialog-borderRadius: var(--commons-borderRadius-L) 0 0 var(--commons-borderRadius-L);
 	--components-dialog-inset: 0 0 0 auto;
 }
 
 @mixin fromBottom {
-	@include keyframe.slideInBottom;
+	@include keyframe.slideFromBottom;
 
-	--components-dialog-animationOpening: slideInBottom;
+	--components-dialog-animationOpening: slideFromBottom;
 	--components-dialog-height: fit-content;
 	--components-dialog-maxHeight: calc(100dvh - var(--spacings-S));
 	--components-dialog-maxWidth: none;
 	--components-dialog-inset: auto 0 0 0;
+	--components-dialog-borderRadius: var(--commons-borderRadius-L) var(--commons-borderRadius-L) 0 0;
 
 	width: 100%;
 	height: var(--components-dialog-size);
+}
+
+@mixin maxContent {
+	width: 100%;
+	height: 100%;
 }
 
 @mixin fullScreen {
@@ -54,7 +60,7 @@
 	--components-dialog-borderRadius: 0;
 }
 
-@mixin titleCenter {
+@mixin titleCentered {
 	.button {
 		--components-dialog-insideHeaderButtonDisplay: none;
 	}

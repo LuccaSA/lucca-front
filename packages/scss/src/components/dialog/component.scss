@@ -81,7 +81,7 @@
 			@include footer.sticky;
 		}
 
-		.backdrop-dialog {
+		.dialogBackdrop {
 			background-color: var(--palettes-grey-900);
 			position: fixed;
 			opacity: 0.4;

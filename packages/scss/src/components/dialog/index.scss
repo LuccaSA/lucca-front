@@ -18,6 +18,10 @@
 		@include fitContent;
 	}
 
+	&.mod-maxContent {
+		@include maxContent;
+	}
+
 	&.mod-L {
 		@include L;
 	}
@@ -26,16 +30,16 @@
 		@include XL;
 	}
 
-	&.mod-drawer {
+	&:where(.mod-drawer) {
 		@include drawer;
 
 		&:where(.mod-fromBottom) {
 			@include fromBottom;
 		}
+	}
 
-		@include media.max('S') {
-			@include titleCenter;
-		}
+	&.mod-titleCentered {
+		@include titleCentered;
 	}
 
 	&.mod-fullScreen {

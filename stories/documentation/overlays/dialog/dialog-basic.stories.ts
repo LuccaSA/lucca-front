@@ -6,7 +6,7 @@ interface DialogBasicStory {
 
 function getTemplate(args: DialogBasicStory): string {
 	return `
-<div class="backdrop-dialog"></div>
+<div class="dialogBackdrop"></div>
 <div role="dialog" aria-modal="true" aria-labelledby="dialogInsideHeaderTitle1" class="dialog ${args.size}">
 	<form class="dialog-inside">
 		<header class="dialog-inside-header">
@@ -49,7 +49,7 @@ export default {
 	component: DialogBasicStory,
 	argTypes: {
 		size: {
-			options: ['mod-fitContent', 'mod-XS', 'mod-S', '', 'mod-L', 'mod-XL', 'mod-fullScreen'],
+			options: ['mod-fitContent', 'mod-XS', 'mod-S', '', 'mod-L', 'mod-XL', 'mod-maxContent', 'mod-fullScreen'],
 			control: {
 				type: 'select',
 			},

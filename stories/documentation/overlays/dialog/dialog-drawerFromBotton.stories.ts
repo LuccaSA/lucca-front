@@ -1,13 +1,15 @@
 import { Meta, StoryFn } from '@storybook/angular';
 
-interface DialogDrawerStory {
+interface DialogDrawerFromBottomStory {
 	size: string;
+	titleCentered: boolean;
 }
 
-function getTemplate(args: DialogDrawerStory): string {
+function getTemplate(args: DialogDrawerFromBottomStory): string {
+	const modCentered = args.titleCentered ? 'mod-titleCentered' : '';
 	return `
 <div class="dialogBackdrop"></div>
-<div role="dialog" aria-modal="true" aria-labelledby="dialogInsideHeaderTitle1" class="dialog mod-drawer ${args.size}">
+<div role="dialog" aria-modal="true" aria-labelledby="dialogInsideHeaderTitle1" class="dialog mod-drawer mod-fromBottom ${args.size} ${modCentered}">
 	<form class="dialog-inside">
 		<header class="dialog-inside-header">
 			<button type="button" class="button">
@@ -29,7 +31,7 @@ function getTemplate(args: DialogDrawerStory): string {
 	`;
 }
 
-const Template: StoryFn<DialogDrawerStory> = (args: DialogDrawerStory) => ({
+const Template: StoryFn<DialogDrawerFromBottomStory> = (args: DialogDrawerFromBottomStory) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [
@@ -42,20 +44,25 @@ const Template: StoryFn<DialogDrawerStory> = (args: DialogDrawerStory) => ({
 	],
 });
 
-class DialogDrawerStory {}
+class DialogDrawerFromBottomStory {}
 
 export default {
-	title: 'Documentation/Overlays/Dialog/Drawer',
-	component: DialogDrawerStory,
+	title: 'Documentation/Overlays/Dialog/DrawerFromBottom',
+	component: DialogDrawerFromBottomStory,
 	argTypes: {
 		size: {
-			options: ['mod-XS', 'mod-S', '', 'mod-L', 'mod-XL', 'mod-maxContent', 'mod-fullScreen'],
+			options: ['mod-fitContent', 'mod-maxContent', 'mod-fullScreen'],
 			control: {
 				type: 'select',
+			},
+		},
+		titleCentered: {
+			control: {
+				type: 'boolean',
 			},
 		},
 	},
 } as Meta;
 
-export const Drawer = Template.bind({});
-Drawer.args = { size: '' };
+export const DrawerFromBottom = Template.bind({});
+DrawerFromBottom.args = { size: 'mod-fitContent', titleCentered: 'false' };
