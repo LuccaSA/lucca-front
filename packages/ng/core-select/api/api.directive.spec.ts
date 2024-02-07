@@ -90,7 +90,7 @@ describe('ALuCoreSelectApiDirective', () => {
 		spectator.tick(MAGIC_DEBOUNCE_DURATION - 1);
 		select.clueChanged('hey');
 		spectator.tick(MAGIC_DEBOUNCE_DURATION);
-		spectator.tick();
+		spectator.tick(MAGIC_OPTION_SCROLL_DELAY);
 
 		expect(testApi.getOptions).toHaveBeenCalledTimes(1);
 		expect(testApi.getOptions).toHaveBeenCalledWith({ clue: 'hey' }, 0);
