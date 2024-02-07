@@ -10,7 +10,7 @@ export default {
 function getTemplate(args: MenuContainerStory): string {
 	return `
 	<nav class="menu">
-		<div class="container u-paddingTopReset u-paddingBottomReset">
+		<div class="container pr-u-paddingTop0 pr-u-paddingBottom0">
 			<ul class="menu-list">
 				<li class="menu-list-item">
 					<a href="#" class="menu-list-item-action" aria-current="page">
