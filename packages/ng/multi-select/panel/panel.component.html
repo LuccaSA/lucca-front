@@ -37,7 +37,9 @@
 					(click)="toggleOption(option)"
 				/>
 			</ng-template>
-			<div class="lu-picker-content-option-emptyState" *ngIf="ctx.options.length === 0">{{intl.emptyResults}}</div>
+			<div class="lu-picker-content-option-emptyState" *ngIf="ctx.options.length === 0 && (loading$ | async) === false">
+				{{intl.emptyResults}}
+			</div>
 		</div>
 		<div *ngIf="loading$ | async" class="lu-picker-content-loading">
 			<div class="loading"></div>
