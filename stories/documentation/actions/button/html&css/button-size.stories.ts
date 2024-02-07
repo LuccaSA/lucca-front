@@ -8,7 +8,7 @@ export default {
 } as Meta;
 
 function getTemplate(args: ButtonSizeStory): string {
-	return `<div class="u-displayFlex u-gapXS u-alignItemsCenter">
+	return `<div class="u-displayFlex pr-u-gapXS u-alignItemsCenter">
 	<button type="button" class="button">Button</button>
 	<button type="button" class="button mod-S">Button</button>
 	<button type="button" class="button mod-XS">Button</button>
