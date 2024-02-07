@@ -21,18 +21,10 @@
 	&[aria-selected='true'] {
 		@include tabSelected;
 	}
-
-	&:focus-visible {
-		@include tabFocused;
-	}
 }
 
 .viewTabsPanel {
 	&:not(.active) {
 		@include panelInactive;
-	}
-
-	&:focus-visible {
-		@include panelFocused;
 	}
 }
