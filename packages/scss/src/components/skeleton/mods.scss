@@ -6,8 +6,8 @@
 @mixin skeletonShapeSizing($spacingsDeprecated...) {
 	@each $spacing in $spacingsDeprecated {
 		&.mod-#{$spacing} {
-			--components-skeleton-shape-height: var(--spacings-#{$spacing});
-			--components-skeleton-shape-width: var(--spacings-#{$spacing});
+			--components-skeleton-shape-height: var(--pr-t-spacings-#{$spacing});
+			--components-skeleton-shape-width: var(--pr-t-spacings-#{$spacing});
 		}
 	}
 }
