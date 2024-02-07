@@ -1,4 +1,5 @@
 @use '@lucca-front/scss/src/commons/utils/reset';
+@use '@lucca-front/scss/src/commons/utils/a11y';
 
 @mixin component($atRoot: 'without: rule') {
 	@include reset.list;
@@ -29,12 +30,23 @@
 			text-decoration: none;
 			color: var(--palettes-grey-800);
 			transition: transform var(--commons-animations-durations-fast);
-			transform: scale(--components-avatars-scale);
+			transform: scale(var(--components-avatars-scale));
 			color: currentColor;
+
+			&:hover,
+			&:focus {
+				--components-avatars-scale: 1.1;
+			}
+
+			&:focus-visible {
+				@include a11y.focusVisible;
+
+				border-radius: var(--commons-borderRadius-full);
+				outline-offset: 0;
+			}
 		}
 
 		.avatars-item-action-more {
-			box-sizing: content-box;
 			display: flex;
 			align-items: center;
 			justify-content: center;

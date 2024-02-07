@@ -20,14 +20,3 @@
 		@include XS;
 	}
 }
-
-.avatars-item-action {
-	&:hover,
-	&:focus {
-		@include hover;
-	}
-
-	&:focus-visible {
-		@include focus;
-	}
-}
