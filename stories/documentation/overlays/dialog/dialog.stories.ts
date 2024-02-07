@@ -1,10 +1,11 @@
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { DialogFooterComponent, DialogHeaderComponent, injectDialogData, injectDialogRef, LuDialogModule, LuDialogService } from '@lucca-front/ng/dialog';
+import { DialogFooterComponent, DialogHeaderComponent, injectDialogData, injectDialogRef, LuDialogModule, LuDialogService, DialogContentComponent } from '@lucca-front/ng/dialog';
 import { Component, inject } from '@angular/core';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
-import { TextInputComponent } from '@lucca-front/ng/forms';
+import { CheckboxInputComponent, TextInputComponent } from '@lucca-front/ng/forms';
 import { FormsModule } from '@angular/forms';
+import { FormFieldComponent } from '@lucca-front/ng/form-field';
 
 @Component({
 	selector: 'test-dialog',
@@ -12,12 +13,13 @@ import { FormsModule } from '@angular/forms';
 		<div class="dialog-inside">
 			<lu-dialog-header>I'm a test dialog ! Hello {{ world }}</lu-dialog-header>
 
-			<!-- TODO this should be a component that holds the class as host value-->
-			<div class="dialog-inside-content">
+			<lu-dialog-content>
 				I'm the content of the dialog !
-				<lu-text-input class="autofocus" ngModel></lu-text-input>
+				<lu-form-field label="Can close">
+					<lu-checkbox-input [(ngModel)]="canClose"></lu-checkbox-input>
+				</lu-form-field>
 				<!-- TODO Discuss focus transfer to child element with gnury-->
-			</div>
+			</lu-dialog-content>
 
 			<lu-dialog-footer>
 				<div class="footer-content">Je suis du texte dans le footer !</div>
@@ -28,12 +30,24 @@ import { FormsModule } from '@angular/forms';
 			</lu-dialog-footer>
 		</div>
 	`,
-	imports: [ButtonComponent, LuSimpleSelectInputComponent, DialogHeaderComponent, DialogFooterComponent, TextInputComponent, FormsModule],
+	imports: [
+		ButtonComponent,
+		LuSimpleSelectInputComponent,
+		DialogHeaderComponent,
+		DialogFooterComponent,
+		TextInputComponent,
+		FormsModule,
+		CheckboxInputComponent,
+		FormFieldComponent,
+		DialogContentComponent,
+	],
 	standalone: true,
 })
 class TestDialogContent {
 	world = injectDialogData<string>();
 	ref = injectDialogRef<number>();
+
+	canClose = false;
 
 	close(): void {
 		this.ref.close(0);
@@ -51,9 +65,7 @@ class TestDialogStory {
 		const ref = this.dialog.open({
 			component: TestDialogContent,
 			data: 'World',
-			cdkConfigOverride: {
-				// autoFocus: '.autofocus input',
-			},
+			canClose: (c) => c.canClose,
 		});
 
 		ref.closed$.subscribe(console.log);
