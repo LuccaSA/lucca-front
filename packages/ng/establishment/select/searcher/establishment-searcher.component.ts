@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, forwardRef, HostBinding, Inject, Input, Optional, Output, Self, SkipSelf, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, forwardRef, HostBinding, Inject, Input, Optional, Output, Self, ViewChild } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { ALuOnCloseSubscriber, ALuOnOpenSubscriber, ALuOnScrollBottomSubscriber, ILuOnCloseSubscriber, ILuOnOpenSubscriber, ILuOnScrollBottomSubscriber } from '@lucca-front/ng/core';
 import { ALuOptionOperator, ILuOptionOperator, LuOptionPlaceholderComponent } from '@lucca-front/ng/option';
@@ -8,6 +8,7 @@ import { Observable, of, Subject } from 'rxjs';
 import { catchError, debounceTime, map, scan, share, startWith, switchMap, takeWhile, tap } from 'rxjs/operators';
 import { ILuEstablishment } from '../../establishment.model';
 import { ALuEstablishmentService, LuEstablishmentService } from '../../service/index';
+import { DEFAULT_ESTABLISHMENT_SERVICE } from '../establishment-select.token';
 
 @Component({
 	selector: 'lu-establishment-searcher',
@@ -38,7 +39,7 @@ import { ALuEstablishmentService, LuEstablishmentService } from '../../service/i
 			multi: true,
 		},
 		{
-			provide: ALuEstablishmentService,
+			provide: DEFAULT_ESTABLISHMENT_SERVICE,
 			useClass: LuEstablishmentService,
 		},
 	],
@@ -110,13 +111,12 @@ export class LuEstablishmentSearcherComponent implements ILuOnOpenSubscriber, IL
 	constructor(
 		@Inject(ALuEstablishmentService)
 		@Optional()
-		@SkipSelf()
-		hostService: LuEstablishmentService,
-		@Inject(ALuEstablishmentService)
+		customService: LuEstablishmentService,
+		@Inject(DEFAULT_ESTABLISHMENT_SERVICE)
 		@Self()
-		selfService: LuEstablishmentService,
+		defaultService: LuEstablishmentService,
 	) {
-		this._service = hostService || selfService;
+		this._service = customService || defaultService;
 	}
 
 	onOpen() {
