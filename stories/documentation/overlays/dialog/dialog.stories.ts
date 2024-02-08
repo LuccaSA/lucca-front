@@ -63,7 +63,7 @@ class TestDialogStory {
 
 	open(): void {
 		const ref = this.dialog.open({
-			component: TestDialogContent,
+			content: TestDialogContent,
 			data: 'World',
 			canClose: (c) => c.canClose,
 		});

@@ -15,7 +15,7 @@ export type LuDialogResult<C> = {
 }[keyof C];
 
 interface BaseLuDialogConfig<C> {
-	component: ComponentType<C> | TemplateRef<C>;
+	content: ComponentType<C> | TemplateRef<C>;
 	data: LuDialogData<C>;
 
 	backdrop?: boolean;

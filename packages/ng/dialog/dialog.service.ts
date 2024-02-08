@@ -10,7 +10,7 @@ export class LuDialogService {
 
 	open<C>(config: LuDialogConfig<C>): LuDialogRef<C> {
 		let luDialogRef: LuDialogRef<C>;
-		const cdkRef = this.#cdkDialog.open(config.component, {
+		const cdkRef = this.#cdkDialog.open(config.content, {
 			ariaModal: true,
 			hasBackdrop: config.backdrop ?? true,
 			data: 'data' in config ? config.data : null,
