@@ -66,19 +66,19 @@ function getTemplate(args: viewTabsBasicStory): string {
 
 <div class="u-marginTopM"></div>
 
-<div class="viewTabsPanel" [class.active]="tabActive === 1" role="tabpanel" id="panel1" aria-labelledby="tab1" tabindex="0">
+<div class="viewTabs_panel" [class.active]="tabActive === 1" role="tabpanel" id="panel1" aria-labelledby="tab1" tabindex="0">
 	Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit, maxime animi perferendis explicabo est eaque ipsa rem, sit quasi sunt corporis iure distinctio. Deleniti deserunt aspernatur est placeat, assumenda provident.
 </div>
 
-<div class="viewTabsPanel" [class.active]="tabActive === 2" role="tabpanel" id="panel2" aria-labelledby="tab2" tabindex="0">
+<div class="viewTabs_panel" [class.active]="tabActive === 2" role="tabpanel" id="panel2" aria-labelledby="tab2" tabindex="0">
 	Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur, cumque ad inventore maiores possimus in commodi ea soluta maxime fugiat libero ducimus provident incidunt sit quod! Cum dolorem tempora sit?
 </div>
 
-<div class="viewTabsPanel" [class.active]="tabActive === 3" role="tabpanel" id="panel3" aria-labelledby="tab3" tabindex="0">
+<div class="viewTabs_panel" [class.active]="tabActive === 3" role="tabpanel" id="panel3" aria-labelledby="tab3" tabindex="0">
 	Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita optio voluptates distinctio nam facere consequatur magni suscipit dolore earum molestiae esse placeat commodi, voluptas atque. Maxime, molestiae. Doloremque, reprehenderit numquam.
 </div>
 
-<div class="viewTabsPanel" [class.active]="tabActive === 4" role="tabpanel" id="panel4" aria-labelledby="tab4" tabindex="0">
+<div class="viewTabs_panel" [class.active]="tabActive === 4" role="tabpanel" id="panel4" aria-labelledby="tab4" tabindex="0">
 	Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias amet placeat deserunt nisi. Vitae delectus animi a voluptate, nisi voluptatum perspiciatis? Quisquam quam, eius molestiae vitae nesciunt iste est non.
 </div>
 	`;
