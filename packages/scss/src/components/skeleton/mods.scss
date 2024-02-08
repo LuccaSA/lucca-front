@@ -3,25 +3,39 @@
 	--components-skeleton-gradient-step-two: var(--palettes-grey-500);
 }
 
-@mixin skeletonShapeSizing($spacingsDeprecated...) {
-	@each $spacing in $spacingsDeprecated {
-		&.mod-#{$spacing} {
-			--components-skeleton-shape-height: var(--pr-t-spacings-#{$spacing});
-			--components-skeleton-shape-width: var(--pr-t-spacings-#{$spacing});
-		}
-	}
-}
-
 @mixin square {
-	@include skeletonShapeSizing('XS', 'S', 'L', 'XL', 'XXL');
 	border-radius: var(--commons-borderRadius-M);
 	height: var(--components-skeleton-shape-height);
 	width: var(--components-skeleton-shape-width);
 }
 
 @mixin circle {
-	@include skeletonShapeSizing('XS', 'S', 'L', 'XL', 'XXL');
 	border-radius: var(--commons-borderRadius-full);
 	height: var(--components-skeleton-shape-height);
 	width: var(--components-skeleton-shape-width);
+}
+
+@mixin XS {
+	--components-skeleton-shape-height: 0.5rem;
+	--components-skeleton-shape-width: 0.5rem;
+}
+
+@mixin S {
+	--components-skeleton-shape-height: 1rem;
+	--components-skeleton-shape-width: 1rem;
+}
+
+@mixin L {
+	--components-skeleton-shape-height: 2rem;
+	--components-skeleton-shape-width: 2rem;
+}
+
+@mixin XL {
+	--components-skeleton-shape-height: 3rem;
+	--components-skeleton-shape-width: 3rem;
+}
+
+@mixin XXL {
+	--components-skeleton-shape-height: 4rem;
+	--components-skeleton-shape-width: 4rem;
 }
