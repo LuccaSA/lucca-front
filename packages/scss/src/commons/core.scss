@@ -36,20 +36,24 @@ $overflow: 'hidden', 'auto', 'visible', 'scroll';
 @mixin spacing($boxModel, $boxDirection, $key, $value, $suffix: '!important', $token: true) {
 	@if $token {
 		.pr-u-#{transform.camelize($boxModel)}#{transform.capitalize($boxDirection)}#{transform.capitalize($key)} {
-			#{$boxModel}#{if($boxDirection == '', '', '-')}#{$boxDirection}: $value #{$suffix};
+			#{$boxModel}#{if($boxDirection == '', '', '-')}#{$boxDirection}: var(--pr-t-spacings-#{transform.capitalize($key)}) #{$suffix};
 		}
 	}
 	@else {
 		.u-#{transform.camelize($boxModel)}#{transform.capitalize($boxDirection)}#{transform.capitalize($key)} {
-			#{$boxModel}#{if($boxDirection == '', '', '-')}#{$boxDirection}: $value #{$suffix};
+			#{$boxModel}#{if($boxDirection == '', '', '-')}#{$boxDirection}: var(--spacings-#{transform.capitalize($key)}) #{$suffix};
 		}
 	}
 }
 
 @mixin spacings($token: true) {
+	$spacings: config.$spacingsDeprecated;
+	@if $token {
+			$spacings: config.$spacings;
+	}
 	@each $boxModel in $boxModel {
 		@each $boxDirection in $boxDirection {
-			@each $key, $value in config.$spacings {
+			@each $key, $value in $spacings {
 				@if $boxModel != 'border' or $value == 0 {
 					@include spacing($boxModel, $boxDirection, $key, $value, $token: $token);
 				}
@@ -62,7 +66,7 @@ $overflow: 'hidden', 'auto', 'visible', 'scroll';
 	}
 
 	@each $gap in $gaps {
-		@each $key, $value in config.$spacings {
+		@each $key, $value in $spacings {
 			@include spacing($gap, $boxDirection: '', $key: $key, $value: $value, $token: $token);
 		}
 	}
