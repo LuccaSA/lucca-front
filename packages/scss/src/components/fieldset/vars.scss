@@ -1,4 +1,4 @@
 @mixin vars {
-	--components-fieldset-gap: calc(var(--pr-t-spacings-XS) + var(--pr-t-spacings-XXXS));
+	--components-fieldset-gap: var(--pr-t-spacings-S);
 	--components-fieldset-contentMaxWidth: 40rem;
 }

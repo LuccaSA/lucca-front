@@ -13,8 +13,8 @@
 		display: flex;
 		align-items: center;
 		gap: var(--pr-t-spacings-XS);
-		margin-top: calc(var(--pr-t-spacings-XS) + var(--pr-t-spacings-XXXS));
-		margin-bottom: calc(var(--pr-t-spacings-XS) + var(--pr-t-spacings-XXXS));
+		margin-top: var(--pr-t-spacings-S);
+		margin-bottom: var(--pr-t-spacings-S);
 		text-wrap: balance;
 		text-align: center;
 		font-size: var(--components-divider-fontSize);
