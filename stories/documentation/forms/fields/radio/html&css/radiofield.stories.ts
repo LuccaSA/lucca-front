@@ -9,7 +9,7 @@ export default {
 
 function getTemplate(args: RadioBasicStory): string {
 	return `
-<fieldset class="formLabel-wrapper">
+<fieldset class="formLabelWrapper">
 	<legend class="formLabel">
 		Text<sup class="formLabel-required" aria-hidden="true">*</sup>
 	</legend>
