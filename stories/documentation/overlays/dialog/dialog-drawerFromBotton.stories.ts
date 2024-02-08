@@ -8,7 +8,7 @@ interface DialogDrawerFromBottomStory {
 function getTemplate(args: DialogDrawerFromBottomStory): string {
 	const modCentered = args.titleCentered ? 'mod-titleCentered' : '';
 	return `
-<div class="dialogBackdrop"></div>
+<div class="dialog_backdrop"></div>
 <div role="dialog" aria-modal="true" aria-labelledby="dialogInsideHeaderTitle1" class="dialog mod-drawer mod-fromBottom ${args.size} ${modCentered}">
 	<form class="dialog-inside">
 		<header class="dialog-inside-header">

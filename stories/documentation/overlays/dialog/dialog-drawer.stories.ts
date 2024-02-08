@@ -6,7 +6,7 @@ interface DialogDrawerStory {
 
 function getTemplate(args: DialogDrawerStory): string {
 	return `
-<div class="dialogBackdrop"></div>
+<div class="dialog_backdrop"></div>
 <div role="dialog" aria-modal="true" aria-labelledby="dialogInsideHeaderTitle1" class="dialog mod-drawer ${args.size}">
 	<form class="dialog-inside">
 		<header class="dialog-inside-header">
