@@ -23,7 +23,7 @@
 	}
 }
 
-.viewTabsPanel {
+.viewTabs_panel {
 	&:not(.active) {
 		@include panelInactive;
 	}
