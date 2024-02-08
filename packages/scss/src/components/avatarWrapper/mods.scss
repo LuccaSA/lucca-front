@@ -1,0 +1,23 @@
+@mixin XL {
+	--components-avatarWrapper-size: 4.5rem;
+	--components-avatarWrapper-fontSize: var(--sizes-XL-fontSize);
+	--components-avatarWrapper-border: 4px;
+}
+
+@mixin L {
+	--components-avatarWrapper-size: 3rem;
+	--components-avatarWrapper-fontSize: var(--sizes-L-fontSize);
+}
+
+@mixin S {
+	--components-avatarWrapper-size: 2rem;
+	--components-avatarWrapper-fontSize: var(--sizes-S-fontSize);
+	--components-avatarWrapper-overlap: var(--spacings-XXS);
+}
+
+@mixin XS {
+	--components-avatarWrapper-size: 1.5rem;
+	--components-avatarWrapper-fontSize: var(--sizes-XS-fontSize);
+	--components-avatarWrapper-border: 1px;
+	--components-avatarWrapper-overlap: var(--spacings-XXS);
+}

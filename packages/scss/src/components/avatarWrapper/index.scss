@@ -1,6 +1,6 @@
 @use 'exports' as *;
 
-.avatars {
+.avatarWrapper {
 	@include vars;
 	@include component;
 
