@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
-import { CheckboxInputComponent } from '../../forms/checkbox-input/checkbox-input.component';
-import { FormFieldComponent } from '../../form-field/form-field.component';
+import { CheckboxInputComponent } from '@lucca-front/ng/forms';
+import { FormFieldComponent } from '@lucca-front/ng/form-field';
 
 @Component({
 	selector: 'lu-dialog-content',
