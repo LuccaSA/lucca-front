@@ -1,5 +1,5 @@
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { DialogFooterComponent, DialogHeaderComponent, injectDialogData, injectDialogRef, LuDialogModule, LuDialogService, DialogContentComponent } from '@lucca-front/ng/dialog';
+import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { DialogContentComponent, DialogFooterComponent, DialogHeaderComponent, injectDialogData, injectDialogRef, LuDialogService, provideLuDialog } from '@lucca-front/ng/dialog';
 import { Component, inject } from '@angular/core';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
@@ -76,8 +76,11 @@ export default {
 	title: 'Documentation/Overlays/Dialog/Angular',
 	component: TestDialogStory,
 	decorators: [
+		applicationConfig({
+			providers: [provideLuDialog()],
+		}),
 		moduleMetadata({
-			imports: [LuDialogModule, ButtonComponent],
+			imports: [ButtonComponent],
 		}),
 	],
 } as Meta;
