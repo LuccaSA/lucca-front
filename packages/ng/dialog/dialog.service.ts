@@ -16,7 +16,7 @@ export class LuDialogService {
 			data: 'data' in config ? config.data : null,
 			disableClose: true,
 			closeOnDestroy: true,
-			role: 'dialog',
+			role: config.dismissible === false ? 'alertdialog' : 'dialog',
 			restoreFocus: true,
 			backdropClass: 'backdrop-dialog',
 			panelClass: 'dialog',
@@ -37,6 +37,9 @@ export class LuDialogService {
 		merge(cdkRef.backdropClick, cdkRef.keydownEvents.pipe(filter((e) => e.key === 'Escape' && !e.defaultPrevented)))
 			.pipe(
 				switchMap(() => {
+					if (!config.dismissible) {
+						return of(false);
+					}
 					if (config.canClose) {
 						const canClose = config.canClose(cdkRef.componentInstance);
 						if (isObservable(canClose)) {

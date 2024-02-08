@@ -15,13 +15,48 @@ export type LuDialogResult<C> = {
 }[keyof C];
 
 interface BaseLuDialogConfig<C> {
+	/**
+	 * The component or tamplate to put iside the dialog container
+	 */
 	content: ComponentType<C> | TemplateRef<C>;
+
+	/**
+	 * Data to pass to the component, will be required if the component used `injectDialogData` in a field, specifying the data that's needed.
+	 */
 	data: LuDialogData<C>;
 
+	/**
+	 * Should we put a backdrop? Defaults to true
+	 */
 	backdrop?: boolean;
+
+	/**
+	 * Can this dialog box be dismissed by clicking on the backdrop or pressing escape?
+	 *
+	 * Defaults to true, setting this to false will also remove the close button in the header
+	 * if you're using `lu-dialog-header`.
+	 */
 	dismissible?: boolean;
+
+	/**
+	 * Can be used if you don't have a header or aren't using the default one, to set an aria-label
+	 * instead of aria-labelledby on the dialog container
+	 */
 	ariaLabel?: string;
+
+	/**
+	 * This provides a way to override ano of the configuration parameters expected by cdk's `Dialog.open` method.
+	 *
+	 * WARNING: this will take full authority and override with your values no matter what's computed by LuDialogService,
+	 * use with caution.
+	 */
 	cdkConfigOverride?: DialogConfig<C>;
+
+	/**
+	 * A hook function to determine if the current dialog can be closed or not, if provided.
+	 *
+	 * @param comp the instance of the component that's inside the dialog box.
+	 */
 	canClose?: (comp: C) => boolean | Observable<boolean>;
 }
 
