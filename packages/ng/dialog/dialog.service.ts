@@ -18,7 +18,7 @@ export class LuDialogService {
 			closeOnDestroy: true,
 			role: config.dismissible === false ? 'alertdialog' : 'dialog',
 			restoreFocus: true,
-			backdropClass: 'backdrop-dialog',
+			backdropClass: 'dialog_backdrop',
 			panelClass: 'dialog',
 			ariaLabel: config.ariaLabel,
 			templateContext: () => ({ dialogRef: luDialogRef }),
