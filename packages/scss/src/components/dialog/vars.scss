@@ -9,7 +9,7 @@
 	--components-dialog-insideHeaderAreas: 'title title close';
 	--components-dialog-insideHeaderTitleAlign: left;
 	--components-dialog-insideHeaderTitlePadding: calc(var(--spacings-XXS) / 2) 0;
-	--components-dialog-insideHeaderButtonDisplay: block;
+	--components-dialog-insideHeaderButtonDisplay: flex;
 	--components-dialog-insideHeaderLinkDisplay: none;
 	--components-dialog-insideHeaderColumns: auto 1fr;
 }
