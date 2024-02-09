@@ -3,6 +3,7 @@ import { ChangeDetectionStrategy, Component, inject, Input, OnInit, ViewEncapsul
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { LuDialogRef } from '../model';
+import { CdkDialogContainer } from '@angular/cdk/dialog';
 
 let nextId = 0;
 
