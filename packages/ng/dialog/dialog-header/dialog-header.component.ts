@@ -38,7 +38,7 @@ export class DialogHeaderComponent implements OnInit {
 			if (!this.id) {
 				this.id = `lu-dialog-header-${nextId++}`;
 			}
-			(this.#ref.cdkRef.containerInstance as CdkDialogContainer)._addAriaLabelledBy(this.id);
+			(this.#ref.cdkRef.containerInstance as CdkDialogContainer)._ariaLabelledByQueue.push(this.id);
 		});
 	}
 }
