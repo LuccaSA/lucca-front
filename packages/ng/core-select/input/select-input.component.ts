@@ -105,6 +105,11 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	public clueChanged(clue: string): void {
 		if (!this.isPanelOpen) {
 			this.openPanel(clue);
+		} else if (clue.endsWith(' ')) {
+			setTimeout(() => {
+				this.emptyClue();
+				this.panelRef?.selectCurrentlyHighlightedValue();
+			});
 		} else if (this.lastEmittedClue !== clue) {
 			this.clueChange.emit(clue);
 			this.lastEmittedClue = clue;
@@ -242,6 +247,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	protected emptyClue(): void {
 		if (this.clue) {
 			this.clue = null;
+			this.changeDetectorRef.markForCheck();
 		}
 	}
 
