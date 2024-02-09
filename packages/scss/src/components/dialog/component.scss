@@ -40,27 +40,27 @@
 			position: sticky;
 			display: grid;
 			top: 0;
+		}
 
-			> .button {
-				@include button.text;
-				@include button.S;
-				@include button.onlyIconS;
+		.dialog-inside-header-button {
+			@include button.text;
+			@include button.S;
+			@include button.onlyIconS;
 
-				align-self: start;
-				justify-self: end;
-				grid-area: close;
-				display: var(--components-dialog-insideHeaderButtonDisplay);
-			}
+			align-self: start;
+			justify-self: end;
+			grid-area: close;
+			display: var(--components-dialog-insideHeaderButtonDisplay);
+		}
 
-			> .link {
-				@include link.decorationHover;
+		.dialog-inside-header-link {
+			@include link.decorationHover;
 
-				justify-self: start;
-				align-self: start;
-				grid-area: close;
-				line-height: var(--sizes-L-lineHeight);
-				display: var(--components-dialog-insideHeaderLinkDisplay);
-			}
+			justify-self: start;
+			align-self: start;
+			grid-area: close;
+			line-height: var(--sizes-L-lineHeight);
+			display: var(--components-dialog-insideHeaderLinkDisplay);
 		}
 
 		.dialog-inside-content {
