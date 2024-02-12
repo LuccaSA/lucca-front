@@ -2,7 +2,7 @@ import { inject, Injectable } from '@angular/core';
 import { LuDialogConfig, LuDialogRef, LuDialogResult } from './model';
 import { Dialog, DialogRef } from '@angular/cdk/dialog';
 import { isObservable, merge, of } from 'rxjs';
-import { filter, first, switchMap } from 'rxjs/operators';
+import { filter, first, switchMap, takeUntil } from 'rxjs/operators';
 
 @Injectable()
 export class LuDialogService {
@@ -49,6 +49,7 @@ export class LuDialogService {
 					}
 					return of(true);
 				}),
+				takeUntil(luDialogRef.closed$),
 			)
 			.subscribe((canClose) => {
 				if (canClose) {
