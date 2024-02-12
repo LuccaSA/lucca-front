@@ -4,11 +4,11 @@ lu-icon {
 	display: inline-flex;
 }
 
-.icon-color-primary {
-	color: var(--palettes-product-700);
-}
-
-.icon-color-secondary {
+// .icon-color-primary is deprecated
+// .icon-color-secondary is deprecated
+.icon-color-primary,
+.icon-color-secondary,
+.icon-color-product {
 	color: var(--palettes-product-700);
 }
 

@@ -11,7 +11,7 @@ function getTemplate(args: EmptyStateBasicStory): string {
 	<section class="emptyState">
 		<h3 class="emptyState-title">Shhh, c'est calme ici</h3>
 		<p class="emptyState-description">Vous pouvez suggérer ici une action à réaliser</p>
-		<button type="button" class="button palette-primary mod-L">Faire une action</button>
+		<button type="button" class="button palette-product mod-L">Faire une action</button>
 	</section>
 	`;
 }

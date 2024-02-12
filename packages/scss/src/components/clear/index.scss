@@ -11,11 +11,12 @@
 	// .palette-primary is deprecated
 	&.palette-product:not([disabled]),
 	&.palette-primary:not([disabled]) {
-		@include primary;
+		@include product;
 	}
 
 	&[disabled] {
 		@include disabled;
+
 		cursor: default;
 	}
 }

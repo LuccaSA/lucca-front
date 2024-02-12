@@ -3,7 +3,7 @@ import { AsyncPipe, NgClass, NgIf } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Directive, DoCheck, ElementRef, HostBinding, Injector, OnDestroy, Renderer2, Type, ViewChild, ViewContainerRef } from '@angular/core';
 import { getIntl } from '@lucca-front/ng/core';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
-import { isObservable, Observable, of, ReplaySubject, Subject, Subscription, timer } from 'rxjs';
+import { Observable, ReplaySubject, Subject, Subscription, isObservable, of, timer } from 'rxjs';
 import { delay, distinctUntilChanged, map, switchMap, tap } from 'rxjs/operators';
 import { LuModalClasses } from './modal-config.model';
 import { ALuModalRef } from './modal-ref.model';
@@ -33,7 +33,7 @@ export abstract class ALuModalPanelComponent<T extends ILuModalContent> implemen
 		return !this._componentInstance.submitAction;
 	}
 	get submitPalette() {
-		return this._componentInstance.submitPalette || 'primary';
+		return this._componentInstance.submitPalette || 'product';
 	}
 
 	submitClass$ = new Subject();

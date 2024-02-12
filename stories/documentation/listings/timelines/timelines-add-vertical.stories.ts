@@ -37,7 +37,7 @@ function getTemplate(args: TimelinesAddStepVerticalStory): string {
 		</li>
 		<li class="timeline-step">
 			<div class="timeline-step-title">
-				<button type="button" class="button palette-grey mod-S u-positionStatic">
+				<button type="button" class="button palette-neutral mod-S u-positionStatic">
 					<span class="timeline-step-title-icon" aria-hidden="true"></span>
 					Add step
 				</button>
