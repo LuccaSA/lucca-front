@@ -44,7 +44,7 @@
 		text-align: center;
 		height: var(--components-calendar-day-size);
 		font-size: var(--sizes-S-fontSize);
-		color: var(--palettes-primary-700);
+		color: var(--palettes-product-700);
 
 		.calendar-labels-item {
 			width: var(--components-calendar-day-size);
@@ -89,7 +89,7 @@
 	}
 
 	&.is-today {
-		color: var(--palettes-primary-700);
+		color: var(--palettes-product-700);
 		font-weight: 600;
 
 		&:after {
@@ -99,7 +99,7 @@
 			left: var(--spacings-XS);
 			right: var(--spacings-XS);
 			height: 2px;
-			background: var(--palettes-primary-700);
+			background: var(--palettes-product-700);
 			z-index: 1;
 		}
 	}
@@ -123,8 +123,8 @@
 
 	&.is-active {
 		.calendar-grid-item-content {
-			background: var(--palettes-primary-700);
-			color: var(--palettes-primary-text);
+			background: var(--palettes-product-700);
+			color: var(--palettes-product-text);
 		}
 
 		&.is-today {
@@ -135,7 +135,8 @@
 		}
 	}
 
-	&.is-disabled, &[disabled] {
+	&.is-disabled,
+	&[disabled] {
 		color: var(--palettes-grey-500);
 		pointer-events: none;
 

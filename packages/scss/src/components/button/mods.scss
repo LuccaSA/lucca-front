@@ -198,7 +198,7 @@
 	--components-button-padding: var(--spacings-XS) calc(var(--spacings-XS) + var(--spacings-XXS)) var(--spacings-XS) var(--spacings-S);
 
 	.button-counter {
-		background-color: var(--palettes-600, var(--palettes-primary-600));
+		background-color: var(--palettes-600, var(--palettes-product-600));
 		border-radius: 1rem;
 		display: flex;
 		font-size: var(--sizes-XS-fontSize);
@@ -211,7 +211,7 @@
 
 	&:hover {
 		.button-counter {
-			--components-button-backgroundColor: var(--palettes-500, var(--palettes-primary-500));
+			--components-button-backgroundColor: var(--palettes-500, var(--palettes-product-500));
 		}
 	}
 }

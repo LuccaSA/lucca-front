@@ -100,7 +100,7 @@
 			&:not(:disabled) {
 				~ .file-content {
 					&::before {
-						border: 1px dashed var(--palettes-primary-400);
+						border: 1px dashed var(--palettes-product-400);
 					}
 
 					.file-button {

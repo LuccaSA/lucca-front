@@ -63,23 +63,23 @@
 			&:checked ~ .checkbox-label {
 				&::before {
 					color: var(--colors-white-color);
-					background-color: var(--palettes-700, var(--palettes-primary-700));
-					box-shadow: inset 0 0 0 var(--components-checkbox-input-border-width) var(--palettes-700, var(--palettes-primary-700));
+					background-color: var(--palettes-700, var(--palettes-product-700));
+					box-shadow: inset 0 0 0 var(--components-checkbox-input-border-width) var(--palettes-700, var(--palettes-product-700));
 				}
 			}
 
 			&:not(:disabled):checked ~ .checkbox-label {
 				&:hover {
 					&::before {
-						background-color: var(--palettes-600, var(--palettes-primary-600));
-						box-shadow: inset 0 0 0 var(--components-checkbox-input-border-width) var(--palettes-600, var(--palettes-primary-600));
+						background-color: var(--palettes-600, var(--palettes-product-600));
+						box-shadow: inset 0 0 0 var(--components-checkbox-input-border-width) var(--palettes-600, var(--palettes-product-600));
 					}
 				}
 
 				&:active {
 					&::before {
-						background-color: var(--palettes-800, var(--palettes-primary-800));
-						box-shadow: inset 0 0 0 var(--components-checkbox-input-border-width) var(--palettes-800, var(--palettes-primary-800));
+						background-color: var(--palettes-800, var(--palettes-product-800));
+						box-shadow: inset 0 0 0 var(--components-checkbox-input-border-width) var(--palettes-800, var(--palettes-product-800));
 					}
 				}
 			}

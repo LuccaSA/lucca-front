@@ -221,11 +221,10 @@
 		.table-head-row-cell,
 		.table-body-row-cell,
 		.table-foot-row-cell {
-			background-color: var(--palettes-primary-50);
+			background-color: var(--palettes-product-50);
 		}
 	}
 }
-
 
 @mixin clickableSelectable {
 	&:hover {
@@ -233,7 +232,7 @@
 			.table-head-row-cell,
 			.table-body-row-cell,
 			.table-foot-row-cell {
-				background-color: var(--palettes-primary-100);
+				background-color: var(--palettes-product-100);
 			}
 		}
 	}

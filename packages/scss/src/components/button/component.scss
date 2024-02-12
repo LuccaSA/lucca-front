@@ -55,8 +55,8 @@
 	}
 
 	&:hover {
-		--components-button-color: var(--palettes-text, var(--palettes-primary-text));
-		--components-button-backgroundColor: var(--palettes-600, var(--palettes-primary-600));
+		--components-button-color: var(--palettes-text, var(--palettes-product-text));
+		--components-button-backgroundColor: var(--palettes-600, var(--palettes-product-600));
 	}
 
 	&:focus-visible {
@@ -64,7 +64,7 @@
 	}
 
 	&:active {
-		--components-button-backgroundColor: var(--palettes-800, var(--palettes-primary-800));
+		--components-button-backgroundColor: var(--palettes-800, var(--palettes-product-800));
 	}
 
 	&:disabled {

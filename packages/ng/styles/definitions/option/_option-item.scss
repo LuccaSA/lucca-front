@@ -9,7 +9,7 @@
 
 	--components-options-checkbox-left: 0.5rem;
 	--components-options-checkbox-size: 1.25rem;
-	--components-options-checkbox-color: var(--palettes-primary-700);
+	--components-options-checkbox-color: var(--palettes-product-700);
 	--components-options-checkbox-border-radius: 6px;
 	--components-options-checkbox-border-color: var(--palettes-grey-700);
 	--components-options-establishment-multiple-padding: 2rem;
@@ -33,7 +33,7 @@
 		cursor: pointer;
 
 		&.is-selected {
-			background-color: var(--palettes-primary-50);
+			background-color: var(--palettes-product-50);
 
 			&:before {
 				content: '';
@@ -42,24 +42,24 @@
 				bottom: 0;
 				left: calc(var(--spacings-XXS) * -1);
 				width: 2px;
-				background-color: var(--palettes-primary-700);
+				background-color: var(--palettes-product-700);
 				border-top-right-radius: var(--commons-borderRadius-M);
 				border-bottom-right-radius: var(--commons-borderRadius-M);
 			}
 
 			&:hover {
-				background-color: var(--palettes-primary-100);
+				background-color: var(--palettes-product-100);
 			}
 
 			&:active {
-				background-color: var(--palettes-primary-200);
+				background-color: var(--palettes-product-200);
 			}
 
 			&.is-highlighted {
-				background-color: var(--palettes-primary-100);
+				background-color: var(--palettes-product-100);
 
 				&:hover {
-					background-color: var(--palettes-primary-200);
+					background-color: var(--palettes-product-200);
 				}
 			}
 		}

@@ -69,9 +69,9 @@
 
 				&:checked {
 					~ .radioButtons-item-label {
-						background-color: var(--palettes-primary-50);
-						box-shadow: 0 0 0 var(--commons-divider-width) var(--palettes-primary-500);
-						color: var(--palettes-primary-800);
+						background-color: var(--palettes-product-50);
+						box-shadow: 0 0 0 var(--commons-divider-width) var(--palettes-product-500);
+						color: var(--palettes-product-800);
 
 						.numericBadge {
 							@include numericBadge.primary;

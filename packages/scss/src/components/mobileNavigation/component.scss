@@ -38,15 +38,15 @@
 				font-size: var(--sizes-M-lineHeight);
 			}
 
-			&[aria-current="page"] {
-				color: var(--palettes-primary-700);
+			&[aria-current='page'] {
+				color: var(--palettes-product-700);
 				font-weight: 600;
 			}
 		}
 
 		.mobileNavigation-list-item-link-counter {
-			--components-numericBadge-background: var(--palettes-primary-200);
-			--components-numericBadge-color: var(--palettes-primary-800);
+			--components-numericBadge-background: var(--palettes-product-200);
+			--components-numericBadge-color: var(--palettes-product-800);
 			box-shadow: 0 0 0 2px var(--colors-white-color);
 			position: absolute;
 			left: calc(50% + 5px);

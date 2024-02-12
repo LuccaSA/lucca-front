@@ -7,7 +7,7 @@
 			@include icon.generate('sign_confirm');
 
 			display: flex;
-			background-color: var(--palettes-700, var(--palettes-primary-700));
+			background-color: var(--palettes-700, var(--palettes-product-700));
 			padding-left: var(--components-switch-handler-offset);
 		}
 
@@ -21,7 +21,7 @@
 	&:not([disabled], [readonly]) {
 		~ .switch-label {
 			&::before {
-				background-color: var(--palettes-600, var(--palettes-primary-600));
+				background-color: var(--palettes-600, var(--palettes-product-600));
 			}
 		}
 	}
@@ -31,7 +31,7 @@
 	&:not([disabled], [readonly]) {
 		~ .switch-label {
 			&::before {
-				background-color: var(--palettes-800, var(--palettes-primary-800));
+				background-color: var(--palettes-800, var(--palettes-product-800));
 			}
 		}
 	}

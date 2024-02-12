@@ -23,23 +23,23 @@
 
 		&:checked ~ .radio-label {
 			&::before {
-				border-color: var(--palettes-700, var(--palettes-primary-700));
+				border-color: var(--palettes-700, var(--palettes-product-700));
 			}
 
 			&::after {
 				transform: scale(0.6);
-				background-color: var(--palettes-700, var(--palettes-primary-700));
+				background-color: var(--palettes-700, var(--palettes-product-700));
 			}
 		}
 
 		&:not(:disabled):checked ~ .radio-label {
 			&:hover {
 				&::before {
-					border-color: var(--palettes-700, var(--palettes-primary-700));
+					border-color: var(--palettes-700, var(--palettes-product-700));
 				}
 
 				&::after {
-					background-color: var(--palettes-700, var(--palettes-primary-700));
+					background-color: var(--palettes-700, var(--palettes-product-700));
 				}
 			}
 		}

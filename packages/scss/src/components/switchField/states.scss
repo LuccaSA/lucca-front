@@ -1,7 +1,7 @@
 @mixin checked {
 	~ .switchField-icon {
-		background-color: var(--palettes-primary-700);
-		border-color: var(--palettes-primary-700);
+		background-color: var(--palettes-product-700);
+		border-color: var(--palettes-product-700);
 
 		&::before {
 			left: 50%;
@@ -10,15 +10,15 @@
 
 	&:hover {
 		~ .switchField-icon {
-			background-color: var(--palettes-primary-600);
-			border-color: var(--palettes-primary-600);
+			background-color: var(--palettes-product-600);
+			border-color: var(--palettes-product-600);
 		}
 	}
 
 	&:active {
 		~ .switchField-icon {
-			background-color: var(--palettes-primary-800);
-			border-color: var(--palettes-primary-800);
+			background-color: var(--palettes-product-800);
+			border-color: var(--palettes-product-800);
 		}
 	}
 }
