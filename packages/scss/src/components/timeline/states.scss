@@ -11,11 +11,11 @@
 
 	~ .timeline-step {
 		.timeline-step-title {
-			color: var(--palettes-grey-600);
+			color: var(--palettes-neutral-600);
 
 			&::before {
-				background-color: var(--palettes-grey-200);
-				color: var(--palettes-grey-600);
+				background-color: var(--palettes-neutral-200);
+				color: var(--palettes-neutral-600);
 			}
 		}
 	}

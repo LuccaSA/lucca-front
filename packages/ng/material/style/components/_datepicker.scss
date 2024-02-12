@@ -85,7 +85,7 @@
 		box-shadow: form.fakeBorderOverlay(var(--commons-divider-color));
 		border: none;
 		border-radius: 0;
-		color: var(--palettes-grey-600);
+		color: var(--palettes-neutral-600);
 		height: 100%;
 		left: 0;
 		top: 0;
@@ -108,7 +108,7 @@
 md-month-view,
 mat-month-view {
 	.mat-calendar-table-header th {
-		color: var(--palettes-grey-600);
+		color: var(--palettes-neutral-600);
 		font-size: 0.9em;
 		padding-bottom: 0.4em;
 	}

@@ -5,12 +5,12 @@
 	cursor: pointer;
 
 	&:hover {
-		background-color: var(--palettes-grey-50);
+		background-color: var(--palettes-neutral-50);
 	}
 }
 
 @mixin S {
-	--components-sortableList-padding: .375rem var(--spacings-XS);
+	--components-sortableList-padding: 0.375rem var(--spacings-XS);
 	--components-sortableList-handler-size: var(--sizes-S-lineHeight);
 	--components-sortableList-description-fontSize: var(--sizes-S-fontSize);
 	--components-sortableList-description-lineHeight: var(--sizes-S-lineHeight);

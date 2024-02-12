@@ -13,7 +13,7 @@
 
 @mixin disabled {
 	--components-verticalNavigation-link-background: transparent;
-	color: var(--palettes-grey-500);
+	color: var(--palettes-neutral-500);
 	pointer-events: none;
 }
 

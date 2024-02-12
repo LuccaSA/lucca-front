@@ -28,7 +28,7 @@
 
 	.table-body-row-cell-action,
 	.table-foot-row-cell-action {
-		color: var(--palettes-grey-800);
+		color: var(--palettes-neutral-800);
 		text-decoration: none;
 
 		&:hover,
@@ -118,8 +118,8 @@
 @mixin parent {
 	.table-body-row-cell,
 	.table-foot-row-cell {
-		color: var(--palettes-grey-700);
-		background-color: var(--palettes-grey-50);
+		color: var(--palettes-neutral-700);
+		background-color: var(--palettes-neutral-50);
 		font-size: var(--sizes-S-fontSize);
 		line-height: var(--sizes-S-lineHeight);
 		font-weight: 600;
@@ -187,7 +187,7 @@
 			&::after {
 				@include icon.generate('dots_drag');
 
-				color: var(--palettes-grey-600);
+				color: var(--palettes-neutral-600);
 				font-size: var(--sizes-M-lineHeight);
 				height: 100%;
 				margin: auto;

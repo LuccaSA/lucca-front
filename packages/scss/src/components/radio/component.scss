@@ -10,13 +10,13 @@
 		&:not(:disabled) ~ .radio-label {
 			&:hover {
 				&::before {
-					border-color: var(--palettes-grey-600);
+					border-color: var(--palettes-neutral-600);
 				}
 			}
 
 			&:active {
 				&::before {
-					border-color: var(--palettes-grey-800);
+					border-color: var(--palettes-neutral-800);
 				}
 			}
 		}
@@ -50,7 +50,7 @@
 	}
 
 	.radio-label {
-		color: var(--palettes-grey-800);
+		color: var(--palettes-neutral-800);
 		line-height: var(--sizes-M-lineHeight);
 		min-height: var(--sizes-M-lineHeight);
 		padding: var(--components-radio-label-padding);
@@ -74,7 +74,7 @@
 
 		&::before {
 			background-color: var(--colors-white-color);
-			border-color: var(--palettes-grey-700);
+			border-color: var(--palettes-neutral-700);
 			border-width: 2px;
 			border-style: solid;
 		}
@@ -86,7 +86,7 @@
 	}
 
 	.radio-label-helper {
-		color: var(--palettes-grey-700);
+		color: var(--palettes-neutral-700);
 		font-size: var(--sizes-S-fontSize);
 		line-height: var(--sizes-S-lineHeight);
 	}

@@ -5,13 +5,13 @@
 	--components-options-item-padding-vertical: var(--spacings-XXS);
 	--components-options-item-padding-horizontal: var(--spacings-XS);
 	--components-options-item-multiple-padding: 2.25rem;
-	--components-options-item-icon-color: var(--palettes-grey-800);
+	--components-options-item-icon-color: var(--palettes-neutral-800);
 
 	--components-options-checkbox-left: 0.5rem;
 	--components-options-checkbox-size: 1.25rem;
 	--components-options-checkbox-color: var(--palettes-product-700);
 	--components-options-checkbox-border-radius: 6px;
-	--components-options-checkbox-border-color: var(--palettes-grey-700);
+	--components-options-checkbox-border-color: var(--palettes-neutral-700);
 	--components-options-establishment-multiple-padding: 2rem;
 }
 
@@ -65,24 +65,24 @@
 		}
 
 		&:hover {
-			background-color: var(--palettes-grey-50);
+			background-color: var(--palettes-neutral-50);
 		}
 
 		&.is-highlighted,
 		&.is-focus {
-			background-color: var(--palettes-grey-50);
+			background-color: var(--palettes-neutral-50);
 
 			&:hover {
-				background-color: var(--palettes-grey-50);
+				background-color: var(--palettes-neutral-50);
 			}
 
 			&:active {
-				background-color: var(--palettes-grey-100);
+				background-color: var(--palettes-neutral-100);
 			}
 		}
 
 		&:active {
-			background-color: var(--palettes-grey-100);
+			background-color: var(--palettes-neutral-100);
 		}
 	}
 
@@ -151,7 +151,7 @@
 			}
 
 			&.is-disabled {
-				--components-options-checkbox-border-color: var(--palettes-grey-500);
+				--components-options-checkbox-border-color: var(--palettes-neutral-500);
 			}
 
 			&:not(.is-disabled):hover {

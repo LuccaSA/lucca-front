@@ -24,7 +24,7 @@
 				border-radius: 6px;
 				transition-duration: var(--commons-animations-durations-fast);
 				transition-property: box-shadow, color, background-color;
-				box-shadow: inset 0 0 0 var(--components-checkbox-input-border-width) var(--palettes-grey-700);
+				box-shadow: inset 0 0 0 var(--components-checkbox-input-border-width) var(--palettes-neutral-700);
 				line-height: var(--components-checkbox-input-size);
 				font-size: var(--components-checkbox-input-size);
 				flex-grow: 0;
@@ -40,19 +40,19 @@
 
 			&:hover {
 				&::before {
-					box-shadow: inset 0 0 0 var(--components-checkbox-input-border-width) var(--palettes-grey-600);
+					box-shadow: inset 0 0 0 var(--components-checkbox-input-border-width) var(--palettes-neutral-600);
 				}
 			}
 
 			&:active {
 				&::before {
-					box-shadow: inset 0 0 0 var(--components-checkbox-input-border-width) var(--palettes-grey-800);
+					box-shadow: inset 0 0 0 var(--components-checkbox-input-border-width) var(--palettes-neutral-800);
 				}
 			}
 		}
 
 		.checkbox-label-helper {
-			color: var(--palettes-grey-600);
+			color: var(--palettes-neutral-600);
 			font-size: var(--sizes-S-fontSize);
 			line-height: var(--sizes-S-lineHeight);
 		}

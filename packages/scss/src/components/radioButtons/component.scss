@@ -43,8 +43,8 @@
 			padding: var(--components-radioButtons-padding);
 			font-size: var(--components-radioButtons-font-size);
 			line-height: var(--components-radioButtons-line-height);
-			color: var(--palettes-grey-700);
-			box-shadow: 0 0 0 var(--commons-divider-width) var(--palettes-grey-300);
+			color: var(--palettes-neutral-700);
+			box-shadow: 0 0 0 var(--commons-divider-width) var(--palettes-neutral-300);
 			transition-duration: var(--commons-animations-durations-fast);
 			transition-property: background-color, color, box-shadow;
 			overflow: hidden;
@@ -57,7 +57,7 @@
 			&:not(:disabled, .is-disabled) {
 				~ .radioButtons-item-label {
 					&:hover {
-						background-color: var(--palettes-grey-50);
+						background-color: var(--palettes-neutral-50);
 					}
 				}
 

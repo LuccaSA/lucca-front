@@ -15,7 +15,7 @@
 
 @mixin hover {
 	~ .radioField-icon {
-		border-color: var(--palettes-grey-600);
+		border-color: var(--palettes-neutral-600);
 	}
 }
 
@@ -35,9 +35,9 @@
 
 @mixin checkedDisabled {
 	~ .radioField-icon {
-		background-color: var(--palettes-grey-500);
-		border-color: var(--palettes-grey-500);
-		color: var(--palettes-grey-500);
+		background-color: var(--palettes-neutral-500);
+		border-color: var(--palettes-neutral-500);
+		color: var(--palettes-neutral-500);
 	}
 }
 
@@ -57,7 +57,7 @@
 
 @mixin active {
 	~ .radioField-icon {
-		border-color: var(--palettes-grey-800);
+		border-color: var(--palettes-neutral-800);
 	}
 }
 
@@ -65,7 +65,7 @@
 	cursor: default;
 
 	~ .radioField-icon {
-		border-color: var(--palettes-grey-500);
+		border-color: var(--palettes-neutral-500);
 	}
 }
 

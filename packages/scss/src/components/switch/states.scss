@@ -40,7 +40,7 @@
 @mixin hover {
 	~ .switch-label {
 		&::before {
-			background-color: var(--palettes-grey-400);
+			background-color: var(--palettes-neutral-400);
 		}
 	}
 }
@@ -49,7 +49,7 @@
 	&:not([disabled], [readonly]) {
 		~ .switch-label {
 			&::before {
-				background-color: var(--palettes-grey-600);
+				background-color: var(--palettes-neutral-600);
 			}
 		}
 	}
@@ -67,16 +67,16 @@
 
 @mixin disabled {
 	~ .switch-label {
-		color: var(--palettes-grey-500);
+		color: var(--palettes-neutral-500);
 		cursor: default;
 
 		&::before {
-			background-color: var(--palettes-grey-100);
-			color: var(--palettes-grey-500);
+			background-color: var(--palettes-neutral-100);
+			color: var(--palettes-neutral-500);
 		}
 
 		&::after {
-			background-color: var(--palettes-grey-500);
+			background-color: var(--palettes-neutral-500);
 			box-shadow: none;
 		}
 	}
@@ -85,7 +85,7 @@
 @mixin disabledChecked {
 	~ .switch-label {
 		&::before {
-			background-color: var(--palettes-grey-100);
+			background-color: var(--palettes-neutral-100);
 		}
 	}
 }

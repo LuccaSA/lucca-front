@@ -25,12 +25,12 @@
 
 @mixin disabled {
 	~ .switchField-icon {
-		background-color: var(--palettes-grey-100);
-		border-color: var(--palettes-grey-100);
-		color: var(--palettes-grey-500);
+		background-color: var(--palettes-neutral-100);
+		border-color: var(--palettes-neutral-100);
+		color: var(--palettes-neutral-500);
 
 		&::before {
-			background-color: var(--palettes-grey-500);
+			background-color: var(--palettes-neutral-500);
 		}
 	}
 }
@@ -38,12 +38,12 @@
 @mixin checkedDisabled {
 	&:disabled {
 		~ .switchField-icon {
-			background-color: var(--palettes-grey-100);
-			border-color: var(--palettes-grey-100);
-			color: var(--palettes-grey-500);
+			background-color: var(--palettes-neutral-100);
+			border-color: var(--palettes-neutral-100);
+			color: var(--palettes-neutral-500);
 
 			&::before {
-				background-color: var(--palettes-grey-500);
+				background-color: var(--palettes-neutral-500);
 			}
 		}
 	}

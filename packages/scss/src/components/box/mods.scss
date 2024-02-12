@@ -1,5 +1,5 @@
 @mixin grey {
-	--components-box-background: var(--palettes-grey-25);
+	--components-box-background: var(--palettes-neutral-25);
 }
 
 @mixin toggle {
@@ -36,7 +36,7 @@
 	left: var(--components-box-arrow-left);
 
 	&.mod-grey {
-		--components-box-arrow-background: var(--palettes-grey-25);
+		--components-box-arrow-background: var(--palettes-neutral-25);
 	}
 }
 

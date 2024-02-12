@@ -24,8 +24,8 @@
 	.label {
 		// deprecated
 		margin-right: 0;
-		background-color: var(--palettes-grey-100);
-		color: var(--palettes-grey-700);
+		background-color: var(--palettes-neutral-100);
+		color: var(--palettes-neutral-700);
 	}
 
 	@at-root ($atRoot) {
@@ -43,7 +43,7 @@
 			@include reset.button;
 			padding: var(--components-menu-padding);
 			border-radius: var(--commons-borderRadius-M);
-			color: var(--palettes-grey-800);
+			color: var(--palettes-neutral-800);
 			display: inline-flex;
 			align-items: center;
 			text-align: center;
@@ -74,7 +74,7 @@
 			&:not(.is-disabled, [disabled]) {
 				&:hover {
 					&:not(.is-active, [aria-current='page']) {
-						color: var(--palettes-grey-900);
+						color: var(--palettes-neutral-900);
 					}
 
 					.label {

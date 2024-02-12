@@ -3,9 +3,9 @@
 @use '@lucca-front/scss/src/commons/utils/reset';
 
 @mixin component($atRoot: 'without: rule') {
-	background-color: var(--palettes-700, var(--palettes-grey-200));
+	background-color: var(--palettes-700, var(--palettes-neutral-200));
 	border-radius: var(--commons-borderRadius-M);
-	color: var(--palettes-text, var(--palettes-grey-800));
+	color: var(--palettes-text, var(--palettes-neutral-800));
 	display: inline-flex;
 	align-items: center;
 	gap: var(--spacings-XS);
@@ -36,7 +36,7 @@
 
 			&::before {
 				border-radius: var(--commons-borderRadius-full);
-				background-color: var(--components-chip-kill-disk-color, var(--palettes-grey-700));
+				background-color: var(--components-chip-kill-disk-color, var(--palettes-neutral-700));
 			}
 
 			&::after {
@@ -47,7 +47,7 @@
 			}
 
 			&:hover {
-				--components-chip-kill-disk-color: var(--palettes-grey-600);
+				--components-chip-kill-disk-color: var(--palettes-neutral-600);
 				--components-chip-kill-cross-color: var(--palettes-700, var(--colors-white-color));
 			}
 
@@ -58,7 +58,7 @@
 			}
 
 			&:active {
-				--components-chip-kill-disk-color: var(--palettes-50, var(--palettes-grey-800));
+				--components-chip-kill-disk-color: var(--palettes-50, var(--palettes-neutral-800));
 			}
 		}
 	}
