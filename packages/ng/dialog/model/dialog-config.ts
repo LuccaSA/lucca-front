@@ -53,6 +53,13 @@ interface BaseLuDialogConfig<C> {
 	cdkConfigOverride?: DialogConfig<C>;
 
 	/**
+	 * CSS selector for the element that should be focused when dialog is opened.
+	 *
+	 * Defaults to `.autoFocus`
+	 */
+	autoFocus?: string;
+
+	/**
 	 * A hook function to determine if the current dialog can be closed or not, if provided.
 	 *
 	 * @param comp the instance of the component that's inside the dialog box.

@@ -15,7 +15,11 @@ import { FormFieldComponent } from '@lucca-front/ng/form-field';
 
 			<lu-dialog-content>
 				I'm the content of the dialog !
-				<lu-form-field label="Can close">
+				<lu-form-field label="Test focus" inlineMessage="This is just a test input to check autofocus">
+					<lu-text-input placeholder="This should be focused" ngModel=""></lu-text-input>
+				</lu-form-field>
+				<div class="divider"></div>
+				<lu-form-field label="Can dismiss" inlineMessage="Check this box to be able to close using the X button ,backdrop click or escape">
 					<lu-checkbox-input [(ngModel)]="canClose"></lu-checkbox-input>
 				</lu-form-field>
 				<!-- TODO Discuss focus transfer to child element with gnury-->

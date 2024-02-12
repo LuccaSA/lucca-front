@@ -4,6 +4,9 @@ import { FORM_FIELD_INSTANCE } from './form-field.token';
 @Directive({
 	selector: '[luInput]',
 	standalone: true,
+	host: {
+		class: 'luInput',
+	},
 })
 export class InputDirective implements OnInit {
 	public readonly host = inject<ElementRef<HTMLElement>>(ElementRef);

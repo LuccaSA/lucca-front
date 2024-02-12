@@ -21,6 +21,7 @@ export class LuDialogService {
 			backdropClass: 'dialog_backdrop',
 			panelClass: 'dialog',
 			ariaLabel: config.ariaLabel,
+			autoFocus: config.autoFocus || '.luInput',
 			templateContext: () => ({ dialogRef: luDialogRef }),
 			providers: (ref: DialogRef<LuDialogResult<C>, C>) => {
 				luDialogRef = new LuDialogRef(ref, config);
@@ -37,7 +38,7 @@ export class LuDialogService {
 		merge(cdkRef.backdropClick, cdkRef.keydownEvents.pipe(filter((e) => e.key === 'Escape' && !e.defaultPrevented)))
 			.pipe(
 				switchMap(() => {
-					if (!config.dismissible) {
+					if (config.dismissible === false) {
 						return of(false);
 					}
 					if (config.canClose) {

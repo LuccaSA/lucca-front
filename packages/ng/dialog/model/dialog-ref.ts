@@ -18,7 +18,9 @@ export class LuDialogRef<C> {
 	}
 
 	/**
-	 * Emits when the dialog is closed, will emit a value if closed
+	 * Emits when the dialog is closed
+	 *
+	 * Emits either the output of result$ or undefined depending on how it has been closed
 	 */
 	closed$: Observable<LuDialogResult<C> | undefined> = this.cdkRef.closed.pipe(map((res): LuDialogResult<C> | undefined => (isDismissed(res) ? undefined : res)));
 
@@ -39,7 +41,7 @@ export class LuDialogRef<C> {
 
 	dismiss(): void {
 		// If we can't dismiss this dialog box, just ignore the dismiss call.
-		if (!this.config.dismissible) {
+		if (this.config.dismissible === false) {
 			return;
 		}
 		if (this.config.canClose) {
