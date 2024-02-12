@@ -1,10 +1,8 @@
 <button class="dialog-inside-header-button" type="button" luButton (click)="close()" *ngIf="dismissible">
 	<lu-icon icon="close"></lu-icon>
-	<!--TODO i18n -->
-	<span class="u-mask">Fermer</span>
+	<span class="u-mask">{{intl.close}}</span>
 </button>
-<!--TODO i18n -->
-<button type="button" class="dialog-inside-header-link link" (click)="close()" *ngIf="dismissible">Fermer</button>
+<button type="button" class="dialog-inside-header-link link" (click)="close()" *ngIf="dismissible">{{intl.close}}</button>
 
 <h1 class="dialog-inside-header-title" [attr.id]="id">
 	<ng-content></ng-content>
