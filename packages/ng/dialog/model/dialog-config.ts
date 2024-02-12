@@ -18,7 +18,7 @@ export type LuDialogResult<C> = keyof C extends never
 
 interface BaseLuDialogConfig<C> {
 	/**
-	 * The component or tamplate to put iside the dialog container
+	 * The component or template to put inside the dialog container
 	 */
 	content: ComponentType<C> | TemplateRef<C>;
 
@@ -47,7 +47,7 @@ interface BaseLuDialogConfig<C> {
 	ariaLabel?: string;
 
 	/**
-	 * This provides a way to override ano of the configuration parameters expected by cdk's `Dialog.open` method.
+	 * This provides a way to override any of the configuration parameters expected by cdk's `Dialog.open` method.
 	 *
 	 * WARNING: this will take full authority and override with your values no matter what's computed by LuDialogService,
 	 * use with caution.
