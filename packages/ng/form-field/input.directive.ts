@@ -5,7 +5,7 @@ import { FORM_FIELD_INSTANCE } from './form-field.token';
 	selector: '[luInput]',
 	standalone: true,
 	host: {
-		class: 'luInput',
+		class: 'luNativeInput',
 	},
 })
 export class InputDirective implements OnInit {

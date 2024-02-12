@@ -1,8 +1,9 @@
-import { inject, Injectable } from '@angular/core';
+import { ElementRef, inject, Injectable } from '@angular/core';
 import { LuDialogConfig, LuDialogRef, LuDialogResult } from './model';
 import { Dialog, DialogRef } from '@angular/cdk/dialog';
-import { isObservable, merge, of } from 'rxjs';
-import { filter, first, switchMap, takeUntil } from 'rxjs/operators';
+import { isObservable, merge, of, take } from 'rxjs';
+import { filter, switchMap, takeUntil } from 'rxjs/operators';
+import { DISMISSED_VALUE } from './model/dialog-ref';
 
 @Injectable()
 export class LuDialogService {
@@ -21,7 +22,7 @@ export class LuDialogService {
 			backdropClass: 'dialog_backdrop',
 			panelClass: 'dialog',
 			ariaLabel: config.ariaLabel,
-			autoFocus: config.autoFocus || '.luInput',
+			autoFocus: 'dialog',
 			templateContext: () => ({ dialogRef: luDialogRef }),
 			providers: (ref: DialogRef<LuDialogResult<C>, C>) => {
 				luDialogRef = new LuDialogRef(ref, config);
@@ -34,6 +35,13 @@ export class LuDialogService {
 			},
 			...(config.cdkConfigOverride || {}),
 		});
+
+		if (!config.cdkConfigOverride?.autoFocus) {
+			const componentHTMLElement = cdkRef.componentRef.injector.get<ElementRef<HTMLElement>>(ElementRef)?.nativeElement;
+			const focusable: HTMLElement =
+				componentHTMLElement.querySelector('.luDialog-autofocus .luNativeInput') || componentHTMLElement.querySelector('.luDialog-autofocus') || componentHTMLElement.querySelector('.luNativeInput');
+			focusable?.focus();
+		}
 		// Setup close listeners on backdrop click and escape key by ourselves so we can hook the `canClose` method to it.
 		merge(cdkRef.backdropClick, cdkRef.keydownEvents.pipe(filter((e) => e.key === 'Escape' && !e.defaultPrevented)))
 			.pipe(
@@ -41,20 +49,15 @@ export class LuDialogService {
 					if (config.dismissible === false) {
 						return of(false);
 					}
-					if (config.canClose) {
-						const canClose = config.canClose(cdkRef.componentInstance);
-						if (isObservable(canClose)) {
-							return canClose.pipe(first());
-						}
-						return of(canClose);
-					}
-					return of(true);
+					const canClose = config.canClose?.(cdkRef.componentInstance) ?? true;
+					const canClose$ = isObservable(canClose) ? canClose : of(canClose);
+					return canClose$.pipe(take(1));
 				}),
 				takeUntil(luDialogRef.closed$),
 			)
 			.subscribe((canClose) => {
 				if (canClose) {
-					cdkRef.close();
+					cdkRef.close(DISMISSED_VALUE);
 				}
 			});
 		return luDialogRef;

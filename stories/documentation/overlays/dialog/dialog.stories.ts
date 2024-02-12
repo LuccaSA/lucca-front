@@ -7,6 +7,8 @@ import { CheckboxInputComponent, TextInputComponent } from '@lucca-front/ng/form
 import { FormsModule } from '@angular/forms';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 
+// TODO document use of .luDialog-autofocus to redirect focus
+
 @Component({
 	selector: 'test-dialog',
 	template: `
@@ -22,7 +24,6 @@ import { FormFieldComponent } from '@lucca-front/ng/form-field';
 				<lu-form-field label="Can dismiss" inlineMessage="Check this box to be able to close using the X button ,backdrop click or escape">
 					<lu-checkbox-input [(ngModel)]="canClose"></lu-checkbox-input>
 				</lu-form-field>
-				<!-- TODO Discuss focus transfer to child element with gnury-->
 			</lu-dialog-content>
 
 			<lu-dialog-footer>

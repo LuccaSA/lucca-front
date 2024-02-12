@@ -1,7 +1,7 @@
-import { isObservable, Observable } from 'rxjs';
+import { isObservable, Observable, of, take } from 'rxjs';
 import { DialogRef } from '@angular/cdk/dialog';
 import { LuDialogConfig, LuDialogResult } from './dialog-config';
-import { filter, first, map } from 'rxjs/operators';
+import { filter, map } from 'rxjs/operators';
 
 export const DISMISSED_VALUE = {} as const;
 
@@ -44,22 +44,13 @@ export class LuDialogRef<C> {
 		if (this.config.dismissible === false) {
 			return;
 		}
-		if (this.config.canClose) {
-			const canClose = this.config.canClose(this.instance);
-			if (isObservable(canClose)) {
-				canClose.pipe(first()).subscribe((close) => {
-					if (close) {
-						this.cdkRef.close(DISMISSED_VALUE);
-					}
-				});
-			} else {
-				if (canClose) {
-					this.cdkRef.close(DISMISSED_VALUE);
-				}
+		const canClose = this.config.canClose?.(this.instance) ?? true;
+		const canClose$ = isObservable(canClose) ? canClose : of(canClose);
+		canClose$.pipe(take(1)).subscribe((close) => {
+			if (close) {
+				this.cdkRef.close(DISMISSED_VALUE);
 			}
-		} else {
-			this.cdkRef.close(DISMISSED_VALUE);
-		}
+		});
 	}
 
 	close(res: LuDialogResult<C>): void {
