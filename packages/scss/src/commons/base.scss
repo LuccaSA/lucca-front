@@ -94,7 +94,7 @@
 			font-weight: 600;
 		}
 
-		@each $palette in list.join(config.$palettes, config.$states) {
+		@each $palette in list.join(config.$palettesForClasses, config.$palettesStates) {
 			$paletteExists: map.get(config.$palettesInterpolation, $palette);
 
 			@if $paletteExists {

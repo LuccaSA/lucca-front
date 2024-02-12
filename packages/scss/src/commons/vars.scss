@@ -11,7 +11,7 @@
 	@include core.cssvars('commons-loading', config.$loading);
 	@include core.cssvars('commons-text-link', config.$textLink);
 
-	@each $palette in config.$allPalettes {
+	@each $palette in config.$palettesForCssVars {
 		@include core.cssvars('palettes-#{$palette}', map.get(config.$palettesInterpolation, $palette));
 	}
 

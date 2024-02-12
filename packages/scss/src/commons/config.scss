@@ -1,14 +1,16 @@
 @use 'sass:list';
 
+$product: 'brand' !default;
 $shades: text, 25, 50, 100, 200, 300, 400, 500, 600, 700, 800, 900;
-$states: 'error', 'warning', 'success';
-$palettesDeprecated: 'lucca', 'primary', 'secondary', 'grey' !default;
-$palettes: 'brand', 'product', 'neutral', 'navigation' !default;
-$decoratives: 'kiwi', 'lime', 'cucumber', 'mint', 'glacier', 'lagoon', 'blueberry', 'lavender', 'grape', 'watermelon', 'pumpkin',
+$palettesStates: 'error', 'warning', 'success';
+$palettesDefault: 'brand', 'neutral', 'navigation', 'product';
+$palettesOtherProduct: () !default;
+$palettesDeprecated: ('lucca', 'grey', 'primary', 'secondary') !default;
+$palettesDecorative: 'kiwi', 'lime', 'cucumber', 'mint', 'glacier', 'lagoon', 'blueberry', 'lavender', 'grape', 'watermelon', 'pumpkin',
 	'pineapple' !default;
 
-$palettes: list.join($palettes, $palettesDeprecated);
-$allPalettes: list.join(list.join($palettes, $states), $decoratives);
+$palettesForClasses: list.join(list.join($palettesDefault, $palettesOtherProduct), $palettesDeprecated);
+$palettesForCssVars: list.join(list.join($palettesDefault, $palettesStates), $palettesDecorative);
 
 $brand: (
 	text: #ffffff,
@@ -79,8 +81,6 @@ $poplee: (
 	800: #005685,
 	900: #003c5c,
 ) !default;
-
-$product: $brand !default;
 
 $neutral: (
 	text: #ffffff,
@@ -311,9 +311,23 @@ $colors: (
 	'black': #121212,
 );
 
+// grey-900 is deprecated
 $colorsRgb: (
 	'white': '255, 255, 255',
+	'grey-900': '19, 29, 53',
 	'neutral-900': '19, 29, 53',
+);
+
+// switch case
+$prod: map-get(
+	(
+		'brand': $brand,
+		'cleemy': $cleemy,
+		'timmi': $timmi,
+		'poplee': $poplee,
+		'pagga': $pagga,
+	),
+	$product
 );
 
 // https://sass-lang.com/documentation/variables/#advanced-variable-functions
@@ -322,9 +336,9 @@ $palettesInterpolation: (
 	'brand': $brand,
 	'grey': $neutral,
 	'neutral': $neutral,
-	'primary': $product,
-	'secondary': $product,
-	'product': $product,
+	'primary': $prod,
+	'secondary': $prod,
+	'product': $prod,
 	'navigation': $navigation,
 	'success': $success,
 	'error': $error,
