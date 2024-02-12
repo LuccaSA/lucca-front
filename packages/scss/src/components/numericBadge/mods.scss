@@ -12,7 +12,7 @@
 	--components-numericBadge-lineHeight: var(--sizes-XS-lineHeight);
 }
 
-@mixin primary {
+@mixin product {
 	--components-numericBadge-background: var(--palettes-product-200);
 	--components-numericBadge-color: var(--palettes-product-800);
 }

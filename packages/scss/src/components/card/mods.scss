@@ -1,6 +1,6 @@
 @use '@lucca-front/scss/src/commons/utils/a11y';
 
-@mixin grey {
+@mixin neutral {
 	--components-card-background: var(--palettes-neutral-50);
 }
 

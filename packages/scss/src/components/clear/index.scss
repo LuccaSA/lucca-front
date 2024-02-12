@@ -8,6 +8,8 @@
 		@include S;
 	}
 
+	// .palette-primary is deprecated
+	&.palette-product:not([disabled]),
 	&.palette-primary:not([disabled]) {
 		@include primary;
 	}

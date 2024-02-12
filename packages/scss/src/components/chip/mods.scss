@@ -5,7 +5,7 @@
 	--components-chip-lineHeight: var(--sizes-XS-lineHeight);
 }
 
-@mixin primary {
+@mixin product {
 	.chip-kill {
 		--components-chip-kill-cross-color: var(--palettes-product-700);
 		--components-chip-kill-disk-color: var(--colors-white-color);

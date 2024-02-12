@@ -5,8 +5,10 @@
 	@include vars;
 	@include component;
 
+	// .mod-grey is deprecated
+	&.mod-neutral,
 	&.mod-grey {
-		@include grey;
+		@include neutral;
 	}
 
 	@include media.max('S') {
