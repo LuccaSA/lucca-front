@@ -1,5 +1,5 @@
 import { InjectionToken } from '@angular/core';
-import { ILuTranslation } from '../../core/translate';
+import { ILuTranslation } from '@lucca-front/ng/core';
 
 export const LU_DIALOG_HEADER_TRANSLATIONS = new InjectionToken('LuDialogHeaderTranslations', {
 	factory: () => luDialogHeaderTranslations,

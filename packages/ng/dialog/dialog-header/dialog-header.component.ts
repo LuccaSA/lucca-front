@@ -5,7 +5,7 @@ import { IconComponent } from '@lucca-front/ng/icon';
 import { LuDialogRef } from '../model';
 import { CdkDialogContainer } from '@angular/cdk/dialog';
 import { LU_DIALOG_HEADER_TRANSLATIONS } from './dialog-header.translate';
-import { getIntl } from '../../core/translate';
+import { getIntl } from '@lucca-front/ng/core';
 
 let nextId = 0;
 
