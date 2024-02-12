@@ -10,9 +10,11 @@ export type LuDialogData<T> = {
 	[K in keyof T]: T[K] extends { [dialogData]: infer D } ? D : never;
 }[keyof T];
 
-export type LuDialogResult<C> = {
-	[K in keyof C]: C[K] extends { [dialogResult]: infer R } ? R : never;
-}[keyof C];
+export type LuDialogResult<C> = keyof C extends never
+	? void
+	: {
+			[K in keyof C]: C[K] extends { [dialogResult]: infer R } ? R : void;
+	  }[keyof C];
 
 interface BaseLuDialogConfig<C> {
 	/**

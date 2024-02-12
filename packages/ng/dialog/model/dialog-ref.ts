@@ -9,7 +9,7 @@ function isDismissed(v: unknown): v is typeof DISMISSED_VALUE {
 	return v === DISMISSED_VALUE;
 }
 
-export class LuDialogRef<C> {
+export class LuDialogRef<C = unknown> {
 	/**
 	 * Instance of the component that's inside the dialog
 	 */

@@ -1,5 +1,16 @@
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { DialogContentComponent, DialogFooterComponent, DialogHeaderComponent, injectDialogData, injectDialogRef, LuDialogService, provideLuDialog } from '@lucca-front/ng/dialog';
+import {
+	DialogComponent,
+	DialogContentComponent,
+	DialogFooterComponent,
+	DialogHeaderComponent,
+	DialogOpenDirective,
+	injectDialogData,
+	injectDialogRef,
+	LuDialogRef,
+	LuDialogService,
+	provideLuDialog,
+} from '@lucca-front/ng/dialog';
 import { Component, inject } from '@angular/core';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
@@ -12,7 +23,7 @@ import { FormFieldComponent } from '@lucca-front/ng/form-field';
 @Component({
 	selector: 'test-dialog',
 	template: `
-		<div class="dialog-inside">
+		<lu-dialog>
 			<lu-dialog-header>I'm a test dialog ! Hello {{ world }}</lu-dialog-header>
 
 			<lu-dialog-content>
@@ -27,13 +38,13 @@ import { FormFieldComponent } from '@lucca-front/ng/form-field';
 			</lu-dialog-content>
 
 			<lu-dialog-footer>
-				<div class="footer-content">Je suis du texte dans le footer !</div>
+				<div class="footer-content">Footer text !</div>
 				<div class="footer-actions">
 					<button type="button" luButton (click)="close()">Confirm</button>
 					<button type="button" luButton="text" (click)="close()">Cancel</button>
 				</div>
 			</lu-dialog-footer>
-		</div>
+		</lu-dialog>
 	`,
 	imports: [
 		ButtonComponent,
@@ -45,6 +56,7 @@ import { FormFieldComponent } from '@lucca-front/ng/form-field';
 		CheckboxInputComponent,
 		FormFieldComponent,
 		DialogContentComponent,
+		DialogComponent,
 	],
 	standalone: true,
 })
@@ -61,7 +73,46 @@ class TestDialogContent {
 
 @Component({
 	selector: 'dialog-story',
-	template: ` <button luButton (click)="open()">Open Dialog</button>`,
+	template: `
+		<button luButton (click)="open()">Open Dialog</button>
+
+		<button luButton [luDialogOpen]="dialogTpl">Open Template-driven Dialog</button>
+
+		<ng-template #dialogTpl>
+			<lu-dialog #dialog>
+				<lu-dialog-header>I'm a template driven header</lu-dialog-header>
+
+				<lu-dialog-content>
+					I'm the content of the dialog !
+					<lu-form-field label="Test focus" inlineMessage="This is just a test input to check autofocus">
+						<lu-text-input placeholder="This should be focused" ngModel=""></lu-text-input>
+					</lu-form-field>
+				</lu-dialog-content>
+
+				<lu-dialog-footer>
+					<div class="footer-content">Footer text !</div>
+					<div class="footer-actions">
+						<button type="button" luButton (click)="dialog.close()">Confirm</button>
+						<button type="button" luButton (click)="closeIn3S(dialog.dialogRef)">Close in 3s</button>
+						<button type="button" luButton="text" (click)="dialog.dismiss()">Cancel</button>
+					</div>
+				</lu-dialog-footer>
+			</lu-dialog>
+		</ng-template>
+	`,
+	standalone: true,
+	imports: [
+		DialogFooterComponent,
+		CheckboxInputComponent,
+		FormFieldComponent,
+		TextInputComponent,
+		DialogContentComponent,
+		DialogHeaderComponent,
+		DialogComponent,
+		ButtonComponent,
+		FormsModule,
+		DialogOpenDirective,
+	],
 })
 class TestDialogStory {
 	dialog = inject(LuDialogService);
@@ -74,6 +125,12 @@ class TestDialogStory {
 		});
 
 		ref.closed$.subscribe(console.log);
+	}
+
+	closeIn3S(ref: LuDialogRef): void {
+		setTimeout(() => {
+			ref.close();
+		}, 3000);
 	}
 }
 
