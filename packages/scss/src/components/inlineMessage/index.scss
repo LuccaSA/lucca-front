@@ -9,14 +9,14 @@
 	}
 
 	&.is-success {
-		@include success
+		@include success;
 	}
 
 	&.is-warning {
-		@include warning
+		@include warning;
 	}
 
 	&.is-error {
-		@include error
+		@include error;
 	}
 }

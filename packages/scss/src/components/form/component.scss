@@ -3,6 +3,16 @@
 @use '@lucca-front/scss/src/components/inlineMessage/exports' as inlineMessage;
 
 @mixin component($atRoot: 'without: rule') {
+	@at-root ($atRoot) {
+		.form-fieldset {
+			margin: 0;
+			padding: 0;
+			border: 0;
+		}
+	}
+}
+
+@mixin componentDeprecated($atRoot: 'without: rule') {
 	padding: 0;
 	border: 0;
 	margin: 0 0 var(--components-form-group-margin-bottom);
