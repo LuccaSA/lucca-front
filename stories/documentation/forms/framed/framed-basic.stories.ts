@@ -188,7 +188,7 @@ function getTemplate(args: FramedBasicStory): string {
 	`;
 }
 
-const Template: StoryFn<FramedBasicStory> = (args: FramedBasicStory) => ({
+const Template: StoryFn<FramedBasicStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 });

@@ -41,7 +41,7 @@ function getTemplate(args: ProgressionBasicStory): string {
 	`;
 }
 
-const Template: StoryFn<ProgressionBasicStory> = (args: ProgressionBasicStory) => ({
+const Template: StoryFn<ProgressionBasicStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 });

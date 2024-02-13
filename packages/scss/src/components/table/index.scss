@@ -14,6 +14,14 @@
 
 	&.mod-clickable {
 		@include clickable;
+
+		.table-head-row,
+		.table-body-row,
+		.table-foot-row {
+			&.mod-selectable {
+				@include clickableSelectable;
+			}
+		}
 	}
 
 	&.mod-card {

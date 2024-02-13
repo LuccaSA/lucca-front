@@ -40,7 +40,7 @@ function getTemplate(args: GridsLegacySortStory): string {
 	`;
 }
 
-const Template: StoryFn<GridsLegacySortStory> = (args: GridsLegacySortStory) => ({
+const Template: StoryFn<GridsLegacySortStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [

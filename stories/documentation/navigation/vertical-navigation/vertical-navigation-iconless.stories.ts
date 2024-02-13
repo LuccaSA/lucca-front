@@ -1,7 +1,6 @@
-import { Meta, Story } from '@storybook/angular';
+import { Meta, StoryFn } from '@storybook/angular';
 
-interface VerticalNavigationIconlessStory {
-}
+interface VerticalNavigationIconlessStory {}
 
 export default {
 	title: 'Documentation/Navigation/VerticalNavigation/Iconless',
@@ -37,10 +36,10 @@ function getTemplate(args: VerticalNavigationIconlessStory): string {
 </nav>`;
 }
 
-const Template: Story<VerticalNavigationIconlessStory> = (args: VerticalNavigationIconlessStory) => ({
+const Template: StoryFn<VerticalNavigationIconlessStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
 export const Iconless = Template.bind({});
-Iconless.args = { };
+Iconless.args = {};

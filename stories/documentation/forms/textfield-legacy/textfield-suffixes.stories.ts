@@ -19,7 +19,7 @@ function getTemplate(args: TextfieldSearchAndSuffixStory): string {
 </label>`;
 }
 
-const Template: StoryFn<TextfieldSearchAndSuffixStory> = (args: TextfieldSearchAndSuffixStory) => ({
+const Template: StoryFn<TextfieldSearchAndSuffixStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [

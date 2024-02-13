@@ -7,13 +7,14 @@ export default {
 } as Meta;
 
 function getTemplate(args: ButtonPaletteStory): string {
-	return `<button type="button" class="button palette-success">Button</button>
-<button type="button" class="button palette-warning">Button</button>
-<button type="button" class="button palette-error">Button</button>`;
+	return `<div class="u-displayFlex u-gapXS u-alignItemsCenter">
+	<button type="button" class="button palette-success">Button</button>
+	<button type="button" class="button palette-warning">Button</button>
+	<button type="button" class="button palette-error">Button</button>
+</div>`;
 }
 
-
-const Template: StoryFn<ButtonPaletteStory> = (args: ButtonPaletteStory) => ({
+const Template: StoryFn<ButtonPaletteStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 });

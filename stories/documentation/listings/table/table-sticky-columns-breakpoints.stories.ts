@@ -145,7 +145,7 @@ function getTemplate(args: TableStickyColumnsAndHeaderWithBreakpointsStory): str
 	`;
 }
 
-const Template: StoryFn<TableStickyColumnsAndHeaderWithBreakpointsStory> = (args: TableStickyColumnsAndHeaderWithBreakpointsStory) => ({
+const Template: StoryFn<TableStickyColumnsAndHeaderWithBreakpointsStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [`.demo-wrapper {overflow: auto; height: 10rem;}`],

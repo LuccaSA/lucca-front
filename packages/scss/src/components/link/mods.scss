@@ -1,5 +1,5 @@
-@mixin icon {
-	.lucca-icon {
+@mixin icon($atRoot: 'without: rule') {
+	&:has(.link-text) {
 		text-decoration: none;
 	}
 
@@ -10,7 +10,7 @@
 		margin-left: var(--spacings-XXS);
 	}
 
-	@at-root {
+	@at-root ($atRoot) {
 		.link-text {
 			text-decoration: underline;
 		}

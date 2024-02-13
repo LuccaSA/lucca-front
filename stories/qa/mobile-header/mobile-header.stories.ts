@@ -1,22 +1,23 @@
 import { Component } from '@angular/core';
-import { Story, Meta, moduleMetadata } from '@storybook/angular';
+import { Meta, StoryFn, moduleMetadata } from '@storybook/angular';
 
 @Component({
 	standalone: true,
 	selector: 'mobile-header-stories',
 	templateUrl: './mobile-header.stories.html',
-}) class MobileHeaderStory {}
+})
+class MobileHeaderStory {}
 
 export default {
-  title: 'QA/MobileHeader',
-  component: MobileHeaderStory,
+	title: 'QA/MobileHeader',
+	component: MobileHeaderStory,
 	decorators: [
 		moduleMetadata({
-			entryComponents: [MobileHeaderStory]
-		})
-	]
+			entryComponents: [MobileHeaderStory],
+		}),
+	],
 } as Meta;
 
-const template: Story<MobileHeaderStory> = () => ({});
+const template: StoryFn<MobileHeaderStory> = () => ({});
 
 export const basic = template.bind({});

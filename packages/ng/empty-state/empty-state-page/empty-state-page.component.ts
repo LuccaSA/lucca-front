@@ -51,7 +51,7 @@ export class EmptyStatePageComponent {
 	 * Background color for content (text)
 	 */
 	@Input()
-	contentBackgroundColor = 'var(--colors-white-color)';
+	contentBackgroundColor = 'var(--commons-background-base)';
 
 	@Input({
 		required: true,

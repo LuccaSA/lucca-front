@@ -12,7 +12,7 @@ function getTemplate(args: CommaStory): string {
 	`;
 }
 
-const Template: StoryFn<CommaStory> = (args: CommaStory) => ({
+const Template: StoryFn<CommaStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [

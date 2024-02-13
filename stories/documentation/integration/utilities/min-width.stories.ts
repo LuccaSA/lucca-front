@@ -21,7 +21,7 @@ export default {
 	component: UMinWidthStory,
 } as Meta;
 
-const template: StoryFn<UMinWidthStory> = (args: UMinWidthStory) => ({
+const template: StoryFn<UMinWidthStory> = (args) => ({
 	props: args,
 });
 

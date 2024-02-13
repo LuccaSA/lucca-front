@@ -9,30 +9,30 @@ interface CardsBasicStory {
 
 export default {
 	title: 'Documentation/Structure/Cards/Basic',
-		argTypes: {
-			disabled: {
-				control: {
-					type: 'boolean',
-				}
-			},
-			elevated: {
-				control: {
-					type: 'boolean',
-				}
-			},
-			clickable: {
-				control: {
-					type: 'boolean',
-				},
-				description: 'Deprecated 🦕',
-			},
-			grey: {
-				control: {
-					type: 'boolean',
-				},
-				description: 'Deprecated 🦕',
+	argTypes: {
+		disabled: {
+			control: {
+				type: 'boolean',
 			},
 		},
+		elevated: {
+			control: {
+				type: 'boolean',
+			},
+		},
+		clickable: {
+			control: {
+				type: 'boolean',
+			},
+			description: 'Deprecated 🦕',
+		},
+		grey: {
+			control: {
+				type: 'boolean',
+			},
+			description: 'Deprecated 🦕',
+		},
+	},
 } as Meta;
 
 function getTemplate(args: CardsBasicStory): string {
@@ -50,10 +50,10 @@ function getTemplate(args: CardsBasicStory): string {
 	`;
 }
 
-const Template: StoryFn<CardsBasicStory> = (args: CardsBasicStory) => ({
+const Template: StoryFn<CardsBasicStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
 export const Basic = Template.bind({});
-Basic.args = { disabled: false, elevated: false, clickable: false, grey: false, };
+Basic.args = { disabled: false, elevated: false, clickable: false, grey: false };

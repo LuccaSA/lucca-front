@@ -17,7 +17,7 @@ function getTemplate(args: SpinStory): string {
 	`;
 }
 
-const Template: StoryFn<SpinStory> = (args: SpinStory) => ({
+const Template: StoryFn<SpinStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [

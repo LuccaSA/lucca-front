@@ -82,7 +82,7 @@ function getTemplate(args: FieldsetBasicStory): string {
 	`;
 }
 
-const Template: StoryFn<FieldsetBasicStory> = (args: FieldsetBasicStory) => ({
+const Template: StoryFn<FieldsetBasicStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 });

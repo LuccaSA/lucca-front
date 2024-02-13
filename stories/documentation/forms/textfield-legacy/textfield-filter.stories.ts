@@ -16,7 +16,7 @@ function getTemplate(args: TextfieldFilterStory): string {
 </div>`;
 }
 
-const Template: StoryFn<TextfieldFilterStory> = (args: TextfieldFilterStory) => ({
+const Template: StoryFn<TextfieldFilterStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [

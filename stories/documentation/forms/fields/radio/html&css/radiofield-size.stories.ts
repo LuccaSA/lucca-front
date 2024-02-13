@@ -28,7 +28,7 @@ function getTemplate(args: RadioSizeStory): string {
 	`;
 }
 
-const Template: StoryFn<RadioSizeStory> = (args: RadioSizeStory) => ({
+const Template: StoryFn<RadioSizeStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 });

@@ -21,7 +21,7 @@ function getTemplate(args: BoxKillableStory): string {
 	return `
 	<div class="box ${grey}">
 	    <div class="box-close">
-	        <button type="button" class="actionIcon">
+	        <button type="button" class="button mod-onlyIcon mod-text">
 	            <span aria-hidden="true" class="lucca-icon icon-signClose"></span>
 	            <span class="u-mask">Close</span>
 	        </button>
@@ -31,7 +31,7 @@ function getTemplate(args: BoxKillableStory): string {
 	`;
 }
 
-const Template: StoryFn<BoxKillableStory> = (args: BoxKillableStory) => ({
+const Template: StoryFn<BoxKillableStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [

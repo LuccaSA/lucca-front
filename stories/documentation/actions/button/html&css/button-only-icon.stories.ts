@@ -10,7 +10,7 @@ function getTemplate(args: ButtonIconStory): string {
 	return `<button type="button" class="button mod-onlyIcon"><span aria-hidden="true" class="lucca-icon icon-heart"></span></button>`;
 }
 
-const Template: StoryFn<ButtonIconStory> = (args: ButtonIconStory) => ({
+const Template: StoryFn<ButtonIconStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 });

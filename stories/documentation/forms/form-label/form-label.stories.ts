@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/angular';
+import { Meta, StoryFn } from '@storybook/angular';
 
 interface FormLabelBasicStory {
 	size: string;
@@ -28,7 +28,7 @@ function getTemplate(args: FormLabelBasicStory): string {
 	return `<label class="formLabel${size}${error}">Text<sup class="formLabel-required" aria-hidden="true">*</sup><span aria-hidden="true" class="lucca-icon icon-signHelp"></span></label>`;
 }
 
-const Template: Story<FormLabelBasicStory> = (args: FormLabelBasicStory) => ({
+const Template: StoryFn<FormLabelBasicStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 });

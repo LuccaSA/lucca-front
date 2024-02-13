@@ -87,7 +87,7 @@ export default {
 	decorators: [applicationConfig({ providers: [provideAnimations()] })],
 } as Meta;
 
-const Template: StoryFn<SidepanelStory> = (args: SidepanelStory) => ({
+const Template: StoryFn<SidepanelStory> = (args) => ({
 	props: args,
 });
 
