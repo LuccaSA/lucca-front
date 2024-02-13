@@ -94,6 +94,10 @@
 			font-weight: 600;
 		}
 
+		*:where([tabindex='0']:focus-visible) {
+			@include a11y.focusVisible($borderRadius: var(--commons-borderRadius-M));
+		}
+
 		@each $palette in list.join(config.$palettes, config.$states) {
 			$paletteExists: map.get(config.$palettesInterpolation, $palette);
 
