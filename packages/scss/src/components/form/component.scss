@@ -19,6 +19,25 @@
 	position: relative;
 
 	@at-root ($atRoot) {
+		.form-header {
+			margin-bottom: var(--spacings-M);
+		}
+
+		.form-header-title {
+			margin: 0;
+			padding: 0;
+		}
+
+		.form-header-mandatory {
+			font-size: var(--sizes-S-fontSize);
+			line-height: var(--sizes-S-lineHeight);
+			color: var(--palettes-grey-700);
+		}
+
+		.form-header-mandatory-asterisk {
+			color: var(--palettes-error-700);
+		}
+
 		.form-field {
 			position: relative;
 			display: flex;
