@@ -9,7 +9,7 @@ export default {
 
 function getTemplate(args: RadioSizeStory): string {
 	return `
-<fieldset class="formLabelWrapper">
+<fieldset class="form-fieldset">
 	<legend class="formLabel">
 		Text<sup class="formLabel-required" aria-hidden="true">*</sup>
 	</legend>
