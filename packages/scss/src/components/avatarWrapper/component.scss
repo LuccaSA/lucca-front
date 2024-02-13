@@ -39,10 +39,7 @@
 			}
 
 			&:focus-visible {
-				@include a11y.focusVisible;
-
-				border-radius: var(--commons-borderRadius-full);
-				outline-offset: 0;
+				@include a11y.focusVisible($borderRadius: var(--commons-borderRadius-full));
 			}
 		}
 
