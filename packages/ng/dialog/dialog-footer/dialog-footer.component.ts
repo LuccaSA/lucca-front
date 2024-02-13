@@ -4,7 +4,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
 	selector: 'lu-dialog-footer',
 	standalone: true,
 	imports: [],
-	templateUrl: './dialog-footer.component.html',
+	template: '<ng-content></ng-content>',
 	styleUrl: './dialog-footer.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	encapsulation: ViewEncapsulation.None,
