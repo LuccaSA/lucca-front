@@ -2,25 +2,24 @@
 @use '@lucca-front/scss/src/commons/utils/a11y';
 
 @mixin component($atRoot: 'without: rule') {
-	@include reset.list;
-
-	display: flex;
-	flex-wrap: wrap;
-	align-content: flex-start;
+	box-shadow: 0 0 0 var(--components-avatar-border) var(--components-avatar-background);
+	border-radius: var(--commons-borderRadius-full);
 
 	@at-root ($atRoot) {
+		.avatarWrapper {
+			@include reset.list;
+
+			display: flex;
+			flex-wrap: wrap;
+			align-content: flex-start;
+		}
+
 		.avatarWrapper-item {
 			margin-block: calc(var(--components-avatarWrapper-overlap) / 2);
 
 			&:not(:last-child) {
 				margin-right: calc(var(--components-avatarWrapper-overlap) * -1);
 			}
-		}
-
-		.avatarWrapper-item-action-more,
-		.avatarWrapper-item-userPicture {
-			box-shadow: 0 0 0 var(--components-avatarWrapper-border) var(--components-avatarWrapper-background);
-			border-radius: var(--commons-borderRadius-full);
 		}
 
 		.avatarWrapper-item-action {
@@ -44,12 +43,14 @@
 		}
 
 		.avatarWrapper-item-action-more {
+			box-shadow: 0 0 0 var(--components-avatar-border) var(--components-avatar-background);
+			border-radius: var(--commons-borderRadius-full);
 			display: flex;
 			align-items: center;
 			justify-content: center;
 			background-color: var(--palettes-grey-200);
-			width: var(--components-avatarWrapper-size);
-			height: var(--components-avatarWrapper-size);
+			width: var(--components-avatar-size);
+			height: var(--components-avatar-size);
 			font-size: var(--components-avatarWrapper-fontSize);
 		}
 	}

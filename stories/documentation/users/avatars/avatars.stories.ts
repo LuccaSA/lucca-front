@@ -4,48 +4,48 @@ import { Meta, StoryFn } from '@storybook/angular';
 import { squidwards } from '../user.mocks';
 
 @Component({
-	selector: 'avatarWrapper-stories',
+	selector: 'avatar-stories',
 	standalone: true,
 	imports: [LuUserPictureModule],
 	template: `
 		<ul class="avatarWrapper" [class]="sizes">
 			<li class="avatarWrapper-item">
-				<lu-user-picture aria-hidden="true" class="avatarWrapper-item-userPicture" [class]="sizes" [user]="user"></lu-user-picture>
+				<lu-user-picture aria-hidden="true" class="avatar" [class]="sizes" [user]="user"></lu-user-picture>
 				<span class="u-mask">{{ user.firstName }} {{ user.lastName }}</span>
 			</li>
 			<li class="avatarWrapper-item">
-				<lu-user-picture aria-hidden="true" class="avatarWrapper-item-userPicture" [class]="sizes" [user]="user"></lu-user-picture>
+				<lu-user-picture aria-hidden="true" class="avatar" [class]="sizes" [user]="user"></lu-user-picture>
 				<span class="u-mask">{{ user.firstName }} {{ user.lastName }}</span>
 			</li>
 			<li class="avatarWrapper-item">
-				<lu-user-picture aria-hidden="true" class="avatarWrapper-item-userPicture" [class]="sizes" [user]="user"></lu-user-picture>
+				<lu-user-picture aria-hidden="true" class="avatar" [class]="sizes" [user]="user"></lu-user-picture>
 				<span class="u-mask">{{ user.firstName }} {{ user.lastName }}</span>
 			</li>
 			<li class="avatarWrapper-item">
-				<lu-user-picture aria-hidden="true" class="avatarWrapper-item-userPicture" [class]="sizes" [user]="user"></lu-user-picture>
+				<lu-user-picture aria-hidden="true" class="avatar" [class]="sizes" [user]="user"></lu-user-picture>
 				<span class="u-mask">{{ user.firstName }} {{ user.lastName }}</span>
 			</li>
 			<li class="avatarWrapper-item">
-				<lu-user-picture aria-hidden="true" class="avatarWrapper-item-userPicture" [class]="sizes" [user]="user"></lu-user-picture>
+				<lu-user-picture aria-hidden="true" class="avatar" [class]="sizes" [user]="user"></lu-user-picture>
 				<span class="u-mask">{{ user.firstName }} {{ user.lastName }}</span>
 			</li>
 		</ul>
 
 		<ul class="avatarWrapper" [class]="sizes">
 			<li class="avatarWrapper-item">
-				<lu-user-picture aria-hidden="true" class="avatarWrapper-item-userPicture" [class]="sizes" [user]="user"></lu-user-picture>
+				<lu-user-picture aria-hidden="true" class="avatar" [class]="sizes" [user]="user"></lu-user-picture>
 				<span class="u-mask">{{ user.firstName }} {{ user.lastName }}</span>
 			</li>
 			<li class="avatarWrapper-item">
-				<lu-user-picture aria-hidden="true" class="avatarWrapper-item-userPicture" [class]="sizes" [user]="user"></lu-user-picture>
+				<lu-user-picture aria-hidden="true" class="avatar" [class]="sizes" [user]="user"></lu-user-picture>
 				<span class="u-mask">{{ user.firstName }} {{ user.lastName }}</span>
 			</li>
 			<li class="avatarWrapper-item">
-				<lu-user-picture aria-hidden="true" class="avatarWrapper-item-userPicture" [class]="sizes" [user]="user"></lu-user-picture>
+				<lu-user-picture aria-hidden="true" class="avatar" [class]="sizes" [user]="user"></lu-user-picture>
 				<span class="u-mask">{{ user.firstName }} {{ user.lastName }}</span>
 			</li>
 			<li class="avatarWrapper-item">
-				<lu-user-picture aria-hidden="true" class="avatarWrapper-item-userPicture" [class]="sizes" [user]="user"></lu-user-picture>
+				<lu-user-picture aria-hidden="true" class="avatar" [class]="sizes" [user]="user"></lu-user-picture>
 				<span class="u-mask">{{ user.firstName }} {{ user.lastName }}</span>
 			</li>
 			<li class="avatarWrapper-item" role="presentation">
@@ -61,31 +61,31 @@ import { squidwards } from '../user.mocks';
 		<ul class="avatarWrapper" [class]="sizes">
 			<li class="avatarWrapper-item">
 				<a href="#" class="avatarWrapper-item-action">
-					<lu-user-picture aria-hidden="true" class="avatarWrapper-item-userPicture" [class]="sizes" [user]="user"></lu-user-picture>
+					<lu-user-picture aria-hidden="true" class="avatar" [class]="sizes" [user]="user"></lu-user-picture>
 					<span class="u-mask">{{ user.firstName }} {{ user.lastName }}</span>
 				</a>
 			</li>
 			<li class="avatarWrapper-item">
 				<a href="#" class="avatarWrapper-item-action">
-					<lu-user-picture aria-hidden="true" class="avatarWrapper-item-userPicture" [class]="sizes" [user]="user"></lu-user-picture>
+					<lu-user-picture aria-hidden="true" class="avatar" [class]="sizes" [user]="user"></lu-user-picture>
 					<span class="u-mask">{{ user.firstName }} {{ user.lastName }}</span>
 				</a>
 			</li>
 			<li class="avatarWrapper-item">
 				<a href="#" class="avatarWrapper-item-action">
-					<lu-user-picture aria-hidden="true" class="avatarWrapper-item-userPicture" [class]="sizes" [user]="user"></lu-user-picture>
+					<lu-user-picture aria-hidden="true" class="avatar" [class]="sizes" [user]="user"></lu-user-picture>
 					<span class="u-mask">{{ user.firstName }} {{ user.lastName }}</span>
 				</a>
 			</li>
 			<li class="avatarWrapper-item">
 				<a href="#" class="avatarWrapper-item-action">
-					<lu-user-picture aria-hidden="true" class="avatarWrapper-item-userPicture" [class]="sizes" [user]="user"></lu-user-picture>
+					<lu-user-picture aria-hidden="true" class="avatar" [class]="sizes" [user]="user"></lu-user-picture>
 					<span class="u-mask">{{ user.firstName }} {{ user.lastName }}</span>
 				</a>
 			</li>
 			<li class="avatarWrapper-item">
 				<a href="#" class="avatarWrapper-item-action">
-					<lu-user-picture aria-hidden="true" class="avatarWrapper-item-userPicture" [class]="sizes" [user]="user"></lu-user-picture>
+					<lu-user-picture aria-hidden="true" class="avatar" [class]="sizes" [user]="user"></lu-user-picture>
 					<span class="u-mask">{{ user.firstName }} {{ user.lastName }}</span>
 				</a>
 			</li>
@@ -94,25 +94,25 @@ import { squidwards } from '../user.mocks';
 		<ul class="avatarWrapper" [class]="sizes">
 			<li class="avatarWrapper-item">
 				<a href="#" class="avatarWrapper-item-action">
-					<lu-user-picture aria-hidden="true" class="avatarWrapper-item-userPicture" [class]="sizes" [user]="user"></lu-user-picture>
+					<lu-user-picture aria-hidden="true" class="avatar" [class]="sizes" [user]="user"></lu-user-picture>
 					<span class="u-mask">{{ user.firstName }} {{ user.lastName }}</span>
 				</a>
 			</li>
 			<li class="avatarWrapper-item">
 				<a href="#" class="avatarWrapper-item-action">
-					<lu-user-picture aria-hidden="true" class="avatarWrapper-item-userPicture" [class]="sizes" [user]="user"></lu-user-picture>
+					<lu-user-picture aria-hidden="true" class="avatar" [class]="sizes" [user]="user"></lu-user-picture>
 					<span class="u-mask">{{ user.firstName }} {{ user.lastName }}</span>
 				</a>
 			</li>
 			<li class="avatarWrapper-item">
 				<a href="#" class="avatarWrapper-item-action">
-					<lu-user-picture aria-hidden="true" class="avatarWrapper-item-userPicture" [class]="sizes" [user]="user"></lu-user-picture>
+					<lu-user-picture aria-hidden="true" class="avatar" [class]="sizes" [user]="user"></lu-user-picture>
 					<span class="u-mask">{{ user.firstName }} {{ user.lastName }}</span>
 				</a>
 			</li>
 			<li class="avatarWrapper-item">
 				<a href="#" class="avatarWrapper-item-action">
-					<lu-user-picture aria-hidden="true" class="avatarWrapper-item-userPicture" [class]="sizes" [user]="user"></lu-user-picture>
+					<lu-user-picture aria-hidden="true" class="avatar" [class]="sizes" [user]="user"></lu-user-picture>
 					<span class="u-mask">{{ user.firstName }} {{ user.lastName }}</span>
 				</a>
 			</li>
@@ -127,15 +127,15 @@ import { squidwards } from '../user.mocks';
 		</ul>
 	`,
 })
-class AvatarWrapperStory {
+class AvatarStory {
 	@Input() @Optional() sizes: string;
 
 	user = squidwards;
 }
 
 export default {
-	title: 'Documentation/Users/AvatarWrapper/Basic',
-	component: AvatarWrapperStory,
+	title: 'Documentation/Users/Avatar/Basic',
+	component: AvatarStory,
 	argTypes: {
 		sizes: {
 			options: ['mod-XS', 'mod-S', '', 'mod-L', 'mod-XL'],
@@ -146,7 +146,7 @@ export default {
 	},
 } as Meta;
 
-const template: StoryFn<AvatarWrapperStory> = (args: AvatarWrapperStory) => ({
+const template: StoryFn<AvatarStory> = (args: AvatarStory) => ({
 	props: args,
 });
 

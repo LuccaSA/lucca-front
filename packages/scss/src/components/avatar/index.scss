@@ -1,8 +1,12 @@
 @use 'exports' as *;
 
-.avatarWrapper {
+.avatar {
 	@include vars;
 	@include component;
+}
+
+.avatarWrapper {
+	@include varsWrapper;
 
 	&.mod-XL {
 		@include XL;
