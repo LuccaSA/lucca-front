@@ -411,35 +411,41 @@ export const mockUsers = {
 	data: {
 		items: [
 			{
-				relevance: 0,
-				item: {
-					id: 6,
-					firstName: 'Chloe',
-					lastName: 'Alibert',
-					picture: null,
+				id: 6,
+				firstName: 'Chloe',
+				lastName: 'Alibert',
+				picture: null,
+			},
+			{
+				id: 7,
+				firstName: 'Marie-Françoise',
+				lastName: 'Archer',
+				picture: {
+					href: 'https://demo-ux1.ilucca.net/getFile.ashx?id=e845a0ca-dbd9-452d-adc0-c873a847a37d',
 				},
 			},
 			{
-				relevance: 0,
-				item: {
-					id: 7,
-					firstName: 'Marie-Françoise',
-					lastName: 'Archer',
-					picture: {
-						href: 'https://demo-ux1.ilucca.net/getFile.ashx?id=e845a0ca-dbd9-452d-adc0-c873a847a37d',
-					},
-				},
+				id: 49,
+				firstName: 'Laurence',
+				lastName: 'Atali',
+				picture: null,
 			},
 			{
-				relevance: 0,
-				item: {
-					id: 49,
-					firstName: 'Laurence',
-					lastName: 'Atali',
-					picture: null,
-				},
+				id: 66,
+				firstName: 'Chloe',
+				lastName: 'Alibert',
+				picture: null,
 			},
 		],
+	},
+};
+
+export const mockUsersSearch = {
+	data: {
+		items: mockUsers.data.items.map((item, relevance) => ({
+			item,
+			relevance,
+		})),
 	},
 };
 

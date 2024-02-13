@@ -10,6 +10,7 @@ import {
 	mockMe,
 	mockProjectUsers,
 	mockUsers,
+	mockUsersSearch,
 } from './mocks';
 
 export const handlers = [
@@ -100,31 +101,26 @@ export const handlers = [
 
 	http.get('/api/v3/users/scopedsearch', async () => {
 		await delay(300);
-		return HttpResponse.json(mockUsers);
+		return HttpResponse.json(mockUsersSearch);
 	}),
 
 	http.get('/api/v3/users', async ({ request }) => {
 		await delay(300);
 		const url = new URL(request.url);
 		// hard coded
-		if (url.searchParams.get('id') === '21,59') {
+		if (url.searchParams.has('id') && url.searchParams.get('fields') === 'id,department.name') {
 			// Need to cast so the type inference won't screw up
 			return HttpResponse.json({
 				data: {
-					items: [
-						{
-							id: 21,
+					items: url.searchParams
+						.get('id')
+						.split(',')
+						.map((id, index) => ({
+							id,
 							department: {
-								name: 'Commercial',
+								name: index % 2 ? 'Commercial' : 'Support',
 							},
-						},
-						{
-							id: 59,
-							department: {
-								name: 'Support',
-							},
-						},
-					],
+						})),
 				},
 			}) as any;
 		}
@@ -134,6 +130,6 @@ export const handlers = [
 
 	http.get('/api/v3/users/search', async () => {
 		await delay(300);
-		return HttpResponse.json(mockUsers);
+		return HttpResponse.json(mockUsersSearch);
 	}),
 ];
