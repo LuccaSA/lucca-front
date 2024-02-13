@@ -3,6 +3,13 @@
 		text-decoration: none;
 	}
 
+	.lucca-icon {
+		text-decoration: none;
+		font-size: var(--sizes-M-fontSize);
+		line-height: var(--sizes-XS-lineHeight);
+		margin-left: var(--spacings-XXS);
+	}
+
 	@at-root ($atRoot) {
 		.link-text {
 			text-decoration: underline;
@@ -14,16 +21,6 @@
 			&::before {
 				content: '\a0';
 			}
-		}
-
-		.lucca-icon {
-			text-decoration: none;
-			font-size: var(--sizes-M-fontSize);
-			line-height: var(--sizes-XS-lineHeight);
-		}
-
-		& > .lucca-icon {
-			margin-left: var(--spacings-XXS);
 		}
 	}
 }
