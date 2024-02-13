@@ -89,7 +89,7 @@ $overflow: 'hidden', 'auto', 'visible', 'scroll';
 }
 
 @mixin palettes($suffix: '!important') {
-	@each $palette in list.join(config.$palettesForClasses, config.$palettesStates) {
+	@each $palette in config.$palettesAll {
 		.u-text#{transform.capitalize($palette)} {
 			color: var(--palettes-#{$palette}-700) #{$suffix};
 		}

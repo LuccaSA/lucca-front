@@ -57,7 +57,7 @@
 }
 
 @mixin error {
-	@include core.cssvars('palettes', config.$error);
+	@include core.cssvars('palettes', config.$critical);
 
 	@include state;
 

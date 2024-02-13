@@ -1,16 +1,22 @@
 @use 'sass:list';
 
 $product: 'brand' !default;
-$shades: text, 25, 50, 100, 200, 300, 400, 500, 600, 700, 800, 900;
-$palettesStates: 'error', 'warning', 'success';
-$palettesDefault: 'brand', 'neutral', 'navigation', 'product';
+$palettesShades: text, 25, 50, 100, 200, 300, 400, 500, 600, 700, 800, 900;
+$palettesStates: 'critical', 'error', 'warning', 'success';
+$palettesDefault: 'brand', 'neutral', 'navigation';
+$palettesProduct: 'product';
 $palettesOtherProduct: () !default;
-$palettesDeprecated: ('lucca', 'grey', 'primary', 'secondary') !default;
 $palettesDecorative: 'kiwi', 'lime', 'cucumber', 'mint', 'glacier', 'lagoon', 'blueberry', 'lavender', 'grape', 'watermelon', 'pumpkin',
 	'pineapple' !default;
+$palettesDeprecated: ('lucca', 'grey', 'primary', 'secondary') !default;
 
-$palettesForClasses: list.join(list.join($palettesDefault, $palettesOtherProduct), $palettesDeprecated);
-$palettesForCssVars: list.join(list.join($palettesDefault, $palettesStates), $palettesDecorative);
+$palettesAll: list.join(
+	list.join(
+		list.join(list.join(list.join($palettesStates, $palettesDefault), $palettesProduct), $palettesOtherProduct),
+		$palettesDecorative
+	),
+	$palettesDeprecated
+);
 
 $brand: (
 	text: #ffffff,
@@ -134,7 +140,7 @@ $warning: (
 	900: #802a00,
 );
 
-$error: (
+$critical: (
 	text: #ffffff,
 	50: #ffebec,
 	100: #ffd6d8,
@@ -341,7 +347,8 @@ $palettesInterpolation: (
 	'product': $prod,
 	'navigation': $navigation,
 	'success': $success,
-	'error': $error,
+	'error': $critical,
+	'critical': $critical,
 	'warning': $warning,
 	'kiwi': $kiwi,
 	'lime': $lime,

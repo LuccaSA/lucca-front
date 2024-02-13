@@ -94,12 +94,12 @@
 			font-weight: 600;
 		}
 
-		@each $palette in list.join(config.$palettesForClasses, config.$palettesStates) {
+		@each $palette in config.$palettesAll {
 			$paletteExists: map.get(config.$palettesInterpolation, $palette);
 
 			@if $paletteExists {
 				.palette-#{$palette} {
-					@each $shade in config.$shades {
+					@each $shade in config.$palettesShades {
 						@if map.get($paletteExists, $shade) {
 							--palettes-#{$shade}: var(--palettes-#{$palette}-#{$shade});
 						}

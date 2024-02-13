@@ -1,4 +1,5 @@
 @use 'sass:map';
+@use 'sass:list';
 
 @use '@lucca-front/scss/src/commons/config';
 @use '@lucca-front/scss/src/commons/core';
@@ -11,7 +12,7 @@
 	@include core.cssvars('commons-loading', config.$loading);
 	@include core.cssvars('commons-text-link', config.$textLink);
 
-	@each $palette in config.$palettesForCssVars {
+	@each $palette in config.$palettesAll {
 		@include core.cssvars('palettes-#{$palette}', map.get(config.$palettesInterpolation, $palette));
 	}
 
