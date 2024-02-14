@@ -11,14 +11,14 @@ export default {
 			imports: [IconComponent],
 		}),
 	],
-	render: ({ luButton, ...inputs }, { argTypes }) => {
+	render: ({ luButton, label, ...inputs }, { argTypes }) => {
 		return {
-			template: `<button luButton${luButton !== '' ? `="${luButton}"` : ''} ${generateInputs(inputs, argTypes)}><lu-icon icon="signInfo"></lu-icon></button>`,
+			template: `<button luButton${luButton !== '' ? `="${luButton}"` : ''} ${generateInputs(inputs, argTypes)}><lu-icon icon="signInfo"></lu-icon>${label}</button>`,
 		};
 	},
 } as Meta;
 
-export const Basic: StoryObj<ButtonComponent> = {
+export const Basic: StoryObj<ButtonComponent & {label: string}> = {
 	argTypes: {
 		luButton: {
 			options: ['', 'outlined', 'text', 'text-invert'],
@@ -33,5 +33,6 @@ export const Basic: StoryObj<ButtonComponent> = {
 		palette: 'none',
 		state: 'default',
 		luButton: '',
+		label: '',
 	},
 };

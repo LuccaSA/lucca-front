@@ -69,7 +69,7 @@ export class ButtonComponent implements OnChanges {
 			[`palette-${this.palette}`]: true,
 			[`is-${this.state}`]: true,
 			['mod-onlyIcon']: this.iconOnly,
-			['withIcon']: this.#iconComponentRef !== undefined,
+			['mod-withIcon']: this.#iconComponentRef !== undefined,
 		};
 
 		if (this.luButton !== '') {
