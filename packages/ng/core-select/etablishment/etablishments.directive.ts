@@ -20,13 +20,7 @@ export type LuCoreSelectEstablishmentsApiParams = {
 	standalone: true,
 	exportAs: 'luEstablishments',
 })
-export class LuCoreSelectEstablishmentsDirective<
-		T extends LuCoreSelectEstablishment = LuCoreSelectEstablishment,
-		TParams extends LuCoreSelectEstablishmentsApiParams = LuCoreSelectEstablishmentsApiParams,
-	>
-	extends ALuCoreSelectApiDirective<T, TParams>
-	implements OnInit
-{
+export class LuCoreSelectEstablishmentsDirective<T extends LuCoreSelectEstablishment = LuCoreSelectEstablishment> extends ALuCoreSelectApiDirective<T> implements OnInit {
 	#groupingService = inject(EstablishmentGroupingService);
 	#destroyRef = inject(DestroyRef);
 
@@ -38,8 +32,8 @@ export class LuCoreSelectEstablishmentsDirective<
 	}
 
 	@Input()
-	public set filters(filters: TParams) {
-		this._params.set(filters);
+	public set filters(filters: Record<string, string | number | boolean> | null) {
+		this._filters.set(filters);
 	}
 
 	@Input()
@@ -53,7 +47,7 @@ export class LuCoreSelectEstablishmentsDirective<
 	}
 
 	protected _url = signal<string>('/organization/structure/api/establishments');
-	protected _params = signal<TParams | null>(null);
+	protected _filters = signal<Record<string, string | number | boolean> | null>(null);
 	protected _operationIds = signal<number[] | null>(null);
 	protected _appInstanceId = signal<number | null>(null);
 
@@ -71,7 +65,7 @@ export class LuCoreSelectEstablishmentsDirective<
 		});
 	}
 
-	protected override getOptions(params: TParams, page: number): Observable<T[]> {
+	protected override getOptions(params: Record<string, string | number | boolean> | null, page: number): Observable<T[]> {
 		return this.httpClient
 			.get<T[] | { items: T[] }>(this._url(), {
 				params: {
@@ -83,7 +77,12 @@ export class LuCoreSelectEstablishmentsDirective<
 			.pipe(map((res) => (Array.isArray(res) ? res : res?.items) ?? []));
 	}
 
-	protected override params$: Observable<TParams> = combineLatest([toObservable(this._params), this.clue$, toObservable(this._operationIds), toObservable(this._appInstanceId)]).pipe(
+	protected override params$: Observable<Record<string, string | number | boolean>> = combineLatest([
+		toObservable(this._filters),
+		this.clue$,
+		toObservable(this._operationIds),
+		toObservable(this._appInstanceId),
+	]).pipe(
 		map(([filters, clue, operationIds, appInstanceId]) => ({
 			...filters,
 			...(clue ? { clue: sanitizeClueFilter(clue) } : {}),

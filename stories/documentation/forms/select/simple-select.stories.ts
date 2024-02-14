@@ -9,6 +9,7 @@ import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 import { Meta, applicationConfig, moduleMetadata } from '@storybook/angular';
 import { HiddenArgType } from 'stories/helpers/common-arg-types';
 import { getStoryGenerator, useDocumentationStory } from 'stories/helpers/stories';
+import { LuCoreSelectCustomEstablishmentsDirective } from './custom-establishment-example.component';
 import { ILegume, LuCoreSelectInputStoryComponent, allLegumes, colorNameByColor, coreSelectStory } from './select.utils';
 
 export type LuSimpleSelectInputStoryComponent = LuCoreSelectInputStoryComponent & {
@@ -229,6 +230,35 @@ export const Establishment = generateStory({
 	},
 });
 
+export const EstablishmentCustom = generateStory({
+	name: 'Establishment Select (custom)',
+	description: "Pour saisir un établissement, il suffit d'utiliser la directive `establishments`",
+	template: `
+	<lu-simple-select
+		#establishmentsRef="luCustomEstablishments"
+		placeholder="Placeholder..."
+		customEstablishments
+		[(ngModel)]="selectedEstablishment"
+	>
+		<ng-container *luDisplayer="let establishment; select: establishmentsRef.select">
+			👉👉👉 {{ establishment.name }} 👈👈👈
+		</ng-container>
+		<ng-container *luOption="let establishment; select: establishmentsRef.select">
+			{{ establishment.name }} <span class="u-textLight">(Random {{ establishment.myCustomProperty }})</span>
+		</ng-container>
+	</lu-simple-select>
+	`,
+	neededImports: {
+		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent'],
+		'@lucca-front/ng/core-select': ['LuDisplayerDirective', 'LuOptionDirective'],
+	},
+	storyPartial: {
+		args: {
+			selectedLegume: allLegumes[4],
+		},
+	},
+});
+
 export const GroupBy = generateStory({
 	name: 'Group options',
 	description: "Pour grouper les options, il suffit d'utiliser la directive `luOptionGroup`.",
@@ -281,6 +311,7 @@ const meta: Meta<LuSimpleSelectInputStoryComponent> = {
 				LuCoreSelectApiV3Directive,
 				LuCoreSelectApiV4Directive,
 				LuCoreSelectEstablishmentsDirective,
+				LuCoreSelectCustomEstablishmentsDirective,
 				LuDisabledOptionDirective,
 				LuOptionGroupDirective,
 			],
