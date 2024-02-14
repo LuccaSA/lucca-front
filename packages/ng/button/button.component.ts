@@ -16,7 +16,7 @@ import { IconComponent } from '@lucca-front/ng/icon';
 })
 export class ButtonComponent implements OnChanges {
 	#ngClazz = inject(NgClazz);
-	#elementRef = inject(ElementRef);
+	#elementRef = inject<ElementRef<HTMLButtonElement>>(ElementRef);
 
 	@Input()
 	size: 'M' | 'S' | 'XS';
@@ -39,21 +39,21 @@ export class ButtonComponent implements OnChanges {
 	 */
 	luButton: '' | 'outlined' | 'text' | 'text-invert' = '';
 
-	#iconComponentRef?: ElementRef;
+	#iconComponentRef?: ElementRef<HTMLElement>;
 
-	@ContentChild(IconComponent, { read: ElementRef })
-	set iconComponentRef(ref: ElementRef) {
+	@ContentChild(IconComponent, { read: ElementRef<HTMLElement> })
+	set iconComponentRef(ref: ElementRef<HTMLElement>) {
 		this.#iconComponentRef = ref;
 		this.updateClasses();
 	}
 
 	private get iconOnly(): boolean {
-		const listOfNode = Array.from((this.#elementRef?.nativeElement as HTMLButtonElement)?.childNodes || []);
-		const noText = listOfNode.every((node) => node.nodeName !== '#text');
+		const childNodes = Array.from(this.#elementRef?.nativeElement?.childNodes || []);
+		const noText = childNodes.every(({ nodeName }) => nodeName !== '#text');
 		// ignore icon and comment
 		const noSpan =
-			listOfNode.filter((node) => {
-				return !(node.nodeName === '#comment' || (node as HTMLElement)?.tagName?.toLowerCase() === 'lu-icon');
+			childNodes.filter(({ nodeName }) => {
+				return !(nodeName === '#comment' || nodeName.toLowerCase() === 'lu-icon');
 			}).length == 0;
 		return !!this.#iconComponentRef && noSpan && noText;
 	}
