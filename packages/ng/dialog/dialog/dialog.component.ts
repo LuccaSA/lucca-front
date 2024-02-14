@@ -4,7 +4,6 @@ import { LuDialogRef } from '../model';
 @Component({
 	selector: 'lu-dialog',
 	standalone: true,
-	imports: [],
 	template: '<ng-content></ng-content>',
 	styleUrl: './dialog.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,

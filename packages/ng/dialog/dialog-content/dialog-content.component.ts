@@ -3,7 +3,6 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
 @Component({
 	selector: 'lu-dialog-content',
 	standalone: true,
-	imports: [],
 	template: '<ng-content></ng-content>',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	encapsulation: ViewEncapsulation.None,
