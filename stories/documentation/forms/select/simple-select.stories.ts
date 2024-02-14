@@ -4,7 +4,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { LuDisabledOptionDirective, LuDisplayerDirective, LuOptionDirective, LuOptionGroupDirective } from '@lucca-front/ng/core-select';
 import { LuCoreSelectApiV3Directive, LuCoreSelectApiV4Directive } from '@lucca-front/ng/core-select/api';
-import { LuCoreSelectEstablishmentsDirective } from '@lucca-front/ng/core-select/etablishment';
+import { LuCoreSelectEstablishmentsDirective } from '@lucca-front/ng/core-select/establishment';
 import { LuCoreSelectJobQualificationsDirective } from '@lucca-front/ng/core-select/job-qualification';
 import { LuCoreSelectUsersDirective } from '@lucca-front/ng/core-select/user';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
@@ -379,7 +379,7 @@ const meta: Meta<LuSimpleSelectInputStoryComponent> = {
 				LuOptionGroupDirective,
 			],
 		}),
-		applicationConfig({ providers: [provideHttpClient(), provideCoreSelectCurrentUserId(() => 6)] }),
+		applicationConfig({ providers: [provideHttpClient(), provideCoreSelectCurrentUserId(() => 66)] }),
 	],
 	args: {
 		placeholder: 'Placeholder...',

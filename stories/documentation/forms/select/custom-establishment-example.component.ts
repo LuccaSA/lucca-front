@@ -1,5 +1,5 @@
 import { Directive } from '@angular/core';
-import { LuCoreSelectEstablishment, LuCoreSelectEstablishmentsDirective } from '@lucca-front/ng/core-select/etablishment';
+import { LuCoreSelectEstablishment, LuCoreSelectEstablishmentsDirective } from '@lucca-front/ng/core-select/establishment';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 

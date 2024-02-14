@@ -1,7 +1,7 @@
 import { AsyncPipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { PORTAL_CONTEXT } from '@lucca-front/ng/core';
-import { LuOptionGroupByContext } from '../select.model';
+import { LuOptionGroupByContext } from '@lucca-front/ng/core-select';
 import { LuCoreSelectJobQualification } from './models';
 
 @Component({

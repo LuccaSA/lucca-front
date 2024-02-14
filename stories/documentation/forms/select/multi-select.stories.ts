@@ -4,9 +4,9 @@ import { FormsModule } from '@angular/forms';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { LuDisabledOptionDirective, LuDisplayerDirective, LuOptionDirective, LuOptionGroupDirective } from '@lucca-front/ng/core-select';
 import { LuCoreSelectApiV3Directive, LuCoreSelectApiV4Directive } from '@lucca-front/ng/core-select/api';
-import { LuCoreSelectEstablishmentsDirective } from '@lucca-front/ng/core-select/etablishment';
+import { LuCoreSelectEstablishmentsDirective } from '@lucca-front/ng/core-select/establishment';
 import { LuCoreSelectJobQualificationsDirective } from '@lucca-front/ng/core-select/job-qualification';
-import { LuCoreSelectUsersDirective } from '@lucca-front/ng/core-select/user';
+import { LuCoreSelectUsersDirective, provideCoreSelectCurrentUserId } from '@lucca-front/ng/core-select/user';
 import { LuMultiDisplayerDirective, LuMultiSelectDisplayerInputDirective, LuMultiSelectInputComponent } from '@lucca-front/ng/multi-select';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 import { Meta, applicationConfig, moduleMetadata } from '@storybook/angular';
@@ -235,6 +235,23 @@ export const Establishment = generateStory({
 	},
 });
 
+export const User = generateStory({
+	name: 'User Select',
+	description: "Pour saisir un utilisateur, il suffit d'utiliser la directive `users`",
+	template: `
+	<lu-multi-select
+		class="multiSelect"
+		placeholder="Placeholder..."
+		users
+		[(ngModel)]="selectedUsers"
+	></lu-multi-select>
+	`,
+	neededImports: {
+		'@lucca-front/ng/multi-select': ['LuMultiSelectInputComponent'],
+		'@lucca-front/ng/core-select/user': ['LuCoreSelectUsersDirective'],
+	},
+});
+
 export const JobQualification = generateStory({
 	name: 'JobQualification Select',
 	description: "Pour saisir une qualification, il suffit d'utiliser la directive `jobQualifications`",
@@ -308,7 +325,7 @@ const meta: Meta<LuMultiSelectInputStoryComponent> = {
 			],
 		}),
 		applicationConfig({
-			providers: [provideAnimations(), provideHttpClient()],
+			providers: [provideAnimations(), provideHttpClient(), provideCoreSelectCurrentUserId(() => 66)],
 		}),
 	],
 	args: {

@@ -14,7 +14,7 @@
 					[attr.aria-labelledby]="selectId + '-group-' + group.key"
 				>
 					<span class="lu-picker-content-option-group-title" role="presentation" [id]="selectId + '-group-' + group.key">
-						<ng-container *luPortal="grouping.content; context: { $implicit: group, select: selectInput }" />
+						<ng-container *luPortal="grouping.content; context: { $implicit: group }" />
 					</span>
 					<ng-template [ngTemplateOutlet]="optionsList" [ngTemplateOutletContext]="{ $implicit: group.options }" />
 				</div>

@@ -1,7 +1,7 @@
 import { AsyncPipe, NgIf } from '@angular/common';
 import { Component, inject } from '@angular/core';
+import { ILuOptionContext, LU_OPTION_CONTEXT } from '@lucca-front/ng/core-select';
 import { LuUserDisplayPipe } from '@lucca-front/ng/user';
-import { ILuOptionContext, LU_OPTION_CONTEXT } from '../option';
 import { LuCoreSelectUser } from './user-option.model';
 import { LuCoreSelectUsersDirective } from './users.directive';
 
