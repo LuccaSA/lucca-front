@@ -1,17 +1,17 @@
-import { DestroyRef, Directive, Input, OnInit, inject } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { LuCoreSelectApiV4Directive } from '@lucca-front/ng/core-select/api';
-import { BehaviorSubject, Observable, combineLatest, distinctUntilChanged, filter, map } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { DestroyRef, Directive, Input, OnInit, inject, signal } from '@angular/core';
+import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
+import { ALuCoreSelectApiDirective } from '@lucca-front/ng/core-select/api';
+import { Observable, combineLatest, filter, map } from 'rxjs';
 import { LuEstablishmentGroupingComponent } from './establishment-grouping.component';
 import { EstablishmentGroupingService } from './establishment-grouping.service';
 import { LuCoreSelectEstablishment } from './models';
 
-export interface LuCoreSelectEstablishmentsApiConfig {
-	url: string;
-	filters: Record<string, string | number | boolean>;
-	appInstanceId: number;
-	operations: number[];
-}
+export type LuCoreSelectEstablishmentsApiParams = {
+	appInstanceId?: number;
+	operationIds?: string;
+	clue?: string;
+};
 
 @Directive({
 	// The attribute is already prefixed with "lu-simple-select" / "lu-multi-select"
@@ -19,16 +19,39 @@ export interface LuCoreSelectEstablishmentsApiConfig {
 	selector: 'lu-simple-select[establishments],lu-multi-select[establishments]',
 	standalone: true,
 })
-export class LuCoreSelectEstablishmentsDirective<T extends LuCoreSelectEstablishment> extends LuCoreSelectApiV4Directive<T> implements OnInit {
-	#defaultEstablishmentsUrl = '/organization/structure/api/establishments';
+export class LuCoreSelectEstablishmentsDirective<T extends LuCoreSelectEstablishment, TParams extends LuCoreSelectEstablishmentsApiParams>
+	extends ALuCoreSelectApiDirective<T, TParams>
+	implements OnInit
+{
 	#groupingService = inject(EstablishmentGroupingService);
 	#destroyRef = inject(DestroyRef);
 
-	constructor() {
-		super();
+	protected httpClient = inject(HttpClient);
 
-		this.url$.next(this.#defaultEstablishmentsUrl);
+	@Input()
+	public set url(url: string | null) {
+		this._url.set(url);
 	}
+
+	@Input()
+	public set filters(filters: TParams) {
+		this._params.set(filters);
+	}
+
+	@Input()
+	public set operationIds(ids: number[] | null) {
+		this._operationIds.set(ids);
+	}
+
+	@Input()
+	public set appInstanceId(id: number | null) {
+		this._appInstanceId.set(id);
+	}
+
+	protected _url = signal<string>('/organization/structure/api/establishments');
+	protected _params = signal<TParams | null>(null);
+	protected _operationIds = signal<number[] | null>(null);
+	protected _appInstanceId = signal<number | null>(null);
 
 	public override ngOnInit(): void {
 		super.ngOnInit();
@@ -41,44 +64,28 @@ export class LuCoreSelectEstablishmentsDirective<T extends LuCoreSelectEstablish
 		});
 	}
 
-	protected operationIds$ = new BehaviorSubject<number[] | null>(null);
-	protected appInstanceId$ = new BehaviorSubject<number | null>(null);
+	protected override getOptions(params: TParams, page: number): Observable<T[]> {
+		return this.httpClient
+			.get<T[] | { items: T[] }>(this._url(), {
+				params: {
+					...params,
+					page: page + 1,
+					limit: this.pageSize,
+				},
+			})
+			.pipe(map((res) => (Array.isArray(res) ? res : res?.items) ?? []));
+	}
 
-	protected override params$: Observable<Record<string, string | number | boolean>> = combineLatest([
-		distinct(this.filters$, (f) => JSON.stringify(f)),
-		distinct(this.sort$),
-		distinct(this.clue$),
-		distinct(this.operationIds$, (ids) => JSON.stringify(ids)),
-		distinct(this.appInstanceId$),
-	]).pipe(
-		map(([filters, sortBy, clue, operationIds, appInstanceId]) => ({
+	protected override params$: Observable<TParams> = combineLatest([toObservable(this._params), this.clue$, toObservable(this._operationIds), toObservable(this._appInstanceId)]).pipe(
+		map(([filters, clue, operationIds, appInstanceId]) => ({
 			...filters,
-			...(sortBy ? { sortBy } : {}),
 			...(clue ? { clue: sanitizeClueFilter(clue) } : {}),
 			...(operationIds ? { operationIds: operationIds.join(',') } : {}),
 			...(appInstanceId ? { appInstanceId } : {}),
 		})),
 	);
 
-	@Input('establishments')
-	public set config(config: Partial<LuCoreSelectEstablishmentsApiConfig>) {
-		if (config.url) {
-			this.url$.next(config.url);
-		}
-		if (config.filters) {
-			this.filters$.next(config.filters);
-		}
-		if (config.appInstanceId) {
-			this.appInstanceId$.next(config.appInstanceId);
-		}
-		if (config.operations) {
-			this.operationIds$.next(config.operations);
-		}
-	}
-}
-
-function distinct<T>(obs$: Observable<T>, by?: (item: T) => string): Observable<T> {
-	return obs$.pipe(distinctUntilChanged(by && ((a, b) => by(a) === by(b))));
+	protected override optionComparer = (a: T, b: T) => a.id === b.id;
 }
 
 function sanitizeClueFilter(clue: string) {
