@@ -36,24 +36,23 @@ export class LuDialogService {
 			...(config.cdkConfigOverride || {}),
 		});
 
-		// Setup close listeners on backdrop click and escape key by ourselves so we can hook the `canClose` method to it.
-		merge(cdkRef.backdropClick, cdkRef.keydownEvents.pipe(filter((e) => e.key === 'Escape' && !e.defaultPrevented)))
-			.pipe(
-				switchMap(() => {
-					if (config.dismissible === false) {
-						return of(false);
+		if (config.dismissible !== false) {
+			// Setup close listeners on backdrop click and escape key by ourselves so we can hook the `canClose` method to it.
+			merge(cdkRef.backdropClick, cdkRef.keydownEvents.pipe(filter((e) => e.key === 'Escape' && !e.defaultPrevented)))
+				.pipe(
+					switchMap(() => {
+						const canClose = config.canClose?.(cdkRef.componentInstance) ?? true;
+						const canClose$ = isObservable(canClose) ? canClose : of(canClose);
+						return canClose$.pipe(take(1));
+					}),
+					takeUntil(luDialogRef.closed$),
+				)
+				.subscribe((canClose) => {
+					if (canClose) {
+						cdkRef.close(DISMISSED_VALUE);
 					}
-					const canClose = config.canClose?.(cdkRef.componentInstance) ?? true;
-					const canClose$ = isObservable(canClose) ? canClose : of(canClose);
-					return canClose$.pipe(take(1));
-				}),
-				takeUntil(luDialogRef.closed$),
-			)
-			.subscribe((canClose) => {
-				if (canClose) {
-					cdkRef.close(DISMISSED_VALUE);
-				}
-			});
+				});
+		}
 		return luDialogRef;
 	}
 }
