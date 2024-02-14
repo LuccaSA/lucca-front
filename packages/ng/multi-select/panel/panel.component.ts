@@ -10,6 +10,7 @@ import { LuMultiSelectInputComponent } from '../input';
 import { LuMultiSelectPanelRef } from '../input/panel.model';
 import { MULTI_SELECT_INPUT } from '../select.model';
 import { LU_MULTI_SELECT_TRANSLATIONS } from '../select.translate';
+import { LuNotSelectedOptionsPipe } from './not-selected.pipe';
 import { LuIsOptionSelectedPipe } from './option-selected.pipe';
 import { ɵLuMultiSelectSelectedChipDirective } from './selected-chip.directive';
 
@@ -31,6 +32,7 @@ import { ɵLuMultiSelectSelectedChipDirective } from './selected-chip.directive'
 		ɵLuMultiSelectSelectedChipDirective,
 		NgTemplateOutlet,
 		PortalDirective,
+		LuNotSelectedOptionsPipe,
 	],
 })
 export class LuMultiSelectPanelComponent<T> implements AfterViewInit {
@@ -85,15 +87,13 @@ export class LuMultiSelectPanelComponent<T> implements AfterViewInit {
 		this._keyManager?.setActiveItem(this.optionsQL.toArray().findIndex((o) => o.option === option));
 	}
 
-	toggleOptions(options: T[]): void {
-		const notSelected = options.filter((o) => !this.selectedOptions.some((so) => this.optionComparer(so, o)));
-
-		if (notSelected.length) {
+	toggleOptions(notSelectedOptions: T[], groupOptions: T[]): void {
+		if (notSelectedOptions.length) {
 			// If some options are not selected, select them all
-			this.selectedOptions = [...this.selectedOptions, ...notSelected];
+			this.selectedOptions = [...this.selectedOptions, ...notSelectedOptions];
 		} else {
 			// If all options are already selected, unselect them all
-			this.selectedOptions = this.selectedOptions.filter((o) => !options.some((so) => this.optionComparer(so, o)));
+			this.selectedOptions = this.selectedOptions.filter((o) => !groupOptions.some((so) => this.optionComparer(so, o)));
 		}
 
 		this.panelRef.emitValue(this.selectedOptions);
