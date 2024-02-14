@@ -13,7 +13,7 @@ function getTemplate(args: ButtonIconStory): string {
 <button type="button" class="button mod-text mod-onlyIcon mod-delete"><span aria-hidden="true" class="lucca-icon icon-trashDelete"></span><span class="u-mask">Supprimer</span></button>`;
 }
 
-const Template: StoryFn<ButtonIconStory> = (args: ButtonIconStory) => ({
+const Template: StoryFn<ButtonIconStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 });

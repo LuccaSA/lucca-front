@@ -10,7 +10,7 @@ function getTemplate(args: ButtonCounterStory): string {
 	return `<button type="button" class="button">Button<span class="numericBadge">7</span></button>`;
 }
 
-const Template: StoryFn<ButtonCounterStory> = (args: ButtonCounterStory) => ({
+const Template: StoryFn<ButtonCounterStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 });

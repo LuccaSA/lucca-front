@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/angular';
+import { Meta, StoryFn } from '@storybook/angular';
 
 interface ClearBasicStory {
 	s: boolean;
@@ -36,7 +36,7 @@ function getTemplate(args: ClearBasicStory): string {
 	`;
 }
 
-const Template: Story<ClearBasicStory> = (args: ClearBasicStory) => ({
+const Template: StoryFn<ClearBasicStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 });

@@ -15,7 +15,7 @@ function getTemplate(args: ShadowsStory): string {
 <div class="u-elevate6"><code class="code">u-elevate6</code></div>`;
 }
 
-const Template: StoryFn<ShadowsStory> = (args: ShadowsStory) => ({
+const Template: StoryFn<ShadowsStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [

@@ -15,7 +15,7 @@ function getTemplate(args: TextSizeStory): string {
 <span class="u-textXXL">XXL</span>`;
 }
 
-const Template: StoryFn<TextSizeStory> = (args: TextSizeStory) => ({
+const Template: StoryFn<TextSizeStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [

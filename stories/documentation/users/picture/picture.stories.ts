@@ -43,7 +43,7 @@ export default {
 	},
 } as Meta;
 
-const template: StoryFn<UserPictureStory> = (args: UserPictureStory) => ({
+const template: StoryFn<UserPictureStory> = (args) => ({
 	props: args,
 });
 

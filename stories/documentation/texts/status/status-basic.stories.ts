@@ -32,7 +32,7 @@ function getTemplate(args: StatusBasicStory): string {
 	`;
 }
 
-const Template: StoryFn<StatusBasicStory> = (args: StatusBasicStory) => ({
+const Template: StoryFn<StatusBasicStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 });

@@ -68,7 +68,7 @@ export default {
 	decorators: [applicationConfig({ providers: [provideAnimations()] })],
 } as Meta;
 
-const template: StoryFn<SelectAdvancedStory> = (args: SelectAdvancedStory) => ({
+const template: StoryFn<SelectAdvancedStory> = (args) => ({
 	props: args,
 });
 

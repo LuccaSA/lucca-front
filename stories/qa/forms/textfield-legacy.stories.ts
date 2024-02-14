@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Meta, moduleMetadata, Story } from '@storybook/angular';
+import { Meta, moduleMetadata, StoryFn } from '@storybook/angular';
 
 @Component({
 	standalone: true,
@@ -22,6 +22,6 @@ export default {
 	],
 } as Meta;
 
-const template: Story<TextfieldLegacyStory> = () => ({});
+const template: StoryFn<TextfieldLegacyStory> = () => ({});
 
 export const basic = template.bind({});

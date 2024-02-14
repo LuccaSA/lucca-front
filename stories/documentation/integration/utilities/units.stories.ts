@@ -12,7 +12,7 @@ function getTemplate(args: UnitsStory): string {
 <p>75 <span class="u-unit">%</span></p>`;
 }
 
-const Template: StoryFn<UnitsStory> = (args: UnitsStory) => ({
+const Template: StoryFn<UnitsStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [

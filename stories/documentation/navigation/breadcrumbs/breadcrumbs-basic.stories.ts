@@ -19,7 +19,7 @@ function getTemplate(args: BreadcrumbsBasicStory): string {
 	`;
 }
 
-const Template: StoryFn<BreadcrumbsBasicStory> = (args: BreadcrumbsBasicStory) => ({
+const Template: StoryFn<BreadcrumbsBasicStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 });

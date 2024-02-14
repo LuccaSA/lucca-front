@@ -1,12 +1,10 @@
-import { Meta, Story } from '@storybook/angular';
+import { Meta, StoryFn } from '@storybook/angular';
 
-interface CalloutKillableStory {
-}
+interface CalloutKillableStory {}
 
 export default {
 	title: 'Documentation/Feedback/Callout/HTML & CSS/Killable',
-	argTypes: {
-	},
+	argTypes: {},
 } as Meta;
 
 function getTemplate(args: CalloutKillableStory): string {
@@ -19,10 +17,10 @@ function getTemplate(args: CalloutKillableStory): string {
 </div>`;
 }
 
-const Template: Story<CalloutKillableStory> = (args: CalloutKillableStory) => ({
+const Template: StoryFn<CalloutKillableStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
 export const Killable = Template.bind({});
-Killable.args = { };
+Killable.args = {};

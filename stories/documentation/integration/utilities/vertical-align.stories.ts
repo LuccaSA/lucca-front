@@ -12,7 +12,7 @@ function getTemplate(args: VerticalAlignStory): string {
 <div class="u-textRight"><code class="code">u-textRight</code></div>`;
 }
 
-const Template: StoryFn<VerticalAlignStory> = (args: VerticalAlignStory) => ({
+const Template: StoryFn<VerticalAlignStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [

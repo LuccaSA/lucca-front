@@ -41,7 +41,7 @@ function getTemplate(args: TimelinesAddBetweenVerticalStory): string {
 	`;
 }
 
-const Template: StoryFn<TimelinesAddBetweenVerticalStory> = (args: TimelinesAddBetweenVerticalStory) => ({
+const Template: StoryFn<TimelinesAddBetweenVerticalStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 });

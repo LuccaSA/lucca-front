@@ -11,7 +11,7 @@ function getTemplate(args: FloatStory): string {
 <div class="u-floatRight"><code class="code">u-floatRight</code></div>`;
 }
 
-const Template: StoryFn<FloatStory> = (args: FloatStory) => ({
+const Template: StoryFn<FloatStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [

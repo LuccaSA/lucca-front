@@ -25,7 +25,7 @@ function getTemplate(args: BoxBasicStory): string {
 	`;
 }
 
-const Template: StoryFn<BoxBasicStory> = (args: BoxBasicStory) => ({
+const Template: StoryFn<BoxBasicStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [

@@ -21,7 +21,7 @@ function getTemplate(args: TextBasicStory): string {
 <p class="u-fontStyleItalic u-textXS">Caption 3 : Portez ce vieux whisky au juge blond qui fume</p>`;
 }
 
-const Template: StoryFn<TextBasicStory> = (args: TextBasicStory) => ({
+const Template: StoryFn<TextBasicStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 });

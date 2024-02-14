@@ -1,12 +1,10 @@
 import { Meta, StoryFn } from '@storybook/angular';
 
-interface CheckboxInvalidStory {
-}
+interface CheckboxInvalidStory {}
 
 export default {
 	title: 'Documentation/Forms/Fields/CheckboxField/HTML&CSS',
-	argTypes: {
-	},
+	argTypes: {},
 } as Meta;
 
 function getTemplate(args: CheckboxInvalidStory): string {
@@ -20,10 +18,10 @@ function getTemplate(args: CheckboxInvalidStory): string {
 </div>`;
 }
 
-const Template: StoryFn<CheckboxInvalidStory> = (args: CheckboxInvalidStory) => ({
+const Template: StoryFn<CheckboxInvalidStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
 export const Invalid = Template.bind({});
-Invalid.args = { };
+Invalid.args = {};

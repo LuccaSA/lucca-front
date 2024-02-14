@@ -19,7 +19,7 @@ function getTemplate(args: BorderRadiusStory): string {
 <div class="u-borderBottomRightRadiusL"><code class="code">.u-borderBottomRightRadiusL</code></div>`;
 }
 
-const Template: StoryFn<BorderRadiusStory> = (args: BorderRadiusStory) => ({
+const Template: StoryFn<BorderRadiusStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [

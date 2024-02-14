@@ -216,6 +216,27 @@
 			width: var(--spacings-S);
 		}
 	}
+
+	&:has(input[type='checkbox']:checked) {
+		.table-head-row-cell,
+		.table-body-row-cell,
+		.table-foot-row-cell {
+			background-color: var(--palettes-primary-50);
+		}
+	}
+}
+
+
+@mixin clickableSelectable {
+	&:hover {
+		&:has(input[type='checkbox']:checked) {
+			.table-head-row-cell,
+			.table-body-row-cell,
+			.table-foot-row-cell {
+				background-color: var(--palettes-primary-100);
+			}
+		}
+	}
 }
 
 @mixin twoLines($atRoot: 'without: rule') {

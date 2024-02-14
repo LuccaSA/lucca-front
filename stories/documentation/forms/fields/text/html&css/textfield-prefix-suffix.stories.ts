@@ -1,12 +1,10 @@
 import { Meta, StoryFn } from '@storybook/angular';
 
-interface TextfieldPrefixSuffixStory {
-}
+interface TextfieldPrefixSuffixStory {}
 
 export default {
 	title: 'Documentation/Forms/Fields/TextField/HTML&CSS',
-	argTypes: {
-	},
+	argTypes: {},
 } as Meta;
 
 function getTemplate(args: TextfieldPrefixSuffixStory): string {
@@ -26,10 +24,10 @@ function getTemplate(args: TextfieldPrefixSuffixStory): string {
 </div>`;
 }
 
-const Template: StoryFn<TextfieldPrefixSuffixStory> = (args: TextfieldPrefixSuffixStory) => ({
+const Template: StoryFn<TextfieldPrefixSuffixStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
 export const PrefixSuffix = Template.bind({});
-PrefixSuffix.args = { };
+PrefixSuffix.args = {};

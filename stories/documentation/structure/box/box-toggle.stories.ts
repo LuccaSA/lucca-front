@@ -29,7 +29,7 @@ function getTemplate(args: BoxToggleStory): string {
 	`;
 }
 
-const Template: StoryFn<BoxToggleStory> = (args: BoxToggleStory) => ({
+const Template: StoryFn<BoxToggleStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [

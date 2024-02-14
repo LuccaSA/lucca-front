@@ -13,7 +13,6 @@
 			display: inline-flex;
 			align-items: flex-start;
 			cursor: pointer;
-			gap: var(--spacings-XS);
 			vertical-align: top;
 
 			&::before {
@@ -42,6 +41,7 @@
 				text-align: center;
 				position: absolute;
 				margin-top: 2px;
+				margin-right: var(--spacings-XS);
 			}
 
 			&:hover {

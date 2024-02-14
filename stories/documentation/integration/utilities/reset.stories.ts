@@ -21,7 +21,7 @@ function getTemplate(args: ResetStory): string {
 </ul>`;
 }
 
-const Template: StoryFn<ResetStory> = (args: ResetStory) => ({
+const Template: StoryFn<ResetStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [

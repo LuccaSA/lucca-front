@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/angular';
+import { Meta, StoryFn } from '@storybook/angular';
 
 interface NumericBadgeBasicStory {
 	palette: string;
@@ -24,12 +24,12 @@ export default {
 } as Meta;
 
 function getTemplate(args: NumericBadgeBasicStory): string {
-	const size = args.size ? ' '+args.size : '';
-	const palette = args.palette ? ' '+args.palette : '';
+	const size = args.size ? ' ' + args.size : '';
+	const palette = args.palette ? ' ' + args.palette : '';
 	return `<span class="numericBadge${size}${palette}">7</span>`;
 }
 
-const Template: Story<NumericBadgeBasicStory> = (args: NumericBadgeBasicStory) => ({
+const Template: StoryFn<NumericBadgeBasicStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 });

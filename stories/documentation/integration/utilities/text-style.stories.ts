@@ -16,7 +16,7 @@ function getTemplate(args: TextStyleStory): string {
 <span class="u-textDecorationLineThrough">Barré</span>`;
 }
 
-const Template: StoryFn<TextStyleStory> = (args: TextStyleStory) => ({
+const Template: StoryFn<TextStyleStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [

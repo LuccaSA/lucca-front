@@ -53,7 +53,7 @@ function getTemplate(args: ActionBasicStory): string {
 </button>`;
 }
 
-const Template: StoryFn<ActionBasicStory> = (args: ActionBasicStory) => ({
+const Template: StoryFn<ActionBasicStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [

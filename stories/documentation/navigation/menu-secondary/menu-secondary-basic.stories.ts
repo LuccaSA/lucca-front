@@ -105,7 +105,7 @@ function getTemplate(args: MenuSecondaryBasicStory): string {
 	`;
 }
 
-const Template: StoryFn<MenuSecondaryBasicStory> = (args: MenuSecondaryBasicStory) => ({
+const Template: StoryFn<MenuSecondaryBasicStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [

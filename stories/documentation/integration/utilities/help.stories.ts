@@ -10,7 +10,7 @@ function getTemplate(args: HelpStory): string {
 	return `<p>J'ai besoin d'aide <span aria-hidden="true" class="lucca-icon icon-signHelp u-help"></span><span class="u-mask">Infos supplémentaires</span></p>`;
 }
 
-const Template: StoryFn<HelpStory> = (args: HelpStory) => ({
+const Template: StoryFn<HelpStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [

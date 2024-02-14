@@ -17,7 +17,7 @@ function getTemplate(args: TextColorStory): string {
 <span class="u-textError">Error</span>`;
 }
 
-const Template: StoryFn<TextColorStory> = (args: TextColorStory) => ({
+const Template: StoryFn<TextColorStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [

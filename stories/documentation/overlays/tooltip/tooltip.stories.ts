@@ -80,7 +80,7 @@ export default {
 	decorators: [applicationConfig({ providers: [provideAnimations()] })],
 } as Meta;
 
-const template: StoryFn<TooltipStory> = (args: TooltipStory) => ({
+const template: StoryFn<TooltipStory> = (args) => ({
 	props: args,
 });
 
