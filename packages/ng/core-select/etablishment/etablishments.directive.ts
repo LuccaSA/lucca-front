@@ -7,12 +7,6 @@ import { LuEstablishmentGroupingComponent } from './establishment-grouping.compo
 import { EstablishmentGroupingService } from './establishment-grouping.service';
 import { LuCoreSelectEstablishment } from './models';
 
-export type LuCoreSelectEstablishmentsApiParams = {
-	appInstanceId?: number;
-	operationIds?: string;
-	clue?: string;
-};
-
 @Directive({
 	// The attribute is already prefixed with "lu-simple-select" / "lu-multi-select"
 	// eslint-disable-next-line @angular-eslint/directive-selector

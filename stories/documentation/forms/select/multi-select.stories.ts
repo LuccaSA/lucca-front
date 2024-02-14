@@ -5,6 +5,8 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 import { LuDisabledOptionDirective, LuDisplayerDirective, LuOptionDirective, LuOptionGroupDirective } from '@lucca-front/ng/core-select';
 import { LuCoreSelectApiV3Directive, LuCoreSelectApiV4Directive } from '@lucca-front/ng/core-select/api';
 import { LuCoreSelectEstablishmentsDirective } from '@lucca-front/ng/core-select/etablishment';
+import { LuCoreSelectJobQualificationsDirective } from '@lucca-front/ng/core-select/job-qualification';
+import { LuCoreSelectUsersDirective } from '@lucca-front/ng/core-select/user';
 import { LuMultiDisplayerDirective, LuMultiSelectDisplayerInputDirective, LuMultiSelectInputComponent } from '@lucca-front/ng/multi-select';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 import { Meta, applicationConfig, moduleMetadata } from '@storybook/angular';
@@ -233,6 +235,22 @@ export const Establishment = generateStory({
 	},
 });
 
+export const JobQualification = generateStory({
+	name: 'JobQualification Select',
+	description: "Pour saisir une qualification, il suffit d'utiliser la directive `jobQualifications`",
+	template: `
+	<lu-multi-select
+		placeholder="Placeholder..."
+		jobQualifications
+		[(ngModel)]="selectedJobQualifications"
+	></lu-multi-select>
+	`,
+	neededImports: {
+		'@lucca-front/ng/multi-select': ['LuMultiSelectInputComponent'],
+		'@lucca-front/ng/core-select/establishment': ['LuCoreSelectJobQualificationsDirective'],
+	},
+});
+
 export const GroupBy = generateStory({
 	name: 'Group options',
 	description: "Pour grouper les options, il suffit d'utiliser la directive `luOptionGroup`.",
@@ -282,6 +300,8 @@ const meta: Meta<LuMultiSelectInputStoryComponent> = {
 				LuCoreSelectApiV3Directive,
 				LuCoreSelectApiV4Directive,
 				LuCoreSelectEstablishmentsDirective,
+				LuCoreSelectUsersDirective,
+				LuCoreSelectJobQualificationsDirective,
 				LuDisabledOptionDirective,
 				LuMultiSelectDisplayerInputDirective,
 				CommonModule,

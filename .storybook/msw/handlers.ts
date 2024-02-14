@@ -77,6 +77,7 @@ export const handlers = [
 				page: (p) => parseInt(p),
 				limit: (l) => parseInt(l),
 				search: (s) => s.toLowerCase(),
+				'fields.root': (f) => f,
 			},
 			// Apply filters to items
 			{
@@ -84,7 +85,7 @@ export const handlers = [
 				search: applyFilter((jq, { search }) => jq.name.toLowerCase().includes(search)),
 				limit: (items, { limit }) => items.slice(0, limit),
 			},
-			(items) => items,
+			handleFieldsRoot(mockJobQualifications.length),
 		),
 	),
 

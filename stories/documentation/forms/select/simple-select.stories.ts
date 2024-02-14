@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { LuDisabledOptionDirective, LuDisplayerDirective, LuOptionDirective, LuOptionGroupDirective } from '@lucca-front/ng/core-select';
 import { LuCoreSelectApiV3Directive, LuCoreSelectApiV4Directive } from '@lucca-front/ng/core-select/api';
 import { LuCoreSelectEstablishmentsDirective } from '@lucca-front/ng/core-select/etablishment';
+import { LuCoreSelectJobQualificationsDirective } from '@lucca-front/ng/core-select/job-qualification';
 import { LuCoreSelectUsersDirective } from '@lucca-front/ng/core-select/user';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 import { LuUserDisplayPipe } from '@lucca-front/ng/user';
@@ -215,7 +216,7 @@ export const ApiV4 = generateStory({
 
 export const User = generateStory({
 	name: 'User Select',
-	description: 'TODO',
+	description: "Pour saisir un utilisateur, il suffit d'utiliser la directive `users`.",
 	template: `
 	<lu-simple-select
 		placeholder="Placeholder..."
@@ -226,11 +227,6 @@ export const User = generateStory({
 	neededImports: {
 		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent'],
 		'@lucca-front/ng/core-select/user': ['LuCoreSelectUsersDirective'],
-	},
-	storyPartial: {
-		args: {
-			selectedLegume: allLegumes[4],
-		},
 	},
 });
 
@@ -259,11 +255,6 @@ export const UserCustom = generateStory({
 		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent'],
 		'@lucca-front/ng/core-select': ['LuDisplayerDirective', 'LuOptionDirective'],
 	},
-	storyPartial: {
-		args: {
-			selectedLegume: allLegumes[4],
-		},
-	},
 });
 
 export const Establishment = generateStory({
@@ -279,11 +270,6 @@ export const Establishment = generateStory({
 	neededImports: {
 		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent'],
 		'@lucca-front/ng/core-select/establishment': ['LuCoreSelectEstablishmentsDirective'],
-	},
-	storyPartial: {
-		args: {
-			selectedLegume: allLegumes[4],
-		},
 	},
 });
 
@@ -313,6 +299,22 @@ export const EstablishmentCustom = generateStory({
 		args: {
 			selectedLegume: allLegumes[4],
 		},
+	},
+});
+
+export const JobQualification = generateStory({
+	name: 'JobQualification Select',
+	description: "Pour saisir une qualification, il suffit d'utiliser la directive `jobQualifications`",
+	template: `
+	<lu-simple-select
+		placeholder="Placeholder..."
+		jobQualifications
+		[(ngModel)]="selectedJobQualifications"
+	></lu-simple-select>
+	`,
+	neededImports: {
+		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent'],
+		'@lucca-front/ng/core-select/establishment': ['LuCoreSelectJobQualificationsDirective'],
 	},
 });
 
@@ -372,6 +374,7 @@ const meta: Meta<LuSimpleSelectInputStoryComponent> = {
 				LuCoreSelectCustomEstablishmentsDirective,
 				LuCoreSelectCustomUsersDirective,
 				LuCoreSelectUsersDirective,
+				LuCoreSelectJobQualificationsDirective,
 				LuDisabledOptionDirective,
 				LuOptionGroupDirective,
 			],

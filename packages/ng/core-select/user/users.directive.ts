@@ -11,13 +11,6 @@ import { LuCoreSelectUserHomonymsService } from './user-homonym.service';
 import { LuUserOptionComponent } from './user-option.component';
 import { LuCoreSelectUser } from './user-option.model';
 
-export interface ILuCoreSelectUsersApiParams {
-	orderBy?: string;
-	operationIds?: number[];
-	appInstanceId?: number;
-	enableFormerEmployees?: boolean;
-}
-
 @Directive({
 	// The attribute is already prefixed with "lu-simple-select"
 	// eslint-disable-next-line @angular-eslint/directive-selector
