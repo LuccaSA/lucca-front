@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { LuDisabledOptionDirective, LuDisplayerDirective, LuOptionDirective, LuOptionGroupDirective } from '@lucca-front/ng/core-select';
 import { LuCoreSelectApiV3Directive, LuCoreSelectApiV4Directive } from '@lucca-front/ng/core-select/api';
-import { LuCoreSelectEstablishmentsApiDirective } from '@lucca-front/ng/core-select/etablishment';
+import { LuCoreSelectEstablishmentsDirective } from '@lucca-front/ng/core-select/etablishment';
 import { LuMultiDisplayerDirective, LuMultiSelectDisplayerInputDirective, LuMultiSelectInputComponent } from '@lucca-front/ng/multi-select';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 import { Meta, applicationConfig, moduleMetadata } from '@storybook/angular';
@@ -218,18 +218,18 @@ export const ApiV4 = generateStory({
 
 export const Establishment = generateStory({
 	name: 'Establishment Select',
-	description: "Pour saisir un établissement, il suffit d'utiliser la directive `establishmentsApi`",
+	description: "Pour saisir un établissement, il suffit d'utiliser la directive `establishments`",
 	template: `
 	<lu-multi-select
 		class="multiSelect"
 		placeholder="Placeholder..."
-		establishmentsApi
+		establishments
 		[(ngModel)]="selectedEstablishment"
 	></lu-multi-select>
 	`,
 	neededImports: {
 		'@lucca-front/ng/multi-select': ['LuMultiSelectInputComponent'],
-		'@lucca-front/ng/core-select/establishment': ['LuCoreSelectEstablishmentsApiDirective'],
+		'@lucca-front/ng/core-select/establishment': ['LuCoreSelectEstablishmentsDirective'],
 	},
 });
 
@@ -281,7 +281,7 @@ const meta: Meta<LuMultiSelectInputStoryComponent> = {
 				LuTooltipModule,
 				LuCoreSelectApiV3Directive,
 				LuCoreSelectApiV4Directive,
-				LuCoreSelectEstablishmentsApiDirective,
+				LuCoreSelectEstablishmentsDirective,
 				LuDisabledOptionDirective,
 				LuMultiSelectDisplayerInputDirective,
 				CommonModule,

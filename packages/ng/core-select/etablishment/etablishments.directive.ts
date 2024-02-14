@@ -16,10 +16,10 @@ export interface LuCoreSelectEstablishmentsApiConfig {
 @Directive({
 	// The attribute is already prefixed with "lu-simple-select" / "lu-multi-select"
 	// eslint-disable-next-line @angular-eslint/directive-selector
-	selector: 'lu-simple-select[establishmentsApi],lu-multi-select[establishmentsApi]',
+	selector: 'lu-simple-select[establishments],lu-multi-select[establishments]',
 	standalone: true,
 })
-export class LuCoreSelectEstablishmentsApiDirective<T extends LuCoreSelectEstablishment> extends LuCoreSelectApiV4Directive<T> implements OnInit {
+export class LuCoreSelectEstablishmentsDirective<T extends LuCoreSelectEstablishment> extends LuCoreSelectApiV4Directive<T> implements OnInit {
 	#defaultEstablishmentsUrl = '/organization/structure/api/establishments';
 	#groupingService = inject(EstablishmentGroupingService);
 	#destroyRef = inject(DestroyRef);
@@ -60,7 +60,7 @@ export class LuCoreSelectEstablishmentsApiDirective<T extends LuCoreSelectEstabl
 		})),
 	);
 
-	@Input('establishmentsApi')
+	@Input('establishments')
 	public set config(config: Partial<LuCoreSelectEstablishmentsApiConfig>) {
 		if (config.url) {
 			this.url$.next(config.url);

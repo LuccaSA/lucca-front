@@ -4,7 +4,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { LuDisabledOptionDirective, LuDisplayerDirective, LuOptionDirective, LuOptionGroupDirective } from '@lucca-front/ng/core-select';
 import { LuCoreSelectApiV3Directive, LuCoreSelectApiV4Directive } from '@lucca-front/ng/core-select/api';
-import { LuCoreSelectEstablishmentsApiDirective } from '@lucca-front/ng/core-select/etablishment';
+import { LuCoreSelectEstablishmentsDirective } from '@lucca-front/ng/core-select/etablishment';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 import { Meta, applicationConfig, moduleMetadata } from '@storybook/angular';
 import { HiddenArgType } from 'stories/helpers/common-arg-types';
@@ -210,17 +210,17 @@ export const ApiV4 = generateStory({
 
 export const Establishment = generateStory({
 	name: 'Establishment Select',
-	description: "Pour saisir un établissement, il suffit d'utiliser la directive `establishmentsApi`",
+	description: "Pour saisir un établissement, il suffit d'utiliser la directive `establishments`",
 	template: `
 	<lu-simple-select
 		placeholder="Placeholder..."
-		establishmentsApi
+		establishments
 		[(ngModel)]="selectedEstablishment"
 	></lu-simple-select>
 	`,
 	neededImports: {
 		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent'],
-		'@lucca-front/ng/core-select/establishment': ['LuCoreSelectEstablishmentsApiDirective'],
+		'@lucca-front/ng/core-select/establishment': ['LuCoreSelectEstablishmentsDirective'],
 	},
 	storyPartial: {
 		args: {
@@ -280,7 +280,7 @@ const meta: Meta<LuSimpleSelectInputStoryComponent> = {
 				SlicePipe,
 				LuCoreSelectApiV3Directive,
 				LuCoreSelectApiV4Directive,
-				LuCoreSelectEstablishmentsApiDirective,
+				LuCoreSelectEstablishmentsDirective,
 				LuDisabledOptionDirective,
 				LuOptionGroupDirective,
 			],
