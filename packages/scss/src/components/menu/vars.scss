@@ -1,3 +1,19 @@
 @mixin vars {
-	--components-menu-padding: var(--pr-t-spacings-200) 0;
+	--components-menu-borderContent: '';
+	--components-menu-headerPadding: 0;
+	--components-menu-listItemActionPadding: var(--pr-t-spacings-200) 0;
+	--components-menu-listGap: 0 var(--pr-t-spacings-400);
+	--components-menu-listDirection: row;
+	--components-menu-listAlign: flex-end;
+	--components-menu-listItemActionAlign: center;
+	--components-menu-listItemActionDisplay: inline-flex;
+	--components-menu-listItemActionTransform: scale(0, 1);
+	--components-menu-listItemActionColor: var(--palettes-grey-800);
+	--components-menu-listItemActionSize: 3px;
+	--components-menu-listItemActionFontSize: inherit;
+	--components-menu-listItemActionLineHeight: inherit;
+	--components-menu-listItemActionInset: auto 0 0 0;
+	--components-menu-listItemActionRadius: var(--commons-borderRadius-M) var(--commons-borderRadius-M) 0 0;
+	--components-menu-listItemActionRadiusWidth: auto;
+	--components-menu-listItemActionRadiusHeight: var(--components-menu-listItemActionSize);
 }

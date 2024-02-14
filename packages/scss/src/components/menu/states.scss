@@ -1,22 +1,21 @@
 @use '@lucca-front/scss/src/components/numericBadge/exports' as numericBadge;
 
 @mixin active {
-	color: var(--palettes-700, var(--palettes-product-700));
+	--components-menu-listItemActionColor: var(--palettes-700, var(--palettes-product-700));
 
+	// .label is deprecated
 	.label {
-		// deprecated
 		background-color: var(--palettes-100, var(--palettes-product-100));
 		color: var(--palettes-700, var(--palettes-product-700));
 	}
 
 	&::after {
-		background-color: var(--palettes-700, var(--palettes-product-700));
-		transform: scale(1);
+		--components-menu-listItemActionTransform: scale(1);
 	}
 
 	&:focus-visible {
 		&::after {
-			transform: scale(0.75, 1);
+			--components-menu-listItemActionTransform: scale(0.75, 1);
 		}
 	}
 
@@ -26,14 +25,20 @@
 }
 
 @mixin disabled {
+	// .label is deprecated
 	&,
 	.label {
-		// deprecated
 		color: var(--palettes-neutral-500);
 		pointer-events: none;
 	}
 
 	.numericBadge {
 		@include numericBadge.disabled;
+	}
+}
+
+@mixin activeVertical {
+	&::after {
+		--components-menu-listItemActionTransform: scale(1);
 	}
 }
