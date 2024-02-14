@@ -51,16 +51,18 @@ function getTemplate(args: PageHeaderBasicStory): string {
 				</button>
 			</div>
 		</div>
-		<section class="pageHeader-description">
-			<p class="u-marginBottom0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac justo scelerisque, blandit nibh quis, imperdiet justo.
-				Nullam condimentum nulla et neque ultricies bibendum <a target="_blank">Lien<span aria-hidden="true" class="lucca-icon icon-arrowExternal mod-XS u-marginLeftXXS"></span></a>.
+		<div class="pageHeader-description">
+			<p class="u-marginBottom0">
+				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac justo scelerisque, blandit nibh quis, imperdiet justo.
+				Nullam condimentum nulla et neque ultricies bibendum
+				<a target="_blank">Lien<span aria-hidden="true" class="lucca-icon icon-arrowExternal mod-XS u-marginLeftXXS"></span></a>.
 			</p>
-		</section>
+		</div>
 	</header>
 	`;
 }
 
-const Template: StoryFn<PageHeaderBasicStory> = (args: PageHeaderBasicStory) => ({
+const Template: StoryFn<PageHeaderBasicStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 });

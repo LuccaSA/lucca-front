@@ -13,7 +13,7 @@ export default {
 	component: UtilitiesPrintStory,
 } as Meta;
 
-const template: StoryFn<UtilitiesPrintStory> = (args: UtilitiesPrintStory) => ({
+const template: StoryFn<UtilitiesPrintStory> = (args) => ({
 	props: args,
 });
 

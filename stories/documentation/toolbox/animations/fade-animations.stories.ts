@@ -30,7 +30,7 @@ export default {
 	decorators: [applicationConfig({ providers: [provideAnimations()] })],
 } as Meta;
 
-const template: StoryFn<FadeAnimationStory> = (args: FadeAnimationStory) => ({
+const template: StoryFn<FadeAnimationStory> = (args) => ({
 	props: args,
 });
 

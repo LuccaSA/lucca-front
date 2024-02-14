@@ -24,7 +24,7 @@ export default {
 			control: {
 				type: 'boolean',
 			},
-			description: "Deprecated 🦕",
+			description: 'Deprecated 🦕',
 		},
 		s: {
 			control: {
@@ -118,7 +118,7 @@ function getTemplate(args: TableBasicStory): string {
 	`;
 }
 
-const Template: StoryFn<TableBasicStory> = (args: TableBasicStory) => ({
+const Template: StoryFn<TableBasicStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 });

@@ -16,7 +16,7 @@ function getTemplate(args: IconColorStory): string {
 <span aria-hidden="true" class="lucca-icon icon-heart u-textSuccess"></span>`;
 }
 
-const Template: StoryFn<IconColorStory> = (args: IconColorStory) => ({
+const Template: StoryFn<IconColorStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 });

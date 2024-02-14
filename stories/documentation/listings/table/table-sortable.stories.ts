@@ -53,7 +53,7 @@ function getTemplate(args: TableSortableStory): string {
 </table>`;
 }
 
-const Template: StoryFn<TableSortableStory> = (args: TableSortableStory) => ({
+const Template: StoryFn<TableSortableStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 });

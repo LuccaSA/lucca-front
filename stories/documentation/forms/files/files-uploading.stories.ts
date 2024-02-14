@@ -49,7 +49,7 @@ function getTemplate(args: FilesUploadingStory): string {
 	`;
 }
 
-const Template: StoryFn<FilesUploadingStory> = (args: FilesUploadingStory) => ({
+const Template: StoryFn<FilesUploadingStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [

@@ -65,7 +65,7 @@ function getTemplate(args: MenuCountStory): string {
 	`;
 }
 
-const Template: StoryFn<MenuCountStory> = (args: MenuCountStory) => ({
+const Template: StoryFn<MenuCountStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 });

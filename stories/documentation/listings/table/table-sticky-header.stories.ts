@@ -55,7 +55,7 @@ function getTemplate(args: TableStickyHeaderStory): string {
 	`;
 }
 
-const Template: StoryFn<TableStickyHeaderStory> = (args: TableStickyHeaderStory) => ({
+const Template: StoryFn<TableStickyHeaderStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [`.demo-wrapper {height: 10rem; overflow: auto;}`],

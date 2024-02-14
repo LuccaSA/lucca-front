@@ -25,7 +25,7 @@ export default {
 	},
 } as Meta;
 
-const template: StoryFn<FramedStory> = (args: FramedStory) => ({
+const template: StoryFn<FramedStory> = (args) => ({
 	props: args,
 });
 

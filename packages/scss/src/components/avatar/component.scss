@@ -1,0 +1,57 @@
+@use '@lucca-front/scss/src/commons/utils/reset';
+@use '@lucca-front/scss/src/commons/utils/a11y';
+
+@mixin component($atRoot: 'without: rule') {
+	box-shadow: 0 0 0 var(--components-avatar-border) var(--components-avatar-background);
+	border-radius: var(--commons-borderRadius-full);
+
+	@at-root ($atRoot) {
+		.avatarWrapper {
+			@include reset.list;
+
+			display: flex;
+			flex-wrap: wrap;
+			align-content: flex-start;
+		}
+
+		.avatarWrapper-item {
+			margin-block: calc(var(--components-avatarWrapper-overlap) / 2);
+
+			&:not(:last-child) {
+				margin-right: calc(var(--components-avatarWrapper-overlap) * -1);
+			}
+		}
+
+		.avatarWrapper-item-action {
+			@include reset.button;
+
+			display: flex;
+			text-decoration: none;
+			color: var(--palettes-grey-800);
+			transition: transform var(--commons-animations-durations-fast);
+			transform: scale(var(--components-avatarWrapper-scale));
+			color: currentColor;
+
+			&:hover,
+			&:focus {
+				--components-avatarWrapper-scale: 1.1;
+			}
+
+			&:focus-visible {
+				@include a11y.focusVisible($borderRadius: var(--commons-borderRadius-full));
+			}
+		}
+
+		.avatarWrapper-item-action-more {
+			box-shadow: 0 0 0 var(--components-avatar-border) var(--components-avatar-background);
+			border-radius: var(--commons-borderRadius-full);
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			background-color: var(--palettes-grey-200);
+			width: var(--components-avatar-size);
+			height: var(--components-avatar-size);
+			font-size: var(--components-avatarWrapper-fontSize);
+		}
+	}
+}

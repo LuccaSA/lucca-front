@@ -16,7 +16,7 @@ function getTemplate(args: TextBasicStory): string {
 <p><b>Cotton candy shortbread fruitcake jelly candy pie jelly beans. Halvah chocolate bar cheesecake jelly-o chocolate cake macaroon cake bear claw lollipop. Tart candy pastry soufflé candy canes marzipan.</b></p>`;
 }
 
-const Template: StoryFn<TextBasicStory> = (args: TextBasicStory) => ({
+const Template: StoryFn<TextBasicStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 });

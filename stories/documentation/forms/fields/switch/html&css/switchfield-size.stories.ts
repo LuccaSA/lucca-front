@@ -1,12 +1,10 @@
 import { Meta, StoryFn } from '@storybook/angular';
 
-interface SwitchSizeStory {
-}
+interface SwitchSizeStory {}
 
 export default {
 	title: 'Documentation/Forms/Fields/SwitchField/HTML&CSS',
-	argTypes: {
-	},
+	argTypes: {},
 } as Meta;
 
 function getTemplate(args: SwitchSizeStory): string {
@@ -20,10 +18,10 @@ function getTemplate(args: SwitchSizeStory): string {
 </div>`;
 }
 
-const Template: StoryFn<SwitchSizeStory> = (args: SwitchSizeStory) => ({
+const Template: StoryFn<SwitchSizeStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
 export const Size = Template.bind({});
-Size.args = { };
+Size.args = {};

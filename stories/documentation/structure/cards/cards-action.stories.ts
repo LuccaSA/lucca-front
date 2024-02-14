@@ -1,7 +1,6 @@
-import { Meta, Story } from '@storybook/angular';
+import { Meta, StoryFn } from '@storybook/angular';
 
-interface CardsActionStory {
-}
+interface CardsActionStory {}
 
 export default {
 	title: 'Documentation/Structure/Cards/Action',
@@ -24,7 +23,7 @@ function getTemplate(args: CardsActionStory): string {
 	`;
 }
 
-const Template: Story<CardsActionStory> = (args: CardsActionStory) => ({
+const Template: StoryFn<CardsActionStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 });

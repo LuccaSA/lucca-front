@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/angular';
+import { Meta, StoryFn } from '@storybook/angular';
 
 interface CalloutTinyStory {
 	s: boolean;
@@ -13,7 +13,7 @@ export default {
 			control: {
 				type: 'boolean',
 			},
-			description: "Taille : Small",
+			description: 'Taille : Small',
 		},
 		palette: {
 			options: ['', 'palette-success', 'palette-warning', 'palette-error'],
@@ -33,23 +33,23 @@ export default {
 function getTemplate(args: CalloutTinyStory): string {
 	const s = args.s ? ` mod-S` : '';
 	let palette = args.palette;
-	const icon = args.icon ? ' '+args.icon : '';
-	let text: {title: string, description: string};
+	const icon = args.icon ? ' ' + args.icon : '';
+	let text: { title: string; description: string };
 	switch (args.palette) {
 		case 'palette-success':
-				text = {title: 'Cool!', description: 'Je suis un callout de succès :)'};
-				break;
-		case 'palette-warning':
-				text = {title: 'Hmmm...', description: 'Je suis un callout d\'alarme :|'};
-				break;
-		case 'palette-error':
-				text = {title: 'Oops!', description: 'Je suis un callout d\'erreur :('};
-				break;
-		default:
-			text = {title: 'Besoin d\'aide ?', description: 'Je suis un callout standard'};
+			text = { title: 'Cool!', description: 'Je suis un callout de succès :)' };
 			break;
-  };
-	palette = ' '+palette;
+		case 'palette-warning':
+			text = { title: 'Hmmm...', description: "Je suis un callout d'alarme :|" };
+			break;
+		case 'palette-error':
+			text = { title: 'Oops!', description: "Je suis un callout d'erreur :(" };
+			break;
+		default:
+			text = { title: "Besoin d'aide ?", description: 'Je suis un callout standard' };
+			break;
+	}
+	palette = ' ' + palette;
 	return `<div class="callout mod-tiny${s}${palette}">
 	<div class="callout-icon">
 		<span aria-hidden="true" class="lucca-icon${icon}"></span>
@@ -60,7 +60,7 @@ function getTemplate(args: CalloutTinyStory): string {
 </div>`;
 }
 
-const Template: Story<CalloutTinyStory> = (args: CalloutTinyStory) => ({
+const Template: StoryFn<CalloutTinyStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 });

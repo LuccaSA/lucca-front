@@ -1,22 +1,23 @@
 import { Component } from '@angular/core';
-import { Story, Meta, moduleMetadata } from '@storybook/angular';
+import { Meta, StoryFn, moduleMetadata } from '@storybook/angular';
 
 @Component({
 	standalone: true,
 	selector: 'numeric-badge-stories',
 	templateUrl: './numeric-badge.stories.html',
-}) class NumericBadgeStory {}
+})
+class NumericBadgeStory {}
 
 export default {
-  title: 'QA/NumericBadge',
-  component: NumericBadgeStory,
+	title: 'QA/NumericBadge',
+	component: NumericBadgeStory,
 	decorators: [
 		moduleMetadata({
-			entryComponents: [NumericBadgeStory]
-		})
-	]
+			entryComponents: [NumericBadgeStory],
+		}),
+	],
 } as Meta;
 
-const template: Story<NumericBadgeStory> = () => ({});
+const template: StoryFn<NumericBadgeStory> = () => ({});
 
 export const basic = template.bind({});

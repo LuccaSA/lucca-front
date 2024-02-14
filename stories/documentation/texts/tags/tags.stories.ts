@@ -26,7 +26,7 @@ export default {
 			control: {
 				type: 'boolean',
 			},
-			description: "Taille : Large",
+			description: 'Taille : Large',
 		},
 		clickable: {
 			control: {
@@ -45,10 +45,10 @@ function getTemplate(args: TagsBasicStory): string {
 	return `<span class="tag ${classes} ${clickable} ${outlined} ${l}">Tag</span>`;
 }
 
-const Template: StoryFn<TagsBasicStory> = (args: TagsBasicStory) => ({
+const Template: StoryFn<TagsBasicStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
 export const Basic = Template.bind({});
-Basic.args = { outlined: false, l: false, palette: '', clickable: false, };
+Basic.args = { outlined: false, l: false, palette: '', clickable: false };

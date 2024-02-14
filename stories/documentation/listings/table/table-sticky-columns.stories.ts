@@ -134,7 +134,7 @@ function getTemplate(args: TableStickyColumnsStory): string {
 	`;
 }
 
-const Template: StoryFn<TableStickyColumnsStory> = (args: TableStickyColumnsStory) => ({
+const Template: StoryFn<TableStickyColumnsStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [`.demo-wrapper {overflow: auto;}`],

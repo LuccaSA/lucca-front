@@ -18,7 +18,7 @@ function getTemplate(args: HeadersNavigationStory): string {
 	`;
 }
 
-const Template: StoryFn<HeadersNavigationStory> = (args: HeadersNavigationStory) => ({
+const Template: StoryFn<HeadersNavigationStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 });

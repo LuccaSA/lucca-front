@@ -30,7 +30,7 @@ function getTemplate(args: LabelBasicStory): string {
 <span class="label ${classes} mod-number">7</span>`;
 }
 
-const Template: StoryFn<LabelBasicStory> = (args: LabelBasicStory) => ({
+const Template: StoryFn<LabelBasicStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [
