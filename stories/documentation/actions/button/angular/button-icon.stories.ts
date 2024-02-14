@@ -3,6 +3,7 @@ import { ButtonComponent } from '@lucca-front/ng/button';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { generateInputs } from 'stories/helpers/stories';
 
+
 export default {
 	title: 'Documentation/Actions/Button/Angular/Icon',
 	component: ButtonComponent,
