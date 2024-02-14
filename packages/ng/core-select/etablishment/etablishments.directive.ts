@@ -18,8 +18,12 @@ export type LuCoreSelectEstablishmentsApiParams = {
 	// eslint-disable-next-line @angular-eslint/directive-selector
 	selector: 'lu-simple-select[establishments],lu-multi-select[establishments]',
 	standalone: true,
+	exportAs: 'luEstablishments',
 })
-export class LuCoreSelectEstablishmentsDirective<T extends LuCoreSelectEstablishment, TParams extends LuCoreSelectEstablishmentsApiParams>
+export class LuCoreSelectEstablishmentsDirective<
+		T extends LuCoreSelectEstablishment = LuCoreSelectEstablishment,
+		TParams extends LuCoreSelectEstablishmentsApiParams = LuCoreSelectEstablishmentsApiParams,
+	>
 	extends ALuCoreSelectApiDirective<T, TParams>
 	implements OnInit
 {
@@ -55,7 +59,10 @@ export class LuCoreSelectEstablishmentsDirective<T extends LuCoreSelectEstablish
 
 	public override ngOnInit(): void {
 		super.ngOnInit();
+		this.initGrouping();
+	}
 
+	protected initGrouping() {
 		this.#groupingService.useGrouping$.pipe(filter(Boolean), takeUntilDestroyed(this.#destroyRef)).subscribe(() => {
 			this.select.grouping = {
 				selector: (option) => option.legalUnitId,

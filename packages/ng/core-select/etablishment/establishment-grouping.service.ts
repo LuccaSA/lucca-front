@@ -1,7 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { combineLatest, map, shareReplay } from 'rxjs';
-import { LuCoreSelectLegalUnit } from './models';
 
 @Injectable({ providedIn: 'root' })
 export class EstablishmentGroupingService {
@@ -15,11 +14,6 @@ export class EstablishmentGroupingService {
 
 	public useGrouping$ = combineLatest([this.legalUnitsCount$, this.establishmentsCount$]).pipe(
 		map(([luCount, establishmentCount]) => luCount > 1 && establishmentCount > 1 && luCount !== establishmentCount),
-		shareReplay(),
-	);
-
-	public legalUnits$ = this.http.get<{ items: LuCoreSelectLegalUnit[] }>(this.legalUnitsUrl).pipe(
-		map((res) => res.items),
 		shareReplay(),
 	);
 }
