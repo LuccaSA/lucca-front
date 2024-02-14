@@ -186,40 +186,21 @@ export const mockAxisSectionsV3 = softs
 		name,
 	}));
 
-export const mockAxisSectionsV4 = {
-	items: [
-		{
-			id: 7,
-			name: 'Commercial Junior',
-			usersCount: 0,
-			job: {
-				id: 3,
-				name: 'Commercial',
-				jobSectorId: 1,
-				isActive: true,
-			},
-			level: {
-				id: 1,
-				position: 1,
-				name: 'Grade 1',
-				isActive: true,
-				author: {
-					fullName: 'Lucca Admin',
-					id: 0,
-					firstName: 'Lucca',
-					lastName: 'Admin',
-					url: 'https://demo-ux1.ilucca.net/api/v3/users/0',
-				},
-				lastModifier: {
-					fullName: 'Lucca Admin',
-					id: 0,
-					firstName: 'Lucca',
-					lastName: 'Admin',
-					url: 'https://demo-ux1.ilucca.net/api/v3/users/0',
-				},
-				lastModifiedAt: '2021-09-23T17:38:47.9240628',
-				createdAt: '2021-09-23T17:38:47.9240628',
-			},
+export const mockAxisSectionsV4 = [
+	{
+		id: 7,
+		name: 'Commercial Junior',
+		usersCount: 0,
+		job: {
+			id: 3,
+			name: 'Commercial',
+			jobSectorId: 1,
+			isActive: true,
+		},
+		level: {
+			id: 1,
+			position: 1,
+			name: 'Grade 1',
 			isActive: true,
 			author: {
 				fullName: 'Lucca Admin',
@@ -235,41 +216,41 @@ export const mockAxisSectionsV4 = {
 				lastName: 'Admin',
 				url: 'https://demo-ux1.ilucca.net/api/v3/users/0',
 			},
-			lastModifiedAt: '2021-09-23T17:39:09.267815',
-			createdAt: '2021-09-23T17:39:09.267815',
+			lastModifiedAt: '2021-09-23T17:38:47.9240628',
+			createdAt: '2021-09-23T17:38:47.9240628',
 		},
-		{
-			id: 8,
-			name: 'Commercial Intermédiaire',
-			usersCount: 0,
-			job: {
-				id: 3,
-				name: 'Commercial',
-				jobSectorId: 1,
-				isActive: true,
-			},
-			level: {
-				id: 2,
-				position: 2,
-				name: 'Grade 2',
-				isActive: true,
-				author: {
-					fullName: 'Lucca Admin',
-					id: 0,
-					firstName: 'Lucca',
-					lastName: 'Admin',
-					url: 'https://demo-ux1.ilucca.net/api/v3/users/0',
-				},
-				lastModifier: {
-					fullName: 'Lucca Admin',
-					id: 0,
-					firstName: 'Lucca',
-					lastName: 'Admin',
-					url: 'https://demo-ux1.ilucca.net/api/v3/users/0',
-				},
-				lastModifiedAt: '2021-09-23T17:38:47.9240628',
-				createdAt: '2021-09-23T17:38:47.9240628',
-			},
+		isActive: true,
+		author: {
+			fullName: 'Lucca Admin',
+			id: 0,
+			firstName: 'Lucca',
+			lastName: 'Admin',
+			url: 'https://demo-ux1.ilucca.net/api/v3/users/0',
+		},
+		lastModifier: {
+			fullName: 'Lucca Admin',
+			id: 0,
+			firstName: 'Lucca',
+			lastName: 'Admin',
+			url: 'https://demo-ux1.ilucca.net/api/v3/users/0',
+		},
+		lastModifiedAt: '2021-09-23T17:39:09.267815',
+		createdAt: '2021-09-23T17:39:09.267815',
+	},
+	{
+		id: 8,
+		name: 'Commercial Intermédiaire',
+		usersCount: 0,
+		job: {
+			id: 3,
+			name: 'Commercial',
+			jobSectorId: 1,
+			isActive: true,
+		},
+		level: {
+			id: 2,
+			position: 2,
+			name: 'Grade 2',
 			isActive: true,
 			author: {
 				fullName: 'Lucca Admin',
@@ -285,41 +266,41 @@ export const mockAxisSectionsV4 = {
 				lastName: 'Admin',
 				url: 'https://demo-ux1.ilucca.net/api/v3/users/0',
 			},
-			lastModifiedAt: '2021-09-23T17:39:09.267815',
-			createdAt: '2021-09-23T17:39:09.267815',
+			lastModifiedAt: '2021-09-23T17:38:47.9240628',
+			createdAt: '2021-09-23T17:38:47.9240628',
 		},
-		{
-			id: 9,
-			name: 'Commercial Sénior',
-			usersCount: 0,
-			job: {
-				id: 3,
-				name: 'Commercial',
-				jobSectorId: 1,
-				isActive: true,
-			},
-			level: {
-				id: 3,
-				position: 3,
-				name: 'Grade 3',
-				isActive: true,
-				author: {
-					fullName: 'Lucca Admin',
-					id: 0,
-					firstName: 'Lucca',
-					lastName: 'Admin',
-					url: 'https://demo-ux1.ilucca.net/api/v3/users/0',
-				},
-				lastModifier: {
-					fullName: 'Lucca Admin',
-					id: 0,
-					firstName: 'Lucca',
-					lastName: 'Admin',
-					url: 'https://demo-ux1.ilucca.net/api/v3/users/0',
-				},
-				lastModifiedAt: '2021-09-23T17:38:47.9240628',
-				createdAt: '2021-09-23T17:38:47.9240628',
-			},
+		isActive: true,
+		author: {
+			fullName: 'Lucca Admin',
+			id: 0,
+			firstName: 'Lucca',
+			lastName: 'Admin',
+			url: 'https://demo-ux1.ilucca.net/api/v3/users/0',
+		},
+		lastModifier: {
+			fullName: 'Lucca Admin',
+			id: 0,
+			firstName: 'Lucca',
+			lastName: 'Admin',
+			url: 'https://demo-ux1.ilucca.net/api/v3/users/0',
+		},
+		lastModifiedAt: '2021-09-23T17:39:09.267815',
+		createdAt: '2021-09-23T17:39:09.267815',
+	},
+	{
+		id: 9,
+		name: 'Commercial Sénior',
+		usersCount: 0,
+		job: {
+			id: 3,
+			name: 'Commercial',
+			jobSectorId: 1,
+			isActive: true,
+		},
+		level: {
+			id: 3,
+			position: 3,
+			name: 'Grade 3',
 			isActive: true,
 			author: {
 				fullName: 'Lucca Admin',
@@ -335,137 +316,138 @@ export const mockAxisSectionsV4 = {
 				lastName: 'Admin',
 				url: 'https://demo-ux1.ilucca.net/api/v3/users/0',
 			},
-			lastModifiedAt: '2021-09-23T17:39:09.267815',
-			createdAt: '2021-09-23T17:39:09.267815',
+			lastModifiedAt: '2021-09-23T17:38:47.9240628',
+			createdAt: '2021-09-23T17:38:47.9240628',
 		},
-	],
-};
+		isActive: true,
+		author: {
+			fullName: 'Lucca Admin',
+			id: 0,
+			firstName: 'Lucca',
+			lastName: 'Admin',
+			url: 'https://demo-ux1.ilucca.net/api/v3/users/0',
+		},
+		lastModifier: {
+			fullName: 'Lucca Admin',
+			id: 0,
+			firstName: 'Lucca',
+			lastName: 'Admin',
+			url: 'https://demo-ux1.ilucca.net/api/v3/users/0',
+		},
+		lastModifiedAt: '2021-09-23T17:39:09.267815',
+		createdAt: '2021-09-23T17:39:09.267815',
+	},
+];
 
-export const mockProjectUsers = {
-	header: {
-		generated: '2022-10-26T15:26:45.507374',
-		principal: 'Api key - Prisme',
+export const mockProjectUsers = [
+	{
+		id: 10,
+		firstName: 'Peter',
+		lastName: 'Benton',
 	},
-	data: {
-		items: [
-			{
-				id: 10,
-				firstName: 'Peter',
-				lastName: 'Benton',
-			},
-			{
-				id: 11,
-				firstName: 'Jessica',
-				lastName: 'Berry',
-			},
-			{
-				id: 14,
-				firstName: 'Peter',
-				lastName: 'Bowen',
-			},
-			{
-				id: 17,
-				firstName: 'Chloe',
-				lastName: 'Brown',
-			},
-			{
-				id: 18,
-				firstName: 'John',
-				lastName: 'Carter',
-			},
-			{
-				id: 21,
-				firstName: 'Adam',
-				lastName: 'Cox',
-			},
-			{
-				id: 59,
-				firstName: 'Adam',
-				lastName: 'Cox',
-			},
-			{
-				id: 23,
-				firstName: 'Katie',
-				lastName: 'Curtis',
-			},
-			{
-				id: 25,
-				firstName: 'Alexander',
-				lastName: 'Doherty',
-			},
-			{
-				id: 26,
-				firstName: 'Rebecca',
-				lastName: 'Douglas',
-			},
-			{
-				id: 30,
-				firstName: 'Lilly',
-				lastName: 'Evans',
-			},
-		],
+	{
+		id: 11,
+		firstName: 'Jessica',
+		lastName: 'Berry',
 	},
-};
+	{
+		id: 14,
+		firstName: 'Peter',
+		lastName: 'Bowen',
+	},
+	{
+		id: 17,
+		firstName: 'Chloe',
+		lastName: 'Brown',
+	},
+	{
+		id: 18,
+		firstName: 'John',
+		lastName: 'Carter',
+	},
+	{
+		id: 21,
+		firstName: 'Adam',
+		lastName: 'Cox',
+	},
+	{
+		id: 59,
+		firstName: 'Adam',
+		lastName: 'Cox',
+	},
+	{
+		id: 23,
+		firstName: 'Katie',
+		lastName: 'Curtis',
+	},
+	{
+		id: 25,
+		firstName: 'Alexander',
+		lastName: 'Doherty',
+	},
+	{
+		id: 26,
+		firstName: 'Rebecca',
+		lastName: 'Douglas',
+	},
+	{
+		id: 30,
+		firstName: 'Lilly',
+		lastName: 'Evans',
+	},
+];
 
-export const mockUsers = {
-	data: {
-		items: [
-			{
-				id: 6,
-				firstName: 'Chloe',
-				lastName: 'Alibert',
-				picture: null,
-			},
-			{
-				id: 7,
-				firstName: 'Marie-Françoise',
-				lastName: 'Archer',
-				picture: {
-					href: 'https://demo-ux1.ilucca.net/getFile.ashx?id=e845a0ca-dbd9-452d-adc0-c873a847a37d',
-				},
-			},
-			{
-				id: 49,
-				firstName: 'Laurence',
-				lastName: 'Atali',
-				picture: null,
-			},
-			{
-				id: 66,
-				firstName: 'Chloe',
-				lastName: 'Alibert',
-				picture: null,
-			},
-		],
+export const mockUsers = [
+	{
+		id: 6,
+		firstName: 'Chloe',
+		lastName: 'Alibert',
+		picture: null,
+		department: {
+			id: 1,
+			name: 'Direction',
+		},
 	},
-};
-
-export const mockUsersSearch = {
-	data: {
-		items: mockUsers.data.items.map((item, relevance) => ({
-			item,
-			relevance,
-		})),
+	{
+		id: 7,
+		firstName: 'Marie-Françoise',
+		lastName: 'Archer',
+		picture: {
+			href: 'https://demo-ux1.ilucca.net/getFile.ashx?id=e845a0ca-dbd9-452d-adc0-c873a847a37d',
+		},
+		department: {
+			id: 1,
+			name: 'Direction',
+		},
 	},
-};
+	{
+		id: 49,
+		firstName: 'Laurence',
+		lastName: 'Atali',
+		picture: null,
+		department: {
+			id: 2,
+			name: 'Support',
+		},
+	},
+	{
+		id: 66,
+		firstName: 'Chloe',
+		lastName: 'Alibert',
+		picture: null,
+		department: {
+			id: 3,
+			name: 'Commercial',
+		},
+	},
+];
 
 export const mockMe = {
-	header: {
-		generated: '2022-10-26T15:41:44.8925533',
-		serverTime: 23,
-		queryTime: 1,
-		queryCount: 4,
-		principal: 'Daniel Hernandez',
-		processId: 2932,
+	id: 35,
+	firstName: 'Daniel',
+	lastName: 'Hernandez',
+	mail: 'dhernandez@example.org',
+	culture: {
+		code: 'fr-FR',
 	},
-	data: {
-		id: 35,
-		firstName: 'Daniel',
-		lastName: 'Hernandez',
-		mail: 'dhernandez@example.org',
-		culture: {
-			code: 'fr-FR',
-		},
-	},
-	metadata: null,
 };

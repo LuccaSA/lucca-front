@@ -1,65 +1,92 @@
 import { delay, http, HttpResponse } from 'msw';
-import {
-	mockAxisSectionsV3,
-	mockDepartmentsTree,
-	mockEstablishments,
-	mockEstablishmentsCount,
-	mockGenericCount,
-	mockJobQualifications,
-	mockLegalUnits,
-	mockMe,
-	mockProjectUsers,
+import { applyFilter, applyV3Paging, applyV4Paging, genericHandler, handleFieldsRoot } from './helpers';
+import { mockAxisSectionsV3, mockDepartmentsTree, mockEstablishments, mockJobQualifications, mockLegalUnits, mockMe, mockProjectUsers, mockUsers } from './mocks';
+
+const usersSearchHandler = genericHandler(
 	mockUsers,
-	mockUsersSearch,
-} from './mocks';
+	// Get and parse params from query params
+	{
+		paging: (p) => p,
+		search: (search) => search.toLowerCase(),
+		id: (ids) => ids.split(',').map((id) => parseInt(id)),
+	},
+	// Apply filters to items
+	{
+		paging: applyV3Paging,
+		search: applyFilter((user, { search }) => `${user.firstName} ${user.lastName}`.includes(search)),
+		id: applyFilter((user, { id }) => id.includes(user.id)),
+	},
+	(items) => ({
+		data: {
+			items: items.map((item) => ({ relevance: 1, item })),
+		},
+	}),
+);
 
 export const handlers = [
-	http.get('/organization/structure/api/legal-units', async ({ request }) => {
-		const url = new URL(request.url);
-		await delay(300);
-		if (url.searchParams.get('fields.root') === 'count') {
-			// Need to cast so the type inference won't screw up
-			return HttpResponse.json(mockGenericCount) as any;
-		}
+	http.get(
+		'/organization/structure/api/legal-units',
+		genericHandler(
+			mockLegalUnits,
+			// Get and parse params from query params
+			{
+				page: (p) => parseInt(p),
+				limit: (l) => parseInt(l),
+				search: (s) => s.toLowerCase(),
+				'fields.root': (f) => f,
+			},
+			// Apply filters to items
+			{
+				page: applyV4Paging,
+				limit: (items, { limit }) => items.slice(0, limit),
+				search: applyFilter((lu, { search }) => lu.name.toLowerCase().includes(search)),
+			},
+			handleFieldsRoot(mockLegalUnits.length),
+		),
+	),
 
-		return HttpResponse.json({ items: mockLegalUnits });
-	}),
+	http.get(
+		'/organization/structure/api/establishments',
+		genericHandler(
+			mockEstablishments,
+			// Get and parse params from query params
+			{
+				page: (p) => parseInt(p),
+				limit: (l) => parseInt(l),
+				legalUnitId: (l) => parseInt(l),
+				search: (s) => s.toLowerCase(),
+				'fields.root': (f) => f,
+			},
+			// Apply filters to items
+			{
+				page: applyV4Paging,
+				limit: (items, { limit }) => items.slice(0, limit),
+				legalUnitId: (items, { legalUnitId }) => items.filter((e) => e.legalUnitId === legalUnitId),
+				search: applyFilter((e, { search }) => e.name.toLowerCase().includes(search)),
+			},
+			handleFieldsRoot(mockEstablishments.length),
+		),
+	),
 
-	http.get('/organization/structure/api/establishments', async ({ request }) => {
-		await delay(300);
-		const url = new URL(request.url);
-		if (url.searchParams.get('fields.root') === 'count') {
-			// Need to cast so the type inference won't screw up
-			return HttpResponse.json(mockEstablishmentsCount) as any;
-		}
-
-		const pageParam = url.searchParams.get('page');
-		const page = pageParam ? parseInt(pageParam) : 1;
-		const limitParam = url.searchParams.get('limit');
-		const limit = limitParam ? parseInt(limitParam) : 10;
-		const legalUnitId = url.searchParams.get('legalUnitId');
-		const search = url.searchParams.get('search');
-
-		let items = mockEstablishments;
-		if (search) {
-			items = mockEstablishments.filter((e) => e.name.toLowerCase().includes(search.toLowerCase()));
-		}
-		if (legalUnitId) {
-			items = mockEstablishments.filter((e) => e.legalUnitId === +legalUnitId) ?? [];
-		}
-
-		items = items.slice((page - 1) * limit, page * limit);
-
-		return HttpResponse.json({ items });
-	}),
-
-	http.get('/organization/structure/api/job-qualifications', async ({ request }) => {
-		await delay(300);
-		const url = new URL(request.url);
-		const search = url.searchParams.get('search');
-
-		return HttpResponse.json(search ? [mockJobQualifications[0]] : mockJobQualifications);
-	}),
+	http.get(
+		'/organization/structure/api/job-qualifications',
+		genericHandler(
+			mockJobQualifications,
+			// Get and parse params from query params
+			{
+				page: (p) => parseInt(p),
+				limit: (l) => parseInt(l),
+				search: (s) => s.toLowerCase(),
+			},
+			// Apply filters to items
+			{
+				page: applyV4Paging,
+				search: applyFilter((jq, { search }) => jq.name.toLowerCase().includes(search)),
+				limit: (items, { limit }) => items.slice(0, limit),
+			},
+			(items) => items,
+		),
+	),
 
 	http.get('/api/v3/departments/tree', async () => {
 		await delay(300);
@@ -72,64 +99,66 @@ export const handlers = [
 		});
 	}),
 
-	http.get('/api/v3/axisSections', async ({ request }) => {
-		await delay(300);
-		const url = new URL(request.url);
-		const page = url.searchParams.get('paging');
-		const name = url.searchParams.get('name');
-
-		const pageSize = page ? parseInt(page.split(',')[1]) : 10;
-		const startIndex = page ? parseInt(page.split(',')[0]) : 0;
-		const clue = name ? decodeURIComponent(name.replace('like,', '')) : '';
-
-		return HttpResponse.json({
-			data: {
-				items: mockAxisSectionsV3.filter((as) => as.name.toLowerCase().includes(clue.toLowerCase())).slice(startIndex, startIndex + pageSize),
+	http.get(
+		'/api/v3/axisSections',
+		genericHandler(
+			mockAxisSectionsV3,
+			// Get and parse params from query params
+			{
+				paging: (p) => p,
+				name: (n) => decodeURIComponent(n.replace('like,', '')),
 			},
-		});
-	}),
+			// Apply filters to items
+			{
+				paging: applyV3Paging,
+				name: applyFilter((as, { name }) => as.name.toLowerCase().includes(name.toLowerCase())),
+			},
+			(items) => ({ data: { items } }),
+		),
+	),
 
-	http.get('/timmi-project/api/projectusers/search', async () => {
-		await delay(300);
-		return HttpResponse.json(mockProjectUsers);
-	}),
+	http.get(
+		'/timmi-project/api/projectusers/search',
+		genericHandler(
+			mockProjectUsers,
+			// Get and parse params from query params
+			{
+				paging: (p) => p,
+				search: (s) => s.toLowerCase(),
+			},
+			// Apply filters to items
+			{
+				paging: applyV3Paging,
+				search: applyFilter((user, { search }) => `${user.firstName} ${user.lastName}`.includes(search)),
+			},
+			(items) => ({ data: { items } }),
+		),
+	),
 
 	http.get('/api/v3/users/me', async () => {
 		await delay(300);
 		return HttpResponse.json(mockMe);
 	}),
 
-	http.get('/api/v3/users/scopedsearch', async () => {
-		await delay(300);
-		return HttpResponse.json(mockUsersSearch);
-	}),
+	http.get('/api/v3/users/scopedsearch', usersSearchHandler),
 
-	http.get('/api/v3/users', async ({ request }) => {
-		await delay(300);
-		const url = new URL(request.url);
-		// hard coded
-		if (url.searchParams.has('id') && url.searchParams.get('fields') === 'id,department.name') {
-			// Need to cast so the type inference won't screw up
-			return HttpResponse.json({
-				data: {
-					items: url.searchParams
-						.get('id')
-						.split(',')
-						.map((id, index) => ({
-							id,
-							department: {
-								name: index % 2 ? 'Commercial' : 'Support',
-							},
-						})),
-				},
-			}) as any;
-		}
+	http.get(
+		'/api/v3/users',
+		genericHandler(
+			mockUsers,
+			// Get and parse params from query params
+			{
+				paging: (p) => p,
+				id: (ids) => ids.split(',').map((id) => parseInt(id)),
+			},
+			// Apply filters to items
+			{
+				paging: applyV3Paging,
+				id: applyFilter((user, { id }) => id.includes(user.id)),
+			},
+			(items) => ({ data: { items } }),
+		),
+	),
 
-		return HttpResponse.json(mockUsers);
-	}),
-
-	http.get('/api/v3/users/search', async () => {
-		await delay(300);
-		return HttpResponse.json(mockUsersSearch);
-	}),
+	http.get('/api/v3/users/search', usersSearchHandler),
 ];
