@@ -13,7 +13,6 @@
 			display: inline-flex;
 			align-items: flex-start;
 			cursor: pointer;
-			gap: var(--spacings-XS);
 			vertical-align: top;
 
 			&::before {
@@ -35,6 +34,7 @@
 				display: block;
 				text-align: center;
 				margin-top: 2px;
+				margin-right: var(--spacings-XS);
 				transform: translate3d(0, 0, 0); // Fix box-shadow artifacts
 			}
 

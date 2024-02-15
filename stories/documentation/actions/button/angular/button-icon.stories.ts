@@ -3,6 +3,7 @@ import { ButtonComponent } from '@lucca-front/ng/button';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { generateInputs } from 'stories/helpers/stories';
 
+
 export default {
 	title: 'Documentation/Actions/Button/Angular/Icon',
 	component: ButtonComponent,
@@ -11,14 +12,14 @@ export default {
 			imports: [IconComponent],
 		}),
 	],
-	render: ({ luButton, ...inputs }, { argTypes }) => {
+	render: ({ luButton, label, ...inputs }, { argTypes }) => {
 		return {
-			template: `<button luButton${luButton !== '' ? `="${luButton}"` : ''} ${generateInputs(inputs, argTypes)}><lu-icon icon="signInfo"></lu-icon> Click me !</button>`,
+			template: `<button luButton${luButton !== '' ? `="${luButton}"` : ''} ${generateInputs(inputs, argTypes)}><lu-icon icon="signInfo"></lu-icon>${label}</button>`,
 		};
 	},
 } as Meta;
 
-export const Basic: StoryObj<ButtonComponent> = {
+export const Basic: StoryObj<ButtonComponent & {label: string}> = {
 	argTypes: {
 		luButton: {
 			options: ['', 'outlined', 'text', 'text-invert'],
@@ -33,5 +34,6 @@ export const Basic: StoryObj<ButtonComponent> = {
 		palette: 'none',
 		state: 'default',
 		luButton: '',
+		label: '',
 	},
 };
