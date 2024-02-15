@@ -46,6 +46,7 @@
 			&::after {
 				background-color: var(--colors-white-color);
 				box-shadow: var(--pr-t-elevation-shadow-overflow);
+				border-radius: var(--commons-borderRadius-full);
 				content: '';
 				display: block;
 				height: var(--components-switch-slider-size);
