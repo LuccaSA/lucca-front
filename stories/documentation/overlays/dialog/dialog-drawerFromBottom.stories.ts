@@ -2,21 +2,18 @@ import { Meta, StoryFn } from '@storybook/angular';
 
 interface DialogDrawerFromBottomStory {
 	size: string;
-	titleCentered: boolean;
 }
 
 function getTemplate(args: DialogDrawerFromBottomStory): string {
-	const modCentered = args.titleCentered ? 'mod-titleCentered' : '';
 	return `
 <div class="dialog_backdrop"></div>
-<div role="dialog" aria-modal="true" aria-labelledby="dialogInsideHeaderTitle1" class="dialog mod-drawer mod-fromBottom ${args.size} ${modCentered}">
+<div role="dialog" aria-modal="true" aria-labelledby="dialogInsideHeaderTitle1" class="dialog mod-drawer mod-fromBottom ${args.size}">
 	<form class="dialog-inside">
 		<header class="dialog-inside-header">
 			<button type="button" class="dialog-inside-header-button button">
 				<span class="lucca-icon icon-signClose" aria-hidden="true"></span>
 				<span class="u-mask">Fermer</span>
 			</button>
-			<button type="button" class="dialog-inside-header-link link">Fermer</button>
 			<h1 class="dialog-inside-header-title" id="dialogInsideHeaderTitle1">Title</h1>
 		</header>
 		<div class="dialog-inside-content">dialog</div>
@@ -51,18 +48,13 @@ export default {
 	component: DialogDrawerFromBottomStory,
 	argTypes: {
 		size: {
-			options: ['mod-fitContent', 'mod-maxContent', 'mod-fullScreen'],
+			options: ['', 'mod-maxContent', 'mod-fullScreen'],
 			control: {
 				type: 'select',
-			},
-		},
-		titleCentered: {
-			control: {
-				type: 'boolean',
 			},
 		},
 	},
 } as Meta;
 
 export const DrawerFromBottom = Template.bind({});
-DrawerFromBottom.args = { size: 'mod-fitContent', titleCentered: 'false' };
+DrawerFromBottom.args = { size: '' };

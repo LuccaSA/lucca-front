@@ -1,5 +1,4 @@
 @use '@lucca-front/scss/src/components/title/exports' as title;
-@use '@lucca-front/scss/src/components/link/exports' as link;
 @use '@lucca-front/scss/src/components/button/exports' as button;
 @use '@lucca-front/scss/src/components/footer/exports' as footer;
 @use '@lucca-front/scss/src/components/keyframe/exports' as keyframe;
@@ -10,7 +9,7 @@
 	animation-name: var(--components-dialog-animationOpening);
 	animation-duration: var(--commons-animations-durations-standard);
 	inset: var(--components-dialog-inset);
-	width: var(--components-dialog-size);
+	width: var(--components-dialog-width);
 	height: var(--components-dialog-height);
 	max-width: var(--components-dialog-maxWidth);
 	max-height: var(--components-dialog-maxHeight);
@@ -51,16 +50,6 @@
 			justify-self: end;
 			grid-area: close;
 			display: var(--components-dialog-insideHeaderButtonDisplay);
-		}
-
-		.dialog-inside-header-link {
-			@include link.decorationHover;
-
-			justify-self: start;
-			align-self: start;
-			grid-area: close;
-			line-height: var(--sizes-L-lineHeight);
-			display: var(--components-dialog-insideHeaderLinkDisplay);
 		}
 
 		.dialog-inside-content {
