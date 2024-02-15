@@ -44,7 +44,6 @@ function getTemplate(args: MenuBasicStory): string {
 	const header = args.header ? `mod-header` : '';
 	const s = args.s ? `mod-S` : '';
 	const vertical = args.vertical ? `mod-vertical` : '';
-	const disabled = args.disabled ? 'is-disabled' : '';
 	if (args.disabled)
 		return `
 	<nav class="menu ${s} ${noBorder} ${header} ${vertical}">
@@ -60,16 +59,16 @@ function getTemplate(args: MenuBasicStory): string {
 				</a>
 			</li>
 			<li class="menu-list-item">
-				<span class="menu-list-item-action ${disabled}">
+				<span class="menu-list-item-action is-disabled">
 					Menu 3
 				</span>
 			</li>
-		</ul>
+		</ul>	
 	</nav>
 	`;
 	else
 		return `
-	<nav class="menu ${s} ${noBorder} ${header}  ${vertical}">
+	<nav class="menu ${s} ${noBorder} ${header} ${vertical}">
 		<ul class="menu-list">
 			<li class="menu-list-item">
 				<a href="#" class="menu-list-item-action" aria-current="page">

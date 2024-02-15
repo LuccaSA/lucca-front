@@ -6,7 +6,6 @@
 	display: flex;
 	position: relative;
 	flex-wrap: wrap;
-	padding: var(--components-menu-headerPadding);
 
 	&::after {
 		content: var(--components-menu-borderContent);
@@ -16,6 +15,10 @@
 		position: absolute;
 		height: 1px;
 		inset: auto 0 0;
+	}
+
+	.scrollBox {
+		--components-scrollBox-shadowBottom: 1px;
 	}
 
 	// .label is deprecated
@@ -35,6 +38,11 @@
 			display: flex;
 			flex-grow: 1;
 			flex-wrap: wrap;
+			padding: var(--components-menu-listPadding);
+
+			.scrollBox & {
+				flex-wrap: nowrap;
+			}
 		}
 
 		// .menu-link is deprecated

@@ -1,7 +1,7 @@
 @use '@lucca-front/scss/src/components/numericBadge/exports' as numericBadge;
 
 @mixin header {
-	--components-menu-headerPadding: 0 calc(var(--spacings-XS) + var(--spacings-L));
+	--components-menu-listPadding: 0 var(--pr-t-spacings-500);
 }
 
 @mixin S {
@@ -34,6 +34,10 @@
 @mixin noBorder {
 	&::after {
 		--components-menu-borderContent: none;
+	}
+
+	.scrollBox {
+		--components-scrollBox-shadowBottom: 0;
 	}
 }
 
