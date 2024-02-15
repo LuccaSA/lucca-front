@@ -1,0 +1,26 @@
+@use 'exports' as *;
+
+.avatar {
+	@include vars;
+	@include component;
+}
+
+.avatarWrapper {
+	@include varsWrapper;
+
+	&.mod-XL {
+		@include XL;
+	}
+
+	&.mod-L {
+		@include L;
+	}
+
+	&.mod-S {
+		@include S;
+	}
+
+	&.mod-XS {
+		@include XS;
+	}
+}

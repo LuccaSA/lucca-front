@@ -14,7 +14,7 @@ function getTemplate(args: VerticalAlignStory): string {
 	`;
 }
 
-const Template: StoryFn<VerticalAlignStory> = (args: VerticalAlignStory) => ({
+const Template: StoryFn<VerticalAlignStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [

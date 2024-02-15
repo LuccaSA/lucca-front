@@ -35,7 +35,7 @@ function getTemplate(args: GridsBasicStory): string {
 </div>`;
 }
 
-const Template: StoryFn<GridsBasicStory> = (args: GridsBasicStory) => ({
+const Template: StoryFn<GridsBasicStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [

@@ -32,7 +32,7 @@ export default {
 	},
 } as Meta;
 
-const template: StoryFn<DisplayStory> = (args: DisplayStory) => ({
+const template: StoryFn<DisplayStory> = (args) => ({
 	props: args,
 });
 

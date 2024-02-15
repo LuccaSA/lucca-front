@@ -18,7 +18,7 @@ export default {
 				type: 'boolean',
 			},
 		},
-	}
+	},
 } as Meta;
 
 function getTemplate(args: ChipBasicStory): string {
@@ -37,7 +37,7 @@ function getTemplate(args: ChipBasicStory): string {
 	`;
 }
 
-const Template: StoryFn<ChipBasicStory> = (args: ChipBasicStory) => ({
+const Template: StoryFn<ChipBasicStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 });

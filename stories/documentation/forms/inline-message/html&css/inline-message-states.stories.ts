@@ -1,12 +1,10 @@
-import { Meta, Story } from '@storybook/angular';
+import { Meta, StoryFn } from '@storybook/angular';
 
-interface InlineMessageStatesStory {
-}
+interface InlineMessageStatesStory {}
 
 export default {
 	title: 'Documentation/Forms/InlineMessage/HTML & CSS/States',
-	argTypes: {
-	},
+	argTypes: {},
 } as Meta;
 
 function getTemplate(args: InlineMessageStatesStory): string {
@@ -15,7 +13,7 @@ function getTemplate(args: InlineMessageStatesStory): string {
 <div class="inlineMessage is-error"><span aria-hidden="true" class="lucca-icon"></span>Inline message</div>`;
 }
 
-const Template: Story<InlineMessageStatesStory> = (args: InlineMessageStatesStory) => ({
+const Template: StoryFn<InlineMessageStatesStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 });

@@ -35,7 +35,7 @@ function getTemplate(args: GridsLegacyVerticalAlignmentStory): string {
 	`;
 }
 
-const Template: StoryFn<GridsLegacyVerticalAlignmentStory> = (args: GridsLegacyVerticalAlignmentStory) => ({
+const Template: StoryFn<GridsLegacyVerticalAlignmentStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [

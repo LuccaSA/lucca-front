@@ -38,7 +38,7 @@ function getTemplate(args: TableCardStory): string {
 	`;
 }
 
-const Template: StoryFn<TableCardStory> = (args: TableCardStory) => ({
+const Template: StoryFn<TableCardStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 });

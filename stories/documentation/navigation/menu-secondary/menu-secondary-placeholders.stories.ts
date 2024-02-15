@@ -35,7 +35,7 @@ function getTemplate(args: MenuSecondaryPlaceholderStory): string {
 	`;
 }
 
-const Template: StoryFn<MenuSecondaryPlaceholderStory> = (args: MenuSecondaryPlaceholderStory) => ({
+const Template: StoryFn<MenuSecondaryPlaceholderStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [

@@ -26,7 +26,7 @@ function getTemplate(args: GridsLegacyHorizontalAlignmentStory): string {
 	`;
 }
 
-const Template: StoryFn<GridsLegacyHorizontalAlignmentStory> = (args: GridsLegacyHorizontalAlignmentStory) => ({
+const Template: StoryFn<GridsLegacyHorizontalAlignmentStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [

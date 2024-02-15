@@ -17,7 +17,7 @@ function getTemplate(args: TextSizeStory): string {
 	`;
 }
 
-const Template: StoryFn<TextSizeStory> = (args: TextSizeStory) => ({
+const Template: StoryFn<TextSizeStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [

@@ -45,6 +45,7 @@
 
 		.callout-kill {
 			@include reset.button;
+
 			color: currentColor;
 			transition-duration: var(--commons-animations-durations-fast);
 			transition-property: background-color;
@@ -56,6 +57,7 @@
 
 			&::before {
 				@include icon.generate('sign_close');
+
 				font-size: var(--sizes-S-lineHeight);
 			}
 		}

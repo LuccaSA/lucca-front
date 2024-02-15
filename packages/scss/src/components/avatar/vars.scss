@@ -1,0 +1,13 @@
+@mixin vars {
+	--components-avatar-size: 2.5rem;
+	--components-avatar-border: 2px;
+	--components-avatar-scale: 1;
+	--components-avatar-background: var(--commons-background-base);
+}
+
+@mixin varsWrapper {
+	@include vars;
+
+	--components-avatarWrapper-fontSize: var(--sizes-M-fontSize);
+	--components-avatarWrapper-overlap: var(--spacings-XS);
+}

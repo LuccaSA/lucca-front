@@ -1,22 +1,23 @@
 import { Component } from '@angular/core';
-import { Story, Meta, moduleMetadata } from '@storybook/angular';
+import { Meta, StoryFn, moduleMetadata } from '@storybook/angular';
 
 @Component({
 	standalone: true,
 	selector: 'inline-message-stories',
 	templateUrl: './inline-message.stories.html',
-}) class InlineMessageStory {}
+})
+class InlineMessageStory {}
 
 export default {
-  title: 'QA/InlineMessage',
-  component: InlineMessageStory,
+	title: 'QA/InlineMessage',
+	component: InlineMessageStory,
 	decorators: [
 		moduleMetadata({
-			entryComponents: [InlineMessageStory]
-		})
-	]
+			entryComponents: [InlineMessageStory],
+		}),
+	],
 } as Meta;
 
-const template: Story<InlineMessageStory> = () => ({});
+const template: StoryFn<InlineMessageStory> = () => ({});
 
 export const basic = template.bind({});

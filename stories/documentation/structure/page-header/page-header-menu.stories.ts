@@ -24,15 +24,15 @@ function getTemplate(args: PageHeaderMenuStory): string {
 			<div class="pageHeader-content-title">
 				<h1 class="u-margin0">H1. Page title</h1>
 				<div>
-					<button type="button" class="actionIcon" luTooltip="Modifier">
+					<button type="button" class="button mod-onlyIcon mod-text" luTooltip="Modifier">
 						<span aria-hidden="true" class="lucca-icon icon-officePen"></span>
 						<span class="u-mask">Modifier</span>
 					</button>
-					<button type="button" class="actionIcon" luTooltip="Copier">
+					<button type="button" class="button mod-onlyIcon mod-text" luTooltip="Copier">
 						<span aria-hidden="true" class="lucca-icon icon-fileCopy"></span>
 						<span class="u-mask">Copier</span>
 					</button>
-					<button type="button" class="actionIcon" luTooltip="Supprimer">
+					<button type="button" class="button mod-onlyIcon mod-text" luTooltip="Supprimer">
 						<span aria-hidden="true" class="lucca-icon icon-trashDelete"></span>
 						<span class="u-mask">Supprimer</span>
 					</button>
@@ -45,17 +45,19 @@ function getTemplate(args: PageHeaderMenuStory): string {
 				</label>
 				<button type="button" class="button">Button</button>
 				<button type="button" class="button mod-outline">Button</button>
-				<button type="button" class="actionIcon">
+				<button type="button" class="button mod-onlyIcon mod-text">
 					<span aria-hidden="true" class="lucca-icon icon-menuDots"></span>
 					<span class="u-mask">voir plus</span>
 				</button>
 			</div>
 		</div>
-		<section class="pageHeader-description">
-			<p class="u-marginBottom0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac justo scelerisque, blandit nibh quis, imperdiet justo.
-				Nullam condimentum nulla et neque ultricies bibendum <a target="_blank">Lien<span aria-hidden="true" class="lucca-icon icon-arrowExternal mod-XS u-marginLeftXXS"></span></a>.
+		<div class="pageHeader-description">
+			<p class="u-marginBottom0">
+				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac justo scelerisque, blandit nibh quis, imperdiet justo.
+				Nullam condimentum nulla et neque ultricies bibendum
+				<a target="_blank">Lien<span aria-hidden="true" class="lucca-icon icon-arrowExternal mod-XS u-marginLeftXXS"></span></a>.
 			</p>
-		</section>
+		</div>
 		<nav class="menu">
 			<ul class="menu-list">
 				<li class="menu-list-item">
@@ -89,7 +91,7 @@ function getTemplate(args: PageHeaderMenuStory): string {
 	`;
 }
 
-const Template: StoryFn<PageHeaderMenuStory> = (args: PageHeaderMenuStory) => ({
+const Template: StoryFn<PageHeaderMenuStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 });

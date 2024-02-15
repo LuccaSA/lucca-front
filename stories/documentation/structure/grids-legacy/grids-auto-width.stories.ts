@@ -28,7 +28,7 @@ function getTemplate(args: GridsLegacyAutoWidthStory): string {
 	`;
 }
 
-const Template: StoryFn<GridsLegacyAutoWidthStory> = (args: GridsLegacyAutoWidthStory) => ({
+const Template: StoryFn<GridsLegacyAutoWidthStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [
