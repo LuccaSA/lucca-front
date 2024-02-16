@@ -3,7 +3,7 @@ import { Meta, StoryFn } from '@storybook/angular';
 interface TagsBasicStory {
 	palette: string;
 	clickable: boolean;
-	l: boolean;
+	M: boolean;
 	outlined: boolean;
 }
 
@@ -34,18 +34,17 @@ export default {
 			control: {
 				type: 'select',
 			},
-			description: 'Deprecated 🦕',
 		},
 		outlined: {
 			control: {
 				type: 'boolean',
 			},
 		},
-		l: {
+		M: {
 			control: {
 				type: 'boolean',
 			},
-			description: 'Taille : Large',
+			description: 'Taille : Medium',
 		},
 		clickable: {
 			control: {
@@ -58,16 +57,28 @@ export default {
 
 function getTemplate(args: TagsBasicStory): string {
 	const classes = [args.palette].filter(Boolean).join(' ');
-	const clickable = args.clickable ? `mod-clickable` : '';
+
 	const outlined = args.outlined ? `mod-outlined` : '';
-	const l = args.l ? `mod-L` : '';
-	return `<span class="tag ${classes} ${clickable} ${outlined} ${l}">Tag</span>`;
+	const M = args.M ? `mod-M` : '';
+	if (args.clickable) {
+		return `<a href="#" class="tag ${classes} ${outlined} ${M}">Tag</a> <span class="tag mod-clickable ${classes} ${outlined} ${M}">Tag</span>`;
+	} else {
+		return `<span class="tag ${classes} ${outlined} ${M}">Tag</span>`;
+	}
 }
 
 const Template: StoryFn<TagsBasicStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
+	styles: [
+		`
+		:host {
+			display: flex;
+			gap: 0.5rem;
+		}
+	`,
+	],
 });
 
 export const Basic = Template.bind({});
-Basic.args = { outlined: false, l: false, palette: '', clickable: false };
+Basic.args = { outlined: false, M: false, palette: '', clickable: false };

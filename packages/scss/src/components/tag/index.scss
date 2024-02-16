@@ -4,10 +4,11 @@
 	@include vars;
 	@include component;
 
-	&.mod-L {
-		@include l;
+	&.mod-M {
+		@include M;
 	}
 
+	&:is(a, button),
 	&.mod-clickable {
 		@include clickable;
 	}
