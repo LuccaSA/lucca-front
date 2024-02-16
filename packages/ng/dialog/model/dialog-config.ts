@@ -1,7 +1,7 @@
 import { TemplateRef } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ComponentType } from '@angular/cdk/overlay';
-import { DialogConfig } from '@angular/cdk/dialog';
+import { AutoFocusTarget, DialogConfig } from '@angular/cdk/dialog';
 
 export const dialogData = Symbol.for('luDialogData');
 export const dialogResult = Symbol.for('luDialogResult');
@@ -45,6 +45,14 @@ interface BaseLuDialogConfig<C> {
 	 * instead of aria-labelledby on the dialog container
 	 */
 	ariaLabel?: string;
+
+	/**
+	 * Autofocus target
+	 *
+	 * Defaults to the close button from the header, first-input is added by us to focus the first available input
+	 * or the first input that is contained inside a node that has the `.luDialog-autofocus` class
+	 */
+	autoFocus?: AutoFocusTarget | 'first-input';
 
 	/**
 	 * This provides a way to override any of the configuration parameters expected by cdk's `Dialog.open` method.

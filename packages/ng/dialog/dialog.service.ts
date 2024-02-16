@@ -22,7 +22,9 @@ export class LuDialogService {
 			backdropClass: 'dialog_backdrop',
 			panelClass: 'dialog',
 			ariaLabel: config.ariaLabel,
-			autoFocus: 'dialog',
+			// If focus is first-input, focus dialog and let the component do the rest
+			// Else, just set it to config value or default to first-tabbable
+			autoFocus: config.autoFocus === 'first-input' ? 'dialog' : config.autoFocus ?? 'first-tabbable',
 			templateContext: () => ({ dialogRef: luDialogRef }),
 			providers: (ref: DialogRef<LuDialogResult<C>, C>) => {
 				luDialogRef = new LuDialogRef(ref, config);

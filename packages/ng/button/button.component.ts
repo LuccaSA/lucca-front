@@ -54,7 +54,7 @@ export class ButtonComponent implements OnChanges {
 		// ignore icon and comment
 		const noSpan =
 			childNodes.filter((node: HTMLElement) => {
-				return node.nodeName !== '#comment' && node.nodeName.toLowerCase() !== 'lu-icon' && !node?.className.includes('u-mask');
+				return node.nodeName !== '#comment' && node.nodeName.toLowerCase() !== 'lu-icon' && !node?.className?.includes('u-mask');
 			}).length == 0;
 		return !!this.#iconComponentRef && noSpan && noText;
 	}

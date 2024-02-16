@@ -26,7 +26,7 @@ export class DialogComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
-		if (!this.dialogRef.config.cdkConfigOverride?.autoFocus) {
+		if (this.dialogRef.config.autoFocus === 'first-input' && !this.dialogRef.config.cdkConfigOverride?.autoFocus) {
 			const focusable: HTMLElement =
 				this.#htmlElement.querySelector('.luDialog-autofocus .luNativeInput') || this.#htmlElement.querySelector('.luDialog-autofocus') || this.#htmlElement.querySelector('.luNativeInput');
 			focusable?.focus();
