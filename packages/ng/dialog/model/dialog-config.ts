@@ -52,7 +52,7 @@ interface BaseLuDialogConfig<C> {
 	 * Defaults to the close button from the header, first-input is added by us to focus the first available input
 	 * or the first input that is contained inside a node that has the `.luDialog-autofocus` class
 	 */
-	autoFocus?: AutoFocusTarget | 'first-input';
+	autoFocus?: AutoFocusTarget | 'first-input' | string;
 
 	/**
 	 * This provides a way to override any of the configuration parameters expected by cdk's `Dialog.open` method.
