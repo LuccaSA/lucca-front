@@ -23,13 +23,13 @@
 			font-size: var(--components-simpleSelect-fontSize);
 			line-height: var(--components-simpleSelect-lineHeight);
 			padding: 0;
-			min-width: fit-content;
 			background-color: transparent;
 			color: var(--components-simpleSelect-value-color);
 			border: 0;
 			outline: none;
 			position: relative;
 			z-index: 1;
+			min-width: 0;
 			cursor: pointer;
 
 			&::placeholder {
@@ -45,8 +45,8 @@
 			line-height: var(--components-simpleSelect-lineHeight);
 			color: var(--components-simpleSelect-value-color);
 			white-space: nowrap;
-		  overflow: hidden;
-		  text-overflow: ellipsis;
+			overflow: hidden;
+			text-overflow: ellipsis;
 			transition: color var(--commons-animations-durations-fast) ease;
 		}
 
