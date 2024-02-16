@@ -36,10 +36,10 @@
 		&:where(.mod-fromBottom) {
 			@include fromBottom;
 		}
-	}
 
-	&.mod-titleCentered {
-		@include titleCentered;
+		@include media.max('XXS') {
+			@include fromBottom;
+		}
 	}
 
 	&.mod-fullScreen {

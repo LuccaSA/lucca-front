@@ -14,7 +14,6 @@ function getTemplate(args: DialogBasicStory): string {
 				<span class="lucca-icon icon-signClose" aria-hidden="true"></span>
 				<span class="u-mask">Fermer</span>
 			</button>
-			<button type="button" class="dialog-inside-header-link link">Fermer</button>
 			<h1 class="dialog-inside-header-title" id="dialogInsideHeaderTitle1">Title</h1>
 		</header>
 		<div class="dialog-inside-content">dialog</div>

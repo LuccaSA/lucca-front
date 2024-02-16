@@ -1,5 +1,6 @@
 @mixin vars {
 	--components-dialog-size: 40rem;
+	--components-dialog-width: var(--components-dialog-size);
 	--components-dialog-height: fit-content;
 	--components-dialog-maxWidth: calc(100vw - (var(--spacings-S) * 2));
 	--components-dialog-maxHeight: calc(100dvh - (var(--spacings-S) * 2));
