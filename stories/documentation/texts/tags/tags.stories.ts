@@ -11,7 +11,26 @@ export default {
 	title: 'Documentation/Texts/Tags/Basic',
 	argTypes: {
 		palette: {
-			options: ['', 'palette-product', 'palette-neutral', 'palette-success', 'palette-warning', 'palette-error'],
+			options: [
+				'',
+				'palette-product',
+				'palette-neutral',
+				'palette-success',
+				'palette-warning',
+				'palette-error',
+				'palette-kiwi',
+				'palette-lime',
+				'palette-cucumber',
+				'palette-mint',
+				'palette-glacier',
+				'palette-lagoon',
+				'palette-blueberry',
+				'palette-lavender',
+				'palette-grape',
+				'palette-watermelon',
+				'palette-pumpkin',
+				'palette-pineapple',
+			],
 			control: {
 				type: 'select',
 			},
