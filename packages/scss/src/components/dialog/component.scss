@@ -1,0 +1,80 @@
+@use '@lucca-front/scss/src/components/title/exports' as title;
+@use '@lucca-front/scss/src/components/button/exports' as button;
+@use '@lucca-front/scss/src/components/footer/exports' as footer;
+@use '@lucca-front/scss/src/components/keyframe/exports' as keyframe;
+
+@mixin component($atRoot: 'without: rule') {
+	@include keyframe.scaleIn;
+
+	animation-name: var(--components-dialog-animationOpening);
+	animation-duration: var(--commons-animations-durations-standard);
+	inset: var(--components-dialog-inset);
+	width: var(--components-dialog-width);
+	height: var(--components-dialog-height);
+	max-width: var(--components-dialog-maxWidth);
+	max-height: var(--components-dialog-maxHeight);
+	background-color: var(--colors-white-color);
+	border-radius: var(--components-dialog-borderRadius);
+	box-shadow: var(--commons-boxShadow-M);
+	position: fixed;
+	margin: auto;
+	overflow: auto;
+	display: flex;
+	flex-direction: column;
+
+	@at-root ($atRoot) {
+		.dialog-inside {
+			display: flex;
+			flex-direction: column;
+			flex-grow: 1;
+		}
+
+		.dialog-inside-header {
+			padding: var(--spacings-S) var(--spacings-M);
+			background-color: var(--colors-white-color);
+			grid-template-areas: var(--components-dialog-insideHeaderAreas);
+			grid-template-columns: var(--components-dialog-insideHeaderColumns);
+			box-shadow: 0 1px 0 0 var(--palettes-grey-100);
+			gap: var(--spacings-S);
+			position: sticky;
+			display: grid;
+			top: 0;
+		}
+
+		.dialog-inside-header-button {
+			@include button.text;
+			@include button.S;
+			@include button.onlyIconS;
+
+			align-self: start;
+			justify-self: end;
+			grid-area: close;
+			display: var(--components-dialog-insideHeaderButtonDisplay);
+		}
+
+		.dialog-inside-content {
+			padding: var(--spacings-S) var(--spacings-M);
+			flex-grow: 1;
+		}
+
+		.dialog-inside-header-title {
+			@include title.h2;
+
+			padding: var(--components-dialog-insideHeaderTitlePadding);
+			text-align: var(--components-dialog-insideHeaderTitleAlign);
+			margin: 0;
+			grid-area: title;
+		}
+
+		.dialog-inside-footer {
+			@include footer.sticky;
+		}
+
+		.dialog_backdrop {
+			background-color: var(--palettes-grey-900);
+			position: fixed;
+			opacity: 0.4;
+			inset: 0;
+		}
+	}
+}

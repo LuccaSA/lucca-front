@@ -38,6 +38,10 @@
 		color: var(--components-button-color);
 	}
 
+	.lucca-icon {
+		display: block;
+	}
+
 	// deprecated
 	.button-icon {
 		@include icon.M;
