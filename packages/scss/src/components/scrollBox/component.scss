@@ -23,23 +23,23 @@
 		top: var(--components-scrollBox-shadowTop);
 		bottom: var(--components-scrollBox-shadowBottom);
 		background-repeat: no-repeat;
-		background-size: 100% 100%, 40% 100%, 1px 100%;
+		background-size: 75% 100%, 25% 100%, 1px 100%;
 	}
 
 	&::before {
 		left: 0;
 		background-position: 0% 50%;
 		background-image: radial-gradient(farthest-side at 0% 50%, rgba(var(--components-scrollBox-shadowColorRgb), 0.24), rgba(0, 0, 0, 0)),
-			radial-gradient(farthest-side at 0% 50%, rgba(var(--components-scrollBox-shadowColorRgb), 0.32) 50%, rgba(0, 0, 0, 0)),
-			radial-gradient(farthest-side at 0% 50%, rgba(var(--components-scrollBox-shadowColorRgb)) calc(100% - 1px), rgba(0, 0, 0, 0));
+			radial-gradient(farthest-side at 0% 50%, rgba(var(--components-scrollBox-shadowColorRgb), 0.32), rgba(0, 0, 0, 0)),
+			radial-gradient(farthest-side at 0% 50%, rgba(var(--components-scrollBox-shadowColorRgb), 0.08) 1px, rgba(0, 0, 0, 0));
 	}
 
 	&::after {
 		right: 0;
 		background-position: 100% 50%;
 		background-image: radial-gradient(farthest-side at 100% 50%, rgba(var(--components-scrollBox-shadowColorRgb), 0.24), rgba(0, 0, 0, 0)),
-			radial-gradient(farthest-side at 100% 50%, rgba(var(--components-scrollBox-shadowColorRgb), 0.32) 50%, rgba(0, 0, 0, 0)),
-			radial-gradient(farthest-side at 100% 50%, rgba(var(--components-scrollBox-shadowColorRgb)) calc(100% - 1px), rgba(0, 0, 0, 0));
+			radial-gradient(farthest-side at 100% 50%, rgba(var(--components-scrollBox-shadowColorRgb), 0.32), rgba(0, 0, 0, 0)),
+			radial-gradient(farthest-side at 100% 50%, rgba(var(--components-scrollBox-shadowColorRgb), 0.08) calc(100% - 1px), rgba(0, 0, 0, 0));
 	}
 
 	@at-root ($atRoot) {
