@@ -34,7 +34,7 @@
 			background-color: var(--colors-white-color);
 			grid-template-areas: var(--components-dialog-insideHeaderAreas);
 			grid-template-columns: var(--components-dialog-insideHeaderColumns);
-			box-shadow: 0 1px 0 0 var(--palettes-grey-100);
+			box-shadow: 0 1px 0 0 var(--palettes-neutral-100);
 			gap: var(--spacings-S);
 			position: sticky;
 			display: grid;
@@ -71,7 +71,7 @@
 		}
 
 		.dialog_backdrop {
-			background-color: var(--palettes-grey-900);
+			background-color: var(--palettes-neutral-900);
 			position: fixed;
 			opacity: 0.4;
 			inset: 0;
