@@ -6,6 +6,8 @@ import { LuOptionContext, SELECT_ID } from '../select.model';
 import { LuOptionOutletDirective } from './option-outlet.directive';
 import { ILuOptionContext, LU_OPTION_CONTEXT } from './option.token';
 
+export const MAGIC_OPTION_SCROLL_DELAY = 15;
+
 @Component({
 	selector: 'lu-select-option',
 	templateUrl: './option.component.html',
@@ -74,7 +76,7 @@ export class LuOptionComponent<T> implements Highlightable, AfterViewInit, OnDes
 		// a race condition somewhere that I can't find so this will just fix it for now.
 		setTimeout(() => {
 			this.elementRef.nativeElement.scrollIntoView(this.scrollIntoViewOptions);
-		}, 15);
+		}, MAGIC_OPTION_SCROLL_DELAY);
 	}
 
 	setInactiveStyles(): void {

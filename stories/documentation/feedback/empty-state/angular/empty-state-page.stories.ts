@@ -4,7 +4,7 @@ import { EmptyStatePageComponent } from '@lucca-front/ng/empty-state';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 
 export default {
-	title: 'Documentation/Feedback/Empty State Page/Angular',
+	title: 'Documentation/Feedback/Empty State/Angular/Page',
 	component: EmptyStatePageComponent,
 	decorators: [
 		moduleMetadata({
@@ -25,8 +25,7 @@ export default {
 }
 `,
 			],
-			template: `
-<lu-empty-state-page
+			template: `<lu-empty-state-page
 	title="${title}"
 	description="${description}"
 	${paramIcon}

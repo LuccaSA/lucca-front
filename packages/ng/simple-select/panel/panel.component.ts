@@ -5,9 +5,11 @@ import { FormsModule } from '@angular/forms';
 import { getIntl } from '@lucca-front/ng/core';
 import { LuSelectPanelRef, SELECT_ID, ɵLuOptionComponent, ɵgenerateGroups } from '@lucca-front/ng/core-select';
 import { EMPTY, asyncScheduler, filter, map, observeOn, take, takeUntil } from 'rxjs';
-import { skip } from 'rxjs/operators';
-import { ILuSimpleSelectPanelData, SIMPLE_SELECT_PANEL_DATA } from '../select.model';
+import { debounceTime, switchMap } from 'rxjs/operators';
+import { LuSimpleSelectInputComponent } from '../input/select-input.component';
+import { SIMPLE_SELECT_INPUT } from '../select.model';
 import { LU_SIMPLE_SELECT_TRANSLATIONS } from '../select.translate';
+import { LuIsOptionSelectedPipe } from './option-selected.pipe';
 
 @Component({
 	selector: 'lu-select-panel',
@@ -15,21 +17,21 @@ import { LU_SIMPLE_SELECT_TRANSLATIONS } from '../select.translate';
 	styleUrls: ['./panel.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	standalone: true,
-	imports: [A11yModule, AsyncPipe, FormsModule, NgIf, NgFor, NgTemplateOutlet, ɵLuOptionComponent],
+	imports: [A11yModule, AsyncPipe, FormsModule, NgIf, NgFor, NgTemplateOutlet, ɵLuOptionComponent, LuIsOptionSelectedPipe],
 })
 export class LuSelectPanelComponent<T> implements AfterViewInit {
-	protected panelData = inject<ILuSimpleSelectPanelData<T>>(SIMPLE_SELECT_PANEL_DATA);
+	public selectInput = inject<LuSimpleSelectInputComponent<T>>(SIMPLE_SELECT_INPUT);
 	public panelRef = inject<LuSelectPanelRef<T, T>>(LuSelectPanelRef);
 	public selectId = inject(SELECT_ID);
 	public intl = getIntl(LU_SIMPLE_SELECT_TRANSLATIONS);
 
-	options$ = this.panelData.options$;
-	groups$ = this.panelData.grouping ? this.panelData.options$.pipe(map((options) => ɵgenerateGroups(options, this.panelData.grouping.selector))) : EMPTY;
-	loading$ = this.panelData.loading$;
-	optionComparer = this.panelData.optionComparer;
-	grouping = this.panelData.grouping;
-	initialValue: T | undefined = this.panelData.initialValue;
-	optionTpl = this.panelData.optionTpl;
+	options$ = this.selectInput.options$;
+	grouping = this.selectInput.grouping;
+	groups$ = this.grouping ? this.options$.pipe(map((options) => ɵgenerateGroups(options, this.grouping.selector))) : EMPTY;
+	loading$ = this.selectInput.loading$;
+	optionComparer = this.selectInput.optionComparer;
+	initialValue: T | undefined = this.selectInput.value;
+	optionTpl = this.selectInput.optionTpl;
 
 	@ViewChildren(ɵLuOptionComponent) optionsQL: QueryList<ɵLuOptionComponent<T>>;
 	private _keyManager: ActiveDescendantKeyManager<ɵLuOptionComponent<T>>;
@@ -70,7 +72,7 @@ export class LuSelectPanelComponent<T> implements AfterViewInit {
 			)
 			.subscribe((activeDescendant) => this.panelRef.activeOptionIdChanged.emit(activeDescendant));
 
-		if (this.initialValue) {
+		if (this.initialValue && !this.selectInput.clue) {
 			this.options$
 				?.pipe(
 					observeOn(asyncScheduler),
@@ -86,15 +88,16 @@ export class LuSelectPanelComponent<T> implements AfterViewInit {
 		}
 
 		/**
-		 * On new options, we want to select the first element with key manager
+		 * On new options after a search, we want to select the first element with key manager
 		 */
-		this.options$
-			?.pipe(
-				observeOn(asyncScheduler),
-				// Skip first so we don't override "select currently active", we only want new options anyways
-				skip(1),
-				takeUntil(this.panelRef.closed),
-			)
-			.subscribe(() => this.keyManager.setFirstItemActive());
+		if (this.selectInput.searchable) {
+			this.selectInput.clueChange
+				.pipe(
+					switchMap(() => this.optionsQL.changes.pipe(take(1))),
+					debounceTime(0),
+					takeUntil(this.panelRef.closed),
+				)
+				.subscribe(() => this.keyManager.setFirstItemActive());
+		}
 	}
 }

@@ -43,7 +43,7 @@
 .optionItem-icons {
 	display: none;
 	position: absolute;
-	top: var(--spacings-XS);
+	top: var(--spacings-XXS);
 	right: var(--spacings-XS);
 	opacity: 0;
 	transition: all var(--commons-animations-durations-fast) ease;
@@ -71,13 +71,11 @@
 
 	.optionItem-value {
 		&::before {
-			top: 1.3rem;
 			left: var(--spacings-XS);
 			pointer-events: none;
 		}
 
 		&::after {
-			top: 1.3rem;
 			left: var(--spacings-XS);
 			pointer-events: none;
 		}

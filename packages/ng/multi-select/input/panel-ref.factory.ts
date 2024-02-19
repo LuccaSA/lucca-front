@@ -3,21 +3,22 @@ import { ComponentPortal } from '@angular/cdk/portal';
 import { ChangeDetectorRef, ComponentRef, ElementRef, Injectable, Injector, inject } from '@angular/core';
 import { takeUntil } from 'rxjs';
 import { LuMultiSelectPanelComponent } from '../panel/index';
-import { ILuMultiSelectPanelData, MULTI_SELECT_PANEL_DATA } from '../select.model';
+import { MULTI_SELECT_INPUT } from '../select.model';
 import { LuMultiSelectPanelRef } from './panel.model';
+import { LuMultiSelectInputComponent } from './select-input.component';
 
 class MultiSelectPanelRef<T> extends LuMultiSelectPanelRef<T> {
 	instance: LuMultiSelectPanelComponent<T>;
 	private panelRef: ComponentRef<LuMultiSelectPanelComponent<T>>;
 	private portalRef: ComponentPortal<LuMultiSelectPanelComponent<T>>;
 
-	constructor(private overlayRef: OverlayRef, parentInjector: Injector, panelData: ILuMultiSelectPanelData<T>, protected defaultPositionStrategy: PositionStrategy) {
+	constructor(private overlayRef: OverlayRef, parentInjector: Injector, selectInput: LuMultiSelectInputComponent<T>, protected defaultPositionStrategy: PositionStrategy) {
 		super();
 
 		const injector = Injector.create({
 			providers: [
 				{ provide: LuMultiSelectPanelRef, useValue: this },
-				{ provide: MULTI_SELECT_PANEL_DATA, useValue: panelData },
+				{ provide: MULTI_SELECT_INPUT, useValue: selectInput },
 			],
 			parent: parentInjector,
 		});
@@ -73,7 +74,7 @@ export class LuMultiSelectPanelRefFactory {
 	protected scrollStrategies = inject(ScrollStrategyOptions);
 	protected parentInjector = inject(Injector);
 
-	buildPanelRef<T>(panelData: ILuMultiSelectPanelData<T>, defaultOverlayConfigOverride: OverlayConfig = {}): LuMultiSelectPanelRef<T> {
+	buildPanelRef<T>(selectInput: LuMultiSelectInputComponent<T>, defaultOverlayConfigOverride: OverlayConfig = {}): LuMultiSelectPanelRef<T> {
 		const defaultOverlayConfig = this.buildDefaultOverlayConfig(defaultOverlayConfigOverride);
 
 		const overlayRef = this.overlay.create(defaultOverlayConfig);
@@ -81,7 +82,7 @@ export class LuMultiSelectPanelRefFactory {
 		overlayRef.hostElement.style.transitionProperty = 'height';
 		overlayRef.hostElement.style.transitionDuration = 'var(--commons-animations-durations-standard)';
 
-		return new MultiSelectPanelRef(overlayRef, this.parentInjector, panelData, defaultOverlayConfig.positionStrategy);
+		return new MultiSelectPanelRef(overlayRef, this.parentInjector, selectInput, defaultOverlayConfig.positionStrategy);
 	}
 
 	protected buildDefaultOverlayConfig(overlayConfigOverride: OverlayConfig = {}): OverlayConfig {

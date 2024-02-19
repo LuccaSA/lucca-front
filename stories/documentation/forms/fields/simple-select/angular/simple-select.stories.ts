@@ -6,6 +6,7 @@ import { allLegumes, FilterLegumesPipe } from '@/stories/forms/select/select.uti
 import { HiddenArgType } from '../../../../../helpers/common-arg-types';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
+import { generateInputs } from '../../../../../helpers/stories';
 
 export default {
 	title: 'Documentation/Forms/Fields/Simple Select/Angular',
@@ -17,6 +18,18 @@ export default {
 	argTypes: {
 		tooltip: {
 			type: 'string',
+		},
+		size: {
+			options: ['M', 'S', 'XS'],
+			control: {
+				type: 'radio',
+			},
+		},
+		inlineMessageState: {
+			options: ['default', 'success', 'warning', 'error'],
+			control: {
+				type: 'select',
+			},
 		},
 		optionComparer: HiddenArgType,
 		options: HiddenArgType,
@@ -30,26 +43,24 @@ export default {
 } as Meta;
 
 export const Basic: StoryObj<LuSimpleSelectInputComponent<unknown> & FormFieldComponent> = {
-	render: ({ label, required, clearable, loading, hiddenLabel, inlineMessage, size, placeholder, inlineMessageState, disabled, tooltip }) => {
+	render: (args, { argTypes }) => {
+		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, ...inputArgs } = args;
 		return {
 			props: { legumes: allLegumes },
-			template: `
-<lu-form-field
-	label="${label}"
-	${hiddenLabel ? 'hiddenLabel' : ''}
-	inlineMessage="${inlineMessage}"
-	inlineMessageState="${inlineMessageState}"
-	size="${size}"
-	tooltip="${tooltip}"
->
-	<lu-simple-select
-		${loading ? 'loading' : ''}
-		${disabled ? 'disabled' : ''}
-		${clearable ? 'clearable' : ''}
+			template: `<lu-form-field ${generateInputs(
+				{
+					label,
+					hiddenLabel,
+					tooltip,
+					inlineMessage,
+					inlineMessageState,
+					size,
+				},
+				argTypes,
+			)}>
+	<lu-simple-select	${generateInputs(inputArgs, argTypes)}
 		[options]="legumes | filterLegumes:clue"
 		(clueChange)="clue = $event"
-		placeholder="${placeholder}"
-		required="${required}"
 		[(ngModel)]="example">
 	</lu-simple-select>
 </lu-form-field>
@@ -61,16 +72,16 @@ export const Basic: StoryObj<LuSimpleSelectInputComponent<unknown> & FormFieldCo
 		};
 	},
 	args: {
+		size: 'M',
 		label: 'Label',
-		required: true,
+		tooltip: 'Tooltip message',
 		hiddenLabel: false,
+		required: false,
+		placeholder: 'Placeholder',
+		clearable: true,
 		disabled: false,
 		inlineMessage: 'Helper Text',
 		inlineMessageState: 'default',
-		size: 'M',
-		placeholder: 'Placeholder',
-		tooltip: "Je suis un message d'aide",
-		clearable: false,
 		loading: false,
 	},
 };

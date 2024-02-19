@@ -104,6 +104,13 @@ function getTemplate(args: ArrowBasicStory): string {
 const Template: StoryFn<ArrowBasicStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
+	styles: [
+		`
+		:host {
+			display: block;
+		}`,
+		args.neutral === true ? ':host { background-color: white; margin: -15px -15px; padding: 15px 15px; }' : '',
+	],
 });
 
 export const Basic = Template.bind({});

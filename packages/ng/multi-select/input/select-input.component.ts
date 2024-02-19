@@ -66,7 +66,7 @@ export class LuMultiSelectInputComponent<T> extends ALuSelectInputComponent<T, T
 	public readonly emptyClue$ = new Subject<void>();
 
 	public override focusInput(): void {
-		this.focusInput$.next();
+		this.focusInput$.next({ keepClue: true });
 	}
 
 	public override emptyClue(): void {
@@ -86,17 +86,7 @@ export class LuMultiSelectInputComponent<T> extends ALuSelectInputComponent<T, T
 	}
 
 	protected override buildPanelRef(): LuMultiSelectPanelRef<T> {
-		return this.panelRefFactory.buildPanelRef(
-			{
-				initialValue: this.value,
-				optionComparer: this.optionComparer,
-				options$: this.options$,
-				loading$: this.loading$,
-				optionTpl: this.optionTpl,
-				grouping: this.grouping,
-			},
-			this.overlayConfig,
-		);
+		return this.panelRefFactory.buildPanelRef(this, this.overlayConfig);
 	}
 
 	protected override bindInputToPanelRefEvents(): void {

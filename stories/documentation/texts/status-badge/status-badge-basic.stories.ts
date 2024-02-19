@@ -18,7 +18,7 @@ export default {
 			control: {
 				type: 'boolean',
 			},
-			description: 'Taille : Large',
+			description: '[v16.2] Taille : Large',
 		},
 	},
 } as Meta;
