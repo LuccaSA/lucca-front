@@ -9,7 +9,7 @@
 
 @mixin disabled {
 	--components-button-cursor: default;
-	--components-button-color: var(--palettes-grey-500);
+	--components-button-color: var(--palettes-neutral-500);
 	--components-button-backgroundColor: var(--commons-disabled-background);
 	--components-button-pointerEvents: none;
 
@@ -57,7 +57,7 @@
 }
 
 @mixin error {
-	@include core.cssvars('palettes', config.$error);
+	@include core.cssvars('palettes', config.$critical);
 
 	@include state;
 

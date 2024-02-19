@@ -9,7 +9,7 @@
 		.file-or,
 		.file-formats,
 		.file-button {
-			color: var(--palettes-grey-500);
+			color: var(--palettes-neutral-500);
 		}
 	}
 }
@@ -17,8 +17,8 @@
 @mixin droppable {
 	~ .file-content {
 		&::before {
-			background-color: var(--palettes-primary-50);
-			border: 1px dashed var(--palettes-primary-400);
+			background-color: var(--palettes-product-50);
+			border: 1px dashed var(--palettes-product-400);
 		}
 	}
 }
@@ -27,7 +27,7 @@
 	~ .file-content {
 		.file-title {
 			font-weight: 400;
-			color: var(--palettes-grey-600);
+			color: var(--palettes-neutral-600);
 			font-size: var(--sizes-S-fontSize);
 			line-height: var(--sizes-S-lineHeight);
 			font-style: italic;
@@ -75,7 +75,7 @@
 	background-color: var(--commons-background-base);
 
 	.file-icon {
-		color: var(--palettes-primary-500);
+		color: var(--palettes-product-500);
 	}
 }
 

@@ -1,6 +1,6 @@
 @mixin dark {
-	--components-skeleton-gradient-step-one: var(--palettes-grey-200);
-	--components-skeleton-gradient-step-two: var(--palettes-grey-500);
+	--components-skeleton-gradient-step-one: var(--palettes-neutral-200);
+	--components-skeleton-gradient-step-two: var(--palettes-neutral-500);
 }
 
 @mixin skeletonShapeSizing($spacings...) {

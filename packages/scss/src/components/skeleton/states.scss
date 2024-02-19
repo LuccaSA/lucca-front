@@ -40,9 +40,9 @@
 		animation: skeletonBackground 1.5s infinite linear;
 		background: linear-gradient(
 			90deg,
-			var(--components-skeleton-gradient-step-one, var(--palettes-grey-50)),
-			var(--components-skeleton-gradient-step-two, var(--palettes-grey-200)),
-			var(--components-skeleton-gradient-step-one, var(--palettes-grey-50))
+			var(--components-skeleton-gradient-step-one, var(--palettes-neutral-50)),
+			var(--components-skeleton-gradient-step-two, var(--palettes-neutral-200)),
+			var(--components-skeleton-gradient-step-one, var(--palettes-neutral-50))
 		);
 		background-size: 150% 100%;
 		background-repeat: repeat-x;

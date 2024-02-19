@@ -9,7 +9,7 @@
 		.list-item {
 			border-bottom-width: var(--commons-divider-width);
 			border-bottom-color: var(--commons-divider-color);
-			color: var(--palettes-grey-800);
+			color: var(--palettes-neutral-800);
 			border-bottom-style: solid;
 			align-items: center;
 			display: flex;
@@ -23,7 +23,7 @@
 
 		.list-item-content {
 			padding: var(--components-list-padding);
-			color: var(--palettes-grey-800);
+			color: var(--palettes-neutral-800);
 			text-decoration: none;
 			width: 100%;
 		}

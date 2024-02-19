@@ -11,8 +11,7 @@ function getTemplate(args: TextColorStory): string {
 		<span class="u-textDefault">Default</span>
 		<span class="u-textLight">Light</span>
 		<span class="u-textPlaceholder">Placeholder</span>
-		<span class="u-textPrimary">Primary</span>
-		<span class="u-textSecondary">Secondary</span>
+		<span class="u-textProduct">Product</span>
 		<span class="u-textSuccess">Success</span>
 		<span class="u-textWarning">Warning</span>
 		<span class="u-textError">Error</span>

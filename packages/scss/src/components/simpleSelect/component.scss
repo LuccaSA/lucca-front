@@ -13,7 +13,7 @@
 	cursor: pointer;
 
 	&:hover {
-		--components-simpleSelect-border-color: var(--palettes-grey-400);
+		--components-simpleSelect-border-color: var(--palettes-neutral-400);
 	}
 
 	@at-root ($atRoot) {

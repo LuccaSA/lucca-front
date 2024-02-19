@@ -120,7 +120,7 @@
 	.textfield-messages-helper,
 	.radiosfield-messages-helper,
 	.checkboxesfield-messages-helper {
-		background-color: var(--palettes-grey-600);
+		background-color: var(--palettes-neutral-600);
 		color: var(--colors-white-color);
 	}
 
@@ -142,7 +142,7 @@
 			background-color: var(--colors-white-color);
 
 			&::placeholder {
-				color: var(--palettes-grey-400);
+				color: var(--palettes-neutral-400);
 			}
 
 			&:focus,
@@ -219,7 +219,7 @@
 		}
 
 		&::placeholder {
-			color: var(--palettes-grey-400);
+			color: var(--palettes-neutral-400);
 		}
 
 		@if ($state == 'error') {
@@ -265,7 +265,7 @@
 
 @mixin framedSearch {
 	&::after {
-		color: var(--palettes-grey-600);
+		color: var(--palettes-neutral-600);
 		padding: var(--components-field-framed-side-padding);
 		bottom: 0;
 		right: 0;

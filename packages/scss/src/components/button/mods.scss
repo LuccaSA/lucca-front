@@ -59,21 +59,21 @@
 
 @mixin textDisabled {
 	--components-button-backgroundColor: transparent;
-	--components-button-color: var(--palettes-grey-500);
+	--components-button-color: var(--palettes-neutral-500);
 }
 
 @mixin text {
 	--components-button-backgroundColor: transparent;
-	--components-button-color: var(--palettes-700, var(--palettes-grey-700));
+	--components-button-color: var(--palettes-700, var(--palettes-neutral-700));
 
 	&:hover,
 	&:focus-visible {
-		--components-button-color: var(--palettes-700, var(--palettes-grey-700));
-		--components-button-backgroundColor: var(--palettes-100, var(--palettes-grey-100));
+		--components-button-color: var(--palettes-700, var(--palettes-neutral-700));
+		--components-button-backgroundColor: var(--palettes-100, var(--palettes-neutral-100));
 	}
 
 	&:active {
-		--components-button-backgroundColor: var(--palettes-200, var(--palettes-grey-200));
+		--components-button-backgroundColor: var(--palettes-200, var(--palettes-neutral-200));
 	}
 
 	&:disabled {
@@ -83,28 +83,28 @@
 
 @mixin outlinedDisabled {
 	--components-button-backgroundColor: var(--colors-white-color);
-	--components-button-boxShadow: 0 0 0 1px var(--palettes-grey-400);
-	--components-button-color: var(--palettes-grey-500);
+	--components-button-boxShadow: 0 0 0 1px var(--palettes-neutral-400);
+	--components-button-color: var(--palettes-neutral-500);
 }
 
 @mixin outlined {
 	--components-button-backgroundColor: var(--colors-white-color);
-	--components-button-color: var(--palettes-700, var(--palettes-grey-700));
-	--components-button-boxShadow: 0 0 0 var(--commons-divider-width) var(--palettes-400, var(--palettes-grey-400));
+	--components-button-color: var(--palettes-700, var(--palettes-neutral-700));
+	--components-button-boxShadow: 0 0 0 var(--commons-divider-width) var(--palettes-400, var(--palettes-neutral-400));
 
 	// deprecated
 	.button-counter {
-		color: var(--palettes-800, var(--palettes-grey-800));
-		background-color: var(--palettes-300, var(--palettes-grey-300));
+		color: var(--palettes-800, var(--palettes-neutral-800));
+		background-color: var(--palettes-300, var(--palettes-neutral-300));
 	}
 
 	&:hover {
-		--components-button-color: var(--palettes-700, var(--palettes-grey-700));
-		--components-button-backgroundColor: var(--palettes-100, var(--palettes-grey-100));
+		--components-button-color: var(--palettes-700, var(--palettes-neutral-700));
+		--components-button-backgroundColor: var(--palettes-100, var(--palettes-neutral-100));
 	}
 
 	&:active {
-		--components-button-backgroundColor: var(--palettes-200, var(--palettes-grey-200));
+		--components-button-backgroundColor: var(--palettes-200, var(--palettes-neutral-200));
 	}
 
 	&:focus-visible {
@@ -122,11 +122,11 @@
 	&:hover,
 	&:focus-visible {
 		--components-button-color: var(--colors-white-color);
-		--components-button-backgroundColor: var(--palettes-800, var(--palettes-grey-800));
+		--components-button-backgroundColor: var(--palettes-800, var(--palettes-neutral-800));
 	}
 
 	&:active {
-		--components-button-backgroundColor: var(--palettes-700, var(--palettes-grey-700));
+		--components-button-backgroundColor: var(--palettes-700, var(--palettes-neutral-700));
 	}
 }
 
@@ -198,7 +198,7 @@
 	--components-button-padding: var(--spacings-XS) calc(var(--spacings-XS) + var(--spacings-XXS)) var(--spacings-XS) var(--spacings-S);
 
 	.button-counter {
-		background-color: var(--palettes-600, var(--palettes-primary-600));
+		background-color: var(--palettes-600, var(--palettes-product-600));
 		border-radius: 1rem;
 		display: flex;
 		font-size: var(--sizes-XS-fontSize);
@@ -211,7 +211,7 @@
 
 	&:hover {
 		.button-counter {
-			--components-button-backgroundColor: var(--palettes-500, var(--palettes-primary-500));
+			--components-button-backgroundColor: var(--palettes-500, var(--palettes-product-500));
 		}
 	}
 }

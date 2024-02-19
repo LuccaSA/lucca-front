@@ -1,15 +1,22 @@
 @use 'sass:list';
 
-$shades: text, 25, 50, 100, 200, 300, 400, 500, 600, 700, 800, 900;
-$states: 'error', 'warning', 'success';
-$palettes: 'lucca', 'primary', 'secondary', 'grey', 'navigation';
-$newPalettes: 'brand', 'product', 'neutral' !default;
-$decoratives: 'kiwi', 'lime', 'cucumber', 'mint', 'glacier', 'lagoon', 'blueberry', 'lavender', 'grape', 'watermelon', 'pumpkin',
+$product: 'brand' !default;
+$palettesShades: text, 25, 50, 100, 200, 300, 400, 500, 600, 700, 800, 900;
+$palettesStates: 'critical', 'error', 'warning', 'success';
+$palettesDefault: 'brand', 'neutral', 'navigation';
+$palettesProduct: 'product';
+$palettesOtherProduct: () !default;
+$palettesDecorative: 'kiwi', 'lime', 'cucumber', 'mint', 'glacier', 'lagoon', 'blueberry', 'lavender', 'grape', 'watermelon', 'pumpkin',
 	'pineapple' !default;
+$palettesDeprecated: ('lucca', 'grey', 'primary', 'secondary') !default;
 
-$palettes: list.join($palettes, $newPalettes);
-$allPalettes: list.join($palettes, $states);
-$allPalettes: list.join($allPalettes, $decoratives);
+$palettesAll: list.join(
+	list.join(
+		list.join(list.join(list.join($palettesStates, $palettesDefault), $palettesProduct), $palettesOtherProduct),
+		$palettesDecorative
+	),
+	$palettesDeprecated
+);
 
 $brand: (
 	text: #ffffff,
@@ -25,18 +32,60 @@ $brand: (
 	900: #611405,
 );
 
-$product: (
+$cleemy: (
 	text: #ffffff,
-	50: #fff1eb,
-	100: #ffe0d1,
-	200: #ffccb3,
-	300: #ffbe9e,
-	400: #ffaa80,
-	500: #ff9361,
-	600: #ff7b3d,
-	700: #e06029,
-	800: #b43409,
-	900: #611405,
+	50: #ecf9f7,
+	100: #ceeee9,
+	200: #a4e0da,
+	300: #7acdc6,
+	400: #54bbb2,
+	500: #00ada5,
+	600: #009491,
+	700: #00807d,
+	800: #00545c,
+	900: #00333d,
+) !default;
+
+$pagga: (
+	text: #ffffff,
+	50: #fbeffa,
+	100: #f5dbf4,
+	200: #ebc1e9,
+	300: #e1a8df,
+	400: #da8bd6,
+	500: #d16bcc,
+	600: #c94cc5,
+	700: #b413ac,
+	800: #86147e,
+	900: #61005c,
+) !default;
+
+$timmi: (
+	text: #ffffff,
+	50: #f0f1fe,
+	100: #e0e1ff,
+	200: #cac9fd,
+	300: #b9b2fa,
+	400: #a69df0,
+	500: #9989ec,
+	600: #866ce4,
+	700: #6f52d1,
+	800: #5027a5,
+	900: #24075a,
+) !default;
+
+$poplee: (
+	text: #ffffff,
+	50: #e6f6fe,
+	100: #cbeafb,
+	200: #b1def6,
+	300: #98d2f1,
+	400: #7bc3ea,
+	500: #62b7e4,
+	600: #3a9ed4,
+	700: #0f7db8,
+	800: #005685,
+	900: #003c5c,
 ) !default;
 
 $neutral: (
@@ -91,7 +140,7 @@ $warning: (
 	900: #802a00,
 );
 
-$error: (
+$critical: (
 	text: #ffffff,
 	50: #ffebec,
 	100: #ffd6d8,
@@ -268,9 +317,23 @@ $colors: (
 	'black': #121212,
 );
 
+// grey-900 is deprecated
 $colorsRgb: (
 	'white': '255, 255, 255',
 	'grey-900': '19, 29, 53',
+	'neutral-900': '19, 29, 53',
+);
+
+// switch case
+$prod: map-get(
+	(
+		'brand': $brand,
+		'cleemy': $cleemy,
+		'timmi': $timmi,
+		'poplee': $poplee,
+		'pagga': $pagga,
+	),
+	$product
 );
 
 // https://sass-lang.com/documentation/variables/#advanced-variable-functions
@@ -279,12 +342,13 @@ $palettesInterpolation: (
 	'brand': $brand,
 	'grey': $neutral,
 	'neutral': $neutral,
-	'primary': $product,
-	'secondary': $product,
-	'product': $product,
+	'primary': $prod,
+	'secondary': $prod,
+	'product': $prod,
 	'navigation': $navigation,
 	'success': $success,
-	'error': $error,
+	'error': $critical,
+	'critical': $critical,
 	'warning': $warning,
 	'kiwi': $kiwi,
 	'lime': $lime,
@@ -298,6 +362,10 @@ $palettesInterpolation: (
 	'watermelon': $watermelon,
 	'pumpkin': $pumpkin,
 	'pineapple': $pineapple,
+	'pagga': $pagga,
+	'poplee': $poplee,
+	'timmi': $timmi,
+	'cleemy': $cleemy,
 );
 
 $breakpoints: (
@@ -369,40 +437,40 @@ $borderRadius: (
 
 $elevations: (
 	// deprecated
-	'1': '0 1px 2px rgba(var(--colors-grey-900-rgb), 0.06), 0px 2px 8px rgba(var(--colors-grey-900-rgb), 0.04)',
+	'1': '0 1px 2px rgba(var(--colors-neutral-900-rgb), 0.06), 0px 2px 8px rgba(var(--colors-neutral-900-rgb), 0.04)',
 	'2':
-		'0 0 0 1px rgba(var(--colors-grey-900-rgb), 0.03), 0 1px 2px rgba(var(--colors-grey-900-rgb), 0.02), 0 2px 6px rgba(var(--colors-grey-900-rgb), 0.05)',
+		'0 0 0 1px rgba(var(--colors-neutral-900-rgb), 0.03), 0 1px 2px rgba(var(--colors-neutral-900-rgb), 0.02), 0 2px 6px rgba(var(--colors-neutral-900-rgb), 0.05)',
 	'3':
-		'0 0 0 1px rgba(var(--colors-grey-900-rgb), 0.03), 0 2px 4px rgba(var(--colors-grey-900-rgb), 0.02), 0 4px 10px rgba(var(--colors-grey-900-rgb), 0.06)',
+		'0 0 0 1px rgba(var(--colors-neutral-900-rgb), 0.03), 0 2px 4px rgba(var(--colors-neutral-900-rgb), 0.02), 0 4px 10px rgba(var(--colors-neutral-900-rgb), 0.06)',
 	'4':
-		'0 0 0 1px rgba(var(--colors-grey-900-rgb), 0.03), 0 3px 6px rgba(var(--colors-grey-900-rgb), 0.04), 0 4px 16px rgba(var(--colors-grey-900-rgb), 0.08)',
+		'0 0 0 1px rgba(var(--colors-neutral-900-rgb), 0.03), 0 3px 6px rgba(var(--colors-neutral-900-rgb), 0.04), 0 4px 16px rgba(var(--colors-neutral-900-rgb), 0.08)',
 	'5':
-		'0 0 0 1px rgba(var(--colors-grey-900-rgb), 0.03), 0 4px 8px rgba(var(--colors-grey-900-rgb), 0.06), 0 12px 32px rgba(var(--colors-grey-900-rgb), 0.08)',
+		'0 0 0 1px rgba(var(--colors-neutral-900-rgb), 0.03), 0 4px 8px rgba(var(--colors-neutral-900-rgb), 0.06), 0 12px 32px rgba(var(--colors-neutral-900-rgb), 0.08)',
 	'6':
-		'0 0 0 1px rgba(var(--colors-grey-900-rgb), 0.03), -2px 2px 8px rgba(var(--colors-grey-900-rgb), 0.04), -12px 6px 24px rgba(var(--colors-grey-900-rgb), 0.06)'
+		'0 0 0 1px rgba(var(--colors-neutral-900-rgb), 0.03), -2px 2px 8px rgba(var(--colors-neutral-900-rgb), 0.04), -12px 6px 24px rgba(var(--colors-neutral-900-rgb), 0.06)'
 );
 
 $boxShadows: (
-	'XXS': '0 2px 8px rgba(var(--colors-grey-900-rgb), .2), 0 1px 2px rgba(var(--colors-grey-900-rgb), 0.15)',
+	'XXS': '0 2px 8px rgba(var(--colors-neutral-900-rgb), .2), 0 1px 2px rgba(var(--colors-neutral-900-rgb), 0.15)',
 	// deprecated
-	'XS': '0 1px 2px rgba(var(--colors-grey-900-rgb), 0.06), 0 2px 8px rgba(var(--colors-grey-900-rgb), 0.04)',
+	'XS': '0 1px 2px rgba(var(--colors-neutral-900-rgb), 0.06), 0 2px 8px rgba(var(--colors-neutral-900-rgb), 0.04)',
 	'S':
-		'0 0 0 1px rgba(var(--colors-grey-900-rgb), 0.03), 0 1px 2px rgba(var(--colors-grey-900-rgb), 0.02), 0 2px 6px rgba(var(--colors-grey-900-rgb), 0.06)',
+		'0 0 0 1px rgba(var(--colors-neutral-900-rgb), 0.03), 0 1px 2px rgba(var(--colors-neutral-900-rgb), 0.02), 0 2px 6px rgba(var(--colors-neutral-900-rgb), 0.06)',
 	'M':
-		'0 0 0 1px rgba(var(--colors-grey-900-rgb), 0.03), 0 2px 4px rgba(var(--colors-grey-900-rgb), 0.02), 0 4px 10px rgba(var(--colors-grey-900-rgb), 0.06)',
+		'0 0 0 1px rgba(var(--colors-neutral-900-rgb), 0.03), 0 2px 4px rgba(var(--colors-neutral-900-rgb), 0.02), 0 4px 10px rgba(var(--colors-neutral-900-rgb), 0.06)',
 	'L':
-		'0 0 0 1px rgba(var(--colors-grey-900-rgb), 0.03), 0 3px 6px rgba(var(--colors-grey-900-rgb), 0.04), 0 4px 16px rgba(var(--colors-grey-900-rgb), 0.08)',
+		'0 0 0 1px rgba(var(--colors-neutral-900-rgb), 0.03), 0 3px 6px rgba(var(--colors-neutral-900-rgb), 0.04), 0 4px 16px rgba(var(--colors-neutral-900-rgb), 0.08)',
 	'XL':
-		'0 0 0 1px rgba(var(--colors-grey-900-rgb), 0.03), 0 4px 8px rgba(var(--colors-grey-900-rgb), 0.06), 0 12px 32px rgba(var(--colors-grey-900-rgb), 0.08)',
+		'0 0 0 1px rgba(var(--colors-neutral-900-rgb), 0.03), 0 4px 8px rgba(var(--colors-neutral-900-rgb), 0.06), 0 12px 32px rgba(var(--colors-neutral-900-rgb), 0.08)',
 	'XXL':
-		'0 0 0 1px rgba(var(--colors-grey-900-rgb), 0.03), -2px 2px 8px rgba(var(--colors-grey-900-rgb), 0.04), -12px 6px 24px rgba(var(--colors-grey-900-rgb), 0.06)',
+		'0 0 0 1px rgba(var(--colors-neutral-900-rgb), 0.03), -2px 2px 8px rgba(var(--colors-neutral-900-rgb), 0.04), -12px 6px 24px rgba(var(--colors-neutral-900-rgb), 0.06)',
 );
 
 $disabled: (
 	'opacity': 0.4,
-	'background': 'var(--palettes-grey-100)',
-	'color': 'var(--palettes-grey-600)',
-	'placeholder': 'var(--palettes-grey-400)',
+	'background': 'var(--palettes-neutral-100)',
+	'color': 'var(--palettes-neutral-600)',
+	'placeholder': 'var(--palettes-neutral-400)',
 );
 
 $animations: (
@@ -418,12 +486,12 @@ $durations: (
 );
 
 $loading: (
-	'frontground': var(--palettes-primary-500),
+	'frontground': var(--palettes-product-500),
 	'speed': 600ms,
 );
 
 $textLink: (
-	color: var(--palettes-primary-700),
-	hover: var(--palettes-primary-600),
-	disabled: var(--palettes-grey-500),
+	color: var(--palettes-product-700),
+	hover: var(--palettes-product-600),
+	disabled: var(--palettes-neutral-500),
 );

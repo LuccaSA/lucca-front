@@ -6,7 +6,7 @@
 		.textfield-input {
 			min-width: 0;
 			border: 0;
-			box-shadow: 0 0 0 1px var(--palettes-grey-300);
+			box-shadow: 0 0 0 1px var(--palettes-neutral-300);
 			line-height: var(--sizes-M-lineHeight);
 			-webkit-appearance: none;
 			background-color: var(--colors-white-color);
@@ -16,7 +16,7 @@
 			transition-duration: var(--commons-animations-durations-fast);
 
 			&::placeholder {
-				color: var(--palettes-grey-400);
+				color: var(--palettes-neutral-400);
 				transition-property: color;
 				transition-duration: var(--commons-animations-durations-fast);
 				opacity: 1;
@@ -31,7 +31,7 @@
 		}
 
 		.textfield-suffix {
-			color: var(--palettes-grey-600);
+			color: var(--palettes-neutral-600);
 			top: calc(var(--components-textfield-suffix-top) + var(--components-textfield-input-padding-vertical));
 			right: var(--components-textfield-input-padding-horizontal);
 			position: absolute;

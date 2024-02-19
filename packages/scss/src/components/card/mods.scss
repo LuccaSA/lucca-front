@@ -1,11 +1,11 @@
 @use '@lucca-front/scss/src/commons/utils/a11y';
 
-@mixin grey {
-	--components-card-background: var(--palettes-grey-50);
+@mixin neutral {
+	--components-card-background: var(--palettes-neutral-50);
 }
 
 @mixin clickable {
-	color: var(--palettes-grey-800);
+	color: var(--palettes-neutral-800);
 	text-decoration: none;
 	cursor: pointer;
 
