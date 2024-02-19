@@ -21,7 +21,7 @@
 
 .calendar-header-date {
 	font-weight: 600;
-	color: var(--palettes-grey-900);
+	color: var(--palettes-neutral-900);
 	font-size: var(--sizes-L-fontSize);
 	line-height: var(--sizes-L-lineHeight);
 	padding: 0;
@@ -44,7 +44,7 @@
 		text-align: center;
 		height: var(--components-calendar-day-size);
 		font-size: var(--sizes-S-fontSize);
-		color: var(--palettes-primary-700);
+		color: var(--palettes-product-700);
 
 		.calendar-labels-item {
 			width: var(--components-calendar-day-size);
@@ -81,15 +81,15 @@
 	position: relative;
 	padding: 0;
 	outline: none;
-	color: var(--palettes-grey-800);
+	color: var(--palettes-neutral-800);
 
 	&.is-previousMonth,
 	&.is-nextMonth {
-		color: var(--palettes-grey-500);
+		color: var(--palettes-neutral-500);
 	}
 
 	&.is-today {
-		color: var(--palettes-primary-700);
+		color: var(--palettes-product-700);
 		font-weight: 600;
 
 		&:after {
@@ -99,20 +99,20 @@
 			left: var(--spacings-XS);
 			right: var(--spacings-XS);
 			height: 2px;
-			background: var(--palettes-primary-700);
+			background: var(--palettes-product-700);
 			z-index: 1;
 		}
 	}
 
 	&:hover {
 		.calendar-grid-item-content {
-			background: var(--palettes-grey-50);
+			background: var(--palettes-neutral-50);
 		}
 	}
 
 	&:active {
 		.calendar-grid-item-content {
-			background: var(--palettes-grey-100);
+			background: var(--palettes-neutral-100);
 		}
 	}
 
@@ -123,8 +123,8 @@
 
 	&.is-active {
 		.calendar-grid-item-content {
-			background: var(--palettes-primary-700);
-			color: var(--palettes-primary-text);
+			background: var(--palettes-product-700);
+			color: var(--palettes-product-text);
 		}
 
 		&.is-today {
@@ -135,8 +135,9 @@
 		}
 	}
 
-	&.is-disabled, &[disabled] {
-		color: var(--palettes-grey-500);
+	&.is-disabled,
+	&[disabled] {
+		color: var(--palettes-neutral-500);
 		pointer-events: none;
 
 		&:hover .calendar-grid-item-content {

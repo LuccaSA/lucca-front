@@ -3,16 +3,16 @@
 
 :host {
 	--components-options-tree-multiple-padding: 2.25rem;
-	--components-options-tree-padding-child: .75rem;
+	--components-options-tree-padding-child: 0.75rem;
 }
 
 .is-disabled {
-	color: var(--palettes-grey-500);
+	color: var(--palettes-neutral-500);
 	user-select: none;
 	cursor: default;
 
 	&.is-selected {
-		background-color: var(--palettes-grey-100);
+		background-color: var(--palettes-neutral-100);
 	}
 
 	&:hover {
@@ -27,7 +27,7 @@
 
 	&:hover {
 		.optionItem-value {
-			background: var(--palettes-grey-50);
+			background: var(--palettes-neutral-50);
 		}
 
 		.optionItem-icons {

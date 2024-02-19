@@ -11,14 +11,14 @@
 			display: block;
 			width: var(--component-switchField-label-input-width);
 			height: var(--component-switchField-label-input-height);
-			border: 2px solid var(--palettes-grey-500);
+			border: 2px solid var(--palettes-neutral-500);
 			border-radius: var(--component-switchField-label-input-height);
 			position: relative;
 			top: 0.125rem;
 			color: var(--colors-white-color);
 			transition-property: color, border-color, background-color;
 			transition-duration: var(--commons-animations-durations-fast);
-			background-color: var(--palettes-grey-500);
+			background-color: var(--palettes-neutral-500);
 			cursor: pointer;
 
 			&::after {
@@ -73,15 +73,15 @@
 
 			&:hover {
 				~ .switchField-icon {
-					border-color: var(--palettes-grey-400);
-					background-color: var(--palettes-grey-400);
+					border-color: var(--palettes-neutral-400);
+					background-color: var(--palettes-neutral-400);
 				}
 			}
 
 			&:active {
 				~ .switchField-icon {
-					border-color: var(--palettes-grey-600);
-					background-color: var(--palettes-grey-600);
+					border-color: var(--palettes-neutral-600);
+					background-color: var(--palettes-neutral-600);
 				}
 			}
 

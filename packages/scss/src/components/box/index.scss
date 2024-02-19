@@ -4,8 +4,10 @@
 	@include vars;
 	@include component;
 
+	// .mod-grey is deprecated
+	&.mod-neutral,
 	&.mod-grey {
-		@include grey;
+		@include neutral;
 	}
 
 	&.mod-withArrow {

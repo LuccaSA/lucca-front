@@ -1,21 +1,21 @@
 @mixin current {
 	.timeline-step-title {
-		color: var(--palettes-primary-700);
+		color: var(--palettes-product-700);
 
 		&::before {
-			background-color: var(--palettes-primary-700);
-			box-shadow: 0 0 0 var(--spacings-XXS) var(--palettes-primary-200);
+			background-color: var(--palettes-product-700);
+			box-shadow: 0 0 0 var(--spacings-XXS) var(--palettes-product-200);
 			color: var(--colors-white-color);
 		}
 	}
 
 	~ .timeline-step {
 		.timeline-step-title {
-			color: var(--palettes-grey-600);
+			color: var(--palettes-neutral-600);
 
 			&::before {
-				background-color: var(--palettes-grey-200);
-				color: var(--palettes-grey-600);
+				background-color: var(--palettes-neutral-200);
+				color: var(--palettes-neutral-600);
 			}
 		}
 	}

@@ -36,8 +36,8 @@ export default {
 	bottomLeftForeground="${bottomLeftForeground}"
 	contentBackgroundColor="${contentBackgroundColor}"
 >
-	<button luButton type="button" palette="primary">Button</button>
-	<button luButton="outlined" type="button" palette="primary">Button</button>
+	<button luButton type="button" palette="product">Button</button>
+	<button luButton="outlined" type="button" palette="product">Button</button>
 </lu-empty-state-page>`,
 		};
 	},

@@ -14,7 +14,7 @@
 		.switch-label {
 			padding: 0;
 			padding-left: calc(var(--components-switch-width) + var(--spacings-XS));
-			color: var(--palettes-grey-800);
+			color: var(--palettes-neutral-800);
 			transition: color var(--commons-animations-durations-fast);
 			display: inline-block;
 			font-size: var(--components-switch-fontSize);
@@ -26,7 +26,7 @@
 				@include icon.generate('sign_close');
 
 				align-items: center;
-				background-color: var(--palettes-grey-500);
+				background-color: var(--palettes-neutral-500);
 				border-radius: var(--commons-borderRadius-full);
 				color: var(--colors-white-color);
 				display: flex;
@@ -59,7 +59,7 @@
 		}
 
 		.switch-label-helper {
-			color: var(--palettes-grey-600);
+			color: var(--palettes-neutral-600);
 			font-size: var(--components-switch-helper-fontSize);
 			line-height: var(--components-switch-helper-lineHeight);
 		}

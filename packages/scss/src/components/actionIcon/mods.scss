@@ -18,7 +18,7 @@
 }
 
 @mixin outlined {
-	box-shadow: 0 0 0 var(--commons-divider-width) var(--palettes-400, var(--palettes-grey-400));
+	box-shadow: 0 0 0 var(--commons-divider-width) var(--palettes-400, var(--palettes-neutral-400));
 	background-color: var(--colors-white-color);
 
 	&:focus-visible {

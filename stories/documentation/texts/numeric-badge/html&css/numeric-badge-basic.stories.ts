@@ -9,7 +9,7 @@ export default {
 	title: 'Documentation/Texts/NumericBadge/HTML & CSS/Basic',
 	argTypes: {
 		palette: {
-			options: ['', 'palette-primary'],
+			options: ['', 'palette-product'],
 			control: {
 				type: 'select',
 			},

@@ -1,33 +1,33 @@
 @use '@lucca-front/icons/src/main';
 
 lu-icon {
-  display: inline-flex;
+	display: inline-flex;
 }
 
-.icon-color-primary {
-  color: var(--palettes-primary-700);
-}
-
-.icon-color-secondary {
-  color: var(--palettes-secondary-700);
+// .icon-color-primary is deprecated
+// .icon-color-secondary is deprecated
+.icon-color-primary,
+.icon-color-secondary,
+.icon-color-product {
+	color: var(--palettes-product-700);
 }
 
 .icon-color-error {
-  color: var(--palettes-error-700);
+	color: var(--palettes-error-700);
 }
 
 .icon-color-warning {
-  color: var(--palettes-warning-700);
+	color: var(--palettes-warning-700);
 }
 
 .icon-color-success {
-  color: var(--palettes-success-700);
+	color: var(--palettes-success-700);
 }
 
 .icon-color-light {
-  color: var(--palettes-grey-600);
+	color: var(--palettes-neutral-600);
 }
 
 .icon-color-placeholder {
-  color: var(--palettes-grey-400);
+	color: var(--palettes-neutral-400);
 }

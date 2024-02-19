@@ -1,18 +1,18 @@
 @mixin S {
-  --components-numericBadge-size: 1.25rem;
-  --components-numericBadge-borderRadius: 6px;
-  --components-numericBadge-fontSize: var(--sizes-XS-fontSize);
-  --components-numericBadge-lineHeight: var(--sizes-XS-lineHeight);
+	--components-numericBadge-size: 1.25rem;
+	--components-numericBadge-borderRadius: 6px;
+	--components-numericBadge-fontSize: var(--sizes-XS-fontSize);
+	--components-numericBadge-lineHeight: var(--sizes-XS-lineHeight);
 }
 
 @mixin XS {
-  --components-numericBadge-size: 1rem;
-  --components-numericBadge-borderRadius: var(--commons-borderRadius-M);
-  --components-numericBadge-fontSize: var(--sizes-XS-fontSize);
-  --components-numericBadge-lineHeight: var(--sizes-XS-lineHeight);
+	--components-numericBadge-size: 1rem;
+	--components-numericBadge-borderRadius: var(--commons-borderRadius-M);
+	--components-numericBadge-fontSize: var(--sizes-XS-fontSize);
+	--components-numericBadge-lineHeight: var(--sizes-XS-lineHeight);
 }
 
-@mixin primary {
-  --components-numericBadge-background: var(--palettes-primary-200);
-  --components-numericBadge-color: var(--palettes-primary-800);
+@mixin product {
+	--components-numericBadge-background: var(--palettes-product-200);
+	--components-numericBadge-color: var(--palettes-product-800);
 }
