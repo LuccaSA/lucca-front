@@ -471,7 +471,7 @@ $elevation: (
 	surface: (
 		'sunken': 'var(--palettes-grey-50)',
 		'default': 'var(--palettes-grey-25)',
-		'raised': '#FFFFFF',
+		'raised': 'var(--colors-white-color)',
 		'backdrop': 'rgba(var(--colors-grey-400-rgb), 0.4)',
 	),
 	shadow: (

@@ -29,7 +29,7 @@
 	@include core.cssvars('spacings', config.$spacings);
 
 	@include core.cssvars('commons-elevations-elevation', config.$elevations);
-	@include core.cssvars('commons-boxShadow', config.$boxShadows);
+	@include core.cssvars('commons-boxShadow', config.$boxShadows); // deprecated
 
 	@each $key, $map in config.$sizes {
 		@include core.cssvars('sizes-#{$key}', $map);
