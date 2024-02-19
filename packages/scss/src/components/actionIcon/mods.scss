@@ -40,12 +40,12 @@
 
 @mixin outlinedDelete {
 	&:hover {
-		box-shadow: 0 0 0 var(--commons-divider-width) var(--palettes-error-400), var(--commons-boxShadow-XS);
+		box-shadow: 0 0 0 var(--commons-divider-width) var(--palettes-error-400);
 	}
 
 	&:focus-visible {
 		background-color: var(--palettes-error-100);
-		box-shadow: 0 0 0 var(--commons-divider-width) var(--palettes-error-400), var(--commons-boxShadow-XS);
+		box-shadow: 0 0 0 var(--commons-divider-width) var(--palettes-error-400);
 		color: var(--palettes-error-700);
 	}
 

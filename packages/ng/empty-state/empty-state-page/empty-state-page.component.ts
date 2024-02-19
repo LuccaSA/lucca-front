@@ -51,7 +51,7 @@ export class EmptyStatePageComponent {
 	 * Background color for content (text)
 	 */
 	@Input()
-	contentBackgroundColor = 'var(--commons-background-base)';
+	contentBackgroundColor = 'var(--pr-t-elevation-surface-default)';
 
 	@Input({
 		required: true,

@@ -320,6 +320,7 @@ $colors: (
 // grey-900 is deprecated
 $colorsRgb: (
 	'white': '255, 255, 255',
+	'grey-400': '172, 187, 215',
 	'grey-900': '19, 29, 53',
 	'neutral-900': '19, 29, 53',
 );
@@ -451,8 +452,8 @@ $elevations: (
 );
 
 $boxShadows: (
-	'XXS': '0 2px 8px rgba(var(--colors-neutral-900-rgb), .2), 0 1px 2px rgba(var(--colors-neutral-900-rgb), 0.15)',
 	// deprecated
+	'XXS': '0 2px 8px rgba(var(--colors-neutral-900-rgb), .2), 0 1px 2px rgba(var(--colors-neutral-900-rgb), 0.15)',
 	'XS': '0 1px 2px rgba(var(--colors-neutral-900-rgb), 0.06), 0 2px 8px rgba(var(--colors-neutral-900-rgb), 0.04)',
 	'S':
 		'0 0 0 1px rgba(var(--colors-neutral-900-rgb), 0.03), 0 1px 2px rgba(var(--colors-neutral-900-rgb), 0.02), 0 2px 6px rgba(var(--colors-neutral-900-rgb), 0.06)',
@@ -464,6 +465,20 @@ $boxShadows: (
 		'0 0 0 1px rgba(var(--colors-neutral-900-rgb), 0.03), 0 4px 8px rgba(var(--colors-neutral-900-rgb), 0.06), 0 12px 32px rgba(var(--colors-neutral-900-rgb), 0.08)',
 	'XXL':
 		'0 0 0 1px rgba(var(--colors-neutral-900-rgb), 0.03), -2px 2px 8px rgba(var(--colors-neutral-900-rgb), 0.04), -12px 6px 24px rgba(var(--colors-neutral-900-rgb), 0.06)',
+);
+
+$elevation: (
+	surface: (
+		'sunken': 'var(--palettes-grey-50)',
+		'default': 'var(--palettes-grey-25)',
+		'raised': 'var(--colors-white-color)',
+		'backdrop': 'rgba(var(--colors-grey-400-rgb), 0.4)',
+	),
+	shadow: (
+		'raised': '0 0 0 1px rgba(var(--colors-grey-400-rgb), 0.08), 0 1px 2px rgba(var(--colors-grey-400-rgb), 0.4), 0 2px 4px rgba(var(--colors-grey-400-rgb), 0.2)',
+		'overflow': '0 0 0 1px rgba(var(--colors-grey-400-rgb), 0.08), 0 0 4px rgba(var(--colors-grey-400-rgb), 0.32), 0 0 8px rgba(var(--colors-grey-400-rgb), 0.24)',
+		'overlay': '0 0 0 1px rgba(var(--colors-grey-400-rgb), 0.08), 0 4px 8px rgba(var(--colors-grey-400-rgb), 0.24), 0 4px 12px 2px rgba(var(--colors-grey-400-rgb), 0.08)',
+	)
 );
 
 $disabled: (

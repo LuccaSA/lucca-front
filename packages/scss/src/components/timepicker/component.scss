@@ -6,7 +6,7 @@
 	border-radius: var(--commons-borderRadius-M);
 	box-shadow: 0 0 0 1px var(--palettes-neutral-300);
 	display: inline-flex;
-	background-color: var(--colors-white-color);
+	background-color: var(--pr-t-elevation-surface-raised);
 	transition: box-shadow var(--commons-animations-durations-fast);
 
 	&:focus-within {

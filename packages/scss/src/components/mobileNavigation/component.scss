@@ -2,9 +2,9 @@
 @use '@lucca-front/scss/src/commons/utils/a11y';
 
 @mixin component($atRoot: 'without: rule') {
-	background-color: var(--colors-white-color);
+	background-color: var(--pr-t-elevation-surface-raised);
 	bottom: 0;
-	box-shadow: var(--commons-boxShadow-S);
+	box-shadow: var(--pr-t-elevation-shadow-overflow);
 	padding: 0 var(--spacings-XS);
 	position: sticky;
 

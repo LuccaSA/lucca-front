@@ -5,6 +5,15 @@
 @use '@lucca-front/scss/src/commons/core';
 
 @mixin vars {
+
+	// TOKENS
+
+	@each $key, $map in config.$elevation {
+		@include core.cssvars('pr-t-elevation-#{$key}', $map);
+	}
+
+	// VARIABLES
+
 	@include core.cssvars('commons-borderRadius', config.$borderRadius);
 	@include core.cssvars('commons-animations', config.$animations);
 	@include core.cssvars('commons-animations-durations', config.$durations);
@@ -20,7 +29,7 @@
 	@include core.cssvars('spacings', config.$spacings);
 
 	@include core.cssvars('commons-elevations-elevation', config.$elevations);
-	@include core.cssvars('commons-boxShadow', config.$boxShadows);
+	@include core.cssvars('commons-boxShadow', config.$boxShadows); // deprecated
 
 	@each $key, $map in config.$sizes {
 		@include core.cssvars('sizes-#{$key}', $map);
@@ -29,13 +38,16 @@
 	@include core.cssvars('colors', config.$colors, '-color');
 	@include core.cssvars('colors', config.$colorsRgb, '-rgb');
 
-	--commons-background-base: var(--palettes-neutral-25);
+
 	--commons-banner-height: 50px;
 	--commons-font-family: 'Source Sans Pro', Tahoma, sans-serif;
 	--commons-divider-width: 1px;
-	--commons-divider-color: var(--palettes-neutral-200); // deprecated
 	--commons-divider-style: solid;
 	--commons-divider-border: var(--commons-divider-width) var(--commons-divider-style) var(--commons-divider-color);
 	--commons-border-100: var(--palettes-neutral-100);
 	--commons-border-200: var(--palettes-neutral-200);
+
+	// Deprecated
+	--commons-background-base: var(--palettes-neutral-25);
+	--commons-divider-color: var(--palettes-neutral-200);
 }

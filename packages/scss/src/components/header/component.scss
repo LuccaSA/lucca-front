@@ -1,7 +1,7 @@
 @use '@lucca-front/icons/src/commons/utils/icon';
 
 @mixin component($atRoot: 'without: rule') {
-	box-shadow: var(--commons-boxShadow-XS);
+	box-shadow: var(--pr-t-elevation-shadow-overflow);
 	background-color: var(--components-header-background);
 	min-height: var(--components-header-height);
 	padding: var(--components-header-padding);
@@ -49,7 +49,7 @@
 			text-decoration: none;
 
 			&:hover {
-				background-color: var(--commons-background-base);
+				background-color: var(--palettes-grey-25);
 				color: var(--palettes-neutral-800);
 			}
 
