@@ -5,7 +5,7 @@
 		<div class="demo-surface" style="background-color: var(--pr-t-elevation-surface-sunken);">Sunken</div>
 		<div class="demo-surface" style="background-color: var(--pr-t-elevation-surface-default);">Default</div>
 		<div class="demo-surface" style="background-color: var(--pr-t-elevation-surface-raised);">Raised</div>
-		<div class="demo-surface" style="background-color: var(--pr-t-elevation-surface-backdrop);">Backdrop</div>
+		<div class="demo-surfaceWrapper"><div class="demo-surface-under"></div><div class="demo-surface" style="background-color: var(--pr-t-elevation-surface-backdrop);">Backdrop</div></div>
 	</div>
 </section>
 <h3>Shadow</h3>
@@ -25,13 +25,28 @@
 	gap: var(--spacings-XS);
 }
 
-.demo-surface {
+.demo-surface, .demo-surfaceWrapper {
+	position: relative;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	height: 5rem;
 	width: 5rem;
 	border-radius: var(--commons-borderRadius-L);
+}
+
+.demo-surface {
+	z-index: 1;
+}
+
+.demo-surface-under {
+	width: 2rem;
+	height: 2rem;
+	position: absolute;
+	top: -1rem;
+	right: -1rem;
+	background: var(--colors-white-color);
+	border-radius: var(--commons-borderRadius-full);
 }
 </style>
 
