@@ -1,5 +1,5 @@
 @mixin vars {
-	--components-tag-color: var(--palettes-900, var(--palettes-neutral-900));
+	--components-tag-color: var(--palettes-800, var(--palettes-neutral-800));
 	--components-tag-background: var(--palettes-100, var(--palettes-neutral-100));
 	--components-tag-shadow: transparent;
 	--components-tag-fontSize: var(--sizes-S-fontSize);
