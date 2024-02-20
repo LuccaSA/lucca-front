@@ -1,7 +1,7 @@
 @use '@lucca-front/scss/src/components/title/exports' as title;
 @use '@lucca-front/scss/src/components/button/exports' as button;
 @use '@lucca-front/scss/src/components/footer/exports' as footer;
-@use '@lucca-front/scss/src/components/keyframe/exports' as keyframe;
+@use '@lucca-front/scss/src/commons/utils/keyframe';
 
 @mixin component($atRoot: 'without: rule') {
 	@include keyframe.scaleIn;
