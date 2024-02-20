@@ -18,30 +18,19 @@ import { CheckboxInputComponent, TextInputComponent } from '@lucca-front/ng/form
 import { FormsModule } from '@angular/forms';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 
-// TODO document use of .luDialog-autofocus to redirect focus
-
 @Component({
 	selector: 'test-dialog',
 	template: `
 		<lu-dialog>
-			<lu-dialog-header>I'm a test dialog ! Hello {{ world }}</lu-dialog-header>
+			<lu-dialog-header>Dialog header</lu-dialog-header>
 
-			<lu-dialog-content>
-				I'm the content of the dialog !
-				<lu-form-field label="Test focus" inlineMessage="This is just a test input to check autofocus">
-					<lu-text-input placeholder="This should be focused" ngModel=""></lu-text-input>
-				</lu-form-field>
-				<div class="divider"></div>
-				<lu-form-field label="Can dismiss" inlineMessage="Check this box to be able to close using the X button ,backdrop click or escape">
-					<lu-checkbox-input [(ngModel)]="canClose"></lu-checkbox-input>
-				</lu-form-field>
-			</lu-dialog-content>
+			<lu-dialog-content>Dialog content</lu-dialog-content>
 
 			<lu-dialog-footer>
-				<div class="footer-content">Footer text !</div>
+				<div class="footer-content">Optional footer text</div>
 				<div class="footer-actions">
 					<button type="button" luButton (click)="close()">Confirm</button>
-					<button type="button" luButton="text" (click)="close()">Cancel</button>
+					<button type="button" luButton="text" (click)="dismiss()">Cancel</button>
 				</div>
 			</lu-dialog-footer>
 		</lu-dialog>
@@ -61,13 +50,14 @@ import { FormFieldComponent } from '@lucca-front/ng/form-field';
 	standalone: true,
 })
 class TestDialogContent {
-	world = injectDialogData<string>();
 	ref = injectDialogRef<number>();
-
-	canClose = false;
 
 	close(): void {
 		this.ref.close(0);
+	}
+
+	dismiss(): void {
+		this.ref.dismiss();
 	}
 }
 
@@ -80,17 +70,12 @@ class TestDialogContent {
 
 		<ng-template #dialogTpl>
 			<lu-dialog #dialog>
-				<lu-dialog-header>I'm a template driven header</lu-dialog-header>
+				<lu-dialog-header>Template driven header</lu-dialog-header>
 
-				<lu-dialog-content>
-					I'm the content of the dialog !
-					<lu-form-field label="Test focus" inlineMessage="This is just a test input to check autofocus">
-						<lu-text-input placeholder="This should be focused" ngModel=""></lu-text-input>
-					</lu-form-field>
-				</lu-dialog-content>
+				<lu-dialog-content>Template-driven content</lu-dialog-content>
 
 				<lu-dialog-footer>
-					<div class="footer-content">Footer text !</div>
+					<div class="footer-content">Optional footer text</div>
 					<div class="footer-actions">
 						<button type="button" luButton (click)="dialog.close()">Confirm</button>
 						<button type="button" luButton (click)="closeIn3S(dialog.dialogRef)">Close in 3s</button>
@@ -120,8 +105,6 @@ class TestDialogStory {
 	open(): void {
 		const ref = this.dialog.open({
 			content: TestDialogContent,
-			data: 'World',
-			canClose: (c) => c.canClose,
 		});
 
 		ref.closed$.subscribe(console.log);
