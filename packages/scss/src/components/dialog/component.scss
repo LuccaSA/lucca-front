@@ -23,6 +23,7 @@
 	flex-direction: column;
 
 	@at-root ($atRoot) {
+		.dialog-form,
 		.dialog-inside {
 			display: flex;
 			flex-direction: column;
