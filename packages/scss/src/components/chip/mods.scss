@@ -19,7 +19,7 @@
 		}
 
 		&:focus-visible {
-			@include a11y.focusVisible($color: var(--colors-white-color));
+			@include a11y.focusVisible($color: var(--colors-white-color), $offset: -4px, $borderRadius: var(--commons-borderRadius-full));
 		}
 	}
 }
