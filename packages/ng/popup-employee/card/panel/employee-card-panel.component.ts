@@ -6,7 +6,7 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, In
 import { RouterLink } from '@angular/router';
 import { ALuPopoverPanel, luTransformPopover } from '@lucca-front/ng/popover';
 import { ILuUser, LuUserPictureModule } from '@lucca-front/ng/user';
-import { Observable, Subscription } from 'rxjs';
+import { Observable, of, Subscription } from 'rxjs';
 
 import { getIntl } from '@lucca-front/ng/core';
 import { LU_POPUP_EMPLOYEE_TRANSLATIONS } from '../../popup-employee.translate';
@@ -17,6 +17,7 @@ import { ILuEmployeeCardPanel } from './employee-card-panel.model';
 import { LuEmployeeCardStore } from '../../service/employee-card.store';
 import { ILuEmployeeCardStore } from '../../service/employee-service.model';
 import { InjectParameterPipe } from '../pipe/inject-parameter.pipe';
+import { catchError } from 'rxjs/operators';
 
 @Component({
 	standalone: true,
@@ -38,7 +39,16 @@ export class LuEmployeeCardPanelComponent extends ALuPopoverPanel implements ILu
 	public set user(user) {
 		if (user) {
 			this._user = user;
-			this.employee$ = this._service.get(this._user.id);
+			this.employee$ = this._service.get(this._user.id).pipe(
+				catchError(() => {
+					return of({
+						id: this._user.id,
+						firstName: this._user.firstName,
+						lastName: this._user.lastName,
+						leaveEndIsFirstHalfDay: false,
+					});
+				}),
+			);
 			this._changeDetectorRef.markForCheck();
 		}
 	}

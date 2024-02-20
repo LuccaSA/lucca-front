@@ -90,8 +90,8 @@ export class LuEmployeeCardTriggerDirective extends ALuPopoverTrigger<LuEmployee
 		this._triggerId = this._elementRef.nativeElement.getAttribute('id') || this._triggerId;
 		this.target.position = 'below';
 		this.target.alignment = 'left';
-		this.enterDelay = 1000;
-		this.leaveDelay = 100;
+		this.enterDelay = 300;
+		this.leaveDelay = 200;
 
 		this._handleTabindex = this._shouldHandleTabindex();
 
