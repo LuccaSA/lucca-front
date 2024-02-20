@@ -19,7 +19,6 @@ export default {
 			<div class="textField-input">
 				<textarea
 					type="text"
-					id="description"
 					luInput
 					class="textField-input-value"
 					${required ? 'required' : ''}
