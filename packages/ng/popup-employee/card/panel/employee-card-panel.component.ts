@@ -16,6 +16,7 @@ import { LuEmployeeCard } from '../../employee.model';
 import { ILuEmployeeCardPanel } from './employee-card-panel.model';
 import { LuEmployeeCardStore } from '../../service/employee-card.store';
 import { ILuEmployeeCardStore } from '../../service/employee-service.model';
+import { InjectParameterPipe } from '../pipe/inject-parameter.pipe';
 
 @Component({
 	standalone: true,
@@ -26,7 +27,7 @@ import { ILuEmployeeCardStore } from '../../service/employee-service.model';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	animations: [luTransformPopover],
 	exportAs: 'LuEmployeeCardPanel',
-	imports: [LuUserPictureModule, NgClass, RouterLink, NgIf, NgTemplateOutlet, DatePipe, OverlayModule, LeaveEndsDisplayPipe, AsyncPipe, IsFuturePipe, isFutureOrTodayPipe],
+	imports: [ LuUserPictureModule, NgClass, RouterLink, NgIf, NgTemplateOutlet, DatePipe, OverlayModule, LeaveEndsDisplayPipe, AsyncPipe, IsFuturePipe, isFutureOrTodayPipe, InjectParameterPipe ],
 })
 export class LuEmployeeCardPanelComponent extends ALuPopoverPanel implements ILuEmployeeCardPanel, OnDestroy {
 	public employee$: Observable<LuEmployeeCard> | undefined;

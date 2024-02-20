@@ -6,47 +6,59 @@ export const LU_POPUP_EMPLOYEE_TRANSLATIONS = new InjectionToken('LuPopupEmploye
 });
 
 export interface LuPopupEmployeeTranslations {
-	placeholder: string;
-	clear: string;
-	clearSearch: string;
-	emptyResults: string;
-	loading: string;
+	EMPLOYEE_CARD_PANEL_COMING_ON_LABEL: string;
+	EMPLOYEE_CARD_PANEL_ABSENCE_LABEL: string;
+	EMPLOYEE_CARD_PANEL_MORNING_LABEL: string;
+	EMPLOYEE_CARD_PANEL_EMPLOYEE_HAS_LEAVED_LABEL: string;
+	EMPLOYEE_CARD_PANEL_UNTIL_TODAY_LABEL: string;
+	EMPLOYEE_CARD_PANEL_UNTIL_TOMORROW_LABEL: string;
+	EMPLOYEE_CARD_PANEL_UNTIL_DATE_LABEL: string;
 }
 
 export const luPopupEmployeeTranslations: ILuTranslation<LuPopupEmployeeTranslations> = {
 	en: {
-		placeholder: 'Select an option',
-		clear: 'Clear',
-		clearSearch: 'Clear search',
-		emptyResults: 'No results',
-		loading: 'Loading...',
+		EMPLOYEE_CARD_PANEL_COMING_ON_LABEL: 'Arrival expected on {{date}}',
+		EMPLOYEE_CARD_PANEL_ABSENCE_LABEL: 'Absent',
+		EMPLOYEE_CARD_PANEL_MORNING_LABEL: 'Morning',
+		EMPLOYEE_CARD_PANEL_EMPLOYEE_HAS_LEAVED_LABEL: 'Left',
+		EMPLOYEE_CARD_PANEL_UNTIL_TODAY_LABEL: 'Till today',
+		EMPLOYEE_CARD_PANEL_UNTIL_TOMORROW_LABEL: 'Until tomorrow',
+		EMPLOYEE_CARD_PANEL_UNTIL_DATE_LABEL: 'Until {{date}} included',
 	},
 	fr: {
-		placeholder: 'Sélectionnez une option',
-		clear: 'Effacer',
-		clearSearch: 'Vider la recherche',
-		emptyResults: 'Aucun résultat pour votre recherche',
-		loading: 'Chargement en cours...',
+		EMPLOYEE_CARD_PANEL_COMING_ON_LABEL: 'Arrivée prévue le {{date}}',
+		EMPLOYEE_CARD_PANEL_ABSENCE_LABEL: 'Absent',
+		EMPLOYEE_CARD_PANEL_MORNING_LABEL: 'Matin',
+		EMPLOYEE_CARD_PANEL_EMPLOYEE_HAS_LEAVED_LABEL: 'Parti(e)',
+		EMPLOYEE_CARD_PANEL_UNTIL_TODAY_LABEL: "Jusqu'à aujourd'hui",
+		EMPLOYEE_CARD_PANEL_UNTIL_TOMORROW_LABEL: "Jusqu'à demain",
+		EMPLOYEE_CARD_PANEL_UNTIL_DATE_LABEL: "Jusqu'au {{date}} inclus",
 	},
 	de: {
-		placeholder: 'Wählen Sie eine Option',
-		clear: 'Löschen',
-		clearSearch: 'Suche löschen',
-		emptyResults: 'Keine Ergebnisse für Ihre Suche',
-		loading: 'Wird geladen...',
+		EMPLOYEE_CARD_PANEL_COMING_ON_LABEL: 'Geplanter Dienstantritt am {{date}}',
+		EMPLOYEE_CARD_PANEL_ABSENCE_LABEL: 'Abwesend',
+		EMPLOYEE_CARD_PANEL_MORNING_LABEL: 'Vormittag',
+		EMPLOYEE_CARD_PANEL_EMPLOYEE_HAS_LEAVED_LABEL: 'Ausgeschieden',
+		EMPLOYEE_CARD_PANEL_UNTIL_TODAY_LABEL: 'Bis heute',
+		EMPLOYEE_CARD_PANEL_UNTIL_TOMORROW_LABEL: 'Bis morgen',
+		EMPLOYEE_CARD_PANEL_UNTIL_DATE_LABEL: 'Bis einschließlich {{date}}',
 	},
 	es: {
-		placeholder: 'Seleccione una opción',
-		clear: 'Borrar',
-		clearSearch: 'Borrar búsqueda',
-		emptyResults: 'No hay resultados para su búsqueda',
-		loading: 'Cargando...',
+		EMPLOYEE_CARD_PANEL_COMING_ON_LABEL: 'Llegada prevista el {{date}}',
+		EMPLOYEE_CARD_PANEL_ABSENCE_LABEL: 'Ausente',
+		EMPLOYEE_CARD_PANEL_MORNING_LABEL: 'Por la mañana',
+		EMPLOYEE_CARD_PANEL_EMPLOYEE_HAS_LEAVED_LABEL: 'Se ha marchado',
+		EMPLOYEE_CARD_PANEL_UNTIL_TODAY_LABEL: 'Hasta hoy',
+		EMPLOYEE_CARD_PANEL_UNTIL_TOMORROW_LABEL: 'Hasta mañana',
+		EMPLOYEE_CARD_PANEL_UNTIL_DATE_LABEL: 'Hasta el {{date}} incluido',
 	},
 	pt: {
-		placeholder: 'Selecione uma opção',
-		clear: 'Limpar',
-		clearSearch: 'Limpar pesquisa',
-		emptyResults: 'Nenhum resultado para sua pesquisa',
-		loading: 'Carregando...',
+		EMPLOYEE_CARD_PANEL_COMING_ON_LABEL: 'Chegada prevista para {{date}}',
+		EMPLOYEE_CARD_PANEL_ABSENCE_LABEL: 'Ausente',
+		EMPLOYEE_CARD_PANEL_MORNING_LABEL: 'Manhã',
+		EMPLOYEE_CARD_PANEL_EMPLOYEE_HAS_LEAVED_LABEL: 'Papel',
+		EMPLOYEE_CARD_PANEL_UNTIL_TODAY_LABEL: 'Até hoje',
+		EMPLOYEE_CARD_PANEL_UNTIL_TOMORROW_LABEL: 'Até amanhã',
+		EMPLOYEE_CARD_PANEL_UNTIL_DATE_LABEL: 'Até {{date}} incluído',
 	},
 };

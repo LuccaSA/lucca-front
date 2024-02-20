@@ -48,12 +48,12 @@
 							class="userCard-details-info-detail-link-icon lucca-icon icon-payPeriod mod-S"
 						></span>
 						<span
-							*ngIf="employee.isWorkingNow === false || (employee.dtContractStart | isFuture)"
+							*ngIf="employee.isWorkingNow === false && (employee.dtContractEnd | isFutureOrToday)"
 							aria-hidden="true"
 							class="lucca-icon icon-payPeriod mod-S"
 						></span>
 						<span
-							*ngIf="employee.isWorkingNow === false && !(employee.dtContractEnd | isFutureOrToday)"
+							*ngIf="employee.isWorkingNow === false && employee.dtContractEnd && !(employee.dtContractEnd | isFutureOrToday)"
 							aria-hidden="true"
 							class="lucca-icon icon-calendarStrikethrough mod-S"
 						></span>
@@ -67,23 +67,17 @@
 							</ng-container>
 							<ng-container *ngIf="employee.isWorkingNow === false">
 								<ng-container *ngIf="employee.dtContractStart | isFuture">
-									EMPLOYEE_CARD_PANEL_COMING_ON_LABEL
-									<!--									{{'EMPLOYEE_CARD_PANEL_COMING_ON_LABEL' | transloco : { dtContractStart: employee.dtContractStart | date: 'longDate' } }}-->
+									{{intl.EMPLOYEE_CARD_PANEL_COMING_ON_LABEL | injectParameter : (employee.dtContractStart | date: 'longDate') }}
 								</ng-container>
 								<ng-container *ngIf="!(employee.dtContractStart | isFuture) && (employee.dtContractEnd | isFutureOrToday)">
-									EMPLOYEE_CARD_PANEL_ABSENCE_LABEL
-									<!--									{{'EMPLOYEE_CARD_PANEL_ABSENCE_LABEL' | transloco }}-->
+									{{ intl.EMPLOYEE_CARD_PANEL_ABSENCE_LABEL }}
 									<span *ngIf="employee.leaveEndsOn" class="u-textGrey600">
 										- {{ employee.leaveEndsOn | leaveEndsDisplay }}
-										<span *ngIf="employee.leaveEndIsFirstHalfDay">
-											(EMPLOYEE_CARD_PANEL_MORNING_LABEL)
-											<!--											({{'EMPLOYEE_CARD_PANEL_MORNING_LABEL' | transloco }})-->
-										</span>
+										<span *ngIf="employee.leaveEndIsFirstHalfDay"> ({{intl.EMPLOYEE_CARD_PANEL_MORNING_LABEL }}) </span>
 									</span>
 								</ng-container>
-								<ng-container *ngIf="!(employee.dtContractEnd | isFutureOrToday )">
-									EMPLOYEE_CARD_PANEL_EMPLOYEE_HAS_LEAVED_LABEL
-									<!--									{{'EMPLOYEE_CARD_PANEL_EMPLOYEE_HAS_LEAVED_LABEL' | transloco }}-->
+								<ng-container *ngIf="employee.dtContractEnd && !(employee.dtContractEnd | isFutureOrToday )">
+									{{intl.EMPLOYEE_CARD_PANEL_EMPLOYEE_HAS_LEAVED_LABEL }}
 								</ng-container>
 							</ng-container>
 						</span>

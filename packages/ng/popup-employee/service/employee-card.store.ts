@@ -19,7 +19,6 @@ export class LuEmployeeCardStore implements ILuEmployeeCardStore {
 			return this.#cache.get(id)!;
 		}
 		const employeeCard$ = this.#http.get<LuEmployeeCard>(`${this._api}/${id}`).pipe(
-			// cacheImage((c) => c.pictureHref),
 			shareReplay(1),
 		);
 		this.#cache.set(id, employeeCard$);
