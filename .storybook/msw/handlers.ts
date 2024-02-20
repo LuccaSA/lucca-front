@@ -162,4 +162,8 @@ export const handlers = [
 	),
 
 	http.get('/api/v3/users/search', usersSearchHandler),
+	http.get('/work-locations/api/employee-profile-card/:id', async () => {
+		await delay(300);
+		return HttpResponse.json(mockUserPopover);
+	}),
 ];

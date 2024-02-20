@@ -1,0 +1,95 @@
+<div
+	class="lu-popover-panel mod-cornerRounded mod-XL mod-boxShadowXL"
+	[ngClass]="panelClassesMap"
+	[attr.id]="panelId"
+	[attr.aria-labelledby]="triggerId"
+	[@transformPopover]="'enter'"
+	(focus)="onMouseOver()"
+	(mouseover)="onMouseOver()"
+	(mouseleave)="onMouseLeave()"
+	(mousedown)="onMouseDown()"
+>
+	<div *ngIf="employee$ | async as employee" class="lu-popover-content userCard">
+		<div class="userCard-details">
+			<lu-user-picture class="userCard-details-avatar" [user]="employee" />
+			<div class="userCard-details-info">
+				<h3 class="userCard-details-info-name">
+					<div *ngIf="!employee._links?.hrCard?.href; else fullNameDisplayLink">
+						<ng-container *ngTemplateOutlet="fullNameDisplay" />
+					</div>
+				</h3>
+				<ng-template #fullNameDisplayLink>
+					<a class="userCard-details-info-name-link" [href]="employee._links?.hrCard?.href">
+						<ng-container *ngTemplateOutlet="fullNameDisplay" />
+					</a>
+				</ng-template>
+				<ng-template #fullNameDisplay> {{employee.firstName}} {{employee.lastName}} </ng-template>
+
+				<p *ngIf="employee.jobTitle" class="userCard-details-info-detail">{{employee.jobTitle}}</p>
+				<p *ngIf="employee.userDepartment" class="userCard-details-info-detail">{{employee.userDepartment?.name}}</p>
+
+				<p class="userCard-details-info-detail">
+					<a
+						*ngIf="employee._links?.schedule?.href; else workLocationDisplayDiv"
+						class="userCard-details-info-detail-link"
+						[href]="employee._links?.schedule?.href"
+					>
+						<ng-container *ngTemplateOutlet="workLocationDisplay" />
+					</a>
+					<ng-template #workLocationDisplayDiv>
+						<div class="userCard-details-info-detail-link">
+							<ng-container *ngTemplateOutlet="workLocationDisplay" />
+						</div>
+					</ng-template>
+					<ng-template #workLocationDisplay>
+						<span
+							*ngIf="employee.isWorkingNow === true && employee.currentWorkLocation"
+							aria-hidden="true"
+							class="userCard-details-info-detail-link-icon lucca-icon icon-payPeriod mod-S"
+						></span>
+						<span
+							*ngIf="employee.isWorkingNow === false || (employee.dtContractStart | isFuture)"
+							aria-hidden="true"
+							class="lucca-icon icon-payPeriod mod-S"
+						></span>
+						<span
+							*ngIf="employee.isWorkingNow === false && !(employee.dtContractEnd | isFutureOrToday)"
+							aria-hidden="true"
+							class="lucca-icon icon-calendarStrikethrough mod-S"
+						></span>
+						<span class="userCard-details-info-detail-link-state">
+							<ng-container *ngIf="employee.isWorkingNow === true">
+								{{ employee.currentWorkLocation?.name }}
+								<ng-container *ngIf="employee.currentWorkLocation?.area">
+									-
+									<span class="u-textGrey600">{{employee.currentWorkLocation?.area?.name}}</span>
+								</ng-container>
+							</ng-container>
+							<ng-container *ngIf="employee.isWorkingNow === false">
+								<ng-container *ngIf="employee.dtContractStart | isFuture">
+									EMPLOYEE_CARD_PANEL_COMING_ON_LABEL
+									<!--									{{'EMPLOYEE_CARD_PANEL_COMING_ON_LABEL' | transloco : { dtContractStart: employee.dtContractStart | date: 'longDate' } }}-->
+								</ng-container>
+								<ng-container *ngIf="!(employee.dtContractStart | isFuture) && (employee.dtContractEnd | isFutureOrToday)">
+									EMPLOYEE_CARD_PANEL_ABSENCE_LABEL
+									<!--									{{'EMPLOYEE_CARD_PANEL_ABSENCE_LABEL' | transloco }}-->
+									<span *ngIf="employee.leaveEndsOn" class="u-textGrey600">
+										- {{ employee.leaveEndsOn | leaveEndsDisplay }}
+										<span *ngIf="employee.leaveEndIsFirstHalfDay">
+											(EMPLOYEE_CARD_PANEL_MORNING_LABEL)
+											<!--											({{'EMPLOYEE_CARD_PANEL_MORNING_LABEL' | transloco }})-->
+										</span>
+									</span>
+								</ng-container>
+								<ng-container *ngIf="!(employee.dtContractEnd | isFutureOrToday )">
+									EMPLOYEE_CARD_PANEL_EMPLOYEE_HAS_LEAVED_LABEL
+									<!--									{{'EMPLOYEE_CARD_PANEL_EMPLOYEE_HAS_LEAVED_LABEL' | transloco }}-->
+								</ng-container>
+							</ng-container>
+						</span>
+					</ng-template>
+				</p>
+			</div>
+		</div>
+	</div>
+</div>
