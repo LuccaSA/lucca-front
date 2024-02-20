@@ -9,15 +9,15 @@ import { ILuUser, LuUserPictureModule } from '@lucca-front/ng/user';
 import { Observable, of, Subscription } from 'rxjs';
 
 import { getIntl } from '@lucca-front/ng/core';
-import { LU_POPUP_EMPLOYEE_TRANSLATIONS } from '../../popup-employee.translate';
-import { LeaveEndsDisplayPipe } from '../pipe/leave-ends-display.pipe';
-import { isFutureOrTodayPipe, IsFuturePipe } from '../pipe/is-future.pipe';
+import { catchError } from 'rxjs/operators';
 import { LuEmployeeCard } from '../../employee.model';
-import { ILuEmployeeCardPanel } from './employee-card-panel.model';
+import { LU_POPUP_EMPLOYEE_TRANSLATIONS } from '../../popup-employee.translate';
 import { LuEmployeeCardStore } from '../../service/employee-card.store';
 import { ILuEmployeeCardStore } from '../../service/employee-service.model';
 import { InjectParameterPipe } from '../pipe/inject-parameter.pipe';
-import { catchError } from 'rxjs/operators';
+import { isFutureOrTodayPipe, IsFuturePipe } from '../pipe/is-future.pipe';
+import { LeaveEndsDisplayPipe } from '../pipe/leave-ends-display.pipe';
+import { ILuEmployeeCardPanel } from './employee-card-panel.model';
 
 @Component({
 	standalone: true,
@@ -28,7 +28,7 @@ import { catchError } from 'rxjs/operators';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	animations: [luTransformPopover],
 	exportAs: 'LuEmployeeCardPanel',
-	imports: [ LuUserPictureModule, NgClass, RouterLink, NgIf, NgTemplateOutlet, DatePipe, OverlayModule, LeaveEndsDisplayPipe, AsyncPipe, IsFuturePipe, isFutureOrTodayPipe, InjectParameterPipe ],
+	imports: [LuUserPictureModule, NgClass, RouterLink, NgIf, NgTemplateOutlet, DatePipe, OverlayModule, LeaveEndsDisplayPipe, AsyncPipe, IsFuturePipe, isFutureOrTodayPipe, InjectParameterPipe],
 })
 export class LuEmployeeCardPanelComponent extends ALuPopoverPanel implements ILuEmployeeCardPanel, OnDestroy {
 	public employee$: Observable<LuEmployeeCard> | undefined;

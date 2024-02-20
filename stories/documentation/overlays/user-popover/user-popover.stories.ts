@@ -1,10 +1,8 @@
-import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { OverlayModule } from '@angular/cdk/overlay';
-import {
-	LuEmployeeCardTriggerDirective
-} from '@lucca-front/ng/popup-employee';
 import { provideHttpClient } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { LuEmployeeCardTriggerDirective } from '@lucca-front/ng/popup-employee';
+import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 
 export default {
 	title: 'Documentation/Overlays/user-popover',
@@ -18,8 +16,8 @@ export default {
 	],
 	render: () => {
 		return {
-			props: {user: {id: 1, firstName: 'David', lastName: 'Hernandez'}},
-			template: `<div [luEmployeeCard]="user">Coucou !</div>`,
+			props: { user: { id: 1, firstName: 'David', lastName: 'Hernandez' } },
+			template: `<div [luEmployeeCard]="user">Coucou !</div>`,
 		};
 	},
 } as Meta;
