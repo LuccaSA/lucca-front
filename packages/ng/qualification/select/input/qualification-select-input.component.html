@@ -24,6 +24,8 @@
 	></lu-api-paged-searcher>
 	<ng-template luForGroups let-group [luForGroupsGroupBy]="groupByJobName">
 		<h4 class="optionItem-groupKey">{{ group.key }}</h4>
-		<lu-option *ngFor="let qualification of group.items; trackBy: trackById" [value]="qualification"> {{ qualification.name }} </lu-option>
+		<div class="lu-picker-content-option">
+			<lu-option *ngFor="let qualification of group.items; trackBy: trackById" [value]="qualification"> {{ qualification.name }} </lu-option>
+		</div>
 	</ng-template>
 </lu-option-picker-advanced>
