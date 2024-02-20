@@ -1,13 +1,13 @@
-@mixin component {
+@mixin component($atRoot: 'without: rule') {
 	background-color: var(--components-tag-background);
 	border-radius: var(--commons-borderRadius-M);
-	font-size: var(--components-tag-fontSize);
-	line-height: var(--components-tag-lineHeight);
 	padding: 0 var(--spacings-XXS);
 	text-decoration: var(--components-tag-decoration);
 	box-shadow: 0 0 0 1px var(--components-tag-shadow);
+	gap: var(--spacings-XXS);
 	cursor: var(--components-tag-cursor);
-	display: inline-block;
+	display: inline-flex;
+	align-items: center;
 	text-align: center;
 	vertical-align: baseline;
 	white-space: nowrap;
@@ -17,5 +17,22 @@
 	&,
 	&:is(a, button) {
 		color: var(--components-tag-color);
+	}
+
+	&,
+	.lucca-icon {
+		font-size: var(--components-tag-fontSize);
+		line-height: var(--components-tag-lineHeight);
+	}
+
+	.lucca-icon {
+		position: relative;
+		bottom: var(--components-tag-iconBottom);
+	}
+
+	@at-root ($atRoot) {
+		.tag-content {
+			text-decoration: var(--components-tag-decoration);
+		}
 	}
 }
