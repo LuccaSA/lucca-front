@@ -11,7 +11,7 @@ export abstract class ALuCoreSelectApiDirective<TOption, TParams = Record<string
 	protected pageSize = MAGIC_PAGE_SIZE;
 	protected debounceDuration = MAGIC_DEBOUNCE_DURATION;
 
-	protected select = inject<ALuSelectInputComponent<TOption, unknown>>(ALuSelectInputComponent);
+	public select = inject<ALuSelectInputComponent<TOption, unknown>>(ALuSelectInputComponent);
 
 	protected page$ = this.select.nextPage.pipe(
 		scan((page) => page + 1, 0),

@@ -39,7 +39,9 @@
 	top: 0;
 	background-color: var(--pr-t-elevation-surface-raised);
 	z-index: 1;
-	display: block;
+	display: flex;
+	gap: var(--spacings-XS);
+	justify-content: space-between;
 	box-shadow: 0 calc(var(--spacings-XXS) * -1) 0 var(--spacings-XXS) var(--pr-t-elevation-surface-raised); // Mask background options scrolling behind
 }
 
