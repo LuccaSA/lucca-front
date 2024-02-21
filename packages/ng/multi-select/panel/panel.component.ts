@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { PortalDirective, getIntl } from '@lucca-front/ng/core';
 import { SELECT_ID, ɵLuOptionComponent, ɵLuOptionOutletDirective, ɵgenerateGroups } from '@lucca-front/ng/core-select';
 import { EMPTY, asyncScheduler, filter, map, observeOn, take, takeUntil } from 'rxjs';
-import { skip, switchMap } from 'rxjs/operators';
+import { debounceTime, switchMap } from 'rxjs/operators';
 import { LuMultiSelectInputComponent } from '../input';
 import { LuMultiSelectPanelRef } from '../input/panel.model';
 import { MULTI_SELECT_INPUT } from '../select.model';
@@ -128,7 +128,8 @@ export class LuMultiSelectPanelComponent<T> implements AfterViewInit {
 		if (this.selectInput.searchable) {
 			this.selectInput.clueChange
 				.pipe(
-					switchMap(() => this.options$.pipe(skip(1), take(1))),
+					switchMap(() => this.optionsQL.changes.pipe(take(1))),
+					debounceTime(0),
 					takeUntil(this.panelRef.closed),
 				)
 				.subscribe(() => this.keyManager.setFirstItemActive());
