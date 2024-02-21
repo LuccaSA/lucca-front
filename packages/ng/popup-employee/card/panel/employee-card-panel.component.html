@@ -43,17 +43,12 @@
 					</ng-template>
 					<ng-template #workLocationDisplay>
 						<span
-							*ngIf="employee.isWorkingNow === true && employee.currentWorkLocation"
-							aria-hidden="true"
-							class="userCard-details-info-detail-link-icon lucca-icon icon-payPeriod mod-S"
-						></span>
-						<span
-							*ngIf="employee.isWorkingNow === false && (employee.dtContractEnd | isFutureOrToday)"
+							*ngIf="employee.dtContractEnd | isFutureOrToday"
 							aria-hidden="true"
 							class="lucca-icon icon-payPeriod mod-S"
 						></span>
 						<span
-							*ngIf="employee.isWorkingNow === false && employee.dtContractEnd && !(employee.dtContractEnd | isFutureOrToday)"
+							*ngIf="!(employee.dtContractEnd | isFutureOrToday)"
 							aria-hidden="true"
 							class="lucca-icon icon-calendarStrikethrough mod-S"
 						></span>
@@ -65,6 +60,7 @@
 									<span class="u-textGrey600">{{employee.currentWorkLocation?.area?.name}}</span>
 								</ng-container>
 							</ng-container>
+
 							<ng-container *ngIf="employee.isWorkingNow === false">
 								<ng-container *ngIf="employee.dtContractStart | isFuture">
 									{{intl.EMPLOYEE_CARD_PANEL_COMING_ON_LABEL | injectParameter : (employee.dtContractStart | date: 'longDate') }}
@@ -72,8 +68,7 @@
 								<ng-container *ngIf="!(employee.dtContractStart | isFuture) && (employee.dtContractEnd | isFutureOrToday)">
 									{{ intl.EMPLOYEE_CARD_PANEL_ABSENCE_LABEL }}
 									<span *ngIf="employee.leaveEndsOn" class="u-textGrey600">
-										- {{ employee.leaveEndsOn | leaveEndsDisplay }}
-										<span *ngIf="employee.leaveEndIsFirstHalfDay"> ({{intl.EMPLOYEE_CARD_PANEL_MORNING_LABEL }}) </span>
+										- {{ employee.leaveEndsOn | leaveEndsDisplay: employee.leaveEndIsFirstHalfDay }}
 									</span>
 								</ng-container>
 								<ng-container *ngIf="employee.dtContractEnd && !(employee.dtContractEnd | isFutureOrToday )">
