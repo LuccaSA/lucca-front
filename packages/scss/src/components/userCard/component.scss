@@ -1,6 +1,10 @@
 @use '@lucca-front/scss/src/commons/utils/text';
 
 @mixin component($atRoot: 'without: rule') {
+	width: 22.5rem;
+	max-width: calc(100vw - var(--spacings-S) * 2);
+	padding: var(--spacings-S);
+
 	@at-root ($atRoot) {
 		.userCard-details {
 			--components-user-picture-image-size: 5.25rem;
