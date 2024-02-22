@@ -1,8 +1,9 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, forwardRef, Inject, Input, OnDestroy, Optional, Self, SkipSelf } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, forwardRef, Inject, Input, OnDestroy, Optional, Self } from '@angular/core';
 import { ALuOptionOperator, ALuOptionSelector, LuOptionSelectAllComponent } from '@lucca-front/ng/option';
 import { Subscription } from 'rxjs';
 import { ILuEstablishment } from '../../establishment.model';
 import { ALuEstablishmentService, LuEstablishmentService } from '../../service/index';
+import { DEFAULT_ESTABLISHMENT_SERVICE } from '../establishment-select.token';
 
 @Component({
 	selector: 'lu-establishment-select-all',
@@ -22,7 +23,7 @@ import { ALuEstablishmentService, LuEstablishmentService } from '../../service/i
 			multi: true,
 		},
 		{
-			provide: ALuEstablishmentService,
+			provide: DEFAULT_ESTABLISHMENT_SERVICE,
 			useClass: LuEstablishmentService,
 		},
 	],
@@ -46,14 +47,13 @@ export class LuEstablishmentSelectAllComponent extends LuOptionSelectAllComponen
 		private readonly _changeDetectorRef: ChangeDetectorRef,
 		@Inject(ALuEstablishmentService)
 		@Optional()
-		@SkipSelf()
-		hostService: LuEstablishmentService,
-		@Inject(ALuEstablishmentService)
+		customService: LuEstablishmentService,
+		@Inject(DEFAULT_ESTABLISHMENT_SERVICE)
 		@Self()
-		selfService: LuEstablishmentService,
+		defaultService: LuEstablishmentService,
 	) {
 		super();
-		this._service = hostService || selfService;
+		this._service = customService || defaultService;
 	}
 
 	override selectAll() {

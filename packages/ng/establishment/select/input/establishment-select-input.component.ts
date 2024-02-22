@@ -1,21 +1,6 @@
 import { Overlay, OverlayModule } from '@angular/cdk/overlay';
 import { CommonModule } from '@angular/common';
-import {
-	AfterViewInit,
-	ChangeDetectionStrategy,
-	ChangeDetectorRef,
-	Component,
-	ElementRef,
-	forwardRef,
-	Inject,
-	Input,
-	OnInit,
-	Optional,
-	Renderer2,
-	Self,
-	SkipSelf,
-	ViewContainerRef,
-} from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, Inject, Input, OnInit, Optional, Renderer2, Self, ViewContainerRef, forwardRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { getIntl } from '@lucca-front/ng/core';
 import { LuInputClearerComponent, LuInputDisplayerDirective } from '@lucca-front/ng/input';
@@ -25,6 +10,7 @@ import { ALuSelectInputComponent } from '@lucca-front/ng/select';
 import { combineLatest } from 'rxjs';
 import { ILuEstablishment } from '../../establishment.model';
 import { ALuEstablishmentService, ALuLegalUnitService, LuEstablishmentService, LuLegalUnitService } from '../../service/index';
+import { DEFAULT_ESTABLISHMENT_SERVICE, DEFAULT_LEGAL_UNIT_SERVICE } from '../establishment-select.token';
 import { LuForLegalUnitsDirective } from '../for-legal-units';
 import { LuLegalUnitSelectorDirective } from '../legal-unit-selector';
 import { LuEstablishmentSearcherComponent } from '../searcher';
@@ -56,11 +42,11 @@ import { LU_ESTABLISHMENT_SELECT_INPUT_TRANSLATIONS } from './establishment-sele
 			multi: true,
 		},
 		{
-			provide: ALuEstablishmentService,
+			provide: DEFAULT_ESTABLISHMENT_SERVICE,
 			useClass: LuEstablishmentService,
 		},
 		{
-			provide: ALuLegalUnitService,
+			provide: DEFAULT_LEGAL_UNIT_SERVICE,
 			useClass: LuLegalUnitService,
 		},
 	],
@@ -98,20 +84,18 @@ export class LuEstablishmentSelectInputComponent<
 		protected override _renderer: Renderer2,
 		@Inject(ALuLegalUnitService)
 		@Optional()
-		@SkipSelf()
-		hostLuService: LuLegalUnitService,
-		@Inject(ALuLegalUnitService) @Self() selfLuService: LuLegalUnitService,
+		customLuService: LuLegalUnitService,
+		@Inject(DEFAULT_LEGAL_UNIT_SERVICE) @Self() defaultLuService: LuLegalUnitService,
 		@Inject(ALuEstablishmentService)
 		@Optional()
-		@SkipSelf()
-		hostEstablishmentService: LuEstablishmentService,
-		@Inject(ALuEstablishmentService)
+		customEstablishmentService: LuEstablishmentService,
+		@Inject(DEFAULT_ESTABLISHMENT_SERVICE)
 		@Self()
-		selfEstablishmentService: LuEstablishmentService,
+		defaultEstablishmentService: LuEstablishmentService,
 	) {
 		super(_changeDetectorRef, _overlay, _elementRef, _viewContainerRef, _renderer);
-		this._establishmentService = hostEstablishmentService || selfEstablishmentService;
-		this._legalUnitService = hostLuService || selfLuService;
+		this._establishmentService = customEstablishmentService || defaultEstablishmentService;
+		this._legalUnitService = customLuService || defaultLuService;
 	}
 
 	ngOnInit() {

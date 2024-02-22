@@ -34,7 +34,7 @@ const Template: StoryFn<GridsLegacyAutoWidthStory> = (args) => ({
 	styles: [
 		`
 		.grid-demo {
-			background-color: var(--palettes-grey-200);
+			background-color: var(--palettes-neutral-200);
 			margin-bottom: var(--spacings-S);
 			padding: var(--spacings-S);
 			border-radius: var(--commons-borderRadius-full);

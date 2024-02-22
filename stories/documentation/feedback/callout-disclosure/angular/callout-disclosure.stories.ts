@@ -14,7 +14,7 @@ export default {
 	render: (args, { argTypes }) => {
 		return {
 			template: `<lu-callout-disclosure ${generateInputs(args, argTypes)}>
-		<ul lu-callout-feedback-list palette="grey">
+		<ul lu-callout-feedback-list palette="neutral">
 			<li lu-callout-feedback-item>
 				<lu-feedback-item-description>
 					 Feedback description.
@@ -45,12 +45,19 @@ export default {
 				type: 'select',
 			},
 		},
+		open: {
+			description: '[v17.2]'
+		},
 	},
 } as Meta;
 
 export const Template: StoryObj<CalloutDisclosureComponent> = {
 	args: {
-		icon: 'signInfo',
+		size: 'M',
+		state: null,
 		heading: 'List title',
+		icon: 'signInfo',
+		palette: 'none',
+		open: false,
 	},
 };

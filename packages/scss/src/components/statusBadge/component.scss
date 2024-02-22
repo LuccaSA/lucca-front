@@ -1,6 +1,6 @@
 @mixin component($atRoot: 'without: rule') {
 	align-items: flex-start;
-	background-color: var(--palettes-100, var(--palettes-primary-100));
+	background-color: var(--palettes-100, var(--palettes-product-100));
 	border-radius: var(--commons-borderRadius-L);
 	display: inline-flex;
 	font-size: var(--components-statusBadge-fontSize);
@@ -11,7 +11,7 @@
 	font-weight: normal;
 
 	&::before {
-		background-color: var(--palettes-700, var(--palettes-primary-700));
+		background-color: var(--palettes-700, var(--palettes-product-700));
 		border-radius: var(--commons-borderRadius-full);
 		content: '';
 		display: block;

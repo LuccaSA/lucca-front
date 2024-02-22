@@ -49,21 +49,21 @@
 	}
 
 	&:hover {
-		background-color: var(--palettes-grey-50);
+		background-color: var(--palettes-neutral-50);
 		color: currentColor;
 	}
 
 	&:focus-visible {
 		@include a11y.focusVisible();
-		background-color: var(--palettes-grey-50);
+		background-color: var(--palettes-neutral-50);
 	}
 
 	&.is-disabled {
-		color: var(--palettes-grey-400);
+		color: var(--palettes-neutral-400);
 		pointer-events: none;
 
 		&:hover {
-			background-color: var(--colors-white-color);
+			background-color: var(--pr-t-elevation-surface-raised);
 		}
 	}
 

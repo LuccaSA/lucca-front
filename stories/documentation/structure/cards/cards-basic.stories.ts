@@ -2,7 +2,7 @@ import { Meta, StoryFn } from '@storybook/angular';
 
 interface CardsBasicStory {
 	clickable: boolean;
-	grey: boolean;
+	neutral: boolean;
 	disabled: boolean;
 	elevated: boolean;
 }
@@ -26,7 +26,7 @@ export default {
 			},
 			description: 'Deprecated 🦕',
 		},
-		grey: {
+		neutral: {
 			control: {
 				type: 'boolean',
 			},
@@ -37,11 +37,11 @@ export default {
 
 function getTemplate(args: CardsBasicStory): string {
 	const clickable = args.clickable ? `mod-clickable` : '';
-	const grey = args.grey ? `mod-grey` : '';
+	const neutral = args.neutral ? `mod-neutral` : '';
 	const disabled = args.disabled ? `is-disabled` : '';
 	const elevated = args.elevated ? `mod-elevated` : '';
 	return `
-	<div class="card ${clickable} ${grey} ${disabled} ${elevated}">
+	<div class="card ${clickable} ${neutral} ${disabled} ${elevated}">
 		<div class="card-content">
 			<h2 class="card-title">Titre de la carte</h2>
 			<p>Contenu de la carte</p>
@@ -56,4 +56,4 @@ const Template: StoryFn<CardsBasicStory> = (args) => ({
 });
 
 export const Basic = Template.bind({});
-Basic.args = { disabled: false, elevated: false, clickable: false, grey: false };
+Basic.args = { disabled: false, elevated: false, clickable: false, neutral: false };

@@ -24,8 +24,8 @@
 	// .label is deprecated
 	.label {
 		margin-right: 0;
-		background-color: var(--palettes-grey-100);
-		color: var(--palettes-grey-700);
+		background-color: var(--palettes-neutral-100);
+		color: var(--palettes-neutral-700);
 	}
 
 	@at-root ($atRoot) {
@@ -68,7 +68,7 @@
 			scroll-margin-inline: var(--spacings-S);
 
 			&::after {
-				background-color: var(--palettes-700, var(--palettes-primary-700));
+				background-color: var(--palettes-700, var(--palettes-product-700));
 				border-radius: var(--components-menu-listItemActionRadius);
 				transition-duration: var(--commons-animations-durations-fast);
 				height: var(--components-menu-listItemActionRadiusHeight);
@@ -85,13 +85,13 @@
 			&:not(.is-disabled, [disabled]) {
 				&:hover {
 					&:not(.is-active, [aria-current='page']) {
-						color: var(--palettes-grey-900);
+						color: var(--palettes-neutral-900);
 					}
 
 					// .label is deprecated
 					.label {
-						background-color: var(--palettes-100, var(--palettes-primary-100));
-						color: var(--palettes-700, var(--palettes-primary-700));
+						background-color: var(--palettes-100, var(--palettes-product-100));
+						color: var(--palettes-700, var(--palettes-product-700));
 					}
 
 					&::after {

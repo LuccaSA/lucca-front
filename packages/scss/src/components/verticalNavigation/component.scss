@@ -6,14 +6,14 @@
 	@at-root ($atRoot) {
 		.verticalNavigation-sectionTitle {
 			@include title.h5;
-			color: var(--palettes-grey-600);
+			color: var(--palettes-neutral-600);
 			padding: 0 var(--components-verticalNavigation-horizontalPadding);
 			margin-bottom: var(--spacings-XS);
 		}
 
 		.verticalNavigation-list {
 			@include reset.list;
-			background-color: var(--colors-white-color);
+			background-color: var(--pr-t-elevation-surface-raised);
 			margin-bottom: var(--spacings-S);
 		}
 
@@ -34,7 +34,7 @@
 			font-weight: 600;
 
 			&:hover {
-				--components-verticalNavigation-link-background: var(--palettes-grey-50);
+				--components-verticalNavigation-link-background: var(--palettes-neutral-50);
 				color: var(--components-verticalNavigation-link-color);
 			}
 
@@ -43,7 +43,7 @@
 			}
 
 			&:active {
-				--components-verticalNavigation-link-background: var(--palettes-grey-100);
+				--components-verticalNavigation-link-background: var(--palettes-neutral-100);
 			}
 		}
 

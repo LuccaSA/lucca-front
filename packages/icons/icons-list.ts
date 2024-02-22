@@ -336,6 +336,7 @@ export const IconsList = [
 	{ icon: 'bill', deprecated: true },
 	{ icon: 'moneyBuildingBank', deprecated: false },
 	{ icon: 'bank', deprecated: true },
+	{ icon: 'moneyBankImport', deprecated: false },
 	{ icon: 'moneyCardImport', deprecated: false },
 	{ icon: 'importCb', deprecated: true },
 	{ icon: 'moneyCoins', deprecated: false },

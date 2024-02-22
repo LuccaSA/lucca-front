@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, ViewEncapsulation } from '@angular/core';
 import { FORM_FIELD_INSTANCE, FormFieldComponent, InputDirective } from '@lucca-front/ng/form-field';
 import { NoopValueAccessorDirective } from '../noop-value-accessor.directive';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -10,6 +10,7 @@ import { injectNgControl } from '../inject-ng-control';
 	imports: [FormFieldComponent, ReactiveFormsModule, InputDirective],
 	templateUrl: './switch-input.component.html',
 	hostDirectives: [NoopValueAccessorDirective],
+	encapsulation: ViewEncapsulation.None,
 	host: {
 		class: 'switchField',
 	},

@@ -1,8 +1,8 @@
 @use '@lucca-front/scss/src/commons/utils/form';
 
 .cdk-drag-placeholder {
-	box-shadow: form.fakeBorderOverlay(var(--palettes-grey-200));
-	background-color: var(--palettes-grey-100);
+	box-shadow: form.fakeBorderOverlay(var(--palettes-neutral-200));
+	background-color: var(--palettes-neutral-100);
 	* {
 		opacity: 0;
 	}
@@ -44,8 +44,8 @@
 .cdk-drag-preview {
 	z-index: 9999 !important;
 	box-sizing: border-box;
-	box-shadow: form.fakeBorderOverlay(var(--palettes-secondary-200));
-	background-color: var(--palettes-secondary-50);
+	box-shadow: form.fakeBorderOverlay(var(--palettes-product-200));
+	background-color: var(--palettes-product-50);
 	border-radius: var(--commons-borderRadius-M);
 	cursor: grabbing;
 }

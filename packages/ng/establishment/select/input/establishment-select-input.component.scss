@@ -20,7 +20,7 @@
 	width: 100%;
 	justify-content: flex-start;
 	font-weight: 600;
-	color: var(--palettes-grey-600);
+	color: var(--palettes-neutral-600);
 	text-decoration: underline;
 
 	&.mod-readonly {
@@ -38,7 +38,7 @@
 			background-color: transparent;
 
 			~ .lu-picker-content-option lu-option {
-				background-color: var(--palettes-grey-50);
+				background-color: var(--palettes-neutral-50);
 				border-radius: var(--commons-borderRadius-M);
 			}
 		}

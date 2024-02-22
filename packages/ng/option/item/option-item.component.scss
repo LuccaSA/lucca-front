@@ -2,12 +2,12 @@
 @include optionItemStyle;
 
 .is-disabled {
-	color: var(--palettes-grey-500);
+	color: var(--palettes-neutral-500);
 	user-select: none;
 	cursor: default;
 
 	&.is-selected {
-		background-color: var(--palettes-grey-100);
+		background-color: var(--palettes-neutral-100);
 	}
 
 	&:hover {

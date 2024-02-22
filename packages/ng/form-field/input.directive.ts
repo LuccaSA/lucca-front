@@ -4,6 +4,10 @@ import { FORM_FIELD_INSTANCE } from './form-field.token';
 @Directive({
 	selector: '[luInput]',
 	standalone: true,
+	host: {
+		// Used to autofocus in dialog boxes, do not change except if you know what you're doing
+		class: 'luNativeInput',
+	},
 })
 export class InputDirective implements OnInit {
 	public readonly host = inject<ElementRef<HTMLElement>>(ElementRef);

@@ -20,7 +20,7 @@
 			&:not(:first-child) {
 				&::before {
 					@include icon.generate('arrow_chevron_right');
-					color: var(--palettes-grey-600);
+					color: var(--palettes-neutral-600);
 					font-size: var(--sizes-XS-lineHeight);
 					padding: 0 var(--spacings-XXS);
 				}
@@ -28,7 +28,7 @@
 		}
 
 		.breadcrumbs-list-item-action {
-			color: var(--palettes-grey-600);
+			color: var(--palettes-neutral-600);
 			transition-duration: var(--commons-animations-durations-fast);
 			transition-property: color;
 			text-decoration: none;
@@ -39,7 +39,7 @@
 			cursor: pointer;
 
 			&:hover {
-				color: var(--palettes-grey-600);
+				color: var(--palettes-neutral-600);
 				text-decoration: underline;
 			}
 

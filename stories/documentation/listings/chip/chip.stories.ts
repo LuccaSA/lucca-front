@@ -1,14 +1,14 @@
 import { Meta, StoryFn } from '@storybook/angular';
 
 interface ChipBasicStory {
-	primary: boolean;
+	product: boolean;
 	disabled: boolean;
 }
 
 export default {
 	title: 'Documentation/Listings/Chip/Basic',
 	argTypes: {
-		primary: {
+		product: {
 			control: {
 				type: 'boolean',
 			},
@@ -22,16 +22,16 @@ export default {
 } as Meta;
 
 function getTemplate(args: ChipBasicStory): string {
-	const primary = args.primary ? `palette-primary` : '';
+	const product = args.product ? `palette-product` : '';
 	const disabled = args.disabled ? `is-disabled` : '';
 	return `
-	<div class="chip ${primary} ${disabled}">
+	<div class="chip ${product} ${disabled}">
 		Label
 		<button type="button" class="chip-kill">
 			<span class="u-mask">delete</span>
 		</button>
 	</div>
-	<div class="chip ${primary} ${disabled}">
+	<div class="chip ${product} ${disabled}">
 		Label
 	</div>
 	`;
@@ -43,4 +43,4 @@ const Template: StoryFn<ChipBasicStory> = (args) => ({
 });
 
 export const Basic = Template.bind({});
-Basic.args = { primary: false, disabled: false };
+Basic.args = { product: false, disabled: false };

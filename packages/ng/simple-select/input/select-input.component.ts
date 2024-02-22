@@ -41,17 +41,7 @@ export class LuSimpleSelectInputComponent<T> extends ALuSelectInputComponent<T, 
 	protected panelRefFactory = inject(LuSimpleSelectPanelRefFactory);
 
 	protected buildPanelRef(): LuSelectPanelRef<T, T> {
-		return this.panelRefFactory.buildPanelRef(
-			{
-				initialValue: this.value,
-				optionComparer: this.optionComparer,
-				options$: this.options$,
-				loading$: this.loading$,
-				optionTpl: this.optionTpl,
-				grouping: this.grouping,
-			},
-			this.overlayConfig,
-		);
+		return this.panelRefFactory.buildPanelRef(this, this.overlayConfig);
 	}
 
 	protected get hasValue(): boolean {

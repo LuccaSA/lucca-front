@@ -1,7 +1,7 @@
 @use '@lucca-front/scss/src/components/loading/exports' as loading;
 
 @mixin disabled {
-	color: var(--palettes-grey-500);
+	color: var(--palettes-neutral-500);
 	pointer-events: none;
 	cursor: default;
 }
@@ -15,7 +15,6 @@
 
 	@include loading.vars;
 	@include loading.component;
-
 
 	&::before,
 	&::after {

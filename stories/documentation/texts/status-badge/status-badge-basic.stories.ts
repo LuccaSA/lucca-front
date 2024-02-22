@@ -9,7 +9,7 @@ export default {
 	title: 'Documentation/Texts/StatusBadge/Basic',
 	argTypes: {
 		palette: {
-			options: ['', 'palette-grey', 'palette-success', 'palette-warning', 'palette-error'],
+			options: ['', 'palette-product', 'palette-success', 'palette-warning', 'palette-error'],
 			control: {
 				type: 'select',
 			},
@@ -18,7 +18,7 @@ export default {
 			control: {
 				type: 'boolean',
 			},
-			description: 'Taille : Large',
+			description: '[v16.2] Taille : Large',
 		},
 	},
 } as Meta;

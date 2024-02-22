@@ -6,14 +6,14 @@
 @mixin stickyColumn($shadowColor: #2a3551) {
 	width: auto;
 	min-width: 100%;
-	background-color: var(--colors-white-color);
+	background-color: var(--pr-t-elevation-surface-raised);
 
 	.table-head-row-cell,
 	.table-body-row-cell,
 	.table-foot-row-cell {
 		&[class*='mod-stickyColumn-'] {
 			position: sticky;
-			background-color: var(--colors-white-color);
+			background-color: var(--pr-t-elevation-surface-raised);
 			z-index: 3;
 		}
 
@@ -66,7 +66,7 @@
 					&::before {
 						width: var(--components-table-fixed-column-sticky-shadow-width);
 						left: calc(var(--components-table-fixed-column-sticky-shadow-width) * -1);
-						background: var(--colors-white-color);
+						background: var(--pr-t-elevation-surface-raised);
 						top: 0;
 						bottom: 0;
 						z-index: 4;
@@ -135,7 +135,7 @@
 
 @mixin stickyHeaderCommon {
 	.table-head-row-cell {
-		background-color: var(--colors-white-color);
+		background-color: var(--pr-t-elevation-surface-raised);
 		position: sticky;
 		z-index: 5;
 	}

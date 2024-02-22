@@ -72,7 +72,7 @@ function getTemplate(args: MenuSecondaryBasicStory): string {
 							<li class="navSide-item-subMenu-item">
 								<a href="#" class="navSide-item-subMenu-link is-active">
 									Section 2.3
-									<span class="numericBadge palette-primary mod-S"><span class="u-mask">, </span>9</span>
+									<span class="numericBadge palette-product mod-S"><span class="u-mask">, </span>9</span>
 								</a>
 							</li>
 						</ul>
@@ -87,7 +87,7 @@ function getTemplate(args: MenuSecondaryBasicStory): string {
 						<a href="#" class="navSide-item-link">
 							<span aria-hidden="true" class="lucca-icon icon-settingsEqualizer"></span>
 							<span class="navSide-item-link-title">Section 4</span>
-							<span class="numericBadge palette-primary mod-S"><span class="u-mask">, </span>9</span>
+							<span class="numericBadge palette-product mod-S"><span class="u-mask">, </span>9</span>
 						</a>
 					</li>
 				</ul>

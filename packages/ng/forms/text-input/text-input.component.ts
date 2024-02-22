@@ -1,4 +1,4 @@
-import { booleanAttribute, Component, ElementRef, Input, ViewChild } from '@angular/core';
+import { booleanAttribute, Component, ElementRef, Input, ViewChild, ViewEncapsulation } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormFieldComponent, InputDirective } from '@lucca-front/ng/form-field';
 import { NoopValueAccessorDirective } from '../noop-value-accessor.directive';
@@ -18,6 +18,7 @@ type TextFieldType = 'text' | 'email' | 'password' | 'number';
 	imports: [FormFieldComponent, InputDirective, NgIf, ReactiveFormsModule, FormFieldIdDirective, NgTemplateOutlet],
 	templateUrl: './text-input.component.html',
 	hostDirectives: [NoopValueAccessorDirective],
+	encapsulation: ViewEncapsulation.None,
 })
 export class TextInputComponent {
 	ngControl = injectNgControl();

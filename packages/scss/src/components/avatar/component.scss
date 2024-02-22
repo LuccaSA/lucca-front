@@ -27,7 +27,7 @@
 
 			display: flex;
 			text-decoration: none;
-			color: var(--palettes-grey-800);
+			color: var(--palettes-neutral-800);
 			transition: transform var(--commons-animations-durations-fast);
 			transform: scale(var(--components-avatarWrapper-scale));
 			color: currentColor;
@@ -48,7 +48,7 @@
 			display: flex;
 			align-items: center;
 			justify-content: center;
-			background-color: var(--palettes-grey-200);
+			background-color: var(--palettes-neutral-200);
 			width: var(--components-avatar-size);
 			height: var(--components-avatar-size);
 			font-size: var(--components-avatarWrapper-fontSize);

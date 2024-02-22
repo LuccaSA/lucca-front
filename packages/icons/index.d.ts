@@ -336,6 +336,7 @@ export type LuccaIcon =
 	| 'bill'
 	| 'moneyBuildingBank'
 	| 'bank'
+	| 'moneyBankImport'
 	| 'moneyCardImport'
 	| 'importCb'
 	| 'moneyCoins'

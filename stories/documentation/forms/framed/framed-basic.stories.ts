@@ -66,7 +66,7 @@ function getTemplate(args: FramedBasicStory): string {
 			<legend class="form-group-legend">Titre Groupe 2</legend>
 			<div class="form-group-line">
 				<div class="form-group-line-col mod-overlay-top">
-					<label class="textfield mod-multiline mod-withSuffix palette-secondary is-required">
+					<label class="textfield mod-multiline mod-withSuffix palette-product is-required">
 						<textarea class="textfield-input" type="text" placeholder="Money Money"></textarea>
 						<span class="textfield-label">Label textfield</span>
 						<span class="textfield-suffix">

@@ -7,7 +7,7 @@
 
 	@at-root ($atRoot) {
 		.gauge-bar {
-			color: var(--palettes-700, var(--palettes-primary-700));
+			color: var(--palettes-700, var(--palettes-product-700));
 			border-bottom-width: var(--components-gauge-height);
 			transition-duration: var(--commons-animations-durations-standard);
 			transition-property: border-color, width, height;

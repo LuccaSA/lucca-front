@@ -1,27 +1,47 @@
-import { provideHttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Meta, moduleMetadata, StoryFn } from '@storybook/angular';
 import { LuSafeExternalSvgPipe } from '@lucca-front/ng/safe-content';
-import { Meta, StoryFn, applicationConfig } from '@storybook/angular';
+import { HttpClientModule } from "@angular/common/http";
 
-@Component({
-	standalone: true,
-	selector: 'empty-state-page-stories',
-	styleUrls: ['empty-state-page.stories.scss'],
-	templateUrl: './empty-state-page.stories.html',
-	imports: [LuSafeExternalSvgPipe],
-})
-class EmptyStatePageStory {}
+interface EmptyStatePageStory {
+}
 
 export default {
-	title: 'Documentation/Feedback/Empty State/HTML&CSS',
-	component: EmptyStatePageStory,
+	title: 'Documentation/Feedback/Empty State/HTML&CSS/Page',
 	decorators: [
-		applicationConfig({
-			providers: [provideHttpClient()],
+		moduleMetadata({
+			imports: [LuSafeExternalSvgPipe, HttpClientModule],
 		}),
 	],
+	argTypes: {
+	},
 } as Meta;
 
-const template: StoryFn<EmptyStatePageStory> = () => ({});
+function getTemplate(args: EmptyStatePageStory): string {
+	return `<section class="emptyState mod-page" [style.--components-emptyState-background-color]="'var(--palettes-grey-25)'">
+	<div class="emptyState-container">
+		<div class="emptyState-content">
+			<div
+				class="emptyState-content-icon"
+				aria-hidden="true"
+				[innerHtml]="'https://cdn.lucca.fr/lucca-front/assets/empty-states/message/medal-01.svg' | luSafeExternalSvg"
+			></div>
+			<div class="emptyState-content-text">
+				<h1 class="emptyState-content-heading">Empty State</h1>
+				<p>Flatus obsequiorum potest inanes pomerium obsequiorum credi homines vero caelibes orbos potest vile diversitate flatus.</p>
+				<div class="emptyState-actions">
+					<button type="button" class="button">Button</button>
+					<button type="button" class="button mod-outlined">Button</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>`;
+}
 
-export const page = template.bind({});
+const Template: StoryFn<EmptyStatePageStory> = (args: EmptyStatePageStory) => ({
+	props: args,
+	template: getTemplate(args),
+});
+
+export const Page = Template.bind({});
+Page.args = { };

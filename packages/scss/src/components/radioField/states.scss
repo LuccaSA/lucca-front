@@ -4,8 +4,8 @@
 
 @mixin checked {
 	~ .radioField-icon {
-		background-color: var(--palettes-primary-700);
-		border-color: var(--palettes-primary-700);
+		background-color: var(--palettes-product-700);
+		border-color: var(--palettes-product-700);
 
 		.radioField-icon-check {
 			transform: scale(1);
@@ -15,36 +15,36 @@
 
 @mixin hover {
 	~ .radioField-icon {
-		border-color: var(--palettes-grey-600);
+		border-color: var(--palettes-neutral-600);
 	}
 }
 
 @mixin checkedHover {
 	~ .radioField-icon {
-		background-color: var(--palettes-primary-600);
-		border-color: var(--palettes-primary-600);
+		background-color: var(--palettes-product-600);
+		border-color: var(--palettes-product-600);
 	}
 }
 
 @mixin checkedActive {
 	~ .radioField-icon {
-		background-color: var(--palettes-primary-800);
-		border-color: var(--palettes-primary-800);
+		background-color: var(--palettes-product-800);
+		border-color: var(--palettes-product-800);
 	}
 }
 
 @mixin checkedDisabled {
 	~ .radioField-icon {
-		background-color: var(--palettes-grey-500);
-		border-color: var(--palettes-grey-500);
-		color: var(--palettes-grey-500);
+		background-color: var(--palettes-neutral-500);
+		border-color: var(--palettes-neutral-500);
+		color: var(--palettes-neutral-500);
 	}
 }
 
 @mixin checkedHover {
 	~ .radioField-icon {
-		background-color: var(--palettes-primary-600);
-		border-color: var(--palettes-primary-600);
+		background-color: var(--palettes-product-600);
+		border-color: var(--palettes-product-600);
 	}
 }
 
@@ -57,7 +57,7 @@
 
 @mixin active {
 	~ .radioField-icon {
-		border-color: var(--palettes-grey-800);
+		border-color: var(--palettes-neutral-800);
 	}
 }
 
@@ -65,7 +65,7 @@
 	cursor: default;
 
 	~ .radioField-icon {
-		border-color: var(--palettes-grey-500);
+		border-color: var(--palettes-neutral-500);
 	}
 }
 

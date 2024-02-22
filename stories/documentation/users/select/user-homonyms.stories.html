@@ -12,8 +12,9 @@
 					standard="v3"
 				>
 				</lu-api-paged-searcher>
-
-				<lu-option *luForOptions="let user" [value]="user"> {{ user | luUserDisplay }} </lu-option>
+				<div class="lu-picker-content-option">
+					<lu-option *luForOptions="let user" [value]="user"> {{ user | luUserDisplay }} </lu-option>
+				</div>
 			</lu-option-picker-advanced>
 		</lu-select>
 		<span class="textfield-label">Pas de gestion des homonymes :</span>
@@ -34,12 +35,13 @@
 				</lu-api-paged-searcher>
 
 				<lu-user-homonyms></lu-user-homonyms>
+				<div class="lu-picker-content-option">
+					<lu-option *luForOptions="let user" [value]="user">
+						{{ user | luUserDisplay }}
 
-				<lu-option *luForOptions="let user" [value]="user">
-					{{ user | luUserDisplay }}
-
-					<div *ngIf="user.additionalInformation" class="u-fontStyleItalic u-textS">({{ user.additionalInformation }})</div>
-				</lu-option>
+						<div *ngIf="user.additionalInformation" class="u-fontStyleItalic u-textS">({{ user.additionalInformation }})</div>
+					</lu-option>
+				</div>
 			</lu-option-picker-advanced>
 		</lu-select>
 		<span class="textfield-label">Avec gestion des homonymes :</span>

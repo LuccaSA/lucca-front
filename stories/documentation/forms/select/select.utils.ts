@@ -1,6 +1,7 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { ALuSelectInputComponent } from '@lucca-front/ng/core-select';
-import { getStoryGenerator } from 'stories/helpers/stories';
+import { StoryObj } from '@storybook/angular';
+import { HiddenArgType } from '../../../helpers/common-arg-types';
 
 export type LegumeColor = 'green' | 'purple' | 'red' | 'orange' | 'white' | 'yellow' | 'brown';
 
@@ -10,16 +11,12 @@ export interface ILegume {
 	color: LegumeColor;
 }
 
-export interface LuSelectInputStoryComponent extends ALuSelectInputComponent<ILegume, ILegume> {
-	legumes: ILegume[];
-	clue: string;
+export type LuCoreSelectInputStoryComponent = {
 	page: number;
-	selectedLegume: ILegume | null;
-	selectedLegumes: ILegume[];
-	maxValuesShown: number;
+	legumes: ILegume[];
 	legumeColor: (legume: ILegume) => LegumeColor;
 	colorNameByColor: Record<LegumeColor, string>;
-}
+} & ALuSelectInputComponent<ILegume, ILegume | ILegume[]>;
 
 export const allLegumes: ILegume[] = [
 	{ name: 'Artichaut', index: 1, color: 'green' },
@@ -65,14 +62,27 @@ export const colorNameByColor: Record<LegumeColor, string> = {
 	brown: 'marron',
 };
 
-export const generateStory = getStoryGenerator<LuSelectInputStoryComponent>({
+export const coreSelectStory = {
 	argTypes: {
-		clearable: { control: false },
-		disabled: { control: false },
-		loading: { control: false },
-		placeholder: { control: false },
+		clearable: HiddenArgType,
+		clueChange: HiddenArgType,
+		colorNameByColor: HiddenArgType,
+		disabled: HiddenArgType,
+		grouping: HiddenArgType,
+		legumeColor: HiddenArgType,
+		legumes: HiddenArgType,
+		loading: HiddenArgType,
+		nextPage: HiddenArgType,
+		optionComparer: HiddenArgType,
+		options: HiddenArgType,
+		optionTpl: HiddenArgType,
+		overlayConfig: HiddenArgType,
+		page: HiddenArgType,
+		placeholder: HiddenArgType,
+		previousPage: HiddenArgType,
+		valueTpl: HiddenArgType,
 	},
-});
+} satisfies StoryObj<LuCoreSelectInputStoryComponent>;
 
 @Pipe({ name: 'filterLegumes', standalone: true })
 export class FilterLegumesPipe implements PipeTransform {

@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 import { NgIf } from '@angular/common';
+import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 import { LuccaIcon } from '@lucca-front/icons';
 
 @Component({
@@ -22,5 +22,5 @@ export class IconComponent {
 	size: 'XXS' | 'XS' | 'S' | 'M' | 'L' | 'XL' | 'XXL';
 
 	@Input()
-	color: 'primary' | 'secondary' | 'error' | 'warning' | 'success' | 'light' | 'placeholder' | 'inherit' = 'inherit';
+	color: 'primary' | 'secondary' | 'product' | 'error' | 'warning' | 'success' | 'light' | 'placeholder' | 'inherit' = 'inherit';
 }

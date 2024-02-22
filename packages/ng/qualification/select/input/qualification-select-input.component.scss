@@ -1,4 +1,4 @@
-@import "_definitions";
+@import '_definitions';
 @include selectInputStyle;
 
 .optionItem-groupKey {
@@ -7,7 +7,7 @@
 	line-height: var(--sizes-S-lineHeight);
 	width: 100%;
 	text-align: left;
-	color: var(--palettes-grey-600);
+	color: var(--palettes-neutral-600);
 	margin: 0;
 
 	&:first-of-type {

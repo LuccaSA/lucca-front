@@ -15,6 +15,7 @@ export interface ILuMultiSelectLabel {
 	expand: string;
 	reduce: string;
 	selectAll: string;
+	unselectAll: string;
 	loading: string;
 }
 
@@ -29,6 +30,7 @@ export const luMultiSelectTranslations: ILuTranslation<ILuMultiSelectLabel> = {
 		expand: 'Expand',
 		reduce: 'Reduce',
 		selectAll: 'Select all',
+		unselectAll: 'Unselect all',
 		loading: 'Loading...',
 	},
 	fr: {
@@ -41,6 +43,7 @@ export const luMultiSelectTranslations: ILuTranslation<ILuMultiSelectLabel> = {
 		expand: 'Étendre',
 		reduce: 'Réduire',
 		selectAll: 'Tout sélectionner',
+		unselectAll: 'Tout désélectionner',
 		loading: 'Chargement en cours...',
 	},
 	de: {
@@ -53,6 +56,7 @@ export const luMultiSelectTranslations: ILuTranslation<ILuMultiSelectLabel> = {
 		expand: 'Erweitern',
 		reduce: 'Reduzieren',
 		selectAll: 'Alles auswählen',
+		unselectAll: 'Alles abwählen',
 		loading: 'Wird geladen...',
 	},
 	es: {
@@ -65,6 +69,7 @@ export const luMultiSelectTranslations: ILuTranslation<ILuMultiSelectLabel> = {
 		expand: 'Expandir',
 		reduce: 'Reducir',
 		selectAll: 'Seleccionar todo',
+		unselectAll: 'Deseleccionar todo',
 		loading: 'Cargando...',
 	},
 	pt: {
@@ -77,6 +82,7 @@ export const luMultiSelectTranslations: ILuTranslation<ILuMultiSelectLabel> = {
 		expand: 'Expandir',
 		reduce: 'Reduzir',
 		selectAll: 'Selecionar tudo',
+		unselectAll: 'Desmarcar tudo',
 		loading: 'Carregando...',
 	},
 };

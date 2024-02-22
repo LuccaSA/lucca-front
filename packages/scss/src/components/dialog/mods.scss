@@ -1,0 +1,60 @@
+@use '@lucca-front/scss/src/commons/utils/a11y';
+@use '@lucca-front/scss/src/components/title/exports' as title;
+@use '@lucca-front/scss/src/components/keyframe/exports' as keyframe;
+
+@mixin XS {
+	--components-dialog-size: 25rem;
+}
+
+@mixin S {
+	--components-dialog-size: 30rem;
+}
+
+@mixin fitContent {
+	--components-dialog-size: fit-content;
+}
+
+@mixin L {
+	--components-dialog-size: 50rem;
+}
+
+@mixin XL {
+	--components-dialog-size: 60rem;
+}
+
+@mixin drawer {
+	@include keyframe.slideFromRight;
+
+	--components-dialog-animationOpening: slideFromRight;
+	--components-dialog-maxHeight: none;
+	--components-dialog-height: 100%;
+	--components-dialog-maxWidth: calc(100vw - var(--spacings-S));
+	--components-dialog-borderRadius: var(--commons-borderRadius-L) 0 0 var(--commons-borderRadius-L);
+	--components-dialog-inset: 0 0 0 auto;
+}
+
+@mixin fromBottom {
+	@include keyframe.slideFromBottom;
+
+	--components-dialog-animationOpening: slideFromBottom;
+	--components-dialog-maxHeight: calc(100dvh - var(--spacings-S));
+	--components-dialog-maxWidth: none;
+	--components-dialog-inset: auto 0 0 0;
+	--components-dialog-borderRadius: var(--commons-borderRadius-L) var(--commons-borderRadius-L) 0 0;
+
+	--components-dialog-width: 100%;
+	--components-dialog-height: fit-content;
+}
+
+@mixin maxContent {
+	--components-dialog-size: 100%;
+	--components-dialog-height: 100%;
+}
+
+@mixin fullScreen {
+	--components-dialog-height: 100%;
+	--components-dialog-size: 100%;
+	--components-dialog-maxWidth: none;
+	--components-dialog-maxHeight: none;
+	--components-dialog-borderRadius: 0;
+}

@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, ViewEncapsulation } from '@angular/core';
 import { FORM_FIELD_INSTANCE, FormFieldComponent, InputDirective } from '@lucca-front/ng/form-field';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NoopValueAccessorDirective } from '../noop-value-accessor.directive';
@@ -10,6 +10,7 @@ import { injectNgControl } from '../inject-ng-control';
 	imports: [ReactiveFormsModule, InputDirective],
 	hostDirectives: [NoopValueAccessorDirective],
 	templateUrl: './checkbox-input.component.html',
+	encapsulation: ViewEncapsulation.None,
 	host: {
 		class: 'checkboxField',
 	},

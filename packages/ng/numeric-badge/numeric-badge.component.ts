@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, inject, Input, OnChanges, SimpleChanges, ViewEncapsulation } from '@angular/core';
-import { NgClazz, Palette } from '@lucca-front/ng/core';
+import { LuClass, Palette } from '@lucca-front/ng/core';
 
 @Component({
 	selector: 'lu-numeric-badge',
@@ -7,14 +7,14 @@ import { NgClazz, Palette } from '@lucca-front/ng/core';
 	templateUrl: './numeric-badge.component.html',
 	styleUrls: ['./numeric-badge.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	hostDirectives: [NgClazz],
+	providers: [LuClass],
 	host: {
 		class: 'numericBadge',
 	},
 	encapsulation: ViewEncapsulation.None,
 })
 export class NumericBadgeComponent implements OnChanges {
-	#ngClass = inject(NgClazz);
+	#luClass = inject(LuClass);
 
 	@Input({ required: true })
 	/**
@@ -36,7 +36,7 @@ export class NumericBadgeComponent implements OnChanges {
 
 	ngOnChanges(changes: SimpleChanges): void {
 		if (changes['palette']?.currentValue || changes['size']?.currentValue) {
-			this.#ngClass.ngClass = [`palette-${this.palette}`, `mod-${this.size}`];
+			this.#luClass.setState([`palette-${this.palette}`, `mod-${this.size}`]);
 		}
 	}
 }

@@ -34,8 +34,8 @@
 	}
 
 	&:hover {
-		--components-clear-cross-color: var(--palettes-grey-text);
-		--components-clear-background: var(--palettes-grey-600);
+		--components-clear-cross-color: var(--palettes-neutral-text);
+		--components-clear-background: var(--palettes-neutral-600);
 	}
 
 	&:focus-visible {
@@ -43,7 +43,7 @@
 	}
 
 	&:active {
-		--components-clear-background: var(--palettes-grey-800);
+		--components-clear-background: var(--palettes-neutral-800);
 	}
 
 	//to prevent breaking change. lucca-icon is no longer needed.

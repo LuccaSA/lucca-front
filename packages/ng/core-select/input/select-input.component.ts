@@ -2,7 +2,6 @@
 import { OverlayConfig, OverlayContainer } from '@angular/cdk/overlay';
 import {
 	ChangeDetectorRef,
-	ContentChild,
 	Directive,
 	ElementRef,
 	EventEmitter,
@@ -19,7 +18,7 @@ import {
 	inject,
 } from '@angular/core';
 import { BehaviorSubject, ReplaySubject, Subject } from 'rxjs';
-import { LuOptionGroupDirective, LuSimpleSelectDefaultOptionComponent } from '../option';
+import { LuOptionGrouping, LuSimpleSelectDefaultOptionComponent } from '../option';
 import { LuSelectPanelRef } from '../panel';
 import { LuOptionContext, SELECT_LABEL, SELECT_LABEL_ID } from '../select.model';
 
@@ -72,7 +71,9 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	};
 
 	@Input() set loading(value: boolean) {
-		this.loading$.next(value);
+		if (value !== this.loading) {
+			this.loading$.next(value);
+		}
 	}
 
 	@Input() set options(options: TOption[]) {
@@ -82,7 +83,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	@Input() optionComparer: (option1: TOption, option2: TOption) => boolean = (option1, option2) => JSON.stringify(option1) === JSON.stringify(option2);
 	@Input() optionTpl?: TemplateRef<LuOptionContext<TOption>> | Type<unknown> = LuSimpleSelectDefaultOptionComponent;
 	@Input() valueTpl?: TemplateRef<LuOptionContext<TOption>> | Type<unknown>;
-	@ContentChild(LuOptionGroupDirective) grouping?: LuOptionGroupDirective<TOption, TValue, unknown>;
+	grouping?: LuOptionGrouping<TOption, unknown>;
 
 	@Output() clueChange = new EventEmitter<string>();
 	@Output() nextPage = new EventEmitter<void>();
@@ -102,19 +103,21 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	}
 
 	public clueChanged(clue: string): void {
-		this.clueChange.emit(clue);
 		if (!this.isPanelOpen) {
-			this.openPanel();
+			this.openPanel(clue);
+		} else if (this.lastEmittedClue !== clue) {
+			this.clueChange.emit(clue);
+			this.lastEmittedClue = clue;
 		}
 	}
 
 	protected _value?: TValue;
 
 	options$ = new ReplaySubject<TOption[]>(1);
-	loading$ = new ReplaySubject<boolean>(1);
+	loading$ = new BehaviorSubject(false);
 	clue: string | null = null;
 	// This is the clue stored after we selected an option to know if we should emit an empty clue on open or not
-	previousClue: string | null = null;
+	lastEmittedClue: string = '';
 
 	protected onChange?: (value: TValue | null) => void;
 	protected onTouched?: () => void;
@@ -201,16 +204,13 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 		this.inputElementRef.nativeElement.focus();
 	}
 
-	openPanel(): void {
+	openPanel(clue: string = ''): void {
 		if (this.isPanelOpen || this.disabled) {
 			return;
 		}
 
 		this.isPanelOpen$.next(true);
-		if (this.previousClue) {
-			this.clueChanged('');
-			this.previousClue = null;
-		}
+		this.clueChanged(clue);
 		this._panelRef = this.buildPanelRef();
 		this.bindInputToPanelRefEvents();
 		setTimeout(() => this.focusInput());
@@ -241,8 +241,8 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 
 	protected emptyClue(): void {
 		if (this.clue) {
-			this.previousClue = this.clue;
 			this.clue = null;
+			this.changeDetectorRef.markForCheck();
 		}
 	}
 
@@ -266,6 +266,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	public updateValue(value: TValue): void {
 		this.value = value;
 		this.emptyClue();
+		this.clueChanged('');
 		this.onChange?.(value);
 		this.onTouched?.();
 	}

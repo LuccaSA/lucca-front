@@ -10,7 +10,7 @@ export default {
 	title: 'Documentation/Texts/Status/Important',
 	argTypes: {
 		palette: {
-			options: ['', 'u-textPrimary', 'u-textSecondary', 'u-textLight', 'u-textError', 'u-textWarning', 'u-textSuccess'],
+			options: ['', 'u-textProduct', 'u-textLight', 'u-textError', 'u-textWarning', 'u-textSuccess'],
 			control: {
 				type: 'select',
 			},

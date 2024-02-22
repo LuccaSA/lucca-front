@@ -11,7 +11,7 @@ export default {
 	],
 	argTypes: {
 		palette: {
-			options: ['none', 'primary', 'grey', 'success', 'warning', 'error'],
+			options: ['none', 'product', 'neutral', 'success', 'warning', 'error'],
 			control: {
 				type: 'select',
 			},

@@ -33,6 +33,7 @@ export default {
 		},
 		state: {
 			options: [null, 'success', 'warning', 'error'],
+			description: 'Shortcut to control both icon and palette',
 			control: {
 				type: 'select',
 			},
@@ -40,7 +41,7 @@ export default {
 		size: {
 			options: ['M', 'S'],
 			control: {
-				type: 'select',
+				type: 'radio',
 			},
 		},
 		heading: {
@@ -56,11 +57,12 @@ export default {
 export const Template: StoryObj<CalloutComponent & { description: string }> = {
 	args: {
 		heading: 'Feedback or informations',
-		icon: 'info',
-		palette: 'none',
 		size: 'M',
+		state: null,
+		icon: null,
+		description: `Description with more details`,
+		palette: 'none',
 		removable: false,
 		removed: false,
-		description: `Description with more details`,
 	},
 };
