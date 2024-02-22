@@ -11,16 +11,25 @@ export class LuDialogService {
 
 	open<C>(config: LuDialogConfig<C>): LuDialogRef<C> {
 		let luDialogRef: LuDialogRef<C>;
+		let modeClasses: string[] = [];
+		switch (config.mode) {
+			case 'drawer':
+				modeClasses = ['mod-drawer'];
+				break;
+			case 'drawer-from-bottom':
+				modeClasses = ['mod-drawer', 'mod-fromBottom'];
+				break;
+		}
 		const cdkRef = this.#cdkDialog.open(config.content, {
-			ariaModal: true,
-			hasBackdrop: config.backdrop ?? true,
+			ariaModal: config.modal,
+			hasBackdrop: config.modal ?? true,
 			data: 'data' in config ? config.data : null,
 			disableClose: true,
 			closeOnDestroy: true,
-			role: config.dismissible === false ? 'alertdialog' : 'dialog',
+			role: config.alert ? 'alertdialog' : 'dialog',
 			restoreFocus: true,
 			backdropClass: 'dialog_backdrop',
-			panelClass: ['dialog', 'mod-drawer', 'mod-S'], //
+			panelClass: ['dialog', `mod-${config.size || 'M'}`, ...modeClasses],
 			ariaLabel: config.ariaLabel,
 			// If focus is first-input, focus dialog and let the component do the rest
 			// Else, just set it to config value or default to first-tabbable
@@ -38,7 +47,7 @@ export class LuDialogService {
 			...(config.cdkConfigOverride || {}),
 		});
 
-		if (config.dismissible !== false) {
+		if (!config.alert) {
 			// Setup close listeners on backdrop click and escape key by ourselves so we can hook the `canClose` method to it.
 			merge(cdkRef.backdropClick, cdkRef.keydownEvents.pipe(filter((e) => e.key === 'Escape' && !e.defaultPrevented)))
 				.pipe(

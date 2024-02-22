@@ -16,7 +16,7 @@
 	background-color: var(--colors-white-color);
 	border-radius: var(--components-dialog-borderRadius);
 	box-shadow: var(--pr-t-elevation-shadow-overlay);
-	position: fixed;
+	position: fixed !important;
 	margin: auto;
 	overflow: auto;
 	display: flex;

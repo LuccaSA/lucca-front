@@ -33,7 +33,7 @@ interface BaseLuDialogConfig<C> {
 	/**
 	 * Should we put a backdrop? Defaults to true
 	 */
-	backdrop?: boolean;
+	modal?: boolean;
 
 	/**
 	 * Can this dialog box be dismissed by clicking on the backdrop or pressing escape?
@@ -41,7 +41,7 @@ interface BaseLuDialogConfig<C> {
 	 * Defaults to true, setting this to false will also remove the close button in the header
 	 * if you're using `lu-dialog-header`.
 	 */
-	dismissible?: boolean;
+	alert?: boolean;
 
 	/**
 	 * Can be used if you don't have a header or aren't using the default one, to set an aria-label
@@ -71,6 +71,10 @@ interface BaseLuDialogConfig<C> {
 	 * @param comp the instance of the component that's inside the dialog box.
 	 */
 	canClose?: (comp: C) => boolean | Observable<boolean>;
+
+	size?: 'XS' | 'S' | 'M' | 'L' | 'XL' | 'fitContent' | `maxContent` | 'fullScreen';
+
+	mode?: 'default' | 'drawer' | 'drawer-from-bottom';
 }
 
 export type LuDialogConfig<T> = LuDialogData<T> extends never ? Omit<BaseLuDialogConfig<T>, 'data'> : BaseLuDialogConfig<T>;

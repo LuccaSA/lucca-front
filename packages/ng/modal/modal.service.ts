@@ -21,8 +21,8 @@ export class LuModal {
 				component: component,
 				data,
 			},
-			backdrop: !extendedConfig.noBackdrop,
-			dismissible: !extendedConfig.undismissable,
+			modal: !extendedConfig.noBackdrop,
+			alert: extendedConfig.undismissable,
 		});
 		/**
 		 * Submitaction, observable ou non,
