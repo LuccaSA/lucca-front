@@ -7,20 +7,14 @@ import {
 	DialogFooterComponent,
 	DialogHeaderComponent,
 	DialogOpenDirective,
-	injectDialogData,
-	injectDialogRef,
 	LuDialogConfig,
-	LuDialogRef,
 	LuDialogService,
-	injectDialogData,
 	injectDialogRef,
 	provideLuDialog,
 } from '@lucca-front/ng/dialog';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { DialogCloseDirective, DialogDismissDirective } from '@lucca-front/ng/dialog';
-import { JsonPipe } from '@angular/common';
 import { CheckboxInputComponent, TextInputComponent } from '@lucca-front/ng/forms';
-import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 import { Meta, StoryObj, applicationConfig, moduleMetadata } from '@storybook/angular';
 
 @Component({
@@ -73,12 +67,6 @@ class TestDialogStory {
 		});
 
 		ref.closed$.subscribe(console.log);
-	}
-
-	closeIn3S(ref: LuDialogRef): void {
-		setTimeout(() => {
-			ref.close();
-		}, 3000);
 	}
 }
 
