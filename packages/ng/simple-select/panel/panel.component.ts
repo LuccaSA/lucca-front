@@ -2,7 +2,7 @@ import { A11yModule, ActiveDescendantKeyManager } from '@angular/cdk/a11y';
 import { AsyncPipe, NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
 import { AfterViewInit, ChangeDetectionStrategy, Component, QueryList, ViewChildren, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { getIntl } from '@lucca-front/ng/core';
+import { PortalDirective, getIntl } from '@lucca-front/ng/core';
 import { LuSelectPanelRef, SELECT_ID, ɵLuOptionComponent, ɵgenerateGroups } from '@lucca-front/ng/core-select';
 import { EMPTY, asyncScheduler, filter, map, observeOn, take, takeUntil } from 'rxjs';
 import { debounceTime, switchMap } from 'rxjs/operators';
@@ -17,7 +17,7 @@ import { LuIsOptionSelectedPipe } from './option-selected.pipe';
 	styleUrls: ['./panel.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	standalone: true,
-	imports: [A11yModule, AsyncPipe, FormsModule, NgIf, NgFor, NgTemplateOutlet, ɵLuOptionComponent, LuIsOptionSelectedPipe],
+	imports: [A11yModule, AsyncPipe, FormsModule, NgIf, NgFor, NgTemplateOutlet, ɵLuOptionComponent, LuIsOptionSelectedPipe, PortalDirective],
 })
 export class LuSelectPanelComponent<T> implements AfterViewInit {
 	public selectInput = inject<LuSimpleSelectInputComponent<T>>(SIMPLE_SELECT_INPUT);

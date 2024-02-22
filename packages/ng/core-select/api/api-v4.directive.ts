@@ -32,7 +32,7 @@ export class LuCoreSelectApiV4Directive<T extends ILuApiItem> extends ALuCoreSel
 
 	protected httpClient = inject(HttpClient);
 
-	protected override params$ = combineLatest([this.filters$, this.sort$, this.clue$]).pipe(
+	protected override params$: Observable<Record<string, string | number | boolean>> = combineLatest([this.filters$, this.sort$, this.clue$]).pipe(
 		map(([filters, sort, clue]) => ({
 			...filters,
 			...(sort ? { sort } : {}),

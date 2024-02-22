@@ -1,4 +1,6 @@
-import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { Component, inject } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { ButtonComponent } from '@lucca-front/ng/button';
 import {
 	DialogComponent,
 	DialogContentComponent,
@@ -10,17 +12,16 @@ import {
 	LuDialogConfig,
 	LuDialogRef,
 	LuDialogService,
+	injectDialogData,
+	injectDialogRef,
 	provideLuDialog,
 } from '@lucca-front/ng/dialog';
-import { Component, inject } from '@angular/core';
-import { ButtonComponent } from '@lucca-front/ng/button';
-import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
-import { CheckboxInputComponent, TextInputComponent } from '@lucca-front/ng/forms';
-import { FormsModule } from '@angular/forms';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
-import { DialogCloseDirective } from '../../../../packages/ng/dialog/directives/dialog-close.directive';
-import { DialogDismissDirective } from '../../../../packages/ng/dialog/directives/dialog-dismiss.directive';
+import { DialogCloseDirective, DialogDismissDirective } from '@lucca-front/ng/dialog';
 import { JsonPipe } from '@angular/common';
+import { CheckboxInputComponent, TextInputComponent } from '@lucca-front/ng/forms';
+import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
+import { Meta, StoryObj, applicationConfig, moduleMetadata } from '@storybook/angular';
 
 @Component({
 	selector: 'test-dialog',

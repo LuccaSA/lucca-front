@@ -2,14 +2,15 @@ import { A11yModule, ActiveDescendantKeyManager } from '@angular/cdk/a11y';
 import { AsyncPipe, NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
 import { AfterViewInit, ChangeDetectionStrategy, Component, QueryList, ViewChildren, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { getIntl } from '@lucca-front/ng/core';
+import { PortalDirective, getIntl } from '@lucca-front/ng/core';
 import { SELECT_ID, ɵLuOptionComponent, ɵLuOptionOutletDirective, ɵgenerateGroups } from '@lucca-front/ng/core-select';
 import { EMPTY, asyncScheduler, filter, map, observeOn, take, takeUntil } from 'rxjs';
-import { skip, switchMap } from 'rxjs/operators';
+import { debounceTime, switchMap } from 'rxjs/operators';
 import { LuMultiSelectInputComponent } from '../input';
 import { LuMultiSelectPanelRef } from '../input/panel.model';
 import { MULTI_SELECT_INPUT } from '../select.model';
 import { LU_MULTI_SELECT_TRANSLATIONS } from '../select.translate';
+import { LuNotSelectedOptionsPipe } from './not-selected.pipe';
 import { LuIsOptionSelectedPipe } from './option-selected.pipe';
 import { ɵLuMultiSelectSelectedChipDirective } from './selected-chip.directive';
 
@@ -19,7 +20,20 @@ import { ɵLuMultiSelectSelectedChipDirective } from './selected-chip.directive'
 	styleUrls: ['./panel.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	standalone: true,
-	imports: [A11yModule, AsyncPipe, FormsModule, LuIsOptionSelectedPipe, NgIf, NgFor, ɵLuOptionComponent, ɵLuOptionOutletDirective, ɵLuMultiSelectSelectedChipDirective, NgTemplateOutlet],
+	imports: [
+		A11yModule,
+		AsyncPipe,
+		FormsModule,
+		LuIsOptionSelectedPipe,
+		NgIf,
+		NgFor,
+		ɵLuOptionComponent,
+		ɵLuOptionOutletDirective,
+		ɵLuMultiSelectSelectedChipDirective,
+		NgTemplateOutlet,
+		PortalDirective,
+		LuNotSelectedOptionsPipe,
+	],
 })
 export class LuMultiSelectPanelComponent<T> implements AfterViewInit {
 	protected selectInput = inject<LuMultiSelectInputComponent<T>>(MULTI_SELECT_INPUT);
@@ -66,11 +80,24 @@ export class LuMultiSelectPanelComponent<T> implements AfterViewInit {
 	}
 
 	toggleOption(option: T): void {
-		const selectedOption = this.selectedOptions.find((o) => this.optionComparer(o, option));
-		this.selectedOptions = selectedOption ? this.selectedOptions.filter((o) => o !== selectedOption) : [...this.selectedOptions, option];
+		const matchingOption = this.selectedOptions.find((o) => this.optionComparer(o, option));
+		this.selectedOptions = matchingOption ? this.selectedOptions.filter((o) => o !== matchingOption) : [...this.selectedOptions, option];
 		this.panelRef.emitValue(this.selectedOptions);
 		setTimeout(() => this.panelRef.updatePosition());
 		this._keyManager?.setActiveItem(this.optionsQL.toArray().findIndex((o) => o.option === option));
+	}
+
+	toggleOptions(notSelectedOptions: T[], groupOptions: T[]): void {
+		if (notSelectedOptions.length) {
+			// If some options are not selected, select them all
+			this.selectedOptions = [...this.selectedOptions, ...notSelectedOptions];
+		} else {
+			// If all options are already selected, unselect them all
+			this.selectedOptions = this.selectedOptions.filter((o) => !groupOptions.some((so) => this.optionComparer(so, o)));
+		}
+
+		this.panelRef.emitValue(this.selectedOptions);
+		setTimeout(() => this.panelRef.updatePosition());
 	}
 
 	protected initKeyManager(): void {
@@ -101,7 +128,8 @@ export class LuMultiSelectPanelComponent<T> implements AfterViewInit {
 		if (this.selectInput.searchable) {
 			this.selectInput.clueChange
 				.pipe(
-					switchMap(() => this.options$.pipe(skip(1), take(1))),
+					switchMap(() => this.optionsQL.changes.pipe(take(1))),
+					debounceTime(0),
 					takeUntil(this.panelRef.closed),
 				)
 				.subscribe(() => this.keyManager.setFirstItemActive());

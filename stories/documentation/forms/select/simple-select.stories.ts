@@ -4,10 +4,30 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { LuDisabledOptionDirective, LuDisplayerDirective, LuOptionDirective, LuOptionGroupDirective } from '@lucca-front/ng/core-select';
 import { LuCoreSelectApiV3Directive, LuCoreSelectApiV4Directive } from '@lucca-front/ng/core-select/api';
+import { LuCoreSelectEstablishmentsDirective } from '@lucca-front/ng/core-select/establishment';
+import { LuCoreSelectJobQualificationsDirective } from '@lucca-front/ng/core-select/job-qualification';
+import { LuCoreSelectUsersDirective } from '@lucca-front/ng/core-select/user';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
+import { LuUserDisplayPipe } from '@lucca-front/ng/user';
 import { Meta, applicationConfig, moduleMetadata } from '@storybook/angular';
-import { useDocumentationStory } from 'stories/helpers/stories';
-import { ILegume, LuSelectInputStoryComponent, allLegumes, colorNameByColor, generateStory } from './select.utils';
+import { HiddenArgType } from 'stories/helpers/common-arg-types';
+import { getStoryGenerator, useDocumentationStory } from 'stories/helpers/stories';
+import { provideCoreSelectCurrentUserId } from '../../../../packages/ng/core-select/user/me.provider';
+import { LuCoreSelectCustomEstablishmentsDirective } from './custom-establishment-example.component';
+import { LuCoreSelectCustomUsersDirective } from './custom-user-example.component';
+import { ILegume, LuCoreSelectInputStoryComponent, allLegumes, colorNameByColor, coreSelectStory } from './select.utils';
+
+export type LuSimpleSelectInputStoryComponent = LuCoreSelectInputStoryComponent & {
+	selectedLegume: ILegume | null;
+} & LuSimpleSelectInputComponent<ILegume>;
+
+const generateStory = getStoryGenerator<LuSimpleSelectInputStoryComponent>({
+	...coreSelectStory,
+	argTypes: {
+		...coreSelectStory.argTypes,
+		selectedLegume: HiddenArgType,
+	},
+});
 
 export const Basic = generateStory({
 	name: 'Basic',
@@ -194,6 +214,110 @@ export const ApiV4 = generateStory({
 	},
 });
 
+export const User = generateStory({
+	name: 'User Select',
+	description: "Pour saisir un utilisateur, il suffit d'utiliser la directive `users`.",
+	template: `
+	<lu-simple-select
+		placeholder="Placeholder..."
+		users
+		[(ngModel)]="selectedUser"
+	></lu-simple-select>
+	`,
+	neededImports: {
+		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent'],
+		'@lucca-front/ng/core-select/user': ['LuCoreSelectUsersDirective'],
+	},
+});
+
+export const UserCustom = generateStory({
+	name: 'User Select (custom)',
+	description: "Pour saisir un utilisateur, il suffit d'utiliser la directive `users`",
+	template: `
+	<lu-simple-select
+		#usersRef="luCustomUsers"
+		placeholder="Placeholder..."
+		customUsers
+		[(ngModel)]="selectedUser"
+	>
+		<ng-container *luDisplayer="let user; select: usersRef.select">
+			👉👉👉 {{ user | luUserDisplay }} 👈👈👈
+		</ng-container>
+		<ng-container *luOption="let user; select: usersRef.select">
+			{{ user | luUserDisplay }} <span class="u-textLight">(Random {{ user.myCustomProperty }})</span>
+
+			<!-- Handle homonyms -->
+			<div *ngIf="user.additionalInformation">({{ user.additionalInformation }})</div>
+		</ng-container>
+	</lu-simple-select>
+	`,
+	neededImports: {
+		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent'],
+		'@lucca-front/ng/core-select': ['LuDisplayerDirective', 'LuOptionDirective'],
+	},
+});
+
+export const Establishment = generateStory({
+	name: 'Establishment Select',
+	description: "Pour saisir un établissement, il suffit d'utiliser la directive `establishments`",
+	template: `
+	<lu-simple-select
+		placeholder="Placeholder..."
+		establishments
+		[(ngModel)]="selectedEstablishment"
+	></lu-simple-select>
+	`,
+	neededImports: {
+		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent'],
+		'@lucca-front/ng/core-select/establishment': ['LuCoreSelectEstablishmentsDirective'],
+	},
+});
+
+export const EstablishmentCustom = generateStory({
+	name: 'Establishment Select (custom)',
+	description: "Pour saisir un établissement, il suffit d'utiliser la directive `establishments`",
+	template: `
+	<lu-simple-select
+		#establishmentsRef="luCustomEstablishments"
+		placeholder="Placeholder..."
+		customEstablishments
+		[(ngModel)]="selectedEstablishment"
+	>
+		<ng-container *luDisplayer="let establishment; select: establishmentsRef.select">
+			👉👉👉 {{ establishment.name }} 👈👈👈
+		</ng-container>
+		<ng-container *luOption="let establishment; select: establishmentsRef.select">
+			{{ establishment.name }} <span class="u-textLight">(Random {{ establishment.myCustomProperty }})</span>
+		</ng-container>
+	</lu-simple-select>
+	`,
+	neededImports: {
+		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent'],
+		'@lucca-front/ng/core-select': ['LuDisplayerDirective', 'LuOptionDirective'],
+	},
+	storyPartial: {
+		args: {
+			selectedLegume: allLegumes[4],
+		},
+	},
+});
+
+export const JobQualification = generateStory({
+	name: 'JobQualification Select',
+	description: "Pour saisir une qualification, il suffit d'utiliser la directive `jobQualifications`",
+	template: `
+	<lu-simple-select
+		placeholder="Placeholder..."
+		jobQualifications
+		[(ngModel)]="selectedJobQualifications"
+	></lu-simple-select>
+	`,
+	neededImports: {
+		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent'],
+		'@lucca-front/ng/core-select/establishment': ['LuCoreSelectJobQualificationsDirective'],
+	},
+});
+
 export const GroupBy = generateStory({
 	name: 'Group options',
 	description: "Pour grouper les options, il suffit d'utiliser la directive `luOptionGroup`.",
@@ -231,7 +355,7 @@ class FilterLegumesPipe implements PipeTransform {
 	}
 }
 
-const meta: Meta<LuSelectInputStoryComponent> = {
+const meta: Meta<LuSimpleSelectInputStoryComponent> = {
 	title: 'Documentation/Forms/SimpleSelect',
 	component: LuSimpleSelectInputComponent,
 	decorators: [
@@ -241,15 +365,21 @@ const meta: Meta<LuSelectInputStoryComponent> = {
 				I18nPluralPipe,
 				LuDisplayerDirective,
 				LuOptionDirective,
+				LuUserDisplayPipe,
 				FilterLegumesPipe,
 				SlicePipe,
 				LuCoreSelectApiV3Directive,
 				LuCoreSelectApiV4Directive,
+				LuCoreSelectEstablishmentsDirective,
+				LuCoreSelectCustomEstablishmentsDirective,
+				LuCoreSelectCustomUsersDirective,
+				LuCoreSelectUsersDirective,
+				LuCoreSelectJobQualificationsDirective,
 				LuDisabledOptionDirective,
 				LuOptionGroupDirective,
 			],
 		}),
-		applicationConfig({ providers: [provideHttpClient()] }),
+		applicationConfig({ providers: [provideHttpClient(), provideCoreSelectCurrentUserId(() => 66)] }),
 	],
 	args: {
 		placeholder: 'Placeholder...',
