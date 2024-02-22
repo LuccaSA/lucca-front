@@ -3,8 +3,10 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 import { ILuModalContent, LU_MODAL_DATA, LuModal, LuModalConfig, LuModalModule } from '@lucca-front/ng/modal';
 import { LuToastsModule, LuToastsService } from '@lucca-front/ng/toast';
 import { Meta, applicationConfig, moduleMetadata } from '@storybook/angular';
-import { map, shareReplay, timer } from 'rxjs';
+import { map, of, shareReplay, timer } from 'rxjs';
 import { generateMarkdownCodeBlock, getStoryGenerator, useDocumentationStory } from 'stories/helpers/stories';
+import { delay } from 'rxjs/operators';
+import { ButtonComponent } from '../../../../packages/ng/button/button.component';
 
 type StoryComponent = LuModalConfig & { useDynamicContent: boolean; message: string };
 
@@ -90,9 +92,9 @@ class ModalDynamicContentComponent implements ILuModalContent {
 	standalone: true,
 	template: `
 		<lu-toasts [sources]="[]"></lu-toasts>
-		<button type="button" class="button" (click)="openModal()">Open</button>
+		<button type="button" luButton (click)="openModal()">Open</button>
 	`,
-	imports: [LuToastsModule],
+	imports: [LuToastsModule, ButtonComponent],
 })
 class ModalStories {
 	@Input() mode: 'modal' | 'sidepanel' = 'modal';
@@ -115,7 +117,14 @@ class ModalStories {
 			noBackdrop: this.noBackdrop ?? false,
 			undismissable: this.undismissable ?? false,
 		};
-		const options = this.mode === 'sidepanel' ? { ...baseOptions, position: this.position, mode: this.mode } : baseOptions;
+		const options =
+			this.mode === 'sidepanel'
+				? {
+						...baseOptions,
+						position: this.position,
+						mode: this.mode,
+				  }
+				: baseOptions;
 		const data = this.message ? { message: this.message } : {};
 
 		const ref = this.modal.open(cmp, data, options);

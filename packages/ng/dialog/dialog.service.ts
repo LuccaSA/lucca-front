@@ -20,7 +20,7 @@ export class LuDialogService {
 			role: config.dismissible === false ? 'alertdialog' : 'dialog',
 			restoreFocus: true,
 			backdropClass: 'dialog_backdrop',
-			panelClass: 'dialog',
+			panelClass: ['dialog', 'mod-drawer', 'mod-S'], //
 			ariaLabel: config.ariaLabel,
 			// If focus is first-input, focus dialog and let the component do the rest
 			// Else, just set it to config value or default to first-tabbable

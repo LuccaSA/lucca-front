@@ -22,6 +22,17 @@
 	display: flex;
 	flex-direction: column;
 
+	.dialog-inside-header-button {
+		@include button.text;
+		@include button.S;
+		@include button.onlyIconS;
+
+		align-self: start;
+		justify-self: end;
+		grid-area: close;
+		display: var(--components-dialog-insideHeaderButtonDisplay);
+	}
+
 	@at-root ($atRoot) {
 		.dialog-inside {
 			display: flex;
@@ -39,17 +50,6 @@
 			position: sticky;
 			display: grid;
 			top: 0;
-		}
-
-		.dialog-inside-header-button {
-			@include button.text;
-			@include button.S;
-			@include button.onlyIconS;
-
-			align-self: start;
-			justify-self: end;
-			grid-area: close;
-			display: var(--components-dialog-insideHeaderButtonDisplay);
 		}
 
 		.dialog-inside-content {

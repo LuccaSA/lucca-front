@@ -3,17 +3,20 @@ import { Observable } from 'rxjs';
 import { ComponentType } from '@angular/cdk/overlay';
 import { AutoFocusTarget, DialogConfig } from '@angular/cdk/dialog';
 
-export const dialogData = Symbol.for('luDialogData');
-export const dialogResult = Symbol.for('luDialogResult');
+const ɵdialogData = Symbol.for('luDialogData');
+const ɵdialogResult = Symbol.for('luDialogResult');
+
+export type ɵDialogDataFlag = { [ɵdialogData]: unknown };
+export type ɵDialogResultFlag<R> = { [ɵdialogResult]: R };
 
 export type LuDialogData<T> = {
-	[K in keyof T]: T[K] extends { [dialogData]: infer D } ? D : never;
+	[K in keyof T]: T[K] extends ɵDialogDataFlag ? Omit<T[K], typeof ɵdialogData> : never;
 }[keyof T];
 
 export type LuDialogResult<C> = keyof C extends never
 	? void
 	: {
-			[K in keyof C]: C[K] extends { [dialogResult]: infer R } ? R : void;
+			[K in keyof C]: C[K] extends ɵDialogResultFlag<infer R> ? R : void;
 	  }[keyof C];
 
 interface BaseLuDialogConfig<C> {
