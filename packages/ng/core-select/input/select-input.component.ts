@@ -266,6 +266,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	public updateValue(value: TValue): void {
 		this.value = value;
 		this.emptyClue();
+		this.clueChanged('');
 		this.onChange?.(value);
 		this.onTouched?.();
 	}
