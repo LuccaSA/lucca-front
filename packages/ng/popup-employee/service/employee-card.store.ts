@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { shareReplay } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { catchError, map, shareReplay } from 'rxjs/operators';
 
 import { ILuEmployeeCardStore } from './employee-service.model';
 import { LuEmployeeCard } from '../employee.model';

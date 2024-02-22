@@ -3,11 +3,13 @@
 
 import { FlexibleConnectedPositionStrategy, Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
-import { AfterViewInit, Directive, ElementRef, HostBinding, HostListener, Input, OnDestroy, ViewContainerRef } from '@angular/core';
+import { AfterViewInit, Directive, ElementRef, HostBinding, HostListener, inject, Input, OnDestroy, ViewContainerRef } from '@angular/core';
 import { ALuPopoverTrigger, LuPopoverScrollStrategy, LuPopoverTarget } from '@lucca-front/ng/popover';
 import { ILuUser } from '@lucca-front/ng/user';
 import { LuEmployeeCardPanelComponent } from '../panel/employee-card-panel.component';
 import { Observable } from 'rxjs';
+import { USER_POPOVER_IS_ACTIVATED } from '../../user-popover.provider';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 /**
  * This directive is intended to be used in conjunction with an lu-dropdown tag.  It is
@@ -20,7 +22,6 @@ import { Observable } from 'rxjs';
 	exportAs: 'LuEmployeeCardTrigger',
 })
 export class LuEmployeeCardTriggerDirective extends ALuPopoverTrigger<LuEmployeeCardPanelComponent, LuPopoverTarget> implements AfterViewInit, OnDestroy {
-
 	@Input('luEmployeeCard') public set user(c: ILuUser) {
 		if (this.panel) {
 			this.panel.user = c;
@@ -74,24 +75,22 @@ export class LuEmployeeCardTriggerDirective extends ALuPopoverTrigger<LuEmployee
 	protected override _portal: ComponentPortal<LuEmployeeCardPanelComponent>;
 	protected _user: ILuUser = { id: 0, firstName: '', lastName: '' };
 
-	public constructor(
-		protected override _overlay: Overlay,
-		protected override _elementRef: ElementRef<HTMLElement>,
-		protected override _viewContainerRef: ViewContainerRef) {
+	public constructor(protected override _overlay: Overlay, protected override _elementRef: ElementRef<HTMLElement>, protected override _viewContainerRef: ViewContainerRef) {
 		super(_overlay, _elementRef, _viewContainerRef);
-		// TODO : Remove this condition when plug on real feature flag
-		if (location.href.includes('localhost') || location.href.includes('demofiggoflex') || !location.href.includes('lucca.ilucca')) {
-			this.triggerEvent = 'hover';
-		} else {
-			this.triggerEvent = 'none';
-		}
 		this.target = new LuPopoverTarget();
 		this.target.elementRef = this._elementRef;
 		this._triggerId = this._elementRef.nativeElement.getAttribute('id') || this._triggerId;
 		this.target.position = 'below';
 		this.target.alignment = 'left';
+		this.triggerEvent = 'none';
 		this.enterDelay = 300;
 		this.leaveDelay = 200;
+
+		inject(USER_POPOVER_IS_ACTIVATED)
+			.pipe(takeUntilDestroyed())
+			.subscribe((isActivated) => {
+				this.triggerEvent = isActivated ? 'hover' : 'none';
+			});
 
 		this._handleTabindex = this._shouldHandleTabindex();
 
