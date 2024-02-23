@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { catchError, map, shareReplay } from 'rxjs/operators';
+import { Observable, OperatorFunction } from 'rxjs';
+import { shareReplay } from 'rxjs/operators';
 
 import { ILuEmployeeCardStore } from './employee-service.model';
 import { LuEmployeeCard } from '../employee.model';
@@ -18,7 +18,10 @@ export class LuEmployeeCardStore implements ILuEmployeeCardStore {
 		if (this.#cache.has(id)) {
 			return this.#cache.get(id)!;
 		}
-		const employeeCard$ = this.#http.get<LuEmployeeCard>(`${this._api}/${id}`).pipe(shareReplay(1));
+		const employeeCard$ = this.#http.get<LuEmployeeCard>(`${this._api}/${id}`).pipe(
+			cacheImage((c) => c.pictureHref),
+			shareReplay(1),
+		);
 
 		this.#cache.set(id, employeeCard$);
 		return employeeCard$;
@@ -31,4 +34,27 @@ export class LuEmployeeCardStore implements ILuEmployeeCardStore {
 			this.#cache.clear();
 		}
 	}
+}
+
+export function cacheImage<T>(accessor: (value: T) => string | undefined): OperatorFunction<T, T> {
+	return function(source: Observable<T>): Observable<T> {
+		return new Observable((subscriber) => {
+			source.subscribe({
+				next(value) {
+					const imagePath = accessor(value);
+					if (!imagePath) {
+						subscriber.next(value);
+					}
+					const img = new Image();
+					img.src = imagePath!;
+					img.onload = function() {
+						subscriber.next(value);
+					};
+					img.onerror = function() {
+						subscriber.next(value);
+					};
+				},
+			});
+		});
+	};
 }

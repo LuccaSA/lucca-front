@@ -42,11 +42,7 @@
 						</div>
 					</ng-template>
 					<ng-template #workLocationDisplay>
-						<span
-							*ngIf="employee.dtContractEnd | isFutureOrToday"
-							aria-hidden="true"
-							class="lucca-icon icon-payPeriod mod-S"
-						></span>
+						<span *ngIf="employee.dtContractEnd | isFutureOrToday" aria-hidden="true" class="lucca-icon icon-payPeriod mod-S"></span>
 						<span
 							*ngIf="!(employee.dtContractEnd | isFutureOrToday)"
 							aria-hidden="true"
@@ -54,11 +50,14 @@
 						></span>
 						<span class="userCard-details-info-detail-link-state">
 							<ng-container *ngIf="employee.isWorkingNow === true">
-								{{ employee.currentWorkLocation?.name }}
-								<ng-container *ngIf="employee.currentWorkLocation?.area">
-									-
-									<span class="u-textGrey600">{{employee.currentWorkLocation?.area?.name}}</span>
+								<ng-container *ngIf="employee.currentWorkLocation">
+									{{ employee.currentWorkLocation?.name }}
+									<ng-container *ngIf="employee.currentWorkLocation?.area">
+										-
+										<span class="u-textGrey600">{{employee.currentWorkLocation?.area?.name}}</span>
+									</ng-container>
 								</ng-container>
+								<ng-container *ngIf="!employee.currentWorkLocation"> {{intl.EMPLOYEE_CARD_PANEL_PRESENT_LABEL }} </ng-container>
 							</ng-container>
 
 							<ng-container *ngIf="employee.isWorkingNow === false">
