@@ -25,12 +25,6 @@ export class LuModal {
 			modal: !extendedConfig.noBackdrop,
 			alert: extendedConfig.undismissable,
 		});
-		/**
-		 * Submitaction, observable ou non,
-		 * 	Si observable => gérer loading/success/error
-		 * 	Sinon, rien à faire?
-		 *
-		 */
 		return new DialogRefAdapter<D, T>(dialogRef);
 	}
 
