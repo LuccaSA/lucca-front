@@ -1,0 +1,5 @@
+@use 'exports' as *;
+.indexTable {
+    @include vars;
+    @include component;
+}

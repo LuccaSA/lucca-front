@@ -1,0 +1,95 @@
+@use '@lucca-front/scss/src/commons/utils/a11y';
+
+@mixin component($atRoot: 'without: rule') {
+    position: relative;
+    display: table;
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 var(--components-indexTable-row-spacing);
+    color: var(--palettes-neutral-800);
+
+    @at-root ($atRoot) {
+        .indexTable-head {
+            display: table-header-group;
+            vertical-align: bottom;
+        }
+
+        .indexTable-head-row {
+            display: table-row;
+        }
+
+        .indexTable-body {
+            display: table-row-group;
+        }
+
+        .indexTable-body-row {
+            cursor: pointer;
+            border-radius: var(--commons-borderRadius-L);
+
+            &:is(:focus-within, :hover) {
+                --components-indexTable-cell-shadow: var(--commons-boxShadow-L);
+            }
+
+            &:focus-within {
+                @include a11y.focusVisible();
+            }
+
+            &:hover {
+                --components-indexTable-cell-inset-x: var(--components-indexTable-hover-offset-x);
+                --components-indexTable-cell-inset-y: var(--components-indexTable-hover-offset-y);
+            }
+        }
+
+        .indexTable-head-row-cell,
+        .indexTable-body-row-cell {
+            display: table-cell;
+            padding: var(--components-indexTable-padding);
+        }
+
+        .indexTable-head-row-cell {
+            color: var(--palettes-neutral-600);
+            font-size: var(--sizes-S-fontSize);
+            line-height: var(--sizes-S-lineHeight);
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .indexTable-body-row-cell {
+            position: relative;
+            display: table-cell;
+            border-radius: var(--components-table-cardList-cell-border-radius);
+            border-bottom: var(--components-table-cardList-cell-spacing) solid transparent;
+
+            &::before,
+            &::after {
+                transition-property: inset, box-shadow;
+                transition-duration: var(--commons-animations-durations-standard);
+            }
+
+            &::before {
+                content: '';
+                position: absolute;
+                inset: var(--components-indexTable-cell-inset-y, 0) var(--components-indexTable-cell-inset-x-right, 0)
+                    var(--components-indexTable-cell-inset-y, 0) var(--components-indexTable-cell-inset-x-left, 0);
+                z-index: -1;
+                border-radius: var(--components-indexTable-cell-border-radius, 0);
+                background: var(--colors-white-color);
+                box-shadow: var(--components-indexTable-shadow-mask),
+                    var(--components-indexTable-cell-shadow, var(--commons-boxShadow-S));
+            }
+
+            &:first-child {
+                --components-indexTable-shadow-mask: 0 0 0 0;
+                --components-indexTable-cell-border-radius: var(--commons-borderRadius-L) 0 0
+                    var(--commons-borderRadius-L);
+                --components-indexTable-cell-inset-x-left: var(--components-indexTable-cell-inset-x);
+            }
+
+            &:last-child {
+                --components-indexTable-cell-border-radius: 0 var(--commons-borderRadius-L)
+                    var(--commons-borderRadius-L) 0;
+                --components-indexTable-cell-inset-x-right: var(--components-indexTable-cell-inset-x);
+            }
+        }
+    }
+}
