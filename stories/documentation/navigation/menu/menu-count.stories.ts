@@ -62,10 +62,10 @@ function getTemplate(args: MenuCountStory): string {
 				</a>
 			</li>
 			<li class="menu-list-item">
-				<span class="menu-list-item-action is-disabled">
+				<a class="menu-list-item-action is-disabled">
 					Menu
 					<span class="numericBadge">9</span>
-				</span>
+				</a>
 			</li>
 		</ul>
 	</nav>

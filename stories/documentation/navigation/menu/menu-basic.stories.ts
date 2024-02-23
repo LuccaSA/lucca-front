@@ -59,9 +59,9 @@ function getTemplate(args: MenuBasicStory): string {
 				</a>
 			</li>
 			<li class="menu-list-item">
-				<span class="menu-list-item-action is-disabled">
+				<a class="menu-list-item-action is-disabled">
 					Menu 3
-				</span>
+				</a>
 			</li>
 		</ul>	
 	</nav>
