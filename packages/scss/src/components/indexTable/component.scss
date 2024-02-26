@@ -70,7 +70,6 @@
             z-index: 1;
             padding: var(--components-indexTable-padding);
             border-radius: var(--components-table-cardList-cell-border-radius);
-            border-bottom: var(--components-table-cardList-cell-spacing) solid transparent;
 
             // apparence of the first cell with a card apparence.
             // we do this because there migh be one or two cells before without background and containing a checkbox

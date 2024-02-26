@@ -6,4 +6,8 @@
     &.mod-selectable {
         @include selectable;
     }
+
+    &.mod-stackable {
+        @include stackable;
+    }
 }

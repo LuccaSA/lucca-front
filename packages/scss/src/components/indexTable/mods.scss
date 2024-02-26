@@ -8,6 +8,54 @@
             --components-indexTable-cell-shadow: 0 0 0 var(--commons-divider-width) var(--palettes-product-700);
             --components-indexTable-shadow-mask-default: -10px 0px 0px 0px var(--palettes-product-50);
             --components-indexTable-cell-transition-property: inset;
+            //is stackable : change the stack color
+            --components-indexTable-stack-svg: var(--components-indexTable-stack-svg-selected);
+        }
+    }
+}
+
+@mixin stackable {
+    .indexTable-body-row {
+        &.mod-stack2,
+        &.mod-stack3 {
+            --components-indexTable-row-stack-border-bottom: var(--components-indexTable-stack2-row-spacing);
+            --components-indexTable-row-stack2-background-image: var(--components-indexTable-stack-svg);
+        }
+
+        &.mod-stack3 {
+            --components-indexTable-row-stack-border-bottom: var(--components-indexTable-stack3-row-spacing);
+            --components-indexTable-row-stack3-background-image: var(--components-indexTable-stack-svg);
+        }
+    }
+
+    .indexTable-body-row-cell {
+        // because we can't set an individual spacing for each row, transparent border are used for this
+        border-bottom: var(--components-indexTable-row-stack-border-bottom) solid transparent;
+
+        --components-indexTable-row-stack2-background-position: -9px 0;
+        --components-indexTable-row-stack3-background-position: -5px 4px;
+        & ~ .indexTable-body-row-cell {
+            --components-indexTable-row-stack2-background-position: -19px 0;
+            --components-indexTable-row-stack3-background-position: -19px 4px;
+        }
+        &:last-child {
+            --components-indexTable-row-stack2-background-position: calc(100% + 7px) 0;
+            --components-indexTable-row-stack3-background-position: calc(100% + 3px) 4px;
+        }
+
+        // stack apparence
+        &::after {
+            content: '';
+            position: absolute;
+            inset: 0 var(--components-indexTable-cell-inset-x-right, 0)
+                calc(var(--components-indexTable-row-stack-border-bottom) * -1)
+                var(--components-indexTable-cell-inset-x-left, 0);
+            z-index: -2;
+            background-image: var(--components-indexTable-row-stack2-background-image, none),
+                var(--components-indexTable-row-stack3-background-image, none);
+            background-position: var(--components-indexTable-row-stack2-background-position, 0 0),
+                var(--components-indexTable-row-stack3-background-position, 0 0);
+            background-repeat: no-repeat, no-repeat;
         }
     }
 }
