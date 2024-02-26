@@ -1,0 +1,3 @@
+@function transparentize($color, $amount: 0.5, $space: var(--commons-colorSpace, srgb)) {
+	@return color-mix(in $space, $color, transparent $amount * 100%);
+}

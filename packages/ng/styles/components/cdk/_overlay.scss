@@ -1,4 +1,5 @@
 @use '@lucca-front/scss/src/components/keyframe/exports' as keyframe;
+@use '@lucca-front/scss/src/commons/utils/color';
 
 :root {
 	--components-cdk-backdrop-opacity: 0.4;
@@ -46,7 +47,7 @@
 	}
 
 	&.cdk-overlay-dark-backdrop {
-		background-color: rgba(var(--colors-neutral-900-rgb), 0.6);
+		background-color: color.transparentize(var(--palettes-neutral-900), 0.4);
 	}
 	&.cdk-overlay-transparent-backdrop {
 		background: 0 0;

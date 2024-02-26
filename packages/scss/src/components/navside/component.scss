@@ -1,5 +1,6 @@
 @use '@lucca-front/scss/src/commons/utils/loading';
 @use '@lucca-front/scss/src/commons/utils/a11y';
+@use '@lucca-front/scss/src/commons/utils/color';
 @use '@lucca-front/icons/src/icon/exports' as icon;
 
 @mixin component($atRoot: 'without: rule') {
@@ -196,7 +197,7 @@
 			}
 
 			&::before {
-				background-color: rgba(var(--colors-neutral-900-rgb), 0.15);
+				background-color: color.transparentize(var(--palettes-neutral-900), 0.85);
 				border-radius: 1em;
 				height: 1em;
 				width: 1em;

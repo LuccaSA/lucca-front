@@ -1,3 +1,5 @@
+@use '@lucca-front/scss/src/commons/utils/color';
+
 @mixin L {
 	height: var(--components-loading-size-big);
 	padding: var(--components-loading-size-big) 0 0;
@@ -72,7 +74,7 @@
 	color: var(--colors-white-color);
 
 	&::after {
-		border-color:  rgba(255, 255, 255, 0.66);
+		border-color: color.transparentize(var(--colors-white-color), 0.44);
 		border-top-color: transparent;
 	}
 }

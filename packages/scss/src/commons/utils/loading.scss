@@ -1,3 +1,4 @@
+@use '@lucca-front/scss/src/commons/utils/color';
 @use '@lucca-front/scss/src/components/keyframe/exports' as keyframe;
 
 @mixin spinner($size: 1.5rem) {
@@ -24,7 +25,7 @@
 	}
 }
 
-@mixin gradient($backgroundColor: transparent, $color: rgba(var(--colors-neutral-900-rgb), 0.1)) {
+@mixin gradient($backgroundColor: transparent, $color: color.transparentize(var(--colors-neutral-900), 0.9)) {
 	@keyframes loadingGradient {
 		0% {
 			background-position: 100% 0%;

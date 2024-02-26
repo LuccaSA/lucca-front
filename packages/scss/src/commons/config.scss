@@ -1,4 +1,5 @@
 @use 'sass:list';
+@use '@lucca-front/scss/src/commons/utils/color';
 
 $product: 'brand' !default;
 $palettesShades: text, 25, 50, 100, 200, 300, 400, 500, 600, 700, 800, 900;
@@ -317,13 +318,14 @@ $colors: (
 	'black': #121212,
 );
 
-// grey-900 is deprecated
+// $colorsRgb are deprecated
 $colorsRgb: (
 	'white': '255, 255, 255',
 	'grey-400': '172, 187, 215',
+	'neutral-400': '172, 187, 215',
 	'grey-900': '19, 29, 53',
 	'neutral-900': '19, 29, 53',
-);
+) !default;
 
 // switch case
 $prod: map-get(
@@ -436,49 +438,55 @@ $borderRadius: (
 	'full': 9999px,
 ) !default;
 
+// $elevations are deprecated
 $elevations: (
-	// deprecated
-	'1': '0 1px 2px rgba(var(--colors-neutral-900-rgb), 0.06), 0px 2px 8px rgba(var(--colors-neutral-900-rgb), 0.04)',
+	'1':
+		'0 1px 2px #{color.transparentize(var(--palettes-neutral-900), 0.94)}, 0px 2px 8px #{color.transparentize(var(--palettes-neutral-900), 0.96)}',
 	'2':
-		'0 0 0 1px rgba(var(--colors-neutral-900-rgb), 0.03), 0 1px 2px rgba(var(--colors-neutral-900-rgb), 0.02), 0 2px 6px rgba(var(--colors-neutral-900-rgb), 0.05)',
+		'0 0 0 1px #{color.transparentize(var(--palettes-neutral-900), 0.97)}, 0 1px 2px #{color.transparentize(var(--palettes-neutral-900), 0.98)}, 0 2px 6px #{color.transparentize(var(--palettes-neutral-900), 0.95)}',
 	'3':
-		'0 0 0 1px rgba(var(--colors-neutral-900-rgb), 0.03), 0 2px 4px rgba(var(--colors-neutral-900-rgb), 0.02), 0 4px 10px rgba(var(--colors-neutral-900-rgb), 0.06)',
+		'0 0 0 1px #{color.transparentize(var(--palettes-neutral-900), 0.97)}, 0 2px 4px #{color.transparentize(var(--palettes-neutral-900), 0.98)}, 0 4px 10px #{color.transparentize(var(--palettes-neutral-900), 0.94)}',
 	'4':
-		'0 0 0 1px rgba(var(--colors-neutral-900-rgb), 0.03), 0 3px 6px rgba(var(--colors-neutral-900-rgb), 0.04), 0 4px 16px rgba(var(--colors-neutral-900-rgb), 0.08)',
+		'0 0 0 1px #{color.transparentize(var(--palettes-neutral-900), 0.97)}, 0 3px 6px #{color.transparentize(var(--palettes-neutral-900), 0.96)}, 0 4px 16px #{color.transparentize(var(--palettes-neutral-900), 0.92)}',
 	'5':
-		'0 0 0 1px rgba(var(--colors-neutral-900-rgb), 0.03), 0 4px 8px rgba(var(--colors-neutral-900-rgb), 0.06), 0 12px 32px rgba(var(--colors-neutral-900-rgb), 0.08)',
+		'0 0 0 1px #{color.transparentize(var(--palettes-neutral-900), 0.97)}, 0 4px 8px #{color.transparentize(var(--palettes-neutral-900), 0.94)}, 0 12px 32px #{color.transparentize(var(--palettes-neutral-900), 0.92)}',
 	'6':
-		'0 0 0 1px rgba(var(--colors-neutral-900-rgb), 0.03), -2px 2px 8px rgba(var(--colors-neutral-900-rgb), 0.04), -12px 6px 24px rgba(var(--colors-neutral-900-rgb), 0.06)'
+		'0 0 0 1px #{color.transparentize(var(--palettes-neutral-900), 0.97)}, -2px 2px 8px #{color.transparentize(var(--palettes-neutral-900), 0.96)}, -12px 6px 24px #{color.transparentize(var(--palettes-neutral-900), 0.94)}',
 );
 
+// $boxShadows are deprecated
 $boxShadows: (
-	// deprecated
-	'XXS': '0 2px 8px rgba(var(--colors-neutral-900-rgb), .2), 0 1px 2px rgba(var(--colors-neutral-900-rgb), 0.15)',
-	'XS': '0 1px 2px rgba(var(--colors-neutral-900-rgb), 0.06), 0 2px 8px rgba(var(--colors-neutral-900-rgb), 0.04)',
+	'XXS':
+		'0 2px 8px #{color.transparentize(var(--palettes-neutral-900), 0.98)}, 0 1px 2px #{color.transparentize(var(--palettes-neutral-900), 0.85)}',
+	'XS':
+		'0 1px 2px #{color.transparentize(var(--palettes-neutral-900), 0.94)}, 0 2px 8px #{color.transparentize(var(--palettes-neutral-900), 0.96)}',
 	'S':
-		'0 0 0 1px rgba(var(--colors-neutral-900-rgb), 0.03), 0 1px 2px rgba(var(--colors-neutral-900-rgb), 0.02), 0 2px 6px rgba(var(--colors-neutral-900-rgb), 0.06)',
+		'0 0 0 1px #{color.transparentize(var(--palettes-neutral-900), 0.97)}, 0 1px 2px #{color.transparentize(var(--palettes-neutral-900), 0.98)}, 0 2px 6px #{color.transparentize(var(--palettes-neutral-900), 0.94)}',
 	'M':
-		'0 0 0 1px rgba(var(--colors-neutral-900-rgb), 0.03), 0 2px 4px rgba(var(--colors-neutral-900-rgb), 0.02), 0 4px 10px rgba(var(--colors-neutral-900-rgb), 0.06)',
+		'0 0 0 1px #{color.transparentize(var(--palettes-neutral-900), 0.97)}, 0 2px 4px #{color.transparentize(var(--palettes-neutral-900), 0.98)}, 0 4px 10px #{color.transparentize(var(--palettes-neutral-900), 0.94)}',
 	'L':
-		'0 0 0 1px rgba(var(--colors-neutral-900-rgb), 0.03), 0 3px 6px rgba(var(--colors-neutral-900-rgb), 0.04), 0 4px 16px rgba(var(--colors-neutral-900-rgb), 0.08)',
+		'0 0 0 1px #{color.transparentize(var(--palettes-neutral-900), 0.97)}, 0 3px 6px #{color.transparentize(var(--palettes-neutral-900), 0.96)}, 0 4px 16px #{color.transparentize(var(--palettes-neutral-900), 0.92)}',
 	'XL':
-		'0 0 0 1px rgba(var(--colors-neutral-900-rgb), 0.03), 0 4px 8px rgba(var(--colors-neutral-900-rgb), 0.06), 0 12px 32px rgba(var(--colors-neutral-900-rgb), 0.08)',
+		'0 0 0 1px #{color.transparentize(var(--palettes-neutral-900), 0.97)}, 0 4px 8px #{color.transparentize(var(--palettes-neutral-900), 0.94)}, 0 12px 32px #{color.transparentize(var(--palettes-neutral-900), 0.92)}',
 	'XXL':
-		'0 0 0 1px rgba(var(--colors-neutral-900-rgb), 0.03), -2px 2px 8px rgba(var(--colors-neutral-900-rgb), 0.04), -12px 6px 24px rgba(var(--colors-neutral-900-rgb), 0.06)',
+		'0 0 0 1px #{color.transparentize(var(--palettes-neutral-900), 0.97)}, -2px 2px 8px #{color.transparentize(var(--palettes-neutral-900), 0.96)}, -12px 6px 24px #{color.transparentize(var(--palettes-neutral-900), 0.94)}',
 );
 
 $elevation: (
 	surface: (
-		'sunken': 'var(--palettes-grey-50)',
-		'default': 'var(--palettes-grey-25)',
-		'raised': 'var(--colors-white-color)',
-		'backdrop': 'rgba(var(--colors-grey-400-rgb), 0.4)',
+		'sunken': var(--palettes-neutral-50),
+		'default': var(--palettes-neutral-25),
+		'raised': var(--colors-white-color),
+		'backdrop': color.transparentize(var(--palettes-neutral-400), 0.6),
 	),
 	shadow: (
-		'raised': '0 0 0 1px rgba(var(--colors-grey-400-rgb), 0.08), 0 1px 2px rgba(var(--colors-grey-400-rgb), 0.4), 0 2px 4px rgba(var(--colors-grey-400-rgb), 0.2)',
-		'overflow': '0 0 0 1px rgba(var(--colors-grey-400-rgb), 0.08), 0 0 4px rgba(var(--colors-grey-400-rgb), 0.32), 0 0 8px rgba(var(--colors-grey-400-rgb), 0.24)',
-		'overlay': '0 0 0 1px rgba(var(--colors-grey-400-rgb), 0.08), 0 4px 8px rgba(var(--colors-grey-400-rgb), 0.24), 0 4px 12px 2px rgba(var(--colors-grey-400-rgb), 0.08)',
-	)
+		'raised':
+			'0 0 0 1px #{color.transparentize(var(--palettes-neutral-400), 0.92)}, 0 1px 2px #{color.transparentize(var(--palettes-neutral-400), 0.6)}, 0 2px 4px #{color.transparentize(var(--palettes-neutral-400), 0.8)}',
+		'overflow':
+			'0 0 0 1px #{color.transparentize(var(--palettes-neutral-400), 0.92)}, 0 0 4px #{color.transparentize(var(--palettes-neutral-300), 0.68)}, 0 0 8px #{color.transparentize(var(--palettes-neutral-400), 0.76)}',
+		'overlay':
+			'0 0 0 1px #{color.transparentize(var(--palettes-neutral-400), 0.92)}, 0 4px 8px #{color.transparentize(var(--palettes-neutral-400), 0.76)}, 0 4px 12px 2px #{color.transparentize(var(--palettes-neutral-400), 0.92)}',
+	),
 );
 
 $disabled: (
