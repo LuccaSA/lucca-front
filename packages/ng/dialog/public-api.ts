@@ -6,3 +6,5 @@ export * from './dialog-header/dialog-header.component';
 export * from './dialog-footer/dialog-footer.component';
 export * from './dialog-content/dialog-content.component';
 export * from './directives/dialog-open.directive';
+export * from './directives/dialog-close.directive';
+export * from './directives/dialog-dismiss.directive';

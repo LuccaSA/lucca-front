@@ -16,11 +16,22 @@
 	background-color: var(--colors-white-color);
 	border-radius: var(--components-dialog-borderRadius);
 	box-shadow: var(--pr-t-elevation-shadow-overlay);
-	position: fixed;
+	position: fixed !important;
 	margin: auto;
 	overflow: auto;
 	display: flex;
 	flex-direction: column;
+
+	.dialog-inside-header-button {
+		@include button.text;
+		@include button.S;
+		@include button.onlyIconS;
+
+		align-self: start;
+		justify-self: end;
+		grid-area: close;
+		display: var(--components-dialog-insideHeaderButtonDisplay);
+	}
 
 	@at-root ($atRoot) {
 		.dialog-form,
@@ -40,17 +51,6 @@
 			position: sticky;
 			display: grid;
 			top: 0;
-		}
-
-		.dialog-inside-header-button {
-			@include button.text;
-			@include button.S;
-			@include button.onlyIconS;
-
-			align-self: start;
-			justify-self: end;
-			grid-area: close;
-			display: var(--components-dialog-insideHeaderButtonDisplay);
 		}
 
 		.dialog-inside-content {

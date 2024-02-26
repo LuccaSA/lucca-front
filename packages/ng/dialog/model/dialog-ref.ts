@@ -41,7 +41,7 @@ export class LuDialogRef<C = unknown> {
 
 	dismiss(): void {
 		// If we can't dismiss this dialog box, just ignore the dismiss call.
-		if (this.config.dismissible === false) {
+		if (this.config.alert) {
 			return;
 		}
 		const canClose = this.config.canClose?.(this.instance) ?? true;

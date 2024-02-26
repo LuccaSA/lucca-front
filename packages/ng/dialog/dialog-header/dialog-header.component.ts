@@ -30,7 +30,7 @@ export class DialogHeaderComponent implements OnInit {
 	@Input('id')
 	id: string;
 
-	dismissible = this.#ref.config.dismissible !== false;
+	dismissible = !this.#ref.config.alert;
 
 	close(): void {
 		this.#ref.dismiss();
