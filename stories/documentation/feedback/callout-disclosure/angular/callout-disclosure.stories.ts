@@ -14,7 +14,7 @@ export default {
 	render: (args, { argTypes }) => {
 		return {
 			template: `<lu-callout-disclosure ${generateInputs(args, argTypes)}>
-		<ul lu-callout-feedback-list palette="grey">
+		<ul lu-callout-feedback-list palette="neutral">
 			<li lu-callout-feedback-item>
 				<lu-feedback-item-description>
 					 Feedback description.

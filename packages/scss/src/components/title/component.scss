@@ -1,10 +1,10 @@
 @mixin component($suffix: '') {
 	// no suffix here
 	margin-top: 0;
-	color: var(--palettes-grey-900);
+	color: var(--palettes-neutral-900);
 	margin-bottom: var(--spacings-S);
 	text-rendering: geometricPrecision;
-	text-wrap: balance;
+	text-wrap: pretty;
 
 	// suffix here
 	font-weight: var(--components-title-weight, 600) #{$suffix};

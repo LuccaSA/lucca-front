@@ -46,7 +46,7 @@
 	}
 
 	&.cdk-overlay-dark-backdrop {
-		background-color: rgba(var(--colors-grey-900-rgb), 0.6);
+		background-color: rgba(var(--colors-neutral-900-rgb), 0.6);
 	}
 	&.cdk-overlay-transparent-backdrop {
 		background: 0 0;
@@ -56,7 +56,7 @@
 .cdk-overlay-backdrop.cdk-overlay-backdrop-showing.lu-popup-backdrop {
 	@include keyframe.fadeIn;
 
-	opacity: var(--components-cdk-backdrop-opacity);
+	opacity: var(--pr-t-elevation-surface-backdrop);
 }
 
 // MODS

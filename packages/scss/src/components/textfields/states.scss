@@ -2,7 +2,7 @@
 @use '@lucca-front/scss/src/commons/utils/a11y';
 
 @mixin inputHover {
-	box-shadow: 0 0 0 1px var(--palettes-grey-400);
+	box-shadow: 0 0 0 1px var(--palettes-neutral-400);
 }
 
 @mixin inputFocus {
@@ -12,7 +12,7 @@
 @mixin inputDisabled {
 	background-color: var(--components-textfield-disabled-background);
 	color: var(--components-textfield-disabled-color);
-	box-shadow: 0 0 0 1px var(--palettes-grey-300);
+	box-shadow: 0 0 0 1px var(--palettes-neutral-300);
 	cursor: default;
 
 	&::placeholder {
@@ -20,19 +20,19 @@
 	}
 
 	~ .textfield-clear {
-		--components-clear-cross-color: var(--palettes-grey-500) !important;
+		--components-clear-cross-color: var(--palettes-neutral-500) !important;
 		pointer-events: none;
 	}
 
 	~ .textfield-actionClear {
 		// deprecated
-		color: var(--palettes-grey-500) !important;
+		color: var(--palettes-neutral-500) !important;
 		pointer-events: none;
 	}
 }
 
 @mixin filterHover {
-	background-color: var(--palettes-grey-50);
+	background-color: var(--palettes-neutral-50);
 }
 
 @mixin open {
@@ -226,5 +226,5 @@
 }
 
 @mixin entryHover {
-	background-color: var(--palettes-primary-50);
+	background-color: var(--palettes-product-50);
 }

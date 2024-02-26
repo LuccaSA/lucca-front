@@ -1,9 +1,9 @@
 @mixin vars {
-	--components-card-background: var(--colors-white-color);
-	--components-card-content-padding: .75rem var(--spacings-S);
+	--components-card-background: var(--pr-t-elevation-surface-raised);
+	--components-card-content-padding: 0.75rem var(--spacings-S);
 	--components-card-footer-padding: var(--spacings-XS) var(--spacings-M);
 	--components-card-border-radius: var(--commons-borderRadius-L);
 	--components-card-border-color: var(--commons-divider-color);
-	--components-card-hover-border: var(--palettes-grey-400);
-	--components-card-hover-background: var(--palettes-grey-100);
+	--components-card-hover-border: var(--palettes-neutral-400);
+	--components-card-hover-background: var(--palettes-neutral-100);
 }

@@ -1,7 +1,7 @@
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { CalloutFeedbackItemComponent, CalloutFeedbackListComponent, CalloutPopoverComponent } from '@lucca-front/ng/callout';
-import { ButtonComponent } from '@lucca-front/ng/button';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ButtonComponent } from '@lucca-front/ng/button';
+import { CalloutFeedbackItemComponent, CalloutFeedbackListComponent, CalloutPopoverComponent } from '@lucca-front/ng/callout';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { generateInputs } from 'stories/helpers/stories';
 
 export default {
@@ -15,7 +15,7 @@ export default {
 	render: (args, { argTypes }) => {
 		return {
 			template: `<lu-callout-popover ${generateInputs(args, argTypes)}>
-		<ul lu-callout-feedback-list palette="grey">
+		<ul lu-callout-feedback-list palette="neutral">
 			<li lu-callout-feedback-item>
 				<lu-feedback-item-description>
 					 Feedback description.

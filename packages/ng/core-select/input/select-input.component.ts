@@ -2,7 +2,6 @@
 import { OverlayConfig, OverlayContainer } from '@angular/cdk/overlay';
 import {
 	ChangeDetectorRef,
-	ContentChild,
 	Directive,
 	ElementRef,
 	EventEmitter,
@@ -19,7 +18,7 @@ import {
 	inject,
 } from '@angular/core';
 import { BehaviorSubject, ReplaySubject, Subject } from 'rxjs';
-import { LuOptionGroupDirective, LuSimpleSelectDefaultOptionComponent } from '../option';
+import { LuOptionGrouping, LuSimpleSelectDefaultOptionComponent } from '../option';
 import { LuSelectPanelRef } from '../panel';
 import { LuOptionContext, SELECT_LABEL, SELECT_LABEL_ID } from '../select.model';
 
@@ -84,7 +83,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	@Input() optionComparer: (option1: TOption, option2: TOption) => boolean = (option1, option2) => JSON.stringify(option1) === JSON.stringify(option2);
 	@Input() optionTpl?: TemplateRef<LuOptionContext<TOption>> | Type<unknown> = LuSimpleSelectDefaultOptionComponent;
 	@Input() valueTpl?: TemplateRef<LuOptionContext<TOption>> | Type<unknown>;
-	@ContentChild(LuOptionGroupDirective) grouping?: LuOptionGroupDirective<TOption, TValue, unknown>;
+	grouping?: LuOptionGrouping<TOption, unknown>;
 
 	@Output() clueChange = new EventEmitter<string>();
 	@Output() nextPage = new EventEmitter<void>();
@@ -243,6 +242,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	protected emptyClue(): void {
 		if (this.clue) {
 			this.clue = null;
+			this.changeDetectorRef.markForCheck();
 		}
 	}
 
@@ -266,6 +266,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	public updateValue(value: TValue): void {
 		this.value = value;
 		this.emptyClue();
+		this.clueChanged('');
 		this.onChange?.(value);
 		this.onTouched?.();
 	}

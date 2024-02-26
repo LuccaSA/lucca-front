@@ -3,26 +3,26 @@
 
 @mixin disabled {
 	~ .checkbox-label {
-		color: var(--palettes-grey-500);
+		color: var(--palettes-neutral-500);
 		cursor: default;
 
 		&::before {
-			border-color: var(--palettes-grey-500);
+			border-color: var(--palettes-neutral-500);
 		}
 
 		.checkbox-label-helper {
-			color: var(--palettes-grey-500);
+			color: var(--palettes-neutral-500);
 		}
 	}
 
 	&:checked ~ .checkbox-label {
 		&::before {
-			background-color: var(--palettes-grey-100);
-			border-color: var(--palettes-grey-100);
+			background-color: var(--palettes-neutral-100);
+			border-color: var(--palettes-neutral-100);
 		}
 
 		&::after {
-			color: var(--palettes-grey-500);
+			color: var(--palettes-neutral-500);
 		}
 	}
 }

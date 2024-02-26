@@ -1,4 +1,4 @@
-<div class="lu-picker-panel lu-option-picker-panel mod-multiple" role="dialog" *ngIf="{ options: options$ | async } as ctx">
+<div class="lu-picker-panel lu-option-picker-panel mod-multiple" role="dialog" *ngIf="{ options: (options$ | async) || [] } as ctx">
 	<div
 		class="lu-picker-content"
 		[class.is-loading]="loading$ | async"
@@ -16,14 +16,23 @@
 					role="group"
 					[attr.aria-labelledby]="selectId + '-group-' + group.key"
 				>
-					<span class="lu-picker-content-option-group-title" role="presentation" [id]="selectId + '-group-' + group.key">
-						<ng-template [ngTemplateOutlet]="grouping.templateRef" [ngTemplateOutletContext]="{ $implicit: group }"></ng-template>
-					</span>
-					<ng-template [ngTemplateOutlet]="optionsList" [ngTemplateOutletContext]="{ $implicit: group.options }"></ng-template>
+					<div class="lu-picker-content-option-group-title" role="presentation">
+						<ng-container *luPortal="grouping.content; context: { $implicit: group }" />
+						<button
+							*ngIf="group.options | luNotSelectedOptions:selectedOptions:optionComparer as notSelectedOptions"
+							type="button"
+							class="link"
+							[id]="selectId + '-group-' + group.key"
+							(click)="toggleOptions(notSelectedOptions, group.options)"
+						>
+							{{ notSelectedOptions.length ? intl.selectAll : intl.unselectAll }}
+						</button>
+					</div>
+					<ng-template [ngTemplateOutlet]="optionsList" [ngTemplateOutletContext]="{ $implicit: group.options }" />
 				</div>
 			</ng-container>
 			<ng-container *ngIf="!grouping">
-				<ng-template [ngTemplateOutlet]="optionsList" [ngTemplateOutletContext]="{ $implicit: ctx.options }"></ng-template>
+				<ng-template [ngTemplateOutlet]="optionsList" [ngTemplateOutletContext]="{ $implicit: ctx.options }" />
 			</ng-container>
 
 			<ng-template #optionsList let-options>
@@ -47,7 +56,7 @@
 		</div>
 	</div>
 	<!--<div class="lu-picker-content-add">
-		<button class="button mod-text mod-icon palette-primary" type="button">
+		<button class="button mod-text mod-icon palette-product" type="button">
 			<span aria-hidden="true" class="lucca-icon icon-mathsPlus"></span>Add a new supplier
 		</button>
 	</div>-->

@@ -1,11 +1,11 @@
 @use '@lucca-front/scss/src/commons/utils/a11y';
 
-@mixin grey {
-	--components-card-background: var(--palettes-grey-50);
+@mixin neutral {
+	--components-card-background: var(--pr-t-elevation-surface-sunken);
 }
 
 @mixin clickable {
-	color: var(--palettes-grey-800);
+	color: var(--palettes-neutral-800);
 	text-decoration: none;
 	cursor: pointer;
 
@@ -21,12 +21,12 @@
 }
 
 @mixin elevated {
-	box-shadow: var(--commons-boxShadow-S);
+	box-shadow: var(--pr-t-elevation-shadow-raised);
 	border: 0;
 }
 
 @mixin action {
-	box-shadow: var(--commons-boxShadow-S);
+	box-shadow: var(--pr-t-elevation-shadow-raised);
 	border: 0;
 	cursor: pointer;
 	padding: var(--components-card-content-padding);
@@ -35,7 +35,7 @@
 	row-gap: var(--spacings-S);
 
 	&:hover {
-		box-shadow: var(--commons-boxShadow-L);
+		box-shadow: var(--pr-t-elevation-shadow-overlay);
 	}
 
 	// Remove actionIcon reference when button & action icon will be merged as a single component

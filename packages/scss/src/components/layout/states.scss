@@ -17,7 +17,7 @@
 	@include media.max('S') {
 		top: var(--commons-banner-height);
 		height: calc(100vh - var(--commons-banner-height));
-		background-color: var(--colors-white-color);
+		background-color: var(--pr-t-elevation-surface-raised);
 		position: fixed;
 		overflow: auto;
 		left: 0;

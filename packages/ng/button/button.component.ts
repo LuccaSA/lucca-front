@@ -1,5 +1,5 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, ContentChild, ElementRef, inject, Input, OnChanges } from '@angular/core';
-import { NgClazz, LuClass, Palette } from '@lucca-front/ng/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, ContentChild, ElementRef, inject, Input, OnChanges, ViewEncapsulation } from '@angular/core';
+import { LuClass, Palette } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
 
 @Component({
@@ -10,6 +10,7 @@ import { IconComponent } from '@lucca-front/ng/icon';
 	template: '<ng-content></ng-content>',
 	styleUrls: ['./button.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
+	encapsulation: ViewEncapsulation.None,
 	host: {
 		class: 'button',
 	},
@@ -52,8 +53,8 @@ export class ButtonComponent implements OnChanges {
 		const noText = childNodes.every(({ nodeName }) => nodeName !== '#text');
 		// ignore icon and comment
 		const noSpan =
-			childNodes.filter(({ nodeName }) => {
-				return nodeName !== '#comment' && nodeName.toLowerCase() !== 'lu-icon';
+			childNodes.filter((node: HTMLElement) => {
+				return node.nodeName !== '#comment' && node.nodeName.toLowerCase() !== 'lu-icon' && !node?.className?.includes('u-mask');
 			}).length == 0;
 		return !!this.#iconComponentRef && noSpan && noText;
 	}

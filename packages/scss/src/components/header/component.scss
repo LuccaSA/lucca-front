@@ -1,7 +1,7 @@
 @use '@lucca-front/icons/src/commons/utils/icon';
 
 @mixin component($atRoot: 'without: rule') {
-	box-shadow: var(--commons-boxShadow-XS);
+	box-shadow: var(--pr-t-elevation-shadow-overflow);
 	background-color: var(--components-header-background);
 	min-height: var(--components-header-height);
 	padding: var(--components-header-padding);
@@ -36,7 +36,7 @@
 			border-right-color: var(--commons-divider-color);
 			border-right-width: var(--commons-divider-width);
 			border-right-style: solid;
-			color: var(--palettes-grey-500);
+			color: var(--palettes-neutral-500);
 			height: var(--components-header-height);
 			width: var(--components-header-height);
 			line-height: var(--components-header-height);
@@ -49,8 +49,8 @@
 			text-decoration: none;
 
 			&:hover {
-				background-color: var(--commons-background-base);
-				color: var(--palettes-grey-800);
+				background-color: var(--palettes-grey-25);
+				color: var(--palettes-neutral-800);
 			}
 
 			&::before {
@@ -59,12 +59,12 @@
 		}
 
 		.header-nav-category {
-			color: var(--palettes-grey-500);
+			color: var(--palettes-neutral-500);
 			font-size: var(--sizes-S-fontSize);
 		}
 
 		.header-nav-title {
-			color: var(--palettes-primary-700);
+			color: var(--palettes-product-700);
 			line-height: var(--sizes-XS-lineHeight);
 			margin: 0;
 		}

@@ -35,8 +35,8 @@ export default {
 	bottomLeftForeground="${bottomLeftForeground}"
 	contentBackgroundColor="${contentBackgroundColor}"
 >
-	<button luButton type="button" palette="primary">Button</button>
-	<button luButton="outlined" type="button" palette="primary">Button</button>
+	<button luButton type="button" palette="product">Button</button>
+	<button luButton="outlined" type="button" palette="product">Button</button>
 </lu-empty-state-page>`,
 		};
 	},
@@ -145,6 +145,6 @@ export const Page: StoryObj<EmptyStatePageComponent> = {
 		topRightForeground: 'https://cdn.lucca.fr/lucca-front/assets/empty-states/generic/coffee-01.svg',
 		bottomLeftBackground: 'https://cdn.lucca.fr/lucca-front/assets/empty-states/poplee/bubbles-bottom-left-01.svg',
 		bottomLeftForeground: 'https://cdn.lucca.fr/lucca-front/assets/empty-states/poplee/core-hr-01.svg',
-		contentBackgroundColor: 'var(--commons-background-base)',
+		contentBackgroundColor: 'var(--pr-t-elevation-surface-default)',
 	},
 };

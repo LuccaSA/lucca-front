@@ -40,14 +40,14 @@
 			border: 0;
 			padding: 0;
 			outline: none;
-			color: var(--palettes-grey-800);
+			color: var(--palettes-neutral-800);
 			font-size: var(--components-multiSelect-fontSize);
 			line-height: var(--components-multiSelect-lineHeight);
 			background-color: transparent;
 			cursor: pointer;
 
 			&::placeholder {
-				color: var(--palettes-grey-400);
+				color: var(--palettes-neutral-400);
 			}
 		}
 

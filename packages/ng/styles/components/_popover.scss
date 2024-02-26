@@ -38,8 +38,8 @@
 }
 
 %popover-content {
-	background-color: var(--colors-white-color);
-	box-shadow: var(--commons-boxShadow-S);
+	background-color: var(--pr-t-elevation-surface-raised);
+	box-shadow: var(--pr-t-elevation-shadow-overlay);
 	border-radius: var(--commons-borderRadius-M);
 
 	&:focus-within {

@@ -1,13 +1,13 @@
 import { Meta, StoryFn } from '@storybook/angular';
 
 interface BoxKillableStory {
-	grey: boolean;
+	neutral: boolean;
 }
 
 export default {
 	title: 'Documentation/Structure/Box/Killable',
 	argTypes: {
-		grey: {
+		neutral: {
 			control: {
 				type: 'boolean',
 			},
@@ -16,10 +16,10 @@ export default {
 } as Meta;
 
 function getTemplate(args: BoxKillableStory): string {
-	const grey = args.grey ? `mod-grey` : '';
+	const neutral = args.neutral ? `mod-neutral` : '';
 
 	return `
-	<div class="box ${grey}">
+	<div class="box ${neutral}">
 	    <div class="box-close">
 	        <button type="button" class="button mod-onlyIcon mod-text">
 	            <span aria-hidden="true" class="lucca-icon icon-signClose"></span>
@@ -39,9 +39,9 @@ const Template: StoryFn<BoxKillableStory> = (args) => ({
 		:host {
 			display: block;
 		}`,
-		args.grey === true ? ':host { background-color: white; margin: -15px -15px; padding: 15px 15px; }' : '',
+		args.neutral === false ? ':host { background-color: white; margin: -15px -15px; padding: 15px 15px; }' : '',
 	],
 });
 
 export const Killable = Template.bind({});
-Killable.args = { grey: false };
+Killable.args = { neutral: false };
