@@ -10,4 +10,12 @@
     &.mod-stackable {
         @include stackable;
     }
+
+    &.mod-stickyHeader {
+        @include stickyHeader;
+    }
+
+    &.mod-withPagination {
+        @include mod-withPagination;
+    }
 }

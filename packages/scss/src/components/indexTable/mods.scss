@@ -1,3 +1,4 @@
+@use 'vars' as *;
 @mixin selectable {
     .indexTable-body-row {
         &:is(:focus-within, :hover) {
@@ -32,12 +33,18 @@
         // because we can't set an individual spacing for each row, transparent border are used for this
         border-bottom: var(--components-indexTable-row-stack-border-bottom) solid transparent;
 
+        // apparence of the first cell with a card apparence.
+        // we do this because there migh be one or two cells before without background and containing a checkbox
         --components-indexTable-row-stack2-background-position: -9px 0;
         --components-indexTable-row-stack3-background-position: -5px 4px;
+
+        // apparence of the nexts cells
         & ~ .indexTable-body-row-cell {
             --components-indexTable-row-stack2-background-position: -19px 0;
             --components-indexTable-row-stack3-background-position: -19px 4px;
         }
+
+        // apparence of the last cell with a card apparence
         &:last-child {
             --components-indexTable-row-stack2-background-position: calc(100% + 7px) 0;
             --components-indexTable-row-stack3-background-position: calc(100% + 3px) 4px;
@@ -57,5 +64,38 @@
                 var(--components-indexTable-row-stack3-background-position, 0 0);
             background-repeat: no-repeat, no-repeat;
         }
+    }
+}
+
+@mixin stickyHeader {
+    .indexTable-head {
+        position: sticky;
+        top: 0;
+        z-index: 2;
+        background-color: var(--components-indexTable-background-color);
+    }
+
+    //hide box-shadow from underneath rows that slighly appear on edges
+    .indexTable-head-row-cell {
+        position: relative;
+        &::before {
+            content: '';
+            position: absolute;
+            inset: 0 var(--components-indexTable-hover-offset-x);
+            z-index: -1;
+            background-color: var(--components-indexTable-background-color);
+        }
+    }
+}
+
+@mixin mod-withPagination {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    & + .pagination {
+        @include vars;
+        padding: 0 var(--spacings-S) 0.75rem 0;
+        border-bottom-left-radius: var(--components-indexTable-border-radius);
+        border-bottom-right-radius: var(--components-indexTable-border-radius);
+        background-color: var(--components-indexTable-background-color);
     }
 }

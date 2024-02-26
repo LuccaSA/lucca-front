@@ -7,8 +7,8 @@
     padding: 0 var(--spacings-XS) var(--spacings-XS);
     border-collapse: separate;
     border-spacing: 0 var(--components-indexTable-row-spacing);
-    border-radius: 12px;
-    background-color: var(--palettes-grey-50);
+    border-radius: var(--components-indexTable-border-radius);
+    background-color: var(--components-indexTable-background-color);
     color: var(--palettes-neutral-800);
 
     @at-root ($atRoot) {
