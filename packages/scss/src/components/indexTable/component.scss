@@ -4,8 +4,11 @@
     position: relative;
     display: table;
     width: 100%;
+    padding: 0 var(--spacings-XS) var(--spacings-XS);
     border-collapse: separate;
     border-spacing: 0 var(--components-indexTable-row-spacing);
+    border-radius: 12px;
+    background-color: var(--palettes-grey-50);
     color: var(--palettes-neutral-800);
 
     @at-root ($atRoot) {
@@ -40,25 +43,51 @@
             }
         }
 
+        .indexTable-head-row-cellEmpty,
+        .indexTable-body-row-cellEmpty,
         .indexTable-head-row-cell,
         .indexTable-body-row-cell {
             display: table-cell;
-            padding: var(--components-indexTable-padding);
+        }
+
+        .indexTable-head-row-cellEmpty,
+        .indexTable-body-row-cellEmpty {
+            width: var(--components-indexTable-row-cell-empty-width);
         }
 
         .indexTable-head-row-cell {
+            padding: var(--spacings-XS) var(--components-indexTable-padding);
             color: var(--palettes-neutral-600);
-            font-size: var(--sizes-S-fontSize);
-            line-height: var(--sizes-S-lineHeight);
             text-align: left;
-            font-weight: 600;
+            font-weight: 400;
         }
 
         .indexTable-body-row-cell {
             position: relative;
-            display: table-cell;
+            z-index: 1;
+            padding: var(--components-indexTable-padding);
             border-radius: var(--components-table-cardList-cell-border-radius);
             border-bottom: var(--components-table-cardList-cell-spacing) solid transparent;
+
+            // apparence of the first cell with a card apparence.
+            // we do this because there migh be one or two cells before without background and containing a checkbox
+            --components-indexTable-shadow-mask: 0 0 0 0;
+            --components-indexTable-cell-border-radius: var(--commons-borderRadius-L) 0 0 var(--commons-borderRadius-L);
+            --components-indexTable-cell-inset-x-left: var(--components-indexTable-cell-inset-x);
+
+            // apparence of the nexts cells
+            ~ .indexTable-body-row-cell {
+                --components-indexTable-shadow-mask: var(--components-indexTable-shadow-mask-default);
+                --components-indexTable-cell-border-radius: 0;
+                --components-indexTable-cell-inset-x-left: 0;
+            }
+
+            // apparence of the last cell with a card apparence
+            &:last-child {
+                --components-indexTable-cell-border-radius: 0 var(--commons-borderRadius-L)
+                    var(--commons-borderRadius-L) 0;
+                --components-indexTable-cell-inset-x-right: var(--components-indexTable-cell-inset-x);
+            }
 
             &::before,
             &::after {
@@ -73,22 +102,9 @@
                     var(--components-indexTable-cell-inset-y, 0) var(--components-indexTable-cell-inset-x-left, 0);
                 z-index: -1;
                 border-radius: var(--components-indexTable-cell-border-radius, 0);
-                background: var(--colors-white-color);
+                background-color: var(--colors-white-color);
                 box-shadow: var(--components-indexTable-shadow-mask),
                     var(--components-indexTable-cell-shadow, var(--commons-boxShadow-S));
-            }
-
-            &:first-child {
-                --components-indexTable-shadow-mask: 0 0 0 0;
-                --components-indexTable-cell-border-radius: var(--commons-borderRadius-L) 0 0
-                    var(--commons-borderRadius-L);
-                --components-indexTable-cell-inset-x-left: var(--components-indexTable-cell-inset-x);
-            }
-
-            &:last-child {
-                --components-indexTable-cell-border-radius: 0 var(--commons-borderRadius-L)
-                    var(--commons-borderRadius-L) 0;
-                --components-indexTable-cell-inset-x-right: var(--components-indexTable-cell-inset-x);
             }
         }
     }
