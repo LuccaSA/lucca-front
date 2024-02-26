@@ -43,8 +43,8 @@
             }
         }
 
-        .indexTable-head-row-cellEmpty,
-        .indexTable-body-row-cellEmpty,
+        .indexTable-head-row-transparentCell,
+        .indexTable-body-row-transparentCell,
         .indexTable-head-row-cell,
         .indexTable-body-row-cell {
             display: table-cell;
@@ -52,11 +52,9 @@
             text-align: left;
         }
 
-        .indexTable-head-row-cellEmpty,
-        .indexTable-body-row-cellEmpty {
-            &:has(.checkbox) {
-                width: var(--components-indexTable-row-cell-with-checkbox-width);
-            }
+        .indexTable-head-row-transparentCell,
+        .indexTable-body-row-transparentCell {
+            width: var(--components-indexTable-row-cell-with-checkbox-width);
         }
 
         .indexTable-head-row-cell {

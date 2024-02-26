@@ -16,7 +16,7 @@ function getTemplate(args: IndexTableSelectableStory): string {
 	<table class="indexTable mod-selectable">
 		<thead class="indexTable-head">
 			<tr class="indexTable-head-row">
-				<th class="indexTable-head-row-cellEmpty"></th>
+				<th class="indexTable-head-row-transparentCell"></th>
 				<th class="indexTable-head-row-cell">Label</th>
 				<th class="indexTable-head-row-cell">Label</th>
 				<th class="indexTable-head-row-cell">Label</th>
@@ -24,7 +24,7 @@ function getTemplate(args: IndexTableSelectableStory): string {
 		</thead>
 		<tbody class="indexTable-body">
 			<tr class="indexTable-body-row">
-				<td class="indexTable-body-row-cellEmpty">
+				<td class="indexTable-body-row-transparentCell">
 					<label class="checkbox">
 						<input class="checkbox-input" type="checkbox" />
 						<span class="checkbox-label"></span>
@@ -36,7 +36,7 @@ function getTemplate(args: IndexTableSelectableStory): string {
 				<td class="indexTable-body-row-cell">Content</td>
 			</tr>
 			<tr class="indexTable-body-row">
-				<td class="indexTable-body-row-cellEmpty">
+				<td class="indexTable-body-row-transparentCell">
 					<label class="checkbox">
 						<input class="checkbox-input" type="checkbox" />
 						<span class="checkbox-label"></span>
@@ -48,7 +48,7 @@ function getTemplate(args: IndexTableSelectableStory): string {
 				<td class="indexTable-body-row-cell">Content</td>
 			</tr>
 			<tr class="indexTable-body-row">
-				<td class="indexTable-body-row-cellEmpty">
+				<td class="indexTable-body-row-transparentCell">
 					<label class="checkbox">
 						<input class="checkbox-input" type="checkbox" />
 						<span class="checkbox-label"></span>

@@ -16,14 +16,14 @@ function getTemplate(args: IndexTableNestedSelectableStory): string {
 	<table class="indexTable mod-selectable">
 		<thead class="indexTable-head">
 			<tr class="indexTable-head-row">
-				<th class="indexTable-head-row-cellEmpty" scope="col">
+				<th class="indexTable-head-row-transparentCell" scope="col">
 					<label class="checkbox">
 						<input class="checkbox-input" type="checkbox" />
 						<span class="checkbox-label"></span>
 						<span class="u-mask">Select all</span>
 					</label>
 				</th>
-				<th class="indexTable-head-row-cell" scope="col"></th>
+				<th class="indexTable-head-row-transparentCell" scope="col"></th>
 				<th class="indexTable-head-row-cell" scope="col">Label</th>
 				<th class="indexTable-head-row-cell" scope="col">Label</th>
 				<th class="indexTable-head-row-cell" scope="col">Label</th>
@@ -31,14 +31,14 @@ function getTemplate(args: IndexTableNestedSelectableStory): string {
 		</thead>
 		<tbody class="indexTable-body">
 			<tr class="indexTable-body-row" id="r0">
-				<th class="indexTable-body-row-cellEmpty">
+				<th class="indexTable-body-row-transparentCell">
 					<label class="checkbox">
 						<input class="checkbox-input" type="checkbox" />
 						<span class="checkbox-label"></span>
 						<span class="u-mask">Select this line</span>
 					</label>
 				</th>
-				<th class="indexTable-body-row-cellEmpty" colspan="4" id="y2021">
+				<th class="indexTable-body-row-transparentCell" colspan="4" id="y2021">
 					<div class="indexTable-body-row-cellTitle">
 						<button class="button mod-text mod-onlyIcon" aria-expanded="true" aria-controls="r1 r2 r3 r4 r5" type="button">
 							<span class="lucca-icon icon-arrowChevronBottom" aria-hidden="true"></span>
@@ -50,15 +50,15 @@ function getTemplate(args: IndexTableNestedSelectableStory): string {
 				</th>
 			</tr>
 			<tr class="indexTable-body-row" id="r1">
-				<th class="indexTable-body-row-cellEmpty" header="y2021"></th>
-				<th class="indexTable-body-row-cellEmpty" header="y2021">
+				<th class="indexTable-body-row-transparentCell" header="y2021">
 					<label class="checkbox">
 						<input class="checkbox-input" type="checkbox" />
 						<span class="checkbox-label"></span>
 						<span class="u-mask">Select this line</span>
 					</label>
 				</th>
-				<th class="indexTable-body-row-cellEmpty" colspan="3" id="september" header="y2021">
+				<th class="indexTable-body-row-transparentCell" header="y2021"></th>
+				<th class="indexTable-body-row-transparentCell" colspan="3" id="september" header="y2021">
 					<div class="indexTable-body-row-cellTitle">
 						<button class="button mod-text mod-onlyIcon" aria-expanded="true" aria-controls="r2" type="button">
 							<span class="lucca-icon icon-arrowChevronBottom" aria-hidden="true"></span>
@@ -70,28 +70,28 @@ function getTemplate(args: IndexTableNestedSelectableStory): string {
 				</th>
 			</tr>
 			<tr class="indexTable-body-row" id="r2">
-				<td class="indexTable-body-row-cellEmpty" header="y2021 september"></td>
-				<td class="indexTable-body-row-cellEmpty" header="y2021 september">
+				<td class="indexTable-body-row-transparentCell" header="y2021 september">
 					<label class="checkbox">
 						<input class="checkbox-input" type="checkbox" />
 						<span class="checkbox-label"></span>
 						<span class="u-mask">Select this line</span>
 					</label>
 				</td>
+				<td class="indexTable-body-row-transparentCell" header="y2021 september"></td>
 				<td class="indexTable-body-row-cell" header="y2021 september">Content</td>
 				<td class="indexTable-body-row-cell" header="y2021 september">Content</td>
 				<td class="indexTable-body-row-cell" header="y2021 september">Content</td>
 			</tr>
 			<tr class="indexTable-body-row" id="r3">
-				<th class="indexTable-body-row-cellEmpty" header="y2021"></th>
-				<th class="indexTable-body-row-cellEmpty" header="y2021">
+				<th class="indexTable-body-row-transparentCell" header="y2021">
 					<label class="checkbox">
 						<input class="checkbox-input" type="checkbox" />
 						<span class="checkbox-label"></span>
 						<span class="u-mask">Select this line</span>
 					</label>
 				</th>
-				<th class="indexTable-body-row-cellEmpty" colspan="3" id="october" header="y2021">
+				<th class="indexTable-body-row-transparentCell" header="y2021"></th>
+				<th class="indexTable-body-row-transparentCell" colspan="3" id="october" header="y2021">
 					<div class="indexTable-body-row-cellTitle">
 						<button class="button mod-text mod-onlyIcon" aria-expanded="true" aria-controls="r4 r5" type="button">
 							<span class="lucca-icon icon-arrowChevronBottom" aria-hidden="true"></span>
@@ -103,27 +103,27 @@ function getTemplate(args: IndexTableNestedSelectableStory): string {
 				</th>
 			</tr>
 			<tr class="indexTable-body-row" id="r4">
-				<td class="indexTable-body-row-cellEmpty" header="y2021 october"></td>
-				<td class="indexTable-body-row-cellEmpty" header="y2021 october">
+				<td class="indexTable-body-row-transparentCell" header="y2021 october">
 					<label class="checkbox">
 						<input class="checkbox-input" type="checkbox" checked />
 						<span class="checkbox-label"></span>
 						<span class="u-mask">Select this line</span>
 					</label>
 				</td>
+				<td class="indexTable-body-row-transparentCell" header="y2021 october"></td>
 				<td class="indexTable-body-row-cell" header="y2021 october">Content</td>
 				<td class="indexTable-body-row-cell" header="y2021 october">Content</td>
 				<td class="indexTable-body-row-cell" header="y2021 october">Content</td>
 			</tr>
 			<tr class="indexTable-body-row" id="r5">
-				<td class="indexTable-body-row-cellEmpty" header="y2021 october"></td>
-				<td class="indexTable-body-row-cellEmpty" header="y2021 october">
+				<td class="indexTable-body-row-transparentCell" header="y2021 october">
 					<label class="checkbox">
 						<input class="checkbox-input" type="checkbox" />
 						<span class="checkbox-label"></span>
 						<span class="u-mask">Select this line</span>
 					</label>
 				</td>
+				<td class="indexTable-body-row-transparentCell" header="y2021 october"></td>
 				<td class="indexTable-body-row-cell" header="y2021 october">Content</td>
 				<td class="indexTable-body-row-cell" header="y2021 october">Content</td>
 				<td class="indexTable-body-row-cell" header="y2021 october">Content</td>
@@ -131,14 +131,14 @@ function getTemplate(args: IndexTableNestedSelectableStory): string {
 		</tbody>
 		<tbody class="indexTable-body">
 			<tr class="indexTable-body-row" id="r6">
-				<th class="indexTable-body-row-cellEmpty">
+				<th class="indexTable-body-row-transparentCell">
 					<label class="checkbox">
 						<input class="checkbox-input" type="checkbox" />
 						<span class="checkbox-label"></span>
 						<span class="u-mask">Select this line</span>
 					</label>
 				</th>
-				<th class="indexTable-body-row-cellEmpty" colspan="4" id="y2022">
+				<th class="indexTable-body-row-transparentCell" colspan="4" id="y2022">
 					<div class="indexTable-body-row-cellTitle">
 						<button class="button mod-text mod-onlyIcon" aria-expanded="true" aria-controls="r7 r8" type="button">
 							<span class="lucca-icon icon-arrowChevronBottom" aria-hidden="true"></span>
@@ -150,15 +150,15 @@ function getTemplate(args: IndexTableNestedSelectableStory): string {
 				</th>
 			</tr>
 			<tr class="indexTable-body-row" id="r7">
-				<th class="indexTable-body-row-cellEmpty" header="y2022"></th>
-				<th class="indexTable-body-row-cellEmpty" header="y2022">
+				<th class="indexTable-body-row-transparentCell" header="y2022">
 					<label class="checkbox">
 						<input class="checkbox-input" type="checkbox" />
 						<span class="checkbox-label"></span>
 						<span class="u-mask">Select this line</span>
 					</label>
 				</th>
-				<th class="indexTable-body-row-cellEmpty" colspan="3" id="january" header="y2022">
+				<th class="indexTable-body-row-transparentCell" header="y2022"></th>
+				<th class="indexTable-body-row-transparentCell" colspan="3" id="january" header="y2022">
 					<div class="indexTable-body-row-cellTitle">
 						<button class="button mod-text mod-onlyIcon" aria-expanded="true" aria-controls="r8" type="button">
 							<span class="lucca-icon icon-arrowChevronBottom" aria-hidden="true"></span>
@@ -170,14 +170,14 @@ function getTemplate(args: IndexTableNestedSelectableStory): string {
 				</th>
 			</tr>
 			<tr class="indexTable-body-row" id="r8">
-				<td class="indexTable-body-row-cellEmpty" header="y2022 january"></td>
-				<td class="indexTable-body-row-cellEmpty" header="y2022 january">
+				<td class="indexTable-body-row-transparentCell" header="y2022 january">
 					<label class="checkbox">
 						<input class="checkbox-input" type="checkbox" />
 						<span class="checkbox-label"></span>
 						<span class="u-mask">Select this line</span>
 					</label>
 				</td>
+				<td class="indexTable-body-row-transparentCell" header="y2022 january"></td>
 				<td class="indexTable-body-row-cell" header="y2022 january">Content</td>
 				<td class="indexTable-body-row-cell" header="y2022 january">Content</td>
 				<td class="indexTable-body-row-cell" header="y2022 january">Content</td>

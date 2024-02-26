@@ -16,7 +16,7 @@ function getTemplate(args: IndexTableStackableStory): string {
 	<table class="indexTable mod-stackable mod-selectable">
 		<thead class="indexTable-head">
 			<tr class="indexTable-head-row">
-				<th class="indexTable-head-row-cellEmpty"></th>
+				<th class="indexTable-head-row-transparentCell"></th>
 				<th class="indexTable-head-row-cell">Label</th>
 				<th class="indexTable-head-row-cell">Label</th>
 				<th class="indexTable-head-row-cell">Label</th>
@@ -24,7 +24,7 @@ function getTemplate(args: IndexTableStackableStory): string {
 		</thead>
 		<tbody class="indexTable-body">
 			<tr class="indexTable-body-row mod-stack2">
-				<td class="indexTable-body-row-cellEmpty">
+				<td class="indexTable-body-row-transparentCell">
 					<label class="checkbox">
 						<input class="checkbox-input" type="checkbox" />
 						<span class="checkbox-label"></span>
@@ -36,7 +36,7 @@ function getTemplate(args: IndexTableStackableStory): string {
 				<td class="indexTable-body-row-cell">Content</td>
 			</tr>
 			<tr class="indexTable-body-row">
-				<td class="indexTable-body-row-cellEmpty">
+				<td class="indexTable-body-row-transparentCell">
 					<label class="checkbox">
 						<input class="checkbox-input" type="checkbox" />
 						<span class="checkbox-label"></span>
@@ -48,7 +48,7 @@ function getTemplate(args: IndexTableStackableStory): string {
 				<td class="indexTable-body-row-cell">Content</td>
 			</tr>
 			<tr class="indexTable-body-row mod-stack3">
-				<td class="indexTable-body-row-cellEmpty">
+				<td class="indexTable-body-row-transparentCell">
 					<label class="checkbox">
 						<input class="checkbox-input" type="checkbox" />
 						<span class="checkbox-label"></span>
@@ -60,7 +60,7 @@ function getTemplate(args: IndexTableStackableStory): string {
 				<td class="indexTable-body-row-cell">Content</td>
 			</tr>
 			<tr class="indexTable-body-row mod-stack3">
-				<td class="indexTable-body-row-cellEmpty">
+				<td class="indexTable-body-row-transparentCell">
 					<label class="checkbox">
 						<input class="checkbox-input" type="checkbox" />
 						<span class="checkbox-label"></span>
@@ -72,7 +72,7 @@ function getTemplate(args: IndexTableStackableStory): string {
 				<td class="indexTable-body-row-cell">Content</td>
 			</tr>
 			<tr class="indexTable-body-row">
-				<td class="indexTable-body-row-cellEmpty">
+				<td class="indexTable-body-row-transparentCell">
 					<label class="checkbox">
 						<input class="checkbox-input" type="checkbox" />
 						<span class="checkbox-label"></span>
