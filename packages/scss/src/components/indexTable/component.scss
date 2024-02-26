@@ -48,17 +48,20 @@
         .indexTable-head-row-cell,
         .indexTable-body-row-cell {
             display: table-cell;
+            vertical-align: middle;
+            text-align: left;
         }
 
         .indexTable-head-row-cellEmpty,
         .indexTable-body-row-cellEmpty {
-            width: var(--components-indexTable-row-cell-empty-width);
+            &:has(.checkbox) {
+                width: var(--components-indexTable-row-cell-with-checkbox-width);
+            }
         }
 
         .indexTable-head-row-cell {
             padding: var(--spacings-XS) var(--components-indexTable-padding);
             color: var(--palettes-neutral-600);
-            text-align: left;
             font-weight: 400;
         }
 
@@ -91,10 +94,11 @@
 
             &::before,
             &::after {
-                transition-property: inset, box-shadow;
+                transition-property: var(--components-indexTable-cell-transition-property);
                 transition-duration: var(--commons-animations-durations-standard);
             }
 
+            // the card apparence is put on a ::before pseudo element
             &::before {
                 content: '';
                 position: absolute;
@@ -102,7 +106,7 @@
                     var(--components-indexTable-cell-inset-y, 0) var(--components-indexTable-cell-inset-x-left, 0);
                 z-index: -1;
                 border-radius: var(--components-indexTable-cell-border-radius, 0);
-                background-color: var(--colors-white-color);
+                background-color: var(--components-indexTable-cell-background-color, var(--colors-white-color));
                 box-shadow: var(--components-indexTable-shadow-mask),
                     var(--components-indexTable-cell-shadow, var(--commons-boxShadow-S));
             }
@@ -110,6 +114,12 @@
 
         .indexTable-body-row-cell-action {
             @include a11y.mask;
+        }
+
+        .indexTable-body-row-cellTitle {
+            display: flex;
+            align-items: center;
+            gap: var(--spacings-XXS);
         }
     }
 }

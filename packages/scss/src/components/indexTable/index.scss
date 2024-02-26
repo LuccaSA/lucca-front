@@ -2,4 +2,8 @@
 .indexTable {
     @include vars;
     @include component;
+
+    &.mod-selectable {
+        @include selectable;
+    }
 }

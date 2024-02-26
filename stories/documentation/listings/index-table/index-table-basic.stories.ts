@@ -16,35 +16,35 @@ function getTemplate(args: IndexTableBasicStory): string {
 	<table class="indexTable">
 		<thead class="indexTable-head">
 			<tr class="indexTable-head-row">
-				<th class="indexTable-head-row-cell">Label</th>
-				<th class="indexTable-head-row-cell">Label</th>
-				<th class="indexTable-head-row-cell">Label</th>
+				<th class="indexTable-head-row-cell" scope="col">Label</th>
+				<th class="indexTable-head-row-cell" scope="col">Label</th>
+				<th class="indexTable-head-row-cell" scope="col">Label</th>
 			</tr>
 		</thead>
 		<tbody class="indexTable-body">
 			<tr class="indexTable-body-row">
 				<td class="indexTable-body-row-cell">
 					<a href="#" class="indexTable-body-row-cell-action">See details</a>
-					Contenu
+					Content
 				</td>
-				<td class="indexTable-body-row-cell">Contenu</td>
-				<td class="indexTable-body-row-cell">Contenu</td>
+				<td class="indexTable-body-row-cell">Content</td>
+				<td class="indexTable-body-row-cell">Content</td>
 			</tr>
 			<tr class="indexTable-body-row">
 				<td class="indexTable-body-row-cell">
 					<a href="#" class="indexTable-body-row-cell-action">See details</a>
-					Contenu
+					Content
 				</td>
-				<td class="indexTable-body-row-cell">Contenu</td>
-				<td class="indexTable-body-row-cell">Contenu</td>
+				<td class="indexTable-body-row-cell">Content</td>
+				<td class="indexTable-body-row-cell">Content</td>
 			</tr>
 			<tr class="indexTable-body-row">
 				<td class="indexTable-body-row-cell">
 					<a href="#" class="indexTable-body-row-cell-action">See details</a>
-					Contenu
+					Content
 				</td>
-				<td class="indexTable-body-row-cell">Contenu</td>
-				<td class="indexTable-body-row-cell">Contenu</td>
+				<td class="indexTable-body-row-cell">Content</td>
+				<td class="indexTable-body-row-cell">Content</td>
 			</tr>
 		</tbody>
 	</table>

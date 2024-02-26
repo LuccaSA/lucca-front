@@ -1,0 +1,13 @@
+@mixin selectable {
+    .indexTable-body-row {
+        &:is(:focus-within, :hover) {
+            outline: none;
+        }
+        &:not(:hover):has(.checkbox-input:checked) {
+            --components-indexTable-cell-background-color: var(--palettes-product-50);
+            --components-indexTable-cell-shadow: 0 0 0 var(--commons-divider-width) var(--palettes-product-700);
+            --components-indexTable-shadow-mask-default: -10px 0px 0px 0px var(--palettes-product-50);
+            --components-indexTable-cell-transition-property: inset;
+        }
+    }
+}

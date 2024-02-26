@@ -13,7 +13,7 @@ export default {
 
 function getTemplate(args: IndexTableSelectableStory): string {
 	return `
-	<table class="indexTable">
+	<table class="indexTable mod-selectable">
 		<thead class="indexTable-head">
 			<tr class="indexTable-head-row">
 				<th class="indexTable-head-row-cellEmpty"></th>
@@ -28,36 +28,36 @@ function getTemplate(args: IndexTableSelectableStory): string {
 					<label class="checkbox">
 						<input class="checkbox-input" type="checkbox" />
 						<span class="checkbox-label"></span>
-						<span class="u-mask">Sélectionner la ligne</span>
+						<span class="u-mask">Select this line</span>
 					</label>
 				</td>
-				<td class="indexTable-body-row-cell">Contenu</td>
-				<td class="indexTable-body-row-cell">Contenu</td>
-				<td class="indexTable-body-row-cell">Contenu</td>
+				<td class="indexTable-body-row-cell">Content</td>
+				<td class="indexTable-body-row-cell">Content</td>
+				<td class="indexTable-body-row-cell">Content</td>
 			</tr>
 			<tr class="indexTable-body-row">
 				<td class="indexTable-body-row-cellEmpty">
 					<label class="checkbox">
 						<input class="checkbox-input" type="checkbox" />
 						<span class="checkbox-label"></span>
-						<span class="u-mask">Sélectionner la ligne</span>
+						<span class="u-mask">Select this line</span>
 					</label>
 				</td>
-				<td class="indexTable-body-row-cell">Contenu</td>
-				<td class="indexTable-body-row-cell">Contenu</td>
-				<td class="indexTable-body-row-cell">Contenu</td>
+				<td class="indexTable-body-row-cell">Content</td>
+				<td class="indexTable-body-row-cell">Content</td>
+				<td class="indexTable-body-row-cell">Content</td>
 			</tr>
 			<tr class="indexTable-body-row">
 				<td class="indexTable-body-row-cellEmpty">
 					<label class="checkbox">
 						<input class="checkbox-input" type="checkbox" />
 						<span class="checkbox-label"></span>
-						<span class="u-mask">Sélectionner la ligne</span>
+						<span class="u-mask">Select this line</span>
 					</label>
 				</td>
-				<td class="indexTable-body-row-cell">Contenu</td>
-				<td class="indexTable-body-row-cell">Contenu</td>
-				<td class="indexTable-body-row-cell">Contenu</td>
+				<td class="indexTable-body-row-cell">Content</td>
+				<td class="indexTable-body-row-cell">Content</td>
+				<td class="indexTable-body-row-cell">Content</td>
 			</tr>
 		</tbody>
 	</table>
