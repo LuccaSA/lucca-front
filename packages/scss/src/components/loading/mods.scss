@@ -74,7 +74,7 @@
 	color: var(--colors-white-color);
 
 	&::after {
-		border-color: color.transparentize(var(--colors-white-color), 0.44);
+		border-color: color.transparentize(var(--colors-white-color), 0.66);
 		border-top-color: transparent;
 	}
 }

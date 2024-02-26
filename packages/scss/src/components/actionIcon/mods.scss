@@ -9,11 +9,11 @@
 		&:hover,
 		&:focus {
 			color: var(--colors-white-color);
-			background-color: color.transparentize(var(--colors-white-color), 0.9);
+			background-color: color.transparentize(var(--colors-white-color), 0.1);
 		}
 
 		&:active {
-			background-color: color.transparentize(var(--colors-white-color), 0.8);
+			background-color: color.transparentize(var(--colors-white-color), 0.2);
 		}
 	}
 }

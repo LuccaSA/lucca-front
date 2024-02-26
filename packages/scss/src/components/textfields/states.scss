@@ -201,7 +201,7 @@
 	background-image: linear-gradient(
 		to right,
 		var(--components-textfield-material-border-color) 33%,
-		color.transparentize(var(--colors-white-color), 1) 0%
+		color.transparentize(var(--colors-white-color), 0) 0%
 	);
 	background-size: 3px 1px;
 	background-color: transparent;
