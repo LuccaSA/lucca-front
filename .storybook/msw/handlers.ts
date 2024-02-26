@@ -166,4 +166,9 @@ export const handlers = [
 		await delay(300);
 		return HttpResponse.json(mockUserPopover);
 	}),
+
+	http.get('/lucca-banner/meta/api/feature-flag-statuses/user-popover-is-activated', async () => {
+		await delay(300);
+		return HttpResponse.json({ key: 'user-popover-is-activated', status: 'Enabled' });
+	})
 ];

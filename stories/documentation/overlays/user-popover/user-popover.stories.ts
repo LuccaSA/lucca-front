@@ -1,17 +1,17 @@
 import { OverlayModule } from '@angular/cdk/overlay';
 import { provideHttpClient } from '@angular/common/http';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { LuEmployeeCardTriggerDirective } from '@lucca-front/ng/popup-employee';
+import { BrowserAnimationsModule, provideAnimations } from '@angular/platform-browser/animations';
+import { EmployeeCardTriggerModule, LuEmployeeCardTriggerDirective } from '@lucca-front/ng/popup-employee';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 
 export default {
 	title: 'Documentation/Overlays/user-popover',
 	decorators: [
 		applicationConfig({
-			providers: [provideHttpClient()],
+			providers: [provideHttpClient(), provideAnimations()],
 		}),
 		moduleMetadata({
-			imports: [BrowserAnimationsModule, OverlayModule, LuEmployeeCardTriggerDirective],
+			imports: [OverlayModule, EmployeeCardTriggerModule],
 		}),
 	],
 	render: () => {

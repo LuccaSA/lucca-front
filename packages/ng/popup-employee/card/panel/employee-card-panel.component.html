@@ -11,7 +11,16 @@
 >
 	<div *ngIf="employee$ | async as employee" class="lu-popover-content userCard">
 		<div class="userCard-details">
-			<lu-user-picture class="userCard-details-avatar" [user]="employee" />
+			<div [ngSwitch]="userPictureDisplay$ | async" class="userCard-details-avatar">
+				<ng-container *ngSwitchCase="'img'">
+					<img class="picture" [src]="userPictureHref$ | async" [alt]="(userInitials$ | async)?.initials" />
+				</ng-container>
+				<ng-container *ngSwitchCase="'initials'">
+					<div class="picture" *ngIf="userInitials$ | async as initials" style.background-color="hsl({{initials.color}}, 60%, 60%)">
+						<span class="userPicture-initials">{{ initials.initials }}</span>
+					</div>
+				</ng-container>
+			</div>
 			<div class="userCard-details-info">
 				<h3 class="userCard-details-info-name">
 					<div *ngIf="!employee._links?.hrCard?.href; else fullNameDisplayLink">

@@ -1,15 +1,14 @@
 /* eslint-disable @angular-eslint/no-input-rename */
 
 import { OverlayModule } from '@angular/cdk/overlay';
-import { AsyncPipe, DatePipe, NgClass, NgIf, NgTemplateOutlet } from '@angular/common';
+import { AsyncPipe, DatePipe, NgClass, NgIf, NgOptimizedImage, NgSwitch, NgSwitchCase, NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Inject, Input, OnDestroy, Output, TemplateRef, ViewChild } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { ALuPopoverPanel, luTransformPopover } from '@lucca-front/ng/popover';
 import { ILuUser, LuUserPictureModule } from '@lucca-front/ng/user';
-import { Observable, of, Subscription } from 'rxjs';
+import { concatMap, Observable, of, ReplaySubject, Subscription } from 'rxjs';
 
 import { getIntl } from '@lucca-front/ng/core';
-import { catchError } from 'rxjs/operators';
 import { LuEmployeeCard } from '../../employee.model';
 import { LU_POPUP_EMPLOYEE_TRANSLATIONS } from '../../popup-employee.translate';
 import { LuEmployeeCardStore } from '../../service/employee-card.store';
@@ -18,6 +17,7 @@ import { InjectParameterPipe } from '../pipe/inject-parameter.pipe';
 import { isFutureOrTodayPipe, IsFuturePipe } from '../pipe/is-future.pipe';
 import { LeaveEndsDisplayPipe } from '../pipe/leave-ends-display.pipe';
 import { ILuEmployeeCardPanel } from './employee-card-panel.model';
+import { catchError, map } from 'rxjs/operators';
 
 @Component({
 	standalone: true,
@@ -28,30 +28,73 @@ import { ILuEmployeeCardPanel } from './employee-card-panel.model';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	animations: [luTransformPopover],
 	exportAs: 'LuEmployeeCardPanel',
-	imports: [LuUserPictureModule, NgClass, RouterLink, NgIf, NgTemplateOutlet, DatePipe, OverlayModule, LeaveEndsDisplayPipe, AsyncPipe, IsFuturePipe, isFutureOrTodayPipe, InjectParameterPipe],
+	imports: [
+		LuUserPictureModule,
+		NgClass,
+		RouterLink,
+		NgIf,
+		NgTemplateOutlet,
+		DatePipe,
+		OverlayModule,
+		LeaveEndsDisplayPipe,
+		AsyncPipe,
+		IsFuturePipe,
+		isFutureOrTodayPipe,
+		InjectParameterPipe,
+		NgSwitch,
+		NgSwitchCase,
+		NgOptimizedImage,
+	],
 })
 export class LuEmployeeCardPanelComponent extends ALuPopoverPanel implements ILuEmployeeCardPanel, OnDestroy {
-	public employee$: Observable<LuEmployeeCard> | undefined;
-	intl = getIntl(LU_POPUP_EMPLOYEE_TRANSLATIONS);
-	public get user() {
-		return this._user;
-	}
-	public set user(user) {
-		if (user) {
-			this._user = user;
-			this.employee$ = this._service.get(this._user.id).pipe(
-				catchError(() => {
-					return of({
-						id: this._user.id,
-						firstName: this._user.firstName,
-						lastName: this._user.lastName,
+	#user$ = new ReplaySubject<ILuUser>();
+	public employee$: Observable<LuEmployeeCard> = this.#user$.pipe(
+		concatMap((user) =>
+			this._service.get(user.id).pipe(
+				catchError(() =>
+					of({
+						id: user.id,
+						firstName: user.firstName,
+						lastName: user.lastName,
 						leaveEndIsFirstHalfDay: false,
-					});
-				}),
-			);
-			this._changeDetectorRef.markForCheck();
+					}),
+				),
+			),
+		),
+	);
+
+	public userPictureDisplay$ = this.employee$.pipe(
+		map((employee) => {
+			if (employee.pictureHref) {
+				return 'img';
+			} else {
+				return 'initials';
+			}
+		}),
+	);
+
+	public userPictureHref$ = this.employee$.pipe(map((employee) => employee.pictureHref));
+
+	public userInitials$ = this.employee$.pipe(
+		// TODO: verifier s'il y a besoin de créer un lien avec la locale
+		map((employee) => {
+			const initials = `${employee.firstName[0]}${employee.lastName[0]}`;
+
+			return {
+				initials,
+				color: initials.split('').reduce((sum, a) => sum + a.charCodeAt(0), 0) % 360,
+			};
+		}),
+	);
+
+	intl = getIntl(LU_POPUP_EMPLOYEE_TRANSLATIONS);
+
+	public set user(user: ILuUser) {
+		if (user) {
+			this.#user$.next(user);
 		}
 	}
+
 	/**
 	 * This method takes classes set on the host lu-popover element and applies them on the
 	 * popover template that displays in the overlay container.  Otherwise, it's difficult
@@ -86,7 +129,6 @@ export class LuEmployeeCardPanelComponent extends ALuPopoverPanel implements ILu
 	}
 
 	private _subs = new Subscription();
-	protected _user: ILuUser | null = null;
 
 	public constructor(private _changeDetectorRef: ChangeDetectorRef, @Inject(LuEmployeeCardStore) private _service: ILuEmployeeCardStore) {
 		super();
