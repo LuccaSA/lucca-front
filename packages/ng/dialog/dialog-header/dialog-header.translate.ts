@@ -22,4 +22,7 @@ export const luDialogHeaderTranslations: ILuTranslation<LuDialogHeaderTranslatio
 	es: {
 		close: 'Cerrar',
 	},
+	pt: {
+		close: 'Fechar',
+	},
 };
