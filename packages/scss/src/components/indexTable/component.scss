@@ -107,5 +107,9 @@
                     var(--components-indexTable-cell-shadow, var(--commons-boxShadow-S));
             }
         }
+
+        .indexTable-body-row-cell-action {
+            @include a11y.mask;
+        }
     }
 }

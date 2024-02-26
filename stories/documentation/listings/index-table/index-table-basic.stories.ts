@@ -23,17 +23,26 @@ function getTemplate(args: IndexTableBasicStory): string {
 		</thead>
 		<tbody class="indexTable-body">
 			<tr class="indexTable-body-row">
-				<td class="indexTable-body-row-cell">Contenu</td>
+				<td class="indexTable-body-row-cell">
+					<a href="#" class="indexTable-body-row-cell-action">See details</a>
+					Contenu
+				</td>
 				<td class="indexTable-body-row-cell">Contenu</td>
 				<td class="indexTable-body-row-cell">Contenu</td>
 			</tr>
 			<tr class="indexTable-body-row">
-				<td class="indexTable-body-row-cell">Contenu</td>
+				<td class="indexTable-body-row-cell">
+					<a href="#" class="indexTable-body-row-cell-action">See details</a>
+					Contenu
+				</td>
 				<td class="indexTable-body-row-cell">Contenu</td>
 				<td class="indexTable-body-row-cell">Contenu</td>
 			</tr>
 			<tr class="indexTable-body-row">
-				<td class="indexTable-body-row-cell">Contenu</td>
+				<td class="indexTable-body-row-cell">
+					<a href="#" class="indexTable-body-row-cell-action">See details</a>
+					Contenu
+				</td>
 				<td class="indexTable-body-row-cell">Contenu</td>
 				<td class="indexTable-body-row-cell">Contenu</td>
 			</tr>
