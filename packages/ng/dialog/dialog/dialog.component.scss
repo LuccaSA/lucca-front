@@ -3,4 +3,7 @@
 .dialog .cdk-dialog-container {
 	display: flex;
 	flex-direction: column;
+	width: auto;
+	height: auto;
+	flex-grow: 1;
 }
