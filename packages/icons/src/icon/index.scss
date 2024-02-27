@@ -6,9 +6,9 @@
 	@include component;
 	@include vars;
 
-	@each $name, $content in config.$icons {
+	@each $name, $value in config.$icons {
 		&.icon-#{core.camelize($name)} {
-			@include subComponent($content);
+			--components-icon-content: '#{$value}';
 		}
 	}
 

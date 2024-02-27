@@ -15,10 +15,14 @@
 	vertical-align: text-bottom;
 	white-space: nowrap;
 	word-wrap: normal;
-}
 
-@mixin subComponent($content) {
 	&::before {
-		content: '#{$content}';
+		@supports (content: '*' / '') {
+			content: var(--components-icon-content) / '';
+		}
+
+		@supports not (content: '*' / '') {
+			content: var(--components-icon-content);
+		}
 	}
 }
