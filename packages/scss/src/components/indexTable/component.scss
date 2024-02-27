@@ -91,7 +91,7 @@
 
             &::before,
             &::after {
-                transition-property: var(--components-indexTable-cell-transition-property);
+                transition-property: inset, box-shadow, background-color;
                 transition-duration: var(--commons-animations-durations-standard);
             }
 
