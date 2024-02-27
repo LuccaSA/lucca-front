@@ -1,4 +1,4 @@
-import { inject, Injectable, Injector, Renderer2, RendererFactory2 } from '@angular/core';
+import { inject, Injectable, Injector, RendererFactory2 } from '@angular/core';
 import { LuDialogConfig, LuDialogRef, LuDialogResult } from './model';
 import { Dialog, DialogRef } from '@angular/cdk/dialog';
 import { isObservable, merge, of, take } from 'rxjs';
