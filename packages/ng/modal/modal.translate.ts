@@ -22,9 +22,19 @@ export const luModalTranslations: ILuTranslation<ILuModalLabel> = {
 		cancel: 'Annuler',
 		close: 'Fermer',
 	},
+	de: {
+		submit: 'Ok',
+		cancel: 'Abbrechen',
+		close: 'Schließen',
+	},
 	es: {
 		submit: 'Ok',
 		cancel: 'Cancelar',
 		close: 'Cerrar',
+	},
+	pt: {
+		submit: 'Ok',
+		cancel: 'Cancelar',
+		close: 'Fechar',
 	},
 };
