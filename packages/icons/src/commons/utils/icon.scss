@@ -4,13 +4,13 @@
 
 @mixin generate($name) {
 	@if map.has-key(config.$icons, $name) {
-		--components-icon-content: '#{map.get(config.$icons, $name)}';
+		--icon-content: '#{map.get(config.$icons, $name)}';
 
 		display: inline-block;
 		vertical-align: text-bottom;
 		font-style: normal;
 		font-family: config.$font-name;
-		content: var(--components-icon-content);
+		content: var(--icon-content);
 	} @else {
 		@error "“#{$name}” wasn’t found in “@lucca-front/icons config.$icons” map.";
 	}
