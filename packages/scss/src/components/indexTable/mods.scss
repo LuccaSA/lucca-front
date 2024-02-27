@@ -8,7 +8,7 @@
             --components-indexTable-cell-background-color: var(--palettes-product-50);
             --components-indexTable-cell-shadow: 0 0 0 var(--commons-divider-width) var(--palettes-product-700);
             --components-indexTable-shadow-mask-default: -10px 0px 0px 0px var(--palettes-product-50);
-            //is stackable : change the stack color
+            //selected stackable row : we change the stacks background color
             --components-indexTable-stack-svg: var(--components-indexTable-stack-svg-selected);
         }
     }
@@ -74,7 +74,7 @@
         background-color: var(--components-indexTable-background-color);
     }
 
-    //hide box-shadow from underneath rows that slighly appear on edges
+    //hide box-shadow from underneath rows that slighly appear on edges of the sticky header when scrolling
     .indexTable-head-row-cell {
         position: relative;
         &::before {
