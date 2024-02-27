@@ -1,4 +1,4 @@
-import { inject, Injectable, Injector } from '@angular/core';
+import { inject, Injectable, Injector, Renderer2, RendererFactory2 } from '@angular/core';
 import { LuDialogConfig, LuDialogRef, LuDialogResult } from './model';
 import { Dialog, DialogRef } from '@angular/cdk/dialog';
 import { isObservable, merge, of, take } from 'rxjs';
@@ -10,6 +10,8 @@ export class LuDialogService {
 	#cdkDialog = inject(Dialog);
 
 	#injector = inject(Injector);
+
+	#renderer = inject(RendererFactory2).createRenderer(null, null);
 
 	open<C>(config: LuDialogConfig<C>): LuDialogRef<C> {
 		let luDialogRef: LuDialogRef<C>;
@@ -49,6 +51,10 @@ export class LuDialogService {
 			},
 			...(config.cdkConfigOverride || {}),
 		});
+
+		if (cdkRef.componentRef) {
+			this.#renderer.setStyle(cdkRef.componentRef.location.nativeElement, 'display', 'contents');
+		}
 
 		if (!config.alert) {
 			// Setup close listeners on backdrop click and escape key by ourselves so we can hook the `canClose` method to it.
