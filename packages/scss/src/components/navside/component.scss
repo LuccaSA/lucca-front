@@ -91,6 +91,10 @@
 			&:active {
 				background-color: var(--palettes-navigation-900);
 			}
+
+			.lucca-icon {
+				@include icon.S;
+			}
 		}
 
 		.navSide-item-link {
@@ -143,7 +147,7 @@
 
 		.navSide-item-subMenu-link {
 			font-weight: 400;
-			padding: var(--spacings-XS) var(--spacings-S) var(--spacings-XS) 3.25rem;
+			padding: var(--spacings-XS) var(--spacings-S) var(--spacings-XS) var(--spacings-XL);
 			font-size: var(--sizes-S-fontSize);
 			line-height: var(--sizes-S-lineHeight);
 		}
@@ -163,7 +167,7 @@
 			.navSide-item-link {
 				background-color: var(--components-navSide-bottom-section-palette-bg-color);
 				color: var(--components-navSide-bottom-section-palette-text);
-				padding: 1em;
+				padding: var(--spacings-S);
 				box-sizing: border-box;
 				cursor: pointer;
 
