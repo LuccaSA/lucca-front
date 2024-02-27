@@ -1,4 +1,4 @@
-import { inject, Injectable } from '@angular/core';
+import { inject, Injectable, Injector } from '@angular/core';
 import { LuDialogConfig, LuDialogRef, LuDialogResult } from './model';
 import { Dialog, DialogRef } from '@angular/cdk/dialog';
 import { isObservable, merge, of, take } from 'rxjs';
@@ -8,6 +8,8 @@ import { DISMISSED_VALUE } from './model/dialog-ref';
 @Injectable()
 export class LuDialogService {
 	#cdkDialog = inject(Dialog);
+
+	#injector = inject(Injector);
 
 	open<C>(config: LuDialogConfig<C>): LuDialogRef<C> {
 		let luDialogRef: LuDialogRef<C>;
@@ -35,6 +37,7 @@ export class LuDialogService {
 			// Else, just set it to config value or default to first-tabbable
 			autoFocus: config.autoFocus === 'first-input' ? 'dialog' : config.autoFocus ?? 'first-tabbable',
 			templateContext: () => ({ dialogRef: luDialogRef }),
+			injector: this.#injector,
 			providers: (ref: DialogRef<LuDialogResult<C>, C>) => {
 				luDialogRef = new LuDialogRef(ref, config);
 				return [
