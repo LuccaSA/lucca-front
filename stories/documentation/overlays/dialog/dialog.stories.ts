@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, InjectionToken } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import {
@@ -11,6 +11,7 @@ import {
 	LuDialogService,
 	injectDialogRef,
 	provideLuDialog,
+	configureLuDialog,
 } from '@lucca-front/ng/dialog';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { DialogCloseDirective, DialogDismissDirective } from '@lucca-front/ng/dialog';
@@ -53,7 +54,8 @@ class TestDialogContent {
 	selector: 'dialog-story',
 	template: ` <button luButton (click)="open()">Open Dialog</button> `,
 	standalone: true,
-	imports: [DialogFooterComponent, CheckboxInputComponent, FormFieldComponent, TextInputComponent, DialogContentComponent, DialogHeaderComponent, DialogComponent, ButtonComponent, FormsModule],
+	imports: [ButtonComponent],
+	providers: [provideLuDialog()],
 })
 class TestDialogStory {
 	dialog = inject(LuDialogService);
@@ -75,7 +77,7 @@ export default {
 	component: TestDialogStory,
 	decorators: [
 		applicationConfig({
-			providers: [provideLuDialog()],
+			providers: [configureLuDialog()],
 		}),
 		moduleMetadata({
 			imports: [

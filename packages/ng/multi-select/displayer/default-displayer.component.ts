@@ -6,9 +6,10 @@ import { getIntl } from '@lucca-front/ng/core';
 import { ILuOptionContext, LU_OPTION_CONTEXT, ɵLuOptionOutletDirective } from '@lucca-front/ng/core-select';
 import { InputDirective } from '@lucca-front/ng/form-field';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
-import { map } from 'rxjs/operators';
+import { map, switchMap } from 'rxjs/operators';
 import { LuMultiSelectInputComponent } from '../input/select-input.component';
 import { LU_MULTI_SELECT_DISPLAYER_TRANSLATIONS } from './default-displayer.translate';
+import { of } from 'rxjs';
 
 @Component({
 	selector: 'lu-multi-select-default-displayer',
@@ -69,11 +70,11 @@ export class LuMultiSelectDefaultDisplayerComponent<T> implements OnInit {
 	context = inject<ILuOptionContext<T[]>>(LU_OPTION_CONTEXT);
 
 	placeholder$ = this.context.option$.pipe(
-		map((options) => {
+		switchMap((options) => {
 			if ((options || []).length > 0) {
-				return '';
+				return of('');
 			}
-			return this.select.placeholder;
+			return this.select.placeholder$;
 		}),
 	);
 
@@ -113,6 +114,7 @@ export class LuMultiSelectDefaultDisplayerComponent<T> implements OnInit {
 			this.select.panelRef?.updateSelectedOptions(this.value);
 		}
 	}
+
 	ngOnInit(): void {
 		this.select.focusInput$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((data?: { keepClue: true }) => {
 			// Everytime we want to focus, we need to reset the input
