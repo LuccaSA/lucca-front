@@ -131,8 +131,7 @@
         }
 
         .indexTable-foot-row-cell {
-            padding-top: var(--spacings-XS);
-            padding-bottom: var(--spacings-XS);
+            padding: var(--spacings-XS) var(--components-indexTable-padding);
             text-align: right;
         }
     }
