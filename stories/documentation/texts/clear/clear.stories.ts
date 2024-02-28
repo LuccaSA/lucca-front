@@ -31,9 +31,7 @@ function getTemplate(args: ClearBasicStory): string {
 	const s = args.s ? `mod-S` : '';
 	const product = args.product ? `palette-product` : '';
 	const disabled = args.disabled ? `disabled` : '';
-	return `
-		<a href="#" class="clear ${s} ${product}" ${disabled}><span class="u-mask">Clear</span></a>
-	`;
+	return `<a href="#" class="clear ${s} ${product}" ${disabled}><span class="u-mask">Clear</span></a>`;
 }
 
 const Template: StoryFn<ClearBasicStory> = (args) => ({
