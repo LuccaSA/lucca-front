@@ -4,6 +4,7 @@ import { LuModalRefFactory } from './modal-ref.factory';
 import { LuModal } from './modal.service';
 import { LU_MODAL_REF_FACTORY } from './modal.token';
 import { LuDialogService } from '@lucca-front/ng/dialog';
+import { DialogModule } from '@angular/cdk/dialog';
 
 /**
  * Provide LuModal.
@@ -14,7 +15,7 @@ export function provideLuModal(): Provider[] {
 }
 
 @NgModule({
-	imports: [OverlayModule],
-	providers: [provideLuModal()],
+	imports: [OverlayModule, DialogModule],
+	providers: [provideLuModal(), LuDialogService],
 })
 export class LuModalModule {}

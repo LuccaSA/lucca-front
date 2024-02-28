@@ -61,18 +61,6 @@
 			list-style-type: none;
 		}
 
-		.navSide-item,
-		.navSide-item-subMenu-item,
-		.navSide-item-subMenu-link {
-			&:not(.mod-mobileToggle) {
-				+ .navSide-item,
-				+ .navSide-item-subMenu-item,
-				+ .navSide-item-subMenu-link {
-					margin-top: var(--spacings-XXS);
-				}
-			}
-		}
-
 		.navSide-item-link,
 		.navSide-item-subMenu-link {
 			cursor: pointer;
@@ -102,6 +90,10 @@
 
 			&:active {
 				background-color: var(--palettes-navigation-900);
+			}
+
+			.lucca-icon {
+				@include icon.S;
 			}
 		}
 
@@ -175,7 +167,7 @@
 			.navSide-item-link {
 				background-color: var(--components-navSide-bottom-section-palette-bg-color);
 				color: var(--components-navSide-bottom-section-palette-text);
-				padding: 1em;
+				padding: var(--spacings-S);
 				box-sizing: border-box;
 				cursor: pointer;
 
