@@ -1,12 +1,11 @@
-import { Component, Input, Type, inject } from '@angular/core';
+import { Component, inject, Input, Type } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { ILuModalContent, LU_MODAL_DATA, LuModal, LuModalConfig, LuModalModule } from '@lucca-front/ng/modal';
 import { LuToastsModule, LuToastsService } from '@lucca-front/ng/toast';
-import { Meta, applicationConfig, moduleMetadata } from '@storybook/angular';
-import { map, of, shareReplay, timer } from 'rxjs';
+import { applicationConfig, Meta, moduleMetadata } from '@storybook/angular';
+import { map, shareReplay, timer } from 'rxjs';
 import { generateMarkdownCodeBlock, getStoryGenerator, useDocumentationStory } from 'stories/helpers/stories';
-import { delay } from 'rxjs/operators';
-import { ButtonComponent } from '../../../../packages/ng/button/button.component';
+import { ButtonComponent } from '@lucca-front/ng/button';
 
 type StoryComponent = LuModalConfig & { useDynamicContent: boolean; message: string };
 
