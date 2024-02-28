@@ -38,25 +38,24 @@
 				<p *ngIf="employee.userDepartment" class="userCard-details-info-detail">{{employee.userDepartment?.name}}</p>
 
 				<p class="userCard-details-info-detail">
+					<!--                        HORS CONTRAT-->
+					<span *ngIf="employee.dtContractStart | isFuture" class="userCard-details-info-detail-link">
+						<span aria-hidden="true" class="lucca-icon icon-payPeriod mod-S"></span>
+						<span class="userCard-details-info-detail-link-state">
+							{{intl.EMPLOYEE_CARD_PANEL_COMING_ON_LABEL | injectParameter : (employee.dtContractStart | date: 'longDate') }}
+						</span>
+					</span>
+					<span *ngIf="!(employee.dtContractEnd | isFutureOrToday)" class="userCard-details-info-detail-link">
+						<span aria-hidden="true" class="lucca-icon icon-calendarStrikethrough mod-S"></span>
+						<span class="userCard-details-info-detail-link-state"> {{intl.EMPLOYEE_CARD_PANEL_EMPLOYEE_HAS_LEAVED_LABEL }} </span>
+					</span>
+					<!--                     EN CONTRAT-->
 					<a
-						*ngIf="employee._links?.schedule?.href; else workLocationDisplayDiv"
+						*ngIf="employee._links?.schedule && !(employee.dtContractStart | isFuture) && (employee.dtContractEnd | isFutureOrToday)"
 						class="userCard-details-info-detail-link"
 						[href]="employee._links?.schedule?.href"
 					>
-						<ng-container *ngTemplateOutlet="workLocationDisplay" />
-					</a>
-					<ng-template #workLocationDisplayDiv>
-						<div class="userCard-details-info-detail-link">
-							<ng-container *ngTemplateOutlet="workLocationDisplay" />
-						</div>
-					</ng-template>
-					<ng-template #workLocationDisplay>
-						<span *ngIf="employee.dtContractEnd | isFutureOrToday" aria-hidden="true" class="lucca-icon icon-payPeriod mod-S"></span>
-						<span
-							*ngIf="!(employee.dtContractEnd | isFutureOrToday)"
-							aria-hidden="true"
-							class="lucca-icon icon-calendarStrikethrough mod-S"
-						></span>
+						<span aria-hidden="true" class="lucca-icon icon-payPeriod mod-S"></span>
 						<span class="userCard-details-info-detail-link-state">
 							<ng-container *ngIf="employee.isWorkingNow === true">
 								<ng-container *ngIf="employee.currentWorkLocation">
@@ -70,21 +69,15 @@
 							</ng-container>
 
 							<ng-container *ngIf="employee.isWorkingNow === false">
-								<ng-container *ngIf="employee.dtContractStart | isFuture">
-									{{intl.EMPLOYEE_CARD_PANEL_COMING_ON_LABEL | injectParameter : (employee.dtContractStart | date: 'longDate') }}
-								</ng-container>
 								<ng-container *ngIf="!(employee.dtContractStart | isFuture) && (employee.dtContractEnd | isFutureOrToday)">
 									{{ intl.EMPLOYEE_CARD_PANEL_ABSENCE_LABEL }}
 									<span *ngIf="employee.leaveEndsOn" class="u-textGrey600">
 										- {{ employee.leaveEndsOn | leaveEndsDisplay: employee.leaveEndIsFirstHalfDay }}
 									</span>
 								</ng-container>
-								<ng-container *ngIf="employee.dtContractEnd && !(employee.dtContractEnd | isFutureOrToday )">
-									{{intl.EMPLOYEE_CARD_PANEL_EMPLOYEE_HAS_LEAVED_LABEL }}
-								</ng-container>
 							</ng-container>
 						</span>
-					</ng-template>
+					</a>
 				</p>
 			</div>
 		</div>
