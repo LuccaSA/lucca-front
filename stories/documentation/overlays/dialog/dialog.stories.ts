@@ -1,81 +1,26 @@
-import { Component, inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import {
+	configureLuDialog,
+	DialogCloseDirective,
 	DialogComponent,
 	DialogContentComponent,
+	DialogDismissDirective,
 	DialogFooterComponent,
 	DialogHeaderComponent,
 	DialogOpenDirective,
-	LuDialogConfig,
-	LuDialogService,
 	injectDialogRef,
-	provideLuDialog,
 } from '@lucca-front/ng/dialog';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
-import { DialogCloseDirective, DialogDismissDirective } from '@lucca-front/ng/dialog';
 import { CheckboxInputComponent, TextInputComponent } from '@lucca-front/ng/forms';
-import { Meta, StoryObj, applicationConfig, moduleMetadata } from '@storybook/angular';
-
-@Component({
-	selector: 'test-dialog',
-	template: `
-		<lu-dialog>
-			<lu-dialog-header>Dialog header</lu-dialog-header>
-
-			<lu-dialog-content>Dialog content</lu-dialog-content>
-
-			<lu-dialog-footer>
-				<div class="footer-content">Optional footer text</div>
-				<div class="footer-actions">
-					<button type="button" luButton (click)="close()">Confirm</button>
-					<button type="button" luButton="text" (click)="dismiss()">Cancel</button>
-				</div>
-			</lu-dialog-footer>
-		</lu-dialog>
-	`,
-	imports: [ButtonComponent, DialogHeaderComponent, DialogFooterComponent, CheckboxInputComponent, DialogContentComponent, DialogComponent],
-	standalone: true,
-})
-class TestDialogContent {
-	ref = injectDialogRef<number>();
-
-	close(): void {
-		this.ref.close(0);
-	}
-
-	dismiss(): void {
-		this.ref.dismiss();
-	}
-}
-
-@Component({
-	selector: 'dialog-story',
-	template: ` <button luButton (click)="open()">Open Dialog</button> `,
-	standalone: true,
-	imports: [DialogFooterComponent, CheckboxInputComponent, FormFieldComponent, TextInputComponent, DialogContentComponent, DialogHeaderComponent, DialogComponent, ButtonComponent, FormsModule],
-})
-class TestDialogStory {
-	dialog = inject(LuDialogService);
-
-	config: LuDialogConfig<TestDialogContent>;
-
-	open(): void {
-		const ref = this.dialog.open({
-			content: TestDialogContent,
-			size: 'fullScreen',
-		});
-
-		ref.closed$.subscribe(console.log);
-	}
-}
+import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 
 export default {
 	title: 'Documentation/Overlays/Dialog/Angular',
-	component: TestDialogStory,
 	decorators: [
 		applicationConfig({
-			providers: [provideLuDialog()],
+			providers: [configureLuDialog()],
 		}),
 		moduleMetadata({
 			imports: [

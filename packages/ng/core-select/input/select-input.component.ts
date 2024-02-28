@@ -27,7 +27,12 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	@ViewChild('inputElement')
 	private inputElementRef: ElementRef<HTMLInputElement>;
 
-	@Input() placeholder = '';
+	public placeholder$ = new BehaviorSubject('');
+
+	@Input()
+	set placeholder(value: string) {
+		this.placeholder$.next(value);
+	}
 
 	@Input({ transform: booleanAttribute })
 	@HostBinding('class.is-clearable')
