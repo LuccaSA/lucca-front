@@ -10,13 +10,6 @@ import { ButtonComponent } from '@lucca-front/ng/button';
 type StoryComponent = LuModalConfig & { useDynamicContent: boolean; message: string };
 
 const globalArgTypes = {
-	position: {
-		options: ['left', 'right'],
-		control: {
-			type: 'select',
-		},
-		if: { arg: 'mode', eq: 'sidepanel' },
-	},
 	mode: {
 		options: ['modal', 'sidepanel'],
 		control: {
@@ -207,7 +200,6 @@ export const ModalSidepanelMode = generateStory({
 		},
 		argTypes: {
 			mode: { table: { disable: true } },
-			position: globalArgTypes.position,
 		},
 	},
 });

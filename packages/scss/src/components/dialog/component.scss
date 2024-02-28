@@ -49,6 +49,7 @@
 			box-shadow: 0 1px 0 0 var(--palettes-neutral-100);
 			gap: var(--spacings-S);
 			position: sticky;
+			z-index: 1;
 			display: grid;
 			top: 0;
 		}
