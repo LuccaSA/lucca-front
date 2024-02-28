@@ -13,7 +13,7 @@ export default {
 
 function getTemplate(args: IndexTableFooterStory): string {
 	return `
-	<h1 class="u-h3">Single footer</h1>
+	<h2 class="u-h3">Single footer</h2>
 	<table class="indexTable u-marginBottomL">
 		<thead class="indexTable-head">
 			<tr class="indexTable-head-row">
@@ -48,7 +48,7 @@ function getTemplate(args: IndexTableFooterStory): string {
 			</tr>
 		</tfoot>
 	</table>
-	<h1 class="u-h3">Multiples footers</h1>
+	<h2 class="u-h3">Multiples footers</h2>
 	<table class="indexTable">
 		<thead class="indexTable-head">
 			<tr class="indexTable-head-row">
