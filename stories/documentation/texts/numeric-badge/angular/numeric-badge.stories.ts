@@ -16,6 +16,9 @@ export default {
 				type: 'select',
 			},
 		},
+		value: {
+			description: 'Doit obligatoirement contenir une valeur numérique (ex: 7, "3/5", "+2", etc.)',
+		}
 	},
 } as Meta;
 
