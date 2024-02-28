@@ -17,12 +17,22 @@
             vertical-align: bottom;
         }
 
-        .indexTable-head-row {
-            display: table-row;
-        }
-
         .indexTable-body {
             display: table-row-group;
+        }
+
+        //There might be more than one footer
+        .indexTable-foot {
+            display: table-row-group;
+            &:is(tfoot) {
+                display: table-footer-group;
+            }
+        }
+
+        .indexTable-head-row,
+        .indexTable-body-row,
+        .indexTable-foot-row {
+            display: table-row;
         }
 
         .indexTable-body-row {
@@ -46,7 +56,8 @@
         .indexTable-head-row-transparentCell,
         .indexTable-body-row-transparentCell,
         .indexTable-head-row-cell,
-        .indexTable-body-row-cell {
+        .indexTable-body-row-cell,
+        .indexTable-foot-row-cell {
             display: table-cell;
             vertical-align: middle;
             text-align: left;
@@ -117,6 +128,12 @@
             display: flex;
             align-items: center;
             gap: var(--spacings-XXS);
+        }
+
+        .indexTable-foot-row-cell {
+            padding-top: var(--spacings-XS);
+            padding-bottom: var(--spacings-XS);
+            text-align: right;
         }
     }
 }
