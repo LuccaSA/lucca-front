@@ -97,7 +97,7 @@ function getTemplate(args: IndexTableNestedSelectableStory): string {
 							<span class="lucca-icon icon-arrowChevronBottom" aria-hidden="true"></span>
 							<span class="u-mask">Hide details</span>
 						</button>
-						<span class="indexTable-body-rowGroup-cellTitle-title">october</span>
+						<span class="indexTable-body-rowGroup-cellTitle-title">October</span>
 						<span class="numericBadge">2</span>
 					</div>
 				</th>
@@ -164,7 +164,7 @@ function getTemplate(args: IndexTableNestedSelectableStory): string {
 							<span class="lucca-icon icon-arrowChevronBottom" aria-hidden="true"></span>
 							<span class="u-mask">Hide details</span>
 						</button>
-						<span class="indexTable-body-rowGroup-cellTitle-title">january</span>
+						<span class="indexTable-body-rowGroup-cellTitle-title">January</span>
 						<span class="numericBadge">1</span>
 					</div>
 				</th>
