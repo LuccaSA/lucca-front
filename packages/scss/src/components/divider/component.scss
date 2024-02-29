@@ -1,7 +1,7 @@
 @mixin component($atRoot: 'without: rule') {
 	border: 0;
 
-	&:empty {
+	&:where(:empty) {
 		border-top-color: var(--commons-divider-color);
 		border-top-width: var(--commons-divider-width);
 		border-top: var(--commons-divider-border);
