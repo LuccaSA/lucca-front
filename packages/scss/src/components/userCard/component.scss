@@ -8,7 +8,6 @@
 	@at-root ($atRoot) {
 		.userCard-details {
 			--components-user-picture-image-size: 5.25rem;
-
 			display: flex;
 			align-items: center;
 			gap: var(--spacings-S);
@@ -54,7 +53,7 @@
 			line-height: var(--sizes-S-lineHeight);
 		}
 
-		.userCard-details-info-detail-link {
+		.userCard-details-info-detail-workplace {
 			display: flex;
 			align-items: center;
 			gap: var(--spacings-XXS);
@@ -62,13 +61,17 @@
 			color: var(--palettes-grey-800);
 			text-decoration: none;
 
-			&:hover,
-			&:active,
-			&:focus {
-				color: var(--palettes-grey-800);
+			&.mod-link {
+				text-decoration: none;
 
-				.userCard-details-info-detail-link-state {
-					text-decoration: underline;
+				&:hover,
+				&:active,
+				&:focus {
+					color: var(--palettes-grey-800);
+
+					.userCard-details-info-detail-workplace-state {
+						text-decoration: underline;
+					}
 				}
 			}
 		}

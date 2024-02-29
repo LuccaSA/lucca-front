@@ -39,24 +39,27 @@
 
 				<p class="userCard-details-info-detail">
 					<!--                        HORS CONTRAT-->
-					<span *ngIf="employee.dtContractStart | isFuture" class="userCard-details-info-detail-link">
+					<span *ngIf="employee.dtContractStart | isFuture" class="userCard-details-info-detail-workplace">
 						<span aria-hidden="true" class="lucca-icon icon-payPeriod mod-S"></span>
 						<span class="userCard-details-info-detail-link-state">
 							{{intl.EMPLOYEE_CARD_PANEL_COMING_ON_LABEL | injectParameter : (employee.dtContractStart | date: 'longDate') }}
 						</span>
 					</span>
-					<span *ngIf="!(employee.dtContractEnd | isFutureOrToday)" class="userCard-details-info-detail-link">
+					<span
+						*ngIf="!(employee.dtContractStart | isFuture) && !(employee.dtContractEnd | isFutureOrToday)"
+						class="userCard-details-info-detail-workplace"
+					>
 						<span aria-hidden="true" class="lucca-icon icon-calendarStrikethrough mod-S"></span>
 						<span class="userCard-details-info-detail-link-state"> {{intl.EMPLOYEE_CARD_PANEL_EMPLOYEE_HAS_LEAVED_LABEL }} </span>
 					</span>
 					<!--                     EN CONTRAT-->
 					<a
 						*ngIf="employee._links?.schedule && !(employee.dtContractStart | isFuture) && (employee.dtContractEnd | isFutureOrToday)"
-						class="userCard-details-info-detail-link"
+						class="userCard-details-info-detail-workplace mod-link"
 						[href]="employee._links?.schedule?.href"
 					>
 						<span aria-hidden="true" class="lucca-icon icon-payPeriod mod-S"></span>
-						<span class="userCard-details-info-detail-link-state">
+						<span class="userCard-details-info-detail-workplace-state">
 							<ng-container *ngIf="employee.isWorkingNow === true">
 								<ng-container *ngIf="employee.currentWorkLocation">
 									{{ employee.currentWorkLocation?.name }}
