@@ -11,6 +11,9 @@ import { ALuSelectInputComponent } from '@lucca-front/ng/select';
 import { ILuQualification } from '../../qualification.model';
 import { LU_QUALIFICATION_SELECT_INPUT_TRANSLATIONS } from './qualification-select-input.translate';
 
+/**
+ * @deprecated prefer SimpleSelect or MultipleSelect with jobQualifications directive
+ */
 @Component({
 	selector: 'lu-qualification-select',
 	templateUrl: './qualification-select-input.component.html',
@@ -26,9 +29,6 @@ import { LU_QUALIFICATION_SELECT_INPUT_TRANSLATIONS } from './qualification-sele
 		},
 	],
 })
-/**
- * @deprecated prefer SimpleSelect or MultipleSelect with jobQualifications directive
- */
 export class LuQualificationSelectInputComponent<
 		D extends import('../../qualification.model').ILuQualification = import('../../qualification.model').ILuQualification,
 		P extends ILuOptionPickerPanel<D> = ILuOptionPickerPanel<D>,

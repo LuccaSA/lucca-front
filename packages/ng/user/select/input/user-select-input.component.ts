@@ -14,7 +14,7 @@ import { LuUserPagedSearcherComponent } from '../searcher';
 import { LU_USER_SELECT_INPUT_TRANSLATIONS } from './user-select-input.translate';
 
 /**
- * Displays user'picture or a placeholder with his/her initials and random bg color'
+ * @deprecated prefer SimpleSelect or MultipleSelect with luCustomUsers directive
  */
 @Component({
 	selector: 'lu-user-select',
@@ -45,9 +45,6 @@ import { LU_USER_SELECT_INPUT_TRANSLATIONS } from './user-select-input.translate
 		},
 	],
 })
-/**
- * @deprecated prefer SimpleSelect or MultipleSelect with luCustomUsers directive
- */
 export class LuUserSelectInputComponent<U extends import('../../user.model').ILuUser = import('../../user.model').ILuUser>
 	extends ALuSelectInputComponent<U>
 	implements ControlValueAccessor, ILuInputWithPicker<U>, AfterViewInit
