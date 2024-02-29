@@ -13,7 +13,7 @@
 		<div class="userCard-details">
 			<div [ngSwitch]="userPictureDisplay$ | async" class="userCard-details-avatar">
 				<ng-container *ngSwitchCase="'img'">
-					<img class="picture" [src]="userPictureHref$ | async" [alt]="(userInitials$ | async)?.initials" />
+					<img class="picture" [src]="userPictureHref$ | async" [alt]="(userInitials$ | async)?.initials" (error)="pictureError()"/>
 				</ng-container>
 				<ng-container *ngSwitchCase="'initials'">
 					<div class="picture" *ngIf="userInitials$ | async as initials" style.background-color="hsl({{initials.color}}, 60%, 60%)">

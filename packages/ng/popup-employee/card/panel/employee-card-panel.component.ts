@@ -6,7 +6,7 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, In
 import { RouterLink } from '@angular/router';
 import { ALuPopoverPanel, luTransformPopover } from '@lucca-front/ng/popover';
 import { ILuUser, LuUserPictureModule } from '@lucca-front/ng/user';
-import { concatMap, Observable, of, ReplaySubject, Subscription } from 'rxjs';
+import { BehaviorSubject, combineLatest, concatMap, Observable, of, ReplaySubject, Subscription } from 'rxjs';
 
 import { getIntl } from '@lucca-front/ng/core';
 import { LuEmployeeCard } from '../../employee.model';
@@ -48,6 +48,7 @@ import { catchError, map } from 'rxjs/operators';
 })
 export class LuEmployeeCardPanelComponent extends ALuPopoverPanel implements ILuEmployeeCardPanel, OnDestroy {
 	#user$ = new ReplaySubject<ILuUser>();
+	#errorImage$ = new BehaviorSubject<boolean>(false);
 	public employee$: Observable<LuEmployeeCard> = this.#user$.pipe(
 		concatMap((user) =>
 			this._service.get(user.id).pipe(
@@ -63,15 +64,19 @@ export class LuEmployeeCardPanelComponent extends ALuPopoverPanel implements ILu
 		),
 	);
 
-	public userPictureDisplay$ = this.employee$.pipe(
-		map((employee) => {
-			if (employee.pictureHref) {
+	public userPictureDisplay$ = combineLatest([this.employee$, this.#errorImage$]).pipe(
+		map(([employee, isError]) => {
+			if (employee.pictureHref && !isError) {
 				return 'img';
 			} else {
 				return 'initials';
 			}
 		}),
 	);
+
+	pictureError() {
+		this.#errorImage$.next(true);
+	}
 
 	public userPictureHref$ = this.employee$.pipe(map((employee) => employee.pictureHref));
 
@@ -82,7 +87,7 @@ export class LuEmployeeCardPanelComponent extends ALuPopoverPanel implements ILu
 
 			return {
 				initials,
-				color: initials.split('').reduce((sum, a) => sum + a.charCodeAt(0), 0) % 360,
+				color: `${employee.firstName}${employee.lastName}`.split('').reduce((sum, a) => sum + a.charCodeAt(0), 0) % 360,
 			};
 		}),
 	);
@@ -162,4 +167,6 @@ export class LuEmployeeCardPanelComponent extends ALuPopoverPanel implements ILu
 		//   firstItem.focus();
 		// }
 	}
+
+
 }

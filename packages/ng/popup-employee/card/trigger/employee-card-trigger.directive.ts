@@ -80,11 +80,11 @@ export class LuEmployeeCardTriggerDirective extends ALuPopoverTrigger<LuEmployee
 		this.target = new LuPopoverTarget();
 		this.target.elementRef = this._elementRef;
 		this._triggerId = this._elementRef.nativeElement.getAttribute('id') || this._triggerId;
-		this.target.position = 'below';
+		this.target.position = 'above';
 		this.target.alignment = 'left';
 		this.triggerEvent = 'none';
 		this.enterDelay = 300;
-		this.leaveDelay = 200;
+		this.leaveDelay = 100;
 
 		inject(USER_POPOVER_IS_ACTIVATED)
 			.pipe(takeUntilDestroyed())
