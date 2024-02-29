@@ -1,4 +1,5 @@
 @use '@lucca-front/scss/src/commons/utils/loading';
+@use '@lucca-front/scss/src/components/keyframe/exports' as keyframe;
 @use '@lucca-front/scss/src/commons/utils/a11y';
 @use '@lucca-front/icons/src/icon/exports' as icon;
 
@@ -124,6 +125,8 @@
 		}
 
 		.navSide-item-arrow {
+			@include icon.S;
+
 			transition-duration: var(--commons-animations-durations-fast);
 			transition-property: transform;
 			transition-timing-function: ease-out;
@@ -134,10 +137,10 @@
 			flex-shrink: 0;
 			transform-origin: 50% 50%;
 			transform: rotate(90deg);
-			@include icon.S;
 		}
 
 		.navSide-item-subMenu {
+			animation-duration: var(--commons-animations-durations-standard);
 			font-size: var(--components-navSide-sub-font-size);
 			margin: 0;
 			padding: 0;
@@ -150,6 +153,27 @@
 			padding: var(--spacings-XS) var(--spacings-S) var(--spacings-XS) var(--spacings-XL);
 			font-size: var(--sizes-S-fontSize);
 			line-height: var(--sizes-S-lineHeight);
+		}
+
+		.navSide-item-subMenu-item {
+			@include keyframe.slideInLeft;
+
+			opacity: 0;
+			animation-fill-mode: forwards;
+			animation-name: slideInLeft;
+			animation-duration: var(--commons-animations-durations-fast);
+			animation-delay: var(--delay);
+
+			@media (prefers-reduced-motion) {
+				animation: none;
+				opacity: 1;
+			}
+
+			@for $i from 0 through 10 {
+				&:nth-child(#{$i}n) {
+					--delay: #{$i * 25ms};
+				}
+			}
 		}
 
 		.navSide-bottomSection {
@@ -177,8 +201,8 @@
 				}
 			}
 
+			// .navSide-item-alert is deprecated
 			.navSide-item-alert {
-				// deprecated
 				background-color: var(--components-navSide-bottom-section-palette-alert-color);
 				color: var(--components-navSide-bottom-section-palette-alert-text);
 			}

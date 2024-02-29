@@ -70,9 +70,24 @@ function getTemplate(args: MenuSecondaryBasicStory): string {
 								<a href="#" class="navSide-item-subMenu-link">Section 2.1</a>
 							</li>
 							<li class="navSide-item-subMenu-item">
+								<a href="#" class="navSide-item-subMenu-link">
+									Section 2.2
+								</a>
+							</li>
+							<li class="navSide-item-subMenu-item">
 								<a href="#" class="navSide-item-subMenu-link is-active">
 									Section 2.3
 									<span class="numericBadge palette-product mod-S"><span class="u-mask">, </span>9</span>
+								</a>
+							</li>
+							<li class="navSide-item-subMenu-item">
+								<a href="#" class="navSide-item-subMenu-link">
+									Section 2.4
+								</a>
+							</li>
+							<li class="navSide-item-subMenu-item">
+								<a href="#" class="navSide-item-subMenu-link">
+									Section 2.5
 								</a>
 							</li>
 						</ul>
