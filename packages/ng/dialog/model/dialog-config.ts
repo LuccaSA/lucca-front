@@ -72,9 +72,20 @@ interface BaseLuDialogConfig<C> {
 	 */
 	canClose?: (comp: C) => boolean | Observable<boolean>;
 
+	/**
+	 * The size of the panel used for the dialog
+	 */
 	size?: 'XS' | 'S' | 'M' | 'L' | 'XL' | 'fitContent' | `maxContent` | 'fullScreen';
 
+	/**
+	 * Should it be a modal (default), a drawer? a drawer from bottom?
+	 */
 	mode?: 'default' | 'drawer' | 'drawer-from-bottom';
+
+	/**
+	 * Classes to add to the panel
+	 */
+	panelClasses?: string[];
 }
 
 export type LuDialogConfig<T> = LuDialogData<T> extends never ? Omit<BaseLuDialogConfig<T>, 'data'> : BaseLuDialogConfig<T>;
