@@ -32,7 +32,7 @@ function getTemplate(args: MenuSecondaryBasicStory): string {
 	const banner = args.banner ? `mod-withBanner` : '';
 	const open = args.open ? `is-open` : '';
 	return `
-	<div class="navSide ${compact} ${banner} ${open}">
+	<div class="navSide ${compact} ${banner}">
 		<nav role="navigation" aria-label="Nom application" class="navSide-wrapper">
 			<div class="navSide-mainSection">
 				<div class="navSide-item mod-mobileToggle">
@@ -59,7 +59,7 @@ function getTemplate(args: MenuSecondaryBasicStory): string {
 							</li>
 						</ul>
 					</li>
-					<li class="navSide-item is-open">
+					<li class="navSide-item ${open}">
 						<button type="button" class="navSide-item-link" aria-expanded="true">
 							<span aria-hidden="true" class="lucca-icon icon-peoplePerson"></span>
 							<span class="navSide-item-link-title">Section#2 with a larger name</span>
