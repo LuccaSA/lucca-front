@@ -1,0 +1,37 @@
+<h1>Filter Bar</h1>
+
+<!-- Basics -->
+<section class="contentSection">
+	<h2>Basics</h2>
+
+	<form class="filterBar">
+		<div class="grid" style="--grid-columns: 4; --grid-colspan: 4">
+			<div class="grid-column" style="--grid-colspanAtMediaMinS: 2; --grid-colspanAtMediaMinM: 1">toto</div>
+			<div class="grid-column" style="--grid-colspanAtMediaMinS: 2; --grid-colspanAtMediaMinM: 1">tata</div>
+			<div class="grid-column" style="--grid-colspanAtMediaMinS: 2; --grid-colspanAtMediaMinM: 1">titi</div>
+			<div class="grid-column" style="--grid-colspanAtMediaMinS: 2; --grid-colspanAtMediaMinM: 1">tutu</div>
+		</div>
+		<div class="grid filterBar-toggledFilters" style="--grid-columns: 4; --grid-colspan: 4">
+			<div class="grid-column" style="--grid-colspanAtMediaMinS: 2; --grid-colspanAtMediaMinM: 1">toto</div>
+			<div class="grid-column" style="--grid-colspanAtMediaMinS: 2; --grid-colspanAtMediaMinM: 1">tata</div>
+			<div class="grid-column" style="--grid-colspanAtMediaMinS: 2; --grid-colspanAtMediaMinM: 1">titi</div>
+			<div class="grid-column" style="--grid-colspanAtMediaMinS: 2; --grid-colspanAtMediaMinM: 1">tutu</div>
+		</div>
+		<div class="filterBar-footer">
+			<button type="button" class="button mod-text mod-withIcon filterBar-footer-toggleButton" aria-expanded="false">
+				<span aria-hidden="true" class="lucca-icon icon-arrowChevronBottom"></span>
+				<span class="filterBar-footer-toggleButton-labelAlternative" data-content-before="Moins de filtres" aria-hidden="true"></span>
+				<span class="filterBar-footer-toggleButton-label">Plus de filtres</span>
+			</button>
+			<div class="filterBar-footer-actions">
+				<span>21 résultats sur 30</span>
+				<button type="reset" class="button mod-text palette-product">Réinitialiser les filtres</button>
+				<button type="submit" class="button">Appliquer</button>
+			</div>
+		</div>
+
+	</form>
+</section>
+
+<!-- To tell the ui-diff tool that the page has finished rendering -->
+<span id="ready"></span>
