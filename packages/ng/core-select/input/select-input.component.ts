@@ -104,7 +104,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	}
 
 	public get inputPlaceholder(): string | null {
-		return this.value ? null : this.placeholder;
+		return this.value ? null : this.placeholder$.value;
 	}
 
 	public clueChanged(clue: string): void {
