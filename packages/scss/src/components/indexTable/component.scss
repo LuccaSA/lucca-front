@@ -115,7 +115,7 @@
                 z-index: -1;
                 border-radius: var(--components-indexTable-cell-border-radius, 0);
                 background-color: var(--components-indexTable-cell-background-color, var(--colors-white-color));
-                // shadow-mask : since the card apparence is put on every cell (du to a Safari bug), we need to hide the right part of the box shadow.
+                // shadow-mask : since the card apparence is put on every cell (du to a Safari bug), we need to hide the left part of the box shadow for everycell exept the first one.
                 // We do this with a rectangular white box-shadow above it.
                 box-shadow: var(--components-indexTable-shadow-mask),
                     var(--components-indexTable-cell-shadow, var(--commons-boxShadow-S));

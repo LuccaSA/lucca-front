@@ -98,3 +98,53 @@
         background-color: var(--components-indexTable-background-color);
     }
 }
+
+@mixin responsiveCardList {
+    display: flex;
+    flex-direction: column;
+    gap: var(--components-indexTable-row-spacing);
+    padding-top: var(--components-indexTable-padding);
+
+    .indexTable-head {
+        display: none;
+    }
+
+    .indexTable-body {
+        display: flex;
+        flex-direction: column;
+        gap: var(--components-indexTable-row-spacing-responsive);
+    }
+
+    .indexTable-body-row {
+        display: grid;
+        // Grid layout by default is a basic one column template.
+        // The user can override this and build a specific layout by using --components-indexTable-row-grid-template-columns and --components-indexTable-row-grid-template-areas
+        grid-template-columns: var(--components-indexTable-row-grid-template-columns, 1fr);
+        grid-template-areas: var(--components-indexTable-row-grid-template-areas, none);
+        position: relative;
+        padding: var(--components-indexTable-row-spacing-responsive) 0;
+    }
+
+    .indexTable-body-row-cell {
+        position: static;
+        grid-column-start: 1;
+        padding-top: 0;
+        padding-bottom: 0;
+        &::before {
+            border-radius: var(--components-indexTable-border-radius);
+        }
+
+        &:not(:first-child)::before {
+            display: none;
+        }
+    }
+
+    .indexTable-body-row-cell-content[data-name] {
+        display: flex;
+        gap: var(--components-indexTable-row-spacing-responsive);
+        &::before {
+            content: attr(data-name);
+            font-weight: 600;
+        }
+    }
+}

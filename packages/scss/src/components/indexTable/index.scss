@@ -19,6 +19,10 @@
         @include mod-withPagination;
     }
 
+    &.mod-responsiveCardList {
+        @include responsiveCardList;
+    }
+
     //States
     @include closedRow;
 }
