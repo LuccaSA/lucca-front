@@ -51,7 +51,7 @@ function getTemplate(args: IndexTableResponsiveCardListStory): string {
 			</tbody>
 		</table>
 		<h2 class="u-h3">With data-name</h2>
-		<table class="indexTable mod-responsiveCardList">
+		<table class="indexTable mod-responsiveCardList u-marginBottomL">
 			<thead class="indexTable-head">
 				<tr class="indexTable-head-row">
 					<th class="indexTable-head-row-cell" scope="col">Label 1</th>
@@ -113,6 +113,59 @@ function getTemplate(args: IndexTableResponsiveCardListStory): string {
 							Content
 						</div>
 					</td>
+				</tr>
+			</tbody>
+		</table>
+		<h2 class="u-h3">User defined custom grid template</h2>
+		<style>
+			/** .mytable is an example of a custom user css grid template */
+			.myTable {
+				--components-indexTable-row-responsive-grid-template-columns: 1fr 1fr; 
+				--components-indexTable-row-responsive-grid-template-areas: 'title total' 'text text';
+			}
+			.myTable  .indexTable-body-row-cell:first-child {
+				grid-area: title;
+			}
+			.myTable  .indexTable-body-row-cell:nth-child(2) {
+				grid-area: text;
+			}
+			.myTable  .indexTable-body-row-cell:nth-child(3) {
+				grid-area: total;
+				text-align: right;
+			}
+		</style>
+		<table class="indexTable mod-responsiveCardList myTable u-marginBottomL" >
+			<thead class="indexTable-head">
+				<tr class="indexTable-head-row">
+					<th class="indexTable-head-row-cell" scope="col">Lorem</th>
+					<th class="indexTable-head-row-cell" scope="col">Ipsum</th>
+					<th class="indexTable-head-row-cell" scope="col">Dolorem</th>
+				</tr>
+			</thead>
+			<tbody class="indexTable-body">
+				<tr class="indexTable-body-row">
+					<td class="indexTable-body-row-cell">
+						<a href="#" class="indexTable-body-row-cell-action">See details</a>
+						Lorem ipsum dolor
+					</td>
+					<td class="indexTable-body-row-cell">Aliquam vestibulum pulvinar luctus</td>
+					<td class="indexTable-body-row-cell"><strong>122,00 €</strong></td>
+				</tr>
+				<tr class="indexTable-body-row">
+					<td class="indexTable-body-row-cell">
+						<a href="#" class="indexTable-body-row-cell-action">See details</a>
+						Vivamus a accumsan
+					</td>
+					<td class="indexTable-body-row-cell">Phasellus ullamcorper vehicula diam in dignissim. Mauris cursus volutpat leo eu convallis. Sed sed scelerisque libero</td>
+					<td class="indexTable-body-row-cell"><strong>56,50 €</strong></td>
+				</tr>
+				<tr class="indexTable-body-row">
+					<td class="indexTable-body-row-cell">
+						<a href="#" class="indexTable-body-row-cell-action">See details</a>
+						Phasellus ut orci
+					</td>
+					<td class="indexTable-body-row-cell">Quisque a tellus at dui elementum</td>
+					<td class="indexTable-body-row-cell"><strong>45,17 €</strong></td>
 				</tr>
 			</tbody>
 		</table>
