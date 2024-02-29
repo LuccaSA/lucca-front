@@ -51,6 +51,9 @@ import { LU_ESTABLISHMENT_SELECT_INPUT_TRANSLATIONS } from './establishment-sele
 		},
 	],
 })
+/**
+ * @deprecated prefer SimpleSelect or MultipleSelect with establishments directive
+ */
 export class LuEstablishmentSelectInputComponent<
 		D extends import('../../establishment.model').ILuEstablishment = import('../../establishment.model').ILuEstablishment,
 		P extends ILuOptionPickerPanel<D> = ILuOptionPickerPanel<D>,

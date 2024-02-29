@@ -26,6 +26,9 @@ import { LU_QUALIFICATION_SELECT_INPUT_TRANSLATIONS } from './qualification-sele
 		},
 	],
 })
+/**
+ * @deprecated prefer SimpleSelect or MultipleSelect with jobQualifications directive
+ */
 export class LuQualificationSelectInputComponent<
 		D extends import('../../qualification.model').ILuQualification = import('../../qualification.model').ILuQualification,
 		P extends ILuOptionPickerPanel<D> = ILuOptionPickerPanel<D>,
