@@ -1,18 +1,5 @@
-import { Meta, StoryFn } from '@storybook/angular';
-
-interface IndexTableNestedSelectableStory {
-
-}
-
-export default {
-	title: 'Documentation/Listings/Index Table/Nested Selectable',
-	argTypes: {
-		
-	},
-} as Meta;
-
-function getTemplate(args: IndexTableNestedSelectableStory): string {
-	return `
+<!-- min-height to prevent storybook container blink on open / close-->
+<div style="min-height: 32rem">
 	<table class="indexTable mod-selectable">
 		<thead class="indexTable-head">
 			<tr class="indexTable-head-row">
@@ -40,7 +27,9 @@ function getTemplate(args: IndexTableNestedSelectableStory): string {
 				</th>
 				<th class="indexTable-body-row-transparentCell" colspan="4" id="y2021">
 					<div class="indexTable-body-row-cellTitle">
-						<button class="indexTable-body-row-cellTitle-button button mod-text mod-onlyIcon" aria-expanded="true" aria-controls="r1 r2 r3 r4 r5" type="button">
+						<button class="indexTable-body-row-cellTitle-button button mod-text mod-onlyIcon"
+							aria-expanded="true" aria-controls="r1 r2 r3 r4 r5" type="button"
+							(click)="toggleRows('r0btn', '#r1, #r2, #r3, #r4, #r5')" id="r0btn">
 							<span class="lucca-icon icon-arrowChevronBottom" aria-hidden="true"></span>
 							<span class="u-mask">Hide details</span>
 						</button>
@@ -60,7 +49,9 @@ function getTemplate(args: IndexTableNestedSelectableStory): string {
 				<th class="indexTable-body-row-transparentCell" header="y2021"></th>
 				<th class="indexTable-body-row-transparentCell" colspan="3" id="september" header="y2021">
 					<div class="indexTable-body-row-cellTitle">
-						<button class="indexTable-body-row-cellTitle-button button mod-text mod-onlyIcon" aria-expanded="true" aria-controls="r2" type="button">
+						<button class="indexTable-body-row-cellTitle-button button mod-text mod-onlyIcon"
+							aria-expanded="true" aria-controls="r2" type="button" (click)="toggleRows('r1btn', '#r2')"
+							id="r1btn">
 							<span class="lucca-icon icon-arrowChevronBottom" aria-hidden="true"></span>
 							<span class="u-mask">Hide details</span>
 						</button>
@@ -93,7 +84,9 @@ function getTemplate(args: IndexTableNestedSelectableStory): string {
 				<th class="indexTable-body-row-transparentCell" header="y2021"></th>
 				<th class="indexTable-body-row-transparentCell" colspan="3" id="october" header="y2021">
 					<div class="indexTable-body-row-cellTitle">
-						<button class="indexTable-body-row-cellTitle-button button mod-text mod-onlyIcon" aria-expanded="true" aria-controls="r4 r5" type="button">
+						<button class="indexTable-body-row-cellTitle-button button mod-text mod-onlyIcon"
+							aria-expanded="true" aria-controls="r4 r5" type="button"
+							(click)="toggleRows('r3btn', '#r4, #r5')" id="r3btn">
 							<span class="lucca-icon icon-arrowChevronBottom" aria-hidden="true"></span>
 							<span class="u-mask">Hide details</span>
 						</button>
@@ -140,7 +133,9 @@ function getTemplate(args: IndexTableNestedSelectableStory): string {
 				</th>
 				<th class="indexTable-body-row-transparentCell" colspan="4" id="y2022">
 					<div class="indexTable-body-row-cellTitle">
-						<button class="indexTable-body-row-cellTitle-button button mod-text mod-onlyIcon" aria-expanded="true" aria-controls="r7 r8" type="button">
+						<button class="indexTable-body-row-cellTitle-button button mod-text mod-onlyIcon"
+							aria-expanded="true" aria-controls="r7 r8" type="button"
+							(click)="toggleRows('r6btn', '#r7, #r8')" id="r6btn">
 							<span class="lucca-icon icon-arrowChevronBottom" aria-hidden="true"></span>
 							<span class="u-mask">Hide details</span>
 						</button>
@@ -160,7 +155,9 @@ function getTemplate(args: IndexTableNestedSelectableStory): string {
 				<th class="indexTable-body-row-transparentCell" header="y2022"></th>
 				<th class="indexTable-body-row-transparentCell" colspan="3" id="january" header="y2022">
 					<div class="indexTable-body-row-cellTitle">
-						<button class="indexTable-body-row-cellTitle-button button mod-text mod-onlyIcon" aria-expanded="true" aria-controls="r8" type="button">
+						<button class="indexTable-body-row-cellTitle-button button mod-text mod-onlyIcon"
+							aria-expanded="true" aria-controls="r8" type="button" (click)="toggleRows('r7btn', '#r8')"
+							id="r7btn">
 							<span class="lucca-icon icon-arrowChevronBottom" aria-hidden="true"></span>
 							<span class="u-mask">Hide details</span>
 						</button>
@@ -184,13 +181,4 @@ function getTemplate(args: IndexTableNestedSelectableStory): string {
 			</tr>
 		</tbody>
 	</table>
-	`;
-}
-
-const Template: StoryFn<IndexTableNestedSelectableStory> = (args) => ({
-	props: args,
-	template: getTemplate(args),
-});
-
-export const NestedSelectable = Template.bind({});
-NestedSelectable.args = { };
+</div>

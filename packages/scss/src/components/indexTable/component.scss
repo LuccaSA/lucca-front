@@ -130,6 +130,10 @@
             gap: var(--spacings-XXS);
         }
 
+        .indexTable-body-row-cellTitle-button .lucca-icon {
+            transition: transform var(--commons-animations-durations-fast) ease;
+        }
+
         .indexTable-foot-row-cell {
             padding: var(--spacings-XS) var(--components-indexTable-padding);
             text-align: right;

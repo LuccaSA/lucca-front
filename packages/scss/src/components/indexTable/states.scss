@@ -1,0 +1,10 @@
+@mixin closedRow {
+    .indexTable-body-row {
+        &.is-closed {
+            display: none;
+        }
+    }
+    .indexTable-body-row-cellTitle-button[aria-expanded='false'] .lucca-icon {
+        transform: rotate(180deg);
+    }
+}
