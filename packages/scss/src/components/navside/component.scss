@@ -104,8 +104,8 @@
 			font-weight: 600;
 		}
 
+		// .navSide-item-alert is deprecated
 		.navSide-item-alert {
-			// deprecated
 			font-size: var(--sizes-XS-fontSize);
 			font-weight: 600;
 			background-color: var(--components-navSide-fullwidth-palette-alert-color);
@@ -124,6 +124,8 @@
 		}
 
 		.navSide-item-arrow {
+			@include icon.S;
+
 			transition-duration: var(--commons-animations-durations-fast);
 			transition-property: transform;
 			transition-timing-function: ease-out;
@@ -134,7 +136,6 @@
 			flex-shrink: 0;
 			transform-origin: 50% 50%;
 			transform: rotate(90deg);
-			@include icon.S;
 		}
 
 		.navSide-item-subMenu {
