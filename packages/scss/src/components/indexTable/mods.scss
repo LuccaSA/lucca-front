@@ -143,12 +143,12 @@
             }
         }
 
-        .indexTable-body-row-cell-content[data-name] {
+        .indexTable-body-row-cell-content[data-label] {
             display: flex;
             flex-direction: column;
             margin-top: var(--spacings-XXS);
             &::before {
-                content: attr(data-name);
+                content: attr(data-label);
                 font-weight: 600;
             }
         }

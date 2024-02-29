@@ -50,7 +50,7 @@ function getTemplate(args: IndexTableResponsiveCardListStory): string {
 				</tr>
 			</tbody>
 		</table>
-		<h2 class="u-h3">With data-name</h2>
+		<h2 class="u-h3">With label</h2>
 		<table class="indexTable mod-responsiveCardList u-marginBottomL">
 			<thead class="indexTable-head">
 				<tr class="indexTable-head-row">
@@ -62,54 +62,54 @@ function getTemplate(args: IndexTableResponsiveCardListStory): string {
 			<tbody class="indexTable-body">
 				<tr class="indexTable-body-row">
 					<td class="indexTable-body-row-cell">
-						<div class="indexTable-body-row-cell-content" data-name="Label 1">
+						<div class="indexTable-body-row-cell-content" data-label="Label 1">
 							<a href="#" class="indexTable-body-row-cell-action">See details</a>
 							Content
 						</div>
 					</td>
 					<td class="indexTable-body-row-cell">
-						<div class="indexTable-body-row-cell-content" data-name="Label 2">
+						<div class="indexTable-body-row-cell-content" data-label="Label 2">
 							Content
 						</div>
 					</td>
 					<td class="indexTable-body-row-cell">
-						<div class="indexTable-body-row-cell-content" data-name="Label 3">
+						<div class="indexTable-body-row-cell-content" data-label="Label 3">
 							Content
 						</div>
 					</td>
 				</tr>
 				<tr class="indexTable-body-row">
 					<td class="indexTable-body-row-cell">
-						<div class="indexTable-body-row-cell-content" data-name="Label 1">
+						<div class="indexTable-body-row-cell-content" data-label="Label 1">
 							<a href="#" class="indexTable-body-row-cell-action">See details</a>
 							Content
 						</div>
 					</td>
 					<td class="indexTable-body-row-cell">
-						<div class="indexTable-body-row-cell-content" data-name="Label 2">
+						<div class="indexTable-body-row-cell-content" data-label="Label 2">
 							Content
 						</div>
 					</td>
 					<td class="indexTable-body-row-cell">
-						<div class="indexTable-body-row-cell-content" data-name="Label 3">
+						<div class="indexTable-body-row-cell-content" data-label="Label 3">
 							Content
 						</div>
 					</td>
 				</tr>
 				<tr class="indexTable-body-row">
 					<td class="indexTable-body-row-cell">
-						<div class="indexTable-body-row-cell-content" data-name="Label 1">
+						<div class="indexTable-body-row-cell-content" data-label="Label 1">
 							<a href="#" class="indexTable-body-row-cell-action">See details</a>
 							Content
 						</div>
 					</td>
 					<td class="indexTable-body-row-cell">
-						<div class="indexTable-body-row-cell-content" data-name="Label 2">
+						<div class="indexTable-body-row-cell-content" data-label="Label 2">
 							Content
 						</div>
 					</td>
 					<td class="indexTable-body-row-cell">
-						<div class="indexTable-body-row-cell-content" data-name="Label 3">
+						<div class="indexTable-body-row-cell-content" data-label="Label 3">
 							Content
 						</div>
 					</td>
