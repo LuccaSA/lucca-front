@@ -53,6 +53,40 @@
 @mixin card {
 	border-top: 0;
 
+	:where(.table-head, .table-body, .table-foot) {
+		&:first-child {
+			:where(.table-head-row, .table-body-row, .table-foot-row) {
+				&:first-child {
+					:where(.table-head-row-cell, .table-body-row-cell) {
+						&:first-child {
+							border-top-left-radius: var(--components-card-border-radius);
+						}
+
+						&:last-child {
+							border-top-right-radius: var(--components-card-border-radius);
+						}
+					}
+				}
+			}
+		}
+
+		&:last-child {
+			:where(.table-head-row, .table-body-row, .table-foot-row) {
+				&:last-child {
+					:where(.table-head-row-cell, .table-body-row-cell) {
+						&:first-child {
+							border-bottom-left-radius: var(--components-card-border-radius);
+						}
+
+						&:last-child {
+							border-bottom-right-radius: var(--components-card-border-radius);
+						}
+					}
+				}
+			}
+		}
+	}
+
 	.table-head-row-cell {
 		border-top: 0;
 	}

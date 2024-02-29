@@ -10,10 +10,6 @@
 	transition-duration: var(--commons-animations-durations-fast);
 	transition-property: background-color, box-shadow, color;
 
-	&:has(.table) {
-		overflow: hidden;
-	}
-
 	@at-root ($atRoot) {
 		.card-content {
 			padding: var(--components-card-content-padding);
