@@ -1,0 +1,15 @@
+@use 'sass:map';
+
+@use '@lucca-front/scss/src/commons/config';
+
+@mixin palette($palette) {
+	$paletteExists: map.get(config.$palettesInterpolation, $palette);
+
+	@if $paletteExists {
+		@each $shade in config.$palettesShades {
+			@if map.get($paletteExists, $shade) {
+				--palettes-#{$shade}: var(--palettes-#{$palette}-#{$shade});
+			}
+		}
+	}
+}

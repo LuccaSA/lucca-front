@@ -18,9 +18,3 @@
 	--components-numericBadge-background: var(--palettes-product-200);
 	--components-numericBadge-color: var(--palettes-product-800);
 }
-
-@mixin brand {
-	@each $key, $value in config.$brand {
-		--palettes-#{$key}: var(--palettes-brand-#{$key});
-	}
-}
