@@ -1,6 +1,7 @@
 @use '@lucca-front/scss/src/commons/utils/loading';
 @use '@lucca-front/scss/src/components/keyframe/exports' as keyframe;
 @use '@lucca-front/scss/src/commons/utils/a11y';
+@use '@lucca-front/scss/src/components/numericBadge/exports' as numericBadge;
 @use '@lucca-front/icons/src/icon/exports' as icon;
 
 @mixin component($atRoot: 'without: rule') {
@@ -16,6 +17,9 @@
 	width: var(--commons-navSide-width);
 
 	.numericBadge {
+		@include numericBadge.S;
+		@include numericBadge.brand;
+
 		margin-left: auto;
 	}
 
@@ -105,8 +109,8 @@
 			font-weight: 600;
 		}
 
+		// .navSide-item-alert is deprecated
 		.navSide-item-alert {
-			// deprecated
 			font-size: var(--sizes-XS-fontSize);
 			font-weight: 600;
 			background-color: var(--components-navSide-fullwidth-palette-alert-color);
