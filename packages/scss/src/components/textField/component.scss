@@ -115,6 +115,7 @@
 			border-top-right-radius: var(--commons-borderRadius-M);
 			border-bottom-right-radius: var(--commons-borderRadius-M);
 			order: 1;
+			flex-shrink: 0;
 
 			~ .textField-input {
 				border-top-right-radius: 0;

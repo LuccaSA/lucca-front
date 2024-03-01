@@ -1,6 +1,6 @@
 @mixin component($atRoot: 'without: rule') {
 	color: var(--components-formLabel-color);
-	display: inline-flex;
+	display: flex;
 	font-size: var(--components-formLabel-fontSize);
 	line-height: var(--components-formLabel-lineHeight);
 	width: var(--components-formLabel-width);
