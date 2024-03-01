@@ -18,3 +18,8 @@
 	--components-numericBadge-background: var(--palettes-product-200);
 	--components-numericBadge-color: var(--palettes-product-800);
 }
+
+@mixin brand {
+	--components-numericBadge-background: var(--palettes-brand-200);
+	--components-numericBadge-color: var(--palettes-brand-800);
+}

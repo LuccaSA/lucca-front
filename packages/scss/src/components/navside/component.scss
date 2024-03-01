@@ -1,6 +1,5 @@
 @use '@lucca-front/scss/src/commons/utils/loading';
 @use '@lucca-front/scss/src/commons/utils/a11y';
-@use '@lucca-front/scss/src/commons/utils/color';
 @use '@lucca-front/scss/src/components/numericBadge/exports' as numericBadge;
 @use '@lucca-front/icons/src/icon/exports' as icon;
 
@@ -18,7 +17,7 @@
 
 	.numericBadge {
 		@include numericBadge.S;
-		@include color.palette('brand');
+		@include numericBadge.brand;
 
 		margin-left: auto;
 	}

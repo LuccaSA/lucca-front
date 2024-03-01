@@ -2,6 +2,7 @@
 
 @use '@lucca-front/scss/src/commons/config';
 
+// future mixin if you need to use palette CSS vars without using a class
 @mixin palette($palette) {
 	$paletteExists: map.get(config.$palettesInterpolation, $palette);
 
