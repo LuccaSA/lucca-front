@@ -189,6 +189,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 
 	setDisabledState(isDisabled: boolean): void {
 		this.disabled = isDisabled;
+		this.changeDetectorRef.markForCheck();
 	}
 
 	ngOnDestroy(): void {
