@@ -27,6 +27,7 @@ export class LuModal {
 			alert: extendedConfig.undismissable,
 			size: extendedConfig.size as LuDialogConfig<unknown>['size'],
 			mode,
+			panelClasses: Array.isArray(extendedConfig.panelClass) ? extendedConfig.panelClass : [extendedConfig.panelClass],
 		});
 		return new DialogRefAdapter<D, T>(dialogRef);
 	}
