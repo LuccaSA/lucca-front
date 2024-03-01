@@ -1,6 +1,11 @@
 @use 'vars' as *;
 @use '@lucca-front/scss/src/commons/utils/media';
 @mixin selectable {
+    .indexTable-head-row-transparentCell,
+    .indexTable-body-row-transparentCell {
+        width: var(--components-indexTable-row-cell-transparent-width);
+    }
+
     .indexTable-body-row {
         &:is(:focus-within, :hover) {
             outline: none;
@@ -26,6 +31,11 @@
         &.mod-stack3 {
             --components-indexTable-row-stack-border-bottom: var(--components-indexTable-stack3-row-spacing);
             --components-indexTable-row-stack3-background-image: var(--components-indexTable-stack-svg);
+            // Different border-bottom with between stack2 and stack3 mess up background bottom position.
+            // this css vars is here to reset this
+            --components-indexTable-row-stack3-row-background-position-fix: calc(
+                var(--components-indexTable-stack3-row-spacing) - var(--components-indexTable-stack2-row-spacing)
+            );
         }
     }
 
@@ -35,19 +45,19 @@
 
         // apparence of the first cell with a card apparence.
         // we do this because there migh be one or two cells before without background and containing a checkbox
-        --components-indexTable-row-stack2-background-position: -9px 0;
-        --components-indexTable-row-stack3-background-position: -5px 4px;
+        --components-indexTable-row-stack2-background-position: left -8px bottom calc(-9px + var(--components-indexTable-row-stack3-row-background-position-fix, 0px));
+        --components-indexTable-row-stack3-background-position: left -4px bottom -9px;
 
         // apparence of the nexts cells
         & ~ .indexTable-body-row-cell {
-            --components-indexTable-row-stack2-background-position: -19px 0;
-            --components-indexTable-row-stack3-background-position: -19px 4px;
+            --components-indexTable-row-stack2-background-position: left -20px bottom calc(-9px + var(--components-indexTable-row-stack3-row-background-position-fix, 0px));
+            --components-indexTable-row-stack3-background-position: left -20px bottom -9px;
         }
 
         // apparence of the last cell with a card apparence
         &:last-child {
-            --components-indexTable-row-stack2-background-position: calc(100% + 7px) 0;
-            --components-indexTable-row-stack3-background-position: calc(100% + 3px) 4px;
+            --components-indexTable-row-stack2-background-position: right -8px bottom calc(-9px + var(--components-indexTable-row-stack3-row-background-position-fix, 0px));
+            --components-indexTable-row-stack3-background-position: right -1px bottom -9px;
         }
 
         // stack apparence
@@ -126,6 +136,7 @@
             grid-template-rows: var(--components-indexTable-row-responsive-grid-template-rows, none);
             grid-auto-rows: auto;
             grid-template-areas: var(--components-indexTable-row-responsive-grid-template-areas, none);
+            align-items: center;
             padding: var(--components-indexTable-row-spacing-responsive) 0;
         }
 
@@ -138,8 +149,10 @@
                 border-radius: var(--components-indexTable-border-radius);
             }
 
-            &:not(:first-child)::before {
-                display: none;
+            ~ .indexTable-body-row-cell {
+                &::before {
+                    display: none;
+                }
             }
         }
 
@@ -150,6 +163,51 @@
             &::before {
                 content: attr(data-label);
                 font-weight: 600;
+            }
+        }
+    }
+}
+
+@mixin selectableResponsiveCardList {
+    @include media.max('S') {
+        .indexTable-body-row {
+            grid-template-columns: min-content var(--components-indexTable-row-responsive-grid-template-columns, 1fr);
+            // Padding add too much vertical spacing on title rows
+            &:not(:has(.indexTable-body-row-cell)) {
+                padding: 0;
+            }
+        }
+        .indexTable-body-row-transparentCell {
+            width: auto;
+            // Nested cell offset
+            &[colspan='2'] + .indexTable-body-row-transparentCell {
+                padding-left: var(--components-indexTable-row-cell-transparent-width);
+            }
+        }
+        .indexTable-body-row-cell {
+            --components-indexTable-cell-inset-x-left: var(--components-indexTable-row-cell-transparent-width);
+            grid-column-start: 2;
+        }
+    }
+}
+
+@mixin stackableResponsiveCardList {
+    @include media.max('S') {
+        .indexTable-body-row-cell {
+            &::after {
+                --components-indexTable-cell-inset-x-right: 50%;
+            }
+            ~ .indexTable-body-row-cell:not(:last-child)::after {
+                display: none;
+            }
+            //placeholder. Need to find another way to do this
+            &:last-child {
+                &::after {
+                    top: 100%;
+                    --components-indexTable-cell-inset-x-right: 3px;
+                    --components-indexTable-cell-inset-x-left: 50%;
+                    border-top: 2px solid #acbbd733;
+                }
             }
         }
     }

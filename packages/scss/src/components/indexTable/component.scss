@@ -63,11 +63,6 @@
             text-align: left;
         }
 
-        .indexTable-head-row-transparentCell,
-        .indexTable-body-row-transparentCell {
-            width: var(--components-indexTable-row-cell-with-checkbox-width);
-        }
-
         .indexTable-head-row-cell {
             padding: var(--spacings-XS) var(--components-indexTable-padding);
             color: var(--palettes-neutral-600);

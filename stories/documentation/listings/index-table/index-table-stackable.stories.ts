@@ -55,7 +55,7 @@ function getTemplate(args: IndexTableStackableStory): string {
 						<span class="u-mask">Select this line</span>
 					</label>
 				</td>
-				<td class="indexTable-body-row-cell">Content</td>
+				<td class="indexTable-body-row-cell">Content<br/>content</td>
 				<td class="indexTable-body-row-cell">Content</td>
 				<td class="indexTable-body-row-cell">Content</td>
 			</tr>

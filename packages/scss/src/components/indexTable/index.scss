@@ -23,6 +23,14 @@
         @include responsiveCardList;
     }
 
+    &.mod-selectable.mod-responsiveCardList {
+        @include selectableResponsiveCardList;
+    }
+
+    &.mod-stackable.mod-responsiveCardList {
+        @include stackableResponsiveCardList;
+    }
+
     //States
     @include closedRow;
 }
