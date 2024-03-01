@@ -73,7 +73,7 @@
 		&:last-child {
 			:where(.table-head-row, .table-body-row, .table-foot-row) {
 				&:last-child {
-					:where(.table-head-row-cell, .table-body-row-cell) {
+					:where(.table-body-row-cell, .table-foot-row-cell) {
 						&:first-child {
 							border-bottom-left-radius: var(--components-card-border-radius);
 						}
