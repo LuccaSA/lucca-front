@@ -1,9 +1,15 @@
+@use '@lucca-front/scss/src/commons/utils/color';
+
 @mixin vars {
 	--components-progress-margin-vertical: var(--spacings-S);
 	--components-progress-margin-horizontal: 0;
 	--components-progress-height: 0.25rem;
 	--components-progress-background: var(--palettes-neutral-100);
 	--components-progress-bar-background: var(--palettes-product-700);
-	--components-progress-bar-gradient: linear-gradient(to right, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0.5) 100%);
+	--components-progress-bar-gradient: linear-gradient(
+		to right,
+		color.transparentize(var(--colors-white-color), 0.8) 0%,
+		color.transparentize(var(--colors-white-color), 0.5) 100%
+	);
 	--components-progress-duration: 1.5s;
 }

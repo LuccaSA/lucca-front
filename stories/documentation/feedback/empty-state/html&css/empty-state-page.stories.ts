@@ -1,9 +1,8 @@
-import { Meta, moduleMetadata, StoryFn } from '@storybook/angular';
+import { HttpClientModule } from '@angular/common/http';
 import { LuSafeExternalSvgPipe } from '@lucca-front/ng/safe-content';
-import { HttpClientModule } from "@angular/common/http";
+import { Meta, moduleMetadata, StoryFn } from '@storybook/angular';
 
-interface EmptyStatePageStory {
-}
+interface EmptyStatePageStory {}
 
 export default {
 	title: 'Documentation/Feedback/Empty State/HTML&CSS/Page',
@@ -12,12 +11,11 @@ export default {
 			imports: [LuSafeExternalSvgPipe, HttpClientModule],
 		}),
 	],
-	argTypes: {
-	},
+	argTypes: {},
 } as Meta;
 
 function getTemplate(args: EmptyStatePageStory): string {
-	return `<section class="emptyState mod-page" [style.--components-emptyState-background-color]="'var(--palettes-grey-25)'">
+	return `<section class="emptyState mod-page" [style.--components-emptyState-background-color]="'var(--palettes-neutral-25)'">
 	<div class="emptyState-container">
 		<div class="emptyState-content">
 			<div
@@ -44,4 +42,4 @@ const Template: StoryFn<EmptyStatePageStory> = (args: EmptyStatePageStory) => ({
 });
 
 export const Page = Template.bind({});
-Page.args = { };
+Page.args = {};
