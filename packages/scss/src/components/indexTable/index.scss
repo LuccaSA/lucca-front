@@ -5,9 +5,8 @@
 
     &.mod-selectable {
         @include selectable;
-        .indexTable-body-row:not(:hover):has(.checkbox-input:checked) {
-            @include selectedRow;
-        }
+        @include selectableSelectedRow;
+        @include selectableSelectedFocusedRow;
     }
 
     &.mod-stackable {
@@ -32,6 +31,10 @@
 
     &.mod-stackable.mod-responsiveCardList {
         @include stackableResponsiveCardList;
+    }
+
+    .indexTable-body-row-cell.mod-actions {
+        @include actions;
     }
 
     // generic states, non tied to a mod

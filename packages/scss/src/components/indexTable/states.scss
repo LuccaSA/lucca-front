@@ -11,27 +11,38 @@
     }
 }
 
-@mixin selectedRow {
+@mixin focusedRow {
+    .indexTable-body-row:focus-within {
+        @include a11y.focusVisible();
+    }
+}
+
+@mixin hoveredRow {
+    .indexTable-body-row:hover:not(:focus-within) {
+        @include hoveredCell;
+    }
+}
+
+// selectable rows
+@mixin selectableSelectedRow {
+    .indexTable-body-row:not(:hover):has(.checkbox-input:checked) {
+        @include selectedCell;
+    }
+}
+
+@mixin selectableSelectedFocusedRow {
+    .indexTable-body-row:has(.checkbox-input:focus) {
+        @include hoveredCell;
+    }
+}
+
+// states vars
+@mixin selectedCell {
     --components-indexTable-cell-background-color: var(--palettes-product-50);
     --components-indexTable-cell-shadow: 0 0 0 var(--commons-divider-width) var(--palettes-product-700);
     --components-indexTable-shadow-mask-default: -10px 0px 0px 0px var(--palettes-product-50);
     //if selected stackable row : we also change the stacks background color
     --components-indexTable-stack-svg: var(--components-indexTable-stack-svg-selected);
-}
-
-@mixin focusedRow {
-    .indexTable-body-row:focus-within {
-        @include a11y.focusVisible();
-        &:has(:focus-visible) {
-            @include hoveredCell;
-        }
-    }
-}
-
-@mixin hoveredRow {
-    .indexTable-body-row:hover {
-        @include hoveredCell;
-    }
 }
 
 @mixin hoveredCell {
