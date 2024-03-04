@@ -1,0 +1,99 @@
+@use '@lucca-front/icons/src/commons/utils/icon';
+@use '@lucca-front/scss/src/commons/utils/a11y';
+
+@mixin sorted {
+    padding: 0;
+
+    .indexTable-head-row-cell-sortableButton {
+        color: var(--palettes-neutral-900);
+        padding: var(--components-table-padding);
+
+        &::after {
+            @include icon.generate('arrow_bottom');
+
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        &:hover {
+            &::after {
+                opacity: 1;
+            }
+        }
+
+        &:focus-visible {
+            &::after {
+                @include a11y.focusVisible();
+            }
+        }
+    }
+}
+
+@mixin sortedAlignRight {
+    .indexTable-head-row-cell-sortableButton {
+        text-align: right;
+
+        &::before {
+            @include icon.generate('arrow_bottom');
+
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        &::after {
+            content: none;
+        }
+
+        &:hover {
+            &::before {
+                opacity: 1;
+            }
+        }
+
+        &:focus-visible {
+            &::before {
+                @include a11y.focusVisible();
+            }
+        }
+    }
+}
+
+@mixin descending {
+    @include sorted;
+
+    .indexTable-head-row-cell-sortableButton {
+        &::after {
+            @include icon.generate('arrow_bottom');
+        }
+    }
+}
+
+@mixin ascending {
+    @include sorted;
+
+    .indexTable-head-row-cell-sortableButton {
+        &::after {
+            @include icon.generate('arrow_top');
+        }
+    }
+}
+
+@mixin descendingAlignRight {
+    @include sortedAlignRight;
+
+    .indexTable-head-row-cell-sortableButton {
+        &::before {
+            @include icon.generate('arrow_bottom');
+        }
+    }
+}
+
+@mixin ascendingAlignRight {
+    @include sortedAlignRight;
+
+    .indexTable-head-row-cell-sortableButton {
+        &::before {
+            @include icon.generate('arrow_top');
+        }
+    }
+}
