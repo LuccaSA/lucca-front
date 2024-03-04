@@ -17,6 +17,6 @@ export class IsFuturePipe implements PipeTransform {
 })
 export class isFutureOrTodayPipe implements PipeTransform {
   public transform(value: Date | undefined): boolean {
-    return !!value && (isFuture(value) || isToday(value));
+    return !value || (isFuture(value) || isToday(value));
   }
 }
