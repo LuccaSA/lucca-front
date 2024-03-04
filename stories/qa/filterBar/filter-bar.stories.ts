@@ -1,10 +1,14 @@
 import { Component } from '@angular/core';
 import { Meta, StoryFn } from '@storybook/angular';
+import {LuSimpleSelectInputComponent} from "../../../packages/ng/simple-select/input";
 
 @Component({
 	standalone: true,
 	selector: 'filter-bar-stories',
 	templateUrl: './filter-bar.stories.html',
+	imports: [
+		LuSimpleSelectInputComponent
+	]
 })
 class FilterBarStory {}
 

@@ -9,7 +9,7 @@
 	container-type: inline-size;
 	padding: var(--spacings-S);
 
-	&:has(.filterBar-footer-toggleButton[aria-expanded="false"]) {
+	&:has(.filterBar-footer-toggle-button[aria-expanded="false"]) {
 		.filterBar-toggledFilters {
 			display: none;
 		}
@@ -30,20 +30,30 @@
 			margin-block-start: var(--spacings-S);
 			padding-block-start: var(--spacings-S);
 
-			@include container.min('XS', $name: 'filterBar') {
+			&:empty {
+				display: none;
+			}
+
+			&:has(.filterBar-footer-toggle:empty) {
+				&:has(.filterBar-footer-actions:empty) {
+					display: none;
+				}
+			}
+
+			@include container.min('S', $name: 'filterBar') {
 				flex-direction: row;
 				justify-content: space-between;
 			}
 		}
 
-		.filterBar-footer-toggleButton {
+		.filterBar-footer-toggle-button {
 			&[aria-expanded="false"] {
-				.filterBar-footer-toggleButton-labelAlternative {
+				.filterBar-footer-toggle-button-labelAlternative {
 					display: none;
 				}
 			}
 			&[aria-expanded="true"] {
-				.filterBar-footer-toggleButton-label {
+				.filterBar-footer-toggle-button-label {
 					@include a11y.mask;
 				}
 				.lucca-icon {
@@ -56,11 +66,21 @@
 		}
 
 		.filterBar-footer-actions {
-			align-items: center;
 			display: flex;
+			flex-direction: column;
 			flex-wrap: wrap;
 			gap: var(--spacings-S);
 			justify-content: center;
+			text-align: center;
+
+			@include container.min('XS', $name: 'filterBar') {
+				align-items: center;
+				flex-direction: row;
+			}
+
+			@include container.min('S', $name: 'filterBar') {
+				margin-inline-start: auto;
+			}
 		}
 	}
 }
