@@ -37,6 +37,7 @@
 	@include keyframe.slideFromBottom;
 
 	--components-dialog-animationOpening: slideFromBottom;
+	--components-dialog-maxHeight: calc(100vh - var(--spacings-S));
 	--components-dialog-maxHeight: calc(100dvh - var(--spacings-S));
 	--components-dialog-maxWidth: none;
 	--components-dialog-inset: auto 0 0 0;

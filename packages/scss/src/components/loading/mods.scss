@@ -20,6 +20,7 @@
 	@include block;
 	@include L;
 
+	--components-loading-transform: translateY(calc((100vh - var(--commons-banner-height)) / 2));
 	--components-loading-transform: translateY(calc((100dvh - var(--commons-banner-height)) / 2));
 }
 
