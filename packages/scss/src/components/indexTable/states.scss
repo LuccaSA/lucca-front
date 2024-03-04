@@ -19,25 +19,25 @@
 
 @mixin hoveredRow {
     .indexTable-body-row:hover:not(:focus-within) {
-        @include hoveredCell;
+        @include hoveredCells;
     }
 }
 
 // selectable rows
 @mixin selectableSelectedRow {
     .indexTable-body-row:not(:hover):has(.checkbox-input:checked) {
-        @include selectedCell;
+        @include selectedCells;
     }
 }
 
-@mixin selectableSelectedFocusedRow {
+@mixin selectableFocusedRow {
     .indexTable-body-row:has(.checkbox-input:focus) {
-        @include hoveredCell;
+        @include hoveredCells;
     }
 }
 
 // states vars
-@mixin selectedCell {
+@mixin selectedCells {
     --components-indexTable-cell-background-color: var(--palettes-product-50);
     --components-indexTable-cell-shadow: 0 0 0 var(--commons-divider-width) var(--palettes-product-700);
     --components-indexTable-shadow-mask-default: -10px 0px 0px 0px var(--palettes-product-50);
@@ -45,7 +45,7 @@
     --components-indexTable-stack-svg: var(--components-indexTable-stack-svg-selected);
 }
 
-@mixin hoveredCell {
+@mixin hoveredCells {
     --components-indexTable-cell-shadow: var(--commons-boxShadow-L);
     --components-indexTable-cell-inset-x: var(--components-indexTable-hover-offset-x);
     --components-indexTable-cell-inset-y: var(--components-indexTable-hover-offset-y);
