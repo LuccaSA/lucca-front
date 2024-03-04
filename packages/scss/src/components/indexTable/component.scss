@@ -36,21 +36,9 @@
         }
 
         .indexTable-body-row {
-            cursor: pointer;
             border-radius: var(--commons-borderRadius-L);
-
-            &:is(:focus-within, :hover) {
-                --components-indexTable-cell-shadow: var(--commons-boxShadow-L);
-            }
-
-            &:focus-within {
-                @include a11y.focusVisible();
-            }
-
-            &:hover {
-                --components-indexTable-cell-inset-x: var(--components-indexTable-hover-offset-x);
-                --components-indexTable-cell-inset-y: var(--components-indexTable-hover-offset-y);
-            }
+            outline: none;
+            cursor: pointer;
         }
 
         .indexTable-head-row-transparentCell,

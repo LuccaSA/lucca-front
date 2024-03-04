@@ -10,13 +10,6 @@
         &:is(:focus-within, :hover) {
             outline: none;
         }
-        &:not(:hover):has(.checkbox-input:checked) {
-            --components-indexTable-cell-background-color: var(--palettes-product-50);
-            --components-indexTable-cell-shadow: 0 0 0 var(--commons-divider-width) var(--palettes-product-700);
-            --components-indexTable-shadow-mask-default: -10px 0px 0px 0px var(--palettes-product-50);
-            //selected stackable row : we change the stacks background color
-            --components-indexTable-stack-svg: var(--components-indexTable-stack-svg-selected);
-        }
     }
 }
 
@@ -180,7 +173,7 @@
         .indexTable-body-row-transparentCell {
             width: auto;
             // Nested cell offset
-            &[colspan='2'] + .indexTable-body-row-transparentCell {
+            &:first-child[colspan='2'] + .indexTable-body-row-transparentCell {
                 padding-left: var(--components-indexTable-row-cell-transparent-width);
             }
         }

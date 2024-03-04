@@ -1,3 +1,5 @@
+@use '@lucca-front/scss/src/commons/utils/a11y';
+
 @mixin closedRow {
     .indexTable-body-row {
         &.is-closed {
@@ -7,4 +9,33 @@
     .indexTable-body-row-cellTitle-button[aria-expanded='false'] .lucca-icon {
         transform: rotate(180deg);
     }
+}
+
+@mixin selectedRow {
+    --components-indexTable-cell-background-color: var(--palettes-product-50);
+    --components-indexTable-cell-shadow: 0 0 0 var(--commons-divider-width) var(--palettes-product-700);
+    --components-indexTable-shadow-mask-default: -10px 0px 0px 0px var(--palettes-product-50);
+    //if selected stackable row : we also change the stacks background color
+    --components-indexTable-stack-svg: var(--components-indexTable-stack-svg-selected);
+}
+
+@mixin focusedRow {
+    .indexTable-body-row:focus-within {
+        @include a11y.focusVisible();
+        &:has(:focus-visible) {
+            @include hoveredCell;
+        }
+    }
+}
+
+@mixin hoveredRow {
+    .indexTable-body-row:hover {
+        @include hoveredCell;
+    }
+}
+
+@mixin hoveredCell {
+    --components-indexTable-cell-shadow: var(--commons-boxShadow-L);
+    --components-indexTable-cell-inset-x: var(--components-indexTable-hover-offset-x);
+    --components-indexTable-cell-inset-y: var(--components-indexTable-hover-offset-y);
 }
