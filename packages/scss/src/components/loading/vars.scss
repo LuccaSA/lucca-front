@@ -1,3 +1,10 @@
 @mixin vars {
-  --components-loading-size-big: 3rem;
+	--components-loading-display: inline-block;
+	--components-loading-size: 1.5rem;
+	--components-loading-size-big: 3rem;
+	--components-loading-margin: 0;
+	--components-loading-spinnerMargin: 0;
+	--components-loading-padding: 0 0 0 var(--components-loading-size);
+	--components-loading-color: currentColor;
+	--components-loading-transform: none;
 }
