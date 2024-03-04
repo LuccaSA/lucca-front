@@ -6,17 +6,18 @@ import { BehaviorSubject } from 'rxjs';
 import { InlineMessageComponent, InlineMessageState } from '@lucca-front/ng/inline-message';
 import { SafeHtml } from '@angular/platform-browser';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
-import { LuClass, PortalContent, PortalDirective } from '@lucca-front/ng/core';
+import { getIntl, IntlParamsPipe, LuClass, PortalContent, PortalDirective } from '@lucca-front/ng/core';
 import { NG_VALIDATORS, NgControl, ReactiveFormsModule, RequiredValidator, Validator, Validators } from '@angular/forms';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { FORM_FIELD_INSTANCE } from './form-field.token';
+import { LU_FORM_FIELD_TRANSLATIONS } from './form-field.translate';
 
 let nextId = 0;
 
 @Component({
 	selector: 'lu-form-field',
 	standalone: true,
-	imports: [NgIf, NgSwitch, NgSwitchCase, NgTemplateOutlet, InlineMessageComponent, LuTooltipModule, ReactiveFormsModule, IconComponent, PortalDirective],
+	imports: [NgIf, NgSwitch, NgSwitchCase, NgTemplateOutlet, InlineMessageComponent, LuTooltipModule, ReactiveFormsModule, IconComponent, IntlParamsPipe, PortalDirective],
 	templateUrl: './form-field.component.html',
 	styleUrls: ['./form-field.component.scss'],
 	providers: [
@@ -29,6 +30,8 @@ let nextId = 0;
 	encapsulation: ViewEncapsulation.None,
 })
 export class FormFieldComponent implements OnChanges, OnDestroy, DoCheck {
+	intl = getIntl(LU_FORM_FIELD_TRANSLATIONS);
+
 	#luClass = inject(LuClass);
 
 	#renderer = inject(Renderer2);
@@ -77,6 +80,17 @@ export class FormFieldComponent implements OnChanges, OnDestroy, DoCheck {
 	layout: 'default' | 'checkable' | 'fieldset' = 'default';
 
 	#inputs: InputDirective[] = [];
+	/**
+	 * Max amount of characters allowed, defaults to 0, which means hidden, no maximum
+	 */
+	@Input()
+	counter = 0;
+
+	get contentLength(): number {
+		return (this.#nativeInputRef as HTMLInputElement)?.value.length || 0;
+	}
+
+	private _input: InputDirective;
 
 	public addInput(input: InputDirective) {
 		this.#inputs.push(input);

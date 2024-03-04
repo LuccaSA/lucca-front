@@ -40,7 +40,7 @@ export default {
 
 export const Basic: StoryObj<TextInputComponent & { disabled: boolean } & FormFieldComponent> = {
 	render: (args, { argTypes }) => {
-		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, ...inputArgs } = args;
+		const { counter, label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, ...inputArgs } = args;
 		return {
 			template: cleanupTemplate(`<lu-form-field ${generateInputs(
 				{
@@ -50,6 +50,7 @@ export const Basic: StoryObj<TextInputComponent & { disabled: boolean } & FormFi
 					inlineMessage,
 					inlineMessageState,
 					size,
+					counter,
 				},
 				argTypes,
 			)}>
@@ -81,12 +82,13 @@ export const Basic: StoryObj<TextInputComponent & { disabled: boolean } & FormFi
 		type: 'text',
 		placeholder: 'Placeholder',
 		tooltip: "Je suis un message d'aide",
+		counter: 0,
 	},
 };
 
 export const PasswordVisiblity: StoryObj<TextInputComponent & { disabled: boolean } & FormFieldComponent> = {
 	render: (args, { argTypes }) => {
-		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, ...inputArgs } = args;
+		const { counter, label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, ...inputArgs } = args;
 		return {
 			template: `
 <lu-form-field ${generateInputs(
@@ -97,6 +99,7 @@ export const PasswordVisiblity: StoryObj<TextInputComponent & { disabled: boolea
 					inlineMessage,
 					inlineMessageState,
 					size,
+					counter,
 				},
 				argTypes,
 			)}>
@@ -127,12 +130,13 @@ export const PasswordVisiblity: StoryObj<TextInputComponent & { disabled: boolea
 		size: 'M',
 		placeholder: 'Placeholder',
 		tooltip: "Je suis un message d'aide",
+		counter: 0,
 	},
 };
 
 export const WithPrefixAndSuffix: StoryObj<TextInputComponent & { disabled: boolean } & FormFieldComponent> = {
 	render: (args, { argTypes }) => {
-		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, prefix, suffix, ...inputArgs } = args;
+		const { counter, label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, prefix, suffix, ...inputArgs } = args;
 		return {
 			props: {
 				prefix: args.prefix,
@@ -146,6 +150,7 @@ export const WithPrefixAndSuffix: StoryObj<TextInputComponent & { disabled: bool
 					inlineMessage,
 					inlineMessageState,
 					size,
+					counter,
 				},
 				argTypes,
 			)}>
@@ -187,5 +192,6 @@ export const WithPrefixAndSuffix: StoryObj<TextInputComponent & { disabled: bool
 		},
 		inlineMessage: 'Helper Text',
 		inlineMessageState: 'default',
+		counter: 0,
 	},
 };
