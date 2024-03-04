@@ -1,12 +1,14 @@
 /* eslint-disable @angular-eslint/no-output-on-prefix */
 import { OverlayConfig, OverlayContainer } from '@angular/cdk/overlay';
 import {
+	booleanAttribute,
 	ChangeDetectorRef,
 	Directive,
 	ElementRef,
 	EventEmitter,
 	HostBinding,
 	HostListener,
+	inject,
 	Input,
 	OnDestroy,
 	OnInit,
@@ -14,8 +16,6 @@ import {
 	TemplateRef,
 	Type,
 	ViewChild,
-	booleanAttribute,
-	inject,
 } from '@angular/core';
 import { BehaviorSubject, ReplaySubject, Subject } from 'rxjs';
 import { LuOptionGrouping, LuSimpleSelectDefaultOptionComponent } from '../option';
@@ -83,6 +83,13 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 
 	@Input() set options(options: TOption[]) {
 		this.options$.next(options);
+		if (this.panelRef) {
+			// We have to put it in a setTimeout so it'll be triggered AFTER the DOM is updated and not right now,
+			// which is before the panel size has been modified by the arrival of the new options
+			setTimeout(() => {
+				this.panelRef.updatePosition();
+			});
+		}
 	}
 
 	@Input() optionComparer: (option1: TOption, option2: TOption) => boolean = (option1, option2) => JSON.stringify(option1) === JSON.stringify(option2);
