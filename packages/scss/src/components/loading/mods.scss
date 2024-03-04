@@ -1,80 +1,50 @@
 @use '@lucca-front/scss/src/commons/utils/color';
 
-@mixin L {
-	height: var(--components-loading-size-big);
-	padding: var(--components-loading-size-big) 0 0;
-	text-align: center;
-	width: 100%;
+@mixin block {
+	--components-loading-display: block;
+	--components-loading-margin: 0 auto;
+	--components-loading-spinnerMargin: 0 auto;
 
-	&::after {
-		margin: 0 auto;
-		width: var(--components-loading-size-big);
-		height: var(--components-loading-size-big);
+	&:not(:empty) {
+		--components-loading-padding: var(--components-loading-size) 0 0;
 	}
 }
 
-@mixin block {
-	display: block;
-	margin-bottom: var(--pr-t-spacings-400);
-	padding: var(--pr-t-spacings-600) 0 0;
-	text-align: center;
-	width: 100%;
+@mixin L {
+	@include block;
 
-	&::after {
-		margin: auto;
-	}
+	--components-loading-size: var(--components-loading-size-big);
 }
 
 @mixin fullPage {
-	display: block;
-	margin: 0 auto;
-	transform: translateY(30vh);
+	@include block;
+	@include L;
 
-	&::after {
-		margin: 0 auto;
-		width: var(--components-loading-size-big);
-		height: var(--components-loading-size-big);
-	}
-}
-
-@mixin dialog {
-	display: block;
-	text-align: center;
-	position: relative;
-	padding: 8rem 0 0;
-	margin: 0 var(--pr-t-spacings-400) var(--pr-t-spacings-400);
-
-	&::after {
-		margin: auto;
-		width: var(--components-loading-size-big);
-		height: var(--components-loading-size-big);
-		left: 0;
-		right: 0;
-	}
-}
-
-@mixin sidePanel {
-	display: block;
-	text-align: center;
-	position: relative;
-	padding: 8rem 0 0;
-	margin: 0 var(--pr-t-spacings-400) var(--pr-t-spacings-400);
-	top: 35vh;
-
-	&::after {
-		margin: auto;
-		width: var(--components-loading-size-big);
-		height: var(--components-loading-size-big);
-		left: 0;
-		right: 0;
-	}
+	--components-loading-transform: translateY(calc((100dvh - var(--commons-banner-height)) / 2));
 }
 
 @mixin invert {
-	color: var(--colors-white-color);
+	--components-loading-color: var(--colors-white-color);
 
 	&::after {
-		border-color: color.transparentize(var(--colors-white-color), 0.66);
-		border-top-color: transparent;
+		--commons-loading-frontground: color.transparentize(var(--colors-white-color), 0.66);
 	}
+}
+
+@mixin popin {
+	@include block;
+	@include L;
+
+	&,
+	&:not(:empty) {
+		--components-loading-padding: 8rem 0 0;
+	}
+
+	--components-loading-margin: 0 var(--pr-t-spacings-400) var(--pr-t-spacings-400);
+	--components-loading-spinnerMargin: auto;
+}
+
+@mixin drawer {
+	@include fullPage;
+	@include popin;
 }
