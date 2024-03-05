@@ -94,15 +94,13 @@ function getTemplate(args: FilterBarBasicStory): string {
 			</div>
 		</div>
 		<div class="filterBar-footer">
-		<div class="filterBar-footer-toggle">
-			<button type="button" class="button mod-text mod-withIcon mod-block filterBar-footer-toggle-button" aria-expanded="true">
+			<button type="button" class="button mod-text mod-withIcon filterBar-footer-toggleButton" aria-expanded="true">
 				<span aria-hidden="true" class="lucca-icon icon-arrowChevronBottom"></span>
-				<span class="filterBar-footer-toggle-button-labelAlternative" data-content-before="Moins de filtres" aria-hidden="true"></span>
-				<span class="filterBar-footer-toggle-button-label">Plus de filtres</span>
+				<span class="filterBar-footer-toggleButton-labelAlternative" data-content-before="Moins de filtres" aria-hidden="true"></span>
+				<span class="filterBar-footer-toggleButton-label">Plus de filtres</span>
 			</button>
-		</div>
 			<div class="filterBar-footer-actions">
-				<span>21 résultats sur 30</span>
+				<span>8 résultats sur 88</span>
 				<button type="reset" class="button mod-text palette-product">Réinitialiser les filtres</button>
 				<button type="submit" class="button">Appliquer les filtres</button>
 			</div>
@@ -115,8 +113,6 @@ const Template: StoryFn<FilterBarBasicStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 });
-
-
 
 export const Basic = Template.bind({});
 Basic.args = {};

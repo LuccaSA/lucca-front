@@ -9,7 +9,7 @@
 	container-type: inline-size;
 	padding: var(--spacings-S);
 
-	&:has(.filterBar-footer-toggle-button[aria-expanded="false"]) {
+	&:has(.filterBar-footer-toggleButton[aria-expanded='false']) {
 		.filterBar-toggledFilters {
 			display: none;
 		}
@@ -34,10 +34,8 @@
 				display: none;
 			}
 
-			&:has(.filterBar-footer-toggle:empty) {
-				&:has(.filterBar-footer-actions:empty) {
-					display: none;
-				}
+			&:has(.filterBar-footer-actions:only-child:empty) {
+				display: none;
 			}
 
 			@include container.min('S', $name: 'filterBar') {
@@ -46,14 +44,14 @@
 			}
 		}
 
-		.filterBar-footer-toggle-button {
-			&[aria-expanded="false"] {
-				.filterBar-footer-toggle-button-labelAlternative {
+		.filterBar-footer-toggleButton {
+			&[aria-expanded='false'] {
+				.filterBar-footer-toggleButton-labelAlternative {
 					display: none;
 				}
 			}
-			&[aria-expanded="true"] {
-				.filterBar-footer-toggle-button-label {
+			&[aria-expanded='true'] {
+				.filterBar-footer-toggleButton-label {
 					@include a11y.mask;
 				}
 				.lucca-icon {
