@@ -32,7 +32,7 @@ export class DialogHeaderComponent implements OnInit {
 
 	dismissible = !this.#ref.config.alert;
 
-	#elementRef = inject(ElementRef);
+	#elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
 
 	#renderer = inject(Renderer2);
 
