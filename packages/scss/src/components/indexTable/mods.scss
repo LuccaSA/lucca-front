@@ -91,18 +91,6 @@
     }
 }
 
-@mixin mod-withPagination {
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
-    & + .pagination {
-        @include vars;
-        padding: 0 var(--spacings-S) 0.75rem 0;
-        border-bottom-left-radius: var(--components-indexTable-border-radius);
-        border-bottom-right-radius: var(--components-indexTable-border-radius);
-        background-color: var(--components-indexTable-background-color);
-    }
-}
-
 @mixin responsiveCardList {
     @include media.max('S') {
         display: flex;

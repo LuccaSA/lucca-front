@@ -1,3 +1,4 @@
+@use 'vars' as *;
 @use '@lucca-front/scss/src/commons/utils/a11y';
 
 @mixin component($atRoot: 'without: rule') {
@@ -122,6 +123,31 @@
         .indexTable-foot-row-cell {
             padding: var(--spacings-XS) var(--components-indexTable-padding);
             text-align: right;
+        }
+
+        .indexTableWrapper {
+            @include vars;
+            display: grid;
+            grid-template-areas: 'table table' 'massSelection pagination';
+            padding: var(--components-indexTable-padding) var(--components-indexTable-padding) var(--spacings-XXS);
+            gap: var(--spacings-XS) var(--components-indexTable-padding);
+            border-radius: var(--components-indexTable-border-radius);
+            background-color: var(--components-indexTable-background-color);
+            .indexTable {
+                grid-area: table;
+                padding: 0;
+            }
+            .pagination {
+                grid-area: pagination;
+                padding: var(--spacings-XXS) 0;
+            }
+            .indexTable_massSelection {
+                grid-area: massSelection;
+                display: flex;
+                align-items: center;
+                padding-left: var(--spacings-XS);
+                gap: var(--spacings-XS);
+            }
         }
     }
 }
