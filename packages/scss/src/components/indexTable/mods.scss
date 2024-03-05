@@ -38,19 +38,19 @@
 
         // apparence of the first cell with a card apparence.
         // we do this because there migh be one or two cells before without background and containing a checkbox
-        --components-indexTable-row-stack2-background-position: left -8px bottom calc(-9px + var(--components-indexTable-row-stack3-row-background-position-fix, 0px));
-        --components-indexTable-row-stack3-background-position: left -4px bottom -9px;
+        --components-indexTable-row-stack2-background-position: left -1px bottom calc(-5px + var(--components-indexTable-row-stack3-row-background-position-fix, 0px));
+        --components-indexTable-row-stack3-background-position: left 2px bottom -5px;
 
         // apparence of the nexts cells
         & ~ .indexTable-body-row-cell {
-            --components-indexTable-row-stack2-background-position: left -20px bottom calc(-9px + var(--components-indexTable-row-stack3-row-background-position-fix, 0px));
-            --components-indexTable-row-stack3-background-position: left -20px bottom -9px;
+            --components-indexTable-row-stack2-background-position: left -20px bottom calc(-5px + var(--components-indexTable-row-stack3-row-background-position-fix, 0px));
+            --components-indexTable-row-stack3-background-position: left -20px bottom -5px;
         }
 
         // apparence of the last cell with a card apparence
         &:last-child {
-            --components-indexTable-row-stack2-background-position: right -8px bottom calc(-9px + var(--components-indexTable-row-stack3-row-background-position-fix, 0px));
-            --components-indexTable-row-stack3-background-position: right -4px bottom -9px;
+            --components-indexTable-row-stack2-background-position: right -1px bottom calc(-5px + var(--components-indexTable-row-stack3-row-background-position-fix, 0px));
+            --components-indexTable-row-stack3-background-position: right 2px bottom -5px;
         }
 
         // stack apparence

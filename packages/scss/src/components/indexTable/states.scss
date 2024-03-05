@@ -46,7 +46,7 @@
 }
 
 @mixin hoveredCells {
-    --components-indexTable-cell-shadow: var(--commons-boxShadow-L);
+    --components-indexTable-cell-shadow: var(--components-indexTable-cell-shadow-hover);
     --components-indexTable-cell-inset-x: var(--components-indexTable-hover-offset-x);
     --components-indexTable-cell-inset-y: var(--components-indexTable-hover-offset-y);
 }
