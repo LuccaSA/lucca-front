@@ -51,7 +51,7 @@ export default {
 
 <ng-template #dialogTpl>
 	<lu-dialog #dialog>
-		<lu-dialog-header>Template driven header</lu-dialog-header>
+		<lu-dialog-header><h1>Template driven header</h1> You can also add more content in header</lu-dialog-header>
 
 		<lu-dialog-content>Template-driven content</lu-dialog-content>
 

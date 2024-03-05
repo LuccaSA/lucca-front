@@ -59,13 +59,16 @@
 			flex-grow: 1;
 		}
 
-		.dialog-inside-header-title {
+		.dialog-inside-header-container {
+			grid-area: container;
+		}
+
+		.dialog-inside-header-container-title {
 			@include title.h2;
 
 			padding: var(--components-dialog-insideHeaderTitlePadding);
 			text-align: var(--components-dialog-insideHeaderTitleAlign);
 			margin: 0;
-			grid-area: title;
 		}
 
 		.dialog-inside-footer {
