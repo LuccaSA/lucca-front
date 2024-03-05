@@ -31,7 +31,7 @@
 }
 
 @mixin selectableFocusedRow {
-    .indexTable-body-row:has(.checkbox-input:focus) {
+    .indexTable-body-row:has(.checkbox-input:focus-visible) {
         @include hoveredCells;
     }
 }
