@@ -125,6 +125,7 @@
             text-align: right;
         }
 
+        //A wrapper is needed for mass selection and pagination that are undex an indexTable
         .indexTableWrapper {
             @include vars;
             display: grid;

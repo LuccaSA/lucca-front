@@ -69,8 +69,8 @@ function getTemplate(args: IndexTableMassSelectionAndPaginationStory): string {
 			</tbody>
 		</table>
 		<div class="indexTable_massSelection">
-			<span class="indexTable_massSelection-text">3 achats sélectionnés</span>
-			<button class="button mod-text palette-product" type="button">Sélectionner tous les achats</button>
+			<span class="indexTable_massSelection-text">3 selected items</span>
+			<button class="button mod-text palette-product" type="button">Select all items</button>
 		</div>
 		<nav class="pagination" role="navigation" aria-labelledby="pagination-count">
 			<div id="pagination-count" class="pagination-count">
