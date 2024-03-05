@@ -107,7 +107,7 @@
         display: flex;
         flex-direction: column;
         gap: var(--components-indexTable-row-spacing);
-        padding-top: var(--components-indexTable-row-cell-padding);
+        padding-top: var(--components-indexTable-cell-padding);
 
         .indexTable-head {
             display: none;
@@ -209,4 +209,26 @@
     // ~ equivalent to width: min-content for a table-cell;
     width: 1%;
     white-space: nowrap;
+
+    // All devices expect touch ones
+    @media not (any-pointer: coarse) {
+        .indexTable-body-row-cell-subAction {
+            opacity: var(--components-indexTable-cell-subAction-opacity, 0);
+            transition: opacity ease var(--commons-animations-durations-fast);
+        }
+
+        //If there are 4 actions or more, the buttons are hidden (not on touch device) and replaced with a dropdown
+        &:has(.indexTable-body-row-cell-subActionDropdownTrigger) {
+            .indexTable-body-row-cell-subAction {
+                display: none;
+            }
+        }
+    }
+
+    // All touch devices
+    @media (any-pointer: coarse) {
+        .indexTable-body-row-cell-subActionDropdownTrigger {
+            display: none;
+        }
+    }
 }

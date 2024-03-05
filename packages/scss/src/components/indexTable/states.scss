@@ -14,6 +14,7 @@
 @mixin focusedRow {
     .indexTable-body-row:focus-within {
         @include a11y.focusVisible();
+        @include visibleSubActions;
     }
 }
 
@@ -49,4 +50,10 @@
     --components-indexTable-cell-shadow: var(--components-indexTable-cell-shadow-hover);
     --components-indexTable-cell-inset-x: var(--components-indexTable-hover-offset-x);
     --components-indexTable-cell-inset-y: var(--components-indexTable-hover-offset-y);
+    @include visibleSubActions;
+}
+
+@mixin visibleSubActions {
+    //if there are subActions, they should be visible
+    --components-indexTable-cell-subAction-opacity: 1;
 }
