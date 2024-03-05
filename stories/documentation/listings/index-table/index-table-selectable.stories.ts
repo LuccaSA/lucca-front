@@ -16,16 +16,16 @@ function getTemplate(args: IndexTableSelectableStory): string {
 	<table class="indexTable mod-selectable">
 		<thead class="indexTable-head">
 			<tr class="indexTable-head-row">
-				<th class="indexTable-head-row-transparentCell">
+				<th class="indexTable-head-row-transparentCell" scope="col">
 				<label class="checkbox">
 					<input class="checkbox-input" type="checkbox" />
 					<span class="checkbox-label"></span>
 					<span class="u-mask">Select all</span>
 				</label>
 				</th>
-				<th class="indexTable-head-row-cell">Label</th>
-				<th class="indexTable-head-row-cell">Label</th>
-				<th class="indexTable-head-row-cell">Label</th>
+				<th class="indexTable-head-row-cell" scope="col">Label</th>
+				<th class="indexTable-head-row-cell" scope="col">Label</th>
+				<th class="indexTable-head-row-cell" scope="col">Label</th>
 			</tr>
 		</thead>
 		<tbody class="indexTable-body">

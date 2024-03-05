@@ -16,10 +16,10 @@ function getTemplate(args: IndexTableStackableStory): string {
 	<table class="indexTable mod-stackable mod-selectable">
 		<thead class="indexTable-head">
 			<tr class="indexTable-head-row">
-				<th class="indexTable-head-row-transparentCell"></th>
-				<th class="indexTable-head-row-cell">Label</th>
-				<th class="indexTable-head-row-cell">Label</th>
-				<th class="indexTable-head-row-cell">Label</th>
+				<th class="indexTable-head-row-transparentCell" scope="col"></th>
+				<th class="indexTable-head-row-cell" scope="col">Label</th>
+				<th class="indexTable-head-row-cell" scope="col">Label</th>
+				<th class="indexTable-head-row-cell" scope="col">Label</th>
 			</tr>
 		</thead>
 		<tbody class="indexTable-body">
