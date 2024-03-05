@@ -1,0 +1,19 @@
+// This file contains all the connections required to make the component functional.
+// The component’s mixins are requested, then assigned to classes.
+// To add the component to the list of all existing components, call it from `components/index` with `@forward 'sample';`.
+// Modifiers and states are optional and must be prefixed by `.mod-` and `.is-`.
+
+@use 'exports' as *;
+
+.sample {
+	@include vars;
+	@include component;
+
+	&.mod-sampleModifierA {
+		@include sampleModifierA;
+	}
+
+	&.is-sampleStateA {
+		@include sampleStateA;
+	}
+}
