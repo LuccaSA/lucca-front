@@ -127,10 +127,13 @@
             padding-top: 0;
             padding-bottom: 0;
             &::before {
-                border-radius: var(--components-indexTable-border-radius);
+                --components-indexTable-cell-inset-x-right: 50%;
             }
-
-            ~ .indexTable-body-row-cell {
+            &:last-child::before {
+                --components-indexTable-cell-inset-x-right: 0;
+                --components-indexTable-cell-inset-x-left: 50%;
+            }
+            ~ .indexTable-body-row-cell:not(:last-child) {
                 &::before {
                     display: none;
                 }
@@ -181,13 +184,10 @@
             ~ .indexTable-body-row-cell:not(:last-child)::after {
                 display: none;
             }
-            //placeholder. Need to find another way to do this
             &:last-child {
                 &::after {
-                    top: 100%;
-                    --components-indexTable-cell-inset-x-right: 3px;
                     --components-indexTable-cell-inset-x-left: 50%;
-                    border-top: 2px solid #acbbd733;
+                    --components-indexTable-cell-inset-x-right: 0;
                 }
             }
         }
