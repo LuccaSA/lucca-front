@@ -11,8 +11,8 @@ export default {
 
 function getTemplate(args: LinkNoWrapStory): string {
 	return `<a class="link mod-icon" href="#" target="_blank">
-		Lien externe sans retour à la ligne possible avant l’icône<span class="link-icon"><span aria-hidden="true" class="lucca-icon icon-arrowExternal"></span></span><span class="u-mask">Ouvrir dans une nouvelle fenêtre</span>
-	</a>`;
+	Lien externe sans retour à la ligne possible avant l’icône<span class="link-icon"><span aria-hidden="true" class="lucca-icon icon-arrowExternal"></span></span><span class="u-mask">Ouvrir dans une nouvelle fenêtre</span>
+</a>`;
 }
 
 const Template: StoryFn<LinkNoWrapStory> = (args) => ({

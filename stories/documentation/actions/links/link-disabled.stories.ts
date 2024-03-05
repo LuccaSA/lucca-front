@@ -10,8 +10,8 @@ export default {
 } as Meta;
 
 function getTemplate(args: LinkDisabledStory): string {
-	return `<a href="#" class="link is-disabled">Lien</a>
-<a class="link is-disabled mod-icon" href="#" target="_blank">Lien externe <span aria-hidden="true" class="lucca-icon icon-arrowExternal"></span><span class="u-mask">Ouvrir dans une nouvelle fenêtre</span></a>`;
+	return `<span class="link is-disabled">Lien</span>
+<span class="link is-disabled mod-icon">Lien externe <span aria-hidden="true" class="lucca-icon icon-arrowExternal"></span></span>`;
 }
 
 const Template: StoryFn<LinkDisabledStory> = (args) => ({
@@ -22,7 +22,7 @@ const Template: StoryFn<LinkDisabledStory> = (args) => ({
 		:host {
 			display: block;
 		}
-		a {
+		span {
 			margin-right: 1rem;
 		}
 		`,
