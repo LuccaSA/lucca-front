@@ -187,14 +187,14 @@ function getTemplate(args: IndexTableResponsiveCardListStory): string {
 			</thead>
 			<tbody class="indexTable-body">
 				<tr class="indexTable-body-row" id="r0">
-					<td class="indexTable-body-row-transparentCell">
+					<th class="indexTable-body-row-transparentCell">
 						<label class="checkbox">
 							<input class="checkbox-input" type="checkbox" />
 							<span class="checkbox-label"></span>
 							<span class="u-mask">Select this line</span>
 						</label>
-					</td>
-					<td class="indexTable-body-row-transparentCell" colspan="4" id="y2021">
+					</th>
+					<th class="indexTable-body-row-transparentCell" colspan="4" id="y2021">
 						<div class="indexTable-body-row-cellTitle">
 							<button class="indexTable-body-row-cellTitle-button button mod-text mod-onlyIcon" aria-expanded="true" aria-controls="r1 r2 r3 r4 r5" type="button">
 								<span class="lucca-icon icon-arrowChevronBottom" aria-hidden="true"></span>
@@ -203,17 +203,17 @@ function getTemplate(args: IndexTableResponsiveCardListStory): string {
 							<span class="indexTable-body-rowGroup-cellTitle-title">2021</span>
 							<span class="numericBadge">4</span>
 						</div>
-					</td>
+					</th>
 				</tr>
 				<tr class="indexTable-body-row" id="r1">
-					<td class="indexTable-body-row-transparentCell" header="y2021" colspan="2">
+					<th class="indexTable-body-row-transparentCell" header="y2021" colspan="2">
 						<label class="checkbox">
 							<input class="checkbox-input" type="checkbox" />
 							<span class="checkbox-label"></span>
 							<span class="u-mask">Select this line</span>
 						</label>
-					</td>
-					<td class="indexTable-body-row-transparentCell" colspan="3" id="september" header="y2021">
+					</th>
+					<th class="indexTable-body-row-transparentCell" colspan="3" id="september" header="y2021">
 						<div class="indexTable-body-row-cellTitle">
 							<button class="indexTable-body-row-cellTitle-button button mod-text mod-onlyIcon" aria-expanded="true" aria-controls="r2" type="button">
 								<span class="lucca-icon icon-arrowChevronBottom" aria-hidden="true"></span>
@@ -222,7 +222,7 @@ function getTemplate(args: IndexTableResponsiveCardListStory): string {
 							<span class="indexTable-body-rowGroup-cellTitle-title">September (stacks for test !)</span>
 							<span class="numericBadge">1</span>
 						</div>
-					</td>
+					</th>
 				</tr>
 				<tr class="indexTable-body-row mod-stack3" id="r2">
 					<td class="indexTable-body-row-transparentCell" header="y2021 september" colspan="2">
@@ -237,14 +237,14 @@ function getTemplate(args: IndexTableResponsiveCardListStory): string {
 					<td class="indexTable-body-row-cell" header="y2021 september">Content</td>
 				</tr>
 				<tr class="indexTable-body-row" id="r3">
-					<td class="indexTable-body-row-transparentCell" header="y2021" colspan="2">
+					<th class="indexTable-body-row-transparentCell" header="y2021" colspan="2">
 						<label class="checkbox">
 							<input class="checkbox-input" type="checkbox" />
 							<span class="checkbox-label"></span>
 							<span class="u-mask">Select this line</span>
 						</label>
-					</td>
-					<td class="indexTable-body-row-transparentCell" colspan="3" id="october" header="y2021">
+					</th>
+					<th class="indexTable-body-row-transparentCell" colspan="3" id="october" header="y2021">
 						<div class="indexTable-body-row-cellTitle">
 							<button class="indexTable-body-row-cellTitle-button button mod-text mod-onlyIcon" aria-expanded="true" aria-controls="r4 r5" type="button">
 								<span class="lucca-icon icon-arrowChevronBottom" aria-hidden="true"></span>
@@ -253,7 +253,7 @@ function getTemplate(args: IndexTableResponsiveCardListStory): string {
 							<span class="indexTable-body-rowGroup-cellTitle-title">October</span>
 							<span class="numericBadge">2</span>
 						</div>
-					</td>
+					</th>
 				</tr>
 				<tr class="indexTable-body-row" id="r4">
 					<td class="indexTable-body-row-transparentCell" header="y2021 october" colspan="2">
@@ -282,14 +282,14 @@ function getTemplate(args: IndexTableResponsiveCardListStory): string {
 			</tbody>
 			<tbody class="indexTable-body">
 				<tr class="indexTable-body-row" id="r6">
-					<td class="indexTable-body-row-transparentCell">
+					<th class="indexTable-body-row-transparentCell">
 						<label class="checkbox">
 							<input class="checkbox-input" type="checkbox" />
 							<span class="checkbox-label"></span>
 							<span class="u-mask">Select this line</span>
 						</label>
-					</td>
-					<td class="indexTable-body-row-transparentCell" colspan="4" id="y2022">
+					</th>
+					<th class="indexTable-body-row-transparentCell" colspan="4" id="y2022">
 						<div class="indexTable-body-row-cellTitle">
 							<button class="indexTable-body-row-cellTitle-button button mod-text mod-onlyIcon" aria-expanded="true" aria-controls="r7 r8" type="button">
 								<span class="lucca-icon icon-arrowChevronBottom" aria-hidden="true"></span>
@@ -298,17 +298,17 @@ function getTemplate(args: IndexTableResponsiveCardListStory): string {
 							<span class="indexTable-body-rowGroup-cellTitle-title">2022</span>
 							<span class="numericBadge">4</span>
 						</div>
-					</td>
+					</th>
 				</tr>
 				<tr class="indexTable-body-row" id="r7">
-					<td class="indexTable-body-row-transparentCell" header="y2022" colspan="2">
+					<th class="indexTable-body-row-transparentCell" header="y2022" colspan="2">
 						<label class="checkbox">
 							<input class="checkbox-input" type="checkbox" />
 							<span class="checkbox-label"></span>
 							<span class="u-mask">Select this line</span>
 						</label>
-					</td>
-					<td class="indexTable-body-row-transparentCell" colspan="3" id="january" header="y2022">
+					</th>
+					<th class="indexTable-body-row-transparentCell" colspan="3" id="january" header="y2022">
 						<div class="indexTable-body-row-cellTitle">
 							<button class="indexTable-body-row-cellTitle-button button mod-text mod-onlyIcon" aria-expanded="true" aria-controls="r8" type="button">
 								<span class="lucca-icon icon-arrowChevronBottom" aria-hidden="true"></span>
@@ -317,7 +317,7 @@ function getTemplate(args: IndexTableResponsiveCardListStory): string {
 							<span class="indexTable-body-rowGroup-cellTitle-title">January</span>
 							<span class="numericBadge">1</span>
 						</div>
-					</td>
+					</th>
 				</tr>
 				<tr class="indexTable-body-row" id="r8">
 					<td class="indexTable-body-row-transparentCell" header="y2022 january" colspan="2">
