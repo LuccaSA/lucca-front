@@ -5,7 +5,8 @@
     position: relative;
     display: table;
     width: 100%;
-    padding: 0 var(--spacings-XS) var(--spacings-XS);
+    padding: var(--components-indexTable-padding);
+    padding-top: 0;
     border-collapse: separate;
     border-spacing: 0 var(--components-indexTable-row-spacing);
     border-radius: var(--components-indexTable-border-radius);
@@ -53,7 +54,7 @@
         }
 
         .indexTable-head-row-cell {
-            padding: var(--spacings-XS) var(--components-indexTable-padding);
+            padding: var(--spacings-XS) var(--components-indexTable-row-cell-padding);
             color: var(--palettes-neutral-600);
             font-weight: 400;
         }
@@ -61,7 +62,7 @@
         .indexTable-body-row-cell {
             position: relative;
             z-index: 1;
-            padding: var(--components-indexTable-padding);
+            padding: var(--components-indexTable-row-cell-padding);
             border-radius: var(--components-table-cardList-cell-border-radius);
 
             // apparence of the first cell with a card apparence.
@@ -121,7 +122,7 @@
         }
 
         .indexTable-foot-row-cell {
-            padding: var(--spacings-XS) var(--components-indexTable-padding);
+            padding: var(--spacings-XS) var(--components-indexTable-row-cell-padding);
             text-align: right;
         }
 
@@ -130,8 +131,9 @@
             @include vars;
             display: grid;
             grid-template-areas: 'table table' 'massSelection pagination';
-            padding: var(--components-indexTable-padding) var(--components-indexTable-padding) var(--spacings-XXS);
-            gap: var(--spacings-XS) var(--components-indexTable-padding);
+            padding: var(--components-indexTable-row-cell-padding) var(--components-indexTable-row-cell-padding)
+                var(--spacings-XXS);
+            gap: var(--spacings-XS) var(--components-indexTable-row-cell-padding);
             border-radius: var(--components-indexTable-border-radius);
             background-color: var(--components-indexTable-background-color);
             .indexTable {

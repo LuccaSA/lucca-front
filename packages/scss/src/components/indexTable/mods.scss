@@ -73,20 +73,31 @@
 @mixin stickyHeader {
     .indexTable-head {
         position: sticky;
-        top: 0;
+        top: var(--components-indexTable-row-spacing);
         z-index: 2;
-        background-color: var(--components-indexTable-background-color);
     }
 
     //hide box-shadow from underneath rows that slighly appear on edges of the sticky header when scrolling
     .indexTable-head-row-cell {
         position: relative;
-        &::before {
+        &::before,
+        &::after {
             content: '';
             position: absolute;
-            inset: 0 var(--components-indexTable-hover-offset-x);
+            inset: calc(var(--components-indexTable-row-spacing) * -1) calc(var(--components-indexTable-padding) * -1) 0;
             z-index: -1;
+        }
+        &::before {
+            background-color: var(--commons-background-base);
+        }
+        &::after {
             background-color: var(--components-indexTable-background-color);
+        }
+        &:first-child::after {
+            border-top-left-radius: var(--components-indexTable-border-radius);
+        }
+        &:last-child::after {
+            border-top-right-radius: var(--components-indexTable-border-radius);
         }
     }
 }
@@ -96,7 +107,7 @@
         display: flex;
         flex-direction: column;
         gap: var(--components-indexTable-row-spacing);
-        padding-top: var(--components-indexTable-padding);
+        padding-top: var(--components-indexTable-row-cell-padding);
 
         .indexTable-head {
             display: none;

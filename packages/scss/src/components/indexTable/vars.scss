@@ -1,11 +1,12 @@
 @mixin vars {
-    --components-indexTable-padding: 0.75rem;
+    --components-indexTable-padding: var(--spacings-XS);
     --components-indexTable-border-radius: 12px;
     --components-indexTable-background-color: var(--palettes-grey-50);
     --components-indexTable-row-spacing: 4px;
     // on responsive, row spacing is increased
     --components-indexTable-row-spacing-responsive: 8px;
 
+    --components-indexTable-row-cell-padding: 0.75rem;
     // shadows
     --components-indexTable-cell-shadow-default: var(--pr-t-elevation-shadow-raised);
     --components-indexTable-cell-shadow-hover: var(--pr-t-elevation-shadow-overlay);
