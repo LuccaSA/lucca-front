@@ -50,7 +50,7 @@
         // apparence of the last cell with a card apparence
         &:last-child {
             --components-indexTable-row-stack2-background-position: right -8px bottom calc(-9px + var(--components-indexTable-row-stack3-row-background-position-fix, 0px));
-            --components-indexTable-row-stack3-background-position: right -1px bottom -9px;
+            --components-indexTable-row-stack3-background-position: right -4px bottom -9px;
         }
 
         // stack apparence
