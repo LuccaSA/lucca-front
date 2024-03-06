@@ -1,9 +1,13 @@
 @use 'vars' as *;
 @use '@lucca-front/scss/src/commons/utils/media';
+@use '@lucca-front/scss/src/commons/config';
 @mixin selectable {
     .indexTable-head-row-transparentCell,
     .indexTable-body-row-transparentCell {
         width: var(--components-indexTable-row-cell-transparent-width);
+        &:first-child {
+            padding-right: 0;
+        }
     }
 
     .indexTable-body-row {
@@ -232,4 +236,36 @@
             display: none;
         }
     }
+}
+
+@mixin layoutFixed {
+    table-layout: fixed;
+
+    [class*='row-cell'] {
+        --cell-width: calc(
+            var(--components-indexTable-cell-fixed-width, var(--components-index-table-cell-fixed-width)) * 1rem
+        );
+    }
+
+    &.mod-layoutFixed [class*='row-cell'] {
+        @include cellFixedWidth;
+    }
+
+    //Layout fixed at breakpoint
+    @each $breakpoint, $value in config.$breakpoints {
+        @include media.min($breakpoint) {
+            &.mod-layoutFixedAtMediaMin#{$breakpoint} {
+                table-layout: fixed;
+                [class*='row-cell'] {
+                    @include cellFixedWidth;
+                }
+            }
+        }
+    }
+}
+
+@mixin cellFixedWidth {
+    min-width: var(--cell-width, auto);
+    max-width: var(--cell-width, auto);
+    width: var(--cell-width, auto);
 }

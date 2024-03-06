@@ -29,6 +29,10 @@
         @include stackableResponsiveCardList;
     }
 
+    &[class*='mod-layoutFixed'] {
+        @include layoutFixed;
+    }
+
     .indexTable-body-row-cell.mod-actions {
         @include actions;
     }
