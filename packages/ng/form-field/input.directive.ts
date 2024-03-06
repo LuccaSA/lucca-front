@@ -17,7 +17,7 @@ export class InputDirective implements OnInit {
 	ngOnInit(): void {
 		// If the field is used as standalone, we won't have the ref provided so it'll crash
 		if (this.formFieldRef) {
-			this.formFieldRef.input = this;
+			this.formFieldRef.addInput(this);
 		}
 	}
 }
