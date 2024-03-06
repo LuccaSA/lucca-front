@@ -206,18 +206,19 @@
 }
 
 @mixin actions {
-    // ~ equivalent to width: min-content for a table-cell;
+    // ~ equivalent to width: min-content for a table-cell but prevent line-break;
     width: 1%;
     white-space: nowrap;
 
-    // All devices expect touch ones
-    @media not (any-pointer: coarse) {
+    // All devices expect touch ones : subActions are hidden and appears when their row is hover or selected
+    // see mixin visibleSubActions() in states.scss
+    @include media.isNotTouchDevice {
         .indexTable-body-row-cell-subAction {
             opacity: var(--components-indexTable-cell-subAction-opacity, 0);
             transition: opacity ease var(--commons-animations-durations-fast);
         }
 
-        //If there are 4 actions or more, the buttons are hidden (not on touch device) and replaced with a dropdown
+        //If there are 4 actions or more, the buttons are hidden (not on touch device) and replaced should be replaced with a dropdown
         &:has(.indexTable-body-row-cell-subActionDropdownTrigger) {
             .indexTable-body-row-cell-subAction {
                 display: none;
@@ -225,8 +226,8 @@
         }
     }
 
-    // All touch devices
-    @media (any-pointer: coarse) {
+    // All touch devices : subActions are always visibles, subActionDropdownTrigger is hidden
+    @include media.isTouchDevice {
         .indexTable-body-row-cell-subActionDropdownTrigger {
             display: none;
         }
