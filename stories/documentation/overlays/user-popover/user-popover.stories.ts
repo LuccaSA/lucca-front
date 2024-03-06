@@ -1,25 +1,53 @@
 import { OverlayModule } from '@angular/cdk/overlay';
-import { provideHttpClient } from '@angular/common/http';
+import { HttpClientModule, provideHttpClient } from '@angular/common/http';
 import { BrowserAnimationsModule, provideAnimations } from '@angular/platform-browser/animations';
 import { EmployeeCardTriggerModule, LuEmployeeCardTriggerDirective } from '@lucca-front/ng/popup-employee';
-import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { applicationConfig, Meta, moduleMetadata, StoryFn, StoryObj } from '@storybook/angular';
+import { bob } from '@/stories/users/user.mocks';
+import { LuDisplayInitials } from '../../../../packages/ng/user/display';
+import { Component, Input, Optional } from '@angular/core';
+import { ILuUser } from '../../../../packages/ng/user/user.model';
+
+
+@Component({
+	imports: [ OverlayModule, EmployeeCardTriggerModule ],
+	selector: 'user-popover-story',
+	standalone: true,
+	template: '<div [luEmployeeCard]="luEmployeeCard" [luEmployeeCardEnterDelay]="luEmployeeCardEnterDelay" [luEmployeeCardLeaveDelay]="luEmployeeCardLeaveDelay" [luEmployeeCardDisabled]="luEmployeeCardDisabled" >Coucou !</div>',
+})
+class UserPopoverStory {
+	@Input() luEmployeeCard: ILuUser;
+	@Input() @Optional() luEmployeeCardEnterDelay: number;
+	@Input() @Optional() luEmployeeCardLeaveDelay: number;
+	@Input() @Optional() luEmployeeCardDisabled: boolean;
+}
 
 export default {
 	title: 'Documentation/Overlays/user-popover',
-	decorators: [
-		applicationConfig({
-			providers: [provideHttpClient(), provideAnimations()],
-		}),
-		moduleMetadata({
-			imports: [OverlayModule, EmployeeCardTriggerModule],
-		}),
-	],
-	render: () => {
-		return {
-			props: { user: { id: 1, firstName: 'David', lastName: 'Hernandez' } },
-			template: `<div [luEmployeeCard]="user">Coucou !</div>`,
-		};
+	component: UserPopoverStory,
+	decorators: [applicationConfig({ providers: [provideAnimations(), provideHttpClient()] })],
+	argsTypes: {
+		luEmployeeCard: { control: { type: 'object' } },
+		luEmployeeCardEnterDelay: { control: { type: 'number' } },
+		luEmployeeCardLeaveDelay: { control: { type: 'number' } },
+		luEmployeeCardDisabled: { control: { type: 'boolean' } },
 	},
 } as Meta;
 
-export const Template: StoryObj = {};
+const template: StoryFn<UserPopoverStory> = (args) => ({
+	props: args,
+});
+
+export const Basic = template.bind({});
+Basic.args = {
+	luEmployeeCard: { id: 1, firstName: 'Chloe', lastName: 'Alibert' },
+	luEmployeeCardEnterDelay: 300,
+	luEmployeeCardLeaveDelay: 200,
+	luEmployeeCardDisabled: false,
+};
+
+Basic.parameters = {
+	controls: {
+		include: ['luEmployeeCard', 'luEmployeeCardEnterDelay', 'luEmployeeCardLeaveDelay', 'luEmployeeCardDisabled'],
+	}
+}
