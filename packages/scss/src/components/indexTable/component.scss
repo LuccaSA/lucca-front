@@ -92,7 +92,7 @@
 
             &::before,
             &::after {
-                transition-property: inset, box-shadow, background-color;
+                transition-property: inset, box-shadow, background-color, background-image;
                 transition-duration: var(--commons-animations-durations-standard);
             }
 
