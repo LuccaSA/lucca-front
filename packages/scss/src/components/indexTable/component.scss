@@ -59,6 +59,13 @@
             font-weight: 400;
         }
 
+        .indexTable-head-row-transparentCell,
+        .indexTable-body-row-transparentCell {
+            &:not(:has(.checkbox)) {
+                padding-right: var(--components-indexTable-cell-padding);
+            }
+        }
+
         .indexTable-body-row-cell {
             position: relative;
             z-index: 1;

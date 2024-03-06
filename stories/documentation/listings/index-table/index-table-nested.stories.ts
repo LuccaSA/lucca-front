@@ -92,7 +92,7 @@ function getTemplate(args: IndexTableNestedStory): string {
 						<span class="numericBadge">3</span>
 					</div>
 				</th>
-				<th class="indexTable-foot-row-cell u-textRight">
+				<th class="indexTable-body-row-transparentCell u-textRight">
 					<span>Total : </span>
 					<strong>7999.1 €</strong>
 				</th>
@@ -131,7 +131,7 @@ function getTemplate(args: IndexTableNestedStory): string {
 						<span class="numericBadge">1</span>
 					</div>
 				</th>
-				<th class="indexTable-foot-row-cell u-textRight">
+				<th class="indexTable-body-row-transparentCell u-textRight">
 					<span>Total : </span>
 					<strong>200.00 €</strong>
 				</th>
