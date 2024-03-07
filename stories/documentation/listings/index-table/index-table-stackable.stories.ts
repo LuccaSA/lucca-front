@@ -20,7 +20,7 @@ function getTemplate(args: IndexTableStackableStory): string {
 					<label class="formLabel u-mask" for="allchbx">Select all items</label>
 					<span class="checkboxField">
 						<input class="checkboxField-input" type="checkbox" id="allchbx"
-							aria-controls="r0chbx r1chbx r2chbx r3chbx r4chbx" />
+							aria-controls="r0chbx r1chbx r2chbx r3chbx r4chbx" checked aria-checked="mixed" />
 						<span class="checkboxField-icon" aria-hidden="true"><span
 								class="checkboxField-icon-check"></span></span>
 					</span>
@@ -74,7 +74,7 @@ function getTemplate(args: IndexTableStackableStory): string {
 				<td class="indexTable-body-row-transparentCell">
 					<label class="formLabel u-mask" for="r3chbx">Select this item</label>
 					<span class="checkboxField">
-						<input class="checkboxField-input" type="checkbox" id="r3chbx" />
+						<input class="checkboxField-input" type="checkbox" id="r3chbx" checked />
 						<span class="checkboxField-icon" aria-hidden="true"><span
 								class="checkboxField-icon-check"></span></span>
 					</span>
