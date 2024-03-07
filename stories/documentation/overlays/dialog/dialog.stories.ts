@@ -1,8 +1,6 @@
-import { Component } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import {
-	configureLuDialog,
 	DialogCloseDirective,
 	DialogComponent,
 	DialogContentComponent,
@@ -10,11 +8,11 @@ import {
 	DialogFooterComponent,
 	DialogHeaderComponent,
 	DialogOpenDirective,
-	injectDialogRef,
+	configureLuDialog,
 } from '@lucca-front/ng/dialog';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { CheckboxInputComponent, TextInputComponent } from '@lucca-front/ng/forms';
-import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { Meta, StoryObj, applicationConfig, moduleMetadata } from '@storybook/angular';
 
 export default {
 	title: 'Documentation/Overlays/Dialog/Angular',
@@ -148,7 +146,7 @@ export const WithForm: StoryObj = {
 <!--form = new FormGroup({
 			example: new FormControl('', Validators.required)
 		})-->
-		<form [formControl]="form" class="dialog-form">
+		<form [formControl]="form" class="dialog-formOptionnal">
 			<lu-dialog-header>Template driven header with Form inside</lu-dialog-header>
 
 			<lu-dialog-content>
