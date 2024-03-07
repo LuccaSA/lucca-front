@@ -2,17 +2,21 @@
 @use '@lucca-front/scss/src/commons/utils/media';
 @use '@lucca-front/scss/src/commons/config';
 @mixin selectable {
-    .indexTable-head-row-transparentCell,
-    .indexTable-body-row-transparentCell {
-        width: var(--components-indexTable-row-cell-transparent-width);
-        &:first-child {
-            padding-right: 0;
-        }
+    .indexTable-head-row {
+        cursor: pointer;
     }
 
     .indexTable-body-row {
         &:is(:focus-within, :hover) {
             outline: none;
+        }
+    }
+
+    .indexTable-head-row-transparentCell,
+    .indexTable-body-row-transparentCell {
+        width: var(--components-indexTable-row-cell-transparent-width);
+        &:first-child {
+            padding-right: 0;
         }
     }
 }

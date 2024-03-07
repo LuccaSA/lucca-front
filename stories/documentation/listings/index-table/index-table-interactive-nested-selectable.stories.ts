@@ -7,7 +7,8 @@ import { Meta, StoryFn } from '@storybook/angular';
 	templateUrl: './index-table-interactive-nested-selectable.stories.html',
 })
 class IndexTableInteractiveNestedSelectableStory {
-	toggleRows(btnID, eIDs) {
+	toggleRows(event, btnID, eIDs) {
+		event.stopPropagation();
 		// Feed the list of ids as a selector
 		var targetRows = document.querySelectorAll(eIDs);
 		// Get the button that triggered this
@@ -31,7 +32,8 @@ class IndexTableInteractiveNestedSelectableStory {
 		}
 	}
 
-	toggleCheckbox(chbxID, eIDs) {
+	toggleCheckbox(event, chbxID, eIDs) {
+		event.stopPropagation();
 		// Feed the list of ids as a selector
 		var childChbxs = document.querySelectorAll(eIDs);
 		// Get the checkbox that triggered this
@@ -83,6 +85,12 @@ class IndexTableInteractiveNestedSelectableStory {
 				}
 			}
 		}
+	}
+
+	// a click on a row select or deselect the corresponding checkbox
+	selectRow(chbxID) {
+		var targetChbx = document.getElementById(chbxID);
+		targetChbx.click();
 	}
 }
 
