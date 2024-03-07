@@ -17,9 +17,9 @@ import { ILuUser } from '../../../../packages/ng/user/user.model';
 })
 class UserPopoverStory {
 	@Input() luEmployeeCard: ILuUser;
-	@Input() @Optional() luEmployeeCardEnterDelay: number;
-	@Input() @Optional() luEmployeeCardLeaveDelay: number;
-	@Input() @Optional() luEmployeeCardDisabled: boolean;
+	@Input() luEmployeeCardEnterDelay = 300;
+	@Input() luEmployeeCardLeaveDelay = 200;
+	@Input() luEmployeeCardDisabled = false;
 }
 
 export default {
