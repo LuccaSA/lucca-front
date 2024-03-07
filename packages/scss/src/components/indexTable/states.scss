@@ -26,13 +26,13 @@
 
 // selectable rows
 @mixin selectableSelectedRow {
-    .indexTable-body-row:not(:hover):has(.checkbox-input:checked) {
+    .indexTable-body-row:not(:hover):has(.checkbox-input:checked, .checkboxField-input:checked) {
         @include selectedCells;
     }
 }
 
 @mixin selectableFocusedRow {
-    .indexTable-body-row:has(.checkbox-input:focus-visible) {
+    .indexTable-body-row:has(.checkbox-input:focus-visible, .checkboxField-input:focus-visible) {
         @include hoveredCells;
     }
 }
