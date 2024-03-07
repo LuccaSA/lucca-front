@@ -177,14 +177,14 @@ la dialog box a accès à tout ce que le composant expose au template, fonctions
 
 ## Utilisation des formulaires
 
-Dans le cas où vous souhaitez utiliser un formulaire au sein d’une dialog box, il vous suffit de placer la balise `form` avec une classe `dialog-form` autour du contenu de votre dialog, que celle-ci soit template-driven ou non:
+Dans le cas où vous souhaitez utiliser un formulaire au sein d’une dialog box, il vous suffit de placer la balise `form` avec une classe `dialog-formOptionnal` autour du contenu de votre dialog, que celle-ci soit template-driven ou non:
 
 ```html
 <lu-dialog>
 		<!--form = new FormGroup({
 			example: new FormControl('', Validators.required)
 		})-->
-		<form [formControl]="form" class="dialog-form">
+		<form [formControl]="form" class="dialog-formOptionnal">
 			<lu-dialog-header>Header with Form inside</lu-dialog-header>
 
 			<lu-dialog-content>
