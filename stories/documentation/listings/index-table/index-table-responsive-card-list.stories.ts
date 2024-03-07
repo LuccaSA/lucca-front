@@ -206,7 +206,7 @@ function getTemplate(args: IndexTableResponsiveCardListStory): string {
 								<span class="u-mask">Hide details</span>
 							</button>
 							<span class="indexTable-body-rowGroup-cellTitle-title">2021</span>
-							<span class="numericBadge">4</span>
+							<span class="numericBadge">3</span>
 						</div>
 					</th>
 				</tr>
@@ -310,7 +310,7 @@ function getTemplate(args: IndexTableResponsiveCardListStory): string {
 								<span class="u-mask">Hide details</span>
 							</button>
 							<span class="indexTable-body-rowGroup-cellTitle-title">2022</span>
-							<span class="numericBadge">4</span>
+							<span class="numericBadge">1</span>
 						</div>
 					</th>
 				</tr>
