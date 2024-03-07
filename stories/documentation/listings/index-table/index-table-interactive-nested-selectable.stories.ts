@@ -36,6 +36,7 @@ class IndexTableInteractiveNestedSelectableStory {
 		var childChbxs = document.querySelectorAll(eIDs);
 		// Get the checkbox that triggered this
 		var clickedChbx = document.getElementById(chbxID) as HTMLInputElement;
+		clickedChbx.removeAttribute("aria-checked");
 		var clickedChbxState = clickedChbx.checked;
 
 		// if this checkbox has childs, propagate her states
@@ -43,17 +44,20 @@ class IndexTableInteractiveNestedSelectableStory {
 			for (var i = 0; i < childChbxs.length; i++) {
 				var childChbx = childChbxs[i] as HTMLInputElement;
 				childChbx.checked = clickedChbxState;
+				childChbx.removeAttribute("aria-checked");
 			}
 		}
 
-		// reverse state propogation on parents + mixed state management
-		// get all clickedChbx ancestors
-		var parentChbxs = document.querySelectorAll(".checkbox-input[aria-controls*='"+clickedChbx.id+"']");
+		// Reverse state propogation on parents + mixed state management
+
+		// get all of the clickedChbx ancestors
+		var parentChbxs = document.querySelectorAll(".checkboxField-input[aria-controls*='"+clickedChbx.id+"']");
 		if(parentChbxs) {
 			// for each ancestor
 			for (var i = parentChbxs.length -1 ; i >= 0; i--) {
 				var parentChbx = parentChbxs[i] as HTMLInputElement;
-				// get child list and sum their states (unchecked = 0 ; checked = 1)
+				parentChbx.removeAttribute("aria-checked");
+				// parse their childs list and sum their states (unchecked = 0 ; checked = 1)
 				var parentChbxChildIds = parentChbx.getAttribute("aria-controls").split(" ");
 				var calculatedState = 0;
 				for (var j = 0; j < parentChbxChildIds.length; j++) {
@@ -64,16 +68,15 @@ class IndexTableInteractiveNestedSelectableStory {
 						calculatedState++;
 					}
 				}
-				// all childs are unchecked
+				// all childs are unchecked => parent is unchecked
 				if(calculatedState == 0) {
 					parentChbx.checked = false;
-					parentChbx.removeAttribute("aria-checked");
 				}
-				// all childs are checked
+				// all childs are checked => parent is checked
 				else if(calculatedState == parentChbxChildIds.length) {
 					parentChbx.checked = true;
-					parentChbx.removeAttribute("aria-checked");
 				}
+				// some childs checked, some unchecked => parent is mixed
 				else {
 					parentChbx.checked = true;
 					parentChbx.setAttribute("aria-checked","mixed");
