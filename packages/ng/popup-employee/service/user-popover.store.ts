@@ -3,28 +3,28 @@ import { inject, Injectable } from '@angular/core';
 import { Observable, OperatorFunction } from 'rxjs';
 import { shareReplay } from 'rxjs/operators';
 
-import { ILuEmployeeCardStore } from './employee-service.model';
-import { LuEmployeeCard } from '../employee.model';
+import { ILuUserPopoverStore } from './user-popover-service.model';
+import { LuUserPopover } from '../user-popover.model';
 
 @Injectable({
 	providedIn: 'root',
 })
-export class LuEmployeeCardStore implements ILuEmployeeCardStore {
+export class LuUserPopoverStore implements ILuUserPopoverStore {
 	#http = inject(HttpClient);
-	#cache = new Map<number, Observable<LuEmployeeCard>>();
+	#cache = new Map<number, Observable<LuUserPopover>>();
 	protected _api = '/work-locations/api/employee-profile-card';
 
-	public get(id: number): Observable<LuEmployeeCard> {
+	public get(id: number): Observable<LuUserPopover> {
 		if (this.#cache.has(id)) {
 			return this.#cache.get(id)!;
 		}
-		const employeeCard$ = this.#http.get<LuEmployeeCard>(`${this._api}/${id}`).pipe(
+		const userPopoverObservable = this.#http.get<LuUserPopover>(`${this._api}/${id}`).pipe(
 			cacheImage((c) => c.pictureHref),
 			shareReplay(1),
 		);
 
-		this.#cache.set(id, employeeCard$);
-		return employeeCard$;
+		this.#cache.set(id, userPopoverObservable);
+		return userPopoverObservable;
 	}
 
 	public clearCache(userId?: number) {

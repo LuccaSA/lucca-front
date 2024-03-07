@@ -1,7 +1,8 @@
 import { Observable, of } from 'rxjs';
-import { inject, InjectionToken} from '@angular/core';
+import { importProvidersFrom, inject, InjectionToken, makeEnvironmentProviders } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { catchError, map, shareReplay } from 'rxjs/operators';
+import { OverlayModule } from '@angular/cdk/overlay';
 
 export const USER_POPOVER_IS_ACTIVATED = new InjectionToken<Observable<boolean>>('user-popover-is-activated', {
 	factory: () =>
@@ -13,3 +14,9 @@ export const USER_POPOVER_IS_ACTIVATED = new InjectionToken<Observable<boolean>>
 				shareReplay(1),
 			),
 });
+
+export function provideLuUserPopover() {
+	return makeEnvironmentProviders([
+		importProvidersFrom(OverlayModule),
+	])
+}

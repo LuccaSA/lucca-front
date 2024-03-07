@@ -1,4 +1,4 @@
-interface LuEmployeeCardDepartment {
+interface LuUserPopoverDepartment {
 	id: number;
 	name: string;
 }
@@ -8,14 +8,14 @@ interface LuEmployeeCardArea {
 	name: string;
 }
 
-interface LuEmployeeCardWorkLocation {
+interface LuUserPopoverWorkLocation {
 	id: number;
 	name: string;
 	color?: string;
 	area: LuEmployeeCardArea;
 }
 
-interface LuEmployeeCardLinks {
+interface LuUserPopoverLinks {
 	schedule?: EntityLinks;
 	hrCard?: EntityLinks;
 }
@@ -24,18 +24,18 @@ interface EntityLinks {
 	href: string;
 }
 
-export interface LuEmployeeCard {
+export interface LuUserPopover {
 	id: number;
 	firstName: string;
 	lastName: string;
-	userDepartment?: LuEmployeeCardDepartment;
+	userDepartment?: LuUserPopoverDepartment;
 	jobTitle?: string;
 	pictureHref?: string;
 	isWorkingNow?: boolean;
 	leaveEndsOn?: Date;
 	leaveEndIsFirstHalfDay: boolean;
-	currentWorkLocation?: LuEmployeeCardWorkLocation;
+	currentWorkLocation?: LuUserPopoverWorkLocation;
 	dtContractStart?: Date;
 	dtContractEnd?: Date;
-	_links?: LuEmployeeCardLinks;
+	_links?: LuUserPopoverLinks;
 }

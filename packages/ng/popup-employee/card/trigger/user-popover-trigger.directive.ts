@@ -6,9 +6,9 @@ import { ComponentPortal } from '@angular/cdk/portal';
 import { AfterViewInit, Directive, ElementRef, HostBinding, HostListener, inject, Input, OnDestroy, ViewContainerRef } from '@angular/core';
 import { ALuPopoverTrigger, LuPopoverScrollStrategy, LuPopoverTarget } from '@lucca-front/ng/popover';
 import { ILuUser } from '@lucca-front/ng/user';
-import { LuEmployeeCardPanelComponent } from '../panel/employee-card-panel.component';
+import { LuUserPopoverPanelComponent } from '../panel/user-popover-panel.component';
 import { Observable } from 'rxjs';
-import { USER_POPOVER_IS_ACTIVATED } from '../../user-popover.provider';
+import { USER_POPOVER_IS_ACTIVATED } from '../../user-popover.providers';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 /**
@@ -17,25 +17,24 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
  */
 @Directive({
 	// eslint-disable-next-line @angular-eslint/directive-selector
-	selector: '[luEmployeeCard]',
+	selector: '[luUserPopover]',
 	standalone: true,
-	exportAs: 'LuEmployeeCardTrigger',
+	exportAs: 'LuUserPopoverTrigger',
 })
-export class LuEmployeeCardTriggerDirective extends ALuPopoverTrigger<LuEmployeeCardPanelComponent, LuPopoverTarget> implements AfterViewInit, OnDestroy {
-	@Input('luEmployeeCard') public set user(c: ILuUser) {
+export class LuUserPopoverTriggerDirective extends ALuPopoverTrigger<LuUserPopoverPanelComponent, LuPopoverTarget> implements AfterViewInit, OnDestroy {
+	@Input('luUserPopover') public set user(c: ILuUser) {
 		if (this.panel) {
 			this.panel.user = c;
 		}
-
 		this._user = c;
 	}
 
 	/** when trigger = hover, delay before the popover panel appears, default 300ms */
-	@Input('luEmployeeCardEnterDelay') public set inputEnterDelay(d: number) {
+	@Input('luUserPopoverEnterDelay') public set inputEnterDelay(d: number) {
 		this.enterDelay = d;
 	}
 	/** when trigger = hover, delay before the popover panel disappears, default 100ms */
-	@Input('luEmployeeCardLeaveDelay') public set inputLeaveDelay(d: number) {
+	@Input('luUserPopoverLeaveDelay') public set inputLeaveDelay(d: number) {
 		this.leaveDelay = d;
 	}
 	// TODO : put this back when uniform alignment and position
@@ -48,7 +47,7 @@ export class LuEmployeeCardTriggerDirective extends ALuPopoverTrigger<LuEmployee
 	// 	this.target.alignment = al;
 	// }
 	/** disable popover apparition */
-	@Input('luEmployeeCardDisabled') public set inputDisabled(d: boolean) {
+	@Input('luUserPopoverDisabled') public set inputDisabled(d: boolean) {
 		this.disabled = d;
 	}
 
@@ -72,7 +71,7 @@ export class LuEmployeeCardTriggerDirective extends ALuPopoverTrigger<LuEmployee
 	// }
 
 	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-	protected override _portal: ComponentPortal<LuEmployeeCardPanelComponent>;
+	protected override _portal: ComponentPortal<LuUserPopoverPanelComponent>;
 	protected _user: ILuUser = { id: 0, firstName: '', lastName: '' };
 
 	public constructor(protected override _overlay: Overlay, protected override _elementRef: ElementRef<HTMLElement>, protected override _viewContainerRef: ViewContainerRef) {
@@ -128,7 +127,7 @@ export class LuEmployeeCardTriggerDirective extends ALuPopoverTrigger<LuEmployee
 
 	protected override _createOverlay(): OverlayRef {
 		if (!this._overlayRef) {
-			this._portal = new ComponentPortal(LuEmployeeCardPanelComponent, this._viewContainerRef);
+			this._portal = new ComponentPortal(LuUserPopoverPanelComponent, this._viewContainerRef);
 			const config = this._getOverlayConfig();
 			this._subscribeToPositions(config.positionStrategy as FlexibleConnectedPositionStrategy);
 			this._overlayRef = this._overlay.create(config);

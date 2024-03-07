@@ -2,32 +2,45 @@
 
 import { OverlayModule } from '@angular/cdk/overlay';
 import { AsyncPipe, DatePipe, NgClass, NgIf, NgOptimizedImage, NgSwitch, NgSwitchCase, NgTemplateOutlet } from '@angular/common';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Inject, Input, OnDestroy, Output, TemplateRef, ViewChild } from '@angular/core';
+import {
+	ChangeDetectionStrategy,
+	ChangeDetectorRef,
+	Component,
+	EventEmitter,
+	Inject,
+	Input,
+	OnDestroy,
+	Output,
+	TemplateRef,
+	ViewChild,
+	ViewEncapsulation,
+} from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { ALuPopoverPanel, luTransformPopover } from '@lucca-front/ng/popover';
 import { ILuUser, LuUserPictureModule } from '@lucca-front/ng/user';
 import { BehaviorSubject, combineLatest, concatMap, Observable, of, ReplaySubject, Subscription } from 'rxjs';
 
 import { getIntl } from '@lucca-front/ng/core';
-import { LuEmployeeCard } from '../../employee.model';
+import { LuUserPopover } from '../../user-popover.model';
 import { LU_POPUP_EMPLOYEE_TRANSLATIONS } from '../../popup-employee.translate';
-import { LuEmployeeCardStore } from '../../service/employee-card.store';
-import { ILuEmployeeCardStore } from '../../service/employee-service.model';
+import { LuUserPopoverStore } from '../../service/user-popover.store';
+import { ILuUserPopoverStore } from '../../service/user-popover-service.model';
 import { InjectParameterPipe } from '../pipe/inject-parameter.pipe';
 import { isFutureOrTodayPipe, IsFuturePipe } from '../pipe/is-future.pipe';
 import { LeaveEndsDisplayPipe } from '../pipe/leave-ends-display.pipe';
-import { ILuEmployeeCardPanel } from './employee-card-panel.model';
+import { ILuUserPopoverPanel } from './user-popover-panel.model';
 import { catchError, map } from 'rxjs/operators';
 
 @Component({
 	standalone: true,
 	// eslint-disable-next-line @angular-eslint/component-selector
-	selector: 'lu-employee-card',
-	templateUrl: './employee-card-panel.component.html',
-	styleUrls: ['./employee-card-panel.component.scss'],
+	selector: 'lu-user-popover-panel',
+	templateUrl: './user-popover-panel.component.html',
+	styleUrls: ['./user-popover-panel.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
+	encapsulation: ViewEncapsulation.None,
 	animations: [luTransformPopover],
-	exportAs: 'LuEmployeeCardPanel',
+	exportAs: 'LuUserPopoverPanel',
 	imports: [
 		LuUserPictureModule,
 		NgClass,
@@ -46,10 +59,10 @@ import { catchError, map } from 'rxjs/operators';
 		NgOptimizedImage,
 	],
 })
-export class LuEmployeeCardPanelComponent extends ALuPopoverPanel implements ILuEmployeeCardPanel, OnDestroy {
+export class LuUserPopoverPanelComponent extends ALuPopoverPanel implements ILuUserPopoverPanel, OnDestroy {
 	#user$ = new ReplaySubject<ILuUser>();
 	#errorImage$ = new BehaviorSubject<boolean>(false);
-	public employee$: Observable<LuEmployeeCard> = this.#user$.pipe(
+	public employee$: Observable<LuUserPopover> = this.#user$.pipe(
 		concatMap((user) =>
 			this._service.get(user.id).pipe(
 				catchError(() =>
@@ -135,7 +148,7 @@ export class LuEmployeeCardPanelComponent extends ALuPopoverPanel implements ILu
 
 	private _subs = new Subscription();
 
-	public constructor(private _changeDetectorRef: ChangeDetectorRef, @Inject(LuEmployeeCardStore) private _service: ILuEmployeeCardStore) {
+	public constructor(private _changeDetectorRef: ChangeDetectorRef, @Inject(LuUserPopoverStore) private _service: ILuUserPopoverStore) {
 		super();
 	}
 
