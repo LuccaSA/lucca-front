@@ -19,7 +19,7 @@
 }
 
 @mixin hoveredRow {
-    .indexTable-body-row:hover:not(:focus-within) {
+    .indexTable-body-row:hover:not(:has(:focus-visible)) {
         @include hoveredCells;
     }
 }
