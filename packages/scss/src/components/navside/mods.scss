@@ -26,6 +26,10 @@
 		display: none;
 	}
 
+	.numericBadge {
+		margin-left: inherit;
+	}
+
 	.navSide-item-alert {
 		// deprecated
 		background-color: var(--components-navSide-compact-palette-alert-color);
