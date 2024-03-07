@@ -170,7 +170,10 @@
 @mixin selectableResponsiveCardList {
     @include media.max('S') {
         .indexTable-body-row {
-            grid-template-columns: min-content var(--components-indexTable-row-responsive-grid-template-columns, 1fr);
+            grid-template-columns: var(--components-indexTable-row-cell-transparent-width) var(
+                    --components-indexTable-row-responsive-grid-template-columns,
+                    1fr
+                );
             // Padding add too much vertical spacing on title rows
             &:not(:has(.indexTable-body-row-cell)) {
                 padding: 0;
@@ -192,7 +195,11 @@
 
 @mixin stackableResponsiveCardList {
     @include media.max('S') {
+        .indexTable-body-row {
+            margin-bottom: var(--components-indexTable-row-stack-border-bottom);
+        }
         .indexTable-body-row-cell {
+            border-bottom: 0;
             &::after {
                 --components-indexTable-cell-inset-x-right: 50%;
             }
