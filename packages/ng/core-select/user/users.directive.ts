@@ -16,6 +16,7 @@ import { LuCoreSelectUser } from './user-option.model';
 	// eslint-disable-next-line @angular-eslint/directive-selector
 	selector: 'lu-simple-select[users],lu-multi-select[users]',
 	standalone: true,
+	exportAs: 'luUsers',
 })
 export class LuCoreSelectUsersDirective<T extends LuCoreSelectUser = LuCoreSelectUser> extends ALuCoreSelectApiDirective<T> {
 	#defaultSearchUrl = '/api/v3/users/search';
