@@ -65,6 +65,11 @@ export class LuCoreSelectUsersDirective<T extends LuCoreSelectUser = LuCoreSelec
 		return this._displayFormat;
 	}
 
+	@Input()
+	public set filters(filters: Record<string, string | number | boolean>) {
+		this._filters.set(filters);
+	}
+
 	protected _url = signal<string | null>(null);
 
 	constructor() {
