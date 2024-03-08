@@ -1,4 +1,4 @@
-import { booleanAttribute, Component, ContentChildren, DoCheck, forwardRef, HostBinding, inject, Input, OnChanges, OnDestroy, QueryList, Renderer2, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, Component, ContentChildren, DoCheck, forwardRef, inject, Input, OnChanges, OnDestroy, QueryList, Renderer2, ViewEncapsulation } from '@angular/core';
 import { NgIf, NgSwitch, NgSwitchCase, NgTemplateOutlet } from '@angular/common';
 import { InputDirective } from './input.directive';
 import { FormFieldSize } from './form-field-size';
@@ -43,9 +43,6 @@ export class FormFieldComponent implements OnChanges, OnDestroy, DoCheck {
 	@ContentChildren(NgControl)
 	controls: NgControl[] = [];
 
-	@HostBinding('class')
-	clazz = 'form-field';
-
 	@Input({
 		required: true,
 	})
@@ -61,6 +58,7 @@ export class FormFieldComponent implements OnChanges, OnDestroy, DoCheck {
 
 	required = false;
 
+	@Input()
 	invalid = false;
 
 	@Input()
@@ -76,7 +74,7 @@ export class FormFieldComponent implements OnChanges, OnDestroy, DoCheck {
 	size: FormFieldSize;
 
 	@Input()
-	layout: 'default' | 'checkable' = 'default';
+	layout: 'default' | 'checkable' | 'fieldset' = 'default';
 
 	#inputs: InputDirective[] = [];
 
@@ -111,7 +109,9 @@ export class FormFieldComponent implements OnChanges, OnDestroy, DoCheck {
 			this.#ariaLabelledBy = [...this.#ariaLabelledBy, id];
 		}
 		this.#inputs.forEach((input) => {
-			this.#renderer.setAttribute(input.host.nativeElement, 'aria-labelledby', this.#ariaLabelledBy.join(' '));
+			if (!input.standalone) {
+				this.#renderer.setAttribute(input.host.nativeElement, 'aria-labelledby', this.#ariaLabelledBy.join(' '));
+			}
 		});
 	}
 
@@ -120,9 +120,15 @@ export class FormFieldComponent implements OnChanges, OnDestroy, DoCheck {
 	}
 
 	ngOnChanges(): void {
+		console.log({
+			[`mod-${this.size}`]: true,
+			'mod-checkable': this.layout === 'checkable',
+			'form-field': this.layout !== 'fieldset',
+		});
 		this.#luClass.setState({
 			[`mod-${this.size}`]: true,
-			[`mod-checkable`]: this.layout === 'checkable',
+			'mod-checkable': this.layout === 'checkable',
+			'form-field': this.layout !== 'fieldset',
 		});
 		this.updateAria();
 	}
@@ -145,7 +151,9 @@ export class FormFieldComponent implements OnChanges, OnDestroy, DoCheck {
 		this.#inputs.forEach((input) => {
 			this.#renderer.setAttribute(input.host.nativeElement, 'aria-invalid', this.invalid.toString());
 			this.#renderer.setAttribute(input.host.nativeElement, 'aria-required', this.required.toString());
-			this.#renderer.setAttribute(input.host.nativeElement, 'aria-describedby', `${input.host.nativeElement.id}-message`);
+			if (!input.standalone) {
+				this.#renderer.setAttribute(input.host.nativeElement, 'aria-describedby', `${input.host.nativeElement.id}-message`);
+			}
 		});
 		if (this.id) {
 			this.addLabelledBy(`${this.id}-label`);

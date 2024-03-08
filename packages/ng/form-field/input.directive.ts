@@ -1,4 +1,4 @@
-import { Directive, ElementRef, inject, OnInit } from '@angular/core';
+import { booleanAttribute, Directive, ElementRef, inject, Input, OnInit } from '@angular/core';
 import { FORM_FIELD_INSTANCE } from './form-field.token';
 
 @Directive({
@@ -13,6 +13,12 @@ export class InputDirective implements OnInit {
 	public readonly host = inject<ElementRef<HTMLElement>>(ElementRef);
 
 	public readonly formFieldRef = inject(FORM_FIELD_INSTANCE, { optional: true });
+
+	/**
+	 * prevents message and label ids from being propagated, useful if the input holds its own message and label (like for radios)
+	 */
+	@Input({ transform: booleanAttribute, alias: 'luInputStandalone' })
+	standalone = false;
 
 	ngOnInit(): void {
 		// If the field is used as standalone, we won't have the ref provided so it'll crash
