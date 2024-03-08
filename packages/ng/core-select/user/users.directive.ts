@@ -22,6 +22,9 @@ export class LuCoreSelectUsersDirective<T extends LuCoreSelectUser = LuCoreSelec
 	#defaultScopedSearchUrl = '/api/v3/users/scopedsearch';
 	#userHomonymsService = inject(LuCoreSelectUserHomonymsService);
 
+	// Not overridable so it will ease employee API migration
+	#userFields = 'id,firstName,lastName,picture.href';
+
 	protected httpClient = inject(HttpClient);
 	public currentUserId = inject(LU_CORE_SELECT_CURRENT_USER_ID);
 
@@ -97,6 +100,7 @@ export class LuCoreSelectUsersDirective<T extends LuCoreSelectUser = LuCoreSelec
 		toObservable(this._enableFormerEmployees),
 	]).pipe(
 		map(([filters, orderBy, clue, operationIds, appInstanceId, enableFormerEmployees]) => ({
+			fields: this.#userFields,
 			...filters,
 			...(orderBy ? { orderBy } : {}),
 			...(clue ? { clue: sanitizeClueFilter(clue) } : {}),
@@ -123,11 +127,12 @@ export class LuCoreSelectUsersDirective<T extends LuCoreSelectUser = LuCoreSelec
 		const url = this.customUrl() || this.defaultUrl();
 
 		const params = {
+			id: this.currentUserId,
+			fields: this.#userFields,
 			...(this._filters() ?? {}),
 			...(this._operationIds() ? { operationIds: this._operationIds().join(',') } : {}),
 			...(this._appInstanceId() ? { appInstanceId: this._appInstanceId() } : {}),
 			...(this._enableFormerEmployees() ? { enableFormerEmployees: this._enableFormerEmployees() } : {}),
-			id: this.currentUserId,
 		};
 
 		return this.httpClient
