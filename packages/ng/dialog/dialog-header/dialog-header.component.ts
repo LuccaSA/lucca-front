@@ -41,7 +41,7 @@ export class DialogHeaderComponent implements OnInit {
 		// Using setTimeout here to make sure this will be handled in the next Cd cycle, not the current one.
 		setTimeout(() => {
 			const header = this.#elementRef.nativeElement.querySelector('h1');
-			const id = header.id || `lu-dialog-header-${nextId++}`;
+			const id = header?.id || `lu-dialog-header-${nextId++}`;
 			if (header) {
 				this.#renderer.setAttribute(header, 'id', id);
 				this.#renderer.addClass(header, 'dialog-inside-header-container-title');
