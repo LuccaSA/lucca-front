@@ -1,4 +1,4 @@
-@Library('Lucca@v0.67.3') _
+@Library('Lucca@v1.11.3') _
 
 import hudson.Util
 import fr.lucca.CI
