@@ -8,7 +8,7 @@ export class EstablishmentGroupingService {
 	protected establishmentsUrl = '/organization/structure/api/establishments';
 	protected legalUnitsUrl = '/organization/structure/api/legal-units';
 
-	protected countParams: HttpParams = new HttpParams().set('fields.root', 'count').set('limit=0', 0);
+	protected countParams: HttpParams = new HttpParams().set('fields.root', 'count').set('limit', 0);
 	protected establishmentsCount$ = this.http.get<{ count: number }>(this.establishmentsUrl, { params: this.countParams }).pipe(map((res) => res.count));
 	protected legalUnitsCount$ = this.http.get<{ count: number }>(this.legalUnitsUrl, { params: this.countParams }).pipe(map((res) => res.count));
 
