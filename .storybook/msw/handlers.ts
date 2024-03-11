@@ -1,6 +1,16 @@
 import { delay, http, HttpResponse } from 'msw';
 import { applyFilter, applyV3Paging, applyV4Paging, genericHandler, handleFieldsRoot } from './helpers';
-import { mockAxisSectionsV3, mockDepartmentsTree, mockEstablishments, mockJobQualifications, mockLegalUnits, mockMe, mockProjectUsers, mockUsers } from './mocks';
+import {
+	mockAxisSectionsV3,
+	mockDepartmentsTree,
+	mockEstablishments,
+	mockJobQualifications,
+	mockLegalUnits,
+	mockMe,
+	mockProjectUsers,
+	mockUserPopover,
+	mockUsers,
+} from './mocks';
 
 const usersSearchHandler = genericHandler(
 	mockUsers,
