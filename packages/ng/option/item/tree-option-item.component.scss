@@ -71,12 +71,10 @@
 
 	.optionItem-value {
 		&::before {
-			left: var(--spacings-XS);
 			pointer-events: none;
 		}
 
 		&::after {
-			left: var(--spacings-XS);
 			pointer-events: none;
 		}
 	}

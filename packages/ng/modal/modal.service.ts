@@ -16,12 +16,7 @@ export class LuModal {
 
 	open<T extends ILuModalContent, D>(component: ComponentType<T>, data: D = undefined, config: Partial<LuModalConfig> = {}): ILuModalRef<D, LuModalContentResult<T>> {
 		const extendedConfig = { ...this._config, ...config } as LuModalConfig;
-
-		const mode = ({
-			sidepanel: 'drawer',
-			modal: 'modal',
-		}[extendedConfig.mode] || 'modal') as LuDialogConfig<unknown>['mode'];
-
+		const mode = extendedConfig.mode === 'sidepanel' ? 'drawer' : 'default';
 		const dialogRef = this.luDialogService.open({
 			content: DialogContentAdapterComponent<D, T>,
 			data: {
@@ -30,7 +25,9 @@ export class LuModal {
 			},
 			modal: !extendedConfig.noBackdrop,
 			alert: extendedConfig.undismissable,
-			mode: mode,
+			size: extendedConfig.size as LuDialogConfig<unknown>['size'],
+			mode,
+			panelClasses: Array.isArray(extendedConfig.panelClass) ? extendedConfig.panelClass : [extendedConfig.panelClass],
 		});
 		return new DialogRefAdapter<D, T>(dialogRef);
 	}

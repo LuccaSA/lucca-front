@@ -34,6 +34,8 @@
 	}
 
 	@at-root ($atRoot) {
+		// .dialog-form is deprecated
+		.dialog-formOptionnal,
 		.dialog-form,
 		.dialog-inside {
 			display: flex;
@@ -57,15 +59,20 @@
 		.dialog-inside-content {
 			padding: var(--spacings-S) var(--spacings-M);
 			flex-grow: 1;
+			position: relative;
+			z-index: 0;
 		}
 
-		.dialog-inside-header-title {
+		.dialog-inside-header-container {
+			grid-area: container;
+		}
+
+		.dialog-inside-header-container-title {
 			@include title.h2;
 
 			padding: var(--components-dialog-insideHeaderTitlePadding);
 			text-align: var(--components-dialog-insideHeaderTitleAlign);
 			margin: 0;
-			grid-area: title;
 		}
 
 		.dialog-inside-footer {
