@@ -33,10 +33,6 @@ const Template: StoryFn<GridsResponsiveStory> = (args) => ({
 			align-items: center;
 			justify-content: center;
 		}
-
-		.grid + .grid {
-			margin-top: var(--spacings-L);
-		}
 		`,
 	],
 });

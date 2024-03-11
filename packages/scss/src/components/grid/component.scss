@@ -1,6 +1,7 @@
 @use 'sass:string';
 
 @use '@lucca-front/scss/src/commons/utils/media';
+@use '@lucca-front/scss/src/commons/utils/container';
 @use '@lucca-front/scss/src/commons/config';
 
 @mixin component($atRoot: 'without: rule') {
@@ -14,6 +15,11 @@
 	max-width: 100%;
 
 	@at-root ($atRoot) {
+		.grid-containerWrapper {
+			container-type: inline-size;
+			container-name: grid;
+		}
+
 		.grid-column {
 			align-self: var(--grid-align, var(--grid-column-align));
 			justify-self: var(--grid-justify, var(--grid-column-justify));
@@ -60,6 +66,44 @@
 					// workaround for Angular replacing CamelCase by kebab-case
 					&[style*='grid-row-at-media-min-#{string.to-lower-case($breakpoint)}'] {
 						grid-row-start: var(--grid-row-at-media-min-#{string.to-lower-case($breakpoint)});
+					}
+				}
+
+				@include container.min($breakpoint, $name: grid) {
+					&[style*='grid-colspanAtContainerMin#{$breakpoint}'] {
+						grid-column-end: span var(--grid-colspanAtContainerMin#{$breakpoint});
+					}
+
+					&[style*='grid-rowspanAtContainerMin#{$breakpoint}'] {
+						grid-row-end: span var(--grid-rowspanAtContainerMin#{$breakpoint});
+					}
+
+					&[style*='grid-columnAtContainerMin#{$breakpoint}'] {
+						grid-column-start: var(--grid-columnAtContainerMin#{$breakpoint});
+					}
+
+					&[style*='grid-rowAtContainerMin#{$breakpoint}'] {
+						grid-row-start: var(--grid-rowAtContainerMin#{$breakpoint});
+					}
+
+					// workaround for Angular replacing CamelCase by kebab-case
+					&[style*='grid-colspan-at-container-min-#{string.to-lower-case($breakpoint)}'] {
+						grid-column-end: span var(--grid-colspan-at-container-min-#{string.to-lower-case($breakpoint)});
+					}
+
+					// workaround for Angular replacing CamelCase by kebab-case
+					&[style*='grid-rowspan-at-container-min-#{string.to-lower-case($breakpoint)}'] {
+						grid-row-end: span var(--grid-rowspan-at-container-min-#{string.to-lower-case($breakpoint)});
+					}
+
+					// workaround for Angular replacing CamelCase by kebab-case
+					&[style*='grid-column-at-container-min-#{string.to-lower-case($breakpoint)}'] {
+						grid-column-start: var(--grid-column-at-container-min-#{string.to-lower-case($breakpoint)});
+					}
+
+					// workaround for Angular replacing CamelCase by kebab-case
+					&[style*='grid-row-at-container-min-#{string.to-lower-case($breakpoint)}'] {
+						grid-row-start: var(--grid-row-at-container-min-#{string.to-lower-case($breakpoint)});
 					}
 				}
 			}
