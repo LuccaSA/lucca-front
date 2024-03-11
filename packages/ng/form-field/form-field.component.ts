@@ -149,10 +149,12 @@ export class FormFieldComponent implements OnChanges, OnDestroy, DoCheck {
 	}
 
 	private updateAria(): void {
-		this.#nativeInputRef.ariaInvalid = this.invalid.toString();
-		this.#nativeInputRef.ariaRequired = this.required.toString();
-		this.#nativeInputRef.setAttribute('aria-describedby', `${this.id}-message`);
-		this.addLabelledBy(`${this.id}-label`);
+		if (this.#nativeInputRef) {
+			this.#nativeInputRef.ariaInvalid = this.invalid.toString();
+			this.#nativeInputRef.ariaRequired = this.required.toString();
+			this.#nativeInputRef.setAttribute('aria-describedby', `${this.id}-message`);
+			this.addLabelledBy(`${this.id}-label`);
+		}
 	}
 
 	ngOnDestroy(): void {
