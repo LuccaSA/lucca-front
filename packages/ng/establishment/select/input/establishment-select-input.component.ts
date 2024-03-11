@@ -17,6 +17,9 @@ import { LuEstablishmentSearcherComponent } from '../searcher';
 import { LuEstablishmentSelectAllComponent } from '../select-all';
 import { LU_ESTABLISHMENT_SELECT_INPUT_TRANSLATIONS } from './establishment-select-input.translate';
 
+/**
+ * @deprecated prefer SimpleSelect or MultipleSelect with establishments directive
+ */
 @Component({
 	selector: 'lu-establishment-select',
 	templateUrl: './establishment-select-input.component.html',

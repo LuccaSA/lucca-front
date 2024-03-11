@@ -1,5 +1,5 @@
 import { NgIf } from '@angular/common';
-import { ChangeDetectionStrategy, Component, inject, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, inject, OnInit, Renderer2, ViewEncapsulation } from '@angular/core';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { LuDialogRef } from '../model';
@@ -27,10 +27,11 @@ export class DialogHeaderComponent implements OnInit {
 
 	intl = getIntl(LU_DIALOG_HEADER_TRANSLATIONS);
 
-	@Input('id')
-	id: string;
-
 	dismissible = !this.#ref.config.alert;
+
+	#elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
+
+	#renderer = inject(Renderer2);
 
 	close(): void {
 		this.#ref.dismiss();
@@ -39,11 +40,14 @@ export class DialogHeaderComponent implements OnInit {
 	ngOnInit(): void {
 		// Using setTimeout here to make sure this will be handled in the next Cd cycle, not the current one.
 		setTimeout(() => {
-			if (!this.id) {
-				this.id = `lu-dialog-header-${nextId++}`;
+			const header = this.#elementRef.nativeElement.querySelector('h1');
+			const id = header?.id || `lu-dialog-header-${nextId++}`;
+			if (header) {
+				this.#renderer.setAttribute(header, 'id', id);
+				this.#renderer.addClass(header, 'dialog-inside-header-container-title');
 			}
 			// TODO change this to _addAriaLabelledBy once cdk is > 17.1
-			(this.#ref.cdkRef.containerInstance as CdkDialogContainer)._ariaLabelledByQueue.push(this.id);
+			(this.#ref.cdkRef.containerInstance as CdkDialogContainer)._ariaLabelledByQueue.push(id);
 		});
 	}
 }

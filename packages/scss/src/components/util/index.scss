@@ -132,11 +132,11 @@
 	color: var(--palettes-neutral-700) !important;
 }
 
-.u-unit {
+.u-unit { // Deprecated
 	font-size: 0.66em !important;
 }
 
-.u-comma {
+.u-comma { // Deprecated
 	&:not(:last-child) {
 		&::after {
 			content: ', ' !important;
