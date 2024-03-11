@@ -48,9 +48,9 @@ export const Basic: StoryObj<RadioGroupInputComponent & FormFieldComponent> = {
 			)}>
 	<lu-radio-group-input ${generateInputs(inputArgs, argTypes)}
 	[(ngModel)]="example">
-		<lu-radio label="Option 1" [value]="1" inlineMessage="I am option 1"></lu-radio>
-		<lu-radio label="Option 2" [value]="2" inlineMessage="I am option 2"></lu-radio>
-		<lu-radio label="Option 3" [value]="3" inlineMessage="I am option 3 and I'm disabled" disabled></lu-radio>
+		<lu-radio [value]="1" inlineMessage="I am option 1">Option 1</lu-radio>
+		<lu-radio [value]="2" inlineMessage="I am option 2">Option 2</lu-radio>
+		<lu-radio [value]="3" inlineMessage="I am option 3 and I'm disabled" disabled>Option 3</lu-radio>
 	</lu-radio-group-input>
 </lu-form-field>
 

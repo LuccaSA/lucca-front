@@ -1,4 +1,6 @@
-<label class="formLabel" id="{{id}}-label" for="{{id}}">{{ label }}</label>
+<label class="formLabel" id="{{id}}-label" for="{{id}}">
+	<ng-content></ng-content>
+</label>
 <span class="radioField">
 	<input
 		[formControl]="formControl"

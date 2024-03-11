@@ -25,9 +25,6 @@ export class RadioComponent<T = unknown> implements OnChanges {
 	#luClass = inject(LuClass);
 
 	@Input({ required: true })
-	label: string;
-
-	@Input({ required: true })
 	value: T;
 
 	@Input({ transform: booleanAttribute })
