@@ -1,0 +1,8 @@
+@mixin vars {
+	--components-scrollBox-backgroundColor: var(--palettes-grey-25);
+	--components-scrollBox-shadowColorRgb: var(--colors-grey-400-rgb);
+	--components-scrollBox-shadowVertical: 0;
+	--components-scrollBox-shadowTop: var(--components-scrollBox-shadowVertical);
+	--components-scrollBox-shadowBottom: var(--components-scrollBox-shadowVertical);
+	--components-scrollBox-shadowWidth: var(--spacings-S);
+}
