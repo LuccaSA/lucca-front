@@ -28,7 +28,7 @@ export default {
 	decorators: [applicationConfig({ providers: [provideAnimations(), provideHttpClient()] })],
 } as Meta;
 
-const template: StoryFn<EstablishmentSelectStory> = (args: EstablishmentSelectStory) => ({
+const template: StoryFn<EstablishmentSelectStory> = (args) => ({
 	props: args,
 });
 

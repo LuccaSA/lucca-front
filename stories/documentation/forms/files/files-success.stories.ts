@@ -48,7 +48,7 @@ function getTemplate(args: FilesSuccessStory): string {
 	`;
 }
 
-const Template: StoryFn<FilesSuccessStory> = (args: FilesSuccessStory) => ({
+const Template: StoryFn<FilesSuccessStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [

@@ -35,13 +35,13 @@ function getTemplate(args: GridsBasicStory): string {
 </div>`;
 }
 
-const Template: StoryFn<GridsBasicStory> = (args: GridsBasicStory) => ({
+const Template: StoryFn<GridsBasicStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [
 		`
 		.demo {
-			background-color: #F3F5FC;
+			background-color: var(--colors-white-color);
 			padding: var(--pr-t-spacings-M);
 			border-radius: 1rem;
 			text-align: center;

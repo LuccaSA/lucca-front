@@ -33,7 +33,7 @@ function getTemplate(args: MenuContainerStory): string {
 	`;
 }
 
-const Template: StoryFn<MenuContainerStory> = (args: MenuContainerStory) => ({
+const Template: StoryFn<MenuContainerStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 });

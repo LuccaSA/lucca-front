@@ -9,7 +9,7 @@
 
 @mixin disabled {
 	--components-button-cursor: default;
-	--components-button-color: var(--palettes-grey-500);
+	--components-button-color: var(--palettes-neutral-500);
 	--components-button-backgroundColor: var(--commons-disabled-background);
 	--components-button-pointerEvents: none;
 
@@ -18,31 +18,17 @@
 	}
 }
 
-@mixin disabledOutlined {
-	--components-button-backgroundColor: var(--colors-white-color);
-	--components-button-boxShadow: 0 0 0 1px var(--palettes-grey-400);
-}
-
-@mixin disabledText {
-	--components-button-backgroundColor: transparent;
-}
-
 @mixin loading {
+	@include loading.spinner(var(--components-button-font-size));
+
 	--components-button-opacity: var(--commons-disabled-opacity);
-
-	&:not(.mod-more) {
-		@include loading.spinner(var(--components-button-font-size));
-
-		--components-button-pointerEvents: none;
-		--components-button-color: transparent;
-		--components-button-userSelect: none;
-	}
+	--components-button-pointerEvents: none;
+	--components-button-color: transparent;
+	--components-button-userSelect: none;
 }
 
 @mixin loadingS {
-	&:not(.mod-more) {
-		@include loading.spinner(var(--sizes-S-fontSize));
-	}
+	@include loading.spinner(var(--sizes-S-fontSize));
 }
 
 @mixin state {
@@ -63,94 +49,19 @@
 @mixin success {
 	@include core.cssvars('palettes', config.$success);
 
-	&:not(.mod-more) {
-		@include state;
+	@include state;
 
-		&::after {
-			@include icon.generate('sign_confirm');
-		}
+	&::after {
+		@include icon.generate('sign_confirm');
 	}
 }
 
 @mixin error {
-	@include core.cssvars('palettes', config.$error);
+	@include core.cssvars('palettes', config.$critical);
 
-	&:not(.mod-more) {
-		@include state;
+	@include state;
 
-		&::after {
-			@include icon.generate('sign_close');
-		}
-	}
-}
-
-@mixin hover {
-	--components-button-color: var(--palettes-text, var(--palettes-primary-text));
-	--components-button-backgroundColor: var(--palettes-600, var(--palettes-primary-600));
-}
-
-@mixin focusVisible {
-	@include a11y.focusVisible;
-}
-
-@mixin active {
-	--components-button-backgroundColor: var(--palettes-800, var(--palettes-primary-800));
-}
-
-@mixin textHover {
-	--components-button-color: var(--palettes-700, var(--palettes-grey-700));
-	--components-button-backgroundColor: var(--palettes-100, var(--palettes-grey-100));
-}
-
-@mixin textActive {
-	--components-button-backgroundColor: var(--palettes-200, var(--palettes-grey-200));
-}
-
-@mixin deleteHover {
-	--components-button-color: var(--palettes-error-700);
-	--components-button-backgroundColor: var(--palettes-error-100);
-}
-
-@mixin deleteActive {
-	--components-button-color: var(--palettes-error-700);
-	--components-button-backgroundColor: var(--palettes-error-200);
-}
-
-@mixin deleteOutlinedHover {
-	--components-button-boxShadow: 0 0 0 var(--commons-divider-width) var(--palettes-error-400);
-	--components-button-color: var(--palettes-error-700);
-	--components-button-backgroundColor: var(--palettes-error-100);
-}
-
-@mixin deleteOutlinedFocusVisible {
-	--components-button-boxShadow: 0 0 0 var(--commons-divider-width) var(--palettes-error-400);
-	--components-button-color: var(--palettes-error-700);
-}
-
-@mixin outlinedHover {
-	--components-button-color: var(--palettes-700, var(--palettes-grey-700));
-	--components-button-backgroundColor: var(--palettes-100, var(--palettes-grey-100));
-}
-
-@mixin outlinedActive {
-	--components-button-backgroundColor: var(--palettes-200, var(--palettes-grey-200));
-}
-
-@mixin outlinedFocusVisible {
-	@include a11y.focusVisible($offset: 3px);
-}
-
-@mixin invertHover {
-	--components-button-color: var(--colors-white-color);
-	--components-button-backgroundColor: var(--palettes-800, var(--palettes-grey-800));
-}
-
-@mixin invertActive {
-	--components-button-backgroundColor: var(--palettes-700, var(--palettes-grey-700));
-}
-
-@mixin counterHover {
-	.button-counter {
-		--components-button-backgroundColor: var(--palettes-500, var(--palettes-primary-500));
+	&::after {
+		@include icon.generate('sign_close');
 	}
 }

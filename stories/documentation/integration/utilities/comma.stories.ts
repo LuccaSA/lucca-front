@@ -7,12 +7,10 @@ export default {
 } as Meta;
 
 function getTemplate(args: CommaStory): string {
-	return `
-		<span class="u-comma">Élément</span><span class="u-comma">élément</span><span class="u-comma">élément</span><span class="u-comma">élément</span>
-	`;
+	return `<span class="u-comma">Élément</span><span class="u-comma">élément</span><span class="u-comma">élément</span><span class="u-comma">élément</span>`;
 }
 
-const Template: StoryFn<CommaStory> = (args: CommaStory) => ({
+const Template: StoryFn<CommaStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [

@@ -22,7 +22,7 @@ function getTemplate(args: TextfieldFeedbackStory): string {
 </label>`;
 }
 
-const Template: StoryFn<TextfieldFeedbackStory> = (args: TextfieldFeedbackStory) => ({
+const Template: StoryFn<TextfieldFeedbackStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [

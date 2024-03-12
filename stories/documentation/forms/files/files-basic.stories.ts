@@ -49,7 +49,7 @@ function getTemplate(args: FilesBasicStory): string {
 	`;
 }
 
-const Template: StoryFn<FilesBasicStory> = (args: FilesBasicStory) => ({
+const Template: StoryFn<FilesBasicStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [

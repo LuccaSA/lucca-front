@@ -8,7 +8,7 @@
 >
 	<div [ngClass]="modalClasses.panelContainer" role="document">
 		<div class="lu-modal-header" tabindex="-1" cdkFocusInitial>
-			<button type="button" class="actionIcon mod-S lu-modal-header-close" (click)="dismiss()" [luTooltip]="closeLabel">
+			<button type="button" class="button mod-onlyIcon mod-text mod-S lu-modal-header-close" (click)="dismiss()" [luTooltip]="closeLabel">
 				<span aria-hidden="true" class="lucca-icon icon-signClose"></span>
 				<span class="u-mask">{{ closeLabel }}</span>
 			</button>
@@ -27,7 +27,7 @@
 				(click)="submit()"
 			>
 				{{ submitLabel$ | async }}
-				<label class="numericBadge palette-primary" *ngIf="hasSubmitCounter$ | async">{{ submitCounter$ | async }}</label>
+				<label class="numericBadge palette-product" *ngIf="hasSubmitCounter$ | async">{{ submitCounter$ | async }}</label>
 			</button>
 			<button type="button" class="button mod-text" (click)="dismiss()">{{ cancelLabel$ | async }}</button>
 		</div>

@@ -1,11 +1,11 @@
 <section class="calendar">
 	<header class="calendar-header">
-		<button type="button" class="actionIcon mod-S" (click)="previous()">
+		<button type="button" class="button mod-onlyIcon mod-text mod-S" (click)="previous()">
 			<span aria-hidden="true" class="lucca-icon icon-arrowChevronLeft"></span>
 			<span class="u-mask">Previous</span>
 		</button>
 		<button type="button" class="calendar-header-date" (click)="increaseGranularity()">{{ header.label }}</button>
-		<button type="button" class="actionIcon mod-S" (click)="next()">
+		<button type="button" class="button mod-onlyIcon mod-text mod-S" (click)="next()">
 			<span aria-hidden="true" class="lucca-icon icon-arrowChevronRight"></span>
 			<span class="u-mask">Next</span>
 		</button>

@@ -12,7 +12,7 @@
 			border-bottom-width: var(--commons-divider-width);
 			border-bottom-color: var(--commons-divider-color);
 			border-bottom-style: solid;
-			color: var(--palettes-grey-800);
+			color: var(--palettes-neutral-800);
 			display: flex;
 			position: relative;
 			text-decoration: none;
@@ -25,7 +25,7 @@
 		}
 
 		.sortableList-item-content {
-			color: var(--palettes-grey-800);
+			color: var(--palettes-neutral-800);
 			text-decoration: none;
 			width: 100%;
 		}
@@ -38,7 +38,7 @@
 
 		.sortableList-item-content-helper {
 			margin: 0;
-			color: var(--palettes-grey-600);
+			color: var(--palettes-neutral-600);
 			font-size: var(--components-sortableList-helper-fontSize);
 			line-height: var(--components-sortableList-helper-lineHeight);
 		}
@@ -49,9 +49,8 @@
 			padding-left: 0;
 		}
 
-
 		.sortableList-item-handler {
-			color: var(--palettes-grey-600);
+			color: var(--palettes-neutral-600);
 			font-size: var(--components-sortableList-handler-size);
 			cursor: move;
 

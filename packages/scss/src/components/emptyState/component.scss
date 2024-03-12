@@ -16,17 +16,15 @@
 		}
 
 		.emptyState-content {
-			background-color: var(--components-emptyState-background-color);
 			border-radius: var(--commons-borderRadius-L);
-			box-shadow: 0 0 8px 4px var(--components-emptyState-background-color);
 			max-width: 100%;
 			padding: var(--pr-t-spacings-XXXS);
 			width: calc(25rem + var(--pr-t-spacings-XXXS) * 2); // content max width
 		}
 
 		.emptyState-content-icon {
-			--components-emptyState-icon-background-color: var(--palettes-100, var(--palettes-primary-100));
-			--components-emptyState-icon-action-color: var(--palettes-600, var(--palettes-primary-600));
+			--components-emptyState-icon-background-color: var(--palettes-100, var(--palettes-product-100));
+			--components-emptyState-icon-action-color: var(--palettes-600, var(--palettes-product-600));
 		}
 
 		.emptyState-content-text {

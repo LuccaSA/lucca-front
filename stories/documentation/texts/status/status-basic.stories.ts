@@ -9,7 +9,7 @@ export default {
 	title: 'Documentation/Texts/Status/Basic',
 	argTypes: {
 		palette: {
-			options: ['', 'u-textPrimary', 'u-textSecondary', 'u-textLight', 'u-textError', 'u-textWarning', 'u-textSuccess'],
+			options: ['', 'u-textProduct', 'u-textLight', 'u-textError', 'u-textWarning', 'u-textSuccess'],
 			control: {
 				type: 'select',
 			},
@@ -32,7 +32,7 @@ function getTemplate(args: StatusBasicStory): string {
 	`;
 }
 
-const Template: StoryFn<StatusBasicStory> = (args: StatusBasicStory) => ({
+const Template: StoryFn<StatusBasicStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 });

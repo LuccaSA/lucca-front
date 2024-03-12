@@ -22,7 +22,7 @@ export default {
 	decorators: [applicationConfig({ providers: [provideAnimations(), provideHttpClient()] })],
 } as Meta;
 
-const template: StoryFn<UserSelectStory> = (args: UserSelectStory) => ({
+const template: StoryFn<UserSelectStory> = (args) => ({
 	props: args,
 });
 
@@ -57,7 +57,9 @@ class UserSelectStoriesModule {}
 `;
 
 export const basic = template.bind({});
-basic.args = {};
+basic.args = {
+	disablePrincipal: false,
+};
 
 basic.parameters = {
 	docs: {

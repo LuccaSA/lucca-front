@@ -10,7 +10,7 @@ export default {
 	title: 'Documentation/Loaders/Gauge/Basic',
 	argTypes: {
 		palette: {
-			options: ['', 'palette-primary', 'palette-grey', 'palette-success', 'palette-warning', 'palette-error'],
+			options: ['', 'palette-product', 'palette-neutral', 'palette-success', 'palette-warning', 'palette-error'],
 			control: {
 				type: 'select',
 			},
@@ -39,7 +39,7 @@ function getTemplate(args: GaugeBasicStory): string {
 	`;
 }
 
-const Template: StoryFn<GaugeBasicStory> = (args: GaugeBasicStory) => ({
+const Template: StoryFn<GaugeBasicStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [

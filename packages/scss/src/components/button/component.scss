@@ -1,6 +1,6 @@
 @use '@lucca-front/icons/src/icon/exports' as icon;
-@use '@lucca-front/scss/src/components/numericBadge/exports' as numericBadge;
 @use '@lucca-front/scss/src/commons/utils/a11y';
+@use '@lucca-front/scss/src/components/numericBadge/exports' as numericBadge;
 
 @mixin component {
 	@include icon.M;
@@ -38,14 +38,43 @@
 		color: var(--components-button-color);
 	}
 
+	.lucca-icon {
+		display: block;
+	}
+
 	// deprecated
 	.button-icon {
 		@include icon.M;
 	}
 
-	&:not(.mod-outlined) {
+	// .mod-outline is deprecated
+	&:not(.mod-outlined, .mod-outline) {
 		.numericBadge {
-			@include numericBadge.primary;
+			@include numericBadge.product;
+		}
+	}
+
+	&:hover {
+		--components-button-color: var(--palettes-text, var(--palettes-product-text));
+		--components-button-backgroundColor: var(--palettes-600, var(--palettes-product-600));
+	}
+
+	&:focus-visible {
+		@include a11y.focusVisible;
+	}
+
+	&:active {
+		--components-button-backgroundColor: var(--palettes-800, var(--palettes-product-800));
+	}
+
+	&:disabled {
+		--components-button-cursor: default;
+		--components-button-color: var(--palettes-neutral-500);
+		--components-button-backgroundColor: var(--commons-disabled-background);
+		--components-button-pointerEvents: none;
+
+		.numericBadge {
+			@include numericBadge.disabled;
 		}
 	}
 }

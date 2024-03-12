@@ -4,11 +4,13 @@ export default {
 	title: 'Documentation/Feedback/Callout Disclosure/HTML&CSS',
 	render: () => {
 		return {
-			styles: [`
+			styles: [
+				`
 				.calloutDisclosure {
 					margin-bottom: var(--pr-t-spacings-XS);
 				}
-			`],
+			`,
+			],
 			template: `<details class="calloutDisclosure palette-success">
   <summary class="calloutDisclosure-summary">
 		<span aria-hidden="true" class="calloutDisclosure-summary-icon lucca-icon icon-signSuccess"></span>
@@ -16,7 +18,7 @@ export default {
 		<span aria-hidden="true" class="calloutDisclosure-summary-chevron lucca-icon icon-arrowChevronBottom"></span>
 	</summary>
 	<div class="calloutDisclosure-details">
-		<ul class="calloutFeedbackList palette-grey">
+		<ul class="calloutFeedbackList palette-neutral">
 	  	<li class="calloutFeedbackList-item">
 				<span class="calloutFeedbackList-item-description">Feedback description.</span>
 				<div class="calloutFeedbackList-item-actions">
@@ -42,7 +44,7 @@ export default {
 		<span aria-hidden="true" class="calloutDisclosure-summary-chevron lucca-icon icon-arrowChevronBottom"></span>
 	</summary>
 	<div class="calloutDisclosure-details">
-		<ul class="calloutFeedbackList palette-grey">
+		<ul class="calloutFeedbackList palette-neutral">
 	  	<li class="calloutFeedbackList-item">
 				<span class="calloutFeedbackList-item-description">Feedback description.</span>
 				<div class="calloutFeedbackList-item-actions">
@@ -68,7 +70,7 @@ export default {
 		<span aria-hidden="true" class="calloutDisclosure-summary-chevron lucca-icon icon-arrowChevronBottom"></span>
 	</summary>
 	<div class="calloutDisclosure-details">
-		<ul class="calloutFeedbackList palette-grey">
+		<ul class="calloutFeedbackList palette-neutral">
 	  	<li class="calloutFeedbackList-item">
 				<span class="calloutFeedbackList-item-description">Feedback description.</span>
 				<div class="calloutFeedbackList-item-actions">
@@ -85,9 +87,9 @@ export default {
 			</li>
 		</ul>
 	</div>
-</details>`
-		}
-	}
+</details>`,
+		};
+	},
 } as Meta;
 
 export const Status: StoryObj = {};

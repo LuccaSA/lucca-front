@@ -21,7 +21,7 @@
 	line-height: var(--sizes-XS-lineHeight);
 	padding: var(--pr-t-spacings-XXXS) var(--pr-t-spacings-XS);
 	transition: all var(--commons-animations-durations-fast);
-	background-color: var(--palettes-grey-600);
+	background-color: var(--palettes-neutral-600);
 	display: inline-block;
 	position: relative;
 	text-decoration: none;
@@ -32,7 +32,7 @@
 
 	&:focus-visible {
 		outline-offset: 2px;
-		outline: 2px solid var(--palettes-primary-700);
+		outline: 2px solid var(--palettes-product-700);
 	}
 
 	&:not(:focus, :focus-visible) {

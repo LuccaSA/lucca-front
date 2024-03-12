@@ -9,7 +9,7 @@ export default {
 	title: 'Documentation/Texts/Label/Basic',
 	argTypes: {
 		palette: {
-			options: ['', 'palette-primary', 'palette-grey', 'palette-success', 'palette-warning', 'palette-error'],
+			options: ['', 'palette-product', 'palette-neutral', 'palette-success', 'palette-warning', 'palette-error'],
 			control: {
 				type: 'select',
 			},
@@ -30,7 +30,7 @@ function getTemplate(args: LabelBasicStory): string {
 <span class="label ${classes} mod-number">7</span>`;
 }
 
-const Template: StoryFn<LabelBasicStory> = (args: LabelBasicStory) => ({
+const Template: StoryFn<LabelBasicStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [

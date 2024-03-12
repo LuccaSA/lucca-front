@@ -3,9 +3,14 @@
 
 @mixin component($atRoot: 'without: rule') {
 	@include reset.list;
+
 	display: flex;
 	flex-direction: column;
 	gap: var(--pr-t-spacings-M);
+
+	.button {
+		@include button.S;
+	}
 
 	@at-root ($atRoot) {
 		.calloutFeedbackList-item {
@@ -17,11 +22,6 @@
 		.calloutFeedbackList-item-actions {
 			display: inline-flex;
 			gap: var(--pr-t-spacings-XS);
-
-			.button {
-				@include button.S;
-				margin: 0;
-			}
 		}
 	}
 }

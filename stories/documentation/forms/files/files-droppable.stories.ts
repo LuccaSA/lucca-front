@@ -47,7 +47,7 @@ function getTemplate(args: FilesDroppableStory): string {
 	`;
 }
 
-const Template: StoryFn<FilesDroppableStory> = (args: FilesDroppableStory) => ({
+const Template: StoryFn<FilesDroppableStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [

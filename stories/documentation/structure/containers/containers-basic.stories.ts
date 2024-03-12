@@ -25,7 +25,7 @@ function getTemplate(args: ContainersBasicStory): string {
 	`;
 }
 
-const Template: StoryFn<ContainersBasicStory> = (args: ContainersBasicStory) => ({
+const Template: StoryFn<ContainersBasicStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 });

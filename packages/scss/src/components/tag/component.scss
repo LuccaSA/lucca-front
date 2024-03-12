@@ -1,14 +1,21 @@
 @mixin component {
-	background-color: var(--palettes-100, var(--palettes-grey-100));
+	background-color: var(--components-tag-background);
 	border-radius: var(--commons-borderRadius-M);
-	color: var(--palettes-900, var(--palettes-grey-700));
-	font-size: var(--sizes-S-fontSize);
+	font-size: var(--components-tag-fontSize);
+	line-height: var(--components-tag-lineHeight);
 	padding: 0 var(--pr-t-spacings-XXXS);
-	line-height: var(--sizes-S-lineHeight);
+	text-decoration: var(--components-tag-decoration);
+	box-shadow: 0 0 0 1px var(--components-tag-shadow);
+	cursor: var(--components-tag-cursor);
 	display: inline-block;
 	text-align: center;
-	text-decoration: none;
 	vertical-align: baseline;
 	white-space: nowrap;
 	font-weight: normal;
+	border: 0;
+
+	&,
+	&:is(a, button) {
+		color: var(--components-tag-color);
+	}
 }

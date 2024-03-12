@@ -35,13 +35,13 @@ function getTemplate(args: GridsLegacyVerticalAlignmentStory): string {
 	`;
 }
 
-const Template: StoryFn<GridsLegacyVerticalAlignmentStory> = (args: GridsLegacyVerticalAlignmentStory) => ({
+const Template: StoryFn<GridsLegacyVerticalAlignmentStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [
 		`
 		.grid-demo {
-			background-color: var(--palettes-grey-200);
+			background-color: var(--palettes-neutral-200);
 			margin-bottom: var(--pr-t-spacings-M);
 			padding: var(--pr-t-spacings-M);
 			border-radius: var(--commons-borderRadius-full);

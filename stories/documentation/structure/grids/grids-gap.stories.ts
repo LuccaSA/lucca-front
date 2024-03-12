@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/angular';
+import { Meta, StoryFn } from '@storybook/angular';
 
 interface GridsGapsStory {
 	reverse: boolean;
@@ -39,13 +39,13 @@ function getTemplate(args: GridsGapsStory): string {
 </div>`;
 }
 
-const Template: Story<GridsGapsStory> = (args: GridsGapsStory) => ({
+const Template: StoryFn<GridsGapsStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [
 		`
 		.demo {
-			background-color: #F3F5FC;
+			background-color: var(--colors-white-color);
 			padding: var(--pr-t-spacings-M);
 			border-radius: 1rem;
 			text-align: center;

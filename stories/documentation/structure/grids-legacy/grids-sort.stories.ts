@@ -40,13 +40,13 @@ function getTemplate(args: GridsLegacySortStory): string {
 	`;
 }
 
-const Template: StoryFn<GridsLegacySortStory> = (args: GridsLegacySortStory) => ({
+const Template: StoryFn<GridsLegacySortStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [
 		`
 		.grid-demo {
-			background-color: var(--palettes-grey-200);
+			background-color: var(--palettes-neutral-200);
 			margin-bottom: var(--pr-t-spacings-M);
 			padding: var(--pr-t-spacings-M);
 			border-radius: var(--commons-borderRadius-full);

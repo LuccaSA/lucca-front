@@ -7,14 +7,12 @@ export default {
 } as Meta;
 
 function getTemplate(args: UnitsStory): string {
-	return `
-		<h1>75 <span class="u-unit">%</span></h1>
-		<h2>75 <span class="u-unit">%</span></h2>
-		<p>75 <span class="u-unit">%</span></p>
-	`;
+	return `<h1>75 <span class="u-unit">%</span></h1>
+<h2>75 <span class="u-unit">%</span></h2>
+<p>75 <span class="u-unit">%</span></p>`;
 }
 
-const Template: StoryFn<UnitsStory> = (args: UnitsStory) => ({
+const Template: StoryFn<UnitsStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [

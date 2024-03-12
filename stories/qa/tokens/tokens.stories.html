@@ -2,9 +2,13 @@
 <h3>Surface</h3>
 <section class="contentSection">
 	<div class="demo-block">
-		<div class="demo-surface" style="background-color: var(--pr-t-elevation-surface-sunken);">Sunken</div>
-		<div class="demo-surface" style="background-color: var(--pr-t-elevation-surface-default);">Default</div>
-		<div class="demo-surface" style="background-color: var(--pr-t-elevation-surface-raised);">Raised</div>
+		<div class="demo-surface" style="background-color: var(--pr-t-elevation-surface-sunken)">Sunken</div>
+		<div class="demo-surface" style="background-color: var(--pr-t-elevation-surface-default)">Default</div>
+		<div class="demo-surface" style="background-color: var(--pr-t-elevation-surface-raised)">Raised</div>
+		<div class="demo-surfaceWrapper">
+			<div class="demo-surface-under"></div>
+			<div class="demo-surface" style="background-color: var(--pr-t-elevation-surface-backdrop)">Backdrop</div>
+		</div>
 	</div>
 </section>
 <h3>Shadow</h3>
@@ -49,7 +53,7 @@
 <style>
 .demo-block {
 	display: flex;
-	background: var(--palettes-grey-25);
+	background: var(--palettes-neutral-25);
 	padding: var(--pr-t-spacings-M);
 	gap: var(--pr-t-spacings-XS);
 }

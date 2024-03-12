@@ -1,4 +1,5 @@
 @use '@lucca-front/scss/src/commons/utils/a11y';
+@use '@lucca-front/scss/src/commons/utils/color';
 @use '@lucca-front/icons/src/icon/exports' as icons;
 
 @mixin invert {
@@ -8,17 +9,17 @@
 		&:hover,
 		&:focus {
 			color: var(--colors-white-color);
-			background-color: rgba(255, 255, 255, 0.1);
+			background-color: color.transparentize(var(--colors-white-color), 0.1);
 		}
 
 		&:active {
-			background-color: rgba(255, 255, 255, 0.2);
+			background-color: color.transparentize(var(--colors-white-color), 0.2);
 		}
 	}
 }
 
 @mixin outlined {
-	box-shadow: 0 0 0 var(--commons-divider-width) var(--palettes-400, var(--palettes-grey-400));
+	box-shadow: 0 0 0 var(--commons-divider-width) var(--palettes-400, var(--palettes-neutral-400));
 	background-color: var(--colors-white-color);
 
 	&:focus-visible {

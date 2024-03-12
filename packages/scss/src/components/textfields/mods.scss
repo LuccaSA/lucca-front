@@ -44,10 +44,10 @@
 		padding: 0;
 		line-height: 0;
 		border-radius: var(--commons-borderRadius-full);
-		background-color: var(--palettes-grey-700);
+		background-color: var(--palettes-neutral-700);
 
 		&:hover {
-			background-color: var(--palettes-grey-600);
+			background-color: var(--palettes-neutral-600);
 		}
 
 		.lucca-icon {
@@ -218,7 +218,7 @@
 	&::after {
 		@include icon.generate('search_magnifying_glass');
 
-		color: var(--palettes-grey-600);
+		color: var(--palettes-neutral-600);
 		position: absolute;
 		pointer-events: none;
 		bottom: var(--pr-t-spacings-XS);
@@ -374,7 +374,7 @@
 	position: relative;
 
 	.textfield-label {
-		color: var(--palettes-grey-600);
+		color: var(--palettes-neutral-600);
 		left: var(--pr-t-spacings-M);
 		font-size: var(--sizes-S-fontSize);
 		font-weight: 400;
@@ -394,14 +394,14 @@
 
 		&::after {
 			bottom: var(--pr-t-spacings-XS);
-			color: var(--palettes-grey-600);
+			color: var(--palettes-neutral-600);
 			font-weight: 400;
 		}
 	}
 }
 
 @mixin suffixIcon {
-	color: var(--palettes-grey-600);
+	color: var(--palettes-neutral-600);
 	line-height: var(--sizes-M-lineHeight);
 }
 
@@ -477,7 +477,7 @@
 		z-index: 10;
 		line-height: var(--sizes-M-lineHeight);
 		font-size: var(--sizes-S-fontSize);
-		color: var(--palettes-grey-600);
+		color: var(--palettes-neutral-600);
 	}
 
 	.textfield-messages,
@@ -525,7 +525,7 @@
 	.textfield-messages-helper,
 	.radiosfield-messages-helper,
 	.checkboxesfield-messages-helper {
-		background-color: var(--palettes-grey-500);
+		background-color: var(--palettes-neutral-500);
 		color: var(--colors-white-color);
 	}
 }
@@ -546,7 +546,7 @@
 
 @mixin framedSearch {
 	&::after {
-		color: var(--palettes-grey-600);
+		color: var(--palettes-neutral-600);
 		padding: var(--components-field-framed-side-padding);
 		bottom: 0;
 		right: 0;
@@ -575,7 +575,7 @@
 
 		&::placeholder {
 			opacity: 0;
-			color: var(--palettes-grey-400);
+			color: var(--palettes-neutral-400);
 		}
 	}
 
@@ -631,7 +631,7 @@
 
 @mixin materialSearch {
 	&::after {
-		color: var(--palettes-grey-500);
+		color: var(--palettes-neutral-500);
 		bottom: var(--pr-t-spacings-XS);
 		right: 0;
 	}

@@ -23,7 +23,7 @@
 }
 
 @mixin noLabel {
-	height: 1rem;
+	line-height: var(--components-checkbox-input-size);
 
 	.checkbox-label {
 		vertical-align: top;

@@ -1,5 +1,5 @@
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { NumericBadgeComponent } from '@lucca-front/ng/numeric-badge';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 
 export default {
 	title: 'Documentation/Texts/NumericBadge/Angular/Basic',
@@ -11,11 +11,14 @@ export default {
 	],
 	argTypes: {
 		palette: {
-			options: ['none', 'primary', 'grey', 'success', 'warning', 'error'],
+			options: ['none', 'product', 'neutral', 'success', 'warning', 'error'],
 			control: {
 				type: 'select',
 			},
 		},
+		value: {
+			description: 'Doit obligatoirement contenir une valeur numérique (ex: 7, "3/5", "+2", etc.)',
+		}
 	},
 } as Meta;
 

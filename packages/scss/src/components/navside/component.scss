@@ -1,6 +1,9 @@
+@use '@lucca-front/icons/src/icon/exports' as icon;
 @use '@lucca-front/scss/src/commons/utils/loading';
 @use '@lucca-front/scss/src/commons/utils/a11y';
-@use '@lucca-front/icons/src/icon/exports' as icon;
+@use '@lucca-front/scss/src/commons/utils/color';
+@use '@lucca-front/scss/src/components/keyframe/exports' as keyframe;
+@use '@lucca-front/scss/src/components/numericBadge/exports' as numericBadge;
 
 @mixin component($atRoot: 'without: rule') {
 	bottom: 0;
@@ -15,6 +18,9 @@
 	width: var(--commons-navSide-width);
 
 	.numericBadge {
+		@include numericBadge.S;
+		@include numericBadge.brand;
+
 		margin-left: auto;
 	}
 
@@ -61,18 +67,6 @@
 			list-style-type: none;
 		}
 
-		.navSide-item,
-		.navSide-item-subMenu-item,
-		.navSide-item-subMenu-link {
-			&:not(.mod-mobileToggle) {
-				+ .navSide-item,
-				+ .navSide-item-subMenu-item,
-				+ .navSide-item-subMenu-link {
-					margin-top: var(--pr-t-spacings-XXXS);
-				}
-			}
-		}
-
 		.navSide-item-link,
 		.navSide-item-subMenu-link {
 			cursor: pointer;
@@ -103,6 +97,10 @@
 			&:active {
 				background-color: var(--palettes-navigation-900);
 			}
+
+			.lucca-icon {
+				@include icon.S;
+			}
 		}
 
 		.navSide-item-link {
@@ -112,7 +110,8 @@
 			font-weight: 600;
 		}
 
-		.navSide-item-alert { // deprecated
+		// .navSide-item-alert is deprecated
+		.navSide-item-alert {
 			font-size: var(--sizes-XS-fontSize);
 			font-weight: 600;
 			background-color: var(--components-navSide-fullwidth-palette-alert-color);
@@ -131,6 +130,8 @@
 		}
 
 		.navSide-item-arrow {
+			@include icon.S;
+
 			transition-duration: var(--commons-animations-durations-fast);
 			transition-property: transform;
 			transition-timing-function: ease-out;
@@ -141,7 +142,6 @@
 			flex-shrink: 0;
 			transform-origin: 50% 50%;
 			transform: rotate(90deg);
-			@include icon.S;
 		}
 
 		.navSide-item-subMenu {
@@ -159,6 +159,27 @@
 			line-height: var(--sizes-S-lineHeight);
 		}
 
+		.navSide-item-subMenu-item {
+			@include keyframe.slideInLeft;
+
+			opacity: 0;
+			animation-fill-mode: forwards;
+			animation-name: slideInLeft;
+			animation-duration: var(--commons-animations-durations-fast);
+			animation-delay: var(--delay);
+
+			@media (prefers-reduced-motion) {
+				animation: none;
+				opacity: 1;
+			}
+
+			@for $i from 0 through 10 {
+				&:nth-child(#{$i}n) {
+					--delay: #{$i * 25ms};
+				}
+			}
+		}
+
 		.navSide-bottomSection {
 			height: var(--components-navSide-bottom-section-height);
 			width: var(--commons-navSide-width);
@@ -174,7 +195,7 @@
 			.navSide-item-link {
 				background-color: var(--components-navSide-bottom-section-palette-bg-color);
 				color: var(--components-navSide-bottom-section-palette-text);
-				padding: 1em;
+				padding: var(--spacings-S);
 				box-sizing: border-box;
 				cursor: pointer;
 
@@ -184,7 +205,8 @@
 				}
 			}
 
-			.navSide-item-alert { // deprecated
+			// .navSide-item-alert is deprecated
+			.navSide-item-alert {
 				background-color: var(--components-navSide-bottom-section-palette-alert-color);
 				color: var(--components-navSide-bottom-section-palette-alert-text);
 			}
@@ -202,7 +224,7 @@
 			}
 
 			&::before {
-				background-color: rgba(var(--colors-grey-900-rgb), 0.15);
+				background-color: color.transparentize(var(--palettes-neutral-900), 0.15);
 				border-radius: 1em;
 				height: 1em;
 				width: 1em;

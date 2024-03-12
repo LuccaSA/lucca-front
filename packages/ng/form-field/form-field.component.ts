@@ -6,7 +6,7 @@ import { BehaviorSubject } from 'rxjs';
 import { InlineMessageComponent, InlineMessageState } from '@lucca-front/ng/inline-message';
 import { SafeHtml } from '@angular/platform-browser';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
-import { NgClazz } from '@lucca-front/ng/core';
+import { LuClass } from '@lucca-front/ng/core';
 import { NG_VALIDATORS, NgControl, ReactiveFormsModule, RequiredValidator, Validator, Validators } from '@angular/forms';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { FORM_FIELD_INSTANCE } from './form-field.token';
@@ -19,8 +19,8 @@ let nextId = 0;
 	imports: [NgIf, NgSwitch, NgSwitchCase, NgTemplateOutlet, InlineMessageComponent, LuTooltipModule, ReactiveFormsModule, IconComponent],
 	templateUrl: './form-field.component.html',
 	styleUrls: ['./form-field.component.scss'],
-	hostDirectives: [NgClazz],
 	providers: [
+		LuClass,
 		{
 			provide: FORM_FIELD_INSTANCE,
 			useExisting: forwardRef(() => FormFieldComponent),
@@ -29,7 +29,7 @@ let nextId = 0;
 	encapsulation: ViewEncapsulation.None,
 })
 export class FormFieldComponent implements OnChanges, OnDestroy, DoCheck {
-	#ngClass = inject(NgClazz);
+	#luClass = inject(LuClass);
 
 	#control: NgControl;
 
@@ -88,7 +88,12 @@ export class FormFieldComponent implements OnChanges, OnDestroy, DoCheck {
 
 	public set input(input: InputDirective) {
 		this._input = input;
-		this.prepareInput();
+		/* We have to put this in the next cycle to make sure it'll be applied properly
+		 * and that it won't trigger a change detection error
+		 */
+		setTimeout(() => {
+			this.prepareInput();
+		});
 	}
 
 	public get input(): InputDirective {
@@ -123,10 +128,10 @@ export class FormFieldComponent implements OnChanges, OnDestroy, DoCheck {
 	#nativeInputRef: HTMLElement;
 
 	ngOnChanges(): void {
-		this.#ngClass.ngClass = {
+		this.#luClass.setState({
 			[`mod-${this.size}`]: true,
 			[`mod-checkable`]: this.layout === 'checkable',
-		};
+		});
 		if (this.#nativeInputRef) {
 			this.updateAria();
 		}
@@ -144,10 +149,12 @@ export class FormFieldComponent implements OnChanges, OnDestroy, DoCheck {
 	}
 
 	private updateAria(): void {
-		this.#nativeInputRef.ariaInvalid = this.invalid.toString();
-		this.#nativeInputRef.ariaRequired = this.required.toString();
-		this.#nativeInputRef.setAttribute('aria-describedby', `${this.id}-message`);
-		this.addLabelledBy(`${this.id}-label`);
+		if (this.#nativeInputRef) {
+			this.#nativeInputRef.ariaInvalid = this.invalid.toString();
+			this.#nativeInputRef.ariaRequired = this.required.toString();
+			this.#nativeInputRef.setAttribute('aria-describedby', `${this.id}-message`);
+			this.addLabelledBy(`${this.id}-label`);
+		}
 	}
 
 	ngOnDestroy(): void {

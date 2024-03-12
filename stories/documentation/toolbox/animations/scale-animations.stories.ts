@@ -63,7 +63,7 @@ export default {
 	decorators: [applicationConfig({ providers: [provideAnimations()] })],
 } as Meta;
 
-const template: StoryFn<ScaleAnimationStory> = (args: ScaleAnimationStory) => ({
+const template: StoryFn<ScaleAnimationStory> = (args) => ({
 	props: args,
 });
 

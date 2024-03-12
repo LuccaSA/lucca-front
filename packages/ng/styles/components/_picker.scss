@@ -25,7 +25,8 @@
 }
 
 .lu-picker-content-option-emptyState {
-	color: var(--palettes-grey-600);
+	color: var(--palettes-neutral-600);
+	padding-inline: var(--spacings-XS);
 	text-align: center;
 }
 
@@ -34,12 +35,14 @@
 	line-height: var(--sizes-S-lineHeight);
 	font-weight: 600;
 	padding: var(--components-options-item-padding-vertical) var(--components-options-item-padding-horizontal);
-	color: var(--palettes-grey-600);
+	color: var(--palettes-neutral-600);
 	position: sticky;
 	top: 0;
 	background-color: var(--pr-t-elevation-surface-raised);
 	z-index: 1;
-	display: block;
+	display: flex;
+	gap: var(--spacings-XS);
+	justify-content: space-between;
 	box-shadow: 0 calc(var(--pr-t-spacings-XXXS) * -1) 0 var(--pr-t-spacings-XXXS) var(--pr-t-elevation-surface-raised); // Mask background options scrolling behind
 }
 
@@ -54,10 +57,11 @@
 .lu-picker-content-loading {
 	padding: var(--pr-t-spacings-XXXS);
 	display: flex;
-	color: var(--palettes-grey-600)
+	color: var(--palettes-neutral-600);
 }
 
-.lu-picker-loading { // deprecated
+.lu-picker-loading {
+	// deprecated
 	position: absolute;
 	left: 50%;
 	top: 50%;

@@ -6,10 +6,10 @@
 	:host {
 		--components-select-input-padding-horizontal: var(--pr-t-spacings-XS);
 		--components-select-input-padding-vertical: var(--pr-t-spacings-XS);
-		--components-select-framed-color: var(--palettes-grey-500);
-		--components-select-framed-color50: var(--palettes-grey-50);
-		--components-select-framed-see-through: var(--palettes-grey-50);
-		--components-select-framed-text: var(--palettes-grey-800);
+		--components-select-framed-color: var(--palettes-neutral-500);
+		--components-select-framed-color50: var(--palettes-neutral-50);
+		--components-select-framed-see-through: var(--palettes-neutral-50);
+		--components-select-framed-text: var(--palettes-neutral-800);
 		--components-select-framed-placeholder: #cccccc;
 		--components-select-framed-side-padding: var(--pr-t-spacings-M);
 		--components-select-framed-top-padding: var(--pr-t-spacings-XL);
@@ -24,7 +24,7 @@
 		&::after {
 			@include icon.generate('arrow_chevron_bottom');
 
-			color: var(--palettes-grey-600);
+			color: var(--palettes-neutral-600);
 			bottom: var(--components-select-input-padding-vertical);
 			font-size: var(--sizes-M-lineHeight);
 			line-height: var(--sizes-M-lineHeight);
@@ -34,7 +34,8 @@
 			transition: transform var(--commons-animations-durations-standard) ease;
 		}
 
-		&[disabled], &.is-disabled {
+		&[disabled],
+		&.is-disabled {
 			cursor: not-allowed;
 			pointer-events: all;
 		}
@@ -57,7 +58,7 @@
 	}
 
 	.lu-select-placeholder {
-		color: var(--palettes-grey-400);
+		color: var(--palettes-neutral-400);
 		line-height: var(--sizes-M-lineHeight);
 		min-height: calc(var(--components-select-framed-bottom-padding) + var(--sizes-M-lineHeight));
 		padding: var(--components-select-input-padding-vertical) 3.5rem var(--components-select-input-padding-vertical)
@@ -81,7 +82,6 @@
 	}
 
 	::ng-deep .lu-select-value {
-
 		.label {
 			padding: var(--pr-t-spacings-XXXS) var(--pr-t-spacings-XS);
 			margin-left: 0;
@@ -159,7 +159,7 @@
 			padding: var(--components-select-framed-top-padding) 0 0;
 
 			&::after {
-				color: var(--palettes-grey-500);
+				color: var(--palettes-neutral-500);
 				bottom: var(--components-select-framed-bottom-padding);
 				right: var(--pr-t-spacings-XS);
 			}
@@ -170,7 +170,7 @@
 			}
 
 			.lu-select-placeholder {
-				color: var(--palettes-grey-400);
+				color: var(--palettes-neutral-400);
 				padding: 0 calc(var(--components-select-framed-side-padding) * 3) var(--components-select-framed-bottom-padding)
 					var(--components-select-framed-side-padding);
 			}
@@ -189,14 +189,14 @@
 			padding: 0;
 			height: auto;
 			padding-top: var(--pr-t-spacings-M);
-			color: var(--palettes-grey-800);
+			color: var(--palettes-neutral-800);
 		}
 	}
 
 	// Material
 	:host-context(.textfield.mod-material) {
 		&::after {
-			color: var(--palettes-grey-500);
+			color: var(--palettes-neutral-500);
 			bottom: 0.6rem;
 			right: 0;
 		}
@@ -252,11 +252,11 @@
 	:host-context(.textfield.mod-outlined) {
 		&.textfield-input {
 			&::after {
-				color: var(--palettes-grey-600);
+				color: var(--palettes-neutral-600);
 			}
 
 			.lu-select-placeholder {
-				color: var(--palettes-grey-400);
+				color: var(--palettes-neutral-400);
 			}
 		}
 		// Error

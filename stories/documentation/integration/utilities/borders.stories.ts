@@ -16,16 +16,17 @@ function getTemplate(args: BorderStory): string {
 	`;
 }
 
-const Template: StoryFn<BorderStory> = (args: BorderStory) => ({
+const Template: StoryFn<BorderStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [
 		`
 		div {
+			background-color: var(--colors-white-color);
 			float: left;
 			text-align: center;
 			padding: var(--pr-t-spacings-M);
-			border: 1px solid #D6D6D6;
+			border: 1px solid var(--palettes-neutral-200);
 			margin: 0 var(--pr-t-spacings-M) var(--pr-t-spacings-M) 0;
 		}`,
 	],

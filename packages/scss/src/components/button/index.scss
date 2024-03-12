@@ -16,43 +16,31 @@
 		@include XS;
 	}
 
-	&:hover {
-		@include hover;
-	}
-
-	&:focus-visible {
-		@include focusVisible;
-	}
-
-	&:active {
-		@include active;
-	}
-
-	&:is(.mod-outline, .mod-outlined) {
-		@include outlined;
-
-		&:hover {
-			@include outlinedHover;
+	// .mod-outline is deprecated
+	&.mod-outlined,
+	&.mod-outline {
+		&:where(:not(.is-success, .is-error)) {
+			@include outlined;
 		}
 
-		&:active {
-			@include outlinedActive;
-		}
-
-		&:focus-visible {
-			@include outlinedFocusVisible;
+		// .disabled is deprecated
+		&.is-disabled,
+		&.disabled {
+			@include outlinedDisabled;
 		}
 	}
 
-	&:is(.mod-text, .mod-link) {
-		@include text;
-
-		&:is(:hover, :focus-visible) {
-			@include textHover;
+	// .mod-link deprecated
+	&.mod-text,
+	&.mod-link {
+		&:where(:not(.is-success, .is-error)) {
+			@include text;
 		}
 
-		&:active {
-			@include textActive;
+		// .disabled is deprecated
+		&.is-disabled,
+		&.disabled {
+			@include textDisabled;
 		}
 	}
 
@@ -67,14 +55,11 @@
 		&.mod-XS {
 			@include counterXS;
 		}
-
-		&:hover {
-			@include counterHover;
-		}
 	}
 
 	// .mod-icon is deprecated
-	&:is(.mod-icon, .mod-withIcon) {
+	&.mod-withIcon,
+	&.mod-icon {
 		@include withIcon;
 
 		&.mod-S {
@@ -99,49 +84,25 @@
 	}
 
 	&.mod-delete {
-		&:hover {
-			@include deleteHover;
+		@include delete;
+
+		// .mod-link is deprecated
+		&.mod-text,
+		&.mod-link {
+			@include deleteText;
 		}
 
-		&:active {
-			@include deleteActive;
-		}
-
-		&.mod-text {
-			&:is(:hover, :focus-visible) {
-				@include deleteHover;
-			}
-
-			&:active {
-				@include deleteActive;
-			}
-		}
-
-		&.mod-outlined {
-			&:hover {
-				@include deleteOutlinedHover;
-			}
-
-			&:focus-visible {
-				@include deleteOutlinedFocusVisible;
-			}
-
-			&:active {
-				@include deleteActive;
-			}
+		// .mod-outline is deprecated
+		&.mod-outlined,
+		&.mod-outline {
+			@include deleteOutlined;
 		}
 	}
 
+	// .mod-invert is deprecated
+	&.mod-inverted,
 	&.mod-invert {
-		@include invert;
-
-		&:is(:hover, :focus-visible) {
-			@include invertHover;
-		}
-
-		&:active {
-			@include invertActive;
-		}
+		@include inverted;
 	}
 
 	&.mod-more {
@@ -156,7 +117,9 @@
 		}
 	}
 
-	&:is(.is-loading, .loading) {
+	// .loading is deprecated
+	&.is-loading,
+	&.loading {
 		@include loading;
 
 		&.mod-S {
@@ -164,23 +127,21 @@
 		}
 	}
 
-	&:is(.is-error, .error) {
+	// .error is deprecated
+	&.is-error,
+	&.error {
 		@include error;
 	}
 
-	&:is(.is-success, .success) {
+	// .success is deprecated
+	&.is-success,
+	&.success {
 		@include success;
 	}
 
-	&:is(.is-disabled, .disabled, :disabled) {
+	// .disabled is deprecated
+	&.is-disabled,
+	&.disabled {
 		@include disabled;
-
-		&:is(.mod-outlined, .mod-outline) {
-			@include disabledOutlined;
-		}
-
-		&:is(.mod-text, .mod-link) {
-			@include disabledText;
-		}
 	}
 }

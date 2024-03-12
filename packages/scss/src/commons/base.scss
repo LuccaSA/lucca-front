@@ -54,7 +54,7 @@
 
 		body {
 			background-color: var(--pr-t-elevation-surface-default);
-			color: var(--palettes-grey-800);
+			color: var(--palettes-neutral-800);
 			font-family: var(--commons-font-family);
 			font-size: var(--sizes-M-fontSize);
 			line-height: var(--sizes-M-lineHeight);
@@ -94,12 +94,12 @@
 			font-weight: 600;
 		}
 
-		@each $palette in list.join(config.$palettes, config.$states) {
+		@each $palette in config.$palettesAll {
 			$paletteExists: map.get(config.$palettesInterpolation, $palette);
 
 			@if $paletteExists {
 				.palette-#{$palette} {
-					@each $shade in config.$shades {
+					@each $shade in config.$palettesShades {
 						@if map.get($paletteExists, $shade) {
 							--palettes-#{$shade}: var(--palettes-#{$palette}-#{$shade});
 						}

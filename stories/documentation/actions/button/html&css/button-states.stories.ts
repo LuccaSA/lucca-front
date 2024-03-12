@@ -14,7 +14,7 @@ function getTemplate(args: ButtonStatesStory): string {
 </div>`;
 }
 
-const Template: StoryFn<ButtonStatesStory> = (args: ButtonStatesStory) => ({
+const Template: StoryFn<ButtonStatesStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 });

@@ -19,7 +19,7 @@
 		text-align: center;
 		font-size: var(--components-divider-fontSize);
 		line-height: var(--components-divider-lineHeight);
-		color: var(--palettes-grey-600);
+		color: var(--palettes-neutral-600);
 
 		&::before,
 		&::after {
@@ -29,6 +29,10 @@
 			flex-grow: 1;
 			min-width: var(--pr-t-spacings-L);
 			content: '';
+		}
+
+		.lucca-icon {
+			color: var(--palettes-neutral-500);
 		}
 	}
 }

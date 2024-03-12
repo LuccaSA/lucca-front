@@ -1,8 +1,8 @@
-import { Meta, Story } from '@storybook/angular';
+import { Meta, StoryFn } from '@storybook/angular';
 
 interface ArrowBasicStory {
 	s: boolean;
-	grey: boolean;
+	neutral: boolean;
 	field: string;
 	checked: boolean;
 }
@@ -21,7 +21,7 @@ export default {
 				type: 'boolean',
 			},
 		},
-		grey: {
+		neutral: {
 			control: {
 				type: 'boolean',
 			},
@@ -38,7 +38,7 @@ export default {
 
 function getTemplate(args: ArrowBasicStory): string {
 	const s = args.s ? ' mod-S' : '';
-	const grey = args.grey ? ' mod-grey' : ' ';
+	const neutral = args.neutral ? ' mod-neutral' : ' ';
 	const checked = args.checked ? ' checked' : '';
 
 	if (args.field === 'radio') {
@@ -58,7 +58,7 @@ function getTemplate(args: ArrowBasicStory): string {
 	      <span class="radioField-icon-check"></span>
 	    </span>
 	  </span>
-	  <div class="form-field-arrow${grey}"></div>
+	  <div class="form-field-arrow${neutral}"></div>
 	</div>
 	<div class="form-field mod-withArrow${s}">
 	  <label class="formLabel" for="IDradioB">Label B</label>
@@ -74,10 +74,10 @@ function getTemplate(args: ArrowBasicStory): string {
 	      <span class="radioField-icon-check"></span>
 	    </span>
 	  </span>
-	  <div class="form-field-arrow${grey}"></div>
+	  <div class="form-field-arrow${neutral}"></div>
 	</div>
 </div>
-<div class="box mod-withArrow${grey}">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam illo nostrum tenetur expedita. Accusantium cumque nisi excepturi eius corporis, iusto quaerat temporibus dolorum necessitatibus laboriosam quidem quibusdam quae aperiam! Vitae!</div>`;
+<div class="box mod-withArrow${neutral}">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam illo nostrum tenetur expedita. Accusantium cumque nisi excepturi eius corporis, iusto quaerat temporibus dolorum necessitatibus laboriosam quidem quibusdam quae aperiam! Vitae!</div>`;
 	} else if (args.field === 'checkbox') {
 		return `<div class="form-field mod-withArrow${s}">
 	<label class="formLabel" for="CB">Label</label>
@@ -85,9 +85,9 @@ function getTemplate(args: ArrowBasicStory): string {
 		<input type="checkbox" class="checkboxField-input" id="CB" aria-labelledby="CB-label"${checked} />
 		<span class="checkboxField-icon" aria-hidden="true"><span class="checkboxField-icon-check"></span></span>
 	</span>
-	<div class="form-field-arrow${grey}"></div>
+	<div class="form-field-arrow${neutral}"></div>
 </div>
-<div class="box mod-withArrow${grey}">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam illo nostrum tenetur expedita. Accusantium cumque nisi excepturi eius corporis, iusto quaerat temporibus dolorum necessitatibus laboriosam quidem quibusdam quae aperiam! Vitae!</div>`;
+<div class="box mod-withArrow${neutral}">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam illo nostrum tenetur expedita. Accusantium cumque nisi excepturi eius corporis, iusto quaerat temporibus dolorum necessitatibus laboriosam quidem quibusdam quae aperiam! Vitae!</div>`;
 	} else {
 		return `<div class="form-field mod-withArrow${s}">
 	<label class="formLabel" for="ID">Label</label>
@@ -95,16 +95,23 @@ function getTemplate(args: ArrowBasicStory): string {
 		<input type="checkbox" class="switchField-input" id="ID"${checked} />
 		<span class="switchField-icon" aria-hidden="true"><span class="switchField-icon-check"></span></span>
 	</span>
-	<div class="form-field-arrow${grey}"></div>
+	<div class="form-field-arrow${neutral}"></div>
 </div>
-<div class="box mod-withArrow${grey}">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam illo nostrum tenetur expedita. Accusantium cumque nisi excepturi eius corporis, iusto quaerat temporibus dolorum necessitatibus laboriosam quidem quibusdam quae aperiam! Vitae!</div>`;
+<div class="box mod-withArrow${neutral}">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam illo nostrum tenetur expedita. Accusantium cumque nisi excepturi eius corporis, iusto quaerat temporibus dolorum necessitatibus laboriosam quidem quibusdam quae aperiam! Vitae!</div>`;
 	}
 }
 
-const Template: Story<ArrowBasicStory> = (args: ArrowBasicStory) => ({
+const Template: StoryFn<ArrowBasicStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
+	styles: [
+		`
+		:host {
+			display: block;
+		}`,
+		args.neutral === true ? ':host { background-color: white; margin: -15px -15px; padding: 15px 15px; }' : '',
+	],
 });
 
 export const Basic = Template.bind({});
-Basic.args = { s: false, grey: true, field: 'radio', checked: true };
+Basic.args = { s: false, neutral: true, field: 'radio', checked: true };

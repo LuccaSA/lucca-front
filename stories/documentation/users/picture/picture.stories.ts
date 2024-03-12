@@ -38,11 +38,12 @@ export default {
 			control: {
 				type: 'boolean',
 			},
+			description: '[v16.1]',
 		},
 	},
 } as Meta;
 
-const template: StoryFn<UserPictureStory> = (args: UserPictureStory) => ({
+const template: StoryFn<UserPictureStory> = (args) => ({
 	props: args,
 });
 

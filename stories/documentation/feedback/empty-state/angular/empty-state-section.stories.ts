@@ -5,7 +5,7 @@ import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { PaletteArgType } from '../../../../helpers/common-arg-types';
 
 export default {
-	title: 'Documentation/Feedback/Empty State Section/Angular',
+	title: 'Documentation/Feedback/Empty State/Angular/Section',
 	component: EmptyStateSectionComponent,
 	decorators: [
 		moduleMetadata({
@@ -16,10 +16,9 @@ export default {
 		const { title, description, center, palette, icon } = args;
 		const paramIcon = args.icon === '' ? '' : 'icon="' + args.icon + '"';
 		return {
-			template: `
-<lu-empty-state-section ${paramIcon} title="${title}" description="${description}" palette="${palette}" ${center ? ' center' : ''}>
-	<button luButton type="button" palette="primary">Button</button>
-	<button luButton="outlined" type="button" palette="primary">Button</button>
+template: `<lu-empty-state-section ${paramIcon} title="${title}" description="${description}" palette="${palette}" ${center ? ' center' : ''}>
+	<button luButton type="button" palette="product">Button</button>
+	<button luButton="outlined" type="button" palette="product">Button</button>
 </lu-empty-state-section>`,
 		};
 	},
@@ -27,7 +26,6 @@ export default {
 		palette: PaletteArgType,
 		icon: {
 			options: [
-				'https://cdn.lucca.fr/lucca-front/assets/empty-states/icons/icon-rocket.svg',
 				'https://cdn.lucca.fr/lucca-front/assets/empty-states/icons/iconBanknote.svg',
 				'https://cdn.lucca.fr/lucca-front/assets/empty-states/icons/iconBanknoteAction.svg',
 				'https://cdn.lucca.fr/lucca-front/assets/empty-states/icons/iconBanknoteActionError.svg',
@@ -88,7 +86,7 @@ export default {
 
 export const Section: StoryObj<EmptyStateSectionComponent> = {
 	args: {
-		icon: 'https://cdn.lucca.fr/lucca-front/assets/empty-states/icons/icon-rocket.svg',
+		icon: 'https://cdn.lucca.fr/lucca-front/assets/empty-states/icons/iconRocket.svg',
 		title: 'Empty state section',
 		description: 'Description can be a string or a ng-template',
 		center: false,

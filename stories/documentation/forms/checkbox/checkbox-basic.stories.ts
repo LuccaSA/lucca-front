@@ -102,10 +102,10 @@ function getTemplate(args: CheckboxBasicStory): string {
 </div>`;
 }
 
-const Template: StoryFn<CheckboxBasicStory> = (args: CheckboxBasicStory) => ({
+const Template: StoryFn<CheckboxBasicStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
 export const Basic = Template.bind({});
-Basic.args = { checked: false, s: false, disabled: false, required: false, mixed: false, invalid: false, help: false, messageState: '', id: 'field1', label: 'Label', message: 'Helper text', };
+Basic.args = { checked: false, s: false, disabled: false, required: false, mixed: false, invalid: false, help: false, messageState: '', id: 'field1', label: 'Label', message: 'Helper text' };

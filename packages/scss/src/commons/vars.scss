@@ -1,4 +1,5 @@
 @use 'sass:map';
+@use 'sass:list';
 
 @use '@lucca-front/scss/src/commons/config';
 @use '@lucca-front/scss/src/commons/core';
@@ -22,7 +23,7 @@
 	@include core.cssvars('commons-loading', config.$loading);
 	@include core.cssvars('commons-text-link', config.$textLink);
 
-	@each $palette in config.$allPalettes {
+	@each $palette in config.$palettesAll {
 		@include core.cssvars('palettes-#{$palette}', map.get(config.$palettesInterpolation, $palette));
 	}
 
@@ -32,7 +33,7 @@
 	}
 
 	@include core.cssvars('commons-elevations-elevation', config.$elevations);
-	@include core.cssvars('commons-boxShadow', config.$boxShadows);
+	@include core.cssvars('commons-boxShadow', config.$boxShadows); // deprecated
 
 	@each $key, $map in config.$sizes {
 		@include core.cssvars('sizes-#{$key}', $map);
@@ -47,10 +48,10 @@
 	--commons-divider-width: 1px;
 	--commons-divider-style: solid;
 	--commons-divider-border: var(--commons-divider-width) var(--commons-divider-style) var(--commons-divider-color);
-	--commons-border-100: var(--palettes-grey-100);
-	--commons-border-200: var(--palettes-grey-200);
+	--commons-border-100: var(--palettes-neutral-100);
+	--commons-border-200: var(--palettes-neutral-200);
 
 	// Deprecated
-	--commons-background-base: var(--palettes-grey-25);
-	--commons-divider-color: var(--palettes-grey-200);
+	--commons-background-base: var(--palettes-neutral-25);
+	--commons-divider-color: var(--palettes-neutral-200);
 }

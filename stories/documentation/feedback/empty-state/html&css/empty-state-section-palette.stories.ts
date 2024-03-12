@@ -1,26 +1,47 @@
-import { provideHttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Meta, moduleMetadata, StoryFn } from '@storybook/angular';
 import { LuSafeExternalSvgPipe } from '@lucca-front/ng/safe-content';
-import { Meta, StoryFn, applicationConfig } from '@storybook/angular';
+import { HttpClientModule } from "@angular/common/http";
 
-@Component({
-	standalone: true,
-	selector: 'empty-state-section-palette-stories',
-	templateUrl: './empty-state-section-palette.stories.html',
-	imports: [LuSafeExternalSvgPipe],
-})
-class EmptyStateSectionStory {}
+interface EmptyStateSectionPaletteStory {
+}
 
 export default {
-	title: 'Documentation/Feedback/Empty State/HTML&CSS',
-	component: EmptyStateSectionStory,
+	title: 'Documentation/Feedback/Empty State/HTML&CSS/Section Palette',
 	decorators: [
-		applicationConfig({
-			providers: [provideHttpClient()],
+		moduleMetadata({
+			imports: [LuSafeExternalSvgPipe, HttpClientModule],
 		}),
 	],
+	argTypes: {
+	},
 } as Meta;
 
-const template: StoryFn<EmptyStateSectionStory> = () => ({});
+function getTemplate(args: EmptyStateSectionPaletteStory): string {
+	return `<section class="emptyState">
+	<div class="emptyState-container">
+		<div class="emptyState-content">
+			<div
+				class="emptyState-content-icon palette-success"
+				aria-hidden="true"
+				[innerHtml]="'https://cdn.lucca.fr/lucca-front/assets/empty-states/icons/iconCalendarAction.svg' | luSafeExternalSvg"
+			></div>
+			<div class="emptyState-content-text">
+				<h3 class="emptyState-content-heading">Empty State</h3>
+				<p>Flatus obsequiorum potest inanes pomerium obsequiorum credi homines vero caelibes orbos potest vile diversitate flatus.</p>
+				<div class="emptyState-actions">
+					<button type="button" class="button">Button</button>
+					<button type="button" class="button mod-outlined">Button</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>`;
+}
 
-export const sectionPalette = template.bind({});
+const Template: StoryFn<EmptyStateSectionPaletteStory> = (args: EmptyStateSectionPaletteStory) => ({
+	props: args,
+	template: getTemplate(args),
+});
+
+export const SectionPalette = Template.bind({});
+SectionPalette.args = { };

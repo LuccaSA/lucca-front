@@ -7,12 +7,12 @@
 }
 
 .is-disabled {
-	color: var(--palettes-grey-500);
+	color: var(--palettes-neutral-500);
 	user-select: none;
 	cursor: default;
 
 	&.is-selected {
-		background-color: var(--palettes-grey-100);
+		background-color: var(--palettes-neutral-100);
 	}
 
 	&:hover {
@@ -27,7 +27,7 @@
 
 	&:hover {
 		.optionItem-value {
-			background: var(--palettes-grey-50);
+			background: var(--palettes-neutral-50);
 		}
 
 		.optionItem-icons {
@@ -71,14 +71,10 @@
 
 	.optionItem-value {
 		&::before {
-			top: 1.3rem;
-			left: var(--pr-t-spacings-XS);
 			pointer-events: none;
 		}
 
 		&::after {
-			top: 1.3rem;
-			left: var(--pr-t-spacings-XS);
 			pointer-events: none;
 		}
 	}

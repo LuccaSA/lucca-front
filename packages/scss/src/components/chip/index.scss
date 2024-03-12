@@ -8,8 +8,10 @@
 		@include S;
 	}
 
+	// .palette-primary is deprecated
+	&.palette-product,
 	&.palette-primary {
-		@include primary;
+		@include product;
 	}
 
 	&.mod-unkillable {

@@ -7,7 +7,7 @@
 	display: table;
 	text-align: left;
 	width: 100%;
-	color: var(--palettes-grey-800);
+	color: var(--palettes-neutral-800);
 
 	@at-root ($atRoot) {
 		.table-head {
@@ -24,7 +24,7 @@
 		}
 
 		.table-head-row-cell {
-			color: var(--palettes-grey-600);
+			color: var(--palettes-neutral-600);
 			font-size: var(--sizes-S-fontSize);
 			line-height: var(--sizes-S-lineHeight);
 			padding: var(--components-table-padding);

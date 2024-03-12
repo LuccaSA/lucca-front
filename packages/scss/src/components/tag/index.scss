@@ -5,9 +5,11 @@
 	@include component;
 
 	&.mod-L {
-		@include l;
+		@include L;
 	}
 
+	// clickable behavior is deprecated
+	&:is(a, button),
 	&.mod-clickable {
 		@include clickable;
 	}

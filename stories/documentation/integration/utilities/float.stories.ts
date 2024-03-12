@@ -7,13 +7,11 @@ export default {
 } as Meta;
 
 function getTemplate(args: FloatStory): string {
-	return `
-		<div class="u-floatLeft"><code class="code">u-floatLeft</code></div>
-		<div class="u-floatRight"><code class="code">u-floatRight</code></div>
-	`;
+	return `<div class="u-floatLeft"><code class="code">u-floatLeft</code></div>
+<div class="u-floatRight"><code class="code">u-floatRight</code></div>`;
 }
 
-const Template: StoryFn<FloatStory> = (args: FloatStory) => ({
+const Template: StoryFn<FloatStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [

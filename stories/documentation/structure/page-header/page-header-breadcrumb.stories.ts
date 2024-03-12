@@ -32,15 +32,15 @@ function getTemplate(args: PageHeaderBreadcrumbStory): string {
 			<div class="pageHeader-content-title">
 				<h1 class="pr-u-margin0">H1. Page title</h1>
 				<div>
-					<button type="button" class="actionIcon" luTooltip="Modifier">
+					<button type="button" class="button mod-onlyIcon mod-text" luTooltip="Modifier">
 						<span aria-hidden="true" class="lucca-icon icon-officePen"></span>
 						<span class="u-mask">Modifier</span>
 					</button>
-					<button type="button" class="actionIcon" luTooltip="Copier">
+					<button type="button" class="button mod-onlyIcon mod-text" luTooltip="Copier">
 						<span aria-hidden="true" class="lucca-icon icon-fileCopy"></span>
 						<span class="u-mask">Copier</span>
 					</button>
-					<button type="button" class="actionIcon" luTooltip="Supprimer">
+					<button type="button" class="button mod-onlyIcon mod-text" luTooltip="Supprimer">
 						<span aria-hidden="true" class="lucca-icon icon-trashDelete"></span>
 						<span class="u-mask">Supprimer</span>
 					</button>
@@ -53,22 +53,24 @@ function getTemplate(args: PageHeaderBreadcrumbStory): string {
 				</label>
 				<button type="button" class="button">Button</button>
 				<button type="button" class="button mod-outline">Button</button>
-				<button type="button" class="actionIcon">
+				<button type="button" class="button mod-onlyIcon mod-text">
 					<span aria-hidden="true" class="lucca-icon icon-menuDots"></span>
 					<span class="u-mask">voir plus</span>
 				</button>
 			</div>
 		</div>
-		<section class="pageHeader-description">
-			<p class="pr-u-marginBottom0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac justo scelerisque, blandit nibh quis, imperdiet justo.
-				Nullam condimentum nulla et neque ultricies bibendum <a target="_blank">Lien<span aria-hidden="true" class="lucca-icon icon-arrowExternal mod-XS pr-u-marginLeftXXXS"></span></a>.
+		<div class="pageHeader-description">
+			<p class="pr-u-marginBottom0">
+				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac justo scelerisque, blandit nibh quis, imperdiet justo.
+				Nullam condimentum nulla et neque ultricies bibendum
+				<a target="_blank">Lien<span aria-hidden="true" class="lucca-icon icon-arrowExternal mod-XS pr-u-marginLeftXXXS"></span></a>.
 			</p>
-		</section>
+		</div>
 	</header>
 	`;
 }
 
-const Template: StoryFn<PageHeaderBreadcrumbStory> = (args: PageHeaderBreadcrumbStory) => ({
+const Template: StoryFn<PageHeaderBreadcrumbStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 });

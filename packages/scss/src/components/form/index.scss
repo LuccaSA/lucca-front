@@ -4,6 +4,10 @@
 
 @use 'exports' as *;
 
+.form {
+	@include component;
+}
+
 .form-field {
 	&.mod-S {
 		@include S;
@@ -52,7 +56,7 @@
 
 .form-group {
 	@include vars;
-	@include component;
+	@include componentDeprecated;
 }
 
 .form-group-line-col {

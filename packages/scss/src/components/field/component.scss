@@ -42,7 +42,7 @@
 			width: 100%;
 
 			&::placeholder {
-				color: var(--palettes-grey-200);
+				color: var(--palettes-neutral-200);
 			}
 		}
 
@@ -106,7 +106,7 @@
 		.textfield-messages-helper,
 		.radiosfield-messages-helper,
 		.checkboxesfield-messages-helper {
-			color: var(--palettes-grey-700);
+			color: var(--palettes-neutral-700);
 		}
 	}
 }

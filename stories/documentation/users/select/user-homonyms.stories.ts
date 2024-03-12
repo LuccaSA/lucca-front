@@ -37,7 +37,7 @@ export default {
 	decorators: [applicationConfig({ providers: [provideAnimations(), provideHttpClient()] })],
 } as Meta;
 
-const template: StoryFn<UserHomonymsStory> = (args: UserHomonymsStory) => ({
+const template: StoryFn<UserHomonymsStory> = (args) => ({
 	props: args,
 });
 
@@ -59,15 +59,17 @@ const code = `
       /* Cette ligne permet d'ajouter la propriété 'additionalInformation' aux utilisateurs comportant un homonyme */
       <lu-user-homonyms></lu-user-homonyms>
 
-      <lu-option *luForOptions="let user" [value]="user">
-        {{ user | luUserDisplay }}
+      <div class="lu-picker-content-option">
+        <lu-option *luForOptions="let user" [value]="user">
+          {{ user | luUserDisplay }}
 
-        /* Ajouter une information additionnelle en pilotant la propriété ajoutée précedemment */
-        /* Par défault, additionalInformation équivaut au nom du département de l'utilisateur */
-        <div *ngIf="user.additionalInformation" class="u-fontStyleItalic u-textS">
-          ({{ user.additionalInformation }})
-        </div>
-      </lu-option>
+          /* Ajouter une information additionnelle en pilotant la propriété ajoutée précedemment */
+          /* Par défault, additionalInformation équivaut au nom du département de l'utilisateur */
+          <div *ngIf="user.additionalInformation" class="u-fontStyleItalic u-textS">
+            ({{ user.additionalInformation }})
+          </div>
+        </lu-option>
+      </div>
     </lu-option-picker-advanced>
   </lu-select>
   <span class="textfield-label">Avec gestion des homonymes :</span>

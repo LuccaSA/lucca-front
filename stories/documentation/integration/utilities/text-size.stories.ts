@@ -7,17 +7,15 @@ export default {
 } as Meta;
 
 function getTemplate(args: TextSizeStory): string {
-	return `
-		<span class="u-textXS">XS</span>
-		<span class="u-textS">S</span>
-		<span class="u-textM">M</span>
-		<span class="u-textL">L</span>
-		<span class="u-textXL">XL</span>
-		<span class="u-textXXL">XXL</span>
-	`;
+	return `<span class="u-textXS">XS</span>
+<span class="u-textS">S</span>
+<span class="u-textM">M</span>
+<span class="u-textL">L</span>
+<span class="u-textXL">XL</span>
+<span class="u-textXXL">XXL</span>`;
 }
 
-const Template: StoryFn<TextSizeStory> = (args: TextSizeStory) => ({
+const Template: StoryFn<TextSizeStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [

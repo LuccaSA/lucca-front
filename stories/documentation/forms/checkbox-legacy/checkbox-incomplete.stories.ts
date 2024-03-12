@@ -30,7 +30,7 @@ function getTemplate(args: CheckboxIncompleteStory): string {
 	`;
 }
 
-const Template: StoryFn<CheckboxIncompleteStory> = (args: CheckboxIncompleteStory) => ({
+const Template: StoryFn<CheckboxIncompleteStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 });

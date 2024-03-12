@@ -33,13 +33,13 @@ function getTemplate(args: GridsLegacyJustifyStory): string {
 	`;
 }
 
-const Template: StoryFn<GridsLegacyJustifyStory> = (args: GridsLegacyJustifyStory) => ({
+const Template: StoryFn<GridsLegacyJustifyStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [
 		`
 		.grid-demo {
-			background-color: var(--palettes-grey-200);
+			background-color: var(--palettes-neutral-200);
 			margin-bottom: var(--pr-t-spacings-M);
 			padding: var(--pr-t-spacings-M);
 			border-radius: var(--commons-borderRadius-full);
