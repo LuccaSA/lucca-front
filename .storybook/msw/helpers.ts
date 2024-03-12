@@ -44,6 +44,27 @@ export function applyV4Paging<T>(items: T[], { page, limit }: { page: number; li
 	return items.slice((page - 1) * limit, page * limit);
 }
 
+export function applyV4Sorting<T>(items: T[], by: string): T[] {
+	const bys = by.split(',');
+	const selector = (item: T, by: string) => {
+		const path = by.split('.');
+		let value: unknown = item;
+		for (const p of path) {
+			const prop = Object.keys(value).find((k) => k.toLowerCase() === p.toLowerCase());
+			value = value && prop ? value[prop] : value;
+		}
+		return value;
+	};
+
+	return items
+		.map((item) => ({
+			item,
+			sorting: bys.map((by) => selector(item, by)).join('__'),
+		}))
+		.sort((a, b) => a.sorting.localeCompare(b.sorting))
+		.map((a) => a.item);
+}
+
 export function applyFilter<T, TParam>(predicate: (item: T, filterValue: TParam) => boolean): (items: T[], filterValue: TParam) => T[] {
 	return (items, filterValue) => items.filter((item) => predicate(item, filterValue));
 }
