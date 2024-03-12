@@ -42,7 +42,7 @@ function getTemplate(args: ArrowBasicStory): string {
 	const checked = args.checked ? ' checked' : '';
 
 	if (args.field === 'radio') {
-		return `<div class="u-displayFlex pr-u-gapM">
+		return `<div class="u-displayFlex pr-u-gap200">
 	<div class="form-field mod-withArrow${s}">
 	  <label class="formLabel" for="IDradioA">Label A</label>
 	  <span class="radioField">

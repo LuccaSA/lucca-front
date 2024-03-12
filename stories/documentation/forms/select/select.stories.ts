@@ -12,7 +12,7 @@ import { Meta, StoryFn, applicationConfig } from '@storybook/angular';
 	imports: [LuSelectInputComponent, LuOptionItemComponent, LuOptionPickerComponent, LuInputDisplayerDirective, FormsModule],
 	template: `
 		<div class="u-displayFlex">
-			<label class="textfield pr-u-marginRightM">
+			<label class="textfield pr-u-marginRight200">
 				<lu-select class="textfield-input" placeholder="Select an item">
 					<ng-container *luDisplayer="let value">{{ value }}</ng-container>
 					<lu-option-picker>
@@ -23,7 +23,7 @@ import { Meta, StoryFn, applicationConfig } from '@storybook/angular';
 				</lu-select>
 				<span class="textfield-label">Select</span>
 			</label>
-			<label class="textfield pr-u-marginRightM">
+			<label class="textfield pr-u-marginRight200">
 				<lu-select class="textfield-input" placeholder="Select an item" [multiple]="true">
 					<ng-container *luDisplayer="let value">{{ value }}</ng-container>
 					<lu-option-picker>
@@ -34,7 +34,7 @@ import { Meta, StoryFn, applicationConfig } from '@storybook/angular';
 				</lu-select>
 				<span class="textfield-label">Multiple Select</span>
 			</label>
-			<label class="textfield pr-u-marginRightM">
+			<label class="textfield pr-u-marginRight200">
 				<lu-select [(ngModel)]="item" class="textfield-input">
 					<ng-container *luDisplayer="let value">{{ value.name }}</ng-container>
 					<lu-option-picker>

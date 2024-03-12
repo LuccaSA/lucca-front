@@ -14,12 +14,12 @@ import { Meta, StoryFn, applicationConfig } from '@storybook/angular';
 			<span class="textfield-label">Api V3 Select</span>
 		</label>
 
-		<label class="textfield pr-u-marginTopL">
+		<label class="textfield pr-u-marginTop300">
 			<lu-api-select class="textfield-input" standard="v4" [api]="apiV4" sort="job.name,level.position"> </lu-api-select>
 			<span class="textfield-label">Api V4 Select</span>
 		</label>
 
-		<label class="textfield pr-u-marginTopL">
+		<label class="textfield pr-u-marginTop300">
 			<lu-api-select class="textfield-input" [disabled]="true" standard="v4" [api]="apiV4" sort="job.name,level.position"> </lu-api-select>
 			<span class="textfield-label">Api V4 Select</span>
 		</label>
@@ -53,7 +53,7 @@ import { LuApiSelectInputComponent } from '@lucca-front/ng/api';
 			<span class="textfield-label">Api V3 Select</span>
 		</label>
 
-		<label class="textfield pr-u-marginTopL">
+		<label class="textfield pr-u-marginTop300">
 			<lu-api-select class="textfield-input"
 				standard="v4"
 				[api]="apiV4"

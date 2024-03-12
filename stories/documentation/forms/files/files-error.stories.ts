@@ -17,7 +17,7 @@ function getTemplate(args: FilesErrorStory): string {
 			<span class="file-titleName">
 				<span class="file-title pr-u-marginBottom0">File not supported</span>
 				<span class="file-name">filename.xls</span>
-				<span class="file-formats pr-u-marginTopXS">Supported file formats: .xls, .xlsx .csv</span>
+				<span class="file-formats pr-u-marginTop100">Supported file formats: .xls, .xlsx .csv</span>
 			</span>
 			<span class="file-or">It’s the wrong file?</span>
 			<span class="file-button button mod-outlined">Select another file</span>

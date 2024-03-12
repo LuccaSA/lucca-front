@@ -7,7 +7,7 @@ export default {
 } as Meta;
 
 function getTemplate(args: SkeletonSquareStory): string {
-	return `<div class="skeleton is-loading u-displayFlex pr-u-gapXS u-alignItemsCenter">
+	return `<div class="skeleton is-loading u-displayFlex pr-u-gap100 u-alignItemsCenter">
 	<span class="skeleton-item mod-square mod-XS"></span>
 	<span class="skeleton-item mod-square mod-S"></span>
 	<span class="skeleton-item mod-square"></span>
