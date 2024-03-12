@@ -90,3 +90,13 @@ export class FilterLegumesPipe implements PipeTransform {
 		return clue ? legumes.filter((legume) => legume.name.toLowerCase().includes(clue.toLowerCase())) : legumes;
 	}
 }
+
+@Pipe({ name: 'sortLegumes', standalone: true })
+export class SortLegumesPipe implements PipeTransform {
+	transform(legumes: ILegume[], by: Array<((l: ILegume) => string) | keyof ILegume>): ILegume[] {
+		return legumes
+			.map((legume) => ({ legume, key: by.map((key) => (typeof key === 'string' ? legume[key] : key(legume))).join('') }))
+			.sort((a, b) => a.key.localeCompare(b.key))
+			.map((a) => a.legume);
+	}
+}
