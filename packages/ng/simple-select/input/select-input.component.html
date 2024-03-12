@@ -7,7 +7,7 @@
 	[attr.aria-expanded]="isPanelOpen"
 	[attr.aria-controls]="ariaControls"
 	placeholder="{{inputPlaceholder}}"
-	[(ngModel)]="clue"
+	[ngModel]="clue"
 	(ngModelChange)="clueChanged($event)"
 	[readonly]="!searchable"
 	[disabled]="disabled"
