@@ -14,3 +14,11 @@
 		background-color: inherit;
 	}
 }
+
+// TODO @Jérémie: Move elsewhere
+.optionItem-group {
+	color: var(--palettes-neutral-600) !important;
+	font-size: var(--sizes-S-fontSize);
+	line-height: var(--sizes-S-lineHeight);
+	padding: var(--components-options-item-padding-vertical) var(--components-options-item-padding-horizontal);
+}

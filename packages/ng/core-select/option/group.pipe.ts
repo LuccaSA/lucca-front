@@ -1,3 +1,4 @@
+import { Pipe, PipeTransform } from '@angular/core';
 import { LuOptionGroup } from '../select.model';
 
 /**
@@ -28,4 +29,16 @@ export function generateGroups<T, TGroup>(options: T[], selector: (option: T) =>
 	}
 
 	return groups;
+}
+
+@Pipe({
+	name: 'luOptionGroup',
+	standalone: true,
+})
+export class LuOptionGroupPipe<T, TGroup> implements PipeTransform {
+	public transform(options: T[], selector: (option: T) => TGroup): LuOptionGroup<T, TGroup>[];
+	public transform(options: T, selector: (option: T) => TGroup): LuOptionGroup<T, TGroup>;
+	public transform(options: T[] | T, selector: (option: T) => TGroup): LuOptionGroup<T, TGroup>[] | LuOptionGroup<T, TGroup> {
+		return Array.isArray(options) ? generateGroups(options, selector) : generateGroups([options], selector)[0];
+	}
 }
