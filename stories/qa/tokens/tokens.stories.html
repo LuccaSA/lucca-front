@@ -51,42 +51,58 @@
 
 
 <style>
-.demo-block {
-	display: flex;
-	background: var(--palettes-neutral-25);
-	padding: var(--pr-t-spacings-M);
-	gap: var(--pr-t-spacings-XS);
-}
+	.demo-block {
+		display: flex;
+		background: var(--palettes-neutral-25);
+		padding: var(--spacings-S);
+		gap: var(--spacings-XS);
+	}
 
-.demo-surface {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	height: 5rem;
-	width: 5rem;
-	border-radius: var(--commons-borderRadius-L);
-}
+	.demo-surface,
+	.demo-surfaceWrapper {
+		position: relative;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		height: 5rem;
+		width: 5rem;
+		border-radius: var(--commons-borderRadius-L);
+	}
 
-.demo-spacings {
-	display: inline-flex;
-	align-items: flex-start;
-	gap: 1rem;
-}
+	.demo-surface {
+		z-index: 1;
+	}
 
-.demo-spacing {
-	background: var(--pr-t-elevation-surface-sunken);
-	border-radius: var(--commons-borderRadius-M);
-}
+	.demo-surface-under {
+		width: 2rem;
+		height: 2rem;
+		position: absolute;
+		top: -1rem;
+		right: -1rem;
+		background: var(--colors-white-color);
+		border-radius: var(--commons-borderRadius-full);
+	}
 
-.demo-spacing div {
-	background: var(--pr-t-elevation-surface-raised);
-	width: 2.5rem;
-	height: 2.5rem;
-	display: inline-flex;
-	align-items: center;
-	justify-content: center;
-	border-radius: var(--commons-borderRadius-M);
-}
+	.demo-spacings {
+		display: inline-flex;
+		align-items: flex-start;
+		gap: 1rem;
+	}
+
+	.demo-spacing {
+		background: var(--pr-t-elevation-surface-sunken);
+		border-radius: var(--commons-borderRadius-M);
+	}
+
+	.demo-spacing div {
+		background: var(--pr-t-elevation-surface-raised);
+		width: 2.5rem;
+		height: 2.5rem;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		border-radius: var(--commons-borderRadius-M);
+	}
 </style>
 
 <!-- To tell the ui-diff tool that the page has finished rendering -->
