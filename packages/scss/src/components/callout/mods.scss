@@ -3,7 +3,7 @@
 @mixin S {
 	font-size: var(--sizes-S-fontSize);
 	line-height: var(--sizes-S-lineHeight);
-	gap: var(--pr-t-spacings-S);
+	gap: var(--pr-t-spacings-150);
 
 	.callout-icon {
 		line-height: var(--sizes-S-lineHeight);
@@ -16,6 +16,6 @@
 
 @mixin tiny {
 	display: inline-flex;
-	gap: var(--pr-t-spacings-XXS);
-	padding: var(--pr-t-spacings-XS);
+	gap: var(--pr-t-spacings-75);
+	padding: var(--pr-t-spacings-100);
 }

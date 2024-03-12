@@ -1,5 +1,5 @@
 @mixin vars {
-	--components-radioButtons-padding: var(--pr-t-spacings-XS) var(--pr-t-spacings-M);
+	--components-radioButtons-padding: var(--pr-t-spacings-100) var(--pr-t-spacings-200);
 	--components-radioButtons-font-size: var(--sizes-M-fontSize);
 	--components-radioButtons-line-height: var(--sizes-M-lineHeight); 
 }

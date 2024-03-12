@@ -4,8 +4,8 @@
 @mixin S {
   --components-simpleSelect-fontSize: var(--sizes-S-fontSize);
   --components-simpleSelect-lineHeight: var(--sizes-S-lineHeight);
-  --components-simpleSelect-padding: var(--pr-t-spacings-XXS);
-  --components-simpleSelect-gap: var(--pr-t-spacings-XXS);
+  --components-simpleSelect-padding: var(--pr-t-spacings-75);
+  --components-simpleSelect-gap: var(--pr-t-spacings-75);
 
   .simpleSelect-arrow {
     @include icon.S;
@@ -19,8 +19,8 @@
 @mixin XS {
   --components-simpleSelect-fontSize: var(--sizes-XS-fontSize);
   --components-simpleSelect-lineHeight: var(--sizes-XS-lineHeight);
-  --components-simpleSelect-padding: var(--pr-t-spacings-XXXS);
-  --components-simpleSelect-gap: var(--pr-t-spacings-XXXS);
+  --components-simpleSelect-padding: var(--pr-t-spacings-50);
+  --components-simpleSelect-gap: var(--pr-t-spacings-50);
 
   .simpleSelect-arrow {
     @include icon.XS;

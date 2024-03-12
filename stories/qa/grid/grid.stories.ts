@@ -5,7 +5,7 @@ import { Meta, StoryFn } from '@storybook/angular';
 	standalone: true,
 	selector: 'grid-stories',
 	templateUrl: './grid.stories.html',
-	styles: ['.grid-demo { background: #eee; border-radius: 3px; min-height: 2.7rem; padding: .6rem var(--pr-t-spacings-M);} .grid + .grid { margin-top: var(--pr-t-spacings-M) }'],
+	styles: ['.grid-demo { background: #eee; border-radius: 3px; min-height: 2.7rem; padding: .6rem var(--pr-t-spacings-200);} .grid + .grid { margin-top: var(--pr-t-spacings-200) }'],
 })
 class GridStory {}
 

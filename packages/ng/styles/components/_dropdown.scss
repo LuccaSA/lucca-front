@@ -7,7 +7,7 @@
 }
 
 .lu-dropdown-content {
-	margin: calc(var(--pr-t-spacings-XS) * -1);
+	margin: calc(var(--pr-t-spacings-100) * -1);
 	padding: 0;
 	border-radius: var(--commons-borderRadius-M);
 	max-width: 90vw;
@@ -18,14 +18,14 @@
 
 .lu-dropdown-options {
 	list-style-type: none;
-	padding: var(--pr-t-spacings-XS) 0;
+	padding: var(--pr-t-spacings-100) 0;
 	margin: 0;
 	min-width: var(--components-dropdown-min-width);
 	max-width: var(--components-dropdown-max-width);
 }
 
 .lu-dropdown-options-item {
-	padding: 0 var(--pr-t-spacings-XS);
+	padding: 0 var(--pr-t-spacings-100);
 }
 
 .lu-dropdown-options-item-action {
@@ -36,9 +36,9 @@
 	color: currentColor;
 	cursor: pointer;
 	display: flex;
-	gap: var(--pr-t-spacings-XS);
+	gap: var(--pr-t-spacings-100);
 	line-height: var(--sizes-M-lineHeight);
-	padding: var(--pr-t-spacings-XS) var(--pr-t-spacings-XS);
+	padding: var(--pr-t-spacings-100) var(--pr-t-spacings-100);
 	text-align: left;
 	transition: background-color var(--commons-animations-durations-standard);
 	text-decoration: none;

@@ -17,8 +17,8 @@
 	@at-root ($atRoot) {
 		.calloutDisclosure-summary {
 			display: flex;
-			gap: var(--pr-t-spacings-S);
-			padding: var(--pr-t-spacings-XS) var(--components-calloutDisclosure-paddingHorizontal);
+			gap: var(--pr-t-spacings-150);
+			padding: var(--pr-t-spacings-100) var(--components-calloutDisclosure-paddingHorizontal);
 			border-radius: var(--commons-borderRadius-L);
 			transition: background-color var(--commons-animations-durations-fast) ease;
 			cursor: pointer;
@@ -54,7 +54,7 @@
 
 		.calloutDisclosure-details {
 			margin: 0 calc(var(--components-calloutDisclosure-paddingHorizontal) + 2.25rem);
-			padding: var(--pr-t-spacings-XS) 0 var(--pr-t-spacings-M);
+			padding: var(--pr-t-spacings-100) 0 var(--pr-t-spacings-200);
 			box-shadow: 0 -1px 0 0 var(--palettes-200, var(--palettes-neutral-200));
 		}
 	}

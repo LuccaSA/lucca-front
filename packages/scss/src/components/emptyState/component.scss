@@ -2,7 +2,7 @@
 	display: flex;
 	flex-direction: column;
 	flex-grow: 1;
-	padding: var(--pr-t-spacings-M);
+	padding: var(--pr-t-spacings-200);
 
 	@at-root ($atRoot) {
 		.emptyState-container {
@@ -18,8 +18,8 @@
 		.emptyState-content {
 			border-radius: var(--commons-borderRadius-L);
 			max-width: 100%;
-			padding: var(--pr-t-spacings-XXXS);
-			width: calc(25rem + var(--pr-t-spacings-XXXS) * 2); // content max width
+			padding: var(--pr-t-spacings-50);
+			width: calc(25rem + var(--pr-t-spacings-50) * 2); // content max width
 		}
 
 		.emptyState-content-icon {
@@ -28,7 +28,7 @@
 		}
 
 		.emptyState-content-text {
-			padding: 0 var(--pr-t-spacings-XXXS);
+			padding: 0 var(--pr-t-spacings-50);
 		}
 
 		.emptyState-content-heading {
@@ -38,7 +38,7 @@
 		.emptyState-actions {
 			display: flex;
 			flex-wrap: wrap;
-			gap: var(--pr-t-spacings-XS);
+			gap: var(--pr-t-spacings-100);
 
 			.button {
 				margin: 0;

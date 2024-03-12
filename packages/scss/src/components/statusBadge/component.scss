@@ -4,9 +4,9 @@
 	border-radius: var(--commons-borderRadius-L);
 	display: inline-flex;
 	font-size: var(--components-statusBadge-fontSize);
-	gap: var(--pr-t-spacings-XXXS);
+	gap: var(--pr-t-spacings-50);
 	line-height: var(--components-statusBadge-lineHeight);
-	padding: calc(var(--pr-t-spacings-XXXS) / 2) var(--pr-t-spacings-XS) calc(var(--pr-t-spacings-XXXS) / 2) var(--pr-t-spacings-XXS);
+	padding: calc(var(--pr-t-spacings-50) / 2) var(--pr-t-spacings-100) calc(var(--pr-t-spacings-50) / 2) var(--pr-t-spacings-75);
 	white-space: nowrap;
 	font-weight: normal;
 

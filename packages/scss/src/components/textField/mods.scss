@@ -4,7 +4,7 @@
 @mixin S {
 	--component-textField-fontSize: var(--sizes-S-fontSize);
 	--component-textField-lineHeight: var(--sizes-S-lineHeight);
-  --component-textField-padding: var(--pr-t-spacings-XXS);
+  --component-textField-padding: var(--pr-t-spacings-75);
 
 	.textField-input-affix-clear {
 		@include clear.S;
@@ -18,7 +18,7 @@
 @mixin XS {
 	--component-textField-fontSize: var(--sizes-XS-fontSize);
 	--component-textField-lineHeight: var(--sizes-XS-lineHeight);
-  --component-textField-padding: var(--pr-t-spacings-XXXS);
+  --component-textField-padding: var(--pr-t-spacings-50);
 
 	.textField-prefix, .textField-suffix {
 		@include icon.XS;

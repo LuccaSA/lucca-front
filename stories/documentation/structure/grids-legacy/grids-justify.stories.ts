@@ -40,8 +40,8 @@ const Template: StoryFn<GridsLegacyJustifyStory> = (args) => ({
 		`
 		.grid-demo {
 			background-color: var(--palettes-neutral-200);
-			margin-bottom: var(--pr-t-spacings-M);
-			padding: var(--pr-t-spacings-M);
+			margin-bottom: var(--pr-t-spacings-200);
+			padding: var(--pr-t-spacings-200);
 			border-radius: var(--commons-borderRadius-full);
 		}`,
 	],

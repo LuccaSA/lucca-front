@@ -8,10 +8,10 @@
 	color: var(--palettes-text, var(--palettes-neutral-800));
 	display: inline-flex;
 	align-items: center;
-	gap: var(--pr-t-spacings-XS);
+	gap: var(--pr-t-spacings-100);
 	position: relative;
 	vertical-align: middle;
-	padding: calc(var(--pr-t-spacings-XXXS) / 2) var(--pr-t-spacings-XS);
+	padding: calc(var(--pr-t-spacings-50) / 2) var(--pr-t-spacings-100);
 	font-size: var(--components-chip-fontSize);
 	line-height: var(--components-chip-lineHeight);
 

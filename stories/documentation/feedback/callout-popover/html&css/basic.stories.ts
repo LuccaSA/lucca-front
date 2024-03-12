@@ -9,7 +9,7 @@ export default {
 					display: flex;
 					flex-direction: column;
 					align-items: flex-start;
-					gap: var(--pr-t-spacings-XXXS);
+					gap: var(--pr-t-spacings-50);
 				}
 			`],
 			template: `<button type="button" class="calloutPopover"><span aria-hidden="true" class="calloutPopover-icon lucca-icon icon-signInfo"></span>1</button>

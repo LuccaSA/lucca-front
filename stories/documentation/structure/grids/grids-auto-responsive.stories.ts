@@ -28,7 +28,7 @@ const Template: Story<GridsPositionStory> = (args: GridsPositionStory) => ({
 		`
 		.demo {
 			background-color: var(--colors-white-color);
-			padding: var(--pr-t-spacings-M);
+			padding: var(--pr-t-spacings-200);
 			border-radius: 1rem;
 			text-align: center;
 			height: 100%;
@@ -38,7 +38,7 @@ const Template: Story<GridsPositionStory> = (args: GridsPositionStory) => ({
 		}
 
 		.grid + .grid {
-			margin-top: var(--pr-t-spacings-XL);
+			margin-top: var(--pr-t-spacings-400);
 		}
 		`,
 	],

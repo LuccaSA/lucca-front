@@ -1,11 +1,11 @@
 @mixin component($atRoot: 'without: rule') {
 	display: flex;
 	flex-wrap: wrap;
-	padding: var(--pr-t-spacings-XS) var(--pr-t-spacings-S);
+	padding: var(--pr-t-spacings-100) var(--pr-t-spacings-150);
 	justify-content: flex-end;
 
 	> *:not(:last-child) {
-		margin-right: var(--pr-t-spacings-XS);
+		margin-right: var(--pr-t-spacings-100);
 	}
 
 	@at-root ($atRoot) {
@@ -18,7 +18,7 @@
 		}
 
 		.pagination-count-separator {
-			margin: 0 var(--pr-t-spacings-XXXS);
+			margin: 0 var(--pr-t-spacings-50);
 		}
 
 		.pagination-navigation {
@@ -28,12 +28,12 @@
 			margin-bottom: 0;
 
 			> *:not(:last-child) {
-				margin-right: var(--pr-t-spacings-XXXS);
+				margin-right: var(--pr-t-spacings-50);
 			}
 		}
 
 		.pagination-navigation-item {
-			margin-right: var(--pr-t-spacings-XXXS);
+			margin-right: var(--pr-t-spacings-50);
 		}
 	}
 }

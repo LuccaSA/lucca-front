@@ -95,9 +95,9 @@
 		&:after {
 			content: '';
 			position: absolute;
-			bottom: var(--pr-t-spacings-XXXS);
-			left: var(--pr-t-spacings-XS);
-			right: var(--pr-t-spacings-XS);
+			bottom: var(--pr-t-spacings-50);
+			left: var(--pr-t-spacings-100);
+			right: var(--pr-t-spacings-100);
 			height: 2px;
 			background: var(--palettes-product-700);
 			z-index: 1;

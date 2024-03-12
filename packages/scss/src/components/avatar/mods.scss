@@ -10,7 +10,7 @@
 }
 
 @mixin S {
-	--components-avatarWrapper-overlap: var(--pr-t-spacings-XXXS);
+	--components-avatarWrapper-overlap: var(--pr-t-spacings-50);
 
 	--components-avatar-size: 2rem;
 	--components-avatar-fontSize: var(--sizes-S-fontSize);
@@ -20,5 +20,5 @@
 	--components-avatar-size: 1.5rem;
 	--components-avatar-fontSize: var(--sizes-XS-fontSize);
 	--components-avatar-border: 1px;
-	--components-avatarWrapper-overlap: var(--pr-t-spacings-XXXS);
+	--components-avatarWrapper-overlap: var(--pr-t-spacings-50);
 }

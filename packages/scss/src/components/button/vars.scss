@@ -1,8 +1,8 @@
 @mixin vars {
 	--components-button-font-size: var(--sizes-M-fontSize);
 	--components-button-line-height: var(--sizes-M-lineHeight);
-	--components-button-padding: var(--pr-t-spacings-XS) var(--pr-t-spacings-M);
-	--components-button-gap: var(--pr-t-spacings-XS);
+	--components-button-padding: var(--pr-t-spacings-100) var(--pr-t-spacings-200);
+	--components-button-gap: var(--pr-t-spacings-100);
 	--components-button-opacity: 1;
 	--components-button-cursor: pointer;
 	--components-button-pointerEvents: auto;

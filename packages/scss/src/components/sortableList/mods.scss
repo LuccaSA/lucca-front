@@ -10,7 +10,7 @@
 }
 
 @mixin S {
-	--components-sortableList-padding: var(--pr-t-spacings-XXS) var(--pr-t-spacings-XS);
+	--components-sortableList-padding: var(--pr-t-spacings-75) var(--pr-t-spacings-100);
 	--components-sortableList-handler-size: var(--sizes-S-lineHeight);
 	--components-sortableList-description-fontSize: var(--sizes-S-fontSize);
 	--components-sortableList-description-lineHeight: var(--sizes-S-lineHeight);

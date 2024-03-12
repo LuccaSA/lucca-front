@@ -5,7 +5,7 @@
 @mixin S {
   font-size: var(--sizes-S-fontSize);
   line-height: var(--sizes-S-lineHeight);
-  padding: var(--pr-t-spacings-XXS);
+  padding: var(--pr-t-spacings-75);
 
   .calloutPopover-icon {
     @include icon.S;
@@ -15,8 +15,8 @@
 @mixin XS {
   font-size: var(--sizes-XS-fontSize);
   line-height: var(--sizes-XS-lineHeight);
-  padding: 0.125rem var(--pr-t-spacings-XXXS);
-  gap: var(--pr-t-spacings-XXXS);
+  padding: 0.125rem var(--pr-t-spacings-50);
+  gap: var(--pr-t-spacings-50);
   border-radius: var(--commons-borderRadius-M);
 
   .calloutPopover-icon {

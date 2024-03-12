@@ -14,7 +14,7 @@
 					&::before {
 						@include icon.generate('format_corner_up_left');
 
-						padding-right: var(--pr-t-spacings-XXXS);
+						padding-right: var(--pr-t-spacings-50);
 						font-size: var(--sizes-XS-lineHeight);
 						line-height: var(--sizes-S-lineHeight);
 						text-decoration: none;

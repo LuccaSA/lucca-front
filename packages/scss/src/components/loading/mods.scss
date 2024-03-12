@@ -15,8 +15,8 @@
 
 @mixin block {
 	display: block;
-	margin-bottom: var(--pr-t-spacings-XL);
-	padding: var(--pr-t-spacings-XXL) 0 0;
+	margin-bottom: var(--pr-t-spacings-400);
+	padding: var(--pr-t-spacings-600) 0 0;
 	text-align: center;
 	width: 100%;
 
@@ -42,7 +42,7 @@
 	text-align: center;
 	position: relative;
 	padding: 8rem 0 0;
-	margin: 0 var(--pr-t-spacings-XL) var(--pr-t-spacings-XL);
+	margin: 0 var(--pr-t-spacings-400) var(--pr-t-spacings-400);
 
 	&::after {
 		margin: auto;
@@ -58,7 +58,7 @@
 	text-align: center;
 	position: relative;
 	padding: 8rem 0 0;
-	margin: 0 var(--pr-t-spacings-XL) var(--pr-t-spacings-XL);
+	margin: 0 var(--pr-t-spacings-400) var(--pr-t-spacings-400);
 	top: 35vh;
 
 	&::after {

@@ -13,12 +13,12 @@
 	.navSide-item-link {
 		color: var(--components-navSide-compact-palette-text);
 		font-size: var(--components-navSide-compact-font-size);
-		padding: var(--pr-t-spacings-S) var(--pr-t-spacings-XS);
+		padding: var(--pr-t-spacings-150) var(--pr-t-spacings-100);
 		flex-direction: column;
 		justify-content: center;
 		position: relative;
 		text-align: center;
-		row-gap: var(--pr-t-spacings-XXXS);
+		row-gap: var(--pr-t-spacings-50);
 	}
 
 	.navSide-item-arrow,
@@ -34,7 +34,7 @@
 		// deprecated
 		background-color: var(--components-navSide-compact-palette-alert-color);
 		color: var(--components-navSide-compact-palette-alert-text);
-		padding: 0 var(--pr-t-spacings-XS);
+		padding: 0 var(--pr-t-spacings-100);
 		margin: auto;
 		position: relative;
 	}
@@ -49,7 +49,7 @@
 
 		&::after {
 			margin-left: 0;
-			margin-top: var(--pr-t-spacings-S);
+			margin-top: var(--pr-t-spacings-150);
 			width: 100%;
 		}
 	}

@@ -147,7 +147,7 @@
 
 			font-size: var(--sizes-M-lineHeight);
 			font-weight: 400;
-			margin-right: var(--pr-t-spacings-XS);
+			margin-right: var(--pr-t-spacings-100);
 			transition-duration: var(--commons-animations-durations-fast);
 			transition-property: transform;
 			vertical-align: top;
@@ -168,7 +168,7 @@
 	.table-body-row-cell,
 	.table-foot-row-cell {
 		&:first-child {
-			padding-left: var(--pr-t-spacings-XXL);
+			padding-left: var(--pr-t-spacings-600);
 		}
 	}
 }
@@ -180,7 +180,7 @@
 			top: 0;
 			bottom: 0;
 			left: 0;
-			width: var(--pr-t-spacings-XL);
+			width: var(--pr-t-spacings-400);
 			position: absolute;
 			cursor: move;
 
@@ -201,7 +201,7 @@
 	.table-body-row-cell,
 	.table-foot-row-cell {
 		&:first-child {
-			padding-left: var(--pr-t-spacings-XL);
+			padding-left: var(--pr-t-spacings-400);
 			position: relative;
 		}
 	}
@@ -212,8 +212,8 @@
 	.table-body-row-cell,
 	.table-foot-row-cell {
 		&:first-child {
-			padding-right: var(--pr-t-spacings-XS);
-			width: var(--pr-t-spacings-M);
+			padding-right: var(--pr-t-spacings-100);
+			width: var(--pr-t-spacings-200);
 		}
 	}
 
@@ -241,7 +241,7 @@
 @mixin twoLines($atRoot: 'without: rule') {
 	@at-root ($atRoot) {
 		.table-head-row-cell-secondLine {
-			margin-top: var(--pr-t-spacings-XXXS);
+			margin-top: var(--pr-t-spacings-50);
 			display: block;
 			font-weight: 400;
 		}
@@ -252,13 +252,13 @@
 	}
 
 	.table-head-row-cell-wrapper {
-		max-width: calc(100% - var(--pr-t-spacings-XL));
+		max-width: calc(100% - var(--pr-t-spacings-400));
 		display: inline-block;
 		vertical-align: top;
 	}
 
 	.table-head-row-cell-secondLine {
-		margin-top: var(--pr-t-spacings-XXXS);
+		margin-top: var(--pr-t-spacings-50);
 		display: block;
 		font-weight: 400;
 	}
@@ -266,12 +266,12 @@
 
 @mixin avatar {
 	padding-right: 0;
-	width: var(--pr-t-spacings-XL);
+	width: var(--pr-t-spacings-400);
 }
 
 @mixin actions {
 	padding: 0.3rem;
-	padding-right: var(--pr-t-spacings-XS);
+	padding-right: var(--pr-t-spacings-100);
 	padding-left: 0;
 	transition-duration: var(--commons-animations-durations-fast);
 	transition-property: opacity;

@@ -1,6 +1,6 @@
 @mixin block {
 	display: block;
 	white-space: pre-wrap;
-	margin: var(--pr-t-spacings-XS) 0;
-	padding: var(--pr-t-spacings-M);
+	margin: var(--pr-t-spacings-100) 0;
+	padding: var(--pr-t-spacings-200);
 }

@@ -1,5 +1,5 @@
 @mixin vars {
-	--components-list-margin-bottom: var(--pr-t-spacings-M);
-	--components-list-padding: var(--pr-t-spacings-M) var(--pr-t-spacings-L);
+	--components-list-margin-bottom: var(--pr-t-spacings-200);
+	--components-list-padding: var(--pr-t-spacings-200) var(--pr-t-spacings-300);
 	--components-list-hover-background: var(--palettes-product-50);
 }

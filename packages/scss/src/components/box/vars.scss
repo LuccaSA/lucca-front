@@ -1,8 +1,8 @@
 @mixin vars {
 	--components-box-background: var(--pr-t-elevation-surface-raised);
 	--components-box-border-radius: var(--commons-borderRadius-L);
-	--components-box-margin: 0 0 var(--pr-t-spacings-M);
-	--components-box-padding: var(--pr-t-spacings-L);
+	--components-box-margin: 0 0 var(--pr-t-spacings-200);
+	--components-box-padding: var(--pr-t-spacings-300);
 	--components-box-toggle-arrow-size: 0.8rem;
 	--components-box-toggle-arrow-left: 2.5rem;
 }

@@ -1,7 +1,7 @@
 @use '@lucca-front/scss/src/commons/utils/reset';
 
 @mixin component($atRoot: 'without: rule') {
-	column-gap: var(--pr-t-spacings-XL);
+	column-gap: var(--pr-t-spacings-400);
 	align-items: center;
 	display: flex;
 	position: relative;
@@ -33,7 +33,7 @@
 			@include reset.list;
 
 			align-items: flex-end;
-			column-gap: var(--pr-t-spacings-XL);
+			column-gap: var(--pr-t-spacings-400);
 			display: flex;
 			flex-wrap: wrap;
 		}
@@ -47,7 +47,7 @@
 			display: inline-flex;
 			align-items: center;
 			text-align: center;
-			gap: var(--pr-t-spacings-XS);
+			gap: var(--pr-t-spacings-100);
 			transition-duration: var(--commons-animations-durations-fast);
 			transition-property: color;
 			position: relative;

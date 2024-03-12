@@ -22,8 +22,8 @@ const Template: StoryFn<ShadowsStory> = (args) => ({
 		`
 		div {
 			background-color: var(--colors-white-color);
-			margin-bottom: var(--pr-t-spacings-M);
-			padding: var(--pr-t-spacings-XS);
+			margin-bottom: var(--pr-t-spacings-200);
+			padding: var(--pr-t-spacings-100);
 			width: 20rem;
 		}`,
 	],

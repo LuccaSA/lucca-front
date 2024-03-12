@@ -6,8 +6,8 @@ import { Meta, moduleMetadata, StoryFn } from '@storybook/angular';
 	selector: 'forms-textfield-legacy-stories',
 	templateUrl: './textfield-legacy.stories.html',
 	styles: [
-		'.demo-white { background: #F5F5F5; display: inline-block; padding: var(--pr-t-spacings-XS) var(--pr-t-spacings-M); border-radius: 3px;}',
-		'.demo-invert { background: #444; display: inline-block; padding: var(--pr-t-spacings-XS) var(--pr-t-spacings-M); margin: 0 var(--pr-t-spacings-XS); border-radius: 3px; }',
+		'.demo-white { background: #F5F5F5; display: inline-block; padding: var(--pr-t-spacings-100) var(--pr-t-spacings-200); border-radius: 3px;}',
+		'.demo-invert { background: #444; display: inline-block; padding: var(--pr-t-spacings-100) var(--pr-t-spacings-200); margin: 0 var(--pr-t-spacings-100); border-radius: 3px; }',
 	],
 })
 class TextfieldLegacyStory {}

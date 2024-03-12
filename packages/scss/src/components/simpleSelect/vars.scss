@@ -1,8 +1,8 @@
 @mixin vars {
   --components-simpleSelect-fontSize: var(--sizes-M-fontSize);
   --components-simpleSelect-lineHeight: var(--sizes-M-lineHeight);
-  --components-simpleSelect-padding: var(--pr-t-spacings-XS);
-  --components-simpleSelect-gap: var(--pr-t-spacings-XS);
+  --components-simpleSelect-padding: var(--pr-t-spacings-100);
+  --components-simpleSelect-gap: var(--pr-t-spacings-100);
   --components-simpleSelect-background: var(--colors-white-color);
   --components-simpleSelect-value-color: var(--palettes-neutral-800);
   --components-simpleSelect-border-color: var(--palettes-neutral-300);

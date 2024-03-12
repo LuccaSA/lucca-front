@@ -12,7 +12,7 @@
 @mixin compact {
 	align-items: center;
 	flex-direction: row;
-	margin-bottom: var(--pr-t-spacings-M);
+	margin-bottom: var(--pr-t-spacings-200);
 	width: calc(
 		var(--components-field-sizes-default) + var(--components-field-compact-label-right-margin) +
 			var(--components-field-compact-label-sizes-default)
@@ -39,7 +39,7 @@
 		top: 0;
 		left: 100%;
 		width: 100%;
-		margin: 0 0 0 var(--pr-t-spacings-M);
+		margin: 0 0 0 var(--pr-t-spacings-200);
 
 		&.mod-helper {
 			padding-left: calc(var(--components-field-compact-label-sizes-default) + var(--components-field-compact-label-right-margin));
@@ -59,7 +59,7 @@
 
 	.radio,
 	.checkbox {
-		margin-right: var(--pr-t-spacings-L);
+		margin-right: var(--pr-t-spacings-300);
 	}
 }
 

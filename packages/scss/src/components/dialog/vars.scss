@@ -2,14 +2,14 @@
 	--components-dialog-size: 40rem;
 	--components-dialog-width: var(--components-dialog-size);
 	--components-dialog-height: fit-content;
-	--components-dialog-maxWidth: calc(100vw - (var(--pr-t-spacings-M) * 2));
-	--components-dialog-maxHeight: calc(100dvh - (var(--pr-t-spacings-M) * 2));
+	--components-dialog-maxWidth: calc(100vw - (var(--pr-t-spacings-200) * 2));
+	--components-dialog-maxHeight: calc(100dvh - (var(--pr-t-spacings-200) * 2));
 	--components-dialog-borderRadius: var(--commons-borderRadius-L);
 	--components-dialog-inset: 0;
 	--components-dialog-animationOpening: scaleIn;
 	--components-dialog-insideHeaderAreas: 'container container close';
 	--components-dialog-insideHeaderTitleAlign: left;
-	--components-dialog-insideHeaderTitlePadding: calc(var(--pr-t-spacings-XXXS) / 2) 0;
+	--components-dialog-insideHeaderTitlePadding: calc(var(--pr-t-spacings-50) / 2) 0;
 	--components-dialog-insideHeaderButtonDisplay: flex;
 	--components-dialog-insideHeaderLinkDisplay: none;
 	--components-dialog-insideHeaderColumns: auto 1fr;
