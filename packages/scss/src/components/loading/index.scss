@@ -12,16 +12,20 @@
 		@include block;
 	}
 
-	&.mod-fullPage {
+	&[class~='mod-fullPage' i] {
 		@include fullPage;
 	}
 
-	&.mod-sidePanel {
-		@include sidePanel;
+	// .mod-dialog is deprecated
+	&.mod-popin,
+	&.mod-dialog {
+		@include popin;
 	}
 
-	&.mod-dialog {
-		@include dialog;
+	// .mod-sidePanel is deprecated
+	&.mod-drawer,
+	&.mod-sidePanel {
+		@include drawer;
 	}
 
 	&.mod-invert {

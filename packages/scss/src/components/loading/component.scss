@@ -3,13 +3,23 @@
 @mixin component {
 	@include loading.spinner();
 
-	min-width: 1.5rem;
-	min-height: 1.5rem;
-	padding-left: var(--spacings-L);
-	display: inline-block;
+	min-height: var(--components-loading-size);
+	display: var(--components-loading-display);
+	margin: var(--components-loading-margin);
+	padding: var(--components-loading-padding);
 	position: relative;
+	transform: var(--components-loading-transform);
+	color: var(--components-loading-color);
+	text-align: center;
+	vertical-align: top;
+
+	&:not(:empty) {
+		--components-loading-padding: 0 0 0 var(--spacings-L);
+	}
 
 	&::after {
-		margin: 0;
+		width: var(--components-loading-size);
+		height: var(--components-loading-size);
+		margin: var(--components-loading-spinnerMargin);
 	}
 }
