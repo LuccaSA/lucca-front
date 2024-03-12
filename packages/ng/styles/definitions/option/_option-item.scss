@@ -18,7 +18,7 @@
 @mixin optionItemStyle {
 	:host {
 		display: block;
-		scroll-margin: var(--spacings-XXS);
+		scroll-margin: var(--pr-t-spacings-XXXS);
 	}
 
 	.optionItem {
