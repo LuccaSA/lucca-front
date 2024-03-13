@@ -43,7 +43,7 @@
 	display: flex;
 	gap: var(--spacings-XS);
 	justify-content: space-between;
-	box-shadow: 0 calc(var(--spacings-XXS) * -1) 0 var(--spacings-XXS) var(--pr-t-elevation-surface-raised); // Mask background options scrolling behind
+	box-shadow:  calc(var(--spacings-XXS) * -0.5) calc(var(--spacings-XXS) * -0.5) 0 2px var(--pr-t-elevation-surface-raised); // Mask background options scrolling behind
 }
 
 .lu-picker-content-add {

@@ -6,8 +6,8 @@
 	(click)="selectOption($event)"
 >
 	<ng-container *luOptionOutlet="optionTpl; value: option" />
-</div>
 
-<div *ngIf="grouping" class="optionItem-group">
-	<ng-container *luPortal="grouping.content; context: { $implicit: option | luOptionGroup:grouping.selector }" />
+	<div *ngIf="grouping" class="optionItem-value-group">
+		<ng-container *luPortal="grouping.content; context: { $implicit: option | luOptionGroup:grouping.selector }" />
+	</div>
 </div>

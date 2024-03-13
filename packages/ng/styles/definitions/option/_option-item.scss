@@ -87,6 +87,12 @@
 		}
 	}
 
+	.optionItem-value-group {
+		color: var(--palettes-neutral-600);
+		font-size: var(--sizes-S-fontSize);
+		line-height: var(--sizes-S-lineHeight);
+	}
+
 	:host-context(.lu-select-value) {
 		.optionItem-value {
 			padding: 0;
