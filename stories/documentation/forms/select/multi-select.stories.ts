@@ -38,7 +38,6 @@ export const Basic = generateStory({
 		class="multiSelect"
 		[placeholder]="placeholder"
 		[clearable]="clearable"
-		[disabled]="disabled"
 		[loading]="loading"
 		[(ngModel)]="selectedLegumes"
 		[options]="legumes | filterLegumes:clue"
@@ -56,7 +55,6 @@ export const Basic = generateStory({
 		},
 		argTypes: {
 			clearable: { control: { type: 'boolean' } },
-			disabled: { control: { type: 'boolean' } },
 			placeholder: { control: { type: 'text' } },
 			maxValuesShown: { control: { type: 'number' } },
 		},
@@ -72,7 +70,6 @@ export const WithMultiDisplayer = generateStory({
 		#selectRef
 		class="multiSelect"
 		[clearable]="clearable"
-		[disabled]="disabled"
 		[loading]="loading"
 		[(ngModel)]="selectedLegumes"
 		placeholder="Placeholder..."
@@ -118,7 +115,6 @@ export const WithDisplayer = generateStory({
 		[options]="legumes | filterLegumes:clue"
 		(clueChange)="clue = $event"
 		[clearable]="clearable"
-		[disabled]="disabled"
 		[loading]="loading"
 		[(ngModel)]="selectedLegumes"
 		[maxValuesShown]="maxValuesShown"
@@ -332,7 +328,6 @@ const meta: Meta<LuMultiSelectInputStoryComponent> = {
 		placeholder: 'Placeholder...',
 		legumes: allLegumes,
 		clearable: true,
-		disabled: false,
 		loading: false,
 		maxValuesShown: 500,
 		selectedLegumes: [],
