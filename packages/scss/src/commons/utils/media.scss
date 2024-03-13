@@ -8,6 +8,9 @@
 	@return math.div($value, 16px) * 1em;
 }
 
+// Range queries have been supported since Safari 16.4. They can therefore be used in theory.
+// However, they only provide a different syntax and penalize some users who don’t have their browser up to date.
+
 // les requêtes simples et multiples
 
 @mixin query($breakpoint, $property: 'width', $max: false, $at: 'media', $name: '') {
