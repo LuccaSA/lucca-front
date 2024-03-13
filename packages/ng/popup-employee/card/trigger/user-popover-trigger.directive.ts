@@ -21,7 +21,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 	standalone: true,
 	exportAs: 'LuUserPopoverTrigger',
 })
-export class LuUserPopoverTriggerDirective extends ALuPopoverTrigger<LuUserPopoverPanelComponent, LuPopoverTarget> implements AfterViewInit, OnDestroy {
+export class LuUserPopoverDirective extends ALuPopoverTrigger<LuUserPopoverPanelComponent, LuPopoverTarget> implements AfterViewInit, OnDestroy {
 	@Input('luUserPopover') public set user(c: ILuUser) {
 		if (this.panel) {
 			this.panel.user = c;

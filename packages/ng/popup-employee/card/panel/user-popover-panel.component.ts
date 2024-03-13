@@ -2,19 +2,7 @@
 
 import { OverlayModule } from '@angular/cdk/overlay';
 import { AsyncPipe, DatePipe, NgClass, NgIf, NgOptimizedImage, NgSwitch, NgSwitchCase, NgTemplateOutlet } from '@angular/common';
-import {
-	ChangeDetectionStrategy,
-	ChangeDetectorRef,
-	Component,
-	EventEmitter,
-	Inject,
-	Input,
-	OnDestroy,
-	Output,
-	TemplateRef,
-	ViewChild,
-	ViewEncapsulation,
-} from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Inject, Input, OnDestroy, Output, TemplateRef, ViewChild, ViewEncapsulation } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { ALuPopoverPanel, luTransformPopover } from '@lucca-front/ng/popover';
 import { ILuUser, LuUserPictureModule } from '@lucca-front/ng/user';
@@ -180,6 +168,4 @@ export class LuUserPopoverPanelComponent extends ALuPopoverPanel implements ILuU
 		//   firstItem.focus();
 		// }
 	}
-
-
 }

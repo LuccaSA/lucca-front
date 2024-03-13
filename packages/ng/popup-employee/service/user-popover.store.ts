@@ -37,8 +37,8 @@ export class LuUserPopoverStore implements ILuUserPopoverStore {
 }
 
 export function cacheImage<T>(accessor: (value: T) => string | undefined): OperatorFunction<T, T> {
-	return function(source: Observable<T>): Observable<T> {
-		return new Observable((subscriber) => {
+	return (source: Observable<T>): Observable<T> =>
+		new Observable((subscriber) => {
 			source.subscribe({
 				next(value) {
 					const imagePath = accessor(value);
@@ -47,14 +47,13 @@ export function cacheImage<T>(accessor: (value: T) => string | undefined): Opera
 					}
 					const img = new Image();
 					img.src = imagePath!;
-					img.onload = function() {
+					img.onload = () => {
 						subscriber.next(value);
 					};
-					img.onerror = function() {
+					img.onerror = () => {
 						subscriber.next(value);
 					};
 				},
 			});
 		});
-	};
 }

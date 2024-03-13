@@ -20,21 +20,21 @@ export class AppModule { }
 
 ## Utilisation
 
-Pour utiliser la UserPopover, il vous suffit d'utiliser la directive `[luEmployeeCard]` et de lui fournir un LuUser
+Pour utiliser la UserPopover, il vous suffit d'utiliser la directive `[luUserPopover]` et de lui fournir un LuUser
 
 ```html
-<div [luEmployeeCard]="user"></div>
-<div [luEmployeeCard]="{id: 1, firstName: 'Brian', lastName: 'Philibert'}"></div>
+<div [luUserPopover]="user"></div>
+<div [luUserPopover]="{id: 1, firstName: 'Brian', lastName: 'Philibert'}"></div>
 ```
 
 ```typescript
-import { LuUserPopoverTriggerDirective } from '@lucca-front/ng/user-popover';
+import { LuUserPopoverDirective } from '@lucca-front/ng/user-popover';
 
 @Composant({
 	...,
   imports: [
 	...
-		LuUserPopoverTriggerDirective,
+		LuUserPopoverDirective,
 	],
 })
 export class MyComponent { }
@@ -45,32 +45,32 @@ export class MyComponent { }
 ### luEmployeeCard
 
 ```html
-<div [luEmployeeCard]="user"></div>
+<div [luUserPopover]="user"></div>
 ```
 
 Permet de fournir un utilisateur à la UserPopover.
 
 
-### luEmployeeCardEnterDelay
+### luUserPopoverEnterDelay
 
 ```html
-<div [luEmployeeCard]="user" [luEmployeeCardEnterDelay]="200"></div>
+<div [luUserPopover]="user" [luUserPopoverEnterDelay]="200"></div>
 ```
 
 Permet de définir le délai avant l'affichage du UserPopover en millisecondes. Par défaut 300
 
-### luEmployeeCardLeaveDelay
+### luUserPopoverLeaveDelay
 
 ```html
-<div [luEmployeeCard]="user" [luEmployeeCardLeaveDelay]="200"></div>
+<div [luUserPopover]="user" [luUserPopoverLeaveDelay]="200"></div>
 ```
 
 Permet de définir le délai avant la disparition du UserPopover en millisecondes. Par défaut 100
 
-### luEmployeeCardDisabled
+### luUserPopoverDisabled
 
 ```html	
-<div [luEmployeeCard]="user" [luEmployeeCardDisabled]="true"></div>
+<div [luUserPopover]="user" [luUserPopoverDisabled]="true"></div>
 ```
 
 Permet de désactiver le UserPopover

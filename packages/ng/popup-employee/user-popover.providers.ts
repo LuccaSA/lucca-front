@@ -16,7 +16,5 @@ export const USER_POPOVER_IS_ACTIVATED = new InjectionToken<Observable<boolean>>
 });
 
 export function provideLuUserPopover() {
-	return makeEnvironmentProviders([
-		importProvidersFrom(OverlayModule),
-	])
+	return makeEnvironmentProviders([importProvidersFrom(OverlayModule)]);
 }
