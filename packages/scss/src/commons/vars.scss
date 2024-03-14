@@ -13,6 +13,7 @@
 	}
 
 	@include core.cssvars('pr-t-spacings', config.$spacings);
+	--pr-t-spacings-auto: auto;
 
 	// VARIABLES
 
@@ -30,6 +31,7 @@
 	@include core.cssvars('breakpoints', config.$breakpoints, '-breakAt');
 	@if (config.$importDeprecatedSpacings) {
 		@include core.cssvars('spacings', config.$spacingsDeprecated);
+		--spacings-auto: auto;
 	}
 
 	@include core.cssvars('commons-elevations-elevation', config.$elevations);

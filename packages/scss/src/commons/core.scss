@@ -36,12 +36,12 @@ $overflow: 'hidden', 'auto', 'visible', 'scroll';
 @mixin spacing($boxModel, $boxDirection, $key, $value, $suffix: '!important', $token: true) {
 	@if $token {
 		.pr-u-#{transform.camelize($boxModel)}#{transform.capitalize($boxDirection)}#{transform.capitalize($key)} {
-			#{$boxModel}#{if($boxDirection == '', '', '-')}#{$boxDirection}: var(--pr-t-spacings-#{transform.capitalize($key)}) #{$suffix};
+			#{$boxModel}#{if($boxDirection == '', '', '-')}#{$boxDirection}: var(--pr-t-spacings-#{$key}) #{$suffix};
 		}
 	}
 	@else {
 		.u-#{transform.camelize($boxModel)}#{transform.capitalize($boxDirection)}#{transform.capitalize($key)} {
-			#{$boxModel}#{if($boxDirection == '', '', '-')}#{$boxDirection}: var(--spacings-#{transform.capitalize($key)}) #{$suffix};
+			#{$boxModel}#{if($boxDirection == '', '', '-')}#{$boxDirection}: var(--spacings-#{$key}) #{$suffix};
 		}
 	}
 }
