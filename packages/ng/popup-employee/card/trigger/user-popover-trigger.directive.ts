@@ -19,7 +19,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 	// eslint-disable-next-line @angular-eslint/directive-selector
 	selector: '[luUserPopover]',
 	standalone: true,
-	exportAs: 'LuUserPopoverTrigger',
+	exportAs: 'LuUserPopoverDirective',
 })
 export class LuUserPopoverDirective extends ALuPopoverTrigger<LuUserPopoverPanelComponent, LuPopoverTarget> implements AfterViewInit, OnDestroy {
 	@Input('luUserPopover') public set user(c: ILuUser) {

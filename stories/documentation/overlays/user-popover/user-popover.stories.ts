@@ -2,7 +2,7 @@ import { OverlayModule } from '@angular/cdk/overlay';
 import { provideHttpClient } from '@angular/common/http';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import {
-	LuUserPopoverTriggerDirective,
+	LuUserPopoverDirective,
 	provideLuUserPopover,
 } from '@lucca-front/ng/popup-employee';
 import { applicationConfig, Meta, StoryFn } from '@storybook/angular';
@@ -15,7 +15,7 @@ import { ILuUser } from '../../../../packages/ng/user/user.model';
 	standalone: true,
 	template: '<div [luUserPopover]="luUserPopover" [luUserPopoverEnterDelay]="luUserPopoverEnterDelay" [luUserPopoverLeaveDelay]="luUserPopoverLeaveDelay" [luUserPopoverDisabled]="luUserPopoverDisabled" >Coucou !</div>',
 	imports: [
-		LuUserPopoverTriggerDirective,
+		LuUserPopoverDirective,
 	],
 })
 class UserPopoverStory {
