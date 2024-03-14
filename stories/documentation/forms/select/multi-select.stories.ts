@@ -1,4 +1,4 @@
-import { CommonModule, I18nPluralPipe } from '@angular/common';
+import { AsyncPipe, CommonModule, I18nPluralPipe } from '@angular/common';
 import { provideHttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { provideAnimations } from '@angular/platform-browser/animations';
@@ -13,6 +13,8 @@ import { Meta, applicationConfig, moduleMetadata } from '@storybook/angular';
 import { HiddenArgType } from 'stories/helpers/common-arg-types';
 import { getStoryGenerator } from 'stories/helpers/stories';
 import { FilterLegumesPipe, ILegume, LuCoreSelectInputStoryComponent, allLegumes, colorNameByColor, coreSelectStory } from './select.utils';
+import { BehaviorSubject, interval, map, of, timer } from 'rxjs';
+import { delay, startWith } from 'rxjs/operators';
 
 type LuMultiSelectInputStoryComponent = LuCoreSelectInputStoryComponent & {
 	selectedLegumes: ILegume[];
@@ -295,6 +297,40 @@ export const GroupBy = generateStory({
 	},
 });
 
+export const testDynamicDisabled = generateStory({
+	name: '[test] Dynamic disabled',
+	description: 'technical test to check dynamic disabled',
+	neededImports: {
+		'@lucca-front/ng/multi-select': ['LuMultiSelectInputComponent'],
+	},
+	template: `
+				<lu-multi-select
+					#selectRef
+					class="multiSelect"
+					[placeholder]="placeholder"
+					[clearable]="clearable"
+					[loading]="loading"
+					[disabled]="dynamicDisabled | async"
+					[(ngModel)]="selectedLegumes"
+					[options]="legumes | filterLegumes:clue"
+					(clueChange)="clue = $event"
+					[maxValuesShown]="maxValuesShown"
+				>
+				</lu-multi-select>
+			`,
+	storyPartial: {
+		args: {
+			selectedLegumes: allLegumes.slice(0, 15),
+			dynamicDisabled: interval(2000).pipe(map(n => !!(n % 2)), startWith(true)),
+		} as any,
+		argTypes: {
+			clearable: { control: { type: 'boolean' } },
+			placeholder: { control: { type: 'text' } },
+			maxValuesShown: { control: { type: 'number' } },
+		},
+	},
+});
+
 const meta: Meta<LuMultiSelectInputStoryComponent> = {
 	title: 'Documentation/Forms/MultiSelect',
 	component: LuMultiSelectInputComponent,
@@ -318,6 +354,7 @@ const meta: Meta<LuMultiSelectInputStoryComponent> = {
 				LuDisabledOptionDirective,
 				LuMultiSelectDisplayerInputDirective,
 				CommonModule,
+				AsyncPipe
 			],
 		}),
 		applicationConfig({
