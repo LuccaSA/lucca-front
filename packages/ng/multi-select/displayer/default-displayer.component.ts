@@ -34,7 +34,7 @@ import { of } from 'rxjs';
 				aria-haspopup="listbox"
 				luInput
 			/>
-			<div *ngFor="let option of displayedOptions$ | async; let index = index" class="multipleSelect-displayer-chip chip" [class.mod-unkillable]="disabled">
+			<div *ngFor="let option of displayedOptions$ | async; let index = index" class="multipleSelect-displayer-chip chip" [class.mod-unkillable]="select.disabled$ | async">
 				<span class="multipleSelect-displayer-chip-value"><ng-container *luOptionOutlet="select.valueTpl || select.optionTpl; value: option"></ng-container></span>
 				<button *ngIf="!(select.disabled$ | async)" type="button" class="chip-kill" (click)="unselectOption(option, $event)">
 					<span class="u-mask">{{ intl.removeOption }}</span>
