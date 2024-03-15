@@ -2,7 +2,7 @@
 <div style="min-height: 32rem">
 	<h2 class="u-h3">Click me ! :)</h2>
 	<table class="indexTable mod-selectable">
-		<thead class="indexTable-head" (click)="selectRow('allchbx')">
+		<thead class="indexTable-head">
 			<tr class="indexTable-head-row">
 				<th class="indexTable-head-row-transparentCell" scope="col">
 					<label class="formLabel u-mask" for="allchbx">Select all items</label>
@@ -21,7 +21,7 @@
 			</tr>
 		</thead>
 		<tbody class="indexTable-body">
-			<tr class="indexTable-body-row" id="r0" (click)="selectRow('r0chbx')">
+			<tr class="indexTable-body-row" id="r0">
 				<th class="indexTable-body-row-transparentCell">
 					<label class=" formLabel u-mask" for="r0chbx">Select all lines for 2021</label>
 					<span class="checkboxField">
@@ -40,12 +40,12 @@
 							<span class="lucca-icon icon-arrowChevronBottom" aria-hidden="true"></span>
 							<span class="u-mask">Hide details</span>
 						</button>
-						<span class="indexTable-body-rowGroup-cellTitle-title">2021</span>
+						<span class="indexTable-body-row-cellTitle-title">2021</span>
 						<span class="numericBadge">3</span>
 					</div>
 				</th>
 			</tr>
-			<tr class="indexTable-body-row" id="r1" (click)="selectRow('r1chbx')">
+			<tr class="indexTable-body-row" id="r1">
 				<th class="indexTable-body-row-transparentCell" header="y2021" colspan="2">
 					<label class="formLabel u-mask" for="r1chbx">Select all items for september 2021</label>
 					<span class="checkboxField">
@@ -63,12 +63,12 @@
 							<span class="lucca-icon icon-arrowChevronBottom" aria-hidden="true"></span>
 							<span class="u-mask">Hide details</span>
 						</button>
-						<span class="indexTable-body-rowGroup-cellTitle-title">September</span>
+						<span class="indexTable-body-row-cellTitle-title">September</span>
 						<span class="numericBadge">1</span>
 					</div>
 				</th>
 			</tr>
-			<tr class="indexTable-body-row" id="r2" (click)="selectRow('r2chbx')">
+			<tr class="indexTable-body-row" id="r2">
 				<td class="indexTable-body-row-transparentCell" header="y2021 september" colspan="2">
 					<label class="formLabel u-mask" for="r2chbx">Select this item</label>
 					<span class="checkboxField">
@@ -78,11 +78,14 @@
 								class="checkboxField-icon-check"></span></span>
 					</span>
 				</td>
-				<td class="indexTable-body-row-cell" header="y2021 september">Content</td>
+				<td class="indexTable-body-row-cell" header="y2021 september">
+					<a href="#" class="indexTable-body-row-cell-action">See details</a>
+					Content
+				</td>
 				<td class="indexTable-body-row-cell" header="y2021 september">Content</td>
 				<td class="indexTable-body-row-cell" header="y2021 september">Content</td>
 			</tr>
-			<tr class="indexTable-body-row" id="r3" (click)="selectRow('r3chbx')">
+			<tr class="indexTable-body-row" id="r3">
 				<th class="indexTable-body-row-transparentCell" header="y2021" colspan="2">
 					<label class="formLabel u-mask" for="r3chbx">Select all items for october 2021</label>
 					<span class="checkboxField">
@@ -101,12 +104,12 @@
 							<span class="lucca-icon icon-arrowChevronBottom" aria-hidden="true"></span>
 							<span class="u-mask">Hide details</span>
 						</button>
-						<span class="indexTable-body-rowGroup-cellTitle-title">October</span>
+						<span class="indexTable-body-row-cellTitle-title">October</span>
 						<span class="numericBadge">2</span>
 					</div>
 				</th>
 			</tr>
-			<tr class="indexTable-body-row" id="r4" (click)="selectRow('r4chbx')">
+			<tr class="indexTable-body-row" id="r4">
 				<td class="indexTable-body-row-transparentCell" header="y2021 october" colspan="2">
 					<label class="formLabel u-mask" for="r4chbx">Select this item</label>
 					<span class="checkboxField">
@@ -116,11 +119,14 @@
 								class="checkboxField-icon-check"></span></span>
 					</span>
 				</td>
-				<td class="indexTable-body-row-cell" header="y2021 october">Content</td>
+				<td class="indexTable-body-row-cell" header="y2021 october">
+					<a href="#" class="indexTable-body-row-cell-action">See details</a>
+					Content
+				</td>
 				<td class="indexTable-body-row-cell" header="y2021 october">Content</td>
 				<td class="indexTable-body-row-cell" header="y2021 october">Content</td>
 			</tr>
-			<tr class="indexTable-body-row" id="r5" (click)="selectRow('r5chbx')">
+			<tr class="indexTable-body-row" id="r5">
 				<td class="indexTable-body-row-transparentCell" header="y2021 october" colspan="2">
 					<label class="formLabel u-mask" for="r5chbx">Select this item</label>
 					<span class="checkboxField">
@@ -130,13 +136,16 @@
 								class="checkboxField-icon-check"></span></span>
 					</span>
 				</td>
-				<td class="indexTable-body-row-cell" header="y2021 october">Content</td>
+				<td class="indexTable-body-row-cell" header="y2021 october">
+					<a href="#" class="indexTable-body-row-cell-action">See details</a>
+					Content
+				</td>
 				<td class="indexTable-body-row-cell" header="y2021 october">Content</td>
 				<td class="indexTable-body-row-cell" header="y2021 october">Content</td>
 			</tr>
 		</tbody>
 		<tbody class="indexTable-body">
-			<tr class="indexTable-body-row" id="r6" (click)="selectRow('r6chbx')">
+			<tr class="indexTable-body-row" id="r6">
 				<th class="indexTable-body-row-transparentCell">
 					<label class="formLabel u-mask" for="r6chbx">Select all items for 2022</label>
 					<span class="checkboxField">
@@ -154,12 +163,12 @@
 							<span class="lucca-icon icon-arrowChevronBottom" aria-hidden="true"></span>
 							<span class="u-mask">Hide details</span>
 						</button>
-						<span class="indexTable-body-rowGroup-cellTitle-title">2022</span>
+						<span class="indexTable-body-row-cellTitle-title">2022</span>
 						<span class="numericBadge">1</span>
 					</div>
 				</th>
 			</tr>
-			<tr class="indexTable-body-row" id="r7" (click)="selectRow('r7chbx')">
+			<tr class="indexTable-body-row" id="r7">
 				<th class="indexTable-body-row-transparentCell" header="y2022" colspan="2">
 					<label class="formLabel u-mask" for="r7chbx">Select all items for january 2022</label>
 					<span class="checkboxField">
@@ -177,12 +186,12 @@
 							<span class="lucca-icon icon-arrowChevronBottom" aria-hidden="true"></span>
 							<span class="u-mask">Hide details</span>
 						</button>
-						<span class="indexTable-body-rowGroup-cellTitle-title">January</span>
+						<span class="indexTable-body-row-cellTitle-title">January</span>
 						<span class="numericBadge">1</span>
 					</div>
 				</th>
 			</tr>
-			<tr class="indexTable-body-row" id="r8" (click)="selectRow('r8chbx')">
+			<tr class="indexTable-body-row" id="r8">
 				<td class="indexTable-body-row-transparentCell" header="y2022 january" colspan="2">
 					<label class="formLabel u-mask" for="r8chbx">Select this item</label>
 					<span class="checkboxField">
@@ -192,7 +201,10 @@
 								class="checkboxField-icon-check"></span></span>
 					</span>
 				</td>
-				<td class="indexTable-body-row-cell" header="y2022 january">Content</td>
+				<td class="indexTable-body-row-cell" header="y2022 january">
+					<a href="#" class="indexTable-body-row-cell-action">See details</a>
+					Content
+				</td>
 				<td class="indexTable-body-row-cell" header="y2022 january">Content</td>
 				<td class="indexTable-body-row-cell" header="y2022 january">Content</td>
 			</tr>

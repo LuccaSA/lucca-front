@@ -86,12 +86,6 @@ class IndexTableInteractiveNestedSelectableStory {
 			}
 		}
 	}
-
-	// a click on a row select or deselect the corresponding checkbox
-	selectRow(chbxID) {
-		var targetChbx = document.getElementById(chbxID);
-		targetChbx.click();
-	}
 }
 
 export default {

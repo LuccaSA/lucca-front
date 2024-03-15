@@ -5,8 +5,9 @@
 
     &.mod-selectable {
         @include selectable;
+        // Selectable states
         @include selectableSelectedRow;
-        @include selectableFocusedRow;
+        @include selectableHoveredRow;
     }
 
     &.mod-stackable {

@@ -32,48 +32,34 @@
         &.mod-stack3 {
             --components-indexTable-row-stack-border-bottom: var(--components-indexTable-stack3-row-spacing);
             --components-indexTable-row-stack3-background-image: var(--components-indexTable-stack-svg);
-            // Different border-bottom with between stack2 and stack3 mess up background bottom position.
-            // this css vars is here to reset this
-            --components-indexTable-row-stack3-row-background-position-fix: calc(
-                var(--components-indexTable-stack3-row-spacing) - var(--components-indexTable-stack2-row-spacing)
-            );
         }
     }
 
     .indexTable-body-row-cell {
         // because we can't set an individual spacing for each row, transparent border are used for this
         border-bottom: var(--components-indexTable-row-stack-border-bottom) solid transparent;
+        // stack apparence
+        background-image: var(--components-indexTable-row-stack2-background-image, none),
+            var(--components-indexTable-row-stack3-background-image, none);
+        background-position: var(--components-indexTable-row-stack2-background-position, 0 0),
+            var(--components-indexTable-row-stack3-background-position, 0 0);
+        background-repeat: no-repeat, no-repeat;
 
         // apparence of the first cell with a card apparence.
         // we do this because there migh be one or two cells before without background and containing a checkbox
-        --components-indexTable-row-stack2-background-position: left -1px bottom calc(-5px + var(--components-indexTable-row-stack3-row-background-position-fix, 0px));
-        --components-indexTable-row-stack3-background-position: left 2px bottom -5px;
+        --components-indexTable-row-stack2-background-position: left -2px bottom -10px;
+        --components-indexTable-row-stack3-background-position: left 1px bottom -14px;
 
         // apparence of the nexts cells
         & ~ .indexTable-body-row-cell {
-            --components-indexTable-row-stack2-background-position: left -20px bottom calc(-5px + var(--components-indexTable-row-stack3-row-background-position-fix, 0px));
-            --components-indexTable-row-stack3-background-position: left -20px bottom -5px;
+            --components-indexTable-row-stack2-background-position: left -20px bottom -10px;
+            --components-indexTable-row-stack3-background-position: left -20px bottom -14px;
         }
 
         // apparence of the last cell with a card apparence
         &:last-child {
-            --components-indexTable-row-stack2-background-position: right -1px bottom calc(-5px + var(--components-indexTable-row-stack3-row-background-position-fix, 0px));
-            --components-indexTable-row-stack3-background-position: right 2px bottom -5px;
-        }
-
-        // stack apparence
-        &::after {
-            content: '';
-            position: absolute;
-            inset: 0 var(--components-indexTable-cell-inset-x-right, 0)
-                calc(var(--components-indexTable-row-stack-border-bottom) * -1)
-                var(--components-indexTable-cell-inset-x-left, 0);
-            z-index: -2;
-            background-image: var(--components-indexTable-row-stack2-background-image, none),
-                var(--components-indexTable-row-stack3-background-image, none);
-            background-position: var(--components-indexTable-row-stack2-background-position, 0 0),
-                var(--components-indexTable-row-stack3-background-position, 0 0);
-            background-repeat: no-repeat, no-repeat;
+            --components-indexTable-row-stack2-background-position: right -2px bottom -10px;
+            --components-indexTable-row-stack3-background-position: right 1px bottom -14px;
         }
     }
 }
@@ -149,6 +135,7 @@
             grid-column-start: 1;
             padding-top: 0;
             padding-bottom: 0;
+
             &::before {
                 --components-indexTable-cell-inset-x-right: 50%;
             }
@@ -198,6 +185,7 @@
 }
 
 @mixin stackableResponsiveCardList {
+    //TODO : a revoir, ne fonctionne plus avec le chagement dans la gestion des stacks
     @include media.max('S') {
         .indexTable-body-row[class*='mod-stack'] {
             margin-bottom: calc(

@@ -40,7 +40,10 @@ function getTemplate(args: IndexTableSelectableStory): string {
 								class="checkboxField-icon-check"></span></span>
 					</span>
 				</td>
-				<td class="indexTable-body-row-cell">Content</td>
+				<td class="indexTable-body-row-cell">
+					<a href="#" class="indexTable-body-row-cell-action">See details</a>
+					Content
+				</td>
 				<td class="indexTable-body-row-cell">Content</td>
 				<td class="indexTable-body-row-cell">Content</td>
 			</tr>
@@ -53,7 +56,10 @@ function getTemplate(args: IndexTableSelectableStory): string {
 								class="checkboxField-icon-check"></span></span>
 					</span>
 				</td>
-				<td class="indexTable-body-row-cell">Content</td>
+				<td class="indexTable-body-row-cell">
+					<a href="#" class="indexTable-body-row-cell-action">See details</a>
+					Content
+				</td>
 				<td class="indexTable-body-row-cell">Content</td>
 				<td class="indexTable-body-row-cell">Content</td>
 			</tr>
@@ -66,7 +72,10 @@ function getTemplate(args: IndexTableSelectableStory): string {
 								class="checkboxField-icon-check"></span></span>
 					</span>
 				</td>
-				<td class="indexTable-body-row-cell">Content</td>
+				<td class="indexTable-body-row-cell">
+					<a href="#" class="indexTable-body-row-cell-action">See details</a>
+					Content
+				</td>
 				<td class="indexTable-body-row-cell">Content</td>
 				<td class="indexTable-body-row-cell">Content</td>
 			</tr>

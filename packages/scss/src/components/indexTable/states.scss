@@ -12,28 +12,37 @@
 }
 
 @mixin focusedRow {
-    .indexTable-body-row:focus-within {
-        @include a11y.focusVisible();
-        @include visibleSubActions;
+    .indexTable-body-row {
+        &:focus-within {
+            --components-indexTable-cell-subAction-opacity: 1;
+        }
+        &:has(.indexTable-body-row-cell-action:focus) {
+            --components-indexTable-outline-opacity: 1;
+        }
     }
 }
 
 @mixin hoveredRow {
-    .indexTable-body-row:hover:not(:has(:focus-visible)) {
+    .indexTable-body-row:hover {
         @include hoveredCells;
     }
 }
 
-// selectable rows
+// selectable selected rows
 @mixin selectableSelectedRow {
-    .indexTable-body-row:not(:hover):has(.checkbox-input:checked, .checkboxField-input:checked) {
+    .indexTable-body-row:not(:has(.indexTable-body-row-cell:hover)):has(.checkbox-input:checked, .checkboxField-input:checked) {
         @include selectedCells;
     }
 }
 
-@mixin selectableFocusedRow {
-    .indexTable-body-row:has(.checkbox-input:focus-visible, .checkboxField-input:focus-visible) {
-        @include hoveredCells;
+// on selectable indexTable : no hover effect on lines when hovering the checkbox
+@mixin selectableHoveredRow {
+    .indexTable-body-row:hover:has(.indexTable-body-row-transparentCell:hover) {
+        // cancel of :hover css vars
+        --components-indexTable-cell-shadow: var(--components-indexTable-cell-shadow-default);
+        --components-indexTable-cell-inset-x: 0px;
+        --components-indexTable-cell-inset-y: 0px;
+        --components-indexTable-cell-subAction-opacity: 0;
     }
 }
 
@@ -50,10 +59,6 @@
     --components-indexTable-cell-shadow: var(--components-indexTable-cell-shadow-hover);
     --components-indexTable-cell-inset-x: var(--components-indexTable-hover-offset-x);
     --components-indexTable-cell-inset-y: var(--components-indexTable-hover-offset-y);
-    @include visibleSubActions;
-}
-
-@mixin visibleSubActions {
-    //if there are subActions, they should be visible
+    --components-indexTable-cell-z-index: 2;
     --components-indexTable-cell-subAction-opacity: 1;
 }

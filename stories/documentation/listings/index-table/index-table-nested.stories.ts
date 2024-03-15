@@ -30,7 +30,7 @@ function getTemplate(args: IndexTableNestedStory): string {
 							<span class="lucca-icon icon-arrowChevronBottom" aria-hidden="true"></span>
 							<span class="u-mask">Hide details</span>
 						</button>
-						<span class="indexTable-body-rowGroup-cellTitle-title">2021</span>
+						<span class="indexTable-body-row-cellTitle-title">2021</span>
 						<span class="numericBadge">3</span>
 					</div>
 				</th>
@@ -59,7 +59,7 @@ function getTemplate(args: IndexTableNestedStory): string {
 							<span class="lucca-icon icon-arrowChevronBottom" aria-hidden="true"></span>
 							<span class="u-mask">Hide details</span>
 						</button>
-						<span class="indexTable-body-rowGroup-cellTitle-title">2022</span>
+						<span class="indexTable-body-row-cellTitle-title">2022</span>
 						<span class="numericBadge">1</span>
 					</div>
 				</th>
@@ -88,7 +88,7 @@ function getTemplate(args: IndexTableNestedStory): string {
 							<span class="lucca-icon icon-arrowChevronBottom" aria-hidden="true"></span>
 							<span class="u-mask">Hide details</span>
 						</button>
-						<span class="indexTable-body-rowGroup-cellTitle-title">2021</span>
+						<span class="indexTable-body-row-cellTitle-title">2021</span>
 						<span class="numericBadge">3</span>
 					</div>
 				</th>
@@ -127,7 +127,7 @@ function getTemplate(args: IndexTableNestedStory): string {
 							<span class="lucca-icon icon-arrowChevronBottom" aria-hidden="true"></span>
 							<span class="u-mask">Hide details</span>
 						</button>
-						<span class="indexTable-body-rowGroup-cellTitle-title">2022</span>
+						<span class="indexTable-body-row-cellTitle-title">2022</span>
 						<span class="numericBadge">1</span>
 					</div>
 				</th>

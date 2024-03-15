@@ -27,4 +27,9 @@
     // Rows visualy grow bigger on hover + focus
     --components-indexTable-hover-offset-x: -4px;
     --components-indexTable-hover-offset-y: -1px;
+
+    // Selectable specific outline
+    --components-indexTable-outline-offset: 4px;
+    --components-indexTable-outline-width: 2px;
+    --components-indexTable-outline-color: var(--palettes-product-700);
 }
