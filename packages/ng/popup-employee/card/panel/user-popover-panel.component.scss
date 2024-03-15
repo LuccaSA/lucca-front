@@ -1,1 +1,7 @@
 @use '@lucca-front/scss/src/components/userCard';
+@import 'definitions/user/user-picture';
+
+lu-user-popover-panel {
+	@include userPictureVars;
+	@include userPictureStyle;
+}

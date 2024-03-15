@@ -1,9 +1,6 @@
 @use 'exports' as *;
-@import 'definitions/user/user-picture';
 
 .userCard {
 	@include vars;
 	@include component;
-	@include userPictureVars;
-	@include userPictureStyle;
 }
