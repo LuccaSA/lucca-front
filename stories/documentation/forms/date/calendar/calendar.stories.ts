@@ -17,7 +17,7 @@ registerLocaleData(localesFr);
 	template: `
 		<lu-calendar [(ngModel)]="date"></lu-calendar>
 
-		<button type="button" class="button mod-outlined u-marginRightS" (click)="random()">Random</button>
+		<button type="button" class="button mod-outlined pr-u-marginRight200" (click)="random()">Random</button>
 
 		{{ date | luDate : 'full' }}
 	`,
