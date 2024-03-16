@@ -60,6 +60,7 @@
 
         .indexTable-head-row-transparentCell,
         .indexTable-body-row-transparentCell {
+            vertical-align: top;
             padding-right: var(--components-indexTable-cell-padding);
         }
 
@@ -99,7 +100,7 @@
                 content: '';
                 position: absolute;
                 z-index: -1;
-                transition-duration: var(--commons-animations-durations-standard);
+                transition-duration: var(--commons-animations-durations-fast);
             }
 
             // the "card" apparence is put on a ::before pseudo element
@@ -110,7 +111,7 @@
                 // shadow-mask : since the card apparence is put on every cell (du to a Safari bug), we need to hide the left part of the box shadow for everycell exept the first one.
                 // We do this with a rectangular white box-shadow above it.
                 box-shadow: var(--components-indexTable-shadow-mask), var(--components-indexTable-cell-shadow, var(--components-indexTable-cell-shadow-default));
-                transition-property: inset, box-shadow, background-color, background-image;
+                transition-property: inset, box-shadow, background-color;
             }
 
             // the focus outline, when needed
@@ -122,10 +123,16 @@
                 border-style: solid;
                 border-color: var(--components-indexTable-outline-color);
                 opacity: var(--components-indexTable-outline-opacity, 0);
-                transition-property: opacity;
+                transition-property: inset, opacity;
             }
         }
 
+        .indexTable-body-row-cell-checkbox {
+            display: block;
+            margin-top: 0.75rem;
+        }
+
+        //hidden element that take focus when the row is focused
         .indexTable-body-row-cell-action {
             @include a11y.mask;
         }

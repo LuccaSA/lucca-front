@@ -42,11 +42,13 @@
         background-image: var(--components-indexTable-row-stack2-background-image, none), var(--components-indexTable-row-stack3-background-image, none);
         background-position: var(--components-indexTable-row-stack2-background-position, 0 0), var(--components-indexTable-row-stack3-background-position, 0 0);
         background-repeat: no-repeat, no-repeat;
+        transition-property: background-image, background-position;
+        transition-duration: var(--commons-animations-durations-fast);
 
         // apparence of the first cell with a card apparence.
         // we do this because there migh be one or two cells before without background and containing a checkbox
-        --components-indexTable-row-stack2-background-position: left -2px bottom -10px;
-        --components-indexTable-row-stack3-background-position: left 1px bottom -14px;
+        --components-indexTable-row-stack2-background-position: left calc(-2px + var(--components-indexTable-cell-inset-x-left, 0px)) bottom -10px;
+        --components-indexTable-row-stack3-background-position: left calc(1px + var(--components-indexTable-cell-inset-x-left, 0px)) bottom -14px;
 
         // apparence of the nexts cells
         & ~ .indexTable-body-row-cell {
@@ -56,8 +58,8 @@
 
         // apparence of the last cell with a card apparence
         &:last-child {
-            --components-indexTable-row-stack2-background-position: right -2px bottom -10px;
-            --components-indexTable-row-stack3-background-position: right 1px bottom -14px;
+            --components-indexTable-row-stack2-background-position: right calc(-2px + var(--components-indexTable-cell-inset-x-right, 0px)) bottom -10px;
+            --components-indexTable-row-stack3-background-position: right calc(1px + var(--components-indexTable-cell-inset-x-right, 0px)) bottom -14px;
         }
     }
 }
@@ -207,6 +209,8 @@
                 background-image: var(--components-indexTable-row-stack2-background-image, none), var(--components-indexTable-row-stack3-background-image, none);
                 background-position: var(--components-indexTable-row-stack2-background-position, 0 0), var(--components-indexTable-row-stack3-background-position, 0 0);
                 background-repeat: no-repeat, no-repeat;
+                transition-property: background-image, background-position;
+                transition-duration: var(--commons-animations-durations-fast);
             }
             &::before {
                 left: var(--components-indexTable-cell-inset-x-left, 0);
