@@ -13,7 +13,8 @@
 
 @mixin focusedRow {
     .indexTable-body-row {
-        &:focus-within {
+        // We can't use focus-within because it would show actions when focusing checkboxs
+        &:has(.indexTable-body-row-cell-action:focus, .indexTable-body-row-cell.mod-actions:focus-within) {
             --components-indexTable-cell-subAction-opacity: 1;
         }
         &:has(.indexTable-body-row-cell-action:focus) {
@@ -38,7 +39,7 @@
 // on selectable indexTable : no hover effect on lines when hovering the checkbox
 @mixin selectableHoveredRow {
     .indexTable-body-row:hover:has(.indexTable-body-row-transparentCell:hover) {
-        // cancel of :hover css vars
+        // cancel for all :hover css vars
         --components-indexTable-cell-shadow: var(--components-indexTable-cell-shadow-default);
         --components-indexTable-cell-inset-x: 0px;
         --components-indexTable-cell-inset-y: 0px;
