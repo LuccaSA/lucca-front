@@ -18,7 +18,7 @@ function getTemplate(args: IndexTableSelectableStory): string {
 			<tr class="indexTable-head-row">
 				<th class="indexTable-head-row-transparentCell" scope="col">
 					<label class="formLabel u-mask" for="allchbx">Select all items</label>
-					<span class="checkboxField">
+					<span class="checkboxField indexTable-body-row-cell-checkbox">
 						<input class="checkboxField-input" type="checkbox" id="allchbx"
 							aria-controls="r0chbx r1chbx r2chbx" />
 						<span class="checkboxField-icon" aria-hidden="true"><span
@@ -34,7 +34,7 @@ function getTemplate(args: IndexTableSelectableStory): string {
 			<tr class="indexTable-body-row">
 				<td class="indexTable-body-row-transparentCell">
 					<label class="formLabel u-mask" for="r0chbx">Select this item</label>
-					<span class="checkboxField">
+					<span class="checkboxField indexTable-body-row-cell-checkbox">
 						<input class="checkboxField-input" type="checkbox" id="r0chbx" />
 						<span class="checkboxField-icon" aria-hidden="true"><span
 								class="checkboxField-icon-check"></span></span>
@@ -50,7 +50,7 @@ function getTemplate(args: IndexTableSelectableStory): string {
 			<tr class="indexTable-body-row">
 				<td class="indexTable-body-row-transparentCell">
 					<label class="formLabel u-mask" for="r1chbx">Select this item</label>
-					<span class="checkboxField">
+					<span class="checkboxField indexTable-body-row-cell-checkbox">
 						<input class="checkboxField-input" type="checkbox" id="r1chbx" />
 						<span class="checkboxField-icon" aria-hidden="true"><span
 								class="checkboxField-icon-check"></span></span>
@@ -66,7 +66,7 @@ function getTemplate(args: IndexTableSelectableStory): string {
 			<tr class="indexTable-body-row">
 				<td class="indexTable-body-row-transparentCell">
 					<label class="formLabel u-mask" for="r2chbx">Select this item</label>
-					<span class="checkboxField">
+					<span class="checkboxField indexTable-body-row-cell-checkbox">
 						<input class="checkboxField-input" type="checkbox" id="r2chbx" />
 						<span class="checkboxField-icon" aria-hidden="true"><span
 								class="checkboxField-icon-check"></span></span>
