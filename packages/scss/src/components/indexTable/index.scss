@@ -30,6 +30,10 @@
         @include stackableResponsiveCardList;
     }
 
+    &.mod-selectable.mod-stackable.mod-responsiveCardList {
+        @include selectableStackableResponsiveCardList;
+    }
+
     &[class*='mod-layoutFixed'] {
         @include layoutFixed;
     }

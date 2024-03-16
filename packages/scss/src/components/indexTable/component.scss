@@ -72,32 +72,26 @@
             // apparence of the first cell with a card apparence.
             // we do this because there migh be one or two cells before without background and containing a checkbox
             --components-indexTable-shadow-mask: 0 0 0 0;
-            --components-indexTable-cell-border-radius: var(--commons-borderRadius-L) 0 0 var(--commons-borderRadius-L);
+            --components-indexTable-cell-border-radius: var(--components-indexTable-cell-border-radius-default) 0 0 var(--components-indexTable-cell-border-radius-default);
             --components-indexTable-cell-inset-x-left: var(--components-indexTable-cell-inset-x);
-            --components-indexTable-outline-border-width: 2px 0 2px 2px;
-            --components-indexTable-outline-border-radius: calc(
-                    var(--commons-borderRadius-L) + var(--components-indexTable-outline-offset)
-                )
-                0 0 calc(var(--commons-borderRadius-L) + var(--components-indexTable-outline-offset));
+            --components-indexTable-outline-border-width: var(--components-indexTable-outline-border-width-default) 0 var(--components-indexTable-outline-border-width-default) var(--components-indexTable-outline-border-width-default);
+            --components-indexTable-outline-border-radius: var(--components-indexTable-outline-border-radius-default) 0 0 var(--components-indexTable-outline-border-radius-default);
 
             // apparence of the nexts cells
             ~ .indexTable-body-row-cell {
                 --components-indexTable-shadow-mask: var(--components-indexTable-shadow-mask-default);
                 --components-indexTable-cell-border-radius: 0;
                 --components-indexTable-cell-inset-x-left: 0px;
-                --components-indexTable-outline-border-width: 2px 0;
+                --components-indexTable-outline-border-width: var(--components-indexTable-outline-border-width-default) 0;
                 --components-indexTable-outline-border-radius: 0;
             }
 
             // apparence of the last cell with a card apparence
             &:last-child {
-                --components-indexTable-cell-border-radius: 0 var(--commons-borderRadius-L)
-                    var(--commons-borderRadius-L) 0;
+                --components-indexTable-cell-border-radius: 0 var(--components-indexTable-cell-border-radius-default) var(--components-indexTable-cell-border-radius-default) 0;
                 --components-indexTable-cell-inset-x-right: var(--components-indexTable-cell-inset-x);
-                --components-indexTable-outline-border-width: 2px 2px 2px 0;
-                --components-indexTable-outline-border-radius: 0
-                    calc(var(--commons-borderRadius-L) + var(--components-indexTable-outline-offset))
-                    calc(var(--commons-borderRadius-L) + var(--components-indexTable-outline-offset)) 0;
+                --components-indexTable-outline-border-width: var(--components-indexTable-outline-border-width-default) var(--components-indexTable-outline-border-width-default) var(--components-indexTable-outline-border-width-default) 0;
+                --components-indexTable-outline-border-radius: 0 var(--components-indexTable-outline-border-radius-default) var(--components-indexTable-outline-border-radius-default) 0;
             }
 
             &::before,
@@ -110,31 +104,19 @@
 
             // the "card" apparence is put on a ::before pseudo element
             &::before {
-                inset: var(--components-indexTable-cell-inset-y, 0) var(--components-indexTable-cell-inset-x-right, 0)
-                    var(--components-indexTable-cell-inset-y, 0) var(--components-indexTable-cell-inset-x-left, 0);
+                inset: var(--components-indexTable-cell-inset-y, 0) var(--components-indexTable-cell-inset-x-right, 0) var(--components-indexTable-cell-inset-y, 0) var(--components-indexTable-cell-inset-x-left, 0);
                 border-radius: var(--components-indexTable-cell-border-radius, 0);
                 background-color: var(--components-indexTable-cell-background-color, var(--colors-white-color));
                 // shadow-mask : since the card apparence is put on every cell (du to a Safari bug), we need to hide the left part of the box shadow for everycell exept the first one.
                 // We do this with a rectangular white box-shadow above it.
-                box-shadow: var(--components-indexTable-shadow-mask),
-                    var(--components-indexTable-cell-shadow, var(--components-indexTable-cell-shadow-default));
+                box-shadow: var(--components-indexTable-shadow-mask), var(--components-indexTable-cell-shadow, var(--components-indexTable-cell-shadow-default));
                 transition-property: inset, box-shadow, background-color, background-image;
             }
 
             // the focus outline, when needed
             &::after {
-                inset: calc(
-                        var(--components-indexTable-cell-inset-y, 0px) - var(--components-indexTable-outline-offset)
-                    )
-                    calc(
-                        var(--components-indexTable-cell-inset-x-right, 0px) -
-                            var(--components-indexTable-outline-offset)
-                    )
-                    calc(var(--components-indexTable-cell-inset-y, 0px) - var(--components-indexTable-outline-offset))
-                    calc(
-                        var(--components-indexTable-cell-inset-x-left, 0px) -
-                            var(--components-indexTable-outline-offset)
-                    );
+                inset: calc(var(--components-indexTable-cell-inset-y, 0px) - var(--components-indexTable-outline-offset)) calc(var(--components-indexTable-cell-inset-x-right, 0px) - var(--components-indexTable-outline-offset))
+                    calc(var(--components-indexTable-cell-inset-y, 0px) - var(--components-indexTable-outline-offset)) calc(var(--components-indexTable-cell-inset-x-left, 0px) - var(--components-indexTable-outline-offset));
                 border-radius: var(--components-indexTable-outline-border-radius);
                 border-width: var(--components-indexTable-outline-border-width);
                 border-style: solid;
@@ -172,8 +154,7 @@
             @include vars;
             display: grid;
             grid-template-areas: 'table table' 'massSelection pagination';
-            padding: var(--components-indexTable-cell-padding) var(--components-indexTable-cell-padding)
-                var(--spacings-XXS);
+            padding: var(--components-indexTable-cell-padding) var(--components-indexTable-cell-padding) var(--spacings-XXS);
             gap: var(--spacings-XS) var(--components-indexTable-cell-padding);
             border-radius: var(--components-indexTable-border-radius);
             background-color: var(--components-indexTable-background-color);

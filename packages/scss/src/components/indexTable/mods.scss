@@ -39,10 +39,8 @@
         // because we can't set an individual spacing for each row, transparent border are used for this
         border-bottom: var(--components-indexTable-row-stack-border-bottom) solid transparent;
         // stack apparence
-        background-image: var(--components-indexTable-row-stack2-background-image, none),
-            var(--components-indexTable-row-stack3-background-image, none);
-        background-position: var(--components-indexTable-row-stack2-background-position, 0 0),
-            var(--components-indexTable-row-stack3-background-position, 0 0);
+        background-image: var(--components-indexTable-row-stack2-background-image, none), var(--components-indexTable-row-stack3-background-image, none);
+        background-position: var(--components-indexTable-row-stack2-background-position, 0 0), var(--components-indexTable-row-stack3-background-position, 0 0);
         background-repeat: no-repeat, no-repeat;
 
         // apparence of the first cell with a card apparence.
@@ -124,12 +122,14 @@
             align-items: center;
             padding: var(--components-indexTable-row-spacing-responsive) 0;
             margin-bottom: var(--components-indexTable-row-spacing-responsive);
+            // "Title" lines that do not contain "card" cells are smaller
             &:not(:has(.indexTable-body-row-cell)) {
                 padding: 0;
                 margin-bottom: 0;
             }
         }
 
+        // We only need one ::before for the card apparence and one ::after for the possible outline
         .indexTable-body-row-cell {
             position: static;
             grid-column-start: 1;
@@ -137,14 +137,15 @@
             padding-bottom: 0;
 
             &::before {
-                --components-indexTable-cell-inset-x-right: 50%;
+                --components-indexTable-cell-border-radius: var(--components-indexTable-cell-border-radius-default);
             }
-            &:last-child::before {
-                --components-indexTable-cell-inset-x-right: 0;
-                --components-indexTable-cell-inset-x-left: 50%;
+            &::after {
+                --components-indexTable-outline-border-width: var(--components-indexTable-outline-border-width-default);
+                --components-indexTable-outline-border-radius: var(--components-indexTable-outline-border-radius-default);
             }
-            ~ .indexTable-body-row-cell:not(:last-child) {
-                &::before {
+            ~ .indexTable-body-row-cell {
+                &::before,
+                &::after {
                     display: none;
                 }
             }
@@ -165,14 +166,11 @@
 @mixin selectableResponsiveCardList {
     @include media.max('S') {
         .indexTable-body-row {
-            grid-template-columns: var(--components-indexTable-row-cell-transparent-width) var(
-                    --components-indexTable-row-responsive-grid-template-columns,
-                    1fr
-                );
+            grid-template-columns: var(--components-indexTable-row-cell-transparent-width) var(--components-indexTable-row-responsive-grid-template-columns, 1fr);
         }
         .indexTable-body-row-transparentCell {
             width: auto;
-            // Nested cell offset
+            // we add a padding-left to keep a correct indent between lvl 1 and lvl 2 titles in nested tables
             &:first-child[colspan='2'] + .indexTable-body-row-transparentCell {
                 padding-left: var(--components-indexTable-row-cell-transparent-width);
             }
@@ -184,29 +182,46 @@
     }
 }
 
+@mixin selectableStackableResponsiveCardList {
+    @include media.max('S') {
+        .indexTable-body-row {
+            --components-indexTable-cell-inset-x-left: var(--components-indexTable-row-cell-transparent-width);
+        }
+    }
+}
+
+// The stack apparence is put on the row instead of the cells
 @mixin stackableResponsiveCardList {
-    //TODO : a revoir, ne fonctionne plus avec le chagement dans la gestion des stacks
     @include media.max('S') {
         .indexTable-body-row[class*='mod-stack'] {
-            margin-bottom: calc(
-                var(--components-indexTable-row-spacing-responsive) +
-                    var(--components-indexTable-row-stack-border-bottom)
-            );
+            border-bottom-width: calc(var(--components-indexTable-row-spacing-responsive) + var(--components-indexTable-row-stack-border-bottom));
+            border-style: solid;
+            border-color: transparent;
+            &::before,
+            &::after {
+                content: '';
+                position: absolute;
+                top: 0;
+                bottom: calc((var(--components-indexTable-row-spacing-responsive) + var(--components-indexTable-row-stack-border-bottom)) * -1);
+                width: 50%;
+                background-image: var(--components-indexTable-row-stack2-background-image, none), var(--components-indexTable-row-stack3-background-image, none);
+                background-position: var(--components-indexTable-row-stack2-background-position, 0 0), var(--components-indexTable-row-stack3-background-position, 0 0);
+                background-repeat: no-repeat, no-repeat;
+            }
+            &::before {
+                left: var(--components-indexTable-cell-inset-x-left, 0);
+                --components-indexTable-row-stack2-background-position: left -2px bottom 6px;
+                --components-indexTable-row-stack3-background-position: left 1px bottom 2px;
+            }
+            &::after {
+                right: 0;
+                --components-indexTable-row-stack2-background-position: right -2px bottom 6px;
+                --components-indexTable-row-stack3-background-position: right 1px bottom 2px;
+            }
         }
         .indexTable-body-row-cell {
             border-bottom: 0;
-            &::after {
-                --components-indexTable-cell-inset-x-right: 50%;
-            }
-            ~ .indexTable-body-row-cell:not(:last-child)::after {
-                display: none;
-            }
-            &:last-child {
-                &::after {
-                    --components-indexTable-cell-inset-x-left: 50%;
-                    --components-indexTable-cell-inset-x-right: 0;
-                }
-            }
+            background-image: none;
         }
     }
 }
@@ -244,9 +259,7 @@
     table-layout: fixed;
 
     [class*='row-cell'] {
-        --cell-width: calc(
-            var(--components-indexTable-cell-fixed-width, var(--components-index-table-cell-fixed-width)) * 1rem
-        );
+        --cell-width: calc(var(--components-indexTable-cell-fixed-width, var(--components-index-table-cell-fixed-width)) * 1rem);
     }
 
     &.mod-layoutFixed [class*='row-cell'] {
