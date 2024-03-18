@@ -200,6 +200,7 @@
 @mixin stackableResponsiveCardList {
     @include media.max('S') {
         .indexTable-body-row[class*='mod-stack'] {
+            border-width: 0;
             border-bottom-width: calc(var(--components-indexTable-row-spacing-responsive) + var(--components-indexTable-row-stack-border-bottom));
             border-style: solid;
             border-color: transparent;
