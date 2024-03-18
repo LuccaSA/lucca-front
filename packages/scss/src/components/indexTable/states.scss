@@ -31,7 +31,7 @@
 
 // selectable selected rows
 @mixin selectableSelectedRow {
-    .indexTable-body-row:not(:has(.indexTable-body-row-cell:hover)):has(.checkbox-input:checked, .checkboxField-input:checked) {
+    .indexTable-body-row:has(.checkbox-input:checked, .checkboxField-input:checked) {
         @include selectedCells;
     }
 }
