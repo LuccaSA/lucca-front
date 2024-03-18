@@ -4,33 +4,33 @@ import { FormFieldComponent, InputDirective } from '@lucca-front/ng/form-field';
 import { NoopValueAccessorDirective } from '../noop-value-accessor.directive';
 import { NgIf, NgTemplateOutlet } from '@angular/common';
 import { FormFieldIdDirective } from '../form-field-id.directive';
-import { TextInputAddon } from './text-input-addon';
-import { LuccaIcon } from '@lucca-front/icons';
+import { TextInputAddon } from '../text-input/text-input-addon';
 import { getIntl } from '@lucca-front/ng/core';
-import { LU_TEXTFIELD_TRANSLATIONS } from './text-input.translate';
+import { LU_NUMBERFIELD_TRANSLATIONS } from './number-input.translate';
 import { injectNgControl } from '../inject-ng-control';
 
-type TextFieldType = 'text' | 'email' | 'password';
-
 @Component({
-	selector: 'lu-text-input',
+	selector: 'lu-number-input',
 	standalone: true,
 	imports: [FormFieldComponent, InputDirective, NgIf, ReactiveFormsModule, FormFieldIdDirective, NgTemplateOutlet],
-	templateUrl: './text-input.component.html',
+	templateUrl: './number-input.component.html',
 	hostDirectives: [NoopValueAccessorDirective],
 	encapsulation: ViewEncapsulation.None,
 })
-export class TextInputComponent {
+export class NumberInputComponent {
 	ngControl = injectNgControl();
 
 	@Input()
 	placeholder: string;
 
-	@Input({ transform: booleanAttribute })
-	hasClearer = false;
+	@Input({ transform: numberAttribute })
+	step: number = 1;
 
 	@Input({ transform: booleanAttribute })
-	hasSearchIcon = false;
+	noSpinButtons = false;
+
+	@Input({ transform: booleanAttribute })
+	hasClearer = false;
 
 	@ViewChild('inputElement', { static: true })
 	inputElementRef: ElementRef<HTMLInputElement>;
@@ -42,36 +42,15 @@ export class TextInputComponent {
 	suffix: TextInputAddon;
 
 	@Input()
-	get type(): TextFieldType {
-		return this.showPassword ? 'text' : this._type;
-	}
-
-	set type(type: TextFieldType) {
-		this._type = type;
-	}
+	min?: number;
 
 	@Input()
-	/**
-	 * Search icon to use for when `hasSearchIcon` is true, defaults to 'search'
-	 */
-	searchIcon: LuccaIcon = 'search';
+	max?: number;
 
-	showPassword: boolean = false;
-
-	private _type: TextFieldType = 'text';
-
-	protected hasTogglePasswordVisibilityIcon() {
-		return this._type === 'password';
-	}
-
-	intl = getIntl(LU_TEXTFIELD_TRANSLATIONS);
+	intl = getIntl(LU_NUMBERFIELD_TRANSLATIONS);
 
 	clearValue(): void {
 		this.ngControl.reset();
 		this.inputElementRef.nativeElement.focus();
-	}
-
-	togglePasswordVisibility() {
-		this.showPassword = !this.showPassword;
 	}
 }

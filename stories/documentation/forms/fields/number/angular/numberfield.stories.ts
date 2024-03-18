@@ -1,4 +1,4 @@
-import { TextInputComponent } from '@lucca-front/ng/forms';
+import { NumberInputComponent } from '@lucca-front/ng/forms';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -6,10 +6,10 @@ import { cleanupTemplate, generateInputs } from 'stories/helpers/stories';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 
 export default {
-	title: 'Documentation/Forms/Fields/TextField/Angular',
+	title: 'Documentation/Forms/Fields/NumberField/Angular',
 	decorators: [
 		moduleMetadata({
-			imports: [TextInputComponent, FormFieldComponent, FormsModule, ReactiveFormsModule, BrowserAnimationsModule],
+			imports: [NumberInputComponent, FormFieldComponent, FormsModule, ReactiveFormsModule, BrowserAnimationsModule],
 		}),
 	],
 	argTypes: {
@@ -38,7 +38,7 @@ export default {
 	},
 } as Meta;
 
-export const Basic: StoryObj<TextInputComponent & { disabled: boolean } & FormFieldComponent> = {
+export const Basic: StoryObj<NumberInputComponent & { disabled: boolean } & FormFieldComponent> = {
 	render: (args, { argTypes }) => {
 		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, ...inputArgs } = args;
 		return {
@@ -54,16 +54,16 @@ export const Basic: StoryObj<TextInputComponent & { disabled: boolean } & FormFi
 				argTypes,
 			)}>
 
-	<lu-text-input
+	<lu-number-input
 	${generateInputs(inputArgs, argTypes)}
 		[(ngModel)]="example">
-	</lu-text-input>
+	</lu-number-input>
 
 </lu-form-field>
 
 {{example}}`),
 			moduleMetadata: {
-				imports: [TextInputComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule],
+				imports: [NumberInputComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule],
 			},
 		};
 	},
@@ -72,65 +72,20 @@ export const Basic: StoryObj<TextInputComponent & { disabled: boolean } & FormFi
 		required: true,
 		hiddenLabel: false,
 		hasClearer: true,
-		hasSearchIcon: false,
-		searchIcon: 'search',
-		disabled: false,
-		inlineMessage: 'Helper Text',
-		inlineMessageState: 'default',
-		size: 'M',
-		type: 'text',
-		placeholder: 'Placeholder',
-		tooltip: "Je suis un message d'aide",
-	},
-};
-
-export const PasswordVisiblity: StoryObj<TextInputComponent & { disabled: boolean } & FormFieldComponent> = {
-	render: (args, { argTypes }) => {
-		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, ...inputArgs } = args;
-		return {
-			template: `
-<lu-form-field ${generateInputs(
-				{
-					label,
-					hiddenLabel,
-					tooltip,
-					inlineMessage,
-					inlineMessageState,
-					size,
-				},
-				argTypes,
-			)}>
-
-	<lu-text-input ${generateInputs(inputArgs, argTypes)}
-		type="password"
-		[(ngModel)]="example">
-	</lu-text-input>
-
-</lu-form-field>
-
-{{example}}`,
-			moduleMetadata: {
-				imports: [TextInputComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule],
-			},
-		};
-	},
-	args: {
-		label: 'Label',
-		required: true,
-		hiddenLabel: false,
-		hasClearer: true,
-		hasSearchIcon: false,
-		searchIcon: 'search',
 		disabled: false,
 		inlineMessage: 'Helper Text',
 		inlineMessageState: 'default',
 		size: 'M',
 		placeholder: 'Placeholder',
 		tooltip: "Je suis un message d'aide",
+		step: 1,
+		min: 0,
+		max: 999,
+		noSpinButtons: false,
 	},
 };
 
-export const WithPrefixAndSuffix: StoryObj<TextInputComponent & { disabled: boolean } & FormFieldComponent> = {
+export const WithPrefixAndSuffix: StoryObj<NumberInputComponent & { disabled: boolean } & FormFieldComponent> = {
 	render: (args, { argTypes }) => {
 		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, prefix, suffix, ...inputArgs } = args;
 		return {
@@ -150,18 +105,18 @@ export const WithPrefixAndSuffix: StoryObj<TextInputComponent & { disabled: bool
 				argTypes,
 			)}>
 
-	<lu-text-input
+	<lu-number-input
 		${generateInputs(inputArgs, argTypes)}
 		[prefix]="prefix"
 		[suffix]="suffix"
 		[(ngModel)]="example">
-	</lu-text-input>
+	</lu-number-input>
 
 </lu-form-field>
 
 {{example}}`),
 			moduleMetadata: {
-				imports: [TextInputComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule],
+				imports: [NumberInputComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule],
 			},
 		};
 	},
@@ -171,12 +126,9 @@ export const WithPrefixAndSuffix: StoryObj<TextInputComponent & { disabled: bool
 		tooltip: 'Tooltip message',
 		hiddenLabel: false,
 		required: true,
-		type: 'text',
 		placeholder: 'Placeholder',
 		disabled: false,
 		hasClearer: false,
-		hasSearchIcon: false,
-		searchIcon: 'search',
 		prefix: {
 			icon: 'dollar',
 			ariaLabel: 'Dollar',
@@ -187,5 +139,9 @@ export const WithPrefixAndSuffix: StoryObj<TextInputComponent & { disabled: bool
 		},
 		inlineMessage: 'Helper Text',
 		inlineMessageState: 'default',
+		step: 1,
+		min: 0,
+		max: 999,
+		noSpinButtons: false,
 	},
 };
