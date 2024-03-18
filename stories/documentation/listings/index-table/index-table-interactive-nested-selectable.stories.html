@@ -6,7 +6,7 @@
 			<tr class="indexTable-head-row">
 				<th class="indexTable-head-row-transparentCell" scope="col">
 					<label class="formLabel u-mask" for="allchbx">Select all items</label>
-					<span class="checkboxField indexTable-body-row-cell-checkbox">
+					<span class="checkboxField indexTable-head-row-cell-checkbox">
 						<input class="checkboxField-input" type="checkbox" id="allchbx" checked aria-checked="mixed"
 							aria-controls="r0chbx r1chbx r2chbx r3chbx r4chbx r5chbx r6chbx r7chbx r8chbx"
 							(click)="toggleCheckbox($event,'allchbx', '#r0chbx, #r1chbx, #r2chbx, #r3chbx, #r4chbx, #r5chbx, #r6chbx, #r7chbx, #r8chbx')" />
@@ -34,8 +34,8 @@
 				</th>
 				<th class="indexTable-body-row-transparentCell" colspan="4" id="y2021">
 					<div class="indexTable-body-row-cellTitle">
-						<button class="indexTable-body-row-cellTitle-button button mod-text mod-onlyIcon"
-							aria-expanded="true" aria-controls="r1 r2 r3 r4 r5" type="button"
+						<button class="indexTable-body-row-cellTitle-button button" aria-expanded="true"
+							aria-controls="r1 r2 r3 r4 r5" type="button"
 							(click)="toggleRows($event,'r0btn', '#r1, #r2, #r3, #r4, #r5')" id="r0btn">
 							<span class="lucca-icon icon-arrowChevronBottom" aria-hidden="true"></span>
 							<span class="u-mask">Hide details</span>
@@ -57,9 +57,8 @@
 				</th>
 				<th class="indexTable-body-row-transparentCell" colspan="3" id="september" header="y2021">
 					<div class="indexTable-body-row-cellTitle">
-						<button class="indexTable-body-row-cellTitle-button button mod-text mod-onlyIcon"
-							aria-expanded="true" aria-controls="r2" type="button"
-							(click)="toggleRows($event,'r1btn', '#r2')" id="r1btn">
+						<button class="indexTable-body-row-cellTitle-button button" aria-expanded="true"
+							aria-controls="r2" type="button" (click)="toggleRows($event,'r1btn', '#r2')" id="r1btn">
 							<span class="lucca-icon icon-arrowChevronBottom" aria-hidden="true"></span>
 							<span class="u-mask">Hide details</span>
 						</button>
@@ -98,9 +97,9 @@
 				</th>
 				<th class="indexTable-body-row-transparentCell" colspan="3" id="october" header="y2021">
 					<div class="indexTable-body-row-cellTitle">
-						<button class="indexTable-body-row-cellTitle-button button mod-text mod-onlyIcon"
-							aria-expanded="true" aria-controls="r4 r5" type="button"
-							(click)="toggleRows($event,'r3btn', '#r4, #r5')" id="r3btn">
+						<button class="indexTable-body-row-cellTitle-button button" aria-expanded="true"
+							aria-controls="r4 r5" type="button" (click)="toggleRows($event,'r3btn', '#r4, #r5')"
+							id="r3btn">
 							<span class="lucca-icon icon-arrowChevronBottom" aria-hidden="true"></span>
 							<span class="u-mask">Hide details</span>
 						</button>
@@ -157,9 +156,9 @@
 				</th>
 				<th class="indexTable-body-row-transparentCell" colspan="4" id="y2022">
 					<div class="indexTable-body-row-cellTitle">
-						<button class="indexTable-body-row-cellTitle-button button mod-text mod-onlyIcon"
-							aria-expanded="true" aria-controls="r7 r8" type="button"
-							(click)="toggleRows($event,'r6btn', '#r7, #r8')" id="r6btn">
+						<button class="indexTable-body-row-cellTitle-button button" aria-expanded="true"
+							aria-controls="r7 r8" type="button" (click)="toggleRows($event,'r6btn', '#r7, #r8')"
+							id="r6btn">
 							<span class="lucca-icon icon-arrowChevronBottom" aria-hidden="true"></span>
 							<span class="u-mask">Hide details</span>
 						</button>
@@ -180,9 +179,8 @@
 				</th>
 				<th class="indexTable-body-row-transparentCell" colspan="3" id="january" header="y2022">
 					<div class="indexTable-body-row-cellTitle">
-						<button class="indexTable-body-row-cellTitle-button button mod-text mod-onlyIcon"
-							aria-expanded="true" aria-controls="r8" type="button"
-							(click)="toggleRows($event,'r7btn', '#r8')" id="r7btn">
+						<button class="indexTable-body-row-cellTitle-button button" aria-expanded="true"
+							aria-controls="r8" type="button" (click)="toggleRows($event,'r7btn', '#r8')" id="r7btn">
 							<span class="lucca-icon icon-arrowChevronBottom" aria-hidden="true"></span>
 							<span class="u-mask">Hide details</span>
 						</button>

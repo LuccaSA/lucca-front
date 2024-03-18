@@ -26,7 +26,7 @@ function getTemplate(args: IndexTableNestedStory): string {
 			<tr class="indexTable-body-row" id="r0">
 				<th class="indexTable-body-row-transparentCell" colspan="3" id="y2021">
 					<div class="indexTable-body-row-cellTitle">
-						<button class="indexTable-body-row-cellTitle-button button mod-text mod-onlyIcon" aria-expanded="true" aria-controls="r1 r2 r3" type="button">
+						<button class="indexTable-body-row-cellTitle-button button" aria-expanded="true" aria-controls="r1 r2 r3" type="button">
 							<span class="lucca-icon icon-arrowChevronBottom" aria-hidden="true"></span>
 							<span class="u-mask">Hide details</span>
 						</button>
@@ -64,7 +64,7 @@ function getTemplate(args: IndexTableNestedStory): string {
 			<tr class="indexTable-body-row" id="r4">
 				<th class="indexTable-body-row-transparentCell" colspan="3" id="y2022">
 					<div class="indexTable-body-row-cellTitle">
-						<button class="indexTable-body-row-cellTitle-button button mod-text mod-onlyIcon" aria-expanded="true" aria-controls="r5" type="button">
+						<button class="indexTable-body-row-cellTitle-button button" aria-expanded="true" aria-controls="r5" type="button">
 							<span class="lucca-icon icon-arrowChevronBottom" aria-hidden="true"></span>
 							<span class="u-mask">Hide details</span>
 						</button>
@@ -96,7 +96,7 @@ function getTemplate(args: IndexTableNestedStory): string {
 			<tr class="indexTable-body-row" id="r0">
 				<th class="indexTable-body-row-transparentCell" colspan="2" id="y2021">
 					<div class="indexTable-body-row-cellTitle">
-						<button class="indexTable-body-row-cellTitle-button button mod-text mod-onlyIcon" aria-expanded="true" aria-controls="r1 r2 r3" type="button">
+						<button class="indexTable-body-row-cellTitle-button button" aria-expanded="true" aria-controls="r1 r2 r3" type="button">
 							<span class="lucca-icon icon-arrowChevronBottom" aria-hidden="true"></span>
 							<span class="u-mask">Hide details</span>
 						</button>
@@ -144,7 +144,7 @@ function getTemplate(args: IndexTableNestedStory): string {
 			<tr class="indexTable-body-row" id="r4">
 				<th class="indexTable-body-row-transparentCell" colspan="2" id="y2022">
 					<div class="indexTable-body-row-cellTitle">
-						<button class="indexTable-body-row-cellTitle-button button mod-text mod-onlyIcon" aria-expanded="true" aria-controls="r5" type="button">
+						<button class="indexTable-body-row-cellTitle-button button" aria-expanded="true" aria-controls="r5" type="button">
 							<span class="lucca-icon icon-arrowChevronBottom" aria-hidden="true"></span>
 							<span class="u-mask">Hide details</span>
 						</button>

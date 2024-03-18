@@ -1,5 +1,6 @@
 @use 'vars' as *;
 @use '@lucca-front/scss/src/commons/utils/a11y';
+@use '@lucca-front/scss/src/components/button/exports' as button;
 
 @mixin component($atRoot: 'without: rule') {
     position: relative;
@@ -60,7 +61,7 @@
 
         .indexTable-head-row-transparentCell,
         .indexTable-body-row-transparentCell {
-            vertical-align: top;
+            vertical-align: text-bottom;
             padding-right: var(--components-indexTable-cell-padding);
         }
 
@@ -127,8 +128,17 @@
             }
         }
 
-        .indexTable-body-row-cell-checkbox {
+        .indexTable-body-row-cell-checkbox,
+        .indexTable-head-row-cell-checkbox {
             display: block;
+            margin-top: 0.75rem;
+        }
+
+        .indexTable-head-row-cell-checkbox {
+            margin-top: var(--spacings-XS);
+        }
+
+        .indexTable-body-row-cell-checkbox {
             margin-top: 0.75rem;
         }
 
@@ -140,11 +150,17 @@
         .indexTable-body-row-cellTitle {
             display: flex;
             align-items: center;
-            gap: var(--spacings-XXS);
+            gap: var(--spacings-XS);
+            padding-bottom: var(--spacings-XXS);
         }
 
-        .indexTable-body-row-cellTitle-button .lucca-icon {
-            transition: transform var(--commons-animations-durations-fast) ease;
+        .indexTable-body-row-cellTitle-button {
+            @include button.text;
+            @include button.S;
+            @include button.onlyIconS;
+            .lucca-icon {
+                transition: transform var(--commons-animations-durations-fast) ease;
+            }
         }
 
         .indexTable-body-row-cellTitle-title {

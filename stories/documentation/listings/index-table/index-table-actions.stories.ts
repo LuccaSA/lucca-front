@@ -175,7 +175,7 @@ function getTemplate(args: IndexTableActionsStory): string {
 			<tr class="indexTable-head-row">
 				<th class="indexTable-head-row-transparentCell" scope="col">
 					<label class="formLabel u-mask" for="allchbx">Select all items</label>
-					<span class="checkboxField indexTable-body-row-cell-checkbox">
+					<span class="checkboxField indexTable-head-row-cell-checkbox">
 						<input class="checkboxField-input" type="checkbox" id="allchbx"
 							aria-controls="r0chbx r1chbx r2chbx" />
 						<span class="checkboxField-icon" aria-hidden="true"><span
