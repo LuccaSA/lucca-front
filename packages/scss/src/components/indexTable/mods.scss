@@ -201,8 +201,8 @@
 @mixin stackableResponsiveCardList {
     @include media.max('S') {
         .indexTable-body-row[class*='mod-stack'] {
-            border-width: 0;
-            border-bottom-width: calc(var(--components-indexTable-row-spacing-responsive) + var(--components-indexTable-row-stack-border-bottom));
+            border: 0;
+            border-bottom-width: var(--components-indexTable-row-stack-border-bottom);
             border-style: solid;
             border-color: transparent;
             &::before,
@@ -210,7 +210,7 @@
                 content: '';
                 position: absolute;
                 top: 0;
-                bottom: calc((var(--components-indexTable-row-spacing-responsive) + var(--components-indexTable-row-stack-border-bottom)) * -1);
+                bottom: calc((var(--components-indexTable-row-spacing-responsive) + var(--components-indexTable-stack3-row-spacing)) * -1);
                 width: 50%;
                 background-image: var(--components-indexTable-row-stack2-background-image, none), var(--components-indexTable-row-stack3-background-image, none);
                 background-position: var(--components-indexTable-row-stack2-background-position, 0 0), var(--components-indexTable-row-stack3-background-position, 0 0);
