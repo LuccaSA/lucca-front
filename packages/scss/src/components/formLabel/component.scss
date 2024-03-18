@@ -16,7 +16,8 @@
 	@at-root ($atRoot) {
 		.formLabel-required {
 			color: var(--palettes-error-700);
-			line-height: normal;
+			font-size: inherit;
+			line-height: inherit;
 			top: 0;
 		}
 	}

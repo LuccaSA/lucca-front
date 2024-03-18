@@ -81,6 +81,8 @@ export const Basic: StoryObj<TextInputComponent & { disabled: boolean } & FormFi
 		type: 'text',
 		placeholder: 'Placeholder',
 		tooltip: "Je suis un message d'aide",
+		noSpinButtons: false,
+		step: 1,
 	},
 };
 
