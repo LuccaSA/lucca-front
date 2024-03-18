@@ -36,17 +36,26 @@ function getTemplate(args: IndexTableNestedStory): string {
 				</th>
 			</tr>
 			<tr class="indexTable-body-row" id="r1">
-				<td class="indexTable-body-row-cell" header="y2021">Content</td>
+				<td class="indexTable-body-row-cell" header="y2021">
+					<a href="#" class="indexTable-body-row-cell-action">See details</a>
+					Content
+				</td>
 				<td class="indexTable-body-row-cell" header="y2021">Content</td>
 				<td class="indexTable-body-row-cell" header="y2021">Content</td>
 			</tr>
 			<tr class="indexTable-body-row" id="r2">
-				<td class="indexTable-body-row-cell" header="y2021">Content</td>
+				<td class="indexTable-body-row-cell" header="y2021">
+					<a href="#" class="indexTable-body-row-cell-action">See details</a>
+					Content
+				</td>
 				<td class="indexTable-body-row-cell" header="y2021">Content</td>
 				<td class="indexTable-body-row-cell" header="y2021">Content</td>
 			</tr>
 			<tr class="indexTable-body-row" id="r3">
-				<td class="indexTable-body-row-cell" header="y2021">Content</td>
+				<td class="indexTable-body-row-cell" header="y2021">
+					<a href="#" class="indexTable-body-row-cell-action">See details</a>
+					Content
+				</td>
 				<td class="indexTable-body-row-cell" header="y2021">Content</td>
 				<td class="indexTable-body-row-cell" header="y2021">Content</td>
 			</tr>
@@ -65,7 +74,10 @@ function getTemplate(args: IndexTableNestedStory): string {
 				</th>
 			</tr>
 			<tr class="indexTable-body-row" id="r5">
-				<td class="indexTable-body-row-cell" header="y2022">Content</td>
+				<td class="indexTable-body-row-cell" header="y2022">
+					<a href="#" class="indexTable-body-row-cell-action">See details</a>
+					Content
+				</td>
 				<td class="indexTable-body-row-cell" header="y2022">Content</td>
 				<td class="indexTable-body-row-cell" header="y2022">Content</td>
 			</tr>
@@ -98,21 +110,30 @@ function getTemplate(args: IndexTableNestedStory): string {
 				</th>
 			</tr>
 			<tr class="indexTable-body-row" id="r1">
-				<td class="indexTable-body-row-cell" header="y2021">Content</td>
+				<td class="indexTable-body-row-cell" header="y2021">
+					<a href="#" class="indexTable-body-row-cell-action">See details</a>
+					Content
+				</td>
 				<td class="indexTable-body-row-cell" header="y2021">Content</td>
 				<td class="indexTable-body-row-cell u-textRight" header="y2021">
 					<strong>170.00 €</strong>
 				</td>
 			</tr>
 			<tr class="indexTable-body-row" id="r2">
-				<td class="indexTable-body-row-cell" header="y2021">Content</td>
+				<td class="indexTable-body-row-cell" header="y2021">
+					<a href="#" class="indexTable-body-row-cell-action">See details</a>
+					Content
+				</td>
 				<td class="indexTable-body-row-cell" header="y2021">Content</td>
 				<td class="indexTable-body-row-cell u-textRight" header="y2021">
 					<strong>50.30 €</strong>
 				</td>
 			</tr>
 			<tr class="indexTable-body-row" id="r3">
-				<td class="indexTable-body-row-cell" header="y2021">Content</td>
+				<td class="indexTable-body-row-cell" header="y2021">
+					<a href="#" class="indexTable-body-row-cell-action">See details</a>
+					Content
+				</td>
 				<td class="indexTable-body-row-cell" header="y2021">Content</td>
 				<td class="indexTable-body-row-cell u-textRight" header="y2021">
 					<strong>7778.80 €</strong>
@@ -137,7 +158,10 @@ function getTemplate(args: IndexTableNestedStory): string {
 				</th>
 			</tr>
 			<tr class="indexTable-body-row" id="r5">
-				<td class="indexTable-body-row-cell" header="y2022">Content</td>
+				<td class="indexTable-body-row-cell" header="y2022">
+					<a href="#" class="indexTable-body-row-cell-action">See details</a>
+					Content
+				</td>
 				<td class="indexTable-body-row-cell" header="y2022">Content</td>
 				<td class="indexTable-body-row-cell u-textRight" header="y2022">
 					<strong>200.00 €</strong>
