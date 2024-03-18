@@ -1,5 +1,5 @@
 @mixin vars {
-    --components-indexTable-padding: var(--spacings-XS);
+    --components-indexTable-padding: var(--spacings-XS) 0.75rem;
     --components-indexTable-border-radius: 12px;
     --components-indexTable-background-color: var(--palettes-grey-50);
     --components-indexTable-row-spacing: 4px;

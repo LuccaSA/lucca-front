@@ -30,6 +30,14 @@ function getTemplate(args: IndexTableMassSelectionAndPaginationStory): string {
 					<th class="indexTable-head-row-cell" scope="col">Label</th>
 					<th class="indexTable-head-row-cell" scope="col">Label</th>
 				</tr>
+				<tr class="indexTable-head-row mod-massSelection">
+					<th class="indexTable-head-row-cell" colspan="4">
+						<div class="indexTable-head-row-cell-massSelection">
+							<span>3 selected items</span>
+							<button class="button mod-text palette-product" type="button">Select all items</button>
+						</div>
+					</th>
+				</tr>
 			</thead>
 			<tbody class="indexTable-body">
 				<tr class="indexTable-body-row">
@@ -82,10 +90,6 @@ function getTemplate(args: IndexTableMassSelectionAndPaginationStory): string {
 				</tr>
 			</tbody>
 		</table>
-		<div class="indexTable_massSelection">
-			<span class="indexTable_massSelection-text">3 selected items</span>
-			<button class="button mod-text palette-product" type="button">Select all items</button>
-		</div>
 		<nav class="pagination" role="navigation" aria-labelledby="pagination-count">
 			<div id="pagination-count" class="pagination-count">
 				<span class="pagination-count-current">

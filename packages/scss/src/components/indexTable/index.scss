@@ -38,6 +38,10 @@
         @include layoutFixed;
     }
 
+    .indexTable-head-row.mod-massSelection {
+        @include massSelection;
+    }
+
     .indexTable-body-row-cell.mod-actions {
         @include actions;
     }

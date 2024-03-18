@@ -171,29 +171,21 @@
             text-align: right;
         }
 
-        //A wrapper is needed for mass selection and pagination that are undex an indexTable
+        //A wrapper is needed for pagination
         .indexTableWrapper {
             @include vars;
-            display: grid;
-            grid-template-areas: 'table table' 'massSelection pagination';
-            padding: var(--components-indexTable-cell-padding) var(--components-indexTable-cell-padding) var(--spacings-XXS);
-            gap: var(--spacings-XS) var(--components-indexTable-cell-padding);
+            display: flex;
+            flex-direction: column;
+            padding-bottom: var(--spacings-XS);
             border-radius: var(--components-indexTable-border-radius);
             background-color: var(--components-indexTable-background-color);
             .indexTable {
-                grid-area: table;
-                padding: 0;
+                flex-grow: 1;
             }
             .pagination {
-                grid-area: pagination;
+                align-self: flex-end;
                 padding: var(--spacings-XXS) 0;
-            }
-            .indexTable_massSelection {
-                grid-area: massSelection;
-                display: flex;
-                align-items: center;
-                padding-left: var(--spacings-XS);
-                gap: var(--spacings-XS);
+                margin-right: 0.75rem;
             }
         }
     }

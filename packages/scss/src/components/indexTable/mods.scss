@@ -294,3 +294,21 @@
     max-width: var(--cell-width, auto);
     width: var(--cell-width, auto);
 }
+
+@mixin massSelection {
+    .indexTable-head-row-cell {
+        padding: 0;
+    }
+    .indexTable-head-row-cell-massSelection {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: var(--spacings-XS);
+        padding: var(--spacings-XXS);
+        border: var(--commons-divider-width) solid var(--palettes-grey-200);
+        border-radius: var(--commons-borderRadius-L);
+        margin-bottom: var(--components-indexTable-row-spacing);
+        color: var(--palettes-grey-800);
+        background-color: var(--palettes-grey-100);
+    }
+}
