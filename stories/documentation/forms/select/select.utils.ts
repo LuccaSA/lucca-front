@@ -67,7 +67,6 @@ export const coreSelectStory = {
 		clearable: HiddenArgType,
 		clueChange: HiddenArgType,
 		colorNameByColor: HiddenArgType,
-		disabled: HiddenArgType,
 		grouping: HiddenArgType,
 		legumeColor: HiddenArgType,
 		legumes: HiddenArgType,
