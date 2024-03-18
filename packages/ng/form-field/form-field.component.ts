@@ -7,7 +7,7 @@ import { InlineMessageComponent, InlineMessageState } from '@lucca-front/ng/inli
 import { SafeHtml } from '@angular/platform-browser';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 import { LuClass } from '@lucca-front/ng/core';
-import { NG_VALIDATORS, NgControl, ReactiveFormsModule, RequiredValidator, Validator, Validators } from '@angular/forms';
+import { AbstractControl, FormControl, NG_VALIDATORS, NgControl, ReactiveFormsModule, RequiredValidator, Validator, Validators } from '@angular/forms';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { FORM_FIELD_INSTANCE } from './form-field.token';
 
@@ -61,6 +61,9 @@ export class FormFieldComponent implements OnChanges, OnDestroy, DoCheck {
 		transform: booleanAttribute,
 	})
 	hiddenLabel = false;
+
+	@Input()
+	statusControl: AbstractControl;
 
 	@Input()
 	tooltip: string | SafeHtml;
@@ -165,7 +168,7 @@ export class FormFieldComponent implements OnChanges, OnDestroy, DoCheck {
 		if (this.#control) {
 			// invalid management
 			const previousInvalid = this.invalid;
-			this.invalid = this.#control.invalid && this.#control.touched;
+			this.invalid = (this.#control.invalid || this.statusControl?.invalid) && this.#control.touched;
 
 			// required management
 			const previousRequired = this.required;
