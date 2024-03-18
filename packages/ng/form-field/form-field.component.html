@@ -6,13 +6,13 @@
 	[class.u-mask]="hiddenLabel"
 	attr.aria-hidden="{{hiddenLabel}}"
 >
-	{{label}}<sup class="formLabel-required" aria-hidden="true" *ngIf="required">*</sup>
+	{{ label }}<sup class="formLabel-required" aria-hidden="true" *ngIf="required">*</sup>
 	<lu-icon icon="helpOutline" alt="" *ngIf="tooltip" [luTooltip]="tooltip" [color]="invalid ? 'error' : 'inherit'"></lu-icon>
 </label>
 <ng-content></ng-content>
 <lu-inline-message
 	id="{{id}}-message"
-	*ngIf="inlineMessage"
-	[label]="inlineMessage"
+	*ngIf="inlineMessage || (invalid ? errorInlineMessage : false)"
+	[label]="(invalid && errorInlineMessage) ? errorInlineMessage : inlineMessage"
 	[state]="invalid ? 'error' : inlineMessageState"
 ></lu-inline-message>

@@ -7,7 +7,7 @@ import { InlineMessageComponent, InlineMessageState } from '@lucca-front/ng/inli
 import { SafeHtml } from '@angular/platform-browser';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 import { LuClass } from '@lucca-front/ng/core';
-import { AbstractControl, FormControl, NG_VALIDATORS, NgControl, ReactiveFormsModule, RequiredValidator, Validator, Validators } from '@angular/forms';
+import { AbstractControl, NG_VALIDATORS, NgControl, ReactiveFormsModule, RequiredValidator, Validator, Validators } from '@angular/forms';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { FORM_FIELD_INSTANCE } from './form-field.token';
 
@@ -74,6 +74,12 @@ export class FormFieldComponent implements OnChanges, OnDestroy, DoCheck {
 
 	@Input()
 	inlineMessage: string;
+
+	/**
+	 * Inline message for when the control is in error state
+	 */
+	@Input()
+	errorInlineMessage: string;
 
 	/**
 	 * State of the inline message, will be ignored if form state is invalid
