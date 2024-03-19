@@ -10,7 +10,7 @@
 	[ngModel]="clue"
 	(ngModelChange)="clueChanged($event)"
 	[readonly]="!searchable"
-	[disabled]="disabled"
+	[disabled]="disabled$ | async"
 	luInput
 	#inputElement
 />

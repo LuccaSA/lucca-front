@@ -8,25 +8,30 @@
 	@return math.div($value, 16px) * 1em;
 }
 
+// Range queries have been supported since Safari 16.4. They can therefore be used in theory.
+// However, they only provide a different syntax and penalize some users who don’t have their browser up to date.
+
 // les requêtes simples et multiples
 
 @mixin query($breakpoint, $property: 'width', $max: false, $at: 'media', $name: '') {
-	$operator: '>=';
+	$reversed: '';
 
 	@if $max {
-		$operator: '<';
+		$reversed: 'not all and';
 	}
 
 	@if map.get(config.$breakpoints, $breakpoint) {
 		$breakpoint: pxToEm(map.get(config.$breakpoints, $breakpoint));
 	}
 
-	@#{$at} #{$name} (#{$property} #{$operator} #{$breakpoint}) {
+	@#{$at} #{$name} #{$reversed} (min-#{$property}: #{$breakpoint}) {
 		@content;
 	}
 }
 
 @mixin queries($breakpoint1, $breakpoint2, $property: 'width', $at: 'media', $name: '') {
+	$reversed: 'not all and';
+
 	@if map.get(config.$breakpoints, $breakpoint1) {
 		$breakpoint1: pxToEm(map.get(config.$breakpoints, $breakpoint1));
 	}
@@ -42,8 +47,10 @@
 		$breakpoint1: $breakpointTmp;
 	}
 
-	@#{$at} #{$name} (#{$breakpoint1} <= #{$property} < #{$breakpoint2}) {
-		@content;
+	@#{$at} #{$name} (min-#{$property}: #{$breakpoint1}) {
+		@#{$at} #{$name} #{$reversed} (min-#{$property}: #{$breakpoint2}) {
+			@content;
+		}
 	}
 }
 
