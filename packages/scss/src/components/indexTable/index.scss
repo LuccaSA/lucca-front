@@ -1,4 +1,6 @@
 @use 'exports' as *;
+@use '@lucca-front/scss/src/commons/utils/media';
+
 .indexTable {
     @include vars;
     @include component;
@@ -18,22 +20,6 @@
         @include stickyHeader;
     }
 
-    &.mod-responsiveCardList {
-        @include responsiveCardList;
-    }
-
-    &.mod-selectable.mod-responsiveCardList {
-        @include selectableResponsiveCardList;
-    }
-
-    &.mod-stackable.mod-responsiveCardList {
-        @include stackableResponsiveCardList;
-    }
-
-    &.mod-selectable.mod-stackable.mod-responsiveCardList {
-        @include selectableStackableResponsiveCardList;
-    }
-
     &[class*='mod-layoutFixed'] {
         @include layoutFixed;
     }
@@ -44,6 +30,25 @@
 
     .indexTable-body-row-cell.mod-actions {
         @include actions;
+    }
+
+    // Responsive
+    @include media.max('S') {
+        &.mod-responsiveCardList {
+            @include responsiveCardList;
+        }
+
+        &.mod-selectable.mod-responsiveCardList {
+            @include selectableResponsiveCardList;
+        }
+
+        &.mod-stackable.mod-responsiveCardList {
+            @include stackableResponsiveCardList;
+        }
+
+        &.mod-selectable.mod-stackable.mod-responsiveCardList {
+            @include selectableStackableResponsiveCardList;
+        }
     }
 
     // generic states, non tied to a mod
