@@ -43,7 +43,7 @@
 	display: flex;
 	gap: var(--spacings-XS);
 	justify-content: space-between;
-	box-shadow:  calc(var(--spacings-XXS) * -0.5) calc(var(--spacings-XXS) * -0.5) 0 2px var(--pr-t-elevation-surface-raised); // Mask background options scrolling behind
+	box-shadow: calc(var(--spacings-XXS) * -0.5) calc(var(--spacings-XXS) * -0.5) 0 2px var(--pr-t-elevation-surface-raised); // Mask background options scrolling behind
 }
 
 .lu-picker-content-add {
@@ -106,4 +106,10 @@
 	.lu-picker-content {
 		max-height: none;
 	}
+}
+
+.lu-picker-content-group {
+	display: flex;
+	flex-direction: column;
+	gap: var(--spacings-XXS);
 }
