@@ -1,7 +1,10 @@
 <div
 	class="lu-picker-panel lu-option-picker-panel mod-multiple"
 	role="dialog"
-	*ngIf="{ options: (options$ | async) || [], clue: clueChange$ | async } as ctx"
+	*ngIf="{
+		options: (options$ | async) || [],
+		groupTemplateLocation: groupTemplateLocation$ | async,
+	} as ctx"
 >
 	<div
 		class="lu-picker-content"
@@ -13,7 +16,7 @@
 		(scroll)="onScroll($event)"
 	>
 		<div class="lu-picker-content-option">
-			<ng-container *ngIf="grouping && !ctx.clue">
+			<ng-container *ngIf="grouping && ctx.groupTemplateLocation === 'group-header'">
 				<div
 					*ngFor="let group of ctx.options | luOptionGroup:grouping.selector"
 					class="lu-picker-content-group"
@@ -35,7 +38,7 @@
 					<ng-template [ngTemplateOutlet]="optionsList" [ngTemplateOutletContext]="{ $implicit: group.options }" />
 				</div>
 			</ng-container>
-			<ng-container *ngIf="!grouping || ctx.clue">
+			<ng-container *ngIf="!grouping || ctx.groupTemplateLocation !== 'group-header'">
 				<ng-template [ngTemplateOutlet]="optionsList" [ngTemplateOutletContext]="{ $implicit: ctx.options }" />
 			</ng-container>
 
@@ -45,7 +48,7 @@
 					[option]="option"
 					[optionTpl]="optionTpl"
 					[optionIndex]="index"
-					[grouping]="grouping && ctx.clue ? grouping : undefined"
+					[grouping]="ctx.groupTemplateLocation === 'option' ? grouping : undefined"
 					[scrollIntoViewOptions]="{ block: 'nearest' }"
 					[isSelected]="option | luIsOptionSelected:optionComparer:selectedOptions"
 					(click)="toggleOption(option)"
