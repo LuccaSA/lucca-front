@@ -8,7 +8,7 @@
 	[cdkTrapFocusAutoCapture]="true"
 >
 	<div class="lu-picker-content" [class.is-loading]="loading$ | async" (scroll)="onScroll($event)">
-		<div class="lu-picker-content-option" role="listbox">
+		<div role="listbox">
 			<ng-container *ngIf="grouping && ctx.groupTemplateLocation === 'group-header'">
 				<div
 					*ngFor="let group of ctx.options | luOptionGroup:grouping.selector"
