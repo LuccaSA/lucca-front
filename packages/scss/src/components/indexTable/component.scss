@@ -51,12 +51,12 @@
             display: table-cell;
             vertical-align: middle;
             text-align: left;
+            font-weight: 400;
         }
 
         .indexTable-head-row-cell {
             padding: var(--spacings-XS) var(--components-indexTable-cell-padding);
             color: var(--palettes-neutral-600);
-            font-weight: 400;
         }
 
         .indexTable-head-row-transparentCell,
