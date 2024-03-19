@@ -1,4 +1,4 @@
-import { booleanAttribute, Component, ElementRef, Input, numberAttribute, ViewChild, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, Component, ElementRef, Input, ViewChild, ViewEncapsulation } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormFieldComponent, InputDirective } from '@lucca-front/ng/form-field';
 import { NoopValueAccessorDirective } from '../noop-value-accessor.directive';
