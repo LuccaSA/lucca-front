@@ -10,11 +10,11 @@ import { LuCoreSelectUsersDirective, provideCoreSelectCurrentUserId } from '@luc
 import { LuMultiDisplayerDirective, LuMultiSelectDisplayerInputDirective, LuMultiSelectInputComponent } from '@lucca-front/ng/multi-select';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 import { Meta, applicationConfig, moduleMetadata } from '@storybook/angular';
+import { interval, map } from 'rxjs';
+import { startWith } from 'rxjs/operators';
 import { HiddenArgType } from 'stories/helpers/common-arg-types';
 import { getStoryGenerator } from 'stories/helpers/stories';
-import { FilterLegumesPipe, ILegume, LuCoreSelectInputStoryComponent, allLegumes, colorNameByColor, coreSelectStory } from './select.utils';
-import { BehaviorSubject, interval, map, of, timer } from 'rxjs';
-import { delay, startWith } from 'rxjs/operators';
+import { FilterLegumesPipe, ILegume, LuCoreSelectInputStoryComponent, SortLegumesPipe, allLegumes, colorNameByColor, coreSelectStory } from './select.utils';
 
 type LuMultiSelectInputStoryComponent = LuCoreSelectInputStoryComponent & {
 	selectedLegumes: ILegume[];
@@ -275,7 +275,7 @@ export const GroupBy = generateStory({
 		class="textfield-input"
 		placeholder="Placeholder..."
 		[(ngModel)]="selectedLegumes"
-		[options]="legumes | filterLegumes:clue"
+		[options]="legumes | filterLegumes:clue | sortLegumes:(clue ? ['name', legumeColor] : [legumeColor])"
 		(clueChange)="clue = $event"
 		[maxValuesShown]="maxValuesShown"
 	>
@@ -290,7 +290,6 @@ export const GroupBy = generateStory({
 	},
 	storyPartial: {
 		args: {
-			legumes: [...allLegumes].sort((a, b) => colorNameByColor[a.color].localeCompare(colorNameByColor[b.color])),
 			legumeColor: (legume: ILegume) => legume.color,
 			colorNameByColor,
 		},
@@ -321,7 +320,10 @@ export const testDynamicDisabled = generateStory({
 	storyPartial: {
 		args: {
 			selectedLegumes: allLegumes.slice(0, 15),
-			dynamicDisabled: interval(2000).pipe(map(n => !!(n % 2)), startWith(true)),
+			dynamicDisabled: interval(2000).pipe(
+				map((n) => !!(n % 2)),
+				startWith(true),
+			),
 		} as any,
 		argTypes: {
 			clearable: { control: { type: 'boolean' } },
@@ -340,6 +342,7 @@ const meta: Meta<LuMultiSelectInputStoryComponent> = {
 				I18nPluralPipe,
 				FormsModule,
 				FilterLegumesPipe,
+				SortLegumesPipe,
 				LuMultiSelectInputComponent,
 				LuMultiDisplayerDirective,
 				LuOptionDirective,
@@ -354,7 +357,7 @@ const meta: Meta<LuMultiSelectInputStoryComponent> = {
 				LuDisabledOptionDirective,
 				LuMultiSelectDisplayerInputDirective,
 				CommonModule,
-				AsyncPipe
+				AsyncPipe,
 			],
 		}),
 		applicationConfig({

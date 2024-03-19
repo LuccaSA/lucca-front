@@ -1,14 +1,17 @@
 <div
 	class="lu-picker-panel lu-option-picker-panel"
 	cdkTrapFocus
-	*ngIf="{ options: (options$ | async) || [] } as ctx"
+	*ngIf="{
+		options: (options$ | async) || [],
+		groupTemplateLocation: groupTemplateLocation$ | async,
+	} as ctx"
 	[cdkTrapFocusAutoCapture]="true"
 >
 	<div class="lu-picker-content" [class.is-loading]="loading$ | async" (scroll)="onScroll($event)">
-		<div class="lu-picker-content-option" role="listbox">
-			<ng-container *ngIf="grouping">
+		<div role="listbox">
+			<ng-container *ngIf="grouping && ctx.groupTemplateLocation === 'group-header'">
 				<div
-					*ngFor="let group of groups$ | async"
+					*ngFor="let group of ctx.options | luOptionGroup:grouping.selector"
 					class="lu-picker-content-option-group"
 					role="group"
 					[attr.aria-labelledby]="selectId + '-group-' + group.key"
@@ -19,7 +22,7 @@
 					<ng-template [ngTemplateOutlet]="optionsList" [ngTemplateOutletContext]="{ $implicit: group.options }" />
 				</div>
 			</ng-container>
-			<ng-container *ngIf="!grouping">
+			<ng-container *ngIf="!grouping || ctx.groupTemplateLocation !== 'group-header'">
 				<ng-template [ngTemplateOutlet]="optionsList" [ngTemplateOutletContext]="{ $implicit: ctx.options }" />
 			</ng-container>
 
@@ -29,10 +32,11 @@
 					[option]="option"
 					[optionTpl]="optionTpl"
 					[optionIndex]="index"
+					[grouping]="ctx.groupTemplateLocation === 'option' ? grouping : undefined"
 					[scrollIntoViewOptions]="{ block: 'center' }"
 					[isSelected]="option | luIsOptionSelected:optionComparer:selected"
 					(click)="panelRef.emitValue(option)"
-				></lu-select-option>
+				/>
 			</ng-template>
 			<div class="lu-picker-content-option-emptyState" *ngIf="ctx.options.length === 0 && (loading$ | async) === false">
 				{{intl.emptyResults}}

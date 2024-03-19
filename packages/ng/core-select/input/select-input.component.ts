@@ -115,6 +115,8 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	}
 
 	public clueChanged(clue: string): void {
+		this.clue = clue;
+
 		if (!this.isPanelOpen) {
 			this.openPanel(clue);
 		} else if (this.lastEmittedClue !== clue) {
@@ -165,9 +167,13 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 					this.panelRef?.handleKeyManagerEvent($event);
 				}
 				break;
-			case 'Space':
+			case ' ':
 			case 'ArrowDown':
 			case 'ArrowUp':
+				// Initial space should just open the panel, not trigger a clue change
+				if (!this.clue && $event.key === ' ') {
+					$event.preventDefault();
+				}
 				if (this.isPanelOpen) {
 					this.panelRef?.handleKeyManagerEvent($event);
 				} else {

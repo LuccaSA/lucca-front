@@ -1,2 +1,2 @@
 export * from './panel.models';
-export { generateGroups as ɵgenerateGroups } from './panel.utils';
+export { getGroupTemplateLocation as ɵgetGroupTemplateLocation } from './panel.utils';
