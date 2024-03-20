@@ -1,25 +1,28 @@
 import { Meta, StoryFn } from '@storybook/angular';
 
-interface CalloutKillableStory {}
+interface CalloutTitleStory {
+	palette: string;
+	s: boolean;
+}
 
 export default {
-	title: 'Documentation/Feedback/Callout/HTML & CSS/Killable',
+	title: 'Documentation/Feedback/Callout/HTML & CSS/Title',
 	argTypes: {},
 } as Meta;
 
-function getTemplate(args: CalloutKillableStory): string {
+function getTemplate(args: CalloutTitleStory): string {
 	return `<div class="callout">
 	<div class="callout-content">
+		<strong class="callout-content-title">Lorem ipsum dolor</strong>
 		<div class="callout-content-description">Caesarem fama studio memorabili ut latius abscessere amplam Nebridius equitum. <a href="#">En savoir plus</a></div>
 	</div>
-	<button type="button" class="callout-kill"></button>
 </div>`;
 }
 
-const Template: StoryFn<CalloutKillableStory> = (args) => ({
+const Template: StoryFn<CalloutTitleStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Killable = Template.bind({});
-Killable.args = {};
+export const Title = Template.bind({});
+Title.args = {};
