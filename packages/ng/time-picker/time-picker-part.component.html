@@ -1,0 +1,34 @@
+<ng-container *ngIf="!isReadonly; else readonly">
+	<label class="timePicker-fieldset-group-textfield">
+		<input
+			#timePickerInput
+			class="timePicker-fieldset-group-textfield-input u-opacity0"
+			type="text"
+			[tabindex]="focused ? 0 : -1"
+			[value]="hideValue ? null : value"
+			(input)="keysInputHandler($event)"
+			(focusin)="timePickerInput.select()"
+			(click)="clickHandler($event)"
+			(keydown)="keydownHandler($event)"
+		/>
+		<span aria-hidden="true" class="timePicker-fieldset-group-textfield-input timePicker-fieldset-group-textfield-display">
+			{{ valueLabel }}
+		</span>
+		<span class="u-mask">{{ label }}</span>
+	</label>
+	<ng-container *ngIf="displayArrows && !disabled">
+		<button class="timePicker-fieldset-group-button" type="button" tabindex="-1" luRepeatOnHold (hold)="up()">
+			<span aria-hidden="true" class="lucca-icon icon-northArrow"></span>
+		</button>
+		<button class="timePicker-fieldset-group-button" type="button" tabindex="-1" luRepeatOnHold (hold)="down()">
+			<span aria-hidden="true" class="lucca-icon icon-southArrow"></span>
+		</button>
+	</ng-container>
+</ng-container>
+
+<ng-template #readonly>
+	<span class="timePicker-fieldset-group-textfield">
+		<span class="timePicker-fieldset-group-textfield-input">{{ value | number: decimalConf }}</span>
+		<span class="u-mask">{{ label }}</span>
+	</span>
+</ng-template>
