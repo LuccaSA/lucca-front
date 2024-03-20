@@ -8,6 +8,10 @@
 		"new-icons": {
 			"description": "Replace old icon names with new ones.",
 			"factory": "./new-icons/index"
+		},
+		"tokens-spacings": {
+			"description": "Replace tokens with new names.",
+			"factory": "./tokens-spacing/index"
 		}
 	}
 }
