@@ -204,7 +204,6 @@
             position: absolute;
             top: 0;
             bottom: calc((var(--components-indexTable-row-spacing-responsive) + var(--components-indexTable-stack3-row-spacing)) * -1);
-            width: 50%;
             background-image: var(--components-indexTable-row-stack2-background-image, none), var(--components-indexTable-row-stack3-background-image, none);
             background-position: var(--components-indexTable-row-stack2-background-position, 0 0), var(--components-indexTable-row-stack3-background-position, 0 0);
             background-repeat: no-repeat, no-repeat;
@@ -213,10 +212,12 @@
         }
         &::before {
             left: var(--components-indexTable-cell-inset-x-left, 0);
+            right: 50%;
             --components-indexTable-row-stack2-background-position: left -2px bottom 6px;
             --components-indexTable-row-stack3-background-position: left 1px bottom 2px;
         }
         &::after {
+            left: 50%;
             right: 0;
             --components-indexTable-row-stack2-background-position: right -2px bottom 6px;
             --components-indexTable-row-stack3-background-position: right 1px bottom 2px;
