@@ -529,5 +529,6 @@ export const IconsList = [
 	{ icon: 'weatherStorm', deprecated: true },
 	{ icon: 'weatherSunny', deprecated: false },
 	{ icon: 'weatherSun', deprecated: true },
+	{ icon: 'weatherStars', deprecated: false },
 	{ icon: 'weight', deprecated: false },
 ];

@@ -529,4 +529,5 @@ export type LuccaIcon =
 	| 'weatherStorm'
 	| 'weatherSunny'
 	| 'weatherSun'
+	| 'weatherStars'
 	| 'weight';
