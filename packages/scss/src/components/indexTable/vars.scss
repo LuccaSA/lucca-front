@@ -8,11 +8,11 @@
 
     --components-indexTable-cell-padding: 0.75rem;
     --components-indexTable-cell-border-radius-default: var(--commons-borderRadius-L);
+    --components-indexTable-cell-background-color-default: var(--colors-white-color);
     // shadows
     --components-indexTable-cell-shadow-default: var(--pr-t-elevation-shadow-raised);
     --components-indexTable-cell-shadow-selected: 0 0 0 var(--commons-divider-width) var(--palettes-product-700);
     --components-indexTable-cell-shadow-hover: var(--pr-t-elevation-shadow-overlay);
-    --components-indexTable-shadow-mask-default: -10px 0px 0px 0px var(--colors-white-color);
 
     // width of selectables cells containing a checkbox
     --components-indexTable-row-cell-transparent-width: 2rem;

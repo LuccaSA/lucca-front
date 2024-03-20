@@ -74,7 +74,6 @@
 
             // apparence of the first cell with a card apparence.
             // we do this because there migh be one or two cells before without background and containing a checkbox
-            --components-indexTable-shadow-mask: 0 0 0 0;
             --components-indexTable-cell-border-radius: var(--components-indexTable-cell-border-radius-default) 0 0 var(--components-indexTable-cell-border-radius-default);
             --components-indexTable-cell-inset-x-left: var(--components-indexTable-cell-inset-x);
             --components-indexTable-outline-border-width: var(--components-indexTable-outline-border-width-default) 0 var(--components-indexTable-outline-border-width-default) var(--components-indexTable-outline-border-width-default);
@@ -82,11 +81,11 @@
 
             // apparence of the nexts cells
             ~ .indexTable-body-row-cell {
-                --components-indexTable-shadow-mask: var(--components-indexTable-shadow-mask-default);
                 --components-indexTable-cell-border-radius: 0;
                 --components-indexTable-cell-inset-x-left: 0px;
                 --components-indexTable-outline-border-width: var(--components-indexTable-outline-border-width-default) 0;
                 --components-indexTable-outline-border-radius: 0;
+                --components-indexTable-shadow-mask: -10px 0px 0px 0px var(--components-indexTable-cell-background-color, var(--components-indexTable-cell-background-color-default));
             }
 
             // apparence of the last cell with a card apparence
@@ -109,10 +108,10 @@
             &::before {
                 inset: var(--components-indexTable-cell-inset-y, 0) var(--components-indexTable-cell-inset-x-right, 0) var(--components-indexTable-cell-inset-y, 0) var(--components-indexTable-cell-inset-x-left, 0);
                 border-radius: var(--components-indexTable-cell-border-radius, 0);
-                background-color: var(--components-indexTable-cell-background-color, var(--colors-white-color));
+                background-color: var(--components-indexTable-cell-background-color, var(--components-indexTable-cell-background-color-default));
                 // shadow-mask : since the card apparence is put on every cell (du to a Safari bug), we need to hide the left part of the box shadow for everycell exept the first one.
                 // We do this with a rectangular white box-shadow above it.
-                box-shadow: var(--components-indexTable-shadow-mask), var(--components-indexTable-cell-shadow, var(--components-indexTable-cell-shadow-default));
+                box-shadow: var(--components-indexTable-shadow-mask, 0 0 0 0), var(--components-indexTable-cell-shadow, var(--components-indexTable-cell-shadow-default));
                 transition-property: inset, box-shadow, background-color;
             }
 

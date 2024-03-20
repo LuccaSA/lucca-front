@@ -52,7 +52,6 @@
     --components-indexTable-cell-background-color: var(--palettes-product-50);
     //!important here if for overriding a potential selectableHoveredRow reset
     --components-indexTable-cell-shadow: var(--components-indexTable-cell-shadow-selected) !important;
-    --components-indexTable-shadow-mask-default: -10px 0px 0px 0px var(--palettes-product-50);
     //if selected stackable row : we also change the stacks background color
     --components-indexTable-stack-svg: var(--components-indexTable-stack-svg-selected);
 }
