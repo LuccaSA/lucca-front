@@ -19,3 +19,33 @@
 	gap: var(--pr-t-spacings-75);
 	padding: var(--pr-t-spacings-100);
 }
+
+@mixin smart {
+	box-shadow: none;
+	background-image: linear-gradient(
+		135deg,
+		var(--palettes-grape-200),
+		var(--palettes-grape-100),
+		var(--palettes-lucca-100),
+		var(--palettes-lucca-200)
+	);
+
+	&::before {
+		content: '';
+		position: absolute;
+		inset: 1px;
+		border-radius: calc(var(--commons-borderRadius-L) - 1px);
+		background-image: linear-gradient(45deg, var(--palettes-grape-50), var(--palettes-lucca-50));
+	}
+
+	.callout-icon,
+	.callout-content {
+		position: relative;
+	}
+
+	.callout-icon {
+		background-image: linear-gradient(135deg, var(--palettes-grape-700), var(--palettes-lucca-600));
+		background-clip: text;
+		color: transparent;
+	}
+}

@@ -16,13 +16,13 @@ export default {
 			description: 'Taille : Small',
 		},
 		palette: {
-			options: ['', 'palette-success', 'palette-warning', 'palette-error'],
+			options: ['', 'palette-success', 'palette-warning', 'palette-error', 'mod-smart'],
 			control: {
 				type: 'select',
 			},
 		},
 		icon: {
-			options: ['icon-signHelp', 'icon-signSuccess', 'icon-signWarning', 'icon-signError'],
+			options: ['icon-signHelp', 'icon-signSuccess', 'icon-signWarning', 'icon-signError', 'icon-star'],
 			control: {
 				type: 'select',
 			},
