@@ -348,6 +348,7 @@ export const IconsList = [
 	{ icon: 'euro', deprecated: true },
 	{ icon: 'moneyPaymentCard', deprecated: false },
 	{ icon: 'bankingCard', deprecated: true },
+	{ icon: 'moneyCheck', deprecated: false },
 	{ icon: 'moneyPiggyBank', deprecated: false },
 	{ icon: 'piggyBank', deprecated: true },
 	{ icon: 'moneyWallet', deprecated: false },
@@ -528,5 +529,6 @@ export const IconsList = [
 	{ icon: 'weatherStorm', deprecated: true },
 	{ icon: 'weatherSunny', deprecated: false },
 	{ icon: 'weatherSun', deprecated: true },
+	{ icon: 'weatherStars', deprecated: false },
 	{ icon: 'weight', deprecated: false },
 ];
