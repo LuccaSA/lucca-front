@@ -1,7 +1,7 @@
 import { DestroyRef, Directive, ElementRef, HostBinding, inject, OnInit } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ILuOptionContext, LU_OPTION_CONTEXT } from '@lucca-front/ng/core-select';
-import { map, startWith, switchMap } from 'rxjs/operators';
+import { startWith, switchMap } from 'rxjs/operators';
 import { LuMultiSelectInputComponent } from '../input';
 import { of } from 'rxjs';
 
