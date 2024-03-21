@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component, forwardRef, inject, Input, ViewEncapsulation } from '@angular/core';
-import { FormFieldComponent } from '../../form-field/form-field.component';
-import { FORM_FIELD_INSTANCE } from '../../form-field/form-field.token';
+import { FormFieldComponent } from '@lucca-front/ng/form-field';
+import { FORM_FIELD_INSTANCE } from '@lucca-front/ng/form-field';
 import { injectNgControl } from '../inject-ng-control';
 import { NoopValueAccessorDirective } from '../noop-value-accessor.directive';
-import { InputDirective } from '../../form-field/input.directive';
+import { InputDirective } from '@lucca-front/ng/form-field';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RADIO_GROUP_INSTANCE } from './radio-group-token';
 

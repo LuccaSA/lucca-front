@@ -120,11 +120,6 @@ export class FormFieldComponent implements OnChanges, OnDestroy, DoCheck {
 	}
 
 	ngOnChanges(): void {
-		console.log({
-			[`mod-${this.size}`]: true,
-			'mod-checkable': this.layout === 'checkable',
-			'form-field': this.layout !== 'fieldset',
-		});
 		this.#luClass.setState({
 			[`mod-${this.size}`]: true,
 			'mod-checkable': this.layout === 'checkable',
