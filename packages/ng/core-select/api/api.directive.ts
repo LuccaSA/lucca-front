@@ -37,7 +37,9 @@ export abstract class ALuCoreSelectApiDirective<TOption, TParams = Record<string
 
 	public ngOnInit(): void {
 		this.select.optionComparer = this.optionComparer;
-		this.buildOptions().pipe(takeUntil(this.destroy$)).subscribe(this.select.options$);
+		this.buildOptions()
+			.pipe(takeUntil(this.destroy$))
+			.subscribe((options) => (this.select.options = options));
 	}
 
 	protected buildOptions(): Observable<TOption[]> {
