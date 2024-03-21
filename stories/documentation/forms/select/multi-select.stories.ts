@@ -100,7 +100,7 @@ export const WithMultiDisplayer = generateStory({
 	},
 	storyPartial: {
 		args: {
-			selectedLegumes: allLegumes.slice(0, 5),
+			selectedLegumes: [],
 		},
 	},
 });
