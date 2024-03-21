@@ -1,8 +1,9 @@
 import { DestroyRef, Directive, ElementRef, HostBinding, inject, OnInit } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ILuOptionContext, LU_OPTION_CONTEXT } from '@lucca-front/ng/core-select';
-import { map } from 'rxjs/operators';
-import { LuMultiSelectInputComponent } from '../input/select-input.component';
+import { map, startWith, switchMap } from 'rxjs/operators';
+import { LuMultiSelectInputComponent } from '../input';
+import { of } from 'rxjs';
 
 @Directive({
 	selector: '[luMultiSelectDisplayerInput]',
@@ -40,20 +41,26 @@ export class LuMultiSelectDisplayerInputDirective<T> implements OnInit {
 	ngOnInit(): void {
 		this.context.option$
 			.pipe(
-				map((options) => {
+				startWith([]),
+				switchMap((options) => {
 					if ((options || []).length > 0) {
-						return '';
+						return of('');
 					}
-					return this.select.placeholder || '';
+					return this.select.placeholder$;
 				}),
 				takeUntilDestroyed(this.destroyRef),
 			)
-			.subscribe((placeholder) => (this.placeholder = placeholder));
+			.subscribe((placeholder) => {
+				this.placeholder = placeholder;
+			});
 		this.select.isPanelOpen$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((open) => {
 			this.panelOpen = open;
 		});
 		this.select.activeDescendant$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((activeDescendant) => {
-			this.activeDescendant = activeDescendant;
+			// Pushing this to next cycle to avoid expression has changed while it was checked
+			setTimeout(() => {
+				this.activeDescendant = activeDescendant;
+			}, 1);
 		});
 		this.context.isDisabled$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((disabled) => {
 			this.disabled = disabled;
