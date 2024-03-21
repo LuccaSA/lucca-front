@@ -7,7 +7,7 @@ const collectionPath = path.normalize(path.join(__dirname, '..', 'collection.jso
 const testsRoot = path.join(__dirname, 'tests');
 const files = fs.readdirSync(testsRoot);
 
-describe('Tokens spacing Migration', () => {
+describe('Palettes Migration', () => {
 	it('should update files', async () => {
 		// Arrange
 		const tree = createTreeFromFiles(testsRoot, files, '.input.');
@@ -15,7 +15,7 @@ describe('Tokens spacing Migration', () => {
 
 		// Act
 		try {
-			await runSchematic('collection', collectionPath, 'tokens-spacings', { skipInstallation: true }, tree);
+			await runSchematic('collection', collectionPath, 'palettes', { skipInstallation: true }, tree);
 		} catch (error) {
 			// eslint-disable-next-line no-console
 			console.log(error);
@@ -24,7 +24,6 @@ describe('Tokens spacing Migration', () => {
 		// Assert
 		expectTree(tree).toMatchTree(expectedTree);
 	});
-
 	// Use this to migrate @lucca-front/* packages
 	it.skip('should migrate @lucca-front/*', async () => {
 		// Arrange
@@ -40,7 +39,7 @@ describe('Tokens spacing Migration', () => {
 		const tree = createTreeFromFiles(lfRoot, lfFiles, '.');
 
 		// Act
-		await runSchematic('collection', collectionPath, 'tokens-spacings', { skipInstallation: true }, tree);
+		await runSchematic('collection', collectionPath, 'palettes', { skipInstallation: true }, tree);
 
 		// Assert
 		tree.visit((p, entry) => {

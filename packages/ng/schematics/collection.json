@@ -12,6 +12,10 @@
 		"tokens-spacings": {
 			"description": "Replace tokens with new names.",
 			"factory": "./tokens-spacing/index"
+		},
+		"palettes": {
+			"description": "Replace palettes with new names.",
+			"factory": "./palettes/index"
 		}
 	}
 }
