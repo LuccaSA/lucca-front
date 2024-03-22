@@ -3,7 +3,9 @@
 @mixin component($atRoot: 'without: rule') {
 	background-color: var(--components-tag-background);
 	border-radius: var(--commons-borderRadius-M);
-	padding: 0 var(--spacings-XXS);
+	font-size: var(--components-tag-fontSize);
+	line-height: var(--components-tag-lineHeight);
+	padding: 0 var(--pr-t-spacings-50);
 	text-decoration: var(--components-tag-decoration);
 	box-shadow: 0 0 0 1px var(--components-tag-shadow);
 	gap: var(--spacings-XXS);

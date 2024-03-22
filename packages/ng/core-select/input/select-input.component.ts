@@ -1,13 +1,14 @@
 /* eslint-disable @angular-eslint/no-output-on-prefix */
 import { OverlayConfig, OverlayContainer } from '@angular/cdk/overlay';
 import {
+	booleanAttribute,
 	ChangeDetectorRef,
-	ContentChild,
 	Directive,
 	ElementRef,
 	EventEmitter,
 	HostBinding,
 	HostListener,
+	inject,
 	Input,
 	OnDestroy,
 	OnInit,
@@ -15,11 +16,9 @@ import {
 	TemplateRef,
 	Type,
 	ViewChild,
-	booleanAttribute,
-	inject,
 } from '@angular/core';
 import { BehaviorSubject, ReplaySubject, Subject } from 'rxjs';
-import { LuOptionGroupDirective, LuSimpleSelectDefaultOptionComponent } from '../option';
+import { LuOptionGrouping, LuSimpleSelectDefaultOptionComponent } from '../option';
 import { LuSelectPanelRef } from '../panel';
 import { LuOptionContext, SELECT_LABEL, SELECT_LABEL_ID } from '../select.model';
 
@@ -28,7 +27,12 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	@ViewChild('inputElement')
 	private inputElementRef: ElementRef<HTMLInputElement>;
 
-	@Input() placeholder = '';
+	public placeholder$ = new BehaviorSubject('');
+
+	@Input()
+	set placeholder(value: string) {
+		this.placeholder$.next(value);
+	}
 
 	@Input({ transform: booleanAttribute })
 	@HostBinding('class.is-clearable')
@@ -79,12 +83,19 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 
 	@Input() set options(options: TOption[]) {
 		this.options$.next(options);
+		if (this.panelRef) {
+			// We have to put it in a setTimeout so it'll be triggered AFTER the DOM is updated and not right now,
+			// which is before the panel size has been modified by the arrival of the new options
+			setTimeout(() => {
+				this.panelRef.updatePosition();
+			});
+		}
 	}
 
 	@Input() optionComparer: (option1: TOption, option2: TOption) => boolean = (option1, option2) => JSON.stringify(option1) === JSON.stringify(option2);
 	@Input() optionTpl?: TemplateRef<LuOptionContext<TOption>> | Type<unknown> = LuSimpleSelectDefaultOptionComponent;
 	@Input() valueTpl?: TemplateRef<LuOptionContext<TOption>> | Type<unknown>;
-	@ContentChild(LuOptionGroupDirective) grouping?: LuOptionGroupDirective<TOption, TValue, unknown>;
+	grouping?: LuOptionGrouping<TOption, unknown>;
 
 	@Output() clueChange = new EventEmitter<string>();
 	@Output() nextPage = new EventEmitter<void>();
@@ -100,7 +111,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	}
 
 	public get inputPlaceholder(): string | null {
-		return this.value ? null : this.placeholder;
+		return this.value ? null : this.placeholder$.value;
 	}
 
 	public clueChanged(clue: string): void {
@@ -185,6 +196,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 
 	setDisabledState(isDisabled: boolean): void {
 		this.disabled = isDisabled;
+		this.changeDetectorRef.markForCheck();
 	}
 
 	ngOnDestroy(): void {
@@ -243,6 +255,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	protected emptyClue(): void {
 		if (this.clue) {
 			this.clue = null;
+			this.changeDetectorRef.markForCheck();
 		}
 	}
 
@@ -266,6 +279,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	public updateValue(value: TValue): void {
 		this.value = value;
 		this.emptyClue();
+		this.clueChanged('');
 		this.onChange?.(value);
 		this.onTouched?.();
 	}

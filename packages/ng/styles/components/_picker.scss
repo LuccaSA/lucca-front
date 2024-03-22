@@ -6,12 +6,12 @@
 	@extend %popover-content;
 
 	max-height: 20rem;
-	padding: var(--spacings-XXS);
+	padding: var(--pr-t-spacings-50);
 	overflow-y: auto;
 	display: block;
 	animation: scaleIn 150ms cubic-bezier(0.25, 0.8, 0.25, 1);
-	margin-left: calc(var(--spacings-XXS) * -1);
-	margin-right: calc(var(--spacings-XXS) * -1);
+	margin-left: calc(var(--pr-t-spacings-50) * -1);
+	margin-right: calc(var(--pr-t-spacings-50) * -1);
 
 	&.is-loading {
 		//height: 17.5rem;
@@ -21,11 +21,12 @@
 .lu-picker-content-option {
 	display: flex;
 	flex-direction: column;
-	gap: var(--spacings-XXS);
+	gap: var(--pr-t-spacings-50);
 }
 
 .lu-picker-content-option-emptyState {
 	color: var(--palettes-neutral-600);
+	padding-inline: var(--pr-t-spacings-100);
 	text-align: center;
 }
 
@@ -39,8 +40,10 @@
 	top: 0;
 	background-color: var(--pr-t-elevation-surface-raised);
 	z-index: 1;
-	display: block;
-	box-shadow: 0 calc(var(--spacings-XXS) * -1) 0 var(--spacings-XXS) var(--pr-t-elevation-surface-raised); // Mask background options scrolling behind
+	display: flex;
+	gap: var(--pr-t-spacings-100);
+	justify-content: space-between;
+	box-shadow: 0 calc(var(--pr-t-spacings-50) * -1) 0 var(--pr-t-spacings-50) var(--pr-t-elevation-surface-raised); // Mask background options scrolling behind
 }
 
 .lu-picker-content-add {
@@ -48,11 +51,11 @@
 	bottom: 0;
 	background: white;
 	box-shadow: var(--pr-t-elevation-shadow-overflow);
-	padding: var(--spacings-XS);
+	padding: var(--pr-t-spacings-100);
 }
 
 .lu-picker-content-loading {
-	padding: var(--spacings-XXS);
+	padding: var(--pr-t-spacings-50);
 	display: flex;
 	color: var(--palettes-neutral-600);
 }
@@ -73,13 +76,13 @@
 	right: 0;
 	display: block;
 	z-index: 1;
-	margin-bottom: var(--spacings-XXS);
-	box-shadow: 0 -4px 0 var(--spacings-XS) var(--pr-t-elevation-surface-raised); // Avoid showing options list while scrolling due to header sticky potisionning
+	margin-bottom: var(--pr-t-spacings-50);
+	box-shadow: 0 -4px 0 var(--pr-t-spacings-100) var(--pr-t-elevation-surface-raised); // Avoid showing options list while scrolling due to header sticky potisionning
 }
 
 .lu-picker-textfield {
 	width: 100%;
-	padding-bottom: var(--spacings-XS);
+	padding-bottom: var(--pr-t-spacings-100);
 
 	.textfield-input {
 		background-color: var(--colors-white-color);

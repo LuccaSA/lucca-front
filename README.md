@@ -5,13 +5,14 @@ It uses sub-packages architecture with unified versioning, à la [angular](https
 
 ## Lucca Front contains 3 packages
 
- - a set of icons
- - a SCSS framework
- - a library of useful angular components
+- a set of icons
+- a SCSS framework
+- a library of useful angular components
 
 Angular package depends on the SCSS one which depends itself on Icons.
 
 ## How to install
+
 ### Add Lucca Front to your npm package
 
 ```
@@ -91,6 +92,7 @@ In your file styles.scss, add imports files and components you want to import to
 @forward '@lucca-front/scss/src/components/util';
 @forward '@lucca-front/scss/src/components/verticalNavigation';
 ```
+
 Then comment unused components to reduce LF’s distribution size and compilation time.
 
 To import all components, replace the previous code by the 3 following lines (not recommended):
@@ -137,7 +139,7 @@ To check available options:
 lucca angular update --help
 ```
 
-To update a specific version of Lucca Front (@ points either to a specific version or a npm release channel): 
+To update a specific version of Lucca Front (@ points either to a specific version or a npm release channel):
 
 ```
 npx ng update @lucca-front/ng@16.5.0
@@ -149,20 +151,27 @@ For release:
 npx ng update @lucca-front/ng@rc
 ```
 
-If you want the latest version you can run this equivalent functions:  
+If you want the latest version you can run this equivalent functions:
 
 ```
 npx ng update @lucca-front/ng
 ```
+
 or
+
 ```
 npx ng update @lucca-front/ng@latest
 ```
 
 ## Storybook
+
 In order to work on Lucca Front, we use Storybook to display components.
 
 - Install [volta.sh](https://docs.volta.sh/guide/getting-started)
 - Install node `volta install node@lts`
 - Build Compodoc to avoid errors (To be fixed) `npm run compodoc`
 - Run storybook `npm start`
+
+## TODO
+
+- [ ] Gestion de l'espace

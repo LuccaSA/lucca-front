@@ -19,7 +19,9 @@
 	// .mod-outline is deprecated
 	&.mod-outlined,
 	&.mod-outline {
-		@include outlined;
+		&:where(:not(.is-success, .is-error)) {
+			@include outlined;
+		}
 
 		// .disabled is deprecated
 		&.is-disabled,
@@ -31,7 +33,9 @@
 	// .mod-link deprecated
 	&.mod-text,
 	&.mod-link {
-		@include text;
+		&:where(:not(.is-success, .is-error)) {
+			@include text;
+		}
 
 		// .disabled is deprecated
 		&.is-disabled,

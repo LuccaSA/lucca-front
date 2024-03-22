@@ -7,8 +7,8 @@
 	--components-popup-M: 40rem;
 	--components-popup-L: 50rem;
 	--components-popup-XL: 60rem;
-	--components-popup-padding-horizontal: var(--spacings-M);
-	--components-popup-padding-vertical: var(--spacings-S);
+	--components-popup-padding-horizontal: var(--pr-t-spacings-300);
+	--components-popup-padding-vertical: var(--pr-t-spacings-200);
 }
 
 .lu-popup-panel {
@@ -56,7 +56,7 @@
 	top: 0;
 	z-index: 5;
 	background-color: var(--pr-t-elevation-surface-raised);
-	padding: var(--components-popup-padding-vertical) var(--spacings-XXL) var(--components-popup-padding-vertical)
+	padding: var(--components-popup-padding-vertical) var(--pr-t-spacings-800) var(--components-popup-padding-vertical)
 		var(--components-popup-padding-horizontal);
 	border-bottom: 1px solid var(--commons-border-100);
 }
@@ -70,7 +70,7 @@
 .lu-modal-header-close {
 	position: absolute;
 	right: 1.25rem;
-	top: 0.75rem;
+	top: var(--pr-t-spacings-150);
 }
 
 .lu-modal-content {
@@ -139,7 +139,7 @@
 			margin-bottom: 2.5rem;
 		}
 		.modal-visual {
-			margin: 4.5rem calc(var(--spacings-L) * -1) 0 calc(var(--spacings-L) * -1);
+			margin: 4.5rem calc(var(--pr-t-spacings-400) * -1) 0 calc(var(--pr-t-spacings-400) * -1);
 		}
 
 		.modal-visual-illustration {

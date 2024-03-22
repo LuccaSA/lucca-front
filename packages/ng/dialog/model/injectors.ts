@@ -1,12 +1,12 @@
 import { LuDialogRef, LuDialogSelfRef } from './dialog-ref';
-import { dialogData, dialogResult } from './dialog-config';
+import { ɵDialogDataFlag, ɵDialogResultFlag } from './dialog-config';
 import { inject } from '@angular/core';
 import { DIALOG_DATA } from '@angular/cdk/dialog';
 
-export function injectDialogData<TData>(): TData & { [dialogData]: TData } {
-	return inject<TData & { [dialogData]: TData }>(DIALOG_DATA);
+export function injectDialogData<TData>(): TData & ɵDialogDataFlag {
+	return inject<TData & ɵDialogDataFlag>(DIALOG_DATA);
 }
 
-export function injectDialogRef<R = void>(): LuDialogSelfRef<R> & { [dialogResult]: R } {
-	return inject<LuDialogSelfRef<R>>(LuDialogRef) as LuDialogSelfRef<R> & { [dialogResult]: R };
+export function injectDialogRef<R = void>(): LuDialogSelfRef<R> & ɵDialogResultFlag<R> {
+	return inject<LuDialogSelfRef<R>>(LuDialogRef) as LuDialogSelfRef<R> & ɵDialogResultFlag<R>;
 }

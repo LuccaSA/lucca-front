@@ -1,5 +1,6 @@
 @use '@lucca-front/scss/src/commons/utils/form';
 @use '@lucca-front/scss/src/commons/utils/a11y';
+@use '@lucca-front/scss/src/commons/utils/color';
 
 @mixin inputHover {
 	box-shadow: 0 0 0 1px var(--palettes-neutral-400);
@@ -197,7 +198,11 @@
 }
 
 @mixin materialInputDisabled {
-	background-image: linear-gradient(to right, var(--components-textfield-material-border-color) 33%, rgba(255, 255, 255, 0) 0%);
+	background-image: linear-gradient(
+		to right,
+		var(--components-textfield-material-border-color) 33%,
+		color.transparentize(var(--colors-white-color), 0) 0%
+	);
 	background-size: 3px 1px;
 	background-color: transparent;
 	background-position: bottom;

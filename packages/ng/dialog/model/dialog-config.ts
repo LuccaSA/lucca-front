@@ -3,17 +3,20 @@ import { Observable } from 'rxjs';
 import { ComponentType } from '@angular/cdk/overlay';
 import { AutoFocusTarget, DialogConfig } from '@angular/cdk/dialog';
 
-export const dialogData = Symbol.for('luDialogData');
-export const dialogResult = Symbol.for('luDialogResult');
+const ɵdialogData = Symbol.for('luDialogData');
+const ɵdialogResult = Symbol.for('luDialogResult');
+
+export type ɵDialogDataFlag = { [ɵdialogData]: unknown };
+export type ɵDialogResultFlag<R> = { [ɵdialogResult]: R };
 
 export type LuDialogData<T> = {
-	[K in keyof T]: T[K] extends { [dialogData]: infer D } ? D : never;
+	[K in keyof T]: T[K] extends ɵDialogDataFlag ? Omit<T[K], typeof ɵdialogData> : never;
 }[keyof T];
 
 export type LuDialogResult<C> = keyof C extends never
 	? void
 	: {
-			[K in keyof C]: C[K] extends { [dialogResult]: infer R } ? R : void;
+			[K in keyof C]: C[K] extends ɵDialogResultFlag<infer R> ? R : void;
 	  }[keyof C];
 
 interface BaseLuDialogConfig<C> {
@@ -30,7 +33,7 @@ interface BaseLuDialogConfig<C> {
 	/**
 	 * Should we put a backdrop? Defaults to true
 	 */
-	backdrop?: boolean;
+	modal?: boolean;
 
 	/**
 	 * Can this dialog box be dismissed by clicking on the backdrop or pressing escape?
@@ -38,7 +41,7 @@ interface BaseLuDialogConfig<C> {
 	 * Defaults to true, setting this to false will also remove the close button in the header
 	 * if you're using `lu-dialog-header`.
 	 */
-	dismissible?: boolean;
+	alert?: boolean;
 
 	/**
 	 * Can be used if you don't have a header or aren't using the default one, to set an aria-label
@@ -68,6 +71,21 @@ interface BaseLuDialogConfig<C> {
 	 * @param comp the instance of the component that's inside the dialog box.
 	 */
 	canClose?: (comp: C) => boolean | Observable<boolean>;
+
+	/**
+	 * The size of the panel used for the dialog
+	 */
+	size?: 'XS' | 'S' | 'M' | 'L' | 'XL' | 'fitContent' | `maxContent` | 'fullScreen';
+
+	/**
+	 * Should it be a modal (default), a drawer? a drawer from bottom?
+	 */
+	mode?: 'default' | 'drawer' | 'drawer-from-bottom';
+
+	/**
+	 * Classes to add to the panel
+	 */
+	panelClasses?: string[];
 }
 
 export type LuDialogConfig<T> = LuDialogData<T> extends never ? Omit<BaseLuDialogConfig<T>, 'data'> : BaseLuDialogConfig<T>;

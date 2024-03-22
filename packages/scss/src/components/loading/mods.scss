@@ -1,3 +1,5 @@
+@use '@lucca-front/scss/src/commons/utils/color';
+
 @mixin L {
 	height: var(--components-loading-size-big);
 	padding: var(--components-loading-size-big) 0 0;
@@ -13,8 +15,8 @@
 
 @mixin block {
 	display: block;
-	margin-bottom: var(--spacings-L);
-	padding: var(--spacings-XL) 0 0;
+	margin-bottom: var(--pr-t-spacings-400);
+	padding: var(--pr-t-spacings-600) 0 0;
 	text-align: center;
 	width: 100%;
 
@@ -40,7 +42,7 @@
 	text-align: center;
 	position: relative;
 	padding: 8rem 0 0;
-	margin: 0 var(--spacings-L) var(--spacings-L);
+	margin: 0 var(--pr-t-spacings-400) var(--pr-t-spacings-400);
 
 	&::after {
 		margin: auto;
@@ -56,7 +58,7 @@
 	text-align: center;
 	position: relative;
 	padding: 8rem 0 0;
-	margin: 0 var(--spacings-L) var(--spacings-L);
+	margin: 0 var(--pr-t-spacings-400) var(--pr-t-spacings-400);
 	top: 35vh;
 
 	&::after {
@@ -72,7 +74,7 @@
 	color: var(--colors-white-color);
 
 	&::after {
-		border-color:  rgba(255, 255, 255, 0.66);
+		border-color: color.transparentize(var(--colors-white-color), 0.66);
 		border-top-color: transparent;
 	}
 }

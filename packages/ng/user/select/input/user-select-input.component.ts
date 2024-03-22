@@ -14,7 +14,7 @@ import { LuUserPagedSearcherComponent } from '../searcher';
 import { LU_USER_SELECT_INPUT_TRANSLATIONS } from './user-select-input.translate';
 
 /**
- * Displays user'picture or a placeholder with his/her initials and random bg color'
+ * @deprecated prefer SimpleSelect or MultipleSelect with luCustomUsers directive
  */
 @Component({
 	selector: 'lu-user-select',
@@ -51,7 +51,8 @@ export class LuUserSelectInputComponent<U extends import('../../user.model').ILu
 {
 	searchFormat = LuDisplayFullname.lastfirst;
 
-	@Input('placeholder') override set inputPlaceholder(p: string) {
+	@Input('placeholder')
+	override set inputPlaceholder(p: string) {
 		this._placeholder = p;
 	}
 
@@ -68,6 +69,7 @@ export class LuUserSelectInputComponent<U extends import('../../user.model').ILu
 	byId: LuOptionComparer<U> = (option1: U, option2: U) => option1 && option2 && option1.id === option2.id;
 
 	public intl = getIntl(LU_USER_SELECT_INPUT_TRANSLATIONS);
+
 	constructor(
 		protected override _changeDetectorRef: ChangeDetectorRef,
 		protected override _overlay: Overlay,

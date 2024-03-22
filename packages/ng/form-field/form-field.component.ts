@@ -88,7 +88,12 @@ export class FormFieldComponent implements OnChanges, OnDestroy, DoCheck {
 
 	public set input(input: InputDirective) {
 		this._input = input;
-		this.prepareInput();
+		/* We have to put this in the next cycle to make sure it'll be applied properly
+		 * and that it won't trigger a change detection error
+		 */
+		setTimeout(() => {
+			this.prepareInput();
+		});
 	}
 
 	public get input(): InputDirective {
@@ -144,10 +149,12 @@ export class FormFieldComponent implements OnChanges, OnDestroy, DoCheck {
 	}
 
 	private updateAria(): void {
-		this.#nativeInputRef.ariaInvalid = this.invalid.toString();
-		this.#nativeInputRef.ariaRequired = this.required.toString();
-		this.#nativeInputRef.setAttribute('aria-describedby', `${this.id}-message`);
-		this.addLabelledBy(`${this.id}-label`);
+		if (this.#nativeInputRef) {
+			this.#nativeInputRef.ariaInvalid = this.invalid.toString();
+			this.#nativeInputRef.ariaRequired = this.required.toString();
+			this.#nativeInputRef.setAttribute('aria-describedby', `${this.id}-message`);
+			this.addLabelledBy(`${this.id}-label`);
+		}
 	}
 
 	ngOnDestroy(): void {

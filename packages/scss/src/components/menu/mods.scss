@@ -8,7 +8,7 @@
 	.menu-list-item-action {
 		font-size: var(--sizes-S-fontSize);
 		line-height: var(--sizes-S-lineHeight);
-		padding: 0.75rem 0;
+		padding: var(--pr-t-spacings-150) 0;
 	}
 
 	.label { // deprecated
@@ -20,6 +20,6 @@
 
 	// legacy syntax
 	.menu-link {
-		margin-right: var(--spacings-M);
+		margin-right: var(--pr-t-spacings-300);
 	}
 }

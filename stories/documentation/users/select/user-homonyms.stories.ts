@@ -44,7 +44,7 @@ const template: StoryFn<UserHomonymsStory> = (args) => ({
 const code = `
 /* Afin de créer une sélection d'utilisateur custom avec gestion des homonymes */
 /* Ajouter un lu-select ainsi qu'un lu-option-picker-advanced */
-<label class="textfield mod-block u-marginTopL">
+<label class="textfield mod-block pr-u-marginTop400">
   <lu-select class="textfield-input">
     <span *luDisplayer="let user">{{ user | luUserDisplay }}</span>
 
@@ -59,15 +59,17 @@ const code = `
       /* Cette ligne permet d'ajouter la propriété 'additionalInformation' aux utilisateurs comportant un homonyme */
       <lu-user-homonyms></lu-user-homonyms>
 
-      <lu-option *luForOptions="let user" [value]="user">
-        {{ user | luUserDisplay }}
+      <div class="lu-picker-content-option">
+        <lu-option *luForOptions="let user" [value]="user">
+          {{ user | luUserDisplay }}
 
-        /* Ajouter une information additionnelle en pilotant la propriété ajoutée précedemment */
-        /* Par défault, additionalInformation équivaut au nom du département de l'utilisateur */
-        <div *ngIf="user.additionalInformation" class="u-fontStyleItalic u-textS">
-          ({{ user.additionalInformation }})
-        </div>
-      </lu-option>
+          /* Ajouter une information additionnelle en pilotant la propriété ajoutée précedemment */
+          /* Par défault, additionalInformation équivaut au nom du département de l'utilisateur */
+          <div *ngIf="user.additionalInformation" class="u-fontStyleItalic u-textS">
+            ({{ user.additionalInformation }})
+          </div>
+        </lu-option>
+      </div>
     </lu-option-picker-advanced>
   </lu-select>
   <span class="textfield-label">Avec gestion des homonymes :</span>

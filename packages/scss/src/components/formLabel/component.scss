@@ -1,6 +1,6 @@
 @mixin component($atRoot: 'without: rule') {
 	color: var(--components-formLabel-color);
-	display: inline-block;
+	display: inline-flex;
 	font-size: var(--components-formLabel-fontSize);
 	line-height: var(--components-formLabel-lineHeight);
 	width: fit-content;
@@ -16,6 +16,8 @@
 	@at-root ($atRoot) {
 		.formLabel-required {
 			color: var(--palettes-error-700);
+			line-height: normal;
+			top: 0;
 		}
 	}
 }

@@ -52,6 +52,10 @@ class SelectPanelRef<T> extends LuSelectPanelRef<T, T> {
 		this.emitValue(this.instance.keyManager.activeItem?.option);
 		this.close();
 	}
+
+	updatePosition(): void {
+		this.overlayRef.updatePosition();
+	}
 }
 
 @Injectable()
