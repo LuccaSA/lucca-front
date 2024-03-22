@@ -1,3 +1,5 @@
+@use '@lucca-front/icons/src/icon/exports' as icon;
+
 @mixin clickable {
 	--components-tag-cursor: pointer;
 
@@ -5,11 +7,27 @@
 	&:focus {
 		--components-tag-decoration: underline;
 	}
+
+	&:has(.tag-content) {
+		&:hover,
+		&:focus {
+			--components-tag-decoration: none;
+
+			.tag-content {
+				--components-tag-decoration: underline;
+			}
+		}
+	}
 }
 
 @mixin L {
 	--components-tag-fontSize: var(--sizes-M-fontSize);
 	--components-tag-lineHeight: var(--sizes-M-lineHeight);
+	--components-tag-iconBottom: 0;
+
+	.lucca-icon {
+		@include icon.XS;
+	}
 }
 
 @mixin outlined {
