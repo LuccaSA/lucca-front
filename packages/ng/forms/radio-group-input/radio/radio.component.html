@@ -1,4 +1,4 @@
-<label class="formLabel" id="{{id}}-label" for="{{id}}">
+<label class="formLabel" id="{{id}}-label" for="{{id}}-input">
 	<ng-content></ng-content>
 </label>
 <span class="radioField">
@@ -7,7 +7,7 @@
 		[attr.disabled]="formControl.disabled || disabled"
 		type="radio"
 		class="radioField-input"
-		id="{{id}}"
+		id="{{id}}-input"
 		[value]="value"
 		luInput
 		luInputStandalone

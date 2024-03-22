@@ -132,10 +132,12 @@ export class FormFieldComponent implements OnChanges, OnDestroy, DoCheck {
 		if (this.#inputs.length === 0) {
 			throw new Error('Missing input for form field, make sure to set `luInput` to your input inside lu-form-field');
 		}
-		this.inputs.forEach((input) => {
-			const inputId = `${input.host.nativeElement.tagName.toLowerCase()}-${++nextId}`;
-			this.#renderer.setAttribute(input.host.nativeElement, 'id', inputId);
-		});
+		this.inputs
+			.filter((input) => !input.standalone)
+			.forEach((input) => {
+				const inputId = `${input.host.nativeElement.tagName.toLowerCase()}-${++nextId}`;
+				this.#renderer.setAttribute(input.host.nativeElement, 'id', inputId);
+			});
 		// We're using the id from the first input available
 		this.id = this.#inputs[0].host.nativeElement.id;
 		this.updateAria();
