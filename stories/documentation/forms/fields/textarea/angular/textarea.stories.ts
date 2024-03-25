@@ -62,8 +62,6 @@ export const Basic: StoryObj<TextareaInputComponent & { disabled: boolean } & Fo
 	},
 	args: {
 		label: 'Label',
-		cols: 50,
-		rows: 3,
 		required: true,
 		hiddenLabel: false,
 		disabled: false,

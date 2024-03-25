@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, numberAttribute, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 import { InputDirective } from '@lucca-front/ng/form-field';
 import { ReactiveFormsModule } from '@angular/forms';
 import { injectNgControl } from '../inject-ng-control';
@@ -18,14 +18,4 @@ export class TextareaInputComponent {
 
 	@Input()
 	placeholder: string;
-
-	@Input({
-		transform: numberAttribute,
-	})
-	cols: number;
-
-	@Input({
-		transform: numberAttribute,
-	})
-	rows: number;
 }
