@@ -1,11 +1,11 @@
 @mixin vars {
   --component-textField-lineHeight: var(--size-M-lightHeight);
   --component-textField-fontSize: var(--size-M-fontSize);
-  --component-textField-placeholder: var(--palettes-product-400);
+  --component-textField-placeholder: var(--palettes-neutral-400);
   --component-textField-background: var(--colors-white-color);
-  --component-textField-border: var(--palettes-product-300);
-  --component-textField-color: var(--palettes-product-800);
-  --component-textField-prefix-color: var(--palettes-product-600);
+  --component-textField-border: var(--palettes-neutral-300);
+  --component-textField-color: var(--palettes-neutral-800);
+  --component-textField-prefix-color: var(--palettes-neutral-600);
   --component-textField-padding: var(--pr-t-spacings-100);
   --component-textField-affix-padding: var(--component-textField-padding);
 }
