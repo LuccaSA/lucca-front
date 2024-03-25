@@ -6,7 +6,7 @@ import { BehaviorSubject } from 'rxjs';
 import { InlineMessageComponent, InlineMessageState } from '@lucca-front/ng/inline-message';
 import { SafeHtml } from '@angular/platform-browser';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
-import { LuClass } from '@lucca-front/ng/core';
+import { LuClass, PortalContent, PortalDirective } from '@lucca-front/ng/core';
 import { NG_VALIDATORS, NgControl, ReactiveFormsModule, RequiredValidator, Validator, Validators } from '@angular/forms';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { FORM_FIELD_INSTANCE } from './form-field.token';
@@ -16,7 +16,7 @@ let nextId = 0;
 @Component({
 	selector: 'lu-form-field',
 	standalone: true,
-	imports: [NgIf, NgSwitch, NgSwitchCase, NgTemplateOutlet, InlineMessageComponent, LuTooltipModule, ReactiveFormsModule, IconComponent],
+	imports: [NgIf, NgSwitch, NgSwitchCase, NgTemplateOutlet, InlineMessageComponent, LuTooltipModule, ReactiveFormsModule, IconComponent, PortalDirective],
 	templateUrl: './form-field.component.html',
 	styleUrls: ['./form-field.component.scss'],
 	providers: [
@@ -46,7 +46,7 @@ export class FormFieldComponent implements OnChanges, OnDestroy, DoCheck {
 	@Input({
 		required: true,
 	})
-	label: string;
+	label: PortalContent;
 
 	@Input({
 		transform: booleanAttribute,

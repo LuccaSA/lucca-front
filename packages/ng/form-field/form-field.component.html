@@ -1,7 +1,10 @@
 <fieldset class="form-fieldset" *ngIf="layout === 'fieldset'; else defaultTpl" [class.mod-S]="size === 'S'">
 	<legend class="formLabel" [class.u-mask]="hiddenLabel" attr.aria-hidden="{{hiddenLabel}}">
-		{{ label }}<sup class="formLabel-required" aria-hidden="true" *ngIf="required">*</sup>
-		<lu-icon icon="helpOutline" alt="" *ngIf="tooltip" [luTooltip]="tooltip" [color]="invalid ? 'error' : 'inherit'"></lu-icon>
+		<ng-container *luPortal="label"></ng-container
+		><!--
+	--><sup class="formLabel-required" aria-hidden="true" *ngIf="required">*</sup>
+		<lu-icon icon="helpOutline" alt="" *ngIf="tooltip" [luTooltip]="tooltip"
+		         [color]="invalid ? 'error' : 'inherit'"></lu-icon>
 	</legend>
 	<ng-container *ngTemplateOutlet="projectionTpl"></ng-container>
 	<lu-inline-message
@@ -21,8 +24,11 @@
 		[class.u-mask]="hiddenLabel"
 		attr.aria-hidden="{{hiddenLabel}}"
 	>
-		{{ label }}<sup class="formLabel-required" aria-hidden="true" *ngIf="required">*</sup>
-		<lu-icon icon="helpOutline" alt="" *ngIf="tooltip" [luTooltip]="tooltip" [color]="invalid ? 'error' : 'inherit'"></lu-icon>
+		<ng-container *luPortal="label"></ng-container
+		><!--
+	--><sup class="formLabel-required" aria-hidden="true" *ngIf="required">*</sup>
+		<lu-icon icon="helpOutline" alt="" *ngIf="tooltip" [luTooltip]="tooltip"
+		         [color]="invalid ? 'error' : 'inherit'"></lu-icon>
 	</label>
 	<ng-container *ngTemplateOutlet="projectionTpl"></ng-container>
 	<lu-inline-message
