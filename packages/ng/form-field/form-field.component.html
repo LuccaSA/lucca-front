@@ -1,4 +1,4 @@
-<fieldset class="form-fieldset" *ngIf="layout === 'fieldset'; else defaultTpl">
+<fieldset class="form-fieldset" *ngIf="layout === 'fieldset'; else defaultTpl" [class.mod-S]="size === 'S'">
 	<legend class="formLabel" [class.u-mask]="hiddenLabel" attr.aria-hidden="{{hiddenLabel}}">
 		{{ label }}<sup class="formLabel-required" aria-hidden="true" *ngIf="required">*</sup>
 		<lu-icon icon="helpOutline" alt="" *ngIf="tooltip" [luTooltip]="tooltip" [color]="invalid ? 'error' : 'inherit'"></lu-icon>
