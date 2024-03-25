@@ -54,6 +54,12 @@
 			&::placeholder {
 				color: var(--component-textField-placeholder);
 			}
+
+			&:is(textarea) {
+				resize: vertical;
+				min-height: calc(2lh + var(--component-textField-padding) * 2);
+				height: calc(3lh + var(--component-textField-padding) * 2);
+			}
 		}
 
 		.textField-input-affix {
