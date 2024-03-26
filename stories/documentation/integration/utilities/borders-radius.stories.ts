@@ -28,9 +28,9 @@ const Template: StoryFn<BorderRadiusStory> = (args) => ({
 			background-color: var(--colors-white-color);
 			float: left;
       text-align: center;
-      padding: var(--spacings-S);
+      padding: var(--pr-t-spacings-200);
       border: 1px solid var(--palettes-neutral-200);
-      margin: 0 var(--spacings-S) var(--spacings-S) 0;
+      margin: 0 var(--pr-t-spacings-200) var(--pr-t-spacings-200) 0;
 		}`,
 	],
 });

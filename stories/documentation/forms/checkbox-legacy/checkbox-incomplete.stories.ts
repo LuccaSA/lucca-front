@@ -13,7 +13,7 @@ function getTemplate(args: CheckboxIncompleteStory): string {
 			<input class="checkbox-input is-incomplete" type="checkbox" checked="checked" aria-checked="mixed" />
 			<span class="checkbox-label">Checkbox</span>
 		</label>
-		<ul class="u-listReset u-marginLeftM">
+		<ul class="u-listReset pr-u-marginLeft300">
 			<li>
 				<label class="checkbox">
 					<input class="checkbox-input" type="checkbox" checked="checked" />

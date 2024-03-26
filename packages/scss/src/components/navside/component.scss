@@ -62,7 +62,7 @@
 
 		.navSide-scrollWrapper {
 			width: var(--commons-navSide-width);
-			padding: var(--spacings-XS);
+			padding: var(--pr-t-spacings-100);
 			margin: 0;
 			list-style-type: none;
 		}
@@ -77,7 +77,7 @@
 			height: 100%;
 			align-items: center;
 			display: flex;
-			column-gap: 0.75rem;
+			column-gap: var(--pr-t-spacings-150);
 			text-decoration: none;
 			user-select: none;
 			color: var(--components-navSide-fullwidth-palette-text);
@@ -106,7 +106,7 @@
 		.navSide-item-link {
 			font-size: var(--sizes-S-fontSize);
 			line-height: var(--sizes-S-lineHeight);
-			padding: 0.75rem var(--spacings-S);
+			padding: var(--pr-t-spacings-150) var(--pr-t-spacings-200);
 			font-weight: 600;
 		}
 
@@ -123,7 +123,7 @@
 			height: var(--sizes-S-lineHeight);
 			line-height: var(--sizes-S-lineHeight);
 			margin-right: 0;
-			padding: 0 var(--spacings-XXS);
+			padding: 0 var(--pr-t-spacings-50);
 			min-width: 1.25rem;
 			text-align: center;
 			flex-shrink: 0;
@@ -154,7 +154,7 @@
 
 		.navSide-item-subMenu-link {
 			font-weight: 400;
-			padding: var(--spacings-XS) var(--spacings-S) var(--spacings-XS) var(--spacings-XL);
+			padding: var(--pr-t-spacings-100) var(--pr-t-spacings-200) var(--pr-t-spacings-100) var(--pr-t-spacings-600);
 			font-size: var(--sizes-S-fontSize);
 			line-height: var(--sizes-S-lineHeight);
 		}
@@ -195,7 +195,7 @@
 			.navSide-item-link {
 				background-color: var(--components-navSide-bottom-section-palette-bg-color);
 				color: var(--components-navSide-bottom-section-palette-text);
-				padding: var(--spacings-S);
+				padding: var(--pr-t-spacings-200);
 				box-sizing: border-box;
 				cursor: pointer;
 

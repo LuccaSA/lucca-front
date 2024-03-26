@@ -22,7 +22,7 @@ const Template: StoryFn<TextStyleStory> = (args) => ({
 	styles: [
 		`
 		span {
-			padding-right: var(--spacings-S);
+			padding-right: var(--pr-t-spacings-200);
 		}
 		}`,
 	],

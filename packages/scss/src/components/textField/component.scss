@@ -54,14 +54,20 @@
 			&::placeholder {
 				color: var(--component-textField-placeholder);
 			}
+
+			&:is(textarea) {
+				resize: vertical;
+				min-height: calc(2lh + var(--component-textField-padding) * 2);
+				height: calc(3lh + var(--component-textField-padding) * 2);
+			}
 		}
 
 		.textField-input-affix {
 			display: inline-flex;
 			align-items: center;
-			gap: var(--spacings-XS);
+			gap: var(--pr-t-spacings-100);
 			position: absolute;
-			right: var(--spacings-XS);
+			right: var(--pr-t-spacings-100);
 			pointer-events: none;
 		}
 

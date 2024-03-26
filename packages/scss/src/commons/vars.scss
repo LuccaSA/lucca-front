@@ -12,6 +12,9 @@
 		@include core.cssvars('pr-t-elevation-#{$key}', $map);
 	}
 
+	@include core.cssvars('pr-t-spacings', config.$spacings);
+	--pr-t-spacings-auto: auto;
+
 	// VARIABLES
 
 	@include core.cssvars('commons-borderRadius', config.$borderRadius);
@@ -26,7 +29,10 @@
 	}
 
 	@include core.cssvars('breakpoints', config.$breakpoints, '-breakAt');
-	@include core.cssvars('spacings', config.$spacings);
+	@if (config.$importDeprecatedSpacings) {
+		@include core.cssvars('spacings', config.$spacingsDeprecated);
+		--spacings-auto: auto;
+	}
 
 	@include core.cssvars('commons-elevations-elevation', config.$elevations);
 	@include core.cssvars('commons-boxShadow', config.$boxShadows); // deprecated

@@ -12,7 +12,7 @@ function getTemplate(args: BreadcrumbsCompactStory): string {
 		<p id="breadcrumbs-title" class="u-mask">Breadcrumbs</p>
 		<ol class="breadcrumbs-list">
 			<li class="breadcrumbs-list-item"><a href="#" class="breadcrumbs-list-item-action">Previous page</a></li>
-			<li class="breadcrumbs-list-item"><span aria-current="page" class="breadcrumbs-list-item-action">current page</span></li>
+			<li class="breadcrumbs-list-item"><span aria-current="page" class="breadcrumbs-list-item-action">Current page</span></li>
 		</ol>
 	</nav>
 	`;

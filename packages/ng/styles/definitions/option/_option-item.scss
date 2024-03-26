@@ -2,8 +2,8 @@
 @use '@lucca-front/scss/src/commons/utils/a11y';
 
 :root {
-	--components-options-item-padding-vertical: var(--spacings-XXS);
-	--components-options-item-padding-horizontal: var(--spacings-XS);
+	--components-options-item-padding-vertical: var(--pr-t-spacings-50);
+	--components-options-item-padding-horizontal: var(--pr-t-spacings-100);
 	--components-options-item-multiple-padding: 2.25rem;
 	--components-options-item-icon-color: var(--palettes-neutral-800);
 
@@ -18,7 +18,7 @@
 @mixin optionItemStyle {
 	:host {
 		display: block;
-		scroll-margin: var(--spacings-XXS);
+		scroll-margin: var(--pr-t-spacings-50);
 	}
 
 	.optionItem {
@@ -41,7 +41,7 @@
 				position: absolute;
 				top: 0;
 				bottom: 0;
-				left: calc(var(--spacings-XXS) * -1);
+				left: calc(var(--pr-t-spacings-50) * -1);
 				width: 2px;
 				background-color: var(--palettes-product-700);
 				border-top-right-radius: var(--commons-borderRadius-M);
@@ -165,13 +165,13 @@
 		&.establishmentOption {
 			.optionItem-value {
 				position: relative;
-				padding-left: calc(var(--components-options-checkbox-size) + var(--spacings-XS) * 2);
+				padding-left: calc(var(--components-options-checkbox-size) + var(--pr-t-spacings-100) * 2);
 			}
 
 			.optionItem-value {
 				&::before,
 				&::after {
-					left: var(--spacings-XS);
+					left: var(--pr-t-spacings-100);
 				}
 			}
 		}
