@@ -174,7 +174,7 @@ export class FormFieldComponent implements OnChanges, OnDestroy, DoCheck {
 				: control.control.hasValidator(Validators.required) || control.control.hasValidator(Validators.requiredTrue);
 
 			// If stuff changed, update aria attributes
-			if (this.invalid !== previousInvalid || this.required !== previousRequired) {
+			if (this.#nativeInputRef && (this.invalid !== previousInvalid || this.required !== previousRequired)) {
 				this.updateAria();
 			}
 		});
