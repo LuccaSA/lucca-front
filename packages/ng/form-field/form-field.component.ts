@@ -87,10 +87,8 @@ export class FormFieldComponent implements OnChanges, OnDestroy, DoCheck {
 	counter = 0;
 
 	get contentLength(): number {
-		return (this.#nativeInputRef as HTMLInputElement)?.value.length || 0;
+		return (this.#inputs[0]?.host?.nativeElement as HTMLInputElement)?.value.length || 0;
 	}
-
-	private _input: InputDirective;
 
 	public addInput(input: InputDirective) {
 		this.#inputs.push(input);
