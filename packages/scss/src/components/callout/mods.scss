@@ -1,21 +1,17 @@
-@use '@lucca-front/icons/src/commons/utils/icon';
+@use '@lucca-front/icons/src/icon/exports' as icon;
 
 @mixin S {
-	font-size: var(--sizes-S-fontSize);
-	line-height: var(--sizes-S-lineHeight);
-	gap: .75rem;
+	--components-callout-gap: var(--pr-t-spacings-150);
+	--components-callout-fontSize: var(--sizes-S-fontSize);
+	--components-callout-lineHeight: var(--sizes-S-lineHeight);
 
 	.callout-icon {
-		line-height: var(--sizes-S-lineHeight);
-
-		.lucca-icon {
-			font-size: var(--sizes-S-lineHeight);
-		}
+		@include icon.S;
 	}
 }
 
 @mixin tiny {
-	display: inline-flex;
-	gap: .375rem;
-	padding: var(--spacings-XS);
+	--components-callout-gap: var(--pr-t-spacings-75);
+	--components-callout-display: inline-flex;
+	--components-callout-padding: var(--spacings-XS);
 }

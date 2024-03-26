@@ -14,33 +14,50 @@
 <h3>Shadow</h3>
 <section class="contentSection">
 	<div class="demo-block">
-		<div
-			class="demo-surface"
-			style="background-color: var(--pr-t-elevation-surface-raised); box-shadow: var(--pr-t-elevation-shadow-raised)"
-		>
-			Raised
-		</div>
-		<div
-			class="demo-surface"
-			style="background-color: var(--pr-t-elevation-surface-raised); box-shadow: var(--pr-t-elevation-shadow-overflow)"
-		>
-			Overflow
-		</div>
-		<div
-			class="demo-surface"
-			style="background-color: var(--pr-t-elevation-surface-raised); box-shadow: var(--pr-t-elevation-shadow-overlay)"
-		>
-			Overlay
-		</div>
+		<div class="demo-surface" style="background-color: var(--pr-t-elevation-surface-raised); box-shadow: var(--pr-t-elevation-shadow-raised);">Raised</div>
+		<div class="demo-surface" style="background-color: var(--pr-t-elevation-surface-raised); box-shadow: var(--pr-t-elevation-shadow-overflow);">Overflow</div>
+		<div class="demo-surface" style="background-color: var(--pr-t-elevation-surface-raised); box-shadow: var(--pr-t-elevation-shadow-overlay);">Overlay</div>
 	</div>
 </section>
+<h2>Spacings</h2>
+<h3>Deprecated (.u-)</h3>
+<section class="contentSection">
+	<div class="demo-spacings">
+		<div class="demo-spacing"><div>0</div></div>
+		<div class="demo-spacing u-paddingXXS"><div>XXS</div></div>
+		<div class="demo-spacing u-paddingXS"><div>XS</div></div>
+		<div class="demo-spacing u-paddingS"><div>S</div></div>
+		<div class="demo-spacing u-paddingM"><div>M</div></div>
+		<div class="demo-spacing u-paddingL"><div>L</div></div>
+		<div class="demo-spacing u-paddingXL"><div>XL</div></div>
+		<div class="demo-spacing u-paddingXXL"><div>XXL</div></div>
+	</div>
+</section>
+<h3>Tokens (.pr-u-)</h3>
+<section class="contentSection">
+	<div class="demo-spacings">
+		<div class="demo-spacing"><div>0</div></div>
+		<div class="demo-spacing pr-u-padding50"><div>50</div></div>
+		<div class="demo-spacing pr-u-padding75"><div>75</div></div>
+		<div class="demo-spacing pr-u-padding100"><div>100</div></div>
+		<div class="demo-spacing pr-u-padding150"><div>150</div></div>
+		<div class="demo-spacing pr-u-padding200"><div>200</div></div>
+		<div class="demo-spacing pr-u-padding300"><div>300</div></div>
+		<div class="demo-spacing pr-u-padding400"><div>400</div></div>
+		<div class="demo-spacing pr-u-padding500"><div>500</div></div>
+		<div class="demo-spacing pr-u-padding600"><div>600</div></div>
+		<div class="demo-spacing pr-u-padding700"><div>700</div></div>
+		<div class="demo-spacing pr-u-padding800"><div>800</div></div>
+	</div>
+</section>
+
 
 <style>
 	.demo-block {
 		display: flex;
 		background: var(--palettes-neutral-25);
-		padding: var(--spacings-S);
-		gap: var(--spacings-XS);
+		padding: var(--pr-t-spacings-200);
+		gap: var(--pr-t-spacings-100);
 	}
 
 	.demo-surface,
@@ -66,6 +83,27 @@
 		right: -1rem;
 		background: var(--colors-white-color);
 		border-radius: var(--commons-borderRadius-full);
+	}
+
+	.demo-spacings {
+		display: inline-flex;
+		align-items: flex-start;
+		gap: 1rem;
+	}
+
+	.demo-spacing {
+		background: var(--pr-t-elevation-surface-sunken);
+		border-radius: var(--commons-borderRadius-M);
+	}
+
+	.demo-spacing div {
+		background: var(--pr-t-elevation-surface-raised);
+		width: 2.5rem;
+		height: 2.5rem;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		border-radius: var(--commons-borderRadius-M);
 	}
 </style>
 

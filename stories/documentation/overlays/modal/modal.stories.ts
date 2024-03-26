@@ -5,7 +5,7 @@ import { LuToastsModule, LuToastsService } from '@lucca-front/ng/toast';
 import { applicationConfig, Meta, moduleMetadata } from '@storybook/angular';
 import { map, shareReplay, timer } from 'rxjs';
 import { generateMarkdownCodeBlock, getStoryGenerator, useDocumentationStory } from 'stories/helpers/stories';
-import { ButtonComponent } from '../../../../packages/ng/button/button.component';
+import { ButtonComponent } from '@lucca-front/ng/button';
 
 type StoryComponent = LuModalConfig & { useDynamicContent: boolean; message: string };
 

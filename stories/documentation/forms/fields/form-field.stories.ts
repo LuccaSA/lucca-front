@@ -13,19 +13,18 @@ export default {
 	],
 	render: ({ label, required, inlineMessage, hiddenLabel, size, inlineMessageState, tooltip }) => {
 		return {
-			template: `
-<lu-form-field label="${label}" ${hiddenLabel ? 'hiddenLabel' : ''} inlineMessage="${inlineMessage}" inlineMessageState="${inlineMessageState}" tooltip="${tooltip}">
+			template: `<lu-form-field label="${label}" ${hiddenLabel ? 'hiddenLabel' : ''} inlineMessage="${inlineMessage}" inlineMessageState="${inlineMessageState}" tooltip="${tooltip}">
 	<div class="textField">
-			<div class="textField-input">
-				<textarea
-					type="text"
-					luInput
-					class="textField-input-value"
-					${required ? 'required' : ''}
-					[(ngModel)]="example"
-					placeholder="Placeholder">
-				</textarea>
-			</div>
+		<div class="textField-input">
+			<textarea
+				type="text"
+				luInput
+				class="textField-input-value"
+				${required ? 'required' : ''}
+				[(ngModel)]="example"
+				placeholder="Placeholder">
+			</textarea>
+		</div>
 	</div>
 </lu-form-field>`,
 		};
@@ -40,6 +39,6 @@ export const Template: StoryObj<FormFieldComponent> = {
 		inlineMessage: 'Helper Text',
 		size: 'M',
 		inlineMessageState: 'default',
-		tooltip: 'You expected me to be helpful but this is a story !',
+		tooltip: 'You expected me to be helpful but this is a story!',
 	},
 };

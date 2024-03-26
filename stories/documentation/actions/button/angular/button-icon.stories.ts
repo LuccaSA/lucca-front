@@ -23,6 +23,9 @@ export default {
 
 export const Basic: StoryObj<ButtonComponent & { label: string }> = {
 	argTypes: {
+		label: {
+			description: 'La présence d\'un label augmente le padding horizontal automatiquement via la classe <code>mod-withIcon</code>',
+		},
 		luButton: {
 			options: ['', 'outlined', 'text', 'text-invert'],
 			control: {
