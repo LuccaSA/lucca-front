@@ -34,21 +34,6 @@ function getTemplate(args: CalloutTinyStory): string {
 	const s = args.s ? ` mod-S` : '';
 	let palette = args.palette;
 	const icon = args.icon ? ' ' + args.icon : '';
-	let text: { title: string; description: string };
-	switch (args.palette) {
-		case 'palette-success':
-			text = { title: 'Cool!', description: 'Je suis un callout de succès :)' };
-			break;
-		case 'palette-warning':
-			text = { title: 'Hmmm...', description: "Je suis un callout d'alarme :|" };
-			break;
-		case 'palette-error':
-			text = { title: 'Oops!', description: "Je suis un callout d'erreur :(" };
-			break;
-		default:
-			text = { title: "Besoin d'aide ?", description: 'Je suis un callout standard' };
-			break;
-	}
 	palette = ' ' + palette;
 	return `<div class="callout mod-tiny${s}${palette}">
 	<div class="callout-icon">

@@ -53,7 +53,7 @@ export class LuCoreSelectJobQualificationsDirective<T extends LuCoreSelectJobQua
 	protected override params$: Observable<Record<string, string | number | boolean>> = combineLatest([toObservable(this._filters), this.clue$]).pipe(
 		map(([filters, clue]) => ({
 			...filters,
-			...(clue ? { clue: sanitizeClueFilter(clue) } : {}),
+			...(clue ? { search: sanitizeClueFilter(clue), sort: 'name' } : { sort: 'job.name,level.position' }),
 		})),
 	);
 

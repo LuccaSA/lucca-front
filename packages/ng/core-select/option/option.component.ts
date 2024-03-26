@@ -1,8 +1,11 @@
 import { Highlightable } from '@angular/cdk/a11y';
-import { AsyncPipe } from '@angular/common';
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, HostBinding, inject, Input, OnDestroy, TemplateRef, Type, ViewChild } from '@angular/core';
-import { asyncScheduler, BehaviorSubject, observeOn, Subscription } from 'rxjs';
+import { AsyncPipe, NgIf } from '@angular/common';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, HostBinding, Input, OnDestroy, TemplateRef, Type, ViewChild, inject } from '@angular/core';
+import { PortalDirective } from '@lucca-front/ng/core';
+import { BehaviorSubject, Subscription, asyncScheduler, observeOn } from 'rxjs';
 import { LuOptionContext, SELECT_ID } from '../select.model';
+import { LuOptionGrouping } from './group.directive';
+import { LuOptionGroupPipe } from './group.pipe';
 import { LuOptionOutletDirective } from './option-outlet.directive';
 import { ILuOptionContext, LU_OPTION_CONTEXT } from './option.token';
 
@@ -14,7 +17,7 @@ export const MAGIC_OPTION_SCROLL_DELAY = 15;
 	styleUrls: ['./option.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	standalone: true,
-	imports: [AsyncPipe, LuOptionOutletDirective],
+	imports: [AsyncPipe, LuOptionOutletDirective, NgIf, PortalDirective, LuOptionGroupPipe],
 })
 export class LuOptionComponent<T> implements Highlightable, AfterViewInit, OnDestroy {
 	@HostBinding('class.optionItem')
@@ -28,6 +31,7 @@ export class LuOptionComponent<T> implements Highlightable, AfterViewInit, OnDes
 	isSelected = false;
 
 	@Input() option?: T;
+	@Input() grouping?: LuOptionGrouping<T, unknown>;
 
 	@Input()
 	public optionIndex = 0;

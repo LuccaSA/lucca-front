@@ -102,6 +102,10 @@ export class DialogContentAdapterComponent<D, C extends ILuModalContent> impleme
 		this.ref.dismiss();
 	}
 
+	close(res: LuModalContentResult<C>): void {
+		this.ref.close(res);
+	}
+
 	ngDoCheck(): void {
 		this.doCheck$.next();
 	}

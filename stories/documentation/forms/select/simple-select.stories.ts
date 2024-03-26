@@ -1,6 +1,5 @@
 import { I18nPluralPipe, SlicePipe } from '@angular/common';
 import { provideHttpClient } from '@angular/common/http';
-import { Pipe, PipeTransform } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { LuDisabledOptionDirective, LuDisplayerDirective, LuOptionDirective, LuOptionGroupDirective } from '@lucca-front/ng/core-select';
 import { LuCoreSelectApiV3Directive, LuCoreSelectApiV4Directive } from '@lucca-front/ng/core-select/api';
@@ -15,7 +14,7 @@ import { getStoryGenerator, useDocumentationStory } from 'stories/helpers/storie
 import { provideCoreSelectCurrentUserId } from '../../../../packages/ng/core-select/user/me.provider';
 import { LuCoreSelectCustomEstablishmentsDirective } from './custom-establishment-example.component';
 import { LuCoreSelectCustomUsersDirective } from './custom-user-example.component';
-import { ILegume, LuCoreSelectInputStoryComponent, allLegumes, colorNameByColor, coreSelectStory } from './select.utils';
+import { FilterLegumesPipe, ILegume, LuCoreSelectInputStoryComponent, SortLegumesPipe, allLegumes, colorNameByColor, coreSelectStory } from './select.utils';
 
 export type LuSimpleSelectInputStoryComponent = LuCoreSelectInputStoryComponent & {
 	selectedLegume: ILegume | null;
@@ -39,7 +38,6 @@ export const Basic = generateStory({
 		[options]="legumes | filterLegumes:clue"
 		(clueChange)="clue = $event"
 		[clearable]="clearable"
-		[disabled]="disabled"
 		[loading]="loading"
 		[(ngModel)]="selectedLegume"
 	>
@@ -53,7 +51,6 @@ export const Basic = generateStory({
 	storyPartial: {
 		argTypes: {
 			clearable: { control: { type: 'boolean' } },
-			disabled: { control: { type: 'boolean' } },
 			placeholder: { control: { type: 'text' } },
 		},
 	},
@@ -327,7 +324,7 @@ export const GroupBy = generateStory({
 		class="textfield-input"
 		placeholder="Placeholder..."
 		[(ngModel)]="selectedLegume"
-		[options]="legumes | filterLegumes:clue"
+		[options]="legumes | filterLegumes:clue | sortLegumes:(clue ? ['name', legumeColor] : [legumeColor])"
 		(clueChange)="clue = $event"
 	>
 		<ng-container *luOptionGroup="let group by legumeColor; select: selectRef">
@@ -341,19 +338,11 @@ export const GroupBy = generateStory({
 	},
 	storyPartial: {
 		args: {
-			legumes: [...allLegumes].sort((a, b) => colorNameByColor[a.color].localeCompare(colorNameByColor[b.color])),
 			legumeColor: (legume: ILegume) => legume.color,
 			colorNameByColor,
 		},
 	},
 });
-
-@Pipe({ name: 'filterLegumes', standalone: true })
-class FilterLegumesPipe implements PipeTransform {
-	transform(legumes: ILegume[], clue: string): ILegume[] {
-		return clue ? legumes.filter((legume) => legume.name.toLowerCase().includes(clue.toLowerCase())) : legumes;
-	}
-}
 
 const meta: Meta<LuSimpleSelectInputStoryComponent> = {
 	title: 'Documentation/Forms/SimpleSelect',
@@ -367,6 +356,7 @@ const meta: Meta<LuSimpleSelectInputStoryComponent> = {
 				LuOptionDirective,
 				LuUserDisplayPipe,
 				FilterLegumesPipe,
+				SortLegumesPipe,
 				SlicePipe,
 				LuCoreSelectApiV3Directive,
 				LuCoreSelectApiV4Directive,
@@ -385,7 +375,6 @@ const meta: Meta<LuSimpleSelectInputStoryComponent> = {
 		placeholder: 'Placeholder...',
 		legumes: allLegumes,
 		clearable: true,
-		disabled: false,
 		loading: false,
 		page: 1,
 	},

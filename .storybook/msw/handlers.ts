@@ -1,5 +1,5 @@
 import { delay, http, HttpResponse } from 'msw';
-import { applyFilter, applyV3Paging, applyV4Paging, genericHandler, handleFieldsRoot } from './helpers';
+import { applyFilter, applyV3Paging, applyV4Paging, applyV4Sorting, genericHandler, handleFieldsRoot } from './helpers';
 import {
 	mockAxisSectionsV3,
 	mockDepartmentsTree,
@@ -12,6 +12,7 @@ import {
 	mockUsers,
 } from './mocks';
 
+
 const usersSearchHandler = genericHandler(
 	mockUsers,
 	// Get and parse params from query params
@@ -20,11 +21,12 @@ const usersSearchHandler = genericHandler(
 		search: (search) => search.toLowerCase(),
 		id: (ids) => ids.split(',').map((id) => parseInt(id)),
 	},
-	// Apply filters to items
 	{
-		paging: applyV3Paging,
+		// Apply filters to items
 		search: applyFilter((user, { search }) => `${user.firstName} ${user.lastName}`.includes(search)),
 		id: applyFilter((user, { id }) => id.includes(user.id)),
+		// Then paging/limiting
+		paging: applyV3Paging,
 	},
 	(items) => ({
 		data: {
@@ -43,13 +45,17 @@ export const handlers = [
 				page: (p) => parseInt(p),
 				limit: (l) => parseInt(l),
 				search: (s) => s.toLowerCase(),
+				sort: (s) => s,
 				'fields.root': (f) => f,
 			},
-			// Apply filters to items
 			{
+				// Apply filters to items
+				search: applyFilter((lu, { search }) => lu.name.toLowerCase().includes(search)),
+				// Then sorting
+				sort: (items, { sort }) => applyV4Sorting(items, sort),
+				// Then paging/limiting
 				page: applyV4Paging,
 				limit: (items, { limit }) => items.slice(0, limit),
-				search: applyFilter((lu, { search }) => lu.name.toLowerCase().includes(search)),
 			},
 			handleFieldsRoot(mockLegalUnits.length),
 		),
@@ -65,14 +71,18 @@ export const handlers = [
 				limit: (l) => parseInt(l),
 				legalUnitId: (l) => parseInt(l),
 				search: (s) => s.toLowerCase(),
+				sort: (s) => s,
 				'fields.root': (f) => f,
 			},
-			// Apply filters to items
 			{
-				page: applyV4Paging,
-				limit: (items, { limit }) => items.slice(0, limit),
+				// Apply filters to items
 				legalUnitId: (items, { legalUnitId }) => items.filter((e) => e.legalUnitId === legalUnitId),
 				search: applyFilter((e, { search }) => e.name.toLowerCase().includes(search)),
+				// Then sorting
+				sort: (items, { sort }) => applyV4Sorting(items, sort),
+				// Then paging/limiting
+				page: applyV4Paging,
+				limit: (items, { limit }) => items.slice(0, limit),
 			},
 			handleFieldsRoot(mockEstablishments.length),
 		),
@@ -87,12 +97,16 @@ export const handlers = [
 				page: (p) => parseInt(p),
 				limit: (l) => parseInt(l),
 				search: (s) => s.toLowerCase(),
+				sort: (s) => s,
 				'fields.root': (f) => f,
 			},
-			// Apply filters to items
 			{
-				page: applyV4Paging,
+				// Apply filters to items
 				search: applyFilter((jq, { search }) => jq.name.toLowerCase().includes(search)),
+				// Then sorting
+				sort: (items, { sort }) => applyV4Sorting(items, sort),
+				// Then paging/limiting
+				page: applyV4Paging,
 				limit: (items, { limit }) => items.slice(0, limit),
 			},
 			handleFieldsRoot(mockJobQualifications.length),
@@ -119,10 +133,11 @@ export const handlers = [
 				paging: (p) => p,
 				name: (n) => decodeURIComponent(n.replace('like,', '')),
 			},
-			// Apply filters to items
 			{
-				paging: applyV3Paging,
+				// Apply filters to items
 				name: applyFilter((as, { name }) => as.name.toLowerCase().includes(name.toLowerCase())),
+				// Then paging/limiting
+				paging: applyV3Paging,
 			},
 			(items) => ({ data: { items } }),
 		),
@@ -137,10 +152,11 @@ export const handlers = [
 				paging: (p) => p,
 				search: (s) => s.toLowerCase(),
 			},
-			// Apply filters to items
 			{
-				paging: applyV3Paging,
+				// Apply filters to items
 				search: applyFilter((user, { search }) => `${user.firstName} ${user.lastName}`.includes(search)),
+				// Then paging/limiting
+				paging: applyV3Paging,
 			},
 			(items) => ({ data: { items } }),
 		),
@@ -162,10 +178,11 @@ export const handlers = [
 				paging: (p) => p,
 				id: (ids) => ids.split(',').map((id) => parseInt(id)),
 			},
-			// Apply filters to items
 			{
-				paging: applyV3Paging,
+				// Apply filters to items
 				id: applyFilter((user, { id }) => id.includes(user.id)),
+				// Then paging/limiting
+				paging: applyV3Paging,
 			},
 			(items) => ({ data: { items } }),
 		),

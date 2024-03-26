@@ -348,6 +348,7 @@ export type LuccaIcon =
 	| 'euro'
 	| 'moneyPaymentCard'
 	| 'bankingCard'
+	| 'moneyCheck'
 	| 'moneyPiggyBank'
 	| 'piggyBank'
 	| 'moneyWallet'
@@ -528,4 +529,5 @@ export type LuccaIcon =
 	| 'weatherStorm'
 	| 'weatherSunny'
 	| 'weatherSun'
+	| 'weatherStars'
 	| 'weight';

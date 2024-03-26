@@ -3,9 +3,9 @@ import { AsyncPipe, NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
 import { AfterViewInit, ChangeDetectionStrategy, Component, QueryList, ViewChildren, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { PortalDirective, getIntl } from '@lucca-front/ng/core';
-import { LuSelectPanelRef, SELECT_ID, ɵLuOptionComponent, ɵgenerateGroups } from '@lucca-front/ng/core-select';
-import { EMPTY, asyncScheduler, filter, map, observeOn, take, takeUntil } from 'rxjs';
-import { debounceTime, switchMap } from 'rxjs/operators';
+import { LuSelectPanelRef, SELECT_ID, ɵLuOptionComponent, ɵLuOptionGroupPipe, ɵgetGroupTemplateLocation } from '@lucca-front/ng/core-select';
+import { asyncScheduler, filter, map, observeOn, take, takeUntil } from 'rxjs';
+import { debounceTime, startWith, switchMap } from 'rxjs/operators';
 import { LuSimpleSelectInputComponent } from '../input/select-input.component';
 import { SIMPLE_SELECT_INPUT } from '../select.model';
 import { LU_SIMPLE_SELECT_TRANSLATIONS } from '../select.translate';
@@ -17,7 +17,7 @@ import { LuIsOptionSelectedPipe } from './option-selected.pipe';
 	styleUrls: ['./panel.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	standalone: true,
-	imports: [A11yModule, AsyncPipe, FormsModule, NgIf, NgFor, NgTemplateOutlet, ɵLuOptionComponent, LuIsOptionSelectedPipe, PortalDirective],
+	imports: [A11yModule, AsyncPipe, FormsModule, NgIf, NgFor, NgTemplateOutlet, ɵLuOptionGroupPipe, ɵLuOptionComponent, LuIsOptionSelectedPipe, PortalDirective],
 })
 export class LuSelectPanelComponent<T> implements AfterViewInit {
 	public selectInput = inject<LuSimpleSelectInputComponent<T>>(SIMPLE_SELECT_INPUT);
@@ -27,7 +27,6 @@ export class LuSelectPanelComponent<T> implements AfterViewInit {
 
 	options$ = this.selectInput.options$;
 	grouping = this.selectInput.grouping;
-	groups$ = this.grouping ? this.options$.pipe(map((options) => ɵgenerateGroups(options, this.grouping.selector))) : EMPTY;
 	loading$ = this.selectInput.loading$;
 	optionComparer = this.selectInput.optionComparer;
 	initialValue: T | undefined = this.selectInput.value;
@@ -43,6 +42,9 @@ export class LuSelectPanelComponent<T> implements AfterViewInit {
 	public get selected(): T | undefined {
 		return this.initialValue;
 	}
+
+	public clueChange$ = this.selectInput.clueChange.pipe(startWith(this.selectInput.clue));
+	public groupTemplateLocation$ = ɵgetGroupTemplateLocation(!!this.grouping, this.clueChange$, this.options$);
 
 	onScroll(evt: Event): void {
 		if (!(evt.target instanceof HTMLElement)) {

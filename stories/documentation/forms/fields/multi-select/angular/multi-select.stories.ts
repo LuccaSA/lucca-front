@@ -79,7 +79,6 @@ export const Basic: StoryObj<LuMultiSelectInputComponent<unknown> & FormFieldCom
 		required: false,
 		placeholder: 'Placeholder',
 		clearable: true,
-		disabled: false,
 		inlineMessage: 'Helper Text',
 		inlineMessageState: 'default',
 		loading: false,

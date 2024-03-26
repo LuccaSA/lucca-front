@@ -3,9 +3,9 @@ import { AsyncPipe, NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
 import { AfterViewInit, ChangeDetectionStrategy, Component, QueryList, ViewChildren, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { PortalDirective, getIntl } from '@lucca-front/ng/core';
-import { SELECT_ID, ɵLuOptionComponent, ɵLuOptionOutletDirective, ɵgenerateGroups } from '@lucca-front/ng/core-select';
-import { EMPTY, asyncScheduler, filter, map, observeOn, take, takeUntil } from 'rxjs';
-import { debounceTime, switchMap } from 'rxjs/operators';
+import { SELECT_ID, ɵLuOptionComponent, ɵLuOptionGroupPipe, ɵLuOptionOutletDirective, ɵgetGroupTemplateLocation } from '@lucca-front/ng/core-select';
+import { asyncScheduler, filter, map, observeOn, take, takeUntil } from 'rxjs';
+import { debounceTime, startWith, switchMap } from 'rxjs/operators';
 import { LuMultiSelectInputComponent } from '../input';
 import { LuMultiSelectPanelRef } from '../input/panel.model';
 import { MULTI_SELECT_INPUT } from '../select.model';
@@ -28,6 +28,7 @@ import { ɵLuMultiSelectSelectedChipDirective } from './selected-chip.directive'
 		NgIf,
 		NgFor,
 		ɵLuOptionComponent,
+		ɵLuOptionGroupPipe,
 		ɵLuOptionOutletDirective,
 		ɵLuMultiSelectSelectedChipDirective,
 		NgTemplateOutlet,
@@ -43,7 +44,6 @@ export class LuMultiSelectPanelComponent<T> implements AfterViewInit {
 
 	options$ = this.selectInput.options$;
 	grouping = this.selectInput.grouping;
-	groups$ = this.grouping ? this.options$.pipe(map((options) => ɵgenerateGroups(options, this.grouping.selector))) : EMPTY;
 	loading$ = this.selectInput.loading$;
 	optionComparer = this.selectInput.optionComparer;
 	selectedOptions: T[] = this.selectInput.value || [];
@@ -55,6 +55,10 @@ export class LuMultiSelectPanelComponent<T> implements AfterViewInit {
 	public get keyManager(): ActiveDescendantKeyManager<ɵLuOptionComponent<T>> {
 		return this._keyManager;
 	}
+
+	public clueChange$ = this.selectInput.clueChange.pipe(startWith(this.selectInput.clue));
+
+	groupTemplateLocation$ = ɵgetGroupTemplateLocation(!!this.grouping, this.clueChange$, this.options$);
 
 	onScroll(evt: Event): void {
 		if (!(evt.target instanceof HTMLElement)) {

@@ -21,13 +21,16 @@ import { BehaviorSubject, ReplaySubject, Subject } from 'rxjs';
 import { LuOptionGrouping, LuSimpleSelectDefaultOptionComponent } from '../option';
 import { LuSelectPanelRef } from '../panel';
 import { LuOptionContext, SELECT_LABEL, SELECT_LABEL_ID } from '../select.model';
+import { ControlValueAccessor } from '@angular/forms';
 
 @Directive()
-export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDestroy, OnInit {
+export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDestroy, OnInit, ControlValueAccessor {
 	@ViewChild('inputElement')
 	private inputElementRef: ElementRef<HTMLInputElement>;
 
 	public placeholder$ = new BehaviorSubject('');
+
+	public disabled$ = new BehaviorSubject(false);
 
 	@Input()
 	set placeholder(value: string) {
@@ -41,9 +44,6 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	get searchable(): boolean {
 		return this.clueChange.observed;
 	}
-
-	@Input({ transform: booleanAttribute })
-	disabled = false;
 
 	@HostBinding('class.is-selected')
 	protected get isSelectedClass(): boolean {
@@ -115,6 +115,8 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	}
 
 	public clueChanged(clue: string): void {
+		this.clue = clue;
+
 		if (!this.isPanelOpen) {
 			this.openPanel(clue);
 		} else if (this.lastEmittedClue !== clue) {
@@ -165,9 +167,13 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 					this.panelRef?.handleKeyManagerEvent($event);
 				}
 				break;
-			case 'Space':
+			case ' ':
 			case 'ArrowDown':
 			case 'ArrowUp':
+				// Initial space should just open the panel, not trigger a clue change
+				if (!this.clue && $event.key === ' ') {
+					$event.preventDefault();
+				}
 				if (this.isPanelOpen) {
 					this.panelRef?.handleKeyManagerEvent($event);
 				} else {
@@ -195,7 +201,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	}
 
 	setDisabledState(isDisabled: boolean): void {
-		this.disabled = isDisabled;
+		this.disabled$.next(isDisabled);
 		this.changeDetectorRef.markForCheck();
 	}
 
@@ -218,7 +224,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	}
 
 	openPanel(clue: string = ''): void {
-		if (this.isPanelOpen || this.disabled) {
+		if (this.isPanelOpen || this.disabled$.value) {
 			return;
 		}
 
