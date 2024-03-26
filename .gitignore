@@ -33,6 +33,7 @@ storybook-static
 compodoc-static
 
 /.angular/cache
+/coverage/
 
 # IDE - Jetbrains
 .idea/*

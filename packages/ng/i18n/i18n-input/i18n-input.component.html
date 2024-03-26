@@ -1,0 +1,43 @@
+@if (currentTranslation) {
+<ng-container [formGroup]="formGroup">
+	<label class="textfield mod-withSuffix" [class.mod-noLabel]="!label">
+		<input
+			class="textfield-input"
+			type="text"
+			[placeholder]="placeholder"
+			formControlName="currentTranslation"
+			cdkOverlayOrigin
+			#overlayOrigin="cdkOverlayOrigin"
+			[attr.aria-required]="currentTranslation.required"
+			(focus)="onTouched()"
+		/>
+		@if(label){
+		<span class="textfield-label">{{label}}</span>
+		}
+		<span class="textfield-suffix i18n-suffix" role="button" (click)="openPopover($event)" (keyup.enter)="openPopover($event)">
+			@if (currentTranslation.cultureIcon) {
+			<lu-icon
+				[icon]="currentTranslation.cultureIcon"
+				[alt]="currentTranslation.cultureName"
+				size="M"
+				[luTooltip]="currentTranslation.cultureName"
+				[luTooltipDisabled]="showPopover"
+			>
+			</lu-icon>
+			} @else { {{ currentTranslation.cultureName }} }
+		</span>
+	</label>
+
+	<ng-template
+		cdkConnectedOverlay
+		[cdkConnectedOverlayOpen]="showPopover"
+		[cdkConnectedOverlayOrigin]="overlayOrigin"
+		cdkConnectedOverlayPanelClass="lu-popover-panel"
+		[cdkConnectedOverlayWidth]="overlayOrigin.elementRef.nativeElement.offsetWidth"
+		[cdkConnectedOverlayPush]="true"
+		(overlayOutsideClick)="closePopover($event)"
+	>
+		<lu-i18n-panel formControlName="translations" class="lu-popover-content" cdkTrapFocus [cdkTrapFocusAutoCapture]="true"></lu-i18n-panel>
+	</ng-template>
+</ng-container>
+}
