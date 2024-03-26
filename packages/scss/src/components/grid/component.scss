@@ -24,6 +24,8 @@
 			grid-column-end: span var(--grid-colspan, var(--grid-column-end));
 			grid-row-end: span var(--grid-rowspan, var(--grid-row-end));
 
+			min-width: 0;
+
 			@each $breakpoint, $value in config.$breakpoints {
 				@include media.min($breakpoint) {
 					&[style*='grid-colspanAtMediaMin#{$breakpoint}'] {
