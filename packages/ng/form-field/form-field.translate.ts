@@ -1,5 +1,5 @@
 import { InjectionToken } from '@angular/core';
-import { ILuTranslation } from '../core/translate';
+import { ILuTranslation } from '@lucca-front/ng/core';
 
 export const LU_FORM_FIELD_TRANSLATIONS = new InjectionToken('LuFormFieldTranslations', {
 	factory: () => luFormFieldTranslations,
