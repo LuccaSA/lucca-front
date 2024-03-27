@@ -1,6 +1,17 @@
 import { delay, http, HttpResponse } from 'msw';
 import { applyFilter, applyV3Paging, applyV4Paging, applyV4Sorting, genericHandler, handleFieldsRoot } from './helpers';
-import { mockAxisSectionsV3, mockDepartmentsTree, mockEstablishments, mockJobQualifications, mockLegalUnits, mockMe, mockProjectUsers, mockUsers } from './mocks';
+import {
+	mockAxisSectionsV3,
+	mockDepartmentsTree,
+	mockEstablishments,
+	mockJobQualifications,
+	mockLegalUnits,
+	mockMe,
+	mockProjectUsers,
+	mockUserPopover,
+	mockUsers,
+} from './mocks';
+
 
 const usersSearchHandler = genericHandler(
 	mockUsers,
@@ -178,4 +189,13 @@ export const handlers = [
 	),
 
 	http.get('/api/v3/users/search', usersSearchHandler),
+	http.get('/work-locations/api/employee-profile-card/:id', async () => {
+		await delay(300);
+		return HttpResponse.json(mockUserPopover);
+	}),
+
+	http.get('/lucca-banner/meta/api/feature-flag-statuses/user-popover-is-activated', async () => {
+		await delay(300);
+		return HttpResponse.json({ key: 'user-popover-is-activated', status: 'Enabled' });
+	})
 ];
