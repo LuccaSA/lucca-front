@@ -8,8 +8,8 @@
 
 	--components-button-font-size: var(--sizes-S-fontSize);
 	--components-button-line-height: var(--sizes-S-lineHeight);
-	--components-button-padding: 0.375rem 0.75rem;
-	--components-button-gap: 0.375rem;
+	--components-button-padding: var(--pr-t-spacings-75) var(--pr-t-spacings-150);
+	--components-button-gap: var(--pr-t-spacings-75);
 
 	.numericBadge {
 		@include numericBadge.S;
@@ -21,8 +21,8 @@
 
 	--components-button-font-size: var(--sizes-XS-fontSize);
 	--components-button-line-height: var(--sizes-XS-lineHeight);
-	--components-button-padding: var(--spacings-XXS) var(--spacings-XS);
-	--components-button-gap: var(--spacings-XXS);
+	--components-button-padding: var(--pr-t-spacings-50) var(--pr-t-spacings-100);
+	--components-button-gap: var(--pr-t-spacings-50);
 
 	.numericBadge {
 		@include numericBadge.XS;
@@ -30,15 +30,15 @@
 }
 
 @mixin onlyIcon {
-	--components-button-padding: var(--spacings-XS);
+	--components-button-padding: var(--pr-t-spacings-100);
 }
 
 @mixin onlyIconS {
-	--components-button-padding: 0.375rem;
+	--components-button-padding: var(--pr-t-spacings-75);
 }
 
 @mixin onlyIconXS {
-	--components-button-padding: var(--spacings-XXS);
+	--components-button-padding: var(--pr-t-spacings-50);
 }
 
 @mixin block {
@@ -46,15 +46,15 @@
 }
 
 @mixin withIcon {
-	--components-button-padding: var(--spacings-XS) calc(var(--spacings-XS) + var(--spacings-XXS));
+	--components-button-padding: var(--pr-t-spacings-100) var(--pr-t-spacings-150);
 }
 
 @mixin withIconS {
-	--components-button-padding: calc(var(--spacings-XXS) + var(--spacings-XXS) / 2) calc(var(--spacings-XS) + var(--spacings-XXS));
+	--components-button-padding: var(--pr-t-spacings-75) var(--pr-t-spacings-150);
 }
 
 @mixin withIconXS {
-	--components-button-padding: var(--spacings-XXS) var(--spacings-XS);
+	--components-button-padding: var(--pr-t-spacings-50) var(--pr-t-spacings-100);
 }
 
 @mixin textDisabled {
@@ -195,7 +195,7 @@
 
 // deprecated
 @mixin counter {
-	--components-button-padding: var(--spacings-XS) calc(var(--spacings-XS) + var(--spacings-XXS)) var(--spacings-XS) var(--spacings-S);
+	--components-button-padding: var(--pr-t-spacings-100) var(--pr-t-spacings-150) var(--pr-t-spacings-100) var(--pr-t-spacings-200);
 
 	.button-counter {
 		background-color: var(--palettes-600, var(--palettes-product-600));
@@ -218,7 +218,7 @@
 
 // deprecated
 @mixin counterS {
-	--components-button-padding: 0.375rem calc(var(--spacings-XS) + var(--spacings-XXS)) 0.375rem var(--spacings-S);
+	--components-button-padding: var(--pr-t-spacings-75) var(--pr-t-spacings-150) var(--pr-t-spacings-75) var(--pr-t-spacings-200);
 
 	.button-counter {
 		height: 1.25rem;
@@ -228,7 +228,7 @@
 
 // deprecated
 @mixin counterXS {
-	--components-button-padding: var(--spacings-XXS) var(--spacings-XS) var(--spacings-XXS) calc(var(--spacings-XS) + var(--spacings-XXS));
+	--components-button-padding: var(--pr-t-spacings-50) var(--pr-t-spacings-100) var(--pr-t-spacings-50) var(--pr-t-spacings-150);
 
 	.button-counter {
 		height: 1rem;

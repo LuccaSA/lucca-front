@@ -43,13 +43,13 @@ class UserSelectStoriesModule {}
 </label>
 
 /* 3. (Exemple n° 2) Utiliser le lu-user-select avec <code class="code">enableFormerEmployees</code> */
-<label class="textfield u-marginTopM">
+<label class="textfield pr-u-marginTop300">
   <lu-user-select class="textfield-input" [ngModel]="model" [enableFormerEmployees]="true"></lu-user-select>
   <span class="textfield-label">Utilisateurs avec <code class="code">enableFormerEmployees</code></span>
 </label>
 
 /* 4. (Exemple n° 3) Utiliser le lu-user-select avec filtre sur son appInstanceId et ses opérations */
-<label class="textfield u-marginTopM">
+<label class="textfield pr-u-marginTop300">
   <lu-user-select class="textfield-input" [ngModel]="model" appInstanceId="6" [operations]="[1]">
   </lu-user-select>
   <span class="textfield-label">Utilisateurs filtrés par operations/appInstanceId</span>

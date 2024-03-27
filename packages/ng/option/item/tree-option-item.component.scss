@@ -3,7 +3,7 @@
 
 :host {
 	--components-options-tree-multiple-padding: 2.25rem;
-	--components-options-tree-padding-child: 0.75rem;
+	--components-options-tree-padding-child: var(--pr-t-spacings-150);
 }
 
 .is-disabled {
@@ -22,7 +22,7 @@
 
 .optionItem {
 	&:not(:last-child) {
-		margin-bottom: var(--spacings-XXS);
+		margin-bottom: var(--pr-t-spacings-50);
 	}
 
 	&:hover {
@@ -43,8 +43,8 @@
 .optionItem-icons {
 	display: none;
 	position: absolute;
-	top: var(--spacings-XXS);
-	right: var(--spacings-XS);
+	top: var(--pr-t-spacings-50);
+	right: var(--pr-t-spacings-100);
 	opacity: 0;
 	transition: all var(--commons-animations-durations-fast) ease;
 }
@@ -52,7 +52,7 @@
 .optionItem-icon {
 	cursor: pointer;
 	opacity: 0.66;
-	margin-left: var(--spacings-XS);
+	margin-left: var(--pr-t-spacings-100);
 	transition: all var(--commons-animations-durations-fast) ease;
 
 	&:hover {
@@ -92,37 +92,37 @@
 
 :host-context(.lu-picker-panel lu-tree-option) {
 	.optionItem-value {
-		padding-left: var(--spacings-XS);
+		padding-left: var(--pr-t-spacings-100);
 	}
 }
 
 :host-context(.lu-picker-panel lu-tree-option lu-tree-option) {
 	.optionItem-value {
-		padding-left: calc(var(--spacings-XS) + var(--components-options-tree-padding-child));
+		padding-left: calc(var(--pr-t-spacings-100) + var(--components-options-tree-padding-child));
 	}
 }
 
 :host-context(.lu-picker-panel lu-tree-option lu-tree-option lu-tree-option) {
 	.optionItem-value {
-		padding-left: calc(var(--spacings-XS) + var(--components-options-tree-padding-child) * 2);
+		padding-left: calc(var(--pr-t-spacings-100) + var(--components-options-tree-padding-child) * 2);
 	}
 }
 
 :host-context(.lu-picker-panel lu-tree-option lu-tree-option lu-tree-option lu-tree-option) {
 	.optionItem-value {
-		padding-left: calc(var(--spacings-XS) + var(--components-options-tree-padding-child) * 3);
+		padding-left: calc(var(--pr-t-spacings-100) + var(--components-options-tree-padding-child) * 3);
 	}
 }
 
 :host-context(.lu-picker-panel lu-tree-option lu-tree-option lu-tree-option lu-tree-option lu-tree-option) {
 	.optionItem-value {
-		padding-left: calc(var(--spacings-XS) + var(--components-options-tree-padding-child) * 4);
+		padding-left: calc(var(--pr-t-spacings-100) + var(--components-options-tree-padding-child) * 4);
 	}
 }
 
 :host-context(.lu-picker-panel lu-tree-option lu-tree-option lu-tree-option lu-tree-option lu-tree-option lu-tree-option) {
 	.optionItem-value {
-		padding-left: calc(var(--spacings-XS) + var(--components-options-tree-padding-child) * 5);
+		padding-left: calc(var(--pr-t-spacings-100) + var(--components-options-tree-padding-child) * 5);
 	}
 }
 
@@ -133,11 +133,11 @@
 		padding-left: var(--components-options-tree-multiple-padding);
 
 		&::before {
-			left: var(--spacings-XS);
+			left: var(--pr-t-spacings-100);
 		}
 
 		&::after {
-			left: var(--spacings-XS);
+			left: var(--pr-t-spacings-100);
 		}
 	}
 }
@@ -147,11 +147,11 @@
 		padding-left: calc(var(--components-options-tree-multiple-padding) + var(--components-options-tree-padding-child));
 
 		&::before {
-			left: calc(var(--spacings-XS) + var(--components-options-tree-padding-child));
+			left: calc(var(--pr-t-spacings-100) + var(--components-options-tree-padding-child));
 		}
 
 		&::after {
-			left: calc(var(--spacings-XS) + var(--components-options-tree-padding-child));
+			left: calc(var(--pr-t-spacings-100) + var(--components-options-tree-padding-child));
 		}
 	}
 }
@@ -161,11 +161,11 @@
 		padding-left: calc(var(--components-options-tree-multiple-padding) + var(--components-options-tree-padding-child) * 2);
 
 		&::before {
-			left: calc(var(--spacings-XS) + var(--components-options-tree-padding-child) * 2);
+			left: calc(var(--pr-t-spacings-100) + var(--components-options-tree-padding-child) * 2);
 		}
 
 		&::after {
-			left: calc(var(--spacings-XS) + var(--components-options-tree-padding-child) * 2);
+			left: calc(var(--pr-t-spacings-100) + var(--components-options-tree-padding-child) * 2);
 		}
 	}
 }
@@ -175,11 +175,11 @@
 		padding-left: calc(var(--components-options-tree-multiple-padding) + var(--components-options-tree-padding-child) * 3);
 
 		&::before {
-			left: calc(var(--spacings-XS) + var(--components-options-tree-padding-child) * 3);
+			left: calc(var(--pr-t-spacings-100) + var(--components-options-tree-padding-child) * 3);
 		}
 
 		&::after {
-			left: calc(var(--spacings-XS) + var(--components-options-tree-padding-child) * 3);
+			left: calc(var(--pr-t-spacings-100) + var(--components-options-tree-padding-child) * 3);
 		}
 	}
 }
@@ -189,11 +189,11 @@
 		padding-left: calc(var(--components-options-tree-multiple-padding) + var(--components-options-tree-padding-child) * 4);
 
 		&::before {
-			left: calc(var(--spacings-XS) + var(--components-options-tree-padding-child) * 4);
+			left: calc(var(--pr-t-spacings-100) + var(--components-options-tree-padding-child) * 4);
 		}
 
 		&::after {
-			left: calc(var(--spacings-XS) + var(--components-options-tree-padding-child) * 4);
+			left: calc(var(--pr-t-spacings-100) + var(--components-options-tree-padding-child) * 4);
 		}
 	}
 }
@@ -203,11 +203,11 @@
 		padding-left: calc(var(--components-options-tree-multiple-padding) + var(--components-options-tree-padding-child) * 5);
 
 		&::before {
-			left: calc(var(--spacings-XS) + var(--components-options-tree-padding-child) * 5);
+			left: calc(var(--pr-t-spacings-100) + var(--components-options-tree-padding-child) * 5);
 		}
 
 		&::after {
-			left: calc(var(--spacings-XS) + var(--components-options-tree-padding-child) * 5);
+			left: calc(var(--pr-t-spacings-100) + var(--components-options-tree-padding-child) * 5);
 		}
 	}
 }

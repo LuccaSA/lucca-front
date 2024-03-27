@@ -34,7 +34,7 @@ const Template: StoryFn<TagsPalettesStory> = (args) => ({
 	styles: [
 		`:host {
 			display: flex;
-			gap: var(--spacings-XXS);
+			gap: var(--pr-t-spacings-50);
 		}`,
 	],
 });

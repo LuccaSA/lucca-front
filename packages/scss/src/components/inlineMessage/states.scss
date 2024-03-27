@@ -1,6 +1,6 @@
 @mixin success {
-	--components-inlineMessage-icon-color: var(--palettes-success-700);
-	--components-inlineMessage-gap: var(--spacings-XXS);
+  --components-inlineMessage-icon-color: var(--palettes-success-700);
+  --components-inlineMessage-gap: var(--pr-t-spacings-50);
 
 	.lucca-icon {
 		&::before {
@@ -11,8 +11,8 @@
 }
 
 @mixin warning {
-	--components-inlineMessage-icon-color: var(--palettes-warning-700);
-	--components-inlineMessage-gap: var(--spacings-XXS);
+  --components-inlineMessage-icon-color: var(--palettes-warning-700);
+  --components-inlineMessage-gap: var(--pr-t-spacings-50);
 
 	.lucca-icon {
 		&::before {
@@ -23,9 +23,9 @@
 }
 
 @mixin error {
-	--components-inlineMessage-icon-color: var(--palettes-error-700);
-	--components-inlineMessage-color: var(--palettes-error-700);
-	--components-inlineMessage-gap: var(--spacings-XXS);
+  --components-inlineMessage-icon-color: var(--palettes-error-700);
+  --components-inlineMessage-color: var(--palettes-error-700);
+  --components-inlineMessage-gap: var(--pr-t-spacings-50);
 
 	.lucca-icon {
 		&::before {
