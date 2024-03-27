@@ -1,4 +1,4 @@
-import { CommonModule, I18nPluralPipe } from '@angular/common';
+import { AsyncPipe, CommonModule, I18nPluralPipe } from '@angular/common';
 import { provideHttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { provideAnimations } from '@angular/platform-browser/animations';
@@ -13,6 +13,8 @@ import { applicationConfig, Meta, moduleMetadata } from '@storybook/angular';
 import { HiddenArgType } from 'stories/helpers/common-arg-types';
 import { getStoryGenerator } from 'stories/helpers/stories';
 import { allLegumes, colorNameByColor, coreSelectStory, FilterLegumesPipe, ILegume, LuCoreSelectInputStoryComponent } from './select.utils';
+import {  interval, map } from 'rxjs';
+import { startWith } from 'rxjs/operators';
 
 type LuMultiSelectInputStoryComponent = LuCoreSelectInputStoryComponent & {
 	selectedLegumes: ILegume[];
@@ -38,7 +40,6 @@ export const Basic = generateStory({
 		class="multiSelect"
 		[placeholder]="placeholder"
 		[clearable]="clearable"
-		[disabled]="disabled"
 		[loading]="loading"
 		[(ngModel)]="selectedLegumes"
 		[options]="legumes | filterLegumes:clue"
@@ -56,7 +57,6 @@ export const Basic = generateStory({
 		},
 		argTypes: {
 			clearable: { control: { type: 'boolean' } },
-			disabled: { control: { type: 'boolean' } },
 			placeholder: { control: { type: 'text' } },
 			maxValuesShown: { control: { type: 'number' } },
 		},
@@ -72,7 +72,6 @@ export const WithMultiDisplayer = generateStory({
 		#selectRef
 		class="multiSelect"
 		[clearable]="clearable"
-		[disabled]="disabled"
 		[loading]="loading"
 		[(ngModel)]="selectedLegumes"
 		placeholder="Placeholder..."
@@ -118,7 +117,6 @@ export const WithDisplayer = generateStory({
 		[options]="legumes | filterLegumes:clue"
 		(clueChange)="clue = $event"
 		[clearable]="clearable"
-		[disabled]="disabled"
 		[loading]="loading"
 		[(ngModel)]="selectedLegumes"
 		[maxValuesShown]="maxValuesShown"
@@ -299,6 +297,40 @@ export const GroupBy = generateStory({
 	},
 });
 
+export const testDynamicDisabled = generateStory({
+	name: '[test] Dynamic disabled',
+	description: 'technical test to check dynamic disabled',
+	neededImports: {
+		'@lucca-front/ng/multi-select': ['LuMultiSelectInputComponent'],
+	},
+	template: `
+				<lu-multi-select
+					#selectRef
+					class="multiSelect"
+					[placeholder]="placeholder"
+					[clearable]="clearable"
+					[loading]="loading"
+					[disabled]="dynamicDisabled | async"
+					[(ngModel)]="selectedLegumes"
+					[options]="legumes | filterLegumes:clue"
+					(clueChange)="clue = $event"
+					[maxValuesShown]="maxValuesShown"
+				>
+				</lu-multi-select>
+			`,
+	storyPartial: {
+		args: {
+			selectedLegumes: allLegumes.slice(0, 15),
+			dynamicDisabled: interval(2000).pipe(map(n => !!(n % 2)), startWith(true)),
+		} as any,
+		argTypes: {
+			clearable: { control: { type: 'boolean' } },
+			placeholder: { control: { type: 'text' } },
+			maxValuesShown: { control: { type: 'number' } },
+		},
+	},
+});
+
 const meta: Meta<LuMultiSelectInputStoryComponent> = {
 	title: 'Documentation/Forms/MultiSelect',
 	component: LuMultiSelectInputComponent,
@@ -322,6 +354,7 @@ const meta: Meta<LuMultiSelectInputStoryComponent> = {
 				LuDisabledOptionDirective,
 				LuMultiSelectDisplayerInputDirective,
 				CommonModule,
+				AsyncPipe
 			],
 		}),
 		applicationConfig({
@@ -332,7 +365,6 @@ const meta: Meta<LuMultiSelectInputStoryComponent> = {
 		placeholder: 'Placeholder...',
 		legumes: allLegumes,
 		clearable: true,
-		disabled: false,
 		loading: false,
 		maxValuesShown: 500,
 		selectedLegumes: [],

@@ -7,7 +7,7 @@ import { InlineMessageComponent, InlineMessageState } from '@lucca-front/ng/inli
 import { SafeHtml } from '@angular/platform-browser';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 import { getIntl, IntlParamsPipe, LuClass, PortalContent, PortalDirective } from '@lucca-front/ng/core';
-import { NG_VALIDATORS, NgControl, ReactiveFormsModule, RequiredValidator, Validator, Validators } from '@angular/forms';
+import { AbstractControl, NG_VALIDATORS, NgControl, ReactiveFormsModule, RequiredValidator, Validator, Validators } from '@angular/forms';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { FORM_FIELD_INSTANCE } from './form-field.token';
 import { LU_FORM_FIELD_TRANSLATIONS } from './form-field.translate';
@@ -57,6 +57,9 @@ export class FormFieldComponent implements OnChanges, OnDestroy, DoCheck {
 	hiddenLabel = false;
 
 	@Input()
+	statusControl: AbstractControl;
+
+	@Input()
 	tooltip: string | SafeHtml;
 
 	required = false;
@@ -66,6 +69,12 @@ export class FormFieldComponent implements OnChanges, OnDestroy, DoCheck {
 
 	@Input()
 	inlineMessage: string;
+
+	/**
+	 * Inline message for when the control is in error state
+	 */
+	@Input()
+	errorInlineMessage: string;
 
 	/**
 	 * State of the inline message, will be ignored if form state is invalid
@@ -158,8 +167,8 @@ export class FormFieldComponent implements OnChanges, OnDestroy, DoCheck {
 
 	private updateAria(): void {
 		this.#inputs.forEach((input) => {
-			this.#renderer.setAttribute(input.host.nativeElement, 'aria-invalid', this.invalid.toString());
-			this.#renderer.setAttribute(input.host.nativeElement, 'aria-required', this.required.toString());
+			this.#renderer.setAttribute(input.host.nativeElement, 'aria-invalid', this.invalid?.toString());
+			this.#renderer.setAttribute(input.host.nativeElement, 'aria-required', this.required?.toString());
 			if (!input.standalone) {
 				this.#renderer.setAttribute(input.host.nativeElement, 'aria-describedby', `${input.host.nativeElement.id}-message`);
 			}
@@ -177,7 +186,7 @@ export class FormFieldComponent implements OnChanges, OnDestroy, DoCheck {
 		this.controls.forEach((control) => {
 			// invalid management
 			const previousInvalid = this.invalid;
-			this.invalid = control.invalid && control.touched;
+			this.invalid = (control.invalid || this.statusControl?.invalid) && control.touched;
 
 			// required management
 			const previousRequired = this.required;

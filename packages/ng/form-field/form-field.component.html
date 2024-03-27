@@ -8,8 +8,8 @@
 	<ng-container *ngTemplateOutlet="projectionTpl"></ng-container>
 	<lu-inline-message
 		id="{{id}}-message"
-		*ngIf="inlineMessage"
-		[label]="inlineMessage"
+		*ngIf="inlineMessage || (invalid ? errorInlineMessage : false)"
+		[label]="(invalid && errorInlineMessage) ? errorInlineMessage : inlineMessage"
 		[state]="invalid ? 'error' : inlineMessageState"
 	></lu-inline-message>
 </fieldset>
@@ -36,8 +36,8 @@
 	<ng-container *ngTemplateOutlet="projectionTpl"></ng-container>
 	<lu-inline-message
 		id="{{id}}-message"
-		*ngIf="inlineMessage"
-		[label]="inlineMessage"
+		*ngIf="inlineMessage || (invalid ? errorInlineMessage : false)"
+		[label]="(invalid && errorInlineMessage) ? errorInlineMessage : inlineMessage"
 		[state]="invalid ? 'error' : inlineMessageState"
 	></lu-inline-message>
 </ng-template>
