@@ -4,7 +4,7 @@
 	font-size: var(--components-formLabel-fontSize);
 	line-height: var(--components-formLabel-lineHeight);
 	width: var(--components-formLabel-width);
-	align-items: baseline;
+	align-items: flex-end;
 	cursor: var(--components-formLabel-cursor);
 
 	.lucca-icon {
@@ -25,6 +25,7 @@
 
 		.formLabel-counter {
 			margin-left: auto;
+			margin-bottom: 0.125rem;
 			font-size: var(--sizes-XS-fontSize);
 			line-height: var(--sizes-XS-lineHeight);
 			color: var(--palettes-neutral-600);
