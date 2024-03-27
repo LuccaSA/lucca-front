@@ -16,6 +16,10 @@
 		"palettes": {
 			"description": "Replace palettes with new names.",
 			"factory": "./palettes/index"
+		},
+		"action-icon": {
+			"description": "Replace actionIcon usages with button mod-onlyIcon",
+			"factory": "./action-icon/index"
 		}
 	}
 }
