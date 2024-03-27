@@ -28,13 +28,6 @@ export default {
 				type: 'select',
 			},
 		},
-		type: {
-			options: ['text', 'number', 'password'],
-			description: '[v17.2] Le type password ajoute automatiquement un bouton pour afficher la valeur du champ.',
-			control: {
-				type: 'select',
-			},
-		},
 	},
 } as Meta;
 
