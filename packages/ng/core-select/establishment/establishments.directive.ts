@@ -84,7 +84,7 @@ export class LuCoreSelectEstablishmentsDirective<T extends LuCoreSelectEstablish
 				  { search: sanitizeClueFilter(clue), sort: 'name' }
 				: // When the clue is empty, establishments are grouped by legal unit, so sort them by legal unit name and then by name
 				  { sort: 'legalunit.name,name' }),
-			...(operationIds ? { operationIds: operationIds.join(',') } : {}),
+			...(operationIds ? { operations: operationIds.join(',') } : {}),
 			...(appInstanceId ? { appInstanceId } : {}),
 		})),
 	);
