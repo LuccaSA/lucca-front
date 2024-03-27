@@ -1,4 +1,4 @@
-import { booleanAttribute, Component, ContentChild, ContentChildren, DoCheck, forwardRef, HostBinding, inject, Input, OnChanges, OnDestroy, QueryList, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, Component, ContentChildren, DoCheck, forwardRef, inject, Input, OnChanges, OnDestroy, QueryList, Renderer2, ViewEncapsulation } from '@angular/core';
 import { NgIf, NgSwitch, NgSwitchCase, NgTemplateOutlet } from '@angular/common';
 import { InputDirective } from './input.directive';
 import { FormFieldSize } from './form-field-size';
@@ -31,7 +31,7 @@ let nextId = 0;
 export class FormFieldComponent implements OnChanges, OnDestroy, DoCheck {
 	#luClass = inject(LuClass);
 
-	#control: NgControl;
+	#renderer = inject(Renderer2);
 
 	#requiredValidator: RequiredValidator | undefined;
 
@@ -40,17 +40,8 @@ export class FormFieldComponent implements OnChanges, OnDestroy, DoCheck {
 		this.#requiredValidator = validators.toArray()?.find((v): v is RequiredValidator => v instanceof RequiredValidator);
 	}
 
-	@ContentChild(NgControl)
-	public set control(control: NgControl) {
-		if (control === undefined) {
-			// This might be because the child input is initialized with a ngIf, just ignore this case
-			return;
-		}
-		this.#control = control;
-	}
-
-	@HostBinding('class')
-	clazz = 'form-field';
+	@ContentChildren(NgControl)
+	controls: NgControl[] = [];
 
 	@Input({
 		required: true,
@@ -70,6 +61,7 @@ export class FormFieldComponent implements OnChanges, OnDestroy, DoCheck {
 
 	required = false;
 
+	@Input()
 	invalid = false;
 
 	@Input()
@@ -91,12 +83,12 @@ export class FormFieldComponent implements OnChanges, OnDestroy, DoCheck {
 	size: FormFieldSize;
 
 	@Input()
-	layout: 'default' | 'checkable' = 'default';
+	layout: 'default' | 'checkable' | 'fieldset' = 'default';
 
-	private _input: InputDirective;
+	#inputs: InputDirective[] = [];
 
-	public set input(input: InputDirective) {
-		this._input = input;
+	public addInput(input: InputDirective) {
+		this.#inputs.push(input);
 		/* We have to put this in the next cycle to make sure it'll be applied properly
 		 * and that it won't trigger a change detection error
 		 */
@@ -105,8 +97,8 @@ export class FormFieldComponent implements OnChanges, OnDestroy, DoCheck {
 		});
 	}
 
-	public get input(): InputDirective {
-		return this._input;
+	public get inputs(): InputDirective[] {
+		return this.#inputs;
 	}
 
 	id: string;
@@ -125,43 +117,51 @@ export class FormFieldComponent implements OnChanges, OnDestroy, DoCheck {
 		} else {
 			this.#ariaLabelledBy = [...this.#ariaLabelledBy, id];
 		}
-		if (this.#nativeInputRef) {
-			this.#nativeInputRef.setAttribute('aria-labelledby', this.#ariaLabelledBy.join(' '));
-		}
+		this.#inputs.forEach((input) => {
+			if (!input.standalone) {
+				this.#renderer.setAttribute(input.host.nativeElement, 'aria-labelledby', this.#ariaLabelledBy.join(' '));
+			}
+		});
 	}
 
 	removeLabelledBy(id: string): void {
 		this.#ariaLabelledBy = this.#ariaLabelledBy.filter((labelledBy) => labelledBy === id);
 	}
 
-	#nativeInputRef: HTMLElement;
-
 	ngOnChanges(): void {
 		this.#luClass.setState({
 			[`mod-${this.size}`]: true,
-			[`mod-checkable`]: this.layout === 'checkable',
+			'mod-checkable': this.layout === 'checkable',
+			'form-field': this.layout !== 'fieldset',
 		});
-		if (this.#nativeInputRef) {
-			this.updateAria();
-		}
+		this.updateAria();
 	}
 
 	prepareInput(): void {
-		if (!this.input) {
+		if (this.#inputs.length === 0) {
 			throw new Error('Missing input for form field, make sure to set `luInput` to your input inside lu-form-field');
 		}
-		this.#nativeInputRef = this.input.host.nativeElement;
-		this.id = `${this.#nativeInputRef.tagName.toLowerCase()}-${++nextId}`;
-		this.#nativeInputRef.id = this.id;
+		this.inputs
+			.filter((input) => !input.standalone)
+			.forEach((input) => {
+				const inputId = `${input.host.nativeElement.tagName.toLowerCase()}-${++nextId}`;
+				this.#renderer.setAttribute(input.host.nativeElement, 'id', inputId);
+			});
+		// We're using the id from the first input available
+		this.id = this.#inputs[0].host.nativeElement.id;
 		this.updateAria();
 		this.ready$.next(true);
 	}
 
 	private updateAria(): void {
-		if (this.#nativeInputRef) {
-			this.#nativeInputRef.ariaInvalid = this.invalid?.toString();
-			this.#nativeInputRef.ariaRequired = this.required?.toString();
-			this.#nativeInputRef.setAttribute('aria-describedby', `${this.id}-message`);
+		this.#inputs.forEach((input) => {
+			this.#renderer.setAttribute(input.host.nativeElement, 'aria-invalid', this.invalid?.toString());
+			this.#renderer.setAttribute(input.host.nativeElement, 'aria-required', this.required?.toString());
+			if (!input.standalone) {
+				this.#renderer.setAttribute(input.host.nativeElement, 'aria-describedby', `${input.host.nativeElement.id}-message`);
+			}
+		});
+		if (this.id) {
 			this.addLabelledBy(`${this.id}-label`);
 		}
 	}
@@ -171,21 +171,21 @@ export class FormFieldComponent implements OnChanges, OnDestroy, DoCheck {
 	}
 
 	ngDoCheck(): void {
-		if (this.#control) {
+		this.controls.forEach((control) => {
 			// invalid management
 			const previousInvalid = this.invalid;
-			this.invalid = (this.#control.invalid || this.statusControl?.invalid) && this.#control.touched;
+			this.invalid = (control.invalid || this.statusControl?.invalid) && control.touched;
 
 			// required management
 			const previousRequired = this.required;
 			this.required = this.#requiredValidator
 				? booleanAttribute(this.#requiredValidator.required)
-				: this.#control.control.hasValidator(Validators.required) || this.#control.control.hasValidator(Validators.requiredTrue);
+				: control.control.hasValidator(Validators.required) || control.control.hasValidator(Validators.requiredTrue);
 
 			// If stuff changed, update aria attributes
-			if (this.#nativeInputRef && (this.invalid !== previousInvalid || this.required !== previousRequired)) {
+			if (this.invalid !== previousInvalid || this.required !== previousRequired) {
 				this.updateAria();
 			}
-		}
+		});
 	}
 }
