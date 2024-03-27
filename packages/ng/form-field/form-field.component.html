@@ -28,7 +28,13 @@
 		><!--
 	--><sup class="formLabel-required" aria-hidden="true" *ngIf="required">*</sup>
 		<lu-icon icon="helpOutline" alt="" *ngIf="tooltip" [luTooltip]="tooltip" [color]="invalid ? 'error' : 'inherit'"></lu-icon>
-		<span *ngIf="counter > 0" class="formLabel-counter" id="{{id}}-counter" aria-live="polite">
+		<span
+			*ngIf="counter > 0"
+			class="formLabel-counter"
+			[class.u-textError]="contentLength > counter"
+			id="{{id}}-counter"
+			aria-live="polite"
+		>
 			<span aria-hidden="true">{{ contentLength }}/{{ counter }}</span>
 			<span class="u-mask">{{ intl.counter | intlParams: { current: contentLength, max: counter } }}</span>
 		</span>
