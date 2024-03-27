@@ -7,7 +7,7 @@
 	attr.aria-hidden="{{hiddenLabel}}"
 >
 	{{label}}<sup class="formLabel-required" aria-hidden="true" *ngIf="required">*</sup>
-	<lu-icon icon="helpOutline" alt="" *ngIf="tooltip" [luTooltip]="tooltip" [color]="invalid ? 'error' : 'inherit'"></lu-icon>
+	<lu-icon icon="signHelp" alt="" *ngIf="tooltip" [luTooltip]="tooltip" [color]="invalid ? 'error' : 'inherit'"></lu-icon>
 </label>
 <ng-content></ng-content>
 <lu-inline-message
