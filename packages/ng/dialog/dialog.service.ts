@@ -23,7 +23,7 @@ export class LuDialogService {
 				break;
 		}
 		const cdkRef = this.#cdkDialog.open(config.content, {
-			ariaModal: config.modal,
+			ariaModal: config.modal ?? true,
 			hasBackdrop: config.modal ?? true,
 			data: 'data' in config ? config.data : null,
 			disableClose: true,

@@ -24,7 +24,7 @@ export class TextInputComponent {
 	ngControl = injectNgControl();
 
 	@Input()
-	placeholder: string;
+	placeholder: string = '';
 
 	@Input({ transform: numberAttribute })
 	step: number = 1;
