@@ -31,11 +31,19 @@
 				--component-textField-affix-padding: 2.5rem;
 			}
 
+			&:has(.textField-input-affix-passwordToggle) {
+				--component-textField-affix-padding: 3rem;
+			}
+
 			&:has(.textField-input-affix-clear) {
 				--component-textField-affix-padding: 2rem;
 
 				&:has(.textField-input-affix-icon) {
 					--component-textField-affix-padding: 4rem;
+				}
+
+				&:has(.textField-input-affix-passwordToggle) {
+					--component-textField-affix-padding: 4.5rem;
 				}
 			}
 		}
@@ -115,6 +123,7 @@
 			border-top-right-radius: var(--commons-borderRadius-M);
 			border-bottom-right-radius: var(--commons-borderRadius-M);
 			order: 1;
+			flex-shrink: 0;
 
 			~ .textField-input {
 				border-top-right-radius: 0;

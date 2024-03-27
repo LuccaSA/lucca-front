@@ -33,7 +33,7 @@ export default {
 
 export const Basic: StoryObj<TextareaInputComponent & { disabled: boolean } & FormFieldComponent> = {
 	render: (args, { argTypes }) => {
-		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, ...inputArgs } = args;
+		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, counter, ...inputArgs } = args;
 		return {
 			template: cleanupTemplate(`<lu-form-field ${generateInputs(
 				{
@@ -43,6 +43,7 @@ export const Basic: StoryObj<TextareaInputComponent & { disabled: boolean } & Fo
 					inlineMessage,
 					inlineMessageState,
 					size,
+					counter,
 				},
 				argTypes,
 			)}>
@@ -70,5 +71,6 @@ export const Basic: StoryObj<TextareaInputComponent & { disabled: boolean } & Fo
 		size: 'M',
 		placeholder: 'Placeholder',
 		tooltip: "Je suis un message d'aide",
+		counter: 0,
 	},
 };
