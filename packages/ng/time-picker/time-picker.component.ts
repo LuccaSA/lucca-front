@@ -48,7 +48,6 @@ export class TimePickerComponent implements OnChanges {
 	protected fieldsetSuffixClass = '';
 	protected separator = '';
 	protected shouldHideZeroValue = false;
-	protected timePickerButtonClass = '';
 
 	@HostBinding('attr.aria-invalid')
 	protected hasError = false;
@@ -84,7 +83,6 @@ export class TimePickerComponent implements OnChanges {
 		this.hoursDecimalConf = this.isDuration ? DEFAULT_DURATION_HOUR_DECIMAL_PIPE_FORMAT : DEFAULT_TIME_DECIMAL_PIPE_FORMAT;
 
 		this.maxHours = this.isDuration ? 24 : 23;
-		this.timePickerButtonClass = `timePicker is-button" ${this.hasError ? 'mod-conflict' : ''}`;
 	}
 
 	protected focusPart(type: 'hours' | 'minutes') {
