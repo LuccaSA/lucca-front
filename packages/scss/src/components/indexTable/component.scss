@@ -55,7 +55,7 @@
         }
 
         .indexTable-head-row-cell {
-            padding: var(--spacings-XS) var(--components-indexTable-cell-padding);
+            padding: var(--components-indexTable-cell-padding);
             color: var(--palettes-neutral-600);
         }
 
@@ -135,14 +135,7 @@
         .indexTable-body-row-cell-checkbox,
         .indexTable-head-row-cell-checkbox {
             display: block;
-        }
-
-        .indexTable-head-row-cell-checkbox {
             margin-top: var(--spacings-XS);
-        }
-
-        .indexTable-body-row-cell-checkbox {
-            margin-top: 0.75rem;
         }
 
         //hidden element that take focus when the row is focused
@@ -154,7 +147,6 @@
             display: flex;
             align-items: center;
             gap: var(--spacings-XS);
-            padding-bottom: var(--spacings-XXS);
         }
 
         .indexTable-body-row-cellTitle-button {

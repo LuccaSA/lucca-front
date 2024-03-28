@@ -128,6 +128,9 @@
             padding: 0;
             margin-bottom: 0;
         }
+        &:first-child {
+            margin-top: var(--spacings-XS);
+        }
     }
 
     // We only need one ::before for the card apparence and one ::after for the possible outline
@@ -177,9 +180,9 @@
     }
     .indexTable-body-row-transparentCell {
         width: auto;
-        // we add a padding-left to keep a correct indent between lvl 1 and lvl 2 titles in nested tables
+        // we add a padding-left to keep a correct indent between lvl 1 and lvl 2 titles in nested tables. * .75 is just for cosmetic
         &:first-child[colspan='2'] + .indexTable-body-row-transparentCell {
-            padding-left: var(--components-indexTable-row-cell-transparent-width);
+            padding-left: calc(var(--components-indexTable-row-cell-transparent-width) * 0.75);
         }
     }
     .indexTable-body-row-cell {
