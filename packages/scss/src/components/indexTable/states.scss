@@ -50,7 +50,7 @@
 // states vars
 @mixin selectedCells {
     // !important here for overriding a potential overrided non blank row background color
-    --components-indexTable-cell-background-color: var(--palettes-product-50) !important;
+    --components-indexTable-cell-background-color: var(--components-indexTable-cell-background-color-selected) !important;
     // !important here if for overriding a potential selectableHoveredRow reset
     --components-indexTable-cell-shadow: var(--components-indexTable-cell-shadow-selected) !important;
     // if selected stackable row : we also change the stacks background color
