@@ -1,6 +1,8 @@
 @use 'vars' as *;
 @use '@lucca-front/scss/src/commons/utils/media';
 @use '@lucca-front/scss/src/commons/config';
+@use '@lucca-front/scss/src/components/button/exports' as button;
+
 @mixin selectable {
     .indexTable-head-row {
         cursor: pointer;
@@ -304,10 +306,14 @@
         justify-content: center;
         gap: var(--spacings-XS);
         padding: var(--spacings-XXS);
-        border: var(--commons-divider-width) solid var(--palettes-grey-200);
         border-radius: var(--commons-borderRadius-L);
-        margin-bottom: var(--components-indexTable-row-spacing);
+        font-size: var(--sizes-S-fontSize);
+        line-height: var(--sizes-S-line-height);
         color: var(--palettes-grey-800);
-        background-color: var(--palettes-grey-100);
+        background-color: var(--pr-t-elevation-surface-default);
+        .button {
+            @include button.text;
+            @include button.S;
+        }
     }
 }

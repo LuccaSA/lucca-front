@@ -34,7 +34,7 @@ function getTemplate(args: IndexTableMassSelectionAndPaginationStory): string {
 					<th class="indexTable-head-row-cell" colspan="4">
 						<div class="indexTable-head-row-cell-massSelection">
 							<span>3 selected items</span>
-							<button class="button mod-text palette-product" type="button">Select all items</button>
+							<button class="button palette-product" type="button">Select all items</button>
 						</div>
 					</th>
 				</tr>
