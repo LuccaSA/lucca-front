@@ -16,7 +16,7 @@
     .indexTable-body-row-transparentCell {
         width: var(--components-indexTable-row-cell-transparent-width);
         &:first-child {
-            padding-right: 0;
+            padding-left: 0;
         }
     }
 }

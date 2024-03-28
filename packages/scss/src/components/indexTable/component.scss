@@ -54,21 +54,25 @@
             font-weight: 400;
         }
 
-        .indexTable-head-row-cell {
-            padding: var(--components-indexTable-cell-padding);
-            color: var(--palettes-neutral-600);
-        }
-
         .indexTable-head-row-transparentCell,
         .indexTable-body-row-transparentCell {
-            vertical-align: text-bottom;
-            padding-right: var(--components-indexTable-cell-padding);
+            padding: var(--spacings-XXS) 0;
+            vertical-align: top;
+        }
+
+        .indexTable-head-row-cell,
+        .indexTable-body-row-cell,
+        .indexTable-foot-row-cell {
+            padding: var(--components-indexTable-cell-padding);
+        }
+
+        .indexTable-head-row-cell {
+            color: var(--palettes-neutral-600);
         }
 
         .indexTable-body-row-cell {
             position: relative;
             z-index: var(--components-indexTable-cell-z-index, 1);
-            padding: var(--components-indexTable-cell-padding);
             border-radius: var(--components-table-cardList-cell-border-radius);
             border: var(--commons-divider-width) 0 solid transparent;
 
@@ -135,7 +139,7 @@
         .indexTable-body-row-cell-checkbox,
         .indexTable-head-row-cell-checkbox {
             display: block;
-            margin-top: var(--spacings-XS);
+            margin-top: var(--spacings-XXS);
         }
 
         //hidden element that take focus when the row is focused
@@ -163,7 +167,6 @@
         }
 
         .indexTable-foot-row-cell {
-            padding: var(--spacings-XS) var(--components-indexTable-cell-padding);
             text-align: right;
         }
 
@@ -180,7 +183,7 @@
             }
             .pagination {
                 align-self: flex-end;
-                padding: var(--spacings-XXS) 0;
+                padding: 0 0 var(--spacings-XXS) 0;
                 margin-right: 0.75rem;
             }
         }
