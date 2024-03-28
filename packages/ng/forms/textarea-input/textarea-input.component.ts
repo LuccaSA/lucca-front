@@ -17,5 +17,5 @@ export class TextareaInputComponent {
 	ngControl = injectNgControl();
 
 	@Input()
-	placeholder: string;
+	placeholder: string = '';
 }

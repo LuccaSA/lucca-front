@@ -23,7 +23,7 @@ import { of } from 'rxjs';
 				[attr.aria-expanded]="select.isPanelOpen"
 				[attr.aria-activedescendant]="select.activeDescendant$ | async"
 				[attr.aria-controls]="ariaControls"
-				[disabled]="select.disabled"
+				[disabled]="select.disabled$ | async"
 				[readonly]="!select.searchable"
 				#inputElement
 				ngModel
@@ -34,9 +34,9 @@ import { of } from 'rxjs';
 				aria-haspopup="listbox"
 				luInput
 			/>
-			<div *ngFor="let option of displayedOptions$ | async; let index = index" class="multipleSelect-displayer-chip chip" [class.mod-unkillable]="disabled">
+			<div *ngFor="let option of displayedOptions$ | async; let index = index" class="multipleSelect-displayer-chip chip" [class.mod-unkillable]="select.disabled$ | async">
 				<span class="multipleSelect-displayer-chip-value"><ng-container *luOptionOutlet="select.valueTpl || select.optionTpl; value: option"></ng-container></span>
-				<button *ngIf="!disabled" type="button" class="chip-kill" (click)="unselectOption(option, $event)">
+				<button *ngIf="!(select.disabled$ | async)" type="button" class="chip-kill" (click)="unselectOption(option, $event)">
 					<span class="u-mask">{{ intl.removeOption }}</span>
 				</button>
 			</div>
@@ -54,10 +54,6 @@ export class LuMultiSelectDefaultDisplayerComponent<T> implements OnInit {
 
 	@ViewChild('inputElement')
 	inputElementRef: ElementRef<HTMLInputElement>;
-
-	get disabled() {
-		return this.select.disabled;
-	}
 
 	get value(): T[] {
 		return this.select.value || [];

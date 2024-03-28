@@ -26,7 +26,7 @@
 			gap: var(--pr-t-spacings-50);
 
 			.formLabel {
-				cursor: pointer;
+				@include formLabel.label;
 			}
 		}
 

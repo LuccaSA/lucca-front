@@ -6,17 +6,18 @@ import { BehaviorSubject } from 'rxjs';
 import { InlineMessageComponent, InlineMessageState } from '@lucca-front/ng/inline-message';
 import { SafeHtml } from '@angular/platform-browser';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
-import { LuClass, PortalContent, PortalDirective } from '@lucca-front/ng/core';
-import { NG_VALIDATORS, NgControl, ReactiveFormsModule, RequiredValidator, Validator, Validators } from '@angular/forms';
+import { getIntl, IntlParamsPipe, LuClass, PortalContent, PortalDirective } from '@lucca-front/ng/core';
+import { AbstractControl, NG_VALIDATORS, NgControl, ReactiveFormsModule, RequiredValidator, Validator, Validators } from '@angular/forms';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { FORM_FIELD_INSTANCE } from './form-field.token';
+import { LU_FORM_FIELD_TRANSLATIONS } from './form-field.translate';
 
 let nextId = 0;
 
 @Component({
 	selector: 'lu-form-field',
 	standalone: true,
-	imports: [NgIf, NgSwitch, NgSwitchCase, NgTemplateOutlet, InlineMessageComponent, LuTooltipModule, ReactiveFormsModule, IconComponent, PortalDirective],
+	imports: [NgIf, NgSwitch, NgSwitchCase, NgTemplateOutlet, InlineMessageComponent, LuTooltipModule, ReactiveFormsModule, IconComponent, IntlParamsPipe, PortalDirective],
 	templateUrl: './form-field.component.html',
 	styleUrls: ['./form-field.component.scss'],
 	providers: [
@@ -29,6 +30,8 @@ let nextId = 0;
 	encapsulation: ViewEncapsulation.None,
 })
 export class FormFieldComponent implements OnChanges, OnDestroy, DoCheck {
+	intl = getIntl(LU_FORM_FIELD_TRANSLATIONS);
+
 	#luClass = inject(LuClass);
 
 	#renderer = inject(Renderer2);
@@ -54,6 +57,9 @@ export class FormFieldComponent implements OnChanges, OnDestroy, DoCheck {
 	hiddenLabel = false;
 
 	@Input()
+	statusControl: AbstractControl;
+
+	@Input()
 	tooltip: string | SafeHtml;
 
 	required = false;
@@ -63,6 +69,12 @@ export class FormFieldComponent implements OnChanges, OnDestroy, DoCheck {
 
 	@Input()
 	inlineMessage: string;
+
+	/**
+	 * Inline message for when the control is in error state
+	 */
+	@Input()
+	errorInlineMessage: string;
 
 	/**
 	 * State of the inline message, will be ignored if form state is invalid
@@ -77,6 +89,15 @@ export class FormFieldComponent implements OnChanges, OnDestroy, DoCheck {
 	layout: 'default' | 'checkable' | 'fieldset' = 'default';
 
 	#inputs: InputDirective[] = [];
+	/**
+	 * Max amount of characters allowed, defaults to 0, which means hidden, no maximum
+	 */
+	@Input()
+	counter = 0;
+
+	get contentLength(): number {
+		return (this.#inputs[0]?.host?.nativeElement as HTMLInputElement)?.value.length || 0;
+	}
 
 	public addInput(input: InputDirective) {
 		this.#inputs.push(input);
@@ -146,8 +167,8 @@ export class FormFieldComponent implements OnChanges, OnDestroy, DoCheck {
 
 	private updateAria(): void {
 		this.#inputs.forEach((input) => {
-			this.#renderer.setAttribute(input.host.nativeElement, 'aria-invalid', this.invalid.toString());
-			this.#renderer.setAttribute(input.host.nativeElement, 'aria-required', this.required.toString());
+			this.#renderer.setAttribute(input.host.nativeElement, 'aria-invalid', this.invalid?.toString());
+			this.#renderer.setAttribute(input.host.nativeElement, 'aria-required', this.required?.toString());
 			if (!input.standalone) {
 				this.#renderer.setAttribute(input.host.nativeElement, 'aria-describedby', `${input.host.nativeElement.id}-message`);
 			}
@@ -165,7 +186,7 @@ export class FormFieldComponent implements OnChanges, OnDestroy, DoCheck {
 		this.controls.forEach((control) => {
 			// invalid management
 			const previousInvalid = this.invalid;
-			this.invalid = control.invalid && control.touched;
+			this.invalid = (control.invalid || this.statusControl?.invalid) && control.touched;
 
 			// required management
 			const previousRequired = this.required;

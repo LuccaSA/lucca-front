@@ -39,7 +39,6 @@ export const Basic = generateStory({
 		[options]="legumes | filterLegumes:clue"
 		(clueChange)="clue = $event"
 		[clearable]="clearable"
-		[disabled]="disabled"
 		[loading]="loading"
 		[(ngModel)]="selectedLegume"
 	>
@@ -53,7 +52,6 @@ export const Basic = generateStory({
 	storyPartial: {
 		argTypes: {
 			clearable: { control: { type: 'boolean' } },
-			disabled: { control: { type: 'boolean' } },
 			placeholder: { control: { type: 'text' } },
 		},
 	},
@@ -385,7 +383,6 @@ const meta: Meta<LuSimpleSelectInputStoryComponent> = {
 		placeholder: 'Placeholder...',
 		legumes: allLegumes,
 		clearable: true,
-		disabled: false,
 		loading: false,
 		page: 1,
 	},
