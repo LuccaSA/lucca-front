@@ -141,12 +141,13 @@
             margin-top: var(--spacings-XXS);
         }
 
-        //hidden element that take focus when the row is focused
+        // hidden element that take focus when the row is focused
         .indexTable-body-row-cell-action {
             @include a11y.mask;
         }
 
         .indexTable-body-row-cellTitle {
+            position: relative;
             display: flex;
             align-items: center;
             gap: var(--spacings-XS);
@@ -156,8 +157,15 @@
             @include button.text;
             @include button.S;
             @include button.onlyIconS;
+            position: static;
             .lucca-icon {
                 transition: transform var(--commons-animations-durations-fast) ease;
+            }
+            // extend button reactive zone to his whole parent
+            &::before {
+                content: '';
+                position: absolute;
+                inset: 0;
             }
         }
 
