@@ -138,11 +138,14 @@
         padding-bottom: 0;
 
         &::before {
-            --components-indexTable-cell-border-radius: var(--components-indexTable-cell-border-radius-default);
+            --components-indexTable-cell-border-radius-left: var(--components-indexTable-cell-border-radius);
+            --components-indexTable-cell-border-radius-right: var(--components-indexTable-cell-border-radius);
         }
         &::after {
-            --components-indexTable-outline-border-width: var(--components-indexTable-outline-border-width-default);
-            --components-indexTable-outline-border-radius: var(--components-indexTable-outline-border-radius-default);
+            --components-indexTable-outline-border-width-left: var(--components-indexTable-outline-border-width);
+            --components-indexTable-outline-border-width-right: var(--components-indexTable-outline-border-width);
+            --components-indexTable-outline-border-radius-left: var(--components-indexTable-outline-border-radius);
+            --components-indexTable-outline-border-radius-right: var(--components-indexTable-outline-border-radius);
         }
         ~ .indexTable-body-row-cell {
             &::before,

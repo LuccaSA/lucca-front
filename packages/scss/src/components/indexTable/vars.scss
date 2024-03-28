@@ -7,7 +7,7 @@
     --components-indexTable-row-spacing-responsive: 8px;
 
     --components-indexTable-cell-padding: 0.75rem;
-    --components-indexTable-cell-border-radius-default: var(--commons-borderRadius-L);
+    --components-indexTable-cell-border-radius: var(--commons-borderRadius-L);
     --components-indexTable-cell-background-color-default: var(--colors-white-color);
     // shadows
     --components-indexTable-cell-shadow-default: var(--pr-t-elevation-shadow-raised);
@@ -32,7 +32,7 @@
 
     // Selectable specific outline
     --components-indexTable-outline-offset: 4px;
-    --components-indexTable-outline-border-width-default: 2px;
-    --components-indexTable-outline-border-radius-default: calc(var(--components-indexTable-cell-border-radius-default) + var(--components-indexTable-outline-offset));
+    --components-indexTable-outline-border-width: 2px;
+    --components-indexTable-outline-border-radius: calc(var(--components-indexTable-cell-border-radius) + var(--components-indexTable-outline-offset));
     --components-indexTable-outline-color: var(--palettes-product-700);
 }
