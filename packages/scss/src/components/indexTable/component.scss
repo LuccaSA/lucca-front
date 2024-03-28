@@ -179,10 +179,11 @@
             background-color: var(--components-indexTable-background-color);
             .indexTable {
                 flex-grow: 1;
+                padding-bottom: 0;
             }
             .pagination {
                 align-self: flex-end;
-                padding: 0 0 var(--spacings-XXS) 0;
+                padding: var(--spacings-XXS) 0 0 0;
                 margin-right: 0.75rem;
             }
         }
