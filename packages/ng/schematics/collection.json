@@ -3,11 +3,13 @@
 	"schematics": {
 		"ng-add": {
 			"description": "Add my lucca-front to the project.",
-			"factory": "./ng-add/index#ngAdd"
+			"factory": "./ng-add/index#ngAdd",
+			"schema": "./ng-add/schema.json"
 		},
 		"new-icons": {
 			"description": "Replace old icon names with new ones.",
-			"factory": "./new-icons/index"
+			"factory": "./new-icons/index",
+			"schema": "./new-icons/schema.json"
 		}
 	}
 }
