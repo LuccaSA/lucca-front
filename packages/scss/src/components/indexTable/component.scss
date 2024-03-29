@@ -131,14 +131,14 @@
                 border-style: solid;
                 border-color: var(--components-indexTable-outline-color);
                 opacity: var(--components-indexTable-outline-opacity, 0);
-                transition-property: inset, opacity;
+                transition-property: inset;
             }
         }
 
         .indexTable-body-row-cell-checkbox,
         .indexTable-head-row-cell-checkbox {
             display: block;
-            margin-top: var(--spacings-XXS);
+            margin: var(--spacings-XXS) 0 0 var(--spacings-XXS);
         }
 
         // hidden element that take focus when the row is focused
@@ -192,7 +192,7 @@
             .pagination {
                 align-self: flex-end;
                 padding: var(--spacings-XXS) 0 0 0;
-                margin-right: 0.75rem;
+                margin-right: var(--spacings-XS);
             }
         }
     }

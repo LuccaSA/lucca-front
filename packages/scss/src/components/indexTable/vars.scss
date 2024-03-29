@@ -1,5 +1,5 @@
 @mixin vars {
-    --components-indexTable-padding: var(--spacings-XS) 0.75rem;
+    --components-indexTable-padding: var(--spacings-XS);
     --components-indexTable-border-radius: 12px;
     --components-indexTable-background-color: var(--palettes-grey-50);
     --components-indexTable-row-spacing: 4px;
@@ -16,7 +16,7 @@
     --components-indexTable-cell-shadow-hover: var(--pr-t-elevation-shadow-overlay);
 
     // width of selectables cells containing a checkbox
-    --components-indexTable-row-cell-transparent-width: 2rem;
+    --components-indexTable-row-cell-transparent-width: 2.25rem;
 
     // due to their bottom decoration, rows with mod-stack2 or mod-stack3 are slightly more spaced
     --components-indexTable-stack2-row-spacing: 5px;

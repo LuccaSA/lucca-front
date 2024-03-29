@@ -133,6 +133,9 @@
         &:first-child {
             margin-top: var(--spacings-XS);
         }
+        &:last-child {
+            margin-bottom: 0;
+        }
     }
 
     // We only need one ::before for the card apparence and one ::after for the possible outline
