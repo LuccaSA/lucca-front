@@ -83,7 +83,7 @@ function getTemplate(args: IndexTableNestedStory): string {
 			</tr>
 		</tbody>
 	</table>
-	<h2 class="u-h3">Value in header</h2>
+	<h2 class="u-h3">with sub totals</h2>
 	<table class="indexTable">
 		<thead class="indexTable-head">
 			<tr class="indexTable-head-row">
@@ -105,7 +105,7 @@ function getTemplate(args: IndexTableNestedStory): string {
 					</div>
 				</th>
 				<th class="indexTable-body-row-transparentCell u-textRight">
-					<span>Total : </span>
+					<span class="u-textS">Sub total : </span>
 					<strong>7999.1 €</strong>
 				</th>
 			</tr>
@@ -153,7 +153,7 @@ function getTemplate(args: IndexTableNestedStory): string {
 					</div>
 				</th>
 				<th class="indexTable-body-row-transparentCell u-textRight">
-					<span>Total : </span>
+				<span class="u-textS">Sub total : </span>
 					<strong>200.00 €</strong>
 				</th>
 			</tr>

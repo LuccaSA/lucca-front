@@ -49,13 +49,13 @@
         .indexTable-body-row-cell,
         .indexTable-foot-row-cell {
             display: table-cell;
-            vertical-align: top;
             text-align: left;
             font-weight: 400;
         }
 
         .indexTable-head-row-transparentCell,
         .indexTable-body-row-transparentCell {
+            vertical-align: middle;
             padding: var(--spacings-XXS) 0;
             &:not(:first-child) {
                 padding-right: var(--components-indexTable-cell-padding);
@@ -65,6 +65,7 @@
         .indexTable-head-row-cell,
         .indexTable-body-row-cell,
         .indexTable-foot-row-cell {
+            vertical-align: top;
             padding: var(--components-indexTable-cell-padding);
         }
 
