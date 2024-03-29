@@ -1,9 +1,16 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input } from '@angular/core';
 import { LuDisplayFormat, LuDisplayFullname, LuDisplayHybrid, LuDisplayInitials } from '../display/index';
-import { ILuUser } from '../user.model';
+
+export interface LuUserTileUserInput {
+	picture?: { href: string } | null;
+	pictureHref?: string | null;
+	firstName: string;
+	lastName: string;
+	jobTitle?: string | null;
+}
 
 /**
- * Displays user picture and name. ILuUser's role can be specified, and the footer is customizable.
+ * Displays user picture and name. LuUserTileUserInput's role can be specified, and the footer is customizable.
  */
 @Component({
 	selector: 'lu-user-tile',
@@ -12,17 +19,17 @@ import { ILuUser } from '../user.model';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LuUserTileComponent {
-	private _user: ILuUser;
+	private _user: LuUserTileUserInput;
 	/**
-	 * ILuUser to display.
+	 * LuUserTileUserInput to display.
 	 */
 	@Input()
-	set user(user: ILuUser) {
+	set user(user: LuUserTileUserInput) {
 		this._user = user;
 		this._changeDetector.markForCheck();
 	}
 
-	get user(): ILuUser {
+	get user(): LuUserTileUserInput {
 		return this._user;
 	}
 
@@ -35,7 +42,7 @@ export class LuUserTileComponent {
 
 	private _role: string;
 	/**
-	 * ILuUser role to display
+	 * LuUserTileUserInput role to display
 	 */
 	@Input()
 	set role(role: string) {
