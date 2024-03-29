@@ -27,7 +27,7 @@ function getTemplate(args: IndexTableNestedStory): string {
 				<th class="indexTable-body-row-transparentCell" colspan="3" id="y2021">
 					<div class="indexTable-body-row-cellTitle">
 						<button class="indexTable-body-row-cellTitle-button button" aria-expanded="true" aria-controls="r1 r2 r3" type="button">
-							<span class="lucca-icon icon-arrowChevronBottom" aria-hidden="true"></span>
+							<span class="lucca-icon icon-arrowChevronTop" aria-hidden="true"></span>
 							<span class="u-mask">Hide details</span>
 						</button>
 						<span class="indexTable-body-row-cellTitle-title">2021</span>
@@ -65,7 +65,7 @@ function getTemplate(args: IndexTableNestedStory): string {
 				<th class="indexTable-body-row-transparentCell" colspan="3" id="y2022">
 					<div class="indexTable-body-row-cellTitle">
 						<button class="indexTable-body-row-cellTitle-button button" aria-expanded="true" aria-controls="r5" type="button">
-							<span class="lucca-icon icon-arrowChevronBottom" aria-hidden="true"></span>
+							<span class="lucca-icon icon-arrowChevronTop" aria-hidden="true"></span>
 							<span class="u-mask">Hide details</span>
 						</button>
 						<span class="indexTable-body-row-cellTitle-title">2022</span>
@@ -97,7 +97,7 @@ function getTemplate(args: IndexTableNestedStory): string {
 				<th class="indexTable-body-row-transparentCell" colspan="2" id="y2021">
 					<div class="indexTable-body-row-cellTitle">
 						<button class="indexTable-body-row-cellTitle-button button" aria-expanded="true" aria-controls="r1 r2 r3" type="button">
-							<span class="lucca-icon icon-arrowChevronBottom" aria-hidden="true"></span>
+							<span class="lucca-icon icon-arrowChevronTop" aria-hidden="true"></span>
 							<span class="u-mask">Hide details</span>
 						</button>
 						<span class="indexTable-body-row-cellTitle-title">2021</span>
@@ -145,7 +145,7 @@ function getTemplate(args: IndexTableNestedStory): string {
 				<th class="indexTable-body-row-transparentCell" colspan="2" id="y2022">
 					<div class="indexTable-body-row-cellTitle">
 						<button class="indexTable-body-row-cellTitle-button button" aria-expanded="true" aria-controls="r5" type="button">
-							<span class="lucca-icon icon-arrowChevronBottom" aria-hidden="true"></span>
+							<span class="lucca-icon icon-arrowChevronTop" aria-hidden="true"></span>
 							<span class="u-mask">Hide details</span>
 						</button>
 						<span class="indexTable-body-row-cellTitle-title">2022</span>

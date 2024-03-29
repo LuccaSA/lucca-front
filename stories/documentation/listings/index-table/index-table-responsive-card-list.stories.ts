@@ -202,7 +202,7 @@ function getTemplate(args: IndexTableResponsiveCardListStory): string {
 						<div class="indexTable-body-row-cellTitle">
 							<button class="indexTable-body-row-cellTitle-button button"
 								aria-expanded="true" aria-controls="r1 r2 r3 r4 r5" type="button" id="r0btn">
-								<span class="lucca-icon icon-arrowChevronBottom" aria-hidden="true"></span>
+								<span class="lucca-icon icon-arrowChevronTop" aria-hidden="true"></span>
 								<span class="u-mask">Hide details</span>
 							</button>
 							<span class="indexTable-body-row-cellTitle-title">2021</span>
@@ -223,7 +223,7 @@ function getTemplate(args: IndexTableResponsiveCardListStory): string {
 						<div class="indexTable-body-row-cellTitle">
 							<button class="indexTable-body-row-cellTitle-button button"
 								aria-expanded="true" aria-controls="r2" type="button" id="r1btn">
-								<span class="lucca-icon icon-arrowChevronBottom" aria-hidden="true"></span>
+								<span class="lucca-icon icon-arrowChevronTop" aria-hidden="true"></span>
 								<span class="u-mask">Hide details</span>
 							</button>
 							<span class="indexTable-body-row-cellTitle-title">September</span>
@@ -260,7 +260,7 @@ function getTemplate(args: IndexTableResponsiveCardListStory): string {
 						<div class="indexTable-body-row-cellTitle">
 							<button class="indexTable-body-row-cellTitle-button button"
 								aria-expanded="true" aria-controls="r4 r5" type="button" id="r3btn">
-								<span class="lucca-icon icon-arrowChevronBottom" aria-hidden="true"></span>
+								<span class="lucca-icon icon-arrowChevronTop" aria-hidden="true"></span>
 								<span class="u-mask">Hide details</span>
 							</button>
 							<span class="indexTable-body-row-cellTitle-title">October (stacks for test !)</span>
@@ -315,7 +315,7 @@ function getTemplate(args: IndexTableResponsiveCardListStory): string {
 						<div class="indexTable-body-row-cellTitle">
 							<button class="indexTable-body-row-cellTitle-button button"
 								aria-expanded="true" aria-controls="r7 r8" type="button" id="r6btn">
-								<span class="lucca-icon icon-arrowChevronBottom" aria-hidden="true"></span>
+								<span class="lucca-icon icon-arrowChevronTop" aria-hidden="true"></span>
 								<span class="u-mask">Hide details</span>
 							</button>
 							<span class="indexTable-body-row-cellTitle-title">2022</span>
@@ -336,7 +336,7 @@ function getTemplate(args: IndexTableResponsiveCardListStory): string {
 						<div class="indexTable-body-row-cellTitle">
 							<button class="indexTable-body-row-cellTitle-button button"
 								aria-expanded="true" aria-controls="r8" type="button" id="r7btn">
-								<span class="lucca-icon icon-arrowChevronBottom" aria-hidden="true"></span>
+								<span class="lucca-icon icon-arrowChevronTop" aria-hidden="true"></span>
 								<span class="u-mask">Hide details</span>
 							</button>
 							<span class="indexTable-body-row-cellTitle-title">January</span>
