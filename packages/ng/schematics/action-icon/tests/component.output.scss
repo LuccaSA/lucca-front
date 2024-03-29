@@ -1,0 +1,9 @@
+// Schematics Lucca Front 17.4.0 migrer actionIcon ("button mod-onlyIcon mod-text" ou "button mod-onlyIcon mod-outlined" si vous avez mod-outlined déjà présent)
+.actionIcon {
+	color: lime;
+}
+
+// Schematics Lucca Front 17.4.0 migrer actionIcon ("button mod-onlyIcon mod-text" ou "button mod-onlyIcon mod-outlined" si vous avez mod-outlined déjà présent)
+.actionIcon .mod-outlined {
+	color: red;
+}

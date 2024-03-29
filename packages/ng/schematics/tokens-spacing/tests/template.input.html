@@ -1,0 +1,11 @@
+<!-- basic class -->
+<div class="u-gapXL"></div>
+<div [class]="'u-gapXL'"></div>
+<div [class]="condition ? 'u-gapXL' : 'u-marginS'"></div>
+
+<!-- NgClass -->
+<span aria-hidden="true" [ngClass]="{ 'u-gapXS': showBillingInfos, 'u-marginXXL': !showBillingInfos }"></span>
+<span aria-hidden="true" [ngClass]="event.expanded ? 'u-gapXL' : 'u-gapM'"></span>
+
+<!-- Class bound attribute -->
+<span [class.u-paddingXXL]="!showDetails"></span>

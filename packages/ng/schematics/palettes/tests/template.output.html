@@ -1,0 +1,11 @@
+<!-- basic class -->
+<div class="palette-neutral"></div>
+<div [class]="'palette-neutral'"></div>
+<div [class]="condition ? 'palette-neutral' : 'palette-product'"></div>
+
+<!-- NgClass -->
+<span aria-hidden="true" [ngClass]="{ 'palette-brand': showBillingInfos, 'palette-product': !showBillingInfos }"></span>
+<span aria-hidden="true" [ngClass]="event.expanded ? 'palette-neutral' : 'palette-brand'"></span>
+
+<!-- Class bound attribute -->
+<span [class.palette-neutral]="!showDetails"></span>
