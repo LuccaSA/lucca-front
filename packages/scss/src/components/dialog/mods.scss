@@ -1,6 +1,6 @@
 @use '@lucca-front/scss/src/commons/utils/a11y';
 @use '@lucca-front/scss/src/components/title/exports' as title;
-@use '@lucca-front/scss/src/components/keyframe/exports' as keyframe;
+@use '@lucca-front/scss/src/commons/utils/keyframe';
 
 @mixin XS {
 	--components-dialog-size: 25rem;
