@@ -113,7 +113,8 @@
         flex-direction: column;
     }
 
-    .indexTable-body-row {
+    .indexTable-body-row,
+    .indexTable-foot-row {
         position: relative;
         display: grid;
         // Grid layout by default is a basic one column template.
@@ -136,6 +137,11 @@
         &:last-child {
             margin-bottom: 0;
         }
+    }
+
+    // checkbox, title and subtotal need to stay on the same row
+    .indexTable-body-row-transparentCell {
+        grid-row: 1;
     }
 
     // We only need one ::before for the card apparence and one ::after for the possible outline

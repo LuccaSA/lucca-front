@@ -73,6 +73,11 @@
             color: var(--palettes-neutral-700);
         }
 
+        .indexTable-foot-row-cell {
+            padding-top: var(--spacings-XXS);
+            padding-bottom: var(--spacings-XXS);
+        }
+
         .indexTable-body-row-cell {
             position: relative;
             z-index: var(--components-indexTable-cell-z-index, 1);

@@ -1,13 +1,20 @@
 @use '@lucca-front/scss/src/commons/utils/a11y';
 
-@mixin closedRow {
-    .indexTable-body-row {
+@mixin openClosedRow {
+    .indexTable-body-row,
+    .indexTable-foot-row {
         &.is-closed {
             display: none;
         }
     }
     .indexTable-body-row-cellTitle-button[aria-expanded='false'] .lucca-icon {
         transform: rotate(180deg);
+    }
+    // subTotal in header are not displayed when the row is open
+    .indexTable-body-row:has(.indexTable-body-row-cellTitle-button[aria-expanded='true']) {
+        .indexTable-body-row-subTotal {
+            display: none;
+        }
     }
 }
 

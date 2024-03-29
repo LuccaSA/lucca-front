@@ -58,6 +58,6 @@
     // hover
     @include hoveredRow;
 
-    // nested closed row
-    @include closedRow;
+    // nested open / closed row
+    @include openClosedRow;
 }
