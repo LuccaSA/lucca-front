@@ -24,9 +24,9 @@
 			grid-template-rows: 1fr;
 			grid-template-areas: 'main';
 			place-items: center;
-			width: var(--spacings-M);
-			height: var(--spacings-M);
-			margin: -0.375rem;
+			width: var(--pr-t-spacings-300);
+			height: var(--pr-t-spacings-300);
+			margin: calc(var(--pr-t-spacings-75) * -1);
 			flex-shrink: 0;
 			cursor: pointer;
 
