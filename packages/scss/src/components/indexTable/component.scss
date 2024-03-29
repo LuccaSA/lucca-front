@@ -57,6 +57,9 @@
         .indexTable-head-row-transparentCell,
         .indexTable-body-row-transparentCell {
             padding: var(--spacings-XXS) 0;
+            &:not(:first-child) {
+                padding-right: var(--components-indexTable-cell-padding);
+            }
         }
 
         .indexTable-head-row-cell,
