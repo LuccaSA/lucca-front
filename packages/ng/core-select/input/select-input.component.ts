@@ -219,7 +219,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 
 	clearValue(event: Event): void {
 		event.stopPropagation();
-		this.updateValue(null);
+		this.updateValue(null, true);
 		this.inputElementRef.nativeElement.focus();
 	}
 
