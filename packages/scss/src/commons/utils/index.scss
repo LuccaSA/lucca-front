@@ -333,6 +333,9 @@
 }
 
 @include core.spacings;
+@if (config.$importDeprecatedSpacings) {
+	@include core.spacings($token: false);
+}
 @include core.sizes;
 @include core.borderRadius;
 @include core.palettes;
