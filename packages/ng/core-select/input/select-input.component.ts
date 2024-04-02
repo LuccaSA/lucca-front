@@ -157,6 +157,11 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	onKeyDownNavigation($event: KeyboardEvent): void {
 		switch ($event.key) {
 			case 'Escape':
+				if (this.isPanelOpen) {
+					$event.stopPropagation();
+				}
+				this.panelRef?.close();
+				break;
 			case 'Tab':
 				this.panelRef?.close();
 				break;
