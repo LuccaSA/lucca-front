@@ -6,7 +6,7 @@
 
     .indexTable-head-row-cell-sortableButton {
         color: var(--palettes-neutral-900);
-        padding: var(--components-table-padding);
+        padding: var(--components-indexTable-padding);
 
         &::after {
             @include icon.generate('arrow_bottom');
