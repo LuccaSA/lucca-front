@@ -3,7 +3,7 @@
 
 @mixin component($atRoot: 'without: rule') {
 	font-weight: 400;
-	font-size: var(--icon-size);
+	font-size: var(--icon-size, var(--icon-sizeDefault));
 	direction: ltr;
 	display: inline-block;
 	font-family: config.$font-name;
