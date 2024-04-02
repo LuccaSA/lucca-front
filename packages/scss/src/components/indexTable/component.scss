@@ -6,8 +6,7 @@
     position: relative;
     display: table;
     width: 100%;
-    padding: var(--components-indexTable-padding);
-    padding-top: 0;
+    padding: 0 var(--components-indexTable-padding) calc(var(--components-indexTable-padding) - var(--components-indexTable-row-spacing));
     border-collapse: separate;
     border-spacing: 0 var(--components-indexTable-row-spacing);
     border-radius: var(--components-indexTable-border-radius);
@@ -147,7 +146,7 @@
         .indexTable-body-row-cell-checkbox,
         .indexTable-head-row-cell-checkbox {
             display: block;
-            margin: var(--spacings-XXS) 0 0 var(--spacings-XXS);
+            margin: 2px 0 0 var(--spacings-XXS);
         }
 
         // hidden element that take focus when the row is focused
