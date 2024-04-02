@@ -45,6 +45,14 @@
 			&.mod-XXL {
 				@include XXL;
 			}
+
+			&.mod-alignRight {
+				@include alignRight;
+			}
+
+			&.mod-alignCenter {
+				@include alignCenter;
+			}
 		}
 	}
 }

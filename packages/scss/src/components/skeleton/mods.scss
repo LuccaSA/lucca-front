@@ -39,3 +39,22 @@
 	--components-skeleton-shape-height: 4rem;
 	--components-skeleton-shape-width: 4rem;
 }
+
+@mixin alignRight {
+	&:not(.mod-square, .mod-circle) {
+		clip-path: inset(
+			calc(var(--components-skeleton-text-offset) + 1px) 0 calc(var(--components-skeleton-text-offset) - 1px)
+				calc(100% - var(--components-skeleton-text-width, 100%)) var(--components-skeleton-text-clipPathRound)
+		);
+	}
+}
+
+@mixin alignCenter {
+	&:not(.mod-square, .mod-circle) {
+		clip-path: inset(
+			calc(var(--components-skeleton-text-offset) + 1px) calc(50% - (var(--components-skeleton-text-width, 100%) / 2))
+				calc(var(--components-skeleton-text-offset) - 1px) calc(50% - (var(--components-skeleton-text-width, 100%) / 2))
+				var(--components-skeleton-text-clipPathRound)
+		);
+	}
+}
