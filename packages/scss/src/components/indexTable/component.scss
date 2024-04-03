@@ -83,8 +83,8 @@
             border-radius: var(--components-table-cardList-cell-border-radius);
             border: var(--commons-divider-width) 0 solid transparent;
 
-            // apparence of the first cell with a card apparence.
-            // we do this because there migh be one or two cells before without background and containing a checkbox
+            // Apparence of the first cell with a card apparence.
+            // We do this because there migh be one or two cells before without background and containing a checkbox
             --components-indexTable-cell-inset-x-left: var(--components-indexTable-cell-inset-x);
             --components-indexTable-cell-border-radius-left: var(--components-indexTable-cell-border-radius);
             --components-indexTable-cell-border-radius-right: 0;
@@ -93,7 +93,7 @@
             --components-indexTable-outline-border-width-left: var(--components-indexTable-outline-border-width);
             --components-indexTable-outline-border-width-right: 0;
 
-            // apparence of the nexts cells
+            // Apparence of the nexts cells
             ~ .indexTable-body-row-cell {
                 --components-indexTable-cell-inset-x-left: 0px;
                 --components-indexTable-shadow-mask: -10px 0px 0px 0px var(--components-indexTable-cell-background-color, var(--components-indexTable-cell-background-color-default));
@@ -102,7 +102,7 @@
                 --components-indexTable-outline-border-width-left: 0;
             }
 
-            // apparence of the last cell with a card apparence
+            // Apparence of the last cell with a card apparence
             &:last-child {
                 --components-indexTable-cell-inset-x-right: var(--components-indexTable-cell-inset-x);
                 --components-indexTable-cell-border-radius-right: var(--components-indexTable-cell-border-radius);
@@ -118,7 +118,7 @@
                 transition-duration: var(--commons-animations-durations-fast);
             }
 
-            // the "card" apparence is put on a ::before pseudo element
+            // The "card" apparence is put on a ::before pseudo element
             &::before {
                 inset: var(--components-indexTable-cell-inset-y, 0) var(--components-indexTable-cell-inset-x-right, 0) var(--components-indexTable-cell-inset-y, 0) var(--components-indexTable-cell-inset-x-left, 0);
                 border-radius: var(--components-indexTable-cell-border-radius-left) var(--components-indexTable-cell-border-radius-right) var(--components-indexTable-cell-border-radius-right) var(--components-indexTable-cell-border-radius-left);
@@ -129,7 +129,7 @@
                 transition-property: inset, box-shadow, background-color;
             }
 
-            // the focus outline, when needed
+            // The focus outline, when needed
             &::after {
                 inset: calc(var(--components-indexTable-cell-inset-y, 0px) - var(--components-indexTable-outline-offset)) calc(var(--components-indexTable-cell-inset-x-right, 0px) - var(--components-indexTable-outline-offset))
                     calc(var(--components-indexTable-cell-inset-y, 0px) - var(--components-indexTable-outline-offset)) calc(var(--components-indexTable-cell-inset-x-left, 0px) - var(--components-indexTable-outline-offset));
@@ -141,6 +141,11 @@
                 opacity: var(--components-indexTable-outline-opacity, 0);
                 transition-property: inset;
             }
+
+            // No shadow if the row contain an emptyState
+            &:has(.emptyState) {
+                --components-indexTable-cell-shadow: none;
+            }
         }
 
         .indexTable-body-row-cell-checkbox,
@@ -149,7 +154,7 @@
             margin: 2px 0 0 var(--spacings-XXS);
         }
 
-        // hidden element that take focus when the row is focused
+        // Hidden element that take focus when the row is focused
         .indexTable-body-row-cell-action {
             @include a11y.mask;
         }
@@ -169,7 +174,7 @@
             .lucca-icon {
                 transition: transform var(--commons-animations-durations-fast) ease;
             }
-            // extend button reactive zone to his whole parent
+            // Extend button reactive zone to his whole parent
             &::before {
                 content: '';
                 position: absolute;
@@ -185,7 +190,7 @@
             text-align: right;
         }
 
-        //A wrapper is needed for pagination
+        // A wrapper is needed for pagination
         .indexTableWrapper {
             @include vars;
             display: flex;

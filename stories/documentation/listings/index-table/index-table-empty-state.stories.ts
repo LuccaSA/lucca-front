@@ -13,7 +13,7 @@ export default {
 
 function getTemplate(args: IndexTableEmptyStateStory): string {
 	return `
-	<table class="indexTable">
+	<table class="indexTable" inert role="presentation">
 		<thead class="indexTable-head">
 			<tr class="indexTable-head-row">
 				<th class="indexTable-head-row-cell" scope="col">Label</th>
