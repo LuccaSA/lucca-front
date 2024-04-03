@@ -246,6 +246,7 @@
 @mixin actions {
     // ~ equivalent to width: min-content for a table-cell but prevent line-break;
     width: 1%;
+    padding: var(--spacings-XXS);
     white-space: nowrap;
 
     // All devices expect touch ones : subActions are hidden and appears when their row is hover or selected
