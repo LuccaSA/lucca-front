@@ -36,13 +36,11 @@
 			class="textField-input-value"
 			[placeholder]="placeholder"
 			[formControl]="ngControl.control"
-			[step]="step"
-			[class.u-noSpinButtons]="noSpinButtons"
 			#inputElement
 		/>
 		<div class="textField-input-affix">
 			<button class="textField-input-affix-clear clear" (click)="clearValue()" *ngIf="hasClearer && inputElement.value">
-				<span aria-hidden="true" class="lucca-icon icon-close"></span>
+				<span aria-hidden="true" class="lucca-icon icon-signClose"></span>
 				<span class="u-mask">{{ intl.clear }}</span>
 			</button>
 			<span aria-hidden="true" class="textField-input-affix-icon lucca-icon icon-{{searchIcon}}" *ngIf="hasSearchIcon"></span>

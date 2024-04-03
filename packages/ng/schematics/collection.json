@@ -10,6 +10,21 @@
 			"description": "Replace old icon names with new ones.",
 			"factory": "./new-icons/index",
 			"schema": "./new-icons/schema.json"
+		},
+		"tokens-spacings": {
+			"description": "Replace tokens with new names.",
+			"factory": "./tokens-spacing/index",
+			"schema": "./tokens-spacing/schema.json"
+		},
+		"palettes": {
+			"description": "Replace palettes with new names.",
+			"factory": "./palettes/index",
+			"schema": "./palettes/schema.json"
+		},
+		"action-icon": {
+			"description": "Replace actionIcon usages with button mod-onlyIcon",
+			"factory": "./action-icon/index",
+			"schema": "./action-icon/schema.json"
 		}
 	}
 }

@@ -19,11 +19,11 @@
 		}
 
 		.sb-main-fullscreen .sb-anchor:not(:last-child) {
-		    margin-bottom: 40px;
+			margin-bottom: 40px;
 		}
 
 		.sb-main-fullscreen .sbdocs-title + .sb-anchor {
-		    margin-bottom: 0 !important;
+			margin-bottom: 0 !important;
 		}
 
 		.sb-main-fullscreen .sbdocs.sbdocs-wrapper {
@@ -52,7 +52,7 @@
 		.sb-main-fullscreen .css-s7utv5 {
 			font-size: 13px;
 			font-weight: 800;
-			color: #2E3438;
+			color: #2e3438;
 			letter-spacing: normal;
 		}
 
@@ -62,7 +62,7 @@
 
 		.sb-main-fullscreen .docblock-argstable-body {
 			border-radius: 4px !important;
-			box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1) !important;
+			box-shadow: inset 0 0 0 1px rgb(0 0 0 / 0.1) !important;
 		}
 
 		.sb-main-fullscreen .docblock-argstable-head tr {
@@ -132,10 +132,10 @@
 </template>
 
 <script>
-	const isInsideStorybook = window.frameElement?.getAttribute('data-is-storybook') === 'true';
+	const isInsideStorybook = window.frameElement?.getAttribute("data-is-storybook") === "true";
 
 	if (!isInsideStorybook) {
-		const template = document.getElementById('outsideStorybookStyle');
+		const template = document.getElementById("outsideStorybookStyle");
 		document.head.appendChild(template.content.cloneNode(true));
 	}
 </script>

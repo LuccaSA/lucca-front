@@ -1,0 +1,212 @@
+@use 'vars' as *;
+@use '@lucca-front/scss/src/commons/utils/a11y';
+@use '@lucca-front/scss/src/components/button/exports' as button;
+
+@mixin component($atRoot: 'without: rule') {
+    position: relative;
+    display: table;
+    width: 100%;
+    padding: 0 var(--components-indexTable-padding) calc(var(--components-indexTable-padding) - var(--components-indexTable-row-spacing));
+    border-collapse: separate;
+    border-spacing: 0 var(--components-indexTable-row-spacing);
+    border-radius: var(--components-indexTable-border-radius);
+    background-color: var(--components-indexTable-background-color);
+    color: var(--palettes-neutral-800);
+
+    @at-root ($atRoot) {
+        .indexTable-head {
+            display: table-header-group;
+            vertical-align: bottom;
+        }
+
+        .indexTable-body {
+            display: table-row-group;
+        }
+
+        //There might be more than one footer
+        .indexTable-foot {
+            display: table-row-group;
+            &:is(tfoot) {
+                display: table-footer-group;
+            }
+        }
+
+        .indexTable-head-row,
+        .indexTable-body-row,
+        .indexTable-foot-row {
+            display: table-row;
+        }
+
+        .indexTable-body-row {
+            border-radius: var(--commons-borderRadius-L);
+            cursor: pointer;
+        }
+
+        .indexTable-head-row-transparentCell,
+        .indexTable-body-row-transparentCell,
+        .indexTable-head-row-cell,
+        .indexTable-body-row-cell,
+        .indexTable-foot-row-cell {
+            display: table-cell;
+            text-align: left;
+            font-weight: 400;
+        }
+
+        .indexTable-head-row-transparentCell,
+        .indexTable-body-row-transparentCell {
+            vertical-align: middle;
+            padding: var(--spacings-XXS) 0;
+            &:not(:first-child) {
+                padding-right: var(--components-indexTable-cell-padding);
+            }
+        }
+
+        .indexTable-head-row-cell,
+        .indexTable-body-row-cell,
+        .indexTable-foot-row-cell {
+            vertical-align: top;
+            padding: var(--components-indexTable-cell-padding);
+        }
+
+        .indexTable-head-row-cell {
+            color: var(--palettes-neutral-700);
+        }
+
+        .indexTable-foot-row-cell {
+            padding-top: var(--spacings-XXS);
+            padding-bottom: var(--spacings-XXS);
+        }
+
+        .indexTable-body-row-cell {
+            position: relative;
+            z-index: var(--components-indexTable-cell-z-index, 1);
+            border-radius: var(--components-table-cardList-cell-border-radius);
+            border: var(--commons-divider-width) 0 solid transparent;
+
+            // Apparence of the first cell with a card apparence.
+            // We do this because there migh be one or two cells before without background and containing a checkbox
+            --components-indexTable-cell-inset-x-left: var(--components-indexTable-cell-inset-x);
+            --components-indexTable-cell-border-radius-left: var(--components-indexTable-cell-border-radius);
+            --components-indexTable-cell-border-radius-right: 0;
+            --components-indexTable-outline-border-radius-left: var(--components-indexTable-outline-border-radius);
+            --components-indexTable-outline-border-radius-right: 0;
+            --components-indexTable-outline-border-width-left: var(--components-indexTable-outline-border-width);
+            --components-indexTable-outline-border-width-right: 0;
+
+            // Apparence of the nexts cells
+            ~ .indexTable-body-row-cell {
+                --components-indexTable-cell-inset-x-left: 0px;
+                --components-indexTable-shadow-mask: -10px 0px 0px 0px var(--components-indexTable-cell-background-color, var(--components-indexTable-cell-background-color-default));
+                --components-indexTable-cell-border-radius-left: 0;
+                --components-indexTable-outline-border-radius-left: 0;
+                --components-indexTable-outline-border-width-left: 0;
+            }
+
+            // Apparence of the last cell with a card apparence
+            &:last-child {
+                --components-indexTable-cell-inset-x-right: var(--components-indexTable-cell-inset-x);
+                --components-indexTable-cell-border-radius-right: var(--components-indexTable-cell-border-radius);
+                --components-indexTable-outline-border-radius-right: var(--components-indexTable-outline-border-radius);
+                --components-indexTable-outline-border-width-right: var(--components-indexTable-outline-border-width);
+            }
+
+            &::before,
+            &::after {
+                content: '';
+                position: absolute;
+                z-index: -1;
+                transition-duration: var(--commons-animations-durations-fast);
+            }
+
+            // The "card" apparence is put on a ::before pseudo element
+            &::before {
+                inset: var(--components-indexTable-cell-inset-y, 0) var(--components-indexTable-cell-inset-x-right, 0) var(--components-indexTable-cell-inset-y, 0) var(--components-indexTable-cell-inset-x-left, 0);
+                border-radius: var(--components-indexTable-cell-border-radius-left) var(--components-indexTable-cell-border-radius-right) var(--components-indexTable-cell-border-radius-right) var(--components-indexTable-cell-border-radius-left);
+                background-color: var(--components-indexTable-cell-background-color, var(--components-indexTable-cell-background-color-default));
+                // shadow-mask : since the card apparence is put on every cell (du to a Safari bug), we need to hide the left part of the box shadow for everycell exept the first one.
+                // We do this with a rectangular white box-shadow above it.
+                box-shadow: var(--components-indexTable-shadow-mask, 0 0 0 0), var(--components-indexTable-cell-shadow, var(--components-indexTable-cell-shadow-default));
+                transition-property: inset, box-shadow, background-color;
+            }
+
+            // The focus outline, when needed
+            &::after {
+                inset: calc(var(--components-indexTable-cell-inset-y, 0px) - var(--components-indexTable-outline-offset)) calc(var(--components-indexTable-cell-inset-x-right, 0px) - var(--components-indexTable-outline-offset))
+                    calc(var(--components-indexTable-cell-inset-y, 0px) - var(--components-indexTable-outline-offset)) calc(var(--components-indexTable-cell-inset-x-left, 0px) - var(--components-indexTable-outline-offset));
+                border-radius: var(--components-indexTable-outline-border-radius-left) var(--components-indexTable-outline-border-radius-right) var(--components-indexTable-outline-border-radius-right)
+                    var(--components-indexTable-outline-border-radius-left);
+                border-width: var(--components-indexTable-outline-border-width) var(--components-indexTable-outline-border-width-right) var(--components-indexTable-outline-border-width) var(--components-indexTable-outline-border-width-left);
+                border-style: solid;
+                border-color: var(--components-indexTable-outline-color);
+                opacity: var(--components-indexTable-outline-opacity, 0);
+                transition-property: inset;
+            }
+
+            // No shadow if the row contain an emptyState
+            &:has(.emptyState) {
+                --components-indexTable-cell-shadow: none;
+            }
+        }
+
+        .indexTable-body-row-cell-checkbox,
+        .indexTable-head-row-cell-checkbox {
+            display: block;
+            margin: 2px 0 0 var(--spacings-XXS);
+        }
+
+        // Hidden element that take focus when the row is focused
+        .indexTable-body-row-cell-action {
+            @include a11y.mask;
+        }
+
+        .indexTable-body-row-cellTitle {
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: var(--spacings-XS);
+        }
+
+        .indexTable-body-row-cellTitle-button {
+            @include button.text;
+            @include button.S;
+            @include button.onlyIconS;
+            position: static;
+            .lucca-icon {
+                transition: transform var(--commons-animations-durations-fast) ease;
+            }
+            // Extend button reactive zone to his whole parent
+            &::before {
+                content: '';
+                position: absolute;
+                inset: 0;
+            }
+        }
+
+        .indexTable-body-row-cellTitle-title {
+            font-weight: 600;
+        }
+
+        .indexTable-foot-row-cell {
+            text-align: right;
+        }
+
+        // A wrapper is needed for pagination
+        .indexTableWrapper {
+            @include vars;
+            display: flex;
+            flex-direction: column;
+            padding-bottom: var(--spacings-XS);
+            border-radius: var(--components-indexTable-border-radius);
+            background-color: var(--components-indexTable-background-color);
+            .indexTable {
+                flex-grow: 1;
+                padding-bottom: 0;
+            }
+            .pagination {
+                align-self: flex-end;
+                padding: var(--spacings-XXS) 0 0 0;
+                margin-right: var(--spacings-XS);
+            }
+        }
+    }
+}

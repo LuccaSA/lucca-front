@@ -4,5 +4,5 @@
 
 @mixin disabled {
 	--components-formLabel-color: var(--palettes-neutral-500);
-	pointer-events: none;
+	--components-formLabel-cursor: default;
 }

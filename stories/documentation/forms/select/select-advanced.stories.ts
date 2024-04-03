@@ -28,7 +28,7 @@ import { Meta, StoryFn, applicationConfig } from '@storybook/angular';
 					<header class="lu-picker-header">
 						<lu-option-feeder [options]="options"></lu-option-feeder>
 						<lu-option-searcher [searchFn]="searchFn"></lu-option-searcher>
-						<lu-option-select-all class="u-displayBlock u-marginXS"></lu-option-select-all>
+						<lu-option-select-all class="u-displayBlock pr-u-margin100"></lu-option-select-all>
 						<lu-option-pager></lu-option-pager>
 					</header>
 					<div class="lu-picker-content-option">

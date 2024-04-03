@@ -1,0 +1,63 @@
+@use 'exports' as *;
+@use '@lucca-front/scss/src/commons/utils/media';
+
+.indexTable {
+    @include vars;
+    @include component;
+
+    &.mod-selectable {
+        @include selectable;
+        // Selectable states
+        @include selectableSelectedRow;
+        @include selectableHoveredRow;
+    }
+
+    &.mod-stackable {
+        @include stackable;
+    }
+
+    &.mod-stickyHeader {
+        @include stickyHeader;
+    }
+
+    &[class*='mod-layoutFixed'] {
+        @include layoutFixed;
+    }
+
+    .indexTable-head-row.mod-massSelection {
+        @include massSelection;
+    }
+
+    .indexTable-body-row-cell.mod-actions {
+        @include actions;
+    }
+
+    // Responsive
+    @include media.max('S') {
+        &.mod-responsiveCardList {
+            @include responsiveCardList;
+        }
+
+        &.mod-selectable.mod-responsiveCardList {
+            @include selectableResponsiveCardList;
+        }
+
+        &.mod-stackable.mod-responsiveCardList {
+            @include stackableResponsiveCardList;
+        }
+
+        &.mod-selectable.mod-stackable.mod-responsiveCardList {
+            @include selectableStackableResponsiveCardList;
+        }
+    }
+
+    // generic states, non tied to a mod
+    // focus-within
+    @include focusedRow;
+
+    // hover
+    @include hoveredRow;
+
+    // nested open / closed row
+    @include openClosedRow;
+}

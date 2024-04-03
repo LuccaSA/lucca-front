@@ -34,7 +34,7 @@ const Template: StoryFn<GridsAlignmentsStory> = (args) => ({
 		`
 		.demo {
 			background-color: var(--colors-white-color);
-			padding: var(--spacings-S);
+			padding: var(--pr-t-spacings-200);
 			border-radius: 1rem;
 			text-align: center;
 			height: 100%;
@@ -44,7 +44,7 @@ const Template: StoryFn<GridsAlignmentsStory> = (args) => ({
 		}
 
 		.grid + .grid {
-			margin-top: var(--spacings-L);
+			margin-top: var(--pr-t-spacings-400);
 		}
 		`,
 	],

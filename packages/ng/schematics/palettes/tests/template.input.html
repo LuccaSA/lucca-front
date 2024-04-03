@@ -1,0 +1,11 @@
+<!-- basic class -->
+<div class="palette-grey"></div>
+<div [class]="'palette-grey'"></div>
+<div [class]="condition ? 'palette-grey' : 'palette-secondary'"></div>
+
+<!-- NgClass -->
+<span aria-hidden="true" [ngClass]="{ 'palette-lucca': showBillingInfos, 'palette-primary': !showBillingInfos }"></span>
+<span aria-hidden="true" [ngClass]="event.expanded ? 'palette-grey' : 'palette-lucca'"></span>
+
+<!-- Class bound attribute -->
+<span [class.palette-grey]="!showDetails"></span>

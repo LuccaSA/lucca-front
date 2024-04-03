@@ -1,0 +1,39 @@
+@mixin vars {
+    --components-indexTable-padding: var(--spacings-XS);
+    --components-indexTable-border-radius: 12px;
+    --components-indexTable-background-color: var(--palettes-grey-50);
+    --components-indexTable-row-spacing: 4px;
+    // on responsive, row spacing is increased
+    --components-indexTable-row-spacing-responsive: 8px;
+
+    --components-indexTable-cell-padding: var(--spacings-XS);
+    --components-indexTable-cell-border-radius: var(--commons-borderRadius-L);
+    --components-indexTable-cell-background-color-default: var(--colors-white-color);
+    // shadows
+    --components-indexTable-cell-shadow-default: var(--pr-t-elevation-shadow-raised);
+    --components-indexTable-cell-background-color-selected: var(--palettes-product-50);
+    --components-indexTable-cell-shadow-selected: 0 0 0 var(--commons-divider-width) var(--palettes-product-500);
+    --components-indexTable-cell-shadow-hover: var(--pr-t-elevation-shadow-overlay);
+
+    // width of selectables cells containing a checkbox
+    --components-indexTable-row-cell-transparent-width: 2.25rem;
+
+    // due to their bottom decoration, rows with mod-stack2 or mod-stack3 are slightly more spaced
+    --components-indexTable-stack2-row-spacing: 5px;
+    --components-indexTable-stack3-row-spacing: 9px;
+
+    // rows stacks apparence is an url encoded svg
+    --components-indexTable-stack-svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='908' height='48' fill='none'%3E%3Cg filter='url(%23a)'%3E%3Crect width='900' height='40' x='4' y='2' fill='%23fff' rx='8'/%3E%3C/g%3E%3Cdefs%3E%3Cfilter id='a' width='908' height='48' x='0' y='0' color-interpolation-filters='sRGB' filterUnits='userSpaceOnUse'%3E%3CfeFlood flood-opacity='0' result='BackgroundImageFix'/%3E%3CfeColorMatrix in='SourceAlpha' result='hardAlpha' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0'/%3E%3CfeOffset dy='2'/%3E%3CfeGaussianBlur stdDeviation='2'/%3E%3CfeColorMatrix values='0 0 0 0 0.67451 0 0 0 0 0.733333 0 0 0 0 0.843137 0 0 0 0.2 0'/%3E%3CfeBlend in2='BackgroundImageFix' result='effect1_dropShadow_1214_48875'/%3E%3CfeColorMatrix in='SourceAlpha' result='hardAlpha' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0'/%3E%3CfeOffset dy='1'/%3E%3CfeGaussianBlur stdDeviation='1'/%3E%3CfeColorMatrix values='0 0 0 0 0.67451 0 0 0 0 0.733333 0 0 0 0 0.843137 0 0 0 0.4 0'/%3E%3CfeBlend in2='effect1_dropShadow_1214_48875' mode='multiply' result='effect2_dropShadow_1214_48875'/%3E%3CfeColorMatrix in='SourceAlpha' result='hardAlpha' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0'/%3E%3CfeMorphology in='SourceAlpha' operator='dilate' radius='1' result='effect3_dropShadow_1214_48875'/%3E%3CfeOffset/%3E%3CfeColorMatrix values='0 0 0 0 0.67451 0 0 0 0 0.733333 0 0 0 0 0.843137 0 0 0 0.08 0'/%3E%3CfeBlend in2='effect2_dropShadow_1214_48875' result='effect3_dropShadow_1214_48875'/%3E%3CfeBlend in='SourceGraphic' in2='effect3_dropShadow_1214_48875' result='shape'/%3E%3C/filter%3E%3C/defs%3E%3C/svg%3E");
+    // selected rows stacks apparence. Inline svg can't use css vars for coloring or fill :(
+    --components-indexTable-stack-svg-selected: url("data:image/svg+xml,%3Csvg width='908' height='48' viewBox='0 0 908 48' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Crect x='4' y='2' width='900' height='40' rx='8' fill='%23FFF1EB' stroke='%23FF9361'/%3E%3C/svg%3E%0A");
+
+    // Rows visualy grow bigger on hover + focus
+    --components-indexTable-hover-offset-x: -4px;
+    --components-indexTable-hover-offset-y: -1px;
+
+    // Selectable specific outline
+    --components-indexTable-outline-offset: 4px;
+    --components-indexTable-outline-border-width: 2px;
+    --components-indexTable-outline-border-radius: calc(var(--components-indexTable-cell-border-radius) + var(--components-indexTable-outline-offset));
+    --components-indexTable-outline-color: var(--palettes-product-700);
+}
