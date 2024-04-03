@@ -1,7 +1,7 @@
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { CalloutComponent, CalloutFeedbackItemComponent, CalloutFeedbackListComponent } from '@lucca-front/ng/callout';
-import { HiddenArgType, PaletteArgType } from 'stories/helpers/common-arg-types';
 import { ButtonComponent } from '@lucca-front/ng/button';
+import { CalloutComponent, CalloutFeedbackItemComponent, CalloutFeedbackListComponent } from '@lucca-front/ng/callout';
+import { Meta, StoryObj, moduleMetadata } from '@storybook/angular';
+import { HiddenArgType, PaletteArgType } from 'stories/helpers/common-arg-types';
 import { generateInputs } from 'stories/helpers/stories';
 
 export default {
@@ -56,7 +56,7 @@ export default {
 
 export const Template: StoryObj<CalloutComponent & { description: string }> = {
 	args: {
-		heading: 'Feedback or informations',
+		heading: '',
 		size: 'M',
 		state: null,
 		icon: null,

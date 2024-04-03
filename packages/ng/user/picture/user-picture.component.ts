@@ -1,6 +1,12 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, Optional } from '@angular/core';
 import { LuDisplayFullname, LuDisplayInitials, LuUserDisplayPipe } from '../display';
-import { ILuUser } from '../user.model';
+
+export interface LuUserPictureUserInput {
+	picture?: { href: string } | null;
+	pictureHref?: string | null;
+	firstName: string;
+	lastName: string;
+}
 
 /**
  * Displays user's picture or a placeholder with his/her initials and random bg color'
@@ -29,12 +35,12 @@ export class LuUserPictureComponent {
 	}
 
 	/**
-	 * ILuUser whose picture you want to display.
+	 * UserPictureUserInput whose picture you want to display.
 	 */
-	private _user: ILuUser;
+	private _user: LuUserPictureUserInput;
 
 	@Input()
-	set user(user: ILuUser) {
+	set user(user: LuUserPictureUserInput) {
 		this._user = user;
 		this.initials = this.displayPipe.transform(user, this.displayFormat);
 		const pictureHref = user?.picture?.href || user?.pictureHref;

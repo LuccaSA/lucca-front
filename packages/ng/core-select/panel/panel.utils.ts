@@ -1,31 +1,24 @@
-import { LuOptionGroup } from '../select.model';
+import { Observable, distinctUntilChanged, map, of, skip, startWith, switchMap, take } from 'rxjs';
+
+export type GroupTemplateLocation = 'group-header' | 'option' | 'none';
 
 /**
- * Generate groups with a O(n) complexity. Note that the options must be sorted by group.
+ * In order to avoid a blinking when we go from empty clue to a clue
+ * We need to delay the change of group displayer location by waiting for the options to be updated.
  */
-export function generateGroups<T, TGroup>(options: T[], selector: (option: T) => TGroup): LuOptionGroup<T, TGroup>[] {
-	if (!options?.length) {
-		return [];
-	}
-
-	const groups: Array<LuOptionGroup<T, TGroup>> = [];
-	let group: LuOptionGroup<T, TGroup>;
-
-	for (const option of options) {
-		const groupKey = selector(option);
-		if (!group || group.key !== groupKey) {
-			if (group) {
-				groups.push(group);
-			}
-			group = { key: groupKey, options: [option] };
-		} else {
-			group.options.push(option);
-		}
-	}
-
-	if (group) {
-		groups.push(group);
-	}
-
-	return groups;
+export function getGroupTemplateLocation(hasGrouping: boolean, clueChange$: Observable<string>, options$: Observable<unknown[]>): Observable<GroupTemplateLocation> {
+	return hasGrouping
+		? clueChange$.pipe(
+				map((clue) => !!clue),
+				distinctUntilChanged(),
+				switchMap((hasClue) =>
+					options$.pipe(
+						skip(1),
+						take(1),
+						map((): GroupTemplateLocation => (hasClue ? 'option' : 'group-header')),
+					),
+				),
+				startWith('group-header' as const),
+		  )
+		: of('none' as const);
 }

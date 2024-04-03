@@ -1,0 +1,9 @@
+// All component states are defined in this file through various mixins.
+// The file may be empty but must be present.
+// All property values modified by a state are modified through a CSS variable.
+
+@mixin sampleStateA {
+	.sample-subComponent {
+		--components-sample-property2: otherValue;
+	}
+}

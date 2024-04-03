@@ -91,6 +91,20 @@ $poplee: (
 	900: #003c5c,
 ) !default;
 
+$cc: (
+	text: #ffffff,
+	50: #feecf4,
+	100: #fcd9e9,
+	200: #f9b9d7,
+	300: #f49fc7,
+	400: #f084b7,
+	500: #e864a1,
+	600: #d63882,
+	700: #bc2069,
+	800: #930747,
+	900: #580b2f,
+) !default;
+
 $neutral: (
 	text: #ffffff,
 	25: #f3f6fc,
@@ -337,6 +351,7 @@ $prod: map-get(
 		'timmi': $timmi,
 		'poplee': $poplee,
 		'pagga': $pagga,
+		'cc': $cc,
 	),
 	$product
 );
@@ -371,6 +386,7 @@ $palettesInterpolation: (
 	'poplee': $poplee,
 	'timmi': $timmi,
 	'cleemy': $cleemy,
+	'cc': $cc,
 );
 
 $breakpoints: (

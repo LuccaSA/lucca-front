@@ -79,7 +79,7 @@ export class LuMultiSelectInputComponent<T> extends ALuSelectInputComponent<T, T
 	}
 
 	public override updateValue(value: T[], skipFocus = false): void {
-		super.updateValue(value);
+		super.updateValue(value, skipFocus);
 		if (!skipFocus) {
 			this.focusInput();
 		}

@@ -114,8 +114,10 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 		return this.value ? null : this.placeholder$.value;
 	}
 
-	public clueChanged(clue: string): void {
-		if (!this.isPanelOpen) {
+	public clueChanged(clue: string, skipPanelOpen = false): void {
+		this.clue = clue;
+
+		if (!skipPanelOpen && !this.isPanelOpen) {
 			this.openPanel(clue);
 		} else if (this.lastEmittedClue !== clue) {
 			this.clueChange.emit(clue);
@@ -155,6 +157,11 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	onKeyDownNavigation($event: KeyboardEvent): void {
 		switch ($event.key) {
 			case 'Escape':
+				if (this.isPanelOpen) {
+					$event.stopPropagation();
+				}
+				this.panelRef?.close();
+				break;
 			case 'Tab':
 				this.panelRef?.close();
 				break;
@@ -165,9 +172,13 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 					this.panelRef?.handleKeyManagerEvent($event);
 				}
 				break;
-			case 'Space':
+			case ' ':
 			case 'ArrowDown':
 			case 'ArrowUp':
+				// Initial space should just open the panel, not trigger a clue change
+				if (!this.clue && $event.key === ' ') {
+					$event.preventDefault();
+				}
 				if (this.isPanelOpen) {
 					this.panelRef?.handleKeyManagerEvent($event);
 				} else {
@@ -213,7 +224,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 
 	clearValue(event: Event): void {
 		event.stopPropagation();
-		this.updateValue(null);
+		this.updateValue(null, true);
 		this.inputElementRef.nativeElement.focus();
 	}
 
@@ -276,10 +287,10 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 		this.value = value;
 	}
 
-	public updateValue(value: TValue): void {
+	public updateValue(value: TValue, skipPanelOpen = false): void {
 		this.value = value;
 		this.emptyClue();
-		this.clueChanged('');
+		this.clueChanged('', skipPanelOpen);
 		this.onChange?.(value);
 		this.onTouched?.();
 	}

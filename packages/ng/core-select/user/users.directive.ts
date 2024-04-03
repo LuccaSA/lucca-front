@@ -105,7 +105,7 @@ export class LuCoreSelectUsersDirective<T extends LuCoreSelectUser = LuCoreSelec
 			...filters,
 			...(orderBy ? { orderBy } : {}),
 			...(clue ? { clue: sanitizeClueFilter(clue) } : {}),
-			...(operationIds ? { operationIds: operationIds.join(',') } : {}),
+			...(operationIds ? { operations: operationIds.join(',') } : {}),
 			...(appInstanceId ? { appInstanceId } : {}),
 			...(enableFormerEmployees ? { enableFormerEmployees } : {}),
 		})),
