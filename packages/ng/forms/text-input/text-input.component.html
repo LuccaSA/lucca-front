@@ -1,7 +1,7 @@
 <div class="textField">
 	<ng-template #textfieldAddon let-addon="addon" let-type="type">
 		<span class="textField-{{type}}" luFormFieldId="{{type}}" *ngIf="addon.content">
-			<span class="textField-label-{{type}}-item" [attr.aria-label]="addon.ariaLabel">{{addon.content}}</span>
+			<span class="textField-label-{{type}}-item" [attr.aria-label]="addon.ariaLabel">{{ addon.content }}</span>
 		</span>
 		<span class="textField-{{type}}" luFormFieldId="{{type}}" *ngIf="addon.icon">
 			<span class="textField-label-{{type}}-item" [attr.aria-label]="addon.ariaLabel"
@@ -40,8 +40,8 @@
 		/>
 		<div class="textField-input-affix">
 			<button class="textField-input-affix-clear clear" (click)="clearValue()" *ngIf="hasClearer && inputElement.value">
-				<span aria-hidden="true" class="lucca-icon icon-close"></span>
-				<span class="u-mask">{{intl.clear}}</span>
+				<span aria-hidden="true" class="lucca-icon icon-signClose"></span>
+				<span class="u-mask">{{ intl.clear }}</span>
 			</button>
 			<span aria-hidden="true" class="textField-input-affix-icon lucca-icon icon-{{searchIcon}}" *ngIf="hasSearchIcon"></span>
 			<button
@@ -52,7 +52,7 @@
 				*ngIf="hasTogglePasswordVisibilityIcon()"
 			>
 				<span aria-hidden="true" class="lucca-icon icon-{{showPassword ? 'unwatch' : 'watch'}}"></span>
-				<span class="u-mask">{{intl.togglePasswordVisibility}}</span>
+				<span class="u-mask">{{ intl.togglePasswordVisibility }}</span>
 			</button>
 		</div>
 	</div>

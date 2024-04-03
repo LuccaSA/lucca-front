@@ -13,12 +13,12 @@
 	.navSide-item-link {
 		color: var(--components-navSide-compact-palette-text);
 		font-size: var(--components-navSide-compact-font-size);
-		padding: 0.75rem var(--spacings-XS);
+		padding: var(--pr-t-spacings-150) var(--pr-t-spacings-100);
 		flex-direction: column;
 		justify-content: center;
 		position: relative;
 		text-align: center;
-		row-gap: var(--spacings-XXS);
+		row-gap: var(--pr-t-spacings-50);
 	}
 
 	.navSide-item-arrow,
@@ -26,11 +26,15 @@
 		display: none;
 	}
 
+	.numericBadge {
+		margin-left: inherit;
+	}
+
 	.navSide-item-alert {
 		// deprecated
 		background-color: var(--components-navSide-compact-palette-alert-color);
 		color: var(--components-navSide-compact-palette-alert-text);
-		padding: 0 var(--spacings-XS);
+		padding: 0 var(--pr-t-spacings-100);
 		margin: auto;
 		position: relative;
 	}
@@ -45,7 +49,7 @@
 
 		&::after {
 			margin-left: 0;
-			margin-top: 0.75rem;
+			margin-top: var(--pr-t-spacings-150);
 			width: 100%;
 		}
 	}

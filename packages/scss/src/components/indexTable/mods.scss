@@ -1,0 +1,332 @@
+@use 'vars' as *;
+@use '@lucca-front/scss/src/commons/utils/media';
+@use '@lucca-front/scss/src/commons/config';
+@use '@lucca-front/scss/src/components/button/exports' as button;
+
+@mixin selectable {
+    .indexTable-head-row {
+        cursor: pointer;
+    }
+
+    .indexTable-body-row {
+        &:is(:focus-within, :hover) {
+            outline: none;
+        }
+    }
+
+    .indexTable-head-row-transparentCell,
+    .indexTable-body-row-transparentCell {
+        width: var(--components-indexTable-row-cell-transparent-width);
+        &:first-child {
+            padding-left: 0;
+        }
+    }
+}
+
+@mixin stackable {
+    .indexTable-body-row {
+        &.mod-stack2,
+        &.mod-stack3 {
+            --components-indexTable-row-stack-border-bottom: var(--components-indexTable-stack2-row-spacing);
+            --components-indexTable-row-stack2-background-image: var(--components-indexTable-stack-svg);
+        }
+
+        &.mod-stack3 {
+            --components-indexTable-row-stack-border-bottom: var(--components-indexTable-stack3-row-spacing);
+            --components-indexTable-row-stack3-background-image: var(--components-indexTable-stack-svg);
+        }
+    }
+
+    .indexTable-body-row-cell {
+        // because we can't set an individual spacing for each row, transparent border are used for this
+        border-bottom: var(--components-indexTable-row-stack-border-bottom) solid transparent;
+        // stack apparence
+        background-image: var(--components-indexTable-row-stack2-background-image, none), var(--components-indexTable-row-stack3-background-image, none);
+        background-position: var(--components-indexTable-row-stack2-background-position, 0 0), var(--components-indexTable-row-stack3-background-position, 0 0);
+        background-repeat: no-repeat, no-repeat;
+        transition-property: background-image, background-position;
+        transition-duration: var(--commons-animations-durations-fast);
+
+        // apparence of the first cell with a card apparence.
+        // we do this because there migh be one or two cells before without background and containing a checkbox
+        --components-indexTable-row-stack2-background-position: left calc(-2px + var(--components-indexTable-cell-inset-x-left, 0px)) bottom -10px;
+        --components-indexTable-row-stack3-background-position: left calc(1px + var(--components-indexTable-cell-inset-x-left, 0px)) bottom -14px;
+
+        // apparence of the nexts cells
+        & ~ .indexTable-body-row-cell {
+            --components-indexTable-row-stack2-background-position: left -20px bottom -10px;
+            --components-indexTable-row-stack3-background-position: left -20px bottom -14px;
+        }
+
+        // apparence of the last cell with a card apparence
+        &:last-child {
+            --components-indexTable-row-stack2-background-position: right calc(-2px + var(--components-indexTable-cell-inset-x-right, 0px)) bottom -10px;
+            --components-indexTable-row-stack3-background-position: right calc(1px + var(--components-indexTable-cell-inset-x-right, 0px)) bottom -14px;
+        }
+    }
+}
+
+@mixin stickyHeader {
+    .indexTable-head {
+        position: sticky;
+        top: var(--components-indexTable-row-spacing);
+        z-index: 2;
+    }
+
+    //hide box-shadow from underneath rows that slighly appear on edges of the sticky header when scrolling
+    .indexTable-head-row-cell {
+        position: relative;
+        &::before,
+        &::after {
+            content: '';
+            position: absolute;
+            inset: calc(var(--components-indexTable-row-spacing) * -1) calc(var(--components-indexTable-padding) * -1) 0;
+            z-index: -1;
+        }
+        &::before {
+            background-color: var(--commons-background-base);
+        }
+        &::after {
+            background-color: var(--components-indexTable-background-color);
+        }
+        &:first-child::after {
+            border-top-left-radius: var(--components-indexTable-border-radius);
+        }
+        &:last-child::after {
+            border-top-right-radius: var(--components-indexTable-border-radius);
+        }
+    }
+}
+
+@mixin responsiveCardList {
+    display: flex;
+    flex-direction: column;
+    gap: var(--components-indexTable-row-spacing);
+    padding: var(--components-indexTable-cell-padding);
+
+    .indexTable-head {
+        display: none;
+    }
+
+    .indexTable-body {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .indexTable-body-row,
+    .indexTable-foot-row {
+        position: relative;
+        display: grid;
+        // Grid layout by default is a basic one column template.
+        // The user can override this and build a specific layout by using --components-indexTable-row-responsive-grid-template-columns, --components-indexTable-row-responsive-grid-template-rows and --components-indexTable-row-responsive-grid-template-areas
+        grid-template-columns: var(--components-indexTable-row-responsive-grid-template-columns, 1fr);
+        grid-template-rows: var(--components-indexTable-row-responsive-grid-template-rows, none);
+        grid-auto-rows: auto;
+        grid-template-areas: var(--components-indexTable-row-responsive-grid-template-areas, none);
+        align-items: center;
+        padding: var(--components-indexTable-row-spacing-responsive) 0;
+        margin-bottom: var(--components-indexTable-row-spacing-responsive);
+        // "Title" lines that do not contain "card" cells are smaller
+        &:not(:has(.indexTable-body-row-cell)) {
+            padding: 0;
+            margin-bottom: 0;
+        }
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+
+    // checkbox, title and subtotal need to stay on the same row
+    .indexTable-body-row-transparentCell {
+        grid-row: 1;
+    }
+
+    // We only need one ::before for the card apparence and one ::after for the possible outline
+    .indexTable-body-row-cell {
+        position: static;
+        grid-column-start: 1;
+        padding-top: 0;
+        padding-bottom: 0;
+
+        &::before {
+            --components-indexTable-cell-border-radius-left: var(--components-indexTable-cell-border-radius);
+            --components-indexTable-cell-border-radius-right: var(--components-indexTable-cell-border-radius);
+        }
+        &::after {
+            --components-indexTable-outline-border-width-left: var(--components-indexTable-outline-border-width);
+            --components-indexTable-outline-border-width-right: var(--components-indexTable-outline-border-width);
+            --components-indexTable-outline-border-radius-left: var(--components-indexTable-outline-border-radius);
+            --components-indexTable-outline-border-radius-right: var(--components-indexTable-outline-border-radius);
+        }
+        ~ .indexTable-body-row-cell {
+            &::before,
+            &::after {
+                display: none;
+            }
+        }
+    }
+
+    .indexTable-body-row-cell-content[data-label] {
+        display: flex;
+        flex-direction: column;
+        margin-top: var(--spacings-XXS);
+        &::before {
+            content: attr(data-label);
+            font-weight: 600;
+        }
+    }
+
+    .indexTable-head-row-cell-checkbox,
+    .indexTable-body-row-cell-checkbox {
+        margin-top: 0;
+    }
+}
+
+@mixin selectableResponsiveCardList {
+    .indexTable-body-row {
+        grid-template-columns: var(--components-indexTable-row-cell-transparent-width) var(--components-indexTable-row-responsive-grid-template-columns, 1fr);
+    }
+    .indexTable-body-row-transparentCell {
+        width: auto;
+        // we add a padding-left to keep a correct indent between lvl 1 and lvl 2 titles in nested tables. * .75 is just for cosmetic
+        &:first-child[colspan='2'] + .indexTable-body-row-transparentCell {
+            padding-left: calc(var(--components-indexTable-row-cell-transparent-width) * 0.75);
+        }
+    }
+    .indexTable-body-row-cell {
+        --components-indexTable-cell-inset-x-left: var(--components-indexTable-row-cell-transparent-width);
+        grid-column-start: 2;
+    }
+}
+
+@mixin selectableStackableResponsiveCardList {
+    .indexTable-body-row {
+        --components-indexTable-cell-inset-x-left: var(--components-indexTable-row-cell-transparent-width);
+    }
+}
+
+// The stack apparence is put on the row instead of the cells
+@mixin stackableResponsiveCardList {
+    .indexTable-body-row[class*='mod-stack'] {
+        border: 0;
+        border-bottom-width: var(--components-indexTable-row-stack-border-bottom);
+        border-style: solid;
+        border-color: transparent;
+        &::before,
+        &::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: calc((var(--components-indexTable-row-spacing-responsive) + var(--components-indexTable-stack3-row-spacing)) * -1);
+            background-image: var(--components-indexTable-row-stack2-background-image, none), var(--components-indexTable-row-stack3-background-image, none);
+            background-position: var(--components-indexTable-row-stack2-background-position, 0 0), var(--components-indexTable-row-stack3-background-position, 0 0);
+            background-repeat: no-repeat, no-repeat;
+            transition-property: background-image, background-position;
+            transition-duration: var(--commons-animations-durations-fast);
+        }
+        &::before {
+            left: var(--components-indexTable-cell-inset-x-left, 0);
+            right: 50%;
+            --components-indexTable-row-stack2-background-position: left -2px bottom 6px;
+            --components-indexTable-row-stack3-background-position: left 1px bottom 2px;
+        }
+        &::after {
+            left: 50%;
+            right: 0;
+            --components-indexTable-row-stack2-background-position: right -2px bottom 6px;
+            --components-indexTable-row-stack3-background-position: right 1px bottom 2px;
+        }
+    }
+    .indexTable-body-row-cell {
+        border-bottom: 0;
+        background-image: none;
+    }
+}
+
+@mixin actions {
+    // ~ equivalent to width: min-content for a table-cell but prevent line-break;
+    width: 1%;
+    padding: var(--spacings-XXS);
+    white-space: nowrap;
+
+    .button {
+        @include button.S;
+        @include button.text;
+        @include button.onlyIconS;
+    }
+
+    // All devices expect touch ones : subActions are hidden and appears when their row is hover or selected
+    // see mixin visibleSubActions() in states.scss
+    @include media.isNotTouchDevice {
+        .indexTable-body-row-cell-subAction {
+            opacity: var(--components-indexTable-cell-subAction-opacity, 0);
+            transition: opacity ease var(--commons-animations-durations-fast);
+        }
+
+        //If there are 4 actions or more, the buttons are hidden (not on touch device) and replaced should be replaced with a dropdown
+        &:has(.indexTable-body-row-cell-subActionDropdownTrigger) {
+            .indexTable-body-row-cell-subAction {
+                display: none;
+            }
+        }
+    }
+
+    // All touch devices : subActions are always visibles, subActionDropdownTrigger is hidden
+    @include media.isTouchDevice {
+        .indexTable-body-row-cell-subActionDropdownTrigger {
+            display: none;
+        }
+    }
+}
+
+@mixin layoutFixed {
+    table-layout: fixed;
+
+    [class*='row-cell'] {
+        --cell-width: calc(var(--components-indexTable-cell-fixed-width, var(--components-index-table-cell-fixed-width)) * 1rem);
+    }
+
+    &.mod-layoutFixed [class*='row-cell'] {
+        @include cellFixedWidth;
+    }
+
+    //Layout fixed at breakpoint
+    @each $breakpoint, $value in config.$breakpoints {
+        @include media.min($breakpoint) {
+            &.mod-layoutFixedAtMediaMin#{$breakpoint} {
+                table-layout: fixed;
+                [class*='row-cell'] {
+                    @include cellFixedWidth;
+                }
+            }
+        }
+    }
+}
+
+@mixin cellFixedWidth {
+    min-width: var(--cell-width, auto);
+    max-width: var(--cell-width, auto);
+    width: var(--cell-width, auto);
+}
+
+@mixin massSelection {
+    .indexTable-head-row-cell {
+        padding: 0;
+    }
+    .indexTable-head-row-cell-massSelection {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: var(--spacings-XS);
+        padding: var(--spacings-XXS);
+        border-radius: var(--commons-borderRadius-L);
+        font-size: var(--sizes-S-fontSize);
+        line-height: var(--sizes-S-line-height);
+        color: var(--palettes-grey-800);
+        background-color: var(--pr-t-elevation-surface-default);
+        .button {
+            @include button.text;
+            @include button.S;
+        }
+    }
+}

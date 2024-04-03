@@ -1,10 +1,12 @@
 import { Directive, HostListener, inject, Input, TemplateRef } from '@angular/core';
 import { LuDialogService } from '../dialog.service';
 import { LuDialogConfig } from '../model';
+import { provideLuDialog } from '../dialog.providers';
 
 @Directive({
 	selector: '[luDialogOpen]',
 	standalone: true,
+	providers: [provideLuDialog()],
 })
 export class DialogOpenDirective {
 	#dialogService = inject(LuDialogService);

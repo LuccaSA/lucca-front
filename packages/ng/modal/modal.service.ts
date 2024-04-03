@@ -4,7 +4,7 @@ import { LuModalConfig } from './modal-config.model';
 import { ILuModalRef } from './modal-ref.model';
 import { ILuModalContent, LuModalContentResult } from './modal.model';
 import { LU_MODAL_CONFIG, LU_MODAL_REF_FACTORY } from './modal.token';
-import { LuDialogService } from '@lucca-front/ng/dialog';
+import { LuDialogConfig, LuDialogService } from '@lucca-front/ng/dialog';
 import { DialogRefAdapter } from './dialog-adapter/dialog-ref-adapter';
 import { DialogContentAdapterComponent } from './dialog-adapter/dialog-content-adapter/dialog-content-adapter.component';
 
@@ -16,6 +16,7 @@ export class LuModal {
 
 	open<T extends ILuModalContent, D>(component: ComponentType<T>, data: D = undefined, config: Partial<LuModalConfig> = {}): ILuModalRef<D, LuModalContentResult<T>> {
 		const extendedConfig = { ...this._config, ...config } as LuModalConfig;
+		const mode = extendedConfig.mode === 'sidepanel' ? 'drawer' : 'default';
 		const dialogRef = this.luDialogService.open({
 			content: DialogContentAdapterComponent<D, T>,
 			data: {
@@ -24,6 +25,9 @@ export class LuModal {
 			},
 			modal: !extendedConfig.noBackdrop,
 			alert: extendedConfig.undismissable,
+			size: extendedConfig.size as LuDialogConfig<unknown>['size'],
+			mode,
+			panelClasses: Array.isArray(extendedConfig.panelClass) ? extendedConfig.panelClass : [extendedConfig.panelClass],
 		});
 		return new DialogRefAdapter<D, T>(dialogRef);
 	}

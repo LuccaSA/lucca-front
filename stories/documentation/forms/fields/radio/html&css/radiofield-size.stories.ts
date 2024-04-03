@@ -9,11 +9,11 @@ export default {
 
 function getTemplate(args: RadioSizeStory): string {
 	return `
-<fieldset class="form-fieldset">
+<fieldset class="form-fieldset mod-S">
 	<legend class="formLabel">
 		Text<sup class="formLabel-required" aria-hidden="true">*</sup>
 	</legend>
-	<div class="form-field mod-S">
+	<div class="form-field">
 		<label class="formLabel" for="IDradioA">Label A</label>
 		<span class="radioField">
 			<input type="radio" class="radioField-input" id="IDradioA" name="radioName1" aria-describedby="IDmessageRadioA" checked />
@@ -21,7 +21,7 @@ function getTemplate(args: RadioSizeStory): string {
 		</span>
 		<div class="inlineMessage" id="IDmessageRadioA">Helper text</div>
 	</div>
-	<div class="form-field mod-S">
+	<div class="form-field">
 		<label class="formLabel" for="IDradioB">Label B</label>
 		<span class="radioField">
 			<input type="radio" class="radioField-input" id="IDradioB" name="radioName1" aria-describedby="IDmessageRadioB" />

@@ -9,13 +9,13 @@ import { LuCoreSelectJobQualificationsDirective } from '@lucca-front/ng/core-sel
 import { LuCoreSelectUsersDirective } from '@lucca-front/ng/core-select/user';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 import { LuUserDisplayPipe } from '@lucca-front/ng/user';
-import { Meta, applicationConfig, moduleMetadata } from '@storybook/angular';
+import { applicationConfig, Meta, moduleMetadata } from '@storybook/angular';
 import { HiddenArgType } from 'stories/helpers/common-arg-types';
 import { getStoryGenerator, useDocumentationStory } from 'stories/helpers/stories';
 import { provideCoreSelectCurrentUserId } from '../../../../packages/ng/core-select/user/me.provider';
 import { LuCoreSelectCustomEstablishmentsDirective } from './custom-establishment-example.component';
 import { LuCoreSelectCustomUsersDirective } from './custom-user-example.component';
-import { ILegume, LuCoreSelectInputStoryComponent, allLegumes, colorNameByColor, coreSelectStory } from './select.utils';
+import { allLegumes, colorNameByColor, coreSelectStory, ILegume, LuCoreSelectInputStoryComponent } from './select.utils';
 
 export type LuSimpleSelectInputStoryComponent = LuCoreSelectInputStoryComponent & {
 	selectedLegume: ILegume | null;
@@ -39,7 +39,6 @@ export const Basic = generateStory({
 		[options]="legumes | filterLegumes:clue"
 		(clueChange)="clue = $event"
 		[clearable]="clearable"
-		[disabled]="disabled"
 		[loading]="loading"
 		[(ngModel)]="selectedLegume"
 	>
@@ -53,7 +52,6 @@ export const Basic = generateStory({
 	storyPartial: {
 		argTypes: {
 			clearable: { control: { type: 'boolean' } },
-			disabled: { control: { type: 'boolean' } },
 			placeholder: { control: { type: 'text' } },
 		},
 	},
@@ -385,7 +383,6 @@ const meta: Meta<LuSimpleSelectInputStoryComponent> = {
 		placeholder: 'Placeholder...',
 		legumes: allLegumes,
 		clearable: true,
-		disabled: false,
 		loading: false,
 		page: 1,
 	},

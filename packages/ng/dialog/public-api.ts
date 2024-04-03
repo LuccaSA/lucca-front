@@ -1,5 +1,5 @@
 export * from './model';
-export * from './dialog.provider';
+export * from './dialog.providers';
 export * from './dialog.service';
 export * from './dialog/dialog.component';
 export * from './dialog-header/dialog-header.component';

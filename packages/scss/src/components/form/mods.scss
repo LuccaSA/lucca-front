@@ -63,7 +63,7 @@
 @mixin checkable {
 	display: grid;
 	grid-template-columns: auto 1fr;
-	gap: 0 var(--spacings-XS);
+	gap: 0 var(--pr-t-spacings-100);
 
 	.radioField,
 	.checkboxField,
@@ -81,7 +81,7 @@
 }
 
 @mixin withArrow {
-	padding-bottom: var(--spacings-S);
+	padding-bottom: var(--pr-t-spacings-200);
 
 	.form-field-arrow {
 		@include box.arrow;
@@ -101,7 +101,7 @@
 }
 
 @mixin withArrowS {
-	padding-bottom: var(--spacings-XS);
+	padding-bottom: var(--pr-t-spacings-100);
 
 	.form-field-arrow {
 		@include box.arrowS;

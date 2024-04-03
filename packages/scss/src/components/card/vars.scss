@@ -1,7 +1,7 @@
 @mixin vars {
 	--components-card-background: var(--pr-t-elevation-surface-raised);
-	--components-card-content-padding: 0.75rem var(--spacings-S);
-	--components-card-footer-padding: var(--spacings-XS) var(--spacings-M);
+	--components-card-content-padding: var(--pr-t-spacings-150) var(--pr-t-spacings-200);
+	--components-card-footer-padding: var(--pr-t-spacings-100) var(--pr-t-spacings-300);
 	--components-card-border-radius: var(--commons-borderRadius-L);
 	--components-card-border-color: var(--commons-divider-color);
 	--components-card-hover-border: var(--palettes-neutral-400);

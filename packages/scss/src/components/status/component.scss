@@ -6,11 +6,11 @@
 	@at-root ($atRoot) {
 		.status-dot {
 			aspect-ratio: 1;
-			width: var(--spacings-XS);
+			width: var(--pr-t-spacings-100);
 			border-radius: var(--commons-borderRadius-full);
 			background-color: currentColor;
-			margin: calc(var(--spacings-XXS) / 2);
-			margin-right: var(--spacings-XS);
+			margin: calc(var(--pr-t-spacings-50) / 2);
+			margin-right: var(--pr-t-spacings-100);
 			position: relative;
 			z-index: 1;
 			display: inline-flex;

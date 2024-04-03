@@ -7,7 +7,7 @@ export default {
 } as Meta;
 
 function getTemplate(args: ButtonPaletteStory): string {
-	return `<div class="u-displayFlex u-gapXS u-alignItemsCenter">
+	return `<div class="u-displayFlex pr-u-gap100 u-alignItemsCenter">
 	<button type="button" class="button palette-success">Button</button>
 	<button type="button" class="button palette-warning">Button</button>
 	<button type="button" class="button palette-error">Button</button>

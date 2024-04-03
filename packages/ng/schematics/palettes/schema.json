@@ -1,0 +1,7 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema",
+	"$id": "LuccaFrontPalettes",
+	"title": "Lucca Front Palettes Schema",
+	"type": "object",
+	"properties": {}
+}

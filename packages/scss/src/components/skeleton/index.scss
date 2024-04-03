@@ -3,6 +3,7 @@
 .skeleton {
 	@include vars;
 	@include component;
+
 	// .mod-dark can be applied to .skeleton or .skeleton-item
 	&.mod-dark {
 		@include dark;
@@ -10,16 +11,39 @@
 
 	&.is-loading {
 		@include loading;
+
 		.skeleton-item {
 			// .mod-dark can be applied to .skeleton or .skeleton-item
 			&.mod-dark {
 				@include dark;
 			}
+
 			&.mod-square {
 				@include square;
 			}
+
 			&.mod-circle {
 				@include circle;
+			}
+
+			&.mod-XS {
+				@include XS;
+			}
+
+			&.mod-S {
+				@include S;
+			}
+
+			&.mod-L {
+				@include L;
+			}
+
+			&.mod-XL {
+				@include XL;
+			}
+
+			&.mod-XXL {
+				@include XXL;
 			}
 		}
 	}

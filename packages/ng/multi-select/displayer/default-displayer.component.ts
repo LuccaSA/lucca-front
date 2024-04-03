@@ -6,9 +6,10 @@ import { getIntl } from '@lucca-front/ng/core';
 import { ILuOptionContext, LU_OPTION_CONTEXT, ɵLuOptionOutletDirective } from '@lucca-front/ng/core-select';
 import { InputDirective } from '@lucca-front/ng/form-field';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
-import { map } from 'rxjs/operators';
+import { map, switchMap } from 'rxjs/operators';
 import { LuMultiSelectInputComponent } from '../input/select-input.component';
 import { LU_MULTI_SELECT_DISPLAYER_TRANSLATIONS } from './default-displayer.translate';
+import { of } from 'rxjs';
 
 @Component({
 	selector: 'lu-multi-select-default-displayer',
@@ -22,7 +23,7 @@ import { LU_MULTI_SELECT_DISPLAYER_TRANSLATIONS } from './default-displayer.tran
 				[attr.aria-expanded]="select.isPanelOpen"
 				[attr.aria-activedescendant]="select.activeDescendant$ | async"
 				[attr.aria-controls]="ariaControls"
-				[disabled]="select.disabled"
+				[disabled]="select.disabled$ | async"
 				[readonly]="!select.searchable"
 				#inputElement
 				ngModel
@@ -33,9 +34,9 @@ import { LU_MULTI_SELECT_DISPLAYER_TRANSLATIONS } from './default-displayer.tran
 				aria-haspopup="listbox"
 				luInput
 			/>
-			<div *ngFor="let option of displayedOptions$ | async; let index = index" class="multipleSelect-displayer-chip chip" [class.mod-unkillable]="disabled">
+			<div *ngFor="let option of displayedOptions$ | async; let index = index" class="multipleSelect-displayer-chip chip" [class.mod-unkillable]="select.disabled$ | async">
 				<span class="multipleSelect-displayer-chip-value"><ng-container *luOptionOutlet="select.valueTpl || select.optionTpl; value: option"></ng-container></span>
-				<button *ngIf="!disabled" type="button" class="chip-kill" (click)="unselectOption(option, $event)">
+				<button *ngIf="!(select.disabled$ | async)" type="button" class="chip-kill" (click)="unselectOption(option, $event)">
 					<span class="u-mask">{{ intl.removeOption }}</span>
 				</button>
 			</div>
@@ -54,10 +55,6 @@ export class LuMultiSelectDefaultDisplayerComponent<T> implements OnInit {
 	@ViewChild('inputElement')
 	inputElementRef: ElementRef<HTMLInputElement>;
 
-	get disabled() {
-		return this.select.disabled;
-	}
-
 	get value(): T[] {
 		return this.select.value || [];
 	}
@@ -69,11 +66,11 @@ export class LuMultiSelectDefaultDisplayerComponent<T> implements OnInit {
 	context = inject<ILuOptionContext<T[]>>(LU_OPTION_CONTEXT);
 
 	placeholder$ = this.context.option$.pipe(
-		map((options) => {
+		switchMap((options) => {
 			if ((options || []).length > 0) {
-				return '';
+				return of('');
 			}
-			return this.select.placeholder;
+			return this.select.placeholder$;
 		}),
 	);
 
@@ -113,6 +110,7 @@ export class LuMultiSelectDefaultDisplayerComponent<T> implements OnInit {
 			this.select.panelRef?.updateSelectedOptions(this.value);
 		}
 	}
+
 	ngOnInit(): void {
 		this.select.focusInput$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((data?: { keepClue: true }) => {
 			// Everytime we want to focus, we need to reset the input

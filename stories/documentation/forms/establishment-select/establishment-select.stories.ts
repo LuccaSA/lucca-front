@@ -8,7 +8,7 @@ import { Meta, StoryFn, applicationConfig } from '@storybook/angular';
 	standalone: true,
 	imports: [LuEstablishmentSelectInputComponent],
 	template: `
-		<label class="textfield mod-inline u-marginRightS">
+		<label class="textfield mod-inline pr-u-marginRight200">
 			<lu-establishment-select class="textfield-input" placeholder="Select an establishment" data-testid="lu-select"></lu-establishment-select>
 			<span class="textfield-label">Establishment Select</span>
 		</label>

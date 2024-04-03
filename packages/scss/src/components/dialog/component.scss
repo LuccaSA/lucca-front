@@ -34,6 +34,8 @@
 	}
 
 	@at-root ($atRoot) {
+		// .dialog-form is deprecated
+		.dialog-formOptionnal,
 		.dialog-form,
 		.dialog-inside {
 			display: flex;
@@ -42,29 +44,35 @@
 		}
 
 		.dialog-inside-header {
-			padding: var(--spacings-S) var(--spacings-M);
+			padding: var(--pr-t-spacings-200) var(--pr-t-spacings-300);
 			background-color: var(--colors-white-color);
 			grid-template-areas: var(--components-dialog-insideHeaderAreas);
 			grid-template-columns: var(--components-dialog-insideHeaderColumns);
 			box-shadow: 0 1px 0 0 var(--palettes-neutral-100);
-			gap: var(--spacings-S);
+			gap: var(--pr-t-spacings-200);
 			position: sticky;
+			z-index: 1;
 			display: grid;
 			top: 0;
 		}
 
 		.dialog-inside-content {
-			padding: var(--spacings-S) var(--spacings-M);
+			padding: var(--pr-t-spacings-200) var(--pr-t-spacings-300);
 			flex-grow: 1;
+			position: relative;
+			z-index: 0;
 		}
 
-		.dialog-inside-header-title {
+		.dialog-inside-header-container {
+			grid-area: container;
+		}
+
+		.dialog-inside-header-container-title {
 			@include title.h2;
 
 			padding: var(--components-dialog-insideHeaderTitlePadding);
 			text-align: var(--components-dialog-insideHeaderTitleAlign);
 			margin: 0;
-			grid-area: title;
 		}
 
 		.dialog-inside-footer {

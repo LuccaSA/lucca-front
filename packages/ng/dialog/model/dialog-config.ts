@@ -13,11 +13,8 @@ export type LuDialogData<T> = {
 	[K in keyof T]: T[K] extends ɵDialogDataFlag ? Omit<T[K], typeof ɵdialogData> : never;
 }[keyof T];
 
-export type LuDialogResult<C> = keyof C extends never
-	? void
-	: {
-			[K in keyof C]: C[K] extends ɵDialogResultFlag<infer R> ? R : void;
-	  }[keyof C];
+type DialogRefProps<C> = { [K in keyof C]: C[K] extends ɵDialogResultFlag<unknown> ? K : never }[keyof C] & keyof C;
+export type LuDialogResult<C> = DialogRefProps<C> extends never ? void : C[DialogRefProps<C>] extends ɵDialogResultFlag<infer T> ? T : void;
 
 interface BaseLuDialogConfig<C> {
 	/**
@@ -72,9 +69,20 @@ interface BaseLuDialogConfig<C> {
 	 */
 	canClose?: (comp: C) => boolean | Observable<boolean>;
 
+	/**
+	 * The size of the panel used for the dialog
+	 */
 	size?: 'XS' | 'S' | 'M' | 'L' | 'XL' | 'fitContent' | `maxContent` | 'fullScreen';
 
+	/**
+	 * Should it be a modal (default), a drawer? a drawer from bottom?
+	 */
 	mode?: 'default' | 'drawer' | 'drawer-from-bottom';
+
+	/**
+	 * Classes to add to the panel
+	 */
+	panelClasses?: string[];
 }
 
 export type LuDialogConfig<T> = LuDialogData<T> extends never ? Omit<BaseLuDialogConfig<T>, 'data'> : BaseLuDialogConfig<T>;

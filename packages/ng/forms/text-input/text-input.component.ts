@@ -10,7 +10,7 @@ import { getIntl } from '@lucca-front/ng/core';
 import { LU_TEXTFIELD_TRANSLATIONS } from './text-input.translate';
 import { injectNgControl } from '../inject-ng-control';
 
-type TextFieldType = 'text' | 'email' | 'password' | 'number';
+type TextFieldType = 'text' | 'email' | 'password';
 
 @Component({
 	selector: 'lu-text-input',
@@ -24,7 +24,7 @@ export class TextInputComponent {
 	ngControl = injectNgControl();
 
 	@Input()
-	placeholder: string;
+	placeholder: string = '';
 
 	@Input({ transform: booleanAttribute })
 	hasClearer = false;

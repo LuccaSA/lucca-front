@@ -1,12 +1,14 @@
 /* eslint-disable @angular-eslint/no-output-on-prefix */
 import { OverlayConfig, OverlayContainer } from '@angular/cdk/overlay';
 import {
+	booleanAttribute,
 	ChangeDetectorRef,
 	Directive,
 	ElementRef,
 	EventEmitter,
 	HostBinding,
 	HostListener,
+	inject,
 	Input,
 	OnDestroy,
 	OnInit,
@@ -14,20 +16,26 @@ import {
 	TemplateRef,
 	Type,
 	ViewChild,
-	booleanAttribute,
-	inject,
 } from '@angular/core';
 import { BehaviorSubject, ReplaySubject, Subject } from 'rxjs';
 import { LuOptionGrouping, LuSimpleSelectDefaultOptionComponent } from '../option';
 import { LuSelectPanelRef } from '../panel';
 import { LuOptionContext, SELECT_LABEL, SELECT_LABEL_ID } from '../select.model';
+import { ControlValueAccessor } from '@angular/forms';
 
 @Directive()
-export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDestroy, OnInit {
+export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDestroy, OnInit, ControlValueAccessor {
 	@ViewChild('inputElement')
 	private inputElementRef: ElementRef<HTMLInputElement>;
 
-	@Input() placeholder = '';
+	public placeholder$ = new BehaviorSubject('');
+
+	public disabled$ = new BehaviorSubject(false);
+
+	@Input()
+	set placeholder(value: string) {
+		this.placeholder$.next(value);
+	}
 
 	@Input({ transform: booleanAttribute })
 	@HostBinding('class.is-clearable')
@@ -36,9 +44,6 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	get searchable(): boolean {
 		return this.clueChange.observed;
 	}
-
-	@Input({ transform: booleanAttribute })
-	disabled = false;
 
 	@HostBinding('class.is-selected')
 	protected get isSelectedClass(): boolean {
@@ -78,6 +83,13 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 
 	@Input() set options(options: TOption[]) {
 		this.options$.next(options);
+		if (this.panelRef) {
+			// We have to put it in a setTimeout so it'll be triggered AFTER the DOM is updated and not right now,
+			// which is before the panel size has been modified by the arrival of the new options
+			setTimeout(() => {
+				this.panelRef.updatePosition();
+			});
+		}
 	}
 
 	@Input() optionComparer: (option1: TOption, option2: TOption) => boolean = (option1, option2) => JSON.stringify(option1) === JSON.stringify(option2);
@@ -99,7 +111,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	}
 
 	public get inputPlaceholder(): string | null {
-		return this.value ? null : this.placeholder;
+		return this.value ? null : this.placeholder$.value;
 	}
 
 	public clueChanged(clue: string): void {
@@ -183,7 +195,8 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	}
 
 	setDisabledState(isDisabled: boolean): void {
-		this.disabled = isDisabled;
+		this.disabled$.next(isDisabled);
+		this.changeDetectorRef.markForCheck();
 	}
 
 	ngOnDestroy(): void {
@@ -205,7 +218,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	}
 
 	openPanel(clue: string = ''): void {
-		if (this.isPanelOpen || this.disabled) {
+		if (this.isPanelOpen || this.disabled$.value) {
 			return;
 		}
 

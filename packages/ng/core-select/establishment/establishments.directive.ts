@@ -79,7 +79,7 @@ export class LuCoreSelectEstablishmentsDirective<T extends LuCoreSelectEstablish
 	]).pipe(
 		map(([filters, clue, operationIds, appInstanceId]) => ({
 			...filters,
-			...(clue ? { clue: sanitizeClueFilter(clue) } : {}),
+			...(clue ? { search: sanitizeClueFilter(clue) } : {}),
 			...(operationIds ? { operationIds: operationIds.join(',') } : {}),
 			...(appInstanceId ? { appInstanceId } : {}),
 		})),

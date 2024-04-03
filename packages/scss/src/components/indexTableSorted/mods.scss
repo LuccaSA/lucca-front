@@ -1,0 +1,17 @@
+@use '@lucca-front/scss/src/components/tableSorted/mods' as tableSorted;
+
+@mixin sortable {
+	@include tableSorted.sortable;
+}
+
+@mixin sortableS {
+	@include tableSorted.sortableS;
+}
+
+@mixin sortableAlignCenter {
+	@include tableSorted.sortableAlignCenter;
+}
+
+@mixin sortableAlignRight {
+	@include tableSorted.sortableAlignRight;
+}

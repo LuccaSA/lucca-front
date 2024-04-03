@@ -1,11 +1,11 @@
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { allLegumes, FilterLegumesPipe } from '@/stories/forms/select/select.utils';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LuOptionDirective } from '@lucca-front/ng/core-select';
-import { allLegumes, FilterLegumesPipe } from '@/stories/forms/select/select.utils';
-import { HiddenArgType } from '../../../../../helpers/common-arg-types';
-import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
+import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { HiddenArgType } from '../../../../../helpers/common-arg-types';
 import { generateInputs } from '../../../../../helpers/stories';
 
 export default {
@@ -58,7 +58,7 @@ export const Basic: StoryObj<LuSimpleSelectInputComponent<unknown> & FormFieldCo
 				},
 				argTypes,
 			)}>
-	<lu-simple-select	${generateInputs(inputArgs, argTypes)}
+	<lu-simple-select required	${generateInputs(inputArgs, argTypes)}
 		[options]="legumes | filterLegumes:clue"
 		(clueChange)="clue = $event"
 		[(ngModel)]="example">
@@ -79,7 +79,6 @@ export const Basic: StoryObj<LuSimpleSelectInputComponent<unknown> & FormFieldCo
 		required: false,
 		placeholder: 'Placeholder',
 		clearable: true,
-		disabled: false,
 		inlineMessage: 'Helper Text',
 		inlineMessageState: 'default',
 		loading: false,
