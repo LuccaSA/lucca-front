@@ -32,10 +32,6 @@ const Template: StoryFn<GridsPositionStory> = (args) => ({
 			align-items: center;
 			justify-content: center;
 		}
-
-		.grid + .grid {
-			margin-top: var(--pr-t-spacings-400);
-		}
 		`,
 	],
 });
