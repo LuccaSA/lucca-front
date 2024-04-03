@@ -1,0 +1,48 @@
+@use '@lucca-front/scss/src/components/tableSorted/exports' as tableSorted;
+@use 'exports' as *;
+
+.indexTable-head-row-cell {
+	&.mod-sortable,
+	.indexTable-head-row-cell-sortableButton {
+		@include tableSorted.sortable;
+
+		.indexTable.mod-S & {
+			@include tableSorted.sortableS;
+		}
+	}
+
+	.indexTable-head-row-cell-sortableButton:is(button) {
+		display: flex;
+		align-items: center;
+	}
+
+	&:is([aria-sort='descending']) {
+		@include descending;
+	}
+
+	&:is([aria-sort='ascending']) {
+		@include ascending;
+	}
+
+	&.mod-alignCenter {
+		&.mod-sortable,
+		.indexTable-head-row-cell-sortableButton {
+			@include tableSorted.sortableAlignCenter;
+		}
+	}
+
+	&.mod-alignRight {
+		&.mod-sortable,
+		.indexTable-head-row-cell-sortableButton {
+			@include tableSorted.sortableAlignRight;
+		}
+
+		&:is([aria-sort='descending']) {
+			@include descendingAlignRight;
+		}
+
+		&:is([aria-sort='ascending']) {
+			@include ascendingAlignRight;
+		}
+	}
+}
