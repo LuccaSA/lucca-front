@@ -249,6 +249,12 @@
     padding: var(--spacings-XXS);
     white-space: nowrap;
 
+    .button {
+        @include button.S;
+        @include button.text;
+        @include button.onlyIconS;
+    }
+
     // All devices expect touch ones : subActions are hidden and appears when their row is hover or selected
     // see mixin visibleSubActions() in states.scss
     @include media.isNotTouchDevice {

@@ -34,10 +34,10 @@ function getTemplate(args: IndexTableActionsStory): string {
 				<td class="indexTable-body-row-cell">Content</td>
 				<td class="indexTable-body-row-cell">Content</td>
 				<td class="indexTable-body-row-cell mod-actions">
-					<button type="button" class="button mod-text indexTable-body-row-cell-subAction mod-onlyIcon mod-S">
+					<button type="button" class="button indexTable-body-row-cell-subAction">
 						<span aria-hidden="true" class="lucca-icon icon-officePen"></span>
 					</button>
-					<button type="button" class="button mod-text indexTable-body-row-cell-subAction mod-onlyIcon mod-S">
+					<button type="button" class="button indexTable-body-row-cell-subAction">
 						<span aria-hidden="true" class="lucca-icon icon-trashDelete"></span>
 					</button>
 				</td>
@@ -50,10 +50,10 @@ function getTemplate(args: IndexTableActionsStory): string {
 				<td class="indexTable-body-row-cell">Content</td>
 				<td class="indexTable-body-row-cell">Content</td>
 				<td class="indexTable-body-row-cell mod-actions">
-					<button type="button" class="button mod-text indexTable-body-row-cell-subAction mod-onlyIcon mod-S">
+					<button type="button" class="button indexTable-body-row-cell-subAction">
 						<span aria-hidden="true" class="lucca-icon icon-officePen"></span>
 					</button>
-					<button type="button" class="button mod-text indexTable-body-row-cell-subAction mod-onlyIcon mod-S">
+					<button type="button" class="button indexTable-body-row-cell-subAction">
 						<span aria-hidden="true" class="lucca-icon icon-trashDelete"></span>
 					</button>
 				</td>
@@ -66,10 +66,10 @@ function getTemplate(args: IndexTableActionsStory): string {
 				<td class="indexTable-body-row-cell">Content</td>
 				<td class="indexTable-body-row-cell">Content</td>
 				<td class="indexTable-body-row-cell mod-actions">
-					<button type="button" class="button mod-text indexTable-body-row-cell-subAction mod-onlyIcon mod-S">
+					<button type="button" class="button indexTable-body-row-cell-subAction">
 						<span aria-hidden="true" class="lucca-icon icon-officePen"></span>
 					</button>
-					<button type="button" class="button mod-text indexTable-body-row-cell-subAction mod-onlyIcon mod-S">
+					<button type="button" class="button indexTable-body-row-cell-subAction">
 						<span aria-hidden="true" class="lucca-icon icon-trashDelete"></span>
 					</button>
 				</td>
@@ -97,16 +97,16 @@ function getTemplate(args: IndexTableActionsStory): string {
 				<td class="indexTable-body-row-cell">Content</td>
 				<td class="indexTable-body-row-cell">Content</td>
 				<td class="indexTable-body-row-cell mod-actions">
-					<button type="button" class="button mod-text indexTable-body-row-cell-subAction mod-onlyIcon mod-S">
+					<button type="button" class="button indexTable-body-row-cell-subAction">
 						<span aria-hidden="true" class="lucca-icon icon-officePen"></span>
 					</button>
-					<button type="button" class="button mod-text indexTable-body-row-cell-subAction mod-onlyIcon mod-S">
+					<button type="button" class="button indexTable-body-row-cell-subAction">
 						<span aria-hidden="true" class="lucca-icon icon-copy"></span>
 					</button>
-					<button type="button" class="button mod-text indexTable-body-row-cell-subAction mod-onlyIcon mod-S">
+					<button type="button" class="button indexTable-body-row-cell-subAction">
 						<span aria-hidden="true" class="lucca-icon icon-archive"></span>
 					</button>
-					<button type="button" class="button mod-text indexTable-body-row-cell-subAction mod-onlyIcon mod-S">
+					<button type="button" class="button indexTable-body-row-cell-subAction">
 						<span aria-hidden="true" class="lucca-icon icon-trashDelete"></span>
 					</button>
 					<!-- Implement dropdown on this button clic-->
@@ -123,20 +123,20 @@ function getTemplate(args: IndexTableActionsStory): string {
 				<td class="indexTable-body-row-cell">Content</td>
 				<td class="indexTable-body-row-cell">Content</td>
 				<td class="indexTable-body-row-cell mod-actions">
-					<button type="button" class="button mod-text indexTable-body-row-cell-subAction mod-onlyIcon mod-S">
+					<button type="button" class="button indexTable-body-row-cell-subAction">
 						<span aria-hidden="true" class="lucca-icon icon-officePen"></span>
 					</button>
-					<button type="button" class="button mod-text indexTable-body-row-cell-subAction mod-onlyIcon mod-S">
+					<button type="button" class="button indexTable-body-row-cell-subAction">
 						<span aria-hidden="true" class="lucca-icon icon-copy"></span>
 					</button>
-					<button type="button" class="button mod-text indexTable-body-row-cell-subAction mod-onlyIcon mod-S">
+					<button type="button" class="button indexTable-body-row-cell-subAction">
 						<span aria-hidden="true" class="lucca-icon icon-archive"></span>
 					</button>
-					<button type="button" class="button mod-text indexTable-body-row-cell-subAction mod-onlyIcon mod-S">
+					<button type="button" class="button indexTable-body-row-cell-subAction">
 						<span aria-hidden="true" class="lucca-icon icon-trashDelete"></span>
 					</button>
 					<!-- Implement dropdown on this button clic-->
-					<button type="button" class="button mod-text mod-onlyIcon mod-S indexTable-body-row-cell-subActionDropdownTrigger">
+					<button type="button" class="button indexTable-body-row-cell-subActionDropdownTrigger">
 						<span aria-hidden="true" class="lucca-icon icon-ellipsis"></span>
 					</button>
 				</td>
@@ -149,20 +149,20 @@ function getTemplate(args: IndexTableActionsStory): string {
 				<td class="indexTable-body-row-cell">Content</td>
 				<td class="indexTable-body-row-cell">Content</td>
 				<td class="indexTable-body-row-cell mod-actions">
-					<button type="button" class="button mod-text indexTable-body-row-cell-subAction mod-onlyIcon mod-S">
+					<button type="button" class="button indexTable-body-row-cell-subAction">
 						<span aria-hidden="true" class="lucca-icon icon-officePen"></span>
 					</button>
-					<button type="button" class="button mod-text indexTable-body-row-cell-subAction mod-onlyIcon mod-S">
+					<button type="button" class="button indexTable-body-row-cell-subAction">
 						<span aria-hidden="true" class="lucca-icon icon-copy"></span>
 					</button>
-					<button type="button" class="button mod-text indexTable-body-row-cell-subAction mod-onlyIcon mod-S">
+					<button type="button" class="button indexTable-body-row-cell-subAction">
 						<span aria-hidden="true" class="lucca-icon icon-archive"></span>
 					</button>
-					<button type="button" class="button mod-text indexTable-body-row-cell-subAction mod-onlyIcon mod-S">
+					<button type="button" class="button indexTable-body-row-cell-subAction">
 						<span aria-hidden="true" class="lucca-icon icon-trashDelete"></span>
 					</button>
 					<!-- Implement dropdown on this button clic-->
-					<button type="button" class="button mod-text mod-onlyIcon mod-S indexTable-body-row-cell-subActionDropdownTrigger">
+					<button type="button" class="button indexTable-body-row-cell-subActionDropdownTrigger">
 						<span aria-hidden="true" class="lucca-icon icon-ellipsis"></span>
 					</button>
 				</td>
@@ -205,10 +205,10 @@ function getTemplate(args: IndexTableActionsStory): string {
 				</td>
 				<td class="indexTable-body-row-cell">Content</td>
 				<td class="indexTable-body-row-cell mod-actions">
-					<button type="button" class="button mod-text indexTable-body-row-cell-subAction mod-onlyIcon mod-S">
+					<button type="button" class="button indexTable-body-row-cell-subAction">
 						<span aria-hidden="true" class="lucca-icon icon-officePen"></span>
 					</button>
-					<button type="button" class="button mod-text indexTable-body-row-cell-subAction mod-onlyIcon mod-S">
+					<button type="button" class="button indexTable-body-row-cell-subAction">
 						<span aria-hidden="true" class="lucca-icon icon-trashDelete"></span>
 					</button>
 				</td>
@@ -228,10 +228,10 @@ function getTemplate(args: IndexTableActionsStory): string {
 				</td>
 				<td class="indexTable-body-row-cell">Content</td>
 				<td class="indexTable-body-row-cell mod-actions">
-					<button type="button" class="button mod-text indexTable-body-row-cell-subAction mod-onlyIcon mod-S">
+					<button type="button" class="button indexTable-body-row-cell-subAction">
 						<span aria-hidden="true" class="lucca-icon icon-officePen"></span>
 					</button>
-					<button type="button" class="button mod-text indexTable-body-row-cell-subAction mod-onlyIcon mod-S">
+					<button type="button" class="button indexTable-body-row-cell-subAction">
 						<span aria-hidden="true" class="lucca-icon icon-trashDelete"></span>
 					</button>
 				</td>
@@ -251,10 +251,10 @@ function getTemplate(args: IndexTableActionsStory): string {
 				</td>
 				<td class="indexTable-body-row-cell">Content</td>
 				<td class="indexTable-body-row-cell mod-actions">
-					<button type="button" class="button mod-text indexTable-body-row-cell-subAction mod-onlyIcon mod-S">
+					<button type="button" class="button indexTable-body-row-cell-subAction">
 						<span aria-hidden="true" class="lucca-icon icon-officePen"></span>
 					</button>
-					<button type="button" class="button mod-text indexTable-body-row-cell-subAction mod-onlyIcon mod-S">
+					<button type="button" class="button indexTable-body-row-cell-subAction">
 						<span aria-hidden="true" class="lucca-icon icon-trashDelete"></span>
 					</button>
 				</td>
