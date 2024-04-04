@@ -102,4 +102,9 @@ export class LuSelectPanelComponent<T> implements AfterViewInit {
 				.subscribe(() => this.keyManager.setFirstItemActive());
 		}
 	}
+
+	addOption(clue: string): void {
+		this.selectInput.addOption.emit(clue);
+		this.panelRef.close();
+	}
 }

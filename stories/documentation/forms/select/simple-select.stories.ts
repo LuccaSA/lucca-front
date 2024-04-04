@@ -344,6 +344,32 @@ export const GroupBy = generateStory({
 	},
 });
 
+export const AddOption = generateStory({
+	name: 'Add option',
+	description: "Pour ajouter une option, il suffit de s'abonner à l'output `addOption`. Le label est customisable via l'input `addOptionLabel`.",
+	template: `
+	<div class="u-marginBottomS">There is {{ legumes.length }} legumes in the list.</div>
+
+	<lu-simple-select
+		#selectRef
+		placeholder="Placeholder..."
+		[(ngModel)]="selectedLegume"
+		[options]="legumes | filterLegumes:clue"
+		[addOptionLabel]="'Ajouter ' + clue + ''"
+		(clueChange)="clue = $event"
+		(addOption)="legumes = addLegume($event, legumes); selectedLegume = legumes[legumes.length - 1]"
+	/>
+	`,
+	neededImports: {
+		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent'],
+	},
+	storyPartial: {
+		args: {
+			addLegume: (name: string, existing: ILegume[]) => [...existing, { name, index: existing.length, color: existing[0].color }],
+		},
+	},
+});
+
 const meta: Meta<LuSimpleSelectInputStoryComponent> = {
 	title: 'Documentation/Forms/SimpleSelect',
 	component: LuSimpleSelectInputComponent,

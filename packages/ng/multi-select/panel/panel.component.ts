@@ -141,4 +141,9 @@ export class LuMultiSelectPanelComponent<T> implements AfterViewInit {
 
 		this.keyManager.setFirstItemActive();
 	}
+
+	addOption(clue: string): void {
+		this.selectInput.addOption.emit(clue);
+		this.panelRef.close();
+	}
 }

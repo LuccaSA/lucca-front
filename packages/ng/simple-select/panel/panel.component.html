@@ -4,6 +4,7 @@
 	*ngIf="{
 		options: (options$ | async) || [],
 		groupTemplateLocation: groupTemplateLocation$ | async,
+		clue: clueChange$ | async,
 	} as ctx"
 	[cdkTrapFocusAutoCapture]="true"
 >
@@ -47,9 +48,10 @@
 			<span>{{intl.loading}}</span>
 		</div>
 	</div>
-	<!--<div class="lu-picker-content-add">
-		<button class="button mod-text mod-icon palette-product" type="button">
-			<span aria-hidden="true" class="lucca-icon icon-mathsPlus"></span>Add a new supplier
+	<div class="lu-picker-content-add" *ngIf="selectInput.addOption.observed && ctx.clue">
+		<button class="button mod-text mod-icon palette-product" type="button" (click)="addOption(ctx.clue)">
+			<span aria-hidden="true" class="lucca-icon icon-mathsPlus"></span>
+			<ng-container *luPortal="selectInput.addOptionLabel" />
 		</button>
-	</div>-->
+	</div>
 </div>

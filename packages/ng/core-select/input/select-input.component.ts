@@ -18,13 +18,23 @@ import {
 	inject,
 } from '@angular/core';
 import { ControlValueAccessor } from '@angular/forms';
+import { PortalContent, getIntl } from '@lucca-front/ng/core';
 import { BehaviorSubject, Observable, ReplaySubject, Subject, switchMap, take } from 'rxjs';
 import { LuOptionGrouping, LuSimpleSelectDefaultOptionComponent } from '../option';
 import { LuSelectPanelRef } from '../panel';
 import { LuOptionContext, SELECT_LABEL, SELECT_LABEL_ID } from '../select.model';
+import { LU_CORE_SELECT_TRANSLATIONS } from '../select.translate';
 
 @Directive()
 export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDestroy, OnInit, ControlValueAccessor {
+	protected changeDetectorRef = inject(ChangeDetectorRef);
+	protected overlayContainerRef: HTMLElement = inject(OverlayContainer).getContainerElement();
+
+	protected labelElement: HTMLElement | undefined = inject(SELECT_LABEL);
+	protected labelId: string = inject(SELECT_LABEL_ID);
+
+	protected coreIntl = getIntl(LU_CORE_SELECT_TRANSLATIONS);
+
 	@ViewChild('inputElement')
 	private inputElementRef: ElementRef<HTMLInputElement>;
 
@@ -44,6 +54,9 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	get searchable(): boolean {
 		return this.clueChange.observed;
 	}
+
+	@Input()
+	addOptionLabel: PortalContent = this.coreIntl.addOption;
 
 	@HostBinding('class.is-selected')
 	protected get isSelectedClass(): boolean {
@@ -100,6 +113,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	@Output() clueChange = new EventEmitter<string>();
 	@Output() nextPage = new EventEmitter<void>();
 	@Output() previousPage = new EventEmitter<void>();
+	@Output() addOption = new EventEmitter<string>();
 
 	public get value(): TValue {
 		return this._value;
@@ -192,12 +206,6 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 				break;
 		}
 	}
-
-	protected changeDetectorRef = inject(ChangeDetectorRef);
-	protected overlayContainerRef: HTMLElement = inject(OverlayContainer).getContainerElement();
-
-	protected labelElement: HTMLElement | undefined = inject(SELECT_LABEL);
-	protected labelId: string = inject(SELECT_LABEL_ID);
 
 	registerOnChange(onChange: (value: TValue) => void): void {
 		this.onChange = onChange;
