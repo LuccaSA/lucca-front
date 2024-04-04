@@ -168,7 +168,7 @@
     .indexTable-body-row-cell-content[data-label] {
         display: flex;
         flex-direction: column;
-        margin-top: var(--spacings-XXS);
+        margin-top: var(--pr-t-spacings-50);
         &::before {
             content: attr(data-label);
             font-weight: 600;
@@ -245,7 +245,7 @@
 @mixin actions {
     // ~ equivalent to width: min-content for a table-cell but prevent line-break;
     width: 1%;
-    padding: var(--spacings-XXS);
+    padding: var(--pr-t-spacings-50);
     white-space: nowrap;
 
     .button {
@@ -316,12 +316,12 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        gap: var(--spacings-XS);
-        padding: var(--spacings-XXS);
+        gap: var(--pr-t-spacings-100);
+        padding: var(--pr-t-spacings-50);
         border-radius: var(--commons-borderRadius-L);
         font-size: var(--sizes-S-fontSize);
         line-height: var(--sizes-S-line-height);
-        color: var(--palettes-grey-800);
+        color: var(--palettes-neutral-800);
         background-color: var(--pr-t-elevation-surface-default);
         .button {
             @include button.text;

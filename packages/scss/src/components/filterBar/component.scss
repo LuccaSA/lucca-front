@@ -7,7 +7,7 @@
 	border: var(--commons-divider-width) solid var(--commons-border-200);
 	container-name: filterBar;
 	container-type: inline-size;
-	padding: var(--spacings-S);
+	padding: var(--pr-t-spacings-200);
 
 	&:has(.filterBar-footer-toggleButton[aria-expanded='false']) {
 		.filterBar-toggledFilters {
@@ -17,7 +17,7 @@
 
 	@at-root ($atRoot) {
 		.filterBar-toggledFilters {
-			margin-block-start: var(--spacings-S);
+			margin-block-start: var(--pr-t-spacings-200);
 		}
 
 		.filterBar-footer {
@@ -25,10 +25,10 @@
 			display: flex;
 			flex-direction: column;
 			flex-wrap: wrap;
-			gap: var(--spacings-XS);
+			gap: var(--pr-t-spacings-100);
 			justify-content: center;
-			margin-block-start: var(--spacings-S);
-			padding-block-start: var(--spacings-S);
+			margin-block-start: var(--pr-t-spacings-200);
+			padding-block-start: var(--pr-t-spacings-200);
 
 			&:empty {
 				display: none;
@@ -67,7 +67,7 @@
 			display: flex;
 			flex-direction: column;
 			flex-wrap: wrap;
-			gap: var(--spacings-S);
+			gap: var(--pr-t-spacings-200);
 			justify-content: center;
 			text-align: center;
 

@@ -31,7 +31,7 @@
 }
 
 .lu-picker-content-option-group {
-	margin-bottom: var(--spacings-XXS);
+	margin-bottom: var(--pr-t-spacings-50);
 }
 
 .lu-picker-content-option-group-title {
@@ -115,5 +115,5 @@
 .lu-picker-content-group {
 	display: flex;
 	flex-direction: column;
-	gap: var(--spacings-XXS);
+	gap: var(--pr-t-spacings-50);
 }

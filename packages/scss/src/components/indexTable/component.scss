@@ -55,7 +55,7 @@
         .indexTable-head-row-transparentCell,
         .indexTable-body-row-transparentCell {
             vertical-align: middle;
-            padding: var(--spacings-XXS) 0;
+            padding: var(--pr-t-spacings-50) 0;
             &:not(:first-child) {
                 padding-right: var(--components-indexTable-cell-padding);
             }
@@ -76,8 +76,8 @@
         }
 
         .indexTable-foot-row-cell {
-            padding-top: var(--spacings-XXS);
-            padding-bottom: var(--spacings-XXS);
+            padding-top: var(--pr-t-spacings-50);
+            padding-bottom: var(--pr-t-spacings-50);
         }
 
         .indexTable-body-row-cell {
@@ -157,7 +157,7 @@
         .indexTable-body-row-cell-checkbox,
         .indexTable-head-row-cell-checkbox {
             display: block;
-            margin: 2px 0 0 var(--spacings-XXS);
+            margin: 2px 0 0 var(--pr-t-spacings-50);
         }
 
         // Hidden element that take focus when the row is focused
@@ -169,7 +169,7 @@
             position: relative;
             display: flex;
             align-items: center;
-            gap: var(--spacings-XS);
+            gap: var(--pr-t-spacings-100);
         }
 
         .indexTable-body-row-cellTitle-button {
@@ -201,7 +201,7 @@
             @include vars;
             display: flex;
             flex-direction: column;
-            padding-bottom: var(--spacings-XS);
+            padding-bottom: var(--pr-t-spacings-100);
             border-radius: var(--components-indexTable-border-radius);
             background-color: var(--components-indexTable-background-color);
             .indexTable {
@@ -210,8 +210,8 @@
             }
             .pagination {
                 align-self: flex-end;
-                padding: var(--spacings-XXS) 0 0 0;
-                margin-right: var(--spacings-XS);
+                padding: var(--pr-t-spacings-50) 0 0 0;
+                margin-right: var(--pr-t-spacings-100);
             }
         }
     }
