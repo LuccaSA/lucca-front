@@ -1,7 +1,7 @@
 @mixin vars {
     --components-indexTable-padding: var(--pr-t-spacings-100);
     --components-indexTable-border-radius: 12px;
-    --components-indexTable-background-color: var(--palettes-grey-50);
+    --components-indexTable-background-color: var(--palettes-neutral-50);
     --components-indexTable-row-spacing: 4px;
     // on responsive, row spacing is increased
     --components-indexTable-row-spacing-responsive: 8px;
