@@ -167,6 +167,8 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 				break;
 			case 'Enter':
 				if (this.isPanelOpen) {
+					// Prevent form submission when selecting a value with Enter
+					$event.preventDefault();
 					this.panelRef.selectCurrentlyHighlightedValue();
 				} else {
 					this.panelRef?.handleKeyManagerEvent($event);
