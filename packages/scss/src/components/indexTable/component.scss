@@ -65,7 +65,10 @@
         .indexTable-body-row-cell,
         .indexTable-foot-row-cell {
             vertical-align: top;
+            // Because outlined cell apparence can be cropped we need a bigger padding-right. To compensate we also need a smaller padding left
             padding: var(--components-indexTable-cell-padding);
+            padding-left: var(--components-indexTable-cell-padding-left, var(--components-indexTable-cell-padding));
+            padding-right: var(--components-indexTable-cell-padding-right, var(--components-indexTable-cell-padding));
         }
 
         .indexTable-head-row-cell {
@@ -92,14 +95,16 @@
             --components-indexTable-outline-border-radius-right: 0;
             --components-indexTable-outline-border-width-left: var(--components-indexTable-outline-border-width);
             --components-indexTable-outline-border-width-right: 0;
+            --components-indexTable-cell-padding-right: calc(var(--components-indexTable-cell-padding) + 4px);
 
             // Apparence of the nexts cells
             ~ .indexTable-body-row-cell {
                 --components-indexTable-cell-inset-x-left: 0px;
-                --components-indexTable-shadow-mask: -10px 0px 0px 0px var(--components-indexTable-cell-background-color, var(--components-indexTable-cell-background-color-default));
+                --components-indexTable-shadow-mask: calc(var(--spacings-XS) * -1) 0px 0px 0px var(--components-indexTable-cell-background-color, var(--components-indexTable-cell-background-color-default));
                 --components-indexTable-cell-border-radius-left: 0;
                 --components-indexTable-outline-border-radius-left: 0;
                 --components-indexTable-outline-border-width-left: 0;
+                --components-indexTable-cell-padding-left: calc(var(--components-indexTable-cell-padding) - 4px);
             }
 
             // Apparence of the last cell with a card apparence
@@ -108,6 +113,7 @@
                 --components-indexTable-cell-border-radius-right: var(--components-indexTable-cell-border-radius);
                 --components-indexTable-outline-border-radius-right: var(--components-indexTable-outline-border-radius);
                 --components-indexTable-outline-border-width-right: var(--components-indexTable-outline-border-width);
+                --components-indexTable-cell-padding-right: var(--components-indexTable-cell-padding);
             }
 
             &::before,
