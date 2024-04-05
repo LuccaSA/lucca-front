@@ -55,7 +55,14 @@
 	bottom: 0;
 	background: white;
 	box-shadow: var(--pr-t-elevation-shadow-overflow);
-	padding: var(--pr-t-spacings-100);
+	padding: var(--pr-t-spacings-50);
+	margin: 0 calc(var(--pr-t-spacings-50) * -1);
+	transform: translateY(var(--pr-t-spacings-50));
+
+	.button {
+		width: 100%;
+		justify-content: left;
+	}
 }
 
 .lu-picker-content-loading {
