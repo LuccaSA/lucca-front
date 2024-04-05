@@ -170,8 +170,13 @@
 @mixin checkedPastStep {
 	.timeline-step:not([aria-current='step']):not([aria-current='step'] ~ .timeline-step):not(.timeline-stepAddBetweenStep) {
 		.timeline-step-title {
+			&:before {
+				content: '';
+			}
+			
 			.timeline-step-title-icon::before {
 				@include icon.generate('sign_confirm');
+
 				font-size: var(--components-timeline-icon-size);
 				display: flex;
 				background-color: transparent;
@@ -198,16 +203,6 @@
 		.timeline-step-title {
 			.timeline-step-title-icon::before {
 				left: 0;
-			}
-		}
-	}
-}
-
-@mixin checkedPastStepVerticalL {
-	.timeline-step:not([aria-current='step']):not([aria-current='step'] ~ .timeline-step) {
-		.timeline-step-title {
-			.timeline-step-title-icon::before {
-				left: var(--sizes-XS-fontSize);
 			}
 		}
 	}
