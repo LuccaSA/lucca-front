@@ -1,6 +1,6 @@
 @mixin vars {
 	--components-scrollBox-backgroundColor: var(--palettes-neutral-25);
-	--components-scrollBox-shadowColor: var(--colors-neutral-400);
+	--components-scrollBox-shadowColor: var(--palettes-neutral-400);
 	--components-scrollBox-shadowVertical: 0;
 	--components-scrollBox-shadowTop: var(--components-scrollBox-shadowVertical);
 	--components-scrollBox-shadowBottom: var(--components-scrollBox-shadowVertical);
