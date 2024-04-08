@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { PortalDirective, getIntl } from '@lucca-front/ng/core';
 import { LuSelectPanelRef, SELECT_ID, ɵLuOptionComponent, ɵLuOptionGroupPipe, ɵgetGroupTemplateLocation } from '@lucca-front/ng/core-select';
 import { asyncScheduler, filter, map, observeOn, take, takeUntil } from 'rxjs';
-import { debounceTime, startWith, switchMap } from 'rxjs/operators';
+import { debounceTime, switchMap } from 'rxjs/operators';
 import { LuSimpleSelectInputComponent } from '../input/select-input.component';
 import { SIMPLE_SELECT_INPUT } from '../select.model';
 import { LU_SIMPLE_SELECT_TRANSLATIONS } from '../select.translate';
@@ -43,7 +43,8 @@ export class LuSelectPanelComponent<T> implements AfterViewInit {
 		return this.initialValue;
 	}
 
-	public clueChange$ = this.selectInput.clueChange.pipe(startWith(this.selectInput.clue));
+	public clueChange$ = this.selectInput.clue$;
+	public shouldDisplayAddOption$ = this.selectInput.shouldDisplayAddOption();
 	public groupTemplateLocation$ = ɵgetGroupTemplateLocation(!!this.grouping, this.clueChange$, this.options$);
 
 	onScroll(evt: Event): void {
@@ -101,10 +102,5 @@ export class LuSelectPanelComponent<T> implements AfterViewInit {
 				)
 				.subscribe(() => this.keyManager.setFirstItemActive());
 		}
-	}
-
-	addOption(clue: string): void {
-		this.selectInput.addOption.emit(clue);
-		this.panelRef.close();
 	}
 }

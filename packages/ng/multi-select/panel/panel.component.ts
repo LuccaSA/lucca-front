@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { PortalDirective, getIntl } from '@lucca-front/ng/core';
 import { SELECT_ID, ɵLuOptionComponent, ɵLuOptionGroupPipe, ɵLuOptionOutletDirective, ɵgetGroupTemplateLocation } from '@lucca-front/ng/core-select';
 import { asyncScheduler, filter, map, observeOn, take, takeUntil } from 'rxjs';
-import { debounceTime, startWith, switchMap } from 'rxjs/operators';
+import { debounceTime, switchMap } from 'rxjs/operators';
 import { LuMultiSelectInputComponent } from '../input';
 import { LuMultiSelectPanelRef } from '../input/panel.model';
 import { MULTI_SELECT_INPUT } from '../select.model';
@@ -56,7 +56,8 @@ export class LuMultiSelectPanelComponent<T> implements AfterViewInit {
 		return this._keyManager;
 	}
 
-	public clueChange$ = this.selectInput.clueChange.pipe(startWith(this.selectInput.clue));
+	public clueChange$ = this.selectInput.clue$;
+	public shouldDisplayAddOption$ = this.selectInput.shouldDisplayAddOption();
 
 	groupTemplateLocation$ = ɵgetGroupTemplateLocation(!!this.grouping, this.clueChange$, this.options$);
 
@@ -140,10 +141,5 @@ export class LuMultiSelectPanelComponent<T> implements AfterViewInit {
 		}
 
 		this.keyManager.setFirstItemActive();
-	}
-
-	addOption(clue: string): void {
-		this.selectInput.addOption.emit(clue);
-		this.panelRef.close();
 	}
 }

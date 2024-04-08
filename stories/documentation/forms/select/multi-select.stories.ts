@@ -342,7 +342,7 @@ export const testDynamicDisabled = generateStory({
 
 export const AddOption = generateStory({
 	name: 'Add option',
-	description: "Pour ajouter une option, il suffit de s'abonner à l'output `addOption`. Le label est customisable via l'input `addOptionLabel`.",
+	description: "Pour ajouter une option, il suffit d'utiliser l'input `addOptionStrategy` et de s'abonner à l'output `addOption`. Le label est customisable via l'input `addOptionLabel`.",
 	template: `
 	<div class="u-marginBottomS">There is {{ legumes.length }} legumes in the list.</div>
 
@@ -351,7 +351,8 @@ export const AddOption = generateStory({
 		placeholder="Placeholder..."
 		[(ngModel)]="selectedLegumes"
 		[options]="legumes | filterLegumes:clue"
-		[addOptionLabel]="'Ajouter ' + clue + ''"
+		[addOptionLabel]="'Ajouter ' + (clue || 'un légume')"
+		[addOptionStrategy]="addOptionStrategy"
 		(clueChange)="clue = $event"
 		(addOption)="legumes = addLegume($event, legumes); selectedLegumes = selectLegume(legumes[legumes.length - 1], selectedLegumes)"
 	/>
@@ -360,8 +361,14 @@ export const AddOption = generateStory({
 		'@lucca-front/ng/multi-select': ['LuMultiSelectInputComponent'],
 	},
 	storyPartial: {
+		argTypes: {
+			addOptionLabel: { control: { type: 'text' } },
+			addOptionStrategy: { control: { type: 'select', options: ['never', 'always', 'if-empty-clue'] } },
+		},
 		args: {
-			addLegume: (name: string, existing: ILegume[]) => [...existing, { name, index: existing.length, color: existing[0].color }],
+			addOptionLabel: 'Ajouter un légume',
+			addOptionStrategy: 'always',
+			addLegume: (name: string, existing: ILegume[]) => [...existing, { name: name || 'Légume sans titre', index: existing.length, color: existing[0].color }],
 			selectLegume: (legume: ILegume, legumes: ILegume[]) => [...legumes, legume],
 		},
 	},

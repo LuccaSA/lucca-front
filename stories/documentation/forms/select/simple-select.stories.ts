@@ -346,7 +346,7 @@ export const GroupBy = generateStory({
 
 export const AddOption = generateStory({
 	name: 'Add option',
-	description: "Pour ajouter une option, il suffit de s'abonner à l'output `addOption`. Le label est customisable via l'input `addOptionLabel`.",
+	description: "Pour ajouter une option, il suffit d'utiliser l'input `addOptionStrategy` et de s'abonner à l'output `addOption`. Le label est customisable via l'input `addOptionLabel`.",
 	template: `
 	<div class="u-marginBottomS">There is {{ legumes.length }} legumes in the list.</div>
 
@@ -355,7 +355,8 @@ export const AddOption = generateStory({
 		placeholder="Placeholder..."
 		[(ngModel)]="selectedLegume"
 		[options]="legumes | filterLegumes:clue"
-		[addOptionLabel]="'Ajouter ' + clue + ''"
+		[addOptionLabel]="addOptionLabel || ('Ajouter ' + (clue || 'un légume'))"
+		[addOptionStrategy]="addOptionStrategy"
 		(clueChange)="clue = $event"
 		(addOption)="legumes = addLegume($event, legumes); selectedLegume = legumes[legumes.length - 1]"
 	/>
@@ -364,8 +365,14 @@ export const AddOption = generateStory({
 		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent'],
 	},
 	storyPartial: {
+		argTypes: {
+			addOptionLabel: { control: { type: 'text' } },
+			addOptionStrategy: { control: { type: 'radio', options: ['never', 'always', 'if-empty-clue'] } },
+		},
 		args: {
-			addLegume: (name: string, existing: ILegume[]) => [...existing, { name, index: existing.length, color: existing[0].color }],
+			addOptionLabel: 'Ajouter un légume',
+			addOptionStrategy: 'always',
+			addLegume: (name: string, existing: ILegume[]) => [...existing, { name: name || 'Légume sans titre', index: existing.length, color: existing[0].color }],
 		},
 	},
 });
