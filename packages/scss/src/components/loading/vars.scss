@@ -7,4 +7,5 @@
 	--components-loading-spinnerMargin: 0;
 	--components-loading-color: currentColor;
 	--components-loading-transform: none;
+	--components-loading-transformFallback: var(--components-loading-transform);
 }

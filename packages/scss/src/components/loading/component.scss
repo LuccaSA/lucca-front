@@ -3,6 +3,10 @@
 @mixin component {
 	@include loading.spinner();
 
+	@supports not (height: 1dvh) {
+		--components-loading-transform: var(--components-loading-transformFallback);
+	}
+
 	min-height: var(--components-loading-size);
 	padding: var(--components-loading-padding);
 	margin: var(--components-loading-margin);
