@@ -144,7 +144,8 @@
           {
             "endOfLine": "auto"
           }
-        ]
+        ],
+        "@angular-eslint/template/button-has-type": "error"
       }
     },
     {
