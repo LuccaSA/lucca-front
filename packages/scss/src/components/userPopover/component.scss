@@ -6,31 +6,31 @@
 	padding: var(--spacings-S);
 
 	@at-root ($atRoot) {
-		.userCard-details {
+		.userPopover-details {
 			--components-user-picture-image-size: 5.25rem;
 			display: flex;
 			align-items: center;
 			gap: var(--spacings-S);
 		}
 
-		.userCard-details-avatar {
+		.userPopover-details-avatar {
 			--components-user-picture-font-size: var(--sizes-XXL-fontSize);
 
 			margin: var(--spacings-XXS) 0;
 		}
 
-		.userCard-details-info {
+		.userPopover-details-info {
 			width: calc(100% - var(--components-user-picture-image-size) - var(--spacings-S));
 		}
 
-		.userCard-details-info-name {
+		.userPopover-details-info-name {
 			@include text.ellipsis;
 
 			margin: 0;
 			padding: 0;
 		}
 
-		.userCard-details-info-name-link {
+		.userPopover-details-info-name-link {
 			color: var(--palettes-grey-900);
 			font-size: var(--sizes-L-fontSize);
 			line-height: var(--sizes-L-lineHeight);
@@ -47,13 +47,13 @@
 			}
 		}
 
-		.userCard-details-info-detail {
+		.userPopover-details-info-detail {
 			margin-bottom: 0;
 			font-size: var(--sizes-S-fontSize);
 			line-height: var(--sizes-S-lineHeight);
 		}
 
-		.userCard-details-info-detail-workplace {
+		.userPopover-details-info-detail-workplace {
 			display: flex;
 			align-items: center;
 			gap: var(--spacings-XXS);
@@ -69,15 +69,15 @@
 				&:focus {
 					color: var(--palettes-grey-800);
 
-					.userCard-details-info-detail-workplace-state {
+					.userPopover-details-info-detail-workplace-state {
 						text-decoration: underline;
 					}
 				}
 			}
 		}
 
-		.userCard-details-info-detail,
-		.userCard-details-info-detail-link-state {
+		.userPopover-details-info-detail,
+		.userPopover-details-info-detail-link-state {
 			@include text.ellipsis;
 		}
 	}

@@ -9,9 +9,9 @@
 	(mouseleave)="onMouseLeave()"
 	(mousedown)="onMouseDown()"
 >
-	<div *ngIf="employee$ | async as employee" class="lu-popover-content userCard">
-		<div class="userCard-details">
-			<div [ngSwitch]="userPictureDisplay$ | async" class="userCard-details-avatar">
+	<div *ngIf="employee$ | async as employee" class="lu-popover-content userPopover">
+		<div class="userPopover-details">
+			<div [ngSwitch]="userPictureDisplay$ | async" class="userPopover-details-avatar">
 				<ng-container *ngSwitchCase="'img'">
 					<img class="picture" [src]="userPictureHref$ | async" [alt]="(userInitials$ | async)?.initials" (error)="pictureError()" />
 				</ng-container>
@@ -21,45 +21,45 @@
 					</div>
 				</ng-container>
 			</div>
-			<div class="userCard-details-info">
-				<h3 class="userCard-details-info-name">
+			<div class="userPopover-details-info">
+				<h3 class="userPopover-details-info-name">
 					<div *ngIf="!employee._links?.hrCard?.href; else fullNameDisplayLink">
 						<ng-container *ngTemplateOutlet="fullNameDisplay" />
 					</div>
 				</h3>
 				<ng-template #fullNameDisplayLink>
-					<a class="userCard-details-info-name-link" [href]="employee._links?.hrCard?.href">
+					<a class="userPopover-details-info-name-link" [href]="employee._links?.hrCard?.href">
 						<ng-container *ngTemplateOutlet="fullNameDisplay" />
 					</a>
 				</ng-template>
 				<ng-template #fullNameDisplay> {{employee.firstName}} {{employee.lastName}} </ng-template>
 
-				<p *ngIf="employee.jobTitle" class="userCard-details-info-detail">{{employee.jobTitle}}</p>
-				<p *ngIf="employee.userDepartment" class="userCard-details-info-detail">{{employee.userDepartment?.name}}</p>
+				<p *ngIf="employee.jobTitle" class="userPopover-details-info-detail">{{employee.jobTitle}}</p>
+				<p *ngIf="employee.userDepartment" class="userPopover-details-info-detail">{{employee.userDepartment?.name}}</p>
 
-				<p class="userCard-details-info-detail">
+				<p class="userPopover-details-info-detail">
 					<!--                        HORS CONTRAT-->
-					<span *ngIf="employee.dtContractStart | isFuture" class="userCard-details-info-detail-workplace">
+					<span *ngIf="employee.dtContractStart | isFuture" class="userPopover-details-info-detail-workplace">
 						<span aria-hidden="true" class="lucca-icon icon-payPeriod mod-S"></span>
-						<span class="userCard-details-info-detail-link-state">
+						<span class="userPopover-details-info-detail-link-state">
 							{{intl.EMPLOYEE_CARD_PANEL_COMING_ON_LABEL | injectParameter : (employee.dtContractStart | date: 'longDate') }}
 						</span>
 					</span>
 					<span
 						*ngIf="!(employee.dtContractStart | isFuture) && !(employee.dtContractEnd | isFutureOrToday)"
-						class="userCard-details-info-detail-workplace"
+						class="userPopover-details-info-detail-workplace"
 					>
 						<span aria-hidden="true" class="lucca-icon icon-calendarStrikethrough mod-S"></span>
-						<span class="userCard-details-info-detail-link-state"> {{intl.EMPLOYEE_CARD_PANEL_EMPLOYEE_HAS_LEAVED_LABEL }} </span>
+						<span class="userPopover-details-info-detail-link-state"> {{intl.EMPLOYEE_CARD_PANEL_EMPLOYEE_HAS_LEAVED_LABEL }} </span>
 					</span>
 					<!--                     EN CONTRAT-->
 					<a
 						*ngIf="employee._links?.schedule && !(employee.dtContractStart | isFuture) && (employee.dtContractEnd | isFutureOrToday)"
-						class="userCard-details-info-detail-workplace mod-link"
+						class="userPopover-details-info-detail-workplace mod-link"
 						[href]="employee._links?.schedule?.href"
 					>
 						<span aria-hidden="true" class="lucca-icon icon-payPeriod mod-S"></span>
-						<span class="userCard-details-info-detail-workplace-state">
+						<span class="userPopover-details-info-detail-workplace-state">
 							<ng-container *ngIf="employee.isWorkingNow === true">
 								<ng-container *ngIf="employee.currentWorkLocation">
 									{{ employee.currentWorkLocation?.name }}
