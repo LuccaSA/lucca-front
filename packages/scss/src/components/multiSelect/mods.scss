@@ -6,8 +6,8 @@
 @mixin S {
   --components-multiSelect-fontSize: var(--sizes-S-fontSize);
   --components-multiSelect-lineHeight: var(--sizes-S-lineHeight);
-  --components-multiSelect-padding: 0.375rem;
-  --components-multiSelect-gap: 0.375rem;
+  --components-multiSelect-padding: var(--pr-t-spacings-75);
+  --components-multiSelect-gap: var(--pr-t-spacings-75);
 
   .multipleSelect-arrow {
     @include icon.S;
@@ -33,7 +33,7 @@
     grid-column-start: 1;
     grid-row-start: 1;
     display: flex;
-    gap: var(--spacings-XXS);
+    gap: var(--pr-t-spacings-50);
   }
 
   .multipleSelect-displayer-search {

@@ -1,10 +1,10 @@
 @mixin vars {
-	--components-multiSelect-fontSize: var(--sizes-M-fontSize);
-	--components-multiSelect-lineHeight: var(--sizes-M-lineHeight);
-	--components-multiSelect-padding: var(--spacings-XS);
-	--components-multiSelect-gap: var(--spacings-XS);
-	--components-multiSelect-background: var(--colors-white-color);
-	--components-multiSelect-border-color: var(--palettes-neutral-300);
-	--components-multiSelect-placeholder: var(--palettes-neutral-400);
-	--components-multiSelect-arrow-color: var(--palettes-neutral-600);
+  --components-multiSelect-fontSize: var(--sizes-M-fontSize);
+  --components-multiSelect-lineHeight: var(--sizes-M-lineHeight);
+  --components-multiSelect-padding: var(--pr-t-spacings-100);
+  --components-multiSelect-gap: var(--pr-t-spacings-100);
+  --components-multiSelect-background: var(--colors-white-color);
+  --components-multiSelect-border-color: var(--palettes-neutral-300);
+  --components-multiSelect-placeholder: var(--palettes-neutral-400);
+  --components-multiSelect-arrow-color: var(--palettes-neutral-600);
 }

@@ -1,8 +1,8 @@
 @mixin userTileStyle {
 	display: flex;
 	align-items: center;
-	padding: var(--spacings-XS);
-	gap: var(--spacings-XS);
+	padding: var(--pr-t-spacings-100);
+	gap: var(--pr-t-spacings-100);
 
 	.user-tile-title {
 		font-size: var(--sizes-M-fontSize);

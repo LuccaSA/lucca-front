@@ -2,6 +2,7 @@ import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { FormFieldComponent, InputDirective } from '@lucca-front/ng/form-field';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
+import { generateInputs } from '../../../helpers/stories';
 
 export default {
 	title: 'Documentation/Forms/Fields/Form Field',
@@ -11,9 +12,10 @@ export default {
 			imports: [FormFieldComponent, InputDirective, BrowserAnimationsModule, FormsModule],
 		}),
 	],
-	render: ({ label, required, inlineMessage, hiddenLabel, size, inlineMessageState, tooltip }) => {
+	render: (args, { argTypes }) => {
+		const { required, ...fieldArgs } = args;
 		return {
-			template: `<lu-form-field label="${label}" ${hiddenLabel ? 'hiddenLabel' : ''} inlineMessage="${inlineMessage}" inlineMessageState="${inlineMessageState}" tooltip="${tooltip}">
+			template: `<lu-form-field ${generateInputs(fieldArgs, argTypes)}>
 	<div class="textField">
 		<div class="textField-input">
 			<textarea
@@ -37,6 +39,7 @@ export const Template: StoryObj<FormFieldComponent> = {
 		required: true,
 		hiddenLabel: false,
 		inlineMessage: 'Helper Text',
+		errorInlineMessage: 'Error helper text',
 		size: 'M',
 		inlineMessageState: 'default',
 		tooltip: 'You expected me to be helpful but this is a story!',

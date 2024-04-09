@@ -8,10 +8,10 @@
 	color: var(--palettes-text, var(--palettes-neutral-800));
 	display: inline-flex;
 	align-items: center;
-	gap: var(--spacings-XS);
+	gap: var(--pr-t-spacings-100);
 	position: relative;
 	vertical-align: middle;
-	padding: calc(var(--spacings-XXS) / 2) var(--spacings-XS);
+	padding: calc(var(--pr-t-spacings-50) / 2) var(--pr-t-spacings-100);
 	font-size: var(--components-chip-fontSize);
 	line-height: var(--components-chip-lineHeight);
 
@@ -23,10 +23,10 @@
 			grid-template-columns: 1fr;
 			grid-template-rows: 1fr;
 			grid-template-areas: 'main';
-			align-items: normal;
-			width: var(--components-chip-kill-size);
-			height: var(--components-chip-kill-size);
-			border-radius: var(--commons-borderRadius-full) !important;
+			place-items: center;
+			width: var(--pr-t-spacings-300);
+			height: var(--pr-t-spacings-300);
+			margin: calc(var(--pr-t-spacings-75) * -1);
 			flex-shrink: 0;
 			cursor: pointer;
 
@@ -34,6 +34,8 @@
 			&::after {
 				content: '';
 				grid-area: main;
+				width: var(--components-chip-kill-size);
+				height: var(--components-chip-kill-size);
 			}
 
 			&::before {
@@ -54,9 +56,7 @@
 			}
 
 			&:focus-visible {
-				@include a11y.focusVisible();
-
-				border-radius: var(--commons-borderRadius-full);
+				@include a11y.focusVisible($offset: -4px, $borderRadius: var(--commons-borderRadius-full));
 			}
 
 			&:active {

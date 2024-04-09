@@ -1,5 +1,6 @@
 @use '@lucca-front/scss/src/commons/config';
 @use '@lucca-front/scss/src/commons/utils/media';
+@use '@lucca-front/scss/src/commons/utils/container';
 @use 'exports' as *;
 
 .grid {
@@ -15,6 +16,14 @@
 			@include autoAt;
 
 			@include media.min($breakpoint) {
+				@include auto;
+			}
+		}
+
+		&.mod-autoAtContainerMin#{$breakpoint} {
+			@include autoAt;
+
+			@include container.min($breakpoint, $name: grid) {
 				@include auto;
 			}
 		}

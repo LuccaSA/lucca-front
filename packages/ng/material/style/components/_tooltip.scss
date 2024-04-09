@@ -5,7 +5,7 @@
 	background: var(--components-tooltip-background-color);
 	color: var(--components-tooltip-color);
 	font-size: var(--sizes-XS-lineHeight) !important;
-	margin: var(--spacings-XS) !important;
-	padding: var(--spacings-XXS) var(--spacings-XS) !important;
+	margin: var(--pr-t-spacings-100) !important;
+	padding: var(--pr-t-spacings-50) var(--pr-t-spacings-100) !important;
 	line-height: var(--sizes-XS-lineHeight);
 }

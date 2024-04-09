@@ -113,3 +113,16 @@
         @content;
     }
 }
+
+// Touch detection
+@mixin isTouchDevice {
+	@media (any-pointer: coarse) {
+		@content;
+	}
+}
+
+@mixin isNotTouchDevice {
+	@media not (any-pointer: coarse) {
+		@content;
+	}
+}

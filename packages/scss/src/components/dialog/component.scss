@@ -1,7 +1,7 @@
 @use '@lucca-front/scss/src/components/title/exports' as title;
 @use '@lucca-front/scss/src/components/button/exports' as button;
 @use '@lucca-front/scss/src/components/footer/exports' as footer;
-@use '@lucca-front/scss/src/components/keyframe/exports' as keyframe;
+@use '@lucca-front/scss/src/commons/utils/keyframe';
 
 @mixin component($atRoot: 'without: rule') {
 	@include keyframe.scaleIn;
@@ -44,12 +44,12 @@
 		}
 
 		.dialog-inside-header {
-			padding: var(--spacings-S) var(--spacings-M);
+			padding: var(--pr-t-spacings-200) var(--pr-t-spacings-300);
 			background-color: var(--colors-white-color);
 			grid-template-areas: var(--components-dialog-insideHeaderAreas);
 			grid-template-columns: var(--components-dialog-insideHeaderColumns);
 			box-shadow: 0 1px 0 0 var(--palettes-neutral-100);
-			gap: var(--spacings-S);
+			gap: var(--pr-t-spacings-200);
 			position: sticky;
 			z-index: 1;
 			display: grid;
@@ -57,7 +57,7 @@
 		}
 
 		.dialog-inside-content {
-			padding: var(--spacings-S) var(--spacings-M);
+			padding: var(--pr-t-spacings-200) var(--pr-t-spacings-300);
 			flex-grow: 1;
 			position: relative;
 			z-index: 0;
