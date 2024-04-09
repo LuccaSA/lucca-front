@@ -8,6 +8,7 @@
 @forward 'title'; // 1 Ko
 @forward 'label'; // 1 Ko
 @forward 'status'; // 1 Ko
+@forward 'filterBar'; // 1 Ko
 @forward 'filters'; // 1 Ko
 @forward 'divider'; // 1 Ko
 @forward 'section'; // 1 Ko
@@ -41,13 +42,11 @@
 @forward 'table'; // 7 Ko
 @forward 'checkbox'; // 7 Ko
 @forward 'checkboxField'; // new component for checkbox
-@forward 'keyframe'; // 8 Ko
 @forward 'tableSorted'; // 9 Ko
 @forward 'timeline'; // 10 Ko
 @forward 'button'; // 12 Ko
 @forward 'textfields'; // 13 Ko
 @forward 'textField'; // new component for checkbox
-@forward 'util'; // 14 Ko
 @forward 'navside'; // 15 Ko
 @forward 'form'; // 25 Ko
 @forward 'tableFixed'; // 33 Ko
@@ -76,6 +75,8 @@
 @forward 'emptyState';
 @forward 'dialog';
 @forward 'avatar';
+@forward 'indexTable';
+@forward 'indexTableSorted';
 
 // Deprecated CSS components
 // @forward 'gridLegacy'; // 40 Ko

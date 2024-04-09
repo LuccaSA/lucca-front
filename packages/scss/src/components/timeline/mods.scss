@@ -26,7 +26,7 @@
 
 	.timeline-step:not([aria-current='step']):not([aria-current='step'] ~ .timeline-step) .timeline-step-title-icon {
 		&::before {
-			left: var(--spacings-XS);
+			left: var(--pr-t-spacings-100);
 		}
 	}
 }
@@ -34,7 +34,7 @@
 @mixin addStepL {
 	.timeline-step-title-icon {
 		&::before {
-			left: var(--spacings-XS);
+			left: var(--pr-t-spacings-100);
 		}
 	}
 }
@@ -44,7 +44,7 @@
 	flex-direction: column;
 
 	.timeline-step {
-		margin-top: var(--spacings-XS);
+		margin-top: var(--pr-t-spacings-100);
 		display: block;
 		position: relative;
 		width: 100%;
@@ -55,8 +55,8 @@
 			display: block;
 			height: auto;
 			position: absolute;
-			top: calc(var(--spacings-L) + var(--spacings-XXS));
-			bottom: -0.75rem;
+			top: calc(var(--pr-t-spacings-400) + var(--pr-t-spacings-50));
+			bottom: calc(var(--pr-t-spacings-150) * -1);
 			left: 0.45rem; // magic number
 			margin: 0;
 			border-left: 2px solid var(--palettes-neutral-200);
@@ -64,23 +64,23 @@
 
 		&:not(:last-child)[aria-current='step'] {
 			&::after {
-				top: calc(var(--spacings-L) + var(--spacings-XXS));
+				top: calc(var(--pr-t-spacings-400) + var(--pr-t-spacings-50));
 			}
 		}
 	}
 
 	.timeline-step-title {
-		margin: var(--spacings-XS) 0;
-		min-height: var(--spacings-M);
+		margin: var(--pr-t-spacings-100) 0;
+		min-height: var(--pr-t-spacings-300);
 		min-width: 0;
 
 		&:before {
-			top: 0.75rem;
+			top: var(--pr-t-spacings-150);
 		}
 	}
 
 	.timeline-step-description {
-		padding-left: var(--spacings-L);
+		padding-left: var(--pr-t-spacings-400);
 	}
 
 	.timeline-stepAddBetweenStep {
@@ -99,26 +99,26 @@
 @mixin verticalS {
 	.timeline-step {
 		&::after {
-			bottom: calc(var(--spacings-S) * -1);
+			bottom: calc(var(--pr-t-spacings-200) * -1);
 			left: 0.45rem; // magic number
-			top: var(--spacings-L);
+			top: var(--pr-t-spacings-400);
 		}
 
 		&[aria-current='step'] {
 			&::after {
-				top: var(--spacings-L);
+				top: var(--pr-t-spacings-400);
 			}
 		}
 	}
 	.timeline-step-description {
-		padding-left: var(--spacings-M);
+		padding-left: var(--pr-t-spacings-300);
 	}
 }
 
 @mixin verticalL {
 	.timeline-step {
 		&::after {
-			bottom: calc(var(--spacings-XS) * -1);
+			bottom: calc(var(--pr-t-spacings-100) * -1);
 			left: 0.95rem; // magic number
 			top: 2.5rem;
 		}
@@ -131,7 +131,7 @@
 	}
 	.timeline-step-description {
 		padding-left: 2.5rem;
-		min-height: var(--spacings-L);
+		min-height: var(--pr-t-spacings-400);
 	}
 }
 
@@ -141,7 +141,7 @@
 			height: unset;
 			width: 2px;
 			border: none;
-			background: linear-gradient(180deg, var(--palettes-product-700) var(--progress), var(--palettes-neutral-200) var(--progress));
+			background: linear-gradient(180deg, var(--palettes-700, var(--palettes-product-700)) var(--progress), var(--palettes-neutral-200) var(--progress));
 		}
 	}
 }
@@ -170,20 +170,25 @@
 @mixin checkedPastStep {
 	.timeline-step:not([aria-current='step']):not([aria-current='step'] ~ .timeline-step):not(.timeline-stepAddBetweenStep) {
 		.timeline-step-title {
+			&:before {
+				content: '';
+			}
+
 			.timeline-step-title-icon::before {
 				@include icon.generate('sign_confirm');
+
 				font-size: var(--components-timeline-icon-size);
 				display: flex;
 				background-color: transparent;
-				color: var(--palettes-product-700);
+				color: var(--palettes-700, var(--palettes-product-700));
 			}
 			&::before {
-				background-color: var(--palettes-product-100);
+				background-color: var(--palettes-100, var(--palettes-product-100));
 			}
 		}
 
 		&::after {
-			border-color: var(--palettes-product-200);
+			border-color: var(--palettes-200, var(--palettes-product-200));
 			border-bottom-style: solid;
 		}
 	}
@@ -203,16 +208,6 @@
 	}
 }
 
-@mixin checkedPastStepVerticalL {
-	.timeline-step:not([aria-current='step']):not([aria-current='step'] ~ .timeline-step) {
-		.timeline-step-title {
-			.timeline-step-title-icon::before {
-				left: var(--sizes-XS-fontSize);
-			}
-		}
-	}
-}
-
 @mixin addStep {
 	.timeline-step {
 		&:nth-last-child(2)::after {
@@ -227,7 +222,7 @@
 				var(--palettes-neutral-200) 75%,
 				var(--palettes-neutral-200) 100%
 			);
-			background-size: var(--spacings-XS) var(--spacings-XS);
+			background-size: var(--pr-t-spacings-100) var(--pr-t-spacings-100);
 		}
 
 		&:last-child {
@@ -246,16 +241,16 @@
 	.timeline-step-title-icon {
 		&::before {
 			content: '';
-			color: var(--palettes-product-text);
+			color: var(--palettes-text, var(--palettes-product-text));
 			width: 1rem;
 			height: 1rem;
 			display: flex;
 			align-items: center;
 			justify-content: center;
 			border-radius: var(--commons-borderRadius-full);
-			background-color: var(--palettes-product-700);
+			background-color: var(--palettes-700, var(--palettes-product-700));
 			position: absolute;
-			left: var(--spacings-XXS);
+			left: var(--pr-t-spacings-50);
 			top: 50%;
 			transform: translateY(-50%);
 		}
@@ -280,7 +275,7 @@
 				var(--palettes-neutral-200) 75%,
 				var(--palettes-neutral-200) 100%
 			);
-			background-size: var(--spacings-XS) var(--spacings-XS);
+			background-size: var(--pr-t-spacings-100) var(--pr-t-spacings-100);
 		}
 	}
 }
@@ -299,7 +294,7 @@
 	.timeline-step:last-child {
 		.timeline-step-title {
 			.timeline-step-title-icon::before {
-				left: var(--spacings-XS);
+				left: var(--pr-t-spacings-100);
 			}
 		}
 	}
@@ -321,7 +316,7 @@
 
 		&:hover {
 			.timeline-step-title-icon::before {
-				background-color: var(--palettes-product-600);
+				background-color: var(--palettes-600, var(--palettes-product-600));
 			}
 		}
 
@@ -348,7 +343,7 @@
 	.timeline-step:not([aria-current='step']):not([aria-current='step'] ~ .timeline-step) .timeline-step-title-icon::before {
 		width: 1.5rem;
 		height: 1.5rem;
-		left: var(--spacings-XXS);
+		left: var(--pr-t-spacings-50);
 	}
 }
 
@@ -357,7 +352,7 @@
 		&::after {
 			border: none;
 			height: 2px;
-			background: linear-gradient(90deg, var(--palettes-product-700) var(--progress), var(--palettes-neutral-200) var(--progress));
+			background: linear-gradient(90deg, var(--palettes-700, var(--palettes-product-700)) var(--progress), var(--palettes-neutral-200) var(--progress));
 		}
 	}
 }
@@ -377,8 +372,8 @@
 @mixin notPastChecked {
 	.timeline-step-title {
 		&::before {
-			background-color: var(--palettes-product-700);
-			color: var(--colors-white-color);
+			background-color: var(--palettes-700, var(--palettes-product-700));
+			color: var(--palettes-text, var(--palettes-product-text));
 		}
 	}
 }

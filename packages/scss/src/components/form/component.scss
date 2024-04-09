@@ -23,10 +23,10 @@
 			position: relative;
 			display: flex;
 			flex-direction: column;
-			gap: var(--spacings-XXS);
+			gap: var(--pr-t-spacings-50);
 
 			.formLabel {
-				cursor: pointer;
+				@include formLabel.label;
 			}
 		}
 
@@ -48,7 +48,7 @@
 		.form-group-title {
 			font-size: var(--components-field-framed-title-font-size);
 			line-height: var(--components-field-framed-title-line-height);
-			padding-bottom: var(--spacings-XXS);
+			padding-bottom: var(--pr-t-spacings-50);
 		}
 
 		.form-actions {

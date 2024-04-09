@@ -4,9 +4,9 @@
 
 @mixin component($atRoot: 'without: rule') {
 	display: inline-flex;
-	gap: 0.375rem;
+	gap: var(--pr-t-spacings-75);
 	align-items: center;
-	padding: var(--spacings-XS);
+	padding: var(--pr-t-spacings-100);
 	border-radius: var(--commons-borderRadius-L);
 	background-color: var(--palettes-50, var(--palettes-neutral-50));
 	border: 0;
@@ -33,7 +33,7 @@
 
 		.calloutPopover-overlay-head {
 			display: flex;
-			gap: var(--spacings-XS);
+			gap: var(--pr-t-spacings-100);
 		}
 
 		.calloutPopover-overlay-head-title {
@@ -49,8 +49,8 @@
 		}
 
 		.calloutPopover-overlay-content {
-			margin: var(--spacings-XS) 0.75rem var(--spacings-XS) var(--components-calloutPopover-content-margin);
-			padding-top: var(--spacings-XS);
+			margin: var(--pr-t-spacings-100) var(--pr-t-spacings-150) var(--pr-t-spacings-100) var(--components-calloutPopover-content-margin);
+			padding-top: var(--pr-t-spacings-100);
 			border-top: var(--commons-divider-width) solid var(--palettes-neutral-200);
 		}
 	}

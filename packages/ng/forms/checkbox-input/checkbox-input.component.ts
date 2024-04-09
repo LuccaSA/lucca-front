@@ -1,4 +1,4 @@
-import { Component, inject, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, Component, inject, Input, ViewEncapsulation } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FORM_FIELD_INSTANCE, FormFieldComponent, InputDirective } from '@lucca-front/ng/form-field';
 import { injectNgControl } from '../inject-ng-control';
@@ -20,6 +20,12 @@ export class CheckboxInputComponent {
 	formField = inject<FormFieldComponent>(FORM_FIELD_INSTANCE, { optional: true });
 
 	ngControl = injectNgControl();
+
+	@Input({ transform: booleanAttribute })
+	/**
+	 * Should set aria-checked='mixed' attribute ?
+	 */
+	mixed = false;
 
 	constructor() {
 		if (this.formField) {

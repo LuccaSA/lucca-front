@@ -20,7 +20,7 @@
 		<div class="gauge mod-vertical">
 			<div class="gauge-bar" style="height: 50%"></div>
 		</div>
-		<div class="gauge mod-vertical mod-thin palette-error u-marginLeftS">
+		<div class="gauge mod-vertical mod-thin palette-error pr-u-marginLeft200">
 			<div class="gauge-bar" style="height: 75%"></div>
 		</div>
 	</div>
@@ -28,55 +28,16 @@
 
 <section class="contentSection">
 	<h2>Palette</h2>
-	<div class="gauge palette-success u-marginBottomS">
+	<div class="gauge palette-success pr-u-marginBottom200">
 		<div class="gauge-bar" style="width: 75%"></div>
 	</div>
-	<div class="gauge palette-warning u-marginBottomS">
+	<div class="gauge palette-warning pr-u-marginBottom200">
 		<div class="gauge-bar" style="width: 50%"></div>
 	</div>
-	<div class="gauge palette-error u-marginBottomS">
+	<div class="gauge palette-error pr-u-marginBottom200">
 		<div class="gauge-bar" style="width: 25%"></div>
 	</div>
 	<em><b>Tip:</b> It will works with all palette's colors</em>
-</section>
-
-<section class="contentSection">
-	<h3>Theme</h3>
-	<table class="table mod-S mod-zebra mod-alignTop">
-		<thead class="table-head">
-			<tr class="table-head-row">
-				<th class="table-head-row-cell">Options</th>
-				<th class="table-head-row-cell">Default value</th>
-				<th class="table-head-row-cell">Notes</th>
-			</tr>
-		</thead>
-		<tbody class="table-body">
-			<tr class="table-body-row">
-				<td class="table-body-row-cell u-nowrap">default-palette</td>
-				<td class="table-body-row-cell">_getMap("palettes.product")</td>
-				<td class="table-body-row-cell u-textLight"></td>
-			</tr>
-			<tr class="table-body-row">
-				<td class="table-body-row-cell u-nowrap">height</td>
-				<td class="table-body-row-cell">.65rem</td>
-				<td class="table-body-row-cell u-textLight"></td>
-			</tr>
-			<tr class="table-body-row">
-				<td class="table-body-row-cell u-nowrap">thin</td>
-				<td class="table-body-row-cell"><b>height:</b> 4px</td>
-				<td class="table-body-row-cell u-textLight"></td>
-			</tr>
-		</tbody>
-	</table>
-</section>
-<section class="contentSection">
-	<h4>Example</h4>
-	<p>Edit your gauge theme in <code class="code">components.override.scss</code>:</p>
-	<p>
-		<code class="code mod-block"
-			>$gauge: ( height: var(--spacings-S), thin: ( height: 10px ) ); $theme: _set($theme, "components.gauge", $gauge);</code
-		>
-	</p>
 </section>
 
 <!-- To tell the ui-diff tool that the page has finished rendering -->

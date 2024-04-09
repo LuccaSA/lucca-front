@@ -13,7 +13,7 @@
 
 		.switch-label {
 			padding: 0;
-			padding-left: calc(var(--components-switch-width) + var(--spacings-XS));
+			padding-left: calc(var(--components-switch-width) + var(--pr-t-spacings-100));
 			color: var(--palettes-neutral-800);
 			transition: color var(--commons-animations-durations-fast);
 			display: inline-block;

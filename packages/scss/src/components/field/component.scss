@@ -21,7 +21,7 @@
 
 	.radiosfield-input,
 	.checkboxesfield-input {
-		row-gap: var(--spacings-XXS);
+		row-gap: var(--pr-t-spacings-50);
 	}
 
 	.textfield-label,
@@ -52,7 +52,7 @@
 			color: var(--components-field-label-color);
 			font-size: var(--sizes-M-fontSize);
 			line-height: var(--sizes-M-lineHeight);
-			min-height: var(--spacings-S);
+			min-height: var(--pr-t-spacings-200);
 			margin-bottom: var(--components-field-label-margin-bottom);
 			transition-duration: var(--commons-animations-durations-fast);
 			transition-property: all;

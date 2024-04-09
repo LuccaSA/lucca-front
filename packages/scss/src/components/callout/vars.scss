@@ -1,2 +1,7 @@
 @mixin vars {
+	--components-callout-gap: var(--pr-t-spacings-150);
+	--components-callout-display: flex;
+	--components-callout-padding: var(--pr-t-spacings-100) var(--pr-t-spacings-150);
+	--components-callout-fontSize: inherit;
+	--components-callout-lineHeight: inherit;
 }

@@ -1,0 +1,11 @@
+<!-- basic class -->
+<div class="pr-u-gap600"></div>
+<div [class]="'pr-u-gap600'"></div>
+<div [class]="condition ? 'pr-u-gap600' : 'pr-u-margin200'"></div>
+
+<!-- NgClass -->
+<span aria-hidden="true" [ngClass]="{ 'pr-u-gap100': showBillingInfos, 'pr-u-margin800': !showBillingInfos }"></span>
+<span aria-hidden="true" [ngClass]="event.expanded ? 'pr-u-gap600' : 'pr-u-gap300'"></span>
+
+<!-- Class bound attribute -->
+<span [class.pr-u-padding800]="!showDetails"></span>
