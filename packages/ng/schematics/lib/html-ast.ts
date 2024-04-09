@@ -78,13 +78,13 @@ export class HtmlAstVisitor<TNode extends TemplateNode> {
 					this.visit(cb, branch.children);
 				});
 			} else if (node instanceof this.lib.TmplAstForLoopBlock) {
+				// Visit @for's children
+				this.visit(cb, node.children);
+
 				if (node.empty) {
 					// If we have an @empty block, visit its children too
-					this.visit(cb, [...node.children, ...node.empty.children]);
-				} else {
-					// Else, just visit @for's children
-					this.visit(cb, node.children);
-				}
+					this.visit(cb, node.empty.children);
+				} 
 			} else if (node instanceof this.lib.TmplAstDeferredBlock || node instanceof this.lib.TmplAstElement || node instanceof this.lib.TmplAstTemplate) {
 				// Visit @defer and classic AST elements
 				this.visit(cb, node.children);
