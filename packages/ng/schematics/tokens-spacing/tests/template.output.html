@@ -1,3 +1,17 @@
+<div class="timeline mod-number pr-u-paddingLeft600 pr-u-paddingRight600 pr-u-paddingTop200 pr-u-paddingBottom400"></div>
+@if (foo) {
+<div class="timeline mod-number pr-u-paddingLeft600 pr-u-paddingRight600 pr-u-paddingTop200 pr-u-paddingBottom400"></div>
+} @else if (bar) {
+<div class="timeline mod-number pr-u-paddingLeft600 pr-u-paddingRight600 pr-u-paddingTop200 pr-u-paddingBottom400"></div>
+} @else {
+<div class="timeline mod-number pr-u-paddingLeft600 pr-u-paddingRight600 pr-u-paddingTop200 pr-u-paddingBottom400"></div>
+}
+<span></span>
+@for (foo of bar; track foo.baz) {
+<div class="timeline mod-number pr-u-paddingLeft600 pr-u-paddingRight600 pr-u-paddingTop200 pr-u-paddingBottom400"></div>
+} @empty {
+<div class="timeline mod-number pr-u-paddingLeft600 pr-u-paddingRight600 pr-u-paddingTop200 pr-u-paddingBottom400"></div>
+}
 <!-- basic class -->
 <div class="pr-u-gap600"></div>
 <div [class]="'pr-u-gap600'"></div>

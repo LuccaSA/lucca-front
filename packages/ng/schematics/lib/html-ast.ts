@@ -1,7 +1,7 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import { ParsedTemplate, TmplAstBoundAttribute, TmplAstElement, TmplAstNode, TmplAstTextAttribute } from '@angular/compiler';
-import { ScriptTarget, createSourceFile } from 'typescript';
+import { createSourceFile, ScriptTarget } from 'typescript';
 import { applyUpdates, updateContent } from './file-update.js';
 import { replaceStringLiterals } from './typescript-ast.js';
 
@@ -72,8 +72,21 @@ export class HtmlAstVisitor<TNode extends TemplateNode> {
 	private visit(cb: (node: TemplateNode) => void, nodes: TemplateNode[]): void {
 		for (const node of nodes) {
 			cb(node);
-
-			if (node instanceof this.lib.TmplAstElement || node instanceof this.lib.TmplAstTemplate) {
+			if (node instanceof this.lib.TmplAstIfBlock) {
+				// Visit @if branches
+				node.branches.forEach((branch) => {
+					this.visit(cb, branch.children);
+				});
+			} else if (node instanceof this.lib.TmplAstForLoopBlock) {
+				if (node.empty) {
+					// If we have an @empty block, visit its children too
+					this.visit(cb, [...node.children, ...node.empty.children]);
+				} else {
+					// Else, just visit @for's children
+					this.visit(cb, node.children);
+				}
+			} else if (node instanceof this.lib.TmplAstDeferredBlock || node instanceof this.lib.TmplAstElement || node instanceof this.lib.TmplAstTemplate) {
+				// Visit @defer and classic AST elements
 				this.visit(cb, node.children);
 			}
 		}
@@ -86,7 +99,13 @@ export class HtmlAstVisitor<TNode extends TemplateNode> {
 
 export class HtmlAst extends HtmlAstVisitor<TemplateNode> {
 	public constructor(content: string, lib: AngularCompilerLib) {
-		super(lib.parseTemplate(content, 'migration.html', { preserveWhitespaces: true }).nodes, lib);
+		super(
+			lib.parseTemplate(content, 'migration.html', {
+				preserveWhitespaces: true,
+				enableBlockSyntax: true,
+			}).nodes,
+			lib,
+		);
 	}
 }
 
