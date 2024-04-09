@@ -58,7 +58,12 @@
 						class="userPopover-details-info-detail-workplace mod-link"
 						[href]="employee._links?.schedule?.href"
 					>
-						<span aria-hidden="true" class="lucca-icon mod-S" [class.icon-mapPin]="employee.isWorkingNow && employee.currentWorkLocation" [class.icon-calendarPlanning]="!employee.isWorkingNow || !employee.currentWorkLocation"></span>
+						<span
+							aria-hidden="true"
+							class="lucca-icon mod-S"
+							[class.icon-mapPin]="employee.isWorkingNow && employee.currentWorkLocation"
+							[class.icon-calendarPlanning]="!employee.isWorkingNow || !employee.currentWorkLocation"
+						></span>
 						<span class="userPopover-details-info-detail-workplace-state">
 							<ng-container *ngIf="employee.isWorkingNow === true">
 								<ng-container *ngIf="employee.currentWorkLocation">
