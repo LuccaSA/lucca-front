@@ -1,14 +1,12 @@
 /* eslint-disable @angular-eslint/no-output-on-prefix */
 import { OverlayConfig, OverlayContainer } from '@angular/cdk/overlay';
 import {
-	booleanAttribute,
 	ChangeDetectorRef,
 	Directive,
 	ElementRef,
 	EventEmitter,
 	HostBinding,
 	HostListener,
-	inject,
 	Input,
 	OnDestroy,
 	OnInit,
@@ -16,12 +14,14 @@ import {
 	TemplateRef,
 	Type,
 	ViewChild,
+	booleanAttribute,
+	inject,
 } from '@angular/core';
-import { BehaviorSubject, ReplaySubject, Subject } from 'rxjs';
+import { ControlValueAccessor } from '@angular/forms';
+import { BehaviorSubject, Observable, ReplaySubject, Subject, switchMap, take } from 'rxjs';
 import { LuOptionGrouping, LuSimpleSelectDefaultOptionComponent } from '../option';
 import { LuSelectPanelRef } from '../panel';
 import { LuOptionContext, SELECT_LABEL, SELECT_LABEL_ID } from '../select.model';
-import { ControlValueAccessor } from '@angular/forms';
 
 @Directive()
 export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDestroy, OnInit, ControlValueAccessor {
@@ -167,6 +167,8 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 				break;
 			case 'Enter':
 				if (this.isPanelOpen) {
+					// Prevent form submission when selecting a value with Enter
+					$event.preventDefault();
 					this.panelRef.selectCurrentlyHighlightedValue();
 				} else {
 					this.panelRef?.handleKeyManagerEvent($event);
@@ -248,8 +250,10 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 		}
 
 		this.panelRef.valueChanged.subscribe((value) => this.updateValue(value));
-		this.panelRef.nextPage.subscribe(() => this.nextPage.emit());
-		this.panelRef.previousPage.subscribe(() => this.previousPage.emit());
+
+		this.#pageChanged(this.panelRef.nextPage).subscribe(() => this.nextPage.emit());
+		this.#pageChanged(this.panelRef.previousPage).subscribe(() => this.previousPage.emit());
+
 		this.panelRef.activeOptionIdChanged.subscribe((optionId) => {
 			this.activeDescendant$.next(optionId);
 			this.changeDetectorRef.markForCheck();
@@ -293,5 +297,10 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 		this.clueChanged('', skipPanelOpen);
 		this.onChange?.(value);
 		this.onTouched?.();
+	}
+
+	// Ensure nextPage/previousPage does not emit too often
+	#pageChanged(pageEmitter: EventEmitter<void>): Observable<void> {
+		return this.options$.pipe(switchMap(() => pageEmitter.pipe(take(1))));
 	}
 }
