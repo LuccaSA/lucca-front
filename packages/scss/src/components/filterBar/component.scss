@@ -1,0 +1,84 @@
+@use '@lucca-front/scss/src/commons/utils/a11y';
+@use '@lucca-front/scss/src/commons/utils/container';
+
+@mixin component($atRoot: 'without: rule') {
+	background-color: var(--components-filterBar-backgroundColor);
+	border-radius: var(--commons-borderRadius-L);
+	border: var(--commons-divider-width) solid var(--commons-border-200);
+	container-name: filterBar;
+	container-type: inline-size;
+	padding: var(--pr-t-spacings-200);
+
+	&:has(.filterBar-footer-toggleButton[aria-expanded='false']) {
+		.filterBar-toggledFilters {
+			display: none;
+		}
+	}
+
+	@at-root ($atRoot) {
+		.filterBar-toggledFilters {
+			margin-block-start: var(--pr-t-spacings-200);
+		}
+
+		.filterBar-footer {
+			border-block-start: var(--commons-divider-width) solid var(--commons-border-200);
+			display: flex;
+			flex-direction: column;
+			flex-wrap: wrap;
+			gap: var(--pr-t-spacings-100);
+			justify-content: center;
+			margin-block-start: var(--pr-t-spacings-200);
+			padding-block-start: var(--pr-t-spacings-200);
+
+			&:empty {
+				display: none;
+			}
+
+			&:has(.filterBar-footer-actions:only-child:empty) {
+				display: none;
+			}
+
+			@include container.min('S', $name: 'filterBar') {
+				flex-direction: row;
+				justify-content: space-between;
+			}
+		}
+
+		.filterBar-footer-toggleButton {
+			&[aria-expanded='false'] {
+				.filterBar-footer-toggleButton-labelAlternative {
+					display: none;
+				}
+			}
+			&[aria-expanded='true'] {
+				.filterBar-footer-toggleButton-label {
+					@include a11y.mask;
+				}
+				.lucca-icon {
+					transform: rotate(180deg);
+				}
+			}
+			.lucca-icon {
+				transition: transform var(--commons-animations-durations-standard);
+			}
+		}
+
+		.filterBar-footer-actions {
+			display: flex;
+			flex-direction: column;
+			flex-wrap: wrap;
+			gap: var(--pr-t-spacings-200);
+			justify-content: center;
+			text-align: center;
+
+			@include container.min('XS', $name: 'filterBar') {
+				align-items: center;
+				flex-direction: row;
+			}
+
+			@include container.min('S', $name: 'filterBar') {
+				margin-inline-start: auto;
+			}
+		}
+	}
+}

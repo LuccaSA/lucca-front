@@ -22,7 +22,7 @@
 
 		.header-nav {
 			height: var(--components-header-height);
-			padding-left: calc(var(--components-header-height) + var(--spacings-S));
+			padding-left: calc(var(--components-header-height) + var(--pr-t-spacings-200));
 			align-items: flex-start;
 			display: flex;
 			flex-direction: column;
@@ -49,7 +49,7 @@
 			text-decoration: none;
 
 			&:hover {
-				background-color: var(--palettes-grey-25);
+				background-color: var(--palettes-neutral-25);
 				color: var(--palettes-neutral-800);
 			}
 

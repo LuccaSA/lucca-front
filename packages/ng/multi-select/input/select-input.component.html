@@ -3,6 +3,7 @@
 <button
 	*ngIf="hasValue && clearable && (disabled$ | async) === false"
 	role="button"
+	type="button"
 	class="multipleSelect-clear clear"
 	(click)="clearValue($event)"
 >

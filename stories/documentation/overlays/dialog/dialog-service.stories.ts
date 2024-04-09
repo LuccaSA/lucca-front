@@ -1,23 +1,23 @@
+import { allLegumes } from '@/stories/forms/select/select.utils';
 import { Component, inject } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import {
-	configureLuDialog,
 	DialogComponent,
 	DialogContentComponent,
 	DialogDismissDirective,
 	DialogFooterComponent,
 	DialogHeaderComponent,
-	injectDialogData,
-	injectDialogRef,
 	LuDialogRef,
 	LuDialogService,
+	configureLuDialog,
+	injectDialogData,
+	injectDialogRef,
 	provideLuDialog,
 } from '@lucca-front/ng/dialog';
-import { applicationConfig, Meta, StoryObj } from '@storybook/angular';
-import { FormFieldComponent } from '../../../../packages/ng/form-field/form-field.component';
-import { LuSimpleSelectInputComponent } from '../../../../packages/ng/simple-select/input';
-import { FormsModule } from '@angular/forms';
-import { allLegumes } from '@/stories/forms/select/select.utils';
+import { FormFieldComponent } from '@lucca-front/ng/form-field';
+import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
+import { Meta, StoryObj, applicationConfig } from '@storybook/angular';
 
 @Component({
 	selector: 'sb-dialog-content',

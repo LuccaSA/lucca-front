@@ -8,6 +8,12 @@
 	@include component;
 }
 
+.form-fieldset {
+	&.mod-S {
+		@include S;
+	}
+}
+
 .form-field {
 	&.mod-S {
 		@include S;

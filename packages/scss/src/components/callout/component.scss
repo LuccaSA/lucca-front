@@ -4,16 +4,18 @@
 
 @mixin component($atRoot: 'without: rule') {
 	align-items: flex-start;
+	position: relative;
 	border-radius: var(--commons-borderRadius-L);
 	background-color: var(--palettes-50, var(--palettes-neutral-50));
 	color: var(--palettes-neutral-800);
 	box-shadow: 0 0 0 var(--commons-divider-width) var(--palettes-300, var(--palettes-neutral-300));
-	gap: 0.75rem;
-	padding: var(--spacings-XS) 0.75rem;
-	position: relative;
+	gap: var(--components-callout-gap);
+	padding: var(--components-callout-padding);
+	font-size: var(--components-callout-fontSize);
+	line-height: var(--components-callout-lineHeight);
 
 	&:not([hidden]) {
-		display: flex;
+		display: var(--components-callout-display);
 	}
 
 	a,
@@ -27,7 +29,7 @@
 			flex: 1;
 			display: flex;
 			flex-direction: column;
-			gap: var(--spacings-XXS);
+			gap: var(--pr-t-spacings-50);
 		}
 
 		.callout-content-title {
@@ -37,10 +39,6 @@
 		.callout-icon {
 			display: inline-flex;
 			color: var(--palettes-700, var(--palettes-neutral-700));
-
-			.lucca-icon {
-				font-size: var(--sizes-M-lineHeight);
-			}
 		}
 
 		.callout-kill {

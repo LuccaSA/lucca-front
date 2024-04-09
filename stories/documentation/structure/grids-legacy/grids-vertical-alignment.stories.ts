@@ -42,8 +42,8 @@ const Template: StoryFn<GridsLegacyVerticalAlignmentStory> = (args) => ({
 		`
 		.grid-demo {
 			background-color: var(--palettes-neutral-200);
-			margin-bottom: var(--spacings-S);
-			padding: var(--spacings-S);
+			margin-bottom: var(--pr-t-spacings-200);
+			padding: var(--pr-t-spacings-200);
 			border-radius: var(--commons-borderRadius-full);
 		}`,
 	],

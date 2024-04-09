@@ -383,50 +383,25 @@ export const mockProjectUsers = [
 	},
 ];
 
-export const mockUsers = [
-	{
-		id: 6,
-		firstName: 'Chloe',
-		lastName: 'Alibert',
+const firstNames = ['Chloe', 'Marie-Françoise', 'Laurence', 'Gaspard', 'Jean', 'Pierre', 'Paul', 'Jacques', 'Marie', 'Sophie', 'Julie', 'Julien'];
+const lastNames = ['Alibert', 'Archer', 'Atali', 'Bouvier', 'Lefevre', 'Durand', 'Dupont', 'Martin', 'Bernard', 'Robert', 'Richard', 'Petit'];
+const departments = ['Direction', 'Support', 'Commercial'];
+
+export const mockUsers = firstNames
+	.flatMap((firstName) => lastNames.flatMap((lastName) => ({ firstName, lastName })))
+	.map((user, index) => ({
+		id: index + 1,
 		picture: null,
-		department: {
-			id: 1,
-			name: 'Direction',
-		},
-	},
-	{
-		id: 7,
-		firstName: 'Marie-Françoise',
-		lastName: 'Archer',
-		picture: {
-			href: 'https://demo-ux1.ilucca.net/getFile.ashx?id=e845a0ca-dbd9-452d-adc0-c873a847a37d',
-		},
-		department: {
-			id: 1,
-			name: 'Direction',
-		},
-	},
-	{
-		id: 49,
-		firstName: 'Laurence',
-		lastName: 'Atali',
-		picture: null,
-		department: {
-			id: 2,
-			name: 'Support',
-		},
-	},
-	{
-		id: 66,
-		firstName: 'Chloe',
-		lastName: 'Alibert',
-		picture: null,
-		department: {
-			id: 3,
-			name: 'Commercial',
-		},
-	},
-];
+		department: { id: (index % departments.length) + 1, name: departments[index % departments.length] },
+		...user,
+	}));
+
+// Create homonym in different department
+mockUsers.unshift({
+	...mockUsers[0],
+	id: mockUsers.length + 1,
+	department: { id: 2, name: 'Commercial' },
+});
 
 export const mockMe = {
 	id: 35,

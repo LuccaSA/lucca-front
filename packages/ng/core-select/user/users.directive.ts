@@ -105,7 +105,7 @@ export class LuCoreSelectUsersDirective<T extends LuCoreSelectUser = LuCoreSelec
 			...filters,
 			...(orderBy ? { orderBy } : {}),
 			...(clue ? { clue: sanitizeClueFilter(clue) } : {}),
-			...(operationIds ? { operationIds: operationIds.join(',') } : {}),
+			...(operationIds ? { operations: operationIds.join(',') } : {}),
 			...(appInstanceId ? { appInstanceId } : {}),
 			...(enableFormerEmployees ? { enableFormerEmployees } : {}),
 		})),
@@ -158,11 +158,10 @@ export class LuCoreSelectUsersDirective<T extends LuCoreSelectUser = LuCoreSelec
 			shareReplay({ bufferSize: 1, refCount: true }),
 		);
 
-		const options$ = super.buildOptions();
+		const meFilter$ = displayMe$.pipe(switchMap((displayMe) => (displayMe ? me$ : of(null))));
 
-		return displayMe$.pipe(
-			switchMap((displayMe) => combineLatest([options$, displayMe ? me$ : of(null)])),
-			map(([options, me]) => (me ? [me, ...(options ?? []).filter((o) => o.id !== me.id)] : options)),
+		return combineLatest([super.buildOptions(), meFilter$]).pipe(
+			map(([options, meFilter]) => (meFilter ? [meFilter, ...(options ?? []).filter((o) => o.id !== meFilter.id)] : options)),
 			switchMap((users) => this.#userHomonymsService.handleHomonyms(users, this.displayFormat)),
 		);
 	}

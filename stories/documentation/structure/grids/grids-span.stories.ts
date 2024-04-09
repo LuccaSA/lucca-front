@@ -10,7 +10,8 @@ export default {
 } as Meta;
 
 function getTemplate(args: GridsSpanStory): string {
-	return `<div class="grid" style="--grid-columns: 6">
+	return `
+<div class="grid" style="--grid-columns: 6">
 	<div class="grid-column"><div class="demo">grid-columns 6</div></div>
 	<div class="grid-column"><div class="demo">grid-columns 6</div></div>
 	<div class="grid-column" style="--grid-colspan: 2"><div class="demo">grid-columns 6<br />colspan 2</div></div>
@@ -33,7 +34,7 @@ const Template: StoryFn<GridsSpanStory> = (args) => ({
 		`
 		.demo {
 			background-color: var(--colors-white-color);
-			padding: var(--spacings-S);
+			padding: var(--pr-t-spacings-200);
 			border-radius: 1rem;
 			text-align: center;
 			height: 100%;
@@ -43,7 +44,7 @@ const Template: StoryFn<GridsSpanStory> = (args) => ({
 		}
 
 		.grid + .grid {
-			margin-top: var(--spacings-L);
+			margin-top: var(--pr-t-spacings-400);
 		}
 		`,
 	],

@@ -1,10 +1,10 @@
 @mixin current {
 	.timeline-step-title {
-		color: var(--palettes-product-700);
+		color: var(--palettes-700, var(--palettes-product-700));
 
 		&::before {
-			background-color: var(--palettes-product-700);
-			box-shadow: 0 0 0 var(--spacings-XXS) var(--palettes-product-200);
+			background-color: var(--palettes-700, var(--palettes-product-700));
+			box-shadow: 0 0 0 var(--pr-t-spacings-50) var(--palettes-200, var(--palettes-product-200));
 			color: var(--colors-white-color);
 		}
 	}
