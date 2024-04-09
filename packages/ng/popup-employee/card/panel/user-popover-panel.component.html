@@ -40,7 +40,7 @@
 				<p class="userPopover-details-info-detail">
 					<!--                        HORS CONTRAT-->
 					<span *ngIf="employee.dtContractStart | isFuture" class="userPopover-details-info-detail-workplace">
-						<span aria-hidden="true" class="lucca-icon icon-payPeriod mod-S"></span>
+						<span aria-hidden="true" class="lucca-icon icon-calendarPlanning mod-S"></span>
 						<span class="userPopover-details-info-detail-link-state">
 							{{intl.EMPLOYEE_CARD_PANEL_COMING_ON_LABEL | injectParameter : (employee.dtContractStart | date: 'longDate') }}
 						</span>
@@ -58,7 +58,7 @@
 						class="userPopover-details-info-detail-workplace mod-link"
 						[href]="employee._links?.schedule?.href"
 					>
-						<span aria-hidden="true" class="lucca-icon icon-payPeriod mod-S"></span>
+						<span aria-hidden="true" class="lucca-icon mod-S" [class.icon-mapPin]="employee.isWorkingNow && employee.currentWorkLocation" [class.icon-calendarPlanning]="!employee.isWorkingNow || !employee.currentWorkLocation"></span>
 						<span class="userPopover-details-info-detail-workplace-state">
 							<ng-container *ngIf="employee.isWorkingNow === true">
 								<ng-container *ngIf="employee.currentWorkLocation">
