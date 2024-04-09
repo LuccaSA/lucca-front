@@ -26,7 +26,7 @@ class UserPopoverStory {
 }
 
 export default {
-	title: 'Documentation/Overlays/user-popover',
+	title: 'Documentation/Users/Popover/Basic',
 	component: UserPopoverStory,
 	decorators: [applicationConfig({ providers: [provideAnimations(), provideHttpClient(), provideLuUserPopover()] })],
 	argsTypes: {
