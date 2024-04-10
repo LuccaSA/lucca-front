@@ -11,7 +11,11 @@
 <div class="timeline mod-number u-paddingLeftXL u-paddingRightXL u-paddingTopS u-paddingBottomL"></div>
 } @empty {
 <div class="timeline mod-number u-paddingLeftXL u-paddingRightXL u-paddingTopS u-paddingBottomL"></div>
-}
+} @switch (foo) { @case ("bar") {
+<div class="timeline mod-number u-paddingLeftXL u-paddingRightXL u-paddingTopS u-paddingBottomL"></div>
+} @default {
+<div class="timeline mod-number u-paddingLeftXL u-paddingRightXL u-paddingTopS u-paddingBottomL"></div>
+} }
 <!-- basic class -->
 <div class="u-gapXL"></div>
 <div [class]="'u-gapXL'"></div>

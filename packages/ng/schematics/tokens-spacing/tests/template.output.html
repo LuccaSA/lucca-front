@@ -11,7 +11,11 @@
 <div class="timeline mod-number pr-u-paddingLeft600 pr-u-paddingRight600 pr-u-paddingTop200 pr-u-paddingBottom400"></div>
 } @empty {
 <div class="timeline mod-number pr-u-paddingLeft600 pr-u-paddingRight600 pr-u-paddingTop200 pr-u-paddingBottom400"></div>
-}
+} @switch (foo) { @case ("bar") {
+<div class="timeline mod-number pr-u-paddingLeft600 pr-u-paddingRight600 pr-u-paddingTop200 pr-u-paddingBottom400"></div>
+} @default {
+<div class="timeline mod-number pr-u-paddingLeft600 pr-u-paddingRight600 pr-u-paddingTop200 pr-u-paddingBottom400"></div>
+} }
 <!-- basic class -->
 <div class="pr-u-gap600"></div>
 <div [class]="'pr-u-gap600'"></div>
