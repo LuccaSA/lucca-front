@@ -6,7 +6,7 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, In
 import { RouterLink } from '@angular/router';
 import { ALuPopoverPanel, luTransformPopover } from '@lucca-front/ng/popover';
 import { ILuUser, LuUserPictureModule } from '@lucca-front/ng/user';
-import { BehaviorSubject, combineLatest, concatMap, Observable, of, ReplaySubject, Subscription } from 'rxjs';
+import { BehaviorSubject, combineLatest, Observable, of, ReplaySubject, Subscription } from 'rxjs';
 
 import { getIntl } from '@lucca-front/ng/core';
 import { LuUserPopover } from '../../user-popover.model';
@@ -17,7 +17,7 @@ import { InjectParameterPipe } from '../pipe/inject-parameter.pipe';
 import { isFutureOrTodayPipe, IsFuturePipe } from '../pipe/is-future.pipe';
 import { LeaveEndsDisplayPipe } from '../pipe/leave-ends-display.pipe';
 import { ILuUserPopoverPanel } from './user-popover-panel.model';
-import { catchError, map } from 'rxjs/operators';
+import { catchError, map, switchMap } from 'rxjs/operators';
 
 @Component({
 	standalone: true,
@@ -51,7 +51,7 @@ export class LuUserPopoverPanelComponent extends ALuPopoverPanel implements ILuU
 	#user$ = new ReplaySubject<ILuUser>();
 	#errorImage$ = new BehaviorSubject<boolean>(false);
 	public employee$: Observable<LuUserPopover> = this.#user$.pipe(
-		concatMap((user) =>
+		switchMap((user) =>
 			this._service.get(user.id).pipe(
 				catchError(() =>
 					of({
@@ -98,6 +98,7 @@ export class LuUserPopoverPanelComponent extends ALuPopoverPanel implements ILuU
 	public set user(user: ILuUser) {
 		if (user) {
 			this.#user$.next(user);
+			this._changeDetectorRef.markForCheck();
 		}
 	}
 
