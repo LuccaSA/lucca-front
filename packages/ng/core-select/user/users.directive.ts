@@ -128,12 +128,12 @@ export class LuCoreSelectUsersDirective<T extends LuCoreSelectUser = LuCoreSelec
 		const url = this.customUrl() || this.defaultUrl();
 
 		const params = {
-			id: this.currentUserId,
 			fields: this.#userFields,
 			...(this._filters() ?? {}),
 			...(this._operationIds() ? { operationIds: this._operationIds().join(',') } : {}),
 			...(this._appInstanceId() ? { appInstanceId: this._appInstanceId() } : {}),
 			...(this._enableFormerEmployees() ? { enableFormerEmployees: this._enableFormerEmployees() } : {}),
+			id: this.currentUserId,
 		};
 
 		return this.httpClient
