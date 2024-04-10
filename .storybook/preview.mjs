@@ -12,42 +12,41 @@ for (const doc of docToCleanup) {
 setCompodocJson(docJson);
 
 export const parameters = {
-	actions: { argTypesRegex: '^on[A-Z].*' },
 	controls: {
 		matchers: {
 			color: /(background|color)$/i,
-			date: /Date$/,
-		},
+			date: /Date$/
+		}
 	},
 	docs: {
 		// When stories are rendered inside an iframe, controls no longer affect displayed story
 		inlineStories: true,
 		page: DocumentationTemplate,
 		canvas: {
-			sourceState: 'shown',
-		},
+			sourceState: 'shown'
+		}
 	},
 	backgrounds: {
 		default: 'Default',
 		values: [
 			{
 				name: 'Raised',
-				value: '#ffffff',
+				value: '#ffffff'
 			},
 			{
 				name: 'Default',
-				value: '#f3f6fc',
+				value: '#f3f6fc'
 			},
 			{
 				name: 'Sunken',
-				value: '#e7edf9',
+				value: '#e7edf9'
 			},
 			{
 				name: 'Inverted',
-				value: '#0b1732',
-			},
-		],
-	},
+				value: '#0b1732'
+			}
+		]
+	}
 };
 
 // ---------------------- MSW ----------------------
@@ -66,7 +65,7 @@ if (typeof global.process === 'undefined') {
 		serviceWorker: {
 			// Points to the custom location of the Service Worker file.
 			url: `${pathname}/mockServiceWorker.js`,
-			scope: '/',
-		},
+			scope: '/'
+		}
 	});
 }
