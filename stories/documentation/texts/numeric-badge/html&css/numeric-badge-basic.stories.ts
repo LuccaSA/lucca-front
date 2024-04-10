@@ -11,13 +11,13 @@ export default {
 		palette: {
 			options: ['', 'palette-product'],
 			control: {
-				type: 'select',
+				type: 'radio',
 			},
 		},
 		size: {
 			options: ['', 'mod-S', 'mod-XS'],
 			control: {
-				type: 'select',
+				type: 'radio',
 			},
 		},
 	},
