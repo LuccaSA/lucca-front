@@ -18,7 +18,7 @@ export class LuSafeExternalSvgPipe implements PipeTransform {
 	#subscription?: Subscription;
 
 	transform(url: string): SafeHtml {
-		if (url !== this.#lastSvgUrl) {
+		if (url && url !== this.#lastSvgUrl) {
 			this.#lastSvgUrl = url;
 			this.#subscribeToSvg(url);
 		}

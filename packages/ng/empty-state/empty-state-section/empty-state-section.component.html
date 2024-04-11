@@ -1,9 +1,9 @@
 <section class="emptyState" [class.mod-center]="center">
 	<div class="emptyState-container">
 		<div class="emptyState-content">
-			<div class="emptyState-content-icon palette-{{palette}}" aria-hidden="true" [innerHtml]="icon | luSafeExternalSvg"></div>
+			<div *ngIf="icon" class="emptyState-content-icon palette-{{palette}}" aria-hidden="true" [innerHtml]="icon | luSafeExternalSvg"></div>
 			<div class="emptyState-content-text">
-				<h3 class="emptyState-content-heading">{{title}}</h3>
+				<h3 class="emptyState-content-heading">{{ title }}</h3>
 				<p>
 					<ng-container *luPortal="description"></ng-container>
 				</p>
