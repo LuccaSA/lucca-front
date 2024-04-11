@@ -174,6 +174,11 @@ export const WithDisabledOptions = generateStory({
 		<ng-container *luOption="let legume; select: selectRef" [luDisabledOption]="legume.index % 2 === 0">{{ legume.name }}</ng-container>
 	</lu-multi-select>
 `,
+	storyPartial: {
+		args: {
+			selectedLegumes: allLegumes.slice(0, 2),
+		},
+	},
 	neededImports: {
 		'@lucca-front/ng/core-select': ['LuOptionDirective', 'LuDisabledOptionDirective'],
 		'@lucca-front/ng/multi-select': ['LuMultiSelectInputComponent'],
