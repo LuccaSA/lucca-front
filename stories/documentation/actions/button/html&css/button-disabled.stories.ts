@@ -1,20 +1,55 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Component } from '@angular/core';
+import { provideAnimations } from '@angular/platform-browser/animations';
+import { LuTooltipModule } from '@lucca-front/ng/tooltip';
+import { Meta, StoryFn, applicationConfig } from '@storybook/angular';
 
-interface ButtonDisabledStory {}
+@Component({
+	selector: 'disabled-stories',
+	standalone: true,
+	imports: [LuTooltipModule],
+	template: `<button type="button" class="button" disabled="disabled">Bouton désactivé</button>
+		<button type="button" class="button" aria-disabled="true" (click)="$event.preventDefault()" [luTooltip]="'On explique pourquoi le bouton est désactivé'">
+			Bouton désactivé avec une infobulle
+		</button>`,
+	styles: [
+		`
+			:host {
+				display: flex;
+				gap: var(--spacings-S);
+				flex-direction: column;
+				align-items: flex-start;
+			}
+		`,
+	],
+})
+class DisabledStory {}
 
 export default {
 	title: 'Documentation/Actions/Button/HTML&CSS/Disabled',
+	component: DisabledStory,
 	argTypes: {},
+	decorators: [applicationConfig({ providers: [provideAnimations()] })],
 } as Meta;
 
-function getTemplate(args: ButtonDisabledStory): string {
-	return `<button type="button" class="button" disabled>Button</button>`;
-}
-
-const Template: StoryFn<ButtonDisabledStory> = (args) => ({
+const template: StoryFn<DisabledStory> = (args) => ({
 	props: args,
-	template: getTemplate(args),
 });
 
-export const DisabledButton = Template.bind({});
-DisabledButton.args = {};
+export const Basic = template.bind({});
+Basic.args = {};
+
+const code = `<button type="button" class="button" disabled="disabled">Bouton désactivé</button>
+
+<button type="button" class="button" aria-disabled="true" (click)="$event.preventDefault()" [luTooltip]="'On explique pourquoi le bouton est désactivé'">
+	Bouton désactivé avec une infobulle
+</button>`;
+
+Basic.parameters = {
+	docs: {
+		source: {
+			language: 'html',
+			type: 'code',
+			code,
+		},
+	},
+};
