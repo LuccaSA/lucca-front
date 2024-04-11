@@ -159,6 +159,15 @@
 
 			&.is-disabled {
 				--components-options-checkbox-border-color: var(--palettes-neutral-500);
+
+				&.is-selected {
+					--components-options-checkbox-color: var(--palettes-neutral-100);
+					background: transparent;
+
+					&::after {
+						color: var(--palettes-neutral-500);
+					}
+				}
 			}
 
 			&:not(.is-disabled):hover {
