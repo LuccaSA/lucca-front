@@ -8,8 +8,7 @@ export default {
 } as Meta;
 
 function getTemplate(args: RadioBasicStory): string {
-	return `
-<fieldset class="form-fieldset">
+	return `<fieldset class="form-fieldset">
 	<legend class="formLabel">
 		Text<sup class="formLabel-required" aria-hidden="true">*</sup>
 	</legend>
@@ -29,8 +28,7 @@ function getTemplate(args: RadioBasicStory): string {
 		</span>
 		<div class="inlineMessage" id="IDmessageRadioB">Helper text</div>
 	</div>
-</fieldset>
-	`;
+</fieldset>`;
 }
 
 const Template: StoryFn<RadioBasicStory> = (args) => ({
