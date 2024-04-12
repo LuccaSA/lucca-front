@@ -10,23 +10,23 @@ export default {
 function getTemplate(args: RadioSizeStory): string {
 	return `<fieldset class="form-fieldset mod-S">
 	<legend class="formLabel">
-		Text<sup class="formLabel-required" aria-hidden="true">*</sup>
+		Label<sup class="formLabel-required" aria-hidden="true">*</sup>
 	</legend>
 	<div class="form-field">
-		<label class="formLabel" for="IDradioA">Label A</label>
+		<label class="formLabel" for="IDradioA">Option A</label>
 		<span class="radioField">
 			<input type="radio" class="radioField-input" id="IDradioA" name="radioName1" aria-describedby="IDmessageRadioA" checked />
 			<span class="radioField-icon" aria-hidden="true"><span class="radioField-icon-check"></span></span>
 		</span>
-		<div class="inlineMessage" id="IDmessageRadioA">Helper text</div>
+		<div class="inlineMessage" id="IDmessageRadioA">Option text</div>
 	</div>
 	<div class="form-field">
-		<label class="formLabel" for="IDradioB">Label B</label>
+		<label class="formLabel" for="IDradioB">Option B</label>
 		<span class="radioField">
 			<input type="radio" class="radioField-input" id="IDradioB" name="radioName1" aria-describedby="IDmessageRadioB" />
 			<span class="radioField-icon" aria-hidden="true"><span class="radioField-icon-check"></span></span>
 		</span>
-		<div class="inlineMessage" id="IDmessageRadioB">Helper text</div>
+		<div class="inlineMessage" id="IDmessageRadioB">Option text</div>
 	</div>
 </fieldset>`;
 }

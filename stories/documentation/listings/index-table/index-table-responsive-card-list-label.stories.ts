@@ -65,5 +65,5 @@ const Template: StoryFn<IndexTableResponsiveCardListLabelStory> = (args) => ({
 	template: getTemplate(args),
 });
 
-export const ResponsiveCardList = Template.bind({});
-ResponsiveCardList.args = { };
+export const ResponsiveCardListLabel = Template.bind({});
+ResponsiveCardListLabel.args = { };

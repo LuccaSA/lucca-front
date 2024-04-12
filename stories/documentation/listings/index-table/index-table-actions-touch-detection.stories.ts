@@ -12,7 +12,7 @@ export default {
 } as Meta;
 
 function getTemplate(args: IndexTableActionsTouchDetectionStory): string {
-	return `<table class="indexTable u-marginBottomL">
+	return `<table class="indexTable">
 	<thead class="indexTable-head">
 		<tr class="indexTable-head-row">
 			<th class="indexTable-head-row-cell" scope="col">Label</th>
@@ -59,5 +59,5 @@ const Template: StoryFn<IndexTableActionsTouchDetectionStory> = (args) => ({
 	template: getTemplate(args),
 });
 
-export const Actions = Template.bind({});
-Actions.args = { };
+export const ActionsTouchDetection = Template.bind({});
+ActionsTouchDetection.args = { };

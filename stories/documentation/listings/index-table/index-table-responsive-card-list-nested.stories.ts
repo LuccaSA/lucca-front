@@ -212,5 +212,5 @@ const Template: StoryFn<IndexTableResponsiveCardListNestedStory> = (args) => ({
 	template: getTemplate(args),
 });
 
-export const ResponsiveCardList = Template.bind({});
-ResponsiveCardList.args = { };
+export const ResponsiveCardListNested = Template.bind({});
+ResponsiveCardListNested.args = { };
