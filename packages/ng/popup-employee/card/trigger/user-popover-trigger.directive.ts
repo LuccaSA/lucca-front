@@ -140,6 +140,7 @@ export class LuUserPopoverDirective extends ALuPopoverTrigger<LuUserPopoverPanel
 		const componentRef = this._overlayRef.attach(this._portal);
 		this._panel = componentRef.instance;
 		this._panel.user = this._user;
+		this._panel.overlayRef = this._overlayRef;
 	}
 
 	protected override _getPanelScrollStrategy(): LuPopoverScrollStrategy {

@@ -1,6 +1,6 @@
 /* eslint-disable @angular-eslint/no-input-rename */
 
-import { OverlayModule } from '@angular/cdk/overlay';
+import { OverlayModule, OverlayRef } from '@angular/cdk/overlay';
 import { AsyncPipe, DatePipe, NgClass, NgIf, NgOptimizedImage, NgSwitch, NgSwitchCase, NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Inject, Input, OnDestroy, Output, TemplateRef, ViewChild, ViewEncapsulation } from '@angular/core';
 import { RouterLink } from '@angular/router';
@@ -17,7 +17,7 @@ import { InjectParameterPipe } from '../pipe/inject-parameter.pipe';
 import { isFutureOrTodayPipe, IsFuturePipe } from '../pipe/is-future.pipe';
 import { LeaveEndsDisplayPipe } from '../pipe/leave-ends-display.pipe';
 import { ILuUserPopoverPanel } from './user-popover-panel.model';
-import { catchError, map, switchMap } from 'rxjs/operators';
+import { catchError, map, switchMap, tap } from 'rxjs/operators';
 
 @Component({
 	standalone: true,
@@ -63,6 +63,7 @@ export class LuUserPopoverPanelComponent extends ALuPopoverPanel implements ILuU
 				),
 			),
 		),
+		tap(() => this.overlayRef.updatePosition()),
 	);
 
 	public userPictureDisplay$ = combineLatest([this.employee$, this.#errorImage$]).pipe(
@@ -112,6 +113,7 @@ export class LuUserPopoverPanelComponent extends ALuPopoverPanel implements ILuU
 	public set inputPanelClasses(classes: string) {
 		this.panelClasses = classes;
 	}
+
 	/**
 	 * This method takes classes set on the host lu-popover element and applies them on the
 	 * popover template that displays in the overlay container. Otherwise, it's difficult
@@ -136,6 +138,8 @@ export class LuUserPopoverPanelComponent extends ALuPopoverPanel implements ILuU
 	}
 
 	private _subs = new Subscription();
+
+	public overlayRef: OverlayRef;
 
 	public constructor(private _changeDetectorRef: ChangeDetectorRef, @Inject(LuUserPopoverStore) private _service: ILuUserPopoverStore) {
 		super();
