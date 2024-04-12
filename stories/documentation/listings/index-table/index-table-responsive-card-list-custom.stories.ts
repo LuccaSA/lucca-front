@@ -63,5 +63,5 @@ const Template: StoryFn<IndexTableResponsiveCardListCustomStory> = (args) => ({
 	template: getTemplate(args),
 });
 
-export const ResponsiveCardList = Template.bind({});
-ResponsiveCardList.args = { };
+export const ResponsiveCardListCustom = Template.bind({});
+ResponsiveCardListCustom.args = { };

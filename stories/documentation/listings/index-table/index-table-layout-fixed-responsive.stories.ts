@@ -5,7 +5,7 @@ interface IndexTableLayoutFixedResponsiveStory {
 }
 
 export default {
-	title: 'Documentation/Listings/Index Table/Layout Fixed',
+	title: 'Documentation/Listings/Index Table/Layout Fixed Responsive',
 	argTypes: {
 
 	},

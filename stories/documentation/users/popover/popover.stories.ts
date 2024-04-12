@@ -13,7 +13,7 @@ import { ILuUser } from '../../../../packages/ng/user/user.model';
 @Component({
 	selector: 'user-popover-story',
 	standalone: true,
-	template: '<div [luUserPopover]="luUserPopover" [luUserPopoverEnterDelay]="luUserPopoverEnterDelay" [luUserPopoverLeaveDelay]="luUserPopoverLeaveDelay" [luUserPopoverDisabled]="luUserPopoverDisabled" >Coucou !</div>',
+	template: '<div [luUserPopover]="luUserPopover" [luUserPopoverEnterDelay]="luUserPopoverEnterDelay" [luUserPopoverLeaveDelay]="luUserPopoverLeaveDelay" [luUserPopoverDisabled]="luUserPopoverDisabled">Survolez-moi !</div>',
 	imports: [
 		LuUserPopoverDirective,
 	],
