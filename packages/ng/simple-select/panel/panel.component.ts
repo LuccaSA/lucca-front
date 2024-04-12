@@ -44,7 +44,7 @@ export class LuSelectPanelComponent<T> implements AfterViewInit {
 	}
 
 	public clueChange$ = this.selectInput.clue$;
-	public shouldDisplayAddOption$ = this.selectInput.shouldDisplayAddOption();
+	public shouldDisplayAddOption$ = this.selectInput.shouldDisplayAddOption$;
 	public groupTemplateLocation$ = ɵgetGroupTemplateLocation(!!this.grouping, this.clueChange$, this.options$);
 
 	onScroll(evt: Event): void {

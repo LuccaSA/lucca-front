@@ -57,7 +57,7 @@ export class LuMultiSelectPanelComponent<T> implements AfterViewInit {
 	}
 
 	public clueChange$ = this.selectInput.clue$;
-	public shouldDisplayAddOption$ = this.selectInput.shouldDisplayAddOption();
+	public shouldDisplayAddOption$ = this.selectInput.shouldDisplayAddOption$;
 
 	groupTemplateLocation$ = ɵgetGroupTemplateLocation(!!this.grouping, this.clueChange$, this.options$);
 

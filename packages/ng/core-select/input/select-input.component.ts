@@ -19,7 +19,7 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor } from '@angular/forms';
 import { PortalContent, getIntl } from '@lucca-front/ng/core';
-import { BehaviorSubject, Observable, ReplaySubject, Subject, map, of, startWith, switchMap, take } from 'rxjs';
+import { BehaviorSubject, Observable, ReplaySubject, Subject, defer, map, of, startWith, switchMap, take } from 'rxjs';
 import { LuOptionGrouping, LuSimpleSelectDefaultOptionComponent } from '../option';
 import { LuSelectPanelRef } from '../panel';
 import { LuOptionContext, SELECT_LABEL, SELECT_LABEL_ID } from '../select.model';
@@ -59,7 +59,9 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	addOptionLabel: PortalContent = this.coreIntl.addOption;
 
 	@Input()
-	addOptionStrategy: 'never' | 'always' | 'if-empty-clue' = 'never';
+	set addOptionStrategy(strategy: 'never' | 'always' | 'if-empty-clue') {
+		this.addOptionStrategy$.next(strategy);
+	}
 
 	@HostBinding('class.is-selected')
 	protected get isSelectedClass(): boolean {
@@ -149,7 +151,21 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	clue: string | null = null;
 	// This is the clue stored after we selected an option to know if we should emit an empty clue on open or not
 	lastEmittedClue: string = '';
-	clue$ = this.clueChange.pipe(startWith(this.clue));
+	clue$ = defer(() => this.clueChange.pipe(startWith(this.clue)));
+
+	addOptionStrategy$ = new BehaviorSubject<'never' | 'always' | 'if-empty-clue'>('never');
+	shouldDisplayAddOption$ = this.addOptionStrategy$.pipe(
+		switchMap((strategy) => {
+			switch (strategy) {
+				case 'always':
+					return of(true);
+				case 'never':
+					return of(false);
+				case 'if-empty-clue':
+					return this.clue$.pipe(map((clue) => !!clue));
+			}
+		}),
+	);
 
 	protected onChange?: (value: TValue | null) => void;
 	protected onTouched?: () => void;
@@ -252,17 +268,6 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 		this._panelRef = this.buildPanelRef();
 		this.bindInputToPanelRefEvents();
 		setTimeout(() => this.focusInput());
-	}
-
-	shouldDisplayAddOption(): Observable<boolean> {
-		switch (this.addOptionStrategy) {
-			case 'always':
-				return of(true);
-			case 'never':
-				return of(false);
-			case 'if-empty-clue':
-				return this.clue$.pipe(map((clue) => !!clue));
-		}
 	}
 
 	emitAddOption(): void {
