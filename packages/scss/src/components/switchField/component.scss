@@ -14,7 +14,7 @@
 			border: 2px solid var(--palettes-neutral-500);
 			border-radius: var(--component-switchField-label-input-height);
 			position: relative;
-			top: 0.125rem;
+			top: var(--pr-t-spacings-25);
 			color: var(--colors-white-color);
 			transition-property: color, border-color, background-color;
 			transition-duration: var(--commons-animations-durations-fast);
