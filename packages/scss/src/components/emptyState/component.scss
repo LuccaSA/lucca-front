@@ -1,3 +1,6 @@
+@use '@lucca-front/scss/src/commons/utils/media';
+@use '@lucca-front/scss/src/components/title/exports' as title;
+
 @mixin component($atRoot: 'without: rule') {
 	display: flex;
 	flex-direction: column;
@@ -33,6 +36,10 @@
 
 		.emptyState-content-heading {
 			margin-bottom: 0;
+
+			@include media.max('XXS') {
+				@include title.h2;
+			}
 		}
 
 		.emptyState-actions {
@@ -42,6 +49,10 @@
 
 			.button {
 				margin: 0;
+
+				@include media.max('XXS') {
+					flex-basis: 100%;
+				}
 			}
 		}
 	}
