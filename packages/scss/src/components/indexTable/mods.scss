@@ -70,7 +70,7 @@
     .indexTable-head {
         position: sticky;
         top: var(--components-indexTable-row-spacing);
-        z-index: 2;
+        z-index: 3;
     }
 
     //hide box-shadow from underneath rows that slighly appear on edges of the sticky header when scrolling
