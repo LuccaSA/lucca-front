@@ -1,18 +1,18 @@
 import { Meta, StoryFn } from '@storybook/angular';
 
-interface IndexTableActionsStory {
+interface IndexTableActionsTouchDetectionStory {
 
 }
 
 export default {
-	title: 'Documentation/Listings/Index Table/Actions',
+	title: 'Documentation/Listings/Index Table/Actions touch detection',
 	argTypes: {
 
 	},
 } as Meta;
 
-function getTemplate(args: IndexTableActionsStory): string {
-	return `<table class="indexTable">
+function getTemplate(args: IndexTableActionsTouchDetectionStory): string {
+	return `<table class="indexTable u-marginBottomL">
 	<thead class="indexTable-head">
 		<tr class="indexTable-head-row">
 			<th class="indexTable-head-row-cell" scope="col">Label</th>
@@ -36,7 +36,17 @@ function getTemplate(args: IndexTableActionsStory): string {
 					<span aria-hidden="true" class="lucca-icon icon-officePen"></span>
 				</button>
 				<button type="button" class="button indexTable-body-row-cell-subAction">
+					<span aria-hidden="true" class="lucca-icon icon-copy"></span>
+				</button>
+				<button type="button" class="button indexTable-body-row-cell-subAction">
+					<span aria-hidden="true" class="lucca-icon icon-archive"></span>
+				</button>
+				<button type="button" class="button indexTable-body-row-cell-subAction">
 					<span aria-hidden="true" class="lucca-icon icon-trashDelete"></span>
+				</button>
+				<!-- Implement dropdown on this button clic-->
+				<button type="button" class="button indexTable-body-row-cell-subActionDropdownTrigger mod-text mod-onlyIcon mod-S">
+					<span aria-hidden="true" class="lucca-icon icon-ellipsis"></span>
 				</button>
 			</td>
 		</tr>
@@ -44,7 +54,7 @@ function getTemplate(args: IndexTableActionsStory): string {
 </table>`;
 }
 
-const Template: StoryFn<IndexTableActionsStory> = (args) => ({
+const Template: StoryFn<IndexTableActionsTouchDetectionStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 });

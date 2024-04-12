@@ -1,6 +1,6 @@
 import { Meta, StoryFn } from '@storybook/angular';
 
-interface IndexTableLayoutFixedStory {
+interface IndexTableLayoutFixedResponsiveStory {
 
 }
 
@@ -11,14 +11,14 @@ export default {
 	},
 } as Meta;
 
-function getTemplate(args: IndexTableLayoutFixedStory): string {
-	return `<table class="indexTable mod-layoutFixed">
+function getTemplate(args: IndexTableLayoutFixedResponsiveStory): string {
+	return `<table class="indexTable mod-layoutFixedAtMediaMinS u-marginBottomL">
 	<thead class="indexTable-head">
 		<tr class="indexTable-head-row">
-			<th class="indexTable-head-row-cell" scope="col" style="--components-indexTable-cell-fixed-width: 15;">15rem column</th>
-			<th class="indexTable-head-row-cell" scope="col" style="--components-indexTable-cell-fixed-width: 10;">10rem column</th>
-			<th class="indexTable-head-row-cell" scope="col" style="--components-indexTable-cell-fixed-width: 6;">6rem col</th>
-			<th class="indexTable-head-row-cell" scope="col">Auto width column</th>
+		<th class="indexTable-head-row-cell" scope="col" style="--components-indexTable-cell-fixed-width: 15;">15rem column</th>
+		<th class="indexTable-head-row-cell" scope="col" style="--components-indexTable-cell-fixed-width: 10;">10rem column</th>
+		<th class="indexTable-head-row-cell" scope="col" style="--components-indexTable-cell-fixed-width: 6;">6rem col</th>
+		<th class="indexTable-head-row-cell" scope="col">Auto width column</th>
 		</tr>
 	</thead>
 	<tbody class="indexTable-body">
@@ -53,10 +53,10 @@ function getTemplate(args: IndexTableLayoutFixedStory): string {
 </table>`;
 }
 
-const Template: StoryFn<IndexTableLayoutFixedStory> = (args) => ({
+const Template: StoryFn<IndexTableLayoutFixedResponsiveStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const LayoutFixed = Template.bind({});
-LayoutFixed.args = { };
+export const LayoutFixedResponsive = Template.bind({});
+LayoutFixedResponsive.args = { };
