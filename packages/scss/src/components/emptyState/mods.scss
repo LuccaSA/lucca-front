@@ -1,4 +1,5 @@
 @use '@lucca-front/scss/src/commons/utils/media';
+@use '@lucca-front/scss/src/components/title/exports' as title;
 
 @mixin page {
 	background-image: var(--components-emptyState-illustration-foreground-bottom-left),
@@ -17,6 +18,20 @@
 	.emptyState-content {
 		background-color: var(--components-emptyState-background-color);
 		box-shadow: 0 0 8px 4px var(--components-emptyState-background-color);
+	}
+
+	.emptyState-content-heading {
+		@include media.max('XXS') {
+			@include title.h2;
+		}
+	}
+
+	.emptyState-actions {
+		.button {
+			@include media.max('XXS') {
+				flex-basis: 100%;
+			}
+		}
 	}
 }
 
