@@ -8,9 +8,9 @@
 >
 	<div class="emptyState-container">
 		<div class="emptyState-content">
-			<div class="emptyState-content-icon" aria-hidden="true" [innerHtml]="icon | luSafeExternalSvg"></div>
+			<div *ngIf="icon" class="emptyState-content-icon" aria-hidden="true" [innerHtml]="icon | luSafeExternalSvg"></div>
 			<div class="emptyState-content-text">
-				<h1 class="emptyState-content-heading">{{title}}</h1>
+				<h1 class="emptyState-content-heading">{{ title }}</h1>
 				<p>
 					<ng-container *luPortal="description"></ng-container>
 				</p>
