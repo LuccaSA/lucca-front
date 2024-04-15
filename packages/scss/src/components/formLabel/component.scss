@@ -1,3 +1,5 @@
+
+
 @mixin component($atRoot: 'without: rule') {
 	color: var(--components-formLabel-color);
 	display: flex;
@@ -21,6 +23,7 @@
 			font-size: inherit;
 			line-height: inherit;
 			font-weight: 600;
+			text-rendering: geometricPrecision;
 			margin-left: var(--pr-t-spacings-25);
 			top: 0;
 		}
