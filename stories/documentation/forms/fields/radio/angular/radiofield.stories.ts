@@ -33,7 +33,7 @@ export const Basic: StoryObj<RadioGroupInputComponent & FormFieldComponent> = {
 		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, ...inputArgs } = args;
 		return {
 			props: {
-				example: false,
+				example: 1,
 			},
 			template: cleanupTemplate(`<lu-form-field ${generateInputs(
 				{
