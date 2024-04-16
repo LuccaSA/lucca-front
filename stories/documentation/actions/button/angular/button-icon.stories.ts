@@ -13,7 +13,7 @@ export default {
 	],
 	render: ({ luButton, label, ...inputs }, { argTypes }) => {
 		return {
-			template: `<button luButton${luButton !== '' ? `="${luButton}"` : ''} ${generateInputs(
+			template: `<button type="button" luButton${luButton !== '' ? `="${luButton}"` : ''}${generateInputs(
 				inputs,
 				argTypes,
 			)}><lu-icon icon="signInfo"></lu-icon><span class="u-mask">Alt text</span>${label}</button>`,
