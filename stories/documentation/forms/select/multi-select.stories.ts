@@ -19,6 +19,7 @@ import { FilterLegumesPipe, ILegume, LuCoreSelectInputStoryComponent, SortLegume
 type LuMultiSelectInputStoryComponent = LuCoreSelectInputStoryComponent & {
 	selectedLegumes: ILegume[];
 	maxValuesShown: number;
+	selectLegume(legume: ILegume, legumes: ILegume[]): ILegume[];
 } & LuMultiSelectInputComponent<ILegume>;
 
 const generateStory = getStoryGenerator<LuMultiSelectInputStoryComponent>({
@@ -28,6 +29,7 @@ const generateStory = getStoryGenerator<LuMultiSelectInputStoryComponent>({
 		selectedLegumes: HiddenArgType,
 		valuesTpl: HiddenArgType,
 		maxValuesShown: HiddenArgType,
+		selectLegume: HiddenArgType,
 	},
 });
 
@@ -334,6 +336,40 @@ export const testDynamicDisabled = generateStory({
 			clearable: { control: { type: 'boolean' } },
 			placeholder: { control: { type: 'text' } },
 			maxValuesShown: { control: { type: 'number' } },
+		},
+	},
+});
+
+export const AddOption = generateStory({
+	name: 'Add option',
+	description: "Pour ajouter une option, il suffit d'utiliser l'input `addOptionStrategy` et de s'abonner à l'output `addOption`. Le label est customisable via l'input `addOptionLabel`.",
+	template: `
+	<div class="u-marginBottomS">There is {{ legumes.length }} legumes in the list.</div>
+
+	<lu-multi-select
+		#selectRef
+		placeholder="Placeholder..."
+		[(ngModel)]="selectedLegumes"
+		[options]="legumes | filterLegumes:clue"
+		[addOptionLabel]="'Ajouter ' + (clue || 'un légume')"
+		[addOptionStrategy]="addOptionStrategy"
+		(clueChange)="clue = $event"
+		(addOption)="legumes = addLegume($event, legumes); selectedLegumes = selectLegume(legumes[legumes.length - 1], selectedLegumes)"
+	/>
+	`,
+	neededImports: {
+		'@lucca-front/ng/multi-select': ['LuMultiSelectInputComponent'],
+	},
+	storyPartial: {
+		argTypes: {
+			addOptionLabel: { control: { type: 'text' } },
+			addOptionStrategy: { control: { type: 'select', options: ['never', 'always', 'if-empty-clue'] } },
+		},
+		args: {
+			addOptionLabel: 'Ajouter un légume',
+			addOptionStrategy: 'always',
+			addLegume: (name: string, existing: ILegume[]) => [...existing, { name: name || 'Légume sans titre', index: existing.length, color: existing[0].color }],
+			selectLegume: (legume: ILegume, legumes: ILegume[]) => [...legumes, legume],
 		},
 	},
 });
