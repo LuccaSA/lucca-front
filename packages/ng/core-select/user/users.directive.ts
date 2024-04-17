@@ -60,7 +60,7 @@ export class LuCoreSelectUsersDirective<T extends LuCoreSelectUser = LuCoreSelec
 
 	@Input()
 	public set displayFormat(format: LuDisplayFormat) {
-		this.displayFormat = format;
+		this._displayFormat = format;
 	}
 
 	private _displayFormat: LuDisplayFormat = LuDisplayFullname.lastfirst;
@@ -107,7 +107,7 @@ export class LuCoreSelectUsersDirective<T extends LuCoreSelectUser = LuCoreSelec
 			...(clue ? { clue: sanitizeClueFilter(clue) } : {}),
 			...(operationIds ? { operations: operationIds.join(',') } : {}),
 			...(appInstanceId ? { appInstanceId } : {}),
-			...(enableFormerEmployees ? { enableFormerEmployees } : {}),
+			...(enableFormerEmployees ? { formerEmployee: enableFormerEmployees } : {}),
 		})),
 	);
 
