@@ -3,14 +3,14 @@ import { Meta, StoryFn } from '@storybook/angular';
 interface TableStickyHeaderStory {}
 
 export default {
-	title: 'Documentation/Listings/Table/Sticky Header',
+	title: 'Documentation/Listings/Table/Legacy/Sticky Header',
 	argTypes: {},
 } as Meta;
 
 function getTemplate(args: TableStickyHeaderStory): string {
 	return `
 	<div class="demo-wrapper">
-		<table class="table mod-stickyHeader" style="--table-sticky-header-shadow-offset: 37px">
+		<table class="table mod-stickyHeader">
 			<thead class="table-head">
 				<tr class="table-head-row">
 					<th class="table-head-row-cell">Head cell</th>
@@ -19,7 +19,7 @@ function getTemplate(args: TableStickyHeaderStory): string {
 				</tr>
 			</thead>
 			<tbody class="table-body">
-				<tr class="table-body-row mod-stickyHeader-shadow">
+				<tr class="table-body-row mod-stickyHeader-shadow" style="--sticky-header-shadow-offset-top: 36px" >
 					<td class="table-body-row-cell" colspan="3" role="presentation">
 						<div class="stickyHeader-shadow-wrapper"></div>
 					</td>
@@ -55,7 +55,7 @@ function getTemplate(args: TableStickyHeaderStory): string {
 	`;
 }
 
-const Template: StoryFn<TableStickyHeaderStory> = (args: TableStickyHeaderStory) => ({
+const Template: StoryFn<TableStickyHeaderStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [`.demo-wrapper {height: 10rem; overflow: auto;}`],
