@@ -1,18 +1,18 @@
 @use 'exports' as *;
 
 .table {
-	// 1 - Layout fixed 
-    &.mod-layoutFixed {
+	// 1 - Layout fixed
+	&.mod-layoutFixed {
 		@include layoutFixed;
 	}
 
 	// 2 - Layout fixed starting at breakpoint
-	&[class*="mod-layoutFixed\@mediaMin"] {
+	&[class*='mod-layoutFixedAtMediaMin'] {
 		@include layoutFixedWithBreakpoint;
 	}
 
 	// Cells management for 1 & 2
-	&[class*="mod-layoutFixed"] {
+	&[class*='mod-layoutFixed'] {
 		@include layoutFixedCells;
 	}
 }

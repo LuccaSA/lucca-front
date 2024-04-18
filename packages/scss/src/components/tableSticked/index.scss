@@ -16,7 +16,7 @@
 
 	@each $breakpoint, $value in config.$breakpoints {
 		@include media.min($breakpoint) {
-			&.mod-stickyColumn\@mediaMin#{$breakpoint} {
+			&.mod-stickyColumnAtMediaMin#{$breakpoint} {
 				@include stickyColumnOffset;
 			}
 		}

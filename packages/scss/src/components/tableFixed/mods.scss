@@ -8,7 +8,7 @@
 @mixin layoutFixedWithBreakpoint {
 	@each $breakpoint, $value in config.$breakpoints {
 		@include media.min($breakpoint) {
-			&.mod-layoutFixed\@mediaMin#{$breakpoint} {
+			&.mod-layoutFixedAtMediaMin#{$breakpoint} {
 				table-layout: fixed;
 			}
 		}
@@ -17,22 +17,22 @@
 
 @mixin layoutFixedCells {
 	[class*='row-cell'] {
-        --cell-width: calc(var(--table-layout-fixed-width) * 1rem);
-    }
-    &.mod-layoutFixed [class*='row-cell'] {
-        @include cellFixedWidth;
-    }
-    @each $breakpoint, $value in config.$breakpoints {
-        @include media.min($breakpoint) {
-            &.mod-layoutFixed\@mediaMin#{$breakpoint} [class*='row-cell'] {
-                @include cellFixedWidth;
-            }
-        }
-    }
+		--cell-width: calc(var(--table-layout-fixed-width) * 1rem);
+	}
+	&.mod-layoutFixed [class*='row-cell'] {
+		@include cellFixedWidth;
+	}
+	@each $breakpoint, $value in config.$breakpoints {
+		@include media.min($breakpoint) {
+			&.mod-layoutFixedAtMediaMin#{$breakpoint} [class*='row-cell'] {
+				@include cellFixedWidth;
+			}
+		}
+	}
 }
 
 @mixin cellFixedWidth {
-    min-width: var(--cell-width, auto);
-    max-width: var(--cell-width, auto);
-    width: var(--cell-width, auto);
+	min-width: var(--cell-width, auto);
+	max-width: var(--cell-width, auto);
+	width: var(--cell-width, auto);
 }

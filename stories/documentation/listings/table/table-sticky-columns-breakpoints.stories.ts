@@ -1,18 +1,16 @@
 import { Meta, Story } from '@storybook/angular';
 
-interface TableStickyColumnsAndHeaderWithBreakpointsStory {
-}
+interface TableStickyColumnsAndHeaderWithBreakpointsStory {}
 
 export default {
 	title: 'Documentation/Listings/Table/Sticky Columns And Header With Breakpoints ',
-	argTypes: {
-	},
+	argTypes: {},
 } as Meta;
 
 function getTemplate(args: TableStickyColumnsAndHeaderWithBreakpointsStory): string {
 	return `
 	<div class="demo-wrapper">
-		<table class="table mod-layoutFixed@mediaMinS mod-stickyColumn@mediaMinS mod-stickyHeader" style="--table-sticky-header-shadow-offset: 56px">
+		<table class="table mod-layoutFixedAtMediaMinS mod-stickyColumnAtMediaMinS mod-stickyHeader" style="--table-sticky-header-shadow-offset: 56px">
 			<thead class="table-head">
 				<tr class="table-head-row">
 					<th class="table-head-row-cell mod-stickyColumn-left" style="--table-layout-fixed-width: 8; --table-sticky-column-offset: 0">
@@ -144,15 +142,13 @@ function getTemplate(args: TableStickyColumnsAndHeaderWithBreakpointsStory): str
 			</tbody>
 		</table>
 	</div>
-	`
+	`;
 }
 
 const Template: Story<TableStickyColumnsAndHeaderWithBreakpointsStory> = (args: TableStickyColumnsAndHeaderWithBreakpointsStory) => ({
 	props: args,
 	template: getTemplate(args),
-	styles: [
-		`.demo-wrapper {overflow: auto; height: 10rem;}`
-	]
+	styles: [`.demo-wrapper {overflow: auto; height: 10rem;}`],
 });
 
 export const StickyColumnsAndHeaderWithBreakpoints = Template.bind({});
