@@ -30,6 +30,15 @@ export class LuUserPictureComponent {
 		this._changeDetector.markForCheck();
 	}
 
+	/**
+	 * Image loading attribute
+	 * It is set to 'lazy' by default
+	 *
+	 * (more info: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img#loading)
+	 */
+	@Input()
+	imageLoadingAttribute: HTMLImageElement['loading'] = 'lazy';
+
 	get displayFormat(): LuDisplayInitials {
 		return this._displayFormat;
 	}
