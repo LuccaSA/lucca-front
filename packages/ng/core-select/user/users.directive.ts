@@ -9,7 +9,7 @@ import { LU_CORE_SELECT_CURRENT_USER_ID } from './me.provider';
 import { LuUserDisplayerComponent } from './user-displayer.component';
 import { LuCoreSelectUserHomonymsService } from './user-homonym.service';
 import { LuUserOptionComponent } from './user-option.component';
-import { LuCoreSelectUser } from './user-option.model';
+import { LuCoreSelectUser, LuCoreSelectWithAdditionnalInformation } from './user-option.model';
 
 @Directive({
 	// The attribute is already prefixed with "lu-simple-select"
@@ -18,7 +18,7 @@ import { LuCoreSelectUser } from './user-option.model';
 	standalone: true,
 	exportAs: 'luUsers',
 })
-export class LuCoreSelectUsersDirective<T extends LuCoreSelectUser = LuCoreSelectUser> extends ALuCoreSelectApiDirective<T> {
+export class LuCoreSelectUsersDirective<T extends LuCoreSelectUser = LuCoreSelectUser> extends ALuCoreSelectApiDirective<LuCoreSelectWithAdditionnalInformation<T>> {
 	#defaultSearchUrl = '/api/v3/users/search';
 	#defaultScopedSearchUrl = '/api/v3/users/scopedsearch';
 	#userHomonymsService = inject(LuCoreSelectUserHomonymsService);
