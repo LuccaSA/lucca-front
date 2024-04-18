@@ -17,36 +17,36 @@
 
 	//Left sticked columns
 	[class*='mod-stickyColumn-left'] {
-		left: var(--components-table-sticked-column-sticky-offset);
+		left: var(--components-tableSticked-column-sticky-offset);
 
 		//left sticked columns shadow
 		&.mod-stickyColumn-shadow,
 		.stickyColumn-shadow-wrapper::before {
-			left: calc(var(--components-table-sticked-column-sticky-offset) - var(--components-table-sticked-column-sticky-shadow-width));
+			left: calc(var(--components-tableSticked-column-sticky-offset) - var(--components-tableSticked-column-sticky-shadow-width));
 		}
 		.stickyColumn-shadow-wrapper::after {
-			left: var(--components-table-sticked-column-sticky-offset);
-			background-image: linear-gradient(to right, var(--components-table-sticked-column-sticky-shadow-color), transparent);
+			left: var(--components-tableSticked-column-sticky-offset);
+			background-image: linear-gradient(to right, var(--components-tableSticked-column-sticky-shadow-color), transparent);
 		}
 	}
 
 	//Right sticked columns
 	[class*='mod-stickyColumn-right'] {
-		right: var(--components-table-sticked-column-sticky-offset);
+		right: var(--components-tableSticked-column-sticky-offset);
 
 		//right sticked columns shadow
 		.stickyColumn-shadow-wrapper {
 			justify-items: end;
-			width: calc(var(--components-table-sticked-column-sticky-shadow-width) * 3);
-			right: calc(var(--components-table-sticked-column-sticky-shadow-width) * -1);
+			width: calc(var(--components-tableSticked-column-sticky-shadow-width) * 3);
+			right: calc(var(--components-tableSticked-column-sticky-shadow-width) * -1);
 		}
 		&.mod-stickyColumn-shadow,
 		.stickyColumn-shadow-wrapper::before {
-			right: calc(var(--components-table-sticked-column-sticky-offset) - var(--components-table-sticked-column-sticky-shadow-width));
+			right: calc(var(--components-tableSticked-column-sticky-offset) - var(--components-tableSticked-column-sticky-shadow-width));
 		}
 		.stickyColumn-shadow-wrapper::after {
-			right: var(--components-table-sticked-column-sticky-offset);
-			background-image: linear-gradient(to left, var(--components-table-sticked-column-sticky-shadow-color), transparent);
+			right: var(--components-tableSticked-column-sticky-offset);
+			background-image: linear-gradient(to left, var(--components-tableSticked-column-sticky-shadow-color), transparent);
 		}
 	}
 
@@ -63,9 +63,9 @@
 		top: 0;
 		bottom: 0;
 		display: grid;
-		grid-template-columns: calc(var(--components-table-sticked-column-sticky-shadow-width) * 2);
+		grid-template-columns: calc(var(--components-tableSticked-column-sticky-shadow-width) * 2);
 		grid-template-areas: 'cell';
-		width: calc(var(--components-table-sticked-column-sticky-shadow-width) * 2);
+		width: calc(var(--components-tableSticked-column-sticky-shadow-width) * 2);
 
 		&::before,
 		&::after {
@@ -74,11 +74,11 @@
 			grid-area: cell;
 		}
 		&::after {
-			width: var(--components-table-sticked-column-sticky-shadow-width);
+			width: var(--components-tableSticked-column-sticky-shadow-width);
 		}
 		&::before {
 			z-index: 1;
-			width: var(--components-table-sticked-column-sticky-shadow-width);
+			width: var(--components-tableSticked-column-sticky-shadow-width);
 			background-color: var(--colors-white-color);
 		}
 	}
@@ -87,7 +87,7 @@
 @mixin stickyColumnOffset {
 	[class*='mod-stickyColumn-'] {
 		position: sticky;
-		--components-table-sticked-column-sticky-offset: calc(var(--table-sticky-column-offset) * 1rem);
+		--components-tableSticked-column-sticky-offset: calc(var(--table-stickyColumn-offset) * 1rem);
 	}
 	.mod-stickyColumn-shadow {
 		display: table-cell;
@@ -103,7 +103,7 @@
 		top: 0;
 	}
 	.mod-stickyHeader-shadow .table-body-row-cell {
-		top: calc(var(--table-sticky-header-shadow-offset) + var(--components-table-sticked-column-sticky-shadow-width));
+		top: calc(var(--table-stickyHeader-shadow-offset) + var(--components-tableSticked-column-sticky-shadow-width));
 	}
 }
 
@@ -113,13 +113,13 @@
 	}
 	.mod-stickyHeader-shadow .table-body-row-cell {
 		top: calc(
-			var(--table-sticky-header-shadow-offset) + var(--commons-banner-height) + var(--components-table-sticked-column-sticky-shadow-width)
+			var(--table-stickyHeader-shadow-offset) + var(--commons-banner-height) + var(--components-tableSticked-column-sticky-shadow-width)
 		);
 	}
 }
 
 @mixin stickyHeaderCommon {
-	margin-top: var(--components-table-sticked-column-sticky-shadow-width);
+	margin-top: var(--components-tableSticked-column-sticky-shadow-width);
 	.table-head-row-cell {
 		background-color: var(--colors-white-color);
 		position: sticky;
@@ -137,7 +137,7 @@
 @mixin stickyHeaderShadow {
 	[class*='row-cell'] {
 		position: sticky;
-		top: var(--table-sticky-header-shadow-offset);
+		top: var(--table-stickyHeader-shadow-offset);
 		z-index: 4;
 		height: 0;
 		padding: 0;
@@ -147,7 +147,7 @@
 
 	.stickyHeader-shadow-wrapper {
 		position: absolute;
-		top: calc(var(--components-table-sticked-column-sticky-shadow-width) * -1);
+		top: calc(var(--components-tableSticked-column-sticky-shadow-width) * -1);
 		width: 100%;
 		height: 0;
 		border: 0;
@@ -155,9 +155,9 @@
 		&::after {
 			content: '';
 			display: block;
-			height: var(--components-table-sticked-column-sticky-shadow-width);
+			height: var(--components-tableSticked-column-sticky-shadow-width);
 			width: 100%;
-			background-image: linear-gradient(to bottom, var(--components-table-sticked-column-sticky-shadow-color), transparent);
+			background-image: linear-gradient(to bottom, var(--components-tableSticked-column-sticky-shadow-color), transparent);
 			opacity: 0.5;
 		}
 	}

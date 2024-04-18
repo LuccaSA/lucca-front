@@ -10,7 +10,7 @@ export default {
 function getTemplate(args: TableStickyHeaderStory): string {
 	return `
 	<div class="demo-wrapper">
-		<table class="table mod-stickyHeader" style="--table-sticky-header-shadow-offset: 37px">
+		<table class="table mod-stickyHeader" [attr.style]="'--table-stickyHeader-shadow-offset: 37px'">
 			<thead class="table-head">
 				<tr class="table-head-row">
 					<th class="table-head-row-cell">Head cell</th>

@@ -17,7 +17,7 @@
 
 @mixin layoutFixedCells {
 	[class*='row-cell'] {
-		--cell-width: calc(var(--table-layout-fixed-width) * 1rem);
+		--cell-width: calc(var(--table-layoutFixed-width) * 1rem);
 	}
 	&.mod-layoutFixed [class*='row-cell'] {
 		@include cellFixedWidth;
