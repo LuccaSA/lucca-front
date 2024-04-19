@@ -1,11 +1,11 @@
-import { AfterContentInit, booleanAttribute, DestroyRef, Directive, ElementRef, HostBinding, HostListener, inject, Input, numberAttribute, Renderer2 } from '@angular/core';
+import { AfterContentInit, booleanAttribute, ChangeDetectorRef, DestroyRef, Directive, ElementRef, HostBinding, HostListener, inject, Input, numberAttribute, Renderer2 } from '@angular/core';
 import { SafeHtml } from '@angular/platform-browser';
 import { LuPopoverPosition } from '@lucca-front/ng/popover';
 import { FlexibleConnectedPositionStrategy, HorizontalConnectionPos, OriginConnectionPosition, Overlay, OverlayConnectionPosition, OverlayRef, VerticalConnectionPos } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
 import { LuTooltipPanelComponent } from '../panel';
-import { BehaviorSubject, combineLatest, merge, Subject, switchMap, timer } from 'rxjs';
-import { debounce, filter, map } from 'rxjs/operators';
+import { BehaviorSubject, combineLatest, merge, Observable, Subject, switchMap, timer } from 'rxjs';
+import { debounce, debounceTime, filter, map } from 'rxjs/operators';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 let nextId = 0;
@@ -22,6 +22,8 @@ export class LuTooltipTriggerDirective implements AfterContentInit {
 	#renderer = inject(Renderer2);
 
 	#destroyRef = inject(DestroyRef);
+
+	#cdr = inject(ChangeDetectorRef);
 
 	@Input()
 	luTooltip: string | SafeHtml;
@@ -46,7 +48,7 @@ export class LuTooltipTriggerDirective implements AfterContentInit {
 	set luTooltipDisabled(disabled: boolean) {
 		this.#disabled = disabled;
 		if (disabled) {
-			this.setTabIndexIfNeeded(null);
+			this.setAccessibilityProperties(null);
 		}
 	}
 
@@ -55,6 +57,12 @@ export class LuTooltipTriggerDirective implements AfterContentInit {
 
 	@Input({ transform: booleanAttribute })
 	luTooltipWhenEllipsis = false;
+
+	resize$ = new Observable((observer) => {
+		new ResizeObserver(() => {
+			observer.next();
+		}).observe(this.#host.nativeElement);
+	});
 
 	open$ = new Subject<void>();
 
@@ -89,12 +97,13 @@ export class LuTooltipTriggerDirective implements AfterContentInit {
 
 	@HostBinding('attr.aria-describedby')
 	get ariaDescribedBy() {
+		if (this.#disabled || (this.luTooltipWhenEllipsis && this.hasEllipsis())) {
+			return null;
+		}
 		return `${this.#generatedId}-panel`;
 	}
 
 	overlayRef?: OverlayRef;
-
-	#shouldSetTabIndex: boolean;
 
 	constructor() {
 		combineLatest([this.#openDelay$, this.#closeDelay$])
@@ -122,7 +131,6 @@ export class LuTooltipTriggerDirective implements AfterContentInit {
 						}),
 					);
 				}),
-
 				takeUntilDestroyed(this.#destroyRef),
 			)
 			.subscribe((event) => {
@@ -132,6 +140,11 @@ export class LuTooltipTriggerDirective implements AfterContentInit {
 					this.closeTooltip();
 				}
 			});
+
+		this.resize$.pipe(takeUntilDestroyed(this.#destroyRef), debounceTime(150)).subscribe(() => {
+			this.setAccessibilityProperties(0);
+			this.#cdr.markForCheck();
+		});
 	}
 
 	private openTooltip(): void {
@@ -146,7 +159,11 @@ export class LuTooltipTriggerDirective implements AfterContentInit {
 		});
 		const portal = new ComponentPortal(LuTooltipPanelComponent);
 		const ref = this.overlayRef.attach(portal);
-		ref.instance.content = this.luTooltip;
+		if (this.luTooltip) {
+			ref.instance.content = this.luTooltip;
+		} else if (this.luTooltipWhenEllipsis) {
+			ref.instance.content = this.#host.nativeElement.innerText;
+		}
 		ref.instance.id = this.ariaDescribedBy;
 		// On tooltip leave => trigger close
 		ref.instance.mouseLeave$.pipe(takeUntilDestroyed(ref.instance.destroyRef)).subscribe(() => this.close$.next());
@@ -161,22 +178,20 @@ export class LuTooltipTriggerDirective implements AfterContentInit {
 		}
 	}
 
-	private shouldSetTabIndex(): boolean {
+	private setAccessibilityProperties(tabindex: number | null): void {
 		if (this.#disabled || (this.luTooltipWhenEllipsis && !this.hasEllipsis())) {
-			return false;
+			this.#renderer.removeAttribute(this.#host.nativeElement, 'tabindex');
+			return;
 		}
+
 		const tag = this.#host.nativeElement.tagName.toLowerCase();
 		const nativelyFocusableTags = ['a', 'button', 'input', 'select', 'textarea'];
 		const isNatevelyFocusableTag = nativelyFocusableTags.includes(tag);
 
 		const hasATabIndex = this.#host.nativeElement.getAttribute('tabindex') !== null;
 
-		return !isNatevelyFocusableTag && !hasATabIndex;
-	}
-
-	private setTabIndexIfNeeded(index: number | null): void {
-		if (this.#shouldSetTabIndex) {
-			this.#renderer.setAttribute(this.#host.nativeElement, 'tabindex', index.toString());
+		if (!isNatevelyFocusableTag && !hasATabIndex) {
+			this.#renderer.setAttribute(this.#host.nativeElement, 'tabindex', tabindex.toString());
 		}
 	}
 
@@ -219,8 +234,7 @@ export class LuTooltipTriggerDirective implements AfterContentInit {
 	}
 
 	ngAfterContentInit(): void {
-		this.#shouldSetTabIndex = this.shouldSetTabIndex();
-		this.setTabIndexIfNeeded(0);
+		this.setAccessibilityProperties(0);
 	}
 
 	/**********************
