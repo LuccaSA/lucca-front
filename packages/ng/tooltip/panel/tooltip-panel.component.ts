@@ -1,9 +1,7 @@
-import { OverlayModule } from '@angular/cdk/overlay';
-import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, HostBinding, Output, TemplateRef, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, HostBinding, HostListener, inject } from '@angular/core';
 import { SafeHtml } from '@angular/platform-browser';
-import { ALuPopoverPanel, ILuPopoverPanel } from '@lucca-front/ng/popover';
-import { luTransformTooltip } from '../animation/index';
+import { luTransformTooltip } from '../animation';
+import { Subject } from 'rxjs';
 
 @Component({
 	selector: 'lu-tooltip-panel',
@@ -11,44 +9,34 @@ import { luTransformTooltip } from '../animation/index';
 	styleUrls: ['./tooltip-panel.component.scss'],
 	animations: [luTransformTooltip],
 	standalone: true,
-	imports: [CommonModule, OverlayModule],
+	host: {
+		role: 'tooltip',
+		class: 'lu-tooltip-panel',
+	},
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class LuTooltipPanelComponent extends ALuPopoverPanel implements ILuPopoverPanel {
-	@HostBinding('@transformTooltip') animationState = 'enter';
+export class LuTooltipPanelComponent {
+	@HostBinding('@transformTooltip')
+	animationState = 'enter';
 
-	private _content: string | SafeHtml;
-	get content() {
-		return this._content;
-	}
-	set content(c) {
-		this._content = c;
-		this._changeDetectorRef.markForCheck();
-	}
+	destroyRef = inject(DestroyRef);
 
-	//FIXME output event
-	// eslint-disable-next-line @angular-eslint/no-output-native
-	@Output() override close = new EventEmitter<void>();
-	// eslint-disable-next-line @angular-eslint/no-output-native
-	@Output() override open = new EventEmitter<void>();
-	@Output() override hovered = new EventEmitter<boolean>();
-	@ViewChild(TemplateRef, { static: true })
-	set vcTemplateRef(tr: TemplateRef<HTMLDivElement>) {
-		this.templateRef = tr;
-	}
-	constructor(private _changeDetectorRef: ChangeDetectorRef) {
-		super();
-		this.scrollStrategy = 'close';
+	mouseEnter$ = new Subject<void>();
+
+	@HostListener('mouseenter')
+	mouseEnter(): void {
+		this.mouseEnter$.next();
 	}
 
-	_emitCloseEvent(): void {
-		this.close.emit();
+	mouseLeave$ = new Subject<void>();
+
+	@HostListener('mouseleave')
+	mouseLeave(): void {
+		this.mouseLeave$.next();
 	}
 
-	_emitOpenEvent(): void {
-		this.open.emit();
-	}
-	_emitHoveredEvent(hovered: boolean): void {
-		this.hovered.emit(hovered);
-	}
+	content: string | SafeHtml;
+
+	@HostBinding('attr.id')
+	id: string;
 }
