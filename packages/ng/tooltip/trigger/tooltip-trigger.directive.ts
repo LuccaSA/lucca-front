@@ -97,7 +97,7 @@ export class LuTooltipTriggerDirective implements AfterContentInit {
 
 	@HostBinding('attr.aria-describedby')
 	get ariaDescribedBy() {
-		if (this.#disabled || (this.luTooltipWhenEllipsis && this.hasEllipsis())) {
+		if (this.#disabled || this.luTooltipWhenEllipsis) {
 			return null;
 		}
 		return `${this.#generatedId}-panel`;
