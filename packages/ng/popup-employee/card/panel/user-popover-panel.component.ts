@@ -89,7 +89,7 @@ export class LuUserPopoverPanelComponent extends ALuPopoverPanel implements ILuU
 
 			return {
 				initials,
-				color: `${employee.firstName}${employee.lastName}`.split('').reduce((sum, a) => sum + a.charCodeAt(0), 0) % 360,
+				color: `${employee.firstName} ${employee.lastName}`.split('').reduce((sum, a) => sum + a.charCodeAt(0), 0) % 360,
 			};
 		}),
 	);
