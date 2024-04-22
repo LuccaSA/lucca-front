@@ -1,12 +1,12 @@
-import { AfterContentInit, booleanAttribute, ChangeDetectorRef, DestroyRef, Directive, ElementRef, HostBinding, HostListener, inject, Input, numberAttribute, Renderer2 } from '@angular/core';
-import { SafeHtml } from '@angular/platform-browser';
-import { LuPopoverPosition } from '@lucca-front/ng/popover';
 import { FlexibleConnectedPositionStrategy, HorizontalConnectionPos, OriginConnectionPosition, Overlay, OverlayConnectionPosition, OverlayRef, VerticalConnectionPos } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
-import { LuTooltipPanelComponent } from '../panel';
-import { BehaviorSubject, combineLatest, merge, Observable, Subject, switchMap, timer } from 'rxjs';
-import { debounce, debounceTime, filter, map } from 'rxjs/operators';
+import { AfterContentInit, ChangeDetectorRef, DestroyRef, Directive, ElementRef, HostBinding, HostListener, Input, Renderer2, booleanAttribute, inject, numberAttribute } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { SafeHtml } from '@angular/platform-browser';
+import { LuPopoverPosition } from '@lucca-front/ng/popover';
+import { BehaviorSubject, Observable, Subject, combineLatest, merge, switchMap, timer } from 'rxjs';
+import { debounce, debounceTime, filter, map } from 'rxjs/operators';
+import { LuTooltipPanelComponent } from '../panel';
 
 let nextId = 0;
 
@@ -211,25 +211,31 @@ export class LuTooltipTriggerDirective implements AfterContentInit {
 		if (window.getComputedStyle(this.#host.nativeElement).textOverflow !== 'ellipsis') {
 			return false;
 		}
-		const temp = this.#host.nativeElement.cloneNode(true) as HTMLElement;
 
-		temp.style.position = 'fixed';
-		temp.style.overflow = 'visible';
-		temp.style.whiteSpace = 'nowrap';
-		temp.style.visibility = 'hidden';
-		temp.style.width = 'fit-content';
+		const mask = document.createElement('div');
+		const clone = this.#host.nativeElement.cloneNode(true) as HTMLElement;
 
-		this.#host.nativeElement.parentElement.appendChild(temp);
+		clone.style.position = 'fixed';
+		clone.style.overflow = 'visible';
+		clone.style.whiteSpace = 'nowrap';
+		clone.style.visibility = 'hidden';
+		clone.style.width = 'fit-content';
+
+		mask.classList.add('u-mask');
+		mask.setAttribute('aria-hidden', 'true');
+		mask.appendChild(clone);
+
+		this.#host.nativeElement.parentElement.appendChild(mask);
 
 		try {
-			const fullWidth = temp.getBoundingClientRect().width;
+			const fullWidth = clone.getBoundingClientRect().width;
 			const displayWidth = this.#host.nativeElement.getBoundingClientRect().width;
 
 			return fullWidth > displayWidth;
 		} catch (e) {
 			return false;
 		} finally {
-			temp.remove();
+			mask.remove();
 		}
 	}
 
