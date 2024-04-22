@@ -1,5 +1,7 @@
 @use '@lucca-front/icons/src/commons/utils/icon';
 
+// Refactor: This style should be in Avatar SCSS component
+
 @mixin userPictureVars {
 	--components-userPicture-XS-image: 1.5rem;
 	--components-userPicture-XS-fontSize: var(--sizes-XS-fontSize);

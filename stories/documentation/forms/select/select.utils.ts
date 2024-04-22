@@ -16,6 +16,7 @@ export type LuCoreSelectInputStoryComponent = {
 	legumes: ILegume[];
 	legumeColor: (legume: ILegume) => LegumeColor;
 	colorNameByColor: Record<LegumeColor, string>;
+	addLegume: (name: string, existing: ILegume[]) => ILegume[];
 } & ALuSelectInputComponent<ILegume, ILegume | ILegume[]>;
 
 export const allLegumes: ILegume[] = [
@@ -64,9 +65,13 @@ export const colorNameByColor: Record<LegumeColor, string> = {
 
 export const coreSelectStory = {
 	argTypes: {
+		addLegume: HiddenArgType,
 		clearable: HiddenArgType,
 		clueChange: HiddenArgType,
 		colorNameByColor: HiddenArgType,
+		addOptionLabel: HiddenArgType,
+		addOptionStrategy: HiddenArgType,
+		addOption: HiddenArgType,
 		grouping: HiddenArgType,
 		legumeColor: HiddenArgType,
 		legumes: HiddenArgType,

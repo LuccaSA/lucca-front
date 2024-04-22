@@ -4,6 +4,39 @@ export const mockEstablishmentsCount = { items: [], count: 4 };
 const usCities = ['New York', 'Los Angeles', 'Chicago', 'Houston', 'Philadelphia', 'Phoenix', 'San Antonio', 'San Diego', 'Dallas', 'San Jose'];
 const frCities = ['Paris', 'Marseille', 'Lyon', 'Toulouse', 'Nice', 'Nantes', 'Strasbourg', 'Montpellier', 'Bordeaux', 'Lille'];
 
+export const mockUserPopover =
+{
+	"id": 6,
+	"lastName": "Alibert",
+	"firstName": "Chloe",
+	"userDepartment": {
+		"id": 6,
+		"name": "SAV"
+	},
+	"jobTitle": "Technicienne",
+	"_links": {
+		"schedule": {
+			"href": "/work-locations/schedule?filterMode=Users&user=6"
+		},
+		"hrCard": {
+			"href": "/directory/users/cards?employeeId=6"
+		}
+	},
+	"pictureHref": "/getFile.ashx?id=5e73eabb-a24e-4590-a4c2-6c5de9893185",
+	"isWorkingNow": true,
+	"leaveEndsOn": null,
+	"leaveEndIsFirstHalfDay": null,
+	"currentWorkLocation": {
+		"id": 18203,
+		"name": "Barcelona",
+		"color": "yellow1",
+		"area": null
+	},
+	"dtContractStart": "2001-09-21T00:00:00",
+	"dtContractEnd": null
+}
+
+
 export const mockEstablishments = [
 	...frCities.map((city, index) => ({
 		id: index + 1,
