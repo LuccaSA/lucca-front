@@ -2,7 +2,7 @@ import { AsyncPipe } from '@angular/common';
 import { Component, Directive, Injector, Input, LOCALE_ID, OnChanges, TemplateRef, ViewContainerRef, inject } from '@angular/core';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { CalloutComponent } from '@lucca-front/ng/callout';
-import { LuHumanizeFormatter, LuHumanizePipe, LuRelativeTime, LuRelativeTimeFormatUnit } from '@lucca-front/ng/date';
+import { LuHumanizeDateFormatter, LuHumanizeDatePipe, LuRelativeTime, LuRelativeTimeFormatUnit } from '@lucca-front/ng/date';
 import { Meta, StoryFn, StoryObj, applicationConfig } from '@storybook/angular';
 
 @Directive({
@@ -32,7 +32,7 @@ class FakeLocaleIdDirective implements OnChanges {
 @Component({
 	selector: 'humanize-stories',
 	standalone: true,
-	imports: [LuHumanizePipe, AsyncPipe, FakeLocaleIdDirective, ButtonComponent, CalloutComponent],
+	imports: [LuHumanizeDatePipe, AsyncPipe, FakeLocaleIdDirective, ButtonComponent, CalloutComponent],
 	template: `
 		<h1>Humanize</h1>
 
@@ -70,7 +70,7 @@ class FakeLocaleIdDirective implements OnChanges {
 		<h2>Résultat</h2>
 
 		<lu-callout *fakeLocaleId="locale" class="pr-u-marginBottom300">
-			Résultat: <b>{{ date | luHumanize : allowedUnits | async }}</b>
+			Résultat: <b>{{ date | luHumanizeDate : allowedUnits | async }}</b>
 		</lu-callout>
 	`,
 })
@@ -131,7 +131,7 @@ export default {
 			source: {
 				language: 'html',
 				type: 'code',
-				code: '{{ date | luHumanize | async }}',
+				code: '{{ date | luHumanizeDate | async }}',
 			},
 		},
 	},
@@ -139,7 +139,7 @@ export default {
 
 export const Humanize: StoryObj<HumanizeStory> = {};
 
-class CustomHumanizeFormatter extends LuHumanizeFormatter {
+class CustomHumanizeFormatter extends LuHumanizeDateFormatter {
 	override format({ unit, value }: LuRelativeTime): string {
 		switch (unit) {
 			case 'second':
@@ -157,7 +157,7 @@ export const HumanizeCustomFormatter: StoryObj<HumanizeStory> = {
 		applicationConfig({
 			providers: [
 				{
-					provide: LuHumanizeFormatter,
+					provide: LuHumanizeDateFormatter,
 					useClass: CustomHumanizeFormatter,
 				},
 			],
