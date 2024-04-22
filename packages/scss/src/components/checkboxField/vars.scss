@@ -1,6 +1,6 @@
 @mixin vars {
 	--component-checkboxField-size: 1.25rem;
-	--component-checkboxField-top: 0.125rem;
+	--component-checkboxField-top: var(--pr-t-spacings-25);
 	--component-checkboxField-borderRadius: 6px;
 	--component-checkboxField-icon-fontSize: var(--sizes-S-lineHeight);
 }

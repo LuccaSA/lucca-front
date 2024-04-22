@@ -25,6 +25,9 @@ export default {
 				type: 'select',
 			},
 		},
+		mixed: {
+				description: '[v17.4]'
+		},
 	},
 } as Meta;
 

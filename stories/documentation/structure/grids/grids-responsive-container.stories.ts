@@ -10,8 +10,7 @@ export default {
 } as Meta;
 
 function getTemplate(args: GridsResponsiveStory): string {
-	return `
-<div class="grid-containerWrapper">
+	return `<div class="grid-containerWrapper">
 	<div class="grid mod-form" [attr.style]="'--grid-colspan: 4'">
 		<div class="grid-column" [attr.style]="'--grid-colspanAtContainerMinXXS: 2; --grid-colspanAtContainerMinS: 4;'"><div class="demo">1</div></div>
 		<div class="grid-column" [attr.style]="'--grid-colspanAtContainerMinXXS: 2; --grid-rowspanAtContainerMinS: 2;'"><div class="demo">2</div></div>
