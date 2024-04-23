@@ -4,7 +4,7 @@ import { getIntl } from '@lucca-front/ng/core';
 import { ILuOptionContext, LU_OPTION_CONTEXT } from '@lucca-front/ng/core-select';
 import { LuUserDisplayPipe } from '@lucca-front/ng/user';
 import { map, startWith } from 'rxjs';
-import { LuCoreSelectUser } from './user-option.model';
+import { LuCoreSelectUser, LuCoreSelectWithAdditionnalInformation } from './user-option.model';
 import { LU_CORE_SELECT_USER_TRANSLATIONS } from './user.translate';
 import { LuCoreSelectUsersDirective } from './users.directive';
 
@@ -35,7 +35,7 @@ import { LuCoreSelectUsersDirective } from './users.directive';
 	],
 })
 export class LuUserOptionComponent {
-	protected context = inject<ILuOptionContext<LuCoreSelectUser>>(LU_OPTION_CONTEXT);
+	protected context = inject<ILuOptionContext<LuCoreSelectWithAdditionnalInformation<LuCoreSelectUser>>>(LU_OPTION_CONTEXT);
 	protected userDirective = inject(LuCoreSelectUsersDirective);
 	protected intl = getIntl(LU_CORE_SELECT_USER_TRANSLATIONS);
 	protected hasEmptyClue$ = this.userDirective.select.clueChange.pipe(
