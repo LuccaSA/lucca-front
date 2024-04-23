@@ -1,10 +1,10 @@
 import { FlexibleConnectedPositionStrategy, HorizontalConnectionPos, OriginConnectionPosition, Overlay, OverlayConnectionPosition, OverlayRef, VerticalConnectionPos } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
-import { AfterContentInit, ChangeDetectorRef, DestroyRef, Directive, ElementRef, HostBinding, HostListener, Input, Renderer2, booleanAttribute, inject, numberAttribute } from '@angular/core';
+import { AfterContentInit, booleanAttribute, ChangeDetectorRef, DestroyRef, Directive, ElementRef, HostBinding, HostListener, inject, Input, numberAttribute, Renderer2 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { SafeHtml } from '@angular/platform-browser';
 import { LuPopoverPosition } from '@lucca-front/ng/popover';
-import { BehaviorSubject, Observable, Subject, combineLatest, merge, switchMap, timer } from 'rxjs';
+import { BehaviorSubject, combineLatest, merge, Observable, Subject, switchMap, timer } from 'rxjs';
 import { debounce, debounceTime, filter, map } from 'rxjs/operators';
 import { LuTooltipPanelComponent } from '../panel';
 
@@ -59,9 +59,13 @@ export class LuTooltipTriggerDirective implements AfterContentInit {
 	luTooltipWhenEllipsis = false;
 
 	resize$ = new Observable((observer) => {
-		new ResizeObserver(() => {
+		const resizeObserver = new ResizeObserver(() => {
 			observer.next();
-		}).observe(this.#host.nativeElement);
+		});
+		resizeObserver.observe(this.#host.nativeElement);
+		return () => {
+			resizeObserver.disconnect();
+		};
 	});
 
 	open$ = new Subject<void>();
