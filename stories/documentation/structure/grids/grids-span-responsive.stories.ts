@@ -10,8 +10,7 @@ export default {
 } as Meta;
 
 function getTemplate(args: GridsSpanStory): string {
-	return `
-<div class="grid" [attr.style]="'--grid-columns: 4; --grid-colspan: 4'">
+	return `<div class="grid" [attr.style]="'--grid-columns: 4; --grid-colspan: 4'">
 	<div class="grid-column" [attr.style]="'--grid-colspanAtMediaMinXS: 2; --grid-rowspanAtMediaMinS: 2'"><div class="demo">columns 4<br />colspan 4<br />media > XS colspan 2<br />media > S rowspan 2</div></div>
 	<div class="grid-column" [attr.style]="'--grid-colspanAtMediaMinXS: 2'"><div class="demo">columns 4<br />colspan 4<br />media > XS colspan 2</div></div>
 	<div class="grid-column" [attr.style]="'--grid-colspanAtMediaMinXS: 2'"><div class="demo">columns 4<br />colspan 4<br />media > XS colspan 2</div></div>

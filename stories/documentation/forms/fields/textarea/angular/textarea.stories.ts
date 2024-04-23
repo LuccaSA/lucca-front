@@ -28,6 +28,9 @@ export default {
 				type: 'select',
 			},
 		},
+		counter: {
+			description: '[v17.4]',
+		},
 	},
 } as Meta;
 
