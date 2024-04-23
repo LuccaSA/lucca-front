@@ -91,9 +91,7 @@ export class LuTooltipTriggerDirective implements AfterContentInit {
 	#generatedId = `${this.#host.nativeElement.tagName.toLowerCase()}-tooltip-${nextId++}`;
 
 	@HostBinding('attr.id')
-	get _attrId() {
-		return this.#host.nativeElement.id || this.#generatedId;
-	}
+	_id: string;
 
 	@HostBinding('attr.aria-describedby')
 	get ariaDescribedBy() {
@@ -241,6 +239,7 @@ export class LuTooltipTriggerDirective implements AfterContentInit {
 
 	ngAfterContentInit(): void {
 		this.setAccessibilityProperties(0);
+		this._id = this.#host.nativeElement.id || this.#generatedId;
 	}
 
 	/**********************
@@ -318,22 +317,21 @@ export class LuTooltipTriggerDirective implements AfterContentInit {
 			]);
 	}
 
-	private invertVerticalPos(y: VerticalConnectionPos) {
+	private invertVerticalPos(y: VerticalConnectionPos): VerticalConnectionPos {
 		if (y === 'top') {
-			y = 'bottom';
+			return 'bottom';
 		} else if (y === 'bottom') {
-			y = 'top';
+			return 'top';
 		}
 		return y;
 	}
 
-	private invertHorizontalPos(x: HorizontalConnectionPos) {
+	private invertHorizontalPos(x: HorizontalConnectionPos): HorizontalConnectionPos {
 		if (x === 'end') {
-			x = 'start';
+			return 'start';
 		} else if (x === 'start') {
-			x = 'end';
+			return 'end';
 		}
-
 		return x;
 	}
 }
