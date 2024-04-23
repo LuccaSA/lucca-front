@@ -11,7 +11,8 @@ import { Meta, StoryFn, applicationConfig } from '@storybook/angular';
 	template: `
 		<button
 			type="button"
-			class="button pr-u-margin400"
+			class="button pr-u-marginBlock400"
+			style="margin-inline: 100px"
 			luTooltip="so you can see me"
 			[luTooltipEnterDelay]="luTooltipEnterDelay"
 			[luTooltipLeaveDelay]="luTooltipLeaveDelay"

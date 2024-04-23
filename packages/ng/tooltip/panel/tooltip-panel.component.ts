@@ -1,14 +1,15 @@
+import { HorizontalConnectionPos, VerticalConnectionPos } from '@angular/cdk/overlay';
 import { ChangeDetectionStrategy, Component, DestroyRef, HostBinding, HostListener, inject } from '@angular/core';
 import { SafeHtml } from '@angular/platform-browser';
-import { luTransformTooltip } from '../animation';
+import { LuClass } from '@lucca-front/ng/core';
 import { Subject } from 'rxjs';
 
 @Component({
 	selector: 'lu-tooltip-panel',
 	templateUrl: './tooltip-panel.component.html',
 	styleUrls: ['./tooltip-panel.component.scss'],
-	animations: [luTransformTooltip],
 	standalone: true,
+	providers: [LuClass],
 	host: {
 		role: 'tooltip',
 		class: 'lu-tooltip-panel',
@@ -16,8 +17,7 @@ import { Subject } from 'rxjs';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LuTooltipPanelComponent {
-	@HostBinding('@transformTooltip')
-	animationState = 'enter';
+	#luClass = inject(LuClass);
 
 	destroyRef = inject(DestroyRef);
 
@@ -39,4 +39,13 @@ export class LuTooltipPanelComponent {
 
 	@HostBinding('attr.id')
 	id: string;
+
+	setPanelPosition(posX: HorizontalConnectionPos, posY: VerticalConnectionPos): void {
+		this.#luClass.setState({
+			'is-before': posX === 'end',
+			'is-after': posX === 'start',
+			'is-above': posY === 'bottom',
+			'is-below': posY === 'top',
+		});
+	}
 }

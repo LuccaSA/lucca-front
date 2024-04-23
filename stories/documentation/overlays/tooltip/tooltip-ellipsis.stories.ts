@@ -1,6 +1,5 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
-import { LuPopoverPosition } from '@lucca-front/ng/popover';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 import { Meta, StoryFn, applicationConfig } from '@storybook/angular';
 

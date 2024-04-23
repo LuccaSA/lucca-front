@@ -166,6 +166,10 @@ export class LuTooltipTriggerDirective implements AfterContentInit {
 		} else if (this.luTooltipWhenEllipsis) {
 			ref.instance.content = this.#host.nativeElement.innerText;
 		}
+
+		// TODO connect position
+		// ref.instance.setPanelPosition();
+
 		ref.instance.id = this.ariaDescribedBy;
 		// On tooltip leave => trigger close
 		ref.instance.mouseLeave$.pipe(takeUntilDestroyed(ref.instance.destroyRef)).subscribe(() => this.close$.next());
