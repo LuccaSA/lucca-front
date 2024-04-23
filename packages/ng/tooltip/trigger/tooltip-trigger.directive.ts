@@ -4,7 +4,7 @@ import { AfterContentInit, booleanAttribute, ChangeDetectorRef, DestroyRef, Dire
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { SafeHtml } from '@angular/platform-browser';
 import { LuPopoverPosition } from '@lucca-front/ng/popover';
-import { BehaviorSubject, combineLatest, merge, Observable, Subject, switchMap, timer } from 'rxjs';
+import { BehaviorSubject, combineLatest, merge, Observable, startWith, Subject, switchMap, timer } from 'rxjs';
 import { debounce, debounceTime, filter, map } from 'rxjs/operators';
 import { LuTooltipPanelComponent } from '../panel';
 
@@ -154,22 +154,28 @@ export class LuTooltipTriggerDirective implements AfterContentInit {
 		if (this.overlayRef) {
 			return;
 		}
+		const position = this.legacyPositionBuilder();
 		this.overlayRef = this.#overlay.create({
-			positionStrategy: this.legacyPositionBuilder(),
+			positionStrategy: position,
 			scrollStrategy: this.#overlay.scrollStrategies.close(),
 			disposeOnNavigation: true,
 		});
 		const portal = new ComponentPortal(LuTooltipPanelComponent);
 		const ref = this.overlayRef.attach(portal);
+		position.positionChanges
+			.pipe(
+				takeUntilDestroyed(this.#destroyRef),
+				map(({ connectionPair }) => connectionPair),
+				startWith(position.positions[0]),
+			)
+			.subscribe(({ overlayX, overlayY }) => {
+				ref.instance.setPanelPosition(overlayX, overlayY);
+			});
 		if (this.luTooltip) {
 			ref.instance.content = this.luTooltip;
 		} else if (this.luTooltipWhenEllipsis) {
 			ref.instance.content = this.#host.nativeElement.innerText;
 		}
-
-		// TODO connect position
-		// ref.instance.setPanelPosition();
-
 		ref.instance.id = this.ariaDescribedBy;
 		// On tooltip leave => trigger close
 		ref.instance.mouseLeave$.pipe(takeUntilDestroyed(ref.instance.destroyRef)).subscribe(() => this.close$.next());

@@ -3,6 +3,7 @@ import { ChangeDetectionStrategy, Component, DestroyRef, HostBinding, HostListen
 import { SafeHtml } from '@angular/platform-browser';
 import { LuClass } from '@lucca-front/ng/core';
 import { Subject } from 'rxjs';
+import { NgClass } from '@angular/common';
 
 @Component({
 	selector: 'lu-tooltip-panel',
@@ -12,9 +13,9 @@ import { Subject } from 'rxjs';
 	providers: [LuClass],
 	host: {
 		role: 'tooltip',
-		class: 'lu-tooltip-panel',
 	},
 	changeDetection: ChangeDetectionStrategy.OnPush,
+	imports: [NgClass],
 })
 export class LuTooltipPanelComponent {
 	#luClass = inject(LuClass);
@@ -40,12 +41,14 @@ export class LuTooltipPanelComponent {
 	@HostBinding('attr.id')
 	id: string;
 
+	contentPositionClasses: Record<string, boolean> = {};
+
 	setPanelPosition(posX: HorizontalConnectionPos, posY: VerticalConnectionPos): void {
-		this.#luClass.setState({
+		this.contentPositionClasses = {
 			'is-before': posX === 'end',
 			'is-after': posX === 'start',
 			'is-above': posY === 'bottom',
 			'is-below': posY === 'top',
-		});
+		};
 	}
 }
