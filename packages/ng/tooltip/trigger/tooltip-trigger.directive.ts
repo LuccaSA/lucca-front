@@ -1,6 +1,20 @@
 import { FlexibleConnectedPositionStrategy, HorizontalConnectionPos, OriginConnectionPosition, Overlay, OverlayConnectionPosition, OverlayRef, VerticalConnectionPos } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
-import { AfterContentInit, booleanAttribute, ChangeDetectorRef, DestroyRef, Directive, ElementRef, HostBinding, HostListener, inject, Input, numberAttribute, Renderer2 } from '@angular/core';
+import {
+	AfterContentInit,
+	booleanAttribute,
+	ChangeDetectorRef,
+	ComponentRef,
+	DestroyRef,
+	Directive,
+	ElementRef,
+	HostBinding,
+	HostListener,
+	inject,
+	Input,
+	numberAttribute,
+	Renderer2,
+} from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { SafeHtml } from '@angular/platform-browser';
 import { LuPopoverPosition } from '@lucca-front/ng/popover';
@@ -214,21 +228,20 @@ export class LuTooltipTriggerDirective implements AfterContentInit {
 			return false;
 		}
 
-		const mask = document.createElement('div');
+		const mask = this.#renderer.createElement('div') as HTMLDivElement;
 		const clone = this.#host.nativeElement.cloneNode(true) as HTMLElement;
 
-		clone.style.position = 'fixed';
-		clone.style.overflow = 'visible';
-		clone.style.whiteSpace = 'nowrap';
-		clone.style.visibility = 'hidden';
-		clone.style.width = 'fit-content';
+		this.#renderer.setStyle(clone, 'position', 'fixed');
+		this.#renderer.setStyle(clone, 'overflow', 'visible');
+		this.#renderer.setStyle(clone, 'white-space', 'nowrap');
+		this.#renderer.setStyle(clone, 'visibility', 'hidden');
+		this.#renderer.setStyle(clone, 'width', 'fit-content');
 
-		mask.classList.add('u-mask');
-		mask.setAttribute('aria-hidden', 'true');
-		mask.appendChild(clone);
+		this.#renderer.addClass(mask, 'u-mask');
+		this.#renderer.setAttribute(mask, 'aria-hidden', 'true');
+		this.#renderer.appendChild(mask, clone);
 
-		this.#host.nativeElement.parentElement.appendChild(mask);
-
+		this.#renderer.appendChild(this.#host.nativeElement.parentElement, mask);
 		try {
 			const fullWidth = clone.getBoundingClientRect().width;
 			const displayWidth = this.#host.nativeElement.getBoundingClientRect().width;
