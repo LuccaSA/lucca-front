@@ -1,20 +1,6 @@
 import { FlexibleConnectedPositionStrategy, HorizontalConnectionPos, OriginConnectionPosition, Overlay, OverlayConnectionPosition, OverlayRef, VerticalConnectionPos } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
-import {
-	AfterContentInit,
-	booleanAttribute,
-	ChangeDetectorRef,
-	ComponentRef,
-	DestroyRef,
-	Directive,
-	ElementRef,
-	HostBinding,
-	HostListener,
-	inject,
-	Input,
-	numberAttribute,
-	Renderer2,
-} from '@angular/core';
+import { AfterContentInit, booleanAttribute, ChangeDetectorRef, DestroyRef, Directive, ElementRef, HostBinding, HostListener, inject, Input, numberAttribute, Renderer2 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { SafeHtml } from '@angular/platform-browser';
 import { LuPopoverPosition } from '@lucca-front/ng/popover';
