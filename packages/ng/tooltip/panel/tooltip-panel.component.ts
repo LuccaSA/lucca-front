@@ -1,7 +1,6 @@
 import { HorizontalConnectionPos, VerticalConnectionPos } from '@angular/cdk/overlay';
 import { ChangeDetectionStrategy, Component, DestroyRef, HostBinding, HostListener, inject } from '@angular/core';
 import { SafeHtml } from '@angular/platform-browser';
-import { LuClass } from '@lucca-front/ng/core';
 import { Subject } from 'rxjs';
 import { NgClass } from '@angular/common';
 
@@ -10,7 +9,6 @@ import { NgClass } from '@angular/common';
 	templateUrl: './tooltip-panel.component.html',
 	styleUrls: ['./tooltip-panel.component.scss'],
 	standalone: true,
-	providers: [LuClass],
 	host: {
 		role: 'tooltip',
 	},
@@ -18,8 +16,6 @@ import { NgClass } from '@angular/common';
 	imports: [NgClass],
 })
 export class LuTooltipPanelComponent {
-	#luClass = inject(LuClass);
-
 	destroyRef = inject(DestroyRef);
 
 	mouseEnter$ = new Subject<void>();
