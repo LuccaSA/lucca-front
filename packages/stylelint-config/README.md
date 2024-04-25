@@ -77,7 +77,7 @@ The configuration from your local repository should be applied right away.
 
 ### VS Code
 
-⚠️ A [VSCode extension bug](https://github.com/stylelint/vscode-stylelint/issues/490#issuecomment-1966934533) issue might prevent you from using stylelint 16+.
+⚠️ A [VSCode extension bug](https://github.com/stylelint/vscode-stylelint/issues/490#issuecomment-1966934533) might prevent you from using stylelint 16+.
 
 Follow instructions on the [extension page](https://marketplace.visualstudio.com/items?itemName=stylelint.vscode-stylelint).
 
