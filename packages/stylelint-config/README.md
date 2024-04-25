@@ -34,8 +34,8 @@ module.exports = {
 Add the relevant scripts to lint the code in Jenkins. Something like:
 
 ```json
-"lint": "ng lint && npm run stylelint",
-"stylelint": "stylelint \"./projects/**/*.scss\"",
+"ngLint": "ng lint",
+"stylelint": "stylelint \"./SOME_PATH/**/*.scss\"",
 ```
 
 ### Breaking the rules
