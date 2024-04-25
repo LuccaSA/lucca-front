@@ -30,6 +30,9 @@ export default {
 				ignore: ['after-comment'],
 			},
 		],
+		// This rule will create issues when using custom properties provided by LF with the format `r, g, b`,
+		// resulting in a mixed syntax `r, g, b / a` instead of `r g b / a`.
+		'color-function-notation': 'legacy',
 		'color-hex-length': null,
 		'custom-property-empty-line-before': [
 			'always',
