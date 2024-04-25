@@ -7,7 +7,7 @@
 		cursor: default;
 
 		&::before {
-			border: var(--components-checkbox-input-border-width) solid var(--palettes-neutral-500);
+			border-color: var(--palettes-neutral-500);
 		}
 
 		.checkbox-label-helper {
@@ -19,7 +19,7 @@
 		&::before {
 			color: var(--palettes-neutral-500);
 			background-color: var(--palettes-neutral-100);
-			border: var(--components-checkbox-input-border-width) solid var(--palettes-neutral-100);
+			border-color: var(--palettes-neutral-100);
 		}
 	}
 }
