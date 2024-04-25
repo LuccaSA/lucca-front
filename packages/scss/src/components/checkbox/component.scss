@@ -23,9 +23,9 @@
 				height: var(--components-checkbox-input-size);
 				border-radius: 6px;
 				transition-duration: var(--commons-animations-durations-fast);
-				transition-property: box-shadow, color, background-color;
-				box-shadow: inset 0 0 0 var(--components-checkbox-input-border-width) var(--palettes-neutral-700);
-				line-height: var(--components-checkbox-input-size);
+				transition-property: border-color, color, background-color;
+				border: var(--components-checkbox-input-border-width) solid var(--palettes-neutral-700);
+				line-height: calc(var(--components-checkbox-input-size) - var(--components-checkbox-input-border-width) * 2);
 				font-size: var(--components-checkbox-input-size);
 				flex-grow: 0;
 				flex-shrink: 0;
@@ -36,17 +36,18 @@
 				margin-top: 2px;
 				margin-right: var(--pr-t-spacings-100);
 				transform: translate3d(0, 0, 0); // Fix box-shadow artifacts
+				text-indent: calc(var(--components-checkbox-input-border-width) * -1);
 			}
 
 			&:hover {
 				&::before {
-					box-shadow: inset 0 0 0 var(--components-checkbox-input-border-width) var(--palettes-neutral-600);
+					border: var(--components-checkbox-input-border-width) solid var(--palettes-neutral-600);
 				}
 			}
 
 			&:active {
 				&::before {
-					box-shadow: inset 0 0 0 var(--components-checkbox-input-border-width) var(--palettes-neutral-800);
+					border: var(--components-checkbox-input-border-width) solid var(--palettes-neutral-800);
 				}
 			}
 		}
@@ -64,7 +65,7 @@
 				&::before {
 					color: var(--colors-white-color);
 					background-color: var(--palettes-700, var(--palettes-product-700));
-					box-shadow: inset 0 0 0 var(--components-checkbox-input-border-width) var(--palettes-700, var(--palettes-product-700));
+					border: var(--components-checkbox-input-border-width) solid var(--palettes-700, var(--palettes-product-700));
 				}
 			}
 
@@ -72,14 +73,14 @@
 				&:hover {
 					&::before {
 						background-color: var(--palettes-600, var(--palettes-product-600));
-						box-shadow: inset 0 0 0 var(--components-checkbox-input-border-width) var(--palettes-600, var(--palettes-product-600));
+						border: var(--components-checkbox-input-border-width) solid var(--palettes-600, var(--palettes-product-600));
 					}
 				}
 
 				&:active {
 					&::before {
 						background-color: var(--palettes-800, var(--palettes-product-800));
-						box-shadow: inset 0 0 0 var(--components-checkbox-input-border-width) var(--palettes-800, var(--palettes-product-800));
+						border: var(--components-checkbox-input-border-width) solid var(--palettes-800, var(--palettes-product-800));
 					}
 				}
 			}
