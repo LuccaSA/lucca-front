@@ -2,13 +2,13 @@ import { Directive, inject, OnDestroy, OnInit } from '@angular/core';
 import { ALuSelectInputComponent } from '@lucca-front/ng/core-select';
 import { catchError, combineLatest, concatMap, debounceTime, distinctUntilChanged, map, merge, Observable, of, pairwise, scan, startWith, Subject, switchMap, takeUntil, takeWhile, tap } from 'rxjs';
 
-export const MAGIC_PAGE_SIZE = 20;
+export const LU_SELECT_MAGIC_PAGE_SIZE = 20;
 export const MAGIC_DEBOUNCE_DURATION = 250;
 
 @Directive()
 export abstract class ALuCoreSelectApiDirective<TOption, TParams = Record<string, string | number | boolean>> implements OnDestroy, OnInit {
 	protected destroy$ = new Subject<void>();
-	protected pageSize = MAGIC_PAGE_SIZE;
+	protected pageSize = LU_SELECT_MAGIC_PAGE_SIZE;
 	protected debounceDuration = MAGIC_DEBOUNCE_DURATION;
 
 	public select = inject<ALuSelectInputComponent<TOption, unknown>>(ALuSelectInputComponent);
