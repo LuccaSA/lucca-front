@@ -16,31 +16,27 @@
 			vertical-align: top;
 
 			&::before {
-				content: '';
+				@include icon.generate('sign_confirm');
+
 				background-color: var(--colors-white-color);
 				width: var(--components-checkbox-input-size);
 				height: var(--components-checkbox-input-size);
 				border-radius: 6px;
 				transition-duration: var(--commons-animations-durations-fast);
 				transition-property: border-color, color, background-color;
+				border: var(--components-checkbox-input-border-width) solid var(--palettes-neutral-700);
+				line-height: calc(var(--components-checkbox-input-size) - var(--components-checkbox-input-border-width) * 2);
+				font-size: var(--components-checkbox-input-size);
 				flex-grow: 0;
 				flex-shrink: 0;
 				flex-basis: auto;
-				display: block;
-				margin-right: var(--spacings-XS);
-				margin-top: 2px;
-				border: var(--components-checkbox-input-border-width) solid var(--palettes-grey-700);
-			}
-
-			&::after {
-				@include icon.generate('sign_confirm');
-
-				line-height: var(--components-checkbox-input-size);
-				font-size: var(--components-checkbox-input-size);
 				color: transparent;
+				display: block;
 				text-align: center;
-				position: absolute;
 				margin-top: 2px;
+				margin-right: var(--spacings-XS);
+				transform: translate3d(0, 0, 0); // Fix box-shadow artifacts
+				text-indent: calc(var(--components-checkbox-input-border-width) * -1);
 			}
 
 			&:hover {
@@ -67,12 +63,9 @@
 
 			&:checked ~ .checkbox-label {
 				&::before {
+					color: var(--colors-white-color);
 					background-color: var(--palettes-700, var(--palettes-product-700));
 					border-color: var(--palettes-700, var(--palettes-product-700));
-				}
-
-				&::after {
-					color: var(--colors-white-color);
 				}
 			}
 
