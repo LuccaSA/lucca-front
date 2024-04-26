@@ -1,6 +1,6 @@
 /* eslint-disable @angular-eslint/no-input-rename */
 
-import { OverlayModule, OverlayRef } from '@angular/cdk/overlay';
+import { OverlayModule } from '@angular/cdk/overlay';
 import { AsyncPipe, DatePipe, NgClass, NgIf, NgOptimizedImage, NgSwitch, NgSwitchCase, NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Inject, Input, OnDestroy, Output, TemplateRef, ViewChild, ViewEncapsulation } from '@angular/core';
 import { RouterLink } from '@angular/router';
@@ -138,8 +138,6 @@ export class LuUserPopoverPanelComponent extends ALuPopoverPanel implements ILuU
 	}
 
 	private _subs = new Subscription();
-
-	public overlayRef: OverlayRef;
 
 	public constructor(private _changeDetectorRef: ChangeDetectorRef, @Inject(LuUserPopoverStore) private _service: ILuUserPopoverStore) {
 		super();

@@ -44,8 +44,11 @@ export declare interface ILuPopoverTrigger<TPanel extends ILuPopoverPanel = ILuP
 	onClose: Observable<void>;
 
 	openPopover();
+
 	closePopover();
+
 	togglePopover();
+
 	destroyPopover();
 }
 
@@ -74,6 +77,7 @@ export abstract class ALuPopoverTrigger<TPanel extends ILuPopoverPanel = ILuPopo
 	get panel() {
 		return this._panel;
 	}
+
 	set panel(p: TPanel) {
 		this._panel = p;
 	}
@@ -83,6 +87,7 @@ export abstract class ALuPopoverTrigger<TPanel extends ILuPopoverPanel = ILuPopo
 	get target() {
 		return this._target;
 	}
+
 	set target(t: TTarget) {
 		this._target = t;
 	}
@@ -91,6 +96,7 @@ export abstract class ALuPopoverTrigger<TPanel extends ILuPopoverPanel = ILuPopo
 	get triggerEvent() {
 		return this._triggerEvent;
 	}
+
 	set triggerEvent(te: LuPopoverTriggerEvent) {
 		this._triggerEvent = te;
 		if (te === 'hover' || te === 'focus') {
@@ -105,17 +111,21 @@ export abstract class ALuPopoverTrigger<TPanel extends ILuPopoverPanel = ILuPopo
 				.subscribe((h) => (h ? this.openPopover() : this.closePopover()));
 		}
 	}
+
 	protected _enterDelay = 50;
 	get enterDelay() {
 		return this._enterDelay;
 	}
+
 	set enterDelay(d: number) {
 		this._enterDelay = d;
 	}
+
 	protected _leaveDelay = 50;
 	get leaveDelay() {
 		return this._leaveDelay;
 	}
+
 	set leaveDelay(d: number) {
 		this._leaveDelay = d;
 	}
@@ -124,6 +134,7 @@ export abstract class ALuPopoverTrigger<TPanel extends ILuPopoverPanel = ILuPopo
 	get disabled() {
 		return this._disabled;
 	}
+
 	set disabled(d: boolean) {
 		this._disabled = d;
 	}
@@ -132,6 +143,7 @@ export abstract class ALuPopoverTrigger<TPanel extends ILuPopoverPanel = ILuPopo
 	get whenEllipsis() {
 		return this._whenEllipsis;
 	}
+
 	set whenEllipsis(we: boolean) {
 		this._whenEllipsis = we;
 	}
@@ -145,6 +157,7 @@ export abstract class ALuPopoverTrigger<TPanel extends ILuPopoverPanel = ILuPopo
 	abstract onClose: Observable<void>;
 
 	protected abstract _emitOpen(): void;
+
 	protected abstract _emitClose(): void;
 
 	constructor(protected _overlay: Overlay, protected _elementRef: ElementRef<HTMLElement>, protected _viewContainerRef: ViewContainerRef) {
@@ -169,11 +182,13 @@ export abstract class ALuPopoverTrigger<TPanel extends ILuPopoverPanel = ILuPopo
 			this._hovered$.next(false);
 		}
 	}
+
 	onFocus() {
 		if (this.triggerEvent === 'hover' || this.triggerEvent === 'focus') {
 			this.openPopover();
 		}
 	}
+
 	onBlur() {
 		if (this.triggerEvent === 'hover' || this.triggerEvent === 'focus') {
 			this.closePopover();
@@ -365,6 +380,7 @@ export abstract class ALuPopoverTrigger<TPanel extends ILuPopoverPanel = ILuPopo
       <button type="button" [luPopover]="popover"></button>`);
 		}
 	}
+
 	protected _checkTarget() {
 		if (!this.target) {
 			throw Error(`lu-popover-trigger: must pass in a popover target instance.`);
@@ -381,6 +397,7 @@ export abstract class ALuPopoverTrigger<TPanel extends ILuPopoverPanel = ILuPopo
 			const config = this._getOverlayConfig();
 			this._subscribeToPositions(config.positionStrategy as FlexibleConnectedPositionStrategy);
 			this._overlayRef = this._overlay.create(config);
+			this._panel.overlayRef = this._overlayRef;
 		}
 
 		return this._overlayRef;
