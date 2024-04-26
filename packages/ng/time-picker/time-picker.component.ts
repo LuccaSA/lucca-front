@@ -1,5 +1,4 @@
-import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, HostBinding, Input, OnChanges, Output, ViewChild, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, HostBinding, Input, OnChanges, Output, ViewChild, inject, OnInit } from '@angular/core';
 import { map } from 'rxjs';
 import { getIntl } from '../core/translate';
 import { ISO8601Duration, ISO8601Time } from './date-primitives';
@@ -14,11 +13,11 @@ import { LU_TIME_PICKER_TRANSLATIONS } from './time-picker.translate';
 @Component({
 	selector: 'lu-time-picker',
 	standalone: true,
-	imports: [CommonModule, TimePickerPartComponent],
+	imports: [TimePickerPartComponent],
 	templateUrl: './time-picker.component.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TimePickerComponent implements OnChanges {
+export class TimePickerComponent implements OnChanges, OnInit {
 	@Input() step: ISO8601Duration | null = null;
 	@Input() value: ISO8601Time | null = null;
 	@Input() min: ISO8601Time | null = null;
@@ -64,6 +63,14 @@ export class TimePickerComponent implements OnChanges {
 
 	// TODO refacto with signals
 	ngOnChanges(): void {
+		this.updateFlags();
+	}
+
+	ngOnInit(): void {
+		this.updateFlags();
+	}
+
+	updateFlags(): void {
 		const timeToSplit = this.value === null ? DEFAULT_MIN_TIME : this.value;
 		this.hours = getHoursPartFromIsoTime(timeToSplit);
 		this.minutes = getMinutesPartFromIsoTime(timeToSplit);

@@ -1,25 +1,47 @@
-import { CommonModule, formatNumber } from '@angular/common';
-import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, Inject, Input, LOCALE_ID, OnChanges, Output, ViewChild } from '@angular/core';
+import { DecimalPipe, formatNumber, NgIf } from '@angular/common';
+import { booleanAttribute, ChangeDetectionStrategy, Component, ElementRef, EventEmitter, Inject, Input, LOCALE_ID, numberAttribute, OnChanges, Output, ViewChild } from '@angular/core';
 import { RepeatOnHoldDirective } from './repeat-on-hold.directive';
 import { PickerControlDirection } from './time-picker.model';
 
 @Component({
 	selector: 'lu-time-picker-part',
 	standalone: true,
-	imports: [CommonModule, RepeatOnHoldDirective],
+	imports: [RepeatOnHoldDirective, NgIf, DecimalPipe],
 	templateUrl: './time-picker-part.component.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TimePickerPartComponent implements OnChanges {
 	@Input() label = '';
 	@Input() decimalConf = '2.0-0';
-	@Input() value = 0;
-	@Input() max = 0;
-	@Input() displayArrows = false;
-	@Input() isReadonly = false;
-	@Input() hideValue = false;
-	@Input() disabled = false;
-	@Input() focused = false;
+	@Input({
+		transform: numberAttribute,
+	})
+	value = 0;
+	@Input({
+		transform: numberAttribute,
+	})
+	max = 0;
+	@Input({
+		transform: booleanAttribute,
+	})
+	displayArrows = false;
+	@Input({
+		transform: booleanAttribute,
+	})
+	isReadonly = false;
+	@Input({
+		transform: booleanAttribute,
+	})
+	hideValue = false;
+	@Input({
+		transform: booleanAttribute,
+	})
+	disabled = false;
+	@Input({
+		transform: booleanAttribute,
+	})
+	focused = false;
+
 	@Output() valueChange = new EventEmitter<number>();
 	@Output() prevRequest = new EventEmitter<void>();
 	@Output() nextRequest = new EventEmitter<void>();
