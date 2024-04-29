@@ -81,7 +81,6 @@ export const oldIconToNewIcon: Record<string, string> = {
 	familyTree: 'chartFlow',
 	orgTree: 'chartFlow',
 	horizontalBarChart: 'chartHorizontalBar',
-	chartLevels: 'chartHorizontalBar',
 	level: 'chartHorizontalBar',
 	dashboard: 'chartPie',
 	analytics: 'chartVerticalBar',
