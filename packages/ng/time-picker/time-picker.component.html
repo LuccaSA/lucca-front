@@ -5,6 +5,7 @@
 		<lu-time-picker-part
 			#hoursPart
 			class="timePicker-fieldset-group"
+			[disabled]="disabled()"
 			[label]="intl.timePickerHours"
 			[value]="hours()"
 			[max]="maxHours()"
@@ -27,7 +28,7 @@
 			[displayArrows]="displayArrows()"
 			[isReadonly]="isReadonly()"
 			[hideValue]="shouldHideZeroValue()"
-			[disabled]="!minutesIncrement()"
+			[disabled]="disabled() || !minutesIncrement()"
 			[focused]="focusedPart === 'minutes'"
 			(valueChange)="minutesInputHandler($event)"
 			(prevRequest)="focusPart('hours')"

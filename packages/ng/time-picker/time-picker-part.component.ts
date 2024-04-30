@@ -1,77 +1,60 @@
 import { DecimalPipe, formatNumber, NgIf } from '@angular/common';
-import { booleanAttribute, ChangeDetectionStrategy, Component, ElementRef, EventEmitter, Inject, Input, LOCALE_ID, numberAttribute, OnChanges, Output, ViewChild } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, computed, ElementRef, EventEmitter, Inject, input, LOCALE_ID, model, numberAttribute, Output, ViewChild } from '@angular/core';
 import { RepeatOnHoldDirective } from './repeat-on-hold.directive';
 import { PickerControlDirection } from './time-picker.model';
+import { InputDirective } from '../form-field/input.directive';
 
 @Component({
 	selector: 'lu-time-picker-part',
 	standalone: true,
-	imports: [RepeatOnHoldDirective, NgIf, DecimalPipe],
+	imports: [RepeatOnHoldDirective, NgIf, DecimalPipe, InputDirective],
 	templateUrl: './time-picker-part.component.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TimePickerPartComponent implements OnChanges {
-	@Input() label = '';
-	@Input() decimalConf = '2.0-0';
-	@Input({
-		transform: numberAttribute,
-	})
-	value = 0;
-	@Input({
-		transform: numberAttribute,
-	})
-	max = 0;
-	@Input({
-		transform: booleanAttribute,
-	})
-	displayArrows = false;
-	@Input({
-		transform: booleanAttribute,
-	})
-	isReadonly = false;
-	@Input({
-		transform: booleanAttribute,
-	})
-	hideValue = false;
-	@Input({
-		transform: booleanAttribute,
-	})
-	disabled = false;
-	@Input({
-		transform: booleanAttribute,
-	})
-	focused = false;
+export class TimePickerPartComponent {
+	label = input('');
 
-	@Output() valueChange = new EventEmitter<number>();
+	decimalConf = input('2.0-0');
+
+	value = model(0);
+
+	max = input(0, {
+		transform: numberAttribute,
+	});
+
+	displayArrows = input(false, {
+		transform: booleanAttribute,
+	});
+
+	isReadonly = input(false, {
+		transform: booleanAttribute,
+	});
+
+	hideValue = input(false, {
+		transform: booleanAttribute,
+	});
+
+	disabled = input(false, {
+		transform: booleanAttribute,
+	});
+
+	focused = input(false, {
+		transform: booleanAttribute,
+	});
+
 	@Output() prevRequest = new EventEmitter<void>();
 	@Output() nextRequest = new EventEmitter<void>();
 	@Output() inputControlClick = new EventEmitter<PickerControlDirection>();
 
 	@ViewChild('timePickerInput') timePickerInput?: ElementRef<HTMLInputElement>;
 
-	valueLabel = '';
+	valueLabel = computed(() => (this.hideValue() ? '  ' : formatNumber(this.value(), this.locale, this.decimalConf())));
 
 	constructor(@Inject(LOCALE_ID) private locale: string) {}
 
-	ngOnChanges(): void {
-		this.valueLabel = this.hideValue ? '  ' : formatNumber(this.value, this.locale, this.decimalConf);
-	}
-
 	arrowKeyPressed(event: KeyboardEvent, isUpArrow: boolean): void {
 		event.preventDefault();
-		if (isUpArrow) {
-			this.up();
-		} else {
-			this.down();
-		}
-	}
-
-	up(): void {
-		this.inputControlClick.emit('up');
-	}
-
-	down(): void {
-		this.inputControlClick.emit('down');
+		this.inputControlClick.emit(isUpArrow ? 'up' : 'down');
 	}
 
 	keysInputHandler(event: Event): void {
@@ -82,7 +65,7 @@ export class TimePickerPartComponent implements OnChanges {
 		}
 
 		if (event.data && /\D+/.test(event.data)) {
-			event.target.value = String(this.value);
+			event.target.value = String(this.value());
 			return;
 		}
 
@@ -90,16 +73,16 @@ export class TimePickerPartComponent implements OnChanges {
 
 		let val = value.slice(-2);
 
-		if (this.max && Number(val) * 10 > this.max) {
+		if (this.max() && Number(val) * 10 > this.max()) {
 			this.moveRequest(event, 'next');
 		}
 
-		if (this.max && Number(val) > this.max) {
+		if (this.max() && Number(val) > this.max()) {
 			val = value.slice(-1);
 		}
 
 		event.target.value = val;
-		this.valueChange.emit(Number(val));
+		this.value.set(Number(val));
 	}
 
 	clearField(event: Event): void {
@@ -107,7 +90,7 @@ export class TimePickerPartComponent implements OnChanges {
 			event.preventDefault();
 		}
 
-		this.valueChange.emit(0);
+		this.value.set(0);
 	}
 
 	clickHandler(event: MouseEvent) {

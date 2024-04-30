@@ -1,5 +1,4 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, computed, ElementRef, EventEmitter, HostBinding, inject, input, model, Output, ViewChild } from '@angular/core';
-import { map } from 'rxjs';
+import { booleanAttribute, ChangeDetectionStrategy, Component, computed, ElementRef, forwardRef, inject, input, model, ViewChild } from '@angular/core';
 import { getIntl } from '../core/translate';
 import { ISO8601Duration, ISO8601Time } from './date-primitives';
 import { convertStringToIsoTime, createIsoTimeFromHoursAndMinutes, getHoursPartFromIsoTime, getMinutesPartFromIsoTime } from './date.utils';
@@ -9,6 +8,9 @@ import { isNil, isNotNil } from './misc.utils';
 import { TimePickerPartComponent } from './time-picker-part.component';
 import { DEFAULT_DURATION_HOUR_DECIMAL_PIPE_FORMAT, DEFAULT_MIN_TIME, DEFAULT_TIME_DECIMAL_PIPE_FORMAT, PickerControlDirection, TimeChangeEvent } from './time-picker.model';
 import { LU_TIME_PICKER_TRANSLATIONS } from './time-picker.translate';
+import { FormFieldComponent } from '../form-field/form-field.component';
+import { FORM_FIELD_INSTANCE } from '../form-field/form-field.token';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
 	selector: 'lu-time-picker',
@@ -16,12 +18,24 @@ import { LU_TIME_PICKER_TRANSLATIONS } from './time-picker.translate';
 	imports: [TimePickerPartComponent],
 	templateUrl: './time-picker.component.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
+	providers: [
+		{
+			provide: NG_VALUE_ACCESSOR,
+			useExisting: forwardRef(() => TimePickerComponent),
+			multi: true,
+		},
+	],
 })
-export class TimePickerComponent {
-	step = model<ISO8601Duration>(null);
+export class TimePickerComponent implements ControlValueAccessor {
+	#formField = inject<FormFieldComponent>(FORM_FIELD_INSTANCE, { optional: true });
+
+	onChange: (value: ISO8601Time) => void;
+	onTouched: () => void;
+
+	step = input<ISO8601Duration>(null);
 	value = model<ISO8601Time>('00:00:00');
-	min = model<ISO8601Time>(null);
-	max = model<ISO8601Time>(null);
+	min = input<ISO8601Time>(null);
+	max = input<ISO8601Time>(null);
 
 	hideZeroValue = input(false, { transform: booleanAttribute });
 
@@ -31,10 +45,6 @@ export class TimePickerComponent {
 	isReadonly = input(false, { transform: booleanAttribute });
 
 	error = input<{ toString: () => string } | null>(null);
-	@Output() timeChange = new EventEmitter<TimeChangeEvent>();
-	@Output() valueChange = this.timeChange.pipe(map((event) => event.value));
-	// eslint-disable-next-line @angular-eslint/no-output-native
-	@Output() blur = new EventEmitter<void>();
 
 	@ViewChild('hoursPart') hoursPart?: TimePickerPartComponent;
 	@ViewChild('minutesPart') minutesPart?: TimePickerPartComponent;
@@ -44,18 +54,15 @@ export class TimePickerComponent {
 	protected hoursIncrement = computed(() => this.getHoursIncrement(this.step()));
 	protected minutesIncrement = computed(() => this.getMinutesIncrement(this.step()));
 	protected shouldHideZeroValue = computed(() => this.hideZeroValue() && this.hours() === 0 && this.minutes() === 0);
-	protected pickerClass = computed(
-		() => `timePicker ${this.isReadonly() ? 'is-readonly' : ''} ${this.displayArrows() ? 'mod-withArrowHoverVisible mod-withArrow' : ''} ${this.hasError() ? 'palette-error' : ''}`,
-	);
+	protected pickerClass = computed(() => `timePicker ${this.isReadonly() ? 'is-readonly' : ''} ${this.displayArrows() ? 'mod-withArrowHoverVisible mod-withArrow' : ''}`);
 	protected fieldsetSuffixClass = computed(() => `timePicker-fieldset-suffix ${this.shouldHideZeroValue() ? 'u-visibilityHidden' : ''}`);
 	protected separator = computed(() => (this.isDuration() ? this.intl.timePickerHourSeparator : this.intl.timePickerTimeSeparator));
-
-	@HostBinding('attr.aria-invalid')
-	protected hasError = computed(() => this.error() !== null);
 
 	protected hoursDecimalConf = computed(() => (this.isDuration() ? DEFAULT_DURATION_HOUR_DECIMAL_PIPE_FORMAT : DEFAULT_TIME_DECIMAL_PIPE_FORMAT));
 
 	protected maxHours = computed(() => (this.isDuration() ? 24 : 23));
+
+	protected disabled = model(false);
 
 	protected focusedPart: 'hours' | 'minutes' = 'hours';
 
@@ -63,7 +70,30 @@ export class TimePickerComponent {
 
 	protected intl = getIntl(LU_TIME_PICKER_TRANSLATIONS);
 
+	constructor() {
+		if (this.#formField) {
+			this.#formField.layout = 'fieldset';
+		}
+	}
+
+	writeValue(value: ISO8601Time): void {
+		this.value.set(value || '00:00:00');
+	}
+
+	registerOnChange(fn: () => void): void {
+		this.onChange = fn;
+	}
+
+	registerOnTouched(fn: () => void): void {
+		this.onTouched = fn;
+	}
+
+	setDisabledState?(isDisabled: boolean): void {
+		this.disabled.set(isDisabled);
+	}
+
 	protected focusPart(type: 'hours' | 'minutes') {
+		this.onTouched?.();
 		if (type === 'hours') {
 			if (this.hoursIncrement() === 0) {
 				return;
@@ -106,7 +136,7 @@ export class TimePickerComponent {
 		}
 
 		this.focusedPart = 'hours';
-		this.blur.emit();
+		this.onTouched?.();
 	}
 
 	protected copyHandler(event: ClipboardEvent): void {
@@ -124,13 +154,8 @@ export class TimePickerComponent {
 		if (isNotNil(pastedValue)) {
 			try {
 				const value = convertStringToIsoTime(pastedValue);
-				const previousValue = this.value();
 				this.value.set(value);
-				this.timeChange.emit({
-					previousValue,
-					source: 'paste',
-					value,
-				});
+				this.onChange?.(value);
 			} catch (e) {
 				// do nothing
 			}
@@ -191,10 +216,7 @@ export class TimePickerComponent {
 		const result = createIsoTimeFromHoursAndMinutes(hours, minutes);
 
 		this.value.set(result);
-		this.timeChange.emit({
-			...protoEvent,
-			value: result,
-		});
+		this.onChange?.(result);
 	}
 
 	protected inputControlClickHandler(part: 'hours' | 'minutes', direction: PickerControlDirection): void {
