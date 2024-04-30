@@ -42,12 +42,12 @@ Il est possible de modifier l'affichage d'une option en fournissant un template 
 Il est possible de modifier la source de données utilisée par le composant. Pour cela, il faut créer une nouvelle directive qui étend `LuCoreSelectUsersDirective` et qui surcharge la méthode `getOptions`.
 
 > ⚠️ Afin de déclencher le chargement au scroll, vous devez spécifier le paramètre `limit` dans les paramètres de votre requête.
-> Vous pouvez utiliser `LU_SELECT_MAGIC_PAGE_SIZE`, qui correspond à une taille de page de **20** items, ou toute autre variable de votre choix.
+> Vous pouvez utiliser `MAGIC_PAGE_SIZE`, qui correspond à une taille de page de **20** items, ou toute autre variable de votre choix.
 
 ```ts
 import { Directive, forwardRef, inject } from '@angular/core';
 import { LuCoreSelectUsersDirective } from '@lucca-front/ng/core-select/user';
-import { LU_SELECT_MAGIC_PAGE_SIZE } from '@lucca-front/ng/core-select/api';
+import { MAGIC_PAGE_SIZE } from '@lucca-front/ng/core-select/api';
 import { Observable, map } from 'rxjs';
 
 import { Person } from '../models';
@@ -69,7 +69,7 @@ export class PersonsDirective extends LuCoreSelectUsersDirective<Person> {
   #personsService = inject(PersonService);
 
   protected override getOptions(params: Record<string, string | number | boolean>, page: number): Observable<Person[]> {
-    return this.#personsService.getPersons({ page: page + 1, limit: LU_SELECT_MAGIC_PAGE_SIZE, ...params }).pipe(map((response) => response.items));
+    return this.#personsService.getPersons({ page: page + 1, limit: MAGIC_PAGE_SIZE, ...params }).pipe(map((response) => response.items));
   }
 }
 ```
