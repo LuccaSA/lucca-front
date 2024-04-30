@@ -29,7 +29,7 @@ export default {
 			},
 		},
 		type: {
-			options: ['text', 'number', 'password'],
+			options: ['text', 'email', 'password', 'url'],
 			description: '[v17.2] Le type password ajoute automatiquement un bouton pour afficher la valeur du champ.',
 			control: {
 				type: 'select',
