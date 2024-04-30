@@ -1,4 +1,4 @@
-<div [class]="pickerClass" (focusout)="focusoutHandler($event)" (copy)="copyHandler($event)" (paste)="pasteHandler($event)">
+<div [class]="pickerClass()" (focusout)="focusoutHandler($event)" (copy)="copyHandler($event)" (paste)="pasteHandler($event)">
 	<!-- eslint-disable-next-line @angular-eslint/template/interactive-supports-focus -->
 	<fieldset class="timePicker-fieldset" (click)="clickHandler($event)">
 		<div class="u-mask">{{ intl.timePickerDescriptionAccessibility }}</div>
@@ -6,28 +6,28 @@
 			#hoursPart
 			class="timePicker-fieldset-group"
 			[label]="intl.timePickerHours"
-			[value]="hours"
-			[max]="maxHours"
-			[decimalConf]="hoursDecimalConf"
-			[displayArrows]="displayArrows"
-			[isReadonly]="isReadonly"
-			[hideValue]="shouldHideZeroValue"
+			[value]="hours()"
+			[max]="maxHours()"
+			[decimalConf]="hoursDecimalConf()"
+			[displayArrows]="displayArrows()"
+			[isReadonly]="isReadonly()"
+			[hideValue]="shouldHideZeroValue()"
 			[focused]="focusedPart === 'hours'"
 			(valueChange)="hoursInputHandler($event)"
 			(nextRequest)="focusPart('minutes')"
 			(inputControlClick)="inputControlClickHandler('hours', $event)"
 		/>
-		<div aria-hidden="true" [class]="fieldsetSuffixClass">{{ separator }}</div>
+		<div aria-hidden="true" [class]="fieldsetSuffixClass()">{{ separator() }}</div>
 		<lu-time-picker-part
 			#minutesPart
 			class="timePicker-fieldset-group"
 			[label]="intl.timePickerMinutes"
-			[value]="minutes"
+			[value]="minutes()"
 			[max]="59"
-			[displayArrows]="displayArrows"
-			[isReadonly]="isReadonly"
-			[hideValue]="shouldHideZeroValue"
-			[disabled]="!minutesIncrement"
+			[displayArrows]="displayArrows()"
+			[isReadonly]="isReadonly()"
+			[hideValue]="shouldHideZeroValue()"
+			[disabled]="!minutesIncrement()"
 			[focused]="focusedPart === 'minutes'"
 			(valueChange)="minutesInputHandler($event)"
 			(prevRequest)="focusPart('hours')"

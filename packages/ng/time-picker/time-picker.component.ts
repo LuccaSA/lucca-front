@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, HostBinding, Input, OnChanges, Output, ViewChild, inject, OnInit } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, computed, ElementRef, EventEmitter, HostBinding, inject, input, model, Output, ViewChild } from '@angular/core';
 import { map } from 'rxjs';
 import { getIntl } from '../core/translate';
 import { ISO8601Duration, ISO8601Time } from './date-primitives';
@@ -17,19 +17,20 @@ import { LU_TIME_PICKER_TRANSLATIONS } from './time-picker.translate';
 	templateUrl: './time-picker.component.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TimePickerComponent implements OnChanges, OnInit {
-	@Input() step: ISO8601Duration | null = null;
-	@Input() value: ISO8601Time | null = null;
-	@Input() min: ISO8601Time | null = null;
-	@Input() max: ISO8601Time | null = null;
+export class TimePickerComponent {
+	step = model<ISO8601Duration>(null);
+	value = model<ISO8601Time>('00:00:00');
+	min = model<ISO8601Time>(null);
+	max = model<ISO8601Time>(null);
 
-	@Input() hideZeroValue = false;
+	hideZeroValue = input(false, { transform: booleanAttribute });
 
 	// TODO : remove isDuration when we have a proper duration picker
-	@Input() isDuration = false;
-	@Input() displayArrows = false;
-	@Input() isReadonly = false;
-	@Input() error: { toString: () => string } | null = null;
+	isDuration = input(false, { transform: booleanAttribute });
+	displayArrows = input(false, { transform: booleanAttribute });
+	isReadonly = input(false, { transform: booleanAttribute });
+
+	error = input<{ toString: () => string } | null>(null);
 	@Output() timeChange = new EventEmitter<TimeChangeEvent>();
 	@Output() valueChange = this.timeChange.pipe(map((event) => event.value));
 	// eslint-disable-next-line @angular-eslint/no-output-native
@@ -38,22 +39,23 @@ export class TimePickerComponent implements OnChanges, OnInit {
 	@ViewChild('hoursPart') hoursPart?: TimePickerPartComponent;
 	@ViewChild('minutesPart') minutesPart?: TimePickerPartComponent;
 
-	protected hours = 0;
-
-	protected minutes = 0;
-	protected hoursIncrement = 1;
-	protected minutesIncrement: number | null = 1; // minutes increment can be null if step is >= 1 hour
-	protected pickerClass = '';
-	protected fieldsetSuffixClass = '';
-	protected separator = '';
-	protected shouldHideZeroValue = false;
+	protected hours = computed(() => getHoursPartFromIsoTime(this.value()));
+	protected minutes = computed(() => getMinutesPartFromIsoTime(this.value()));
+	protected hoursIncrement = computed(() => this.getHoursIncrement(this.step()));
+	protected minutesIncrement = computed(() => this.getMinutesIncrement(this.step()));
+	protected shouldHideZeroValue = computed(() => this.hideZeroValue() && this.hours() === 0 && this.minutes() === 0);
+	protected pickerClass = computed(
+		() => `timePicker ${this.isReadonly() ? 'is-readonly' : ''} ${this.displayArrows() ? 'mod-withArrowHoverVisible mod-withArrow' : ''} ${this.hasError() ? 'palette-error' : ''}`,
+	);
+	protected fieldsetSuffixClass = computed(() => `timePicker-fieldset-suffix ${this.shouldHideZeroValue() ? 'u-visibilityHidden' : ''}`);
+	protected separator = computed(() => (this.isDuration() ? this.intl.timePickerHourSeparator : this.intl.timePickerTimeSeparator));
 
 	@HostBinding('attr.aria-invalid')
-	protected hasError = false;
+	protected hasError = computed(() => this.error() !== null);
 
-	protected hoursDecimalConf = '';
+	protected hoursDecimalConf = computed(() => (this.isDuration() ? DEFAULT_DURATION_HOUR_DECIMAL_PIPE_FORMAT : DEFAULT_TIME_DECIMAL_PIPE_FORMAT));
 
-	protected maxHours = 23;
+	protected maxHours = computed(() => (this.isDuration() ? 24 : 23));
 
 	protected focusedPart: 'hours' | 'minutes' = 'hours';
 
@@ -61,40 +63,9 @@ export class TimePickerComponent implements OnChanges, OnInit {
 
 	protected intl = getIntl(LU_TIME_PICKER_TRANSLATIONS);
 
-	// TODO refacto with signals
-	ngOnChanges(): void {
-		this.updateFlags();
-	}
-
-	ngOnInit(): void {
-		this.updateFlags();
-	}
-
-	updateFlags(): void {
-		const timeToSplit = this.value === null ? DEFAULT_MIN_TIME : this.value;
-		this.hours = getHoursPartFromIsoTime(timeToSplit);
-		this.minutes = getMinutesPartFromIsoTime(timeToSplit);
-
-		this.hoursIncrement = this.getHoursIncrement(this.step);
-		this.minutesIncrement = this.getMinutesIncrement(this.step);
-
-		this.shouldHideZeroValue = this.hideZeroValue && this.hours === 0 && this.minutes === 0;
-
-		this.fieldsetSuffixClass = `timePicker-fieldset-suffix ${this.shouldHideZeroValue ? 'u-visibilityHidden' : ''}`;
-
-		this.hasError = this.error !== null;
-		this.pickerClass = `timePicker ${this.isReadonly ? 'is-readonly' : ''} ${this.displayArrows ? 'mod-withArrowHoverVisible mod-withArrow' : ''} ${this.hasError ? 'palette-error' : ''}`;
-
-		this.separator = this.isDuration ? this.intl.timePickerHourSeparator : this.intl.timePickerTimeSeparator;
-
-		this.hoursDecimalConf = this.isDuration ? DEFAULT_DURATION_HOUR_DECIMAL_PIPE_FORMAT : DEFAULT_TIME_DECIMAL_PIPE_FORMAT;
-
-		this.maxHours = this.isDuration ? 24 : 23;
-	}
-
 	protected focusPart(type: 'hours' | 'minutes') {
 		if (type === 'hours') {
-			if (this.hoursIncrement === 0) {
+			if (this.hoursIncrement() === 0) {
 				return;
 			}
 
@@ -102,7 +73,7 @@ export class TimePickerComponent implements OnChanges, OnInit {
 			this.hoursPart?.focus();
 		}
 		if (type === 'minutes') {
-			if (this.minutesIncrement === 0) {
+			if (this.minutesIncrement() === 0) {
 				return;
 			}
 
@@ -113,16 +84,16 @@ export class TimePickerComponent implements OnChanges, OnInit {
 
 	protected hoursInputHandler(value: number): void {
 		this.setTime({
-			previousValue: this.value,
-			value: createIsoTimeFromHoursAndMinutes(value, this.minutes),
+			previousValue: this.value(),
+			value: createIsoTimeFromHoursAndMinutes(value, this.minutes()),
 			source: 'input',
 		});
 	}
 
 	protected minutesInputHandler(value: number): void {
 		this.setTime({
-			previousValue: this.value,
-			value: createIsoTimeFromHoursAndMinutes(this.hours, value),
+			previousValue: this.value(),
+			value: createIsoTimeFromHoursAndMinutes(this.hours(), value),
 			source: 'input',
 		});
 	}
@@ -141,7 +112,7 @@ export class TimePickerComponent implements OnChanges, OnInit {
 	protected copyHandler(event: ClipboardEvent): void {
 		event.preventDefault();
 		// write value to clipboard
-		const value = this.value;
+		const value = this.value();
 		if (isNotNil(value)) {
 			event.clipboardData?.setData('text/plain', value);
 		}
@@ -153,9 +124,8 @@ export class TimePickerComponent implements OnChanges, OnInit {
 		if (isNotNil(pastedValue)) {
 			try {
 				const value = convertStringToIsoTime(pastedValue);
-				const previousValue = this.value;
-				this.value = value;
-				this.ngOnChanges(); // TODO refacto signals
+				const previousValue = this.value();
+				this.value.set(value);
 				this.timeChange.emit({
 					previousValue,
 					source: 'paste',
@@ -220,8 +190,7 @@ export class TimePickerComponent implements OnChanges, OnInit {
 
 		const result = createIsoTimeFromHoursAndMinutes(hours, minutes);
 
-		this.value = result;
-		this.ngOnChanges(); // TODO refacto signals
+		this.value.set(result);
 		this.timeChange.emit({
 			...protoEvent,
 			value: result,
@@ -229,12 +198,12 @@ export class TimePickerComponent implements OnChanges, OnInit {
 	}
 
 	protected inputControlClickHandler(part: 'hours' | 'minutes', direction: PickerControlDirection): void {
-		const val = this.value ?? DEFAULT_MIN_TIME;
+		const val = this.value() ?? DEFAULT_MIN_TIME;
 		const hoursPart = getHoursPartFromIsoTime(val);
 		const minutesPart = getMinutesPartFromIsoTime(val);
 
 		const selectedPart = part === 'hours' ? hoursPart : minutesPart;
-		const selectedIncrement = part === 'hours' ? this.hoursIncrement : this.minutesIncrement;
+		const selectedIncrement = part === 'hours' ? this.hoursIncrement() : this.minutesIncrement();
 		let modifiedVal: number;
 
 		if (selectedIncrement === null) {
@@ -251,7 +220,7 @@ export class TimePickerComponent implements OnChanges, OnInit {
 
 		this.setTime({
 			source: 'control',
-			previousValue: this.value,
+			previousValue: this.value(),
 			value: newTime,
 			part,
 			direction,
