@@ -43,12 +43,12 @@ export class FormFieldComponent implements OnChanges, OnDestroy, DoCheck {
 
 	#doCheck$ = new Subject<void>();
 
-	@ContentChildren(NG_VALIDATORS)
+	@ContentChildren(NG_VALIDATORS, { descendants: true })
 	public set validators(validators: QueryList<Validator | undefined>) {
 		this.#requiredValidator = validators.toArray()?.find((v): v is RequiredValidator => v instanceof RequiredValidator);
 	}
 
-	@ContentChildren(NgControl)
+	@ContentChildren(NgControl, { descendants: true })
 	set controls(controls: QueryList<NgControl>) {
 		const controls$ = controls.changes.pipe(
 			takeUntilDestroyed(this.#destroyRef),
