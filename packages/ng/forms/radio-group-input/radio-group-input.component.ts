@@ -1,11 +1,11 @@
 import { ChangeDetectionStrategy, Component, forwardRef, inject, Input, ViewEncapsulation } from '@angular/core';
-import { FormFieldComponent } from '@lucca-front/ng/form-field';
-import { FORM_FIELD_INSTANCE } from '@lucca-front/ng/form-field';
+import { FORM_FIELD_INSTANCE, FormFieldComponent, InputDirective } from '@lucca-front/ng/form-field';
 import { injectNgControl } from '../inject-ng-control';
 import { NoopValueAccessorDirective } from '../noop-value-accessor.directive';
-import { InputDirective } from '@lucca-front/ng/form-field';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RADIO_GROUP_INSTANCE } from './radio-group-token';
+
+let nextId = 0;
 
 @Component({
 	selector: 'lu-radio-group-input',
@@ -30,6 +30,8 @@ export class RadioGroupInputComponent {
 
 	@Input()
 	size: 'S' | 'M';
+
+	name = `radio-group-${nextId++}`;
 
 	constructor() {
 		if (this.formField) {
