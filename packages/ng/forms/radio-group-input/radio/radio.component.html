@@ -4,10 +4,11 @@
 <span class="radioField">
 	<input
 		[formControl]="formControl"
-		[attr.disabled]="formControl.disabled || disabled"
+		[attr.disabled]="(formControl.disabled || disabled) ? 'disabled' : null"
 		type="radio"
 		class="radioField-input"
-		id="{{id}}-input"
+		id="{{id}}"
+		[name]="name"
 		[value]="value"
 		luInput
 		luInputStandalone
