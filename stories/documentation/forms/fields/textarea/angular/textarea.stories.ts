@@ -1,9 +1,9 @@
-import { TextareaInputComponent } from '@lucca-front/ng/forms';
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { cleanupTemplate, generateInputs } from 'stories/helpers/stories';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
+import { TextareaInputComponent } from '@lucca-front/ng/forms';
+import { Meta, StoryObj, moduleMetadata } from '@storybook/angular';
+import { cleanupTemplate, generateInputs } from 'stories/helpers/stories';
 
 export default {
 	title: 'Documentation/Forms/Fields/TextAreaField/Angular',
@@ -27,6 +27,9 @@ export default {
 			control: {
 				type: 'select',
 			},
+		},
+		rows: {
+			control: { type: 'number', min: 2 },
 		},
 		counter: {
 			description: '[v17.4]',
@@ -75,5 +78,6 @@ export const Basic: StoryObj<TextareaInputComponent & { disabled: boolean } & Fo
 		placeholder: 'Placeholder',
 		tooltip: "Je suis un message d'aide",
 		counter: 0,
+		rows: 3,
 	},
 };
