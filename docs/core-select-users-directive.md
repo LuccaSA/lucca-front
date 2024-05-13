@@ -14,6 +14,14 @@ Il faut ajouter un _provider_ global dans votre `AppModule` ou dans votre fichie
 
 <details>
 
+<summary>S'exclure de la sélection</summary>
+
+Il est possible de s'exclure de la liste des utilisateurs sélectionnables grâce à `displayMeOption="false"`.
+
+</details>
+
+<details>
+
 <summary>Modifier l'affichage d'une option (mais pas la source de données)</summary>
 
 Il est possible de modifier l'affichage d'une option en fournissant un template pour les options. Pour cela, il faut ajouter un template avec la directive `luOptionTemplate` dans le composant parent.
