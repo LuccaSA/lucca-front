@@ -1,9 +1,19 @@
 @use 'exports' as *;
 @use '@lucca-front/scss/src/commons/utils/a11y';
 
+.formLabel, .inlineMessage {
+	display: none !important;
+}
+
 .timePicker {
 	@include vars;
 	@include component;
+
+	&.mod-S {
+		@include S;
+	}
+
+	// Cover L size ?
 
 	&.mod-withStepper {
 		@include withStepper;

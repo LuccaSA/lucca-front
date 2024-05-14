@@ -1,3 +1,10 @@
+@mixin S {
+  --components-timepicker-fontSize: var(--sizes-S-fontSize);
+  --components-timepicker-lineHeight: var(--sizes-S-lineHeight);
+  --components-timepicker-input-height: 1.5rem;
+  --components-timepicker-input-width: 1rem;
+}
+
 @mixin withStepper {
   .timePicker-fieldset {
     margin: var(--spacings-S) 0;

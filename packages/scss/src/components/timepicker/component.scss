@@ -1,8 +1,7 @@
 @use '@lucca-front/scss/src/commons/utils/a11y';
 
 @mixin component($atRoot: 'without: rule') {
-  //display: flex;
-  //justify-content: center;
+  display: flex;
 
 	@at-root ($atRoot) {
     .timePicker-fieldset {
@@ -21,11 +20,10 @@
     	cursor: text;
 
     	&:hover {
-    		--components-timepicker-border: 0 0 0 1px var(--palettes-400, var(--palettes-grey-400));
+    		--components-timepicker-border: 0 0 0 1px var(--palettes-400, var(--palettes-neutral-400));
     	}
 
-    	&:focus-within,
-    	&:focus-visible {
+    	&:focus-within {
     		@include a11y.focusVisible($offset: 3px);
     	}
     }
@@ -38,16 +36,12 @@
 
     .timePicker-fieldset-group {
     	position: relative;
-    	display: inline-block;
+    	display: inline-flex;
     }
 
     .timePicker-fieldset-group-textfield {
     	display: block;
     	outline: none;
-    }
-
-    input.timePicker-fieldset-group-textfield-input {
-      opacity: 0;
     }
 
     .timePicker-fieldset-group-textfield-input {
@@ -59,14 +53,19 @@
     	text-align: center;
     	height: var(--components-timepicker-input-height);
     	width: var(--components-timepicker-input-width);
+      opacity: 0;
 
-    	&.mod-L {
-    		width: 1.8rem;
-    	}
+      &:focus-visible + .timePicker-fieldset-group-textfield-display {
+        background-color: var(--palettes-primary-100);
+      }
 
-    	&.mod-XL {
-    		width: 2.5rem;
-    	}
+    	// &.mod-L {
+    	// 	width: 1.8rem;
+    	// }
+      //
+    	// &.mod-XL {
+    	// 	width: 2.5rem;
+    	// }
 
     	&[type='number'] {
     		/* stylelint-disable-next-line property-no-vendor-prefix */
@@ -81,9 +80,7 @@
     		}
     	}
 
-      &:focus-visible + .timePicker-fieldset-group-textfield-display {
-      	background-color: var(--palettes-primary-100);
-      }
+
     }
 
     .timePicker-fieldset-group-textfield-display {
@@ -92,14 +89,14 @@
     	left: 50%;
     	transform: translate(-50%, -50%);
     	pointer-events: none;
-    	padding: 0.15rem;
-
-    	color: var(--palettes-grey-800);
+    	padding: var(--pr-t-spacings-50);
+    	color: var(--palettes-neutral-800);
+      border-radius: var(--commons-borderRadius-M);
     }
 
     .timePicker-fieldset-group-button {
     	position: absolute;
-    	bottom: calc(100% + 0.5rem);
+    	bottom: calc(100% + var(--pr-t-spacings-100) + 1px);
     	left: 0;
     	right: 0;
     	width: 100%;
@@ -107,6 +104,7 @@
     	padding: 0;
     	height: 1rem;
     	background-color: transparent;
+      color: var(--palettes-neutral-600);
     	cursor: pointer;
 
     	// style actionIcon
@@ -118,19 +116,19 @@
     	&:not([disabled], .is-disabled, [readonly], .is-readonly) {
     		&:hover {
     			cursor: pointer;
-    			background-color: var(--palettes-grey-50);
-    			color: var(--palettes-grey-800);
+    			background-color: var(--palettes-neutral-50);
+    			color: var(--palettes-neutral-800);
     		}
 
     		&:focus-visible {
-    			background-color: var(--palettes-grey-100);
-    			color: var(--palettes-grey-800);
+    			background-color: var(--palettes-neutral-100);
+    			color: var(--palettes-neutral-800);
     			outline: none;
     		}
     	}
 
     	&:is(.is-disabled, .disabled, [disabled]) {
-    		color: var(--palettes-grey-500);
+    		color: var(--palettes-neutral-500);
     		cursor: default;
     	}
 
@@ -139,22 +137,22 @@
     	}
 
     	+ .timePicker-fieldset-group-button {
-    		top: calc(100% + 0.5rem);
+    		top: calc(100% + var(--pr-t-spacings-100) + 1px);
     		bottom: auto;
     	}
     }
 
-    .timePicker-skeletonOverlay {
-    	inset: 0.75rem;
-    	position: absolute;
-    	border-radius: 0.8rem;
-    	animation-name: aniUISkeleton;
-    	animation-duration: 1s;
-    	animation-timing-function: linear;
-    	animation-iteration-count: infinite;
-    	background: linear-gradient(90deg, var(--palettes-grey-100), var(--palettes-grey-50), var(--palettes-grey-100));
-    	background-size: 150%;
-    }
+    // .timePicker-skeletonOverlay {
+    // 	inset: 0.75rem;
+    // 	position: absolute;
+    // 	border-radius: 0.8rem;
+    // 	animation-name: aniUISkeleton;
+    // 	animation-duration: 1s;
+    // 	animation-timing-function: linear;
+    // 	animation-iteration-count: infinite;
+    // 	background: linear-gradient(90deg, var(--palettes-neutral-100), var(--palettes-neutral-50), var(--palettes-neutral-100));
+    // 	background-size: 150%;
+    // }
 	}
 
 
