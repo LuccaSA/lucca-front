@@ -1,4 +1,4 @@
-<div class="is-invalid" [class]="pickerClass()" (focusout)="focusoutHandler($event)" (copy)="copyHandler($event)" (paste)="pasteHandler($event)">
+<div [class]="pickerClass()" (focusout)="focusoutHandler($event)" (copy)="copyHandler($event)" (paste)="pasteHandler($event)">
 	<!-- eslint-disable-next-line @angular-eslint/template/interactive-supports-focus -->
 	<fieldset class="timePicker-fieldset" (click)="clickHandler($event)">
 		<div class="u-mask">{{ intl.timePickerDescriptionAccessibility }}</div>

@@ -9,8 +9,10 @@
   // grid-template-rows: min-content 1fr;
   // grid-template-columns: min-content;
 
-  &:hover {
-    --components-timepicker-border: var(--palettes-error-600);
+  .timePicker-fieldset {
+    &:hover {
+      --components-timepicker-border: var(--palettes-error-600);
+    }
   }
 
   // .timePicker-fieldset {

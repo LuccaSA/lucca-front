@@ -9,14 +9,16 @@
 		@include S;
 	}
 
-	// Cover L size ?
-
 	&.mod-withStepper {
 		@include withStepper;
 	}
 
 	&.mod-withStepperHover {
 		@include withStepperHover;
+	}
+
+	&.mod-duration {
+		@include duration;
 	}
 
 	&.is-invalid { // Previously mod-conflict which cannot be find in Angular files
@@ -31,6 +33,8 @@
 		@include disabled;
 	}
 }
+
+// Cover L size ?
 
 // TODO INT en attente des futurs ateliers LF sur le timePicker - Premier test - renommage conseillé
 
