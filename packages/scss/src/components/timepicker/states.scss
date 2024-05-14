@@ -1,27 +1,29 @@
 @use '@lucca-front/scss/src/commons/utils/a11y';
 
 @mixin invalid {
-  position: relative;
-  display: grid;
-  grid-template-rows: min-content 1fr;
-  grid-template-columns: min-content;
+  --components-timepicker-border: var(--palettes-error-400);
+  --components-timepicker-background: var(--palettes-error-50);
 
-  .timePicker-fieldset {
-    box-shadow: 0 0 0 1px var(--palettes-error-400);
-    margin: 0;
-    grid-row: 2;
-    cursor: default;
-    background-color: var(--palettes-error-50);
+  // position: relative;
+  // display: grid;
+  // grid-template-rows: min-content 1fr;
+  // grid-template-columns: min-content;
 
-    .timePicker-fieldset-group-textfield-input {
-      cursor: default;
-    }
-
-    &:focus-within,
-    &:focus-visible {
-      @include a11y.focusVisible($color: var(--palettes-error-700));
-    }
+  &:hover {
+    --components-timepicker-border: var(--palettes-error-600);
   }
+
+  // .timePicker-fieldset {
+  //   margin: 0;
+  //   grid-row: 2;
+  // }
+}
+
+@mixin disabled {
+  --components-timepicker-background: var(--palettes-neutral-100);
+  --components-timepicker-color: var(--palettes-neutral-600);
+  --components-timepicker-border: var(--palettes-neutral-400);
+  pointer-events: none;
 }
 
 @mixin readonly {

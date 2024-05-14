@@ -23,8 +23,12 @@
 		@include invalid;
 	}
 
-	&.is-readonly {
+	&[readonly], &.is-readonly {
 		@include readonly;
+	}
+
+	&[disabled], &.is-disabled {
+		@include disabled;
 	}
 }
 
