@@ -8,7 +8,7 @@
  *    B = 'b',
  * }
  *
- * type ExampleEnumValue = EnumValue<ExampleEnum>; // Same as 'a' | 'b'
+ * type ExampleEnumValue = EnumValue<typeof ExampleEnum>; // Same as 'a' | 'b'
  * ```
  */
 export type EnumValue<T> = `${T[keyof T] & string}`;
