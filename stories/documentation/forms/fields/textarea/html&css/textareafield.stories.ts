@@ -12,7 +12,7 @@ function getTemplate(args: TextareaBasicStory): string {
 		<label class="formLabel" id="IDlabel" for="ID">Label</label>
 		<div class="textField">
 			<div class="textField-input">
-				<textarea id="ID" class="textField-input-value" aria-labelledby="IDlabel" aria-describedby="IDmessage" placeholder="Placeholder" aria-invalid="false"></textarea>
+				<textarea rows="3" id="ID" class="textField-input-value" aria-labelledby="IDlabel" aria-describedby="IDmessage" placeholder="Placeholder" aria-invalid="false"></textarea>
 			</div>
 		</div>
 		<div class="inlineMessage" id="IDmessage"><span aria-hidden="true" class="lucca-icon"></span>Helper text</div>
