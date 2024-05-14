@@ -4,16 +4,25 @@
 .timePicker {
 	@include vars;
 	@include component;
+
+	&.mod-withStepper {
+		@include withStepper;
+	}
+
+	&.mod-withStepperHover {
+		@include withStepperHover;
+	}
+
+	&.is-invalid { // Previously mod-conflict which cannot be find in Angular files
+		@include invalid;
+	}
+
+	&.is-readonly {
+		@include readonly;
+	}
 }
 
 // TODO INT en attente des futurs ateliers LF sur le timePicker - Premier test - renommage conseillé
-
-// TODO add this to utils???
-.u-opacity0 {
-	opacity: 0;
-}
-
-// TODO :
 
 // TODO OUCH OUCH OUCH
 
@@ -30,7 +39,7 @@
 // }
 
 
-// .mod-clickable .timePicker.mod-conflict .timePicker-fieldset {
+// .mod-clickable .timePicker.mod-invalid .timePicker-fieldset {
 // 	cursor: pointer;
 //
 // 	.timePicker-fieldset-group-textfield-input {

@@ -1,7 +1,7 @@
 @mixin vars {
-  --textfield-time-size-M: 1.5rem;
-  --textfield-time-margin: var(--spacings-XS) 0;
-  --textfield-time-boxShadow: 0 0 0 1px var(--palettes-300, var(--palettes-grey-200));
-  --textfield-time-boxShadow-hover: 0 0 0 1px var(--palettes-400, var(--palettes-grey-400)), var(--commons-boxShadow-XS);
-  --textfield-time-boxShadow-readonly: 0 0 0 1px var(--colors-white-color);
+  --components-timepicker-border: 0 0 0 1px var(--palettes-300, var(--palettes-neutral-300));
+  --components-timepicker-fontSize: var(--sizes-M-fontSize);
+  --components-timepicker-lineHeight: var(--sizes-M-lineHeight);
+  --components-timepicker-input-height: 2rem;
+  --components-timepicker-input-width: 1.5rem;
 }

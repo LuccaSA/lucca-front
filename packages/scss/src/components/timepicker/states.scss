@@ -1,9 +1,37 @@
-// All component states are defined in this file through various mixins.
-// The file may be empty but must be present.
-// All property values modified by a state are modified through a CSS variable.
+@use '@lucca-front/scss/src/commons/utils/a11y';
 
-// @mixin sampleStateA {
-// 	.sample-subComponent {
-// 		--components-sample-property2: otherValue;
-// 	}
-// }
+@mixin invalid {
+  position: relative;
+  display: grid;
+  grid-template-rows: min-content 1fr;
+  grid-template-columns: min-content;
+
+  .timePicker-fieldset {
+    box-shadow: 0 0 0 1px var(--palettes-error-400);
+    margin: 0;
+    grid-row: 2;
+    cursor: default;
+    background-color: var(--palettes-error-50);
+
+    .timePicker-fieldset-group-textfield-input {
+      cursor: default;
+    }
+
+    &:focus-within,
+    &:focus-visible {
+      @include a11y.focusVisible($color: var(--palettes-error-700));
+    }
+  }
+}
+
+@mixin readonly {
+  .timePicker-fieldset {
+    padding: var(--spacings-XXS) 0.75rem;
+  }
+
+  .timePicker-fieldset-group-textfield-input {
+    width: 100%;
+  }
+
+  cursor: text;
+}

@@ -1,7 +1,19 @@
-// All component modifiers are defined in this file through various mixins.
-// The file may be empty but must be present.
-// All property values modified by a modifier are modified through a CSS variable.
+@mixin withStepper {
+  .timePicker-fieldset {
+    margin: var(--spacings-S) 0;
+  }
+}
 
-// @mixin sampleModifierA {
-// 	--components-sample-property1: otherValue;
-// }
+@mixin withStepperHover {
+  .timePicker-fieldset-group-button {
+    visibility: hidden;
+  }
+
+  &:not([disabled], .is-disabled, [readonly], .is-readonly) {
+    &:is(:hover, :focus-within) {
+      .timePicker-fieldset-group-button {
+        visibility: visible;
+      }
+    }
+  }
+}

@@ -54,7 +54,7 @@ export class TimePickerComponent implements ControlValueAccessor {
 	protected hoursIncrement = computed(() => this.getHoursIncrement(this.step()));
 	protected minutesIncrement = computed(() => this.getMinutesIncrement(this.step()));
 	protected shouldHideZeroValue = computed(() => this.hideZeroValue() && this.hours() === 0 && this.minutes() === 0);
-	protected pickerClass = computed(() => `timePicker ${this.isReadonly() ? 'is-readonly' : ''} ${this.displayArrows() ? 'mod-withArrowHoverVisible mod-withArrow' : ''}`);
+	protected pickerClass = computed(() => `timePicker ${this.isReadonly() ? 'is-readonly' : ''} ${this.displayArrows() ? 'mod-withStepperHover mod-withStepper' : ''}`);
 	protected fieldsetSuffixClass = computed(() => `timePicker-fieldset-suffix ${this.shouldHideZeroValue() ? 'u-visibilityHidden' : ''}`);
 	protected separator = computed(() => (this.isDuration() ? this.intl.timePickerHourSeparator : this.intl.timePickerTimeSeparator));
 
