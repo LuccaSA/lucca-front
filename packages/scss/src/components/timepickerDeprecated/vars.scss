@@ -1,0 +1,5 @@
+@mixin vars {
+  --components-timepicker-input-width: 1.25rem;
+  --components-timepicker-input-height: 2rem;
+  --components-timepicker-padding: var(--pr-t-spacings-50) var(--pr-t-spacings-100);
+}

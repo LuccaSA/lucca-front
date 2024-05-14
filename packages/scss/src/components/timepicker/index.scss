@@ -1,14 +1,39 @@
 @use 'exports' as *;
+@use '@lucca-front/scss/src/commons/utils/a11y';
 
-.timepicker {
+.timePicker {
 	@include vars;
 	@include component;
-
-	&.mod-S {
-		@include S;
-	}
-
-	&:is(.is-disabled, .disabled, [disabled]) {
-		@include disabled;
-	}
 }
+
+// TODO INT en attente des futurs ateliers LF sur le timePicker - Premier test - renommage conseillé
+
+// TODO add this to utils???
+.u-opacity0 {
+	opacity: 0;
+}
+
+// TODO :
+
+// TODO OUCH OUCH OUCH
+
+// .mod-highlightedComment > .timePicker {
+// 	.timePicker-fieldset {
+// 	@include highlightedComment;
+
+// 		border-top-right-radius: 0;
+
+// 		&::before {
+// 			pointer-events: none;
+// 		}
+// 	}
+// }
+
+
+// .mod-clickable .timePicker.mod-conflict .timePicker-fieldset {
+// 	cursor: pointer;
+//
+// 	.timePicker-fieldset-group-textfield-input {
+// 		cursor: pointer;
+// 	}
+// }
