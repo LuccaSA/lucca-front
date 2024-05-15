@@ -29,7 +29,7 @@ export default {
 	},
 } as Meta;
 
-export const Basic: StoryObj<RadioGroupInputComponent & FormFieldComponent> = {
+export const Basic: StoryObj<TimePickerComponent & FormFieldComponent> = {
 	render: (args, { argTypes }) => {
 		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, ...inputArgs } = args;
 		return {
@@ -60,5 +60,11 @@ export const Basic: StoryObj<RadioGroupInputComponent & FormFieldComponent> = {
 		required: true,
 		inlineMessage: 'Helper message',
 		inlineMessageState: 'default',
+		displayArrows: false,
+		isReadonly: false,
+		hideZeroValue: false,
+		step: 'P0DT1M',
+		min: '00:00:00',
+		max: '23:59:59',
 	},
 };
