@@ -10,16 +10,12 @@
 		luInput
 		class="timePicker-fieldset-group-textfield-input"
 		type="text"
-		[tabindex]="focused() ? 0 : -1"
 		[value]="hideValue() ? null : value()"
 		(input)="keysInputHandler($event)"
-		(focusin)="timePickerInput.select()"
 		(click)="clickHandler($event)"
 		(keydown)="keydownHandler($event)"
 	/>
-	<span aria-hidden="true" class="timePicker-fieldset-group-textfield-display">
-		{{ valueLabel() }}
-	</span>
+	<span aria-hidden="true" class="timePicker-fieldset-group-textfield-display"> {{ valueLabel() }} </span>
 	<span class="u-mask">{{ label() }}</span>
 </label>
 @if (displayArrows() && !disabled()) {

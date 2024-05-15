@@ -1,4 +1,4 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, computed, ElementRef, forwardRef, inject, input, model, ViewChild } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, computed, forwardRef, inject, input, model, ViewChild } from '@angular/core';
 import { getIntl } from '../core/translate';
 import { ISO8601Duration, ISO8601Time } from './date-primitives';
 import { convertStringToIsoTime, createIsoTimeFromHoursAndMinutes, getHoursPartFromIsoTime, getMinutesPartFromIsoTime } from './date.utils';
@@ -64,10 +64,6 @@ export class TimePickerComponent implements ControlValueAccessor {
 
 	protected disabled = model(false);
 
-	protected focusedPart: 'hours' | 'minutes' = 'hours';
-
-	private elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
-
 	protected intl = getIntl(LU_TIME_PICKER_TRANSLATIONS);
 
 	writeValue(value: ISO8601Time): void {
@@ -93,7 +89,6 @@ export class TimePickerComponent implements ControlValueAccessor {
 				return;
 			}
 
-			this.focusedPart = 'hours';
 			this.hoursPart?.focus();
 		}
 		if (type === 'minutes') {
@@ -101,7 +96,6 @@ export class TimePickerComponent implements ControlValueAccessor {
 				return;
 			}
 
-			this.focusedPart = 'minutes';
 			this.minutesPart?.focus();
 		}
 	}
@@ -120,17 +114,6 @@ export class TimePickerComponent implements ControlValueAccessor {
 			value: createIsoTimeFromHoursAndMinutes(this.hours(), value),
 			source: 'input',
 		});
-	}
-
-	protected focusoutHandler(event: FocusEvent): void {
-		if (event.relatedTarget !== null && event.relatedTarget instanceof HTMLElement && this.elementRef.nativeElement.contains(event.relatedTarget)) {
-			event.preventDefault();
-			event.stopImmediatePropagation();
-			return;
-		}
-
-		this.focusedPart = 'hours';
-		this.onTouched?.();
 	}
 
 	protected copyHandler(event: ClipboardEvent): void {
@@ -153,12 +136,6 @@ export class TimePickerComponent implements ControlValueAccessor {
 			} catch (e) {
 				// do nothing
 			}
-		}
-	}
-
-	protected clickHandler(event: MouseEvent): void {
-		if (event.target === event.currentTarget && isNotNil(this.hoursPart)) {
-			this.focusPart('hours');
 		}
 	}
 
@@ -191,7 +168,7 @@ export class TimePickerComponent implements ControlValueAccessor {
 	}
 
 	private getLoopingPoint(): number {
-		return isoDurationToSeconds(this.isDuration ? 'PT24H' : 'PT23H59M59S');
+		return isoDurationToSeconds(this.isDuration() ? 'PT24H' : 'PT23H59M59S');
 	}
 
 	private setTime(protoEvent: TimeChangeEvent): void {

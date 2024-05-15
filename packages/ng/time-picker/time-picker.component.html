@@ -1,6 +1,6 @@
-<div [class]="pickerClass()" (focusout)="focusoutHandler($event)" (copy)="copyHandler($event)" (paste)="pasteHandler($event)">
+<div [class]="pickerClass()" (copy)="copyHandler($event)" (paste)="pasteHandler($event)">
 	<!-- eslint-disable-next-line @angular-eslint/template/interactive-supports-focus -->
-	<fieldset class="timePicker-fieldset" (click)="clickHandler($event)">
+	<fieldset class="timePicker-fieldset">
 		<div class="u-mask">{{ intl.timePickerDescriptionAccessibility }}</div>
 		<lu-time-picker-part
 			#hoursPart
@@ -13,7 +13,6 @@
 			[displayArrows]="displayArrows()"
 			[isReadonly]="isReadonly()"
 			[hideValue]="shouldHideZeroValue()"
-			[focused]="focusedPart === 'hours'"
 			(valueChange)="hoursInputHandler($event)"
 			(nextRequest)="focusPart('minutes')"
 			(inputControlClick)="inputControlClickHandler('hours', $event)"
@@ -29,7 +28,6 @@
 			[isReadonly]="isReadonly()"
 			[hideValue]="shouldHideZeroValue()"
 			[disabled]="disabled() || !minutesIncrement()"
-			[focused]="focusedPart === 'minutes'"
 			(valueChange)="minutesInputHandler($event)"
 			(prevRequest)="focusPart('hours')"
 			(inputControlClick)="inputControlClickHandler('minutes', $event)"

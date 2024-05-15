@@ -97,6 +97,14 @@ export class TimePickerPartComponent {
 		event.preventDefault();
 	}
 
+	up(): void {
+		this.inputControlClick.emit('up');
+	}
+
+	down(): void {
+		this.inputControlClick.emit('down');
+	}
+
 	keydownHandler(event: KeyboardEvent): void {
 		switch (event.key) {
 			case 'ArrowLeft':
