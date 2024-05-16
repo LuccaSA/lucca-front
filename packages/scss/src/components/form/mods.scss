@@ -7,9 +7,10 @@
 @use '@lucca-front/scss/src/components/textField/exports' as textField;
 @use '@lucca-front/scss/src/components/switchField/exports' as switchField;
 @use '@lucca-front/scss/src/components/checkboxField/exports' as checkboxField;
+@use '@lucca-front/scss/src/components/radioField/exports' as radioField;
 @use '@lucca-front/scss/src/components/simpleSelect/exports' as simpleSelect;
 @use '@lucca-front/scss/src/components/multiSelect/exports' as multiSelect;
-@use '@lucca-front/scss/src/components/radioField/exports' as radioField;
+@use '@lucca-front/scss/src/components/timepicker/exports' as timepicker;
 @use '@lucca-front/scss/src/components/box/exports' as box;
 
 @mixin maxWidth {
@@ -43,6 +44,10 @@
 
 	.multiSelect {
 		@include multiSelect.S;
+	}
+
+	.timePicker {
+		@include timepicker.S;
 	}
 }
 
