@@ -1,4 +1,4 @@
-@use "exports" as *;
+@use 'exports' as *;
 
 .comment {
 	@include vars;
@@ -12,4 +12,8 @@
 	&.mod-noAvatar {
 		@include noAvatar;
 	}
+}
+
+.commentWrapper {
+	@include vars;
 }
