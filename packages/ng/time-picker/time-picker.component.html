@@ -1,6 +1,6 @@
 <div [class]="pickerClass()" (copy)="copyHandler($event)" (paste)="pasteHandler($event)">
 	<!-- eslint-disable-next-line @angular-eslint/template/interactive-supports-focus -->
-	<fieldset class="timePicker-fieldset">
+	<fieldset class="timePicker-fieldset" [disabled]="disabled()">
 		<div class="u-mask">{{ intl.timePickerDescriptionAccessibility }}</div>
 		<lu-time-picker-part
 			#hoursPart

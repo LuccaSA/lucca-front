@@ -43,6 +43,7 @@ export class TimePickerComponent implements ControlValueAccessor {
 	isDuration = input(false, { transform: booleanAttribute });
 	displayArrows = input(false, { transform: booleanAttribute });
 	isReadonly = input(false, { transform: booleanAttribute });
+	disabled = model(false);
 
 	error = input<{ toString: () => string } | null>(null);
 
@@ -61,8 +62,6 @@ export class TimePickerComponent implements ControlValueAccessor {
 	protected hoursDecimalConf = computed(() => (this.isDuration() ? DEFAULT_DURATION_HOUR_DECIMAL_PIPE_FORMAT : DEFAULT_TIME_DECIMAL_PIPE_FORMAT));
 
 	protected maxHours = computed(() => (this.isDuration() ? 24 : 23));
-
-	protected disabled = model(false);
 
 	protected intl = getIntl(LU_TIME_PICKER_TRANSLATIONS);
 
