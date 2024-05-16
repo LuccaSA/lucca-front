@@ -1,5 +1,6 @@
 <section
 	class="emptyState mod-page"
+	[attr.role]="title ? null : 'presentation'"
 	[style.--components-emptyState-background-color]="contentBackgroundColor"
 	style.--components-emptyState-illustration-background-bottom-left="url({{bottomLeftBackground}})"
 	style.--components-emptyState-illustration-foreground-bottom-left="url({{bottomLeftForeground}})"

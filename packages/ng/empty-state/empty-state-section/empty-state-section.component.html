@@ -1,4 +1,4 @@
-<section class="emptyState" [class.mod-center]="center">
+<section class="emptyState" [class.mod-center]="center" [attr.role]="title ? null : 'presentation'">
 	<div class="emptyState-container">
 		<div class="emptyState-content">
 			<div *ngIf="icon" class="emptyState-content-icon palette-{{palette}}" aria-hidden="true" [innerHtml]="icon | luSafeExternalSvg"></div>
