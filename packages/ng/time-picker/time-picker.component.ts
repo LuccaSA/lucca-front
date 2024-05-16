@@ -70,12 +70,6 @@ export class TimePickerComponent implements ControlValueAccessor {
 
 	protected intl = getIntl(LU_TIME_PICKER_TRANSLATIONS);
 
-	constructor() {
-		if (this.#formField) {
-			this.#formField.layout = 'fieldset';
-		}
-	}
-
 	writeValue(value: ISO8601Time): void {
 		this.value.set(value || '00:00:00');
 	}
