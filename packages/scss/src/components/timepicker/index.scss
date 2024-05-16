@@ -21,15 +21,17 @@
 		@include duration;
 	}
 
-	&.is-invalid { // Previously mod-conflict which cannot be find in Angular files
+	&:has(.timePicker-fieldset-group-textfield-input[aria-invalid="true"]) {
 		@include invalid;
 	}
 
 	&[readonly], &.is-readonly {
 		@include readonly;
 	}
+}
 
-	&[disabled], &.is-disabled {
+.timePicker-fieldset {
+	&[disabled] {
 		@include disabled;
 	}
 }

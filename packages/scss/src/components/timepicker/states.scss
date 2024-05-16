@@ -4,28 +4,17 @@
   --components-timepicker-border: var(--palettes-error-400);
   --components-timepicker-background: var(--palettes-error-50);
 
-  // position: relative;
-  // display: grid;
-  // grid-template-rows: min-content 1fr;
-  // grid-template-columns: min-content;
-
   .timePicker-fieldset {
     &:hover {
       --components-timepicker-border: var(--palettes-error-600);
     }
   }
-
-  // .timePicker-fieldset {
-  //   margin: 0;
-  //   grid-row: 2;
-  // }
 }
 
 @mixin disabled {
   --components-timepicker-background: var(--palettes-neutral-100);
   --components-timepicker-color: var(--palettes-neutral-600);
   --components-timepicker-border: var(--palettes-neutral-400);
-  pointer-events: none;
 }
 
 @mixin readonly {
