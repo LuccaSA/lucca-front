@@ -1,0 +1,15 @@
+@use "exports" as *;
+
+.comment {
+	@include vars;
+
+	@include component;
+
+	&.mod-S {
+		@include S;
+	}
+
+	&.mod-noAvatar {
+		@include noAvatar;
+	}
+}

@@ -1,0 +1,7 @@
+@mixin vars {
+	--components-comment-text-fontSize: var(--sizes-M-fontSize);
+	--components-comment-text-lineHeight: var(--sizes-M-lineHeight);
+	--components-comment-info-fontSize: var(--sizes-S-fontSize);
+	--components-comment-info-lineHeight: var(--sizes-S-lineHeight);
+	--components-comment-content-margin: 0 0 0 2rem; // 1.5rem for the width of the avatar and 0.5rem for the gap
+}

@@ -1,0 +1,106 @@
+@mixin component($atRoot: 'without: rule') {
+	container: comment / inline-size;
+	display: flex;
+	flex-direction: column;
+	gap: var(--spacings-XS);
+	max-width: 40rem;
+
+	@at-root ($atRoot) {
+		.comment-infos {
+			align-items: first baseline;
+			display: flex;
+			font-style: normal;
+			gap: var(--spacings-XS);
+			justify-content: flex-start;
+
+			@container comment (min-width: 25em) {
+				align-items: center;
+			}
+		}
+
+		.comment-infos-content {
+			display: flex;
+			flex-direction: column;
+			font-size: var(--components-comment-info-fontSize);
+			line-height: var(--components-comment-info-lineHeight);
+			justify-content: flex-start;
+
+			@container comment (min-width: 25em) {
+				align-items: center;
+				flex-direction: row;
+				gap: var(--spacings-XS);
+			}
+		}
+
+		.comment-infos-name + .comment-infos-date {
+			align-items: center;
+			display: flex;
+			gap: var(--spacings-XS);
+
+			&::before {
+				background-color: var(--palettes-grey-400);
+				border-radius: 50%;
+				content: '';
+				display: none;
+				width: 0.25rem;
+				height: 0.25rem;
+
+				@container comment (min-width: 25em) {
+					display: block;
+				}
+			}
+		}
+
+		.comment-content {
+			background: var(--palettes-grey-50);
+			border-radius: var(--commons-borderRadius-M) var(--commons-borderRadius-L) var(--commons-borderRadius-L);
+			display: flex;
+			flex-direction: column;
+			gap: 0.75rem;
+			margin: var(--components-comment-content-margin);
+			max-width: fit-content;
+			padding: var(--spacings-XS) 0.625rem;
+		}
+
+		.comment-content-text {
+			margin-bottom: 0;
+		}
+
+		.comment-content-textContainer {
+			display: flex;
+			flex-direction: column;
+			gap: var(--spacings-XS);
+
+			* {
+				margin: 0;
+			}
+		}
+
+		.comment-content-text {
+			font-size: var(--components-comment-text-fontSize);
+			line-height: var(--components-comment-text-lineHeight);
+		}
+
+		.comment-content-textContainer {
+			font-size: var(--components-comment-text-fontSize);
+			line-height: var(--components-comment-text-lineHeight);
+		}
+
+		.commentWrapper {
+			display: flex;
+			flex-direction: column;
+			gap: var(--spacings-XS);
+			margin: 0;
+			padding: 0;
+		}
+
+		.commentWrapper-item {
+			list-style: none;
+			max-width: 40rem;
+
+			&.mod-WrapperAvatar ~ &:not(.mod-WrapperAvatar) {
+				padding-left: var(--spacings-L);
+			}
+		}
+	}
+}

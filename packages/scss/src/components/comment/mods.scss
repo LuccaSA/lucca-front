@@ -1,0 +1,10 @@
+@mixin S {
+	--components-comment-text-fontSize: var(--sizes-S-fontSize);
+	--components-comment-text-lineHeight: var(--sizes-S-lineHeight);
+	--components-comment-info-fontSize: var(--sizes-XS-fontSize);
+	--components-comment-info-lineHeight: var(--sizes-XS-lineHeight);
+}
+
+@mixin noAvatar {
+	--components-comment-content-margin: 0;
+}
