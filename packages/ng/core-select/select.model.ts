@@ -13,6 +13,8 @@ export interface LuOptionGroup<T, TGroup> {
 	options: T[];
 }
 
+export type CoreSelectAddOptionStrategy = 'never' | 'always' | 'if-empty-clue' | 'if-not-empty-clue';
+
 export const SELECT_ID = new InjectionToken<number>('LuSelectPanelData');
 export const SELECT_LABEL = new InjectionToken<HTMLLabelElement | undefined>('LuSelectLabel');
 export const SELECT_LABEL_ID = new InjectionToken<string>('LuSelectLabelId');
