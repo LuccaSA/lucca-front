@@ -167,7 +167,6 @@ In order to work on Lucca Front, we use Storybook to display components.
 
 - Install [volta.sh](https://docs.volta.sh/guide/getting-started)
 - Install node `volta install node@lts`
-- Build Compodoc to avoid errors (To be fixed) `npm run compodoc`
 - Run storybook `npm start`
 
 ## TODO
