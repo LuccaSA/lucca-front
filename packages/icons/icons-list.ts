@@ -218,6 +218,7 @@ export const IconsList = [
 	{ icon: 'lunchAlternative', deprecated: true },
 	{ icon: 'foodBurger', deprecated: false },
 	{ icon: 'lunch', deprecated: true },
+	{ icon: 'foodCutlery', deprecated: false },
 	{ icon: 'meal', deprecated: true },
 	{ icon: 'foodChefHat', deprecated: false },
 	{ icon: 'restaurant', deprecated: true },

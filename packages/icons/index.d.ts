@@ -218,6 +218,7 @@ export type LuccaIcon =
 	| 'lunchAlternative'
 	| 'foodBurger'
 	| 'lunch'
+	| 'foodCutlery'
 	| 'meal'
 	| 'foodChefHat'
 	| 'restaurant'
