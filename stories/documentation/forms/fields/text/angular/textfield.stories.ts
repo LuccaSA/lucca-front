@@ -75,7 +75,7 @@ export const Basic: StoryObj<TextInputComponent & { disabled: boolean } & FormFi
 		label: 'Label',
 		required: true,
 		hiddenLabel: false,
-		hasClearer: true,
+		hasClearer: false,
 		hasSearchIcon: false,
 		searchIcon: 'search',
 		disabled: false,
