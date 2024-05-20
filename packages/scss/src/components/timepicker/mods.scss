@@ -26,28 +26,28 @@
 }
 
 @mixin duration {
-  .timePicker-fieldset {
-    display: grid;
-    grid-template-columns: 1fr max-content;
-    width: 4rem;
-    justify-content: center;
-    align-items: center;
-    gap: 0;
-  }
-
-  .timePicker-fieldset-group {
-    grid-column: 1/3;
-    grid-row: 1;
-  }
-
-  .timePicker-fieldset-suffix {
-    grid-column: 2/3;
-    grid-row: 1;
-    padding-right: var(--spacings-XXS);
-  }
-
-  .timePicker-fieldset-group-textfield-input {
-    width: 2.5rem;
-    margin-left: 0.25rem;
-  }
+  // .timePicker-fieldset {
+  //   display: grid;
+  //   grid-template-columns: 1fr max-content;
+  //   width: 4rem;
+  //   justify-content: center;
+  //   align-items: center;
+  //   gap: 0;
+  // }
+  //
+  // .timePicker-fieldset-group {
+  //   grid-column: 1/3;
+  //   grid-row: 1;
+  // }
+  //
+  // .timePicker-fieldset-suffix {
+  //   grid-column: 2/3;
+  //   grid-row: 1;
+  //   padding-right: var(--spacings-XXS);
+  // }
+  //
+  // .timePicker-fieldset-group-textfield-input {
+  //   width: 2.5rem;
+  //   margin-left: 0.25rem;
+  // }
 }

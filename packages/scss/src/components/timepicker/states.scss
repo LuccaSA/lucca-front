@@ -16,15 +16,3 @@
   --components-timepicker-color: var(--palettes-neutral-600);
   --components-timepicker-border: var(--palettes-neutral-400);
 }
-
-@mixin readonly {
-  .timePicker-fieldset {
-    padding: var(--spacings-XXS) 0.75rem;
-  }
-
-  .timePicker-fieldset-group-textfield-input {
-    width: 100%;
-  }
-
-  cursor: text;
-}

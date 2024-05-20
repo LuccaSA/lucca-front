@@ -61,14 +61,6 @@
         background-color: var(--palettes-primary-100);
       }
 
-    	// &.mod-L {
-    	// 	width: 1.8rem;
-    	// }
-      //
-    	// &.mod-XL {
-    	// 	width: 2.5rem;
-    	// }
-
     	&[type='number'] {
     		/* stylelint-disable-next-line property-no-vendor-prefix */
     		-moz-appearance: textfield;
@@ -91,6 +83,8 @@
     	padding: var(--pr-t-spacings-50);
     	color: var(--components-timepicker-color);
       border-radius: var(--commons-borderRadius-M);
+      min-height: var(--components-timepicker-input-height);
+      min-width: var(--components-timepicker-input-width);
       cursor: text;
     }
 
@@ -105,16 +99,14 @@
     	height: 1rem;
     	background-color: transparent;
       color: var(--palettes-neutral-600);
-    	cursor: pointer;
-
-    	// style actionIcon
     	display: inline-flex;
     	justify-content: center;
     	align-items: center;
     	border-radius: var(--commons-borderRadius-M);
+      outline: none;
+      cursor: pointer;
 
   		&:hover {
-  			cursor: pointer;
   			background-color: var(--palettes-neutral-50);
   			color: var(--palettes-neutral-800);
   		}
@@ -122,7 +114,7 @@
   		&:focus-visible {
   			background-color: var(--palettes-neutral-100);
   			color: var(--palettes-neutral-800);
-  			outline: none;
+
   		}
 
     	.lucca-icon {
@@ -147,46 +139,4 @@
     // 	background-size: 150%;
     // }
 	}
-
-
-  // TODO : Voir pourquoi Laurent avait supprimé ca dans la PR #2710.
-  // Le design du picker jour était cassé.
-
-
-  // &:not(.is-button) {
-  //   .timePicker-fieldset-group-textfield-input {
-  //     &[type='number'] {
-  //       &:hover,
-  //       &:focus,
-  //       &:focus-visible {
-  //         background-color: var(--palettes-100, var(--palettes-primary-100));
-  //         outline: none;
-  //       }
-  //     }
-  //   }
-  // }
-
-  // &.is-button {
-  //   .timePicker-fieldset {
-  //     background-color: var(--colors-white-color);
-  //     cursor: pointer;
-  //   }
-  // }
-
-  // &.palette-error {
-  //   .timePicker-fieldset {
-  //     &:focus-within,
-  //     &:focus-visible {
-  //       @include a11y.focusVisible($color: var(--palettes-error-700));
-  //     }
-  //   }
-  // }
-  //
-  // &:not(.palette-error) {
-  //   &.is-readonly {
-  //     .timePicker-fieldset {
-  //       --components-timepicker-border: var(--colors-white-color);
-  //     }
-  //   }
-  // }
 }

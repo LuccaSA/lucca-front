@@ -24,10 +24,6 @@
 	&:has(.timePicker-fieldset-group-textfield-input[aria-invalid="true"]) {
 		@include invalid;
 	}
-
-	&[readonly], &.is-readonly {
-		@include readonly;
-	}
 }
 
 .timePicker-fieldset {
@@ -35,30 +31,3 @@
 		@include disabled;
 	}
 }
-
-// Cover L size ?
-
-// TODO INT en attente des futurs ateliers LF sur le timePicker - Premier test - renommage conseillé
-
-// TODO OUCH OUCH OUCH
-
-// .mod-highlightedComment > .timePicker {
-// 	.timePicker-fieldset {
-// 	@include highlightedComment;
-
-// 		border-top-right-radius: 0;
-
-// 		&::before {
-// 			pointer-events: none;
-// 		}
-// 	}
-// }
-
-
-// .mod-clickable .timePicker.mod-invalid .timePicker-fieldset {
-// 	cursor: pointer;
-//
-// 	.timePicker-fieldset-group-textfield-input {
-// 		cursor: pointer;
-// 	}
-// }
