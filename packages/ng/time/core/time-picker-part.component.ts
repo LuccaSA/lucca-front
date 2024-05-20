@@ -1,13 +1,13 @@
-import { DecimalPipe, formatNumber, NgIf } from '@angular/common';
+import { DecimalPipe, formatNumber } from '@angular/common';
 import { booleanAttribute, ChangeDetectionStrategy, Component, computed, ElementRef, EventEmitter, Inject, input, LOCALE_ID, model, numberAttribute, Output, ViewChild } from '@angular/core';
 import { RepeatOnHoldDirective } from './repeat-on-hold.directive';
-import { PickerControlDirection } from './time-picker.model';
-import { InputDirective } from '../form-field/input.directive';
+import { PickerControlDirection } from './misc.utils';
+import { InputDirective } from '@lucca-front/ng/form-field';
 
 @Component({
 	selector: 'lu-time-picker-part',
 	standalone: true,
-	imports: [RepeatOnHoldDirective, NgIf, DecimalPipe, InputDirective],
+	imports: [RepeatOnHoldDirective, DecimalPipe, InputDirective],
 	templateUrl: './time-picker-part.component.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })

@@ -1,9 +1,3 @@
-@if (isReadonly()) {
-<span class="timePicker-fieldset-group-textfield">
-	<span class="timePicker-fieldset-group-textfield-input">{{ value() | number: decimalConf() }}</span>
-	<span class="u-mask">{{ label() }}</span>
-</span>
-} @else {
 <label class="timePicker-fieldset-group-textfield">
 	<input
 		#timePickerInput
@@ -25,4 +19,4 @@
 <button class="timePicker-fieldset-group-button" type="button" tabindex="-1" luRepeatOnHold (hold)="down()">
 	<span aria-hidden="true" class="lucca-icon icon-southArrow"></span>
 </button>
-} }
+}

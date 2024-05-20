@@ -1,15 +1,13 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, computed, forwardRef, inject, input, model, ViewChild } from '@angular/core';
-import { getIntl } from '../core/translate';
-import { ISO8601Duration, ISO8601Time } from './date-primitives';
-import { convertStringToIsoTime, createIsoTimeFromHoursAndMinutes, getHoursPartFromIsoTime, getMinutesPartFromIsoTime } from './date.utils';
-import { isoDurationToDateFnsDuration, isoDurationToSeconds } from './duration.utils';
-import { ceilToNearest, circularize, floorToNearest, roundToNearest } from './math.utils';
-import { isNil, isNotNil } from './misc.utils';
-import { TimePickerPartComponent } from './time-picker-part.component';
-import { DEFAULT_DURATION_HOUR_DECIMAL_PIPE_FORMAT, DEFAULT_MIN_TIME, DEFAULT_TIME_DECIMAL_PIPE_FORMAT, PickerControlDirection, TimeChangeEvent } from './time-picker.model';
+import { booleanAttribute, ChangeDetectionStrategy, Component, computed, EventEmitter, forwardRef, input, model, output, Output, ViewChild } from '@angular/core';
+import { getIntl } from '../../core/translate';
+import { ISO8601Duration, ISO8601Time } from '../core/date-primitives';
+import { convertStringToIsoTime, createIsoTimeFromHoursAndMinutes, getHoursPartFromIsoTime, getMinutesPartFromIsoTime } from '../core/date.utils';
+import { isoDurationToDateFnsDuration, isoDurationToSeconds } from '../core/duration.utils';
+import { ceilToNearest, circularize, floorToNearest, roundToNearest } from '../core/math.utils';
+import { isNil, isNotNil, PickerControlDirection } from '../core/misc.utils';
+import { TimePickerPartComponent } from '../core/time-picker-part.component';
+import { DEFAULT_MIN_TIME, DEFAULT_TIME_DECIMAL_PIPE_FORMAT, TimeChangeEvent } from './time-picker.model';
 import { LU_TIME_PICKER_TRANSLATIONS } from './time-picker.translate';
-import { FormFieldComponent } from '../form-field/form-field.component';
-import { FORM_FIELD_INSTANCE } from '../form-field/form-field.token';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
@@ -27,7 +25,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 	],
 })
 export class TimePickerComponent implements ControlValueAccessor {
-	#formField = inject<FormFieldComponent>(FORM_FIELD_INSTANCE, { optional: true });
+	protected intl = getIntl(LU_TIME_PICKER_TRANSLATIONS);
 
 	onChange: (value: ISO8601Time) => void;
 	onTouched: () => void;
@@ -37,33 +35,31 @@ export class TimePickerComponent implements ControlValueAccessor {
 	min = input<ISO8601Time>(null);
 	max = input<ISO8601Time>(null);
 
-	hideZeroValue = input(false, { transform: booleanAttribute });
-
-	// TODO : remove isDuration when we have a proper duration picker
-	isDuration = input(false, { transform: booleanAttribute });
 	displayArrows = input(false, { transform: booleanAttribute });
-	isReadonly = input(false, { transform: booleanAttribute });
+
 	disabled = model(false);
 
-	error = input<{ toString: () => string } | null>(null);
+	size = input<'S' | 'M'>();
 
-	@ViewChild('hoursPart') hoursPart?: TimePickerPartComponent;
-	@ViewChild('minutesPart') minutesPart?: TimePickerPartComponent;
+	timeChange = output<TimeChangeEvent>();
+
+	@ViewChild('hoursPart')
+	hoursPart?: TimePickerPartComponent;
+
+	@ViewChild('minutesPart')
+	minutesPart?: TimePickerPartComponent;
 
 	protected hours = computed(() => getHoursPartFromIsoTime(this.value()));
 	protected minutes = computed(() => getMinutesPartFromIsoTime(this.value()));
 	protected hoursIncrement = computed(() => this.getHoursIncrement(this.step()));
 	protected minutesIncrement = computed(() => this.getMinutesIncrement(this.step()));
-	protected shouldHideZeroValue = computed(() => this.hideZeroValue() && this.hours() === 0 && this.minutes() === 0);
-	protected pickerClass = computed(() => `timePicker ${this.isReadonly() ? 'is-readonly' : ''} ${this.displayArrows() ? 'mod-withStepperHover mod-withStepper' : ''}`);
-	protected fieldsetSuffixClass = computed(() => `timePicker-fieldset-suffix ${this.shouldHideZeroValue() ? 'u-visibilityHidden' : ''}`);
-	protected separator = computed(() => (this.isDuration() ? this.intl.timePickerHourSeparator : this.intl.timePickerTimeSeparator));
+	protected pickerClass = computed(() => `timePicker ${this.displayArrows() ? 'mod-withStepperHover mod-withStepper' : ''} ${this.size() ? `mod-${this.size()}` : ''}`);
+	protected fieldsetSuffixClass = 'timePicker-fieldset-suffix';
+	protected separator = this.intl.timePickerTimeSeparator;
 
-	protected hoursDecimalConf = computed(() => (this.isDuration() ? DEFAULT_DURATION_HOUR_DECIMAL_PIPE_FORMAT : DEFAULT_TIME_DECIMAL_PIPE_FORMAT));
+	protected hoursDecimalConf = DEFAULT_TIME_DECIMAL_PIPE_FORMAT;
 
-	protected maxHours = computed(() => (this.isDuration() ? 24 : 23));
-
-	protected intl = getIntl(LU_TIME_PICKER_TRANSLATIONS);
+	protected maxHours = 23;
 
 	writeValue(value: ISO8601Time): void {
 		this.value.set(value || '00:00:00');
@@ -130,6 +126,11 @@ export class TimePickerComponent implements ControlValueAccessor {
 		if (isNotNil(pastedValue)) {
 			try {
 				const value = convertStringToIsoTime(pastedValue);
+				this.timeChange.emit({
+					previousValue: this.value(),
+					source: 'paste',
+					value,
+				});
 				this.value.set(value);
 				this.onChange?.(value);
 			} catch (e) {
@@ -166,15 +167,11 @@ export class TimePickerComponent implements ControlValueAccessor {
 		return 60 % minutes === 0 ? minutes : 1;
 	}
 
-	private getLoopingPoint(): number {
-		return isoDurationToSeconds(this.isDuration() ? 'PT24H' : 'PT23H59M59S');
-	}
-
 	private setTime(protoEvent: TimeChangeEvent): void {
 		const hoursPart = getHoursPartFromIsoTime(protoEvent.value);
 		const minutesPart = getMinutesPartFromIsoTime(protoEvent.value);
 
-		const max = this.getLoopingPoint();
+		const max = isoDurationToSeconds('PT23H59M59S');
 
 		const candidateTimeAsSeconds = hoursPart * 3600 + minutesPart * 60;
 
@@ -187,6 +184,10 @@ export class TimePickerComponent implements ControlValueAccessor {
 
 		this.value.set(result);
 		this.onChange?.(result);
+		this.timeChange.emit({
+			...protoEvent,
+			value: result,
+		});
 	}
 
 	protected inputControlClickHandler(part: 'hours' | 'minutes', direction: PickerControlDirection): void {

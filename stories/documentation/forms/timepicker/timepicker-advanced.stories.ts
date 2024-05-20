@@ -1,10 +1,9 @@
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { RadioGroupInputComponent } from '../../../../packages/ng/forms/radio-group-input/radio-group-input.component';
-import { FormFieldComponent } from '../../../../packages/ng/form-field/form-field.component';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { cleanupTemplate, generateInputs } from '../../../helpers/stories';
-import { TimePickerComponent } from '../../../../packages/ng/time-picker/time-picker.component';
+import { TimePickerComponent } from '@lucca-front/ng/time';
+import { FormFieldComponent } from '@lucca-front/ng/form-field';
 
 export default {
 	title: 'Documentation/Forms/Timepicker/Angular Form',
@@ -61,10 +60,8 @@ export const Basic: StoryObj<TimePickerComponent & FormFieldComponent> = {
 		inlineMessage: 'Helper message',
 		inlineMessageState: 'default',
 		displayArrows: false,
-		isReadonly: false,
-		hideZeroValue: false,
 		disabled: false,
-		step: 'P0DT1M',
+		step: 'PT1M',
 		min: '00:00:00',
 		max: '23:59:59',
 	},

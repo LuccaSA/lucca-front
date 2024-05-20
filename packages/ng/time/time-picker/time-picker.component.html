@@ -8,16 +8,14 @@
 			[disabled]="disabled()"
 			[label]="intl.timePickerHours"
 			[value]="hours()"
-			[max]="maxHours()"
-			[decimalConf]="hoursDecimalConf()"
+			[max]="maxHours"
+			[decimalConf]="hoursDecimalConf"
 			[displayArrows]="displayArrows()"
-			[isReadonly]="isReadonly()"
-			[hideValue]="shouldHideZeroValue()"
 			(valueChange)="hoursInputHandler($event)"
 			(nextRequest)="focusPart('minutes')"
 			(inputControlClick)="inputControlClickHandler('hours', $event)"
 		/>
-		<div aria-hidden="true" [class]="fieldsetSuffixClass()">{{ separator() }}</div>
+		<div aria-hidden="true" [class]="fieldsetSuffixClass">{{ separator }}</div>
 		<lu-time-picker-part
 			#minutesPart
 			class="timePicker-fieldset-group"
@@ -25,8 +23,6 @@
 			[value]="minutes()"
 			[max]="59"
 			[displayArrows]="displayArrows()"
-			[isReadonly]="isReadonly()"
-			[hideValue]="shouldHideZeroValue()"
 			[disabled]="disabled() || !minutesIncrement()"
 			(valueChange)="minutesInputHandler($event)"
 			(prevRequest)="focusPart('hours')"
