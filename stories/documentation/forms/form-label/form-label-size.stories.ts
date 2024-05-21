@@ -1,17 +1,15 @@
 import { Meta, StoryFn } from '@storybook/angular';
 
-interface FormLabelSizeStory {
-}
+interface FormLabelSizeStory {}
 
 export default {
 	title: 'Documentation/Forms/Form Label Size',
-	argTypes: {
-	},
+	argTypes: {},
 } as Meta;
 
 function getTemplate(args: FormLabelSizeStory): string {
-	return `<label class="formLabel mod-S">Label<sup class="formLabel-required" aria-hidden="true">*</sup><span aria-hidden="true" class="lucca-icon icon-signHelp"></span></label>
-<label class="formLabel mod-XS">Label<sup class="formLabel-required" aria-hidden="true">*</sup><span aria-hidden="true" class="lucca-icon icon-signHelp"></span></label>`;
+	return `<label class="formLabel mod-S">Label<sup class="formLabel-required" aria-hidden="true">*</sup><span class="formLabel-info"><span aria-hidden="true" class="lucca-icon icon-signHelp"></span><span class="u-mask">?</span></span></label>
+<label class="formLabel mod-XS">Label<sup class="formLabel-required" aria-hidden="true">*</sup><span class="formLabel-info"><span aria-hidden="true" class="lucca-icon icon-signHelp"></span><span class="u-mask">?</span></span></label>`;
 }
 
 const Template: StoryFn<FormLabelSizeStory> = (args) => ({
