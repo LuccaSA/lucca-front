@@ -6,7 +6,7 @@ import { TimePickerComponent } from '@lucca-front/ng/time';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 
 export default {
-	title: 'Documentation/Forms/Timepicker/Angular Form',
+	title: 'Documentation/Forms/Time/Time Picker/Angular Form',
 	decorators: [
 		moduleMetadata({
 			imports: [TimePickerComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule],

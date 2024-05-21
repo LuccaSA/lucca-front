@@ -6,7 +6,7 @@ interface timepickerBasicStory {
 }
 
 export default {
-	title: 'Documentation/Forms/Timepicker/Basic',
+	title: 'Documentation/Forms/Time/Time Picker/Basic',
 	argTypes: {
 		s: {
 			control: {

@@ -1,50 +1,58 @@
 import { booleanAttribute, ChangeDetectionStrategy, Component, computed, forwardRef, input, model, output } from '@angular/core';
 import { getIntl } from '../../core/translate';
-import { ISO8601Duration, ISO8601Time } from '../core/date-primitives';
-import { convertStringToIsoTime, createIsoTimeFromHoursAndMinutes, getHoursPartFromIsoTime, getMinutesPartFromIsoTime } from '../core/date.utils';
-import { isoDurationToDateFnsDuration, isoDurationToSeconds } from '../core/duration.utils';
+import { ISO8601Duration } from '../core/date-primitives';
+import { createDurationFromHoursAndMinutes, getHoursPartFromDuration, getMinutesPartFromDuration, isoDurationToDateFnsDuration, isoDurationToSeconds } from '../core/duration.utils';
 import { ceilToNearest, circularize, floorToNearest, roundToNearest } from '../core/math.utils';
 import { isNil, isNotNil, PickerControlDirection } from '../core/misc.utils';
 import { TimePickerPartComponent } from '../core/time-picker-part.component';
-import { DEFAULT_MIN_TIME, DEFAULT_TIME_DECIMAL_PIPE_FORMAT, TimeChangeEvent } from './time-picker.model';
-import { LU_TIME_PICKER_TRANSLATIONS } from './time-picker.translate';
+import { DEFAULT_TIME_DECIMAL_PIPE_FORMAT, DurationChangeEvent } from './duration-picker.model';
+import { LU_TIME_PICKER_TRANSLATIONS } from './duration-picker.translate';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { NgClass } from '@angular/common';
 import { BasePickerComponent } from '../core/base-picker.component';
 
 @Component({
-	selector: 'lu-time-picker',
+	selector: 'lu-duration-picker',
 	standalone: true,
 	imports: [TimePickerPartComponent, NgClass],
-	templateUrl: './time-picker.component.html',
+	templateUrl: './duration-picker.component.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	providers: [
 		{
 			provide: NG_VALUE_ACCESSOR,
-			useExisting: forwardRef(() => TimePickerComponent),
+			useExisting: forwardRef(() => DurationPickerComponent),
 			multi: true,
 		},
 	],
 })
-export class TimePickerComponent extends BasePickerComponent {
+export class DurationPickerComponent extends BasePickerComponent {
 	protected intl = getIntl(LU_TIME_PICKER_TRANSLATIONS);
 
-	value = model<ISO8601Time>('00:00:00');
-	min = input<ISO8601Time>(null);
-	max = input<ISO8601Time>(null);
+	value = model<ISO8601Duration>('PT0S');
+	min = input<ISO8601Duration>('P0S');
+	max = input<ISO8601Duration>('P9999D');
 
-	timeChange = output<TimeChangeEvent>();
+	loopingPoint = input<ISO8601Duration>('P9999D');
 
-	protected hours = computed(() => getHoursPartFromIsoTime(this.value()));
-	protected minutes = computed(() => getMinutesPartFromIsoTime(this.value()));
+	hideZeroValue = input(false, { transform: booleanAttribute });
+
+	durationChange = output<DurationChangeEvent>();
+
+	protected hours = computed(() => getHoursPartFromDuration(this.value()));
+	protected minutes = computed(() => getMinutesPartFromDuration(this.value()));
+	protected shouldHideValue = computed(() => this.hideZeroValue() && this.hours() === 0 && this.minutes() === 0);
+	protected fieldsetSuffixClasses = computed(() => {
+		return {
+			'timePicker-fieldset-suffix': true,
+			'u-visibilityHidden': this.shouldHideValue(),
+		};
+	});
 	protected separator = this.intl.timePickerTimeSeparator;
 
 	protected hoursDecimalConf = DEFAULT_TIME_DECIMAL_PIPE_FORMAT;
 
-	protected maxHours = 23;
-
-	writeValue(value: ISO8601Time): void {
-		this.value.set(value || '00:00:00');
+	writeValue(value: ISO8601Duration): void {
+		this.value.set(value || 'PT0S');
 	}
 
 	setDisabledState?(isDisabled: boolean): void {
@@ -54,7 +62,7 @@ export class TimePickerComponent extends BasePickerComponent {
 	protected hoursInputHandler(value: number): void {
 		this.setTime({
 			previousValue: this.value(),
-			value: createIsoTimeFromHoursAndMinutes(value, this.minutes()),
+			value: createDurationFromHoursAndMinutes(value, this.minutes()),
 			source: 'input',
 		});
 	}
@@ -62,7 +70,7 @@ export class TimePickerComponent extends BasePickerComponent {
 	protected minutesInputHandler(value: number): void {
 		this.setTime({
 			previousValue: this.value(),
-			value: createIsoTimeFromHoursAndMinutes(this.hours(), value),
+			value: createDurationFromHoursAndMinutes(this.hours(), value),
 			source: 'input',
 		});
 	}
@@ -81,8 +89,8 @@ export class TimePickerComponent extends BasePickerComponent {
 		const pastedValue = event.clipboardData?.getData('text/plain');
 		if (isNotNil(pastedValue)) {
 			try {
-				const value = convertStringToIsoTime(pastedValue);
-				this.timeChange.emit({
+				const value = pastedValue as ISO8601Duration;
+				this.durationChange.emit({
 					previousValue: this.value(),
 					source: 'paste',
 					value,
@@ -125,11 +133,11 @@ export class TimePickerComponent extends BasePickerComponent {
 		return 60 % minutes === 0 ? minutes : 1;
 	}
 
-	private setTime(protoEvent: TimeChangeEvent): void {
-		const hoursPart = getHoursPartFromIsoTime(protoEvent.value);
-		const minutesPart = getMinutesPartFromIsoTime(protoEvent.value);
+	private setTime(protoEvent: DurationChangeEvent): void {
+		const hoursPart = getHoursPartFromDuration(protoEvent.value);
+		const minutesPart = getMinutesPartFromDuration(protoEvent.value);
 
-		const max = isoDurationToSeconds('PT23H59M59S');
+		const max = isoDurationToSeconds(this.loopingPoint());
 
 		const candidateTimeAsSeconds = hoursPart * 3600 + minutesPart * 60;
 
@@ -138,20 +146,20 @@ export class TimePickerComponent extends BasePickerComponent {
 		const hours = Math.floor(seconds / 3600);
 		const minutes = Math.floor((seconds % 3600) / 60);
 
-		const result = createIsoTimeFromHoursAndMinutes(hours, minutes);
+		const result = createDurationFromHoursAndMinutes(hours, minutes);
 
 		this.value.set(result);
 		this.onChange?.(result);
-		this.timeChange.emit({
+		this.durationChange.emit({
 			...protoEvent,
 			value: result,
 		});
 	}
 
 	protected inputControlClickHandler(part: 'hours' | 'minutes', direction: PickerControlDirection): void {
-		const val = this.value() ?? DEFAULT_MIN_TIME;
-		const hoursPart = getHoursPartFromIsoTime(val);
-		const minutesPart = getMinutesPartFromIsoTime(val);
+		const val = this.value() ?? 'PT0S';
+		const hoursPart = getHoursPartFromDuration(val);
+		const minutesPart = getMinutesPartFromDuration(val);
 
 		const selectedPart = part === 'hours' ? hoursPart : minutesPart;
 		const selectedIncrement = part === 'hours' ? this.hoursIncrement() : this.minutesIncrement();
@@ -167,7 +175,7 @@ export class TimePickerComponent extends BasePickerComponent {
 			modifiedVal = ceilToNearest(selectedPart - selectedIncrement, selectedIncrement);
 		}
 
-		const newTime = part === 'hours' ? createIsoTimeFromHoursAndMinutes(modifiedVal, minutesPart) : createIsoTimeFromHoursAndMinutes(hoursPart, modifiedVal);
+		const newTime = part === 'hours' ? createDurationFromHoursAndMinutes(modifiedVal, minutesPart) : createDurationFromHoursAndMinutes(hoursPart, modifiedVal);
 
 		this.setTime({
 			source: 'control',

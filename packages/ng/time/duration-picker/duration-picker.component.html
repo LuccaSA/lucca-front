@@ -8,20 +8,21 @@
 			[disabled]="disabled()"
 			[label]="intl.timePickerHours"
 			[value]="hours()"
-			[max]="maxHours"
 			[decimalConf]="hoursDecimalConf"
+			[hideValue]="shouldHideValue()"
 			[displayArrows]="displayArrows()"
 			(valueChange)="hoursInputHandler($event)"
 			(nextRequest)="focusPart('minutes')"
 			(inputControlClick)="inputControlClickHandler('hours', $event)"
 		/>
-		<div aria-hidden="true" class="timePicker-fieldset-suffix">{{ separator }}</div>
+		<div aria-hidden="true" [ngClass]="fieldsetSuffixClasses()">{{ separator }}</div>
 		<lu-time-picker-part
 			#minutesPart
 			class="timePicker-fieldset-group"
 			[label]="intl.timePickerMinutes"
 			[value]="minutes()"
 			[max]="59"
+			[hideValue]="shouldHideValue()"
 			[displayArrows]="displayArrows()"
 			[disabled]="disabled() || !minutesIncrement()"
 			(valueChange)="minutesInputHandler($event)"

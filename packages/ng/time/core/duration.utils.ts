@@ -66,3 +66,15 @@ export const isoDurationToSeconds = (duration: ISO8601Duration): number => {
 
 	return dateFnsDurationToSeconds(durationFns);
 };
+
+export const getHoursPartFromDuration = (duration: ISO8601Duration): number => {
+	return Math.floor(isoDurationToSeconds(duration) / 3600);
+};
+
+export const getMinutesPartFromDuration = (duration: ISO8601Duration): number => {
+	return Math.floor((isoDurationToSeconds(duration) % 3600) / 60);
+};
+
+export const createDurationFromHoursAndMinutes = (hours: number, minutes: number): ISO8601Duration => {
+	return `PT${hours}H${minutes}M`;
+};
