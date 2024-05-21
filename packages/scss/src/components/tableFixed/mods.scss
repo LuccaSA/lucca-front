@@ -16,16 +16,28 @@
 }
 
 @mixin layoutFixedCells {
-	[class*='row-cell'] {
-		--cell-width: calc(var(--table-layoutFixed-width) * 1rem);
+	.table-head-row-cell,
+	.table-body-row-cell,
+	.table-foot-row-cell {
+		--cell-width: var(--table-layoutFixed-width);
 	}
-	&.mod-layoutFixed [class*='row-cell'] {
-		@include cellFixedWidth;
+
+	&.mod-layoutFixed {
+		.table-head-row-cell,
+		.table-body-row-cell,
+		.table-foot-row-cell {
+			@include cellFixedWidth;
+		}
 	}
+
 	@each $breakpoint, $value in config.$breakpoints {
 		@include media.min($breakpoint) {
-			&.mod-layoutFixedAtMediaMin#{$breakpoint} [class*='row-cell'] {
-				@include cellFixedWidth;
+			&.mod-layoutFixedAtMediaMin#{$breakpoint} {
+				.table-head-row-cell,
+				.table-body-row-cell,
+				.table-foot-row-cell {
+					@include cellFixedWidth;
+				}
 			}
 		}
 	}
@@ -33,6 +45,5 @@
 
 @mixin cellFixedWidth {
 	min-width: var(--cell-width, auto);
-	max-width: var(--cell-width, auto);
 	width: var(--cell-width, auto);
 }

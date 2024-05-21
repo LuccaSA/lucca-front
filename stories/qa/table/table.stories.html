@@ -669,8 +669,8 @@
 	<table class="table mod-layoutFixed">
 		<thead class="table-head">
 			<tr class="table-head-row">
-				<th class="table-head-row-cell" [attr.style]="'--table-layoutFixed-width: 8'">Fixed 8rem column</th>
-				<th class="table-head-row-cell" [attr.style]="'--table-layoutFixed-width: 12'">Fixed 12rem column</th>
+				<th class="table-head-row-cell" [attr.style]="'--table-layoutFixed-width: 8rem'">Fixed 8rem column</th>
+				<th class="table-head-row-cell" [attr.style]="'--table-layoutFixed-width: 12rem'">Fixed 12rem column</th>
 				<th class="table-head-row-cell">Head cell</th>
 			</tr>
 		</thead>
@@ -692,16 +692,12 @@
 			</tr>
 		</tbody>
 	</table>
-	<em
-		><b>Tip:</b> the numeric value used in the var will be calculated in rem. Ex
-		<code class="code">--table-layoutFixed-width: <strong>8</strong></code> means a cell width of <strong>8</strong> rem</em
-	>
 	<h2 class="u-marginTopM">Fixed layout columns starting at breakpoint S</h2>
 	<table class="table mod-layoutFixedAtMediaMinS">
 		<thead class="table-head">
 			<tr class="table-head-row">
-				<th class="table-head-row-cell" [attr.style]="'--table-layoutFixed-width: 8'">Fixed 8rem head cell</th>
-				<th class="table-head-row-cell" [attr.style]="'--table-layoutFixed-width: 12'">Fixed 12rem head cell</th>
+				<th class="table-head-row-cell" [attr.style]="'--table-layoutFixed-width: 8rem'">Fixed 8rem head cell</th>
+				<th class="table-head-row-cell" [attr.style]="'--table-layoutFixed-width: 12rem'">Fixed 12rem head cell</th>
 				<th class="table-head-row-cell">Head cell</th>
 			</tr>
 		</thead>
@@ -729,19 +725,19 @@
 				<tr class="table-head-row">
 					<th
 						class="table-head-row-cell mod-stickyColumn-left"
-						[attr.style]="'--table-layoutFixed-width: 8; --table-stickyColumn-offset: 0'"
+						[attr.style]="'--table-layoutFixed-width: 8rem; --table-stickyColumn-offset: 0rem'"
 					>
 						Head cell
 					</th>
 					<th
 						class="table-head-row-cell mod-stickyColumn-left"
-						[attr.style]="'--table-layoutFixed-width: 7; --table-stickyColumn-offset: 8'"
+						[attr.style]="'--table-layoutFixed-width: 7rem; --table-stickyColumn-offset: 8rem'"
 					>
 						Head cell
 					</th>
 					<th
 						class="table-head-row-cell mod-stickyColumn-left"
-						[attr.style]="'--table-layoutFixed-width: 5; --table-stickyColumn-offset: 15'"
+						[attr.style]="'--table-layoutFixed-width: 5rem; --table-stickyColumn-offset: 15rem'"
 					>
 						Head cell
 					</th>
@@ -757,7 +753,7 @@
 					<th class="table-head-row-cell">Head cell</th>
 					<th
 						class="table-head-row-cell mod-stickyColumn-right"
-						[attr.style]="'--table-layoutFixed-width: 5; --table-stickyColumn-offset: 0'"
+						[attr.style]="'--table-layoutFixed-width: 5rem; --table-stickyColumn-offset: 0rem'"
 					>
 						Head cell
 					</th>
@@ -765,9 +761,9 @@
 			</thead>
 			<tbody class="table-body">
 				<tr class="table-body-row">
-					<td class="table-body-row-cell mod-stickyColumn-left" [attr.style]="'--table-stickyColumn-offset: 0'">Body cell</td>
-					<td class="table-body-row-cell mod-stickyColumn-left" [attr.style]="'--table-stickyColumn-offset: 8'">Body cell</td>
-					<td class="table-body-row-cell mod-stickyColumn-left" [attr.style]="'--table-stickyColumn-offset: 15'">Body cell</td>
+					<td class="table-body-row-cell mod-stickyColumn-left" [attr.style]="'--table-stickyColumn-offset: 0rem'">Body cell</td>
+					<td class="table-body-row-cell mod-stickyColumn-left" [attr.style]="'--table-stickyColumn-offset: 8rem'">Body cell</td>
+					<td class="table-body-row-cell mod-stickyColumn-left" [attr.style]="'--table-stickyColumn-offset: 15rem'">Body cell</td>
 					<td class="table-body-row-cell">Body cell</td>
 					<td class="table-body-row-cell">Body cell</td>
 					<td class="table-body-row-cell">Body cell</td>
@@ -778,12 +774,12 @@
 					<td class="table-body-row-cell">Body cell</td>
 					<td class="table-body-row-cell">Body cell</td>
 					<td class="table-body-row-cell">Body cell</td>
-					<td class="table-body-row-cell mod-stickyColumn-right" [attr.style]="'--table-stickyColumn-offset: 0'">Body cell</td>
+					<td class="table-body-row-cell mod-stickyColumn-right" [attr.style]="'--table-stickyColumn-offset: 0rem'">Body cell</td>
 				</tr>
 				<tr class="table-body-row">
-					<td class="table-body-row-cell mod-stickyColumn-left" [attr.style]="'--table-stickyColumn-offset: 0'">Body cell</td>
-					<td class="table-body-row-cell mod-stickyColumn-left" [attr.style]="'--table-stickyColumn-offset: 8'">Body cell</td>
-					<td class="table-body-row-cell mod-stickyColumn-left" [attr.style]="'--table-stickyColumn-offset: 15'">Body cell</td>
+					<td class="table-body-row-cell mod-stickyColumn-left" [attr.style]="'--table-stickyColumn-offset: 0rem'">Body cell</td>
+					<td class="table-body-row-cell mod-stickyColumn-left" [attr.style]="'--table-stickyColumn-offset: 8rem'">Body cell</td>
+					<td class="table-body-row-cell mod-stickyColumn-left" [attr.style]="'--table-stickyColumn-offset: 15rem'">Body cell</td>
 					<td class="table-body-row-cell">Body cell</td>
 					<td class="table-body-row-cell">Body cell</td>
 					<td class="table-body-row-cell">Body cell</td>
@@ -794,7 +790,7 @@
 					<td class="table-body-row-cell">Body cell</td>
 					<td class="table-body-row-cell">Body cell</td>
 					<td class="table-body-row-cell">Body cell</td>
-					<td class="table-body-row-cell mod-stickyColumn-right" [attr.style]="'--table-stickyColumn-offset: 0'">Body cell</td>
+					<td class="table-body-row-cell mod-stickyColumn-right" [attr.style]="'--table-stickyColumn-offset: 0rem'">Body cell</td>
 				</tr>
 			</tbody>
 		</table>
@@ -820,26 +816,26 @@
 				<tr class="table-head-row">
 					<th
 						class="table-head-row-cell mod-stickyColumn-left"
-						[attr.style]="'--table-layoutFixed-width: 8; --table-stickyColumn-offset: 0'"
+						[attr.style]="'--table-layoutFixed-width: 8rem; --table-stickyColumn-offset: 0rem'"
 					>
 						Head cell
 					</th>
 					<th
 						class="table-head-row-cell mod-stickyColumn-left"
-						[attr.style]="'--table-layoutFixed-width: 7; --table-stickyColumn-offset: 8'"
+						[attr.style]="'--table-layoutFixed-width: 7rem; --table-stickyColumn-offset: 8rem'"
 					>
 						Head cell
 					</th>
 					<th
 						class="table-head-row-cell mod-stickyColumn-left"
-						[attr.style]="'--table-layoutFixed-width: 5; --table-stickyColumn-offset: 15'"
+						[attr.style]="'--table-layoutFixed-width: 5rem; --table-stickyColumn-offset: 15rem'"
 					>
 						Head cell
 					</th>
 					<th
 						class="table-head-row-cell mod-stickyColumn-left mod-stickyColumn-shadow"
 						role="presentation"
-						[attr.style]="'--table-stickyColumn-offset: 20'"
+						[attr.style]="'--table-stickyColumn-offset: 20rem'"
 					>
 						<div class="stickyColumn-shadow-wrapper"></div>
 					</th>
@@ -856,13 +852,13 @@
 					<th
 						class="table-head-row-cell mod-stickyColumn-right mod-stickyColumn-shadow"
 						role="presentation"
-						[attr.style]="'--table-stickyColumn-offset: 5'"
+						[attr.style]="'--table-stickyColumn-offset: 5rem'"
 					>
 						<div class="stickyColumn-shadow-wrapper"></div>
 					</th>
 					<th
 						class="table-head-row-cell mod-stickyColumn-right"
-						[attr.style]="'--table-layoutFixed-width: 5; --table-stickyColumn-offset: 0'"
+						[attr.style]="'--table-layoutFixed-width: 5rem; --table-stickyColumn-offset: 0rem'"
 					>
 						Head cell
 					</th>
@@ -870,13 +866,13 @@
 			</thead>
 			<tbody class="table-body">
 				<tr class="table-body-row">
-					<td class="table-body-row-cell mod-stickyColumn-left" [attr.style]="'--table-stickyColumn-offset: 0'">Body cell</td>
-					<td class="table-body-row-cell mod-stickyColumn-left" [attr.style]="'--table-stickyColumn-offset: 8'">Body cell</td>
-					<td class="table-body-row-cell mod-stickyColumn-left" [attr.style]="'--table-stickyColumn-offset: 15'">Body cell</td>
+					<td class="table-body-row-cell mod-stickyColumn-left" [attr.style]="'--table-stickyColumn-offset: 0rem'">Body cell</td>
+					<td class="table-body-row-cell mod-stickyColumn-left" [attr.style]="'--table-stickyColumn-offset: 8rem'">Body cell</td>
+					<td class="table-body-row-cell mod-stickyColumn-left" [attr.style]="'--table-stickyColumn-offset: 15rem'">Body cell</td>
 					<td
 						class="table-body-row-cell mod-stickyColumn-left mod-stickyColumn-shadow"
 						role="presentation"
-						[attr.style]="'--table-stickyColumn-offset: 20'"
+						[attr.style]="'--table-stickyColumn-offset: 20rem'"
 					>
 						<div class="stickyColumn-shadow-wrapper"></div>
 					</td>
@@ -893,20 +889,20 @@
 					<td
 						class="table-body-row-cell mod-stickyColumn-right mod-stickyColumn-shadow"
 						role="presentation"
-						[attr.style]="'--table-stickyColumn-offset: 5'"
+						[attr.style]="'--table-stickyColumn-offset: 5rem'"
 					>
 						<div class="stickyColumn-shadow-wrapper"></div>
 					</td>
-					<td class="table-body-row-cell mod-stickyColumn-right" [attr.style]="'--table-stickyColumn-offset: 0'">Body cell</td>
+					<td class="table-body-row-cell mod-stickyColumn-right" [attr.style]="'--table-stickyColumn-offset: 0rem'">Body cell</td>
 				</tr>
 				<tr class="table-body-row">
-					<td class="table-body-row-cell mod-stickyColumn-left" [attr.style]="'--table-stickyColumn-offset: 0'">Body cell</td>
-					<td class="table-body-row-cell mod-stickyColumn-left" [attr.style]="'--table-stickyColumn-offset: 8'">Body cell</td>
-					<td class="table-body-row-cell mod-stickyColumn-left" [attr.style]="'--table-stickyColumn-offset: 15'">Body cell</td>
+					<td class="table-body-row-cell mod-stickyColumn-left" [attr.style]="'--table-stickyColumn-offset: 0rem'">Body cell</td>
+					<td class="table-body-row-cell mod-stickyColumn-left" [attr.style]="'--table-stickyColumn-offset: 8rem'">Body cell</td>
+					<td class="table-body-row-cell mod-stickyColumn-left" [attr.style]="'--table-stickyColumn-offset: 15rem'">Body cell</td>
 					<td
 						class="table-body-row-cell mod-stickyColumn-left mod-stickyColumn-shadow"
 						role="presentation"
-						[attr.style]="'--table-stickyColumn-offset: 20'"
+						[attr.style]="'--table-stickyColumn-offset: 20rem'"
 					>
 						<div class="stickyColumn-shadow-wrapper"></div>
 					</td>
@@ -923,20 +919,20 @@
 					<td
 						class="table-body-row-cell mod-stickyColumn-right mod-stickyColumn-shadow"
 						role="presentation"
-						[attr.style]="'--table-stickyColumn-offset: 5'"
+						[attr.style]="'--table-stickyColumn-offset: 5rem'"
 					>
 						<div class="stickyColumn-shadow-wrapper"></div>
 					</td>
-					<td class="table-body-row-cell mod-stickyColumn-right" [attr.style]="'--table-stickyColumn-offset: 0'">Body cell</td>
+					<td class="table-body-row-cell mod-stickyColumn-right" [attr.style]="'--table-stickyColumn-offset: 0rem'">Body cell</td>
 				</tr>
 				<tr class="table-body-row">
-					<td class="table-body-row-cell mod-stickyColumn-left" [attr.style]="'--table-stickyColumn-offset: 0'">Body cell</td>
-					<td class="table-body-row-cell mod-stickyColumn-left" [attr.style]="'--table-stickyColumn-offset: 8'">Body cell</td>
-					<td class="table-body-row-cell mod-stickyColumn-left" [attr.style]="'--table-stickyColumn-offset: 15'">Body cell</td>
+					<td class="table-body-row-cell mod-stickyColumn-left" [attr.style]="'--table-stickyColumn-offset: 0rem'">Body cell</td>
+					<td class="table-body-row-cell mod-stickyColumn-left" [attr.style]="'--table-stickyColumn-offset: 8rem'">Body cell</td>
+					<td class="table-body-row-cell mod-stickyColumn-left" [attr.style]="'--table-stickyColumn-offset: 15rem'">Body cell</td>
 					<td
 						class="table-body-row-cell mod-stickyColumn-left mod-stickyColumn-shadow"
 						role="presentation"
-						[attr.style]="'--table-stickyColumn-offset: 20'"
+						[attr.style]="'--table-stickyColumn-offset: 20rem'"
 					>
 						<div class="stickyColumn-shadow-wrapper"></div>
 					</td>
@@ -953,11 +949,11 @@
 					<td
 						class="table-body-row-cell mod-stickyColumn-right mod-stickyColumn-shadow"
 						role="presentation"
-						[attr.style]="'--table-stickyColumn-offset: 5'"
+						[attr.style]="'--table-stickyColumn-offset: 5rem'"
 					>
 						<div class="stickyColumn-shadow-wrapper"></div>
 					</td>
-					<td class="table-body-row-cell mod-stickyColumn-right" [attr.style]="'--table-stickyColumn-offset: 0'">Body cell</td>
+					<td class="table-body-row-cell mod-stickyColumn-right" [attr.style]="'--table-stickyColumn-offset: 0rem'">Body cell</td>
 				</tr>
 			</tbody>
 		</table>
@@ -975,26 +971,26 @@
 				<tr class="table-head-row">
 					<th
 						class="table-head-row-cell mod-stickyColumn-left"
-						[attr.style]="'--table-layoutFixed-width: 8; --table-stickyColumn-offset: 0'"
+						[attr.style]="'--table-layoutFixed-width: 8rem; --table-stickyColumn-offset: 0'"
 					>
 						Head cell
 					</th>
 					<th
 						class="table-head-row-cell mod-stickyColumn-left"
-						[attr.style]="'--table-layoutFixed-width: 7; --table-stickyColumn-offset: 8'"
+						[attr.style]="'--table-layoutFixed-width: 7rem; --table-stickyColumn-offset: 8rem'"
 					>
 						Head cell
 					</th>
 					<th
 						class="table-head-row-cell mod-stickyColumn-left"
-						[attr.style]="'--table-layoutFixed-width: 5; --table-stickyColumn-offset: 15'"
+						[attr.style]="'--table-layoutFixed-width: 5rem; --table-stickyColumn-offset: 15'"
 					>
 						Head cell
 					</th>
 					<th
 						class="table-head-row-cell mod-stickyColumn-left mod-stickyColumn-shadow"
 						role="presentation"
-						[attr.style]="'--table-stickyColumn-offset: 20'"
+						[attr.style]="'--table-stickyColumn-offset: 20rem'"
 					>
 						<div class="stickyColumn-shadow-wrapper"></div>
 					</th>
@@ -1011,13 +1007,13 @@
 					<th
 						class="table-head-row-cell mod-stickyColumn-right mod-stickyColumn-shadow"
 						role="presentation"
-						[attr.style]="'--table-stickyColumn-offset: 5'"
+						[attr.style]="'--table-stickyColumn-offset: 5rem'"
 					>
 						<div class="stickyColumn-shadow-wrapper"></div>
 					</th>
 					<th
 						class="table-head-row-cell mod-stickyColumn-right"
-						[attr.style]="'--table-layoutFixed-width: 5; --table-stickyColumn-offset: 0'"
+						[attr.style]="'--table-layoutFixed-width: 5rem; --table-stickyColumn-offset: 0'"
 					>
 						Head cell
 					</th>
@@ -1030,13 +1026,13 @@
 					</td>
 				</tr>
 				<tr class="table-body-row">
-					<td class="table-body-row-cell mod-stickyColumn-left" [attr.style]="'--table-stickyColumn-offset: 0'">Body cell</td>
-					<td class="table-body-row-cell mod-stickyColumn-left" [attr.style]="'--table-stickyColumn-offset: 8'">Body cell</td>
-					<td class="table-body-row-cell mod-stickyColumn-left" [attr.style]="'--table-stickyColumn-offset: 15'">Body cell</td>
+					<td class="table-body-row-cell mod-stickyColumn-left" [attr.style]="'--table-stickyColumn-offset: 0rem'">Body cell</td>
+					<td class="table-body-row-cell mod-stickyColumn-left" [attr.style]="'--table-stickyColumn-offset: 8rem'">Body cell</td>
+					<td class="table-body-row-cell mod-stickyColumn-left" [attr.style]="'--table-stickyColumn-offset: 15rem'">Body cell</td>
 					<td
 						class="table-body-row-cell mod-stickyColumn-left mod-stickyColumn-shadow"
 						role="presentation"
-						[attr.style]="'--table-stickyColumn-offset: 20'"
+						[attr.style]="'--table-stickyColumn-offset: 20rem'"
 					>
 						<div class="stickyColumn-shadow-wrapper"></div>
 					</td>
@@ -1053,20 +1049,20 @@
 					<td
 						class="table-body-row-cell mod-stickyColumn-right mod-stickyColumn-shadow"
 						role="presentation"
-						[attr.style]="'--table-stickyColumn-offset: 5'"
+						[attr.style]="'--table-stickyColumn-offset: 5rem'"
 					>
 						<div class="stickyColumn-shadow-wrapper"></div>
 					</td>
-					<td class="table-body-row-cell mod-stickyColumn-right" [attr.style]="'--table-stickyColumn-offset: 0'">Body cell</td>
+					<td class="table-body-row-cell mod-stickyColumn-right" [attr.style]="'--table-stickyColumn-offset: 0rem'">Body cell</td>
 				</tr>
 				<tr class="table-body-row">
-					<td class="table-body-row-cell mod-stickyColumn-left" [attr.style]="'--table-stickyColumn-offset: 0'">Body cell</td>
-					<td class="table-body-row-cell mod-stickyColumn-left" [attr.style]="'--table-stickyColumn-offset: 8'">Body cell</td>
-					<td class="table-body-row-cell mod-stickyColumn-left" [attr.style]="'--table-stickyColumn-offset: 15'">Body cell</td>
+					<td class="table-body-row-cell mod-stickyColumn-left" [attr.style]="'--table-stickyColumn-offset: 0rem'">Body cell</td>
+					<td class="table-body-row-cell mod-stickyColumn-left" [attr.style]="'--table-stickyColumn-offset: 8rem'">Body cell</td>
+					<td class="table-body-row-cell mod-stickyColumn-left" [attr.style]="'--table-stickyColumn-offset: 15rem'">Body cell</td>
 					<td
 						class="table-body-row-cell mod-stickyColumn-left mod-stickyColumn-shadow"
 						role="presentation"
-						[attr.style]="'--table-stickyColumn-offset: 20'"
+						[attr.style]="'--table-stickyColumn-offset: 20rem'"
 					>
 						<div class="stickyColumn-shadow-wrapper"></div>
 					</td>
@@ -1083,20 +1079,20 @@
 					<td
 						class="table-body-row-cell mod-stickyColumn-right mod-stickyColumn-shadow"
 						role="presentation"
-						[attr.style]="'--table-stickyColumn-offset: 5'"
+						[attr.style]="'--table-stickyColumn-offset: 5rem'"
 					>
 						<div class="stickyColumn-shadow-wrapper"></div>
 					</td>
-					<td class="table-body-row-cell mod-stickyColumn-right" [attr.style]="'--table-stickyColumn-offset: 0'">Body cell</td>
+					<td class="table-body-row-cell mod-stickyColumn-right" [attr.style]="'--table-stickyColumn-offset: 0rem'">Body cell</td>
 				</tr>
 				<tr class="table-body-row">
-					<td class="table-body-row-cell mod-stickyColumn-left" [attr.style]="'--table-stickyColumn-offset: 0'">Body cell</td>
-					<td class="table-body-row-cell mod-stickyColumn-left" [attr.style]="'--table-stickyColumn-offset: 8'">Body cell</td>
-					<td class="table-body-row-cell mod-stickyColumn-left" [attr.style]="'--table-stickyColumn-offset: 15'">Body cell</td>
+					<td class="table-body-row-cell mod-stickyColumn-left" [attr.style]="'--table-stickyColumn-offset: 0rem'">Body cell</td>
+					<td class="table-body-row-cell mod-stickyColumn-left" [attr.style]="'--table-stickyColumn-offset: 8rem'">Body cell</td>
+					<td class="table-body-row-cell mod-stickyColumn-left" [attr.style]="'--table-stickyColumn-offset: 15rem'">Body cell</td>
 					<td
 						class="table-body-row-cell mod-stickyColumn-left mod-stickyColumn-shadow"
 						role="presentation"
-						[attr.style]="'--table-stickyColumn-offset: 20'"
+						[attr.style]="'--table-stickyColumn-offset: 20rem'"
 					>
 						<div class="stickyColumn-shadow-wrapper"></div>
 					</td>
@@ -1113,11 +1109,11 @@
 					<td
 						class="table-body-row-cell mod-stickyColumn-right mod-stickyColumn-shadow"
 						role="presentation"
-						[attr.style]="'--table-stickyColumn-offset: 5'"
+						[attr.style]="'--table-stickyColumn-offset: 5rem'"
 					>
 						<div class="stickyColumn-shadow-wrapper"></div>
 					</td>
-					<td class="table-body-row-cell mod-stickyColumn-right" [attr.style]="'--table-stickyColumn-offset: 0'">Body cell</td>
+					<td class="table-body-row-cell mod-stickyColumn-right" [attr.style]="'--table-stickyColumn-offset: 0rem'">Body cell</td>
 				</tr>
 			</tbody>
 		</table>
