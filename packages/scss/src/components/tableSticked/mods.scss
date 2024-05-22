@@ -86,8 +86,9 @@
 
 @mixin stickyColumnOffset {
 	[class*='mod-stickyColumn-'] {
+		--components-tableSticked-column-sticky-offset: var(--table-stickyColumn-offset, 0rem);
+
 		position: sticky;
-		--components-tableSticked-column-sticky-offset: calc(var(--table-stickyColumn-offset) * 1rem);
 	}
 	.mod-stickyColumn-shadow {
 		display: table-cell;
