@@ -12,11 +12,17 @@
 		@include XS;
 	}
 
-	&.is-invalid, &:has(.textField-input-value[aria-invalid='true']) {
+	&.mod-alignRight {
+		@include alignRight;
+	}
+
+	&.is-invalid,
+	&:has(.textField-input-value[aria-invalid='true']) {
 		@include invalid;
 	}
 
-	&.is-disabled, &:has(.textField-input-value:disabled) {
+	&.is-disabled,
+	&:has(.textField-input-value:disabled) {
 		@include disabled;
 	}
 }
