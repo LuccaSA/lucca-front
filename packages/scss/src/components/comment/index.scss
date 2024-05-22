@@ -1,8 +1,9 @@
+@use '@lucca-front/scss/src/commons/utils/container';
+
 @use 'exports' as *;
 
 .comment {
 	@include vars;
-
 	@include component;
 
 	&.mod-S {
@@ -12,8 +13,16 @@
 	&.mod-noAvatar {
 		@include noAvatar;
 	}
+
+	@include container.max('XXS', $name: 'comment') {
+		@include narrow;
+	}
 }
 
 .commentWrapper {
 	@include vars;
+
+	&.mod-compact {
+		@include wrapperCompact;
+	}
 }

@@ -4,4 +4,7 @@
 	--components-comment-info-fontSize: var(--sizes-S-fontSize);
 	--components-comment-info-lineHeight: var(--sizes-S-lineHeight);
 	--components-comment-content-margin: calc(1.5rem + var(--pr-t-spacings-100)); // 1.5rem for the width of the avatar and 0.5rem for the gap
+	--components-comment-info-separator: '•';
+	--components-comment-info-content-display: block;
+	--components-comment-info-content-marginTop: var(--pr-t-spacings-25);
 }
