@@ -1,7 +1,7 @@
+import { NgIf } from '@angular/common';
 import { booleanAttribute, ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 import { Palette, PortalContent, PortalDirective } from '@lucca-front/ng/core';
 import { LuSafeExternalSvgPipe } from '@lucca-front/ng/safe-content';
-import { NgIf } from '@angular/common';
 
 @Component({
 	selector: 'lu-empty-state-section',
@@ -36,4 +36,7 @@ export class EmptyStateSectionComponent {
 		required: true,
 	})
 	description: PortalContent;
+
+	@Input()
+	hx: number = 3;
 }
