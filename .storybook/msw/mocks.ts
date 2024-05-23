@@ -4,6 +4,39 @@ export const mockEstablishmentsCount = { items: [], count: 4 };
 const usCities = ['New York', 'Los Angeles', 'Chicago', 'Houston', 'Philadelphia', 'Phoenix', 'San Antonio', 'San Diego', 'Dallas', 'San Jose'];
 const frCities = ['Paris', 'Marseille', 'Lyon', 'Toulouse', 'Nice', 'Nantes', 'Strasbourg', 'Montpellier', 'Bordeaux', 'Lille'];
 
+export const mockUserPopover =
+{
+	"id": 6,
+	"lastName": "Alibert",
+	"firstName": "Chloe",
+	"userDepartment": {
+		"id": 6,
+		"name": "SAV"
+	},
+	"jobTitle": "Technicienne",
+	"_links": {
+		"schedule": {
+			"href": "/work-locations/schedule?filterMode=Users&user=6"
+		},
+		"hrCard": {
+			"href": "/directory/users/cards?employeeId=6"
+		}
+	},
+	"pictureHref": "/getFile.ashx?id=5e73eabb-a24e-4590-a4c2-6c5de9893185",
+	"isWorkingNow": true,
+	"leaveEndsOn": null,
+	"leaveEndIsFirstHalfDay": null,
+	"currentWorkLocation": {
+		"id": 18203,
+		"name": "Barcelona",
+		"color": "yellow1",
+		"area": null
+	},
+	"dtContractStart": "2001-09-21T00:00:00",
+	"dtContractEnd": null
+}
+
+
 export const mockEstablishments = [
 	...frCities.map((city, index) => ({
 		id: index + 1,
@@ -350,50 +383,25 @@ export const mockProjectUsers = [
 	},
 ];
 
-export const mockUsers = [
-	{
-		id: 6,
-		firstName: 'Chloe',
-		lastName: 'Alibert',
+const firstNames = ['Chloe', 'Marie-Françoise', 'Laurence', 'Gaspard', 'Jean', 'Pierre', 'Paul', 'Jacques', 'Marie', 'Sophie', 'Julie', 'Julien'];
+const lastNames = ['Alibert', 'Archer', 'Atali', 'Bouvier', 'Lefevre', 'Durand', 'Dupont', 'Martin', 'Bernard', 'Robert', 'Richard', 'Petit'];
+const departments = ['Direction', 'Support', 'Commercial'];
+
+export const mockUsers = firstNames
+	.flatMap((firstName) => lastNames.flatMap((lastName) => ({ firstName, lastName })))
+	.map((user, index) => ({
+		id: index + 1,
 		picture: null,
-		department: {
-			id: 1,
-			name: 'Direction',
-		},
-	},
-	{
-		id: 7,
-		firstName: 'Marie-Françoise',
-		lastName: 'Archer',
-		picture: {
-			href: 'https://demo-ux1.ilucca.net/getFile.ashx?id=e845a0ca-dbd9-452d-adc0-c873a847a37d',
-		},
-		department: {
-			id: 1,
-			name: 'Direction',
-		},
-	},
-	{
-		id: 49,
-		firstName: 'Laurence',
-		lastName: 'Atali',
-		picture: null,
-		department: {
-			id: 2,
-			name: 'Support',
-		},
-	},
-	{
-		id: 66,
-		firstName: 'Chloe',
-		lastName: 'Alibert',
-		picture: null,
-		department: {
-			id: 3,
-			name: 'Commercial',
-		},
-	},
-];
+		department: { id: (index % departments.length) + 1, name: departments[index % departments.length] },
+		...user,
+	}));
+
+// Create homonym in different department
+mockUsers.unshift({
+	...mockUsers[0],
+	id: mockUsers.length + 1,
+	department: { id: 2, name: 'Commercial' },
+});
 
 export const mockMe = {
 	id: 35,

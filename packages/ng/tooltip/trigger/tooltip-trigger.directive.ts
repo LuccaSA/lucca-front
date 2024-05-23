@@ -1,156 +1,350 @@
-import { FlexibleConnectedPositionStrategy, Overlay, OverlayRef } from '@angular/cdk/overlay';
+import { FlexibleConnectedPositionStrategy, HorizontalConnectionPos, OriginConnectionPosition, Overlay, OverlayConnectionPosition, OverlayRef, VerticalConnectionPos } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
-import { AfterViewInit, Directive, ElementRef, EventEmitter, HostBinding, HostListener, Input, OnDestroy, Output, ViewContainerRef } from '@angular/core';
+import { AfterContentInit, booleanAttribute, ChangeDetectorRef, DestroyRef, Directive, ElementRef, HostBinding, HostListener, inject, Input, numberAttribute, Renderer2 } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { SafeHtml } from '@angular/platform-browser';
-import { ALuPopoverTrigger, LuPopoverPosition, LuPopoverScrollStrategy, LuPopoverTarget } from '@lucca-front/ng/popover';
-import { LuTooltipPanelComponent } from '../panel/tooltip-panel.component';
+import { LuPopoverPosition } from '@lucca-front/ng/popover';
+import { BehaviorSubject, combineLatest, merge, Observable, startWith, Subject, switchMap, timer } from 'rxjs';
+import { debounce, debounceTime, filter, map } from 'rxjs/operators';
+import { LuTooltipPanelComponent } from '../panel';
+
+let nextId = 0;
 
 @Directive({
 	selector: '[luTooltip]',
 	standalone: true,
 })
-export class LuTooltipTriggerDirective extends ALuPopoverTrigger<LuTooltipPanelComponent, LuPopoverTarget> implements AfterViewInit, OnDestroy {
-	@Input('luTooltip') set tooltipContent(c: string | SafeHtml) {
-		if (this.panel) {
-			this.panel.content = c;
+export class LuTooltipTriggerDirective implements AfterContentInit {
+	#overlay = inject(Overlay);
+
+	#host = inject<ElementRef<HTMLElement>>(ElementRef);
+
+	#renderer = inject(Renderer2);
+
+	#destroyRef = inject(DestroyRef);
+
+	#cdr = inject(ChangeDetectorRef);
+
+	@Input()
+	luTooltip: string | SafeHtml;
+
+	#openDelay$ = new BehaviorSubject<number>(300);
+
+	@Input({ transform: numberAttribute })
+	set luTooltipEnterDelay(delay: number) {
+		this.#openDelay$.next(delay);
+	}
+
+	#closeDelay$ = new BehaviorSubject<number>(100);
+
+	@Input({ transform: numberAttribute })
+	set luTooltipLeaveDelay(delay: number) {
+		this.#closeDelay$.next(delay);
+	}
+
+	#disabled = false;
+
+	@Input({ transform: numberAttribute })
+	set luTooltipDisabled(disabled: boolean) {
+		this.#disabled = disabled;
+		if (disabled) {
+			this.setAccessibilityProperties(null);
 		}
-
-		this._tooltipContent = c;
-	}
-	/** when trigger = hover, delay before the popover panel appears, default 300ms */
-	@Input('luTooltipEnterDelay') set inputEnterDelay(d: number) {
-		this.enterDelay = d;
-	}
-	/** when trigger = hover, delay before the popover panel disappears, default 100ms */
-	@Input('luTooltipLeaveDelay') set inputLeaveDelay(d: number) {
-		this.leaveDelay = d;
-	}
-	/** disable popover apparition */
-	@Input('luTooltipDisabled') set inputDisabled(d: boolean) {
-		this.disabled = d;
-		if (this._handleTabindex) {
-			this._setTabindex(d ? null : 0);
-		}
 	}
 
-	@Input('luTooltipPosition') set inputPosition(pos: LuPopoverPosition) {
-		this.target.position = pos;
-	}
+	@Input()
+	luTooltipPosition: LuPopoverPosition = 'above';
 
-	@Input('luTooltipWhenEllipsis') public set inputWhenEllipsis(we: boolean) {
-		this.whenEllipsis = we;
-	}
+	@Input({ transform: booleanAttribute })
+	luTooltipWhenEllipsis = false;
 
-	// FIXME output native
-	/** Event emitted when the associated popover is opened. */
-	// eslint-disable-next-line @angular-eslint/no-output-on-prefix
-	@Output('luTooltipOnOpen') onOpen = new EventEmitter<void>();
-	/** Event emitted when the associated popover is closed. */
-	// eslint-disable-next-line @angular-eslint/no-output-on-prefix
-	@Output('luTooltipOnClose') onClose = new EventEmitter<void>();
+	resize$ = new Observable((observer) => {
+		const resizeObserver = new ResizeObserver(() => {
+			observer.next();
+		});
+		resizeObserver.observe(this.#host.nativeElement);
+		return () => {
+			resizeObserver.disconnect();
+		};
+	});
+
+	open$ = new Subject<void>();
+
+	close$ = new Subject<void>();
 
 	@HostListener('mouseenter')
-	override onMouseEnter() {
-		super.onMouseEnter();
+	onMouseEnter() {
+		this.open$.next();
 	}
+
 	@HostListener('mouseleave')
-	override onMouseLeave() {
-		super.onMouseLeave();
+	onMouseLeave() {
+		this.close$.next();
 	}
+
 	@HostListener('focus')
-	override onFocus() {
-		super.onFocus();
+	onFocus() {
+		this.open$.next();
 	}
+
 	@HostListener('blur')
-	override onBlur() {
-		super.onBlur();
-	}
-	private _handleTabindex = false;
-	// @HostBinding('attr.tabindex') tabindex;
-	// private set tabindex(i: number = null) {
-
-	// }
-
-	/** accessibility attribute - dont override */
-	@HostBinding('attr.id') get _attrId() {
-		return this._triggerId;
-	}
-	/** accessibility attribute - dont override */
-	@HostBinding('attr.aria-describedby') get _attrAriaDescribedBy() {
-		return this._panelId;
+	onBlur() {
+		this.close$.next();
 	}
 
-	protected override _portal: ComponentPortal<LuTooltipPanelComponent>;
-	protected _tooltipContent: string | SafeHtml = '';
+	#generatedId = `${this.#host.nativeElement.tagName.toLowerCase()}-tooltip-${nextId++}`;
 
-	constructor(protected override _overlay: Overlay, protected override _elementRef: ElementRef<HTMLElement>, protected override _viewContainerRef: ViewContainerRef) {
-		super(_overlay, _elementRef, _viewContainerRef);
-		this.target = new LuPopoverTarget();
-		this.target.elementRef = this._elementRef;
-		this._triggerId = this._elementRef.nativeElement.getAttribute('id') || this._triggerId;
-		this.triggerEvent = 'hover';
-		this.target.position = 'above';
-		this.enterDelay = 300;
-		this.leaveDelay = 100;
+	@HostBinding('attr.id')
+	_id: string;
 
-		this._handleTabindex = this._shouldHandleTabindex();
+	@HostBinding('attr.aria-describedby')
+	get ariaDescribedBy() {
+		if (this.#disabled || this.luTooltipWhenEllipsis) {
+			return null;
+		}
+		return `${this.#generatedId}-panel`;
+	}
 
-		if (this._handleTabindex) {
-			this._setTabindex(0);
+	overlayRef?: OverlayRef;
+
+	constructor() {
+		combineLatest([this.#openDelay$, this.#closeDelay$])
+			.pipe(
+				switchMap(([openDelay, closeDelay]) => {
+					// We only filter open events because even if it's disabled while opened,
+					// 	we want the tooltip to be able to close itself no matter what
+					const openEvents$ = this.open$.pipe(
+						filter(() => {
+							if (this.#disabled) {
+								return false;
+							}
+							// If not disabled, let's check for ellipsis if needed
+							if (this.luTooltipWhenEllipsis) {
+								return this.hasEllipsis();
+							}
+							// If it's not disabled and is not triggered based on ellipsis, just return true
+							return true;
+						}),
+						map(() => 'open'),
+					);
+					return merge(openEvents$, this.close$.pipe(map(() => 'close'))).pipe(
+						debounce((event) => {
+							return timer(event === 'open' ? openDelay : closeDelay);
+						}),
+					);
+				}),
+				takeUntilDestroyed(this.#destroyRef),
+			)
+			.subscribe((event) => {
+				if (event === 'open') {
+					this.openTooltip();
+				} else {
+					this.closeTooltip();
+				}
+			});
+
+		this.resize$.pipe(takeUntilDestroyed(this.#destroyRef), debounceTime(150)).subscribe(() => {
+			this.setAccessibilityProperties(0);
+			this.#cdr.markForCheck();
+		});
+	}
+
+	private openTooltip(): void {
+		// If tooltip is already opened, don't do anything
+		if (this.overlayRef) {
+			return;
+		}
+		const position = this.legacyPositionBuilder();
+		this.overlayRef = this.#overlay.create({
+			positionStrategy: position,
+			scrollStrategy: this.#overlay.scrollStrategies.close(),
+			disposeOnNavigation: true,
+		});
+		const portal = new ComponentPortal(LuTooltipPanelComponent);
+		const ref = this.overlayRef.attach(portal);
+		position.positionChanges
+			.pipe(
+				takeUntilDestroyed(this.#destroyRef),
+				map(({ connectionPair }) => connectionPair),
+				startWith(position.positions[0]),
+			)
+			.subscribe(({ overlayX, overlayY }) => {
+				ref.instance.setPanelPosition(overlayX, overlayY);
+			});
+		if (this.luTooltip) {
+			ref.instance.content = this.luTooltip;
+		} else if (this.luTooltipWhenEllipsis) {
+			ref.instance.content = this.#host.nativeElement.innerText;
+		}
+		ref.instance.id = this.ariaDescribedBy;
+		// On tooltip leave => trigger close
+		ref.instance.mouseLeave$.pipe(takeUntilDestroyed(ref.instance.destroyRef)).subscribe(() => this.close$.next());
+		// On tooltip enter => trigger open to keep it opened
+		ref.instance.mouseEnter$.pipe(takeUntilDestroyed(ref.instance.destroyRef)).subscribe(() => this.open$.next());
+	}
+
+	private closeTooltip(): void {
+		if (this.overlayRef) {
+			this.overlayRef.detach();
+			delete this.overlayRef;
 		}
 	}
 
-	ngAfterViewInit() {
-		this._checkTarget();
-	}
-	ngOnDestroy() {
-		this._cleanUpSubscriptions();
-		if (this._popoverOpen) {
-			this.closePopover();
-		}
-		this.destroyPopover();
-	}
-	protected _emitOpen(): void {
-		this.onOpen.emit();
-	}
-	protected _emitClose(): void {
-		this.onClose.emit();
-	}
-
-	protected override _createOverlay(): OverlayRef {
-		if (!this._overlayRef) {
-			this._portal = new ComponentPortal(LuTooltipPanelComponent, this._viewContainerRef);
-			const config = this._getOverlayConfig();
-			this._subscribeToPositions(config.positionStrategy as FlexibleConnectedPositionStrategy);
-			this._overlayRef = this._overlay.create(config);
+	private setAccessibilityProperties(tabindex: number | null): void {
+		if (this.#disabled || (this.luTooltipWhenEllipsis && !this.hasEllipsis())) {
+			this.#renderer.removeAttribute(this.#host.nativeElement, 'tabindex');
+			return;
 		}
 
-		return this._overlayRef;
-	}
-
-	protected override _attachPortalToOverlay(): void {
-		const componentRef = this._overlayRef.attach(this._portal);
-		this._panel = componentRef.instance;
-		this._panel.content = this._tooltipContent;
-	}
-
-	protected override _getPanelScrollStrategy(): LuPopoverScrollStrategy {
-		return 'close';
-	}
-
-	private _shouldHandleTabindex(): boolean {
-		const tag = this._elementRef.nativeElement.tagName?.toLowerCase();
-		// https://allyjs.io/data-tables/focusable.html
-		// i'm choosing to not support area and iframe, dont @ me
+		const tag = this.#host.nativeElement.tagName.toLowerCase();
 		const nativelyFocusableTags = ['a', 'button', 'input', 'select', 'textarea'];
 		const isNatevelyFocusableTag = nativelyFocusableTags.includes(tag);
 
-		const hasATabIndex = this._elementRef.nativeElement.getAttribute('tabindex') !== null;
+		const hasATabIndex = this.#host.nativeElement.getAttribute('tabindex') !== null;
 
-		return !isNatevelyFocusableTag && !hasATabIndex;
+		if (!isNatevelyFocusableTag && !hasATabIndex) {
+			this.#renderer.setAttribute(this.#host.nativeElement, 'tabindex', tabindex.toString());
+		}
 	}
 
-	private _setTabindex(i: number = null): void {
-		this._elementRef.nativeElement.setAttribute('tabindex', `${i}`);
+	/**
+	 * Hacky af but let's explain everything
+	 * This method checks for ellipsis by cloning the node and checking its width against original element.
+	 *
+	 * We used to do this using scrollWidth but the thing is, it's a rounded value. Sometimes,
+	 * you'd get true while it should be false and vice-versa, because of rounding.
+	 *
+	 * We could also use getBoundingClientRect() but it only considers text content, meaning that if ellipsis is caused by
+	 * any margin or padding, it won't be detected
+	 *
+	 * @private
+	 */
+	private hasEllipsis(): boolean {
+		if (window.getComputedStyle(this.#host.nativeElement).textOverflow !== 'ellipsis') {
+			return false;
+		}
+
+		const mask = this.#renderer.createElement('div') as HTMLDivElement;
+		const clone = this.#host.nativeElement.cloneNode(true) as HTMLElement;
+
+		this.#renderer.setStyle(clone, 'position', 'fixed');
+		this.#renderer.setStyle(clone, 'overflow', 'visible');
+		this.#renderer.setStyle(clone, 'white-space', 'nowrap');
+		this.#renderer.setStyle(clone, 'visibility', 'hidden');
+		this.#renderer.setStyle(clone, 'width', 'fit-content');
+
+		this.#renderer.addClass(mask, 'u-mask');
+		this.#renderer.setAttribute(mask, 'aria-hidden', 'true');
+		this.#renderer.appendChild(mask, clone);
+
+		this.#renderer.appendChild(this.#host.nativeElement.parentElement, mask);
+		try {
+			const fullWidth = clone.getBoundingClientRect().width;
+			const displayWidth = this.#host.nativeElement.getBoundingClientRect().width;
+
+			return fullWidth > displayWidth;
+		} catch (e) {
+			return false;
+		} finally {
+			mask.remove();
+		}
+	}
+
+	ngAfterContentInit(): void {
+		this.setAccessibilityProperties(0);
+		this._id = this.#host.nativeElement.id || this.#generatedId;
+	}
+
+	/**********************
+	 *
+	 * LEGACY STUFF TO HANDLE EXISTING POSITIONS
+	 *
+	 ***********************/
+
+	private legacyPositionBuilder(): FlexibleConnectedPositionStrategy {
+		const connectionPosition: OriginConnectionPosition = {
+			originX: 'start',
+			originY: 'top',
+		};
+
+		// Position
+		const position = this.luTooltipPosition;
+		if (position === 'above') {
+			connectionPosition.originY = 'top';
+		} else if (position === 'below') {
+			connectionPosition.originY = 'bottom';
+		} else if (position === 'before') {
+			connectionPosition.originX = 'start';
+		} else if (position === 'after') {
+			connectionPosition.originX = 'end';
+		}
+
+		// Alignment
+		if (position === 'above' || position === 'below') {
+			connectionPosition.originX = 'center';
+		} else {
+			connectionPosition.originY = 'center';
+		}
+
+		const overlayPosition: OverlayConnectionPosition = {
+			overlayX: 'start',
+			overlayY: 'top',
+		};
+
+		if (position === 'above' || position === 'below') {
+			overlayPosition.overlayX = connectionPosition.originX;
+			overlayPosition.overlayY = position === 'above' ? 'bottom' : 'top';
+		} else {
+			overlayPosition.overlayX = position === 'before' ? 'end' : 'start';
+			overlayPosition.overlayY = connectionPosition.originY;
+		}
+
+		return this.#overlay
+			.position()
+			.flexibleConnectedTo(this.#host)
+			.withPositions([
+				{
+					originX: connectionPosition.originX,
+					originY: connectionPosition.originY,
+					overlayX: overlayPosition.overlayX,
+					overlayY: overlayPosition.overlayY,
+				},
+				{
+					originX: connectionPosition.originX,
+					originY: this.invertVerticalPos(connectionPosition.originY),
+					overlayX: overlayPosition.overlayX,
+					overlayY: this.invertVerticalPos(overlayPosition.overlayY),
+				},
+				{
+					originX: this.invertHorizontalPos(connectionPosition.originX),
+					originY: connectionPosition.originY,
+					overlayX: this.invertHorizontalPos(overlayPosition.overlayX),
+					overlayY: overlayPosition.overlayY,
+				},
+				{
+					originX: this.invertHorizontalPos(connectionPosition.originX),
+					originY: this.invertVerticalPos(connectionPosition.originY),
+					overlayX: this.invertHorizontalPos(overlayPosition.overlayX),
+					overlayY: this.invertVerticalPos(overlayPosition.overlayY),
+				},
+			]);
+	}
+
+	private invertVerticalPos(y: VerticalConnectionPos): VerticalConnectionPos {
+		if (y === 'top') {
+			return 'bottom';
+		} else if (y === 'bottom') {
+			return 'top';
+		}
+		return y;
+	}
+
+	private invertHorizontalPos(x: HorizontalConnectionPos): HorizontalConnectionPos {
+		if (x === 'end') {
+			return 'start';
+		} else if (x === 'start') {
+			return 'end';
+		}
+		return x;
 	}
 }

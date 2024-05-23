@@ -1,9 +1,9 @@
-import { NumberInputComponent } from '@lucca-front/ng/forms';
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { cleanupTemplate, generateInputs } from 'stories/helpers/stories';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
+import { NumberInputComponent } from '@lucca-front/ng/forms';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { cleanupTemplate, generateInputs } from 'stories/helpers/stories';
 
 export default {
 	title: 'Documentation/Forms/Fields/NumberField/Angular',
@@ -70,7 +70,7 @@ export const Basic: StoryObj<NumberInputComponent & { disabled: boolean } & Form
 		inlineMessageState: 'default',
 		size: 'M',
 		placeholder: 'Placeholder',
-		tooltip: "Je suis un message d'aide",
+		tooltip: 'Je suis un message d’aide',
 		step: 1,
 		min: 0,
 		max: 999,

@@ -7,8 +7,8 @@ export default {
 	component: ButtonComponent,
 	render: ({ luButton, ...inputs }, { argTypes }) => {
 		return {
-			template: `<button luButton${luButton !== '' ? `="${luButton}"` : ''}  ${generateInputs(inputs, argTypes)}
->Click me !</button>`,
+			template: `<button luButton${luButton !== '' ? `="${luButton}"` : ''}${generateInputs(inputs, argTypes)}
+>Button</button>`,
 		};
 	},
 } as Meta;

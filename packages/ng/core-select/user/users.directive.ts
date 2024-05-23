@@ -60,7 +60,7 @@ export class LuCoreSelectUsersDirective<T extends LuCoreSelectUser = LuCoreSelec
 
 	@Input()
 	public set displayFormat(format: LuDisplayFormat) {
-		this.displayFormat = format;
+		this._displayFormat = format;
 	}
 
 	private _displayFormat: LuDisplayFormat = LuDisplayFullname.lastfirst;
@@ -107,7 +107,7 @@ export class LuCoreSelectUsersDirective<T extends LuCoreSelectUser = LuCoreSelec
 			...(clue ? { clue: sanitizeClueFilter(clue) } : {}),
 			...(operationIds ? { operations: operationIds.join(',') } : {}),
 			...(appInstanceId ? { appInstanceId } : {}),
-			...(enableFormerEmployees ? { enableFormerEmployees } : {}),
+			...(enableFormerEmployees ? { formerEmployee: enableFormerEmployees } : {}),
 		})),
 	);
 
@@ -128,12 +128,12 @@ export class LuCoreSelectUsersDirective<T extends LuCoreSelectUser = LuCoreSelec
 		const url = this.customUrl() || this.defaultUrl();
 
 		const params = {
-			id: this.currentUserId,
 			fields: this.#userFields,
 			...(this._filters() ?? {}),
 			...(this._operationIds() ? { operationIds: this._operationIds().join(',') } : {}),
 			...(this._appInstanceId() ? { appInstanceId: this._appInstanceId() } : {}),
 			...(this._enableFormerEmployees() ? { enableFormerEmployees: this._enableFormerEmployees() } : {}),
+			id: this.currentUserId,
 		};
 
 		return this.httpClient
@@ -158,11 +158,10 @@ export class LuCoreSelectUsersDirective<T extends LuCoreSelectUser = LuCoreSelec
 			shareReplay({ bufferSize: 1, refCount: true }),
 		);
 
-		const options$ = super.buildOptions();
+		const meFilter$ = displayMe$.pipe(switchMap((displayMe) => (displayMe ? me$ : of(null))));
 
-		return displayMe$.pipe(
-			switchMap((displayMe) => combineLatest([options$, displayMe ? me$ : of(null)])),
-			map(([options, me]) => (me ? [me, ...(options ?? []).filter((o) => o.id !== me.id)] : options)),
+		return combineLatest([super.buildOptions(), meFilter$]).pipe(
+			map(([options, meFilter]) => (meFilter ? [meFilter, ...(options ?? []).filter((o) => o.id !== meFilter.id)] : options)),
 			switchMap((users) => this.#userHomonymsService.handleHomonyms(users, this.displayFormat)),
 		);
 	}

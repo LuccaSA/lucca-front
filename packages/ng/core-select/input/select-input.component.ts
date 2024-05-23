@@ -1,14 +1,12 @@
 /* eslint-disable @angular-eslint/no-output-on-prefix */
 import { OverlayConfig, OverlayContainer } from '@angular/cdk/overlay';
 import {
-	booleanAttribute,
 	ChangeDetectorRef,
 	Directive,
 	ElementRef,
 	EventEmitter,
 	HostBinding,
 	HostListener,
-	inject,
 	Input,
 	OnDestroy,
 	OnInit,
@@ -16,15 +14,27 @@ import {
 	TemplateRef,
 	Type,
 	ViewChild,
+	booleanAttribute,
+	inject,
 } from '@angular/core';
-import { BehaviorSubject, ReplaySubject, Subject } from 'rxjs';
+import { ControlValueAccessor } from '@angular/forms';
+import { PortalContent, getIntl } from '@lucca-front/ng/core';
+import { BehaviorSubject, Observable, ReplaySubject, Subject, defer, map, of, startWith, switchMap, take } from 'rxjs';
 import { LuOptionGrouping, LuSimpleSelectDefaultOptionComponent } from '../option';
 import { LuSelectPanelRef } from '../panel';
 import { LuOptionContext, SELECT_LABEL, SELECT_LABEL_ID } from '../select.model';
-import { ControlValueAccessor } from '@angular/forms';
+import { LU_CORE_SELECT_TRANSLATIONS } from '../select.translate';
 
 @Directive()
 export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDestroy, OnInit, ControlValueAccessor {
+	protected changeDetectorRef = inject(ChangeDetectorRef);
+	protected overlayContainerRef: HTMLElement = inject(OverlayContainer).getContainerElement();
+
+	protected labelElement: HTMLElement | undefined = inject(SELECT_LABEL);
+	protected labelId: string = inject(SELECT_LABEL_ID);
+
+	protected coreIntl = getIntl(LU_CORE_SELECT_TRANSLATIONS);
+
 	@ViewChild('inputElement')
 	private inputElementRef: ElementRef<HTMLInputElement>;
 
@@ -43,6 +53,14 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 
 	get searchable(): boolean {
 		return this.clueChange.observed;
+	}
+
+	@Input()
+	addOptionLabel: PortalContent = this.coreIntl.addOption;
+
+	@Input()
+	set addOptionStrategy(strategy: 'never' | 'always' | 'if-empty-clue') {
+		this.addOptionStrategy$.next(strategy);
 	}
 
 	@HostBinding('class.is-selected')
@@ -100,6 +118,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	@Output() clueChange = new EventEmitter<string>();
 	@Output() nextPage = new EventEmitter<void>();
 	@Output() previousPage = new EventEmitter<void>();
+	@Output() addOption = new EventEmitter<string>();
 
 	public get value(): TValue {
 		return this._value;
@@ -132,6 +151,21 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	clue: string | null = null;
 	// This is the clue stored after we selected an option to know if we should emit an empty clue on open or not
 	lastEmittedClue: string = '';
+	clue$ = defer(() => this.clueChange.pipe(startWith(this.clue)));
+
+	addOptionStrategy$ = new BehaviorSubject<'never' | 'always' | 'if-empty-clue'>('never');
+	shouldDisplayAddOption$ = this.addOptionStrategy$.pipe(
+		switchMap((strategy) => {
+			switch (strategy) {
+				case 'always':
+					return of(true);
+				case 'never':
+					return of(false);
+				case 'if-empty-clue':
+					return this.clue$.pipe(map((clue) => !!clue));
+			}
+		}),
+	);
 
 	protected onChange?: (value: TValue | null) => void;
 	protected onTouched?: () => void;
@@ -167,6 +201,8 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 				break;
 			case 'Enter':
 				if (this.isPanelOpen) {
+					// Prevent form submission when selecting a value with Enter
+					$event.preventDefault();
 					this.panelRef.selectCurrentlyHighlightedValue();
 				} else {
 					this.panelRef?.handleKeyManagerEvent($event);
@@ -190,12 +226,6 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 				break;
 		}
 	}
-
-	protected changeDetectorRef = inject(ChangeDetectorRef);
-	protected overlayContainerRef: HTMLElement = inject(OverlayContainer).getContainerElement();
-
-	protected labelElement: HTMLElement | undefined = inject(SELECT_LABEL);
-	protected labelId: string = inject(SELECT_LABEL_ID);
 
 	registerOnChange(onChange: (value: TValue) => void): void {
 		this.onChange = onChange;
@@ -240,6 +270,11 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 		setTimeout(() => this.focusInput());
 	}
 
+	emitAddOption(): void {
+		this.addOption.emit(this.clue);
+		this.panelRef?.close();
+	}
+
 	protected abstract buildPanelRef(): this['panelRef'];
 
 	protected bindInputToPanelRefEvents(): void {
@@ -248,8 +283,10 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 		}
 
 		this.panelRef.valueChanged.subscribe((value) => this.updateValue(value));
-		this.panelRef.nextPage.subscribe(() => this.nextPage.emit());
-		this.panelRef.previousPage.subscribe(() => this.previousPage.emit());
+
+		this.#pageChanged(this.panelRef.nextPage).subscribe(() => this.nextPage.emit());
+		this.#pageChanged(this.panelRef.previousPage).subscribe(() => this.previousPage.emit());
+
 		this.panelRef.activeOptionIdChanged.subscribe((optionId) => {
 			this.activeDescendant$.next(optionId);
 			this.changeDetectorRef.markForCheck();
@@ -293,5 +330,10 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 		this.clueChanged('', skipPanelOpen);
 		this.onChange?.(value);
 		this.onTouched?.();
+	}
+
+	// Ensure nextPage/previousPage does not emit too often
+	#pageChanged(pageEmitter: EventEmitter<void>): Observable<void> {
+		return this.options$.pipe(switchMap(() => pageEmitter.pipe(take(1))));
 	}
 }

@@ -39,7 +39,7 @@
 			#inputElement
 		/>
 		<div class="textField-input-affix">
-			<button class="textField-input-affix-clear clear" (click)="clearValue()" *ngIf="hasClearer && inputElement.value">
+			<button class="textField-input-affix-clear clear" type="button" (click)="clearValue()" *ngIf="hasClearer && inputElement.value">
 				<span aria-hidden="true" class="lucca-icon icon-signClose"></span>
 				<span class="u-mask">{{ intl.clear }}</span>
 			</button>

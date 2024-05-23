@@ -100,7 +100,7 @@
             // Apparence of the nexts cells
             ~ .indexTable-body-row-cell {
                 --components-indexTable-cell-inset-x-left: 0px;
-                --components-indexTable-shadow-mask: calc(var(--spacings-XS) * -1) 0px 0px 0px var(--components-indexTable-cell-background-color, var(--components-indexTable-cell-background-color-default));
+                --components-indexTable-shadow-mask: calc(var(--pr-t-spacings-100) * -1) 0px 0px 0px var(--components-indexTable-cell-background-color, var(--components-indexTable-cell-background-color-default));
                 --components-indexTable-cell-border-radius-left: 0;
                 --components-indexTable-outline-border-radius-left: 0;
                 --components-indexTable-outline-border-width-left: 0;
