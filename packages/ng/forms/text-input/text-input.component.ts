@@ -1,5 +1,5 @@
 import { NgIf, NgTemplateOutlet } from '@angular/common';
-import { booleanAttribute, Component, ElementRef, Input, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, ElementRef, Input, ViewChild, ViewEncapsulation, booleanAttribute } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LuccaIcon } from '@lucca-front/icons';
 import { getIntl } from '@lucca-front/ng/core';
@@ -31,6 +31,9 @@ export class TextInputComponent {
 
 	@Input({ transform: booleanAttribute })
 	hasSearchIcon = false;
+
+	@Input({ transform: booleanAttribute })
+	alignRight = false;
 
 	@ViewChild('inputElement', { static: true })
 	inputElementRef: ElementRef<HTMLInputElement>;

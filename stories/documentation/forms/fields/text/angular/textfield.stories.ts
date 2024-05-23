@@ -2,7 +2,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { TextInputComponent } from '@lucca-front/ng/forms';
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { Meta, StoryObj, moduleMetadata } from '@storybook/angular';
 import { cleanupTemplate, generateInputs } from 'stories/helpers/stories';
 
 export default {
@@ -86,6 +86,7 @@ export const Basic: StoryObj<TextInputComponent & { disabled: boolean } & FormFi
 		placeholder: 'Placeholder',
 		tooltip: "Je suis un message d'aide",
 		counter: 0,
+		alignRight: false,
 	},
 };
 
