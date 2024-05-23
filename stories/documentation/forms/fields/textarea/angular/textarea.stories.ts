@@ -76,7 +76,7 @@ export const Basic: StoryObj<TextareaInputComponent & { disabled: boolean } & Fo
 		inlineMessageState: 'default',
 		size: 'M',
 		placeholder: 'Placeholder',
-		tooltip: "Je suis un message d'aide",
+		tooltip: 'Je suis un message d’aide',
 		counter: 0,
 		rows: 3,
 	},

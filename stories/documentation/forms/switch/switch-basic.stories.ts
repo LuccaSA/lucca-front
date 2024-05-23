@@ -78,7 +78,7 @@ function getTemplate(args: SwitchBasicStory): string {
 
 	return `<div class="form-field${s}">
 	<label class="formLabel" for="${id}">
-		Label<span aria-hidden="true" class="lucca-icon icon-signHelp" *ngIf="help"></span>
+		Label<span *ngIf="help" class="formLabel-info"><span aria-hidden="true" class="lucca-icon icon-signHelp"></span><span class="u-mask">?</span></span>
 	</label>
 	<span class="switchField">
 		<input type="checkbox" class="switchField-input" id="${id}" aria-describedby="${id}message"${checked}${disabled}${invalid} />

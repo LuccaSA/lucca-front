@@ -1,3 +1,5 @@
+@use '@lucca-front/scss/src/commons/utils/a11y';
+
 @mixin component($atRoot: 'without: rule') {
 	color: var(--components-formLabel-color);
 	display: flex;
@@ -24,6 +26,20 @@
 			text-rendering: geometricPrecision;
 			margin-left: var(--pr-t-spacings-25);
 			top: 0;
+		}
+
+		.formLabel-info {
+			&:focus-visible {
+				outline: none;
+
+				.lucca-icon {
+					&::before {
+						border-radius: 50%;
+
+						@include a11y.focusVisible($offset: 0);
+					}
+				}
+			}
 		}
 
 		.formLabel-counter {
