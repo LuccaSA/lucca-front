@@ -4,6 +4,8 @@ import { RepeatOnHoldDirective } from './repeat-on-hold.directive';
 import { PickerControlDirection } from './misc.utils';
 import { InputDirective } from '@lucca-front/ng/form-field';
 
+let nextId = 0;
+
 @Component({
 	selector: 'lu-time-picker-part',
 	standalone: true,
@@ -49,6 +51,8 @@ export class TimePickerPartComponent {
 	@ViewChild('timePickerInput') timePickerInput?: ElementRef<HTMLInputElement>;
 
 	valueLabel = computed(() => (this.hideValue() ? '  ' : formatNumber(this.value(), this.locale, this.decimalConf())));
+
+	protected inputId = `time-picker-part-${nextId++}`;
 
 	constructor(@Inject(LOCALE_ID) private locale: string) {}
 

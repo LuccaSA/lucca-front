@@ -1,28 +1,25 @@
 import { InjectionToken } from '@angular/core';
 import { ILuTranslation } from '../../core/translate';
 
-export const LU_TIME_PICKER_TRANSLATIONS = new InjectionToken('LuTimePickerTranslations', {
-	factory: () => luTimePickerTranslations,
+export const LU_DURATION_PICKER_TRANSLATIONS = new InjectionToken('LuDurationPickerTranslations', {
+	factory: () => luDurationPickerTranslations,
 });
 
-export type TimePickerTranslations = {
-	timePickerDescriptionAccessibility: string;
+export type DurationPickerTranslations = {
 	timePickerHours: string;
 	timePickerTimeSeparator: string;
 	timePickerMinutes: string;
 };
 
-export const luTimePickerTranslations: ILuTranslation<TimePickerTranslations> = {
+export const luDurationPickerTranslations: ILuTranslation<DurationPickerTranslations> = {
 	en: {
-		timePickerDescriptionAccessibility: '%%TODO%%',
-		timePickerHours: '%%HEURES%%',
+		timePickerHours: 'hours',
 		timePickerTimeSeparator: 'h',
-		timePickerMinutes: '%%MINUTES%%',
+		timePickerMinutes: 'minutes',
 	},
 	fr: {
-		timePickerDescriptionAccessibility: '%%TODO%%',
-		timePickerHours: '%%HEURES%%',
+		timePickerHours: 'heures',
 		timePickerTimeSeparator: 'h',
-		timePickerMinutes: '%%MINUTES%%',
+		timePickerMinutes: 'minutes',
 	},
 };

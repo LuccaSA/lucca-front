@@ -15,7 +15,7 @@ export class InputDirective implements OnInit {
 	public readonly formFieldRef = inject(FORM_FIELD_INSTANCE, { optional: true });
 
 	/**
-	 * prevents message and label ids from being propagated, useful if the input holds its own message and label (like for radios)
+	 * Prevents message and label ids from being propagated, useful if the input holds its own message and label (like for radios)
 	 */
 	@Input({ transform: booleanAttribute, alias: 'luInputStandalone' })
 	standalone = false;

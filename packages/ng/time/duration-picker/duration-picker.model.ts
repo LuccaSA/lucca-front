@@ -1,4 +1,4 @@
-import { ISO8601Duration, ISO8601Time } from '../core/date-primitives';
+import { ISO8601Duration } from '../core/date-primitives';
 
 export type DurationChangeEvent = {
 	previousValue: ISO8601Duration | null;

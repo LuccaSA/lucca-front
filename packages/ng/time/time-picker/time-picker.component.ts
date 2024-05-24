@@ -1,6 +1,6 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, computed, forwardRef, input, model, output } from '@angular/core';
-import { getIntl } from '../../core/translate';
-import { ISO8601Duration, ISO8601Time } from '../core/date-primitives';
+import { ChangeDetectionStrategy, Component, computed, forwardRef, inject, input, model, output } from '@angular/core';
+import { getIntl } from '@lucca-front/ng/core';
+import { ISO8601Time } from '../core/date-primitives';
 import { convertStringToIsoTime, createIsoTimeFromHoursAndMinutes, getHoursPartFromIsoTime, getMinutesPartFromIsoTime } from '../core/date.utils';
 import { isoDurationToDateFnsDuration, isoDurationToSeconds } from '../core/duration.utils';
 import { ceilToNearest, circularize, floorToNearest, roundToNearest } from '../core/math.utils';
@@ -11,6 +11,7 @@ import { LU_TIME_PICKER_TRANSLATIONS } from './time-picker.translate';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { NgClass } from '@angular/common';
 import { BasePickerComponent } from '../core/base-picker.component';
+import { FORM_FIELD_INSTANCE } from '@lucca-front/ng/form-field';
 
 @Component({
 	selector: 'lu-time-picker',
@@ -27,6 +28,8 @@ import { BasePickerComponent } from '../core/base-picker.component';
 	],
 })
 export class TimePickerComponent extends BasePickerComponent {
+	#formFieldRef = inject(FORM_FIELD_INSTANCE, { optional: true });
+
 	protected intl = getIntl(LU_TIME_PICKER_TRANSLATIONS);
 
 	value = model<ISO8601Time>('00:00:00');
@@ -42,6 +45,13 @@ export class TimePickerComponent extends BasePickerComponent {
 	protected hoursDecimalConf = DEFAULT_TIME_DECIMAL_PIPE_FORMAT;
 
 	protected maxHours = 23;
+
+	constructor() {
+		super();
+		if (this.#formFieldRef) {
+			this.#formFieldRef.layout = 'fieldset';
+		}
+	}
 
 	writeValue(value: ISO8601Time): void {
 		this.value.set(value || '00:00:00');

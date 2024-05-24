@@ -1,15 +1,16 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, computed, forwardRef, input, model, output } from '@angular/core';
-import { getIntl } from '../../core/translate';
+import { booleanAttribute, ChangeDetectionStrategy, Component, computed, forwardRef, inject, input, model, output } from '@angular/core';
+import { getIntl } from '@lucca-front/ng/core';
 import { ISO8601Duration } from '../core/date-primitives';
 import { createDurationFromHoursAndMinutes, getHoursPartFromDuration, getMinutesPartFromDuration, isoDurationToDateFnsDuration, isoDurationToSeconds } from '../core/duration.utils';
 import { ceilToNearest, circularize, floorToNearest, roundToNearest } from '../core/math.utils';
 import { isNil, isNotNil, PickerControlDirection } from '../core/misc.utils';
 import { TimePickerPartComponent } from '../core/time-picker-part.component';
 import { DEFAULT_TIME_DECIMAL_PIPE_FORMAT, DurationChangeEvent } from './duration-picker.model';
-import { LU_TIME_PICKER_TRANSLATIONS } from './duration-picker.translate';
+import { LU_DURATION_PICKER_TRANSLATIONS } from './duration-picker.translate';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { NgClass } from '@angular/common';
 import { BasePickerComponent } from '../core/base-picker.component';
+import { FORM_FIELD_INSTANCE } from '@lucca-front/ng/form-field';
 
 @Component({
 	selector: 'lu-duration-picker',
@@ -26,7 +27,9 @@ import { BasePickerComponent } from '../core/base-picker.component';
 	],
 })
 export class DurationPickerComponent extends BasePickerComponent {
-	protected intl = getIntl(LU_TIME_PICKER_TRANSLATIONS);
+	#formFieldRef = inject(FORM_FIELD_INSTANCE, { optional: true });
+
+	protected intl = getIntl(LU_DURATION_PICKER_TRANSLATIONS);
 
 	value = model<ISO8601Duration>('PT0S');
 	min = input<ISO8601Duration>('P0S');
@@ -50,6 +53,13 @@ export class DurationPickerComponent extends BasePickerComponent {
 	protected separator = this.intl.timePickerTimeSeparator;
 
 	protected hoursDecimalConf = DEFAULT_TIME_DECIMAL_PIPE_FORMAT;
+
+	constructor() {
+		super();
+		if (this.#formFieldRef) {
+			this.#formFieldRef.layout = 'fieldset';
+		}
+	}
 
 	writeValue(value: ISO8601Duration): void {
 		this.value.set(value || 'PT0S');

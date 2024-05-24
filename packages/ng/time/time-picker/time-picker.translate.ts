@@ -6,7 +6,6 @@ export const LU_TIME_PICKER_TRANSLATIONS = new InjectionToken('LuTimePickerTrans
 });
 
 export type TimePickerTranslations = {
-	timePickerDescriptionAccessibility: string;
 	timePickerHours: string;
 	timePickerTimeSeparator: string;
 	timePickerMinutes: string;
@@ -14,15 +13,13 @@ export type TimePickerTranslations = {
 
 export const luTimePickerTranslations: ILuTranslation<TimePickerTranslations> = {
 	en: {
-		timePickerDescriptionAccessibility: '%%TODO%%',
-		timePickerHours: '%%HEURES%%',
-		timePickerTimeSeparator: 'h',
-		timePickerMinutes: '%%MINUTES%%',
+		timePickerHours: 'hours',
+		timePickerTimeSeparator: ':',
+		timePickerMinutes: 'minutes',
 	},
 	fr: {
-		timePickerDescriptionAccessibility: '%%TODO%%',
-		timePickerHours: '%%HEURES%%',
-		timePickerTimeSeparator: 'h',
-		timePickerMinutes: '%%MINUTES%%',
+		timePickerHours: 'heures',
+		timePickerTimeSeparator: ':',
+		timePickerMinutes: 'minutes',
 	},
 };
