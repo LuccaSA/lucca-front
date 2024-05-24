@@ -38,5 +38,5 @@ export class EmptyStateSectionComponent {
 	description: PortalContent;
 
 	@Input()
-	hx: number = 3;
+	hx: 1 | 2 | 3 | 4 | 5 | 6 = 3;
 }

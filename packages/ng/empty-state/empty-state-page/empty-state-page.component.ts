@@ -64,5 +64,5 @@ export class EmptyStatePageComponent {
 	description: PortalContent;
 
 	@Input()
-	hx: number = 1;
+	hx: 1 | 2 | 3 | 4 | 5 | 6 = 1;
 }
