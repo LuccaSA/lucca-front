@@ -35,6 +35,8 @@ export class DurationPickerComponent extends BasePickerComponent {
 	min = input<ISO8601Duration>('P0S');
 	max = input<ISO8601Duration>('P9999D');
 
+	displayArrows = input(false, { transform: booleanAttribute });
+
 	loopingPoint = input<ISO8601Duration>('P9999D');
 
 	hideZeroValue = input(false, { transform: booleanAttribute });
@@ -44,6 +46,15 @@ export class DurationPickerComponent extends BasePickerComponent {
 	protected hours = computed(() => getHoursPartFromDuration(this.value()));
 	protected minutes = computed(() => getMinutesPartFromDuration(this.value()));
 	protected shouldHideValue = computed(() => this.hideZeroValue() && this.hours() === 0 && this.minutes() === 0);
+
+	protected pickerClasses = computed(() => {
+		return {
+			timePicker: true,
+			'mod-withStepperHover': this.displayArrows(),
+			'mod-withStepper': this.displayArrows(),
+			[`mod-${this.size()}`]: Boolean(this.size()),
+		};
+	});
 	protected fieldsetSuffixClasses = computed(() => {
 		return {
 			'timePicker-fieldset-suffix': true,

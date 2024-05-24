@@ -1,5 +1,5 @@
 import { ISO8601Duration, ISO8601Time } from './date-primitives';
-import { booleanAttribute, computed, input, model, ViewChild } from '@angular/core';
+import { computed, input, model, ViewChild } from '@angular/core';
 import { TimePickerPartComponent } from './time-picker-part.component';
 import { ControlValueAccessor } from '@angular/forms';
 
@@ -8,8 +8,6 @@ export abstract class BasePickerComponent implements ControlValueAccessor {
 	onTouched: () => void;
 
 	step = input<ISO8601Duration>(null);
-
-	displayArrows = input(false, { transform: booleanAttribute });
 
 	disabled = model(false);
 
@@ -23,14 +21,6 @@ export abstract class BasePickerComponent implements ControlValueAccessor {
 
 	protected hoursIncrement = computed(() => this.getHoursIncrement());
 	protected minutesIncrement = computed(() => this.getMinutesIncrement());
-	protected pickerClasses = computed(() => {
-		return {
-			timePicker: true,
-			'mod-withStepperHover': this.displayArrows(),
-			'mod-withStepper': this.displayArrows(),
-			[`mod-${this.size()}`]: Boolean(this.size()),
-		};
-	});
 
 	registerOnChange(fn: () => void): void {
 		this.onChange = fn;

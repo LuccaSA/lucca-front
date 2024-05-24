@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, forwardRef, inject, input, model, output } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, computed, forwardRef, inject, input, model, output } from '@angular/core';
 import { getIntl } from '@lucca-front/ng/core';
 import { ISO8601Time } from '../core/date-primitives';
 import { convertStringToIsoTime, createIsoTimeFromHoursAndMinutes, getHoursPartFromIsoTime, getMinutesPartFromIsoTime } from '../core/date.utils';
@@ -36,10 +36,20 @@ export class TimePickerComponent extends BasePickerComponent {
 	min = input<ISO8601Time>(null);
 	max = input<ISO8601Time>(null);
 
+	displayArrows = input(false, { transform: booleanAttribute });
+
 	timeChange = output<TimeChangeEvent>();
 
 	protected hours = computed(() => getHoursPartFromIsoTime(this.value()));
 	protected minutes = computed(() => getMinutesPartFromIsoTime(this.value()));
+	protected pickerClasses = computed(() => {
+		return {
+			timePicker: true,
+			'mod-withStepperHover': this.displayArrows(),
+			'mod-withStepper': this.displayArrows(),
+			[`mod-${this.size()}`]: Boolean(this.size()),
+		};
+	});
 	protected separator = this.intl.timePickerTimeSeparator;
 
 	protected hoursDecimalConf = DEFAULT_TIME_DECIMAL_PIPE_FORMAT;
