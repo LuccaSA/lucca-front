@@ -19,7 +19,6 @@
 			display: flex;
 			align-items: center;
 			width: 100%;
-			// box-shadow: 0 0 0 1px var(--component-textField-border);
 			border-radius: var(--commons-borderRadius-M);
 			background-color: var(--component-textField-background);
 			position: relative;
@@ -106,7 +105,6 @@
 			color: var(--component-textField-prefix-color);
 			line-height: var(--component-textField-lineHeight);
 			font-size: var(--component-textField-fontSize);
-			// box-shadow: 0 0 0 1px var(--component-textField-border);
 			border-top-left-radius: var(--commons-borderRadius-M);
 			border-bottom-left-radius: var(--commons-borderRadius-M);
 
@@ -123,7 +121,6 @@
 			color: var(--component-textField-prefix-color);
 			line-height: var(--component-textField-lineHeight);
 			font-size: var(--component-textField-fontSize);
-			// box-shadow: 0 0 0 1px var(--component-textField-border);
 			border-top-right-radius: var(--commons-borderRadius-M);
 			border-bottom-right-radius: var(--commons-borderRadius-M);
 			order: 1;

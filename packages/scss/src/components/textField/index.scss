@@ -12,8 +12,8 @@
 		@include XS;
 	}
 
-	&.mod-alignRight {
-		@include alignRight;
+	&.mod-valueAlignRight {
+		@include valueAlignRight;
 	}
 
 	&.is-invalid,

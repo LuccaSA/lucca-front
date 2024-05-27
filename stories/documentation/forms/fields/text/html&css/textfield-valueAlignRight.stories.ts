@@ -1,17 +1,17 @@
 import { Meta, StoryFn } from '@storybook/angular';
 
-interface TextfieldAlignRightStory {}
+interface TextfieldValueAlignRightStory {}
 
 export default {
 	title: 'Documentation/Forms/Fields/TextField/HTML&CSS',
 	argTypes: {},
 } as Meta;
 
-function getTemplate(args: TextfieldAlignRightStory): string {
+function getTemplate(args: TextfieldValueAlignRightStory): string {
 	return `
 <div class="form-field">
 	<label class="formLabel" id="IDlabel" for="ID">Label</label>
-	<div class="textField mod-alignRight">
+	<div class="textField mod-valueAlignRight">
 		<div class="textField-input">
 			<input type="text" id="ID" class="textField-input-value" aria-labelledby="IDlabel" aria-describedby="IDmessage" placeholder="Placeholder" aria-invalid="false" />
 		</div>
@@ -21,10 +21,10 @@ function getTemplate(args: TextfieldAlignRightStory): string {
 `;
 }
 
-const Template: StoryFn<TextfieldAlignRightStory> = (args) => ({
+const Template: StoryFn<TextfieldValueAlignRightStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const AlignRight = Template.bind({});
-AlignRight.args = {};
+export const ValueAlignRight = Template.bind({});
+ValueAlignRight.args = {};
