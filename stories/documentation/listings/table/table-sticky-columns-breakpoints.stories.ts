@@ -23,20 +23,12 @@ function getTemplate(args: TableStickyColumnsAndHeaderWithBreakpointsStory): str
 					</th>
 					<!-- col 3 width passed with CSS var -->
 					<!-- col 3 offset equal to col 1 width + col 2 width -->
-<<<<<<< Updated upstream
-					<th class="table-head-row-cell mod-stickyColumn-left" [attr.style]="'--table-layoutFixed-width: 5rem; --table-stickyColumn-offset: calc(8rem + 7rem)'">
-=======
 					<th class="table-head-row-cell mod-stickyColumn-left" [attr.style]="'--table-layoutFixed-width: 5.5rem; --table-stickyColumn-offset: calc(8rem + 7rem)'">
->>>>>>> Stashed changes
 						Head cell
 					</th>
 					<!-- col containing the left shadow -->
 					<!-- col 4 offset equal to col 1 width + col 2 width + col 3 width -->
-<<<<<<< Updated upstream
-					<th class="table-head-row-cell mod-stickyColumn-left mod-stickyColumn-shadow" [attr.style]="'--table-stickyColumn-offset: calc(8rem + 7rem + 5rem)'" aria-hidden="true">
-=======
 					<th class="table-head-row-cell mod-stickyColumn-left mod-stickyColumn-shadow" [attr.style]="'--table-stickyColumn-offset: calc(8rem + 7rem + 5.5rem)'" aria-hidden="true">
->>>>>>> Stashed changes
 						<div class="stickyColumn-shadow-wrapper"></div>
 					</th>
 					<th class="table-head-row-cell">Head cell</th>
@@ -51,19 +43,11 @@ function getTemplate(args: TableStickyColumnsAndHeaderWithBreakpointsStory): str
 					<th class="table-head-row-cell">Head cell</th>
 					<!-- col containing the right shadow -->
 					<!-- col 13 offset equal to col 14 width -->
-<<<<<<< Updated upstream
-					<th class="table-head-row-cell mod-stickyColumn-right mod-stickyColumn-shadow" [attr.style]="'--table-stickyColumn-offset: 5rem'" aria-hidden="true">
-						<div class="stickyColumn-shadow-wrapper"></div>
-					</th>
-					<!-- col 14 width passed with CSS var -->
-					<th class="table-head-row-cell mod-stickyColumn-right" [attr.style]="'--table-layoutFixed-width: 5rem'">
-=======
 					<th class="table-head-row-cell mod-stickyColumn-right mod-stickyColumn-shadow" [attr.style]="'--table-stickyColumn-offset: 6rem'" aria-hidden="true">
 						<div class="stickyColumn-shadow-wrapper"></div>
 					</th>
 					<!-- col 14 width passed with CSS var -->
 					<th class="table-head-row-cell mod-stickyColumn-right" [attr.style]="'--table-layoutFixed-width: 6rem'">
->>>>>>> Stashed changes
 						Head cell
 					</th>
 				</tr>
@@ -86,11 +70,7 @@ function getTemplate(args: TableStickyColumnsAndHeaderWithBreakpointsStory): str
 						Body cell
 					</td>
 					<!-- col containing the left shadow -->
-<<<<<<< Updated upstream
-					<td class="table-body-row-cell mod-stickyColumn-left mod-stickyColumn-shadow" [attr.style]="'--table-stickyColumn-offset: calc(8rem + 7rem + 5rem)'" aria-hidden="true">
-=======
 					<td class="table-body-row-cell mod-stickyColumn-left mod-stickyColumn-shadow" [attr.style]="'--table-stickyColumn-offset: calc(8rem + 7rem + 5.5rem)'" aria-hidden="true">
->>>>>>> Stashed changes
 						<div class="stickyColumn-shadow-wrapper"></div>
 					</td>
 					<td class="table-body-row-cell">Body cell</td>
@@ -104,11 +84,7 @@ function getTemplate(args: TableStickyColumnsAndHeaderWithBreakpointsStory): str
 					<td class="table-body-row-cell">Body cell</td>
 					<td class="table-body-row-cell">Body cell</td>
 					<!-- col containing the right shadow -->
-<<<<<<< Updated upstream
-					<td class="table-body-row-cell mod-stickyColumn-right mod-stickyColumn-shadow" [attr.style]="'--table-stickyColumn-offset: 5rem'" aria-hidden="true">
-=======
 					<td class="table-body-row-cell mod-stickyColumn-right mod-stickyColumn-shadow" [attr.style]="'--table-stickyColumn-offset: 6rem'" aria-hidden="true">
->>>>>>> Stashed changes
 						<div class="stickyColumn-shadow-wrapper"></div>
 					</td>
 					<td class="table-body-row-cell mod-stickyColumn-right">
@@ -117,7 +93,6 @@ function getTemplate(args: TableStickyColumnsAndHeaderWithBreakpointsStory): str
 				</tr>
 			</tbody>
 		</table>
-	
 	`;
 }
 

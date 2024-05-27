@@ -808,18 +808,13 @@
 </section>
 
 <!-- Sticky columns with shadow-->
-<section class="contentSection">
+<section class="contentSection u-whiteSpaceNowrap">
 	<h2>Sticky columns with shadow on scroll</h2>
 	<div style="max-width: 100%" class="u-overflowAuto">
 		<table class="table mod-layoutFixedAtMediaMinS mod-stickyColumnAtMediaMinS">
 			<thead class="table-head">
 				<tr class="table-head-row">
-					<th
-						class="table-head-row-cell mod-stickyColumn-left"
-						[attr.style]="'--table-layoutFixed-width: 8rem; --table-stickyColumn-offset: 0rem'"
-					>
-						Head cell
-					</th>
+					<th class="table-head-row-cell mod-stickyColumn-left" [attr.style]="'--table-layoutFixed-width: 8rem'">Head cell</th>
 					<th
 						class="table-head-row-cell mod-stickyColumn-left"
 						[attr.style]="'--table-layoutFixed-width: 7rem; --table-stickyColumn-offset: 8rem'"
@@ -828,14 +823,14 @@
 					</th>
 					<th
 						class="table-head-row-cell mod-stickyColumn-left"
-						[attr.style]="'--table-layoutFixed-width: 5rem; --table-stickyColumn-offset: 15rem'"
+						[attr.style]="'--table-layoutFixed-width: 5.5rem; --table-stickyColumn-offset: calc(8rem + 7rem)'"
 					>
 						Head cell
 					</th>
 					<th
 						class="table-head-row-cell mod-stickyColumn-left mod-stickyColumn-shadow"
 						role="presentation"
-						[attr.style]="'--table-stickyColumn-offset: 20rem'"
+						[attr.style]="'--table-stickyColumn-offset: calc(8rem + 7rem + 5.5rem)'"
 					>
 						<div class="stickyColumn-shadow-wrapper"></div>
 					</th>
@@ -852,27 +847,24 @@
 					<th
 						class="table-head-row-cell mod-stickyColumn-right mod-stickyColumn-shadow"
 						role="presentation"
-						[attr.style]="'--table-stickyColumn-offset: 5rem'"
+						[attr.style]="'--table-stickyColumn-offset: 5.5rem'"
 					>
 						<div class="stickyColumn-shadow-wrapper"></div>
 					</th>
-					<th
-						class="table-head-row-cell mod-stickyColumn-right"
-						[attr.style]="'--table-layoutFixed-width: 5rem; --table-stickyColumn-offset: 0rem'"
-					>
-						Head cell
-					</th>
+					<th class="table-head-row-cell mod-stickyColumn-right" [attr.style]="'--table-layoutFixed-width: 5.5rem'">Head cell</th>
 				</tr>
 			</thead>
 			<tbody class="table-body">
 				<tr class="table-body-row">
-					<td class="table-body-row-cell mod-stickyColumn-left" [attr.style]="'--table-stickyColumn-offset: 0rem'">Body cell</td>
+					<td class="table-body-row-cell mod-stickyColumn-left">Body cell</td>
 					<td class="table-body-row-cell mod-stickyColumn-left" [attr.style]="'--table-stickyColumn-offset: 8rem'">Body cell</td>
-					<td class="table-body-row-cell mod-stickyColumn-left" [attr.style]="'--table-stickyColumn-offset: 15rem'">Body cell</td>
+					<td class="table-body-row-cell mod-stickyColumn-left" [attr.style]="'--table-stickyColumn-offset: calc(8rem + 7rem)'">
+						Body cell
+					</td>
 					<td
 						class="table-body-row-cell mod-stickyColumn-left mod-stickyColumn-shadow"
 						role="presentation"
-						[attr.style]="'--table-stickyColumn-offset: 20rem'"
+						[attr.style]="'--table-stickyColumn-offset: calc(8rem + 7rem + 5.5rem)'"
 					>
 						<div class="stickyColumn-shadow-wrapper"></div>
 					</td>
@@ -889,20 +881,22 @@
 					<td
 						class="table-body-row-cell mod-stickyColumn-right mod-stickyColumn-shadow"
 						role="presentation"
-						[attr.style]="'--table-stickyColumn-offset: 5rem'"
+						[attr.style]="'--table-stickyColumn-offset: 5.5rem'"
 					>
 						<div class="stickyColumn-shadow-wrapper"></div>
 					</td>
-					<td class="table-body-row-cell mod-stickyColumn-right" [attr.style]="'--table-stickyColumn-offset: 0rem'">Body cell</td>
+					<td class="table-body-row-cell mod-stickyColumn-right">Body cell</td>
 				</tr>
 				<tr class="table-body-row">
-					<td class="table-body-row-cell mod-stickyColumn-left" [attr.style]="'--table-stickyColumn-offset: 0rem'">Body cell</td>
+					<td class="table-body-row-cell mod-stickyColumn-left">Body cell</td>
 					<td class="table-body-row-cell mod-stickyColumn-left" [attr.style]="'--table-stickyColumn-offset: 8rem'">Body cell</td>
-					<td class="table-body-row-cell mod-stickyColumn-left" [attr.style]="'--table-stickyColumn-offset: 15rem'">Body cell</td>
+					<td class="table-body-row-cell mod-stickyColumn-left" [attr.style]="'--table-stickyColumn-offset: calc(8rem + 7rem)'">
+						Body cell
+					</td>
 					<td
 						class="table-body-row-cell mod-stickyColumn-left mod-stickyColumn-shadow"
 						role="presentation"
-						[attr.style]="'--table-stickyColumn-offset: 20rem'"
+						[attr.style]="'--table-stickyColumn-offset: calc(8rem + 7rem + 5.5rem)'"
 					>
 						<div class="stickyColumn-shadow-wrapper"></div>
 					</td>
@@ -919,20 +913,22 @@
 					<td
 						class="table-body-row-cell mod-stickyColumn-right mod-stickyColumn-shadow"
 						role="presentation"
-						[attr.style]="'--table-stickyColumn-offset: 5rem'"
+						[attr.style]="'--table-stickyColumn-offset: 5.5rem'"
 					>
 						<div class="stickyColumn-shadow-wrapper"></div>
 					</td>
-					<td class="table-body-row-cell mod-stickyColumn-right" [attr.style]="'--table-stickyColumn-offset: 0rem'">Body cell</td>
+					<td class="table-body-row-cell mod-stickyColumn-right">Body cell</td>
 				</tr>
 				<tr class="table-body-row">
-					<td class="table-body-row-cell mod-stickyColumn-left" [attr.style]="'--table-stickyColumn-offset: 0rem'">Body cell</td>
+					<td class="table-body-row-cell mod-stickyColumn-left">Body cell</td>
 					<td class="table-body-row-cell mod-stickyColumn-left" [attr.style]="'--table-stickyColumn-offset: 8rem'">Body cell</td>
-					<td class="table-body-row-cell mod-stickyColumn-left" [attr.style]="'--table-stickyColumn-offset: 15rem'">Body cell</td>
+					<td class="table-body-row-cell mod-stickyColumn-left" [attr.style]="'--table-stickyColumn-offset: calc(8rem + 7rem)'">
+						Body cell
+					</td>
 					<td
 						class="table-body-row-cell mod-stickyColumn-left mod-stickyColumn-shadow"
 						role="presentation"
-						[attr.style]="'--table-stickyColumn-offset: 20rem'"
+						[attr.style]="'--table-stickyColumn-offset: calc(8rem + 7rem + 5.5rem)'"
 					>
 						<div class="stickyColumn-shadow-wrapper"></div>
 					</td>
@@ -949,32 +945,91 @@
 					<td
 						class="table-body-row-cell mod-stickyColumn-right mod-stickyColumn-shadow"
 						role="presentation"
-						[attr.style]="'--table-stickyColumn-offset: 5rem'"
+						[attr.style]="'--table-stickyColumn-offset: 5.5rem'"
 					>
 						<div class="stickyColumn-shadow-wrapper"></div>
 					</td>
-					<td class="table-body-row-cell mod-stickyColumn-right" [attr.style]="'--table-stickyColumn-offset: 0rem'">Body cell</td>
+					<td class="table-body-row-cell mod-stickyColumn-right">Body cell</td>
+				</tr>
+				<tr class="table-body-row">
+					<td class="table-body-row-cell mod-stickyColumn-left">Body cell</td>
+					<td class="table-body-row-cell mod-stickyColumn-left" [attr.style]="'--table-stickyColumn-offset: 8rem'">Body cell</td>
+					<td class="table-body-row-cell mod-stickyColumn-left" [attr.style]="'--table-stickyColumn-offset: calc(8rem + 7rem)'">
+						Body cell
+					</td>
+					<td
+						class="table-body-row-cell mod-stickyColumn-left mod-stickyColumn-shadow"
+						role="presentation"
+						[attr.style]="'--table-stickyColumn-offset: calc(8rem + 7rem + 5.5rem)'"
+					>
+						<div class="stickyColumn-shadow-wrapper"></div>
+					</td>
+					<td class="table-body-row-cell">Body cell</td>
+					<td class="table-body-row-cell">Body cell</td>
+					<td class="table-body-row-cell">Body cell</td>
+					<td class="table-body-row-cell">Body cell</td>
+					<td class="table-body-row-cell">Body cell</td>
+					<td class="table-body-row-cell">Body cell</td>
+					<td class="table-body-row-cell">Body cell</td>
+					<td class="table-body-row-cell">Body cell</td>
+					<td class="table-body-row-cell">Body cell</td>
+					<td class="table-body-row-cell">Body cell</td>
+					<td
+						class="table-body-row-cell mod-stickyColumn-right mod-stickyColumn-shadow"
+						role="presentation"
+						[attr.style]="'--table-stickyColumn-offset: 5.5rem'"
+					>
+						<div class="stickyColumn-shadow-wrapper"></div>
+					</td>
+					<td class="table-body-row-cell mod-stickyColumn-right">Body cell</td>
+				</tr>
+				<tr class="table-body-row">
+					<td class="table-body-row-cell mod-stickyColumn-left">Body cell</td>
+					<td class="table-body-row-cell mod-stickyColumn-left" [attr.style]="'--table-stickyColumn-offset: 8rem'">Body cell</td>
+					<td class="table-body-row-cell mod-stickyColumn-left" [attr.style]="'--table-stickyColumn-offset: calc(8rem + 7rem)'">
+						Body cell
+					</td>
+					<td
+						class="table-body-row-cell mod-stickyColumn-left mod-stickyColumn-shadow"
+						role="presentation"
+						[attr.style]="'--table-stickyColumn-offset: calc(8rem + 7rem + 5.5rem)'"
+					>
+						<div class="stickyColumn-shadow-wrapper"></div>
+					</td>
+					<td class="table-body-row-cell">Body cell</td>
+					<td class="table-body-row-cell">Body cell</td>
+					<td class="table-body-row-cell">Body cell</td>
+					<td class="table-body-row-cell">Body cell</td>
+					<td class="table-body-row-cell">Body cell</td>
+					<td class="table-body-row-cell">Body cell</td>
+					<td class="table-body-row-cell">Body cell</td>
+					<td class="table-body-row-cell">Body cell</td>
+					<td class="table-body-row-cell">Body cell</td>
+					<td class="table-body-row-cell">Body cell</td>
+					<td
+						class="table-body-row-cell mod-stickyColumn-right mod-stickyColumn-shadow"
+						role="presentation"
+						[attr.style]="'--table-stickyColumn-offset: 5.5rem'"
+					>
+						<div class="stickyColumn-shadow-wrapper"></div>
+					</td>
+					<td class="table-body-row-cell mod-stickyColumn-right">Body cell</td>
 				</tr>
 			</tbody>
 		</table>
 	</div>
 </section>
 <!-- All in -->
-<section class="contentSection">
+<section class="contentSection u-whiteSpaceNowrap">
 	<h2 class="u-marginTopM">Sticky columns + header with shadow on scroll starting at breakpoint S</h2>
 	<div style="max-width: 100%; max-height: 150px" class="u-overflowAuto">
 		<table
 			class="table mod-layoutFixedAtMediaMinS mod-stickyColumnAtMediaMinS mod-stickyHeader"
-			[attr.style]="'--table-stickyHeader-shadow-offset: 56px'"
+			[attr.style]="'--table-stickyHeader-shadow-offset: 2.25rem'"
 		>
 			<thead class="table-head">
 				<tr class="table-head-row">
-					<th
-						class="table-head-row-cell mod-stickyColumn-left"
-						[attr.style]="'--table-layoutFixed-width: 8rem; --table-stickyColumn-offset: 0'"
-					>
-						Head cell
-					</th>
+					<th class="table-head-row-cell mod-stickyColumn-left" [attr.style]="'--table-layoutFixed-width: 8rem'">Head cell</th>
 					<th
 						class="table-head-row-cell mod-stickyColumn-left"
 						[attr.style]="'--table-layoutFixed-width: 7rem; --table-stickyColumn-offset: 8rem'"
@@ -983,14 +1038,14 @@
 					</th>
 					<th
 						class="table-head-row-cell mod-stickyColumn-left"
-						[attr.style]="'--table-layoutFixed-width: 5rem; --table-stickyColumn-offset: 15'"
+						[attr.style]="'--table-layoutFixed-width: 5.5rem; --table-stickyColumn-offset: calc(7rem + 8rem)'"
 					>
 						Head cell
 					</th>
 					<th
 						class="table-head-row-cell mod-stickyColumn-left mod-stickyColumn-shadow"
 						role="presentation"
-						[attr.style]="'--table-stickyColumn-offset: 20rem'"
+						[attr.style]="'--table-stickyColumn-offset: calc(7rem + 8rem + 5.5rem)'"
 					>
 						<div class="stickyColumn-shadow-wrapper"></div>
 					</th>
@@ -1007,16 +1062,11 @@
 					<th
 						class="table-head-row-cell mod-stickyColumn-right mod-stickyColumn-shadow"
 						role="presentation"
-						[attr.style]="'--table-stickyColumn-offset: 5rem'"
+						[attr.style]="'--table-stickyColumn-offset: 5.5rem'"
 					>
 						<div class="stickyColumn-shadow-wrapper"></div>
 					</th>
-					<th
-						class="table-head-row-cell mod-stickyColumn-right"
-						[attr.style]="'--table-layoutFixed-width: 5rem; --table-stickyColumn-offset: 0'"
-					>
-						Head cell
-					</th>
+					<th class="table-head-row-cell mod-stickyColumn-right" [attr.style]="'--table-layoutFixed-width: 5.5rem'">Head cell</th>
 				</tr>
 			</thead>
 			<tbody class="table-body">
@@ -1026,13 +1076,15 @@
 					</td>
 				</tr>
 				<tr class="table-body-row">
-					<td class="table-body-row-cell mod-stickyColumn-left" [attr.style]="'--table-stickyColumn-offset: 0rem'">Body cell</td>
+					<td class="table-body-row-cell mod-stickyColumn-left">Body cell</td>
 					<td class="table-body-row-cell mod-stickyColumn-left" [attr.style]="'--table-stickyColumn-offset: 8rem'">Body cell</td>
-					<td class="table-body-row-cell mod-stickyColumn-left" [attr.style]="'--table-stickyColumn-offset: 15rem'">Body cell</td>
+					<td class="table-body-row-cell mod-stickyColumn-left" [attr.style]="'--table-stickyColumn-offset: calc(8rem + 7rem)'">
+						Body cell
+					</td>
 					<td
 						class="table-body-row-cell mod-stickyColumn-left mod-stickyColumn-shadow"
 						role="presentation"
-						[attr.style]="'--table-stickyColumn-offset: 20rem'"
+						[attr.style]="'--table-stickyColumn-offset: calc(8rem + 7rem + 5.5rem)'"
 					>
 						<div class="stickyColumn-shadow-wrapper"></div>
 					</td>
@@ -1049,20 +1101,22 @@
 					<td
 						class="table-body-row-cell mod-stickyColumn-right mod-stickyColumn-shadow"
 						role="presentation"
-						[attr.style]="'--table-stickyColumn-offset: 5rem'"
+						[attr.style]="'--table-stickyColumn-offset: 5.5rem'"
 					>
 						<div class="stickyColumn-shadow-wrapper"></div>
 					</td>
-					<td class="table-body-row-cell mod-stickyColumn-right" [attr.style]="'--table-stickyColumn-offset: 0rem'">Body cell</td>
+					<td class="table-body-row-cell mod-stickyColumn-right">Body cell</td>
 				</tr>
 				<tr class="table-body-row">
-					<td class="table-body-row-cell mod-stickyColumn-left" [attr.style]="'--table-stickyColumn-offset: 0rem'">Body cell</td>
+					<td class="table-body-row-cell mod-stickyColumn-left">Body cell</td>
 					<td class="table-body-row-cell mod-stickyColumn-left" [attr.style]="'--table-stickyColumn-offset: 8rem'">Body cell</td>
-					<td class="table-body-row-cell mod-stickyColumn-left" [attr.style]="'--table-stickyColumn-offset: 15rem'">Body cell</td>
+					<td class="table-body-row-cell mod-stickyColumn-left" [attr.style]="'--table-stickyColumn-offset: calc(8rem + 7rem)'">
+						Body cell
+					</td>
 					<td
 						class="table-body-row-cell mod-stickyColumn-left mod-stickyColumn-shadow"
 						role="presentation"
-						[attr.style]="'--table-stickyColumn-offset: 20rem'"
+						[attr.style]="'--table-stickyColumn-offset: calc(8rem + 7rem + 5.5rem)'"
 					>
 						<div class="stickyColumn-shadow-wrapper"></div>
 					</td>
@@ -1079,20 +1133,22 @@
 					<td
 						class="table-body-row-cell mod-stickyColumn-right mod-stickyColumn-shadow"
 						role="presentation"
-						[attr.style]="'--table-stickyColumn-offset: 5rem'"
+						[attr.style]="'--table-stickyColumn-offset: 5.5rem'"
 					>
 						<div class="stickyColumn-shadow-wrapper"></div>
 					</td>
-					<td class="table-body-row-cell mod-stickyColumn-right" [attr.style]="'--table-stickyColumn-offset: 0rem'">Body cell</td>
+					<td class="table-body-row-cell mod-stickyColumn-right">Body cell</td>
 				</tr>
 				<tr class="table-body-row">
-					<td class="table-body-row-cell mod-stickyColumn-left" [attr.style]="'--table-stickyColumn-offset: 0rem'">Body cell</td>
+					<td class="table-body-row-cell mod-stickyColumn-left">Body cell</td>
 					<td class="table-body-row-cell mod-stickyColumn-left" [attr.style]="'--table-stickyColumn-offset: 8rem'">Body cell</td>
-					<td class="table-body-row-cell mod-stickyColumn-left" [attr.style]="'--table-stickyColumn-offset: 15rem'">Body cell</td>
+					<td class="table-body-row-cell mod-stickyColumn-left" [attr.style]="'--table-stickyColumn-offset: calc(8rem + 7rem)'">
+						Body cell
+					</td>
 					<td
 						class="table-body-row-cell mod-stickyColumn-left mod-stickyColumn-shadow"
 						role="presentation"
-						[attr.style]="'--table-stickyColumn-offset: 20rem'"
+						[attr.style]="'--table-stickyColumn-offset: calc(8rem + 7rem + 5.5rem)'"
 					>
 						<div class="stickyColumn-shadow-wrapper"></div>
 					</td>
@@ -1109,11 +1165,75 @@
 					<td
 						class="table-body-row-cell mod-stickyColumn-right mod-stickyColumn-shadow"
 						role="presentation"
-						[attr.style]="'--table-stickyColumn-offset: 5rem'"
+						[attr.style]="'--table-stickyColumn-offset: 5.5rem'"
 					>
 						<div class="stickyColumn-shadow-wrapper"></div>
 					</td>
-					<td class="table-body-row-cell mod-stickyColumn-right" [attr.style]="'--table-stickyColumn-offset: 0rem'">Body cell</td>
+					<td class="table-body-row-cell mod-stickyColumn-right">Body cell</td>
+				</tr>
+				<tr class="table-body-row">
+					<td class="table-body-row-cell mod-stickyColumn-left">Body cell</td>
+					<td class="table-body-row-cell mod-stickyColumn-left" [attr.style]="'--table-stickyColumn-offset: 8rem'">Body cell</td>
+					<td class="table-body-row-cell mod-stickyColumn-left" [attr.style]="'--table-stickyColumn-offset: calc(8rem + 7rem)'">
+						Body cell
+					</td>
+					<td
+						class="table-body-row-cell mod-stickyColumn-left mod-stickyColumn-shadow"
+						role="presentation"
+						[attr.style]="'--table-stickyColumn-offset: calc(8rem + 7rem + 5.5rem)'"
+					>
+						<div class="stickyColumn-shadow-wrapper"></div>
+					</td>
+					<td class="table-body-row-cell">Body cell</td>
+					<td class="table-body-row-cell">Body cell</td>
+					<td class="table-body-row-cell">Body cell</td>
+					<td class="table-body-row-cell">Body cell</td>
+					<td class="table-body-row-cell">Body cell</td>
+					<td class="table-body-row-cell">Body cell</td>
+					<td class="table-body-row-cell">Body cell</td>
+					<td class="table-body-row-cell">Body cell</td>
+					<td class="table-body-row-cell">Body cell</td>
+					<td class="table-body-row-cell">Body cell</td>
+					<td
+						class="table-body-row-cell mod-stickyColumn-right mod-stickyColumn-shadow"
+						role="presentation"
+						[attr.style]="'--table-stickyColumn-offset: 5.5rem'"
+					>
+						<div class="stickyColumn-shadow-wrapper"></div>
+					</td>
+					<td class="table-body-row-cell mod-stickyColumn-right">Body cell</td>
+				</tr>
+				<tr class="table-body-row">
+					<td class="table-body-row-cell mod-stickyColumn-left">Body cell</td>
+					<td class="table-body-row-cell mod-stickyColumn-left" [attr.style]="'--table-stickyColumn-offset: 8rem'">Body cell</td>
+					<td class="table-body-row-cell mod-stickyColumn-left" [attr.style]="'--table-stickyColumn-offset: calc(8rem + 7rem)'">
+						Body cell
+					</td>
+					<td
+						class="table-body-row-cell mod-stickyColumn-left mod-stickyColumn-shadow"
+						role="presentation"
+						[attr.style]="'--table-stickyColumn-offset: calc(8rem + 7rem + 5.5rem)'"
+					>
+						<div class="stickyColumn-shadow-wrapper"></div>
+					</td>
+					<td class="table-body-row-cell">Body cell</td>
+					<td class="table-body-row-cell">Body cell</td>
+					<td class="table-body-row-cell">Body cell</td>
+					<td class="table-body-row-cell">Body cell</td>
+					<td class="table-body-row-cell">Body cell</td>
+					<td class="table-body-row-cell">Body cell</td>
+					<td class="table-body-row-cell">Body cell</td>
+					<td class="table-body-row-cell">Body cell</td>
+					<td class="table-body-row-cell">Body cell</td>
+					<td class="table-body-row-cell">Body cell</td>
+					<td
+						class="table-body-row-cell mod-stickyColumn-right mod-stickyColumn-shadow"
+						role="presentation"
+						[attr.style]="'--table-stickyColumn-offset: 5.5rem'"
+					>
+						<div class="stickyColumn-shadow-wrapper"></div>
+					</td>
+					<td class="table-body-row-cell mod-stickyColumn-right">Body cell</td>
 				</tr>
 			</tbody>
 		</table>
