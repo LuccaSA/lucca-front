@@ -347,10 +347,6 @@
 	text-align: right;
 }
 
-@mixin layoutFixed {
-	table-layout: fixed;
-}
-
 @mixin noOffset {
 	.table-head-row-cell,
 	.table-body-row-cell,

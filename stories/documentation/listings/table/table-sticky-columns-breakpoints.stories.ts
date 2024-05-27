@@ -3,29 +3,34 @@ import { Meta, StoryFn } from '@storybook/angular';
 interface TableStickyColumnsAndHeaderWithBreakpointsStory {}
 
 export default {
-	title: 'Documentation/Listings/Table/Sticky Columns And Header With Breakpoints',
+	title: 'Documentation/Listings/Table/Sticky Columns And Header With Breakpoints ',
 	argTypes: {},
 } as Meta;
 
 function getTemplate(args: TableStickyColumnsAndHeaderWithBreakpointsStory): string {
-	return `
-	<div class="demo-wrapper">
-		<table class="table mod-layoutFixed@mediaMinXS mod-stickyColumn@mediaMinXS mod-stickyHeader">
+	return `<!-- header height passed with CSS var -->
+		<table class="table mod-layoutFixedAtMediaMinS mod-stickyColumnAtMediaMinS mod-stickyHeader" [attr.style]="'--table-stickyHeader-shadow-offset: 2.25rem'">
 			<thead class="table-head">
 				<tr class="table-head-row">
-					<th class=" table-head-row-cell mod-layoutFixed-8@mediaMinXS mod-stickyColumn-leftOffset0 " >
+					<!-- col 1 width passed with CSS var -->
+					<th class="table-head-row-cell mod-stickyColumn-left" [attr.style]="'--table-layoutFixed-width: 8rem'">
 						Head cell
 					</th>
-					<th class=" table-head-row-cell mod-layoutFixed-7@mediaMinXS mod-stickyColumn-leftOffset8 " >
+					<!-- col 2 width passed with CSS var -->
+					<!-- col 2 offset equal to col 1 width -->
+					<th class="table-head-row-cell mod-stickyColumn-left" [attr.style]="'--table-layoutFixed-width: 7rem; --table-stickyColumn-offset: 8rem'">
 						Head cell
 					</th>
-					<th class=" table-head-row-cell mod-layoutFixed-5@mediaMinXS mod-stickyColumn-leftOffset15 " >
+					<!-- col 3 width passed with CSS var -->
+					<!-- col 3 offset equal to col 1 width + col 2 width -->
+					<th class="table-head-row-cell mod-stickyColumn-left" [attr.style]="'--table-layoutFixed-width: 5.5rem; --table-stickyColumn-offset: calc(8rem + 7rem)'">
 						Head cell
 					</th>
-					<th class=" table-head-row-cell mod-stickyColumn-leftOffset20 mod-stickyColumn-shadow " role="presentation" >
+					<!-- col containing the left shadow -->
+					<!-- col 4 offset equal to col 1 width + col 2 width + col 3 width -->
+					<th class="table-head-row-cell mod-stickyColumn-left mod-stickyColumn-shadow" [attr.style]="'--table-stickyColumn-offset: calc(8rem + 7rem + 5.5rem)'" aria-hidden="true">
 						<div class="stickyColumn-shadow-wrapper"></div>
 					</th>
-					<th class="table-head-row-cell mod-columnSticky-shadowMask">Head cell</th>
 					<th class="table-head-row-cell">Head cell</th>
 					<th class="table-head-row-cell">Head cell</th>
 					<th class="table-head-row-cell">Head cell</th>
@@ -34,35 +39,40 @@ function getTemplate(args: TableStickyColumnsAndHeaderWithBreakpointsStory): str
 					<th class="table-head-row-cell">Head cell</th>
 					<th class="table-head-row-cell">Head cell</th>
 					<th class="table-head-row-cell">Head cell</th>
-					<th class="table-head-row-cell mod-columnSticky-shadowMask">Head cell</th>
-					<th class=" table-head-row-cell mod-stickyColumn-rightOffset5 mod-stickyColumn-shadow " role="presentation" >
+					<th class="table-head-row-cell">Head cell</th>
+					<th class="table-head-row-cell">Head cell</th>
+					<!-- col containing the right shadow -->
+					<!-- col 13 offset equal to col 14 width -->
+					<th class="table-head-row-cell mod-stickyColumn-right mod-stickyColumn-shadow" [attr.style]="'--table-stickyColumn-offset: 6rem'" aria-hidden="true">
 						<div class="stickyColumn-shadow-wrapper"></div>
 					</th>
-					<th class=" table-head-row-cell mod-layoutFixed-5@mediaMinXS mod-stickyColumn-rightOffset0 " >
+					<!-- col 14 width passed with CSS var -->
+					<th class="table-head-row-cell mod-stickyColumn-right" [attr.style]="'--table-layoutFixed-width: 6rem'">
 						Head cell
 					</th>
 				</tr>
 			</thead>
 			<tbody class="table-body">
-				<tr class="table-body-row mod-stickyHeader-shadow">
-					<td class="table-body-row-cell" style="--sticky-header-shadow-offset-top: 56px" colspan="16" role="presentation" >
+				<!-- row containing the top shadow -->
+				<tr class="table-body-row mod-stickyHeader-shadow" aria-hidden="true">
+					<td class="table-body-row-cell" colspan="16">
 						<div class="stickyHeader-shadow-wrapper"></div>
 					</td>
 				</tr>
-				<tr class="table-body-row">
-					<td class="table-body-row-cell mod-stickyColumn-leftOffset0">
+				<tr class="table-body-row" *ngFor="let _ of [].constructor(5)">
+					<td class="table-body-row-cell mod-stickyColumn-left">
 						Body cell
 					</td>
-					<td class="table-body-row-cell mod-stickyColumn-leftOffset8">
+					<td class="table-body-row-cell mod-stickyColumn-left" [attr.style]="'--table-stickyColumn-offset: 8rem'">
 						Body cell
 					</td>
-					<td class="table-body-row-cell mod-stickyColumn-leftOffset15">
+					<td class="table-body-row-cell mod-stickyColumn-left" [attr.style]="'--table-stickyColumn-offset: calc(8rem + 7rem)'">
 						Body cell
 					</td>
-					<td class=" table-body-row-cell mod-stickyColumn-leftOffset20 mod-stickyColumn-shadow " role="presentation" >
+					<!-- col containing the left shadow -->
+					<td class="table-body-row-cell mod-stickyColumn-left mod-stickyColumn-shadow" [attr.style]="'--table-stickyColumn-offset: calc(8rem + 7rem + 5.5rem)'" aria-hidden="true">
 						<div class="stickyColumn-shadow-wrapper"></div>
 					</td>
-					<td class="table-body-row-cell mod-columnSticky-shadowMask">Body cell</td>
 					<td class="table-body-row-cell">Body cell</td>
 					<td class="table-body-row-cell">Body cell</td>
 					<td class="table-body-row-cell">Body cell</td>
@@ -71,84 +81,25 @@ function getTemplate(args: TableStickyColumnsAndHeaderWithBreakpointsStory): str
 					<td class="table-body-row-cell">Body cell</td>
 					<td class="table-body-row-cell">Body cell</td>
 					<td class="table-body-row-cell">Body cell</td>
-					<td class="table-body-row-cell mod-columnSticky-shadowMask">Body cell</td>
-					<td class=" table-body-row-cell mod-stickyColumn-rightOffset5 mod-stickyColumn-shadow " role="presentation" >
+					<td class="table-body-row-cell">Body cell</td>
+					<td class="table-body-row-cell">Body cell</td>
+					<!-- col containing the right shadow -->
+					<td class="table-body-row-cell mod-stickyColumn-right mod-stickyColumn-shadow" [attr.style]="'--table-stickyColumn-offset: 6rem'" aria-hidden="true">
 						<div class="stickyColumn-shadow-wrapper"></div>
 					</td>
-					<td class="table-body-row-cell mod-stickyColumn-rightOffset0">
-						Body cell
-					</td>
-				</tr>
-				<tr class="table-body-row">
-					<td class="table-body-row-cell mod-stickyColumn-leftOffset0">
-						Body cell
-					</td>
-					<td class="table-body-row-cell mod-stickyColumn-leftOffset8">
-						Body cell
-					</td>
-					<td class="table-body-row-cell mod-stickyColumn-leftOffset15">
-						Body cell
-					</td>
-					<td class=" table-body-row-cell mod-stickyColumn-leftOffset20 mod-stickyColumn-shadow " role="presentation" >
-						<div class="stickyColumn-shadow-wrapper"></div>
-					</td>
-					<td class="table-body-row-cell mod-columnSticky-shadowMask">Body cell</td>
-					<td class="table-body-row-cell">Body cell</td>
-					<td class="table-body-row-cell">Body cell</td>
-					<td class="table-body-row-cell">Body cell</td>
-					<td class="table-body-row-cell">Body cell</td>
-					<td class="table-body-row-cell">Body cell</td>
-					<td class="table-body-row-cell">Body cell</td>
-					<td class="table-body-row-cell">Body cell</td>
-					<td class="table-body-row-cell">Body cell</td>
-					<td class="table-body-row-cell mod-columnSticky-shadowMask">Body cell</td>
-					<td class=" table-body-row-cell mod-stickyColumn-rightOffset5 mod-stickyColumn-shadow " role="presentation" >
-						<div class="stickyColumn-shadow-wrapper"></div>
-					</td>
-					<td class="table-body-row-cell mod-stickyColumn-rightOffset0">
-						Body cell
-					</td>
-				</tr>
-				<tr class="table-body-row">
-					<td class="table-body-row-cell mod-stickyColumn-leftOffset0">
-						Body cell
-					</td>
-					<td class="table-body-row-cell mod-stickyColumn-leftOffset8">
-						Body cell
-					</td>
-					<td class="table-body-row-cell mod-stickyColumn-leftOffset15">
-						Body cell
-					</td>
-					<td class=" table-body-row-cell mod-stickyColumn-leftOffset20 mod-stickyColumn-shadow " role="presentation" >
-						<div class="stickyColumn-shadow-wrapper"></div>
-					</td>
-					<td class="table-body-row-cell mod-columnSticky-shadowMask">Body cell</td>
-					<td class="table-body-row-cell">Body cell</td>
-					<td class="table-body-row-cell">Body cell</td>
-					<td class="table-body-row-cell">Body cell</td>
-					<td class="table-body-row-cell">Body cell</td>
-					<td class="table-body-row-cell">Body cell</td>
-					<td class="table-body-row-cell">Body cell</td>
-					<td class="table-body-row-cell">Body cell</td>
-					<td class="table-body-row-cell">Body cell</td>
-					<td class="table-body-row-cell mod-columnSticky-shadowMask">Body cell</td>
-					<td class=" table-body-row-cell mod-stickyColumn-rightOffset5 mod-stickyColumn-shadow " role="presentation" >
-						<div class="stickyColumn-shadow-wrapper"></div>
-					</td>
-					<td class="table-body-row-cell mod-stickyColumn-rightOffset0">
+					<td class="table-body-row-cell mod-stickyColumn-right">
 						Body cell
 					</td>
 				</tr>
 			</tbody>
 		</table>
-	</div>
 	`;
 }
 
-const Template: StoryFn<TableStickyColumnsAndHeaderWithBreakpointsStory> = (args) => ({
+const Template: StoryFn<TableStickyColumnsAndHeaderWithBreakpointsStory> = (args: TableStickyColumnsAndHeaderWithBreakpointsStory) => ({
 	props: args,
 	template: getTemplate(args),
-	styles: [`.demo-wrapper {overflow: auto; height: 10rem;}`],
+	styles: [`:host {display: block; overflow: auto; height: 10rem; white-space: nowrap}`],
 });
 
 export const StickyColumnsAndHeaderWithBreakpoints = Template.bind({});
