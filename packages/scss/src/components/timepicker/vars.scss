@@ -1,9 +1,11 @@
 @mixin vars {
-  --components-timepicker-border: var(--palettes-neutral-300);
-  --components-timepicker-background: var(--colors-white-color);
-  --components-timepicker-color: var(--palettes-neutral-800);
-  --components-timepicker-fontSize: var(--sizes-M-fontSize);
-  --components-timepicker-lineHeight: var(--sizes-M-lineHeight);
-  --components-timepicker-input-height: 2rem;
-  --components-timepicker-input-width: 1.5rem;
+	--components-timepicker-border: var(--palettes-neutral-300);
+	--components-timepicker-background: var(--colors-white-color);
+	--components-timepicker-color: var(--palettes-neutral-800);
+	--components-timepicker-fontSize: var(--sizes-M-fontSize);
+	--components-timepicker-lineHeight: var(--sizes-M-lineHeight);
+	--components-timepicker-input-height: 1.5rem;
+	--components-timepicker-input-width: 1.25rem;
+	--components-timepicker-padding: 0;
+	--components-timepicker-paddingFieldset: var(--pr-t-spacings-100);
 }

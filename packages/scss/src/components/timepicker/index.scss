@@ -9,25 +9,19 @@
 		@include S;
 	}
 
-	&.mod-withStepper {
-		@include withStepper;
+	&.mod-stepper {
+		@include stepper;
 	}
 
-	&.mod-withStepperHover {
-		@include withStepperHover;
+	&.mod-stepperHover {
+		@include stepperHover;
 	}
 
-	&.mod-duration {
-		@include duration;
-	}
-
-	&:has(.timePicker-fieldset-group-textfield-input[aria-invalid="true"]) {
+	&:has([aria-invalid='true']) {
 		@include invalid;
 	}
-}
 
-.timePicker-fieldset {
-	&[disabled] {
+	&:has([disabled]) {
 		@include disabled;
 	}
 }

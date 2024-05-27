@@ -1,31 +1,27 @@
 <div class="timePicker-fieldset-group-textfield">
 	<label class="formLabel u-mask" id="{{inputId}}-label" for="{{inputId}}-input">{{ label() }}</label>
-	<div class="textField">
-		<div class="textField-input">
-			<input
-				#timePickerInput
-				type="text"
-				luInput
-				luInputStandalone
-				id="{{inputId}}-input"
-				class="timePicker-fieldset-group-textfield-input"
-				attr.aria-labelledby="{{inputId}}-label"
-				[disabled]="disabled()"
-				[value]="hideValue() ? null : value()"
-				(input)="keysInputHandler($event)"
-				(click)="clickHandler($event)"
-				(keydown)="keydownHandler($event)"
-			/>
-			<span aria-hidden="true" class="timePicker-fieldset-group-textfield-display"> {{ valueLabel() }} </span>
-		</div>
+	<div class="timePicker-fieldset-group-textfield">
+		<input
+			#timePickerInput
+			type="text"
+			luInput
+			luInputStandalone
+			id="{{inputId}}-input"
+			class="timePicker-fieldset-group-textfield-input"
+			attr.aria-labelledby="{{inputId}}-label"
+			[value]="hideValue() ? null : value()"
+			(input)="keysInputHandler($event)"
+			(click)="clickHandler($event)"
+			(keydown)="keydownHandler($event)"
+		/>
+		<span aria-hidden="true" class="timePicker-fieldset-group-textfield-display">{{ valueLabel() }}</span>
 	</div>
+	@if (displayArrows()) {
+	<button class="timePicker-fieldset-group-stepper" type="button" tabindex="-1" aria-hidden="true" luRepeatOnHold (hold)="up()">
+		<span aria-hidden="true" class="lucca-icon icon-northArrow"></span>
+	</button>
+	<button class="timePicker-fieldset-group-stepper" type="button" tabindex="-1" aria-hidden="true" luRepeatOnHold (hold)="down()">
+		<span aria-hidden="true" class="lucca-icon icon-southArrow"></span>
+	</button>
+	}
 </div>
-
-@if (displayArrows() && !disabled()) {
-<button class="timePicker-fieldset-group-button" type="button" tabindex="-1" luRepeatOnHold (hold)="up()">
-	<span aria-hidden="true" class="lucca-icon icon-northArrow"></span>
-</button>
-<button class="timePicker-fieldset-group-button" type="button" tabindex="-1" luRepeatOnHold (hold)="down()">
-	<span aria-hidden="true" class="lucca-icon icon-southArrow"></span>
-</button>
-}

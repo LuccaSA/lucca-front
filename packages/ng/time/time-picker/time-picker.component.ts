@@ -1,5 +1,8 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, computed, forwardRef, inject, input, model, output } from '@angular/core';
+import { NgClass } from '@angular/common';
+import { booleanAttribute, ChangeDetectionStrategy, Component, computed, forwardRef, Input, input, model, output } from '@angular/core';
+import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { getIntl } from '@lucca-front/ng/core';
+import { BasePickerComponent } from '../core/base-picker.component';
 import { ISO8601Time } from '../core/date-primitives';
 import { convertStringToIsoTime, createIsoTimeFromHoursAndMinutes, getHoursPartFromIsoTime, getMinutesPartFromIsoTime } from '../core/date.utils';
 import { isoDurationToDateFnsDuration, isoDurationToSeconds } from '../core/duration.utils';
@@ -8,10 +11,6 @@ import { isNil, isNotNil, PickerControlDirection } from '../core/misc.utils';
 import { TimePickerPartComponent } from '../core/time-picker-part.component';
 import { DEFAULT_MIN_TIME, DEFAULT_TIME_DECIMAL_PIPE_FORMAT, TimeChangeEvent } from './time-picker.model';
 import { LU_TIME_PICKER_TRANSLATIONS } from './time-picker.translate';
-import { NG_VALUE_ACCESSOR } from '@angular/forms';
-import { NgClass } from '@angular/common';
-import { BasePickerComponent } from '../core/base-picker.component';
-import { FORM_FIELD_INSTANCE } from '@lucca-front/ng/form-field';
 
 @Component({
 	selector: 'lu-time-picker',
@@ -28,8 +27,6 @@ import { FORM_FIELD_INSTANCE } from '@lucca-front/ng/form-field';
 	],
 })
 export class TimePickerComponent extends BasePickerComponent {
-	#formFieldRef = inject(FORM_FIELD_INSTANCE, { optional: true });
-
 	protected intl = getIntl(LU_TIME_PICKER_TRANSLATIONS);
 
 	value = model<ISO8601Time>('00:00:00');
@@ -38,6 +35,8 @@ export class TimePickerComponent extends BasePickerComponent {
 
 	displayArrows = input(false, { transform: booleanAttribute });
 
+	@Input() label: string;
+
 	timeChange = output<TimeChangeEvent>();
 
 	protected hours = computed(() => getHoursPartFromIsoTime(this.value()));
@@ -45,8 +44,8 @@ export class TimePickerComponent extends BasePickerComponent {
 	protected pickerClasses = computed(() => {
 		return {
 			timePicker: true,
-			'mod-withStepperHover': this.displayArrows(),
-			'mod-withStepper': this.displayArrows(),
+			'mod-stepper': this.displayArrows(),
+			'mod-stepperHover': this.displayArrows(),
 			[`mod-${this.size()}`]: Boolean(this.size()),
 		};
 	});
@@ -58,9 +57,6 @@ export class TimePickerComponent extends BasePickerComponent {
 
 	constructor() {
 		super();
-		if (this.#formFieldRef) {
-			this.#formFieldRef.layout = 'fieldset';
-		}
 	}
 
 	writeValue(value: ISO8601Time): void {

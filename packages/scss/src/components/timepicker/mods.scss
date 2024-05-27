@@ -1,53 +1,21 @@
+@use '@lucca-front/scss/src/commons/utils/a11y';
+
 @mixin S {
-  --components-timepicker-fontSize: var(--sizes-S-fontSize);
-  --components-timepicker-lineHeight: var(--sizes-S-lineHeight);
-  --components-timepicker-input-height: 1.5rem;
-  --components-timepicker-input-width: 1rem;
+	--components-timepicker-fontSize: var(--sizes-S-fontSize);
+	--components-timepicker-lineHeight: var(--sizes-S-lineHeight);
+	--components-timepicker-paddingFieldset: var(--pr-t-spacings-75);
+	--components-timepicker-input-height: 1.25rem;
+	--components-timepicker-input-width: 1.25rem;
 }
 
-@mixin withStepper {
-  .timePicker-fieldset {
-    margin: var(--spacings-S) 0;
-  }
+@mixin stepper {
+	--components-timepicker-padding: var(--pr-t-spacings-300) 0;
 }
 
-@mixin withStepperHover {
-  .timePicker-fieldset-group-button {
-    visibility: hidden;
-  }
-
-  &:not([disabled], .is-disabled, [readonly], .is-readonly) {
-    &:is(:hover, :focus-within) {
-      .timePicker-fieldset-group-button {
-        visibility: visible;
-      }
-    }
-  }
-}
-
-@mixin duration {
-  // .timePicker-fieldset {
-  //   display: grid;
-  //   grid-template-columns: 1fr max-content;
-  //   width: 4rem;
-  //   justify-content: center;
-  //   align-items: center;
-  //   gap: 0;
-  // }
-  //
-  // .timePicker-fieldset-group {
-  //   grid-column: 1/3;
-  //   grid-row: 1;
-  // }
-  //
-  // .timePicker-fieldset-suffix {
-  //   grid-column: 2/3;
-  //   grid-row: 1;
-  //   padding-right: var(--spacings-XXS);
-  // }
-  //
-  // .timePicker-fieldset-group-textfield-input {
-  //   width: 2.5rem;
-  //   margin-left: 0.25rem;
-  // }
+@mixin stepperHover {
+	&:not(:hover, :focus-within) {
+		.timePicker-fieldset-group-stepper {
+			opacity: 0;
+		}
+	}
 }

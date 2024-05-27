@@ -1,9 +1,9 @@
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { cleanupTemplate, generateInputs } from '../../../helpers/stories';
-import { TimePickerComponent } from '@lucca-front/ng/time';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
+import { TimePickerComponent } from '@lucca-front/ng/time';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { cleanupTemplate, generateInputs } from '../../../helpers/stories';
 
 export default {
 	title: 'Documentation/Forms/Time/Time Picker/Angular Form',
@@ -32,9 +32,8 @@ export const Basic: StoryObj<TimePickerComponent & FormFieldComponent> = {
 	render: (args, { argTypes }) => {
 		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, ...inputArgs } = args;
 		return {
-			template: cleanupTemplate(`<lu-form-field ${generateInputs(
+			template: cleanupTemplate(`<lu-form-field [label]="labelID" [rolePresentationLabel]="true" ${generateInputs(
 				{
-					label,
 					hiddenLabel,
 					tooltip,
 					inlineMessage,
@@ -43,9 +42,12 @@ export const Basic: StoryObj<TimePickerComponent & FormFieldComponent> = {
 				},
 				argTypes,
 			)}>
-	<lu-time-picker ${generateInputs(inputArgs, argTypes)}
+<lu-time-picker label="${label}" ${generateInputs(inputArgs, argTypes)}
 	[(ngModel)]="example">
 	</lu-time-picker>
+	<ng-template #labelID>
+    	<span aria-hidden="true">${label}</span>
+  	</ng-template>
 </lu-form-field>
 
 {{example}}`),

@@ -3,6 +3,9 @@ import { Meta, StoryFn } from '@storybook/angular';
 interface timepickerBasicStory {
 	s: boolean;
 	disabled: boolean;
+	stepper: boolean;
+	stepperHover: boolean;
+	invalid: boolean;
 }
 
 export default {
@@ -12,9 +15,23 @@ export default {
 			control: {
 				type: 'boolean',
 			},
-			description: 'Taille : Small',
 		},
 		disabled: {
+			control: {
+				type: 'boolean',
+			},
+		},
+		invalid: {
+			control: {
+				type: 'boolean',
+			},
+		},
+		stepper: {
+			control: {
+				type: 'boolean',
+			},
+		},
+		stepperHover: {
 			control: {
 				type: 'boolean',
 			},
@@ -23,37 +40,54 @@ export default {
 } as Meta;
 
 function getTemplate(args: timepickerBasicStory): string {
-	const disabled = args.disabled ? `disabled` : '';
+	const disabled = args.disabled ? `disabled="disabled"` : '';
+	const invalid = args.invalid ? `aria-invalid="true"` : '';
 	const s = args.s ? `mod-S` : '';
+	const stepperHover = args.stepperHover ? 'mod-stepperHover' : '';
+	const stepper = args.stepper ? 'mod-stepper' : '';
+	const stepperButtons =
+		args.stepper || args.stepperHover
+			? `
+<button ${disabled} class="timePicker-fieldset-group-stepper" type="button" tabindex="-1" aria-hidden="true">
+	<span aria-hidden="true" class="lucca-icon icon-northArrow"></span>
+</button>
+<button ${disabled} class="timePicker-fieldset-group-stepper" type="button" tabindex="-1" aria-hidden="true">
+	<span aria-hidden="true" class="lucca-icon icon-southArrow"></span>
+</button>`
+			: '';
 	return `
-<fieldset class="timepicker ${s}" ${disabled}>
-	<legend class="u-mask">Durée</legend>
-	<div class="timepicker-field">
-		<label>
-			<span class="u-mask">heures</span>
-			<input class="timepicker-field-input" type="number" min="0" max="23" step="1" value="7">
-		</label>
-		<button class="timepicker-field-increment" type="button" tabindex="-1" aria-hidden="true">
-			<span class="lucca-icon icon-chevronTop"></span>
-		</button>
-		<button class="timepicker-field-increment" type="button" tabindex="-1" aria-hidden="true">
-			<span class="lucca-icon icon-chevronBottom"></span>
-		</button>
+<div class="form-field ${s}">
+	<label for="hour-input" class="formLabel" role="presentation">
+		<span aria-hidden="true">Label</span>
+	</label>
+	<div class="timePicker ${stepper} ${stepperHover}">
+		<fieldset class="timePicker-fieldset">
+			<legend><span class="u-mask">Label</span></legend>
+			<div class="timePicker-fieldset-group">
+				<label class="formLabel u-mask" id="hour-label" for="hour-input">hours</label>
+				<div class="timePicker-fieldset-group-textfield">
+					<input ${disabled} ${invalid} type="text" class="timePicker-fieldset-group-textfield-input" aria-labelledby="hour-label" id="hour-input" aria-describedby="helper" min="0" max="23" value="12" />
+					<span aria-hidden="true" class="timePicker-fieldset-group-textfield-display">12</span>
+					
+				</div>
+				${stepperButtons}
+			</div>
+			<div aria-hidden="true" class="timePicker-fieldset-groupSeparator">:</div>
+			<div class="timePicker-fieldset-group">
+				<label class="formLabel u-mask" id="minutes-label" for="minutes-input">minutes</label>
+				<div class="timePicker-fieldset-group-textfield">
+					<input ${disabled} ${invalid} type="text" class="timePicker-fieldset-group-textfield-input" aria-labelledby="minutes-label" id="minutes-input" min="0" max="59" value="12" />
+					<span aria-hidden="true" class="timePicker-fieldset-group-textfield-display">12</span>
+				</div>
+				${stepperButtons}
+			</div>
+		</fieldset>
 	</div>
-	<div class="timepicker-separator" aria-hidden="true">h</div>
-	<div class="timepicker-field">
-		<label>
-			<span class="u-mask">minutes</span>
-			<input class="timepicker-field-input" type="number" min="00" max="45" step="15" value="00">
-		</label>
-		<button class="timepicker-field-increment" type="button" tabindex="-1" aria-hidden="true">
-			<span class="lucca-icon icon-chevronTop"></span>
-		</button>
-		<button class="timepicker-field-increment" type="button" tabindex="-1" aria-hidden="true">
-			<span class="lucca-icon icon-chevronBottom"></span>
-		</button>
+	<div class="inlineMessage" id="helper">
+		<span aria-hidden="true" class="lucca-icon"></span>
+		Helper text
 	</div>
-</fieldset>
+</div>
 	`;
 }
 
@@ -63,4 +97,4 @@ const Template: StoryFn<timepickerBasicStory> = (args) => ({
 });
 
 export const Basic = Template.bind({});
-Basic.args = { s: false, disabled: false };
+Basic.args = { s: false, disabled: false, stepper: false, stepperHover: false, invalid: false };

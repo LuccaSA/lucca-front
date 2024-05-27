@@ -1,5 +1,9 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, computed, forwardRef, inject, input, model, output } from '@angular/core';
+import { NgClass } from '@angular/common';
+import { booleanAttribute, ChangeDetectionStrategy, Component, computed, forwardRef, inject, Input, input, model, output } from '@angular/core';
+import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { getIntl } from '@lucca-front/ng/core';
+import { FORM_FIELD_INSTANCE } from '@lucca-front/ng/form-field';
+import { BasePickerComponent } from '../core/base-picker.component';
 import { ISO8601Duration } from '../core/date-primitives';
 import { createDurationFromHoursAndMinutes, getHoursPartFromDuration, getMinutesPartFromDuration, isoDurationToDateFnsDuration, isoDurationToSeconds } from '../core/duration.utils';
 import { ceilToNearest, circularize, floorToNearest, roundToNearest } from '../core/math.utils';
@@ -7,10 +11,6 @@ import { isNil, isNotNil, PickerControlDirection } from '../core/misc.utils';
 import { TimePickerPartComponent } from '../core/time-picker-part.component';
 import { DEFAULT_TIME_DECIMAL_PIPE_FORMAT, DurationChangeEvent } from './duration-picker.model';
 import { LU_DURATION_PICKER_TRANSLATIONS } from './duration-picker.translate';
-import { NG_VALUE_ACCESSOR } from '@angular/forms';
-import { NgClass } from '@angular/common';
-import { BasePickerComponent } from '../core/base-picker.component';
-import { FORM_FIELD_INSTANCE } from '@lucca-front/ng/form-field';
 
 @Component({
 	selector: 'lu-duration-picker',
@@ -37,6 +37,8 @@ export class DurationPickerComponent extends BasePickerComponent {
 
 	displayArrows = input(false, { transform: booleanAttribute });
 
+	@Input() label: string;
+
 	loopingPoint = input<ISO8601Duration>('P9999D');
 
 	hideZeroValue = input(false, { transform: booleanAttribute });
@@ -50,8 +52,8 @@ export class DurationPickerComponent extends BasePickerComponent {
 	protected pickerClasses = computed(() => {
 		return {
 			timePicker: true,
-			'mod-withStepperHover': this.displayArrows(),
-			'mod-withStepper': this.displayArrows(),
+			'mod-stepper': this.displayArrows(),
+			'mod-stepperHover': this.displayArrows(),
 			[`mod-${this.size()}`]: Boolean(this.size()),
 		};
 	});

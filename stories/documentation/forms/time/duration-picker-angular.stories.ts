@@ -1,10 +1,9 @@
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { cleanupTemplate, generateInputs } from '../../../helpers/stories';
-import { TimePickerComponent } from '@lucca-front/ng/time';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { DurationPickerComponent } from '../../../../packages/ng/time/duration-picker/duration-picker.component';
+import { cleanupTemplate, generateInputs } from '../../../helpers/stories';
 
 export default {
 	title: 'Documentation/Forms/Time/Duration Picker/Angular Form',
@@ -33,7 +32,7 @@ export const Basic: StoryObj<DurationPickerComponent & FormFieldComponent> = {
 	render: (args, { argTypes }) => {
 		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, ...inputArgs } = args;
 		return {
-			template: cleanupTemplate(`<lu-form-field ${generateInputs(
+			template: cleanupTemplate(`<lu-form-field [rolePresentationLabel]="true" ${generateInputs(
 				{
 					label,
 					hiddenLabel,
