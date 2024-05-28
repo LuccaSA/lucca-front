@@ -1,5 +1,5 @@
 import { NgIf, NgTemplateOutlet } from '@angular/common';
-import { Component, ElementRef, Input, ViewChild, ViewEncapsulation, booleanAttribute } from '@angular/core';
+import { booleanAttribute, Component, ElementRef, Input, ViewChild, ViewEncapsulation } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LuccaIcon } from '@lucca-front/icons';
 import { getIntl } from '@lucca-front/ng/core';
