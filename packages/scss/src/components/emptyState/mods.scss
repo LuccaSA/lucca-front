@@ -21,6 +21,8 @@
 	}
 
 	.emptyState-content-heading {
+		@include title.h1;
+
 		@include media.max('XXS') {
 			@include title.h2;
 		}

@@ -10,7 +10,7 @@
 		<div class="emptyState-content">
 			<div *ngIf="icon" class="emptyState-content-icon" aria-hidden="true" [innerHtml]="icon | luSafeExternalSvg"></div>
 			<div class="emptyState-content-text">
-				<h1 class="emptyState-content-heading">{{ title }}</h1>
+				<div role="heading" [attr.aria-level]="hx" class="emptyState-content-heading">{{ title }}</div>
 				<p>
 					<ng-container *luPortal="description"></ng-container>
 				</p>

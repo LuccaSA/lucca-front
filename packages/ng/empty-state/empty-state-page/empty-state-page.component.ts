@@ -62,4 +62,7 @@ export class EmptyStatePageComponent {
 		required: true,
 	})
 	description: PortalContent;
+
+	@Input()
+	hx: 1 | 2 | 3 | 4 | 5 | 6 = 1;
 }
