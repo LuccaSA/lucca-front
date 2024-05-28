@@ -186,6 +186,8 @@ export const ApiV4 = generateStory({
 	name: 'Api V4',
 	description: `Pour récupérer automatiquement les options depuis une api V4 avec pagination et recherche, il suffit d'utiliser la directive \`apiV4\`.
 
+	Il est possible de modifier la clé de tri par défaut \`name\` en utilisant l'input \`sort\`.
+
 	Plus d'informations sur les directives API personnalisée sur la [documentation dédiée](https://github.com/LuccaSA/lucca-front/blob/master/docs/core-select-api-directive.md).`,
 	template: `<lu-simple-select
 	placeholder="Placeholder..."
