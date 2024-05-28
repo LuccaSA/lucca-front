@@ -100,7 +100,7 @@
 
 		.textField-prefix {
 			display: flex;
-			padding: 0 var(--component-textField-padding);
+			padding-left: var(--component-textField-padding);
 			align-items: center;
 			color: var(--component-textField-prefix-color);
 			line-height: var(--component-textField-lineHeight);
@@ -116,7 +116,7 @@
 
 		.textField-suffix {
 			display: flex;
-			padding: 0 var(--component-textField-padding);
+			padding-right: var(--component-textField-padding);
 			align-items: center;
 			color: var(--component-textField-prefix-color);
 			line-height: var(--component-textField-lineHeight);
