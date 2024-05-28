@@ -301,11 +301,7 @@
 	}
 
 	// Error
-	:host-context(.textfield-input.is-error) {
-		&::after {
-			color: var(--palettes-error-700);
-		}
-
+	:host-context(.textfield-input.is-error, .textfield-input.is-invalid, .textfield-input.ng-invalid.ng-touched) {
 		.lu-select-placeholder {
 			color: var(--palettes-error-400);
 		}

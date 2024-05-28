@@ -41,7 +41,7 @@ export class LuCoreSelectApiV3Directive<T extends ILuApiItem> extends ALuCoreSel
 	protected override params$ = combineLatest([this.fields$, this.filters$, this.orderBy$, this.clue$]).pipe(
 		map(([fields, filters, orderBy, clue]) => ({
 			...filters,
-			fields,
+			...(fields ? { fields } : {}),
 			...(orderBy ? { orderBy } : {}),
 			...(clue ? { name: `like,${clue}` } : {}),
 		})),

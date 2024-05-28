@@ -1,4 +1,4 @@
-import { HorizontalConnectionPos, VerticalConnectionPos } from '@angular/cdk/overlay';
+import { HorizontalConnectionPos, OverlayRef, VerticalConnectionPos } from '@angular/cdk/overlay';
 import { TemplateRef } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 
@@ -10,6 +10,7 @@ export declare interface ILuPopoverPanel<T = unknown> {
 	panelId?: string;
 	triggerId?: string;
 	templateRef?: TemplateRef<T>;
+	overlayRef: OverlayRef;
 
 	/** will emit when the panel wants to close */
 	close: Observable<void>;
@@ -28,9 +29,11 @@ export declare interface ILuPopoverPanel<T = unknown> {
 
 	/** method called by the trigger when it opens the popover */
 	onOpen(): void;
+
 	/** method called by the trigger when it closes the popover */
 	onClose(): void;
 }
+
 /**
  * abstract class for basic implementation of a popover panel
  */
@@ -47,6 +50,7 @@ export abstract class ALuPopoverPanel<T = unknown> implements ILuPopoverPanel<T>
 	get closeOnClick() {
 		return this._closeOnClick;
 	}
+
 	set closeOnClick(coc: boolean) {
 		this._closeOnClick = coc;
 	}
@@ -55,6 +59,7 @@ export abstract class ALuPopoverPanel<T = unknown> implements ILuPopoverPanel<T>
 	get trapFocus() {
 		return this._trapFocus;
 	}
+
 	set trapFocus(tf: boolean) {
 		this._trapFocus = tf;
 	}
@@ -63,6 +68,7 @@ export abstract class ALuPopoverPanel<T = unknown> implements ILuPopoverPanel<T>
 	get scrollStrategy() {
 		return this._scrollStrategy;
 	}
+
 	set scrollStrategy(ss: LuPopoverScrollStrategy) {
 		this._scrollStrategy = ss;
 	}
@@ -71,6 +77,7 @@ export abstract class ALuPopoverPanel<T = unknown> implements ILuPopoverPanel<T>
 	get templateRef() {
 		return this._templateRef;
 	}
+
 	set templateRef(tr: TemplateRef<T>) {
 		this._templateRef = tr;
 	}
@@ -80,9 +87,11 @@ export abstract class ALuPopoverPanel<T = unknown> implements ILuPopoverPanel<T>
 	get panelClasses() {
 		return this._panelClasses;
 	}
+
 	set panelClasses(cl: string) {
 		this._panelClasses = cl;
 	}
+
 	get panelClassesMap(): Record<string, boolean> {
 		const map: Record<string, boolean> = this._panelClasses
 			.split(' ')
@@ -99,9 +108,11 @@ export abstract class ALuPopoverPanel<T = unknown> implements ILuPopoverPanel<T>
 	get contentClasses() {
 		return this._contentClasses;
 	}
+
 	set contentClasses(cl: string) {
 		this._contentClasses = cl;
 	}
+
 	get contentClassesMap() {
 		return this._contentClasses.split(' ').reduce((obj: Record<string, boolean>, className: string) => {
 			obj[className] = true;
@@ -109,11 +120,14 @@ export abstract class ALuPopoverPanel<T = unknown> implements ILuPopoverPanel<T>
 		}, {});
 	}
 
+	public overlayRef: OverlayRef;
+
 	/** Classes to be passed into the popover's overlay */
 	protected _overlayPaneClass: string | string[];
 	public get overlayPaneClass() {
 		return this._overlayPaneClass;
 	}
+
 	public set overlayPaneClass(opc) {
 		this._overlayPaneClass = opc;
 	}
@@ -121,6 +135,7 @@ export abstract class ALuPopoverPanel<T = unknown> implements ILuPopoverPanel<T>
 	// /** Config object to be passed into the popover's content ngStyle */
 
 	protected _keydownEventsSub: Subscription;
+
 	set keydownEvents$(evt$: Observable<KeyboardEvent>) {
 		if (!this._keydownEventsSub) {
 			this._keydownEventsSub = evt$.subscribe((e) => this._handleKeydown(e));
@@ -130,8 +145,11 @@ export abstract class ALuPopoverPanel<T = unknown> implements ILuPopoverPanel<T>
 	close: Observable<void>;
 	open: Observable<void>;
 	hovered: Observable<boolean>;
+
 	abstract _emitCloseEvent(): void;
+
 	abstract _emitOpenEvent(): void;
+
 	abstract _emitHoveredEvent(hovered: boolean): void;
 
 	setPositionClasses(posX: HorizontalConnectionPos, posY: VerticalConnectionPos): void {
@@ -150,9 +168,11 @@ export abstract class ALuPopoverPanel<T = unknown> implements ILuPopoverPanel<T>
 	onOpen() {
 		this._isOpen = true;
 	}
+
 	onClose() {
 		this._isOpen = false;
 	}
+
 	/**
 	 * TODO: Refactor when @angular/cdk includes feature I mentioned on github see link below.
 	 * https://github.com/angular/material2/pull/5493#issuecomment-313085323
@@ -161,10 +181,12 @@ export abstract class ALuPopoverPanel<T = unknown> implements ILuPopoverPanel<T>
 	onMouseOver() {
 		this._emitHoveredEvent(true);
 	}
+
 	/** Enables close of popover when mouse leaving popover element */
 	onMouseLeave() {
 		this._emitHoveredEvent(false);
 	}
+
 	/** does nothing but must be overridable */
 	// eslint-disable-next-line @typescript-eslint/no-empty-function
 	onMouseDown() {}

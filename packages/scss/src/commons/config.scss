@@ -475,35 +475,35 @@ $borderRadius: (
 // $elevations are deprecated
 $elevations: (
 	'1':
-		'0 1px 2px #{color.transparentize(var(--palettes-neutral-400), 0.06)}, 0px 2px 8px #{color.transparentize(var(--palettes-neutral-400), 0.04)}',
+		'0 1px 2px #{color.transparentize(var(--palettes-neutral-900), 0.06)}, 0px 2px 8px #{color.transparentize(var(--palettes-neutral-900), 0.04)}',
 	'2':
-		'0 0 0 1px #{color.transparentize(var(--palettes-neutral-400), 0.03)}, 0 1px 2px #{color.transparentize(var(--palettes-neutral-400), 0.02)}, 0 2px 6px #{color.transparentize(var(--palettes-neutral-400), 0.05)}',
+		'0 0 0 1px #{color.transparentize(var(--palettes-neutral-900), 0.03)}, 0 1px 2px #{color.transparentize(var(--palettes-neutral-900), 0.02)}, 0 2px 6px #{color.transparentize(var(--palettes-neutral-900), 0.05)}',
 	'3':
-		'0 0 0 1px #{color.transparentize(var(--palettes-neutral-400), 0.03)}, 0 2px 4px #{color.transparentize(var(--palettes-neutral-400), 0.02)}, 0 4px 10px #{color.transparentize(var(--palettes-neutral-400), 0.06)}',
+		'0 0 0 1px #{color.transparentize(var(--palettes-neutral-900), 0.03)}, 0 2px 4px #{color.transparentize(var(--palettes-neutral-900), 0.02)}, 0 4px 10px #{color.transparentize(var(--palettes-neutral-900), 0.06)}',
 	'4':
-		'0 0 0 1px #{color.transparentize(var(--palettes-neutral-400), 0.03)}, 0 3px 6px #{color.transparentize(var(--palettes-neutral-400), 0.04)}, 0 4px 16px #{color.transparentize(var(--palettes-neutral-400), 0.08)}',
+		'0 0 0 1px #{color.transparentize(var(--palettes-neutral-900), 0.03)}, 0 3px 6px #{color.transparentize(var(--palettes-neutral-900), 0.04)}, 0 4px 16px #{color.transparentize(var(--palettes-neutral-900), 0.08)}',
 	'5':
-		'0 0 0 1px #{color.transparentize(var(--palettes-neutral-400), 0.03)}, 0 4px 8px #{color.transparentize(var(--palettes-neutral-400), 0.06)}, 0 12px 32px #{color.transparentize(var(--palettes-neutral-400), 0.08)}',
+		'0 0 0 1px #{color.transparentize(var(--palettes-neutral-900), 0.03)}, 0 4px 8px #{color.transparentize(var(--palettes-neutral-900), 0.06)}, 0 12px 32px #{color.transparentize(var(--palettes-neutral-900), 0.08)}',
 	'6':
-		'0 0 0 1px #{color.transparentize(var(--palettes-neutral-400), 0.03)}, -2px 2px 8px #{color.transparentize(var(--palettes-neutral-400), 0.04)}, -12px 6px 24px #{color.transparentize(var(--palettes-neutral-400), 0.06)}',
+		'0 0 0 1px #{color.transparentize(var(--palettes-neutral-900), 0.03)}, -2px 2px 8px #{color.transparentize(var(--palettes-neutral-900), 0.04)}, -12px 6px 24px #{color.transparentize(var(--palettes-neutral-900), 0.06)}',
 );
 
 // $boxShadows are deprecated
 $boxShadows: (
 	'XXS':
-		'0 2px 8px #{color.transparentize(var(--palettes-neutral-400), 0.2)}, 0 1px 2px #{color.transparentize(var(--palettes-neutral-400), 0.15)}',
+		'0 2px 8px #{color.transparentize(var(--palettes-neutral-900), 0.2)}, 0 1px 2px #{color.transparentize(var(--palettes-neutral-900), 0.15)}',
 	'XS':
-		'0 1px 2px #{color.transparentize(var(--palettes-neutral-400), 0.06)}, 0 2px 8px #{color.transparentize(var(--palettes-neutral-400), 0.04)}',
+		'0 1px 2px #{color.transparentize(var(--palettes-neutral-900), 0.06)}, 0 2px 8px #{color.transparentize(var(--palettes-neutral-900), 0.04)}',
 	'S':
-		'0 0 0 1px #{color.transparentize(var(--palettes-neutral-400), 0.03)}, 0 1px 2px #{color.transparentize(var(--palettes-neutral-400), 0.02)}, 0 2px 6px #{color.transparentize(var(--palettes-neutral-400), 0.06)}',
+		'0 0 0 1px #{color.transparentize(var(--palettes-neutral-900), 0.03)}, 0 1px 2px #{color.transparentize(var(--palettes-neutral-900), 0.02)}, 0 2px 6px #{color.transparentize(var(--palettes-neutral-900), 0.06)}',
 	'M':
-		'0 0 0 1px #{color.transparentize(var(--palettes-neutral-400), 0.03)}, 0 2px 4px #{color.transparentize(var(--palettes-neutral-400), 0.02)}, 0 4px 10px #{color.transparentize(var(--palettes-neutral-400), 0.06)}',
+		'0 0 0 1px #{color.transparentize(var(--palettes-neutral-900), 0.03)}, 0 2px 4px #{color.transparentize(var(--palettes-neutral-900), 0.02)}, 0 4px 10px #{color.transparentize(var(--palettes-neutral-900), 0.06)}',
 	'L':
-		'0 0 0 1px #{color.transparentize(var(--palettes-neutral-400), 0.03)}, 0 3px 6px #{color.transparentize(var(--palettes-neutral-400), 0.04)}, 0 4px 16px #{color.transparentize(var(--palettes-neutral-400), 0.08)}',
+		'0 0 0 1px #{color.transparentize(var(--palettes-neutral-900), 0.03)}, 0 3px 6px #{color.transparentize(var(--palettes-neutral-900), 0.04)}, 0 4px 16px #{color.transparentize(var(--palettes-neutral-900), 0.08)}',
 	'XL':
-		'0 0 0 1px #{color.transparentize(var(--palettes-neutral-400), 0.03)}, 0 4px 8px #{color.transparentize(var(--palettes-neutral-400), 0.06)}, 0 12px 32px #{color.transparentize(var(--palettes-neutral-400), 0.08)}',
+		'0 0 0 1px #{color.transparentize(var(--palettes-neutral-900), 0.03)}, 0 4px 8px #{color.transparentize(var(--palettes-neutral-900), 0.06)}, 0 12px 32px #{color.transparentize(var(--palettes-neutral-900), 0.08)}',
 	'XXL':
-		'0 0 0 1px #{color.transparentize(var(--palettes-neutral-400), 0.03)}, -2px 2px 8px #{color.transparentize(var(--palettes-neutral-400), 0.04)}, -12px 6px 24px #{color.transparentize(var(--palettes-neutral-400), 0.06)}',
+		'0 0 0 1px #{color.transparentize(var(--palettes-neutral-900), 0.03)}, -2px 2px 8px #{color.transparentize(var(--palettes-neutral-900), 0.04)}, -12px 6px 24px #{color.transparentize(var(--palettes-neutral-900), 0.06)}',
 );
 
 $elevation: (

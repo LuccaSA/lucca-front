@@ -8,9 +8,11 @@ import {
 	ChangeDetectorRef,
 	Component,
 	ContentChildren,
+	DestroyRef,
 	Directive,
 	EventEmitter,
 	forwardRef,
+	inject,
 	Inject,
 	Input,
 	OnDestroy,
@@ -26,12 +28,15 @@ import { delay, map, share } from 'rxjs/operators';
 import { LuOptionItemComponent } from '../item';
 import { ALuOptionItem } from '../item/option-item.model';
 import { ALuOptionPicker, ILuOptionPickerPanel, LuOptionComparer } from './option-picker.model';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Directive()
 export abstract class ALuOptionPickerComponent<T, O extends import('../item/option-item.model').ILuOptionItem<T> = import('../item/option-item.model').ILuOptionItem<T>>
 	extends ALuOptionPicker<T, O>
 	implements ILuOptionPickerPanel<T>, OnDestroy, AfterViewInit
 {
+	protected destroyRef = inject(DestroyRef);
+
 	/**
 	 * This method takes classes set on the host lu-popover element and applies them on the
 	 * popover template that displays in the overlay container.  Otherwise, it's difficult
@@ -42,6 +47,7 @@ export abstract class ALuOptionPickerComponent<T, O extends import('../item/opti
 	set inputPanelClasses(classes: string) {
 		this.panelClasses = classes;
 	}
+
 	/**
 	 * This method takes classes set on the host lu-popover element and applies them on the
 	 * popover template that displays in the overlay container. Otherwise, it's difficult
@@ -75,6 +81,9 @@ export abstract class ALuOptionPickerComponent<T, O extends import('../item/opti
 	protected _optionsQL: QueryList<O>;
 	@ContentChildren(ALuOptionItem, { descendants: true }) set optionsQL(ql: QueryList<O>) {
 		this._optionsQL = ql;
+		ql.changes.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {
+			this.overlayRef.updatePosition();
+		});
 	}
 
 	constructor(protected _changeDetectorRef: ChangeDetectorRef, @Inject(DOCUMENT) protected document: Document) {
@@ -86,24 +95,30 @@ export abstract class ALuOptionPickerComponent<T, O extends import('../item/opti
 	protected _emitSelectValue(val: T) {
 		this.onSelectValue.emit(val);
 	}
+
 	ngOnDestroy() {
 		super.destroy();
 	}
+
 	_emitOpenEvent(): void {
 		this.open.emit();
 	}
+
 	_emitCloseEvent(): void {
 		this.close.emit();
 	}
+
 	_emitHoveredEvent(h: boolean): void {
 		this.hovered.emit(h);
 	}
+
 	override onOpen() {
 		super.onOpen();
 		this.highlightIndex = -1;
 		this._incrHighlight();
 		this._applySelected();
 	}
+
 	@ViewChild(TemplateRef, { static: true })
 	set vcTemplateRef(tr: TemplateRef<HTMLElement>) {
 		this.templateRef = tr;
@@ -130,14 +145,17 @@ export abstract class ALuOptionPickerComponent<T, O extends import('../item/opti
 				break;
 		}
 	}
+
 	protected _highlightIndex = -1;
 	get highlightIndex() {
 		return this._highlightIndex;
 	}
+
 	set highlightIndex(i: number) {
 		this._highlightIndex = i;
 		this._applyHighlight(true);
 	}
+
 	protected _initHighlight() {
 		this._subs.add(
 			this._options$.subscribe((options) => {
@@ -152,10 +170,12 @@ export abstract class ALuOptionPickerComponent<T, O extends import('../item/opti
 			this.highlightIndex = -1;
 		}, 1);
 	}
+
 	protected _incrHighlight() {
 		const nextIndex = this._options.findIndex((item, index) => index > this.highlightIndex && !item.disabled);
 		this.highlightIndex = nextIndex > -1 ? nextIndex : this._options.findIndex((item) => !item.disabled);
 	}
+
 	protected _decrHighlight() {
 		//NB: findLastIndex would be better but is not available on this project
 		let nextIndex = -1;
@@ -180,6 +200,7 @@ export abstract class ALuOptionPickerComponent<T, O extends import('../item/opti
 		}
 		this.highlightIndex = nextIndex;
 	}
+
 	protected _applyHighlight(reScroll = false) {
 		if (!this.isOpen) {
 			return;
@@ -202,6 +223,7 @@ export abstract class ALuOptionPickerComponent<T, O extends import('../item/opti
 		}
 		this._changeDetectorRef.markForCheck();
 	}
+
 	protected _scrollToHighlight(targetElt: HTMLElement) {
 		if (!targetElt) {
 			return;
@@ -226,6 +248,7 @@ export abstract class ALuOptionPickerComponent<T, O extends import('../item/opti
 			return;
 		}
 	}
+
 	protected _selectHighlighted() {
 		const options = this._options ? this._options : [];
 		const highlightedOption = options[this.highlightIndex];
@@ -233,6 +256,7 @@ export abstract class ALuOptionPickerComponent<T, O extends import('../item/opti
 			this._toggle(highlightedOption);
 		}
 	}
+
 	protected _initSelected() {
 		this._subs.add(
 			this._options$.subscribe(() => {
@@ -240,6 +264,7 @@ export abstract class ALuOptionPickerComponent<T, O extends import('../item/opti
 			}),
 		);
 	}
+
 	protected _applySelected() {
 		if (!this._options) {
 			return;
@@ -292,10 +317,12 @@ export abstract class ALuOptionPickerComponent<T, O extends import('../item/opti
 		this._initHighlight();
 		this._initSelected();
 	}
+
 	ngAfterViewInit() {
 		this.initItems();
 	}
 }
+
 /**
  * basic option picker panel
  */

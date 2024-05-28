@@ -1,17 +1,6 @@
 import { delay, http, HttpResponse } from 'msw';
 import { applyFilter, applyV3Paging, applyV4Paging, applyV4Sorting, genericHandler, handleFieldsRoot } from './helpers';
-import {
-	mockAxisSectionsV3,
-	mockDepartmentsTree,
-	mockEstablishments,
-	mockJobQualifications,
-	mockLegalUnits,
-	mockMe,
-	mockProjectUsers,
-	mockUserPopover,
-	mockUsers,
-} from './mocks';
-
+import { mockAxisSectionsV3, mockDepartmentsTree, mockEstablishments, mockJobQualifications, mockLegalUnits, mockMe, mockProjectUsers, mockUserPopover, mockUsers } from './mocks';
 
 const usersSearchHandler = genericHandler(
 	mockUsers,
@@ -197,5 +186,31 @@ export const handlers = [
 	http.get('/lucca-banner/meta/api/feature-flag-statuses/user-popover-is-activated', async () => {
 		await delay(300);
 		return HttpResponse.json({ key: 'user-popover-is-activated', status: 'Enabled' });
-	})
+	}),
+	http.get(
+		'/api/legumes',
+		genericHandler(
+			[
+				{ id: 1, name: 'Carotte', color: 'orange' },
+				{ id: 2, name: 'Haricot', color: 'green' },
+				{ id: 3, name: 'Poireau', color: 'white' },
+				{ id: 4, name: 'Radis', color: 'red' },
+				{ id: 5, name: 'Salade', color: 'green' },
+			],
+			// Get and parse params from query params
+			{
+				page: (p) => parseInt(p),
+				limit: (l) => parseInt(l),
+				search: (s) => s.toLowerCase(),
+			},
+			{
+				// Apply filters to items
+				search: applyFilter((legume, { search }) => legume.name.toLowerCase().includes(search)),
+				// Then paging/limiting
+				page: applyV4Paging,
+				limit: (items, { limit }) => items.slice(0, limit),
+			},
+			(items) => ({ items }),
+		),
+	),
 ];

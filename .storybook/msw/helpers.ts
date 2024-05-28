@@ -25,9 +25,9 @@ export function genericHandler<T, TRawParams extends Record<string, (param: stri
 			allParams[paramKey] = parserFn(url.searchParams.get(paramKey)!);
 		}
 
-		for (const [paramName, paramValue] of Object.entries(allParams)) {
+		for (const paramName of Object.keys(allParams)) {
 			// Typing is a bit tricky here, the public typings of this method is OK though
-			entities = modifierByQueryParam[paramName]?.(entities, allParams as AllParsedParams<TRawParams>);
+			entities = modifierByQueryParam[paramName] ? modifierByQueryParam[paramName](entities, allParams as AllParsedParams<TRawParams>) : entities;
 		}
 
 		return HttpResponse.json(buildResponse(entities, allParams as AllParsedParams<TRawParams>));

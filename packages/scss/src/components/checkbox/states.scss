@@ -17,12 +17,9 @@
 
 	&:checked ~ .checkbox-label {
 		&::before {
+			color: var(--palettes-neutral-500);
 			background-color: var(--palettes-neutral-100);
 			border-color: var(--palettes-neutral-100);
-		}
-
-		&::after {
-			color: var(--palettes-neutral-500);
 		}
 	}
 }
@@ -30,7 +27,7 @@
 @mixin incomplete {
 	~ .checkbox-mixed ~ .checkbox-label,
 	~ .checkbox-label {
-		&::after {
+		&::before {
 			@include icon.generate('maths_minus');
 		}
 	}
