@@ -64,7 +64,7 @@ function getTemplate(args: TimelinesVerticalStory): string {
 	`;
 }
 
-const Template: StoryFn<TimelinesVerticalStory> = (args: TimelinesVerticalStory) => ({
+const Template: StoryFn<TimelinesVerticalStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 });

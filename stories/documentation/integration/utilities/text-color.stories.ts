@@ -7,25 +7,22 @@ export default {
 } as Meta;
 
 function getTemplate(args: TextColorStory): string {
-	return `
-		<span class="u-textDefault">Default</span>
-		<span class="u-textLight">Light</span>
-		<span class="u-textPlaceholder">Placeholder</span>
-		<span class="u-textPrimary">Primary</span>
-		<span class="u-textSecondary">Secondary</span>
-		<span class="u-textSuccess">Success</span>
-		<span class="u-textWarning">Warning</span>
-		<span class="u-textError">Error</span>
-	`;
+	return `<span class="u-textDefault">Default</span>
+<span class="u-textLight">Light</span>
+<span class="u-textPlaceholder">Placeholder</span>
+<span class="u-textProduct">Product</span>
+<span class="u-textSuccess">Success</span>
+<span class="u-textWarning">Warning</span>
+<span class="u-textError">Error</span>`;
 }
 
-const Template: StoryFn<TextColorStory> = (args: TextColorStory) => ({
+const Template: StoryFn<TextColorStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [
 		`
 		span {
-			padding-right: var(--spacings-S);
+			padding-right: var(--pr-t-spacings-200);
 		}
 		}`,
 	],

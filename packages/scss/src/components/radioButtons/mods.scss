@@ -1,11 +1,11 @@
 @mixin S {
 	--components-radioButtons-font-size: var(--sizes-S-fontSize);
 	--components-radioButtons-line-height: var(--sizes-S-lineHeight);
-	--components-radioButtons-padding: .375rem .75rem;
+	--components-radioButtons-padding: var(--pr-t-spacings-75) var(--pr-t-spacings-150);
 }
 
 @mixin XS {
 	--components-radioButtons-font-size: var(--sizes-XS-fontSize);
 	--components-radioButtons-line-height: var(--sizes-XS-lineHeight);
-	--components-radioButtons-padding: var(--spacings-XXS) var(--spacings-XS);
+	--components-radioButtons-padding: var(--pr-t-spacings-50) var(--pr-t-spacings-100);
 }

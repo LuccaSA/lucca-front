@@ -1,13 +1,13 @@
-@mixin grey {
-	background-color: var(--commons-background-base);
+@mixin neutral {
+	background-color: var(--pr-t-elevation-surface-default);
 }
 
 @mixin S {
-	padding-left: var(--spacings-L);
-	padding-right: var(--spacings-L);
+	padding-left: var(--pr-t-spacings-400);
+	padding-right: var(--pr-t-spacings-400);
 }
 
 @mixin XS {
-	padding-left: var(--spacings-S);
-	padding-right: var(--spacings-S);
+	padding-left: var(--pr-t-spacings-200);
+	padding-right: var(--pr-t-spacings-200);
 }

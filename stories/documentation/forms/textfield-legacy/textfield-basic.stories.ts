@@ -74,7 +74,7 @@ function getTemplate(args: TextfieldBasicStory): string {
 	const disabled = args.disabled ? ` disabled` : '';
 	const required = args.required ? ` aria-required="true"` : '';
 	const invert = args.invert ? ` mod-invert` : '';
-	const size = args.size ? ' '+args.size : '';
+	const size = args.size ? ' ' + args.size : '';
 	const noLabel = args.noLabel ? ` mod-noLabel` : '';
 	const error = args.error ? ` is-error` : '';
 	return `<label class="textfield${classes}${size}${noLabel}${invert}">
@@ -83,7 +83,7 @@ function getTemplate(args: TextfieldBasicStory): string {
 </label>`;
 }
 
-const Template: StoryFn<TextfieldBasicStory> = (args: TextfieldBasicStory) => ({
+const Template: StoryFn<TextfieldBasicStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [
@@ -96,4 +96,4 @@ const Template: StoryFn<TextfieldBasicStory> = (args: TextfieldBasicStory) => ({
 });
 
 export const Basic = Template.bind({});
-Basic.args = { display: '', style: '', noLabel: false, width: '', size: '', disabled: false, error: false, required: false, invert: false, };
+Basic.args = { display: '', style: '', noLabel: false, width: '', size: '', disabled: false, error: false, required: false, invert: false };

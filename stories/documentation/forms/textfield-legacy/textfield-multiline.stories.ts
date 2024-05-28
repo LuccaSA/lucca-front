@@ -14,7 +14,7 @@ function getTemplate(args: TextfieldMultilineStory): string {
 </label>`;
 }
 
-const Template: StoryFn<TextfieldMultilineStory> = (args: TextfieldMultilineStory) => ({
+const Template: StoryFn<TextfieldMultilineStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 });

@@ -5,7 +5,7 @@
 
 	@at-root ($atRoot) {
 		.collapse-title {
-			margin-bottom: var(--spacings-XXS);
+			margin-bottom: var(--pr-t-spacings-50);
 			display: inline-flex;
 			overflow: hidden;
 			cursor: pointer;
@@ -16,14 +16,14 @@
 
 			&:focus-within,
 			&:hover {
-				color: var(--palettes-grey-900);
+				color: var(--palettes-neutral-900);
 			}
 
 			&::before {
 				@include icon.generate('arrow_chevron_right');
 
 				font-size: var(--sizes-XS-fontSize);
-				margin-right: var(--spacings-XXS);
+				margin-right: var(--pr-t-spacings-50);
 				transition-duration: var(--commons-animations-durations-fast);
 				transition-property: transform;
 				vertical-align: middle;

@@ -3,41 +3,44 @@
 @use '@lucca-front/scss/src/commons/utils/reset';
 
 @mixin component($atRoot: 'without: rule') {
-	background-color: var(--palettes-700, var(--palettes-grey-200));
+	background-color: var(--palettes-700, var(--palettes-neutral-200));
 	border-radius: var(--commons-borderRadius-M);
-	color: var(--palettes-text, var(--palettes-grey-800));
-
+	color: var(--palettes-text, var(--palettes-neutral-800));
 	display: inline-flex;
 	align-items: center;
-	gap: var(--spacings-XS);
+	gap: var(--pr-t-spacings-100);
 	position: relative;
 	vertical-align: middle;
-	padding: calc(var(--spacings-XXS) / 2) var(--spacings-XS);
-	font-size: var(--sizes-S-fontSize);
-	line-height: var(--sizes-S-lineHeight);
+	padding: calc(var(--pr-t-spacings-50) / 2) var(--pr-t-spacings-100);
+	font-size: var(--components-chip-fontSize);
+	line-height: var(--components-chip-lineHeight);
 
 	@at-root ($atRoot) {
 		.chip-kill {
 			@include reset.button;
+
 			display: grid;
 			grid-template-columns: 1fr;
 			grid-template-rows: 1fr;
 			grid-template-areas: 'main';
-			align-items: normal;
-			width: var(--components-chip-kill-size);
-			height: var(--components-chip-kill-size);
-			border-radius: 50% !important;
+			place-items: center;
+			width: var(--pr-t-spacings-300);
+			height: var(--pr-t-spacings-300);
+			margin: calc(var(--pr-t-spacings-75) * -1);
+			flex-shrink: 0;
 			cursor: pointer;
 
 			&::before,
 			&::after {
 				content: '';
 				grid-area: main;
+				width: var(--components-chip-kill-size);
+				height: var(--components-chip-kill-size);
 			}
 
 			&::before {
-				border-radius: 50%;
-				background-color: var(--components-chip-kill-disk-color, var(--palettes-grey-700));
+				border-radius: var(--commons-borderRadius-full);
+				background-color: var(--components-chip-kill-disk-color, var(--palettes-neutral-700));
 			}
 
 			&::after {
@@ -48,17 +51,16 @@
 			}
 
 			&:hover {
-				--components-chip-kill-disk-color: var(--palettes-grey-600);
+				--components-chip-kill-disk-color: var(--palettes-neutral-600);
 				--components-chip-kill-cross-color: var(--palettes-700, var(--colors-white-color));
 			}
 
 			&:focus-visible {
-				border-radius: 50%;
-				@include a11y.focusVisible();
+				@include a11y.focusVisible($offset: -4px, $borderRadius: var(--commons-borderRadius-full));
 			}
 
 			&:active {
-				--components-chip-kill-disk-color: var(--palettes-50, var(--palettes-grey-800));
+				--components-chip-kill-disk-color: var(--palettes-50, var(--palettes-neutral-800));
 			}
 		}
 	}

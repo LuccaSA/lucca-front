@@ -1,7 +1,6 @@
-import { Meta, Story } from '@storybook/angular';
+import { Meta, StoryFn } from '@storybook/angular';
 
-interface VerticalNavigationBasicStory {
-}
+interface VerticalNavigationBasicStory {}
 
 export default {
 	title: 'Documentation/Navigation/VerticalNavigation/Basic',
@@ -37,10 +36,10 @@ function getTemplate(args: VerticalNavigationBasicStory): string {
 </nav>`;
 }
 
-const Template: Story<VerticalNavigationBasicStory> = (args: VerticalNavigationBasicStory) => ({
+const Template: StoryFn<VerticalNavigationBasicStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
 export const Basic = Template.bind({});
-Basic.args = { };
+Basic.args = {};

@@ -1,7 +1,7 @@
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { CalloutComponent, CalloutFeedbackItemComponent, CalloutFeedbackListComponent } from '@lucca-front/ng/callout';
-import { HiddenArgType, PaletteArgType } from 'stories/helpers/common-arg-types';
 import { ButtonComponent } from '@lucca-front/ng/button';
+import { CalloutComponent, CalloutFeedbackItemComponent, CalloutFeedbackListComponent } from '@lucca-front/ng/callout';
+import { Meta, StoryObj, moduleMetadata } from '@storybook/angular';
+import { HiddenArgType, PaletteArgType } from 'stories/helpers/common-arg-types';
 import { generateInputs } from 'stories/helpers/stories';
 
 export default {
@@ -33,6 +33,7 @@ export default {
 		},
 		state: {
 			options: [null, 'success', 'warning', 'error'],
+			description: 'Shortcut to control both icon and palette',
 			control: {
 				type: 'select',
 			},
@@ -40,7 +41,7 @@ export default {
 		size: {
 			options: ['M', 'S'],
 			control: {
-				type: 'select',
+				type: 'radio',
 			},
 		},
 		heading: {
@@ -55,12 +56,13 @@ export default {
 
 export const Template: StoryObj<CalloutComponent & { description: string }> = {
 	args: {
-		heading: 'Feedback or informations',
-		icon: 'info',
-		palette: 'none',
+		heading: '',
 		size: 'M',
+		state: null,
+		icon: null,
+		description: `Description with more details`,
+		palette: 'none',
 		removable: false,
 		removed: false,
-		description: `Description with more details`,
 	},
 };

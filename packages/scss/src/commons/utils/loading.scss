@@ -1,29 +1,31 @@
-@use '@lucca-front/scss/src/components/keyframe/exports' as keyframe;
+@use '@lucca-front/scss/src/commons/utils/color';
+@use '@lucca-front/scss/src/commons/utils/keyframe';
 
 @mixin spinner($size: 1.5rem) {
 	&::after {
+		@include keyframe.rotate;
+
+		content: '';
 		width: $size;
 		height: $size;
-		border-radius: 50%;
+		border-radius: var(--commons-borderRadius-full);
 		line-height: 0.8rem;
 		border-width: 3px;
 		inset: 0;
 		margin: auto;
 		position: absolute;
 		border-style: solid;
-		content: '';
-		
-		@include keyframe.rotate;
+
 		animation-name: rotate;
 		animation-duration: var(--commons-loading-speed);
 		animation-timing-function: linear;
 		animation-iteration-count: infinite;
-		border-color:  var(--commons-loading-frontground);
+		border-color: var(--commons-loading-frontground);
 		border-top-color: transparent;
 	}
 }
 
-@mixin gradient($backgroundColor: transparent, $color: rgba(var(--colors-grey-900-rgb), 0.1)) {
+@mixin gradient($backgroundColor: transparent, $color: color.transparentize(var(--colors-neutral-900), 0.1)) {
 	@keyframes loadingGradient {
 		0% {
 			background-position: 100% 0%;

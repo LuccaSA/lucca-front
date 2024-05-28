@@ -1,6 +1,6 @@
 <section
 	class="emptyState mod-page"
-	[style.--components-emptyState-background-color]="'var(--colors-white-color)'"
+	[style.--components-emptyState-background-color]="contentBackgroundColor"
 	style.--components-emptyState-illustration-background-bottom-left="url({{bottomLeftBackground}})"
 	style.--components-emptyState-illustration-foreground-bottom-left="url({{bottomLeftForeground}})"
 	style.--components-emptyState-illustration-background-top-right="url({{topRightBackground}})"
@@ -8,9 +8,9 @@
 >
 	<div class="emptyState-container">
 		<div class="emptyState-content">
-			<div class="emptyState-content-icon" aria-hidden="true" [innerHtml]="icon | luSafeExternalSvg"></div>
+			<div *ngIf="icon" class="emptyState-content-icon" aria-hidden="true" [innerHtml]="icon | luSafeExternalSvg"></div>
 			<div class="emptyState-content-text">
-				<h1 class="emptyState-content-heading">{{title}}</h1>
+				<div role="heading" [attr.aria-level]="hx" class="emptyState-content-heading">{{ title }}</div>
 				<p>
 					<ng-container *luPortal="description"></ng-container>
 				</p>

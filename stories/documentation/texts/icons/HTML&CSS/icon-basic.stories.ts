@@ -10,7 +10,7 @@ function getTemplate(args: IconBasicStory): string {
 	return `<span aria-hidden="true" class="lucca-icon icon-heart">`;
 }
 
-const Template: StoryFn<IconBasicStory> = (args: IconBasicStory) => ({
+const Template: StoryFn<IconBasicStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 });

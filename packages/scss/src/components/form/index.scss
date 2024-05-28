@@ -4,6 +4,16 @@
 
 @use 'exports' as *;
 
+.form {
+	@include component;
+}
+
+.form-fieldset {
+	&.mod-S {
+		@include S;
+	}
+}
+
 .form-field {
 	&.mod-S {
 		@include S;
@@ -52,7 +62,7 @@
 
 .form-group {
 	@include vars;
-	@include component;
+	@include componentDeprecated;
 }
 
 .form-group-line-col {

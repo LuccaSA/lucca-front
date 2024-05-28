@@ -1,7 +1,7 @@
 @use '@lucca-front/scss/src/commons/utils/a11y';
 
 @mixin component {
-	padding: var(--spacings-M);
+	padding: var(--pr-t-spacings-300);
 	max-width: 30rem;
 	min-height: 17.5rem;
 	display: flex;
@@ -12,7 +12,7 @@
 
 	.file-icon {
 		font-size: var(--sizes-M-lineHeight);
-		margin: 0 var(--spacings-XXS);
+		margin: 0 var(--pr-t-spacings-50);
 		display: none;
 	}
 
@@ -23,25 +23,25 @@
 		font-weight: 600;
 		display: block;
 		position: relative;
-		color: var(--palettes-grey-700);
+		color: var(--palettes-neutral-700);
 	}
 
 	.file-or {
 		font-size: var(--sizes-S-fontSize);
 		line-height: var(--sizes-S-lineHeight);
-		margin-bottom: var(--spacings-XXS);
+		margin-bottom: var(--pr-t-spacings-50);
 		display: block;
 		position: relative;
-		color: var(--palettes-grey-600);
+		color: var(--palettes-neutral-600);
 
 		&:not(:empty) {
-			margin-bottom: var(--spacings-XS);
-			color: var(--palettes-grey-800);
+			margin-bottom: var(--pr-t-spacings-100);
+			color: var(--palettes-neutral-800);
 		}
 	}
 
 	.file-progress {
-		margin: var(--spacings-S) 0 var(--spacings-XS);
+		margin: var(--pr-t-spacings-200) 0 var(--pr-t-spacings-100);
 		display: block;
 	}
 
@@ -49,8 +49,8 @@
 		&:not(:empty) {
 			font-size: var(--sizes-S-fontSize);
 			line-height: var(--sizes-S-lineHeight);
-			margin-bottom: var(--spacings-S);
-			color: var(--palettes-grey-600);
+			margin-bottom: var(--pr-t-spacings-200);
+			color: var(--palettes-neutral-600);
 			display: block;
 		}
 	}
@@ -58,7 +58,7 @@
 	.file-formats {
 		font-size: var(--sizes-S-fontSize);
 		line-height: var(--sizes-S-lineHeight);
-		color: var(--palettes-grey-600);
+		color: var(--palettes-neutral-600);
 		position: relative;
 		display: block;
 	}
@@ -88,7 +88,7 @@
 
 		~ .file-content {
 			&::before {
-				border: 1px dashed var(--palettes-grey-400);
+				border: 1px dashed var(--palettes-neutral-400);
 				border-radius: var(--commons-borderRadius-M);
 				position: absolute;
 				inset: 0;
@@ -100,11 +100,11 @@
 			&:not(:disabled) {
 				~ .file-content {
 					&::before {
-						border: 1px dashed var(--palettes-primary-400);
+						border: 1px dashed var(--palettes-product-400);
 					}
 
 					.file-button {
-						background-color: var(--palettes-100, var(--palettes-grey-100));
+						background-color: var(--palettes-100, var(--palettes-neutral-100));
 					}
 				}
 			}

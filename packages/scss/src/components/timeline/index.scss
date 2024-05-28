@@ -68,9 +68,6 @@
 		&.mod-vertical:not(.mod-L) {
 			@include checkedPastStepVerticalNotL;
 		}
-		&.mod-vertical.mod-L {
-			@include checkedPastStepVerticalL;
-		}
 	}
 
 	&.mod-addBetweenStep {

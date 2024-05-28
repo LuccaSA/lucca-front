@@ -1,20 +1,25 @@
 @use '@lucca-front/scss/src/commons/utils/a11y';
 
-@mixin primary {
+@mixin S {
+	--components-chip-fontSize: var(--sizes-XS-fontSize);
+	--components-chip-lineHeight: var(--sizes-XS-lineHeight);
+}
+
+@mixin product {
 	.chip-kill {
-		--components-chip-kill-cross-color: var(--palettes-primary-700);
+		--components-chip-kill-cross-color: var(--palettes-product-700);
 		--components-chip-kill-disk-color: var(--colors-white-color);
 
 		&:hover {
-			--components-chip-kill-disk-color: var(--palettes-primary-50);
+			--components-chip-kill-disk-color: var(--palettes-product-50);
 		}
 
 		&:active {
-			--components-chip-kill-disk-color: var(--palettes-primary-50);
+			--components-chip-kill-disk-color: var(--palettes-product-50);
 		}
 
 		&:focus-visible {
-			@include a11y.focusVisible($color: var(--colors-white-color));
+			@include a11y.focusVisible($color: var(--colors-white-color), $offset: -4px, $borderRadius: var(--commons-borderRadius-full));
 		}
 	}
 }
@@ -30,6 +35,6 @@
 	text-decoration: none;
 
 	&:hover {
-		background-color: var(--palettes-600, var(--palettes-grey-100));
+		background-color: var(--palettes-600, var(--palettes-neutral-100));
 	}
 }

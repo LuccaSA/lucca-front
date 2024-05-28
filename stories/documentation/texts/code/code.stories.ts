@@ -24,7 +24,7 @@ sit</code>
 amet`;
 }
 
-const Template: StoryFn<TextCodeStory> = (args: TextCodeStory) => ({
+const Template: StoryFn<TextCodeStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [

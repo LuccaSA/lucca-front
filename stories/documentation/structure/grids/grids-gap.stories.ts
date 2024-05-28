@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/angular';
+import { Meta, StoryFn } from '@storybook/angular';
 
 interface GridsGapsStory {
 	reverse: boolean;
@@ -31,7 +31,7 @@ function getTemplate(args: GridsGapsStory): string {
 	<div class="grid-column"><div class="demo">4</div></div>
 </div>
 
-<div class="grid" style="--grid-columns: 2; --grid-gap: var(--spacings-XS)">
+<div class="grid" style="--grid-columns: 2; --grid-gap: var(--pr-t-spacings-100)">
 	<div class="grid-column"><div class="demo">1</div></div>
 	<div class="grid-column"><div class="demo">2</div></div>
 	<div class="grid-column"><div class="demo">3</div></div>
@@ -39,14 +39,14 @@ function getTemplate(args: GridsGapsStory): string {
 </div>`;
 }
 
-const Template: Story<GridsGapsStory> = (args: GridsGapsStory) => ({
+const Template: StoryFn<GridsGapsStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [
 		`
 		.demo {
-			background-color: #F3F5FC;
-			padding: var(--spacings-S);
+			background-color: var(--colors-white-color);
+			padding: var(--pr-t-spacings-200);
 			border-radius: 1rem;
 			text-align: center;
 			height: 100%;
@@ -56,7 +56,7 @@ const Template: Story<GridsGapsStory> = (args: GridsGapsStory) => ({
 		}
 
 		.grid + .grid {
-			margin-top: var(--spacings-L);
+			margin-top: var(--pr-t-spacings-400);
 		}
 		`,
 	],

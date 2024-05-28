@@ -1,0 +1,21 @@
+<label class="formLabel" id="{{id}}-label" for="{{id}}-input">
+	<ng-content></ng-content>
+</label>
+<span class="radioField">
+	<input
+		[formControl]="formControl"
+		[attr.disabled]="formControl.disabled || disabled"
+		type="radio"
+		class="radioField-input"
+		id="{{id}}-input"
+		[value]="value"
+		luInput
+		luInputStandalone
+		attr.aria-labelledby="{{id}}-label"
+		attr.aria-describedby="{{id}}-message"
+	/>
+	<span class="radioField-icon" aria-hidden="true">
+		<span class="radioField-icon-check"></span>
+	</span>
+</span>
+<lu-inline-message *ngIf="inlineMessage" [label]="inlineMessage" id="{{id}}-message"></lu-inline-message>

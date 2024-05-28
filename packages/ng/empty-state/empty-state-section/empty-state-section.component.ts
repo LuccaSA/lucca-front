@@ -1,12 +1,12 @@
+import { NgIf } from '@angular/common';
 import { booleanAttribute, ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Palette, PortalContent, PortalDirective } from '@lucca-front/ng/core';
 import { LuSafeExternalSvgPipe } from '@lucca-front/ng/safe-content';
-import { PortalContent, PortalDirective, Palette } from '@lucca-front/ng/core';
 
 @Component({
 	selector: 'lu-empty-state-section',
 	standalone: true,
-	imports: [CommonModule, LuSafeExternalSvgPipe, PortalDirective],
+	imports: [NgIf, LuSafeExternalSvgPipe, PortalDirective],
 	templateUrl: './empty-state-section.component.html',
 	styleUrl: './empty-state-section.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
@@ -36,4 +36,7 @@ export class EmptyStateSectionComponent {
 		required: true,
 	})
 	description: PortalContent;
+
+	@Input()
+	hx: 1 | 2 | 3 | 4 | 5 | 6 = 3;
 }

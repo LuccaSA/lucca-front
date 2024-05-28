@@ -1,7 +1,6 @@
-import { Meta, Story } from '@storybook/angular';
+import { Meta, StoryFn } from '@storybook/angular';
 
-interface CardsActionStory {
-}
+interface CardsActionStory {}
 
 export default {
 	title: 'Documentation/Structure/Cards/Action',
@@ -15,7 +14,7 @@ function getTemplate(args: CardsActionStory): string {
 			<p>Contenu de la carte</p>
 		</div>
 		<div class="card-action">
-			<button type="button" class="actionIcon" luTooltip="Modifier">
+			<button type="button" class="button mod-onlyIcon mod-text" luTooltip="Modifier">
 			  <span aria-hidden="true" class="lucca-icon icon-arrowRight"></span>
 			  <span class="u-mask">Accéder</span>
 			</button>
@@ -24,7 +23,7 @@ function getTemplate(args: CardsActionStory): string {
 	`;
 }
 
-const Template: Story<CardsActionStory> = (args: CardsActionStory) => ({
+const Template: StoryFn<CardsActionStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 });

@@ -2,22 +2,23 @@
 @use '@lucca-front/scss/src/commons/utils/a11y';
 
 :root {
-	--components-options-item-padding-vertical: var(--spacings-XS);
-	--components-options-item-padding-horizontal: var(--spacings-XS);
+	--components-options-item-padding-vertical: var(--pr-t-spacings-50);
+	--components-options-item-padding-horizontal: var(--pr-t-spacings-100);
 	--components-options-item-multiple-padding: 2.25rem;
-	--components-options-item-icon-color: var(--palettes-grey-800);
+	--components-options-item-icon-color: var(--palettes-neutral-800);
 
 	--components-options-checkbox-left: 0.5rem;
 	--components-options-checkbox-size: 1.25rem;
-	--components-options-checkbox-color: var(--palettes-primary-700);
+	--components-options-checkbox-color: var(--palettes-product-700);
 	--components-options-checkbox-border-radius: 6px;
-	--components-options-checkbox-border-color: var(--palettes-grey-700);
+	--components-options-checkbox-border-color: var(--palettes-neutral-700);
 	--components-options-establishment-multiple-padding: 2rem;
 }
 
 @mixin optionItemStyle {
 	:host {
 		display: block;
+		scroll-margin: var(--pr-t-spacings-50);
 	}
 
 	.optionItem {
@@ -25,6 +26,7 @@
 	}
 
 	.optionItem-value {
+		position: relative;
 		border-radius: var(--commons-borderRadius-M);
 		display: block;
 		padding: var(--components-options-item-padding-vertical) var(--components-options-item-padding-horizontal);
@@ -32,45 +34,63 @@
 		cursor: pointer;
 
 		&.is-selected {
-			background-color: var(--palettes-primary-50);
+			background-color: var(--palettes-product-50);
+
+			&:before {
+				content: '';
+				position: absolute;
+				top: 0;
+				bottom: 0;
+				left: calc(var(--pr-t-spacings-50) * -1);
+				width: 2px;
+				background-color: var(--palettes-product-700);
+				border-top-right-radius: var(--commons-borderRadius-M);
+				border-bottom-right-radius: var(--commons-borderRadius-M);
+			}
 
 			&:hover {
-				background-color: var(--palettes-primary-100);
+				background-color: var(--palettes-product-100);
 			}
 
 			&:active {
-				background-color: var(--palettes-primary-200);
+				background-color: var(--palettes-product-200);
 			}
 
 			&.is-highlighted {
-				background-color: var(--palettes-primary-100);
+				background-color: var(--palettes-product-100);
 
 				&:hover {
-					background-color: var(--palettes-primary-200);
+					background-color: var(--palettes-product-200);
 				}
 			}
 		}
 
 		&:hover {
-			background-color: var(--palettes-grey-50);
+			background-color: var(--palettes-neutral-50);
 		}
 
 		&.is-highlighted,
 		&.is-focus {
-			background-color: var(--palettes-grey-50);
+			background-color: var(--palettes-neutral-50);
 
 			&:hover {
-				background-color: var(--palettes-grey-50);
+				background-color: var(--palettes-neutral-50);
 			}
 
 			&:active {
-				background-color: var(--palettes-grey-100);
+				background-color: var(--palettes-neutral-100);
 			}
 		}
 
 		&:active {
-			background-color: var(--palettes-grey-100);
+			background-color: var(--palettes-neutral-100);
 		}
+	}
+
+	.optionItem-value-group {
+		color: var(--palettes-neutral-600);
+		font-size: var(--sizes-S-fontSize);
+		line-height: var(--sizes-S-lineHeight);
 	}
 
 	:host-context(.lu-select-value) {
@@ -138,7 +158,16 @@
 			}
 
 			&.is-disabled {
-				--components-options-checkbox-border-color: var(--palettes-grey-500);
+				--components-options-checkbox-border-color: var(--palettes-neutral-500);
+
+				&.is-selected {
+					--components-options-checkbox-color: var(--palettes-neutral-100);
+					background: transparent;
+
+					&::after {
+						color: var(--palettes-neutral-500);
+					}
+				}
 			}
 
 			&:not(.is-disabled):hover {
@@ -151,13 +180,13 @@
 		&.establishmentOption {
 			.optionItem-value {
 				position: relative;
-				padding-left: calc(var(--components-options-checkbox-size) + var(--spacings-XS) * 2);
+				padding-left: calc(var(--components-options-checkbox-size) + var(--pr-t-spacings-100) * 2);
 			}
 
 			.optionItem-value {
 				&::before,
 				&::after {
-					left: var(--spacings-XS);
+					left: var(--pr-t-spacings-100);
 				}
 			}
 		}

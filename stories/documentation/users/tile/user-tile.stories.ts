@@ -24,7 +24,7 @@ export default {
 	],
 } as Meta;
 
-const template: StoryFn<LuUserTileComponent> = (args: LuUserTileComponent) => ({
+const template: StoryFn<LuUserTileComponent> = (args) => ({
 	props: args,
 });
 

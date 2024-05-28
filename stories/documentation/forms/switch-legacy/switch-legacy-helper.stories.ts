@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/angular';
+import { Meta, StoryFn } from '@storybook/angular';
 
 interface SwitchLegacyHelperStory {
 	disabled: boolean;
@@ -13,17 +13,17 @@ export default {
 			control: {
 				type: 'boolean',
 			},
-			description: "Taille : Small",
+			description: 'Taille : Small',
 		},
 		inline: {
 			control: {
 				type: 'boolean',
-			}
+			},
 		},
 		disabled: {
 			control: {
 				type: 'boolean',
-			}
+			},
 		},
 	},
 } as Meta;
@@ -42,7 +42,7 @@ function getTemplate(args: SwitchLegacyHelperStory): string {
 </label>`;
 }
 
-const Template: Story<SwitchLegacyHelperStory> = (args: SwitchLegacyHelperStory) => ({
+const Template: StoryFn<SwitchLegacyHelperStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 });

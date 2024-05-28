@@ -90,9 +90,9 @@ function getTemplate(args: CheckboxBasicStory): string {
 	const help = args.help;
 	const messageState = args.messageState ? ' is-' + args.messageState : '';
 
-	return `<div class="form-field${s} u-marginBottomS">
+	return `<div class="form-field${s} pr-u-marginBottom200">
 	<label class="formLabel" for="${id}">
-		Label<sup class="formLabel-required" *ngIf="required" aria-hidden="true">*</sup><span *ngIf="help" aria-hidden="true" class="lucca-icon icon-signHelp"></span>
+		Label<sup class="formLabel-required" *ngIf="required" aria-hidden="true">*</sup><span *ngIf="help" class="formLabel-info"><span aria-hidden="true" class="lucca-icon icon-signHelp"></span><span class="u-mask">?</span></span>
 	</label>
 	<span class="checkboxField">
 		<input type="checkbox" class="checkboxField-input" id="${id}" aria-labelledby="${id}label" aria-describedby="${id}message"${checked}${mixed}${disabled}${required}${invalid} />
@@ -102,10 +102,10 @@ function getTemplate(args: CheckboxBasicStory): string {
 </div>`;
 }
 
-const Template: StoryFn<CheckboxBasicStory> = (args: CheckboxBasicStory) => ({
+const Template: StoryFn<CheckboxBasicStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
 export const Basic = Template.bind({});
-Basic.args = { checked: false, s: false, disabled: false, required: false, mixed: false, invalid: false, help: false, messageState: '', id: 'field1', label: 'Label', message: 'Helper text', };
+Basic.args = { checked: false, s: false, disabled: false, required: false, mixed: false, invalid: false, help: false, messageState: '', id: 'field1', label: 'Label', message: 'Helper text' };

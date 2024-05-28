@@ -40,6 +40,7 @@ export abstract class ALuSelectInputComponent<T, TPicker extends ILuPickerPanel<
 	@Input('placeholder') set inputPlaceholder(p: string) {
 		this._placeholder = p;
 	}
+
 	@Input('multiple') set inputMultiple(m: boolean | string) {
 		if (m === '') {
 			// allows to have multiple = true when writing
@@ -49,6 +50,7 @@ export abstract class ALuSelectInputComponent<T, TPicker extends ILuPickerPanel<
 			this.multiple = !!m;
 		}
 	}
+
 	/** Event emitted when the associated popover is opened. */
 	@Output() onOpen = new EventEmitter<void>();
 	/** Event emitted when the associated popover is closed. */
@@ -63,17 +65,21 @@ export abstract class ALuSelectInputComponent<T, TPicker extends ILuPickerPanel<
 	) {
 		super(_changeDetectorRef, _overlay, _elementRef, _viewContainerRef, _renderer);
 	}
+
 	@HostBinding('class.is-disabled')
 	get isDisabled() {
 		return this.disabled;
 	}
+
 	@Input('disabled') set inputDisabled(d: boolean) {
 		this._disabled = d;
 	}
+
 	@HostBinding('class.is-focused')
 	get isFocused() {
 		return this._popoverOpen && !this.target.overlap;
 	}
+
 	@HostBinding('class.mod-multiple')
 	get modMultiple() {
 		return this._multiple;
@@ -83,6 +89,7 @@ export abstract class ALuSelectInputComponent<T, TPicker extends ILuPickerPanel<
 	get isClearable() {
 		return !!this._clearer;
 	}
+
 	/**
 	 * popover trigger class extension
 	 */
@@ -101,22 +108,27 @@ export abstract class ALuSelectInputComponent<T, TPicker extends ILuPickerPanel<
 	override onClick() {
 		super.onClick();
 	}
+
 	@HostListener('mouseenter')
 	override onMouseEnter() {
 		super.onMouseEnter();
 	}
+
 	@HostListener('mouseleave')
 	override onMouseLeave() {
 		super.onMouseLeave();
 	}
+
 	@HostListener('focus')
 	override onFocus() {
 		super.onFocus();
 	}
+
 	@HostListener('blur')
 	override onBlur() {
 		super.onBlur();
 	}
+
 	@HostListener('keydown.space', ['$event'])
 	@HostListener('keydown.enter', ['$event'])
 	onKeydown($event: KeyboardEvent) {
@@ -163,9 +175,11 @@ export abstract class ALuSelectInputComponent<T, TPicker extends ILuPickerPanel<
 		this.destroyPopover();
 		this.onDestroy();
 	}
+
 	protected _emitOpen(): void {
 		this.onOpen.emit();
 	}
+
 	protected _emitClose(): void {
 		this.onClose.emit();
 	}
@@ -173,6 +187,8 @@ export abstract class ALuSelectInputComponent<T, TPicker extends ILuPickerPanel<
 
 /**
  * select input
+ *
+ * @deprecated prefer SimpleSelect or MultipleSelect
  */
 @Component({
 	selector: 'lu-select',
@@ -193,6 +209,7 @@ export class LuSelectInputComponent<T> extends ALuSelectInputComponent<T> implem
 	get modMultipleView() {
 		return this.useMultipleViews();
 	}
+
 	constructor(
 		protected override _changeDetectorRef: ChangeDetectorRef,
 		protected override _overlay: Overlay,
@@ -202,11 +219,13 @@ export class LuSelectInputComponent<T> extends ALuSelectInputComponent<T> implem
 	) {
 		super(_changeDetectorRef, _overlay, _elementRef, _viewContainerRef, _renderer);
 	}
+
 	// display clearer
 	@ContentChild(ALuClearer, { read: ElementRef, static: false })
 	clearerEltRef: ElementRef<HTMLElement>;
 	@ViewChild('suffix', { read: ElementRef, static: true })
 	suffixEltRef: ElementRef<HTMLElement>;
+
 	displayClearer() {
 		if (this.clearerEltRef) {
 			this._renderer.appendChild(this.suffixEltRef.nativeElement, this.clearerEltRef.nativeElement);

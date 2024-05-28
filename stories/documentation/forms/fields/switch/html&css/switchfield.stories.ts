@@ -1,12 +1,10 @@
 import { Meta, StoryFn } from '@storybook/angular';
 
-interface SwitchBasicStory {
-}
+interface SwitchBasicStory {}
 
 export default {
 	title: 'Documentation/Forms/Fields/SwitchField/HTML&CSS',
-	argTypes: {
-	},
+	argTypes: {},
 } as Meta;
 
 function getTemplate(args: SwitchBasicStory): string {
@@ -20,10 +18,10 @@ function getTemplate(args: SwitchBasicStory): string {
 </div>`;
 }
 
-const Template: StoryFn<SwitchBasicStory> = (args: SwitchBasicStory) => ({
+const Template: StoryFn<SwitchBasicStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
 export const Basic = Template.bind({});
-Basic.args = { };
+Basic.args = {};

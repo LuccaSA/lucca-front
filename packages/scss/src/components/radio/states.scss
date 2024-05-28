@@ -1,16 +1,16 @@
 @mixin disabled {
 	~ .radio-label {
-		color: var(--palettes-grey-500);
+		color: var(--palettes-neutral-500);
 		cursor: default;
 
 		&::before {
-			border-color: var(--palettes-grey-500);
+			border-color: var(--palettes-neutral-500);
 			border-width: 2px;
 			border-style: solid;
 		}
 
 		.radio-label-helper {
-			color: var(--palettes-grey-500);
+			color: var(--palettes-neutral-500);
 		}
 	}
 }
@@ -18,13 +18,13 @@
 @mixin disabledChecked {
 	~ .radio-label {
 		&::before {
-			border-color: var(--palettes-grey-500);
+			border-color: var(--palettes-neutral-500);
 			border-width: 2px;
 			border-style: solid;
 		}
 
 		&::after {
-			background-color: var(--palettes-grey-500);
+			background-color: var(--palettes-neutral-500);
 		}
 	}
 }

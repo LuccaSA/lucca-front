@@ -31,7 +31,7 @@ function getTemplate(args: TableTwoLinesHeaderStory): string {
 	`;
 }
 
-const Template: StoryFn<TableTwoLinesHeaderStory> = (args: TableTwoLinesHeaderStory) => ({
+const Template: StoryFn<TableTwoLinesHeaderStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 });

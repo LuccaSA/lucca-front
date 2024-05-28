@@ -57,7 +57,7 @@ function getTemplate(args: timepickerBasicStory): string {
 	`;
 }
 
-const Template: StoryFn<timepickerBasicStory> = (args: timepickerBasicStory) => ({
+const Template: StoryFn<timepickerBasicStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 });

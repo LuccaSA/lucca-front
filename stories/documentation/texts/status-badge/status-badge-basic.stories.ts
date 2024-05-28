@@ -9,7 +9,7 @@ export default {
 	title: 'Documentation/Texts/StatusBadge/Basic',
 	argTypes: {
 		palette: {
-			options: ['', 'palette-grey', 'palette-success', 'palette-warning', 'palette-error'],
+			options: ['', 'palette-product', 'palette-success', 'palette-warning', 'palette-error'],
 			control: {
 				type: 'select',
 			},
@@ -18,7 +18,7 @@ export default {
 			control: {
 				type: 'boolean',
 			},
-			description: 'Taille : Large',
+			description: '[v16.2] Taille : Large',
 		},
 	},
 } as Meta;
@@ -28,10 +28,10 @@ function getTemplate(args: StatusBadgeBasicStory): string {
 	return `<div class="statusBadge ${l} ${args.palette}">Status</div>`;
 }
 
-const Template: StoryFn<StatusBadgeBasicStory> = (args: StatusBadgeBasicStory) => ({
+const Template: StoryFn<StatusBadgeBasicStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
 export const Basic = Template.bind({});
-Basic.args = { palette: '',  l: false,  };
+Basic.args = { palette: '', l: false };

@@ -38,7 +38,7 @@ function getTemplate(args: NotchBoxBasicStory): string {
 	`;
 }
 
-const Template: StoryFn<NotchBoxBasicStory> = (args: NotchBoxBasicStory) => ({
+const Template: StoryFn<NotchBoxBasicStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [

@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/angular';
+import { Meta, StoryFn } from '@storybook/angular';
 
 interface GridsPositionStory {
 	reverse: boolean;
@@ -31,14 +31,14 @@ function getTemplate(args: GridsPositionStory): string {
 </div>`;
 }
 
-const Template: Story<GridsPositionStory> = (args: GridsPositionStory) => ({
+const Template: StoryFn<GridsPositionStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [
 		`
 		.demo {
-			background-color: #F3F5FC;
-			padding: var(--spacings-S);
+			background-color: var(--colors-white-color);
+			padding: var(--pr-t-spacings-200);
 			border-radius: 1rem;
 			text-align: center;
 			height: 100%;
@@ -48,7 +48,7 @@ const Template: Story<GridsPositionStory> = (args: GridsPositionStory) => ({
 		}
 
 		.grid + .grid {
-			margin-top: var(--spacings-L);
+			margin-top: var(--pr-t-spacings-400);
 		}
 		`,
 	],

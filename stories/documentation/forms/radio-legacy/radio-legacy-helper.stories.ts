@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/angular';
+import { Meta, StoryFn } from '@storybook/angular';
 
 interface RadioLegacyHelperStory {
 	row: boolean;
@@ -12,18 +12,18 @@ export default {
 		row: {
 			control: {
 				type: 'boolean',
-			}
+			},
 		},
 		disabled: {
 			control: {
 				type: 'boolean',
-			}
+			},
 		},
 		s: {
 			control: {
 				type: 'boolean',
 			},
-			description: "Taille : Small",
+			description: 'Taille : Small',
 		},
 	},
 } as Meta;
@@ -51,7 +51,7 @@ function getTemplate(args: RadioLegacyHelperStory): string {
 </fieldset>`;
 }
 
-const Template: Story<RadioLegacyHelperStory> = (args: RadioLegacyHelperStory) => ({
+const Template: StoryFn<RadioLegacyHelperStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 });

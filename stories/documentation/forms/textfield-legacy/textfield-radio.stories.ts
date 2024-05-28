@@ -24,7 +24,7 @@ function getTemplate(args: TextfieldRadioStory): string {
 </span>`;
 }
 
-const Template: StoryFn<TextfieldRadioStory> = (args: TextfieldRadioStory) => ({
+const Template: StoryFn<TextfieldRadioStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 });

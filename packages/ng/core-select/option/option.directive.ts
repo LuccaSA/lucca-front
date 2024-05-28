@@ -1,6 +1,6 @@
 import { Directive, Input, TemplateRef } from '@angular/core';
-import { ALuSelectInputComponent } from '../input';
-import { LuOptionContext } from '../select.model';
+import type { ALuSelectInputComponent } from '../input';
+import type { LuOptionContext } from '../select.model';
 
 @Directive({
 	selector: '[luOption]',

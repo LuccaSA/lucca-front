@@ -50,8 +50,11 @@ export function getStoryGenerator<TComponent>(globalPartial: StoryObj<TComponent
 			  };
 
 		return {
+			...globalPartial,
+			...storyPartial,
 			name,
 			args: { ...globalPartial.args, ...storyPartial?.args },
+			argTypes: { ...globalPartial.argTypes, ...storyPartial?.argTypes },
 			render: (args) => ({
 				props: args,
 				template,
@@ -66,8 +69,6 @@ export function getStoryGenerator<TComponent>(globalPartial: StoryObj<TComponent
 				...globalPartial.parameters,
 				...storyPartial?.parameters,
 			},
-			...globalPartial,
-			...storyPartial,
 		};
 	};
 }

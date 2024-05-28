@@ -1,20 +1,17 @@
+import { Meta, StoryFn } from '@storybook/angular';
 
-import { Meta, Story } from '@storybook/angular';
-
-interface NewBadgeBasicStory {
-}
+interface NewBadgeBasicStory {}
 
 export default {
 	title: 'Documentation/Texts/NewBadge/HTML & CSS/Basic',
-	argTypes: {
-	},
+	argTypes: {},
 } as Meta;
 
 function getTemplate(args: NewBadgeBasicStory): string {
 	return `<span class="newBadge">New</span>`;
 }
 
-const Template: Story<NewBadgeBasicStory> = (args: NewBadgeBasicStory) => ({
+const Template: StoryFn<NewBadgeBasicStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 });

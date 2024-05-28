@@ -20,7 +20,7 @@ function getTemplate(args: CheckboxBasicStory): string {
 `;
 }
 
-const Template: StoryFn<CheckboxBasicStory> = (args: CheckboxBasicStory) => ({
+const Template: StoryFn<CheckboxBasicStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 });

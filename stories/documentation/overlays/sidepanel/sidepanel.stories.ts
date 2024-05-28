@@ -41,7 +41,7 @@ class SidepanelDynamicContentComponent implements ILuSidepanelContent {
 	imports: [LuSidepanelModule, LuModalModule, LuToastsModule],
 	template: `
 		<lu-toasts [sources]="[]"></lu-toasts>
-		<div class="u-marginBottomS">
+		<div class="pr-u-marginBottom200">
 			<button type="button" class="button" (click)="openSidepanel()">Open</button>
 			<button type="button" class="button" (click)="openDynamicContentSidepanel()">Open (Dynamic)</button>
 			<button type="button" class="button" (click)="openUndismissableSidepanel()">Open (Backdrop event)</button>
@@ -87,7 +87,7 @@ export default {
 	decorators: [applicationConfig({ providers: [provideAnimations()] })],
 } as Meta;
 
-const Template: StoryFn<SidepanelStory> = (args: SidepanelStory) => ({
+const Template: StoryFn<SidepanelStory> = (args) => ({
 	props: args,
 });
 

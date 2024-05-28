@@ -49,7 +49,7 @@ function getTemplate(args: NotchBoxNotchPositioningStory): string {
 	`;
 }
 
-const Template: StoryFn<NotchBoxNotchPositioningStory> = (args: NotchBoxNotchPositioningStory) => ({
+const Template: StoryFn<NotchBoxNotchPositioningStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [

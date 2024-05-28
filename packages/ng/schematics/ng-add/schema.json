@@ -1,0 +1,7 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema",
+	"$id": "LuccaFrontNgAdd",
+	"title": "Lucca Front NgAdd Schema",
+	"type": "object",
+	"properties": {}
+}

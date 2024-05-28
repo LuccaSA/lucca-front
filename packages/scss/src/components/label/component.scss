@@ -2,15 +2,15 @@
 	background-color: var(--palettes-100, var(--components-label-default-palette-100));
 	color: var(--palettes-900, var(--components-label-default-palette-900));
 	display: inline-flex;
-	gap: 0 var(--spacings-XXS);
+	gap: 0 var(--pr-t-spacings-50);
 	justify-content: center;
 	align-items: center;
 	white-space: nowrap;
-	border-radius: 9999px;
+	border-radius: var(--commons-borderRadius-full);
 	font-size: var(--sizes-S-fontSize);
 	line-height: var(--sizes-XS-lineHeight);
 	font-weight: 600;
-	padding: var(--spacings-XXS) var(--spacings-XS);
+	padding: var(--pr-t-spacings-50) var(--pr-t-spacings-100);
 
 	.label-icon {
 		margin: 0;

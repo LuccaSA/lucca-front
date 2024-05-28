@@ -11,7 +11,7 @@ function getTemplate(args: ButtonDisabledStory): string {
 	return `<button type="button" class="button" disabled>Button</button>`;
 }
 
-const Template: StoryFn<ButtonDisabledStory> = (args: ButtonDisabledStory) => ({
+const Template: StoryFn<ButtonDisabledStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 });

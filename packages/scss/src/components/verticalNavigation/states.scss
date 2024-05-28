@@ -1,19 +1,19 @@
 @mixin active {
-	--components-verticalNavigation-link-background: var(--palettes-primary-100);
+	--components-verticalNavigation-link-background: var(--palettes-product-100);
 	color: var(--components-verticalNavigation-link-color);
 
-  &:hover {
-  	--components-verticalNavigation-link-background: var(--palettes-primary-200);
-  }
+	&:hover {
+		--components-verticalNavigation-link-background: var(--palettes-product-200);
+	}
 
 	&:active {
-		--components-verticalNavigation-link-background: var(--palettes-primary-300);
+		--components-verticalNavigation-link-background: var(--palettes-product-300);
 	}
 }
 
 @mixin disabled {
 	--components-verticalNavigation-link-background: transparent;
-	color: var(--palettes-grey-500);
+	color: var(--palettes-neutral-500);
 	pointer-events: none;
 }
 

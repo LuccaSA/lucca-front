@@ -2,8 +2,8 @@
 
 @mixin disabled {
 	~ .radioButtons-item-label {
-		box-shadow: 0 0 0 1px var(--palettes-grey-200);
-		color: var(--palettes-grey-500);
+		box-shadow: 0 0 0 1px var(--palettes-neutral-200);
+		color: var(--palettes-neutral-500);
 		cursor: default;
 
 		.numericBadge {
@@ -13,7 +13,7 @@
 
 	&:checked {
 		~ .radioButtons-item-label {
-			background-color: var(--palettes-grey-100);
+			background-color: var(--palettes-neutral-100);
 		}
 	}
 }

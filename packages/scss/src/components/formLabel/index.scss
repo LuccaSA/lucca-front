@@ -12,7 +12,12 @@
 		@include XS;
 	}
 
-	&.is-error { // To replace by :has as soon as it is implemented in Firefox to cover usage as legend for checkboxes and radio states.
+	&.mod-counter {
+		@include counter;
+	}
+
+	&.is-error {
+		// To replace by :has as soon as it is implemented in Firefox to cover usage as legend for checkboxes and radio states.
 		@include error;
 	}
 }

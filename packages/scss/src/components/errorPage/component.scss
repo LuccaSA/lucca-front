@@ -8,7 +8,7 @@
 	.errorPage-section {
 		height: 100%;
 		max-width: 1200px;
-		padding: 0 var(--spacings-L);
+		padding: 0 var(--pr-t-spacings-400);
 		width: 100vw;
 		margin: 0 auto;
 		display: flex;
@@ -20,7 +20,7 @@
 		margin-top: 10vh;
 		max-width: 90vw;
 		width: 450px;
-		padding-right: var(--spacings-L);
+		padding-right: var(--pr-t-spacings-400);
 	}
 
 	.errorPage-section-info-title {
@@ -49,13 +49,13 @@
 	}
 
 	.errorPage-section-info {
-		margin-top: var(--spacings-L);
-		margin-bottom: var(--spacings-L);
+		margin-top: var(--pr-t-spacings-400);
+		margin-bottom: var(--pr-t-spacings-400);
 		order: 1;
 		padding: 0;
 	}
 	.errorPage-section-image {
-		margin-top: var(--spacings-L);
+		margin-top: var(--pr-t-spacings-400);
 		order: 0;
 	}
 }

@@ -1,21 +1,53 @@
-@mixin component($atRoot: 'without: rule') {
-  color: var(--components-formLabel-color);
-  display: inline-block;
-  font-size: var(--components-formLabel-fontSize);
-  line-height: var(--components-formLabel-lineHeight);
-  width: fit-content;
+@use '@lucca-front/scss/src/commons/utils/a11y';
 
-  .lucca-icon {
-    color: var(--palettes-grey-600);
-    font-size: var(--components-formLabel-help-fontSize);
-    line-height: var(--components-formLabel-help-lineHeight);
-    margin-left: .125rem;
-    vertical-align: top;
-  }
+@mixin component($atRoot: 'without: rule') {
+	color: var(--components-formLabel-color);
+	display: flex;
+	font-size: var(--components-formLabel-fontSize);
+	line-height: var(--components-formLabel-lineHeight);
+	width: var(--components-formLabel-width);
+	align-items: flex-end;
+	cursor: var(--components-formLabel-cursor);
+
+	.lucca-icon {
+		color: var(--palettes-neutral-600);
+		font-size: var(--components-formLabel-help-fontSize);
+		line-height: var(--components-formLabel-help-lineHeight);
+		margin-left: var(--pr-t-spacings-25);
+		vertical-align: top;
+	}
 
 	@at-root ($atRoot) {
-    .formLabel-required {
-      color: var(--palettes-error-700);
-    }
-  }
+		.formLabel-required {
+			color: var(--palettes-error-700);
+			font-size: inherit;
+			line-height: inherit;
+			font-weight: 600;
+			text-rendering: geometricPrecision;
+			margin-left: var(--pr-t-spacings-25);
+			top: 0;
+		}
+
+		.formLabel-info {
+			&:focus-visible {
+				outline: none;
+
+				.lucca-icon {
+					&::before {
+						border-radius: 50%;
+
+						@include a11y.focusVisible($offset: 0);
+					}
+				}
+			}
+		}
+
+		.formLabel-counter {
+			margin-left: auto;
+			margin-bottom: var(--pr-t-spacings-25);
+			font-size: var(--sizes-XS-fontSize);
+			line-height: var(--sizes-XS-lineHeight);
+			color: var(--palettes-neutral-600);
+		}
+	}
 }

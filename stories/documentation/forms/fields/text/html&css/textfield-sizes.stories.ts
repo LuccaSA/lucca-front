@@ -1,12 +1,10 @@
 import { Meta, StoryFn } from '@storybook/angular';
 
-interface TextfieldSizeStory {
-}
+interface TextfieldSizeStory {}
 
 export default {
 	title: 'Documentation/Forms/Fields/TextField/HTML&CSS',
-	argTypes: {
-	},
+	argTypes: {},
 } as Meta;
 
 function getTemplate(args: TextfieldSizeStory): string {
@@ -30,15 +28,15 @@ function getTemplate(args: TextfieldSizeStory): string {
 </div>`;
 }
 
-const Template: StoryFn<TextfieldSizeStory> = (args: TextfieldSizeStory) => ({
+const Template: StoryFn<TextfieldSizeStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [
 		`.form-field {
-			margin-bottom: var(--spacings-S);
+			margin-bottom: var(--pr-t-spacings-200);
 		}`,
 	],
 });
 
 export const Size = Template.bind({});
-Size.args = { };
+Size.args = {};

@@ -4,13 +4,13 @@
 
 @mixin hover {
 	&::placeholder {
-		color: var(--palettes-grey-500);
+		color: var(--palettes-neutral-500);
 	}
 }
 
 @mixin focus {
 	&::placeholder {
-		color: var(--palettes-grey-200);
+		color: var(--palettes-neutral-200);
 	}
 }
 
@@ -30,7 +30,7 @@
 }
 
 @mixin inputDisabled {
-	color: var(--palettes-grey-500);
+	color: var(--palettes-neutral-500);
 	cursor: not-allowed;
 }
 
@@ -75,7 +75,7 @@
 	&::before,
 	&::after {
 		content: '' !important;
-		right: var(--spacings-XS) !important;
+		right: var(--pr-t-spacings-100) !important;
 		bottom: 0.7rem !important;
 		z-index: 2 !important;
 		left: inherit !important;
@@ -86,7 +86,7 @@
 	.textfield-input,
 	.radiosfield-input,
 	.checkboxesfield-input {
-		padding-right: var(--spacings-L);
+		padding-right: var(--pr-t-spacings-400);
 	}
 }
 
@@ -131,7 +131,7 @@
 		animation-fill-mode: forwards;
 		animation-name: success;
 		animation-duration: 3s;
-		border-radius: 50%;
+		border-radius: var(--commons-borderRadius-full);
 		bottom: 0.85rem;
 		font-size: 1.2rem;
 		height: 1rem;
@@ -142,7 +142,7 @@
 	.textfield-input,
 	.radiosfield-input,
 	.checkboxesfield-input {
-		padding-right: var(--spacings-L);
+		padding-right: var(--pr-t-spacings-400);
 	}
 }
 

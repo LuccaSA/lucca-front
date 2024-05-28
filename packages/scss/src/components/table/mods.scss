@@ -28,7 +28,7 @@
 
 	.table-body-row-cell-action,
 	.table-foot-row-cell-action {
-		color: var(--palettes-grey-800);
+		color: var(--palettes-neutral-800);
 		text-decoration: none;
 
 		&:hover,
@@ -52,6 +52,40 @@
 
 @mixin card {
 	border-top: 0;
+
+	:where(.table-head, .table-body, .table-foot) {
+		&:first-child {
+			:where(.table-head-row, .table-body-row, .table-foot-row) {
+				&:first-child {
+					:where(.table-head-row-cell, .table-body-row-cell) {
+						&:first-child {
+							border-top-left-radius: var(--components-card-border-radius);
+						}
+
+						&:last-child {
+							border-top-right-radius: var(--components-card-border-radius);
+						}
+					}
+				}
+			}
+		}
+
+		&:last-child {
+			:where(.table-head-row, .table-body-row, .table-foot-row) {
+				&:last-child {
+					:where(.table-body-row-cell, .table-foot-row-cell) {
+						&:first-child {
+							border-bottom-left-radius: var(--components-card-border-radius);
+						}
+
+						&:last-child {
+							border-bottom-right-radius: var(--components-card-border-radius);
+						}
+					}
+				}
+			}
+		}
+	}
 
 	.table-head-row-cell {
 		border-top: 0;
@@ -118,8 +152,8 @@
 @mixin parent {
 	.table-body-row-cell,
 	.table-foot-row-cell {
-		color: var(--palettes-grey-700);
-		background-color: var(--palettes-grey-50);
+		color: var(--palettes-neutral-700);
+		background-color: var(--palettes-neutral-50);
 		font-size: var(--sizes-S-fontSize);
 		line-height: var(--sizes-S-lineHeight);
 		font-weight: 600;
@@ -147,7 +181,7 @@
 
 			font-size: var(--sizes-M-lineHeight);
 			font-weight: 400;
-			margin-right: var(--spacings-XS);
+			margin-right: var(--pr-t-spacings-100);
 			transition-duration: var(--commons-animations-durations-fast);
 			transition-property: transform;
 			vertical-align: top;
@@ -168,7 +202,7 @@
 	.table-body-row-cell,
 	.table-foot-row-cell {
 		&:first-child {
-			padding-left: var(--spacings-XL);
+			padding-left: var(--pr-t-spacings-600);
 		}
 	}
 }
@@ -180,14 +214,14 @@
 			top: 0;
 			bottom: 0;
 			left: 0;
-			width: var(--spacings-L);
+			width: var(--pr-t-spacings-400);
 			position: absolute;
 			cursor: move;
 
 			&::after {
 				@include icon.generate('dots_drag');
 
-				color: var(--palettes-grey-600);
+				color: var(--palettes-neutral-600);
 				font-size: var(--sizes-M-lineHeight);
 				height: 100%;
 				margin: auto;
@@ -201,7 +235,7 @@
 	.table-body-row-cell,
 	.table-foot-row-cell {
 		&:first-child {
-			padding-left: var(--spacings-L);
+			padding-left: var(--pr-t-spacings-400);
 			position: relative;
 		}
 	}
@@ -212,8 +246,28 @@
 	.table-body-row-cell,
 	.table-foot-row-cell {
 		&:first-child {
-			padding-right: var(--spacings-XS);
-			width: var(--spacings-S);
+			padding-right: var(--pr-t-spacings-100);
+			width: var(--pr-t-spacings-200);
+		}
+	}
+
+	&:has(input[type='checkbox']:checked) {
+		.table-head-row-cell,
+		.table-body-row-cell,
+		.table-foot-row-cell {
+			background-color: var(--palettes-product-50);
+		}
+	}
+}
+
+@mixin clickableSelectable {
+	&:hover {
+		&:has(input[type='checkbox']:checked) {
+			.table-head-row-cell,
+			.table-body-row-cell,
+			.table-foot-row-cell {
+				background-color: var(--palettes-product-100);
+			}
 		}
 	}
 }
@@ -221,7 +275,7 @@
 @mixin twoLines($atRoot: 'without: rule') {
 	@at-root ($atRoot) {
 		.table-head-row-cell-secondLine {
-			margin-top: var(--spacings-XXS);
+			margin-top: var(--pr-t-spacings-50);
 			display: block;
 			font-weight: 400;
 		}
@@ -232,13 +286,13 @@
 	}
 
 	.table-head-row-cell-wrapper {
-		max-width: calc(100% - var(--spacings-L));
+		max-width: calc(100% - var(--pr-t-spacings-400));
 		display: inline-block;
 		vertical-align: top;
 	}
 
 	.table-head-row-cell-secondLine {
-		margin-top: var(--spacings-XXS);
+		margin-top: var(--pr-t-spacings-50);
 		display: block;
 		font-weight: 400;
 	}
@@ -246,12 +300,12 @@
 
 @mixin avatar {
 	padding-right: 0;
-	width: var(--spacings-L);
+	width: var(--pr-t-spacings-400);
 }
 
 @mixin actions {
 	padding: 0.3rem;
-	padding-right: var(--spacings-XS);
+	padding-right: var(--pr-t-spacings-100);
 	padding-left: 0;
 	transition-duration: var(--commons-animations-durations-fast);
 	transition-property: opacity;
@@ -291,10 +345,6 @@
 
 @mixin alignRight {
 	text-align: right;
-}
-
-@mixin layoutFixed {
-	table-layout: fixed;
 }
 
 @mixin noOffset {

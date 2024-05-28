@@ -9,7 +9,7 @@ import { Meta, StoryFn, applicationConfig } from '@storybook/angular';
 	standalone: true,
 	imports: [LuQualificationSelectInputComponent],
 	template: `
-		<label class="textfield mod-inline u-marginRightS">
+		<label class="textfield mod-inline pr-u-marginRight200">
 			<lu-qualification-select placeholder="Select a qualification" class="textfield-input"></lu-qualification-select>
 			<span class="textfield-label">Simple</span>
 		</label>
@@ -27,7 +27,7 @@ export default {
 	decorators: [applicationConfig({ providers: [provideAnimations(), provideHttpClient()] })],
 } as Meta;
 
-const template: StoryFn<QualificationSelectStory> = (args: QualificationSelectStory) => ({
+const template: StoryFn<QualificationSelectStory> = (args) => ({
 	props: args,
 });
 

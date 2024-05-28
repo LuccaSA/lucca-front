@@ -1,0 +1,21 @@
+@use '@lucca-front/scss/src/commons/config';
+@use '@lucca-front/scss/src/commons/utils/media';
+@use 'exports' as *;
+
+.table-head-row-cell,
+.table-body-row-cell,
+.table-foot-row-cell {
+	@for $i from 2 through 20 {
+		&.mod-layoutFixed-#{$i} {
+			@include layoutFixed($i);
+		}
+
+		@each $breakpoint, $value in config.$breakpoints {
+			@include media.min($breakpoint) {
+				&.mod-layoutFixed-#{$i}\@mediaMin#{$breakpoint} {
+					@include layoutFixed($i);
+				}
+			}
+		}
+	}
+}

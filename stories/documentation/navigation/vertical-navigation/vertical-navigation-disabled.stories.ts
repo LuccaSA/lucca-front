@@ -1,7 +1,6 @@
-import { Meta, Story } from '@storybook/angular';
+import { Meta, StoryFn } from '@storybook/angular';
 
-interface VerticalNavigationDisabledStory {
-}
+interface VerticalNavigationDisabledStory {}
 
 export default {
 	title: 'Documentation/Navigation/VerticalNavigation/Disabled',
@@ -37,10 +36,10 @@ function getTemplate(args: VerticalNavigationDisabledStory): string {
 </nav>`;
 }
 
-const Template: Story<VerticalNavigationDisabledStory> = (args: VerticalNavigationDisabledStory) => ({
+const Template: StoryFn<VerticalNavigationDisabledStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
 export const Disabled = Template.bind({});
-Disabled.args = { };
+Disabled.args = {};

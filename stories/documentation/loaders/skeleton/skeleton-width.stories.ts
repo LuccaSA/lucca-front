@@ -17,7 +17,7 @@ function getTemplate(args: SkeletonWidthStory): string {
 </div>`;
 }
 
-const Template: StoryFn<SkeletonWidthStory> = (args: SkeletonWidthStory) => ({
+const Template: StoryFn<SkeletonWidthStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 });

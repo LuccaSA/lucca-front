@@ -10,7 +10,10 @@
 }
 
 .breadcrumbs-list-item-action {
-	&:is(.is-active, .active, [aria-current='page']) {
+	// &.active is deprecated
+	&.is-active,
+	&.active,
+	&[aria-current='page'] {
 		@include active;
 	}
 }

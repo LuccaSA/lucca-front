@@ -25,7 +25,7 @@ export default {
 	decorators: [applicationConfig({ providers: [provideAnimations()] })],
 } as Meta;
 
-const template: StoryFn<PopoverStory> = (args: PopoverStory) => ({
+const template: StoryFn<PopoverStory> = (args) => ({
 	props: args,
 });
 

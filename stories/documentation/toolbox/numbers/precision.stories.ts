@@ -22,7 +22,7 @@ export default {
 	},
 } as Meta;
 
-const template: StoryFn<PrecisionStory> = (args: PrecisionStory) => ({
+const template: StoryFn<PrecisionStory> = (args) => ({
 	props: args,
 });
 

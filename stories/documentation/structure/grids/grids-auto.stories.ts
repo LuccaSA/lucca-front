@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/angular';
+import { Meta, StoryFn } from '@storybook/angular';
 
 interface GridsAutoStory {
 	reverse: boolean;
@@ -47,14 +47,14 @@ function getTemplate(args: GridsAutoStory): string {
 </div>`;
 }
 
-const Template: Story<GridsAutoStory> = (args: GridsAutoStory) => ({
+const Template: StoryFn<GridsAutoStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [
 		`
 		.demo {
-			background-color: #F3F5FC;
-			padding: var(--spacings-S);
+			background-color: var(--colors-white-color);
+			padding: var(--pr-t-spacings-200);
 			border-radius: 1rem;
 			text-align: center;
 			height: 100%;
@@ -64,7 +64,7 @@ const Template: Story<GridsAutoStory> = (args: GridsAutoStory) => ({
 		}
 
 		.grid + .grid {
-			margin-top: var(--spacings-L);
+			margin-top: var(--pr-t-spacings-400);
 		}
 		`,
 	],

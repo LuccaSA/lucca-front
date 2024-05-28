@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/angular';
+import { Meta, StoryFn } from '@storybook/angular';
 
 interface SortableListBasicStory {
 	clickable: boolean;
@@ -61,7 +61,7 @@ function getTemplate(args: SortableListBasicStory): string {
 </ul>`;
 }
 
-const Template: Story<SortableListBasicStory> = (args: SortableListBasicStory) => ({
+const Template: StoryFn<SortableListBasicStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 });

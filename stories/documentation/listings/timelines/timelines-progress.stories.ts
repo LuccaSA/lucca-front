@@ -40,7 +40,7 @@ function getTemplate(args: TimelinesProgressStory): string {
 	`;
 }
 
-const Template: StoryFn<TimelinesProgressStory> = (args: TimelinesProgressStory) => ({
+const Template: StoryFn<TimelinesProgressStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 });

@@ -1,3 +1,5 @@
-import { TemplateRef } from '@angular/core';
+import { InjectionToken, TemplateRef, Type } from '@angular/core';
 
-export type PortalContent<T = unknown> = string | TemplateRef<T>;
+export type PortalContent<T = unknown> = string | TemplateRef<T> | Type<unknown>;
+
+export const PORTAL_CONTEXT = new InjectionToken<unknown>('PORTAL_CONTEXT');

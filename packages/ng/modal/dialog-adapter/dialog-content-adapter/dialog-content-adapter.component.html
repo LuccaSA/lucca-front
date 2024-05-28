@@ -1,0 +1,23 @@
+<lu-dialog>
+	<lu-dialog-header><h1>{{ title$ | async }}</h1></lu-dialog-header>
+	<lu-dialog-content>
+		<ng-container #contentProjectionRef></ng-container>
+	</lu-dialog-content>
+	<lu-dialog-footer>
+		<div class="footer-actions">
+			<button
+				luButton
+				type="button"
+				*ngIf="hasSubmit$ | async"
+				[palette]="submitPalette"
+				[disabled]="submitDisabled$ | async"
+				[ngClass]="submitClass()"
+				(click)="submit()"
+			>
+				{{ submitLabel$ | async }}
+				<lu-numeric-badge palette="product" *ngIf="hasSubmitCounter$ | async" [value]="submitCounter$ | async"></lu-numeric-badge>
+			</button>
+			<button luButton type="button" class="button mod-text" (click)="dismiss()">{{ cancelLabel$ | async }}</button>
+		</div>
+	</lu-dialog-footer>
+</lu-dialog>

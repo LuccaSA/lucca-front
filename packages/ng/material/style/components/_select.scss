@@ -9,14 +9,14 @@ mat-select {
 
 	.mat-select-trigger {
 		font-size: var(--sizes-M-fontSize);
-		margin: 2.2rem var(--spacings-S) 0.7rem;
+		margin: 2.2rem var(--pr-t-spacings-200) 0.7rem;
 		&::after {
 			bottom: -0.7rem;
 			content: '';
 			display: block;
-			left: calc(var(--spacings-S) * -1);
+			left: calc(var(--pr-t-spacings-200) * -1);
 			position: absolute;
-			right: calc(var(--spacings-S) * -1);
+			right: calc(var(--pr-t-spacings-200) * -1);
 			top: -2.2rem;
 		}
 	}

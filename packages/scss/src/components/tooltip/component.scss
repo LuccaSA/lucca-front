@@ -1,0 +1,24 @@
+@use '@lucca-front/scss/src/commons/utils/keyframe';
+
+@mixin component($atRoot: 'without: rule') {
+	@include keyframe.scaleIn;
+
+	background-color: var(--components-tooltip-background-color);
+	color: var(--components-tooltip-color);
+	padding: var(--pr-t-spacings-50) var(--pr-t-spacings-100);
+	max-width: var(--components-tooltip-max-width);
+	border-radius: var(--commons-borderRadius-M);
+	font-size: var(--sizes-XS-fontSize);
+	line-height: var(--sizes-XS-lineHeight);
+	transform-origin: var(--components-tooltip-transformOrigin);
+	margin: var(--components-tooltip-margin);
+	text-align: center;
+	width: fit-content;
+	animation-name: scaleIn;
+	animation-duration: var(--commons-animations-durations-fast);
+	animation-iteration-count: 1;
+
+	&:empty {
+		display: none;
+	}
+}

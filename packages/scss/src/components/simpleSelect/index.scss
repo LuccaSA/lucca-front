@@ -1,0 +1,42 @@
+@use 'exports' as *;
+
+.simpleSelect {
+	@include vars;
+	@include component;
+
+	&.mod-S {
+		@include S;
+	}
+
+	&.mod-XS {
+		@include XS;
+	}
+
+	&:has(.simpleSelect-input:focus-visible) {
+		@include focused;
+
+		&:has(.simpleSelect-input[aria-expanded="true"]) {
+			@include focusedExpanded;
+		}
+	}
+
+	&.is-searchFilled {
+		@include searchFilled;
+	}
+
+	&.is-selected {
+		@include selected;
+
+		&.is-searchFilled {
+			@include selectedSearchFilled;
+		}
+	}
+
+	&:has(.simpleSelect-input[aria-invalid="true"]) {
+		@include invalid;
+	}
+
+	&:has(.simpleSelect-input:disabled) {
+		@include disabled;
+	}
+}

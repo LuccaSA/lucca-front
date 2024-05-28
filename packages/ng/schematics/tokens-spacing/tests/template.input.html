@@ -1,0 +1,29 @@
+<div class="timeline mod-number u-paddingLeftXL u-paddingRightXL u-paddingTopS u-paddingBottomL"></div>
+@if (foo) {
+<div class="timeline mod-number u-paddingLeftXL u-paddingRightXL u-paddingTopS u-paddingBottomL"></div>
+} @else if (bar) {
+<div class="timeline mod-number u-paddingLeftXL u-paddingRightXL u-paddingTopS u-paddingBottomL"></div>
+} @else {
+<div class="timeline mod-number u-paddingLeftXL u-paddingRightXL u-paddingTopS u-paddingBottomL"></div>
+}
+<span></span>
+@for (foo of bar; track foo.baz) {
+<div class="timeline mod-number u-paddingLeftXL u-paddingRightXL u-paddingTopS u-paddingBottomL"></div>
+} @empty {
+<div class="timeline mod-number u-paddingLeftXL u-paddingRightXL u-paddingTopS u-paddingBottomL"></div>
+} @switch (foo) { @case ("bar") {
+<div class="timeline mod-number u-paddingLeftXL u-paddingRightXL u-paddingTopS u-paddingBottomL"></div>
+} @default {
+<div class="timeline mod-number u-paddingLeftXL u-paddingRightXL u-paddingTopS u-paddingBottomL"></div>
+} }
+<!-- basic class -->
+<div class="u-gapXL"></div>
+<div [class]="'u-gapXL'"></div>
+<div [class]="condition ? 'u-gapXL' : 'u-marginS'"></div>
+
+<!-- NgClass -->
+<span aria-hidden="true" [ngClass]="{ 'u-gapXS': showBillingInfos, 'u-marginXXL': !showBillingInfos }"></span>
+<span aria-hidden="true" [ngClass]="event.expanded ? 'u-gapXL' : 'u-gapM'"></span>
+
+<!-- Class bound attribute -->
+<span [class.u-paddingXXL]="!showDetails"></span>

@@ -1,19 +1,17 @@
-import { Meta, Story } from '@storybook/angular';
+import { Meta, StoryFn } from '@storybook/angular';
 
-interface InlineMessageBasicStory {
-}
+interface InlineMessageBasicStory {}
 
 export default {
 	title: 'Documentation/Forms/InlineMessage/HTML & CSS/Basic',
-	argTypes: {
-	},
+	argTypes: {},
 } as Meta;
 
 function getTemplate(args: InlineMessageBasicStory): string {
 	return `<div class="inlineMessage">Inline message</div>`;
 }
 
-const Template: Story<InlineMessageBasicStory> = (args: InlineMessageBasicStory) => ({
+const Template: StoryFn<InlineMessageBasicStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 });

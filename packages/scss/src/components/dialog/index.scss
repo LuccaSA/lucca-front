@@ -1,0 +1,48 @@
+@use 'exports' as *;
+@use '@lucca-front/scss/src/commons/utils/media';
+@use '@lucca-front/scss/src/components/button/exports' as button;
+
+.dialog {
+	@include vars;
+	@include component;
+
+	&.mod-XS {
+		@include XS;
+	}
+
+	&.mod-S {
+		@include S;
+	}
+
+	&.mod-fitContent {
+		@include fitContent;
+	}
+
+	&.mod-maxContent {
+		@include maxContent;
+	}
+
+	&.mod-L {
+		@include L;
+	}
+
+	&.mod-XL {
+		@include XL;
+	}
+
+	&:where(.mod-drawer) {
+		@include drawer;
+
+		&:where(.mod-fromBottom) {
+			@include fromBottom;
+		}
+
+		@include media.max('XXS') {
+			@include fromBottom;
+		}
+	}
+
+	&.mod-fullScreen {
+		@include fullScreen;
+	}
+}

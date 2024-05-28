@@ -1,14 +1,14 @@
 import { ChangeDetectionStrategy, Component, inject, Input, OnChanges, ViewEncapsulation } from '@angular/core';
 import { NgIf } from '@angular/common';
 import { InlineMessageState } from './inline-message-state';
-import { NgClazz } from '@lucca-front/ng/core';
+import { LuClass } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
 
 @Component({
 	selector: 'lu-inline-message',
 	standalone: true,
 	imports: [NgIf, IconComponent],
-	hostDirectives: [NgClazz],
+	providers: [LuClass],
 	templateUrl: './inline-message.component.html',
 	styleUrls: ['./inline-message.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
@@ -18,7 +18,7 @@ import { IconComponent } from '@lucca-front/ng/icon';
 	},
 })
 export class InlineMessageComponent implements OnChanges {
-	#ngClass = inject(NgClazz);
+	#luClass = inject(LuClass);
 
 	@Input({ required: true })
 	label: string;
@@ -30,9 +30,9 @@ export class InlineMessageComponent implements OnChanges {
 	size: 'S' | 'M';
 
 	ngOnChanges(): void {
-		this.#ngClass.ngClass = {
+		this.#luClass.setState({
 			[`mod-${this.size}`]: true,
 			[`is-${this.state}`]: true,
-		};
+		});
 	}
 }

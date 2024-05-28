@@ -1,12 +1,10 @@
 import { Meta, StoryFn } from '@storybook/angular';
 
-interface TextfieldInvalidStory {
-}
+interface TextfieldInvalidStory {}
 
 export default {
 	title: 'Documentation/Forms/Fields/TextField/HTML&CSS',
-	argTypes: {
-	},
+	argTypes: {},
 } as Meta;
 
 function getTemplate(args: TextfieldInvalidStory): string {
@@ -21,10 +19,10 @@ function getTemplate(args: TextfieldInvalidStory): string {
 </div>`;
 }
 
-const Template: StoryFn<TextfieldInvalidStory> = (args: TextfieldInvalidStory) => ({
+const Template: StoryFn<TextfieldInvalidStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
 export const Invalid = Template.bind({});
-Invalid.args = { };
+Invalid.args = {};

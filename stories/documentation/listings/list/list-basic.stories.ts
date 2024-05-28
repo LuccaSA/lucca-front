@@ -43,7 +43,7 @@ function getTemplate(args: ListBasicStory): string {
 	`;
 }
 
-const Template: StoryFn<ListBasicStory> = (args: ListBasicStory) => ({
+const Template: StoryFn<ListBasicStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 });

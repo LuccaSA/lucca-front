@@ -1,16 +1,19 @@
+import { NgIf } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { LuSafeExternalSvgPipe } from '@lucca-front/ng/safe-content';
 import { PortalContent, PortalDirective } from '@lucca-front/ng/core';
+import { LuSafeExternalSvgPipe } from '@lucca-front/ng/safe-content';
 
 @Component({
 	selector: 'lu-empty-state-page',
 	standalone: true,
-	imports: [CommonModule, LuSafeExternalSvgPipe, PortalDirective],
+	imports: [NgIf, LuSafeExternalSvgPipe, PortalDirective],
 	templateUrl: './empty-state-page.component.html',
 	styleUrl: './empty-state-page.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	encapsulation: ViewEncapsulation.None,
+	host: {
+		class: 'emptyState-wrapper',
+	},
 })
 export class EmptyStatePageComponent {
 	@Input()
@@ -18,7 +21,7 @@ export class EmptyStatePageComponent {
 	/**
 	 * Icon image (URL)
 	 */
-	icon = 'https://cdn.lucca.fr/lucca-front/assets/empty-states/message/medal-01.svg';
+	icon = null;
 
 	/**
 	 * Top right background image (URL)
@@ -44,6 +47,12 @@ export class EmptyStatePageComponent {
 	@Input()
 	bottomLeftForeground = 'https://cdn.lucca.fr/lucca-front/assets/empty-states/poplee/core-hr-01.svg';
 
+	/**
+	 * Background color for content (text)
+	 */
+	@Input()
+	contentBackgroundColor = 'var(--pr-t-elevation-surface-default)';
+
 	@Input({
 		required: true,
 	})
@@ -53,4 +62,7 @@ export class EmptyStatePageComponent {
 		required: true,
 	})
 	description: PortalContent;
+
+	@Input()
+	hx: 1 | 2 | 3 | 4 | 5 | 6 = 1;
 }

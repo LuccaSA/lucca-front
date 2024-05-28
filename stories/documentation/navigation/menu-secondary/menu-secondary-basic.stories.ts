@@ -32,7 +32,7 @@ function getTemplate(args: MenuSecondaryBasicStory): string {
 	const banner = args.banner ? `mod-withBanner` : '';
 	const open = args.open ? `is-open` : '';
 	return `
-	<div class="navSide ${compact} ${banner} ${open}">
+	<div class="navSide ${compact} ${banner}">
 		<nav role="navigation" aria-label="Nom application" class="navSide-wrapper">
 			<div class="navSide-mainSection">
 				<div class="navSide-item mod-mobileToggle">
@@ -59,7 +59,7 @@ function getTemplate(args: MenuSecondaryBasicStory): string {
 							</li>
 						</ul>
 					</li>
-					<li class="navSide-item is-open">
+					<li class="navSide-item ${open}">
 						<button type="button" class="navSide-item-link" aria-expanded="true">
 							<span aria-hidden="true" class="lucca-icon icon-peoplePerson"></span>
 							<span class="navSide-item-link-title">Section#2 with a larger name</span>
@@ -70,9 +70,24 @@ function getTemplate(args: MenuSecondaryBasicStory): string {
 								<a href="#" class="navSide-item-subMenu-link">Section 2.1</a>
 							</li>
 							<li class="navSide-item-subMenu-item">
+								<a href="#" class="navSide-item-subMenu-link">
+									Section 2.2
+								</a>
+							</li>
+							<li class="navSide-item-subMenu-item">
 								<a href="#" class="navSide-item-subMenu-link is-active">
 									Section 2.3
-									<span class="numericBadge palette-primary mod-S"><span class="u-mask">, </span>9</span>
+									<span class="numericBadge"><span class="u-mask">, </span>9</span>
+								</a>
+							</li>
+							<li class="navSide-item-subMenu-item">
+								<a href="#" class="navSide-item-subMenu-link">
+									Section 2.4
+								</a>
+							</li>
+							<li class="navSide-item-subMenu-item">
+								<a href="#" class="navSide-item-subMenu-link">
+									Section 2.5
 								</a>
 							</li>
 						</ul>
@@ -87,7 +102,7 @@ function getTemplate(args: MenuSecondaryBasicStory): string {
 						<a href="#" class="navSide-item-link">
 							<span aria-hidden="true" class="lucca-icon icon-settingsEqualizer"></span>
 							<span class="navSide-item-link-title">Section 4</span>
-							<span class="numericBadge palette-primary mod-S"><span class="u-mask">, </span>9</span>
+							<span class="numericBadge"><span class="u-mask">, </span>9</span>
 						</a>
 					</li>
 				</ul>
@@ -105,7 +120,7 @@ function getTemplate(args: MenuSecondaryBasicStory): string {
 	`;
 }
 
-const Template: StoryFn<MenuSecondaryBasicStory> = (args: MenuSecondaryBasicStory) => ({
+const Template: StoryFn<MenuSecondaryBasicStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [

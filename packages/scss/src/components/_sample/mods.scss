@@ -1,0 +1,7 @@
+// All component modifiers are defined in this file through various mixins.
+// The file may be empty but must be present.
+// All property values modified by a modifier are modified through a CSS variable.
+
+@mixin sampleModifierA {
+	--components-sample-property1: otherValue;
+}

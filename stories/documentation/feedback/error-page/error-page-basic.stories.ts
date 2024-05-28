@@ -21,7 +21,7 @@ function getTemplate(args: ErrorBasicStory): string {
 	`;
 }
 
-const Template: StoryFn<ErrorBasicStory> = (args: ErrorBasicStory) => ({
+const Template: StoryFn<ErrorBasicStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [

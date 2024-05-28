@@ -18,7 +18,7 @@ function getTemplate(args: TextfieldClearableStory): string {
 </label>`;
 }
 
-const Template: StoryFn<TextfieldClearableStory> = (args: TextfieldClearableStory) => ({
+const Template: StoryFn<TextfieldClearableStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [

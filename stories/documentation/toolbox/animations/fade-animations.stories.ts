@@ -10,7 +10,7 @@ import { applicationConfig, Meta, StoryFn } from '@storybook/angular';
 	imports: [CommonModule],
 	template: ` <div class="grid">
 		<div class="grid-column ng-demo-block" style="--grid-colspan: 3">
-			<h3 class="u-margin0">
+			<h3 class="pr-u-margin0">
 				Fade
 				<button class="button mod-S" (click)="fading = !fading">{{ fading ? 'Show' : 'Hide' }}</button>
 			</h3>
@@ -30,7 +30,7 @@ export default {
 	decorators: [applicationConfig({ providers: [provideAnimations()] })],
 } as Meta;
 
-const template: StoryFn<FadeAnimationStory> = (args: FadeAnimationStory) => ({
+const template: StoryFn<FadeAnimationStory> = (args) => ({
 	props: args,
 });
 
@@ -52,7 +52,7 @@ class AppModule {}
 	template: \`
 		<div class="grid">
 			<div class="grid-column ng-demo-block" style="--grid-colspan: 3">
-				<h3 class="u-margin0">
+				<h3 class="pr-u-margin0">
 					Fade
 					<button class="button mod-S" (click)="fading = !fading">{{ fading ? 'Show' : 'Hide' }}</button>
 				</h3>

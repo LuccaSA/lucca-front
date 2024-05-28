@@ -3,25 +3,27 @@
 
 @mixin component($atRoot: 'without: rule') {
 	@include reset.list;
+
 	display: flex;
 	flex-direction: column;
-	gap: var(--spacings-S);
+	font-size: var(--components-calloutFeedbackList-fontSize);
+	line-height: var(--components-calloutFeedbackList-lineHeight);
+	gap: var(--components-calloutFeedbackList-gap);
+
+	.button {
+		@include button.S;
+	}
 
 	@at-root ($atRoot) {
 		.calloutFeedbackList-item {
 			display: flex;
 			flex-direction: column;
-			gap: var(--spacings-XS);
+			gap: var(--pr-t-spacings-100);
 		}
 
 		.calloutFeedbackList-item-actions {
 			display: inline-flex;
-			gap: var(--spacings-XS);
-
-			.button {
-				@include button.S;
-				margin: 0;
-			}
+			gap: var(--pr-t-spacings-100);
 		}
 	}
 }

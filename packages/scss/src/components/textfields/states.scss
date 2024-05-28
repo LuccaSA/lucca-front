@@ -1,8 +1,9 @@
 @use '@lucca-front/scss/src/commons/utils/form';
 @use '@lucca-front/scss/src/commons/utils/a11y';
+@use '@lucca-front/scss/src/commons/utils/color';
 
 @mixin inputHover {
-	box-shadow: 0 0 0 1px var(--palettes-grey-400);
+	box-shadow: 0 0 0 1px var(--palettes-neutral-400);
 }
 
 @mixin inputFocus {
@@ -12,7 +13,7 @@
 @mixin inputDisabled {
 	background-color: var(--components-textfield-disabled-background);
 	color: var(--components-textfield-disabled-color);
-	box-shadow: 0 0 0 1px var(--palettes-grey-300);
+	box-shadow: 0 0 0 1px var(--palettes-neutral-300);
 	cursor: default;
 
 	&::placeholder {
@@ -20,19 +21,19 @@
 	}
 
 	~ .textfield-clear {
-		--components-clear-cross-color: var(--palettes-grey-500) !important;
+		--components-clear-cross-color: var(--palettes-neutral-500) !important;
 		pointer-events: none;
 	}
 
 	~ .textfield-actionClear {
 		// deprecated
-		color: var(--palettes-grey-500) !important;
+		color: var(--palettes-neutral-500) !important;
 		pointer-events: none;
 	}
 }
 
 @mixin filterHover {
-	background-color: var(--palettes-grey-50);
+	background-color: var(--palettes-neutral-50);
 }
 
 @mixin open {
@@ -197,7 +198,11 @@
 }
 
 @mixin materialInputDisabled {
-	background-image: linear-gradient(to right, var(--components-textfield-material-border-color) 33%, rgba(255, 255, 255, 0) 0%);
+	background-image: linear-gradient(
+		to right,
+		var(--components-textfield-material-border-color) 33%,
+		color.transparentize(var(--colors-white-color), 0) 0%
+	);
 	background-size: 3px 1px;
 	background-color: transparent;
 	background-position: bottom;
@@ -226,5 +231,5 @@
 }
 
 @mixin entryHover {
-	background-color: var(--palettes-primary-50);
+	background-color: var(--palettes-product-50);
 }

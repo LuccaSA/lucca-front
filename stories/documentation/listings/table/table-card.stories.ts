@@ -35,10 +35,34 @@ function getTemplate(args: TableCardStory): string {
 			</tbody>
 		</table>
 	</div>
+	<div class="card">
+		<table class="table mod-card mod-clickable">
+			<tbody class="table-body">
+				<tr class="table-body-row">
+					<td class="table-body-row-cell">
+						<a href="#" class="table-body-row-cell-action">Table cell</a>
+					</td>
+					<td class="table-body-row-cell">Table cell</td>
+				</tr>
+				<tr class="table-body-row">
+					<td class="table-body-row-cell">
+						<a href="#" class="table-body-row-cell-action">Table cell</a>
+					</td>
+					<td class="table-body-row-cell">Table cell</td>
+				</tr>
+				<tr class="table-body-row">
+					<td class="table-body-row-cell">
+						<a href="#" class="table-body-row-cell-action">Table cell</a>
+					</td>
+					<td class="table-body-row-cell">Table cell</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
 	`;
 }
 
-const Template: StoryFn<TableCardStory> = (args: TableCardStory) => ({
+const Template: StoryFn<TableCardStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 });

@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
-import { Config, sanitize } from 'dompurify';
+import { Config, sanitize } from 'isomorphic-dompurify';
 
 type SanitizerConfig = Config & { RETURN_DOM_FRAGMENT?: false | undefined; RETURN_DOM?: false | undefined };
 

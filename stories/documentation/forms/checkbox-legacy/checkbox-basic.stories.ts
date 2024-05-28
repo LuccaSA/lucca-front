@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/angular';
+import { Meta, StoryFn } from '@storybook/angular';
 
 interface CheckboxBasicStory {
 	row: boolean;
@@ -59,7 +59,7 @@ function getTemplate(args: CheckboxBasicStory): string {
 </fieldset>`;
 }
 
-const Template: Story<CheckboxBasicStory> = (args: CheckboxBasicStory) => ({
+const Template: StoryFn<CheckboxBasicStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 });

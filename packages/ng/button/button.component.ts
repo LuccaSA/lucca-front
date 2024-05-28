@@ -1,20 +1,24 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, inject, Input, OnChanges } from '@angular/core';
-import { NgClazz, Palette } from '@lucca-front/ng/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, ContentChild, ElementRef, inject, Input, OnChanges, OnInit, Renderer2, ViewEncapsulation } from '@angular/core';
+import { LuClass, Palette } from '@lucca-front/ng/core';
+import { IconComponent } from '@lucca-front/ng/icon';
 
 @Component({
 	// eslint-disable-next-line @angular-eslint/component-selector
 	selector: 'button[luButton],a[luButton]',
 	standalone: true,
-	hostDirectives: [NgClazz],
+	providers: [LuClass],
 	template: '<ng-content></ng-content>',
 	styleUrls: ['./button.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
+	encapsulation: ViewEncapsulation.None,
 	host: {
 		class: 'button',
 	},
 })
-export class ButtonComponent implements OnChanges {
-	#ngClazz = inject(NgClazz);
+export class ButtonComponent implements OnChanges, OnInit {
+	#luClass = inject(LuClass);
+	#elementRef = inject<ElementRef<HTMLButtonElement>>(ElementRef);
+	#renderer = inject(Renderer2);
 
 	@Input()
 	size: 'M' | 'S' | 'XS';
@@ -23,6 +27,11 @@ export class ButtonComponent implements OnChanges {
 		transform: booleanAttribute,
 	})
 	block = false;
+
+	@Input({
+		transform: booleanAttribute,
+	})
+	delete = false;
 
 	@Input()
 	palette: Palette = 'none';
@@ -37,13 +46,46 @@ export class ButtonComponent implements OnChanges {
 	 */
 	luButton: '' | 'outlined' | 'text' | 'text-invert' = '';
 
+	#iconComponentRef?: ElementRef<HTMLElement>;
+
+	@ContentChild(IconComponent, { read: ElementRef<HTMLElement> })
+	set iconComponentRef(ref: ElementRef<HTMLElement>) {
+		this.#iconComponentRef = ref;
+		this.updateClasses();
+	}
+
+	private get iconOnly(): boolean {
+		const childNodes = Array.from(this.#elementRef?.nativeElement?.childNodes || []);
+		const noText = childNodes.every(({ nodeName }) => nodeName !== '#text');
+		// ignore icon and comment
+		const noSpan =
+			childNodes.filter((node: HTMLElement) => {
+				return node.nodeName !== '#comment' && node.nodeName.toLowerCase() !== 'lu-icon' && !node?.className?.includes('u-mask');
+			}).length == 0;
+		return !!this.#iconComponentRef && noSpan && noText;
+	}
+
 	ngOnChanges(): void {
+		this.updateClasses();
+	}
+
+	ngOnInit(): void {
+		if (this.#elementRef.nativeElement.tagName.toLowerCase() === 'button' && this.#elementRef.nativeElement.getAttribute('type') === null) {
+			this.#renderer.setAttribute(this.#elementRef.nativeElement, 'type', 'button');
+		}
+	}
+
+	updateClasses(): void {
 		const ngClassConfig = {
 			[`mod-${this.size}`]: true,
 			[`mod-block`]: this.block,
 			[`palette-${this.palette}`]: true,
 			[`is-${this.state}`]: true,
+			['mod-onlyIcon']: this.iconOnly,
+			['mod-withIcon']: this.#iconComponentRef !== undefined,
+			['mod-delete']: this.delete,
 		};
+
 		if (this.luButton !== '') {
 			if (this.luButton === 'text-invert') {
 				ngClassConfig['mod-text'] = true;
@@ -52,6 +94,6 @@ export class ButtonComponent implements OnChanges {
 				ngClassConfig[`mod-${this.luButton}`] = true;
 			}
 		}
-		this.#ngClazz.ngClass = ngClassConfig;
+		this.#luClass.setState(ngClassConfig);
 	}
 }

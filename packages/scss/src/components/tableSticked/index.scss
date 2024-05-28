@@ -5,51 +5,29 @@
 .table {
 	@include vars;
 
-	&.mod-stickyColumn {
+	//For both mod-stickyColumn + responsive variant
+	&[class*='mod-stickyColumn'] {
 		@include stickyColumn;
+	}
+
+	&.mod-stickyColumn {
+		@include stickyColumnOffset;
 	}
 
 	@each $breakpoint, $value in config.$breakpoints {
 		@include media.min($breakpoint) {
-			&.mod-stickyColumn\@mediaMin#{$breakpoint} {
-				@include stickyColumn;
+			&.mod-stickyColumnAtMediaMin#{$breakpoint} {
+				@include stickyColumnOffset;
 			}
 		}
 	}
 
-	&.mod-stickyColumn-shadow {
-		@include shadow;
-	}
-
-	&[class*='mod-stickyColumn'] {
-		.table-head-row-cell,
-		.table-body-row-cell,
-		.table-foot-row-cell {
-			@for $i from 0 through 50 {
-				&.mod-stickyColumn-leftOffset#{$i} {
-					@include leftOffset($i);
-				}
-
-				&.mod-stickyColumn-rightOffset#{$i} {
-					@include rightOffset($i);
-				}
-			}
-		}
-	}
-
-	[class*='sticky'][class*='shadow-wrapper'] {
-		@include wrapper;
-	}
-
+	//For both stickyHeader + -withBanner variant
 	&[class*='mod-stickyHeader'] {
 		@include stickyHeaderCommon;
 
-		@each $breakpoint, $value in config.$breakpoints {
-			@include media.max($breakpoint) {
-				&.mod-stickyColumn\@mediaMin#{$breakpoint} {
-					@include stickyColumnBreakpoint;
-				}
-			}
+		.mod-stickyHeader-shadow {
+			@include stickyHeaderShadow;
 		}
 	}
 
@@ -59,12 +37,5 @@
 
 	&.mod-stickyHeader-withBanner {
 		@include stickyHeaderBanner;
-	}
-}
-
-.table-body-row,
-.table-foot-row {
-	&.mod-stickyHeader-shadow {
-		@include stickyHeaderShadow;
 	}
 }

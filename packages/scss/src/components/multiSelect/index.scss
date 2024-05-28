@@ -1,0 +1,37 @@
+@use 'exports' as *;
+
+.multiSelect {
+	@include vars;
+	@include component;
+
+	&.mod-S {
+		@include S;
+	}
+
+	&:has(.multipleSelect-displayer-search:focus-visible) {
+		@include focused;
+	}
+
+	&:has(.multipleSelect-displayer-search[aria-invalid="true"]) {
+		@include invalid;
+	}
+
+	&:has(.multipleSelect-displayer-search:disabled) {
+		@include disabled;
+	}
+
+}
+
+.multipleSelect-displayer {
+	&.mod-filter {
+		@include displayerFilter;
+
+		&.is-filled {
+			@include displayerFilterFilled;
+		}
+
+		&:has([aria-expanded="true"]):not(:has(:placeholder-shown)) {
+			@include displayerFilterExpended;
+		}
+	}
+}

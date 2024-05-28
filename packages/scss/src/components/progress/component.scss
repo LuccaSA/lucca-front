@@ -1,4 +1,4 @@
-@use '@lucca-front/scss/src/components/keyframe/exports' as keyframe;
+@use '@lucca-front/scss/src/commons/utils/keyframe';
 
 @mixin component($atRoot: 'without: rule') {
 	@keyframes progress {
@@ -13,7 +13,8 @@
 		}
 	}
 
-	background-color: var(--commons-background-base);
+	background-color: var(--components-progress-background);
+	border-radius: var(--commons-borderRadius-full);
 	height: var(--components-progress-height);
 	margin: var(--components-progress-margin-vertical) var(--components-progress-margin-horizontal);
 	position: relative;

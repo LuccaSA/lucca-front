@@ -1,3 +1,0 @@
-@mixin duration($speed) {
-	--duration: var(--commons-animations-durations-#{$speed});
-}

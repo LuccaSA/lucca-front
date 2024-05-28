@@ -1,3 +1,7 @@
+@mixin autoAt {
+	--grid-columns: 1;
+}
+
 @mixin auto {
 	--grid-template-columns: none;
 	grid-auto-columns: 1fr;

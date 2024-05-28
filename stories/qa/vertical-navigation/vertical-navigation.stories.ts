@@ -1,22 +1,23 @@
 import { Component } from '@angular/core';
-import { Story, Meta, moduleMetadata } from '@storybook/angular';
+import { Meta, StoryFn, moduleMetadata } from '@storybook/angular';
 
 @Component({
 	standalone: true,
 	selector: 'vertical-navigation-stories',
 	templateUrl: './vertical-navigation.stories.html',
-}) class VerticalNavigationStory {}
+})
+class VerticalNavigationStory {}
 
 export default {
-  title: 'QA/VerticalNavigation',
-  component: VerticalNavigationStory,
+	title: 'QA/VerticalNavigation',
+	component: VerticalNavigationStory,
 	decorators: [
 		moduleMetadata({
-			entryComponents: [VerticalNavigationStory]
-		})
-	]
+			entryComponents: [VerticalNavigationStory],
+		}),
+	],
 } as Meta;
 
-const template: Story<VerticalNavigationStory> = () => ({});
+const template: StoryFn<VerticalNavigationStory> = () => ({});
 
 export const basic = template.bind({});

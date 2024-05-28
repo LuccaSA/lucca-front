@@ -1,22 +1,23 @@
 import { Component } from '@angular/core';
-import { Story, Meta, moduleMetadata } from '@storybook/angular';
+import { Meta, StoryFn, moduleMetadata } from '@storybook/angular';
 
 @Component({
 	standalone: true,
 	selector: 'sortable-list-stories',
 	templateUrl: './sortable-list.stories.html',
-}) class SortableListStory {}
+})
+class SortableListStory {}
 
 export default {
-  title: 'QA/SortableList',
-  component: SortableListStory,
+	title: 'QA/SortableList',
+	component: SortableListStory,
 	decorators: [
 		moduleMetadata({
-			entryComponents: [SortableListStory]
-		})
-	]
+			entryComponents: [SortableListStory],
+		}),
+	],
 } as Meta;
 
-const template: Story<SortableListStory> = () => ({});
+const template: StoryFn<SortableListStory> = () => ({});
 
 export const basic = template.bind({});

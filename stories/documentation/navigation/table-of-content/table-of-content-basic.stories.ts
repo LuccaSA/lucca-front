@@ -37,7 +37,7 @@ function getTemplate(args: TableOfContentBasicStory): string {
 	`;
 }
 
-const Template: StoryFn<TableOfContentBasicStory> = (args: TableOfContentBasicStory) => ({
+const Template: StoryFn<TableOfContentBasicStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 });

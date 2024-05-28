@@ -24,16 +24,16 @@ function getTemplate(args: GridsLegacyOffsetStory): string {
 	`;
 }
 
-const Template: StoryFn<GridsLegacyOffsetStory> = (args: GridsLegacyOffsetStory) => ({
+const Template: StoryFn<GridsLegacyOffsetStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [
 		`
 		.grid-demo {
-			background-color: var(--palettes-grey-200);
-			margin-bottom: var(--spacings-S);
-			padding: var(--spacings-S);
-			border-radius: 9999px;
+			background-color: var(--palettes-neutral-200);
+			margin-bottom: var(--pr-t-spacings-200);
+			padding: var(--pr-t-spacings-200);
+			border-radius: var(--commons-borderRadius-full);
 		}`,
 	],
 });

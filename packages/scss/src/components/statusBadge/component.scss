@@ -1,18 +1,18 @@
 @mixin component($atRoot: 'without: rule') {
 	align-items: flex-start;
-	background-color: var(--palettes-100, var(--palettes-primary-100));
+	background-color: var(--palettes-100, var(--palettes-product-100));
 	border-radius: var(--commons-borderRadius-L);
 	display: inline-flex;
 	font-size: var(--components-statusBadge-fontSize);
-	gap: var(--spacings-XXS);
+	gap: var(--pr-t-spacings-50);
 	line-height: var(--components-statusBadge-lineHeight);
-	padding: calc(var(--spacings-XXS) / 2) var(--spacings-XS) calc(var(--spacings-XXS) / 2) .375rem;
+	padding: calc(var(--pr-t-spacings-50) / 2) var(--pr-t-spacings-100) calc(var(--pr-t-spacings-50) / 2) var(--pr-t-spacings-75);
 	white-space: nowrap;
 	font-weight: normal;
 
 	&::before {
-		background-color: var(--palettes-700, var(--palettes-primary-700));
-		border-radius: 50%;
+		background-color: var(--palettes-700, var(--palettes-product-700));
+		border-radius: var(--commons-borderRadius-full);
 		content: '';
 		display: block;
 		height: var(--components-statusBadge-dot-size);

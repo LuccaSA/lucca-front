@@ -1,16 +1,8 @@
-@use '@lucca-front/icons/src/commons/config';
-@use '@lucca-front/icons/src/commons/core';
 @use 'exports' as *;
 
 .lucca-icon {
 	@include component;
 	@include vars;
-
-	@each $name, $content in config.$icons {
-		&.icon-#{core.camelize($name)} {
-			@include subComponent($content);
-		}
-	}
 
 	&.mod-XXS {
 		@include XXS;

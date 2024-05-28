@@ -4,17 +4,17 @@
 
 @mixin selectInputStyle {
 	:host {
-		--components-select-input-padding-horizontal: var(--spacings-XS);
-		--components-select-input-padding-vertical: var(--spacings-XS);
-		--components-select-framed-color: var(--palettes-grey-500);
-		--components-select-framed-color50: var(--palettes-grey-50);
-		--components-select-framed-see-through: var(--palettes-grey-50);
-		--components-select-framed-text: var(--palettes-grey-800);
+		--components-select-input-padding-horizontal: var(--pr-t-spacings-100);
+		--components-select-input-padding-vertical: var(--pr-t-spacings-100);
+		--components-select-framed-color: var(--palettes-neutral-500);
+		--components-select-framed-color50: var(--palettes-neutral-50);
+		--components-select-framed-see-through: var(--palettes-neutral-50);
+		--components-select-framed-text: var(--palettes-neutral-800);
 		--components-select-framed-placeholder: #cccccc;
-		--components-select-framed-side-padding: var(--spacings-S);
-		--components-select-framed-top-padding: var(--spacings-L);
-		--components-select-framed-bottom-padding: var(--spacings-S);
-		--components-select-framed-label-top-offset: var(--spacings-XS);
+		--components-select-framed-side-padding: var(--pr-t-spacings-200);
+		--components-select-framed-top-padding: var(--pr-t-spacings-400);
+		--components-select-framed-bottom-padding: var(--pr-t-spacings-200);
+		--components-select-framed-label-top-offset: var(--pr-t-spacings-100);
 
 		cursor: pointer;
 		outline: none;
@@ -24,7 +24,7 @@
 		&::after {
 			@include icon.generate('arrow_chevron_bottom');
 
-			color: var(--palettes-grey-600);
+			color: var(--palettes-neutral-600);
 			bottom: var(--components-select-input-padding-vertical);
 			font-size: var(--sizes-M-lineHeight);
 			line-height: var(--sizes-M-lineHeight);
@@ -34,7 +34,8 @@
 			transition: transform var(--commons-animations-durations-standard) ease;
 		}
 
-		&[disabled], &.is-disabled {
+		&[disabled],
+		&.is-disabled {
 			cursor: not-allowed;
 			pointer-events: all;
 		}
@@ -57,7 +58,7 @@
 	}
 
 	.lu-select-placeholder {
-		color: var(--palettes-grey-400);
+		color: var(--palettes-neutral-400);
 		line-height: var(--sizes-M-lineHeight);
 		min-height: calc(var(--components-select-framed-bottom-padding) + var(--sizes-M-lineHeight));
 		padding: var(--components-select-input-padding-vertical) 3.5rem var(--components-select-input-padding-vertical)
@@ -70,27 +71,26 @@
 
 	.lu-select-suffix {
 		position: absolute;
-		bottom: 0.75rem;
+		bottom: var(--pr-t-spacings-150);
 		right: 2.25rem;
 	}
 
 	.lu-select-clearer {
 		position: absolute;
-		bottom: 0.75rem;
+		bottom: var(--pr-t-spacings-150);
 		right: 2.25rem;
 	}
 
 	::ng-deep .lu-select-value {
-
 		.label {
-			padding: var(--spacings-XXS) var(--spacings-XS);
+			padding: var(--pr-t-spacings-50) var(--pr-t-spacings-100);
 			margin-left: 0;
 		}
 
 		.chip {
 			vertical-align: baseline;
 			max-width: 100%;
-			margin: 0 var(--spacings-XXS) var(--spacings-XXS) 0;
+			margin: 0 var(--pr-t-spacings-50) var(--pr-t-spacings-50) 0;
 			text-overflow: ellipsis;
 			overflow: hidden;
 			vertical-align: top;
@@ -113,7 +113,7 @@
 		}
 
 		.lu-select-clearer {
-			bottom: var(--spacings-XS);
+			bottom: var(--pr-t-spacings-100);
 		}
 
 		&::after {
@@ -141,9 +141,9 @@
 				height: var(--sizes-XS-lineHeight);
 				line-height: var(--sizes-XS-lineHeight);
 				font-size: var(--sizes-XS-fontSize);
-				padding-left: var(--spacings-XXS);
-				padding-right: var(--spacings-XXS);
-				gap: var(--spacings-XXS);
+				padding-left: var(--pr-t-spacings-50);
+				padding-right: var(--pr-t-spacings-50);
+				gap: var(--pr-t-spacings-50);
 			}
 
 			.numericBadge {
@@ -159,9 +159,9 @@
 			padding: var(--components-select-framed-top-padding) 0 0;
 
 			&::after {
-				color: var(--palettes-grey-500);
+				color: var(--palettes-neutral-500);
 				bottom: var(--components-select-framed-bottom-padding);
-				right: var(--spacings-XS);
+				right: var(--pr-t-spacings-100);
 			}
 
 			.lu-select-value {
@@ -170,7 +170,7 @@
 			}
 
 			.lu-select-placeholder {
-				color: var(--palettes-grey-400);
+				color: var(--palettes-neutral-400);
 				padding: 0 calc(var(--components-select-framed-side-padding) * 3) var(--components-select-framed-bottom-padding)
 					var(--components-select-framed-side-padding);
 			}
@@ -188,15 +188,15 @@
 		.lu-select-placeholder {
 			padding: 0;
 			height: auto;
-			padding-top: var(--spacings-S);
-			color: var(--palettes-grey-800);
+			padding-top: var(--pr-t-spacings-200);
+			color: var(--palettes-neutral-800);
 		}
 	}
 
 	// Material
 	:host-context(.textfield.mod-material) {
 		&::after {
-			color: var(--palettes-grey-500);
+			color: var(--palettes-neutral-500);
 			bottom: 0.6rem;
 			right: 0;
 		}
@@ -244,7 +244,7 @@
 		.lu-select-display-wrapper {
 			overflow: visible;
 			white-space: normal;
-			margin-bottom: calc(var(--spacings-XXS) * -1);
+			margin-bottom: calc(var(--pr-t-spacings-50) * -1);
 		}
 	}
 
@@ -252,11 +252,11 @@
 	:host-context(.textfield.mod-outlined) {
 		&.textfield-input {
 			&::after {
-				color: var(--palettes-grey-600);
+				color: var(--palettes-neutral-600);
 			}
 
 			.lu-select-placeholder {
-				color: var(--palettes-grey-400);
+				color: var(--palettes-neutral-400);
 			}
 		}
 		// Error

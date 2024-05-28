@@ -3,7 +3,7 @@
 @mixin component($atRoot: 'without: rule') {
 	list-style-type: none;
 	padding: 0;
-	margin: var(--spacings-S) 0;
+	margin: var(--pr-t-spacings-200) 0;
 	display: flex;
 	align-items: center;
 
@@ -18,8 +18,8 @@
 					content: '';
 					display: flex;
 					flex-grow: 1;
-					border-bottom: 2px solid var(--palettes-grey-200);
-					margin: var(--spacings-XS);
+					border-bottom: 2px solid var(--palettes-neutral-200);
+					margin: var(--pr-t-spacings-100);
 				}
 			}
 
@@ -32,7 +32,7 @@
 			padding-left: 1.75rem;
 			position: relative;
 			display: block;
-			color: var(--palettes-primary-700);
+			color: var(--palettes-product-700);
 			font-weight: 600;
 			margin: 0;
 			font-size: var(--sizes-M-fontSize);
@@ -44,16 +44,16 @@
 		.timeline-step:not([aria-current='step']):not([aria-current='step'] ~ .timeline-step) .timeline-step-title-icon {
 			&::before {
 				content: '';
-				color: var(--palettes-primary-text);
+				color: var(--palettes-product-text);
 				width: 1rem;
 				height: 1rem;
 				display: flex;
 				align-items: center;
 				justify-content: center;
-				border-radius: 50%;
-				background-color: var(--palettes-primary-700);
+				border-radius: var(--commons-borderRadius-full);
+				background-color: var(--palettes-product-700);
 				position: absolute;
-				left: var(--spacings-XXS);
+				left: var(--pr-t-spacings-50);
 				top: 50%;
 				transform: translateY(-50%);
 			}

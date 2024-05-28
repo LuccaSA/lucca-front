@@ -1,8 +1,8 @@
-import { Meta, Story } from '@storybook/angular';
+import { Meta, StoryFn } from '@storybook/angular';
 
 interface ClearBasicStory {
 	s: boolean;
-	primary: boolean;
+	product: boolean;
 	disabled: boolean;
 }
 
@@ -14,7 +14,7 @@ export default {
 				type: 'boolean',
 			},
 		},
-		primary: {
+		product: {
 			control: {
 				type: 'boolean',
 			},
@@ -29,17 +29,15 @@ export default {
 
 function getTemplate(args: ClearBasicStory): string {
 	const s = args.s ? `mod-S` : '';
-	const primary = args.primary ? `palette-primary` : '';
+	const product = args.product ? `palette-product` : '';
 	const disabled = args.disabled ? `disabled` : '';
-	return `
-		<a href="#" class="clear ${s} ${primary}" ${disabled}><span class="u-mask">Clear</span></a>
-	`;
+	return `<a href="#" class="clear ${s} ${product}" ${disabled}><span class="u-mask">Clear</span></a>`;
 }
 
-const Template: Story<ClearBasicStory> = (args: ClearBasicStory) => ({
+const Template: StoryFn<ClearBasicStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
 export const Basic = Template.bind({});
-Basic.args = { s: false, primary: false, disabled: false };
+Basic.args = { s: false, product: false, disabled: false };

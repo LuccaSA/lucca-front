@@ -31,7 +31,7 @@ function getTemplate(args: TextfieldMessagesStory): string {
 </label>`;
 }
 
-const Template: StoryFn<TextfieldMessagesStory> = (args: TextfieldMessagesStory) => ({
+const Template: StoryFn<TextfieldMessagesStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [

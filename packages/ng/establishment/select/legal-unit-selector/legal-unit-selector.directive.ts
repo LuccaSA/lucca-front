@@ -1,8 +1,9 @@
-import { Directive, forwardRef, HostListener, Inject, Input, OnDestroy, Optional, Self, SkipSelf } from '@angular/core';
+import { Directive, forwardRef, HostListener, Inject, Input, OnDestroy, Optional, Self } from '@angular/core';
 import { ALuOptionSelector, ILuOptionSelector } from '@lucca-front/ng/option';
 import { Subject, Subscription } from 'rxjs';
 import { ILuEstablishment, ILuLegalUnit } from '../../establishment.model';
 import { ALuEstablishmentService, LuEstablishmentService } from '../../service/index';
+import { DEFAULT_ESTABLISHMENT_SERVICE } from '../establishment-select.token';
 
 @Directive({
 	selector: '[luLegalUnitSelector]',
@@ -14,7 +15,7 @@ import { ALuEstablishmentService, LuEstablishmentService } from '../../service/i
 			multi: true,
 		},
 		{
-			provide: ALuEstablishmentService,
+			provide: DEFAULT_ESTABLISHMENT_SERVICE,
 			useClass: LuEstablishmentService,
 		},
 	],
@@ -39,13 +40,12 @@ export class LuLegalUnitSelectorDirective implements ILuOptionSelector<ILuEstabl
 	constructor(
 		@Inject(ALuEstablishmentService)
 		@Optional()
-		@SkipSelf()
-		hostService: LuEstablishmentService,
-		@Inject(ALuEstablishmentService)
+		customService: LuEstablishmentService,
+		@Inject(DEFAULT_ESTABLISHMENT_SERVICE)
 		@Self()
-		selfService: LuEstablishmentService,
+		defaultService: LuEstablishmentService,
 	) {
-		this._service = hostService || selfService;
+		this._service = customService || defaultService;
 	}
 
 	@HostListener('click')

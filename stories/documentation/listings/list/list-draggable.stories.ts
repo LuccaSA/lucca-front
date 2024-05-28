@@ -28,7 +28,7 @@ function getTemplate(args: ListDraggableStory): string {
 	`;
 }
 
-const Template: StoryFn<ListDraggableStory> = (args: ListDraggableStory) => ({
+const Template: StoryFn<ListDraggableStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 });

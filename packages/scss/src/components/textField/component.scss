@@ -8,6 +8,7 @@
 	align-items: stretch;
 	border-radius: var(--commons-borderRadius-M);
 	background-color: var(--component-textField-background);
+	box-shadow: 0 0 0 1px var(--component-textField-border);
 
 	&:has(.textField-input-value:focus-visible) {
 		@include a11y.focusVisible($offset: 3px);
@@ -18,24 +19,31 @@
 			display: flex;
 			align-items: center;
 			width: 100%;
-			box-shadow: 0 0 0 1px var(--component-textField-border);
 			border-radius: var(--commons-borderRadius-M);
 			background-color: var(--component-textField-background);
 			position: relative;
 
 			&:hover {
-				--component-textField-border: var(--palettes-grey-400);
+				--component-textField-border: var(--palettes-neutral-400);
 			}
 
-			&:has(.textField-input-affix-icon ) {
+			&:has(.textField-input-affix-icon) {
 				--component-textField-affix-padding: 2.5rem;
+			}
+
+			&:has(.textField-input-affix-passwordToggle) {
+				--component-textField-affix-padding: 3rem;
 			}
 
 			&:has(.textField-input-affix-clear) {
 				--component-textField-affix-padding: 2rem;
 
-				&:has(.textField-input-affix-icon ) {
+				&:has(.textField-input-affix-icon) {
 					--component-textField-affix-padding: 4rem;
+				}
+
+				&:has(.textField-input-affix-passwordToggle) {
+					--component-textField-affix-padding: 4.5rem;
 				}
 			}
 		}
@@ -46,27 +54,37 @@
 			line-height: var(--component-textField-lineHeight);
 			font-size: var(--component-textField-fontSize);
 			width: 100%;
-			padding: var(--component-textField-padding) var(--component-textField-affix-padding) var(--component-textField-padding) var(--component-textField-padding);
+			padding: var(--component-textField-padding) var(--component-textField-affix-padding) var(--component-textField-padding)
+				var(--component-textField-padding);
 			background-color: transparent;
 			color: var(--component-textField-color);
 
 			&::placeholder {
 				color: var(--component-textField-placeholder);
 			}
+
+			&:is(textarea) {
+				resize: vertical;
+				min-height: calc(2lh + var(--component-textField-padding) * 2);
+
+				&:not([rows]) {
+					height: calc(3lh + var(--component-textField-padding) * 2);
+				}
+			}
 		}
 
 		.textField-input-affix {
 			display: inline-flex;
 			align-items: center;
-			gap: var(--spacings-XS);
+			gap: var(--pr-t-spacings-100);
 			position: absolute;
-			right: var(--spacings-XS);
+			right: var(--pr-t-spacings-100);
 			pointer-events: none;
 		}
 
 		.textField-input-affix-icon {
 			@include icon.M;
-			color: var(--palettes-grey-600);
+			color: var(--palettes-neutral-600);
 			pointer-events: none;
 		}
 
@@ -82,12 +100,11 @@
 
 		.textField-prefix {
 			display: flex;
-			padding: 0 var(--component-textField-padding);
+			padding-left: var(--component-textField-padding);
 			align-items: center;
 			color: var(--component-textField-prefix-color);
 			line-height: var(--component-textField-lineHeight);
 			font-size: var(--component-textField-fontSize);
-			box-shadow: 0 0 0 1px var(--component-textField-border);
 			border-top-left-radius: var(--commons-borderRadius-M);
 			border-bottom-left-radius: var(--commons-borderRadius-M);
 
@@ -99,15 +116,15 @@
 
 		.textField-suffix {
 			display: flex;
-			padding: 0 var(--component-textField-padding);
+			padding-right: var(--component-textField-padding);
 			align-items: center;
 			color: var(--component-textField-prefix-color);
 			line-height: var(--component-textField-lineHeight);
 			font-size: var(--component-textField-fontSize);
-			box-shadow: 0 0 0 1px var(--component-textField-border);
 			border-top-right-radius: var(--commons-borderRadius-M);
 			border-bottom-right-radius: var(--commons-borderRadius-M);
 			order: 1;
+			flex-shrink: 0;
 
 			~ .textField-input {
 				border-top-right-radius: 0;

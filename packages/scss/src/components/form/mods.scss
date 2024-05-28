@@ -7,6 +7,8 @@
 @use '@lucca-front/scss/src/components/textField/exports' as textField;
 @use '@lucca-front/scss/src/components/switchField/exports' as switchField;
 @use '@lucca-front/scss/src/components/checkboxField/exports' as checkboxField;
+@use '@lucca-front/scss/src/components/simpleSelect/exports' as simpleSelect;
+@use '@lucca-front/scss/src/components/multiSelect/exports' as multiSelect;
 @use '@lucca-front/scss/src/components/radioField/exports' as radioField;
 @use '@lucca-front/scss/src/components/box/exports' as box;
 
@@ -30,6 +32,14 @@
 	.switchField {
 		@include switchField.S;
 	}
+
+	.simpleSelect {
+		@include simpleSelect.S;
+	}
+
+	.multiSelect {
+		@include multiSelect.S;
+	}
 }
 
 @mixin XS {
@@ -44,12 +54,16 @@
 	.inlineMessage {
 		@include inlineMessage.S;
 	}
+
+	.simpleSelect {
+		@include simpleSelect.XS;
+	}
 }
 
 @mixin checkable {
 	display: grid;
 	grid-template-columns: auto 1fr;
-	gap: 0 var(--spacings-XS);
+	gap: 0 var(--pr-t-spacings-100);
 
 	.radioField,
 	.checkboxField,
@@ -67,7 +81,7 @@
 }
 
 @mixin withArrow {
-	padding-bottom: var(--spacings-S);
+	padding-bottom: var(--pr-t-spacings-200);
 
 	.form-field-arrow {
 		@include box.arrow;
@@ -87,7 +101,7 @@
 }
 
 @mixin withArrowS {
-	padding-bottom: var(--spacings-XS);
+	padding-bottom: var(--pr-t-spacings-100);
 
 	.form-field-arrow {
 		@include box.arrowS;
@@ -177,7 +191,7 @@
 	margin-bottom: 0;
 	background-color: var(--colors-white-color);
 	padding: 0;
-	box-shadow: form.fakeBorderOverlay(var(--palettes-grey-200));
+	box-shadow: form.fakeBorderOverlay(var(--palettes-neutral-200));
 	transition: background-color var(--commons-animations-durations-standard);
 	margin-bottom: 0 !important;
 
@@ -197,12 +211,12 @@
 			position: relative;
 			z-index: 1;
 			background-color: var(--colors-white-color);
-			box-shadow: form.fakeBorderOverlay(var(--palettes-grey-600));
+			box-shadow: form.fakeBorderOverlay(var(--palettes-neutral-600));
 		}
 
 		&:focus {
 			z-index: 4;
-			box-shadow: form.fakeBorderOverlay(var(--palettes-grey-600)), 0 0 0 4px var(--palettes-grey-50);
+			box-shadow: form.fakeBorderOverlay(var(--palettes-neutral-600)), 0 0 0 4px var(--palettes-neutral-50);
 		}
 	}
 

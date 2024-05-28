@@ -1,4 +1,11 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, Directive, ViewEncapsulation } from '@angular/core';
+
+@Directive({
+	// eslint-disable-next-line @angular-eslint/directive-selector
+	selector: 'lu-feedback-item-description',
+	standalone: true,
+})
+export class CalloutFeedbackItemDescriptionDirective {}
 
 @Component({
 	// eslint-disable-next-line @angular-eslint/component-selector

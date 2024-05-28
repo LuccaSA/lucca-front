@@ -4,7 +4,7 @@
 	background-color: transparent;
 	border: 0;
 	border-radius: var(--commons-borderRadius-M);
-	color: var(--palettes-700, var(--palettes-grey-700));
+	color: var(--palettes-700, var(--palettes-neutral-700));
 	height: 2.5rem;
 	width: 2.5rem;
 	transition: background-color var(--commons-animations-durations-fast) ease, color var(--commons-animations-durations-fast) ease;
@@ -21,16 +21,16 @@
 
 	&:not([disabled], .is-disabled) {
 		&:hover {
-			background-color: var(--palettes-100, var(--palettes-grey-100));
+			background-color: var(--palettes-100, var(--palettes-neutral-100));
 		}
 
 		&:focus-visible {
 			@include a11y.focusVisible;
-			background-color: var(--palettes-100, var(--palettes-grey-100));
+			background-color: var(--palettes-100, var(--palettes-neutral-100));
 		}
 
 		&:active {
-			background-color: var(--palettes-200, var(--palettes-grey-200));
+			background-color: var(--palettes-200, var(--palettes-neutral-200));
 		}
 	}
 }

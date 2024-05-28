@@ -1,7 +1,6 @@
-import { Meta, Story } from '@storybook/angular';
+import { Meta, StoryFn } from '@storybook/angular';
 
-interface VerticalNavigationIconlessStory {
-}
+interface VerticalNavigationIconlessStory {}
 
 export default {
 	title: 'Documentation/Navigation/VerticalNavigation/Iconless',
@@ -12,7 +11,7 @@ function getTemplate(args: VerticalNavigationIconlessStory): string {
 	<h3 class="verticalNavigation-sectionTitle">Section title</h3>
 	<ul class="verticalNavigation-list">
 		<li class="verticalNavigation-list-item">
-			<button class="verticalNavigation-list-item-link" aria-expanded="false">Item<span aria-hidden="true" class="lucca-icon icon-southArrow verticalNavigation-list-item-link-arrow"></span></button>
+			<button class="verticalNavigation-list-item-link" aria-expanded="false">Item<span aria-hidden="true" class="lucca-icon icon-arrowChevronBottom verticalNavigation-list-item-link-arrow"></span></button>
 			<ul class="verticalNavigation-list mod-child">
 				<li class="verticalNavigation-list-item">
 					<a href="#" class="verticalNavigation-list-item-link">Item</a>
@@ -23,7 +22,7 @@ function getTemplate(args: VerticalNavigationIconlessStory): string {
 			</ul>
 		</li>
 		<li class="verticalNavigation-list-item">
-			<button class="verticalNavigation-list-item-link" aria-expanded="true">Item<span aria-hidden="true" class="lucca-icon icon-southArrow verticalNavigation-list-item-link-arrow"></span></button>
+			<button class="verticalNavigation-list-item-link" aria-expanded="true">Item<span aria-hidden="true" class="lucca-icon icon-arrowChevronBottom verticalNavigation-list-item-link-arrow"></span></button>
 			<ul class="verticalNavigation-list mod-child">
 				<li class="verticalNavigation-list-item">
 					<a href="#" class="verticalNavigation-list-item-link" aria-current="page">Item</a>
@@ -37,10 +36,10 @@ function getTemplate(args: VerticalNavigationIconlessStory): string {
 </nav>`;
 }
 
-const Template: Story<VerticalNavigationIconlessStory> = (args: VerticalNavigationIconlessStory) => ({
+const Template: StoryFn<VerticalNavigationIconlessStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
 export const Iconless = Template.bind({});
-Iconless.args = { };
+Iconless.args = {};

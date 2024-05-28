@@ -1,5 +1,5 @@
 <ng-container *ngIf="hasPicture; else displayInitials">
-	<img class="picture" [src]="pictureHref" alt="" (error)="pictureError()" />
+	<img class="picture" [src]="pictureHref" alt="" (error)="pictureError()" [loading]="imageLoadingAttribute" />
 </ng-container>
 
 <ng-template #displayInitials>

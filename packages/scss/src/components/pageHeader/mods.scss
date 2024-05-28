@@ -5,7 +5,7 @@
 }
 
 @mixin breadcrumbs {
-	padding-top: var(--spacings-S);
+	padding-top: var(--pr-t-spacings-200);
 
 	.breadcrumbs {
 		margin-bottom: 0;
@@ -13,7 +13,7 @@
 }
 
 @mixin sticky {
-	background-color: var(--commons-background-base);
+	background-color: var(--pr-t-elevation-surface-default);
 	top: var(--commons-banner-height);
 	position: sticky;
 	left: 0;

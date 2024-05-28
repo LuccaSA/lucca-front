@@ -7,7 +7,7 @@ export default {
 } as Meta;
 
 function getTemplate(args: SkeletonCircleStory): string {
-	return `<div class="skeleton is-loading u-displayFlex u-gapXS u-alignItemsCenter">
+	return `<div class="skeleton is-loading u-displayFlex pr-u-gap100 u-alignItemsCenter">
 	<span class="skeleton-item mod-circle mod-XS"></span>
 	<span class="skeleton-item mod-circle mod-S"></span>
 	<span class="skeleton-item mod-circle"></span>
@@ -17,7 +17,7 @@ function getTemplate(args: SkeletonCircleStory): string {
 </div>`;
 }
 
-const Template: StoryFn<SkeletonCircleStory> = (args: SkeletonCircleStory) => ({
+const Template: StoryFn<SkeletonCircleStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 });

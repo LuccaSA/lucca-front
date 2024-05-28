@@ -1,14 +1,15 @@
 @use '@lucca-front/scss/src/commons/utils/media';
+@use '@lucca-front/scss/src/components/button/exports' as button;
 
 @mixin component($atRoot: 'without: rule') {
-	background-color: var(--colors-white-color);
-	padding: var(--spacings-S) var(--spacings-M);
+	background-color: var(--pr-t-elevation-surface-raised);
+	padding: var(--pr-t-spacings-200) var(--pr-t-spacings-300);
 	display: flex;
-	gap: var(--spacings-S);
+	gap: var(--pr-t-spacings-200);
 	align-items: center;
-	box-shadow: var(--commons-boxShadow-L);
+	box-shadow: var(--pr-t-elevation-shadow-overflow);
 
-	@include media.max("XXS") {
+	@include media.max('XXS') {
 		flex-direction: column;
 	}
 
@@ -16,19 +17,19 @@
 		.footer-actions {
 			display: flex;
 			margin-left: auto;
-			gap: var(--spacings-S);
+			gap: var(--pr-t-spacings-200);
 
 			.button {
 				margin: 0;
 			}
 
-			@include media.max("XXS") {
+			@include media.max('XXS') {
 				flex-direction: column;
 				margin-left: inherit;
 				width: 100%;
 
 				.button {
-					width: 100%;
+					@include button.block;
 				}
 			}
 		}

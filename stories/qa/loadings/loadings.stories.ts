@@ -5,7 +5,7 @@ import { Meta, StoryFn } from '@storybook/angular';
 	standalone: true,
 	selector: 'loadings-stories',
 	templateUrl: './loadings.stories.html',
-	styles: ['.demo-invert { background: #444; display: inline-block; padding: var(--spacings-XS) var(--spacings-S); margin: 0 var(--spacings-XS); border-radius: 3px; }'],
+	styles: ['.demo-invert { background: #444; display: inline-block; padding: var(--pr-t-spacings-100) var(--pr-t-spacings-200); margin: 0 var(--pr-t-spacings-100); border-radius: 3px; }'],
 })
 class LoadingsStory {}
 
