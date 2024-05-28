@@ -3,11 +3,9 @@ import { Meta, StoryFn } from '@storybook/angular';
 interface LoadingsBasicStory {
 	label: boolean;
 	block: boolean;
-	l: boolean;
+	L: boolean;
 	invert: boolean;
-	fullpage: boolean;
-	dialog: boolean;
-	sidepanel: boolean;
+	template: string;
 }
 
 export default {
@@ -23,30 +21,20 @@ export default {
 				type: 'boolean',
 			},
 		},
-		l: {
+		L: {
 			control: {
 				type: 'boolean',
 			},
-			description: 'Taille : Large',
 		},
 		invert: {
 			control: {
 				type: 'boolean',
 			},
 		},
-		fullpage: {
+		template: {
+			options: ['', 'mod-popin', 'mod-drawer', 'mod-fullpage'],
 			control: {
-				type: 'boolean',
-			},
-		},
-		dialog: {
-			control: {
-				type: 'boolean',
-			},
-		},
-		sidepanel: {
-			control: {
-				type: 'boolean',
+				type: 'select',
 			},
 		},
 	},
@@ -55,13 +43,11 @@ export default {
 function getTemplate(args: LoadingsBasicStory): string {
 	const label = args.label ? `Loading…` : '';
 	const block = args.block ? `mod-block` : '';
-	const l = args.l ? `mod-L` : '';
+	const L = args.L ? `mod-L` : '';
 	const invert = args.invert ? `mod-invert` : '';
-	const fullpage = args.fullpage ? `mod-fullpage` : '';
-	const dialog = args.dialog ? `mod-dialog` : '';
-	const sidepanel = args.sidepanel ? `mod-sidePanel` : '';
+
 	return `
-	<div class="loading ${block} ${l} ${invert} ${fullpage} ${dialog} ${sidepanel}">${label}</div>
+	<div class="loading ${block} ${L} ${invert} ${args.template}">${label}</div>
 	`;
 }
 
@@ -72,11 +58,10 @@ const Template: StoryFn<LoadingsBasicStory> = (args) => ({
 		`
 		:host {
 			display: block;
-			min-height: 100px;
 		}`,
-		args.invert === true ? ':host { background-color: #333333; min-height: 130px; margin: -15px -15px; padding: 15px 15px; }' : '',
+		args.invert === true ? ':host { background-color: #333333;  }' : '',
 	],
 });
 
 export const Basic = Template.bind({});
-Basic.args = { label: false, block: false, l: false, invert: false, fullpage: false, dialog: false, sidepanel: false };
+Basic.args = { label: false, block: false, L: false, invert: false, template: '' };
