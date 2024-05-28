@@ -14,7 +14,7 @@
 		@include noAvatar;
 	}
 
-	@include container.max('XXS', $name: 'comment') {
+	@include container.max(25rem, $name: 'comment') {
 		@include narrow;
 	}
 }
