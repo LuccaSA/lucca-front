@@ -59,7 +59,7 @@
 			color: inherit;
 			background-color: transparent;
 			text-align: center;
-			padding: var(--components-timepicker-paddingFieldset);
+			padding: var(--components-timepicker-paddingInput);
 			box-sizing: content-box;
 
 			//&:has(+ .timePicker-fieldset-group-textfield-display) {
@@ -90,7 +90,7 @@
 
 		.timePicker-fieldset-group-textfield-display {
 			position: absolute;
-			inset: var(--components-timepicker-paddingFieldset);
+			inset: var(--components-timepicker-paddingInput);
 			border-radius: var(--commons-borderRadius-M);
 			pointer-events: none;
 			display: grid;
@@ -99,12 +99,12 @@
 
 		.timePicker-fieldset-group-stepper {
 			position: absolute;
-			bottom: calc(100% + var(--pr-t-spacings-150) + 1px);
-			left: 0;
-			width: 100%;
+			bottom: calc(100% + var(--pr-t-spacings-100) + 1px);
+			left: var(--pr-t-spacings-100);
+			right: var(--pr-t-spacings-100);
 			border: 0;
 			padding: 0;
-			height: 1rem;
+			height: var(--pr-t-spacings-200);
 			background-color: transparent;
 			color: var(--palettes-neutral-600);
 			display: inline-flex;
@@ -133,7 +133,7 @@
 			}
 
 			+ .timePicker-fieldset-group-stepper {
-				top: calc(100% + var(--pr-t-spacings-150) + 1px);
+				top: calc(100% + var(--pr-t-spacings-100) + 1px);
 				bottom: auto;
 			}
 		}
