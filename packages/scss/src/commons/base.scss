@@ -48,6 +48,10 @@
 			box-sizing: border-box;
 		}
 
+		::placeholder {
+			opacity: 1;
+		}
+
 		html {
 			height: -webkit-fill-available;
 		}
