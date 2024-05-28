@@ -5,57 +5,85 @@ import { luUserDisplay, LuUserDisplayPipe } from './user-display.pipe';
 
 describe('UserNamePipe', () => {
 	let user: ILuUser;
+	let userFirst: ILuUser;
+	let userLast: ILuUser;
 	beforeEach(() => {
 		user = <ILuUser>{ firstName: 'John', lastName: 'Doe' };
+		userFirst = <ILuUser>{ firstName: 'John', lastName: '' };
+		userLast = <ILuUser>{ firstName: '', lastName: 'Doe' };
 	});
 
 	describe('luUserDisplay()', () => {
 		it("should return the right value with 'lf' format", () => {
 			expect(luUserDisplay(user, LuDisplayFullname.lastfirst)).toBe('Doe John');
+			expect(luUserDisplay(userFirst, LuDisplayFullname.lastfirst)).toBe('John');
+			expect(luUserDisplay(userLast, LuDisplayFullname.lastfirst)).toBe('Doe');
 		});
 
 		it("should return the right value with 'Lf' format", () => {
 			expect(luUserDisplay(user, LuDisplayHybrid.lastIfirstFull)).toBe('D. John');
+			expect(luUserDisplay(userFirst, LuDisplayHybrid.lastIfirstFull)).toBe('John');
+			expect(luUserDisplay(userLast, LuDisplayHybrid.lastIfirstFull)).toBe('D.');
 		});
 
 		it("should return the right value with 'LF' format", () => {
 			expect(luUserDisplay(user, LuDisplayInitials.lastfirst)).toBe('DJ');
+			expect(luUserDisplay(userFirst, LuDisplayInitials.lastfirst)).toBe('J');
+			expect(luUserDisplay(userLast, LuDisplayInitials.lastfirst)).toBe('D');
 		});
 
 		it("should return the right value with 'lF' format", () => {
 			expect(luUserDisplay(user, LuDisplayHybrid.lastFullfirstI)).toBe('Doe J.');
+			expect(luUserDisplay(userFirst, LuDisplayHybrid.lastFullfirstI)).toBe('J.');
+			expect(luUserDisplay(userLast, LuDisplayHybrid.lastFullfirstI)).toBe('Doe');
 		});
 
 		it("should return the right value with 'l' format", () => {
 			expect(luUserDisplay(user, LuDisplayFullname.last)).toBe('Doe');
+			expect(luUserDisplay(userFirst, LuDisplayFullname.last)).toBe('');
+			expect(luUserDisplay(userLast, LuDisplayFullname.last)).toBe('Doe');
 		});
 
 		it("should return the right value with 'L' format", () => {
 			expect(luUserDisplay(user, LuDisplayInitials.last)).toBe('D');
+			expect(luUserDisplay(userFirst, LuDisplayInitials.last)).toBe('');
+			expect(luUserDisplay(userLast, LuDisplayInitials.last)).toBe('D');
 		});
 
 		it("should return the right value with 'fl' format", () => {
 			expect(luUserDisplay(user, LuDisplayFullname.firstlast)).toBe('John Doe');
+			expect(luUserDisplay(userFirst, LuDisplayFullname.firstlast)).toBe('John');
+			expect(luUserDisplay(userLast, LuDisplayFullname.firstlast)).toBe('Doe');
 		});
 
 		it("should return the right value with 'Fl' format", () => {
 			expect(luUserDisplay(user, LuDisplayHybrid.firstIlastFull)).toBe('J. Doe');
+			expect(luUserDisplay(userFirst, LuDisplayHybrid.firstIlastFull)).toBe('J.');
+			expect(luUserDisplay(userLast, LuDisplayHybrid.firstIlastFull)).toBe('Doe');
 		});
 
 		it("should return the right value with 'FL' format", () => {
 			expect(luUserDisplay(user, LuDisplayInitials.firstlast)).toBe('JD');
+			expect(luUserDisplay(userFirst, LuDisplayInitials.firstlast)).toBe('J');
+			expect(luUserDisplay(userLast, LuDisplayInitials.firstlast)).toBe('D');
 		});
 
 		it("should return the right value with 'fL' format", () => {
 			expect(luUserDisplay(user, LuDisplayHybrid.firstFulllastI)).toBe('John D.');
+			expect(luUserDisplay(userFirst, LuDisplayHybrid.firstFulllastI)).toBe('John');
+			expect(luUserDisplay(userLast, LuDisplayHybrid.firstFulllastI)).toBe('D.');
 		});
 
 		it("should return the right value with 'f' format", () => {
 			expect(luUserDisplay(user, LuDisplayFullname.first)).toBe('John');
+			expect(luUserDisplay(userFirst, LuDisplayFullname.first)).toBe('John');
+			expect(luUserDisplay(userLast, LuDisplayFullname.first)).toBe('');
 		});
 
 		it("should return the right value with 'F' format", () => {
 			expect(luUserDisplay(user, LuDisplayInitials.first)).toBe('J');
+			expect(luUserDisplay(userFirst, LuDisplayInitials.first)).toBe('J');
+			expect(luUserDisplay(userLast, LuDisplayInitials.first)).toBe('');
 		});
 	});
 

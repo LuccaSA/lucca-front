@@ -8,6 +8,7 @@ import { delay, map, startWith, switchMap } from 'rxjs/operators';
 import { ALuTreeOptionItem } from '../item/index';
 import { ALuOptionPickerComponent } from './option-picker.component';
 import { ILuTreeOptionPickerPanel } from './tree-option-picker.model';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 enum ToggleMode {
 	all,
@@ -23,12 +24,17 @@ export abstract class ALuTreeOptionPickerComponent<T, O extends import('../item/
 	@ContentChildren(ALuTreeOptionItem, { descendants: true })
 	override set optionsQL(ql: QueryList<O>) {
 		this._optionsQL = ql;
+		ql.changes.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {
+			this.overlayRef.updatePosition();
+		});
 	}
+
 	@ContentChildren(ALuTreeOptionItem, {
 		descendants: true,
 		read: ViewContainerRef,
 	})
 	optionsQLVR: QueryList<ViewContainerRef>;
+
 	protected override set _options$(optionItems$: Observable<O[]>) {
 		// reapply selected when the options change
 		this._subs.add(optionItems$.subscribe(() => this._applySelected()));
@@ -41,9 +47,11 @@ export abstract class ALuTreeOptionPickerComponent<T, O extends import('../item/
 		this._subs.add(singleFlowSelectSelf$.subscribe((option) => this._toggle(option, ToggleMode.self)));
 		this._subs.add(singleFlowSelectChildren$.subscribe((option) => this._toggle(option, ToggleMode.children)));
 	}
+
 	constructor(_changeDetectorRef: ChangeDetectorRef, @Inject(DOCUMENT) document: Document) {
 		super(_changeDetectorRef, document);
 	}
+
 	protected override _toggle(option: O, mod = ToggleMode.all) {
 		switch (mod) {
 			case ToggleMode.self:
@@ -54,6 +62,7 @@ export abstract class ALuTreeOptionPickerComponent<T, O extends import('../item/
 				return this._toggleAll(option);
 		}
 	}
+
 	protected _toggleAll(option: O) {
 		const value = option.value;
 		if (!this.multiple) {
@@ -74,6 +83,7 @@ export abstract class ALuTreeOptionPickerComponent<T, O extends import('../item/
 		}
 		this._select(newValues);
 	}
+
 	protected _toggleSelf(option: O) {
 		const value = option.value;
 		if (!this.multiple) {
@@ -95,6 +105,7 @@ export abstract class ALuTreeOptionPickerComponent<T, O extends import('../item/
 		}
 		this._select(newValues);
 	}
+
 	protected _toggleChildren(option: O) {
 		const value = option.value;
 		if (!this.multiple) {
@@ -113,10 +124,12 @@ export abstract class ALuTreeOptionPickerComponent<T, O extends import('../item/
 		}
 		this._select(newValues);
 	}
+
 	protected _add(values: T[], entries: T[]): T[] {
 		const newEntries = entries.filter((entry) => !values.some((v) => this.optionComparer(v, entry)));
 		return [...values, ...newEntries];
 	}
+
 	protected _remove(values: T[], entries: T[]): T[] {
 		const entriesToKeep = values.filter((value) => !entries.some((e) => this.optionComparer(e, value)));
 		return [...entriesToKeep];
@@ -132,10 +145,12 @@ export abstract class ALuTreeOptionPickerComponent<T, O extends import('../item/
 		this._subs.add(items$.subscribe((o) => (this._options = o || [])));
 		this._options$ = items$;
 	}
+
 	override ngAfterViewInit() {
 		this.initItems();
 	}
 }
+
 /**
  * basic tree option picker panel
  */

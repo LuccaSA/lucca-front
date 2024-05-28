@@ -7,9 +7,9 @@ import { ALuSelectInputComponent } from '@lucca-front/ng/core-select';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 import { BehaviorSubject, ReplaySubject, first } from 'rxjs';
 import { LuCoreSelectApiV3Directive } from './api-v3.directive';
-import { MAGIC_DEBOUNCE_DURATION, MAGIC_PAGE_SIZE } from './api.directive';
+import { MAGIC_DEBOUNCE_DURATION, LU_SELECT_MAGIC_PAGE_SIZE } from './api.directive';
 
-const itemsMocks = Array.from({ length: MAGIC_PAGE_SIZE * 2 + 5 }, (_, i) => ({ id: i, name: `item ${i}` }));
+const itemsMocks = Array.from({ length: LU_SELECT_MAGIC_PAGE_SIZE * 2 + 5 }, (_, i) => ({ id: i, name: `item ${i}` }));
 
 describe('CoreSelectApiV3Directive', () => {
 	let directive: LuCoreSelectApiV3Directive<ILuApiItem>;
@@ -77,7 +77,7 @@ describe('CoreSelectApiV3Directive', () => {
 		tick();
 
 		httpTestingController.expectOne('/api/v3/axisSections?fields=id,name&orderBy=name,asc&paging=0,20').flush({
-			data: { items: itemsMocks.slice(0, MAGIC_PAGE_SIZE) },
+			data: { items: itemsMocks.slice(0, LU_SELECT_MAGIC_PAGE_SIZE) },
 		});
 		tick();
 
@@ -86,11 +86,11 @@ describe('CoreSelectApiV3Directive', () => {
 
 		// Assert
 		httpTestingController.expectOne('/api/v3/axisSections?fields=id,name&orderBy=name,asc&paging=20,20').flush({
-			data: { items: itemsMocks.slice(MAGIC_PAGE_SIZE, MAGIC_PAGE_SIZE * 2) },
+			data: { items: itemsMocks.slice(LU_SELECT_MAGIC_PAGE_SIZE, LU_SELECT_MAGIC_PAGE_SIZE * 2) },
 		});
 
 		selectMock.options$.pipe(first()).subscribe((options) => {
-			expect(options).toEqual(itemsMocks.slice(0, MAGIC_PAGE_SIZE * 2));
+			expect(options).toEqual(itemsMocks.slice(0, LU_SELECT_MAGIC_PAGE_SIZE * 2));
 		});
 		tick();
 	}));
@@ -104,13 +104,13 @@ describe('CoreSelectApiV3Directive', () => {
 		tick();
 
 		httpTestingController.expectOne('/api/v3/axisSections?fields=id,name&orderBy=name,asc&paging=0,20').flush({
-			data: { items: itemsMocks.slice(0, MAGIC_PAGE_SIZE) },
+			data: { items: itemsMocks.slice(0, LU_SELECT_MAGIC_PAGE_SIZE) },
 		});
 		tick();
 
 		selectMock.nextPage.emit();
 		httpTestingController.expectOne('/api/v3/axisSections?fields=id,name&orderBy=name,asc&paging=20,20').flush({
-			data: { items: itemsMocks.slice(MAGIC_PAGE_SIZE, MAGIC_PAGE_SIZE * 2) },
+			data: { items: itemsMocks.slice(LU_SELECT_MAGIC_PAGE_SIZE, LU_SELECT_MAGIC_PAGE_SIZE * 2) },
 		});
 
 		// Act

@@ -338,7 +338,7 @@ export const AddOption = generateStory({
 	storyPartial: {
 		argTypes: {
 			addOptionLabel: { control: { type: 'text' } },
-			addOptionStrategy: { control: { type: 'select', options: ['never', 'always', 'if-empty-clue'] } },
+			addOptionStrategy: { control: { type: 'select', options: ['never', 'always', 'if-empty-clue', 'if-not-empty-clue'] } },
 		},
 		args: {
 			addOptionLabel: 'Ajouter un légume',

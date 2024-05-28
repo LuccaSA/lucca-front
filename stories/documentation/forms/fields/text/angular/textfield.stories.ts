@@ -29,8 +29,8 @@ export default {
 			},
 		},
 		type: {
-			options: ['text', 'number', 'password'],
-			description: '[v17.2] Le type password ajoute automatiquement un bouton pour afficher la valeur du champ.',
+			options: ['text', 'email', 'password', 'url'],
+			description: '[v17.2] Le type password ajoute automatiquement un bouton pour afficher la valeur du champ.<br>[v17.4.1] Type : url.',
 			control: {
 				type: 'select',
 			},
@@ -75,7 +75,7 @@ export const Basic: StoryObj<TextInputComponent & { disabled: boolean } & FormFi
 		label: 'Label',
 		required: true,
 		hiddenLabel: false,
-		hasClearer: true,
+		hasClearer: false,
 		hasSearchIcon: false,
 		searchIcon: 'search',
 		disabled: false,

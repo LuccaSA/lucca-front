@@ -12,6 +12,7 @@ import { Meta, applicationConfig, moduleMetadata } from '@storybook/angular';
 import { HiddenArgType } from 'stories/helpers/common-arg-types';
 import { getStoryGenerator, useDocumentationStory } from 'stories/helpers/stories';
 import { provideCoreSelectCurrentUserId } from '../../../../packages/ng/core-select/user/me.provider';
+import { LuCoreSelectLegumesDirective } from './custom-api-example.component';
 import { LuCoreSelectCustomEstablishmentsDirective } from './custom-establishment-example.component';
 import { LuCoreSelectCustomUsersDirective } from './custom-user-example.component';
 import { FilterLegumesPipe, ILegume, LuCoreSelectInputStoryComponent, SortLegumesPipe, allLegumes, colorNameByColor, coreSelectStory } from './select.utils';
@@ -167,7 +168,9 @@ export const WithDisabledOptions = generateStory({
 
 export const ApiV3 = generateStory({
 	name: 'Api V3',
-	description: "Pour récupérer automatiquement les options depuis une api V3 avec pagination et recherche, il suffit d'utiliser la directive `apiV3`.",
+	description: `Pour récupérer automatiquement les options depuis une api V3 avec pagination et recherche, il suffit d'utiliser la directive \`apiV3\`.
+
+	Plus d'informations sur les directives API personnalisée sur la [documentation dédiée](https://github.com/LuccaSA/lucca-front/blob/master/docs/core-select-api-directive.md).`,
 	template: `<lu-simple-select
 	placeholder="Placeholder..."
 	apiV3="/api/v3/axisSections"
@@ -181,7 +184,9 @@ export const ApiV3 = generateStory({
 
 export const ApiV4 = generateStory({
 	name: 'Api V4',
-	description: "Pour récupérer automatiquement les options depuis une api V4 avec pagination et recherche, il suffit d'utiliser la directive `apiV4`.",
+	description: `Pour récupérer automatiquement les options depuis une api V4 avec pagination et recherche, il suffit d'utiliser la directive \`apiV4\`.
+
+	Plus d'informations sur les directives API personnalisée sur la [documentation dédiée](https://github.com/LuccaSA/lucca-front/blob/master/docs/core-select-api-directive.md).`,
 	template: `<lu-simple-select
 	placeholder="Placeholder..."
 	apiV4="/organization/structure/api/establishments"
@@ -193,23 +198,74 @@ export const ApiV4 = generateStory({
 	},
 });
 
-export const User = generateStory({
-	name: 'User Select',
-	description: "Pour saisir un utilisateur, il suffit d'utiliser la directive `users`.",
-	template: `<lu-simple-select
-	placeholder="Placeholder..."
-	users
-	[(ngModel)]="selectedUser"
-></lu-simple-select>`,
+const optionStyle = `
+	display: inline-block;
+	width: 1rem;
+	height: 1rem;
+	border-radius: 50%;
+	border: 1px solid black;
+`;
+const displayerStyle = `
+	display: inline-block;
+	width: 10rem;
+	height: 1rem;
+	border: 1px solid black;
+`;
+
+const inlineStyle = (style: string) => style.split('\n').filter(Boolean).join('');
+
+export const CustomApiV4 = generateStory({
+	name: 'Custom Api V4',
+	description: `Pour récupérer automatiquement les options depuis une api V4 avec pagination et recherche, il suffit d'utiliser la directive \`apiV4\`.
+
+Plus d'informations sur les directives API personnalisée sur la [documentation dédiée](https://github.com/LuccaSA/lucca-front/blob/master/docs/core-select-api-directive.md).`,
+	template: `
+		<lu-simple-select
+			placeholder="Placeholder..."
+			luLegumes
+			#legumeRef="luLegumes"
+		>
+			<ng-container *luDisplayer="let legume; select: legumeRef.select">
+				<span [style.background-color]="legume.color" style="${inlineStyle(displayerStyle)}"></span>
+			</ng-container>
+
+			<ng-container *luOption="let legume; select: legumeRef.select">
+				{{ legume.name }}
+				<span [style.background-color]="legume.color" style="${inlineStyle(optionStyle)}"></span>
+			</ng-container>
+		</lu-simple-select>`,
 	neededImports: {
 		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent'],
-		'@lucca-front/ng/core-select/user': ['LuCoreSelectUsersDirective'],
+		'@lucca-front/ng/core-select/api': ['LuCoreSelectApiV4Directive'],
+	},
+});
+
+export const User = generateStory({
+	name: 'User Select',
+	description: `
+Pour saisir un utilisateur, il suffit d'utiliser la directive \`users\`.
+
+La première fois que cette directive est utilisée, il faut ajouter \`provideCoreSelectCurrentUserId(() => inject(PRINCIPAL).id)\` dans votre AppModule ou dans le app.config.ts
+
+Plus d'informations sur les directives users personnalisée sur la [documentation dédiée](https://github.com/LuccaSA/lucca-front/blob/master/docs/core-select-users-directive.md).`,
+	template: `
+	<lu-simple-select
+		placeholder="Placeholder..."
+		users
+		[(ngModel)]="selectedUser"
+	></lu-simple-select>
+	`,
+	neededImports: {
+		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent'],
+		'@lucca-front/ng/core-select/user': ['LuCoreSelectUsersDirective', 'provideCoreSelectCurrentUserId'],
 	},
 });
 
 export const UserCustom = generateStory({
 	name: 'User Select (custom)',
-	description: "Pour saisir un utilisateur, il suffit d'utiliser la directive `users`",
+	description: `Pour saisir un utilisateur, il suffit d'utiliser la directive \`users\`
+
+	Plus d'informations sur les directives users personnalisée sur la [documentation dédiée](https://github.com/LuccaSA/lucca-front/blob/master/docs/core-select-users-directive.md).`,
 	template: `<lu-simple-select
 	#usersRef="luCustomUsers"
 	placeholder="Placeholder..."
@@ -334,7 +390,7 @@ export const AddOption = generateStory({
 	storyPartial: {
 		argTypes: {
 			addOptionLabel: { control: { type: 'text' } },
-			addOptionStrategy: { control: { type: 'radio', options: ['never', 'always', 'if-empty-clue'] } },
+			addOptionStrategy: { control: { type: 'radio', options: ['never', 'always', 'if-empty-clue', 'if-not-empty-clue'] } },
 		},
 		args: {
 			addOptionLabel: 'Ajouter un légume',
@@ -363,6 +419,7 @@ const meta: Meta<LuSimpleSelectInputStoryComponent> = {
 				LuCoreSelectEstablishmentsDirective,
 				LuCoreSelectCustomEstablishmentsDirective,
 				LuCoreSelectCustomUsersDirective,
+				LuCoreSelectLegumesDirective,
 				LuCoreSelectUsersDirective,
 				LuCoreSelectJobQualificationsDirective,
 				LuDisabledOptionDirective,

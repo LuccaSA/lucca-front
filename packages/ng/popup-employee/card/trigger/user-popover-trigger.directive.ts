@@ -22,7 +22,8 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 	exportAs: 'LuUserPopoverDirective',
 })
 export class LuUserPopoverDirective extends ALuPopoverTrigger<LuUserPopoverPanelComponent, LuPopoverTarget> implements AfterViewInit, OnDestroy {
-	@Input('luUserPopover') public set user(c: ILuUser) {
+	@Input('luUserPopover')
+	public set user(c: ILuUser) {
 		if (this.panel) {
 			this.panel.user = c;
 		}
@@ -30,13 +31,17 @@ export class LuUserPopoverDirective extends ALuPopoverTrigger<LuUserPopoverPanel
 	}
 
 	/** when trigger = hover, delay before the popover panel appears, default 300ms */
-	@Input('luUserPopoverEnterDelay') public set inputEnterDelay(d: number) {
+	@Input('luUserPopoverEnterDelay')
+	public set inputEnterDelay(d: number) {
 		this.enterDelay = d;
 	}
+
 	/** when trigger = hover, delay before the popover panel disappears, default 100ms */
-	@Input('luUserPopoverLeaveDelay') public set inputLeaveDelay(d: number) {
+	@Input('luUserPopoverLeaveDelay')
+	public set inputLeaveDelay(d: number) {
 		this.leaveDelay = d;
 	}
+
 	// TODO : put this back when uniform alignment and position
 	// /** how you want to position the panel relative to the target, allowed values: above, below, before, after */
 	// @Input('luEmployeeCardPosition') public set inputPosition(pos: LuPopoverPosition) {
@@ -47,20 +52,26 @@ export class LuUserPopoverDirective extends ALuPopoverTrigger<LuUserPopoverPanel
 	// 	this.target.alignment = al;
 	// }
 	/** disable popover apparition */
-	@Input('luUserPopoverDisabled') public set inputDisabled(d: boolean) {
+	@Input('luUserPopoverDisabled')
+	public set inputDisabled(d: boolean) {
 		this.disabled = d;
 	}
 
 	/** accessibility attribute - dont override */
-	@HostBinding('attr.aria-expanded') public get _attrAriaExpanded() {
+	@HostBinding('attr.aria-expanded')
+	public get _attrAriaExpanded() {
 		return this._popoverOpen;
 	}
+
 	/** accessibility attribute - dont override */
-	@HostBinding('attr.id') public get _attrId() {
+	@HostBinding('attr.id')
+	public get _attrId() {
 		return this._triggerId;
 	}
+
 	/** accessibility attribute - dont override */
-	@HostBinding('attr.aria-controls') public get _attrAriaControls() {
+	@HostBinding('attr.aria-controls')
+	public get _attrAriaControls() {
 		return this._panelId;
 	}
 
@@ -102,21 +113,26 @@ export class LuUserPopoverDirective extends ALuPopoverTrigger<LuUserPopoverPanel
 	public override onMouseEnter() {
 		super.onMouseEnter();
 	}
+
 	@HostListener('mouseleave')
 	public override onMouseLeave() {
 		super.onMouseLeave();
 	}
+
 	@HostListener('focus')
 	public override onFocus() {
 		super.onFocus();
 	}
+
 	@HostListener('blur')
 	public override onBlur() {
 		super.onBlur();
 	}
+
 	public ngAfterViewInit() {
 		this._checkTarget();
 	}
+
 	public ngOnDestroy() {
 		this._cleanUpSubscriptions();
 		if (this._popoverOpen) {
@@ -167,6 +183,8 @@ export class LuUserPopoverDirective extends ALuPopoverTrigger<LuUserPopoverPanel
 	// Mandatory but useless
 	onClose: Observable<void>;
 	onOpen: Observable<void>;
+
 	protected override _emitOpen(): void {}
+
 	protected override _emitClose(): void {}
 }
