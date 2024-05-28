@@ -86,6 +86,7 @@ export const Basic: StoryObj<TextInputComponent & { disabled: boolean } & FormFi
 		placeholder: 'Placeholder',
 		tooltip: 'Je suis un message d’aide',
 		counter: 0,
+		valueAlignRight: false,
 	},
 };
 
