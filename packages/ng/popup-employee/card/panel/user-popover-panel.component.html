@@ -10,7 +10,7 @@
 	(mousedown)="onMouseDown()"
 >
 	<div *ngIf="employee$ | async as employee" class="lu-popover-content userPopover">
-		<div class="userPopover-details">
+		<section class="userPopover-details">
 			<div [ngSwitch]="userPictureDisplay$ | async" class="userPopover-details-avatar">
 				<ng-container *ngSwitchCase="'img'">
 					<img class="picture" [src]="userPictureHref$ | async" [alt]="(userInitials$ | async)?.initials" (error)="pictureError()" />
@@ -22,23 +22,22 @@
 				</ng-container>
 			</div>
 			<div class="userPopover-details-info">
-				<h3 class="userPopover-details-info-name">
-					<div *ngIf="!employee._links?.hrCard?.href; else fullNameDisplayLink">
+				<h1 class="userPopover-details-info-name u-ellipsis">
+					<ng-container *ngIf="!employee._links?.hrCard?.href; else fullNameDisplayLink">
 						<ng-container *ngTemplateOutlet="fullNameDisplay" />
-					</div>
-				</h3>
+					</ng-container>
+				</h1>
 				<ng-template #fullNameDisplayLink>
-					<a class="userPopover-details-info-name-link" [href]="employee._links?.hrCard?.href">
+					<a class="userPopover-details-info-name-linkOptional" [href]="employee._links?.hrCard?.href">
 						<ng-container *ngTemplateOutlet="fullNameDisplay" />
 					</a>
 				</ng-template>
 				<ng-template #fullNameDisplay> {{employee.firstName}} {{employee.lastName}} </ng-template>
+				<p *ngIf="employee.jobTitle" class="userPopover-details-info-detail u-ellipsis">{{employee.jobTitle}}</p>
+				<p *ngIf="employee.userDepartment" class="userPopover-details-info-detail u-ellipsis">{{employee.userDepartment?.name}}</p>
 
-				<p *ngIf="employee.jobTitle" class="userPopover-details-info-detail">{{employee.jobTitle}}</p>
-				<p *ngIf="employee.userDepartment" class="userPopover-details-info-detail">{{employee.userDepartment?.name}}</p>
-
-				<p class="userPopover-details-info-detail">
-					<!--                        HORS CONTRAT-->
+				<p class="userPopover-details-info-detail u-marginTopXS">
+					<!-- HORS CONTRAT-->
 					<span *ngIf="employee.dtContractStart | isFuture" class="userPopover-details-info-detail-workplace">
 						<span aria-hidden="true" class="lucca-icon icon-calendarPlanning mod-S"></span>
 						<span class="userPopover-details-info-detail-link-state">
@@ -52,10 +51,10 @@
 						<span aria-hidden="true" class="lucca-icon icon-calendarStrikethrough mod-S"></span>
 						<span class="userPopover-details-info-detail-link-state"> {{intl.EMPLOYEE_CARD_PANEL_EMPLOYEE_HAS_LEAVED_LABEL }} </span>
 					</span>
-					<!--                     EN CONTRAT-->
+					<!-- EN CONTRAT-->
 					<a
 						*ngIf="employee._links?.schedule && !(employee.dtContractStart | isFuture) && (employee.dtContractEnd | isFutureOrToday)"
-						class="userPopover-details-info-detail-workplace mod-link"
+						class="userPopover-details-info-detail-workplace"
 						[href]="employee._links?.schedule?.href"
 					>
 						<span
@@ -68,19 +67,18 @@
 							<ng-container *ngIf="employee.isWorkingNow === true">
 								<ng-container *ngIf="employee.currentWorkLocation">
 									{{ employee.currentWorkLocation?.name }}
-									<ng-container *ngIf="employee.currentWorkLocation?.area">
-										-
-										<span class="u-textGrey600">{{employee.currentWorkLocation?.area?.name}}</span>
+									<ng-container *ngIf="employee.currentWorkLocation?.area"
+										><span class="u-textLight"> – {{employee.currentWorkLocation?.area?.name}}</span>
 									</ng-container>
 								</ng-container>
-								<ng-container *ngIf="!employee.currentWorkLocation"> {{intl.EMPLOYEE_CARD_PANEL_PRESENT_LABEL }} </ng-container>
+								<ng-container *ngIf="!employee.currentWorkLocation">{{intl.EMPLOYEE_CARD_PANEL_PRESENT_LABEL }} </ng-container>
 							</ng-container>
 
 							<ng-container *ngIf="employee.isWorkingNow === false">
 								<ng-container *ngIf="!(employee.dtContractStart | isFuture) && (employee.dtContractEnd | isFutureOrToday)">
 									{{ intl.EMPLOYEE_CARD_PANEL_ABSENCE_LABEL }}
-									<span *ngIf="employee.leaveEndsOn" class="u-textGrey600">
-										- {{ employee.leaveEndsOn | leaveEndsDisplay: employee.leaveEndIsFirstHalfDay }}
+									<span *ngIf="employee.leaveEndsOn" class="u-textLight"
+										> – {{ employee.leaveEndsOn | leaveEndsDisplay: employee.leaveEndIsFirstHalfDay }}
 									</span>
 								</ng-container>
 							</ng-container>
@@ -88,6 +86,6 @@
 					</a>
 				</p>
 			</div>
-		</div>
+		</section>
 	</div>
 </div>

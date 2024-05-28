@@ -1,5 +1,3 @@
-@use '@lucca-front/scss/src/commons/utils/text';
-
 @mixin component($atRoot: 'without: rule') {
 	width: 22.5rem;
 	max-width: calc(100vw - var(--spacings-S) * 2);
@@ -8,8 +6,9 @@
 	@at-root ($atRoot) {
 		.userPopover-details {
 			--components-user-picture-image-size: 5.25rem;
+
 			display: flex;
-			align-items: center;
+			align-items: flex-start;
 			gap: var(--spacings-S);
 		}
 
@@ -20,29 +19,26 @@
 		}
 
 		.userPopover-details-info {
-			width: calc(100% - var(--components-user-picture-image-size) - var(--spacings-S));
+			min-width: 0;
 		}
 
 		.userPopover-details-info-name {
-			@include text.ellipsis;
-
-			margin: 0;
-			padding: 0;
-		}
-
-		.userPopover-details-info-name-link {
-			color: var(--palettes-grey-900);
+			margin: calc(var(--pr-t-spacings-50) * -1);
+			padding: var(--pr-t-spacings-50);
 			font-size: var(--sizes-L-fontSize);
 			line-height: var(--sizes-L-lineHeight);
 			font-weight: 700;
+			color: currentColor;
+		}
+
+		.userPopover-details-info-name-linkOptional {
+			color: currentColor;
 			text-decoration: underline;
 			text-decoration-thickness: 0.75px;
 			text-underline-offset: 3px;
 
-			&:hover,
-			&:active,
-			&:focus {
-				color: var(--palettes-grey-900);
+			&:hover {
+				color: currentColor;
 				text-decoration-thickness: 1.5px;
 			}
 		}
@@ -55,30 +51,21 @@
 
 		.userPopover-details-info-detail-workplace {
 			display: flex;
-			align-items: center;
+			align-items: flex-start;
 			gap: var(--spacings-XXS);
-			margin-top: var(--spacings-XS);
-			color: var(--palettes-grey-800);
+			color: currentColor;
 			text-decoration: none;
 
-			&.mod-link {
-				text-decoration: none;
-
+			&:is(a, button) {
 				&:hover,
-				&:active,
 				&:focus {
-					color: var(--palettes-grey-800);
+					color: currentColor;
 
 					.userPopover-details-info-detail-workplace-state {
 						text-decoration: underline;
 					}
 				}
 			}
-		}
-
-		.userPopover-details-info-detail,
-		.userPopover-details-info-detail-link-state {
-			@include text.ellipsis;
 		}
 	}
 }
