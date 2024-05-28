@@ -3,8 +3,8 @@
 @mixin S {
 	--components-timepicker-fontSize: var(--sizes-S-fontSize);
 	--components-timepicker-lineHeight: var(--sizes-S-lineHeight);
-	--components-timepicker-paddingFieldset: var(--pr-t-spacings-75);
-	--components-timepicker-input-height: 1.25rem;
+	--components-timepicker-paddingFieldset: var(--pr-t-spacings-25) var(--pr-t-spacings-75);
+	--components-timepicker-input-height: 1.75rem;
 	--components-timepicker-input-width: 1.25rem;
 }
 

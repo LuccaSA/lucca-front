@@ -9,16 +9,16 @@
 		.timePicker-fieldset {
 			display: flex;
 			align-items: center;
-			gap: var(--pr-t-spacings-50);
 			box-shadow: 0 0 0 1px var(--components-timepicker-border);
 			border-radius: var(--commons-borderRadius-M);
-			padding: var(--components-timepicker-paddingFieldset);
+			padding: 0;
 			border: 0;
 			margin: 0;
 			background-color: var(--components-timepicker-background);
 			color: var(--components-timepicker-color);
 			font-size: var(--components-timepicker-fontSize);
 			line-height: var(--components-timepicker-lineHeight);
+			position: relative;
 			cursor: text;
 
 			&:hover {
@@ -31,8 +31,12 @@
 		}
 
 		.timePicker-fieldset-groupSeparator {
-			width: var(--pr-t-spacings-150);
 			text-align: center;
+			position: absolute;
+			inset: 0;
+			pointer-events: none;
+			display: grid;
+			place-items: center;
 		}
 
 		.timePicker-fieldset-group {
@@ -55,6 +59,8 @@
 			color: inherit;
 			background-color: transparent;
 			text-align: center;
+			padding: var(--components-timepicker-paddingFieldset);
+			box-sizing: content-box;
 
 			//&:has(+ .timePicker-fieldset-group-textfield-display) {
 			opacity: 0.0001;
@@ -84,13 +90,11 @@
 
 		.timePicker-fieldset-group-textfield-display {
 			position: absolute;
-			inset: 0;
+			inset: var(--components-timepicker-paddingFieldset);
 			border-radius: var(--commons-borderRadius-M);
-			min-height: var(--components-timepicker-input-height);
-			min-width: var(--components-timepicker-input-width);
 			pointer-events: none;
-			text-align: center;
-			cursor: text;
+			display: grid;
+			place-items: center;
 		}
 
 		.timePicker-fieldset-group-stepper {
