@@ -105,6 +105,12 @@
     "ts-node": "~10.9.1",
     "typescript": "5.4.5"
   },
+  "optionalDependencies": {
+    "@nx/nx-darwin-arm64": "^19.1.0",
+    "@nx/nx-darwin-x64": "^19.1.0",
+    "@nx/nx-linux-x64-gnu": "^19.1.0",
+    "@nx/nx-win32-x64-msvc": "^19.1.0"
+  },
   "volta": {
     "node": "20.14.0"
   },
