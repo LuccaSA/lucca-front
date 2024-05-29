@@ -12,7 +12,11 @@ class SelectPanelRef<T> extends LuSelectPanelRef<T, T> {
 	private panelRef: ComponentRef<LuSelectPanelComponent<T>>;
 	private portalRef: ComponentPortal<LuSelectPanelComponent<T>>;
 
-	constructor(private overlayRef: OverlayRef, parentInjector: Injector, selectInput: LuSimpleSelectInputComponent<T>) {
+	constructor(
+		private overlayRef: OverlayRef,
+		parentInjector: Injector,
+		selectInput: LuSimpleSelectInputComponent<T>,
+	) {
 		super();
 
 		const injector = Injector.create({

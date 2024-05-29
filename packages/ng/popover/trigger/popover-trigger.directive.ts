@@ -88,7 +88,11 @@ export class LuPopoverTriggerDirective<TPanel extends ILuPopoverPanel = ILuPopov
 		return this._panelId;
 	}
 
-	constructor(protected override _overlay: Overlay, protected override _elementRef: ElementRef<HTMLElement>, protected override _viewContainerRef: ViewContainerRef) {
+	constructor(
+		protected override _overlay: Overlay,
+		protected override _elementRef: ElementRef<HTMLElement>,
+		protected override _viewContainerRef: ViewContainerRef,
+	) {
 		super(_overlay, _elementRef, _viewContainerRef);
 		this.target = new LuPopoverTarget() as ILuPopoverTarget as TTarget;
 		this.target.elementRef = this._elementRef;

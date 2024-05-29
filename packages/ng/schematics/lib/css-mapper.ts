@@ -23,7 +23,11 @@ export class CssMapper {
 	private classesToUpdate = new Set(Object.keys(this.mappings.classes));
 	private varsToUpdate = new Set(Object.keys(this.mappings.variables));
 
-	constructor(private tree: Tree, private rawMappings: Mappings, private mappingProps?: Record<string, Record<string, string>>) {}
+	constructor(
+		private tree: Tree,
+		private rawMappings: Mappings,
+		private mappingProps?: Record<string, Record<string, string>>,
+	) {}
 
 	async run() {
 		const postCssScss = await import('../lib/local-deps/postcss-scss.js');

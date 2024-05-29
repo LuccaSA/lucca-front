@@ -14,11 +14,11 @@ import { LuCoreSelectUsersDirective } from './users.directive';
 	template: `
 		<ng-container *ngIf="context.option$ | async as user">
 			<div *ngIf="userDirective.displayMeOption && user.id === userDirective.currentUserId && hasEmptyClue$ | async; else notMe">
-				<b>{{ intl.me }} {{ user | luUserDisplay : userDirective.displayFormat }}</b>
+				<b>{{ intl.me }} {{ user | luUserDisplay: userDirective.displayFormat }}</b>
 			</div>
 
 			<ng-template #notMe>
-				<div>{{ user | luUserDisplay : userDirective.displayFormat }}</div>
+				<div>{{ user | luUserDisplay: userDirective.displayFormat }}</div>
 			</ng-template>
 			<div class="lu-select-additionalInformation" *ngIf="user.additionalInformation">({{ user.additionalInformation }})</div>
 		</ng-container>
