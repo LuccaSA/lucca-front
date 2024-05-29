@@ -1,4 +1,6 @@
+@use '@lucca-front/scss/src/commons/utils/color';
+
 @mixin vars {
 	--components-tableSticked-column-sticky-shadow-width: 0.5rem;
-	--components-tableSticked-column-sticky-shadow-color: rgba(172, 187, 215, 0.25);
+	--components-tableSticked-column-sticky-shadow-color: #{color.transparentize(var(--palettes-neutral-400), 0.24)};
 }
