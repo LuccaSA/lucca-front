@@ -1,10 +1,10 @@
-<section class="emptyState" [class.mod-center]="center">
+<section class="emptyState" [class.mod-center]="center" [attr.role]="title ? null : 'presentation'">
 	<div class="emptyState-container">
 		<div class="emptyState-content">
 			<div *ngIf="icon" class="emptyState-content-icon palette-{{palette}}" aria-hidden="true" [innerHtml]="icon | luSafeExternalSvg"></div>
 			<div class="emptyState-content-text">
-				<div role="heading" [attr.aria-level]="hx" class="emptyState-content-heading">{{ title }}</div>
-				<p>
+				<div role="heading" [attr.aria-level]="hx" class="emptyState-content-heading" *ngIf="title">{{ title }}</div>
+				<p class="emptyState-content-description" *ngIf="description">
 					<ng-container *luPortal="description"></ng-container>
 				</p>
 				<div class="emptyState-actions">

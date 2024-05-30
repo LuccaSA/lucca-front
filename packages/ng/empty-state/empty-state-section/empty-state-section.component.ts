@@ -27,14 +27,10 @@ export class EmptyStateSectionComponent {
 	})
 	center = false;
 
-	@Input({
-		required: true,
-	})
+	@Input()
 	title: string;
 
-	@Input({
-		required: true,
-	})
+	@Input()
 	description: PortalContent;
 
 	@Input()

@@ -40,9 +40,14 @@
 			margin-bottom: 0;
 		}
 
+		.emptyState-content-description {
+			margin: 0;
+		}
+
 		.emptyState-actions {
 			display: flex;
 			flex-wrap: wrap;
+			margin-top: var(--pr-t-spacings-200);
 			gap: var(--pr-t-spacings-100);
 
 			.button {
