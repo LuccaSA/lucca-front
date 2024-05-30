@@ -1,5 +1,5 @@
 @mixin component($atRoot: 'without: rule') {
-	width: 22.5rem;
+	width: 23.5rem;
 	max-width: calc(100vw - var(--spacings-S) * 2);
 	padding: var(--spacings-S);
 

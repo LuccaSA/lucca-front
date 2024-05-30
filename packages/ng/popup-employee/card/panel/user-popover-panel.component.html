@@ -41,7 +41,7 @@
 					<span *ngIf="employee.dtContractStart | isFuture" class="userPopover-details-info-detail-workplace">
 						<span aria-hidden="true" class="lucca-icon icon-calendarPlanning mod-S"></span>
 						<span class="userPopover-details-info-detail-link-state">
-							{{intl.EMPLOYEE_CARD_PANEL_COMING_ON_LABEL | injectParameter : (employee.dtContractStart | date: 'longDate') }}
+							{{intl.EMPLOYEE_CARD_PANEL_COMING_ON_LABEL | injectParameter : (employee.dtContractStart | date: 'shortDate') }}
 						</span>
 					</span>
 					<span

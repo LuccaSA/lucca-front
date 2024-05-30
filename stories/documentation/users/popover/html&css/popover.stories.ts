@@ -38,7 +38,7 @@ function getTemplate(args: UserPopoverStory): string {
 							class="lucca-icon icon-calendarPlanning mod-S"
 						></span>
 						<span class="userPopover-details-info-detail-workplace-state">
-							Absent(e) – <span class="u-textLight">Jusqu’au 28 févr. inclus</span>
+							Absent(e) – <span class="u-textLight">Jusqu’au 28/02/2024 inclus</span>
 						</span>
 					</a>
 				</p>
