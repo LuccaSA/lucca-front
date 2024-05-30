@@ -7,6 +7,8 @@ expect.extend(toHaveNoViolations);
 
 Element.prototype.scrollIntoView = () => {};
 
+// @angular-devkit/schematics needs TextDecoder and TextEncoder
+// It is used in LF's schematics tests
 Object.assign(global, { TextDecoder, TextEncoder });
 
 // xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
