@@ -12,7 +12,7 @@
 			&:first-child {
 				.breadcrumbs-list-item-action {
 					&::before {
-						@include icon.generate('format_corner_up_left');
+						@include icon.generate('arrow_left');
 
 						padding-right: var(--pr-t-spacings-50);
 						font-size: var(--sizes-XS-lineHeight);
