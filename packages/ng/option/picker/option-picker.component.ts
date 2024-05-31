@@ -86,7 +86,10 @@ export abstract class ALuOptionPickerComponent<T, O extends import('../item/opti
 		});
 	}
 
-	constructor(protected _changeDetectorRef: ChangeDetectorRef, @Inject(DOCUMENT) protected document: Document) {
+	constructor(
+		protected _changeDetectorRef: ChangeDetectorRef,
+		@Inject(DOCUMENT) protected document: Document,
+	) {
 		super();
 		this._isOptionItemsInitialized = false;
 		this.overlayPaneClass = this._defaultOverlayPaneClasses;

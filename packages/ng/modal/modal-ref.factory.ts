@@ -60,7 +60,10 @@ class LuModalRef<T extends ILuModalContent = ILuModalContent, D = unknown, R = u
 export class LuModalRefFactory implements ILuPopupRefFactory<ILuModalContent, LuModalConfig> {
 	protected _applicationRef = inject(ApplicationRef);
 
-	constructor(protected _overlay: Overlay, protected _injector: Injector) {}
+	constructor(
+		protected _overlay: Overlay,
+		protected _injector: Injector,
+	) {}
 	forge<T extends ILuModalContent, C extends LuModalConfig, D, R>(component: ComponentType<T>, config: C) {
 		return new LuModalRef<T, D, R>(this._overlay, this._injector, component, config, this._applicationRef);
 	}

@@ -85,7 +85,11 @@ export class LuUserPopoverDirective extends ALuPopoverTrigger<LuUserPopoverPanel
 	protected override _portal: ComponentPortal<LuUserPopoverPanelComponent>;
 	protected _user: ILuUser = { id: 0, firstName: '', lastName: '' };
 
-	public constructor(protected override _overlay: Overlay, protected override _elementRef: ElementRef<HTMLElement>, protected override _viewContainerRef: ViewContainerRef) {
+	public constructor(
+		protected override _overlay: Overlay,
+		protected override _elementRef: ElementRef<HTMLElement>,
+		protected override _viewContainerRef: ViewContainerRef,
+	) {
 		super(_overlay, _elementRef, _viewContainerRef);
 		this.target = new LuPopoverTarget();
 		this.target.elementRef = this._elementRef;

@@ -10,7 +10,10 @@ export class ScssValueAst {
 		this.parsed.nodes = nodes;
 	}
 
-	constructor(value: string, private postcssValueParser: ValueParser) {
+	constructor(
+		value: string,
+		private postcssValueParser: ValueParser,
+	) {
 		this.parsed = postcssValueParser(value);
 	}
 

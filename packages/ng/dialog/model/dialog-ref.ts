@@ -37,7 +37,10 @@ export class LuDialogRef<C = unknown> {
 	 */
 	result$: Observable<LuDialogResult<C>> = this.cdkRef.closed.pipe(filter((res): res is LuDialogResult<C> => !isDismissed(res)));
 
-	constructor(public readonly cdkRef: DialogRef<LuDialogResult<C> | typeof DISMISSED_VALUE, C>, public readonly config: LuDialogConfig<C>) {}
+	constructor(
+		public readonly cdkRef: DialogRef<LuDialogResult<C> | typeof DISMISSED_VALUE, C>,
+		public readonly config: LuDialogConfig<C>,
+	) {}
 
 	dismiss(): void {
 		// If we can't dismiss this dialog box, just ignore the dismiss call.

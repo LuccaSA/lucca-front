@@ -16,7 +16,7 @@ export class LuUserPopoverStore implements ILuUserPopoverStore {
 
 	public get(id: number): Observable<LuUserPopover> {
 		if (this.#cache.has(id)) {
-			return this.#cache.get(id)!;
+			return this.#cache.get(id);
 		}
 		const userPopoverObservable = this.#http.get<LuUserPopover>(`${this._api}/${id}`).pipe(
 			cacheImage((c) => c.pictureHref),

@@ -7,8 +7,8 @@ import { PortalDirective } from './portal.directive';
 	standalone: true,
 	imports: [PortalDirective],
 	template: `
-		@if(displayed) {
-		<div *luPortal="content; context: context"></div>
+		@if (displayed) {
+			<div *luPortal="content; context: context"></div>
 		}
 	`,
 })

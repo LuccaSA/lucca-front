@@ -30,7 +30,12 @@ export abstract class ALuPopupRef<T = unknown, D = unknown, R = unknown, C exten
 
 	protected _subs = new Subscription();
 
-	constructor(protected _overlay: Overlay, protected _injector: Injector, protected _component: ComponentType<T>, protected _config: C) {}
+	constructor(
+		protected _overlay: Overlay,
+		protected _injector: Injector,
+		protected _component: ComponentType<T>,
+		protected _config: C,
+	) {}
 
 	open(data?: D) {
 		this._createOverlay();

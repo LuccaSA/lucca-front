@@ -12,7 +12,12 @@ class MultiSelectPanelRef<T> extends LuMultiSelectPanelRef<T> {
 	private panelRef: ComponentRef<LuMultiSelectPanelComponent<T>>;
 	private portalRef: ComponentPortal<LuMultiSelectPanelComponent<T>>;
 
-	constructor(private overlayRef: OverlayRef, parentInjector: Injector, selectInput: LuMultiSelectInputComponent<T>, protected defaultPositionStrategy: PositionStrategy) {
+	constructor(
+		private overlayRef: OverlayRef,
+		parentInjector: Injector,
+		selectInput: LuMultiSelectInputComponent<T>,
+		protected defaultPositionStrategy: PositionStrategy,
+	) {
 		super();
 
 		const injector = Injector.create({
@@ -124,7 +129,7 @@ export class LuMultiSelectPanelRefFactory {
 			? ({
 					originY: oppositeYDirection,
 					overlayY: oppositeYDirection,
-			  } as const)
+				} as const)
 			: ({ originY: yDirection, overlayY: oppositeYDirection } as const);
 
 		return {
