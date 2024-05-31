@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Directive, ElementRef, forwardRef, HostListener, Input, OnInit, Renderer2 } from '@angular/core';
 import { AbstractControl, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors, Validator } from '@angular/forms';
-import { ALuDateAdapter, ELuDateGranularity, getIntl } from '@lucca-front/ng/core';
+import { ALuDateAdapter, ELuDateGranularity, getIntl, LuDateGranularity } from '@lucca-front/ng/core';
 import { ALuInput } from '@lucca-front/ng/input';
 import { LU_DATE_INPUT_TRANSLATIONS } from './date-input.translate';
 
@@ -24,7 +24,7 @@ export class LuDateInputDirective<D> extends ALuInput<D, HTMLInputElement> imple
 	private _focused = false;
 	@Input() min?: D;
 	@Input() max?: D;
-	@Input() granularity: ELuDateGranularity = ELuDateGranularity.day;
+	@Input() granularity: LuDateGranularity = ELuDateGranularity.day;
 
 	@Input() override set placeholder(p: string) {
 		this._elementRef.nativeElement.placeholder = p;

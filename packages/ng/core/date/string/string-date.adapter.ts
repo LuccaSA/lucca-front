@@ -1,8 +1,8 @@
-import { Injectable, Inject, LOCALE_ID } from '@angular/core';
-import { LuNativeDateAdapter } from '../native/index';
+import { Inject, Injectable, LOCALE_ID } from '@angular/core';
 import { ALuDateAdapter } from '../date-adapter.class';
-import { ELuDateGranularity } from '../date-granularity.enum';
 import { ILuDateAdapter } from '../date-adapter.interface';
+import { LuDateGranularity } from '../date-granularity.enum';
+import { LuNativeDateAdapter } from '../native/index';
 
 /** bind to a string with iso 26001 format YYYY-MM-DD */
 @Injectable()
@@ -35,7 +35,7 @@ export class LuStringDateAdapter extends ALuDateAdapter<string> implements ILuDa
 		return this._nativeAdapter.isValid(this.stringToDate(d));
 	}
 
-	override compare(a: string, b: string, granularity: ELuDateGranularity): number {
+	override compare(a: string, b: string, granularity: LuDateGranularity): number {
 		const da = this.stringToDate(a);
 		const db = this.stringToDate(b);
 
@@ -46,7 +46,7 @@ export class LuStringDateAdapter extends ALuDateAdapter<string> implements ILuDa
 		return this._nativeAdapter.isParsable(text);
 	}
 
-	parse(text: string, granularity: ELuDateGranularity): string {
+	parse(text: string, granularity: LuDateGranularity): string {
 		return this.dateToString(this._nativeAdapter.parse(text, granularity));
 	}
 
@@ -74,7 +74,7 @@ export class LuStringDateAdapter extends ALuDateAdapter<string> implements ILuDa
 		return this._nativeAdapter.getDay(this.stringToDate(d));
 	}
 
-	add(d: string, count: number, granularity: ELuDateGranularity): string {
+	add(d: string, count: number, granularity: LuDateGranularity): string {
 		return this.dateToString(this._nativeAdapter.add(this.stringToDate(d), count, granularity));
 	}
 
