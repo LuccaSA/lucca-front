@@ -12,6 +12,10 @@
 @use '@lucca-front/scss/src/components/radioField/exports' as radioField;
 @use '@lucca-front/scss/src/components/box/exports' as box;
 
+@mixin maxWidth {
+	max-width: var(--components-form-maxWidth);
+}
+
 @mixin S {
 	.formLabel {
 		@include formLabel.S;

@@ -6,6 +6,10 @@
 
 .form {
 	@include component;
+
+	&.mod-maxWidth {
+		@include maxWidth;
+	}
 }
 
 .form-fieldset {
