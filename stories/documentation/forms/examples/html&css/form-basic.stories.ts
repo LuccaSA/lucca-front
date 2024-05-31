@@ -10,7 +10,7 @@ export default {
 function getTemplate(args: FieldsetBasicStory): string {
 	return `
 	<section>
-		<form class="form">
+		<form class="form mod-maxWidth">
 			<header class="form-header">
 				<h1 class="form-header-title">Form title</h1>
 				<span class="form-header-mandatory" aria-hidden="true"><sup class="form-header-mandatory-asterisk">*</sup> Champs obligatoires</span>
