@@ -1,11 +1,11 @@
 import { Component, inject, Input, Type } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
+import { ButtonComponent } from '@lucca-front/ng/button';
 import { ILuModalContent, LU_MODAL_DATA, LuModal, LuModalConfig, LuModalModule } from '@lucca-front/ng/modal';
 import { LuToastsModule, LuToastsService } from '@lucca-front/ng/toast';
 import { applicationConfig, Meta, moduleMetadata } from '@storybook/angular';
 import { map, shareReplay, timer } from 'rxjs';
 import { generateMarkdownCodeBlock, getStoryGenerator, useDocumentationStory } from 'stories/helpers/stories';
-import { ButtonComponent } from '@lucca-front/ng/button';
 
 type StoryComponent = LuModalConfig & { useDynamicContent: boolean; message: string };
 
@@ -25,7 +25,7 @@ const globalArgTypes = {
 		},
 	},
 	noBackdrop: { control: { type: 'boolean' } },
-};
+} as const;
 
 const generateStory = getStoryGenerator<StoryComponent>({
 	argTypes: globalArgTypes,
@@ -99,7 +99,10 @@ class ModalStories {
 	@Input() useDynamicContent: boolean;
 	@Input() message: string;
 
-	constructor(private modal: LuModal, private toastsService: LuToastsService) {}
+	constructor(
+		private modal: LuModal,
+		private toastsService: LuToastsService,
+	) {}
 
 	public openModal() {
 		const cmp: Type<ILuModalContent> = this.useDynamicContent ? ModalDynamicContentComponent : ModalContentComponent;
@@ -115,7 +118,7 @@ class ModalStories {
 						...baseOptions,
 						position: this.position,
 						mode: this.mode,
-				  }
+					}
 				: baseOptions;
 		const data = this.message ? { message: this.message } : {};
 

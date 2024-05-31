@@ -9,5 +9,5 @@ export const HiddenArgType = {
 	table: {
 		disable: true,
 	},
-	control: false,
+	control: undefined,
 };
