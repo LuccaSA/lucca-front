@@ -79,8 +79,8 @@
 				position: absolute;
 				z-index: 1;
 				display: block;
-				top: 0;
-				bottom: 0;
+				top: 1px;
+				bottom: 1px;
 				width: calc(var(--components-scrollBox-shadowWidth) * 2);
 				pointer-events: none;
 			}
