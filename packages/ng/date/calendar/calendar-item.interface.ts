@@ -1,4 +1,4 @@
-import { ELuDateGranularity } from '@lucca-front/ng/core';
+import { LuDateGranularity } from '@lucca-front/ng/core';
 
 export interface ICalendarItem<D> {
 	id: string;
@@ -6,5 +6,5 @@ export interface ICalendarItem<D> {
 	mods: string[];
 	label: string;
 	isDisabled: boolean;
-	granularity: ELuDateGranularity;
+	granularity: LuDateGranularity;
 }

@@ -1,7 +1,7 @@
 import { CommonModule, FormStyle, getLocaleDayNames, getLocaleFirstDayOfWeek, TranslationWidth } from '@angular/common';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, forwardRef, Inject, Input, LOCALE_ID, OnInit, Renderer2 } from '@angular/core';
 import { AbstractControl, ControlValueAccessor, FormsModule, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors, Validator } from '@angular/forms';
-import { ALuDateAdapter, ELuDateGranularity } from '@lucca-front/ng/core';
+import { ALuDateAdapter, ELuDateGranularity, LuDateGranularity } from '@lucca-front/ng/core';
 import { ALuInput } from '@lucca-front/ng/input';
 import { LuCalendarItemFactory } from './calendar-item.factory';
 import { ICalendarItem } from './calendar-item.interface';
@@ -30,10 +30,10 @@ import { ICalendarItem } from './calendar-item.interface';
 export class LuCalendarInputComponent<D> extends ALuInput<D> implements ControlValueAccessor, OnInit, Validator {
 	@Input() min?: D;
 	@Input() max?: D;
-	@Input() granularity: ELuDateGranularity = ELuDateGranularity.day;
+	@Input() granularity: LuDateGranularity = ELuDateGranularity.day;
 	@Input() startOn: D = this._adapter.forgeToday();
 
-	viewGranularity: ELuDateGranularity;
+	viewGranularity: LuDateGranularity;
 	header: ICalendarItem<D>;
 	items: ICalendarItem<D>[] = [];
 	get mod() {

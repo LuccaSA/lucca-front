@@ -1,4 +1,4 @@
-import { ELuDateGranularity } from '@lucca-front/ng/core';
+import { ELuDateGranularity, LuDateGranularity } from '@lucca-front/ng/core';
 import { ICalendarItem } from './calendar-item.interface';
 
 export abstract class ACalendarItem<D> implements ICalendarItem<D> {
@@ -9,7 +9,7 @@ export abstract class ACalendarItem<D> implements ICalendarItem<D> {
 	mods: string[] = [];
 	isDisabled = false;
 	label: string;
-	readonly granularity: ELuDateGranularity;
+	readonly granularity: LuDateGranularity;
 }
 export class DayItem<D> extends ACalendarItem<D> implements ICalendarItem<D> {
 	override readonly granularity = ELuDateGranularity.day;

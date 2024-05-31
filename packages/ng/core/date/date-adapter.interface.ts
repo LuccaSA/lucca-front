@@ -1,13 +1,13 @@
-import { ELuDateGranularity } from './date-granularity.enum';
+import { LuDateGranularity } from './date-granularity.enum';
 
 export interface ILuDateAdapter<D> {
 	forge(year: number, month: number, date: number): D;
 	forgeToday(): D;
 	forgeInvalid(): D;
 	isValid(d: D): boolean;
-	compare(a: D, b: D, granularity: ELuDateGranularity): number;
-	isParsable(text: string, granularity?: ELuDateGranularity): boolean;
-	parse(text: string, granularity?: ELuDateGranularity): D;
+	compare(a: D, b: D, granularity: LuDateGranularity): number;
+	isParsable(text: string, granularity?: LuDateGranularity): boolean;
+	parse(text: string, granularity?: LuDateGranularity): D;
 	format(d: D, format: string): string;
 	clone(d: D): D;
 
@@ -16,5 +16,5 @@ export interface ILuDateAdapter<D> {
 	getDate(d: D): number;
 	getDay(d: D): number;
 
-	add(d: D, count: number, granularity: ELuDateGranularity): D;
+	add(d: D, count: number, granularity: LuDateGranularity): D;
 }

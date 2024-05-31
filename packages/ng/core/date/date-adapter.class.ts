@@ -1,12 +1,12 @@
 import { ILuDateAdapter } from './date-adapter.interface';
-import { ELuDateGranularity } from './date-granularity.enum';
+import { ELuDateGranularity, LuDateGranularity } from './date-granularity.enum';
 
 export abstract class ALuDateAdapter<D> implements ILuDateAdapter<D> {
 	abstract forge(year: number, month: number, date: number): D;
 	abstract forgeToday(): D;
 	abstract forgeInvalid(): D;
 	abstract isValid(d: D): boolean;
-	compare(a: D, b: D, granularity: ELuDateGranularity): number {
+	compare(a: D, b: D, granularity: LuDateGranularity): number {
 		if (!a || !b || !this.isValid(a) || !this.isValid(b)) {
 			throw new Error('you must provide valid and not null dates to be compared');
 		}
@@ -60,8 +60,8 @@ export abstract class ALuDateAdapter<D> implements ILuDateAdapter<D> {
 
 		return 0;
 	}
-	abstract isParsable(text: string, granularity?: ELuDateGranularity): boolean;
-	abstract parse(text: string, granularity?: ELuDateGranularity): D;
+	abstract isParsable(text: string, granularity?: LuDateGranularity): boolean;
+	abstract parse(text: string, granularity?: LuDateGranularity): D;
 	abstract format(d: D, format: string): string;
 	abstract clone(d: D): D;
 
@@ -70,5 +70,5 @@ export abstract class ALuDateAdapter<D> implements ILuDateAdapter<D> {
 	abstract getDate(d: D): number;
 	abstract getDay(d: D): number;
 
-	abstract add(d: D, count: number, granularity: ELuDateGranularity): D;
+	abstract add(d: D, count: number, granularity: LuDateGranularity): D;
 }
