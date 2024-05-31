@@ -1,11 +1,7 @@
 @use '@lucca-front/scss/src/commons/utils/reset';
 
 @mixin component($atRoot: 'without: rule') {
-	column-gap: var(--pr-t-spacings-400);
-	align-items: center;
-	display: flex;
 	position: relative;
-	flex-wrap: wrap;
 
 	&::after {
 		content: var(--components-menu-borderContent);
@@ -35,10 +31,6 @@
 			flex-grow: 1;
 			flex-wrap: wrap;
 			padding: var(--components-menu-listPadding);
-
-			.scrollBox & {
-				flex-wrap: nowrap;
-			}
 		}
 
 		// .menu-link is deprecated
