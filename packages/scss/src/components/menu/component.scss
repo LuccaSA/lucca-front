@@ -2,6 +2,11 @@
 
 @mixin component($atRoot: 'without: rule') {
 	position: relative;
+	column-gap: var(--pr-t-spacings-400);
+	align-items: center;
+	display: flex;
+	position: relative;
+	flex-wrap: wrap;
 
 	&::after {
 		content: var(--components-menu-borderContent);
