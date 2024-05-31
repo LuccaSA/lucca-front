@@ -22,8 +22,8 @@
 		position: sticky;
 		flex-shrink: 0;
 		width: var(--components-scrollBox-shadowWidth);
-		top: var(--components-scrollBox-shadowTop);
-		bottom: var(--components-scrollBox-shadowBottom);
+		top: 0;
+		bottom: 0;
 		background-repeat: no-repeat;
 		background-size: 75% 100%, 25% 100%, 1px 100%;
 	}
@@ -79,8 +79,8 @@
 				position: absolute;
 				z-index: 1;
 				display: block;
-				top: var(--components-scrollBox-shadowTop);
-				bottom: var(--components-scrollBox-shadowBottom);
+				top: 0;
+				bottom: 0;
 				width: calc(var(--components-scrollBox-shadowWidth) * 2);
 				pointer-events: none;
 			}

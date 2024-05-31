@@ -35,10 +35,6 @@
 	&::after {
 		--components-menu-borderContent: none;
 	}
-
-	.scrollBox {
-		--components-scrollBox-shadowBottom: 0;
-	}
 }
 
 @mixin vertical {
