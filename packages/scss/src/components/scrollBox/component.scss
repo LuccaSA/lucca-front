@@ -1,0 +1,114 @@
+@use '@lucca-front/scss/src/commons/utils/color';
+
+@mixin component($atRoot: 'without: rule') {
+	background-color: var(--components-scrollBox-backgroundColor);
+	position: relative;
+	display: flex;
+	overflow: auto;
+	scrollbar-width: thin;
+
+	@media (hover: none) {
+		scrollbar-width: none;
+
+		&::-webkit-scrollbar {
+			display: none;
+		}
+	}
+
+	&::before,
+	&::after {
+		content: '';
+		pointer-events: none;
+		position: sticky;
+		flex-shrink: 0;
+		width: var(--components-scrollBox-shadowWidth);
+		top: 0;
+		bottom: 0;
+		background-repeat: no-repeat;
+		background-size: 75% 100%, 25% 100%, 1px 100%;
+	}
+
+	&::before {
+		left: 0;
+		background-position: 0% 50%;
+		background-image: radial-gradient(
+				farthest-side at 0% 50%,
+				color.transparentize(var(--components-scrollBox-shadowColor), 0.24),
+				color.transparentize(var(--colors-black-color), 0)
+			),
+			radial-gradient(
+				farthest-side at 0% 50%,
+				color.transparentize(var(--components-scrollBox-shadowColor), 0.32) 50%,
+				color.transparentize(var(--colors-black-color), 0)
+			),
+			radial-gradient(
+				farthest-side at 0% 50%,
+				color.transparentize(var(--components-scrollBox-shadowColor), 1) calc(100% - 1px),
+				color.transparentize(var(--colors-black-color), 0)
+			);
+	}
+
+	&::after {
+		right: 0;
+		background-position: 100% 50%;
+		background-image: radial-gradient(
+				farthest-side at 100% 50%,
+				color.transparentize(var(--components-scrollBox-shadowColor), 0.24),
+				color.transparentize(var(--colors-black-color), 0)
+			),
+			radial-gradient(
+				farthest-side at 100% 50%,
+				color.transparentize(var(--components-scrollBox-shadowColor), 0.32) 50%,
+				color.transparentize(var(--colors-black-color), 0)
+			),
+			radial-gradient(
+				farthest-side at 100% 50%,
+				color.transparentize(var(--components-scrollBox-shadowColor), 1) calc(100% - 1px),
+				color.transparentize(var(--colors-black-color), 0)
+			);
+	}
+
+	@at-root ($atRoot) {
+		.scrollBox-inner {
+			flex-shrink: 0;
+			position: relative;
+
+			&::before,
+			&::after {
+				content: '';
+				position: absolute;
+				z-index: 1;
+				display: block;
+				top: 1px;
+				bottom: 1px;
+				width: calc(var(--components-scrollBox-shadowWidth) * 2);
+				pointer-events: none;
+			}
+
+			&::before {
+				left: calc(var(--components-scrollBox-shadowWidth) * -1);
+				background-image: linear-gradient(
+					to right,
+					var(--components-scrollBox-backgroundColor) var(--components-scrollBox-shadowWidth),
+					color.transparentize(var(--colors-black-color), 0)
+				);
+			}
+
+			&::after {
+				right: calc(var(--components-scrollBox-shadowWidth) * -1);
+				background-image: linear-gradient(
+					to left,
+					var(--components-scrollBox-backgroundColor) var(--components-scrollBox-shadowWidth),
+					color.transparentize(var(--colors-black-color), 0)
+				);
+			}
+		}
+
+		.scrollBox-inner-content {
+			margin-left: calc(var(--components-scrollBox-shadowWidth) * -1);
+			margin-right: calc(var(--components-scrollBox-shadowWidth) * -1);
+			position: relative;
+			z-index: 2;
+		}
+	}
+}
