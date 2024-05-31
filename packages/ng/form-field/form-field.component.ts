@@ -1,8 +1,8 @@
-import { booleanAttribute, Component, ContentChildren, DoCheck, forwardRef, inject, Input, OnChanges, OnDestroy, QueryList, Renderer2, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, Component, ContentChildren, DestroyRef, DoCheck, forwardRef, inject, Input, OnChanges, OnDestroy, QueryList, Renderer2, ViewEncapsulation } from '@angular/core';
 import { NgIf, NgSwitch, NgSwitchCase, NgTemplateOutlet } from '@angular/common';
 import { InputDirective } from './input.directive';
 import { FormFieldSize } from './form-field-size';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, map, merge, startWith, Subject, switchMap } from 'rxjs';
 import { InlineMessageComponent, InlineMessageState } from '@lucca-front/ng/inline-message';
 import { SafeHtml } from '@angular/platform-browser';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
@@ -11,6 +11,7 @@ import { AbstractControl, NG_VALIDATORS, NgControl, ReactiveFormsModule, Require
 import { IconComponent } from '@lucca-front/ng/icon';
 import { FORM_FIELD_INSTANCE } from './form-field.token';
 import { LU_FORM_FIELD_TRANSLATIONS } from './form-field.translate';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 let nextId = 0;
 
@@ -38,13 +39,40 @@ export class FormFieldComponent implements OnChanges, OnDestroy, DoCheck {
 
 	#requiredValidator: RequiredValidator | undefined;
 
-	@ContentChildren(NG_VALIDATORS)
+	#destroyRef = inject(DestroyRef);
+
+	#doCheck$ = new Subject<void>();
+
+	@ContentChildren(NG_VALIDATORS, { descendants: true })
 	public set validators(validators: QueryList<Validator | undefined>) {
 		this.#requiredValidator = validators.toArray()?.find((v): v is RequiredValidator => v instanceof RequiredValidator);
 	}
 
-	@ContentChildren(NgControl)
-	controls: NgControl[] = [];
+	@ContentChildren(NgControl, { descendants: true })
+	set controls(controls: QueryList<NgControl>) {
+		const controls$ = controls.changes.pipe(
+			takeUntilDestroyed(this.#destroyRef),
+			startWith(controls),
+			map(() => controls.toArray()),
+		);
+		// If a control is added or removed, we want to update status based on the new ones
+		controls$.subscribe((controls) => {
+			this.updateRequiredStatus(controls);
+		});
+		// Upon status change or NgDoCheck trigger, we want to update validity and display
+		controls$
+			.pipe(
+				switchMap((controls) => {
+					// We have to trigger status check on DoCheck too to properly update display when control.touched changes
+					// Because we can't listen to `control.touched` changes, we need to hook on this.
+					// TODO use unified control state change events once we have Angular 18
+					return merge(this.#doCheck$, ...controls.map((control) => control.statusChanges)).pipe(map(() => controls));
+				}),
+			)
+			.subscribe((controls) => {
+				this.updateRequiredStatus(controls);
+			});
+	}
 
 	@Input({
 		required: true,
@@ -61,8 +89,6 @@ export class FormFieldComponent implements OnChanges, OnDestroy, DoCheck {
 
 	@Input()
 	tooltip: string | SafeHtml;
-
-	required = false;
 
 	@Input()
 	invalid = false;
@@ -94,6 +120,8 @@ export class FormFieldComponent implements OnChanges, OnDestroy, DoCheck {
 	 */
 	@Input()
 	counter = 0;
+
+	required = false;
 
 	get contentLength(): number {
 		return (this.#inputs[0]?.host?.nativeElement as HTMLInputElement)?.value.length || 0;
@@ -178,12 +206,8 @@ export class FormFieldComponent implements OnChanges, OnDestroy, DoCheck {
 		}
 	}
 
-	ngOnDestroy(): void {
-		this.ready$.complete();
-	}
-
-	ngDoCheck(): void {
-		this.controls.forEach((control) => {
+	private updateRequiredStatus(controls: NgControl[]): void {
+		controls.forEach((control) => {
 			// invalid management
 			const previousInvalid = this.invalid;
 			this.invalid = (control.invalid || this.statusControl?.invalid) && control.touched;
@@ -199,5 +223,13 @@ export class FormFieldComponent implements OnChanges, OnDestroy, DoCheck {
 				this.updateAria();
 			}
 		});
+	}
+
+	ngOnDestroy(): void {
+		this.ready$.complete();
+	}
+
+	ngDoCheck(): void {
+		this.#doCheck$.next();
 	}
 }

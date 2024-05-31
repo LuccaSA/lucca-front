@@ -137,7 +137,7 @@ export class LuMultiSelectPanelComponent<T> implements AfterViewInit {
 					debounceTime(0),
 					takeUntil(this.panelRef.closed),
 				)
-				.subscribe(() => this.keyManager.setFirstItemActive());
+				.subscribe(() => (this.optionsQL.length ? this.keyManager.setFirstItemActive() : this.keyManager.setActiveItem(-1)));
 		}
 
 		this.keyManager.setFirstItemActive();

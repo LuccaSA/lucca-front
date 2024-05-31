@@ -1,22 +1,16 @@
-import { OverlayModule } from '@angular/cdk/overlay';
 import { provideHttpClient } from '@angular/common/http';
-import { provideAnimations } from '@angular/platform-browser/animations';
-import {
-	LuUserPopoverDirective,
-	provideLuUserPopover,
-} from '@lucca-front/ng/popup-employee';
-import { applicationConfig, Meta, StoryFn } from '@storybook/angular';
 import { Component, Input } from '@angular/core';
-import { ILuUser } from '../../../../packages/ng/user/user.model';
-
+import { provideAnimations } from '@angular/platform-browser/animations';
+import { LuUserPopoverDirective, provideLuUserPopover } from '@lucca-front/ng/popup-employee';
+import { Meta, StoryFn, applicationConfig } from '@storybook/angular';
+import { ILuUser } from '../../../../../packages/ng/user/user.model';
 
 @Component({
 	selector: 'user-popover-story',
 	standalone: true,
-	template: '<div [luUserPopover]="luUserPopover" [luUserPopoverEnterDelay]="luUserPopoverEnterDelay" [luUserPopoverLeaveDelay]="luUserPopoverLeaveDelay" [luUserPopoverDisabled]="luUserPopoverDisabled">Survolez-moi !</div>',
-	imports: [
-		LuUserPopoverDirective,
-	],
+	template:
+		'<div [luUserPopover]="luUserPopover" [luUserPopoverEnterDelay]="luUserPopoverEnterDelay" [luUserPopoverLeaveDelay]="luUserPopoverLeaveDelay" [luUserPopoverDisabled]="luUserPopoverDisabled">Survolez-moi !</div>',
+	imports: [LuUserPopoverDirective],
 })
 class UserPopoverStory {
 	@Input() luUserPopover: ILuUser;
@@ -26,7 +20,7 @@ class UserPopoverStory {
 }
 
 export default {
-	title: 'Documentation/Users/Popover/Basic',
+	title: 'Documentation/Users/Popover/Angular',
 	component: UserPopoverStory,
 	decorators: [applicationConfig({ providers: [provideAnimations(), provideHttpClient(), provideLuUserPopover()] })],
 	argsTypes: {
@@ -52,5 +46,5 @@ Basic.args = {
 Basic.parameters = {
 	controls: {
 		include: ['luUserPopover', 'luUserPopoverEnterDelay', 'luUserPopoverLeaveDelay', 'luUserPopoverDisabled'],
-	}
-}
+	},
+};

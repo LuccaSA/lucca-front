@@ -1,9 +1,8 @@
-import { Meta, moduleMetadata, StoryFn } from '@storybook/angular';
+import { HttpClientModule } from '@angular/common/http';
 import { LuSafeExternalSvgPipe } from '@lucca-front/ng/safe-content';
-import { HttpClientModule } from "@angular/common/http";
+import { Meta, moduleMetadata, StoryFn } from '@storybook/angular';
 
-interface EmptyStateSectionBasicStory {
-}
+interface EmptyStateSectionBasicStory {}
 
 export default {
 	title: 'Documentation/Feedback/Empty State/HTML&CSS/Section',
@@ -12,8 +11,7 @@ export default {
 			imports: [LuSafeExternalSvgPipe, HttpClientModule],
 		}),
 	],
-	argTypes: {
-	},
+	argTypes: {},
 } as Meta;
 
 function getTemplate(args: EmptyStateSectionBasicStory): string {
@@ -27,7 +25,7 @@ function getTemplate(args: EmptyStateSectionBasicStory): string {
 			></div>
 			<div class="emptyState-content-text">
 				<h3 class="emptyState-content-heading">Empty State</h3>
-				<p>Flatus obsequiorum potest inanes pomerium obsequiorum credi homines vero caelibes orbos potest vile diversitate flatus.</p>
+				<p class="emptyState-content-description">Flatus obsequiorum potest inanes pomerium obsequiorum credi homines vero caelibes orbos potest vile diversitate flatus.</p>
 				<div class="emptyState-actions">
 					<button type="button" class="button">Button</button>
 					<button type="button" class="button mod-outlined">Button</button>
@@ -44,4 +42,4 @@ const Template: StoryFn<EmptyStateSectionBasicStory> = (args: EmptyStateSectionB
 });
 
 export const Section = Template.bind({});
-Section.args = { };
+Section.args = {};

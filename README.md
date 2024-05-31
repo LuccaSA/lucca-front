@@ -97,9 +97,9 @@ To import all components, replace the previous code by the 3 following lines (no
 
 ```
 // Import styles
-@forward '@lucca-front/icons/src/main’;
-@forward '@lucca-front/scss/src/main-all’;
-@forward '@lucca-front/ng/src/main’;
+@forward '@lucca-front/icons/src/main';
+@forward '@lucca-front/scss/src/main-all';
+@forward '@lucca-front/ng/src/main';
 ```
 
 For custom imports, check our [advanced usage documentation](https://prisme.lucca.io/94310e217/p/950783-chargement-des-composants).
@@ -113,9 +113,9 @@ In angular.json, we suggest to add a couple of entries to your paths:
   "build": {
     "options": {
       "stylePreprocessorOptions": {
-        “includePaths": [
+        "includePaths": [
           "src/scss",
-          "node_modules",
+          "node_modules"
         ]
       },
     },
@@ -167,7 +167,6 @@ In order to work on Lucca Front, we use Storybook to display components.
 
 - Install [volta.sh](https://docs.volta.sh/guide/getting-started)
 - Install node `volta install node@lts`
-- Build Compodoc to avoid errors (To be fixed) `npm run compodoc`
 - Run storybook `npm start`
 
 ## TODO

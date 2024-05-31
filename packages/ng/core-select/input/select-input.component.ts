@@ -22,7 +22,7 @@ import { PortalContent, getIntl } from '@lucca-front/ng/core';
 import { BehaviorSubject, Observable, ReplaySubject, Subject, defer, map, of, startWith, switchMap, take } from 'rxjs';
 import { LuOptionGrouping, LuSimpleSelectDefaultOptionComponent } from '../option';
 import { LuSelectPanelRef } from '../panel';
-import { LuOptionContext, SELECT_LABEL, SELECT_LABEL_ID } from '../select.model';
+import { CoreSelectAddOptionStrategy, LuOptionContext, SELECT_LABEL, SELECT_LABEL_ID } from '../select.model';
 import { LU_CORE_SELECT_TRANSLATIONS } from '../select.translate';
 
 @Directive()
@@ -59,7 +59,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	addOptionLabel: PortalContent = this.coreIntl.addOption;
 
 	@Input()
-	set addOptionStrategy(strategy: 'never' | 'always' | 'if-empty-clue') {
+	set addOptionStrategy(strategy: CoreSelectAddOptionStrategy) {
 		this.addOptionStrategy$.next(strategy);
 	}
 
@@ -153,7 +153,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	lastEmittedClue: string = '';
 	clue$ = defer(() => this.clueChange.pipe(startWith(this.clue)));
 
-	addOptionStrategy$ = new BehaviorSubject<'never' | 'always' | 'if-empty-clue'>('never');
+	addOptionStrategy$ = new BehaviorSubject<CoreSelectAddOptionStrategy>('never');
 	shouldDisplayAddOption$ = this.addOptionStrategy$.pipe(
 		switchMap((strategy) => {
 			switch (strategy) {
@@ -162,6 +162,8 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 				case 'never':
 					return of(false);
 				case 'if-empty-clue':
+					return this.clue$.pipe(map((clue) => !clue));
+				case 'if-not-empty-clue':
 					return this.clue$.pipe(map((clue) => !!clue));
 			}
 		}),

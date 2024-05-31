@@ -27,6 +27,7 @@
 
 	--components-dialog-animationOpening: slideFromRight;
 	--components-dialog-maxHeight: none;
+	--components-dialog-maxHeightFallback: var(--components-dialog-maxHeight);
 	--components-dialog-height: 100%;
 	--components-dialog-maxWidth: calc(100vw - var(--pr-t-spacings-200));
 	--components-dialog-borderRadius: var(--commons-borderRadius-L) 0 0 var(--commons-borderRadius-L);
@@ -38,6 +39,7 @@
 
 	--components-dialog-animationOpening: slideFromBottom;
 	--components-dialog-maxHeight: calc(100dvh - var(--pr-t-spacings-200));
+	--components-dialog-maxHeightFallback: calc(100vh - var(--pr-t-spacings-200));
 	--components-dialog-maxWidth: none;
 	--components-dialog-inset: auto 0 0 0;
 	--components-dialog-borderRadius: var(--commons-borderRadius-L) var(--commons-borderRadius-L) 0 0;
@@ -56,5 +58,6 @@
 	--components-dialog-size: 100%;
 	--components-dialog-maxWidth: none;
 	--components-dialog-maxHeight: none;
+	--components-dialog-maxHeightFallback: var(--components-dialog-maxHeight);
 	--components-dialog-borderRadius: 0;
 }

@@ -6,5 +6,8 @@ export interface LuCoreSelectUser extends ILuApiItem {
 	picture?: {
 		href: string;
 	};
-	additionalInformation?: string;
 }
+
+export type LuCoreSelectWithAdditionnalInformation<T> = T & {
+	additionalInformation?: string;
+};

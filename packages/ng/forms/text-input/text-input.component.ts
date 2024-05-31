@@ -10,7 +10,7 @@ import { NoopValueAccessorDirective } from '../noop-value-accessor.directive';
 import { TextInputAddon } from './text-input-addon';
 import { LU_TEXTFIELD_TRANSLATIONS } from './text-input.translate';
 
-type TextFieldType = 'text' | 'email' | 'password';
+type TextFieldType = 'text' | 'email' | 'password' | 'url';
 
 @Component({
 	selector: 'lu-text-input',
@@ -31,6 +31,9 @@ export class TextInputComponent {
 
 	@Input({ transform: booleanAttribute })
 	hasSearchIcon = false;
+
+	@Input({ transform: booleanAttribute })
+	valueAlignRight = false;
 
 	@ViewChild('inputElement', { static: true })
 	inputElementRef: ElementRef<HTMLInputElement>;

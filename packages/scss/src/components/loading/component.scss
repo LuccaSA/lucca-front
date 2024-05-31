@@ -3,13 +3,27 @@
 @mixin component {
 	@include loading.spinner();
 
-	min-width: 1.5rem;
-	min-height: 1.5rem;
-	padding-left: var(--pr-t-spacings-400);
-	display: inline-block;
+	@supports not (height: 1dvh) {
+		--components-loading-transform: var(--components-loading-transformFallback);
+	}
+
+	min-height: var(--components-loading-size);
+	padding: var(--components-loading-padding);
+	margin: var(--components-loading-margin);
+	display: var(--components-loading-display);
+	transform: var(--components-loading-transform);
+	color: var(--components-loading-color);
 	position: relative;
+	text-align: center;
+	vertical-align: top;
+
+	&:not(:empty) {
+		--components-loading-padding: 0 0 0 var(--pr-t-spacings-400);
+	}
 
 	&::after {
-		margin: 0;
+		width: var(--components-loading-size);
+		height: var(--components-loading-size);
+		margin: var(--components-loading-spinnerMargin);
 	}
 }

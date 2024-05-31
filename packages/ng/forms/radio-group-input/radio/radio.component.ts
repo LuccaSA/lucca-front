@@ -39,6 +39,10 @@ export class RadioComponent<T = unknown> implements OnChanges {
 		return this.#parentGroup.ngControl.control;
 	}
 
+	public get name() {
+		return this.#parentGroup.name;
+	}
+
 	@HostBinding('id')
 	id = `radio-${++nextId}`;
 

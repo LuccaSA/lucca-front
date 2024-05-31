@@ -3,7 +3,7 @@ import { Meta, StoryFn } from '@storybook/angular';
 interface TableStickyColumnsStory {}
 
 export default {
-	title: 'Documentation/Listings/Table/Sticky Columns',
+	title: 'Documentation/Listings/Table/Legacy/Sticky Columns',
 	argTypes: {},
 } as Meta;
 

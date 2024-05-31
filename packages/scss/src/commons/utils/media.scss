@@ -18,6 +18,10 @@
 
 	@if $max {
 		$reversed: 'not all and';
+
+		@if $at == 'container' {
+			$reversed: 'not';
+		}
 	}
 
 	@if map.get(config.$breakpoints, $breakpoint) {
@@ -31,6 +35,10 @@
 
 @mixin queries($breakpoint1, $breakpoint2, $property: 'width', $at: 'media', $name: '') {
 	$reversed: 'not all and';
+
+	@if $at == 'container' {
+		$reversed: 'not';
+	}
 
 	@if map.get(config.$breakpoints, $breakpoint1) {
 		$breakpoint1: pxToEm(map.get(config.$breakpoints, $breakpoint1));
