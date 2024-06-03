@@ -2,8 +2,8 @@ import { formatDate, FormatWidth, getLocaleDateFormat } from '@angular/common';
 import { Inject, Injectable, LOCALE_ID, Optional } from '@angular/core';
 import { ALuDateAdapter } from '../date-adapter.class';
 import { ILuDateAdapter } from '../date-adapter.interface';
-import { ELuDateGranularity } from '../date-granularity.enum';
-import { ILuNativeDateAdapterOptions, luDefaultNativeDateAdapterOptions, LU_NATIVE_DATE_ADAPTER_OPTIONS } from './native-date.option';
+import { ELuDateGranularity, LuDateGranularity } from '../date-granularity.enum';
+import { ILuNativeDateAdapterOptions, LU_NATIVE_DATE_ADAPTER_OPTIONS, luDefaultNativeDateAdapterOptions } from './native-date.option';
 
 @Injectable()
 export class LuNativeDateAdapter extends ALuDateAdapter<Date> implements ILuDateAdapter<Date> {
@@ -38,7 +38,7 @@ export class LuNativeDateAdapter extends ALuDateAdapter<Date> implements ILuDate
 			}
 		});
 	}
-	private extract(text: string, granularity: ELuDateGranularity = ELuDateGranularity.day): { date: number; month: number; year: number } {
+	private extract(text: string, granularity: LuDateGranularity = ELuDateGranularity.day): { date: number; month: number; year: number } {
 		const groups = text.split(this._regex);
 		let date = 1,
 			month = 1,
@@ -59,7 +59,7 @@ export class LuNativeDateAdapter extends ALuDateAdapter<Date> implements ILuDate
 		}
 		return { date, month, year };
 	}
-	isParsable(text: string, granularity = ELuDateGranularity.day): boolean {
+	isParsable(text: string, granularity: LuDateGranularity = ELuDateGranularity.day): boolean {
 		if (!text) {
 			return false;
 		}
@@ -123,7 +123,7 @@ export class LuNativeDateAdapter extends ALuDateAdapter<Date> implements ILuDate
 			return false;
 		}
 	}
-	parse(text: string, granularity = ELuDateGranularity.day): Date {
+	parse(text: string, granularity: LuDateGranularity = ELuDateGranularity.day): Date {
 		if (!text) {
 			return undefined;
 		}
@@ -205,7 +205,7 @@ export class LuNativeDateAdapter extends ALuDateAdapter<Date> implements ILuDate
 		}
 	}
 
-	add(d: Date, count: number, granularity: ELuDateGranularity): Date {
+	add(d: Date, count: number, granularity: LuDateGranularity): Date {
 		let year = this.getYear(d);
 		let month = this.getMonth(d);
 		let date = this.getDate(d);

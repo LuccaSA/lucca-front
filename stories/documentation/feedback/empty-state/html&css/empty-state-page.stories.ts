@@ -25,7 +25,7 @@ function getTemplate(args: EmptyStatePageStory): string {
 			></div>
 			<div class="emptyState-content-text">
 				<h1 class="emptyState-content-heading">Empty State</h1>
-				<p>Flatus obsequiorum potest inanes pomerium obsequiorum credi homines vero caelibes orbos potest vile diversitate flatus.</p>
+				<p class="emptyState-content-description">Flatus obsequiorum potest inanes pomerium obsequiorum credi homines vero caelibes orbos potest vile diversitate flatus.</p>
 				<div class="emptyState-actions">
 					<button type="button" class="button">Button</button>
 					<button type="button" class="button mod-outlined">Button</button>

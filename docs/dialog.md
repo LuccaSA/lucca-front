@@ -181,25 +181,25 @@ Dans le cas où vous souhaitez utiliser un formulaire au sein d’une dialog box
 
 ```html
 <lu-dialog>
-		<!--form = new FormGroup({
-			example: new FormControl('', Validators.required)
-		})-->
-		<form [formControl]="form" class="dialog-formOptionnal">
-			<lu-dialog-header>Header with Form inside</lu-dialog-header>
+  <!--form = new FormGroup({
+    example: new FormControl('', Validators.required)
+  })-->
+  <form [formControl]="form" class="dialog-formOptionnal">
+    <lu-dialog-header>Header with Form inside</lu-dialog-header>
 
-			<lu-dialog-content>
-				<lu-form-field label="Example input">
-					<lu-text-input formControlName="example" placeholder="This will be focused if autoFocus is set to first-input"></lu-text-input>
-				</lu-form-field>
-			</lu-dialog-content>
+    <lu-dialog-content>
+      <lu-form-field label="Example input">
+        <lu-text-input formControlName="example" placeholder="This will be focused if autoFocus is set to first-input"></lu-text-input>
+      </lu-form-field>
+    </lu-dialog-content>
 
-			<lu-dialog-footer>
-				<div class="footer-content">Optional footer text</div>
-				<div class="footer-actions">
-					<button type="submit" luButton [disabled]="!form.valid" luDialogClose>Submit</button>
-					<button type="button" luButton="text" luDialogDismiss>Cancel</button>
-				</div>
-			</lu-dialog-footer>
-		</form>
-	</lu-dialog>
+    <lu-dialog-footer>
+      <div class="footer-content">Optional footer text</div>
+      <div class="footer-actions">
+        <button type="submit" luButton [disabled]="!form.valid" luDialogClose>Submit</button>
+        <button type="button" luButton="text" luDialogDismiss>Cancel</button>
+      </div>
+    </lu-dialog-footer>
+  </form>
+</lu-dialog>
 ```

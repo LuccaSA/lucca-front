@@ -12,7 +12,7 @@ export default {
 		}),
 	],
 	render: (args: EmptyStatePageComponent) => {
-		const { title, description, icon, topRightBackground, topRightForeground, bottomLeftBackground, bottomLeftForeground, contentBackgroundColor } = args;
+		const { title, description, icon, topRightBackground, topRightForeground, bottomLeftBackground, bottomLeftForeground, contentBackgroundColor, hx } = args;
 		const paramIcon = args.icon === '' ? '' : 'icon="' + args.icon + '"';
 
 		return {
@@ -34,6 +34,7 @@ export default {
 	bottomLeftBackground="${bottomLeftBackground}"
 	bottomLeftForeground="${bottomLeftForeground}"
 	contentBackgroundColor="${contentBackgroundColor}"
+	hx="${hx}"
 >
 	<button luButton type="button" palette="product">Button</button>
 	<button luButton="outlined" type="button" palette="product">Button</button>
@@ -133,6 +134,13 @@ export default {
 				type: 'text',
 			},
 		},
+		hx: {
+			control: {
+				type: 'number',
+				min: 1,
+				max: 6,
+			},
+		},
 	},
 } as Meta;
 
@@ -146,5 +154,6 @@ export const Page: StoryObj<EmptyStatePageComponent> = {
 		bottomLeftBackground: 'https://cdn.lucca.fr/lucca-front/assets/empty-states/poplee/bubbles-bottom-left-01.svg',
 		bottomLeftForeground: 'https://cdn.lucca.fr/lucca-front/assets/empty-states/poplee/core-hr-01.svg',
 		contentBackgroundColor: 'var(--pr-t-elevation-surface-default)',
+		hx: 1,
 	},
 };

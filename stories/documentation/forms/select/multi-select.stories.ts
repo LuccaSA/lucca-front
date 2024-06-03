@@ -7,7 +7,7 @@ import { LuCoreSelectApiV3Directive, LuCoreSelectApiV4Directive } from '@lucca-f
 import { LuCoreSelectEstablishmentsDirective } from '@lucca-front/ng/core-select/establishment';
 import { LuCoreSelectJobQualificationsDirective } from '@lucca-front/ng/core-select/job-qualification';
 import { LuCoreSelectUsersDirective, provideCoreSelectCurrentUserId } from '@lucca-front/ng/core-select/user';
-import { LuMultiDisplayerDirective, LuMultiSelectDisplayerInputDirective, LuMultiSelectInputComponent } from '@lucca-front/ng/multi-select';
+import { LuMultiDisplayerDirective, LuMultiSelectCounterDisplayerComponent, LuMultiSelectDisplayerInputDirective, LuMultiSelectInputComponent } from '@lucca-front/ng/multi-select';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 import { Meta, applicationConfig, moduleMetadata } from '@storybook/angular';
 import { interval, map } from 'rxjs';
@@ -76,22 +76,9 @@ export const WithMultiDisplayer = generateStory({
 	placeholder="Placeholder..."
 	[options]="legumes | filterLegumes:clue"
 	(clueChange)="clue = $event"
-	[maxValuesShown]="maxValuesShown"
 >
-	<ng-container *luMultiDisplayer="let legumes; select: selectRef">
-		<div class="multipleSelect-displayer mod-filter" [class.is-filled]="legumes?.length > 0">
-			<input
-				type="text"
-				luInput
-				luMultiSelectDisplayerInput
-				ngModel
-				(ngModelChange)="selectRef.clueChanged($event)"
-			/>
-			<div class="multipleSelect-displayer-filter">
-				<div class="multipleSelect-displayer-chip chip mod-unkillable" *ngIf="legumes?.length === 1">{{legumes[0]?.name}}</div>
-				<ng-container *ngIf="legumes?.length > 1"><span class="multipleSelect-displayer-numericBadge numericBadge">{{ legumes?.length }}</span><span class="multipleSelect-displayer-label">légumes sélectionnés</span></ng-container>
-			</div>
-		</div>
+	<ng-container *luMultiDisplayer="let values; select: selectRef">
+		<lu-multi-select-counter-displayer [selected]="values" label="trucs sélectionnés"></lu-multi-select-counter-displayer>
 	</ng-container>
 </lu-multi-select>`,
 	neededImports: {
@@ -343,7 +330,14 @@ export const AddOption = generateStory({
 		args: {
 			addOptionLabel: 'Ajouter un légume',
 			addOptionStrategy: 'always',
-			addLegume: (name: string, existing: ILegume[]) => [...existing, { name: name || 'Légume sans titre', index: existing.length, color: existing[0].color }],
+			addLegume: (name: string, existing: ILegume[]) => [
+				...existing,
+				{
+					name: name || 'Légume sans titre',
+					index: existing.length,
+					color: existing[0].color,
+				},
+			],
 			selectLegume: (legume: ILegume, legumes: ILegume[]) => [...legumes, legume],
 		},
 	},
@@ -372,6 +366,7 @@ const meta: Meta<LuMultiSelectInputStoryComponent> = {
 				LuCoreSelectJobQualificationsDirective,
 				LuDisabledOptionDirective,
 				LuMultiSelectDisplayerInputDirective,
+				LuMultiSelectCounterDisplayerComponent,
 				CommonModule,
 				AsyncPipe,
 			],

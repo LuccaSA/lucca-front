@@ -8,24 +8,71 @@ import { Meta, StoryFn, applicationConfig } from '@storybook/angular';
 	selector: 'tooltip-stories',
 	standalone: true,
 	imports: [LuTooltipModule],
-	template: `<button
-		type="button"
-		class="button pr-u-margin400"
-		luTooltip="so you can see me"
-		[luTooltipEnterDelay]="luTooltipEnterDelay"
-		[luTooltipLeaveDelay]="luTooltipLeaveDelay"
-		[luTooltipPosition]="luTooltipPosition"
-		[luTooltipDisabled]="luTooltipDisabled"
-		[luTooltipWhenEllipsis]="luTooltipWhenEllipsis"
-		[class.u-ellipsis]="luTooltipWhenEllipsis"
-		[tabindex]="tabindex"
-		[attr.data-tooltip]="getDataTooltip()"
-	>
-		Come over here
-	</button>`,
+	template: `
+		<button
+			type="button"
+			class="button pr-u-marginBlock400"
+			style="margin-inline: 100px"
+			luTooltip="so you can see me"
+			[luTooltipEnterDelay]="luTooltipEnterDelay"
+			[luTooltipLeaveDelay]="luTooltipLeaveDelay"
+			[luTooltipPosition]="luTooltipPosition"
+			[luTooltipDisabled]="luTooltipDisabled"
+			[luTooltipWhenEllipsis]="luTooltipWhenEllipsis"
+			[tabindex]="tabindex"
+			[attr.data-tooltip]="getDataTooltip()"
+		>
+			Come over here
+		</button>
+		<br />
+		<b>Ellipsis enabled:</b>
+		<div
+			class="ellipsis-example u-ellipsis"
+			luTooltip="In the Game Boy Pokémon games, Pokémon Red, Green, Blue, and Yellow, players were able to access a set of 105 glitch Pokémon."
+			[luTooltipEnterDelay]="luTooltipEnterDelay"
+			[luTooltipLeaveDelay]="luTooltipLeaveDelay"
+			[luTooltipPosition]="luTooltipPosition"
+			[luTooltipDisabled]="luTooltipDisabled"
+			luTooltipWhenEllipsis
+		>
+			In the Game Boy Pokémon games, Pokémon Red, Green, Blue, and Yellow, players were able to access a set of 105 glitch Pokémon.
+		</div>
+		<br />
+		<b>Ellipsis from padding:</b>
+		<div style="width: 228px">
+			<div
+				class="ellipsis-padding u-ellipsis"
+				luTooltip="In the Game Boy Pokémon games."
+				[luTooltipEnterDelay]="luTooltipEnterDelay"
+				[luTooltipLeaveDelay]="luTooltipLeaveDelay"
+				[luTooltipPosition]="luTooltipPosition"
+				[luTooltipDisabled]="luTooltipDisabled"
+				luTooltipWhenEllipsis
+			>
+				In the Game Boy Pokémon games.
+			</div>
+		</div>
+		<br />
+		<b>Same code but text is not ellipsed:</b>
+		<div
+			luTooltip="In the Game Boy Pokémon games, Pokémon Red, Green, Blue, and Yellow, players were able to access a set of 105 glitch Pokémon."
+			[luTooltipEnterDelay]="luTooltipEnterDelay"
+			[luTooltipLeaveDelay]="luTooltipLeaveDelay"
+			[luTooltipPosition]="luTooltipPosition"
+			[luTooltipDisabled]="luTooltipDisabled"
+			luTooltipWhenEllipsis
+		>
+			In the Game Boy Pokémon games, Pokémon Red, Green, Blue, and Yellow, players were able to access a set of 105 glitch Pokémon.
+		</div>
+	`,
 	styles: [
 		`
-			button.u-ellipsis {
+			.ellipsis-padding {
+				width: 228px;
+				padding-inline: 14px;
+			}
+
+			.ellipsis-example {
 				width: 100px;
 			}
 		`,

@@ -13,10 +13,10 @@ export default {
 		}),
 	],
 	render: (args: EmptyStateSectionComponent) => {
-		const { title, description, center, palette, icon } = args;
+		const { title, description, center, palette, hx, icon } = args;
 		const paramIcon = args.icon === '' ? '' : 'icon="' + args.icon + '"';
 		return {
-template: `<lu-empty-state-section ${paramIcon} title="${title}" description="${description}" palette="${palette}" ${center ? ' center' : ''}>
+			template: `<lu-empty-state-section hx="${hx}" ${paramIcon} title="${title}" description="${description}" palette="${palette}" ${center ? ' center' : ''}>
 	<button luButton type="button" palette="product">Button</button>
 	<button luButton="outlined" type="button" palette="product">Button</button>
 </lu-empty-state-section>`,
@@ -24,6 +24,13 @@ template: `<lu-empty-state-section ${paramIcon} title="${title}" description="${
 	},
 	argTypes: {
 		palette: PaletteArgType,
+		hx: {
+			control: {
+				type: 'number',
+				min: 1,
+				max: 6,
+			},
+		},
 		icon: {
 			options: [
 				'https://cdn.lucca.fr/lucca-front/assets/empty-states/icons/iconBanknote.svg',
@@ -91,5 +98,6 @@ export const Section: StoryObj<EmptyStateSectionComponent> = {
 		description: 'Description can be a string or a ng-template',
 		center: false,
 		palette: 'none',
+		hx: 3,
 	},
 };

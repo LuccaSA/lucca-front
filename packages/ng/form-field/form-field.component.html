@@ -3,7 +3,14 @@
 		<ng-container *luPortal="label"></ng-container
 		><!--
 	--><sup class="formLabel-required" aria-hidden="true" *ngIf="required">*</sup>
-		<lu-icon icon="signHelp" alt="" *ngIf="tooltip" [luTooltip]="tooltip" [color]="invalid ? 'error' : 'inherit'"></lu-icon>
+		<lu-icon
+			class="formLabel-info"
+			icon="signHelp"
+			[alt]="'?'"
+			*ngIf="tooltip"
+			[luTooltip]="tooltip"
+			[color]="invalid ? 'error' : 'inherit'"
+		></lu-icon>
 	</legend>
 	<ng-container *ngTemplateOutlet="projectionTpl"></ng-container>
 	<lu-inline-message
@@ -28,7 +35,14 @@
 		><!--
 	--><sup class="formLabel-required" aria-hidden="true" *ngIf="required">*</sup>
 
-		<lu-icon icon="signHelp" alt="" *ngIf="tooltip" [luTooltip]="tooltip" [color]="invalid ? 'error' : 'inherit'"></lu-icon>
+		<lu-icon
+			class="formLabel-info"
+			icon="signHelp"
+			[alt]="'?'"
+			*ngIf="tooltip"
+			[luTooltip]="tooltip"
+			[color]="invalid ? 'error' : 'inherit'"
+		></lu-icon>
 		<span
 			*ngIf="counter > 0"
 			class="formLabel-counter"

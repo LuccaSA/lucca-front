@@ -7,7 +7,7 @@ export default {
 	component: ButtonComponent,
 	render: ({ luButton, ...inputs }, { argTypes }) => {
 		return {
-			template: `<button type="button" luButton${luButton !== '' ? `="${luButton}"` : ''}${generateInputs(inputs, argTypes)}
+			template: `<button luButton${luButton !== '' ? `="${luButton}"` : ''}${generateInputs(inputs, argTypes)}
 >Button</button>`,
 		};
 	},

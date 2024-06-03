@@ -1,11 +1,9 @@
 @mixin vars {
+	--components-form-maxWidth: 40rem;
 	--components-form-group-margin-bottom: 1.2rem;
-
 	--components-form-field-margin-bottom: var(--pr-t-spacings-200);
-
 	--components-form-label-font-size: var(--sizes-M-fontSize);
 	--components-form-label-margin-bottom: var(--pr-t-spacings-50);
-
 	--components-field-framed-side-padding: var(--pr-t-spacings-200);
 	--components-field-framed-top-padding: var(--pr-t-spacings-400);
 	--components-field-framed-bottom-padding: var(--pr-t-spacings-200);

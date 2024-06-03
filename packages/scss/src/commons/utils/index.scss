@@ -323,11 +323,19 @@
 		.u-insetReset {
 			inset: 0 !important;
 		}
-	} @else {
+	} @else if $direction != 'block' and $direction != 'inline' {
 		// .u-#{$direction}Reset is deprecated
 		.u-#{$direction}0,
 		.u-#{$direction}Reset {
 			#{$direction}: 0 !important;
+		}
+	} @else {
+		@each $boxModel in core.$boxModel {
+			@if $boxModel != 'border' {
+				.u-#{$boxModel}#{transform.capitalize($direction)}0 {
+					#{$boxModel}-#{$direction}: 0 !important;
+				}
+			}
 		}
 	}
 }

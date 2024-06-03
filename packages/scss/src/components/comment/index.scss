@@ -1,0 +1,28 @@
+@use '@lucca-front/scss/src/commons/utils/container';
+
+@use 'exports' as *;
+
+.comment {
+	@include vars;
+	@include component;
+
+	&.mod-S {
+		@include S;
+	}
+
+	&.mod-noAvatar {
+		@include noAvatar;
+	}
+
+	@include container.max(25rem, $name: 'comment') {
+		@include narrow;
+	}
+}
+
+.commentWrapper {
+	@include vars;
+
+	&.mod-compact {
+		@include wrapperCompact;
+	}
+}

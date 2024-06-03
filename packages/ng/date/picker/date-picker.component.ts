@@ -5,7 +5,7 @@ import { A11yModule } from '@angular/cdk/a11y';
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, EventEmitter, forwardRef, Input, Output, TemplateRef, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ALuDateAdapter, ELuDateGranularity } from '@lucca-front/ng/core';
+import { ALuDateAdapter, ELuDateGranularity, LuDateGranularity } from '@lucca-front/ng/core';
 import { ALuPickerPanel } from '@lucca-front/ng/picker';
 import { luTransformPopover } from '@lucca-front/ng/popover';
 import { LuCalendarInputComponent } from '../calendar';
@@ -31,7 +31,7 @@ export class LuDatePickerComponent<D = Date> extends ALuPickerPanel<D> {
 
 	@Input() min?: D;
 	@Input() max?: D;
-	@Input() granularity: ELuDateGranularity = ELuDateGranularity.day;
+	@Input() granularity: LuDateGranularity = ELuDateGranularity.day;
 	@Input() startOn: D = this._adapter.forgeToday();
 
 	@Output() override close = new EventEmitter<void>();

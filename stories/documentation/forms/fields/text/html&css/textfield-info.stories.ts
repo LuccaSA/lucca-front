@@ -10,7 +10,7 @@ export default {
 function getTemplate(args: TextfieldInfoStory): string {
 	return `<div class="form-field">
 	<label class="formLabel" id="IDlabel" for="ID">
-		Label<span aria-hidden="true" class="lucca-icon icon-signHelp"></span>
+		Label<span class="formLabel-info"><span aria-hidden="true" class="lucca-icon icon-signHelp"></span><span class="u-mask">?</span></span>
 	</label>
 	<div class="textField">
 		<div class="textField-input">
