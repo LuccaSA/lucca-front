@@ -13,6 +13,7 @@
 			(input)="keysInputHandler($event)"
 			(click)="clickHandler($event)"
 			(keydown)="keydownHandler($event)"
+			(blur)="touched.emit()"
 		/>
 		<span aria-hidden="true" class="timePicker-fieldset-group-textfield-display">{{ valueLabel() }}</span>
 	</div>

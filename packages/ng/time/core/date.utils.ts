@@ -26,6 +26,27 @@ export const createIsoTimeFromHoursAndMinutes = (hours: number, minutes: number,
 	return `${hoursStr}:${minutesStr}:${secondsStr}`;
 };
 
-export const getHoursPartFromIsoTime = (time: ISO8601Time): number => Number(time.split(':')[0]);
+export const isoTimeToSeconds = (time: ISO8601Time): number => {
+	return getHoursPartFromIsoTime(time) * 3600 + getMinutesPartFromIsoTime(time) * 60 + getSecondsPartFromIsoTime(time);
+};
 
-export const getMinutesPartFromIsoTime = (time: ISO8601Time): number => Number(time.split(':')[1]);
+export const getHoursPartFromIsoTime = (time: ISO8601Time): number => Number(time.split(':')[0]) || 0;
+
+export const getMinutesPartFromIsoTime = (time: ISO8601Time): number => Number(time.split(':')[1]) || 0;
+export const getSecondsPartFromIsoTime = (time: ISO8601Time): number => Number(time.split(':')[2]) || 0;
+
+export const getHoursDisplayPartFromIsoTime = (time: ISO8601Time): number | '--' => {
+	const hours = time.split(':')[0];
+	if (hours === '--') {
+		return hours;
+	}
+	return Number(hours);
+};
+
+export const getMinutesDisplayPartFromIsoTime = (time: ISO8601Time): number | '--' => {
+	const minutes = time.split(':')[1];
+	if (minutes === '--') {
+		return minutes;
+	}
+	return Number(minutes);
+};

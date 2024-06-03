@@ -4,8 +4,16 @@ import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { getIntl } from '@lucca-front/ng/core';
 import { BasePickerComponent } from '../core/base-picker.component';
 import { ISO8601Time } from '../core/date-primitives';
-import { convertStringToIsoTime, createIsoTimeFromHoursAndMinutes, getHoursPartFromIsoTime, getMinutesPartFromIsoTime } from '../core/date.utils';
-import { isoDurationToDateFnsDuration, isoDurationToSeconds } from '../core/duration.utils';
+import {
+	convertStringToIsoTime,
+	createIsoTimeFromHoursAndMinutes,
+	getHoursDisplayPartFromIsoTime,
+	getHoursPartFromIsoTime,
+	getMinutesDisplayPartFromIsoTime,
+	getMinutesPartFromIsoTime,
+	isoTimeToSeconds,
+} from '../core/date.utils';
+import { isoDurationToDateFnsDuration } from '../core/duration.utils';
 import { ceilToNearest, circularize, floorToNearest, roundToNearest } from '../core/math.utils';
 import { isNil, isNotNil, PickerControlDirection } from '../core/misc.utils';
 import { TimePickerPartComponent } from '../core/time-picker-part.component';
@@ -29,8 +37,7 @@ import { LU_TIME_PICKER_TRANSLATIONS } from './time-picker.translate';
 export class TimePickerComponent extends BasePickerComponent {
 	protected intl = getIntl(LU_TIME_PICKER_TRANSLATIONS);
 
-	value = model<ISO8601Time>('00:00:00');
-	min = input<ISO8601Time>(null);
+	value = model<ISO8601Time>('--:--:--');
 	max = input<ISO8601Time>(null);
 
 	displayArrows = input(false, { transform: booleanAttribute });
@@ -38,6 +45,9 @@ export class TimePickerComponent extends BasePickerComponent {
 	@Input() label: string;
 
 	timeChange = output<TimeChangeEvent>();
+
+	protected hoursDisplay = computed(() => getHoursDisplayPartFromIsoTime(this.value()));
+	protected minutesDisplay = computed(() => getMinutesDisplayPartFromIsoTime(this.value()));
 
 	protected hours = computed(() => getHoursPartFromIsoTime(this.value()));
 	protected minutes = computed(() => getMinutesPartFromIsoTime(this.value()));
@@ -53,14 +63,12 @@ export class TimePickerComponent extends BasePickerComponent {
 
 	protected hoursDecimalConf = DEFAULT_TIME_DECIMAL_PIPE_FORMAT;
 
-	protected maxHours = 23;
-
-	constructor() {
-		super();
-	}
+	protected maxHours = computed(() => {
+		return getHoursPartFromIsoTime(this.max() ?? '23:59:59');
+	});
 
 	writeValue(value: ISO8601Time): void {
-		this.value.set(value || '00:00:00');
+		this.value.set(value || '--:--:--');
 	}
 
 	setDisabledState?(isDisabled: boolean): void {
@@ -145,7 +153,7 @@ export class TimePickerComponent extends BasePickerComponent {
 		const hoursPart = getHoursPartFromIsoTime(protoEvent.value);
 		const minutesPart = getMinutesPartFromIsoTime(protoEvent.value);
 
-		const max = isoDurationToSeconds('PT23H59M59S');
+		const max = isoTimeToSeconds(this.max());
 
 		const candidateTimeAsSeconds = hoursPart * 3600 + minutesPart * 60;
 

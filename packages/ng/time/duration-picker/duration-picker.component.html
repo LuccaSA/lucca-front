@@ -1,6 +1,6 @@
 <div [ngClass]="pickerClasses()" (copy)="copyHandler($event)" (paste)="pasteHandler($event)">
-	<fieldset class="timePicker-fieldset">
-		<legend><span class="u-mask">{{label}}</span></legend>
+	<fieldset class="timePicker-fieldset" [disabled]="disabled()">
+		<legend><span class="u-mask">{{ label }}</span></legend>
 		<lu-time-picker-part
 			#hoursPart
 			class="timePicker-fieldset-group"

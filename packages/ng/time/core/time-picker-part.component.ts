@@ -1,5 +1,20 @@
 import { DecimalPipe, formatNumber } from '@angular/common';
-import { booleanAttribute, ChangeDetectionStrategy, Component, computed, ElementRef, EventEmitter, Inject, input, LOCALE_ID, model, numberAttribute, Output, ViewChild } from '@angular/core';
+import {
+	booleanAttribute,
+	ChangeDetectionStrategy,
+	Component,
+	computed,
+	ElementRef,
+	EventEmitter,
+	Inject,
+	input,
+	LOCALE_ID,
+	model,
+	ModelSignal,
+	numberAttribute,
+	Output,
+	ViewChild,
+} from '@angular/core';
 import { RepeatOnHoldDirective } from './repeat-on-hold.directive';
 import { PickerControlDirection } from './misc.utils';
 import { InputDirective } from '@lucca-front/ng/form-field';
@@ -18,7 +33,7 @@ export class TimePickerPartComponent {
 
 	decimalConf = input('2.0-0');
 
-	value = model(0);
+	value: ModelSignal<number | '--'> = model('--');
 
 	max = input(0, {
 		transform: numberAttribute,
@@ -47,10 +62,20 @@ export class TimePickerPartComponent {
 	@Output() prevRequest = new EventEmitter<void>();
 	@Output() nextRequest = new EventEmitter<void>();
 	@Output() inputControlClick = new EventEmitter<PickerControlDirection>();
+	@Output() touched = new EventEmitter<void>();
 
 	@ViewChild('timePickerInput') timePickerInput?: ElementRef<HTMLInputElement>;
 
-	valueLabel = computed(() => (this.hideValue() ? '  ' : formatNumber(this.value(), this.locale, this.decimalConf())));
+	valueLabel = computed(() => {
+		if (this.hideValue()) {
+			return '  ';
+		}
+		const value = this.value();
+		if (value === '--') {
+			return value;
+		}
+		return formatNumber(value, this.locale, this.decimalConf());
+	});
 
 	protected inputId = `time-picker-part-${nextId++}`;
 
@@ -75,7 +100,7 @@ export class TimePickerPartComponent {
 
 		const value = event.target.value;
 
-		let val = value.slice(-2);
+		let val = value.slice(-2) || '00';
 
 		if (this.max() && Number(val) * 10 > this.max()) {
 			this.moveRequest(event, 'next');

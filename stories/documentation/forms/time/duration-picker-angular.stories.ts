@@ -63,8 +63,6 @@ export const Basic: StoryObj<DurationPickerComponent & FormFieldComponent> = {
 		displayArrows: false,
 		disabled: false,
 		step: 'PT1M',
-		loopingPoint: 'P3D',
-		min: 'PT0S',
-		max: 'P1Y',
+		max: 'PT99H',
 	},
 };

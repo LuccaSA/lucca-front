@@ -64,7 +64,6 @@ export const Basic: StoryObj<TimePickerComponent & FormFieldComponent> = {
 		displayArrows: false,
 		disabled: false,
 		step: 'PT1M',
-		min: '00:00:00',
 		max: '23:59:59',
 	},
 };

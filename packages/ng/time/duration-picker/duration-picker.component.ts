@@ -1,8 +1,7 @@
 import { NgClass } from '@angular/common';
-import { booleanAttribute, ChangeDetectionStrategy, Component, computed, forwardRef, inject, Input, input, model, output } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, computed, forwardRef, Input, input, model, output } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { getIntl } from '@lucca-front/ng/core';
-import { FORM_FIELD_INSTANCE } from '@lucca-front/ng/form-field';
 import { BasePickerComponent } from '../core/base-picker.component';
 import { ISO8601Duration } from '../core/date-primitives';
 import { createDurationFromHoursAndMinutes, getHoursPartFromDuration, getMinutesPartFromDuration, isoDurationToDateFnsDuration, isoDurationToSeconds } from '../core/duration.utils';
@@ -27,19 +26,14 @@ import { LU_DURATION_PICKER_TRANSLATIONS } from './duration-picker.translate';
 	],
 })
 export class DurationPickerComponent extends BasePickerComponent {
-	#formFieldRef = inject(FORM_FIELD_INSTANCE, { optional: true });
-
 	protected intl = getIntl(LU_DURATION_PICKER_TRANSLATIONS);
 
 	value = model<ISO8601Duration>('PT0S');
-	min = input<ISO8601Duration>('P0S');
-	max = input<ISO8601Duration>('P9999D');
+	max = input<ISO8601Duration>('PT99H');
 
 	displayArrows = input(false, { transform: booleanAttribute });
 
 	@Input() label: string;
-
-	loopingPoint = input<ISO8601Duration>('P9999D');
 
 	hideZeroValue = input(false, { transform: booleanAttribute });
 
@@ -59,20 +53,13 @@ export class DurationPickerComponent extends BasePickerComponent {
 	});
 	protected fieldsetSuffixClasses = computed(() => {
 		return {
-			'timePicker-fieldset-suffix': true,
+			'timePicker-fieldset-groupSeparator': true,
 			'u-visibilityHidden': this.shouldHideValue(),
 		};
 	});
 	protected separator = this.intl.timePickerTimeSeparator;
 
 	protected hoursDecimalConf = DEFAULT_TIME_DECIMAL_PIPE_FORMAT;
-
-	constructor() {
-		super();
-		if (this.#formFieldRef) {
-			this.#formFieldRef.layout = 'fieldset';
-		}
-	}
 
 	writeValue(value: ISO8601Duration): void {
 		this.value.set(value || 'PT0S');
@@ -157,10 +144,20 @@ export class DurationPickerComponent extends BasePickerComponent {
 	}
 
 	private setTime(protoEvent: DurationChangeEvent): void {
-		const hoursPart = getHoursPartFromDuration(protoEvent.value);
+		let hoursPart = getHoursPartFromDuration(protoEvent.value);
 		const minutesPart = getMinutesPartFromDuration(protoEvent.value);
 
-		const max = isoDurationToSeconds(this.loopingPoint());
+		if (hoursPart < 0) {
+			hoursPart = getHoursPartFromDuration(this.max());
+			if (isoDurationToSeconds(createDurationFromHoursAndMinutes(hoursPart, minutesPart)) > isoDurationToSeconds(this.max())) {
+				// If current value with minutes is > max, decrement hours again
+				hoursPart--;
+			}
+		} else if (hoursPart > getHoursPartFromDuration(this.max())) {
+			hoursPart = 0;
+		}
+
+		const max = isoDurationToSeconds(this.max());
 
 		const candidateTimeAsSeconds = hoursPart * 3600 + minutesPart * 60;
 
@@ -198,7 +195,34 @@ export class DurationPickerComponent extends BasePickerComponent {
 			modifiedVal = ceilToNearest(selectedPart - selectedIncrement, selectedIncrement);
 		}
 
+		// if (modifiedVal < 0) {
+		// 	if (part === 'hours') {
+		// 		// If we are doing 'down' at 0, event says -increment, but just return max value instead
+		// 		modifiedVal = getHoursPartFromDuration(this.max());
+		// 		if (isoDurationToSeconds(createDurationFromHoursAndMinutes(modifiedVal, minutesPart)) > isoDurationToSeconds(this.max())) {
+		// 			// If current value with minutes is > max, decrement hours again
+		// 			modifiedVal--;
+		// 		}
+		// 	}
+		// 	if (part === 'minutes') {
+		// 		// If we have reached max hours, minutes max can apply, else max minutes is always 59
+		// 		const isMaxHours = hoursPart === getHoursPartFromDuration(this.max());
+		// 		modifiedVal = isMaxHours ? getMinutesPartFromDuration(this.max()) || 59 : 59;
+		// 		if (isMaxHours && isoDurationToSeconds(createDurationFromHoursAndMinutes(hoursPart, modifiedVal)) > isoDurationToSeconds(this.max())) {
+		// 			modifiedVal = getMinutesPartFromDuration(this.max());
+		// 		}
+		// 	}
+		// }
+
 		const newTime = part === 'hours' ? createDurationFromHoursAndMinutes(modifiedVal, minutesPart) : createDurationFromHoursAndMinutes(hoursPart, modifiedVal);
+
+		// if (isoDurationToSeconds(newTime) > isoDurationToSeconds(this.max())) {
+		// 	if (part === 'hours') {
+		// 		newTime = createDurationFromHoursAndMinutes(0, minutesPart);
+		// 	} else {
+		// 		newTime = 'PT0S';
+		// 	}
+		// }
 
 		this.setTime({
 			source: 'control',
