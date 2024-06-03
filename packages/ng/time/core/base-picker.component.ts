@@ -1,8 +1,11 @@
 import { ISO8601Duration, ISO8601Time } from './date-primitives';
-import { computed, input, model, ViewChild } from '@angular/core';
+import { Component, computed, input, model, ViewChild } from '@angular/core';
 import { TimePickerPartComponent } from './time-picker-part.component';
 import { ControlValueAccessor } from '@angular/forms';
 
+@Component({
+	template: '',
+})
 export abstract class BasePickerComponent implements ControlValueAccessor {
 	onChange: (value: ISO8601Time | ISO8601Duration) => void;
 	onTouched: () => void;

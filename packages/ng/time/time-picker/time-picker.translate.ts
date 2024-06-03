@@ -1,5 +1,5 @@
 import { InjectionToken } from '@angular/core';
-import { ILuTranslation } from '../../core/translate';
+import { ILuTranslation } from '@lucca-front/ng/core';
 
 export const LU_TIME_PICKER_TRANSLATIONS = new InjectionToken('LuTimePickerTranslations', {
 	factory: () => luTimePickerTranslations,
