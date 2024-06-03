@@ -70,8 +70,8 @@ export function relativeTimeTimer(date: Date | number, allowedUnits?: readonly L
 			const unit =
 				relativeTime.value === 1 && relativeTime.unit !== 'second'
 					? // We a future date come closer, we need to switch to the previous unit
-					  // For example, if we are at 1 minutes, we should switch to second to avoid displaying '1 minute' during '1 minute' (we want to wait one second to display '59 seconds')
-					  previousRelativeTimeUnitByUnit[relativeTime.unit]
+						// For example, if we are at 1 minutes, we should switch to second to avoid displaying '1 minute' during '1 minute' (we want to wait one second to display '59 seconds')
+						previousRelativeTimeUnitByUnit[relativeTime.unit]
 					: relativeTime.unit;
 
 			const delta = now - dateAsNumber;
