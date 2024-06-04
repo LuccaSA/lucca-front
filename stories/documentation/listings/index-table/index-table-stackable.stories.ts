@@ -1,14 +1,10 @@
 import { Meta, StoryFn } from '@storybook/angular';
 
-interface IndexTableStackableStory {
-
-}
+interface IndexTableStackableStory {}
 
 export default {
 	title: 'Documentation/Listings/Index Table/Stackable',
-	argTypes: {
-
-	},
+	argTypes: {},
 } as Meta;
 
 function getTemplate(args: IndexTableStackableStory): string {
@@ -40,8 +36,8 @@ function getTemplate(args: IndexTableStackableStory): string {
 				</span>
 			</td>
 			<td class="indexTable-body-row-cell">
-				<a href="#" class="indexTable-body-row-cell-action">See details</a>
-				Content
+				<a href="#" class="indexTable-body-row-cell-action">Content/a>
+				
 			</td>
 			<td class="indexTable-body-row-cell">Content</td>
 			<td class="indexTable-body-row-cell">Content</td>
@@ -56,8 +52,8 @@ function getTemplate(args: IndexTableStackableStory): string {
 				</span>
 			</td>
 			<td class="indexTable-body-row-cell">
-				<a href="#" class="indexTable-body-row-cell-action">See details</a>
-				Content
+				<a href="#" class="indexTable-body-row-cell-link">Content</a>
+				
 			</td>
 			<td class="indexTable-body-row-cell">Content</td>
 			<td class="indexTable-body-row-cell">Content</td>
@@ -72,8 +68,8 @@ function getTemplate(args: IndexTableStackableStory): string {
 				</span>
 			</td>
 			<td class="indexTable-body-row-cell">
-				<a href="#" class="indexTable-body-row-cell-action">See details</a>
-				Content
+				<a href="#" class="indexTable-body-row-cell-link">Content</a>
+				
 			</td>
 			<td class="indexTable-body-row-cell">Content</td>
 			<td class="indexTable-body-row-cell">Content</td>
@@ -88,4 +84,4 @@ const Template: StoryFn<IndexTableStackableStory> = (args) => ({
 });
 
 export const Stackable = Template.bind({});
-Stackable.args = { };
+Stackable.args = {};

@@ -176,9 +176,22 @@
 			margin: 2px 0 0 var(--pr-t-spacings-50);
 		}
 
-		// Hidden element that take focus when the row is focused
+		// indexTable-body-row-cell-action is deprecated
 		.indexTable-body-row-cell-action {
 			@include a11y.mask;
+		}
+
+		.indexTable-body-row-cell-link {
+			text-decoration: none;
+
+			&,
+			&:hover {
+				color: currentColor;
+			}
+
+			&:focus-visible {
+				outline: none;
+			}
 		}
 
 		.indexTable-body-row-cellTitle {
