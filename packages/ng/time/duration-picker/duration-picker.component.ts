@@ -4,7 +4,7 @@ import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { getIntl } from '@lucca-front/ng/core';
 import { BasePickerComponent } from '../core/base-picker.component';
 import { ISO8601Duration } from '../core/date-primitives';
-import { createDurationFromHoursAndMinutes, getHoursPartFromDuration, getMinutesPartFromDuration, isoDurationToDateFnsDuration, isoDurationToSeconds } from '../core/duration.utils';
+import { createDurationFromHoursAndMinutes, getHoursPartFromDuration, getMinutesPartFromDuration, isISO8601Duration, isoDurationToDateFnsDuration, isoDurationToSeconds } from '../core/duration.utils';
 import { ceilToNearest, circularize, floorToNearest, roundToNearest } from '../core/math.utils';
 import { isNil, isNotNil, PickerControlDirection } from '../core/misc.utils';
 import { TimePickerPartComponent } from '../core/time-picker-part.component';
@@ -98,8 +98,20 @@ export class DurationPickerComponent extends BasePickerComponent {
 		event.preventDefault();
 		const pastedValue = event.clipboardData?.getData('text/plain');
 		if (isNotNil(pastedValue)) {
-			try {
-				const value = pastedValue as ISO8601Duration;
+			let value: ISO8601Duration;
+			// If it's an iso duration, handle as-is
+			if (isISO8601Duration(pastedValue)) {
+				value = pastedValue;
+			}
+			if (/\d?\dh\d\d/.test(pastedValue)) {
+				const split = pastedValue.split('h');
+				value = createDurationFromHoursAndMinutes(+split[0], +split[1]);
+			}
+			if (/\d?\d:\d\d/.test(pastedValue)) {
+				const split = pastedValue.split(':');
+				value = createDurationFromHoursAndMinutes(+split[0], +split[1]);
+			}
+			if (value) {
 				this.durationChange.emit({
 					previousValue: this.value(),
 					source: 'paste',
@@ -107,8 +119,6 @@ export class DurationPickerComponent extends BasePickerComponent {
 				});
 				this.value.set(value);
 				this.onChange?.(value);
-			} catch (e) {
-				// do nothing
 			}
 		}
 	}
@@ -195,34 +205,7 @@ export class DurationPickerComponent extends BasePickerComponent {
 			modifiedVal = ceilToNearest(selectedPart - selectedIncrement, selectedIncrement);
 		}
 
-		// if (modifiedVal < 0) {
-		// 	if (part === 'hours') {
-		// 		// If we are doing 'down' at 0, event says -increment, but just return max value instead
-		// 		modifiedVal = getHoursPartFromDuration(this.max());
-		// 		if (isoDurationToSeconds(createDurationFromHoursAndMinutes(modifiedVal, minutesPart)) > isoDurationToSeconds(this.max())) {
-		// 			// If current value with minutes is > max, decrement hours again
-		// 			modifiedVal--;
-		// 		}
-		// 	}
-		// 	if (part === 'minutes') {
-		// 		// If we have reached max hours, minutes max can apply, else max minutes is always 59
-		// 		const isMaxHours = hoursPart === getHoursPartFromDuration(this.max());
-		// 		modifiedVal = isMaxHours ? getMinutesPartFromDuration(this.max()) || 59 : 59;
-		// 		if (isMaxHours && isoDurationToSeconds(createDurationFromHoursAndMinutes(hoursPart, modifiedVal)) > isoDurationToSeconds(this.max())) {
-		// 			modifiedVal = getMinutesPartFromDuration(this.max());
-		// 		}
-		// 	}
-		// }
-
 		const newTime = part === 'hours' ? createDurationFromHoursAndMinutes(modifiedVal, minutesPart) : createDurationFromHoursAndMinutes(hoursPart, modifiedVal);
-
-		// if (isoDurationToSeconds(newTime) > isoDurationToSeconds(this.max())) {
-		// 	if (part === 'hours') {
-		// 		newTime = createDurationFromHoursAndMinutes(0, minutesPart);
-		// 	} else {
-		// 		newTime = 'PT0S';
-		// 	}
-		// }
 
 		this.setTime({
 			source: 'control',

@@ -13,10 +13,12 @@ export type NonNullableDateFnsDuration = {
 
 type DateFnsDuration = Duration;
 
+const ISO8601DurationRegExp =
+	/^(?<sign>-)?P(?:(?<years>-?\d+)Y)?(?:(?<months>-?\d+)M)?(?:(?<weeks>-?\d+)W)?(?:(?<days>-?\d+)D)?(?:T(?:(?<hours>-?\d+)H)?(?:(?<minutes>-?\d+)M)?(?:(?<seconds>-?\d+(?:\.\d+)?)S)?)?$/;
+
 // TODO memoize
 export const isoDurationToDateFnsDuration = (isoDuration: ISO8601Duration): NonNullableDateFnsDuration => {
-	const regex = /^(?<sign>-)?P(?:(?<years>-?\d+)Y)?(?:(?<months>-?\d+)M)?(?:(?<weeks>-?\d+)W)?(?:(?<days>-?\d+)D)?(?:T(?:(?<hours>-?\d+)H)?(?:(?<minutes>-?\d+)M)?(?:(?<seconds>-?\d+(?:\.\d+)?)S)?)?$/;
-	const matches = regex.exec(isoDuration);
+	const matches = ISO8601DurationRegExp.exec(isoDuration);
 
 	const groups = matches?.groups;
 
@@ -44,6 +46,10 @@ export const isoDurationToDateFnsDuration = (isoDuration: ISO8601Duration): NonN
 
 	return result;
 };
+
+export function isISO8601Duration(value: string): value is ISO8601Duration {
+	return ISO8601DurationRegExp.test(value);
+}
 
 export const dateFnsDurationToSeconds = (durationFns: DateFnsDuration): number => {
 	const { years, months } = durationFns;
