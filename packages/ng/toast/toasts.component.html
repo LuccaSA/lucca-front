@@ -6,12 +6,14 @@
 			<div [innerHtml]="toast.message"></div>
 		</div>
 		<button type="button" class="toasts-item-kill" (click)="removeToast(toast)" (animationend)="removeToast(toast)">
-			<span class="lucca-icon icon-signClose mod-XS" aria-hidden="true"></span>
+			<span class="lucca-icon icon-signClose" aria-hidden="true"></span>
+			<!-- Required while toast timer is handled by animation end -->
 			<div class="circularGauge" *ngIf="!isOnlyDismissibleManually(toast) && toast.duration > 0">
 				<svg viewBox="0 0 32 32">
 					<circle r="16" cx="16" cy="16" [style.animation-duration]="toast.duration + 'ms'" />
 				</svg>
 			</div>
+			<!-- -->
 			<span class="u-mask">{{ intl.close }}</span>
 		</button>
 	</div>

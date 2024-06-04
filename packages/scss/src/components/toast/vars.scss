@@ -1,11 +1,13 @@
 @mixin vars {
-	--components-toasts-background: var(--palettes-neutral-900);
 	--components-toasts-color: var(--colors-white-color);
 	--components-toasts-top: var(--pr-t-spacings-300);
 	--components-toasts-right: var(--pr-t-spacings-300);
 	--components-toasts-left: var(--pr-t-spacings-300);
 	--components-toasts-bottom: var(--pr-t-spacings-300);
-	--components-toasts-margin-bottom: var(--pr-t-spacings-100);
+	--components-toasts-margin-bottom: var(--pr-t-spacings-50);
 	--components-toasts-maxwidth: 22.5rem;
+
+	// Deprecated
+	--components-toasts-background: var(--palettes-neutral-800);
 	--components-toasts-padding: var(--pr-t-spacings-100) var(--pr-t-spacings-200);
 }

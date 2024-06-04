@@ -25,29 +25,33 @@
 	@at-root ($atRoot) {
 		.toasts-item {
 			display: flex;
-			gap: var(--pr-t-spacings-150);
+			gap: var(--pr-t-spacings-50);
 			color: var(--components-toasts-color);
-			padding: var(--components-toasts-padding);
+			padding: var(--pr-t-spacings-50);
 			margin-bottom: var(--components-toasts-margin-bottom);
-			background-color: var(--palettes-800, var(--components-toasts-background));
+			background-color: var(--palettes-neutral-800);
 			animation-name: toast;
 			animation-duration: var(--commons-animations-durations-standard);
 			animation-iteration-count: 1;
-			border-radius: var(--commons-borderRadius-M);
+			border-radius: var(--commons-borderRadius-XL);
 			overflow: hidden;
 			position: relative;
 			transform-origin: top;
 		}
 
 		.toast-item-icon {
-			margin-top: 2px;
+			display: block;
+			background: var(--palettes-700, var(--palettes-product-700));
+			border-radius: var(--commons-borderRadius-L);
+			padding: var(--pr-t-spacings-100) var(--pr-t-spacings-50);
 		}
 
 		.toast-item-content {
-			flex-grow: 1;
 			display: flex;
+			flex-grow: 1;
 			flex-direction: column;
-			gap: var(--pr-t-spacings-100);
+			gap: var(--pr-t-spacings-50);
+			padding: var(--pr-t-spacings-100) 0 var(--pr-t-spacings-100) var(--pr-t-spacings-100);
 		}
 
 		.toasts-item-kill {
@@ -56,21 +60,13 @@
 			color: var(--colors-white-color);
 			transition-property: opacity;
 			transition-duration: var(--commons-animations-durations-fast);
-			height: 1.25rem;
-			min-width: 1.25rem;
+			height: 1.5rem;
+			min-width: 1.5rem;
+			margin: var(--pr-t-spacings-100);
 			cursor: pointer;
 			position: relative;
 			border: 0;
 			background: transparent;
-			margin-top: 2px;
-
-			&:hover {
-				opacity: 0.66;
-			}
-
-			&::after {
-				@include icon.generate('sign_close');
-			}
 		}
 	}
 }
