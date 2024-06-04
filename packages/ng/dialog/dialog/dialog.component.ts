@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ElementRef, inject, OnInit, ViewEncapsulation } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, inject, ViewEncapsulation } from '@angular/core';
 import { LuDialogRef } from '../model';
 
 @Component({
@@ -12,7 +12,7 @@ import { LuDialogRef } from '../model';
 		class: 'dialog-inside',
 	},
 })
-export class DialogComponent implements OnInit {
+export class DialogComponent implements AfterViewInit {
 	public readonly dialogRef = inject<LuDialogRef>(LuDialogRef);
 
 	#htmlElement = inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
@@ -25,7 +25,7 @@ export class DialogComponent implements OnInit {
 		this.dialogRef.dismiss();
 	}
 
-	ngOnInit(): void {
+	ngAfterViewInit(): void {
 		if (this.dialogRef.config.autoFocus === 'first-input' && !this.dialogRef.config.cdkConfigOverride?.autoFocus) {
 			const focusable: HTMLElement =
 				this.#htmlElement.querySelector('.luDialog-autofocus .luNativeInput') || this.#htmlElement.querySelector('.luDialog-autofocus') || this.#htmlElement.querySelector('.luNativeInput');
