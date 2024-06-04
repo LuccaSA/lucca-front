@@ -72,7 +72,7 @@ export abstract class ALuCoreSelectApiDirective<TOption, TParams = Record<string
 							}),
 							takeWhile((items) => items.length === this.pageSize, true),
 							scan((acc, items) => [...acc, ...items], [] as TOption[]),
-					  )
+						)
 					: of([] as TOption[]),
 			),
 		);

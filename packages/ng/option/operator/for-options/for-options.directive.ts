@@ -31,7 +31,12 @@ export class LuForOptionsDirective<T> extends NgForOf<T> implements ILuOptionOpe
 		this.ngForTrackBy = fn;
 	}
 
-	constructor(_viewContainer: ViewContainerRef, _template: TemplateRef<NgForOfContext<T>>, _differs: IterableDiffers, protected _changeDetectionRef: ChangeDetectorRef) {
+	constructor(
+		_viewContainer: ViewContainerRef,
+		_template: TemplateRef<NgForOfContext<T>>,
+		_differs: IterableDiffers,
+		protected _changeDetectionRef: ChangeDetectorRef,
+	) {
 		super(_viewContainer, _template, _differs);
 	}
 

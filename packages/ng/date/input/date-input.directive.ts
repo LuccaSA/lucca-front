@@ -30,7 +30,12 @@ export class LuDateInputDirective<D> extends ALuInput<D, HTMLInputElement> imple
 		this._elementRef.nativeElement.placeholder = p;
 	}
 	private _intl = getIntl(LU_DATE_INPUT_TRANSLATIONS);
-	constructor(_changeDetectorRef: ChangeDetectorRef, _elementRef: ElementRef<HTMLInputElement>, _renderer: Renderer2, private _adapter: ALuDateAdapter<D>) {
+	constructor(
+		_changeDetectorRef: ChangeDetectorRef,
+		_elementRef: ElementRef<HTMLInputElement>,
+		_renderer: Renderer2,
+		private _adapter: ALuDateAdapter<D>,
+	) {
 		super(_changeDetectorRef, _elementRef, _renderer);
 	}
 	ngOnInit() {

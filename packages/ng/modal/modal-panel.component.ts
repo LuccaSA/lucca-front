@@ -44,7 +44,11 @@ export abstract class ALuModalPanelComponent<T extends ILuModalContent> implemen
 	private _subs = new Subscription();
 	public modalClasses: LuModalClasses;
 
-	constructor(protected _ref: ALuModalRef<T>, _elementRef: ElementRef<HTMLElement>, _renderer: Renderer2) {
+	constructor(
+		protected _ref: ALuModalRef<T>,
+		_elementRef: ElementRef<HTMLElement>,
+		_renderer: Renderer2,
+	) {
 		this.modalClasses = _ref.modalClasses;
 		_renderer.addClass(_elementRef.nativeElement, this.modalClasses.panel);
 	}

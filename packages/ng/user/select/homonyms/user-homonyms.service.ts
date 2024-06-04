@@ -60,7 +60,10 @@ export class LuUserHomonymsService<U extends ILuUser = ILuUser> extends ALuUserH
 				catchError(() => of([])),
 			);
 	}
-	constructor(private _pipe: LuUserDisplayPipe, private _http: HttpClient) {
+	constructor(
+		private _pipe: LuUserDisplayPipe,
+		private _http: HttpClient,
+	) {
 		super();
 	}
 }

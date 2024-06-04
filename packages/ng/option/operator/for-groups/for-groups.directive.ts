@@ -4,7 +4,11 @@ import { Observable, Subscription } from 'rxjs';
 import { ALuOptionOperator, ILuOptionOperator } from '../option-operator.model';
 
 export class LuForGroupContext<T> {
-	public constructor(public $implicit: T, public index: number, public count: number) {}
+	public constructor(
+		public $implicit: T,
+		public index: number,
+		public count: number,
+	) {}
 
 	public get first(): boolean {
 		return this.index === 0;
@@ -49,7 +53,11 @@ export class LuForGroupsDirective<TItem, TKey> implements ILuOptionOperator<TIte
 		this.outOptions$ = options$;
 	}
 
-	public constructor(protected _vcr: ViewContainerRef, protected _cdr: ChangeDetectorRef, protected _templateRef: TemplateRef<LuForGroupContext<ILuGroup<TItem, TKey>>>) {}
+	public constructor(
+		protected _vcr: ViewContainerRef,
+		protected _cdr: ChangeDetectorRef,
+		protected _templateRef: TemplateRef<LuForGroupContext<ILuGroup<TItem, TKey>>>,
+	) {}
 
 	public ngOnDestroy(): void {
 		this._subs.unsubscribe();

@@ -9,7 +9,11 @@ export abstract class ALuInput<T, U extends HTMLElement = HTMLElement> implement
 		return this._placeholder;
 	}
 	protected _value: T;
-	constructor(protected _changeDetectorRef: ChangeDetectorRef, protected _elementRef: ElementRef<U>, protected _renderer: Renderer2) {}
+	constructor(
+		protected _changeDetectorRef: ChangeDetectorRef,
+		protected _elementRef: ElementRef<U>,
+		protected _renderer: Renderer2,
+	) {}
 	setValue(value: T) {
 		this.value = value;
 		this._cvaOnChange(value);

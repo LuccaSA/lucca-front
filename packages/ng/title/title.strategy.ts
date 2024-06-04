@@ -17,7 +17,11 @@ export class LuTitleStrategy extends TitleStrategy {
 		map((parts) => parts.join(TitleSeparator)),
 		distinctUntilChanged(),
 	);
-	constructor(private title: Title, @Inject(LU_TITLE_TRANSLATE_SERVICE) private translateService: ILuTitleTranslateService, @Inject(APP_TITLE) private appTitle: string) {
+	constructor(
+		private title: Title,
+		@Inject(LU_TITLE_TRANSLATE_SERVICE) private translateService: ILuTitleTranslateService,
+		@Inject(APP_TITLE) private appTitle: string,
+	) {
 		super();
 		this.title$.pipe(tap((title) => this.title.setTitle(title))).subscribe();
 	}

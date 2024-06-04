@@ -139,7 +139,10 @@ export class LuUserPopoverPanelComponent extends ALuPopoverPanel implements ILuU
 
 	private _subs = new Subscription();
 
-	public constructor(private _changeDetectorRef: ChangeDetectorRef, @Inject(LuUserPopoverStore) private _service: ILuUserPopoverStore) {
+	public constructor(
+		private _changeDetectorRef: ChangeDetectorRef,
+		@Inject(LuUserPopoverStore) private _service: ILuUserPopoverStore,
+	) {
 		super();
 	}
 

@@ -18,7 +18,11 @@ export class LuTitleService {
 		map((parts) => parts.join(TitleSeparator)),
 	);
 
-	constructor(private router: Router, private title: Title, @Inject(LU_TITLE_TRANSLATE_SERVICE) private translateService: ILuTitleTranslateService) {}
+	constructor(
+		private router: Router,
+		private title: Title,
+		@Inject(LU_TITLE_TRANSLATE_SERVICE) private translateService: ILuTitleTranslateService,
+	) {}
 
 	init(applicationNameTranslationKey: string) {
 		this.router.events

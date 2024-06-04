@@ -13,7 +13,10 @@ export type TemplateNode = ParsedTemplate['nodes'] extends Array<infer S> ? S : 
 export class HtmlAstVisitor<TNode extends TemplateNode> {
 	private nodes: TNode[];
 
-	public constructor(nodes: TNode[] | TNode, private lib: AngularCompilerLib) {
+	public constructor(
+		nodes: TNode[] | TNode,
+		private lib: AngularCompilerLib,
+	) {
 		this.nodes = Array.isArray(nodes) ? nodes : [nodes];
 	}
 

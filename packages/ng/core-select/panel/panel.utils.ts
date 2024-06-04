@@ -19,6 +19,6 @@ export function getGroupTemplateLocation(hasGrouping: boolean, clueChange$: Obse
 					),
 				),
 				startWith('group-header' as const),
-		  )
+			)
 		: of('none' as const);
 }
