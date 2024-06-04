@@ -1,14 +1,10 @@
 import { Meta, StoryFn } from '@storybook/angular';
 
-interface IndexTableResponsiveCardListNestedStory {
-
-}
+interface IndexTableResponsiveCardListNestedStory {}
 
 export default {
 	title: 'Documentation/Listings/Index Table/Responsive Card List Nested',
-	argTypes: {
-
-	},
+	argTypes: {},
 } as Meta;
 
 function getTemplate(args: IndexTableResponsiveCardListNestedStory): string {
@@ -84,8 +80,7 @@ function getTemplate(args: IndexTableResponsiveCardListNestedStory): string {
 				</span>
 			</td>
 			<td class="indexTable-body-row-cell" header="y2021 september">
-				<a href="#" class="indexTable-body-row-cell-action">See details</a>
-				Content
+				<a href="#" class="indexTable-body-row-cell-link">Content</a>
 			</td>
 			<td class="indexTable-body-row-cell" header="y2021 september">Content</td>
 			<td class="indexTable-body-row-cell" header="y2021 september">Content</td>
@@ -121,8 +116,8 @@ function getTemplate(args: IndexTableResponsiveCardListNestedStory): string {
 				</span>
 			</td>
 			<td class="indexTable-body-row-cell" header="y2021 october">
-				<a href="#" class="indexTable-body-row-cell-action">See details</a>
-				Content
+				<a href="#" class="indexTable-body-row-cell-link">Content</a>
+				
 			</td>
 			<td class="indexTable-body-row-cell" header="y2021 october">Content</td>
 			<td class="indexTable-body-row-cell" header="y2021 october">Content</td>
@@ -137,8 +132,7 @@ function getTemplate(args: IndexTableResponsiveCardListNestedStory): string {
 				</span>
 			</td>
 			<td class="indexTable-body-row-cell" header="y2021 october">
-				<a href="#" class="indexTable-body-row-cell-action">See details</a>
-				Content
+				<a href="#" class="indexTable-body-row-cell-link">Content</a>
 			</td>
 			<td class="indexTable-body-row-cell" header="y2021 october">Content</td>
 			<td class="indexTable-body-row-cell" header="y2021 october">Content</td>
@@ -197,8 +191,7 @@ function getTemplate(args: IndexTableResponsiveCardListNestedStory): string {
 				</span>
 			</td>
 			<td class="indexTable-body-row-cell" header="y2022 january">
-				<a href="#" class="indexTable-body-row-cell-action">See details</a>
-				Content
+				<a href="#" class="indexTable-body-row-cell-link">Content</a>
 			</td>
 			<td class="indexTable-body-row-cell" header="y2022 january">Content</td>
 			<td class="indexTable-body-row-cell" header="y2022 january">Content</td>
@@ -213,4 +206,4 @@ const Template: StoryFn<IndexTableResponsiveCardListNestedStory> = (args) => ({
 });
 
 export const ResponsiveCardListNested = Template.bind({});
-ResponsiveCardListNested.args = { };
+ResponsiveCardListNested.args = {};
