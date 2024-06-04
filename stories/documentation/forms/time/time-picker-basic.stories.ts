@@ -66,9 +66,9 @@ function getTemplate(args: timepickerBasicStory): string {
 			<div class="timePicker-fieldset-group">
 				<label class="formLabel u-mask" id="hour-label" for="hour-input">hours</label>
 				<div class="timePicker-fieldset-group-textfield">
-					<input ${disabled} ${invalid} type="text" class="timePicker-fieldset-group-textfield-input" aria-labelledby="hour-label" id="hour-input" aria-describedby="helper" min="0" max="23" value="12" />
+					<input ${disabled} ${invalid} type="text" inputmode="numeric" class="timePicker-fieldset-group-textfield-input" aria-labelledby="hour-label" id="hour-input" aria-describedby="helper" min="0" max="23" value="12" />
 					<span aria-hidden="true" class="timePicker-fieldset-group-textfield-display">12</span>
-					
+
 				</div>
 				${stepperButtons}
 			</div>
@@ -76,7 +76,7 @@ function getTemplate(args: timepickerBasicStory): string {
 			<div class="timePicker-fieldset-group">
 				<label class="formLabel u-mask" id="minutes-label" for="minutes-input">minutes</label>
 				<div class="timePicker-fieldset-group-textfield">
-					<input ${disabled} ${invalid} type="text" class="timePicker-fieldset-group-textfield-input" aria-labelledby="minutes-label" id="minutes-input" min="0" max="59" value="12" />
+					<input ${disabled} ${invalid} type="text" inputmode="numeric" class="timePicker-fieldset-group-textfield-input" aria-labelledby="minutes-label" id="minutes-input" min="0" max="59" value="12" />
 					<span aria-hidden="true" class="timePicker-fieldset-group-textfield-display">12</span>
 				</div>
 				${stepperButtons}

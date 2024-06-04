@@ -6,6 +6,7 @@
 			type="text"
 			luInput
 			luInputStandalone
+			inputmode="numeric"
 			id="{{inputId}}-input"
 			class="timePicker-fieldset-group-textfield-input"
 			attr.aria-labelledby="{{inputId}}-label"
@@ -14,6 +15,7 @@
 			(click)="clickHandler($event)"
 			(keydown)="keydownHandler($event)"
 			(blur)="touched.emit()"
+			(focus)="timePickerInput.select()"
 		/>
 		<span aria-hidden="true" class="timePicker-fieldset-group-textfield-display">{{ valueLabel() }}</span>
 	</div>
