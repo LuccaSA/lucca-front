@@ -1,8 +1,8 @@
-import { AfterViewInit, ChangeDetectionStrategy, Component, contentChildren, effect, TemplateRef, ViewEncapsulation } from '@angular/core';
+import { OverlayRef } from '@angular/cdk/overlay';
 import { NgIf, NgTemplateOutlet } from '@angular/common';
+import { ChangeDetectionStrategy, Component, TemplateRef, ViewEncapsulation, contentChildren, effect } from '@angular/core';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { IconComponent } from '@lucca-front/ng/icon';
-import { OverlayRef } from '@angular/cdk/overlay';
 
 @Component({
 	selector: 'lu-popover-content',
@@ -10,9 +10,7 @@ import { OverlayRef } from '@angular/cdk/overlay';
 	imports: [NgTemplateOutlet, ButtonComponent, IconComponent, NgIf],
 	templateUrl: './popover-content.component.html',
 	styleUrl: './popover-content.component.scss',
-	host: {
-		class: '',
-	},
+
 	encapsulation: ViewEncapsulation.None,
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })

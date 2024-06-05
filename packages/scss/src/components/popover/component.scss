@@ -1,0 +1,22 @@
+@use '@lucca-front/scss/src/components/button/exports' as button;
+
+@mixin component($atRoot: 'without: rule') {
+	display: block;
+	background-color: var(--pr-t-elevation-surface-raised);
+	box-shadow: var(--pr-t-elevation-shadow-raised);
+	position: relative;
+	min-height: 5rem;
+	min-width: 5rem;
+
+	@at-root {
+		.popover-close {
+			@include button.text;
+			@include button.S;
+			@include button.onlyIconS;
+
+			position: absolute;
+			right: 0;
+			top: 0;
+		}
+	}
+}
