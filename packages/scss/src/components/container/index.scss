@@ -31,4 +31,8 @@
 	&.mod-maxXXXL {
 		@include maxXXXL;
 	}
+
+	&.mod-padding0 {
+		@include padding0;
+	}
 }
