@@ -9,11 +9,16 @@ node(label: CI.getSelectedLinuxNode(script:this)) {
 	def projectTechnicalName = 'lucca-front'
 	def repoName = "lucca-front"
 
-	def branchName = env.BRANCH_NAME;
+	def branchName = env.BRANCH_NAME
+
+	def releaseRegexPattern = /^v\d+\.\d+\.\d+$/
+	def preReleaseRegexPattern = /^v\d+\.\d+\.\d+-\w*(\.\d+)?$/
 
 	def isPR = env.BRANCH_NAME ==~ /^PR-\d*/
 	def isMaster = env.BRANCH_NAME == "master"
 	def isRc = env.BRANCH_NAME == "rc"
+	def isRelease = env.BRANCH_NAME ==~ releaseRegexPattern
+	def isPreRelease = env.BRANCH_NAME ==~ preReleaseRegexPattern
 	def prNumber = env.CHANGE_ID
 
 	cleanJenkins()
@@ -32,8 +37,7 @@ node(label: CI.getSelectedLinuxNode(script:this)) {
 			npmScript(script: 'jenkins-test', skip: isPR)
 			npmScript(script: 'lint', skip: isPR)
 
-			def shouldDeploy = isPR || isRc || isMaster;
-
+			def shouldDeploy = isPR || isRc || isMaster || isRelease || isPreRelease
 			loggableStage('Deploy', !shouldDeploy) {
 				echo "deploying ${branchName}"
 				npmScript(script: 'build-storybook')
@@ -52,7 +56,8 @@ node(label: CI.getSelectedLinuxNode(script:this)) {
 				}
 			}
 
-			loggableStage('e2e', !shouldDeploy) {
+			def shouldRunE2E = isPR || isRc || isMaster
+			loggableStage('e2e', !shouldRunE2E) {
 				publishE2e(loggableStageName: 'e2e', slnFilepath: 'e2e/LuccaFront.e2e.sln', framework: "net6.0")
 				archiveElements(e2e: true)
 			}
