@@ -55,9 +55,17 @@ export class NumberFormatDirective implements ControlValueAccessor, OnChanges {
 	@HostListener('input') input(): void {
 		if (!this.inputElement.readOnly) {
 			const isInputEmpty = !this.inputElement.value || this.inputElement.value.trim().length === 0;
-			const value = isInputEmpty ? undefined : this.#cleanParse(this.inputElement.value);
-			if (value === undefined || !isNaN(value)) {
-				this.value = value;
+			const isInputMinusSign = this.inputElement.value === '-';
+			if (isInputEmpty) {
+				this.value = undefined;
+			} else if (isInputMinusSign) {
+				// wait for more
+				return;
+			} else {
+				const parsedValue = this.#cleanParse(this.inputElement.value);
+				if (!isNaN(parsedValue)) {
+					this.value = parsedValue;
+				}
 			}
 			let selectionStart = this.inputElement.selectionStart;
 			const formattedValue = this.#formatValue(this.value);
