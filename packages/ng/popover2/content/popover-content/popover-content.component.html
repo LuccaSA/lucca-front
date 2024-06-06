@@ -1,8 +1,10 @@
 <div class="popover">
-	<button type="button" luButton class="popover-close" (click)="close()">
-		<lu-icon icon="signClose"></lu-icon>
-		<span class="u-mask">TODO intl.close</span>
-	</button>
+	<div>
+		<button type="button" luButton class="popover-close" (click)="close()">
+			<lu-icon icon="signClose"></lu-icon>
+			<span class="u-mask">TODO intl.close</span>
+		</button>
+	</div>
 
 	<ng-container *ngTemplateOutlet="content"></ng-container>
 </div>
