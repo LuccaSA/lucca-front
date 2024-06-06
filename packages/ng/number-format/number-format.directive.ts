@@ -53,37 +53,50 @@ export class NumberFormatDirective implements ControlValueAccessor, OnChanges {
 	}
 
 	@HostListener('input') input(): void {
-		if (!this.inputElement.readOnly) {
-			const isInputEmpty = !this.inputElement.value || this.inputElement.value.trim().length === 0;
-			const isInputMinusSign = this.inputElement.value === '-';
-			if (isInputEmpty) {
-				this.value = undefined;
-			} else if (isInputMinusSign) {
-				// wait for more
-				return;
-			} else {
-				const parsedValue = this.#cleanParse(this.inputElement.value);
-				if (!isNaN(parsedValue)) {
-					this.value = parsedValue;
-				}
-			}
-			let selectionStart = this.inputElement.selectionStart;
-			const formattedValue = this.#formatValue(this.value);
-			// If formatted value is different from input
-			// selectionStart should be changed
-			if (this.inputElement.value.slice(0, selectionStart).localeCompare(formattedValue.slice(0, selectionStart))) {
-				if (this.inputElement.value.length < formattedValue.length) {
-					selectionStart++;
-				}
-				if (this.inputElement.value.length > formattedValue.length) {
-					selectionStart--;
-				}
-			}
-			this.inputElement.value = this.#formatValue(this.value);
-			this.inputElement.selectionStart = selectionStart;
-			this.inputElement.selectionEnd = selectionStart;
-			this.onChange(isNaN(this.value) ? null : this.value);
+		if (this.inputElement.readOnly) {
+			return;
 		}
+		const inputValue = this.inputElement.value;
+
+		// Wait for others characters before parsing/formatting
+		if (inputValue === '-') {
+			return;
+		}
+
+		// Nil or empty input should be treated as null value
+		if (inputValue == null || inputValue === '') {
+			this.value = null;
+		} else {
+			const parsedValue = this.#cleanParse(inputValue);
+			// Update value only if parsed input is a number
+			if (!isNaN(parsedValue)) {
+				this.value = parsedValue;
+				this.onChange(this.value);
+			}
+		}
+		this.#updateInputValue();
+	}
+
+	#updateInputValue(): void {
+		const inputValue = this.inputElement.value;
+		let selectionStart = this.inputElement.selectionStart;
+		const formattedValue = this.#formatValue(this.value);
+
+		// Check if caret position evolve with formatting
+		const caretPositionChanged = !!inputValue.slice(0, selectionStart).localeCompare(formattedValue.slice(0, selectionStart));
+		if (caretPositionChanged) {
+			// A character has been inserted before caret position (ie: ',' separator)
+			if (inputValue.length < formattedValue.length) {
+				selectionStart++;
+			}
+			// A character has been removed before caret position (ie: ',' separator)
+			if (inputValue.length > formattedValue.length) {
+				selectionStart--;
+			}
+		}
+		this.inputElement.value = this.#formatValue(this.value);
+		this.inputElement.selectionStart = selectionStart;
+		this.inputElement.selectionEnd = selectionStart;
 	}
 
 	writeValue(value: number): void {
