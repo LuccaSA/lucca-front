@@ -20,7 +20,6 @@ function getTemplate(args: IndexTableFooterStory): string {
 		<tr class="indexTable-body-row">
 			<td class="indexTable-body-row-cell">
 				<a href="#" class="indexTable-body-row-cell-link">Content</a>
-				Content
 			</td>
 			<td class="indexTable-body-row-cell">Content</td>
 			<td class="indexTable-body-row-cell u-textRight">100,00 €</td>
@@ -28,7 +27,6 @@ function getTemplate(args: IndexTableFooterStory): string {
 		<tr class="indexTable-body-row">
 			<td class="indexTable-body-row-cell">
 				<a href="#" class="indexTable-body-row-cell-link">Content</a>
-				Content
 			</td>
 			<td class="indexTable-body-row-cell">Content</td>
 			<td class="indexTable-body-row-cell u-textRight">50,00 €</td>
@@ -54,7 +52,6 @@ function getTemplate(args: IndexTableFooterStory): string {
 		<tr class="indexTable-body-row">
 			<td class="indexTable-body-row-cell">
 				<a href="#" class="indexTable-body-row-cell-link">Content</a>
-				Content
 			</td>
 			<td class="indexTable-body-row-cell">Content</td>
 			<td class="indexTable-body-row-cell u-textRight">126,00 €</td>
@@ -69,7 +66,6 @@ function getTemplate(args: IndexTableFooterStory): string {
 		<tr class="indexTable-body-row">
 			<td class="indexTable-body-row-cell">
 				<a href="#" class="indexTable-body-row-cell-link">Content</a>
-				Content
 			</td>
 			<td class="indexTable-body-row-cell">Content</td>
 			<td class="indexTable-body-row-cell u-textRight">133,00 €</td>

@@ -21,7 +21,6 @@ function getTemplate(args: IndexTableResponsiveCardListLabelStory): string {
 			<td class="indexTable-body-row-cell">
 				<div class="indexTable-body-row-cell-content" data-label="Label 1">
 					<a href="#" class="indexTable-body-row-cell-link">Content</a>
-					
 				</div>
 			</td>
 			<td class="indexTable-body-row-cell">

@@ -117,7 +117,6 @@ function getTemplate(args: IndexTableResponsiveCardListNestedStory): string {
 			</td>
 			<td class="indexTable-body-row-cell" header="y2021 october">
 				<a href="#" class="indexTable-body-row-cell-link">Content</a>
-				
 			</td>
 			<td class="indexTable-body-row-cell" header="y2021 october">Content</td>
 			<td class="indexTable-body-row-cell" header="y2021 october">Content</td>
