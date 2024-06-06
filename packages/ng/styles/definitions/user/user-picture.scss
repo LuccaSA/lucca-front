@@ -4,25 +4,30 @@
 
 @mixin userPictureVars {
 	--components-userPicture-XS-image: 1.5rem;
-	--components-userPicture-XS-fontSize: var(--sizes-XS-fontSize);
+	--components-userPicture-XS-fontSize: 0.75rem;
 	--components-userPicture-XS-placeholder: 0.75rem;
 	--components-userPicture-S-image: 2rem;
-	--components-userPicture-S-fontSize: var(--sizes-S-fontSize);
-	--components-userPicture-S-placeholder: var(--sizes-XS-lineHeight);
+	--components-userPicture-S-fontSize: 0.875rem;
+	--components-userPicture-S-placeholder: 1rem;
 	--components-userPicture-M-image: 2.5rem;
-	--components-userPicture-M-fontSize: var(--sizes-M-fontSize);
-	--components-userPicture-M-placeholder: var(--sizes-S-lineHeight);
+	--components-userPicture-M-fontSize: 1rem;
+	--components-userPicture-M-placeholder: 1.25rem;
 	--components-userPicture-L-image: 3rem;
-	--components-userPicture-L-fontSize: var(--sizes-L-fontSize);
-	--components-userPicture-L-placeholder: var(--sizes-M-lineHeight);
+	--components-userPicture-L-fontSize: 1.125rem;
+	--components-userPicture-L-placeholder: 1.5rem;
+	--components-userPicture-XL-image: 4rem;
+	--components-userPicture-XL-fontSize: 1.25rem;
+	--components-userPicture-XL-placeholder: 2rem;
+	--components-userPicture-XXL-image: 5rem;
+	--components-userPicture-XXL-fontSize: 1.5rem;
+	--components-userPicture-XXL-placeholder: 2.25rem;
+	--components-userPicture-XXXL-image: 6rem;
+	--components-userPicture-XXXL-fontSize: 1.75rem;
+	--components-userPicture-XXXL-placeholder: 2.5rem;
 
 	// deprecated
 	--components-userPicture-XXS-image: 1rem;
 	--components-userPicture-XXS-fontSize: 0.5625rem;
-	--components-userPicture-XL-image: 4.5rem;
-	--components-userPicture-XL-fontSize: 1.8rem;
-	--components-userPicture-XXL-image: 7.5rem;
-	--components-userPicture-XXL-fontSize: 3rem;
 }
 
 @mixin userPictureStyle {
@@ -74,11 +79,19 @@
 	&.mod-XL {
 		--components-user-picture-image-size: var(--components-userPicture-XL-image);
 		--components-user-picture-font-size: var(--components-userPicture-XL-fontSize);
+		--components-user-picture-placeholder: var(--components-userPicture-XL-placeholder);
 	}
 
 	&.mod-XXL {
 		--components-user-picture-image-size: var(--components-userPicture-XXL-image);
 		--components-user-picture-font-size: var(--components-userPicture-XXL-fontSize);
+		--components-user-picture-placeholder: var(--components-userPicture-XXL-placeholder);
+	}
+
+	&.mod-XXXL {
+		--components-user-picture-image-size: var(--components-userPicture-XXXL-image);
+		--components-user-picture-font-size: var(--components-userPicture-XXXL-fontSize);
+		--components-user-picture-placeholder: var(--components-userPicture-XXXL-placeholder);
 	}
 
 	&.mod-border {
