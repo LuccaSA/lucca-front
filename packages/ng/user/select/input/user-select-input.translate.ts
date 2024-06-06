@@ -23,4 +23,8 @@ export const luUserSelectInputTranslations: ILuTranslation<ILuUserSelectInputLab
 		users: 'empleados',
 		me: 'Yo :',
 	},
+	de: {
+		users: 'Benutzer',
+		me: 'Ich:',
+	},
 };

@@ -19,4 +19,7 @@ export const luUserSearcherTranslations: ILuTranslation<ILuUserSearcherLabel> = 
 	es: {
 		includeFormerEmployees: 'Incluir a los antiguos empleados',
 	},
+	de: {
+		includeFormerEmployees: 'Ehemalige Mitarbeiter einbeziehen',
+	},
 };
