@@ -12,6 +12,7 @@
 	border-radius: var(--components-indexTable-border-radius);
 	background-color: var(--components-indexTable-background-color);
 	color: var(--palettes-neutral-800);
+	contain: paint;
 
 	@at-root ($atRoot) {
 		.indexTable-head {
@@ -39,7 +40,6 @@
 
 		.indexTable-body-row {
 			border-radius: var(--commons-borderRadius-L);
-			cursor: pointer;
 		}
 
 		.indexTable-head-row-transparentCell,
@@ -56,6 +56,9 @@
 		.indexTable-body-row-transparentCell {
 			vertical-align: middle;
 			padding: var(--pr-t-spacings-50) 0;
+			position: relative;
+			z-index: 3;
+
 			&:not(:first-child) {
 				padding-right: var(--components-indexTable-cell-padding);
 			}
@@ -80,6 +83,10 @@
 
 			&:last-child {
 				--components-indexTable-cell-padding-right: var(--components-indexTable-cell-padding);
+			}
+
+			&:not(:has(button, a, input, textarea, select, [tabindex='0'])) {
+				pointer-events: none;
 			}
 		}
 
@@ -183,6 +190,12 @@
 
 		.indexTable-body-row-cell-link {
 			text-decoration: none;
+
+			&::after {
+				content: '';
+				position: absolute;
+				inset: 0 -9999px;
+			}
 
 			&,
 			&:hover {

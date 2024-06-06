@@ -36,8 +36,7 @@ function getTemplate(args: IndexTableStackableStory): string {
 				</span>
 			</td>
 			<td class="indexTable-body-row-cell">
-				<a href="#" class="indexTable-body-row-cell-action">Content/a>
-				
+				<a href="#" class="indexTable-body-row-cell-link">Content</a>
 			</td>
 			<td class="indexTable-body-row-cell">Content</td>
 			<td class="indexTable-body-row-cell">Content</td>
@@ -53,7 +52,6 @@ function getTemplate(args: IndexTableStackableStory): string {
 			</td>
 			<td class="indexTable-body-row-cell">
 				<a href="#" class="indexTable-body-row-cell-link">Content</a>
-				
 			</td>
 			<td class="indexTable-body-row-cell">Content</td>
 			<td class="indexTable-body-row-cell">Content</td>
@@ -69,7 +67,6 @@ function getTemplate(args: IndexTableStackableStory): string {
 			</td>
 			<td class="indexTable-body-row-cell">
 				<a href="#" class="indexTable-body-row-cell-link">Content</a>
-				
 			</td>
 			<td class="indexTable-body-row-cell">Content</td>
 			<td class="indexTable-body-row-cell">Content</td>
