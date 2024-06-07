@@ -1,14 +1,21 @@
-import { Directive, ElementRef, HostListener, inject, Input, TemplateRef, ViewContainerRef } from '@angular/core';
+import { booleanAttribute, DestroyRef, Directive, ElementRef, HostBinding, HostListener, inject, Injector, input, Input, signal, TemplateRef, ViewContainerRef } from '@angular/core';
 import { ConnectedPosition, ConnectionPositionPair, Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
 import { PopoverContentComponent } from './content/popover-content/popover-content.component';
-import { PopoverFocusTrap } from './popover-focus-trap';
+import { POPOVER_CONFIG, PopoverConfig } from './popover-tokens';
+import { combineLatest, merge, Subject, switchMap, timer } from 'rxjs';
+import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
+import { debounce, filter, map } from 'rxjs/operators';
 
 export type PopoverPosition = 'above' | 'below' | 'before' | 'after';
 
+let nextId = 0;
+
 @Directive({
 	selector: '[luPopover2]',
-	providers: [PopoverFocusTrap],
+	host: {
+		'[attr.aria-expanded]': 'opened()',
+	},
 	standalone: true,
 })
 export class PopoverDirective {
@@ -18,7 +25,7 @@ export class PopoverDirective {
 
 	#vcr = inject(ViewContainerRef);
 
-	#focusManager = new PopoverFocusTrap(this.#elementRef.nativeElement);
+	#destroyRef = inject(DestroyRef);
 
 	@Input({
 		alias: 'luPopover2',
@@ -28,7 +35,28 @@ export class PopoverDirective {
 	@Input()
 	luPopoverPosition: PopoverPosition = 'above';
 
+	@Input({
+		transform: booleanAttribute,
+	})
+	luPopoverDisabled = false;
+
+	@Input()
+	luPopoverTrigger = input<'click' | 'click+hover'>('click');
+
+	@Input()
+	customPositions?: ConnectionPositionPair[];
+
+	luPopoverOpenDelay = input(300);
+
+	luPopoverCloseDelay = input(100);
+
+	open$ = new Subject<void>();
+
+	close$ = new Subject<void>();
+
 	#overlayRef: OverlayRef;
+
+	#componentRef?: PopoverContentComponent;
 
 	positionPairs: Record<PopoverPosition, ConnectionPositionPair> = {
 		above: new ConnectionPositionPair(
@@ -61,15 +89,99 @@ export class PopoverDirective {
 		),
 	};
 
+	opened = signal(false);
+
+	@HostBinding('attr.aria-describedby')
+	ariaDescribedBy = `popover-content-${nextId++}`;
+
+	constructor() {
+		combineLatest([toObservable(this.luPopoverOpenDelay), toObservable(this.luPopoverCloseDelay), toObservable(this.luPopoverTrigger)])
+			.pipe(
+				filter(([, , trigger]) => {
+					return trigger.includes('hover');
+				}),
+				switchMap(([openDelay, closeDelay]) => {
+					return merge(this.open$.pipe(map(() => 'open')), this.close$.pipe(map(() => 'close'))).pipe(
+						debounce((event) => {
+							return timer(event === 'open' ? openDelay : closeDelay);
+						}),
+					);
+				}),
+				takeUntilDestroyed(this.#destroyRef),
+			)
+			.subscribe((event) => {
+				if (event === 'open') {
+					this.openPopover(true);
+				} else {
+					this.#componentRef?.close();
+				}
+			});
+	}
+
+	@HostListener('mouseenter')
+	onMouseEnter() {
+		this.open$.next();
+	}
+
+	@HostListener('mouseleave')
+	onMouseLeave() {
+		this.close$.next();
+	}
+
 	@HostListener('click')
-	openPopover(): void {
-		this.#overlayRef = this.#overlay.create({
-			positionStrategy: this.#overlay.position().flexibleConnectedTo(this.#elementRef).withPositions(this.#buildPositions()),
-			scrollStrategy: this.#overlay.scrollStrategies.block(),
-		});
-		const componentRef = this.#overlayRef.attach(new ComponentPortal(PopoverContentComponent, this.#vcr));
-		componentRef.instance.content = this.content;
-		componentRef.instance.ref = this.#overlayRef;
+	click(): void {
+		if (this.opened()) {
+			this.#componentRef?.close();
+		} else {
+			this.openPopover();
+		}
+	}
+
+	openPopover(disableFocusHandler = false): void {
+		if (!this.opened() && !this.luPopoverDisabled) {
+			this.opened.set(true);
+			this.#overlayRef = this.#overlay.create({
+				positionStrategy: this.#overlay
+					.position()
+					.flexibleConnectedTo(this.#elementRef)
+					.withPositions(this.customPositions || this.#buildPositions()),
+				scrollStrategy: this.#overlay.scrollStrategies.block(),
+				hasBackdrop: this.luPopoverTrigger() === 'click',
+				backdropClass: '',
+				disposeOnNavigation: true,
+			});
+			// Close on backdrop click even if backdrop is invisible
+			this.#overlayRef.backdropClick().subscribe(() => this.#componentRef.close());
+			const config: PopoverConfig = {
+				content: this.content,
+				ref: this.#overlayRef,
+				contentId: this.ariaDescribedBy,
+				triggerElement: this.#elementRef.nativeElement,
+				disableFocusManipulation: disableFocusHandler,
+			};
+			this.#componentRef = this.#overlayRef.attach(
+				new ComponentPortal(
+					PopoverContentComponent,
+					this.#vcr,
+					Injector.create({
+						providers: [{ provide: POPOVER_CONFIG, useValue: config }],
+					}),
+				),
+			).instance;
+			// On tooltip leave => trigger close
+			this.#componentRef.mouseLeave$.pipe(takeUntilDestroyed(this.#componentRef.destroyRef)).subscribe(() => this.close$.next());
+			// On tooltip enter => trigger open to keep it opened
+			this.#componentRef.mouseEnter$.pipe(takeUntilDestroyed(this.#componentRef.destroyRef)).subscribe(() => this.open$.next());
+			this.#componentRef.closed$.subscribe(() => this.opened.set(false));
+		}
+	}
+
+	@HostListener('keydown.Tab', ['$event'])
+	focusBackToContent(event: KeyboardEvent): void {
+		if (this.opened()) {
+			event.preventDefault();
+			this.#componentRef.grabFocus();
+		}
 	}
 
 	#buildPositions(): ConnectedPosition[] {

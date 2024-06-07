@@ -5,16 +5,19 @@ import { DOCUMENT } from '@angular/common';
 @Injectable()
 export class PopoverFocusTrap extends FocusTrap {
 	override startAnchorListener = () => {
-		console.log('startAnchorListener');
+		this.triggerElement.focus();
 		return true;
 	};
 
 	override endAnchorListener = () => {
-		console.log('endAnchorListener');
+		this.triggerElement.focus();
 		return true;
 	};
 
-	constructor(element: HTMLElement) {
+	constructor(
+		element: HTMLElement,
+		private triggerElement: HTMLElement,
+	) {
 		super(element, inject(InteractivityChecker), inject(NgZone), inject(DOCUMENT), true);
 	}
 }
