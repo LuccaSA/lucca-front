@@ -24,7 +24,7 @@
 		}
 
 		.footer-containerOptional {
-			@include container.padding0;
+			--components-container-padding: 0;
 
 			display: flex;
 			gap: var(--pr-t-spacings-200);

@@ -34,7 +34,3 @@
 @mixin maxXXXL {
 	--components-container-max-width: #{pxToRem(map.get(config.$breakpoints, 'XXXL'))};
 }
-
-@mixin padding0 {
-	--components-container-padding: 0;
-}
