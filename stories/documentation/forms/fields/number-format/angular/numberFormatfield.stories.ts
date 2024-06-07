@@ -28,6 +28,18 @@ export default {
 				type: 'select',
 			},
 		},
+		formatStyle: {
+			options: ['decimal', 'percent', 'currency'],
+			control: {
+				type: 'select',
+			},
+		},
+		currencyCode: {
+			options: ['EUR', 'USD', 'CNY', 'JPY'],
+			control: {
+				type: 'select',
+			},
+		},
 	},
 } as Meta;
 
@@ -71,62 +83,7 @@ export const Basic: StoryObj<NumberFormatInputComponent & { disabled: boolean } 
 		size: 'M',
 		placeholder: 'Placeholder',
 		tooltip: 'Je suis un message d’aide',
-	},
-};
-
-export const WithPrefixAndSuffix: StoryObj<NumberFormatInputComponent & { disabled: boolean } & FormFieldComponent> = {
-	render: (args, { argTypes }) => {
-		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, prefix, suffix, ...inputArgs } = args;
-		return {
-			props: {
-				prefix: args.prefix,
-				suffix: args.suffix,
-			},
-			template: cleanupTemplate(`<lu-form-field ${generateInputs(
-				{
-					label,
-					hiddenLabel,
-					tooltip,
-					inlineMessage,
-					inlineMessageState,
-					size,
-				},
-				argTypes,
-			)}>
-
-	<lu-number-format-input
-		${generateInputs(inputArgs, argTypes)}
-		[prefix]="prefix"
-		[suffix]="suffix"
-		[(ngModel)]="example">
-	</lu-number-format-input>
-
-</lu-form-field>
-
-{{example}}`),
-			moduleMetadata: {
-				imports: [NumberFormatInputComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule],
-			},
-		};
-	},
-	args: {
-		size: 'M',
-		label: 'Label',
-		tooltip: 'Tooltip message',
-		hiddenLabel: false,
-		required: true,
-		placeholder: 'Placeholder',
-		disabled: false,
-		hasClearer: false,
-		prefix: {
-			icon: 'dollar',
-			ariaLabel: 'Dollar',
-		},
-		suffix: {
-			content: '€/j',
-			ariaLabel: 'euros par jour',
-		},
-		inlineMessage: 'Helper Text',
-		inlineMessageState: 'default',
+		formatStyle: 'decimal',
+		currencyCode: 'EUR',
 	},
 };

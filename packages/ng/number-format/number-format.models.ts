@@ -1,3 +1,6 @@
+// Based on Intl number input
+// (more info: https://dm4t2.github.io/)
+
 export type NumberFormatStyle = 'decimal' | 'currency' | 'percent' | 'unit';
 
 export type NumberFormatUnit =
@@ -51,78 +54,87 @@ export type NumberFormatUnitDisplay = 'short' | 'narrow' | 'long';
 
 export type NumberFormatCurrencyDisplay = 'code' | 'symbol' | 'narrowSymbol' | 'name';
 
-export type NumberFormatCurrencySign = 'standard' | 'accounting';
-
-export type NumberFormatNotation = 'standard' | 'scientific' | 'engineering' | 'compact';
-
-export type NumberFormatRoundingMode = 'ceil' | 'floor' | 'expand' | 'trunc' | 'halfCeil' | 'halfFloor' | 'halfExpand' | 'halfTrunc' | 'halfEven';
-
-export interface NumberFormatBaseOptions {
-	style: NumberFormatStyle;
-	notation?: NumberFormatNotation;
-	minimumIntegerDigits?: number;
-	minimumFractionDigits?: number;
-	maximumFractionDigits?: number;
-	minimumSignificantDigits?: number;
-	maximumSignificantDigits?: number;
-	roundingMode?: NumberFormatRoundingMode;
+export interface NumberFormatRange {
+	min?: number;
+	max?: number;
 }
 
-export interface FormatDecimalOptions extends NumberFormatBaseOptions {
-	style: 'decimal';
+export interface NumberFormatOptions {
+	style?: string | undefined;
+	currency?: string | undefined;
+	useGrouping?: boolean | undefined;
+	minimumIntegerDigits?: number | undefined;
+	minimumFractionDigits?: number | undefined;
+	maximumFractionDigits?: number | undefined;
+	minimumSignificantDigits?: number | undefined;
+	maximumSignificantDigits?: number | undefined;
+	unit?: NumberFormatUnit | undefined;
+	unitDisplay?: NumberFormatUnitDisplay | undefined;
+	currencyDisplay?: NumberFormatCurrencyDisplay | undefined;
 }
 
-export interface FormatUnitOptions extends NumberFormatBaseOptions {
-	style: 'unit';
-	unit: NumberFormatUnit;
-	unitDisplay?: NumberFormatUnitDisplay;
-}
-
-export interface FormatPercentOptions extends NumberFormatBaseOptions {
-	style: 'percent';
-}
-
-export interface FormatCurrencyOptions extends NumberFormatBaseOptions {
-	style: 'currency';
-	currency: string;
+export interface NumberFormatConfig {
+	/**
+	 * A {@link https://tools.ietf.org/html/bcp47|BCP 47} language tag.
+	 * Default value is `undefined` (use the default locale of the Browser)
+	 *
+	 * @example `"en"` or `"de-DE"`
+	 */
+	locale: string;
+	/**
+	 * The format style to use.
+	 * Default value is `"decimal"`.
+	 */
+	style?: NumberFormatStyle;
+	/**
+	 * A {@link https://en.wikipedia.org/wiki/ISO_4217|ISO 4217} currency code, which is required when using {@link NumberFormatStyle.Currency}.
+	 *
+	 * @example `"EUR"`
+	 */
+	currency?: string;
+	/**
+	 * How to display the currency when using {@link NumberFormatStyle.Currency}.
+	 */
 	currencyDisplay?: NumberFormatCurrencyDisplay;
-	currencySign?: NumberFormatCurrencySign;
+	/**
+	 * A {@link https://tc39.es/proposal-unified-intl-numberformat/section6/locales-currencies-tz_proposed_out.html#sec-issanctionedsimpleunitidentifier|unit identifier}, which is required when using {@link NumberFormatStyle.Unit}.
+	 * Pairs of simple units can be concatenated with "-per-" to make a compound unit.
+	 *
+	 * @example `"byte"` (simple unit) or `"byte-per-second"` (compound unit).
+	 */
+	unit?: NumberFormatUnit;
+	/**
+	 * How to display the unit when using {@link NumberFormatStyle.Currency}.
+	 */
+	unitDisplay?: NumberFormatUnitDisplay;
+	/**
+	 * The number of displayed decimal digits.
+	 * Default value is `undefined` (use the default of the {@link NumberFormatStyle}, decimal digits will be hidden for integer numbers).
+	 * Must be between 0 and 15.
+	 */
+	precision?: number | NumberFormatRange;
+	/**
+	 * Whether the decimal symbol is inserted automatically, using the last inputted digits as decimal digits.
+	 * Default is `false` (the decimal symbol needs to be inserted manually).
+	 */
+	autoDecimalDigits?: boolean;
+	/**
+	 * Whether the minus symbol is automatically inserted or prevented to be inputted depending on the configured `valueRange`.
+	 * Default is `true`.
+	 */
+	autoSign?: boolean;
+	/**
+	 * The range of accepted values.
+	 * Default is `undefined` (no value range).
+	 * The validation is triggered on blur and automatically sets the respective threshold if out of range.
+	 */
+	valueRange?: NumberFormatRange;
+	/**
+	 * Whether to use grouping separators such as thousands/lakh/crore separators.
+	 * Default is `true`.
+	 */
+	useGrouping?: boolean;
 }
 
-export type NumberFormatOptions = NumberFormatBaseOptions | FormatDecimalOptions | FormatUnitOptions | FormatPercentOptions | FormatCurrencyOptions;
-
-export function formatNumber(value: number | null | undefined, locale: string, options: NumberFormatOptions): string {
-	if (typeof value === 'number') {
-		return new Intl.NumberFormat(locale, options).format(value);
-	}
-	return '';
-}
-
-export interface ParseNumberLookuptable {
-	group: RegExp;
-	decimal: RegExp;
-	numeral: RegExp;
-	exclude: RegExp;
-	index: (v: string) => string;
-}
-
-export function createParseNumberLookuptable(locale: string): ParseNumberLookuptable {
-	const parts = new Intl.NumberFormat(locale).formatToParts(12345.6);
-	const numerals = [...new Intl.NumberFormat(locale, { useGrouping: false }).format(9876543210)].reverse();
-	const index = new Map(numerals.map((d, i) => [d, i.toString()]));
-	const groupStr = parts.find((d) => d.type === 'group').value;
-	const decimalStr = parts.find((d) => d.type === 'decimal').value;
-	return {
-		group: new RegExp(`[${groupStr}]`, 'g'),
-		decimal: new RegExp(`[${decimalStr}]`),
-		numeral: new RegExp(`[${numerals.join('')}]`, 'g'),
-		exclude: new RegExp(`[^${[...numerals, groupStr, decimalStr, '+', '-'].join('')}]`, 'g'),
-		index: (d) => index.get(d),
-	};
-}
-
-export function parseNumber(value: string, config: { locale?: string; table: ParseNumberLookuptable }): number {
-	const lookupTable = config.table ?? createParseNumberLookuptable(config.locale);
-	const parsedValue = value.trim().replace(lookupTable.group, '').replace(lookupTable.decimal, '.').replace(lookupTable.numeral, lookupTable.index).replace(lookupTable.exclude, '');
-	return parsedValue ? +parsedValue : NaN;
-}
+export const DECIMAL_SEPARATORS = [',', '.', '٫'];
+export const INTEGER_PATTERN = '(0|[1-9]\\d*)';

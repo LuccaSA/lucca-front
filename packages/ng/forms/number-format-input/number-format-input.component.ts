@@ -1,4 +1,4 @@
-import { booleanAttribute, Component, ElementRef, Input, ViewChild, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, Component, ElementRef, inject, Input, LOCALE_ID, ViewChild, ViewEncapsulation } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormFieldComponent, InputDirective } from '@lucca-front/ng/form-field';
 import { NoopValueAccessorDirective } from '../noop-value-accessor.directive';
@@ -8,7 +8,7 @@ import { TextInputAddon } from '../text-input/text-input-addon';
 import { getIntl } from '@lucca-front/ng/core';
 import { LU_NUMBERFORMATFIELD_TRANSLATIONS } from './number-format-input.translate';
 import { injectNgControl } from '../inject-ng-control';
-import { NumberFormatDirective } from '@lucca-front/ng/number-format';
+import { NumberFormatConfig, NumberFormatDirective, NumberFormatStyle } from '@lucca-front/ng/number-format';
 
 @Component({
 	selector: 'lu-number-format-input',
@@ -19,7 +19,15 @@ import { NumberFormatDirective } from '@lucca-front/ng/number-format';
 	encapsulation: ViewEncapsulation.None,
 })
 export class NumberFormatInputComponent {
+	#locale = inject(LOCALE_ID);
+
 	ngControl = injectNgControl();
+
+	@Input()
+	formatStyle: NumberFormatStyle = 'decimal';
+
+	@Input()
+	currencyCode?: string;
 
 	@Input()
 	placeholder: string = '';
@@ -35,6 +43,10 @@ export class NumberFormatInputComponent {
 
 	@Input()
 	suffix: TextInputAddon;
+
+	get formatOptions(): NumberFormatConfig {
+		return { locale: this.#locale, style: this.formatStyle, currency: this.currencyCode };
+	}
 
 	intl = getIntl(LU_NUMBERFORMATFIELD_TRANSLATIONS);
 
