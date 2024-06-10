@@ -1,7 +1,6 @@
 @mixin XL {
-	--components-avatar-size: 4.5rem;
+	--components-avatar-size: 4rem;
 	--components-avatar-fontSize: var(--sizes-XL-fontSize);
-	--components-avatar-border: 4px;
 }
 
 @mixin L {
