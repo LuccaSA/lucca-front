@@ -75,18 +75,20 @@ export class TimePickerComponent extends BasePickerComponent {
 		this.disabled.set(isDisabled);
 	}
 
-	protected hoursInputHandler(value: number): void {
+	protected hoursInputHandler(value: number | '--'): void {
 		this.setTime({
 			previousValue: this.value(),
-			value: createIsoTimeFromHoursAndMinutes(value, this.minutes()),
+			// Mostly for compiler because we never set the time to -- with input handler
+			value: createIsoTimeFromHoursAndMinutes(+value, this.minutes()),
 			source: 'input',
 		});
 	}
 
-	protected minutesInputHandler(value: number): void {
+	protected minutesInputHandler(value: number | '--'): void {
 		this.setTime({
 			previousValue: this.value(),
-			value: createIsoTimeFromHoursAndMinutes(this.hours(), value),
+			// Mostly for compiler because we never set the time to -- with input handler
+			value: createIsoTimeFromHoursAndMinutes(this.hours(), +value),
 			source: 'input',
 		});
 	}
