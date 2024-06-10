@@ -1,3 +1,5 @@
+import { PortalContent } from '../core/portal';
+
 export type LuToastType = 'Info' | 'Error' | 'Success' | 'Warning';
 
 export const defaultToastDuration = 5000;
@@ -6,7 +8,7 @@ export interface LuToastInput {
 	/**
 	 * InnerHTML supported.
 	 */
-	message: string;
+	message: PortalContent;
 	/**
 	 * Bold title.
 	 * InnerHTML not supported.

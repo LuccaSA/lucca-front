@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input, OnDestroy } from '@angular/core';
-import { getIntl } from '@lucca-front/ng/core';
+import { getIntl, PortalContent, PortalDirective } from '@lucca-front/ng/core';
 import { merge, Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { LuToast, LuToastInput, LuToastType } from './toasts.model';
@@ -12,7 +12,7 @@ import { LU_TOAST_TRANSLATIONS } from './toasts.translate';
 	templateUrl: './toasts.component.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	standalone: true,
-	imports: [CommonModule],
+	imports: [CommonModule, PortalDirective],
 })
 export class LuToastsComponent implements OnDestroy {
 	@Input() public bottom = false;
@@ -48,6 +48,10 @@ export class LuToastsComponent implements OnDestroy {
 		Error: 'palette-error',
 		Warning: 'palette-warning',
 	};
+
+	public isStringPortalContent(message: PortalContent): message is string {
+		return typeof message === 'string';
+	}
 
 	public removeToast(toast: LuToast): void {
 		this.toastsService.removeToast(toast);
