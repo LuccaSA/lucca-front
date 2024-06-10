@@ -3,9 +3,8 @@ import { ConnectedPosition, ConnectionPositionPair, Overlay, OverlayRef } from '
 import { ComponentPortal } from '@angular/cdk/portal';
 import { PopoverContentComponent } from './content/popover-content/popover-content.component';
 import { POPOVER_CONFIG, PopoverConfig } from './popover-tokens';
-import { combineLatest, merge, Subject, switchMap, timer } from 'rxjs';
+import { combineLatest, debounce, filter, map, merge, Subject, switchMap, timer } from 'rxjs';
 import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
-import { debounce, filter, map } from 'rxjs/operators';
 
 export type PopoverPosition = 'above' | 'below' | 'before' | 'after';
 

@@ -5,6 +5,8 @@ import { IconComponent } from '@lucca-front/ng/icon';
 import { PopoverFocusTrap } from '../../popover-focus-trap';
 import { Subject } from 'rxjs';
 import { POPOVER_CONFIG } from '../../popover-tokens';
+import { LU_POPOVER2_TRANSLATIONS } from '../../popover.translate';
+import { getIntl } from '@lucca-front/ng/core';
 
 @Component({
 	selector: 'lu-popover-content',
@@ -17,6 +19,8 @@ import { POPOVER_CONFIG } from '../../popover-tokens';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PopoverContentComponent implements AfterViewInit {
+	intl = getIntl(LU_POPOVER2_TRANSLATIONS);
+
 	#elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
 
 	#config = inject(POPOVER_CONFIG);
@@ -61,8 +65,6 @@ export class PopoverContentComponent implements AfterViewInit {
 
 	@HostListener('window:keydown.escape')
 	close(): void {
-		// Detach overlay
-		this.#config.ref.detach();
 		if (!this.#config.disableFocusManipulation) {
 			// Focus initial trigger element
 			this.#config.triggerElement.focus();
@@ -72,5 +74,7 @@ export class PopoverContentComponent implements AfterViewInit {
 		this.closed$.complete();
 		this.mouseEnter$.complete();
 		this.mouseLeave$.complete();
+		// Detach overlay
+		this.#config.ref.detach();
 	}
 }

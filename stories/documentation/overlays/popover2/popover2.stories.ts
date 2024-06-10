@@ -17,6 +17,10 @@ export default {
 	],
 	argTypes: {
 		luPopover2: HiddenArgType,
+		luPopoverTrigger: {
+			control: 'select',
+			options: ['click', 'click+hover'],
+		},
 	},
 } as Meta;
 
