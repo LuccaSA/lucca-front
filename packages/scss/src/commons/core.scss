@@ -120,3 +120,20 @@ $overflow: 'hidden', 'auto', 'visible', 'scroll';
 		}
 	}
 }
+
+@mixin rosetta($before, $after, $iterations) {
+    @if type-of($iterations) == map {
+        @each $iterationBefore, $iterationAfter in $iterations {
+			@if type-of($iterationAfter) == string {
+            	#{$before}-#{$iterationBefore}: var(#{$after}-#{$iterationAfter});
+			} @else {
+				#{$before}-#{$iterationBefore}: #{$iterationAfter};
+			}
+        }
+    }
+    @else {
+        @each $iteration in $iterations {
+            #{$before}-#{$iteration}: var(#{$after}-#{$iteration});
+        }
+    }
+}
