@@ -152,7 +152,10 @@ export class PopoverDirective {
 				disposeOnNavigation: true,
 			});
 			// Close on backdrop click even if backdrop is invisible
-			this.#overlayRef.backdropClick().subscribe(() => this.#componentRef.close());
+			this.#overlayRef
+				.backdropClick()
+				.pipe(takeUntilDestroyed(this.#destroyRef))
+				.subscribe(() => this.#componentRef.close());
 			const config: PopoverConfig = {
 				content: this.content,
 				ref: this.#overlayRef,
@@ -170,10 +173,10 @@ export class PopoverDirective {
 				),
 			).instance;
 			// On tooltip leave => trigger close
-			this.#componentRef.mouseLeave$.pipe(takeUntilDestroyed(this.#componentRef.destroyRef)).subscribe(() => this.close$.next());
+			this.#componentRef.mouseLeave$.pipe(takeUntilDestroyed(this.#componentRef.destroyRef), takeUntilDestroyed(this.#destroyRef)).subscribe(() => this.close$.next());
 			// On tooltip enter => trigger open to keep it opened
-			this.#componentRef.mouseEnter$.pipe(takeUntilDestroyed(this.#componentRef.destroyRef)).subscribe(() => this.open$.next());
-			this.#componentRef.closed$.pipe(takeUntilDestroyed(this.#componentRef.destroyRef)).subscribe(() => this.opened.set(false));
+			this.#componentRef.mouseEnter$.pipe(takeUntilDestroyed(this.#componentRef.destroyRef), takeUntilDestroyed(this.#destroyRef)).subscribe(() => this.open$.next());
+			this.#componentRef.closed$.pipe(takeUntilDestroyed(this.#componentRef.destroyRef), takeUntilDestroyed(this.#destroyRef)).subscribe(() => this.opened.set(false));
 		}
 	}
 
