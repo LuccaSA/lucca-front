@@ -1,4 +1,4 @@
-import { PortalContent } from '../core/portal';
+import { PortalContent } from '@lucca-front/ng/core';
 
 export type LuToastType = 'Info' | 'Error' | 'Success' | 'Warning';
 
