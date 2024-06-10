@@ -4,19 +4,13 @@
 import { NumberFormat } from './number-format';
 import { removeLeadingZeros } from './number-format.utils';
 
-abstract class AbstractNumberMask {
+export class NumberMask {
 	protected numberFormat: NumberFormat;
 
 	constructor(numberFormat: NumberFormat) {
 		this.numberFormat = numberFormat;
 	}
-}
 
-export interface NumberMask {
-	conformToMask(str: string, previousConformedValue: string): string | { fractionDigits: string; numberValue: number };
-}
-
-export class DefaultNumberMask extends AbstractNumberMask implements NumberMask {
 	conformToMask(str: string, previousConformedValue = ''): string | { fractionDigits: string; numberValue: number } {
 		const negative = this.numberFormat.isNegative(str);
 		const checkIncompleteValue = (str: string) => {
@@ -57,25 +51,5 @@ export class DefaultNumberMask extends AbstractNumberMask implements NumberMask 
 		} else {
 			return '';
 		}
-	}
-}
-
-export class AutoDecimalDigitsNumberMask extends AbstractNumberMask implements NumberMask {
-	conformToMask(str: string, previousConformedValue = ''): string | { fractionDigits: string; numberValue: number } {
-		if (
-			str === '' ||
-			(this.numberFormat.parse(previousConformedValue) === 0 && this.numberFormat.stripPrefixOrSuffix(previousConformedValue).slice(0, -1) === this.numberFormat.stripPrefixOrSuffix(str))
-		) {
-			return '';
-		}
-		const negative = this.numberFormat.isNegative(str);
-		const numberValue =
-			this.numberFormat.stripMinusSymbol(str) === ''
-				? -0
-				: Number(`${negative ? '-' : ''}${removeLeadingZeros(this.numberFormat.onlyDigits(str))}`) / Math.pow(10, this.numberFormat.maximumFractionDigits);
-		return {
-			numberValue,
-			fractionDigits: numberValue.toFixed(this.numberFormat.maximumFractionDigits).slice(-this.numberFormat.maximumFractionDigits),
-		};
 	}
 }

@@ -114,11 +114,6 @@ export interface NumberFormatConfig {
 	 */
 	precision?: number | NumberFormatRange;
 	/**
-	 * Whether the decimal symbol is inserted automatically, using the last inputted digits as decimal digits.
-	 * Default is `false` (the decimal symbol needs to be inserted manually).
-	 */
-	autoDecimalDigits?: boolean;
-	/**
 	 * Whether the minus symbol is automatically inserted or prevented to be inputted depending on the configured `valueRange`.
 	 * Default is `true`.
 	 */

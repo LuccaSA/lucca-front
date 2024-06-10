@@ -5,7 +5,7 @@ import { Directive, ElementRef, forwardRef, HostListener, inject, Input, OnChang
 import type { ControlValueAccessor } from '@angular/forms';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { DECIMAL_SEPARATORS, NumberFormatConfig } from './number-format.models';
-import { AutoDecimalDigitsNumberMask, DefaultNumberMask, NumberMask } from './number-mask';
+import { NumberMask } from './number-mask';
 import { NumberFormat } from './number-format';
 import { countOccurrences } from './number-format.utils';
 
@@ -54,13 +54,8 @@ export class NumberFormatDirective implements ControlValueAccessor, OnChanges {
 			autoSign: true,
 			...options,
 		};
-		if (this.formatConfig.autoDecimalDigits) {
-			this.inputElement.setAttribute('inputmode', 'numeric');
-		} else {
-			this.inputElement.setAttribute('inputmode', 'decimal');
-		}
 		this.#numberFormat = new NumberFormat(this.formatConfig);
-		this.#numberMask = this.formatConfig.autoDecimalDigits ? new AutoDecimalDigitsNumberMask(this.#numberFormat) : new DefaultNumberMask(this.#numberFormat);
+		this.#numberMask = new NumberMask(this.#numberFormat);
 		this.#minValue = this.#getMinValue();
 		this.#maxValue = this.#getMaxValue();
 	}
@@ -129,7 +124,7 @@ export class NumberFormatDirective implements ControlValueAccessor, OnChanges {
 				let { maximumFractionDigits, minimumFractionDigits } = this.#numberFormat;
 				if (this.#isFocused) {
 					minimumFractionDigits = hideNegligibleDecimalDigits ? fractionDigits.replace(/0+$/, '').length : Math.min(maximumFractionDigits, fractionDigits.length);
-				} else if (Number.isInteger(numberValue) && !this.formatConfig.autoDecimalDigits && (this.formatConfig.precision === undefined || minimumFractionDigits === 0)) {
+				} else if (Number.isInteger(numberValue) && (this.formatConfig.precision === undefined || minimumFractionDigits === 0)) {
 					minimumFractionDigits = maximumFractionDigits = 0;
 				}
 				formattedValue =
@@ -228,7 +223,7 @@ export class NumberFormatDirective implements ControlValueAccessor, OnChanges {
 			if (Math.abs(newValueLength - value.length) > 1 && selectionStart <= decimalSymbolPosition) {
 				return this.#formattedValue.indexOf(decimalSymbol) + 1;
 			} else {
-				if (!this.formatConfig.autoDecimalDigits && selectionStart > decimalSymbolPosition) {
+				if (selectionStart > decimalSymbolPosition) {
 					if (this.#numberFormat.onlyDigits(value.substring(decimalSymbolPosition)).length - 1 === maximumFractionDigits) {
 						caretPositionFromLeft -= 1;
 					}
