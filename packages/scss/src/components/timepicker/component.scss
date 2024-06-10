@@ -1,91 +1,141 @@
 @use '@lucca-front/scss/src/commons/utils/a11y';
+@use '@lucca-front/icons/src/icon/exports' as icons;
 
 @mixin component($atRoot: 'without: rule') {
 	padding: var(--components-timepicker-padding);
-	border: 0;
-	border-radius: var(--commons-borderRadius-M);
-	box-shadow: 0 0 0 1px var(--palettes-neutral-300);
-	display: inline-flex;
-	background-color: var(--pr-t-elevation-surface-raised);
-	transition: box-shadow var(--commons-animations-durations-fast);
-
-	&:focus-within {
-		@include a11y.focusVisible($offset: 3px);
-		background-color: transparent;
-	}
+	width: fit-content;
 
 	@at-root ($atRoot) {
-		.timepicker-field {
+		.timePicker-fieldset {
+			display: flex;
+			align-items: center;
+			box-shadow: 0 0 0 1px var(--components-timepicker-border);
+			border-radius: var(--commons-borderRadius-M);
+			padding: 0;
+			border: 0;
+			margin: 0;
+			background-color: var(--components-timepicker-background);
+			color: var(--components-timepicker-color);
+			font-size: var(--components-timepicker-fontSize);
+			line-height: var(--components-timepicker-lineHeight);
 			position: relative;
-			display: inline-block;
+			cursor: text;
+
+			&:hover {
+				--components-timepicker-border: var(--palettes-neutral-400);
+			}
+
+			&:focus-within {
+				@include a11y.focusVisible($offset: 3px);
+			}
 		}
 
-		.timepicker-field-input {
-			background-color: transparent;
-			border-radius: var(--commons-borderRadius-M);
+		.timePicker-fieldset-groupSeparator {
 			text-align: center;
-			color: var(--palettes-neutral-800);
-			width: var(--components-timepicker-input-width);
+			position: absolute;
+			inset: 0;
+			pointer-events: none;
+			display: grid;
+			place-items: center;
+		}
+
+		.timePicker-fieldset-group {
+			position: relative;
+		}
+
+		.timePicker-fieldset-group-textfield {
+			background-color: transparent;
+		}
+
+		.timePicker-fieldset-group-textfield-input {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			border: 0;
+			text-align: center;
 			height: var(--components-timepicker-input-height);
+			width: var(--components-timepicker-input-width);
+			outline: none;
+			color: inherit;
+			background-color: transparent;
+			text-align: center;
+			padding: var(--components-timepicker-paddingInput);
+			box-sizing: content-box;
+
+			//&:has(+ .timePicker-fieldset-group-textfield-display) {
+			opacity: 0.0001;
+			//}
+
+			/*
+			&[type='number'] {
+				-moz-appearance: textfield;
+
+				&::-webkit-outer-spin-button,
+				&::-webkit-inner-spin-button {
+					-webkit-appearance: none;
+				}
+			}
+			*/
+
+			&::placeholder {
+				color: var(--component-textField-placeholder);
+			}
+
+			&:focus-visible {
+				& + .timePicker-fieldset-group-textfield-display {
+					background-color: var(--palettes-primary-100);
+				}
+			}
+		}
+
+		.timePicker-fieldset-group-textfield-display {
+			position: absolute;
+			inset: var(--components-timepicker-paddingInput);
+			border-radius: var(--commons-borderRadius-M);
+			pointer-events: none;
+			display: grid;
+			place-items: center;
+		}
+
+		.timePicker-fieldset-group-stepper {
+			position: absolute;
+			bottom: calc(100% + var(--pr-t-spacings-100) + 1px);
+			left: var(--pr-t-spacings-100);
+			right: var(--pr-t-spacings-100);
 			border: 0;
 			padding: 0;
-			-moz-appearance: textfield;
-
-			&::-webkit-outer-spin-button,
-			&::-webkit-inner-spin-button {
-				-webkit-appearance: none;
-				margin: 0;
-			}
-
-			&:hover,
-			&:focus,
-			&:focus-visible {
-				background-color: var(--palettes-100, var(--palettes-product-100));
-				outline: none;
-			}
-		}
-
-		.timepicker-field-increment {
-			cursor: pointer;
-			position: absolute;
-			bottom: calc(100% + 0.5rem + 1px);
-			left: 0;
-			border: 0;
-			height: 1.25rem;
+			height: var(--pr-t-spacings-200);
 			background-color: transparent;
 			color: var(--palettes-neutral-600);
 			display: inline-flex;
 			justify-content: center;
 			align-items: center;
 			border-radius: var(--commons-borderRadius-M);
-			width: var(--components-timepicker-input-width);
-			padding: 0;
-
-			&:last-child {
-				top: calc(100% + 0.5rem + 1px);
-				bottom: auto;
-			}
+			outline: none;
+			opacity: 1;
+			transition-property: opacity;
+			transition-duration: var(--commons-animations-durations-fast);
+			cursor: pointer;
 
 			&:hover {
 				background-color: var(--palettes-neutral-50);
 				color: var(--palettes-neutral-800);
 			}
 
-			&:focus {
-				background-color: var(--palettes-neutral-100);
-				color: var(--palettes-neutral-800);
+			&:disabled {
+				cursor: default;
+				color: var(--palettes-neutral-500);
+				pointer-events: none;
 			}
 
 			.lucca-icon {
-				font-size: 1rem;
+				@include icons.XS;
 			}
-		}
 
-		.timepicker-separator {
-			margin: 0 var(--pr-t-spacings-50);
-			text-align: center;
-			width: 0.5rem;
-			line-height: var(--components-timepicker-input-height);
+			+ .timePicker-fieldset-group-stepper {
+				top: calc(100% + var(--pr-t-spacings-100) + 1px);
+				bottom: auto;
+			}
 		}
 	}
 }

@@ -1,6 +1,7 @@
 @use 'exports' as *;
+@use '@lucca-front/scss/src/commons/utils/a11y';
 
-.timepicker {
+.timePicker {
 	@include vars;
 	@include component;
 
@@ -8,7 +9,19 @@
 		@include S;
 	}
 
-	&:is(.is-disabled, .disabled, [disabled]) {
+	&.mod-stepper {
+		@include stepper;
+	}
+
+	&.mod-stepperHover {
+		@include stepperHover;
+	}
+
+	&:has([aria-invalid='true']) {
+		@include invalid;
+	}
+
+	&:has([disabled]) {
 		@include disabled;
 	}
 }
