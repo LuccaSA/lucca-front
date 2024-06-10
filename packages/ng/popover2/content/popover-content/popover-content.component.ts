@@ -70,5 +70,7 @@ export class PopoverContentComponent implements AfterViewInit {
 		// Tell the directive we're closed now
 		this.closed$.next();
 		this.closed$.complete();
+		this.mouseEnter$.complete();
+		this.mouseLeave$.complete();
 	}
 }

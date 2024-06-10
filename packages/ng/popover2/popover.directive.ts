@@ -11,6 +11,37 @@ export type PopoverPosition = 'above' | 'below' | 'before' | 'after';
 
 let nextId = 0;
 
+const defaultPositionPairs: Record<PopoverPosition, ConnectionPositionPair> = {
+	above: new ConnectionPositionPair(
+		{ originX: 'center', originY: 'top' },
+		{
+			overlayX: 'center',
+			overlayY: 'bottom',
+		},
+	),
+	below: new ConnectionPositionPair(
+		{ originX: 'center', originY: 'bottom' },
+		{
+			overlayX: 'center',
+			overlayY: 'top',
+		},
+	),
+	before: new ConnectionPositionPair(
+		{ originX: 'start', originY: 'center' },
+		{
+			overlayX: 'end',
+			overlayY: 'center',
+		},
+	),
+	after: new ConnectionPositionPair(
+		{ originX: 'end', originY: 'center' },
+		{
+			overlayX: 'start',
+			overlayY: 'center',
+		},
+	),
+};
+
 @Directive({
 	selector: '[luPopover2]',
 	host: {
@@ -58,36 +89,7 @@ export class PopoverDirective {
 
 	#componentRef?: PopoverContentComponent;
 
-	positionPairs: Record<PopoverPosition, ConnectionPositionPair> = {
-		above: new ConnectionPositionPair(
-			{ originX: 'center', originY: 'top' },
-			{
-				overlayX: 'center',
-				overlayY: 'bottom',
-			},
-		),
-		below: new ConnectionPositionPair(
-			{ originX: 'center', originY: 'bottom' },
-			{
-				overlayX: 'center',
-				overlayY: 'top',
-			},
-		),
-		before: new ConnectionPositionPair(
-			{ originX: 'start', originY: 'center' },
-			{
-				overlayX: 'end',
-				overlayY: 'center',
-			},
-		),
-		after: new ConnectionPositionPair(
-			{ originX: 'end', originY: 'center' },
-			{
-				overlayX: 'start',
-				overlayY: 'center',
-			},
-		),
-	};
+	positionPairs: Record<PopoverPosition, ConnectionPositionPair> = defaultPositionPairs;
 
 	opened = signal(false);
 
@@ -172,7 +174,7 @@ export class PopoverDirective {
 			this.#componentRef.mouseLeave$.pipe(takeUntilDestroyed(this.#componentRef.destroyRef)).subscribe(() => this.close$.next());
 			// On tooltip enter => trigger open to keep it opened
 			this.#componentRef.mouseEnter$.pipe(takeUntilDestroyed(this.#componentRef.destroyRef)).subscribe(() => this.open$.next());
-			this.#componentRef.closed$.subscribe(() => this.opened.set(false));
+			this.#componentRef.closed$.pipe(takeUntilDestroyed(this.#componentRef.destroyRef)).subscribe(() => this.opened.set(false));
 		}
 	}
 
