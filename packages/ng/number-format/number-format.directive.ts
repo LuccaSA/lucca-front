@@ -21,8 +21,7 @@ import { countOccurrences } from './number-format.utils';
 	],
 })
 export class NumberFormatDirective implements ControlValueAccessor, OnChanges {
-	readonly #el = inject<ElementRef<HTMLInputElement>>(ElementRef<HTMLInputElement>);
-	readonly inputElement: HTMLInputElement = this.#el.nativeElement;
+	readonly inputElement = inject<ElementRef<HTMLInputElement>>(ElementRef<HTMLInputElement>).nativeElement;
 	readonly #renderer = inject(Renderer2);
 
 	#numberValue!: number | null;
