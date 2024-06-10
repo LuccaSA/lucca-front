@@ -92,8 +92,8 @@ export class PopoverDirective {
 
 	opened = signal(false);
 
-	@HostBinding('attr.aria-describedby')
-	ariaDescribedBy = `popover-content-${nextId++}`;
+	@HostBinding('attr.aria-controls')
+	ariaControls = `popover-content-${nextId++}`;
 
 	constructor() {
 		combineLatest([toObservable(this.luPopoverOpenDelay), toObservable(this.luPopoverCloseDelay), toObservable(this.luPopoverTrigger)])
@@ -156,7 +156,7 @@ export class PopoverDirective {
 			const config: PopoverConfig = {
 				content: this.content,
 				ref: this.#overlayRef,
-				contentId: this.ariaDescribedBy,
+				contentId: this.ariaControls,
 				triggerElement: this.#elementRef.nativeElement,
 				disableFocusManipulation: disableFocusHandler,
 			};
