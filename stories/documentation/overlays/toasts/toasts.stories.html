@@ -1,10 +1,15 @@
 <section class="contentSection">
 	<lu-toasts [sources]="[toastError$]" [bottom]="isBottom"></lu-toasts>
 
-	<button type="button" class="button" (click)="createToast()">Toast</button>
+	<button type="button" class="button" (click)="createToast('Info')">Toast</button>
 	<button type="button" class="button mod-outlined" (click)="createToast('Info', null)">Info, sans auto kill</button>
 	<button type="button" class="button mod-outlined palette-warning" (click)="createToast('Warning')">Toast warning</button>
 	<button type="button" class="button mod-outlined palette-success" (click)="createToast('Success', 2000)">Toast succès, 2000ms</button>
+
+	<button type="button" class="button" (click)="createToastWithTemplate('Info', toastMessage)">Toast with template</button>
+	<ng-template #toastMessage>
+		<button type="button" class="button mod-outlined palette-warning" (click)="onClickButtonInsideToast()">Toast with a button</button>
+	</ng-template>
 
 	<h4 class="pr-u-marginTop300">Toast d'erreur généré grace à la création d'un observable</h4>
 	<button type="button" class="button mod-outlined palette-error" (click)="notifyError()">Toast erreur</button>

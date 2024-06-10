@@ -3,7 +3,11 @@
 		<span *ngIf="toast.type" class="toast-item-icon lucca-icon" aria-hidden="true" [ngClass]="iconClassByToastType[toast.type]"></span>
 		<div class="toast-item-content">
 			<div *ngIf="toast.title"><strong>{{ toast.title }}</strong></div>
+			@if (isStringPortalContent(toast.message)) {
 			<div [innerHtml]="toast.message"></div>
+			} @else {
+			<ng-container *luPortal="toast.message"></ng-container>
+			}
 		</div>
 		<button type="button" class="toasts-item-kill" (click)="removeToast(toast)" (animationend)="removeToast(toast)">
 			<span class="lucca-icon icon-signClose mod-XS" aria-hidden="true"></span>
