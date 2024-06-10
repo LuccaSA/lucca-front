@@ -1,4 +1,4 @@
-import { booleanAttribute, DestroyRef, Directive, ElementRef, HostBinding, HostListener, inject, Injector, input, Input, signal, TemplateRef, ViewContainerRef } from '@angular/core';
+import { booleanAttribute, DestroyRef, Directive, ElementRef, HostBinding, HostListener, inject, Injector, input, Input, InputSignal, signal, TemplateRef, ViewContainerRef } from '@angular/core';
 import { ConnectedPosition, ConnectionPositionPair, Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
 import { PopoverContentComponent } from './content/popover-content/popover-content.component';
@@ -40,15 +40,15 @@ export class PopoverDirective {
 	})
 	luPopoverDisabled = false;
 
-	@Input()
 	luPopoverTrigger = input<'click' | 'click+hover'>('click');
 
 	@Input()
 	customPositions?: ConnectionPositionPair[];
 
-	luPopoverOpenDelay = input(300);
+	// We have to type these two for Compodoc to find the right type and tell Storybook these aren't strings
+	luPopoverOpenDelay: InputSignal<number> = input<number>(300);
 
-	luPopoverCloseDelay = input(100);
+	luPopoverCloseDelay: InputSignal<number> = input<number>(100);
 
 	open$ = new Subject<void>();
 

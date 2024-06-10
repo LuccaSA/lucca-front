@@ -1,9 +1,12 @@
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { configureLuPopover, PopoverDirective } from '@lucca-front/ng/popover2';
-import { applicationConfig, Meta, moduleMetadata } from '@storybook/angular';
+import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { HiddenArgType } from '../../../helpers/common-arg-types';
+import { cleanupTemplate, generateInputs } from '../../../helpers/stories';
 
 export default {
 	title: 'Documentation/Overlays/Popover2/Angular',
+	component: PopoverDirective,
 	decorators: [
 		applicationConfig({
 			providers: [configureLuPopover()],
@@ -12,21 +15,32 @@ export default {
 			imports: [ButtonComponent, PopoverDirective],
 		}),
 	],
-	render: () => {
+	argTypes: {
+		luPopover2: HiddenArgType,
+	},
+} as Meta;
+
+export const Basic: StoryObj<PopoverDirective> = {
+	render: (args, { argTypes }) => {
 		return {
-			template: `<button luButton [luPopover2]="contentRef">Click me!</button>
+			template: cleanupTemplate(`<button luButton [luPopover2]="contentRef" ${generateInputs(args, argTypes)}>Click me!</button>
 <ng-template #contentRef>
 <ul class="button-group mod-outlined u-flexDirectionColumn" style="width: 15rem">
     <li class="button-group-item"><button type="button" class="button mod-outlined">A</button></li>
     <li class="button-group-item"><button type="button" class="button mod-outlined">B</button></li>
     <li class="button-group-item"><button type="button" class="button mod-outlined">C</button></li>
-	<li class="button-group-item"><button type="button" class="button mod-outlined">D</button></li>
-	<li class="button-group-item"><button type="button" class="button mod-outlined">E</button></li>
+		<li class="button-group-item"><button type="button" class="button mod-outlined">D</button></li>
+		<li class="button-group-item"><button type="button" class="button mod-outlined">E</button></li>
 </ul>
 </ng-template>
-`,
+`),
 		};
 	},
-} as Meta;
-
-export const Basic = {};
+	args: {
+		luPopoverTrigger: 'click',
+		luPopoverCloseDelay: 100,
+		luPopoverOpenDelay: 300,
+		luPopoverDisabled: false,
+		luPopoverPosition: 'above',
+	},
+};
