@@ -7,7 +7,7 @@
 		</div>
 		<button
 			type="button"
-			class="button toasts-item-kill"
+			class="toasts-item-kill"
 			(click)="removeToast(toast)"
 			(animationend)="(!isOnlyDismissibleManually(toast) && toast.duration > 0) ? removeToast(toast) : null"
 			[style.animation-duration]="(!isOnlyDismissibleManually(toast) && toast.duration > 0) ? toast.duration + 'ms' : null"

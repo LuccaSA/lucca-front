@@ -122,11 +122,11 @@
 	&:hover,
 	&:focus-visible {
 		--components-button-color: var(--colors-white-color);
-		--components-button-backgroundColor: var(--palettes-900, var(--palettes-neutral-900));
+		--components-button-backgroundColor: var(--palettes-neutral-900);
 	}
 
 	&:active {
-		--components-button-backgroundColor: var(--palettes-700, var(--palettes-neutral-700));
+		--components-button-backgroundColor: var(--palettes-neutral-700);
 	}
 }
 

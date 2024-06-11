@@ -59,6 +59,10 @@
 		}
 
 		.toasts-item-kill {
+			// the button class should be added to the component, but in the meantime we initialize the component here
+			@include button.vars;
+			@include button.component;
+
 			@include button.onlyIcon;
 			@include button.text;
 			@include button.inverted;
