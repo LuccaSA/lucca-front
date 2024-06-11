@@ -1,4 +1,5 @@
 import { booleanAttribute, ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { LuccaIcon } from '@lucca-front/icons';
 import { Palette } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
@@ -10,7 +11,7 @@ import { IconComponent } from '@lucca-front/ng/icon';
 	styleUrls: ['./tag.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	encapsulation: ViewEncapsulation.None,
-	imports: [IconComponent],
+	imports: [IconComponent, RouterLink],
 })
 export class TagComponent {
 	@Input({ required: true })
@@ -22,6 +23,7 @@ export class TagComponent {
 	 */
 	size: 'M' | 'S' = 'M';
 
+	@Input()
 	/**
 	 * Which palette should be used for the entire callout.
 	 * Defaults to none (inherits parent palette)
@@ -35,7 +37,10 @@ export class TagComponent {
 	outlined = false;
 
 	@Input()
-	href: string;
+	/**
+	 * For routerLink usage
+	 */
+	link: string;
 
 	@Input()
 	/**

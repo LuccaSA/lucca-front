@@ -3,7 +3,7 @@ export const PaletteArgType = {
 	control: {
 		type: 'select',
 	},
-};
+} as const;
 
 export const PaletteAllArgType = {
 	options: [
@@ -29,7 +29,7 @@ export const PaletteAllArgType = {
 	control: {
 		type: 'select',
 	},
-};
+} as const;
 
 export const HiddenArgType = {
 	table: {
