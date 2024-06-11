@@ -1,189 +1,161 @@
-// Based on Intl number input
-// (more info: https://dm4t2.github.io/)
+import { NumberFormatOptions } from './number-format.models';
 
-import { DECIMAL_SEPARATORS, INTEGER_PATTERN, NumberFormatConfig, NumberFormatCurrencyDisplay, NumberFormatOptions, NumberFormatStyle, NumberFormatUnitDisplay } from './number-format.models';
-import { escapeRegExp, getPrefix, getSuffix, substringBefore } from './number-format.utils';
+const VALUE_TYPES: Intl.NumberFormatPartTypes[] = ['integer', 'decimal', 'fraction', 'group', 'minusSign'];
+
+const DIGIT_TYPES: Intl.NumberFormatPartTypes[] = ['integer', 'decimal', 'fraction'];
+
+const SUFFIX_PREFIX_TYPES: Intl.NumberFormatPartTypes[] = ['percent', 'percentSign', 'currency', 'code', 'symbol', 'name', 'unit'];
 
 export class NumberFormat {
-	locale?: string;
-	style?: NumberFormatStyle;
-	currency?: string;
-	currencyDisplay?: NumberFormatCurrencyDisplay;
-	unit?: string;
-	unitDisplay?: NumberFormatUnitDisplay;
-	digits: string[];
-	decimalSymbol: string | undefined;
-	groupingSymbol: string | undefined;
-	minusSymbol: string;
-	minimumFractionDigits: number;
-	maximumFractionDigits: number;
-	prefix: string;
-	negativePrefix: string;
-	suffix: string[];
+	#locale: string;
+	#options: Intl.NumberFormatOptions;
+	#focusIntlNumberFormat: Intl.NumberFormat;
+	#intlNumberFormat: Intl.NumberFormat;
 
-	constructor(config: NumberFormatConfig) {
-		const { style, currency, currencyDisplay, unit, unitDisplay, locale, precision } = config;
-		const createNumberFormat = (options: NumberFormatOptions) =>
-			new Intl.NumberFormat(locale, {
-				currency,
-				currencyDisplay,
-				unit,
-				unitDisplay,
-				style,
-				...options,
-			});
-		const numberFormat = createNumberFormat({ minimumFractionDigits: style !== 'currency' ? 1 : undefined });
-		const formatParts = numberFormat.formatToParts(style === 'percent' ? 1234.56 : 123456);
-
-		this.locale = locale;
-		this.style = style;
-		this.currency = currency;
-		this.currencyDisplay = currencyDisplay;
-		this.unit = unit;
-		this.unitDisplay = unitDisplay;
-		this.digits = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((i) => i.toLocaleString(locale));
-		this.decimalSymbol = formatParts.find(({ type }) => type === 'decimal')?.value;
-		this.groupingSymbol = formatParts.find(({ type }) => type === 'group')?.value;
-		this.minusSymbol = substringBefore(Number(-1).toLocaleString(locale), this.digits[1]);
-
-		if (this.decimalSymbol === undefined) {
-			this.minimumFractionDigits = this.maximumFractionDigits = 0;
-		} else if (typeof precision === 'number') {
-			this.minimumFractionDigits = this.maximumFractionDigits = precision;
-		} else if (typeof precision === 'object') {
-			this.minimumFractionDigits = precision.min ?? 0;
-			this.maximumFractionDigits = precision.max ?? 15;
-		} else {
-			const { maximumFractionDigits, minimumFractionDigits } = new Intl.NumberFormat(locale, { currency, unit, style }).resolvedOptions();
-			this.minimumFractionDigits = minimumFractionDigits;
-			this.maximumFractionDigits = maximumFractionDigits;
-		}
-
-		this.prefix = getPrefix(numberFormat.formatToParts(1));
-		this.suffix = [getSuffix(createNumberFormat({ minimumFractionDigits: 0 }).formatToParts(1)), getSuffix(numberFormat.formatToParts(2))];
-		this.negativePrefix = getPrefix(numberFormat.formatToParts(-1));
+	constructor({ locale, ...options }: NumberFormatOptions) {
+		this.#locale = locale;
+		this.#options = this.#applyBoundariesToDigitOptions(options);
+		this.#intlNumberFormat = new Intl.NumberFormat(this.#locale, this.#options);
+		this.#focusIntlNumberFormat = new Intl.NumberFormat(this.#locale, {
+			...this.#options,
+			minimumFractionDigits: 0,
+		});
 	}
 
-	parse(str: string | null): number | null {
-		if (str) {
-			const negative = this.isNegative(str);
-			str = this.normalizeDigits(str);
-			str = this.stripPrefixOrSuffix(str);
-			str = this.stripMinusSymbol(str);
-			const fraction = this.decimalSymbol ? `(?:${escapeRegExp(this.decimalSymbol)}(\\d*))?` : '';
-			const match = this.stripGroupingSeparator(str).match(new RegExp(`^${INTEGER_PATTERN}${fraction}$`));
-			if (match && this.isValidIntegerFormat(this.decimalSymbol ? str.split(this.decimalSymbol)[0] : str, Number(match[1]))) {
-				const number = Number(`${negative ? '-' : ''}${this.onlyDigits(match[1])}.${this.onlyDigits(match[2] || '')}`);
-				if (this.style === 'percent') {
-					return Number((number / 100).toFixed(this.maximumFractionDigits + 2));
-				} else {
-					return number;
-				}
-			}
+	#applyBoundariesToDigitOptions({
+		style,
+		minimumFractionDigits,
+		maximumFractionDigits,
+		minimumIntegerDigits,
+		minimumSignificantDigits,
+		maximumSignificantDigits,
+		...options
+	}: Intl.NumberFormatOptions): Intl.NumberFormatOptions {
+		style = style ?? 'decimal';
+		// https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat#minimumfractiondigits
+		minimumFractionDigits = Math.min(Math.max(minimumFractionDigits ?? 0, 0), 20);
+		// https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat#maximumfractiondigits
+		maximumFractionDigits = Math.min(Math.max(maximumFractionDigits ?? 2, minimumFractionDigits), 20);
+		// https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat#maximumfractiondigits
+		minimumIntegerDigits = Math.min(Math.max(minimumFractionDigits ?? 1, 1), 21);
+		// https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat#minimumsignificantdigits
+		minimumSignificantDigits = Math.min(Math.max(minimumSignificantDigits ?? 1, 1), 21);
+		// https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat#maximumsignificantdigits
+		maximumSignificantDigits = Math.min(Math.max(maximumSignificantDigits ?? 21, minimumSignificantDigits), 21);
+		return {
+			...options,
+			style,
+			minimumFractionDigits,
+			maximumFractionDigits,
+			minimumIntegerDigits,
+			minimumSignificantDigits,
+			maximumSignificantDigits,
+		};
+	}
+
+	hasMinusSignAtStart(text: string): boolean {
+		return text.match(new RegExp(`^-`, 'g')) !== null;
+	}
+
+	hasDecimalAtEnd(text: string): boolean {
+		return text.match(new RegExp(`[.,]$`, 'g')) !== null;
+	}
+
+	getSuffix(value: number | null): string | null {
+		value = value ?? 1;
+
+		const parts = this.#intlNumberFormat.formatToParts(value).reverse();
+		const indexOfFirstDigit = parts.findIndex((p) => DIGIT_TYPES.includes(p.type));
+		const indexOfFirstSuffix = parts.findIndex((p) => SUFFIX_PREFIX_TYPES.includes(p.type));
+		if (indexOfFirstSuffix >= 0 && indexOfFirstSuffix < indexOfFirstDigit) {
+			return parts[indexOfFirstSuffix].value;
 		}
 		return null;
 	}
 
-	isValidIntegerFormat(formattedNumber: string, integerNumber: number): boolean {
-		const options = {
-			style: this.style,
-			currency: this.currency,
-			currencyDisplay: this.currencyDisplay,
-			unit: this.unit,
-			unitDisplay: this.unitDisplay,
-			minimumFractionDigits: 0,
-		};
-		if (this.style === 'percent') {
-			integerNumber /= 100;
+	getPrefix(value: number | null): string | null {
+		value = value ?? 1;
+
+		const parts = this.#intlNumberFormat.formatToParts(value);
+		const indexOfLastDigit = parts.findIndex((p) => DIGIT_TYPES.includes(p.type));
+		const indexOfLastSuffix = parts.findIndex((p) => SUFFIX_PREFIX_TYPES.includes(p.type));
+		if (indexOfLastSuffix >= 0 && indexOfLastSuffix < indexOfLastDigit) {
+			return parts[indexOfLastSuffix].value;
 		}
-		return [
-			this.stripPrefixOrSuffix(
-				this.normalizeDigits(
-					integerNumber.toLocaleString(this.locale, {
-						...options,
-						useGrouping: true,
-					}),
-				),
-			),
-			this.stripPrefixOrSuffix(
-				this.normalizeDigits(
-					integerNumber.toLocaleString(this.locale, {
-						...options,
-						useGrouping: false,
-					}),
-				),
-			),
-		].includes(formattedNumber);
+		return null;
 	}
 
-	format(
-		value: number | null,
-		options: Intl.NumberFormatOptions = {
-			minimumFractionDigits: this.minimumFractionDigits,
-			maximumFractionDigits: this.maximumFractionDigits,
-		},
-	): string {
-		return value != null
-			? new Intl.NumberFormat(this.locale, {
-					style: this.style,
-					currency: this.currency,
-					currencyDisplay: this.currencyDisplay,
-					unit: this.unit,
-					unitDisplay: this.unitDisplay,
-					...options,
-				}).format(this.style === 'percent' ? value / 100 : value)
-			: '';
-	}
+	/**
+	 * Parse string to number
+	 * @param text
+	 */
+	parse(text: string): number | null {
+		const hasMinusSignAtStart = this.hasMinusSignAtStart(text);
 
-	toFraction(str: string): string {
-		return `${this.digits[0]}${this.decimalSymbol}${this.onlyLocaleDigits(str.slice(1)).slice(0, this.maximumFractionDigits)}`;
-	}
+		// Keep only digits and decimal delimiter
+		text = text.replace(new RegExp(`[^.,0-9]`, 'g'), '');
 
-	isFractionIncomplete(str: string): boolean {
-		return !!this.normalizeDigits(this.stripGroupingSeparator(str)).match(new RegExp(`^${INTEGER_PATTERN}${escapeRegExp(this.decimalSymbol)}$`));
-	}
+		// Replace decimal delimiter by '.' before casting string to number
+		text = text.replace(new RegExp(`[,]`, 'g'), '.');
 
-	isNegative(str: string): boolean {
-		return str.startsWith(this.negativePrefix) || str.replace('-', this.minusSymbol).startsWith(this.minusSymbol);
-	}
-
-	insertPrefixOrSuffix(str: string, negative: boolean): string {
-		return `${negative ? this.negativePrefix : this.prefix}${str}${this.suffix[1]}`;
-	}
-
-	stripGroupingSeparator(str: string): string {
-		return this.groupingSymbol !== undefined ? str.replace(new RegExp(escapeRegExp(this.groupingSymbol), 'g'), '') : str;
-	}
-
-	stripMinusSymbol(str: string): string {
-		return str.replace('-', this.minusSymbol).replace(this.minusSymbol, '');
-	}
-
-	stripPrefixOrSuffix(str: string): string {
-		return str.replace(this.negativePrefix, '').replace(this.prefix, '').replace(this.suffix[1], '').replace(this.suffix[0], '');
-	}
-
-	normalizeDecimalSeparator(str: string, from: number): string {
-		DECIMAL_SEPARATORS.forEach((s) => {
-			str = str.slice(0, from) + str.slice(from).replace(s, this.decimalSymbol);
-		});
-		return str;
-	}
-
-	normalizeDigits(str: string): string {
-		if (this.digits[0] !== '0') {
-			this.digits.forEach((digit, index) => {
-				str = str.replace(new RegExp(digit, 'g'), String(index));
-			});
+		// Keep only first decimalDelimiter
+		const parts = text.split('.');
+		text = parts[0];
+		if (parts.length > 1) {
+			const fraction = parts
+				.slice(1)
+				.join('')
+				//ignore digits above maximumFractionDigits
+				.slice(0, this.#options.maximumFractionDigits ?? 2);
+			text += `.${fraction}`;
 		}
-		return str;
+
+		if (text.trim() === '' || isNaN(+text)) {
+			return null;
+		}
+
+		const value = hasMinusSignAtStart ? -text : +text;
+		return this.#options.style === 'percent' ? value / 100 : value;
 	}
 
-	onlyDigits(str: string): string {
-		return this.normalizeDigits(str).replace(/\D+/g, '');
+	format(value: number | null): string {
+		if (value === null) {
+			return '';
+		}
+		return this.#intlNumberFormat.format(value);
 	}
 
-	onlyLocaleDigits(str: string): string {
-		return str.replace(new RegExp(`[^${this.digits.join('')}]*`, 'g'), '');
+	countDecimalOccurences(text: string): number {
+		return text.match(new RegExp(`[.,]`, 'g'))?.length ?? 0;
+	}
+
+	getFocusFormat(value: number | null): string {
+		if (value === null) {
+			return '';
+		}
+		const parts = this.#focusIntlNumberFormat.formatToParts(value);
+		const minusSign = parts.find((p) => p.type === 'minusSign')?.value ?? '';
+		const integerPart = parts
+			.filter((p) => p.type === 'integer')
+			.map((p) => p.value)
+			.join('');
+		const decimal = parts.find((p) => p.type === 'decimal') ? '.' : '';
+		const fractionPart = parts
+			.filter((p) => p.type === 'fraction')
+			.map((p) => p.value)
+			.join('');
+
+		return `${minusSign}${integerPart}${decimal}${fractionPart}`;
+	}
+
+	getBlurFormat(value: number | null): string {
+		if (value === null) {
+			return '';
+		}
+		return this.#intlNumberFormat
+			.formatToParts(value)
+			.filter((p) => VALUE_TYPES.includes(p.type))
+			.map((p) => p.value)
+			.join('');
 	}
 }

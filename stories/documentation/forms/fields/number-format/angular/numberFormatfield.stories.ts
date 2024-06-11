@@ -29,16 +29,38 @@ export default {
 			},
 		},
 		formatStyle: {
-			options: ['decimal', 'percent', 'currency'],
+			options: ['decimal', 'percent', 'currency', 'unit'],
 			control: {
 				type: 'select',
 			},
 		},
-		currencyCode: {
+		currency: {
 			options: ['EUR', 'USD', 'CNY', 'JPY'],
 			control: {
 				type: 'select',
 			},
+			if: { arg: 'formatStyle', eq: 'currency' },
+		},
+		currencyDisplay: {
+			options: ['code', 'symbol', 'narrowSymbol', 'name'],
+			control: {
+				type: 'select',
+			},
+			if: { arg: 'formatStyle', eq: 'currency' },
+		},
+		unit: {
+			options: ['second', 'kilometer', 'kilogram'],
+			control: {
+				type: 'select',
+			},
+			if: { arg: 'formatStyle', eq: 'unit' },
+		},
+		unitDisplay: {
+			options: ['short', 'narrow', 'long'],
+			control: {
+				type: 'select',
+			},
+			if: { arg: 'formatStyle', eq: 'unit' },
 		},
 	},
 } as Meta;
@@ -84,6 +106,6 @@ export const Basic: StoryObj<NumberFormatInputComponent & { disabled: boolean } 
 		placeholder: 'Placeholder',
 		tooltip: 'Je suis un message d’aide',
 		formatStyle: 'decimal',
-		currencyCode: 'EUR',
+		currency: 'EUR',
 	},
 };

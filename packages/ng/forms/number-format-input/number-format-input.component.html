@@ -10,39 +10,38 @@
 		</span>
 	</ng-template>
 
-	<ng-container *ngIf="prefix">
-		<ng-container
-			*ngTemplateOutlet="addon; context:{
-			type: 'prefix',
-			addon: prefix
-     }"
-		>
-		</ng-container>
+	@if (prefix()) {
+	<ng-container
+		*ngTemplateOutlet="addon; context:{
+				type: 'prefix',
+				addon: prefix()
+	     }"
+	>
 	</ng-container>
-	<ng-container *ngIf="suffix">
-		<ng-container
-			*ngTemplateOutlet="addon; context:{
-			type: 'suffix',
-			addon: suffix
-     }"
-		>
-		</ng-container>
+	} @if (suffix()) {
+	<ng-container
+		*ngTemplateOutlet="addon; context:{
+				type: 'suffix',
+				addon: suffix()
+	     }"
+	>
 	</ng-container>
+	}
 
 	<div class="textField-input">
 		<input
 			luInput
 			luNumberFormatInput
-			[formatConfig]="formatOptions"
+			[formatOptions]="formatOptions()"
 			type="text"
 			inputmode="decimal"
 			class="textField-input-value"
-			[placeholder]="placeholder"
+			[placeholder]="placeholder()"
 			[formControl]="ngControl.control"
 			#inputElement
 		/>
 		<div class="textField-input-affix">
-			<button class="textField-input-affix-clear clear" type="button" (click)="clearValue()" *ngIf="hasClearer && inputElement.value">
+			<button class="textField-input-affix-clear clear" type="button" (click)="clearValue()" *ngIf="hasClearer() && inputElement.value">
 				<span aria-hidden="true" class="lucca-icon icon-signClose"></span>
 				<span class="u-mask">{{ intl.clear }}</span>
 			</button>

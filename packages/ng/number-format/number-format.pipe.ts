@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { NumberFormatConfig } from './number-format.models';
+import { NumberFormatOptions } from './number-format.models';
 import { NumberFormat } from './number-format';
 
 @Pipe({
@@ -7,7 +7,7 @@ import { NumberFormat } from './number-format';
 	standalone: true,
 })
 export class LuFormatNumberPipe implements PipeTransform {
-	transform(value: number, config: NumberFormatConfig) {
-		return new NumberFormat(config).format(value);
+	transform(value: number, options: NumberFormatOptions) {
+		return new NumberFormat(options).format(value);
 	}
 }
