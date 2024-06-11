@@ -1,15 +1,15 @@
 @if (href) {
-<a [href]="href" class="tag mod-{{size}} palette-{{palette}}" [class.mod-outlined]="outlined">
+	<a [href]="href" class="tag mod-{{size}} palette-{{palette}}" [class.mod-outlined]="outlined">
 	@if (icon) {
-	<lu-icon [icon]="icon"></lu-icon><span class="tag-content">{{label}}</span>
+		<lu-icon [icon]="icon"></lu-icon><span class="tag-content">{{label}}</span>
 	} @else {
-	{{label}}
+		{{label}}
 	}</a>
 } @else {
-<span class="tag mod-{{size}} palette-{{palette}}" [class.mod-outlined]="outlined">
+	<span class="tag mod-{{size}} palette-{{palette}}" [class.mod-outlined]="outlined">
 	@if (icon) {
-	<lu-icon [icon]="icon"></lu-icon><span class="tag-content">{{label}}</span>
+		<lu-icon [icon]="icon"></lu-icon><span class="tag-content">{{label}}</span>
 	} @else {
-	{{label}}
-}</span>
+		{{label}}
+	}</span>
 }
