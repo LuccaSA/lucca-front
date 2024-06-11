@@ -1,17 +1,8 @@
-@use '@lucca-front/scss/src/components/tableSorted/mods' as tableSorted;
-
-@mixin sortable {
-	@include tableSorted.sortable;
+@mixin alignRight {
+	--components-sorted-direction: row-reverse;
+	--components-sorted-offset: var(--pr-t-spacings-50);
 }
 
-@mixin sortableS {
-	@include tableSorted.sortableS;
-}
-
-@mixin sortableAlignCenter {
-	@include tableSorted.sortableAlignCenter;
-}
-
-@mixin sortableAlignRight {
-	@include tableSorted.sortableAlignRight;
+@mixin alignCenter {
+	--components-sorted-offset: 0;
 }
