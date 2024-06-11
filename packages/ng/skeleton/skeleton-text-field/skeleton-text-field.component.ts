@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
 @Component({
 	selector: 'lu-skeleton-text-field',
@@ -7,4 +7,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 	styleUrl: './skeleton-text-field.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SkeletonTextFieldComponent {}
+export class SkeletonTextFieldComponent {
+	@Input({ transform: booleanAttribute })
+	dark = false;
+}

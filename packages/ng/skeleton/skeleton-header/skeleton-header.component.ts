@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
 @Component({
 	selector: 'lu-skeleton-header',
@@ -7,4 +7,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 	styleUrl: './skeleton-header.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SkeletonHeaderComponent {}
+export class SkeletonHeaderComponent {
+	@Input({ transform: booleanAttribute })
+	dark = false;
+}
