@@ -4,12 +4,17 @@
 @mixin component($atRoot: 'without: rule') {
 	display: block;
 	background-color: var(--pr-t-elevation-surface-raised);
-	box-shadow: var(--pr-t-elevation-shadow-raised);
+	box-shadow: var(--pr-t-elevation-shadow-overlay);
+	border-radius: var(--commons-borderRadius-L);
 	position: relative;
 	min-height: var(--pr-t-spacings-500);
 	min-width: var(--pr-t-spacings-500);
 
 	@at-root {
+		.popover-contentOptional {
+			padding: var(--pr-t-spacings-100) var(--pr-t-spacings-150);
+		}
+
 		.popover-close {
 			@include button.text;
 			@include button.XS;

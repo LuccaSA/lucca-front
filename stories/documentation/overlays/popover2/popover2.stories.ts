@@ -29,13 +29,15 @@ export const Basic: StoryObj<PopoverDirective> = {
 		return {
 			template: cleanupTemplate(`<button luButton [luPopover2]="contentRef" ${generateInputs(args, argTypes)}>Click me!</button>
 <ng-template #contentRef>
-<ul class="button-group mod-outlined u-flexDirectionColumn" style="width: 15rem">
-    <li class="button-group-item"><button type="button" class="button mod-outlined">A</button></li>
-    <li class="button-group-item"><button type="button" class="button mod-outlined">B</button></li>
-    <li class="button-group-item"><button type="button" class="button mod-outlined">C</button></li>
-		<li class="button-group-item"><button type="button" class="button mod-outlined">D</button></li>
-		<li class="button-group-item"><button type="button" class="button mod-outlined">E</button></li>
-</ul>
+	<div class="popover-contentOptional">
+		<ul class="button-group mod-outlined u-flexDirectionColumn" style="width: 15rem">
+		    <li class="button-group-item"><button type="button" class="button mod-outlined">A</button></li>
+		    <li class="button-group-item"><button type="button" class="button mod-outlined">B</button></li>
+		    <li class="button-group-item"><button type="button" class="button mod-outlined">C</button></li>
+				<li class="button-group-item"><button type="button" class="button mod-outlined">D</button></li>
+				<li class="button-group-item"><button type="button" class="button mod-outlined">E</button></li>
+		</ul>
+	</div>
 </ng-template>
 `),
 		};
