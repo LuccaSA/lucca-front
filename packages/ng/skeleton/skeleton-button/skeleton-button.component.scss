@@ -1,0 +1,12 @@
+@use '@lucca-front/scss/src/components/button';
+@use '@lucca-front/scss/src/components/skeleton';
+
+.skeleton.is-loading {
+  .button {
+    background-color: transparent;
+
+    .skeleton-item {
+      width: 4rem;
+    }
+	}
+}
