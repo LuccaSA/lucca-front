@@ -7,9 +7,4 @@
 	&.mod-bottom {
 		@include bottom;
 	}
-
-	// Required while toast timer is handled by animation end
-	&.mod-withCircularGauge {
-		@include circularGauge;
-	}
 }

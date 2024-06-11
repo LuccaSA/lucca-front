@@ -36,7 +36,6 @@
 @forward 'switch'; // 4 Ko
 @forward 'switchField'; // new component for switch
 @forward 'file'; // 5 Ko
-@forward 'toast'; // 5 Ko
 @forward 'layout'; // 5 Ko
 @forward 'radioButtons'; // 5 Ko
 @forward 'table'; // 7 Ko
@@ -81,6 +80,7 @@
 @forward 'userPopover';
 @forward 'scrollBox';
 @forward 'comment';
+@forward 'toast'; // 5 Ko
 
 // Deprecated CSS components
 // @forward 'gridLegacy'; // 40 Ko

@@ -1,24 +1,3 @@
 @mixin bottom {
-	top: auto;
-	bottom: var(--pr-t-spacings-300);
-}
-
-// Required while toast timer is handled by animation end
-@mixin circularGauge {
-	.circularGauge {
-		opacity: 0;
-
-		circle {
-			animation: gauge;
-		}
-	}
-
-	&:hover,
-	&:focus-within {
-		.circularGauge circle {
-			animation-play-state: paused;
-		}
-	}
-
-	@keyframes gauge {}
+	--components-toasts-inset: auto var(--components-toasts-right) var(--components-toasts-bottom) auto;
 }

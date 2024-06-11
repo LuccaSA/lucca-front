@@ -1,26 +1,13 @@
-@use '@lucca-front/scss/src/commons/utils/reset';
-@use '@lucca-front/icons/src/commons/utils/icon';
+@use '@lucca-front/scss/src/components/button/exports' as button;
 
 @mixin component($atRoot: 'without: rule') {
-	@keyframes toast {
-		0% {
-			transform: translateY(var(--pr-t-spacings-200));
-			opacity: 0;
-		}
-
-		100% {
-			opacity: 1;
-		}
-	}
-
-	right: var(--components-toasts-right);
-	top: var(--components-toasts-top);
 	max-width: var(--components-toasts-maxwidth);
 	display: flex;
 	flex-direction: column;
 	align-items: flex-end;
 	position: fixed;
 	z-index: 9999;
+	inset: var(--components-toasts-inset);
 
 	@at-root ($atRoot) {
 		.toasts-item {
@@ -30,17 +17,34 @@
 			padding: var(--pr-t-spacings-50);
 			margin-bottom: var(--components-toasts-margin-bottom);
 			background-color: var(--palettes-neutral-800);
-			animation-name: toast;
+			animation-name: toastsItem;
 			animation-duration: var(--commons-animations-durations-standard);
 			animation-iteration-count: 1;
 			border-radius: var(--commons-borderRadius-XL);
 			overflow: hidden;
 			position: relative;
 			transform-origin: top;
+
+			@keyframes toastsItem {
+				0% {
+					transform: translateY(var(--pr-t-spacings-200));
+					opacity: 0;
+				}
+		
+				100% {
+					opacity: 1;
+				}
+			}
+
+			&:hover,
+			&:focus-within {
+				.toasts-item-kill {
+					animation-play-state: paused;
+				}
+			}
 		}
 
 		.toast-item-icon {
-			display: block;
 			background: var(--palettes-700, var(--palettes-product-700));
 			border-radius: var(--commons-borderRadius-L);
 			padding: var(--pr-t-spacings-100) var(--pr-t-spacings-50);
@@ -55,18 +59,15 @@
 		}
 
 		.toasts-item-kill {
-			@include reset.button;
-			width: auto;
-			color: var(--colors-white-color);
-			transition-property: opacity;
-			transition-duration: var(--commons-animations-durations-fast);
-			height: 1.5rem;
-			min-width: 1.5rem;
-			margin: var(--pr-t-spacings-100);
-			cursor: pointer;
-			position: relative;
-			border: 0;
-			background: transparent;
+			@include button.onlyIcon;
+			@include button.text;
+			@include button.inverted;
+
+			@keyframes timer {}
+
+			align-self: flex-start;
+			border-radius: var(--commons-borderRadius-L);
+			animation-name: timer;
 		}
 	}
 }
