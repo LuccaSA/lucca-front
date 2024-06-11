@@ -7,9 +7,8 @@ import { FormFieldIdDirective } from '../form-field-id.directive';
 import { getIntl } from '@lucca-front/ng/core';
 import { LU_NUMBERFORMATFIELD_TRANSLATIONS } from './number-format-input.translate';
 import { injectNgControl } from '../inject-ng-control';
-import { NumberFormatCurrencyDisplay, NumberFormatDirective, NumberFormatOptions, NumberFormatStyle, NumberFormatUnit, NumberFormatUnitDisplay } from '@lucca-front/ng/number-format';
+import { NumberFormatCurrencyDisplay, NumberFormatDirective, NumberFormat, NumberFormatOptions, NumberFormatStyle, NumberFormatUnit, NumberFormatUnitDisplay } from '@lucca-front/ng/number-format';
 import { TextfieldTextAddon } from '../text-input/text-input-addon';
-import { NumberFormat } from '../../number-format/number-format';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { startWith } from 'rxjs/operators';
 
