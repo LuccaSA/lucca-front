@@ -2,47 +2,46 @@
 @use '@lucca-front/icons/src/icon/exports' as icon;
 
 @mixin component($atRoot: 'without: rule') {
-    @include button.text;
-    @include button.withIcon;
+	@include button.text;
+	@include button.withIcon;
 
-    --components-button-padding: 0 var(--pr-t-spacings-50);
-    --components-button-gap: var(--pr-t-spacings-25);
+	--components-button-padding: 0 var(--pr-t-spacings-50);
+	--components-button-gap: var(--pr-t-spacings-25);
 
-    user-select: none;
-    font-weight: 400;
-    vertical-align: top;
-    align-items: flex-start;
-    left: var(--components-sorted-offset);
-    text-align: inherit;
-    flex-direction: var(--components-sorted-direction);
-	
+	user-select: none;
+	font-weight: 400;
+	vertical-align: top;
+	align-items: flex-start;
+	left: var(--components-sorted-offset);
+	text-align: inherit;
+	flex-direction: var(--components-sorted-direction);
+
 	@at-root ($atRoot) {
 		.indexTable-head-row-cell-sortableButton-arrows {
-            margin-top: var(--pr-t-spacings-50);
-            position: relative;
-            width: 1rem;
-            height: 1rem;
-        }
+			margin-top: var(--pr-t-spacings-50);
+			position: relative;
+			width: 1rem;
+			height: 1rem;
+		}
 
-        .indexTable-head-row-cell-sortableButton-arrows-ascending,
-        .indexTable-head-row-cell-sortableButton-arrows-descending {
-            @include icon.XS;
+		.indexTable-head-row-cell-sortableButton-arrows-ascending,
+		.indexTable-head-row-cell-sortableButton-arrows-descending {
+			@include icon.XS;
 
-            position: absolute;
-            inset: 0;
-            color: var(--components-sorted-arrowColor);
-            transition-property: translate, scale, color;
-            transition-duration: var(--commons-animations-durations-slow);
-            scale: var(--components-sorted-arrowScale);
-        }
+			position: absolute;
+			inset: 0;
+			color: var(--components-sorted-arrowColor);
+			transition-property: translate, scale, color;
+			transition-duration: var(--commons-animations-durations-slow);
+			scale: var(--components-sorted-arrowScale);
+		}
 
-        .indexTable-head-row-cell-sortableButton-arrows-ascending {
-            translate: 0 calc(var(--pr-t-spacings-50) * -1);
-        }
+		.indexTable-head-row-cell-sortableButton-arrows-ascending {
+			translate: 0 calc(var(--pr-t-spacings-50) * -1);
+		}
 
-        .indexTable-head-row-cell-sortableButton-arrows-descending {
-            translate: 0 var(--pr-t-spacings-50);
-        }
+		.indexTable-head-row-cell-sortableButton-arrows-descending {
+			translate: 0 var(--pr-t-spacings-50);
+		}
 	}
 }
-
