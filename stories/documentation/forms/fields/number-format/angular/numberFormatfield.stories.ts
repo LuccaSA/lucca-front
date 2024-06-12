@@ -28,6 +28,12 @@ export default {
 				type: 'select',
 			},
 		},
+		min: {
+			type: 'number',
+		},
+		max: {
+			type: 'number',
+		},
 		formatStyle: {
 			options: ['decimal', 'percent', 'currency', 'unit'],
 			control: {

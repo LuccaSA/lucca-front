@@ -7,10 +7,10 @@ const DIGIT_TYPES: Intl.NumberFormatPartTypes[] = ['integer', 'decimal', 'fracti
 const SUFFIX_PREFIX_TYPES: Intl.NumberFormatPartTypes[] = ['percent', 'percentSign', 'currency', 'code', 'symbol', 'name', 'unit'];
 
 export class NumberFormat {
-	#locale: string;
-	#options: Intl.NumberFormatOptions;
-	#focusIntlNumberFormat: Intl.NumberFormat;
-	#intlNumberFormat: Intl.NumberFormat;
+	readonly #locale: string;
+	readonly #options: Intl.NumberFormatOptions;
+	readonly #focusIntlNumberFormat: Intl.NumberFormat;
+	readonly #intlNumberFormat: Intl.NumberFormat;
 
 	constructor({ locale, ...options }: NumberFormatOptions) {
 		this.#locale = locale;

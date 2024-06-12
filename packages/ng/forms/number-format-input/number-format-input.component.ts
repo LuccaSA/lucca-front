@@ -2,20 +2,19 @@ import { booleanAttribute, Component, computed, ElementRef, inject, input, LOCAL
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormFieldComponent, InputDirective } from '@lucca-front/ng/form-field';
 import { NoopValueAccessorDirective } from '../noop-value-accessor.directive';
-import { NgIf, NgTemplateOutlet } from '@angular/common';
+import { NgIf } from '@angular/common';
 import { FormFieldIdDirective } from '../form-field-id.directive';
 import { getIntl } from '@lucca-front/ng/core';
 import { LU_NUMBERFORMATFIELD_TRANSLATIONS } from './number-format-input.translate';
 import { injectNgControl } from '../inject-ng-control';
-import { NumberFormatCurrencyDisplay, NumberFormatDirective, NumberFormat, NumberFormatOptions, NumberFormatStyle, NumberFormatUnit, NumberFormatUnitDisplay } from '@lucca-front/ng/number-format';
-import { TextfieldTextAddon } from '../text-input/text-input-addon';
+import { NumberFormat, NumberFormatCurrencyDisplay, NumberFormatDirective, NumberFormatOptions, NumberFormatStyle, NumberFormatUnit, NumberFormatUnitDisplay } from '@lucca-front/ng/number-format';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { startWith } from 'rxjs/operators';
 
 @Component({
 	selector: 'lu-number-format-input',
 	standalone: true,
-	imports: [FormFieldComponent, InputDirective, NgIf, ReactiveFormsModule, FormFieldIdDirective, NgTemplateOutlet, NumberFormatDirective],
+	imports: [FormFieldComponent, InputDirective, NgIf, ReactiveFormsModule, FormFieldIdDirective, NumberFormatDirective],
 	templateUrl: './number-format-input.component.html',
 	hostDirectives: [NoopValueAccessorDirective],
 	encapsulation: ViewEncapsulation.None,
@@ -35,6 +34,10 @@ export class NumberFormatInputComponent {
 
 	unitDisplay = input<NumberFormatUnitDisplay | undefined>(undefined);
 
+	min = input<number | undefined>(undefined);
+
+	max = input<number | undefined>(undefined);
+
 	placeholder = input<string>('');
 
 	hasClearer = input(false, { transform: booleanAttribute });
@@ -44,8 +47,8 @@ export class NumberFormatInputComponent {
 	#suffixPrefixValue = toSignal(this.ngControl.valueChanges.pipe(startWith(1)));
 
 	#numberFormat = computed(() => new NumberFormat(this.formatOptions()));
-	prefix = computed(() => ({ content: this.#numberFormat().getPrefix(this.#suffixPrefixValue() as number) }) as TextfieldTextAddon);
-	suffix = computed(() => ({ content: this.#numberFormat().getSuffix(this.#suffixPrefixValue() as number) }) as TextfieldTextAddon);
+	prefix = computed(() => this.#numberFormat().getPrefix(this.#suffixPrefixValue() as number));
+	suffix = computed(() => this.#numberFormat().getSuffix(this.#suffixPrefixValue() as number));
 
 	formatOptions = computed(
 		() =>

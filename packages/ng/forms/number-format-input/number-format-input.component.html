@@ -1,31 +1,12 @@
 <div class="textField">
-	<ng-template #addon let-addon="addon" let-type="type">
-		<span class="textField-{{type}}" luFormFieldId="{{type}}" *ngIf="addon.content">
-			<span class="textField-label-{{type}}-item" [attr.aria-label]="addon.ariaLabel">{{ addon.content }}</span>
-		</span>
-		<span class="textField-{{type}}" luFormFieldId="{{type}}" *ngIf="addon.icon">
-			<span class="textField-label-{{type}}-item" [attr.aria-label]="addon.ariaLabel"
-				><span class="lucca-icon icon-{{addon.icon}}"></span
-			></span>
-		</span>
-	</ng-template>
-
 	@if (prefix()) {
-	<ng-container
-		*ngTemplateOutlet="addon; context:{
-				type: 'prefix',
-				addon: prefix()
-	     }"
-	>
-	</ng-container>
+	<span class="textField-prefix" luFormFieldId="prefix">
+		<span class="textField-label-prefix-item" [attr.aria-label]="prefix()">{{ prefix() }}</span>
+	</span>
 	} @if (suffix()) {
-	<ng-container
-		*ngTemplateOutlet="addon; context:{
-				type: 'suffix',
-				addon: suffix()
-	     }"
-	>
-	</ng-container>
+	<span class="textField-suffix" luFormFieldId="suffix">
+		<span class="textField-label-suffix-item" [attr.aria-label]="suffix()">{{ suffix() }}</span>
+	</span>
 	}
 
 	<div class="textField-input">
@@ -33,6 +14,8 @@
 			luInput
 			luNumberFormatInput
 			[formatOptions]="formatOptions()"
+			[min]="min()"
+			[max]="max()"
 			type="text"
 			inputmode="decimal"
 			class="textField-input-value"

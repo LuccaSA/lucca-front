@@ -25,30 +25,34 @@ export class NumberFormatDirective implements ControlValueAccessor {
 	#numberValue = signal<number | null>(null);
 	#isFocused = signal<boolean>(false);
 
+	min = input<number | undefined>(undefined);
+	max = input<number | undefined>(undefined);
 	formatOptions = input.required<NumberFormatOptions>();
 	#numberFormat = computed(() => {
 		return new NumberFormat(this.formatOptions());
 	});
-
-	// suffixChanged = output<string | null>();
-	// prefixChanged = output<string | null>();
-	// formattedValueChanged = output<string | null>();
-	//
-	// constructor() {
-	// 	effect(() => {
-	// 		this.suffixChanged.emit(this.#numberFormat().getSuffix(this.#numberValue()));
-	// 		this.prefixChanged.emit(this.#numberFormat().getPrefix(this.#numberValue()));
-	// 		this.formattedValueChanged.emit(this.#numberFormat().format(this.#numberValue()));
-	// 	});
-	// }
 
 	onChange: (_value: number | undefined | null) => void = () => {};
 
 	onTouched: () => void = (): void => {};
 
 	writeValue(value: number): void {
+		value = this.#applyRange(value);
 		this.#numberValue.set(value);
 		this.#inputElement.value = this.#isFocused() ? this.#numberFormat().getFocusFormat(value) : this.#numberFormat().getBlurFormat(value);
+	}
+
+	#applyRange(value: number | null): number | null {
+		if (value === null) {
+			return null;
+		}
+		if (this.min() !== undefined) {
+			value = Math.max(this.min(), value);
+		}
+		if (this.max() !== undefined) {
+			value = Math.min(this.max(), value);
+		}
+		return value;
 	}
 
 	registerOnChange(fn: (_value: number | undefined | null) => void): void {
@@ -64,7 +68,7 @@ export class NumberFormatDirective implements ControlValueAccessor {
 	}
 	@HostListener('focus') focus(): void {
 		this.#isFocused.set(true);
-		this.#inputElement.value = this.#numberFormat().getFocusFormat(this.#numberValue());
+		this.#inputElement.value = this.#getReformattedInput(this.#inputElement.value, this.#numberValue());
 	}
 
 	@HostListener('blur') lostFocus(): void {
@@ -77,7 +81,10 @@ export class NumberFormatDirective implements ControlValueAccessor {
 		const currentInputValue = this.#inputElement.value;
 
 		let numberValue = this.#numberFormat().parse(currentInputValue);
+		numberValue = this.#applyRange(numberValue);
+
 		const formattedValue = this.#getReformattedInput(currentInputValue, numberValue);
+
 		// format can have an effect on value (ie: fraction min/max)
 		numberValue = this.#numberFormat().parse(formattedValue);
 
@@ -90,8 +97,16 @@ export class NumberFormatDirective implements ControlValueAccessor {
 	#getReformattedInput(inputValue: string, value: number | null): string {
 		let formattedValue = this.#numberFormat().getFocusFormat(value);
 
-		// Preserve minus sign even if no digits provided after it
-		if (formattedValue === '' && inputValue === '-') {
+		// Check if min allows negative values
+		if (this.min() === undefined || this.min() < 0) {
+			// Preserve minus sign even if no digits provided after it
+			if (formattedValue === '' && inputValue === '-') {
+				formattedValue = '-';
+			}
+		}
+
+		// Check if max forces negative values
+		if (this.max() !== undefined && this.max() <= 0 && formattedValue === '') {
 			formattedValue = '-';
 		}
 
