@@ -22,11 +22,10 @@ export class NumberFormatDirective implements ControlValueAccessor {
 	readonly #inputElement = inject<ElementRef<HTMLInputElement>>(ElementRef<HTMLInputElement>).nativeElement;
 	readonly #renderer = inject(Renderer2);
 
-	#numberValue = signal<number | null>(null);
+	#value = signal<number | undefined | null>(null);
+	#valueAtFocus: number | undefined | null = null;
 	#isFocused = signal<boolean>(false);
 
-	min = input<number | undefined>(undefined);
-	max = input<number | undefined>(undefined);
 	formatOptions = input.required<NumberFormatOptions>();
 	#numberFormat = computed(() => {
 		return new NumberFormat(this.formatOptions());
@@ -36,23 +35,10 @@ export class NumberFormatDirective implements ControlValueAccessor {
 
 	onTouched: () => void = (): void => {};
 
-	writeValue(value: number): void {
-		value = this.#applyRange(value);
-		this.#numberValue.set(value);
+	writeValue(value: number | undefined | null): void {
+		value = this.#numberFormat().applyRange(value);
+		this.#value.set(value);
 		this.#inputElement.value = this.#isFocused() ? this.#numberFormat().getFocusFormat(value) : this.#numberFormat().getBlurFormat(value);
-	}
-
-	#applyRange(value: number | null): number | null {
-		if (value === null) {
-			return null;
-		}
-		if (this.min() !== undefined) {
-			value = Math.max(this.min(), value);
-		}
-		if (this.max() !== undefined) {
-			value = Math.min(this.max(), value);
-		}
-		return value;
 	}
 
 	registerOnChange(fn: (_value: number | undefined | null) => void): void {
@@ -67,54 +53,26 @@ export class NumberFormatDirective implements ControlValueAccessor {
 		this.#renderer.setProperty(this.#inputElement, 'disabled', isDisabled);
 	}
 	@HostListener('focus') focus(): void {
+		this.#valueAtFocus = this.#value();
 		this.#isFocused.set(true);
-		this.#inputElement.value = this.#getReformattedInput(this.#inputElement.value, this.#numberValue());
+		this.#inputElement.value = this.#numberFormat().getFocusFormat(this.#value());
 	}
 
 	@HostListener('blur') lostFocus(): void {
 		this.#isFocused.set(false);
-		this.#inputElement.value = this.#numberFormat().getBlurFormat(this.#numberValue());
-		this.onTouched();
+		this.#inputElement.value = this.#numberFormat().getBlurFormat(this.#value());
+		if (this.#valueAtFocus !== this.#value()) {
+			this.onTouched();
+		}
 	}
 
 	@HostListener('input') input(): void {
-		const currentInputValue = this.#inputElement.value;
+		const parsedInput = this.#numberFormat().parse(this.#inputElement.value);
 
-		let numberValue = this.#numberFormat().parse(currentInputValue);
-		numberValue = this.#applyRange(numberValue);
+		this.#inputElement.value = parsedInput.cleanInput;
 
-		const formattedValue = this.#getReformattedInput(currentInputValue, numberValue);
+		this.#value.set(parsedInput.value);
 
-		// format can have an effect on value (ie: fraction min/max)
-		numberValue = this.#numberFormat().parse(formattedValue);
-
-		this.#numberValue.set(numberValue);
-		this.#inputElement.value = formattedValue;
-
-		this.onChange?.(numberValue);
-	}
-
-	#getReformattedInput(inputValue: string, value: number | null): string {
-		let formattedValue = this.#numberFormat().getFocusFormat(value);
-
-		// Check if min allows negative values
-		if (this.min() === undefined || this.min() < 0) {
-			// Preserve minus sign even if no digits provided after it
-			if (formattedValue === '' && inputValue === '-') {
-				formattedValue = '-';
-			}
-		}
-
-		// Check if max forces negative values
-		if (this.max() !== undefined && this.max() <= 0 && formattedValue === '') {
-			formattedValue = '-';
-		}
-
-		// Preserve decimal delimiter even if no digits provided after it
-		if (this.#numberFormat().hasDecimalAtEnd(inputValue) && this.#numberFormat().countDecimalOccurences(formattedValue) === 0) {
-			formattedValue += '.';
-		}
-
-		return formattedValue;
+		this.onChange?.(parsedInput.value);
 	}
 }

@@ -55,6 +55,8 @@ export class NumberFormatInputComponent {
 			({
 				locale: this.#locale,
 				style: this.formatStyle(),
+				min: this.min(),
+				max: this.max(),
 				currency: this.currency(),
 				currencyDisplay: this.currencyDisplay(),
 				unit: this.unit(),

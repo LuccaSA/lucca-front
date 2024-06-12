@@ -1,4 +1,4 @@
-import { NumberFormatOptions } from './number-format.models';
+import { canCastSplittedInputToNumber, joinSplittedInput, NumberFormatOptions, NumberFormatParsedInput, NumberFormatSplittedInput } from './number-format.models';
 
 const VALUE_TYPES: Intl.NumberFormatPartTypes[] = ['integer', 'decimal', 'fraction', 'group', 'minusSign'];
 
@@ -7,17 +7,21 @@ const DIGIT_TYPES: Intl.NumberFormatPartTypes[] = ['integer', 'decimal', 'fracti
 const SUFFIX_PREFIX_TYPES: Intl.NumberFormatPartTypes[] = ['percent', 'percentSign', 'currency', 'code', 'symbol', 'name', 'unit'];
 
 export class NumberFormat {
-	readonly #locale: string;
-	readonly #options: Intl.NumberFormatOptions;
+	readonly locale: string;
+	readonly min: number | undefined;
+	readonly max: number | undefined;
+	readonly options: Intl.NumberFormatOptions;
 	readonly #focusIntlNumberFormat: Intl.NumberFormat;
 	readonly #intlNumberFormat: Intl.NumberFormat;
 
-	constructor({ locale, ...options }: NumberFormatOptions) {
-		this.#locale = locale;
-		this.#options = this.#applyBoundariesToDigitOptions(options);
-		this.#intlNumberFormat = new Intl.NumberFormat(this.#locale, this.#options);
-		this.#focusIntlNumberFormat = new Intl.NumberFormat(this.#locale, {
-			...this.#options,
+	constructor({ locale, min, max, ...options }: NumberFormatOptions) {
+		this.locale = locale;
+		this.min = min;
+		this.max = max;
+		this.options = this.#applyBoundariesToDigitOptions(options);
+		this.#intlNumberFormat = new Intl.NumberFormat(this.locale, this.options);
+		this.#focusIntlNumberFormat = new Intl.NumberFormat(this.locale, {
+			...this.options,
 			minimumFractionDigits: 0,
 		});
 	}
@@ -53,17 +57,10 @@ export class NumberFormat {
 		};
 	}
 
-	hasMinusSignAtStart(text: string): boolean {
-		return text.match(new RegExp(`^-`, 'g')) !== null;
-	}
-
-	hasDecimalAtEnd(text: string): boolean {
-		return text.match(new RegExp(`[.,]$`, 'g')) !== null;
-	}
-
 	getSuffix(value: number | null): string | null {
 		value = value ?? 1;
 
+		// Parts after digits are suffix
 		const parts = this.#intlNumberFormat.formatToParts(value).reverse();
 		const indexOfFirstDigit = parts.findIndex((p) => DIGIT_TYPES.includes(p.type));
 		const indexOfFirstSuffix = parts.findIndex((p) => SUFFIX_PREFIX_TYPES.includes(p.type));
@@ -76,6 +73,7 @@ export class NumberFormat {
 	getPrefix(value: number | null): string | null {
 		value = value ?? 1;
 
+		// Parts before digits are prefix
 		const parts = this.#intlNumberFormat.formatToParts(value);
 		const indexOfLastDigit = parts.findIndex((p) => DIGIT_TYPES.includes(p.type));
 		const indexOfLastSuffix = parts.findIndex((p) => SUFFIX_PREFIX_TYPES.includes(p.type));
@@ -85,41 +83,84 @@ export class NumberFormat {
 		return null;
 	}
 
-	/**
-	 * Parse string to number
-	 * @param text
-	 */
-	parse(text: string): number | null {
-		const hasMinusSignAtStart = this.hasMinusSignAtStart(text);
-
-		// Keep only digits and decimal delimiter
-		text = text.replace(new RegExp(`[^.,0-9]`, 'g'), '');
-
-		// Replace decimal delimiter by '.' before casting string to number
-		text = text.replace(new RegExp(`[,]`, 'g'), '.');
-
-		// Keep only first decimalDelimiter
-		const parts = text.split('.');
-		text = parts[0];
-		if (parts.length > 1) {
-			const fraction = parts
-				.slice(1)
-				.join('')
-				//ignore digits above maximumFractionDigits
-				.slice(0, this.#options.maximumFractionDigits ?? 2);
-			text += `.${fraction}`;
-		}
-
-		if (text.trim() === '' || isNaN(+text)) {
+	applyRange(value: number | null): number | null {
+		if (value === null) {
 			return null;
 		}
-
-		let value = hasMinusSignAtStart ? -text : +text;
-		if (this.#options.style === 'percent') {
-			value /= 100;
-			value = +value.toFixed(this.#options.maximumFractionDigits + 2);
+		if (this.min !== undefined) {
+			value = Math.max(this.min, value);
+		}
+		if (this.max !== undefined) {
+			value = Math.min(this.max, value);
 		}
 		return value;
+	}
+
+	#parseAndSplitInput(input: string): NumberFormatSplittedInput {
+		let minusSign = /^-/g.exec(input)?.[0] ?? '';
+		// if minus sign has been input but range only allows positive values, remove it
+		if (this.min >= 0) {
+			minusSign = '';
+		}
+
+		// Add minus sign by default if range only allows negative values
+		if (this.max < 0) {
+			minusSign = '-';
+		}
+
+		// Keep only digits and decimal delimiter
+		input = input.replace(/[^.,0-9]/g, '');
+
+		// Replace decimal delimiter ',' by '.' before casting string to number
+		input = input.replace(/,/g, '.');
+
+		const parts = input.split('.');
+		const integer = parts[0];
+		const fraction = parts
+			.slice(1)
+			.join('')
+			//ignore digits above maximumFractionDigits
+			.slice(0, this.options.maximumFractionDigits ?? 2);
+		const delimiter = parts.length > 1 ? '.' : '';
+
+		const splittedInput: NumberFormatSplittedInput = {
+			minusSign,
+			integer,
+			delimiter,
+			fraction,
+		};
+
+		// cast input in number only if it has integer or fraction
+		if (canCastSplittedInputToNumber(splittedInput)) {
+			const value = +joinSplittedInput(splittedInput);
+
+			// if value is not in range, fix it and split again !
+			const valueInRange = this.applyRange(value);
+			if (value !== valueInRange) {
+				return this.#parseAndSplitInput(this.getFocusFormat(valueInRange));
+			}
+		}
+
+		return splittedInput;
+	}
+
+	parse(input: string): NumberFormatParsedInput {
+		const splittedInput = this.#parseAndSplitInput(input);
+		const cleanInput = joinSplittedInput(splittedInput);
+		let value: number | null = null;
+
+		if (canCastSplittedInputToNumber(splittedInput)) {
+			value = +joinSplittedInput(splittedInput);
+			if (this.options.style === 'percent') {
+				value /= 100;
+				value = +value.toFixed(this.options.maximumFractionDigits + 2);
+			}
+		}
+		return {
+			splittedInput,
+			cleanInput,
+			value,
+		};
 	}
 
 	format(value: number | null): string {
@@ -129,13 +170,10 @@ export class NumberFormat {
 		return this.#intlNumberFormat.format(value);
 	}
 
-	countDecimalOccurences(text: string): number {
-		return text.match(new RegExp(`[.,]`, 'g'))?.length ?? 0;
-	}
-
-	getFocusFormat(value: number | null): string {
-		if (value === null) {
-			return '';
+	getFocusFormat(value: number | undefined | null): string {
+		if (value === null || value === undefined || isNaN(value)) {
+			// Add minus sign by default if range only allows negative values
+			return this.max < 0 ? '-' : '';
 		}
 		const parts = this.#focusIntlNumberFormat.formatToParts(value);
 		const minusSign = parts.find((p) => p.type === 'minusSign')?.value ?? '';
@@ -152,8 +190,8 @@ export class NumberFormat {
 		return `${minusSign}${integerPart}${decimal}${fractionPart}`;
 	}
 
-	getBlurFormat(value: number | null): string {
-		if (value === null) {
+	getBlurFormat(value: number | undefined | null): string {
+		if (value === null || value === undefined) {
 			return '';
 		}
 		return this.#intlNumberFormat

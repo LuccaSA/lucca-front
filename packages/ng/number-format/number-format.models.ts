@@ -53,6 +53,8 @@ export type NumberFormatCurrencyDisplay = 'code' | 'symbol' | 'narrowSymbol' | '
 
 export interface NumberFormatOptions {
 	locale: string;
+	min?: number | undefined;
+	max?: number | undefined;
 	style: NumberFormatStyle;
 	currency?: string | undefined;
 	currencyDisplay?: NumberFormatCurrencyDisplay | undefined;
@@ -64,4 +66,25 @@ export interface NumberFormatOptions {
 	maximumFractionDigits?: number | undefined;
 	minimumSignificantDigits?: number | undefined;
 	maximumSignificantDigits?: number | undefined;
+}
+
+export interface NumberFormatSplittedInput {
+	minusSign: string;
+	integer: string;
+	delimiter: string;
+	fraction: string;
+}
+
+export interface NumberFormatParsedInput {
+	splittedInput: NumberFormatSplittedInput;
+	cleanInput: string;
+	value: number | null;
+}
+
+export function joinSplittedInput({ minusSign, integer, delimiter, fraction }: NumberFormatSplittedInput): string {
+	return `${minusSign}${integer}${delimiter}${fraction}`;
+}
+
+export function canCastSplittedInputToNumber({ integer, fraction }: NumberFormatSplittedInput): boolean {
+	return integer !== '' || fraction !== '';
 }
