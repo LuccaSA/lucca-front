@@ -40,7 +40,6 @@
 @forward 'table'; // 7 Ko
 @forward 'checkbox'; // 7 Ko
 @forward 'checkboxField'; // new component for checkbox
-@forward 'tableSorted'; // 9 Ko
 @forward 'timeline'; // 10 Ko
 @forward 'button'; // 12 Ko
 @forward 'textfields'; // 13 Ko
@@ -75,6 +74,7 @@
 @forward 'avatar';
 @forward 'indexTable';
 @forward 'indexTableSorted';
+@forward 'tableSorted';
 @forward 'tooltip';
 @forward 'userPopover';
 @forward 'scrollBox';

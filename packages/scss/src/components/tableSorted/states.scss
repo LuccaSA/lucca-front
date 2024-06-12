@@ -165,3 +165,17 @@
 		}
 	}
 }
+
+@mixin sortAscending {
+	.table-head-row-cell-sortableButton-arrows-ascending {
+		--components-sorted-arrowColor: var(--palettes-neutral-700);
+		--components-sorted-arrowScale: 1.25;
+	}
+}
+
+@mixin sortDescending {
+	.table-head-row-cell-sortableButton-arrows-descending {
+		--components-sorted-arrowColor: var(--palettes-neutral-700);
+		--components-sorted-arrowScale: 1.25;
+	}
+}

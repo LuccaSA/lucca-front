@@ -1,53 +1,136 @@
 import { Meta, StoryFn } from '@storybook/angular';
 
 interface TableSortableStory {
-	ascending: boolean;
-	alignRight: boolean;
+	align: string;
 }
 
 export default {
 	title: 'Documentation/Listings/Table/Sortable',
 	argTypes: {
-		ascending: {
+		align: {
+			options: ['', 'mod-alignRight', 'mod-alignCenter'],
 			control: {
-				type: 'boolean',
-			},
-		},
-		alignRight: {
-			control: {
-				type: 'boolean',
+				type: 'select',
 			},
 		},
 	},
 } as Meta;
 
 function getTemplate(args: TableSortableStory): string {
-	const sort = args.ascending ? 'ascending' : 'descending';
-	const alignRight = args.alignRight ? ' mod-alignRight' : '';
-	return `<table class="table">
+	return `
+<table class="table mod-layoutFixed">
 	<thead class="table-head">
 		<tr class="table-head-row">
-			<th class="table-head-row-cell${alignRight}" >
+			<th class="table-head-row-cell ${args.align}" >
 				Non triable
 			</th>
-			<th class="table-head-row-cell${alignRight}" aria-sort="none">
+			<th class="table-head-row-cell ${args.align}" aria-sort="none">
 				<button type="button" class="table-head-row-cell-sortableButton">Triable</button>
 			</th>
-			<th class="table-head-row-cell${alignRight}" aria-sort="${sort}">
-				<button type="button" class="table-head-row-cell-sortableButton">Trié</button>
+			<th class="table-head-row-cell ${args.align}" aria-sort="ascending">
+				<button type="button" class="table-head-row-cell-sortableButton">Trié ascendant</button>
+			</th>
+			<th class="table-head-row-cell ${args.align}" aria-sort="descending">
+				<button type="button" class="table-head-row-cell-sortableButton">Trié descendant</button>
 			</th>
 		</tr>
 	</thead>
 	<tbody class="table-body">
 		<tr class="table-body-row">
-			<td class="table-body-row-cell${alignRight}">Contenu</td>
-			<td class="table-body-row-cell${alignRight}">Contenu</td>
-			<td class="table-body-row-cell${alignRight}">Contenu</td>
+			<td class="table-body-row-cell ${args.align}">Contenu</td>
+			<td class="table-body-row-cell ${args.align}">Contenu</td>
+			<td class="table-body-row-cell ${args.align}">Contenu</td>
+			<td class="table-body-row-cell ${args.align}">Contenu</td>
 		</tr>
 		<tr class="table-body-row">
-			<td class="table-body-row-cell${alignRight}">Contenu</td>
-			<td class="table-body-row-cell${alignRight}">Contenu</td>
-			<td class="table-body-row-cell${alignRight}">Contenu</td>
+			<td class="table-body-row-cell ${args.align}">Contenu</td>
+			<td class="table-body-row-cell ${args.align}">Contenu</td>
+			<td class="table-body-row-cell ${args.align}">Contenu</td>
+			<td class="table-body-row-cell ${args.align}">Contenu</td>
+		</tr>
+	</tbody>
+</table>
+<br />
+<table class="table mod-layoutFixed">
+	<thead class="table-head">
+		<tr class="table-head-row">
+			<th class="table-head-row-cell ${args.align}">
+				Non triable
+			</th>
+			<th class="table-head-row-cell ${args.align} mod-sortable">
+				Triable
+			</th>
+			<th class="table-head-row-cell ${args.align} mod-sortable sortedAscending">
+				Trié ascendant
+			</th>
+			<th class="table-head-row-cell ${args.align}  mod-sortable sortedDescending">
+				Trié descendant
+			</th>
+		</tr>
+	</thead>
+	<tbody class="table-body">
+		<tr class="table-body-row">
+			<td class="table-body-row-cell ${args.align}">Contenu</td>
+			<td class="table-body-row-cell ${args.align}">Contenu</td>
+			<td class="table-body-row-cell ${args.align}">Contenu</td>
+			<td class="table-body-row-cell ${args.align}">Contenu</td>
+		</tr>
+		<tr class="table-body-row">
+			<td class="table-body-row-cell ${args.align}">Contenu</td>
+			<td class="table-body-row-cell ${args.align}">Contenu</td>
+			<td class="table-body-row-cell ${args.align}">Contenu</td>
+			<td class="table-body-row-cell ${args.align}">Contenu</td>
+		</tr>
+	</tbody>
+</table>
+<br />
+<table class="table mod-layoutFixed">
+	<thead class="table-head">
+		<tr class="table-head-row">
+			<th class="table-head-row-cell ${args.align}" >
+				Non triable
+			</th>
+			<th class="table-head-row-cell ${args.align}" aria-sort="none">
+				<button type="button" class="table-head-row-cell-sortableButton button">
+					Triable
+					<span class="table-head-row-cell-sortableButton-arrows">
+						<span class="lucca-icon icon-chevronTop table-head-row-cell-sortableButton-arrows-ascending"></span>
+						<span class="lucca-icon icon-chevronBottom table-head-row-cell-sortableButton-arrows-descending"></span>
+					</span>
+				</button>
+			</th>
+			<th class="table-head-row-cell ${args.align}" aria-sort="ascending">
+				<button type="button" class="table-head-row-cell-sortableButton button">
+					Trié ascendant
+					<span class="table-head-row-cell-sortableButton-arrows">
+						<span class="lucca-icon icon-chevronTop table-head-row-cell-sortableButton-arrows-ascending"></span>
+						<span class="lucca-icon icon-chevronBottom table-head-row-cell-sortableButton-arrows-descending"></span>
+					</span>
+				</button>
+			</th>
+			<th class="table-head-row-cell ${args.align}" aria-sort="descending">
+				<button type="button" class="table-head-row-cell-sortableButton button">
+					Trié descendant
+					<span class="table-head-row-cell-sortableButton-arrows">
+						<span class="lucca-icon icon-chevronTop table-head-row-cell-sortableButton-arrows-ascending"></span>
+						<span class="lucca-icon icon-chevronBottom table-head-row-cell-sortableButton-arrows-descending"></span>
+					</span>
+				</button>
+			</th>
+		</tr>
+	</thead>
+	<tbody class="table-body">
+		<tr class="table-body-row">
+			<td class="table-body-row-cell ${args.align}">Contenu</td>
+			<td class="table-body-row-cell ${args.align}">Contenu</td>
+			<td class="table-body-row-cell ${args.align}">Contenu</td>
+			<td class="table-body-row-cell ${args.align}">Contenu</td>
+		</tr>
+		<tr class="table-body-row">
+			<td class="table-body-row-cell ${args.align}">Contenu</td>
+			<td class="table-body-row-cell ${args.align}">Contenu</td>
+			<td class="table-body-row-cell ${args.align}">Contenu</td>
+			<td class="table-body-row-cell ${args.align}">Contenu</td>
 		</tr>
 	</tbody>
 </table>`;
@@ -60,6 +143,5 @@ const Template: StoryFn<TableSortableStory> = (args) => ({
 
 export const Sortable = Template.bind({});
 Sortable.args = {
-	ascending: false,
-	alignRight: false,
+	align: '',
 };

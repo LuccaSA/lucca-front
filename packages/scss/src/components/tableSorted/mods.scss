@@ -91,3 +91,12 @@
 		text-align: right;
 	}
 }
+
+@mixin sortAlignRight {
+	--components-sorted-direction: row-reverse;
+	--components-sorted-offset: var(--pr-t-spacings-50);
+}
+
+@mixin sortAlignCenter {
+	--components-sorted-offset: 0;
+}
