@@ -1,7 +1,7 @@
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
-import { NumberFormatInputComponent } from '@lucca-front/ng/forms';
+import { NumberFormatInputComponent, NumberInputComponent } from '@lucca-front/ng/forms';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { cleanupTemplate, generateInputs } from 'stories/helpers/stories';
 
@@ -104,7 +104,7 @@ export const Basic: StoryObj<NumberFormatInputComponent & { disabled: boolean } 
 		label: 'Label',
 		required: true,
 		hiddenLabel: false,
-		hasClearer: true,
+		hasClearer: false,
 		disabled: false,
 		inlineMessage: 'Helper Text',
 		inlineMessageState: 'default',
@@ -113,5 +113,153 @@ export const Basic: StoryObj<NumberFormatInputComponent & { disabled: boolean } 
 		tooltip: 'Je suis un message d’aide',
 		formatStyle: 'decimal',
 		currency: 'EUR',
+	},
+};
+
+export const WithCurrency: StoryObj<NumberFormatInputComponent & { disabled: boolean } & FormFieldComponent> = {
+	render: (args, { argTypes }) => {
+		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, ...inputArgs } = args;
+		return {
+			props: {
+				prefix: args.prefix,
+				suffix: args.suffix,
+			},
+			template: cleanupTemplate(`<lu-form-field ${generateInputs(
+				{
+					label,
+					hiddenLabel,
+					tooltip,
+					inlineMessage,
+					inlineMessageState,
+					size,
+				},
+				argTypes,
+			)}>
+
+	<lu-number-format-input
+		${generateInputs(inputArgs, argTypes)}
+		[(ngModel)]="example">
+	</lu-number-format-input>
+
+</lu-form-field>
+
+{{example}}`),
+			moduleMetadata: {
+				imports: [NumberFormatInputComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule],
+			},
+		};
+	},
+	args: {
+		label: 'Label',
+		required: true,
+		hiddenLabel: false,
+		hasClearer: false,
+		disabled: false,
+		inlineMessage: 'Helper Text',
+		inlineMessageState: 'default',
+		size: 'M',
+		placeholder: 'Placeholder',
+		tooltip: 'Je suis un message d’aide',
+		formatStyle: 'currency',
+		currency: 'EUR',
+		currencyDisplay: 'name',
+	},
+};
+
+export const WithUnitKm: StoryObj<NumberFormatInputComponent & { disabled: boolean } & FormFieldComponent> = {
+	render: (args, { argTypes }) => {
+		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, ...inputArgs } = args;
+		return {
+			props: {
+				prefix: args.prefix,
+				suffix: args.suffix,
+			},
+			template: cleanupTemplate(`<lu-form-field ${generateInputs(
+				{
+					label,
+					hiddenLabel,
+					tooltip,
+					inlineMessage,
+					inlineMessageState,
+					size,
+				},
+				argTypes,
+			)}>
+
+	<lu-number-format-input
+		${generateInputs(inputArgs, argTypes)}
+		[(ngModel)]="example">
+	</lu-number-format-input>
+
+</lu-form-field>
+
+{{example}}`),
+			moduleMetadata: {
+				imports: [NumberFormatInputComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule],
+			},
+		};
+	},
+	args: {
+		label: 'Label',
+		required: true,
+		hiddenLabel: false,
+		hasClearer: false,
+		disabled: false,
+		inlineMessage: 'Helper Text',
+		inlineMessageState: 'default',
+		size: 'M',
+		placeholder: 'Placeholder',
+		tooltip: 'Je suis un message d’aide',
+		formatStyle: 'unit',
+		unit: 'kilometer',
+		unitDisplay: 'long',
+	},
+};
+
+export const WithPercent: StoryObj<NumberFormatInputComponent & { disabled: boolean } & FormFieldComponent> = {
+	render: (args, { argTypes }) => {
+		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, ...inputArgs } = args;
+		return {
+			props: {
+				prefix: args.prefix,
+				suffix: args.suffix,
+			},
+			template: cleanupTemplate(`<lu-form-field ${generateInputs(
+				{
+					label,
+					hiddenLabel,
+					tooltip,
+					inlineMessage,
+					inlineMessageState,
+					size,
+				},
+				argTypes,
+			)}>
+
+	<lu-number-format-input
+		${generateInputs(inputArgs, argTypes)}
+		[(ngModel)]="example">
+	</lu-number-format-input>
+
+</lu-form-field>
+
+{{example}}`),
+			moduleMetadata: {
+				imports: [NumberFormatInputComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule],
+			},
+		};
+	},
+	args: {
+		label: 'Label',
+		required: true,
+		hiddenLabel: false,
+		hasClearer: false,
+		disabled: false,
+		inlineMessage: 'Helper Text',
+		inlineMessageState: 'default',
+		size: 'M',
+		placeholder: 'Placeholder',
+		tooltip: 'Je suis un message d’aide',
+		formatStyle: 'percent',
 	},
 };
