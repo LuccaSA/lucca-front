@@ -1,58 +1,93 @@
 @use 'exports' as *;
 
 .table-head-row-cell {
-	&.mod-sortable,
-	.table-head-row-cell-sortableButton {
-		@include sortable;
-
-		.table.mod-S & {
-			@include sortableS;
-		}
-	}
-
-	&:is(.is-sorted-descending, .sortedDescending) {
-		@include descendingLegacy;
-	}
-
-	&:is(.is-sorted-ascending, .sortedAscending) {
-		@include ascendingLegacy;
-	}
-
-	&:is([aria-sort='descending']) {
-		@include descending;
-	}
-
-	&:is([aria-sort='ascending']) {
-		@include ascending;
-	}
-
-	&.mod-alignCenter {
+	&:not(:has(.table-head-row-cell-sortableButton-arrows)) {
 		&.mod-sortable,
 		.table-head-row-cell-sortableButton {
-			@include sortableAlignCenter;
-		}
-	}
+			@include sortable;
 
-	&.mod-alignRight {
-		&.mod-sortable,
-		.table-head-row-cell-sortableButton {
-			@include sortableAlignRight;
+			.table.mod-S & {
+				@include sortableS;
+			}
 		}
 
 		&:is(.is-sorted-descending, .sortedDescending) {
-			@include descendingLegacyAlignRight;
+			@include descendingLegacy;
 		}
 
 		&:is(.is-sorted-ascending, .sortedAscending) {
-			@include ascendingLegacyAlignRight;
+			@include ascendingLegacy;
 		}
 
 		&:is([aria-sort='descending']) {
-			@include descendingAlignRight;
+			&:not(:has(.table-head-row-cell-sortableButton-arrows)) {
+				@include descending;
+			}
 		}
 
 		&:is([aria-sort='ascending']) {
-			@include ascendingAlignRight;
+			@include ascending;
+		}
+
+		&.mod-alignCenter {
+			&.mod-sortable,
+			.table-head-row-cell-sortableButton {
+				@include sortableAlignCenter;
+			}
+		}
+
+		&.mod-alignRight {
+			&.mod-sortable,
+			.table-head-row-cell-sortableButton {
+				@include sortableAlignRight;
+			}
+
+			&:is(.is-sorted-descending, .sortedDescending) {
+				@include descendingLegacyAlignRight;
+			}
+
+			&:is(.is-sorted-ascending, .sortedAscending) {
+				@include ascendingLegacyAlignRight;
+			}
+
+			&:is([aria-sort='descending']) {
+				@include descendingAlignRight;
+			}
+
+			&:is([aria-sort='ascending']) {
+				@include ascendingAlignRight;
+			}
+		}
+	}
+}
+
+.table-head-row-cell-sortableButton {
+	@include vars;
+	@include component;
+}
+
+.table-head-row-cell {
+	&.mod-alignRight {
+		.table-head-row-cell-sortableButton {
+			@include sortAlignRight;
+		}
+	}
+
+	&.mod-alignCenter {
+		.table-head-row-cell-sortableButton {
+			@include sortAlignCenter;
+		}
+	}
+
+	&[aria-sort='ascending'] {
+		.table-head-row-cell-sortableButton {
+			@include sortAscending;
+		}
+	}
+
+	&[aria-sort='descending'] {
+		.table-head-row-cell-sortableButton {
+			@include sortDescending;
 		}
 	}
 }
