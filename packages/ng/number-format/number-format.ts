@@ -114,8 +114,12 @@ export class NumberFormat {
 			return null;
 		}
 
-		const value = hasMinusSignAtStart ? -text : +text;
-		return this.#options.style === 'percent' ? value / 100 : value;
+		let value = hasMinusSignAtStart ? -text : +text;
+		if (this.#options.style === 'percent') {
+			value /= 100;
+			value = +value.toFixed(this.#options.maximumFractionDigits + 2);
+		}
+		return value;
 	}
 
 	format(value: number | null): string {
