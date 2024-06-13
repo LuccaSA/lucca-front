@@ -26,17 +26,23 @@ export default {
 
 export const Basic: StoryObj<PopoverDirective> = {
 	render: (args, { argTypes }) => {
+		const action = args.luPopoverTrigger === 'click' ? 'Click me' : 'Click me or hover me';
+		let openDelay = '';
+		if (args.luPopoverTrigger !== 'click') {
+			openDelay = ' ' + args.luPopoverOpenDelay + 'ms';
+		}
 		return {
-			template: cleanupTemplate(`<button luButton [luPopover2]="contentRef" ${generateInputs(args, argTypes)}>Click me!</button>
+			template: cleanupTemplate(`
+<button style="margin: 8rem; user-select: none" luButton [luPopover2]="contentRef" ${generateInputs(args, argTypes)}>${action}${openDelay}!</button>
 <ng-template #contentRef>
 	<div class="popover-contentOptional">
-		<ul class="button-group mod-outlined u-flexDirectionColumn" style="width: 15rem">
-		    <li class="button-group-item"><button type="button" class="button mod-outlined">A</button></li>
-		    <li class="button-group-item"><button type="button" class="button mod-outlined">B</button></li>
-		    <li class="button-group-item"><button type="button" class="button mod-outlined">C</button></li>
-				<li class="button-group-item"><button type="button" class="button mod-outlined">D</button></li>
-				<li class="button-group-item"><button type="button" class="button mod-outlined">E</button></li>
-		</ul>
+		<div class="verticalNavigation mod-iconless">
+			<ul class="verticalNavigation-list u-listReset">
+				<li class="verticalNavigation-list-item"><a href="#" class="verticalNavigation-list-item-link">Item A</a></li>
+				<li class="verticalNavigation-list-item"><a href="#" class="verticalNavigation-list-item-link">Item B</a></li>
+				<li class="verticalNavigation-list-item"><a href="#" class="verticalNavigation-list-item-link">Item C</a></li>
+			</ul>
+		</div>
 	</div>
 </ng-template>
 `),
@@ -44,7 +50,7 @@ export const Basic: StoryObj<PopoverDirective> = {
 	},
 	args: {
 		luPopoverTrigger: 'click',
-		luPopoverCloseDelay: 100,
+		luPopoverCloseDelay: 300,
 		luPopoverOpenDelay: 300,
 		luPopoverDisabled: false,
 		luPopoverPosition: 'above',
