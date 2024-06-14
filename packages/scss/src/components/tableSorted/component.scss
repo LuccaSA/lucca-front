@@ -17,7 +17,8 @@
 	flex-direction: var(--components-sorted-direction);
 
 	@at-root ($atRoot) {
-		.table-head-row-cell-sortableButton-arrows {
+		.table-head-row-cell-sortableButton-arrows,
+		.indexTable-head-row-cell-sortableButton-arrows {
 			margin-top: var(--pr-t-spacings-50);
 			position: relative;
 			width: 1rem;
@@ -25,7 +26,9 @@
 		}
 
 		.table-head-row-cell-sortableButton-arrows-ascending,
-		.table-head-row-cell-sortableButton-arrows-descending {
+		.table-head-row-cell-sortableButton-arrows-descending,
+		.indexTable-head-row-cell-sortableButton-arrows-ascending,
+		.indexTable-head-row-cell-sortableButton-arrows-descending {
 			@include icon.XS;
 
 			position: absolute;
@@ -36,11 +39,13 @@
 			scale: var(--components-sorted-arrowScale);
 		}
 
-		.table-head-row-cell-sortableButton-arrows-ascending {
+		.table-head-row-cell-sortableButton-arrows-ascending,
+		.indexTable-head-row-cell-sortableButton-arrows-ascending {
 			translate: 0 calc(var(--pr-t-spacings-50) * -1);
 		}
 
-		.table-head-row-cell-sortableButton-arrows-descending {
+		.table-head-row-cell-sortableButton-arrows-descending,
+		.indexTable-head-row-cell-sortableButton-arrows-descending {
 			translate: 0 var(--pr-t-spacings-50);
 		}
 	}
