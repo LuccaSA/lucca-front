@@ -61,32 +61,38 @@
 	}
 }
 
-.table-head-row-cell-sortableButton {
+.table-head-row-cell-sortableButton,
+.indexTable-head-row-cell-sortableButton {
 	@include vars;
 	@include component;
 }
 
-.table-head-row-cell {
+.table-head-row-cell,
+.indexTable-head-row-cell {
 	&.mod-alignRight {
-		.table-head-row-cell-sortableButton {
+		.table-head-row-cell-sortableButton,
+		.indexTable-head-row-cell-sortableButton {
 			@include sortAlignRight;
 		}
 	}
 
 	&.mod-alignCenter {
-		.table-head-row-cell-sortableButton {
+		.table-head-row-cell-sortableButton,
+		.indexTable-head-row-cell-sortableButton {
 			@include sortAlignCenter;
 		}
 	}
 
 	&[aria-sort='ascending'] {
-		.table-head-row-cell-sortableButton {
+		.table-head-row-cell-sortableButton,
+		.indexTable-head-row-cell-sortableButton {
 			@include sortAscending;
 		}
 	}
 
 	&[aria-sort='descending'] {
-		.table-head-row-cell-sortableButton {
+		.table-head-row-cell-sortableButton,
+		.indexTable-head-row-cell-sortableButton {
 			@include sortDescending;
 		}
 	}

@@ -1,8 +1,0 @@
-@mixin alignRight {
-	--components-sorted-direction: row-reverse;
-	--components-sorted-offset: var(--pr-t-spacings-50);
-}
-
-@mixin alignCenter {
-	--components-sorted-offset: 0;
-}
