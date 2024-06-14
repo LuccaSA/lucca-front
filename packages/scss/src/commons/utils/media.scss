@@ -13,27 +13,41 @@
 
 // les requêtes simples et multiples
 
-@mixin query($breakpoint, $property: 'width', $max: false, $at: 'media', $name: '') {
-	$reversed: '';
-
-	@if $max {
-		$reversed: 'not all and';
-
-		@if $at == 'container' {
-			$reversed: 'not';
+@mixin query($breakpoint, $property: 'width', $inverted: false, $at: 'media', $name: '', $breakpoint2: null) {
+	// si on breakpoint supplémentaire est passé, c’est queries qu’il faut appeler
+	@if $breakpoint2 != null {
+		@include queries(
+			$breakpoint1: $breakpoint,
+			$breakpoint2: $breakpoint2,
+			$property: $property,
+			$at: $at,
+			$name: $name,
+			$inverted: $inverted
+		) {
+			@content;
 		}
-	}
+	} @else {
+		$reversed: '';
 
-	@if map.get(config.$breakpoints, $breakpoint) {
-		$breakpoint: pxToEm(map.get(config.$breakpoints, $breakpoint));
-	}
+		@if $inverted {
+			$reversed: 'not all and';
 
-	@#{$at} #{$name} #{$reversed} (min-#{$property}: #{$breakpoint}) {
-		@content;
+			@if $at == 'container' {
+				$reversed: 'not';
+			}
+		}
+
+		@if map.get(config.$breakpoints, $breakpoint) {
+			$breakpoint: pxToEm(map.get(config.$breakpoints, $breakpoint));
+		}
+
+		@#{$at} #{$name} #{$reversed} (min-#{$property}: #{$breakpoint}) {
+			@content;
+		}
 	}
 }
 
-@mixin queries($breakpoint1, $breakpoint2, $property: 'width', $at: 'media', $name: '') {
+@mixin queries($breakpoint1, $breakpoint2, $property: 'width', $at: 'media', $name: '', $inverted: false) {
 	$reversed: 'not all and';
 
 	@if $at == 'container' {
@@ -55,9 +69,18 @@
 		$breakpoint1: $breakpointTmp;
 	}
 
-	@#{$at} #{$name} (min-#{$property}: #{$breakpoint1}) {
-		@#{$at} #{$name} #{$reversed} (min-#{$property}: #{$breakpoint2}) {
+	// si on souhaite inverser, ce sont deux queries combinées (or)
+	@if $inverted == true {
+		@#{$at} #{$name} #{$reversed} (min-#{$property}: #{$breakpoint1}), (min-#{$property}: #{$breakpoint2}) {
 			@content;
+		}
+	}
+	// sinon, ce sont deux queries imbriquées (and)
+	@else {
+		@#{$at} #{$name} (min-#{$property}: #{$breakpoint1}) {
+			@#{$at} #{$name} #{$reversed} (min-#{$property}: #{$breakpoint2}) {
+				@content;
+			}
 		}
 	}
 }
@@ -71,7 +94,7 @@
 }
 
 @mixin max($breakpoint, $property: 'width', $at: 'media') {
-	@include query($breakpoint, $property: $property, $max: true, $at: $at) {
+	@include query($breakpoint, $property: $property, $inverted: true, $at: $at) {
 		@content;
 	}
 }
@@ -91,15 +114,15 @@
 }
 
 @mixin maxWidth($breakpoint, $at: 'media') {
-	@include query($breakpoint, $max: true, $at: $at) {
+	@include query($breakpoint, $inverted: true, $at: $at) {
 		@content;
 	}
 }
 
 @mixin betweenWidths($breakpoint1, $breakpoint2, $at: 'media') {
-    @include queries($breakpoint1, $breakpoint2, $at: $at) {
-        @content;
-    }
+	@include queries($breakpoint1, $breakpoint2, $at: $at) {
+		@content;
+	}
 }
 
 // les raccourcis vers les requêtes pour minHeight/maxHeight/betweenHeights
@@ -111,15 +134,15 @@
 }
 
 @mixin maxHeight($breakpoint, $at: 'media') {
-	@include query($breakpoint, $max: true, $property: 'height', $at: $at) {
+	@include query($breakpoint, $inverted: true, $property: 'height', $at: $at) {
 		@content;
 	}
 }
 
 @mixin betweenHeights($breakpoint1, $breakpoint2, $at: 'media') {
-    @include queries($breakpoint1, $breakpoint2, $property: 'height', $at: $at) {
-        @content;
-    }
+	@include queries($breakpoint1, $breakpoint2, $property: 'height', $at: $at) {
+		@content;
+	}
 }
 
 // Touch detection

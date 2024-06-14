@@ -4,8 +4,8 @@
 
 // les raccourcis des requêtes simples et multiples
 
-@mixin query($breakpoint, $property: 'width', $max: false, $name: '') {
-	@include media.query($breakpoint: $breakpoint, $property: $property, $max: $max, $at: 'container', $name: $name) {
+@mixin query($breakpoint, $property: 'width', $inverted: false, $name: '') {
+	@include media.query($breakpoint: $breakpoint, $property: $property, $inverted: $inverted, $at: 'container', $name: $name) {
 		@content;
 	}
 }
@@ -25,7 +25,7 @@
 }
 
 @mixin max($breakpoint, $property: 'width', $name: '') {
-	@include media.query($breakpoint, $property: $property, $max: true, $at: 'container', $name: $name) {
+	@include media.query($breakpoint, $property: $property, $inverted: true, $at: 'container', $name: $name) {
 		@content;
 	}
 }
@@ -45,7 +45,7 @@
 }
 
 @mixin maxWidth($breakpoint, $name: '') {
-	@include media.query($breakpoint, $max: true, $at: 'container', $name: $name) {
+	@include media.query($breakpoint, $inverted: true, $at: 'container', $name: $name) {
 		@content;
 	}
 }
@@ -65,7 +65,7 @@
 }
 
 @mixin maxHeight($breakpoint, $name: '') {
-	@include media.query($breakpoint, $max: true, $property: 'height', $at: 'container', $name: $name) {
+	@include media.query($breakpoint, $inverted: true, $property: 'height', $at: 'container', $name: $name) {
 		@content;
 	}
 }
