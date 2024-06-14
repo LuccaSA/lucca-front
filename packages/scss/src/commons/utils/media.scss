@@ -105,6 +105,12 @@
 	}
 }
 
+@mixin outside($breakpoint1, $breakpoint2, $property: 'width', $at: 'media') {
+	@include queries($breakpoint1, $breakpoint2, $property: $property, $at: $at, $inverted: true) {
+		@content;
+	}
+}
+
 // les raccourcis vers les requêtes pour minWidth/maxWidth/betweenWidths
 
 @mixin minWidth($breakpoint, $at: 'media') {
@@ -120,6 +126,12 @@
 }
 
 @mixin betweenWidths($breakpoint1, $breakpoint2, $at: 'media') {
+	@include queries($breakpoint1, $breakpoint2, $at: $at) {
+		@content;
+	}
+}
+
+@mixin outsideWidths($breakpoint1, $breakpoint2, $at: 'media', $inverted: true) {
 	@include queries($breakpoint1, $breakpoint2, $at: $at) {
 		@content;
 	}
@@ -141,6 +153,12 @@
 
 @mixin betweenHeights($breakpoint1, $breakpoint2, $at: 'media') {
 	@include queries($breakpoint1, $breakpoint2, $property: 'height', $at: $at) {
+		@content;
+	}
+}
+
+@mixin outsideHeights($breakpoint1, $breakpoint2, $at: 'media') {
+	@include queries($breakpoint1, $breakpoint2, $property: 'height', $at: $at, $inverted: true) {
 		@content;
 	}
 }
