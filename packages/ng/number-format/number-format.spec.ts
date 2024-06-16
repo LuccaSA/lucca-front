@@ -226,6 +226,57 @@ const suffixPrefixPercentTests: SuffixPrefixTestData[] = [
 	},
 ];
 
+interface FormatTestData {
+	value: number | null;
+	formatted: string;
+}
+
+const focusFormatTests: FormatTestData[] = [
+	{
+		value: null,
+		formatted: '',
+	},
+	{
+		value: 0,
+		formatted: '0',
+	},
+	{
+		value: 123245.5,
+		formatted: '123245.5',
+	},
+	{
+		value: -123245.5,
+		formatted: '-123245.5',
+	},
+	{
+		value: 123245.12345,
+		formatted: '123245.12345',
+	},
+];
+
+const blurFormatTests: FormatTestData[] = [
+	{
+		value: null,
+		formatted: '',
+	},
+	{
+		value: 0,
+		formatted: '0',
+	},
+	{
+		value: 123245.5,
+		formatted: '123 245,5',
+	},
+	{
+		value: -123245.5,
+		formatted: '-123 245,5',
+	},
+	{
+		value: 123245.12345,
+		formatted: '123 245,12345',
+	},
+];
+
 describe('NumberFormat', () => {
 	it.each<ParseTestData>(parseTests)("should parse '$input' to $value and clean to '$cleanInput'", ({ input, cleanInput, value }) => {
 		const numberFormat = new NumberFormat({ locale: LOCALE_FR, style: 'decimal' });
@@ -279,4 +330,16 @@ describe('NumberFormat', () => {
 			expect(numberFormat.getSuffix(value)).toBe(suffix);
 		},
 	);
+
+	it.each<FormatTestData>(focusFormatTests)("should format '$value' for focus into '$formatted'", ({ value, formatted }) => {
+		const numberFormat = new NumberFormat({ locale: LOCALE_FR, style: 'decimal' });
+
+		expect(numberFormat.getFocusFormat(value)).toBe(formatted);
+	});
+
+	it.each<FormatTestData>(blurFormatTests)("should format '$value' for blur into '$formatted'", ({ value, formatted }) => {
+		const numberFormat = new NumberFormat({ locale: LOCALE_FR, style: 'decimal' });
+
+		expect(numberFormat.getBlurFormat(value)).toBe(formatted);
+	});
 });
