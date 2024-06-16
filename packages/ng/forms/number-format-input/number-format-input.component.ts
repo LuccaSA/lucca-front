@@ -2,7 +2,7 @@ import { booleanAttribute, Component, computed, ElementRef, inject, input, LOCAL
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormFieldComponent, InputDirective } from '@lucca-front/ng/form-field';
 import { NoopValueAccessorDirective } from '../noop-value-accessor.directive';
-import { NgIf } from '@angular/common';
+import { NgIf, NgTemplateOutlet } from '@angular/common';
 import { FormFieldIdDirective } from '../form-field-id.directive';
 import { getIntl } from '@lucca-front/ng/core';
 import { LU_NUMBERFORMATFIELD_TRANSLATIONS } from './number-format-input.translate';
@@ -10,11 +10,12 @@ import { injectNgControl } from '../inject-ng-control';
 import { NumberFormat, NumberFormatCurrencyDisplay, NumberFormatDirective, NumberFormatOptions, NumberFormatStyle, NumberFormatUnit, NumberFormatUnitDisplay } from '@lucca-front/ng/number-format';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { startWith } from 'rxjs/operators';
+import { TextInputAddon } from '../text-input/text-input-addon';
 
 @Component({
 	selector: 'lu-number-format-input',
 	standalone: true,
-	imports: [FormFieldComponent, InputDirective, NgIf, ReactiveFormsModule, FormFieldIdDirective, NumberFormatDirective],
+	imports: [FormFieldComponent, InputDirective, NgIf, ReactiveFormsModule, FormFieldIdDirective, NumberFormatDirective, NgTemplateOutlet],
 	templateUrl: './number-format-input.component.html',
 	hostDirectives: [NoopValueAccessorDirective],
 	encapsulation: ViewEncapsulation.None,
@@ -25,6 +26,12 @@ export class NumberFormatInputComponent {
 	ngControl = injectNgControl();
 
 	formatStyle = input<NumberFormatStyle>('decimal');
+
+	useAutoPrefixSuffix = input<boolean | undefined>(undefined);
+
+	prefix = input<TextInputAddon | undefined>(undefined);
+
+	suffix = input<TextInputAddon | undefined>(undefined);
 
 	currency = input<string | undefined>(undefined);
 
@@ -47,8 +54,32 @@ export class NumberFormatInputComponent {
 	#suffixPrefixValue = toSignal(this.ngControl.valueChanges.pipe(startWith(1)));
 
 	#numberFormat = computed(() => new NumberFormat(this.formatOptions()));
-	prefix = computed(() => this.#numberFormat().getPrefix(this.#suffixPrefixValue() as number));
-	suffix = computed(() => this.#numberFormat().getSuffix(this.#suffixPrefixValue() as number));
+	prefixAddon = computed(() => {
+		if (this.useAutoPrefixSuffix() === undefined || this.useAutoPrefixSuffix() === false) {
+			return this.prefix();
+		}
+		const content = this.#numberFormat().getPrefix(this.#suffixPrefixValue() as number);
+		if (content == null || content.trim() === '') {
+			return undefined;
+		}
+		return {
+			content,
+			ariaLabel: content,
+		} as TextInputAddon;
+	});
+	suffixAddon = computed(() => {
+		if (this.useAutoPrefixSuffix() === undefined || this.useAutoPrefixSuffix() === false) {
+			return this.suffix();
+		}
+		const content = this.#numberFormat().getSuffix(this.#suffixPrefixValue() as number);
+		if (content == null || content.trim() === '') {
+			return undefined;
+		}
+		return {
+			content,
+			ariaLabel: content,
+		} as TextInputAddon;
+	});
 
 	formatOptions = computed(
 		() =>

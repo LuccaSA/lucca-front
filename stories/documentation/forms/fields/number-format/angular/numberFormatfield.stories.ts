@@ -1,7 +1,7 @@
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
-import { NumberFormatInputComponent, NumberInputComponent } from '@lucca-front/ng/forms';
+import { NumberFormatInputComponent } from '@lucca-front/ng/forms';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { cleanupTemplate, generateInputs } from 'stories/helpers/stories';
 
@@ -27,6 +27,9 @@ export default {
 			control: {
 				type: 'select',
 			},
+		},
+		useAutoPrefixSuffix: {
+			type: 'boolean',
 		},
 		min: {
 			type: 'number',
@@ -113,6 +116,7 @@ export const Basic: StoryObj<NumberFormatInputComponent & { disabled: boolean } 
 		tooltip: 'Je suis un message d’aide',
 		formatStyle: 'decimal',
 		currency: 'EUR',
+		useAutoPrefixSuffix: false,
 	},
 };
 
@@ -120,10 +124,6 @@ export const WithCurrency: StoryObj<NumberFormatInputComponent & { disabled: boo
 	render: (args, { argTypes }) => {
 		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, ...inputArgs } = args;
 		return {
-			props: {
-				prefix: args.prefix,
-				suffix: args.suffix,
-			},
 			template: cleanupTemplate(`<lu-form-field ${generateInputs(
 				{
 					label,
@@ -161,6 +161,7 @@ export const WithCurrency: StoryObj<NumberFormatInputComponent & { disabled: boo
 		placeholder: 'Placeholder',
 		tooltip: 'Je suis un message d’aide',
 		formatStyle: 'currency',
+		useAutoPrefixSuffix: true,
 		currency: 'EUR',
 		currencyDisplay: 'name',
 	},
@@ -170,10 +171,6 @@ export const WithUnitKm: StoryObj<NumberFormatInputComponent & { disabled: boole
 	render: (args, { argTypes }) => {
 		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, ...inputArgs } = args;
 		return {
-			props: {
-				prefix: args.prefix,
-				suffix: args.suffix,
-			},
 			template: cleanupTemplate(`<lu-form-field ${generateInputs(
 				{
 					label,
@@ -211,6 +208,7 @@ export const WithUnitKm: StoryObj<NumberFormatInputComponent & { disabled: boole
 		placeholder: 'Placeholder',
 		tooltip: 'Je suis un message d’aide',
 		formatStyle: 'unit',
+		useAutoPrefixSuffix: true,
 		unit: 'kilometer',
 		unitDisplay: 'long',
 	},
@@ -220,10 +218,6 @@ export const WithPercent: StoryObj<NumberFormatInputComponent & { disabled: bool
 	render: (args, { argTypes }) => {
 		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, ...inputArgs } = args;
 		return {
-			props: {
-				prefix: args.prefix,
-				suffix: args.suffix,
-			},
 			template: cleanupTemplate(`<lu-form-field ${generateInputs(
 				{
 					label,
@@ -261,5 +255,6 @@ export const WithPercent: StoryObj<NumberFormatInputComponent & { disabled: bool
 		placeholder: 'Placeholder',
 		tooltip: 'Je suis un message d’aide',
 		formatStyle: 'percent',
+		useAutoPrefixSuffix: true,
 	},
 };
