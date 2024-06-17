@@ -1,37 +1,37 @@
-@use '@lucca-front/scss/src/commons/utils/media';
-@use '@lucca-front/scss/src/components/button/exports' as button;
+@use '@lucca-front/scss/src/components/container/exports' as container;
 
 @mixin component($atRoot: 'without: rule') {
 	background-color: var(--pr-t-elevation-surface-raised);
 	padding: var(--pr-t-spacings-200) var(--pr-t-spacings-300);
 	display: flex;
+	justify-content: space-between;
 	gap: var(--pr-t-spacings-200);
-	align-items: center;
+	align-items: var(--components-footer-alignItems);
 	box-shadow: var(--pr-t-elevation-shadow-overflow);
-
-	@include media.max('XXS') {
-		flex-direction: column;
-	}
+	bottom: 0;
+	position: var(--components-footer-position);
+	flex-direction: var(--components-footer-direction);
 
 	@at-root ($atRoot) {
+		.footer-content {
+			flex-grow: 1;
+		}
+
 		.footer-actions {
 			display: flex;
-			margin-left: auto;
 			gap: var(--pr-t-spacings-200);
+			flex-direction: var(--components-footer-direction);
+		}
 
-			.button {
-				margin: 0;
-			}
+		.footer-containerOptional {
+			--components-container-padding: 0;
 
-			@include media.max('XXS') {
-				flex-direction: column;
-				margin-left: inherit;
-				width: 100%;
-
-				.button {
-					@include button.block;
-				}
-			}
+			display: flex;
+			gap: var(--pr-t-spacings-200);
+			align-items: var(--components-footer-alignItems);
+			flex-grow: 1;
+			justify-content: space-between;
+			flex-direction: var(--components-footer-direction);
 		}
 	}
 }
