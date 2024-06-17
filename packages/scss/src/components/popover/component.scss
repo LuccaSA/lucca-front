@@ -9,13 +9,7 @@
 	position: relative;
 	min-height: var(--pr-t-spacings-500);
 	min-width: var(--pr-t-spacings-500);
-	transition-property: opacity, scale;
-	transition-duration: var(--commons-animations-durations-fast);
-
-	@starting-style {
-		opacity: 0.5;
-		scale: 0.95;
-	}
+	animation: popup var(--commons-animations-durations-fast) ease 1 forwards;
 
 	// need of a higher specificity
 	.popover-close {
@@ -40,6 +34,17 @@
 			&:not(:focus-visible) {
 				@include a11y.mask;
 			}
+		}
+	}
+
+	@keyframes popup {
+		from {
+			transform: scale(0.95);
+			opacity: 0.5;
+		}
+		to {
+			transform: scale(1);
+			opacity: 1;
 		}
 	}
 }
