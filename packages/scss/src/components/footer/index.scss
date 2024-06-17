@@ -9,16 +9,7 @@
 		@include sticky;
 	}
 
-	&:not([class*='mod-narrow']) {
-		@include media.max('XXS') {
-			@include narrow;
-		}
-	}
-
-	&.mod-narrow {
-		@include narrow;
-	}
-
+	&:not([class*='mod-narrow']),
 	&.mod-narrowAtMediaMaxXXS {
 		@include media.max('XXS') {
 			@include narrow;
