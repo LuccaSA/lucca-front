@@ -1,0 +1,21 @@
+<div class="comment" [class.mod-noAvatar]="noAvatar()" [class.mod-S]="size() === 'S'">
+	<div class="comment-infos">
+		@if (!noAvatar()) {
+		<lu-user-picture [user]="author()"></lu-user-picture>
+		}
+
+		<div class="comment-infos-content">
+			<span class="comment-infos-name">{{ author().firstName }} {{ author().lastName }}</span>&ngsp;
+			<time class="comment-infos-date" [attr.datetime]="date().toISOString()">
+				@if (dateDisplay()) {
+				<ng-container *luPortal="dateDisplay()"></ng-container>
+				} @else { {{ date() | date }} }
+			</time>
+		</div>
+	</div>
+	<blockquote class="comment-content">
+		<p class="comment-content-text">
+			<ng-container *luPortal="content()"></ng-container>
+		</p>
+	</blockquote>
+</div>
