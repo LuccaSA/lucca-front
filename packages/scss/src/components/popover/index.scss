@@ -1,0 +1,6 @@
+@use 'exports' as *;
+
+.popover {
+	@include vars;
+	@include component;
+}
