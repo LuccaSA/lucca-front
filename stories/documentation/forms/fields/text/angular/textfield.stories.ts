@@ -38,6 +38,9 @@ export default {
 		counter: {
 			description: '[v17.4]',
 		},
+		valueAlignRight: {
+			description: '[v18.1]',
+		},
 	},
 } as Meta;
 
