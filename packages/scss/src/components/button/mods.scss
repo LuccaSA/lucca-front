@@ -92,12 +92,6 @@
 	--components-button-color: var(--palettes-700, var(--palettes-neutral-700));
 	--components-button-boxShadow: 0 0 0 var(--commons-divider-width) var(--palettes-400, var(--palettes-neutral-400));
 
-	// deprecated
-	.button-counter {
-		color: var(--palettes-800, var(--palettes-neutral-800));
-		background-color: var(--palettes-300, var(--palettes-neutral-300));
-	}
-
 	&:hover {
 		--components-button-color: var(--palettes-700, var(--palettes-neutral-700));
 		--components-button-backgroundColor: var(--palettes-100, var(--palettes-neutral-100));
@@ -190,48 +184,5 @@
 	&:active {
 		--components-button-color: var(--palettes-error-700);
 		--components-button-backgroundColor: var(--palettes-error-200);
-	}
-}
-
-// deprecated
-@mixin counter {
-	--components-button-padding: var(--pr-t-spacings-100) var(--pr-t-spacings-150) var(--pr-t-spacings-100) var(--pr-t-spacings-200);
-
-	.button-counter {
-		background-color: var(--palettes-600, var(--palettes-product-600));
-		border-radius: 1rem;
-		display: flex;
-		font-size: var(--sizes-XS-fontSize);
-		height: 1.5rem;
-		min-width: 1.5rem;
-		align-items: center;
-		justify-content: center;
-		transition: background-color var(--commons-animations-durations-fast) ease;
-	}
-
-	&:hover {
-		.button-counter {
-			--components-button-backgroundColor: var(--palettes-500, var(--palettes-product-500));
-		}
-	}
-}
-
-// deprecated
-@mixin counterS {
-	--components-button-padding: var(--pr-t-spacings-75) var(--pr-t-spacings-150) var(--pr-t-spacings-75) var(--pr-t-spacings-200);
-
-	.button-counter {
-		height: 1.25rem;
-		min-width: 1.25rem;
-	}
-}
-
-// deprecated
-@mixin counterXS {
-	--components-button-padding: var(--pr-t-spacings-50) var(--pr-t-spacings-100) var(--pr-t-spacings-50) var(--pr-t-spacings-150);
-
-	.button-counter {
-		height: 1rem;
-		min-width: 1rem;
 	}
 }

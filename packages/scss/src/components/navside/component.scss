@@ -110,25 +110,6 @@
 			font-weight: 600;
 		}
 
-		// .navSide-item-alert is deprecated
-		.navSide-item-alert {
-			font-size: var(--sizes-XS-fontSize);
-			font-weight: 600;
-			background-color: var(--components-navSide-fullwidth-palette-alert-color);
-			color: var(--components-navSide-fullwidth-palette-alert-text);
-			transition-duration: var(--commons-animations-durations-standard);
-			transition-property: background-color;
-			margin-left: auto;
-			border-radius: 6px;
-			height: var(--sizes-S-lineHeight);
-			line-height: var(--sizes-S-lineHeight);
-			margin-right: 0;
-			padding: 0 var(--pr-t-spacings-50);
-			min-width: 1.25rem;
-			text-align: center;
-			flex-shrink: 0;
-		}
-
 		.navSide-item-arrow {
 			@include icon.S;
 
@@ -203,12 +184,6 @@
 					background-color: var(--components-navSide-bottom-section-palette-hovered-bg);
 					color: var(--components-navSide-bottom-section-palette-hovered-text);
 				}
-			}
-
-			// .navSide-item-alert is deprecated
-			.navSide-item-alert {
-				background-color: var(--components-navSide-bottom-section-palette-alert-color);
-				color: var(--components-navSide-bottom-section-palette-alert-text);
 			}
 		}
 

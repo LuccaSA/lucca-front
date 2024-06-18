@@ -44,19 +44,6 @@
 		}
 	}
 
-	// .mod-counter deprecated
-	&.mod-counter {
-		@include counter;
-
-		&.mod-S {
-			@include counterS;
-		}
-
-		&.mod-XS {
-			@include counterXS;
-		}
-	}
-
 	// .mod-icon is deprecated
 	&.mod-withIcon,
 	&.mod-icon {
