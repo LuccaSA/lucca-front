@@ -8,19 +8,34 @@ export default {
 	argTypes: {
 		luTooltipEnterDelay: {
 			control: { type: 'number' },
+			table: {
+				defaultValue: { summary: '300' },
+			},
 		},
 		luTooltipLeaveDelay: {
 			control: { type: 'number' },
+			table: {
+				defaultValue: { summary: '100' },
+			},
 		},
 		luTooltipDisabled: {
 			control: { type: 'boolean' },
+			table: {
+				defaultValue: { summary: 'false' },
+			},
 		},
 		luTooltipPosition: {
 			control: 'inline-radio',
 			options: ['above', 'below', 'before', 'after'],
+			table: {
+				defaultValue: { summary: 'above' },
+			},
 		},
 		luTooltipWhenEllipsis: {
 			control: { type: 'boolean' },
+			table: {
+				defaultValue: { summary: 'false' },
+			},
 		},
 	},
 	decorators: [
@@ -90,10 +105,10 @@ export default {
 
 export const Basic: StoryObj<LuTooltipTriggerDirective> = {
 	args: {
-		luTooltipEnterDelay: 50,
-		luTooltipLeaveDelay: 50,
+		luTooltipEnterDelay: 300,
+		luTooltipLeaveDelay: 100,
 		luTooltipDisabled: false,
-		luTooltipPosition: 'below',
+		luTooltipPosition: 'above',
 		luTooltipWhenEllipsis: false,
 	},
 };
