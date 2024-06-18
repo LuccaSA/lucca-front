@@ -32,6 +32,9 @@ export class TextInputComponent {
 	@Input({ transform: booleanAttribute })
 	hasSearchIcon = false;
 
+	@Input({ transform: booleanAttribute })
+	valueAlignRight = false;
+
 	@ViewChild('inputElement', { static: true })
 	inputElementRef: ElementRef<HTMLInputElement>;
 

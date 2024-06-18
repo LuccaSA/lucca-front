@@ -1,6 +1,7 @@
 @use '@lucca-front/icons/src/commons/utils/icon';
 @use '@lucca-front/scss/src/commons/utils/reset';
 @use '@lucca-front/scss/src/commons/utils/a11y';
+@use '@lucca-front/scss/src/components/button/exports' as button;
 
 @mixin component($atRoot: 'without: rule') {
 	align-items: flex-start;
@@ -34,6 +35,17 @@
 
 		.callout-content-title {
 			font-weight: 600;
+		}
+
+		.callout-content-description-actions {
+			display: flex;
+			gap: var(--pr-t-spacings-75);
+			margin-top: var(--pr-t-spacings-50);
+			padding: var(--pr-t-spacings-50) 0;
+
+			.button {
+				@include button.S;
+			}
 		}
 
 		.callout-icon {

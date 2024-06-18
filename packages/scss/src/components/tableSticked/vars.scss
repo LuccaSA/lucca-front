@@ -1,8 +1,6 @@
-@mixin vars {
-	// --components-table-sticky-column-max-offset: 50;
-	// --components-table-fixed-column-min-col-width: 2;
-	// --components-table-fixed-column-max-col-width: 20;
-	// --components-table-fixed-column-sticky-shadow-color: #2a3551;
+@use '@lucca-front/scss/src/commons/utils/color';
 
-	--components-table-fixed-column-sticky-shadow-width: 0.625rem;
+@mixin vars {
+	--components-tableSticked-column-sticky-shadow-width: 0.5rem;
+	--components-tableSticked-column-sticky-shadow-color: #{color.transparentize(var(--palettes-neutral-400), 0.24)};
 }

@@ -1,0 +1,12 @@
+@use '@lucca-front/scss/src/components/pageHeader';
+@use '@lucca-front/scss/src/components/skeleton';
+@use '@lucca-front/scss/src/commons/utils/media';
+
+.pageHeader.skeleton.is-loading {
+	.pageHeader-content-actions {
+		width: 100px;
+		@include media.max('XS') {
+			display: none;
+		}
+	}
+}

@@ -1,0 +1,5 @@
+@mixin layoutFixed($i) {
+	min-width: $i * 1rem;
+	max-width: $i * 1rem;
+	width: $i * 1rem;
+}

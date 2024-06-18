@@ -1,0 +1,91 @@
+@use '@lucca-front/scss/src/commons/utils/a11y';
+
+@mixin component($atRoot: 'without: rule') {
+	padding: var(--components-timepicker-padding);
+	border: 0;
+	border-radius: var(--commons-borderRadius-M);
+	box-shadow: 0 0 0 1px var(--palettes-neutral-300);
+	display: inline-flex;
+	background-color: var(--pr-t-elevation-surface-raised);
+	transition: box-shadow var(--commons-animations-durations-fast);
+
+	&:focus-within {
+		@include a11y.focusVisible($offset: 3px);
+		background-color: transparent;
+	}
+
+	@at-root ($atRoot) {
+		.timepicker-field {
+			position: relative;
+			display: inline-block;
+		}
+
+		.timepicker-field-input {
+			background-color: transparent;
+			border-radius: var(--commons-borderRadius-M);
+			text-align: center;
+			color: var(--palettes-neutral-800);
+			width: var(--components-timepicker-input-width);
+			height: var(--components-timepicker-input-height);
+			border: 0;
+			padding: 0;
+			-moz-appearance: textfield;
+
+			&::-webkit-outer-spin-button,
+			&::-webkit-inner-spin-button {
+				-webkit-appearance: none;
+				margin: 0;
+			}
+
+			&:hover,
+			&:focus,
+			&:focus-visible {
+				background-color: var(--palettes-100, var(--palettes-product-100));
+				outline: none;
+			}
+		}
+
+		.timepicker-field-increment {
+			cursor: pointer;
+			position: absolute;
+			bottom: calc(100% + 0.5rem + 1px);
+			left: 0;
+			border: 0;
+			height: 1.25rem;
+			background-color: transparent;
+			color: var(--palettes-neutral-600);
+			display: inline-flex;
+			justify-content: center;
+			align-items: center;
+			border-radius: var(--commons-borderRadius-M);
+			width: var(--components-timepicker-input-width);
+			padding: 0;
+
+			&:last-child {
+				top: calc(100% + 0.5rem + 1px);
+				bottom: auto;
+			}
+
+			&:hover {
+				background-color: var(--palettes-neutral-50);
+				color: var(--palettes-neutral-800);
+			}
+
+			&:focus {
+				background-color: var(--palettes-neutral-100);
+				color: var(--palettes-neutral-800);
+			}
+
+			.lucca-icon {
+				font-size: 1rem;
+			}
+		}
+
+		.timepicker-separator {
+			margin: 0 var(--pr-t-spacings-50);
+			text-align: center;
+			width: 0.5rem;
+			line-height: var(--components-timepicker-input-height);
+		}
+	}
+}

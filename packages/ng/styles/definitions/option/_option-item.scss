@@ -6,8 +6,6 @@
 	--components-options-item-padding-horizontal: var(--pr-t-spacings-100);
 	--components-options-item-multiple-padding: 2.25rem;
 	--components-options-item-icon-color: var(--palettes-neutral-800);
-
-	--components-options-checkbox-left: 0.5rem;
 	--components-options-checkbox-size: 1.25rem;
 	--components-options-checkbox-color: var(--palettes-product-700);
 	--components-options-checkbox-border-radius: 6px;
@@ -116,9 +114,8 @@
 			&::before {
 				display: block;
 				position: absolute;
-				left: var(--components-options-checkbox-left);
-				top: 50%;
-				transform: translateY(-50%);
+				left: var(--pr-t-spacings-100);
+				top: var(--pr-t-spacings-75);
 			}
 
 			&::before {
@@ -140,7 +137,7 @@
 				line-height: var(--components-options-checkbox-size);
 				position: absolute;
 				text-align: center;
-				transform: translateY(-50%) scale(0);
+				transform: scale(0);
 				transition: all 100ms;
 				width: var(--components-options-checkbox-size);
 			}
@@ -153,7 +150,7 @@
 
 				&::after {
 					color: var(--colors-white-color);
-					transform: translateY(-50%) scale(1);
+					transform: scale(1);
 				}
 			}
 

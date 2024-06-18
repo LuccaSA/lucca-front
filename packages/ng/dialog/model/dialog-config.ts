@@ -33,9 +33,9 @@ interface BaseLuDialogConfig<C> {
 	modal?: boolean;
 
 	/**
-	 * Can this dialog box be dismissed by clicking on the backdrop or pressing escape?
+	 * Is this dialog a blocking popup that cannot be dismissed ?
 	 *
-	 * Defaults to true, setting this to false will also remove the close button in the header
+	 * Defaults to false, setting this to true will also remove the close button in the header
 	 * if you're using `lu-dialog-header`.
 	 */
 	alert?: boolean;

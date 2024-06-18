@@ -31,7 +31,7 @@ function getTemplate(args: IndexTableEmptyStateStory): string {
 						</div>
 						<div class="emptyState-content-text">
 							<h3 class="emptyState-content-heading">Empty State</h3>
-							<p>Flatus obsequiorum potest inanes pomerium obsequiorum credi homines vero caelibes orbos potest vile diversitate flatus.</p>
+							<p class="emptyState-content-description">Flatus obsequiorum potest inanes pomerium obsequiorum credi homines vero caelibes orbos potest vile diversitate flatus.</p>
 						</div>
 					</div>
 				</div>

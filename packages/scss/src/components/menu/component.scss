@@ -1,28 +1,25 @@
 @use '@lucca-front/scss/src/commons/utils/reset';
 
 @mixin component($atRoot: 'without: rule') {
+	position: relative;
 	column-gap: var(--pr-t-spacings-400);
 	align-items: center;
 	display: flex;
 	position: relative;
 	flex-wrap: wrap;
 
-	&:not(.mod-noBorder) {
-		&::after {
-			border-bottom-width: var(--commons-divider-width);
-			border-bottom-color: var(--commons-divider-color);
-			border-bottom-style: solid;
-			position: absolute;
-			height: 1px;
-			bottom: 0;
-			left: 0;
-			right: 0;
-			content: '';
-		}
+	&::after {
+		content: var(--components-menu-borderContent);
+		border-bottom-width: var(--commons-divider-width);
+		border-bottom-color: var(--commons-divider-color);
+		border-bottom-style: solid;
+		position: absolute;
+		height: 1px;
+		inset: auto 0 0;
 	}
 
+	// .label is deprecated
 	.label {
-		// deprecated
 		margin-right: 0;
 		background-color: var(--palettes-neutral-100);
 		color: var(--palettes-neutral-700);
@@ -32,41 +29,48 @@
 		.menu-list {
 			@include reset.list;
 
-			align-items: flex-end;
-			column-gap: var(--pr-t-spacings-400);
+			align-items: var(--components-menu-listAlign);
+			gap: var(--components-menu-listGap);
+			flex-direction: var(--components-menu-listDirection);
 			display: flex;
+			flex-grow: 1;
 			flex-wrap: wrap;
+			padding: var(--components-menu-listPadding);
 		}
 
-		.menu-link, // legacy syntax
-		.menu-list-item-action {
+		// .menu-link is deprecated
+		.menu-list-item-action,
+		.menu-link {
 			@include reset.button;
-			padding: var(--components-menu-padding);
+
+			font-size: var(--components-menu-listItemActionFontSize);
+			line-height: var(--components-menu-listItemActionLineHeight);
+			padding: var(--components-menu-listItemActionPadding);
 			border-radius: var(--commons-borderRadius-M);
-			color: var(--palettes-neutral-800);
-			display: inline-flex;
-			align-items: center;
-			text-align: center;
-			gap: var(--pr-t-spacings-100);
+			color: var(--components-menu-listItemActionColor);
+			display: var(--components-menu-listItemActionDisplay);
+			text-align: var(--components-menu-listItemActionAlign);
 			transition-duration: var(--commons-animations-durations-fast);
+			gap: var(--pr-t-spacings-100);
+			align-items: center;
 			transition-property: color;
 			position: relative;
 			text-decoration: none;
 			width: auto;
 			z-index: 1;
+			scroll-margin-inline: var(--spacings-S);
 
 			&::after {
 				background-color: var(--palettes-700, var(--palettes-product-700));
-				border-radius: var(--commons-borderRadius-M) var(--commons-borderRadius-M) 0 0;
+				border-radius: var(--components-menu-listItemActionRadius);
 				transition-duration: var(--commons-animations-durations-fast);
+				height: var(--components-menu-listItemActionRadiusHeight);
+				width: var(--components-menu-listItemActionRadiusWidth);
+				transform: var(--components-menu-listItemActionTransform);
+				inset: var(--components-menu-listItemActionInset);
 				transition-property: transform;
 				display: block;
 				position: absolute;
-				bottom: 0;
-				height: 2px;
-				left: 0;
-				right: 0;
-				transform: scale(0, 1);
 				z-index: 1;
 				content: '';
 			}
@@ -77,14 +81,14 @@
 						color: var(--palettes-neutral-900);
 					}
 
+					// .label is deprecated
 					.label {
-						// deprecated
 						background-color: var(--palettes-100, var(--palettes-product-100));
 						color: var(--palettes-700, var(--palettes-product-700));
 					}
 
 					&::after {
-						transform: scale(0.75, 1);
+						--components-menu-listItemActionTransform: scale(0.75, 1);
 					}
 				}
 			}

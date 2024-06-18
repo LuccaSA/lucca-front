@@ -1,0 +1,38 @@
+@use 'exports' as *;
+
+.tooltip {
+	@include vars;
+	@include component;
+
+	&.is-above {
+		@include above;
+	}
+
+	&.is-below {
+		@include below;
+	}
+
+	&.is-before {
+		@include before;
+
+		&.is-above {
+			@include beforeAbove;
+		}
+
+		&.is-below {
+			@include beforeBelow;
+		}
+	}
+
+	&.is-after {
+		@include after;
+
+		&.is-above {
+			@include afterAbove;
+		}
+
+		&.is-below {
+			@include afterBelow;
+		}
+	}
+}

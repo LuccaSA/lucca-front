@@ -7,12 +7,12 @@ const usersSearchHandler = genericHandler(
 	// Get and parse params from query params
 	{
 		paging: (p) => p,
-		search: (search) => search.toLowerCase(),
+		clue: (clue) => clue.toLowerCase(),
 		id: (ids) => ids.split(',').map((id) => parseInt(id)),
 	},
 	{
 		// Apply filters to items
-		search: applyFilter((user, { search }) => `${user.firstName} ${user.lastName}`.includes(search)),
+		clue: applyFilter((user, { clue }) => `${user.firstName.toLowerCase()} ${user.lastName.toLowerCase()}`.includes(clue)),
 		id: applyFilter((user, { id }) => id.includes(user.id)),
 		// Then paging/limiting
 		paging: applyV3Paging,

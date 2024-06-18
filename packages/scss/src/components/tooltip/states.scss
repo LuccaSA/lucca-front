@@ -1,0 +1,31 @@
+@mixin above {
+	--components-tooltip-transformOrigin: bottom center;
+}
+
+@mixin below {
+	--components-tooltip-transformOrigin: top center;
+}
+
+@mixin before {
+	--components-tooltip-transformOrigin: center right;
+}
+
+@mixin after {
+	--components-tooltip-transformOrigin: center left;
+}
+
+@mixin beforeAbove {
+	--components-tooltip-transformOrigin: bottom right;
+}
+
+@mixin beforeBelow {
+	--components-tooltip-transformOrigin: top right;
+}
+
+@mixin afterAbove {
+	--components-tooltip-transformOrigin: bottom left;
+}
+
+@mixin afterBelow {
+	--components-tooltip-transformOrigin: top left;
+}

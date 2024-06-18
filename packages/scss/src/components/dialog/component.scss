@@ -6,6 +6,10 @@
 @mixin component($atRoot: 'without: rule') {
 	@include keyframe.scaleIn;
 
+	@supports not (height: 1dvh) {
+		--components-dialog-maxHeight: var(--components-dialog-maxHeightFallback);
+	}
+
 	animation-name: var(--components-dialog-animationOpening);
 	animation-duration: var(--commons-animations-durations-standard);
 	inset: var(--components-dialog-inset);

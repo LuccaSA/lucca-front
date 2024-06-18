@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, TemplateRef } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { LuToastInput, LuToastType, LuToastsComponent, LuToastsService, defaultToastDuration } from '@lucca-front/ng/toast';
@@ -38,6 +38,10 @@ class ToastsStory implements OnInit, OnDestroy {
 		this.toastsService.addToast({ type, title, message, duration });
 	}
 
+	public createToastWithTemplate(type: LuToastType, message: TemplateRef<unknown>): void {
+		this.toastsService.addToast({ type, message });
+	}
+
 	public notifyError(): void {
 		this.error$.next(this.getRandomMessage());
 	}
@@ -59,6 +63,10 @@ class ToastsStory implements OnInit, OnDestroy {
 
 		const random = Math.floor(Math.random() * toastsValues.length);
 		return toastsValues[random];
+	}
+
+	onClickButtonInsideToast() {
+		this.createToast('Info');
 	}
 }
 

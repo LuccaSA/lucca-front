@@ -5,6 +5,7 @@ interface MenuBasicStory {
 	header: boolean;
 	s: boolean;
 	disabled: boolean;
+	vertical: boolean;
 }
 
 export default {
@@ -30,6 +31,11 @@ export default {
 				type: 'boolean',
 			},
 		},
+		vertical: {
+			control: {
+				type: 'boolean',
+			},
+		},
 	},
 } as Meta;
 
@@ -37,23 +43,46 @@ function getTemplate(args: MenuBasicStory): string {
 	const noBorder = args.noBorder ? `mod-noBorder` : '';
 	const header = args.header ? `mod-header` : '';
 	const s = args.s ? `mod-S` : '';
-	const disabled = args.disabled ? `disabled` : '';
-	return `
-	<nav class="menu ${s} ${noBorder} ${header}">
+	const vertical = args.vertical ? `mod-vertical` : '';
+	if (args.disabled)
+		return `
+	<nav class="menu ${s} ${noBorder} ${header} ${vertical}">
 		<ul class="menu-list">
 			<li class="menu-list-item">
-				<a href="#" class="menu-list-item-action" ${disabled} aria-current="page">
-					Tab
+				<a href="#" class="menu-list-item-action" aria-current="page">
+					Menu 1
 				</a>
 			</li>
 			<li class="menu-list-item">
-				<a href="#" class="menu-list-item-action" ${disabled}>
-					Tab
+				<a href="#" class="menu-list-item-action">
+					Menu 2
 				</a>
 			</li>
 			<li class="menu-list-item">
-				<a href="#" class="menu-list-item-action" ${disabled}>
-					Tab
+				<a class="menu-list-item-action is-disabled">
+					Menu 3
+				</a>
+			</li>
+		</ul>	
+	</nav>
+	`;
+	else
+		return `
+	<nav class="menu ${s} ${noBorder} ${header} ${vertical}">
+		<ul class="menu-list">
+			<li class="menu-list-item">
+				<a href="#" class="menu-list-item-action" aria-current="page">
+					Menu 1
+				</a>
+			</li>
+			<li class="menu-list-item">
+				<a href="#" class="menu-list-item-action">
+					Menu 2
+				</a>
+			</li>
+			<li class="menu-list-item">
+				<a href="#" class="menu-list-item-action">
+					Menu 3
 				</a>
 			</li>
 		</ul>
@@ -67,4 +96,4 @@ const Template: StoryFn<MenuBasicStory> = (args) => ({
 });
 
 export const Basic = Template.bind({});
-Basic.args = { noBorder: false, header: false, s: false, disabled: false };
+Basic.args = { noBorder: false, header: false, s: false, disabled: false, vertical: false };

@@ -1,4 +1,4 @@
-import { Directive, inject, Injector, Input, OnChanges, OnDestroy, Renderer2, SimpleChanges, TemplateRef, ViewContainerRef } from '@angular/core';
+import { ComponentRef, Directive, EmbeddedViewRef, inject, Injector, Input, OnChanges, OnDestroy, Renderer2, SimpleChanges, TemplateRef, ViewContainerRef } from '@angular/core';
 import { PORTAL_CONTEXT, PortalContent } from './portal-content';
 
 @Directive({
@@ -18,16 +18,21 @@ export class PortalDirective<T = unknown> implements OnChanges, OnDestroy {
 	public luPortalContext: T | null = null;
 
 	private createdTextElement: Text | null = null;
+	private embeddedViewRef?: EmbeddedViewRef<T>;
+	private componentRef?: ComponentRef<unknown>;
 
 	private render(): void {
 		this.viewContainerRef.clear();
+		this.embeddedViewRef = undefined;
+		this.componentRef = undefined;
 
 		if (typeof this.luPortal !== 'string') {
 			this.destroyRenderedText();
 		}
 
 		if (this.luPortal instanceof TemplateRef) {
-			this.viewContainerRef.createEmbeddedView<T>(this.luPortal, this.luPortalContext);
+			const context = Object.assign({}, this.luPortalContext);
+			this.embeddedViewRef = this.viewContainerRef.createEmbeddedView<T>(this.luPortal, context);
 		} else if (typeof this.luPortal === 'string') {
 			this.renderText(this.luPortal);
 		} else {
@@ -35,8 +40,8 @@ export class PortalDirective<T = unknown> implements OnChanges, OnDestroy {
 				parent: this.injector,
 				providers: [{ provide: PORTAL_CONTEXT, useValue: this.luPortalContext }],
 			});
-			const ref = this.viewContainerRef.createComponent(this.luPortal, { injector });
-			ref.changeDetectorRef.detectChanges();
+			this.componentRef = this.viewContainerRef.createComponent(this.luPortal, { injector });
+			this.componentRef.changeDetectorRef.detectChanges();
 		}
 	}
 
@@ -45,11 +50,15 @@ export class PortalDirective<T = unknown> implements OnChanges, OnDestroy {
 			// If we're here, it means that either the template ref changed or the string changed,
 			// meaning that we need to render again
 			this.render();
+		} else if (changes['luPortalContext'] && this.embeddedViewRef) {
+			this.updateEmbeddedViewContext(this.luPortalContext);
 		}
 	}
 
 	ngOnDestroy(): void {
 		this.destroyRenderedText();
+		this.embeddedViewRef?.destroy();
+		this.componentRef?.destroy();
 	}
 
 	private renderText(text: string): void {
@@ -68,6 +77,23 @@ export class PortalDirective<T = unknown> implements OnChanges, OnDestroy {
 		if (this.createdTextElement) {
 			this.renderer.removeChild(this.createdTextElement.parentNode, this.createdTextElement);
 			this.createdTextElement = null;
+		}
+	}
+
+	/**
+	 * Embeded view context should not be overwritten, but updated.
+	 * @see https://github.com/angular/angular/pull/51887
+	 */
+	private updateEmbeddedViewContext(context: T): void {
+		if (this.embeddedViewRef) {
+			const props = Object.keys(context);
+
+			for (const prop of props) {
+				delete this.embeddedViewRef.context[prop];
+			}
+
+			Object.assign(this.embeddedViewRef.context, context);
+			this.embeddedViewRef.detectChanges();
 		}
 	}
 }

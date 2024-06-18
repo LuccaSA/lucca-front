@@ -1,13 +1,16 @@
+@use '@lucca-front/scss/src/commons/utils/a11y';
+
+@mixin invalid {
+	--components-timepicker-background: var(--palettes-error-50);
+	--components-timepicker-border: var(--palettes-error-400);
+
+	&:hover {
+		--components-timepicker-border: var(--palettes-error-600);
+	}
+}
+
 @mixin disabled {
-	background-color: var(--palettes-neutral-100);
-	color: var(--palettes-neutral-600);
-
-	.timepicker-field-input {
-		background: transparent;
-		color: var(--palettes-neutral-600);
-	}
-
-	.timepicker-field-increment {
-		display: none;
-	}
+	--components-timepicker-background: var(--palettes-neutral-100);
+	--components-timepicker-border: var(--palettes-neutral-400);
+	--components-timepicker-color: var(--palettes-neutral-600);
 }

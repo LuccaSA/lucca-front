@@ -7,7 +7,6 @@
 @forward 'chip'; // 1 Ko
 @forward 'title'; // 1 Ko
 @forward 'label'; // 1 Ko
-@forward 'status'; // 1 Ko
 @forward 'filterBar'; // 1 Ko
 @forward 'filters'; // 1 Ko
 @forward 'divider'; // 1 Ko
@@ -36,7 +35,6 @@
 @forward 'switch'; // 4 Ko
 @forward 'switchField'; // new component for switch
 @forward 'file'; // 5 Ko
-@forward 'toast'; // 5 Ko
 @forward 'layout'; // 5 Ko
 @forward 'radioButtons'; // 5 Ko
 @forward 'table'; // 7 Ko
@@ -49,9 +47,9 @@
 @forward 'textField'; // new component for checkbox
 @forward 'navside'; // 15 Ko
 @forward 'form'; // 25 Ko
-@forward 'tableFixed'; // 33 Ko
+@forward 'tableFixed'; // 2 Ko
 @forward 'grid';
-@forward 'tableSticked'; // 67 Ko
+@forward 'tableSticked'; // 8 Ko
 @forward 'timepicker'; //
 @forward 'notchBox';
 @forward 'statusBadge';
@@ -77,8 +75,16 @@
 @forward 'avatar';
 @forward 'indexTable';
 @forward 'indexTableSorted';
+@forward 'tooltip';
 @forward 'userPopover';
+@forward 'scrollBox';
+@forward 'comment';
+@forward 'toast'; // 5 Ko
+@forward 'popover';
 
 // Deprecated CSS components
 // @forward 'gridLegacy'; // 40 Ko
 // @forward 'emptyStateDeprecated';
+
+// @forward 'tableFixedDeprecated'; // 33 Ko
+// @forward 'tableStickedDeprecated'; // 67 Ko

@@ -4,6 +4,7 @@
 	--components-dialog-height: fit-content;
 	--components-dialog-maxWidth: calc(100vw - (var(--pr-t-spacings-200) * 2));
 	--components-dialog-maxHeight: calc(100dvh - (var(--pr-t-spacings-200) * 2));
+	--components-dialog-maxHeightFallback: calc(100vh - (var(--pr-t-spacings-200) * 2));
 	--components-dialog-borderRadius: var(--commons-borderRadius-L);
 	--components-dialog-inset: 0;
 	--components-dialog-animationOpening: scaleIn;

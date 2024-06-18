@@ -1,4 +1,4 @@
-<div class="textField">
+<div class="textField" [class.mod-valueAlignRight]="valueAlignRight">
 	<ng-template #textfieldAddon let-addon="addon" let-type="type">
 		<span class="textField-{{type}}" luFormFieldId="{{type}}" *ngIf="addon.content">
 			<span class="textField-label-{{type}}-item" [attr.aria-label]="addon.ariaLabel">{{ addon.content }}</span>

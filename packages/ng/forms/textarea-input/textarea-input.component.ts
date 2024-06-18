@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
-import { InputDirective } from '@lucca-front/ng/form-field';
 import { ReactiveFormsModule } from '@angular/forms';
+import { InputDirective } from '@lucca-front/ng/form-field';
 import { injectNgControl } from '../inject-ng-control';
 import { NoopValueAccessorDirective } from '../noop-value-accessor.directive';
 
@@ -18,4 +18,7 @@ export class TextareaInputComponent {
 
 	@Input()
 	placeholder: string = '';
+
+	@Input()
+	rows?: number;
 }

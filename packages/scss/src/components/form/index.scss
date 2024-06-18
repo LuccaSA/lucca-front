@@ -6,6 +6,10 @@
 
 .form {
 	@include component;
+
+	&.mod-maxWidth {
+		@include maxWidth;
+	}
 }
 
 .form-fieldset {
@@ -38,7 +42,7 @@
 		@include checkable;
 	}
 
-	&:has(.textField-input-value[aria-invalid='true']) {
+	&:has(.textField-input-value[aria-invalid='true'], .timePicker-fieldset-group-textfield-input[aria-invalid='true']) {
 		@include invalid;
 	}
 

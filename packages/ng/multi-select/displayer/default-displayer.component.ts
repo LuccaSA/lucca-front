@@ -1,5 +1,5 @@
 import { AsyncPipe, NgFor, NgIf, NgPlural, NgPluralCase } from '@angular/common';
-import { ChangeDetectionStrategy, Component, DestroyRef, ElementRef, OnInit, ViewChild, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, ElementRef, inject, OnInit, ViewChild } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { getIntl } from '@lucca-front/ng/core';
@@ -40,7 +40,7 @@ import { of } from 'rxjs';
 					<span class="u-mask">{{ intl.removeOption }}</span>
 				</button>
 			</div>
-			<div class="chip" *ngIf="overflowOptions$ | async as overflow">+ {{ overflow }}</div>
+			<div class="multipleSelect-displayer-chip chip" *ngIf="overflowOptions$ | async as overflow">+ {{ overflow }}</div>
 		</div>
 	`,
 	styleUrls: ['./default-displayer.component.scss'],

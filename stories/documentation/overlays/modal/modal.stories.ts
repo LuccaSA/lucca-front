@@ -9,7 +9,8 @@ import { generateMarkdownCodeBlock, getStoryGenerator, useDocumentationStory } f
 
 type StoryComponent = LuModalConfig & { useDynamicContent: boolean; message: string };
 
-const globalArgTypes = {
+// We have to cast as any to make this
+const globalArgTypes: any = {
 	mode: {
 		options: ['modal', 'sidepanel'],
 		control: {

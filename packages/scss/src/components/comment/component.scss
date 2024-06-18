@@ -1,0 +1,90 @@
+@mixin component($atRoot: 'without: rule') {
+	container: comment / inline-size;
+	display: flex;
+	flex-direction: column;
+	gap: var(--pr-t-spacings-100);
+	max-width: 40rem;
+
+	@at-root ($atRoot) {
+		.comment-infos {
+			display: flex;
+			font-style: normal;
+			gap: var(--pr-t-spacings-100);
+			justify-content: flex-start;
+			align-items: flex-start;
+		}
+
+		.comment-infos-content {
+			flex-direction: column;
+			display: var(--components-comment-info-content-display);
+			font-size: var(--components-comment-info-fontSize);
+			line-height: var(--components-comment-info-lineHeight);
+			margin-top: var(--components-comment-info-content-marginTop);
+		}
+
+		.comment-infos-name {
+			& + .comment-infos-date {
+				&::before {
+					content: var(--components-comment-info-separator);
+					color: var(--palettes-grey-400);
+					padding-inline: 1ch;
+
+					@supports (content: '*' / '') {
+						content: var(--components-comment-info-separator) / '';
+					}
+				}
+			}
+		}
+
+		.comment-content {
+			background: var(--palettes-grey-50);
+			border-radius: var(--commons-borderRadius-M) var(--commons-borderRadius-L) var(--commons-borderRadius-L);
+			display: flex;
+			flex-direction: column;
+			gap: var(--pr-t-spacings-150);
+			margin: 0 0 0 var(--components-comment-content-margin);
+			max-width: fit-content;
+			padding: var(--pr-t-spacings-100) var(--pr-t-spacings-150);
+		}
+
+		.comment-content-text {
+			margin-bottom: 0;
+		}
+
+		.comment-content-textContainer {
+			display: flex;
+			flex-direction: column;
+			gap: var(--pr-t-spacings-100);
+
+			> * {
+				margin: 0;
+			}
+		}
+
+		.comment-content-text {
+			font-size: var(--components-comment-text-fontSize);
+			line-height: var(--components-comment-text-lineHeight);
+		}
+
+		.comment-content-textContainer {
+			font-size: var(--components-comment-text-fontSize);
+			line-height: var(--components-comment-text-lineHeight);
+		}
+
+		.commentWrapper {
+			display: flex;
+			flex-direction: column;
+			gap: var(--pr-t-spacings-100);
+			margin: 0;
+			padding: 0;
+		}
+
+		.commentWrapper-item {
+			list-style: none;
+
+			&.mod-WrapperAvatar ~ &:not(.mod-WrapperAvatar) {
+				padding-left: var(--components-comment-content-margin);
+			}
+		}
+	}
+}

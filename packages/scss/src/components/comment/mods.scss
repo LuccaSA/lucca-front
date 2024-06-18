@@ -1,0 +1,37 @@
+@use '@lucca-front/scss/src/commons/utils/a11y';
+
+@mixin S {
+	--components-comment-text-fontSize: var(--sizes-S-fontSize);
+	--components-comment-text-lineHeight: var(--sizes-S-lineHeight);
+	--components-comment-info-fontSize: var(--sizes-XS-fontSize);
+	--components-comment-info-lineHeight: var(--sizes-XS-lineHeight);
+	--components-comment-info-content-marginTop: var(--pr-t-spacings-50);
+}
+
+@mixin noAvatar {
+	--components-comment-content-margin: 0;
+}
+
+@mixin narrow {
+	@at-root {
+		.comment-infos-content {
+			--components-comment-info-content-display: flex;
+		}
+
+		.comment-infos-name + .comment-infos-date {
+			&::before {
+				--components-comment-info-separator: none;
+			}
+		}
+	}
+}
+
+@mixin wrapperCompact {
+	.commentWrapper-item {
+		&:not(:first-child) {
+			.comment-infos {
+				@include a11y.mask;
+			}
+		}
+	}
+}

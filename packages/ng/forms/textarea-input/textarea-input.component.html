@@ -1,5 +1,11 @@
 <div class="textField">
 	<div class="textField-input">
-		<textarea luInput class="textField-input-value" [formControl]="ngControl.control" [placeholder]="placeholder"></textarea>
+		<textarea
+			luInput
+			class="textField-input-value"
+			[formControl]="ngControl.control"
+			[attr.placeholder]="placeholder"
+			[attr.rows]="rows"
+		></textarea>
 	</div>
 </div>

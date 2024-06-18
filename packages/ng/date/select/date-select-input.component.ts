@@ -1,7 +1,7 @@
 import { Overlay, OverlayModule } from '@angular/cdk/overlay';
 import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, forwardRef, Input, Renderer2, ViewContainerRef } from '@angular/core';
 import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors, Validator } from '@angular/forms';
-import { ALuDateAdapter, ELuDateGranularity, getIntl } from '@lucca-front/ng/core';
+import { ALuDateAdapter, ELuDateGranularity, LuDateGranularity, getIntl } from '@lucca-front/ng/core';
 import { LuInputClearerComponent, LuInputDirective, LuInputDisplayerDirective } from '@lucca-front/ng/input';
 import { ILuInputWithPicker } from '@lucca-front/ng/picker';
 import { ALuSelectInputComponent } from '@lucca-front/ng/select';
@@ -32,7 +32,7 @@ import { LU_DATE_SELECT_INPUT_TRANSLATIONS } from './date-select-input.translate
 export class LuDateSelectInputComponent<D> extends ALuSelectInputComponent<D> implements ControlValueAccessor, ILuInputWithPicker<D>, AfterViewInit, Validator {
 	@Input() min?: D;
 	@Input() max?: D;
-	@Input() granularity: ELuDateGranularity = ELuDateGranularity.day;
+	@Input() granularity: LuDateGranularity = ELuDateGranularity.day;
 	@Input('placeholder') override set inputPlaceholder(p: string) {
 		this._placeholder = p;
 	}
