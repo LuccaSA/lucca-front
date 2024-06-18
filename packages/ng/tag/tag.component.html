@@ -1,11 +1,11 @@
 @if (link) {
-	<a [routerLink]="link" class="tag mod-{{size}} palette-{{palette}}" [class.mod-outlined]="outlined">
-		@if (icon) {
-			<lu-icon [icon]="icon"></lu-icon><span class="tag-content">{{label}}</span> } @else { {{label}} }</a
-	>
+<a [routerLink]="link" class="tag mod-{{size}} palette-{{palette}}" [class.mod-outlined]="outlined">
+	@if (icon) {
+	<lu-icon [icon]="icon"></lu-icon><span class="tag-content">{{ label }}</span> } @else { {{ label }} }</a
+>
 } @else {
-	<span class="tag mod-{{size}} palette-{{palette}}" [class.mod-outlined]="outlined">
-		@if (icon) {
-			<lu-icon [icon]="icon"></lu-icon><span class="tag-content">{{label}}</span> } @else { {{label}} }</span
-	>
+<span class="tag mod-{{size}} palette-{{palette}}" [class.mod-outlined]="outlined">
+	@if (icon) {
+	<lu-icon [icon]="icon"></lu-icon><span class="tag-content">{{ label }}</span> } @else { {{ label }} }</span
+>
 }
