@@ -20,16 +20,18 @@ export default {
 			control: {
 				type: 'select',
 			},
-			description: 'Passing no class causes a default switch to XXS.',
+			description: '[v18.1] Modifie le breakpoint. Default: XXS',
 		},
 		container: {
 			type: 'boolean',
+			description: '[v18.1]',
 		},
 		containerMax: {
 			options: ['mod-maxXXXL', 'mod-maxXXL', 'mod-maxXL', 'mod-maxL', 'mod-maxM'],
 			control: {
 				type: 'select',
 			},
+			description: '[v18.1]',
 		},
 	},
 } as Meta;
