@@ -53,12 +53,22 @@ export class EmptyStatePageComponent {
 	@Input()
 	contentBackgroundColor = 'var(--pr-t-elevation-surface-default)';
 
+	/**
+	 * [v18.1] Optional
+	 */
 	@Input()
 	title: string;
 
+	/**
+	 * [v18.1] Optional
+	 */
 	@Input()
 	description: PortalContent;
 
+
+	/**
+	 * [v18.1]
+	 */
 	@Input()
 	hx: 1 | 2 | 3 | 4 | 5 | 6 = 1;
 }
