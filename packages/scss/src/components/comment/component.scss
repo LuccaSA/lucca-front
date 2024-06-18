@@ -22,11 +22,17 @@
 			margin-top: var(--components-comment-info-content-marginTop);
 		}
 
+		.comment-infos-date {
+			color: var(--palettes-neutral-700);
+		}
+
 		.comment-infos-name {
+			color: var(--palettes-neutral-800);
+
 			& + .comment-infos-date {
 				&::before {
 					content: var(--components-comment-info-separator);
-					color: var(--palettes-grey-400);
+					color: var(--palettes-neutral-400);
 					padding-inline: 1ch;
 
 					@supports (content: '*' / '') {
@@ -37,7 +43,7 @@
 		}
 
 		.comment-content {
-			background: var(--palettes-grey-50);
+			background: var(--palettes-neutral-50);
 			border-radius: var(--commons-borderRadius-M) var(--commons-borderRadius-L) var(--commons-borderRadius-L);
 			display: flex;
 			flex-direction: column;
