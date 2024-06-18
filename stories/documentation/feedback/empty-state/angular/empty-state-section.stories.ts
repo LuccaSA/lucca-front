@@ -30,6 +30,7 @@ export default {
 				min: 1,
 				max: 6,
 			},
+			description: '[v18.1]',
 		},
 		icon: {
 			options: [
@@ -87,6 +88,12 @@ export default {
 				'https://cdn.lucca.fr/lucca-front/assets/empty-states/icons/iconWarning.svg',
 			],
 			control: 'select',
+		},
+		title: {
+			description: '[v18.1] Optional',
+		},
+		description: {
+			description: '[v18.1] Optional',
 		},
 	},
 } as Meta;
