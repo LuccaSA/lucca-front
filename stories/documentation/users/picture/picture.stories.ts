@@ -33,6 +33,7 @@ export default {
 			control: {
 				type: 'select',
 			},
+			description: '[v18.1] XL, XXL & XXXL',
 		},
 		placeholder: {
 			control: {
