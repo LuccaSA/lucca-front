@@ -65,7 +65,6 @@ export class EmptyStatePageComponent {
 	@Input()
 	description: PortalContent;
 
-
 	/**
 	 * [v18.1]
 	 */
