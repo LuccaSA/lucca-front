@@ -32,6 +32,9 @@ export const Basic: StoryObj<ButtonComponent & { label: string }> = {
 				type: 'select',
 			},
 		},
+		delete: {
+			description: '[v18.1] Couleur critical au hover / focus',
+		}
 	},
 	args: {
 		size: 'M',
@@ -40,5 +43,6 @@ export const Basic: StoryObj<ButtonComponent & { label: string }> = {
 		state: 'default',
 		luButton: '',
 		label: '',
+		delete: false,
 	},
 };
