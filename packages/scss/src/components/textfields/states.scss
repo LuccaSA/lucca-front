@@ -24,12 +24,6 @@
 		--components-clear-cross-color: var(--palettes-neutral-500) !important;
 		pointer-events: none;
 	}
-
-	~ .textfield-actionClear {
-		// deprecated
-		color: var(--palettes-neutral-500) !important;
-		pointer-events: none;
-	}
 }
 
 @mixin filterHover {

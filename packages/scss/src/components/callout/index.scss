@@ -7,8 +7,4 @@
 	&.mod-S {
 		@include S;
 	}
-
-	&.mod-tiny {
-		@include tiny;
-	}
 }
