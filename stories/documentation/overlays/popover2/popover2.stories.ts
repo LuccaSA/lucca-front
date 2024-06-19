@@ -51,7 +51,7 @@ export const Basic: StoryObj<PopoverDirective> = {
 				`
 	.demo {
 		display: flex;
-		min-height: 16rem;
+		min-height: 20rem;
 		align-items: center;
 		justify-content: center;
 	}`,
