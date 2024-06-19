@@ -7,15 +7,13 @@ export default {
 } as Meta;
 
 function getTemplate(args: BreadcrumbsCompactStory): string {
-	return `
-	<nav class="breadcrumbs mod-compact" aria-describedby="breadcrumbs-title">
-		<p id="breadcrumbs-title" class="u-mask">Breadcrumbs</p>
-		<ol class="breadcrumbs-list">
-			<li class="breadcrumbs-list-item"><a href="#" class="breadcrumbs-list-item-action">Previous page</a></li>
-			<li class="breadcrumbs-list-item"><span aria-current="page" class="breadcrumbs-list-item-action">Current page</span></li>
-		</ol>
-	</nav>
-	`;
+	return `<nav class="breadcrumbs mod-compact" aria-describedby="breadcrumbs-title">
+	<p id="breadcrumbs-title" class="u-mask">Breadcrumbs</p>
+	<ol class="breadcrumbs-list">
+		<li class="breadcrumbs-list-item"><a href="#" class="breadcrumbs-list-item-action">Previous page</a></li>
+		<li class="breadcrumbs-list-item"><span aria-current="page" class="breadcrumbs-list-item-action">Current page</span></li>
+	</ol>
+</nav>`;
 }
 
 const Template: StoryFn<BreadcrumbsCompactStory> = (args) => ({
