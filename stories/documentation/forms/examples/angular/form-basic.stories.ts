@@ -17,7 +17,7 @@ function getTemplate(): string {
 	return `<form class="form">
 	<header class="form-header">
 		<h1 class="form-header-title">Form title</h1>
-		<span class="form-header-mandatory" aria-hidden="true"><sup class="form-header-mandatory-asterisk">*</sup> Champs obligatoires</span>
+		<!--<span class="form-header-mandatory" aria-hidden="true"><sup class="form-header-mandatory-asterisk">*</sup> Champs obligatoires</span>-->
 	</header>
 	<fieldset class="fieldset" aria-labelledby="fieldsetTitleContent1">
 		<legend class="fieldset-title">
