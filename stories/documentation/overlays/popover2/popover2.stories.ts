@@ -47,15 +47,15 @@ export const Basic: StoryObj<PopoverDirective> = {
 	</ng-template>
 </div>
 `),
-styles: [
-	`
+			styles: [
+				`
 	.demo {
 		display: flex;
 		min-height: 16rem;
 		align-items: center;
 		justify-content: center;
 	}`,
-],
+			],
 		};
 	},
 	args: {
