@@ -7,6 +7,7 @@ import { ISO8601Time } from '../core/date-primitives';
 import {
 	convertStringToIsoTime,
 	createIsoTimeFromHoursAndMinutes,
+	formatAMPM,
 	getHoursDisplayPartFromIsoTime,
 	getHoursPartFromIsoTime,
 	getMinutesDisplayPartFromIsoTime,
@@ -42,11 +43,13 @@ export class TimePickerComponent extends BasePickerComponent {
 
 	displayArrows = input(false, { transform: booleanAttribute });
 
+	ampm = input(false, { transform: booleanAttribute });
+
 	@Input() label: string;
 
 	timeChange = output<TimeChangeEvent>();
 
-	protected hoursDisplay = computed(() => getHoursDisplayPartFromIsoTime(this.value()));
+	protected hoursDisplay = computed(() => getHoursDisplayPartFromIsoTime(this.value(), this.ampm()));
 	protected minutesDisplay = computed(() => getMinutesDisplayPartFromIsoTime(this.value()));
 
 	protected hours = computed(() => getHoursPartFromIsoTime(this.value()));
@@ -64,7 +67,14 @@ export class TimePickerComponent extends BasePickerComponent {
 	protected hoursDecimalConf = DEFAULT_TIME_DECIMAL_PIPE_FORMAT;
 
 	protected maxHours = computed(() => {
+		if (this.ampm()) {
+			return 12;
+		}
 		return getHoursPartFromIsoTime(this.max() ?? '23:59:59');
+	});
+
+	protected ampmDisplay = computed(() => {
+		return formatAMPM(this.hours()).suffix;
 	});
 
 	writeValue(value: ISO8601Time): void {
@@ -208,5 +218,20 @@ export class TimePickerComponent extends BasePickerComponent {
 		if (isNotNil(this.hoursPart)) {
 			this.focusPart('hours');
 		}
+	}
+
+	switchAmpm(ampmDisplay: 'AM' | 'PM') {
+		let hours = getHoursPartFromIsoTime(this.value());
+		const minutes = getMinutesPartFromIsoTime(this.value());
+		if (ampmDisplay === 'AM') {
+			hours = circularize(hours + 12, 23);
+		} else {
+			hours = circularize(hours - 12, 23);
+		}
+		this.setTime({
+			source: 'input',
+			previousValue: this.value(),
+			value: createIsoTimeFromHoursAndMinutes(hours, minutes),
+		});
 	}
 }

@@ -35,6 +35,8 @@ export class TimePickerPartComponent {
 
 	value: ModelSignal<number | '--'> = model('--');
 
+	display = input<number | '--'>();
+
 	max = input(0, {
 		transform: numberAttribute,
 	});
@@ -69,6 +71,9 @@ export class TimePickerPartComponent {
 	valueLabel = computed(() => {
 		if (this.hideValue()) {
 			return '  ';
+		}
+		if (this.display() !== undefined) {
+			return this.display();
 		}
 		const value = this.value();
 		if (value === '--') {

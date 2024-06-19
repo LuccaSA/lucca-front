@@ -35,12 +35,27 @@ export const getHoursPartFromIsoTime = (time: ISO8601Time): number => Number(tim
 export const getMinutesPartFromIsoTime = (time: ISO8601Time): number => Number(time.split(':')[1]) || 0;
 export const getSecondsPartFromIsoTime = (time: ISO8601Time): number => Number(time.split(':')[2]) || 0;
 
-export const getHoursDisplayPartFromIsoTime = (time: ISO8601Time): number | '--' => {
+export const getHoursDisplayPartFromIsoTime = (time: ISO8601Time, ampm = false): number | '--' => {
 	const hours = time.split(':')[0];
 	if (hours === '--') {
 		return hours;
 	}
+	if (ampm) {
+		// Most consistent impl is to create a date and ask date-fns
+		return formatAMPM(Number(hours)).hours;
+	}
 	return Number(hours);
+};
+
+export const formatAMPM = (inputHours: number): { hours: number; suffix: 'AM' | 'PM' } => {
+	let hours = inputHours;
+	const suffix = hours >= 12 ? 'PM' : 'AM';
+	hours = hours % 12;
+	hours = hours ? hours : 12; // 0 should be 12
+	return {
+		hours,
+		suffix,
+	};
 };
 
 export const getMinutesDisplayPartFromIsoTime = (time: ISO8601Time): number | '--' => {
