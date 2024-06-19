@@ -25,7 +25,10 @@
 		top: 0;
 		bottom: 0;
 		background-repeat: no-repeat;
-		background-size: 75% 100%, 25% 100%, 1px 100%;
+		background-size:
+			75% 100%,
+			25% 100%,
+			1px 100%;
 	}
 
 	&::before {
@@ -81,7 +84,7 @@
 				display: block;
 				top: 1px;
 				bottom: 1px;
-				width: calc(var(--components-scrollBox-shadowWidth) * 2);
+				width: calc(var(--components-scrollBox-shadowWidth) / 2);
 				pointer-events: none;
 			}
 
