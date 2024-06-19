@@ -26,26 +26,36 @@ export default {
 
 export const Basic: StoryObj<PopoverDirective> = {
 	render: (args, { argTypes }) => {
-		const action = args.luPopoverTrigger === 'click' ? 'Click me' : 'Click me or hover me';
+		const action = args.luPopoverTrigger === 'click' ? 'Cliquez-moi' : 'Cliquez ou survolez-moi';
 		let openDelay = '';
 		if (args.luPopoverTrigger !== 'click') {
 			openDelay = ' ' + args.luPopoverOpenDelay + 'ms';
 		}
 		return {
-			template: cleanupTemplate(`
-<button style="margin: 8rem; user-select: none" luButton [luPopover2]="contentRef" ${generateInputs(args, argTypes)}>${action}${openDelay}!</button>
-<ng-template #contentRef>
-	<div class="popover-contentOptional">
-		<div class="verticalNavigation mod-iconless">
-			<ul class="verticalNavigation-list u-listReset">
-				<li class="verticalNavigation-list-item"><a href="#" class="verticalNavigation-list-item-link">Item A</a></li>
-				<li class="verticalNavigation-list-item"><a href="#" class="verticalNavigation-list-item-link">Item B</a></li>
-				<li class="verticalNavigation-list-item"><a href="#" class="verticalNavigation-list-item-link">Item C</a></li>
-			</ul>
+			template: cleanupTemplate(`<div class="demo">
+	<button luButton [luPopover2]="contentRef" ${generateInputs(args, argTypes)}>${action}${openDelay} !</button>
+	<ng-template #contentRef>
+		<div class="popover-contentOptional">
+			<div class="verticalNavigation mod-iconless">
+				<ul class="verticalNavigation-list u-listReset">
+					<li class="verticalNavigation-list-item"><a href="#" class="verticalNavigation-list-item-link">Item A</a></li>
+					<li class="verticalNavigation-list-item"><a href="#" class="verticalNavigation-list-item-link">Item B</a></li>
+					<li class="verticalNavigation-list-item"><a href="#" class="verticalNavigation-list-item-link">Item C</a></li>
+				</ul>
+			</div>
 		</div>
-	</div>
-</ng-template>
+	</ng-template>
+</div>
 `),
+			styles: [
+				`
+	.demo {
+		display: flex;
+		min-height: 16rem;
+		align-items: center;
+		justify-content: center;
+	}`,
+			],
 		};
 	},
 	args: {

@@ -48,57 +48,38 @@ export default {
 		return {
 			styles: [
 				`
-					.ellipsis-padding {
-						width: 228px;
-						padding-inline: 14px;
+					h3 {
+						margin: 0;
 					}
-
+					.button {
+						margin-bottom: var(--pr-t-spacings-200);
+					}
 					.ellipsis-example {
-						width: 100px;
+						width: 11rem;
 					}
 				`,
 			],
-			template: `
-		<button
-			type="button"
-			class="button pr-u-marginBlock400"
-			style="margin-inline: 100px"
-			luTooltip="so you can see me"
-			${generateInputs(args, argTypes)}
-		>
-			Come over here
-		</button>
-		<br />
-		<b>Ellipsis enabled:</b>
-		<div
-			class="ellipsis-example u-ellipsis"
-			luTooltip="In the Game Boy Pokémon games, Pokémon Red, Green, Blue, and Yellow, players were able to access a set of 105 glitch Pokémon."
-			${generateInputs(args, argTypes)}
-			luTooltipWhenEllipsis
-		>
-			In the Game Boy Pokémon games, Pokémon Red, Green, Blue, and Yellow, players were able to access a set of 105 glitch Pokémon.
-		</div>
-		<br />
-		<b>Ellipsis from padding:</b>
-		<div style="width: 228px">
-			<div
-				class="ellipsis-padding u-ellipsis"
-				luTooltip="In the Game Boy Pokémon games."
-				${generateInputs(args, argTypes)}
-				luTooltipWhenEllipsis
-			>
-				In the Game Boy Pokémon games.
-			</div>
-		</div>
-		<br />
-		<b>Same code but text is not ellipsed:</b>
-		<div
-			luTooltip="In the Game Boy Pokémon games, Pokémon Red, Green, Blue, and Yellow, players were able to access a set of 105 glitch Pokémon."
-			${generateInputs(args, argTypes)}
-			luTooltipWhenEllipsis
-		>
-			In the Game Boy Pokémon games, Pokémon Red, Green, Blue, and Yellow, players were able to access a set of 105 glitch Pokémon.
-		</div>`,
+			template: `<h3>Tooltip simple</h3>
+<button
+	type="button"
+	class="button"
+	luTooltip="👋 Hello"
+	${generateInputs(args, argTypes)}
+>Tooltip au survol</button>
+<h3>Tooltip et ellipse</h3>
+<div
+	class="u-ellipsis"
+	style="width: 10rem;"
+	luTooltip="Ce texte est trop long pour être affiché entièrement. Le tooltip apparait au survol."
+	${generateInputs(args, argTypes)}
+	luTooltipWhenEllipsis
+>Ce texte est trop long pour être affiché entièrement. Le tooltip apparait au survol.</div>
+<div
+	class="u-ellipsis"
+	luTooltip="Ce texte est affiché entièrement. Le tooltip n'apparait pas au survol."
+	${generateInputs(args, argTypes)}
+	luTooltipWhenEllipsis
+>Ce texte est affiché entièrement. Le tooltip n'apparait pas au survol.</div>`,
 		};
 	},
 } as Meta;
