@@ -30,6 +30,7 @@ export default {
 		},
 		rows: {
 			control: { type: 'number', min: 2 },
+			description: '[v18.1]',
 		},
 		counter: {
 			description: '[v17.4]',

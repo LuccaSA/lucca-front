@@ -8,7 +8,7 @@ export default {
 
 function getTemplate(args: TimelinesCheckedStory): string {
 	return `
-		<ol class="timeline mod-checkedPastStep">
+		<ol class="timeline mod-checkedPastStep mod-number">
 			<li class="timeline-step">
 				<div class="timeline-step-title">
 					<span class="timeline-step-title-icon" aria-hidden="true"></span>

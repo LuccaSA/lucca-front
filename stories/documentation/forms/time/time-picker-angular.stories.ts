@@ -42,12 +42,11 @@ export const Basic: StoryObj<TimePickerComponent & FormFieldComponent> = {
 				},
 				argTypes,
 			)}>
-<lu-time-picker label="${label}" ${generateInputs(inputArgs, argTypes)}
-	[(ngModel)]="example">
+	<lu-time-picker label="${label}" ${generateInputs(inputArgs, argTypes)} [(ngModel)]="example">
 	</lu-time-picker>
 	<ng-template #labelID>
-    	<span aria-hidden="true">${label}</span>
-  	</ng-template>
+			<span aria-hidden="true">${label}</span>
+		</ng-template>
 </lu-form-field>
 
 {{example}}`),
