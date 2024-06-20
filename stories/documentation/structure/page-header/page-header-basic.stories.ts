@@ -55,7 +55,7 @@ function getTemplate(args: PageHeaderBasicStory): string {
 			<p class="pr-u-marginBottom0">
 				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac justo scelerisque, blandit nibh quis, imperdiet justo.
 				Nullam condimentum nulla et neque ultricies bibendum
-				<a target="_blank">Lien<span aria-hidden="true" class="lucca-icon icon-arrowExternal mod-XS pr-u-marginLeft50"></span></a>.
+				<a href="#" target="_blank">Lien<span aria-hidden="true" class="lucca-icon icon-arrowExternal mod-XS pr-u-marginLeft50"></span></a>.
 			</p>
 		</div>
 	</header>
@@ -67,5 +67,5 @@ const Template: StoryFn<PageHeaderBasicStory> = (args) => ({
 	template: getTemplate(args),
 });
 
-export const BaiscPageHeader = Template.bind({});
-BaiscPageHeader.args = { sticky: false };
+export const BasicPageHeader = Template.bind({});
+BasicPageHeader.args = { sticky: false };

@@ -1,0 +1,7 @@
+// All responsive behaviours are defined in this file through various mixins.
+// The file may be empty but must be present.
+// All property values modified by a responsive behaviour are modified through a CSS variable.
+
+@mixin sampleBehaviour {
+	--components-sample-property1: otherValue;
+}

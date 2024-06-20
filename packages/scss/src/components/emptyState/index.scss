@@ -1,3 +1,4 @@
+@use '@lucca-front/scss/src/commons/utils/media';
 @use 'exports' as *;
 
 .emptyState {
@@ -11,4 +12,60 @@
 	&.mod-center {
 		@include center;
 	}
+}
+
+@mixin responsive(
+	$breakpoint: 'XXS',
+	$breakpoint2: null,
+	$inverted: true,
+	$at: 'media',
+	$containerName: '',
+	$responsive: null,
+	$size: 'width',
+	$selector: '.emptyState'
+) {
+	#{if($responsive, $selector + '.responsive-' + $responsive, $selector)} {
+		@include media.query(
+			$breakpoint: $breakpoint,
+			$breakpoint2: $breakpoint2,
+			$inverted: $inverted,
+			$at: $at,
+			$containerName: $containerName,
+			$size: $size
+		) {
+			@include pageActionsNarrow;
+			@include pageHeadingNarrow;
+		}
+	}
+}
+
+@mixin responsiveBackground(
+	$breakpoint: 'S',
+	$breakpoint2: null,
+	$inverted: true,
+	$at: 'media',
+	$containerName: '',
+	$responsive: null,
+	$size: 'width',
+	$selector: '.emptyState'
+) {
+	#{$selector} {
+		@include media.query(
+			$breakpoint: $breakpoint,
+			$breakpoint2: $breakpoint2,
+			$inverted: $inverted,
+			$at: $at,
+			$containerName: $containerName,
+			$size: $size
+		) {
+			@include pageNarrow;
+		}
+	}
+}
+
+$responsive: true !default;
+
+@if $responsive {
+	@include responsive;
+	@include responsiveBackground;
 }

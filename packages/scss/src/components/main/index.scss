@@ -1,10 +1,5 @@
+@use '@lucca-front/scss/src/commons/utils/media';
 @use 'exports' as *;
-
-.main {
-	&:is(.is-notScrollable, .notScrollable) {
-		@include notScrollable;
-	}
-}
 
 .main-content {
 	@include vars;
@@ -29,4 +24,36 @@
 	.mod-withMenuCompact & {
 		@include menuCompact;
 	}
+}
+
+@mixin responsive(
+	$breakpoint: 'S',
+	$breakpoint2: null,
+	$inverted: true,
+	$at: 'media',
+	$containerName: '',
+	$responsive: null,
+	$size: 'width',
+	$selector: '.main-content'
+) {
+	#{if($responsive, $selector + '.responsive-' + $responsive, $selector)} {
+		@include media.query(
+			$breakpoint: $breakpoint,
+			$breakpoint2: $breakpoint2,
+			$inverted: $inverted,
+			$at: $at,
+			$containerName: $containerName,
+			$size: $size
+		) {
+			@include narrow;
+			@include bannerNarrow;
+			@include notScrollable;
+		}
+	}
+}
+
+$responsive: true !default;
+
+@if $responsive {
+	@include responsive;
 }

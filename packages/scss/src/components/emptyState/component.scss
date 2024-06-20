@@ -1,5 +1,3 @@
-@use '@lucca-front/scss/src/components/title/exports' as title;
-
 @mixin component($atRoot: 'without: rule') {
 	display: flex;
 	flex-direction: column;
@@ -34,10 +32,11 @@
 		}
 
 		.emptyState-content-heading {
-			@include title.component;
-			@include title.h3;
-
 			margin-bottom: 0;
+			padding-block: var(--components-emptyState-heading-padding);
+			font-size: var(--components-emptyState-heading-fontSize);
+			line-height: var(--components-emptyState-heading-lineHeight);
+			font-weight: var(--components-emptyState-heading-fontWeight);
 		}
 
 		.emptyState-content-description {

@@ -1,0 +1,173 @@
+@mixin cardList {
+	&.mod-responsiveCardList {
+		display: flex;
+		flex-direction: column;
+		gap: var(--components-indexTable-row-spacing);
+		padding: var(--components-indexTable-padding);
+
+		.indexTable-head {
+			display: none;
+		}
+
+		.indexTable-body {
+			display: flex;
+			flex-direction: column;
+		}
+
+		.indexTable-body-row,
+		.indexTable-foot-row {
+			position: relative;
+			display: grid;
+			// Grid layout by default is a basic one column template.
+			// The user can override this and build a specific layout by using --components-indexTable-row-responsive-grid-template-columns, --components-indexTable-row-responsive-grid-template-rows and --components-indexTable-row-responsive-grid-template-areas
+			grid-template-columns: var(--components-indexTable-row-responsive-grid-template-columns, 1fr);
+			grid-template-rows: var(--components-indexTable-row-responsive-grid-template-rows, none);
+			grid-auto-rows: auto;
+			grid-template-areas: var(--components-indexTable-row-responsive-grid-template-areas, none);
+			align-items: center;
+			padding: var(--components-indexTable-row-spacing-responsive) 0;
+			margin-bottom: var(--components-indexTable-row-spacing-responsive);
+
+			// "Title" lines that do not contain "card" cells are smaller
+			&:not(:has(.indexTable-body-row-cell)) {
+				padding: 0;
+				margin-bottom: 0;
+			}
+
+			&:last-child {
+				margin-bottom: 0;
+			}
+		}
+
+		// checkbox, title and subtotal need to stay on the same row
+		.indexTable-body-row-transparentCell {
+			grid-row: 1;
+		}
+
+		// We only need one ::before for the card apparence and one ::after for the possible outline
+		.indexTable-body-row-cell {
+			position: static;
+			grid-column-start: 1;
+			padding: 0 var(--components-indexTable-cell-padding);
+
+			&::before {
+				--components-indexTable-cell-border-radius-left: var(--components-indexTable-cell-border-radius);
+				--components-indexTable-cell-border-radius-right: var(--components-indexTable-cell-border-radius);
+			}
+
+			&::after {
+				--components-indexTable-outline-border-width-left: var(--components-indexTable-outline-border-width);
+				--components-indexTable-outline-border-width-right: var(--components-indexTable-outline-border-width);
+				--components-indexTable-outline-border-radius-left: var(--components-indexTable-outline-border-radius);
+				--components-indexTable-outline-border-radius-right: var(--components-indexTable-outline-border-radius);
+			}
+
+			~ .indexTable-body-row-cell {
+				&::before,
+				&::after {
+					display: none;
+				}
+			}
+		}
+
+		.indexTable-body-row-cell-content[data-label] {
+			display: flex;
+			flex-direction: column;
+			margin-top: var(--pr-t-spacings-50);
+
+			&::before {
+				content: attr(data-label);
+				font-weight: 600;
+			}
+		}
+
+		.indexTable-head-row-cell-checkbox,
+		.indexTable-body-row-cell-checkbox {
+			margin-top: 0;
+		}
+	}
+}
+
+@mixin selectableCardList {
+	&.mod-selectable.mod-responsiveCardList {
+		.indexTable-body-row {
+			grid-template-columns: var(--components-indexTable-row-cell-transparent-width) var(
+					--components-indexTable-row-responsive-grid-template-columns,
+					1fr
+				);
+		}
+
+		.indexTable-body-row-transparentCell {
+			width: auto;
+			// we add a padding-left to keep a correct indent between lvl 1 and lvl 2 titles in nested tables. * .75 is just for cosmetic
+			&:first-child[colspan='2'] + .indexTable-body-row-transparentCell {
+				padding-left: calc(var(--components-indexTable-row-cell-transparent-width) * 0.75);
+			}
+		}
+
+		.indexTable-body-row-cell {
+			--components-indexTable-cell-inset-x-left: var(--components-indexTable-row-cell-transparent-width);
+			grid-column-start: 2;
+		}
+	}
+}
+
+// The stack apparence is put on the row instead of the cells
+@mixin stackableCardList {
+	&.mod-stackable {
+		.mod-responsiveCardList {
+			.indexTable-body-row[class*='mod-stack'] {
+				border: 0;
+				border-bottom-width: var(--components-indexTable-row-stack-border-bottom);
+				border-style: solid;
+				border-color: transparent;
+
+				&::before,
+				&::after {
+					content: '';
+					position: absolute;
+					top: 0;
+					bottom: calc((var(--components-indexTable-row-spacing-responsive) + var(--components-indexTable-stack3-row-spacing)) * -1);
+					background-image: var(--components-indexTable-row-stack2-background-image, none),
+						var(--components-indexTable-row-stack3-background-image, none);
+					background-position: var(--components-indexTable-row-stack2-background-position, 0 0),
+						var(--components-indexTable-row-stack3-background-position, 0 0);
+					background-repeat: no-repeat, no-repeat;
+					transition-property: background-image, background-position;
+					transition-duration: var(--commons-animations-durations-fast);
+				}
+
+				&::before {
+					left: var(--components-indexTable-cell-inset-x-left, 0);
+					right: 50%;
+					--components-indexTable-row-stack2-background-position: left -2px bottom 6px;
+					--components-indexTable-row-stack3-background-position: left 1px bottom 2px;
+				}
+
+				&::after {
+					left: 50%;
+					right: 0;
+					--components-indexTable-row-stack2-background-position: right -2px bottom 6px;
+					--components-indexTable-row-stack3-background-position: right 1px bottom 2px;
+				}
+			}
+
+			.indexTable-body-row-cell {
+				border-bottom: 0;
+				background-image: none;
+			}
+		}
+	}
+}
+
+@mixin selectableStackableCardList {
+	&.mod-selectable {
+		.mod-stackable {
+			.mod-responsiveCardList {
+				.indexTable-body-row {
+					--components-indexTable-cell-inset-x-left: var(--components-indexTable-row-cell-transparent-width);
+				}
+			}
+		}
+	}
+}

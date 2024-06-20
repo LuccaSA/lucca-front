@@ -2,6 +2,7 @@
 // The component’s mixins are requested, then assigned to classes.
 // To add the component to the list of all existing components, call it from `components/index` with `@forward 'sample';`.
 // Modifiers and states are optional and must be prefixed by `.mod-` and `.is-`.
+// A responsive mixin and varible define the default behaviour but can be overridden. All this settings must be preserved.
 
 @use 'exports' as *;
 
@@ -16,4 +17,34 @@
 	&.is-sampleStateA {
 		@include sampleStateA;
 	}
+}
+
+@mixin responsive(
+	$breakpoint: 'M',
+	$breakpoint2: null,
+	$inverted: false,
+	$at: 'container',
+	$containerName: '',
+	$responsive: null,
+	$size: 'width',
+	$selector: '.sample'
+) {
+	#{if($responsive, $selector + '.responsive-' + $responsive, $selector)} {
+		@include media.query(
+			$breakpoint: $breakpoint,
+			$breakpoint2: $breakpoint2,
+			$inverted: $inverted,
+			$at: $at,
+			$containerName: $containerName,
+			$size: $size
+		) {
+			@include sampleBehaviour;
+		}
+	}
+}
+
+$responsive: true !default;
+
+@if $responsive {
+	@include responsive;
 }

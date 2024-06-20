@@ -2,62 +2,76 @@
 @use '@lucca-front/scss/src/commons/utils/media';
 
 .indexTable {
-    @include vars;
-    @include component;
+	@include vars;
+	@include component;
 
-    &.mod-selectable {
-        @include selectable;
-        // Selectable states
-        @include selectableSelectedRow;
-        @include selectableHoveredRow;
-    }
+	&.mod-selectable {
+		@include selectable;
+		// Selectable states
+		@include selectableSelectedRow;
+		@include selectableHoveredRow;
+	}
 
-    &.mod-stackable {
-        @include stackable;
-    }
+	&.mod-stackable {
+		@include stackable;
+	}
 
-    &.mod-stickyHeader {
-        @include stickyHeader;
-    }
+	&.mod-stickyHeader {
+		@include stickyHeader;
+	}
 
-    &[class*='mod-layoutFixed'] {
-        @include layoutFixed;
-    }
+	&[class*='mod-layoutFixed'] {
+		@include layoutFixed;
+	}
 
-    .indexTable-head-row.mod-massSelection {
-        @include massSelection;
-    }
+	.indexTable-head-row.mod-massSelection {
+		@include massSelection;
+	}
 
-    .indexTable-body-row-cell.mod-actions {
-        @include actions;
-    }
+	.indexTable-body-row-cell.mod-actions {
+		@include actions;
+	}
 
-    // Responsive
-    @include media.max('S') {
-        &.mod-responsiveCardList {
-            @include responsiveCardList;
-        }
+	// generic states, non tied to a mod
+	// focus-within
+	@include focusedRow;
 
-        &.mod-selectable.mod-responsiveCardList {
-            @include selectableResponsiveCardList;
-        }
+	// hover
+	@include hoveredRow;
 
-        &.mod-stackable.mod-responsiveCardList {
-            @include stackableResponsiveCardList;
-        }
+	// nested open / closed row
+	@include openClosedRow;
+}
 
-        &.mod-selectable.mod-stackable.mod-responsiveCardList {
-            @include selectableStackableResponsiveCardList;
-        }
-    }
+@mixin responsive(
+	$breakpoint: 'S',
+	$breakpoint2: null,
+	$inverted: true,
+	$at: 'media',
+	$containerName: '',
+	$responsive: null,
+	$size: 'width',
+	$selector: '.indexTable'
+) {
+	#{if($responsive, $selector + '.responsive-' + $responsive, $selector)} {
+		@include media.query(
+			$breakpoint: $breakpoint,
+			$breakpoint2: $breakpoint2,
+			$inverted: $inverted,
+			$at: $at,
+			$containerName: $containerName,
+			$size: $size
+		) {
+			@include cardList;
+			@include selectableCardList;
+			@include stackableCardList;
+			@include selectableStackableCardList;
+		}
+	}
+}
 
-    // generic states, non tied to a mod
-    // focus-within
-    @include focusedRow;
+$responsive: true !default;
 
-    // hover
-    @include hoveredRow;
-
-    // nested open / closed row
-    @include openClosedRow;
+@if $responsive {
+	@include responsive;
 }

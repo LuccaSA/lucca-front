@@ -8,29 +8,34 @@
 	&.mod-sticky {
 		@include sticky;
 	}
+}
 
-	&:not([class*='mod-narrow']),
-	&.mod-narrowAtMediaMaxXXS {
-		@include media.max('XXS') {
+@mixin responsive(
+	$breakpoint: 'XXS',
+	$breakpoint2: null,
+	$inverted: true,
+	$at: 'media',
+	$containerName: '',
+	$responsive: null,
+	$size: 'width',
+	$selector: '.footer'
+) {
+	#{if($responsive, $selector + '.responsive-' + $responsive, $selector)} {
+		@include media.query(
+			$breakpoint: $breakpoint,
+			$breakpoint2: $breakpoint2,
+			$inverted: $inverted,
+			$at: $at,
+			$containerName: $containerName,
+			$size: $size
+		) {
 			@include narrow;
 		}
 	}
+}
 
-	&.mod-narrowAtMediaMaxXS {
-		@include media.max('XS') {
-			@include narrow;
-		}
-	}
+$responsive: true !default;
 
-	&.mod-narrowAtMediaMaxS {
-		@include media.max('S') {
-			@include narrow;
-		}
-	}
-
-	&.mod-narrowAtMediaMaxM {
-		@include media.max('M') {
-			@include narrow;
-		}
-	}
+@if $responsive {
+	@include responsive;
 }

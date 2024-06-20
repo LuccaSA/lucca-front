@@ -1,0 +1,15 @@
+@mixin stickyNarrow {
+	&.mod-sticky {
+		top: calc(var(--commons-banner-height) + var(--commons-navSide-mobile-toggle-height));
+		left: 0 !important;
+	}
+}
+
+@mixin searchNarrow {
+	.pageHeader-content-actions {
+		.textfield.mod-search {
+			width: 100%;
+			flex: auto;
+		}
+	}
+}
