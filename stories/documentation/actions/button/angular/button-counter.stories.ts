@@ -26,6 +26,9 @@ export const Basic: StoryObj<ButtonComponent> = {
 				type: 'select',
 			},
 		},
+		delete: {
+			description: '[v18.1] Couleur critical au hover / focus',
+		}
 	},
 	args: {
 		size: 'M',
@@ -33,5 +36,6 @@ export const Basic: StoryObj<ButtonComponent> = {
 		palette: 'none',
 		state: 'default',
 		luButton: '',
+		delete: false,
 	},
 };

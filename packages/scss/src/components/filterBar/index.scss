@@ -1,4 +1,5 @@
 @use 'exports' as *;
+@use '@lucca-front/scss/src/commons/utils/media';
 
 .filterBar {
 	@include vars;
@@ -7,4 +8,59 @@
 	&.mod-neutral {
 		@include neutral;
 	}
+}
+
+@mixin responsive(
+	$breakpoint: 'S',
+	$breakpoint2: null,
+	$inverted: false,
+	$at: 'container',
+	$containerName: 'filterBar',
+	$responsive: null,
+	$size: 'width',
+	$selector: '.filterBar'
+) {
+	#{if($responsive, $selector + '.responsive-' + $responsive, $selector)} {
+		@include media.query(
+			$breakpoint: $breakpoint,
+			$breakpoint2: $breakpoint2,
+			$inverted: $inverted,
+			$at: $at,
+			$containerName: $containerName,
+			$size: $size
+		) {
+			@include narrow;
+		}
+	}
+}
+
+@mixin responsiveActions(
+	$breakpoint: 'XS',
+	$breakpoint2: null,
+	$inverted: false,
+	$at: 'container',
+	$containerName: 'filterBar',
+	$responsive: null,
+	$size: 'width',
+	$selector: '.filterBar'
+) {
+	#{$selector} {
+		@include media.query(
+			$breakpoint: $breakpoint,
+			$breakpoint2: $breakpoint2,
+			$inverted: $inverted,
+			$at: $at,
+			$containerName: $containerName,
+			$size: $size
+		) {
+			@include actionsNarrow;
+		}
+	}
+}
+
+$responsive: true !default;
+
+@if $responsive {
+	@include responsive;
+	@include responsiveActions;
 }

@@ -1,17 +1,22 @@
-<div class="toasts mod-withCircularGauge" aria-live="polite" [class.mod-bottom]="bottom">
+<div class="toasts" aria-live="polite" [class.mod-bottom]="bottom">
 	<div *ngFor="let toast of toasts$ | async; trackBy: trackToast" class="toasts-item" [ngClass]="paletteClassByToastType[toast.type]">
 		<span *ngIf="toast.type" class="toast-item-icon lucca-icon" aria-hidden="true" [ngClass]="iconClassByToastType[toast.type]"></span>
 		<div class="toast-item-content">
 			<div *ngIf="toast.title"><strong>{{ toast.title }}</strong></div>
+			@if (isStringPortalContent(toast.message)) {
 			<div [innerHtml]="toast.message"></div>
+			} @else {
+			<ng-container *luPortal="toast.message"></ng-container>
+			}
 		</div>
-		<button type="button" class="toasts-item-kill" (click)="removeToast(toast)" (animationend)="removeToast(toast)">
-			<span class="lucca-icon icon-signClose mod-XS" aria-hidden="true"></span>
-			<div class="circularGauge" *ngIf="!isOnlyDismissibleManually(toast) && toast.duration > 0">
-				<svg viewBox="0 0 32 32">
-					<circle r="16" cx="16" cy="16" [style.animation-duration]="toast.duration + 'ms'" />
-				</svg>
-			</div>
+		<button
+			type="button"
+			class="toasts-item-kill"
+			(click)="removeToast(toast)"
+			(animationend)="(!isOnlyDismissibleManually(toast) && toast.duration > 0) ? removeToast(toast) : null"
+			[style.animation-duration]="(!isOnlyDismissibleManually(toast) && toast.duration > 0) ? toast.duration + 'ms' : null"
+		>
+			<span class="lucca-icon icon-signClose" aria-hidden="true"></span>
 			<span class="u-mask">{{ intl.close }}</span>
 		</button>
 	</div>

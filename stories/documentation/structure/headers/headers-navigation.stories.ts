@@ -8,13 +8,13 @@ export default {
 
 function getTemplate(args: HeadersNavigationStory): string {
 	return `
-	<div class="header mod-nav">
-		<div class="header-nav">
-			<a class="header-nav-back"></a>
-			<div class="header-nav-category">Catégorie</div>
-			<h4 class="header-nav-title">Titre de la page</h4>
+		<div class="header mod-nav">
+			<div class="header-nav">
+				<a class="header-nav-back"></a>
+				<div class="header-nav-category">Catégorie</div>
+				<h4 class="header-nav-title">Titre de la page</h4>
+			</div>
 		</div>
-	</div>
 	`;
 }
 

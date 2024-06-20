@@ -1,0 +1,20 @@
+@mixin compact {
+	overflow-y: auto;
+
+	.errorPage-section {
+		flex-direction: column;
+		justify-content: center;
+	}
+
+	.errorPage-section-info {
+		margin-top: var(--pr-t-spacings-400);
+		margin-bottom: var(--pr-t-spacings-400);
+		order: 1;
+		padding: 0;
+	}
+
+	.errorPage-section-image {
+		margin-top: var(--pr-t-spacings-400);
+		order: 0;
+	}
+}

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, TemplateRef, viewChild } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { PortalDirective } from './portal.directive';
 
@@ -10,12 +10,15 @@ import { PortalDirective } from './portal.directive';
 		@if (displayed) {
 			<div *luPortal="content; context: context"></div>
 		}
+		<ng-template #tpl let-value>{{ value }}</ng-template>
 	`,
 })
 class PortalTestComponent {
 	content: PortalDirective['luPortal'] | null = null;
 	context: PortalDirective['luPortalContext'] | null = null;
 	displayed = true;
+
+	contentTpl = viewChild.required<TemplateRef<unknown>>('tpl');
 }
 
 @Component({
@@ -74,5 +77,21 @@ describe('PortalDirective', () => {
 		host.content = PortalTestContentComponent;
 		fixture.detectChanges();
 		expect(hostContent.textContent).toBe('Component content');
+	});
+
+	it('should work with templateRef with context updates', () => {
+		// Arrange
+		host.content = host.contentTpl();
+		host.context = { $implicit: 'test' };
+		fixture.detectChanges();
+
+		// Act
+		const firstText = hostContent.textContent;
+		host.context = { $implicit: 'test2' };
+		fixture.detectChanges();
+
+		// Assert
+		expect(firstText).toBe('test');
+		expect(hostContent.textContent).toBe('test2');
 	});
 });

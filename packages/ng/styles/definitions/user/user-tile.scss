@@ -79,4 +79,9 @@
 		--components-user-picture-image-size: var(--components-userPicture-XXL-image);
 		--components-user-picture-font-size: var(--components-userPicture-XXL-fontSize);
 	}
+
+	&.mod-XXXL {
+		--components-user-picture-image-size: var(--components-userPicture-XXXL-image);
+		--components-user-picture-font-size: var(--components-userPicture-XXXL-fontSize);
+	}
 }

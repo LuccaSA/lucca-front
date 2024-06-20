@@ -1,0 +1,32 @@
+<div [ngClass]="pickerClasses()" (copy)="copyHandler($event)" (paste)="pasteHandler($event)">
+	<fieldset class="timePicker-fieldset" [disabled]="disabled()">
+		<legend><span class="u-mask">{{ label }}</span></legend>
+		<lu-time-picker-part
+			#hoursPart
+			class="timePicker-fieldset-group"
+			[disabled]="disabled()"
+			[label]="intl.timePickerHours"
+			[value]="hours()"
+			[decimalConf]="hoursDecimalConf"
+			[hideValue]="shouldHideValue()"
+			[displayArrows]="displayArrows()"
+			(valueChange)="hoursInputHandler($event)"
+			(nextRequest)="focusPart('minutes')"
+			(inputControlClick)="inputControlClickHandler('hours', $event)"
+		/>
+		<div aria-hidden="true" [ngClass]="fieldsetSuffixClasses()">{{ separator }}</div>
+		<lu-time-picker-part
+			#minutesPart
+			class="timePicker-fieldset-group"
+			[label]="intl.timePickerMinutes"
+			[value]="minutes()"
+			[max]="59"
+			[hideValue]="shouldHideValue()"
+			[displayArrows]="displayArrows()"
+			[disabled]="disabled() || !minutesIncrement()"
+			(valueChange)="minutesInputHandler($event)"
+			(prevRequest)="focusPart('hours')"
+			(inputControlClick)="inputControlClickHandler('minutes', $event)"
+		/>
+	</fieldset>
+</div>

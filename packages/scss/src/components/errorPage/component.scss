@@ -1,64 +1,46 @@
 @use '@lucca-front/scss/src/components/title/exports' as title;
 
-@mixin component {
+@mixin component($atRoot: 'without: rule') {
 	background-color: var(--components-errorPage-background);
 	height: 100vh;
 	width: 100vw;
 	line-height: 1.2;
 	overflow: hidden;
 
-	.errorPage-section {
-		height: 100%;
-		max-width: 1200px;
-		padding: 0 var(--pr-t-spacings-400);
-		width: 100vw;
-		margin: 0 auto;
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-	}
+	@at-root ($atRoot) {
+		.errorPage-section {
+			height: 100%;
+			max-width: 1200px;
+			padding: 0 var(--pr-t-spacings-400);
+			width: 100vw;
+			margin: 0 auto;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+		}
 
-	.errorPage-section-info {
-		margin-top: 10vh;
-		max-width: 90vw;
-		width: 450px;
-		padding-right: var(--pr-t-spacings-400);
-	}
+		.errorPage-section-info {
+			margin-top: 10vh;
+			max-width: 90vw;
+			width: 450px;
+			padding-right: var(--pr-t-spacings-400);
+		}
 
-	.errorPage-section-info-title {
-		@include title.component;
-		@include title.XXXL;
-	}
+		.errorPage-section-info-title {
+			@include title.component;
+			@include title.XXXL;
+		}
 
-	.errorPage-section-info-text {
-		font-size: var(--sizes-L-fontSize);
-		line-height: var(--sizes-L-lineHeight);
-	}
+		.errorPage-section-info-text {
+			font-size: var(--sizes-L-fontSize);
+			line-height: var(--sizes-L-lineHeight);
+		}
 
-	.errorPage-section-image {
-		margin-top: 10vh;
-		width: 50%;
-		max-width: 580px;
-		min-width: 350px;
-	}
-}
-
-@mixin compact {
-	overflow-y: auto;
-
-	.errorPage-section {
-		flex-direction: column;
-		justify-content: center;
-	}
-
-	.errorPage-section-info {
-		margin-top: var(--pr-t-spacings-400);
-		margin-bottom: var(--pr-t-spacings-400);
-		order: 1;
-		padding: 0;
-	}
-	.errorPage-section-image {
-		margin-top: var(--pr-t-spacings-400);
-		order: 0;
+		.errorPage-section-image {
+			margin-top: 10vh;
+			width: 50%;
+			max-width: 580px;
+			min-width: 350px;
+		}
 	}
 }

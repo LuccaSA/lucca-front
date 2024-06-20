@@ -1,5 +1,3 @@
-@use '@lucca-front/scss/src/commons/utils/media';
-
 @mixin component($atRoot: 'without: rule') {
 	padding: var(--pr-t-spacings-400) 2.5rem var(--pr-t-spacings-300);
 
@@ -35,17 +33,7 @@
 
 			.button {
 				margin: 0;
-
-				@include media.max('XS') {
-					flex: 1;
-				}
-			}
-
-			.textfield.mod-search {
-				@include media.max('XS') {
-					width: 100%;
-					flex: auto;
-				}
+				flex-grow: 1;
 			}
 		}
 

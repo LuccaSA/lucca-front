@@ -1,0 +1,21 @@
+@mixin narrow {
+	margin-left: 0 !important;
+}
+
+@mixin bannerNarrow {
+	&.mod-withBanner,
+	.navSide.mod-withBanner ~ &,
+	.mod-withBanner & {
+		margin-top: calc(var(--commons-banner-height) + var(--commons-navSide-mobile-toggle-height));
+	}
+}
+
+@mixin notScrollable {
+	@at-root {
+		.main.is-notScrollable,
+		.main.notScrollable {
+			height: 100vh;
+			overflow: hidden;
+		}
+	}
+}

@@ -29,10 +29,11 @@ export default {
 			},
 		},
 		sizes: {
-			options: ['mod-XS', 'mod-S', '', 'mod-L'],
+			options: ['mod-XS', 'mod-S', '', 'mod-L', 'mod-XL', 'mod-XXL', 'mod-XXXL'],
 			control: {
 				type: 'select',
 			},
+			description: '[v18.1] XL, XXL & XXXL',
 		},
 		placeholder: {
 			control: {

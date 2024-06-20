@@ -29,7 +29,7 @@
 		id="{{id}}-label"
 		for="{{id}}"
 		[class.u-mask]="hiddenLabel"
-		attr.aria-hidden="{{hiddenLabel}}"
+		attr.role="{{rolePresentationLabel ? 'presentation' : null}}"
 	>
 		<ng-container *luPortal="label"></ng-container
 		><!--

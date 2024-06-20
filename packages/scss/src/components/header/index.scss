@@ -1,3 +1,4 @@
+@use '@lucca-front/scss/src/commons/utils/media';
 @use 'exports' as *;
 
 .header {
@@ -25,4 +26,35 @@
 	&:is(.is-loading, .loading) {
 		@include loading;
 	}
+}
+
+@mixin responsive(
+	$breakpoint: 'S',
+	$breakpoint2: null,
+	$inverted: true,
+	$at: 'media',
+	$containerName: '',
+	$responsive: null,
+	$size: 'width',
+	$selector: '.header'
+) {
+	#{if($responsive, $selector + '.responsive-' + $responsive, $selector)} {
+		@include media.query(
+			$breakpoint: $breakpoint,
+			$breakpoint2: $breakpoint2,
+			$inverted: $inverted,
+			$at: $at,
+			$containerName: $containerName,
+			$size: $size
+		) {
+			@include stickyNarrow;
+			@include stickyLeftNarrow;
+		}
+	}
+}
+
+$responsive: true !default;
+
+@if $responsive {
+	@include responsive;
 }

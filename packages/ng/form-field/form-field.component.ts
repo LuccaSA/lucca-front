@@ -4,11 +4,11 @@ import { InputDirective } from './input.directive';
 import { FormFieldSize } from './form-field-size';
 import { BehaviorSubject, map, merge, startWith, Subject, switchMap } from 'rxjs';
 import { InlineMessageComponent, InlineMessageState } from '@lucca-front/ng/inline-message';
-import { SafeHtml } from '@angular/platform-browser';
-import { LuTooltipModule } from '@lucca-front/ng/tooltip';
-import { getIntl, IntlParamsPipe, LuClass, PortalContent, PortalDirective } from '@lucca-front/ng/core';
 import { AbstractControl, NG_VALIDATORS, NgControl, ReactiveFormsModule, RequiredValidator, Validator, Validators } from '@angular/forms';
+import { SafeHtml } from '@angular/platform-browser';
+import { getIntl, IntlParamsPipe, LuClass, PortalContent, PortalDirective } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
+import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 import { FORM_FIELD_INSTANCE } from './form-field.token';
 import { LU_FORM_FIELD_TRANSLATIONS } from './form-field.translate';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -83,6 +83,11 @@ export class FormFieldComponent implements OnChanges, OnDestroy, DoCheck {
 		transform: booleanAttribute,
 	})
 	hiddenLabel = false;
+
+	@Input({
+		transform: booleanAttribute,
+	})
+	rolePresentationLabel = false;
 
 	@Input()
 	statusControl: AbstractControl;

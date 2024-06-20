@@ -2,12 +2,6 @@
 	background-color: var(--components-navSide-fullwidth-palette-selected-bg);
 	color: var(--components-navSide-fullwidth-palette-selected-text);
 	opacity: 1;
-
-	.navSide-item-alert {
-		// deprecated
-		background-color: var(--components-navSide-fullwidth-palette-selected-alert-color);
-		color: var(--components-navSide-fullwidth-palette-selected-alert-text);
-	}
 }
 
 @mixin expanded {

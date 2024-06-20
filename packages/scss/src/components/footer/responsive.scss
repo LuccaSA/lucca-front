@@ -1,0 +1,4 @@
+@mixin narrow {
+	--components-footer-direction: column;
+	--components-footer-alignItems: stretch;
+}

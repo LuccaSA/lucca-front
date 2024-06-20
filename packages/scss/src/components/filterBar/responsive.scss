@@ -1,0 +1,10 @@
+@mixin narrow {
+	--components-filterBar-footer-direction: row;
+	--components-filterBar-footer-justify: space-between;
+	--components-filterBar-footer-actions-marginInlineStart: auto;
+}
+
+@mixin actionsNarrow {
+	--components-filterBar-footer-actions-direction: row;
+	--components-filterBar-footer-actions-align: center;
+}

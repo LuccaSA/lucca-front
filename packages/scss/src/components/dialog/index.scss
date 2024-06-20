@@ -36,13 +36,41 @@
 		&:where(.mod-fromBottom) {
 			@include fromBottom;
 		}
-
-		@include media.max('XXS') {
-			@include fromBottom;
-		}
 	}
 
 	&.mod-fullScreen {
 		@include fullScreen;
 	}
+}
+
+@mixin responsive(
+	$breakpoint: 'XXS',
+	$breakpoint2: null,
+	$inverted: true,
+	$at: 'media',
+	$containerName: '',
+	$responsive: null,
+	$size: 'width',
+	$selector: '.dialog'
+) {
+	#{if($responsive, $selector + '.responsive-' + $responsive, $selector)} {
+		@include media.query(
+			$breakpoint: $breakpoint,
+			$breakpoint2: $breakpoint2,
+			$inverted: $inverted,
+			$at: $at,
+			$containerName: $containerName,
+			$size: $size
+		) {
+			&:where(.mod-drawer) {
+				@include fromBottom;
+			}
+		}
+	}
+}
+
+$responsive: true !default;
+
+@if $responsive {
+	@include responsive;
 }

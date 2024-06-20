@@ -1,38 +1,28 @@
-@use '@lucca-front/scss/src/commons/utils/media';
-@use '@lucca-front/scss/src/components/title/exports' as title;
-
 @mixin page {
 	background-image: var(--components-emptyState-illustration-foreground-bottom-left),
 		var(--components-emptyState-illustration-background-bottom-left), var(--components-emptyState-illustration-foreground-top-right),
 		var(--components-emptyState-illustration-background-top-right);
 	background-repeat: no-repeat;
-	background-position: bottom left, bottom left, top left var(--components-emptyState-illustration-top-right-offset-left),
+	background-size: var(--components-emptyState-illustration-size);
+	background-position:
+		bottom left,
+		bottom left,
+		top left var(--components-emptyState-illustration-top-right-offset-left),
 		top left var(--components-emptyState-illustration-top-right-offset-left);
 
-	@include media.max('S') {
-		background-position: bottom left, bottom left, top left var(--components-emptyState-illustration-top-right-offset-left-S),
-			top left var(--components-emptyState-illustration-top-right-offset-left-S);
-		background-size: auto 10.875rem;
-	}
+	--components-emptyState-heading-padding: var(--sizes-XXL-verticalPadding);
+	--components-emptyState-heading-fontSize: var(--sizes-XXL-fontSize);
+	--components-emptyState-heading-lineHeight: var(--sizes-XXL-lineHeight);
+	--components-emptyState-heading-fontWeight: 900;
 
 	.emptyState-content {
 		background-color: var(--components-emptyState-background-color);
 		box-shadow: 0 0 8px 4px var(--components-emptyState-background-color);
 	}
 
-	.emptyState-content-heading {
-		@include title.h1;
-
-		@include media.max('XXS') {
-			@include title.h2;
-		}
-	}
-
 	.emptyState-actions {
 		.button {
-			@include media.max('XXS') {
-				flex-basis: 100%;
-			}
+			flex-basis: var(--components-emptyState-actions-width);
 		}
 	}
 }

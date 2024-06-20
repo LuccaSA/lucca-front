@@ -1,4 +1,4 @@
-@use '@lucca-front/scss/src/commons/utils/container';
+@use '@lucca-front/scss/src/commons/utils/media';
 
 @use 'exports' as *;
 
@@ -13,10 +13,6 @@
 	&.mod-noAvatar {
 		@include noAvatar;
 	}
-
-	@include container.max(25rem, $name: 'comment') {
-		@include narrow;
-	}
 }
 
 .commentWrapper {
@@ -25,4 +21,33 @@
 	&.mod-compact {
 		@include wrapperCompact;
 	}
+}
+
+@mixin responsive(
+	$breakpoint: 25rem,
+	$breakpoint2: null,
+	$inverted: true,
+	$at: 'container',
+	$containerName: 'comment',
+	$size: 'width',
+	$selector: '.comment'
+) {
+	#{if($responsive, $selector + '.responsive-' + $responsive, $selector)} {
+		@include media.query(
+			$breakpoint: $breakpoint,
+			$breakpoint2: $breakpoint2,
+			$inverted: $inverted,
+			$at: $at,
+			$containerName: $containerName,
+			$size: $size
+		) {
+			@include narrow;
+		}
+	}
+}
+
+$responsive: true !default;
+
+@if $responsive {
+	@include responsive;
 }

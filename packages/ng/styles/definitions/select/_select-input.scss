@@ -82,11 +82,6 @@
 	}
 
 	::ng-deep .lu-select-value {
-		.label {
-			padding: var(--pr-t-spacings-50) var(--pr-t-spacings-100);
-			margin-left: 0;
-		}
-
 		.chip {
 			vertical-align: baseline;
 			max-width: 100%;
@@ -127,16 +122,6 @@
 		}
 
 		::ng-deep .lu-select-value {
-			.label {
-				// deprecated
-				font-size: var(--sizes-S-fontSize);
-				line-height: var(--sizes-S-lineHeight);
-				font-weight: 600;
-				margin: 0;
-				padding: 0;
-				background-color: transparent;
-			}
-
 			.chip {
 				height: var(--sizes-XS-lineHeight);
 				line-height: var(--sizes-XS-lineHeight);

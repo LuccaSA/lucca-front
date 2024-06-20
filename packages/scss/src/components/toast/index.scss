@@ -7,8 +7,4 @@
 	&.mod-bottom {
 		@include bottom;
 	}
-	
-	&.mod-withCircularGauge {
-		@include circularGauge;
-	}
 }

@@ -1,3 +1,8 @@
 @mixin vars {
 	--components-filterBar-backgroundColor: var(--pr-t-elevation-surface-raised);
+	--components-filterBar-footer-direction: column;
+	--components-filterBar-footer-actions-direction: column;
+	--components-filterBar-footer-justify: center;
+	--components-filterBar-footer-actions-align: stretch;
+	--components-filterBar-footer-actions-marginInlineStart: 0;
 }

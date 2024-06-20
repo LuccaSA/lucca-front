@@ -40,7 +40,7 @@ import { of } from 'rxjs';
 					<span class="u-mask">{{ intl.removeOption }}</span>
 				</button>
 			</div>
-			<div class="chip" *ngIf="overflowOptions$ | async as overflow">+ {{ overflow }}</div>
+			<div class="multipleSelect-displayer-chip chip" *ngIf="overflowOptions$ | async as overflow">+ {{ overflow }}</div>
 		</div>
 	`,
 	styleUrls: ['./default-displayer.component.scss'],

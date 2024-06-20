@@ -1,90 +1,88 @@
-@forward 'field'; //
-@forward 'box'; // 1 Ko
-@forward 'tag'; // 1 Ko
-@forward 'main'; // 1 Ko
-@forward 'code'; // 1 Ko
-@forward 'link'; // 1 Ko
-@forward 'chip'; // 1 Ko
-@forward 'title'; // 1 Ko
-@forward 'label'; // 1 Ko
-@forward 'status'; // 1 Ko
-@forward 'filterBar'; // 1 Ko
-@forward 'filters'; // 1 Ko
-@forward 'divider'; // 1 Ko
-@forward 'section'; // 1 Ko
-@forward 'collapse'; // 1 Ko
-@forward 'container'; // 1 Ko
-@forward 'errorPage'; // 1 Ko
-@forward 'pageHeader'; // 1 Ko
-@forward 'pagination'; // 1 Ko
-@forward 'titleSection'; // 1 Ko
-@forward 'contentSection'; // 1 Ko
-@forward 'tableOfContent'; // 1 Ko
-@forward 'list'; // 2 Ko
-@forward 'card'; // 2 Ko
-@forward 'gauge'; // 2 Ko
-@forward 'callout'; // 2 Ko
-@forward 'loading'; // 2 Ko
-@forward 'progress'; // 2 Ko
-@forward 'breadcrumbs'; // 2 Ko
-@forward 'buttonGroup'; // 2 Ko
-@forward 'header'; // 3 Ko
-@forward 'actionIcon'; // 3 Ko
-@forward 'menu'; // 4 Ko
-@forward 'radio'; // 4 Ko
-@forward 'radioField'; // new component for radio
-@forward 'switch'; // 4 Ko
-@forward 'switchField'; // new component for switch
-@forward 'file'; // 5 Ko
-@forward 'toast'; // 5 Ko
-@forward 'layout'; // 5 Ko
-@forward 'radioButtons'; // 5 Ko
-@forward 'table'; // 7 Ko
-@forward 'checkbox'; // 7 Ko
-@forward 'checkboxField'; // new component for checkbox
-@forward 'tableSorted'; // 9 Ko
-@forward 'timeline'; // 10 Ko
-@forward 'button'; // 12 Ko
-@forward 'textfields'; // 13 Ko
-@forward 'textField'; // new component for checkbox
-@forward 'navside'; // 15 Ko
-@forward 'form'; // 25 Ko
-@forward 'tableFixed'; // 2 Ko
-@forward 'grid';
-@forward 'tableSticked'; // 8 Ko
-@forward 'timepicker'; //
-@forward 'notchBox';
-@forward 'statusBadge';
-@forward 'mobileHeader';
-@forward 'clear';
-@forward 'newBadge';
-@forward 'inlineMessage';
-@forward 'numericBadge';
-@forward 'mobileNavigation';
-@forward 'footer';
-@forward 'formLabel';
-@forward 'verticalNavigation';
-@forward 'sortableList';
-@forward 'fieldset';
-@forward 'skeleton';
-@forward 'calloutDisclosure';
-@forward 'calloutPopover';
-@forward 'calloutFeedbackList';
-@forward 'simpleSelect';
-@forward 'multiSelect';
-@forward 'emptyState';
-@forward 'dialog';
-@forward 'avatar';
-@forward 'indexTable';
-@forward 'indexTableSorted';
-@forward 'tooltip';
-@forward 'userPopover';
-@forward 'scrollBox';
-@forward 'comment';
+@use 'field';
+@use 'box';
+@use 'tag';
+@use 'main';
+@use 'code';
+@use 'link';
+@use 'chip';
+@use 'title';
+@use 'label';
+@use 'filterBar';
+@use 'filters';
+@use 'divider';
+@use 'section';
+@use 'collapse';
+@use 'container';
+@use 'errorPage';
+@use 'pageHeader';
+@use 'pagination';
+@use 'titleSection';
+@use 'contentSection';
+@use 'tableOfContent';
+@use 'list';
+@use 'card';
+@use 'gauge';
+@use 'callout';
+@use 'loading';
+@use 'progress';
+@use 'breadcrumbs';
+@use 'buttonGroup';
+@use 'header';
+@use 'actionIcon';
+@use 'menu';
+@use 'radio';
+@use 'radioField';
+@use 'switch';
+@use 'switchField';
+@use 'file';
+@use 'layout';
+@use 'radioButtons';
+@use 'table';
+@use 'checkbox';
+@use 'checkboxField';
+@use 'tableSorted';
+@use 'timeline';
+@use 'button';
+@use 'textfields';
+@use 'textField';
+@use 'navside';
+@use 'form';
+@use 'tableFixed';
+@use 'grid';
+@use 'tableSticked';
+@use 'timepicker';
+@use 'notchBox';
+@use 'statusBadge';
+@use 'mobileHeader';
+@use 'clear';
+@use 'newBadge';
+@use 'inlineMessage';
+@use 'numericBadge';
+@use 'mobileNavigation';
+@use 'footer';
+@use 'formLabel';
+@use 'verticalNavigation';
+@use 'sortableList';
+@use 'fieldset';
+@use 'skeleton';
+@use 'calloutDisclosure';
+@use 'calloutPopover';
+@use 'calloutFeedbackList';
+@use 'simpleSelect';
+@use 'multiSelect';
+@use 'emptyState';
+@use 'dialog';
+@use 'avatar';
+@use 'indexTable';
+@use 'indexTableSorted';
+@use 'tooltip';
+@use 'userPopover';
+@use 'scrollBox';
+@use 'comment';
+@use 'toast';
+@use 'popover';
 
-// Deprecated CSS components
-// @forward 'gridLegacy'; // 40 Ko
-// @forward 'emptyStateDeprecated';
-
-// @forward 'tableFixedLegacy'; // 33 Ko
-// @forward 'tableStickedLegacy'; // 67 Ko
+// @use 'gridLegacy';
+// @use 'emptyStateDeprecated';
+// @use 'tableFixedDeprecated';
+// @use 'tableStickedDeprecated';

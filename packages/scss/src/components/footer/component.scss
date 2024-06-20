@@ -17,6 +17,11 @@
 			flex-grow: 1;
 		}
 
+		.footerResponsiveWrapper {
+			container-type: inline-size;
+			container-name: footer;
+		}
+
 		.footer-actions {
 			display: flex;
 			gap: var(--pr-t-spacings-200);

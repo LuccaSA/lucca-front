@@ -1,0 +1,26 @@
+@use '@lucca-front/scss/src/components/title/exports' as title;
+
+@mixin pageNarrow {
+	&.mod-page {
+		background-position:
+			bottom left,
+			bottom left,
+			top left var(--components-emptyState-illustration-top-right-offset-left-S),
+			top left var(--components-emptyState-illustration-top-right-offset-left-S);
+
+		--components-emptyState-illustration-size: auto 10.875rem;
+	}
+}
+
+@mixin pageHeadingNarrow {
+	&.mod-page {
+		--components-emptyState-heading-padding: var(--sizes-XL-verticalPadding);
+		--components-emptyState-heading-fontSize: var(--sizes-XL-fontSize);
+		--components-emptyState-heading-lineHeight: var(--sizes-XL-lineHeight);
+		--components-emptyState-heading-fontWeight: 700;
+	}
+}
+
+@mixin pageActionsNarrow {
+	--components-emptyState-actions-width: 100%;
+}

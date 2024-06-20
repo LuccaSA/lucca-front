@@ -23,7 +23,7 @@
 		&.mod-autoAtContainerMin#{$breakpoint} {
 			@include autoAt;
 
-			@include container.min($breakpoint, $name: grid) {
+			@include container.min($breakpoint, $containerName: grid) {
 				@include auto;
 			}
 		}

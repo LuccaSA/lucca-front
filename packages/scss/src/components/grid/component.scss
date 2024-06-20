@@ -71,7 +71,7 @@
 					}
 				}
 
-				@include container.min($breakpoint, $name: grid) {
+				@include container.min($breakpoint, $containerName: grid) {
 					&[style*='grid-colspanAtContainerMin#{$breakpoint}'] {
 						grid-column-end: span var(--grid-colspanAtContainerMin#{$breakpoint});
 					}

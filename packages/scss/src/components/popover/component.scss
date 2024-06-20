@@ -1,0 +1,50 @@
+@use '@lucca-front/scss/src/components/button/exports' as button;
+@use '@lucca-front/scss/src/commons/utils/a11y';
+
+@mixin component($atRoot: 'without: rule') {
+	display: block;
+	background-color: var(--pr-t-elevation-surface-raised);
+	box-shadow: var(--pr-t-elevation-shadow-overlay);
+	border-radius: var(--commons-borderRadius-L);
+	position: relative;
+	min-height: var(--pr-t-spacings-500);
+	min-width: var(--pr-t-spacings-500);
+	animation: popup var(--commons-animations-durations-fast) ease 1 forwards;
+
+	// need of a higher specificity
+	.popover-close {
+		--components-button-padding: var(--pr-t-spacings-50);
+	}
+
+	@at-root {
+		.popover-contentOptional {
+			padding: var(--pr-t-spacings-100) var(--pr-t-spacings-150);
+		}
+
+		.popover-close {
+			@include button.text;
+			@include button.XS;
+			@include button.onlyIconXS;
+
+			position: absolute;
+			right: var(--pr-t-spacings-150);
+			top: var(--pr-t-spacings-100);
+			z-index: 2;
+
+			&:not(:focus-visible) {
+				@include a11y.mask;
+			}
+		}
+	}
+
+	@keyframes popup {
+		from {
+			transform: scale(0.95);
+			opacity: 0.5;
+		}
+		to {
+			transform: scale(1);
+			opacity: 1;
+		}
+	}
+}

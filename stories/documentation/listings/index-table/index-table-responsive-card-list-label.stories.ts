@@ -1,14 +1,10 @@
 import { Meta, StoryFn } from '@storybook/angular';
 
-interface IndexTableResponsiveCardListLabelStory {
-
-}
+interface IndexTableResponsiveCardListLabelStory {}
 
 export default {
 	title: 'Documentation/Listings/Index Table/Responsive Card List Labels',
-	argTypes: {
-
-	},
+	argTypes: {},
 } as Meta;
 
 function getTemplate(args: IndexTableResponsiveCardListLabelStory): string {
@@ -58,7 +54,8 @@ function getTemplate(args: IndexTableResponsiveCardListLabelStory): string {
 			</td>
 		</tr>
 	</tbody>
-</table>`;}
+</table>`;
+}
 
 const Template: StoryFn<IndexTableResponsiveCardListLabelStory> = (args) => ({
 	props: args,
@@ -66,4 +63,4 @@ const Template: StoryFn<IndexTableResponsiveCardListLabelStory> = (args) => ({
 });
 
 export const ResponsiveCardListLabel = Template.bind({});
-ResponsiveCardListLabel.args = { };
+ResponsiveCardListLabel.args = {};

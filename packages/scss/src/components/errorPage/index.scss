@@ -4,8 +4,34 @@
 .errorPage {
 	@include vars;
 	@include component;
+}
 
-	@include media.max('S') {
-		@include compact;
+@mixin responsive(
+	$breakpoint: 'S',
+	$breakpoint2: null,
+	$inverted: true,
+	$at: 'media',
+	$containerName: '',
+	$responsive: null,
+	$size: 'width',
+	$selector: '.errorPage'
+) {
+	#{if($responsive, $selector + '.responsive-' + $responsive, $selector)} {
+		@include media.query(
+			$breakpoint: $breakpoint,
+			$breakpoint2: $breakpoint2,
+			$inverted: $inverted,
+			$at: $at,
+			$containerName: $containerName,
+			$size: $size
+		) {
+			@include compact;
+		}
 	}
+}
+
+$responsive: true !default;
+
+@if $responsive {
+	@include responsive;
 }

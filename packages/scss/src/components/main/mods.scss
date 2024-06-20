@@ -1,5 +1,3 @@
-@use '@lucca-front/scss/src/commons/utils/media';
-
 @mixin menu {
 	margin-left: var(--commons-navSide-width);
 }
@@ -10,10 +8,6 @@
 
 @mixin banner {
 	margin-top: var(--commons-banner-height);
-
-	@include media.max('S') {
-		margin-top: calc(var(--commons-banner-height) + var(--commons-navSide-mobile-toggle-height));
-	}
 }
 
 @mixin stickyHeader {

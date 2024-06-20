@@ -1,12 +1,10 @@
 @use '@lucca-front/scss/src/commons/utils/a11y';
-@use '@lucca-front/scss/src/commons/utils/container';
 
 @mixin component($atRoot: 'without: rule') {
 	background-color: var(--components-filterBar-backgroundColor);
 	border-radius: var(--commons-borderRadius-L);
 	border: var(--commons-divider-width) solid var(--commons-border-200);
-	container-name: filterBar;
-	container-type: inline-size;
+
 	padding: var(--pr-t-spacings-200);
 
 	&:has(.filterBar-footer-toggleButton[aria-expanded='false']) {
@@ -16,6 +14,11 @@
 	}
 
 	@at-root ($atRoot) {
+		.filterBarResponsiveWrapper {
+			container-name: filterBar;
+			container-type: inline-size;
+		}
+
 		.filterBar-toggledFilters {
 			margin-block-start: var(--pr-t-spacings-200);
 		}
@@ -23,10 +26,10 @@
 		.filterBar-footer {
 			border-block-start: var(--commons-divider-width) solid var(--commons-border-200);
 			display: flex;
-			flex-direction: column;
+			flex-direction: var(--components-filterBar-footer-direction);
 			flex-wrap: wrap;
 			gap: var(--pr-t-spacings-100);
-			justify-content: center;
+			justify-content: var(--components-filterBar-footer-justify);
 			margin-block-start: var(--pr-t-spacings-200);
 			padding-block-start: var(--pr-t-spacings-200);
 
@@ -36,11 +39,6 @@
 
 			&:has(.filterBar-footer-actions:only-child:empty) {
 				display: none;
-			}
-
-			@include container.min('S', $name: 'filterBar') {
-				flex-direction: row;
-				justify-content: space-between;
 			}
 		}
 
@@ -65,20 +63,13 @@
 
 		.filterBar-footer-actions {
 			display: flex;
-			flex-direction: column;
+			flex-direction: var(--components-filterBar-footer-actions-direction);
 			flex-wrap: wrap;
 			gap: var(--pr-t-spacings-200);
 			justify-content: center;
 			text-align: center;
-
-			@include container.min('XS', $name: 'filterBar') {
-				align-items: center;
-				flex-direction: row;
-			}
-
-			@include container.min('S', $name: 'filterBar') {
-				margin-inline-start: auto;
-			}
+			align-items: var(--components-filterBar-footer-actions-align);
+			margin-inline-start: var(--components-filterBar-footer-actions-marginInlineStart);
 		}
 	}
 }

@@ -9,16 +9,7 @@
 		@include sticky;
 	}
 
-	&:not([class*='mod-narrow']) {
-		@include media.max('XXS') {
-			@include narrow;
-		}
-	}
-
-	&.mod-narrow {
-		@include narrow;
-	}
-
+	&:not([class*='mod-narrow']),
 	&.mod-narrowAtMediaMaxXXS {
 		@include media.max('XXS') {
 			@include narrow;
@@ -42,4 +33,34 @@
 			@include narrow;
 		}
 	}
+}
+
+@mixin responsive(
+	$breakpoint: 'XXS',
+	$breakpoint2: null,
+	$inverted: true,
+	$at: 'media',
+	$containerName: '',
+	$responsive: null,
+	$size: 'width',
+	$selector: '.footer'
+) {
+	#{if($responsive, $selector + '.responsive-' + $responsive, $selector)} {
+		@include media.query(
+			$breakpoint: $breakpoint,
+			$breakpoint2: $breakpoint2,
+			$inverted: $inverted,
+			$at: $at,
+			$containerName: $containerName,
+			$size: $size
+		) {
+			@include narrow;
+		}
+	}
+}
+
+$responsive: true !default;
+
+@if $responsive {
+	@include responsive;
 }

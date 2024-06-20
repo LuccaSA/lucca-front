@@ -55,7 +55,7 @@ function getTemplate(args: PageHeaderMenuStory): string {
 			<p class="pr-u-marginBottom0">
 				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac justo scelerisque, blandit nibh quis, imperdiet justo.
 				Nullam condimentum nulla et neque ultricies bibendum
-				<a target="_blank">Lien<span aria-hidden="true" class="lucca-icon icon-arrowExternal mod-XS pr-u-marginLeft50"></span></a>.
+				<a href="#" target="_blank">Lien<span aria-hidden="true" class="lucca-icon icon-arrowExternal mod-XS pr-u-marginLeft50"></span></a>.
 			</p>
 		</div>
 		<nav class="menu">

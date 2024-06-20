@@ -1,5 +1,3 @@
-@use '@lucca-front/scss/src/commons/utils/media';
-
 @mixin menu {
 	padding-bottom: 0;
 }
@@ -19,9 +17,4 @@
 	left: 0;
 	right: 0;
 	z-index: 99;
-
-	@include media.max('S') {
-		top: calc(var(--commons-banner-height) + var(--commons-navSide-mobile-toggle-height));
-		left: 0 !important;
-	}
 }
