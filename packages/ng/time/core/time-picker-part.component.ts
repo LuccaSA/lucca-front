@@ -1,23 +1,23 @@
 import { DecimalPipe, formatNumber } from '@angular/common';
 import {
-	booleanAttribute,
 	ChangeDetectionStrategy,
 	Component,
-	computed,
 	ElementRef,
 	EventEmitter,
 	Inject,
-	input,
 	LOCALE_ID,
-	model,
 	ModelSignal,
-	numberAttribute,
 	Output,
 	ViewChild,
+	booleanAttribute,
+	computed,
+	input,
+	model,
+	numberAttribute,
 } from '@angular/core';
-import { RepeatOnHoldDirective } from './repeat-on-hold.directive';
-import { PickerControlDirection } from './misc.utils';
 import { InputDirective } from '@lucca-front/ng/form-field';
+import { PickerControlDirection } from './misc.utils';
+import { RepeatOnHoldDirective } from './repeat-on-hold.directive';
 
 let nextId = 0;
 
@@ -33,9 +33,9 @@ export class TimePickerPartComponent {
 
 	decimalConf = input('2.0-0');
 
-	value: ModelSignal<number | '--'> = model('--');
+	value: ModelSignal<number | '––'> = model('––');
 
-	display = input<number | '--'>();
+	display = input<number | '––'>();
 
 	max = input(0, {
 		transform: numberAttribute,
@@ -76,7 +76,7 @@ export class TimePickerPartComponent {
 			return this.display();
 		}
 		const value = this.value();
-		if (value === '--') {
+		if (value === '––') {
 			return value;
 		}
 		return formatNumber(value, this.locale, this.decimalConf());

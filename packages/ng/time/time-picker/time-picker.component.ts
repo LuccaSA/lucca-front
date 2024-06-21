@@ -1,6 +1,6 @@
 import { NgClass } from '@angular/common';
 import { booleanAttribute, ChangeDetectionStrategy, Component, computed, forwardRef, Input, input, model, output } from '@angular/core';
-import { NG_VALUE_ACCESSOR } from '@angular/forms';
+import { FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { getIntl } from '@lucca-front/ng/core';
 import { BasePickerComponent } from '../core/base-picker.component';
 import { ISO8601Time } from '../core/date-primitives';
@@ -24,7 +24,7 @@ import { LU_TIME_PICKER_TRANSLATIONS } from './time-picker.translate';
 @Component({
 	selector: 'lu-time-picker',
 	standalone: true,
-	imports: [TimePickerPartComponent, NgClass],
+	imports: [TimePickerPartComponent, NgClass, FormsModule],
 	templateUrl: './time-picker.component.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	providers: [
@@ -78,26 +78,26 @@ export class TimePickerComponent extends BasePickerComponent {
 	});
 
 	writeValue(value: ISO8601Time): void {
-		this.value.set(value || '--:--:--');
+		this.value.set(value || '––:––:––');
 	}
 
 	setDisabledState?(isDisabled: boolean): void {
 		this.disabled.set(isDisabled);
 	}
 
-	protected hoursInputHandler(value: number | '--'): void {
+	protected hoursInputHandler(value: number | '––'): void {
 		this.setTime({
 			previousValue: this.value(),
-			// Mostly for compiler because we never set the time to -- with input handler
+			// Mostly for compiler because we never set the time to –– with input handler
 			value: createIsoTimeFromHoursAndMinutes(+value, this.minutes()),
 			source: 'input',
 		});
 	}
 
-	protected minutesInputHandler(value: number | '--'): void {
+	protected minutesInputHandler(value: number | '––'): void {
 		this.setTime({
 			previousValue: this.value(),
-			// Mostly for compiler because we never set the time to -- with input handler
+			// Mostly for compiler because we never set the time to –– with input handler
 			value: createIsoTimeFromHoursAndMinutes(this.hours(), +value),
 			source: 'input',
 		});
@@ -220,10 +220,10 @@ export class TimePickerComponent extends BasePickerComponent {
 		}
 	}
 
-	switchAmpm(ampmDisplay: 'AM' | 'PM') {
+	switchMeridiem(newValue: 'AM' | 'PM') {
 		let hours = getHoursPartFromIsoTime(this.value());
 		const minutes = getMinutesPartFromIsoTime(this.value());
-		if (ampmDisplay === 'AM') {
+		if (newValue === 'PM') {
 			hours = circularize(hours + 12, 23);
 		} else {
 			hours = circularize(hours - 12, 23);

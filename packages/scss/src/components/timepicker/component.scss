@@ -31,12 +31,17 @@
 		}
 
 		.timePicker-fieldset-groupSeparator {
-			text-align: center;
-			position: absolute;
-			inset: 0;
+			// text-align: center;
+			// position: absolute;
+			// top: 0;
+			// bottom: 0;
+			// left: var(--components-timepicker-separator-left);
 			pointer-events: none;
 			display: grid;
 			place-items: center;
+			text-align: center;
+			width: 1rem;
+			margin: 0 -0.5rem;
 		}
 
 		.timePicker-fieldset-group {
@@ -136,6 +141,46 @@
 				top: calc(100% + var(--pr-t-spacings-100) + 1px);
 				bottom: auto;
 			}
+		}
+
+		.timePicker-fieldset-meridiem {
+			width: var(--pr-t-spacings-500);
+			position: relative;
+			align-self: stretch;
+			margin-left: calc(var(--pr-t-spacings-100) * -1);
+
+			&::after {
+				content: '';
+				position: absolute;
+				inset: var(--components-timepicker-paddingInput);
+				border-radius: var(--commons-borderRadius-M);
+				display: grid;
+				place-items: center;
+				text-align: right;
+			}
+
+			&:has(input:focus) {
+				&::after {
+					background-color: var(--palettes-primary-100);
+				}
+			}
+
+			&:has(#anteMeridiem:checked) {
+				&::after {
+					content: 'AM';
+				}
+			}
+
+			&:has(#postMeridiem:checked) {
+				&::after {
+					content: 'PM';
+				}
+			}
+		}
+
+		.timePicker-fieldset-meridiem-ante,
+		.timePicker-fieldset-meridiem-post {
+			@include a11y.mask;
 		}
 	}
 }

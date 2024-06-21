@@ -35,9 +35,9 @@ export const getHoursPartFromIsoTime = (time: ISO8601Time): number => Number(tim
 export const getMinutesPartFromIsoTime = (time: ISO8601Time): number => Number(time.split(':')[1]) || 0;
 export const getSecondsPartFromIsoTime = (time: ISO8601Time): number => Number(time.split(':')[2]) || 0;
 
-export const getHoursDisplayPartFromIsoTime = (time: ISO8601Time, ampm = false): number | '--' => {
+export const getHoursDisplayPartFromIsoTime = (time: ISO8601Time, ampm = false): number | '––' => {
 	const hours = time.split(':')[0];
-	if (hours === '--') {
+	if (hours === '––') {
 		return hours;
 	}
 	if (ampm) {
@@ -58,9 +58,9 @@ export const formatAMPM = (inputHours: number): { hours: number; suffix: 'AM' | 
 	};
 };
 
-export const getMinutesDisplayPartFromIsoTime = (time: ISO8601Time): number | '--' => {
+export const getMinutesDisplayPartFromIsoTime = (time: ISO8601Time): number | '––' => {
 	const minutes = time.split(':')[1];
-	if (minutes === '--') {
+	if (minutes === '––') {
 		return minutes;
 	}
 	return Number(minutes);

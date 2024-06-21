@@ -31,7 +31,41 @@
 			(inputControlClick)="inputControlClickHandler('minutes', $event)"
 		/>
 		@if (ampm()) {
-		<div (click)="switchAmpm(ampmDisplay())">{{ ampmDisplay() }}</div>
+		<div
+			class="timePicker-fieldset-meridiem"
+			(keydown.A)="anteMeridiemRef.click()"
+			(keydown.P)="postMeridiemRef.click()"
+			(keydown.shift.A)="anteMeridiemRef.click()"
+			(keydown.shift.P)="postMeridiemRef.click()"
+			(click)="ampmDisplay() === 'AM' ? anteMeridiemRef.focus() : postMeridiemRef.focus()"
+		>
+			<div class="timePicker-fieldset-meridiem-ante">
+				<label for="anteMeridiem">AM</label>
+				<input
+					#anteMeridiemRef
+					type="radio"
+					name="meridiem"
+					id="anteMeridiem"
+					value="AM"
+					[ngModel]="ampmDisplay()"
+					(ngModelChange)="switchMeridiem($event)"
+					(click)="$event.stopPropagation()"
+				/>
+			</div>
+			<div class="timePicker-fieldset-meridiem-post">
+				<label for="postMeridiem">PM</label>
+				<input
+					#postMeridiemRef
+					type="radio"
+					name="meridiem"
+					id="postMeridiem"
+					value="PM"
+					[ngModel]="ampmDisplay()"
+					(ngModelChange)="switchMeridiem($event)"
+					(click)="$event.stopPropagation()"
+				/>
+			</div>
+		</div>
 		}
 	</fieldset>
 </div>
