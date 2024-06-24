@@ -1,5 +1,5 @@
 import { NgClass } from '@angular/common';
-import { booleanAttribute, ChangeDetectionStrategy, Component, computed, forwardRef, Input, input, model, output } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, computed, forwardRef, inject, Input, input, LOCALE_ID, model, output } from '@angular/core';
 import { FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { getIntl } from '@lucca-front/ng/core';
 import { BasePickerComponent } from '../core/base-picker.component';
@@ -37,19 +37,33 @@ import { LU_TIME_PICKER_TRANSLATIONS } from './time-picker.translate';
 })
 export class TimePickerComponent extends BasePickerComponent {
 	protected intl = getIntl(LU_TIME_PICKER_TRANSLATIONS);
+	protected localeId = inject(LOCALE_ID);
 
 	value = model<ISO8601Time>('--:--:--');
 	max = input<ISO8601Time>(null);
 
 	displayArrows = input(false, { transform: booleanAttribute });
 
-	ampm = input(false, { transform: booleanAttribute });
+	forceMeridiemDisplay = input<boolean | null>(null);
+
+	enableMeridiemDisplay = computed(() => {
+		if (this.forceMeridiemDisplay() !== null) {
+			return this.forceMeridiemDisplay();
+		}
+		// We can't ask the API if time should include meridiem so the easiest was to just make it format a static date.
+		return Intl.DateTimeFormat(this.localeId, {
+			timeStyle: 'short',
+			dateStyle: 'short',
+		})
+			.format(new Date('1/1/1 17:00:00'))
+			.includes('PM');
+	});
 
 	@Input() label: string;
 
 	timeChange = output<TimeChangeEvent>();
 
-	protected hoursDisplay = computed(() => getHoursDisplayPartFromIsoTime(this.value(), this.ampm()));
+	protected hoursDisplay = computed(() => getHoursDisplayPartFromIsoTime(this.value(), this.enableMeridiemDisplay()));
 	protected minutesDisplay = computed(() => getMinutesDisplayPartFromIsoTime(this.value()));
 
 	protected hours = computed(() => getHoursPartFromIsoTime(this.value()));
@@ -67,7 +81,7 @@ export class TimePickerComponent extends BasePickerComponent {
 	protected hoursDecimalConf = DEFAULT_TIME_DECIMAL_PIPE_FORMAT;
 
 	protected maxHours = computed(() => {
-		if (this.ampm()) {
+		if (this.enableMeridiemDisplay()) {
 			return 12;
 		}
 		return getHoursPartFromIsoTime(this.max() ?? '23:59:59');

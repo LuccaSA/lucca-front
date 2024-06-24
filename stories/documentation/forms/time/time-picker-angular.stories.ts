@@ -25,12 +25,18 @@ export default {
 				type: 'select',
 			},
 		},
+		forceMeridiemDisplay: {
+			options: [null, false, true],
+			control: {
+				type: 'radio',
+			},
+		},
 	},
 } as Meta;
 
 export const Basic: StoryObj<TimePickerComponent & FormFieldComponent> = {
 	render: (args, { argTypes }) => {
-		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, ...inputArgs } = args;
+		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, forceMeridiemDisplay, ...inputArgs } = args;
 		return {
 			template: cleanupTemplate(`<lu-form-field [label]="labelID" [rolePresentationLabel]="true" ${generateInputs(
 				{
@@ -42,7 +48,7 @@ export const Basic: StoryObj<TimePickerComponent & FormFieldComponent> = {
 				},
 				argTypes,
 			)}>
-<lu-time-picker label="${label}" ${generateInputs(inputArgs, argTypes)}
+<lu-time-picker label="${label}" ${generateInputs(inputArgs, argTypes)} ${forceMeridiemDisplay !== null ? `[forceMeridiemDisplay]="${forceMeridiemDisplay}"` : ''}
 	[(ngModel)]="example">
 	</lu-time-picker>
 	<ng-template #labelID>
@@ -65,6 +71,6 @@ export const Basic: StoryObj<TimePickerComponent & FormFieldComponent> = {
 		disabled: false,
 		step: 'PT1M',
 		max: '23:59:59',
-		ampm: false,
+		forceMeridiemDisplay: null,
 	},
 };

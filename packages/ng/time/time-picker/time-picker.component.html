@@ -30,7 +30,7 @@
 			(prevRequest)="focusPart('hours')"
 			(inputControlClick)="inputControlClickHandler('minutes', $event)"
 		/>
-		@if (ampm()) {
+		@if (enableMeridiemDisplay()) {
 		<div
 			class="timePicker-fieldset-meridiem"
 			(keydown.A)="anteMeridiemRef.click()"
