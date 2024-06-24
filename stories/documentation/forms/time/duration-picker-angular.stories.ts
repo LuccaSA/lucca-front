@@ -43,8 +43,7 @@ export const Basic: StoryObj<DurationPickerComponent & FormFieldComponent> = {
 				},
 				argTypes,
 			)}>
-	<lu-duration-picker ${generateInputs(inputArgs, argTypes)}
-	[(ngModel)]="example">
+	<lu-duration-picker ${generateInputs(inputArgs, argTypes)} [(ngModel)]="example">
 	</lu-duration-picker>
 </lu-form-field>
 

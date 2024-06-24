@@ -52,8 +52,8 @@ export const Basic: StoryObj<TimePickerComponent & FormFieldComponent> = {
 	[(ngModel)]="example">
 	</lu-time-picker>
 	<ng-template #labelID>
-    	<span aria-hidden="true">${label}</span>
-  	</ng-template>
+			<span aria-hidden="true">${label}</span>
+		</ng-template>
 </lu-form-field>
 
 {{example}}`),
