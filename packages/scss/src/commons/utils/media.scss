@@ -37,6 +37,10 @@
 			}
 		}
 
+		@if $at == 'media' {
+			$containerName: '';
+		}
+
 		@if map.get(config.$breakpoints, $breakpoint) {
 			$breakpoint: pxToEm(map.get(config.$breakpoints, $breakpoint));
 		}
@@ -53,12 +57,19 @@
 	@if $at == 'container' {
 		$reversed: 'not';
 	}
+
+	@if $at == 'media' {
+		$containerName: '';
+	}
+
 	@if map.get(config.$breakpoints, $breakpoint1) {
 		$breakpoint1: pxToEm(map.get(config.$breakpoints, $breakpoint1));
 	}
+
 	@if map.get(config.$breakpoints, $breakpoint2) {
 		$breakpoint2: pxToEm(map.get(config.$breakpoints, $breakpoint2));
 	}
+
 	// si le breakpoint2 est plus petit que le breakpoint1, on les inverse
 	@if ($breakpoint2 < $breakpoint1) {
 		$breakpointTmp: $breakpoint2;

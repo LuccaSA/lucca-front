@@ -6,6 +6,11 @@
 	}
 
 	@at-root ($atRoot) {
+		.pageHeaderResponsiveWrapper {
+			container-type: size;
+			container-name: pageHeader;
+		}
+
 		.pageHeader-content {
 			display: flex;
 			justify-content: space-between;

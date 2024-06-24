@@ -1,11 +1,15 @@
 @mixin component($atRoot: 'without: rule') {
-	container: comment / inline-size;
 	display: flex;
 	flex-direction: column;
 	gap: var(--pr-t-spacings-100);
 	max-width: 40rem;
 
 	@at-root ($atRoot) {
+		.commentResponsiveWrapper {
+			container-type: size;
+			container-name: comment;
+		}
+
 		.comment-infos {
 			display: flex;
 			font-style: normal;

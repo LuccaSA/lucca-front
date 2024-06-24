@@ -14,6 +14,11 @@
 	color: var(--palettes-neutral-800);
 
 	@at-root ($atRoot) {
+		.indexTableResponsiveWrapper {
+			container-type: size;
+			container-name: indexTable;
+		}
+
 		.indexTable-head {
 			display: table-header-group;
 			vertical-align: bottom;

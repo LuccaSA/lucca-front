@@ -1,20 +1,16 @@
 @use 'field';
 @use 'box';
 @use 'tag';
-@use 'main';
 @use 'code';
 @use 'link';
 @use 'chip';
 @use 'title';
 @use 'label';
 @use 'filterBar';
-@use 'filters';
 @use 'divider';
 @use 'section';
 @use 'collapse';
 @use 'container';
-@use 'errorPage';
-@use 'pageHeader';
 @use 'pagination';
 @use 'titleSection';
 @use 'contentSection';
@@ -27,7 +23,6 @@
 @use 'progress';
 @use 'breadcrumbs';
 @use 'buttonGroup';
-@use 'header';
 @use 'actionIcon';
 @use 'menu';
 @use 'radio';
@@ -59,7 +54,6 @@
 @use 'inlineMessage';
 @use 'numericBadge';
 @use 'mobileNavigation';
-@use 'footer';
 @use 'formLabel';
 @use 'verticalNavigation';
 @use 'sortableList';
@@ -70,10 +64,7 @@
 @use 'calloutFeedbackList';
 @use 'simpleSelect';
 @use 'multiSelect';
-@use 'emptyState';
-@use 'dialog';
 @use 'avatar';
-@use 'indexTable';
 @use 'indexTableSorted';
 @use 'tooltip';
 @use 'userPopover';
@@ -81,6 +72,28 @@
 @use 'comment';
 @use 'toast';
 @use 'popover';
+
+@use 'main' with($responsive: false);
+@use 'dialog' with($responsive: false);
+@use 'errorPage' with($responsive: false);
+@use 'filters' with($responsive: false);
+@use 'header' with($responsive: false);
+@use 'footer' with($responsive: false);
+@use 'indexTable' with($responsive: false);
+@use 'pageHeader' with($responsive: false);
+@use 'emptyState' with($responsive: false);
+
+@include main.responsive($at: 'media');
+@include dialog.responsive($at: 'media');
+@include errorPage.responsive($at: 'media');
+@include filters.responsive($at: 'media');
+@include header.responsive($at: 'media');
+@include footer.responsive($at: 'media');
+@include indexTable.responsive($at: 'media');
+@include pageHeader.responsive($at: 'media');
+@include pageHeader.responsiveSearch($at: 'media');
+@include emptyState.responsive($at: 'media');
+@include emptyState.responsiveBackground($at: 'media');
 
 // @use 'gridLegacy';
 // @use 'emptyStateDeprecated';
