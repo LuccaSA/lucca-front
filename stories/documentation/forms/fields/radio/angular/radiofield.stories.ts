@@ -1,9 +1,9 @@
-import { RadioComponent, RadioGroupInputComponent } from '@lucca-front/ng/forms';
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { FormsModule } from '@angular/forms';
-import { cleanupTemplate, generateInputs } from 'stories/helpers/stories';
-import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormFieldComponent } from '@lucca-front/ng/form-field';
+import { RadioComponent, RadioGroupInputComponent } from '@lucca-front/ng/forms';
+import { Meta, StoryObj, moduleMetadata } from '@storybook/angular';
+import { cleanupTemplate, generateInputs } from 'stories/helpers/stories';
 
 export default {
 	title: 'Documentation/Forms/Fields/RadioField/Angular',
