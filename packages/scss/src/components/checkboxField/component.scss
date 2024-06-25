@@ -3,6 +3,9 @@
 
 @mixin component($atRoot: 'without: rule') {
 	position: relative;
+	display: block;
+	width: var(--component-checkboxField-size);
+	height: var(--component-checkboxField-size);
 
 	@at-root ($atRoot) {
 		.checkboxField-icon {
