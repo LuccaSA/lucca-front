@@ -58,9 +58,7 @@ export class PopoverContentComponent implements AfterViewInit {
 	}
 
 	grabFocus(): void {
-		if (!this.#config.disableFocusManipulation) {
-			this.#focusManager.focusInitialElement();
-		}
+		this.#focusManager.focusInitialElement();
 	}
 
 	@HostListener('window:keydown.escape')

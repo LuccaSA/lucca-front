@@ -1,4 +1,20 @@
-import { booleanAttribute, DestroyRef, Directive, ElementRef, HostBinding, HostListener, inject, Injector, input, Input, InputSignal, signal, TemplateRef, ViewContainerRef } from '@angular/core';
+import {
+	booleanAttribute,
+	DestroyRef,
+	Directive,
+	ElementRef,
+	HostBinding,
+	HostListener,
+	inject,
+	Injector,
+	input,
+	Input,
+	InputSignal,
+	OnDestroy,
+	signal,
+	TemplateRef,
+	ViewContainerRef,
+} from '@angular/core';
 import { ConnectedPosition, ConnectionPositionPair, Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
 import { PopoverContentComponent } from './content/popover-content/popover-content.component';
@@ -48,7 +64,7 @@ const defaultPositionPairs: Record<PopoverPosition, ConnectionPositionPair> = {
 	},
 	standalone: true,
 })
-export class PopoverDirective {
+export class PopoverDirective implements OnDestroy {
 	#overlay = inject(Overlay);
 
 	#elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
@@ -70,7 +86,7 @@ export class PopoverDirective {
 	})
 	luPopoverDisabled = false;
 
-	luPopoverTrigger = input<'click' | 'click+hover'>('click');
+	luPopoverTrigger = input<'click' | 'click+hover' | 'hover+focus'>('click');
 
 	@Input()
 	customPositions?: ConnectionPositionPair[];
@@ -99,7 +115,7 @@ export class PopoverDirective {
 		combineLatest([toObservable(this.luPopoverOpenDelay), toObservable(this.luPopoverCloseDelay), toObservable(this.luPopoverTrigger)])
 			.pipe(
 				filter(([, , trigger]) => {
-					return trigger.includes('hover');
+					return trigger.includes('hover') || trigger.includes('focus');
 				}),
 				switchMap(([openDelay, closeDelay]) => {
 					return merge(this.open$.pipe(map(() => 'open')), this.close$.pipe(map(() => 'close'))).pipe(
@@ -119,14 +135,29 @@ export class PopoverDirective {
 			});
 	}
 
+	ngOnDestroy(): void {
+		this.#componentRef?.close();
+	}
+
 	@HostListener('mouseenter')
 	onMouseEnter() {
-		this.open$.next();
+		if (this.luPopoverTrigger().includes('hover')) {
+			this.open$.next();
+		}
+	}
+
+	@HostListener('focus')
+	onFocus() {
+		if (this.luPopoverTrigger().includes('focus')) {
+			this.open$.next();
+		}
 	}
 
 	@HostListener('mouseleave')
 	onMouseLeave() {
-		this.close$.next();
+		if (this.luPopoverTrigger().includes('hover')) {
+			this.close$.next();
+		}
 	}
 
 	@HostListener('click')
