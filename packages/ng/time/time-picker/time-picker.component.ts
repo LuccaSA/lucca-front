@@ -20,11 +20,12 @@ import { isNil, isNotNil, PickerControlDirection } from '../core/misc.utils';
 import { TimePickerPartComponent } from '../core/time-picker-part.component';
 import { DEFAULT_MIN_TIME, DEFAULT_TIME_DECIMAL_PIPE_FORMAT, TimeChangeEvent } from './time-picker.model';
 import { LU_TIME_PICKER_TRANSLATIONS } from './time-picker.translate';
+import { RepeatOnHoldDirective } from '../core/repeat-on-hold.directive';
 
 @Component({
 	selector: 'lu-time-picker',
 	standalone: true,
-	imports: [TimePickerPartComponent, NgClass, FormsModule],
+	imports: [TimePickerPartComponent, NgClass, FormsModule, RepeatOnHoldDirective],
 	templateUrl: './time-picker.component.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	providers: [
