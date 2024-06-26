@@ -1,5 +1,6 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input } from '@angular/core';
-import { LuDisplayFormat, LuDisplayFullname, LuDisplayHybrid, LuDisplayInitials } from '../display/index';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, inject } from '@angular/core';
+import { LU_DEFAULT_DISPLAY_POLICY, LuDisplayFormat } from '../display/index';
+import { displayPictureFormatRecord } from '../picture/user-picture.component';
 
 export interface LuUserTileUserInput {
 	picture?: { href: string } | null;
@@ -19,6 +20,10 @@ export interface LuUserTileUserInput {
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LuUserTileComponent {
+	readonly #defaultFormat = inject(LU_DEFAULT_DISPLAY_POLICY);
+	readonly #changeDetector = inject(ChangeDetectorRef);
+	displayPictureFormat = displayPictureFormatRecord[this.#defaultFormat];
+
 	private _user: LuUserTileUserInput;
 	/**
 	 * LuUserTileUserInput to display.
@@ -26,19 +31,27 @@ export class LuUserTileComponent {
 	@Input()
 	set user(user: LuUserTileUserInput) {
 		this._user = user;
-		this._changeDetector.markForCheck();
+		this.#changeDetector.markForCheck();
 	}
 
 	get user(): LuUserTileUserInput {
 		return this._user;
 	}
 
+	private _displayFormat: LuDisplayFormat;
 	/**
 	 * User Display format.
-	 * It is set to 'lf' by default
+	 * It is set to 'LU_DEFAULT_DISPLAY_POLICY' by default
 	 */
 	@Input()
-	displayFormat: LuDisplayFormat;
+	set displayFormat(displayFormat: LuDisplayFormat) {
+		this._displayFormat = displayFormat;
+		this.displayPictureFormat = displayPictureFormatRecord[displayFormat];
+		this.#changeDetector.markForCheck();
+	}
+	get displayFormat(): LuDisplayFormat {
+		return this._displayFormat;
+	}
 
 	private _role: string;
 	/**
@@ -47,34 +60,10 @@ export class LuUserTileComponent {
 	@Input()
 	set role(role: string) {
 		this._role = role;
-		this._changeDetector.markForCheck();
+		this.#changeDetector.markForCheck();
 	}
 
 	get role(): string {
 		return this._role;
 	}
-
-	get displayPictureFormat(): LuDisplayInitials {
-		switch (this.displayFormat) {
-			case LuDisplayFullname.lastfirst:
-			case LuDisplayInitials.lastfirst:
-			case LuDisplayHybrid.lastIfirstFull:
-			case LuDisplayHybrid.lastFullfirstI:
-				return LuDisplayInitials.lastfirst;
-			case LuDisplayFullname.last:
-			case LuDisplayInitials.last:
-				return LuDisplayInitials.last;
-			case LuDisplayFullname.first:
-			case LuDisplayInitials.first:
-				return LuDisplayInitials.first;
-			case LuDisplayFullname.firstlast:
-			case LuDisplayInitials.firstlast:
-			case LuDisplayHybrid.firstIlastFull:
-			case LuDisplayHybrid.firstFulllastI:
-			default:
-				return LuDisplayInitials.firstlast;
-		}
-	}
-
-	constructor(private _changeDetector: ChangeDetectorRef) {}
 }
