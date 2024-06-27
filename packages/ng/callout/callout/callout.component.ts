@@ -32,7 +32,7 @@ export class CalloutComponent {
 	/**
 	 * Which size should the callout be? Defaults to medium
 	 */
-	size: 'M' | 'S';
+	size: 'M' | 'S' = 'M';
 
 	@Input({ transform: booleanAttribute })
 	/**
