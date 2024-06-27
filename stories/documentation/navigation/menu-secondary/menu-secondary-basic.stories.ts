@@ -96,13 +96,17 @@ function getTemplate(args: MenuSecondaryBasicStory): string {
 						<a href="#" class="navSide-item-link">
 							<span aria-hidden="true" class="lucca-icon icon-chartVerticalBar"></span>
 							<span class="navSide-item-link-title">Section 3</span>
+							<span class="newBadge">New</span>
 						</a>
 					</li>
 					<li class="navSide-item">
 						<a href="#" class="navSide-item-link">
 							<span aria-hidden="true" class="lucca-icon icon-settingsEqualizer"></span>
 							<span class="navSide-item-link-title">Section 4</span>
-							<span class="numericBadge"><span class="u-mask">, </span>9</span>
+							<div class="navSide-item-link-badgesOptional">
+								<span class="newBadge">New</span>
+								<span class="numericBadge"><span class="u-mask">, </span>9</span>
+							</div>
 						</a>
 					</li>
 				</ul>

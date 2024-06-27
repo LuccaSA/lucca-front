@@ -114,6 +114,14 @@
 			font-weight: 600;
 		}
 
+		.navSide-item-link-badgesOptional {
+			display: flex;
+			column-gap: var(--pr-t-spacings-150);
+			row-gap: var(--pr-t-spacings-50);
+			align-items: center;
+			margin-left: auto;
+		}
+
 		.navSide-item-arrow {
 			@include icon.S;
 
