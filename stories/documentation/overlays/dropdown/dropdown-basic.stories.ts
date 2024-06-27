@@ -44,7 +44,7 @@ class DropdownStoriesModule {}
 		</a>
 	</li>
 	<li class="lu-dropdown-options-item">
-		<a routerLink="." fragment="link2" class="lu-dropdown-options-item-action" luDropdownItem>
+		<a routerLink="./toto" fragment="link2" class="lu-dropdown-options-item-action" luDropdownItem>
 			<span aria-hidden="true" class="lucca-icon icon-officePen"></span>
 			Editer
 		</a>

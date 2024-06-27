@@ -8,3 +8,4 @@ export * from './dialog-content/dialog-content.component';
 export * from './directives/dialog-open.directive';
 export * from './directives/dialog-close.directive';
 export * from './directives/dialog-dismiss.directive';
+export * from './dialog-routing';
