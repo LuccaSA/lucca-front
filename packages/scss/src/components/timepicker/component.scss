@@ -31,21 +31,22 @@
 		}
 
 		.timePicker-fieldset-groupSeparator {
-			// text-align: center;
-			// position: absolute;
-			// top: 0;
-			// bottom: 0;
-			// left: var(--components-timepicker-separator-left);
 			pointer-events: none;
 			display: grid;
 			place-items: center;
 			text-align: center;
-			width: 1rem;
-			margin: 0 -0.5rem;
+			width: var(--pr-t-spacings-200);
+			margin: 0 calc(var(--pr-t-spacings-100) * -1);
+			position: relative;
+			left: calc(var(--pr-t-spacings-25) * -1);
 		}
 
 		.timePicker-fieldset-group {
 			position: relative;
+
+			~ .timePicker-fieldset-group {
+				margin-left: calc(var(--pr-t-spacings-50) * -1);
+			}
 		}
 
 		.timePicker-fieldset-group-textfield {
@@ -66,21 +67,7 @@
 			text-align: center;
 			padding: var(--components-timepicker-paddingInput);
 			box-sizing: content-box;
-
-			//&:has(+ .timePicker-fieldset-group-textfield-display) {
 			opacity: 0.0001;
-			//}
-
-			/*
-			&[type='number'] {
-				-moz-appearance: textfield;
-
-				&::-webkit-outer-spin-button,
-				&::-webkit-inner-spin-button {
-					-webkit-appearance: none;
-				}
-			}
-			*/
 
 			&::placeholder {
 				color: var(--component-textField-placeholder);
@@ -104,12 +91,13 @@
 
 		.timePicker-fieldset-group-stepper {
 			position: absolute;
-			bottom: calc(100% + var(--pr-t-spacings-100) + 1px);
-			left: var(--pr-t-spacings-100);
-			right: var(--pr-t-spacings-100);
+			bottom: calc(var(--components-timepicker-input-height) + var(--pr-t-spacings-150));
 			border: 0;
 			padding: 0;
-			height: var(--pr-t-spacings-200);
+			height: 1rem;
+			width: 1rem;
+			left: 50%;
+			transform: translateX(-50%);
 			background-color: transparent;
 			color: var(--palettes-neutral-600);
 			display: inline-flex;
@@ -138,7 +126,7 @@
 			}
 
 			+ .timePicker-fieldset-group-stepper {
-				top: calc(100% + var(--pr-t-spacings-100) + 1px);
+				top: calc(var(--components-timepicker-input-height) + var(--pr-t-spacings-150));
 				bottom: auto;
 			}
 		}
@@ -147,7 +135,7 @@
 			width: var(--pr-t-spacings-500);
 			position: relative;
 			align-self: stretch;
-			margin-left: calc(var(--pr-t-spacings-100) * -1);
+			margin-left: calc(var(--pr-t-spacings-50) * -1);
 
 			&::after {
 				content: '';

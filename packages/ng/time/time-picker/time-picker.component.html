@@ -65,27 +65,27 @@
 					(click)="$event.stopPropagation()"
 				/>
 			</div>
+			@if (displayArrows()) {
+			<button
+				class="timePicker-fieldset-group-stepper"
+				type="button"
+				tabindex="-1"
+				aria-hidden="true"
+				(click)="switchMeridiem(ampmDisplay() === 'AM' ? 'PM' : 'AM')"
+			>
+				<span aria-hidden="true" class="lucca-icon icon-northArrow"></span>
+			</button>
+			<button
+				class="timePicker-fieldset-group-stepper"
+				type="button"
+				tabindex="-1"
+				aria-hidden="true"
+				(click)="switchMeridiem(ampmDisplay() === 'AM' ? 'PM' : 'AM')"
+			>
+				<span aria-hidden="true" class="lucca-icon icon-southArrow"></span>
+			</button>
+			}
 		</div>
-
-		@if (displayArrows()) {
-		<button
-			class="timePicker-fieldset-group-stepper"
-			type="button"
-			tabindex="-1"
-			aria-hidden="true"
-			(click)="switchMeridiem(ampmDisplay() === 'AM' ? 'PM' : 'AM')"
-		>
-			<span aria-hidden="true" class="lucca-icon icon-northArrow"></span>
-		</button>
-		<button
-			class="timePicker-fieldset-group-stepper"
-			type="button"
-			tabindex="-1"
-			aria-hidden="true"
-			(click)="switchMeridiem(ampmDisplay() === 'AM' ? 'PM' : 'AM')"
-		>
-			<span aria-hidden="true" class="lucca-icon icon-southArrow"></span>
-		</button>
-		} }
+		}
 	</fieldset>
 </div>
