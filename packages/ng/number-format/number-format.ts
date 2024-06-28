@@ -132,7 +132,11 @@ export class NumberFormat {
 
 		// cast input in number only if it has integer or fraction
 		if (canCastSplittedInputToNumber(splittedInput)) {
-			const value = +joinSplittedInput(splittedInput);
+			let value = +joinSplittedInput(splittedInput);
+			if (this.options.style === 'percent') {
+				value /= 100;
+				value = +value.toFixed(this.options.maximumFractionDigits + 2);
+			}
 
 			// if value is not in range, fix it and split again !
 			const valueInRange = this.applyRange(value);

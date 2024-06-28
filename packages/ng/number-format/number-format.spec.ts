@@ -114,6 +114,7 @@ const percentParseTests: ParseTestData[] = [
 
 const minMaxTests: ParseTestData[] = [
 	{
+		style: 'decimal',
 		input: '5',
 		min: -10,
 		max: 10,
@@ -121,6 +122,15 @@ const minMaxTests: ParseTestData[] = [
 		value: 5,
 	},
 	{
+		style: 'percent',
+		input: '5',
+		min: -0.1,
+		max: 0.1,
+		cleanInput: '5',
+		value: 0.05,
+	},
+	{
+		style: 'decimal',
 		input: '-15',
 		min: -10,
 		max: 10,
@@ -128,14 +138,32 @@ const minMaxTests: ParseTestData[] = [
 		value: -10,
 	},
 	{
+		style: 'percent',
+		input: '-15',
+		min: -0.1,
+		max: 0.1,
+		cleanInput: '-10',
+		value: -0.1,
+	},
+	{
+		style: 'decimal',
 		input: '15',
 		min: -10,
 		max: 10,
 		cleanInput: '10',
 		value: 10,
 	},
+	{
+		style: 'percent',
+		input: '15',
+		min: -0.1,
+		max: 0.1,
+		cleanInput: '10',
+		value: 0.1,
+	},
 	// If values can only be negative, add minus sign by default
 	{
+		style: 'decimal',
 		input: '',
 		min: -10,
 		max: -5,
@@ -293,13 +321,16 @@ describe('NumberFormat', () => {
 		expect(parsedInput.value).toBe(value);
 	});
 
-	it.each<ParseTestData>(minMaxTests)("with range '$min' to '$max' should parse '$input' to $value and clean to '$cleanInput'", ({ min, max, input, cleanInput, value }) => {
-		const numberFormat = new NumberFormat({ locale: LOCALE_FR, style: 'decimal', min, max });
+	it.each<ParseTestData>(minMaxTests)(
+		"with range '$min' to '$max', and style '$style', should parse '$input' to $value and clean to '$cleanInput'",
+		({ min, max, input, cleanInput, value, style }) => {
+			const numberFormat = new NumberFormat({ locale: LOCALE_FR, style, min, max });
 
-		const parsedInput = numberFormat.parse(input);
-		expect(parsedInput.cleanInput).toBe(cleanInput);
-		expect(parsedInput.value).toBe(value);
-	});
+			const parsedInput = numberFormat.parse(input);
+			expect(parsedInput.cleanInput).toBe(cleanInput);
+			expect(parsedInput.value).toBe(value);
+		},
+	);
 
 	it.each<SuffixPrefixTestData>(suffixPrefixCurrencyTests)(
 		"with currency '$currency' and display '$currencyDisplay', '$value' should get prefix '$prefix' and suffix '$suffix'",
