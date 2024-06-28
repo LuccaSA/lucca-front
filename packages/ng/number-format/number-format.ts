@@ -201,7 +201,12 @@ export class NumberFormat {
 		return this.#intlNumberFormat
 			.formatToParts(value)
 			.filter((p) => VALUE_TYPES.includes(p.type))
-			.map((p) => p.value)
+			.map((p) => {
+				if (p.type === 'minusSign') {
+					return '−';
+				}
+				return p.value;
+			})
 			.join('');
 	}
 }

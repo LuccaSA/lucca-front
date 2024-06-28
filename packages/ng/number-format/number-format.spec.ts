@@ -297,7 +297,7 @@ const blurFormatTests: FormatTestData[] = [
 	},
 	{
 		value: -123245.5,
-		formatted: '-123 245,5',
+		formatted: '−123 245,5',
 	},
 	{
 		value: 123245.12345,
