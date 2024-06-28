@@ -124,23 +124,26 @@ class DialogRoutingStory {
 	service = inject(DataProvider);
 }
 
-const routeDialogFactory = dialogRouteFactory(TestDialogComponent, {
+const dialogRoute = dialogRouteFactory(TestDialogComponent, {
 	dialogConfig: {
 		modal: true,
 		size: 'M',
 	},
+	dialogRouteConfig: {
+		onClosed: (onClosedData, router = inject(Router), service = inject(DataProvider)) => {
+			service.dialogOut.set(onClosedData);
+			return router.navigate(['closed']);
+		},
+		onDismissed: (router = inject(Router)) => router.navigate(['dismissed']),
+	},
 });
 
 const routes: Routes = [
-	routeDialogFactory({
+	dialogRoute({
 		path: 'dialog',
 		dataFactory: (service = inject(DataProvider)) => service.dummy(),
 		dialogRouteConfig: {
-			onClosed: (onClosedData, router = inject(Router), service = inject(DataProvider)) => {
-				service.dialogOut.set(onClosedData);
-				return router.navigate(['closed']);
-			},
-			onDismissed: (router = inject(Router)) => router.navigate(['dismissed']),
+			// Can be overridden here
 		},
 	}),
 	{ path: 'closed', component: ClosedComponent },
@@ -163,21 +166,33 @@ const code = `
 const providers = [provideRouter(routes), DataProvider];
 
 // ROUTES
+// dialogRoute can be used for multiple routes
+const dialogRoute = dialogRouteFactory(TestDialogComponent, {
+	dialogConfig: {
+		modal: true,
+		size: 'M',
+	},
+	dialogRouteConfig: {
+		onClosed: (onClosedData, router = inject(Router), service = inject(DataProvider)) => {
+			service.dialogOut.set(onClosedData);
+			return router.navigate(['closed']);
+		},
+		onDismissed: (router = inject(Router)) => router.navigate(['dismissed']),
+	},
+});
+
 const routes: Routes = [
-  routeDialogFactory({
-    path: 'dialog',
-    dataFactory: (service = inject(DataProvider)) => service.dummy(),
-    dialogRouteConfig: {
-      onClosed: (onClosedData, router = inject(Router), service = inject(DataProvider)) => {
-        service.dialogOut.set(onClosedData);
-        return router.navigate(['closed']);
-      },
-      onDismissed: (router = inject(Router)) => router.navigate(['dismissed']),
-    },
-  }),
-  { path: 'closed', component: SubComponent },
-  { path: 'dismissed', component: SubComponent },
-  { path: '**', component: SubComponent },
+	dialogRoute({
+// specify path of routed dialog
+		path: 'dialog',
+// dataFactory is mandatory if routed dialog require data (use: injectDialogData)
+		dataFactory: (service = inject(DataProvider)) => service.dummy(),
+		// dialogRouteConfig can be overridden here
+		dialogRouteConfig: {},
+	}),
+	{ path: 'closed', component: ClosedComponent },
+	{ path: 'dismissed', component: DismissedComponent },
+	{ path: '**', component: EmptyComponent },
 ];
 
 // Service to communicate with dialog, could be a shared store
