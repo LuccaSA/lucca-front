@@ -17,7 +17,7 @@ export default {
 			type: 'string',
 		},
 		size: {
-			options: ['M', 'S', 'XS'],
+			options: ['M', 'S'],
 			control: {
 				type: 'radio',
 			},
@@ -30,6 +30,7 @@ export default {
 		},
 		useAutoPrefixSuffix: {
 			type: 'boolean',
+			description: 'Affiche le préfixe ou suffixe (en fonction de la locale)',
 		},
 		min: {
 			type: 'number',
@@ -42,6 +43,7 @@ export default {
 			control: {
 				type: 'select',
 			},
+			description: 'En <code>percent</code>, la valeur est comprise entre 0 et 1',
 		},
 		currency: {
 			options: ['EUR', 'USD', 'CNY', 'JPY'],
@@ -109,14 +111,14 @@ export const Basic: StoryObj<NumberFormatInputComponent & { disabled: boolean } 
 		hiddenLabel: false,
 		hasClearer: false,
 		disabled: false,
-		inlineMessage: 'Helper Text',
+		inlineMessage: 'Seuls les nombres sont acceptés',
 		inlineMessageState: 'default',
 		size: 'M',
 		placeholder: 'Placeholder',
 		tooltip: 'Je suis un message d’aide',
 		formatStyle: 'decimal',
 		currency: 'EUR',
-		useAutoPrefixSuffix: false,
+		useAutoPrefixSuffix: true,
 	},
 };
 
@@ -155,7 +157,7 @@ export const WithCurrency: StoryObj<NumberFormatInputComponent & { disabled: boo
 		hiddenLabel: false,
 		hasClearer: false,
 		disabled: false,
-		inlineMessage: 'Helper Text',
+		inlineMessage: 'Seuls les nombres sont acceptés',
 		inlineMessageState: 'default',
 		size: 'M',
 		placeholder: 'Placeholder',
@@ -202,7 +204,7 @@ export const WithUnitKm: StoryObj<NumberFormatInputComponent & { disabled: boole
 		hiddenLabel: false,
 		hasClearer: false,
 		disabled: false,
-		inlineMessage: 'Helper Text',
+		inlineMessage: 'Seuls les nombres sont acceptés',
 		inlineMessageState: 'default',
 		size: 'M',
 		placeholder: 'Placeholder',
@@ -249,7 +251,7 @@ export const WithPercent: StoryObj<NumberFormatInputComponent & { disabled: bool
 		hiddenLabel: false,
 		hasClearer: false,
 		disabled: false,
-		inlineMessage: 'Helper Text',
+		inlineMessage: 'Seuls les nombres sont acceptés',
 		inlineMessageState: 'default',
 		size: 'M',
 		placeholder: 'Placeholder',
