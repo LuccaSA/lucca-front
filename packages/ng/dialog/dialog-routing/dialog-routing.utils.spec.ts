@@ -9,16 +9,13 @@ import { provideRouter, Route, Router, RouterOutlet } from '@angular/router';
 import { EMPTY, Observable, Subject } from 'rxjs';
 
 const dialogOpen = jest.fn();
-jest.mock('@lucca-front/ng/dialog', () => {
-	const { LuDialogRef, injectDialogData, LuDialogService } = jest.requireActual('@lucca-front/ng/dialog');
+jest.mock('../dialog.providers', () => {
+	const { LuDialogService } = jest.requireActual('../dialog.service');
 	return {
 		provideLuDialog: () => ({
 			provide: LuDialogService,
 			useValue: { open: dialogOpen },
 		}),
-		LuDialogRef,
-		injectDialogData,
-		LuDialogService,
 	};
 });
 
