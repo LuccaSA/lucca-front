@@ -26,7 +26,12 @@
 		display: none;
 	}
 
-	.numericBadge {
+	.navSide-item-link-badgesOptional {
+		flex-direction: column;
+		margin-left: inherit;
+	}
+
+	.numericBadge, .newBadge {
 		margin-left: inherit;
 	}
 
