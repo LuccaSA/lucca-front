@@ -1,14 +1,10 @@
 import { Meta, StoryFn } from '@storybook/angular';
 
-interface IndexTableActionsStory {
-
-}
+interface IndexTableActionsStory {}
 
 export default {
 	title: 'Documentation/Listings/Index Table/Actions',
-	argTypes: {
-
-	},
+	argTypes: {},
 } as Meta;
 
 function getTemplate(args: IndexTableActionsStory): string {
@@ -26,8 +22,7 @@ function getTemplate(args: IndexTableActionsStory): string {
 	<tbody class="indexTable-body">
 		<tr class="indexTable-body-row">
 			<td class="indexTable-body-row-cell">
-				<a href="#" class="indexTable-body-row-cell-action">See details</a>
-				Content
+				<a href="#" class="indexTable-body-row-cell-link">Content</a>
 			</td>
 			<td class="indexTable-body-row-cell">Content</td>
 			<td class="indexTable-body-row-cell">Content</td>
@@ -50,4 +45,4 @@ const Template: StoryFn<IndexTableActionsStory> = (args) => ({
 });
 
 export const Actions = Template.bind({});
-Actions.args = { };
+Actions.args = {};

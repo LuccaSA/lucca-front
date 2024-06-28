@@ -1,14 +1,10 @@
 import { Meta, StoryFn } from '@storybook/angular';
 
-interface IndexTableSelectableStory {
-
-}
+interface IndexTableSelectableStory {}
 
 export default {
 	title: 'Documentation/Listings/Index Table/Selectable',
-	argTypes: {
-
-	},
+	argTypes: {},
 } as Meta;
 
 function getTemplate(args: IndexTableSelectableStory): string {
@@ -40,8 +36,7 @@ function getTemplate(args: IndexTableSelectableStory): string {
 				</span>
 			</td>
 			<td class="indexTable-body-row-cell">
-				<a href="#" class="indexTable-body-row-cell-action">See details</a>
-				Content
+				<a href="#" class="indexTable-body-row-cell-link">Content</a>
 			</td>
 			<td class="indexTable-body-row-cell">Content</td>
 			<td class="indexTable-body-row-cell">Content</td>
@@ -56,8 +51,7 @@ function getTemplate(args: IndexTableSelectableStory): string {
 				</span>
 			</td>
 			<td class="indexTable-body-row-cell">
-				<a href="#" class="indexTable-body-row-cell-action">See details</a>
-				Content
+				<a href="#" class="indexTable-body-row-cell-link">Content</a>
 			</td>
 			<td class="indexTable-body-row-cell">Content</td>
 			<td class="indexTable-body-row-cell">Content</td>
@@ -72,4 +66,4 @@ const Template: StoryFn<IndexTableSelectableStory> = (args) => ({
 });
 
 export const Selectable = Template.bind({});
-Selectable.args = { };
+Selectable.args = {};

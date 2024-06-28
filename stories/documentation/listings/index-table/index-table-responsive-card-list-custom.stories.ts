@@ -1,14 +1,10 @@
 import { Meta, StoryFn } from '@storybook/angular';
 
-interface IndexTableResponsiveCardListCustomStory {
-
-}
+interface IndexTableResponsiveCardListCustomStory {}
 
 export default {
 	title: 'Documentation/Listings/Index Table/Responsive Card List Custom',
-	argTypes: {
-
-	},
+	argTypes: {},
 } as Meta;
 
 function getTemplate(args: IndexTableResponsiveCardListCustomStory): string {
@@ -40,16 +36,14 @@ function getTemplate(args: IndexTableResponsiveCardListCustomStory): string {
 	<tbody class="indexTable-body">
 		<tr class="indexTable-body-row">
 			<td class="indexTable-body-row-cell">
-				<a href="#" class="indexTable-body-row-cell-action">See details</a>
-				Lorem ipsum dolor
+				<a href="#" class="indexTable-body-row-cell-link">Lorem</a>
 			</td>
 			<td class="indexTable-body-row-cell">Aliquam vestibulum pulvinar luctus</td>
 			<td class="indexTable-body-row-cell"><strong>122,00 €</strong></td>
 		</tr>
 		<tr class="indexTable-body-row">
 			<td class="indexTable-body-row-cell">
-				<a href="#" class="indexTable-body-row-cell-action">See details</a>
-				Vivamus a accumsan
+				<a href="#" class="indexTable-body-row-cell-link">Lorem</a>
 			</td>
 			<td class="indexTable-body-row-cell">Phasellus ullamcorper vehicula diam in dignissim. Mauris cursus volutpat leo eu convallis. Sed sed scelerisque libero</td>
 			<td class="indexTable-body-row-cell"><strong>56,50 €</strong></td>
@@ -64,4 +58,4 @@ const Template: StoryFn<IndexTableResponsiveCardListCustomStory> = (args) => ({
 });
 
 export const ResponsiveCardListCustom = Template.bind({});
-ResponsiveCardListCustom.args = { };
+ResponsiveCardListCustom.args = {};
