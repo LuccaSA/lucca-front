@@ -19,7 +19,7 @@ export default {
 		luPopover2: HiddenArgType,
 		luPopoverTrigger: {
 			control: 'select',
-			options: ['click', 'click+hover'],
+			options: ['click', 'click+hover', 'hover+focus'],
 		},
 	},
 } as Meta;
