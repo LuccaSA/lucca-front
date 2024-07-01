@@ -20,15 +20,15 @@
 	@include block;
 	@include L;
 
-	--components-loading-transform: translateY(calc((100dvh - var(--commons-banner-height)) / 2));
-	--components-loading-transformFallback: translateY(calc((100vh - var(--commons-banner-height)) / 2));
+	--components-loading-transform: translateY(30vh);
+	--components-loading-padding: 0;
 }
 
 @mixin invert {
 	--components-loading-color: var(--colors-white-color);
 
 	&::after {
-		--commons-loading-frontground: color.transparentize(var(--colors-white-color), 0.66);
+		--commons-loading-frontground: #{color.transparentize(var(--colors-white-color), 66%)};
 	}
 }
 
@@ -48,4 +48,6 @@
 @mixin drawer {
 	@include fullPage;
 	@include popin;
+
+	--components-loading-transform: translateY(35vh);
 }
