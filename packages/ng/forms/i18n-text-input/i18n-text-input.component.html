@@ -1,0 +1,27 @@
+<div class="textField">
+	<div class="textField-input">
+		<input luInput type="text" class="textField-input-value" [placeholder]="placeholder" [formControl]="ngControl.control" #inputElement />
+		<div class="textField-input-affix">
+			<button
+				[luPopover2]="popoverMultilanguage"
+				[customPositions]="popoverPositions"
+				type="button"
+				class="button mod-onlyIcon mod-text textField-input-affix-toggle"
+			>
+				<span aria-hidden="true" class="lucca-icon icon-signTranslation"></span>
+				<span class="u-mask">{{ intl.toggleMultilanguage }}</span>
+			</button>
+			<ng-template #popoverMultilanguage>
+				<div class="popover-contentOptional" [style.width.px]="inputElement.clientWidth + 16">
+					<div class="u-displayFlex u-gapXS u-flexDirectionColumn">
+						@for (lang of languages; track lang) {
+						<lu-form-field [label]="intl['translateTo' + lang]" hiddenLabel>
+							<lu-text-input [suffix]="{content: lang, ariaLabel: ''}" [(ngModel)]="model[lang]"></lu-text-input>
+						</lu-form-field>
+						}
+					</div>
+				</div>
+			</ng-template>
+		</div>
+	</div>
+</div>
