@@ -1,6 +1,20 @@
 import { FlexibleConnectedPositionStrategy, HorizontalConnectionPos, OriginConnectionPosition, Overlay, OverlayConnectionPosition, OverlayRef, VerticalConnectionPos } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
-import { AfterContentInit, ChangeDetectorRef, DestroyRef, Directive, ElementRef, HostBinding, HostListener, Input, Renderer2, booleanAttribute, inject, numberAttribute } from '@angular/core';
+import {
+	AfterContentInit,
+	ChangeDetectorRef,
+	DestroyRef,
+	Directive,
+	ElementRef,
+	HostBinding,
+	HostListener,
+	Input,
+	Renderer2,
+	booleanAttribute,
+	inject,
+	numberAttribute,
+	OnDestroy,
+} from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { SafeHtml } from '@angular/platform-browser';
 import { LuPopoverPosition } from '@lucca-front/ng/popover';
@@ -14,7 +28,7 @@ let nextId = 0;
 	selector: '[luTooltip]',
 	standalone: true,
 })
-export class LuTooltipTriggerDirective implements AfterContentInit {
+export class LuTooltipTriggerDirective implements AfterContentInit, OnDestroy {
 	#overlay = inject(Overlay);
 
 	#host = inject<ElementRef<HTMLElement>>(ElementRef);
@@ -147,6 +161,10 @@ export class LuTooltipTriggerDirective implements AfterContentInit {
 			this.setAccessibilityProperties(0);
 			this.#cdr.markForCheck();
 		});
+	}
+
+	ngOnDestroy(): void {
+		this.closeTooltip();
 	}
 
 	private openTooltip(): void {

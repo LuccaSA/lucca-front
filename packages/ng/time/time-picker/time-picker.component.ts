@@ -1,5 +1,5 @@
 import { NgClass } from '@angular/common';
-import { booleanAttribute, ChangeDetectionStrategy, Component, computed, forwardRef, inject, Input, input, LOCALE_ID, model, output } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, computed, forwardRef, inject, Input, input, LOCALE_ID, model, output, ViewEncapsulation } from '@angular/core';
 import { FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { getIntl } from '@lucca-front/ng/core';
 import { BasePickerComponent } from '../core/base-picker.component';
@@ -27,7 +27,9 @@ import { RepeatOnHoldDirective } from '../core/repeat-on-hold.directive';
 	standalone: true,
 	imports: [TimePickerPartComponent, NgClass, FormsModule, RepeatOnHoldDirective],
 	templateUrl: './time-picker.component.html',
+	styleUrls: ['./time-picker.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
+	encapsulation: ViewEncapsulation.None,
 	providers: [
 		{
 			provide: NG_VALUE_ACCESSOR,
