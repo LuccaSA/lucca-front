@@ -2,6 +2,7 @@ export * from './form-field-id.directive';
 export * from './inject-ng-control';
 export * from './noop-value-accessor.directive';
 
+export * from './number-format-input/number-format-input.component';
 export * from './checkbox-input/checkbox-input.component';
 export * from './i18n-text-input/i18n-text-input.component';
 export * from './number-input/number-input.component';

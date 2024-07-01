@@ -35,6 +35,23 @@
 		.popover-contentOptional {
 			padding: var(--pr-t-spacings-100) var(--pr-t-spacings-150);
 		}
+
+		.popover-close {
+			@include button.outlined;
+			@include button.XS;
+			@include button.onlyIconXS;
+
+			padding: 0;
+			border-radius: 50%;
+			position: absolute;
+			left: calc(var(--pr-t-spacings-100) * -1);
+			top: calc(var(--pr-t-spacings-100) * -1);
+			z-index: 2;
+
+			&:not(:focus-visible) {
+				@include a11y.mask;
+			}
+		}
 	}
 
 	@keyframes popup {

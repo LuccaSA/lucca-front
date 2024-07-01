@@ -1,5 +1,5 @@
 import { NgClass } from '@angular/common';
-import { booleanAttribute, ChangeDetectionStrategy, Component, computed, forwardRef, Input, input, model, output } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, computed, forwardRef, Input, input, model, output, ViewEncapsulation } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { getIntl } from '@lucca-front/ng/core';
 import { BasePickerComponent } from '../core/base-picker.component';
@@ -25,7 +25,9 @@ import { LU_TIME_PICKER_TRANSLATIONS } from './time-picker.translate';
 	standalone: true,
 	imports: [TimePickerPartComponent, NgClass],
 	templateUrl: './time-picker.component.html',
+	styleUrls: ['./time-picker.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
+	encapsulation: ViewEncapsulation.None,
 	providers: [
 		{
 			provide: NG_VALUE_ACCESSOR,
