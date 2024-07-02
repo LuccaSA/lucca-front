@@ -57,8 +57,9 @@ export class LuDialogService {
 
 		if (!config.alert) {
 			// Setup close listeners on backdrop click and escape key by ourselves so we can hook the `canClose` method to it.
-			merge(cdkRef.backdropClick.pipe(filter(() => config.canCloseWithBackdrop ?? true)), cdkRef.keydownEvents.pipe(filter((e) => e.key === 'Escape' && !e.defaultPrevented)))
+			merge(cdkRef.backdropClick, cdkRef.keydownEvents.pipe(filter((e) => e.key === 'Escape' && !e.defaultPrevented)))
 				.pipe(
+					filter(() => config.canCloseWithBackdrop ?? true),
 					switchMap(() => {
 						const canClose = config.canClose?.(cdkRef.componentInstance) ?? true;
 						const canClose$ = isObservable(canClose) ? canClose : of(canClose);
