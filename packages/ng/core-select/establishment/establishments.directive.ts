@@ -81,7 +81,7 @@ export class LuCoreSelectEstablishmentsDirective<T extends LuCoreSelectEstablish
 			...filters,
 			...(clue
 				? // When the clue is not empty, sort establishments by name
-					{ search: sanitizeClueFilter(clue), sort: 'name' }
+					{ search: clue, sort: 'name' }
 				: // When the clue is empty, establishments are grouped by legal unit, so sort them by legal unit name and then by name
 					{ sort: 'legalunit.name,name' }),
 			...(operationIds ? { operations: operationIds.join(',') } : {}),
@@ -90,8 +90,4 @@ export class LuCoreSelectEstablishmentsDirective<T extends LuCoreSelectEstablish
 	);
 
 	protected override optionComparer = (a: T, b: T) => a.id === b.id;
-}
-
-function sanitizeClueFilter(clue: string) {
-	return clue.split(' ').join(',');
 }
