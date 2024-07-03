@@ -1,7 +1,7 @@
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
-import { I18nTextInputComponent } from '@lucca-front/ng/forms';
+import { I18nTextInputComponent, I18nTranslation } from '@lucca-front/ng/forms';
 import { Meta, StoryObj, moduleMetadata } from '@storybook/angular';
 import { cleanupTemplate, generateInputs } from 'stories/helpers/stories';
 
@@ -26,6 +26,30 @@ export const Basic: StoryObj<I18nTextInputComponent & FormFieldComponent> = {
 	render: (args, { argTypes }) => {
 		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, ...inputArgs } = args;
 		return {
+			props: {
+				example: [
+					{
+						cultureCode: 'invariant',
+						cultureName: 'Default value',
+						value: '',
+					},
+					{
+						cultureCode: 'fr-FR',
+						cultureName: 'fr-FR',
+						value: '',
+					},
+					{
+						cultureCode: 'en-EN',
+						cultureName: 'en-EN',
+						value: '',
+					},
+					{
+						cultureCode: 'de-DE',
+						cultureName: 'de-DE',
+						value: '',
+					},
+				] as I18nTranslation[],
+			},
 			template: cleanupTemplate(`<lu-form-field ${generateInputs(
 				{
 					label,
@@ -45,10 +69,7 @@ export const Basic: StoryObj<I18nTextInputComponent & FormFieldComponent> = {
 
 </lu-form-field>
 
-{{example}}`),
-			moduleMetadata: {
-				imports: [I18nTextInputComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule],
-			},
+{{example | json}}`),
 		};
 	},
 	args: {
