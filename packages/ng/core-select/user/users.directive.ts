@@ -170,8 +170,5 @@ export class LuCoreSelectUsersDirective<T extends LuCoreSelectUser = LuCoreSelec
 }
 
 function sanitizeClueFilter(clue: string) {
-	return clue
-		.split(' ')
-		.map((c: string) => encodeURIComponent(c))
-		.join(',');
+	return clue.split(' ').join(',');
 }
