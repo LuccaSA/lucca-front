@@ -1,19 +1,19 @@
 import { ConnectionPositionPair } from '@angular/cdk/overlay';
 import { NgTemplateOutlet } from '@angular/common';
-import { Component, computed, effect, forwardRef, input, signal, ViewEncapsulation, WritableSignal } from '@angular/core';
+import { Component, computed, forwardRef, inject, input, LOCALE_ID, signal, ViewEncapsulation, WritableSignal } from '@angular/core';
 import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
-import { getIntl } from '@lucca-front/ng/core';
+import { getIntl, IntlParamsPipe } from '@lucca-front/ng/core';
 import { FormFieldComponent, InputDirective } from '@lucca-front/ng/form-field';
 import { PopoverDirective } from '@lucca-front/ng/popover2';
 import { FormFieldIdDirective } from '../form-field-id.directive';
 import { TextInputComponent } from '../text-input/text-input.component';
-import { LU_TEXTFIELD_TRANSLATIONS } from './i18n-text-input.translate';
+import { LU_I18n_TEXT_INPUT_TRANSLATIONS } from './i18n-text-input.translate';
 import { I18nTranslation } from './model/i18n-translation';
 
 @Component({
 	selector: 'lu-i18n-text-input',
 	standalone: true,
-	imports: [FormFieldComponent, ReactiveFormsModule, FormFieldIdDirective, NgTemplateOutlet, PopoverDirective, TextInputComponent, FormFieldComponent, FormsModule, InputDirective],
+	imports: [FormFieldComponent, ReactiveFormsModule, FormFieldIdDirective, NgTemplateOutlet, PopoverDirective, TextInputComponent, FormFieldComponent, FormsModule, InputDirective, IntlParamsPipe],
 	templateUrl: './i18n-text-input.component.html',
 	styleUrl: './i18n-text-input.component.scss',
 	providers: [
@@ -26,9 +26,12 @@ import { I18nTranslation } from './model/i18n-translation';
 	encapsulation: ViewEncapsulation.None,
 })
 export class I18nTextInputComponent implements ControlValueAccessor {
-	intl = getIntl(LU_TEXTFIELD_TRANSLATIONS);
+	#localeId = inject(LOCALE_ID);
+
+	intl = getIntl(LU_I18n_TEXT_INPUT_TRANSLATIONS);
 
 	protected onTouched = () => {};
+
 	protected onChange = (_value: I18nTranslation[]) => {};
 
 	placeholder = input('');
@@ -50,10 +53,8 @@ export class I18nTextInputComponent implements ControlValueAccessor {
 		new ConnectionPositionPair({ originX: 'end', originY: 'top' }, { overlayX: 'end', overlayY: 'bottom' }, 16, -6),
 	];
 
-	constructor() {
-		effect(() => {
-			this.onChange?.(this.model());
-		});
+	getLocaleDisplayName(locale: string): string {
+		return new Intl.DisplayNames([this.#localeId], { type: 'language' }).of(locale);
 	}
 
 	writeValue(value: I18nTranslation[]): void {

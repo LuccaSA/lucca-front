@@ -24,7 +24,7 @@
 				<div class="popover-contentOptional" [style.width.px]="inputElement.clientWidth + 16">
 					<div class="u-displayFlex u-gapXS u-flexDirectionColumn">
 						@for (row of panelInputs(); track row.cultureCode) {
-						<lu-form-field [label]="intl['translateTo' + row.cultureName]" hiddenLabel>
+						<lu-form-field [label]="intl.translateTo | intlParams: {lang: getLocaleDisplayName(row.cultureCode)}" hiddenLabel>
 							<lu-text-input
 								[suffix]="{content: row.cultureCode, ariaLabel: ''}"
 								[(ngModel)]="row.value"
