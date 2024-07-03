@@ -61,8 +61,5 @@ export class LuCoreSelectJobQualificationsDirective<T extends LuCoreSelectJobQua
 }
 
 function sanitizeClueFilter(clue: string) {
-	return clue
-		.split(' ')
-		.map((c: string) => encodeURIComponent(c))
-		.join(',');
+	return clue.split(' ').join(',');
 }
