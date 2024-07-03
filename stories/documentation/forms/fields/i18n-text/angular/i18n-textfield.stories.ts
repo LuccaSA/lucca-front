@@ -30,22 +30,18 @@ export const Basic: StoryObj<I18nTextInputComponent & FormFieldComponent> = {
 				example: [
 					{
 						cultureCode: 'invariant',
-						cultureName: 'Default value',
 						value: '',
 					},
 					{
 						cultureCode: 'fr-FR',
-						cultureName: 'fr-FR',
 						value: '',
 					},
 					{
 						cultureCode: 'en-EN',
-						cultureName: 'en-EN',
 						value: '',
 					},
 					{
 						cultureCode: 'de-DE',
-						cultureName: 'de-DE',
 						value: '',
 					},
 				] as I18nTranslation[],
