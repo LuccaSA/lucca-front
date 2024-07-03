@@ -93,8 +93,5 @@ export class LuCoreSelectEstablishmentsDirective<T extends LuCoreSelectEstablish
 }
 
 function sanitizeClueFilter(clue: string) {
-	return clue
-		.split(' ')
-		.map((c: string) => encodeURIComponent(c))
-		.join(',');
+	return clue.split(' ').join(',');
 }
