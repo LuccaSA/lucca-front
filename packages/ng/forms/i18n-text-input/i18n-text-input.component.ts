@@ -1,6 +1,6 @@
 import { ConnectionPositionPair } from '@angular/cdk/overlay';
 import { NgTemplateOutlet } from '@angular/common';
-import { Component, computed, forwardRef, inject, input, LOCALE_ID, signal, ViewEncapsulation, WritableSignal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, forwardRef, inject, input, LOCALE_ID, signal, ViewEncapsulation, WritableSignal } from '@angular/core';
 import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
 import { getIntl, IntlParamsPipe } from '@lucca-front/ng/core';
 import { FormFieldComponent, InputDirective } from '@lucca-front/ng/form-field';
@@ -24,9 +24,12 @@ import { I18nTranslation } from './model/i18n-translation';
 		},
 	],
 	encapsulation: ViewEncapsulation.None,
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class I18nTextInputComponent implements ControlValueAccessor {
 	#localeId = inject(LOCALE_ID);
+
+	#intlDisplay = new Intl.DisplayNames([this.#localeId], { type: 'language' });
 
 	intl = getIntl(LU_I18n_TEXT_INPUT_TRANSLATIONS);
 
@@ -54,7 +57,7 @@ export class I18nTextInputComponent implements ControlValueAccessor {
 	];
 
 	getLocaleDisplayName(locale: string): string {
-		return new Intl.DisplayNames([this.#localeId], { type: 'language' }).of(locale);
+		return this.#intlDisplay.of(locale);
 	}
 
 	writeValue(value: I18nTranslation[]): void {
