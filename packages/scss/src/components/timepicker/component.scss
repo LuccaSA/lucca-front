@@ -91,7 +91,7 @@
 
 		.timePicker-fieldset-group-stepper {
 			position: absolute;
-			bottom: calc(var(--components-timepicker-input-height) + var(--pr-t-spacings-150));
+			bottom: calc(var(--components-timepicker-input-height) + var(--pr-t-spacings-150) + 1px);
 			border: 0;
 			padding: 0;
 			height: 1rem;
@@ -126,7 +126,7 @@
 			}
 
 			+ .timePicker-fieldset-group-stepper {
-				top: calc(var(--components-timepicker-input-height) + var(--pr-t-spacings-150));
+				top: calc(var(--components-timepicker-input-height) + var(--pr-t-spacings-150) + 1px);
 				bottom: auto;
 			}
 		}
