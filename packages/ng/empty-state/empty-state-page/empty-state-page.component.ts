@@ -1,4 +1,3 @@
-import { NgIf } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 import { PortalContent, PortalDirective } from '@lucca-front/ng/core';
 import { LuSafeExternalSvgPipe } from '@lucca-front/ng/safe-content';
@@ -6,7 +5,7 @@ import { LuSafeExternalSvgPipe } from '@lucca-front/ng/safe-content';
 @Component({
 	selector: 'lu-empty-state-page',
 	standalone: true,
-	imports: [NgIf, LuSafeExternalSvgPipe, PortalDirective],
+	imports: [LuSafeExternalSvgPipe, PortalDirective],
 	templateUrl: './empty-state-page.component.html',
 	styleUrl: './empty-state-page.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,

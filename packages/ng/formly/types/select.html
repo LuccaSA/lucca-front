@@ -1,18 +1,22 @@
 <lu-select
-	class="textfield-input"
+	(blur)="blur()"
+	(focus)="focus()"
 	[formControl]="formControl"
 	[formlyAttributes]="field"
-	(focus)="focus()"
-	(blur)="blur()"
 	[multiple]="props['multiple']"
 	[placeholder]="props.placeholder"
+	class="textfield-input"
 >
 	<ng-container *luDisplayer="let option">
 		<span [class.chip]="props['multiple']" [class.mod-unkillable]="props['multiple']">{{ option.name }}</span>
 	</ng-container>
 	<lu-option-picker>
-		<lu-option *ngFor="let option of _options" [value]="option"> {{ option.name }} </lu-option>
+		@for (option of _options; track option.value) {
+		<lu-option [value]="option"> {{ option.name }}</lu-option>
+		}
 	</lu-option-picker>
-	<lu-input-clearer *ngIf="!props.required && !props['multiple']"></lu-input-clearer>
+	@if (!props.required && !props['multiple']) {
+	<lu-input-clearer></lu-input-clearer>
+	}
 </lu-select>
 <span class="textfield-label">{{ props.label }}</span>

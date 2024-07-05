@@ -1,9 +1,9 @@
 import { A11yModule, ActiveDescendantKeyManager } from '@angular/cdk/a11y';
-import { AsyncPipe, NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
-import { AfterViewInit, ChangeDetectionStrategy, Component, QueryList, ViewChildren, inject } from '@angular/core';
+import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
+import { AfterViewInit, ChangeDetectionStrategy, Component, inject, QueryList, ViewChildren } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { PortalDirective, getIntl } from '@lucca-front/ng/core';
-import { LuSelectPanelRef, SELECT_ID, ɵLuOptionComponent, ɵLuOptionGroupPipe, ɵgetGroupTemplateLocation } from '@lucca-front/ng/core-select';
+import { getIntl, PortalDirective } from '@lucca-front/ng/core';
+import { LuSelectPanelRef, SELECT_ID, ɵgetGroupTemplateLocation, ɵLuOptionComponent, ɵLuOptionGroupPipe } from '@lucca-front/ng/core-select';
 import { asyncScheduler, filter, map, observeOn, take, takeUntil } from 'rxjs';
 import { debounceTime, switchMap } from 'rxjs/operators';
 import { LuSimpleSelectInputComponent } from '../input/select-input.component';
@@ -17,7 +17,7 @@ import { LuIsOptionSelectedPipe } from './option-selected.pipe';
 	styleUrls: ['./panel.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	standalone: true,
-	imports: [A11yModule, AsyncPipe, FormsModule, NgIf, NgFor, NgTemplateOutlet, ɵLuOptionGroupPipe, ɵLuOptionComponent, LuIsOptionSelectedPipe, PortalDirective],
+	imports: [A11yModule, AsyncPipe, FormsModule, NgTemplateOutlet, ɵLuOptionGroupPipe, ɵLuOptionComponent, LuIsOptionSelectedPipe, PortalDirective],
 })
 export class LuSelectPanelComponent<T> implements AfterViewInit {
 	public selectInput = inject<LuSimpleSelectInputComponent<T>>(SIMPLE_SELECT_INPUT);
@@ -33,6 +33,10 @@ export class LuSelectPanelComponent<T> implements AfterViewInit {
 	optionTpl = this.selectInput.optionTpl;
 
 	@ViewChildren(ɵLuOptionComponent) optionsQL: QueryList<ɵLuOptionComponent<T>>;
+	public clueChange$ = this.selectInput.clue$;
+	public shouldDisplayAddOption$ = this.selectInput.shouldDisplayAddOption$;
+	public groupTemplateLocation$ = ɵgetGroupTemplateLocation(!!this.grouping, this.clueChange$, this.options$);
+
 	private _keyManager: ActiveDescendantKeyManager<ɵLuOptionComponent<T>>;
 
 	public get keyManager(): ActiveDescendantKeyManager<ɵLuOptionComponent<T>> {
@@ -42,10 +46,6 @@ export class LuSelectPanelComponent<T> implements AfterViewInit {
 	public get selected(): T | undefined {
 		return this.initialValue;
 	}
-
-	public clueChange$ = this.selectInput.clue$;
-	public shouldDisplayAddOption$ = this.selectInput.shouldDisplayAddOption$;
-	public groupTemplateLocation$ = ɵgetGroupTemplateLocation(!!this.grouping, this.clueChange$, this.options$);
 
 	onScroll(evt: Event): void {
 		if (!(evt.target instanceof HTMLElement)) {

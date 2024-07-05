@@ -8,26 +8,25 @@
 	<lu-input-clearer></lu-input-clearer>
 </div>
 
-<ng-template luDisplayer [luDisplayerMultiple]="true" let-values>
-	<span *ngIf="multiple && values?.length > 1; else singleView"
-		><span class="numericBadge">{{ values.length }}</span> {{ intl.qualifications }}</span
-	>
-	<ng-template #singleView>{{ (values[0] || values).name }}</ng-template>
+<ng-template [luDisplayerMultiple]="true" let-values luDisplayer>
+	@if (multiple && values?.length > 1) {
+	<span><span class="numericBadge">{{ values.length }}</span> {{ intl.qualifications }}</span>
+	} @else { {{ (values[0] || values).name }} }
 </ng-template>
 
 <lu-option-picker-advanced [option-comparer]="byId">
 	<lu-api-paged-searcher
-		api="/organization/structure/api/job-qualifications"
-		standard="v4"
 		[filters]="filters"
+		api="/organization/structure/api/job-qualifications"
 		sort="job.name,level.position"
+		standard="v4"
 	></lu-api-paged-searcher>
-	<ng-template luForGroups let-group [luForGroupsGroupBy]="groupByJobName">
+	<ng-template [luForGroupsGroupBy]="groupByJobName" let-group luForGroups>
 		<h4 class="optionItem-groupKey">{{ group.key }}</h4>
 		<div class="lu-picker-content-option">
-			<lu-option *ngFor="let qualification of group.items; trackBy: trackById" [value]="qualification">
-				{{ qualification.name }}
-			</lu-option>
+			@for (qualification of group.items; track qualification.id) {
+			<lu-option [value]="qualification"> {{ qualification.name }}</lu-option>
+			}
 		</div>
 	</ng-template>
 </lu-option-picker-advanced>

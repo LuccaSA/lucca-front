@@ -36,6 +36,20 @@ export class LuCalendarInputComponent<D> extends ALuInput<D> implements ControlV
 	viewGranularity: LuDateGranularity;
 	header: ICalendarItem<D>;
 	items: ICalendarItem<D>[] = [];
+	// daily view
+	labels: string[] = [];
+
+	constructor(
+		_changeDetectorRef: ChangeDetectorRef,
+		_elementRef: ElementRef<HTMLElement>,
+		_renderer: Renderer2,
+		@Inject(LOCALE_ID) private _locale: string,
+		private _factory: LuCalendarItemFactory<D>,
+		private _adapter: ALuDateAdapter<D>,
+	) {
+		super(_changeDetectorRef, _elementRef, _renderer);
+	}
+
 	get mod() {
 		switch (this.viewGranularity) {
 			case ELuDateGranularity.year:
@@ -48,33 +62,95 @@ export class LuCalendarInputComponent<D> extends ALuInput<D> implements ControlV
 		}
 	}
 
-	// daily view
-	labels: string[] = [];
-	constructor(
-		_changeDetectorRef: ChangeDetectorRef,
-		_elementRef: ElementRef<HTMLElement>,
-		_renderer: Renderer2,
-		@Inject(LOCALE_ID) private _locale: string,
-		private _factory: LuCalendarItemFactory<D>,
-		private _adapter: ALuDateAdapter<D>,
-	) {
-		super(_changeDetectorRef, _elementRef, _renderer);
-	}
 	ngOnInit() {
 		this.viewGranularity = this.granularity;
 		this.initDayLabels();
 	}
+
 	override writeValue(value?: D) {
 		const date = value && this._adapter.isValid(value) ? this._adapter.clone(value) : this.startOn;
 		this.header = this._factory.forgeMonth(date);
 		super.writeValue(value);
 	}
+
 	initDayLabels() {
 		this.labels = [...getLocaleDayNames(this._locale, FormStyle.Standalone, TranslationWidth.Abbreviated)];
 		if (getLocaleFirstDayOfWeek(this._locale) === 1) {
 			this.labels.push(this.labels.shift());
 		}
 	}
+
+	select(item: ICalendarItem<D>) {
+		switch (this.viewGranularity) {
+			case ELuDateGranularity.year:
+				this.selectYear(item);
+				break;
+			case ELuDateGranularity.month:
+				this.selectMonth(item);
+				break;
+			case ELuDateGranularity.day:
+			default:
+				this.selectDay(item);
+				break;
+		}
+	}
+
+	previous() {
+		switch (this.viewGranularity) {
+			case ELuDateGranularity.year:
+				this.previousDecade();
+				break;
+			case ELuDateGranularity.month:
+				this.previousYear();
+				break;
+			case ELuDateGranularity.day:
+			default:
+				this.previousMonth();
+				break;
+		}
+		this.render();
+	}
+
+	next() {
+		switch (this.viewGranularity) {
+			case ELuDateGranularity.year:
+				this.nextDecade();
+				break;
+			case ELuDateGranularity.month:
+				this.nextYear();
+				break;
+			case ELuDateGranularity.day:
+			default:
+				this.nextMonth();
+				break;
+		}
+		this.render();
+	}
+
+	increaseGranularity() {
+		if (this.header.granularity !== ELuDateGranularity.decade) {
+			this.viewGranularity = this.header.granularity;
+			this.render();
+		}
+	}
+
+	validate(control: AbstractControl): ValidationErrors | null {
+		const d = control.value as D;
+		if (!d) {
+			return null;
+		}
+		if (!this._adapter.isValid(d)) {
+			return { date: true };
+		}
+		if (!!this.min && this._adapter.isValid(this.min) && this._adapter.compare(this.min, d, ELuDateGranularity.day) > 0) {
+			return { min: true };
+		}
+		if (!!this.max && this._adapter.isValid(this.max) && this._adapter.compare(this.max, d, ELuDateGranularity.day) < 0) {
+			return { max: true };
+		}
+		return null;
+	}
+
 	protected render() {
 		switch (this.viewGranularity) {
 			case ELuDateGranularity.year:
@@ -203,21 +279,6 @@ export class LuCalendarInputComponent<D> extends ALuInput<D> implements ControlV
 		});
 	}
 
-	select(item: ICalendarItem<D>) {
-		switch (this.viewGranularity) {
-			case ELuDateGranularity.year:
-				this.selectYear(item);
-				break;
-			case ELuDateGranularity.month:
-				this.selectMonth(item);
-				break;
-			case ELuDateGranularity.day:
-			default:
-				this.selectDay(item);
-				break;
-		}
-	}
-
 	protected selectDay(item: ICalendarItem<D>) {
 		const year = this._adapter.getYear(item.date);
 		const month = this._adapter.getMonth(item.date);
@@ -242,49 +303,6 @@ export class LuCalendarInputComponent<D> extends ALuInput<D> implements ControlV
 		} else {
 			this.header = item;
 			this.viewGranularity = ELuDateGranularity.month;
-			this.render();
-		}
-	}
-
-	previous() {
-		switch (this.viewGranularity) {
-			case ELuDateGranularity.year:
-				this.previousDecade();
-				break;
-			case ELuDateGranularity.month:
-				this.previousYear();
-				break;
-			case ELuDateGranularity.day:
-			default:
-				this.previousMonth();
-				break;
-		}
-		this.render();
-	}
-
-	next() {
-		switch (this.viewGranularity) {
-			case ELuDateGranularity.year:
-				this.nextDecade();
-				break;
-			case ELuDateGranularity.month:
-				this.nextYear();
-				break;
-			case ELuDateGranularity.day:
-			default:
-				this.nextMonth();
-				break;
-		}
-		this.render();
-	}
-
-	trackBy(_idx, item: ICalendarItem<D>) {
-		return item.id;
-	}
-
-	increaseGranularity() {
-		if (this.header.granularity !== ELuDateGranularity.decade) {
-			this.viewGranularity = this.header.granularity;
 			this.render();
 		}
 	}
@@ -317,22 +335,5 @@ export class LuCalendarInputComponent<D> extends ALuInput<D> implements ControlV
 	protected previousDecade() {
 		const d = this._adapter.add(this.header.date, -1, ELuDateGranularity.decade);
 		this.header = this._factory.forgeDecade(d);
-	}
-
-	validate(control: AbstractControl): ValidationErrors | null {
-		const d = control.value as D;
-		if (!d) {
-			return null;
-		}
-		if (!this._adapter.isValid(d)) {
-			return { date: true };
-		}
-		if (!!this.min && this._adapter.isValid(this.min) && this._adapter.compare(this.min, d, ELuDateGranularity.day) > 0) {
-			return { min: true };
-		}
-		if (!!this.max && this._adapter.isValid(this.max) && this._adapter.compare(this.max, d, ELuDateGranularity.day) < 0) {
-			return { max: true };
-		}
-		return null;
 	}
 }

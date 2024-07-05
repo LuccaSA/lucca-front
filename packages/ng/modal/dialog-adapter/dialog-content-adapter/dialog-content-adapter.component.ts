@@ -8,7 +8,7 @@ import { delay, distinctUntilChanged, map, switchMap, tap } from 'rxjs/operators
 import { isObservable, Observable, of, ReplaySubject, Subject } from 'rxjs';
 import { getIntl, Palette } from '@lucca-front/ng/core';
 import { LU_MODAL_TRANSLATIONS } from '../../modal.translate';
-import { AsyncPipe, NgClass, NgIf } from '@angular/common';
+import { AsyncPipe, NgClass } from '@angular/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { NumericBadgeComponent } from '@lucca-front/ng/numeric-badge';
@@ -24,47 +24,30 @@ interface AdapterData<D, C> {
 	templateUrl: './dialog-content-adapter.component.html',
 	changeDetection: ChangeDetectionStrategy.Default,
 	encapsulation: ViewEncapsulation.None,
-	imports: [DialogComponent, DialogHeaderComponent, DialogContentComponent, DialogFooterComponent, AsyncPipe, ButtonComponent, NgIf, NumericBadgeComponent, NgClass],
+	imports: [DialogComponent, DialogHeaderComponent, DialogContentComponent, DialogFooterComponent, AsyncPipe, ButtonComponent, NumericBadgeComponent, NgClass],
 })
 export class DialogContentAdapterComponent<D, C extends ILuModalContent> implements OnInit, DoCheck {
-	#destroyRef = inject(DestroyRef);
-
 	@ViewChild('contentProjectionRef', { read: ViewContainerRef, static: true })
 	contentProjectionRef: ViewContainerRef;
-
-	#contentComponentInstance: C;
-
-	#injector = inject(Injector);
-
 	dialogData = injectDialogData<AdapterData<D, C>>();
-
 	ref = injectDialogRef<LuModalContentResult<C>>();
-
 	submitClass = signal('');
 	error$ = new Subject();
-
-	protected doCheck$ = new ReplaySubject<void>(1);
-
 	public intl = getIntl(LU_MODAL_TRANSLATIONS);
+	protected doCheck$ = new ReplaySubject<void>(1);
+	protected hasSubmitCounter$ = this.submitCounter$.pipe(map(Boolean));
+	#destroyRef = inject(DestroyRef);
+	#contentComponentInstance: C;
 	protected title$ = this.observeValue(() => this.#contentComponentInstance.title);
 	protected submitLabel$ = this.observeValue(() => this.#contentComponentInstance.submitLabel || this.intl.submit);
 	protected cancelLabel$ = this.observeValue(() => this.#contentComponentInstance.cancelLabel || this.intl.cancel);
 	protected submitCounter$ = this.observeValue(() => this.#contentComponentInstance.submitCounter);
 	protected submitDisabled$ = this.observeValue(() => this.#contentComponentInstance.submitDisabled);
-	protected hasSubmitCounter$ = this.submitCounter$.pipe(map(Boolean));
 	protected hasSubmit$ = this.observeValue(() => this.#contentComponentInstance.submitAction).pipe(map(Boolean));
+	#injector = inject(Injector);
 
 	get submitPalette() {
 		return (this.#contentComponentInstance.submitPalette || 'product') as Palette;
-	}
-
-	private observeValue<TValue>(selector: () => TValue | Observable<TValue>): Observable<TValue> {
-		return this.doCheck$.pipe(
-			takeUntilDestroyed(this.#destroyRef),
-			map(selector),
-			distinctUntilChanged(),
-			switchMap((value) => (isObservable(value) ? value : of(value))),
-		);
 	}
 
 	submit(): void {
@@ -121,5 +104,14 @@ export class DialogContentAdapterComponent<D, C extends ILuModalContent> impleme
 		this.#contentComponentInstance = this.contentProjectionRef.createComponent(this.dialogData.component, {
 			injector,
 		}).instance;
+	}
+
+	private observeValue<TValue>(selector: () => TValue | Observable<TValue>): Observable<TValue> {
+		return this.doCheck$.pipe(
+			takeUntilDestroyed(this.#destroyRef),
+			map(selector),
+			distinctUntilChanged(),
+			switchMap((value) => (isObservable(value) ? value : of(value))),
+		);
 	}
 }

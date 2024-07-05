@@ -1,5 +1,5 @@
 import { booleanAttribute, Component, ContentChildren, DestroyRef, DoCheck, forwardRef, inject, Input, OnChanges, OnDestroy, QueryList, Renderer2, ViewEncapsulation } from '@angular/core';
-import { NgIf, NgSwitch, NgSwitchCase, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import { InputDirective } from './input.directive';
 import { FormFieldSize } from './form-field-size';
 import { BehaviorSubject, map, merge, startWith, Subject, switchMap } from 'rxjs';
@@ -18,7 +18,7 @@ let nextId = 0;
 @Component({
 	selector: 'lu-form-field',
 	standalone: true,
-	imports: [NgIf, NgSwitch, NgSwitchCase, NgTemplateOutlet, InlineMessageComponent, LuTooltipModule, ReactiveFormsModule, IconComponent, IntlParamsPipe, PortalDirective],
+	imports: [NgTemplateOutlet, InlineMessageComponent, LuTooltipModule, ReactiveFormsModule, IconComponent, IntlParamsPipe, PortalDirective],
 	templateUrl: './form-field.component.html',
 	styleUrls: ['./form-field.component.scss'],
 	providers: [
@@ -32,16 +32,55 @@ let nextId = 0;
 })
 export class FormFieldComponent implements OnChanges, OnDestroy, DoCheck {
 	intl = getIntl(LU_FORM_FIELD_TRANSLATIONS);
-
+	@Input({
+		required: true,
+	})
+	label: PortalContent;
+	@Input({
+		transform: booleanAttribute,
+	})
+	hiddenLabel = false;
+	@Input({
+		transform: booleanAttribute,
+	})
+	rolePresentationLabel = false;
+	@Input()
+	statusControl: AbstractControl;
+	@Input()
+	tooltip: string | SafeHtml;
+	@Input()
+	invalid = false;
+	@Input()
+	inlineMessage: string;
+	/**
+	 * Inline message for when the control is in error state
+	 */
+	@Input()
+	errorInlineMessage: string;
+	/**
+	 * State of the inline message, will be ignored if form state is invalid
+	 */
+	@Input()
+	inlineMessageState: InlineMessageState;
+	@Input()
+	size: FormFieldSize;
+	@Input()
+	layout: 'default' | 'checkable' | 'fieldset' = 'default';
+	/**
+	 * Max amount of characters allowed, defaults to 0, which means hidden, no maximum
+	 */
+	@Input()
+	counter = 0;
+	required = false;
+	id: string;
+	ready$ = new BehaviorSubject<boolean>(false);
 	#luClass = inject(LuClass);
-
 	#renderer = inject(Renderer2);
-
 	#requiredValidator: RequiredValidator | undefined;
-
 	#destroyRef = inject(DestroyRef);
-
 	#doCheck$ = new Subject<void>();
+	#inputs: InputDirective[] = [];
+	#ariaLabelledBy: string[] = [];
 
 	@ContentChildren(NG_VALIDATORS, { descendants: true })
 	public set validators(validators: QueryList<Validator | undefined>) {
@@ -74,62 +113,16 @@ export class FormFieldComponent implements OnChanges, OnDestroy, DoCheck {
 			});
 	}
 
-	@Input({
-		required: true,
-	})
-	label: PortalContent;
-
-	@Input({
-		transform: booleanAttribute,
-	})
-	hiddenLabel = false;
-
-	@Input({
-		transform: booleanAttribute,
-	})
-	rolePresentationLabel = false;
-
-	@Input()
-	statusControl: AbstractControl;
-
-	@Input()
-	tooltip: string | SafeHtml;
-
-	@Input()
-	invalid = false;
-
-	@Input()
-	inlineMessage: string;
-
-	/**
-	 * Inline message for when the control is in error state
-	 */
-	@Input()
-	errorInlineMessage: string;
-
-	/**
-	 * State of the inline message, will be ignored if form state is invalid
-	 */
-	@Input()
-	inlineMessageState: InlineMessageState;
-
-	@Input()
-	size: FormFieldSize;
-
-	@Input()
-	layout: 'default' | 'checkable' | 'fieldset' = 'default';
-
-	#inputs: InputDirective[] = [];
-	/**
-	 * Max amount of characters allowed, defaults to 0, which means hidden, no maximum
-	 */
-	@Input()
-	counter = 0;
-
-	required = false;
-
 	get contentLength(): number {
 		return (this.#inputs[0]?.host?.nativeElement as HTMLInputElement)?.value.length || 0;
+	}
+
+	public get inputs(): InputDirective[] {
+		return this.#inputs;
+	}
+
+	public get ready(): boolean {
+		return this.ready$.value;
 	}
 
 	public addInput(input: InputDirective) {
@@ -141,20 +134,6 @@ export class FormFieldComponent implements OnChanges, OnDestroy, DoCheck {
 			this.prepareInput();
 		});
 	}
-
-	public get inputs(): InputDirective[] {
-		return this.#inputs;
-	}
-
-	id: string;
-
-	ready$ = new BehaviorSubject<boolean>(false);
-
-	public get ready(): boolean {
-		return this.ready$.value;
-	}
-
-	#ariaLabelledBy: string[] = [];
 
 	addLabelledBy(id: string, prepend = false): void {
 		if (prepend) {
@@ -198,6 +177,14 @@ export class FormFieldComponent implements OnChanges, OnDestroy, DoCheck {
 		this.ready$.next(true);
 	}
 
+	ngOnDestroy(): void {
+		this.ready$.complete();
+	}
+
+	ngDoCheck(): void {
+		this.#doCheck$.next();
+	}
+
 	private updateAria(): void {
 		this.#inputs.forEach((input) => {
 			this.#renderer.setAttribute(input.host.nativeElement, 'aria-invalid', this.invalid?.toString());
@@ -228,13 +215,5 @@ export class FormFieldComponent implements OnChanges, OnDestroy, DoCheck {
 				this.updateAria();
 			}
 		});
-	}
-
-	ngOnDestroy(): void {
-		this.ready$.complete();
-	}
-
-	ngDoCheck(): void {
-		this.#doCheck$.next();
 	}
 }

@@ -7,28 +7,27 @@
 <div class="lu-select-suffix">
 	<lu-input-clearer></lu-input-clearer>
 </div>
-<ng-template luDisplayer [luDisplayerMultiple]="true" let-values>
-	<span *ngIf="multiple && values?.length > 1; else singleView"
-		><span class="numericBadge">{{ values.length }}</span> {{ intl.users }}</span
-	>
-	<ng-template #singleView>{{ values[0] || values | luUserDisplay }}</ng-template>
+<ng-template [luDisplayerMultiple]="true" let-values luDisplayer>
+	@if (multiple && values?.length > 1) {
+	<span><span class="numericBadge">{{ values.length }}</span> {{ intl.users }}</span>
+	} @else { {{ values[0] || values | luUserDisplay }} }
 </ng-template>
 <lu-option-picker-advanced [option-comparer]="byId">
 	<header class="lu-picker-header">
 		<lu-user-paged-searcher
+			(clueChange)="clue = $event"
+			[appInstanceId]="appInstanceId"
+			[enableFormerEmployees]="enableFormerEmployees"
 			[fields]="fields"
 			[filters]="filters"
-			[orderBy]="orderBy"
-			[appInstanceId]="appInstanceId"
 			[operations]="operations"
-			[enableFormerEmployees]="enableFormerEmployees"
-			(clueChange)="clue = $event"
+			[orderBy]="orderBy"
 		></lu-user-paged-searcher>
 	</header>
 	<lu-user-homonyms></lu-user-homonyms>
-	<ng-container *ngIf="!disablePrincipal">
-		<lu-option
-			*luUserMeOption="
+	@if (!disablePrincipal) {
+	<lu-option
+		*luUserMeOption="
 			let user;
 			fields: fields;
 			filters: filters;
@@ -37,17 +36,21 @@
 			operations: operations;
 			clue: clue
 		"
-			[value]="user"
-		>
-			<div>
-				<b>{{ intl.me }} {{ user | luUserDisplay: searchFormat }}</b>
-			</div>
-			<div class="lu-select-additionalInformation" *ngIf="user.additionalInformation">({{ user.additionalInformation }})</div>
-		</lu-option>
-	</ng-container>
+		[value]="user"
+	>
+		<div>
+			<b>{{ intl.me }} {{ user | luUserDisplay: searchFormat }}</b>
+		</div>
+		@if (user.additionalInformation) {
+		<div class="lu-select-additionalInformation">({{ user.additionalInformation }})</div>
+		}
+	</lu-option>
+	}
 
 	<lu-option *luForOptions="let user" [value]="user">
 		<div>{{ user | luUserDisplay: searchFormat }}</div>
-		<div class="lu-select-additionalInformation" *ngIf="user.additionalInformation">({{ user.additionalInformation }})</div>
+		@if (user.additionalInformation) {
+		<div class="lu-select-additionalInformation">({{ user.additionalInformation }})</div>
+		}
 	</lu-option>
 </lu-option-picker-advanced>

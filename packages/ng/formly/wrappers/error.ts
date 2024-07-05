@@ -23,9 +23,11 @@ export class LuFormlyWrapperError extends FieldWrapper<FieldTypeConfig> {
 // component that display the right error message
 @Component({
 	selector: 'lu-formly-error-message',
-	template: `<div class="textfield-messages-error" *ngFor="let message of errorMessages">
-		{{ message }}
-	</div>`,
+	template: `@for (message of errorMessages; track message) {
+		<div class="textfield-messages-error">
+			{{ message }}
+		</div>
+	}`,
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 // eslint-disable-next-line @angular-eslint/component-class-suffix

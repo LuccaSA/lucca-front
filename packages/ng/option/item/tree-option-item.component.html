@@ -1,15 +1,17 @@
-<div class="optionItem" #element>
+<div #element class="optionItem">
 	<div
-		class="optionItem-value"
 		(click)="select()"
 		[class.is-disabled]="disabled"
-		[class.is-selected]="selected"
 		[class.is-highlighted]="highlighted"
+		[class.is-selected]="selected"
+		class="optionItem-value"
 	>
 		<ng-container #value></ng-container>
 	</div>
-	<div class="optionItem-icons" *ngIf="hasChildren">
-		<span *ngIf="!_tree.disabled" class="optionItem-icon parentOnly" (click)="selectSelf()" [luTooltip]="intl.parentOnly">
+	@if (hasChildren) {
+	<div class="optionItem-icons">
+		@if (!_tree.disabled) {
+		<span class="optionItem-icon parentOnly" (click)="selectSelf()" [luTooltip]="intl.parentOnly">
 			<svg class="optionItem-icon-shape" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
 				<path
 					opacity="0.2"
@@ -20,6 +22,7 @@
 				/>
 			</svg>
 		</span>
+		}
 		<span class="optionItem-icon childrenOnly" (click)="selectChildren()" [luTooltip]="intl.childrenOnly">
 			<svg class="optionItem-icon-shape" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
 				<path
@@ -32,6 +35,7 @@
 			</svg>
 		</span>
 	</div>
+	}
 </div>
 
 <div #children class="children">

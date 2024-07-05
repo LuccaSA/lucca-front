@@ -1,30 +1,25 @@
 <input
-	class="simpleSelect-input"
-	type="text"
-	role="combobox"
-	aria-haspopup="listbox"
-	[attr.aria-activedescendant]="activeDescendant$ | async"
-	[attr.aria-expanded]="isPanelOpen"
-	[attr.aria-controls]="ariaControls"
-	placeholder="{{inputPlaceholder}}"
-	[ngModel]="clue"
-	(ngModelChange)="clueChanged($event)"
-	[readonly]="!searchable"
-	[disabled]="disabled$ | async"
-	luInput
 	#inputElement
+	(ngModelChange)="clueChanged($event)"
+	[attr.aria-activedescendant]="activeDescendant$ | async"
+	[attr.aria-controls]="ariaControls"
+	[attr.aria-expanded]="isPanelOpen"
+	[disabled]="disabled$ | async"
+	[ngModel]="clue"
+	[readonly]="!searchable"
+	aria-haspopup="listbox"
+	class="simpleSelect-input"
+	luInput
+	placeholder="{{inputPlaceholder}}"
+	role="combobox"
+	type="text"
 />
 <div class="simpleSelect-value">
 	<ng-container *luOptionOutlet="valueTpl || optionTpl; value: value"></ng-container>
 </div>
-<button
-	*ngIf="clearable && hasValue"
-	class="simpleSelect-clear clear"
-	role="button"
-	type="button"
-	(click)="clearValue($event)"
-	(keydown.space)="clearValue($event)"
->
-	<span class="u-mask">{{intl.clear}}</span>
+@if (clearable && hasValue) {
+<button class="simpleSelect-clear clear" role="button" type="button" (click)="clearValue($event)" (keydown.space)="clearValue($event)">
+	<span class="u-mask">{{ intl.clear }}</span>
 </button>
+}
 <span aria-hidden="true" class="simpleSelect-arrow lucca-icon icon-arrowChevronBottom"></span>

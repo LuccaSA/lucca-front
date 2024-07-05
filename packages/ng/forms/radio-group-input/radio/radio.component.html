@@ -1,22 +1,24 @@
-<label class="formLabel" id="{{id}}-label" for="{{id}}-input">
+<label class="formLabel" for="{{id}}-input" id="{{id}}-label">
 	<ng-content></ng-content>
 </label>
 <span class="radioField">
 	<input
-		[formControl]="formControl"
 		[attr.disabled]="(formControl.disabled || disabled) ? 'disabled' : null"
-		type="radio"
+		[attr.name]="name"
+		[formControl]="formControl"
+		[value]="value"
+		attr.aria-describedby="{{id}}-message"
+		attr.aria-labelledby="{{id}}-label"
 		class="radioField-input"
 		id="{{id}}-input"
-		[attr.name]="name"
-		[value]="value"
 		luInput
 		luInputStandalone
-		attr.aria-labelledby="{{id}}-label"
-		attr.aria-describedby="{{id}}-message"
+		type="radio"
 	/>
-	<span class="radioField-icon" aria-hidden="true">
+	<span aria-hidden="true" class="radioField-icon">
 		<span class="radioField-icon-check"></span>
 	</span>
 </span>
-<lu-inline-message *ngIf="inlineMessage" [label]="inlineMessage" id="{{id}}-message"></lu-inline-message>
+@if (inlineMessage) {
+<lu-inline-message [label]="inlineMessage" id="{{id}}-message"></lu-inline-message>
+}

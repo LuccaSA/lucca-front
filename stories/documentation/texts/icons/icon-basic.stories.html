@@ -1,16 +1,18 @@
 <div class="textfield mod-outlined mod-search pr-u-marginBottom300">
 	<span class="textfield-label">Rechercher une icône</span>
-	<input type="text" class="textfield-input" [(ngModel)]="filter" (ngModelChange)="updateIcons($event)" />
+	<input (ngModelChange)="updateIcons($event)" [(ngModel)]="filter" class="textfield-input" type="text" />
 </div>
 
-<input type="checkbox" id="showDeprecatedIcons" class="showDeprecated pr-u-marginBottom300" />
+<input class="showDeprecated pr-u-marginBottom300" id="showDeprecatedIcons" type="checkbox" />
 <label for="showDeprecatedIcons"> Afficher les icônes dépréciées</label>
 
 <div class="icons">
-	<div class="demo-icon" *ngFor="let icon of icons" (click)="copyIcon(icon.icon)">
+	@for (icon of icons; track icon) {
+	<div class="demo-icon" (click)="copyIcon(icon.icon)">
 		<span aria-hidden="true" class="lucca-icon icon-{{icon.icon}}" [class.deprecated]="icon.deprecated"></span>
-		<code class="code">icon-{{icon.icon}}</code>
+		<code class="code">icon-{{ icon.icon }}</code>
 	</div>
+	}
 </div>
 
 <style>

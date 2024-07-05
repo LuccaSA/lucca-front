@@ -1,7 +1,7 @@
 /* eslint-disable @angular-eslint/no-input-rename */
 
 import { OverlayModule } from '@angular/cdk/overlay';
-import { AsyncPipe, DatePipe, NgClass, NgIf, NgOptimizedImage, NgSwitch, NgSwitchCase, NgTemplateOutlet } from '@angular/common';
+import { AsyncPipe, DatePipe, NgClass, NgOptimizedImage, NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Inject, Input, OnDestroy, Output, TemplateRef, ViewChild, ViewEncapsulation } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { ALuPopoverPanel, luTransformPopover } from '@lucca-front/ng/popover';
@@ -33,7 +33,6 @@ import { catchError, map, switchMap, tap } from 'rxjs/operators';
 		LuUserPictureModule,
 		NgClass,
 		RouterLink,
-		NgIf,
 		NgTemplateOutlet,
 		DatePipe,
 		OverlayModule,
@@ -42,14 +41,30 @@ import { catchError, map, switchMap, tap } from 'rxjs/operators';
 		IsFuturePipe,
 		isFutureOrTodayPipe,
 		InjectParameterPipe,
-		NgSwitch,
-		NgSwitchCase,
 		NgOptimizedImage,
 	],
 })
 export class LuUserPopoverPanelComponent extends ALuPopoverPanel implements ILuUserPopoverPanel, OnDestroy {
+	public userPictureHref$ = this.employee$.pipe(map((employee) => employee.pictureHref));
+	public userInitials$ = this.employee$.pipe(
+		// TODO: verifier s'il y a besoin de créer un lien avec la locale
+		map((employee) => {
+			const initials = `${employee.firstName[0]}${employee.lastName[0]}`;
+
+			return {
+				initials,
+				color: `${employee.firstName} ${employee.lastName}`.split('').reduce((sum, a) => sum + a.charCodeAt(0), 0) % 360,
+			};
+		}),
+	);
+	intl = getIntl(LU_POPUP_EMPLOYEE_TRANSLATIONS);
+	/** Event emitted when the popover is closed. */
+	// eslint-disable-next-line @angular-eslint/no-output-native
+	@Output() public override close = new EventEmitter<void>();
+	// eslint-disable-next-line @angular-eslint/no-output-native
+	@Output() public override open = new EventEmitter<void>();
+	@Output() public override hovered = new EventEmitter<boolean>();
 	#user$ = new ReplaySubject<ILuUser>();
-	#errorImage$ = new BehaviorSubject<boolean>(false);
 	public employee$: Observable<LuUserPopover> = this.#user$.pipe(
 		switchMap((user) =>
 			this._service.get(user.id).pipe(
@@ -65,7 +80,7 @@ export class LuUserPopoverPanelComponent extends ALuPopoverPanel implements ILuU
 		),
 		tap(() => this.overlayRef.updatePosition()),
 	);
-
+	#errorImage$ = new BehaviorSubject<boolean>(false);
 	public userPictureDisplay$ = combineLatest([this.employee$, this.#errorImage$]).pipe(
 		map(([employee, isError]) => {
 			if (employee.pictureHref && !isError) {
@@ -75,26 +90,14 @@ export class LuUserPopoverPanelComponent extends ALuPopoverPanel implements ILuU
 			}
 		}),
 	);
+	private _subs = new Subscription();
 
-	pictureError() {
-		this.#errorImage$.next(true);
+	public constructor(
+		private _changeDetectorRef: ChangeDetectorRef,
+		@Inject(LuUserPopoverStore) private _service: ILuUserPopoverStore,
+	) {
+		super();
 	}
-
-	public userPictureHref$ = this.employee$.pipe(map((employee) => employee.pictureHref));
-
-	public userInitials$ = this.employee$.pipe(
-		// TODO: verifier s'il y a besoin de créer un lien avec la locale
-		map((employee) => {
-			const initials = `${employee.firstName[0]}${employee.lastName[0]}`;
-
-			return {
-				initials,
-				color: `${employee.firstName} ${employee.lastName}`.split('').reduce((sum, a) => sum + a.charCodeAt(0), 0) % 360,
-			};
-		}),
-	);
-
-	intl = getIntl(LU_POPUP_EMPLOYEE_TRANSLATIONS);
 
 	public set user(user: ILuUser) {
 		if (user) {
@@ -125,25 +128,13 @@ export class LuUserPopoverPanelComponent extends ALuPopoverPanel implements ILuU
 		this.contentClasses = classes;
 	}
 
-	/** Event emitted when the popover is closed. */
-	// eslint-disable-next-line @angular-eslint/no-output-native
-	@Output() public override close = new EventEmitter<void>();
-	// eslint-disable-next-line @angular-eslint/no-output-native
-	@Output() public override open = new EventEmitter<void>();
-	@Output() public override hovered = new EventEmitter<boolean>();
-
 	@ViewChild(TemplateRef, { static: true })
 	public set vcTemplateRef(tr: TemplateRef<unknown>) {
 		this.templateRef = tr;
 	}
 
-	private _subs = new Subscription();
-
-	public constructor(
-		private _changeDetectorRef: ChangeDetectorRef,
-		@Inject(LuUserPopoverStore) private _service: ILuUserPopoverStore,
-	) {
-		super();
+	pictureError() {
+		this.#errorImage$.next(true);
 	}
 
 	public ngOnDestroy() {

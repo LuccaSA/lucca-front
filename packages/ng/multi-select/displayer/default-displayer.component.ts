@@ -1,4 +1,4 @@
-import { AsyncPipe, NgFor, NgIf, NgPlural, NgPluralCase } from '@angular/common';
+import { AsyncPipe, NgPlural, NgPluralCase } from '@angular/common';
 import { ChangeDetectionStrategy, Component, DestroyRef, ElementRef, inject, OnInit, ViewChild } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
@@ -14,7 +14,7 @@ import { of } from 'rxjs';
 @Component({
 	selector: 'lu-multi-select-default-displayer',
 	standalone: true,
-	imports: [AsyncPipe, LuTooltipModule, NgIf, NgFor, NgPlural, NgPluralCase, ɵLuOptionOutletDirective, FormsModule, InputDirective],
+	imports: [AsyncPipe, LuTooltipModule, NgPlural, NgPluralCase, ɵLuOptionOutletDirective, FormsModule, InputDirective],
 	template: `
 		<div class="multipleSelect-displayer">
 			<input
@@ -34,13 +34,19 @@ import { of } from 'rxjs';
 				aria-haspopup="listbox"
 				luInput
 			/>
-			<div *ngFor="let option of displayedOptions$ | async; let index = index" class="multipleSelect-displayer-chip chip" [class.mod-unkillable]="select.disabled$ | async">
-				<span class="multipleSelect-displayer-chip-value"><ng-container *luOptionOutlet="select.valueTpl || select.optionTpl; value: option"></ng-container></span>
-				<button *ngIf="!(select.disabled$ | async)" type="button" class="chip-kill" (click)="unselectOption(option, $event)">
-					<span class="u-mask">{{ intl.removeOption }}</span>
-				</button>
-			</div>
-			<div class="multipleSelect-displayer-chip chip" *ngIf="overflowOptions$ | async as overflow">+ {{ overflow }}</div>
+			@for (option of displayedOptions$ | async; track option; let index = $index) {
+				<div class="multipleSelect-displayer-chip chip" [class.mod-unkillable]="select.disabled$ | async">
+					<span class="multipleSelect-displayer-chip-value"><ng-container *luOptionOutlet="select.valueTpl || select.optionTpl; value: option"></ng-container></span>
+					@if (!(select.disabled$ | async)) {
+						<button type="button" class="chip-kill" (click)="unselectOption(option, $event)">
+							<span class="u-mask">{{ intl.removeOption }}</span>
+						</button>
+					}
+				</div>
+			}
+			@if (overflowOptions$ | async; as overflow) {
+				<div class="multipleSelect-displayer-chip chip">+ {{ overflow }}</div>
+			}
 		</div>
 	`,
 	styleUrls: ['./default-displayer.component.scss'],
@@ -49,22 +55,9 @@ import { of } from 'rxjs';
 export class LuMultiSelectDefaultDisplayerComponent<T> implements OnInit {
 	select = inject<LuMultiSelectInputComponent<T>>(LuMultiSelectInputComponent);
 	intl = getIntl(LU_MULTI_SELECT_DISPLAYER_TRANSLATIONS);
-
-	protected destroyRef = inject(DestroyRef);
-
 	@ViewChild('inputElement')
 	inputElementRef: ElementRef<HTMLInputElement>;
-
-	get value(): T[] {
-		return this.select.value || [];
-	}
-
-	get ariaControls() {
-		return this.select.ariaControls;
-	}
-
 	context = inject<ILuOptionContext<T[]>>(LU_OPTION_CONTEXT);
-
 	placeholder$ = this.context.option$.pipe(
 		switchMap((options) => {
 			if ((options || []).length > 0) {
@@ -73,7 +66,6 @@ export class LuMultiSelectDefaultDisplayerComponent<T> implements OnInit {
 			return this.select.placeholder$;
 		}),
 	);
-
 	displayedOptions$ = this.context.option$.pipe(
 		map((options) => {
 			if (this.select.maxValuesShown) {
@@ -82,12 +74,20 @@ export class LuMultiSelectDefaultDisplayerComponent<T> implements OnInit {
 			return options;
 		}),
 	);
-
 	overflowOptions$ = this.context.option$.pipe(
 		map((options) => {
 			return Math.max(0, (options || []).length - this.select.maxValuesShown);
 		}),
 	);
+	protected destroyRef = inject(DestroyRef);
+
+	get value(): T[] {
+		return this.select.value || [];
+	}
+
+	get ariaControls() {
+		return this.select.ariaControls;
+	}
 
 	unselectOption(option: T, $event?: Event): void {
 		if ($event) {

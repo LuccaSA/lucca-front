@@ -1,13 +1,16 @@
 <div class="textField">
 	<ng-template #addon let-addon="addon" let-type="type">
-		<span class="textField-{{type}}" luFormFieldId="{{type}}" *ngIf="addon.content">
+		@if (addon.content) {
+		<span class="textField-{{type}}" luFormFieldId="{{type}}">
 			<span class="textField-label-{{type}}-item" [attr.aria-label]="addon.ariaLabel">{{ addon.content }}</span>
 		</span>
-		<span class="textField-{{type}}" luFormFieldId="{{type}}" *ngIf="addon.icon">
+		} @if (addon.icon) {
+		<span class="textField-{{type}}" luFormFieldId="{{type}}">
 			<span class="textField-label-{{type}}-item" [attr.aria-label]="addon.ariaLabel"
 				><span class="lucca-icon icon-{{addon.icon}}"></span
 			></span>
 		</span>
+		}
 	</ng-template>
 
 	@if (prefixAddon()) {
@@ -17,7 +20,7 @@
 			addon: prefixAddon()
      }"
 	/>
-	} @if(suffixAddon()) {
+	} @if (suffixAddon()) {
 	<ng-container
 		*ngTemplateOutlet="addon; context:{
 			type: 'suffix',
@@ -28,23 +31,25 @@
 
 	<div class="textField-input">
 		<input
+			#inputElement
+			[formControl]="ngControl.control"
+			[formatOptions]="formatOptions()"
+			[max]="max()"
+			[min]="min()"
+			[placeholder]="placeholder()"
+			class="textField-input-value"
+			inputmode="decimal"
 			luInput
 			luNumberFormatInput
-			[formatOptions]="formatOptions()"
-			[min]="min()"
-			[max]="max()"
 			type="text"
-			inputmode="decimal"
-			class="textField-input-value"
-			[placeholder]="placeholder()"
-			[formControl]="ngControl.control"
-			#inputElement
 		/>
 		<div class="textField-input-affix">
-			<button class="textField-input-affix-clear clear" type="button" (click)="clearValue()" *ngIf="hasClearer() && inputElement.value">
+			@if (hasClearer() && inputElement.value) {
+			<button class="textField-input-affix-clear clear" type="button" (click)="clearValue()">
 				<span aria-hidden="true" class="lucca-icon icon-signClose"></span>
 				<span class="u-mask">{{ intl.clear }}</span>
 			</button>
+			}
 		</div>
 	</div>
 </div>

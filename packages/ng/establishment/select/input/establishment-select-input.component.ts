@@ -1,6 +1,6 @@
 import { Overlay, OverlayModule } from '@angular/cdk/overlay';
-import { CommonModule } from '@angular/common';
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, Inject, Input, OnInit, Optional, Renderer2, Self, ViewContainerRef, forwardRef } from '@angular/core';
+
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, forwardRef, Inject, Input, OnInit, Optional, Renderer2, Self, ViewContainerRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { getIntl } from '@lucca-front/ng/core';
 import { LuInputClearerComponent, LuInputDisplayerDirective } from '@lucca-front/ng/input';
@@ -27,7 +27,6 @@ import { LU_ESTABLISHMENT_SELECT_INPUT_TRANSLATIONS } from './establishment-sele
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	standalone: true,
 	imports: [
-		CommonModule,
 		OverlayModule,
 		LuInputClearerComponent,
 		LuOptionPickerAdvancedComponent,
@@ -61,23 +60,14 @@ export class LuEstablishmentSelectInputComponent<
 	extends ALuSelectInputComponent<D, P>
 	implements ControlValueAccessor, ILuInputWithPicker<D>, OnInit, AfterViewInit
 {
-	byId: LuOptionComparer<D> = (option1: D, option2: D) => option1 && option2 && option1.id === option2.id;
-
 	@Input() filters: string[];
 	@Input() appInstanceId: number;
 	@Input() operations: number[];
-
-	private _establishmentService: LuEstablishmentService;
-	private _legalUnitService: LuLegalUnitService;
-
 	isSearching = false;
 	groupByLu = true;
-
-	get sort(): string {
-		return this.isSearching ? 'name' : 'legalunit.name,name';
-	}
-
 	public intl = getIntl(LU_ESTABLISHMENT_SELECT_INPUT_TRANSLATIONS);
+	private _establishmentService: LuEstablishmentService;
+	private _legalUnitService: LuLegalUnitService;
 
 	constructor(
 		protected override _changeDetectorRef: ChangeDetectorRef,
@@ -100,6 +90,12 @@ export class LuEstablishmentSelectInputComponent<
 		this._establishmentService = customEstablishmentService || defaultEstablishmentService;
 		this._legalUnitService = customLuService || defaultLuService;
 	}
+
+	get sort(): string {
+		return this.isSearching ? 'name' : 'legalunit.name,name';
+	}
+
+	byId: LuOptionComparer<D> = (option1: D, option2: D) => option1 && option2 && option1.id === option2.id;
 
 	ngOnInit() {
 		this._subs.add(

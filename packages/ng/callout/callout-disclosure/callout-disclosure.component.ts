@@ -1,5 +1,4 @@
-import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, ViewEncapsulation, booleanAttribute } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angular/core';
 import { LuccaIcon } from '@lucca-front/icons';
 import { Palette, PortalContent, PortalDirective } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
@@ -8,7 +7,7 @@ import { CalloutState, CalloutStateMap } from '../callout-state';
 @Component({
 	selector: 'lu-callout-disclosure',
 	standalone: true,
-	imports: [CommonModule, IconComponent, PortalDirective],
+	imports: [IconComponent, PortalDirective],
 	templateUrl: './callout-disclosure.component.html',
 	styleUrls: ['./callout-disclosure.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
@@ -26,6 +25,8 @@ export class CalloutDisclosureComponent {
 
 	@Input()
 	size: 'M' | 'S' = 'M';
+	@Input({ transform: booleanAttribute }) open = false;
+	@Output() openChange = new EventEmitter<boolean>();
 
 	@Input()
 	/**
@@ -44,10 +45,6 @@ export class CalloutDisclosureComponent {
 			this.icon = icon;
 		}
 	}
-
-	@Input({ transform: booleanAttribute }) open = false;
-
-	@Output() openChange = new EventEmitter<boolean>();
 
 	public onToggle(event: Event) {
 		if (event.target instanceof HTMLDetailsElement) {

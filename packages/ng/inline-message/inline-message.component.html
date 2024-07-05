@@ -1,1 +1,3 @@
-<lu-icon [icon]="state" *ngIf="state && state !== 'default'" [alt]="state"></lu-icon>{{label}}
+@if (state && state !== 'default') {
+<lu-icon [icon]="state" [alt]="state"></lu-icon>
+}{{ label }}

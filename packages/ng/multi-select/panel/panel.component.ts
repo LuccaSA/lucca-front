@@ -1,9 +1,9 @@
 import { A11yModule, ActiveDescendantKeyManager } from '@angular/cdk/a11y';
-import { AsyncPipe, NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
-import { AfterViewInit, ChangeDetectionStrategy, Component, QueryList, ViewChildren, inject } from '@angular/core';
+import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
+import { AfterViewInit, ChangeDetectionStrategy, Component, inject, QueryList, ViewChildren } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { PortalDirective, getIntl } from '@lucca-front/ng/core';
-import { SELECT_ID, ɵLuOptionComponent, ɵLuOptionGroupPipe, ɵLuOptionOutletDirective, ɵgetGroupTemplateLocation } from '@lucca-front/ng/core-select';
+import { getIntl, PortalDirective } from '@lucca-front/ng/core';
+import { SELECT_ID, ɵgetGroupTemplateLocation, ɵLuOptionComponent, ɵLuOptionGroupPipe, ɵLuOptionOutletDirective } from '@lucca-front/ng/core-select';
 import { asyncScheduler, filter, map, observeOn, take, takeUntil } from 'rxjs';
 import { debounceTime, switchMap } from 'rxjs/operators';
 import { LuMultiSelectInputComponent } from '../input';
@@ -25,8 +25,6 @@ import { ɵLuMultiSelectSelectedChipDirective } from './selected-chip.directive'
 		AsyncPipe,
 		FormsModule,
 		LuIsOptionSelectedPipe,
-		NgIf,
-		NgFor,
 		ɵLuOptionComponent,
 		ɵLuOptionGroupPipe,
 		ɵLuOptionOutletDirective,
@@ -37,29 +35,26 @@ import { ɵLuMultiSelectSelectedChipDirective } from './selected-chip.directive'
 	],
 })
 export class LuMultiSelectPanelComponent<T> implements AfterViewInit {
-	protected selectInput = inject<LuMultiSelectInputComponent<T>>(MULTI_SELECT_INPUT);
 	panelRef = inject<LuMultiSelectPanelRef<T>>(LuMultiSelectPanelRef);
 	selectId = inject(SELECT_ID);
 	intl = getIntl(LU_MULTI_SELECT_TRANSLATIONS);
-
+	protected selectInput = inject<LuMultiSelectInputComponent<T>>(MULTI_SELECT_INPUT);
+	public clueChange$ = this.selectInput.clue$;
 	options$ = this.selectInput.options$;
 	grouping = this.selectInput.grouping;
 	loading$ = this.selectInput.loading$;
+	@ViewChildren(ɵLuOptionComponent) optionsQL: QueryList<ɵLuOptionComponent<T>>;
+	groupTemplateLocation$ = ɵgetGroupTemplateLocation(!!this.grouping, this.clueChange$, this.options$);
 	optionComparer = this.selectInput.optionComparer;
 	selectedOptions: T[] = this.selectInput.value || [];
 	optionTpl = this.selectInput.optionTpl;
+	public shouldDisplayAddOption$ = this.selectInput.shouldDisplayAddOption$;
 
-	@ViewChildren(ɵLuOptionComponent) optionsQL: QueryList<ɵLuOptionComponent<T>>;
 	private _keyManager: ActiveDescendantKeyManager<ɵLuOptionComponent<T>>;
 
 	public get keyManager(): ActiveDescendantKeyManager<ɵLuOptionComponent<T>> {
 		return this._keyManager;
 	}
-
-	public clueChange$ = this.selectInput.clue$;
-	public shouldDisplayAddOption$ = this.selectInput.shouldDisplayAddOption$;
-
-	groupTemplateLocation$ = ɵgetGroupTemplateLocation(!!this.grouping, this.clueChange$, this.options$);
 
 	onScroll(evt: Event): void {
 		if (!(evt.target instanceof HTMLElement)) {

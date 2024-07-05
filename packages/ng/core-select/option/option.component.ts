@@ -1,8 +1,8 @@
 import { Highlightable } from '@angular/cdk/a11y';
-import { AsyncPipe, NgIf } from '@angular/common';
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, HostBinding, Input, OnDestroy, TemplateRef, Type, ViewChild, inject } from '@angular/core';
+import { AsyncPipe } from '@angular/common';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, HostBinding, inject, Input, OnDestroy, TemplateRef, Type, ViewChild } from '@angular/core';
 import { PortalDirective } from '@lucca-front/ng/core';
-import { BehaviorSubject, Subscription, asyncScheduler, observeOn } from 'rxjs';
+import { asyncScheduler, BehaviorSubject, observeOn, Subscription } from 'rxjs';
 import { LuOptionContext, SELECT_ID } from '../select.model';
 import { LuOptionGrouping } from './group.directive';
 import { LuOptionGroupPipe } from './group.pipe';
@@ -17,7 +17,7 @@ export const MAGIC_OPTION_SCROLL_DELAY = 15;
 	styleUrls: ['./option.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	standalone: true,
-	imports: [AsyncPipe, LuOptionOutletDirective, NgIf, PortalDirective, LuOptionGroupPipe],
+	imports: [AsyncPipe, LuOptionOutletDirective, PortalDirective, LuOptionGroupPipe],
 })
 export class LuOptionComponent<T> implements Highlightable, AfterViewInit, OnDestroy {
 	@HostBinding('class.optionItem')
@@ -45,23 +45,19 @@ export class LuOptionComponent<T> implements Highlightable, AfterViewInit, OnDes
 	 * Whether option is disabled. Used by ListKeyManager.
 	 */
 	disabled = false;
-
-	@ViewChild(LuOptionOutletDirective, { read: LU_OPTION_CONTEXT, static: true })
-	private optionContext?: ILuOptionContext<T>;
-
-	private cdr = inject(ChangeDetectorRef);
-	private subscription?: Subscription;
-
 	@HostBinding('attr.role')
 	public role = 'option';
+	protected elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
+	protected selectId = inject(SELECT_ID);
+	@ViewChild(LuOptionOutletDirective, { read: LU_OPTION_CONTEXT, static: true })
+	private optionContext?: ILuOptionContext<T>;
+	private cdr = inject(ChangeDetectorRef);
+	private subscription?: Subscription;
 
 	@HostBinding('attr.id')
 	public get id(): string {
 		return `lu-select-${this.selectId}-option-${this.optionIndex}`;
 	}
-
-	protected elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
-	protected selectId = inject(SELECT_ID);
 
 	ngOnDestroy(): void {
 		this.subscription?.unsubscribe();

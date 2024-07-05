@@ -1,5 +1,5 @@
 import { Overlay } from '@angular/cdk/overlay';
-import { CommonModule } from '@angular/common';
+
 import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, forwardRef, Input, Renderer2, ViewContainerRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { LuInputClearerComponent, LuInputDisplayerDirective } from '@lucca-front/ng/input';
@@ -13,7 +13,7 @@ import { LuApiPagedSearcherComponent } from '../searcher';
 	styleUrls: ['./api-select-input.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	standalone: true,
-	imports: [CommonModule, LuInputClearerComponent, LuOptionPickerAdvancedComponent, LuApiPagedSearcherComponent, LuOptionItemComponent, LuForOptionsDirective, LuInputDisplayerDirective],
+	imports: [LuInputClearerComponent, LuOptionPickerAdvancedComponent, LuApiPagedSearcherComponent, LuOptionItemComponent, LuForOptionsDirective, LuInputDisplayerDirective],
 	providers: [
 		{
 			provide: NG_VALUE_ACCESSOR,
@@ -42,7 +42,6 @@ export class LuApiSelectInputComponent<T extends import('../../api.model').ILuAp
 	 */
 	@Input() sort: string;
 
-	byId: LuOptionComparer<T> = (option1: T, option2: T) => option1 && option2 && option1.id === option2.id;
 	constructor(
 		protected override _changeDetectorRef: ChangeDetectorRef,
 		protected override _overlay: Overlay,
@@ -52,4 +51,6 @@ export class LuApiSelectInputComponent<T extends import('../../api.model').ILuAp
 	) {
 		super(_changeDetectorRef, _overlay, _elementRef, _viewContainerRef, _renderer);
 	}
+
+	byId: LuOptionComparer<T> = (option1: T, option2: T) => option1 && option2 && option1.id === option2.id;
 }

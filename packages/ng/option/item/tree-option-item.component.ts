@@ -1,5 +1,5 @@
 /* eslint-disable @angular-eslint/no-output-on-prefix */
-import { CommonModule } from '@angular/common';
+
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ContentChild, ElementRef, EventEmitter, forwardRef, Input, Output, ViewChild, ViewContainerRef } from '@angular/core';
 import { getIntl, ILuTree } from '@lucca-front/ng/core';
 import { ALuInputDisplayer, ILuInputDisplayer } from '@lucca-front/ng/input';
@@ -13,7 +13,7 @@ import { LU_TREE_OPTION_ITEM_TRANSLATIONS } from './tree-option-item.translate';
 	styleUrls: ['./tree-option-item.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	standalone: true,
-	imports: [CommonModule, LuTooltipTriggerDirective],
+	imports: [LuTooltipTriggerDirective],
 	providers: [
 		{
 			provide: ALuTreeOptionItem,
@@ -23,72 +23,73 @@ import { LU_TREE_OPTION_ITEM_TRANSLATIONS } from './tree-option-item.translate';
 	],
 })
 export class LuTreeOptionItemComponent<T> extends ALuTreeOptionItem<T> implements ILuTreeOptionItem<T> {
-	protected _children: this[] = [];
-	protected _tree: ILuTree<T>;
+	@ViewChild('element', { read: ElementRef, static: true }) element: ElementRef;
+	@Output() onSelect = new EventEmitter<this>();
+	@Output() onSelectSelf = new EventEmitter<this>();
+	@Output() onSelectChildren = new EventEmitter<this>();
+	public intl = getIntl(LU_TREE_OPTION_ITEM_TRANSLATIONS);
 	protected _displayer: ILuInputDisplayer<T>;
 	@ViewChild('value', { static: true, read: ViewContainerRef })
 	protected _valueVCR: ViewContainerRef;
 	@ViewChild('children', { static: true, read: ViewContainerRef })
 	protected _childrenVCR: ViewContainerRef;
-	@ViewChild('element', { read: ElementRef, static: true }) element: ElementRef;
 
-	@Output() onSelect = new EventEmitter<this>();
-	@Output() onSelectSelf = new EventEmitter<this>();
-	@Output() onSelectChildren = new EventEmitter<this>();
-	select() {
-		if (this.disabled) {
-			return;
-		}
-		this.onSelect.emit(this);
+	constructor(private _cdr: ChangeDetectorRef) {
+		super();
 	}
-	selectSelf() {
-		if (this.disabled) {
-			return;
-		}
-		this.onSelectSelf.emit(this);
+
+	protected _children: this[] = [];
+
+	get children() {
+		return this._children;
 	}
-	selectChildren() {
-		this.onSelectChildren.emit(this);
+
+	set children(c) {
+		this._children = c;
 	}
+
+	protected _tree: ILuTree<T>;
 
 	@Input() set tree(t: ILuTree<T>) {
 		this._tree = t;
 		this._renderValue(t.value);
 		this._renderChildren(t.children);
 	}
+
 	get value() {
 		return this._tree.value;
 	}
-	get children() {
-		return this._children;
-	}
-	set children(c) {
-		this._children = c;
-	}
+
 	get hasChildren() {
 		return !!this.children && this.children.length > 0;
 	}
 
 	protected _selected = false;
+
 	get selected() {
 		return this._selected;
 	}
+
 	@Input() set selected(s: boolean) {
 		if (s !== this._selected && !this.disabled) {
 			this._selected = s;
 			this._cdr.markForCheck();
 		}
 	}
+
 	protected _highlighted = false;
+
 	get highlighted() {
 		return this._highlighted;
 	}
+
 	@Input() set highlighted(h: boolean) {
 		if (h !== this._highlighted) {
 			this._highlighted = h;
 			this._cdr.markForCheck();
 		}
 	}
+
 	get disabled() {
 		return this._tree.disabled;
 	}
@@ -97,10 +98,22 @@ export class LuTreeOptionItemComponent<T> extends ALuTreeOptionItem<T> implement
 		this._displayer = displayer;
 	}
 
-	public intl = getIntl(LU_TREE_OPTION_ITEM_TRANSLATIONS);
+	select() {
+		if (this.disabled) {
+			return;
+		}
+		this.onSelect.emit(this);
+	}
 
-	constructor(private _cdr: ChangeDetectorRef) {
-		super();
+	selectSelf() {
+		if (this.disabled) {
+			return;
+		}
+		this.onSelectSelf.emit(this);
+	}
+
+	selectChildren() {
+		this.onSelectChildren.emit(this);
 	}
 
 	private _renderValue(value: T) {
@@ -108,6 +121,7 @@ export class LuTreeOptionItemComponent<T> extends ALuTreeOptionItem<T> implement
 		this._valueVCR.clear();
 		this._valueVCR.insert(evr);
 	}
+
 	private _renderChildren(children: ILuTree<T>[] = []) {
 		this._childrenVCR.clear();
 		this.children = children.map((c) => {

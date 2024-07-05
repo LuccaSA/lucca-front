@@ -1,6 +1,8 @@
-<details class="calloutDisclosure palette-{{palette}} mod-{{size}}" [class.mod-iconless]="!icon" [open]="open" (toggle)="onToggle($event)">
+<details (toggle)="onToggle($event)" [class.mod-iconless]="!icon" [open]="open" class="calloutDisclosure palette-{{palette}} mod-{{size}}">
 	<summary class="calloutDisclosure-summary">
-		<lu-icon class="calloutDisclosure-summary-icon" *ngIf="icon" [icon]="icon"></lu-icon>
+		@if (icon) {
+		<lu-icon class="calloutDisclosure-summary-icon" [icon]="icon"></lu-icon>
+		}
 		<span class="calloutDisclosure-summary-title">
 			<ng-container *luPortal="heading"></ng-container>
 		</span>

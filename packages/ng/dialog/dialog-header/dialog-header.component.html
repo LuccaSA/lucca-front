@@ -1,7 +1,9 @@
-<button class="dialog-inside-header-button" type="button" luButton (click)="close()" *ngIf="dismissible">
+@if (dismissible) {
+<button class="dialog-inside-header-button" type="button" luButton (click)="close()">
 	<lu-icon icon="signClose"></lu-icon>
 	<span class="u-mask">{{ intl.close }}</span>
 </button>
+}
 
 <div class="dialog-inside-header-container">
 	<ng-content></ng-content>

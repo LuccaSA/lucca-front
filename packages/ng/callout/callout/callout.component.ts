@@ -1,5 +1,5 @@
 import { booleanAttribute, ChangeDetectionStrategy, Component, EventEmitter, HostBinding, Input, Output, ViewEncapsulation } from '@angular/core';
-import { NgIf } from '@angular/common';
+
 import { getIntl, Palette, PortalContent, PortalDirective } from '@lucca-front/ng/core';
 import { LU_CALLOUT_TRANSLATIONS } from '../callout.translate';
 import { LuccaIcon } from '@lucca-front/icons';
@@ -8,7 +8,7 @@ import { CalloutState, CalloutStateMap } from '../callout-state';
 @Component({
 	selector: 'lu-callout',
 	standalone: true,
-	imports: [NgIf, PortalDirective],
+	imports: [PortalDirective],
 	templateUrl: './callout.component.html',
 	styleUrls: ['./callout.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
@@ -46,6 +46,14 @@ export class CalloutComponent {
 	 * Defaults to no icon.
 	 */
 	icon: LuccaIcon;
+	@Input({ transform: booleanAttribute })
+	/**
+	 * Is the callout removed? Works with two way binding too.
+	 */
+	removed = false;
+	@Output()
+	removedChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+	public intl = getIntl(LU_CALLOUT_TRANSLATIONS);
 
 	@Input()
 	/**
@@ -65,19 +73,8 @@ export class CalloutComponent {
 		}
 	}
 
-	@Input({ transform: booleanAttribute })
-	/**
-	 * Is the callout removed? Works with two way binding too.
-	 */
-	removed = false;
-
 	@HostBinding('attr.hidden')
 	get hiddenAttr(): 'hidden' | null {
 		return this.removed ? 'hidden' : null;
 	}
-
-	@Output()
-	removedChange: EventEmitter<boolean> = new EventEmitter<boolean>();
-
-	public intl = getIntl(LU_CALLOUT_TRANSLATIONS);
 }

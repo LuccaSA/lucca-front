@@ -1,9 +1,13 @@
-<div class="toasts" aria-live="polite" [class.mod-bottom]="bottom">
-	<div *ngFor="let toast of toasts$ | async; trackBy: trackToast" class="toasts-item" [ngClass]="paletteClassByToastType[toast.type]">
-		<span *ngIf="toast.type" class="toast-item-icon lucca-icon" aria-hidden="true" [ngClass]="iconClassByToastType[toast.type]"></span>
+<div [class.mod-bottom]="bottom" aria-live="polite" class="toasts">
+	@for (toast of toasts$ | async; track toast.id) {
+	<div class="toasts-item" [ngClass]="paletteClassByToastType[toast.type]">
+		@if (toast.type) {
+		<span class="toast-item-icon lucca-icon" aria-hidden="true" [ngClass]="iconClassByToastType[toast.type]"></span>
+		}
 		<div class="toast-item-content">
-			<div *ngIf="toast.title"><strong>{{ toast.title }}</strong></div>
-			@if (isStringPortalContent(toast.message)) {
+			@if (toast.title) {
+			<div><strong>{{ toast.title }}</strong></div>
+			} @if (isStringPortalContent(toast.message)) {
 			<div [innerHtml]="toast.message"></div>
 			} @else {
 			<ng-container *luPortal="toast.message"></ng-container>
@@ -20,4 +24,5 @@
 			<span class="u-mask">{{ intl.close }}</span>
 		</button>
 	</div>
+	}
 </div>

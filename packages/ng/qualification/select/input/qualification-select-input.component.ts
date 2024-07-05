@@ -1,5 +1,5 @@
 import { Overlay, OverlayModule } from '@angular/cdk/overlay';
-import { CommonModule } from '@angular/common';
+
 import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, forwardRef, Input, Renderer2, ViewContainerRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { LuApiPagedSearcherComponent } from '@lucca-front/ng/api';
@@ -20,7 +20,7 @@ import { LU_QUALIFICATION_SELECT_INPUT_TRANSLATIONS } from './qualification-sele
 	styleUrls: ['./qualification-select-input.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	standalone: true,
-	imports: [CommonModule, OverlayModule, LuInputClearerComponent, LuOptionPickerAdvancedComponent, LuApiPagedSearcherComponent, LuOptionItemComponent, LuForGroupsDirective, LuInputDisplayerDirective],
+	imports: [OverlayModule, LuInputClearerComponent, LuOptionPickerAdvancedComponent, LuApiPagedSearcherComponent, LuOptionItemComponent, LuForGroupsDirective, LuInputDisplayerDirective],
 	providers: [
 		{
 			provide: NG_VALUE_ACCESSOR,
@@ -36,12 +36,8 @@ export class LuQualificationSelectInputComponent<
 	extends ALuSelectInputComponent<D, P>
 	implements ControlValueAccessor, ILuInputWithPicker<D>, AfterViewInit
 {
-	byId: LuOptionComparer<D> = (option1: D, option2: D) => option1 && option2 && option1.id === option2.id;
-
 	@Input() filters: string[];
-
 	isSearching = false;
-
 	public intl = getIntl(LU_QUALIFICATION_SELECT_INPUT_TRANSLATIONS);
 
 	constructor(
@@ -53,6 +49,8 @@ export class LuQualificationSelectInputComponent<
 	) {
 		super(_changeDetectorRef, _overlay, _elementRef, _viewContainerRef, _renderer);
 	}
+
+	byId: LuOptionComparer<D> = (option1: D, option2: D) => option1 && option2 && option1.id === option2.id;
 
 	onIsSearchingChanged(isSearching: boolean) {
 		this.isSearching = isSearching;

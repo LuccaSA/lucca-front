@@ -1,4 +1,3 @@
-import { NgIf } from '@angular/common';
 import { provideHttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -8,14 +7,13 @@ import { LuInputDisplayerDirective } from '@lucca-front/ng/input';
 import { LuForOptionsDirective, LuOptionItemComponent, LuOptionPickerAdvancedComponent, LuOptionPickerComponent } from '@lucca-front/ng/option';
 import { LuSelectInputComponent } from '@lucca-front/ng/select';
 import { LuUserDisplayPipe, LuUserHomonymsComponent, LuUserMeOptionDirective } from '@lucca-front/ng/user';
-import { Meta, StoryFn, applicationConfig } from '@storybook/angular';
+import { applicationConfig, Meta, StoryFn } from '@storybook/angular';
 
 @Component({
 	standalone: true,
 	selector: 'user-select-stories',
 	templateUrl: './user-homonyms.stories.html',
 	imports: [
-		NgIf,
 		LuUserHomonymsComponent,
 		LuSelectInputComponent,
 		LuOptionPickerComponent,

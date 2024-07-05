@@ -2,7 +2,7 @@ import { booleanAttribute, Component, ElementRef, Input, numberAttribute, ViewCh
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormFieldComponent, InputDirective } from '@lucca-front/ng/form-field';
 import { NoopValueAccessorDirective } from '../noop-value-accessor.directive';
-import { NgIf, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import { FormFieldIdDirective } from '../form-field-id.directive';
 import { TextInputAddon } from '../text-input/text-input-addon';
 import { getIntl } from '@lucca-front/ng/core';
@@ -12,7 +12,7 @@ import { injectNgControl } from '../inject-ng-control';
 @Component({
 	selector: 'lu-number-input',
 	standalone: true,
-	imports: [FormFieldComponent, InputDirective, NgIf, ReactiveFormsModule, FormFieldIdDirective, NgTemplateOutlet],
+	imports: [FormFieldComponent, InputDirective, ReactiveFormsModule, FormFieldIdDirective, NgTemplateOutlet],
 	templateUrl: './number-input.component.html',
 	hostDirectives: [NoopValueAccessorDirective],
 	encapsulation: ViewEncapsulation.None,

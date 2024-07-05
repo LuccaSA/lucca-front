@@ -1,28 +1,25 @@
 <section class="calendar">
 	<header class="calendar-header">
-		<button type="button" class="button mod-onlyIcon mod-text mod-S" (click)="previous()">
+		<button (click)="previous()" class="button mod-onlyIcon mod-text mod-S" type="button">
 			<span aria-hidden="true" class="lucca-icon icon-arrowChevronLeft"></span>
 			<span class="u-mask">Previous</span>
 		</button>
-		<button type="button" class="calendar-header-date" (click)="increaseGranularity()">{{ header.label }}</button>
-		<button type="button" class="button mod-onlyIcon mod-text mod-S" (click)="next()">
+		<button (click)="increaseGranularity()" class="calendar-header-date" type="button">{{ header.label }}</button>
+		<button (click)="next()" class="button mod-onlyIcon mod-text mod-S" type="button">
 			<span aria-hidden="true" class="lucca-icon icon-arrowChevronRight"></span>
 			<span class="u-mask">Next</span>
 		</button>
 	</header>
-	<section class="calendar-labels" [ngClass]="mod">
-		<div class="calendar-labels-item" *ngFor="let label of labels">{{ label }}</div>
+	<section [ngClass]="mod" class="calendar-labels">
+		@for (label of labels; track label) {
+		<div class="calendar-labels-item">{{ label }}</div>
+		}
 	</section>
-	<section class="calendar-grid" [ngClass]="mod">
-		<button
-			type="button"
-			*ngFor="let item of items; trackBy: trackBy"
-			class="calendar-grid-item"
-			[ngClass]="item.mods"
-			[disabled]="item.isDisabled"
-			(click)="select(item)"
-		>
+	<section [ngClass]="mod" class="calendar-grid">
+		@for (item of items; track item.id) {
+		<button type="button" class="calendar-grid-item" [ngClass]="item.mods" [disabled]="item.isDisabled" (click)="select(item)">
 			<div class="calendar-grid-item-content">{{ item.label }}</div>
 		</button>
+		}
 	</section>
 </section>

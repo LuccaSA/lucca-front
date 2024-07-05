@@ -16,38 +16,35 @@ import { LU_TOAST_TRANSLATIONS } from './toasts.translate';
 })
 export class LuToastsComponent implements OnDestroy {
 	@Input() public bottom = false;
-	@Input() public set sources(sources: Array<Observable<LuToastInput>>) {
-		merge(...sources)
-			.pipe(takeUntil(this.destroy$))
-			.subscribe((toast) => this.toastsService.addToast(toast));
-	}
-
 	public toasts$ = this.toastsService.toasts$;
-
-	private destroy$ = new Subject<void>();
-
 	public intl = getIntl(LU_TOAST_TRANSLATIONS);
-
-	constructor(private toastsService: LuToastsService) {}
-
-	public ngOnDestroy(): void {
-		this.destroy$.next();
-		this.destroy$.complete();
-	}
-
 	public iconClassByToastType: Record<LuToastType, string> = {
 		Info: 'icon-signInfo',
 		Success: 'icon-signSuccess',
 		Error: 'icon-signError',
 		Warning: 'icon-signWarning',
 	};
-
 	public paletteClassByToastType: Record<LuToastType, string> = {
 		Info: '',
 		Success: 'palette-success',
 		Error: 'palette-error',
 		Warning: 'palette-warning',
 	};
+	private destroy$ = new Subject<void>();
+
+	constructor(private toastsService: LuToastsService) {}
+
+	@Input()
+	public set sources(sources: Array<Observable<LuToastInput>>) {
+		merge(...sources)
+			.pipe(takeUntil(this.destroy$))
+			.subscribe((toast) => this.toastsService.addToast(toast));
+	}
+
+	public ngOnDestroy(): void {
+		this.destroy$.next();
+		this.destroy$.complete();
+	}
 
 	public isStringPortalContent(message: PortalContent): message is string {
 		return typeof message === 'string';
@@ -55,10 +52,6 @@ export class LuToastsComponent implements OnDestroy {
 
 	public removeToast(toast: LuToast): void {
 		this.toastsService.removeToast(toast);
-	}
-
-	public trackToast(_index: number, toast: LuToast): string {
-		return toast.id;
 	}
 
 	public isOnlyDismissibleManually(toast: LuToast): boolean {

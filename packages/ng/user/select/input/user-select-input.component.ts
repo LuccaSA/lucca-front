@@ -1,5 +1,5 @@
 import { Overlay, OverlayModule } from '@angular/cdk/overlay';
-import { CommonModule } from '@angular/common';
+
 import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, forwardRef, Input, Renderer2, ViewContainerRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { getIntl } from '@lucca-front/ng/core';
@@ -23,7 +23,6 @@ import { LU_USER_SELECT_INPUT_TRANSLATIONS } from './user-select-input.translate
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	standalone: true,
 	imports: [
-		CommonModule,
 		OverlayModule,
 		LuInputClearerComponent,
 		LuInputDisplayerDirective,
@@ -50,12 +49,6 @@ export class LuUserSelectInputComponent<U extends import('../../user.model').ILu
 	implements ControlValueAccessor, ILuInputWithPicker<U>, AfterViewInit
 {
 	searchFormat = LuDisplayFullname.lastfirst;
-
-	@Input('placeholder')
-	override set inputPlaceholder(p: string) {
-		this._placeholder = p;
-	}
-
 	@Input() fields: string;
 	@Input() filters: string[];
 	@Input() orderBy: string;
@@ -63,11 +56,7 @@ export class LuUserSelectInputComponent<U extends import('../../user.model').ILu
 	@Input() operations: number[];
 	@Input() enableFormerEmployees = false;
 	@Input() disablePrincipal = false;
-
 	clue = '';
-
-	byId: LuOptionComparer<U> = (option1: U, option2: U) => option1 && option2 && option1.id === option2.id;
-
 	public intl = getIntl(LU_USER_SELECT_INPUT_TRANSLATIONS);
 
 	constructor(
@@ -79,4 +68,11 @@ export class LuUserSelectInputComponent<U extends import('../../user.model').ILu
 	) {
 		super(_changeDetectorRef, _overlay, _elementRef, _viewContainerRef, _renderer);
 	}
+
+	@Input('placeholder')
+	override set inputPlaceholder(p: string) {
+		this._placeholder = p;
+	}
+
+	byId: LuOptionComparer<U> = (option1: U, option2: U) => option1 && option2 && option1.id === option2.id;
 }

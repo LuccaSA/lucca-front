@@ -1,11 +1,10 @@
-import { NgIf } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 import { LuccaIcon } from '@lucca-front/icons';
 
 @Component({
 	selector: 'lu-icon',
 	standalone: true,
-	imports: [NgIf],
+	imports: [],
 	templateUrl: './icon.component.html',
 	styleUrls: ['./icon.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,

@@ -1,4 +1,4 @@
-import { NgIf, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import { booleanAttribute, Component, ElementRef, Input, ViewChild, ViewEncapsulation } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LuccaIcon } from '@lucca-front/icons';
@@ -15,7 +15,7 @@ type TextFieldType = 'text' | 'email' | 'password' | 'url';
 @Component({
 	selector: 'lu-text-input',
 	standalone: true,
-	imports: [FormFieldComponent, InputDirective, NgIf, ReactiveFormsModule, FormFieldIdDirective, NgTemplateOutlet],
+	imports: [FormFieldComponent, InputDirective, ReactiveFormsModule, FormFieldIdDirective, NgTemplateOutlet],
 	templateUrl: './text-input.component.html',
 	hostDirectives: [NoopValueAccessorDirective],
 	encapsulation: ViewEncapsulation.None,
@@ -43,6 +43,15 @@ export class TextInputComponent {
 
 	@Input()
 	suffix: TextInputAddon;
+	@Input()
+	/**
+	 * Search icon to use for when `hasSearchIcon` is true, defaults to 'search'
+	 */
+	searchIcon: LuccaIcon = 'search';
+	showPassword: boolean = false;
+	intl = getIntl(LU_TEXTFIELD_TRANSLATIONS);
+
+	private _type: TextFieldType = 'text';
 
 	@Input()
 	get type(): TextFieldType {
@@ -53,22 +62,6 @@ export class TextInputComponent {
 		this._type = type;
 	}
 
-	@Input()
-	/**
-	 * Search icon to use for when `hasSearchIcon` is true, defaults to 'search'
-	 */
-	searchIcon: LuccaIcon = 'search';
-
-	showPassword: boolean = false;
-
-	private _type: TextFieldType = 'text';
-
-	protected hasTogglePasswordVisibilityIcon() {
-		return this._type === 'password';
-	}
-
-	intl = getIntl(LU_TEXTFIELD_TRANSLATIONS);
-
 	clearValue(): void {
 		this.ngControl.reset();
 		this.inputElementRef.nativeElement.focus();
@@ -76,5 +69,9 @@ export class TextInputComponent {
 
 	togglePasswordVisibility() {
 		this.showPassword = !this.showPassword;
+	}
+
+	protected hasTogglePasswordVisibilityIcon() {
+		return this._type === 'password';
 	}
 }

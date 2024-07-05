@@ -1,24 +1,26 @@
 <ng-template>
 	<div
+		(click)="onClick()"
+		(mousedown)="onMouseDown()"
+		(mouseleave)="onMouseLeave()"
+		(mouseover)="onMouseOver()"
+		[class.mod-multiple]="multiple"
+		[ngClass]="panelClassesMap"
 		class="lu-picker-panel lu-option-picker-panel"
 		role="dialog"
-		[ngClass]="panelClassesMap"
-		[class.mod-multiple]="multiple"
-		(click)="onClick()"
-		(mouseover)="onMouseOver()"
-		(mouseleave)="onMouseLeave()"
-		(mousedown)="onMouseDown()"
 	>
 		<div
-			[class.is-loading]="loading$ | async"
-			class="lu-picker-content"
-			[ngClass]="contentClassesMap"
-			[cdkTrapFocus]="trapFocus"
-			luScroll
 			(onScrollBottom)="onScrollBottom()"
+			[cdkTrapFocus]="trapFocus"
+			[class.is-loading]="loading$ | async"
+			[ngClass]="contentClassesMap"
+			class="lu-picker-content"
+			luScroll
 		>
 			<ng-content></ng-content>
-			<div *ngIf="loading$ | async" class="loading lu-picker-loading"></div>
+			@if (loading$ | async) {
+			<div class="loading lu-picker-loading"></div>
+			}
 		</div>
 	</div>
 </ng-template>

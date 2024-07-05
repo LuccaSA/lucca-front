@@ -8,16 +8,15 @@
 	<lu-input-clearer></lu-input-clearer>
 </div>
 
-<ng-template luDisplayer [luDisplayerMultiple]="true" let-values>
-	<span *ngIf="multiple && values?.length > 1; else singleView"
-		><span class="numericBadge">{{ values.length }}</span> {{ intl.departments }}</span
-	>
-	<ng-template #singleView>{{ (values[0] || values).name }}</ng-template>
+<ng-template [luDisplayerMultiple]="true" let-values luDisplayer>
+	@if (multiple && values?.length > 1) {
+	<span><span class="numericBadge">{{ values.length }}</span> {{ intl.departments }}</span>
+	} @else { {{ (values[0] || values).name }} }
 </ng-template>
 
 <lu-tree-option-picker-advanced [option-comparer]="byId">
-	<header class="lu-picker-header" [class.mod-multiple]="multiple">
-		<lu-department-feeder [appInstanceId]="appInstanceId" [operations]="operations" [filters]="filters"></lu-department-feeder>
+	<header [class.mod-multiple]="multiple" class="lu-picker-header">
+		<lu-department-feeder [appInstanceId]="appInstanceId" [filters]="filters" [operations]="operations"></lu-department-feeder>
 		<lu-tree-option-searcher [searchFn]="searchFn"></lu-tree-option-searcher>
 		<lu-tree-option-select-all class="option-selector"></lu-tree-option-select-all>
 	</header>

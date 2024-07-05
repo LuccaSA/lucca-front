@@ -1,4 +1,3 @@
-import { NgIf } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ElementRef, inject, OnInit, Renderer2, ViewEncapsulation } from '@angular/core';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { IconComponent } from '@lucca-front/ng/icon';
@@ -12,7 +11,7 @@ let nextId = 0;
 @Component({
 	selector: 'lu-dialog-header',
 	standalone: true,
-	imports: [IconComponent, ButtonComponent, NgIf],
+	imports: [IconComponent, ButtonComponent],
 	templateUrl: './dialog-header.component.html',
 	styleUrl: './dialog-header.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
@@ -23,10 +22,8 @@ let nextId = 0;
 	},
 })
 export class DialogHeaderComponent implements OnInit {
-	#ref = inject(LuDialogRef);
-
 	intl = getIntl(LU_DIALOG_HEADER_TRANSLATIONS);
-
+	#ref = inject(LuDialogRef);
 	dismissible = !this.#ref.config.alert;
 
 	#elementRef = inject<ElementRef<HTMLElement>>(ElementRef);

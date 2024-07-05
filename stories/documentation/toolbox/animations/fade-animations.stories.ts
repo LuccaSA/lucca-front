@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { luFadeAnimationFactory } from '@lucca-front/ng/animations';
@@ -7,14 +6,16 @@ import { applicationConfig, Meta, StoryFn } from '@storybook/angular';
 @Component({
 	selector: 'story-fade-animation',
 	standalone: true,
-	imports: [CommonModule],
+	imports: [],
 	template: ` <div class="grid">
 		<div class="grid-column ng-demo-block" style="--grid-colspan: 3">
 			<h3 class="pr-u-margin0">
 				Fade
 				<button class="button mod-S" (click)="fading = !fading">{{ fading ? 'Show' : 'Hide' }}</button>
 			</h3>
-			<div class="animated-block" [@fadeAnimation] *ngIf="!fading">Fade</div>
+			@if (!fading) {
+				<div class="animated-block" [@fadeAnimation]>Fade</div>
+			}
 		</div>
 	</div>`,
 	styleUrls: ['./animations.scss'],

@@ -1,13 +1,15 @@
 <div
-	class="optionItem-value"
-	[class.is-selected]="isSelected"
-	[class.is-highlighted]="isHighlighted$ | async"
-	[class.is-disabled]="disabled"
 	(click)="selectOption($event)"
+	[class.is-disabled]="disabled"
+	[class.is-highlighted]="isHighlighted$ | async"
+	[class.is-selected]="isSelected"
+	class="optionItem-value"
 >
 	<ng-container *luOptionOutlet="optionTpl; value: option" />
 
-	<div *ngIf="grouping" class="optionItem-value-group">
+	@if (grouping) {
+	<div class="optionItem-value-group">
 		<ng-container *luPortal="grouping.content; context: { $implicit: option | luOptionGroup:grouping.selector }" />
 	</div>
+	}
 </div>
