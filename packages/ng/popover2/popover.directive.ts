@@ -11,6 +11,7 @@ import {
 	Input,
 	InputSignal,
 	OnDestroy,
+	Renderer2,
 	signal,
 	TemplateRef,
 	ViewContainerRef,
@@ -21,6 +22,8 @@ import { PopoverContentComponent } from './content/popover-content/popover-conte
 import { POPOVER_CONFIG, PopoverConfig } from './popover-tokens';
 import { combineLatest, debounce, filter, map, merge, Subject, switchMap, timer } from 'rxjs';
 import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
+import { LU_POPOVER2_TRANSLATIONS } from './popover2.translate';
+import { getIntl } from '../core/translate';
 
 export type PopoverPosition = 'above' | 'below' | 'before' | 'after';
 
@@ -73,6 +76,10 @@ export class PopoverDirective implements OnDestroy {
 
 	#destroyRef = inject(DestroyRef);
 
+	#renderer = inject(Renderer2);
+
+	intl = getIntl(LU_POPOVER2_TRANSLATIONS);
+
 	@Input({
 		alias: 'luPopover2',
 	})
@@ -100,6 +107,9 @@ export class PopoverDirective implements OnDestroy {
 
 	close$ = new Subject<void>();
 
+	#listenToMouseLeave = false;
+	#listenToMouseEnter = true;
+
 	#overlayRef: OverlayRef;
 
 	#componentRef?: PopoverContentComponent;
@@ -110,6 +120,8 @@ export class PopoverDirective implements OnDestroy {
 
 	@HostBinding('attr.aria-controls')
 	ariaControls = `popover-content-${nextId++}`;
+
+	#screenReaderDescription?: HTMLSpanElement;
 
 	constructor() {
 		combineLatest([toObservable(this.luPopoverOpenDelay), toObservable(this.luPopoverCloseDelay), toObservable(this.luPopoverTrigger)])
@@ -129,8 +141,16 @@ export class PopoverDirective implements OnDestroy {
 			.subscribe(([event, type]: ['open' | 'close', 'focus' | 'click' | 'hover']) => {
 				if (event === 'open') {
 					this.openPopover(type === 'focus', true);
-				} else {
+					this.#listenToMouseLeave = type !== 'click';
+					if (type === 'focus' && !this.#screenReaderDescription) {
+						this.#screenReaderDescription = this.#renderer.createElement('span') as HTMLSpanElement;
+						this.#screenReaderDescription.innerText = this.intl.screenReaderDescription;
+						this.#renderer.addClass(this.#screenReaderDescription, 'u-mask');
+						this.#renderer.appendChild(this.#elementRef.nativeElement, this.#screenReaderDescription);
+					}
+				} else if (this.opened()) {
 					this.#componentRef?.close();
+					this.#listenToMouseEnter = true;
 				}
 			});
 	}
@@ -141,8 +161,9 @@ export class PopoverDirective implements OnDestroy {
 
 	@HostListener('mouseenter')
 	onMouseEnter() {
-		if (this.luPopoverTrigger().includes('hover')) {
+		if (this.#listenToMouseEnter && this.luPopoverTrigger().includes('hover')) {
 			this.open$.next('hover');
+			this.#listenToMouseLeave = true;
 		}
 	}
 
@@ -150,13 +171,15 @@ export class PopoverDirective implements OnDestroy {
 	onFocus() {
 		if (this.luPopoverTrigger().includes('focus')) {
 			this.open$.next('focus');
+			this.#listenToMouseLeave = true;
 		}
 	}
 
 	@HostListener('mouseleave')
 	onMouseLeave() {
-		if (this.luPopoverTrigger().includes('hover')) {
+		if (this.#listenToMouseLeave && this.luPopoverTrigger().includes('hover')) {
 			this.close$.next();
+			this.#listenToMouseEnter = true;
 		}
 	}
 
@@ -164,8 +187,11 @@ export class PopoverDirective implements OnDestroy {
 	click(): void {
 		if (this.opened()) {
 			this.#componentRef?.close();
+			this.#listenToMouseLeave = true;
 		} else {
 			this.openPopover(true);
+			this.#listenToMouseLeave = false;
+			this.#listenToMouseEnter = false;
 		}
 	}
 
@@ -186,7 +212,10 @@ export class PopoverDirective implements OnDestroy {
 			this.#overlayRef
 				.backdropClick()
 				.pipe(takeUntilDestroyed(this.#destroyRef))
-				.subscribe(() => this.#componentRef.close());
+				.subscribe(() => {
+					this.#componentRef.close();
+					this.#listenToMouseLeave = true;
+				});
 			const config: PopoverConfig = {
 				content: this.content,
 				ref: this.#overlayRef,
@@ -207,7 +236,14 @@ export class PopoverDirective implements OnDestroy {
 			this.#componentRef.mouseLeave$.pipe(takeUntilDestroyed(this.#componentRef.destroyRef), takeUntilDestroyed(this.#destroyRef)).subscribe(() => this.close$.next());
 			// On tooltip enter => trigger open to keep it opened
 			this.#componentRef.mouseEnter$.pipe(takeUntilDestroyed(this.#componentRef.destroyRef), takeUntilDestroyed(this.#destroyRef)).subscribe(() => this.open$.next('hover'));
-			this.#componentRef.closed$.pipe(takeUntilDestroyed(this.#componentRef.destroyRef), takeUntilDestroyed(this.#destroyRef)).subscribe(() => this.opened.set(false));
+			this.#componentRef.closed$.pipe(takeUntilDestroyed(this.#componentRef.destroyRef), takeUntilDestroyed(this.#destroyRef)).subscribe(() => {
+				this.opened.set(false);
+				this.#listenToMouseLeave = false;
+				if (this.#screenReaderDescription) {
+					this.#screenReaderDescription.remove();
+					this.#screenReaderDescription = undefined;
+				}
+			});
 		}
 	}
 
