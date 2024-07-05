@@ -28,6 +28,7 @@
 			[disabled]="disabled() || !minutesIncrement()"
 			(valueChange)="minutesInputHandler($event)"
 			(prevRequest)="focusPart('hours')"
+			(nextRequest)="focusPart('meridiem')"
 			(inputControlClick)="inputControlClickHandler('minutes', $event)"
 		/>
 		@if (enableMeridiemDisplay()) {
@@ -50,6 +51,7 @@
 					[ngModel]="ampmDisplay()"
 					(ngModelChange)="switchMeridiem($event)"
 					(click)="$event.stopPropagation()"
+					(keydown.arrowleft)="$event.preventDefault();focusPart('minutes')"
 				/>
 			</div>
 			<div class="timePicker-fieldset-meridiem-post">
@@ -63,6 +65,7 @@
 					[ngModel]="ampmDisplay()"
 					(ngModelChange)="switchMeridiem($event)"
 					(click)="$event.stopPropagation()"
+					(keydown.arrowleft)="$event.preventDefault();focusPart('minutes')"
 				/>
 			</div>
 			@if (displayArrows()) {

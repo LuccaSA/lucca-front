@@ -1,5 +1,5 @@
 import { NgClass } from '@angular/common';
-import { booleanAttribute, ChangeDetectionStrategy, Component, computed, forwardRef, inject, Input, input, LOCALE_ID, model, output, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, computed, ElementRef, forwardRef, inject, Input, input, LOCALE_ID, model, output, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { getIntl } from '@lucca-front/ng/core';
 import { BasePickerComponent } from '../core/base-picker.component';
@@ -41,6 +41,12 @@ import { RepeatOnHoldDirective } from '../core/repeat-on-hold.directive';
 export class TimePickerComponent extends BasePickerComponent {
 	protected intl = getIntl(LU_TIME_PICKER_TRANSLATIONS);
 	protected localeId = inject(LOCALE_ID);
+
+	@ViewChild('anteMeridiemRef')
+	anteMeridiemRef: ElementRef<HTMLInputElement>;
+
+	@ViewChild('postMeridiemRef')
+	postMeridiemRef: ElementRef<HTMLInputElement>;
 
 	value = model<ISO8601Time>('--:--:--');
 	max = input<ISO8601Time>(null);
@@ -93,6 +99,14 @@ export class TimePickerComponent extends BasePickerComponent {
 	protected ampmDisplay = computed(() => {
 		return formatAMPM(this.hours()).suffix;
 	});
+
+	protected override focusPart(type: 'hours' | 'minutes' | 'meridiem') {
+		if (type === 'meridiem') {
+			this.ampmDisplay() === 'AM' ? this.anteMeridiemRef?.nativeElement?.focus() : this.postMeridiemRef?.nativeElement?.focus();
+		} else {
+			super.focusPart(type);
+		}
+	}
 
 	writeValue(value: ISO8601Time): void {
 		this.value.set(value || '––:––:––');
