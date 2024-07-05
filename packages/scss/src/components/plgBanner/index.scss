@@ -1,0 +1,5 @@
+@use 'exports' as *;
+
+.plgBanner {
+	@include component;
+}
