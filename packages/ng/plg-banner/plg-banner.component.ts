@@ -1,4 +1,3 @@
-import { NgIf } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 import { SafeUrl } from '@angular/platform-browser';
 import { getIntl } from '../core/translate';
@@ -8,7 +7,7 @@ import { LU_PLG_BANNER_TRANSLATIONS } from './plg-banner.translate';
 @Component({
 	selector: 'lu-plg-banner',
 	standalone: true,
-	imports: [NgIf, IconComponent],
+	imports: [IconComponent],
 	templateUrl: './plg-banner.component.html',
 	styleUrls: ['./plg-banner.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,

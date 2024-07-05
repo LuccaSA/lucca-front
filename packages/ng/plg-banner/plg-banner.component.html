@@ -9,16 +9,19 @@
 		</svg>
 	</div>
 	<div class="plgBanner-content">
-		<div *ngIf="bannerTitle" class="plgBanner-content-title">{{ bannerTitle }}</div>
+		@if (bannerTitle) {
+		<div class="plgBanner-content-title">{{ bannerTitle }}</div>
+		}
 		<div class="plgBanner-content-description">
 			<ng-content></ng-content>
 		</div>
-		<div *ngIf="linkLabel && linkURL" class="plgBanner-content-link">
-			<a class="link mod-icon" [href]="linkURL" target="_blank" rel="noopener noreferrer">
+		@if (linkLabel && linkURL) {
+		<div class="plgBanner-content-link">
+			<a class="link mod-icon u-textProduct" [href]="linkURL" target="_blank" rel="noopener noreferrer">
 				{{ linkLabel }}
-				<span aria-hidden="true" class="lucca-icon icon-arrowExternal"></span>
-				<span class="u-mask">{{ intl.openNewTab }}</span>
+				<lu-icon icon="arrowExternal" [alt]="intl.openNewTab"></lu-icon>
 			</a>
 		</div>
+		}
 	</div>
 </div>
