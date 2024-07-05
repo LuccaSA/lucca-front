@@ -96,7 +96,7 @@ export class PopoverDirective implements OnDestroy {
 
 	luPopoverCloseDelay: InputSignal<number> = input<number>(100);
 
-	open$ = new Subject<void>();
+	open$ = new Subject<'focus' | 'click' | 'hover'>();
 
 	close$ = new Subject<void>();
 
@@ -118,17 +118,17 @@ export class PopoverDirective implements OnDestroy {
 					return trigger.includes('hover') || trigger.includes('focus');
 				}),
 				switchMap(([openDelay, closeDelay]) => {
-					return merge(this.open$.pipe(map(() => 'open')), this.close$.pipe(map(() => 'close'))).pipe(
-						debounce((event) => {
+					return merge(this.open$.pipe(map((type) => ['open', type])), this.close$.pipe(map(() => ['close']))).pipe(
+						debounce(([event]) => {
 							return timer(event === 'open' ? openDelay : closeDelay);
 						}),
 					);
 				}),
 				takeUntilDestroyed(this.#destroyRef),
 			)
-			.subscribe((event) => {
+			.subscribe(([event, type]: ['open' | 'close', 'focus' | 'click' | 'hover']) => {
 				if (event === 'open') {
-					this.openPopover(true);
+					this.openPopover(type === 'focus', true);
 				} else {
 					this.#componentRef?.close();
 				}
@@ -142,14 +142,14 @@ export class PopoverDirective implements OnDestroy {
 	@HostListener('mouseenter')
 	onMouseEnter() {
 		if (this.luPopoverTrigger().includes('hover')) {
-			this.open$.next();
+			this.open$.next('hover');
 		}
 	}
 
 	@HostListener('focus')
 	onFocus() {
 		if (this.luPopoverTrigger().includes('focus')) {
-			this.open$.next();
+			this.open$.next('focus');
 		}
 	}
 
@@ -165,25 +165,23 @@ export class PopoverDirective implements OnDestroy {
 		if (this.opened()) {
 			this.#componentRef?.close();
 		} else {
-			this.openPopover();
+			this.openPopover(true);
 		}
 	}
 
-	openPopover(disableFocusHandler = false): void {
+	openPopover(withBackdrop = false, disableFocusHandler = false): void {
 		if (!this.opened() && !this.luPopoverDisabled) {
 			this.opened.set(true);
-			this.#overlayRef =
-				this.#overlayRef ||
-				this.#overlay.create({
-					positionStrategy: this.#overlay
-						.position()
-						.flexibleConnectedTo(this.#elementRef)
-						.withPositions(this.customPositions || this.#buildPositions()),
-					scrollStrategy: this.#overlay.scrollStrategies.reposition(),
-					hasBackdrop: this.luPopoverTrigger() === 'click',
-					backdropClass: '',
-					disposeOnNavigation: true,
-				});
+			this.#overlayRef = this.#overlay.create({
+				positionStrategy: this.#overlay
+					.position()
+					.flexibleConnectedTo(this.#elementRef)
+					.withPositions(this.customPositions || this.#buildPositions()),
+				scrollStrategy: this.#overlay.scrollStrategies.reposition(),
+				hasBackdrop: withBackdrop,
+				backdropClass: '',
+				disposeOnNavigation: true,
+			});
 			// Close on backdrop click even if backdrop is invisible
 			this.#overlayRef
 				.backdropClick()
@@ -208,7 +206,7 @@ export class PopoverDirective implements OnDestroy {
 			// On tooltip leave => trigger close
 			this.#componentRef.mouseLeave$.pipe(takeUntilDestroyed(this.#componentRef.destroyRef), takeUntilDestroyed(this.#destroyRef)).subscribe(() => this.close$.next());
 			// On tooltip enter => trigger open to keep it opened
-			this.#componentRef.mouseEnter$.pipe(takeUntilDestroyed(this.#componentRef.destroyRef), takeUntilDestroyed(this.#destroyRef)).subscribe(() => this.open$.next());
+			this.#componentRef.mouseEnter$.pipe(takeUntilDestroyed(this.#componentRef.destroyRef), takeUntilDestroyed(this.#destroyRef)).subscribe(() => this.open$.next('hover'));
 			this.#componentRef.closed$.pipe(takeUntilDestroyed(this.#componentRef.destroyRef), takeUntilDestroyed(this.#destroyRef)).subscribe(() => this.opened.set(false));
 		}
 	}
@@ -218,6 +216,13 @@ export class PopoverDirective implements OnDestroy {
 		if (this.opened()) {
 			event.preventDefault();
 			this.#componentRef.grabFocus();
+		}
+	}
+
+	@HostListener('keydown.Shift.Tab', ['$event'])
+	focusOutBefore(): void {
+		if (this.opened() && this.luPopoverTrigger().includes('focus')) {
+			this.#componentRef.close();
 		}
 	}
 
