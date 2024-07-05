@@ -34,6 +34,8 @@
 		@if (enableMeridiemDisplay()) {
 		<div
 			class="timePicker-fieldset-meridiem"
+			(copy)="copyHandler($event)"
+			(paste)="pasteHandler($event)"
 			(keydown.A)="anteMeridiemRef.click()"
 			(keydown.P)="postMeridiemRef.click()"
 			(keydown.shift.A)="anteMeridiemRef.click()"
@@ -52,6 +54,7 @@
 					(ngModelChange)="switchMeridiem($event)"
 					(click)="$event.stopPropagation()"
 					(keydown.arrowleft)="$event.preventDefault();focusPart('minutes')"
+					(keydown.arrowright)="$event.preventDefault()"
 				/>
 			</div>
 			<div class="timePicker-fieldset-meridiem-post">
@@ -66,6 +69,7 @@
 					(ngModelChange)="switchMeridiem($event)"
 					(click)="$event.stopPropagation()"
 					(keydown.arrowleft)="$event.preventDefault();focusPart('minutes')"
+					(keydown.arrowright)="$event.preventDefault()"
 				/>
 			</div>
 			@if (displayArrows()) {
