@@ -37,7 +37,7 @@
 	--components-button-userSelect: none;
 
 	&::after {
-		color: var(--colors-white-color);
+		color: var(--palettes-neutral-0);
 		font-size: calc(1.5 * var(--components-button-font-size));
 		height: var(--components-button-line-height);
 		inset: 0;

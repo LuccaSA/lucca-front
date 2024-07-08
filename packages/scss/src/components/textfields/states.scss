@@ -43,7 +43,7 @@
 	&:not(:disabled, .is-error, .is-success, .is-valid, .is-warning, .is-invalid) {
 		position: relative;
 		z-index: 1;
-		background-color: var(--colors-white-color);
+		background-color: var(--palettes-neutral-0);
 		box-shadow: form.fakeBorderOverlay(var(--components-field-framed-color));
 	}
 }
@@ -52,8 +52,10 @@
 	&:not(:disabled, .is-error, .is-success, .is-valid, .is-warning, .is-invalid) {
 		position: relative;
 		z-index: 4;
-		background-color: var(--colors-white-color);
-		box-shadow: form.fakeBorderOverlay(var(--components-field-framed-color)), 0 0 0 4px var(--components-field-framed-color50);
+		background-color: var(--palettes-neutral-0);
+		box-shadow:
+			form.fakeBorderOverlay(var(--components-field-framed-color)),
+			0 0 0 4px var(--components-field-framed-color50);
 	}
 }
 
@@ -107,12 +109,16 @@
 }
 
 @mixin framedStateInputFocus($state) {
-	background-color: var(--colors-white-color) !important;
-	box-shadow: form.fakeBorderOverlay(var(--palettes-#{$state}-700)), 0 0 0 4px var(--palettes-#{$state}-50) !important;
+	background-color: var(--palettes-neutral-0) !important;
+	box-shadow:
+		form.fakeBorderOverlay(var(--palettes-#{$state}-700)),
+		0 0 0 4px var(--palettes-#{$state}-50) !important;
 
 	@if $state == 'error' {
-		box-shadow: form.fakeBorderOverlay(var(--palettes-#{$state}-700)), 0 0 0 4px var(--palettes-#{$state}-50) !important;
-		background-color: var(--colors-white-color) !important;
+		box-shadow:
+			form.fakeBorderOverlay(var(--palettes-#{$state}-700)),
+			0 0 0 4px var(--palettes-#{$state}-50) !important;
+		background-color: var(--palettes-neutral-0) !important;
 	}
 }
 
@@ -138,8 +144,10 @@
 }
 
 @mixin framedStateFocus($state) {
-	background-color: var(--colors-white-color);
-	box-shadow: form.fakeBorderOverlay(var(--palettes-#{$state}-700)), 0 0 0 4px var(--palettes-#{$state}-50);
+	background-color: var(--palettes-neutral-0);
+	box-shadow:
+		form.fakeBorderOverlay(var(--palettes-#{$state}-700)),
+		0 0 0 4px var(--palettes-#{$state}-50);
 
 	// todo: déplacer dans field
 	.textfield-messages,
@@ -195,7 +203,7 @@
 	background-image: linear-gradient(
 		to right,
 		var(--components-textfield-material-border-color) 33%,
-		color.transparentize(var(--colors-white-color), 0) 0%
+		color.transparentize(var(--palettes-neutral-0), 0) 0%
 	);
 	background-size: 3px 1px;
 	background-color: transparent;

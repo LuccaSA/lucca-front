@@ -82,13 +82,13 @@
 }
 
 @mixin outlinedDisabled {
-	--components-button-backgroundColor: var(--colors-white-color);
+	--components-button-backgroundColor: var(--palettes-neutral-0);
 	--components-button-boxShadow: 0 0 0 1px var(--palettes-neutral-400);
 	--components-button-color: var(--palettes-neutral-500);
 }
 
 @mixin outlined {
-	--components-button-backgroundColor: var(--colors-white-color);
+	--components-button-backgroundColor: var(--palettes-neutral-0);
 	--components-button-color: var(--palettes-700, var(--palettes-neutral-700));
 	--components-button-boxShadow: 0 0 0 var(--commons-divider-width) var(--palettes-400, var(--palettes-neutral-400));
 
@@ -111,11 +111,11 @@
 }
 
 @mixin inverted {
-	--components-button-color: var(--colors-white-color);
+	--components-button-color: var(--palettes-neutral-0);
 
 	&:hover,
 	&:focus-visible {
-		--components-button-color: var(--colors-white-color);
+		--components-button-color: var(--palettes-neutral-0);
 		--components-button-backgroundColor: var(--palettes-neutral-900);
 	}
 

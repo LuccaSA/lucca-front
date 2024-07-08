@@ -154,7 +154,7 @@
 
 @mixin invert {
 	.textfield-label {
-		color: var(--colors-white-color);
+		color: var(--palettes-neutral-0);
 	}
 }
 
@@ -366,7 +366,7 @@
 		outline: none;
 
 		&:not(:disabled, .is-error, .is-success, .is-valid, .is-warning, .is-invalid) {
-			background-color: var(--colors-white-color);
+			background-color: var(--palettes-neutral-0);
 		}
 	}
 
@@ -404,14 +404,14 @@
 	.radiosfield-messages-error,
 	.checkboxesfield-messages-error {
 		background-color: var(--palettes-error-700);
-		color: var(--colors-white-color);
+		color: var(--palettes-neutral-0);
 	}
 
 	.textfield-messages-warning,
 	.radiosfield-messages-warning,
 	.checkboxesfield-messages-warning {
 		background-color: var(--palettes-warning-700);
-		color: var(--colors-white-color);
+		color: var(--palettes-neutral-0);
 	}
 
 	.textfield-messages-valid,
@@ -421,14 +421,14 @@
 	.radiosfield-messages-success,
 	.checkboxesfield-messages-success {
 		background-color: var(--palettes-success-700);
-		color: var(--colors-white-color);
+		color: var(--palettes-neutral-0);
 	}
 
 	.textfield-messages-helper,
 	.radiosfield-messages-helper,
 	.checkboxesfield-messages-helper {
 		background-color: var(--palettes-neutral-500);
-		color: var(--colors-white-color);
+		color: var(--palettes-neutral-0);
 	}
 }
 

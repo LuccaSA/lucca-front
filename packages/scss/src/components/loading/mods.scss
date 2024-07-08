@@ -25,10 +25,10 @@
 }
 
 @mixin invert {
-	--components-loading-color: var(--colors-white-color);
+	--components-loading-color: var(--palettes-neutral-0);
 
 	&::after {
-		--commons-loading-frontground: #{color.transparentize(var(--colors-white-color), 66%)};
+		--commons-loading-frontground: color.transparentize(var(--palettes-neutral-0), 0.66);
 	}
 }
 
