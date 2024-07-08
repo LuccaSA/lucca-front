@@ -82,7 +82,7 @@ export abstract class ALuOptionPickerComponent<T, O extends import('../item/opti
 	@ContentChildren(ALuOptionItem, { descendants: true }) set optionsQL(ql: QueryList<O>) {
 		this._optionsQL = ql;
 		ql.changes.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {
-			this.overlayRef.updatePosition();
+			this.overlayRef?.updatePosition();
 		});
 	}
 
