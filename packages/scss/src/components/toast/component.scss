@@ -9,6 +9,10 @@
 	z-index: 9999;
 	inset: var(--components-toasts-inset);
 
+	html:has(.main-content .footer.mod-sticky, .dialog.mod-drawer .dialog-inside-footer) & {
+		--components-toasts-bottom: calc(var(--components-toasts-footerHeight) + var(--pr-t-spacings-300));
+	}
+
 	@at-root ($atRoot) {
 		.toasts-item {
 			display: flex;
@@ -30,7 +34,7 @@
 					transform: translateY(var(--pr-t-spacings-200));
 					opacity: 0;
 				}
-		
+
 				100% {
 					opacity: 1;
 				}
@@ -67,7 +71,8 @@
 			@include button.text;
 			@include button.inverted;
 
-			@keyframes timer {}
+			@keyframes timer {
+			}
 
 			align-self: flex-start;
 			border-radius: var(--commons-borderRadius-L);
