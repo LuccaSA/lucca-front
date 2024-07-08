@@ -23,7 +23,7 @@ import { POPOVER_CONFIG, PopoverConfig } from './popover-tokens';
 import { combineLatest, debounce, filter, map, merge, Subject, switchMap, timer } from 'rxjs';
 import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 import { LU_POPOVER2_TRANSLATIONS } from './popover2.translate';
-import { getIntl } from '../core/translate';
+import { getIntl } from '@lucca-front/ng/core';
 
 export type PopoverPosition = 'above' | 'below' | 'before' | 'after';
 
