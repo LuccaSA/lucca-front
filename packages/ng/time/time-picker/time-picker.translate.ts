@@ -1,5 +1,6 @@
 import { InjectionToken } from '@angular/core';
 import { ILuTranslation } from '@lucca-front/ng/core';
+import { Translations } from './translations';
 
 export const LU_TIME_PICKER_TRANSLATIONS = new InjectionToken('LuTimePickerTranslations', {
 	factory: () => luTimePickerTranslations,
@@ -11,15 +12,4 @@ export type TimePickerTranslations = {
 	timePickerMinutes: string;
 };
 
-export const luTimePickerTranslations: ILuTranslation<TimePickerTranslations> = {
-	en: {
-		timePickerHours: 'hours',
-		timePickerTimeSeparator: ':',
-		timePickerMinutes: 'minutes',
-	},
-	fr: {
-		timePickerHours: 'heures',
-		timePickerTimeSeparator: ':',
-		timePickerMinutes: 'minutes',
-	},
-};
+export const luTimePickerTranslations: ILuTranslation<TimePickerTranslations> = Translations;

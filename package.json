@@ -32,7 +32,8 @@
     "build-storybook": "ng run ng:build-storybook",
     "lint": "ng lint",
     "lint:scss": "stylelint --config .stylelintrc packages/scss/src/**/*.scss",
-    "icons:update": "node ./packages/icons/update-icons.js"
+    "icons:update": "node ./packages/icons/update-icons.js",
+    "i18n:update": "lucca translate && prettier --write packages/ng/**/translations.ts"
   },
   "dependencies": {
     "@angular/animations": "^18.0.0",
