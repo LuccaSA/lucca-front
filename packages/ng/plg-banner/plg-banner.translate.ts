@@ -14,6 +14,12 @@ export const luPLGBannerTranslations: ILuTranslation<LuPLGBannerLabel> = {
 		openNewTab: 'Open in a new tab',
 	},
 	fr: {
-		openNewTab: 'Ouvrir dans une nouvelle fenêtre',
+		openNewTab: 'Ouvrir dans un nouvel onglet',
+	},
+	es: {
+		openNewTab: 'Abrir en una pestaña nueva',
+	},
+	de: {
+		openNewTab: 'In neuem Tab öffnen',
 	},
 };

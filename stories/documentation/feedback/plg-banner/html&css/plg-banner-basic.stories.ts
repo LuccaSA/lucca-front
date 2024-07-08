@@ -32,7 +32,7 @@ function getTemplate(args: PLGBannerBasicStory): string {
 	const link =
 		args.linkURL && args.linkLabel
 			? `<div class="plgBanner-content-link">
-				<a class="link mod-icon u-textProduct" href="${args.linkURL}" target="_blank">
+				<a class="link mod-icon u-textProduct" href="${args.linkURL}" target="_blank" rel="noopener noreferrer">
 					${args.linkLabel}
 					<span aria-hidden="true" class="lucca-icon icon-arrowExternal"></span>
 					<span class="u-mask">Ouvrir dans une nouvelle fenêtre</span>
