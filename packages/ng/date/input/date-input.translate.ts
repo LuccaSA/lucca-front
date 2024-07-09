@@ -10,7 +10,6 @@ export interface ILuDateInputLabel {
 	placeholderDay: string;
 	placeholderMonth: string;
 	placeholderYear: string;
-	formatDay: string;
 	formatMonth: string;
 	formatYear: string;
 }
