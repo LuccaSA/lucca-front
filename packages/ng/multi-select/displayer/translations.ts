@@ -9,7 +9,7 @@
 		otherResult: 'anderes Ergebnis',
 		otherResults: 'andere Ergebnisse',
 		showResultsDetails: 'Details anzeigen',
-		removeOption: 'Remove option',
+		removeOption: 'Option löschen',
 	},
 	fr: {
 		otherResult: 'autre résultat',

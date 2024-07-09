@@ -6,10 +6,10 @@
 		Goto_Content: 'Go to content',
 	},
 	de: {
-		Goto: 'LÕgßóÔ ÿïäPŽHÚê',
-		Goto_Nav_Banner: 'äòÃùÍß â èY âMxûšMAVoÉçX ÇäVoâvÒêŒÔoú',
-		Goto_Nav_Navside: 'HšJáUœ ó u÷ ÂŠAñùÀQNXÏeØ YÝXëYíêŽ',
-		Goto_Content: 'SCuåHÍ rá RWžûYÚëR',
+		Goto: 'Schneller Zugang',
+		Goto_Nav_Banner: 'Gehen Sie zur Hauptnavigation',
+		Goto_Nav_Navside: 'Gehen Sie zur internen Navigation',
+		Goto_Content: 'Zum Inhalt springen',
 	},
 	fr: {
 		Goto: 'Accès rapides',
