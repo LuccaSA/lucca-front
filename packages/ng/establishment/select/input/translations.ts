@@ -3,7 +3,7 @@
 		establishments: 'establishments',
 	},
 	de: {
-		establishments: 'establishments',
+		establishments: 'Betriebe',
 	},
 	fr: {
 		establishments: 'établissements',
@@ -12,18 +12,21 @@
 		establishments: 'établissements',
 	},
 	it: {
-		establishments: 'establishments',
+		establishments: 'stabilimenti',
 	},
 	nl: {
-		establishments: 'establishments',
+		establishments: 'vestiging',
 	},
 	'nl-BE': {
+		establishments: 'vestiging',
+	},
+	'en-US': {
 		establishments: 'establishments',
 	},
 	es: {
 		establishments: 'establecimiento',
 	},
 	pt: {
-		establishments: 'establishments',
+		establishments: 'estabelecimentos',
 	},
 };

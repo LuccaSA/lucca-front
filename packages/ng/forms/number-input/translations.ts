@@ -3,7 +3,7 @@
 		clear: 'Empty this field',
 	},
 	de: {
-		clear: 'Empty this field',
+		clear: 'Dieses Feld leeren',
 	},
 	fr: {
 		clear: 'Vider ce champ',
@@ -12,18 +12,21 @@
 		clear: 'Vider ce champ',
 	},
 	it: {
-		clear: 'Empty this field',
+		clear: 'Svuotare questo campo',
 	},
 	nl: {
-		clear: 'Empty this field',
+		clear: 'Leeg dit veld',
 	},
 	'nl-BE': {
+		clear: 'Leeg dit veld',
+	},
+	'en-US': {
 		clear: 'Empty this field',
 	},
 	es: {
-		clear: 'Empty this field',
+		clear: 'Vacíe este campo',
 	},
 	pt: {
-		clear: 'Empty this field',
+		clear: 'Esvaziar este campo',
 	},
 };

@@ -12,12 +12,15 @@
 		addOption: 'Ajouter une option',
 	},
 	it: {
-		addOption: 'Add option',
+		addOption: "Aggiungere un'opzione",
 	},
 	nl: {
-		addOption: 'Add option',
+		addOption: 'Een optie toevoegen',
 	},
 	'nl-BE': {
+		addOption: 'Een optie toevoegen',
+	},
+	'en-US': {
 		addOption: 'Add option',
 	},
 	es: {

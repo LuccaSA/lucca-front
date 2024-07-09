@@ -4,8 +4,8 @@
 		togglePasswordVisibility: 'Show password',
 	},
 	de: {
-		clear: 'Empty this field',
-		togglePasswordVisibility: 'Show password',
+		clear: 'Dieses Feld leeren',
+		togglePasswordVisibility: 'Passwort anzeigen',
 	},
 	fr: {
 		clear: 'Vider ce champ',
@@ -16,23 +16,27 @@
 		togglePasswordVisibility: 'Afficher le mot de passe',
 	},
 	it: {
-		clear: 'Empty this field',
-		togglePasswordVisibility: 'Show password',
+		clear: 'Svuotare questo campo',
+		togglePasswordVisibility: 'Visualizzazione della password',
 	},
 	nl: {
-		clear: 'Empty this field',
-		togglePasswordVisibility: 'Show password',
+		clear: 'Leeg dit veld',
+		togglePasswordVisibility: 'Wachtwoord weergeven',
 	},
 	'nl-BE': {
+		clear: 'Leeg dit veld',
+		togglePasswordVisibility: 'Wachtwoord weergeven',
+	},
+	'en-US': {
 		clear: 'Empty this field',
 		togglePasswordVisibility: 'Show password',
 	},
 	es: {
-		clear: 'Empty this field',
-		togglePasswordVisibility: 'Show password',
+		clear: 'Vacíe este campo',
+		togglePasswordVisibility: 'Mostrar contraseña',
 	},
 	pt: {
-		clear: 'Empty this field',
-		togglePasswordVisibility: 'Show password',
+		clear: 'Esvaziar este campo',
+		togglePasswordVisibility: 'Mostrar palavra-passe',
 	},
 };

@@ -5,9 +5,9 @@
 		timePickerMinutes: 'minutes',
 	},
 	de: {
-		timePickerHours: 'hours',
-		timePickerTimeSeparator: 'h',
-		timePickerMinutes: 'minutes',
+		timePickerHours: 'Stunden',
+		timePickerTimeSeparator: 'Std.',
+		timePickerMinutes: 'Minuten',
 	},
 	fr: {
 		timePickerHours: 'heures',
@@ -20,28 +20,33 @@
 		timePickerMinutes: 'minutes',
 	},
 	it: {
-		timePickerHours: 'hours',
+		timePickerHours: 'ore',
 		timePickerTimeSeparator: 'h',
-		timePickerMinutes: 'minutes',
+		timePickerMinutes: 'minuti',
 	},
 	nl: {
-		timePickerHours: 'hours',
+		timePickerHours: 'uur',
 		timePickerTimeSeparator: 'h',
-		timePickerMinutes: 'minutes',
+		timePickerMinutes: 'minuten',
 	},
 	'nl-BE': {
+		timePickerHours: 'uur',
+		timePickerTimeSeparator: 'h',
+		timePickerMinutes: 'minuten',
+	},
+	'en-US': {
 		timePickerHours: 'hours',
 		timePickerTimeSeparator: 'h',
 		timePickerMinutes: 'minutes',
 	},
 	es: {
-		timePickerHours: 'hours',
+		timePickerHours: 'horas',
 		timePickerTimeSeparator: 'h',
-		timePickerMinutes: 'minutes',
+		timePickerMinutes: 'minutos',
 	},
 	pt: {
-		timePickerHours: 'hours',
+		timePickerHours: 'horas',
 		timePickerTimeSeparator: 'h',
-		timePickerMinutes: 'minutes',
+		timePickerMinutes: 'minutos',
 	},
 };

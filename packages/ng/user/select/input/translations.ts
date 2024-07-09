@@ -16,14 +16,18 @@
 		me: 'Moi :',
 	},
 	it: {
-		users: 'users',
-		me: 'Me:',
+		users: 'utenti',
+		me: 'Io:',
 	},
 	nl: {
-		users: 'users',
-		me: 'Me:',
+		users: 'gebruikers',
+		me: 'Ik:',
 	},
 	'nl-BE': {
+		users: 'gebruikers',
+		me: 'Ik:',
+	},
+	'en-US': {
 		users: 'users',
 		me: 'Me:',
 	},
@@ -32,7 +36,7 @@
 		me: 'Yo :',
 	},
 	pt: {
-		users: 'users',
-		me: 'Me:',
+		users: 'utilizadores',
+		me: 'Eu:',
 	},
 };

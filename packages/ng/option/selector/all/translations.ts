@@ -16,14 +16,18 @@
 		deselect: 'Tout déselectionner',
 	},
 	it: {
-		select: 'Select all',
-		deselect: 'Deselect all',
+		select: 'Seleziona tutti',
+		deselect: 'Deselezionare tutti',
 	},
 	nl: {
-		select: 'Select all',
-		deselect: 'Deselect all',
+		select: 'Alles selecteren',
+		deselect: 'Alles deselecteren',
 	},
 	'nl-BE': {
+		select: 'Alles selecteren',
+		deselect: 'Alles deselecteren',
+	},
+	'en-US': {
 		select: 'Select all',
 		deselect: 'Deselect all',
 	},

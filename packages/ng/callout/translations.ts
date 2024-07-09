@@ -3,7 +3,7 @@
 		close: 'Close',
 	},
 	de: {
-		close: 'Close',
+		close: 'Schließen',
 	},
 	fr: {
 		close: 'Fermer',
@@ -12,18 +12,21 @@
 		close: 'Fermer',
 	},
 	it: {
-		close: 'Close',
+		close: 'Chiudere',
 	},
 	nl: {
-		close: 'Close',
+		close: 'Sluiten',
 	},
 	'nl-BE': {
+		close: 'Sluiten',
+	},
+	'en-US': {
 		close: 'Close',
 	},
 	es: {
 		close: 'Cerrar',
 	},
 	pt: {
-		close: 'Close',
+		close: 'Fechar',
 	},
 };

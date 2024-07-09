@@ -12,12 +12,15 @@
 		close: 'Fermer',
 	},
 	it: {
-		close: 'Close',
+		close: 'Chiudere',
 	},
 	nl: {
-		close: 'Close',
+		close: 'Sluiten',
 	},
 	'nl-BE': {
+		close: 'Sluiten',
+	},
+	'en-US': {
 		close: 'Close',
 	},
 	es: {

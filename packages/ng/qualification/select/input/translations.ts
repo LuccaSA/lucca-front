@@ -3,7 +3,7 @@
 		qualifications: 'qualifications',
 	},
 	de: {
-		qualifications: 'qualifications',
+		qualifications: 'Qualifikationen',
 	},
 	fr: {
 		qualifications: 'qualifications',
@@ -12,18 +12,21 @@
 		qualifications: 'qualifications',
 	},
 	it: {
-		qualifications: 'qualifications',
+		qualifications: 'qualifiche',
 	},
 	nl: {
-		qualifications: 'qualifications',
+		qualifications: 'kwalificaties',
 	},
 	'nl-BE': {
+		qualifications: 'kwalificaties',
+	},
+	'en-US': {
 		qualifications: 'qualifications',
 	},
 	es: {
 		qualifications: 'calificaciones',
 	},
 	pt: {
-		qualifications: 'qualifications',
+		qualifications: 'qualificações',
 	},
 };

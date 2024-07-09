@@ -3,7 +3,7 @@
 		departments: 'departments',
 	},
 	de: {
-		departments: 'departments',
+		departments: 'Abteilungen',
 	},
 	fr: {
 		departments: 'départements',
@@ -12,18 +12,21 @@
 		departments: 'départements',
 	},
 	it: {
-		departments: 'departments',
+		departments: 'reparti',
 	},
 	nl: {
-		departments: 'departments',
+		departments: 'afdelingen',
 	},
 	'nl-BE': {
+		departments: 'afdelingen',
+	},
+	'en-US': {
 		departments: 'departments',
 	},
 	es: {
 		departments: 'departamentos',
 	},
 	pt: {
-		departments: 'departments',
+		departments: 'departamentos',
 	},
 };

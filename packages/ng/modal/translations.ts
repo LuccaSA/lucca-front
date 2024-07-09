@@ -21,15 +21,20 @@
 	},
 	it: {
 		submit: 'Ok',
-		cancel: 'Cancel',
-		close: 'Close',
+		cancel: 'Annullamento',
+		close: 'Chiudere',
 	},
 	nl: {
-		submit: 'Ok',
-		cancel: 'Cancel',
-		close: 'Close',
+		submit: 'Oké',
+		cancel: 'Annuleren',
+		close: 'Sluiten',
 	},
 	'nl-BE': {
+		submit: 'Oké',
+		cancel: 'Annuleren',
+		close: 'Sluiten',
+	},
+	'en-US': {
 		submit: 'Ok',
 		cancel: 'Cancel',
 		close: 'Close',
