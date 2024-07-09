@@ -8,9 +8,6 @@
 	fr: {
 		me: 'Moi :',
 	},
-	'fr-CH': {
-		me: 'Moi :',
-	},
 	it: {
 		me: 'Io:',
 	},

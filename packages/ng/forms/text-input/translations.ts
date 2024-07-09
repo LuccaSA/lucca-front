@@ -11,10 +11,6 @@
 		clear: 'Vider ce champ',
 		togglePasswordVisibility: 'Afficher le mot de passe',
 	},
-	'fr-CH': {
-		clear: 'Vider ce champ',
-		togglePasswordVisibility: 'Afficher le mot de passe',
-	},
 	it: {
 		clear: 'Svuotare questo campo',
 		togglePasswordVisibility: 'Visualizzazione della password',

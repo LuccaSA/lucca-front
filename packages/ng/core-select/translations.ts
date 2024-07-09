@@ -8,9 +8,6 @@
 	fr: {
 		addOption: 'Ajouter une option',
 	},
-	'fr-CH': {
-		addOption: 'Ajouter une option',
-	},
 	it: {
 		addOption: "Aggiungere un'opzione",
 	},

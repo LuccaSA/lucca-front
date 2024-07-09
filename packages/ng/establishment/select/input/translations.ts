@@ -8,9 +8,6 @@
 	fr: {
 		establishments: 'établissements',
 	},
-	'fr-CH': {
-		establishments: 'établissements',
-	},
 	it: {
 		establishments: 'stabilimenti',
 	},

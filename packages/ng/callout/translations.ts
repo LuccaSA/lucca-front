@@ -8,9 +8,6 @@
 	fr: {
 		close: 'Fermer',
 	},
-	'fr-CH': {
-		close: 'Fermer',
-	},
 	it: {
 		close: 'Chiudere',
 	},

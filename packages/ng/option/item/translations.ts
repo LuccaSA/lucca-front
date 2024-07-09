@@ -11,10 +11,6 @@
 		parentOnly: 'Seulement le parent',
 		childrenOnly: 'Seulement les enfants',
 	},
-	'fr-CH': {
-		parentOnly: 'Seulement le parent',
-		childrenOnly: 'Seulement les enfants',
-	},
 	it: {
 		parentOnly: 'Solo il genitore',
 		childrenOnly: 'Solo bambini',

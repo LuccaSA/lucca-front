@@ -17,12 +17,6 @@
 		showResultsDetails: 'Voir le détail',
 		removeOption: "Supprimer l'option",
 	},
-	'fr-CH': {
-		otherResult: 'autre résultat',
-		otherResults: 'autres résultats',
-		showResultsDetails: 'Voir le détail',
-		removeOption: "Supprimer l'option",
-	},
 	it: {
 		otherResult: 'altro risultato',
 		otherResults: 'altri risultati',

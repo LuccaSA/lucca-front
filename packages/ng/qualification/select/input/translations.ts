@@ -8,9 +8,6 @@
 	fr: {
 		qualifications: 'qualifications',
 	},
-	'fr-CH': {
-		qualifications: 'qualifications',
-	},
 	it: {
 		qualifications: 'qualifiche',
 	},

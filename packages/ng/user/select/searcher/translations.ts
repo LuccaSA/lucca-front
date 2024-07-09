@@ -8,9 +8,6 @@
 	fr: {
 		includeFormerEmployees: 'Inclure les salariés partis',
 	},
-	'fr-CH': {
-		includeFormerEmployees: 'Inclure les salariés partis',
-	},
 	it: {
 		includeFormerEmployees: 'Includere i dipendenti che hanno lasciato',
 	},

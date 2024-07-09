@@ -8,9 +8,6 @@
 	fr: {
 		clear: 'Vider ce champ',
 	},
-	'fr-CH': {
-		clear: 'Vider ce champ',
-	},
 	it: {
 		clear: 'Svuotare questo campo',
 	},

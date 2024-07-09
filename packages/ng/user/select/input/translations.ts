@@ -11,10 +11,6 @@
 		users: 'utilisateurs',
 		me: 'Moi :',
 	},
-	'fr-CH': {
-		users: 'utilisateurs',
-		me: 'Moi :',
-	},
 	it: {
 		users: 'utenti',
 		me: 'Io:',

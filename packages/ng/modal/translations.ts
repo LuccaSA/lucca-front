@@ -14,11 +14,6 @@
 		cancel: 'Annuler',
 		close: 'Fermer',
 	},
-	'fr-CH': {
-		submit: 'Ok',
-		cancel: 'Annuler',
-		close: 'Fermer',
-	},
 	it: {
 		submit: 'Ok',
 		cancel: 'Annullamento',

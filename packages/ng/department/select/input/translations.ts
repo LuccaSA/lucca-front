@@ -8,9 +8,6 @@
 	fr: {
 		departments: 'départements',
 	},
-	'fr-CH': {
-		departments: 'départements',
-	},
 	it: {
 		departments: 'reparti',
 	},

@@ -11,10 +11,6 @@
 		placeholderDescription: 'Aucun résultat pour votre recherche',
 		placeholderAction: 'Vider la recherche',
 	},
-	'fr-CH': {
-		placeholderDescription: 'Aucun résultat pour votre recherche',
-		placeholderAction: 'Vider la recherche',
-	},
 	it: {
 		placeholderDescription: 'Nessun risultato per la ricerca',
 		placeholderAction: 'Ricerca vuota',

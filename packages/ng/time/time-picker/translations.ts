@@ -14,11 +14,6 @@
 		timePickerTimeSeparator: ':',
 		timePickerMinutes: 'minutes',
 	},
-	'fr-CH': {
-		timePickerHours: 'heures',
-		timePickerTimeSeparator: ':',
-		timePickerMinutes: 'minutes',
-	},
 	it: {
 		timePickerHours: 'ore',
 		timePickerTimeSeparator: ':',

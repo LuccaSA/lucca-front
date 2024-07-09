@@ -20,13 +20,6 @@
 		formatMonth: 'MM/Y',
 		formatYear: 'Y',
 	},
-	'fr-CH': {
-		placeholderDay: 'JJ/MM/AAAA',
-		placeholderMonth: 'MM/AAAA',
-		placeholderYear: 'AAAA',
-		formatMonth: 'MM/Y',
-		formatYear: 'Y',
-	},
 	it: {
 		placeholderDay: 'GG/MM/AAAA',
 		placeholderMonth: 'MM/AAAA',

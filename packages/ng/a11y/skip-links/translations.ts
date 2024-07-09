@@ -17,12 +17,6 @@
 		Goto_Nav_Navside: 'Aller à la navigation interne',
 		Goto_Content: 'Aller au contenu',
 	},
-	'fr-CH': {
-		Goto: 'Accès rapides',
-		Goto_Nav_Banner: 'Aller à la navigation principale',
-		Goto_Nav_Navside: 'Aller à la navigation interne',
-		Goto_Content: 'Aller au contenu',
-	},
 	it: {
 		Goto: 'Accesso rapido',
 		Goto_Nav_Banner: 'Vai alla navigazione principale',

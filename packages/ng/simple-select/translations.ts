@@ -20,13 +20,6 @@
 		emptyResults: 'Aucun résultat pour votre recherche',
 		loading: 'Chargement en cours...',
 	},
-	'fr-CH': {
-		placeholder: 'Sélectionnez une option',
-		clear: 'Effacer',
-		clearSearch: 'Vider la recherche',
-		emptyResults: 'Aucun résultat pour votre recherche',
-		loading: 'Chargement en cours...',
-	},
 	it: {
 		placeholder: "Selezionare un'opzione",
 		clear: 'Cancellare',

@@ -11,10 +11,6 @@
 		select: 'Tout sélectionner',
 		deselect: 'Tout déselectionner',
 	},
-	'fr-CH': {
-		select: 'Tout sélectionner',
-		deselect: 'Tout déselectionner',
-	},
 	it: {
 		select: 'Seleziona tutti',
 		deselect: 'Deselezionare tutti',

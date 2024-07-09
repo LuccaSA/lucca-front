@@ -8,9 +8,6 @@
 	fr: {
 		counter: 'Votre publication fait {{current}} caractères de long. {{max}} caractères maximum sont autorisés.',
 	},
-	'fr-CH': {
-		counter: 'Votre publication fait {{current}} caractères de long. {{max}} caractères maximum sont autorisés.',
-	},
 	it: {
 		counter: '{{current}} {{max}} La vostra pubblicazione è lunga un numero massimo di caratteri.',
 	},
