@@ -1,5 +1,5 @@
 import { InjectionToken } from '@angular/core';
-import { ILuTranslation } from '@lucca-front/ng/core';
+import { LuTranslation } from '@lucca-front/ng/core';
 import { Translations } from './translations';
 
 export const LU_DATE_SELECT_INPUT_TRANSLATIONS = new InjectionToken('LuDateSelectInputtranslations', {
@@ -15,4 +15,4 @@ export interface ILuDateSelectInputLabel {
 	formatYear: string;
 }
 
-export const luDateSelectInputTranslations: ILuTranslation<ILuDateSelectInputLabel> = Translations;
+export const luDateSelectInputTranslations: LuTranslation<ILuDateSelectInputLabel> = Translations;

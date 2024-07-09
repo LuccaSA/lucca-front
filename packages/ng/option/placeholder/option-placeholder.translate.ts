@@ -1,5 +1,5 @@
 import { InjectionToken } from '@angular/core';
-import { ILuTranslation } from '@lucca-front/ng/core';
+import { LuTranslation } from '@lucca-front/ng/core';
 import { Translations } from './translations';
 
 export const LU_OPTION_PLACEHOLDER_TRANSLATIONS = new InjectionToken('LuOptionPlaceholderTranslations', {
@@ -11,4 +11,4 @@ export interface ILuOptionPlaceholderLabel {
 	placeholderAction: string;
 }
 
-export const luOptionPlaceholderTranslations: ILuTranslation<ILuOptionPlaceholderLabel> = Translations;
+export const luOptionPlaceholderTranslations: LuTranslation<ILuOptionPlaceholderLabel> = Translations;

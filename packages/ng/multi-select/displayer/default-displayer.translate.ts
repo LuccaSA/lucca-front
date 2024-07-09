@@ -1,5 +1,5 @@
 import { InjectionToken } from '@angular/core';
-import { ILuTranslation } from '@lucca-front/ng/core';
+import { LuTranslation } from '@lucca-front/ng/core';
 import { Translations } from './translations';
 
 export const LU_MULTI_SELECT_DISPLAYER_TRANSLATIONS = new InjectionToken('LuMultiSelectDisplayerTranslations', {
@@ -13,4 +13,4 @@ export interface ILuMultiSelectDisplayerLabel {
 	removeOption: string;
 }
 
-export const luMultiSelectDisplayerTranslations: ILuTranslation<ILuMultiSelectDisplayerLabel> = Translations;
+export const luMultiSelectDisplayerTranslations: LuTranslation<ILuMultiSelectDisplayerLabel> = Translations;

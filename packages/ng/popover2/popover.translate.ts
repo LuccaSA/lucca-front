@@ -1,5 +1,5 @@
 import { InjectionToken } from '@angular/core';
-import { ILuTranslation } from '@lucca-front/ng/core';
+import { LuTranslation } from '@lucca-front/ng/core';
 import { Translations } from './translations';
 
 export const LU_POPOVER2_TRANSLATIONS = new InjectionToken('LuPopover2Translations', {
@@ -10,4 +10,4 @@ export interface ILuPopover2Label {
 	close: string;
 }
 
-export const luPopoverTranslations: ILuTranslation<ILuPopover2Label> = Translations;
+export const luPopoverTranslations: LuTranslation<ILuPopover2Label> = Translations;

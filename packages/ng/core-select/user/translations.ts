@@ -12,12 +12,15 @@
 		me: 'Moi :',
 	},
 	it: {
-		me: 'Me:',
+		me: 'Io:',
 	},
 	nl: {
-		me: 'Me:',
+		me: 'Ik:',
 	},
 	'nl-BE': {
+		me: 'Ik:',
+	},
+	'en-US': {
 		me: 'Me:',
 	},
 	es: {

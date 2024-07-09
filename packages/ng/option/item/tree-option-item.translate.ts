@@ -1,5 +1,5 @@
 import { InjectionToken } from '@angular/core';
-import { ILuTranslation } from '@lucca-front/ng/core';
+import { LuTranslation } from '@lucca-front/ng/core';
 import { Translations } from './translations';
 
 export const LU_TREE_OPTION_ITEM_TRANSLATIONS = new InjectionToken('LuTreeOptionItemTranslations', {
@@ -11,4 +11,4 @@ export interface ILuTreeOptionItemLabel {
 	childrenOnly: string;
 }
 
-export const luTreeOptionItemTranslations: ILuTranslation<ILuTreeOptionItemLabel> = Translations;
+export const luTreeOptionItemTranslations: LuTranslation<ILuTreeOptionItemLabel> = Translations;

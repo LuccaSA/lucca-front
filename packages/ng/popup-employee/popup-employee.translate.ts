@@ -1,5 +1,5 @@
 import { InjectionToken } from '@angular/core';
-import { ILuTranslation } from '@lucca-front/ng/core';
+import { LuTranslation } from '@lucca-front/ng/core';
 import { Translations } from './translations';
 
 export const LU_POPUP_EMPLOYEE_TRANSLATIONS = new InjectionToken('LuPopupEmployeeTranslations', {
@@ -20,4 +20,4 @@ export interface LuPopupEmployeeTranslations {
 	EMPLOYEE_CARD_PANEL_UNTIL_MORNING_DATE_LABEL: string;
 }
 
-export const luPopupEmployeeTranslations: ILuTranslation<LuPopupEmployeeTranslations> = Translations;
+export const luPopupEmployeeTranslations: LuTranslation<LuPopupEmployeeTranslations> = Translations;

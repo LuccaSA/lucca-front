@@ -1,6 +1,6 @@
 import { InjectionToken } from '@angular/core';
-import { ILuTranslation } from '@lucca-front/ng/core';
-import { ALuModalRef as ALuSidepanelRef, ILuModalContent, ILuModalLabel, ILuModalRef, luDefaultSidepanelConfig, LuModalConfig, luModalTranslations, LU_MODAL_DATA } from '@lucca-front/ng/modal';
+import { LuTranslation } from '@lucca-front/ng/core';
+import { ALuModalRef as ALuSidepanelRef, ILuModalContent, ILuModalLabel, ILuModalRef, LU_MODAL_DATA, LuModalConfig, luDefaultSidepanelConfig, luModalTranslations } from '@lucca-front/ng/modal';
 
 /**
  * For backward compatibility, we re-export modal tokens as sidepanel tokens.
@@ -34,7 +34,7 @@ export type ILuSidepanelLabel = ILuModalLabel;
 /**
  * @deprecated Use luModalTranslations from @lucca-front/ng/modal instead.
  */
-export const luSidepanelTranslations: ILuTranslation<ILuSidepanelLabel> = luModalTranslations;
+export const luSidepanelTranslations: LuTranslation<ILuSidepanelLabel> = luModalTranslations;
 
 /**
  * @deprecated Use LuModalConfig from @lucca-front/ng/modal instead.

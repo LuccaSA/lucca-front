@@ -1,5 +1,5 @@
 import { InjectionToken } from '@angular/core';
-import { ILuTranslation } from '@lucca-front/ng/core';
+import { LuTranslation } from '@lucca-front/ng/core';
 import { Translations } from './translations';
 
 export const LU_CALLOUT_TRANSLATIONS = new InjectionToken('LuCalloutTranslations', {
@@ -10,4 +10,4 @@ export interface LuCalloutLabel {
 	close: string;
 }
 
-export const luCalloutTranslations: ILuTranslation<LuCalloutLabel> = Translations;
+export const luCalloutTranslations: LuTranslation<LuCalloutLabel> = Translations;

@@ -1,5 +1,5 @@
 import { InjectionToken } from '@angular/core';
-import { ILuTranslation } from '@lucca-front/ng/core';
+import { LuTranslation } from '@lucca-front/ng/core';
 import { Translations } from './translations';
 
 export const LU_TOAST_TRANSLATIONS = new InjectionToken('LuToastTranslations', {
@@ -10,4 +10,4 @@ export interface ILuToastLabel {
 	close: string;
 }
 
-export const luToastTranslations: ILuTranslation<ILuToastLabel> = Translations;
+export const luToastTranslations: LuTranslation<ILuToastLabel> = Translations;

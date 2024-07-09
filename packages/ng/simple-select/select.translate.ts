@@ -1,5 +1,5 @@
 import { InjectionToken } from '@angular/core';
-import { ILuTranslation } from '@lucca-front/ng/core';
+import { LuTranslation } from '@lucca-front/ng/core';
 import { Translations } from './translations';
 
 export const LU_SIMPLE_SELECT_TRANSLATIONS = new InjectionToken('LuSimpleSelectTranslations', {
@@ -14,4 +14,4 @@ export interface ILuSimpleSelectLabel {
 	loading: string;
 }
 
-export const luSimpleSelectTranslations: ILuTranslation<ILuSimpleSelectLabel> = Translations;
+export const luSimpleSelectTranslations: LuTranslation<ILuSimpleSelectLabel> = Translations;

@@ -1,5 +1,5 @@
 import { InjectionToken } from '@angular/core';
-import { ILuTranslation } from '@lucca-front/ng/core';
+import { LuTranslation } from '@lucca-front/ng/core';
 import { Translations } from './translations';
 
 export const LU_OPTION_SELECT_ALL_TRANSLATIONS = new InjectionToken('LuOptionSelectAllTranslations', {
@@ -11,4 +11,4 @@ export interface ILuOptionSelectAllLabel {
 	deselect: string;
 }
 
-export const luOptionSelectAllTranslations: ILuTranslation<ILuOptionSelectAllLabel> = Translations;
+export const luOptionSelectAllTranslations: LuTranslation<ILuOptionSelectAllLabel> = Translations;

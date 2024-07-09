@@ -1,8 +1,8 @@
 import { InjectionToken } from '@angular/core';
-import { ILuTranslation } from '@lucca-front/ng/core';
+import { LuTranslation } from '@lucca-front/ng/core';
 import { Translations } from './translations';
 
-export const LU_SKIP_LINKS_TRANSLATIONS = new InjectionToken<ILuTranslation<ILuSkipLinksLabel>>('LuModalTranslations', {
+export const LU_SKIP_LINKS_TRANSLATIONS = new InjectionToken<LuTranslation<ILuSkipLinksLabel>>('LuModalTranslations', {
 	factory: () => luSkipLinksTranslations,
 });
 
@@ -19,4 +19,4 @@ export abstract class ALuSkipLinksLabel {
 	Goto_Content: string;
 }
 
-export const luSkipLinksTranslations: ILuTranslation<ILuSkipLinksLabel> = Translations;
+export const luSkipLinksTranslations: LuTranslation<ILuSkipLinksLabel> = Translations;

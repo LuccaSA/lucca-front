@@ -1,5 +1,5 @@
 import { InjectionToken } from '@angular/core';
-import { ILuTranslation } from '@lucca-front/ng/core';
+import { LuTranslation } from '@lucca-front/ng/core';
 import { Translations } from './translations';
 
 export const LU_NUMBERFORMATFIELD_TRANSLATIONS = new InjectionToken('LuNumberFormatFieldTranslations', {
@@ -10,4 +10,4 @@ export interface LuNumberFormatFieldLabel {
 	clear: string;
 }
 
-export const luNumberFormatFieldTranslations: ILuTranslation<LuNumberFormatFieldLabel> = Translations;
+export const luNumberFormatFieldTranslations: LuTranslation<LuNumberFormatFieldLabel> = Translations;

@@ -1,5 +1,5 @@
 import { InjectionToken } from '@angular/core';
-import { ILuTranslation } from '../../core/translate';
+import { LuTranslation } from '../../core/translate';
 import { Translations } from './translations';
 
 export const LU_DURATION_PICKER_TRANSLATIONS = new InjectionToken('LuDurationPickerTranslations', {
@@ -12,4 +12,4 @@ export type DurationPickerTranslations = {
 	timePickerMinutes: string;
 };
 
-export const luDurationPickerTranslations: ILuTranslation<DurationPickerTranslations> = Translations;
+export const luDurationPickerTranslations: LuTranslation<DurationPickerTranslations> = Translations;

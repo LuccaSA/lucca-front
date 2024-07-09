@@ -1,5 +1,5 @@
 import { InjectionToken } from '@angular/core';
-import { ILuTranslation } from '@lucca-front/ng/core';
+import { LuTranslation } from '@lucca-front/ng/core';
 import { Translations } from './translations';
 
 export const LU_MODAL_TRANSLATIONS = new InjectionToken('LuModalTranslations', {
@@ -12,4 +12,4 @@ export interface ILuModalLabel {
 	close: string;
 }
 
-export const luModalTranslations: ILuTranslation<ILuModalLabel> = Translations;
+export const luModalTranslations: LuTranslation<ILuModalLabel> = Translations;
