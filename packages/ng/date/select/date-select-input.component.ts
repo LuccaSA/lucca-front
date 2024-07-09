@@ -53,7 +53,7 @@ export class LuDateSelectInputComponent<D> extends ALuSelectInputComponent<D> im
 				return this._intl.formatMonth;
 			case ELuDateGranularity.day:
 			default:
-				return this._intl.formatDay;
+				return 'shortDate';
 		}
 	}
 	private _intl = getIntl(LU_DATE_SELECT_INPUT_TRANSLATIONS);
