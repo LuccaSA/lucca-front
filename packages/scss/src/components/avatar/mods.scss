@@ -1,3 +1,5 @@
+@use '@lucca-front/icons/src/commons/utils/icon';
+
 @mixin XL {
 	--components-avatar-size: 4rem;
 	--components-avatar-fontSize: var(--sizes-XL-fontSize);
@@ -20,4 +22,24 @@
 	--components-avatar-fontSize: var(--sizes-XS-fontSize);
 	--components-avatar-border: 1px;
 	--components-avatarWrapper-overlap: var(--pr-t-spacings-50);
+}
+
+@mixin placeholder {
+	.avatar-content {
+		background-color: var(--palettes-neutral-200) !important;
+
+		&::before {
+			@include icon.generate('people_person');
+
+			color: var(--palettes-neutral-600);
+			font-weight: 400;
+			font-size: var(--components-user-picture-placeholder, var(--components-userPicture-M-placeholder));
+		}
+	}
+
+	// .userPicture-initials is deprecated
+	.avatar-content-initials,
+	.userPicture-initials {
+		display: none;
+	}
 }

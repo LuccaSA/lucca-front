@@ -13,10 +13,20 @@
 		<section class="userPopover-details">
 			<div [ngSwitch]="userPictureDisplay$ | async" class="userPopover-details-avatar">
 				<ng-container *ngSwitchCase="'img'">
-					<img class="picture" [src]="userPictureHref$ | async" [alt]="(userInitials$ | async)?.initials" (error)="pictureError()" />
+					<img
+						class="user-picture-content"
+						[src]="userPictureHref$ | async"
+						[alt]="(userInitials$ | async)?.initials"
+						(error)="pictureError()"
+					/>
 				</ng-container>
 				<ng-container *ngSwitchCase="'initials'">
-					<div class="picture" *ngIf="userInitials$ | async as initials" style.background-color="hsl({{initials.color}}, 60%, 60%)">
+					<div
+						aria-hidden="true"
+						class="user-picture-content"
+						*ngIf="userInitials$ | async as initials"
+						style.background-color="hsl({{initials.color}}, 60%, 60%)"
+					>
 						<span class="userPicture-initials">{{ initials.initials }}</span>
 					</div>
 				</ng-container>

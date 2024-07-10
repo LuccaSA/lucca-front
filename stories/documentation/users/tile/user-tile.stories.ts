@@ -15,7 +15,7 @@ class UserTileStory {
 }
 
 export default {
-	title: 'Documentation/Users/Tile/Basic',
+	title: 'Documentation/Users/Tile/Angular/Basic',
 	component: UserTileStory,
 	decorators: [
 		applicationConfig({

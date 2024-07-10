@@ -1,0 +1,50 @@
+@use 'exports' as *;
+
+.userTile {
+	@include vars;
+	@include component;
+
+	&.mod-wordBreak {
+		@include wordBreak;
+	}
+
+	&.mod-nameOnly {
+		@include nameOnly;
+	}
+
+	&.mod-vertical {
+		@include vertical;
+	}
+
+	&.mod-XXS {
+		@include XXS;
+	}
+
+	&.mod-XS {
+		@include XS;
+	}
+
+	&.mod-S {
+		@include S;
+	}
+
+	&.mod-L {
+		@include L;
+	}
+
+	&.mod-XL {
+		@include XL;
+	}
+
+	&.mod-XXL {
+		@include XXL;
+	}
+
+	&.mod-XXXL {
+		@include XXXL;
+	}
+
+	&.mod-border {
+		@include border;
+	}
+}

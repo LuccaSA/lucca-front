@@ -4,7 +4,7 @@ import { Meta, StoryFn } from '@storybook/angular';
 import { squidwards } from '../user.mocks';
 
 @Component({
-	selector: 'avatar-stories',
+	selector: 'avatarWrapper-stories',
 	standalone: true,
 	imports: [LuUserPictureModule],
 	template: `
@@ -127,15 +127,15 @@ import { squidwards } from '../user.mocks';
 		</ul>
 	`,
 })
-class AvatarStory {
+class AvatarWrapperStory {
 	@Input() @Optional() sizes: string;
 
 	user = squidwards;
 }
 
 export default {
-	title: 'Documentation/Users/Avatar/Basic',
-	component: AvatarStory,
+	title: 'Documentation/Users/Avatar/Wrapper',
+	component: AvatarWrapperStory,
 	argTypes: {
 		sizes: {
 			options: ['mod-XS', 'mod-S', '', 'mod-L', 'mod-XL'],
@@ -146,15 +146,15 @@ export default {
 	},
 } as Meta;
 
-const template: StoryFn<AvatarStory> = (args: AvatarStory) => ({
+const template: StoryFn<AvatarWrapperStory> = (args: AvatarWrapperStory) => ({
 	props: args,
 });
 
-export const Basic = template.bind({});
-Basic.args = {
+export const Wrapper = template.bind({});
+Wrapper.args = {
 	sizes: '',
 };
 
-Basic.parameters = {
+Wrapper.parameters = {
 	controls: { include: ['sizes'] },
 };

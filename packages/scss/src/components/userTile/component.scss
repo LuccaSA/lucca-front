@@ -1,0 +1,52 @@
+@mixin component($atRoot: 'without: rule') {
+	display: flex;
+	align-items: center;
+	padding: var(--pr-t-spacings-100);
+	gap: var(--pr-t-spacings-100);
+
+	@at-root ($atRoot) {
+		.userTile-content-title {
+			font-size: var(--sizes-M-fontSize);
+			line-height: var(--sizes-M-lineHeight);
+			font-weight: 600;
+			margin: 0;
+		}
+
+		.userTile-content-label {
+			font-size: var(--sizes-S-fontSize);
+			line-height: var(--sizes-XS-lineHeight);
+			color: var(--palettes-neutral-600);
+		}
+
+		.userTile-content-footnote {
+			font-size: var(--sizes-S-fontSize);
+			line-height: var(--sizes-S-lineHeight);
+		}
+
+		.userTile-picture {
+			display: inline-block;
+			vertical-align: middle;
+		}
+
+		// .picture is deprecated
+		.userTile-picture-content,
+		.picture {
+			align-items: center;
+			aspect-ratio: 1;
+			border-radius: var(--commons-borderRadius-full);
+			background-color: var(--palettes-neutral-50);
+			background-position: center;
+			background-size: cover;
+			background-repeat: no-repeat;
+			color: var(--colors-white-color);
+			display: flex;
+			font-size: var(--components-user-picture-font-size, var(--components-userPicture-M-fontSize));
+			font-weight: 600;
+			line-height: 1;
+			justify-content: center;
+			object-fit: cover;
+			object-position: center;
+			width: var(--components-user-picture-image-size, var(--components-userPicture-M-image));
+		}
+	}
+}

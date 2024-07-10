@@ -3,6 +3,10 @@
 .avatar {
 	@include vars;
 	@include component;
+
+	&.mod-placeholder {
+		@include placeholder;
+	}
 }
 
 .avatarWrapper {

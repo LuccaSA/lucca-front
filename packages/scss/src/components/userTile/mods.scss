@@ -1,0 +1,79 @@
+@mixin wordBreak {
+	&.mod-wordBreak {
+		overflow-wrap: break-word;
+	}
+}
+
+@mixin nameOnly {
+	&.mod-nameOnly {
+		.userTile-content-label,
+		.userTile-content-footnote {
+			display: none;
+		}
+	}
+}
+
+@mixin vertical {
+	&.mod-vertical {
+		flex-direction: column;
+
+		// TODO
+		lu-user-picture {
+			margin-right: 0;
+			margin-bottom: 0.8em;
+		}
+
+		// TODO
+		.userTile-content-info {
+			text-align: center;
+		}
+	}
+}
+
+@mixin XXS {
+	--components-user-picture-image-size: var(--components-userPicture-XXS-image);
+	--components-user-picture-font-size: var(--components-userPicture-XXS-fontSize);
+	--components-user-picture-placeholder: var(--components-userPicture-XXS-placeholder);
+}
+
+@mixin XS {
+	--components-user-picture-image-size: var(--components-userPicture-XS-image);
+	--components-user-picture-font-size: var(--components-userPicture-XS-fontSize);
+	--components-user-picture-placeholder: var(--components-userPicture-XS-placeholder);
+}
+
+@mixin S {
+	--components-user-picture-image-size: var(--components-userPicture-S-image);
+	--components-user-picture-font-size: var(--components-userPicture-S-fontSize);
+	--components-user-picture-placeholder: var(--components-userPicture-S-placeholder);
+}
+
+@mixin L {
+	--components-user-picture-image-size: var(--components-userPicture-L-image);
+	--components-user-picture-font-size: var(--components-userPicture-L-fontSize);
+	--components-user-picture-placeholder: var(--components-userPicture-L-placeholder);
+}
+
+@mixin XL {
+	--components-user-picture-image-size: var(--components-userPicture-XL-image);
+	--components-user-picture-font-size: var(--components-userPicture-XL-fontSize);
+	--components-user-picture-placeholder: var(--components-userPicture-XL-placeholder);
+}
+
+@mixin XXL {
+	--components-user-picture-image-size: var(--components-userPicture-XXL-image);
+	--components-user-picture-font-size: var(--components-userPicture-XXL-fontSize);
+	--components-user-picture-placeholder: var(--components-userPicture-XXL-placeholder);
+}
+
+@mixin XXXL {
+	--components-user-picture-image-size: var(--components-userPicture-XXXL-image);
+	--components-user-picture-font-size: var(--components-userPicture-XXXL-fontSize);
+	--components-user-picture-placeholder: var(--components-userPicture-XXXL-placeholder);
+}
+
+@mixin border {
+	.user-picture {
+		box-shadow: 0 0 0 2px var(--colors-white-color);
+	}
+}

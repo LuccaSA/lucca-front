@@ -4,6 +4,27 @@
 @mixin component($atRoot: 'without: rule') {
 	box-shadow: 0 0 0 var(--components-avatar-border) var(--components-avatar-background);
 	border-radius: var(--commons-borderRadius-full);
+	display: inline-block;
+	vertical-align: middle;
+
+	.avatar-content {
+		align-items: center;
+		aspect-ratio: 1;
+		border-radius: var(--commons-borderRadius-full);
+		background-color: var(--palettes-neutral-50);
+		background-position: center;
+		background-size: cover;
+		background-repeat: no-repeat;
+		color: var(--colors-white-color);
+		display: flex;
+		font-size: var(--components-avatar-fontSize);
+		font-weight: 600;
+		line-height: 1;
+		justify-content: center;
+		object-fit: cover;
+		object-position: center;
+		width: var(--components-avatar-size);
+	}
 
 	@at-root ($atRoot) {
 		.avatarWrapper {

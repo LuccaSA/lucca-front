@@ -3,6 +3,7 @@
 	--components-avatar-border: 2px;
 	--components-avatar-scale: 1;
 	--components-avatar-background: var(--pr-t-elevation-surface-default);
+	--components-avatar-fontSize: var(--sizes-M-fontSize);
 }
 
 @mixin varsWrapper {

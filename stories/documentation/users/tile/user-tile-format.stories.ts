@@ -17,7 +17,7 @@ class UserTileFormatStory {
 }
 
 export default {
-	title: 'Documentation/Users/Tile/Format',
+	title: 'Documentation/Users/Tile/Angular/Format',
 	component: UserTileFormatStory,
 	decorators: [
 		applicationConfig({
