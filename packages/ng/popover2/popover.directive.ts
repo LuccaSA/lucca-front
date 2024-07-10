@@ -141,16 +141,18 @@ export class PopoverDirective {
 	openPopover(disableFocusHandler = false): void {
 		if (!this.opened() && !this.luPopoverDisabled) {
 			this.opened.set(true);
-			this.#overlayRef = this.#overlay.create({
-				positionStrategy: this.#overlay
-					.position()
-					.flexibleConnectedTo(this.#elementRef)
-					.withPositions(this.customPositions || this.#buildPositions()),
-				scrollStrategy: this.#overlay.scrollStrategies.block(),
-				hasBackdrop: this.luPopoverTrigger() === 'click',
-				backdropClass: '',
-				disposeOnNavigation: true,
-			});
+			this.#overlayRef =
+				this.#overlayRef ||
+				this.#overlay.create({
+					positionStrategy: this.#overlay
+						.position()
+						.flexibleConnectedTo(this.#elementRef)
+						.withPositions(this.customPositions || this.#buildPositions()),
+					scrollStrategy: this.#overlay.scrollStrategies.block(),
+					hasBackdrop: this.luPopoverTrigger() === 'click',
+					backdropClass: '',
+					disposeOnNavigation: true,
+				});
 			// Close on backdrop click even if backdrop is invisible
 			this.#overlayRef
 				.backdropClick()
