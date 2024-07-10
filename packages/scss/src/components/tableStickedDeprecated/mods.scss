@@ -62,6 +62,8 @@
 					}
 				}
 
+				// .mod-columnSticky-shadowMask is deprecated
+				&.mod-stickyColumn-shadowMask,
 				&.mod-columnSticky-shadowMask {
 					&::before {
 						width: var(--components-tableFixed-column-sticky-shadow-width);
@@ -75,8 +77,12 @@
 					}
 				}
 
+				// .mod-columnSticky-shadowMask is deprecated
+				&:not(.mod-stickyColumn-shadowMask),
 				&:not(.mod-columnSticky-shadowMask) {
 					&:not(.mod-stickyColumn-shadow) {
+						// .mod-columnSticky-shadowMask is deprecated
+						+ .mod-stickyColumn-shadowMask,
 						+ .mod-columnSticky-shadowMask {
 							&::before {
 								left: auto;
