@@ -14,6 +14,10 @@
 		@include noAvatar;
 	}
 
+	&.mod-answer {
+		@include answer;
+	}
+
 	@include container.max(25rem, $name: 'comment') {
 		@include narrow;
 	}
@@ -24,5 +28,9 @@
 
 	&.mod-compact {
 		@include wrapperCompact;
+	}
+
+	&.mod-chatbox {
+		@include chatBox;
 	}
 }
