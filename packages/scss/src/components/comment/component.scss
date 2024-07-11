@@ -2,8 +2,8 @@
 	container: comment / inline-size;
 	display: flex;
 	flex-direction: column;
-	gap: var(--pr-t-spacings-50);
-	max-width: 40rem;
+	gap: var(--pr-t-spacings-100);
+	max-width: var(--components-comment-max-width);
 
 	@at-root ($atRoot) {
 		.comment-infos {
@@ -43,7 +43,7 @@
 		}
 
 		.comment-content {
-			background: var(--palettes-neutral-50);
+			background: var(--components-comment-background-color, var(--palettes-neutral-50));
 			border-radius: var(--commons-borderRadius-M) var(--commons-borderRadius-L) var(--commons-borderRadius-L);
 			display: flex;
 			flex-direction: column;
