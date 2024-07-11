@@ -39,6 +39,25 @@
 
 	.dialog-inside-footer {
 		@include footer.sticky;
+
+		@supports (background-image: -webkit-named-image(test)) {
+			@keyframes footerVisibility {
+				from {
+					visibility: visible;
+					opacity: 0;
+				}
+				to {
+					visibility: visible;
+					opacity: 1;
+				}
+			}
+
+			visibility: hidden;
+			animation-delay: var(--commons-animations-durations-standard);
+			animation-name: footerVisibility;
+			animation-duration: var(--commons-animations-durations-standard);
+			animation-fill-mode: both;
+		}
 	}
 
 	@at-root ($atRoot) {
