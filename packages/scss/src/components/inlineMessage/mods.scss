@@ -3,8 +3,9 @@
 @mixin S {
 	--components-inlineMessage-fontSize: var(--sizes-XS-fontSize);
 	--components-inlineMessage-lineHeight: var(--sizes-XS-lineHeight);
+	--components-inlineMessage-icon-offset: 1px;
 
-	.lucca-icon {
+	.inlineMessage-content-statusIcon {
 		@include icon.XXS;
 	}
 }

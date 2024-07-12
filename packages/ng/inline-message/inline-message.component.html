@@ -1,9 +1,13 @@
 @if (isStringPortalContent(label)) {
 <p class="inlineMessage-content">
-	<lu-icon class="inlineMessage-content-statusIcon" [icon]="state" *ngIf="state && state !== 'default'" [alt]="state"></lu-icon>{{label}}
+	<span *ngIf="state && state !== 'default'" class="lucca-icon inlineMessage-content-statusIcon" aria-hidden="true"></span>
+	<span class="u-mask">{{state}}</span>
+	{{label}}
 </p>
 } @else {
 <ng-container>
-	<lu-icon class="inlineMessage-content-statusIcon" [icon]="state" *ngIf="state && state !== 'default'" [alt]="state"></lu-icon>{{label}}
+	<span *ngIf="state && state !== 'default'" class="lucca-icon inlineMessage-content-statusIcon" aria-hidden="true"></span>
+	<span class="u-mask">{{state}}</span>
+	<div class="inlineMessage-content">{{label}}</div>
 </ng-container>
 }

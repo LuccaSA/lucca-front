@@ -32,7 +32,7 @@ function getTemplate(args: FieldsetBasicStory): string {
 								<input type="text" id="ID1" class="textField-input-value" aria-labelledby="IDlabel1" aria-describedby="IDmessage1" placeholder="Placeholder" aria-invalid="false" />
 							</div>
 						</div>
-						<div class="inlineMessage" id="IDmessage1"><span aria-hidden="true" class="inlineMessage-content-statusIcon"></span>Helper text</div>
+						<div class="inlineMessage" id="IDmessage1"><span aria-hidden="true" class="lucca-icon inlineMessage-content-statusIcon"></span>Helper text</div>
 					</div>
 				</div>
 				<div class="grid-column" style="--grid-colspanAtMediaMinXXS: 2">
@@ -118,7 +118,7 @@ function getTemplate(args: FieldsetBasicStory): string {
 								<input type="text" id="ID8" class="textField-input-value" aria-labelledby="IDlabel8" aria-describedby="IDmessage8" placeholder="Placeholder" aria-invalid="false" />
 							</div>
 						</div>
-						<div class="inlineMessage" id="IDmessage8"><span aria-hidden="true" class="inlineMessage-content-statusIcon"></span>Helper text</div>
+						<div class="inlineMessage" id="IDmessage8"><span aria-hidden="true" class="lucca-icon inlineMessage-content-statusIcon"></span>Helper text</div>
 					</div>
 				</div>
 				<div class="grid-column" style="--grid-colspanAtMediaMinXXS: 2">

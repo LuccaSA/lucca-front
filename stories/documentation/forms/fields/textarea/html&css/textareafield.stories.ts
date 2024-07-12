@@ -15,7 +15,7 @@ function getTemplate(args: TextareaBasicStory): string {
 				<textarea rows="3" id="ID" class="textField-input-value" aria-labelledby="IDlabel" aria-describedby="IDmessage" placeholder="Placeholder" aria-invalid="false"></textarea>
 			</div>
 		</div>
-		<div class="inlineMessage" id="IDmessage"><span aria-hidden="true" class="inlineMessage-content-statusIcon"></span>Helper text</div>
+		<div class="inlineMessage" id="IDmessage"><span aria-hidden="true" class="lucca-icon inlineMessage-content-statusIcon"></span>Helper text</div>
 	</div>`;
 }
 
