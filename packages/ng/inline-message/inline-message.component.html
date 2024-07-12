@@ -1,1 +1,9 @@
-<lu-icon class="inlineMessage-statusIcon" [icon]="state" *ngIf="state && state !== 'default'" [alt]="state"></lu-icon>{{label}}
+@if (isStringPortalContent(label)) {
+<p class="inlineMessage-content">
+	<lu-icon class="inlineMessage-content-statusIcon" [icon]="state" *ngIf="state && state !== 'default'" [alt]="state"></lu-icon>{{label}}
+</p>
+} @else {
+<ng-container>
+	<lu-icon class="inlineMessage-content-statusIcon" [icon]="state" *ngIf="state && state !== 'default'" [alt]="state"></lu-icon>{{label}}
+</ng-container>
+}

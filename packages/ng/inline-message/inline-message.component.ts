@@ -1,8 +1,8 @@
-import { ChangeDetectionStrategy, Component, inject, Input, OnChanges, ViewEncapsulation } from '@angular/core';
 import { NgIf } from '@angular/common';
-import { InlineMessageState } from './inline-message-state';
-import { LuClass } from '@lucca-front/ng/core';
+import { ChangeDetectionStrategy, Component, inject, Input, OnChanges, ViewEncapsulation } from '@angular/core';
+import { LuClass, PortalContent } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
+import { InlineMessageState } from './inline-message-state';
 
 @Component({
 	selector: 'lu-inline-message',
@@ -21,7 +21,7 @@ export class InlineMessageComponent implements OnChanges {
 	#luClass = inject(LuClass);
 
 	@Input({ required: true })
-	label: string;
+	label: PortalContent;
 
 	@Input()
 	state: InlineMessageState;
@@ -34,5 +34,9 @@ export class InlineMessageComponent implements OnChanges {
 			[`mod-${this.size}`]: true,
 			[`is-${this.state}`]: true,
 		});
+	}
+
+	public isStringPortalContent(message: PortalContent): message is string {
+		return typeof message === 'string';
 	}
 }

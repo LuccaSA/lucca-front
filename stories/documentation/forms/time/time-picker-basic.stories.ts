@@ -84,7 +84,7 @@ function getTemplate(args: timepickerBasicStory): string {
 		</fieldset>
 	</div>
 	<div class="inlineMessage" id="helper">
-		<span aria-hidden="true" class="inlineMessage-statusIcon"></span>
+		<span aria-hidden="true" class="inlineMessage-content-statusIcon"></span>
 		Helper text
 	</div>
 </div>

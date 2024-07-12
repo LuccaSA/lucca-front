@@ -8,9 +8,9 @@ export default {
 } as Meta;
 
 function getTemplate(args: InlineMessageStatesStory): string {
-	return `<div class="inlineMessage is-success"><span aria-hidden="true" class="inlineMessage-statusIcon"></span>Inline message</div>
-<div class="inlineMessage is-warning"><span aria-hidden="true" class="inlineMessage-statusIcon"></span>Inline message</div>
-<div class="inlineMessage is-error"><span aria-hidden="true" class="inlineMessage-statusIcon"></span>Inline message</div>`;
+	return `<div class="inlineMessage is-success"><span aria-hidden="true" class="inlineMessage-content-statusIcon"></span>Inline message</div>
+<div class="inlineMessage is-warning"><span aria-hidden="true" class="inlineMessage-content-statusIcon"></span>Inline message</div>
+<div class="inlineMessage is-error"><span aria-hidden="true" class="inlineMessage-content-statusIcon"></span>Inline message</div>`;
 }
 
 const Template: StoryFn<InlineMessageStatesStory> = (args) => ({

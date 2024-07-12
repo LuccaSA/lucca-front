@@ -15,7 +15,7 @@ function getTemplate(args: TextfieldInvalidStory): string {
 			<input type="text" id="ID" class="textField-input-value" aria-labelledby="IDlabel" aria-describedby="IDmessage" placeholder="Placeholder" aria-invalid="true" />
 		</div>
 	</div>
-	<div class="inlineMessage" id="IDmessage"><span aria-hidden="true" class="inlineMessage-statusIcon"></span>Error message</div>
+	<div class="inlineMessage" id="IDmessage"><span aria-hidden="true" class="inlineMessage-content-statusIcon"></span>Error message</div>
 </div>`;
 }
 
