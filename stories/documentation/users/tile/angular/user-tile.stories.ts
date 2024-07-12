@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { LuUserDisplayModule, LuUserPictureModule, LuUserTileComponent, LuUserTileModule } from '@lucca-front/ng/user';
 import { Meta, StoryFn, applicationConfig } from '@storybook/angular';
-import { bob } from '../user.mocks';
+import { bob } from '../../user.mocks';
 
 @Component({
 	standalone: true,
@@ -15,7 +15,7 @@ class UserTileStory {
 }
 
 export default {
-	title: 'Documentation/Users/Tile/Basic',
+	title: 'Documentation/Users/Tile/Angular/Basic',
 	component: UserTileStory,
 	decorators: [
 		applicationConfig({
