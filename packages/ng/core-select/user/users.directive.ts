@@ -104,7 +104,7 @@ export class LuCoreSelectUsersDirective<T extends LuCoreSelectUser = LuCoreSelec
 			fields: this.#userFields,
 			...filters,
 			...(orderBy ? { orderBy } : {}),
-			...(clue ? { clue: sanitizeClueFilter(clue) } : {}),
+			...(clue ? { clue: clue } : {}),
 			...(operationIds ? { operations: operationIds.join(',') } : {}),
 			...(appInstanceId ? { appInstanceId } : {}),
 			...(enableFormerEmployees ? { formerEmployee: enableFormerEmployees } : {}),
@@ -167,11 +167,4 @@ export class LuCoreSelectUsersDirective<T extends LuCoreSelectUser = LuCoreSelec
 	}
 
 	protected override optionComparer = (a: T, b: T) => a.id === b.id;
-}
-
-function sanitizeClueFilter(clue: string) {
-	return clue
-		.split(' ')
-		.map((c: string) => encodeURIComponent(c))
-		.join(',');
 }
