@@ -65,7 +65,7 @@
 			color: inherit;
 			background-color: transparent;
 			text-align: center;
-			padding: var(--components-timepicker-paddingInput);
+			padding: var(--components-timepicker-paddingInput-inline) var(--components-timepicker-paddingInput-block);
 			box-sizing: content-box;
 			opacity: 0.0001;
 
@@ -82,7 +82,7 @@
 
 		.timePicker-fieldset-group-textfield-display {
 			position: absolute;
-			inset: var(--components-timepicker-paddingInput);
+			inset: var(--components-timepicker-paddingInput-inline) var(--components-timepicker-paddingInput-block);
 			border-radius: var(--commons-borderRadius-M);
 			pointer-events: none;
 			display: grid;
@@ -132,7 +132,7 @@
 		}
 
 		.timePicker-fieldset-meridiem {
-			width: var(--pr-t-spacings-500);
+			width: calc(var(--components-timepicker-input-width) + var(--components-timepicker-paddingInput-block) * 2);
 			position: relative;
 			align-self: stretch;
 			margin-left: calc(var(--pr-t-spacings-50) * -1);
@@ -140,7 +140,7 @@
 			&::after {
 				content: '';
 				position: absolute;
-				inset: var(--components-timepicker-paddingInput);
+				inset: var(--components-timepicker-paddingInput-inline) var(--components-timepicker-paddingInput-block);
 				border-radius: var(--commons-borderRadius-M);
 				display: grid;
 				place-items: center;
