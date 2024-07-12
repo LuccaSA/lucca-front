@@ -1,0 +1,6 @@
+@mixin vars {
+  --components-userTile-title-fontSize: var(--sizes-M-fontSize);
+  --components-userTile-title-lineHeight: var(--sizes-M-lineHeight);
+  --components-userTile-info-fontSize: var(--sizes-S-fontSize);
+  --components-userTile-info-lineHeight: var(--sizes-S-lineHeight);
+}
