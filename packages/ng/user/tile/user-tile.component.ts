@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, inject } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, inject, ViewEncapsulation } from '@angular/core';
 import { LU_DEFAULT_DISPLAY_POLICY, LuDisplayFormat } from '../display/index';
 import { displayPictureFormatRecord } from '../picture/user-picture.component';
 
@@ -18,6 +18,8 @@ export interface LuUserTileUserInput {
 	templateUrl: './user-tile.component.html',
 	styleUrls: ['./user-tile.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
+	host: { class: 'userTile' },
+	encapsulation: ViewEncapsulation.None,
 })
 export class LuUserTileComponent {
 	readonly #defaultFormat = inject(LU_DEFAULT_DISPLAY_POLICY);
