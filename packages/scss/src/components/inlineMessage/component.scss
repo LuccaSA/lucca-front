@@ -1,6 +1,6 @@
 @use '@lucca-front/icons/src/icon/exports' as icon;
 
-@mixin component {
+@mixin component($atRoot: 'without: rule') {
 	display: flex;
 	gap: var(--components-inlineMessage-gap);
 	font-size: var(--components-inlineMessage-fontSize);
@@ -8,10 +8,12 @@
 	color: var(--components-inlineMessage-color);
 	grid-column: 2;
 
-	.lucca-icon {
-		@include icon.XS;
+	@at-root ($atRoot) {
+		.inlineMessage-statusIcon {
+			@include icon.XS;
 
-		color: var(--components-inlineMessage-icon-color);
-		margin-top: 2px;
+			color: var(--components-inlineMessage-icon-color);
+			margin-top: 2px;
+		}
 	}
 }
