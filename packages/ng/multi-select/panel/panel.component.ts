@@ -1,9 +1,9 @@
 import { A11yModule, ActiveDescendantKeyManager } from '@angular/cdk/a11y';
 import { AsyncPipe, NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
-import { AfterViewInit, ChangeDetectionStrategy, Component, QueryList, ViewChildren, inject } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, QueryList, TrackByFunction, ViewChildren, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { PortalDirective, getIntl } from '@lucca-front/ng/core';
-import { SELECT_ID, ɵLuOptionComponent, ɵLuOptionGroupPipe, ɵLuOptionOutletDirective, ɵgetGroupTemplateLocation } from '@lucca-front/ng/core-select';
+import { LuOptionGroup, SELECT_ID, ɵLuOptionComponent, ɵLuOptionGroupPipe, ɵLuOptionOutletDirective, ɵgetGroupTemplateLocation } from '@lucca-front/ng/core-select';
 import { asyncScheduler, filter, map, observeOn, take, takeUntil } from 'rxjs';
 import { debounceTime, switchMap } from 'rxjs/operators';
 import { LuMultiSelectInputComponent } from '../input';
@@ -46,6 +46,11 @@ export class LuMultiSelectPanelComponent<T> implements AfterViewInit {
 	grouping = this.selectInput.grouping;
 	loading$ = this.selectInput.loading$;
 	optionComparer = this.selectInput.optionComparer;
+	optionKey = this.selectInput.optionKey;
+
+	trackOptionsBy: TrackByFunction<T> = (_, option) => this.optionKey(option);
+	trackGroupsBy: TrackByFunction<LuOptionGroup<T, unknown>> = (_, group) => group.key;
+
 	selectedOptions: T[] = this.selectInput.value || [];
 	optionTpl = this.selectInput.optionTpl;
 
