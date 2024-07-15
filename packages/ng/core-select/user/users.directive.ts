@@ -158,9 +158,10 @@ export class LuCoreSelectUsersDirective<T extends LuCoreSelectUser = LuCoreSelec
 			shareReplay({ bufferSize: 1, refCount: true }),
 		);
 
-		const meFilter$ = displayMe$.pipe(switchMap((displayMe) => (displayMe ? me$ : of(null))));
+		const options$ = super.buildOptions();
 
-		return combineLatest([super.buildOptions(), meFilter$]).pipe(
+		return displayMe$.pipe(
+			switchMap((displayMe) => (displayMe ? combineLatest([options$, me$]) : options$.pipe(map((options) => [options, null] as const)))),
 			map(([options, meFilter]) => (meFilter ? [meFilter, ...(options ?? []).filter((o) => o.id !== meFilter.id)] : options)),
 			switchMap((users) => this.#userHomonymsService.handleHomonyms(users, this.displayFormat)),
 		);

@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { ILuApiCollectionResponse } from '@lucca-front/ng/api';
 import { LuDisplayFormat, luUserDisplay } from '@lucca-front/ng/user';
-import { Observable, map, of, startWith, tap } from 'rxjs';
+import { Observable, map, of, tap } from 'rxjs';
 import { LuCoreSelectUser } from './user-option.model';
 
 @Injectable({ providedIn: 'root' })
@@ -45,7 +45,6 @@ export class LuCoreSelectUserHomonymsService {
 					return user;
 				});
 			}),
-			startWith(users),
 		);
 	}
 
