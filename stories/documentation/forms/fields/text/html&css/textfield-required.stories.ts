@@ -15,7 +15,12 @@ function getTemplate(args: TextfieldRequiredStory): string {
 			<input type="text" id="ID" class="textField-input-value" aria-labelledby="IDlabel" aria-describedby="IDmessage" placeholder="Placeholder" aria-invalid="false" aria-required="true" />
 		</div>
 	</div>
-	<div class="inlineMessage" id="IDmessage"><span aria-hidden="true" class="lucca-icon inlineMessage-content-statusIcon"></span>Helper text</div>
+	<div class="inlineMessage" id="IDmessage">
+		<p class="inlineMessage-content">
+			<span aria-hidden="true" class="lucca-icon inlineMessage-content-statusIcon"></span>
+			Helper text
+		</p>
+	</div>
 </div>`;
 }
 

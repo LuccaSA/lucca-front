@@ -4,14 +4,14 @@
 	display: flex;
 	gap: var(--components-inlineMessage-gap);
 	grid-column: 2;
+	font-size: var(--components-inlineMessage-fontSize);
+	line-height: var(--components-inlineMessage-lineHeight);
+	color: var(--components-inlineMessage-color);
 
 	@at-root ($atRoot) {
 		.inlineMessage-content {
 			display: flex;
 			gap: var(--components-inlineMessage-gap);
-			font-size: var(--components-inlineMessage-fontSize);
-			line-height: var(--components-inlineMessage-lineHeight);
-			color: var(--components-inlineMessage-color);
 			margin: 0;
 		}
 

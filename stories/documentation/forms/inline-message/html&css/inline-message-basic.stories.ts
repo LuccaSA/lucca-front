@@ -8,7 +8,11 @@ export default {
 } as Meta;
 
 function getTemplate(args: InlineMessageBasicStory): string {
-	return `<div class="inlineMessage"><p class="inlineMessage-content">Inline message</p></div>`;
+	return `
+<div class="inlineMessage">
+	<p class="inlineMessage-content">Inline message</p>
+</div>
+`;
 }
 
 const Template: StoryFn<InlineMessageBasicStory> = (args) => ({

@@ -15,7 +15,12 @@ function getTemplate(args: TextfieldSizeStory): string {
 			<input type="text" id="ID" class="textField-input-value" aria-labelledby="IDlabel" aria-describedby="IDmessage" placeholder="Placeholder" aria-invalid="false" />
 		</div>
 	</div>
-	<div class="inlineMessage" id="IDmessage"><span aria-hidden="true" class="lucca-icon inlineMessage-content-statusIcon"></span>Helper text</div>
+	<div class="inlineMessage" id="IDmessage">
+		<p class="inlineMessage-content">
+			<span aria-hidden="true" class="lucca-icon inlineMessage-content-statusIcon"></span>
+			Helper text
+		</p>
+	</div>
 </div>
 <div class="form-field mod-XS">
 	<label class="formLabel" id="IDlabel" for="ID">Label</label>
@@ -24,7 +29,12 @@ function getTemplate(args: TextfieldSizeStory): string {
 			<input type="text" id="ID" class="textField-input-value" aria-labelledby="IDlabel" aria-describedby="IDmessage" placeholder="Placeholder" aria-invalid="false" />
 		</div>
 	</div>
-	<div class="inlineMessage" id="IDmessage"><span aria-hidden="true" class="lucca-icon inlineMessage-content-statusIcon"></span>Helper text</div>
+	<div class="inlineMessage" id="IDmessage">
+		<p class="inlineMessage-content">
+			<span aria-hidden="true" class="lucca-icon inlineMessage-content-statusIcon"></span>
+			Helper text
+		</p>
+	</div>
 </div>`;
 }
 
