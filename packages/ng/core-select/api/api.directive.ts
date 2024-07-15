@@ -33,7 +33,7 @@ export abstract class ALuCoreSelectApiDirective<TOption, TParams = Record<string
 	/**
 	 * Return a key to identify the option in for-of loops
 	 */
-	protected optionKey?: (option: TOption) => unknown;
+	protected abstract optionKey: (option: TOption) => unknown;
 
 	/**
 	 * Return the options for the given params and page
@@ -42,10 +42,7 @@ export abstract class ALuCoreSelectApiDirective<TOption, TParams = Record<string
 
 	public ngOnInit(): void {
 		this.select.optionComparer = this.optionComparer;
-
-		if (this.optionKey) {
-			this.select.optionKey = this.optionKey;
-		}
+		this.select.optionKey = this.optionKey;
 
 		this.buildOptions()
 			.pipe(takeUntil(this.destroy$))
