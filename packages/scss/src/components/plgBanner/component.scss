@@ -7,6 +7,8 @@
 	align-items: flex-start;
 	gap: var(--pr-t-spacings-100);
 	padding: var(--pr-t-spacings-100);
+	font-size: var(--sizes-S-fontSize);
+	line-height: var(--sizes-S-lineHeight);
 	border: var(--commons-divider-width) var(--commons-divider-style) var(--palettes-brand-200);
 	border-radius: var(--commons-borderRadius-L);
 	background-color: var(--palettes-brand-50);
@@ -17,8 +19,8 @@
 			display: flex;
 			align-items: center;
 			justify-content: center;
-			height: 2rem;
-			width: 2rem;
+			height: var(--components-plgBanner-icon-size);
+			width: var(--components-plgBanner-icon-size);
 		}
 
 		.plgBanner-icons-front {
@@ -40,12 +42,7 @@
 		}
 
 		.plgBanner-content-title {
-			color: var(--palettes-neutral-800);
 			font-weight: 600;
-		}
-
-		.plgBanner-content-description {
-			color: var(--palettes-neutral-800);
 		}
 
 		.plgBanner-content-link {
