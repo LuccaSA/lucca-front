@@ -31,12 +31,22 @@ export abstract class ALuCoreSelectApiDirective<TOption, TParams = Record<string
 	protected abstract optionComparer: (a: TOption, b: TOption) => boolean;
 
 	/**
+	 * Return a key to identify the option in for-of loops
+	 */
+	protected optionKey?: (option: TOption) => unknown;
+
+	/**
 	 * Return the options for the given params and page
 	 */
 	protected abstract getOptions(params: TParams, page: number): Observable<TOption[]>;
 
 	public ngOnInit(): void {
 		this.select.optionComparer = this.optionComparer;
+
+		if (this.optionKey) {
+			this.select.optionKey = this.optionKey;
+		}
+
 		this.buildOptions()
 			.pipe(takeUntil(this.destroy$))
 			.subscribe((options) => (this.select.options = options));

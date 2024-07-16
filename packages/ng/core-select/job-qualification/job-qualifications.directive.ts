@@ -58,4 +58,5 @@ export class LuCoreSelectJobQualificationsDirective<T extends LuCoreSelectJobQua
 	);
 
 	protected override optionComparer = (a: T, b: T) => a.id === b.id;
+	protected override optionKey = (option: T) => option.id;
 }

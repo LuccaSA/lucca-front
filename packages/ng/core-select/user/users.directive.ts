@@ -4,7 +4,7 @@ import { toObservable } from '@angular/core/rxjs-interop';
 import { ILuApiCollectionResponse } from '@lucca-front/ng/api';
 import { ALuCoreSelectApiDirective } from '@lucca-front/ng/core-select/api';
 import { LuDisplayFormat, LuDisplayFullname } from '@lucca-front/ng/user';
-import { EMPTY, Observable, combineLatest, distinctUntilChanged, filter, map, of, shareReplay, switchMap, take } from 'rxjs';
+import { EMPTY, Observable, combineLatest, distinctUntilChanged, filter, map, shareReplay, switchMap, take } from 'rxjs';
 import { LU_CORE_SELECT_CURRENT_USER_ID } from './me.provider';
 import { LuUserDisplayerComponent } from './user-displayer.component';
 import { LuCoreSelectUserHomonymsService } from './user-homonym.service';
@@ -158,13 +158,15 @@ export class LuCoreSelectUsersDirective<T extends LuCoreSelectUser = LuCoreSelec
 			shareReplay({ bufferSize: 1, refCount: true }),
 		);
 
-		const meFilter$ = displayMe$.pipe(switchMap((displayMe) => (displayMe ? me$ : of(null))));
+		const options$ = super.buildOptions();
 
-		return combineLatest([super.buildOptions(), meFilter$]).pipe(
+		return displayMe$.pipe(
+			switchMap((displayMe) => (displayMe ? combineLatest([options$, me$]) : options$.pipe(map((options) => [options, null as T | null] as const)))),
 			map(([options, meFilter]) => (meFilter ? [meFilter, ...(options ?? []).filter((o) => o.id !== meFilter.id)] : options)),
 			switchMap((users) => this.#userHomonymsService.handleHomonyms(users, this.displayFormat)),
 		);
 	}
 
 	protected override optionComparer = (a: T, b: T) => a.id === b.id;
+	protected override optionKey = (option: T) => option.id;
 }
