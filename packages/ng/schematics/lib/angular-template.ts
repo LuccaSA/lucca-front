@@ -95,7 +95,7 @@ export function replaceComponentInput(componentName: string, inputName: string, 
 				}
 			});
 
-			elAst.visitBoundAttribute('icon', (attr) => {
+			elAst.visitBoundAttribute(inputName, (attr) => {
 				if (attr.valueSpan && attr.value instanceof angularCompiler.ASTWithSource) {
 					const attrValue = attr.value.source || '';
 					const sourcefile = createSourceFile('', attrValue, ScriptTarget.ESNext);
