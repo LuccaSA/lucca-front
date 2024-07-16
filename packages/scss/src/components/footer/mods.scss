@@ -1,3 +1,9 @@
 @mixin sticky {
 	--components-footer-position: sticky;
 }
+
+@mixin narrow {
+	--components-footer-direction: column;
+	--components-footer-alignItems: stretch;
+	--components-footer-actions-margin: 0;
+}

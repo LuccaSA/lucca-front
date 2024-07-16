@@ -23,6 +23,7 @@
 		}
 
 		.footer-actions {
+			margin-left: var(--components-footer-actions-margin);
 			display: flex;
 			gap: var(--pr-t-spacings-200);
 			flex-direction: var(--components-footer-direction);

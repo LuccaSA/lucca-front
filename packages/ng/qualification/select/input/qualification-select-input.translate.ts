@@ -1,5 +1,6 @@
 import { InjectionToken } from '@angular/core';
-import { ILuTranslation } from '@lucca-front/ng/core';
+import { LuTranslation } from '@lucca-front/ng/core';
+import { Translations } from './translations';
 
 export const LU_QUALIFICATION_SELECT_INPUT_TRANSLATIONS = new InjectionToken('LuQualificationSelectTranslations', {
 	factory: () => luQualificationSelectInputTranslations,
@@ -9,14 +10,4 @@ export interface ILuQualificationSelectInputLabel {
 	qualifications: string;
 }
 
-export const luQualificationSelectInputTranslations: ILuTranslation<ILuQualificationSelectInputLabel> = {
-	en: {
-		qualifications: 'qualifications',
-	},
-	fr: {
-		qualifications: 'qualifications',
-	},
-	es: {
-		qualifications: 'calificaciones',
-	},
-};
+export const luQualificationSelectInputTranslations: LuTranslation<ILuQualificationSelectInputLabel> = Translations;

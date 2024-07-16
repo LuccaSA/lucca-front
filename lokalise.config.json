@@ -1,0 +1,10 @@
+{
+  "config": [
+    {
+      "generator": "ngx",
+      "project_id": "82124740668bd95d34a560.46721282",
+      "local_directory": "packages/ng/",
+      "remote_directory": "ng/"
+    }
+  ]
+}

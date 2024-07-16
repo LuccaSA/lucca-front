@@ -66,7 +66,7 @@ export class LuDateInputDirective<D> extends ALuInput<D, HTMLInputElement> imple
 				break;
 			case ELuDateGranularity.day:
 			default:
-				format = this._intl.formatDay;
+				format = 'shortDate';
 				break;
 		}
 		const text = this.value && this._adapter.isValid(this.value) ? this._adapter.format(this.value, format) : '';
