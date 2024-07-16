@@ -111,3 +111,55 @@ export function replaceComponentInput(componentName: string, inputName: string, 
 		});
 	});
 }
+
+export function replaceComponentInputName(componentName: string, oldInputName: string, newInputName: string, template: string, angularCompiler: AngularCompilerLib): string {
+	return updateContent(template, (updates) => {
+		const htmlAst = new HtmlAst(template, angularCompiler);
+		htmlAst.visitElements(componentName, (el) => {
+			const elAst = new HtmlAstVisitor(el, angularCompiler);
+
+			elAst.visitAttribute(oldInputName, (attr) => {
+				if (attr.keySpan) {
+					updates.push({
+						position: attr.keySpan.start.offset,
+						oldContent: oldInputName,
+						newContent: newInputName,
+					});
+				}
+			});
+
+			elAst.visitBoundAttribute(oldInputName, (attr) => {
+				if (attr.keySpan) {
+					updates.push({
+						position: attr.keySpan.start.offset,
+						oldContent: oldInputName,
+						newContent: newInputName,
+					});
+				}
+			});
+		});
+	});
+}
+
+export function updateAngularTemplate(fileName: string, content: string, updater: (template: string) => string): string {
+	if (fileName.endsWith('.html')) {
+		return updater(content);
+	}
+
+	if (!fileName.endsWith('.ts')) {
+		return content;
+	}
+
+	return updateContent(content, (updates) => {
+		const sourcefile = createSourceFile(fileName, content, ScriptTarget.ESNext);
+		const templates = extractNgTemplates(sourcefile);
+
+		updates.push(
+			...templates.map((tpl) => ({
+				position: tpl.offsetStart,
+				oldContent: tpl.content,
+				newContent: updater(tpl.content),
+			})),
+		);
+	});
+}
