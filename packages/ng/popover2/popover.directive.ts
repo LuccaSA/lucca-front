@@ -148,6 +148,7 @@ export class PopoverDirective {
 						.position()
 						.flexibleConnectedTo(this.#elementRef)
 						.withPositions(this.customPositions || this.#buildPositions()),
+					scrollStrategy: this.#overlay.scrollStrategies.reposition(),
 					hasBackdrop: this.luPopoverTrigger() === 'click',
 					backdropClass: '',
 					disposeOnNavigation: true,
