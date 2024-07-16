@@ -1,20 +1,21 @@
 import { Meta, StoryFn } from '@storybook/angular';
 
-interface EllipsisStory {}
+interface VisibilityStory {}
 
 export default {
-	title: 'Documentation/Integration/Utilities/Ellipsis',
+	title: 'Documentation/Integration/Utilities/Visibility',
 } as Meta;
 
-function getTemplate(args: EllipsisStory): string {
+function getTemplate(args: VisibilityStory): string {
 	return `
 <div>
-	<div class="u-ellipsis">Bonbon fruitcake sweet lemon drops cupcake dessert. Shortbread chocolate cookie ice cream marshmallow. Macaroon sesame snaps carrot cake macaroon dessert. </div>
+	<div><code class="code">u-visibilityHidden</code> <span class="u-visibilityHidden">Lorem ipsum</span></div>
+	<div><code class="code">u-visibilityVisible</code> <span class="u-visibilityVisible">Lorem ipsum</span></div>
 </div>
 `;
 }
 
-const Template: StoryFn<EllipsisStory> = (args) => ({
+const Template: StoryFn<VisibilityStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [
@@ -40,5 +41,5 @@ const Template: StoryFn<EllipsisStory> = (args) => ({
 	],
 });
 
-export const Ellipsis = Template.bind({});
-Ellipsis.args = {};
+export const Visibility = Template.bind({});
+Visibility.args = {};

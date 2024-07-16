@@ -1,20 +1,21 @@
 import { Meta, StoryFn } from '@storybook/angular';
 
-interface EllipsisStory {}
+interface ResetStory {}
 
 export default {
-	title: 'Documentation/Integration/Utilities/Ellipsis',
+	title: 'Documentation/Integration/Utilities/Content',
 } as Meta;
 
-function getTemplate(args: EllipsisStory): string {
+function getTemplate(args: ResetStory): string {
 	return `
 <div>
-	<div class="u-ellipsis">Bonbon fruitcake sweet lemon drops cupcake dessert. Shortbread chocolate cookie ice cream marshmallow. Macaroon sesame snaps carrot cake macaroon dessert. </div>
+	<div><code class="code">data-content-before</code> <span data-content-before="Lorem ipsum"></span></div>
+	<div><code class="code">data-content-after</code> <span data-content-after="Lorem ipsum"></span></div>
 </div>
 `;
 }
 
-const Template: StoryFn<EllipsisStory> = (args) => ({
+const Template: StoryFn<ResetStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [
@@ -40,5 +41,5 @@ const Template: StoryFn<EllipsisStory> = (args) => ({
 	],
 });
 
-export const Ellipsis = Template.bind({});
-Ellipsis.args = {};
+export const Content = Template.bind({});
+Content.args = {};
