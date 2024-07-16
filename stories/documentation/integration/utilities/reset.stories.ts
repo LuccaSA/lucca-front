@@ -7,60 +7,32 @@ export default {
 } as Meta;
 
 function getTemplate(args: ResetStory): string {
-	return `
-<div>
-	<div>
-		<button class="u-buttonReset"><code class="code">u-buttonReset</code></button>
+	return `<div class="demo-utilityWrapper">
+	<div class="demo-utility">
+		<code class="code">u-buttonReset</code>
+		<button class="u-buttonReset">Button</button>
 	</div>
-	<div>
+	<div class="demo-utility">
+		<code class="code">u-listReset</code>
 		<ul class="u-listReset">
-			<li><code class="code">u-listReset</code></li>
-			<li><code class="code">u-listReset</code></li>
-			<li><code class="code">u-listReset</code></li>
+			<li>List item</li>
+			<li>List item</li>
+			<li>List item</li>
 		</ul>
 	</div>
-	<div>
-		<ol class="u-listReset">
-			<li><code class="code">u-listReset</code></li>
-			<li><code class="code">u-listReset</code></li>
-			<li><code class="code">u-listReset</code></li>
-		</ol>
-	</div>
-	<div>
+	<div class="demo-utility">
+		<code class="code">u-descriptionListReset</code>
 		<dl class="u-descriptionListReset">
-			<dt><code class="code">u-descriptionListReset</code></dt>
-			<dd><code class="code">u-descriptionListReset</code></dd>
-			<dd><code class="code">u-descriptionListReset</code></dd>
+			<dt>Term</dt>
+			<dd>Description</dd>
 		</dl>
 	</div>
-</div>
-`;
+</div>`;
 }
 
 const Template: StoryFn<ResetStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
-	styles: [
-		`
-		:host {
-			gap: var(--pr-t-spacings-500);
-			display: flex;
-			flex-direction: column;
-
-			> div {
-				display: flex;
-				gap: var(--pr-t-spacings-100);
-				flex-wrap: wrap; 
-				align-items: flex-start;
-
-				> div { 	
-					border: 1px solid var(--palettes-neutral-600);
-					padding: var(--pr-t-spacings-100);
-				}
-			} 
-		}
-		`,
-	],
 });
 
 export const Reset = Template.bind({});

@@ -7,16 +7,14 @@ export default {
 } as Meta;
 
 function getTemplate(args: ShadowsStory): string {
-	return `
-<div>
+	return `<div>
 	<div class="u-elevate1"><code class="code">u-elevate1</code></div>
 	<div class="u-elevate2"><code class="code">u-elevate2</code></div>
 	<div class="u-elevate3"><code class="code">u-elevate3</code></div>
 	<div class="u-elevate4"><code class="code">u-elevate4</code></div>
 	<div class="u-elevate5"><code class="code">u-elevate5</code></div>
 	<div class="u-elevate6"><code class="code">u-elevate6</code></div>
-</div>
-`;
+</div>`;
 }
 
 const Template: StoryFn<ShadowsStory> = (args) => ({
@@ -32,13 +30,13 @@ const Template: StoryFn<ShadowsStory> = (args) => ({
 			> div {
 				display: flex;
 				gap: var(--pr-t-spacings-100);
-				flex-wrap: wrap; 
+				flex-wrap: wrap;
 				align-items: flex-start;
 
-				> div { 	
+				> div {
 					padding: var(--pr-t-spacings-100);
 				}
-			} 
+			}
 		}
 		`,
 	],

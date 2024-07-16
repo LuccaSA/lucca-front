@@ -7,29 +7,27 @@ export default {
 } as Meta;
 
 function getTemplate(args: PositionStory): string {
-	return `
-<div>
-	<div>
+	return `<div class="demo-utilityWrapper">
+	<div class="demo-utility">
 		<div class="u-positionFixed"><code class="code">u-positionFixed</code></div>
 	</div>
 </div>
-<div>
-	<div>
+<div class="demo-utilityWrapper">
+	<div class="demo-utility">
 		<div class="u-positionAbsolute"><code class="code">u-positionAbsolute</code></div>
 	</div>
 </div>
-<div>
+<div class="demo-utilityWrapper">
 	<div>
-		<div class="u-positionStatic"><code class="code">u-positionStatic</code></div>
+		<div class="u-positionStatic demo-utility"><code class="code">u-positionStatic</code></div>
 	</div>
 	<div>
-		<div class="u-positionRelative"><code class="code">u-positionRelative</code></div>
+		<div class="u-positionRelative demo-utility"><code class="code">u-positionRelative</code></div>
 	</div>
 	<div>
-		<div class="u-positionSticky"><code class="code">u-positionSticky</code></div>
+		<div class="u-positionSticky demo-utility"><code class="code">u-positionSticky</code></div>
 	</div>
-</div>
-`;
+</div>`;
 }
 
 const Template: StoryFn<PositionStory> = (args) => ({
@@ -38,21 +36,9 @@ const Template: StoryFn<PositionStory> = (args) => ({
 	styles: [
 		`
 		:host {
-			gap: var(--pr-t-spacings-500);
+			gap: var(--pr-t-spacings-400);
 			display: flex;
 			flex-direction: column;
-
-			> div {
-				display: flex;
-				gap: var(--pr-t-spacings-100);
-				flex-wrap: wrap; 
-				align-items: flex-start;
-
-				> div { 	
-					border: 1px solid var(--palettes-neutral-600);
-					padding: var(--pr-t-spacings-100);
-				}
-			} 
 		}
 		`,
 	],

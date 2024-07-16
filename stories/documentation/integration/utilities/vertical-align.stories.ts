@@ -7,18 +7,15 @@ export default {
 } as Meta;
 
 function getTemplate(args: VerticalAlignStory): string {
-	return `
-<div>
-	<div>
+	return `<div class="demo-utility">
 		<div class="u-textAlignLeft"><code class="code">u-textAlignLeft</code></div>
 	</div>
-	<div>
+	<div class="demo-utility">
 		<div class="u-textAlignCenter"><code class="code">u-textAlignCenter</code></div>
 	</div>
-	<div>
+	<div class="demo-utility">
 		<div class="u-textAlignRight"><code class="code">u-textAlignRight</code></div>
-	</div>
-</div>`;
+	</div>`;
 }
 
 const Template: StoryFn<VerticalAlignStory> = (args) => ({
@@ -27,21 +24,13 @@ const Template: StoryFn<VerticalAlignStory> = (args) => ({
 	styles: [
 		`
 		:host {
-			gap: var(--pr-t-spacings-500);
+			gap: var(--pr-t-spacings-100);
 			display: flex;
 			flex-direction: column;
+		}
 
-			> div {
-				display: flex;
-				gap: var(--pr-t-spacings-100);
-				flex-wrap: wrap; 
-				flex-direction: column;
-
-				> div { 	
-					border: 1px solid var(--palettes-neutral-600);
-					padding: var(--pr-t-spacings-100);
-				}
-			} 
+		.code {
+			display: inline-flex;
 		}
 		`,
 	],
