@@ -1,7 +1,7 @@
 @mixin component($atRoot: 'without: rule') {
 	display: flex;
 	flex-direction: column;
-	align-items: flex-start;
+	align-items: start;
 	position: relative;
 	border: 0;
 	padding: 0;

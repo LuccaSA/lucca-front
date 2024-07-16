@@ -1,5 +1,5 @@
 @mixin component($atRoot: 'without: rule') {
-	align-items: flex-start;
+	align-items: start;
 	background-color: var(--palettes-100, var(--palettes-product-100));
 	border-radius: var(--commons-borderRadius-L);
 	display: inline-flex;

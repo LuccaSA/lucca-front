@@ -8,7 +8,7 @@
 			--components-user-picture-image-size: var(--components-userPicture-XXXL-image);
 
 			display: flex;
-			align-items: flex-start;
+			align-items: start;
 			gap: var(--spacings-S);
 		}
 
@@ -51,7 +51,7 @@
 
 		.userPopover-details-info-detail-workplace {
 			display: flex;
-			align-items: flex-start;
+			align-items: start;
 			gap: var(--spacings-XXS);
 			color: currentColor;
 			text-decoration: none;

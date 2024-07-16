@@ -4,7 +4,7 @@
 @use '@lucca-front/scss/src/components/button/exports' as button;
 
 @mixin component($atRoot: 'without: rule') {
-	align-items: flex-start;
+	align-items: start;
 	position: relative;
 	border-radius: var(--commons-borderRadius-L);
 	background-color: var(--palettes-50, var(--palettes-neutral-50));

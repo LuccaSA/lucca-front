@@ -77,7 +77,7 @@ import { Meta, StoryFn, applicationConfig } from '@storybook/angular';
 				gap: 0.5rem;
 				display: flex;
 				flex-direction: column;
-				justify-content: flex-start;
+				justify-content: start;
 			}
 		`,
 	],

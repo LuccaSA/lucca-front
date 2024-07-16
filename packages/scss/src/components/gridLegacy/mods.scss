@@ -11,7 +11,7 @@
 }
 
 @mixin start {
-	justify-content: flex-start;
+	justify-content: start;
 	text-align: start;
 }
 
@@ -21,12 +21,12 @@
 }
 
 @mixin end {
-	justify-content: flex-end;
+	justify-content: end;
 	text-align: end;
 }
 
 @mixin top {
-	align-items: flex-start;
+	align-items: start;
 }
 
 @mixin middle {
@@ -34,7 +34,7 @@
 }
 
 @mixin bottom {
-	align-items: flex-end;
+	align-items: end;
 }
 
 @mixin around {

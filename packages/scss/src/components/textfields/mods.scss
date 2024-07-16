@@ -321,7 +321,7 @@
 }
 
 @mixin compactMultiline {
-	align-items: flex-start;
+	align-items: start;
 }
 
 @mixin compactSize($size) {

@@ -40,7 +40,7 @@
 }
 
 @mixin vertical {
-	align-items: flex-start;
+	align-items: start;
 	flex-direction: column;
 
 	.timeline-step {
@@ -141,7 +141,11 @@
 			height: unset;
 			width: 2px;
 			border: none;
-			background: linear-gradient(180deg, var(--palettes-700, var(--palettes-product-700)) var(--progress), var(--palettes-neutral-200) var(--progress));
+			background: linear-gradient(
+				180deg,
+				var(--palettes-700, var(--palettes-product-700)) var(--progress),
+				var(--palettes-neutral-200) var(--progress)
+			);
 		}
 	}
 }
@@ -352,7 +356,11 @@
 		&::after {
 			border: none;
 			height: 2px;
-			background: linear-gradient(90deg, var(--palettes-700, var(--palettes-product-700)) var(--progress), var(--palettes-neutral-200) var(--progress));
+			background: linear-gradient(
+				90deg,
+				var(--palettes-700, var(--palettes-product-700)) var(--progress),
+				var(--palettes-neutral-200) var(--progress)
+			);
 		}
 	}
 }

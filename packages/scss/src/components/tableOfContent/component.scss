@@ -1,7 +1,7 @@
 @use '@lucca-front/scss/src/commons/utils/reset';
 
 @mixin component($atRoot: 'without: rule') {
-	align-items: flex-start;
+	align-items: start;
 	display: flex;
 	flex-direction: column;
 	position: sticky;

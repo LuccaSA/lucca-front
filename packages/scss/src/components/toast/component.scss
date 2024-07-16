@@ -4,7 +4,7 @@
 	max-width: var(--components-toasts-maxwidth);
 	display: flex;
 	flex-direction: column;
-	align-items: flex-end;
+	align-items: end;
 	position: fixed;
 	z-index: 9999;
 	inset: var(--components-toasts-inset);
@@ -30,7 +30,7 @@
 					transform: translateY(var(--pr-t-spacings-200));
 					opacity: 0;
 				}
-		
+
 				100% {
 					opacity: 1;
 				}
@@ -67,9 +67,10 @@
 			@include button.text;
 			@include button.inverted;
 
-			@keyframes timer {}
+			@keyframes timer {
+			}
 
-			align-self: flex-start;
+			align-self: start;
 			border-radius: var(--commons-borderRadius-L);
 			animation-name: timer;
 		}
