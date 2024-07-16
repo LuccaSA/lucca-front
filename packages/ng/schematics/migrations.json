@@ -1,4 +1,10 @@
 {
-	"$schema": "../../../node_modules/@angular-devkit/schematics/collection-schema.json",
-	"schematics": {}
+  "$schema": "../../../node_modules/@angular-devkit/schematics/collection-schema.json",
+  "schematics": {
+    "empty-state-heading": {
+      "version": "18.2.0-alpha",
+      "description": "Change title input to heading input in empty state component.",
+      "factory": "./empty-state-title/index"
+    }
+  }
 }
