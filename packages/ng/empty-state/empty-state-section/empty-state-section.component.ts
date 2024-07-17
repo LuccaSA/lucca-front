@@ -28,7 +28,7 @@ export class EmptyStateSectionComponent {
 	center = false;
 
 	@Input()
-	heading: string;
+	title: string;
 
 	@Input()
 	description: PortalContent;
