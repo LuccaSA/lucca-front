@@ -37,6 +37,10 @@
 		display: var(--components-dialog-insideHeaderButtonDisplay);
 	}
 
+	.dialog-inside-footer {
+		@include footer.sticky;
+	}
+
 	@at-root ($atRoot) {
 		// .dialog-form is deprecated
 		.dialog-formOptionnal,
@@ -77,10 +81,6 @@
 			padding: var(--components-dialog-insideHeaderTitlePadding);
 			text-align: var(--components-dialog-insideHeaderTitleAlign);
 			margin: 0;
-		}
-
-		.dialog-inside-footer {
-			@include footer.sticky;
 		}
 
 		.dialog_backdrop {

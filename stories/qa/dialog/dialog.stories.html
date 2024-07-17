@@ -1,0 +1,36 @@
+<h1 class="demo-divider">Dialog</h1>
+
+<!-- Basics -->
+
+<div style="height: 20rem">
+	<div class="dialog_backdrop"></div>
+	<div
+		role="dialog"
+		aria-modal="true"
+		aria-labelledby="dialogInsideHeaderTitle1"
+		class="dialog"
+		[attr.style]="'--components-dialog-maxHeight: 15rem'"
+	>
+		<form class="dialog-inside">
+			<header class="dialog-inside-header">
+				<button type="button" class="dialog-inside-header-button button">
+					<span class="lucca-icon icon-signClose" aria-hidden="true"></span>
+					<span class="u-mask">Fermer</span>
+				</button>
+				<div class="dialog-inside-header-container">
+					<h1 class="dialog-inside-header-container-title" id="dialogInsideHeaderTitle1">Title</h1>
+				</div>
+			</header>
+			<div class="dialog-inside-content">dialog<br />dialog<br />dialog<br />dialog</div>
+			<footer class="dialog-inside-footer footer">
+				<div class="footer-actions">
+					<button type="submit" class="button">Action</button>
+					<button type="button" class="button mod-text">Action</button>
+				</div>
+			</footer>
+		</form>
+	</div>
+</div>
+
+<!-- To tell the ui-diff tool that the page has finished rendering -->
+<span id="ready"></span>

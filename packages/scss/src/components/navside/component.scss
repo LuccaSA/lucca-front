@@ -24,6 +24,10 @@
 		margin-left: auto;
 	}
 
+	.newBadge {
+		margin-left: auto;
+	}
+
 	@at-root ($atRoot) {
 		.navSide-wrapper {
 			display: flex;
@@ -108,6 +112,14 @@
 			line-height: var(--sizes-S-lineHeight);
 			padding: var(--pr-t-spacings-150) var(--pr-t-spacings-200);
 			font-weight: 600;
+		}
+
+		.navSide-item-link-badgesOptional {
+			display: flex;
+			column-gap: var(--pr-t-spacings-150);
+			row-gap: var(--pr-t-spacings-50);
+			align-items: center;
+			margin-left: auto;
 		}
 
 		.navSide-item-arrow {

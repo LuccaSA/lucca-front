@@ -56,10 +56,12 @@
 		.callout-kill {
 			@include reset.button;
 
-			color: currentColor;
+			color: var(--palettes-neutral-700);
+			text-align: center;
 			transition-duration: var(--commons-animations-durations-fast);
 			transition-property: background-color;
-			width: auto;
+			height: var(--components-callout-kill-size);
+			width: var(--components-callout-kill-size);
 
 			&:focus-visible {
 				@include a11y.focusVisible($borderRadius: var(--commons-borderRadius-M));
