@@ -41,6 +41,8 @@
 
 		.card-footer-right {
 			margin-left: auto;
+			display: inline-flex;
+			gap: var(--pr-t-spacings-200);
 		}
 	}
 }
