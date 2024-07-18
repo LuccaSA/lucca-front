@@ -12,5 +12,5 @@
 @mixin disabled {
 	--components-timepicker-background: var(--commons-disabled-background);
 	--components-timepicker-border: var(--commons-disabled-placeholder);
-	--components-timepicker-color: var(--commons-disabled-color);
+	--components-timepicker-color: var(--palettes-neutral-700); // disabled token candidate
 }

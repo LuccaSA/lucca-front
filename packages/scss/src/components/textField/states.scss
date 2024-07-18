@@ -11,5 +11,5 @@
 @mixin disabled {
 	--component-textField-border: var(--palettes-neutral-300); // disabled token candidate
 	--component-textField-background: var(--commons-disabled-background);
-	--component-textField-color: var(--commons-disabled-color);
+	--component-textField-color: var(--palettes-neutral-700); // disabled token candidate
 }

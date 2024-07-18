@@ -1,10 +1,10 @@
 @mixin disabled {
 	background-color: var(--commons-disabled-background);
-	color: var(--commons-disabled-color);
+	color: var(--palettes-neutral-700); // disabled token candidate
 
 	.timepicker-field-input {
 		background: transparent;
-		color: var(--commons-disabled-color);
+		color: var(--palettes-neutral-700); // disabled token candidate
 	}
 
 	.timepicker-field-increment {
