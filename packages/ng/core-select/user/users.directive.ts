@@ -1,10 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Directive, Input, computed, inject, signal } from '@angular/core';
-import { toObservable } from '@angular/core/rxjs-interop';
+import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 import { ILuApiCollectionResponse } from '@lucca-front/ng/api';
 import { ALuCoreSelectApiDirective } from '@lucca-front/ng/core-select/api';
 import { LuDisplayFormat, LuDisplayFullname } from '@lucca-front/ng/user';
-import { EMPTY, Observable, combineLatest, distinctUntilChanged, filter, map, shareReplay, switchMap, take } from 'rxjs';
+import { EMPTY, Observable, catchError, combineLatest, map, of, shareReplay, switchMap, take, tap } from 'rxjs';
 import { LU_CORE_SELECT_CURRENT_USER_ID } from './me.provider';
 import { LuUserDisplayerComponent } from './user-displayer.component';
 import { LuCoreSelectUserHomonymsService } from './user-homonym.service';
@@ -111,7 +111,31 @@ export class LuCoreSelectUsersDirective<T extends LuCoreSelectUser = LuCoreSelec
 		})),
 	);
 
-	protected override getOptions(params: Record<string, string | number | boolean>, page: number): Observable<T[]> {
+	protected meParams$ = toObservable(
+		computed(() => ({
+			fields: this.#userFields,
+			...(this._filters() ?? {}),
+			...(this._operationIds() ? { operations: this._operationIds().join(',') } : {}),
+			...(this._appInstanceId() ? { appInstanceId: this._appInstanceId() } : {}),
+			id: this.currentUserId,
+		})),
+	);
+
+	protected me$ = this.meParams$.pipe(
+		switchMap((params) => {
+			const url = this.customUrl() || this.defaultUrl();
+			return this.httpClient.get<ILuApiCollectionResponse<{ item: T }>>(url, { params }).pipe(catchError(() => EMPTY));
+		}),
+		map((res) => res.data.items.map(({ item }) => item)[0] ?? null),
+		takeUntilDestroyed(),
+		shareReplay(),
+	);
+
+	protected getMe(): Observable<T | null> {
+		return this.me$.pipe(take(1));
+	}
+
+	protected getOptions(params: Record<string, string | number | boolean>, page: number): Observable<T[]> {
 		const url = this.customUrl() || this.defaultUrl();
 
 		return this.httpClient
@@ -124,47 +148,29 @@ export class LuCoreSelectUsersDirective<T extends LuCoreSelectUser = LuCoreSelec
 			.pipe(map((res) => res.data.items.map(({ item }) => item)));
 	}
 
-	protected getMe(): Observable<T | null> {
-		const url = this.customUrl() || this.defaultUrl();
+	protected override getOptionsPage(params: Record<string, string | number | boolean>, page: number): Observable<{ items: LuCoreSelectWithAdditionnalInformation<T>[]; isLastPage: boolean }> {
+		const hasClue = !!params['clue'];
+		const displayMe = this.displayMeOption && !hasClue;
+		const prependMe = displayMe && page === 0;
 
-		const params = {
-			fields: this.#userFields,
-			...(this._filters() ?? {}),
-			...(this._operationIds() ? { operations: this._operationIds().join(',') } : {}),
-			...(this._appInstanceId() ? { appInstanceId: this._appInstanceId() } : {}),
-			...(this._enableFormerEmployees() ? { enableFormerEmployees: this._enableFormerEmployees() } : {}),
-			id: this.currentUserId,
-		};
+		this.select.loading = true;
 
-		return this.httpClient
-			.get<ILuApiCollectionResponse<{ item: T }>>(url, {
-				params,
-			})
-			.pipe(map((res) => res.data.items.map(({ item }) => item)[0] ?? null));
-	}
+		const me$ = prependMe ? this.getMe() : of(null);
 
-	protected override buildOptions(): Observable<T[]> {
-		const hasClue$ = this.clue$.pipe(map((clue) => !!clue));
-		const displayMe$ = combineLatest([hasClue$, this.displayMeOption$]).pipe(
-			map(([hasClue, displayMeOption]) => displayMeOption && !hasClue),
-			distinctUntilChanged(),
+		const users$ = this.getOptions(params, page).pipe(
+			map((users) => ({ items: users, isLastPage: users.length < this.pageSize })),
+			tap(() => (this.select.loading = false)),
 		);
 
-		// Wait for the first time the panel is open to get the current user
-		const me$ = this.select.isPanelOpen$.pipe(
-			filter((isOpen) => isOpen),
-			take(1),
-			switchMap((isOpen) => (isOpen ? this.getMe() : EMPTY)),
-			shareReplay({ bufferSize: 1, refCount: true }),
+		const page$ = combineLatest([me$, users$]).pipe(
+			map(([me, { items, isLastPage }]) => {
+				// If "me" is displayed as first option, we remove it from the list of users
+				const filteredItems = displayMe ? items.filter((u) => u.id !== this.currentUserId) : items;
+				return { items: me && prependMe ? [me, ...filteredItems] : filteredItems, isLastPage };
+			}),
 		);
 
-		const options$ = super.buildOptions();
-
-		return displayMe$.pipe(
-			switchMap((displayMe) => (displayMe ? combineLatest([options$, me$]) : options$.pipe(map((options) => [options, null as T | null] as const)))),
-			map(([options, meFilter]) => (meFilter ? [meFilter, ...(options ?? []).filter((o) => o.id !== meFilter.id)] : options)),
-			switchMap((users) => this.#userHomonymsService.handleHomonyms(users, this.displayFormat)),
-		);
+		return page$.pipe(switchMap((page) => this.#userHomonymsService.handleHomonyms(page.items, this.displayFormat).pipe(map((items) => ({ items, isLastPage: page.isLastPage })))));
 	}
 
 	protected override optionComparer = (a: T, b: T) => a.id === b.id;
