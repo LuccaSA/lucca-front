@@ -19,7 +19,7 @@ describe('CoreSelectKeyManager', () => {
 
 		queryList = new QueryList<ɵLuOptionComponent<string>>();
 		options$ = new BehaviorSubject<string[]>([]);
-		keyManager = TestBed.inject(CoreSelectKeyManager);
+		keyManager = TestBed.inject<CoreSelectKeyManager<string>>(CoreSelectKeyManager);
 
 		keyManager.init({
 			queryList,
@@ -130,6 +130,6 @@ function createComponent(option: string): ɵLuOptionComponent<string> {
 	component.option = option;
 	component.setActiveStyles = () => {};
 	component.setInactiveStyles = () => {};
-	(component as any).id = String(id++);
+	Object.defineProperty(component, 'id', { get: () => String(id++) });
 	return component;
 }
