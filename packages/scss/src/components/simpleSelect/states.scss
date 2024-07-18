@@ -55,10 +55,10 @@
 }
 
 @mixin disabled {
-	--components-simpleSelect-border-color: var(--palettes-neutral-300);
-	--components-simpleSelect-background: var(--palettes-neutral-100);
-	--components-simpleSelect-placeholder: var(--palettes-neutral-400);
-	--components-simpleSelect-value-color: var(--palettes-neutral-600);
-	--components-simpleSelect-arrow-color: var(--palettes-neutral-500);
+	--components-simpleSelect-border-color: var(--palettes-neutral-300); // disabled token candidate
+	--components-simpleSelect-background: var(--commons-disabled-background);
+	--components-simpleSelect-placeholder: var(--commons-disabled-placeholder);
+	--components-simpleSelect-value-color: var(--commons-disabled-color);
+	--components-simpleSelect-arrow-color: var(--palettes-neutral-500); // disabled token candidate
 	pointer-events: none;
 }

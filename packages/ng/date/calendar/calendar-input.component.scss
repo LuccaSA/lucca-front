@@ -118,6 +118,7 @@
 
 	&:focus-visible {
 		@include a11y.focusVisible($borderRadius: var(--commons-borderRadius-L));
+
 		z-index: 1;
 	}
 
@@ -137,11 +138,11 @@
 
 	&.is-disabled,
 	&[disabled] {
-		color: var(--palettes-neutral-500);
+		color: var(--palettes-neutral-500); // disabled token candidate
 		pointer-events: none;
 
 		&:hover .calendar-grid-item-content {
-			background-color: var(--palettes-neutral-0);
+			background-color: var(--palettes-neutral-0); // disabled token candidate
 		}
 	}
 }

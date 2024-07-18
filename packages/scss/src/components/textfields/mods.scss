@@ -366,7 +366,7 @@
 		outline: none;
 
 		&:not(:disabled, .is-error, .is-success, .is-valid, .is-warning, .is-invalid) {
-			background-color: var(--palettes-neutral-0);
+			background-color: var(--palettes-neutral-0); // disabled token candidate
 		}
 	}
 

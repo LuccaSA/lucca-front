@@ -9,7 +9,7 @@
 }
 
 @mixin disabled {
-	--component-textField-border: var(--palettes-neutral-300);
-	--component-textField-background: var(--palettes-neutral-100);
-	--component-textField-color: var(--palettes-neutral-600);
+	--component-textField-border: var(--palettes-neutral-300); // disabled token candidate
+	--component-textField-background: var(--commons-disabled-background);
+	--component-textField-color: var(--commons-disabled-color);
 }

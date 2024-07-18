@@ -155,14 +155,14 @@
 			}
 
 			&.is-disabled {
-				--components-options-checkbox-border-color: var(--palettes-neutral-500);
+				--components-options-checkbox-border-color: var(--palettes-neutral-500); // disabled token candidate
 
 				&.is-selected {
-					--components-options-checkbox-color: var(--palettes-neutral-100);
-					background: transparent;
+					--components-options-checkbox-color: var(--commons-disabled-background);
+					background-color: transparent;
 
 					&::after {
-						color: var(--palettes-neutral-500);
+						color: var(--palettes-neutral-500); // disabled token candidate
 					}
 				}
 			}
