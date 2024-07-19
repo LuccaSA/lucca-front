@@ -7,7 +7,7 @@
 	de: {
 		placeholderDay: 'TT/MM/JJJJ',
 		placeholderMonth: 'MM/JJJJ',
-		placeholderYear: 'AAAA',
+		placeholderYear: 'JJJJ',
 	},
 	fr: {
 		placeholderDay: 'JJ/MM/AAAA',
@@ -22,17 +22,12 @@
 	nl: {
 		placeholderDay: 'DD/MM/JJJJ',
 		placeholderMonth: 'MM/JJJJ',
-		placeholderYear: 'AAAA',
+		placeholderYear: 'JJJJ',
 	},
 	'nl-BE': {
 		placeholderDay: 'DD/MM/JJJJ',
 		placeholderMonth: 'MM/JJJJ',
-		placeholderYear: 'AAAA',
-	},
-	'en-US': {
-		placeholderDay: 'MM/DD/YYYYY',
-		placeholderMonth: 'MM/YYYY',
-		placeholderYear: 'YYYY',
+		placeholderYear: 'JJJJ',
 	},
 	es: {
 		placeholderDay: 'DD/MM/AAAA',

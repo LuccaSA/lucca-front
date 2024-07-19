@@ -9,19 +9,16 @@
 		establishments: 'établissements',
 	},
 	it: {
-		establishments: 'stabilimenti',
+		establishments: 'strutture',
 	},
 	nl: {
-		establishments: 'vestiging',
+		establishments: 'vestigingen',
 	},
 	'nl-BE': {
-		establishments: 'vestiging',
-	},
-	'en-US': {
-		establishments: 'establishments',
+		establishments: 'vestigingen',
 	},
 	es: {
-		establishments: 'establecimiento',
+		establishments: 'establecimientos',
 	},
 	pt: {
 		establishments: 'estabelecimentos',

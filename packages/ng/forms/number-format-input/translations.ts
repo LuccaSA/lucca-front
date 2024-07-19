@@ -1,27 +1,24 @@
 ﻿export const Translations = {
 	en: {
-		clear: 'Empty this field',
+		clear: 'Clear',
 	},
 	de: {
-		clear: 'Dieses Feld leeren',
+		clear: 'Löschen',
 	},
 	fr: {
 		clear: 'Vider ce champ',
 	},
 	it: {
-		clear: 'Svuotare questo campo',
+		clear: 'Cancellare questo campo',
 	},
 	nl: {
-		clear: 'Leeg dit veld',
+		clear: 'Dit veld leegmaken',
 	},
 	'nl-BE': {
-		clear: 'Leeg dit veld',
-	},
-	'en-US': {
-		clear: 'Empty this field',
+		clear: 'Dit veld leegmaken',
 	},
 	es: {
-		clear: 'Vacíe este campo',
+		clear: 'Eliminar',
 	},
 	pt: {
 		clear: 'Esvaziar este campo',
