@@ -11,7 +11,7 @@ import { axe } from 'jest-axe';
 import { of } from 'rxjs';
 import { ILuDepartment } from './department.model';
 import { LuDepartmentSelectInputComponent } from './select';
-import { ALuDepartmentService, LuDepartmentV3Service } from './service';
+import { ALuDepartmentService, LuDepartmentService } from './service';
 
 const deptMock: ILuTree<ILuDepartment>[] = [
 	{
@@ -24,7 +24,7 @@ const deptMock: ILuTree<ILuDepartment>[] = [
 	{ value: { id: 2, name: 'Lucca UK' }, children: [{ value: { id: 21, name: 'Support' }, children: [] }] },
 ];
 
-const mock = createMock(LuDepartmentV3Service);
+const mock = createMock(LuDepartmentService);
 mock.getTrees = jest.fn(() => of(deptMock));
 
 describe('department select', () => {

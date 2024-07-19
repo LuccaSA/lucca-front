@@ -13,8 +13,8 @@ export interface IApiDepartment {
 }
 
 @Injectable()
-export class LuDepartmentV3Service extends LuApiV3Service<ILuDepartment> implements ILuDepartmentService<ILuDepartment> {
-	protected override _api = `/api/v3/departments`;
+export class LuDepartmentService extends LuApiV3Service<ILuDepartment> implements ILuDepartmentService<ILuDepartment> {
+	protected override _api = `/organization/structure/api/departments`;
 	protected _appInstanceId: number | string;
 	set appInstanceId(appInstanceId: number | string) {
 		if (appInstanceId) {
@@ -37,7 +37,7 @@ export class LuDepartmentV3Service extends LuApiV3Service<ILuDepartment> impleme
 				`/api/v3/departments/scopedtree?fields=id,name&${[`appInstanceId=${this._appInstanceId}`, `operations=${this._operations.join(',')}`, this._filters.join(',')].filter((f) => !!f).join('&')}`,
 			);
 		} else {
-			call = this._http.get<ILuApiResponse<IApiDepartment>>(`/api/v3/departments/tree?fields=id,name&${this._filters.join(',')}`);
+			call = this._http.get<ILuApiResponse<IApiDepartment>>(`${this._api}/tree?fields=id,name&${this._filters.join(',')}`);
 		}
 		return call.pipe(
 			map((response: ILuApiResponse<IApiDepartment>): ILuTree<ILuDepartment>[] => {
