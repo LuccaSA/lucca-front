@@ -33,18 +33,21 @@ export class LuDepartmentService extends LuApiV3Service<ILuDepartment> implement
 	getTrees() {
 		let call: Observable<ILuApiResponse<IApiDepartment>>;
 		if (this._appInstanceId && this._operations?.length) {
-			call = this._http.get<ILuApiResponse<IApiDepartment>>(
-				`/api/v3/departments/scopedtree?fields=id,name&${[`appInstanceId=${this._appInstanceId}`, `operations=${this._operations.join(',')}`, this._filters.join(',')].filter((f) => !!f).join('&')}`,
-			);
+			call = this._http
+				.get<
+					ILuApiResponse<IApiDepartment>
+				>(`/api/v3/departments/scopedtree?fields=id,name&${[`appInstanceId=${this._appInstanceId}`, `operations=${this._operations.join(',')}`, this._filters.join(',')].filter((f) => !!f).join('&')}`)
+				.pipe(
+					map((response: ILuApiResponse<IApiDepartment>): ILuTree<ILuDepartment>[] => {
+						const tree = response.data;
+						return tree?.children.map((c) => this.format(c)) ?? [];
+					}),
+				);
 		} else {
-			call = this._http.get<ILuApiResponse<IApiDepartment>>(`${this._api}/tree?fields=id,name&${this._filters.join(',')}`);
+			call = this._http.get<IApiDepartment>(`${this._api}/tree`);
 		}
-		return call.pipe(
-			map((response: ILuApiResponse<IApiDepartment>): ILuTree<ILuDepartment>[] => {
-				const tree = response.data;
-				return tree?.children.map((c) => this.format(c)) ?? [];
-			}),
-		);
+
+		return call;
 	}
 
 	private format(t: IApiDepartment): ILuTree<ILuDepartment> {
