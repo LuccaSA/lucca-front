@@ -17,9 +17,6 @@
 	'nl-BE': {
 		clear: 'Dit veld leegmaken',
 	},
-	'en-US': {
-		clear: 'Empty this field',
-	},
 	es: {
 		clear: 'Vacíe este campo',
 	},

@@ -17,9 +17,6 @@
 	'nl-BE': {
 		departments: 'afdelingen',
 	},
-	'en-US': {
-		departments: 'departments',
-	},
 	es: {
 		departments: 'departamentos',
 	},

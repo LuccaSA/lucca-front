@@ -9,9 +9,9 @@
 	de: {
 		placeholderDay: 'TT/MM/JJJJ',
 		placeholderMonth: 'MM/JJJJ',
-		placeholderYear: 'AAAA',
-		formatMonth: 'MM/Y',
-		formatYear: 'Y',
+		placeholderYear: 'JJJJ',
+		formatMonth: 'MM/J',
+		formatYear: 'J',
 	},
 	fr: {
 		placeholderDay: 'JJ/MM/AAAA',
@@ -41,19 +41,12 @@
 		formatMonth: 'MM/J',
 		formatYear: 'J',
 	},
-	'en-US': {
-		placeholderDay: 'MM/DD/YYYYY',
-		placeholderMonth: 'MM/YYYY',
-		placeholderYear: 'YYYY',
-		formatMonth: 'MM/Y',
-		formatYear: 'Y',
-	},
 	es: {
 		placeholderDay: 'DD/MM/AAAA',
 		placeholderMonth: 'MM/AAAA',
 		placeholderYear: 'AAAA',
 		formatMonth: 'MM/A',
-		formatYear: 'Y',
+		formatYear: 'A',
 	},
 	pt: {
 		placeholderDay: 'DD/MM/AAAA',

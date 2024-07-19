@@ -17,9 +17,6 @@
 	'nl-BE': {
 		close: 'Sluiten',
 	},
-	'en-US': {
-		close: 'Close',
-	},
 	es: {
 		close: 'Cerrar',
 	},

@@ -17,11 +17,8 @@
 	'nl-BE': {
 		addOption: 'Een optie toevoegen',
 	},
-	'en-US': {
-		addOption: 'Add option',
-	},
 	es: {
-		addOption: 'Agregar opción',
+		addOption: 'Añadir una opción',
 	},
 	pt: {
 		addOption: 'Adicionar opção',

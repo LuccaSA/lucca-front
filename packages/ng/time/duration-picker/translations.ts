@@ -6,7 +6,7 @@
 	},
 	de: {
 		timePickerHours: 'Stunden',
-		timePickerTimeSeparator: 'Std.',
+		timePickerTimeSeparator: 'h',
 		timePickerMinutes: 'Minuten',
 	},
 	fr: {
@@ -28,11 +28,6 @@
 		timePickerHours: 'uren',
 		timePickerTimeSeparator: 'h',
 		timePickerMinutes: 'minuten',
-	},
-	'en-US': {
-		timePickerHours: 'hours',
-		timePickerTimeSeparator: 'h',
-		timePickerMinutes: 'minutes',
 	},
 	es: {
 		timePickerHours: 'horas',
