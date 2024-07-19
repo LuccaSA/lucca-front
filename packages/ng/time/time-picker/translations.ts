@@ -29,11 +29,6 @@
 		timePickerTimeSeparator: ':',
 		timePickerMinutes: 'minuten',
 	},
-	'en-US': {
-		timePickerHours: 'hours',
-		timePickerTimeSeparator: ':',
-		timePickerMinutes: 'minutes',
-	},
 	es: {
 		timePickerHours: 'horas',
 		timePickerTimeSeparator: ':',

@@ -3,7 +3,7 @@
 		includeFormerEmployees: 'Include former employees',
 	},
 	de: {
-		includeFormerEmployees: 'Ehemalige Mitarbeiter einbeziehen',
+		includeFormerEmployees: 'Ausgeschiedene Mitarbeitende einbeziehen ',
 	},
 	fr: {
 		includeFormerEmployees: 'Inclure les salariés partis',
@@ -16,9 +16,6 @@
 	},
 	'nl-BE': {
 		includeFormerEmployees: 'Inclusief medewerkers die zijn vertrokken',
-	},
-	'en-US': {
-		includeFormerEmployees: 'Include former employees',
 	},
 	es: {
 		includeFormerEmployees: 'Incluir a los antiguos empleados',

@@ -5,7 +5,7 @@
 	},
 	de: {
 		parentOnly: 'Nur der Elternteil',
-		childrenOnly: 'Nur Kinder',
+		childrenOnly: 'Nur die Kinder',
 	},
 	fr: {
 		parentOnly: 'Seulement le parent',
@@ -23,13 +23,9 @@
 		parentOnly: 'Alleen de ouder',
 		childrenOnly: 'Alleen de kinderen',
 	},
-	'en-US': {
-		parentOnly: 'Parent only',
-		childrenOnly: 'Children only',
-	},
 	es: {
-		parentOnly: 'Sólo el padre',
-		childrenOnly: 'Sólo niños',
+		parentOnly: 'Solo el principal',
+		childrenOnly: 'Solo los secundarios',
 	},
 	pt: {
 		parentOnly: 'Apenas o pai',

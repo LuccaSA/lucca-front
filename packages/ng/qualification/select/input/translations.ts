@@ -17,11 +17,8 @@
 	'nl-BE': {
 		qualifications: 'kwalificaties',
 	},
-	'en-US': {
-		qualifications: 'qualifications',
-	},
 	es: {
-		qualifications: 'calificaciones',
+		qualifications: 'cualificaciones',
 	},
 	pt: {
 		qualifications: 'qualificações',

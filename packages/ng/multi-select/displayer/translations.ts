@@ -8,7 +8,7 @@
 	de: {
 		otherResult: 'anderes Ergebnis',
 		otherResults: 'andere Ergebnisse',
-		showResultsDetails: 'Details anzeigen',
+		showResultsDetails: 'Details anzeigen ',
 		removeOption: 'Option löschen',
 	},
 	fr: {
@@ -35,17 +35,11 @@
 		showResultsDetails: 'Zie details',
 		removeOption: 'Optie verwijderen',
 	},
-	'en-US': {
-		otherResult: 'other result',
-		otherResults: 'other results',
-		showResultsDetails: 'Show details',
-		removeOption: 'Remove option',
-	},
 	es: {
 		otherResult: 'otro resultado',
 		otherResults: 'otros resultados',
-		showResultsDetails: 'Mostrar detalles',
-		removeOption: 'Remove option',
+		showResultsDetails: 'Ver los detalles',
+		removeOption: 'Eliminar la opción',
 	},
 	pt: {
 		otherResult: 'outro resultado',
