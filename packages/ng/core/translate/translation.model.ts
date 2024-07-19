@@ -1,3 +1,6 @@
+/**
+ * @deprecated use `LuTranslation` instead.
+ */
 export interface ILuTranslation<T> {
 	en: T;
 	'en-GB'?: T;
@@ -7,3 +10,5 @@ export interface ILuTranslation<T> {
 	fr?: T;
 	pt?: T;
 }
+
+export type LuTranslation<T> = Record<string, T>;

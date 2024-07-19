@@ -1,3 +1,4 @@
 export * from './default-displayer.component';
-export * from './displayer.directive';
+export * from './default-displayer.translate';
 export * from './displayer-input.directive';
+export * from './displayer.directive';
