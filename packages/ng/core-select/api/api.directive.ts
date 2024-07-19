@@ -73,18 +73,29 @@ export abstract class ALuCoreSelectApiDirective<TOption, TParams = Record<string
 			switchMap(([params, isOpened]) =>
 				isOpened
 					? this.page$.pipe(
-							concatMap((page) => {
-								this.select.loading = true;
-								return this.getOptions(params, page).pipe(
-									catchError(() => of([] as TOption[])),
-									tap(() => (this.select.loading = false)),
-								);
-							}),
-							takeWhile((items) => items.length === this.pageSize, true),
-							scan((acc, items) => [...acc, ...items], [] as TOption[]),
+							concatMap((page) => this.getOptionsPage(params, page).pipe(map(({ items, isLastPage }) => ({ items, isLastPage, page })))),
+							takeWhile(({ isLastPage }) => !isLastPage, true),
+							scan(
+								(acc, { items, page }) => {
+									acc[page] = items;
+									return acc;
+								},
+								{} as Record<number, TOption[]>,
+							),
+							map((pages) => Object.values(pages).flat()),
 						)
 					: of([] as TOption[]),
 			),
+		);
+	}
+
+	protected getOptionsPage(params: TParams, page: number): Observable<{ items: TOption[]; isLastPage: boolean }> {
+		this.select.loading = true;
+
+		return this.getOptions(params, page).pipe(
+			catchError(() => of([] as TOption[])),
+			tap(() => (this.select.loading = false)),
+			map((items) => ({ items, isLastPage: items.length < this.pageSize })),
 		);
 	}
 

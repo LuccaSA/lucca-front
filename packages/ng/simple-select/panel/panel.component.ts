@@ -1,11 +1,10 @@
-import { A11yModule, ActiveDescendantKeyManager } from '@angular/cdk/a11y';
+import { A11yModule } from '@angular/cdk/a11y';
 import { AsyncPipe, NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
 import { AfterViewInit, ChangeDetectionStrategy, Component, QueryList, TrackByFunction, ViewChildren, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { PortalDirective, getIntl } from '@lucca-front/ng/core';
-import { LuOptionGroup, LuSelectPanelRef, SELECT_ID, ɵLuOptionComponent, ɵLuOptionGroupPipe, ɵgetGroupTemplateLocation } from '@lucca-front/ng/core-select';
-import { asyncScheduler, filter, map, observeOn, take, takeUntil } from 'rxjs';
-import { debounceTime, switchMap } from 'rxjs/operators';
+import { CoreSelectKeyManager, LuOptionGroup, LuSelectPanelRef, SELECT_ID, ɵLuOptionComponent, ɵLuOptionGroupPipe, ɵgetGroupTemplateLocation } from '@lucca-front/ng/core-select';
+import { EMPTY } from 'rxjs';
 import { LuSimpleSelectInputComponent } from '../input/select-input.component';
 import { SIMPLE_SELECT_INPUT } from '../select.model';
 import { LU_SIMPLE_SELECT_TRANSLATIONS } from '../select.translate';
@@ -18,6 +17,7 @@ import { LuIsOptionSelectedPipe } from './option-selected.pipe';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	standalone: true,
 	imports: [A11yModule, AsyncPipe, FormsModule, NgIf, NgFor, NgTemplateOutlet, ɵLuOptionGroupPipe, ɵLuOptionComponent, LuIsOptionSelectedPipe, PortalDirective],
+	providers: [CoreSelectKeyManager],
 })
 export class LuSelectPanelComponent<T> implements AfterViewInit {
 	public selectInput = inject<LuSimpleSelectInputComponent<T>>(SIMPLE_SELECT_INPUT);
@@ -38,11 +38,8 @@ export class LuSelectPanelComponent<T> implements AfterViewInit {
 	optionTpl = this.selectInput.optionTpl;
 
 	@ViewChildren(ɵLuOptionComponent) optionsQL: QueryList<ɵLuOptionComponent<T>>;
-	private _keyManager: ActiveDescendantKeyManager<ɵLuOptionComponent<T>>;
 
-	public get keyManager(): ActiveDescendantKeyManager<ɵLuOptionComponent<T>> {
-		return this._keyManager;
-	}
+	public keyManager = inject<CoreSelectKeyManager<T>>(CoreSelectKeyManager);
 
 	public get selected(): T | undefined {
 		return this.initialValue;
@@ -67,45 +64,16 @@ export class LuSelectPanelComponent<T> implements AfterViewInit {
 	}
 
 	ngAfterViewInit(): void {
-		if (!this.optionsQL) {
-			return;
-		}
-
-		this._keyManager = new ActiveDescendantKeyManager(this.optionsQL).withHomeAndEnd();
-
-		this.keyManager.change
-			.pipe(
-				map(() => this.keyManager.activeItem?.id),
-				takeUntil(this.panelRef.closed),
-			)
-			.subscribe((activeDescendant) => this.panelRef.activeOptionIdChanged.emit(activeDescendant));
+		this.keyManager.init({
+			queryList: this.optionsQL,
+			options$: this.options$,
+			optionComparer: this.optionComparer,
+			activeOptionIdChanged$: this.panelRef.activeOptionIdChanged,
+			clueChange$: this.selectInput.searchable ? this.selectInput.clueChange : EMPTY,
+		});
 
 		if (this.initialValue && !this.selectInput.clue) {
-			this.options$
-				?.pipe(
-					observeOn(asyncScheduler),
-					map((options) => options.findIndex((o) => this.optionComparer(o, this.initialValue))),
-					filter((index) => index !== -1),
-					take(1),
-					takeUntil(this.panelRef.closed),
-				)
-				.subscribe((selectedIndex) => this.keyManager.setActiveItem(selectedIndex));
-		} else {
-			// If no initial Value, set first as active
-			setTimeout(() => this.keyManager.setFirstItemActive());
-		}
-
-		/**
-		 * On new options after a search, we want to select the first element with key manager
-		 */
-		if (this.selectInput.searchable) {
-			this.selectInput.clueChange
-				.pipe(
-					switchMap(() => this.optionsQL.changes.pipe(take(1))),
-					debounceTime(0),
-					takeUntil(this.panelRef.closed),
-				)
-				.subscribe(() => (this.optionsQL.length ? this.keyManager.setFirstItemActive() : this.keyManager.setActiveItem(-1)));
+			this.keyManager.highlightOption(this.initialValue);
 		}
 	}
 }
