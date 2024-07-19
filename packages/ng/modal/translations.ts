@@ -5,7 +5,7 @@
 		close: 'Close',
 	},
 	de: {
-		submit: 'Ok',
+		submit: 'OK',
 		cancel: 'Abbrechen',
 		close: 'Schließen',
 	},
@@ -29,13 +29,8 @@
 		cancel: 'Annuleren',
 		close: 'Sluiten',
 	},
-	'en-US': {
-		submit: 'Ok',
-		cancel: 'Cancel',
-		close: 'Close',
-	},
 	es: {
-		submit: 'Ok',
+		submit: 'Aceptar',
 		cancel: 'Cancelar',
 		close: 'Cerrar',
 	},

@@ -17,11 +17,8 @@
 	'nl-BE': {
 		establishments: 'vestigingen',
 	},
-	'en-US': {
-		establishments: 'establishments',
-	},
 	es: {
-		establishments: 'establecimiento',
+		establishments: 'establecimientos',
 	},
 	pt: {
 		establishments: 'estabelecimentos',

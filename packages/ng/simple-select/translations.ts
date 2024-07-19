@@ -41,13 +41,6 @@
 		emptyResults: 'Geen resultaten voor uw zoekopdracht',
 		loading: 'Bezig met laden...',
 	},
-	'en-US': {
-		placeholder: 'Select an option',
-		clear: 'Clear',
-		clearSearch: 'Clear search',
-		emptyResults: 'No results',
-		loading: 'Loading...',
-	},
 	es: {
 		placeholder: 'Seleccione una opción',
 		clear: 'Borrar',
