@@ -128,7 +128,7 @@ export class LuCoreSelectUsersDirective<T extends LuCoreSelectUser = LuCoreSelec
 		}),
 		map((res) => res.data.items.map(({ item }) => item)[0] ?? null),
 		takeUntilDestroyed(),
-		shareReplay(),
+		shareReplay(1),
 	);
 
 	protected getMe(): Observable<T | null> {

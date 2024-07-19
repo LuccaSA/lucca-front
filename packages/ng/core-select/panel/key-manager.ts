@@ -40,6 +40,10 @@ export class CoreSelectKeyManager<T> {
 		return this.#cdkKeyManager?.activeItemIndex ?? -1;
 	}
 
+	setActiveItem(index: number): void {
+		this.#cdkKeyManager?.setActiveItem(index);
+	}
+
 	highlightOption(option: T): void {
 		if (!this.#options) {
 			return;
@@ -56,10 +60,6 @@ export class CoreSelectKeyManager<T> {
 				takeUntilDestroyed(this.#destroyRef),
 			)
 			.subscribe((selectedIndex) => this.setActiveItem(selectedIndex));
-	}
-
-	setActiveItem(index: number): void {
-		this.#cdkKeyManager?.setActiveItem(index);
 	}
 
 	#bindClueChange(clueChange$: Observable<string>): void {
