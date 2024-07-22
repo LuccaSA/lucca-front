@@ -39,3 +39,6 @@ compodoc-static
 
 # apple stuff
 .DS_Store
+
+# lucca stuff
+.lokalise.logs
