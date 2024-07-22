@@ -1,8 +1,8 @@
 ﻿export const Translations = {
 	en: {
-		placeholderDay: 'DD/MM/YYYYY',
-		placeholderMonth: 'MM/YYYYY',
-		placeholderYear: 'YYYYY',
+		placeholderDay: 'DD/MM/YYYY',
+		placeholderMonth: 'MM/YYYY',
+		placeholderYear: 'YYYY',
 	},
 	de: {
 		placeholderDay: 'TT/MM/JJJJ',
@@ -22,17 +22,12 @@
 	nl: {
 		placeholderDay: 'DD/MM/JJJJ',
 		placeholderMonth: 'MM/JJJJ',
-		placeholderYear: 'AAAA',
+		placeholderYear: 'JJJJ',
 	},
 	'nl-BE': {
 		placeholderDay: 'DD/MM/JJJJ',
 		placeholderMonth: 'MM/JJJJ',
-		placeholderYear: 'AAAA',
-	},
-	'en-US': {
-		placeholderDay: 'MM/DD/YYYYY',
-		placeholderMonth: 'MM/YYYYY',
-		placeholderYear: 'YYYYY',
+		placeholderYear: 'JJJJ',
 	},
 	es: {
 		placeholderDay: 'DD/MM/AAAA',

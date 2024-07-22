@@ -20,19 +20,14 @@
 		timePickerMinutes: 'minuti',
 	},
 	nl: {
-		timePickerHours: 'uur',
+		timePickerHours: 'uren',
 		timePickerTimeSeparator: ':',
 		timePickerMinutes: 'minuten',
 	},
 	'nl-BE': {
-		timePickerHours: 'uur',
+		timePickerHours: 'uren',
 		timePickerTimeSeparator: ':',
 		timePickerMinutes: 'minuten',
-	},
-	'en-US': {
-		timePickerHours: 'hours',
-		timePickerTimeSeparator: ':',
-		timePickerMinutes: 'minutes',
 	},
 	es: {
 		timePickerHours: 'horas',
