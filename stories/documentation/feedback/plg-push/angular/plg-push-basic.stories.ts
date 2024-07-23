@@ -1,21 +1,21 @@
-import { PLGBannerComponent } from '@lucca-front/ng/plg-banner';
+import { PLGPushComponent } from '@lucca-front/ng/plg-push';
 import { Meta, StoryObj } from '@storybook/angular';
 import { generateInputs } from 'stories/helpers/stories';
 
 export default {
-	title: 'Documentation/Feedback/PLG Banner/Angular/Basic',
-	component: PLGBannerComponent,
-	render: (args: PLGBannerComponent & { description: string }, context) => {
+	title: 'Documentation/Feedback/PLG Push/Angular/Basic',
+	component: PLGPushComponent,
+	render: (args: PLGPushComponent & { description: string }, context) => {
 		const { description, ...inputs } = args;
 		return {
 			template: `
-			<lu-plg-banner ${generateInputs(inputs, context.argTypes)}>
+			<lu-plg-push ${generateInputs(inputs, context.argTypes)}>
 				${description}
-			</lu-plg-banner>`,
+			</lu-plg-push>`,
 		};
 	},
 	argTypes: {
-		bannerTitle: {
+		pushTitle: {
 			type: 'string',
 		},
 		description: {
@@ -30,9 +30,9 @@ export default {
 	},
 } as Meta;
 
-export const Template: StoryObj<PLGBannerComponent & { description: string }> = {
+export const Template: StoryObj<PLGPushComponent & { description: string }> = {
 	args: {
-		bannerTitle: `Title`,
+		pushTitle: `Title`,
 		description: `Description`,
 		linkLabel: `Link`,
 		linkURL: `https://www.google.com/`,

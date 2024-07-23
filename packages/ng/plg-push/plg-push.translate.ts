@@ -1,15 +1,15 @@
 import { InjectionToken } from '@angular/core';
 import { ILuTranslation } from '@lucca-front/ng/core';
 
-export const LU_PLG_BANNER_TRANSLATIONS = new InjectionToken('LuPLGBannerTranslations', {
-	factory: () => luPLGBannerTranslations,
+export const LU_PLG_PUSH_TRANSLATIONS = new InjectionToken('LuPLGPushTranslations', {
+	factory: () => luPLGPushTranslations,
 });
 
-export interface LuPLGBannerLabel {
+export interface LuPLGPushLabel {
 	openNewTab: string;
 }
 
-export const luPLGBannerTranslations: ILuTranslation<LuPLGBannerLabel> = {
+export const luPLGPushTranslations: ILuTranslation<LuPLGPushLabel> = {
 	en: {
 		openNewTab: 'Open in a new tab',
 	},

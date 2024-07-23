@@ -14,38 +14,38 @@
 	background-color: var(--palettes-brand-50);
 
 	@at-root ($atRoot) {
-		.plgBanner-icons {
+		.plgPush-icons {
 			position: relative;
 			display: flex;
 			align-items: center;
 			justify-content: center;
-			height: var(--components-plgBanner-icon-size);
-			width: var(--components-plgBanner-icon-size);
+			height: var(--components-plgPush-icon-size);
+			width: var(--components-plgPush-icon-size);
 		}
 
-		.plgBanner-icons-front {
+		.plgPush-icons-front {
 			color: var(--palettes-brand-600);
 			z-index: 1;
 		}
 
-		.plgBanner-icons-back {
+		.plgPush-icons-back {
 			position: absolute;
 			z-index: 0;
 			inset: 0;
 		}
 
-		.plgBanner-content {
+		.plgPush-content {
 			display: flex;
 			flex-direction: column;
 			gap: var(--pr-t-spacings-50);
 			padding: var(--pr-t-spacings-75) var(--pr-t-spacings-0);
 		}
 
-		.plgBanner-content-title {
+		.plgPush-content-title {
 			font-weight: 600;
 		}
 
-		.plgBanner-content-link {
+		.plgPush-content-link {
 			display: flex;
 			align-items: center;
 			gap: var(--pr-t-spacings-25);
