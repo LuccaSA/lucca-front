@@ -8,6 +8,24 @@
 	background-color: white;
 }
 
+.demo-utilityWrapper {
+	display: flex;
+	gap: var(--pr-t-spacings-100);
+	flex-wrap: wrap;
+	align-items: flex-start;
+}
+
+.demo-utility {
+	background-color: var(--pr-t-elevation-surface-raised);
+	padding: var(--pr-t-spacings-100);
+	border: 1px solid var(--palettes-neutral-300);
+
+	.code {
+		margin: 0;
+		display: block;
+	}
+}
+
 .demo-icon {
 	.deprecated {
 		&,

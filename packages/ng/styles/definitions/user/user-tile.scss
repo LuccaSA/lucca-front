@@ -27,7 +27,7 @@
 	}
 
 	&.mod-wordBreak {
-		word-break: break-all;
+		overflow-wrap: break-word;
 	}
 
 	&.mod-nameOnly {

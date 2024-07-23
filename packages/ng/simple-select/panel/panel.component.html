@@ -12,7 +12,7 @@
 		<div role="listbox">
 			<ng-container *ngIf="grouping && ctx.groupTemplateLocation === 'group-header'">
 				<div
-					*ngFor="let group of ctx.options | luOptionGroup:grouping.selector"
+					*ngFor="let group of ctx.options | luOptionGroup:grouping.selector; trackBy: trackGroupsBy"
 					class="lu-picker-content-option-group"
 					role="group"
 					[attr.aria-labelledby]="selectId + '-group-' + group.key"
@@ -29,7 +29,7 @@
 
 			<ng-template #optionsList let-options>
 				<lu-select-option
-					*ngFor="let option of options; let index = index"
+					*ngFor="let option of options; let index = index; trackBy: trackOptionsBy"
 					[option]="option"
 					[optionTpl]="optionTpl"
 					[optionIndex]="index"
