@@ -27,6 +27,7 @@
 		//There might be more than one footer
 		.indexTable-foot {
 			display: table-row-group;
+
 			&:is(tfoot) {
 				display: table-footer-group;
 			}
@@ -75,6 +76,7 @@
 			padding-right: var(--components-indexTable-cell-padding-right, var(--components-indexTable-cell-padding));
 
 			--components-indexTable-cell-padding-right: calc(var(--components-indexTable-cell-padding) + 4px);
+
 			~ .indexTable-head-row-cell,
 			~ .indexTable-body-row-cell,
 			~ .indexTable-foot-row-cell {
@@ -85,7 +87,7 @@
 				--components-indexTable-cell-padding-right: var(--components-indexTable-cell-padding);
 			}
 
-			&:not(:has(button, a, input, textarea, select, [tabindex='0'])) {
+			&:not(:has(button, a, input, textarea, select, details, [tabindex='0']), .mod-allowTextSelection) {
 				pointer-events: none;
 			}
 		}
@@ -218,10 +220,13 @@
 			@include button.text;
 			@include button.S;
 			@include button.onlyIconS;
+
 			position: static;
+
 			.lucca-icon {
 				transition: transform var(--commons-animations-durations-fast) ease;
 			}
+
 			// Extend button reactive zone to his whole parent
 			&::before {
 				content: '';
@@ -241,15 +246,18 @@
 		// A wrapper is needed for pagination
 		.indexTableWrapper {
 			@include vars;
+
 			display: flex;
 			flex-direction: column;
 			padding-bottom: var(--pr-t-spacings-100);
 			border-radius: var(--components-indexTable-border-radius);
 			background-color: var(--components-indexTable-background-color);
+
 			.indexTable {
 				flex-grow: 1;
 				padding-bottom: 0;
 			}
+
 			.pagination {
 				align-self: flex-end;
 				padding: var(--pr-t-spacings-50) 0 0 0;

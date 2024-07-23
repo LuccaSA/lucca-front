@@ -21,8 +21,15 @@ function getTemplate(args: IndexTableBasicStory): string {
 			<td class="indexTable-body-row-cell">
 				<a href="#" class="indexTable-body-row-cell-link">Content</a>
 			</td>
+			<td class="indexTable-body-row-cell">Content</td>
+			<td class="indexTable-body-row-cell">Content</td>
+		</tr>
+		<tr class="indexTable-body-row">
 			<td class="indexTable-body-row-cell">
-				Content
+				<a href="#" class="indexTable-body-row-cell-link">Content</a>
+			</td>
+			<td class="indexTable-body-row-cell mod-allowTextSelection">
+				Content selectable
 			</td>
 			<td class="indexTable-body-row-cell">
 				Content
@@ -32,7 +39,7 @@ function getTemplate(args: IndexTableBasicStory): string {
 			<td class="indexTable-body-row-cell">
 				<a href="#" class="indexTable-body-row-cell-link">Content</a>
 			</td>
-			<td class="indexTable-body-row-cell">Content</td>
+			<td class="indexTable-body-row-cell"><a href="#">Content actionable</a></td>
 			<td class="indexTable-body-row-cell">Content</td>
 		</tr>
 	</tbody>
