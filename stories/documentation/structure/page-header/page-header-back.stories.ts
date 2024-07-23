@@ -1,28 +1,26 @@
 import { Meta, StoryFn } from '@storybook/angular';
 
-interface PageHeaderBasicStory {
+interface PageHeaderBackStory {
 	sticky: boolean;
 }
 
 export default {
-	title: 'Documentation/Structure/PageHeader/Basic',
-	argTypes: {
-		sticky: {
-			control: {
-				type: 'boolean',
-			},
-		},
-	},
+	title: 'Documentation/Structure/PageHeader/Back',
+	argTypes: {},
 } as Meta;
 
-function getTemplate(args: PageHeaderBasicStory): string {
-	const sticky = args.sticky ? `mod-sticky` : '';
-
+function getTemplate(args: PageHeaderBackStory): string {
 	return `
-	<header class="pageHeader ${sticky}">
+	<header class="pageHeader">
 		<div class="pageHeader-content">
 			<div class="pageHeader-content-title">
-				<h1 class="pr-u-margin0">H1. Page title</h1>
+				<nav class="pageHeader-content-title-back">
+					<a href="#" class="button mod-onlyIcon mod-text">
+						<span class="lucca-icon icon-arrowLeft" aria-hidden="true"></span>
+						<span class="u-mask">Page parente</span>
+					</a>
+				</nav>
+				<h1 class="pr-u-margin0">Page courante</h1>
 				<div>
 					<button type="button" class="button mod-onlyIcon mod-text" luTooltip="Modifier">
 						<span aria-hidden="true" class="lucca-icon icon-officePen"></span>
@@ -47,25 +45,24 @@ function getTemplate(args: PageHeaderBasicStory): string {
 				<button type="button" class="button mod-outline">Button</button>
 				<button type="button" class="button mod-onlyIcon mod-text">
 					<span aria-hidden="true" class="lucca-icon icon-menuDots"></span>
-					<span class="u-mask">voir plus</span>
+					<span class="u-mask">Voir plus</span>
 				</button>
 			</div>
 		</div>
 		<div class="pageHeader-description">
 			<p class="pr-u-marginBottom0">
 				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac justo scelerisque, blandit nibh quis, imperdiet justo.
-				Nullam condimentum nulla et neque ultricies bibendum
-				<a target="_blank">Lien<span aria-hidden="true" class="lucca-icon icon-arrowExternal mod-XS pr-u-marginLeft50"></span></a>.
+				Nullam condimentum nulla et neque ultricies bibendum.
 			</p>
 		</div>
 	</header>
 	`;
 }
 
-const Template: StoryFn<PageHeaderBasicStory> = (args) => ({
+const Template: StoryFn<PageHeaderBackStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const BasicPageHeader = Template.bind({});
-BasicPageHeader.args = { sticky: false };
+export const PageHeaderBackStory = Template.bind({});
+PageHeaderBackStory.args = {};
