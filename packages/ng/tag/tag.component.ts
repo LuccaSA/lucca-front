@@ -1,3 +1,4 @@
+import { NgClass } from '@angular/common';
 import { booleanAttribute, ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { LuccaIcon } from '@lucca-front/icons';
@@ -11,7 +12,7 @@ import { IconComponent } from '@lucca-front/ng/icon';
 	styleUrls: ['./tag.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	encapsulation: ViewEncapsulation.None,
-	imports: [IconComponent, RouterLink],
+	imports: [IconComponent, NgClass, RouterLink],
 })
 export class TagComponent {
 	@Input({ required: true })
@@ -48,4 +49,11 @@ export class TagComponent {
 	 * Defaults to no icon.
 	 */
 	icon: LuccaIcon;
+
+	get tagClasses() {
+		return {
+			[`mod-${this.size}`]: !!this.size,
+			[`palette-${this.palette}`]: !!this.palette,
+		};
+	}
 }

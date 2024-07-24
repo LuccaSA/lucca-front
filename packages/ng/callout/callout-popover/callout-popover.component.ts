@@ -1,12 +1,12 @@
-import { ChangeDetectionStrategy, Component, ElementRef, inject, Input, numberAttribute, OnDestroy, TemplateRef, ViewChild, ViewContainerRef, ViewEncapsulation } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { IconComponent } from '@lucca-front/ng/icon';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { TemplatePortal } from '@angular/cdk/portal';
-import { animate, state, style, transition, trigger } from '@angular/animations';
-import { Palette, PortalContent, PortalDirective } from '@lucca-front/ng/core';
+import { CommonModule } from '@angular/common';
+import { ChangeDetectionStrategy, Component, ElementRef, inject, Input, numberAttribute, OnDestroy, TemplateRef, ViewChild, ViewContainerRef, ViewEncapsulation } from '@angular/core';
 import { LuccaIcon } from '@lucca-front/icons';
 import { ButtonComponent } from '@lucca-front/ng/button';
+import { Palette, PortalContent, PortalDirective } from '@lucca-front/ng/core';
+import { IconComponent } from '@lucca-front/ng/icon';
 import { CalloutState, CalloutStateMap } from '../callout-state';
 
 @Component({
@@ -121,6 +121,25 @@ export class CalloutPopoverComponent implements OnDestroy {
 			return 'S';
 		}
 		return this.size;
+	}
+
+	get calloutClasses() {
+		return {
+			[`mod-${this.size}`]: !!this.size,
+			[`palette-${this.palette}`]: !!this.palette,
+		};
+	}
+
+	get calloutOverlayClasses() {
+		return {
+			[`mod-${this.size}`]: !!this.size,
+		};
+	}
+
+	get calloutOverlayHeadClasses() {
+		return {
+			[`palette-${this.palette}`]: !!this.palette,
+		};
 	}
 
 	public showContent() {
