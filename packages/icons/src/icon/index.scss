@@ -1,8 +1,8 @@
 @use 'exports' as *;
 
 .lucca-icon {
-	@include component;
 	@include vars;
+	@include component;
 
 	&.mod-XXS {
 		@include XXS;
