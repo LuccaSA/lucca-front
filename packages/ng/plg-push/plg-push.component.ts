@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 import { SafeUrl } from '@angular/platform-browser';
-import { getIntl } from '../core/translate';
-import { IconComponent } from '../icon/icon.component';
+import { getIntl } from '@lucca-front/ng/core';
+import { IconComponent } from '@lucca-front/ng/icon';
 import { LU_PLG_PUSH_TRANSLATIONS } from './plg-push.translate';
 
 @Component({
