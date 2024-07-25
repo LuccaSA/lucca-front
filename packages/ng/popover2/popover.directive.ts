@@ -1,10 +1,29 @@
-import { booleanAttribute, DestroyRef, Directive, ElementRef, HostBinding, HostListener, inject, Injector, input, Input, InputSignal, signal, TemplateRef, ViewContainerRef } from '@angular/core';
+import {
+	booleanAttribute,
+	DestroyRef,
+	Directive,
+	ElementRef,
+	HostBinding,
+	HostListener,
+	inject,
+	Injector,
+	input,
+	Input,
+	InputSignal,
+	OnDestroy,
+	Renderer2,
+	signal,
+	TemplateRef,
+	ViewContainerRef,
+} from '@angular/core';
 import { ConnectedPosition, ConnectionPositionPair, Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
 import { PopoverContentComponent } from './content/popover-content/popover-content.component';
 import { POPOVER_CONFIG, PopoverConfig } from './popover-tokens';
 import { combineLatest, debounce, filter, map, merge, Subject, switchMap, timer } from 'rxjs';
 import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
+import { LU_POPOVER2_TRANSLATIONS } from './popover2.translate';
+import { getIntl } from '@lucca-front/ng/core';
 
 export type PopoverPosition = 'above' | 'below' | 'before' | 'after';
 
@@ -48,7 +67,7 @@ const defaultPositionPairs: Record<PopoverPosition, ConnectionPositionPair> = {
 	},
 	standalone: true,
 })
-export class PopoverDirective {
+export class PopoverDirective implements OnDestroy {
 	#overlay = inject(Overlay);
 
 	#elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
@@ -56,6 +75,10 @@ export class PopoverDirective {
 	#vcr = inject(ViewContainerRef);
 
 	#destroyRef = inject(DestroyRef);
+
+	#renderer = inject(Renderer2);
+
+	intl = getIntl(LU_POPOVER2_TRANSLATIONS);
 
 	@Input({
 		alias: 'luPopover2',
@@ -70,7 +93,7 @@ export class PopoverDirective {
 	})
 	luPopoverDisabled = false;
 
-	luPopoverTrigger = input<'click' | 'click+hover'>('click');
+	luPopoverTrigger = input<'click' | 'click+hover' | 'hover+focus'>('click');
 
 	@Input()
 	customPositions?: ConnectionPositionPair[];
@@ -80,9 +103,12 @@ export class PopoverDirective {
 
 	luPopoverCloseDelay: InputSignal<number> = input<number>(100);
 
-	open$ = new Subject<void>();
+	open$ = new Subject<'focus' | 'click' | 'hover'>();
 
 	close$ = new Subject<void>();
+
+	#listenToMouseLeave = false;
+	#listenToMouseEnter = true;
 
 	#overlayRef: OverlayRef;
 
@@ -95,69 +121,101 @@ export class PopoverDirective {
 	@HostBinding('attr.aria-controls')
 	ariaControls = `popover-content-${nextId++}`;
 
+	#screenReaderDescription?: HTMLSpanElement;
+
 	constructor() {
 		combineLatest([toObservable(this.luPopoverOpenDelay), toObservable(this.luPopoverCloseDelay), toObservable(this.luPopoverTrigger)])
 			.pipe(
 				filter(([, , trigger]) => {
-					return trigger.includes('hover');
+					return trigger.includes('hover') || trigger.includes('focus');
 				}),
 				switchMap(([openDelay, closeDelay]) => {
-					return merge(this.open$.pipe(map(() => 'open')), this.close$.pipe(map(() => 'close'))).pipe(
-						debounce((event) => {
+					return merge(this.open$.pipe(map((type) => ['open', type])), this.close$.pipe(map(() => ['close']))).pipe(
+						debounce(([event]) => {
 							return timer(event === 'open' ? openDelay : closeDelay);
 						}),
 					);
 				}),
 				takeUntilDestroyed(this.#destroyRef),
 			)
-			.subscribe((event) => {
+			.subscribe(([event, type]: ['open' | 'close', 'focus' | 'click' | 'hover']) => {
 				if (event === 'open') {
-					this.openPopover(true);
-				} else {
+					this.openPopover(type === 'focus', true);
+					this.#listenToMouseLeave = type !== 'click';
+					if (type === 'focus' && !this.#screenReaderDescription) {
+						this.#screenReaderDescription = this.#renderer.createElement('span') as HTMLSpanElement;
+						this.#screenReaderDescription.innerText = this.intl.screenReaderDescription;
+						this.#renderer.addClass(this.#screenReaderDescription, 'u-mask');
+						this.#renderer.appendChild(this.#elementRef.nativeElement, this.#screenReaderDescription);
+					}
+				} else if (this.opened()) {
 					this.#componentRef?.close();
+					this.#listenToMouseEnter = true;
 				}
 			});
 	}
 
+	ngOnDestroy(): void {
+		this.#componentRef?.close();
+	}
+
 	@HostListener('mouseenter')
 	onMouseEnter() {
-		this.open$.next();
+		if (this.#listenToMouseEnter && this.luPopoverTrigger().includes('hover')) {
+			this.open$.next('hover');
+			this.#listenToMouseLeave = true;
+		}
+	}
+
+	@HostListener('focus')
+	onFocus() {
+		if (this.luPopoverTrigger().includes('focus')) {
+			this.open$.next('focus');
+			this.#listenToMouseLeave = true;
+		}
 	}
 
 	@HostListener('mouseleave')
 	onMouseLeave() {
-		this.close$.next();
+		if (this.#listenToMouseLeave && this.luPopoverTrigger().includes('hover')) {
+			this.close$.next();
+			this.#listenToMouseEnter = true;
+		}
 	}
 
 	@HostListener('click')
 	click(): void {
 		if (this.opened()) {
 			this.#componentRef?.close();
+			this.#listenToMouseLeave = true;
 		} else {
-			this.openPopover();
+			this.openPopover(true);
+			this.#listenToMouseLeave = false;
+			this.#listenToMouseEnter = false;
 		}
 	}
 
-	openPopover(disableFocusHandler = false): void {
+	openPopover(withBackdrop = false, disableFocusHandler = false): void {
 		if (!this.opened() && !this.luPopoverDisabled) {
 			this.opened.set(true);
-			this.#overlayRef =
-				this.#overlayRef ||
-				this.#overlay.create({
-					positionStrategy: this.#overlay
-						.position()
-						.flexibleConnectedTo(this.#elementRef)
-						.withPositions(this.customPositions || this.#buildPositions()),
-					scrollStrategy: this.#overlay.scrollStrategies.reposition(),
-					hasBackdrop: this.luPopoverTrigger() === 'click',
-					backdropClass: '',
-					disposeOnNavigation: true,
-				});
+			this.#overlayRef = this.#overlay.create({
+				positionStrategy: this.#overlay
+					.position()
+					.flexibleConnectedTo(this.#elementRef)
+					.withPositions(this.customPositions || this.#buildPositions()),
+				scrollStrategy: this.#overlay.scrollStrategies.reposition(),
+				hasBackdrop: withBackdrop,
+				backdropClass: '',
+				disposeOnNavigation: true,
+			});
 			// Close on backdrop click even if backdrop is invisible
 			this.#overlayRef
 				.backdropClick()
 				.pipe(takeUntilDestroyed(this.#destroyRef))
-				.subscribe(() => this.#componentRef.close());
+				.subscribe(() => {
+					this.#componentRef.close();
+					this.#listenToMouseLeave = true;
+				});
 			const config: PopoverConfig = {
 				content: this.content,
 				ref: this.#overlayRef,
@@ -177,8 +235,15 @@ export class PopoverDirective {
 			// On tooltip leave => trigger close
 			this.#componentRef.mouseLeave$.pipe(takeUntilDestroyed(this.#componentRef.destroyRef), takeUntilDestroyed(this.#destroyRef)).subscribe(() => this.close$.next());
 			// On tooltip enter => trigger open to keep it opened
-			this.#componentRef.mouseEnter$.pipe(takeUntilDestroyed(this.#componentRef.destroyRef), takeUntilDestroyed(this.#destroyRef)).subscribe(() => this.open$.next());
-			this.#componentRef.closed$.pipe(takeUntilDestroyed(this.#componentRef.destroyRef), takeUntilDestroyed(this.#destroyRef)).subscribe(() => this.opened.set(false));
+			this.#componentRef.mouseEnter$.pipe(takeUntilDestroyed(this.#componentRef.destroyRef), takeUntilDestroyed(this.#destroyRef)).subscribe(() => this.open$.next('hover'));
+			this.#componentRef.closed$.pipe(takeUntilDestroyed(this.#componentRef.destroyRef), takeUntilDestroyed(this.#destroyRef)).subscribe(() => {
+				this.opened.set(false);
+				this.#listenToMouseLeave = false;
+				if (this.#screenReaderDescription) {
+					this.#screenReaderDescription.remove();
+					this.#screenReaderDescription = undefined;
+				}
+			});
 		}
 	}
 
@@ -187,6 +252,13 @@ export class PopoverDirective {
 		if (this.opened()) {
 			event.preventDefault();
 			this.#componentRef.grabFocus();
+		}
+	}
+
+	@HostListener('keydown.Shift.Tab', ['$event'])
+	focusOutBefore(): void {
+		if (this.opened() && this.luPopoverTrigger().includes('focus')) {
+			this.#componentRef.close();
 		}
 	}
 
