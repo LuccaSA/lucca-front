@@ -42,9 +42,9 @@ export default {
 
 export const Template: StoryObj<PLGPushComponent & { description: string; linkLabel: string; linkURL: string }> = {
 	args: {
-		heading: `Title`,
-		description: `Description`,
-		linkLabel: `Link`,
-		linkURL: `https://www.google.com/`,
+		heading: ``,
+		description: `Bénéficiez de toutes les options liées au télétravail avec Timmi Office.`,
+		linkLabel: `Demander un essai gratuit`,
+		linkURL: `#`,
 	},
 };

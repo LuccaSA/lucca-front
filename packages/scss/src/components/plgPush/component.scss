@@ -40,7 +40,7 @@
 			display: flex;
 			flex-direction: column;
 			gap: var(--pr-t-spacings-50);
-			padding: var(--pr-t-spacings-75) var(--pr-t-spacings-0);
+			padding-block: var(--pr-t-spacings-75);
 		}
 
 		.plgPush-content-title {
@@ -56,7 +56,7 @@
 
 		.link {
 			@include link.brand;
-			@include link.noWrap;
+			display: inline-block;
 		}
 	}
 }

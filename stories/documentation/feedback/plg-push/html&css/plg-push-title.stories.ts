@@ -1,22 +1,23 @@
 import { Meta, StoryFn } from '@storybook/angular';
 
-interface PLGPushBasicStory {
+interface PLGPushTitleStory {
 }
 
 export default {
-	title: 'Documentation/Feedback/PLG Push/HTML & CSS/Basic',
+	title: 'Documentation/Feedback/PLG Push/HTML & CSS/Title',
 	argTypes: {},
 } as Meta;
 
-function getTemplate(args: PLGPushBasicStory): string {
+function getTemplate(args: PLGPushTitleStory): string {
 	return `<div class="plgPush">
 	<div class="plgPush-icons">
 		<span aria-hidden="true" class="plgPush-icons-front lucca-icon icon-transportRocket mod-S"></span>
 		<img class="plgPush-icons-back" alt="" src="https://cdn.lucca.fr/lucca-front/assets/plg-push/shape.svg" />
 	</div>
 	<div class="plgPush-content">
+		<div class="plgPush-content-title">Connaissez-vous Timmi Office ?</div>
 		<div class="plgPush-content-description">
-			Bénéficiez de toutes les options liées au télétravail avec Timmi Office.
+			Activez toutes les options liées aux télétravail.
 			<a class="link mod-icon" href="#" target="_blank" rel="noopener noreferrer">
 				<span>Demander un essai gratuit</span>
 				<span aria-hidden="true" class="lucca-icon icon-arrowExternal"></span>
@@ -27,10 +28,10 @@ function getTemplate(args: PLGPushBasicStory): string {
 </div>`;
 }
 
-const Template: StoryFn<PLGPushBasicStory> = (args) => ({
+const Template: StoryFn<PLGPushTitleStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Basic = Template.bind({});
-Basic.args = {};
+export const Title = Template.bind({});
+Title.args = {};
