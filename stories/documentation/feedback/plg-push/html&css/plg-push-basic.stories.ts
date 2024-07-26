@@ -37,8 +37,8 @@ function getTemplate(args: PLGPushBasicStory): string {
 	const title = args.pushTitle ? `<div class="plgPush-content-title">${args.pushTitle}</div>` : ``;
 	const link =
 		args.linkURL && args.linkLabel
-			? `<a class="link mod-icon u-textProduct" href="${args.linkURL}" target="_blank" rel="noopener noreferrer">
-					${args.linkLabel}
+			? `<a class="link mod-icon" href="${args.linkURL}" target="_blank" rel="noopener noreferrer">
+					<span>${args.linkLabel}</span>
 					<span aria-hidden="true" class="lucca-icon icon-arrowExternal mod-S"></span>
 					<span class="u-mask">Ouvrir dans une nouvelle fenêtre</span>
 				</a>`
