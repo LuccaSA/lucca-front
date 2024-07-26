@@ -25,7 +25,7 @@ export default {
 		};
 	},
 	argTypes: {
-		pushTitle: {
+		heading: {
 			type: 'string',
 		},
 		description: {
@@ -42,7 +42,7 @@ export default {
 
 export const Template: StoryObj<PLGPushComponent & { description: string; linkLabel: string; linkURL: string }> = {
 	args: {
-		pushTitle: `Title`,
+		heading: `Title`,
 		description: `Description`,
 		linkLabel: `Link`,
 		linkURL: `https://www.google.com/`,

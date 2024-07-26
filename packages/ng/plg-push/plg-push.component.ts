@@ -13,7 +13,7 @@ import { LU_PLG_PUSH_TRANSLATIONS } from './plg-push.translate';
 	encapsulation: ViewEncapsulation.None,
 })
 export class PLGPushComponent {
-	@Input() public pushTitle = '';
+	@Input() public heading = '';
 
 	public intl = getIntl(LU_PLG_PUSH_TRANSLATIONS);
 }

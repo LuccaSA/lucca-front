@@ -1,7 +1,7 @@
 import { Meta, StoryFn } from '@storybook/angular';
 
 interface PLGPushBasicStory {
-	pushTitle: string;
+	heading: string;
 	description: string;
 	linkLabel: string;
 	linkURL: string;
@@ -10,7 +10,7 @@ interface PLGPushBasicStory {
 export default {
 	title: 'Documentation/Feedback/PLG Push/HTML & CSS/Basic',
 	argTypes: {
-		pushTitle: {
+		heading: {
 			control: {
 				type: 'text',
 			},
@@ -34,7 +34,7 @@ export default {
 } as Meta;
 
 function getTemplate(args: PLGPushBasicStory): string {
-	const title = args.pushTitle ? `<div class="plgPush-content-title">${args.pushTitle}</div>` : ``;
+	const title = args.heading ? `<div class="plgPush-content-title">${args.heading}</div>` : ``;
 	const link =
 		args.linkURL && args.linkLabel
 			? `<a class="link mod-icon" href="${args.linkURL}" target="_blank" rel="noopener noreferrer">
@@ -66,7 +66,7 @@ const Template: StoryFn<PLGPushBasicStory> = (args) => ({
 
 export const Basic = Template.bind({});
 Basic.args = {
-	pushTitle: `Title`,
+	heading: `Title`,
 	description: `Description`,
 	linkLabel: `Link`,
 	linkURL: `https://www.google.com/`,
