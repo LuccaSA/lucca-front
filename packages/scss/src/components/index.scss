@@ -82,30 +82,46 @@
 @use 'indexTable';
 @use 'main';
 @use 'pageHeader';
-@use 'dialog'; // @media
+@use 'dialog';
 
 // avoid breaking
-/*
-@use 'emptyState' with ($responsive: false);
-@use 'errorPage' with ($responsive: false);
-@use 'filters' with ($responsive: false);
-@use 'footer' with ($responsive: false);
-@use 'header' with ($responsive: false);
-@use 'indexTable' with ($responsive: false);
-@use 'main' with ($responsive: false);
-@use 'pageHeader' with ($responsive: false);
+@use 'emptyState' with (
+	$responsive: false
+);
+@use 'pageHeader' with (
+	$responsive: false
+);
+@use 'errorPage' with (
+	$responsive: false
+);
+@use 'filters' with (
+	$responsive: false
+);
+@use 'footer' with (
+	$responsive: false
+);
+@use 'header' with (
+	$responsive: false
+);
+@use 'indexTable' with (
+	$responsive: false
+);
+@use 'main' with (
+	$responsive: false
+);
 
 @include emptyState.responsive($at: 'media');
 @include emptyState.responsiveBackground($at: 'media');
+
+@include pageHeader.responsive($at: 'media');
+@include pageHeader.responsiveSearch($at: 'media');
+
 @include errorPage.responsive($at: 'media');
 @include filters.responsive($at: 'media');
 @include footer.responsive($at: 'media');
 @include header.responsive($at: 'media');
 @include indexTable.responsive($at: 'media');
 @include main.responsive($at: 'media');
-@include pageHeader.responsive($at: 'media');
-@include pageHeader.responsiveSearch($at: 'media');
-*/
 
 // @use 'gridLegacy';
 // @use 'emptyStateDeprecated';
