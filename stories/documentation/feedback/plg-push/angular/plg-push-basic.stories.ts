@@ -1,16 +1,26 @@
+import { IconComponent } from '@lucca-front/ng/icon';
 import { PLGPushComponent } from '@lucca-front/ng/plg-push';
-import { Meta, StoryObj } from '@storybook/angular';
+import { Meta, StoryObj, moduleMetadata } from '@storybook/angular';
 import { generateInputs } from 'stories/helpers/stories';
 
 export default {
 	title: 'Documentation/Feedback/PLG Push/Angular/Basic',
 	component: PLGPushComponent,
-	render: (args: PLGPushComponent & { description: string }, context) => {
-		const { description, ...inputs } = args;
+	decorators: [
+		moduleMetadata({
+			imports: [IconComponent],
+		}),
+	],
+	render: (args: PLGPushComponent & { description: string; linkLabel: string; linkURL: string }, context) => {
+		const { description, linkLabel, linkURL, ...inputs } = args;
 		return {
 			template: `
 			<lu-plg-push ${generateInputs(inputs, context.argTypes)}>
 				${description}
+				<a class="link mod-icon u-textProduct" href="${linkURL}" target="_blank" rel="noopener noreferrer">
+					${linkLabel}
+					<lu-icon icon="arrowExternal" alt="Ouvrir dans une nouvelle fenêtre"></lu-icon>
+				</a>
 			</lu-plg-push>`,
 		};
 	},
@@ -30,7 +40,7 @@ export default {
 	},
 } as Meta;
 
-export const Template: StoryObj<PLGPushComponent & { description: string }> = {
+export const Template: StoryObj<PLGPushComponent & { description: string; linkLabel: string; linkURL: string }> = {
 	args: {
 		pushTitle: `Title`,
 		description: `Description`,

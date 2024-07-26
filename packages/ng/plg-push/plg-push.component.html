@@ -15,13 +15,5 @@
 		<div class="plgPush-content-description">
 			<ng-content></ng-content>
 		</div>
-		@if (linkLabel && linkURL) {
-		<div class="plgPush-content-link">
-			<a class="link mod-icon u-textProduct" [href]="linkURL" target="_blank" rel="noopener noreferrer">
-				{{ linkLabel }}
-				<lu-icon icon="arrowExternal" [alt]="intl.openNewTab"></lu-icon>
-			</a>
-		</div>
-		}
 	</div>
 </div>

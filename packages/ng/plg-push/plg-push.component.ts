@@ -1,5 +1,4 @@
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
-import { SafeUrl } from '@angular/platform-browser';
 import { getIntl } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { LU_PLG_PUSH_TRANSLATIONS } from './plg-push.translate';
@@ -15,8 +14,6 @@ import { LU_PLG_PUSH_TRANSLATIONS } from './plg-push.translate';
 })
 export class PLGPushComponent {
 	@Input() public pushTitle = '';
-	@Input() public linkLabel = '';
-	@Input() public linkURL: SafeUrl | null = null;
 
 	public intl = getIntl(LU_PLG_PUSH_TRANSLATIONS);
 }
