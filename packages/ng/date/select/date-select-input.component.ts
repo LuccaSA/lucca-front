@@ -1,5 +1,5 @@
 import { Overlay, OverlayModule } from '@angular/cdk/overlay';
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, forwardRef, Input, Renderer2, ViewContainerRef } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, Input, Renderer2, ViewContainerRef, forwardRef } from '@angular/core';
 import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors, Validator } from '@angular/forms';
 import { ALuDateAdapter, ELuDateGranularity, LuDateGranularity, getIntl } from '@lucca-front/ng/core';
 import { LuInputClearerComponent, LuInputDirective, LuInputDisplayerDirective } from '@lucca-front/ng/input';
@@ -48,9 +48,9 @@ export class LuDateSelectInputComponent<D> extends ALuSelectInputComponent<D> im
 	get format(): string {
 		switch (this.granularity) {
 			case ELuDateGranularity.year:
-				return this._intl.formatYear;
+				return 'Y';
 			case ELuDateGranularity.month:
-				return this._intl.formatMonth;
+				return 'MM/Y';
 			case ELuDateGranularity.day:
 			default:
 				return 'shortDate';

@@ -8,7 +8,7 @@
 	de: {
 		otherResult: 'anderes Ergebnis',
 		otherResults: 'andere Ergebnisse',
-		showResultsDetails: 'Details anzeigen',
+		showResultsDetails: 'Details anzeigen ',
 		removeOption: 'Option löschen',
 	},
 	fr: {
@@ -20,32 +20,26 @@
 	it: {
 		otherResult: 'altro risultato',
 		otherResults: 'altri risultati',
-		showResultsDetails: 'Vedi dettagli',
-		removeOption: "Cancellare l'opzione",
+		showResultsDetails: 'Vedere il dettaglio',
+		removeOption: 'Cancellare l’opzione',
 	},
 	nl: {
 		otherResult: 'ander resultaat',
-		otherResults: 'overige resultaten',
-		showResultsDetails: 'Zie de details',
+		otherResults: 'andere resultaten',
+		showResultsDetails: 'Zie details',
 		removeOption: 'Optie verwijderen',
 	},
 	'nl-BE': {
 		otherResult: 'ander resultaat',
-		otherResults: 'overige resultaten',
-		showResultsDetails: 'Zie de details',
+		otherResults: 'andere resultaten',
+		showResultsDetails: 'Zie details',
 		removeOption: 'Optie verwijderen',
-	},
-	'en-US': {
-		otherResult: 'other result',
-		otherResults: 'other results',
-		showResultsDetails: 'Show details',
-		removeOption: 'Remove option',
 	},
 	es: {
 		otherResult: 'otro resultado',
 		otherResults: 'otros resultados',
-		showResultsDetails: 'Mostrar detalles',
-		removeOption: 'Remove option',
+		showResultsDetails: 'Ver los detalles',
+		removeOption: 'Eliminar la opción',
 	},
 	pt: {
 		otherResult: 'outro resultado',

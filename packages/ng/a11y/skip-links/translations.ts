@@ -1,15 +1,15 @@
 ﻿export const Translations = {
 	en: {
 		Goto: 'Quick access',
-		Goto_Nav_Banner: 'Go to main navigation',
-		Goto_Nav_Navside: 'Go to internal navigation',
+		Goto_Nav_Banner: 'Go to the main navigation menu',
+		Goto_Nav_Navside: 'Go to the internal navigation menu',
 		Goto_Content: 'Go to content',
 	},
 	de: {
-		Goto: 'Schneller Zugang',
-		Goto_Nav_Banner: 'Gehen Sie zur Hauptnavigation',
-		Goto_Nav_Navside: 'Gehen Sie zur internen Navigation',
-		Goto_Content: 'Zum Inhalt springen',
+		Goto: 'Schnellzugriff',
+		Goto_Nav_Banner: 'Zur Hauptnavigation',
+		Goto_Nav_Navside: 'Zur internen Navigation',
+		Goto_Content: 'Zum Inhalt',
 	},
 	fr: {
 		Goto: 'Accès rapides',
@@ -35,14 +35,8 @@
 		Goto_Nav_Navside: 'Ga naar interne navigatie',
 		Goto_Content: 'Ga naar inhoud',
 	},
-	'en-US': {
-		Goto: 'Quick access',
-		Goto_Nav_Banner: 'Go to main navigation',
-		Goto_Nav_Navside: 'Go to internal navigation',
-		Goto_Content: 'Go to content',
-	},
 	es: {
-		Goto: 'Acceso rápido',
+		Goto: 'Accesos rápidos',
 		Goto_Nav_Banner: 'Ir a la navegación principal',
 		Goto_Nav_Navside: 'Ir a la navegación interna',
 		Goto_Content: 'Ir al contenido',

@@ -5,31 +5,27 @@
 	},
 	de: {
 		parentOnly: 'Nur der Elternteil',
-		childrenOnly: 'Nur Kinder',
+		childrenOnly: 'Nur die Kinder',
 	},
 	fr: {
 		parentOnly: 'Seulement le parent',
 		childrenOnly: 'Seulement les enfants',
 	},
 	it: {
-		parentOnly: 'Solo il genitore',
-		childrenOnly: 'Solo bambini',
+		parentOnly: 'Solo il principale',
+		childrenOnly: 'Solo i figli',
 	},
 	nl: {
 		parentOnly: 'Alleen de ouder',
-		childrenOnly: 'Alleen kinderen',
+		childrenOnly: 'Alleen de kinderen',
 	},
 	'nl-BE': {
 		parentOnly: 'Alleen de ouder',
-		childrenOnly: 'Alleen kinderen',
-	},
-	'en-US': {
-		parentOnly: 'Parent only',
-		childrenOnly: 'Children only',
+		childrenOnly: 'Alleen de kinderen',
 	},
 	es: {
-		parentOnly: 'Sólo el padre',
-		childrenOnly: 'Sólo niños',
+		parentOnly: 'Solo el principal',
+		childrenOnly: 'Solo los secundarios',
 	},
 	pt: {
 		parentOnly: 'Apenas o pai',
