@@ -46,13 +46,8 @@ function getTemplate(args: PLGPushBasicStory): string {
 	return `
 	<div class="plgPush">
 		<div class="plgPush-icons">
-			<span aria-hidden="true" class="plgPush-icons-front lucca-icon icon-transportRocket"></span>
-			<svg class="plgPush-icons-back" aria-hidden="true" viewBox="0 0 32 32">
-				<path
-					d="M7.78066 27.3433C-7.15809 9.74516 2.8692 3.56387 9.33431 1.57963C15.8092 -0.408899 34.8658 -3.46454 31.634 13.4808C28.4035 30.4261 16.3229 37.4045 7.78066 27.3433Z"
-					fill="var(--palettes-brand-100)"
-				/>
-			</svg>
+			<span aria-hidden="true" class="plgPush-icons-front lucca-icon icon-transportRocket mod-S"></span>
+            <img class="plgPush-icons-back" alt="" src="https://cdn.lucca.fr/lucca-front/assets/plg-push/shape.svg" />
 		</div>
 		<div class="plgPush-content">
 			${title}
