@@ -70,6 +70,11 @@ interface BaseLuDialogConfig<C> {
 	canClose?: (comp: C) => boolean | Observable<boolean>;
 
 	/**
+	 * Determine if the current dialog can be close by a click on backdrop or escape key
+	 */
+	canCloseWithBackdrop?: boolean;
+
+	/**
 	 * The size of the panel used for the dialog
 	 */
 	size?: 'XS' | 'S' | 'M' | 'L' | 'XL' | 'fitContent' | `maxContent` | 'fullScreen';

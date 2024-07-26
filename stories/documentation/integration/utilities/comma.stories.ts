@@ -13,10 +13,6 @@ function getTemplate(args: CommaStory): string {
 const Template: StoryFn<CommaStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
-	styles: [
-		`
-		}`,
-	],
 });
 
 export const Comma = Template.bind({});

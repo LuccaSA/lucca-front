@@ -10,7 +10,7 @@ export class LuCoreSelectUserHomonymsService {
 	protected http = inject(HttpClient);
 	protected cache: Record<number, string> = {};
 
-	protected extractHomonyms<T extends LuCoreSelectUser>(users: T[], format: LuDisplayFormat): Set<T> {
+	protected extractHomonyms<T extends LuCoreSelectUser>(users: T[], format: LuDisplayFormat): Set<T['id']> {
 		const usersByFullName: Record<string, T[]> = {};
 
 		for (const user of users) {
@@ -22,7 +22,7 @@ export class LuCoreSelectUserHomonymsService {
 		return new Set(
 			Object.values(usersByFullName)
 				.filter((users) => users.length > 1)
-				.flatMap((users) => users),
+				.flatMap((users) => users.map((user) => user.id)),
 		);
 	}
 
@@ -34,23 +34,22 @@ export class LuCoreSelectUserHomonymsService {
 		}
 
 		return this.getAdditionalInformationByUserId(Array.from(homonyms)).pipe(
-			map((additionalInformation) => {
-				return users.map((user) => {
-					if (homonyms.has(user)) {
-						return {
-							...user,
-							additionalInformation: this.cache[user.id] || additionalInformation[user.id],
-						};
-					}
-					return user;
-				});
-			}),
+			map((additionalInformation) =>
+				users.map((user) =>
+					homonyms.has(user.id)
+						? {
+								...user,
+								additionalInformation: this.cache[user.id] || additionalInformation[user.id],
+							}
+						: user,
+				),
+			),
 			startWith(users),
 		);
 	}
 
-	protected getAdditionalInformationByUserId<T extends LuCoreSelectUser>(homonyms: T[]): Observable<Record<number, string>> {
-		const userIds = homonyms.map((user) => user.id).filter((id) => !this.cache[id]);
+	protected getAdditionalInformationByUserId<T extends LuCoreSelectUser>(homonyms: T['id'][]): Observable<Record<number, string>> {
+		const userIds = homonyms.filter((userId) => !this.cache[userId]);
 
 		if (userIds.length === 0) {
 			return of({});

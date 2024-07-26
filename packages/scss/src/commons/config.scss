@@ -45,7 +45,7 @@ $cleemy: (
 	400: #54bbb2,
 	500: #00ada5,
 	600: #009491,
-	700: #00807d,
+	700: #007a78,
 	800: #00545c,
 	900: #00333d,
 ) !default;
@@ -87,9 +87,23 @@ $poplee: (
 	400: #7bc3ea,
 	500: #62b7e4,
 	600: #3a9ed4,
-	700: #0f7db8,
+	700: #0b77b1,
 	800: #005685,
 	900: #003c5c,
+) !default;
+
+$coreHR: (
+	text: #ffffff,
+	50: #e6f2fe,
+	100: #cbe3fb,
+	200: #b0d3f7,
+	300: #96c4f3,
+	400: #78b2ed,
+	500: #5ea3e8,
+	600: #3387db,
+	700: #0c63bb,
+	800: #004285,
+	900: #002e5c,
 ) !default;
 
 $cc: (
@@ -108,6 +122,7 @@ $cc: (
 
 $neutral: (
 	text: #ffffff,
+	0: #ffffff,
 	25: #f3f6fc,
 	50: #e7edf9,
 	100: #dbe3f5,
@@ -351,6 +366,7 @@ $prod: map-get(
 		'cleemy': $cleemy,
 		'timmi': $timmi,
 		'poplee': $poplee,
+		'coreHR': $coreHR,
 		'pagga': $pagga,
 		'cc': $cc,
 	),
@@ -385,6 +401,7 @@ $palettesInterpolation: (
 	'pineapple': $pineapple,
 	'pagga': $pagga,
 	'poplee': $poplee,
+	'coreHR': $coreHR,
 	'timmi': $timmi,
 	'cleemy': $cleemy,
 	'cc': $cc,

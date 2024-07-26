@@ -1,11 +1,11 @@
+import { CdkDialogContainer } from '@angular/cdk/dialog';
 import { NgIf } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ElementRef, inject, OnInit, Renderer2, ViewEncapsulation } from '@angular/core';
 import { ButtonComponent } from '@lucca-front/ng/button';
+import { getIntl } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { LuDialogRef } from '../model';
-import { CdkDialogContainer } from '@angular/cdk/dialog';
 import { LU_DIALOG_HEADER_TRANSLATIONS } from './dialog-header.translate';
-import { getIntl } from '@lucca-front/ng/core';
 
 let nextId = 0;
 
@@ -19,7 +19,6 @@ let nextId = 0;
 	encapsulation: ViewEncapsulation.None,
 	host: {
 		class: 'dialog-inside-header',
-		role: 'header',
 	},
 })
 export class DialogHeaderComponent implements OnInit {

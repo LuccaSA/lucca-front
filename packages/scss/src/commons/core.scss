@@ -38,8 +38,7 @@ $overflow: 'hidden', 'auto', 'visible', 'scroll';
 		.pr-u-#{transform.camelize($boxModel)}#{transform.capitalize($boxDirection)}#{transform.capitalize($key)} {
 			#{$boxModel}#{if($boxDirection == '', '', '-')}#{$boxDirection}: var(--pr-t-spacings-#{$key}) #{$suffix};
 		}
-	}
-	@else {
+	} @else {
 		.u-#{transform.camelize($boxModel)}#{transform.capitalize($boxDirection)}#{transform.capitalize($key)} {
 			#{$boxModel}#{if($boxDirection == '', '', '-')}#{$boxDirection}: var(--spacings-#{$key}) #{$suffix};
 		}
@@ -49,7 +48,7 @@ $overflow: 'hidden', 'auto', 'visible', 'scroll';
 @mixin spacings($token: true) {
 	$spacings: config.$spacingsDeprecated;
 	@if $token {
-			$spacings: config.$spacings;
+		$spacings: config.$spacings;
 	}
 	@each $boxModel in $boxModel {
 		@each $boxDirection in $boxDirection {
@@ -122,18 +121,17 @@ $overflow: 'hidden', 'auto', 'visible', 'scroll';
 }
 
 @mixin rosetta($before, $after, $iterations) {
-    @if type-of($iterations) == map {
-        @each $iterationBefore, $iterationAfter in $iterations {
+	@if type-of($iterations) == map {
+		@each $iterationBefore, $iterationAfter in $iterations {
 			@if type-of($iterationAfter) == string {
-            	#{$before}-#{$iterationBefore}: var(#{$after}-#{$iterationAfter});
+				#{$before}-#{$iterationBefore}: var(#{$after}-#{$iterationAfter});
 			} @else {
 				#{$before}-#{$iterationBefore}: #{$iterationAfter};
 			}
-        }
-    }
-    @else {
-        @each $iteration in $iterations {
-            #{$before}-#{$iteration}: var(#{$after}-#{$iteration});
-        }
-    }
+		}
+	} @else {
+		@each $iteration in $iterations {
+			#{$before}-#{$iteration}: var(#{$after}-#{$iteration});
+		}
+	}
 }
