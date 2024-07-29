@@ -40,6 +40,7 @@
 	.dialog-inside-footer {
 		@include footer.sticky;
 
+		// Safari fix to avoid footer to clip while loading
 		@supports (background-image: -webkit-named-image(test)) {
 			@keyframes footerVisibility {
 				from {
