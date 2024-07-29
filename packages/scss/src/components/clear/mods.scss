@@ -1,6 +1,6 @@
 @mixin product {
 	--components-clear-cross-color: var(--palettes-product-700);
-	--components-clear-background: var(--colors-white-color);
+	--components-clear-background: var(--palettes-neutral-0);
 
 	&:hover {
 		--components-clear-background: var(--palettes-product-50);

@@ -42,7 +42,7 @@
 		background-position: center;
 		background-size: cover;
 		background-repeat: no-repeat;
-		color: var(--colors-white-color);
+		color: var(--palettes-neutral-0);
 		display: flex;
 		font-size: var(--components-user-picture-font-size, var(--components-userPicture-M-fontSize));
 		font-weight: 600;
@@ -95,7 +95,7 @@
 	}
 
 	&.mod-border {
-		box-shadow: 0 0 0 2px var(--colors-white-color);
+		box-shadow: 0 0 0 2px var(--palettes-neutral-0);
 	}
 
 	&.mod-placeholder {

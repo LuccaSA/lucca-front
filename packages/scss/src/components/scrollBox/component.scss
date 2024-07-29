@@ -37,17 +37,17 @@
 		background-image: radial-gradient(
 				farthest-side at 0% 50%,
 				color.transparentize(var(--components-scrollBox-shadowColor), 0.24),
-				color.transparentize(var(--colors-black-color), 0)
+				color.transparentize(var(--palettes-neutral-900), 0)
 			),
 			radial-gradient(
 				farthest-side at 0% 50%,
 				color.transparentize(var(--components-scrollBox-shadowColor), 0.32) 50%,
-				color.transparentize(var(--colors-black-color), 0)
+				color.transparentize(var(--palettes-neutral-900), 0)
 			),
 			radial-gradient(
 				farthest-side at 0% 50%,
 				color.transparentize(var(--components-scrollBox-shadowColor), 1) calc(100% - 1px),
-				color.transparentize(var(--colors-black-color), 0)
+				color.transparentize(var(--palettes-neutral-900), 0)
 			);
 	}
 
@@ -57,17 +57,17 @@
 		background-image: radial-gradient(
 				farthest-side at 100% 50%,
 				color.transparentize(var(--components-scrollBox-shadowColor), 0.24),
-				color.transparentize(var(--colors-black-color), 0)
+				color.transparentize(var(--palettes-neutral-900), 0)
 			),
 			radial-gradient(
 				farthest-side at 100% 50%,
 				color.transparentize(var(--components-scrollBox-shadowColor), 0.32) 50%,
-				color.transparentize(var(--colors-black-color), 0)
+				color.transparentize(var(--palettes-neutral-900), 0)
 			),
 			radial-gradient(
 				farthest-side at 100% 50%,
 				color.transparentize(var(--components-scrollBox-shadowColor), 1) calc(100% - 1px),
-				color.transparentize(var(--colors-black-color), 0)
+				color.transparentize(var(--palettes-neutral-900), 0)
 			);
 	}
 
@@ -93,7 +93,7 @@
 				background-image: linear-gradient(
 					to right,
 					var(--components-scrollBox-backgroundColor) var(--components-scrollBox-shadowWidth),
-					color.transparentize(var(--colors-black-color), 0)
+					color.transparentize(var(--palettes-neutral-900), 0)
 				);
 			}
 
@@ -102,7 +102,7 @@
 				background-image: linear-gradient(
 					to left,
 					var(--components-scrollBox-backgroundColor) var(--components-scrollBox-shadowWidth),
-					color.transparentize(var(--colors-black-color), 0)
+					color.transparentize(var(--palettes-neutral-900), 0)
 				);
 			}
 		}

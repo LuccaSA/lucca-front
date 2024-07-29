@@ -5,7 +5,7 @@
 @mixin component($atRoot: 'without: rule') {
 	background-color: var(--palettes-700, var(--palettes-neutral-200));
 	border-radius: var(--commons-borderRadius-M);
-	color: var(--palettes-text, var(--palettes-neutral-800));
+	color: var(--palettes-0, var(--palettes-text, var(--palettes-neutral-800)));
 	display: inline-flex;
 	align-items: center;
 	gap: var(--pr-t-spacings-100);
@@ -47,12 +47,12 @@
 				mask-image: var(--components-chip-kill-background-image);
 				mask-size: var(--components-chip-kill-size);
 				mask-repeat: no-repeat;
-				background-color: var(--components-chip-kill-cross-color, var(--colors-white-color));
+				background-color: var(--components-chip-kill-cross-color, var(--palettes-neutral-0));
 			}
 
 			&:hover {
 				--components-chip-kill-disk-color: var(--palettes-neutral-600);
-				--components-chip-kill-cross-color: var(--palettes-700, var(--colors-white-color));
+				--components-chip-kill-cross-color: var(--palettes-700, var(--palettes-neutral-0));
 			}
 
 			&:focus-visible {

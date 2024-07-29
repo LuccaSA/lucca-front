@@ -45,7 +45,7 @@ const Template: StoryFn<ContainersBasicStory> = (args) => ({
 	styles: [
 		`
 		.container {
-			background-color: var(--colors-white-color);
+			background-color: var(--palettes-neutral-0);
 		}
 		`,
 	],

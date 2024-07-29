@@ -14,10 +14,10 @@
 			border: 2px solid var(--palettes-neutral-700);
 			border-radius: var(--component-checkboxField-borderRadius);
 			position: relative;
-			color: var(--colors-white-color);
+			color: var(--palettes-neutral-0);
 			transition-property: color, border-color, background-color;
 			transition-duration: var(--commons-animations-durations-fast);
-			background-color: var(--colors-white-color);
+			background-color: var(--palettes-neutral-0);
 			display: block;
 			cursor: pointer;
 

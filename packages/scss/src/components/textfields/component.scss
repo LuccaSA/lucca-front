@@ -9,7 +9,7 @@
 			box-shadow: 0 0 0 1px var(--palettes-neutral-300);
 			line-height: var(--sizes-M-lineHeight);
 			-webkit-appearance: none;
-			background-color: var(--colors-white-color);
+			background-color: var(--palettes-neutral-0);
 			border-radius: var(--components-textfield-border-radius);
 			padding: var(--components-textfield-input-padding-vertical) var(--components-textfield-input-padding-horizontal);
 			transition-property: box-shadow, background-color, color;
@@ -41,7 +41,7 @@
 
 		.textfield-options {
 			box-shadow: var(--pr-t-elevation-shadow-overflow);
-			background-color: var(--colors-white-color);
+			background-color: var(--palettes-neutral-0);
 			border-radius: var(--commons-borderRadius-M);
 			transition-duration: var(--commons-animations-durations-fast);
 			transition-property: all;
