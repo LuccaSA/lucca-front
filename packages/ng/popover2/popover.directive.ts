@@ -262,6 +262,10 @@ export class PopoverDirective implements OnDestroy {
 		}
 	}
 
+	updatePosition() {
+		this.#overlayRef?.updatePosition();
+	}
+
 	#buildPositions(): ConnectedPosition[] {
 		const opposite: Record<PopoverPosition, PopoverPosition> = {
 			before: 'after',
