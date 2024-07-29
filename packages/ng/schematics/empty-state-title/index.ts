@@ -1,8 +1,8 @@
 import type { Rule } from '@angular-devkit/schematics';
 import { spawnSync } from 'child_process';
 import * as path from 'path';
-import { migrateFile } from '../lib/schematics.js';
-import { migrateHTMLFile, migrateScssFile, migrateTsFile } from './migration.js';
+import { replaceComponentInputName, updateAngularTemplate } from '../lib/angular-template';
+import { migrateFile } from '../lib/schematics';
 
 export default (options?: { skipInstallation?: boolean }): Rule => {
 	const skipInstallation = options?.skipInstallation ?? false;
@@ -13,7 +13,7 @@ export default (options?: { skipInstallation?: boolean }): Rule => {
 
 			try {
 				spawnSync('npm', ['ci'], {
-					cwd: path.join(__dirname, '../../lib/local-deps'),
+					cwd: path.join(__dirname, '../lib/local-deps'),
 				});
 				context.logger.info('Installing dependencies... Done!');
 			} catch (e) {
@@ -22,23 +22,20 @@ export default (options?: { skipInstallation?: boolean }): Rule => {
 			}
 		}
 
-		const postCssScss = await import('../lib/local-deps/postcss-scss.js');
 		const angularCompiler = await import('@angular/compiler');
-		const { postcssSelectorParser } = await import('../lib/local-deps/postcss-selector-parser.js');
 
 		tree.visit((path, entry) => {
 			if (path.includes('node_modules') || !entry) {
 				return;
 			}
-			if (path.endsWith('.scss')) {
-				migrateFile(path, entry, tree, (content) => migrateScssFile(content, postCssScss, postcssSelectorParser));
-			}
-			if (path.endsWith('.html')) {
-				migrateFile(path, entry, tree, (content) => migrateHTMLFile(content, angularCompiler));
-			}
-			if (path.endsWith('.ts')) {
-				migrateFile(path, entry, tree, (content) => migrateTsFile(path, content, angularCompiler));
-			}
+
+			migrateFile(path, entry, tree, (content) =>
+				updateAngularTemplate(path, content, (template) => {
+					template = replaceComponentInputName('lu-empty-state-page', 'title', 'heading', template, angularCompiler);
+					template = replaceComponentInputName('lu-empty-state-section', 'title', 'heading', template, angularCompiler);
+					return template;
+				}),
+			);
 		});
 	};
 };
