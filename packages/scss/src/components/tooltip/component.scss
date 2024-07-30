@@ -21,4 +21,18 @@
 	&:empty {
 		display: none;
 	}
+
+	@at-root ($atRoot) {
+		// Prevent Safari to display a native tooltip
+		[luTooltipWhenEllipsis] {
+			@supports (background-image: -webkit-named-image(i)) {
+				@media (hover: hover) {
+					&::after {
+						content: '';
+						display: block;
+					}
+				}
+			}
+		}
+	}
 }
