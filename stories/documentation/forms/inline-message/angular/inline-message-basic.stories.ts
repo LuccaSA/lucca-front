@@ -23,7 +23,6 @@ export default {
 export const Template: StoryObj<InlineMessageComponent> = {
 	args: {
 		state: 'default',
-		size: 'M',
 		label: 'Inline message',
 	},
 };

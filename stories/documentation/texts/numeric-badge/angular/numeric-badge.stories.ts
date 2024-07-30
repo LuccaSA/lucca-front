@@ -18,6 +18,11 @@ export default {
 		},
 		value: {
 			description: 'Doit obligatoirement contenir une valeur numérique (ex: 7, "3/5", "+2", etc.)',
+		},
+		size: {
+			control: {
+				type: 'select',
+			},
 		}
 	},
 } as Meta;
@@ -25,7 +30,5 @@ export default {
 export const Template: StoryObj<NumericBadgeComponent> = {
 	args: {
 		value: 7,
-		size: 'M',
-		palette: 'none',
 	},
 };
