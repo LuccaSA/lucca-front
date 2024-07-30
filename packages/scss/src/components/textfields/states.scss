@@ -13,7 +13,7 @@
 @mixin inputDisabled {
 	background-color: var(--components-textfield-disabled-background);
 	color: var(--components-textfield-disabled-color);
-	box-shadow: 0 0 0 1px var(--palettes-neutral-300);
+	box-shadow: 0 0 0 1px var(--palettes-neutral-300); // disabled token candidate
 	cursor: default;
 
 	&::placeholder {
@@ -21,7 +21,7 @@
 	}
 
 	~ .textfield-clear {
-		--components-clear-cross-color: var(--palettes-neutral-500) !important;
+		--components-clear-cross-color: var(--palettes-neutral-500) !important; // disabled token candidate
 		pointer-events: none;
 	}
 }

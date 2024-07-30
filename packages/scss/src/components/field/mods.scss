@@ -139,17 +139,17 @@
 
 	.textfield-input {
 		&:not(:disabled, .is-error, .is-success, .is-valid, .is-warning, .is-invalid) {
-			background-color: var(--palettes-neutral-0);
+			background-color: var(--palettes-neutral-0); // disabled token candidate
 
 			&::placeholder {
-				color: var(--palettes-neutral-400);
+				color: var(--commons-disabled-placeholder);
 			}
 
 			&:focus,
 			&:hover {
 				position: relative;
 				z-index: 1;
-				background-color: var(--palettes-neutral-0);
+				background-color: var(--palettes-neutral-0); // disabled token candidate
 				box-shadow: form.fakeBorderOverlay(var(--components-field-framed-color));
 
 				~ .textfield-messages,

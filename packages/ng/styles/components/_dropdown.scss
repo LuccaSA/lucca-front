@@ -59,7 +59,7 @@
 	}
 
 	&.is-disabled {
-		color: var(--palettes-neutral-400);
+		color: var(--commons-disabled-placeholder);
 		pointer-events: none;
 
 		&:hover {

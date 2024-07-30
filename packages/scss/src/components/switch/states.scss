@@ -67,16 +67,16 @@
 
 @mixin disabled {
 	~ .switch-label {
-		color: var(--palettes-neutral-500);
+		color: var(--palettes-neutral-500); // disabled token candidate
 		cursor: default;
 
 		&::before {
-			background-color: var(--palettes-neutral-100);
-			color: var(--palettes-neutral-500);
+			background-color: var(--commons-disabled-background);
+			color: var(--palettes-neutral-500); // disabled token candidate
 		}
 
 		&::after {
-			background-color: var(--palettes-neutral-500);
+			background-color: var(--palettes-neutral-500); // disabled token candidate
 			box-shadow: none;
 		}
 	}
@@ -85,7 +85,7 @@
 @mixin disabledChecked {
 	~ .switch-label {
 		&::before {
-			background-color: var(--palettes-neutral-100);
+			background-color: var(--commons-disabled-background);
 		}
 	}
 }
