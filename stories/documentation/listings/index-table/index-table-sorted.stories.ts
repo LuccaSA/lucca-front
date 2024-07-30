@@ -1,14 +1,10 @@
 import { Meta, StoryFn } from '@storybook/angular';
 
-interface IndexTableSortedStory {
-
-}
+interface IndexTableSortedStory {}
 
 export default {
 	title: 'Documentation/Listings/Index Table/Sorted',
-	argTypes: {
-
-	},
+	argTypes: {},
 } as Meta;
 
 function getTemplate(args: IndexTableSortedStory): string {
@@ -27,16 +23,14 @@ function getTemplate(args: IndexTableSortedStory): string {
 	<tbody class="indexTable-body">
 		<tr class="indexTable-body-row">
 			<td class="indexTable-body-row-cell">
-				<a href="#" class="indexTable-body-row-cell-action">See details</a>
-				Content
+				<a href="#" class="indexTable-body-row-cell-link">Content</a>
 			</td>
 			<td class="indexTable-body-row-cell">Content</td>
 			<td class="indexTable-body-row-cell">Content</td>
 		</tr>
 		<tr class="indexTable-body-row">
 			<td class="indexTable-body-row-cell">
-				<a href="#" class="indexTable-body-row-cell-action">See details</a>
-				Content
+				<a href="#" class="indexTable-body-row-cell-link">Content</a>
 			</td>
 			<td class="indexTable-body-row-cell">Content</td>
 			<td class="indexTable-body-row-cell">Content</td>
@@ -51,4 +45,4 @@ const Template: StoryFn<IndexTableSortedStory> = (args) => ({
 });
 
 export const Sorted = Template.bind({});
-Sorted.args = { };
+Sorted.args = {};
