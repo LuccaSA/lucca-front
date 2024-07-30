@@ -40,7 +40,6 @@ export const Template: StoryObj<FormFieldComponent> = {
 		hiddenLabel: false,
 		inlineMessage: 'Helper Text',
 		errorInlineMessage: 'Error helper text',
-		size: 'M',
 		inlineMessageState: 'default',
 		tooltip: 'You expected me to be helpful but this is a story!',
 	},
