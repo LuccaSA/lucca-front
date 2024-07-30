@@ -19,7 +19,7 @@ export default {
 		size: {
 			options: ['M', 'S', 'XS'],
 			control: {
-				type: 'radio',
+				type: 'select',
 			},
 		},
 		inlineMessageState: {
@@ -68,7 +68,6 @@ export const Basic: StoryObj<NumberInputComponent & { disabled: boolean } & Form
 		disabled: false,
 		inlineMessage: 'Helper Text',
 		inlineMessageState: 'default',
-		size: 'M',
 		placeholder: 'Placeholder',
 		tooltip: 'Je suis un message d’aide',
 		step: 1,
@@ -114,7 +113,6 @@ export const WithPrefixAndSuffix: StoryObj<NumberInputComponent & { disabled: bo
 		};
 	},
 	args: {
-		size: 'M',
 		label: 'Label',
 		tooltip: 'Tooltip message',
 		hiddenLabel: false,

@@ -22,7 +22,7 @@ export default {
 		size: {
 			options: ['M', 'S', 'XS'],
 			control: {
-				type: 'radio',
+				type: 'select',
 			},
 		},
 		inlineMessageState: {
@@ -72,7 +72,6 @@ export const Basic: StoryObj<LuSimpleSelectInputComponent<unknown> & FormFieldCo
 		};
 	},
 	args: {
-		size: 'M',
 		label: 'Label',
 		tooltip: 'Tooltip message',
 		hiddenLabel: false,

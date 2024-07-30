@@ -16,7 +16,7 @@ export default {
 		size: {
 			options: ['M', 'S'],
 			control: {
-				type: 'radio',
+				type: 'select',
 			},
 		},
 		inlineMessageState: {
@@ -53,7 +53,6 @@ export const Basic: StoryObj<TimePickerComponent & FormFieldComponent> = {
 		};
 	},
 	args: {
-		size: 'M',
 		label: 'Label',
 		tooltip: 'Tooltip message',
 		hiddenLabel: false,
