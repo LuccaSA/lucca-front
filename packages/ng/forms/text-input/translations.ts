@@ -12,24 +12,20 @@
 		togglePasswordVisibility: 'Afficher le mot de passe',
 	},
 	it: {
-		clear: 'Svuotare questo campo',
-		togglePasswordVisibility: 'Visualizzazione della password',
+		clear: 'Cancellare questo campo',
+		togglePasswordVisibility: 'Visualizzare la password',
 	},
 	nl: {
-		clear: 'Leeg dit veld',
+		clear: 'Dit veld leegmaken',
 		togglePasswordVisibility: 'Wachtwoord weergeven',
 	},
 	'nl-BE': {
-		clear: 'Leeg dit veld',
+		clear: 'Dit veld leegmaken',
 		togglePasswordVisibility: 'Wachtwoord weergeven',
-	},
-	'en-US': {
-		clear: 'Empty this field',
-		togglePasswordVisibility: 'Show password',
 	},
 	es: {
 		clear: 'Vacíe este campo',
-		togglePasswordVisibility: 'Mostrar contraseña',
+		togglePasswordVisibility: 'Ver la contraseña',
 	},
 	pt: {
 		clear: 'Esvaziar este campo',

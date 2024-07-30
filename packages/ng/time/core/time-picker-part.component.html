@@ -10,6 +10,7 @@
 			id="{{inputId}}-input"
 			class="timePicker-fieldset-group-textfield-input"
 			attr.aria-labelledby="{{inputId}}-label"
+			autocomplete="off"
 			[value]="hideValue() ? null : value()"
 			(input)="keysInputHandler($event)"
 			(click)="clickHandler($event)"

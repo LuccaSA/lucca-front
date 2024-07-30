@@ -1,14 +1,10 @@
 import { Meta, StoryFn } from '@storybook/angular';
 
-interface IndexTableActionsTouchDetectionStory {
-
-}
+interface IndexTableActionsTouchDetectionStory {}
 
 export default {
 	title: 'Documentation/Listings/Index Table/Actions touch detection',
-	argTypes: {
-
-	},
+	argTypes: {},
 } as Meta;
 
 function getTemplate(args: IndexTableActionsTouchDetectionStory): string {
@@ -26,8 +22,7 @@ function getTemplate(args: IndexTableActionsTouchDetectionStory): string {
 	<tbody class="indexTable-body">
 		<tr class="indexTable-body-row">
 			<td class="indexTable-body-row-cell">
-				<a href="#" class="indexTable-body-row-cell-action">See details</a>
-				Content
+				<a href="#" class="indexTable-body-row-cell-link">Content</a>
 			</td>
 			<td class="indexTable-body-row-cell">Content</td>
 			<td class="indexTable-body-row-cell">Content</td>
@@ -60,4 +55,4 @@ const Template: StoryFn<IndexTableActionsTouchDetectionStory> = (args) => ({
 });
 
 export const ActionsTouchDetection = Template.bind({});
-ActionsTouchDetection.args = { };
+ActionsTouchDetection.args = {};

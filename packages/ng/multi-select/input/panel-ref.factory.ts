@@ -67,7 +67,7 @@ class MultiSelectPanelRef<T> extends LuMultiSelectPanelRef<T> {
 	}
 
 	selectCurrentlyHighlightedValue(): void {
-		if (this.instance.keyManager?.activeItem) {
+		if (this.instance.keyManager.activeItem) {
 			this.instance.toggleOption(this.instance.keyManager.activeItem.option);
 		}
 	}

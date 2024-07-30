@@ -17,11 +17,8 @@
 	'nl-BE': {
 		me: 'Ik:',
 	},
-	'en-US': {
-		me: 'Me:',
-	},
 	es: {
-		me: 'Yo :',
+		me: 'Yo:',
 	},
 	pt: {
 		me: 'Eu:',

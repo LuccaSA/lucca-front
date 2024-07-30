@@ -59,10 +59,10 @@ export class LuDateInputDirective<D> extends ALuInput<D, HTMLInputElement> imple
 		let format: string;
 		switch (this.granularity) {
 			case ELuDateGranularity.year:
-				format = this._intl.formatYear;
+				format = 'Y';
 				break;
 			case ELuDateGranularity.month:
-				format = this._intl.formatMonth;
+				format = 'MM/Y';
 				break;
 			case ELuDateGranularity.day:
 			default:

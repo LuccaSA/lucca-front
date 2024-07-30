@@ -1,11 +1,11 @@
 ﻿export const Translations = {
 	en: {
-		placeholderDescription: 'No results match your search criteria.',
+		placeholderDescription: 'Your search did not produce any results.',
 		placeholderAction: 'Clear search',
 	},
 	de: {
 		placeholderDescription: 'Keine Ergebnisse für Ihre Suche',
-		placeholderAction: 'Suche löschen',
+		placeholderAction: 'Suche leeren',
 	},
 	fr: {
 		placeholderDescription: 'Aucun résultat pour votre recherche',
@@ -13,23 +13,19 @@
 	},
 	it: {
 		placeholderDescription: 'Nessun risultato per la ricerca',
-		placeholderAction: 'Ricerca vuota',
+		placeholderAction: 'Cancellare la ricerca',
 	},
 	nl: {
-		placeholderDescription: 'Geen resultaten voor je zoekopdracht',
-		placeholderAction: 'Leeg zoeken',
+		placeholderDescription: 'Geen resultaten voor uw zoekopdracht',
+		placeholderAction: 'Zoekopdracht leegmaken',
 	},
 	'nl-BE': {
-		placeholderDescription: 'Geen resultaten voor je zoekopdracht',
-		placeholderAction: 'Leeg zoeken',
-	},
-	'en-US': {
-		placeholderDescription: 'No results match your search criteria.',
-		placeholderAction: 'Clear search',
+		placeholderDescription: 'Geen resultaten voor uw zoekopdracht',
+		placeholderAction: 'Zoekopdracht leegmaken',
 	},
 	es: {
-		placeholderDescription: 'No se han encontrado resultados para su búsqueda',
-		placeholderAction: 'Eliminar búsqueda',
+		placeholderDescription: 'No hay resultados para su búsqueda',
+		placeholderAction: 'Vaciar la búsqueda',
 	},
 	pt: {
 		placeholderDescription: 'Nenhum resultado para sua pesquisa',

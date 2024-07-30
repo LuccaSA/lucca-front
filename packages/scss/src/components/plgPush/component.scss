@@ -1,0 +1,62 @@
+@use '@lucca-front/icons/src/commons/utils/icon';
+@use '@lucca-front/scss/src/commons/utils/reset';
+@use '@lucca-front/scss/src/commons/utils/a11y';
+@use '@lucca-front/scss/src/components/link/exports' as link;
+
+@mixin component($atRoot: 'without: rule') {
+	display: flex;
+	align-items: flex-start;
+	gap: var(--pr-t-spacings-100);
+	padding: var(--pr-t-spacings-100);
+	font-size: var(--sizes-S-fontSize);
+	line-height: var(--sizes-S-lineHeight);
+	border: var(--commons-divider-width) var(--commons-divider-style) var(--palettes-brand-200);
+	border-radius: var(--commons-borderRadius-L);
+	background-color: var(--palettes-brand-50);
+
+	@at-root ($atRoot) {
+		.plgPush-icons {
+			position: relative;
+			display: flex;
+			flex-shrink: 0;
+			align-items: center;
+			justify-content: center;
+			height: var(--components-plgPush-icon-size);
+			width: var(--components-plgPush-icon-size);
+		}
+
+		.plgPush-icons-front {
+			color: var(--palettes-brand-600);
+			z-index: 1;
+		}
+
+		.plgPush-icons-back {
+			position: absolute;
+			z-index: 0;
+			inset: 0;
+		}
+
+		.plgPush-content {
+			display: flex;
+			flex-direction: column;
+			gap: var(--pr-t-spacings-50);
+			padding-block: var(--pr-t-spacings-75);
+		}
+
+		.plgPush-content-title {
+			font-weight: 600;
+		}
+
+		.plgPush-content-link {
+			display: flex;
+			align-items: center;
+			gap: var(--pr-t-spacings-25);
+			padding: var(--pr-t-spacings-0);
+		}
+
+		.link {
+			@include link.brand;
+			display: inline-block;
+		}
+	}
+}

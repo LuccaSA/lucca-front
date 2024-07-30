@@ -124,12 +124,12 @@
 	&.is-active {
 		.calendar-grid-item-content {
 			background: var(--palettes-product-700);
-			color: var(--palettes-product-text);
+			color: var(--palettes-product-0);
 		}
 
 		&.is-today {
 			&:after {
-				background: white !important;
+				background-color: var(--palettes-neutral-0) !important;
 				transition: background-color var(--commons-animations-durations-fast);
 			}
 		}
@@ -141,7 +141,7 @@
 		pointer-events: none;
 
 		&:hover .calendar-grid-item-content {
-			background-color: white;
+			background-color: var(--palettes-neutral-0);
 		}
 	}
 }

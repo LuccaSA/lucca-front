@@ -1,4 +1,5 @@
 import { provideAnimations } from '@angular/platform-browser/animations';
+import { IconComponent } from '@lucca-front/ng/icon';
 import { LuTooltipModule, LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { generateInputs } from '../../../helpers/stories';
@@ -41,7 +42,7 @@ export default {
 	decorators: [
 		applicationConfig({ providers: [provideAnimations()] }),
 		moduleMetadata({
-			imports: [LuTooltipModule],
+			imports: [LuTooltipModule, IconComponent],
 		}),
 	],
 	render: (args, { argTypes }) => {
@@ -50,9 +51,7 @@ export default {
 				`
 					h3 {
 						margin: 0;
-					}
-					.button {
-						margin-bottom: var(--pr-t-spacings-200);
+						margin-top: var(--pr-t-spacings-200);
 					}
 					.ellipsis-example {
 						width: 11rem;
@@ -79,7 +78,10 @@ export default {
 	luTooltip="Ce texte est affiché entièrement. Le tooltip n'apparait pas au survol."
 	${generateInputs(args, argTypes)}
 	luTooltipWhenEllipsis
->Ce texte est affiché entièrement. Le tooltip n'apparait pas au survol.</div>`,
+>Ce texte est affiché entièrement. Le tooltip n'apparait pas au survol.</div>
+<h3>Tooltip et icône (avec alternative)</h3>
+<lu-icon icon="star" alt="Favoris" luTooltip="Favoris" luTooltipOnlyForDisplay="true"></lu-icon>
+`,
 		};
 	},
 } as Meta;

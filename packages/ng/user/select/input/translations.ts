@@ -23,12 +23,8 @@
 		users: 'gebruikers',
 		me: 'Ik:',
 	},
-	'en-US': {
-		users: 'users',
-		me: 'Me:',
-	},
 	es: {
-		users: 'empleados',
+		users: 'usuarios',
 		me: 'Yo :',
 	},
 	pt: {

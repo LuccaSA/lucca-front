@@ -1,6 +1,6 @@
 <section
 	class="emptyState mod-page"
-	[attr.role]="title ? null : 'presentation'"
+	[attr.role]="heading ? null : 'presentation'"
 	[style.--components-emptyState-background-color]="contentBackgroundColor"
 	style.--components-emptyState-illustration-background-bottom-left="url({{bottomLeftBackground}})"
 	style.--components-emptyState-illustration-foreground-bottom-left="url({{bottomLeftForeground}})"
@@ -11,7 +11,7 @@
 		<div class="emptyState-content">
 			<div *ngIf="icon" class="emptyState-content-icon" aria-hidden="true" [innerHtml]="icon | luSafeExternalSvg"></div>
 			<div class="emptyState-content-text">
-				<div role="heading" [attr.aria-level]="hx" class="emptyState-content-heading" *ngIf="title">{{ title }}</div>
+				<div role="heading" [attr.aria-level]="hx" class="emptyState-content-heading" *ngIf="heading">{{ heading }}</div>
 				<p class="emptyState-content-description" *ngIf="description">
 					<ng-container *luPortal="description"></ng-container>
 				</p>

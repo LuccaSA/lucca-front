@@ -1,7 +1,7 @@
 import { inject, InjectionToken, LOCALE_ID } from '@angular/core';
-import { LuTranslation } from './translation.model';
+import { ILuTranslation, LuTranslation } from './translation.model';
 
-export function getIntl<T>(translationsToken: InjectionToken<LuTranslation<T>>): T {
+export function getIntl<T>(translationsToken: InjectionToken<LuTranslation<T>> | InjectionToken<ILuTranslation<T>>): T {
 	const locale = inject(LOCALE_ID);
 	const translations = inject(translationsToken);
 

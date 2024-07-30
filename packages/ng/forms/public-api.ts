@@ -13,4 +13,3 @@ export * from './textarea-input/textarea-input.component';
 
 export * from './number-input/number-input.translate';
 export * from './text-input/text-input.translate';
-export * from './number-format-input/number-format-input.translate';
