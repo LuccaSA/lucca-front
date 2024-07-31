@@ -41,6 +41,9 @@ export default {
 		valueAlignRight: {
 			description: '[v18.1]',
 		},
+		hiddenLabel: {
+			description: 'Masque le label en le conservant dans le DOM pour les lecteurs d\'écrans'
+		},
 	},
 } as Meta;
 

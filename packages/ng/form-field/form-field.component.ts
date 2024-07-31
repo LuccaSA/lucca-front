@@ -79,6 +79,9 @@ export class FormFieldComponent implements OnChanges, OnDestroy, DoCheck {
 	})
 	label: PortalContent;
 
+	/**
+	 * Hide field label, while keeping it in DOM for screen readers
+	 */
 	@Input({
 		transform: booleanAttribute,
 	})
