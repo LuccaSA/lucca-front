@@ -10,6 +10,9 @@
 	inset: var(--components-toasts-inset);
 
 	html:has(.main-content .footer.mod-sticky, .dialog.mod-drawer .dialog-inside-footer) & {
+		// Provide extra bottom spacing when a footer is sticked
+		// Will only work on desktop with standard footer layout
+		// Refactor: Position should be calculated dynamically 
 		--components-toasts-bottom: calc(var(--components-toasts-footerHeight) + var(--pr-t-spacings-300));
 	}
 
