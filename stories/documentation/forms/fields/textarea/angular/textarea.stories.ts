@@ -19,7 +19,7 @@ export default {
 		size: {
 			options: ['M', 'S', 'XS'],
 			control: {
-				type: 'radio',
+				type: 'select',
 			},
 		},
 		inlineMessageState: {
@@ -78,7 +78,6 @@ export const Basic: StoryObj<TextareaInputComponent & { disabled: boolean } & Fo
 		disabled: false,
 		inlineMessage: 'Helper Text',
 		inlineMessageState: 'default',
-		size: 'M',
 		placeholder: 'Placeholder',
 		tooltip: 'Je suis un message d’aide',
 		counter: 0,
