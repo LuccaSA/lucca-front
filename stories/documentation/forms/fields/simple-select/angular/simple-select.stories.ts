@@ -31,6 +31,9 @@ export default {
 				type: 'select',
 			},
 		},
+		hiddenLabel: {
+			description: 'Masque le label en le conservant dans le DOM pour les lecteurs d\'écrans',
+		},
 		optionComparer: HiddenArgType,
 		options: HiddenArgType,
 		optionTpl: HiddenArgType,

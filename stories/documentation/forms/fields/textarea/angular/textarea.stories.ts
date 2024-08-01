@@ -35,6 +35,9 @@ export default {
 		counter: {
 			description: '[v17.4]',
 		},
+		hiddenLabel: {
+			description: 'Masque le label en le conservant dans le DOM pour les lecteurs d\'écrans',
+		},
 	},
 } as Meta;
 
