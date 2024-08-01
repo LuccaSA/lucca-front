@@ -1,9 +1,9 @@
 @use '@lucca-front/scss/src/components/numericBadge/exports' as numericBadge;
 
 @mixin tabSelected {
-	--components-viewTabs-background: var(--palettes-primary-100);
-	--components-viewTabs-shadow: var(--palettes-primary-500);
-	--components-viewTabs-color: var(--palettes-primary-800);
+	--components-viewTabs-background: var(--palettes-product-50);
+	--components-viewTabs-shadow: var(--palettes-product-500);
+	--components-viewTabs-color: var(--palettes-product-800);
 	--components-viewTabs-cursor: default;
 
 	.numericBadge {
