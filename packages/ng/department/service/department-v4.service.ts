@@ -6,18 +6,11 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { ILuDepartment } from '../department.model';
 import { ILuDepartmentService } from './department-service.model';
+import { IApiDepartment } from './department-v3.service';
 
-export interface IApiDepartment {
-	node: ILuDepartment;
-	children: IApiDepartment[];
-}
-
-/**
- * @deprecated use {LuDepartmentService} instead.
- */
 @Injectable()
-export class LuDepartmentV3Service extends LuApiV3Service<ILuDepartment> implements ILuDepartmentService<ILuDepartment> {
-	protected override _api = `/api/v3/departments`;
+export class LuDepartmentService extends LuApiV3Service<ILuDepartment> implements ILuDepartmentService<ILuDepartment> {
+	protected override _api = `/organization/structure/api/departments`;
 	protected _appInstanceId: number | string;
 	set appInstanceId(appInstanceId: number | string) {
 		if (appInstanceId) {
@@ -34,17 +27,19 @@ export class LuDepartmentV3Service extends LuApiV3Service<ILuDepartment> impleme
 	}
 
 	getTrees() {
-		let call: Observable<ILuApiResponse<IApiDepartment>>;
+		let call: Observable<IApiDepartment>;
 		if (this._appInstanceId && this._operations?.length) {
-			call = this._http.get<ILuApiResponse<IApiDepartment>>(
-				`/api/v3/departments/scopedtree?fields=id,name&${[`appInstanceId=${this._appInstanceId}`, `operations=${this._operations.join(',')}`, this._filters.join(',')].filter((f) => !!f).join('&')}`,
-			);
+			call = this._http
+				.get<
+					ILuApiResponse<IApiDepartment>
+				>(`/api/v3/departments/scopedtree?fields=id,name&${[`appInstanceId=${this._appInstanceId}`, `operations=${this._operations.join(',')}`, this._filters.join(',')].filter((f) => !!f).join('&')}`)
+				.pipe(map((response) => response.data));
 		} else {
-			call = this._http.get<ILuApiResponse<IApiDepartment>>(`/api/v3/departments/tree?fields=id,name&${this._filters.join(',')}`);
+			call = this._http.get<IApiDepartment>(`${this._api}/tree`);
 		}
+
 		return call.pipe(
-			map((response: ILuApiResponse<IApiDepartment>): ILuTree<ILuDepartment>[] => {
-				const tree = response.data;
+			map((tree: IApiDepartment): ILuTree<ILuDepartment>[] => {
 				return tree?.children.map((c) => this.format(c)) ?? [];
 			}),
 		);
