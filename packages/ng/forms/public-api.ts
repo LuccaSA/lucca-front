@@ -4,8 +4,8 @@ export * from './noop-value-accessor.directive';
 
 export * from './number-format-input/number-format-input.component';
 export * from './checkbox-input/checkbox-input.component';
-export * from './i18n-text-input/i18n-text-input.component';
-export * from './i18n-text-input/model/i18n-translation';
+export * from './multilanguage-input/multilanguage-input.component';
+export * from './multilanguage-input/model/multilanguage-translation';
 export * from './number-input/number-input.component';
 export * from './radio-group-input/radio-group-input.component';
 export * from './radio-group-input/radio/radio.component';

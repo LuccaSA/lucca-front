@@ -1,15 +1,15 @@
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
-import { I18nTextInputComponent, I18nTranslation } from '@lucca-front/ng/forms';
+import { MultilanguageInputComponent, MultilanguageTranslation } from '@lucca-front/ng/forms';
 import { Meta, StoryObj, moduleMetadata } from '@storybook/angular';
 import { cleanupTemplate, generateInputs } from 'stories/helpers/stories';
 
 export default {
-	title: 'Documentation/Forms/Fields/I18nTextfield/Angular',
+	title: 'Documentation/Forms/Fields/MultilanguageField/Angular',
 	decorators: [
 		moduleMetadata({
-			imports: [I18nTextInputComponent, FormFieldComponent, FormsModule, ReactiveFormsModule, BrowserAnimationsModule],
+			imports: [MultilanguageInputComponent, FormFieldComponent, FormsModule, ReactiveFormsModule, BrowserAnimationsModule],
 		}),
 	],
 	argTypes: {
@@ -22,7 +22,7 @@ export default {
 	},
 } as Meta;
 
-export const Basic: StoryObj<I18nTextInputComponent & FormFieldComponent> = {
+export const Basic: StoryObj<MultilanguageInputComponent & FormFieldComponent> = {
 	render: (args, { argTypes }) => {
 		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, ...inputArgs } = args;
 		return {
@@ -44,7 +44,7 @@ export const Basic: StoryObj<I18nTextInputComponent & FormFieldComponent> = {
 						cultureCode: 'de-DE',
 						value: '',
 					},
-				] as I18nTranslation[],
+				] as MultilanguageTranslation[],
 			},
 			template: cleanupTemplate(`<lu-form-field ${generateInputs(
 				{
@@ -58,10 +58,10 @@ export const Basic: StoryObj<I18nTextInputComponent & FormFieldComponent> = {
 				argTypes,
 			)}>
 
-	<lu-i18n-text-input
+	<lu-multilanguage-input
 	${generateInputs(inputArgs, argTypes)}
 		[(ngModel)]="example">
-	</lu-i18n-text-input>
+	</lu-multilanguage-input>
 
 </lu-form-field>
 

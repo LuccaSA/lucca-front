@@ -1,17 +1,17 @@
 import { InjectionToken } from '@angular/core';
 import { ILuTranslation } from '@lucca-front/ng/core';
 
-export const LU_I18n_TEXT_INPUT_TRANSLATIONS = new InjectionToken('LuI18nInputTranslations', {
-	factory: () => lui18nTextInputTranslations,
+export const LU_MULTILANGUAGE_INPUT_TRANSLATIONS = new InjectionToken('LuMultilanguageInputTranslations', {
+	factory: () => luMultilanguageInputTranslations,
 });
 
-export interface LuI18nInputTranslations {
+export interface LuMultilanguageInputTranslations {
 	clear: string;
 	toggleMultilanguage: string;
 	translateTo: string;
 }
 
-export const lui18nTextInputTranslations: ILuTranslation<LuI18nInputTranslations> = {
+export const luMultilanguageInputTranslations: ILuTranslation<LuMultilanguageInputTranslations> = {
 	en: {
 		clear: 'Empty this field',
 		toggleMultilanguage: 'Show translations',

@@ -7,41 +7,41 @@ import { FormFieldComponent, InputDirective } from '@lucca-front/ng/form-field';
 import { PopoverDirective } from '@lucca-front/ng/popover2';
 import { FormFieldIdDirective } from '../form-field-id.directive';
 import { TextInputComponent } from '../text-input/text-input.component';
-import { LU_I18n_TEXT_INPUT_TRANSLATIONS } from './i18n-text-input.translate';
-import { I18nTranslation } from './model/i18n-translation';
+import { LU_MULTILANGUAGE_INPUT_TRANSLATIONS } from './multilanguage-input.translate';
+import { MultilanguageTranslation } from './model/multilanguage-translation';
 
 @Component({
-	selector: 'lu-i18n-text-input',
+	selector: 'lu-multilanguage-input',
 	standalone: true,
 	imports: [FormFieldComponent, ReactiveFormsModule, FormFieldIdDirective, NgTemplateOutlet, PopoverDirective, TextInputComponent, FormFieldComponent, FormsModule, InputDirective, IntlParamsPipe],
-	templateUrl: './i18n-text-input.component.html',
-	styleUrl: './i18n-text-input.component.scss',
+	templateUrl: './multilanguage-input.component.html',
+	styleUrl: './multilanguage-input.component.scss',
 	providers: [
 		{
 			provide: NG_VALUE_ACCESSOR,
-			useExisting: forwardRef(() => I18nTextInputComponent),
+			useExisting: forwardRef(() => MultilanguageInputComponent),
 			multi: true,
 		},
 	],
 	encapsulation: ViewEncapsulation.None,
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class I18nTextInputComponent implements ControlValueAccessor {
+export class MultilanguageInputComponent implements ControlValueAccessor {
 	#localeId = inject(LOCALE_ID);
 
 	#intlDisplay = new Intl.DisplayNames([this.#localeId], { type: 'language' });
 
-	intl = getIntl(LU_I18n_TEXT_INPUT_TRANSLATIONS);
+	intl = getIntl(LU_MULTILANGUAGE_INPUT_TRANSLATIONS);
 
 	protected onTouched = () => {};
 
-	protected onChange = (_value: I18nTranslation[]) => {};
+	protected onChange = (_value: MultilanguageTranslation[]) => {};
 
 	placeholder = input('');
 
 	disabled = signal(false);
 
-	model: WritableSignal<I18nTranslation[]> = signal([] as I18nTranslation[]);
+	model: WritableSignal<MultilanguageTranslation[]> = signal([] as MultilanguageTranslation[]);
 
 	invariant = computed(() => {
 		return this.model().find((row) => row.cultureCode === 'invariant') || { value: '' };
@@ -60,7 +60,7 @@ export class I18nTextInputComponent implements ControlValueAccessor {
 		return this.#intlDisplay.of(locale);
 	}
 
-	writeValue(value: I18nTranslation[]): void {
+	writeValue(value: MultilanguageTranslation[]): void {
 		if (!value) {
 			value = [];
 		}
@@ -72,7 +72,7 @@ export class I18nTextInputComponent implements ControlValueAccessor {
 		}
 	}
 
-	registerOnChange(fn: (value: I18nTranslation[]) => void): void {
+	registerOnChange(fn: (value: MultilanguageTranslation[]) => void): void {
 		this.onChange = fn;
 	}
 
