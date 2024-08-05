@@ -7,11 +7,12 @@ import { Subject } from 'rxjs';
 import { POPOVER_CONFIG } from '../../popover-tokens';
 import { LU_POPOVER2_TRANSLATIONS } from '../../popover.translate';
 import { getIntl } from '@lucca-front/ng/core';
+import { CdkObserveContent } from '@angular/cdk/observers';
 
 @Component({
 	selector: 'lu-popover-content',
 	standalone: true,
-	imports: [NgTemplateOutlet, ButtonComponent, IconComponent],
+	imports: [NgTemplateOutlet, ButtonComponent, IconComponent, CdkObserveContent],
 	templateUrl: './popover-content.component.html',
 	styleUrl: './popover-content.component.scss',
 
@@ -36,6 +37,8 @@ export class PopoverContentComponent implements AfterViewInit {
 
 	closed$ = new Subject<void>();
 
+	contentChangedDebounceTime = 100;
+
 	mouseEnter$ = new Subject<void>();
 
 	@HostListener('mouseenter')
@@ -48,6 +51,10 @@ export class PopoverContentComponent implements AfterViewInit {
 	@HostListener('mouseleave')
 	mouseLeave(): void {
 		this.mouseLeave$.next();
+	}
+
+	contentChanged() {
+		this.#config.ref.updatePosition();
 	}
 
 	ngAfterViewInit(): void {
