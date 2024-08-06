@@ -70,10 +70,10 @@ export class ButtonComponent implements OnChanges {
 
 	updateClasses(): void {
 		const ngClassConfig = {
-			[`mod-${this.size}`]: true,
+			[`mod-${this.size}`]: !!this.size,
 			[`mod-block`]: this.block,
-			[`palette-${this.palette}`]: true,
-			[`is-${this.state}`]: true,
+			[`palette-${this.palette}`]: !!this.palette,
+			[`is-${this.state}`]: !!this.state,
 			['mod-onlyIcon']: this.iconOnly,
 			['mod-withIcon']: this.#iconComponentRef !== undefined,
 			['mod-delete']: this.delete,

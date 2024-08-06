@@ -22,7 +22,7 @@ export const Template: StoryObj<TagComponent> = {
 		size: {
 			options: ['M', 'L'],
 			control: {
-				type: 'radio',
+				type: 'select',
 			},
 		},
 		palette: PaletteAllArgType,
@@ -42,7 +42,6 @@ export const Template: StoryObj<TagComponent> = {
 
 	args: {
 		label: 'Text',
-		size: 'M',
 		palette: null,
 		outlined: false,
 		icon: null,

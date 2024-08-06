@@ -22,7 +22,7 @@ export default {
 		size: {
 			options: ['M', 'S', 'XS'],
 			control: {
-				type: 'radio',
+				type: 'select',
 			},
 		},
 		inlineMessageState: {
@@ -30,6 +30,9 @@ export default {
 			control: {
 				type: 'select',
 			},
+		},
+		hiddenLabel: {
+			description: 'Masque le label en le conservant dans le DOM pour les lecteurs d\'écrans',
 		},
 		optionComparer: HiddenArgType,
 		options: HiddenArgType,
@@ -72,7 +75,6 @@ export const Basic: StoryObj<LuSimpleSelectInputComponent<unknown> & FormFieldCo
 		};
 	},
 	args: {
-		size: 'M',
 		label: 'Label',
 		tooltip: 'Tooltip message',
 		hiddenLabel: false,

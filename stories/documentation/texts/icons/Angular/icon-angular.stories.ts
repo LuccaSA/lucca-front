@@ -15,9 +15,8 @@ export default {
 
 export const Template: StoryObj<IconComponent> = {
 	args: {
-		alt: "Faut mettre du beurre dans le fond du plat pour pas qu'le grâtin colle",
+		alt: "Texte alternatif",
 		color: 'inherit',
 		icon: 'heart',
-		size: 'M',
 	},
 };

@@ -48,12 +48,16 @@ export default {
 		open: {
 			description: '[v17.2]'
 		},
+		size: {
+			control: {
+				type: 'select',
+			},
+		},
 	},
 } as Meta;
 
 export const Template: StoryObj<CalloutDisclosureComponent> = {
 	args: {
-		size: 'M',
 		state: null,
 		heading: 'List title',
 		icon: 'signInfo',
