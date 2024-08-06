@@ -36,7 +36,7 @@
 
 		&[disabled],
 		&.is-disabled {
-			cursor: not-allowed;
+			cursor: not-allowed; // disabled token candidate
 			pointer-events: all;
 		}
 	}

@@ -1,0 +1,6 @@
+@use 'exports' as *;
+
+.plgPush {
+	@include vars;
+	@include component;
+}

@@ -1,14 +1,10 @@
 import { Meta, StoryFn } from '@storybook/angular';
 
-interface IndexTableNestedSubTotalsStory {
-
-}
+interface IndexTableNestedSubTotalsStory {}
 
 export default {
 	title: 'Documentation/Listings/Index Table/Nested Sub Totals',
-	argTypes: {
-
-	},
+	argTypes: {},
 } as Meta;
 
 function getTemplate(args: IndexTableNestedSubTotalsStory): string {
@@ -41,8 +37,8 @@ function getTemplate(args: IndexTableNestedSubTotalsStory): string {
 		</tr>
 		<tr class="indexTable-body-row" id="r1">
 			<td class="indexTable-body-row-cell" header="y2021">
-				<a href="#" class="indexTable-body-row-cell-action">See details</a>
-				Content
+				<a href="#" class="indexTable-body-row-cell-link">Content</a>
+				
 			</td>
 			<td class="indexTable-body-row-cell" header="y2021">Content</td>
 			<td class="indexTable-body-row-cell u-textRight" header="y2021">
@@ -51,8 +47,7 @@ function getTemplate(args: IndexTableNestedSubTotalsStory): string {
 		</tr>
 		<tr class="indexTable-body-row" id="r2">
 			<td class="indexTable-body-row-cell" header="y2021">
-				<a href="#" class="indexTable-body-row-cell-action">See details</a>
-				Content
+				<a href="#" class="indexTable-body-row-cell-link">Content</a>
 			</td>
 			<td class="indexTable-body-row-cell" header="y2021">Content</td>
 			<td class="indexTable-body-row-cell u-textRight" header="y2021">
@@ -61,8 +56,7 @@ function getTemplate(args: IndexTableNestedSubTotalsStory): string {
 		</tr>
 		<tr class="indexTable-body-row" id="r3">
 			<td class="indexTable-body-row-cell" header="y2021">
-				<a href="#" class="indexTable-body-row-cell-action">See details</a>
-				Content
+				<a href="#" class="indexTable-body-row-cell-link">Content</a>
 			</td>
 			<td class="indexTable-body-row-cell" header="y2021">Content</td>
 			<td class="indexTable-body-row-cell u-textRight" header="y2021">
@@ -97,8 +91,7 @@ function getTemplate(args: IndexTableNestedSubTotalsStory): string {
 		</tr>
 		<tr class="indexTable-body-row" id="r6">
 			<td class="indexTable-body-row-cell" header="y2022">
-				<a href="#" class="indexTable-body-row-cell-action">See details</a>
-				Content
+				<a href="#" class="indexTable-body-row-cell-link">Content</a>
 			</td>
 			<td class="indexTable-body-row-cell" header="y2022">Content</td>
 			<td class="indexTable-body-row-cell u-textRight" header="y2022">
@@ -133,8 +126,7 @@ function getTemplate(args: IndexTableNestedSubTotalsStory): string {
 		</tr>
 		<tr class="indexTable-body-row is-closed" id="r9">
 			<td class="indexTable-body-row-cell" header="y2023">
-				<a href="#" class="indexTable-body-row-cell-action">See details</a>
-				Content
+				<a href="#" class="indexTable-body-row-cell-link">Content</a>
 			</td>
 			<td class="indexTable-body-row-cell" header="y2023">Content</td>
 			<td class="indexTable-body-row-cell u-textRight" header="y2023">
@@ -165,4 +157,4 @@ const Template: StoryFn<IndexTableNestedSubTotalsStory> = (args) => ({
 });
 
 export const NestedSubTotals = Template.bind({});
-NestedSubTotals.args = { };
+NestedSubTotals.args = {};

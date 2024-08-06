@@ -1,4 +1,4 @@
-<div class="popover">
+<div class="popover" (cdkObserveContent)="contentChanged()" [debounce]="contentChangedDebounceTime">
 	<div>
 		<button type="button" luButton class="popover-close" (click)="close()">
 			<lu-icon icon="signClose"></lu-icon>

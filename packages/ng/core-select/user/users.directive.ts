@@ -107,7 +107,7 @@ export class LuCoreSelectUsersDirective<T extends LuCoreSelectUser = LuCoreSelec
 			...(clue ? { clue: clue } : {}),
 			...(operationIds ? { operations: operationIds.join(',') } : {}),
 			...(appInstanceId ? { appInstanceId } : {}),
-			...(enableFormerEmployees ? { formerEmployee: enableFormerEmployees } : {}),
+			...(enableFormerEmployees ? { formerEmployees: enableFormerEmployees } : {}),
 		})),
 	);
 

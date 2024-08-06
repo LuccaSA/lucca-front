@@ -25,7 +25,7 @@ function getTemplate(args: TableStickyColumnsAndHeaderWithBreakpointsStory): str
 					<th class=" table-head-row-cell mod-stickyColumn-leftOffset20 mod-stickyColumn-shadow " role="presentation" >
 						<div class="stickyColumn-shadow-wrapper"></div>
 					</th>
-					<th class="table-head-row-cell mod-columnSticky-shadowMask">Head cell</th>
+					<th class="table-head-row-cell mod-stickyColumn-shadowMask">Head cell</th>
 					<th class="table-head-row-cell">Head cell</th>
 					<th class="table-head-row-cell">Head cell</th>
 					<th class="table-head-row-cell">Head cell</th>
@@ -34,7 +34,7 @@ function getTemplate(args: TableStickyColumnsAndHeaderWithBreakpointsStory): str
 					<th class="table-head-row-cell">Head cell</th>
 					<th class="table-head-row-cell">Head cell</th>
 					<th class="table-head-row-cell">Head cell</th>
-					<th class="table-head-row-cell mod-columnSticky-shadowMask">Head cell</th>
+					<th class="table-head-row-cell mod-stickyColumn-shadowMask">Head cell</th>
 					<th class=" table-head-row-cell mod-stickyColumn-rightOffset5 mod-stickyColumn-shadow " role="presentation" >
 						<div class="stickyColumn-shadow-wrapper"></div>
 					</th>
@@ -62,7 +62,7 @@ function getTemplate(args: TableStickyColumnsAndHeaderWithBreakpointsStory): str
 					<td class=" table-body-row-cell mod-stickyColumn-leftOffset20 mod-stickyColumn-shadow " role="presentation" >
 						<div class="stickyColumn-shadow-wrapper"></div>
 					</td>
-					<td class="table-body-row-cell mod-columnSticky-shadowMask">Body cell</td>
+					<td class="table-body-row-cell mod-stickyColumn-shadowMask">Body cell</td>
 					<td class="table-body-row-cell">Body cell</td>
 					<td class="table-body-row-cell">Body cell</td>
 					<td class="table-body-row-cell">Body cell</td>
@@ -71,7 +71,7 @@ function getTemplate(args: TableStickyColumnsAndHeaderWithBreakpointsStory): str
 					<td class="table-body-row-cell">Body cell</td>
 					<td class="table-body-row-cell">Body cell</td>
 					<td class="table-body-row-cell">Body cell</td>
-					<td class="table-body-row-cell mod-columnSticky-shadowMask">Body cell</td>
+					<td class="table-body-row-cell mod-stickyColumn-shadowMask">Body cell</td>
 					<td class=" table-body-row-cell mod-stickyColumn-rightOffset5 mod-stickyColumn-shadow " role="presentation" >
 						<div class="stickyColumn-shadow-wrapper"></div>
 					</td>
@@ -92,7 +92,7 @@ function getTemplate(args: TableStickyColumnsAndHeaderWithBreakpointsStory): str
 					<td class=" table-body-row-cell mod-stickyColumn-leftOffset20 mod-stickyColumn-shadow " role="presentation" >
 						<div class="stickyColumn-shadow-wrapper"></div>
 					</td>
-					<td class="table-body-row-cell mod-columnSticky-shadowMask">Body cell</td>
+					<td class="table-body-row-cell mod-stickyColumn-shadowMask">Body cell</td>
 					<td class="table-body-row-cell">Body cell</td>
 					<td class="table-body-row-cell">Body cell</td>
 					<td class="table-body-row-cell">Body cell</td>
@@ -101,7 +101,7 @@ function getTemplate(args: TableStickyColumnsAndHeaderWithBreakpointsStory): str
 					<td class="table-body-row-cell">Body cell</td>
 					<td class="table-body-row-cell">Body cell</td>
 					<td class="table-body-row-cell">Body cell</td>
-					<td class="table-body-row-cell mod-columnSticky-shadowMask">Body cell</td>
+					<td class="table-body-row-cell mod-stickyColumn-shadowMask">Body cell</td>
 					<td class=" table-body-row-cell mod-stickyColumn-rightOffset5 mod-stickyColumn-shadow " role="presentation" >
 						<div class="stickyColumn-shadow-wrapper"></div>
 					</td>
@@ -122,7 +122,7 @@ function getTemplate(args: TableStickyColumnsAndHeaderWithBreakpointsStory): str
 					<td class=" table-body-row-cell mod-stickyColumn-leftOffset20 mod-stickyColumn-shadow " role="presentation" >
 						<div class="stickyColumn-shadow-wrapper"></div>
 					</td>
-					<td class="table-body-row-cell mod-columnSticky-shadowMask">Body cell</td>
+					<td class="table-body-row-cell mod-stickyColumn-shadowMask">Body cell</td>
 					<td class="table-body-row-cell">Body cell</td>
 					<td class="table-body-row-cell">Body cell</td>
 					<td class="table-body-row-cell">Body cell</td>
@@ -131,7 +131,7 @@ function getTemplate(args: TableStickyColumnsAndHeaderWithBreakpointsStory): str
 					<td class="table-body-row-cell">Body cell</td>
 					<td class="table-body-row-cell">Body cell</td>
 					<td class="table-body-row-cell">Body cell</td>
-					<td class="table-body-row-cell mod-columnSticky-shadowMask">Body cell</td>
+					<td class="table-body-row-cell mod-stickyColumn-shadowMask">Body cell</td>
 					<td class=" table-body-row-cell mod-stickyColumn-rightOffset5 mod-stickyColumn-shadow " role="presentation" >
 						<div class="stickyColumn-shadow-wrapper"></div>
 					</td>

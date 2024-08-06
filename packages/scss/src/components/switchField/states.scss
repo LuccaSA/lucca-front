@@ -25,12 +25,12 @@
 
 @mixin disabled {
 	~ .switchField-icon {
-		background-color: var(--palettes-neutral-100);
-		border-color: var(--palettes-neutral-100);
-		color: var(--palettes-neutral-500);
+		background-color: var(--commons-disabled-background);
+		border-color: var(--commons-disabled-background);
+		color: var(--palettes-neutral-500); // disabled token candidate
 
 		&::before {
-			background-color: var(--palettes-neutral-500);
+			background-color: var(--palettes-neutral-500); // disabled token candidate
 		}
 	}
 }
@@ -38,12 +38,12 @@
 @mixin checkedDisabled {
 	&:disabled {
 		~ .switchField-icon {
-			background-color: var(--palettes-neutral-100);
-			border-color: var(--palettes-neutral-100);
-			color: var(--palettes-neutral-500);
+			background-color: var(--commons-disabled-background);
+			border-color: var(--commons-disabled-background);
+			color: var(--palettes-neutral-500); // disabled token candidate
 
 			&::before {
-				background-color: var(--palettes-neutral-500);
+				background-color: var(--palettes-neutral-500); // disabled token candidate
 			}
 		}
 	}
