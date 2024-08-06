@@ -42,5 +42,8 @@ export const Template: StoryObj<FormFieldComponent> = {
 		errorInlineMessage: 'Error helper text',
 		inlineMessageState: 'default',
 		tooltip: 'You expected me to be helpful but this is a story!',
+		invalid: false,
+		counter: null,
+		rolePresentationLabel: false,
 	},
 };
