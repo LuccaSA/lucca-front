@@ -212,6 +212,40 @@
 	}
 }
 
+@mixin checkedFutureStep {
+	.timeline-step:not([aria-current='step']):not([aria-current='step'] ~ .timeline-step):not(.timeline-stepAddBetweenStep) {
+		&.valid {
+			.timeline-step-title {
+				color: var(--palettes-product-800);
+
+				&::before {
+					@include icon.generate('sign_confirm');
+					display: flex;
+					font-size: var(--components-timeline-icon-size);
+					background-color: var(--palettes-product-100);
+					color: var(--palettes-700, var(--palettes-product-700));
+				}
+			}
+		}
+	}
+}
+
+@mixin checkedFutureStepL {
+	--components-timeline-icon-size: var(--sizes-S-lineHeight);
+}
+
+@mixin checkedFutureStepVerticalNotL {
+	.timeline-step:not([aria-current='step']):not([aria-current='step'] ~ .timeline-step) {
+		&.valid {
+			.timeline-step-title {
+				.timeline-step-title-icon::before {
+					left: 0;
+				}
+			}
+		}
+	}
+}
+
 @mixin addStep {
 	.timeline-step {
 		&:nth-last-child(2)::after {
