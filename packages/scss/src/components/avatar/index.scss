@@ -1,6 +1,6 @@
 @use 'exports' as *;
 
-.avatar {
+.avatar, .lu-user-picture {
 	@include vars;
 	@include component;
 

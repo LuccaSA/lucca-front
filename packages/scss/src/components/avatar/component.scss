@@ -20,7 +20,7 @@
 	align-items: center;
 
 	@at-root ($atRoot) {
-		.avatar-picture {
+		.avatar-picture, .picture { // .picture is deprecated
 			border-radius: var(--commons-borderRadius-full);
 			background-position: center;
 			background-size: cover;
@@ -29,13 +29,16 @@
 			object-fit: cover;
 			object-position: center;
 			aspect-ratio: 1;
+			display: flex; // deprecated
 		}
 
-		.avatar-initials {
+		.avatar-initials, .picture { // .picture is deprecated
 			font-size: var(--components-avatar-fontSize);
 			font-weight: 600;
 			line-height: 1;
 			color: var(--palettes-neutral-0);
+			justify-content: center;
+			align-items: center;
 		}
 
 		.avatarWrapper {
