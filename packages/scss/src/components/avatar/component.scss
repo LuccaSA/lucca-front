@@ -1,14 +1,6 @@
 @use '@lucca-front/scss/src/commons/utils/reset';
 @use '@lucca-front/scss/src/commons/utils/a11y';
 
-// @import '_definitions';
-//
-// :host {
-//   @include userPictureVars;
-//   @include userPictureStyle;
-// }
-
-
 @mixin component($atRoot: 'without: rule') {
 	display: inline-flex;
 	vertical-align: middle;

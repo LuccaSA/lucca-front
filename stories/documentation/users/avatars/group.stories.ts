@@ -134,7 +134,7 @@ class AvatarStory {
 }
 
 export default {
-	title: 'Documentation/Users/Avatar/Basic',
+	title: 'Documentation/Users/Avatar/Group',
 	component: AvatarStory,
 	argTypes: {
 		sizes: {
