@@ -1,6 +1,9 @@
-@import '_definitions';
+@use '@lucca-front/scss/src/components/avatar';
 
-:host {
-  @include userPictureVars;
-  @include userPictureStyle;
-}
+
+// @import '_definitions';
+//
+// :host {
+//   @include userPictureVars;
+//   @include userPictureStyle;
+// }

@@ -1,9 +1,8 @@
 <ng-container *ngIf="hasPicture; else displayInitials">
-	<img class="picture" [src]="pictureHref" alt="" (error)="pictureError()" [loading]="imageLoadingAttribute" />
+	<img class="avatar-picture" [src]="pictureHref" alt="" (error)="pictureError()" [loading]="imageLoadingAttribute" />
 </ng-container>
 
 <ng-template #displayInitials>
-	<div class="picture" [ngStyle]="style">
-		<span class="userPicture-initials">{{ initials }}</span>
-	</div>
+	<div class="avatar-picture" [ngStyle]="style"></div>
+	<span class="avatar-initials">{{ initials }}</span>
 </ng-template>
