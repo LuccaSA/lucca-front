@@ -1,17 +1,53 @@
 @use '@lucca-front/scss/src/commons/utils/reset';
 @use '@lucca-front/scss/src/commons/utils/a11y';
 
+// @import '_definitions';
+//
+// :host {
+//   @include userPictureVars;
+//   @include userPictureStyle;
+// }
+
+
 @mixin component($atRoot: 'without: rule') {
-	box-shadow: 0 0 0 var(--components-avatar-border) var(--components-avatar-background);
+	display: inline-flex;
+	vertical-align: middle;
 	border-radius: var(--commons-borderRadius-full);
+	background-color: var(--palettes-neutral-200);
+	width: var(--components-avatar-size);
+	aspect-ratio: 1;
+	justify-content: center;
+	align-items: center;
 
 	@at-root ($atRoot) {
+		.avatar-picture {
+			border-radius: var(--commons-borderRadius-full);
+			background-position: center;
+			background-size: cover;
+			background-repeat: no-repeat;
+			width: var(--components-avatar-size);
+			object-fit: cover;
+			object-position: center;
+			aspect-ratio: 1;
+		}
+
+		.avatar-initials {
+			font-size: var(--components-avatar-fontSize);
+			font-weight: 600;
+			line-height: 1;
+			color: var(--palettes-neutral-0);
+		}
+
 		.avatarWrapper {
 			@include reset.list;
 
 			display: flex;
 			flex-wrap: wrap;
 			align-content: flex-start;
+
+			.avatar {
+				box-shadow: 0 0 0 var(--components-avatar-border) var(--components-avatar-background);
+			}
 		}
 
 		.avatarWrapper-item {

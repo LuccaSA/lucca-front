@@ -3,6 +3,34 @@
 .avatar {
 	@include vars;
 	@include component;
+
+	&.mod-XS {
+		@include XS;
+	}
+
+	&.mod-S {
+		@include S;
+	}
+
+	&.mod-L {
+		@include L;
+	}
+
+	&.mod-XL {
+		@include XL;
+	}
+
+	&.mod-XXL {
+		@include XXL;
+	}
+
+	&.mod-XXXL {
+		@include XXXL;
+	}
+
+	&.mod-placeholder {
+		@include placeholder;
+	}
 }
 
 .avatarWrapper {
