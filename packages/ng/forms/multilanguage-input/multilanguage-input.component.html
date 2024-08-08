@@ -8,6 +8,7 @@
 			[(ngModel)]="invariant().value"
 			(ngModelChange)="valueChange()"
 			(blur)="onTouched?.()"
+			[disabled]="disabledInternal()"
 			#inputElement
 		/>
 		<div class="textField-input-affix">
@@ -29,6 +30,7 @@
 								[suffix]="{content: row.cultureCode, ariaLabel: ''}"
 								[(ngModel)]="row.value"
 								(ngModelChange)="valueChange()"
+								[disabled]="disabledInternal()"
 							></lu-text-input>
 						</lu-form-field>
 						}

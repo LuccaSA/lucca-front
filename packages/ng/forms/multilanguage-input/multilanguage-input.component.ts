@@ -39,7 +39,8 @@ export class MultilanguageInputComponent implements ControlValueAccessor {
 
 	placeholder = input('');
 
-	disabled = signal(false);
+	// Suffixed with Internal to avoid conflict with NgModel's disabled attribute
+	disabledInternal = signal(false);
 
 	model: WritableSignal<MultilanguageTranslation[]> = signal([] as MultilanguageTranslation[]);
 
@@ -81,7 +82,7 @@ export class MultilanguageInputComponent implements ControlValueAccessor {
 	}
 
 	setDisabledState?(isDisabled: boolean): void {
-		this.disabled.set(isDisabled);
+		this.disabledInternal.set(isDisabled);
 	}
 
 	valueChange(): void {

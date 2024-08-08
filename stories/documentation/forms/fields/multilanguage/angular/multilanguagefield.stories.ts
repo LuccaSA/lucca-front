@@ -2,7 +2,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { MultilanguageInputComponent, MultilanguageTranslation } from '@lucca-front/ng/forms';
-import { Meta, StoryObj, moduleMetadata } from '@storybook/angular';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { cleanupTemplate, generateInputs } from 'stories/helpers/stories';
 
 export default {
@@ -22,7 +22,7 @@ export default {
 	},
 } as Meta;
 
-export const Basic: StoryObj<MultilanguageInputComponent & FormFieldComponent> = {
+export const Basic: StoryObj<MultilanguageInputComponent & FormFieldComponent & { disabled: boolean }> = {
 	render: (args, { argTypes }) => {
 		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, ...inputArgs } = args;
 		return {
@@ -69,6 +69,7 @@ export const Basic: StoryObj<MultilanguageInputComponent & FormFieldComponent> =
 		};
 	},
 	args: {
+		disabled: false,
 		label: 'Label',
 		required: true,
 		hiddenLabel: false,
