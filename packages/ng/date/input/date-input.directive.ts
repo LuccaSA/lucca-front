@@ -59,14 +59,14 @@ export class LuDateInputDirective<D> extends ALuInput<D, HTMLInputElement> imple
 		let format: string;
 		switch (this.granularity) {
 			case ELuDateGranularity.year:
-				format = this._intl.formatYear;
+				format = 'Y';
 				break;
 			case ELuDateGranularity.month:
-				format = this._intl.formatMonth;
+				format = 'MM/Y';
 				break;
 			case ELuDateGranularity.day:
 			default:
-				format = this._intl.formatDay;
+				format = 'shortDate';
 				break;
 		}
 		const text = this.value && this._adapter.isValid(this.value) ? this._adapter.format(this.value, format) : '';

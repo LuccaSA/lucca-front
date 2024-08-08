@@ -37,7 +37,7 @@ const Template: StoryFn<BoxToggleStory> = (args) => ({
 		:host {
 			display: block;
 		}`,
-		args.neutral === false ? ':host { background-color: white; margin: -15px -15px; padding: 15px 15px; }' : '',
+		args.neutral === false ? ':host { background-color: var(--palettes-neutral-0); margin: -15px -15px; padding: 15px 15px; }' : '',
 	],
 });
 

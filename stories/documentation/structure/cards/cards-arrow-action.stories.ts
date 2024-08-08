@@ -1,12 +1,12 @@
 import { Meta, StoryFn } from '@storybook/angular';
 
-interface CardsActionStory {}
+interface CardsArrowActionStory {}
 
 export default {
-	title: 'Documentation/Structure/Cards/Action',
+	title: 'Documentation/Structure/Cards/Arrow Action',
 } as Meta;
 
-function getTemplate(args: CardsActionStory): string {
+function getTemplate(args: CardsArrowActionStory): string {
 	return `
 	<div class="card mod-action">
 		<div class="card-content">
@@ -23,10 +23,10 @@ function getTemplate(args: CardsActionStory): string {
 	`;
 }
 
-const Template: StoryFn<CardsActionStory> = (args) => ({
+const Template: StoryFn<CardsArrowActionStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Action = Template.bind({});
-Action.args = {};
+export const ArrowAction = Template.bind({});
+ArrowAction.args = {};

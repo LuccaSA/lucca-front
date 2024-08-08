@@ -1,11 +1,10 @@
-import { A11yModule, ActiveDescendantKeyManager } from '@angular/cdk/a11y';
+import { A11yModule } from '@angular/cdk/a11y';
 import { AsyncPipe, NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
-import { AfterViewInit, ChangeDetectionStrategy, Component, QueryList, ViewChildren, inject } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, QueryList, TrackByFunction, ViewChildren, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { PortalDirective, getIntl } from '@lucca-front/ng/core';
-import { SELECT_ID, ɵLuOptionComponent, ɵLuOptionGroupPipe, ɵLuOptionOutletDirective, ɵgetGroupTemplateLocation } from '@lucca-front/ng/core-select';
-import { asyncScheduler, filter, map, observeOn, take, takeUntil } from 'rxjs';
-import { debounceTime, switchMap } from 'rxjs/operators';
+import { CoreSelectKeyManager, LuOptionGroup, SELECT_ID, ɵLuOptionComponent, ɵLuOptionGroupPipe, ɵLuOptionOutletDirective, ɵgetGroupTemplateLocation } from '@lucca-front/ng/core-select';
+import { EMPTY } from 'rxjs';
 import { LuMultiSelectInputComponent } from '../input';
 import { LuMultiSelectPanelRef } from '../input/panel.model';
 import { MULTI_SELECT_INPUT } from '../select.model';
@@ -35,6 +34,7 @@ import { ɵLuMultiSelectSelectedChipDirective } from './selected-chip.directive'
 		PortalDirective,
 		LuNotSelectedOptionsPipe,
 	],
+	providers: [CoreSelectKeyManager],
 })
 export class LuMultiSelectPanelComponent<T> implements AfterViewInit {
 	protected selectInput = inject<LuMultiSelectInputComponent<T>>(MULTI_SELECT_INPUT);
@@ -46,15 +46,16 @@ export class LuMultiSelectPanelComponent<T> implements AfterViewInit {
 	grouping = this.selectInput.grouping;
 	loading$ = this.selectInput.loading$;
 	optionComparer = this.selectInput.optionComparer;
+	optionKey = this.selectInput.optionKey;
+
+	trackOptionsBy: TrackByFunction<T> = (_, option) => this.optionKey(option);
+	trackGroupsBy: TrackByFunction<LuOptionGroup<T, unknown>> = (_, group) => group.key;
+
 	selectedOptions: T[] = this.selectInput.value || [];
 	optionTpl = this.selectInput.optionTpl;
 
 	@ViewChildren(ɵLuOptionComponent) optionsQL: QueryList<ɵLuOptionComponent<T>>;
-	private _keyManager: ActiveDescendantKeyManager<ɵLuOptionComponent<T>>;
-
-	public get keyManager(): ActiveDescendantKeyManager<ɵLuOptionComponent<T>> {
-		return this._keyManager;
-	}
+	keyManager = inject<CoreSelectKeyManager<T>>(CoreSelectKeyManager);
 
 	public clueChange$ = this.selectInput.clue$;
 	public shouldDisplayAddOption$ = this.selectInput.shouldDisplayAddOption$;
@@ -89,7 +90,7 @@ export class LuMultiSelectPanelComponent<T> implements AfterViewInit {
 		this.selectedOptions = matchingOption ? this.selectedOptions.filter((o) => o !== matchingOption) : [...this.selectedOptions, option];
 		this.panelRef.emitValue(this.selectedOptions);
 		setTimeout(() => this.panelRef.updatePosition());
-		this._keyManager?.setActiveItem(this.optionsQL.toArray().findIndex((o) => o.option === option));
+		this.keyManager.setActiveItem(this.optionsQL.toArray().findIndex((o) => o.option === option));
 	}
 
 	toggleOptions(notSelectedOptions: T[], groupOptions: T[]): void {
@@ -106,40 +107,16 @@ export class LuMultiSelectPanelComponent<T> implements AfterViewInit {
 	}
 
 	protected initKeyManager(): void {
-		this._keyManager = new ActiveDescendantKeyManager(this.optionsQL).withHomeAndEnd();
+		this.keyManager.init({
+			queryList: this.optionsQL,
+			options$: this.options$,
+			optionComparer: this.optionComparer,
+			activeOptionIdChanged$: this.panelRef.activeOptionIdChanged,
+			clueChange$: this.selectInput.searchable ? this.selectInput.clueChange : EMPTY,
+		});
 
-		if (this.selectedOptions) {
-			this.options$
-				?.pipe(
-					observeOn(asyncScheduler),
-					map((options) => (this.selectedOptions.length ? options.findIndex((o) => this.optionComparer(o, this.selectedOptions[0])) : -1)),
-					filter((index) => index !== -1),
-					take(1),
-					takeUntil(this.panelRef.closed),
-				)
-				.subscribe((selectedIndex) => this._keyManager.setActiveItem(selectedIndex));
+		if (this.selectedOptions?.length) {
+			this.keyManager.highlightOption(this.selectedOptions[0]);
 		}
-
-		this._keyManager.change
-			.pipe(
-				map(() => this._keyManager.activeItem?.id),
-				takeUntil(this.panelRef.closed),
-			)
-			.subscribe((activeDescendant) => this.panelRef.activeOptionIdChanged.emit(activeDescendant));
-
-		/**
-		 * On new options, we want to select the first element with key manager
-		 */
-		if (this.selectInput.searchable) {
-			this.selectInput.clueChange
-				.pipe(
-					switchMap(() => this.optionsQL.changes.pipe(take(1))),
-					debounceTime(0),
-					takeUntil(this.panelRef.closed),
-				)
-				.subscribe(() => (this.optionsQL.length ? this.keyManager.setFirstItemActive() : this.keyManager.setActiveItem(-1)));
-		}
-
-		this.keyManager.setFirstItemActive();
 	}
 }

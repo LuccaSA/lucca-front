@@ -2,7 +2,7 @@
 
 @mixin disabled {
 	~ .radioButtons-item-label {
-		box-shadow: 0 0 0 1px var(--palettes-neutral-200);
+		box-shadow: 0 0 0 1px var(--palettes-neutral-200); // disabled token candidate
 		color: var(--palettes-neutral-500);
 		cursor: default;
 
@@ -13,7 +13,7 @@
 
 	&:checked {
 		~ .radioButtons-item-label {
-			background-color: var(--palettes-neutral-100);
+			background-color: var(--commons-disabled-background);
 		}
 	}
 }

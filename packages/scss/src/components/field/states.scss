@@ -30,8 +30,8 @@
 }
 
 @mixin inputDisabled {
-	color: var(--palettes-neutral-500);
-	cursor: not-allowed;
+	color: var(--palettes-neutral-500); // disabled token candidate
+	cursor: not-allowed; // disabled token candidate
 }
 
 @mixin inputState($state) {

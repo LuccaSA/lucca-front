@@ -9,7 +9,6 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
 	encapsulation: ViewEncapsulation.None,
 	host: {
 		class: 'dialog-inside-footer footer',
-		role: 'footer',
 	},
 })
 export class DialogFooterComponent {}

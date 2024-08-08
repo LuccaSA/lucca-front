@@ -18,7 +18,7 @@
 	<ng-container *luOptionOutlet="valueTpl || optionTpl; value: value"></ng-container>
 </div>
 <button
-	*ngIf="clearable && hasValue"
+	*ngIf="clearable && hasValue && (disabled$ | async) === false"
 	class="simpleSelect-clear clear"
 	role="button"
 	type="button"

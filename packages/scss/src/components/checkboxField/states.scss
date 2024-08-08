@@ -47,9 +47,9 @@
 
 @mixin checkedDisabled {
 	~ .checkboxField-icon {
-		background-color: var(--palettes-neutral-100);
-		border-color: var(--palettes-neutral-100);
-		color: var(--palettes-neutral-500);
+		background-color: var(--commons-disabled-background);
+		border-color: var(--commons-disabled-background);
+		color: var(--palettes-neutral-500); // disabled token candidate
 	}
 }
 
@@ -77,7 +77,7 @@
 	cursor: default;
 
 	~ .checkboxField-icon {
-		border-color: var(--palettes-neutral-500);
+		border-color: var(--palettes-neutral-500); // disabled token candidate
 	}
 }
 

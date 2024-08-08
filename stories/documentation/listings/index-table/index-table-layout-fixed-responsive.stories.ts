@@ -1,14 +1,10 @@
 import { Meta, StoryFn } from '@storybook/angular';
 
-interface IndexTableLayoutFixedResponsiveStory {
-
-}
+interface IndexTableLayoutFixedResponsiveStory {}
 
 export default {
 	title: 'Documentation/Listings/Index Table/Layout Fixed Responsive',
-	argTypes: {
-
-	},
+	argTypes: {},
 } as Meta;
 
 function getTemplate(args: IndexTableLayoutFixedResponsiveStory): string {
@@ -24,8 +20,7 @@ function getTemplate(args: IndexTableLayoutFixedResponsiveStory): string {
 	<tbody class="indexTable-body">
 		<tr class="indexTable-body-row">
 			<td class="indexTable-body-row-cell">
-				<a href="#" class="indexTable-body-row-cell-action">See details</a>
-				Content
+				<a href="#" class="indexTable-body-row-cell-link">Content</a>
 			</td>
 			<td class="indexTable-body-row-cell">Content</td>
 			<td class="indexTable-body-row-cell">Content</td>
@@ -33,8 +28,7 @@ function getTemplate(args: IndexTableLayoutFixedResponsiveStory): string {
 		</tr>
 		<tr class="indexTable-body-row">
 			<td class="indexTable-body-row-cell">
-				<a href="#" class="indexTable-body-row-cell-action">See details</a>
-				Content
+				<a href="#" class="indexTable-body-row-cell-link">Content</a>
 			</td>
 			<td class="indexTable-body-row-cell">Content</td>
 			<td class="indexTable-body-row-cell">Content</td>
@@ -42,8 +36,7 @@ function getTemplate(args: IndexTableLayoutFixedResponsiveStory): string {
 		</tr>
 		<tr class="indexTable-body-row">
 			<td class="indexTable-body-row-cell">
-				<a href="#" class="indexTable-body-row-cell-action">See details</a>
-				Content
+				<a href="#" class="indexTable-body-row-cell-link">Content</a>
 			</td>
 			<td class="indexTable-body-row-cell">Content</td>
 			<td class="indexTable-body-row-cell">Content</td>
@@ -59,4 +52,4 @@ const Template: StoryFn<IndexTableLayoutFixedResponsiveStory> = (args) => ({
 });
 
 export const LayoutFixedResponsive = Template.bind({});
-LayoutFixedResponsive.args = { };
+LayoutFixedResponsive.args = {};
