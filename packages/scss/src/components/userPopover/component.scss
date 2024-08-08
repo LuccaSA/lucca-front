@@ -1,21 +1,15 @@
+@use '@lucca-front/scss/src/components/avatar/exports' as avatar;
+
 @mixin component($atRoot: 'without: rule') {
 	width: 23.5rem;
-	max-width: calc(100vw - var(--spacings-S) * 2);
-	padding: var(--spacings-S);
+	max-width: calc(100vw - var(--pr-t-spacings-200) * 2);
+	padding: var(--pr-t-spacings-200);
 
 	@at-root ($atRoot) {
 		.userPopover-details {
-			--components-user-picture-image-size: var(--components-userPicture-XXXL-image);
-
 			display: flex;
 			align-items: flex-start;
-			gap: var(--spacings-S);
-		}
-
-		.userPopover-details-avatar {
-			--components-user-picture-font-size: var(--components-userPicture-XXXL-fontSize);
-
-			margin: var(--spacings-XXS) 0;
+			gap: var(--pr-t-spacings-200);
 		}
 
 		.userPopover-details-info {
@@ -52,7 +46,7 @@
 		.userPopover-details-info-detail-workplace {
 			display: flex;
 			align-items: flex-start;
-			gap: var(--spacings-XXS);
+			gap: var(--pr-t-spacings-50);
 			color: currentColor;
 			text-decoration: none;
 
@@ -67,5 +61,10 @@
 				}
 			}
 		}
+	}
+
+	.avatar {
+		@include avatar.XXXL;
+		margin: var(--pr-t-spacings-50) 0;
 	}
 }

@@ -10,42 +10,42 @@ import { squidwards } from '../user.mocks';
 	template: `
 		<ul class="avatarWrapper" [class]="sizes">
 			<li class="avatarWrapper-item">
-				<lu-user-picture aria-hidden="true" class="avatar" [class]="sizes" [user]="user"></lu-user-picture>
+				<lu-user-picture aria-hidden="true" class="avatar" [user]="user"></lu-user-picture>
 				<span class="u-mask">{{ user.firstName }} {{ user.lastName }}</span>
 			</li>
 			<li class="avatarWrapper-item">
-				<lu-user-picture aria-hidden="true" class="avatar" [class]="sizes" [user]="user"></lu-user-picture>
+				<lu-user-picture aria-hidden="true" class="avatar" [user]="user"></lu-user-picture>
 				<span class="u-mask">{{ user.firstName }} {{ user.lastName }}</span>
 			</li>
 			<li class="avatarWrapper-item">
-				<lu-user-picture aria-hidden="true" class="avatar" [class]="sizes" [user]="user"></lu-user-picture>
+				<lu-user-picture aria-hidden="true" class="avatar" [user]="user"></lu-user-picture>
 				<span class="u-mask">{{ user.firstName }} {{ user.lastName }}</span>
 			</li>
 			<li class="avatarWrapper-item">
-				<lu-user-picture aria-hidden="true" class="avatar" [class]="sizes" [user]="user"></lu-user-picture>
+				<lu-user-picture aria-hidden="true" class="avatar" [user]="user"></lu-user-picture>
 				<span class="u-mask">{{ user.firstName }} {{ user.lastName }}</span>
 			</li>
 			<li class="avatarWrapper-item">
-				<lu-user-picture aria-hidden="true" class="avatar" [class]="sizes" [user]="user"></lu-user-picture>
+				<lu-user-picture aria-hidden="true" class="avatar" [user]="user"></lu-user-picture>
 				<span class="u-mask">{{ user.firstName }} {{ user.lastName }}</span>
 			</li>
 		</ul>
 
 		<ul class="avatarWrapper" [class]="sizes">
 			<li class="avatarWrapper-item">
-				<lu-user-picture aria-hidden="true" class="avatar" [class]="sizes" [user]="user"></lu-user-picture>
+				<lu-user-picture aria-hidden="true" class="avatar" [user]="user"></lu-user-picture>
 				<span class="u-mask">{{ user.firstName }} {{ user.lastName }}</span>
 			</li>
 			<li class="avatarWrapper-item">
-				<lu-user-picture aria-hidden="true" class="avatar" [class]="sizes" [user]="user"></lu-user-picture>
+				<lu-user-picture aria-hidden="true" class="avatar" [user]="user"></lu-user-picture>
 				<span class="u-mask">{{ user.firstName }} {{ user.lastName }}</span>
 			</li>
 			<li class="avatarWrapper-item">
-				<lu-user-picture aria-hidden="true" class="avatar" [class]="sizes" [user]="user"></lu-user-picture>
+				<lu-user-picture aria-hidden="true" class="avatar" [user]="user"></lu-user-picture>
 				<span class="u-mask">{{ user.firstName }} {{ user.lastName }}</span>
 			</li>
 			<li class="avatarWrapper-item">
-				<lu-user-picture aria-hidden="true" class="avatar" [class]="sizes" [user]="user"></lu-user-picture>
+				<lu-user-picture aria-hidden="true" class="avatar" [user]="user"></lu-user-picture>
 				<span class="u-mask">{{ user.firstName }} {{ user.lastName }}</span>
 			</li>
 			<li class="avatarWrapper-item" role="presentation">
@@ -61,31 +61,31 @@ import { squidwards } from '../user.mocks';
 		<ul class="avatarWrapper" [class]="sizes">
 			<li class="avatarWrapper-item">
 				<a href="#" class="avatarWrapper-item-action">
-					<lu-user-picture aria-hidden="true" class="avatar" [class]="sizes" [user]="user"></lu-user-picture>
+					<lu-user-picture aria-hidden="true" class="avatar" [user]="user"></lu-user-picture>
 					<span class="u-mask">{{ user.firstName }} {{ user.lastName }}</span>
 				</a>
 			</li>
 			<li class="avatarWrapper-item">
 				<a href="#" class="avatarWrapper-item-action">
-					<lu-user-picture aria-hidden="true" class="avatar" [class]="sizes" [user]="user"></lu-user-picture>
+					<lu-user-picture aria-hidden="true" class="avatar" [user]="user"></lu-user-picture>
 					<span class="u-mask">{{ user.firstName }} {{ user.lastName }}</span>
 				</a>
 			</li>
 			<li class="avatarWrapper-item">
 				<a href="#" class="avatarWrapper-item-action">
-					<lu-user-picture aria-hidden="true" class="avatar" [class]="sizes" [user]="user"></lu-user-picture>
+					<lu-user-picture aria-hidden="true" class="avatar" [user]="user"></lu-user-picture>
 					<span class="u-mask">{{ user.firstName }} {{ user.lastName }}</span>
 				</a>
 			</li>
 			<li class="avatarWrapper-item">
 				<a href="#" class="avatarWrapper-item-action">
-					<lu-user-picture aria-hidden="true" class="avatar" [class]="sizes" [user]="user"></lu-user-picture>
+					<lu-user-picture aria-hidden="true" class="avatar" [user]="user"></lu-user-picture>
 					<span class="u-mask">{{ user.firstName }} {{ user.lastName }}</span>
 				</a>
 			</li>
 			<li class="avatarWrapper-item">
 				<a href="#" class="avatarWrapper-item-action">
-					<lu-user-picture aria-hidden="true" class="avatar" [class]="sizes" [user]="user"></lu-user-picture>
+					<lu-user-picture aria-hidden="true" class="avatar" [user]="user"></lu-user-picture>
 					<span class="u-mask">{{ user.firstName }} {{ user.lastName }}</span>
 				</a>
 			</li>
@@ -94,25 +94,25 @@ import { squidwards } from '../user.mocks';
 		<ul class="avatarWrapper" [class]="sizes">
 			<li class="avatarWrapper-item">
 				<a href="#" class="avatarWrapper-item-action">
-					<lu-user-picture aria-hidden="true" class="avatar" [class]="sizes" [user]="user"></lu-user-picture>
+					<lu-user-picture aria-hidden="true" class="avatar" [user]="user"></lu-user-picture>
 					<span class="u-mask">{{ user.firstName }} {{ user.lastName }}</span>
 				</a>
 			</li>
 			<li class="avatarWrapper-item">
 				<a href="#" class="avatarWrapper-item-action">
-					<lu-user-picture aria-hidden="true" class="avatar" [class]="sizes" [user]="user"></lu-user-picture>
+					<lu-user-picture aria-hidden="true" class="avatar" [user]="user"></lu-user-picture>
 					<span class="u-mask">{{ user.firstName }} {{ user.lastName }}</span>
 				</a>
 			</li>
 			<li class="avatarWrapper-item">
 				<a href="#" class="avatarWrapper-item-action">
-					<lu-user-picture aria-hidden="true" class="avatar" [class]="sizes" [user]="user"></lu-user-picture>
+					<lu-user-picture aria-hidden="true" class="avatar" [user]="user"></lu-user-picture>
 					<span class="u-mask">{{ user.firstName }} {{ user.lastName }}</span>
 				</a>
 			</li>
 			<li class="avatarWrapper-item">
 				<a href="#" class="avatarWrapper-item-action">
-					<lu-user-picture aria-hidden="true" class="avatar" [class]="sizes" [user]="user"></lu-user-picture>
+					<lu-user-picture aria-hidden="true" class="avatar" [user]="user"></lu-user-picture>
 					<span class="u-mask">{{ user.firstName }} {{ user.lastName }}</span>
 				</a>
 			</li>

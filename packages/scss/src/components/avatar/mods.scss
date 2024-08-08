@@ -5,14 +5,12 @@
 	--components-avatar-fontSize: var(--sizes-XS-fontSize);
 	--components-avatar-placeholder-size: 0.75rem;
 	--components-avatar-border: 1px;
-	--components-avatarWrapper-overlap: var(--pr-t-spacings-50);
 }
 
 @mixin S {
 	--components-avatar-size: 2rem;
 	--components-avatar-fontSize: var(--sizes-S-fontSize);
 	--components-avatar-placeholder-size: 1rem;
-	--components-avatarWrapper-overlap: var(--pr-t-spacings-50);
 }
 
 @mixin L {
@@ -39,6 +37,34 @@
 	--components-avatar-placeholder-size: 2.5rem;
 }
 
+@mixin wrapperXL {
+	.avatar, .avatarWrapper-item-action {
+		@include XL;
+	}
+}
+
+@mixin wrapperL {
+	.avatar, .avatarWrapper-item-action {
+		@include L;
+	}
+}
+
+@mixin wrapperS {
+	--components-avatarWrapper-overlap: var(--pr-t-spacings-50);
+
+	.avatar, .avatarWrapper-item-action {
+		@include S;
+	}
+}
+
+@mixin wrapperXS {
+	--components-avatarWrapper-overlap: var(--pr-t-spacings-50);
+
+	.avatar, .avatarWrapper-item-action {
+		@include XS;
+	}
+}
+
 @mixin placeholder {
 		background: var(--palettes-neutral-200) !important;
 
@@ -48,8 +74,8 @@
 			font-weight: 400;
 			font-size: var(--components-avatar-placeholder-size);
 		}
-		// 
-		// .avatar-initials {
-		// 	display: none;
-		// }
+
+		.avatar-picture {
+			display: none;
+		}
 }

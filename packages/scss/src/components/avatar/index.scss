@@ -1,6 +1,6 @@
 @use 'exports' as *;
 
-.avatar, .lu-user-picture {
+.avatar, .lu-user-picture { // lu-user-picture is deprecated
 	@include vars;
 	@include component;
 
@@ -37,18 +37,18 @@
 	@include varsWrapper;
 
 	&.mod-XL {
-		@include XL;
+		@include wrapperXL;
 	}
 
 	&.mod-L {
-		@include L;
+		@include wrapperL;
 	}
 
 	&.mod-S {
-		@include S;
+		@include wrapperS;
 	}
 
 	&.mod-XS {
-		@include XS;
+		@include wrapperXS;
 	}
 }

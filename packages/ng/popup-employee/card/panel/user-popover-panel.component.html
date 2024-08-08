@@ -11,13 +11,13 @@
 >
 	<div *ngIf="employee$ | async as employee" class="lu-popover-content userPopover">
 		<section class="userPopover-details">
-			<div [ngSwitch]="userPictureDisplay$ | async" class="userPopover-details-avatar">
+			<div [ngSwitch]="userPictureDisplay$ | async" class="userPopover-details-avatar avatar">
 				<ng-container *ngSwitchCase="'img'">
-					<img class="picture" [src]="userPictureHref$ | async" [alt]="(userInitials$ | async)?.initials" (error)="pictureError()" />
+					<img class="avatar-picture" [src]="userPictureHref$ | async" [alt]="(userInitials$ | async)?.initials" (error)="pictureError()" />
 				</ng-container>
 				<ng-container *ngSwitchCase="'initials'">
-					<div class="picture" *ngIf="userInitials$ | async as initials" style.background-color="hsl({{initials.color}}, 60%, 60%)">
-						<span class="userPicture-initials">{{ initials.initials }}</span>
+					<div class="avatar-picture" *ngIf="userInitials$ | async as initials" style.background-color="hsl({{initials.color}}, 60%, 60%)">
+						<span class="avatar-picture-initials">{{ initials.initials }}</span>
 					</div>
 				</ng-container>
 			</div>

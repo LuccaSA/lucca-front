@@ -3,6 +3,7 @@
 </ng-container>
 
 <ng-template #displayInitials>
-	<div class="avatar-picture" [ngStyle]="style"></div>
-	<span class="avatar-initials">{{ initials }}</span>
+	<div class="avatar-picture" [ngStyle]="style">
+		<span class="avatar-picture-initials">{{ initials }}</span>
+	</div>
 </ng-template>

@@ -5,7 +5,6 @@
 	display: inline-flex;
 	vertical-align: middle;
 	border-radius: var(--commons-borderRadius-full);
-	background-color: var(--palettes-neutral-200);
 	width: var(--components-avatar-size);
 	aspect-ratio: 1;
 	justify-content: center;
@@ -13,6 +12,7 @@
 
 	@at-root ($atRoot) {
 		.avatar-picture, .picture { // .picture is deprecated
+			background-color: var(--palettes-neutral-200);
 			border-radius: var(--commons-borderRadius-full);
 			background-position: center;
 			background-size: cover;
@@ -21,16 +21,16 @@
 			object-fit: cover;
 			object-position: center;
 			aspect-ratio: 1;
-			display: flex; // deprecated
+			display: flex;
+			justify-content: center;
+			align-items: center;
 		}
 
-		.avatar-initials, .picture { // .picture is deprecated
+		.avatar-picture-initials, .picture { // .picture is deprecated
 			font-size: var(--components-avatar-fontSize);
 			font-weight: 600;
 			line-height: 1;
 			color: var(--palettes-neutral-0);
-			justify-content: center;
-			align-items: center;
 		}
 
 		.avatarWrapper {
