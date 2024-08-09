@@ -4,40 +4,41 @@
 @use '@lucca-front/scss/src/components/numericBadge/exports' as numericBadge;
 
 @mixin S {
-  --components-multiSelect-fontSize: var(--sizes-S-fontSize);
-  --components-multiSelect-lineHeight: var(--sizes-S-lineHeight);
-  --components-multiSelect-padding: var(--pr-t-spacings-75);
-  --components-multiSelect-gap: var(--pr-t-spacings-75);
+	--components-multiSelect-fontSize: var(--sizes-S-fontSize);
+	--components-multiSelect-lineHeight: var(--sizes-S-lineHeight);
+	--components-multiSelect-padding: var(--pr-t-spacings-75);
+	--components-multiSelect-gap: var(--pr-t-spacings-75);
 
-  .multipleSelect-arrow {
-    @include icon.S;
-  }
+	.multipleSelect-arrow {
+		@include icon.S;
+	}
 
-  .multipleSelect-clear {
-    @include clear.S;
-  }
+	.multipleSelect-clear {
+		@include clear.S;
+	}
 
-  .multipleSelect-displayer-chip {
-    @include chip.S;
-  }
+	.multipleSelect-displayer-chip {
+		@include chip.S;
+	}
 
-  .multipleSelect-displayer-numericBadge {
-    @include numericBadge.S;
-  }
+	.multipleSelect-displayer-numericBadge {
+		@include numericBadge.S;
+	}
 }
 
 @mixin displayerFilter {
-  display: grid;
+	display: grid;
 
-  .multipleSelect-displayer-filter {
-    grid-column-start: 1;
-    grid-row-start: 1;
-    display: flex;
-    gap: var(--pr-t-spacings-50);
-  }
+	.multipleSelect-displayer-filter {
+		grid-column-start: 1;
+		grid-row-start: 1;
+		display: flex;
+		gap: var(--pr-t-spacings-50);
+		min-width: 0;
+	}
 
-  .multipleSelect-displayer-search {
-    grid-column-start: 1;
-    grid-row-start: 1;
-  }
+	.multipleSelect-displayer-search {
+		grid-column-start: 1;
+		grid-row-start: 1;
+	}
 }

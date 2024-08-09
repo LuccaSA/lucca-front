@@ -1,14 +1,10 @@
 import { Meta, StoryFn } from '@storybook/angular';
 
-interface IndexTableFooterStory {
-
-}
+interface IndexTableFooterStory {}
 
 export default {
 	title: 'Documentation/Listings/Index Table/Footer',
-	argTypes: {
-
-	},
+	argTypes: {},
 } as Meta;
 
 function getTemplate(args: IndexTableFooterStory): string {
@@ -23,16 +19,14 @@ function getTemplate(args: IndexTableFooterStory): string {
 	<tbody class="indexTable-body">
 		<tr class="indexTable-body-row">
 			<td class="indexTable-body-row-cell">
-				<a href="#" class="indexTable-body-row-cell-action">See details</a>
-				Content
+				<a href="#" class="indexTable-body-row-cell-link">Content</a>
 			</td>
 			<td class="indexTable-body-row-cell">Content</td>
 			<td class="indexTable-body-row-cell u-textRight">100,00 €</td>
 		</tr>
 		<tr class="indexTable-body-row">
 			<td class="indexTable-body-row-cell">
-				<a href="#" class="indexTable-body-row-cell-action">See details</a>
-				Content
+				<a href="#" class="indexTable-body-row-cell-link">Content</a>
 			</td>
 			<td class="indexTable-body-row-cell">Content</td>
 			<td class="indexTable-body-row-cell u-textRight">50,00 €</td>
@@ -57,8 +51,7 @@ function getTemplate(args: IndexTableFooterStory): string {
 	<tbody class="indexTable-body">
 		<tr class="indexTable-body-row">
 			<td class="indexTable-body-row-cell">
-				<a href="#" class="indexTable-body-row-cell-action">See details</a>
-				Content
+				<a href="#" class="indexTable-body-row-cell-link">Content</a>
 			</td>
 			<td class="indexTable-body-row-cell">Content</td>
 			<td class="indexTable-body-row-cell u-textRight">126,00 €</td>
@@ -72,8 +65,7 @@ function getTemplate(args: IndexTableFooterStory): string {
 	<tbody class="indexTable-body">
 		<tr class="indexTable-body-row">
 			<td class="indexTable-body-row-cell">
-				<a href="#" class="indexTable-body-row-cell-action">See details</a>
-				Content
+				<a href="#" class="indexTable-body-row-cell-link">Content</a>
 			</td>
 			<td class="indexTable-body-row-cell">Content</td>
 			<td class="indexTable-body-row-cell u-textRight">133,00 €</td>
@@ -98,4 +90,4 @@ const Template: StoryFn<IndexTableFooterStory> = (args) => ({
 });
 
 export const Footer = Template.bind({});
-Footer.args = { };
+Footer.args = {};

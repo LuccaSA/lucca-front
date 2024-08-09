@@ -7,24 +7,19 @@ export default {
 } as Meta;
 
 function getTemplate(args: TextSizeStory): string {
-	return `<span class="u-textXS">XS</span>
-<span class="u-textS">S</span>
-<span class="u-textM">M</span>
-<span class="u-textL">L</span>
-<span class="u-textXL">XL</span>
-<span class="u-textXXL">XXL</span>`;
+	return `<div class="demo-utilityWrapper">
+	<div class="u-textXS demo-utility"><code class="code">u-textXS</code> Lorem ipsum</div>
+	<div class="u-textS demo-utility"><code class="code">u-textS</code> Lorem ipsum</div>
+	<div class="u-textM demo-utility"><code class="code">u-textM</code> Lorem ipsum</div>
+	<div class="u-textL demo-utility"><code class="code">u-textL</code> Lorem ipsum</div>
+	<div class="u-textXL demo-utility"><code class="code">u-textXL</code> Lorem ipsum</div>
+	<div class="u-textXXL demo-utility"><code class="code">u-textXXL</code> Lorem ipsum</div>
+</div>`;
 }
 
 const Template: StoryFn<TextSizeStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
-	styles: [
-		`
-		span {
-			padding-right: var(--pr-t-spacings-200);
-		}
-		}`,
-	],
 });
 
 export const TextSize = Template.bind({});

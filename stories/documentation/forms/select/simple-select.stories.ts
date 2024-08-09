@@ -205,13 +205,13 @@ const optionStyle = `
 	width: 1rem;
 	height: 1rem;
 	border-radius: 50%;
-	border: 1px solid black;
+	border: 1px solid var(--palettes-neutral-900);
 `;
 const displayerStyle = `
 	display: inline-block;
 	width: 10rem;
 	height: 1rem;
-	border: 1px solid black;
+	border: 1px solid var(--palettes-neutral-900);
 `;
 
 const inlineStyle = (style: string) => style.split('\n').filter(Boolean).join('');
