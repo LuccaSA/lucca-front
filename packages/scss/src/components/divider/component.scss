@@ -5,16 +5,14 @@
 		border-top-color: var(--commons-divider-color);
 		border-top-width: var(--commons-divider-width);
 		border-top: var(--commons-divider-border);
-		margin-top: var(--pr-t-spacings-300);
-		margin-bottom: var(--pr-t-spacings-300);
+		margin-block: var(--components-divider-margin);
 	}
 
 	&:not(:empty) {
+		--components-divider-margin: 0;
 		display: flex;
 		align-items: center;
 		gap: var(--pr-t-spacings-100);
-		margin-top: var(--pr-t-spacings-150);
-		margin-bottom: var(--pr-t-spacings-150);
 		text-wrap: balance;
 		text-align: center;
 		font-size: var(--components-divider-fontSize);
@@ -32,7 +30,7 @@
 		}
 
 		.lucca-icon {
-			color: var(--palettes-neutral-500);
+			color: var(--palettes-neutral-600);
 		}
 	}
 }
