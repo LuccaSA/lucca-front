@@ -9,11 +9,24 @@ import { FormFieldIdDirective } from '../form-field-id.directive';
 import { TextInputComponent } from '../text-input/text-input.component';
 import { LU_MULTILANGUAGE_INPUT_TRANSLATIONS } from './multilanguage-input.translate';
 import { MultilanguageTranslation } from './model/multilanguage-translation';
+import { LuTooltipTriggerDirective } from '../../tooltip/trigger';
 
 @Component({
 	selector: 'lu-multilanguage-input',
 	standalone: true,
-	imports: [FormFieldComponent, ReactiveFormsModule, FormFieldIdDirective, NgTemplateOutlet, PopoverDirective, TextInputComponent, FormFieldComponent, FormsModule, InputDirective, IntlParamsPipe],
+	imports: [
+		FormFieldComponent,
+		ReactiveFormsModule,
+		FormFieldIdDirective,
+		NgTemplateOutlet,
+		PopoverDirective,
+		TextInputComponent,
+		FormFieldComponent,
+		FormsModule,
+		InputDirective,
+		IntlParamsPipe,
+		LuTooltipTriggerDirective,
+	],
 	templateUrl: './multilanguage-input.component.html',
 	styleUrl: './multilanguage-input.component.scss',
 	providers: [

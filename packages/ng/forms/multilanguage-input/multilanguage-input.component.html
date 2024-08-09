@@ -18,8 +18,7 @@
 				type="button"
 				class="button mod-onlyIcon mod-text textField-input-affix-toggle"
 			>
-				<span aria-hidden="true" class="lucca-icon icon-signTranslation"></span>
-				<span class="u-mask">{{ intl.toggleMultilanguage }}</span>
+				<span aria-hidden="true" [luTooltip]="intl.toggleMultilanguage" class="lucca-icon icon-signTranslation"></span>
 			</button>
 			<ng-template #popoverMultilanguage>
 				<div class="popover-contentOptional" [style.width.px]="inputElement.clientWidth + 16">
