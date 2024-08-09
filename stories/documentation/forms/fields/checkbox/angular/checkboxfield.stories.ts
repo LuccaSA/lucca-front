@@ -16,7 +16,7 @@ export default {
 		size: {
 			options: ['M', 'S'],
 			control: {
-				type: 'radio',
+				type: 'select',
 			},
 		},
 		inlineMessageState: {
@@ -27,6 +27,9 @@ export default {
 		},
 		mixed: {
 				description: '[v17.4]'
+		},
+		hiddenLabel: {
+			description: 'Masque le label en le conservant dans le DOM pour les lecteurs d\'écrans',
 		},
 	},
 } as Meta;
@@ -60,7 +63,6 @@ export const Basic: StoryObj<CheckboxInputComponent & FormFieldComponent> = {
 		};
 	},
 	args: {
-		size: 'M',
 		label: 'Label',
 		tooltip: 'Tooltip message',
 		hiddenLabel: false,

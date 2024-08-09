@@ -16,7 +16,7 @@ export default {
 		size: {
 			options: ['M', 'S'],
 			control: {
-				type: 'radio',
+				type: 'select',
 			},
 		},
 		inlineMessageState: {
@@ -25,6 +25,9 @@ export default {
 				type: 'select',
 			},
 		},
+		hiddenLabel: {
+			description: 'Masque le label en le conservant dans le DOM pour les lecteurs d\'écrans',
+    },
 		forceMeridiemDisplay: {
 			options: [null, false, true],
 			control: {
@@ -60,7 +63,6 @@ export const Basic: StoryObj<TimePickerComponent & FormFieldComponent> = {
 		};
 	},
 	args: {
-		size: 'M',
 		label: 'Label',
 		tooltip: 'Tooltip message',
 		hiddenLabel: false,

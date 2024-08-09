@@ -36,7 +36,7 @@ export class NumericBadgeComponent implements OnChanges {
 
 	ngOnChanges(changes: SimpleChanges): void {
 		if (changes['palette']?.currentValue || changes['size']?.currentValue) {
-			this.#luClass.setState([`palette-${this.palette}`, `mod-${this.size}`]);
+			this.#luClass.setState({ [`palette-${this.palette}`]: !!this.palette, [`mod-${this.size}`]: !!this.size });
 		}
 	}
 }

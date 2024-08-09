@@ -184,7 +184,7 @@ Dans le cas où vous souhaitez utiliser un formulaire au sein d’une dialog box
   <!--form = new FormGroup({
     example: new FormControl('', Validators.required)
   })-->
-  <form [formControl]="form" class="dialog-formOptional">
+  <form [formGroup]="form" class="dialog-formOptional">
     <lu-dialog-header>Header with Form inside</lu-dialog-header>
 
     <lu-dialog-content>

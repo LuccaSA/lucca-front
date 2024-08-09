@@ -57,7 +57,6 @@ export default {
 export const Template: StoryObj<CalloutComponent & { description: string }> = {
 	args: {
 		heading: '',
-		size: 'M',
 		state: null,
 		icon: null,
 		description: `Description with more details`,

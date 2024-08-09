@@ -48,7 +48,7 @@ export class RadioComponent<T = unknown> implements OnChanges {
 
 	ngOnChanges(): void {
 		this.#luClass.setState({
-			[`mod-${this.#parentGroup.size}`]: true,
+			[`mod-${this.#parentGroup.size}`]: !!this.#parentGroup.size,
 		});
 	}
 }
