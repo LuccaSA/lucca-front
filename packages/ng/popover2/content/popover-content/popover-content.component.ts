@@ -75,6 +75,6 @@ export class PopoverContentComponent implements AfterViewInit {
 		this.mouseEnter$.complete();
 		this.mouseLeave$.complete();
 		// Detach overlay
-		this.#config.ref.detach();
+		this.#config.ref.dispose();
 	}
 }
