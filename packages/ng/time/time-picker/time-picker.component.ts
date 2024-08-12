@@ -20,6 +20,8 @@ import { TimePickerPartComponent } from '../core/time-picker-part.component';
 import { DEFAULT_MIN_TIME, DEFAULT_TIME_DECIMAL_PIPE_FORMAT, TimeChangeEvent } from './time-picker.model';
 import { LU_TIME_PICKER_TRANSLATIONS } from './time-picker.translate';
 
+const MAX_TIME = '23:59:59';
+
 @Component({
 	selector: 'lu-time-picker',
 	standalone: true,
@@ -40,7 +42,7 @@ export class TimePickerComponent extends BasePickerComponent {
 	protected intl = getIntl(LU_TIME_PICKER_TRANSLATIONS);
 
 	value = model<ISO8601Time>('--:--:--');
-	max = input<ISO8601Time>(null);
+	max = input<ISO8601Time>(MAX_TIME);
 
 	displayArrows = input(false, { transform: booleanAttribute });
 
@@ -66,7 +68,7 @@ export class TimePickerComponent extends BasePickerComponent {
 	protected hoursDecimalConf = DEFAULT_TIME_DECIMAL_PIPE_FORMAT;
 
 	protected maxHours = computed(() => {
-		return getHoursPartFromIsoTime(this.max() ?? '23:59:59');
+		return getHoursPartFromIsoTime(this.max());
 	});
 
 	writeValue(value: ISO8601Time): void {
