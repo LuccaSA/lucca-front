@@ -14,9 +14,9 @@ export default {
 	],
 	argTypes: {
 		size: {
-			options: ['M', 'S', 'XS'],
+			options: ['M', 'S'],
 			control: {
-				type: 'radio',
+				type: 'select',
 			},
 		},
 	},
@@ -75,7 +75,6 @@ export const Basic: StoryObj<MultilanguageInputComponent & FormFieldComponent & 
 		hiddenLabel: false,
 		inlineMessage: 'Helper Text',
 		inlineMessageState: 'default',
-		size: 'M',
 		placeholder: 'Placeholder',
 		tooltip: 'Je suis un message d’aide',
 	},
