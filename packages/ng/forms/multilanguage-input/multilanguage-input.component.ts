@@ -9,7 +9,7 @@ import { FormFieldIdDirective } from '../form-field-id.directive';
 import { TextInputComponent } from '../text-input/text-input.component';
 import { LU_MULTILANGUAGE_INPUT_TRANSLATIONS } from './multilanguage-input.translate';
 import { MultilanguageTranslation } from './model/multilanguage-translation';
-import { LuTooltipTriggerDirective } from '../../tooltip/trigger';
+import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
 
 @Component({
 	selector: 'lu-multilanguage-input',
