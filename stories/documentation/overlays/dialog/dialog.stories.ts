@@ -1,6 +1,7 @@
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import {
+	configureLuDialog,
 	DialogCloseDirective,
 	DialogComponent,
 	DialogContentComponent,
@@ -8,11 +9,10 @@ import {
 	DialogFooterComponent,
 	DialogHeaderComponent,
 	DialogOpenDirective,
-	configureLuDialog,
 } from '@lucca-front/ng/dialog';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { CheckboxInputComponent, TextInputComponent } from '@lucca-front/ng/forms';
-import { Meta, StoryObj, applicationConfig, moduleMetadata } from '@storybook/angular';
+import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 
 export default {
 	title: 'Documentation/Overlays/Dialog/Angular',
