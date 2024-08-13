@@ -16,8 +16,8 @@
 
 	.textField-input-affix-toggle {
 		pointer-events: auto;
-		width: 1.75rem;
-		height: 1.75rem;
+		width: var(--component-textField-affix-size);
+		height: var(--component-textField-affix-size);
 		color: var(--palettes-neutral-600);
 	}
 
