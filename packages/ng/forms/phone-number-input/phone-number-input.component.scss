@@ -1,0 +1,12 @@
+lu-phone-number-input {
+  display: flex;
+  gap: var(--pr-t-spacings-100);
+}
+
+.phoneNumber-countryCode {
+  width: 7rem;
+}
+
+.phoneNumber-national {
+  width: 12rem;
+}
