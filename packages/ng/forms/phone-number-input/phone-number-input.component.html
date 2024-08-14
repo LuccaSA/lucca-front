@@ -1,1 +1,17 @@
-<p>phone-number-input works!</p>
+<lu-simple-select
+	[options]="prefixes()"
+	[(ngModel)]="prefixEntry"
+	(ngModelChange)="updateModel()"
+	[optionKey]="getPrefixKey"
+	[optionComparer]="prefixComparator"
+	(blur)="touched()"
+	#selectRef
+>
+	<ng-container *luOption="let prefixOption; select: selectRef">({{ prefixOption.country }}) +{{ prefixOption.prefix }} </ng-container>
+</lu-simple-select>
+<lu-text-input
+	[(ngModel)]="nationalNumber"
+	(ngModelChange)="updateModel()"
+	(blur)="touched();formatNationalNumber()"
+	luInput
+></lu-text-input>
