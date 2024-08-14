@@ -3,7 +3,7 @@ import { E164Number, NumberFormat } from './types';
 import { PhoneNumberFormatter } from './formatter';
 
 @Pipe({
-	name: 'phoneNumberFormat',
+	name: 'luPhoneNumberFormat',
 	standalone: true,
 })
 export class PhoneNumberFormatPipe implements PipeTransform {
