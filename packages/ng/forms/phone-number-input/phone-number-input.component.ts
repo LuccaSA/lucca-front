@@ -71,7 +71,7 @@ export class PhoneNumberInputComponent implements ControlValueAccessor, Validato
 			return this.#prefixEntries();
 		}
 		return this.#prefixEntries().filter((entry) => {
-			return entry.country.includes(query) || entry.prefix.includes(query);
+			return entry.country.toLowerCase().includes(query.toLowerCase()) || entry.prefix.includes(query);
 		});
 	});
 
