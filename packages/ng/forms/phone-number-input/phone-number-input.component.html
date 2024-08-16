@@ -9,7 +9,10 @@
 	#selectRef
 	class="phoneNumber-countryCode"
 >
-	<ng-container *luOption="let prefixOption; select: selectRef">({{ prefixOption.country }}) +{{ prefixOption.prefix }} </ng-container>
+	<ng-container *luOption="let prefixOption; select: selectRef"
+		><img src="https://cdn.lucca.fr/assets/misc/flags/{{prefixOption.country}}.svg" [alt]="prefixOption.country" />
+		+{{ prefixOption.prefix }}
+	</ng-container>
 </lu-simple-select>
 <lu-text-input
 	[(ngModel)]="nationalNumber"
