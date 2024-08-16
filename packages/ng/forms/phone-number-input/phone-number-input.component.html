@@ -10,13 +10,14 @@
 	class="phoneNumber-countryCode"
 >
 	<ng-container *luOption="let prefixOption; select: selectRef"
-		><img src="https://cdn.lucca.fr/assets/misc/flags/{{prefixOption.country}}.svg" [alt]="prefixOption.country" />
-		+{{ prefixOption.prefix }}
+		><img class="pr-u-marginRight50" src="https://cdn.lucca.fr/assets/misc/flags/{{prefixOption.country}}.svg" [alt]="prefixOption.country" />
+		{{prefixOption.country}} (+{{ prefixOption.prefix }})
 	</ng-container>
 	<ng-container *luDisplayer="let prefixOption; select: selectRef"
 		><img
 			src="https://cdn.lucca.fr/assets/misc/flags/{{prefixOption.country}}.svg"
 			alt="{{prefixOption.country}} +{{ prefixOption.prefix }}"
+			class="phoneNumber-countryCode-flag"
 		/>
 	</ng-container>
 </lu-simple-select>
