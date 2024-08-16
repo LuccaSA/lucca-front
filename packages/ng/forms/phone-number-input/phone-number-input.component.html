@@ -1,10 +1,11 @@
 <lu-simple-select
-	[options]="prefixes()"
+	[options]="prefixesDisplay()"
 	[(ngModel)]="prefixEntry"
 	(ngModelChange)="updateModel()"
 	[optionKey]="getPrefixKey"
 	[optionComparer]="prefixComparator"
 	(blur)="touched()"
+	(clueChange)="query.set($event)"
 	#selectRef
 	class="phoneNumber-countryCode"
 >

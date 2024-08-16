@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, forwardRef, input, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, forwardRef, input, signal, ViewEncapsulation } from '@angular/core';
 import { LuSimpleSelectInputComponent } from '../../simple-select/input';
 import { TextInputComponent } from '../text-input/text-input.component';
 import { AbstractControl, ControlValueAccessor, FormsModule, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors, Validator } from '@angular/forms';
@@ -55,12 +55,24 @@ export class PhoneNumberInputComponent implements ControlValueAccessor, Validato
 	 */
 	allowedCountries = input<Array<CountryCode | string>>([]);
 
-	protected prefixes = computed(() => {
+	#prefixEntries = computed(() => {
 		const whitelist = this.allowedCountries();
 		if (whitelist.length === 0) {
 			return PREFIX_ENTRIES;
 		}
 		return PREFIX_ENTRIES.filter((e) => whitelist.includes(e.country));
+	});
+
+	query = signal('');
+
+	protected prefixesDisplay = computed(() => {
+		const query = this.query();
+		if (query === '') {
+			return this.#prefixEntries();
+		}
+		return this.#prefixEntries().filter((entry) => {
+			return entry.country.includes(query) || entry.prefix.includes(query);
+		});
 	});
 
 	nationalNumber: string;
@@ -76,7 +88,7 @@ export class PhoneNumberInputComponent implements ControlValueAccessor, Validato
 	writeValue(value: string): void {
 		if (value) {
 			this.parsedPhoneNumber = parsePhoneNumber(value);
-			this.prefixEntry = this.prefixes().find((p) => p.country === this.parsedPhoneNumber.country);
+			this.prefixEntry = this.#prefixEntries().find((p) => p.country === this.parsedPhoneNumber.country);
 			this.nationalNumber = this.parsedPhoneNumber.nationalNumber;
 		} else {
 			delete this.nationalNumber;
@@ -104,7 +116,7 @@ export class PhoneNumberInputComponent implements ControlValueAccessor, Validato
 			if (isValidPhoneNumber(this.nationalNumber)) {
 				const country = parsePhoneNumber(this.nationalNumber).country;
 				if (country !== this.prefixEntry?.country) {
-					this.prefixEntry = this.prefixes().find((p) => p.country === country);
+					this.prefixEntry = this.#prefixEntries().find((p) => p.country === country);
 				}
 			}
 			this.parsedPhoneNumber = parsePhoneNumber(this.nationalNumber, this.prefixEntry.country);
