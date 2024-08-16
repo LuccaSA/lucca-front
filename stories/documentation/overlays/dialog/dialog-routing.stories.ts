@@ -62,7 +62,7 @@ class DismissedComponent {}
 	],
 	template: `
 		<lu-dialog>
-			<form [formGroup]="form" class="dialog-formOptionnal">
+			<form [formGroup]="form" class="dialog-formOptional">
 				<lu-dialog-header> Dialog opened by route </lu-dialog-header>
 				<lu-dialog-content>
 					<lu-form-field label="Data received by dialog">
