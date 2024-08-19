@@ -226,7 +226,7 @@ export class FormFieldComponent implements OnChanges, OnDestroy, DoCheck {
 				this.#renderer.setAttribute(input.host.nativeElement, 'aria-describedby', `${input.host.nativeElement.id}-message`);
 			}
 		});
-		if (this.id) {
+		if (this.id && !this.#ariaLabelledBy.includes(`${this.id}-label`)) {
 			this.addLabelledBy(`${this.id}-label`);
 		}
 	}
