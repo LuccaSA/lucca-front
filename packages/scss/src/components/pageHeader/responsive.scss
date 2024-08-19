@@ -6,6 +6,8 @@
 }
 
 @mixin searchNarrow {
+	--components-pageHeader-padding: var(--pr-t-spacings-200) var(--pr-t-spacings-300);
+
 	.pageHeader-content-actions {
 		.textfield.mod-search {
 			width: 100%;
