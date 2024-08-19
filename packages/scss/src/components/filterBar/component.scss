@@ -16,7 +16,7 @@
 	@at-root ($atRoot) {
 		.filterBarResponsiveWrapper {
 			container-name: filterBar;
-			container-type: size;
+			container-type: inline-size;
 		}
 
 		.filterBar-toggledFilters {

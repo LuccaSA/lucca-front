@@ -31,67 +31,11 @@ In your file styles.scss, add imports files and components you want to import to
 @forward '@lucca-front/scss/src/main';
 @forward '@lucca-front/ng/src/main';
 
-// Import SCSS components
-@forward '@lucca-front/scss/src/components/actionIcon';
-@forward '@lucca-front/scss/src/components/box';
-@forward '@lucca-front/scss/src/components/breadcrumbs';
-@forward '@lucca-front/scss/src/components/button';
-@forward '@lucca-front/scss/src/components/buttonGroup';
-@forward '@lucca-front/scss/src/components/callout';
-@forward '@lucca-front/scss/src/components/card';
-@forward '@lucca-front/scss/src/components/checkbox';
-@forward '@lucca-front/scss/src/components/chip';
-@forward '@lucca-front/scss/src/components/clear';
-@forward '@lucca-front/scss/src/components/code';
-@forward '@lucca-front/scss/src/components/collapse';
-@forward '@lucca-front/scss/src/components/container';
-@forward '@lucca-front/scss/src/components/contentSection';
-@forward '@lucca-front/scss/src/components/divider';
-@forward '@lucca-front/scss/src/components/emptyState';
-@forward '@lucca-front/scss/src/components/errorPage';
-@forward '@lucca-front/scss/src/components/field';
-@forward '@lucca-front/scss/src/components/file';
-@forward '@lucca-front/scss/src/components/filters';
-@forward '@lucca-front/scss/src/components/form';
-@forward '@lucca-front/scss/src/components/formLabel';
-@forward '@lucca-front/scss/src/components/gauge';
-@forward '@lucca-front/scss/src/components/grid';
-@forward '@lucca-front/scss/src/components/grid';
-@forward '@lucca-front/scss/src/components/header';
-@forward '@lucca-front/scss/src/components/label';
-@forward '@lucca-front/scss/src/components/layout';
-@forward '@lucca-front/scss/src/components/link';
-@forward '@lucca-front/scss/src/components/list';
-@forward '@lucca-front/scss/src/components/loading';
-@forward '@lucca-front/scss/src/components/main';
-@forward '@lucca-front/scss/src/components/menu';
-@forward '@lucca-front/scss/src/components/navSide';
-@forward '@lucca-front/scss/src/components/notchBox';
-@forward '@lucca-front/scss/src/components/pageHeader';
-@forward '@lucca-front/scss/src/components/pagination';
-@forward '@lucca-front/scss/src/components/progress';
-@forward '@lucca-front/scss/src/components/radio';
-@forward '@lucca-front/scss/src/components/radioButtons';
-@forward '@lucca-front/scss/src/components/section';
-@forward '@lucca-front/scss/src/components/sortableList';
-@forward '@lucca-front/scss/src/components/statusBadge';
-@forward '@lucca-front/scss/src/components/switch';
-@forward '@lucca-front/scss/src/components/table';
-@forward '@lucca-front/scss/src/components/tableFixed';
-@forward '@lucca-front/scss/src/components/tableOfContent';
-@forward '@lucca-front/scss/src/components/tableSorted';
-@forward '@lucca-front/scss/src/components/tableSticked';
-@forward '@lucca-front/scss/src/components/tag';
-@forward '@lucca-front/scss/src/components/textfield';
-@forward '@lucca-front/scss/src/components/timeline';
-@forward '@lucca-front/scss/src/components/timepicker';
-@forward '@lucca-front/scss/src/components/title';
-@forward '@lucca-front/scss/src/components/titleSection';
-@forward '@lucca-front/scss/src/components/toast';
-@forward '@lucca-front/scss/src/components/verticalNavigation';
+// Import SCSS components you use to reduce LF’s distribution size and compilation time.
+@use '@lucca-front/scss/src/components/componentA';
+@use '@lucca-front/scss/src/components/componentB';
+@use '@lucca-front/scss/src/components/componentC';
 ```
-
-Then comment unused components to reduce LF’s distribution size and compilation time.
 
 To import all components, replace the previous code by the 3 following lines (not recommended):
 
