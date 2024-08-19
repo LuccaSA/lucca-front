@@ -7,6 +7,7 @@ export interface PopoverConfig {
 	ref: OverlayRef;
 	contentId: string;
 	disableFocusManipulation: boolean;
+	noCloseButton: boolean;
 }
 
 export const POPOVER_CONFIG = new InjectionToken<PopoverConfig>('Popover:Config');
