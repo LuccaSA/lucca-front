@@ -14,6 +14,13 @@
 		@include a11y.focusVisible($offset: 3px);
 	}
 
+	.textField-input-affix-toggle {
+		pointer-events: auto;
+		width: var(--component-textField-affix-size);
+		height: var(--component-textField-affix-size);
+		color: var(--palettes-neutral-600);
+	}
+
 	@at-root ($atRoot) {
 		.textField-input {
 			display: flex;
@@ -31,7 +38,7 @@
 				--component-textField-affix-padding: 2.5rem;
 			}
 
-			&:has(.textField-input-affix-passwordToggle) {
+			&:has(.textField-input-affix-toggle) {
 				--component-textField-affix-padding: 3rem;
 			}
 
@@ -42,7 +49,7 @@
 					--component-textField-affix-padding: 4rem;
 				}
 
-				&:has(.textField-input-affix-passwordToggle) {
+				&:has(.textField-input-affix-toggle) {
 					--component-textField-affix-padding: 4.5rem;
 				}
 			}
@@ -90,12 +97,6 @@
 
 		.textField-input-affix-clear {
 			pointer-events: auto;
-		}
-
-		.textField-input-affix-passwordToggle {
-			pointer-events: auto;
-			width: 1.75rem;
-			height: 1.75rem;
 		}
 
 		.textField-prefix {

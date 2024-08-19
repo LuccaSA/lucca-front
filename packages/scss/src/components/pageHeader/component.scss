@@ -1,5 +1,5 @@
 @mixin component($atRoot: 'without: rule') {
-	padding: var(--pr-t-spacings-400) 2.5rem var(--pr-t-spacings-300);
+	padding: var(--components-pageHeader-padding);
 
 	.menu {
 		margin-top: var(--pr-t-spacings-100);

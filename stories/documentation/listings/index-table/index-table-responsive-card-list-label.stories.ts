@@ -20,8 +20,7 @@ function getTemplate(args: IndexTableResponsiveCardListLabelStory): string {
 		<tr class="indexTable-body-row">
 			<td class="indexTable-body-row-cell">
 				<div class="indexTable-body-row-cell-content" data-label="Label 1">
-					<a href="#" class="indexTable-body-row-cell-action">See details</a>
-					Content
+					<a href="#" class="indexTable-body-row-cell-link">Content</a>
 				</div>
 			</td>
 			<td class="indexTable-body-row-cell">
@@ -38,8 +37,8 @@ function getTemplate(args: IndexTableResponsiveCardListLabelStory): string {
 		<tr class="indexTable-body-row">
 			<td class="indexTable-body-row-cell">
 				<div class="indexTable-body-row-cell-content" data-label="Label 1">
-					<a href="#" class="indexTable-body-row-cell-action">See details</a>
-					Content
+					<a href="#" class="indexTable-body-row-cell-link">Content</a>
+					
 				</div>
 			</td>
 			<td class="indexTable-body-row-cell">

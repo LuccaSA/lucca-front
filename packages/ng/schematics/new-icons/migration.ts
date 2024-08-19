@@ -1,4 +1,3 @@
-import { ValueParser } from 'postcss-value-parser';
 import { ScriptTarget, createSourceFile } from 'typescript';
 import { extractNgTemplates, replaceComponentInput } from '../lib/angular-template.js';
 import { updateContent } from '../lib/file-update.js';
@@ -8,7 +7,7 @@ import { PostCssScssLib, updateCSSClassNamesInRules } from '../lib/scss-ast.js';
 import { replaceStringLiterals } from '../lib/typescript-ast.js';
 import { oldIconClassToNewIconClass, oldIconToNewIcon, oldIcons } from './mapping.js';
 
-export function migrateScssFile(content: string, postCssScss: PostCssScssLib, postcssValueParser: ValueParser, postcssSelectorParser: PostCssSelectorParserLib): string {
+export function migrateScssFile(content: string, postCssScss: PostCssScssLib, postcssSelectorParser: PostCssSelectorParserLib): string {
 	const root = postCssScss.parse(content);
 
 	updateCSSClassNamesInRules(root, oldIconClassToNewIconClass, postcssSelectorParser);

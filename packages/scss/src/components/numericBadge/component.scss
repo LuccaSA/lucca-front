@@ -14,4 +14,5 @@
 	transition-property: background-color, color;
 	transition-duration: var(--commons-animations-durations-fast);
 	transition-timing-function: ease;
+	white-space: nowrap;
 }

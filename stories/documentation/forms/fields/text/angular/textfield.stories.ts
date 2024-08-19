@@ -19,7 +19,7 @@ export default {
 		size: {
 			options: ['M', 'S', 'XS'],
 			control: {
-				type: 'radio',
+				type: 'select',
 			},
 		},
 		inlineMessageState: {
@@ -40,6 +40,9 @@ export default {
 		},
 		valueAlignRight: {
 			description: '[v18.1]',
+		},
+		hiddenLabel: {
+			description: 'Masque le label en le conservant dans le DOM pour les lecteurs d\'écrans'
 		},
 	},
 } as Meta;
@@ -84,7 +87,6 @@ export const Basic: StoryObj<TextInputComponent & { disabled: boolean } & FormFi
 		disabled: false,
 		inlineMessage: 'Helper Text',
 		inlineMessageState: 'default',
-		size: 'M',
 		type: 'text',
 		placeholder: 'Placeholder',
 		tooltip: 'Je suis un message d’aide',
@@ -134,7 +136,6 @@ export const PasswordVisiblity: StoryObj<TextInputComponent & { disabled: boolea
 		disabled: false,
 		inlineMessage: 'Helper Text',
 		inlineMessageState: 'default',
-		size: 'M',
 		placeholder: 'Placeholder',
 		tooltip: 'Je suis un message d’aide',
 		counter: 0,
@@ -178,7 +179,6 @@ export const WithPrefixAndSuffix: StoryObj<TextInputComponent & { disabled: bool
 		};
 	},
 	args: {
-		size: 'M',
 		label: 'Label',
 		tooltip: 'Tooltip message',
 		hiddenLabel: false,

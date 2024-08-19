@@ -19,7 +19,7 @@ export default {
 		size: {
 			options: ['M', 'S', 'XS'],
 			control: {
-				type: 'radio',
+				type: 'select',
 			},
 		},
 		inlineMessageState: {
@@ -34,6 +34,9 @@ export default {
 		},
 		counter: {
 			description: '[v17.4]',
+		},
+		hiddenLabel: {
+			description: 'Masque le label en le conservant dans le DOM pour les lecteurs d\'écrans',
 		},
 	},
 } as Meta;
@@ -75,7 +78,6 @@ export const Basic: StoryObj<TextareaInputComponent & { disabled: boolean } & Fo
 		disabled: false,
 		inlineMessage: 'Helper Text',
 		inlineMessageState: 'default',
-		size: 'M',
 		placeholder: 'Placeholder',
 		tooltip: 'Je suis un message d’aide',
 		counter: 0,

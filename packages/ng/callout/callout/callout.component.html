@@ -1,4 +1,4 @@
-<div class="callout palette-{{palette}} mod-{{size}}" *ngIf="!removed">
+<div class="callout" [ngClass]="calloutClasses" *ngIf="!removed">
 	<div class="callout-icon" *ngIf="icon">
 		<span aria-hidden="true" class="lucca-icon icon-{{icon}}"></span>
 	</div>

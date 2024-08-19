@@ -42,6 +42,7 @@
 @use 'navside';
 @use 'form';
 @use 'tableFixed';
+@use 'viewTabs';
 @use 'grid';
 @use 'tableSticked';
 @use 'timepicker';
@@ -70,21 +71,20 @@
 @use 'scrollBox';
 @use 'toast';
 @use 'popover';
+@use 'plgPush';
+
+// deprecated components
+// @use 'gridLegacy';
+// @use 'emptyStateDeprecated';
+// @use 'tableFixedDeprecated';
+// @use 'tableStickedDeprecated';
 
 // responsive components
 @use 'comment';
-@use 'emptyState';
-@use 'errorPage';
 @use 'filterBar';
-@use 'filters';
-@use 'footer';
-@use 'header';
-@use 'indexTable';
-@use 'main';
-@use 'pageHeader';
 @use 'dialog';
 
-// avoid breaking
+// responsive components with default behaviours disabled
 @use 'emptyState' with (
 	$responsive: false
 );
@@ -110,6 +110,7 @@
 	$responsive: false
 );
 
+// responsive behaviors reactivated with media queries to avoid breakings
 @include emptyState.responsive($at: 'media');
 @include emptyState.responsiveBackground($at: 'media');
 
@@ -122,8 +123,3 @@
 @include header.responsive($at: 'media');
 @include indexTable.responsive($at: 'media');
 @include main.responsive($at: 'media');
-
-// @use 'gridLegacy';
-// @use 'emptyStateDeprecated';
-// @use 'tableFixedDeprecated';
-// @use 'tableStickedDeprecated';

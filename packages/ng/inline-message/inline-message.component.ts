@@ -31,8 +31,8 @@ export class InlineMessageComponent implements OnChanges {
 
 	ngOnChanges(): void {
 		this.#luClass.setState({
-			[`mod-${this.size}`]: true,
-			[`is-${this.state}`]: true,
+			[`mod-${this.size}`]: !!this.size,
+			[`is-${this.state}`]: !!this.state,
 		});
 	}
 }

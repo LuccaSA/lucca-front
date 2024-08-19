@@ -44,7 +44,7 @@
 		.timeline-step:not([aria-current='step']):not([aria-current='step'] ~ .timeline-step) .timeline-step-title-icon {
 			&::before {
 				content: '';
-				color: var(--palettes-product-text);
+				color: var(--palettes-product-0);
 				width: 1rem;
 				height: 1rem;
 				display: flex;

@@ -3,24 +3,24 @@
 @use '@lucca-front/icons/src/icon/exports' as icons;
 
 @mixin invert {
-	color: var(--colors-white-color);
+	color: var(--palettes-neutral-0);
 
 	&:not([disabled], .is-disabled) {
 		&:hover,
 		&:focus {
-			color: var(--colors-white-color);
-			background-color: color.transparentize(var(--colors-white-color), 0.1);
+			color: var(--palettes-neutral-0);
+			background-color: color.transparentize(var(--palettes-neutral-0), 0.1);
 		}
 
 		&:active {
-			background-color: color.transparentize(var(--colors-white-color), 0.2);
+			background-color: color.transparentize(var(--palettes-neutral-0), 0.2);
 		}
 	}
 }
 
 @mixin outlined {
 	box-shadow: 0 0 0 var(--commons-divider-width) var(--palettes-400, var(--palettes-neutral-400));
-	background-color: var(--colors-white-color);
+	background-color: var(--palettes-neutral-0);
 
 	&:focus-visible {
 		@include a11y.focusVisible($offset: 3px);
