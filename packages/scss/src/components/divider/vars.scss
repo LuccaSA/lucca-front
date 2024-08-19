@@ -1,4 +1,5 @@
 @mixin vars {
 	--components-divider-fontSize: var(--sizes-M-fontSize);
 	--components-divider-lineHeight: var(--sizes-M-lineHeight);
+	--components-divider-margin: var(--pr-t-spacings-50);
 }

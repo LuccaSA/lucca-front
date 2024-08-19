@@ -32,6 +32,18 @@
 		@include actions;
 	}
 
+	.indexTable-head-row-cell,
+	.indexTable-body-row-cell,
+	.indexTable-foot-row-cell {
+		&.mod-alignRight {
+			@include alignRight;
+		}
+
+		&.mod-alignCenter {
+			@include alignCenter;
+		}
+	}
+
 	// generic states, non tied to a mod
 	// focus-within
 	@include focusedRow;

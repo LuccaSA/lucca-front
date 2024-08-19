@@ -187,3 +187,11 @@
 		}
 	}
 }
+
+@mixin alignRight {
+    text-align: right;
+}
+
+@mixin alignCenter {
+    text-align: center;
+}

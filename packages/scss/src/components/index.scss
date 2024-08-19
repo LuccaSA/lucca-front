@@ -65,7 +65,7 @@
 @use 'simpleSelect';
 @use 'multiSelect';
 @use 'avatar';
-@use 'indexTableSorted';
+@use 'tableSortable';
 @use 'tooltip';
 @use 'userPopover';
 @use 'scrollBox';
@@ -74,7 +74,7 @@
 @use 'plgPush';
 
 // deprecated components
-// @use 'gridLegacy';
+// @use 'gridLegacy'; // caution: grid and gridLegacy cannot be loaded at the same time
 // @use 'emptyStateDeprecated';
 // @use 'tableFixedDeprecated';
 // @use 'tableStickedDeprecated';
