@@ -4,7 +4,24 @@
 @use '@lucca-front/scss/src/commons/utils/reset';
 @use '@lucca-front/scss/src/commons/utils/a11y';
 
-@mixin sortable {
+@mixin sortAlignRight {
+	--components-sortable-direction: row-reverse;
+	--components-sortable-offset: var(--pr-t-spacings-50);
+}
+
+@mixin sortAlignCenter {
+	--components-sortable-offset: 0;
+}
+
+@mixin sortLegacy2 {
+	padding: 0;
+
+	.table-head-row-cell-sortableButton {
+		padding: var(--components-table-padding);
+	}
+}
+
+@mixin sortableLegacy {
 	cursor: pointer;
 
 	&::after {
@@ -45,17 +62,17 @@
 	}
 }
 
-@mixin sortableS {
+@mixin sortableLegacyS {
 	&::after {
 		margin-top: 0;
 	}
 }
 
-@mixin sortableAlignCenter {
+@mixin sortableLegacyAlignCenter {
 	text-align: center;
 }
 
-@mixin sortableAlignRight {
+@mixin sortableLegacyAlignRight {
 	&::after {
 		content: none;
 	}
@@ -92,11 +109,62 @@
 	}
 }
 
-@mixin sortAlignRight {
-	--components-sorted-direction: row-reverse;
-	--components-sorted-offset: var(--pr-t-spacings-50);
+@mixin sortedLegacy {
+	color: var(--palettes-neutral-900);
+
+	&::after {
+		@include icon.generate('arrow_bottom');
+
+		opacity: 1;
+		transform: translateY(0);
+	}
+
+	&:hover {
+		&::after {
+			opacity: 1;
+		}
+	}
 }
 
-@mixin sortAlignCenter {
-	--components-sorted-offset: 0;
+@mixin sortedLegacyAlignRight {
+	&::before {
+		@include icon.generate('arrow_bottom');
+
+		opacity: 1;
+		transform: translateY(0);
+	}
+
+	&::after {
+		content: none;
+	}
+
+	&:hover {
+		&::before {
+			opacity: 1;
+		}
+	}
+}
+
+@mixin descendingLegacy {
+	@include sortedLegacy;
+
+	&::after {
+		@include icon.generate('arrow_bottom');
+	}
+}
+
+@mixin ascendingLegacy {
+	@include sortedLegacy;
+
+	&::after {
+		@include icon.generate('arrow_top');
+	}
+}
+
+@mixin descendingLegacyAlignRight {
+	@include sortedLegacyAlignRight;
+}
+
+@mixin ascendingLegacyAlignRight {
+	@include sortedLegacyAlignRight;
 }

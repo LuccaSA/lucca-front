@@ -91,29 +91,29 @@ function getTemplate(args: TableSortableStory): string {
 				Non triable
 			</th>
 			<th class="table-head-row-cell ${args.align}" aria-sort="none">
-				<button type="button" class="table-head-row-cell-sortableButton button">
+				<button type="button" class="tableSortable button">
 					Triable
-					<span class="table-head-row-cell-sortableButton-arrows">
-						<span class="lucca-icon icon-chevronTop table-head-row-cell-sortableButton-arrows-ascending"></span>
-						<span class="lucca-icon icon-chevronBottom table-head-row-cell-sortableButton-arrows-descending"></span>
+					<span class="tableSortable-arrows">
+						<span class="lucca-icon icon-chevronTop tableSortable-arrows-ascending"></span>
+						<span class="lucca-icon icon-chevronBottom tableSortable-arrows-descending"></span>
 					</span>
 				</button>
 			</th>
 			<th class="table-head-row-cell ${args.align}" aria-sort="ascending">
-				<button type="button" class="table-head-row-cell-sortableButton button">
+				<button type="button" class="tableSortable button">
 					Trié ascendant
-					<span class="table-head-row-cell-sortableButton-arrows">
-						<span class="lucca-icon icon-chevronTop table-head-row-cell-sortableButton-arrows-ascending"></span>
-						<span class="lucca-icon icon-chevronBottom table-head-row-cell-sortableButton-arrows-descending"></span>
+					<span class="tableSortable-arrows">
+						<span class="lucca-icon icon-chevronTop tableSortable-arrows-ascending"></span>
+						<span class="lucca-icon icon-chevronBottom tableSortable-arrows-descending"></span>
 					</span>
 				</button>
 			</th>
 			<th class="table-head-row-cell ${args.align}" aria-sort="descending">
-				<button type="button" class="table-head-row-cell-sortableButton button">
+				<button type="button" class="tableSortable button">
 					Trié descendant
-					<span class="table-head-row-cell-sortableButton-arrows">
-						<span class="lucca-icon icon-chevronTop table-head-row-cell-sortableButton-arrows-ascending"></span>
-						<span class="lucca-icon icon-chevronBottom table-head-row-cell-sortableButton-arrows-descending"></span>
+					<span class="tableSortable-arrows">
+						<span class="lucca-icon icon-chevronTop tableSortable-arrows-ascending"></span>
+						<span class="lucca-icon icon-chevronBottom tableSortable-arrows-descending"></span>
 					</span>
 				</button>
 			</th>
