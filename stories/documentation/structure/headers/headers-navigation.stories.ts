@@ -1,21 +1,52 @@
 import { Meta, StoryFn } from '@storybook/angular';
 
-interface HeadersNavigationStory {}
+interface HeadersNavigationStory {
+	sticky: boolean;
+	navside: boolean;
+}
 
 export default {
 	title: 'Documentation/Structure/Headers/Navigation',
+	argTypes: {
+		sticky: {
+			control: {
+				type: 'boolean',
+			},
+		},
+		navside: {
+			control: {
+				type: 'boolean',
+			},
+		},
+	},
 } as Meta;
 
 function getTemplate(args: HeadersNavigationStory): string {
-	return `
-		<div class="header mod-nav">
-			<div class="header-nav">
-				<a class="header-nav-back"></a>
-				<div class="header-nav-category">Catégorie</div>
-				<h4 class="header-nav-title">Titre de la page</h4>
+	const sticky = args.sticky ? `mod-sticky` : '';
+	if (args.navside) {
+		return `
+			<div class="navSide"></div>
+			<div class="main-content">
+				<div class="header mod-nav ${sticky}">
+					<div class="header-nav">
+						<a class="header-nav-back"></a>
+						<div class="header-nav-category">Catégorie</div>
+						<h4 class="header-nav-title">Titre de la page</h4>
+					</div>
+				</div>
 			</div>
-		</div>
-	`;
+		`;
+	} else {
+		return `
+			<div class="header mod-nav ${sticky}">
+				<div class="header-nav">
+					<a class="header-nav-back"></a>
+					<div class="header-nav-category">Catégorie</div>
+					<h4 class="header-nav-title">Titre de la page</h4>
+				</div>
+			</div>
+		`;
+	}
 }
 
 const Template: StoryFn<HeadersNavigationStory> = (args) => ({
@@ -24,4 +55,7 @@ const Template: StoryFn<HeadersNavigationStory> = (args) => ({
 });
 
 export const Navigation = Template.bind({});
-Navigation.args = {};
+Navigation.args = {
+	sticky: false,
+	navside: false,
+};

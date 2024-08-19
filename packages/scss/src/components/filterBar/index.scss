@@ -44,7 +44,7 @@
 	$size: 'width',
 	$selector: '.filterBar'
 ) {
-	#{$selector} {
+	#{if($responsive, $selector + '.responsive-' + $responsive, $selector)} {
 		@include media.query(
 			$breakpoint: $breakpoint,
 			$breakpoint2: $breakpoint2,
