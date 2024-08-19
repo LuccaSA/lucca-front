@@ -14,7 +14,7 @@
 		@include withArrow;
 	}
 
-	// legacy
+	// .mod-toggle is deprecated
 	&.mod-toggle {
 		@include toggle;
 	}

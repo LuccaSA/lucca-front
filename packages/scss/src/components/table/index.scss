@@ -39,6 +39,13 @@
 	&.mod-borderless {
 		@include borderless;
 	}
+
+	.tableSortable {
+		--components-sortable-fontWeight: 600;
+		--components-sortable-fontSize: var(--sizes-S-fontSize);
+		--components-sortable-lineHeight: var(--sizes-S-lineHeight);
+		--components-sortable-arrowsOffset: var(--pr-t-spacings-25);
+	}
 }
 
 .table-body-row,
@@ -91,7 +98,8 @@
 	&.mod-actions {
 		@include actions;
 
-		&.mod-actionsHidden { // Legacy
+		// .mod-actionsHidden is deprecated
+		&.mod-actionsHidden {
 			@include actionsHidden;
 		}
 	}
