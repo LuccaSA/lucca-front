@@ -185,7 +185,7 @@
 			margin: 2px 0 0 var(--pr-t-spacings-50);
 		}
 
-		// indexTable-body-row-cell-action is deprecated
+		// .indexTable-body-row-cell-action is deprecated
 		.indexTable-body-row-cell-action {
 			@include a11y.mask;
 		}
