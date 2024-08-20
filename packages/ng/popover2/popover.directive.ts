@@ -98,6 +98,12 @@ export class PopoverDirective implements OnDestroy {
 	@Input()
 	customPositions?: ConnectionPositionPair[];
 
+	@Input({ transform: booleanAttribute })
+	/**
+	 * Removes close button entirely, this is bad for a11y but sometimes we want it.
+	 */
+	luPopoverNoCloseButton = false;
+
 	// We have to type these two for Compodoc to find the right type and tell Storybook these aren't strings
 	luPopoverOpenDelay: InputSignal<number> = input<number>(300);
 
@@ -222,6 +228,7 @@ export class PopoverDirective implements OnDestroy {
 				contentId: this.ariaControls,
 				triggerElement: this.#elementRef.nativeElement,
 				disableFocusManipulation: disableFocusHandler,
+				noCloseButton: this.luPopoverNoCloseButton,
 			};
 			this.#componentRef = this.#overlayRef.attach(
 				new ComponentPortal(

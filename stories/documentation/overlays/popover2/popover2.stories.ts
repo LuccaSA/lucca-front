@@ -64,5 +64,6 @@ export const Basic: StoryObj<PopoverDirective> = {
 		luPopoverOpenDelay: 300,
 		luPopoverDisabled: false,
 		luPopoverPosition: 'above',
+		luPopoverNoCloseButton: false,
 	},
 };
