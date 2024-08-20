@@ -63,7 +63,7 @@
 		}
 	}
 
-	.avatar {
+	.userPopover-details-avatar {
 		@include avatar.XXXL;
 		margin: var(--pr-t-spacings-50) 0;
 	}
