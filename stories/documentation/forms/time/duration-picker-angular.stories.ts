@@ -26,7 +26,7 @@ export default {
 			},
 		},
 		hiddenLabel: {
-			description: 'Masque le label en le conservant dans le DOM pour les lecteurs d\'écrans',
+			description: "Masque le label en le conservant dans le DOM pour les lecteurs d'écrans",
 		},
 	},
 } as Meta;
@@ -46,7 +46,7 @@ export const Basic: StoryObj<DurationPickerComponent & FormFieldComponent> = {
 				},
 				argTypes,
 			)}>
-	<lu-duration-picker ${generateInputs(inputArgs, argTypes)} [(ngModel)]="example">
+	<lu-duration-picker label="${label}" ${generateInputs(inputArgs, argTypes)} [(ngModel)]="example">
 	</lu-duration-picker>
 </lu-form-field>
 
