@@ -8,11 +8,6 @@
 		@include nameOnly;
 	}
 
-	// .mod-XSS is deprecated
-	&.mod-XXS {
-		@include XXS;
-	}
-
 	&.mod-XS {
 		@include XS;
 	}
