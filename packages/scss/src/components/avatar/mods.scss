@@ -66,7 +66,9 @@
 }
 
 @mixin placeholder {
-		background: var(--palettes-neutral-200) !important;
+	// .picture is deprecated
+	.avatar-picture, .picture {
+		background-color: var(--palettes-neutral-200) !important;
 
 		&::before {
 			@include icon.generate('people_person');
@@ -74,8 +76,10 @@
 			font-weight: 400;
 			font-size: var(--components-avatar-placeholder-size);
 		}
+	}
 
-		.avatar-picture {
-			display: none;
-		}
+	// .userPicture-initials is deprecated
+	.userPicture-initials {
+		display: none;
+	}
 }
