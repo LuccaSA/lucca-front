@@ -23,8 +23,8 @@ export class DialogOpenDirective {
 	@HostListener('click')
 	click(): void {
 		this.#dialogService.open({
-			content: this.dialog,
 			...this.luDialogConfig,
+			content: this.dialog,
 		});
 	}
 }

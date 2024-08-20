@@ -3,31 +3,37 @@
 	display: flex;
 	align-items: center;
 	gap: var(--pr-t-spacings-150);
-	padding: var(--pr-t-spacings-100); // deprecated
 	overflow-wrap: break-word;
 
 	@at-root ($atRoot) {
-		.userTile-content, .user-info { // .user-tile-info deprecated
+		// .user-info is deprecated
+		.userTile-content,
+		.user-info {
 			display: flex;
 			flex-direction: column;
 			margin: 0;
 		}
 
-		.userTile-content-name, .user-tile-title { // .user-tile-title deprecated
+		// .user-tile-title is deprecated
+		.userTile-content-name,
+		.user-tile-title {
 			font-size: var(--components-userTile-title-fontSize);
 			line-height: var(--components-userTile-title-lineHeight);
 			color: var(--palettes-neutral-800);
-			margin: 0; // deprecated
+			margin: 0;
 		}
 
-		.userTile-content-info, .user-tile-label { // .user-tile-label deprecated
+		// .user-tile-label is deprecated
+		.userTile-content-info,
+		.user-tile-label {
 			font-size: var(--components-userTile-info-fontSize);
 			line-height: var(--components-userTile-info-lineHeight);
 			color: var(--palettes-neutral-600);
 			margin: 0;
 		}
 
-		.user-tile-footnote { // .user-tile-footnote deprecated
+		// .user-tile-footnote deprecated
+		.user-tile-footnote {
 			font-size: var(--sizes-S-fontSize);
 			line-height: var(--sizes-S-lineHeight);
 		}

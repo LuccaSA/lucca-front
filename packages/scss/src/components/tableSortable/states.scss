@@ -1,80 +1,9 @@
 @use '@lucca-front/icons/src/commons/utils/icon';
 @use '@lucca-front/scss/src/commons/utils/a11y';
 
-@mixin sortedLegacy {
-	color: var(--palettes-neutral-900);
-
-	&::after {
-		@include icon.generate('arrow_bottom');
-
-		opacity: 1;
-		transform: translateY(0);
-	}
-
-	&:hover {
-		&::after {
-			opacity: 1;
-		}
-	}
-}
-
-@mixin sortedLegacyAlignRight {
-	&::before {
-		@include icon.generate('arrow_bottom');
-
-		opacity: 1;
-		transform: translateY(0);
-	}
-
-	&::after {
-		content: none;
-	}
-
-	&:hover {
-		&::before {
-			opacity: 1;
-		}
-	}
-}
-
-@mixin descendingLegacy {
-	@include sortedLegacy;
-
-	&::after {
-		@include icon.generate('arrow_bottom');
-	}
-}
-
-@mixin ascendingLegacy {
-	@include sortedLegacy;
-
-	&::after {
-		@include icon.generate('arrow_top');
-	}
-}
-
-@mixin descendingLegacyAlignRight {
-	@include sortedLegacyAlignRight;
-
-	&::after {
-		@include icon.generate('arrow_bottom');
-	}
-}
-
-@mixin ascendingLegacyAlignRight {
-	@include sortedLegacyAlignRight;
-
-	&::after {
-		@include icon.generate('arrow_top');
-	}
-}
-
 @mixin sorted {
-	padding: 0;
-
 	.table-head-row-cell-sortableButton {
 		color: var(--palettes-neutral-900);
-		padding: var(--components-table-padding);
 
 		&::after {
 			@include icon.generate('arrow_bottom');
@@ -126,7 +55,7 @@
 	}
 }
 
-@mixin descending {
+@mixin descendingLegacy2 {
 	@include sorted;
 
 	.table-head-row-cell-sortableButton {
@@ -136,7 +65,7 @@
 	}
 }
 
-@mixin ascending {
+@mixin ascendingLegacy2 {
 	@include sorted;
 
 	.table-head-row-cell-sortableButton {
@@ -163,5 +92,23 @@
 		&::before {
 			@include icon.generate('arrow_top');
 		}
+	}
+}
+
+@mixin sortAscending {
+	.tableSortable-arrows-ascending,
+	.table-head-row-cell-sortableButton-arrows-ascending,
+	.indexTable-head-row-cell-sortableButton-arrows-ascending {
+		--components-sortable-arrowColor: var(--palettes-neutral-700);
+		--components-sortable-arrowScale: 1.25;
+	}
+}
+
+@mixin sortDescending {
+	.tableSortable-arrows-descending,
+	.table-head-row-cell-sortableButton-arrows-descending,
+	.indexTable-head-row-cell-sortableButton-arrows-descending {
+		--components-sortable-arrowColor: var(--palettes-neutral-700);
+		--components-sortable-arrowScale: 1.25;
 	}
 }

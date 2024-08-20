@@ -59,7 +59,7 @@
 
 @mixin textDisabled {
 	--components-button-backgroundColor: transparent;
-	--components-button-color: var(--palettes-neutral-500);
+	--components-button-color: var(--palettes-neutral-500); // disabled token candidate
 }
 
 @mixin text {
@@ -83,8 +83,8 @@
 
 @mixin outlinedDisabled {
 	--components-button-backgroundColor: var(--palettes-neutral-0);
-	--components-button-boxShadow: 0 0 0 1px var(--palettes-neutral-400);
-	--components-button-color: var(--palettes-neutral-500);
+	--components-button-boxShadow: 0 0 0 1px var(--commons-disabled-placeholder);
+	--components-button-color: var(--palettes-neutral-500); // disabled token candidate
 }
 
 @mixin outlined {

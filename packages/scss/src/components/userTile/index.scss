@@ -8,7 +8,12 @@
 		@include nameOnly;
 	}
 
-	&.mod-XS, &.mod-XXS { // XXS deprecated
+	// .mod-XSS is deprecated
+	&.mod-XXS {
+		@include XXS;
+	}
+
+	&.mod-XS {
 		@include XS;
 	}
 
@@ -20,15 +25,18 @@
 		@include L;
 	}
 
-	&.mod-XL { // deprecated
+	// .mod-XL is deprecated
+	&.mod-XL {
 		@include XL;
 	}
 
-	&.mod-XXL { // deprecated
+	// .mod-XXL is deprecated
+	&.mod-XXL {
 		@include XXL;
 	}
 
-	&.mod-XXXL { // deprecated
+	// .mod-XXXL is deprecated
+	&.mod-XXXL {
 		@include XXXL;
 	}
 }

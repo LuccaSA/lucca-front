@@ -1,14 +1,14 @@
+import { NgClass, NgIf } from '@angular/common';
 import { booleanAttribute, ChangeDetectionStrategy, Component, EventEmitter, HostBinding, Input, Output, ViewEncapsulation } from '@angular/core';
-import { NgIf } from '@angular/common';
-import { getIntl, Palette, PortalContent, PortalDirective } from '@lucca-front/ng/core';
-import { LU_CALLOUT_TRANSLATIONS } from '../callout.translate';
 import { LuccaIcon } from '@lucca-front/icons';
+import { getIntl, Palette, PortalContent, PortalDirective } from '@lucca-front/ng/core';
 import { CalloutState, CalloutStateMap } from '../callout-state';
+import { LU_CALLOUT_TRANSLATIONS } from '../callout.translate';
 
 @Component({
 	selector: 'lu-callout',
 	standalone: true,
-	imports: [NgIf, PortalDirective],
+	imports: [NgClass, NgIf, PortalDirective],
 	templateUrl: './callout.component.html',
 	styleUrls: ['./callout.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
@@ -80,4 +80,11 @@ export class CalloutComponent {
 	removedChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
 	public intl = getIntl(LU_CALLOUT_TRANSLATIONS);
+
+	get calloutClasses() {
+		return {
+			[`mod-${this.size}`]: !!this.size,
+			[`palette-${this.palette}`]: !!this.palette,
+		};
+	}
 }

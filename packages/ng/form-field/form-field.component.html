@@ -1,4 +1,5 @@
-<fieldset class="form-fieldset" *ngIf="layout === 'fieldset'; else defaultTpl" [class.mod-S]="size === 'S'">
+@if (layout === 'fieldset') {
+<fieldset class="form-fieldset" [class.mod-S]="size === 'S'">
 	<legend class="formLabel" [class.u-mask]="hiddenLabel" attr.aria-hidden="{{hiddenLabel}}">
 		<ng-container *luPortal="label"></ng-container
 		><!--
@@ -9,59 +10,49 @@
 			[alt]="'?'"
 			*ngIf="tooltip"
 			[luTooltip]="tooltip"
-			[color]="invalid ? 'error' : 'inherit'"
+			[color]="invalidStatus ? 'error' : 'inherit'"
 		></lu-icon>
 	</legend>
 	<ng-container *ngTemplateOutlet="projectionTpl"></ng-container>
+	@if (inlineMessage || (invalidStatus ? errorInlineMessage : false)) {
 	<lu-inline-message
 		id="{{id}}-message"
-		*ngIf="inlineMessage || (invalid ? errorInlineMessage : false)"
-		[label]="(invalid && errorInlineMessage) ? errorInlineMessage : inlineMessage"
-		[state]="invalid ? 'error' : inlineMessageState"
+		[label]="(invalidStatus && errorInlineMessage) ? errorInlineMessage : inlineMessage"
+		[state]="invalidStatus ? 'error' : inlineMessageState"
 	></lu-inline-message>
+	}
 </fieldset>
-
-<ng-template #defaultTpl>
-	<label
-		class="formLabel"
-		[class.is-error]="invalid"
-		[class.mod-counter]="counter > 0"
-		id="{{id}}-label"
-		for="{{id}}"
-		[class.u-mask]="hiddenLabel"
-		attr.role="{{rolePresentationLabel ? 'presentation' : null}}"
-	>
-		<ng-container *luPortal="label"></ng-container
-		><!--
+} @else {
+<label
+	class="formLabel"
+	[class.is-error]="invalidStatus"
+	[class.mod-counter]="counter > 0"
+	id="{{id}}-label"
+	for="{{id}}"
+	[class.u-mask]="hiddenLabel"
+	attr.role="{{rolePresentationLabel ? 'presentation' : null}}"
+>
+	<ng-container *luPortal="label"></ng-container
+	><!--
 	--><sup class="formLabel-required" aria-hidden="true" *ngIf="required">*</sup>
 
-		<lu-icon
-			class="formLabel-info"
-			icon="signHelp"
-			[alt]="'?'"
-			*ngIf="tooltip"
-			[luTooltip]="tooltip"
-			[color]="invalid ? 'error' : 'inherit'"
-		></lu-icon>
-		<span
-			*ngIf="counter > 0"
-			class="formLabel-counter"
-			[class.u-textError]="contentLength > counter"
-			id="{{id}}-counter"
-			aria-live="polite"
-		>
-			<span aria-hidden="true">{{ contentLength }}/{{ counter }}</span>
-			<span class="u-mask">{{ intl.counter | intlParams: { current: contentLength, max: counter } }}</span>
-		</span>
-	</label>
-	<ng-container *ngTemplateOutlet="projectionTpl"></ng-container>
-	<lu-inline-message
-		id="{{id}}-message"
-		*ngIf="inlineMessage || (invalid ? errorInlineMessage : false)"
-		[label]="(invalid && errorInlineMessage) ? errorInlineMessage : inlineMessage"
-		[state]="invalid ? 'error' : inlineMessageState"
-	></lu-inline-message>
-</ng-template>
+	@if (tooltip) {
+	<lu-icon class="formLabel-info" icon="signHelp" [alt]="'?'" [luTooltip]="tooltip" [color]="invalidStatus ? 'error' : 'inherit'"></lu-icon>
+	} @if (counter > 0) {
+	<span class="formLabel-counter" [class.u-textError]="contentLength > counter" id="{{id}}-counter" aria-live="polite">
+		<span aria-hidden="true">{{ contentLength }}/{{ counter }}</span>
+		<span class="u-mask">{{ intl.counter | intlParams: { current: contentLength, max: counter } }}</span>
+	</span>
+	}
+</label>
+<ng-container *ngTemplateOutlet="projectionTpl"></ng-container>
+@if (inlineMessage || (invalidStatus ? errorInlineMessage : false)) {
+<lu-inline-message
+	id="{{id}}-message"
+	[label]="(invalidStatus && errorInlineMessage) ? errorInlineMessage : inlineMessage"
+	[state]="invalidStatus ? 'error' : inlineMessageState"
+></lu-inline-message>
+} }
 
 <ng-template #projectionTpl>
 	<ng-content></ng-content>

@@ -1,12 +1,10 @@
 import { Meta, StoryFn } from '@storybook/angular';
 
-interface UserTileBasicStory {
-}
+interface UserTileBasicStory {}
 
 export default {
 	title: 'Documentation/Users/Tile/HTML&CSS/Basic',
-	argTypes: {
-	},
+	argTypes: {},
 } as Meta;
 
 function getTemplate(args: UserTileBasicStory): string {
@@ -22,7 +20,8 @@ function getTemplate(args: UserTileBasicStory): string {
 const Template: StoryFn<UserTileBasicStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
-	styles: [`
+	styles: [
+		`
 		.avatar {
 			background: lime;
 			height: var(--components-avatar-size, 2.5rem);
@@ -31,8 +30,9 @@ const Template: StoryFn<UserTileBasicStory> = (args) => ({
 			background-size: cover;
 			flex-shrink: 0;
 		}
-	`],
+	`,
+	],
 });
 
 export const Basic = Template.bind({});
-Basic.args = { };
+Basic.args = {};
