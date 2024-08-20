@@ -1,0 +1,42 @@
+@use 'exports' as *;
+
+.userTile {
+	@include vars;
+	@include component;
+
+	&.mod-nameOnly {
+		@include nameOnly;
+	}
+
+	// .mod-XSS is deprecated
+	&.mod-XXS {
+		@include XXS;
+	}
+
+	&.mod-XS {
+		@include XS;
+	}
+
+	&.mod-S {
+		@include S;
+	}
+
+	&.mod-L {
+		@include L;
+	}
+
+	// .mod-XL is deprecated
+	&.mod-XL {
+		@include XL;
+	}
+
+	// .mod-XXL is deprecated
+	&.mod-XXL {
+		@include XXL;
+	}
+
+	// .mod-XXXL is deprecated
+	&.mod-XXXL {
+		@include XXXL;
+	}
+}
