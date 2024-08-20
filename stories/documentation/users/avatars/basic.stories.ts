@@ -17,7 +17,7 @@ class UserPictureStory {
 }
 
 export default {
-	title: 'Documentation/Users/Picture/Basic',
+	title: 'Documentation/Users/Avatar/Basic',
 	component: UserPictureStory,
 	argTypes: {
 		user: {

@@ -9,12 +9,12 @@ export default {
 
 function getTemplate(args: UserTileBasicStory): string {
 	return `<div class="userTile">
-		<div class="avatar"></div>
-		<dl class="userTile-content">
-			<dt class="userTile-content-name">Mertens Finn</dt>
-			<dd class="userTile-content-info">Hero</dd>
-		</dl>
-	</div>`;
+	<div class="avatar"></div>
+	<dl class="userTile-content">
+		<dt class="userTile-content-name">Mertens Finn</dt>
+		<dd class="userTile-content-info">Hero</dd>
+	</dl>
+</div>`;
 }
 
 const Template: StoryFn<UserTileBasicStory> = (args) => ({
