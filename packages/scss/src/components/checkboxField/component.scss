@@ -3,23 +3,25 @@
 
 @mixin component($atRoot: 'without: rule') {
 	position: relative;
-	display: block;
 	width: fit-content;
 	height: fit-content;
 
+	display: grid;
+	grid-template-areas: 'checkbox';
+	grid-template-columns: var(--component-checkboxField-size);
+	grid-template-rows: var(--component-checkboxField-size);
+
 	@at-root ($atRoot) {
 		.checkboxField-icon {
-			width: var(--component-checkboxField-size);
-			height: var(--component-checkboxField-size);
 			border: 2px solid var(--palettes-neutral-700);
 			border-radius: var(--component-checkboxField-borderRadius);
-			position: relative;
 			color: var(--palettes-neutral-0);
 			transition-property: color, border-color, background-color;
 			transition-duration: var(--commons-animations-durations-fast);
 			background-color: var(--palettes-neutral-0);
-			display: block;
 			cursor: pointer;
+			grid-area: checkbox;
+			display: flex;
 
 			@media (prefers-reduced-motion: reduce) {
 				transition-property: none;
@@ -28,7 +30,7 @@
 			&::after {
 				content: '';
 				position: absolute;
-				inset: -2px;
+				inset: 0;
 				outline-offset: 2px;
 				border-radius: var(--component-checkboxField-borderRadius);
 			}
@@ -67,12 +69,10 @@
 		}
 
 		.checkboxField-input {
-			position: absolute;
 			z-index: 1;
-			width: var(--component-checkboxField-size);
-			height: var(--component-checkboxField-size);
 			opacity: 0;
 			cursor: pointer;
+			grid-area: checkbox;
 		}
 	}
 }
