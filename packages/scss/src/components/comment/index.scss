@@ -29,26 +29,26 @@
 	$inverted: true,
 	$at: 'container',
 	$containerName: 'comment',
-	$responsive: null,
-	$size: 'width',
+	$responsiveSelector: null,
+	$axe: 'width',
 	$selector: '.comment'
 ) {
-	#{if($responsive, $selector + '.responsive-' + $responsive, $selector)} {
+	#{if($responsiveSelector, $selector + '.rwd-' + $responsiveSelector, $selector)} {
 		@include media.query(
 			$breakpoint: $breakpoint,
 			$breakpoint2: $breakpoint2,
 			$inverted: $inverted,
 			$at: $at,
 			$containerName: $containerName,
-			$size: $size
+			$axe: $axe
 		) {
 			@include narrow;
 		}
 	}
 }
 
-$responsive: true !default;
+$defaultResponsive: true !default;
 
-@if $responsive {
+@if $defaultResponsive {
 	@include responsive;
 }

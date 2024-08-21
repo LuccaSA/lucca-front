@@ -85,28 +85,28 @@
 
 // responsive components with default behaviours disabled
 @use 'emptyState' with (
-	$responsive: false
+	$defaultResponsive: false
 );
 @use 'pageHeader' with (
-	$responsive: false
+	$defaultResponsive: false
 );
 @use 'errorPage' with (
-	$responsive: false
+	$defaultResponsive: false
 );
 @use 'filters' with (
-	$responsive: false
+	$defaultResponsive: false
 );
 @use 'footer' with (
-	$responsive: false
+	$defaultResponsive: false
 );
 @use 'header' with (
-	$responsive: false
+	$defaultResponsive: false
 );
 @use 'indexTable' with (
-	$responsive: false
+	$defaultResponsive: false
 );
 @use 'main' with (
-	$responsive: false
+	$defaultResponsive: false
 );
 
 // responsive behaviors reactivated with media queries to avoid breakings
