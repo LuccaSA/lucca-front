@@ -1,13 +1,4 @@
 @mixin narrow {
-	@at-root {
-		.comment-infos-content {
-			--components-comment-info-content-display: flex;
-		}
-
-		.comment-infos-name + .comment-infos-date {
-			&::before {
-				--components-comment-info-separator: none;
-			}
-		}
-	}
+	--components-comment-info-content-direction: column;
+	--components-comment-info-separator: none;
 }

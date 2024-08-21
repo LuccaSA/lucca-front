@@ -18,7 +18,7 @@
 	$containerName: 'filterBar',
 	$responsiveSelector: null,
 	$axe: 'width',
-	$selector: '.filterBar'
+	$selector: '.filterBar-footer'
 ) {
 	#{if($responsiveSelector, $selector + '.rwd-' + $responsiveSelector, $selector)} {
 		@include media.query(
@@ -42,7 +42,7 @@
 	$containerName: 'filterBar',
 	$responsiveSelector: null,
 	$axe: 'width',
-	$selector: '.filterBar'
+	$selector: '.filterBar-footer'
 ) {
 	#{if($responsiveSelector, $selector + '.rwd-' + $responsiveSelector, $selector)} {
 		@include media.query(

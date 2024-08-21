@@ -4,8 +4,10 @@
 	background-color: var(--components-filterBar-backgroundColor);
 	border-radius: var(--commons-borderRadius-L);
 	border: var(--commons-divider-width) solid var(--commons-border-200);
-
 	padding: var(--pr-t-spacings-200);
+
+	container-name: filterBar;
+	container-type: inline-size;
 
 	&:has(.filterBar-footer-toggleButton[aria-expanded='false']) {
 		.filterBar-toggledFilters {
@@ -14,11 +16,6 @@
 	}
 
 	@at-root ($atRoot) {
-		.filterBarResponsiveWrapper {
-			container-name: filterBar;
-			container-type: inline-size;
-		}
-
 		.filterBar-toggledFilters {
 			margin-block-start: var(--pr-t-spacings-200);
 		}

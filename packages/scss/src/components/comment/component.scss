@@ -4,12 +4,10 @@
 	gap: var(--pr-t-spacings-100);
 	max-width: 40rem;
 
-	@at-root ($atRoot) {
-		.commentResponsiveWrapper {
-			container-type: inline-size;
-			container-name: comment;
-		}
+	container-type: inline-size;
+	container-name: comment;
 
+	@at-root ($atRoot) {
 		.comment-infos {
 			display: flex;
 			font-style: normal;
@@ -19,8 +17,8 @@
 		}
 
 		.comment-infos-content {
-			flex-direction: column;
-			display: var(--components-comment-info-content-display);
+			display: flex;
+			flex-direction: var(--components-comment-info-content-direction);
 			font-size: var(--components-comment-info-fontSize);
 			line-height: var(--components-comment-info-lineHeight);
 			margin-top: var(--components-comment-info-content-marginTop);

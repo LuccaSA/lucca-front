@@ -31,7 +31,7 @@
 	$containerName: 'comment',
 	$responsiveSelector: null,
 	$axe: 'width',
-	$selector: '.comment'
+	$selector: '.comment-infos'
 ) {
 	#{if($responsiveSelector, $selector + '.rwd-' + $responsiveSelector, $selector)} {
 		@include media.query(
