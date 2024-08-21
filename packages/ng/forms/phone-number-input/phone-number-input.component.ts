@@ -4,7 +4,7 @@ import { LuDisplayerDirective, LuOptionDirective } from '@lucca-front/ng/core-se
 import { FormFieldComponent, InputDirective } from '@lucca-front/ng/form-field';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 import { CountryCallingCode, getCountries, getCountryCallingCode, isValidPhoneNumber, parsePhoneNumber, PhoneNumber, validatePhoneNumberLength } from 'libphonenumber-js';
-import { TextInputComponent } from '../text-input/text-input.component';
+import { TextInputComponent } from '@lucca-front/ng/forms';
 import { CountryCode, E164Number, ValidatePhoneNumberLengthResult } from './types';
 import { PhoneNumberValidators } from './validators';
 
@@ -24,7 +24,6 @@ const PREFIX_ENTRIES = getCountries().map((country) => ({
 	imports: [LuSimpleSelectInputComponent, TextInputComponent, FormsModule, LuDisplayerDirective, LuOptionDirective, InputDirective, FormFieldComponent],
 	templateUrl: './phone-number-input.component.html',
 	styleUrl: './phone-number-input.component.scss',
-	// TODO We need to plug in aria stuff
 	encapsulation: ViewEncapsulation.None,
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	providers: [
