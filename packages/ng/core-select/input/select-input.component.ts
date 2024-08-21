@@ -22,7 +22,7 @@ import { PortalContent, getIntl } from '@lucca-front/ng/core';
 import { BehaviorSubject, Observable, ReplaySubject, Subject, defer, map, of, startWith, switchMap, take } from 'rxjs';
 import { LuOptionGrouping, LuSimpleSelectDefaultOptionComponent } from '../option';
 import { LuSelectPanelRef } from '../panel';
-import { CoreSelectAddOptionStrategy, LuOptionContext, SELECT_LABEL, SELECT_LABEL_ID } from '../select.model';
+import { CoreSelectAddOptionStrategy, LuOptionComparer, LuOptionContext, SELECT_LABEL, SELECT_LABEL_ID } from '../select.model';
 import { LU_CORE_SELECT_TRANSLATIONS } from '../select.translate';
 
 @Directive()
@@ -110,7 +110,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 		}
 	}
 
-	@Input() optionComparer: (option1: TOption, option2: TOption) => boolean = (option1, option2) => JSON.stringify(option1) === JSON.stringify(option2);
+	optionComparer: LuOptionComparer<TOption> = (option1, option2) => JSON.stringify(option1) === JSON.stringify(option2);
 	@Input() optionKey: (option: TOption) => unknown = (option) => option;
 	@Input() optionTpl?: TemplateRef<LuOptionContext<TOption>> | Type<unknown> = LuSimpleSelectDefaultOptionComponent;
 	@Input() valueTpl?: TemplateRef<LuOptionContext<TOption>> | Type<unknown>;
