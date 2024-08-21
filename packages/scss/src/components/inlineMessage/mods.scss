@@ -4,7 +4,9 @@
 	--components-inlineMessage-fontSize: var(--sizes-XS-fontSize);
 	--components-inlineMessage-lineHeight: var(--sizes-XS-lineHeight);
 
-	.lucca-icon {
+	// .lucca-icon:first-child is deprecated
+	.inlineMessage-statusIcon,
+	& > .lucca-icon:first-child {
 		@include icon.XXS;
 	}
 }

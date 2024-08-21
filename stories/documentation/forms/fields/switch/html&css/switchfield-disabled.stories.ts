@@ -14,7 +14,9 @@ function getTemplate(args: SwitchDisabledStory): string {
 		<input type="checkbox" class="switchField-input" id="ID" aria-describedby="IDmessage" disabled />
 		<span class="switchField-icon" aria-hidden="true"><span class="switchField-icon-check"></span></span>
 	</span>
-	<div class="inlineMessage" id="IDmessage">Helper text</div>
+	<div class="inlineMessage" id="IDmessage">
+		<p class="inlineMessage-content">Helper text</p>
+	</div>
 </div>`;
 }
 

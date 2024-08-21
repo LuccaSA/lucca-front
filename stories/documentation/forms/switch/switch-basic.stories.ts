@@ -84,7 +84,9 @@ function getTemplate(args: SwitchBasicStory): string {
 		<input type="checkbox" class="switchField-input" id="${id}" aria-describedby="${id}message"${checked}${disabled}${invalid} />
 		<span class="switchField-icon" aria-hidden="true"><span class="switchField-icon-check"></span></span>
 	</span>
-	<div class="inlineMessage${messageState}" id="${id}message" *ngIf="message">Helper text</div>
+	<div class="inlineMessage ${messageState}" id="${id}message" *ngIf="message">
+		<p class="inlineMessage-content">Helper text</p>
+	</div>
 </div>`;
 }
 
