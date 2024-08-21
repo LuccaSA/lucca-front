@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { LuUserDisplayModule, LuUserPictureModule, LuUserTileComponent, LuUserTileModule } from '@lucca-front/ng/user';
 import { Meta, StoryFn, applicationConfig } from '@storybook/angular';
-import { bob, patrick, squidwards } from '../user.mocks';
+import { bob, patrick, squidwards } from '../../user.mocks';
 
 @Component({
 	standalone: true,
@@ -17,7 +17,7 @@ class UserTileFormatStory {
 }
 
 export default {
-	title: 'Documentation/Users/Tile/Format',
+	title: 'Documentation/Users/Tile/Angular/Format',
 	component: UserTileFormatStory,
 	decorators: [
 		applicationConfig({

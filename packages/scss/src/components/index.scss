@@ -71,12 +71,7 @@
 @use 'toast';
 @use 'popover';
 @use 'plgPush';
-
-// deprecated components
-// @use 'gridLegacy'; // caution: grid and gridLegacy cannot be loaded at the same time
-// @use 'emptyStateDeprecated';
-// @use 'tableFixedDeprecated';
-// @use 'tableStickedDeprecated';
+@use 'userTile';
 
 // responsive components
 @use 'comment';
@@ -122,3 +117,9 @@
 @include header.responsive($at: 'media');
 @include indexTable.responsive($at: 'media');
 @include main.responsive($at: 'media');
+
+// deprecated components
+// @use 'gridLegacy'; // caution: grid and gridLegacy cannot be loaded at the same time
+// @use 'emptyStateDeprecated';
+// @use 'tableFixedDeprecated';
+// @use 'tableStickedDeprecated';
