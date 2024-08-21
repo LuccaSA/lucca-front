@@ -1,12 +1,12 @@
-import { ChangeDetectionStrategy, Component, computed, forwardRef, input, signal, ViewEncapsulation } from '@angular/core';
-import { LuSimpleSelectInputComponent } from '../../simple-select/input';
-import { TextInputComponent } from '../text-input/text-input.component';
+import { ChangeDetectionStrategy, Component, computed, forwardRef, Input, input, signal, ViewEncapsulation } from '@angular/core';
 import { AbstractControl, ControlValueAccessor, FormsModule, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors, Validator } from '@angular/forms';
 import { CountryCallingCode, getCountries, getCountryCallingCode, isValidPhoneNumber, parsePhoneNumber, PhoneNumber, validatePhoneNumberLength } from 'libphonenumber-js';
 import { LuDisplayerDirective } from '../../core-select/displayer';
 import { LuOptionDirective } from '../../core-select/option';
-import { CountryCode, E164Number, ValidatePhoneNumberLengthResult } from './types';
 import { InputDirective } from '../../form-field/input.directive';
+import { LuSimpleSelectInputComponent } from '../../simple-select/input';
+import { TextInputComponent } from '../text-input/text-input.component';
+import { CountryCode, E164Number, ValidatePhoneNumberLengthResult } from './types';
 import { PhoneNumberValidators } from './validators';
 
 interface PrefixEntry {
@@ -42,6 +42,8 @@ const PREFIX_ENTRIES = getCountries().map((country) => ({
 	],
 })
 export class PhoneNumberInputComponent implements ControlValueAccessor, Validator {
+	@Input() label: string;
+
 	#onChange?: (value: E164Number | ValidatePhoneNumberLengthResult) => void;
 
 	#onTouched?: () => void;

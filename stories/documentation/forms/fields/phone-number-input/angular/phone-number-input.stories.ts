@@ -1,9 +1,9 @@
+import { FormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { PhoneNumberInputComponent } from '@lucca-front/ng/forms';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { FormsModule } from '@angular/forms';
 import { cleanupTemplate, generateInputs } from 'stories/helpers/stories';
-import { FormFieldComponent } from '@lucca-front/ng/form-field';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 export default {
 	title: 'Documentation/Forms/Fields/PhoneNumberField/Angular',
@@ -16,12 +16,12 @@ export default {
 
 export const Basic: StoryObj<PhoneNumberInputComponent & FormFieldComponent> = {
 	render: (args, { argTypes }) => {
-		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, errorInlineMessage, size } = args;
+		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, errorInlineMessage, size, ...inputArgs } = args;
 		return {
 			props: {
 				example: '+3466525',
 			},
-			template: cleanupTemplate(`<lu-form-field ${generateInputs(
+			template: cleanupTemplate(`<lu-form-field [rolePresentationLabel]="true" ${generateInputs(
 				{
 					label,
 					hiddenLabel,
@@ -33,7 +33,7 @@ export const Basic: StoryObj<PhoneNumberInputComponent & FormFieldComponent> = {
 				},
 				argTypes,
 			)}>
-	<lu-phone-number-input [(ngModel)]="example"></lu-phone-number-input>
+	<lu-phone-number-input label="${label}" [(ngModel)]="example" ${generateInputs(inputArgs, argTypes)}></lu-phone-number-input>
 </lu-form-field>
 
 {{example}}`),
@@ -41,12 +41,13 @@ export const Basic: StoryObj<PhoneNumberInputComponent & FormFieldComponent> = {
 	},
 	args: {
 		size: 'M',
-		label: 'Label',
+		label: 'Phone',
 		tooltip: 'Tooltip message',
 		hiddenLabel: false,
 		required: true,
 		inlineMessage: 'Helper message',
 		errorInlineMessage: 'Invalid Phone Number',
 		inlineMessageState: 'default',
+		disabled: false,
 	},
 };

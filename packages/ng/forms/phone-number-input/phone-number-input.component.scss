@@ -1,15 +1,19 @@
 lu-phone-number-input {
-  display: flex;
-  gap: var(--pr-t-spacings-100);
-  width: 17.5rem;
-}
+	.phoneNumber-fieldset {
+		border: 0;
+		padding: 0;
+		gap: var(--pr-t-spacings-100);
+		width: 17.5rem;
+		display: flex;
+	}
 
-.phoneNumber-countryCode {
-  .simpleSelect-input {
-    width: 21px;
-  }
-}
+	.phoneNumber-fieldset-select {
+		.simpleSelect-input {
+			width: 21px;
+		}
+	}
 
-.phoneNumber-national {
-  flex: 1;
+	.phoneNumber-fieldset-textfield {
+		flex-grow: 1;
+	}
 }
