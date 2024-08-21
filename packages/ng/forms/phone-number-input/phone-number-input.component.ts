@@ -1,7 +1,7 @@
-import { ChangeDetectionStrategy, Component, computed, forwardRef, input, Input, signal, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, forwardRef, Input, input, signal, ViewEncapsulation } from '@angular/core';
 import { AbstractControl, ControlValueAccessor, FormsModule, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors, Validator } from '@angular/forms';
 import { LuDisplayerDirective, LuOptionDirective } from '@lucca-front/ng/core-select';
-import { InputDirective } from '@lucca-front/ng/form-field';
+import { FormFieldComponent, InputDirective } from '@lucca-front/ng/form-field';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 import { CountryCallingCode, getCountries, getCountryCallingCode, isValidPhoneNumber, parsePhoneNumber, PhoneNumber, validatePhoneNumberLength } from 'libphonenumber-js';
 import { TextInputComponent } from '../text-input/text-input.component';
@@ -21,7 +21,7 @@ const PREFIX_ENTRIES = getCountries().map((country) => ({
 @Component({
 	selector: 'lu-phone-number-input',
 	standalone: true,
-	imports: [LuSimpleSelectInputComponent, TextInputComponent, FormsModule, LuDisplayerDirective, LuOptionDirective, InputDirective],
+	imports: [LuSimpleSelectInputComponent, TextInputComponent, FormsModule, LuDisplayerDirective, LuOptionDirective, InputDirective, FormFieldComponent],
 	templateUrl: './phone-number-input.component.html',
 	styleUrl: './phone-number-input.component.scss',
 	// TODO We need to plug in aria stuff
