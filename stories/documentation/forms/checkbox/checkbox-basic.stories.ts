@@ -99,8 +99,8 @@ function getTemplate(args: CheckboxBasicStory): string {
 		<span class="checkboxField-icon" aria-hidden="true"><span class="checkboxField-icon-check"></span></span>
 	</span>
 	<div class="inlineMessage ${messageState}" id="${id}message" *ngIf="message">
+		<span aria-hidden="true" class="lucca-icon inlineMessage-statusIcon"></span>
 		<p class="inlineMessage-content">
-			<span aria-hidden="true" class="lucca-icon inlineMessage-content-statusIcon"></span>
 			${message}
 		</p>
 	</div>

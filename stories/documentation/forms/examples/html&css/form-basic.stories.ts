@@ -33,8 +33,8 @@ function getTemplate(args: FieldsetBasicStory): string {
 							</div>
 						</div>
 						<div class="inlineMessage" id="IDmessage1">
+							<span aria-hidden="true" class="lucca-icon inlineMessage-statusIcon"></span>
 							<p class="inlineMessage-content">
-								<span aria-hidden="true" class="lucca-icon inlineMessage-content-statusIcon"></span>
 								Helper text
 							</p>
 						</div>
@@ -124,8 +124,8 @@ function getTemplate(args: FieldsetBasicStory): string {
 							</div>
 						</div>
 						<div class="inlineMessage" id="IDmessage8">
+							<span aria-hidden="true" class="lucca-icon inlineMessage-statusIcon"></span>
 							<p class="inlineMessage-content">
-								<span aria-hidden="true" class="lucca-icon inlineMessage-content-statusIcon"></span>
 								Helper text
 							</p>
 						</div>

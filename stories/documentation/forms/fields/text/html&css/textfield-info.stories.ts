@@ -18,8 +18,8 @@ function getTemplate(args: TextfieldInfoStory): string {
 		</div>
 	</div>
 	<div class="inlineMessage" id="IDmessage"
+		<span aria-hidden="true" class="lucca-icon inlineMessage-statusIcon"></span>
 		<p class="inlineMessage-content">
-			<span aria-hidden="true" class="lucca-icon inlineMessage-content-statusIcon"></span>
 			Helper text
 		</p>
 	</div>

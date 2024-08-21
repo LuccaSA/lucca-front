@@ -16,8 +16,8 @@
 		}
 
 		// .lucca-icon:first-child is deprecated
-		.inlineMessage-content-statusIcon,
-		.inlineMessage-content > .lucca-icon:first-child {
+		.inlineMessage-statusIcon,
+		.inlineMessage > .lucca-icon:first-child {
 			@include icon.XS;
 
 			color: var(--components-inlineMessage-icon-color);

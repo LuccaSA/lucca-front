@@ -10,20 +10,20 @@ export default {
 function getTemplate(args: InlineMessageStatesStory): string {
 	return `
 <div class="inlineMessage is-success">
+	<span aria-hidden="true" class="lucca-icon inlineMessage-statusIcon"></span>
 	<p class="inlineMessage-content">
-		<span aria-hidden="true" class="lucca-icon inlineMessage-content-statusIcon"></span>
 		Inline message
 	</p>
 </div>
 <div class="inlineMessage is-warning">
+	<span aria-hidden="true" class="lucca-icon inlineMessage-statusIcon"></span>
 	<p class="inlineMessage-content">
-		<span aria-hidden="true" class="lucca-icon inlineMessage-content-statusIcon"></span>
 		Inline message
 	</p>
 </div>
 <div class="inlineMessage is-error">
+	<span aria-hidden="true" class="lucca-icon inlineMessage-statusIcon"></span>
 	<p class="inlineMessage-content">
-		<span aria-hidden="true" class="lucca-icon inlineMessage-content-statusIcon"></span>
 		Inline message
 	</p>
 </div>

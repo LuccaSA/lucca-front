@@ -5,8 +5,8 @@
 	--components-inlineMessage-lineHeight: var(--sizes-XS-lineHeight);
 
 	// .lucca-icon:first-child is deprecated
-	.inlineMessage-content-statusIcon,
-	.inlineMessage-content > .lucca-icon:first-child {
+	.inlineMessage-statusIcon,
+	& > .lucca-icon:first-child {
 		@include icon.XXS;
 	}
 }

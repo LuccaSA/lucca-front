@@ -16,8 +16,8 @@ function getTemplate(args: TextfieldInvalidStory): string {
 		</div>
 	</div>
 	<div class="inlineMessage" id="IDmessage">
+		<span aria-hidden="true" class="lucca-icon inlineMessage-statusIcon"></span>
 		<p class="inlineMessage-content">
-			<span aria-hidden="true" class="lucca-icon inlineMessage-content-statusIcon"></span>
 			Error message
 		</p>
 	</div>
