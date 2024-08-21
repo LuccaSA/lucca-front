@@ -37,6 +37,7 @@
 			class="textField-input-value"
 			[placeholder]="placeholder"
 			[formControl]="ngControl.control"
+			(blur)="blur.emit($event)"
 			#inputElement
 		/>
 		<div class="textField-input-affix">
