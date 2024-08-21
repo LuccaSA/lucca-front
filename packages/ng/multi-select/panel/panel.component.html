@@ -16,6 +16,9 @@
 		aria-multiselectable="true"
 		(scroll)="onScroll($event)"
 	>
+		@if (selectInput.panelHeaderTpl) {
+		<ng-container *luPortal="selectInput.panelHeaderTpl" />
+		}
 		<div class="lu-picker-content-option">
 			<ng-container *ngIf="grouping && ctx.groupTemplateLocation === 'group-header'">
 				<div

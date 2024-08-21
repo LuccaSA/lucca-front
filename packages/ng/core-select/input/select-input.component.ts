@@ -114,6 +114,8 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	@Input() optionKey: (option: TOption) => unknown = (option) => option;
 	@Input() optionTpl?: TemplateRef<LuOptionContext<TOption>> | Type<unknown> = LuSimpleSelectDefaultOptionComponent;
 	@Input() valueTpl?: TemplateRef<LuOptionContext<TOption>> | Type<unknown>;
+	@Input() panelHeaderTpl?: TemplateRef<void> | Type<unknown>;
+
 	grouping?: LuOptionGrouping<TOption, unknown>;
 
 	@Output() clueChange = new EventEmitter<string>();
