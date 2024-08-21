@@ -1,7 +1,7 @@
 @if (isStringPortalContent(label)) {
 <p class="inlineMessage-content">
 	<span *ngIf="state && state !== 'default'" class="lucca-icon inlineMessage-content-statusIcon" aria-hidden="true"></span>
-	{{label}}
+	<ng-container *luPortal="label"></ng-container>
 </p>
 } @else {
 <ng-container>

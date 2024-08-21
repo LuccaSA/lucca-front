@@ -3,9 +3,10 @@
 @mixin S {
 	--components-inlineMessage-fontSize: var(--sizes-XS-fontSize);
 	--components-inlineMessage-lineHeight: var(--sizes-XS-lineHeight);
-	--components-inlineMessage-icon-offset: 1px;
 
-	.inlineMessage-content-statusIcon {
+	// .lucca-icon:first-child is deprecated
+	.inlineMessage-content-statusIcon,
+	.inlineMessage-content > .lucca-icon:first-child {
 		@include icon.XXS;
 	}
 }
