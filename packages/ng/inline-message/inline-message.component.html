@@ -2,5 +2,5 @@
 @if (isStringPortalContent(label)) {
 <p class="inlineMessage-content">{{label}}</p>
 } @else {
-<div class="inlineMessage-content">{{label}}</div>
+<div class="inlineMessage-content"><ng-container *luPortal="label"></ng-container></div>
 }
