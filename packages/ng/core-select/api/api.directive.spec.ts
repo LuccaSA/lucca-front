@@ -25,6 +25,8 @@ class TestDirective extends ALuCoreSelectApiDirective<TestEntity> {
 
 	protected override optionComparer = (a: TestEntity, b: TestEntity) => a.id === b.id;
 
+	protected override optionKey = (option: TestEntity) => option.id;
+
 	public override getOptions(): Observable<TestEntity[]> {
 		return of([{ id: 1, name: 'test' }]);
 	}
