@@ -15,7 +15,7 @@
 	contain: paint;
 
 	@at-root ($atRoot) {
-		.indexTableResponsiveWrapper {
+		.indexTableWrapper {
 			container-type: inline-size;
 			container-name: indexTable;
 		}

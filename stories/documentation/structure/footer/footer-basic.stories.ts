@@ -65,24 +65,28 @@ function getTemplate(args: FooterBasicStory): string {
 	</div>`;
 	} else if (container && !wrapper) {
 		return `
-		<footer class="footer ${sticky}">
-			<div class="footer-containerOptional container ${containerMax}">
+		<div class="footerResponsiveWrapper">
+			<footer class="footer ${sticky}">
+				<div class="footer-containerOptional container ${containerMax}">
+					<div class="footer-content">Content</div>
+					<div class="footer-actions">
+						<button type="button" class="button">Button</button>
+						<button type="button" class="button mod-outlined">Button</button>
+					</div>
+				</div>
+			</footer>
+		</div>`;
+	} else {
+		return `
+		<div class="footerResponsiveWrapper">
+			<footer class="footer ${sticky}">
 				<div class="footer-content">Content</div>
 				<div class="footer-actions">
 					<button type="button" class="button">Button</button>
 					<button type="button" class="button mod-outlined">Button</button>
 				</div>
-			</div>
-		</footer>`;
-	} else {
-		return `
-		<footer class="footer ${sticky}">
-			<div class="footer-content">Content</div>
-			<div class="footer-actions">
-				<button type="button" class="button">Button</button>
-				<button type="button" class="button mod-outlined">Button</button>
-			</div>
-		</footer>
+			</footer>
+		</div>
 		`;
 	}
 }
