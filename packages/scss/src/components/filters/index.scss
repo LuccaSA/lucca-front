@@ -31,7 +31,7 @@
 	$at: 'container',
 	$containerName: 'filters',
 	$responsiveSelector: null,
-	$axe: 'width',
+	$axis: 'width',
 	$selector: '.filters'
 ) {
 	#{if($responsiveSelector, $selector + '.rwd-' + $responsiveSelector, $selector)} {
@@ -41,7 +41,7 @@
 			$inverted: $inverted,
 			$at: $at,
 			$containerName: $containerName,
-			$axe: $axe
+			$axis: $axis
 		) {
 			@include stickyNarrow;
 		}

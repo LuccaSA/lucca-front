@@ -26,7 +26,7 @@
 	$at: 'container',
 	$containerName: 'sample',
 	$responsiveSelector: null,
-	$axe: 'width',
+	$axis: 'width',
 	$selector: '.sample'
 ) {
 	#{if($responsiveSelector, $selector + '.rwd-' + $responsiveSelector, $selector)} {
@@ -36,7 +36,7 @@
 			$inverted: $inverted,
 			$at: $at,
 			$containerName: $containerName,
-			$axe: $axe
+			$axis: $axis
 		) {
 			@include sampleBehaviour;
 		}

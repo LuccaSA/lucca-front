@@ -33,7 +33,7 @@
 	$at: 'container',
 	$containerName: 'mainContent',
 	$responsiveSelector: null,
-	$axe: 'width',
+	$axis: 'width',
 	$selector: '.main-content'
 ) {
 	#{if($responsiveSelector, $selector + '.rwd-' + $responsiveSelector, $selector)} {
@@ -43,7 +43,7 @@
 			$inverted: $inverted,
 			$at: $at,
 			$containerName: $containerName,
-			$axe: $axe
+			$axis: $axis
 		) {
 			@include narrow;
 			@include bannerNarrow;

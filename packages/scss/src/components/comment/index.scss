@@ -30,7 +30,7 @@
 	$at: 'container',
 	$containerName: 'comment',
 	$responsiveSelector: null,
-	$axe: 'width',
+	$axis: 'width',
 	$selector: '.comment-infos'
 ) {
 	#{if($responsiveSelector, $selector + '.rwd-' + $responsiveSelector, $selector)} {
@@ -40,7 +40,7 @@
 			$inverted: $inverted,
 			$at: $at,
 			$containerName: $containerName,
-			$axe: $axe
+			$axis: $axis
 		) {
 			@include narrow;
 		}

@@ -17,7 +17,7 @@
 	$at: 'container',
 	$containerName: 'footer',
 	$responsiveSelector: null,
-	$axe: 'width',
+	$axis: 'width',
 	$selector: '.footer'
 ) {
 	#{if($responsiveSelector, $selector + '.rwd-' + $responsiveSelector, $selector)} {
@@ -27,7 +27,7 @@
 			$inverted: $inverted,
 			$at: $at,
 			$containerName: $containerName,
-			$axe: $axe
+			$axis: $axis
 		) {
 			@include narrow;
 		}

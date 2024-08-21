@@ -50,7 +50,7 @@
 	$at: 'media',
 	$containerName: 'dialog',
 	$responsiveSelector: null,
-	$axe: 'width',
+	$axis: 'width',
 	$selector: '.dialog'
 ) {
 	#{if($responsiveSelector, $selector + '.rwd-' + $responsiveSelector, $selector)} {
@@ -60,7 +60,7 @@
 			$inverted: $inverted,
 			$at: $at,
 			$containerName: $containerName,
-			$axe: $axe
+			$axis: $axis
 		) {
 			&:where(.mod-drawer) {
 				@include fromBottom;
