@@ -1,29 +1,31 @@
 <fieldset [disabled]="disabled" class="phoneNumber-fieldset">
 	<legend><span class="u-mask">{{ label }}</span></legend>
-	<label class="u-mask" for="TODO">Prefix</label>
-	<lu-simple-select
-		[options]="prefixesDisplay()"
-		[(ngModel)]="prefixEntry"
-		(ngModelChange)="updateModel(); formatNationalNumber()"
-		[optionKey]="getPrefixKey"
-		[optionComparer]="prefixComparator"
-		(blur)="touched()"
-		(clueChange)="query.set($event)"
-		#selectRef
-		class="phoneNumber-fieldset-select"
-	>
-		<ng-container *luOption="let prefixOption; select: selectRef"
-			><img class="pr-u-marginRight50" src="https://cdn.lucca.fr/assets/misc/flags/{{prefixOption.country}}.svg" alt="" />
-			{{prefixOption.country}} (+{{ prefixOption.prefix }})
-		</ng-container>
-		<ng-container *luDisplayer="let prefixOption; select: selectRef"
-			><img
-				src="https://cdn.lucca.fr/assets/misc/flags/{{prefixOption.country}}.svg"
-				alt="{{prefixOption.country}} +{{ prefixOption.prefix }}"
-				class="phoneNumber-countryCode-flag"
-			/>
-		</ng-container>
-	</lu-simple-select>
+	<label>
+		<span class="u-mask">Prefix</span>
+		<lu-simple-select
+			[options]="prefixesDisplay()"
+			[(ngModel)]="prefixEntry"
+			(ngModelChange)="updateModel(); formatNationalNumber()"
+			[optionKey]="getPrefixKey"
+			[optionComparer]="prefixComparator"
+			(blur)="touched()"
+			(clueChange)="query.set($event)"
+			#selectRef
+			class="phoneNumber-fieldset-select"
+		>
+			<ng-container *luOption="let prefixOption; select: selectRef"
+				><img class="pr-u-marginRight50" src="https://cdn.lucca.fr/assets/misc/flags/{{prefixOption.country}}.svg" alt="" />
+				{{prefixOption.country}} (+{{ prefixOption.prefix }})
+			</ng-container>
+			<ng-container *luDisplayer="let prefixOption; select: selectRef"
+				><img
+					src="https://cdn.lucca.fr/assets/misc/flags/{{prefixOption.country}}.svg"
+					alt="{{prefixOption.country}} +{{ prefixOption.prefix }}"
+					class="phoneNumber-countryCode-flag"
+				/>
+			</ng-container>
+		</lu-simple-select>
+	</label>
 	<label for="phoneNumberFieldsetTextfieldInput" class="u-mask">Number</label>
 	<div class="textField phoneNumber-fieldset-textfield">
 		<div class="textField-input">

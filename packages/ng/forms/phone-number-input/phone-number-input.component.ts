@@ -1,11 +1,9 @@
-import { ChangeDetectionStrategy, Component, computed, forwardRef, input, signal, ViewEncapsulation } from '@angular/core';
-import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
-import { TextInputComponent } from '../text-input/text-input.component';
+import { ChangeDetectionStrategy, Component, computed, forwardRef, input, Input, signal, ViewEncapsulation } from '@angular/core';
 import { AbstractControl, ControlValueAccessor, FormsModule, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors, Validator } from '@angular/forms';
-import { CountryCallingCode, getCountries, getCountryCallingCode, isValidPhoneNumber, parsePhoneNumber, PhoneNumber, validatePhoneNumberLength } from 'libphonenumber-js';
 import { LuDisplayerDirective, LuOptionDirective } from '@lucca-front/ng/core-select';
 import { InputDirective } from '@lucca-front/ng/form-field';
-import { LuSimpleSelectInputComponent } from '../../simple-select/input';
+import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
+import { CountryCallingCode, getCountries, getCountryCallingCode, isValidPhoneNumber, parsePhoneNumber, PhoneNumber, validatePhoneNumberLength } from 'libphonenumber-js';
 import { TextInputComponent } from '../text-input/text-input.component';
 import { CountryCode, E164Number, ValidatePhoneNumberLengthResult } from './types';
 import { PhoneNumberValidators } from './validators';
