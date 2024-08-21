@@ -1,9 +1,11 @@
 @mixin component($atRoot: 'without: rule') {
-	container: comment / inline-size;
 	display: flex;
 	flex-direction: column;
 	gap: var(--pr-t-spacings-100);
 	max-width: 40rem;
+
+	container-type: inline-size;
+	container-name: comment;
 
 	@at-root ($atRoot) {
 		.comment-infos {
@@ -15,8 +17,8 @@
 		}
 
 		.comment-infos-content {
-			flex-direction: column;
-			display: var(--components-comment-info-content-display);
+			display: flex;
+			flex-direction: var(--components-comment-info-content-direction);
 			font-size: var(--components-comment-info-fontSize);
 			line-height: var(--components-comment-info-lineHeight);
 			margin-top: var(--components-comment-info-content-marginTop);

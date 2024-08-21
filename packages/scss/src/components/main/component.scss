@@ -1,9 +1,3 @@
-@use '@lucca-front/scss/src/commons/utils/media';
-
 @mixin component {
 	position: relative;
-
-	@include media.max('S') {
-		margin-left: 0 !important;
-	}
 }

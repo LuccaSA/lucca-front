@@ -15,6 +15,11 @@
 	contain: paint;
 
 	@at-root ($atRoot) {
+		.indexTableWrapper {
+			container-type: inline-size;
+			container-name: indexTable;
+		}
+
 		.indexTable-head {
 			display: table-header-group;
 			vertical-align: bottom;

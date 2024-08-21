@@ -8,7 +8,8 @@ export default {
 } as Meta;
 
 function getTemplate(args: IndexTableMassSelectionAndPaginationStory): string {
-	return `<div class="indexTableWrapper">
+	return `
+	<div class="indexTableWrapper">
 	<table class="indexTable mod-selectable">
 		<thead class="indexTable-head">
 			<tr class="indexTable-head-row">

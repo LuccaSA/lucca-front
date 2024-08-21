@@ -1,0 +1,6 @@
+@mixin stickyNarrow {
+	&.mod-sticky {
+		left: 0 !important;
+		top: calc(var(--commons-banner-height) + var(--commons-navSide-mobile-toggle-height));
+	}
+}

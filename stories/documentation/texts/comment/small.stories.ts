@@ -8,11 +8,12 @@ export default {
 } as Meta;
 
 function getTemplate(args: CommentSmallStory): string {
-	return `<div class="comment mod-S">
+	return `
+<div class="comment mod-S">
 	<div class="comment-infos">
 		<div class="avatar"></div>
 		<div class="comment-infos-content">
-			<span class="comment-infos-name">Marie Bragoulet</span>&ngsp;
+			<span class="comment-infos-name">Marie Bragoulet</span>
 			<time class="comment-infos-date" datetime="2024-01-04T16:50:00+00:00">Lun. 4 janv. à 16:50</time>
 		</div>
 	</div>
@@ -22,7 +23,8 @@ function getTemplate(args: CommentSmallStory): string {
 			iste neque ex?
 		</p>
 	</blockquote>
-</div>`;
+</div>
+`;
 }
 
 const Template: StoryFn<CommentSmallStory> = (args) => ({

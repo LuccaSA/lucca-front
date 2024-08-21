@@ -8,29 +8,34 @@
 	&.mod-sticky {
 		@include sticky;
 	}
+}
 
-	&:not([class*='mod-narrow']),
-	&.mod-narrowAtMediaMaxXXS {
-		@include media.max('XXS') {
+@mixin responsive(
+	$breakpoint: 'XXS',
+	$breakpoint2: null,
+	$inverted: true,
+	$at: 'container',
+	$containerName: 'footer',
+	$responsiveSelector: null,
+	$axis: 'width',
+	$selector: '.footer'
+) {
+	#{if($responsiveSelector, $selector + '.rwd-' + $responsiveSelector, $selector)} {
+		@include media.query(
+			$breakpoint: $breakpoint,
+			$breakpoint2: $breakpoint2,
+			$inverted: $inverted,
+			$at: $at,
+			$containerName: $containerName,
+			$axis: $axis
+		) {
 			@include narrow;
 		}
 	}
+}
 
-	&.mod-narrowAtMediaMaxXS {
-		@include media.max('XS') {
-			@include narrow;
-		}
-	}
+$defaultResponsive: true !default;
 
-	&.mod-narrowAtMediaMaxS {
-		@include media.max('S') {
-			@include narrow;
-		}
-	}
-
-	&.mod-narrowAtMediaMaxM {
-		@include media.max('M') {
-			@include narrow;
-		}
-	}
+@if $defaultResponsive {
+	@include responsive;
 }
