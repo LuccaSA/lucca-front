@@ -129,13 +129,8 @@ export class PhoneNumberInputComponent implements ControlValueAccessor, Validato
 	}
 
 	formatNationalNumber(): void {
-		// TODO: Should we revert format on focus for better edit UX?
-		try {
-			if (isValidPhoneNumber(this.nationalNumber, this.prefixEntry.country)) {
-				this.nationalNumber = this.parsedPhoneNumber?.formatNational();
-			}
-		} catch (e) {
-			console.error(e);
+		if (isValidPhoneNumber(this.nationalNumber, this.prefixEntry.country)) {
+			this.nationalNumber = this.parsedPhoneNumber?.formatNational();
 		}
 	}
 
