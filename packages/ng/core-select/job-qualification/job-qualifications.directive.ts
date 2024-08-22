@@ -1,9 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Directive, Input, OnInit, computed, forwardRef, inject, signal } from '@angular/core';
 import { toObservable } from '@angular/core/rxjs-interop';
+import { CORE_SELECT_API_TOTAL_COUNT_PROVIDER, CoreSelectApiTotalCountProvider } from '@lucca-front/ng/core-select';
 import { ALuCoreSelectApiDirective } from '@lucca-front/ng/core-select/api';
 import { Observable, combineLatest, debounceTime, map, switchMap } from 'rxjs';
-import { CORE_SELECT_API_TOTAL_COUNT_PROVIDER, CoreSelectApiTotalCountProvider } from '../select.model';
 import { LuJobQualificationGroupingComponent } from './job-qualification-grouping.component';
 import { LuCoreSelectJobQualification } from './models';
 

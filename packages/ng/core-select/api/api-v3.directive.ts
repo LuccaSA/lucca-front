@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Directive, forwardRef, inject, Input } from '@angular/core';
 import { ILuApiCollectionResponse, ILuApiItem } from '@lucca-front/ng/api';
+import { CORE_SELECT_API_TOTAL_COUNT_PROVIDER, CoreSelectApiTotalCountProvider } from '@lucca-front/ng/core-select';
 import { BehaviorSubject, combineLatest, debounceTime, map, Observable, ReplaySubject, switchMap, take } from 'rxjs';
-import { CORE_SELECT_API_TOTAL_COUNT_PROVIDER, CoreSelectApiTotalCountProvider } from '../select.model';
 import { ALuCoreSelectApiDirective } from './api.directive';
 
 @Directive({
