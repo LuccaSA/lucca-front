@@ -54,6 +54,7 @@
 
 // .mod-sortable is deprecated
 // .table-head-row-cell-sortableButton is deprecated
+.indexTable-head-row-cell,
 .table-head-row-cell {
 	&:not(:has(.tableSortable-arrows)) {
 		&.mod-sortable,
@@ -71,10 +72,6 @@
 
 		&:is(.is-sorted-ascending, .sortedAscending) {
 			@include ascendingLegacy;
-		}
-
-		&:is([aria-sort]) {
-			@include sortLegacy2;
 		}
 
 		&:is([aria-sort='descending']) {

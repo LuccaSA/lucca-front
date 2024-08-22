@@ -42,6 +42,15 @@ function getTemplate(args: IndexTableBasicStory): string {
 			<td class="indexTable-body-row-cell"><a href="#">Content actionable</a></td>
 			<td class="indexTable-body-row-cell">Content</td>
 		</tr>
+		<!-- indexTable-body-row-cell-action is deprecated -->
+		<tr class="indexTable-body-row">
+			<td class="indexTable-body-row-cell">
+				<a href="#" class="indexTable-body-row-cell-action">Action</a>
+				Content
+			</td>
+			<td class="indexTable-body-row-cell">Content with deprecated action</td>
+			<td class="indexTable-body-row-cell">Content</td>
+		</tr>
 	</tbody>
 </table>`;
 }
