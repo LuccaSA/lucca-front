@@ -17,6 +17,7 @@
 	flex-direction: var(--components-sortable-direction);
 	font-size: var(--components-sortable-fontSize);
 	line-height: var(--components-sortable-lineHeight);
+	color: currentColor;
 
 	@at-root ($atRoot) {
 		.tableSortable-arrows {
