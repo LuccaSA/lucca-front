@@ -8,9 +8,9 @@
 	gap: var(--pr-t-spacings-200);
 	align-items: var(--components-footer-alignItems);
 	box-shadow: var(--pr-t-elevation-shadow-overflow);
+	flex-direction: var(--components-footer-direction);
 	bottom: 0;
 	position: var(--components-footer-position);
-	flex-direction: var(--components-footer-direction);
 
 	@at-root ($atRoot) {
 		.footer-content {
@@ -20,6 +20,8 @@
 		.footerResponsiveWrapper {
 			container-type: inline-size;
 			container-name: footer;
+			bottom: 0;
+			position: var(--components-footer-position);
 		}
 
 		.footer-actions {

@@ -2,8 +2,12 @@
 @use '@lucca-front/scss/src/commons/utils/media';
 
 .footer {
-	@include vars;
 	@include component;
+}
+
+.footer,
+.footerResponsiveWrapper {
+	@include vars;
 
 	&.mod-sticky {
 		@include sticky;
