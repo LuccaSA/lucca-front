@@ -3,6 +3,10 @@ import { LuOptionComparer } from '@lucca-front/ng/core-select';
 import type { LuMultiSelectInputComponent } from './input';
 
 export const MULTI_SELECT_INPUT = new InjectionToken<LuMultiSelectInputComponent<unknown>>('MultiSelectInput');
+
+export type LuMultiSelectWithSelectAllValue<T> = { mode: 'include'; values: T[] } | { mode: 'exclude'; values: T[] } | { mode: 'all' } | { mode: 'none' };
+export type LuMultiSelectWithSelectAllMode = LuMultiSelectWithSelectAllValue<unknown>['mode'];
+
 @Injectable({
 	providedIn: 'root',
 	useFactory: () => new DefaultIsSelectedStrategy(),
