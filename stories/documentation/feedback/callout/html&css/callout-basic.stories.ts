@@ -29,7 +29,7 @@ function getTemplate(args: CalloutBasicStory): string {
 	const s = args.s ? ` mod-S` : '';
 	return `<div class="callout${classes}${s}">
 	<div class="callout-content">
-		<div class="callout-content-description">Caesarem fama studio memorabili ut latius abscessere amplam Nebridius equitum. <a href="#">En savoir plus</a></div>
+		<div class="callout-content-description">Feedback description</div>
 	</div>
 </div>`;
 }
