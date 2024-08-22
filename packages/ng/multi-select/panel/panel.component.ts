@@ -9,7 +9,7 @@ import { LuMultiSelectInputComponent } from '../input';
 import { LuMultiSelectPanelRef } from '../input/panel.model';
 import { MULTI_SELECT_INPUT } from '../select.model';
 import { LU_MULTI_SELECT_TRANSLATIONS } from '../select.translate';
-import { LuNotSelectedOptionsPipe } from './not-selected.pipe';
+import { LuOptionsGroupContextPipe } from './option-group-context.pipe';
 import { LuIsOptionSelectedPipe } from './option-selected.pipe';
 import { ɵLuMultiSelectSelectedChipDirective } from './selected-chip.directive';
 
@@ -32,7 +32,7 @@ import { ɵLuMultiSelectSelectedChipDirective } from './selected-chip.directive'
 		ɵLuMultiSelectSelectedChipDirective,
 		NgTemplateOutlet,
 		PortalDirective,
-		LuNotSelectedOptionsPipe,
+		LuOptionsGroupContextPipe,
 	],
 	providers: [CoreSelectKeyManager],
 })

@@ -76,6 +76,17 @@ export class LuMultiSelectWithSelectAllDirective<TValue> extends ɵIsSelectedStr
 		}
 	}
 
+	override isGroupSelected(options: TValue[], notSelectedOptions: TValue[]): boolean {
+		switch (this.#mode()) {
+			case 'all':
+				return this.selectAll();
+			case 'include':
+				return notSelectedOptions.length === 0;
+			case 'exclude':
+				return notSelectedOptions.length > 0;
+		}
+	}
+
 	registerOnChange(fn: (value: TValue[] | LuMultiSelectWithSelectAllValue<TValue>) => void): void {
 		this.#onChange = fn;
 

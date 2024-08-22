@@ -13,10 +13,15 @@ export type LuMultiSelectWithSelectAllMode = LuMultiSelectWithSelectAllValue<unk
 })
 export abstract class ɵIsSelectedStrategy<TOption> {
 	abstract isSelected(option: TOption, selectedOptions: TOption[], optionComparer: LuOptionComparer<TOption>): boolean;
+	abstract isGroupSelected(options: TOption[], notSelectedOptions: TOption[]): boolean;
 }
 
 class DefaultIsSelectedStrategy<TOption> extends ɵIsSelectedStrategy<TOption> {
 	isSelected(option: TOption, selectedOptions: TOption[], optionComparer: LuOptionComparer<TOption>): boolean {
 		return selectedOptions.some((o) => optionComparer(o, option));
+	}
+
+	isGroupSelected(options: TOption[], notSelectedOptions: TOption[]): boolean {
+		return notSelectedOptions.length === options.length;
 	}
 }
