@@ -22,6 +22,8 @@ import { DEFAULT_MIN_TIME, DEFAULT_TIME_DECIMAL_PIPE_FORMAT, TimeChangeEvent } f
 import { LU_TIME_PICKER_TRANSLATIONS } from './time-picker.translate';
 import { RepeatOnHoldDirective } from '../core/repeat-on-hold.directive';
 
+const MAX_TIME = '23:59:59';
+
 @Component({
 	selector: 'lu-time-picker',
 	standalone: true,
@@ -49,7 +51,7 @@ export class TimePickerComponent extends BasePickerComponent {
 	postMeridiemRef: ElementRef<HTMLInputElement>;
 
 	value = model<ISO8601Time>('--:--:--');
-	max = input<ISO8601Time>(null);
+	max = input<ISO8601Time>(MAX_TIME);
 
 	displayArrows = input(false, { transform: booleanAttribute });
 
