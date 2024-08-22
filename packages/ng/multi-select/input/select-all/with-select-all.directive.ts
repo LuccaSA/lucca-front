@@ -1,10 +1,10 @@
-import { Directive, computed, effect, forwardRef, inject, input, model, signal, untracked } from '@angular/core';
+import { Directive, computed, effect, forwardRef, inject, input, signal, untracked } from '@angular/core';
 import { LuOptionComparer } from '@lucca-front/ng/option';
 import { LuMultiSelectWithSelectAllMode, LuMultiSelectWithSelectAllValue, ɵIsSelectedStrategy } from '../../select.model';
 import { LuMultiSelectInputComponent } from '../select-input.component';
 import { LuMultiSelectAllDisplayerComponent } from './multi-select-all-displayer.component';
 import { LuMultiSelectAllHeaderComponent } from './multi-select-all-header.component';
-import { MULTI_SELECT_WITH_SELECT_ALL_CONTEXT } from './select-all.models';
+import { LuMultiSelectWithSelectAllContext, MULTI_SELECT_WITH_SELECT_ALL_CONTEXT } from './select-all.models';
 
 @Directive({
 	// eslint-disable-next-line @angular-eslint/directive-selector
@@ -21,11 +21,10 @@ import { MULTI_SELECT_WITH_SELECT_ALL_CONTEXT } from './select-all.models';
 		},
 	],
 })
-export class LuMultiSelectWithSelectAllDirective<TValue> extends ɵIsSelectedStrategy<TValue> {
+export class LuMultiSelectWithSelectAllDirective<TValue> extends ɵIsSelectedStrategy<TValue> implements LuMultiSelectWithSelectAllContext {
 	readonly #select = inject(LuMultiSelectInputComponent);
 
-	readonly selectAll = model(false, { alias: 'withSelectAll' });
-	readonly totalCount = input<number>(0, { alias: 'withSelectAllTotalCount' });
+	readonly selectAll = signal(false);
 	readonly displayerLabel = input.required<string>({ alias: 'withSelectAllDisplayerLabel' });
 
 	readonly #mode = signal<LuMultiSelectWithSelectAllMode>('include');
@@ -56,12 +55,12 @@ export class LuMultiSelectWithSelectAllDirective<TValue> extends ɵIsSelectedStr
 		effect(() => this.#onChange?.(this.#selectAllValue()));
 
 		effect(() => {
-			const selectAll = this.selectAll();
+			this.selectAll(); // Track selectAll changes
 
 			untracked(() => {
 				this.#selectWriteValue([]);
 				this.#values.set([]);
-				this.#mode.set(selectAll ? 'all' : 'none');
+				this.#mode.set('all');
 			});
 		});
 	}
@@ -74,8 +73,6 @@ export class LuMultiSelectWithSelectAllDirective<TValue> extends ɵIsSelectedStr
 				return selectedOptions.some((o) => optionComparer(o, option));
 			case 'exclude':
 				return !selectedOptions.some((o) => optionComparer(o, option));
-			case 'none':
-				return false;
 		}
 	}
 
@@ -88,12 +85,12 @@ export class LuMultiSelectWithSelectAllDirective<TValue> extends ɵIsSelectedStr
 			const oldMode = this.#mode();
 			const selectAll = this.selectAll();
 
-			if ((oldMode === 'all' || oldMode === 'none') && values.length) {
+			if (oldMode === 'all' && values.length) {
 				this.#mode.set(selectAll ? 'exclude' : 'include');
 			}
 
 			if (!values.length) {
-				this.#mode.set(this.selectAll() ? 'all' : 'none');
+				this.#mode.set('all');
 			}
 		});
 	}

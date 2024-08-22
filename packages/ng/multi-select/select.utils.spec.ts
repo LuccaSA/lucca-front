@@ -13,7 +13,6 @@ describe('multi-select utils', () => {
 				values: [{ id: 12 }, { id: 13 }],
 			},
 			all: { mode: 'all' },
-			none: { mode: 'none' },
 		};
 
 		it('should return correct value when "include" selection', () => {
@@ -35,14 +34,6 @@ describe('multi-select utils', () => {
 		it('should return empty object when "all" selection', () => {
 			// Act
 			const result = selectionToQueryParams('id', selections.all, (e) => e.id);
-
-			// Assert
-			expect(result).toEqual({});
-		});
-
-		it('should return empty object when "none" selection', () => {
-			// Act
-			const result = selectionToQueryParams('id', selections.none, (e) => e.id);
 
 			// Assert
 			expect(result).toEqual({});
