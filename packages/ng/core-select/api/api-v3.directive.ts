@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
-import { Directive, inject, Input } from '@angular/core';
+import { Directive, forwardRef, inject, Input } from '@angular/core';
 import { ILuApiCollectionResponse, ILuApiItem } from '@lucca-front/ng/api';
-import { BehaviorSubject, combineLatest, map, Observable, ReplaySubject, switchMap, take } from 'rxjs';
+import { BehaviorSubject, combineLatest, debounceTime, map, Observable, ReplaySubject, switchMap, take } from 'rxjs';
+import { CORE_SELECT_API_TOTAL_COUNT_PROVIDER, CoreSelectApiTotalCountProvider } from '../select.model';
 import { ALuCoreSelectApiDirective } from './api.directive';
 
 @Directive({
@@ -9,8 +10,14 @@ import { ALuCoreSelectApiDirective } from './api.directive';
 	// eslint-disable-next-line @angular-eslint/directive-selector
 	selector: 'lu-simple-select[apiV3],lu-multi-select[apiV3]',
 	standalone: true,
+	providers: [
+		{
+			provide: CORE_SELECT_API_TOTAL_COUNT_PROVIDER,
+			useExisting: forwardRef(() => LuCoreSelectApiV3Directive),
+		},
+	],
 })
-export class LuCoreSelectApiV3Directive<T extends ILuApiItem> extends ALuCoreSelectApiDirective<T> {
+export class LuCoreSelectApiV3Directive<T extends ILuApiItem> extends ALuCoreSelectApiDirective<T> implements CoreSelectApiTotalCountProvider {
 	@Input()
 	public set apiV3(value: string) {
 		this.url$.next(value);
@@ -45,6 +52,19 @@ export class LuCoreSelectApiV3Directive<T extends ILuApiItem> extends ALuCoreSel
 			...(orderBy ? { orderBy } : {}),
 			...(clue ? { name: `like,${clue}` } : {}),
 		})),
+	);
+
+	public totalCount$ = combineLatest([this.url$, this.filters$]).pipe(
+		debounceTime(250),
+		switchMap(([url, params]) =>
+			this.httpClient.get<{ data: { count: number } }>(url, {
+				params: {
+					...params,
+					fields: 'collection.count',
+				},
+			}),
+		),
+		map((res) => res.data?.count ?? 0),
 	);
 
 	protected override getOptions(params: Record<string, string | number | boolean>, page: number): Observable<T[]> {

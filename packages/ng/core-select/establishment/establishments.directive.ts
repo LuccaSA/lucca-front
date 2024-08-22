@@ -1,8 +1,9 @@
 import { HttpClient } from '@angular/common/http';
-import { DestroyRef, Directive, Input, OnInit, inject, signal } from '@angular/core';
+import { DestroyRef, Directive, Input, OnInit, computed, forwardRef, inject, signal } from '@angular/core';
 import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 import { ALuCoreSelectApiDirective } from '@lucca-front/ng/core-select/api';
-import { Observable, combineLatest, filter, map } from 'rxjs';
+import { Observable, combineLatest, debounceTime, filter, map, switchMap } from 'rxjs';
+import { CORE_SELECT_API_TOTAL_COUNT_PROVIDER, CoreSelectApiTotalCountProvider } from '../select.model';
 import { LuEstablishmentGroupingComponent } from './establishment-grouping.component';
 import { EstablishmentGroupingService } from './establishment-grouping.service';
 import { LuCoreSelectEstablishment } from './models';
@@ -13,8 +14,17 @@ import { LuCoreSelectEstablishment } from './models';
 	selector: 'lu-simple-select[establishments],lu-multi-select[establishments]',
 	standalone: true,
 	exportAs: 'luEstablishments',
+	providers: [
+		{
+			provide: CORE_SELECT_API_TOTAL_COUNT_PROVIDER,
+			useExisting: forwardRef(() => LuCoreSelectEstablishmentsDirective),
+		},
+	],
 })
-export class LuCoreSelectEstablishmentsDirective<T extends LuCoreSelectEstablishment = LuCoreSelectEstablishment> extends ALuCoreSelectApiDirective<T> implements OnInit {
+export class LuCoreSelectEstablishmentsDirective<T extends LuCoreSelectEstablishment = LuCoreSelectEstablishment>
+	extends ALuCoreSelectApiDirective<T>
+	implements OnInit, CoreSelectApiTotalCountProvider
+{
 	#groupingService = inject(EstablishmentGroupingService);
 	#destroyRef = inject(DestroyRef);
 
@@ -87,6 +97,19 @@ export class LuCoreSelectEstablishmentsDirective<T extends LuCoreSelectEstablish
 			...(operationIds ? { operations: operationIds.join(',') } : {}),
 			...(appInstanceId ? { appInstanceId } : {}),
 		})),
+	);
+
+	public totalCount$ = toObservable(computed(() => ({ url: this._url(), filters: this._filters() }))).pipe(
+		debounceTime(250),
+		switchMap(({ url, filters }) =>
+			this.httpClient.get<{ count: number }>(url, {
+				params: {
+					...filters,
+					['fields.root']: 'count',
+				},
+			}),
+		),
+		map((res) => res?.count ?? 0),
 	);
 
 	protected override optionComparer = (a: T, b: T) => a.id === b.id;
