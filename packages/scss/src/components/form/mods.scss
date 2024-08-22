@@ -128,28 +128,34 @@
 @mixin overlay {
 	&:focus-within {
 		.textfield-input {
-			box-shadow: form.fakeBorderOverlay(var(--components-field-framed-color)), 0 0 0 4px var(--components-field-framed-color50);
+			box-shadow:
+				form.fakeBorderOverlay(var(--components-field-framed-color)),
+				0 0 0 4px var(--components-field-framed-color50);
 			z-index: 4;
 		}
 
 		.is-error {
 			.textfield-input {
-				background-color: var(--colors-white-color) !important;
+				background-color: var(--palettes-neutral-0) !important;
 			}
 		}
 
 		.is-warning {
 			.textfield-input {
 				background-color: #444242;
-				box-shadow: form.fakeBorderOverlay(var(--palettes-warning-700)), 0 0 0 4px var(--palettes-warning-50);
+				box-shadow:
+					form.fakeBorderOverlay(var(--palettes-warning-700)),
+					0 0 0 4px var(--palettes-warning-50);
 			}
 		}
 
 		.is-valid,
 		.is-success {
 			.textfield-input {
-				background-color: var(--colors-white-color);
-				box-shadow: form.fakeBorderOverlay(var(--palettes-success-700)), 0 0 0 4px var(--palettes-success-50);
+				background-color: var(--palettes-neutral-0);
+				box-shadow:
+					form.fakeBorderOverlay(var(--palettes-success-700)),
+					0 0 0 4px var(--palettes-success-50);
 			}
 		}
 	}
@@ -198,7 +204,7 @@
 
 @mixin framed {
 	margin-bottom: 0;
-	background-color: var(--colors-white-color);
+	background-color: var(--palettes-neutral-0);
 	padding: 0;
 	box-shadow: form.fakeBorderOverlay(var(--palettes-neutral-200));
 	transition: background-color var(--commons-animations-durations-standard);
@@ -219,13 +225,15 @@
 		&:focus {
 			position: relative;
 			z-index: 1;
-			background-color: var(--colors-white-color);
+			background-color: var(--palettes-neutral-0);
 			box-shadow: form.fakeBorderOverlay(var(--palettes-neutral-600));
 		}
 
 		&:focus {
 			z-index: 4;
-			box-shadow: form.fakeBorderOverlay(var(--palettes-neutral-600)), 0 0 0 4px var(--palettes-neutral-50);
+			box-shadow:
+				form.fakeBorderOverlay(var(--palettes-neutral-600)),
+				0 0 0 4px var(--palettes-neutral-50);
 		}
 	}
 

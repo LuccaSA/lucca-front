@@ -1,7 +1,7 @@
 @use '@lucca-front/scss/src/commons/utils/media';
 
 @mixin component($atRoot: 'without: rule') {
-	padding: var(--pr-t-spacings-400) 2.5rem var(--pr-t-spacings-300);
+	padding: var(--components-pageHeader-padding);
 
 	.menu {
 		margin-top: var(--pr-t-spacings-100);
@@ -18,7 +18,7 @@
 
 		.pageHeader-content-title {
 			display: flex;
-			column-gap: var(--pr-t-spacings-200);
+			column-gap: var(--pr-t-spacings-100);
 			align-items: center;
 			flex-wrap: wrap;
 		}

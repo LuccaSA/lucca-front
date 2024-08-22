@@ -53,7 +53,7 @@
 .lu-picker-content-add {
 	position: sticky;
 	bottom: 0;
-	background: white;
+	background-color: var(--palettes-neutral-0);
 	box-shadow: var(--pr-t-elevation-shadow-overflow);
 	padding: var(--pr-t-spacings-50);
 	margin: 0 calc(var(--pr-t-spacings-50) * -1);
@@ -96,7 +96,7 @@
 	padding-bottom: var(--pr-t-spacings-100);
 
 	.textfield-input {
-		background-color: var(--colors-white-color);
+		background-color: var(--palettes-neutral-0);
 		outline: none;
 	}
 }

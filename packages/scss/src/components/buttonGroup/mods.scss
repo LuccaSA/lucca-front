@@ -5,7 +5,7 @@
 	box-shadow: 0 0 0 1px var(--palettes-400, var(--palettes-neutral-400));
 
 	&:is(.is-disabled, .disabled) {
-		box-shadow: 0 0 0 1px var(--palettes-neutral-200);
+		box-shadow: 0 0 0 1px var(--palettes-neutral-200); // disabled token candidate
 	}
 
 	.button {
@@ -25,7 +25,7 @@
 			}
 
 			&:is([disabled], .is-disabled) {
-				box-shadow: 0 0 0 1px var(--palettes-neutral-200);
+				box-shadow: 0 0 0 1px var(--palettes-neutral-200); // disabled token candidate
 			}
 		}
 	}

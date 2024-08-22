@@ -1,7 +1,2 @@
 @use '@lucca-front/scss/src/components/userPopover';
-@import 'definitions/user/user-picture';
-
-lu-user-popover-panel {
-	@include userPictureVars;
-	@include userPictureStyle;
-}
+@use '@lucca-front/scss/src/components/avatar';

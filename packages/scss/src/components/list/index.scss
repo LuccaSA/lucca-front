@@ -14,7 +14,8 @@
 		@include draggable;
 	}
 
+	// .mod-actionsHidden is deprecated
 	&.mod-actionsHidden {
-		@include actionsHidden; // Legacy
+		@include actionsHidden;
 	}
 }

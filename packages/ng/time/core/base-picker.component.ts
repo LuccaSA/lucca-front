@@ -1,7 +1,7 @@
-import { ISO8601Duration, ISO8601Time } from './date-primitives';
 import { Component, computed, input, model, ViewChild } from '@angular/core';
-import { TimePickerPartComponent } from './time-picker-part.component';
 import { ControlValueAccessor } from '@angular/forms';
+import { ISO8601Duration, ISO8601Time } from './date-primitives';
+import { TimePickerPartComponent } from './time-picker-part.component';
 
 @Component({
 	template: '',

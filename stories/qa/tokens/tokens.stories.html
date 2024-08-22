@@ -14,9 +14,24 @@
 <h3>Shadow</h3>
 <section class="contentSection">
 	<div class="demo-block">
-		<div class="demo-surface" style="background-color: var(--pr-t-elevation-surface-raised); box-shadow: var(--pr-t-elevation-shadow-raised);">Raised</div>
-		<div class="demo-surface" style="background-color: var(--pr-t-elevation-surface-raised); box-shadow: var(--pr-t-elevation-shadow-overflow);">Overflow</div>
-		<div class="demo-surface" style="background-color: var(--pr-t-elevation-surface-raised); box-shadow: var(--pr-t-elevation-shadow-overlay);">Overlay</div>
+		<div
+			class="demo-surface"
+			style="background-color: var(--pr-t-elevation-surface-raised); box-shadow: var(--pr-t-elevation-shadow-raised)"
+		>
+			Raised
+		</div>
+		<div
+			class="demo-surface"
+			style="background-color: var(--pr-t-elevation-surface-raised); box-shadow: var(--pr-t-elevation-shadow-overflow)"
+		>
+			Overflow
+		</div>
+		<div
+			class="demo-surface"
+			style="background-color: var(--pr-t-elevation-surface-raised); box-shadow: var(--pr-t-elevation-shadow-overlay)"
+		>
+			Overlay
+		</div>
 	</div>
 </section>
 <h2>Spacings</h2>
@@ -52,11 +67,10 @@
 	</div>
 </section>
 
-
 <style>
 	.demo-block {
 		display: flex;
-		background: var(--palettes-neutral-25);
+		background-color: var(--palettes-neutral-25);
 		padding: var(--pr-t-spacings-200);
 		gap: var(--pr-t-spacings-100);
 	}
@@ -82,7 +96,7 @@
 		position: absolute;
 		top: -1rem;
 		right: -1rem;
-		background: var(--colors-white-color);
+		background-color: var(--palettes-neutral-0);
 		border-radius: var(--commons-borderRadius-full);
 	}
 
@@ -93,12 +107,12 @@
 	}
 
 	.demo-spacing {
-		background: var(--pr-t-elevation-surface-sunken);
+		background-color: var(--pr-t-elevation-surface-sunken);
 		border-radius: var(--commons-borderRadius-M);
 	}
 
 	.demo-spacing div {
-		background: var(--pr-t-elevation-surface-raised);
+		background-color: var(--pr-t-elevation-surface-raised);
 		width: 2.5rem;
 		height: 2.5rem;
 		display: inline-flex;

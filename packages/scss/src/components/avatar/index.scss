@@ -1,26 +1,54 @@
 @use 'exports' as *;
 
-.avatar {
+.avatar, .lu-user-picture { // lu-user-picture is deprecated
 	@include vars;
 	@include component;
-}
 
-.avatarWrapper {
-	@include varsWrapper;
-
-	&.mod-XL {
-		@include XL;
-	}
-
-	&.mod-L {
-		@include L;
+	&.mod-XS {
+		@include XS;
 	}
 
 	&.mod-S {
 		@include S;
 	}
 
+	&.mod-L {
+		@include L;
+	}
+
+	&.mod-XL {
+		@include XL;
+	}
+
+	&.mod-XXL {
+		@include XXL;
+	}
+
+	&.mod-XXXL {
+		@include XXXL;
+	}
+
+	&.mod-placeholder {
+		@include placeholder;
+	}
+}
+
+.avatarWrapper {
+	@include varsWrapper;
+
+	&.mod-XL {
+		@include wrapperXL;
+	}
+
+	&.mod-L {
+		@include wrapperL;
+	}
+
+	&.mod-S {
+		@include wrapperS;
+	}
+
 	&.mod-XS {
-		@include XS;
+		@include wrapperXS;
 	}
 }

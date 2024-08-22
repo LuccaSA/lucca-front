@@ -5,6 +5,11 @@
 	--component-textField-fontSize: var(--sizes-S-fontSize);
 	--component-textField-lineHeight: var(--sizes-S-lineHeight);
 	--component-textField-padding: var(--pr-t-spacings-75);
+	--component-textField-affix-size: 1.5rem;
+
+	.textField-input-affix-toggle {
+		@include icon.S;
+	}
 
 	.textField-input-affix-clear {
 		@include clear.S;

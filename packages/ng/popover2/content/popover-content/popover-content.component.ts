@@ -7,11 +7,12 @@ import { Subject } from 'rxjs';
 import { POPOVER_CONFIG } from '../../popover-tokens';
 import { LU_POPOVER2_TRANSLATIONS } from '../../popover.translate';
 import { getIntl } from '@lucca-front/ng/core';
+import { CdkObserveContent } from '@angular/cdk/observers';
 
 @Component({
 	selector: 'lu-popover-content',
 	standalone: true,
-	imports: [NgTemplateOutlet, ButtonComponent, IconComponent],
+	imports: [NgTemplateOutlet, ButtonComponent, IconComponent, CdkObserveContent],
 	templateUrl: './popover-content.component.html',
 	styleUrl: './popover-content.component.scss',
 
@@ -23,18 +24,20 @@ export class PopoverContentComponent implements AfterViewInit {
 
 	#elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
 
-	#config = inject(POPOVER_CONFIG);
+	config = inject(POPOVER_CONFIG);
 
 	destroyRef = inject(DestroyRef);
 
 	@HostBinding('attr.id')
-	contentId = this.#config.contentId;
+	contentId = this.config.contentId;
 
-	content: TemplateRef<unknown> = this.#config.content;
+	content: TemplateRef<unknown> = this.config.content;
 
-	#focusManager = new PopoverFocusTrap(this.#elementRef.nativeElement, this.#config.triggerElement);
+	#focusManager = new PopoverFocusTrap(this.#elementRef.nativeElement, this.config.triggerElement);
 
 	closed$ = new Subject<void>();
+
+	contentChangedDebounceTime = 100;
 
 	mouseEnter$ = new Subject<void>();
 
@@ -50,24 +53,26 @@ export class PopoverContentComponent implements AfterViewInit {
 		this.mouseLeave$.next();
 	}
 
+	contentChanged() {
+		this.config.ref.updatePosition();
+	}
+
 	ngAfterViewInit(): void {
 		this.#focusManager.attachAnchors();
-		if (!this.#config.disableFocusManipulation) {
+		if (!this.config.disableFocusManipulation) {
 			void this.#focusManager.focusInitialElementWhenReady();
 		}
 	}
 
 	grabFocus(): void {
-		if (!this.#config.disableFocusManipulation) {
-			this.#focusManager.focusInitialElement();
-		}
+		this.#focusManager.focusInitialElement();
 	}
 
 	@HostListener('window:keydown.escape')
 	close(): void {
-		if (!this.#config.disableFocusManipulation) {
+		if (!this.config.disableFocusManipulation) {
 			// Focus initial trigger element
-			this.#config.triggerElement.focus();
+			this.config.triggerElement.focus();
 		}
 		// Tell the directive we're closed now
 		this.closed$.next();
@@ -75,6 +80,6 @@ export class PopoverContentComponent implements AfterViewInit {
 		this.mouseEnter$.complete();
 		this.mouseLeave$.complete();
 		// Detach overlay
-		this.#config.ref.dispose();
+		this.config.ref.dispose();
 	}
 }

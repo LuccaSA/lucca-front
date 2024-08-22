@@ -10,8 +10,6 @@ export interface ILuDateInputLabel {
 	placeholderDay: string;
 	placeholderMonth: string;
 	placeholderYear: string;
-	formatMonth: string;
-	formatYear: string;
 }
 
 export const luDateInputTranslations: LuTranslation<ILuDateInputLabel> = Translations;

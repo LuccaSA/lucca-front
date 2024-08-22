@@ -1,6 +1,6 @@
-@use '@lucca-front/icons/src/commons/utils/icon';
+// Deprecated
 
-// Refactor: This style should be in Avatar SCSS component
+@use '@lucca-front/icons/src/commons/utils/icon';
 
 @mixin userPictureVars {
 	--components-userPicture-XS-image: 1.5rem;
@@ -24,8 +24,6 @@
 	--components-userPicture-XXXL-image: 6rem;
 	--components-userPicture-XXXL-fontSize: 1.75rem;
 	--components-userPicture-XXXL-placeholder: 2.5rem;
-
-	// deprecated
 	--components-userPicture-XXS-image: 1rem;
 	--components-userPicture-XXS-fontSize: 0.5625rem;
 }
@@ -42,7 +40,7 @@
 		background-position: center;
 		background-size: cover;
 		background-repeat: no-repeat;
-		color: var(--colors-white-color);
+		color: var(--palettes-neutral-0);
 		display: flex;
 		font-size: var(--components-user-picture-font-size, var(--components-userPicture-M-fontSize));
 		font-weight: 600;
@@ -95,7 +93,7 @@
 	}
 
 	&.mod-border {
-		box-shadow: 0 0 0 2px var(--colors-white-color);
+		box-shadow: 0 0 0 2px var(--palettes-neutral-0);
 	}
 
 	&.mod-placeholder {

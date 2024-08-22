@@ -97,14 +97,14 @@
 	.radiosfield-messages-error,
 	.checkboxesfield-messages-error {
 		background-color: var(--palettes-error-700);
-		color: var(--colors-white-color);
+		color: var(--palettes-neutral-0);
 	}
 
 	.textfield-messages-warning,
 	.radiosfield-messages-warning,
 	.checkboxesfield-messages-warning {
 		background-color: var(--palettes-warning-700);
-		color: var(--colors-white-color);
+		color: var(--palettes-neutral-0);
 	}
 
 	.textfield-messages-valid,
@@ -114,14 +114,14 @@
 	.radiosfield-messages-success,
 	.checkboxesfield-messages-success {
 		background-color: var(--palettes-success-700);
-		color: var(--colors-white-color);
+		color: var(--palettes-neutral-0);
 	}
 
 	.textfield-messages-helper,
 	.radiosfield-messages-helper,
 	.checkboxesfield-messages-helper {
 		background-color: var(--palettes-neutral-600);
-		color: var(--colors-white-color);
+		color: var(--palettes-neutral-0);
 	}
 
 	.textfield-input,
@@ -139,17 +139,17 @@
 
 	.textfield-input {
 		&:not(:disabled, .is-error, .is-success, .is-valid, .is-warning, .is-invalid) {
-			background-color: var(--colors-white-color);
+			background-color: var(--palettes-neutral-0); // disabled token candidate
 
 			&::placeholder {
-				color: var(--palettes-neutral-400);
+				color: var(--commons-disabled-placeholder);
 			}
 
 			&:focus,
 			&:hover {
 				position: relative;
 				z-index: 1;
-				background-color: var(--colors-white-color);
+				background-color: var(--palettes-neutral-0); // disabled token candidate
 				box-shadow: form.fakeBorderOverlay(var(--components-field-framed-color));
 
 				~ .textfield-messages,
@@ -161,7 +161,9 @@
 
 			&:focus {
 				z-index: 4;
-				box-shadow: form.fakeBorderOverlay(var(--components-field-framed-color)), 0 0 0 4px var(--components-field-framed-color50);
+				box-shadow:
+					form.fakeBorderOverlay(var(--components-field-framed-color)),
+					0 0 0 4px var(--components-field-framed-color50);
 			}
 		}
 	}
@@ -214,8 +216,10 @@
 		}
 
 		&:focus {
-			background-color: white !important;
-			box-shadow: form.fakeBorderOverlay(var(--palettes-#{$state}-700)), 0 0 0 4px var(--palettes-#{$state}-50) !important;
+			background-color: var(--palettes-neutral-0) !important;
+			box-shadow:
+				form.fakeBorderOverlay(var(--palettes-#{$state}-700)),
+				0 0 0 4px var(--palettes-#{$state}-50) !important;
 		}
 
 		&::placeholder {
@@ -235,8 +239,10 @@
 			}
 
 			&:focus {
-				box-shadow: form.fakeBorderOverlay(var(--palettes-#{$state}-700)), 0 0 0 4px var(--palettes-#{$state}-50) !important;
-				background-color: white !important;
+				box-shadow:
+					form.fakeBorderOverlay(var(--palettes-#{$state}-700)),
+					0 0 0 4px var(--palettes-#{$state}-50) !important;
+				background-color: var(--palettes-neutral-0) !important;
 			}
 		}
 	}
@@ -252,8 +258,10 @@
 	}
 
 	&:focus-within {
-		background-color: white;
-		box-shadow: form.fakeBorderOverlay(var(--palettes-#{$state}-700)), 0 0 0 4px var(--palettes-#{$state}-50);
+		background-color: var(--palettes-neutral-0);
+		box-shadow:
+			form.fakeBorderOverlay(var(--palettes-#{$state}-700)),
+			0 0 0 4px var(--palettes-#{$state}-50);
 
 		.textfield-messages,
 		.radiosfield-messages,
@@ -303,8 +311,10 @@
 			}
 
 			&:focus {
-				background-color: white;
-				box-shadow: form.fakeBorderOverlay(var(--palettes-error-700)), 0 0 0 4px var(--palettes-error-50);
+				background-color: var(--palettes-neutral-0);
+				box-shadow:
+					form.fakeBorderOverlay(var(--palettes-error-700)),
+					0 0 0 4px var(--palettes-error-50);
 
 				~ .textfield-messages {
 					transform: translateY(100%);

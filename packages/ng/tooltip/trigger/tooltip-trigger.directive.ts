@@ -9,11 +9,11 @@ import {
 	HostBinding,
 	HostListener,
 	Input,
+	OnDestroy,
 	Renderer2,
 	booleanAttribute,
 	inject,
 	numberAttribute,
-	OnDestroy,
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { SafeHtml } from '@angular/platform-browser';
@@ -66,6 +66,9 @@ export class LuTooltipTriggerDirective implements AfterContentInit, OnDestroy {
 		}
 	}
 
+	@Input({ transform: booleanAttribute })
+	luTooltipOnlyForDisplay = false;
+
 	@Input()
 	luTooltipPosition: LuPopoverPosition = 'above';
 
@@ -113,7 +116,7 @@ export class LuTooltipTriggerDirective implements AfterContentInit, OnDestroy {
 
 	@HostBinding('attr.aria-describedby')
 	get ariaDescribedBy() {
-		if (this.#disabled || this.luTooltipWhenEllipsis) {
+		if (this.#disabled || this.luTooltipWhenEllipsis || this.luTooltipOnlyForDisplay) {
 			return null;
 		}
 		return `${this.#generatedId}-panel`;

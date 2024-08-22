@@ -1,7 +1,7 @@
 @mixin disabled {
 	&,
 	&::file-selector-button {
-		cursor: not-allowed;
+		cursor: not-allowed; // disabled token candidate
 	}
 
 	~ .file-content {
@@ -9,7 +9,7 @@
 		.file-or,
 		.file-formats,
 		.file-button {
-			color: var(--palettes-neutral-500);
+			color: var(--palettes-neutral-500); // disabled token candidate
 		}
 	}
 }
@@ -92,7 +92,7 @@
 		&:hover,
 		&:focus,
 		&:active {
-			cursor: not-allowed;
+			cursor: not-allowed; // disabled token candidate
 			box-shadow: 0 0 0 1px inset;
 			background-color: transparent;
 		}

@@ -1,14 +1,10 @@
 import { Meta, StoryFn } from '@storybook/angular';
 
-interface IndexTableBasicStory {
-
-}
+interface IndexTableBasicStory {}
 
 export default {
 	title: 'Documentation/Listings/Index Table/Basic',
-	argTypes: {
-
-	},
+	argTypes: {},
 } as Meta;
 
 function getTemplate(args: IndexTableBasicStory): string {
@@ -23,18 +19,36 @@ function getTemplate(args: IndexTableBasicStory): string {
 	<tbody class="indexTable-body">
 		<tr class="indexTable-body-row">
 			<td class="indexTable-body-row-cell">
-				<a href="#" class="indexTable-body-row-cell-action">See details</a>
-				Content
+				<a href="#" class="indexTable-body-row-cell-link">Content</a>
 			</td>
 			<td class="indexTable-body-row-cell">Content</td>
 			<td class="indexTable-body-row-cell">Content</td>
 		</tr>
 		<tr class="indexTable-body-row">
 			<td class="indexTable-body-row-cell">
-				<a href="#" class="indexTable-body-row-cell-action">See details</a>
+				<a href="#" class="indexTable-body-row-cell-link">Content</a>
+			</td>
+			<td class="indexTable-body-row-cell mod-allowTextSelection">
+				Content selectable
+			</td>
+			<td class="indexTable-body-row-cell">
 				Content
 			</td>
+		</tr>
+		<tr class="indexTable-body-row">
+			<td class="indexTable-body-row-cell">
+				<a href="#" class="indexTable-body-row-cell-link">Content</a>
+			</td>
+			<td class="indexTable-body-row-cell"><a href="#">Content actionable</a></td>
 			<td class="indexTable-body-row-cell">Content</td>
+		</tr>
+		<!-- indexTable-body-row-cell-action is deprecated -->
+		<tr class="indexTable-body-row">
+			<td class="indexTable-body-row-cell">
+				<a href="#" class="indexTable-body-row-cell-action">Action</a>
+				Content
+			</td>
+			<td class="indexTable-body-row-cell">Content with deprecated action</td>
 			<td class="indexTable-body-row-cell">Content</td>
 		</tr>
 	</tbody>
@@ -47,4 +61,4 @@ const Template: StoryFn<IndexTableBasicStory> = (args) => ({
 });
 
 export const Basic = Template.bind({});
-Basic.args = { };
+Basic.args = {};

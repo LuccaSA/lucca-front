@@ -2,16 +2,45 @@
 @use '@lucca-front/scss/src/commons/utils/a11y';
 
 @mixin component($atRoot: 'without: rule') {
-	box-shadow: 0 0 0 var(--components-avatar-border) var(--components-avatar-background);
+	display: inline-block;
+	vertical-align: middle;
 	border-radius: var(--commons-borderRadius-full);
+	width: var(--components-avatar-size);
+	aspect-ratio: 1;
 
 	@at-root ($atRoot) {
+		.avatar-picture, .picture { // .picture is deprecated
+			background-color: var(--palettes-neutral-200);
+			border-radius: var(--commons-borderRadius-full);
+			background-position: center;
+			background-size: cover;
+			background-repeat: no-repeat;
+			width: var(--components-avatar-size);
+			object-fit: cover;
+			object-position: center;
+			aspect-ratio: 1;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+
+		.avatar-picture-initials, .picture { // .picture is deprecated
+			font-size: var(--components-avatar-fontSize);
+			font-weight: 600;
+			line-height: 1;
+			color: var(--palettes-neutral-0);
+		}
+
 		.avatarWrapper {
 			@include reset.list;
 
 			display: flex;
 			flex-wrap: wrap;
 			align-content: flex-start;
+
+			.avatar {
+				box-shadow: 0 0 0 var(--components-avatar-border) var(--components-avatar-background);
+			}
 		}
 
 		.avatarWrapper-item {

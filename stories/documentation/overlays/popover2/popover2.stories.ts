@@ -19,7 +19,7 @@ export default {
 		luPopover2: HiddenArgType,
 		luPopoverTrigger: {
 			control: 'select',
-			options: ['click', 'click+hover'],
+			options: ['click', 'click+hover', 'hover+focus'],
 		},
 	},
 } as Meta;
@@ -64,5 +64,6 @@ export const Basic: StoryObj<PopoverDirective> = {
 		luPopoverOpenDelay: 300,
 		luPopoverDisabled: false,
 		luPopoverPosition: 'above',
+		luPopoverNoCloseButton: false,
 	},
 };

@@ -1,14 +1,10 @@
 import { Meta, StoryFn } from '@storybook/angular';
 
-interface IndexTableNestedStory {
-
-}
+interface IndexTableNestedStory {}
 
 export default {
 	title: 'Documentation/Listings/Index Table/Nested',
-	argTypes: {
-
-	},
+	argTypes: {},
 } as Meta;
 
 function getTemplate(args: IndexTableNestedStory): string {
@@ -35,24 +31,21 @@ function getTemplate(args: IndexTableNestedStory): string {
 		</tr>
 		<tr class="indexTable-body-row" id="r1">
 			<td class="indexTable-body-row-cell" header="y2021">
-				<a href="#" class="indexTable-body-row-cell-action">See details</a>
-				Content
+				<a href="#" class="indexTable-body-row-cell-link">Content</a>
 			</td>
 			<td class="indexTable-body-row-cell" header="y2021">Content</td>
 			<td class="indexTable-body-row-cell" header="y2021">Content</td>
 		</tr>
 		<tr class="indexTable-body-row" id="r2">
 			<td class="indexTable-body-row-cell" header="y2021">
-				<a href="#" class="indexTable-body-row-cell-action">See details</a>
-				Content
+				<a href="#" class="indexTable-body-row-cell-link">Content</a>
 			</td>
 			<td class="indexTable-body-row-cell" header="y2021">Content</td>
 			<td class="indexTable-body-row-cell" header="y2021">Content</td>
 		</tr>
 		<tr class="indexTable-body-row" id="r3">
 			<td class="indexTable-body-row-cell" header="y2021">
-				<a href="#" class="indexTable-body-row-cell-action">See details</a>
-				Content
+				<a href="#" class="indexTable-body-row-cell-link">Content</a>
 			</td>
 			<td class="indexTable-body-row-cell" header="y2021">Content</td>
 			<td class="indexTable-body-row-cell" header="y2021">Content</td>
@@ -73,8 +66,7 @@ function getTemplate(args: IndexTableNestedStory): string {
 		</tr>
 		<tr class="indexTable-body-row" id="r5">
 			<td class="indexTable-body-row-cell" header="y2022">
-				<a href="#" class="indexTable-body-row-cell-action">See details</a>
-				Content
+				<a href="#" class="indexTable-body-row-cell-link">Content</a>
 			</td>
 			<td class="indexTable-body-row-cell" header="y2022">Content</td>
 			<td class="indexTable-body-row-cell" header="y2022">Content</td>
@@ -89,4 +81,4 @@ const Template: StoryFn<IndexTableNestedStory> = (args) => ({
 });
 
 export const Nested = Template.bind({});
-Nested.args = { };
+Nested.args = {};
