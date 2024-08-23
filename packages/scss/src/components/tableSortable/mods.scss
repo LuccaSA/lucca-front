@@ -52,7 +52,8 @@
 		text-align: left;
 
 		.indexTable & {
-			display: flex;
+			display: inline-flex;
+			width: fit-content;
 		}
 
 		&::after {
@@ -72,8 +73,21 @@
 }
 
 @mixin sortableLegacyAlignRight {
-	&::after {
-		content: none;
+	.table & {
+		&::after {
+			content: none;
+		}
+	}
+
+	.indexTable & {
+		&::before {
+			content: none;
+		}
+
+		&::after {
+			margin-left: 0;
+			margin-right: var(--pr-t-spacings-50);
+		}
 	}
 
 	&::before {
@@ -105,6 +119,12 @@
 
 	&:is(button) {
 		text-align: right;
+	}
+}
+
+@mixin sortableLegacy2AlignRight {
+	&::before {
+		margin-right: 0;
 	}
 }
 
