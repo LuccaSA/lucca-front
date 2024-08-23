@@ -91,12 +91,10 @@ export const Basic: StoryObj<NumberFormatInputComponent & { disabled: boolean } 
 				},
 				argTypes,
 			)}>
-
 	<lu-number-format-input
 	${generateInputs(inputArgs, argTypes)}
 		[(ngModel)]="example">
 	</lu-number-format-input>
-
 </lu-form-field>
 
 {{example}}`),
@@ -113,7 +111,6 @@ export const Basic: StoryObj<NumberFormatInputComponent & { disabled: boolean } 
 		disabled: false,
 		inlineMessage: 'Seuls les nombres sont acceptés',
 		inlineMessageState: 'default',
-		size: 'M',
 		placeholder: 'Placeholder',
 		tooltip: 'Je suis un message d’aide',
 		formatStyle: 'decimal',
@@ -137,12 +134,10 @@ export const WithCurrency: StoryObj<NumberFormatInputComponent & { disabled: boo
 				},
 				argTypes,
 			)}>
-
 	<lu-number-format-input
 		${generateInputs(inputArgs, argTypes)}
 		[(ngModel)]="example">
 	</lu-number-format-input>
-
 </lu-form-field>
 
 {{example}}`),
@@ -159,7 +154,6 @@ export const WithCurrency: StoryObj<NumberFormatInputComponent & { disabled: boo
 		disabled: false,
 		inlineMessage: 'Seuls les nombres sont acceptés',
 		inlineMessageState: 'default',
-		size: 'M',
 		placeholder: 'Placeholder',
 		tooltip: 'Je suis un message d’aide',
 		formatStyle: 'currency',
@@ -184,12 +178,10 @@ export const WithUnitKm: StoryObj<NumberFormatInputComponent & { disabled: boole
 				},
 				argTypes,
 			)}>
-
 	<lu-number-format-input
 		${generateInputs(inputArgs, argTypes)}
 		[(ngModel)]="example">
 	</lu-number-format-input>
-
 </lu-form-field>
 
 {{example}}`),
@@ -206,7 +198,6 @@ export const WithUnitKm: StoryObj<NumberFormatInputComponent & { disabled: boole
 		disabled: false,
 		inlineMessage: 'Seuls les nombres sont acceptés',
 		inlineMessageState: 'default',
-		size: 'M',
 		placeholder: 'Placeholder',
 		tooltip: 'Je suis un message d’aide',
 		formatStyle: 'unit',
@@ -231,12 +222,10 @@ export const WithPercent: StoryObj<NumberFormatInputComponent & { disabled: bool
 				},
 				argTypes,
 			)}>
-
 	<lu-number-format-input
 		${generateInputs(inputArgs, argTypes)}
 		[(ngModel)]="example">
 	</lu-number-format-input>
-
 </lu-form-field>
 
 {{example}}`),
@@ -253,7 +242,6 @@ export const WithPercent: StoryObj<NumberFormatInputComponent & { disabled: bool
 		disabled: false,
 		inlineMessage: 'Seuls les nombres sont acceptés',
 		inlineMessageState: 'default',
-		size: 'M',
 		placeholder: 'Placeholder',
 		tooltip: 'Je suis un message d’aide',
 		formatStyle: 'percent',

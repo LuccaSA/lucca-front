@@ -38,6 +38,9 @@ export default {
 				defaultValue: { summary: 'false' },
 			},
 		},
+		luTooltipOnlyForDisplay: {
+			description: '[v18.2]',
+		},
 	},
 	decorators: [
 		applicationConfig({ providers: [provideAnimations()] }),
