@@ -26,12 +26,6 @@
 	}
 
 	&::before {
-		@supports (content: '*' / '') {
-			content: var(--icon-content) / '';
-		}
-
-		@supports not (content: '*' / '') {
-			content: var(--icon-content);
-		}
+		content: var(--icon-content) / '';
 	}
 }
