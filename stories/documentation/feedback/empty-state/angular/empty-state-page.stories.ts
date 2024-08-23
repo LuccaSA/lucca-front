@@ -142,7 +142,7 @@ export default {
 			},
 			description: '[v18.1]',
 		},
-		title: {
+		heading: {
 			description: '[v18.1] Optional',
 		},
 		description: {
