@@ -8,8 +8,7 @@ export default {
 } as Meta;
 
 function getTemplate(args: UserAvatarGroupClickableStory): string {
-	return `
-<ul class="avatarWrapper">
+	return `<ul class="avatarWrapper">
 	<li class="avatarWrapper-item">
 		<a href="#" class="avatarWrapper-item-action">
 			<span class="avatar">
@@ -34,8 +33,7 @@ function getTemplate(args: UserAvatarGroupClickableStory): string {
 			<span class="u-mask">Finn Mertens</span>
 		</a>
 	</li>
-</ul>
-	`;
+</ul>`;
 }
 
 const Template: StoryFn<UserAvatarGroupClickableStory> = (args) => ({

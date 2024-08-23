@@ -8,8 +8,7 @@ export default {
 } as Meta;
 
 function getTemplate(args: UserAvatarGroupBasicStory): string {
-	return `
-<ul class="avatarWrapper">
+	return `<ul class="avatarWrapper">
 	<li class="avatarWrapper-item">
 		<span class="avatar">
 			<img alt="" class="avatar-picture" loading="lazy" src="https://cdn.lucca.fr/lucca-front/avatars/finn.png" />
@@ -28,8 +27,7 @@ function getTemplate(args: UserAvatarGroupBasicStory): string {
 		</span>
 		<span class="u-mask">Finn Mertens</span>
 	</li>
-</ul>
-	`;
+</ul>`;
 }
 
 const Template: StoryFn<UserAvatarGroupBasicStory> = (args) => ({

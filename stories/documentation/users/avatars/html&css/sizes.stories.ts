@@ -8,8 +8,7 @@ export default {
 } as Meta;
 
 function getTemplate(args: UserAvatarSizesStory): string {
-	return `
-<span class="avatar mod-XS">
+	return `<span class="avatar mod-XS">
 	<img alt="" class="avatar-picture" loading="lazy" src="https://cdn.lucca.fr/lucca-front/avatars/finn.png" />
 </span>
 <span class="avatar mod-S">
@@ -29,8 +28,7 @@ function getTemplate(args: UserAvatarSizesStory): string {
 </span>
 <span class="avatar mod-XXXL">
 	<img alt="" class="avatar-picture" loading="lazy" src="https://cdn.lucca.fr/lucca-front/avatars/finn.png" />
-</span>
-	`;
+</span>`;
 }
 
 const Template: StoryFn<UserAvatarSizesStory> = (args) => ({
