@@ -1,7 +1,7 @@
 import { Component, Input, Optional } from '@angular/core';
 import { LuUserPictureModule } from '@lucca-front/ng/user';
 import { Meta, StoryFn } from '@storybook/angular';
-import { squidwards } from '../user.mocks';
+import { squidwards } from '../../user.mocks';
 
 @Component({
 	selector: 'avatar-stories',
@@ -134,7 +134,7 @@ class AvatarStory {
 }
 
 export default {
-	title: 'Documentation/Users/Avatar/Group',
+	title: 'Documentation/Users/Avatar/Angular/Group',
 	component: AvatarStory,
 	argTypes: {
 		sizes: {
