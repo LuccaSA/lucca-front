@@ -7,6 +7,10 @@
 	&.mod-S {
 		@include S;
 	}
+
+	&.mod-vertical {
+		@include vertical;
+	}
 }
 
 .viewTabs-item-tab {
