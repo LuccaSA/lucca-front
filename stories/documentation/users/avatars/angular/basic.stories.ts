@@ -1,7 +1,7 @@
 import { Component, Input, Optional } from '@angular/core';
 import { ILuUser, LuDisplayInitials, LuUserPictureModule } from '@lucca-front/ng/user';
 import { Meta, StoryFn } from '@storybook/angular';
-import { bob, georges, squidwards } from '../user.mocks';
+import { bob, georges, squidwards } from '../../user.mocks';
 
 @Component({
 	selector: 'user-picture-stories',
@@ -17,7 +17,7 @@ class UserPictureStory {
 }
 
 export default {
-	title: 'Documentation/Users/Avatar/Basic',
+	title: 'Documentation/Users/Avatar/Angular/Basic',
 	component: UserPictureStory,
 	argTypes: {
 		user: {

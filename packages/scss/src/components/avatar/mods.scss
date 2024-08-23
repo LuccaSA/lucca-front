@@ -38,13 +38,15 @@
 }
 
 @mixin wrapperXL {
-	.avatar, .avatarWrapper-item-action {
+	.avatar,
+	.avatarWrapper-item-action {
 		@include XL;
 	}
 }
 
 @mixin wrapperL {
-	.avatar, .avatarWrapper-item-action {
+	.avatar,
+	.avatarWrapper-item-action {
 		@include L;
 	}
 }
@@ -52,7 +54,8 @@
 @mixin wrapperS {
 	--components-avatarWrapper-overlap: var(--pr-t-spacings-50);
 
-	.avatar, .avatarWrapper-item-action {
+	.avatar,
+	.avatarWrapper-item-action {
 		@include S;
 	}
 }
@@ -60,14 +63,16 @@
 @mixin wrapperXS {
 	--components-avatarWrapper-overlap: var(--pr-t-spacings-50);
 
-	.avatar, .avatarWrapper-item-action {
+	.avatar,
+	.avatarWrapper-item-action {
 		@include XS;
 	}
 }
 
 @mixin placeholder {
 	// .picture is deprecated
-	.avatar-picture, .picture {
+	.avatar-picture,
+	.picture {
 		background-color: var(--palettes-neutral-200) !important;
 
 		&::before {
@@ -79,6 +84,7 @@
 	}
 
 	// .userPicture-initials is deprecated
+	.avatar-picture-initials,
 	.userPicture-initials {
 		display: none;
 	}
