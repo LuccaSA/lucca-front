@@ -52,7 +52,8 @@
 		text-align: left;
 
 		.indexTable & {
-			display: flex;
+			display: inline-flex;
+			width: fit-content;
 		}
 
 		&::after {

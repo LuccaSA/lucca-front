@@ -2,7 +2,8 @@
 @use '@lucca-front/scss/src/commons/utils/a11y';
 
 @mixin sorted {
-	.table-head-row-cell-sortableButton {
+	.table-head-row-cell-sortableButton,
+	.indexTable-head-row-cell-sortableButton {
 		color: var(--palettes-neutral-900);
 
 		&::after {
@@ -68,7 +69,8 @@
 @mixin ascendingLegacy2 {
 	@include sorted;
 
-	.table-head-row-cell-sortableButton {
+	.table-head-row-cell-sortableButton,
+	.indexTable-head-row-cell-sortableButton {
 		&::after {
 			@include icon.generate('arrow_top');
 		}

@@ -58,7 +58,8 @@
 .table-head-row-cell {
 	&:not(:has(.tableSortable-arrows)) {
 		&.mod-sortable,
-		.table-head-row-cell-sortableButton {
+		.table-head-row-cell-sortableButton,
+		.indexTable-head-row-cell-sortableButton {
 			@include sortableLegacy;
 
 			.table.mod-S & {
