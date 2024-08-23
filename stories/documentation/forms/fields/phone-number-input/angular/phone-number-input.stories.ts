@@ -39,8 +39,21 @@ export const Basic: StoryObj<PhoneNumberInputComponent & FormFieldComponent> = {
 {{example}}`),
 		};
 	},
+	argTypes: {
+		size: {
+			options: ['M', 'S'],
+			control: {
+				type: 'select',
+			},
+		},
+		inlineMessageState: {
+			options: ['default', 'success', 'warning', 'error'],
+			control: {
+				type: 'select',
+			},
+		},
+	},
 	args: {
-		size: 'M',
 		label: 'Phone',
 		tooltip: 'Tooltip message',
 		hiddenLabel: false,

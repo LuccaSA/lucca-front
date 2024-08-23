@@ -20,7 +20,11 @@ export default {
 		luPopoverTrigger: {
 			control: 'select',
 			options: ['click', 'click+hover', 'hover+focus'],
+			description: '[v18.2] Hover + focus',
 		},
+		luPopoverNoCloseButton: {
+			description: '[v18.2]',
+		}
 	},
 } as Meta;
 
