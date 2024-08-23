@@ -3,7 +3,6 @@ import { Meta, StoryFn } from '@storybook/angular';
 interface viewTabsBasicStory {
 	size: string;
 	withNumericBadge: boolean;
-	modVertical: boolean;
 }
 
 export default {
@@ -27,19 +26,12 @@ export default {
 				type: 'boolean',
 			},
 		},
-		modVertical: {
-			control: {
-				type: 'boolean',
-			},
-		},
 	},
 } as Meta;
 
 function getTemplate(args: viewTabsBasicStory): string {
-	const vertical = args.modVertical ? 'mod-vertical' : '';
-
 	return `
-<ul class="viewTabs ${args.size} ${vertical}" role="tablist">
+<ul class="viewTabs ${args.size}" role="tablist">
 	<li class="viewTabs-item" role="presentation">
 		<button class="viewTabs-item-tab" type="button" role="tab" id="tab1" aria-controls="panel1" [attr.aria-selected]="tabActive === 1" [attr.tabindex]="tabActive === 1 ? null : '-1'">
 			Lorem
@@ -94,5 +86,4 @@ Basic.args = {
 	size: '',
 	tabActive: 1,
 	withNumericBadge: false,
-	modVertical: false,
 };
