@@ -13,15 +13,14 @@
 	position: var(--components-footer-position);
 
 	@at-root ($atRoot) {
-		.footer-content {
-			flex-grow: 1;
-		}
-
-		.footerResponsiveWrapper {
+		*:has(> &) {
 			container-type: inline-size;
 			container-name: footer;
-			bottom: 0;
-			position: var(--components-footer-position);
+			display: block;
+		}
+
+		.footer-content {
+			flex-grow: 1;
 		}
 
 		.footer-actions {

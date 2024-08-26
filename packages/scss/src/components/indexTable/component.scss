@@ -15,9 +15,10 @@
 	contain: paint;
 
 	@at-root ($atRoot) {
-		.indexTableWrapper {
+		*:has(> &) {
 			container-type: inline-size;
 			container-name: indexTable;
+			display: block;
 		}
 
 		.indexTable-head {

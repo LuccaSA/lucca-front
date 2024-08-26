@@ -15,9 +15,10 @@
 	max-width: 100%;
 
 	@at-root ($atRoot) {
-		.grid-containerWrapper {
+		*:has(> &) {
 			container-type: inline-size;
 			container-name: grid;
+			display: block;
 		}
 
 		.grid-column {

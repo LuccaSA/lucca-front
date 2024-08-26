@@ -41,7 +41,6 @@ function getTemplate(args: FooterBasicStory): string {
 	const containerMax = args.containerMax;
 	if (container && wrapper) {
 		return `
-	<div class="footerResponsiveWrapper">
 		<footer class="footer ${sticky}">
 			<div class="footer-containerOptional container ${containerMax}">
 				<div class="footer-content">Content</div>
@@ -51,10 +50,9 @@ function getTemplate(args: FooterBasicStory): string {
 				</div>
 			</div>
 		</footer>
-	</div>`;
+	`;
 	} else if (!container && wrapper) {
 		return `
-	<div class="footerResponsiveWrapper">
 		<footer class="footer ${sticky}">
 			<div class="footer-content">Content</div>
 			<div class="footer-actions">
@@ -62,32 +60,29 @@ function getTemplate(args: FooterBasicStory): string {
 				<button type="button" class="button mod-outlined">Button</button>
 			</div>
 		</footer>
-	</div>`;
+	`;
 	} else if (container && !wrapper) {
 		return `
-		<div class="footerResponsiveWrapper">
-			<footer class="footer ${sticky}">
-				<div class="footer-containerOptional container ${containerMax}">
-					<div class="footer-content">Content</div>
-					<div class="footer-actions">
-						<button type="button" class="button">Button</button>
-						<button type="button" class="button mod-outlined">Button</button>
-					</div>
-				</div>
-			</footer>
-		</div>`;
-	} else {
-		return `
-		<div class="footerResponsiveWrapper">
-			<footer class="footer ${sticky}">
+		<footer class="footer ${sticky}">
+			<div class="footer-containerOptional container ${containerMax}">
 				<div class="footer-content">Content</div>
 				<div class="footer-actions">
 					<button type="button" class="button">Button</button>
 					<button type="button" class="button mod-outlined">Button</button>
 				</div>
-			</footer>
-		</div>
-		`;
+			</div>
+		</footer>
+	`;
+	} else {
+		return `
+		<footer class="footer ${sticky}">
+			<div class="footer-content">Content</div>
+			<div class="footer-actions">
+				<button type="button" class="button">Button</button>
+				<button type="button" class="button mod-outlined">Button</button>
+			</div>
+		</footer>
+	`;
 	}
 }
 

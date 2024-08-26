@@ -6,9 +6,10 @@
 	}
 
 	@at-root ($atRoot) {
-		.pageHeaderResponsiveWrapper {
+		*:has(> &) {
 			container-type: inline-size;
 			container-name: pageHeader;
+			display: block;
 		}
 
 		.pageHeader-content {

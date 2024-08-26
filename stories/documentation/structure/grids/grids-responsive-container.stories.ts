@@ -10,14 +10,14 @@ export default {
 } as Meta;
 
 function getTemplate(args: GridsResponsiveStory): string {
-	return `<div class="grid-containerWrapper">
+	return `
 	<div class="grid mod-form" [attr.style]="'--grid-colspan: 4'">
 		<div class="grid-column" [attr.style]="'--grid-colspanAtContainerMinXXS: 2; --grid-colspanAtContainerMinS: 4;'"><div class="demo">1</div></div>
 		<div class="grid-column" [attr.style]="'--grid-colspanAtContainerMinXXS: 2; --grid-rowspanAtContainerMinS: 2;'"><div class="demo">2</div></div>
 		<div class="grid-column" [attr.style]="'--grid-colspanAtContainerMinXXS: 2;'"><div class="demo">3</div></div>
 		<div class="grid-column" [attr.style]="'--grid-colspanAtContainerMinXXS: 2; --grid-colspanAtContainerMinS: 2; --grid-columnAtContainerMinS: 3;'"><div class="demo">4</div></div>
 	</div>
-</div>`;
+`;
 }
 
 const Template: StoryFn<GridsResponsiveStory> = (args) => ({

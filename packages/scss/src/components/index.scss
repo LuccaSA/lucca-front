@@ -113,7 +113,7 @@
 
 @include errorPage.responsive($at: 'media');
 @include filters.responsive($at: 'media');
-@include footer.responsive($at: 'media');
+@include footer.responsive($at: 'container');
 @include header.responsive($at: 'media');
 @include indexTable.responsive($at: 'media');
 @include main.responsive($at: 'media');

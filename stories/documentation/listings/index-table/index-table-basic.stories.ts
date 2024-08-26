@@ -9,44 +9,42 @@ export default {
 
 function getTemplate(args: IndexTableBasicStory): string {
 	return `
-	<div class="indexTableWrapper">
-		<table class="indexTable">
-			<thead class="indexTable-head">
-				<tr class="indexTable-head-row">
-					<th class="indexTable-head-row-cell" scope="col">Label</th>
-					<th class="indexTable-head-row-cell" scope="col">Label</th>
-					<th class="indexTable-head-row-cell" scope="col">Label</th>
-				</tr>
-			</thead>
-			<tbody class="indexTable-body">
-				<tr class="indexTable-body-row">
-					<td class="indexTable-body-row-cell">
-						<a href="#" class="indexTable-body-row-cell-link">Content</a>
-					</td>
-					<td class="indexTable-body-row-cell">Content</td>
-					<td class="indexTable-body-row-cell">Content</td>
-				</tr>
-				<tr class="indexTable-body-row">
-					<td class="indexTable-body-row-cell">
-						<a href="#" class="indexTable-body-row-cell-link">Content</a>
-					</td>
-					<td class="indexTable-body-row-cell mod-allowTextSelection">
-						Content selectable
-					</td>
-					<td class="indexTable-body-row-cell">
-						Content
-					</td>
-				</tr>
-				<tr class="indexTable-body-row">
-					<td class="indexTable-body-row-cell">
-						<a href="#" class="indexTable-body-row-cell-link">Content</a>
-					</td>
-					<td class="indexTable-body-row-cell"><a href="#">Content actionable</a></td>
-					<td class="indexTable-body-row-cell">Content</td>
-				</tr>
-			</tbody>
-		</table>
-	</div>
+	<table class="indexTable">
+		<thead class="indexTable-head">
+			<tr class="indexTable-head-row">
+				<th class="indexTable-head-row-cell" scope="col">Label</th>
+				<th class="indexTable-head-row-cell" scope="col">Label</th>
+				<th class="indexTable-head-row-cell" scope="col">Label</th>
+			</tr>
+		</thead>
+		<tbody class="indexTable-body">
+			<tr class="indexTable-body-row">
+				<td class="indexTable-body-row-cell">
+					<a href="#" class="indexTable-body-row-cell-link">Content</a>
+				</td>
+				<td class="indexTable-body-row-cell">Content</td>
+				<td class="indexTable-body-row-cell">Content</td>
+			</tr>
+			<tr class="indexTable-body-row">
+				<td class="indexTable-body-row-cell">
+					<a href="#" class="indexTable-body-row-cell-link">Content</a>
+				</td>
+				<td class="indexTable-body-row-cell mod-allowTextSelection">
+					Content selectable
+				</td>
+				<td class="indexTable-body-row-cell">
+					Content
+				</td>
+			</tr>
+			<tr class="indexTable-body-row">
+				<td class="indexTable-body-row-cell">
+					<a href="#" class="indexTable-body-row-cell-link">Content</a>
+				</td>
+				<td class="indexTable-body-row-cell"><a href="#">Content actionable</a></td>
+				<td class="indexTable-body-row-cell">Content</td>
+			</tr>
+		</tbody>
+	</table>
 `;
 }
 
