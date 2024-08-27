@@ -19,7 +19,7 @@ export default {
 function getTemplate(args: GridsLegacyBasicStory): string {
 	const reverse = args.reverse ? `mod-reverse` : '';
 	return `
-	<div class="grid ${reverse}">
+	<div class="grid rwd-autoContainer ${reverse}">
 		<div class="grid-6@mediaMinXS">
 			<div class="demo">1</div>
 		</div>
@@ -28,7 +28,7 @@ function getTemplate(args: GridsLegacyBasicStory): string {
 		</div>
 	</div>
 
-	<div class="grid ${reverse}">
+	<div class="grid rwd-autoContainer ${reverse}">
 		<div class="grid-4@mediaMinS">
 			<div class="demo">1</div>
 		</div>
@@ -37,7 +37,7 @@ function getTemplate(args: GridsLegacyBasicStory): string {
 		</div>
 	</div>
 
-	<div class="grid ${reverse}">
+	<div class="grid rwd-autoContainer ${reverse}">
 		<div class="grid-7@mediaMinM">
 			<div class="demo">1</div>
 		</div>
@@ -46,7 +46,7 @@ function getTemplate(args: GridsLegacyBasicStory): string {
 		</div>
 	</div>
 
-	<div class="grid ${reverse}">
+	<div class="grid rwd-autoContainer ${reverse}">
 		<div class="grid-3@mediaMinL grid-6@mediaMinM">
 			<div class="demo">1</div>
 		</div>

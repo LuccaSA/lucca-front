@@ -1,6 +1,32 @@
+@use 'sass:string';
 @use '@lucca-front/scss/src/commons/utils/media';
 
-// dans cette page tous les mixins sont des raccourcis vers media.query et media.queries
+@mixin auto($containerName) {
+	*:has(> .#{$containerName}.rwd-autoContainer) {
+		container-type: inline-size;
+		container-name: string.unquote($containerName);
+	}
+
+	*:has(> .#{$containerName}.rwd-autoContainerBlock) {
+		container-type: inline-size;
+		container-name: string.unquote($containerName);
+		display: block;
+	}
+
+	*:has(> .#{$containerName}.rwd-autoContainerFlex) {
+		container-type: inline-size;
+		container-name: string.unquote($containerName);
+		display: flex;
+	}
+
+	*:has(> .#{$containerName}.rwd-autoContainerGrid) {
+		container-type: inline-size;
+		container-name: string.unquote($containerName);
+		display: grid;
+	}
+}
+
+// dans ce qui suit tous les mixins sont des raccourcis vers media.query et media.queries
 
 // les raccourcis des requêtes simples et multiples
 

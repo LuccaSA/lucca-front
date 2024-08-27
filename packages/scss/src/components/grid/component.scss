@@ -15,11 +15,7 @@
 	max-width: 100%;
 
 	@at-root ($atRoot) {
-		*:has(> &) {
-			container-type: inline-size;
-			container-name: grid;
-			display: block;
-		}
+		@include container.auto('grid');
 
 		.grid-column {
 			align-self: var(--grid-align, var(--grid-column-align));

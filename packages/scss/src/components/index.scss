@@ -73,10 +73,20 @@
 @use 'plgPush';
 @use 'userTile';
 
-// responsive components
+// responsive components with media queries
+@use 'dialog';
+@use 'filters';
+@use 'header';
+@use 'errorPage';
+@use 'main';
+
+// responsive components with container queries
 @use 'comment';
 @use 'filterBar';
-@use 'dialog';
+// @use 'emptyState';
+// @use 'pageHeader';
+// @use 'footer';
+// @use 'indexTable';
 
 // responsive components with default behaviours disabled
 @use 'emptyState' with (
@@ -85,22 +95,10 @@
 @use 'pageHeader' with (
 	$defaultResponsive: false
 );
-@use 'errorPage' with (
-	$defaultResponsive: false
-);
-@use 'filters' with (
-	$defaultResponsive: false
-);
 @use 'footer' with (
 	$defaultResponsive: false
 );
-@use 'header' with (
-	$defaultResponsive: false
-);
 @use 'indexTable' with (
-	$defaultResponsive: false
-);
-@use 'main' with (
 	$defaultResponsive: false
 );
 
@@ -111,12 +109,9 @@
 @include pageHeader.responsive($at: 'media');
 @include pageHeader.responsiveSearch($at: 'media');
 
-@include errorPage.responsive($at: 'media');
-@include filters.responsive($at: 'media');
 @include footer.responsive($at: 'container');
-@include header.responsive($at: 'media');
-@include indexTable.responsive($at: 'media');
-@include main.responsive($at: 'media');
+
+@include indexTable.responsive($at: 'container');
 
 // deprecated components
 // @use 'gridLegacy'; // caution: grid and gridLegacy cannot be loaded at the same time

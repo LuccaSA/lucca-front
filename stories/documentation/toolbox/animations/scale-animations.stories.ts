@@ -9,7 +9,7 @@ import { applicationConfig, Meta, StoryFn } from '@storybook/angular';
 	standalone: true,
 	imports: [CommonModule],
 	template: `
-		<div class="grid mod-auto">
+		<div class="grid rwd-autoContainer mod-auto">
 			<div class="grid-column ng-demo-block">
 				<h3 class="pr-u-margin0">
 					Scale
@@ -83,7 +83,7 @@ class AppModule {}
 @Component({
 	selector: 'story-scale-animation',
 	template: \`
-		<div class="grid">
+		<div class="grid rwd-autoContainer">
 			<div class="grid-column ng-demo-block">
 				<h3 class="pr-u-margin0">
 					Scale

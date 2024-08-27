@@ -15,12 +15,6 @@
 	contain: paint;
 
 	@at-root ($atRoot) {
-		*:has(> &) {
-			container-type: inline-size;
-			container-name: indexTable;
-			display: block;
-		}
-
 		.indexTable-head {
 			display: table-header-group;
 			vertical-align: bottom;

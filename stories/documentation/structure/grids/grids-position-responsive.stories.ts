@@ -10,7 +10,7 @@ export default {
 } as Meta;
 
 function getTemplate(args: GridsPositionStory): string {
-	return `<div class="grid" [attr.style]="'--grid-columns: 3; --grid-colspan: 2'">
+	return `<div class="grid rwd-autoContainer" [attr.style]="'--grid-columns: 3; --grid-colspan: 2'">
 	<div class="grid-column" [attr.style]="'--grid-colspan: 1; --grid-rowspan: 2; --grid-columnAtMediaMinS: 3'"><div class="demo">columns 3<br />colspan 1<br />rowspan 2<br />media > S column 3</div></div>
 	<div class="grid-column" [attr.style]="'--grid-rowAtMediaMinS: 2; --grid-columnAtMediaMinS: 1'"><div class="demo">columns 3<br />colspan 2<br />media > S column 1<br />media > S row 2</div></div>
 	<div class="grid-column" [attr.style]="'--grid-rowAtMediaMinS: 1'"><div class="demo">columns 3<br />colspan 2<br />media > S row 1</div></div>

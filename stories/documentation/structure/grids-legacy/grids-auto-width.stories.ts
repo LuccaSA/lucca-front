@@ -8,7 +8,7 @@ export default {
 
 function getTemplate(args: GridsLegacyAutoWidthStory): string {
 	return `
-	<div class="grid">
+	<div class="grid rwd-autoContainer">
 		<div class="grid@mediaMinM">
 			<div class="grid-demo">1</div>
 		</div>

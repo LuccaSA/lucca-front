@@ -19,7 +19,7 @@ function getTemplate(args: PageHeaderBreadcrumbStory): string {
 	const sticky = args.sticky ? `mod-sticky` : '';
 
 	return `
-	<header class="pageHeader mod-withBreadcrumbs ${sticky}">
+	<header class="pageHeader rwd-autoContainer mod-withBreadcrumbs ${sticky}">
 		<nav class="breadcrumbs" aria-describedby="breadcrumbs-title">
 			<p id="breadcrumbs-title" class="u-mask">Breadcrumbs</p>
 			<ol class="breadcrumbs-list">
@@ -73,6 +73,12 @@ function getTemplate(args: PageHeaderBreadcrumbStory): string {
 const Template: StoryFn<PageHeaderBreadcrumbStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
+	styles: [
+		`
+		:host {
+			display: block;
+		}`,
+	],
 });
 
 export const BreadcrumbPageHeader = Template.bind({});

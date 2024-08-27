@@ -8,7 +8,7 @@ export default {
 } as Meta;
 
 function getTemplate(args: IndexTableResponsiveCardListNestedStory): string {
-	return `<table class="indexTable mod-selectable mod-stackable mod-responsiveCardList">
+	return `<table class="indexTable rwd-autoContainer mod-selectable mod-stackable mod-responsiveCardList">
 	<thead class="indexTable-head">
 		<tr class="indexTable-head-row">
 			<th class="indexTable-head-row-transparentCell" scope="col">
@@ -202,6 +202,13 @@ function getTemplate(args: IndexTableResponsiveCardListNestedStory): string {
 const Template: StoryFn<IndexTableResponsiveCardListNestedStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
+	styles: [
+		`
+		:host {
+			display: block;
+		}
+	`,
+	],
 });
 
 export const ResponsiveCardListNested = Template.bind({});

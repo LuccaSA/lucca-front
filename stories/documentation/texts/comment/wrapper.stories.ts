@@ -10,7 +10,7 @@ export default {
 function getTemplate(args: CommentWrapperStory): string {
 	return `<ol class="commentWrapper">
 	<li class="commentWrapper-item">
-		<div class="comment">
+		<div class="comment rwd-autoContainer">
 			<div class="comment-infos">
 				<div class="avatar"></div>
 				<div class="comment-infos-content">
@@ -27,7 +27,7 @@ function getTemplate(args: CommentWrapperStory): string {
 		</div>
 	</li>
 	<li class="commentWrapper-item">
-		<div class="comment">
+		<div class="comment rwd-autoContainer">
 			<div class="comment-infos">
 				<div class="avatar"></div>
 				<div class="comment-infos-content">
@@ -41,7 +41,7 @@ function getTemplate(args: CommentWrapperStory): string {
 		</div>
 	</li>
 	<li class="commentWrapper-item">
-		<div class="comment">
+		<div class="comment rwd-autoContainer">
 			<div class="comment-infos">
 				<div class="avatar"></div>
 				<div class="comment-infos-content">

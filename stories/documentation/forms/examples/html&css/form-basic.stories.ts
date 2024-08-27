@@ -23,7 +23,7 @@ function getTemplate(args: FieldsetBasicStory): string {
 			</span>
 		</legend>
 		<div class="fieldset-content">
-			<div class="grid mod-form" style="--grid-colspan: 4">
+			<div class="grid rwd-autoContainer mod-form" style="--grid-colspan: 4">
 				<div class="grid-column">
 					<div class="form-field">
 						<label class="formLabel" id="IDlabel1" for="ID1">Label</label>
@@ -109,7 +109,7 @@ function getTemplate(args: FieldsetBasicStory): string {
 			</span>
 		</legend>
 		<div class="fieldset-content">
-			<div class="grid mod-form" style="--grid-colspan: 4">
+			<div class="grid rwd-autoContainer mod-form" style="--grid-colspan: 4">
 				<div class="grid-column">
 					<div class="form-field">
 						<label class="formLabel" id="IDlabel8" for="ID8">Label</label>

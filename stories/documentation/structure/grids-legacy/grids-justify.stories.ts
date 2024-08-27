@@ -8,7 +8,7 @@ export default {
 
 function getTemplate(args: GridsLegacyJustifyStory): string {
 	return `
-	<div class="grid mod-between@mediaMinXS">
+	<div class="grid rwd-autoContainer mod-between@mediaMinXS">
 		<div class="grid-3@mediaMinXS">
 			<div class="grid-demo">1</div>
 		</div>
@@ -19,7 +19,7 @@ function getTemplate(args: GridsLegacyJustifyStory): string {
 			<div class="grid-demo">3</div>
 		</div>
 	</div>
-	<div class="grid mod-around@mediaMinXS">
+	<div class="grid rwd-autoContainer mod-around@mediaMinXS">
 		<div class="grid-3@mediaMinXS">
 			<div class="grid-demo">1</div>
 		</div>

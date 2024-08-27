@@ -6,12 +6,6 @@
 	}
 
 	@at-root ($atRoot) {
-		*:has(> &) {
-			container-type: inline-size;
-			container-name: pageHeader;
-			display: block;
-		}
-
 		.pageHeader-content {
 			display: flex;
 			justify-content: space-between;

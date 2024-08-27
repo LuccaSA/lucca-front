@@ -19,7 +19,7 @@ function getTemplate(args: PageHeaderBasicStory): string {
 	const sticky = args.sticky ? `mod-sticky` : '';
 
 	return `
-	<header class="pageHeader ${sticky}">
+	<header class="pageHeader rwd-autoContainer ${sticky}">
 		<div class="pageHeader-content">
 			<div class="pageHeader-content-title">
 				<h1 class="pr-u-margin0">H1. Page title</h1>
@@ -65,6 +65,13 @@ function getTemplate(args: PageHeaderBasicStory): string {
 const Template: StoryFn<PageHeaderBasicStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
+	styles: [
+		`
+		:host {
+			display: block;
+		}
+		`,
+	],
 });
 
 export const BasicPageHeader = Template.bind({});

@@ -6,9 +6,6 @@
 	border: var(--commons-divider-width) solid var(--commons-border-200);
 	padding: var(--pr-t-spacings-200);
 
-	container-name: filterBar;
-	container-type: inline-size;
-
 	&:has(.filterBar-footer-toggleButton[aria-expanded='false']) {
 		.filterBar-toggledFilters {
 			display: none;

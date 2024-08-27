@@ -17,7 +17,7 @@ export default {
 } as Meta;
 
 function getTemplate(args: IndexTableSortableStory): string {
-	return `<table class="indexTable">
+	return `<table class="indexTable rwd-autoContainer">
 	<thead class="indexTable-head">
 		<tr class="indexTable-head-row">
 			<th class="indexTable-head-row-cell" scope="col">Not sortable</th>

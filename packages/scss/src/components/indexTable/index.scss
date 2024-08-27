@@ -1,5 +1,6 @@
 @use 'exports' as *;
 @use '@lucca-front/scss/src/commons/utils/media';
+@use '@lucca-front/scss/src/commons/utils/container';
 
 .indexTable {
 	@include vars;
@@ -7,7 +8,6 @@
 
 	&.mod-selectable {
 		@include selectable;
-		// Selectable states
 		@include selectableSelectedRow;
 		@include selectableHoveredRow;
 	}
@@ -44,14 +44,9 @@
 		}
 	}
 
-	// generic states, non tied to a mod
-	// focus-within
 	@include focusedRow;
-
-	// hover
 	@include hoveredRow;
 
-	// nested open / closed row
 	@include openClosedRow;
 }
 
@@ -65,6 +60,10 @@
 	$axis: 'width',
 	$selector: '.indexTable'
 ) {
+	@if ($at == 'container') {
+		@include container.auto($containerName);
+	}
+
 	#{if($responsiveSelector, $selector + '.rwd-' + $responsiveSelector, $selector)} {
 		@include media.query(
 			$breakpoint: $breakpoint,

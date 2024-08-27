@@ -8,7 +8,7 @@ export default {
 } as Meta;
 
 function getTemplate(args: IndexTableResponsiveCardListLabelStory): string {
-	return `<table class="indexTable mod-responsiveCardList">
+	return `<table class="indexTable rwd-autoContainer mod-responsiveCardList">
 	<thead class="indexTable-head">
 		<tr class="indexTable-head-row">
 			<th class="indexTable-head-row-cell" scope="col">Label 1</th>
@@ -59,6 +59,13 @@ function getTemplate(args: IndexTableResponsiveCardListLabelStory): string {
 const Template: StoryFn<IndexTableResponsiveCardListLabelStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
+	styles: [
+		`
+		:host {
+			display: block;
+		}
+	`,
+	],
 });
 
 export const ResponsiveCardListLabel = Template.bind({});

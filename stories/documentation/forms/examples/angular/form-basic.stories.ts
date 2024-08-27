@@ -29,7 +29,7 @@ function getTemplate(): string {
 			</span>
 		</legend>
 		<div class="fieldset-content">
-			<div class="grid mod-form" style="--grid-colspan: 4">
+			<div class="grid rwd-autoContainer mod-form" style="--grid-colspan: 4">
 				<div class="grid-column">
 					<lu-form-field label="Label" inlineMessage="Helper text">
 						<!-- In real cases, you'll most likely use formControlName here or have a name attribute, standalone: true is just for this example -->
@@ -86,7 +86,7 @@ function getTemplate(): string {
 			</span>
 		</legend>
 		<div class="fieldset-content">
-			<div class="grid mod-form" style="--grid-colspan: 4">
+			<div class="grid rwd-autoContainer mod-form" style="--grid-colspan: 4">
 				<div class="grid-column">
 					<lu-form-field label="Label" inlineMessage="Helper text">
 						<!-- In real cases, you'll most likely use formControlName here or have a name attribute, standalone: true is just for this example -->

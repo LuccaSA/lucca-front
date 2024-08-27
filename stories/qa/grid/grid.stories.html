@@ -3,7 +3,7 @@
 <!-- Basics -->
 <section class="contentSection">
 	<h2>Grid</h2>
-	<div class="grid">
+	<div class="grid rwd-autoContainer">
 		<div class="grid-column" style="--grid-colspan: 6">
 			<div class="grid-demo">--grid-colspan: 6</div>
 		</div>
@@ -11,7 +11,7 @@
 			<div class="grid-demo">--grid-colspan: 6</div>
 		</div>
 	</div>
-	<div class="grid">
+	<div class="grid rwd-autoContainer">
 		<div class="grid-column" style="--grid-colspan: 12; --grid-colspanAtMediaMinXS: 4">
 			<div class="grid-demo">--grid-colspan: 12; --grid-colspanAtMediaMinXS: 4</div>
 		</div>
@@ -19,11 +19,11 @@
 			<div class="grid-demo">--grid-colspan: 12; --grid-colspanAtMediaMinXS: 8</div>
 		</div>
 	</div>
-	<div class="grid">
+	<div class="grid rwd-autoContainer">
 		<div class="grid-column" style="--grid-colspan: 12; --grid-colspanAtMediaMinS: 7"><div class="grid-demo">grid-7AtmediaMinS</div></div>
 		<div class="grid-column" style="--grid-colspan: 12; --grid-colspanAtMediaMinS: 5"><div class="grid-demo">grid-5AtmediaMinS</div></div>
 	</div>
-	<div class="grid">
+	<div class="grid rwd-autoContainer">
 		<div class="grid-column" style="--grid-colspan: 12; --grid-colspanAtMediaMinS: 6; --grid-colspanAtMediaMinM: 3">
 			<div class="grid-demo">--grid-colspan: 12; --grid-colspanAtMediaMinS: 6; --grid-colspanAtMediaMinM: 3</div>
 		</div>
@@ -38,7 +38,7 @@
 		</div>
 	</div>
 	<code class="code mod-block"
-		>&lt;div class="grid"&gt; &lt;div class="grid-6AtmediaMinXXXS"&gt;...&lt;/div&gt; &lt;div
+		>&lt;div class="grid rwd-autoContainer"&gt; &lt;div class="grid-6AtmediaMinXXXS"&gt;...&lt;/div&gt; &lt;div
 		class="grid-6AtmediaMinXXXS"&gt;...&lt;/div&gt; &lt;/div&gt;
 	</code>
 </section>
@@ -46,26 +46,27 @@
 <!-- Offsets -->
 <section class="contentSection">
 	<h2>Offsets</h2>
-	<div class="grid">
+	<div class="grid rwd-autoContainer">
 		<div class="grid-8AtmediaMinXXXS grid-offset4AtmediaMinXXXS">
 			<div class="demo-grid">grid-8AtmediaMinXXXS grid-offset4AtmediaMinXXXS</div>
 		</div>
 	</div>
-	<div class="grid">
+	<div class="grid rwd-autoContainer">
 		<div class="grid-6AtmediaMinXXXS grid-offset3AtmediaMinXXXS">
 			<div class="demo-grid">grid-6AtmediaMinXXXS grid-offset3AtmediaMinXXXS</div>
 		</div>
 		<div class="grid-3AtmediaMinXXXS"><div class="demo-grid">grid-3AtmediaMinXXXS</div></div>
 	</div>
 	<code class="code mod-block"
-		>&lt;div class="grid"&gt; &lt;div class="grid-8AtmediaMinXXXS grid-offset4AtmediaMinXXXS"&gt;...&lt;/div&gt; &lt;/div&gt;
+		>&lt;div class="grid rwd-autoContainer"&gt; &lt;div class="grid-8AtmediaMinXXXS grid-offset4AtmediaMinXXXS"&gt;...&lt;/div&gt;
+		&lt;/div&gt;
 	</code>
 </section>
 
 <!-- Auto width -->
 <section class="contentSection">
 	<h2>Auto width</h2>
-	<div class="grid mod-auto">
+	<div class="grid rwd-autoContainer mod-auto">
 		<div class="grid-column"><div class="grid-demo">grid mod-auto</div></div>
 		<div class="grid-column"><div class="grid-demo">grid mod-auto</div></div>
 		<div class="grid-column"><div class="grid-demo">grid mod-auto</div></div>
@@ -73,8 +74,8 @@
 		<div class="grid-column"><div class="grid-demo">grid mod-auto</div></div>
 	</div>
 	<code class="code mod-block"
-		>&lt;div class="grid"&gt; &lt;div class="gridAtmediaMinS"&gt;...&lt;/div&gt; &lt;div class="gridAtmediaMinS"&gt;...&lt;/div&gt; ...
-		&lt;/div&gt;
+		>&lt;div class="grid rwd-autoContainer"&gt; &lt;div class="gridAtmediaMinS"&gt;...&lt;/div&gt; &lt;div
+		class="gridAtmediaMinS"&gt;...&lt;/div&gt; ... &lt;/div&gt;
 	</code>
 	<em
 		><b>Tip:</b> It will also work with <code class="code">XXS</code>, <code class="code">XS</code>, <code class="code">S</code>,
@@ -86,18 +87,18 @@
 <section class="contentSection">
 	<h2>Horizontal alignment</h2>
 	<p>You can align the content horizontaly inside the column:</p>
-	<div class="grid" style="--grid-columns: 1">
+	<div class="grid rwd-autoContainer" style="--grid-columns: 1">
 		<div class="grid-column" style="--grid-justify: start"><div class="grid-demo"></div></div>
 	</div>
-	<div class="grid" style="--grid-columns: 1">
+	<div class="grid rwd-autoContainer" style="--grid-columns: 1">
 		<div class="grid-column" style="--grid-justify: center"><div class="grid-demo"></div></div>
 	</div>
-	<div class="grid" style="--grid-columns: 1">
+	<div class="grid rwd-autoContainer" style="--grid-columns: 1">
 		<div class="grid-column" style="--grid-justify: end"><div class="grid-demo"></div></div>
 	</div>
-	<code class="code mod-block">&lt;div class="grid mod-startAtmediaMinXXXS"&gt; ... </code>
-	<code class="code mod-block">&lt;div class="grid mod-centerAtmediaMinXXXS"&gt; ... </code>
-	<code class="code mod-block">&lt;div class="grid mod-endAtmediaMinXXXS"&gt; ... </code>
+	<code class="code mod-block">&lt;div class="grid rwd-autoContainer mod-startAtmediaMinXXXS"&gt; ... </code>
+	<code class="code mod-block">&lt;div class="grid rwd-autoContainer mod-centerAtmediaMinXXXS"&gt; ... </code>
+	<code class="code mod-block">&lt;div class="grid rwd-autoContainer mod-endAtmediaMinXXXS"&gt; ... </code>
 	<em
 		><b>Tip:</b> It will also work with <code class="code">XXS</code>, <code class="code">XS</code>, <code class="code">S</code>,
 		<code class="code">M</code>, <code class="code">L</code>, <code class="code">XL</code>, <code class="code">XXL</code> and
@@ -109,21 +110,21 @@
 <section class="contentSection">
 	<h2>Vertical alignment</h2>
 	<p>You can align columns verticaly inside the grid:</p>
-	<div class="grid mod-topAtmediaMinXXXS">
+	<div class="grid rwd-autoContainer mod-topAtmediaMinXXXS">
 		<div class="grid-6AtmediaMinXXXS"><div class="demo-grid" style="height: 100px"></div></div>
 		<div class="grid-6AtmediaMinXXXS"><div class="demo-grid"></div></div>
 	</div>
-	<div class="grid mod-middleAtmediaMinXXXS">
+	<div class="grid rwd-autoContainer mod-middleAtmediaMinXXXS">
 		<div class="grid-6AtmediaMinXXXS"><div class="demo-grid" style="height: 100px"></div></div>
 		<div class="grid-6AtmediaMinXXXS"><div class="demo-grid"></div></div>
 	</div>
-	<div class="grid mod-bottomAtmediaMinXXXS">
+	<div class="grid rwd-autoContainer mod-bottomAtmediaMinXXXS">
 		<div class="grid-6AtmediaMinXXXS"><div class="demo-grid" style="height: 100px"></div></div>
 		<div class="grid-6AtmediaMinXXXS"><div class="demo-grid"></div></div>
 	</div>
-	<code class="code mod-block">&lt;div class="grid mod-topAtmediaMinXXXS"&gt; ... </code>
-	<code class="code mod-block">&lt;div class="grid mod-middleAtmediaMinXXXS"&gt; ... </code>
-	<code class="code mod-block">&lt;div class="grid mod-bottomAtmediaMinXXXS"&gt; ... </code>
+	<code class="code mod-block">&lt;div class="grid rwd-autoContainer mod-topAtmediaMinXXXS"&gt; ... </code>
+	<code class="code mod-block">&lt;div class="grid rwd-autoContainer mod-middleAtmediaMinXXXS"&gt; ... </code>
+	<code class="code mod-block">&lt;div class="grid rwd-autoContainer mod-bottomAtmediaMinXXXS"&gt; ... </code>
 	<em
 		><b>Tip:</b> It will also work with <code class="code">XXS</code>, <code class="code">XS</code>, <code class="code">S</code>,
 		<code class="code">M</code>, <code class="code">L</code>, <code class="code">XL</code>, <code class="code">XXL</code> and
@@ -135,21 +136,21 @@
 <section class="contentSection">
 	<h2>Reorder</h2>
 	<p>You can reorder columns with utilities:</p>
-	<div class="grid mod-dense" style="--grid-columns: 4">
+	<div class="grid rwd-autoContainer mod-dense" style="--grid-columns: 4">
 		<div class="grid-column" style="--grid-column: 2"><div class="grid-demo">1 --grid-column: 2</div></div>
 		<div class="grid-column" style="--grid-column: 3"><div class="grid-demo">2 --grid-column: 3</div></div>
 		<div class="grid-column" style="--grid-column: 1"><div class="grid-demo">3 --grid-column: 1</div></div>
 		<div class="grid-column"><div class="grid-demo">4</div></div>
 	</div>
-	<div class="grid mod-dense" style="--grid-columns: 4">
+	<div class="grid rwd-autoContainer mod-dense" style="--grid-columns: 4">
 		<div class="grid-column"><div class="grid-demo">1</div></div>
 		<div class="grid-column" style="--grid-columnAtMediaMinM: 4"><div class="grid-demo">2 --grid-columnAtMediaMinM: 4</div></div>
 		<div class="grid-column"><div class="grid-demo">3</div></div>
 		<div class="grid-column"><div class="grid-demo">4</div></div>
 	</div>
 	<code class="code mod-block"
-		>&lt;div class="grid"&gt; &lt;div class="grid-6AtmediaMinXXXS u-lastAtmediaMinXS"&gt;...&lt;/div&gt; &lt;div class="grid-6AtmediaMinXXXS
-		u-firstAtmediaMinXS"&gt;...&lt;/div&gt; &lt;/div&gt;
+		>&lt;div class="grid rwd-autoContainer"&gt; &lt;div class="grid-6AtmediaMinXXXS u-lastAtmediaMinXS"&gt;...&lt;/div&gt; &lt;div
+		class="grid-6AtmediaMinXXXS u-firstAtmediaMinXS"&gt;...&lt;/div&gt; &lt;/div&gt;
 	</code>
 	<em
 		><b>Tip:</b> It will also work with <code class="code">XXS</code>, <code class="code">XS</code>, <code class="code">S</code>,

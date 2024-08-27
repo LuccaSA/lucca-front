@@ -1,5 +1,6 @@
 @use 'exports' as *;
 @use '@lucca-front/scss/src/commons/utils/media';
+@use '@lucca-front/scss/src/commons/utils/container';
 
 .filterBar {
 	@include vars;
@@ -18,8 +19,12 @@
 	$containerName: 'filterBar',
 	$responsiveSelector: null,
 	$axis: 'width',
-	$selector: '.filterBar-footer'
+	$selector: '.filterBar'
 ) {
+	@if ($at == 'container') {
+		@include container.auto($containerName);
+	}
+
 	#{if($responsiveSelector, $selector + '.rwd-' + $responsiveSelector, $selector)} {
 		@include media.query(
 			$breakpoint: $breakpoint,
@@ -42,7 +47,7 @@
 	$containerName: 'filterBar',
 	$responsiveSelector: null,
 	$axis: 'width',
-	$selector: '.filterBar-footer'
+	$selector: '.filterBar'
 ) {
 	#{if($responsiveSelector, $selector + '.rwd-' + $responsiveSelector, $selector)} {
 		@include media.query(

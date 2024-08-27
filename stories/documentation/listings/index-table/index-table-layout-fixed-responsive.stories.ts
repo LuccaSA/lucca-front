@@ -9,7 +9,7 @@ export default {
 
 function getTemplate(args: IndexTableLayoutFixedResponsiveStory): string {
 	return `
-	<table class="indexTable mod-layoutFixedAtMediaMinS u-marginBottomL">
+	<table class="indexTable rwd-autoContainer mod-layoutFixedAtMediaMinS u-marginBottomL">
 		<thead class="indexTable-head">
 			<tr class="indexTable-head-row">
 			<th class="indexTable-head-row-cell" scope="col" style="--components-indexTable-cell-fixed-width: 15;">15rem column</th>

@@ -9,7 +9,7 @@ export default {
 
 function getTemplate(args: IndexTableStickyHeaderStory): string {
 	return `<div class="demo-wrapper">
-	<table class="indexTable mod-stickyHeader">
+	<table class="indexTable rwd-autoContainer mod-stickyHeader">
 		<thead class="indexTable-head">
 			<tr class="indexTable-head-row">
 				<th class="indexTable-head-row-cell" scope="col">Label</th>

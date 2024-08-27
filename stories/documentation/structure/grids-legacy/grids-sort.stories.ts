@@ -8,7 +8,7 @@ export default {
 
 function getTemplate(args: GridsLegacySortStory): string {
 	return `
-	<div class="grid">
+	<div class="grid rwd-autoContainer">
 		<div class="grid-3@mediaMinXS">
 			<div class="grid-demo">1</div>
 		</div>
@@ -22,7 +22,7 @@ function getTemplate(args: GridsLegacySortStory): string {
 			<div class="grid-demo">4</div>
 		</div>
 	</div>
-	<div class="grid">
+	<div class="grid rwd-autoContainer">
 		<div class="grid-3@mediaMinXS">
 			<div class="grid-demo">1</div>
 		</div>

@@ -89,25 +89,27 @@
 }
 
 @mixin selectableCardList {
-	&.mod-selectable.mod-responsiveCardList {
-		.indexTable-body-row {
-			grid-template-columns: var(--components-indexTable-row-cell-transparent-width) var(
-					--components-indexTable-row-responsive-grid-template-columns,
-					1fr
-				);
-		}
-
-		.indexTable-body-row-transparentCell {
-			width: auto;
-			// we add a padding-left to keep a correct indent between lvl 1 and lvl 2 titles in nested tables. * .75 is just for cosmetic
-			&:first-child[colspan='2'] + .indexTable-body-row-transparentCell {
-				padding-left: calc(var(--components-indexTable-row-cell-transparent-width) * 0.75);
+	&.mod-selectable {
+		&.mod-responsiveCardList {
+			.indexTable-body-row {
+				grid-template-columns: var(--components-indexTable-row-cell-transparent-width) var(
+						--components-indexTable-row-responsive-grid-template-columns,
+						1fr
+					);
 			}
-		}
 
-		.indexTable-body-row-cell {
-			--components-indexTable-cell-inset-x-left: var(--components-indexTable-row-cell-transparent-width);
-			grid-column-start: 2;
+			.indexTable-body-row-transparentCell {
+				width: auto;
+				// we add a padding-left to keep a correct indent between lvl 1 and lvl 2 titles in nested tables. * .75 is just for cosmetic
+				&:first-child[colspan='2'] + .indexTable-body-row-transparentCell {
+					padding-left: calc(var(--components-indexTable-row-cell-transparent-width) * 0.75);
+				}
+			}
+
+			.indexTable-body-row-cell {
+				--components-indexTable-cell-inset-x-left: var(--components-indexTable-row-cell-transparent-width);
+				grid-column-start: 2;
+			}
 		}
 	}
 }
@@ -115,7 +117,7 @@
 // The stack apparence is put on the row instead of the cells
 @mixin stackableCardList {
 	&.mod-stackable {
-		.mod-responsiveCardList {
+		&.mod-responsiveCardList {
 			.indexTable-body-row[class*='mod-stack'] {
 				border: 0;
 				border-bottom-width: var(--components-indexTable-row-stack-border-bottom);
@@ -162,8 +164,8 @@
 
 @mixin selectableStackableCardList {
 	&.mod-selectable {
-		.mod-stackable {
-			.mod-responsiveCardList {
+		&.mod-stackable {
+			&.mod-responsiveCardList {
 				.indexTable-body-row {
 					--components-indexTable-cell-inset-x-left: var(--components-indexTable-row-cell-transparent-width);
 				}

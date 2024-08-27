@@ -1,5 +1,6 @@
-@use '@lucca-front/scss/src/commons/utils/media';
 @use 'exports' as *;
+@use '@lucca-front/scss/src/commons/utils/media';
+@use '@lucca-front/scss/src/commons/utils/container';
 
 .header {
 	@include vars;
@@ -32,12 +33,16 @@
 	$breakpoint: 'S',
 	$breakpoint2: null,
 	$inverted: true,
-	$at: 'container',
+	$at: 'media',
 	$containerName: 'header',
 	$responsiveSelector: null,
 	$axis: 'width',
 	$selector: '.header'
 ) {
+	@if ($at == 'container') {
+		@include container.auto($containerName);
+	}
+
 	#{if($responsiveSelector, $selector + '.rwd-' + $responsiveSelector, $selector)} {
 		@include media.query(
 			$breakpoint: $breakpoint,

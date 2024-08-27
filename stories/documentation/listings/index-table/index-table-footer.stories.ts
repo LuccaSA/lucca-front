@@ -9,7 +9,7 @@ export default {
 
 function getTemplate(args: IndexTableFooterStory): string {
 	return `
-	<table class="indexTable">
+	<table class="indexTable rwd-autoContainer">
 		<thead class="indexTable-head">
 			<tr class="indexTable-head-row">
 				<th class="indexTable-head-row-cell" scope="col">Label</th>
@@ -41,7 +41,7 @@ function getTemplate(args: IndexTableFooterStory): string {
 			</tr>
 		</tfoot>
 	</table>
-	<table class="indexTable">
+	<table class="indexTable rwd-autoContainer">
 		<thead class="indexTable-head">
 			<tr class="indexTable-head-row">
 				<th class="indexTable-head-row-cell" scope="col">Label</th>

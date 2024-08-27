@@ -11,7 +11,7 @@ export default {
 
 function getTemplate(args: PageHeaderBackStory): string {
 	return `
-	<header class="pageHeader">
+	<header class="pageHeader rwd-autoContainer">
 		<div class="pageHeader-content">
 			<div class="pageHeader-content-title">
 				<nav class="pageHeader-content-title-back">
@@ -62,6 +62,12 @@ function getTemplate(args: PageHeaderBackStory): string {
 const Template: StoryFn<PageHeaderBackStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
+	styles: [
+		`
+		:host {
+			display: block;
+		}`,
+	],
 });
 
 export const PageHeaderBackStory = Template.bind({});

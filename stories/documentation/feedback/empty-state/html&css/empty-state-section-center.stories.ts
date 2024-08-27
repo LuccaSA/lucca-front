@@ -1,9 +1,8 @@
-import { Meta, moduleMetadata, StoryFn } from '@storybook/angular';
+import { HttpClientModule } from '@angular/common/http';
 import { LuSafeExternalSvgPipe } from '@lucca-front/ng/safe-content';
-import { HttpClientModule } from "@angular/common/http";
+import { Meta, moduleMetadata, StoryFn } from '@storybook/angular';
 
-interface EmptyStateSectionCenterStory {
-}
+interface EmptyStateSectionCenterStory {}
 
 export default {
 	title: 'Documentation/Feedback/Empty State/HTML&CSS/Section Center',
@@ -12,12 +11,11 @@ export default {
 			imports: [LuSafeExternalSvgPipe, HttpClientModule],
 		}),
 	],
-	argTypes: {
-	},
+	argTypes: {},
 } as Meta;
 
 function getTemplate(args: EmptyStateSectionCenterStory): string {
-	return `<section class="emptyState mod-center">
+	return `<section class="emptyState rwd-autoContainer mod-center">
 	<div class="emptyState-container">
 		<div class="emptyState-content">
 			<div
@@ -44,4 +42,4 @@ const Template: StoryFn<EmptyStateSectionCenterStory> = (args: EmptyStateSection
 });
 
 export const SectionCenter = Template.bind({});
-SectionCenter.args = { };
+SectionCenter.args = {};

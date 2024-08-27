@@ -8,12 +8,12 @@ export default {
 
 function getTemplate(args: GridsLegacyOffsetStory): string {
 	return `
-	<div class="grid">
+	<div class="grid rwd-autoContainer">
 		<div class="grid-8@mediaMinXS grid-offset4@mediaMinXS">
 			<div class="grid-demo">1</div>
 		</div>
 	</div>
-	<div class="grid">
+	<div class="grid rwd-autoContainer">
 		<div class="grid-6@mediaMinXS grid-offset3@mediaMinXS">
 			<div class="grid-demo">1</div>
 		</div>

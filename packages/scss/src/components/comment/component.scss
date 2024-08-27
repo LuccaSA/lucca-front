@@ -4,9 +4,6 @@
 	gap: var(--pr-t-spacings-100);
 	max-width: 40rem;
 
-	container-type: inline-size;
-	container-name: comment;
-
 	@at-root ($atRoot) {
 		.comment-infos {
 			display: flex;
