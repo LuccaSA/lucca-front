@@ -19,7 +19,7 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor } from '@angular/forms';
 import { PortalContent, getIntl } from '@lucca-front/ng/core';
-import { BehaviorSubject, Observable, ReplaySubject, Subject, defer, map, of, startWith, switchMap, take } from 'rxjs';
+import { BehaviorSubject, Observable, ReplaySubject, Subject, defer, distinctUntilChanged, filter, map, of, skip, startWith, switchMap, take } from 'rxjs';
 import { LuOptionGrouping, LuSimpleSelectDefaultOptionComponent } from '../option';
 import { LuSelectPanelRef } from '../panel';
 import { CoreSelectAddOptionStrategy, LuOptionContext, SELECT_LABEL, SELECT_LABEL_ID } from '../select.model';
@@ -80,6 +80,15 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	}
 
 	public isPanelOpen$ = new BehaviorSubject(false);
+
+	private panelStateChange$ = this.isPanelOpen$.pipe(
+		skip(1),
+		distinctUntilChanged(),
+		map((): void => undefined),
+	);
+
+	@Output() panelOpened: Observable<void> = this.panelStateChange$.pipe(filter(() => this.isPanelOpen));
+	@Output() panelClosed: Observable<void> = this.panelStateChange$.pipe(filter(() => !this.isPanelOpen));
 
 	public activeDescendant$ = new BehaviorSubject('');
 
