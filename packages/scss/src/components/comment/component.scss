@@ -1,9 +1,15 @@
+@use '@lucca-front/scss/src/components/avatar/exports' as avatar;
+
 @mixin component($atRoot: 'without: rule') {
 	container: comment / inline-size;
 	display: flex;
 	flex-direction: column;
 	gap: var(--pr-t-spacings-50);
 	max-width: 40rem;
+
+	.avatar {
+		@include avatar.XS;
+	}
 
 	@at-root ($atRoot) {
 		.comment-infos {
@@ -57,10 +63,14 @@
 			margin-bottom: 0;
 		}
 
+		// .comment-content-textContainer is deprecated
+		.comment-content-textContainerOptionnal,
 		.comment-content-textContainer {
 			display: flex;
 			flex-direction: column;
 			gap: var(--pr-t-spacings-100);
+			font-size: var(--components-comment-text-fontSize);
+			line-height: var(--components-comment-text-lineHeight);
 
 			> * {
 				margin: 0;
@@ -68,11 +78,6 @@
 		}
 
 		.comment-content-text {
-			font-size: var(--components-comment-text-fontSize);
-			line-height: var(--components-comment-text-lineHeight);
-		}
-
-		.comment-content-textContainer {
 			font-size: var(--components-comment-text-fontSize);
 			line-height: var(--components-comment-text-lineHeight);
 		}

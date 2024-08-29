@@ -5,6 +5,12 @@
 	--components-comment-text-lineHeight: var(--sizes-S-lineHeight);
 }
 
+@mixin wrapperS {
+	.comment {
+		@include S;
+	}
+}
+
 @mixin noAvatar {
 	--components-comment-content-margin: 0;
 }
