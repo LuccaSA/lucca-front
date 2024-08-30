@@ -143,9 +143,22 @@
 	@include a11y.mask('!important');
 }
 
-.u-clearfix,
-.u-clear {
+.u-clearfix {
 	@include reset.clearfix('!important');
+}
+
+// .u-clear is deprecated
+.u-clearBoth,
+.u-clear {
+	@include reset.clear('both', '!important');
+}
+
+.u-clearLeft {
+	@include reset.clear('left', '!important');
+}
+
+.u-clearRight {
+	@include reset.clear('right', '!important');
 }
 
 .u-listReset {
@@ -201,17 +214,17 @@
 	@include title.h6;
 }
 
-// u-textLeft is deprecated
+// .u-textLeft is deprecated
 .u-textLeft {
 	text-align: left !important;
 }
 
-// u-textRight is deprecated
+// .u-textRight is deprecated
 .u-textRight {
 	text-align: right !important;
 }
 
-// u-textCenter is deprecated
+// .u-textCenter is deprecated
 .u-textCenter {
 	text-align: center !important;
 }
@@ -310,7 +323,7 @@
 
 @each $display in core.$displays {
 	@if $display != 'none' {
-		.u-onlyPrintDisplay#{transform.capitalize($display)} {
+		.u-onlyPrintDisplay#{transform.capitalize(transform.camelize($display))} {
 			@extend %displayNone;
 		}
 	}

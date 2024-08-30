@@ -1,9 +1,15 @@
+@use '@lucca-front/scss/src/components/avatar/exports' as avatar;
+
 @mixin component($atRoot: 'without: rule') {
 	container: comment / inline-size;
 	display: flex;
 	flex-direction: column;
-	gap: var(--pr-t-spacings-100);
+	gap: var(--pr-t-spacings-50);
 	max-width: 40rem;
+
+	.avatar {
+		@include avatar.XS;
+	}
 
 	@at-root ($atRoot) {
 		.comment-infos {
@@ -17,16 +23,22 @@
 		.comment-infos-content {
 			flex-direction: column;
 			display: var(--components-comment-info-content-display);
-			font-size: var(--components-comment-info-fontSize);
-			line-height: var(--components-comment-info-lineHeight);
-			margin-top: var(--components-comment-info-content-marginTop);
+			font-size: var(--sizes-S-fontSize);
+			line-height: var(--sizes-S-lineHeight);
+			margin-block: var(--pr-t-spacings-25);
+		}
+
+		.comment-infos-date {
+			color: var(--palettes-neutral-700);
 		}
 
 		.comment-infos-name {
+			color: var(--palettes-neutral-800);
+
 			& + .comment-infos-date {
 				&::before {
 					content: var(--components-comment-info-separator);
-					color: var(--palettes-grey-400);
+					color: var(--palettes-neutral-400);
 					padding-inline: 1ch;
 
 					@supports (content: '*' / '') {
@@ -37,7 +49,7 @@
 		}
 
 		.comment-content {
-			background: var(--palettes-grey-50);
+			background: var(--palettes-neutral-50);
 			border-radius: var(--commons-borderRadius-M) var(--commons-borderRadius-L) var(--commons-borderRadius-L);
 			display: flex;
 			flex-direction: column;
@@ -51,10 +63,14 @@
 			margin-bottom: 0;
 		}
 
+		// .comment-content-textContainer is deprecated
+		.comment-content-textContainerOptionnal,
 		.comment-content-textContainer {
 			display: flex;
 			flex-direction: column;
 			gap: var(--pr-t-spacings-100);
+			font-size: var(--components-comment-text-fontSize);
+			line-height: var(--components-comment-text-lineHeight);
 
 			> * {
 				margin: 0;
@@ -62,11 +78,6 @@
 		}
 
 		.comment-content-text {
-			font-size: var(--components-comment-text-fontSize);
-			line-height: var(--components-comment-text-lineHeight);
-		}
-
-		.comment-content-textContainer {
 			font-size: var(--components-comment-text-fontSize);
 			line-height: var(--components-comment-text-lineHeight);
 		}

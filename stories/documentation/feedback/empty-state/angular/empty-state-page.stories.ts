@@ -12,7 +12,7 @@ export default {
 		}),
 	],
 	render: (args: EmptyStatePageComponent) => {
-		const { title, description, icon, topRightBackground, topRightForeground, bottomLeftBackground, bottomLeftForeground, contentBackgroundColor, hx } = args;
+		const { heading, description, icon, topRightBackground, topRightForeground, bottomLeftBackground, bottomLeftForeground, contentBackgroundColor, hx } = args;
 		const paramIcon = args.icon === '' ? '' : 'icon="' + args.icon + '"';
 
 		return {
@@ -26,7 +26,7 @@ export default {
 `,
 			],
 			template: `<lu-empty-state-page
-	title="${title}"
+	heading="${heading}"
 	description="${description}"
 	${paramIcon}
 	topRightBackground="${topRightBackground}"
@@ -140,13 +140,20 @@ export default {
 				min: 1,
 				max: 6,
 			},
+			description: '[v18.1]',
+		},
+		heading: {
+			description: '[v18.1] Optional',
+		},
+		description: {
+			description: '[v18.1] Optional',
 		},
 	},
 } as Meta;
 
 export const Page: StoryObj<EmptyStatePageComponent> = {
 	args: {
-		title: 'Empty state page',
+		heading: 'Empty state page',
 		description: 'Description can be a string or a ng-template',
 		icon: '',
 		topRightBackground: 'https://cdn.lucca.fr/lucca-front/assets/empty-states/poplee/bubbles-top-right-01.svg',

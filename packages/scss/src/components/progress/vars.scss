@@ -8,8 +8,8 @@
 	--components-progress-bar-background: var(--palettes-product-700);
 	--components-progress-bar-gradient: linear-gradient(
 		to right,
-		color.transparentize(var(--colors-white-color), 0.8) 0%,
-		color.transparentize(var(--colors-white-color), 0.5) 100%
+		color.transparentize(var(--palettes-neutral-0), 0.8) 0%,
+		color.transparentize(var(--palettes-neutral-0), 0.5) 100%
 	);
 	--components-progress-duration: 1.5s;
 }

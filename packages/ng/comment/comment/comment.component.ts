@@ -1,6 +1,6 @@
+import { DatePipe, NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, Component, computed, HostBinding, inject, input, LOCALE_ID, ViewEncapsulation } from '@angular/core';
 import { PortalDirective } from '@lucca-front/ng/core';
-import { DatePipe, NgTemplateOutlet } from '@angular/common';
 import { LuUserPictureModule } from '@lucca-front/ng/user';
 import { COMMENT_BLOCK_INSTANCE } from '../token';
 
@@ -9,7 +9,6 @@ import { COMMENT_BLOCK_INSTANCE } from '../token';
 	standalone: true,
 	imports: [PortalDirective, DatePipe, LuUserPictureModule, NgTemplateOutlet],
 	templateUrl: './comment.component.html',
-	styleUrl: './comment.component.scss',
 	encapsulation: ViewEncapsulation.None,
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	host: {
@@ -39,15 +38,19 @@ export class CommentComponent {
 
 	date = input<Date>();
 
+	content = input<string>();
+
+	contentIsHTML = computed(() => {
+		return /<\/?[a-z][\s\S]*>/i.test(this.content());
+	});
+
 	dateDisplay = computed(() => {
 		const formatted = this.#intlDateTimeFormat.format(this.date());
 		return `${formatted[0].toUpperCase()}${formatted.slice(1)}`;
 	});
 
-	isFirstComment = computed(() => this.#parentBlock.comments()[0] === this);
-
 	role = computed(() => {
-		return this.#parentBlock.isSingleComment() ? '' : 'listitem';
+		return this.#parentBlock.isSingleComment() ? null : 'listitem';
 	});
 
 	@HostBinding('attr.role')

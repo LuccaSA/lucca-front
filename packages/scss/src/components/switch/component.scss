@@ -28,7 +28,7 @@
 				align-items: center;
 				background-color: var(--palettes-neutral-500);
 				border-radius: var(--commons-borderRadius-full);
-				color: var(--colors-white-color);
+				color: var(--palettes-neutral-0);
 				display: flex;
 				font-size: var(--components-switch-icon-size);
 				height: var(--components-switch-height);
@@ -44,7 +44,7 @@
 			}
 
 			&::after {
-				background-color: var(--colors-white-color);
+				background-color: var(--palettes-neutral-0);
 				box-shadow: var(--pr-t-elevation-shadow-overflow);
 				border-radius: var(--commons-borderRadius-full);
 				content: '';

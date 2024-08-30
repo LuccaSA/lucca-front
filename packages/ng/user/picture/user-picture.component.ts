@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, Input, OnChanges, Optional } from '@angular/core';
-import { LuDisplayFullname, LuDisplayInitials, luUserDisplay } from '../display';
+import { ChangeDetectionStrategy, Component, Input, OnChanges, Optional, inject, ViewEncapsulation } from '@angular/core';
+import { LU_DEFAULT_DISPLAY_POLICY, LuDisplayFormat, LuDisplayFullname, LuDisplayHybrid, LuDisplayInitials, luUserDisplay } from '../display';
 
 export interface LuUserPictureUserInput {
 	picture?: { href: string } | null;
@@ -8,6 +8,24 @@ export interface LuUserPictureUserInput {
 	lastName: string;
 }
 
+export const displayPictureFormatRecord: Record<LuDisplayFormat, LuDisplayInitials> = {
+	[LuDisplayFullname.lastfirst]: LuDisplayInitials.lastfirst,
+	[LuDisplayInitials.lastfirst]: LuDisplayInitials.lastfirst,
+	[LuDisplayHybrid.lastIfirstFull]: LuDisplayInitials.lastfirst,
+	[LuDisplayHybrid.lastFullfirstI]: LuDisplayInitials.lastfirst,
+
+	[LuDisplayFullname.last]: LuDisplayInitials.last,
+	[LuDisplayInitials.last]: LuDisplayInitials.last,
+
+	[LuDisplayFullname.first]: LuDisplayInitials.first,
+	[LuDisplayInitials.first]: LuDisplayInitials.first,
+
+	[LuDisplayFullname.firstlast]: LuDisplayInitials.firstlast,
+	[LuDisplayInitials.firstlast]: LuDisplayInitials.firstlast,
+	[LuDisplayHybrid.firstIlastFull]: LuDisplayInitials.firstlast,
+	[LuDisplayHybrid.firstFulllastI]: LuDisplayInitials.firstlast,
+};
+
 /**
  * Displays user's picture or a placeholder with his/her initials and random bg color'
  */
@@ -15,16 +33,18 @@ export interface LuUserPictureUserInput {
 	selector: 'lu-user-picture',
 	templateUrl: './user-picture.component.html',
 	styleUrls: ['./user-picture.component.scss'],
+	host: { class: 'avatar' },
 	changeDetection: ChangeDetectionStrategy.OnPush,
+	encapsulation: ViewEncapsulation.None,
 })
 export class LuUserPictureComponent implements OnChanges {
 	/**
 	 * User Display format.
-	 * It is set to 'LF' by default
+	 * It is set to 'LU_DEFAULT_DISPLAY_POLICY' by default
 	 */
 	@Input()
 	@Optional()
-	displayFormat: LuDisplayInitials = LuDisplayInitials.lastfirst;
+	displayFormat: LuDisplayInitials = displayPictureFormatRecord[inject(LU_DEFAULT_DISPLAY_POLICY)];
 
 	/**
 	 * Image loading attribute

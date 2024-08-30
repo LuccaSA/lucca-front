@@ -22,6 +22,10 @@
 .commentWrapper {
 	@include vars;
 
+	&.mod-S {
+		@include wrapperS;
+	}
+
 	&.mod-compact {
 		@include wrapperCompact;
 	}

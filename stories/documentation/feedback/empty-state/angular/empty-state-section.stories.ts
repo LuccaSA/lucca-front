@@ -13,10 +13,10 @@ export default {
 		}),
 	],
 	render: (args: EmptyStateSectionComponent) => {
-		const { title, description, center, palette, hx, icon } = args;
+		const { heading, description, center, palette, hx, icon } = args;
 		const paramIcon = args.icon === '' ? '' : 'icon="' + args.icon + '"';
 		return {
-			template: `<lu-empty-state-section hx="${hx}" ${paramIcon} title="${title}" description="${description}" palette="${palette}" ${center ? ' center' : ''}>
+			template: `<lu-empty-state-section hx="${hx}" ${paramIcon} heading="${heading}" description="${description}" palette="${palette}" ${center ? ' center' : ''}>
 	<button luButton type="button" palette="product">Button</button>
 	<button luButton="outlined" type="button" palette="product">Button</button>
 </lu-empty-state-section>`,
@@ -30,6 +30,7 @@ export default {
 				min: 1,
 				max: 6,
 			},
+			description: '[v18.1]',
 		},
 		icon: {
 			options: [
@@ -88,13 +89,19 @@ export default {
 			],
 			control: 'select',
 		},
+		heading: {
+			description: '[v18.1] Optional',
+		},
+		description: {
+			description: '[v18.1] Optional',
+		},
 	},
 } as Meta;
 
 export const Section: StoryObj<EmptyStateSectionComponent> = {
 	args: {
 		icon: 'https://cdn.lucca.fr/lucca-front/assets/empty-states/icons/iconRocket.svg',
-		title: 'Empty state section',
+		heading: 'Empty state section',
 		description: 'Description can be a string or a ng-template',
 		center: false,
 		palette: 'none',

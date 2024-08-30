@@ -6,7 +6,7 @@
 	font-size: var(--icon-size, var(--icon-sizeDefault));
 	direction: ltr;
 	display: inline-block;
-	font-family: config.$font-name;
+	font-family: var(--icon-fontFamily);
 	font-feature-settings: 'liga';
 	-webkit-font-smoothing: antialiased;
 	font-style: normal;

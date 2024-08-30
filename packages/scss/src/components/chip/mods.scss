@@ -8,7 +8,7 @@
 @mixin product {
 	.chip-kill {
 		--components-chip-kill-cross-color: var(--palettes-product-700);
-		--components-chip-kill-disk-color: var(--colors-white-color);
+		--components-chip-kill-disk-color: var(--palettes-neutral-0);
 
 		&:hover {
 			--components-chip-kill-disk-color: var(--palettes-product-50);
@@ -19,7 +19,7 @@
 		}
 
 		&:focus-visible {
-			@include a11y.focusVisible($color: var(--colors-white-color), $offset: -4px, $borderRadius: var(--commons-borderRadius-full));
+			@include a11y.focusVisible($color: var(--palettes-neutral-0), $offset: -4px, $borderRadius: var(--commons-borderRadius-full));
 		}
 	}
 }

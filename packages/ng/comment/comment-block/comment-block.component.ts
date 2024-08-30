@@ -1,7 +1,7 @@
-import { ChangeDetectionStrategy, Component, computed, contentChildren, forwardRef, HostBinding, input, TemplateRef, viewChild, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, computed, contentChildren, forwardRef, HostBinding, Input, input, TemplateRef, ViewEncapsulation } from '@angular/core';
 import { PortalContent } from '@lucca-front/ng/core';
-import { COMMENT_BLOCK_INSTANCE } from '../token';
 import { CommentComponent } from '../comment/comment.component';
+import { COMMENT_BLOCK_INSTANCE } from '../token';
 
 @Component({
 	selector: 'lu-comment-block',
@@ -12,7 +12,7 @@ import { CommentComponent } from '../comment/comment.component';
 	encapsulation: ViewEncapsulation.None,
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	host: {
-		class: 'commentWrapper mod-compact',
+		class: 'commentWrapper',
 	},
 	providers: [
 		{
@@ -22,11 +22,23 @@ import { CommentComponent } from '../comment/comment.component';
 	],
 })
 export class CommentBlockComponent {
+	@Input({
+		transform: booleanAttribute,
+	})
+	@HostBinding('class.mod-compact')
+	compact = false;
+
+	@Input({
+		transform: booleanAttribute,
+	})
+	@HostBinding('class.mod-S')
+	small = false;
+
 	comments = contentChildren(CommentComponent, { read: CommentComponent, descendants: true });
 
 	authorName = input<PortalContent>();
 
-	avatar = viewChild<TemplateRef<unknown>>('avatarTpl');
+	avatar = input<TemplateRef<unknown>>();
 
 	noAvatar = computed(() => {
 		return !this.avatar();
@@ -39,7 +51,7 @@ export class CommentBlockComponent {
 	});
 
 	protected role = computed(() => {
-		return this.isSingleComment() ? 'presentation' : 'list';
+		return this.isSingleComment() ? null : 'list';
 	});
 
 	@HostBinding('attr.role')

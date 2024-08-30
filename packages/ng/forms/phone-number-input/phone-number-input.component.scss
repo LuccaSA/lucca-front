@@ -1,0 +1,19 @@
+lu-phone-number-input {
+	.phoneNumber-fieldset {
+		border: 0;
+		padding: 0;
+		gap: var(--pr-t-spacings-100);
+		width: 17.5rem;
+		display: flex;
+	}
+
+	.phoneNumber-fieldset-select {
+		.simpleSelect-input {
+			width: 21px;
+		}
+	}
+
+	.phoneNumber-fieldset-textfield {
+		flex-grow: 1;
+	}
+}

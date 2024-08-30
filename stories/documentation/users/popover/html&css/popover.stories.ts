@@ -10,8 +10,10 @@ function getTemplate(args: UserPopoverStory): string {
 	return `
 	<section class="lu-popover-content userPopover">
 		<div class="userPopover-details">
-			<div class="userPopover-details-avatar">
-				<img class="picture" src="https://dummyimage.com/168/60d65c/FFF&text=%20CA%20" width="84" height="84" alt="" />
+			<div class="userPopover-details-avatar avatar">
+				<div class="avatar-picture" style="background-color: rgb(92,214,153);">
+					<span class="avatar-picture-initials">CA</span>
+				</div>
 			</div>
 			<div class="userPopover-details-info">
 				<h1 class="userPopover-details-info-name u-ellipsis">

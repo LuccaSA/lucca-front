@@ -1,22 +1,25 @@
-<section class="contentSection">
+<section class="contentSection" style="min-height: 20rem">
 	<lu-toasts [sources]="[toastError$]" [bottom]="isBottom"></lu-toasts>
 
-	<button type="button" class="button" (click)="createToast('Info')">Toast</button>
-	<button type="button" class="button mod-outlined" (click)="createToast('Info', null)">Info, sans auto kill</button>
-	<button type="button" class="button mod-outlined palette-warning" (click)="createToast('Warning')">Toast warning</button>
-	<button type="button" class="button mod-outlined palette-success" (click)="createToast('Success', 2000)">Toast succès, 2000ms</button>
+	<div class="u-displayFlex pr-u-gap100 pr-u-marginBottom200">
+		<button type="button" class="button mod-S" (click)="createToast('Info')">Toast</button>
+		<button type="button" class="button mod-S mod-outlined palette-success" (click)="createToast('Success')">Toast success</button>
+		<button type="button" class="button mod-S mod-outlined palette-warning" (click)="createToast('Warning')">Toast warning</button>
+		<button type="button" class="button mod-S mod-outlined palette-error" (click)="notifyError()">Toast error</button>
+	</div>
 
-	<button type="button" class="button" (click)="createToastWithTemplate('Info', toastMessage)">Toast with template</button>
+	<div class="u-displayFlex pr-u-gap100 pr-u-marginBottom200">
+		<button type="button" class="button mod-S mod-outlined" (click)="createToast('Info', null)">Toast sans auto kill</button>
+		<button type="button" class="button mod-S mod-outlined" (click)="createToast('Info', 2000)">Toast 2000ms</button>
+		<button type="button" class="button mod-S mod-outlined" (click)="createToastWithTemplate('Info', toastMessage)">Toast avec template</button>
+	</div>
+
 	<ng-template #toastMessage>
-		<button type="button" class="button mod-outlined palette-warning" (click)="onClickButtonInsideToast()">Toast with a button</button>
+		<button type="button" class="button mod-outlined" (click)="onClickButtonInsideToast()">Toast avec button</button>
 	</ng-template>
 
-	<h4 class="pr-u-marginTop300">Toast d'erreur généré grace à la création d'un observable</h4>
-	<button type="button" class="button mod-outlined palette-error" (click)="notifyError()">Toast erreur</button>
-
-	<h4 class="pr-u-marginTop300">Positionnement</h4>
 	<label class="switch">
 		<input class="switch-input" type="checkbox" name="switchList1" [(ngModel)]="isBottom" #ctrl="ngModel" />
-		<span class="switch-label">En bas</span>
+		<span class="switch-label">Positionnement bas</span>
 	</label>
 </section>

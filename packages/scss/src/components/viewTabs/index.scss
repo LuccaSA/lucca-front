@@ -1,0 +1,22 @@
+@use 'exports' as *;
+
+.viewTabs {
+	@include vars;
+	@include component;
+
+	&.mod-S {
+		@include S;
+	}
+}
+
+.viewTabs-item-tab {
+	&[aria-selected='true'] {
+		@include tabSelected;
+	}
+}
+
+.viewTabs_panel {
+	&:not(.active) {
+		@include panelInactive;
+	}
+}

@@ -62,7 +62,7 @@ export class LuOptionOutletDirective<T> implements OnChanges, OnDestroy {
 
 	private updateRefValue(): void {
 		if (this.embeddedViewRef) {
-			this.embeddedViewRef.context = { $implicit: this.luOptionOutletValue };
+			this.embeddedViewRef.context.$implicit = this.luOptionOutletValue;
 		} else if (this.componentRef) {
 			this.optionContext.option$.next(this.luOptionOutletValue);
 		}

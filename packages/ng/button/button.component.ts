@@ -1,4 +1,4 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, ContentChild, ElementRef, inject, Input, OnChanges, OnInit, Renderer2, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, ContentChild, ElementRef, inject, Input, OnChanges, ViewEncapsulation } from '@angular/core';
 import { LuClass, Palette } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
 
@@ -15,10 +15,9 @@ import { IconComponent } from '@lucca-front/ng/icon';
 		class: 'button',
 	},
 })
-export class ButtonComponent implements OnChanges, OnInit {
+export class ButtonComponent implements OnChanges {
 	#luClass = inject(LuClass);
 	#elementRef = inject<ElementRef<HTMLButtonElement>>(ElementRef);
-	#renderer = inject(Renderer2);
 
 	@Input()
 	size: 'M' | 'S' | 'XS';
@@ -69,18 +68,12 @@ export class ButtonComponent implements OnChanges, OnInit {
 		this.updateClasses();
 	}
 
-	ngOnInit(): void {
-		if (this.#elementRef.nativeElement.tagName.toLowerCase() === 'button' && this.#elementRef.nativeElement.getAttribute('type') === null) {
-			this.#renderer.setAttribute(this.#elementRef.nativeElement, 'type', 'button');
-		}
-	}
-
 	updateClasses(): void {
 		const ngClassConfig = {
-			[`mod-${this.size}`]: true,
+			[`mod-${this.size}`]: !!this.size,
 			[`mod-block`]: this.block,
-			[`palette-${this.palette}`]: true,
-			[`is-${this.state}`]: true,
+			[`palette-${this.palette}`]: !!this.palette,
+			[`is-${this.state}`]: !!this.state,
 			['mod-onlyIcon']: this.iconOnly,
 			['mod-withIcon']: this.#iconComponentRef !== undefined,
 			['mod-delete']: this.delete,

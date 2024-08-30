@@ -25,7 +25,10 @@
 		top: 0;
 		bottom: 0;
 		background-repeat: no-repeat;
-		background-size: 75% 100%, 25% 100%, 1px 100%;
+		background-size:
+			75% 100%,
+			25% 100%,
+			1px 100%;
 	}
 
 	&::before {
@@ -34,17 +37,17 @@
 		background-image: radial-gradient(
 				farthest-side at 0% 50%,
 				color.transparentize(var(--components-scrollBox-shadowColor), 0.24),
-				color.transparentize(var(--colors-black-color), 0)
+				color.transparentize(var(--palettes-neutral-900), 0)
 			),
 			radial-gradient(
 				farthest-side at 0% 50%,
 				color.transparentize(var(--components-scrollBox-shadowColor), 0.32) 50%,
-				color.transparentize(var(--colors-black-color), 0)
+				color.transparentize(var(--palettes-neutral-900), 0)
 			),
 			radial-gradient(
 				farthest-side at 0% 50%,
 				color.transparentize(var(--components-scrollBox-shadowColor), 1) calc(100% - 1px),
-				color.transparentize(var(--colors-black-color), 0)
+				color.transparentize(var(--palettes-neutral-900), 0)
 			);
 	}
 
@@ -54,17 +57,17 @@
 		background-image: radial-gradient(
 				farthest-side at 100% 50%,
 				color.transparentize(var(--components-scrollBox-shadowColor), 0.24),
-				color.transparentize(var(--colors-black-color), 0)
+				color.transparentize(var(--palettes-neutral-900), 0)
 			),
 			radial-gradient(
 				farthest-side at 100% 50%,
 				color.transparentize(var(--components-scrollBox-shadowColor), 0.32) 50%,
-				color.transparentize(var(--colors-black-color), 0)
+				color.transparentize(var(--palettes-neutral-900), 0)
 			),
 			radial-gradient(
 				farthest-side at 100% 50%,
 				color.transparentize(var(--components-scrollBox-shadowColor), 1) calc(100% - 1px),
-				color.transparentize(var(--colors-black-color), 0)
+				color.transparentize(var(--palettes-neutral-900), 0)
 			);
 	}
 
@@ -81,7 +84,7 @@
 				display: block;
 				top: 1px;
 				bottom: 1px;
-				width: calc(var(--components-scrollBox-shadowWidth) * 2);
+				width: calc(var(--components-scrollBox-shadowWidth) / 2);
 				pointer-events: none;
 			}
 
@@ -90,7 +93,7 @@
 				background-image: linear-gradient(
 					to right,
 					var(--components-scrollBox-backgroundColor) var(--components-scrollBox-shadowWidth),
-					color.transparentize(var(--colors-black-color), 0)
+					color.transparentize(var(--palettes-neutral-900), 0)
 				);
 			}
 
@@ -99,7 +102,7 @@
 				background-image: linear-gradient(
 					to left,
 					var(--components-scrollBox-backgroundColor) var(--components-scrollBox-shadowWidth),
-					color.transparentize(var(--colors-black-color), 0)
+					color.transparentize(var(--palettes-neutral-900), 0)
 				);
 			}
 		}

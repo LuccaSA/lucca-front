@@ -26,6 +26,10 @@
 	cursor: pointer #{$suffix};
 }
 
+@mixin clear($direction, $suffix: '') {
+	clear: #{$direction} #{$suffix};
+}
+
 @mixin clearfix($suffix: '') {
 	&::before,
 	&::after {

@@ -7,7 +7,7 @@ export default {
 	component: ButtonComponent,
 	render: ({ luButton, ...inputs }, { argTypes }) => {
 		return {
-			template: `<button luButton${luButton !== '' ? `="${luButton}"` : ''}${generateInputs(inputs, argTypes)}
+			template: `<button type="button" luButton${luButton !== '' ? `="${luButton}"` : ''}${generateInputs(inputs, argTypes)}
 >Button</button>`,
 		};
 	},
@@ -21,12 +21,20 @@ export const Basic: StoryObj<ButtonComponent> = {
 				type: 'select',
 			},
 		},
+		delete: {
+			description: '[v18.1] Couleur critical au hover / focus',
+		},
+		size: {
+			control: {
+				type: 'select',
+			},
+		}
 	},
 	args: {
-		size: 'M',
 		block: false,
 		palette: 'none',
 		state: 'default',
 		luButton: '',
+		delete: false,
 	},
 };

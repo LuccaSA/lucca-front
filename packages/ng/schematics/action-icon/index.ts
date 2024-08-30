@@ -4,6 +4,9 @@ import * as path from 'path';
 import { migrateFile } from '../lib/schematics';
 import { migrateHTMLFile, migrateScssFile } from './migration';
 
+// Nx need to see "@angular-devkit/schematics" in order to run this migration correctly (see https://github.com/nrwl/nx/blob/d9fed4b832bf01d1b9a44ae9e486a5e5cd2d2253/packages/nx/src/command-line/migrate/migrate.ts#L1729-L1738)
+require('@angular-devkit/schematics');
+
 export default (options?: { skipInstallation?: boolean }): Rule => {
 	const skipInstallation = options?.skipInstallation ?? false;
 

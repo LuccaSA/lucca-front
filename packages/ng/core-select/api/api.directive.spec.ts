@@ -25,8 +25,18 @@ class TestDirective extends ALuCoreSelectApiDirective<TestEntity> {
 
 	protected override optionComparer = (a: TestEntity, b: TestEntity) => a.id === b.id;
 
+	protected override optionKey = (option: TestEntity) => option.id;
+
 	public override getOptions(): Observable<TestEntity[]> {
 		return of([{ id: 1, name: 'test' }]);
+	}
+
+	public setPageSize(size: number) {
+		this.pageSize = size;
+	}
+
+	public override getOptionsPage(params: Record<string, string | number | boolean>, page: number): Observable<{ items: TestEntity[]; isLastPage: boolean }> {
+		return super.getOptionsPage(params, page);
 	}
 }
 
@@ -41,6 +51,7 @@ describe('ALuCoreSelectApiDirective', () => {
 	let spectator: Spectator<HostComponent>;
 	let select: LuSimpleSelectInputComponent<TestEntity>;
 	let testApi: TestDirective;
+	let getOptionsSpy: jest.SpyInstance<Observable<TestEntity[]>, []>;
 
 	const createComponent = createComponentFactory<HostComponent>({
 		component: HostComponent,
@@ -50,7 +61,7 @@ describe('ALuCoreSelectApiDirective', () => {
 		spectator = createComponent({ detectChanges: false });
 		testApi = spectator.query(TestDirective);
 		select = spectator.query<LuSimpleSelectInputComponent<TestEntity>>(LuSimpleSelectInputComponent);
-		jest.spyOn(testApi, 'getOptions');
+		getOptionsSpy = jest.spyOn(testApi, 'getOptions');
 	});
 
 	it('should query options when clicking on the select', fakeAsync(() => {
@@ -96,5 +107,101 @@ describe('ALuCoreSelectApiDirective', () => {
 		expect(testApi.getOptions).toHaveBeenCalledWith({ clue: 'hey' }, 0);
 
 		spectator.tick(); // Avoid "1 periodic timer(s) still in the queue." because of the debounceTime(0) in the ALuCoreSelectApiDirective
+	}));
+
+	it('should call each page will page not full', fakeAsync(() => {
+		// Arrange
+		spectator.tick(); // Component initialization uses a setTimeout :see_no_evil:
+		testApi.setPageSize(2);
+
+		// Act (Page 1)
+		getOptionsSpy.mockReturnValue(
+			of([
+				{ id: 1, name: 'test 1' },
+				{ id: 2, name: 'test 2' },
+			]),
+		);
+
+		select.clueChanged('test');
+		spectator.tick(MAGIC_DEBOUNCE_DURATION);
+		spectator.tick();
+
+		// Act (Page 2)
+		getOptionsSpy.mockReturnValue(
+			of([
+				{ id: 3, name: 'test 3' },
+				{ id: 4, name: 'test 4' },
+			]),
+		);
+		select.nextPage.emit();
+		spectator.tick(MAGIC_OPTION_SCROLL_DELAY);
+		spectator.tick();
+
+		// // Act (Page 3)
+		getOptionsSpy.mockReturnValue(of([{ id: 5, name: 'test 5' }]));
+		select.nextPage.emit();
+		spectator.tick(MAGIC_OPTION_SCROLL_DELAY);
+		spectator.tick();
+
+		// Act (do nothing)
+		select.nextPage.emit();
+		select.nextPage.emit();
+
+		// // Assert
+		expect(testApi.getOptions).toHaveBeenCalledTimes(3);
+
+		let options: TestEntity[];
+
+		select.options$.subscribe((o) => (options = o));
+
+		expect(options).toEqual([
+			{ id: 1, name: 'test 1' },
+			{ id: 2, name: 'test 2' },
+			{ id: 3, name: 'test 3' },
+			{ id: 4, name: 'test 4' },
+			{ id: 5, name: 'test 5' },
+		]);
+	}));
+
+	it('should allow multiple emission on same page', fakeAsync(() => {
+		// Arrange
+		spectator.tick(); // Component initialization uses a setTimeout :see_no_evil:
+		testApi.setPageSize(2);
+
+		const getPageSpy = jest.spyOn(testApi, 'getOptionsPage');
+		getPageSpy.mockImplementation((params, page) => {
+			// Emit one list, then the same list with one more item
+			return of(
+				{
+					items: [{ id: page * 2 + 1, name: `test ${page * 2 + 1}` }],
+					isLastPage: false,
+				},
+				{
+					items: [
+						{ id: page * 2 + 1, name: `test ${page * 2 + 1}` },
+						{ id: page * 2 + 2, name: `test ${page * 2 + 2}` },
+					],
+					isLastPage: false,
+				},
+			);
+		});
+
+		// Act (Page 1)
+		select.openPanel();
+		spectator.tick(MAGIC_OPTION_SCROLL_DELAY);
+
+		// Act (Page 2)
+		select.nextPage.emit();
+		spectator.tick(MAGIC_OPTION_SCROLL_DELAY);
+
+		// Assert
+		let options: TestEntity[];
+		select.options$.subscribe((o) => (options = o));
+		expect(options).toEqual([
+			{ id: 1, name: 'test 1' },
+			{ id: 2, name: 'test 2' },
+			{ id: 3, name: 'test 3' },
+			{ id: 4, name: 'test 4' },
+		]);
 	}));
 });

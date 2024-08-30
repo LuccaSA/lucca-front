@@ -16,7 +16,7 @@ export default {
 		size: {
 			options: ['M', 'S'],
 			control: {
-				type: 'radio',
+				type: 'select',
 			},
 		},
 		inlineMessageState: {
@@ -25,12 +25,22 @@ export default {
 				type: 'select',
 			},
 		},
+		hiddenLabel: {
+			description: 'Masque le label en le conservant dans le DOM pour les lecteurs d\'écrans',
+    },
+		forceMeridiemDisplay: {
+			options: [null, false, true],
+			control: {
+				type: 'select',
+			},
+			description: '[v18.2]',
+		},
 	},
 } as Meta;
 
 export const Basic: StoryObj<TimePickerComponent & FormFieldComponent> = {
 	render: (args, { argTypes }) => {
-		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, ...inputArgs } = args;
+		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, forceMeridiemDisplay, ...inputArgs } = args;
 		return {
 			template: cleanupTemplate(`<lu-form-field [label]="labelID" [rolePresentationLabel]="true" ${generateInputs(
 				{
@@ -42,19 +52,18 @@ export const Basic: StoryObj<TimePickerComponent & FormFieldComponent> = {
 				},
 				argTypes,
 			)}>
-<lu-time-picker label="${label}" ${generateInputs(inputArgs, argTypes)}
+<lu-time-picker label="${label}" ${generateInputs(inputArgs, argTypes)} ${forceMeridiemDisplay !== null ? `[forceMeridiemDisplay]="${forceMeridiemDisplay}"` : ''}
 	[(ngModel)]="example">
 	</lu-time-picker>
 	<ng-template #labelID>
-    	<span aria-hidden="true">${label}</span>
-  	</ng-template>
+			<span aria-hidden="true">${label}</span>
+		</ng-template>
 </lu-form-field>
 
 {{example}}`),
 		};
 	},
 	args: {
-		size: 'M',
 		label: 'Label',
 		tooltip: 'Tooltip message',
 		hiddenLabel: false,
@@ -65,5 +74,6 @@ export const Basic: StoryObj<TimePickerComponent & FormFieldComponent> = {
 		disabled: false,
 		step: 'PT1M',
 		max: '23:59:59',
+		forceMeridiemDisplay: null,
 	},
 };

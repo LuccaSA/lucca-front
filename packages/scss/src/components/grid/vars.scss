@@ -1,6 +1,6 @@
 @mixin vars {
 	--grid-columns: 12;
-	--grid-gap: var(--pr-t-spacings-200);
+	--grid-gap: var(--pr-t-spacings-150);
 	--grid-column-gap: var(--grid-gap);
 	--grid-row-gap: var(--grid-gap);
 	--grid-maxWidth: none;

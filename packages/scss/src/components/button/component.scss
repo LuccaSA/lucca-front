@@ -55,7 +55,7 @@
 	}
 
 	&:hover {
-		--components-button-color: var(--palettes-text, var(--palettes-product-text));
+		--components-button-color: var(--palettes-0, var(--palettes-text, var(--palettes-product-0)));
 		--components-button-backgroundColor: var(--palettes-600, var(--palettes-product-600));
 	}
 
@@ -69,7 +69,7 @@
 
 	&:disabled {
 		--components-button-cursor: default;
-		--components-button-color: var(--palettes-neutral-500);
+		--components-button-color: var(--palettes-neutral-500); // disabled token candidate
 		--components-button-backgroundColor: var(--commons-disabled-background);
 		--components-button-pointerEvents: none;
 

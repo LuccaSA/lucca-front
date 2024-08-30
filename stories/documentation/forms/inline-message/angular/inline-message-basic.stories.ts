@@ -17,13 +17,15 @@ export default {
 				type: 'select',
 			},
 		},
+		label: {
+			description: '[v18.2] PortalContent',
+		},
 	},
 } as Meta;
 
 export const Template: StoryObj<InlineMessageComponent> = {
 	args: {
 		state: 'default',
-		size: 'M',
 		label: 'Inline message',
 	},
 };

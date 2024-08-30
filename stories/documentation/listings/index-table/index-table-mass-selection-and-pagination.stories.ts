@@ -1,14 +1,10 @@
 import { Meta, StoryFn } from '@storybook/angular';
 
-interface IndexTableMassSelectionAndPaginationStory {
-
-}
+interface IndexTableMassSelectionAndPaginationStory {}
 
 export default {
 	title: 'Documentation/Listings/Index Table/Mass Selection And Pagination',
-	argTypes: {
-
-	},
+	argTypes: {},
 } as Meta;
 
 function getTemplate(args: IndexTableMassSelectionAndPaginationStory): string {
@@ -49,8 +45,7 @@ function getTemplate(args: IndexTableMassSelectionAndPaginationStory): string {
 					</span>
 				</td>
 				<td class="indexTable-body-row-cell">
-					<a href="#" class="indexTable-body-row-cell-action">See details</a>
-					Content
+					<a href="#" class="indexTable-body-row-cell-link">Content</a>
 				</td>
 				<td class="indexTable-body-row-cell">Content</td>
 				<td class="indexTable-body-row-cell">Content</td>
@@ -65,8 +60,7 @@ function getTemplate(args: IndexTableMassSelectionAndPaginationStory): string {
 					</span>
 				</td>
 				<td class="indexTable-body-row-cell">
-					<a href="#" class="indexTable-body-row-cell-action">See details</a>
-					Content
+					<a href="#" class="indexTable-body-row-cell-link">Content</a>
 				</td>
 				<td class="indexTable-body-row-cell">Content</td>
 				<td class="indexTable-body-row-cell">Content</td>
@@ -105,4 +99,4 @@ const Template: StoryFn<IndexTableMassSelectionAndPaginationStory> = (args) => (
 });
 
 export const Pagination = Template.bind({});
-Pagination.args = { };
+Pagination.args = {};

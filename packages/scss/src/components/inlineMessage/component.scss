@@ -1,17 +1,27 @@
 @use '@lucca-front/icons/src/icon/exports' as icon;
 
-@mixin component {
+@mixin component($atRoot: 'without: rule') {
 	display: flex;
 	gap: var(--components-inlineMessage-gap);
+	grid-column: 2;
 	font-size: var(--components-inlineMessage-fontSize);
 	line-height: var(--components-inlineMessage-lineHeight);
 	color: var(--components-inlineMessage-color);
-	grid-column: 2;
 
-	.lucca-icon {
-		@include icon.XS;
+	@at-root ($atRoot) {
+		.inlineMessage-content {
+			display: flex;
+			gap: var(--components-inlineMessage-gap);
+			margin: 0;
+		}
 
-		color: var(--components-inlineMessage-icon-color);
-		margin-top: 2px;
+		// .lucca-icon:first-child is deprecated
+		.inlineMessage-statusIcon,
+		.inlineMessage > .lucca-icon:first-child {
+			@include icon.XS;
+
+			color: var(--components-inlineMessage-icon-color);
+			margin-top: 2px;
+		}
 	}
 }

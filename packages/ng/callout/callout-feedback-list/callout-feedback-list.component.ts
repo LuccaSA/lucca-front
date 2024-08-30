@@ -24,6 +24,6 @@ export class CalloutFeedbackListComponent implements OnChanges {
 	size: 'M' | 'S';
 
 	ngOnChanges(): void {
-		this.#luClass.setState([`palette-${this.palette}`, `mod-${this.size}`]);
+		this.#luClass.setState({ [`palette-${this.palette}`]: !!this.palette, [`mod-${this.size}`]: !!this.size });
 	}
 }

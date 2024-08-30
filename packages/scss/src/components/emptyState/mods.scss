@@ -20,6 +20,10 @@
 		box-shadow: 0 0 8px 4px var(--components-emptyState-background-color);
 	}
 
+	.emptyState-content-text {
+		padding: 0;
+	}
+
 	.emptyState-content-heading {
 		@include title.h1;
 

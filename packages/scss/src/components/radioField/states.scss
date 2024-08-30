@@ -35,9 +35,9 @@
 
 @mixin checkedDisabled {
 	~ .radioField-icon {
-		background-color: var(--palettes-neutral-500);
-		border-color: var(--palettes-neutral-500);
-		color: var(--palettes-neutral-500);
+		background-color: var(--palettes-neutral-500); // disabled token candidate
+		border-color: var(--palettes-neutral-500); // disabled token candidate
+		color: var(--palettes-neutral-500); // disabled token candidate
 	}
 }
 
@@ -65,7 +65,7 @@
 	cursor: default;
 
 	~ .radioField-icon {
-		border-color: var(--palettes-neutral-500);
+		border-color: var(--palettes-neutral-500); // disabled token candidate
 	}
 }
 

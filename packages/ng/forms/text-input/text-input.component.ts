@@ -1,5 +1,5 @@
 import { NgIf, NgTemplateOutlet } from '@angular/common';
-import { booleanAttribute, Component, ElementRef, Input, ViewChild, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, Component, ElementRef, EventEmitter, Input, Output, ViewChild, ViewEncapsulation } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LuccaIcon } from '@lucca-front/icons';
 import { getIntl } from '@lucca-front/ng/core';
@@ -43,6 +43,10 @@ export class TextInputComponent {
 
 	@Input()
 	suffix: TextInputAddon;
+
+	@Output()
+	// eslint-disable-next-line @angular-eslint/no-output-native
+	blur = new EventEmitter<FocusEvent>();
 
 	@Input()
 	get type(): TextFieldType {

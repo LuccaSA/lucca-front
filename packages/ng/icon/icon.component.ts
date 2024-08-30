@@ -1,11 +1,11 @@
-import { NgIf } from '@angular/common';
+import { NgClass, NgIf } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 import { LuccaIcon } from '@lucca-front/icons';
 
 @Component({
 	selector: 'lu-icon',
 	standalone: true,
-	imports: [NgIf],
+	imports: [NgClass, NgIf],
 	templateUrl: './icon.component.html',
 	styleUrls: ['./icon.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
@@ -23,4 +23,10 @@ export class IconComponent {
 
 	@Input()
 	color: 'primary' | 'secondary' | 'product' | 'error' | 'warning' | 'success' | 'light' | 'placeholder' | 'inherit' = 'inherit';
+
+	get iconClasses() {
+		return {
+			[`mod-${this.size}`]: !!this.size,
+		};
+	}
 }

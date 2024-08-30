@@ -78,7 +78,7 @@ export const WithMultiDisplayer = generateStory({
 	(clueChange)="clue = $event"
 >
 	<ng-container *luMultiDisplayer="let values; select: selectRef">
-		<lu-multi-select-counter-displayer [selected]="values" label="trucs sélectionnés"></lu-multi-select-counter-displayer>
+		<lu-multi-select-counter-displayer [selected]="values" label="légumes sélectionnés"></lu-multi-select-counter-displayer>
 	</ng-container>
 </lu-multi-select>`,
 	neededImports: {

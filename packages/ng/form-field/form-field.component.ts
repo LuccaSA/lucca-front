@@ -71,6 +71,7 @@ export class FormFieldComponent implements OnChanges, OnDestroy, DoCheck {
 			)
 			.subscribe((controls) => {
 				this.updateRequiredStatus(controls);
+				this.updateAria();
 			});
 	}
 
@@ -79,6 +80,9 @@ export class FormFieldComponent implements OnChanges, OnDestroy, DoCheck {
 	})
 	label: PortalContent;
 
+	/**
+	 * Hide field label, while keeping it in DOM for screen readers
+	 */
 	@Input({
 		transform: booleanAttribute,
 	})
@@ -95,8 +99,24 @@ export class FormFieldComponent implements OnChanges, OnDestroy, DoCheck {
 	@Input()
 	tooltip: string | SafeHtml;
 
-	@Input()
-	invalid = false;
+	/**
+	 * Override from input
+	 * @private
+	 */
+	#invalidStatusOverride = false;
+
+	@Input({ transform: booleanAttribute })
+	set invalid(invalid: boolean) {
+		this.#invalidStatusOverride = invalid !== undefined && invalid !== null;
+		this.invalidStatus = invalid;
+		this.updateAria();
+	}
+
+	/**
+	 * Used to cache previous invalid status and know if we want to update aria stuff or not.
+	 * @private
+	 */
+	protected invalidStatus = false;
 
 	@Input()
 	inlineMessage: string;
@@ -175,7 +195,7 @@ export class FormFieldComponent implements OnChanges, OnDestroy, DoCheck {
 
 	ngOnChanges(): void {
 		this.#luClass.setState({
-			[`mod-${this.size}`]: true,
+			[`mod-${this.size}`]: !!this.size,
 			'mod-checkable': this.layout === 'checkable',
 			'form-field': this.layout !== 'fieldset',
 		});
@@ -200,22 +220,26 @@ export class FormFieldComponent implements OnChanges, OnDestroy, DoCheck {
 
 	private updateAria(): void {
 		this.#inputs.forEach((input) => {
-			this.#renderer.setAttribute(input.host.nativeElement, 'aria-invalid', this.invalid?.toString());
+			this.#renderer.setAttribute(input.host.nativeElement, 'aria-invalid', this.invalidStatus?.toString());
 			this.#renderer.setAttribute(input.host.nativeElement, 'aria-required', this.required?.toString());
 			if (!input.standalone) {
 				this.#renderer.setAttribute(input.host.nativeElement, 'aria-describedby', `${input.host.nativeElement.id}-message`);
 			}
 		});
-		if (this.id) {
+		if (this.id && !this.#ariaLabelledBy.includes(`${this.id}-label`)) {
 			this.addLabelledBy(`${this.id}-label`);
 		}
 	}
 
 	private updateRequiredStatus(controls: NgControl[]): void {
+		// If invalid status is override, just skip updating from control because we don't care
+		if (this.#invalidStatusOverride) {
+			return;
+		}
 		controls.forEach((control) => {
 			// invalid management
-			const previousInvalid = this.invalid;
-			this.invalid = (control.invalid || this.statusControl?.invalid) && control.touched;
+			const previousInvalid = this.invalidStatus;
+			this.invalidStatus = (control.invalid || this.statusControl?.invalid) && control.touched;
 
 			// required management
 			const previousRequired = this.required;
@@ -224,7 +248,7 @@ export class FormFieldComponent implements OnChanges, OnDestroy, DoCheck {
 				: control.control.hasValidator(Validators.required) || control.control.hasValidator(Validators.requiredTrue);
 
 			// If stuff changed, update aria attributes
-			if (this.invalid !== previousInvalid || this.required !== previousRequired) {
+			if (this.invalidStatus !== previousInvalid || this.required !== previousRequired) {
 				this.updateAria();
 			}
 		});

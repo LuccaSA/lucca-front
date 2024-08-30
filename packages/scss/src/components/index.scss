@@ -7,7 +7,6 @@
 @forward 'chip'; // 1 Ko
 @forward 'title'; // 1 Ko
 @forward 'label'; // 1 Ko
-@forward 'status'; // 1 Ko
 @forward 'filterBar'; // 1 Ko
 @forward 'filters'; // 1 Ko
 @forward 'divider'; // 1 Ko
@@ -41,14 +40,16 @@
 @forward 'table'; // 7 Ko
 @forward 'checkbox'; // 7 Ko
 @forward 'checkboxField'; // new component for checkbox
-@forward 'tableSorted'; // 9 Ko
 @forward 'timeline'; // 10 Ko
 @forward 'button'; // 12 Ko
 @forward 'textfields'; // 13 Ko
 @forward 'textField'; // new component for checkbox
 @forward 'navside'; // 15 Ko
 @forward 'form'; // 25 Ko
-@forward 'tableFixed'; // 2 Ko
+@forward 'tableFixed'; // 33 Ko
+@forward 'viewTabs';
+
+// caution: the two components cannot be loaded at the same time
 @forward 'grid';
 @forward 'tableSticked'; // 8 Ko
 @forward 'timepicker'; //
@@ -75,17 +76,19 @@
 @forward 'dialog';
 @forward 'avatar';
 @forward 'indexTable';
-@forward 'indexTableSorted';
+@forward 'tableSortable';
 @forward 'tooltip';
 @forward 'userPopover';
 @forward 'scrollBox';
 @forward 'comment';
 @forward 'toast'; // 5 Ko
 @forward 'popover';
+@forward 'userTile';
+@forward 'plgPush';
 
 // Deprecated CSS components
 // @forward 'gridLegacy'; // 40 Ko
 // @forward 'emptyStateDeprecated';
 
-// @forward 'tableFixedLegacy'; // 33 Ko
-// @forward 'tableStickedLegacy'; // 67 Ko
+// @forward 'tableFixedDeprecated'; // 33 Ko
+// @forward 'tableStickedDeprecated'; // 67 Ko

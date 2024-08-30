@@ -1,0 +1,121 @@
+@use 'exports' as *;
+
+// .table-head-row-cell-sortableButton is deprecated
+// .indexTable-head-row-cell-sortableButton is deprecated
+.tableSortable,
+.table-head-row-cell-sortableButton,
+.indexTable-head-row-cell-sortableButton {
+	@include vars;
+	@include component;
+}
+
+.table-head-row-cell,
+.indexTable-head-row-cell {
+	&.mod-alignRight {
+		// .table-head-row-cell-sortableButton is deprecated
+		// .indexTable-head-row-cell-sortableButton is deprecated
+		.tableSortable,
+		.table-head-row-cell-sortableButton,
+		.indexTable-head-row-cell-sortableButton {
+			@include sortAlignRight;
+		}
+	}
+
+	&.mod-alignCenter {
+		// .table-head-row-cell-sortableButton is deprecated
+		// .indexTable-head-row-cell-sortableButton is deprecated
+		.tableSortable,
+		.table-head-row-cell-sortableButton,
+		.indexTable-head-row-cell-sortableButton {
+			@include sortAlignCenter;
+		}
+	}
+
+	&[aria-sort='ascending'] {
+		// table-head-row-cell-sortableButton is deprecated
+		// .indexTable-head-row-cell-sortableButton is deprecated
+		.tableSortable,
+		.table-head-row-cell-sortableButton,
+		.indexTable-head-row-cell-sortableButton {
+			@include sortAscending;
+		}
+	}
+
+	&[aria-sort='descending'] {
+		// .table-head-row-cell-sortableButton is deprecated
+		// .indexTable-head-row-cell-sortableButton is deprecated
+		.tableSortable,
+		.table-head-row-cell-sortableButton,
+		.indexTable-head-row-cell-sortableButton {
+			@include sortDescending;
+		}
+	}
+}
+
+// .mod-sortable is deprecated
+// .table-head-row-cell-sortableButton is deprecated
+.indexTable-head-row-cell,
+.table-head-row-cell {
+	&:not(:has(.tableSortable-arrows)) {
+		&.mod-sortable,
+		.table-head-row-cell-sortableButton,
+		.indexTable-head-row-cell-sortableButton {
+			@include sortableLegacy;
+
+			.table.mod-S & {
+				@include sortableLegacyS;
+			}
+		}
+
+		&:is(.is-sorted-descending, .sortedDescending) {
+			@include descendingLegacy;
+		}
+
+		&:is(.is-sorted-ascending, .sortedAscending) {
+			@include ascendingLegacy;
+		}
+
+		&:is([aria-sort='descending']) {
+			@include descendingLegacy2;
+		}
+
+		&:is([aria-sort='ascending']) {
+			@include ascendingLegacy2;
+		}
+
+		&.mod-alignCenter {
+			&.mod-sortable,
+			.table-head-row-cell-sortableButton {
+				@include sortableLegacyAlignCenter;
+			}
+		}
+
+		&.mod-alignRight {
+			&.mod-sortable,
+			.table-head-row-cell-sortableButton,
+			.indexTable-head-row-cell-sortableButton {
+				@include sortableLegacyAlignRight;
+			}
+
+			&.mod-sortable {
+				@include sortableLegacy2AlignRight;
+			}
+
+			&:is(.is-sorted-descending, .sortedDescending) {
+				@include descendingLegacyAlignRight;
+			}
+
+			&:is(.is-sorted-ascending, .sortedAscending) {
+				@include ascendingLegacyAlignRight;
+			}
+
+			&:is([aria-sort='descending']) {
+				@include descendingAlignRight;
+			}
+
+			&:is([aria-sort='ascending']) {
+				@include ascendingAlignRight;
+			}
+		}
+	}
+}

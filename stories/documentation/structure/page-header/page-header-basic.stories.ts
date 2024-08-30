@@ -67,5 +67,5 @@ const Template: StoryFn<PageHeaderBasicStory> = (args) => ({
 	template: getTemplate(args),
 });
 
-export const BaiscPageHeader = Template.bind({});
-BaiscPageHeader.args = { sticky: false };
+export const BasicPageHeader = Template.bind({});
+BasicPageHeader.args = { sticky: false };

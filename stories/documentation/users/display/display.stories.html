@@ -1,0 +1,12 @@
+<section class="contentSection">
+	<h4>Un utilisateur</h4>
+	<div>{{ users[0] | luUserDisplay : displayFormat }}</div>
+</section>
+
+<section class="contentSection u-marginTopM">
+	<h4>Plusieurs utilisateurs</h4>
+	<div class="u-displayFlex u-flexDirectionColumn u-gapS">
+		<div><label class="u-marginRightM">Avec un séparateur :</label>{{ users | luUserDisplay : { format: displayFormat, separator } }}</div>
+		<div><label class="u-marginRightM">Avec un formatter :</label>{{ users | luUserDisplay : { format: displayFormat, formatter } }}</div>
+	</div>
+</section>

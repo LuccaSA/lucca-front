@@ -1,3 +1,5 @@
+@use '@lucca-front/scss/src/commons/utils/color';
+
 @mixin vars {
 	/** notch */
 	--component-notchbox-notch-radius: var(--commons-borderRadius-M);
@@ -11,7 +13,7 @@
 	--component-notchbox-box-radius: 16px;
 	--component-notchbox-box-padding: var(--pr-t-spacings-200);
 	--component-notchbox-box-background-color: var(--pr-t-elevation-surface-raised);
-	--component-notchbox-box-shadow: 0 0 4px var(--palettes-neutral-200);
+	--component-notchbox-box-shadow: 0 1px 2px #{color.transparentize(var(--palettes-neutral-400), 0.6)};
 
 	/** badge */
 	--component-notchbox-badge-offset: 17px;
