@@ -1,21 +1,20 @@
-import { CommentAvatarDirective, CommentBlockComponent, CommentComponent } from '@lucca-front/ng/comment';
+import { CommentBlockComponent, CommentComponent } from '@lucca-front/ng/comment';
 import { LuUserPictureModule } from '@lucca-front/ng/user';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { generateInputs } from '../../../helpers/stories';
 
 export default {
 	title: 'Documentation/Texts/Comment/Angular/Basic',
 	decorators: [
 		moduleMetadata({
-			imports: [CommentComponent, CommentBlockComponent, LuUserPictureModule, CommentAvatarDirective],
+			imports: [CommentComponent, CommentBlockComponent, LuUserPictureModule],
 		}),
 	],
-	render: (args) => {
-		const firstName = args['author'].firstName;
-		const lastName = args['author'].lastName;
-		const compact = args['compact'];
-		const small = args['small'];
-		const avatar = args['noAvatar'] ? '' : '[avatar]="avatarTpl"';
-		const avatar2 = args['noAvatar'] ? '' : '[avatar]="avatarTpl2"';
+	render: (args, { argTypes }) => {
+		const avatar = args['noAvatar'] ? '' : '[avatar]="avatarTpl" ';
+		const avatar2 = args['noAvatar'] ? '' : '[avatar]="avatarTpl2" ';
+
+		const { firstName, lastName, compact, small, content } = args;
 
 		const richContent = `
 			<h3>Lorem, ipsum.</h3>
@@ -31,20 +30,26 @@ export default {
 				date: new Date(),
 			},
 			template: `
-<div class="u-displayFlex u-flexDirectionColumn u-gapM">	
-	<lu-comment-block ${avatar} authorName="${firstName} ${lastName}" compact="${compact}" small="${small}">
+<div class="u-displayFlex u-flexDirectionColumn u-gapM">
+	<lu-comment-block ${avatar}${generateInputs(
+		{
+			compact,
+			small,
+		},
+		argTypes,
+	)} authorName="${firstName} ${lastName}">
 		<ng-template #avatarTpl>
 			<lu-user-picture [user]="{firstName: 'Marie', lastName: 'Bragoulet'}"></lu-user-picture>
 		</ng-template>
-		<lu-comment [date]="date" content="${args['content']}" />
+		<lu-comment [date]="date" content="${content}" />
 		<lu-comment [date]="date" content="Lorem ipsum dolor sit amet." />
 		<lu-comment [date]="date" content="${richContent}" />
 	</lu-comment-block>
-	<lu-comment-block ${avatar2} authorName="Chloé Alibert" compact="${compact}" small="${small}">
+	<lu-comment-block ${avatar2}${generateInputs({ compact, small }, argTypes)} authorName="Chloé Alibert">
 		<ng-template #avatarTpl2>
 			<lu-user-picture [user]="{firstName: 'Chloé', lastName: 'Alibert'}"></lu-user-picture>
 		</ng-template>
-		<lu-comment [date]="date" content="${args['content']}" />
+		<lu-comment [date]="date" content="${content}" />
 	</lu-comment-block>
 </div>`,
 		};
@@ -58,6 +63,7 @@ export const Basic: StoryObj = {
 		compact: false,
 		small: false,
 		date: new Date(),
-		author: { firstName: 'Marie', lastName: 'Bragoulet' },
+		firstName: 'Marie',
+		lastName: 'Bragoulet',
 	},
 };
