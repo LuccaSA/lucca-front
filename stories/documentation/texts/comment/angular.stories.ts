@@ -15,6 +15,7 @@ export default {
 		const compact = args['compact'];
 		const small = args['small'];
 		const avatar = args['noAvatar'] ? '' : '[avatar]="avatarTpl"';
+		const avatar2 = args['noAvatar'] ? '' : '[avatar]="avatarTpl2"';
 
 		const richContent = `
 			<h3>Lorem, ipsum.</h3>
@@ -30,14 +31,22 @@ export default {
 				date: new Date(),
 			},
 			template: `
-<lu-comment-block ${avatar} authorName="${firstName} ${lastName}" compact="${compact}" small="${small}">
-	<ng-template #avatarTpl>
-		<lu-user-picture [user]="{firstName: 'Marie', lastName: 'Bragoulet'}"></lu-user-picture>
-	</ng-template>
-	<lu-comment [date]="date" content="${args['content']}" />
-	<lu-comment [date]="date" content="Lorem ipsum dolor sit amet." />
-	<lu-comment [date]="date" content="${richContent}" />
-</lu-comment-block>`,
+<div class="u-displayFlex u-flexDirectionColumn u-gapM">	
+	<lu-comment-block ${avatar} authorName="${firstName} ${lastName}" compact="${compact}" small="${small}">
+		<ng-template #avatarTpl>
+			<lu-user-picture [user]="{firstName: 'Marie', lastName: 'Bragoulet'}"></lu-user-picture>
+		</ng-template>
+		<lu-comment [date]="date" content="${args['content']}" />
+		<lu-comment [date]="date" content="Lorem ipsum dolor sit amet." />
+		<lu-comment [date]="date" content="${richContent}" />
+	</lu-comment-block>
+	<lu-comment-block ${avatar2} authorName="Chloé Alibert" compact="${compact}" small="${small}">
+		<ng-template #avatarTpl2>
+			<lu-user-picture [user]="{firstName: 'Chloé', lastName: 'Alibert'}"></lu-user-picture>
+		</ng-template>
+		<lu-comment [date]="date" content="${args['content']}" />
+	</lu-comment-block>
+</div>`,
 		};
 	},
 } as Meta;

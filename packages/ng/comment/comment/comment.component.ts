@@ -50,7 +50,7 @@ export class CommentComponent {
 	});
 
 	role = computed(() => {
-		return this.#parentBlock.isSingleComment() ? '' : 'listitem';
+		return this.#parentBlock.isSingleComment() ? null : 'listitem';
 	});
 
 	@HostBinding('attr.role')

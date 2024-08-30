@@ -51,7 +51,7 @@ export class CommentBlockComponent {
 	});
 
 	protected role = computed(() => {
-		return this.isSingleComment() ? 'presentation' : 'list';
+		return this.isSingleComment() ? null : 'list';
 	});
 
 	@HostBinding('attr.role')
