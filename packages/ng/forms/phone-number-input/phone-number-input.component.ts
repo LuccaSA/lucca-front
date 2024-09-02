@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, forwardRef, Input, input, signal, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, forwardRef, inject, Input, input, LOCALE_ID, signal, ViewEncapsulation } from '@angular/core';
 import { AbstractControl, ControlValueAccessor, FormsModule, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors, Validator } from '@angular/forms';
 import { LuDisplayerDirective, LuOptionDirective } from '@lucca-front/ng/core-select';
 import { FormFieldComponent, InputDirective } from '@lucca-front/ng/form-field';
@@ -11,12 +11,8 @@ import { PhoneNumberValidators } from './validators';
 interface PrefixEntry {
 	country: CountryCode;
 	prefix: CountryCallingCode;
+	name: string;
 }
-
-const PREFIX_ENTRIES = getCountries().map((country) => ({
-	country,
-	prefix: getCountryCallingCode(country),
-}));
 
 @Component({
 	selector: 'lu-phone-number-input',
@@ -40,6 +36,8 @@ const PREFIX_ENTRIES = getCountries().map((country) => ({
 	],
 })
 export class PhoneNumberInputComponent implements ControlValueAccessor, Validator {
+	#locale = inject(LOCALE_ID);
+
 	@Input() label: string;
 
 	#onChange?: (value: E164Number | ValidatePhoneNumberLengthResult) => void;
@@ -47,6 +45,14 @@ export class PhoneNumberInputComponent implements ControlValueAccessor, Validato
 	#onTouched?: () => void;
 
 	disabled = false;
+
+	#displayNames = new Intl.DisplayNames(this.#locale, { type: 'region' });
+
+	prefixEntries = getCountries().map((country) => ({
+		country,
+		prefix: getCountryCallingCode(country),
+		name: this.#displayNames.of(country),
+	}));
 
 	/**
 	 * Which countries should be shown? Defaults to empty array which means all of them.
@@ -58,9 +64,9 @@ export class PhoneNumberInputComponent implements ControlValueAccessor, Validato
 	#prefixEntries = computed(() => {
 		const whitelist = this.allowedCountries();
 		if (whitelist.length === 0) {
-			return PREFIX_ENTRIES;
+			return this.prefixEntries;
 		}
-		return PREFIX_ENTRIES.filter((e) => whitelist.includes(e.country));
+		return this.prefixEntries.filter((e) => whitelist.includes(e.country));
 	});
 
 	query = signal('');
@@ -71,7 +77,7 @@ export class PhoneNumberInputComponent implements ControlValueAccessor, Validato
 			return this.#prefixEntries();
 		}
 		return this.#prefixEntries().filter((entry) => {
-			return entry.country.toLowerCase().includes(query.toLowerCase()) || entry.prefix.includes(query);
+			return entry.country.toLowerCase().includes(query.toLowerCase()) || `+${entry.prefix}`.includes(query) || entry.name.toLowerCase().includes(query.toLowerCase());
 		});
 	});
 
