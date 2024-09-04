@@ -1,0 +1,23 @@
+@use 'exports' as *;
+
+.segmentedControl {
+	@include vars;
+	@include component;
+
+	&.mod-S {
+		@include S;
+	}
+}
+
+.segmentedControl-item-action {
+	.segmentedControl-item-input:checked + &,
+	&[aria-selected='true'] {
+		@include selected;
+	}
+}
+
+.segmentedControl_panel {
+	&:not(.is-active, .active) {
+		@include panelInactive;
+	}
+}

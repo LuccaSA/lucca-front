@@ -1,0 +1,12 @@
+@use '@lucca-front/scss/src/components/numericBadge/exports' as numericBadge;
+
+@mixin S {
+	--components-segmentedControl-padding: var(--pr-t-spacings-75) var(--pr-t-spacings-150);
+	--components-segmentedControl-fontSize: var(--sizes-S-fontSize);
+	--components-segmentedControl-lineHeight: var(--sizes-S-lineHeight);
+	--components-segmentedControl-dividerInset: var(--pr-t-spacings-75);
+
+	.numericBadge {
+		@include numericBadge.S;
+	}
+}

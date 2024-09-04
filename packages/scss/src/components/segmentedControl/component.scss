@@ -1,0 +1,79 @@
+@use '@lucca-front/scss/src/commons/utils/a11y';
+
+@mixin component($atRoot: 'without: rule') {
+	padding: 0;
+	margin: 0;
+	list-style-type: none;
+	display: flex;
+	flex-wrap: wrap;
+	width: var(--components-segmentedControl-width);
+	flex-direction: var(--components-segmentedControl-direction);
+	box-shadow: 0 0 0 var(--commons-divider-width) var(--palettes-neutral-300);
+	border-radius: var(--components-segmentedControl-borderRadius);
+	background-color: var(--palettes-neutral-0);
+	font-size: var(--components-segmentedControl-fontSize);
+	line-height: var(--components-segmentedControl-lineHeight);
+
+	@at-root ($atRoot) {
+		.segmentedControl-item-input {
+			@include a11y.mask;
+
+			&:focus-visible {
+				+ .segmentedControl-item-action {
+					@include a11y.focusVisible($offset: 3px);
+				}
+			}
+		}
+
+		.segmentedControl-item {
+			flex-grow: 1;
+			position: relative;
+
+			&:not(:last-child) {
+				&::before {
+					content: '';
+					border-width: 0;
+					inset: var(--components-segmentedControl-dividerInset);
+					right: calc(var(--commons-divider-width) * -1);
+					border-left-width: var(--commons-divider-width);
+					border-color: var(--palettes-neutral-200);
+					left: auto;
+					position: absolute;
+					border-style: solid;
+				}
+			}
+		}
+
+		.segmentedControl-item-action {
+			width: 100%;
+			border: 0;
+			margin: 0;
+			padding: var(--components-segmentedControl-padding);
+			background-color: var(--components-segmentedControl-background);
+			box-shadow: 0 0 0 var(--commons-divider-width) var(--components-segmentedControl-shadow);
+			border-radius: var(--components-segmentedControl-borderRadius);
+			gap: var(--pr-t-spacings-100);
+			color: var(--components-segmentedControl-color);
+			text-align: center;
+			justify-content: center;
+			display: flex;
+			align-items: center;
+			position: relative;
+			z-index: 1;
+			cursor: var(--components-segmentedControl-cursor);
+			font: inherit;
+
+			&:focus-visible {
+				@include a11y.focusVisible($offset: 3px);
+			}
+		}
+
+		.segmentedControl_panel {
+			display: var(--components-segmentedControl-display, block);
+
+			&:focus-visible {
+				@include a11y.focusVisible;
+			}
+		}
+	}
+}
