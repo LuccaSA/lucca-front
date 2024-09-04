@@ -86,13 +86,17 @@ export class PhoneNumberInputComponent implements ControlValueAccessor, Validato
 	protected prefixComparator = (a: PrefixEntry, b: PrefixEntry) => this.getPrefixKey(a) === this.getPrefixKey(b);
 
 	writeValue(value: string): void {
-		if (value) {
-			this.parsedPhoneNumber = parsePhoneNumber(value);
-			this.prefixEntry = this.#prefixEntries().find((p) => p.country === this.parsedPhoneNumber.country);
-			this.nationalNumber = this.parsedPhoneNumber.nationalNumber;
-		} else {
-			delete this.nationalNumber;
-			delete this.prefixEntry;
+		try {
+			if (value) {
+				this.parsedPhoneNumber = parsePhoneNumber(value);
+				this.prefixEntry = this.#prefixEntries().find((p) => p.country === this.parsedPhoneNumber.country);
+				this.nationalNumber = this.parsedPhoneNumber.nationalNumber;
+			} else {
+				delete this.nationalNumber;
+				delete this.prefixEntry;
+			}
+		} catch {
+			// do nothing
 		}
 	}
 
@@ -109,18 +113,22 @@ export class PhoneNumberInputComponent implements ControlValueAccessor, Validato
 	}
 
 	updateModel(): void {
-		const invalidPhoneNumberReason = validatePhoneNumberLength(this.nationalNumber, this.prefixEntry.country);
-		if (invalidPhoneNumberReason) {
-			this.#onChange?.(invalidPhoneNumberReason);
-		} else {
-			if (isValidPhoneNumber(this.nationalNumber)) {
-				const country = parsePhoneNumber(this.nationalNumber).country;
-				if (country !== this.prefixEntry?.country) {
-					this.prefixEntry = this.#prefixEntries().find((p) => p.country === country);
+		try {
+			const invalidPhoneNumberReason = validatePhoneNumberLength(this.nationalNumber, this.prefixEntry.country);
+			if (invalidPhoneNumberReason) {
+				this.#onChange?.(invalidPhoneNumberReason);
+			} else {
+				if (isValidPhoneNumber(this.nationalNumber)) {
+					const country = parsePhoneNumber(this.nationalNumber).country;
+					if (country !== this.prefixEntry?.country) {
+						this.prefixEntry = this.#prefixEntries().find((p) => p.country === country);
+					}
 				}
+				this.parsedPhoneNumber = parsePhoneNumber(this.nationalNumber, this.prefixEntry.country);
+				this.#onChange?.(this.parsedPhoneNumber.number);
 			}
-			this.parsedPhoneNumber = parsePhoneNumber(this.nationalNumber, this.prefixEntry.country);
-			this.#onChange?.(this.parsedPhoneNumber.number);
+		} catch {
+			// do nothing
 		}
 	}
 
@@ -129,8 +137,12 @@ export class PhoneNumberInputComponent implements ControlValueAccessor, Validato
 	}
 
 	formatNationalNumber(): void {
-		if (isValidPhoneNumber(this.nationalNumber, this.prefixEntry.country)) {
-			this.nationalNumber = this.parsedPhoneNumber?.formatNational();
+		try {
+			if (isValidPhoneNumber(this.nationalNumber, this.prefixEntry.country)) {
+				this.nationalNumber = this.parsedPhoneNumber?.formatNational();
+			}
+		} catch {
+			// do nothing
 		}
 	}
 
