@@ -1,6 +1,8 @@
 @use 'exports' as *;
 
-.segmentedControl {
+// .viewTabs is deprecated
+.segmentedControl,
+.viewTabs {
 	@include vars;
 	@include component;
 
@@ -9,14 +11,18 @@
 	}
 }
 
-.segmentedControl-item-action {
+// .viewTabs-item-tab is deprecated
+.segmentedControl-item-action,
+.viewTabs-item-tab {
 	.segmentedControl-item-input:checked + &,
 	&[aria-selected='true'] {
 		@include selected;
 	}
 }
 
-.segmentedControl_panel {
+// .viewTabs_panel is deprecated
+.segmentedControl_panel,
+.viewTabs_panel {
 	&:not(.is-active, .active) {
 		@include panelInactive;
 	}
