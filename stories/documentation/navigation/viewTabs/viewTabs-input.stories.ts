@@ -23,7 +23,7 @@ export default {
 } as Meta;
 
 function getTemplate(args: segmentedControlInputStory): string {
-	return `<ul class="segmentedControl ${args.size}">
+	return `<ul class="segmentedControl ${args.size}" role="presentation">
 	<li class="segmentedControl-item">
 		<input type="radio" class="segmentedControl-item-input" name="tab" id="tab1" checked="checked" />
 		<label for="tab1" class="segmentedControl-item-action">
