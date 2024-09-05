@@ -4,11 +4,11 @@
 		<span class="u-mask">Prefix</span>
 		<lu-simple-select
 			[options]="prefixesDisplay()"
-			[(ngModel)]="prefixEntry"
-			(ngModelChange)="updateModel(); formatNationalNumber()"
+			[ngModel]="prefixEntry()"
+			(ngModelChange)="updatePrefix($event)"
 			[optionKey]="getPrefixKey"
 			[optionComparer]="prefixComparator"
-			(blur)="touched()"
+			(blur)="touched();formatNationalNumber()"
 			(clueChange)="query.set($event)"
 			#selectRef
 			class="phoneNumber-fieldset-select"
@@ -32,8 +32,8 @@
 			<input
 				type="text"
 				id="phoneNumberFieldsetTextfieldInput"
-				[(ngModel)]="nationalNumber"
-				(ngModelChange)="updateModel()"
+				[ngModel]="nationalNumber()"
+				(ngModelChange)="updateNumber($event)"
 				(blur)="touched();formatNationalNumber()"
 				luInput
 				luInputStandalone
