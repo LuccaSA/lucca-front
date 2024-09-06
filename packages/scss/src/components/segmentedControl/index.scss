@@ -1,3 +1,4 @@
+@use '@lucca-front/scss/src/commons/utils/media';
 @use 'exports' as *;
 
 // .viewTabs is deprecated
@@ -8,6 +9,14 @@
 
 	&.mod-S {
 		@include S;
+	}
+
+	&.mod-vertical {
+		@include vertical;
+	}
+
+	@include media.max('XXS') {
+		@include vertical;
 	}
 }
 

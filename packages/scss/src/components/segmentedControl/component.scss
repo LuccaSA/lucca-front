@@ -30,19 +30,28 @@
 		.viewTabs-item {
 			flex-grow: 1;
 			position: relative;
+			z-index: 1;
 
-			&:not(:last-child) {
-				&::before {
-					content: '';
-					border-width: 0;
-					inset: var(--components-segmentedControl-dividerInset);
-					right: calc(var(--commons-divider-width) * -1);
-					border-left-width: var(--commons-divider-width);
-					border-color: var(--palettes-neutral-200);
-					left: auto;
-					position: absolute;
-					border-style: solid;
-				}
+			&::before,
+			&::after {
+				content: '';
+				border-width: 0;
+				inset: var(--components-segmentedControl-dividerInset);
+				border-color: var(--palettes-grey-200);
+				position: absolute;
+				border-style: solid;
+			}
+
+			&::before {
+				right: calc(var(--commons-divider-width) * -1);
+				border-left-width: var(--commons-divider-width);
+				left: auto;
+			}
+
+			&::after {
+				bottom: calc(var(--commons-divider-width) * -1);
+				border-top-width: var(--commons-divider-width);
+				top: auto;
 			}
 		}
 
@@ -63,12 +72,33 @@
 			display: flex;
 			align-items: center;
 			position: relative;
-			z-index: 1;
 			cursor: var(--components-segmentedControl-cursor);
+			z-index: var(--components-segmentedControl-zIndex);
 			font: inherit;
 
 			&:focus-visible {
 				@include a11y.focusVisible($offset: 3px);
+			}
+
+			&::before {
+				content: var(--components-segmentedControl-backgroundContent);
+				z-index: -1;
+				position: absolute;
+				inset: var(--pr-t-spacings-50);
+				bottom: calc(var(--pr-t-spacings-50) - var(--commons-divider-width));
+				border-radius: var(--commons-borderRadius-M);
+				transition-property: scale, opacity;
+				transition-duration: var(--commons-animations-durations-standard);
+				opacity: 0;
+				scale: 0;
+			}
+
+			&:hover {
+				&::before {
+					background-color: var(--palettes-neutral-50);
+					opacity: 1;
+					scale: 1;
+				}
 			}
 		}
 

@@ -1,17 +1,22 @@
 import { Meta, StoryFn } from '@storybook/angular';
 
-interface segmentedControlButtonStory {
-	size: string;
+interface segmentedControlTabsStory {
+	S: string;
 	withNumericBadge: boolean;
+	vertical: boolean;
 }
 
 export default {
-	title: 'Documentation/Navigation/segmentedControl/Button',
+	title: 'Documentation/Navigation/segmentedControl/Tabs',
 	argTypes: {
-		size: {
-			options: ['', 'mod-S', 'mod-XS'],
+		S: {
 			control: {
-				type: 'select',
+				type: 'boolean',
+			},
+		},
+		vertical: {
+			control: {
+				type: 'boolean',
 			},
 		},
 		tabActive: {
@@ -29,8 +34,11 @@ export default {
 	},
 } as Meta;
 
-function getTemplate(args: segmentedControlButtonStory): string {
-	return `<ul class="segmentedControl ${args.size}" role="tablist">
+function getTemplate(args: segmentedControlTabsStory): string {
+	const size = args.S ? `mod-S` : '';
+	const vertical = args.vertical ? `mod-vertical` : '';
+
+	return `<ul class="segmentedControl ${size} ${vertical}" role="tablist">
 	<li class="segmentedControl-item" role="presentation">
 		<button class="segmentedControl-item-action" type="button" role="tab" id="tab1" aria-controls="panel1" [attr.aria-selected]="tabActive === 1" [attr.tabindex]="tabActive === 1 ? null : '-1'">
 			Lorem
@@ -70,14 +78,15 @@ function getTemplate(args: segmentedControlButtonStory): string {
 	`;
 }
 
-const Template: StoryFn<segmentedControlButtonStory> = (args: segmentedControlButtonStory) => ({
+const Template: StoryFn<segmentedControlTabsStory> = (args: segmentedControlTabsStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Button = Template.bind({});
-Button.args = {
-	size: '',
-	tabActive: 1,
+export const Tabs = Template.bind({});
+Tabs.args = {
+	S: false,
 	withNumericBadge: false,
+	vertical: false,
+	tabActive: 1,
 };

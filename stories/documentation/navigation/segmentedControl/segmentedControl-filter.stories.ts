@@ -1,17 +1,22 @@
 import { Meta, StoryFn } from '@storybook/angular';
 
-interface segmentedControlInputStory {
-	size: string;
+interface segmentedControlFilterStory {
+	S: string;
 	withNumericBadge: boolean;
+	vertical: boolean;
 }
 
 export default {
-	title: 'Documentation/Navigation/segmentedControl/Input',
+	title: 'Documentation/Navigation/segmentedControl/Filter',
 	argTypes: {
-		size: {
-			options: ['', 'mod-S', 'mod-XS'],
+		S: {
 			control: {
-				type: 'select',
+				type: 'boolean',
+			},
+		},
+		vertical: {
+			control: {
+				type: 'boolean',
 			},
 		},
 		withNumericBadge: {
@@ -22,8 +27,10 @@ export default {
 	},
 } as Meta;
 
-function getTemplate(args: segmentedControlInputStory): string {
-	return `<ul class="segmentedControl ${args.size}" role="presentation">
+function getTemplate(args: segmentedControlFilterStory): string {
+	const size = args.S ? `mod-S` : '';
+	const vertical = args.vertical ? `mod-vertical` : '';
+	return `<ul class="segmentedControl ${size} ${vertical}" role="presentation">
 	<li class="segmentedControl-item">
 		<input type="radio" class="segmentedControl-item-input" name="tab" id="tab1" checked="checked" />
 		<label for="tab1" class="segmentedControl-item-action">
@@ -54,13 +61,14 @@ function getTemplate(args: segmentedControlInputStory): string {
 `;
 }
 
-const Template: StoryFn<segmentedControlInputStory> = (args: segmentedControlInputStory) => ({
+const Template: StoryFn<segmentedControlFilterStory> = (args: segmentedControlFilterStory) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Input = Template.bind({});
-Input.args = {
-	size: '',
+export const Filter = Template.bind({});
+Filter.args = {
+	S: false,
 	withNumericBadge: false,
+	vertical: false,
 };
