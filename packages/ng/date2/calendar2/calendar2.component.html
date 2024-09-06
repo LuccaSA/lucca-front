@@ -1,0 +1,26 @@
+<table role="grid">
+	<caption>
+		{{ currentMonthLabel() }}
+	</caption>
+	<thead>
+		<tr>
+			@for (day of daysOfWeek; track day.long) {
+			<th scope="col" [attr.data-content-after]="day.short"><span class="mask">{{ day.long }}</span></th>
+			}
+		</tr>
+	</thead>
+	<tbody>
+		@for (week of gridDisplay(); track $index; let isFirstWeek = $first) {
+		<tr>
+			<td *luRepeatTimes="isFirstWeek ? 7 - week.length : 0"></td>
+			@for (day of week; track di; let di = $index) { @if (day) {
+			<td tabindex="{{di === 0 && isFirstWeek ? '0' : '-1'}}" [class.weekend]="day.isWeekend">
+				<button type="button">{{ day.day }}</button>
+			</td>
+			} @else {
+			<td></td>
+			} }
+		</tr>
+		}
+	</tbody>
+</table>
