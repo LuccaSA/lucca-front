@@ -221,10 +221,15 @@
 	}
 
 	.textfield-clear {
-		@include clear.S;
+		// :not(.class) is only there to increase specificity when the class isn’t present
+		// but the class should be present, and this code is temporary
+		&.clear,
+		&:not(.clear) {
+			@include clear.S;
 
-		right: 2.125rem;
-		bottom: 0.625rem;
+			right: 2.125rem;
+			bottom: 0.625rem;
+		}
 	}
 }
 
@@ -247,10 +252,12 @@
 	}
 
 	.textfield-clear {
-		@include clear.S;
+		&.clear {
+			@include clear.S;
 
-		right: 1.75rem;
-		bottom: var(--pr-t-spacings-75);
+			right: 1.75rem;
+			bottom: var(--pr-t-spacings-75);
+		}
 	}
 }
 

@@ -1,4 +1,5 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta, moduleMetadata, StoryFn } from '@storybook/angular';
+import { ButtonComponent } from 'dist/ng/button';
 
 interface IndexTableSortableStory {
 	align: string;
@@ -14,6 +15,11 @@ export default {
 			},
 		},
 	},
+	decorators: [
+		moduleMetadata({
+			imports: [ButtonComponent],
+		}),
+	],
 } as Meta;
 
 function getTemplate(args: IndexTableSortableStory): string {
@@ -79,7 +85,7 @@ function getTemplate(args: IndexTableSortableStory): string {
 			<td class="indexTable-body-row-cell ${args.align}">Content</td>
 		</tr>
 	</tbody>
-</table>`;
+</table><button luButton>test</button>`;
 }
 
 const Template: StoryFn<IndexTableSortableStory> = (args) => ({

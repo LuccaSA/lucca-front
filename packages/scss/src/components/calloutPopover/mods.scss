@@ -3,48 +3,48 @@
 @use '@lucca-front/icons/src/icon/exports' as icon;
 
 @mixin S {
-  font-size: var(--sizes-S-fontSize);
-  line-height: var(--sizes-S-lineHeight);
-  padding: var(--pr-t-spacings-75);
+	font-size: var(--sizes-S-fontSize);
+	line-height: var(--sizes-S-lineHeight);
+	padding: var(--pr-t-spacings-75);
 
-  .calloutPopover-icon {
-    @include icon.S;
-  }
+	.calloutPopover-icon {
+		@include icon.S;
+	}
 }
 
 @mixin XS {
-  font-size: var(--sizes-XS-fontSize);
-  line-height: var(--sizes-XS-lineHeight);
-  padding: var(--pr-t-spacings-25) var(--pr-t-spacings-50);
-  gap: var(--pr-t-spacings-50);
-  border-radius: var(--commons-borderRadius-M);
+	font-size: var(--sizes-XS-fontSize);
+	line-height: var(--sizes-XS-lineHeight);
+	padding: var(--pr-t-spacings-25) var(--pr-t-spacings-50);
+	gap: var(--pr-t-spacings-50);
+	border-radius: var(--commons-borderRadius-M);
 
-  .calloutPopover-icon {
-    @include icon.XS;
-  }
+	.calloutPopover-icon {
+		@include icon.XS;
+	}
 }
 
 @mixin overlayS {
-  --components-calloutPopover-width: 20rem;
-  --components-calloutPopover-content-margin: 1.75rem;
+	--components-calloutPopover-width: 20rem;
+	--components-calloutPopover-content-margin: 1.75rem;
 
-  .calloutPopover-overlay-head-icon {
-    @include icon.S;
-  }
+	.calloutPopover-overlay-head-icon {
+		@include icon.S;
+	}
 
-  .calloutPopover-overlay-head-title {
-    @include title.h5;
-  }
+	.calloutPopover-overlay-head-title {
+		@include title.h5;
+	}
 
-  .calloutFeedbackList {
-    @include calloutFeedbackList.S;
-  }
+	.calloutFeedbackList {
+		@include calloutFeedbackList.S;
+	}
 }
 
 @mixin overlayIconless {
-  --components-calloutPopover-content-margin: 0;
+	--components-calloutPopover-content-margin: 0;
 
-  .calloutPopover-overlay-head-icon {
-    display: none;
-  }
+	.calloutPopover-overlay-head-icon {
+		display: none;
+	}
 }

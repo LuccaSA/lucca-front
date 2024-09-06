@@ -27,14 +27,19 @@
 	flex-direction: column;
 
 	.dialog-inside-header-button {
-		@include button.text;
-		@include button.S;
-		@include button.onlyIconS;
+		// :not(.class) is only there to increase specificity when the class isn’t present
+		// but the class should be present, and this code is temporary
+		&.button,
+		&:not(.button) {
+			@include button.text;
+			@include button.S;
+			@include button.onlyIconS;
 
-		align-self: start;
-		justify-self: end;
-		grid-area: close;
-		display: var(--components-dialog-insideHeaderButtonDisplay);
+			align-self: start;
+			justify-self: end;
+			grid-area: close;
+			display: var(--components-dialog-insideHeaderButtonDisplay);
+		}
 	}
 
 	.dialog-inside-footer {

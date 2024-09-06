@@ -14,15 +14,27 @@
 	}
 
 	.multipleSelect-clear {
-		@include clear.S;
+		// :not(.class) is only there to increase specificity when the class isn’t present
+		// but the class should be present, and this code is temporary
+		&.clear,
+		&:not(.clear) {
+			@include clear.S;
+		}
 	}
 
 	.multipleSelect-displayer-chip {
-		@include chip.S;
+		.chip {
+			@include chip.S;
+		}
 	}
 
 	.multipleSelect-displayer-numericBadge {
-		@include numericBadge.S;
+		// :not(.class) is only there to increase specificity when the class isn’t present
+		// but the class should be present, and this code is temporary
+		&.numericBadge,
+		&:not(.numericBadge) {
+			@include numericBadge.S;
+		}
 	}
 }
 

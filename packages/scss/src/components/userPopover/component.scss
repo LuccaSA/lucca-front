@@ -64,7 +64,13 @@
 	}
 
 	.userPopover-details-avatar {
-		@include avatar.XXXL;
-		margin: var(--pr-t-spacings-50) 0;
+		// :not(.class) is only there to increase specificity when the class isn’t present
+		// but the class should be present, and this code is temporary
+		&.avatar,
+		&:not(.avatar) {
+			@include avatar.XXXL;
+
+			margin: var(--pr-t-spacings-50) 0;
+		}
 	}
 }
