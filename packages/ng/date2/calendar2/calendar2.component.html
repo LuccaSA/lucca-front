@@ -1,24 +1,28 @@
-<table role="grid">
-	<caption>
+<table role="grid" class="calendar">
+	<caption class="calendar-caption">
 		{{ currentMonthLabel() }}
 	</caption>
-	<thead>
-		<tr>
+	<thead class="calendar-head">
+		<tr class="calendar-head-week">
 			@for (day of daysOfWeek; track day.long) {
-			<th scope="col" [attr.data-content-after]="day.short"><span class="mask">{{ day.long }}</span></th>
+			<th class="calendar-head-week-day" scope="col" [attr.data-content-after]="day.short.substring(0, 1)">
+				<span class="u-mask">{{ day.long }}</span>
+			</th>
 			}
 		</tr>
 	</thead>
-	<tbody>
+	<tbody class="calendar-body">
 		@for (week of gridDisplay(); track $index; let isFirstWeek = $first) {
-		<tr>
-			<td *luRepeatTimes="isFirstWeek ? 7 - week.length : 0"></td>
+		<tr class="calendar-body-week">
+			<td class="calendar-body-week-day" *luRepeatTimes="isFirstWeek ? 7 - week.length : 0"></td>
 			@for (day of week; track di; let di = $index) { @if (day) {
-			<td tabindex="{{di === 0 && isFirstWeek ? '0' : '-1'}}" [class.weekend]="day.isWeekend">
-				<button type="button">{{ day.day }}</button>
+			<td class="calendar-body-week-day" [class.mod-weekend]="day.isWeekend">
+				<button class="calendar-body-week-day-action" type="button" tabindex="{{di === 0 && isFirstWeek ? '0' : '-1'}}">
+					{{ day.day }}
+				</button>
 			</td>
 			} @else {
-			<td></td>
+			<td class="calendar-body-week-day"></td>
 			} }
 		</tr>
 		}
