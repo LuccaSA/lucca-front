@@ -43,7 +43,12 @@
 	}
 
 	.dialog-inside-footer {
-		@include footer.sticky;
+		// :not(.class) is only there to increase specificity when the class isn’t present
+		// but the class should be present, and this code is temporary
+		&.footer,
+		&:not(.footer) {
+			@include footer.sticky;
+		}
 
 		// Safari fix to avoid footer to clip while loading
 		@supports (background-image: -webkit-named-image(test)) {

@@ -1,5 +1,3 @@
-@use '@lucca-front/scss/src/components/container/exports' as container;
-
 @mixin component($atRoot: 'without: rule') {
 	background-color: var(--pr-t-elevation-surface-raised);
 	padding: var(--pr-t-spacings-200) var(--pr-t-spacings-300);
