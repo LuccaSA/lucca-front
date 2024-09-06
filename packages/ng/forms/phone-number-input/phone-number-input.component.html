@@ -8,7 +8,6 @@
 			(ngModelChange)="updatePrefix($event)"
 			[optionKey]="getPrefixKey"
 			[optionComparer]="prefixComparator"
-			(blur)="touched();formatNationalNumber()"
 			(clueChange)="query.set($event)"
 			#selectRef
 			class="phoneNumber-fieldset-select"
@@ -32,7 +31,7 @@
 			<input
 				type="text"
 				id="phoneNumberFieldsetTextfieldInput"
-				[ngModel]="nationalNumber()"
+				[ngModel]="displayedNumber()"
 				(ngModelChange)="updateNumber($event)"
 				(blur)="touched();formatNationalNumber()"
 				luInput

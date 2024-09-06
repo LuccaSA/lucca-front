@@ -19,8 +19,8 @@ export const Basic: StoryObj<PhoneNumberInputComponent & FormFieldComponent> = {
 		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, errorInlineMessage, size, ...inputArgs } = args;
 		return {
 			props: {
-				example: '0702345678',
-				country: 'FR',
+				example: '+12125550199',
+				country: '',
 			},
 			template: cleanupTemplate(`<lu-form-field [rolePresentationLabel]="true" ${generateInputs(
 				{
