@@ -35,15 +35,22 @@ export default {
 		counter: {
 			description: '[v17.4]',
 		},
+		autoResize: {
+			type: 'boolean',
+		},
+		scrollIntoViewOnAutoResizing: {
+			type: 'boolean',
+			if: { arg: 'autoResize', truthy: true },
+		},
 		hiddenLabel: {
-			description: 'Masque le label en le conservant dans le DOM pour les lecteurs d\'écrans',
+			description: "Masque le label en le conservant dans le DOM pour les lecteurs d'écrans",
 		},
 	},
 } as Meta;
 
 export const Basic: StoryObj<TextareaInputComponent & { disabled: boolean } & FormFieldComponent> = {
 	render: (args, { argTypes }) => {
-		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, counter, ...inputArgs } = args;
+		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, counter, autoResize, scrollIntoViewOnAutoResizing, ...inputArgs } = args;
 		return {
 			template: cleanupTemplate(`<lu-form-field ${generateInputs(
 				{
@@ -57,15 +64,12 @@ export const Basic: StoryObj<TextareaInputComponent & { disabled: boolean } & Fo
 				},
 				argTypes,
 			)}>
-
-	<lu-textarea-input
+	<lu-textarea-input scrollIntoViewOnAutoResizing="${scrollIntoViewOnAutoResizing}" autoResize="${autoResize}"
 	${generateInputs(inputArgs, argTypes)}
 		[(ngModel)]="example">
 	</lu-textarea-input>
-
 </lu-form-field>
-
-{{example}}`),
+`),
 			moduleMetadata: {
 				imports: [TextareaInputComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule],
 			},
@@ -81,6 +85,8 @@ export const Basic: StoryObj<TextareaInputComponent & { disabled: boolean } & Fo
 		placeholder: 'Placeholder',
 		tooltip: 'Je suis un message d’aide',
 		counter: 0,
+		autoResize: false,
+		scrollIntoViewOnAutoResizing: false,
 		rows: 3,
 	},
 };

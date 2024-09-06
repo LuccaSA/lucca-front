@@ -44,3 +44,28 @@
 		text-align: right;
 	}
 }
+
+@mixin autoResize {
+	.textField-input {
+		display: grid;
+		align-items: normal;
+		min-width: 0;
+	}
+
+	.textField-input-valueClone,
+	.textField-input-value {
+		white-space: pre-wrap;
+		overflow-wrap: break-word;
+		grid-area: 1 / 1 / 2 / 2;
+		resize: none;
+		min-width: 0;
+	}
+
+	.textField-input-valueClone {
+		visibility: hidden;
+
+		&::after {
+			content: ' ';
+		}
+	}
+}

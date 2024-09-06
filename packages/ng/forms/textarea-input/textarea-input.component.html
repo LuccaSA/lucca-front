@@ -1,11 +1,16 @@
-<div class="textField">
+<div class="textField" [class.mod-autoResize]="autoResize">
 	<div class="textField-input">
+		@if (autoResize) {
+		<div class="textField-input-valueClone" aria-hidden="true" [attr.data-content-before]="ngControl.control.value"></div>
+		}
 		<textarea
 			luInput
 			class="textField-input-value"
 			[formControl]="ngControl.control"
 			[attr.placeholder]="placeholder"
 			[attr.rows]="rows"
+			(input)="updateScroll()"
+			#textarea
 		></textarea>
 	</div>
 </div>
