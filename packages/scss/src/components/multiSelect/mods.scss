@@ -23,7 +23,10 @@
 	}
 
 	.multipleSelect-displayer-chip {
-		.chip {
+		// :not(.class) is only there to increase specificity when the class isn’t present
+		// but the class should be present, and this code is temporary
+		&.chip,
+		&:not(.chip) {
 			@include chip.S;
 		}
 	}
