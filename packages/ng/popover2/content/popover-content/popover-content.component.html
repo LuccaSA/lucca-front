@@ -1,7 +1,7 @@
 <div class="popover" (cdkObserveContent)="contentChanged()" [debounce]="contentChangedDebounceTime">
 	@if (!config.noCloseButton) {
 	<div>
-		<button type="button" luButton class="popover-close" (click)="close()">
+		<button type="button" luButton class="popover-close button" (click)="close()">
 			<lu-icon icon="signClose"></lu-icon>
 			<span class="u-mask">{{ intl.close }}</span>
 		</button>
