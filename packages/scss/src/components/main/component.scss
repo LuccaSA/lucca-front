@@ -2,6 +2,7 @@
 
 @mixin component {
 	position: relative;
+	scroll-margin-top: var(--commons-banner-height);
 
 	@include media.max('S') {
 		margin-left: 0 !important;

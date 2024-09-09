@@ -16,6 +16,7 @@
 	background-color: var(--components-navSide-fullwidth-palette-bg-color);
 	padding-top: var(--components-navSide-padding-top);
 	width: var(--commons-navSide-width);
+	scroll-margin-top: var(--commons-banner-height);
 
 	.numericBadge {
 		@include numericBadge.S;
