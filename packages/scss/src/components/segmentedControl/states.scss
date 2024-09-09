@@ -1,0 +1,18 @@
+@use '@lucca-front/scss/src/components/numericBadge/exports' as numericBadge;
+
+@mixin selected {
+	--components-segmentedControl-background: var(--palettes-product-50);
+	--components-segmentedControl-shadow: var(--palettes-product-500);
+	--components-segmentedControl-color: var(--palettes-product-800);
+	--components-segmentedControl-cursor: default;
+	--components-segmentedControl-backgroundContent: none;
+	--components-segmentedControl-zIndex: 1;
+
+	.numericBadge {
+		@include numericBadge.product;
+	}
+}
+
+@mixin panelInactive {
+	--components-segmentedControl-display: none;
+}
