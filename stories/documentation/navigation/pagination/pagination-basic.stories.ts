@@ -16,7 +16,7 @@ function getTemplate(args: PaginationBasicStory): string {
 				1<span aria-hidden="true"> – </span>
 				<span class="u-mask">à </span>10
 			</span>
-			<span class="pagination-count-separator"> de </span>
+			<span class="pagination-count-separator"> sur </span>
 			<span class="pagination-count-total">
 				50<span class="u-mask"> pages</span>
 			</span>
