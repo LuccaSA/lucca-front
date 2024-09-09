@@ -101,7 +101,9 @@ export class LuTooltipTriggerDirective implements AfterContentInit, OnDestroy {
 
 	@HostListener('focus')
 	onFocus() {
-		this.open$.next();
+		if (this.#host.nativeElement.getAttribute('aria-expanded') !== 'true') {
+			this.open$.next();
+		}
 	}
 
 	@HostListener('blur')
