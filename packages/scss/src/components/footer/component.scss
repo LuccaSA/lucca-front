@@ -1,6 +1,6 @@
 @mixin component($atRoot: 'without: rule') {
 	background-color: var(--pr-t-elevation-surface-raised);
-	padding: var(--pr-t-spacings-200) var(--pr-t-spacings-300);
+	padding: var(--pr-t-spacings-200) var(--components-footer-paddingInline);
 	display: flex;
 	justify-content: space-between;
 	gap: var(--pr-t-spacings-200);
@@ -31,6 +31,7 @@
 			flex-grow: 1;
 			justify-content: space-between;
 			flex-direction: var(--components-footer-direction);
+			max-width: calc(var(--components-container-max-width) - var(--components-footer-paddingInline) * 2);
 		}
 	}
 }
