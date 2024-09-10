@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, inject, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, Input, ViewEncapsulation } from '@angular/core';
 import { LU_DEFAULT_DISPLAY_POLICY, LuDisplayFormat } from '../display/index';
 import { displayPictureFormatRecord } from '../picture/user-picture.component';
 

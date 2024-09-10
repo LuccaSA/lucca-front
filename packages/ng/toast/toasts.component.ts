@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Input, OnDestroy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnDestroy, ViewEncapsulation } from '@angular/core';
 import { getIntl, PortalContent, PortalDirective } from '@lucca-front/ng/core';
 import { merge, Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -10,9 +10,11 @@ import { LU_TOAST_TRANSLATIONS } from './toasts.translate';
 @Component({
 	selector: 'lu-toasts',
 	templateUrl: './toasts.component.html',
+	styleUrl: './toasts.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	standalone: true,
 	imports: [CommonModule, PortalDirective],
+	encapsulation: ViewEncapsulation.None,
 })
 export class LuToastsComponent implements OnDestroy {
 	@Input() public bottom = false;

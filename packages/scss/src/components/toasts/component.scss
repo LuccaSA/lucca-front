@@ -1,3 +1,4 @@
+@use '@lucca-front/scss/src/commons/utils/a11y';
 @use '@lucca-front/scss/src/components/button/exports' as button;
 
 @mixin component($atRoot: 'without: rule') {
@@ -12,7 +13,7 @@
 	html:has(.main-content .footer.mod-sticky, .dialog.mod-drawer .dialog-inside-footer) & {
 		// Provide extra bottom spacing when a footer is sticked
 		// Will only work on desktop with standard footer layout
-		// Refactor: Position should be calculated dynamically 
+		// Refactor: Position should be calculated dynamically
 		--components-toasts-bottom: calc(var(--components-toasts-footerHeight) + var(--pr-t-spacings-300));
 	}
 
@@ -45,18 +46,26 @@
 
 			&:hover,
 			&:focus-within {
+				// .toasts-item-kill is deprecated
+				.toasts-item-closeButton,
 				.toasts-item-kill {
-					animation-play-state: paused;
+					&.button {
+						animation-play-state: paused;
+					}
 				}
 			}
 		}
 
+		// .toast-item-icon is deprecated
+		.toasts-item-icon,
 		.toast-item-icon {
 			background: var(--palettes-700, var(--palettes-product-700));
 			border-radius: var(--commons-borderRadius-L);
 			padding: var(--pr-t-spacings-100) var(--pr-t-spacings-50);
 		}
 
+		// .toast-item-content is deprecated
+		.toasts-item-content,
 		.toast-item-content {
 			display: flex;
 			flex-grow: 1;
@@ -65,21 +74,25 @@
 			padding: var(--pr-t-spacings-100) 0 var(--pr-t-spacings-100) var(--pr-t-spacings-100);
 		}
 
+		// .toasts-item-kill is deprecated
+		.toasts-item-closeButton,
 		.toasts-item-kill {
-			// the button class should be added to the component, but in the meantime we initialize the component here
-			@include button.vars;
-			@include button.component;
+			&.button {
+				@include button.onlyIcon;
+				@include button.text;
+				@include button.inverted;
 
-			@include button.onlyIcon;
-			@include button.text;
-			@include button.inverted;
+				&:focus-visible {
+					@include a11y.focusVisible($offset: 0);
+				}
 
-			@keyframes timer {
+				@keyframes timer {
+				}
+
+				align-self: flex-start;
+				border-radius: var(--commons-borderRadius-L);
+				animation-name: timer;
 			}
-
-			align-self: flex-start;
-			border-radius: var(--commons-borderRadius-L);
-			animation-name: timer;
 		}
 	}
 }
