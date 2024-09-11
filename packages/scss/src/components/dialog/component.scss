@@ -80,6 +80,7 @@
 		.dialog-inside-footer {
 			&.footer {
 				background-color: transparent;
+				position: relative;
 			}
 		}
 
@@ -90,6 +91,8 @@
 			grid-template-columns: var(--components-dialog-insideHeaderColumns);
 			box-shadow: 0 1px 0 0 var(--palettes-neutral-100);
 			gap: var(--pr-t-spacings-200);
+			position: relative;
+			z-index: 1;
 		}
 
 		.dialog-inside-content {
