@@ -5,10 +5,6 @@ export function getIntlWeekDay(date: Date): CalendarWeekDay {
 	return (date.getDay() || 7) as CalendarWeekDay;
 }
 
-export function getIntlFirstDayOfWeek(weekInfo: CalendarWeekInfo): CalendarWeekDay {
-	return weekInfo.firstDay;
-}
-
 export function getJSFirstDayOfWeek(weekInfo: CalendarWeekInfo): Day {
 	return (weekInfo.firstDay % 7) as Day;
 }

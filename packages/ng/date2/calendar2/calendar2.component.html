@@ -12,18 +12,28 @@
 		</tr>
 	</thead>
 	<tbody class="calendar-body">
-		@for (week of gridDisplay(); track $index; let isFirstWeek = $first) {
+		@for (week of monthGridDisplay(); track $index; let isFirstWeek = $first) {
 		<tr class="calendar-body-week">
 			<td class="calendar-body-week-day" *luRepeatTimes="isFirstWeek ? 7 - week.length : 0"></td>
 			@for (day of week; track di; let di = $index) { @if (day) {
-			<td class="calendar-body-week-day" [class.mod-weekend]="day.isWeekend">
-				<button class="calendar-body-week-day-action" type="button" tabindex="{{di === 0 && isFirstWeek ? '0' : '-1'}}">
+			<td class="calendar-body-week-day" [class.mod-weekend]="day.isWeekend" [ngClass]="day.status?.classes">
+				<button
+					[luCalendar2Day]="di"
+					[luCalendar2FirstDayOfMonth]="isFirstWeek && di === 0"
+					class="calendar-body-week-day-action"
+					type="button"
+					(click)="dateClicked.emit(day.date)"
+				>
 					{{ day.day }}
 				</button>
 			</td>
 			} @else {
 			<td class="calendar-body-week-day"></td>
 			} }
+		</tr>
+		} @if (monthGridDisplay().length < 6) {
+		<tr class="calendar-body-week" *luRepeatTimes="6 - monthGridDisplay().length">
+			<td class="calendar-body-week-day" *luRepeatTimes="7"></td>
 		</tr>
 		}
 	</tbody>
