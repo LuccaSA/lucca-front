@@ -1,19 +1,30 @@
-import { ChangeDetectionStrategy, Component, computed, inject, LOCALE_ID, signal, ViewEncapsulation } from '@angular/core';
-import { eachDayOfInterval, endOfMonth, endOfWeek, setDay, startOfMonth, startOfWeek, WeekOptions } from 'date-fns';
+import { ChangeDetectionStrategy, Component, computed, inject, input, LOCALE_ID, model, output, signal, viewChildren, ViewEncapsulation } from '@angular/core';
+import { eachDayOfInterval, endOfMonth, endOfWeek, startOfMonth, startOfWeek, WeekOptions } from 'date-fns';
 import { firstToUpper } from '../../core/tools/first-to-upper';
 import { WEEK_INFO } from '../calendar.token';
 import { getIntlWeekDay, getJSFirstDayOfWeek } from '../utils';
 import { CalendarDayInfo } from './calendar-day-info';
 import { RepeatTimesDirective } from '../repeat-times.directive';
+import { ButtonComponent } from '../../button/button.component';
+import { Calendar2DayDirective } from './calendar2-day.directive';
+import { CALENDAR_DAYS } from './calendar2.tokens';
+import { NgClass } from '@angular/common';
+import { DayStatus } from './day-status';
 
 @Component({
 	selector: 'lu-calendar2',
 	standalone: true,
-	imports: [RepeatTimesDirective],
+	imports: [RepeatTimesDirective, ButtonComponent, Calendar2DayDirective, NgClass],
 	templateUrl: './calendar2.component.html',
 	styleUrl: './calendar2.component.scss',
 	encapsulation: ViewEncapsulation.None,
 	changeDetection: ChangeDetectionStrategy.OnPush,
+	providers: [
+		{
+			provide: CALENDAR_DAYS,
+			useFactory: () => inject(Calendar2Component).calendar2DayInstances,
+		},
+	],
 })
 export class Calendar2Component {
 	#locale = inject(LOCALE_ID);
@@ -26,6 +37,16 @@ export class Calendar2Component {
 
 	#weekOptions: WeekOptions = { weekStartsOn: getJSFirstDayOfWeek(this.#weekInfo) };
 
+	focusMonth = model(new Date());
+
+	dateClicked = output<Date>();
+
+	nextMonth = output<void>();
+
+	previousMonth = output<void>();
+
+	calendar2DayInstances = viewChildren(Calendar2DayDirective);
+
 	daysOfWeek = eachDayOfInterval({
 		start: startOfWeek(new Date(), this.#weekOptions),
 		end: endOfWeek(new Date(), this.#weekOptions),
@@ -34,10 +55,13 @@ export class Calendar2Component {
 		short: firstToUpper(this.#intlDaysShort.format(day)),
 	}));
 
-	currentMonth = signal(startOfMonth(new Date()));
+	currentMonth = signal(startOfMonth(this.focusMonth()));
 
-	gridDisplay = computed(() => {
-		// TODO proper typings
+	getDayInfo = input<(day: Date) => DayStatus>((_day: Date) => ({
+		classes: [],
+		disabled: false,
+	}));
+	monthGridDisplay = computed(() => {
 		const daysOfMonth: CalendarDayInfo[] = eachDayOfInterval({
 			start: this.currentMonth(),
 			end: endOfMonth(this.currentMonth()),
@@ -45,6 +69,7 @@ export class Calendar2Component {
 			return {
 				day: date.getDate(),
 				isWeekend: this.#weekInfo.weekend.includes(getIntlWeekDay(date)),
+				status: this.getDayInfo()(date),
 				date,
 			};
 		});
