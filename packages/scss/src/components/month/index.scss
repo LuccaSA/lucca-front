@@ -1,0 +1,40 @@
+@use 'exports' as *;
+
+.month {
+	@include vars;
+	@include component;
+
+	&.mod-daysOffHidden {
+		@include daysOffHidden;
+	}
+
+	&.mod-daysOverflowingHidden {
+		@include daysOverflowingHidden;
+	}
+}
+
+.month-body-week-day {
+	&.is-daysOff {
+		@include daysOff;
+	}
+
+	&.is-today {
+		@include today;
+	}
+
+	&.is-selected {
+		@include selected;
+	}
+
+	&.is-start {
+		@include start;
+	}
+
+	&.is-end {
+		@include end;
+	}
+
+	&.is-overflow {
+		@include overflow;
+	}
+}

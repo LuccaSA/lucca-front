@@ -1,0 +1,98 @@
+@use '@lucca-front/scss/src/commons/utils/reset';
+@use '@lucca-front/scss/src/commons/utils/a11y';
+
+@mixin component($atRoot: 'without: rule') {
+	border-collapse: collapse;
+	border: var(--pr-t-spacings-150) solid transparent;
+	border-top: 0;
+	empty-cells: hide;
+	table-layout: fixed;
+	background-color: var(--palettes-neutral-0);
+
+	@at-root ($atRoot) {
+		.month_stripes {
+			@include a11y.mask;
+		}
+
+		.month_stripes-symbol-path {
+			fill: var(--month-body-week-day-action-stripesColor);
+		}
+
+		.month-name {
+			line-height: var(--sizes-L-lineHeight);
+			font-size: var(--sizes-L-fontSize);
+			font-weight: 700;
+			border: var(--pr-t-spacings-150) solid transparent;
+			border-bottom: var(--pr-t-spacings-100) solid transparent;
+			text-transform: lowercase;
+			background-color: var(--palettes-neutral-0);
+		}
+
+		.month-head-week-day,
+		.month-body-week-day {
+			padding: var(--pr-t-spacings-25);
+		}
+
+		.month-head-week {
+			border-bottom: var(--pr-t-spacings-50) solid transparent;
+		}
+
+		.month-head-week-day {
+			font-weight: 400;
+			line-height: var(--sizes-S-lineHeight);
+			font-size: var(--sizes-S-fontSize);
+			color: var(--palettes-neutral-700);
+		}
+
+		.month-body-week-day {
+			position: relative;
+			color: var(--palettes-neutral-700);
+		}
+
+		.month-body-week-day-action {
+			@include reset.button;
+
+			width: var(--pr-t-spacings-400);
+			height: var(--pr-t-spacings-400);
+			border-radius: var(--commons-borderRadius-L);
+			position: relative;
+			z-index: 1;
+			text-align: center;
+			color: var(--palettes-neutral-800);
+			font: inherit;
+
+			background-color: var(--month-body-week-day-actionColor);
+			box-shadow:
+				0 0 0 1px var(--month-body-week-day-actionColor),
+				0 0 0 1px var(--month-body-week-day-actionColor) inset;
+
+			&:disabled {
+				color: var(--palettes-neutral-500);
+				text-decoration: line-through;
+				cursor: default;
+			}
+
+			&:not(:disabled) {
+				&:hover,
+				&:focus-visible {
+					@include a11y.focusVisible($offset: -1px);
+				}
+
+				&:active {
+					outline: 2px solid var(--palettes-product-800);
+					background-color: var(--palettes-product-800);
+					color: var(--palettes-product-0);
+				}
+			}
+		}
+
+		.month-body-week-day-action-stripes {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 60px;
+			height: 60px;
+			z-index: -1;
+		}
+	}
+}

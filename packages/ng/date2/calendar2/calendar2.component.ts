@@ -1,14 +1,14 @@
-import { ChangeDetectionStrategy, Component, computed, inject, input, LOCALE_ID, model, output, signal, viewChildren, ViewEncapsulation } from '@angular/core';
+import { NgClass } from '@angular/common';
+import { booleanAttribute, ChangeDetectionStrategy, Component, computed, inject, Input, input, LOCALE_ID, model, output, signal, viewChildren, ViewEncapsulation } from '@angular/core';
 import { eachDayOfInterval, endOfMonth, endOfWeek, startOfMonth, startOfWeek, WeekOptions } from 'date-fns';
+import { ButtonComponent } from '../../button/button.component';
 import { firstToUpper } from '../../core/tools/first-to-upper';
 import { WEEK_INFO } from '../calendar.token';
+import { RepeatTimesDirective } from '../repeat-times.directive';
 import { getIntlWeekDay, getJSFirstDayOfWeek } from '../utils';
 import { CalendarDayInfo } from './calendar-day-info';
-import { RepeatTimesDirective } from '../repeat-times.directive';
-import { ButtonComponent } from '../../button/button.component';
 import { Calendar2DayDirective } from './calendar2-day.directive';
 import { CALENDAR_DAYS } from './calendar2.tokens';
-import { NgClass } from '@angular/common';
 import { DayStatus } from './day-status';
 
 @Component({
@@ -89,4 +89,10 @@ export class Calendar2Component {
 	currentMonthLabel = computed(() => {
 		return firstToUpper(this.#intlDateFormat.format(this.currentMonth()));
 	});
+
+	@Input({ transform: booleanAttribute })
+	daysOffHidden = false;
+
+	@Input({ transform: booleanAttribute })
+	daysOverflowingHidden = true;
 }
