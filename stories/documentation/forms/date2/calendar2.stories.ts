@@ -1,10 +1,10 @@
-import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { FormsModule } from '@angular/forms';
 import { LOCALE_ID } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { Calendar2Component, DayStatus } from '@lucca-front/ng/date2';
+import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 
 export default {
-	title: 'Documentation/Forms/Date2/Calendar2',
+	title: 'Documentation/Forms/Date2/Month',
 	decorators: [
 		moduleMetadata({
 			imports: [Calendar2Component, FormsModule],
@@ -19,19 +19,19 @@ export default {
 			props: {
 				getDayInfo: (date: Date) => {
 					const day = date.getDate();
-					if (day === 6) {
+					if (day === 7) {
 						return {
-							classes: ['range-start'],
+							classes: ['is-start', 'is-selected'],
 						} as DayStatus;
 					}
-					if (day > 6 && day < 19) {
+					if (day > 7 && day < 19) {
 						return {
-							classes: ['range'],
+							classes: ['is-selected'],
 						};
 					}
 					if (day === 19) {
 						return {
-							classes: ['range-end'],
+							classes: ['is-end', 'is-selected'],
 						} as DayStatus;
 					}
 					return { classes: [] };

@@ -1,6 +1,0 @@
-@use 'exports' as *;
-
-.calendar {
-	@include vars;
-	@include component;
-}
