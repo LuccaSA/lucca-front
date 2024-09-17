@@ -17,6 +17,7 @@ export default {
 	render: (args, { argTypes }) => {
 		return {
 			props: {
+				currentMonth: new Date(),
 				getDayInfo: (date: Date) => {
 					const day = date.getDate();
 					if (day === 7) {
@@ -38,7 +39,7 @@ export default {
 				},
 			},
 			template: `
-				<lu-calendar2 [getDayInfo]="getDayInfo"></lu-calendar2>
+				<lu-calendar2 [getDayInfo]="getDayInfo" [month]="currentMonth"></lu-calendar2>
 			`,
 		};
 	},
