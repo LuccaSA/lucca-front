@@ -1,16 +1,23 @@
+/* eslint-disable @typescript-eslint/no-unsafe-return */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { ILuApiResponse, LuApiV3Service } from '@lucca-front/ng/api';
+import { ILuApiResponse } from '@lucca-front/ng/api';
 import { ILuTree } from '@lucca-front/ng/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { ILuDepartment } from '../department.model';
-import { ILuDepartmentService } from './department-service.model';
 import { IApiDepartment } from './department-v3.service';
 
 @Injectable()
-export class LuDepartmentService extends LuApiV3Service<ILuDepartment> implements ILuDepartmentService<ILuDepartment> {
-	protected override _api = `/organization/structure/api/departments`;
+export class LuDepartmentV4Service {
+	api = `/organization/structure/api/departments`;
+	protected _filters: string[] = [];
+	set filters(filters: string[]) {
+		this._filters = filters;
+	}
 	protected _appInstanceId: number | string;
 	set appInstanceId(appInstanceId: number | string) {
 		if (appInstanceId) {
@@ -22,9 +29,7 @@ export class LuDepartmentService extends LuApiV3Service<ILuDepartment> implement
 		this._operations = operations;
 	}
 
-	constructor(protected override _http: HttpClient) {
-		super(_http);
-	}
+	constructor(private _http: HttpClient) {}
 
 	getTrees() {
 		let call: Observable<IApiDepartment>;
@@ -35,7 +40,7 @@ export class LuDepartmentService extends LuApiV3Service<ILuDepartment> implement
 				>(`/api/v3/departments/scopedtree?fields=id,name&${[`appInstanceId=${this._appInstanceId}`, `operations=${this._operations.join(',')}`, this._filters.join(',')].filter((f) => !!f).join('&')}`)
 				.pipe(map((response) => response.data));
 		} else {
-			call = this._http.get<IApiDepartment>(`${this._api}/tree`);
+			call = this._http.get<IApiDepartment>(`${this.api}/tree`);
 		}
 
 		return call.pipe(
