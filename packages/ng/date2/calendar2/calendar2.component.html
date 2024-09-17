@@ -12,39 +12,40 @@
 		</tr>
 	</thead>
 	<tbody class="month-body">
-		@for (week of monthGridDisplay(); track $index; let isFirstWeek = $first) {
+		@for (week of monthGridDisplay(); track $index; let isFirstWeek = $first; let isLastWeek = $last) {
 		<tr class="month-body-week">
-			<td class="month-body-week-day is-overflow" *luRepeatTimes="isFirstWeek ? 7 - week.length : 0">
-				@if (!daysOverflowingHidden) {
-				<button type="button" class="month-body-week-day-action">0</button>
-				}
-			</td>
-			@for (day of week; track di; let di = $index) { @if (day) {
-			<td class="month-body-week-day" [class.is-daysOff]="day.isWeekend && !daysOffHidden" [ngClass]="day.status?.classes">
+			<td class="month-body-week-day is-overflow" *luRepeatTimes="isFirstWeek ? 7 - week.length : 0"></td>
+			@for (day of week; track di; let di = $index) {
+			<td
+				class="month-body-week-day"
+				[class.is-daysOff]="day.isWeekend"
+				[class.is-overflow]="day.isOverflow"
+				[ngClass]="day.status?.classes"
+			>
 				<button
 					[luCalendar2Day]="di"
 					[luCalendar2FirstDayOfMonth]="isFirstWeek && di === 0"
 					class="month-body-week-day-action"
 					type="button"
+					[disabled]="day.status?.disabled || (day.isOverflow && !enableOverflow())"
 					(click)="dateClicked.emit(day.date)"
 				>
-					{{ day.day }} @if (day.isWeekend && !daysOffHidden) {
-					<svg class="month-body-week-day-action-stripes"><use href="#month_stripes-symbol"></use></svg>
+					{{ day.day }} @if (day.isWeekend) {
+					<svg class="month-body-week-day-action-stripes">
+						<use href="#month_stripes-symbol"></use>
+					</svg>
 					}
 				</button>
 			</td>
-			} @else {
-			<td class="month-body-week-day"></td>
-			} }
+			}
+			<td class="month-body-week-day is-overflow" *luRepeatTimes="isLastWeek ? 7 - week.length : 0"></td>
 		</tr>
-		} @if (monthGridDisplay().length < 6) {
+		}
 		<tr class="month-body-week" *luRepeatTimes="6 - monthGridDisplay().length">
 			<td class="month-body-week-day" *luRepeatTimes="7"></td>
 		</tr>
-		}
 	</tbody>
 </table>
-@if (!daysOffHidden) {
 <svg class="month_stripes" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" aria-hidden="true">
 	<symbol id="month_stripes-symbol" viewBox="0 0 60 60">
 		<path
@@ -53,4 +54,3 @@
 		/>
 	</symbol>
 </svg>
-}

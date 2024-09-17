@@ -1,14 +1,13 @@
-import { NgClass } from '@angular/common';
-import { booleanAttribute, ChangeDetectionStrategy, Component, computed, inject, Input, input, LOCALE_ID, model, output, signal, viewChildren, ViewEncapsulation } from '@angular/core';
-import { eachDayOfInterval, endOfMonth, endOfWeek, startOfMonth, startOfWeek, WeekOptions } from 'date-fns';
-import { ButtonComponent } from '../../button/button.component';
-import { firstToUpper } from '../../core/tools/first-to-upper';
+import { ChangeDetectionStrategy, Component, computed, inject, input, LOCALE_ID, output, viewChildren, ViewEncapsulation } from '@angular/core';
+import { addMonths, eachDayOfInterval, endOfMonth, endOfWeek, lastDayOfMonth, startOfMonth, startOfWeek, subMonths, WeekOptions } from 'date-fns';
 import { WEEK_INFO } from '../calendar.token';
-import { RepeatTimesDirective } from '../repeat-times.directive';
 import { getIntlWeekDay, getJSFirstDayOfWeek } from '../utils';
 import { CalendarDayInfo } from './calendar-day-info';
+import { RepeatTimesDirective } from '../repeat-times.directive';
+import { ButtonComponent } from '../../button/button.component';
 import { Calendar2DayDirective } from './calendar2-day.directive';
 import { CALENDAR_DAYS } from './calendar2.tokens';
+import { NgClass } from '@angular/common';
 import { DayStatus } from './day-status';
 
 @Component({
@@ -37,13 +36,17 @@ export class Calendar2Component {
 
 	#weekOptions: WeekOptions = { weekStartsOn: getJSFirstDayOfWeek(this.#weekInfo) };
 
-	focusMonth = model(new Date());
+	showOverflow = input<boolean>(false);
+
+	enableOverflow = input<boolean>(false);
+
+	month = input<Date, Date>(new Date(), { transform: (date) => startOfMonth(date) });
+
+	previousMonth = computed(() => subMonths(this.month(), 1));
+
+	nextMonth = computed(() => addMonths(this.month(), 1));
 
 	dateClicked = output<Date>();
-
-	nextMonth = output<void>();
-
-	previousMonth = output<void>();
 
 	calendar2DayInstances = viewChildren(Calendar2DayDirective);
 
@@ -51,28 +54,23 @@ export class Calendar2Component {
 		start: startOfWeek(new Date(), this.#weekOptions),
 		end: endOfWeek(new Date(), this.#weekOptions),
 	}).map((day) => ({
-		long: firstToUpper(this.#intlDaysLong.format(day)),
-		short: firstToUpper(this.#intlDaysShort.format(day)),
+		// TODO check if capitalize pipe or CSS wouldn't do that
+		long: this.#intlDaysLong.format(day),
+		short: this.#intlDaysShort.format(day),
 	}));
 
-	currentMonth = signal(startOfMonth(this.focusMonth()));
+	// TODO add ranges input with start, end and class, computed into class-start, class and class-end
 
 	getDayInfo = input<(day: Date) => DayStatus>((_day: Date) => ({
 		classes: [],
 		disabled: false,
 	}));
+
 	monthGridDisplay = computed(() => {
 		const daysOfMonth: CalendarDayInfo[] = eachDayOfInterval({
-			start: this.currentMonth(),
-			end: endOfMonth(this.currentMonth()),
-		}).map((date) => {
-			return {
-				day: date.getDate(),
-				isWeekend: this.#weekInfo.weekend.includes(getIntlWeekDay(date)),
-				status: this.getDayInfo()(date),
-				date,
-			};
-		});
+			start: this.month(),
+			end: endOfMonth(this.month()),
+		}).map((date) => this.dateToDayInfo(date));
 		const daysByWeek = daysOfMonth.reduce<Record<number, CalendarDayInfo[]>>((acc, day) => {
 			const key = startOfWeek(day.date, this.#weekOptions).getTime();
 			return {
@@ -80,19 +78,44 @@ export class Calendar2Component {
 				[key]: [...(acc[key] || []), day],
 			};
 		}, {});
-
+		// If we want to show days before and after this month
+		if (this.showOverflow()) {
+			// Use last week of previous month
+			const startOfPreviousOverflow = startOfWeek(lastDayOfMonth(this.previousMonth()), this.#weekOptions);
+			const previousOverflow = eachDayOfInterval({
+				start: startOfPreviousOverflow,
+				end: endOfMonth(this.previousMonth()),
+			}).map((date) => this.dateToDayInfo(date, true));
+			if (daysByWeek[startOfPreviousOverflow.getTime()]) {
+				daysByWeek[startOfPreviousOverflow.getTime()] = [...previousOverflow, ...daysByWeek[startOfPreviousOverflow.getTime()]];
+			}
+			// Use first week of next month
+			const startOfNextMonthOverflow = startOfWeek(startOfMonth(this.nextMonth()), this.#weekOptions);
+			const endOfNextMonthOverflow = endOfWeek(startOfMonth(this.nextMonth()), this.#weekOptions);
+			const nextOverflow = eachDayOfInterval({
+				start: startOfMonth(this.nextMonth()),
+				end: endOfNextMonthOverflow,
+			}).map((date) => this.dateToDayInfo(date, true));
+			if (daysByWeek[startOfNextMonthOverflow.getTime()]) {
+				daysByWeek[startOfNextMonthOverflow.getTime()] = [...daysByWeek[startOfNextMonthOverflow.getTime()], ...nextOverflow];
+			}
+		}
 		return Object.keys(daysByWeek)
 			.sort()
 			.map((weekStart) => daysByWeek[+weekStart]);
 	});
 
+	dateToDayInfo(date: Date, isOverflow = false): CalendarDayInfo {
+		return {
+			day: date.getDate(),
+			isWeekend: this.#weekInfo.weekend.includes(getIntlWeekDay(date)),
+			isOverflow,
+			status: this.getDayInfo()(date),
+			date,
+		};
+	}
+
 	currentMonthLabel = computed(() => {
-		return firstToUpper(this.#intlDateFormat.format(this.currentMonth()));
+		return this.#intlDateFormat.format(this.month());
 	});
-
-	@Input({ transform: booleanAttribute })
-	daysOffHidden = false;
-
-	@Input({ transform: booleanAttribute })
-	daysOverflowingHidden = true;
 }

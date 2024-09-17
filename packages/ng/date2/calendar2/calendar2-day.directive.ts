@@ -11,9 +11,9 @@ export class Calendar2DayDirective implements OnInit {
 	#days = inject(CALENDAR_DAYS);
 
 	// Index of this day in the current week display row, not depending on locale, 0 is first day of week and 6 is last
-	luCalendar2Day = input<number>();
+	luCalendar2Day = input.required<number>();
 
-	luCalendar2FirstDayOfMonth = input<boolean>();
+	luCalendar2FirstDayOfMonth = input.required<boolean>();
 
 	firstDayOfWeek = computed(() => this.luCalendar2Day() === 0);
 
@@ -57,6 +57,8 @@ export class Calendar2DayDirective implements OnInit {
 	}
 
 	#moveFocus(target: Calendar2DayDirective): void {
+		// Only the currently focused day should be focusable so we first set tabindex
+		// to -1 on current before focusing the next one
 		this.blur();
 		target.focus();
 	}
