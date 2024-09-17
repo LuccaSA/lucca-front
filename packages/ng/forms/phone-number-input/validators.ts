@@ -8,7 +8,7 @@ export class PhoneNumberValidators {
 			if (reason) {
 				return { validPhoneNumber: reason };
 			}
-			if (!isValidPhoneNumber(control.value)) {
+			if (!isValidPhoneNumber(control.value, countryCode)) {
 				return { validPhoneNumber: 'INVALID' };
 			}
 		}
