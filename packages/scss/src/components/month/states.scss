@@ -1,7 +1,5 @@
 @mixin daysOff {
 	.month-body-week-day-action {
-		overflow: hidden;
-
 		&:active {
 			--month-body-week-day-action-stripesColor: var(--palettes-product-900);
 		}
@@ -10,46 +8,42 @@
 
 @mixin today {
 	.month-body-week-day-action {
-		font-weight: 600;
-
-		&:not-disabled {
-			color: var(--palettes-product-700);
-			&:active {
-				color: var(--palettes-product-0);
-			}
-		}
+		--month-body-week-day-actionFontWeight: 600;
+		--month-body-week-day-actionColor: var(--palettes-product-700);
 	}
 }
 
 @mixin tips {
 	.month-body-week-day-action {
-		--month-body-week-day-actionColor: var(--palettes-product-700);
-
-		color: var(--palettes-product-0);
+		--month-body-week-day-actionColor: var(--palettes-product-0);
+		--month-body-week-day-actionHighlight: var(--palettes-product-700);
 
 		&:hover {
-			--month-body-week-day-actionColor: var(--palettes-product-600);
+			--month-body-week-day-actionHighlight: var(--palettes-product-600);
 			--month-body-week-day-action-stripesColor: var(--palettes-product-700);
-			outline: none;
+			--month-body-week-day-actionOutlineWidth: 0;
 		}
 
 		&:active {
-			--month-body-week-day-actionColor: var(--palettes-product-800);
+			--month-body-week-day-actionHighlight: var(--palettes-product-800);
 			--month-body-week-day-action-stripesColor: var(--palettes-product-900);
 		}
 
 		&:focus-visible {
-			outline-offset: 2px;
+			--month-body-week-day-actionOutlineOffset: 2px;
+		}
+	}
+
+	&.is-daysOff {
+		.month-body-week-day-action {
+			--month-body-week-day-action-stripesColor: var(--palettes-product-800);
 		}
 	}
 }
 
 @mixin selected {
 	&::before {
-		content: '';
-		background-color: var(--palettes-product-50);
-		position: absolute;
-		inset: var(--pr-t-spacings-25) 0;
+		--month-body-week-daySelectedBeforeContent: '';
 	}
 
 	&.is-daysOff {
@@ -67,8 +61,7 @@
 	@include tips;
 
 	&::before {
-		left: var(--pr-t-spacings-25);
-		border-radius: var(--commons-borderRadius-L) 0 0 var(--commons-borderRadius-L);
+		--month-body-week-daySelectedBeforeBorderRadius: var(--commons-borderRadius-L) 0 0 var(--commons-borderRadius-L);
 	}
 }
 
@@ -76,13 +69,12 @@
 	@include tips;
 
 	&::before {
-		right: var(--pr-t-spacings-25);
-		border-radius: 0 var(--commons-borderRadius-L) var(--commons-borderRadius-L) 0;
+		--month-body-week-daySelectedBeforeBorderRadius: 0 var(--commons-borderRadius-L) var(--commons-borderRadius-L) 0;
 	}
 }
 
 @mixin overflow {
 	.month-body-week-day-action {
-		color: var(--palettes-neutral-600);
+		--month-body-week-day-actionColor: var(--palettes-neutral-600);
 	}
 }

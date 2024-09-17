@@ -47,6 +47,14 @@
 		.month-body-week-day {
 			position: relative;
 			color: var(--palettes-neutral-700);
+
+			&::before {
+				background-color: var(--palettes-product-50);
+				position: absolute;
+				inset: var(--pr-t-spacings-25) 0;
+				content: var(--month-body-week-daySelectedBeforeContent);
+				border-radius: var(--month-body-week-daySelectedBeforeBorderRadius);
+			}
 		}
 
 		.month-body-week-day-action {
@@ -60,11 +68,14 @@
 			text-align: center;
 			color: var(--palettes-neutral-800);
 			font: inherit;
-
-			background-color: var(--month-body-week-day-actionColor);
+			overflow: hidden;
+			font-weight: var(--month-body-week-day-actionFontWeight);
+			color: var(--month-body-week-day-actionColor);
+			background-color: var(--month-body-week-day-actionHighlight);
+			display: var(--month-body-week-day-actionDisplay);
 			box-shadow:
-				0 0 0 1px var(--month-body-week-day-actionColor),
-				0 0 0 1px var(--month-body-week-day-actionColor) inset;
+				0 0 0 1px var(--month-body-week-day-actionHighlight),
+				0 0 0 1px var(--month-body-week-day-actionHighlight) inset;
 
 			&:disabled {
 				color: var(--palettes-neutral-500);
@@ -75,7 +86,10 @@
 			&:not(:disabled) {
 				&:hover,
 				&:focus-visible {
-					@include a11y.focusVisible($offset: -1px);
+					@include a11y.focusVisible;
+
+					outline-width: var(--month-body-week-day-actionOutlineWidth);
+					outline-offset: var(--month-body-week-day-actionOutlineOffset);
 				}
 
 				&:active {
@@ -93,6 +107,7 @@
 			width: 60px;
 			height: 60px;
 			z-index: -1;
+			display: var(--month-body-week-day-action-stripesDisplay);
 		}
 	}
 }

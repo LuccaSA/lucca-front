@@ -1,6 +1,6 @@
 @mixin daysOffHidden {
 	.month-body-week-day-action-stripes {
-		display: none;
+		--month-body-week-day-action-stripesDisplay: none;
 	}
 }
 
@@ -8,7 +8,7 @@
 	.month-body-week-day {
 		&.is-overflow {
 			.month-body-week-day-action {
-				display: none;
+				--month-body-week-day-actionDisplay: none;
 			}
 		}
 	}
