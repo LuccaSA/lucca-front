@@ -20,7 +20,7 @@
 @mixin inline {
 	.form-field {
 		display: inline-flex;
-
+		
 		&:not(:last-of-type) {
 			margin-inline-end: var(--pr-t-spacings-200);
 		}
@@ -105,6 +105,7 @@
 
 @mixin withArrow {
 	padding-bottom: var(--pr-t-spacings-200);
+	margin-block: 0;
 
 	.form-field-arrow {
 		@include box.arrow;
