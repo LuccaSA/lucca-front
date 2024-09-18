@@ -12,7 +12,7 @@
 	html:has(.main-content .footer.mod-sticky, .dialog.mod-drawer .dialog-inside-footer) & {
 		// Provide extra bottom spacing when a footer is sticked
 		// Will only work on desktop with standard footer layout
-		// Refactor: Position should be calculated dynamically 
+		// Refactor: Position should be calculated dynamically
 		--components-toasts-bottom: calc(var(--components-toasts-footerHeight) + var(--pr-t-spacings-300));
 	}
 
@@ -66,20 +66,21 @@
 		}
 
 		.toasts-item-kill {
-			// the button class should be added to the component, but in the meantime we initialize the component here
-			@include button.vars;
-			@include button.component;
+			// :not(.class) is only there to increase specificity when the class isn’t present
+			// but the class should be present, and this code is temporary
+			&.button,
+			&:not(.button) {
+				@include button.onlyIcon;
+				@include button.text;
+				@include button.inverted;
 
-			@include button.onlyIcon;
-			@include button.text;
-			@include button.inverted;
+				@keyframes timer {
+				}
 
-			@keyframes timer {
+				align-self: flex-start;
+				border-radius: var(--commons-borderRadius-L);
+				animation-name: timer;
 			}
-
-			align-self: flex-start;
-			border-radius: var(--commons-borderRadius-L);
-			animation-name: timer;
 		}
 	}
 }

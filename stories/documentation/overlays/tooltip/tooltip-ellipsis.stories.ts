@@ -7,7 +7,7 @@ import { Meta, StoryFn, applicationConfig } from '@storybook/angular';
 	selector: 'tooltip-stories',
 	standalone: true,
 	imports: [LuTooltipModule],
-	template: ` <div class="test width200" luTooltip luTooltipWhenEllipsis>Lorem ipsum dolor sit amet consectetur adipisicing elit.</div>
+	template: `<div class="test width200" luTooltip luTooltipWhenEllipsis>Lorem ipsum dolor sit amet consectetur adipisicing elit.</div>
 		<div class="test ellipsis resize" luTooltip luTooltipWhenEllipsis>Lorem ipsum dolor sit amet consectetur adipisicing elit.</div>
 		<div class="test ellipsis width400" luTooltip luTooltipWhenEllipsis>Lorem ipsum dolor sit amet consectetur adipisicing elit.</div>
 		<div class="test ellipsis width400 fontWeight" luTooltip luTooltipWhenEllipsis>Lorem ipsum dolor sit amet consectetur adipisicing elit.</div>
@@ -78,6 +78,10 @@ import { Meta, StoryFn, applicationConfig } from '@storybook/angular';
 				display: flex;
 				flex-direction: column;
 				justify-content: flex-start;
+			}
+
+			[tabindex='0'] {
+				color: green;
 			}
 		`,
 	],

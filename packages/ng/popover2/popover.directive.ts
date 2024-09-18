@@ -65,6 +65,7 @@ const defaultPositionPairs: Record<PopoverPosition, ConnectionPositionPair> = {
 	host: {
 		'[attr.aria-expanded]': 'opened()',
 	},
+	exportAs: 'luPopover2',
 	standalone: true,
 })
 export class PopoverDirective implements OnDestroy {
@@ -198,6 +199,13 @@ export class PopoverDirective implements OnDestroy {
 			this.openPopover(true);
 			this.#listenToMouseLeave = false;
 			this.#listenToMouseEnter = false;
+		}
+	}
+
+	close(): void {
+		if (this.opened()) {
+			this.#componentRef?.close();
+			this.#listenToMouseLeave = true;
 		}
 	}
 

@@ -4,18 +4,17 @@
 		<span class="u-mask">Prefix</span>
 		<lu-simple-select
 			[options]="prefixesDisplay()"
-			[(ngModel)]="prefixEntry"
-			(ngModelChange)="updateModel(); formatNationalNumber()"
+			[ngModel]="prefixEntry()"
+			(ngModelChange)="updatePrefix($event)"
 			[optionKey]="getPrefixKey"
 			[optionComparer]="prefixComparator"
-			(blur)="touched()"
 			(clueChange)="query.set($event)"
 			#selectRef
 			class="phoneNumber-fieldset-select"
 		>
 			<ng-container *luOption="let prefixOption; select: selectRef"
 				><img class="pr-u-marginRight50" src="https://cdn.lucca.fr/assets/misc/flags/{{prefixOption.country}}.svg" alt="" />
-				{{prefixOption.country}} (+{{ prefixOption.prefix }})
+				{{ prefixOption.name }} (+{{ prefixOption.prefix }})
 			</ng-container>
 			<ng-container *luDisplayer="let prefixOption; select: selectRef"
 				><img
@@ -32,8 +31,8 @@
 			<input
 				type="text"
 				id="phoneNumberFieldsetTextfieldInput"
-				[(ngModel)]="nationalNumber"
-				(ngModelChange)="updateModel()"
+				[ngModel]="displayedNumber()"
+				(ngModelChange)="updateNumber($event)"
 				(blur)="touched();formatNationalNumber()"
 				luInput
 				luInputStandalone
