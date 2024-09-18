@@ -10,6 +10,10 @@
 	background-color: var(--component-textField-background);
 	box-shadow: 0 0 0 1px var(--component-textField-border);
 
+	&:hover {
+		--component-textField-border: var(--palettes-neutral-400);
+	}
+
 	&:has(.textField-input-value:focus-visible) {
 		@include a11y.focusVisible($offset: 3px);
 	}
@@ -29,10 +33,6 @@
 			border-radius: var(--commons-borderRadius-M);
 			background-color: var(--component-textField-background);
 			position: relative;
-
-			&:hover {
-				--component-textField-border: var(--palettes-neutral-400);
-			}
 
 			&:has(.textField-input-affix-icon) {
 				--component-textField-affix-padding: 2.5rem;
