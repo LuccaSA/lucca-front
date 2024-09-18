@@ -17,6 +17,20 @@
 	max-width: var(--components-form-maxWidth);
 }
 
+@mixin inline {
+	.form-field {
+		display: inline-flex;
+
+		&:not(:last-of-type) {
+			margin-inline-end: var(--pr-t-spacings-200);
+		}
+
+		&:has(.radioField) {
+			display: inline-grid;
+		}
+	}
+}
+
 @mixin S {
 	.formLabel {
 		@include formLabel.S;

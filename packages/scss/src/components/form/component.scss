@@ -8,6 +8,14 @@
 			margin: 0;
 			padding: 0;
 			border: 0;
+
+			.form-field {
+				margin-block: var(--pr-t-spacings-50);
+
+				&:last-child {
+					margin-block-end: 0;
+				}
+			}
 		}
 	}
 }
