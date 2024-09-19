@@ -14,6 +14,12 @@
 	border-radius: var(--commons-borderRadius-L);
 	background-color: var(--palettes-brand-50);
 
+	.link {
+		@include link.brand;
+
+		display: inline-block;
+	}
+
 	@at-root ($atRoot) {
 		.plgPush-icons {
 			position: relative;
@@ -52,12 +58,6 @@
 			align-items: center;
 			gap: var(--pr-t-spacings-25);
 			padding: var(--pr-t-spacings-0);
-		}
-
-		.link {
-			@include link.brand;
-
-			display: inline-block;
 		}
 	}
 }
