@@ -1,16 +1,24 @@
-<div class="callout" [ngClass]="calloutClasses" *ngIf="!removed">
-	<div class="callout-icon" *ngIf="icon">
-		<span aria-hidden="true" class="lucca-icon icon-{{icon}}"></span>
+@if (!removed) {
+<div class="callout" [ngClass]="calloutClasses">
+	@if (state | luCalloutIcon: icon; as calloutIcon) {
+	<div class="callout-icon">
+		<span aria-hidden="true" class="lucca-icon icon-{{calloutIcon}}"></span>
 	</div>
+	}
 	<div class="callout-content">
-		<strong class="callout-content-title" *ngIf="heading">
+		@if (heading) {
+		<strong class="callout-content-title">
 			<ng-container *luPortal="heading"></ng-container>
 		</strong>
+		}
 		<div class="callout-content-description">
 			<ng-content></ng-content>
 		</div>
 	</div>
-	<button *ngIf="removable" type="button" class="callout-kill" (click)="removed = true; removedChange.emit(true)">
+	@if (removable) {
+	<button type="button" class="callout-kill" (click)="removed = true; removedChange.emit(true)">
 		<span class="u-mask">{{ intl.close }}</span>
 	</button>
+	}
 </div>
+}
