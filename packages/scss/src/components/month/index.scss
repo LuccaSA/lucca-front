@@ -11,6 +11,26 @@
 	&.mod-daysOverflowingHidden {
 		@include daysOverflowingHidden;
 	}
+
+	// si on a un début de sélection
+	&:has(.month-body-week-day.is-start) {
+		// mais pas de fin de sélection
+		&:not(:has(.month-body-week-day.is-end)) {
+			// et soit un focus-visible
+			&:has(.month-body-week-day-action:focus-visible) {
+				// on appelle le mixin de sélection en cours
+				@include selectionInProgress($event: ':focus-within');
+			}
+
+			// soit un survol (sans focus-visible)
+			&:not(:has(.month-body-week-day:focus-within)) {
+				&:has(.month-body-week-day:hover) {
+					// on appelle le mixin de sélection en cours
+					@include selectionInProgress($event: ':hover');
+				}
+			}
+		}
+	}
 }
 
 .month-body-week-day {

@@ -78,3 +78,133 @@
 		--month-body-week-day-actionColor: var(--palettes-neutral-600);
 	}
 }
+
+@mixin selectionInProgressBeforeWeek($parent, $child, $start, $action, $event) {
+	#{$child + $event} {
+		&:has(#{$action}) {
+			@include selected;
+
+			--month-body-week-daySelectedBeforeBorderRadius: var(--commons-borderRadius-L) 0 0 var(--commons-borderRadius-L);
+		}
+	}
+
+	#{$child + $event} ~ #{$child} {
+		&:has(#{$action}) {
+			@include selected;
+		}
+	}
+
+	~ #{$parent} {
+		&:not(#{$parent}:has(#{$start}) ~ #{$parent}) {
+			#{$child} {
+				&:not(#{$start} ~ #{$child}) {
+					&:has(#{$action}) {
+						@include selected;
+					}
+				}
+			}
+		}
+	}
+	~ #{$parent}:has(#{$start}) {
+		#{$start} {
+			&::before {
+				--month-body-week-daySelectedBeforeBorderRadius: 0 var(--commons-borderRadius-L) var(--commons-borderRadius-L) 0;
+			}
+		}
+	}
+}
+
+@mixin selectionInProgressAfterWeek($parent, $child, $start, $action, $event) {
+	~ #{$parent} {
+		&:not(&#{$event} ~ #{$parent}) {
+			#{$child} {
+				&:not(#{$child + $event} ~ #{$child}) {
+					&:has(#{$action}) {
+						@include selected;
+
+						#{$event} {
+							--month-body-week-daySelectedBeforeBorderRadius: 0 var(--commons-borderRadius-L) var(--commons-borderRadius-L) 0;
+						}
+					}
+				}
+			}
+		}
+	}
+
+	#{$start} ~ #{$child} {
+		&:has(#{$action}) {
+			@include selected;
+
+			#{$event} {
+				--month-body-week-daySelectedBeforeBorderRadius: 0 var(--commons-borderRadius-L) var(--commons-borderRadius-L) 0;
+			}
+		}
+	}
+}
+
+@mixin selectionInProgressSameWeekBeforeDay($parent, $child, $start, $action, $event) {
+	#{$child + $event} ~ #{$child} {
+		&:not(#{$start} ~ #{$child}) {
+			@include selected;
+		}
+	}
+
+	#{$child + $event} {
+		@include selected;
+
+		--month-body-week-daySelectedBeforeBorderRadius: var(--commons-borderRadius-L) 0 0 var(--commons-borderRadius-L);
+	}
+
+	#{$start} {
+		&::before {
+			--month-body-week-daySelectedBeforeBorderRadius: 0 var(--commons-borderRadius-L) var(--commons-borderRadius-L) 0;
+		}
+	}
+}
+
+@mixin selectionInProgressSameWeekAfterDay($parent, $child, $start, $action, $event) {
+	#{$start} ~ #{$child} {
+		&:not(#{$child + $event} ~ #{$child}) {
+			&:has(#{$action}) {
+				@include selected;
+
+				#{$event} {
+					--month-body-week-daySelectedBeforeBorderRadius: 0 var(--commons-borderRadius-L) var(--commons-borderRadius-L) 0;
+				}
+			}
+		}
+	}
+}
+
+@mixin selectionInProgress($event) {
+	$parent: '.month-body-week';
+	$child: '.month-body-week-day';
+	$start: #{$child + '.is-start'};
+	$action: '.month-body-week-day-action:not(:disabled)';
+
+	#{$parent} {
+		&:has(#{$start}) {
+			&:has(~ #{$parent} #{$child + $event}) {
+				@include selectionInProgressAfterWeek($parent, $child, $start, $action, $event);
+			}
+		}
+	}
+
+	#{$parent} {
+		&:has(#{$child + $event}) {
+			&:has(~ #{$parent} #{$start}) {
+				@include selectionInProgressBeforeWeek($parent, $child, $start, $action, $event);
+			}
+		}
+	}
+
+	#{$parent} {
+		&:has(#{$start} ~ #{$child + $event}) {
+			@include selectionInProgressSameWeekAfterDay($parent, $child, $start, $action, $event);
+		}
+
+		&:has(#{$child + $event} ~ #{$start}) {
+			@include selectionInProgressSameWeekBeforeDay($parent, $child, $start, $action, $event);
+		}
+	}
+}
