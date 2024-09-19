@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, inject, input, LOCALE_ID, output, viewChildren, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, computed, inject, input, LOCALE_ID, output, viewChildren, ViewEncapsulation } from '@angular/core';
 import { addMonths, eachDayOfInterval, endOfMonth, endOfWeek, lastDayOfMonth, startOfMonth, startOfWeek, subMonths, WeekOptions } from 'date-fns';
 import { WEEK_INFO } from '../calendar.token';
 import { getIntlWeekDay, getJSFirstDayOfWeek } from '../utils';
@@ -36,11 +36,11 @@ export class Calendar2Component {
 
 	#weekOptions: WeekOptions = { weekStartsOn: getJSFirstDayOfWeek(this.#weekInfo) };
 
-	showOverflow = input<boolean>(false);
+	showOverflow = input<boolean, boolean>(false, { transform: booleanAttribute });
 
-	enableOverflow = input<boolean>(false);
+	enableOverflow = input<boolean, boolean>(false, { transform: booleanAttribute });
 
-	month = input<Date, Date>(new Date(), { transform: (date) => startOfMonth(date) });
+	month = input<Date, Date>(startOfMonth(new Date()), { transform: (date) => startOfMonth(date) });
 
 	previousMonth = computed(() => subMonths(this.month(), 1));
 
