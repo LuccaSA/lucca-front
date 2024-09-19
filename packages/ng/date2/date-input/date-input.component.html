@@ -1,0 +1,5 @@
+<input type="text" />
+<button [luPopover2]="calendar">open picker</button>
+<ng-template #calendar>
+	<lu-calendar2 showOverflow [getDayInfo]="getDayInfo" (dateClicked)="selectedDay.set($event)"></lu-calendar2>
+</ng-template>
