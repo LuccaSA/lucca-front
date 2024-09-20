@@ -3,10 +3,6 @@
 .month,
 .monthCalendarWrapper {
 	@include vars;
-}
-
-.month {
-	@include component;
 
 	&.mod-daysOffHidden {
 		@include daysOffHidden;
@@ -15,6 +11,10 @@
 	&.mod-daysOverflowingHidden {
 		@include daysOverflowingHidden;
 	}
+}
+
+.month {
+	@include component;
 
 	// si on a un début de sélection
 	&:has(.month-body-week-day.is-start) {

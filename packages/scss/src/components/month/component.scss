@@ -3,20 +3,20 @@
 @use '@lucca-front/scss/src/components/button/exports' as button;
 
 @mixin component($atRoot: 'without: rule') {
-	border-collapse: collapse;
+	border-spacing: 0;
 	border: var(--pr-t-spacings-150) solid transparent;
 	border-top: 0;
-	empty-cells: hide;
 	table-layout: fixed;
-	background-color: var(--palettes-neutral-0);
+	background-color: var(--monthBackground);
 	scroll-snap-align: start end;
 	flex-shrink: 0;
 	flex-basis: var(--monthWidth);
+	empty-cells: hide;
 
 	@at-root ($atRoot) {
 		.monthCalendarWrapper {
 			width: calc(var(--monthWidth) * var(--monthCalendarWrapperVisible));
-			background-color: var(--palettes-neutral-0);
+			background-color: var(--monthBackground);
 
 			position: relative;
 
@@ -32,11 +32,11 @@
 			overflow: auto;
 			scroll-behavior: smooth;
 			scroll-snap-type: x mandatory;
-			//-ms-overflow-style: none;
-			//scrollbar-width: none;
+			-ms-overflow-style: none;
+			scrollbar-width: none;
 
 			&::-webkit-scrollbar {
-				// display: none;
+				display: none;
 			}
 
 			&:focus-visible {
@@ -46,9 +46,11 @@
 
 		.monthCalendarWrapper-navigation {
 			position: absolute;
-			top: 0;
-			background-color: var(--palettes-neutral-0);
-			border: var(--pr-t-spacings-150) solid var(--palettes-neutral-0);
+			top: var(--pr-t-spacings-150);
+			background-color: var(--monthBackground);
+			border-width: 0 var(--pr-t-spacings-150);
+			border-style: solid;
+			border-color: transparent var(--monthBackground);
 
 			&.mod-prev {
 				left: 0;
@@ -84,7 +86,7 @@
 			border: var(--pr-t-spacings-150) solid transparent;
 			border-bottom: var(--pr-t-spacings-100) solid transparent;
 			text-transform: lowercase;
-			background-color: var(--palettes-neutral-0);
+			background-color: var(--monthBackground);
 		}
 
 		.month-head-week-day,

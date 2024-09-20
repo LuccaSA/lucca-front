@@ -1,5 +1,7 @@
+import { ConnectionPositionPair } from '@angular/cdk/overlay';
 import { ChangeDetectionStrategy, Component, computed, effect, ElementRef, inject, model, OnInit, Renderer2, signal, viewChild, viewChildren, ViewEncapsulation } from '@angular/core';
-import { addMonths, isSameDay, isSameMonth, startOfMonth } from 'date-fns';
+import { IconComponent } from '@lucca-front/ng/icon';
+import { addMonths, format, isSameDay, startOfMonth } from 'date-fns';
 import { PopoverDirective } from '../../popover2/popover.directive';
 import { Calendar2Component } from '../calendar2/calendar2.component';
 import { DayStatus } from '../calendar2/day-status';
@@ -7,13 +9,18 @@ import { DayStatus } from '../calendar2/day-status';
 @Component({
 	selector: 'lu-date-input',
 	standalone: true,
-	imports: [PopoverDirective, Calendar2Component],
+	imports: [PopoverDirective, Calendar2Component, IconComponent],
 	templateUrl: './date-input.component.html',
 	styleUrl: './date-input.component.scss',
 	encapsulation: ViewEncapsulation.None,
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DateInputComponent implements OnInit {
+	popoverPositions: ConnectionPositionPair[] = [
+		new ConnectionPositionPair({ originX: 'end', originY: 'bottom' }, { overlayX: 'end', overlayY: 'top' }, 16, 6),
+		new ConnectionPositionPair({ originX: 'end', originY: 'top' }, { overlayX: 'end', overlayY: 'bottom' }, 16, -6),
+	];
+
 	#renderer = inject(Renderer2);
 
 	currentMonth = model(startOfMonth(new Date()));
@@ -28,6 +35,9 @@ export class DateInputComponent implements OnInit {
 	calendar = viewChild<ElementRef<HTMLDivElement>>('calendar');
 
 	months = viewChildren<Calendar2Component>(Calendar2Component);
+
+	dateSelected: string | undefined;
+	dateFormat = 'dd/MM/yyyy';
 
 	#observer: IntersectionObserver;
 
@@ -46,49 +56,42 @@ export class DateInputComponent implements OnInit {
 
 	constructor() {
 		effect(() => {
-			setTimeout(() => {
-				this.months().forEach((month) => {
-					this.#observer.observe(month.elementRef.nativeElement);
-				});
-			}, 1000);
+			this.months().forEach((month) => {
+				this.#observer.observe(month.elementRef.nativeElement);
+			});
 		});
 
 		effect(() => {
-			console.log(this.currentMonth());
+			this.dateSelected = format(this.selectedDay(), this.dateFormat);
 		});
 	}
 
-	prev() {
-		console.log('prev');
-	}
+	prev() {}
 
 	next() {
-		const target = this.months().find((el) => {
-			return isSameMonth(el.month(), addMonths(this.currentMonth(), 1));
-		});
-
-		target.elementRef.nativeElement.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
+		// const target = this.months().find((el) => {
+		// 	return isSameMonth(el.month(), addMonths(this.currentMonth(), 1));
+		// });
+		// target.elementRef.nativeElement.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
 	}
 
 	ngOnInit(): void {
-		setTimeout(() => {
-			const target = this.months().find((el) => {
-				return isSameMonth(el.month(), this.currentMonth());
-			});
-			console.log(target);
+		// const target = this.months().find((el) => {
+		// 	return isSameMonth(el.month(), this.currentMonth());
+		// 	console.log(target);
+		// });
 
-			target.elementRef.nativeElement.scrollIntoView({ behavior: 'instant', block: 'nearest', inline: 'nearest' });
-		}, 500);
+		// target.elementRef.nativeElement.scrollIntoView({ behavior: 'instant', block: 'nearest', inline: 'nearest' });
 
 		this.#observer = new IntersectionObserver(
 			(entries) => {
 				entries.forEach((entry) => {
 					if (entry.isIntersecting) {
 						this.#renderer.removeAttribute(entry.target, 'inert');
-						const currentChild = this.months().find((el) => {
-							return entry.target === el.elementRef.nativeElement;
-						});
-						this.currentMonth.set(currentChild.month());
+						// const currentChild = this.months().find((el) => {
+						// 	return entry.target === el.elementRef.nativeElement;
+						// });
+						// this.currentMonth.set(currentChild.month());
 					} else {
 						this.#renderer.setAttribute(entry.target, 'inert', 'inert');
 					}
