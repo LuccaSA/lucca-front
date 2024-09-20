@@ -1,3 +1,4 @@
+import { DateRange } from './date-range';
 import { DayStatus } from './day-status';
 
 export interface CalendarDayInfo {
@@ -6,4 +7,12 @@ export interface CalendarDayInfo {
 	isOverflow: boolean;
 	date: Date;
 	status: DayStatus;
+	isToday: boolean;
+	classes: string[];
+	rangeInfo: {
+		range?: DateRange;
+		isStart: boolean;
+		isEnd: boolean;
+		label?: string;
+	};
 }
