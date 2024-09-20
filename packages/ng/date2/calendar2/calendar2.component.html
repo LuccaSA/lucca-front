@@ -20,7 +20,12 @@
 				class="month-body-week-day"
 				[class.is-daysOff]="day.isWeekend"
 				[class.is-overflow]="day.isOverflow"
-				[ngClass]="day.status?.classes"
+				[class.is-today]="day.isToday"
+				[attr.aria-selected]="day.status.selected || day.rangeInfo.range!== undefined"
+				[class.is-start]="day.rangeInfo.isStart"
+				[class.is-end]="day.rangeInfo.isEnd"
+				[class.is-selected]="day.rangeInfo.range"
+				[ngClass]="day.classes"
 			>
 				<button
 					[luCalendar2Day]="di"
@@ -30,10 +35,12 @@
 					[disabled]="day.status?.disabled || (day.isOverflow && !enableOverflow())"
 					(click)="dateClicked.emit(day.date)"
 				>
-					{{ day.day }} @if (day.isWeekend) {
-					<svg class="month-body-week-day-action-stripes">
-						<use href="#month_stripes-symbol"></use>
-					</svg>
+					{{ day.day }} @if (day.rangeInfo.label) {
+					<span class="u-mask">({{ day.rangeInfo.label }})</span>
+					} @if (day.isToday) {
+					<span class="u-mask">({{ todayLabel }})</span>
+					} @if (day.isWeekend) {
+					<svg class="month-body-week-day-action-stripes"><use href="#month_stripes-symbol"></use></svg>
 					}
 				</button>
 			</td>

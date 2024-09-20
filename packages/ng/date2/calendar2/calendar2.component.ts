@@ -1,13 +1,14 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, computed, inject, input, LOCALE_ID, output, viewChildren, ViewEncapsulation } from '@angular/core';
-import { addMonths, eachDayOfInterval, endOfMonth, endOfWeek, lastDayOfMonth, startOfMonth, startOfWeek, subMonths, WeekOptions } from 'date-fns';
+import { NgClass } from '@angular/common';
+import { booleanAttribute, ChangeDetectionStrategy, Component, computed, ElementRef, inject, input, LOCALE_ID, output, viewChildren, ViewEncapsulation } from '@angular/core';
+import { addMonths, eachDayOfInterval, endOfMonth, endOfWeek, isSameDay, isWithinInterval, lastDayOfMonth, startOfDay, startOfMonth, startOfWeek, subMonths, WeekOptions } from 'date-fns';
+import { ButtonComponent } from '../../button/button.component';
 import { WEEK_INFO } from '../calendar.token';
+import { RepeatTimesDirective } from '../repeat-times.directive';
 import { getIntlWeekDay, getJSFirstDayOfWeek } from '../utils';
 import { CalendarDayInfo } from './calendar-day-info';
-import { RepeatTimesDirective } from '../repeat-times.directive';
-import { ButtonComponent } from '../../button/button.component';
 import { Calendar2DayDirective } from './calendar2-day.directive';
 import { CALENDAR_DAYS } from './calendar2.tokens';
-import { NgClass } from '@angular/common';
+import { DateRange } from './date-range';
 import { DayStatus } from './day-status';
 
 @Component({
@@ -28,11 +29,13 @@ import { DayStatus } from './day-status';
 export class Calendar2Component {
 	#locale = inject(LOCALE_ID);
 	#weekInfo = inject(WEEK_INFO);
+	readonly elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
 
 	#intlDateFormat = new Intl.DateTimeFormat(this.#locale, { month: 'long', year: 'numeric' });
 
 	#intlDaysLong = new Intl.DateTimeFormat(this.#locale, { weekday: 'long' });
 	#intlDaysShort = new Intl.DateTimeFormat(this.#locale, { weekday: 'short' });
+	#intlRelativeDay = new Intl.RelativeTimeFormat(this.#locale, { numeric: 'auto' });
 
 	#weekOptions: WeekOptions = { weekStartsOn: getJSFirstDayOfWeek(this.#weekInfo) };
 
@@ -40,7 +43,16 @@ export class Calendar2Component {
 
 	enableOverflow = input<boolean, boolean>(false, { transform: booleanAttribute });
 
+	hideToday = input<boolean, boolean>(false, { transform: booleanAttribute });
+
 	month = input<Date, Date>(startOfMonth(new Date()), { transform: (date) => startOfMonth(date) });
+
+	ranges = input<DateRange[]>([]);
+
+	getDayInfo = input<(day: Date) => DayStatus>((_day: Date) => ({
+		classes: [],
+		disabled: false,
+	}));
 
 	previousMonth = computed(() => subMonths(this.month(), 1));
 
@@ -48,22 +60,16 @@ export class Calendar2Component {
 
 	dateClicked = output<Date>();
 
+	todayLabel = this.#intlRelativeDay.format(0, 'day');
+
 	calendar2DayInstances = viewChildren(Calendar2DayDirective);
 
 	daysOfWeek = eachDayOfInterval({
 		start: startOfWeek(new Date(), this.#weekOptions),
 		end: endOfWeek(new Date(), this.#weekOptions),
 	}).map((day) => ({
-		// TODO check if capitalize pipe or CSS wouldn't do that
 		long: this.#intlDaysLong.format(day),
 		short: this.#intlDaysShort.format(day),
-	}));
-
-	// TODO add ranges input with start, end and class, computed into class-start, class and class-end
-
-	getDayInfo = input<(day: Date) => DayStatus>((_day: Date) => ({
-		classes: [],
-		disabled: false,
 	}));
 
 	monthGridDisplay = computed(() => {
@@ -106,12 +112,37 @@ export class Calendar2Component {
 	});
 
 	dateToDayInfo(date: Date, isOverflow = false): CalendarDayInfo {
+		const range: DateRange | undefined = this.ranges().find((range: DateRange) => {
+			return isWithinInterval(date, { start: startOfDay(range.start), end: range.end || endOfMonth(date) });
+		});
+
+		const status = this.getDayInfo()(date);
+
+		const isStart: boolean = range && isSameDay(date, range.start);
+		const isEnd: boolean = range && range.end && isSameDay(date, range.end);
+
+		// const value: string = range.value;
+
+		const classes: string[] = status?.classes || [];
+
+		if (range?.class) {
+			classes.push(range.class);
+		}
+
 		return {
 			day: date.getDate(),
 			isWeekend: this.#weekInfo.weekend.includes(getIntlWeekDay(date)),
 			isOverflow,
-			status: this.getDayInfo()(date),
+			status,
 			date,
+			classes,
+			isToday: isSameDay(new Date(), date) && !this.hideToday(),
+			rangeInfo: {
+				range,
+				isStart,
+				isEnd,
+				label: range?.label,
+			},
 		};
 	}
 

@@ -1,7 +1,11 @@
 @use 'exports' as *;
 
-.month {
+.month,
+.monthCalendarWrapper {
 	@include vars;
+}
+
+.month {
 	@include component;
 
 	&.mod-daysOffHidden {
@@ -38,6 +42,10 @@
 		@include daysOff;
 	}
 
+	&.is-overflow {
+		@include overflow;
+	}
+
 	&.is-today {
 		@include today;
 	}
@@ -52,9 +60,5 @@
 
 	&.is-end {
 		@include end;
-	}
-
-	&.is-overflow {
-		@include overflow;
 	}
 }

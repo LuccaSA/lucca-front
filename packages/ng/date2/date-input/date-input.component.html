@@ -1,5 +1,21 @@
 <input type="text" />
-<button [luPopover2]="calendar">open picker</button>
-<ng-template #calendar>
-	<lu-calendar2 showOverflow [getDayInfo]="getDayInfo" (dateClicked)="selectedDay.set($event)"></lu-calendar2>
-</ng-template>
+<button type="button">open picker</button>
+<!--<ng-template #calendar>-->
+<div class="monthCalendarWrapper">
+	<div class="monthCalendarWrapper-navigation mod-prev">
+		<button class="monthCalendarWrapper-navigation-button button" type="button" (click)="prev()">
+			<span aria-hidden="true" class="lucca-icon icon-chevronLeft"></span><span class="u-mask">Mois précédent</span>
+		</button>
+	</div>
+	<div class="monthCalendarWrapper-content" tabindex="-1" #calendar>
+		@for (month of display(); track month.getMonth() ){
+		<lu-calendar2 [month]="month" [getDayInfo]="getDayInfo" (dateClicked)="selectedDay.set($event)"></lu-calendar2>
+		}
+	</div>
+	<div class="monthCalendarWrapper-navigation mod-next">
+		<button class="monthCalendarWrapper-navigation-button button" type="button" (click)="next()">
+			<span aria-hidden="true" class="lucca-icon icon-chevronRight"></span><span class="u-mask">Mois Suivant</span>
+		</button>
+	</div>
+</div>
+<!--</ng-template>-->
