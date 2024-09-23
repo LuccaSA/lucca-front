@@ -136,7 +136,7 @@ export class Calendar2Component {
 			status,
 			date,
 			classes,
-			isToday: isSameDay(new Date(), date) && !this.hideToday(),
+			isCurrent: isSameDay(new Date(), date) && !this.hideToday(),
 			rangeInfo: {
 				range,
 				isStart,

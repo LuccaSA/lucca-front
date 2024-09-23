@@ -13,13 +13,13 @@
 	}
 }
 
-.calendar-header {
+.calendar-table-header {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
 }
 
-.calendar-header-date {
+.calendar-table-header-date {
 	font-weight: 600;
 	color: var(--palettes-neutral-900);
 	font-size: var(--sizes-L-fontSize);

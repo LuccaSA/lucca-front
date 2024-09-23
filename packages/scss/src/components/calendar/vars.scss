@@ -1,0 +1,22 @@
+@mixin wrapperVars {
+	--calendarWrapperWidth: 17.25rem;
+	--calendarWrapperVisible: 1;
+	--calendarWrapperBackground: transparent;
+	--calendarWrapper-navigationBackground: var(--palettes-neutral-0);
+}
+
+@mixin vars {
+	--calendar-table-body-row-cell-action-stripesColor: var(--palettes-neutral-200);
+	--calendar-table-body-row-cell-actionHighlight: transparent;
+	--calendar-table-body-row-cell-actionFontWeight: 400;
+	--calendar-table-body-row-cell-actionColor: inherit;
+	--calendar-table-body-row-cell-actionOutlineWidth: 2px;
+	--calendar-table-body-row-cell-actionOutlineOffset: -1px;
+	--calendar-table-body-row-cellSelectedBeforeContent: none;
+	--calendar-table-body-row-cellSelectedBeforeBorderRadius: 0;
+	--calendar-table-body-row-cell-actionDisplay: block;
+	--calendar-table-body-row-cell-action-stripesDisplay: block;
+	--calendarBackground: var(--calendarWrapperBackground, var(--palettes-neutral-0));
+	--calendarWidth: var(--calendarWrapperWidth, 17.25rem);
+	--calendarBorderSpacing: 0;
+}
