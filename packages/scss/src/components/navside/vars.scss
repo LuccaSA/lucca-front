@@ -1,4 +1,6 @@
-@mixin vars($atRoot: 'without: rule') {
+@use '@lucca-front/scss/src/commons/utils/namespace' as ns;
+
+@mixin vars($atRoot: ns.$defaultAtRoot) {
 	@at-root ($atRoot) {
 		:root {
 			--commons-navSide-width: 15rem;

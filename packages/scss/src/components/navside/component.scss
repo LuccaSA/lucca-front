@@ -3,9 +3,10 @@
 @use '@lucca-front/scss/src/commons/utils/a11y';
 @use '@lucca-front/scss/src/commons/utils/color';
 @use '@lucca-front/scss/src/commons/utils/keyframe';
+@use '@lucca-front/scss/src/commons/utils/namespace' as ns;
 @use '@lucca-front/scss/src/components/numericBadge/exports' as numericBadge;
 
-@mixin component($atRoot: 'without: rule') {
+@mixin component($atRoot: ns.$defaultAtRoot) {
 	bottom: 0;
 	left: 0;
 	top: 0;

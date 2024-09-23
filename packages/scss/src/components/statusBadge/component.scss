@@ -1,4 +1,6 @@
-@mixin component($atRoot: 'without: rule') {
+@use '@lucca-front/scss/src/commons/utils/namespace' as ns;
+
+@mixin component($atRoot: ns.$defaultAtRoot) {
 	align-items: flex-start;
 	background-color: var(--palettes-100, var(--palettes-product-100));
 	border-radius: var(--commons-borderRadius-L);

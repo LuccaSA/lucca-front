@@ -1,7 +1,8 @@
 @use '@lucca-front/scss/src/commons/utils/a11y';
+@use '@lucca-front/scss/src/commons/utils/namespace' as ns;
 @use '@lucca-front/scss/src/components/numericBadge/exports' as numericBadge;
 
-@mixin component($atRoot: 'without: rule') {
+@mixin component($atRoot: ns.$defaultAtRoot) {
 	display: flex;
 
 	@at-root ($atRoot) {

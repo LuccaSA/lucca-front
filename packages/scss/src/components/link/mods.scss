@@ -1,4 +1,6 @@
-@mixin icon($atRoot: 'without: rule') {
+@use '@lucca-front/scss/src/commons/utils/namespace' as ns;
+
+@mixin icon($atRoot: ns.$defaultAtRoot) {
 	&:has(.link-text) {
 		text-decoration: none;
 	}

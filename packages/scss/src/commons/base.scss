@@ -3,8 +3,25 @@
 
 @use '@lucca-front/scss/src/commons/config';
 @use '@lucca-front/scss/src/commons/utils/a11y';
+@use '@lucca-front/scss/src/commons/utils/namespace' as ns;
 
-@mixin base($atRoot: 'without: rule') {
+@mixin body {
+	background-color: var(--pr-t-elevation-surface-default);
+	color: var(--palettes-neutral-800);
+	font-family: var(--commons-font-family);
+	font-size: var(--sizes-M-fontSize);
+	line-height: var(--sizes-M-lineHeight);
+
+	@supports (-webkit-touch-callout: none) {
+		min-height: -webkit-fill-available;
+	}
+}
+
+@mixin html {
+	height: -webkit-fill-available;
+}
+
+@mixin base($atRoot: ns.$defaultAtRoot) {
 	@at-root ($atRoot) {
 		@if config.$fontFamily != 'Source Sans Pro' {
 			@font-face {
@@ -90,19 +107,18 @@
 			opacity: 1;
 		}
 
-		html {
-			height: -webkit-fill-available;
-		}
+		@if config.$isNamespaced {
+			& {
+				@include body;
+				@include html;
+			}
+		} @else {
+			html {
+				@include html;
+			}
 
-		body {
-			background-color: var(--pr-t-elevation-surface-default);
-			color: var(--palettes-neutral-800);
-			font-family: var(--commons-font-family);
-			font-size: var(--sizes-M-fontSize);
-			line-height: var(--sizes-M-lineHeight);
-
-			@supports (-webkit-touch-callout: none) {
-				min-height: -webkit-fill-available;
+			body {
+				@include body;
 			}
 		}
 

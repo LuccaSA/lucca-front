@@ -2,21 +2,23 @@
 
 body {
 	-moz-osx-font-smoothing: grayscale;
+}
 
-	@at-root {
-		@font-face {
-			font-family: config.$font-name;
-			font-style: normal;
-			font-weight: 400;
-			src: url('#{config.$font-path}.woff2') format('woff2'), url('#{config.$font-path}.woff') format('woff');
-			letter-spacing: normal;
-			-webkit-font-feature-settings: 'liga';
-			-moz-font-feature-settings: 'liga=1';
-			-moz-font-feature-settings: 'liga';
-			-ms-font-feature-settings: 'liga' 1;
-			font-feature-settings: 'liga';
-			-webkit-font-variant-ligatures: discretionary-ligatures;
-			font-variant-ligatures: discretionary-ligatures;
-		}
+@at-root {
+	@font-face {
+		font-family: config.$font-name;
+		font-style: normal;
+		font-weight: 400;
+		src:
+			url('#{config.$font-path}.woff2') format('woff2'),
+			url('#{config.$font-path}.woff') format('woff');
+		letter-spacing: normal;
+		-webkit-font-feature-settings: 'liga';
+		-moz-font-feature-settings: 'liga=1';
+		-moz-font-feature-settings: 'liga';
+		-ms-font-feature-settings: 'liga' 1;
+		font-feature-settings: 'liga';
+		-webkit-font-variant-ligatures: discretionary-ligatures;
+		font-variant-ligatures: discretionary-ligatures;
 	}
 }

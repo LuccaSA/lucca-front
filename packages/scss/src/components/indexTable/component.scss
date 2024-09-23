@@ -1,8 +1,9 @@
 @use 'vars' as *;
 @use '@lucca-front/scss/src/commons/utils/a11y';
 @use '@lucca-front/scss/src/components/button/exports' as button;
+@use '@lucca-front/scss/src/commons/utils/namespace' as ns;
 
-@mixin component($atRoot: 'without: rule') {
+@mixin component($atRoot: ns.$defaultAtRoot) {
 	position: relative;
 	display: table;
 	width: 100%;

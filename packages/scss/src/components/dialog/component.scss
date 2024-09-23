@@ -2,8 +2,9 @@
 @use '@lucca-front/scss/src/components/button/exports' as button;
 @use '@lucca-front/scss/src/components/footer/exports' as footer;
 @use '@lucca-front/scss/src/commons/utils/keyframe';
+@use '@lucca-front/scss/src/commons/utils/namespace' as ns;
 
-@mixin component($atRoot: 'without: rule') {
+@mixin component($atRoot: ns.$defaultAtRoot) {
 	@include keyframe.scaleIn;
 
 	@supports not (height: 1dvh) {

@@ -1,0 +1,17 @@
+@use '@lucca-front/scss/src/commons/config';
+
+// default to 'without: rule' is ns.$isNamespaced is false
+// default to 'with: rule' is ns.$isNamespaced is true
+$defaultAtRoot: config.$isNamespaced and 'with: rule' or 'without: rule';
+
+@mixin appendRootVars {
+	@if config.$isNamespaced {
+		& {
+			@content;
+		}
+	} @else {
+		:root {
+			@content;
+		}
+	}
+}

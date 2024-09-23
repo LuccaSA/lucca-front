@@ -1,4 +1,6 @@
-:root {
+@use '@lucca-front/scss/src/commons/utils/namespace' as ns;
+
+@include ns.appendRootVars {
 	--components-sidepanel-XS: 25rem;
 	--components-sidepanel-S: 30rem;
 	--components-sidepanel-M: 40rem;

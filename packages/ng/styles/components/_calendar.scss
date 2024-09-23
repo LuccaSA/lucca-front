@@ -1,4 +1,6 @@
-:root {
-  --components-calendar-width: 17.5rem;
-  --components-calendar-day-size: 2.5rem;
+@use '@lucca-front/scss/src/commons/utils/namespace' as ns;
+
+@include ns.appendRootVars {
+	--components-calendar-width: 17.5rem;
+	--components-calendar-day-size: 2.5rem;
 }
