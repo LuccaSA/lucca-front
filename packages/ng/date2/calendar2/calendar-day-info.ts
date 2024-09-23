@@ -7,7 +7,7 @@ export interface CalendarDayInfo {
 	isOverflow: boolean;
 	date: Date;
 	status: DayStatus;
-	isToday: boolean;
+	isCurrent: boolean;
 	classes: string[];
 	rangeInfo: {
 		range?: DateRange;

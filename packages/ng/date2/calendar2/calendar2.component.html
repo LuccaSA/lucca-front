@@ -1,63 +1,66 @@
-<table class="month" role="grid">
-	<caption class="month-name">
-		{{ currentMonthLabel() }}
-	</caption>
-	<thead class="month-head">
-		<tr class="month-head-week">
-			@for (day of daysOfWeek; track day.long) {
-			<th class="month-head-week-day" scope="col" [attr.data-content-after]="day.short.substring(0, 1)">
-				<span class="u-mask">{{ day.long }}</span>
-			</th>
-			}
-		</tr>
-	</thead>
-	<tbody class="month-body">
-		@for (week of monthGridDisplay(); track $index; let isFirstWeek = $first; let isLastWeek = $last) {
-		<tr class="month-body-week">
-			<td class="month-body-week-day is-overflow" *luRepeatTimes="isFirstWeek ? 7 - week.length : 0"></td>
-			@for (day of week; track di; let di = $index) {
-			<td
-				class="month-body-week-day"
-				[class.is-daysOff]="day.isWeekend"
-				[class.is-overflow]="day.isOverflow"
-				[class.is-today]="day.isToday"
-				[attr.aria-selected]="day.status.selected || day.rangeInfo.range!== undefined"
-				[class.is-start]="day.rangeInfo.isStart"
-				[class.is-end]="day.rangeInfo.isEnd"
-				[class.is-selected]="day.rangeInfo.range"
-				[ngClass]="day.classes"
-			>
-				<button
-					[luCalendar2Day]="di"
-					[luCalendar2FirstDayOfMonth]="isFirstWeek && di === 0"
-					class="month-body-week-day-action"
-					type="button"
-					[disabled]="day.status?.disabled || (day.isOverflow && !enableOverflow())"
-					(click)="dateClicked.emit(day.date)"
+<div class="calendar">
+	<div class="calendar-name" id="calendar-name">
+		<button type="button" class="calendar-name-button">septembre</button>&ngsp;
+		<button type="button" class="calendar-name-button">2024</button>
+		<!-- {{ currentMonthLabel() }} -->
+	</div>
+	<table class="calendar-table" role="grid" aria-labelledby="calendar-name">
+		<thead class="calendar-table-head">
+			<tr class="calendar-table-head-row">
+				@for (day of daysOfWeek; track day.long) {
+				<th class="calendar-table-head-row-cell" scope="col" [attr.data-content-after]="day.short.substring(0, 1)">
+					<span class="u-mask">{{ day.long }}</span>
+				</th>
+				}
+			</tr>
+		</thead>
+		<tbody class="calendar-table-body">
+			@for (week of monthGridDisplay(); track $index; let isFirstWeek = $first; let isLastWeek = $last) {
+			<tr class="calendar-table-body-row">
+				<td class="calendar-table-body-row-cell is-overflow" *luRepeatTimes="isFirstWeek ? 7 - week.length : 0"></td>
+				@for (day of week; track di; let di = $index) {
+				<td
+					class="calendar-table-body-row-cell"
+					[class.is-daysOff]="day.isWeekend"
+					[class.is-overflow]="day.isOverflow"
+					[class.is-current]="day.isCurrent"
+					[attr.aria-selected]="day.status.selected || day.rangeInfo.range!== undefined"
+					[class.is-start]="day.rangeInfo.isStart"
+					[class.is-end]="day.rangeInfo.isEnd"
+					[class.is-selected]="day.rangeInfo.range"
+					[ngClass]="day.classes"
 				>
-					{{ day.day }} @if (day.rangeInfo.label) {
-					<span class="u-mask">({{ day.rangeInfo.label }})</span>
-					} @if (day.isToday) {
-					<span class="u-mask">({{ todayLabel }})</span>
-					} @if (day.isWeekend) {
-					<svg class="month-body-week-day-action-stripes"><use href="#month_stripes-symbol"></use></svg>
-					}
-				</button>
-			</td>
+					<button
+						[luCalendar2Day]="di"
+						[luCalendar2FirstDayOfMonth]="isFirstWeek && di === 0"
+						class="calendar-table-body-row-cell-action"
+						type="button"
+						[disabled]="day.status?.disabled || (day.isOverflow && !enableOverflow())"
+						(click)="dateClicked.emit(day.date)"
+					>
+						{{ day.day }} @if (day.rangeInfo.label) {
+						<span class="u-mask">({{ day.rangeInfo.label }})</span>
+						} @if (day.isCurrent) {
+						<span class="u-mask">({{ todayLabel }})</span>
+						} @if (day.isWeekend) {
+						<svg class="calendar-table-body-row-cell-action-stripes"><use href="#calendar-stripes-symbol"></use></svg>
+						}
+					</button>
+				</td>
+				}
+				<td class="calendar-table-body-row-cell is-overflow" *luRepeatTimes="isLastWeek ? 7 - week.length : 0"></td>
+			</tr>
 			}
-			<td class="month-body-week-day is-overflow" *luRepeatTimes="isLastWeek ? 7 - week.length : 0"></td>
-		</tr>
-		}
-		<tr class="month-body-week" *luRepeatTimes="6 - monthGridDisplay().length">
-			<td class="month-body-week-day" *luRepeatTimes="7"></td>
-		</tr>
-	</tbody>
-</table>
-<svg class="month_stripes" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" aria-hidden="true">
-	<symbol id="month_stripes-symbol" viewBox="0 0 60 60">
-		<path
-			class="month_stripes-symbol-path"
-			d="m-41.82 43.03 84.85-84.85.53.53-84.85 84.85zm2.12 2.12L45.15-39.7l.53.53-84.85 84.85zm2.12 2.12
+			<tr class="calendar-table-body-row" *luRepeatTimes="6 - monthGridDisplay().length">
+				<td class="calendar-table-body-row-cell" *luRepeatTimes="7"></td>
+			</tr>
+		</tbody>
+	</table>
+	<svg class="calendar-stripes" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" aria-hidden="true">
+		<symbol id="calendar-stripes-symbol" viewBox="0 0 60 60">
+			<path
+				class="calendar-stripes-symbol-path"
+				d="m-41.82 43.03 84.85-84.85.53.53-84.85 84.85zm2.12 2.12L45.15-39.7l.53.53-84.85 84.85zm2.12 2.12
 			84.85-84.85.53.53-84.85 84.85zm2.12 2.13L49.4-35.47l.53.53-84.85 84.85zm2.12 2.11
 			84.85-84.85.54.53-84.86 84.86zm2.12 2.13 84.86-84.86.53.53-84.86 84.86zm2.12
 			2.12L55.76-29.1l.53.53-84.86 84.86zm2.13 2.12 84.85-84.85.53.53-84.85 84.85zm2.12
@@ -71,6 +74,7 @@
 			4.85l.53.53L5.38 90.23zm2.12 2.12L91.82 6.97l.53.53L7.5 92.35zm2.12 2.12L93.94 9.1l.53.53L9.62
 			94.47zm2.12 2.12 84.85-84.85.53.53-84.85 84.85zm2.12 2.12 84.85-84.85.53.53-84.85 84.85zm2.12
 			2.12 84.86-84.85.53.53-84.86 84.86z"
-		/>
-	</symbol>
-</svg>
+			/>
+		</symbol>
+	</svg>
+</div>

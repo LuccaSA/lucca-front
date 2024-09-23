@@ -1,5 +1,5 @@
 import { ConnectionPositionPair } from '@angular/cdk/overlay';
-import { ChangeDetectionStrategy, Component, computed, effect, ElementRef, inject, model, OnInit, Renderer2, signal, viewChild, viewChildren, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, effect, ElementRef, inject, model, OnInit, Renderer2, signal, ViewChild, viewChild, viewChildren, ViewEncapsulation } from '@angular/core';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { addMonths, format, isSameDay, startOfMonth } from 'date-fns';
 import { PopoverDirective } from '../../popover2/popover.directive';
@@ -18,8 +18,14 @@ import { DayStatus } from '../calendar2/day-status';
 export class DateInputComponent implements OnInit {
 	popoverPositions: ConnectionPositionPair[] = [
 		new ConnectionPositionPair({ originX: 'end', originY: 'bottom' }, { overlayX: 'end', overlayY: 'top' }, 16, 6),
-		new ConnectionPositionPair({ originX: 'end', originY: 'top' }, { overlayX: 'end', overlayY: 'bottom' }, 16, -6),
+		new ConnectionPositionPair({ originX: 'end', originY: 'top' }, { overlayX: 'end', overlayY: 'bottom' }, 16, 6),
 	];
+
+	@ViewChild('popoverTrigger', { read: ElementRef, static: true })
+	popoverTrigger: ElementRef<HTMLElement>;
+
+	@ViewChild('date', { read: ElementRef, static: true })
+	dateInput: ElementRef<HTMLInputElement>;
 
 	#renderer = inject(Renderer2);
 
@@ -44,7 +50,7 @@ export class DateInputComponent implements OnInit {
 	getDayInfo = (day: Date): DayStatus => {
 		const classes: string[] = [];
 		if (isSameDay(day, new Date())) {
-			classes.push('is-today');
+			classes.push('is-current');
 		}
 		if (this.selectedDay() && isSameDay(day, this.selectedDay())) {
 			classes.push('is-start', 'is-end');
@@ -63,6 +69,7 @@ export class DateInputComponent implements OnInit {
 
 		effect(() => {
 			this.dateSelected = format(this.selectedDay(), this.dateFormat);
+			this.closePopover();
 		});
 	}
 
@@ -73,6 +80,24 @@ export class DateInputComponent implements OnInit {
 		// 	return isSameMonth(el.month(), addMonths(this.currentMonth(), 1));
 		// });
 		// target.elementRef.nativeElement.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
+	}
+
+	openCombobox() {
+		this.openPopover();
+		// TODO : ne pas déplacer le focus à l’ouverture
+	}
+
+	closeCombobox() {
+		this.closePopover();
+		// TODO : ne pas déplacer le focus à la fermeture
+	}
+
+	openPopover() {
+		this.popoverTrigger.nativeElement.click();
+	}
+
+	closePopover() {
+		this.popoverTrigger.nativeElement.click();
 	}
 
 	ngOnInit(): void {

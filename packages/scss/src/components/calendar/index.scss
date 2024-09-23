@@ -1,8 +1,7 @@
 @use 'exports' as *;
 
-.month,
-.monthCalendarWrapper {
-	@include vars;
+.calendarWrapper {
+	@include wrapperVars;
 
 	&.mod-daysOffHidden {
 		@include daysOffHidden;
@@ -13,22 +12,28 @@
 	}
 }
 
-.month {
+.calendar {
 	@include component;
+	@include vars;
+
+	// si les lignes ont trois colonnes
+	&:has(.calendar-table-body-row-cell:nth-child(3):last-child) {
+		@include third;
+	}
 
 	// si on a un début de sélection
-	&:has(.month-body-week-day.is-start) {
+	&:has(.calendar-table-body-row-cell.is-start) {
 		// mais pas de fin de sélection
-		&:not(:has(.month-body-week-day.is-end)) {
+		&:not(:has(.calendar-table-body-row-cell.is-end)) {
 			// et soit un focus-visible
-			&:has(.month-body-week-day-action:focus-visible) {
+			&:has(.calendar-table-body-row-cell-action:focus-visible) {
 				// on appelle le mixin de sélection en cours
 				@include selectionInProgress($event: ':focus-within');
 			}
 
 			// soit un survol (sans focus-visible)
-			&:not(:has(.month-body-week-day:focus-within)) {
-				&:has(.month-body-week-day:hover) {
+			&:not(:has(.calendar-table-body-row-cell:focus-within)) {
+				&:has(.calendar-table-body-row-cell:hover) {
 					// on appelle le mixin de sélection en cours
 					@include selectionInProgress($event: ':hover');
 				}
@@ -37,7 +42,8 @@
 	}
 }
 
-.month-body-week-day {
+.calendar-table-body-row-cell,
+.calendar-table-body-row-cell {
 	&.is-daysOff {
 		@include daysOff;
 	}
@@ -46,8 +52,8 @@
 		@include overflow;
 	}
 
-	&.is-today {
-		@include today;
+	&.is-current {
+		@include current;
 	}
 
 	&.is-selected {
