@@ -1,4 +1,4 @@
-export interface DayStatus {
+export interface CellStatus {
 	classes: string[];
 	disabled?: boolean;
 	selected?: boolean;

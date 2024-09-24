@@ -21,12 +21,6 @@
 			width: calc(var(--calendarWrapperWidth) * var(--calendarWrapperVisible));
 			background-color: var(--calendarWrapperBackground);
 			position: relative;
-
-			&:has(.calendarWrapper-content > *:first-child:last-child) {
-				.calendarWrapper-navigation {
-					display: none;
-				}
-			}
 		}
 
 		.calendarWrapper-content {

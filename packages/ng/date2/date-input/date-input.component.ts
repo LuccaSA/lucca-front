@@ -1,21 +1,23 @@
 import { ConnectionPositionPair } from '@angular/cdk/overlay';
 import { ChangeDetectionStrategy, Component, computed, effect, ElementRef, inject, model, OnInit, Renderer2, signal, ViewChild, viewChild, viewChildren, ViewEncapsulation } from '@angular/core';
 import { IconComponent } from '@lucca-front/ng/icon';
-import { addMonths, format, isSameDay, startOfMonth } from 'date-fns';
+import { addMonths, addYears, isSameDay, isSameMonth, startOfMonth, subMonths } from 'date-fns';
 import { PopoverDirective } from '../../popover2/popover.directive';
 import { Calendar2Component } from '../calendar2/calendar2.component';
-import { DayStatus } from '../calendar2/day-status';
+import { CellStatus } from '../calendar2/cell-status';
+import { CalendarMode } from '../calendar2/calendar-mode';
+import { InputDirective } from '../../form-field/input.directive';
 
 @Component({
 	selector: 'lu-date-input',
 	standalone: true,
-	imports: [PopoverDirective, Calendar2Component, IconComponent],
+	imports: [PopoverDirective, Calendar2Component, IconComponent, InputDirective],
 	templateUrl: './date-input.component.html',
 	styleUrl: './date-input.component.scss',
 	encapsulation: ViewEncapsulation.None,
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DateInputComponent implements OnInit {
+export class DateInputComponent {
 	popoverPositions: ConnectionPositionPair[] = [
 		new ConnectionPositionPair({ originX: 'end', originY: 'bottom' }, { overlayX: 'end', overlayY: 'top' }, 16, 6),
 		new ConnectionPositionPair({ originX: 'end', originY: 'top' }, { overlayX: 'end', overlayY: 'bottom' }, 16, 6),
@@ -27,27 +29,20 @@ export class DateInputComponent implements OnInit {
 	@ViewChild('date', { read: ElementRef, static: true })
 	dateInput: ElementRef<HTMLInputElement>;
 
-	#renderer = inject(Renderer2);
+	calendarMode = signal<CalendarMode>('month');
 
-	currentMonth = model(startOfMonth(new Date()));
-	display = computed(() => {
-		return [-2, -1, 0, 1, 2].map((offset) => {
-			return addMonths(this.currentMonth(), offset);
-		});
-	});
+	currentDate = model(startOfMonth(new Date()));
 
 	selectedDay = signal<Date | null>(null);
 
 	calendar = viewChild<ElementRef<HTMLDivElement>>('calendar');
-
-	months = viewChildren<Calendar2Component>(Calendar2Component);
 
 	dateSelected: string | undefined;
 	dateFormat = 'dd/MM/yyyy';
 
 	#observer: IntersectionObserver;
 
-	getDayInfo = (day: Date): DayStatus => {
+	getDayInfo = (day: Date): CellStatus => {
 		const classes: string[] = [];
 		if (isSameDay(day, new Date())) {
 			classes.push('is-current');
@@ -61,72 +56,37 @@ export class DateInputComponent implements OnInit {
 	};
 
 	constructor() {
-		effect(() => {
-			this.months().forEach((month) => {
-				this.#observer.observe(month.elementRef.nativeElement);
-			});
-		});
-
-		effect(() => {
-			this.dateSelected = format(this.selectedDay(), this.dateFormat);
-			this.closePopover();
-		});
+		//this.dateSelected = format(this.selectedDay(), this.dateFormat);
+		//this.closePopover();
 	}
 
-	prev() {}
+	prev() {
+		this.move(-1);
+	}
 
 	next() {
-		// const target = this.months().find((el) => {
-		// 	return isSameMonth(el.month(), addMonths(this.currentMonth(), 1));
-		// });
-		// target.elementRef.nativeElement.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
+		this.move(1);
+	}
+
+	move(direction: 1 | -1): void {
+		switch (this.calendarMode()) {
+			case 'decade':
+				this.currentDate.set(addYears(this.currentDate(), direction * 10));
+				break;
+			case 'year':
+				this.currentDate.set(addYears(this.currentDate(), direction));
+				break;
+			case 'month':
+				this.currentDate.set(addMonths(this.currentDate(), direction));
+				break;
+		}
 	}
 
 	openCombobox() {
-		this.openPopover();
 		// TODO : ne pas déplacer le focus à l’ouverture
 	}
 
 	closeCombobox() {
-		this.closePopover();
 		// TODO : ne pas déplacer le focus à la fermeture
-	}
-
-	openPopover() {
-		this.popoverTrigger.nativeElement.click();
-	}
-
-	closePopover() {
-		this.popoverTrigger.nativeElement.click();
-	}
-
-	ngOnInit(): void {
-		// const target = this.months().find((el) => {
-		// 	return isSameMonth(el.month(), this.currentMonth());
-		// 	console.log(target);
-		// });
-
-		// target.elementRef.nativeElement.scrollIntoView({ behavior: 'instant', block: 'nearest', inline: 'nearest' });
-
-		this.#observer = new IntersectionObserver(
-			(entries) => {
-				entries.forEach((entry) => {
-					if (entry.isIntersecting) {
-						this.#renderer.removeAttribute(entry.target, 'inert');
-						// const currentChild = this.months().find((el) => {
-						// 	return entry.target === el.elementRef.nativeElement;
-						// });
-						// this.currentMonth.set(currentChild.month());
-					} else {
-						this.#renderer.setAttribute(entry.target, 'inert', 'inert');
-					}
-				});
-			},
-			{
-				root: this.calendar().nativeElement,
-				rootMargin: '0px',
-				threshold: 0.75,
-			},
-		);
 	}
 }

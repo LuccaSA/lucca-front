@@ -1,8 +1,8 @@
 <div class="calendar">
+	@switch (displayMode()) { @case ('month') {
 	<div class="calendar-name" id="calendar-name">
-		<button type="button" class="calendar-name-button">septembre</button>&ngsp;
-		<button type="button" class="calendar-name-button">2024</button>
-		<!-- {{ currentMonthLabel() }} -->
+		<button type="button" class="calendar-name-button" (click)="displayMode.set('year')">{{ currentMonthLabel() }}</button>&ngsp;
+		<button type="button" class="calendar-name-button" (click)="displayMode.set('decade')">{{ currentYearLabel() }}</button>
 	</div>
 	<table class="calendar-table" role="grid" aria-labelledby="calendar-name">
 		<thead class="calendar-table-head">
@@ -24,26 +24,29 @@
 					[class.is-daysOff]="day.isWeekend"
 					[class.is-overflow]="day.isOverflow"
 					[class.is-current]="day.isCurrent"
-					[attr.aria-selected]="day.status.selected || day.rangeInfo.range!== undefined"
-					[class.is-start]="day.rangeInfo.isStart"
-					[class.is-end]="day.rangeInfo.isEnd"
-					[class.is-selected]="day.rangeInfo.range"
+					[attr.aria-selected]="day.status.selected || day.rangeInfo?.range!== undefined"
+					[class.is-start]="day.rangeInfo?.isStart"
+					[class.is-end]="day.rangeInfo?.isEnd"
+					[class.is-selected]="day.rangeInfo?.range"
 					[ngClass]="day.classes"
 				>
 					<button
-						[luCalendar2Day]="di"
-						[luCalendar2FirstDayOfMonth]="isFirstWeek && di === 0"
+						[luCalendar2Cell]="di"
+						[luCalendar2FirstCellOfGrid]="isFirstWeek && di === 0"
+						luCalendar2Mode="month"
 						class="calendar-table-body-row-cell-action"
 						type="button"
 						[disabled]="day.status?.disabled || (day.isOverflow && !enableOverflow())"
-						(click)="dateClicked.emit(day.date)"
+						(click)="onCellClicked(day.date)"
 					>
-						{{ day.day }} @if (day.rangeInfo.label) {
-						<span class="u-mask">({{ day.rangeInfo.label }})</span>
+						{{ day.day }} @if (day.rangeInfo?.label) {
+						<span class="u-mask">({{ day.rangeInfo?.label }})</span>
 						} @if (day.isCurrent) {
 						<span class="u-mask">({{ todayLabel }})</span>
 						} @if (day.isWeekend) {
-						<svg class="calendar-table-body-row-cell-action-stripes"><use href="#calendar-stripes-symbol"></use></svg>
+						<svg class="calendar-table-body-row-cell-action-stripes">
+							<use href="#calendar-stripes-symbol"></use>
+						</svg>
 						}
 					</button>
 				</td>
@@ -56,6 +59,82 @@
 			</tr>
 		</tbody>
 	</table>
+	} @case ('year') {
+	<div class="calendar-name" id="calendar-year-name">
+		<button type="button" class="calendar-name-button" (click)="displayMode.set('decade')">{{ currentYearLabel() }}</button>
+	</div>
+	<table class="calendar-table" role="grid" aria-labelledby="calendar-year-name">
+		<tbody class="calendar-table-body">
+			@for (quarter of yearGridDisplay(); track $index; let isFirstQuarter = $first) {
+			<tr class="calendar-table-body-row">
+				@for (month of quarter; track di; let di = $index) {
+				<td
+					class="calendar-table-body-row-cell"
+					[class.is-current]="month.isCurrent"
+					[class.is-selected]="month.status.selected"
+					[ngClass]="month.status.classes"
+					[attr.aria-selected]="month.status.selected"
+					[class.is-start]="month.status.selected"
+					[class.is-end]="month.status.selected"
+				>
+					<button
+						class="calendar-table-body-row-cell-action"
+						type="button"
+						[attr.data-content-after]="month.short"
+						[luCalendar2Cell]="di"
+						[disabled]="month.status.disabled"
+						[luCalendar2FirstCellOfGrid]="isFirstQuarter && di === 0"
+						(click)="onCellClicked(month.date)"
+						luCalendar2Mode="year"
+					>
+						<span class="u-mask">{{ month.long }}</span>
+						@if (month.isCurrent) {
+						<span class="u-mask">({{ thisMonthLabel }})</span>
+						}
+					</button>
+				</td>
+				}
+			</tr>
+			}
+		</tbody>
+	</table>
+	} @case ('decade') {
+	<div class="calendar-name" id="calendar-decade-name">{{ currentDecadeLabel() }}</div>
+	<table class="calendar-table" role="grid" aria-labelledby="calendar-decade-name">
+		<tbody class="calendar-table-body">
+			@for (row of decadeGridDisplay(); track $index; let firstRow = $first; let lastRow = $last) {
+			<tr class="calendar-table-body-row">
+				@for (year of row; track di; let di = $index; let firstCell = $first; let lastCell = $last) {
+				<td
+					class="calendar-table-body-row-cell"
+					[class.is-overflow]="(firstRow && firstCell) || (lastRow && lastCell)"
+					[class.is-current]="year.isCurrent"
+					[class.is-selected]="year.status.selected"
+					[attr.aria-selected]="year.status.selected"
+					[ngClass]="year.status.classes"
+					[class.is-start]="year.status.selected"
+					[class.is-end]="year.status.selected"
+				>
+					<button
+						class="calendar-table-body-row-cell-action"
+						type="button"
+						[luCalendar2Cell]="di"
+						[luCalendar2FirstCellOfGrid]="firstRow && di === 0"
+						[disabled]="year.status.disabled"
+						luCalendar2Mode="decade"
+						(click)="onCellClicked(year.date)"
+					>
+						{{ year.label }} @if (year.isCurrent) {
+						<span class="u-mask">({{ thisYearLabel }})</span>
+						}
+					</button>
+				</td>
+				}
+			</tr>
+			}
+		</tbody>
+	</table>
+	} }
 	<svg class="calendar-stripes" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" aria-hidden="true">
 		<symbol id="calendar-stripes-symbol" viewBox="0 0 60 60">
 			<path

@@ -1,41 +1,71 @@
 import { NgClass } from '@angular/common';
-import { booleanAttribute, ChangeDetectionStrategy, Component, computed, ElementRef, inject, input, LOCALE_ID, output, viewChildren, ViewEncapsulation } from '@angular/core';
-import { addMonths, eachDayOfInterval, endOfMonth, endOfWeek, isSameDay, isWithinInterval, lastDayOfMonth, startOfDay, startOfMonth, startOfWeek, subMonths, WeekOptions } from 'date-fns';
+import { booleanAttribute, ChangeDetectionStrategy, Component, computed, ElementRef, inject, input, LOCALE_ID, model, OnInit, output, viewChildren, ViewEncapsulation } from '@angular/core';
+import {
+	addMonths,
+	addYears,
+	eachDayOfInterval,
+	eachMonthOfInterval,
+	eachYearOfInterval,
+	endOfDecade,
+	endOfMonth,
+	endOfWeek,
+	endOfYear,
+	isSameDay,
+	isSameMonth,
+	isSameYear,
+	isWithinInterval,
+	lastDayOfMonth,
+	startOfDay,
+	startOfDecade,
+	startOfMonth,
+	startOfWeek,
+	startOfYear,
+	subMonths,
+	subYears,
+	WeekOptions,
+} from 'date-fns';
 import { ButtonComponent } from '../../button/button.component';
 import { WEEK_INFO } from '../calendar.token';
 import { RepeatTimesDirective } from '../repeat-times.directive';
 import { getIntlWeekDay, getJSFirstDayOfWeek } from '../utils';
 import { CalendarDayInfo } from './calendar-day-info';
-import { Calendar2DayDirective } from './calendar2-day.directive';
-import { CALENDAR_DAYS } from './calendar2.tokens';
+import { Calendar2DCellDirective } from './calendar2-day.directive';
+import { CALENDAR_CELLS } from './calendar2.tokens';
 import { DateRange } from './date-range';
-import { DayStatus } from './day-status';
+import { CellStatus } from './cell-status';
+import { CalendarMode } from './calendar-mode';
+
+const MODE_HIERARCHY: CalendarMode[] = ['month', 'year', 'decade'];
 
 @Component({
 	selector: 'lu-calendar2',
 	standalone: true,
-	imports: [RepeatTimesDirective, ButtonComponent, Calendar2DayDirective, NgClass],
+	imports: [RepeatTimesDirective, ButtonComponent, Calendar2DCellDirective, NgClass],
 	templateUrl: './calendar2.component.html',
 	styleUrl: './calendar2.component.scss',
 	encapsulation: ViewEncapsulation.None,
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	providers: [
 		{
-			provide: CALENDAR_DAYS,
+			provide: CALENDAR_CELLS,
 			useFactory: () => inject(Calendar2Component).calendar2DayInstances,
 		},
 	],
 })
-export class Calendar2Component {
+export class Calendar2Component implements OnInit {
 	#locale = inject(LOCALE_ID);
 	#weekInfo = inject(WEEK_INFO);
 	readonly elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
 
-	#intlDateFormat = new Intl.DateTimeFormat(this.#locale, { month: 'long', year: 'numeric' });
+	#intlDateFormat = new Intl.DateTimeFormat(this.#locale, { month: 'long' });
+	#intlDateYear = new Intl.DateTimeFormat(this.#locale, { year: 'numeric' });
 
 	#intlDaysLong = new Intl.DateTimeFormat(this.#locale, { weekday: 'long' });
 	#intlDaysShort = new Intl.DateTimeFormat(this.#locale, { weekday: 'short' });
 	#intlRelativeDay = new Intl.RelativeTimeFormat(this.#locale, { numeric: 'auto' });
+
+	#intlMonthsLong = new Intl.DateTimeFormat(this.#locale, { month: 'long' });
+	#intlMonthsShort = new Intl.DateTimeFormat(this.#locale, { month: 'short' });
 
 	#weekOptions: WeekOptions = { weekStartsOn: getJSFirstDayOfWeek(this.#weekInfo) };
 
@@ -45,11 +75,22 @@ export class Calendar2Component {
 
 	hideToday = input<boolean, boolean>(false, { transform: booleanAttribute });
 
-	month = input<Date, Date>(startOfMonth(new Date()), { transform: (date) => startOfMonth(date) });
+	// Date used to init the component and as internal focus model
+	date = model.required<Date>();
+
+	month = computed(() => startOfMonth(this.date()));
+
+	year = computed(() => startOfYear(this.date()));
+
+	decade = computed(() => startOfDecade(this.date()));
+
+	mode = model<CalendarMode>('month');
+
+	displayMode = model<CalendarMode>('decade');
 
 	ranges = input<DateRange[]>([]);
 
-	getDayInfo = input<(day: Date) => DayStatus>((_day: Date) => ({
+	getCellInfo = input<(date: Date, displayMode: CalendarMode) => CellStatus>((_date: Date) => ({
 		classes: [],
 		disabled: false,
 	}));
@@ -61,8 +102,10 @@ export class Calendar2Component {
 	dateClicked = output<Date>();
 
 	todayLabel = this.#intlRelativeDay.format(0, 'day');
+	thisMonthLabel = this.#intlRelativeDay.format(0, 'month');
+	thisYearLabel = this.#intlRelativeDay.format(0, 'year');
 
-	calendar2DayInstances = viewChildren(Calendar2DayDirective);
+	calendar2DayInstances = viewChildren(Calendar2DCellDirective);
 
 	daysOfWeek = eachDayOfInterval({
 		start: startOfWeek(new Date(), this.#weekOptions),
@@ -76,7 +119,7 @@ export class Calendar2Component {
 		const daysOfMonth: CalendarDayInfo[] = eachDayOfInterval({
 			start: this.month(),
 			end: endOfMonth(this.month()),
-		}).map((date) => this.dateToDayInfo(date));
+		}).map((date) => this.dateToCellInfo(date));
 		const daysByWeek = daysOfMonth.reduce<Record<number, CalendarDayInfo[]>>((acc, day) => {
 			const key = startOfWeek(day.date, this.#weekOptions).getTime();
 			return {
@@ -91,7 +134,7 @@ export class Calendar2Component {
 			const previousOverflow = eachDayOfInterval({
 				start: startOfPreviousOverflow,
 				end: endOfMonth(this.previousMonth()),
-			}).map((date) => this.dateToDayInfo(date, true));
+			}).map((date) => this.dateToCellInfo(date, true));
 			if (daysByWeek[startOfPreviousOverflow.getTime()]) {
 				daysByWeek[startOfPreviousOverflow.getTime()] = [...previousOverflow, ...daysByWeek[startOfPreviousOverflow.getTime()]];
 			}
@@ -101,7 +144,7 @@ export class Calendar2Component {
 			const nextOverflow = eachDayOfInterval({
 				start: startOfMonth(this.nextMonth()),
 				end: endOfNextMonthOverflow,
-			}).map((date) => this.dateToDayInfo(date, true));
+			}).map((date) => this.dateToCellInfo(date, true));
 			if (daysByWeek[startOfNextMonthOverflow.getTime()]) {
 				daysByWeek[startOfNextMonthOverflow.getTime()] = [...daysByWeek[startOfNextMonthOverflow.getTime()], ...nextOverflow];
 			}
@@ -111,22 +154,109 @@ export class Calendar2Component {
 			.map((weekStart) => daysByWeek[+weekStart]);
 	});
 
-	dateToDayInfo(date: Date, isOverflow = false): CalendarDayInfo {
-		const range: DateRange | undefined = this.ranges().find((range: DateRange) => {
-			return isWithinInterval(date, { start: startOfDay(range.start), end: range.end || endOfMonth(date) });
+	yearGridDisplay = computed(() => {
+		const monthsOfYear: Date[] = eachMonthOfInterval({
+			start: this.year(),
+			end: endOfYear(this.year()),
 		});
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-return
+		return monthsOfYear
+			.map((month) => {
+				return {
+					date: month,
+					short: this.#intlMonthsShort.format(month),
+					long: this.#intlMonthsLong.format(month),
+					isCurrent: isSameMonth(new Date(), month),
+					status: this.getCellInfo()(month, this.displayMode()),
+				};
+			})
+			.reduce((all, one, i) => {
+				const ch = Math.floor(i / 3);
+				all[ch] = [].concat(all[ch] || [], one);
+				// eslint-disable-next-line @typescript-eslint/no-unsafe-return
+				return all;
+			}, []);
+	});
 
-		const status = this.getDayInfo()(date);
+	decadeGridDisplay = computed(() => {
+		const yearsOfDecade: Date[] = eachYearOfInterval({
+			start: subYears(this.decade(), 1),
+			end: addYears(endOfDecade(this.decade()), 1),
+		});
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-return
+		return yearsOfDecade
+			.map((year) => {
+				return {
+					date: year,
+					label: this.#intlDateYear.format(year),
+					isCurrent: isSameYear(new Date(), year),
+					status: this.getCellInfo()(year, this.displayMode()),
+				};
+			})
+			.reduce((all, one, i) => {
+				const ch = Math.floor(i / 3);
+				all[ch] = [].concat(all[ch] || [], one);
+				// eslint-disable-next-line @typescript-eslint/no-unsafe-return
+				return all;
+			}, []);
+	});
 
-		const isStart: boolean = range && isSameDay(date, range.start);
-		const isEnd: boolean = range && range.end && isSameDay(date, range.end);
+	currentMonthLabel = computed(() => {
+		return this.#intlDateFormat.format(this.date());
+	});
+
+	currentYearLabel = computed(() => {
+		return this.#intlDateYear.format(this.date());
+	});
+
+	currentDecadeLabel = computed(() => {
+		// eslint-disable-next-line no-irregular-whitespace
+		return `${this.#intlDateYear.format(startOfDecade(this.decade()))} – ${this.#intlDateYear.format(endOfDecade(this.decade()))}`;
+	});
+
+	ngOnInit(): void {
+		// On init, set display mode to the mode specified by component consumer
+		this.displayMode.set(this.mode());
+	}
+
+	onCellClicked(date: Date): void {
+		// On cell clicked, if display mode is same as mode, emit value
+		// Else, zoom in to new mode
+		if (this.displayMode() === this.mode()) {
+			this.dateClicked.emit(date);
+		} else {
+			// Check that we are able to zoom in
+			const maxZoomLevel = MODE_HIERARCHY.indexOf(this.mode());
+			const currentZoomLevel = MODE_HIERARCHY.indexOf(this.displayMode());
+			const targetZoomLevel = currentZoomLevel - 1;
+			if (targetZoomLevel >= 0 && targetZoomLevel >= maxZoomLevel) {
+				const newZoomLevel = MODE_HIERARCHY[targetZoomLevel];
+				switch (newZoomLevel) {
+					case 'decade':
+						this.date.set(startOfDecade(date));
+						break;
+					case 'year':
+						this.date.set(startOfYear(date));
+						break;
+					case 'month':
+						this.date.set(startOfMonth(date));
+				}
+				this.displayMode.set(newZoomLevel);
+			}
+		}
+	}
+
+	dateToCellInfo(date: Date, isOverflow = false): CalendarDayInfo {
+		const status = this.getCellInfo()(date, this.displayMode());
 
 		// const value: string = range.value;
 
 		const classes: string[] = status?.classes || [];
 
-		if (range?.class) {
-			classes.push(range.class);
+		const rangeInfo = this.getRangeInfo(date, 'month');
+
+		if (rangeInfo?.class) {
+			classes.push(rangeInfo.class);
 		}
 
 		return {
@@ -137,16 +267,31 @@ export class Calendar2Component {
 			date,
 			classes,
 			isCurrent: isSameDay(new Date(), date) && !this.hideToday(),
-			rangeInfo: {
-				range,
-				isStart,
-				isEnd,
-				label: range?.label,
-			},
+			rangeInfo,
 		};
 	}
 
-	currentMonthLabel = computed(() => {
-		return this.#intlDateFormat.format(this.month());
-	});
+	getRangeInfo(date: Date, scope: CalendarMode) {
+		const range: DateRange | undefined = this.ranges().find((range: DateRange) => {
+			return (
+				(range.scope || 'month') === scope &&
+				isWithinInterval(date, {
+					start: startOfDay(range.start),
+					end: range.end || endOfMonth(date),
+				})
+			);
+		});
+		if (!range) {
+			return null;
+		}
+		const isStart: boolean = range && isSameDay(date, range.start);
+		const isEnd: boolean = range && range.end && isSameDay(date, range.end);
+		return {
+			range,
+			isStart,
+			isEnd,
+			label: range?.label,
+			class: range?.class,
+		};
+	}
 }

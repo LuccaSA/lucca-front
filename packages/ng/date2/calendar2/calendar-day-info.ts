@@ -1,12 +1,12 @@
 import { DateRange } from './date-range';
-import { DayStatus } from './day-status';
+import { CellStatus } from './cell-status';
 
 export interface CalendarDayInfo {
 	day: number;
 	isWeekend: boolean;
 	isOverflow: boolean;
 	date: Date;
-	status: DayStatus;
+	status: CellStatus;
 	isCurrent: boolean;
 	classes: string[];
 	rangeInfo: {

@@ -1,57 +1,53 @@
-<div class="form-field">
-	<label class="formLabel" id="datelabel" for="date">Date</label>
-	<div class="textField">
-		<div class="textField-input">
-			<input
-				type="text"
-				id="date"
-				#date
-				class="textField-input-value"
-				aria-labelledby="dateLabel"
-				aria-describedby="dateMessage"
-				[value]="dateSelected ? dateSelected : null"
-				aria-haspopup="true"
-				role="combobox"
-				(focus)="openCombobox()"
-				(keyup.escape)="closeCombobox()"
-				(keyup.arrowdown)="openPopover()"
-			/>
-			<div class="textField-input-affix">
-				<button
-					#popoverTrigger
-					tabindex="-1"
-					type="button"
-					class="button mod-onlyIcon mod-text textField-input-affix-toggle"
-					[luPopover2]="calendar"
-					[luPopoverNoCloseButton]="true"
-					[customPositions]="popoverPositions"
-				>
-					<lu-icon [icon]="'calendarDate'" [alt]="'Choisir une date dans le calendrier'"></lu-icon>
-				</button>
-				<ng-template #calendar>
-					<div class="calendarWrapper">
-						<div class="calendarWrapper-content" tabindex="-1" #calendar>
-							@for (month of display(); track month.getMonth() ){
-							<lu-calendar2 [month]="month" [getDayInfo]="getDayInfo" (dateClicked)="selectedDay.set($event)"></lu-calendar2>
-							}
-						</div>
-						<div class="calendarWrapper-navigation mod-prev">
-							<button class="calendarWrapper-navigation-button button" type="button" (click)="prev()">
-								<span aria-hidden="true" class="lucca-icon icon-chevronLeft"></span><span class="u-mask">Mois précédent</span>
-							</button>
-						</div>
-						<div class="calendarWrapper-navigation mod-next">
-							<button class="calendarWrapper-navigation-button button" type="button" (click)="next()">
-								<span aria-hidden="true" class="lucca-icon icon-chevronRight"></span><span class="u-mask">Mois Suivant</span>
-							</button>
-						</div>
-					</div>
-				</ng-template>
-			</div>
+<div class="textField">
+	<div class="textField-input">
+		<input
+			type="text"
+			id="date"
+			#date
+			luInput
+			class="textField-input-value"
+			aria-labelledby="dateLabel"
+			aria-describedby="dateMessage"
+			[value]="dateSelected ? dateSelected : null"
+			aria-haspopup="true"
+			role="combobox"
+			(focus)="openCombobox()"
+			(keyup.escape)="closeCombobox()"
+		/>
+		<div class="textField-input-affix">
+			<button
+				[luPopover2]="calendar"
+				[customPositions]="popoverPositions"
+				tabindex="-1"
+				type="button"
+				class="button mod-onlyIcon mod-text textField-input-affix-toggle"
+			>
+				<lu-icon [icon]="'calendarDate'" [alt]="'Choisir une date dans le calendrier'"></lu-icon>
+			</button>
 		</div>
 	</div>
-	<div class="inlineMessage" id="dateMessage">
-		<span aria-hidden="true" class="lucca-icon inlineMessage-statusIcon"></span>
-		<p class="inlineMessage-content">au format JJ/MM/AAAA</p>
-	</div>
 </div>
+
+<ng-template #calendar>
+	<div class="calendarWrapper">
+		<div class="calendarWrapper-content" tabindex="-1">
+			<lu-calendar2
+				[date]="currentDate()"
+				[getCellInfo]="getDayInfo"
+				(dateClicked)="selectedDay.set($event)"
+				mode="month"
+				[(displayMode)]="calendarMode"
+			></lu-calendar2>
+		</div>
+		<div class="calendarWrapper-navigation mod-prev">
+			<button class="calendarWrapper-navigation-button button" type="button" (click)="prev()">
+				<span aria-hidden="true" class="lucca-icon icon-chevronLeft"></span><span class="u-mask">Mois précédent</span>
+			</button>
+		</div>
+		<div class="calendarWrapper-navigation mod-next">
+			<button class="calendarWrapper-navigation-button button" type="button" (click)="next()">
+				<span aria-hidden="true" class="lucca-icon icon-chevronRight"></span><span class="u-mask">Mois Suivant</span>
+			</button>
+		</div>
+	</div>
+</ng-template>
