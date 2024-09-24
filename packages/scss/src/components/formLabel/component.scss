@@ -27,6 +27,7 @@
 			font-weight: 600;
 			text-rendering: geometricPrecision;
 			margin-left: var(--pr-t-spacings-25);
+			top: 0; // Reset sup HTML element
 		}
 
 		.formLabel-info {
