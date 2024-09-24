@@ -26,7 +26,7 @@
 	.optionItem-value {
 		position: relative;
 		border-radius: var(--commons-borderRadius-M);
-		display: flex;
+		display: block;
 		padding: var(--components-options-item-padding-vertical) var(--components-options-item-padding-horizontal);
 		transition: background-color 50ms;
 		cursor: pointer;
