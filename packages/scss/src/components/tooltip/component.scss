@@ -1,7 +1,7 @@
 @use '@lucca-front/scss/src/commons/utils/keyframe';
-@use '@lucca-front/scss/src/commons/utils/namespace' as ns;
+@use '@lucca-front/scss/src/commons/utils/namespace';
 
-@mixin component($atRoot: ns.$defaultAtRoot) {
+@mixin component($atRoot: namespace.$defaultAtRoot) {
 	@include keyframe.scaleIn;
 
 	background-color: var(--components-tooltip-background-color);

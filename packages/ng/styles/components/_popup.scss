@@ -1,8 +1,8 @@
-@use '@lucca-front/scss/src/commons/utils/namespace' as ns;
+@use '@lucca-front/scss/src/commons/utils/namespace';
 @use '@lucca-front/scss/src/commons/utils/media';
 @use '@lucca-front/scss/src/components/title/exports' as title;
 
-@include ns.appendRootVars {
+@include namespace.appendRootVars {
 	--components-popup-XS: 25rem;
 	--components-popup-S: 30rem;
 	--components-popup-M: 40rem;

@@ -1,6 +1,6 @@
-@use '@lucca-front/scss/src/commons/utils/namespace' as ns;
+@use '@lucca-front/scss/src/commons/utils/namespace';
 
-@mixin component($atRoot: ns.$defaultAtRoot) {
+@mixin component($atRoot: namespace.$defaultAtRoot) {
 	background-color: var(--pr-t-elevation-surface-raised);
 	padding: var(--pr-t-spacings-200) var(--components-footer-paddingInline);
 	display: flex;

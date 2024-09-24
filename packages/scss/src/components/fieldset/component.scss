@@ -1,7 +1,7 @@
 @use '@lucca-front/scss/src/components/title/exports' as title;
-@use '@lucca-front/scss/src/commons/utils/namespace' as ns;
+@use '@lucca-front/scss/src/commons/utils/namespace';
 
-@mixin component($atRoot: ns.$defaultAtRoot) {
+@mixin component($atRoot: namespace.$defaultAtRoot) {
 	border: 0;
 	margin: 0;
 	padding: 0;

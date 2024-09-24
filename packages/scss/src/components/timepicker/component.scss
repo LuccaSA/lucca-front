@@ -1,8 +1,8 @@
 @use '@lucca-front/scss/src/commons/utils/a11y';
 @use '@lucca-front/icons/src/icon/exports' as icons;
-@use '@lucca-front/scss/src/commons/utils/namespace' as ns;
+@use '@lucca-front/scss/src/commons/utils/namespace';
 
-@mixin component($atRoot: ns.$defaultAtRoot) {
+@mixin component($atRoot: namespace.$defaultAtRoot) {
 	padding: var(--components-timepicker-padding);
 	width: fit-content;
 

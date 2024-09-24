@@ -1,6 +1,6 @@
-@use '@lucca-front/scss/src/commons/utils/namespace' as ns;
+@use '@lucca-front/scss/src/commons/utils/namespace';
 
-@mixin component($atRoot: ns.$defaultAtRoot) {
+@mixin component($atRoot: namespace.$defaultAtRoot) {
 	display: flex;
 	flex-wrap: wrap;
 	padding: var(--pr-t-spacings-100) var(--pr-t-spacings-150);

@@ -2,9 +2,9 @@
 // It does not contain its selector, which is present in the index.
 // Any sub-components are placed in the `@at-root`.
 // The `@at-root` eliminates this selector by default, and its parameter can be used to restore it.
-@use '@lucca-front/scss/src/commons/utils/namespace' as ns;
+@use '@lucca-front/scss/src/commons/utils/namespace';
 
-@mixin component($atRoot: ns.$defaultAtRoot) {
+@mixin component($atRoot: namespace.$defaultAtRoot) {
 	property: value;
 	property: var(--components-sample-property1);
 

@@ -1,8 +1,8 @@
 @use '@lucca-front/scss/src/commons/utils/a11y';
 @use '@lucca-front/icons/src/commons/utils/icon';
-@use '@lucca-front/scss/src/commons/utils/namespace' as ns;
+@use '@lucca-front/scss/src/commons/utils/namespace';
 
-@mixin component($atRoot: ns.$defaultAtRoot) {
+@mixin component($atRoot: namespace.$defaultAtRoot) {
 	display: block;
 	position: relative;
 	line-height: var(--components-switch-lineHeight);

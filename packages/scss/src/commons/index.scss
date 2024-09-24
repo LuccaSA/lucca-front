@@ -1,7 +1,7 @@
-@use '@lucca-front/scss/src/commons/utils/namespace' as ns;
+@use '@lucca-front/scss/src/commons/utils/namespace';
 @use 'exports' as *;
 
-@include ns.appendRootVars {
+@include namespace.appendRootVars {
 	@include vars;
 	@include base;
 }

@@ -1,6 +1,6 @@
-@use '@lucca-front/scss/src/commons/utils/namespace' as ns;
+@use '@lucca-front/scss/src/commons/utils/namespace';
 
-@mixin icon($atRoot: ns.$defaultAtRoot) {
+@mixin icon($atRoot: namespace.$defaultAtRoot) {
 	&:has(.link-text) {
 		text-decoration: none;
 	}

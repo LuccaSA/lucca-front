@@ -1,6 +1,6 @@
-@use '@lucca-front/scss/src/commons/utils/namespace' as ns;
+@use '@lucca-front/scss/src/commons/utils/namespace';
 
-@mixin component($atRoot: ns.$defaultAtRoot) {
+@mixin component($atRoot: namespace.$defaultAtRoot) {
 	@at-root ($atRoot) {
 		.skeleton-item {
 			animation: skeletonFade var(--commons-animations-durations-fast) ease-in 1 forwards;

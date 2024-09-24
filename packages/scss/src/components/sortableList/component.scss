@@ -1,7 +1,7 @@
 @use '@lucca-front/icons/src/commons/utils/icon';
-@use '@lucca-front/scss/src/commons/utils/namespace' as ns;
+@use '@lucca-front/scss/src/commons/utils/namespace';
 
-@mixin component($atRoot: ns.$defaultAtRoot) {
+@mixin component($atRoot: namespace.$defaultAtRoot) {
 	background-color: var(--pr-t-elevation-surface-raised);
 	border: var(--commons-divider-width) solid var(--commons-divider-color);
 	border-radius: var(--commons-borderRadius-M);

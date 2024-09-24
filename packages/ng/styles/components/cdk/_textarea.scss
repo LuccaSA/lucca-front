@@ -1,6 +1,6 @@
-@use '@lucca-front/scss/src/commons/utils/namespace' as ns;
+@use '@lucca-front/scss/src/commons/utils/namespace';
 
-@include ns.appendRootVars {
+@include namespace.appendRootVars {
 	--components-cdk-textarea-input-padding-horizontal: var(--pr-t-spacings-100);
 }
 
