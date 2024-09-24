@@ -13,8 +13,8 @@
 			class="phoneNumber-fieldset-select"
 		>
 			<ng-container *luOption="let prefixOption; select: selectRef"
-				><img class="pr-u-marginRight50" src="https://cdn.lucca.fr/assets/misc/flags/{{prefixOption.country}}.svg" alt="" />
-				{{ prefixOption.name }} (+{{ prefixOption.prefix }})
+				><img class="phoneNumber-option-flag" src="https://cdn.lucca.fr/assets/misc/flags/{{prefixOption.country}}.svg" alt="" />{{
+				prefixOption.name }} (+{{ prefixOption.prefix }})
 			</ng-container>
 			<ng-container *luDisplayer="let prefixOption; select: selectRef"
 				><img
