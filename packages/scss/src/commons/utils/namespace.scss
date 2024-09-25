@@ -1,8 +1,11 @@
 @use '@lucca-front/scss/src/commons/config';
 
-// default to 'without: rule' is namespace.$isNamespaced is false
-// default to 'with: rule' is namespace.$isNamespaced is true
-$defaultAtRoot: config.$isNamespaced and 'with: rule' or 'without: rule';
+$defaultAtRoot: 'without: rule';
+
+@if ($isNamespaced) {
+	// When namespaced, we need to keep the surrounding selector
+	$defaultAtRoot: 'with: rule';
+}
 
 @mixin appendRootVars {
 	@if config.$isNamespaced {
