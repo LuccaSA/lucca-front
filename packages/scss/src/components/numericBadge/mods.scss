@@ -14,9 +14,9 @@
 	--components-numericBadge-lineHeight: var(--sizes-XS-lineHeight);
 }
 
-@mixin product {
-	--components-numericBadge-background: var(--palettes-product-200);
-	--components-numericBadge-color: var(--palettes-product-800);
+@mixin inherit {
+	--components-numericBadge-background: var(--palettes-200, var(--palettes-product-200));
+	--components-numericBadge-color: var(--palettes-800, var(--palettes-product-700));
 }
 
 @mixin brand {
