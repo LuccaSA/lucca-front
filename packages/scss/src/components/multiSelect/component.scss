@@ -12,6 +12,10 @@
 	gap: var(--components-multiSelect-gap);
 	cursor: pointer;
 
+	&:hover {
+		--components-multiSelect-border-color: var(--palettes-neutral-400);
+	}
+
 	&:has(.multipleSelect-displayer-search:focus-visible) {
 		@include a11y.focusVisible($offset: 3px);
 	}
@@ -67,6 +71,8 @@
 		.multipleSelect-arrow {
 			@include icon.M;
 			color: var(--components-multiSelect-arrow-color);
+			transition-property: transform;
+			transition-duration: var(--commons-animations-durations-standard);
 		}
 	}
 }

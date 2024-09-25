@@ -18,13 +18,19 @@
 	pointer-events: none;
 }
 
+@mixin expanded {
+	.multipleSelect-arrow {
+		transform: rotate(-180deg);
+	}
+}
+
 @mixin displayerFilterFilled {
 	.multipleSelect-displayer-search {
 		opacity: 0;
 	}
 }
 
-@mixin displayerFilterExpended {
+@mixin displayerFilterExpanded {
 	.multipleSelect-displayer-filter {
 		display: none;
 	}
