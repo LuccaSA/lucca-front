@@ -37,7 +37,10 @@ export class TextareaInputComponent {
 
 	updateScroll() {
 		if (this.scrollIntoViewOnAutoResizing) {
-			this.textarea.nativeElement.scrollIntoView();
+			this.textarea.nativeElement.scrollIntoView({
+				behavior: 'instant',
+				block: 'end',
+			});
 		}
 	}
 }
