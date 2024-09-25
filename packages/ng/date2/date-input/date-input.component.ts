@@ -70,7 +70,6 @@ export class DateInputComponent implements ControlValueAccessor {
 
 	displayValue = computed(() => {
 		if (this.selectedDate()) {
-			console.log('FORMAT', this.selectedDate());
 			return this.#intlDateTimeFormat.format(this.selectedDate());
 		}
 		return null;
@@ -109,11 +108,11 @@ export class DateInputComponent implements ControlValueAccessor {
 		}
 	}
 
-	registerOnChange(fn: any): void {
+	registerOnChange(fn: (value: Date) => void): void {
 		this.#onChange = fn;
 	}
 
-	registerOnTouched(fn: any): void {
+	registerOnTouched(fn: () => void): void {
 		this.onTouched = fn;
 	}
 
