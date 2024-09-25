@@ -34,6 +34,9 @@ import { CALENDAR_CELLS } from './calendar2.tokens';
 import { DateRange } from './date-range';
 import { CellStatus } from './cell-status';
 import { CalendarMode } from './calendar-mode';
+import { toObservable } from '@angular/core/rxjs-interop';
+import { skip } from 'rxjs/operators';
+import { take } from 'rxjs';
 
 const MODE_HIERARCHY: CalendarMode[] = ['month', 'year', 'decade'];
 
@@ -48,7 +51,7 @@ const MODE_HIERARCHY: CalendarMode[] = ['month', 'year', 'decade'];
 	providers: [
 		{
 			provide: CALENDAR_CELLS,
-			useFactory: () => inject(Calendar2Component).calendar2DayInstances,
+			useFactory: () => inject(Calendar2Component).calendar2CellInstances,
 		},
 	],
 })
@@ -99,13 +102,18 @@ export class Calendar2Component implements OnInit {
 
 	nextMonth = computed(() => addMonths(this.month(), 1));
 
+	nextPage = output();
+
+	previousPage = output();
+
 	dateClicked = output<Date>();
 
 	todayLabel = this.#intlRelativeDay.format(0, 'day');
 	thisMonthLabel = this.#intlRelativeDay.format(0, 'month');
 	thisYearLabel = this.#intlRelativeDay.format(0, 'year');
 
-	calendar2DayInstances = viewChildren(Calendar2DCellDirective);
+	calendar2CellInstances = viewChildren(Calendar2DCellDirective);
+	calendar2CellInstances$ = toObservable(this.calendar2CellInstances);
 
 	daysOfWeek = eachDayOfInterval({
 		start: startOfWeek(new Date(), this.#weekOptions),
@@ -213,6 +221,40 @@ export class Calendar2Component implements OnInit {
 		// eslint-disable-next-line no-irregular-whitespace
 		return `${this.#intlDateYear.format(startOfDecade(this.decade()))} – ${this.#intlDateYear.format(endOfDecade(this.decade()))}`;
 	});
+
+	loadNextPage(targetHorizontalIndex = -1): void {
+		this.nextPage.emit();
+		// Once we have new cells displayed, meaning that the change has occurred
+		this.calendar2CellInstances$.pipe(skip(1), take(1)).subscribe(() => {
+			// If we want to keep same day of week (for when we go previous month but using arrow up)
+			if (targetHorizontalIndex > -1) {
+				// Focus the first day of new grid that has the same day of week
+				this.calendar2CellInstances()
+					.slice(0, 7)
+					.find((cell) => cell.luCalendar2Cell() === targetHorizontalIndex)
+					?.focus();
+			} else {
+				// Else focus first element
+				this.calendar2CellInstances()[0].focus();
+			}
+		});
+	}
+
+	loadPreviousPage(targetHorizontalIndex = -1): void {
+		this.previousPage.emit();
+		this.calendar2CellInstances$.pipe(skip(1), take(1)).subscribe(() => {
+			if (targetHorizontalIndex > -1) {
+				// Focus the last day of new grid that has the same day of week
+				this.calendar2CellInstances()
+					.slice(-7)
+					.find((cell) => cell.luCalendar2Cell() === targetHorizontalIndex)
+					?.focus();
+			} else {
+				// Else focus last element
+				this.calendar2CellInstances()[this.calendar2CellInstances().length - 1].focus();
+			}
+		});
+	}
 
 	ngOnInit(): void {
 		// On init, set display mode to the mode specified by component consumer

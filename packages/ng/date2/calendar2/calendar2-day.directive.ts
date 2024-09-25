@@ -1,4 +1,4 @@
-import { computed, Directive, ElementRef, HostBinding, HostListener, inject, input, OnInit } from '@angular/core';
+import { computed, Directive, ElementRef, HostBinding, HostListener, inject, input, OnInit, output } from '@angular/core';
 import { CALENDAR_CELLS } from './calendar2.tokens';
 import { CalendarMode } from './calendar-mode';
 
@@ -22,6 +22,14 @@ export class Calendar2DCellDirective implements OnInit {
 
 	lastDayOfWeek = computed(() => this.luCalendar2Mode() === 'month' && this.luCalendar2Cell() === 6);
 
+	rightEnd = output();
+
+	leftEnd = output();
+
+	upEnd = output();
+
+	downEnd = output();
+
 	@HostBinding('tabindex')
 	tabindex: 0 | -1;
 
@@ -33,15 +41,27 @@ export class Calendar2DCellDirective implements OnInit {
 		switch ($event.key) {
 			case 'ArrowRight':
 				target = this.#cells()[thisIndex + 1];
+				if (!target) {
+					this.rightEnd.emit();
+				}
 				break;
 			case 'ArrowLeft':
 				target = this.#cells()[thisIndex - 1];
+				if (!target) {
+					this.leftEnd.emit();
+				}
 				break;
 			case 'ArrowDown':
 				target = this.#cells()[thisIndex + cellsPerRow];
+				if (!target) {
+					this.downEnd.emit();
+				}
 				break;
 			case 'ArrowUp':
 				target = this.#cells()[thisIndex - cellsPerRow];
+				if (!target) {
+					this.upEnd.emit();
+				}
 				break;
 			case 'Home':
 				if (this.luCalendar2Mode() === 'month') {

@@ -1,7 +1,7 @@
 import { ConnectionPositionPair } from '@angular/cdk/overlay';
-import { ChangeDetectionStrategy, Component, computed, effect, ElementRef, inject, model, OnInit, Renderer2, signal, ViewChild, viewChild, viewChildren, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, effect, ElementRef, inject, LOCALE_ID, model, signal, ViewChild, viewChild, ViewEncapsulation } from '@angular/core';
 import { IconComponent } from '@lucca-front/ng/icon';
-import { addMonths, addYears, isSameDay, isSameMonth, startOfMonth, subMonths } from 'date-fns';
+import { addMonths, addYears, isSameDay, parse, startOfDay, startOfMonth } from 'date-fns';
 import { PopoverDirective } from '../../popover2/popover.directive';
 import { Calendar2Component } from '../calendar2/calendar2.component';
 import { CellStatus } from '../calendar2/cell-status';
@@ -18,6 +18,25 @@ import { InputDirective } from '../../form-field/input.directive';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DateInputComponent {
+	#locale = inject(LOCALE_ID);
+
+	#intlDateTimeFormat = new Intl.DateTimeFormat(this.#locale);
+
+	// Contains the current date format (like dd/mm/yy etc) based on current locale
+	#dateFormat = this.#intlDateTimeFormat.formatToParts(new Date('01/01/2024')).reduce((acc, part) => {
+		switch (part.type) {
+			case 'day':
+				return `${acc}${'d'.repeat(part.value.length)}`;
+			case 'month':
+				return `${acc}${'M'.repeat(part.value.length)}`;
+			case 'year':
+				return `${acc}${'y'.repeat(part.value.length)}`;
+			case 'literal':
+				return `${acc}${part.value}`;
+		}
+		return acc;
+	}, '');
+
 	popoverPositions: ConnectionPositionPair[] = [
 		new ConnectionPositionPair({ originX: 'end', originY: 'bottom' }, { overlayX: 'end', overlayY: 'top' }, 16, 6),
 		new ConnectionPositionPair({ originX: 'end', originY: 'top' }, { overlayX: 'end', overlayY: 'bottom' }, 16, 6),
@@ -33,31 +52,38 @@ export class DateInputComponent {
 
 	currentDate = model(startOfMonth(new Date()));
 
-	selectedDay = signal<Date | null>(null);
+	selectedDate = signal<Date | null>(null);
 
 	calendar = viewChild<ElementRef<HTMLDivElement>>('calendar');
 
-	dateSelected: string | undefined;
-	dateFormat = 'dd/MM/yyyy';
+	displayValue = computed(() => {
+		if (this.selectedDate()) {
+			return this.#intlDateTimeFormat.format(this.selectedDate());
+		}
+		return null;
+	});
 
-	#observer: IntersectionObserver;
+	userTextInput = signal<string>('');
 
 	getDayInfo = (day: Date): CellStatus => {
-		const classes: string[] = [];
-		if (isSameDay(day, new Date())) {
-			classes.push('is-current');
-		}
-		if (this.selectedDay() && isSameDay(day, this.selectedDay())) {
-			classes.push('is-start', 'is-end');
-		}
 		return {
-			classes,
+			classes: [],
+			selected: this.selectedDate() && isSameDay(day, this.selectedDate()),
 		};
 	};
 
 	constructor() {
-		//this.dateSelected = format(this.selectedDay(), this.dateFormat);
-		//this.closePopover();
+		effect(
+			() => {
+				const inputValue = this.userTextInput();
+				const parsed = parse(inputValue, this.#dateFormat, startOfDay(new Date()));
+				if (parsed.getFullYear() > 999) {
+					this.selectedDate.set(startOfDay(parsed));
+					this.currentDate.set(startOfDay(parsed));
+				}
+			},
+			{ allowSignalWrites: true },
+		);
 	}
 
 	prev() {
@@ -80,13 +106,5 @@ export class DateInputComponent {
 				this.currentDate.set(addMonths(this.currentDate(), direction));
 				break;
 		}
-	}
-
-	openCombobox() {
-		// TODO : ne pas déplacer le focus à l’ouverture
-	}
-
-	closeCombobox() {
-		// TODO : ne pas déplacer le focus à la fermeture
 	}
 }
