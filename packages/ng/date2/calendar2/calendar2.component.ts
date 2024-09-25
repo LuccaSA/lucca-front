@@ -1,5 +1,7 @@
 import { NgClass } from '@angular/common';
 import { booleanAttribute, ChangeDetectionStrategy, Component, computed, ElementRef, inject, input, LOCALE_ID, model, OnInit, output, viewChildren, ViewEncapsulation } from '@angular/core';
+import { toObservable } from '@angular/core/rxjs-interop';
+import { CalloutComponent } from '@lucca-front/ng/callout';
 import {
 	addMonths,
 	addYears,
@@ -24,26 +26,25 @@ import {
 	subYears,
 	WeekOptions,
 } from 'date-fns';
+import { take } from 'rxjs';
+import { skip } from 'rxjs/operators';
 import { ButtonComponent } from '../../button/button.component';
 import { WEEK_INFO } from '../calendar.token';
 import { RepeatTimesDirective } from '../repeat-times.directive';
 import { getIntlWeekDay, getJSFirstDayOfWeek } from '../utils';
 import { CalendarDayInfo } from './calendar-day-info';
+import { CalendarMode } from './calendar-mode';
 import { Calendar2DCellDirective } from './calendar2-day.directive';
 import { CALENDAR_CELLS } from './calendar2.tokens';
-import { DateRange } from './date-range';
 import { CellStatus } from './cell-status';
-import { CalendarMode } from './calendar-mode';
-import { toObservable } from '@angular/core/rxjs-interop';
-import { skip } from 'rxjs/operators';
-import { take } from 'rxjs';
+import { DateRange } from './date-range';
 
 const MODE_HIERARCHY: CalendarMode[] = ['month', 'year', 'decade'];
 
 @Component({
 	selector: 'lu-calendar2',
 	standalone: true,
-	imports: [RepeatTimesDirective, ButtonComponent, Calendar2DCellDirective, NgClass],
+	imports: [RepeatTimesDirective, ButtonComponent, Calendar2DCellDirective, NgClass, CalloutComponent],
 	templateUrl: './calendar2.component.html',
 	styleUrl: './calendar2.component.scss',
 	encapsulation: ViewEncapsulation.None,

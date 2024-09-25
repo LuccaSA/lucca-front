@@ -1,13 +1,13 @@
 import { ConnectionPositionPair } from '@angular/cdk/overlay';
-import { ChangeDetectionStrategy, Component, computed, effect, ElementRef, forwardRef, inject, LOCALE_ID, model, signal, ViewChild, viewChild, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, effect, ElementRef, forwardRef, inject, LOCALE_ID, model, signal, viewChild, ViewEncapsulation } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { addMonths, addYears, isSameDay, parse, startOfDay, startOfMonth } from 'date-fns';
+import { InputDirective } from '../../form-field/input.directive';
 import { PopoverDirective } from '../../popover2/popover.directive';
+import { CalendarMode } from '../calendar2/calendar-mode';
 import { Calendar2Component } from '../calendar2/calendar2.component';
 import { CellStatus } from '../calendar2/cell-status';
-import { CalendarMode } from '../calendar2/calendar-mode';
-import { InputDirective } from '../../form-field/input.directive';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
 	selector: 'lu-date-input',
@@ -53,12 +53,6 @@ export class DateInputComponent implements ControlValueAccessor {
 		new ConnectionPositionPair({ originX: 'end', originY: 'bottom' }, { overlayX: 'end', overlayY: 'top' }, 16, 6),
 		new ConnectionPositionPair({ originX: 'end', originY: 'top' }, { overlayX: 'end', overlayY: 'bottom' }, 16, 6),
 	];
-
-	@ViewChild('popoverTrigger', { read: ElementRef, static: true })
-	popoverTrigger: ElementRef<HTMLElement>;
-
-	@ViewChild('date', { read: ElementRef, static: true })
-	dateInput: ElementRef<HTMLInputElement>;
 
 	calendarMode = signal<CalendarMode>('month');
 

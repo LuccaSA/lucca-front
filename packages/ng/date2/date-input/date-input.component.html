@@ -22,6 +22,7 @@
 			<button
 				[luPopover2]="calendar"
 				[disabled]="disabled"
+				[luPopoverNoCloseButton]="true"
 				#popoverRef="luPopover2"
 				[customPositions]="popoverPositions"
 				tabindex="-1"
@@ -36,6 +37,12 @@
 
 <ng-template #calendar>
 	<div class="calendarWrapper">
+		<div class="calendarWrapper-navigation mod-prev">
+			<button class="calendarWrapper-navigation-button button" type="button" (click)="prev()">
+				<span aria-hidden="true" class="lucca-icon icon-chevronLeft"></span
+				><span class="u-mask"> <!--TODO translate -->Mois précédent</span>
+			</button>
+		</div>
 		<div class="calendarWrapper-content" tabindex="-1">
 			<lu-calendar2
 				[date]="currentDate()"
@@ -46,12 +53,6 @@
 				mode="month"
 				[(displayMode)]="calendarMode"
 			></lu-calendar2>
-		</div>
-		<div class="calendarWrapper-navigation mod-prev">
-			<button class="calendarWrapper-navigation-button button" type="button" (click)="prev()">
-				<span aria-hidden="true" class="lucca-icon icon-chevronLeft"></span
-				><span class="u-mask"> <!--TODO translate -->Mois précédent</span>
-			</button>
 		</div>
 		<div class="calendarWrapper-navigation mod-next">
 			<button class="calendarWrapper-navigation-button button" type="button" (click)="next()">
