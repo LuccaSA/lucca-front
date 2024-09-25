@@ -1,5 +1,5 @@
 import { ConnectionPositionPair } from '@angular/cdk/overlay';
-import { ChangeDetectionStrategy, Component, computed, effect, ElementRef, inject, LOCALE_ID, model, signal, ViewChild, viewChild, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, effect, ElementRef, forwardRef, inject, LOCALE_ID, model, signal, ViewChild, viewChild, ViewEncapsulation } from '@angular/core';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { addMonths, addYears, isSameDay, parse, startOfDay, startOfMonth } from 'date-fns';
 import { PopoverDirective } from '../../popover2/popover.directive';
@@ -7,6 +7,7 @@ import { Calendar2Component } from '../calendar2/calendar2.component';
 import { CellStatus } from '../calendar2/cell-status';
 import { CalendarMode } from '../calendar2/calendar-mode';
 import { InputDirective } from '../../form-field/input.directive';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
 	selector: 'lu-date-input',
@@ -16,11 +17,22 @@ import { InputDirective } from '../../form-field/input.directive';
 	styleUrl: './date-input.component.scss',
 	encapsulation: ViewEncapsulation.None,
 	changeDetection: ChangeDetectionStrategy.OnPush,
+	providers: [
+		{
+			provide: NG_VALUE_ACCESSOR,
+			useExisting: forwardRef(() => DateInputComponent),
+			multi: true,
+		},
+	],
 })
-export class DateInputComponent {
+export class DateInputComponent implements ControlValueAccessor {
 	#locale = inject(LOCALE_ID);
 
 	#intlDateTimeFormat = new Intl.DateTimeFormat(this.#locale);
+
+	#onChange?: (value: Date) => void;
+	onTouched?: () => void;
+	disabled = false;
 
 	// Contains the current date format (like dd/mm/yy etc) based on current locale
 	#dateFormat = this.#intlDateTimeFormat.formatToParts(new Date('01/01/2024')).reduce((acc, part) => {
@@ -58,6 +70,7 @@ export class DateInputComponent {
 
 	displayValue = computed(() => {
 		if (this.selectedDate()) {
+			console.log('FORMAT', this.selectedDate());
 			return this.#intlDateTimeFormat.format(this.selectedDate());
 		}
 		return null;
@@ -84,6 +97,28 @@ export class DateInputComponent {
 			},
 			{ allowSignalWrites: true },
 		);
+		effect(() => {
+			this.#onChange?.(this.selectedDate());
+		});
+	}
+
+	writeValue(date: Date): void {
+		if (date) {
+			this.selectedDate.set(startOfDay(date));
+			this.currentDate.set(startOfDay(date));
+		}
+	}
+
+	registerOnChange(fn: any): void {
+		this.#onChange = fn;
+	}
+
+	registerOnTouched(fn: any): void {
+		this.onTouched = fn;
+	}
+
+	setDisabledState?(isDisabled: boolean): void {
+		this.disabled = isDisabled;
 	}
 
 	prev() {

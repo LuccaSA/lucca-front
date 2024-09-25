@@ -10,15 +10,18 @@
 			aria-describedby="dateMessage"
 			[value]="displayValue()"
 			(input)="userTextInput.set(date.value)"
+			(blur)="onTouched?.()"
 			aria-haspopup="true"
 			role="combobox"
 			(click)="popoverRef.openPopover(true, true)"
 			(keyup.arrowDown)="popoverRef.openPopover(true)"
 			(keyup.escape)="popoverRef.close()"
+			[disabled]="disabled"
 		/>
 		<div class="textField-input-affix">
 			<button
 				[luPopover2]="calendar"
+				[disabled]="disabled"
 				#popoverRef="luPopover2"
 				[customPositions]="popoverPositions"
 				tabindex="-1"

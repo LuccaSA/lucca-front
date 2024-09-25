@@ -21,7 +21,6 @@ export default {
 		return {
 			props: {
 				currentMonth: new Date(),
-				selected: (value: Date) => console.log(value),
 				getDayInfo: (date: Date, mode: CalendarMode) => {
 					if (mode === 'decade' && date.getFullYear() === 2023) {
 						return {
