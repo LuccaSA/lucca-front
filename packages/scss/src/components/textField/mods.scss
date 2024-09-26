@@ -60,14 +60,10 @@
 		grid-area: 1 / 1 / 2 / 2;
 		resize: none;
 		min-width: 0;
-		overflow: auto;
 	}
 
 	.textField-input-valueClone {
-		scroll-margin-bottom: var(--component-textField-clone-scrollMagin);
-	}
-
-	.textField-input-valueClone {
+		scroll-margin-bottom: var(--component-textField-clone-scrollMargin);
 		visibility: hidden;
 
 		&::after {
