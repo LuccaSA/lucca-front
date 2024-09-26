@@ -1,8 +1,9 @@
 @use '@lucca-front/scss/src/commons/utils/form';
 @use '@lucca-front/scss/src/components/formLabel/exports' as formLabel;
 @use '@lucca-front/scss/src/components/inlineMessage/exports' as inlineMessage;
+@use '@lucca-front/scss/src/commons/utils/namespace';
 
-@mixin component($atRoot: 'without: rule') {
+@mixin component($atRoot: namespace.$defaultAtRoot) {
 	@at-root ($atRoot) {
 		.form-fieldset {
 			margin: 0;
@@ -16,7 +17,7 @@
 	}
 }
 
-@mixin componentDeprecated($atRoot: 'without: rule') {
+@mixin componentDeprecated($atRoot: namespace.$defaultAtRoot) {
 	padding: 0;
 	border: 0;
 	margin: 0 0 var(--components-form-group-margin-bottom);
