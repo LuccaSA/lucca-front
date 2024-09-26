@@ -2,7 +2,7 @@
 
 $defaultAtRoot: 'without: rule';
 
-@if ($isNamespaced) {
+@if (config.$isNamespaced) {
 	// When namespaced, we need to keep the surrounding selector
 	$defaultAtRoot: 'with: rule';
 }
