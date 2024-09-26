@@ -20,7 +20,7 @@
 	}
 
 	.numericBadge {
-		@include numericBadge.product;
+		@include numericBadge.inherit;
 	}
 }
 
