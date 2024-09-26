@@ -2,7 +2,7 @@
 @use '@lucca-front/scss/src/commons/utils/color';
 
 $importDeprecatedSpacings: true !default;
-$isNamespaced: false !default;
+$namespace: null !default;
 
 $fontFamily: 'Source Sans Pro' !default;
 $product: 'brand' !default;

@@ -1,10 +1,10 @@
-@use '@lucca-front/scss/src/commons/utils/namespace';
+@use '@lucca-front/scss/src/commons/core';
 
-@mixin component($atRoot: namespace.$defaultAtRoot) {
+@mixin component($atRoot: null) {
 	vertical-align: middle;
 	width: var(--components-textfield-sizes-default);
 
-	@at-root ($atRoot) {
+	@include core.atRoot($atRoot) {
 		.textfield-input {
 			min-width: 0;
 			border: 0;

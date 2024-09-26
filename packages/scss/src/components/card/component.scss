@@ -1,6 +1,6 @@
-@use '@lucca-front/scss/src/commons/utils/namespace';
+@use '@lucca-front/scss/src/commons/core';
 
-@mixin component($atRoot: namespace.$defaultAtRoot) {
+@mixin component($atRoot: null) {
 	background-color: var(--components-card-background);
 	border-radius: var(--components-card-border-radius);
 	border-color: var(--components-card-border-color);
@@ -12,7 +12,7 @@
 	transition-duration: var(--commons-animations-durations-fast);
 	transition-property: background-color, box-shadow, color;
 
-	@at-root ($atRoot) {
+	@include core.atRoot($atRoot) {
 		.card-content {
 			padding: var(--components-card-content-padding);
 		}

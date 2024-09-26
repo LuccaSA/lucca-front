@@ -1,14 +1,14 @@
 @use '@lucca-front/icons/src/commons/utils/icon';
-@use '@lucca-front/scss/src/commons/utils/namespace';
+@use '@lucca-front/scss/src/commons/core';
 
-@mixin component($atRoot: namespace.$defaultAtRoot) {
+@mixin component($atRoot: null) {
 	background-color: var(--pr-t-elevation-surface-raised);
 	border: var(--commons-divider-width) solid var(--commons-divider-color);
 	border-radius: var(--commons-borderRadius-M);
 	list-style: none;
 	padding: 0;
 
-	@at-root ($atRoot) {
+	@include core.atRoot($atRoot) {
 		.sortableList-item {
 			border-bottom-width: var(--commons-divider-width);
 			border-bottom-color: var(--commons-divider-color);

@@ -1,9 +1,9 @@
 @use '@lucca-front/scss/src/commons/utils/reset';
 @use '@lucca-front/scss/src/commons/utils/a11y';
 @use '@lucca-front/icons/src/icon/exports' as icon;
-@use '@lucca-front/scss/src/commons/utils/namespace';
+@use '@lucca-front/scss/src/commons/core';
 
-@mixin component($atRoot: namespace.$defaultAtRoot) {
+@mixin component($atRoot: null) {
 	display: flex;
 	box-shadow: 0 0 0 1px var(--components-multiSelect-border-color);
 	background-color: var(--components-multiSelect-background);
@@ -21,7 +21,7 @@
 		@include a11y.focusVisible($offset: 3px);
 	}
 
-	@at-root ($atRoot) {
+	@include core.atRoot($atRoot) {
 		.multipleSelect-displayer {
 			display: flex;
 			gap: var(--pr-t-spacings-50);

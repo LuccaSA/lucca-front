@@ -1,8 +1,8 @@
-@use '@lucca-front/scss/src/commons/utils/namespace';
+@use '@lucca-front/scss/src/commons/core';
 @use '@lucca-front/scss/src/commons/utils/keyframe';
 @use '@lucca-front/scss/src/commons/utils/color';
 
-@include namespace.appendRootVars {
+@include core.appendRootVars {
 	--components-cdk-backdrop-opacity: 0.4;
 }
 

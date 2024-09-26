@@ -1,7 +1,7 @@
 @use '@lucca-front/icons/src/icon/exports' as icon;
-@use '@lucca-front/scss/src/commons/utils/namespace';
+@use '@lucca-front/scss/src/commons/core';
 
-@mixin component($atRoot: namespace.$defaultAtRoot) {
+@mixin component($atRoot: null) {
 	display: grid;
 	grid-template-columns: 1fr auto auto;
 	align-items: center;
@@ -17,7 +17,7 @@
 		--components-simpleSelect-border-color: var(--palettes-neutral-400);
 	}
 
-	@at-root ($atRoot) {
+	@include core.atRoot($atRoot) {
 		.simpleSelect-input {
 			grid-column-start: 1;
 			grid-row-start: 1;

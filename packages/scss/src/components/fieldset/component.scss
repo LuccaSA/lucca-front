@@ -1,7 +1,7 @@
 @use '@lucca-front/scss/src/components/title/exports' as title;
-@use '@lucca-front/scss/src/commons/utils/namespace';
+@use '@lucca-front/scss/src/commons/core';
 
-@mixin component($atRoot: namespace.$defaultAtRoot) {
+@mixin component($atRoot: null) {
 	border: 0;
 	margin: 0;
 	padding: 0;
@@ -9,7 +9,7 @@
 	gap: var(--components-fieldset-gap);
 	grid-template-columns: auto;
 
-	@at-root ($atRoot) {
+	@include core.atRoot($atRoot) {
 		.fieldset-title {
 			@include title.component;
 			@include title.h3;

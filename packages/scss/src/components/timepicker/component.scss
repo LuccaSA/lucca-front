@@ -1,12 +1,12 @@
 @use '@lucca-front/scss/src/commons/utils/a11y';
 @use '@lucca-front/icons/src/icon/exports' as icons;
-@use '@lucca-front/scss/src/commons/utils/namespace';
+@use '@lucca-front/scss/src/commons/core';
 
-@mixin component($atRoot: namespace.$defaultAtRoot) {
+@mixin component($atRoot: null) {
 	padding: var(--components-timepicker-padding);
 	width: fit-content;
 
-	@at-root ($atRoot) {
+	@include core.atRoot($atRoot) {
 		.timePicker-fieldset {
 			display: flex;
 			align-items: center;

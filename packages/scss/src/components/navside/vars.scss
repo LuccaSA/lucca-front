@@ -1,7 +1,7 @@
-@use '@lucca-front/scss/src/commons/utils/namespace';
+@use '@lucca-front/scss/src/commons/core';
 
-@mixin vars($atRoot: namespace.$defaultAtRoot) {
-	@at-root ($atRoot) {
+@mixin vars($atRoot: null) {
+	@include core.atRoot($atRoot) {
 		:root {
 			--commons-navSide-width: 15rem;
 			--commons-navSide-compact-width: 7.5rem;

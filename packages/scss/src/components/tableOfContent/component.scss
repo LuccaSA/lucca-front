@@ -1,13 +1,13 @@
 @use '@lucca-front/scss/src/commons/utils/reset';
-@use '@lucca-front/scss/src/commons/utils/namespace';
+@use '@lucca-front/scss/src/commons/core';
 
-@mixin component($atRoot: namespace.$defaultAtRoot) {
+@mixin component($atRoot: null) {
 	align-items: flex-start;
 	display: flex;
 	flex-direction: column;
 	position: sticky;
 
-	@at-root ($atRoot) {
+	@include core.atRoot($atRoot) {
 		.tableOfContent-list {
 			@include reset.list;
 		}

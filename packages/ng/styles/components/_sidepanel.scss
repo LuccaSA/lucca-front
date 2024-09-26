@@ -1,6 +1,6 @@
-@use '@lucca-front/scss/src/commons/utils/namespace';
+@use '@lucca-front/scss/src/commons/core';
 
-@include namespace.appendRootVars {
+@include core.appendRootVars {
 	--components-sidepanel-XS: 25rem;
 	--components-sidepanel-S: 30rem;
 	--components-sidepanel-M: 40rem;

@@ -1,15 +1,15 @@
 @use '@lucca-front/scss/src/commons/utils/reset';
 @use '@lucca-front/scss/src/commons/utils/a11y';
-@use '@lucca-front/scss/src/commons/utils/namespace';
+@use '@lucca-front/scss/src/commons/core';
 
-@mixin component($atRoot: namespace.$defaultAtRoot) {
+@mixin component($atRoot: null) {
 	background-color: var(--pr-t-elevation-surface-raised);
 	bottom: 0;
 	box-shadow: var(--pr-t-elevation-shadow-overflow);
 	padding: 0 var(--pr-t-spacings-100);
 	position: sticky;
 
-	@at-root ($atRoot) {
+	@include core.atRoot($atRoot) {
 		.mobileNavigation-list {
 			@include reset.list;
 			display: flex;

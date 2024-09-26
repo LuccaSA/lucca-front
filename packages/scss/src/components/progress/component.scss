@@ -1,7 +1,7 @@
 @use '@lucca-front/scss/src/commons/utils/keyframe';
-@use '@lucca-front/scss/src/commons/utils/namespace';
+@use '@lucca-front/scss/src/commons/core';
 
-@mixin component($atRoot: namespace.$defaultAtRoot) {
+@mixin component($atRoot: null) {
 	@keyframes progress {
 		0% {
 			transform: scale(0, 1);
@@ -21,7 +21,7 @@
 	position: relative;
 	overflow: hidden;
 
-	@at-root ($atRoot) {
+	@include core.atRoot($atRoot) {
 		.progress-bar {
 			background-color: var(--palettes-700, var(--components-progress-bar-background));
 			transition-duration: var(--commons-animations-durations-fast);

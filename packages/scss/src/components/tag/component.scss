@@ -1,7 +1,7 @@
 @use '@lucca-front/icons/src/icon/exports' as icon;
-@use '@lucca-front/scss/src/commons/utils/namespace';
+@use '@lucca-front/scss/src/commons/core';
 
-@mixin component($atRoot: namespace.$defaultAtRoot) {
+@mixin component($atRoot: null) {
 	background-color: var(--components-tag-background);
 	border-radius: var(--commons-borderRadius-M);
 	font-size: var(--components-tag-fontSize);
@@ -30,7 +30,7 @@
 		@include icon.XXS;
 	}
 
-	@at-root ($atRoot) {
+	@include core.atRoot($atRoot) {
 		.tag-content {
 			text-decoration: var(--components-tag-decoration);
 		}

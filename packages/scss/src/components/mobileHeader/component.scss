@@ -1,6 +1,6 @@
-@use '@lucca-front/scss/src/commons/utils/namespace';
+@use '@lucca-front/scss/src/commons/core';
 
-@mixin component($atRoot: namespace.$defaultAtRoot) {
+@mixin component($atRoot: null) {
 	display: flex;
 	align-items: center;
 	gap: var(--pr-t-spacings-100);
@@ -9,7 +9,7 @@
 	padding: var(--pr-t-spacings-75) var(--pr-t-spacings-150);
 	min-height: 3.5rem;
 
-	@at-root ($atRoot) {
+	@include core.atRoot($atRoot) {
 		.mobileHeader-title {
 			flex: 1;
 			text-align: center;

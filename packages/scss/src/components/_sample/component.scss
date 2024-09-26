@@ -1,14 +1,14 @@
 // This file contains only the component mixin, this structure never changes.
 // It does not contain its selector, which is present in the index.
-// Any sub-components are placed in the `@at-root`.
-// The `@at-root` eliminates this selector by default, and its parameter can be used to restore it.
-@use '@lucca-front/scss/src/commons/utils/namespace';
+// Any sub-components are placed in the `atRoot` mixin.
+// The `atRoot` eliminates this selector by default, and its parameter can be used to restore it.
+@use '@lucca-front/scss/src/commons/core';
 
-@mixin component($atRoot: namespace.$defaultAtRoot) {
+@mixin component($atRoot: null) {
 	property: value;
 	property: var(--components-sample-property1);
 
-	@at-root ($atRoot) {
+	@include core.atRoot($atRoot) {
 		.sample-subComponent {
 			property: var(--components-sample-property2);
 		}

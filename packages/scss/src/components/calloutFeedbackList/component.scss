@@ -1,8 +1,8 @@
 @use '@lucca-front/scss/src/commons/utils/reset';
 @use '@lucca-front/scss/src/components/button/exports' as button;
-@use '@lucca-front/scss/src/commons/utils/namespace';
+@use '@lucca-front/scss/src/commons/core';
 
-@mixin component($atRoot: namespace.$defaultAtRoot) {
+@mixin component($atRoot: null) {
 	@include reset.list;
 
 	display: flex;
@@ -15,7 +15,7 @@
 		@include button.S;
 	}
 
-	@at-root ($atRoot) {
+	@include core.atRoot($atRoot) {
 		.calloutFeedbackList-item {
 			display: flex;
 			flex-direction: column;

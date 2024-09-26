@@ -1,6 +1,6 @@
-@use '@lucca-front/scss/src/commons/utils/namespace';
+@use '@lucca-front/scss/src/commons/core';
 
-@mixin component($atRoot: namespace.$defaultAtRoot) {
+@mixin component($atRoot: null) {
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
@@ -32,7 +32,7 @@
 		color: var(--components-field-label-color);
 	}
 
-	@at-root ($atRoot) {
+	@include core.atRoot($atRoot) {
 		.textfield-input,
 		.radiosfield-input,
 		.checkboxesfield-input {

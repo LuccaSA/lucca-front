@@ -1,8 +1,8 @@
 @use '@lucca-front/icons/src/commons/utils/icon';
 @use '@lucca-front/scss/src/commons/utils/a11y';
-@use '@lucca-front/scss/src/commons/utils/namespace';
+@use '@lucca-front/scss/src/commons/core';
 
-@mixin component($atRoot: namespace.$defaultAtRoot) {
+@mixin component($atRoot: null) {
 	position: relative;
 	width: fit-content;
 	height: fit-content;
@@ -11,7 +11,7 @@
 	grid-template-columns: var(--component-radioField-size);
 	grid-template-rows: var(--component-radioField-size);
 
-	@at-root ($atRoot) {
+	@include core.atRoot($atRoot) {
 		.radioField-icon {
 			border: 2px solid var(--palettes-neutral-700);
 			border-radius: var(--component-radioField-borderRadius);

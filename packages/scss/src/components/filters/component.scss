@@ -1,6 +1,6 @@
-@use '@lucca-front/scss/src/commons/utils/namespace';
+@use '@lucca-front/scss/src/commons/core';
 
-@mixin component($atRoot: namespace.$defaultAtRoot) {
+@mixin component($atRoot: null) {
 	background-color: var(--components-filters-background);
 	box-shadow: 0 1px 0 0 var(--commons-border-200);
 	min-height: var(--components-filters-height);
@@ -9,7 +9,7 @@
 	position: relative;
 	z-index: 99;
 
-	@at-root ($atRoot) {
+	@include core.atRoot($atRoot) {
 		.filters-sectionLeft {
 			align-items: center;
 			display: flex;

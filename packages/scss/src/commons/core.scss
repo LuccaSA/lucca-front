@@ -135,3 +135,33 @@ $overflow: 'hidden', 'auto', 'visible', 'scroll';
 		}
 	}
 }
+
+@mixin appendRootVars {
+	@if config.$namespace == null '' {
+		:root {
+			@content;
+		}
+	} @else {
+		#{$namespace} {
+			@content;
+		}
+	}
+}
+
+@mixin atRoot($atRoot: null) {
+	$atRuleOrDefault: $atRoot;
+
+	@if config.$namespace == null {
+		@if $atRuleOrDefault == null {
+			$atRuleOrDefault: 'without: rule';
+		}
+
+		@at-root ($atRuleOrDefault) {
+			@content;
+		}
+	} @else {
+		#{$namespace} {
+			@content;
+		}
+	}
+}

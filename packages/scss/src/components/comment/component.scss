@@ -1,13 +1,13 @@
-@use '@lucca-front/scss/src/commons/utils/namespace';
+@use '@lucca-front/scss/src/commons/core';
 
-@mixin component($atRoot: namespace.$defaultAtRoot) {
+@mixin component($atRoot: null) {
 	container: comment / inline-size;
 	display: flex;
 	flex-direction: column;
 	gap: var(--pr-t-spacings-50);
 	max-width: 40rem;
 
-	@at-root ($atRoot) {
+	@include core.atRoot($atRoot) {
 		.comment-infos {
 			display: flex;
 			font-style: normal;

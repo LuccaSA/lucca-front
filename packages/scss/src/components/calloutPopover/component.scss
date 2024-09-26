@@ -1,9 +1,9 @@
 @use '@lucca-front/scss/src/commons/utils/a11y';
 @use '@lucca-front/scss/src/components/title/exports' as title;
 @use '@lucca-front/icons/src/icon/exports' as icon;
-@use '@lucca-front/scss/src/commons/utils/namespace';
+@use '@lucca-front/scss/src/commons/core';
 
-@mixin component($atRoot: namespace.$defaultAtRoot) {
+@mixin component($atRoot: null) {
 	display: inline-flex;
 	gap: var(--pr-t-spacings-75);
 	align-items: center;
@@ -22,7 +22,7 @@
 		@include a11y.focusVisible();
 	}
 
-	@at-root ($atRoot) {
+	@include core.atRoot($atRoot) {
 		.calloutPopover-icon {
 			color: var(--palettes-700, var(--palettes-neutral-700));
 		}
