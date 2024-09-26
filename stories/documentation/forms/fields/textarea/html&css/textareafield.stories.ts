@@ -47,34 +47,12 @@ function getTemplate(args: TextareaBasicStory): string {
 				Helper Text
 			</p>
 		</div>
-	</div>
-	<footer class="demoFooter footer mod-sticky">footer</footer>`;
+	</div>`;
 }
 
 const Template: StoryFn<TextareaBasicStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
-	styles: [
-		`
-		.form-field {
-			flex-grow: 1;
-			margin-bottom: 1rem;
-		}
-
-		.demoFooter {
-			margin: 0 -1rem -1rem;
-			bottom: -1rem;
-		}
-			
-		:host {
-			display: flex;
-			flex-direction: column;
-			height: 20rem;
-			overflow: auto;
-			padding: 1rem;
-			margin: -1rem;
-		}`,
-	],
 });
 
 export const Basic = Template.bind({});
