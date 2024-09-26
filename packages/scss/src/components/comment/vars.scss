@@ -1,8 +1,9 @@
 @mixin vars {
-	--components-comment-max-width: 40rem;;
+	--components-comment-max-width: none;
 	--components-comment-text-fontSize: var(--sizes-M-fontSize);
 	--components-comment-text-lineHeight: var(--sizes-M-lineHeight);
 	--components-comment-content-margin: calc(1.5rem + var(--pr-t-spacings-100)); // 1.5rem for the width of the avatar and 0.5rem for the gap
 	--components-comment-info-separator: '•';
 	--components-comment-info-content-display: block;
+	--components-comment-align: flex-start;
 }

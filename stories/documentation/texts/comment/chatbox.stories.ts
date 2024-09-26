@@ -26,8 +26,8 @@ function getTemplate(args: CommentChatboxStory): string {
 			</blockquote>
 		</div>
 	</li>
-	<li class="commentWrapper-item">
-		<div class="comment mod-answer">
+	<li class="commentWrapper-item mod-answer">
+		<div class="comment">
 			<div class="comment-infos">
 				<div class="avatar"></div>
 				<div class="comment-infos-content">
@@ -55,8 +55,8 @@ function getTemplate(args: CommentChatboxStory): string {
 			</blockquote>
 		</div>
 	</li>
-	<li class="commentWrapper-item">
-		<div class="comment mod-answer">
+	<li class="commentWrapper-item mod-answer">
+		<div class="comment">
 			<div class="comment-infos">
 				<div class="avatar"></div>
 				<div class="comment-infos-content">
@@ -69,8 +69,8 @@ function getTemplate(args: CommentChatboxStory): string {
 			</blockquote>
 		</div>
 	</li>
-	<li class="commentWrapper-item">
-		<div class="comment mod-answer">
+	<li class="commentWrapper-item mod-answer">
+		<div class="comment">
 			<div class="comment-infos">
 				<div class="avatar"></div>
 				<div class="comment-infos-content">
