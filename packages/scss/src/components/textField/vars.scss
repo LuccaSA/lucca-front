@@ -9,5 +9,7 @@
 	--component-textField-padding: var(--pr-t-spacings-100);
 	--component-textField-affix-padding: var(--component-textField-padding);
 	--component-textField-affix-size: 1.75rem;
-	--component-textField-clone-scrollMargin: 88rem; // un nombre arbitraire suffit pour scrollIntoView
+	--component-textField-scrollMargin: 88rem; // un nombre arbitraire suffit pour scrollIntoView
+	--component-textField-maxHeight: calc(100dvh - 10rem);
+	--component-textField-maxHeightFallback: calc(100vh - 10rem);
 }

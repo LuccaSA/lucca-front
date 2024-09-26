@@ -24,7 +24,7 @@ function getTemplate(args: TextareaBasicStory): string {
 	let input = '';
 	if (args.autoResize) {
 		if (args.scrollIntoViewOnAutoResizing) {
-			input = "onInput=\"this.previousElementSibling.dataset.contentBefore = this.value; this.previousElementSibling.scrollIntoView({ behavior: 'instant', block: 'end' })\"";
+			input = "onInput=\"this.previousElementSibling.dataset.contentBefore = this.value; this.parentNode.scrollIntoView({ behavior: 'instant', block: 'end' })\"";
 		} else {
 			input = 'onInput="this.previousElementSibling.dataset.contentBefore = this.value"';
 		}

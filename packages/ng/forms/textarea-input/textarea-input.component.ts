@@ -14,8 +14,8 @@ import { NoopValueAccessorDirective } from '../noop-value-accessor.directive';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TextareaInputComponent {
-	@ViewChild('clone')
-	clone?: ElementRef<HTMLElement>;
+	@ViewChild('parent')
+	parent?: ElementRef<HTMLElement>;
 
 	ngControl = injectNgControl();
 
@@ -43,8 +43,8 @@ export class TextareaInputComponent {
 		this.cloneValue = value;
 		this.#cdr.detectChanges();
 
-		if (this.scrollIntoViewOnAutoResizing && this.clone) {
-			this.clone.nativeElement.scrollIntoView({
+		if (this.scrollIntoViewOnAutoResizing && this.parent) {
+			this.parent.nativeElement.scrollIntoView({
 				behavior: 'instant',
 				block: 'end',
 			});

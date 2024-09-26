@@ -1,7 +1,7 @@
 <div class="textField" [class.mod-autoResize]="autoResize">
-	<div class="textField-input">
+	<div class="textField-input" #parent>
 		@if (autoResize) {
-		<div #clone class="textField-input-valueClone" aria-hidden="true" [attr.data-content-before]="cloneValue"></div>
+		<div class="textField-input-valueClone" aria-hidden="true" [attr.data-content-before]="cloneValue"></div>
 		}
 		<textarea
 			luInput
