@@ -1,4 +1,4 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, ElementRef, Input, ViewChild, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, inject, Input, ViewChild, ViewEncapsulation } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { InputDirective } from '@lucca-front/ng/form-field';
 import { injectNgControl } from '../inject-ng-control';
@@ -14,10 +14,12 @@ import { NoopValueAccessorDirective } from '../noop-value-accessor.directive';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TextareaInputComponent {
-	@ViewChild('textarea', { read: ElementRef, static: true })
-	textarea: ElementRef<HTMLTextAreaElement>;
+	@ViewChild('clone')
+	clone?: ElementRef<HTMLElement>;
 
 	ngControl = injectNgControl();
+
+	#cdr = inject(ChangeDetectorRef);
 
 	@Input()
 	placeholder: string = '';
@@ -35,9 +37,14 @@ export class TextareaInputComponent {
 	})
 	scrollIntoViewOnAutoResizing = false;
 
-	updateScroll() {
-		if (this.scrollIntoViewOnAutoResizing) {
-			this.textarea.nativeElement.scrollIntoView({
+	cloneValue = '';
+
+	updateScroll(value: string) {
+		this.cloneValue = value;
+		this.#cdr.detectChanges();
+
+		if (this.scrollIntoViewOnAutoResizing && this.clone) {
+			this.clone.nativeElement.scrollIntoView({
 				behavior: 'instant',
 				block: 'end',
 			});

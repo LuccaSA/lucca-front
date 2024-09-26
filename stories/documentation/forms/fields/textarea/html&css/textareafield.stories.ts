@@ -24,13 +24,14 @@ function getTemplate(args: TextareaBasicStory): string {
 	let input = '';
 	if (args.autoResize) {
 		if (args.scrollIntoViewOnAutoResizing) {
-			input = 'onInput="this.previousElementSibling.dataset.contentBefore = this.value; this.scrollIntoViewOnAutoResizing({ behavior: "instant", block: "end" })"';
+			input = "onInput=\"this.previousElementSibling.dataset.contentBefore = this.value; this.previousElementSibling.scrollIntoView({ behavior: 'instant', block: 'end' })\"";
 		} else {
 			input = 'onInput="this.previousElementSibling.dataset.contentBefore = this.value"';
 		}
 	}
 
-	return `<div class="form-field">
+	return `
+	<div class="form-field">
 		<label class="formLabel" id="IDlabel" for="ID">Label</label>
 		<div class="textField ${autoResize}">
 			<div class="textField-input">
@@ -46,12 +47,34 @@ function getTemplate(args: TextareaBasicStory): string {
 				Helper Text
 			</p>
 		</div>
-	</div>`;
+	</div>
+	<footer class="demoFooter footer mod-sticky">footer</footer>`;
 }
 
 const Template: StoryFn<TextareaBasicStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
+	styles: [
+		`
+		.form-field {
+			flex-grow: 1;
+			margin-bottom: 1rem;
+		}
+
+		.demoFooter {
+			margin: 0 -1rem -1rem;
+			bottom: -1rem;
+		}
+			
+		:host {
+			display: flex;
+			flex-direction: column;
+			height: 20rem;
+			overflow: auto;
+			padding: 1rem;
+			margin: -1rem;
+		}`,
+	],
 });
 
 export const Basic = Template.bind({});
