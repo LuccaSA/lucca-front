@@ -38,3 +38,23 @@
 		}
 	}
 }
+
+@mixin answer {
+	--components-comment-background-color: var(--palettes-product-100);
+	margin-left: auto;
+	align-items: end;
+}
+
+@mixin chatBox {
+	--components-comment-background-color: var(--colors-white-color);
+	gap: var(--pr-t-spacings-200);
+
+	.commentWrapper-item {
+		display: flex;
+	}
+
+	.comment {
+		container-type: normal;
+		max-width: min(var(--components-comment-max-width), 90%);
+	}
+}
