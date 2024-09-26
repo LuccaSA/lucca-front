@@ -66,7 +66,11 @@
 				var(--component-textField-padding);
 			background-color: transparent;
 			color: var(--component-textField-color);
-			max-height: 80vh;
+			max-height: var(--component-textField-maxHeight);
+
+			@supports not (height: 1dvh) {
+				--component-textField-maxHeight: var(--component-textField-maxHeightFallback);
+			}
 
 			&::placeholder {
 				color: var(--component-textField-placeholder);

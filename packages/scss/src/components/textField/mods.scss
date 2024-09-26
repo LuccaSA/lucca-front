@@ -64,7 +64,7 @@
 	}
 
 	.textField-input-valueClone {
-		scroll-margin-bottom: 88rem; // un nombre arbitraire suffit pour scrollIntoView
+		scroll-margin-bottom: var(--component-textField-clone-scrollMagin);
 	}
 
 	.textField-input-valueClone {
