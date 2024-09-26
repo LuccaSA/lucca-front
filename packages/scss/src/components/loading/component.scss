@@ -12,7 +12,6 @@
 	position: relative;
 	text-align: var(--components-loading-textAlign);
 	vertical-align: top;
-	width: var(--components-loading-width);
 
 	&:not(:empty) {
 		--components-loading-padding: 0 0 0 var(--pr-t-spacings-400);

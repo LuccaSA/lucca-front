@@ -28,10 +28,6 @@
 @mixin popin {
 	@include block;
 	@include L;
-
-	// legacy, arbitrary margins
-	--components-loading-width: calc(100% - var(--pr-t-spacings-400) * 2);
-	--components-loading-margin: 0 var(--pr-t-spacings-400) var(--pr-t-spacings-400);
 }
 
 @mixin drawer {
