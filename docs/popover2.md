@@ -24,7 +24,7 @@ Pour utiliser `Popover2` dans un template, il suffit d'appliquer la directive `[
 
 Seule la référence au `ng-template` est obligatoire, mais la directive propose des paramètres pour divers usages:
 
-- luPopoverTrigger permet de définir les évènements déclencheurs d’ouverture du popover :
+- `luPopoverTrigger` permet de définir les évènements déclencheurs d’ouverture du popover :
   - `click` est le cas par défaut, c’est le cas le plus proche d’un comportement natif navigateur et le moins intrusif.
   - `click+hover` ajoute au click l’ouverture au survol. Le popover s’ouvre alors plus facilement (mais peut l’être aussi de manière involontaire).
   - `hover+focus` désactive l’ouverture au click, ce qui permet de le réserver pour une navigation vers une autre page. Il faut cependant bien noter que dans cette configuration le popover n’est plus accessible : il convient donc de s’assurer que les informations contenues dans le popover soient reprises dans la page liée.
