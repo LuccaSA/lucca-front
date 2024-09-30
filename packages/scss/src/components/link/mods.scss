@@ -3,11 +3,17 @@
 		text-decoration: none;
 	}
 
+	&:not(:has(.link-icon)) {
+		.lucca-icon {
+			margin-left: 0.2em;
+		}
+	}
+
 	.lucca-icon {
 		text-decoration: none;
-		font-size: var(--sizes-M-fontSize);
-		line-height: var(--sizes-XS-lineHeight);
-		margin-left: var(--pr-t-spacings-50);
+		font-size: 1em;
+		line-height: 1lh;
+		vertical-align: bottom;
 	}
 
 	@at-root ($atRoot) {
@@ -26,10 +32,23 @@
 }
 
 @mixin decorationHover {
-	text-decoration: none;
+	&,
+	.link-text {
+		text-decoration: none;
+	}
 
-	&:hover {
-		text-decoration: underline;
+	&:not(:has(.link-text)) {
+		&:hover {
+			text-decoration: underline;
+		}
+	}
+
+	&:has(.link-text) {
+		&:hover {
+			.link-text {
+				text-decoration: underline;
+			}
+		}
 	}
 }
 

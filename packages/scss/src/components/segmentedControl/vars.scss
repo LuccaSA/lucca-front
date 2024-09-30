@@ -1,0 +1,15 @@
+@mixin vars {
+	--components-segmentedControl-borderRadius: var(--commons-borderRadius-L);
+	--components-segmentedControl-padding: var(--pr-t-spacings-100) var(--pr-t-spacings-200);
+	--components-segmentedControl-fontSize: var(--sizes-M-fontSize);
+	--components-segmentedControl-lineHeight: var(--sizes-M-lineHeight);
+	--components-segmentedControl-background: transparent;
+	--components-segmentedControl-shadow: transparent;
+	--components-segmentedControl-color: var(--palettes-neutral-700);
+	--components-segmentedControl-cursor: pointer;
+	--components-segmentedControl-dividerInset: var(--pr-t-spacings-100);
+	--components-segmentedControl-direction: row;
+	--components-segmentedControl-width: fit-content;
+	--components-segmentedControl-backgroundContent: '';
+	--components-segmentedControl-zIndex: 0;
+}

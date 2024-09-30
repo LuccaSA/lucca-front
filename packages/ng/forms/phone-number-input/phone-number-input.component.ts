@@ -1,22 +1,43 @@
-import { ChangeDetectionStrategy, Component, computed, forwardRef, Input, input, signal, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, forwardRef, inject, Input, input, LOCALE_ID, output, signal, ViewEncapsulation } from '@angular/core';
 import { AbstractControl, ControlValueAccessor, FormsModule, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors, Validator } from '@angular/forms';
 import { LuDisplayerDirective, LuOptionDirective } from '@lucca-front/ng/core-select';
 import { FormFieldComponent, InputDirective } from '@lucca-front/ng/form-field';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
-import { CountryCallingCode, getCountries, getCountryCallingCode, isValidPhoneNumber, parsePhoneNumber, PhoneNumber, validatePhoneNumberLength } from 'libphonenumber-js';
+import { type CountryCallingCode, formatIncompletePhoneNumber, getCountries, getCountryCallingCode, parsePhoneNumber } from 'libphonenumber-js';
 import { TextInputComponent } from '@lucca-front/ng/forms';
-import { CountryCode, E164Number, ValidatePhoneNumberLengthResult } from './types';
+import { CountryCode, E164Number } from './types';
 import { PhoneNumberValidators } from './validators';
 
 interface PrefixEntry {
 	country: CountryCode;
 	prefix: CountryCallingCode;
+	name: string;
 }
 
-const PREFIX_ENTRIES = getCountries().map((country) => ({
-	country,
-	prefix: getCountryCallingCode(country),
-}));
+type ParsePhoneNumberResult = {
+	number: E164Number;
+	country?: CountryCode;
+	nationalNumber?: string;
+	isValid: boolean;
+};
+
+function tryParsePhoneNumber(phoneNumber: string, countryCode?: CountryCode): ParsePhoneNumberResult {
+	try {
+		const parsedNumber = parsePhoneNumber(phoneNumber, countryCode);
+		return {
+			country: parsedNumber.country,
+			number: parsedNumber.number,
+			nationalNumber: parsedNumber.formatNational(),
+			isValid: parsedNumber.isValid(),
+		};
+	} catch (e) {
+		return {
+			number: phoneNumber as E164Number,
+			nationalNumber: phoneNumber,
+			isValid: false,
+		};
+	}
+}
 
 @Component({
 	selector: 'lu-phone-number-input',
@@ -40,13 +61,23 @@ const PREFIX_ENTRIES = getCountries().map((country) => ({
 	],
 })
 export class PhoneNumberInputComponent implements ControlValueAccessor, Validator {
+	#locale = inject(LOCALE_ID);
+
 	@Input() label: string;
 
-	#onChange?: (value: E164Number | ValidatePhoneNumberLengthResult) => void;
+	#onChange?: (value: E164Number) => void;
 
 	#onTouched?: () => void;
 
 	disabled = false;
+
+	#displayNames = new Intl.DisplayNames(this.#locale, { type: 'region' });
+
+	prefixEntries = getCountries().map((country) => ({
+		country,
+		prefix: getCountryCallingCode(country),
+		name: this.#displayNames.of(country),
+	}));
 
 	/**
 	 * Which countries should be shown? Defaults to empty array which means all of them.
@@ -58,9 +89,9 @@ export class PhoneNumberInputComponent implements ControlValueAccessor, Validato
 	#prefixEntries = computed(() => {
 		const whitelist = this.allowedCountries();
 		if (whitelist.length === 0) {
-			return PREFIX_ENTRIES;
+			return this.prefixEntries;
 		}
-		return PREFIX_ENTRIES.filter((e) => whitelist.includes(e.country));
+		return this.prefixEntries.filter((e) => whitelist.includes(e.country));
 	});
 
 	query = signal('');
@@ -71,32 +102,45 @@ export class PhoneNumberInputComponent implements ControlValueAccessor, Validato
 			return this.#prefixEntries();
 		}
 		return this.#prefixEntries().filter((entry) => {
-			return entry.country.toLowerCase().includes(query.toLowerCase()) || entry.prefix.includes(query);
+			return entry.country.toLowerCase().includes(query.toLowerCase()) || `+${entry.prefix}`.includes(query) || entry.name.toLowerCase().includes(query.toLowerCase());
 		});
 	});
 
-	nationalNumber: string;
+	defaultCountryCode = input<CountryCode>(undefined, { alias: 'country' });
 
-	prefixEntry: PrefixEntry;
+	countryChange = output<CountryCode>();
 
-	parsedPhoneNumber: PhoneNumber;
+	countryCodeSelected = signal<CountryCode | undefined>(undefined);
 
-	protected getPrefixKey = (prefix: PrefixEntry) => prefix.country;
+	countryCode = computed(() => this.countryCodeSelected() ?? this.defaultCountryCode());
+
+	displayedNumber = signal<string | undefined>(undefined);
+
+	prefixEntry = computed(() => this.#prefixEntries().find((p) => p.country === this.countryCode()));
+
+	protected getPrefixKey = (prefix: PrefixEntry) => prefix?.country;
 
 	protected prefixComparator = (a: PrefixEntry, b: PrefixEntry) => this.getPrefixKey(a) === this.getPrefixKey(b);
 
 	writeValue(value: string): void {
-		if (value) {
-			this.parsedPhoneNumber = parsePhoneNumber(value);
-			this.prefixEntry = this.#prefixEntries().find((p) => p.country === this.parsedPhoneNumber.country);
-			this.nationalNumber = this.parsedPhoneNumber.nationalNumber;
-		} else {
-			delete this.nationalNumber;
-			delete this.prefixEntry;
+		try {
+			if (value) {
+				const { country, number, nationalNumber } = tryParsePhoneNumber(value, this.countryCode());
+				this.displayedNumber.set(nationalNumber);
+				this.countryCodeSelected.set(country);
+				if (value !== number) {
+					this.#onChange?.(number);
+				}
+			} else {
+				this.displayedNumber.set(undefined);
+			}
+		} catch (e) {
+			this.displayedNumber.set(value);
 		}
+		this.formatNationalNumber();
 	}
 
-	registerOnChange(fn: (value: E164Number | ValidatePhoneNumberLengthResult) => void): void {
+	registerOnChange(fn: (value: E164Number) => void): void {
 		this.#onChange = fn;
 	}
 
@@ -108,19 +152,33 @@ export class PhoneNumberInputComponent implements ControlValueAccessor, Validato
 		this.disabled = isDisabled;
 	}
 
+	updatePrefix(prefixEntry: PrefixEntry) {
+		this.countryCodeSelected.set(prefixEntry.country);
+		this.countryChange.emit(prefixEntry.country);
+		this.touched();
+		this.updateModel();
+		this.formatNationalNumber();
+	}
+
+	updateNumber(number: string) {
+		this.displayedNumber.set(number);
+		this.updateModel();
+	}
+
 	updateModel(): void {
-		const invalidPhoneNumberReason = validatePhoneNumberLength(this.nationalNumber, this.prefixEntry.country);
-		if (invalidPhoneNumberReason) {
-			this.#onChange?.(invalidPhoneNumberReason);
-		} else {
-			if (isValidPhoneNumber(this.nationalNumber)) {
-				const country = parsePhoneNumber(this.nationalNumber).country;
-				if (country !== this.prefixEntry?.country) {
-					this.prefixEntry = this.#prefixEntries().find((p) => p.country === country);
-				}
+		const displayedNumber = this.displayedNumber();
+		const countryCode = this.countryCode();
+
+		try {
+			const { country, number } = tryParsePhoneNumber(displayedNumber, countryCode);
+			if (country && country !== countryCode) {
+				this.countryCodeSelected.set(country);
+				this.countryChange.emit(country);
 			}
-			this.parsedPhoneNumber = parsePhoneNumber(this.nationalNumber, this.prefixEntry.country);
-			this.#onChange?.(this.parsedPhoneNumber.number);
+			this.#onChange?.(number);
+			return;
+		} catch (e) {
+			this.#onChange?.(displayedNumber as E164Number);
 		}
 	}
 
@@ -129,12 +187,21 @@ export class PhoneNumberInputComponent implements ControlValueAccessor, Validato
 	}
 
 	formatNationalNumber(): void {
-		if (isValidPhoneNumber(this.nationalNumber, this.prefixEntry.country)) {
-			this.nationalNumber = this.parsedPhoneNumber?.formatNational();
+		const countryCode = this.countryCode();
+		const displayedNumber = this.displayedNumber();
+		try {
+			const { isValid, nationalNumber } = tryParsePhoneNumber(displayedNumber, countryCode);
+			if (isValid) {
+				this.displayedNumber.set(nationalNumber);
+			} else if (countryCode) {
+				this.displayedNumber.set(formatIncompletePhoneNumber(displayedNumber, countryCode));
+			}
+		} catch (e) {
+			// do nothing
 		}
 	}
 
 	validate(control: AbstractControl<string, string>): ValidationErrors {
-		return PhoneNumberValidators.validPhoneNumber(control);
+		return PhoneNumberValidators.validPhoneNumber(control, this.countryCode());
 	}
 }
