@@ -1,6 +1,8 @@
 @use 'sass:string';
 @use 'sass:list';
 
+@use '@lucca-front/icons/src/commons/config';
+
 @function capitalize($string) {
 	@return string.to-upper-case(string.slice($string, 1, 1)) + string.slice($string, 2);
 }
@@ -33,4 +35,32 @@
 	}
 
 	@return $string;
+}
+
+// This mixin allows style to be applied at the root of the document or at the root of a namespace.
+// It also allows to keep component nested inside the selector based on the $nestChildren parameter.
+@mixin atRoot($nestChildren: true) {
+	@if $nestChildren {
+		// When atRoot is used inside a selector with $nestChildren set to true,
+		// the content is kept inside the selector.
+		// Example: .parent { @include atRoot { .child { color: red; } } }
+		// Output: .parent .child { color: red; }
+		@content;
+	} @else {
+		@at-root {
+			@if $namespace {
+				// When a namespace is set, the content is wrapped inside it.
+				// Example: .parent { @include atRoot($nestChildren: false) { .child { color: red; } } }
+				// Output: .namespace .child { color: red; }
+				#{$namespace} {
+					@content;
+				}
+			} @else {
+				// When no namespace is set, the content is kept at the root.
+				// Example: .parent { @include atRoot($nestChildren: false) { .child { color: red; } } }
+				// Output: .child { color: red; }
+				@content;
+			}
+		}
+	}
 }
