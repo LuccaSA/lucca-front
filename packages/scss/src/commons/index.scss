@@ -3,5 +3,5 @@
 
 @include core.appendRootVars {
 	@include vars;
-	@include base;
+	@include base($nestChildren: false);
 }

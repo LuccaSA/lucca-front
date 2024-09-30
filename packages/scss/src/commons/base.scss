@@ -21,8 +21,8 @@
 	height: -webkit-fill-available;
 }
 
-@mixin base($atRoot: null) {
-	@include core.atRoot($atRoot) {
+@mixin base($nestChildren: true) {
+	@include core.atRoot($nestChildren) {
 		@if config.$fontFamily != 'Source Sans Pro' {
 			@font-face {
 				font-family: '#{config.$fontFamily}';
@@ -107,18 +107,16 @@
 			opacity: 1;
 		}
 
-		@if config.$namespace == null {
+		@if config.$namespace {
+			@include body;
+			@include html;
+		} @else {
 			html {
 				@include html;
 			}
 
 			body {
 				@include body;
-			}
-		} @else {
-			#{config.$namespace} {
-				@include body;
-				@include html;
 			}
 		}
 

@@ -4,11 +4,11 @@
 // The `atRoot` eliminates this selector by default, and its parameter can be used to restore it.
 @use '@lucca-front/scss/src/commons/core';
 
-@mixin component($atRoot: null) {
+@mixin component($nestChildren: true) {
 	property: value;
 	property: var(--components-sample-property1);
 
-	@include core.atRoot($atRoot) {
+	@include core.atRoot($nestChildren) {
 		.sample-subComponent {
 			property: var(--components-sample-property2);
 		}
