@@ -2,8 +2,8 @@
 	display: block;
 	background-color: var(--palettes-neutral-0);
 	border-block-end: 1px solid var(--commons-border-200);
-	padding-block-end: var(--components-options-item-padding-vertical);
-	margin-block-end: var(--components-options-item-padding-vertical);
+	padding: 0 var(--pr-t-spacings-50) var(--components-options-item-padding-vertical);
+	margin: 0 calc(-1 * var(--pr-t-spacings-50)) var(--components-options-item-padding-vertical);
 }
 
 .multiSelectAllDisplayer {
@@ -14,13 +14,22 @@
 		background-color: var(--palettes-neutral-50);
 	}
 
+	&:has(.checkboxField-input:checked) {
+		background-color: var(--palettes-product-50);
+
+		&:hover {
+			background-color: var(--palettes-product-100);
+		}
+	}
+
 	::ng-deep {
 		.formLabel {
 			width: 100%;
 			padding: var(--components-options-item-padding-vertical) 0;
 		}
-		.checkboxField {
-			padding: var(--components-options-item-padding-vertical) 0 0 var(--components-options-item-padding-horizontal);
-		}
 	}
+}
+
+.multiSelectAllDisplayer-checkbox {
+	margin: var(--components-options-item-padding-vertical) 0 0 var(--components-options-item-padding-horizontal);
 }
