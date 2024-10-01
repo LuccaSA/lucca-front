@@ -10,10 +10,13 @@ import { MULTI_SELECT_WITH_SELECT_ALL_CONTEXT } from './select-all.models';
 	selector: 'lu-multi-select-all-header',
 	standalone: true,
 	imports: [FormsModule, CheckboxInputComponent, FormFieldComponent],
+	styleUrls: ['./multi-select-all-header.component.scss'],
 	template: `
-		<lu-form-field [label]="intl.selectAll">
-			<lu-checkbox-input [(ngModel)]="selectAllContext.selectAll" [mixed]="mixed()" />
-		</lu-form-field>
+		<div class="multiSelectAllDisplayer">
+			<lu-form-field [label]="intl.selectAll">
+				<lu-checkbox-input [(ngModel)]="selectAllContext.selectAll" [mixed]="mixed()" />
+			</lu-form-field>
+		</div>
 	`,
 })
 export class LuMultiSelectAllHeaderComponent {

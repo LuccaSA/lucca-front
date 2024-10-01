@@ -1,0 +1,26 @@
+:host {
+	display: block;
+	background-color: var(--palettes-neutral-0);
+	border-block-end: 1px solid var(--commons-border-200);
+	padding-block-end: var(--components-options-item-padding-vertical);
+	margin-block-end: var(--components-options-item-padding-vertical);
+}
+
+.multiSelectAllDisplayer {
+	border-radius: var(--commons-borderRadius-M);
+	cursor: pointer;
+
+	&:hover {
+		background-color: var(--palettes-neutral-50);
+	}
+
+	::ng-deep {
+		.formLabel {
+			width: 100%;
+			padding: var(--components-options-item-padding-vertical) 0;
+		}
+		.checkboxField {
+			padding: var(--components-options-item-padding-vertical) 0 0 var(--components-options-item-padding-horizontal);
+		}
+	}
+}
