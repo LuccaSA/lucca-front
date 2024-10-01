@@ -1,6 +1,5 @@
 import { NgClass } from '@angular/common';
-import { booleanAttribute, ChangeDetectionStrategy, Component, computed, ElementRef, inject, input, LOCALE_ID, model, OnInit, output, viewChildren, ViewEncapsulation } from '@angular/core';
-import { toObservable } from '@angular/core/rxjs-interop';
+import { booleanAttribute, ChangeDetectionStrategy, Component, computed, effect, ElementRef, inject, input, LOCALE_ID, model, OnInit, output, viewChildren, ViewEncapsulation } from '@angular/core';
 import { CalloutComponent } from '@lucca-front/ng/callout';
 import {
 	addMonths,
@@ -26,25 +25,25 @@ import {
 	subYears,
 	WeekOptions,
 } from 'date-fns';
-import { take } from 'rxjs';
-import { skip } from 'rxjs/operators';
-import { ButtonComponent } from '../../button/button.component';
+import { ButtonComponent } from '@lucca-front/ng/button';
 import { WEEK_INFO } from '../calendar.token';
 import { RepeatTimesDirective } from '../repeat-times.directive';
 import { getIntlWeekDay, getJSFirstDayOfWeek } from '../utils';
-import { CalendarDayInfo } from './calendar-day-info';
+import { CalendarCellInfo, CalendarMonthInfo, CalendarYearInfo } from './calendar-cell-info';
 import { CalendarMode } from './calendar-mode';
-import { Calendar2DCellDirective } from './calendar2-day.directive';
-import { CALENDAR_CELLS } from './calendar2.tokens';
+import { Calendar2CellDirective } from './calendar2-cell.directive';
+import { CALENDAR_CELLS, CALENDAR_TABBABLE_DATE } from './calendar2.tokens';
 import { CellStatus } from './cell-status';
 import { DateRange } from './date-range';
+import { getIntl } from '../../core/translate';
+import { LU_DATE2_TRANSLATIONS } from '../date2.translate';
 
 const MODE_HIERARCHY: CalendarMode[] = ['month', 'year', 'decade'];
 
 @Component({
 	selector: 'lu-calendar2',
 	standalone: true,
-	imports: [RepeatTimesDirective, ButtonComponent, Calendar2DCellDirective, NgClass, CalloutComponent],
+	imports: [RepeatTimesDirective, ButtonComponent, Calendar2CellDirective, NgClass, CalloutComponent],
 	templateUrl: './calendar2.component.html',
 	styleUrl: './calendar2.component.scss',
 	encapsulation: ViewEncapsulation.None,
@@ -53,6 +52,10 @@ const MODE_HIERARCHY: CalendarMode[] = ['month', 'year', 'decade'];
 		{
 			provide: CALENDAR_CELLS,
 			useFactory: () => inject(Calendar2Component).calendar2CellInstances,
+		},
+		{
+			provide: CALENDAR_TABBABLE_DATE,
+			useFactory: () => inject(Calendar2Component).tabbableDate,
 		},
 	],
 })
@@ -73,6 +76,8 @@ export class Calendar2Component implements OnInit {
 
 	#weekOptions: WeekOptions = { weekStartsOn: getJSFirstDayOfWeek(this.#weekInfo) };
 
+	intl = getIntl(LU_DATE2_TRANSLATIONS);
+
 	showOverflow = input<boolean, boolean>(false, { transform: booleanAttribute });
 
 	enableOverflow = input<boolean, boolean>(false, { transform: booleanAttribute });
@@ -82,11 +87,7 @@ export class Calendar2Component implements OnInit {
 	// Date used to init the component and as internal focus model
 	date = model.required<Date>();
 
-	month = computed(() => startOfMonth(this.date()));
-
-	year = computed(() => startOfYear(this.date()));
-
-	decade = computed(() => startOfDecade(this.date()));
+	tabbableDate = model<Date | null>(null);
 
 	mode = model<CalendarMode>('month');
 
@@ -98,6 +99,12 @@ export class Calendar2Component implements OnInit {
 		classes: [],
 		disabled: false,
 	}));
+
+	month = computed(() => startOfMonth(this.date()));
+
+	year = computed(() => startOfYear(this.date()));
+
+	decade = computed(() => startOfDecade(this.date()));
 
 	previousMonth = computed(() => subMonths(this.month(), 1));
 
@@ -113,8 +120,7 @@ export class Calendar2Component implements OnInit {
 	thisMonthLabel = this.#intlRelativeDay.format(0, 'month');
 	thisYearLabel = this.#intlRelativeDay.format(0, 'year');
 
-	calendar2CellInstances = viewChildren(Calendar2DCellDirective);
-	calendar2CellInstances$ = toObservable(this.calendar2CellInstances);
+	calendar2CellInstances = viewChildren(Calendar2CellDirective);
 
 	daysOfWeek = eachDayOfInterval({
 		start: startOfWeek(new Date(), this.#weekOptions),
@@ -125,11 +131,11 @@ export class Calendar2Component implements OnInit {
 	}));
 
 	monthGridDisplay = computed(() => {
-		const daysOfMonth: CalendarDayInfo[] = eachDayOfInterval({
+		const daysOfMonth: CalendarCellInfo[] = eachDayOfInterval({
 			start: this.month(),
 			end: endOfMonth(this.month()),
 		}).map((date) => this.dateToCellInfo(date));
-		const daysByWeek = daysOfMonth.reduce<Record<number, CalendarDayInfo[]>>((acc, day) => {
+		const daysByWeek = daysOfMonth.reduce<Record<number, CalendarCellInfo[]>>((acc, day) => {
 			const key = startOfWeek(day.date, this.#weekOptions).getTime();
 			return {
 				...acc,
@@ -168,7 +174,6 @@ export class Calendar2Component implements OnInit {
 			start: this.year(),
 			end: endOfYear(this.year()),
 		});
-		// eslint-disable-next-line @typescript-eslint/no-unsafe-return
 		return monthsOfYear
 			.map((month) => {
 				return {
@@ -177,12 +182,11 @@ export class Calendar2Component implements OnInit {
 					long: this.#intlMonthsLong.format(month),
 					isCurrent: isSameMonth(new Date(), month),
 					status: this.getCellInfo()(month, this.displayMode()),
-				};
+				} as CalendarMonthInfo;
 			})
-			.reduce((all, one, i) => {
+			.reduce<CalendarMonthInfo[][]>((all, one, i) => {
 				const ch = Math.floor(i / 3);
-				all[ch] = [].concat(all[ch] || [], one);
-				// eslint-disable-next-line @typescript-eslint/no-unsafe-return
+				all[ch] = [...(all[ch] || []), one];
 				return all;
 			}, []);
 	});
@@ -192,7 +196,6 @@ export class Calendar2Component implements OnInit {
 			start: subYears(this.decade(), 1),
 			end: addYears(endOfDecade(this.decade()), 1),
 		});
-		// eslint-disable-next-line @typescript-eslint/no-unsafe-return
 		return yearsOfDecade
 			.map((year) => {
 				return {
@@ -202,10 +205,9 @@ export class Calendar2Component implements OnInit {
 					status: this.getCellInfo()(year, this.displayMode()),
 				};
 			})
-			.reduce((all, one, i) => {
+			.reduce<CalendarYearInfo[][]>((all, one, i) => {
 				const ch = Math.floor(i / 3);
-				all[ch] = [].concat(all[ch] || [], one);
-				// eslint-disable-next-line @typescript-eslint/no-unsafe-return
+				all[ch] = [...(all[ch] || []), one];
 				return all;
 			}, []);
 	});
@@ -223,38 +225,27 @@ export class Calendar2Component implements OnInit {
 		return `${this.#intlDateYear.format(startOfDecade(this.decade()))} – ${this.#intlDateYear.format(endOfDecade(this.decade()))}`;
 	});
 
-	loadNextPage(targetHorizontalIndex = -1): void {
-		this.nextPage.emit();
-		// Once we have new cells displayed, meaning that the change has occurred
-		this.calendar2CellInstances$.pipe(skip(1), take(1)).subscribe(() => {
-			// If we want to keep same day of week (for when we go previous month but using arrow up)
-			if (targetHorizontalIndex > -1) {
-				// Focus the first day of new grid that has the same day of week
-				this.calendar2CellInstances()
-					.slice(0, 7)
-					.find((cell) => cell.luCalendar2Cell() === targetHorizontalIndex)
-					?.focus();
-			} else {
-				// Else focus first element
-				this.calendar2CellInstances()[0].focus();
-			}
-		});
+	constructor() {
+		effect(
+			() => {
+				if (this.tabbableDate() === null) {
+					this.tabbableDate.set(this.date());
+				}
+			},
+			{ allowSignalWrites: true },
+		);
 	}
 
-	loadPreviousPage(targetHorizontalIndex = -1): void {
-		this.previousPage.emit();
-		this.calendar2CellInstances$.pipe(skip(1), take(1)).subscribe(() => {
-			if (targetHorizontalIndex > -1) {
-				// Focus the last day of new grid that has the same day of week
-				this.calendar2CellInstances()
-					.slice(-7)
-					.find((cell) => cell.luCalendar2Cell() === targetHorizontalIndex)
-					?.focus();
-			} else {
-				// Else focus last element
-				this.calendar2CellInstances()[this.calendar2CellInstances().length - 1].focus();
-			}
-		});
+	focusTabbableDate(): void {
+		this.calendar2CellInstances()
+			.find((cell) => cell.isTabbableDate())
+			?.focus();
+	}
+
+	blurTabbableDate(): void {
+		this.calendar2CellInstances()
+			.find((cell) => cell.isTabbableDate())
+			?.blur();
 	}
 
 	ngOnInit(): void {
@@ -289,10 +280,8 @@ export class Calendar2Component implements OnInit {
 		}
 	}
 
-	dateToCellInfo(date: Date, isOverflow = false): CalendarDayInfo {
+	dateToCellInfo(date: Date, isOverflow = false): CalendarCellInfo {
 		const status = this.getCellInfo()(date, this.displayMode());
-
-		// const value: string = range.value;
 
 		const classes: string[] = status?.classes || [];
 

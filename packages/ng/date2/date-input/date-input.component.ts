@@ -1,13 +1,17 @@
 import { ConnectionPositionPair } from '@angular/cdk/overlay';
-import { ChangeDetectionStrategy, Component, computed, effect, ElementRef, forwardRef, inject, LOCALE_ID, model, signal, viewChild, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, effect, ElementRef, forwardRef, inject, input, LOCALE_ID, signal, viewChild, ViewEncapsulation } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { IconComponent } from '@lucca-front/ng/icon';
-import { addMonths, addYears, isSameDay, parse, startOfDay, startOfMonth } from 'date-fns';
-import { InputDirective } from '../../form-field/input.directive';
-import { PopoverDirective } from '../../popover2/popover.directive';
+import { addMonths, addYears, parse, startOfDay, startOfMonth } from 'date-fns';
+import { InputDirective } from '@lucca-front/ng/form-field';
+import { PopoverDirective } from '@lucca-front/ng/popover2';
 import { CalendarMode } from '../calendar2/calendar-mode';
 import { Calendar2Component } from '../calendar2/calendar2.component';
 import { CellStatus } from '../calendar2/cell-status';
+import { comparePeriods, startOfPeriod } from '../utils';
+import { getIntl, ɵeffectWithDeps } from '@lucca-front/ng/core';
+import { DateRange } from '../calendar2/date-range';
+import { LU_DATE2_TRANSLATIONS } from '../date2.translate';
 
 @Component({
 	selector: 'lu-date-input',
@@ -30,10 +34,6 @@ export class DateInputComponent implements ControlValueAccessor {
 
 	#intlDateTimeFormat = new Intl.DateTimeFormat(this.#locale);
 
-	#onChange?: (value: Date) => void;
-	onTouched?: () => void;
-	disabled = false;
-
 	// Contains the current date format (like dd/mm/yy etc) based on current locale
 	#dateFormat = this.#intlDateTimeFormat.formatToParts(new Date('01/01/2024')).reduce((acc, part) => {
 		switch (part.type) {
@@ -49,6 +49,20 @@ export class DateInputComponent implements ControlValueAccessor {
 		return acc;
 	}, '');
 
+	intl = getIntl(LU_DATE2_TRANSLATIONS);
+
+	// CVA stuff
+	#onChange?: (value: Date) => void;
+	onTouched?: () => void;
+	disabled = false;
+
+	min = input<Date>(new Date('1/1/1000'));
+	max = input<Date | null>(null);
+
+	ranges = input<DateRange[]>([]);
+
+	getCellInfo = input<((day: Date, mode: CalendarMode) => CellStatus) | null>();
+
 	popoverPositions: ConnectionPositionPair[] = [
 		new ConnectionPositionPair({ originX: 'end', originY: 'bottom' }, { overlayX: 'end', overlayY: 'top' }, 16, 6),
 		new ConnectionPositionPair({ originX: 'end', originY: 'top' }, { overlayX: 'end', overlayY: 'bottom' }, 16, 6),
@@ -56,11 +70,13 @@ export class DateInputComponent implements ControlValueAccessor {
 
 	calendarMode = signal<CalendarMode>('month');
 
-	currentDate = model(startOfMonth(new Date()));
+	protected currentDate = signal(startOfMonth(new Date()));
+
+	protected tabbableDate = signal<Date | null>(null);
 
 	selectedDate = signal<Date | null>(null);
 
-	calendar = viewChild<ElementRef<HTMLDivElement>>('calendar');
+	calendar = viewChild(Calendar2Component);
 
 	displayValue = computed(() => {
 		if (this.selectedDate()) {
@@ -71,12 +87,23 @@ export class DateInputComponent implements ControlValueAccessor {
 
 	userTextInput = signal<string>('');
 
-	getDayInfo = (day: Date): CellStatus => {
+	combinedGetCellInfo = (date: Date, mode: CalendarMode): CellStatus => {
+		const infoFromInput = this.getCellInfo()?.(date, mode);
 		return {
-			classes: [],
-			selected: this.selectedDate() && isSameDay(day, this.selectedDate()),
+			classes: [...(infoFromInput?.classes || [])],
+			// TODO compare min and max based on mode
+			disabled: infoFromInput?.disabled || !this.isInMinMax(date, mode),
+			selected: this.selectedDate() && this.calendarMode() === mode && comparePeriods(mode, date, this.selectedDate()),
 		};
 	};
+
+	previousButton = viewChild<ElementRef<Element>>('previousButtonRef');
+
+	nextButton = viewChild<ElementRef<Element>>('nextButtonRef');
+
+	get isNavigationButtonFocused(): boolean {
+		return [this.previousButton()?.nativeElement, this.nextButton()?.nativeElement].includes(document.activeElement);
+	}
 
 	constructor() {
 		effect(
@@ -93,6 +120,49 @@ export class DateInputComponent implements ControlValueAccessor {
 		effect(() => {
 			this.#onChange?.(this.selectedDate());
 		});
+
+		ɵeffectWithDeps([this.calendarMode, this.tabbableDate], (calendarMode, tabbableDate) => {
+			if (tabbableDate && !comparePeriods(calendarMode, tabbableDate, this.currentDate())) {
+				this.currentDate.set(startOfPeriod(calendarMode, tabbableDate));
+			}
+			if (!this.isNavigationButtonFocused) {
+				this.calendar()?.blurTabbableDate();
+				setTimeout(() => {
+					this.calendar()?.focusTabbableDate();
+				});
+			}
+		});
+	}
+
+	isInMinMax(date: Date, mode: CalendarMode): boolean {
+		let result = true;
+		if (this.min()) {
+			switch (mode) {
+				case 'month':
+					result = result && this.min().getTime() <= date.getTime();
+					break;
+				case 'year':
+					result = result && this.min().getMonth() <= date.getMonth();
+					break;
+				case 'decade':
+					result = result && this.min().getFullYear() <= date.getFullYear();
+					break;
+			}
+		}
+		if (this.max()) {
+			switch (mode) {
+				case 'month':
+					result = result && this.max().getTime() >= date.getTime();
+					break;
+				case 'year':
+					result = result && this.max().getMonth() >= date.getMonth();
+					break;
+				case 'decade':
+					result = result && this.max().getFullYear() >= date.getFullYear();
+					break;
+			}
+		}
+		return result;
 	}
 
 	writeValue(date: Date): void {
@@ -122,16 +192,24 @@ export class DateInputComponent implements ControlValueAccessor {
 		this.move(1);
 	}
 
+	currentDateChangeFromCalendar(date: Date): void {
+		this.tabbableDate.set(date);
+		this.currentDate.set(date);
+	}
+
 	move(direction: 1 | -1): void {
 		switch (this.calendarMode()) {
 			case 'decade':
 				this.currentDate.set(addYears(this.currentDate(), direction * 10));
+				this.tabbableDate.set(addYears(this.tabbableDate(), direction * 10));
 				break;
 			case 'year':
 				this.currentDate.set(addYears(this.currentDate(), direction));
+				this.tabbableDate.set(addYears(this.tabbableDate(), direction));
 				break;
 			case 'month':
 				this.currentDate.set(addMonths(this.currentDate(), direction));
+				this.tabbableDate.set(addMonths(this.tabbableDate(), direction));
 				break;
 		}
 	}

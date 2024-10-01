@@ -14,7 +14,7 @@
 			aria-haspopup="true"
 			role="combobox"
 			(click)="popoverRef.openPopover(true, true)"
-			(keyup.arrowDown)="popoverRef.openPopover(true)"
+			(keyup.arrowDown)="popoverRef.opened() ? popoverRef.focusBackToContent($event) : popoverRef.openPopover(true)"
 			(keyup.escape)="popoverRef.close()"
 			[disabled]="disabled"
 		/>
@@ -29,7 +29,7 @@
 				type="button"
 				class="button mod-onlyIcon mod-text textField-input-affix-toggle"
 			>
-				<lu-icon [icon]="'calendarDate'" [alt]="'Choisir une date dans le calendrier'"></lu-icon>
+				<lu-icon [icon]="'calendarDate'" [alt]="intl.pickDate"></lu-icon>
 			</button>
 		</div>
 	</div>
@@ -38,15 +38,17 @@
 <ng-template #calendar>
 	<div class="calendarWrapper">
 		<div class="calendarWrapper-navigation mod-prev">
-			<button class="calendarWrapper-navigation-button button" type="button" (click)="prev()">
-				<span aria-hidden="true" class="lucca-icon icon-chevronLeft"></span
-				><span class="u-mask"> <!--TODO translate -->Mois précédent</span>
+			<button class="calendarWrapper-navigation-button button" type="button" (click)="prev()" #previousButtonRef>
+				<span aria-hidden="true" class="lucca-icon icon-chevronLeft"></span><span class="u-mask">{{ intl.previous }}</span>
 			</button>
 		</div>
 		<div class="calendarWrapper-content" tabindex="-1">
 			<lu-calendar2
 				[date]="currentDate()"
-				[getCellInfo]="getDayInfo"
+				(dateChange)="currentDateChangeFromCalendar($event)"
+				[(tabbableDate)]="tabbableDate"
+				[getCellInfo]="combinedGetCellInfo"
+				[ranges]="ranges()"
 				(dateClicked)="selectedDate.set($event);popoverRef.close()"
 				(nextPage)="move(1)"
 				(previousPage)="move(-1)"
@@ -55,12 +57,8 @@
 			></lu-calendar2>
 		</div>
 		<div class="calendarWrapper-navigation mod-next">
-			<button class="calendarWrapper-navigation-button button" type="button" (click)="next()">
-				<span aria-hidden="true" class="lucca-icon icon-chevronRight"></span
-				><span class="u-mask">
-					<!--TODO translate -->
-					Mois Suivant</span
-				>
+			<button class="calendarWrapper-navigation-button button" type="button" (click)="next()" #nextButtonRef>
+				<span aria-hidden="true" class="lucca-icon icon-chevronRight"></span><span class="u-mask"> {{ intl.next }}</span>
 			</button>
 		</div>
 	</div>

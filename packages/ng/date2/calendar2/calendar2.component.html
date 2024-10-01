@@ -32,11 +32,7 @@
 				>
 					<button
 						[luCalendar2Cell]="dayIndex"
-						[luCalendar2FirstCellOfGrid]="isFirstWeek && dayIndex === 0"
-						(rightEnd)="loadNextPage()"
-						(downEnd)="loadNextPage(dayIndex)"
-						(leftEnd)="loadPreviousPage()"
-						(upEnd)="loadPreviousPage(dayIndex)"
+						[luCalendar2Date]="day.date"
 						luCalendar2Mode="month"
 						class="calendar-table-body-row-cell-action"
 						type="button"
@@ -90,7 +86,7 @@
 	</div>
 	<table class="calendar-table" role="grid" aria-labelledby="calendar-year-name">
 		<tbody class="calendar-table-body">
-			@for (quarter of yearGridDisplay(); track $index; let isFirstQuarter = $first) {
+			@for (quarter of yearGridDisplay(); track $index) {
 			<tr class="calendar-table-body-row">
 				@for (month of quarter; track month.date.getTime(); let index = $index) {
 				<td
@@ -107,8 +103,8 @@
 						type="button"
 						[attr.data-content-after]="month.short"
 						[luCalendar2Cell]="index"
+						[luCalendar2Date]="month.date"
 						[disabled]="month.status.disabled"
-						[luCalendar2FirstCellOfGrid]="isFirstQuarter && index === 0"
 						(click)="onCellClicked(month.date)"
 						luCalendar2Mode="year"
 					>
@@ -144,8 +140,8 @@
 						class="calendar-table-body-row-cell-action"
 						type="button"
 						[luCalendar2Cell]="index"
-						[luCalendar2FirstCellOfGrid]="firstRow && index === 0"
 						[disabled]="year.status.disabled"
+						[luCalendar2Date]="year.date"
 						luCalendar2Mode="decade"
 						(click)="onCellClicked(year.date)"
 					>
@@ -160,7 +156,5 @@
 		</tbody>
 	</table>
 	} }
-	<lu-callout icon="signInfo" palette="neutral" size="S" class="calendar-callout">
-		Les touches directionnelles servent à parcourir les dates.
-	</lu-callout>
+	<lu-callout icon="signInfo" palette="neutral" size="S" class="calendar-callout"> {{ intl.directionKeysTip }} </lu-callout>
 </div>
