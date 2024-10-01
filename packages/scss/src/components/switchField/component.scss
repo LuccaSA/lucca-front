@@ -67,7 +67,7 @@
 			z-index: 1;
 			width: var(--component-switchField-label-input-width);
 			height: var(--component-switchField-label-input-height);
-			opacity: 0;
+			opacity: 0.0001;
 			cursor: pointer;
 
 			&:hover {
