@@ -1,5 +1,5 @@
 import { ConnectionPositionPair } from '@angular/cdk/overlay';
-import { ChangeDetectionStrategy, Component, computed, effect, ElementRef, forwardRef, inject, input, LOCALE_ID, signal, viewChild, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, computed, effect, ElementRef, forwardRef, inject, input, LOCALE_ID, signal, viewChild, ViewEncapsulation } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { addMonths, addYears, parse, startOfDay, startOfMonth } from 'date-fns';
@@ -60,6 +60,10 @@ export class DateInputComponent implements ControlValueAccessor {
 	max = input<Date | null>(null);
 
 	ranges = input<DateRange[]>([]);
+
+	enableOverflow = input<boolean, boolean>(false, { transform: booleanAttribute });
+	showOverflow = input<boolean, boolean>(false, { transform: booleanAttribute });
+	hideToday = input<boolean, boolean>(false, { transform: booleanAttribute });
 
 	getCellInfo = input<((day: Date, mode: CalendarMode) => CellStatus) | null>();
 

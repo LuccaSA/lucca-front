@@ -4,6 +4,7 @@ import { IconComponent } from '@lucca-front/ng/icon';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { DateInputComponent } from '@lucca-front/ng/date2';
 import { StoryModelDisplayComponent } from '../../../helpers/story-model-display.component';
+import { generateInputs } from '../../../helpers/stories';
 
 export default {
 	title: 'Documentation/Forms/Date2/DateInput',
@@ -25,9 +26,18 @@ export default {
 		selected: {
 			control: 'date',
 		},
+		hideToday: {
+			control: 'boolean',
+		},
+		enableOverflow: {
+			control: 'boolean',
+		},
+		showOverflow: {
+			control: 'boolean',
+		},
 	},
-	render: (args) => {
-		const { min, max, selected } = args;
+	render: (args, { argTypes }) => {
+		const { min, max, selected, ...flags } = args;
 		return {
 			props: {
 				selected: selected || new Date(),
@@ -44,7 +54,7 @@ export default {
 				`,
 			],
 			template: `
-			<lu-date-input [(ngModel)]="selected" [min]="min" [max]="max"></lu-date-input>
+			<lu-date-input [(ngModel)]="selected" [min]="min" [max]="max" ${generateInputs(flags, argTypes)}></lu-date-input>
 
 
 			<pr-story-model-display>{{selected}}</pr-story-model-display>
@@ -53,4 +63,10 @@ export default {
 	},
 } as Meta;
 
-export const Basic: StoryObj<DateInputComponent> = {};
+export const Basic: StoryObj<DateInputComponent> = {
+	args: {
+		enableOverflow: false,
+		showOverflow: false,
+		hideToday: false,
+	},
+};

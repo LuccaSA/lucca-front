@@ -44,6 +44,9 @@
 		</div>
 		<div class="calendarWrapper-content" tabindex="-1">
 			<lu-calendar2
+				[enableOverflow]="enableOverflow()"
+				[showOverflow]="showOverflow()"
+				[hideToday]="hideToday()"
 				[date]="currentDate()"
 				(dateChange)="currentDateChangeFromCalendar($event)"
 				[(tabbableDate)]="tabbableDate"
