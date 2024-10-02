@@ -1,4 +1,6 @@
-@mixin component($atRoot: 'without: rule') {
+@use '@lucca-front/scss/src/commons/utils/namespace';
+
+@mixin component($atRoot: namespace.$defaultAtRoot) {
 	border-radius: var(--commons-borderRadius-full);
 	height: var(--components-gauge-height);
 	overflow: hidden;
@@ -16,6 +18,7 @@
 			position: absolute;
 			border-bottom-style: solid;
 			border-color: currentColor;
+			border-radius: var(--commons-borderRadius-full);
 		}
 	}
 }

@@ -20,6 +20,9 @@
 		@include disabled;
 	}
 
+	&:has([aria-expanded="true"]) {
+		@include expanded;
+	}
 }
 
 .multipleSelect-displayer {
@@ -31,7 +34,7 @@
 		}
 
 		&:has([aria-expanded="true"]):not(:has(:placeholder-shown)) {
-			@include displayerFilterExpended;
+			@include displayerFilterExpanded;
 		}
 	}
 }

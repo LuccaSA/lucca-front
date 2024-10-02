@@ -9,7 +9,7 @@
 	--components-segmentedControl-zIndex: 1;
 
 	.numericBadge {
-		@include numericBadge.product;
+		@include numericBadge.inherit;
 	}
 }
 
