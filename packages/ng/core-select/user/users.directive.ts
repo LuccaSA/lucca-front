@@ -5,6 +5,7 @@ import { ILuApiCollectionResponse } from '@lucca-front/ng/api';
 import { ALuCoreSelectApiDirective } from '@lucca-front/ng/core-select/api';
 import { LuDisplayFormat, LuDisplayFullname } from '@lucca-front/ng/user';
 import { EMPTY, Observable, catchError, combineLatest, map, of, shareReplay, switchMap, take, tap } from 'rxjs';
+import { sanitizeClueFilter } from '../select.utils';
 import { LU_CORE_SELECT_CURRENT_USER_ID } from './me.provider';
 import { LuUserDisplayerComponent } from './user-displayer.component';
 import { LuCoreSelectUserHomonymsService } from './user-homonym.service';
@@ -74,6 +75,17 @@ export class LuCoreSelectUsersDirective<T extends LuCoreSelectUser = LuCoreSelec
 		this._filters.set(filters);
 	}
 
+	@Input()
+	public set searchDelimiter(delimiter: string) {
+		this._searchDelimiter = delimiter;
+	}
+
+	private _searchDelimiter: string;
+
+	public get searchDelimiter() {
+		return this._searchDelimiter;
+	}
+
 	protected _url = signal<string | null>(null);
 
 	constructor() {
@@ -104,7 +116,7 @@ export class LuCoreSelectUsersDirective<T extends LuCoreSelectUser = LuCoreSelec
 			fields: this.#userFields,
 			...filters,
 			...(orderBy ? { orderBy } : {}),
-			...(clue ? { clue: clue } : {}),
+			...(clue ? { clue: sanitizeClueFilter(clue, this.searchDelimiter) } : {}),
 			...(operationIds ? { operations: operationIds.join(',') } : {}),
 			...(appInstanceId ? { appInstanceId } : {}),
 			...(enableFormerEmployees ? { formerEmployees: enableFormerEmployees } : {}),
