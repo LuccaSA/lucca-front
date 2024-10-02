@@ -1,5 +1,15 @@
+@use '@lucca-front/scss/src/commons/config';
 @use '@lucca-front/scss/src/commons/core';
 @use 'exports' as *;
+@use 'normalize-scss/sass/normalize' as *;
+
+@if config.$namespace {
+	#{config.$namespace} {
+		@include normalize();
+	}
+} @else {
+	@include normalize();
+}
 
 @include core.appendRootVars {
 	@include vars;
