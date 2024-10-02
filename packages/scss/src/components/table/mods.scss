@@ -1,5 +1,5 @@
 @use '@lucca-front/icons/src/commons/utils/icon';
-@use '@lucca-front/scss/src/commons/utils/namespace';
+@use '@lucca-front/scss/src/commons/core';
 
 @mixin S {
 	font-size: var(--sizes-S-fontSize);
@@ -208,8 +208,8 @@
 	}
 }
 
-@mixin draggable($atRoot: namespace.$defaultAtRoot) {
-	@at-root ($atRoot) {
+@mixin draggable($atRoot: null) {
+	@include core.atRoot($atRoot) {
 		.table-body-row-cell-handler,
 		.table-foot-row-cell-handler {
 			top: 0;
@@ -273,8 +273,8 @@
 	}
 }
 
-@mixin twoLines($atRoot: namespace.$defaultAtRoot) {
-	@at-root ($atRoot) {
+@mixin twoLines($atRoot: null) {
+	@include core.atRoot($atRoot) {
 		.table-head-row-cell-secondLine {
 			margin-top: var(--pr-t-spacings-50);
 			display: block;

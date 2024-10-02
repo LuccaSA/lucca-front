@@ -1,5 +1,5 @@
 @use 'exports' as *;
-@use '@lucca-front/scss/src/commons/utils/namespace';
+@use '@lucca-front/scss/src/commons/core';
 
 .form.mod-framed {
 	.textfield,
@@ -70,7 +70,7 @@
 			@include fieldFramedState('success');
 		}
 
-		@at-root (namespace.$defaultAtRoot) {
+		@include core.atRoot {
 			.form.mod-framed {
 				.is-error {
 					@include fieldFramedState('error');

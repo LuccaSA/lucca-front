@@ -1,9 +1,9 @@
 @use '@lucca-front/icons/src/commons/utils/icon';
 @use '@lucca-front/scss/src/commons/utils/a11y';
-@use '@lucca-front/scss/src/commons/utils/namespace';
+@use '@lucca-front/scss/src/commons/core';
 
-@mixin component($atRoot: namespace.$defaultAtRoot) {
-	@at-root ($atRoot) {
+@mixin component($atRoot: null) {
+	@include core.atRoot($atRoot) {
 		.breadcrumbs-list {
 			display: flex;
 			flex-wrap: wrap;

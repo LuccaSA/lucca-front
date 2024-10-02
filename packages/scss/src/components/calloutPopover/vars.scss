@@ -1,10 +1,8 @@
-@use '@lucca-front/scss/src/commons/utils/namespace';
+@use '@lucca-front/scss/src/commons/core';
 
-@mixin vars($atRoot: namespace.$defaultAtRoot) {
-	@at-root ($atRoot) {
-		:root {
-			--components-calloutPopover-width: 30rem;
-			--components-calloutPopover-content-margin: 2rem;
-		}
+@mixin vars {
+	@include core.appendRootVars {
+		--components-calloutPopover-width: 30rem;
+		--components-calloutPopover-content-margin: 2rem;
 	}
 }

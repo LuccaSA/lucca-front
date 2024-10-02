@@ -1,14 +1,14 @@
 @use '@lucca-front/scss/src/commons/utils/reset';
-@use '@lucca-front/scss/src/commons/utils/namespace';
+@use '@lucca-front/scss/src/commons/core';
 
-@mixin component($atRoot: namespace.$defaultAtRoot) {
+@mixin component($atRoot: null) {
 	list-style-type: none;
 	padding: 0;
 	margin: var(--pr-t-spacings-200) 0;
 	display: flex;
 	align-items: center;
 
-	@at-root ($atRoot) {
+	@include core.atRoot($atRoot) {
 		.timeline-step {
 			flex-grow: 1;
 			display: flex;

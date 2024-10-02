@@ -1,8 +1,8 @@
 @use '@lucca-front/scss/src/components/button/exports' as button;
 @use '@lucca-front/icons/src/icon/exports' as icon;
-@use '@lucca-front/scss/src/commons/utils/namespace';
+@use '@lucca-front/scss/src/commons/core';
 
-@mixin component($atRoot: namespace.$defaultAtRoot) {
+@mixin component($atRoot: null) {
 	@include button.text;
 	@include button.withIcon;
 
@@ -21,7 +21,7 @@
 	line-height: var(--components-sortable-lineHeight);
 	color: currentColor;
 
-	@at-root ($atRoot) {
+	@include core.atRoot($atRoot) {
 		.tableSortable-arrows {
 			margin-bottom: var(--components-sortable-arrowsOffset);
 			position: relative;

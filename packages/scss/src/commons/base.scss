@@ -2,8 +2,8 @@
 @use 'sass:list';
 
 @use '@lucca-front/scss/src/commons/config';
+@use '@lucca-front/scss/src/commons/core';
 @use '@lucca-front/scss/src/commons/utils/a11y';
-@use '@lucca-front/scss/src/commons/utils/namespace';
 
 @mixin body {
 	background-color: var(--pr-t-elevation-surface-default);
@@ -21,8 +21,8 @@
 	height: -webkit-fill-available;
 }
 
-@mixin base($atRoot: namespace.$defaultAtRoot) {
-	@at-root ($atRoot) {
+@mixin base($nestChildren: true) {
+	@include core.atRoot($nestChildren) {
 		@if config.$fontFamily != 'Source Sans Pro' {
 			@font-face {
 				font-family: '#{config.$fontFamily}';
@@ -107,11 +107,9 @@
 			opacity: 1;
 		}
 
-		@if config.$isNamespaced {
-			& {
-				@include body;
-				@include html;
-			}
+		@if config.$namespace {
+			@include body;
+			@include html;
 		} @else {
 			html {
 				@include html;

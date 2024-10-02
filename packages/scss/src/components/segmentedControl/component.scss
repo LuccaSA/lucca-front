@@ -1,3 +1,4 @@
+@use '@lucca-front/scss/src/commons/core';
 @use '@lucca-front/scss/src/commons/utils/a11y';
 
 @mixin component($atRoot: 'without: rule') {
@@ -14,7 +15,7 @@
 	font-size: var(--components-segmentedControl-fontSize);
 	line-height: var(--components-segmentedControl-lineHeight);
 
-	@at-root ($atRoot) {
+	@include core.atRoot($atRoot) {
 		.segmentedControl-item-input {
 			@include a11y.mask;
 

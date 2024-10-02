@@ -2,9 +2,9 @@
 @use '@lucca-front/scss/src/components/button/exports' as button;
 @use '@lucca-front/scss/src/components/footer/exports' as footer;
 @use '@lucca-front/scss/src/commons/utils/keyframe';
-@use '@lucca-front/scss/src/commons/utils/namespace';
+@use '@lucca-front/scss/src/commons/core';
 
-@mixin component($atRoot: namespace.$defaultAtRoot) {
+@mixin component($atRoot: null) {
 	@include keyframe.scaleIn;
 
 	@supports not (height: 1dvh) {
@@ -72,7 +72,7 @@
 		}
 	}
 
-	@at-root ($atRoot) {
+	@include core.atRoot($atRoot) {
 		// .dialog-form is deprecated
 		.dialog-formOptional,
 		.dialog-form,

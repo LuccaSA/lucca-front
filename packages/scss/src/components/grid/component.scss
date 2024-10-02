@@ -3,9 +3,9 @@
 @use '@lucca-front/scss/src/commons/utils/media';
 @use '@lucca-front/scss/src/commons/utils/container';
 @use '@lucca-front/scss/src/commons/config';
-@use '@lucca-front/scss/src/commons/utils/namespace';
+@use '@lucca-front/scss/src/commons/core';
 
-@mixin component($atRoot: namespace.$defaultAtRoot) {
+@mixin component($atRoot: null) {
 	display: grid;
 	grid-template-columns: var(--grid-template-columns);
 	gap: var(--grid-row-gap) var(--grid-column-gap);
@@ -14,7 +14,7 @@
 	// max-width: var(--grid-max-width, var(--grid-maxWidth));
 	max-width: var(--grid-max-width, var(--grid-maxWidth));
 
-	@at-root ($atRoot) {
+	@include core.atRoot($atRoot) {
 		.grid-containerWrapper {
 			container-type: inline-size;
 			container-name: grid;

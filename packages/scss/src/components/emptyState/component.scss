@@ -1,13 +1,13 @@
 @use '@lucca-front/scss/src/components/title/exports' as title;
-@use '@lucca-front/scss/src/commons/utils/namespace';
+@use '@lucca-front/scss/src/commons/core';
 
-@mixin component($atRoot: namespace.$defaultAtRoot) {
+@mixin component($atRoot: null) {
 	display: flex;
 	flex-direction: column;
 	flex-grow: 1;
 	padding: var(--pr-t-spacings-200);
 
-	@at-root ($atRoot) {
+	@include core.atRoot($atRoot) {
 		.emptyState-container {
 			align-items: center;
 			display: flex;

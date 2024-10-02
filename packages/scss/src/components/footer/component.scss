@@ -1,6 +1,6 @@
-@use '@lucca-front/scss/src/commons/utils/namespace';
+@use '@lucca-front/scss/src/commons/core';
 
-@mixin component($atRoot: namespace.$defaultAtRoot) {
+@mixin component($atRoot: null) {
 	background-color: var(--pr-t-elevation-surface-raised);
 	padding: var(--pr-t-spacings-200) var(--components-footer-paddingInline);
 	display: flex;
@@ -12,7 +12,7 @@
 	position: var(--components-footer-position);
 	flex-direction: var(--components-footer-direction);
 
-	@at-root ($atRoot) {
+	@include core.atRoot($atRoot) {
 		.footer-content {
 			flex-grow: 1;
 		}

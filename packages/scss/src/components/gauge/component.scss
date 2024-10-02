@@ -1,13 +1,13 @@
-@use '@lucca-front/scss/src/commons/utils/namespace';
+@use '@lucca-front/scss/src/commons/core';
 
-@mixin component($atRoot: namespace.$defaultAtRoot) {
+@mixin component($atRoot: null) {
 	border-radius: var(--commons-borderRadius-full);
 	height: var(--components-gauge-height);
 	overflow: hidden;
 	position: relative;
 	background-color: var(--components-gauge-background);
 
-	@at-root ($atRoot) {
+	@include core.atRoot($atRoot) {
 		.gauge-bar {
 			color: var(--palettes-700, var(--palettes-product-700));
 			border-bottom-width: var(--components-gauge-height);

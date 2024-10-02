@@ -1,7 +1,7 @@
 @use '@lucca-front/icons/src/commons/utils/icon';
-@use '@lucca-front/scss/src/commons/utils/namespace';
+@use '@lucca-front/scss/src/commons/core';
 
-@mixin component($atRoot: namespace.$defaultAtRoot) {
+@mixin component($atRoot: null) {
 	font-size: var(--components-table-font-size);
 	line-height: var(--components-table-line-height);
 	border-spacing: 0;
@@ -10,7 +10,7 @@
 	width: 100%;
 	color: var(--palettes-neutral-800);
 
-	@at-root ($atRoot) {
+	@include core.atRoot($atRoot) {
 		.table-head {
 			display: table-header-group;
 			vertical-align: bottom;

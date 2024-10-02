@@ -1,6 +1,6 @@
-@use '@lucca-front/scss/src/commons/utils/namespace';
+@use '@lucca-front/scss/src/commons/core';
 
-@mixin icon($atRoot: namespace.$defaultAtRoot) {
+@mixin icon($atRoot: null) {
 	&:has(.link-text) {
 		text-decoration: none;
 	}
@@ -18,7 +18,7 @@
 		vertical-align: bottom;
 	}
 
-	@at-root ($atRoot) {
+	@include core.atRoot($atRoot) {
 		.link-text {
 			text-decoration: underline;
 		}

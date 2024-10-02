@@ -1,6 +1,6 @@
-@use '@lucca-front/scss/src/commons/utils/namespace';
+@use '@lucca-front/scss/src/commons/core';
 
-@mixin component($atRoot: namespace.$defaultAtRoot) {
+@mixin component($atRoot: null) {
 	display: flex;
 	flex-wrap: wrap;
 	padding: var(--pr-t-spacings-100) var(--pr-t-spacings-150);
@@ -10,7 +10,7 @@
 		margin-right: var(--pr-t-spacings-100);
 	}
 
-	@at-root ($atRoot) {
+	@include core.atRoot($atRoot) {
 		.pagination-count,
 		.pagination-navigation,
 		.pagination-scrolling {

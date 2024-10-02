@@ -1,6 +1,6 @@
-@use '@lucca-front/scss/src/commons/utils/namespace';
+@use '@lucca-front/scss/src/commons/core';
 
-@mixin component($atRoot: namespace.$defaultAtRoot) {
+@mixin component($atRoot: null) {
 	border-radius: var(--components-box-border-radius);
 	margin: var(--components-box-margin);
 	padding: var(--components-box-padding);
@@ -8,7 +8,7 @@
 	display: block;
 	position: relative;
 
-	@at-root ($atRoot) {
+	@include core.atRoot($atRoot) {
 		.box-close {
 			position: absolute;
 			font-size: var(--sizes-M-fontSize);

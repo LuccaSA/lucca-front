@@ -1,16 +1,18 @@
 @use '@lucca-front/scss/src/commons/utils/reset';
 @use '@lucca-front/scss/src/commons/utils/a11y';
-@use '@lucca-front/scss/src/commons/utils/namespace';
+@use '@lucca-front/scss/src/commons/core';
 
-@mixin component($atRoot: namespace.$defaultAtRoot) {
+@mixin component($atRoot: null) {
 	display: inline-block;
 	vertical-align: middle;
 	border-radius: var(--commons-borderRadius-full);
 	width: var(--components-avatar-size);
 	aspect-ratio: 1;
 
-	@at-root ($atRoot) {
-		.avatar-picture, .picture { // .picture is deprecated
+	@include core.atRoot($atRoot) {
+		.avatar-picture,
+		.picture {
+			// .picture is deprecated
 			background-color: var(--palettes-neutral-200);
 			border-radius: var(--commons-borderRadius-full);
 			background-position: center;
