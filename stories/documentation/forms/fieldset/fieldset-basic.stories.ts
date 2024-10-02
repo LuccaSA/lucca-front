@@ -48,38 +48,34 @@ function getTemplate(args: FieldsetBasicStory): string {
 	const content = args.content;
 
 	if (args.expandable === true)
-		return `
-		<fieldset class="fieldset mod-expandable" aria-labelledby="fieldsetTitleContent1">
-			<legend class="fieldset-title">
-				<button type="button" class="fieldset-title-content" id="fieldsetTitleContent1" [attr.aria-expanded]="expanded" (click)="expanded = !expanded">
-					<span class="fieldset-title-content-text">
-						${title}
-						${helper}
-					</span>
-					<span class="lucca-icon" aria-hidden="true" [class.icon-collapse]="expanded" [class.icon-expand]="!expanded"></span>
-				</button>
-			</legend>
-			<div class="fieldset-content" [attr.hidden]="expanded ? null : 'hidden'">
-				${content}
-			</div>
-		</fieldset>
-	`;
+		return `<fieldset class="fieldset mod-expandable" aria-labelledby="fieldsetTitleContent1">
+	<legend class="fieldset-title">
+		<button type="button" class="fieldset-title-content" id="fieldsetTitleContent1" [attr.aria-expanded]="expanded" (click)="expanded = !expanded">
+			<span class="fieldset-title-content-text">
+				${title}
+				${helper}
+			</span>
+			<span class="lucca-icon" aria-hidden="true" [class.icon-collapse]="expanded" [class.icon-expand]="!expanded"></span>
+		</button>
+	</legend>
+	<div class="fieldset-content" [attr.hidden]="expanded ? null : 'hidden'">
+		${content}
+	</div>
+</fieldset>`;
 	else
-		return `
-		<fieldset class="fieldset ${horizontal}" aria-labelledby="fieldsetTitleContent1">
-			<legend class="fieldset-title">
-				<span class="fieldset-title-content" id="fieldsetTitleContent1">
-					<span class="fieldset-title-content-text">
-						${title}
-						${helper}
-					</span>
-				</span>
-			</legend>
-			<div class="fieldset-content">
-				${content}
-			</div>
-		</fieldset>
-	`;
+		return `<fieldset class="fieldset ${horizontal}" aria-labelledby="fieldsetTitleContent1">
+	<legend class="fieldset-title">
+		<span class="fieldset-title-content" id="fieldsetTitleContent1">
+			<span class="fieldset-title-content-text">
+				${title}
+				${helper}
+			</span>
+		</span>
+	</legend>
+	<div class="fieldset-content">
+		${content}
+	</div>
+</fieldset>`;
 }
 
 const Template: StoryFn<FieldsetBasicStory> = (args) => ({
