@@ -1,6 +1,6 @@
 @mixin daysOffHidden {
 	.calendar-table-body-row-cell-action-stripes {
-		--calendar-table-body-row-cell-action-stripesDisplay: none;
+		--components-calendar-table-body-row-cell-action-stripesDisplay: none;
 	}
 }
 
@@ -8,12 +8,12 @@
 	.calendar-table-body-row-cell {
 		&.is-overflow {
 			.calendar-table-body-row-cell-action {
-				--calendar-table-body-row-cell-actionDisplay: none;
+				--components-calendar-table-body-row-cell-actionDisplay: none;
 			}
 		}
 	}
 }
 
 @mixin third {
-	--calendarBorderSpacing: 0 var(--pr-t-spacings-200);
+	--components-calendarBorderSpacing: 0 var(--pr-t-spacings-200);
 }

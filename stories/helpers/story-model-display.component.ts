@@ -7,11 +7,23 @@ import { CalloutComponent } from '@lucca-front/ng/callout';
 	standalone: true,
 	imports: [CalloutComponent],
 	template: ` <lu-callout icon="settingsGear" size="S" heading="NgModel value">
-		<div class="code">
+		<pre class="code">
 			<ng-content></ng-content>
-		</div>
+		</pre>
 	</lu-callout>`,
-	styles: ``,
+	styles: `
+		pr-story-model-display {
+			margin-top: var(--pr-t-spacings-400);
+			display: block;
+		}
+		pr-story-model-display .callout-content {
+			min-width: 0;
+		}
+
+		pr-story-model-display pre {
+			overflow: auto;
+		}
+	`,
 	encapsulation: ViewEncapsulation.None,
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })

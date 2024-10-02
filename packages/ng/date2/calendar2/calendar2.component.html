@@ -3,6 +3,7 @@
 	<div class="calendar-name" id="calendar-name" aria-live="polite">
 		<button type="button" class="calendar-name-button" (click)="displayMode.set('year')">{{ currentMonthLabel() }}</button>&ngsp;
 		<button type="button" class="calendar-name-button" (click)="displayMode.set('decade')">{{ currentYearLabel() }}</button>
+		<span class="u-mask">{{ intl.directionKeysTip }} </span>
 	</div>
 	<table class="calendar-table" role="grid" aria-labelledby="calendar-name">
 		<thead class="calendar-table-head">
@@ -80,9 +81,15 @@
 			/>
 		</symbol>
 	</svg>
+	<!--
+	<div class="u-paddingXS">
+		<button type="button" class="button mod-block mod-S mod-text">Aujourd’hui</button>
+	</div>
+	-->
 	} @case ('year') {
 	<div class="calendar-name" id="calendar-year-name">
 		<button type="button" class="calendar-name-button" (click)="displayMode.set('decade')">{{ currentYearLabel() }}</button>
+		<span class="u-mask">{{ intl.directionKeysTip }} </span>
 	</div>
 	<table class="calendar-table" role="grid" aria-labelledby="calendar-year-name">
 		<tbody class="calendar-table-body">
@@ -120,7 +127,10 @@
 		</tbody>
 	</table>
 	} @case ('decade') {
-	<div class="calendar-name" id="calendar-decade-name">{{ currentDecadeLabel() }}</div>
+	<div class="calendar-name" id="calendar-decade-name">
+		{{ currentDecadeLabel() }}
+		<span class="u-mask">{{ intl.directionKeysTip }} </span>
+	</div>
 	<table class="calendar-table" role="grid" aria-labelledby="calendar-decade-name">
 		<tbody class="calendar-table-body">
 			@for (row of decadeGridDisplay(); track $index; let firstRow = $first; let lastRow = $last) {
@@ -156,5 +166,4 @@
 		</tbody>
 	</table>
 	} }
-	<lu-callout icon="signInfo" palette="neutral" size="S" class="calendar-callout"> {{ intl.directionKeysTip }} </lu-callout>
 </div>

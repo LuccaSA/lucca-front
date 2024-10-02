@@ -15,10 +15,16 @@
 			role="combobox"
 			(click)="popoverRef.openPopover(true, true)"
 			(keyup.arrowDown)="popoverRef.opened() ? popoverRef.focusBackToContent($event) : popoverRef.openPopover(true)"
+			(keyup.space)=" popoverRef.opened() ? popoverRef.focusBackToContent($event) : popoverRef.openPopover(true)"
 			(keyup.escape)="popoverRef.close()"
 			[disabled]="disabled"
 		/>
 		<div class="textField-input-affix">
+			@if (clearable) {
+			<button class="clear" type="button" (click)="clear()" style="pointer-events: auto">
+				<span class="u-mask">{{ intl.clear }}</span>
+			</button>
+			}
 			<button
 				[luPopover2]="calendar"
 				[disabled]="disabled"
@@ -42,6 +48,11 @@
 				<span aria-hidden="true" class="lucca-icon icon-chevronLeft"></span><span class="u-mask">{{ intl.previous }}</span>
 			</button>
 		</div>
+		<div class="calendarWrapper-navigation mod-next">
+			<button class="calendarWrapper-navigation-button button" type="button" (click)="next()" #nextButtonRef>
+				<span aria-hidden="true" class="lucca-icon icon-chevronRight"></span><span class="u-mask"> {{ intl.next }}</span>
+			</button>
+		</div>
 		<div class="calendarWrapper-content" tabindex="-1">
 			<lu-calendar2
 				[enableOverflow]="enableOverflow()"
@@ -58,11 +69,6 @@
 				mode="month"
 				[(displayMode)]="calendarMode"
 			></lu-calendar2>
-		</div>
-		<div class="calendarWrapper-navigation mod-next">
-			<button class="calendarWrapper-navigation-button button" type="button" (click)="next()" #nextButtonRef>
-				<span aria-hidden="true" class="lucca-icon icon-chevronRight"></span><span class="u-mask"> {{ intl.next }}</span>
-			</button>
 		</div>
 	</div>
 </ng-template>

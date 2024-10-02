@@ -1,17 +1,17 @@
 import { ConnectionPositionPair } from '@angular/cdk/overlay';
 import { booleanAttribute, ChangeDetectionStrategy, Component, computed, effect, ElementRef, forwardRef, inject, input, LOCALE_ID, signal, viewChild, ViewEncapsulation } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { IconComponent } from '@lucca-front/ng/icon';
-import { addMonths, addYears, parse, startOfDay, startOfMonth } from 'date-fns';
+import { getIntl, ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { InputDirective } from '@lucca-front/ng/form-field';
+import { IconComponent } from '@lucca-front/ng/icon';
 import { PopoverDirective } from '@lucca-front/ng/popover2';
+import { addMonths, addYears, parse, startOfDay, startOfMonth } from 'date-fns';
 import { CalendarMode } from '../calendar2/calendar-mode';
 import { Calendar2Component } from '../calendar2/calendar2.component';
 import { CellStatus } from '../calendar2/cell-status';
-import { comparePeriods, startOfPeriod } from '../utils';
-import { getIntl, ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { DateRange } from '../calendar2/date-range';
 import { LU_DATE2_TRANSLATIONS } from '../date2.translate';
+import { comparePeriods, startOfPeriod } from '../utils';
 
 @Component({
 	selector: 'lu-date-input',
@@ -66,6 +66,8 @@ export class DateInputComponent implements ControlValueAccessor {
 	hideToday = input<boolean, boolean>(false, { transform: booleanAttribute });
 
 	getCellInfo = input<((day: Date, mode: CalendarMode) => CellStatus) | null>();
+
+	clearable = input<boolean, boolean>(false, { transform: booleanAttribute });
 
 	popoverPositions: ConnectionPositionPair[] = [
 		new ConnectionPositionPair({ originX: 'end', originY: 'bottom' }, { overlayX: 'end', overlayY: 'top' }, 16, 6),
@@ -195,6 +197,8 @@ export class DateInputComponent implements ControlValueAccessor {
 	next() {
 		this.move(1);
 	}
+
+	clear() {}
 
 	currentDateChangeFromCalendar(date: Date): void {
 		this.tabbableDate.set(date);

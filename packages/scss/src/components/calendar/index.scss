@@ -16,25 +16,25 @@
 	@include component;
 	@include vars;
 
-	// si les lignes ont trois colonnes
+	// if rows have three columns (display for months and years)
 	&:has(.calendar-table-body-row-cell:nth-child(3):last-child) {
 		@include third;
 	}
 
-	// si on a un début de sélection
+	// if we have a selection start
 	&:has(.calendar-table-body-row-cell.is-start) {
-		// mais pas de fin de sélection
+		// but no selection end
 		&:not(:has(.calendar-table-body-row-cell.is-end)) {
-			// et soit un focus-visible
+			// and either focus-visible
 			&:has(.calendar-table-body-row-cell-action:focus-visible) {
-				// on appelle le mixin de sélection en cours
+				// we call the selection in progress mixin
 				@include selectionInProgress($event: ':focus-within');
 			}
 
-			// soit un survol (sans focus-visible)
+			// or hovering (without focus-visible)
 			&:not(:has(.calendar-table-body-row-cell:focus-within)) {
 				&:has(.calendar-table-body-row-cell:hover) {
-					// on appelle le mixin de sélection en cours
+					// we call the selection in progress mixin
 					@include selectionInProgress($event: ':hover');
 				}
 			}

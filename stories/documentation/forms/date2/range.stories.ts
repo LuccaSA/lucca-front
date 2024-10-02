@@ -4,7 +4,6 @@ import { Calendar2Component } from '@lucca-front/ng/date2';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { setDate } from 'date-fns';
 import { DateRange } from 'packages/ng/date2/calendar2/date-range';
-import { CalendarMode } from '../../../../packages/ng/date2/calendar2/calendar-mode';
 
 export default {
 	title: 'Documentation/Forms/Date2/Calendar',
@@ -21,33 +20,6 @@ export default {
 		return {
 			props: {
 				currentMonth: new Date(),
-				getDayInfo: (date: Date, mode: CalendarMode) => {
-					if (mode === 'decade' && date.getFullYear() === 2023) {
-						return {
-							disabled: true,
-							classes: [],
-						};
-					}
-					if (mode === 'decade' && date.getFullYear() === 2022) {
-						return {
-							selected: true,
-							classes: [],
-						};
-					}
-					if (mode === 'year' && date.getFullYear() === 2024 && date.getMonth() === 1) {
-						return {
-							disabled: true,
-							classes: [],
-						};
-					}
-					if (mode === 'year' && date.getFullYear() === 2024 && date.getMonth() === 2) {
-						return {
-							selected: true,
-							classes: [],
-						};
-					}
-					return { classes: [] };
-				},
 				ranges: [
 					{
 						start: setDate(new Date(), 2),
@@ -71,12 +43,11 @@ export default {
 					},
 				] as DateRange[],
 			},
-			styles: [`:host { display: flex; gap: 1rem; align-items: flex-start }`],
 			template: `
-				<lu-calendar2 [ranges]="ranges" [getCellInfo]="getDayInfo" [date]="currentMonth" mode="month" (dateClicked)="selected($event)"></lu-calendar2>
+				<lu-calendar2 [hideToday]="false" [showOverflow]="true" [enableOverflow]="true" [ranges]="ranges" [date]="currentMonth" mode="month" (dateClicked)="selected($event)"></lu-calendar2>
 			`,
 		};
 	},
 } as Meta;
 
-export const Basic: StoryObj<Calendar2Component> = {};
+export const Range: StoryObj<Calendar2Component> = {};

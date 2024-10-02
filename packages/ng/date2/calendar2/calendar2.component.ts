@@ -1,5 +1,6 @@
 import { NgClass } from '@angular/common';
 import { booleanAttribute, ChangeDetectionStrategy, Component, computed, effect, ElementRef, inject, input, LOCALE_ID, model, OnInit, output, viewChildren, ViewEncapsulation } from '@angular/core';
+import { ButtonComponent } from '@lucca-front/ng/button';
 import { CalloutComponent } from '@lucca-front/ng/callout';
 import {
 	addMonths,
@@ -25,8 +26,9 @@ import {
 	subYears,
 	WeekOptions,
 } from 'date-fns';
-import { ButtonComponent } from '@lucca-front/ng/button';
+import { getIntl } from '../../core/translate';
 import { WEEK_INFO } from '../calendar.token';
+import { LU_DATE2_TRANSLATIONS } from '../date2.translate';
 import { RepeatTimesDirective } from '../repeat-times.directive';
 import { getIntlWeekDay, getJSFirstDayOfWeek } from '../utils';
 import { CalendarCellInfo, CalendarMonthInfo, CalendarYearInfo } from './calendar-cell-info';
@@ -35,8 +37,6 @@ import { Calendar2CellDirective } from './calendar2-cell.directive';
 import { CALENDAR_CELLS, CALENDAR_TABBABLE_DATE } from './calendar2.tokens';
 import { CellStatus } from './cell-status';
 import { DateRange } from './date-range';
-import { getIntl } from '../../core/translate';
-import { LU_DATE2_TRANSLATIONS } from '../date2.translate';
 
 const MODE_HIERARCHY: CalendarMode[] = ['month', 'year', 'decade'];
 
@@ -83,6 +83,8 @@ export class Calendar2Component implements OnInit {
 	enableOverflow = input<boolean, boolean>(false, { transform: booleanAttribute });
 
 	hideToday = input<boolean, boolean>(false, { transform: booleanAttribute });
+
+	hideWeekend = input<boolean, boolean>(false, { transform: booleanAttribute });
 
 	// Date used to init the component and as internal focus model
 	date = model.required<Date>();
@@ -293,7 +295,7 @@ export class Calendar2Component implements OnInit {
 
 		return {
 			day: date.getDate(),
-			isWeekend: this.#weekInfo.weekend.includes(getIntlWeekDay(date)),
+			isWeekend: this.#weekInfo.weekend.includes(getIntlWeekDay(date)) && !this.hideWeekend(),
 			isOverflow,
 			status,
 			date,
