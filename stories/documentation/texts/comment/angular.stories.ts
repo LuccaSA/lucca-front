@@ -16,6 +16,9 @@ export default {
 
 		const { firstName, lastName, compact, small, content } = args;
 
+		const chatfeed = args['answer'] ? '[chatfeed]="true"' : '';
+		const chatfeedAnswer = args['answer'] ? '[chatfeedAnswer]="true"' : '';
+
 		const richContent = `
 			<h3>Lorem, ipsum.</h3>
 			<p>
@@ -30,8 +33,7 @@ export default {
 				date: new Date(),
 			},
 			template: `
-<div class="u-displayFlex u-flexDirectionColumn u-gapM">
-	<lu-comment-block ${avatar}${generateInputs(
+	<lu-comment-block ${chatfeed} ${avatar} ${generateInputs(
 		{
 			compact,
 			small,
@@ -45,13 +47,14 @@ export default {
 		<lu-comment [date]="date" content="Lorem ipsum dolor sit amet." />
 		<lu-comment [date]="date" content="${richContent}" />
 	</lu-comment-block>
-	<lu-comment-block ${avatar2}${generateInputs({ compact, small }, argTypes)} authorName="Chloé Alibert">
+	<lu-comment-block ${chatfeed} ${chatfeedAnswer} ${avatar2} ${generateInputs({ compact, small }, argTypes)} authorName="Chloé Alibert">
 		<ng-template #avatarTpl2>
 			<lu-user-picture [user]="{firstName: 'Chloé', lastName: 'Alibert'}"></lu-user-picture>
 		</ng-template>
 		<lu-comment [date]="date" content="${content}" />
+		<lu-comment [date]="date" content="Lorem ipsum dolor sit amet." />
 	</lu-comment-block>
-</div>`,
+`,
 		};
 	},
 } as Meta;
@@ -65,5 +68,6 @@ export const Basic: StoryObj = {
 		date: new Date(),
 		firstName: 'Marie',
 		lastName: 'Bragoulet',
+		answer: false,
 	},
 };

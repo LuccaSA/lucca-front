@@ -39,29 +39,20 @@
 	}
 }
 
-@mixin answer {
-	--components-comment-align: flex-end;
-
+@mixin chatfeed {
 	.comment {
-		--components-comment-background-color: var(--palettes-product-100);
-	}
-
-	.comment-content {
-		margin-left: 0;
+		--components-comment-background-color: var(--colors-white-color);
+		--components-comment-max-width: min(40rem, 90%);
 	}
 }
 
-@mixin chatBox {
-	--components-comment-max-width: 40rem;
-	--components-comment-background-color: var(--colors-white-color);
-	gap: var(--pr-t-spacings-200);
-
-	.commentWrapper-item {
-		display: flex;
-	}
-
+@mixin chatfeedAnswer {
 	.comment {
-		container-type: normal;
-		max-width: min(var(--components-comment-max-width), 90%);
+		--components-comment-background-color: var(--palettes-product-100);
+		--components-comment-align: end;
+		--components-comment-content-margin: 0;
+		--components-comment-margin: auto;
+		--components-comment-border-radius: var(--commons-borderRadius-L) var(--commons-borderRadius-M) var(--commons-borderRadius-L)
+			var(--commons-borderRadius-L);
 	}
 }

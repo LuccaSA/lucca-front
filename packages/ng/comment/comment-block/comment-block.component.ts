@@ -58,4 +58,12 @@ export class CommentBlockComponent {
 	get roleAttr(): string {
 		return this.role();
 	}
+
+	@Input()
+	@HostBinding('class.mod-chatfeedAnswer')
+	chatfeedAnswer = false;
+
+	@Input()
+	@HostBinding('class.mod-chatfeed')
+	chatfeed = false;
 }

@@ -30,13 +30,11 @@
 		@include wrapperCompact;
 	}
 
-	&.mod-chatbox {
-		@include chatBox;
+	&.mod-chatfeed {
+		@include chatfeed;
 	}
-}
 
-.commentWrapper-item {
-	&.mod-answer {
-		@include answer;
+	&.mod-chatfeedAnswer {
+		@include chatfeedAnswer;
 	}
 }
