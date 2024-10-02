@@ -4,6 +4,7 @@ import { toObservable } from '@angular/core/rxjs-interop';
 import { CORE_SELECT_API_TOTAL_COUNT_PROVIDER, CoreSelectApiTotalCountProvider } from '@lucca-front/ng/core-select';
 import { ALuCoreSelectApiDirective } from '@lucca-front/ng/core-select/api';
 import { Observable, combineLatest, debounceTime, map, switchMap } from 'rxjs';
+import { sanitizeClueFilter } from '../select.utils';
 import { LuJobQualificationGroupingComponent } from './job-qualification-grouping.component';
 import { LuCoreSelectJobQualification } from './models';
 
@@ -36,6 +37,17 @@ export class LuCoreSelectJobQualificationsDirective<T extends LuCoreSelectJobQua
 		this._filters.set(filters);
 	}
 
+	@Input()
+	public set searchDelimiter(delimiter: string) {
+		this._searchDelimiter = delimiter;
+	}
+
+	private _searchDelimiter: string;
+
+	public get searchDelimiter() {
+		return this._searchDelimiter;
+	}
+
 	protected _url = signal<string>('/organization/structure/api/job-qualifications');
 	protected _filters = signal<Record<string, string | number | boolean> | null>(null);
 
@@ -63,7 +75,7 @@ export class LuCoreSelectJobQualificationsDirective<T extends LuCoreSelectJobQua
 	protected override params$: Observable<Record<string, string | number | boolean>> = combineLatest([toObservable(this._filters), this.clue$]).pipe(
 		map(([filters, clue]) => ({
 			...filters,
-			...(clue ? { search: clue, sort: 'name' } : { sort: 'job.name,level.position' }),
+			...(clue ? { search: sanitizeClueFilter(clue, this.searchDelimiter), sort: 'name' } : { sort: 'job.name,level.position' }),
 		})),
 	);
 

@@ -55,6 +55,9 @@ export class LuCoreSelectUsersDirective<T extends LuCoreSelectUser = LuCoreSelec
 	displayMeOption = input(true);
 
 	includeFormerEmployees = signal(false);
+	searchDelimiter = input<string>(' ');
+
+	protected _url = signal<string | null>(null);
 
 	constructor() {
 		super();

@@ -4,6 +4,7 @@ import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 import { CORE_SELECT_API_TOTAL_COUNT_PROVIDER, CoreSelectApiTotalCountProvider } from '@lucca-front/ng/core-select';
 import { ALuCoreSelectApiDirective } from '@lucca-front/ng/core-select/api';
 import { Observable, combineLatest, debounceTime, filter, map, switchMap } from 'rxjs';
+import { sanitizeClueFilter } from '../select.utils';
 import { LuEstablishmentGroupingComponent } from './establishment-grouping.component';
 import { EstablishmentGroupingService } from './establishment-grouping.service';
 import { LuCoreSelectEstablishment } from './models';
@@ -50,6 +51,17 @@ export class LuCoreSelectEstablishmentsDirective<T extends LuCoreSelectEstablish
 		this._appInstanceId.set(id);
 	}
 
+	@Input()
+	public set searchDelimiter(delimiter: string) {
+		this._searchDelimiter = delimiter;
+	}
+
+	private _searchDelimiter: string;
+
+	public get searchDelimiter() {
+		return this._searchDelimiter;
+	}
+
 	protected _url = signal<string>('/organization/structure/api/establishments');
 	protected _filters = signal<Record<string, string | number | boolean> | null>(null);
 	protected _operationIds = signal<number[] | null>(null);
@@ -91,7 +103,7 @@ export class LuCoreSelectEstablishmentsDirective<T extends LuCoreSelectEstablish
 			...filters,
 			...(clue
 				? // When the clue is not empty, sort establishments by name
-					{ search: clue, sort: 'name' }
+					{ search: sanitizeClueFilter(clue, this.searchDelimiter), sort: 'name' }
 				: // When the clue is empty, establishments are grouped by legal unit, so sort them by legal unit name and then by name
 					{ sort: 'legalunit.name,name' }),
 			...(operationIds ? { operations: operationIds.join(',') } : {}),
