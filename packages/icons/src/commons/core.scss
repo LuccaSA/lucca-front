@@ -39,7 +39,7 @@
 
 // This mixin allows style to be applied at the root of the document or at the root of a namespace.
 // It also allows to keep component nested inside the selector based on the $nestChildren parameter.
-@mixin atRoot($nestChildren: true) {
+@mixin atRoot($nestChildren: false) {
 	@if $nestChildren {
 		// When atRoot is used inside a selector with $nestChildren set to true,
 		// the content is kept inside the selector.
@@ -48,11 +48,11 @@
 		@content;
 	} @else {
 		@at-root {
-			@if $namespace {
+			@if config.$namespace {
 				// When a namespace is set, the content is wrapped inside it.
 				// Example: .parent { @include atRoot($nestChildren: false) { .child { color: red; } } }
 				// Output: .namespace .child { color: red; }
-				#{$namespace} {
+				#{config.$namespace} {
 					@content;
 				}
 			} @else {

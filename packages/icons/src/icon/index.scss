@@ -1,34 +1,38 @@
+@use '@lucca-front/icons/src/commons/core';
+
 @use 'exports' as *;
 
-.lucca-icon {
-	@include vars;
-	@include component;
+@include core.atRoot {
+	.lucca-icon {
+		@include vars;
+		@include component($nestChildren: false);
 
-	&.mod-XXS {
-		@include XXS;
-	}
+		&.mod-XXS {
+			@include XXS;
+		}
 
-	&.mod-XS {
-		@include XS;
-	}
+		&.mod-XS {
+			@include XS;
+		}
 
-	&.mod-S {
-		@include S;
-	}
+		&.mod-S {
+			@include S;
+		}
 
-	&.mod-M {
-		@include M;
-	}
+		&.mod-M {
+			@include M;
+		}
 
-	&.mod-L {
-		@include L;
-	}
+		&.mod-L {
+			@include L;
+		}
 
-	&.mod-XL {
-		@include XL;
-	}
+		&.mod-XL {
+			@include XL;
+		}
 
-	&.mod-XXL {
-		@include XXL;
+		&.mod-XXL {
+			@include XXL;
+		}
 	}
 }
