@@ -1,134 +1,137 @@
+@use '@lucca-front/scss/src/commons/core';
 @use 'exports' as *;
 
-.button {
-	@include vars;
-	@include component;
+@include core.atRoot {
+	.button {
+		@include vars;
+		@include component;
 
-	&.mod-block {
-		@include block;
-	}
-
-	&.mod-S {
-		@include S;
-	}
-
-	&.mod-XS {
-		@include XS;
-	}
-
-	// .mod-outline is deprecated
-	&.mod-outlined,
-	&.mod-outline {
-		&:where(:not(.is-success, .is-error)) {
-			@include outlined;
+		&.mod-block {
+			@include block;
 		}
-
-		// .disabled is deprecated
-		&.is-disabled,
-		&.disabled {
-			@include outlinedDisabled;
-		}
-	}
-
-	// .mod-link deprecated
-	&.mod-text,
-	&.mod-link {
-		&:where(:not(.is-success, .is-error)) {
-			@include text;
-		}
-
-		// .disabled is deprecated
-		&.is-disabled,
-		&.disabled {
-			@include textDisabled;
-		}
-	}
-
-	// .mod-icon is deprecated
-	&.mod-withIcon,
-	&.mod-icon {
-		@include withIcon;
 
 		&.mod-S {
-			@include withIconS;
+			@include S;
 		}
 
 		&.mod-XS {
-			@include withIconXS;
-		}
-	}
-
-	&.mod-onlyIcon {
-		@include onlyIcon;
-
-		&.mod-S {
-			@include onlyIconS;
-		}
-
-		&.mod-XS {
-			@include onlyIconXS;
-		}
-	}
-
-	&.mod-delete {
-		@include delete;
-
-		// .mod-link is deprecated
-		&.mod-text,
-		&.mod-link {
-			@include deleteText;
+			@include XS;
 		}
 
 		// .mod-outline is deprecated
 		&.mod-outlined,
 		&.mod-outline {
-			@include deleteOutlined;
-		}
-	}
+			&:where(:not(.is-success, .is-error)) {
+				@include outlined;
+			}
 
-	// .mod-invert is deprecated
-	&.mod-inverted,
-	&.mod-invert {
-		@include inverted;
-	}
-
-	&.mod-more {
-		@include more;
-
-		&.mod-S {
-			@include moreS;
+			// .disabled is deprecated
+			&.is-disabled,
+			&.disabled {
+				@include outlinedDisabled;
+			}
 		}
 
-		&.mod-XS {
-			@include moreXS;
+		// .mod-link deprecated
+		&.mod-text,
+		&.mod-link {
+			&:where(:not(.is-success, .is-error)) {
+				@include text;
+			}
+
+			// .disabled is deprecated
+			&.is-disabled,
+			&.disabled {
+				@include textDisabled;
+			}
 		}
-	}
 
-	// .loading is deprecated
-	&.is-loading,
-	&.loading {
-		@include loading;
+		// .mod-icon is deprecated
+		&.mod-withIcon,
+		&.mod-icon {
+			@include withIcon;
 
-		&.mod-S {
-			@include loadingS;
+			&.mod-S {
+				@include withIconS;
+			}
+
+			&.mod-XS {
+				@include withIconXS;
+			}
 		}
-	}
 
-	// .error is deprecated
-	&.is-error,
-	&.error {
-		@include error;
-	}
+		&.mod-onlyIcon {
+			@include onlyIcon;
 
-	// .success is deprecated
-	&.is-success,
-	&.success {
-		@include success;
-	}
+			&.mod-S {
+				@include onlyIconS;
+			}
 
-	// .disabled is deprecated
-	&.is-disabled,
-	&.disabled {
-		@include disabled;
+			&.mod-XS {
+				@include onlyIconXS;
+			}
+		}
+
+		&.mod-delete {
+			@include delete;
+
+			// .mod-link is deprecated
+			&.mod-text,
+			&.mod-link {
+				@include deleteText;
+			}
+
+			// .mod-outline is deprecated
+			&.mod-outlined,
+			&.mod-outline {
+				@include deleteOutlined;
+			}
+		}
+
+		// .mod-invert is deprecated
+		&.mod-inverted,
+		&.mod-invert {
+			@include inverted;
+		}
+
+		&.mod-more {
+			@include more;
+
+			&.mod-S {
+				@include moreS;
+			}
+
+			&.mod-XS {
+				@include moreXS;
+			}
+		}
+
+		// .loading is deprecated
+		&.is-loading,
+		&.loading {
+			@include loading;
+
+			&.mod-S {
+				@include loadingS;
+			}
+		}
+
+		// .error is deprecated
+		&.is-error,
+		&.error {
+			@include error;
+		}
+
+		// .success is deprecated
+		&.is-success,
+		&.success {
+			@include success;
+		}
+
+		// .disabled is deprecated
+		&.is-disabled,
+		&.disabled {
+			@include disabled;
+		}
 	}
 }

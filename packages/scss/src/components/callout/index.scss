@@ -1,10 +1,13 @@
+@use '@lucca-front/scss/src/commons/core';
 @use 'exports' as *;
 
-.callout {
-	@include vars;
-	@include component;
+@include core.atRoot {
+	.callout {
+		@include vars;
+		@include component($nestChildren: false);
 
-	&.mod-S {
-		@include S;
+		&.mod-S {
+			@include S;
+		}
 	}
 }

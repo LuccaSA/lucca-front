@@ -4,7 +4,7 @@
 @use '@lucca-front/scss/src/components/button/exports' as button;
 @use '@lucca-front/scss/src/commons/core';
 
-@mixin component($atRoot: null) {
+@mixin component($nestChildren: true) {
 	align-items: flex-start;
 	position: relative;
 	border-radius: var(--commons-borderRadius-L);
@@ -26,7 +26,7 @@
 		--commons-text-link-hover: var(--palettes-neutral-700);
 	}
 
-	@include core.atRoot($atRoot) {
+	@include core.atRoot($nestChildren) {
 		.callout-content {
 			flex: 1;
 			display: flex;
