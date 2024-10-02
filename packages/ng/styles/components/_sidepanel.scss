@@ -8,55 +8,57 @@
 	--components-sidepanel-XL: 60rem;
 }
 
-.lu-popup-panel {
-	&.mod-sidepanel {
-		position: fixed !important;
-		top: 0;
-		right: 0;
-		bottom: 0;
-		width: var(--components-sidepanel-M);
-		max-width: 100%;
-		max-height: 100vh;
-		border-radius: 0;
-		animation-name: sidepanel;
-		transform-origin: center center;
+@include core.atRoot {
+	.lu-popup-panel {
+		&.mod-sidepanel {
+			position: fixed !important;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			width: var(--components-sidepanel-M);
+			max-width: 100%;
+			max-height: 100vh;
+			border-radius: 0;
+			animation-name: sidepanel;
+			transform-origin: center center;
 
-		&.mod-XS {
-			width: var(--components-sidepanel-XS);
-		}
+			&.mod-XS {
+				width: var(--components-sidepanel-XS);
+			}
 
-		&.mod-S {
-			width: var(--components-sidepanel-S);
-		}
+			&.mod-S {
+				width: var(--components-sidepanel-S);
+			}
 
-		&.mod-L {
-			width: var(--components-sidepanel-L);
-		}
+			&.mod-L {
+				width: var(--components-sidepanel-L);
+			}
 
-		&.mod-XL {
-			width: var(--components-sidepanel-XL);
+			&.mod-XL {
+				width: var(--components-sidepanel-XL);
+			}
 		}
 	}
-}
 
-.lu-sidepanel-panel-inner,
-.lu-sidepanel-container {
-	display: flex;
-	flex-flow: column;
-	flex-grow: 1;
-	height: 100%;
-}
-
-.lu-sidepanel-container {
-	overflow: auto;
-}
-
-@keyframes sidepanel {
-	0% {
-		transform: translate(100%, 0);
+	.lu-sidepanel-panel-inner,
+	.lu-sidepanel-container {
+		display: flex;
+		flex-flow: column;
+		flex-grow: 1;
+		height: 100%;
 	}
 
-	100% {
-		transform: translate(0, 0);
+	.lu-sidepanel-container {
+		overflow: auto;
+	}
+
+	@keyframes sidepanel {
+		0% {
+			transform: translate(100%, 0);
+		}
+
+		100% {
+			transform: translate(0, 0);
+		}
 	}
 }
