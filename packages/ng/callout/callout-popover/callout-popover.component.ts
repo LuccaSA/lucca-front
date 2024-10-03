@@ -7,12 +7,14 @@ import { LuccaIcon } from '@lucca-front/icons';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { Palette, PortalContent, PortalDirective } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
-import { CalloutState, CalloutStateMap } from '../callout-state';
+import { CalloutIconPipe } from '../callout-icon.pipe';
+import { CalloutState } from '../callout-state';
+import { getCalloutPalette } from '../callout.utils';
 
 @Component({
 	selector: 'lu-callout-popover',
 	standalone: true,
-	imports: [CommonModule, IconComponent, ButtonComponent, PortalDirective],
+	imports: [CommonModule, IconComponent, ButtonComponent, PortalDirective, CalloutIconPipe],
 	animations: [
 		trigger('tooltip', [
 			state(
@@ -100,15 +102,7 @@ export class CalloutPopoverComponent implements OnDestroy {
 	 * If one of the icon or palette inputs are filled along with the state input, their values will have the priority over
 	 * state (so setting state to success and palette to warning will make the palette warning)
 	 */
-	set state(state: CalloutState) {
-		const { icon, palette } = CalloutStateMap[state];
-		if (this.palette === 'none') {
-			this.palette = palette;
-		}
-		if (!this.icon) {
-			this.icon = icon;
-		}
-	}
+	state: CalloutState;
 
 	/**
 	 * Heading for the details popover
@@ -124,9 +118,10 @@ export class CalloutPopoverComponent implements OnDestroy {
 	}
 
 	get calloutClasses() {
+		const palette = getCalloutPalette(this.state, this.palette);
 		return {
 			[`mod-${this.size}`]: !!this.size,
-			[`palette-${this.palette}`]: !!this.palette,
+			[`palette-${palette}`]: !!palette,
 		};
 	}
 
@@ -137,8 +132,9 @@ export class CalloutPopoverComponent implements OnDestroy {
 	}
 
 	get calloutOverlayHeadClasses() {
+		const palette = getCalloutPalette(this.state, this.palette);
 		return {
-			[`palette-${this.palette}`]: !!this.palette,
+			[`palette-${palette}`]: !!palette,
 		};
 	}
 

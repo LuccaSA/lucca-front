@@ -15,7 +15,8 @@ const SCHEMATICS = path.join(ROOT, 'packages', 'ng', 'schematics');
 const OUTPUT = path.join(ROOT, 'dist');
 const OUTPUT_SCSS = path.join(OUTPUT, 'scss');
 const OUTPUT_ICONS = path.join(OUTPUT, 'icons');
-const OUTPUT_SCHEMATICS = path.join(OUTPUT, 'ng', 'schematics');
+const OUTPUT_NG = path.join(OUTPUT, 'ng');
+const OUTPUT_SCHEMATICS = path.join(OUTPUT_NG, 'schematics');
 
 runTask('Lucca Front compilation', async () => {
 	// Clean dist directories
@@ -83,6 +84,10 @@ runTask('Lucca Front compilation', async () => {
 			context: SCHEMATICS,
 			output: OUTPUT_SCHEMATICS,
 		});
+
+		const npmIgnoreFile = path.join(OUTPUT_NG, '.npmignore');
+		const toIgnore = '!/schematics/lib/local-deps/package.json';
+		addLineToFile(npmIgnoreFile, toIgnore);
 	});
 });
 
@@ -188,4 +193,25 @@ async function runTask(taskName, func) {
 	const from = Date.now();
 	await func();
 	console.log(`[${taskName}] Done in ${new Intl.NumberFormat().format(Date.now() - from)}ms`);
+}
+
+/**
+ *
+ * @param {string} file
+ * @param {string} line
+ */
+function addLineToFile(file, line) {
+	if (!fs.existsSync(file)) {
+		return;
+	}
+
+	let fileContent = fs.readFileSync(file, 'utf-8');
+
+	if (!fileContent.includes(line)) {
+		fileContent += '\n';
+		fileContent += line;
+		fileContent += '\n';
+
+		fs.writeFileSync(file, fileContent);
+	}
 }

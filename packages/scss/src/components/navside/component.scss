@@ -3,9 +3,10 @@
 @use '@lucca-front/scss/src/commons/utils/a11y';
 @use '@lucca-front/scss/src/commons/utils/color';
 @use '@lucca-front/scss/src/commons/utils/keyframe';
+@use '@lucca-front/scss/src/commons/utils/namespace';
 @use '@lucca-front/scss/src/components/numericBadge/exports' as numericBadge;
 
-@mixin component($atRoot: 'without: rule') {
+@mixin component($atRoot: namespace.$defaultAtRoot) {
 	bottom: 0;
 	left: 0;
 	top: 0;
@@ -16,6 +17,7 @@
 	background-color: var(--components-navSide-fullwidth-palette-bg-color);
 	padding-top: var(--components-navSide-padding-top);
 	width: var(--commons-navSide-width);
+	scroll-margin-top: var(--commons-banner-height);
 
 	.numericBadge {
 		@include numericBadge.S;

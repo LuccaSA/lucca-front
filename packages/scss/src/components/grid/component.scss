@@ -3,16 +3,16 @@
 @use '@lucca-front/scss/src/commons/utils/media';
 @use '@lucca-front/scss/src/commons/utils/container';
 @use '@lucca-front/scss/src/commons/config';
+@use '@lucca-front/scss/src/commons/utils/namespace';
 
-@mixin component($atRoot: 'without: rule') {
+@mixin component($atRoot: namespace.$defaultAtRoot) {
 	display: grid;
 	grid-template-columns: var(--grid-template-columns);
 	gap: var(--grid-row-gap) var(--grid-column-gap);
 
 	// workaround for Angular replacing CamelCase by kebab-case
 	// max-width: var(--grid-max-width, var(--grid-maxWidth));
-	width: var(--grid-max-width, var(--grid-maxWidth));
-	max-width: 100%;
+	max-width: var(--grid-max-width, var(--grid-maxWidth));
 
 	@at-root ($atRoot) {
 		.grid-containerWrapper {
