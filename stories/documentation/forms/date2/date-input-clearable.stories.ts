@@ -19,7 +19,9 @@ export default {
 	render: (args) => {
 		const { min, max, selected } = args;
 		return {
-			props: {},
+			props: {
+				selected: selected || new Date(),
+			},
 			template: `
 			<lu-date-input [clearable]="true" [(ngModel)]="selected" [min]="min" [max]="max"></lu-date-input>
 			<pr-story-model-display>{{selected}}</pr-story-model-display>
