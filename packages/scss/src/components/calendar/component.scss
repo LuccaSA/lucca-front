@@ -69,12 +69,12 @@
 			border-color: transparent var(--components-calendarWrapper-navigationBackground);
 
 			&.mod-prev {
-				left: 0;
+				left: calc(var(--pr-t-spacings-50) / 2);
 				border-right: 0;
 			}
 
 			&.mod-next {
-				right: 0;
+				right: calc(var(--pr-t-spacings-50) / 2);
 				border-left: 0;
 			}
 		}

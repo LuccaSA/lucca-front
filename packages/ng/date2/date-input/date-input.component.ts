@@ -64,10 +64,9 @@ export class DateInputComponent implements ControlValueAccessor {
 	enableOverflow = input<boolean, boolean>(false, { transform: booleanAttribute });
 	showOverflow = input<boolean, boolean>(false, { transform: booleanAttribute });
 	hideToday = input<boolean, boolean>(false, { transform: booleanAttribute });
+	clearable = input<boolean, boolean>(false, { transform: booleanAttribute });
 
 	getCellInfo = input<((day: Date, mode: CalendarMode) => CellStatus) | null>();
-
-	clearable = input<boolean, boolean>(false, { transform: booleanAttribute });
 
 	popoverPositions: ConnectionPositionPair[] = [
 		new ConnectionPositionPair({ originX: 'end', originY: 'bottom' }, { overlayX: 'end', overlayY: 'top' }, 16, 6),
@@ -198,8 +197,10 @@ export class DateInputComponent implements ControlValueAccessor {
 		this.move(1);
 	}
 
-	clear() {
-		// todo clear
+	clearValue(input: HTMLInputElement) {
+		input.value = '';
+		this.selectedDate.set(null);
+		this.onTouched?.();
 	}
 
 	currentDateChangeFromCalendar(date: Date): void {

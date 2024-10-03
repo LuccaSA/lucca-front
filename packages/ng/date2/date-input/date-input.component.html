@@ -1,6 +1,5 @@
 <div class="textField">
 	<div class="textField-input">
-		<!-- TODO add mod clearable -->
 		<input
 			type="text"
 			id="date"
@@ -19,11 +18,12 @@
 			(keyup.space)=" popoverRef.opened() ? popoverRef.focusBackToContent($event) : popoverRef.openPopover(true)"
 			(keyup.escape)="popoverRef.close()"
 			[disabled]="disabled"
-			[attr.style]="clearable() ? 'padding-right: 4rem' : null"
 		/>
+
 		<div class="textField-input-affix">
-			@if (clearable()) {
-			<button class="clear u-pointerEventsAuto" type="button" (click)="clear()">
+			@if (clearable() && date.value !== '') {
+			<button class="textField-input-affix-clear clear" type="button" (click)="clearValue(date)">
+				<span aria-hidden="true" class="lucca-icon icon-signClose"></span>
 				<span class="u-mask">{{ intl.clear }}</span>
 			</button>
 			}
