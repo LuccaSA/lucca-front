@@ -11,6 +11,7 @@ export interface Date2Translate {
 	pickDate: string;
 	previous: string;
 	next: string;
+	clear: string;
 }
 
 export const luDate2Translations: LuTranslation<Date2Translate> = Translations;

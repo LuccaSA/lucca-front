@@ -1,7 +1,7 @@
 import { computed, Directive, ElementRef, HostBinding, HostListener, inject, input } from '@angular/core';
 import { CALENDAR_TABBABLE_DATE } from './calendar2.tokens';
 import { CalendarMode } from './calendar-mode';
-import { add, endOfWeek, startOfWeek, sub } from 'date-fns';
+import { add, addMonths, addYears, endOfWeek, startOfWeek, sub, subMonths, subYears } from 'date-fns';
 import type { Duration } from 'date-fns/types';
 import { WEEK_INFO } from '../calendar.token';
 import { comparePeriods, getJSFirstDayOfWeek } from '../utils';
@@ -40,6 +40,8 @@ export class Calendar2CellDirective {
 
 	@HostListener('keydown', ['$event'])
 	keydown($event: KeyboardEvent): void {
+		// See https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/examples/datepicker-dialog/#ex_label for keyboard
+		// navigation standards on date pickers
 		const cellsPerRow = this.luCalendar2Mode() === 'month' ? 7 : 3;
 		const datePropertyToEdit = modeToDurationKey[this.luCalendar2Mode()];
 		switch ($event.key) {
@@ -68,6 +70,26 @@ export class Calendar2CellDirective {
 			case 'End':
 				if (this.luCalendar2Mode() === 'month') {
 					this.#tabbableDate.set(endOfWeek(this.luCalendar2Date(), { weekStartsOn: getJSFirstDayOfWeek(this.#weekInfo) }));
+					$event.preventDefault();
+				}
+				break;
+			case 'PageUp':
+				if (this.luCalendar2Mode() === 'month') {
+					if ($event.shiftKey) {
+						this.#tabbableDate.set(subYears(this.luCalendar2Date(), 1));
+					} else {
+						this.#tabbableDate.set(subMonths(this.luCalendar2Date(), 1));
+					}
+					$event.preventDefault();
+				}
+				break;
+			case 'PageDown':
+				if (this.luCalendar2Mode() === 'month') {
+					if ($event.shiftKey) {
+						this.#tabbableDate.set(addYears(this.luCalendar2Date(), 1));
+					} else {
+						this.#tabbableDate.set(addMonths(this.luCalendar2Date(), 1));
+					}
 					$event.preventDefault();
 				}
 				break;

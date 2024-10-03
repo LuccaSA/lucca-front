@@ -46,6 +46,7 @@ export default {
 			},
 			template: `
 			<lu-date-input [(ngModel)]="selected" [min]="min" [max]="max" ${generateInputs(flags, argTypes)}></lu-date-input>
+
 			<pr-story-model-display>{{selected}}</pr-story-model-display>
 			`,
 		};

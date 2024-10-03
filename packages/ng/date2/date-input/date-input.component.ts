@@ -1,6 +1,6 @@
 import { ConnectionPositionPair } from '@angular/cdk/overlay';
 import { booleanAttribute, ChangeDetectionStrategy, Component, computed, effect, ElementRef, forwardRef, inject, input, LOCALE_ID, signal, viewChild, ViewEncapsulation } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors, Validator } from '@angular/forms';
 import { getIntl, ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { InputDirective } from '@lucca-front/ng/form-field';
 import { IconComponent } from '@lucca-front/ng/icon';
@@ -27,9 +27,14 @@ import { comparePeriods, startOfPeriod } from '../utils';
 			useExisting: forwardRef(() => DateInputComponent),
 			multi: true,
 		},
+		{
+			provide: NG_VALIDATORS,
+			useExisting: forwardRef(() => DateInputComponent),
+			multi: true,
+		},
 	],
 })
-export class DateInputComponent implements ControlValueAccessor {
+export class DateInputComponent implements ControlValueAccessor, Validator {
 	#locale = inject(LOCALE_ID);
 
 	#intlDateTimeFormat = new Intl.DateTimeFormat(this.#locale);
@@ -56,13 +61,15 @@ export class DateInputComponent implements ControlValueAccessor {
 	onTouched?: () => void;
 	disabled = false;
 
+	inputFocused = signal(false);
+
 	min = input<Date>(new Date('1/1/1000'));
 	max = input<Date | null>(null);
 
 	ranges = input<DateRange[]>([]);
 
-	enableOverflow = input<boolean, boolean>(false, { transform: booleanAttribute });
-	showOverflow = input<boolean, boolean>(false, { transform: booleanAttribute });
+	enableOverflow = input<boolean>(true);
+	showOverflow = input<boolean>(true);
 	hideToday = input<boolean, boolean>(false, { transform: booleanAttribute });
 	clearable = input<boolean, boolean>(false, { transform: booleanAttribute });
 
@@ -84,7 +91,7 @@ export class DateInputComponent implements ControlValueAccessor {
 	calendar = viewChild(Calendar2Component);
 
 	displayValue = computed(() => {
-		if (this.selectedDate()) {
+		if (this.selectedDate() && this.isValidDate(this.selectedDate())) {
 			return this.#intlDateTimeFormat.format(this.selectedDate());
 		}
 		return null;
@@ -96,7 +103,6 @@ export class DateInputComponent implements ControlValueAccessor {
 		const infoFromInput = this.getCellInfo()?.(date, mode);
 		return {
 			classes: [...(infoFromInput?.classes || [])],
-			// TODO compare min and max based on mode
 			disabled: infoFromInput?.disabled || !this.isInMinMax(date, mode),
 			selected: this.selectedDate() && this.calendarMode() === mode && comparePeriods(mode, date, this.selectedDate()),
 		};
@@ -114,10 +120,14 @@ export class DateInputComponent implements ControlValueAccessor {
 		effect(
 			() => {
 				const inputValue = this.userTextInput();
-				const parsed = parse(inputValue, this.#dateFormat, startOfDay(new Date()));
-				if (parsed.getFullYear() > 999) {
-					this.selectedDate.set(startOfDay(parsed));
-					this.currentDate.set(startOfDay(parsed));
+				if (inputValue.length > 0) {
+					const parsed = parse(inputValue, this.#dateFormat, startOfDay(new Date()));
+					if (parsed.getFullYear() > 999) {
+						this.selectedDate.set(startOfDay(parsed));
+						this.currentDate.set(startOfDay(parsed));
+					} else {
+						this.selectedDate.set(parsed);
+					}
 				}
 			},
 			{ allowSignalWrites: true },
@@ -130,13 +140,21 @@ export class DateInputComponent implements ControlValueAccessor {
 			if (tabbableDate && !comparePeriods(calendarMode, tabbableDate, this.currentDate())) {
 				this.currentDate.set(startOfPeriod(calendarMode, tabbableDate));
 			}
-			if (!this.isNavigationButtonFocused) {
+			if (!this.isNavigationButtonFocused && !this.inputFocused()) {
 				this.calendar()?.blurTabbableDate();
 				setTimeout(() => {
 					this.calendar()?.focusTabbableDate();
 				});
 			}
 		});
+	}
+
+	validate(control: AbstractControl<Date, Date>): ValidationErrors {
+		return this.isValidDate(control.value) ? null : { date: true };
+	}
+
+	isValidDate(date: Date): boolean {
+		return !!date && !isNaN(date.getTime());
 	}
 
 	isInMinMax(date: Date, mode: CalendarMode): boolean {
@@ -197,7 +215,7 @@ export class DateInputComponent implements ControlValueAccessor {
 		this.move(1);
 	}
 
-	clearValue(input: HTMLInputElement) {
+	clear(input: HTMLInputElement) {
 		input.value = '';
 		this.selectedDate.set(null);
 		this.onTouched?.();

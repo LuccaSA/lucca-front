@@ -10,7 +10,8 @@
 			aria-describedby="dateMessage"
 			[value]="displayValue()"
 			(input)="userTextInput.set(date.value)"
-			(blur)="onTouched?.()"
+			(blur)="onTouched?.();inputFocused.set(false)"
+			(focus)="inputFocused.set(true)"
 			aria-haspopup="true"
 			role="combobox"
 			(click)="popoverRef.openPopover(true, true)"
@@ -22,7 +23,7 @@
 
 		<div class="textField-input-affix">
 			@if (clearable() && date.value !== '') {
-			<button class="textField-input-affix-clear clear" type="button" (click)="clearValue(date)">
+			<button class="textField-input-affix-clear clear" type="button" (click)="clear(date)">
 				<span aria-hidden="true" class="lucca-icon icon-signClose"></span>
 				<span class="u-mask">{{ intl.clear }}</span>
 			</button>
