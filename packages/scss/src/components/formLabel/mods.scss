@@ -20,4 +20,5 @@
 
 @mixin counter {
 	--components-formLabel-width: auto;
+	--components-formLabel-paddingRight: var(--pr-t-spacings-600);
 }

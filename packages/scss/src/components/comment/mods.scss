@@ -1,4 +1,5 @@
 @use '@lucca-front/scss/src/commons/utils/a11y';
+@use '@lucca-front/scss/src/commons/utils/namespace';
 
 @mixin S {
 	--components-comment-text-fontSize: var(--sizes-S-fontSize);
@@ -16,7 +17,7 @@
 }
 
 @mixin narrow {
-	@at-root {
+	@at-root (namespace.$defaultAtRoot) {
 		.comment-infos-content {
 			--components-comment-info-content-display: flex;
 		}

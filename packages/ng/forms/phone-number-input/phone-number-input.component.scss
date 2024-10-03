@@ -17,3 +17,9 @@ lu-phone-number-input {
 		flex-grow: 1;
 	}
 }
+
+.phoneNumber-option-flag {
+	vertical-align: top;
+	margin-block-start: var(--pr-t-spacings-50);
+	margin-inline-end: var(--pr-t-spacings-100);
+}

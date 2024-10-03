@@ -20,11 +20,13 @@ export default {
 			control: {
 				type: 'boolean',
 			},
+			if: { arg: 'template', truthy: false },
 		},
 		L: {
 			control: {
 				type: 'boolean',
 			},
+			if: { arg: 'template', truthy: false },
 		},
 		invert: {
 			control: {
@@ -32,7 +34,7 @@ export default {
 			},
 		},
 		template: {
-			options: ['', 'mod-popin', 'mod-drawer', 'mod-fullpage'],
+			options: ['', 'mod-popin', 'mod-drawer', 'mod-fullPage'],
 			control: {
 				type: 'select',
 			},

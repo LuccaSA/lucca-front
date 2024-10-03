@@ -1,7 +1,8 @@
+@use '@lucca-front/scss/src/commons/utils/namespace';
 @use '@lucca-front/scss/src/components/avatar/exports' as avatar;
 @use '@lucca-front/scss/src/commons/utils/reset';
 
-@mixin component($atRoot: 'without: rule') {
+@mixin component($atRoot: namespace.$defaultAtRoot) {
 	container: comment / inline-size;
 	display: flex;
 	flex-direction: column;

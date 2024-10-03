@@ -1,7 +1,8 @@
 @use '@lucca-front/scss/src/components/button/exports' as button;
 @use '@lucca-front/scss/src/commons/utils/a11y';
+@use '@lucca-front/scss/src/commons/utils/namespace';
 
-@mixin component($atRoot: 'without: rule') {
+@mixin component($atRoot: namespace.$defaultAtRoot) {
 	display: block;
 	background-color: var(--pr-t-elevation-surface-raised);
 	box-shadow: var(--pr-t-elevation-shadow-overlay);
@@ -11,31 +12,27 @@
 	min-width: var(--pr-t-spacings-500);
 	animation: popup var(--commons-animations-durations-fast) ease 1 forwards;
 
-	@at-root {
-		.popover-close {
-			// :not(.class) is only there to increase specificity when the class isn’t present
-			// but the class should be present, and this code is temporary
-			&.button,
-			&:not(.button) {
-				@include button.outlined;
-				@include button.XS;
-				@include button.onlyIconXS;
+	// need of a higher specificity
+	.popover-close {
+		@include button.outlined;
+		@include button.XS;
+		@include button.onlyIconXS;
 
-				--components-button-padding: var(--pr-t-spacings-50);
+		--components-button-padding: var(--pr-t-spacings-50);
 
-				padding: 0;
-				border-radius: 50%;
-				position: absolute;
-				left: calc(var(--pr-t-spacings-100) * -1);
-				top: calc(var(--pr-t-spacings-100) * -1);
-				z-index: 2;
+		padding: 0;
+		border-radius: 50%;
+		position: absolute;
+		left: calc(var(--pr-t-spacings-100) * -1);
+		top: calc(var(--pr-t-spacings-100) * -1);
+		z-index: 2;
 
-				&:not(:focus-visible) {
-					@include a11y.mask;
-				}
-			}
+		&:not(:focus-visible) {
+			@include a11y.mask;
 		}
+	}
 
+	@at-root ($atRoot) {
 		.popover-contentOptional {
 			padding: var(--pr-t-spacings-100) var(--pr-t-spacings-150);
 		}

@@ -50,7 +50,7 @@
 	// .mod-outline is deprecated
 	&:not(.mod-outlined, .mod-outline) {
 		.numericBadge {
-			@include numericBadge.product;
+			@include numericBadge.inherit;
 		}
 	}
 
