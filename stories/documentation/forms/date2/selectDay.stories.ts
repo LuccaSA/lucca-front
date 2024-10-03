@@ -46,4 +46,4 @@ export default {
 	},
 } as Meta;
 
-export const DayInfo: StoryObj<Calendar2Component> = {};
+export const SelectDay: StoryObj<Calendar2Component> = {};

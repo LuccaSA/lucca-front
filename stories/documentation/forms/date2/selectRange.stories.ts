@@ -50,4 +50,4 @@ export default {
 	},
 } as Meta;
 
-export const Range: StoryObj<Calendar2Component> = {};
+export const SelectRange: StoryObj<Calendar2Component> = {};

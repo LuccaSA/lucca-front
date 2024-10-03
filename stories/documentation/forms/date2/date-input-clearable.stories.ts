@@ -21,11 +21,11 @@ export default {
 		return {
 			props: {},
 			template: `
-			<lu-date-input [(ngModel)]="selected" [min]="min" [max]="max"></lu-date-input>
+			<lu-date-input [clearable]="true" [(ngModel)]="selected" [min]="min" [max]="max"></lu-date-input>
 			<pr-story-model-display>{{selected}}</pr-story-model-display>
 			`,
 		};
 	},
 } as Meta;
 
-export const Clear: StoryObj<DateInputComponent> = {};
+export const Clearable: StoryObj<DateInputComponent> = {};

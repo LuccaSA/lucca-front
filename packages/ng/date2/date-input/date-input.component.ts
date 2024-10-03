@@ -198,7 +198,9 @@ export class DateInputComponent implements ControlValueAccessor {
 		this.move(1);
 	}
 
-	clear() {}
+	clear() {
+		// todo clear
+	}
 
 	currentDateChangeFromCalendar(date: Date): void {
 		this.tabbableDate.set(date);

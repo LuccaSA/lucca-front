@@ -20,10 +20,10 @@ export default {
 				currentMonth: new Date(),
 			},
 			template: `
-				<lu-calendar2 [hideWeekend]="true" [showOverflow]="true" [enableOverflow]="true" [date]="currentMonth" mode="month" (dateClicked)="selected($event)"></lu-calendar2>
+				<lu-calendar2 [hideToday]="false" [showOverflow]="true" [enableOverflow]="false" [date]="currentMonth" mode="month" (dateClicked)="selected($event)"></lu-calendar2>
 			`,
 		};
 	},
 } as Meta;
 
-export const HideWeekend: StoryObj<Calendar2Component> = {};
+export const optionOverflowDisabled: StoryObj<Calendar2Component> = {};
