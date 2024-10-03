@@ -1,1 +1,11 @@
-<ng-content></ng-content>
+<ng-template #content><ng-content></ng-content></ng-template>
+
+@if (isSingleComment()) {
+<div class="commentWrapper" [class.mod-S]="small" [class.mod-compact]="compact" [class.mod-chatAnswer]="chatAnswer">
+	<ng-container *ngTemplateOutlet="content"></ng-container>
+</div>
+} @else {
+<ol class="commentWrapper" [class.mod-S]="small" [class.mod-compact]="compact" [class.mod-chatAnswer]="chatAnswer">
+	<ng-container *ngTemplateOutlet="content"></ng-container>
+</ol>
+}

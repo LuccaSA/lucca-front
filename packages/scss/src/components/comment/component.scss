@@ -1,4 +1,5 @@
 @use '@lucca-front/scss/src/components/avatar/exports' as avatar;
+@use '@lucca-front/scss/src/commons/utils/reset';
 
 @mixin component($atRoot: 'without: rule') {
 	container: comment / inline-size;
@@ -91,10 +92,6 @@
 			gap: var(--pr-t-spacings-100);
 			margin: 0;
 			padding: 0;
-
-			& + & {
-				margin-top: var(--pr-t-spacings-200);
-			}
 		}
 
 		.commentWrapper-item {
@@ -104,5 +101,18 @@
 				padding-left: var(--components-comment-content-margin);
 			}
 		}
+	}
+}
+
+@mixin chat {
+	@include reset.list;
+
+	display: flex;
+	flex-direction: column;
+	gap: var(--pr-t-spacings-200);
+
+	.comment {
+		--components-comment-background-color: var(--colors-white-color);
+		--components-comment-max-width: min(66ch, 90%);
 	}
 }

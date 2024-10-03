@@ -39,14 +39,7 @@
 	}
 }
 
-@mixin chatfeed {
-	.comment {
-		--components-comment-background-color: var(--colors-white-color);
-		--components-comment-max-width: min(40rem, 90%);
-	}
-}
-
-@mixin chatfeedAnswer {
+@mixin chatAnswer {
 	.comment {
 		--components-comment-background-color: var(--palettes-product-100);
 		--components-comment-align: end;
