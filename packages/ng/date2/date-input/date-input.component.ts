@@ -12,6 +12,7 @@ import { CellStatus } from '../calendar2/cell-status';
 import { DateRange } from '../calendar2/date-range';
 import { LU_DATE2_TRANSLATIONS } from '../date2.translate';
 import { comparePeriods, startOfPeriod } from '../utils';
+import { getDateFormat } from '../date-format';
 
 @Component({
 	selector: 'lu-date-input',
@@ -40,19 +41,7 @@ export class DateInputComponent implements ControlValueAccessor, Validator {
 	#intlDateTimeFormat = new Intl.DateTimeFormat(this.#locale);
 
 	// Contains the current date format (like dd/mm/yy etc) based on current locale
-	#dateFormat = this.#intlDateTimeFormat.formatToParts(new Date('01/01/2024')).reduce((acc, part) => {
-		switch (part.type) {
-			case 'day':
-				return `${acc}${'d'.repeat(part.value.length)}`;
-			case 'month':
-				return `${acc}${'M'.repeat(part.value.length)}`;
-			case 'year':
-				return `${acc}${'y'.repeat(part.value.length)}`;
-			case 'literal':
-				return `${acc}${part.value}`;
-		}
-		return acc;
-	}, '');
+	#dateFormat = getDateFormat(this.#locale);
 
 	intl = getIntl(LU_DATE2_TRANSLATIONS);
 
