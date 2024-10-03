@@ -50,8 +50,6 @@ export class DateInputComponent implements ControlValueAccessor, Validator {
 	onTouched?: () => void;
 	disabled = false;
 
-	inputFocused = signal(false);
-
 	min = input<Date>(new Date('1/1/1000'));
 	max = input<Date | null>(null);
 
@@ -61,6 +59,7 @@ export class DateInputComponent implements ControlValueAccessor, Validator {
 	showOverflow = input<boolean>(true);
 	hideToday = input<boolean, boolean>(false, { transform: booleanAttribute });
 	clearable = input<boolean, boolean>(false, { transform: booleanAttribute });
+	placeholder = input<string>(this.#dateFormat);
 
 	getCellInfo = input<((day: Date, mode: CalendarMode) => CellStatus) | null>();
 
@@ -70,6 +69,8 @@ export class DateInputComponent implements ControlValueAccessor, Validator {
 	];
 
 	calendarMode = signal<CalendarMode>('month');
+
+	inputFocused = signal(false);
 
 	protected currentDate = signal(startOfMonth(new Date()));
 
