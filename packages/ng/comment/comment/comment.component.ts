@@ -12,7 +12,7 @@ import { COMMENT_BLOCK_INSTANCE } from '../token';
 	encapsulation: ViewEncapsulation.None,
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	host: {
-		class: 'commentWrapper-item mod-WrapperAvatar',
+		class: 'commentWrapper-item',
 	},
 })
 export class CommentComponent {

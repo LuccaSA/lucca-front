@@ -16,6 +16,15 @@
 	}
 
 	@at-root ($atRoot) {
+		.commentWrapper {
+			display: flex;
+			flex-direction: column;
+			gap: var(--pr-t-spacings-100);
+			margin: 0;
+			padding: 0;
+			list-style-type: none;
+		}
+
 		.comment-infos {
 			display: flex;
 			font-style: normal;
@@ -85,22 +94,6 @@
 		.comment-content-text {
 			font-size: var(--components-comment-text-fontSize);
 			line-height: var(--components-comment-text-lineHeight);
-		}
-
-		.commentWrapper {
-			display: flex;
-			flex-direction: column;
-			gap: var(--pr-t-spacings-100);
-			margin: 0;
-			padding: 0;
-		}
-
-		.commentWrapper-item {
-			list-style: none;
-
-			&.mod-WrapperAvatar ~ &:not(.mod-WrapperAvatar) {
-				padding-left: var(--components-comment-content-margin);
-			}
 		}
 	}
 }
