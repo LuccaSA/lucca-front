@@ -9,6 +9,8 @@ export interface CalendarCellInfo {
 	status: CellStatus;
 	isCurrent: boolean;
 	classes: string[];
+	disabled: boolean;
+	label?: string;
 	rangeInfo: {
 		range?: DateRange;
 		isStart: boolean;

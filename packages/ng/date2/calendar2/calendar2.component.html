@@ -37,12 +37,11 @@
 						luCalendar2Mode="month"
 						class="calendar-table-body-row-cell-action"
 						type="button"
-						[disabled]="day.status?.disabled || (day.isOverflow && !enableOverflow())"
-						(click)="onCellClicked(day.date)"
+						[attr.aria-disabled]="day.disabled ? 'true' : null"
+						(click)="day.disabled?null:onCellClicked(day.date)"
+						[luTooltip]="day.label"
 					>
-						{{ day.day }} @if (day.rangeInfo?.label) {
-						<span class="u-mask">({{ day.rangeInfo?.label }})</span>
-						} @if (day.isCurrent) {
+						{{ day.day }} @if (day.isCurrent) {
 						<span class="u-mask">({{ todayLabel }})</span>
 						} @if (day.isWeekend) {
 						<svg class="calendar-table-body-row-cell-action-stripes">
@@ -82,10 +81,10 @@
 		</symbol>
 	</svg>
 	<!--
-	<div class="u-paddingXS">
-		<button type="button" class="button mod-block mod-S mod-text">Aujourd’hui</button>
-	</div>
-	-->
+											<div class="u-paddingXS">
+												<button type="button" class="button mod-block mod-S mod-text">Aujourd’hui</button>
+											</div>
+											-->
 	} @case ('year') {
 	<div class="calendar-name" id="calendar-year-name">
 		<button type="button" class="calendar-name-button" (click)="displayMode.set('decade')">{{ currentYearLabel() }}</button>

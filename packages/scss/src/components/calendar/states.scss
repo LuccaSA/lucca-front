@@ -1,6 +1,6 @@
 @mixin daysOff {
 	.calendar-table-body-row-cell-action {
-		&:not(:disabled) {
+		&:not(:disabled, [aria-disabled=true]) {
 			&:active {
 				--components-calendar-table-body-row-cell-action-stripesColor: var(--palettes-product-900);
 			}
@@ -194,7 +194,7 @@
 	$parent: '.calendar-table-body-row';
 	$child: '.calendar-table-body-row-cell';
 	$start: #{$child + '.is-start'};
-	$action: '.calendar-table-body-row-cell-action:not(:disabled)';
+	$action: '.calendar-table-body-row-cell-action:not(:disabled, [aria-disabled=true])';
 
 	#{$parent} {
 		&:has(#{$start}) {

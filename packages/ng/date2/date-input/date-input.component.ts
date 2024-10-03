@@ -84,7 +84,7 @@ export class DateInputComponent implements ControlValueAccessor, Validator {
 		if (this.selectedDate() && this.isValidDate(this.selectedDate())) {
 			return this.#intlDateTimeFormat.format(this.selectedDate());
 		}
-		return null;
+		return this.userTextInput();
 	});
 
 	userTextInput = signal<string>('');
@@ -95,6 +95,7 @@ export class DateInputComponent implements ControlValueAccessor, Validator {
 			classes: [...(infoFromInput?.classes || [])],
 			disabled: infoFromInput?.disabled || !this.isInMinMax(date, mode),
 			selected: this.selectedDate() && this.calendarMode() === mode && comparePeriods(mode, date, this.selectedDate()),
+			label: infoFromInput.label,
 		};
 	};
 

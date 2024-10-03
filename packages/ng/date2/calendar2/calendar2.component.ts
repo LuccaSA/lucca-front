@@ -37,13 +37,14 @@ import { Calendar2CellDirective } from './calendar2-cell.directive';
 import { CALENDAR_CELLS, CALENDAR_TABBABLE_DATE } from './calendar2.tokens';
 import { CellStatus } from './cell-status';
 import { DateRange } from './date-range';
+import { LuTooltipTriggerDirective } from '../../tooltip/trigger';
 
 const MODE_HIERARCHY: CalendarMode[] = ['month', 'year', 'decade'];
 
 @Component({
 	selector: 'lu-calendar2',
 	standalone: true,
-	imports: [RepeatTimesDirective, ButtonComponent, Calendar2CellDirective, NgClass, CalloutComponent],
+	imports: [RepeatTimesDirective, ButtonComponent, Calendar2CellDirective, NgClass, CalloutComponent, LuTooltipTriggerDirective],
 	templateUrl: './calendar2.component.html',
 	styleUrl: './calendar2.component.scss',
 	encapsulation: ViewEncapsulation.None,
@@ -298,10 +299,12 @@ export class Calendar2Component implements OnInit {
 			isWeekend: this.#weekInfo.weekend.includes(getIntlWeekDay(date)) && !this.hideWeekend(),
 			isOverflow,
 			status,
+			label: status.label || rangeInfo?.label,
 			date,
 			classes,
 			isCurrent: isSameDay(new Date(), date) && !this.hideToday(),
 			rangeInfo,
+			disabled: status?.disabled || (isOverflow && !this.enableOverflow()),
 		};
 	}
 

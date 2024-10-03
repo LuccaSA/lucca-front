@@ -20,19 +20,20 @@ export default {
 			props: {
 				currentMonth: new Date(),
 				getDayInfo: (date: Date, mode: CalendarMode) => {
-					if (mode === 'month' && date.getDate() === 10 && date.getMonth()) {
+					if (mode === 'month' && date.getDate() === 10 && date.getMonth() === new Date().getMonth()) {
 						return {
 							selected: true,
 						};
 					}
-					if (mode === 'month' && date.getDate() === 17 && date.getMonth()) {
+					if (mode === 'month' && date.getDate() === 17 && date.getMonth() === new Date().getMonth()) {
 						return {
 							disabled: true,
 						};
 					}
-					if (mode === 'month' && date.getDate() === 24 && date.getMonth()) {
+					if (mode === 'month' && date.getDate() === 2 && date.getMonth() === new Date().getMonth()) {
 						return {
 							selected: true,
+							label: 'I am green',
 							classes: ['palette-mint'],
 						};
 					}

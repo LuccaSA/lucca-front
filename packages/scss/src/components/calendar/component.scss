@@ -172,13 +172,13 @@
 				0 0 0 1px var(--components-calendar-table-body-row-cell-actionHighlight),
 				0 0 0 1px var(--components-calendar-table-body-row-cell-actionHighlight) inset;
 
-			&:disabled {
+			&:disabled, &[aria-disabled=true] {
 				--components-calendar-table-body-row-cell-actionColor: var(--palettes-neutral-500);
 				text-decoration: line-through;
 				cursor: default;
 			}
 
-			&:not(:disabled) {
+			&:not(:disabled, [aria-disabled=true]) {
 				&:hover,
 				&:focus-visible {
 					@include a11y.focusVisible;
