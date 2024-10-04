@@ -77,9 +77,11 @@ export class LuMultiSelectDisplayerInputDirective<T> implements OnInit {
 	);
 
 	ngOnInit(): void {
-		this.select.focusInput$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {
-			this.elementRef.nativeElement.value = '';
-			this.select.clueChanged('');
+		this.select.focusInput$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((data?: { keepClue: boolean }) => {
+			if (!data?.keepClue) {
+				this.elementRef.nativeElement.value = '';
+				this.select.clueChanged('');
+			}
 			this.elementRef.nativeElement.focus();
 		});
 		this.select.emptyClue$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {
