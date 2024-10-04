@@ -26,6 +26,9 @@ export class TextInputComponent {
 	@Input()
 	placeholder: string = '';
 
+	@Input()
+	autocomplete: string = 'on';
+
 	@Input({ transform: booleanAttribute })
 	hasClearer = false;
 
