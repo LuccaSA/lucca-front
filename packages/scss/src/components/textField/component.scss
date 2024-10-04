@@ -65,6 +65,7 @@
 				var(--component-textField-padding);
 			background-color: transparent;
 			color: var(--component-textField-color);
+			border-radius: var(--commons-borderRadius-M);
 
 			&::placeholder {
 				color: var(--component-textField-placeholder);
