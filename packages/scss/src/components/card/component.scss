@@ -1,4 +1,6 @@
-@mixin component($atRoot: 'without: rule') {
+@use '@lucca-front/scss/src/commons/utils/namespace';
+
+@mixin component($atRoot: namespace.$defaultAtRoot) {
 	background-color: var(--components-card-background);
 	border-radius: var(--components-card-border-radius);
 	border-color: var(--components-card-border-color);

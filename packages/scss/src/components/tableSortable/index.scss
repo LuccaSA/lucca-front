@@ -6,6 +6,16 @@
 .table-head-row-cell-sortableButton,
 .indexTable-head-row-cell-sortableButton {
 	@include vars;
+}
+
+// :not(.class) is only there to increase specificity when the class isn’t present
+// but the class should be present, and this code is temporary
+// .table-head-row-cell-sortableButton is deprecated
+// .indexTable-head-row-cell-sortableButton is deprecated
+.tableSortable.button,
+.tableSortable:not(.button),
+.table-head-row-cell-sortableButton,
+.indexTable-head-row-cell-sortableButton {
 	@include component;
 }
 

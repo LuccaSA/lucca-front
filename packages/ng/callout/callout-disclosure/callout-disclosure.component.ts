@@ -3,12 +3,14 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, ViewEn
 import { LuccaIcon } from '@lucca-front/icons';
 import { Palette, PortalContent, PortalDirective } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
-import { CalloutState, CalloutStateMap } from '../callout-state';
+import { CalloutIconPipe } from '../callout-icon.pipe';
+import { CalloutState } from '../callout-state';
+import { getCalloutPalette } from '../callout.utils';
 
 @Component({
 	selector: 'lu-callout-disclosure',
 	standalone: true,
-	imports: [CommonModule, IconComponent, NgClass, PortalDirective],
+	imports: [CommonModule, IconComponent, NgClass, PortalDirective, CalloutIconPipe],
 	templateUrl: './callout-disclosure.component.html',
 	styleUrls: ['./callout-disclosure.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
@@ -35,15 +37,7 @@ export class CalloutDisclosureComponent {
 	 * If one of the icon or palette inputs are filled along with the state input, their values will have the priority over
 	 * state (so setting state to success and palette to warning will make the palette warning)
 	 */
-	set state(state: CalloutState) {
-		const { icon, palette } = CalloutStateMap[state];
-		if (this.palette === 'none') {
-			this.palette = palette;
-		}
-		if (!this.icon) {
-			this.icon = icon;
-		}
-	}
+	state: CalloutState;
 
 	@Input({ transform: booleanAttribute }) open = false;
 
@@ -56,9 +50,10 @@ export class CalloutDisclosureComponent {
 	}
 
 	get calloutClasses() {
+		const palette = getCalloutPalette(this.state, this.palette);
 		return {
 			[`mod-${this.size}`]: !!this.size,
-			[`palette-${this.palette}`]: !!this.palette,
+			[`palette-${palette}`]: !!palette,
 		};
 	}
 }

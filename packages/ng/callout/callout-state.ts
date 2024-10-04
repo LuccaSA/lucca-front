@@ -1,7 +1,9 @@
-import { Palette } from '@lucca-front/ng/core';
 import { LuccaIcon } from '@lucca-front/icons';
+import { Palette } from '@lucca-front/ng/core';
 
-export type CalloutState = 'success' | 'warning' | 'error';
+export const CalloutStates = ['success', 'warning', 'error'] as const;
+
+export type CalloutState = (typeof CalloutStates)[number];
 
 export const CalloutStateMap: Record<CalloutState, { icon: LuccaIcon; palette: Palette }> = {
 	success: {

@@ -22,7 +22,7 @@ export default {
 			control: {
 				type: 'boolean',
 			},
-			description: 'Deprecated 🦕',
+			description: 'Deprecated 💀',
 		},
 		s: {
 			control: {

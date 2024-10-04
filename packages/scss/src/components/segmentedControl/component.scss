@@ -1,0 +1,115 @@
+@use '@lucca-front/scss/src/commons/utils/a11y';
+
+@mixin component($atRoot: 'without: rule') {
+	padding: 0;
+	margin: 0;
+	list-style-type: none;
+	display: flex;
+	flex-wrap: wrap;
+	width: var(--components-segmentedControl-width);
+	flex-direction: var(--components-segmentedControl-direction);
+	box-shadow: 0 0 0 var(--commons-divider-width) var(--palettes-neutral-300);
+	border-radius: var(--components-segmentedControl-borderRadius);
+	background-color: var(--palettes-neutral-0);
+	font-size: var(--components-segmentedControl-fontSize);
+	line-height: var(--components-segmentedControl-lineHeight);
+
+	@at-root ($atRoot) {
+		.segmentedControl-item-input {
+			@include a11y.mask;
+
+			&:focus-visible {
+				+ .segmentedControl-item-action {
+					@include a11y.focusVisible($offset: 3px);
+				}
+			}
+		}
+
+		//.viewTabs-item is deprecated
+		.segmentedControl-item,
+		.viewTabs-item {
+			flex-grow: 1;
+			position: relative;
+			z-index: 1;
+
+			&::before,
+			&::after {
+				content: '';
+				border-width: 0;
+				inset: var(--components-segmentedControl-dividerInset);
+				border-color: var(--palettes-grey-200);
+				position: absolute;
+				border-style: solid;
+			}
+
+			&::before {
+				right: calc(var(--commons-divider-width) * -1);
+				border-left-width: var(--commons-divider-width);
+				left: auto;
+			}
+
+			&::after {
+				bottom: calc(var(--commons-divider-width) * -1);
+				border-top-width: var(--commons-divider-width);
+				top: auto;
+			}
+		}
+
+		//.viewTabs-item-tab is deprecated
+		.segmentedControl-item-action,
+		.viewTabs-item-tab {
+			width: 100%;
+			border: 0;
+			margin: 0;
+			padding: var(--components-segmentedControl-padding);
+			background-color: var(--components-segmentedControl-background);
+			box-shadow: 0 0 0 var(--commons-divider-width) var(--components-segmentedControl-shadow);
+			border-radius: var(--components-segmentedControl-borderRadius);
+			gap: var(--pr-t-spacings-100);
+			color: var(--components-segmentedControl-color);
+			text-align: center;
+			justify-content: center;
+			display: flex;
+			align-items: center;
+			position: relative;
+			cursor: var(--components-segmentedControl-cursor);
+			z-index: var(--components-segmentedControl-zIndex);
+			font: inherit;
+
+			&:focus-visible {
+				@include a11y.focusVisible($offset: 3px);
+			}
+
+			&::before {
+				content: var(--components-segmentedControl-backgroundContent);
+				z-index: -1;
+				position: absolute;
+				background-color: var(--palettes-neutral-50);
+				inset: var(--pr-t-spacings-75);
+				bottom: calc(var(--pr-t-spacings-75) - var(--commons-divider-width));
+				border-radius: var(--commons-borderRadius-M);
+				transition-property: scale, opacity;
+				transition-duration: var(--commons-animations-durations-standard);
+				opacity: 0;
+				scale: 0;
+			}
+
+			&:hover {
+				&::before {
+					opacity: 1;
+					scale: 1;
+				}
+			}
+		}
+
+		//.viewTabs_panel is deprecated
+		.segmentedControl_panel,
+		.viewTabs_panel {
+			display: var(--components-segmentedControl-display, block);
+
+			&:focus-visible {
+				@include a11y.focusVisible;
+			}
+		}
+	}
+}

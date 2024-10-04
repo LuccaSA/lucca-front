@@ -1,6 +1,5 @@
 import type { Rule } from '@angular-devkit/schematics';
-import { spawnSync } from 'child_process';
-import * as path from 'path';
+import { installLocalDependencies } from '../lib/local-deps/installer';
 import { migrateFile } from '../lib/schematics';
 import { migrateHTMLFile, migrateScssFile } from './migration';
 
@@ -12,17 +11,7 @@ export default (options?: { skipInstallation?: boolean }): Rule => {
 
 	return async (tree, context) => {
 		if (!skipInstallation) {
-			context.logger.info('Installing dependencies...');
-
-			try {
-				spawnSync('npm', ['ci'], {
-					cwd: path.join(__dirname, '../../lib/local-deps'),
-				});
-				context.logger.info('Installing dependencies... Done!');
-			} catch (e) {
-				// eslint-disable-next-line
-				context.logger.error('Failed to install dependencies', (e as any).toString());
-			}
+			installLocalDependencies(context);
 		}
 
 		const postCssScss = await import('../lib/local-deps/postcss-scss.js');

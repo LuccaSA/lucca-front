@@ -1,8 +1,9 @@
 @use 'vars' as *;
 @use '@lucca-front/scss/src/commons/utils/a11y';
 @use '@lucca-front/scss/src/components/button/exports' as button;
+@use '@lucca-front/scss/src/commons/utils/namespace';
 
-@mixin component($atRoot: 'without: rule') {
+@mixin component($atRoot: namespace.$defaultAtRoot) {
 	position: relative;
 	display: table;
 	width: 100%;
@@ -227,21 +228,26 @@
 		}
 
 		.indexTable-body-row-cellTitle-button {
-			@include button.text;
-			@include button.S;
-			@include button.onlyIconS;
+			// :not(.class) is only there to increase specificity when the class isn’t present
+			// but the class should be present, and this code is temporary
+			&.button,
+			&:not(.button) {
+				@include button.text;
+				@include button.S;
+				@include button.onlyIconS;
 
-			position: static;
+				position: static;
 
-			.lucca-icon {
-				transition: transform var(--commons-animations-durations-fast) ease;
-			}
+				.lucca-icon {
+					transition: transform var(--commons-animations-durations-fast) ease;
+				}
 
-			// Extend button reactive zone to his whole parent
-			&::before {
-				content: '';
-				position: absolute;
-				inset: 0;
+				// Extend button reactive zone to his whole parent
+				&::before {
+					content: '';
+					position: absolute;
+					inset: 0;
+				}
 			}
 		}
 
