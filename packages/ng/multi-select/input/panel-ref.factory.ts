@@ -9,6 +9,7 @@ import { LuMultiSelectInputComponent } from './select-input.component';
 
 class MultiSelectPanelRef<T> extends LuMultiSelectPanelRef<T> {
 	instance: LuMultiSelectPanelComponent<T>;
+	changeDetectorRef: ChangeDetectorRef;
 	private panelRef: ComponentRef<LuMultiSelectPanelComponent<T>>;
 	private portalRef: ComponentPortal<LuMultiSelectPanelComponent<T>>;
 
@@ -31,6 +32,7 @@ class MultiSelectPanelRef<T> extends LuMultiSelectPanelRef<T> {
 		this.portalRef = new ComponentPortal<LuMultiSelectPanelComponent<T>>(LuMultiSelectPanelComponent, undefined, injector);
 		this.panelRef = overlayRef.attach(this.portalRef);
 		this.instance = this.panelRef.instance;
+		this.changeDetectorRef = this.panelRef.changeDetectorRef;
 
 		overlayRef
 			.backdropClick()

@@ -14,7 +14,7 @@ import { MULTI_SELECT_WITH_SELECT_ALL_CONTEXT } from './select-all.models';
 	template: `
 		<div class="multiSelectAllDisplayer">
 			<lu-form-field [label]="intl.selectAll">
-				<lu-checkbox-input class="multiSelectAllDisplayer-checkbox" [(ngModel)]="selectAllContext.selectAll" [mixed]="mixed()" />
+				<lu-checkbox-input class="multiSelectAllDisplayer-checkbox" [ngModel]="selectAllContext.selectAll()" (ngModelChange)="selectAllContext.setSelectAll($event)" [mixed]="mixed()" />
 			</lu-form-field>
 		</div>
 	`,
@@ -22,5 +22,5 @@ import { MULTI_SELECT_WITH_SELECT_ALL_CONTEXT } from './select-all.models';
 export class LuMultiSelectAllHeaderComponent {
 	readonly intl = getIntl(LU_MULTI_SELECT_TRANSLATIONS);
 	readonly selectAllContext = inject(MULTI_SELECT_WITH_SELECT_ALL_CONTEXT);
-	readonly mixed = computed(() => this.selectAllContext.mode() === 'exclude');
+	readonly mixed = computed(() => this.selectAllContext.values().length > 0 && this.selectAllContext.values().length !== this.selectAllContext.totalCount());
 }
