@@ -35,7 +35,7 @@ export class TextareaInputComponent {
 	@Input({
 		transform: booleanAttribute,
 	})
-	scrollIntoViewOnAutoResizing = false;
+	autoResizeScrollIntoView = false;
 
 	cloneValue = '';
 
@@ -43,7 +43,7 @@ export class TextareaInputComponent {
 		this.cloneValue = value;
 		this.#cdr.detectChanges();
 
-		if (this.scrollIntoViewOnAutoResizing && this.parent) {
+		if (this.autoResizeScrollIntoView && this.parent) {
 			this.parent.nativeElement.scrollIntoView({
 				behavior: 'instant',
 				block: 'end',

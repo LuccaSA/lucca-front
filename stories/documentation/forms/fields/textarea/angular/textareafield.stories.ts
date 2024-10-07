@@ -2,7 +2,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { TextareaInputComponent } from '@lucca-front/ng/forms';
-import { Meta, StoryObj, moduleMetadata } from '@storybook/angular';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { cleanupTemplate, generateInputs } from 'stories/helpers/stories';
 
 export default {
@@ -38,7 +38,7 @@ export default {
 		autoResize: {
 			type: 'boolean',
 		},
-		scrollIntoViewOnAutoResizing: {
+		autoResizeScrollIntoView: {
 			type: 'boolean',
 			if: { arg: 'autoResize', truthy: true },
 		},
@@ -50,7 +50,7 @@ export default {
 
 export const Basic: StoryObj<TextareaInputComponent & { disabled: boolean } & FormFieldComponent> = {
 	render: (args, { argTypes }) => {
-		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, counter, autoResize, scrollIntoViewOnAutoResizing, ...inputArgs } = args;
+		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, counter, autoResize, autoResizeScrollIntoView, ...inputArgs } = args;
 		return {
 			template: cleanupTemplate(`<lu-form-field ${generateInputs(
 				{
@@ -64,7 +64,7 @@ export const Basic: StoryObj<TextareaInputComponent & { disabled: boolean } & Fo
 				},
 				argTypes,
 			)}>
-	<lu-textarea-input scrollIntoViewOnAutoResizing="${scrollIntoViewOnAutoResizing}" autoResize="${autoResize}"
+	<lu-textarea-input autoResizeScrollIntoView="${autoResizeScrollIntoView}" autoResize="${autoResize}"
 	${generateInputs(inputArgs, argTypes)}
 		[(ngModel)]="example">
 	</lu-textarea-input>
@@ -86,7 +86,7 @@ export const Basic: StoryObj<TextareaInputComponent & { disabled: boolean } & Fo
 		tooltip: 'Je suis un message d’aide',
 		counter: 0,
 		autoResize: false,
-		scrollIntoViewOnAutoResizing: false,
+		autoResizeScrollIntoView: false,
 		rows: 3,
 	},
 };

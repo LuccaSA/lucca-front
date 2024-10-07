@@ -2,7 +2,7 @@ import { Meta, StoryFn } from '@storybook/angular';
 
 interface TextareaBasicStory {
 	autoResize: boolean;
-	scrollIntoViewOnAutoResizing: boolean;
+	autoResizeScrollIntoView: boolean;
 }
 
 export default {
@@ -11,7 +11,7 @@ export default {
 		autoResize: {
 			type: 'boolean',
 		},
-		scrollIntoViewOnAutoResizing: {
+		autoResizeScrollIntoView: {
 			type: 'boolean',
 			if: { arg: 'autoResize', truthy: true },
 		},
@@ -23,7 +23,7 @@ function getTemplate(args: TextareaBasicStory): string {
 	const clone = args.autoResize ? '<div class="textField-input-valueClone" aria-hidden="true"></div>' : '';
 	let input = '';
 	if (args.autoResize) {
-		if (args.scrollIntoViewOnAutoResizing) {
+		if (args.autoResizeScrollIntoView) {
 			input = "onInput=\"this.previousElementSibling.dataset.contentBefore = this.value; this.parentNode.scrollIntoView({ behavior: 'instant', block: 'end' })\"";
 		} else {
 			input = 'onInput="this.previousElementSibling.dataset.contentBefore = this.value"';
@@ -58,5 +58,5 @@ const Template: StoryFn<TextareaBasicStory> = (args) => ({
 export const Basic = Template.bind({});
 Basic.args = {
 	autoResize: false,
-	scrollIntoViewOnAutoResizing: false,
+	autoResizeScrollIntoView: false,
 };
