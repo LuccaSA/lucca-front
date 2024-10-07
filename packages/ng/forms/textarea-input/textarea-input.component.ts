@@ -41,7 +41,7 @@ export class TextareaInputComponent {
 
 	updateScroll(value: string) {
 		this.cloneValue = value;
-		this.#cdr.detectChanges();
+		this.#cdr.detectChanges(); // Needed to apply cloneValue to autoresize HTML clone
 
 		if (this.autoResizeScrollIntoView && this.parent) {
 			this.parent.nativeElement.scrollIntoView({

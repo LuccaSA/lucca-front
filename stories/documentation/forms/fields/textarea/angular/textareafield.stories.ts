@@ -37,10 +37,12 @@ export default {
 		},
 		autoResize: {
 			type: 'boolean',
+			description: '[v18.3]',
 		},
 		autoResizeScrollIntoView: {
 			type: 'boolean',
 			if: { arg: 'autoResize', truthy: true },
+			description: '[v18.3]',
 		},
 		hiddenLabel: {
 			description: "Masque le label en le conservant dans le DOM pour les lecteurs d'écrans",
