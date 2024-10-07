@@ -95,7 +95,7 @@ export class DateInputComponent implements ControlValueAccessor, Validator {
 			classes: [...(infoFromInput?.classes || [])],
 			disabled: infoFromInput?.disabled || !this.isInMinMax(date, mode),
 			selected: this.selectedDate() && this.calendarMode() === mode && comparePeriods(mode, date, this.selectedDate()),
-			label: infoFromInput.label,
+			label: infoFromInput?.label,
 		};
 	};
 
