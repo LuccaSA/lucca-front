@@ -1,4 +1,4 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, computed, forwardRef, inject, Input, input, LOCALE_ID, output, signal, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, forwardRef, inject, Input, input, LOCALE_ID, output, signal, ViewEncapsulation } from '@angular/core';
 import { AbstractControl, ControlValueAccessor, FormsModule, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors, Validator } from '@angular/forms';
 import { LuDisplayerDirective, LuOptionDirective } from '@lucca-front/ng/core-select';
 import { FormFieldComponent, InputDirective } from '@lucca-front/ng/form-field';
@@ -65,10 +65,7 @@ export class PhoneNumberInputComponent implements ControlValueAccessor, Validato
 
 	@Input() label: string;
 
-	@Input({
-		transform: booleanAttribute,
-	})
-	autocomplete = false;
+	@Input() autocomplete?: 'off' | 'tel';
 
 	#onChange?: (value: E164Number) => void;
 

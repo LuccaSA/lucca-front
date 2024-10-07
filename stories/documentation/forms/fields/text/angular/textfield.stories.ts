@@ -86,7 +86,7 @@ export const Basic: StoryObj<TextInputComponent & { disabled: boolean } & FormFi
 		hiddenLabel: false,
 		hasClearer: false,
 		hasSearchIcon: false,
-		autocomplete: 'on',
+		autocomplete: '',
 		searchIcon: 'search',
 		disabled: false,
 		inlineMessage: 'Helper Text',
