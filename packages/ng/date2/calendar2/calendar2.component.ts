@@ -27,6 +27,7 @@ import {
 	WeekOptions,
 } from 'date-fns';
 import { getIntl } from '../../core/translate';
+import { LuTooltipTriggerDirective } from '../../tooltip/trigger';
 import { WEEK_INFO } from '../calendar.token';
 import { LU_DATE2_TRANSLATIONS } from '../date2.translate';
 import { RepeatTimesDirective } from '../repeat-times.directive';
@@ -37,7 +38,6 @@ import { Calendar2CellDirective } from './calendar2-cell.directive';
 import { CALENDAR_CELLS, CALENDAR_TABBABLE_DATE } from './calendar2.tokens';
 import { CellStatus } from './cell-status';
 import { DateRange } from './date-range';
-import { LuTooltipTriggerDirective } from '../../tooltip/trigger';
 
 const MODE_HIERARCHY: CalendarMode[] = ['month', 'year', 'decade'];
 
@@ -84,6 +84,8 @@ export class Calendar2Component implements OnInit {
 	enableOverflow = input<boolean, boolean>(false, { transform: booleanAttribute });
 
 	hideToday = input<boolean, boolean>(false, { transform: booleanAttribute });
+
+	hasTodayButton = input<boolean, boolean>(false, { transform: booleanAttribute });
 
 	hideWeekend = input<boolean, boolean>(false, { transform: booleanAttribute });
 
@@ -249,6 +251,10 @@ export class Calendar2Component implements OnInit {
 		this.calendar2CellInstances()
 			.find((cell) => cell.isTabbableDate())
 			?.blur();
+	}
+
+	clickToday() {
+		this.onCellClicked(new Date());
 	}
 
 	ngOnInit(): void {

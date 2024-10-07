@@ -10,9 +10,9 @@ import { CalendarMode } from '../calendar2/calendar-mode';
 import { Calendar2Component } from '../calendar2/calendar2.component';
 import { CellStatus } from '../calendar2/cell-status';
 import { DateRange } from '../calendar2/date-range';
+import { getDateFormat } from '../date-format';
 import { LU_DATE2_TRANSLATIONS } from '../date2.translate';
 import { comparePeriods, startOfPeriod } from '../utils';
-import { getDateFormat } from '../date-format';
 
 @Component({
 	selector: 'lu-date-input',
@@ -58,6 +58,7 @@ export class DateInputComponent implements ControlValueAccessor, Validator {
 	enableOverflow = input<boolean>(true);
 	showOverflow = input<boolean>(true);
 	hideToday = input<boolean, boolean>(false, { transform: booleanAttribute });
+	hasTodayButton = input<boolean, boolean>(false, { transform: booleanAttribute });
 	clearable = input<boolean, boolean>(false, { transform: booleanAttribute });
 	placeholder = input<string>(this.#dateFormat);
 

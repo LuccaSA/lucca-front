@@ -59,6 +59,10 @@
 			</tr>
 		</tbody>
 	</table>
+	@if (hasTodayButton()) {
+	<div class="calendar-divider divider"></div>
+	<button class="calendar-todayLink link" type="button" (click)="clickToday()">{{ todayLabel }}</button>
+	}
 	<svg class="calendar-stripes" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" aria-hidden="true">
 		<symbol id="calendar-stripes-symbol" viewBox="0 0 60 60">
 			<path
@@ -80,11 +84,6 @@
 			/>
 		</symbol>
 	</svg>
-	<!--
-											<div class="u-paddingXS">
-												<button type="button" class="button mod-block mod-S mod-text">Aujourd’hui</button>
-											</div>
-											-->
 	} @case ('year') {
 	<div class="calendar-name" id="calendar-year-name">
 		<button type="button" class="calendar-name-button" (click)="displayMode.set('decade')">{{ currentYearLabel() }}</button>

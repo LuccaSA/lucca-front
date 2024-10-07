@@ -23,6 +23,11 @@ import { CalloutComponent } from '@lucca-front/ng/callout';
 		pr-story-model-display pre {
 			overflow: auto;
 		}
+
+		pr-story-model-display pre:focus-visible {
+			outline: 2px solid var(--palettes-brand-700);
+			outline-offset: 2px;
+		}
 	`,
 	encapsulation: ViewEncapsulation.None,
 	changeDetection: ChangeDetectionStrategy.OnPush,

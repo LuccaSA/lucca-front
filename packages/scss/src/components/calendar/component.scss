@@ -1,6 +1,7 @@
 @use '@lucca-front/scss/src/commons/utils/reset';
 @use '@lucca-front/scss/src/commons/utils/a11y';
 @use '@lucca-front/scss/src/components/button/exports' as button;
+@use '@lucca-front/scss/src/components/link/exports' as link;
 
 @mixin component($atRoot: 'without: rule') {
 	width: var(--components-calendarWidth);
@@ -90,6 +91,28 @@
 			@include a11y.mask;
 		}
 
+		.calendar-divider {
+			&.divider {
+				margin: 0;
+			}
+		}
+
+		.calendar-todayLink {
+			&.link {
+				@include link.decorationHover;
+
+				text-transform: capitalize;
+				display: block;
+				margin: auto;
+				padding: var(--pr-t-spacings-100);
+				line-height: var(--sizes-M-lineHeight);
+
+				&:focus-visible {
+					@include a11y.focusVisible($offset: -4px, $borderRadius: 8px);
+				}
+			}
+		}
+
 		.calendar-stripes-symbol-path {
 			fill: var(--components-calendar-table-body-row-cell-action-stripesColor);
 		}
@@ -113,6 +136,8 @@
 			text-align: inherit;
 			width: fit-content;
 			display: inline-block;
+			padding: var(--pr-t-spacings-50);
+			margin-top: calc(var(--pr-t-spacings-50) * -1);
 
 			&:hover {
 				color: var(--palettes-700, var(--palettes-product-700));
@@ -123,7 +148,11 @@
 			}
 
 			&:focus-visible {
-				@include a11y.focusVisible;
+				@include a11y.focusVisible($offset: 0);
+			}
+
+			& + & {
+				margin-left: calc(var(--pr-t-spacings-100) * -1);
 			}
 		}
 
@@ -172,15 +201,15 @@
 				0 0 0 1px var(--components-calendar-table-body-row-cell-actionHighlight),
 				0 0 0 1px var(--components-calendar-table-body-row-cell-actionHighlight) inset;
 
-			&:disabled, &[aria-disabled=true] {
+			&:disabled,
+			&[aria-disabled='true'] {
 				--components-calendar-table-body-row-cell-actionColor: var(--palettes-neutral-500);
 				text-decoration: line-through;
 				cursor: default;
 			}
 
-			&:not(:disabled, [aria-disabled=true]) {
-				&:hover,
-				&:focus-visible {
+			&:not(:disabled, [aria-disabled='true']) {
+				&:hover {
 					@include a11y.focusVisible;
 
 					outline-width: var(--components-calendar-table-body-row-cell-actionOutlineWidth);
@@ -193,6 +222,14 @@
 					background-color: var(--palettes-800, var(--palettes-product-800));
 					color: var(--palettes-0, var(--palettes-product-0));
 				}
+			}
+
+			&:focus-visible {
+				@include a11y.focusVisible;
+
+				outline-width: var(--components-calendar-table-body-row-cell-actionOutlineWidth);
+				outline-offset: var(--components-calendar-table-body-row-cell-actionOutlineOffset);
+				outline-color: var(--palettes-700, var(--palettes-product-700));
 			}
 		}
 
