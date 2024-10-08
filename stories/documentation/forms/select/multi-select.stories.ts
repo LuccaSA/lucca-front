@@ -41,6 +41,8 @@ const generateStory = getStoryGenerator<LuMultiSelectInputStoryComponent>({
 		...coreSelectStory.argTypes,
 		selectedLegumes: HiddenArgType,
 		valuesTpl: HiddenArgType,
+		panelHeaderTpl: HiddenArgType,
+		optionKey: HiddenArgType,
 		maxValuesShown: HiddenArgType,
 		selectLegume: HiddenArgType,
 	},
@@ -258,11 +260,27 @@ export const Establishment = generateStory({
 
 export const User = generateStory({
 	name: 'User Select',
-	description: "Pour saisir un utilisateur, il suffit d'utiliser la directive `users`",
+	description: "Pour saisir des utilisateurs, il suffit d'utiliser la directive `users`",
 	template: `<lu-multi-select
 	class="multiSelect"
 	placeholder="Placeholder..."
 	users
+	[(ngModel)]="selectedUsers"
+></lu-multi-select>`,
+	neededImports: {
+		'@lucca-front/ng/multi-select': ['LuMultiSelectInputComponent'],
+		'@lucca-front/ng/core-select/user': ['LuCoreSelectUsersDirective'],
+	},
+});
+
+export const FormerUser = generateStory({
+	name: 'User Select (with former)',
+	description: "Pour saisir des utilisateurs, il suffit d'utiliser la directive `users`",
+	template: `<lu-multi-select
+	class="multiSelect"
+	placeholder="Placeholder..."
+	users
+	enableFormerEmployees
 	[(ngModel)]="selectedUsers"
 ></lu-multi-select>`,
 	neededImports: {

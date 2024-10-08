@@ -1,4 +1,4 @@
-import { Directive, TemplateRef, effect, inject, input } from '@angular/core';
+import { Directive, TemplateRef, effect, inject, input, untracked } from '@angular/core';
 import { ALuSelectInputComponent } from '../input';
 
 @Directive({
@@ -11,7 +11,10 @@ export class LuCoreSelectPanelHeaderDirective {
 	readonly select = input.required<ALuSelectInputComponent<unknown, unknown>>({ alias: 'luSelectPanelHeader' });
 
 	constructor() {
-		effect(() => this.select().panelHeaderTpl.set(this.templateRef));
+		effect(() => {
+			const select = this.select();
+			untracked(() => select.panelHeaderTpl.set(this.templateRef));
+		});
 	}
 
 	public static ngTemplateContextGuard(_dir: LuCoreSelectPanelHeaderDirective, ctx: unknown): ctx is void {

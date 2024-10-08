@@ -290,6 +290,22 @@ export const UserCustom = generateStory({
 	},
 });
 
+export const FormerUser = generateStory({
+	name: 'User Select (with former)',
+	description: "Pour saisir des utilisateurs, il suffit d'utiliser la directive `users`",
+	template: `<lu-simple-select
+	class="simpleSelect"
+	placeholder="Placeholder..."
+	users
+	enableFormerEmployees
+	[(ngModel)]="selectedUsers"
+></lu-simple-select>`,
+	neededImports: {
+		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent'],
+		'@lucca-front/ng/core-select/user': ['LuCoreSelectUsersDirective'],
+	},
+});
+
 export const Establishment = generateStory({
 	name: 'Establishment Select',
 	description: "Pour saisir un établissement, il suffit d'utiliser la directive `establishments`",
