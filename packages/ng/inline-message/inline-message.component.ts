@@ -1,13 +1,13 @@
 import { NgIf } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject, Input, OnChanges, ViewEncapsulation } from '@angular/core';
-import { LuClass, PortalContent } from '@lucca-front/ng/core';
+import { LuClass, PortalContent, PortalDirective } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { InlineMessageState } from './inline-message-state';
 
 @Component({
 	selector: 'lu-inline-message',
 	standalone: true,
-	imports: [NgIf, IconComponent],
+	imports: [NgIf, IconComponent, PortalDirective],
 	providers: [LuClass],
 	templateUrl: './inline-message.component.html',
 	styleUrls: ['./inline-message.component.scss'],
