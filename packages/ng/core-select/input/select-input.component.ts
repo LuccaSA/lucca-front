@@ -15,7 +15,9 @@ import {
 	Type,
 	ViewChild,
 	booleanAttribute,
+	computed,
 	inject,
+	model,
 } from '@angular/core';
 import { ControlValueAccessor } from '@angular/forms';
 import { PortalContent, getIntl } from '@lucca-front/ng/core';
@@ -112,9 +114,12 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 
 	@Input() optionComparer: LuOptionComparer<TOption> = (option1, option2) => JSON.stringify(option1) === JSON.stringify(option2);
 	@Input() optionKey: (option: TOption) => unknown = (option) => option;
-	@Input() optionTpl?: TemplateRef<LuOptionContext<TOption>> | Type<unknown> = LuSimpleSelectDefaultOptionComponent;
-	@Input() valueTpl?: TemplateRef<LuOptionContext<TOption>> | Type<unknown>;
-	@Input() panelHeaderTpl?: TemplateRef<void> | Type<unknown>;
+
+	optionTpl? = model<TemplateRef<LuOptionContext<TOption>> | Type<unknown>>(LuSimpleSelectDefaultOptionComponent);
+	valueTpl? = model<TemplateRef<LuOptionContext<TOption>> | Type<unknown>>();
+	panelHeaderTpl? = model<TemplateRef<void> | Type<unknown>>();
+
+	displayerTpl = computed(() => this.valueTpl() || this.optionTpl());
 
 	grouping?: LuOptionGrouping<TOption, unknown>;
 

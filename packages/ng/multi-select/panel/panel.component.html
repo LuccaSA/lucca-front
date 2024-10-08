@@ -17,7 +17,7 @@
 		(scroll)="onScroll($event)"
 	>
 		@if (selectInput.panelHeaderTpl) {
-		<ng-container *luPortal="selectInput.panelHeaderTpl" />
+		<ng-container *luPortal="selectInput.panelHeaderTpl()" />
 		}
 		<div class="lu-picker-content-option">
 			<ng-container *ngIf="grouping && ctx.groupTemplateLocation === 'group-header'">
@@ -50,7 +50,7 @@
 				<lu-select-option
 					*ngFor="let option of options; let index = index; trackBy: trackOptionsBy"
 					[option]="option"
-					[optionTpl]="optionTpl"
+					[optionTpl]="optionTpl()"
 					[optionIndex]="index"
 					[grouping]="ctx.groupTemplateLocation === 'option' ? grouping : undefined"
 					[scrollIntoViewOptions]="{ block: 'nearest' }"

@@ -51,8 +51,8 @@ export class LuCoreSelectUsersDirective<T extends LuCoreSelectUser = LuCoreSelec
 
 	constructor() {
 		super();
-		this.select.optionTpl = LuUserOptionComponent;
-		this.select.valueTpl = LuUserDisplayerComponent;
+		this.select.optionTpl.set(LuUserOptionComponent);
+		this.select.valueTpl.set(LuUserDisplayerComponent);
 
 		// this.#select.panelHeaderTpl = LuMultiSelectAllHeaderComponent;
 	}
