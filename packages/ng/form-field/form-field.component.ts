@@ -119,13 +119,13 @@ export class FormFieldComponent implements OnChanges, OnDestroy, DoCheck {
 	protected invalidStatus = false;
 
 	@Input()
-	inlineMessage: string;
+	inlineMessage: PortalContent;
 
 	/**
 	 * Inline message for when the control is in error state
 	 */
 	@Input()
-	errorInlineMessage: string;
+	errorInlineMessage: PortalContent;
 
 	/**
 	 * State of the inline message, will be ignored if form state is invalid
