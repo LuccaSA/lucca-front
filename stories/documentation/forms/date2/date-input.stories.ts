@@ -41,6 +41,10 @@ export default {
 		clearable: {
 			control: 'boolean',
 		},
+		mode: {
+			control: 'select',
+			options: ['month', 'year', 'decade'],
+		},
 	},
 	render: (args, { argTypes }) => {
 		const { min, max, selected, ...flags } = args;
@@ -65,6 +69,8 @@ export const Basic: StoryObj<DateInputComponent> = {
 		showOverflow: false,
 		hideToday: false,
 		hasTodayButton: false,
+		hideWeekend: false,
 		clearable: false,
+		mode: 'month',
 	},
 };

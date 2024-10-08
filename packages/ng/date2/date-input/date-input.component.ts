@@ -40,6 +40,9 @@ export class DateInputComponent implements ControlValueAccessor, Validator {
 
 	#intlDateTimeFormat = new Intl.DateTimeFormat(this.#locale);
 
+	#intlDateTimeFormatMonth = new Intl.DateTimeFormat(this.#locale, { month: 'numeric', year: 'numeric' });
+	#intlDateTimeFormatYear = new Intl.DateTimeFormat(this.#locale, { year: 'numeric' });
+
 	// Contains the current date format (like dd/mm/yy etc) based on current locale
 	#dateFormat = getDateFormat(this.#locale);
 
@@ -61,6 +64,8 @@ export class DateInputComponent implements ControlValueAccessor, Validator {
 	hasTodayButton = input<boolean, boolean>(false, { transform: booleanAttribute });
 	clearable = input<boolean, boolean>(false, { transform: booleanAttribute });
 	placeholder = input<string>(this.#dateFormat);
+	mode = input<CalendarMode>('month');
+	hideWeekend = input<boolean, boolean>(false, { transform: booleanAttribute });
 
 	getCellInfo = input<((day: Date, mode: CalendarMode) => CellStatus) | null>();
 
@@ -83,7 +88,19 @@ export class DateInputComponent implements ControlValueAccessor, Validator {
 
 	displayValue = computed(() => {
 		if (this.selectedDate() && this.isValidDate(this.selectedDate())) {
-			return this.#intlDateTimeFormat.format(this.selectedDate());
+			let formatter: Intl.DateTimeFormat;
+			switch (this.mode()) {
+				case 'month':
+					formatter = this.#intlDateTimeFormat;
+					break;
+				case 'year':
+					formatter = this.#intlDateTimeFormatMonth;
+					break;
+				case 'decade':
+					formatter = this.#intlDateTimeFormatYear;
+					break;
+			}
+			return formatter.format(this.selectedDate());
 		}
 		return this.userTextInput();
 	});

@@ -68,11 +68,13 @@
 				[(tabbableDate)]="tabbableDate"
 				[getCellInfo]="combinedGetCellInfo"
 				[ranges]="ranges()"
-				(dateClicked)="selectedDate.set($event);popoverRef.close()"
+				(dateClicked)="selectedDate.set($event);currentDate.set($event);popoverRef.close()"
 				(nextPage)="move(1)"
 				(previousPage)="move(-1)"
 				mode="month"
 				[(displayMode)]="calendarMode"
+				[mode]="mode()"
+				[hideWeekend]="hideWeekend()"
 			></lu-calendar2>
 		</div>
 	</div>

@@ -254,7 +254,7 @@ export class Calendar2Component implements OnInit {
 	}
 
 	clickToday() {
-		this.onCellClicked(new Date());
+		this.onCellClicked(startOfDay(new Date()));
 	}
 
 	ngOnInit(): void {
