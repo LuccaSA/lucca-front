@@ -44,7 +44,7 @@ export class LuSimpleSelectInputComponent<T> extends ALuSelectInputComponent<T, 
 		return this.panelRefFactory.buildPanelRef(this, this.overlayConfig);
 	}
 
-	protected get hasValue(): boolean {
+	protected hasValue(): boolean {
 		return this.value !== null && this.value !== undefined;
 	}
 }

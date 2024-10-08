@@ -1,4 +1,4 @@
-import { Directive, Signal, computed, forwardRef, inject, input, signal } from '@angular/core';
+import { Directive, computed, forwardRef, inject, input, signal } from '@angular/core';
 import { takeUntilDestroyed, toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { CORE_SELECT_API_TOTAL_COUNT_PROVIDER } from '@lucca-front/ng/core-select';
 import { LuOptionComparer } from '@lucca-front/ng/option';
@@ -38,7 +38,7 @@ export class LuMultiSelectWithSelectAllDirective<TValue> extends ɵIsSelectedStr
 	readonly selectAll = computed(() => this.#selectAll());
 	readonly totalCount = toSignal(inject(CORE_SELECT_API_TOTAL_COUNT_PROVIDER).totalCount$);
 
-	readonly #displayClearer = computed(() => this.#values().length > 0 || this.#selectAll());
+	readonly #hasValue = computed(() => this.#values().length > 0 || this.#selectAll());
 
 	readonly #selectAllValue = computed<LuMultiSelectWithSelectAllValue<TValue>>(() => {
 		const mode = this.#mode();
@@ -58,13 +58,12 @@ export class LuMultiSelectWithSelectAllDirective<TValue> extends ɵIsSelectedStr
 		this.#select.writeValue = (value) => this.writeValue(value);
 		this.#select.panelHeaderTpl = LuMultiSelectAllHeaderComponent;
 		this.#select.valuesTpl = LuMultiSelectAllDisplayerComponent;
-		this.#select.displayClearer = () => this.#displayClearer();
+		this.#select.hasValue = () => this.#hasValue();
 
 		toObservable(this.#selectAllValue)
 			.pipe(skip(1), takeUntilDestroyed())
 			.subscribe((value) => this.#onChange?.(value));
 	}
-	hasValue: Signal<boolean>;
 
 	setSelectAll(value: boolean): void {
 		this.#selectAll.set(value);

@@ -97,12 +97,8 @@ export class LuMultiSelectInputComponent<T> extends ALuSelectInputComponent<T, T
 		super.bindInputToPanelRefEvents();
 	}
 
-	get hasValue(): boolean {
-		return !this.displayClearer();
-	}
-
-	displayClearer(): boolean {
-		return !this.value?.length;
+	hasValue(): boolean {
+		return !!this.value?.length;
 	}
 
 	override clearValue(event: MouseEvent): void {

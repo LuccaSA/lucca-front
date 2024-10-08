@@ -65,7 +65,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 
 	@HostBinding('class.is-selected')
 	protected get isSelectedClass(): boolean {
-		return this.hasValue;
+		return this.hasValue();
 	}
 
 	@HostBinding('class.is-searchFilled')
@@ -73,7 +73,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 		return this.clue?.length > 0;
 	}
 
-	protected abstract readonly hasValue: boolean;
+	protected abstract hasValue(): boolean;
 
 	public get isPanelOpen(): boolean {
 		return this.isPanelOpen$.value;
