@@ -2,7 +2,14 @@ import { AsyncPipe, CommonModule, I18nPluralPipe } from '@angular/common';
 import { provideHttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { provideAnimations } from '@angular/platform-browser/animations';
-import { LuCoreSelectTotalCountDirective, LuDisabledOptionDirective, LuDisplayerDirective, LuOptionDirective, LuOptionGroupDirective } from '@lucca-front/ng/core-select';
+import {
+	LuCoreSelectPanelHeaderDirective,
+	LuCoreSelectTotalCountDirective,
+	LuDisabledOptionDirective,
+	LuDisplayerDirective,
+	LuOptionDirective,
+	LuOptionGroupDirective,
+} from '@lucca-front/ng/core-select';
 import { LuCoreSelectApiV3Directive, LuCoreSelectApiV4Directive } from '@lucca-front/ng/core-select/api';
 import { LuCoreSelectEstablishmentsDirective } from '@lucca-front/ng/core-select/establishment';
 import { LuCoreSelectJobQualificationsDirective } from '@lucca-front/ng/core-select/job-qualification';
@@ -385,6 +392,24 @@ export const AddOption = generateStory({
 	},
 });
 
+export const CustomPanelHeader = generateStory({
+	name: 'Custom Panel Header',
+	description: "Pour customiser l'en-tête du panel, il suffit d'utiliser la directive `luCoreSelectPanelHeader`.",
+	template: `<lu-multi-select
+	#selectRef
+	placeholder="Placeholder..."
+	[(ngModel)]="selectedLegume"
+	[options]="legumes | filterLegumes:clue"
+	(clueChange)="clue = $event"
+>
+	<h1 *luSelectPanelHeader="selectRef">Custom Header</h1>
+</lu-multi-select>`,
+	neededImports: {
+		'@lucca-front/ng/core-select': ['LuCoreSelectPanelHeaderDirective'],
+		'@lucca-front/ng/multi-select': ['LuMultiSelectInputComponent'],
+	},
+});
+
 const meta: Meta<LuMultiSelectInputStoryComponent> = {
 	title: 'Documentation/Forms/MultiSelect',
 	component: LuMultiSelectInputComponent,
@@ -408,6 +433,7 @@ const meta: Meta<LuMultiSelectInputStoryComponent> = {
 				LuCoreSelectEstablishmentsDirective,
 				LuCoreSelectUsersDirective,
 				LuCoreSelectJobQualificationsDirective,
+				LuCoreSelectPanelHeaderDirective,
 				LuDisabledOptionDirective,
 				LuMultiSelectDisplayerInputDirective,
 				LuMultiSelectCounterDisplayerComponent,
