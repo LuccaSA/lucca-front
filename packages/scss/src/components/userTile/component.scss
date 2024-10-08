@@ -2,7 +2,7 @@
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
 	display: flex;
-	align-items: center;
+	align-items: flex-start;
 	gap: var(--pr-t-spacings-150);
 	overflow-wrap: break-word;
 
@@ -12,7 +12,7 @@
 		.user-info {
 			display: flex;
 			flex-direction: column;
-			margin: 0;
+			margin: var(--components-userTile-content-marginTop) 0 0 0;
 		}
 
 		// .user-tile-title is deprecated
@@ -37,6 +37,10 @@
 		.user-tile-footnote {
 			font-size: var(--sizes-S-fontSize);
 			line-height: var(--sizes-S-lineHeight);
+		}
+
+		.avatar {
+			margin-top: var(--components-userTile-avatar-marginTop);
 		}
 	}
 }
