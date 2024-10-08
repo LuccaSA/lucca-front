@@ -44,7 +44,7 @@ export default {
 				] as DateRange[],
 			},
 			template: `
-				<lu-calendar2 [hideToday]="false" [showOverflow]="true" [enableOverflow]="true" [ranges]="ranges" [date]="currentMonth" mode="month" (dateClicked)="selected($event)"></lu-calendar2>
+				<lu-calendar2 [hideToday]="false" [showOverflow]="true" [enableOverflow]="true" [ranges]="ranges" [date]="currentMonth" mode="day" (dateClicked)="selected($event)"></lu-calendar2>
 			`,
 		};
 	},

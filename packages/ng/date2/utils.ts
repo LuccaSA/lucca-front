@@ -11,15 +11,15 @@ export function getJSFirstDayOfWeek(weekInfo: CalendarWeekInfo): Day {
 }
 
 const modeToComparator: Record<CalendarMode, (a: Date, b: Date) => boolean> = {
-	month: isSameDay,
-	year: isSameMonth,
-	decade: isSameYear,
+	day: isSameDay,
+	month: isSameMonth,
+	year: isSameYear,
 };
 
 const modeToPeriodStart: Record<CalendarMode, (date: Date) => Date> = {
-	month: startOfDay,
-	year: startOfMonth,
-	decade: startOfYear,
+	day: startOfDay,
+	month: startOfMonth,
+	year: startOfYear,
 };
 
 export function comparePeriods(mode: CalendarMode, a: Date, b: Date): boolean {

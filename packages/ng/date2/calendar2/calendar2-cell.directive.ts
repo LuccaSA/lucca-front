@@ -7,9 +7,9 @@ import { WEEK_INFO } from '../calendar.token';
 import { comparePeriods, getJSFirstDayOfWeek } from '../utils';
 
 const modeToDurationKey: Record<CalendarMode, keyof Duration> = {
-	month: 'days',
-	year: 'months',
-	decade: 'years',
+	day: 'days',
+	month: 'months',
+	year: 'years',
 };
 
 @Directive({
@@ -42,7 +42,7 @@ export class Calendar2CellDirective {
 	keydown($event: KeyboardEvent): void {
 		// See https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/examples/datepicker-dialog/#ex_label for keyboard
 		// navigation standards on date pickers
-		const cellsPerRow = this.luCalendar2Mode() === 'month' ? 7 : 3;
+		const cellsPerRow = this.luCalendar2Mode() === 'day' ? 7 : 3;
 		const datePropertyToEdit = modeToDurationKey[this.luCalendar2Mode()];
 		switch ($event.key) {
 			case 'ArrowRight':
@@ -62,19 +62,19 @@ export class Calendar2CellDirective {
 				$event.preventDefault();
 				break;
 			case 'Home':
-				if (this.luCalendar2Mode() === 'month') {
+				if (this.luCalendar2Mode() === 'day') {
 					this.#tabbableDate.set(startOfWeek(this.luCalendar2Date(), { weekStartsOn: getJSFirstDayOfWeek(this.#weekInfo) }));
 					$event.preventDefault();
 				}
 				break;
 			case 'End':
-				if (this.luCalendar2Mode() === 'month') {
+				if (this.luCalendar2Mode() === 'day') {
 					this.#tabbableDate.set(endOfWeek(this.luCalendar2Date(), { weekStartsOn: getJSFirstDayOfWeek(this.#weekInfo) }));
 					$event.preventDefault();
 				}
 				break;
 			case 'PageUp':
-				if (this.luCalendar2Mode() === 'month') {
+				if (this.luCalendar2Mode() === 'day') {
 					if ($event.shiftKey) {
 						this.#tabbableDate.set(subYears(this.luCalendar2Date(), 1));
 					} else {
@@ -84,7 +84,7 @@ export class Calendar2CellDirective {
 				}
 				break;
 			case 'PageDown':
-				if (this.luCalendar2Mode() === 'month') {
+				if (this.luCalendar2Mode() === 'day') {
 					if ($event.shiftKey) {
 						this.#tabbableDate.set(addYears(this.luCalendar2Date(), 1));
 					} else {

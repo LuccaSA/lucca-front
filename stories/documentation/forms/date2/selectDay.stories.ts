@@ -20,17 +20,17 @@ export default {
 			props: {
 				currentMonth: new Date(),
 				getDayInfo: (date: Date, mode: CalendarMode) => {
-					if (mode === 'month' && date.getDate() === 10 && date.getMonth() === new Date().getMonth()) {
+					if (mode === 'day' && date.getDate() === 10 && date.getMonth() === new Date().getMonth()) {
 						return {
 							selected: true,
 						};
 					}
-					if (mode === 'month' && date.getDate() === 17 && date.getMonth() === new Date().getMonth()) {
+					if (mode === 'day' && date.getDate() === 17 && date.getMonth() === new Date().getMonth()) {
 						return {
 							disabled: true,
 						};
 					}
-					if (mode === 'month' && date.getDate() === 2 && date.getMonth() === new Date().getMonth()) {
+					if (mode === 'day' && date.getDate() === 2 && date.getMonth() === new Date().getMonth()) {
 						return {
 							selected: true,
 							label: 'I am green',
@@ -41,7 +41,7 @@ export default {
 				},
 			},
 			template: `
-				<lu-calendar2 [hideToday]="false" [showOverflow]="true" [enableOverflow]="true" [getCellInfo]="getDayInfo" [date]="currentMonth" mode="month" (dateClicked)="selected($event)"></lu-calendar2>
+				<lu-calendar2 [hideToday]="false" [showOverflow]="true" [enableOverflow]="true" [getCellInfo]="getDayInfo" [date]="currentMonth" mode="day" (dateClicked)="selected($event)"></lu-calendar2>
 			`,
 		};
 	},

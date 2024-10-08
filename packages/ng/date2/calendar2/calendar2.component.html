@@ -1,8 +1,8 @@
 <div class="calendar">
-	@switch (displayMode()) { @case ('month') {
+	@switch (displayMode()) { @case ('day') {
 	<div class="calendar-name" id="calendar-name" aria-live="polite">
-		<button type="button" class="calendar-name-button" (click)="displayMode.set('year')">{{ currentMonthLabel() }}</button>&ngsp;
-		<button type="button" class="calendar-name-button" (click)="displayMode.set('decade')">{{ currentYearLabel() }}</button>
+		<button type="button" class="calendar-name-button" (click)="displayMode.set('month')">{{ currentMonthLabel() }}</button>&ngsp;
+		<button type="button" class="calendar-name-button" (click)="displayMode.set('year')">{{ currentYearLabel() }}</button>
 		<span class="u-mask">{{ intl.directionKeysTip }} </span>
 	</div>
 	<table class="calendar-table" role="grid" aria-labelledby="calendar-name">
@@ -34,7 +34,7 @@
 					<button
 						[luCalendar2Cell]="dayIndex"
 						[luCalendar2Date]="day.date"
-						luCalendar2Mode="month"
+						luCalendar2Mode="day"
 						class="calendar-table-body-row-cell-action"
 						type="button"
 						[attr.aria-disabled]="day.disabled ? 'true' : null"
@@ -84,9 +84,9 @@
 			/>
 		</symbol>
 	</svg>
-	} @case ('year') {
+	} @case ('month') {
 	<div class="calendar-name" id="calendar-year-name">
-		<button type="button" class="calendar-name-button" (click)="displayMode.set('decade')">{{ currentYearLabel() }}</button>
+		<button type="button" class="calendar-name-button" (click)="displayMode.set('year')">{{ currentYearLabel() }}</button>
 		<span class="u-mask">{{ intl.directionKeysTip }} </span>
 	</div>
 	<table class="calendar-table" role="grid" aria-labelledby="calendar-year-name">
@@ -111,7 +111,7 @@
 						[luCalendar2Date]="month.date"
 						[disabled]="month.status.disabled"
 						(click)="onCellClicked(month.date)"
-						luCalendar2Mode="year"
+						luCalendar2Mode="month"
 					>
 						<span class="u-mask">{{ month.long }}</span>
 						@if (month.isCurrent) {
@@ -124,7 +124,7 @@
 			}
 		</tbody>
 	</table>
-	} @case ('decade') {
+	} @case ('year') {
 	<div class="calendar-name" id="calendar-decade-name">
 		{{ currentDecadeLabel() }}
 		<span class="u-mask">{{ intl.directionKeysTip }} </span>
@@ -150,7 +150,7 @@
 						[luCalendar2Cell]="index"
 						[disabled]="year.status.disabled"
 						[luCalendar2Date]="year.date"
-						luCalendar2Mode="decade"
+						luCalendar2Mode="year"
 						(click)="onCellClicked(year.date)"
 					>
 						{{ year.label }} @if (year.isCurrent) {

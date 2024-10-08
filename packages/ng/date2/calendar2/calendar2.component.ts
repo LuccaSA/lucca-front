@@ -39,7 +39,7 @@ import { CALENDAR_CELLS, CALENDAR_TABBABLE_DATE } from './calendar2.tokens';
 import { CellStatus } from './cell-status';
 import { DateRange } from './date-range';
 
-const MODE_HIERARCHY: CalendarMode[] = ['month', 'year', 'decade'];
+const MODE_HIERARCHY: CalendarMode[] = ['day', 'month', 'year'];
 
 @Component({
 	selector: 'lu-calendar2',
@@ -94,9 +94,9 @@ export class Calendar2Component implements OnInit {
 
 	tabbableDate = model<Date | null>(null);
 
-	mode = model<CalendarMode>('month');
+	mode = model<CalendarMode>('day');
 
-	displayMode = model<CalendarMode>('decade');
+	displayMode = model<CalendarMode>('year');
 
 	ranges = input<DateRange[]>([]);
 
@@ -275,13 +275,13 @@ export class Calendar2Component implements OnInit {
 			if (targetZoomLevel >= 0 && targetZoomLevel >= maxZoomLevel) {
 				const newZoomLevel = MODE_HIERARCHY[targetZoomLevel];
 				switch (newZoomLevel) {
-					case 'decade':
+					case 'year':
 						this.date.set(startOfDecade(date));
 						break;
-					case 'year':
+					case 'month':
 						this.date.set(startOfYear(date));
 						break;
-					case 'month':
+					case 'day':
 						this.date.set(startOfMonth(date));
 				}
 				this.displayMode.set(newZoomLevel);
@@ -294,7 +294,7 @@ export class Calendar2Component implements OnInit {
 
 		const classes: string[] = status?.classes || [];
 
-		const rangeInfo = this.getRangeInfo(date, 'month');
+		const rangeInfo = this.getRangeInfo(date, 'day');
 
 		if (rangeInfo?.class) {
 			classes.push(rangeInfo.class);
@@ -317,7 +317,7 @@ export class Calendar2Component implements OnInit {
 	getRangeInfo(date: Date, scope: CalendarMode) {
 		const range: DateRange | undefined = this.ranges().find((range: DateRange) => {
 			return (
-				(range.scope || 'month') === scope &&
+				(range.scope || 'day') === scope &&
 				isWithinInterval(date, {
 					start: startOfDay(range.start),
 					end: range.end || endOfMonth(date),

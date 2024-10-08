@@ -43,7 +43,7 @@ export default {
 		},
 		mode: {
 			control: 'select',
-			options: ['month', 'year', 'decade'],
+			options: ['day', 'month', 'year'],
 		},
 	},
 	render: (args, { argTypes }) => {
@@ -71,6 +71,6 @@ export const Basic: StoryObj<DateInputComponent> = {
 		hasTodayButton: false,
 		hideWeekend: false,
 		clearable: false,
-		mode: 'month',
+		mode: 'day',
 	},
 };

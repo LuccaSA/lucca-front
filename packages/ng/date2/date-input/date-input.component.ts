@@ -64,7 +64,7 @@ export class DateInputComponent implements ControlValueAccessor, Validator {
 	hasTodayButton = input<boolean, boolean>(false, { transform: booleanAttribute });
 	clearable = input<boolean, boolean>(false, { transform: booleanAttribute });
 	placeholder = input<string>(this.#dateFormat);
-	mode = input<CalendarMode>('month');
+	mode = input<CalendarMode>('day');
 	hideWeekend = input<boolean, boolean>(false, { transform: booleanAttribute });
 
 	getCellInfo = input<((day: Date, mode: CalendarMode) => CellStatus) | null>();
@@ -74,7 +74,7 @@ export class DateInputComponent implements ControlValueAccessor, Validator {
 		new ConnectionPositionPair({ originX: 'end', originY: 'top' }, { overlayX: 'end', overlayY: 'bottom' }, 16, 6),
 	];
 
-	calendarMode = signal<CalendarMode>('month');
+	calendarMode = signal<CalendarMode>('day');
 
 	inputFocused = signal(false);
 
@@ -90,13 +90,13 @@ export class DateInputComponent implements ControlValueAccessor, Validator {
 		if (this.selectedDate() && this.isValidDate(this.selectedDate())) {
 			let formatter: Intl.DateTimeFormat;
 			switch (this.mode()) {
-				case 'month':
+				case 'day':
 					formatter = this.#intlDateTimeFormat;
 					break;
-				case 'year':
+				case 'month':
 					formatter = this.#intlDateTimeFormatMonth;
 					break;
-				case 'decade':
+				case 'year':
 					formatter = this.#intlDateTimeFormatYear;
 					break;
 			}
@@ -170,26 +170,26 @@ export class DateInputComponent implements ControlValueAccessor, Validator {
 		let result = true;
 		if (this.min()) {
 			switch (mode) {
-				case 'month':
+				case 'day':
 					result = result && this.min().getTime() <= date.getTime();
 					break;
-				case 'year':
+				case 'month':
 					result = result && this.min().getMonth() <= date.getMonth();
 					break;
-				case 'decade':
+				case 'year':
 					result = result && this.min().getFullYear() <= date.getFullYear();
 					break;
 			}
 		}
 		if (this.max()) {
 			switch (mode) {
-				case 'month':
+				case 'day':
 					result = result && this.max().getTime() >= date.getTime();
 					break;
-				case 'year':
+				case 'month':
 					result = result && this.max().getMonth() >= date.getMonth();
 					break;
-				case 'decade':
+				case 'year':
 					result = result && this.max().getFullYear() >= date.getFullYear();
 					break;
 			}
@@ -237,15 +237,15 @@ export class DateInputComponent implements ControlValueAccessor, Validator {
 
 	move(direction: 1 | -1): void {
 		switch (this.calendarMode()) {
-			case 'decade':
+			case 'year':
 				this.currentDate.set(addYears(this.currentDate(), direction * 10));
 				this.tabbableDate.set(addYears(this.tabbableDate(), direction * 10));
 				break;
-			case 'year':
+			case 'month':
 				this.currentDate.set(addYears(this.currentDate(), direction));
 				this.tabbableDate.set(addYears(this.tabbableDate(), direction));
 				break;
-			case 'month':
+			case 'day':
 				this.currentDate.set(addMonths(this.currentDate(), direction));
 				this.tabbableDate.set(addMonths(this.tabbableDate(), direction));
 				break;
