@@ -13,6 +13,7 @@
 	[disabled]="disabled$ | async"
 	luInput
 	#inputElement
+	[attr.autocomplete]="autocomplete"
 />
 <div class="simpleSelect-value">
 	<ng-container *luOptionOutlet="valueTpl || optionTpl; value: value"></ng-container>
