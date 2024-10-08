@@ -56,8 +56,8 @@ export class LuMultiSelectWithSelectAllDirective<TValue> extends ɵIsSelectedStr
 
 		this.#select.registerOnChange = (fn) => this.registerOnChange(fn);
 		this.#select.writeValue = (value) => this.writeValue(value);
-		this.#select.panelHeaderTpl = LuMultiSelectAllHeaderComponent;
-		this.#select.valuesTpl = LuMultiSelectAllDisplayerComponent;
+		this.#select.panelHeaderTpl.set(LuMultiSelectAllHeaderComponent);
+		this.#select.valuesTpl.set(LuMultiSelectAllDisplayerComponent);
 		this.#select.hasValue = () => this.#hasValue();
 
 		toObservable(this.#selectAllValue)

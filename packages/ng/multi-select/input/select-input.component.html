@@ -1,4 +1,4 @@
-<ng-container *luOptionOutlet="valuesTpl; value: value || []"></ng-container>
+<ng-container *luOptionOutlet="valuesTpl(); value: value || []"></ng-container>
 
 <button
 	*ngIf="hasValue() && clearable && (disabled$ | async) === false"

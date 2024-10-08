@@ -21,7 +21,7 @@ import { MULTI_SELECT_WITH_SELECT_ALL_CONTEXT } from './select-all.models';
 				<div class="multipleSelect-displayer-filter">
 					@if (displayerCount() === 1) {
 						<div class="multipleSelect-displayer-chip chip" [class.mod-unkillable]="disabled()">
-							<span class="multipleSelect-displayer-chip-value" *luOptionOutlet="select.valueTpl || select.optionTpl; value: select.value[0]"></span>
+							<span class="multipleSelect-displayer-chip-value" *luOptionOutlet="select.displayerTpl(); value: select.value[0]"></span>
 
 							@if (!disabled()) {
 								<button type="button" class="chip-kill" (click)="unselectOption(select.value[0], $event)">

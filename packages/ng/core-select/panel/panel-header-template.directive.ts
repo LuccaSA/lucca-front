@@ -11,7 +11,7 @@ export class LuCoreSelectPanelHeaderDirective {
 	readonly select = input.required<ALuSelectInputComponent<unknown, unknown>>({ alias: 'luSelectPanelHeader' });
 
 	constructor() {
-		effect(() => (this.select().panelHeaderTpl = this.templateRef));
+		effect(() => this.select().panelHeaderTpl.set(this.templateRef));
 	}
 
 	public static ngTemplateContextGuard(_dir: LuCoreSelectPanelHeaderDirective, ctx: unknown): ctx is void {
