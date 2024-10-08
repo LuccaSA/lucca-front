@@ -17,7 +17,7 @@ let nextId = 0;
 	encapsulation: ViewEncapsulation.None,
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	host: {
-		class: 'form-field mod-withArrow',
+		class: 'form-field',
 	},
 	providers: [LuClass],
 })
@@ -53,6 +53,7 @@ export class RadioComponent<T = unknown> implements OnChanges {
 	ngOnChanges(): void {
 		this.#luClass.setState({
 			[`mod-${this.#parentGroup.size}`]: !!this.#parentGroup.size,
+			'mod-withArrow': this.arrow !== undefined,
 		});
 	}
 }
