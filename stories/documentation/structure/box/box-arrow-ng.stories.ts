@@ -1,9 +1,9 @@
-import { Meta, moduleMetadata, StoryFn } from '@storybook/angular';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { Meta, moduleMetadata, StoryFn } from '@storybook/angular';
 import { FormFieldComponent } from '../../../../packages/ng/form-field/form-field.component';
-import { RadioComponent } from '../../../../packages/ng/forms/radio-group-input/radio/radio.component';
 import { RadioGroupInputComponent } from '../../../../packages/ng/forms/radio-group-input/radio-group-input.component';
+import { RadioComponent } from '../../../../packages/ng/forms/radio-group-input/radio/radio.component';
 
 interface ArrowBasicStory {
 	s: boolean;
@@ -52,15 +52,13 @@ function getTemplate(args: ArrowBasicStory): string {
 	const checked = args.checked ? ' checked' : '';
 
 	if (args.field === 'radio') {
-		return `<div class="u-displayFlex pr-u-gap200">
-	<lu-form-field>
-		<lu-radio-group-input [(ngModel)]="example" arrow="neutral">
-			<lu-radio [value]="1" inlineMessage="Option text">Option A</lu-radio>
-			<lu-radio [value]="2" inlineMessage="Option text">Option B</lu-radio>
-			<lu-radio [value]="3" inlineMessage="Option text">Option C</lu-radio>
-		</lu-radio-group-input>
-	</lu-form-field>
-</div>
+		return `<lu-form-field>
+	<lu-radio-group-input [(ngModel)]="example" arrow="neutral">
+		<lu-radio [value]="1">Option A</lu-radio>
+		<lu-radio [value]="2">Option B</lu-radio>
+		<lu-radio [value]="3">Option C</lu-radio>
+	</lu-radio-group-input>
+</lu-form-field>
 <div class="box mod-withArrow${neutral}">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam illo nostrum tenetur expedita. Accusantium cumque nisi excepturi eius corporis, iusto quaerat temporibus dolorum necessitatibus laboriosam quidem quibusdam quae aperiam! Vitae!</div>`;
 	} else if (args.field === 'checkbox') {
 		return `<div class="form-field mod-withArrow${s}">
