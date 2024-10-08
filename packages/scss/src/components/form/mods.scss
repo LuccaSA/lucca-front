@@ -19,14 +19,10 @@
 
 @mixin inline {
 	.form-field {
-		display: inline-flex;
-		
+		display: inline-grid;
+
 		&:not(:last-of-type) {
 			margin-inline-end: var(--pr-t-spacings-200);
-		}
-
-		&:has(.radioField) {
-			display: inline-grid;
 		}
 	}
 }
