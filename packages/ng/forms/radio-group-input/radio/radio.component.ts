@@ -17,12 +17,14 @@ let nextId = 0;
 	encapsulation: ViewEncapsulation.None,
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	host: {
-		class: 'form-field',
+		class: 'form-field mod-withArrow',
 	},
 	providers: [LuClass],
 })
 export class RadioComponent<T = unknown> implements OnChanges {
 	#luClass = inject(LuClass);
+
+	#parentGroup = inject(RADIO_GROUP_INSTANCE);
 
 	@Input({ required: true })
 	value: T;
@@ -33,7 +35,9 @@ export class RadioComponent<T = unknown> implements OnChanges {
 	@Input()
 	inlineMessage: string;
 
-	#parentGroup = inject(RADIO_GROUP_INSTANCE);
+	public get arrow() {
+		return this.#parentGroup.arrow;
+	}
 
 	public get formControl() {
 		return this.#parentGroup.ngControl.control;
