@@ -1,11 +1,12 @@
 import { HttpClient } from '@angular/common/http';
-import { Directive, computed, forwardRef, inject, input } from '@angular/core';
+import { Directive, Type, booleanAttribute, computed, effect, forwardRef, inject, input, signal, untracked } from '@angular/core';
 import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 import { ILuApiCollectionResponse } from '@lucca-front/ng/api';
 import { CORE_SELECT_API_TOTAL_COUNT_PROVIDER, CoreSelectApiTotalCountProvider } from '@lucca-front/ng/core-select';
 import { ALuCoreSelectApiDirective } from '@lucca-front/ng/core-select/api';
 import { LuDisplayFormat, LuDisplayFullname } from '@lucca-front/ng/user';
 import { EMPTY, Observable, catchError, combineLatest, debounceTime, map, of, shareReplay, switchMap, take, tap } from 'rxjs';
+import { FORMER_EMPLOYEES_CONTEXT, FormerEmployeesContext, LuCoreSelectFormerEmployeesComponent } from './former-employees.component';
 import { LU_CORE_SELECT_CURRENT_USER_ID } from './me.provider';
 import { LuUserDisplayerComponent } from './user-displayer.component';
 import { LuCoreSelectUserHomonymsService } from './user-homonym.service';
@@ -22,6 +23,10 @@ import { LuCoreSelectUser, LuCoreSelectWithAdditionnalInformation } from './user
 		{
 			provide: CORE_SELECT_API_TOTAL_COUNT_PROVIDER,
 			useExisting: forwardRef(() => LuCoreSelectUsersDirective),
+		},
+		{
+			provide: FORMER_EMPLOYEES_CONTEXT,
+			useExisting: forwardRef(() => LuCoreSelectUsersDirective satisfies Type<FormerEmployeesContext>),
 		},
 	],
 })
@@ -46,15 +51,21 @@ export class LuCoreSelectUsersDirective<T extends LuCoreSelectUser = LuCoreSelec
 	orderBy = input<string | null>(null);
 	operationIds = input<number[] | null>(null);
 	appInstanceId = input<number | null>(null);
-	enableFormerEmployees = input<boolean>(false);
-	displayMeOption = input<boolean>(true);
+	enableFormerEmployees = input(false, { transform: booleanAttribute });
+	displayMeOption = input(true);
+
+	includeFormerEmployees = signal(false);
 
 	constructor() {
 		super();
 		this.select.optionTpl.set(LuUserOptionComponent);
 		this.select.valueTpl.set(LuUserDisplayerComponent);
 
-		// this.#select.panelHeaderTpl = LuMultiSelectAllHeaderComponent;
+		effect(() => {
+			if (this.enableFormerEmployees()) {
+				untracked(() => this.select.panelHeaderTpl.set(LuCoreSelectFormerEmployeesComponent));
+			}
+		});
 	}
 
 	protected defaultUrl = computed(() => (this.appInstanceId() && this.operationIds()?.length ? this.#defaultScopedSearchUrl : this.#defaultSearchUrl));
@@ -67,16 +78,16 @@ export class LuCoreSelectUsersDirective<T extends LuCoreSelectUser = LuCoreSelec
 		this.clue$,
 		toObservable(this.operationIds),
 		toObservable(this.appInstanceId),
-		toObservable(this.enableFormerEmployees),
+		toObservable(this.includeFormerEmployees),
 	]).pipe(
-		map(([filters, orderBy, clue, operationIds, appInstanceId, enableFormerEmployees]) => ({
+		map(([filters, orderBy, clue, operationIds, appInstanceId, includeFormerEmployees]) => ({
 			fields: this.#userFields,
 			...filters,
 			...(orderBy ? { orderBy } : {}),
 			...(clue ? { clue: clue } : {}),
 			...(operationIds ? { operations: operationIds.join(',') } : {}),
 			...(appInstanceId ? { appInstanceId } : {}),
-			...(enableFormerEmployees ? { formerEmployees: enableFormerEmployees } : {}),
+			...(includeFormerEmployees ? { formerEmployees: includeFormerEmployees } : {}),
 		})),
 	);
 
