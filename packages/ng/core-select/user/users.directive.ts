@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Directive, Input, computed, forwardRef, inject, signal } from '@angular/core';
+import { Directive, computed, forwardRef, inject, input } from '@angular/core';
 import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 import { ILuApiCollectionResponse } from '@lucca-front/ng/api';
 import { CORE_SELECT_API_TOTAL_COUNT_PROVIDER, CoreSelectApiTotalCountProvider } from '@lucca-front/ng/core-select';
@@ -39,76 +39,35 @@ export class LuCoreSelectUsersDirective<T extends LuCoreSelectUser = LuCoreSelec
 	protected httpClient = inject(HttpClient);
 	public currentUserId = inject(LU_CORE_SELECT_CURRENT_USER_ID);
 
-	@Input()
-	public set url(url: string | null) {
-		this.customUrl.set(url);
-	}
+	displayFormat = input<LuDisplayFormat>(LuDisplayFullname.lastfirst);
 
-	@Input()
-	public set operationIds(ids: number[] | null) {
-		this._operationIds.set(ids);
-	}
-
-	@Input()
-	public set appInstanceId(id: number | null) {
-		this._appInstanceId.set(id);
-	}
-
-	@Input()
-	public set enableFormerEmployees(value: boolean) {
-		this._enableFormerEmployees.set(value);
-	}
-
-	@Input()
-	public set displayMeOption(value: boolean) {
-		this._displayMeOption.set(value);
-	}
-
-	public get displayMeOption() {
-		return this._displayMeOption();
-	}
-
-	@Input()
-	public set displayFormat(format: LuDisplayFormat) {
-		this._displayFormat = format;
-	}
-
-	private _displayFormat: LuDisplayFormat = LuDisplayFullname.lastfirst;
-
-	public get displayFormat() {
-		return this._displayFormat;
-	}
-
-	@Input()
-	public set filters(filters: Record<string, string | number | boolean>) {
-		this._filters.set(filters);
-	}
-
-	protected _url = signal<string | null>(null);
+	filters = input<Record<string, string | number | boolean>>({});
+	url = input<string | null>(null);
+	orderBy = input<string | null>(null);
+	operationIds = input<number[] | null>(null);
+	appInstanceId = input<number | null>(null);
+	enableFormerEmployees = input<boolean>(false);
+	displayMeOption = input<boolean>(true);
 
 	constructor() {
 		super();
 		this.select.optionTpl = LuUserOptionComponent;
 		this.select.valueTpl = LuUserDisplayerComponent;
+
+		// this.#select.panelHeaderTpl = LuMultiSelectAllHeaderComponent;
 	}
 
-	protected _orderBy = signal<string | null>(null);
-	protected _filters = signal<Record<string, string | number | boolean>>({});
-	protected _operationIds = signal<number[] | null>(null);
-	protected _appInstanceId = signal<number | null>(null);
-	protected _enableFormerEmployees = signal<boolean>(false);
-	protected defaultUrl = computed(() => (this._appInstanceId() && this._operationIds()?.length ? this.#defaultScopedSearchUrl : this.#defaultSearchUrl));
-	protected customUrl = signal<string | null>(null);
-	protected _displayMeOption = signal<boolean>(true);
-	protected displayMeOption$ = toObservable(this._displayMeOption);
+	protected defaultUrl = computed(() => (this.appInstanceId() && this.operationIds()?.length ? this.#defaultScopedSearchUrl : this.#defaultSearchUrl));
+	protected displayMeOption$ = toObservable(this.displayMeOption);
+	protected urlOrDefault = computed(() => this.url() ?? this.defaultUrl());
 
 	protected override params$: Observable<Record<string, string | number | boolean>> = combineLatest([
-		toObservable(this._filters),
-		toObservable(this._orderBy),
+		toObservable(this.filters),
+		toObservable(this.orderBy),
 		this.clue$,
-		toObservable(this._operationIds),
-		toObservable(this._appInstanceId),
-		toObservable(this._enableFormerEmployees),
+		toObservable(this.operationIds),
+		toObservable(this.appInstanceId),
+		toObservable(this.enableFormerEmployees),
 	]).pipe(
 		map(([filters, orderBy, clue, operationIds, appInstanceId, enableFormerEmployees]) => ({
 			fields: this.#userFields,
@@ -124,24 +83,21 @@ export class LuCoreSelectUsersDirective<T extends LuCoreSelectUser = LuCoreSelec
 	protected meParams$ = toObservable(
 		computed(() => ({
 			fields: this.#userFields,
-			...(this._filters() ?? {}),
-			...(this._operationIds() ? { operations: this._operationIds().join(',') } : {}),
-			...(this._appInstanceId() ? { appInstanceId: this._appInstanceId() } : {}),
+			...(this.filters() ?? {}),
+			...(this.operationIds() ? { operations: this.operationIds().join(',') } : {}),
+			...(this.appInstanceId() ? { appInstanceId: this.appInstanceId() } : {}),
 			id: this.currentUserId,
 		})),
 	);
 
 	protected me$ = this.meParams$.pipe(
-		switchMap((params) => {
-			const url = this.customUrl() || this.defaultUrl();
-			return this.httpClient.get<ILuApiCollectionResponse<{ item: T }>>(url, { params }).pipe(catchError(() => EMPTY));
-		}),
+		switchMap((params) => this.httpClient.get<ILuApiCollectionResponse<{ item: T }>>(this.urlOrDefault(), { params }).pipe(catchError(() => EMPTY))),
 		map((res) => res.data.items.map(({ item }) => item)[0] ?? null),
 		takeUntilDestroyed(),
 		shareReplay(1),
 	);
 
-	public totalCount$ = toObservable(computed(() => ({ url: this._url(), filters: this._filters() }))).pipe(
+	public totalCount$ = toObservable(computed(() => ({ url: this.urlOrDefault(), filters: this.filters() }))).pipe(
 		debounceTime(250),
 		switchMap(({ url, filters }) =>
 			this.httpClient.get<{ count: number }>(url, {
@@ -159,10 +115,8 @@ export class LuCoreSelectUsersDirective<T extends LuCoreSelectUser = LuCoreSelec
 	}
 
 	protected getOptions(params: Record<string, string | number | boolean>, page: number): Observable<T[]> {
-		const url = this.customUrl() || this.defaultUrl();
-
 		return this.httpClient
-			.get<ILuApiCollectionResponse<{ item: T }>>(url, {
+			.get<ILuApiCollectionResponse<{ item: T }>>(this.urlOrDefault(), {
 				params: {
 					...params,
 					paging: `${page * this.pageSize},${this.pageSize}`,
@@ -193,7 +147,7 @@ export class LuCoreSelectUsersDirective<T extends LuCoreSelectUser = LuCoreSelec
 			}),
 		);
 
-		return page$.pipe(switchMap((page) => this.#userHomonymsService.handleHomonyms(page.items, this.displayFormat).pipe(map((items) => ({ items, isLastPage: page.isLastPage })))));
+		return page$.pipe(switchMap((page) => this.#userHomonymsService.handleHomonyms(page.items, this.displayFormat()).pipe(map((items) => ({ items, isLastPage: page.isLastPage })))));
 	}
 
 	protected override optionComparer = (a: T, b: T) => a.id === b.id;
