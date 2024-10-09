@@ -11,6 +11,7 @@
 
 .checkboxField-input {
 	&[aria-checked='mixed'] {
+		@include checked;
 		@include mixed;
 	}
 

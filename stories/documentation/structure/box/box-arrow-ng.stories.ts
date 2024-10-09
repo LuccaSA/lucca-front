@@ -1,4 +1,9 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { FormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { Meta, moduleMetadata, StoryFn } from '@storybook/angular';
+import { FormFieldComponent } from '../../../../packages/ng/form-field/form-field.component';
+import { RadioGroupInputComponent } from '../../../../packages/ng/forms/radio-group-input/radio-group-input.component';
+import { RadioComponent } from '../../../../packages/ng/forms/radio-group-input/radio/radio.component';
 
 interface ArrowBasicStory {
 	s: boolean;
@@ -8,7 +13,12 @@ interface ArrowBasicStory {
 }
 
 export default {
-	title: 'Documentation/Structure/Box/Arrow',
+	title: 'Documentation/Structure/Box/Arrow/Angular',
+	decorators: [
+		moduleMetadata({
+			imports: [RadioGroupInputComponent, RadioComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule],
+		}),
+	],
 	argTypes: {
 		checked: {
 			control: {
@@ -42,47 +52,14 @@ function getTemplate(args: ArrowBasicStory): string {
 	const checked = args.checked ? ' checked' : '';
 
 	if (args.field === 'radio') {
-		return `<fieldset class="form-fieldset mod-inline">
-	<legend class="formLabel u-mask">
-		Label
-		<sup class="formLabel-required" aria-hidden="true">*</sup>
-	</legend>
-	<div class="form-field mod-withArrow${s}">
-	<label class="formLabel" for="IDradioA">Label A</label>
-	<span class="radioField">
-		<input
-		type="radio"
-		class="radioField-input"
-		id="IDradioA"
-		name="radioName2"
-		aria-describedby="IDmessageRadioA"
-		checked
-		/>
-		<span class="radioField-icon" aria-hidden="true">
-		<span class="radioField-icon-check"></span>
-		</span>
-	</span>
-	<div class="form-field-arrow${neutral}"></div>
-	</div>
-	<div class="form-field mod-withArrow${s}">
-	<label class="formLabel" for="IDradioB">Label B</label>
-	<span class="radioField">
-		<input
-		type="radio"
-		class="radioField-input"
-		id="IDradioB"
-		name="radioName2"
-		aria-describedby="IDmessageRadioB"
-		/>
-		<span class="radioField-icon" aria-hidden="true">
-		<span class="radioField-icon-check"></span>
-		</span>
-	</span>
-	<div class="form-field-arrow${neutral}"></div>
-	</div>
-</fieldset>
-	<div class="box mod-withArrow${neutral}">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam illo nostrum tenetur expedita. Accusantium cumque nisi excepturi eius corporis, iusto quaerat temporibus dolorum necessitatibus laboriosam quidem quibusdam quae aperiam! Vitae!</div>
-`;
+		return `<lu-form-field label="Légende" hiddenLabel>
+	<lu-radio-group-input [(ngModel)]="example" arrow="neutral">
+		<lu-radio [value]="1">Option A</lu-radio>
+		<lu-radio [value]="2">Option B</lu-radio>
+		<lu-radio [value]="3">Option C</lu-radio>
+	</lu-radio-group-input>
+</lu-form-field>
+<div class="box mod-withArrow${neutral}">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam illo nostrum tenetur expedita. Accusantium cumque nisi excepturi eius corporis, iusto quaerat temporibus dolorum necessitatibus laboriosam quidem quibusdam quae aperiam! Vitae!</div>`;
 	} else if (args.field === 'checkbox') {
 		return `<div class="form-field mod-withArrow${s}">
 	<label class="formLabel" for="CB">Label</label>

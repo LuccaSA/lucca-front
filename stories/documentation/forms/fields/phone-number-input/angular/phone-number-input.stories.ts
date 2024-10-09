@@ -17,6 +17,7 @@ export default {
 export const Basic: StoryObj<PhoneNumberInputComponent & FormFieldComponent> = {
 	render: (args, { argTypes }) => {
 		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, errorInlineMessage, size, ...inputArgs } = args;
+
 		return {
 			props: {
 				example: '+12125550199',
@@ -35,7 +36,6 @@ export const Basic: StoryObj<PhoneNumberInputComponent & FormFieldComponent> = {
 				argTypes,
 			)}>
 	<lu-phone-number-input label="${label}" [country]="country" [(ngModel)]="example" #result="ngModel" ${generateInputs(inputArgs, argTypes)}></lu-phone-number-input>
-
 </lu-form-field>
 @if(result.invalid && result.errors.validPhoneNumber){
   <div>{{result.errors.validPhoneNumber}}</div>
@@ -53,6 +53,12 @@ export const Basic: StoryObj<PhoneNumberInputComponent & FormFieldComponent> = {
 		},
 		inlineMessageState: {
 			options: ['default', 'success', 'warning', 'error'],
+			control: {
+				type: 'select',
+			},
+		},
+		autocomplete: {
+			options: ['', 'off', 'tel'],
 			control: {
 				type: 'select',
 			},

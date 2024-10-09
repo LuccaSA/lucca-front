@@ -34,6 +34,7 @@
 		<input
 			luInput
 			[type]="type"
+			[attr.autocomplete]="autocomplete ? autocomplete : null"
 			class="textField-input-value"
 			[placeholder]="placeholder"
 			[formControl]="ngControl.control"
