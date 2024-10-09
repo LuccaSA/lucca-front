@@ -2,23 +2,23 @@ import { FlexibleConnectedPositionStrategy, HorizontalConnectionPos, OriginConne
 import { ComponentPortal } from '@angular/cdk/portal';
 import {
 	AfterContentInit,
+	booleanAttribute,
 	ChangeDetectorRef,
 	DestroyRef,
 	Directive,
 	ElementRef,
 	HostBinding,
 	HostListener,
+	inject,
 	Input,
+	numberAttribute,
 	OnDestroy,
 	Renderer2,
-	booleanAttribute,
-	inject,
-	numberAttribute,
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { SafeHtml } from '@angular/platform-browser';
 import { LuPopoverPosition } from '@lucca-front/ng/popover';
-import { BehaviorSubject, Observable, Subject, combineLatest, merge, startWith, switchMap, timer } from 'rxjs';
+import { BehaviorSubject, combineLatest, merge, Observable, startWith, Subject, switchMap, timer } from 'rxjs';
 import { debounce, debounceTime, filter, map } from 'rxjs/operators';
 import { LuTooltipPanelComponent } from '../panel';
 
@@ -26,6 +26,7 @@ let nextId = 0;
 
 @Directive({
 	selector: '[luTooltip]',
+	exportAs: 'luTooltip',
 	standalone: true,
 })
 export class LuTooltipTriggerDirective implements AfterContentInit, OnDestroy {
