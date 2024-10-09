@@ -30,6 +30,10 @@
 		@include XL;
 	}
 
+	&.mod-neutral {
+		@include neutral;
+	}
+
 	&:where(.mod-drawer) {
 		@include drawer;
 
