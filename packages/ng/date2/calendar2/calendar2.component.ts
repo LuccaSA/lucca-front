@@ -26,8 +26,8 @@ import {
 	subYears,
 	WeekOptions,
 } from 'date-fns';
-import { getIntl } from '../../core/translate';
-import { LuTooltipTriggerDirective } from '../../tooltip/trigger';
+import { getIntl } from '@lucca-front/ng/core';
+import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
 import { WEEK_INFO } from '../calendar.token';
 import { LU_DATE2_TRANSLATIONS } from '../date2.translate';
 import { RepeatTimesDirective } from '../repeat-times.directive';
