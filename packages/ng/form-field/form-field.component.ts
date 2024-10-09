@@ -93,6 +93,11 @@ export class FormFieldComponent implements OnChanges, OnDestroy, DoCheck {
 	})
 	rolePresentationLabel = false;
 
+	@Input({
+		transform: booleanAttribute,
+	})
+	inline = false;
+
 	@Input()
 	statusControl: AbstractControl;
 
@@ -138,6 +143,8 @@ export class FormFieldComponent implements OnChanges, OnDestroy, DoCheck {
 
 	@Input()
 	layout: 'default' | 'checkable' | 'fieldset' = 'default';
+
+	hasArrow = false;
 
 	#inputs: InputDirective[] = [];
 	/**
