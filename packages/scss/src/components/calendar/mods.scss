@@ -1,0 +1,19 @@
+@mixin daysOffHidden {
+	.calendar-table-body-row-cell-action-stripes {
+		--components-calendar-table-body-row-cell-action-stripesDisplay: none;
+	}
+}
+
+@mixin daysOverflowingHidden {
+	.calendar-table-body-row-cell {
+		&.is-overflow {
+			.calendar-table-body-row-cell-action {
+				--components-calendar-table-body-row-cell-actionDisplay: none;
+			}
+		}
+	}
+}
+
+@mixin third {
+	--components-calendarBorderSpacing: 0 var(--pr-t-spacings-200);
+}

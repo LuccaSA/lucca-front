@@ -5,5 +5,6 @@ export * from './tree/index';
 export * from './group/index';
 export * from './id/index';
 export * from './portal/index';
+export * from './signal';
 export * from './type/index';
 export * from './tools/class';
