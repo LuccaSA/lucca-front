@@ -35,7 +35,7 @@ export class LuDialogService {
 			ariaLabel: config.ariaLabel,
 			// If focus is first-input, focus dialog and let the component do the rest
 			// Else, just set it to config value or default to first-tabbable
-			autoFocus: config.autoFocus === 'first-input' ? 'dialog' : config.autoFocus ?? 'first-tabbable',
+			autoFocus: config.autoFocus === 'first-input' ? 'dialog' : (config.autoFocus ?? 'first-tabbable'),
 			templateContext: () => ({ dialogRef: luDialogRef }),
 			injector: this.#injector,
 			providers: (ref: DialogRef<LuDialogResult<C>, C>) => {
