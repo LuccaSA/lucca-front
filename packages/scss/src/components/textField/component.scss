@@ -2,13 +2,18 @@
 @use '@lucca-front/scss/src/components/inlineMessage/exports' as inlineMessage;
 @use '@lucca-front/scss/src/commons/utils/a11y';
 @use '@lucca-front/icons/src/icon/exports' as icon;
+@use '@lucca-front/scss/src/commons/utils/namespace';
 
-@mixin component($atRoot: 'without: rule') {
+@mixin component($atRoot: namespace.$defaultAtRoot) {
 	display: flex;
 	align-items: stretch;
 	border-radius: var(--commons-borderRadius-M);
 	background-color: var(--component-textField-background);
 	box-shadow: 0 0 0 1px var(--component-textField-border);
+
+	&:hover {
+		--component-textField-border: var(--palettes-neutral-400);
+	}
 
 	&:has(.textField-input-value:focus-visible) {
 		@include a11y.focusVisible($offset: 3px);
@@ -29,10 +34,6 @@
 			border-radius: var(--commons-borderRadius-M);
 			background-color: var(--component-textField-background);
 			position: relative;
-
-			&:hover {
-				--component-textField-border: var(--palettes-neutral-400);
-			}
 
 			&:has(.textField-input-affix-icon) {
 				--component-textField-affix-padding: 2.5rem;
@@ -55,6 +56,7 @@
 			}
 		}
 
+		.textField-input-valueClone,
 		.textField-input-value {
 			border: 0;
 			outline: 0;
@@ -65,6 +67,12 @@
 				var(--component-textField-padding);
 			background-color: transparent;
 			color: var(--component-textField-color);
+			border-radius: var(--commons-borderRadius-M);
+			max-height: var(--component-textField-maxHeight);
+
+			@supports not (height: 1dvh) {
+				--component-textField-maxHeight: var(--component-textField-maxHeightFallback);
+			}
 
 			&::placeholder {
 				color: var(--component-textField-placeholder);

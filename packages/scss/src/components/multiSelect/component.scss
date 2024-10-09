@@ -1,8 +1,9 @@
 @use '@lucca-front/scss/src/commons/utils/reset';
 @use '@lucca-front/scss/src/commons/utils/a11y';
 @use '@lucca-front/icons/src/icon/exports' as icon;
+@use '@lucca-front/scss/src/commons/utils/namespace';
 
-@mixin component($atRoot: 'without: rule') {
+@mixin component($atRoot: namespace.$defaultAtRoot) {
 	display: flex;
 	box-shadow: 0 0 0 1px var(--components-multiSelect-border-color);
 	background-color: var(--components-multiSelect-background);
@@ -11,6 +12,10 @@
 	align-items: flex-end;
 	gap: var(--components-multiSelect-gap);
 	cursor: pointer;
+
+	&:hover {
+		--components-multiSelect-border-color: var(--palettes-neutral-400);
+	}
 
 	&:has(.multipleSelect-displayer-search:focus-visible) {
 		@include a11y.focusVisible($offset: 3px);
@@ -67,6 +72,8 @@
 		.multipleSelect-arrow {
 			@include icon.M;
 			color: var(--components-multiSelect-arrow-color);
+			transition-property: transform;
+			transition-duration: var(--commons-animations-durations-standard);
 		}
 	}
 }

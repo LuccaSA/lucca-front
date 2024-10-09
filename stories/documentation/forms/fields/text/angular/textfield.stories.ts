@@ -42,7 +42,10 @@ export default {
 			description: '[v18.1]',
 		},
 		hiddenLabel: {
-			description: 'Masque le label en le conservant dans le DOM pour les lecteurs d\'écrans'
+			description: 'Masque le label en le conservant dans le DOM pour les lecteurs d’écrans',
+		},
+		autocomplete: {
+			type: 'string',
 		},
 	},
 } as Meta;
@@ -83,6 +86,7 @@ export const Basic: StoryObj<TextInputComponent & { disabled: boolean } & FormFi
 		hiddenLabel: false,
 		hasClearer: false,
 		hasSearchIcon: false,
+		autocomplete: '',
 		searchIcon: 'search',
 		disabled: false,
 		inlineMessage: 'Helper Text',

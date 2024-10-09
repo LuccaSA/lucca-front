@@ -1,8 +1,9 @@
 @use '@lucca-front/scss/src/commons/utils/a11y';
 @use '@lucca-front/scss/src/components/title/exports' as title;
 @use '@lucca-front/icons/src/icon/exports' as icon;
+@use '@lucca-front/scss/src/commons/utils/namespace';
 
-@mixin component($atRoot: 'without: rule') {
+@mixin component($atRoot: namespace.$defaultAtRoot) {
 	display: inline-flex;
 	gap: var(--pr-t-spacings-75);
 	align-items: center;

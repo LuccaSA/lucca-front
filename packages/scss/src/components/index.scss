@@ -49,6 +49,7 @@
 @forward 'tableFixed'; // 33 Ko
 @forward 'segmentedControl';
 @forward 'calendar';
+@forward 'skipLinks';
 
 // caution: the two components cannot be loaded at the same time
 @forward 'grid';

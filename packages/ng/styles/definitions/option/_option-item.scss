@@ -1,7 +1,8 @@
+@use '@lucca-front/scss/src/commons/utils/namespace';
 @use '@lucca-front/icons/src/commons/utils/icon';
 @use '@lucca-front/scss/src/commons/utils/a11y';
 
-:root {
+@include namespace.appendRootVars {
 	--components-options-item-padding-vertical: var(--pr-t-spacings-50);
 	--components-options-item-padding-horizontal: var(--pr-t-spacings-100);
 	--components-options-item-multiple-padding: 2.25rem;
@@ -26,7 +27,7 @@
 	.optionItem-value {
 		position: relative;
 		border-radius: var(--commons-borderRadius-M);
-		display: flex;
+		display: block;
 		padding: var(--components-options-item-padding-vertical) var(--components-options-item-padding-horizontal);
 		transition: background-color 50ms;
 		cursor: pointer;

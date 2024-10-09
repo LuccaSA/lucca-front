@@ -1,4 +1,6 @@
-@mixin component($atRoot: 'without: rule') {
+@use '@lucca-front/scss/src/commons/utils/namespace';
+
+@mixin component($atRoot: namespace.$defaultAtRoot) {
 	vertical-align: middle;
 	width: var(--components-textfield-sizes-default);
 
