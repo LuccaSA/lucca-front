@@ -86,6 +86,7 @@ export const Basic: StoryObj = {
 		size: 'S',
 		alert: false,
 		mode: 'default',
+		panelClasses: ['mod-neutral'],
 	},
 };
 
