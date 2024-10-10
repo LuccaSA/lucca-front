@@ -30,8 +30,8 @@
 		@include XL;
 	}
 
-	&.mod-neutral {
-		@include neutral;
+	&.mod-neutralBackground {
+		@include neutralBackground;
 	}
 
 	&:where(.mod-drawer) {

@@ -2,14 +2,14 @@ import { Meta, StoryFn } from '@storybook/angular';
 
 interface DialogBasicStory {
 	size: string;
-	neutral: boolean;
+	neutralBackground: boolean;
 }
 
 function getTemplate(args: DialogBasicStory): string {
-	const neutral = args.neutral ? ' mod-neutral' : '';
+	const neutralBackground = args.neutralBackground ? ' mod-neutralBackground' : '';
 	return `
 <div class="dialog_backdrop"></div>
-<div role="dialog" aria-modal="true" aria-labelledby="dialogInsideHeaderTitle1" class="dialog${neutral} ${args.size}">
+<div role="dialog" aria-modal="true" aria-labelledby="dialogInsideHeaderTitle1" class="dialog${neutralBackground} ${args.size}">
 	<div class="dialog-inside">
 		<form class="dialog-inside-formOptional">
 			<header class="dialog-inside-header">
@@ -59,7 +59,7 @@ export default {
 				type: 'select',
 			},
 		},
-		neutral: {
+		neutralBackground: {
 			control: {
 				type: 'boolean',
 			},
@@ -68,4 +68,4 @@ export default {
 } as Meta;
 
 export const Basic = Template.bind({});
-Basic.args = { size: '', neutral: false };
+Basic.args = { size: '', neutralBackground: false };

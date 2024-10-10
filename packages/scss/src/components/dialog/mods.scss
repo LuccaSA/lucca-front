@@ -62,6 +62,6 @@
 	--components-dialog-borderRadius: 0;
 }
 
-@mixin neutral {
+@mixin neutralBackground {
 	--components-dialog-insideContent-background: var(--pr-t-elevation-surface-default);
-} 
+}
