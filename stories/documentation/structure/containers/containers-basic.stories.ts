@@ -52,4 +52,4 @@ const Template: StoryFn<ContainersBasicStory> = (args) => ({
 });
 
 export const Basic = Template.bind({});
-Basic.args = { center: true, size: '', small: false };
+Basic.args = { center: false, size: '', small: false };
