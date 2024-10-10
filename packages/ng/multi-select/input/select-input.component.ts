@@ -100,7 +100,7 @@ export class LuMultiSelectInputComponent<T> extends ALuSelectInputComponent<T, T
 		return !!this.value?.length;
 	}
 
-	override clearValue(event: MouseEvent): void {
+	override clearValue(event: Event): void {
 		event.stopPropagation();
 		this.onChange?.([]);
 		this.value = [];
