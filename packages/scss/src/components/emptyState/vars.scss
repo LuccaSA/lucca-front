@@ -1,10 +1,8 @@
-@use '@lucca-front/scss/src/components/container/exports' as container;
-
 @mixin vars {
-	@include container.vars;
+	--components-emptyState-container-maxWidth: calc(100vw - var(--commons-navSide-width) - 7rem);
+	--components-emptyState-container-left: calc(var(--commons-navSide-width) + 3.5rem);
 
 	--components-emptyState-background-color: var(--pr-t-elevation-surface-default);
-	--components-emptyState-max-width: var(--components-container-max-width);
 	--components-emptyState-illustration-top-right-offset-left: min(calc(100% + 5rem), calc(var(--components-emptyState-max-width) - 8.5rem));
 	--components-emptyState-illustration-top-right-offset-left-S: min(
 		calc(100% + 3.5rem),
