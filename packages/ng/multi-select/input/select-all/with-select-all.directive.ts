@@ -45,9 +45,10 @@ export class LuMultiSelectWithSelectAllDirective<TValue> extends ɵIsSelectedStr
 		return mode === 'all' || mode === 'none' ? { mode } : { mode, values: this.#values() };
 	});
 
-	// Keep the original registerOnChange and writeValue methods
+	// Keep the original registerOnChange / writeValue / clearValye methods
 	readonly #selectRegisterOnChange = this.#select.registerOnChange.bind(this.#select) as LuMultiSelectInputComponent<TValue>['registerOnChange'];
 	readonly #selectWriteValue = this.#select.writeValue.bind(this.#select) as LuMultiSelectInputComponent<TValue>['writeValue'];
+	readonly #selectClearValue = this.#select.clearValue.bind(this.#select) as LuMultiSelectInputComponent<TValue>['clearValue'];
 
 	#onChange?: (values: LuMultiSelectWithSelectAllValue<TValue>) => void;
 
@@ -56,6 +57,8 @@ export class LuMultiSelectWithSelectAllDirective<TValue> extends ɵIsSelectedStr
 
 		this.#select.registerOnChange = (fn) => this.registerOnChange(fn);
 		this.#select.writeValue = (value) => this.writeValue(value);
+		this.#select.clearValue = ($event) => this.clearValue($event);
+
 		this.#select.panelHeaderTpl.set(LuMultiSelectAllHeaderComponent);
 		this.#select.valuesTpl.set(LuMultiSelectAllDisplayerComponent);
 		this.#select.hasValue = () => this.#hasValue();
@@ -155,5 +158,11 @@ export class LuMultiSelectWithSelectAllDirective<TValue> extends ɵIsSelectedStr
 		this.#selectWriteValue(values);
 		this.#mode.set(mode);
 		this.#values.set(values);
+	}
+
+	clearValue($event: Event): void {
+		this.#selectClearValue($event);
+		this.#mode.set('none');
+		this.#values.set([]);
 	}
 }
