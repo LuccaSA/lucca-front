@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Directive, Type, booleanAttribute, computed, effect, forwardRef, inject, input, signal, untracked } from '@angular/core';
-import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
+import { takeUntilDestroyed, toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { ILuApiCollectionResponse } from '@lucca-front/ng/api';
 import { CORE_SELECT_API_TOTAL_COUNT_PROVIDER, CoreSelectApiTotalCountProvider } from '@lucca-front/ng/core-select';
 import { ALuCoreSelectApiDirective } from '@lucca-front/ng/core-select/api';
@@ -62,9 +62,8 @@ export class LuCoreSelectUsersDirective<T extends LuCoreSelectUser = LuCoreSelec
 		this.select.valueTpl.set(LuUserDisplayerComponent);
 
 		effect(() => {
-			if (this.enableFormerEmployees()) {
-				untracked(() => this.select.panelHeaderTpl.set(LuCoreSelectFormerEmployeesComponent));
-			}
+			const enableFormerEmployees = this.enableFormerEmployees();
+			untracked(() => this.select.panelHeaderTpl.set(enableFormerEmployees ? LuCoreSelectFormerEmployeesComponent : undefined));
 		});
 	}
 
@@ -72,29 +71,32 @@ export class LuCoreSelectUsersDirective<T extends LuCoreSelectUser = LuCoreSelec
 	protected displayMeOption$ = toObservable(this.displayMeOption);
 	protected urlOrDefault = computed(() => this.url() ?? this.defaultUrl());
 
-	protected override params$: Observable<Record<string, string | number | boolean>> = combineLatest([
-		toObservable(this.filters),
-		toObservable(this.orderBy),
-		this.clue$,
-		toObservable(this.operationIds),
-		toObservable(this.appInstanceId),
-		toObservable(this.includeFormerEmployees),
-	]).pipe(
-		map(([filters, orderBy, clue, operationIds, appInstanceId, includeFormerEmployees]) => ({
-			fields: this.#userFields,
-			...filters,
-			...(orderBy ? { orderBy } : {}),
-			...(clue ? { clue: clue } : {}),
-			...(operationIds ? { operations: operationIds.join(',') } : {}),
-			...(appInstanceId ? { appInstanceId } : {}),
-			...(includeFormerEmployees ? { formerEmployees: includeFormerEmployees } : {}),
-		})),
+	protected clue = toSignal(this.clue$);
+
+	protected override params$: Observable<Record<string, string | number | boolean>> = toObservable(
+		computed(() => {
+			const orderBy = this.orderBy();
+			const clue = this.clue();
+			const operationIds = this.operationIds();
+			const appInstanceId = this.appInstanceId();
+			const formerEmployees = this.includeFormerEmployees();
+
+			return {
+				fields: this.#userFields,
+				...this.filters(),
+				...(orderBy ? { orderBy } : {}),
+				...(clue ? { clue } : {}),
+				...(operationIds ? { operations: operationIds.join(',') } : {}),
+				...(appInstanceId ? { appInstanceId } : {}),
+				...(formerEmployees ? { formerEmployees } : {}),
+			};
+		}),
 	);
 
 	protected meParams$ = toObservable(
 		computed(() => ({
 			fields: this.#userFields,
-			...(this.filters() ?? {}),
+			...this.filters(),
 			...(this.operationIds() ? { operations: this.operationIds().join(',') } : {}),
 			...(this.appInstanceId() ? { appInstanceId: this.appInstanceId() } : {}),
 			id: this.currentUserId,
