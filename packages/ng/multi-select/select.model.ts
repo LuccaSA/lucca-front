@@ -4,9 +4,9 @@ import type { LuMultiSelectInputComponent } from './input';
 
 export const MULTI_SELECT_INPUT = new InjectionToken<LuMultiSelectInputComponent<unknown>>('MultiSelectInput');
 
-export type LuMultiSelectWithSelectAllValue<T> = { mode: 'include'; values: T[] } | { mode: 'exclude'; values: T[] } | { mode: 'none' } | { mode: 'all' };
+export type LuMultiSelection<T> = { mode: 'include'; values: T[] } | { mode: 'exclude'; values: T[] } | { mode: 'none' } | { mode: 'all' };
 
-export type LuMultiSelectWithSelectAllMode = LuMultiSelectWithSelectAllValue<unknown>['mode'];
+export type LuMultiSelectionMode = LuMultiSelection<unknown>['mode'];
 
 @Injectable({
 	providedIn: 'root',

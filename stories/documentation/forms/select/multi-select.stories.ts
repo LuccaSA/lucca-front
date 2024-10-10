@@ -23,7 +23,7 @@ import {
 } from '@lucca-front/ng/multi-select';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 import { Meta, applicationConfig, moduleMetadata } from '@storybook/angular';
-import { LuMultiSelectWithSelectAllValue } from 'packages/ng/multi-select/select.model';
+import { LuMultiSelection } from 'packages/ng/multi-select/select.model';
 import { interval, map } from 'rxjs';
 import { startWith } from 'rxjs/operators';
 import { HiddenArgType } from 'stories/helpers/common-arg-types';
@@ -32,7 +32,7 @@ import { FilterLegumesPipe, ILegume, LuCoreSelectInputStoryComponent, SortLegume
 
 type LuMultiSelectInputStoryComponent = LuCoreSelectInputStoryComponent & {
 	selectedLegumes: ILegume[];
-	legumeSelection?: LuMultiSelectWithSelectAllValue<ILegume>;
+	legumeSelection?: LuMultiSelection<ILegume>;
 	maxValuesShown: number;
 	selectLegume(legume: ILegume, legumes: ILegume[]): ILegume[];
 } & LuMultiSelectInputComponent<ILegume>;

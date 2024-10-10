@@ -1,6 +1,6 @@
-import { LuMultiSelectWithSelectAllValue } from './select.model';
+import { LuMultiSelection } from './select.model';
 
-export function selectionToQueryParams<T, Key extends string>(key: Key, value: LuMultiSelectWithSelectAllValue<T>, selector: (value: T) => unknown): Partial<Record<Key | `-${Key}`, string>> {
+export function selectionToQueryParams<T, Key extends string>(key: Key, value: LuMultiSelection<T>, selector: (value: T) => unknown): Partial<Record<Key | `-${Key}`, string>> {
 	if (value.mode === 'all' || value.mode === 'none') {
 		return {};
 	}
