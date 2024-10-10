@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Directive, inject, Input } from '@angular/core';
 import { ILuApiItem } from '@lucca-front/ng/api';
 import { BehaviorSubject, combineLatest, map, Observable, ReplaySubject, switchMap, take } from 'rxjs';
+import { sanitizeClueFilter } from '../select.utils';
 import { ALuCoreSelectApiDirective } from './api.directive';
 
 @Directive({
@@ -26,6 +27,9 @@ export class LuCoreSelectApiV4Directive<T extends ILuApiItem> extends ALuCoreSel
 		this.filters$.next(value);
 	}
 
+	@Input()
+	public searchDelimiter = ' ';
+
 	protected url$ = new ReplaySubject<string>(1);
 	protected sort$ = new BehaviorSubject<string | null>('+name');
 	protected filters$ = new BehaviorSubject<Record<string, string | number | boolean>>({});
@@ -36,7 +40,7 @@ export class LuCoreSelectApiV4Directive<T extends ILuApiItem> extends ALuCoreSel
 		map(([filters, sort, clue]) => ({
 			...filters,
 			...(sort ? { sort } : {}),
-			...(clue ? { search: clue } : {}),
+			...(clue ? { search: sanitizeClueFilter(clue, this.searchDelimiter) } : {}),
 		})),
 	);
 

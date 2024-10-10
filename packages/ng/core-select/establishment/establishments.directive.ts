@@ -3,6 +3,7 @@ import { DestroyRef, Directive, Input, OnInit, inject, signal } from '@angular/c
 import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 import { ALuCoreSelectApiDirective } from '@lucca-front/ng/core-select/api';
 import { Observable, combineLatest, filter, map } from 'rxjs';
+import { sanitizeClueFilter } from '../select.utils';
 import { LuEstablishmentGroupingComponent } from './establishment-grouping.component';
 import { EstablishmentGroupingService } from './establishment-grouping.service';
 import { LuCoreSelectEstablishment } from './models';
@@ -38,6 +39,17 @@ export class LuCoreSelectEstablishmentsDirective<T extends LuCoreSelectEstablish
 	@Input()
 	public set appInstanceId(id: number | null) {
 		this._appInstanceId.set(id);
+	}
+
+	@Input()
+	public set searchDelimiter(delimiter: string) {
+		this._searchDelimiter = delimiter;
+	}
+
+	private _searchDelimiter: string;
+
+	public get searchDelimiter() {
+		return this._searchDelimiter;
 	}
 
 	protected _url = signal<string>('/organization/structure/api/establishments');
@@ -81,7 +93,7 @@ export class LuCoreSelectEstablishmentsDirective<T extends LuCoreSelectEstablish
 			...filters,
 			...(clue
 				? // When the clue is not empty, sort establishments by name
-					{ search: clue, sort: 'name' }
+					{ search: sanitizeClueFilter(clue, this.searchDelimiter), sort: 'name' }
 				: // When the clue is empty, establishments are grouped by legal unit, so sort them by legal unit name and then by name
 					{ sort: 'legalunit.name,name' }),
 			...(operationIds ? { operations: operationIds.join(',') } : {}),
