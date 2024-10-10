@@ -9,7 +9,7 @@ export default {
 
 function getTemplate(args: CommentWrapperCompactStory): string {
 	return `<ol class="commentWrapper mod-compact">
-	<li class="commentWrapper-item mod-WrapperAvatar">
+	<li class="commentWrapper-item">
 		<div class="comment">
 			<div class="comment-infos">
 				<div class="avatar"></div>
@@ -27,7 +27,7 @@ function getTemplate(args: CommentWrapperCompactStory): string {
 		</div>
 	</li>
 	<li class="commentWrapper-item">
-		<div class="comment mod-noAvatar">
+		<div class="comment">
 			<div class="comment-infos">
 				<div class="avatar"></div>
 				<div class="comment-infos-content">
@@ -41,7 +41,7 @@ function getTemplate(args: CommentWrapperCompactStory): string {
 		</div>
 	</li>
 	<li class="commentWrapper-item">
-		<div class="comment mod-noAvatar">
+		<div class="comment">
 			<div class="comment-infos">
 				<div class="avatar"></div>
 				<div class="comment-infos-content">
