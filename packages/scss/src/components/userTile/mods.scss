@@ -2,49 +2,66 @@
 
 // nameOnly is deprecated
 @mixin nameOnly {
-  .user-tile-label,
-  .user-tile-footnote {
-    display: none;
-  }
+	.user-tile-label,
+	.user-tile-footnote {
+		display: none;
+	}
 }
 
 @mixin XS {
-  --components-userTile-title-fontSize: var(--sizes-S-fontSize);
-  --components-userTile-title-lineHeight: var(--sizes-S-lineHeight);
-  --components-userTile-info-fontSize: var(--sizes-XS-fontSize);
-  --components-userTile-info-lineHeight: var(--sizes-XS-lineHeight);
+	--components-userTile-title-fontSize: var(--sizes-S-fontSize);
+	--components-userTile-title-lineHeight: var(--sizes-S-lineHeight);
+	--components-userTile-info-fontSize: var(--sizes-XS-fontSize);
+	--components-userTile-info-lineHeight: var(--sizes-XS-lineHeight);
+	--components-userTile-avatar-marginTop: 0.375rem;
 
-  .avatar {
-    @include avatar.XS;
-  }
+	.avatar {
+		@include avatar.XS;
+	}
 }
 
 @mixin S {
-  .avatar {
-    @include avatar.S;
-  }
+	--components-userTile-avatar-marginTop: 0.375rem;
+
+	.avatar {
+		@include avatar.S;
+	}
 }
 
 @mixin L {
-  .avatar {
-    @include avatar.L;
-  }
+	--components-userTile-avatar-marginTop: 0;
+	--components-userTile-content-marginTop: 0.125rem;
+
+	.avatar {
+		@include avatar.L;
+	}
 }
 
-@mixin XL { // Deprecated
-  .avatar {
-    @include avatar.XL;
-  }
+@mixin XL {
+	// Deprecated
+	--components-userTile-avatar-marginTop: 0;
+	--components-userTile-content-marginTop: 0.5rem;
+
+	.avatar {
+		@include avatar.XL;
+	}
 }
 
-@mixin XXL { // Deprecated
-  .avatar {
-    @include avatar.XXL;
-  }
+@mixin XXL {
+	// Deprecated
+	--components-userTile-avatar-marginTop: 0;
+	--components-userTile-content-marginTop: 1rem;
+
+	.avatar {
+		@include avatar.XXL;
+	}
 }
 
-@mixin XXXL { // Deprecated
-  .avatar {
-    @include avatar.XXXL;
-  }
+@mixin XXXL {
+	// Deprecated
+	--components-userTile-avatar-marginTop: 0;
+
+	.avatar {
+		@include avatar.XXXL;
+	}
 }
