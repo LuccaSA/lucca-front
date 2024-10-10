@@ -19,7 +19,7 @@ import { MULTI_SELECT_WITH_SELECT_ALL_CONTEXT } from './select-all.models';
 
 			@if (displayerCount() !== null) {
 				<div class="multipleSelect-displayer-filter">
-					@if (displayerCount() === 1) {
+					@if (displayerCount() === 1 && isIncludeMode()) {
 						<div class="multipleSelect-displayer-chip chip" [class.mod-unkillable]="disabled()">
 							<span class="multipleSelect-displayer-chip-value" *luOptionOutlet="select.displayerTpl(); value: select.value[0]"></span>
 
@@ -51,6 +51,7 @@ export class LuMultiSelectAllDisplayerComponent<TValue> {
 	readonly #valuesCount = computed(() => this.selectAllContext.values().length);
 
 	readonly isFilled = computed(() => this.selectAllContext.mode() !== 'none');
+	readonly isIncludeMode = computed(() => this.selectAllContext.mode() === 'include');
 	readonly displayerLabel = this.selectAllContext.displayerLabel;
 
 	readonly intl = getIntl(LU_MULTI_SELECT_DISPLAYER_TRANSLATIONS);
