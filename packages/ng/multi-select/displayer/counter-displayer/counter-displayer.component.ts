@@ -17,7 +17,7 @@ import { LuMultiSelectDisplayerInputDirective } from '../displayer-input.directi
 			<input type="text" #inputElement luMultiSelectDisplayerInput />
 			<div class="multipleSelect-displayer-filter" *ngIf="selectedOptions$ | async as selectedOptions">
 				<div class="multipleSelect-displayer-chip chip mod-unkillable" *ngIf="selectedOptions?.length === 1">
-					<ng-container *luOptionOutlet="select.valueTpl || select.optionTpl; value: selectedOptions[0]"></ng-container>
+					<ng-container *luOptionOutlet="select.displayerTpl(); value: selectedOptions[0]"></ng-container>
 				</div>
 				<ng-container *ngIf="selectedOptions?.length > 1"
 					><span class="multipleSelect-displayer-numericBadge numericBadge">{{ selectedOptions?.length }}</span

@@ -19,9 +19,9 @@ import { MULTI_SELECT_WITH_SELECT_ALL_CONTEXT } from './select-all.models';
 
 			@if (displayerCount() !== null) {
 				<div class="multipleSelect-displayer-filter">
-					@if (displayerCount() === 1) {
+					@if (displayerCount() === 1 && isIncludeMode()) {
 						<div class="multipleSelect-displayer-chip chip" [class.mod-unkillable]="disabled()">
-							<span class="multipleSelect-displayer-chip-value" *luOptionOutlet="select.valueTpl || select.optionTpl; value: select.value[0]"></span>
+							<span class="multipleSelect-displayer-chip-value" *luOptionOutlet="select.displayerTpl(); value: select.value[0]"></span>
 
 							@if (!disabled()) {
 								<button type="button" class="chip-kill" (click)="unselectOption(select.value[0], $event)">
@@ -49,9 +49,9 @@ export class LuMultiSelectAllDisplayerComponent<TValue> {
 	readonly select = inject<LuMultiSelectInputComponent<TValue>>(LuMultiSelectInputComponent);
 
 	readonly #valuesCount = computed(() => this.selectAllContext.values().length);
-	readonly #totalCount = computed(() => this.selectAllContext.totalCount());
 
-	readonly isFilled = computed(() => this.selectAllContext.mode() !== 'all' || this.selectAllContext.selectAll());
+	readonly isFilled = computed(() => this.selectAllContext.mode() !== 'none');
+	readonly isIncludeMode = computed(() => this.selectAllContext.mode() === 'include');
 	readonly displayerLabel = this.selectAllContext.displayerLabel;
 
 	readonly intl = getIntl(LU_MULTI_SELECT_DISPLAYER_TRANSLATIONS);
@@ -62,11 +62,13 @@ export class LuMultiSelectAllDisplayerComponent<TValue> {
 	readonly displayerCount = computed(() => {
 		switch (this.selectAllContext.mode()) {
 			case 'all':
-				return this.selectAllContext.selectAll() ? this.#totalCount() : null;
+				return this.selectAllContext.totalCount();
 			case 'include':
 				return this.#valuesCount();
 			case 'exclude':
-				return this.#totalCount() - this.#valuesCount();
+				return this.selectAllContext.totalCount() - this.#valuesCount();
+			case 'none':
+				return null;
 		}
 	});
 

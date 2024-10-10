@@ -25,7 +25,7 @@
 	},
 	es: {
 		users: 'usuarios',
-		me: 'Yo :',
+		me: 'Yo:',
 	},
 	pt: {
 		users: 'utilizadores',
