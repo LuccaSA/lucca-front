@@ -20,24 +20,6 @@
 			width: 100%;
 			position: sticky;
 
-			// todo: remove this when --commons-navSide-compact-width will be depreciated
-			:root:has(.navSide.mod-compact, .mod-withMenuCompact) & {
-				--components-emptyState-container-maxWidth: calc(100vw - var(--commons-navSide-compact-width) - 7rem);
-				--components-emptyState-container-left: calc(var(--commons-navSide-compact-width) + 3.5rem);
-			}
-
-			// todo: remove this when --commons-navSide-compact-width will be depreciated
-			:root:not(:has(.navSide)) & {
-				--components-emptyState-container-maxWidth: calc(100vw - 7rem);
-				--components-emptyState-container-left: 3.5rem;
-			}
-
-			// todo: remove this when --commons-navSide-compact-width will be depreciated
-			@include media.max('S') {
-				--components-emptyState-container-maxWidth: calc(100vw - 7rem);
-				--components-emptyState-container-left: 3.5rem;
-			}
-
 			.container & {
 				--components-emptyState-container-maxWidth: none;
 				--components-emptyState-container-left: auto;

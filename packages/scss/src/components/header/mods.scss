@@ -26,9 +26,3 @@
 		top: var(--commons-navSide-mobile-toggle-height);
 	}
 }
-
-@mixin leftCompact {
-	@include left;
-
-	left: var(--commons-navSide-compact-width);
-}
