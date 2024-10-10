@@ -1,9 +1,9 @@
-import { LuMultiSelectWithSelectAllMode, LuMultiSelectWithSelectAllValue } from './select.model';
+import { LuMultiSelection, LuMultiSelectionMode } from './select.model';
 import { selectionToQueryParams } from './select.utils';
 
 describe('multi-select utils', () => {
 	describe('selectionToQueryParams', () => {
-		const selections: Record<LuMultiSelectWithSelectAllMode, LuMultiSelectWithSelectAllValue<{ id: number }>> = {
+		const selections: Record<LuMultiSelectionMode, LuMultiSelection<{ id: number }>> = {
 			include: {
 				mode: 'include',
 				values: [{ id: 12 }, { id: 13 }],

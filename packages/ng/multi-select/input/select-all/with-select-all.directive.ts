@@ -3,7 +3,7 @@ import { takeUntilDestroyed, toObservable, toSignal } from '@angular/core/rxjs-i
 import { CORE_SELECT_API_TOTAL_COUNT_PROVIDER } from '@lucca-front/ng/core-select';
 import { LuOptionComparer } from '@lucca-front/ng/option';
 import { skip } from 'rxjs';
-import { LuMultiSelectWithSelectAllMode, LuMultiSelectWithSelectAllValue, ɵIsSelectedStrategy } from '../../select.model';
+import { LuMultiSelection, LuMultiSelectionMode, ɵIsSelectedStrategy } from '../../select.model';
 import { LuMultiSelectInputComponent } from '../select-input.component';
 import { LuMultiSelectAllDisplayerComponent } from './multi-select-all-displayer.component';
 import { LuMultiSelectAllHeaderComponent } from './multi-select-all-header.component';
@@ -29,7 +29,7 @@ export class LuMultiSelectWithSelectAllDirective<TValue> extends ɵIsSelectedStr
 
 	readonly displayerLabel = input.required<string>({ alias: 'withSelectAllDisplayerLabel' });
 
-	readonly #mode = signal<LuMultiSelectWithSelectAllMode>('none');
+	readonly #mode = signal<LuMultiSelectionMode>('none');
 	readonly #values = signal<TValue[]>([]);
 
 	readonly mode = this.#mode.asReadonly();
@@ -38,7 +38,7 @@ export class LuMultiSelectWithSelectAllDirective<TValue> extends ɵIsSelectedStr
 
 	readonly #hasValue = computed(() => this.mode() !== 'none');
 
-	readonly #selectAllValue = computed<LuMultiSelectWithSelectAllValue<TValue>>(() => {
+	readonly #selectAllValue = computed<LuMultiSelection<TValue>>(() => {
 		const mode = this.#mode();
 		return mode === 'all' || mode === 'none' ? { mode } : { mode, values: this.#values() };
 	});
@@ -48,7 +48,7 @@ export class LuMultiSelectWithSelectAllDirective<TValue> extends ɵIsSelectedStr
 	readonly #selectWriteValue = this.#select.writeValue.bind(this.#select) as LuMultiSelectInputComponent<TValue>['writeValue'];
 	readonly #selectClearValue = this.#select.clearValue.bind(this.#select) as LuMultiSelectInputComponent<TValue>['clearValue'];
 
-	#onChange?: (values: LuMultiSelectWithSelectAllValue<TValue>) => void;
+	#onChange?: (values: LuMultiSelection<TValue>) => void;
 
 	constructor() {
 		super();
@@ -101,7 +101,7 @@ export class LuMultiSelectWithSelectAllDirective<TValue> extends ɵIsSelectedStr
 		}
 	}
 
-	registerOnChange(fn: (value: TValue[] | LuMultiSelectWithSelectAllValue<TValue>) => void): void {
+	registerOnChange(fn: (value: TValue[] | LuMultiSelection<TValue>) => void): void {
 		this.#onChange = fn;
 
 		this.#selectRegisterOnChange((values: TValue[]) => {
@@ -111,12 +111,12 @@ export class LuMultiSelectWithSelectAllDirective<TValue> extends ɵIsSelectedStr
 		});
 	}
 
-	writeValue(value: TValue[] | LuMultiSelectWithSelectAllValue<TValue>): void {
+	writeValue(value: TValue[] | LuMultiSelection<TValue>): void {
 		if (Array.isArray(value)) {
 			throw new Error('MultiSelectWithSelectAllDirective does not support array values. Pass a LuMultiSelectWithSelectAllValue<TValue>.');
 		}
 
-		let mode: LuMultiSelectWithSelectAllMode;
+		let mode: LuMultiSelectionMode;
 		let values: TValue[];
 
 		if (!value) {
@@ -138,7 +138,7 @@ export class LuMultiSelectWithSelectAllDirective<TValue> extends ɵIsSelectedStr
 		this.#values.set([]);
 	}
 
-	#getNextMode(fromMode: LuMultiSelectWithSelectAllMode, values: TValue[]): LuMultiSelectWithSelectAllMode {
+	#getNextMode(fromMode: LuMultiSelectionMode, values: TValue[]): LuMultiSelectionMode {
 		const allSelected = values.length === this.totalCount();
 
 		if (allSelected) {
