@@ -1,10 +1,11 @@
 import { HttpClient } from '@angular/common/http';
-import { Directive, Input, computed, inject, signal } from '@angular/core';
+import { Directive, Input, computed, forwardRef, inject, signal } from '@angular/core';
 import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 import { ILuApiCollectionResponse } from '@lucca-front/ng/api';
+import { CORE_SELECT_API_TOTAL_COUNT_PROVIDER, CoreSelectApiTotalCountProvider } from '@lucca-front/ng/core-select';
 import { ALuCoreSelectApiDirective } from '@lucca-front/ng/core-select/api';
 import { LuDisplayFormat, LuDisplayFullname } from '@lucca-front/ng/user';
-import { EMPTY, Observable, catchError, combineLatest, map, of, shareReplay, switchMap, take, tap } from 'rxjs';
+import { EMPTY, Observable, catchError, combineLatest, debounceTime, map, of, shareReplay, switchMap, take, tap } from 'rxjs';
 import { LU_CORE_SELECT_CURRENT_USER_ID } from './me.provider';
 import { LuUserDisplayerComponent } from './user-displayer.component';
 import { LuCoreSelectUserHomonymsService } from './user-homonym.service';
@@ -17,8 +18,17 @@ import { LuCoreSelectUser, LuCoreSelectWithAdditionnalInformation } from './user
 	selector: 'lu-simple-select[users],lu-multi-select[users]',
 	standalone: true,
 	exportAs: 'luUsers',
+	providers: [
+		{
+			provide: CORE_SELECT_API_TOTAL_COUNT_PROVIDER,
+			useExisting: forwardRef(() => LuCoreSelectUsersDirective),
+		},
+	],
 })
-export class LuCoreSelectUsersDirective<T extends LuCoreSelectUser = LuCoreSelectUser> extends ALuCoreSelectApiDirective<LuCoreSelectWithAdditionnalInformation<T>> {
+export class LuCoreSelectUsersDirective<T extends LuCoreSelectUser = LuCoreSelectUser>
+	extends ALuCoreSelectApiDirective<LuCoreSelectWithAdditionnalInformation<T>>
+	implements CoreSelectApiTotalCountProvider
+{
 	#defaultSearchUrl = '/api/v3/users/search';
 	#defaultScopedSearchUrl = '/api/v3/users/scopedsearch';
 	#userHomonymsService = inject(LuCoreSelectUserHomonymsService);
@@ -129,6 +139,19 @@ export class LuCoreSelectUsersDirective<T extends LuCoreSelectUser = LuCoreSelec
 		map((res) => res.data.items.map(({ item }) => item)[0] ?? null),
 		takeUntilDestroyed(),
 		shareReplay(1),
+	);
+
+	public totalCount$ = toObservable(computed(() => ({ url: this._url(), filters: this._filters() }))).pipe(
+		debounceTime(250),
+		switchMap(({ url, filters }) =>
+			this.httpClient.get<{ count: number }>(url, {
+				params: {
+					...filters,
+					['fields.root']: 'count',
+				},
+			}),
+		),
+		map((res) => res?.count ?? 0),
 	);
 
 	protected getMe(): Observable<T | null> {
