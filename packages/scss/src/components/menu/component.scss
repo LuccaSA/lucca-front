@@ -28,6 +28,11 @@
 	}
 
 	@at-root ($atRoot) {
+		.menu-containerOptionnal {
+			max-width: var(--commons-container-maxWidth);
+			padding-inline: var(--commons-container-padding);
+		}
+
 		.menu-list {
 			@include reset.list;
 
