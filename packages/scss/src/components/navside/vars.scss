@@ -1,10 +1,12 @@
 @use '@lucca-front/scss/src/commons/utils/namespace';
+@use '@lucca-front/scss/src/commons/utils/media';
 
-@mixin vars($atRoot: namespace.$defaultAtRoot) {
-	@at-root ($atRoot) {
-		:root {
+@mixin vars {
+	@at-root {
+		@include namespace.appendRootVars {
+			// --commons-navSide-compact-width is deprecated
 			--commons-navSide-width: 15rem;
-			--commons-navSide-compact-width: 7.5rem;
+			--commons-navSide-compact-width: var(--commons-navSide-width);
 			--commons-navSide-mobile-toggle-height: 3.5rem;
 		}
 	}
