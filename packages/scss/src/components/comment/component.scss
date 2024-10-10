@@ -31,6 +31,7 @@
 			gap: var(--pr-t-spacings-100);
 			justify-content: flex-start;
 			align-items: flex-start;
+			flex-direction: var(--components-comment-info-direction);
 		}
 
 		.comment-infos-content {
@@ -106,6 +107,6 @@
 	gap: var(--pr-t-spacings-200);
 
 	.comment {
-		--components-comment-max-width: min(66ch, 90%);
+		--components-comment-max-width: min(66ch, calc(100% - var(--components-comment-content-margin)));
 	}
 }
