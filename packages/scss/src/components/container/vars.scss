@@ -1,4 +1,8 @@
 @mixin vars {
-	--components-container-max-width: 100rem;
-	--components-container-padding: 3.5rem;
+	// for this component some variables are placed in common
+
+	// --components-container-max-width is deprecated
+	// --components-container-padding is deprecated
+	--components-container-max-width: var(--commons-container-maxWidth);
+	--components-container-padding: var(--commons-container-padding);
 }
