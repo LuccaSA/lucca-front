@@ -473,6 +473,7 @@ export type LuccaIcon =
 	| 'signShieldError'
 	| 'signShieldSuccess'
 	| 'signShieldWarning'
+	| 'signWebhook'
 	| 'signSuccess'
 	| 'success'
 	| 'signTranslation'

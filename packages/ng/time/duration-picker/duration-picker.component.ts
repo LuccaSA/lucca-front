@@ -71,18 +71,18 @@ export class DurationPickerComponent extends BasePickerComponent {
 		this.disabled.set(isDisabled);
 	}
 
-	protected hoursInputHandler(value: number): void {
+	protected hoursInputHandler(value: number | '––'): void {
 		this.setTime({
 			previousValue: this.value(),
-			value: createDurationFromHoursAndMinutes(value, this.minutes()),
+			value: createDurationFromHoursAndMinutes(+value, this.minutes()),
 			source: 'input',
 		});
 	}
 
-	protected minutesInputHandler(value: number): void {
+	protected minutesInputHandler(value: number | '––'): void {
 		this.setTime({
 			previousValue: this.value(),
-			value: createDurationFromHoursAndMinutes(this.hours(), value),
+			value: createDurationFromHoursAndMinutes(this.hours(), +value),
 			source: 'input',
 		});
 	}
