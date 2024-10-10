@@ -27,18 +27,16 @@ import { LuMultiSelectWithSelectAllContext, MULTI_SELECT_WITH_SELECT_ALL_CONTEXT
 export class LuMultiSelectWithSelectAllDirective<TValue> extends ɵIsSelectedStrategy<TValue> implements LuMultiSelectWithSelectAllContext {
 	readonly #select = inject<LuMultiSelectInputComponent<TValue>>(LuMultiSelectInputComponent);
 
-	readonly #selectAll = signal(false);
 	readonly displayerLabel = input.required<string>({ alias: 'withSelectAllDisplayerLabel' });
 
-	readonly #mode = signal<LuMultiSelectWithSelectAllMode>('all');
+	readonly #mode = signal<LuMultiSelectWithSelectAllMode>('none');
 	readonly #values = signal<TValue[]>([]);
 
 	readonly mode = this.#mode.asReadonly();
 	readonly values = this.#values.asReadonly();
-	readonly selectAll = this.#selectAll.asReadonly();
 	readonly totalCount = toSignal(inject(CORE_SELECT_API_TOTAL_COUNT_PROVIDER).totalCount$);
 
-	readonly #hasValue = computed(() => this.#values().length > 0 || this.#selectAll());
+	readonly #hasValue = computed(() => this.mode() !== 'none');
 
 	readonly #selectAllValue = computed<LuMultiSelectWithSelectAllValue<TValue>>(() => {
 		const mode = this.#mode();
@@ -68,15 +66,13 @@ export class LuMultiSelectWithSelectAllDirective<TValue> extends ɵIsSelectedStr
 			.subscribe((value) => this.#onChange?.(value));
 	}
 
-	setSelectAll(value: boolean): void {
-		const wasSelected = this.#selectAll();
-		this.#selectAll.set(value);
+	setSelectAll(selectAll: boolean): void {
 		this.#selectWriteValue([]);
 
 		if (this.#values().length) {
 			this.#values.set([]);
 		}
-		this.#mode.set(wasSelected ? 'none' : 'all');
+		this.#mode.set(selectAll ? 'all' : 'none');
 	}
 
 	override isSelected(option: TValue, selectedOptions: TValue[], optionComparer: LuOptionComparer<TValue>): boolean {
@@ -110,32 +106,8 @@ export class LuMultiSelectWithSelectAllDirective<TValue> extends ɵIsSelectedStr
 
 		this.#selectRegisterOnChange((values: TValue[]) => {
 			this.#values.set(values);
-
 			const oldMode = this.#mode();
-
-			// The first value selected will "all" mode transitions to "exclude"
-			if (oldMode === 'all' && values.length) {
-				this.#mode.set('exclude');
-			}
-
-			// The first value selected will "none" mode transitions to "include"
-			if (oldMode === 'none' && values.length) {
-				this.#mode.set('include');
-			}
-
-			// When checking or unchecking all, we need to reset the values
-			if (values.length === this.totalCount()) {
-				this.#mode.set('all');
-				this.#selectAll.set(oldMode === 'include');
-				this.#selectWriteValue([]);
-			}
-
-			// When selecting an option, we need to reset the select all
-			if (!values.length) {
-				this.#mode.set('none');
-				this.#selectAll.set(false);
-				this.#selectWriteValue([]);
-			}
+			this.#mode.set(this.#getNextMode(oldMode, values));
 		});
 	}
 
@@ -164,5 +136,33 @@ export class LuMultiSelectWithSelectAllDirective<TValue> extends ɵIsSelectedStr
 		this.#selectClearValue($event);
 		this.#mode.set('none');
 		this.#values.set([]);
+	}
+
+	#getNextMode(fromMode: LuMultiSelectWithSelectAllMode, values: TValue[]): LuMultiSelectWithSelectAllMode {
+		const allSelected = values.length === this.totalCount();
+
+		if (allSelected) {
+			return 'all';
+		}
+
+		const someSelected = values.length > 0;
+
+		// The first value selected will transition from "all" to "exclude"
+		if (fromMode === 'all' && someSelected) {
+			return 'exclude';
+		}
+
+		// The first value selected will transition from "none" to "include"
+		if (fromMode === 'none' && someSelected) {
+			return 'include';
+		}
+
+		// When none selected, "include" -> "none" and "exclude" -> "all"
+		if (values.length === 0) {
+			return fromMode === 'include' ? 'none' : 'all';
+		}
+
+		// No match, keep the same mode
+		return fromMode;
 	}
 }
