@@ -49,9 +49,8 @@ export class LuMultiSelectAllDisplayerComponent<TValue> {
 	readonly select = inject<LuMultiSelectInputComponent<TValue>>(LuMultiSelectInputComponent);
 
 	readonly #valuesCount = computed(() => this.selectAllContext.values().length);
-	readonly #totalCount = computed(() => this.selectAllContext.totalCount());
 
-	readonly isFilled = computed(() => this.selectAllContext.mode() !== 'all' || this.selectAllContext.selectAll());
+	readonly isFilled = computed(() => this.selectAllContext.mode() !== 'none');
 	readonly displayerLabel = this.selectAllContext.displayerLabel;
 
 	readonly intl = getIntl(LU_MULTI_SELECT_DISPLAYER_TRANSLATIONS);
@@ -62,11 +61,13 @@ export class LuMultiSelectAllDisplayerComponent<TValue> {
 	readonly displayerCount = computed(() => {
 		switch (this.selectAllContext.mode()) {
 			case 'all':
-				return this.selectAllContext.selectAll() ? this.#totalCount() : null;
+				return this.selectAllContext.totalCount();
 			case 'include':
 				return this.#valuesCount();
 			case 'exclude':
-				return this.#totalCount() - this.#valuesCount();
+				return this.selectAllContext.totalCount() - this.#valuesCount();
+			case 'none':
+				return null;
 		}
 	});
 

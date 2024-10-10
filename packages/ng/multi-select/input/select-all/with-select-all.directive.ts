@@ -25,7 +25,7 @@ import { LuMultiSelectWithSelectAllContext, MULTI_SELECT_WITH_SELECT_ALL_CONTEXT
 	],
 })
 export class LuMultiSelectWithSelectAllDirective<TValue> extends ɵIsSelectedStrategy<TValue> implements LuMultiSelectWithSelectAllContext {
-	readonly #select = inject(LuMultiSelectInputComponent);
+	readonly #select = inject<LuMultiSelectInputComponent<TValue>>(LuMultiSelectInputComponent);
 
 	readonly #selectAll = signal(false);
 	readonly displayerLabel = input.required<string>({ alias: 'withSelectAllDisplayerLabel' });
@@ -33,16 +33,16 @@ export class LuMultiSelectWithSelectAllDirective<TValue> extends ɵIsSelectedStr
 	readonly #mode = signal<LuMultiSelectWithSelectAllMode>('all');
 	readonly #values = signal<TValue[]>([]);
 
-	readonly mode = computed(() => this.#mode());
-	readonly values = computed(() => this.#values());
-	readonly selectAll = computed(() => this.#selectAll());
+	readonly mode = this.#mode.asReadonly();
+	readonly values = this.#values.asReadonly();
+	readonly selectAll = this.#selectAll.asReadonly();
 	readonly totalCount = toSignal(inject(CORE_SELECT_API_TOTAL_COUNT_PROVIDER).totalCount$);
 
 	readonly #hasValue = computed(() => this.#values().length > 0 || this.#selectAll());
 
 	readonly #selectAllValue = computed<LuMultiSelectWithSelectAllValue<TValue>>(() => {
 		const mode = this.#mode();
-		return mode === 'all' ? { mode } : { mode, values: this.#values() };
+		return mode === 'all' || mode === 'none' ? { mode } : { mode, values: this.#values() };
 	});
 
 	// Keep the original registerOnChange and writeValue methods
@@ -66,34 +66,39 @@ export class LuMultiSelectWithSelectAllDirective<TValue> extends ɵIsSelectedStr
 	}
 
 	setSelectAll(value: boolean): void {
+		const wasSelected = this.#selectAll();
 		this.#selectAll.set(value);
 		this.#selectWriteValue([]);
 
 		if (this.#values().length) {
 			this.#values.set([]);
 		}
-		this.#mode.set('all');
+		this.#mode.set(wasSelected ? 'none' : 'all');
 	}
 
 	override isSelected(option: TValue, selectedOptions: TValue[], optionComparer: LuOptionComparer<TValue>): boolean {
 		switch (this.#mode()) {
 			case 'all':
-				return this.#selectAll();
+				return true;
 			case 'include':
 				return selectedOptions.some((o) => optionComparer(o, option));
 			case 'exclude':
 				return !selectedOptions.some((o) => optionComparer(o, option));
+			case 'none':
+				return false;
 		}
 	}
 
-	override isGroupSelected(options: TValue[], notSelectedOptions: TValue[]): boolean {
+	override isGroupSelected(_options: TValue[], notSelectedOptions: TValue[]): boolean {
 		switch (this.#mode()) {
 			case 'all':
-				return this.#selectAll();
+				return true;
 			case 'include':
 				return notSelectedOptions.length === 0;
 			case 'exclude':
 				return notSelectedOptions.length > 0;
+			case 'none':
+				return false;
 		}
 	}
 
@@ -104,10 +109,15 @@ export class LuMultiSelectWithSelectAllDirective<TValue> extends ɵIsSelectedStr
 			this.#values.set(values);
 
 			const oldMode = this.#mode();
-			const selectAll = this.#selectAll();
 
+			// The first value selected will "all" mode transitions to "exclude"
 			if (oldMode === 'all' && values.length) {
-				this.#mode.set(selectAll ? 'exclude' : 'include');
+				this.#mode.set('exclude');
+			}
+
+			// The first value selected will "none" mode transitions to "include"
+			if (oldMode === 'none' && values.length) {
+				this.#mode.set('include');
 			}
 
 			// When checking or unchecking all, we need to reset the values
@@ -119,7 +129,7 @@ export class LuMultiSelectWithSelectAllDirective<TValue> extends ɵIsSelectedStr
 
 			// When selecting an option, we need to reset the select all
 			if (!values.length) {
-				this.#mode.set('all');
+				this.#mode.set('none');
 				this.#selectAll.set(false);
 				this.#selectWriteValue([]);
 			}
@@ -127,15 +137,16 @@ export class LuMultiSelectWithSelectAllDirective<TValue> extends ɵIsSelectedStr
 	}
 
 	writeValue(value: TValue[] | LuMultiSelectWithSelectAllValue<TValue>): void {
+		if (Array.isArray(value)) {
+			throw new Error('MultiSelectWithSelectAllDirective does not support array values. Pass a LuMultiSelectWithSelectAllValue<TValue>.');
+		}
+
 		let mode: LuMultiSelectWithSelectAllMode;
 		let values: TValue[];
 
 		if (!value) {
 			values = [];
-			mode = 'all';
-		} else if (Array.isArray(value)) {
-			values = value;
-			mode = value.length ? 'include' : 'all';
+			mode = 'none';
 		} else {
 			values = value.mode === 'exclude' ? value.values : [];
 			mode = value.mode;
