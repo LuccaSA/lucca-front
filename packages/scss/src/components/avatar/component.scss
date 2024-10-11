@@ -10,7 +10,9 @@
 	aspect-ratio: 1;
 
 	@at-root ($atRoot) {
-		.avatar-picture, .picture { // .picture is deprecated
+		.avatar-picture,
+		.picture {
+			// .picture is deprecated
 			background-color: var(--palettes-neutral-200);
 			border-radius: var(--commons-borderRadius-full);
 			background-position: center;
@@ -25,7 +27,9 @@
 			align-items: center;
 		}
 
-		.avatar-picture-initials, .picture { // .picture is deprecated
+		.avatar-picture-initials,
+		.picture {
+			// .picture is deprecated
 			font-size: var(--components-avatar-fontSize);
 			font-weight: 600;
 			line-height: 1;
