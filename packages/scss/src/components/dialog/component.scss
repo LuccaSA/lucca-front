@@ -96,6 +96,7 @@
 		}
 
 		.dialog-inside-content {
+			background-color: var(--components-dialog-insideContent-background);
 			padding: var(--pr-t-spacings-200) var(--pr-t-spacings-300);
 			grid-area: overflow;
 			overflow: auto;
