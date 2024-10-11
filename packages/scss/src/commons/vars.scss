@@ -62,7 +62,7 @@
 	--commons-container-maxWidth: var(--commons-container-maxWidthXXL);
 	--commons-container-padding: 3.5rem;
 
-	--commons-navSide-width: 15rem;
+	--commons-navSide-width: 0rem; // unit is required for calc
 	--commons-navSide-compact-width: 7.5rem;
 	--commons-navSide-mobile-toggle-height: 3.5rem;
 }

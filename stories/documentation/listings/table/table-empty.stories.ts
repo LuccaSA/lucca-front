@@ -7,7 +7,7 @@ interface TableBasicStory {
 }
 
 export default {
-	title: 'Documentation/Listings/Table/Basic',
+	title: 'Documentation/Listings/Table/Empty',
 	decorators: [
 		moduleMetadata({
 			imports: [EmptyStateSectionComponent, ButtonComponent],
@@ -66,7 +66,7 @@ const Template: StoryFn<TableBasicStory> = (args) => ({
 	],
 });
 
-export const Empty = Template.bind({});
-Empty.args = {
+export const Basic = Template.bind({});
+Basic.args = {
 	withOverflow: false,
 };

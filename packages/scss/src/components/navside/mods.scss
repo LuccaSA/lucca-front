@@ -1,5 +1,4 @@
 @use '@lucca-front/scss/src/commons/utils/a11y';
-@use '@lucca-front/scss/src/commons/utils/media';
 @use '@lucca-front/scss/src/commons/utils/namespace';
 
 @mixin compact {
@@ -8,6 +7,10 @@
 
 	@at-root {
 		@include namespace.appendRootVars {
+			&:has(.navSide) {
+				--commons-navSide-width: 15rem;
+			}
+
 			// .mod-withMenuCompact is deprecated
 			&:has(.navSide.mod-compact, .mod-withMenuCompact) {
 				--commons-navSide-width: 7.5rem;
@@ -101,12 +104,6 @@
 }
 
 @mixin mobile {
-	@at-root {
-		@include namespace.appendRootVars {
-			--commons-navSide-width: 0;
-		}
-	}
-
 	padding-top: var(--commons-navSide-mobile-toggle-height);
 	width: 100%;
 	bottom: auto;
