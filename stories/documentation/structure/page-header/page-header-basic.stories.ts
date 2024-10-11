@@ -19,7 +19,7 @@ function getTemplate(args: PageHeaderBasicStory): string {
 	const sticky = args.sticky ? `mod-sticky` : '';
 
 	return `
-	<header class="pageHeader rwd-autoContainer ${sticky}">
+	<header class="pageHeader ${sticky}">
 		<div class="pageHeader-content">
 			<div class="pageHeader-content-title">
 				<h1 class="pr-u-margin0">H1. Page title</h1>

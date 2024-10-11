@@ -8,7 +8,7 @@ export default {
 } as Meta;
 
 function getTemplate(args: IndexTableNestedSelectableStory): string {
-	return `<table class="indexTable rwd-autoContainer mod-selectable">
+	return `<table class="indexTable mod-selectable">
 	<thead class="indexTable-head">
 		<tr class="indexTable-head-row">
 			<th class="indexTable-head-row-transparentCell" scope="col">

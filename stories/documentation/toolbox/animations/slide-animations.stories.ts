@@ -9,7 +9,7 @@ import { applicationConfig, Meta, StoryFn } from '@storybook/angular';
 	standalone: true,
 	imports: [CommonModule],
 	template: `
-		<div class="grid rwd-autoContainer mod-auto">
+		<div class="grid mod-auto">
 			<div class="grid-column ng-demo-block">
 				<h3 class="pr-u-margin0">
 					Left <button class="button mod-S" (click)="slidingLeft = !slidingLeft">{{ slidingLeft ? 'Show' : 'Hide' }}</button>
@@ -75,7 +75,7 @@ class AppModule {}
 @Component({
 	selector: 'story-slide-animation',
 	template: \`
-		<div class="grid rwd-autoContainer">
+		<div class="grid">
 			<div class="grid-column ng-demo-block">
 				<h3 class="pr-u-margin0">
 					Left <button class="button mod-S" (click)="slidingLeft = !slidingLeft">{{ slidingLeft ? 'Show' : 'Hide' }}</button>

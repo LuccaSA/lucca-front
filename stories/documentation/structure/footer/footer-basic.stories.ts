@@ -36,7 +36,7 @@ function getTemplate(args: FooterBasicStory): string {
 	const containerMax = args.containerMax;
 	if (container) {
 		return `
-		<footer class="footer rwd-autoContainer ${sticky}">
+		<footer class="footer ${sticky}">
 			<div class="footer-containerOptional container ${containerMax}">
 				<div class="footer-content">Content</div>
 				<div class="footer-actions">
@@ -48,13 +48,15 @@ function getTemplate(args: FooterBasicStory): string {
 	`;
 	} else {
 		return `
-		<footer class="footer rwd-autoContainer ${sticky}">
-			<div class="footer-content">Content</div>
-			<div class="footer-actions">
-				<button type="button" class="button">Button</button>
-				<button type="button" class="button mod-outlined">Button</button>
-			</div>
-		</footer>
+		<div>
+			<footer class="footer rwd-disableAutoContainer ${sticky}">
+				<div class="footer-content">Content</div>
+				<div class="footer-actions">
+					<button type="button" class="button">Button</button>
+					<button type="button" class="button mod-outlined">Button</button>
+				</div>
+			</footer>
+		</div>
 	`;
 	}
 }

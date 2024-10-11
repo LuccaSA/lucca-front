@@ -15,7 +15,7 @@ export default {
 } as Meta;
 
 function getTemplate(args: EmptyStatePageStory): string {
-	return `<section class="emptyState rwd-autoContainer mod-page" [style.--components-emptyState-background-color]="'var(--palettes-neutral-25)'">
+	return `<section class="emptyState mod-page" [style.--components-emptyState-background-color]="'var(--palettes-neutral-25)'">
 	<div class="emptyState-container">
 		<div class="emptyState-content">
 			<div

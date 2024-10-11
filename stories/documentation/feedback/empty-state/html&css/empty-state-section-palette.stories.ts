@@ -15,7 +15,7 @@ export default {
 } as Meta;
 
 function getTemplate(args: EmptyStateSectionPaletteStory): string {
-	return `<section class="emptyState rwd-autoContainer">
+	return `<section class="emptyState">
 	<div class="emptyState-container">
 		<div class="emptyState-content">
 			<div

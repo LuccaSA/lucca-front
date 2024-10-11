@@ -8,7 +8,7 @@ export default {
 } as Meta;
 
 function getTemplate(args: IndexTableResponsiveCardListLabelStory): string {
-	return `<table class="indexTable rwd-autoContainer mod-responsiveCardList">
+	return `<table class="indexTable mod-responsiveCardList">
 	<thead class="indexTable-head">
 		<tr class="indexTable-head-row">
 			<th class="indexTable-head-row-cell" scope="col">Label 1</th>

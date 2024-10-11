@@ -9,7 +9,7 @@ export default {
 
 function getTemplate(args: CommentBasicStory): string {
 	return `
-	<div class="comment rwd-autoContainer">
+	<div class="comment">
 		<div class="comment-infos">
 			<div class="avatar"></div>
 			<div class="comment-infos-content">

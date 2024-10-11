@@ -10,7 +10,7 @@ export default {
 } as Meta;
 
 function getTemplate(args: GridsBasicStory): string {
-	return `<div class="grid rwd-autoContainer">
+	return `<div class="grid">
 	<div class="grid-column"><div class="demo">1</div></div>
 	<div class="grid-column"><div class="demo">2</div></div>
 	<div class="grid-column"><div class="demo">3</div></div>
@@ -25,7 +25,7 @@ function getTemplate(args: GridsBasicStory): string {
 	<div class="grid-column"><div class="demo">12</div></div>
 </div>
 
-<div class="grid rwd-autoContainer" style="--grid-columns: 6">
+<div class="grid" style="--grid-columns: 6">
 	<div class="grid-column"><div class="demo">grid-columns 6</div></div>
 	<div class="grid-column"><div class="demo">grid-columns 6</div></div>
 	<div class="grid-column"><div class="demo">grid-columns 6</div></div>

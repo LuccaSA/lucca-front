@@ -8,7 +8,7 @@ export default {
 
 function getTemplate(args: GridsLegacyVerticalAlignmentStory): string {
 	return `
-	<div class="grid rwd-autoContainer mod-top@mediaMinXS">
+	<div class="grid mod-top@mediaMinXS">
 		<div class="grid-6@mediaMinXS">
 			<div class="grid-demo" style="height:100px"></div>
 		</div>
@@ -16,7 +16,7 @@ function getTemplate(args: GridsLegacyVerticalAlignmentStory): string {
 			<div class="grid-demo">Top</div>
 		</div>
 	</div>
-	<div class="grid rwd-autoContainer mod-middle@mediaMinXS">
+	<div class="grid mod-middle@mediaMinXS">
 		<div class="grid-6@mediaMinXS">
 			<div class="grid-demo" style="height:100px"></div>
 		</div>
@@ -24,7 +24,7 @@ function getTemplate(args: GridsLegacyVerticalAlignmentStory): string {
 			<div class="grid-demo">Middle</div>
 		</div>
 	</div>
-	<div class="grid rwd-autoContainer mod-bottom@mediaMinXS">
+	<div class="grid mod-bottom@mediaMinXS">
 		<div class="grid-6@mediaMinXS">
 			<div class="grid-demo" style="height:100px"></div>
 		</div>

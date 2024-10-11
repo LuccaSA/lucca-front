@@ -8,8 +8,8 @@ export default {
 
 function getTemplate(args: FilterBarBasicStory): string {
 	return `
-	<form class="filterBar rwd-autoContainer">
-		<div class="grid rwd-autoContainer" style="--grid-columns: 4; --grid-colspan: 4; --grid-align: end">
+	<form class="filterBar">
+		<div class="grid" style="--grid-columns: 4; --grid-colspan: 4; --grid-align: end">
 			<div class="grid-column" style="--grid-colspanAtMediaMinS: 2; --grid-colspanAtMediaMinM: 1">
 				<div class="form-field">
 					<label class="formLabel" id="IDlabel" for="ID">Label</label>
@@ -51,7 +51,7 @@ function getTemplate(args: FilterBarBasicStory): string {
 				</div>
 			</div>
 		</div>
-		<div class="grid rwd-autoContainer filterBar-toggledFilters" style="--grid-columns: 4; --grid-colspan: 4; --grid-align: end">
+		<div class="grid filterBar-toggledFilters" style="--grid-columns: 4; --grid-colspan: 4; --grid-align: end">
 			<div class="grid-column" style="--grid-colspanAtMediaMinS: 2; --grid-colspanAtMediaMinM: 1">
 				<div class="form-field">
 					<label class="formLabel" id="IDlabel" for="ID">Label</label>

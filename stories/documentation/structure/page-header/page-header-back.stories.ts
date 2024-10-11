@@ -11,7 +11,7 @@ export default {
 
 function getTemplate(args: PageHeaderBackStory): string {
 	return `
-	<header class="pageHeader rwd-autoContainer">
+	<header class="pageHeader">
 		<div class="pageHeader-content">
 			<div class="pageHeader-content-title">
 				<nav class="pageHeader-content-title-back">

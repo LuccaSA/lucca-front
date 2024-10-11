@@ -2,27 +2,9 @@
 @use '@lucca-front/scss/src/commons/utils/media';
 
 @mixin auto($containerName) {
-	*:has(> .#{$containerName}.rwd-autoContainer) {
+	*:has(> .#{$containerName}:not(.rwd-disableAutoContainer)) {
 		container-type: inline-size;
 		container-name: string.unquote($containerName);
-	}
-
-	*:has(> .#{$containerName}.rwd-autoContainerBlock) {
-		container-type: inline-size;
-		container-name: string.unquote($containerName);
-		display: block;
-	}
-
-	*:has(> .#{$containerName}.rwd-autoContainerFlex) {
-		container-type: inline-size;
-		container-name: string.unquote($containerName);
-		display: flex;
-	}
-
-	*:has(> .#{$containerName}.rwd-autoContainerGrid) {
-		container-type: inline-size;
-		container-name: string.unquote($containerName);
-		display: grid;
 	}
 }
 

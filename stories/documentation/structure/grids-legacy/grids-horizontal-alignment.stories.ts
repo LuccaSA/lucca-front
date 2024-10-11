@@ -8,17 +8,17 @@ export default {
 
 function getTemplate(args: GridsLegacyHorizontalAlignmentStory): string {
 	return `
-	<div class="grid rwd-autoContainer mod-start@mediaMinXS">
+	<div class="grid mod-start@mediaMinXS">
 		<div class="grid-6@mediaMinXS">
 			<div class="grid-demo">1</div>
 		</div>
 	</div>
-	<div class="grid rwd-autoContainer mod-center@mediaMinXS">
+	<div class="grid mod-center@mediaMinXS">
 		<div class="grid-6@mediaMinXS">
 			<div class="grid-demo">2</div>
 		</div>
 	</div>
-	<div class="grid rwd-autoContainer mod-end@mediaMinXS">
+	<div class="grid mod-end@mediaMinXS">
 		<div class="grid-6@mediaMinXS">
 			<div class="grid-demo">3</div>
 		</div>

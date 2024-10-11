@@ -19,7 +19,7 @@ function getTemplate(args: PageHeaderBreadcrumbStory): string {
 	const sticky = args.sticky ? `mod-sticky` : '';
 
 	return `
-	<header class="pageHeader rwd-autoContainer mod-withBreadcrumbs ${sticky}">
+	<header class="pageHeader mod-withBreadcrumbs ${sticky}">
 		<nav class="breadcrumbs" aria-describedby="breadcrumbs-title">
 			<p id="breadcrumbs-title" class="u-mask">Breadcrumbs</p>
 			<ol class="breadcrumbs-list">

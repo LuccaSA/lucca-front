@@ -10,7 +10,7 @@ export default {
 } as Meta;
 
 function getTemplate(args: GridsFormStory): string {
-	return `<div class="grid rwd-autoContainer mod-form">
+	return `<div class="grid mod-form">
 	<div class="grid-column" style="--grid-colspan: 4"><div class="demo">mod-form<br />colspan 4</div></div>
 	<div class="grid-column" style="--grid-colspan: 2"><div class="demo">mod-form<br />colspan 2</div></div>
 	<div class="grid-column" style="--grid-colspan: 2"><div class="demo">mod-form<br />colspan 2</div></div>

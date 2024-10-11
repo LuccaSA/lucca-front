@@ -10,7 +10,7 @@ export default {
 function getTemplate(args: IndexTableMassSelectionAndPaginationStory): string {
 	return `
 	<div class="indexTableWrapper">
-		<table class="indexTable rwd-autoContainer mod-selectable">
+		<table class="indexTable mod-selectable">
 			<thead class="indexTable-head">
 				<tr class="indexTable-head-row">
 					<th class="indexTable-head-row-transparentCell" scope="col">

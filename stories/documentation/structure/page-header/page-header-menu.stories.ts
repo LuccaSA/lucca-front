@@ -19,7 +19,7 @@ function getTemplate(args: PageHeaderMenuStory): string {
 	const sticky = args.sticky ? `mod-sticky` : '';
 
 	return `
-	<header class="pageHeader rwd-autoContainer mod-withMenu">
+	<header class="pageHeader mod-withMenu">
 		<div class="pageHeader-content">
 			<div class="pageHeader-content-title">
 				<h1 class="pr-u-margin0">H1. Page title</h1>

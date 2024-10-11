@@ -8,7 +8,7 @@ import { applicationConfig, Meta, StoryFn } from '@storybook/angular';
 	selector: 'story-fade-animation',
 	standalone: true,
 	imports: [CommonModule],
-	template: ` <div class="grid rwd-autoContainer">
+	template: ` <div class="grid">
 		<div class="grid-column ng-demo-block" style="--grid-colspan: 3">
 			<h3 class="pr-u-margin0">
 				Fade
@@ -50,7 +50,7 @@ class AppModule {}
 @Component({
 	selector: 'story-fade-animation',
 	template: \`
-		<div class="grid rwd-autoContainer">
+		<div class="grid">
 			<div class="grid-column ng-demo-block" style="--grid-colspan: 3">
 				<h3 class="pr-u-margin0">
 					Fade

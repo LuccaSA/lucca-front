@@ -8,7 +8,7 @@ export default {
 
 function getTemplate(args: EmptyStateBasicStory): string {
 	return `
-	<section class="emptyState rwd-autoContainer">
+	<section class="emptyState">
 		<h3 class="emptyState-title">Shhh, c'est calme ici</h3>
 		<p class="emptyState-description">Vous pouvez suggérer ici une action à réaliser</p>
 		<button type="button" class="button palette-product mod-L">Faire une action</button>

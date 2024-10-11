@@ -9,7 +9,7 @@ export default {
 
 function getTemplate(args: IndexTableEmptyStateStory): string {
 	return `
-	<table class="indexTable rwd-autoContainer" inert role="presentation">
+	<table class="indexTable" inert role="presentation">
 		<thead class="indexTable-head">
 			<tr class="indexTable-head-row">
 				<th class="indexTable-head-row-cell" scope="col">Label</th>
@@ -20,7 +20,7 @@ function getTemplate(args: IndexTableEmptyStateStory): string {
 		<tbody class="indexTable-body">
 			<tr class="indexTable-body-row">
 				<td class="indexTable-body-row-cell" colspan="3">
-				<section class="emptyState rwd-autoContainer">
+				<section class="emptyState">
 					<div class="emptyState-container">
 						<div class="emptyState-content">
 							<div class="emptyState-content-icon" aria-hidden="true">

@@ -9,7 +9,7 @@ export default {
 
 function getTemplate(args: CommentNoAvatarStory): string {
 	return `
-<div class="comment rwd-autoContainer mod-noAvatar">
+<div class="comment mod-noAvatar">
 	<div class="comment-infos">
 		<div class="comment-infos-content">
 			<span class="comment-infos-name">Marie Bragoulet</span>
