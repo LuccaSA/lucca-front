@@ -5,6 +5,8 @@
 	--components-numericBadge-borderRadius: 6px;
 	--components-numericBadge-fontSize: var(--sizes-XS-fontSize);
 	--components-numericBadge-lineHeight: var(--sizes-XS-lineHeight);
+
+	--commons-loading-borderWidth: 2px;
 }
 
 @mixin XS {
@@ -12,6 +14,8 @@
 	--components-numericBadge-borderRadius: var(--commons-borderRadius-M);
 	--components-numericBadge-fontSize: var(--sizes-XS-fontSize);
 	--components-numericBadge-lineHeight: var(--sizes-XS-lineHeight);
+
+	--commons-loading-borderWidth: 1px;
 }
 
 @mixin inherit {

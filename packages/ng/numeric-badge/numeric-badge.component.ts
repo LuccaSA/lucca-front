@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, Input, OnChanges, SimpleChanges, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostBinding, inject, Input, OnChanges, SimpleChanges, ViewEncapsulation } from '@angular/core';
 import { LuClass, Palette } from '@lucca-front/ng/core';
 
 @Component({
@@ -27,6 +27,10 @@ export class NumericBadgeComponent implements OnChanges {
 	 * The size of the badge
 	 */
 	size: 'XS' | 'S' | 'M';
+
+	@HostBinding('class.mod-loading')
+	@Input()
+	loading: boolean = false;
 
 	@Input()
 	/**

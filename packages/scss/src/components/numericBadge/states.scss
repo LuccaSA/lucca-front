@@ -1,4 +1,13 @@
+@use '@lucca-front/scss/src/commons/utils/loading';
+
 @mixin disabled {
 	background-color: var(--palettes-neutral-200); // disabled token candidate
 	color: var(--palettes-neutral-500); // disabled token candidate
+}
+
+@mixin loading {
+	@include loading.spinner(calc(var(--components-numericBadge-size) - var(--pr-t-spacings-100)));
+
+	--commons-loading-frontground: var(--components-numericBadge-loadingColor);
+	--components-numericBadge-color: transparent;
 }
