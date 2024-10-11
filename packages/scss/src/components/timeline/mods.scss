@@ -4,6 +4,8 @@
 
 @mixin S {
 	.timeline-step-title {
+		--components-timeline-title-fontSize: var(--sizes-S-fontSize);
+		--components-timeline-title-lineHeight: var(--sizes-M-lineHeight);
 		padding-left: 1.25rem;
 
 		&::before {

@@ -61,3 +61,7 @@
 	--components-dialog-maxHeightFallback: var(--components-dialog-maxHeight);
 	--components-dialog-borderRadius: 0;
 }
+
+@mixin neutralBackground {
+	--components-dialog-insideContent-background: var(--pr-t-elevation-surface-default);
+}

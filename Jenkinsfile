@@ -1,4 +1,4 @@
-@Library('Lucca@v1.11.4') _
+@Library('Lucca@v1.14.5') _
 
 import hudson.Util
 import fr.lucca.CI
@@ -70,7 +70,8 @@ node(label: CI.getSelectedLinuxNode(script:this)) {
 			)
 
 			loggableStage('Publish', isPR) {
-				def version = env.BRANCH_NAME
+				// Strip "v" from env.BRANCH_NAME if it's a release or pre-release (ie 18.2.1 instead of v18.2.1)
+				def version = (isRelease || isPreRelease) ? env.BRANCH_NAME.substring(1) : env.BRANCH_NAME
 
 				def iconsPackageJson = readFile(file: 'dist/icons/package.json');
 				def scssPackageJson = readFile(file: 'dist/scss/package.json');

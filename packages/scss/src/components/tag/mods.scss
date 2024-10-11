@@ -31,7 +31,6 @@
 }
 
 @mixin outlined {
-	--components-tag-color: var(--palettes-600, var(--palettes-neutral-600));
 	--components-tag-shadow: var(--palettes-300, var(--palettes-neutral-300));
 	--components-tag-background: transparent;
 }

@@ -13,12 +13,13 @@
 	[disabled]="disabled$ | async"
 	luInput
 	#inputElement
+	[attr.autocomplete]="autocomplete"
 />
 <div class="simpleSelect-value">
 	<ng-container *luOptionOutlet="valueTpl || optionTpl; value: value"></ng-container>
 </div>
 <button
-	*ngIf="clearable && hasValue && (disabled$ | async) === false"
+	*ngIf="clearable && hasValue() && (disabled$ | async) === false"
 	class="simpleSelect-clear clear"
 	role="button"
 	type="button"

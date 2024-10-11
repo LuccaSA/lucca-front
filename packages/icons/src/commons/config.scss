@@ -7,6 +7,7 @@
 // $font-path: '../../font/lucca-icons' !default;
 $font-path: '//cdn.lucca.fr/lucca-front/icons/font/lucca-icons' !default;
 $font-name: 'Lucca icons' !default;
+$isNamespaced: false !default;
 
 $icons: (
 	'app': '\e959',
@@ -478,6 +479,7 @@ $icons: (
 	'sign_shield_error': '\e9fd',
 	'sign_shield_success': '\e9fe',
 	'sign_shield_warning': '\ea00',
+	'sign_webhook': '\ea04',
 	'sign_success': '\e9ed',
 	'success': '\e9ed',
 	'sign_translation': '\e9fc',

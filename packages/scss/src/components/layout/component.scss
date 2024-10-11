@@ -3,13 +3,14 @@
 
 @use '@lucca-front/scss/src/commons/utils/media';
 @use '@lucca-front/scss/src/commons/config';
+@use '@lucca-front/scss/src/commons/utils/namespace';
 
-@mixin component($atRoot: 'without: rule') {
+@mixin component($atRoot: namespace.$defaultAtRoot) {
 	min-height: 100vh;
 	display: grid;
 
 	@include media.min('L') {
-		grid-template-columns: var(--commons-navSide-compact-width) 1fr var(--components-aside-width);
+		grid-template-columns: var(--commons-navSide-width) 1fr var(--components-aside-width);
 		grid-template-rows: var(--commons-banner-height) 1fr;
 		grid-template-areas:
 			'banner banner banner'
@@ -17,7 +18,7 @@
 	}
 
 	@include media.max('L') {
-		grid-template-columns: var(--commons-navSide-compact-width) 1fr;
+		grid-template-columns: var(--commons-navSide-width) 1fr;
 		grid-template-rows: var(--commons-banner-height) 1fr auto;
 		grid-template-areas:
 			'banner banner'

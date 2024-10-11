@@ -1,6 +1,7 @@
 @use '@lucca-front/scss/src/components/avatar/exports' as avatar;
+@use '@lucca-front/scss/src/commons/utils/namespace';
 
-@mixin component($atRoot: 'without: rule') {
+@mixin component($atRoot: namespace.$defaultAtRoot) {
 	width: 23.5rem;
 	max-width: calc(100vw - var(--pr-t-spacings-200) * 2);
 	padding: var(--pr-t-spacings-200);
@@ -64,7 +65,13 @@
 	}
 
 	.userPopover-details-avatar {
-		@include avatar.XXXL;
-		margin: var(--pr-t-spacings-50) 0;
+		// :not(.class) is only there to increase specificity when the class isn’t present
+		// but the class should be present, and this code is temporary
+		&.avatar,
+		&:not(.avatar) {
+			@include avatar.XXXL;
+
+			margin: var(--pr-t-spacings-50) 0;
+		}
 	}
 }

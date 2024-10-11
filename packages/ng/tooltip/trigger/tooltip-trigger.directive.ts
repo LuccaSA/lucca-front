@@ -2,23 +2,23 @@ import { FlexibleConnectedPositionStrategy, HorizontalConnectionPos, OriginConne
 import { ComponentPortal } from '@angular/cdk/portal';
 import {
 	AfterContentInit,
+	booleanAttribute,
 	ChangeDetectorRef,
 	DestroyRef,
 	Directive,
 	ElementRef,
 	HostBinding,
 	HostListener,
+	inject,
 	Input,
+	numberAttribute,
 	OnDestroy,
 	Renderer2,
-	booleanAttribute,
-	inject,
-	numberAttribute,
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { SafeHtml } from '@angular/platform-browser';
 import { LuPopoverPosition } from '@lucca-front/ng/popover';
-import { BehaviorSubject, Observable, Subject, combineLatest, merge, startWith, switchMap, timer } from 'rxjs';
+import { BehaviorSubject, combineLatest, merge, Observable, startWith, Subject, switchMap, timer } from 'rxjs';
 import { debounce, debounceTime, filter, map } from 'rxjs/operators';
 import { LuTooltipPanelComponent } from '../panel';
 
@@ -26,6 +26,7 @@ let nextId = 0;
 
 @Directive({
 	selector: '[luTooltip]',
+	exportAs: 'luTooltip',
 	standalone: true,
 })
 export class LuTooltipTriggerDirective implements AfterContentInit, OnDestroy {
@@ -101,7 +102,9 @@ export class LuTooltipTriggerDirective implements AfterContentInit, OnDestroy {
 
 	@HostListener('focus')
 	onFocus() {
-		this.open$.next();
+		if (this.#host.nativeElement.getAttribute('aria-expanded') !== 'true') {
+			this.open$.next();
+		}
 	}
 
 	@HostListener('blur')
@@ -235,8 +238,8 @@ export class LuTooltipTriggerDirective implements AfterContentInit, OnDestroy {
 	 * We used to do this using scrollWidth but the thing is, it's a rounded value. Sometimes,
 	 * you'd get true while it should be false and vice-versa, because of rounding.
 	 *
-	 * We could also use getBoundingClientRect() but it only considers text content, meaning that if ellipsis is caused by
-	 * any margin or padding, it won't be detected
+	 * So we duplicate the properties we're interested in on the element to be tested to calculate its ideal size,
+	 * which we then compare with its current size.
 	 *
 	 * @private
 	 */
@@ -245,29 +248,44 @@ export class LuTooltipTriggerDirective implements AfterContentInit, OnDestroy {
 			return false;
 		}
 
-		const mask = this.#renderer.createElement('div') as HTMLDivElement;
-		const clone = this.#host.nativeElement.cloneNode(true) as HTMLElement;
+		const element = this.#host.nativeElement;
+		const elementCloned = this.#renderer.createElement('div') as HTMLDivElement;
+		const parentMasked = this.#renderer.createElement('div') as HTMLDivElement;
+		const elementStyle = window.getComputedStyle(element);
 
-		this.#renderer.setStyle(clone, 'position', 'fixed');
-		this.#renderer.setStyle(clone, 'overflow', 'visible');
-		this.#renderer.setStyle(clone, 'white-space', 'nowrap');
-		this.#renderer.setStyle(clone, 'visibility', 'hidden');
-		this.#renderer.setStyle(clone, 'width', 'fit-content');
+		this.#renderer.addClass(parentMasked, 'u-mask');
+		this.#renderer.setAttribute(parentMasked, 'aria-hidden', 'true');
 
-		this.#renderer.addClass(mask, 'u-mask');
-		this.#renderer.setAttribute(mask, 'aria-hidden', 'true');
-		this.#renderer.appendChild(mask, clone);
+		this.#renderer.setStyle(elementCloned, 'width', 'fit-content');
 
-		this.#renderer.appendChild(this.#host.nativeElement.parentElement, mask);
+		this.#renderer.setStyle(elementCloned, 'padding', elementStyle.padding);
+		this.#renderer.setStyle(elementCloned, 'borderWidth', elementStyle.borderWidth);
+		this.#renderer.setStyle(elementCloned, 'borderStyle', elementStyle.borderStyle);
+		this.#renderer.setStyle(elementCloned, 'boxSizing', elementStyle.boxSizing);
+		this.#renderer.setStyle(elementCloned, 'fontFamily', elementStyle.fontFamily);
+		this.#renderer.setStyle(elementCloned, 'fontWeight', elementStyle.fontWeight);
+		this.#renderer.setStyle(elementCloned, 'fontStyle', elementStyle.fontStyle);
+		this.#renderer.setStyle(elementCloned, 'whiteSpace', 'nowrap');
+		this.#renderer.setStyle(
+			elementCloned,
+			'fontSize',
+			(Number(elementStyle.fontSize.replace('px', '')) / Number(window.getComputedStyle(document.body).fontSize.replace('px', ''))).toString() + 'rem',
+		);
+
+		elementCloned.innerHTML = element.innerHTML;
+
+		this.#renderer.appendChild(parentMasked, elementCloned);
+		this.#renderer.appendChild(document.body, parentMasked);
+
 		try {
-			const fullWidth = clone.getBoundingClientRect().width;
-			const displayWidth = this.#host.nativeElement.getBoundingClientRect().width;
+			const elementClonedWidth = elementCloned.getBoundingClientRect().width;
+			const elementWidth = element.getBoundingClientRect().width;
 
-			return fullWidth > displayWidth;
+			return elementClonedWidth > elementWidth;
 		} catch (e) {
 			return false;
 		} finally {
-			mask.remove();
+			parentMasked.remove();
 		}
 	}
 

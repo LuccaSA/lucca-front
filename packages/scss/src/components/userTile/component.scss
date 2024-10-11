@@ -1,9 +1,18 @@
+@use '@lucca-front/scss/src/commons/utils/namespace';
 
-@mixin component($atRoot: 'without: rule') {
+@mixin component($atRoot: namespace.$defaultAtRoot) {
 	display: flex;
 	align-items: center;
 	gap: var(--pr-t-spacings-150);
 	overflow-wrap: break-word;
+
+	.avatar {
+		display: flex;
+		align-self: start;
+		align-items: center;
+		height: calc(var(--components-userTile-title-lineHeight) + var(--components-userTile-info-lineHeight));
+		min-height: var(--components-avatar-size);
+	}
 
 	@at-root ($atRoot) {
 		// .user-info is deprecated

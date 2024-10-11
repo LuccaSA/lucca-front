@@ -8,7 +8,3 @@
 @mixin stickyNavSide {
 	left: var(--commons-navSide-width);
 }
-
-@mixin stickyNavSideCompact {
-	left: var(--commons-navSide-compact-width);
-}

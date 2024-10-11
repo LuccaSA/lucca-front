@@ -31,8 +31,9 @@ export default {
 		forceMeridiemDisplay: {
 			options: [null, false, true],
 			control: {
-				type: 'radio',
+				type: 'select',
 			},
+			description: '[v18.2]',
 		},
 	},
 } as Meta;

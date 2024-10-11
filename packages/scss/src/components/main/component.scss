@@ -1,3 +1,4 @@
 @mixin component {
 	position: relative;
+	scroll-margin-top: var(--commons-banner-height);
 }

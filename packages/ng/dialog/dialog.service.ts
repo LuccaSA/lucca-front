@@ -1,8 +1,8 @@
-import { inject, Injectable, Injector, Renderer2 } from '@angular/core';
-import { LuDialogConfig, LuDialogRef, LuDialogResult } from './model';
 import { Dialog, DialogRef } from '@angular/cdk/dialog';
+import { inject, Injectable, Injector, Renderer2 } from '@angular/core';
 import { isObservable, merge, of, take } from 'rxjs';
 import { filter, switchMap, takeUntil } from 'rxjs/operators';
+import { LuDialogConfig, LuDialogRef, LuDialogResult } from './model';
 import { DISMISSED_VALUE } from './model/dialog-ref';
 
 @Injectable()

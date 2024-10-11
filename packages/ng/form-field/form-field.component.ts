@@ -1,17 +1,17 @@
-import { booleanAttribute, Component, ContentChildren, DestroyRef, DoCheck, forwardRef, inject, Input, OnChanges, OnDestroy, QueryList, Renderer2, ViewEncapsulation } from '@angular/core';
 import { NgIf, NgSwitch, NgSwitchCase, NgTemplateOutlet } from '@angular/common';
-import { InputDirective } from './input.directive';
-import { FormFieldSize } from './form-field-size';
-import { BehaviorSubject, map, merge, startWith, Subject, switchMap } from 'rxjs';
-import { InlineMessageComponent, InlineMessageState } from '@lucca-front/ng/inline-message';
+import { booleanAttribute, Component, ContentChildren, DestroyRef, DoCheck, forwardRef, inject, Input, OnChanges, OnDestroy, QueryList, Renderer2, ViewEncapsulation } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { AbstractControl, NG_VALIDATORS, NgControl, ReactiveFormsModule, RequiredValidator, Validator, Validators } from '@angular/forms';
 import { SafeHtml } from '@angular/platform-browser';
 import { getIntl, IntlParamsPipe, LuClass, PortalContent, PortalDirective } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
+import { InlineMessageComponent, InlineMessageState } from '@lucca-front/ng/inline-message';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
+import { BehaviorSubject, map, merge, startWith, Subject, switchMap } from 'rxjs';
+import { FormFieldSize } from './form-field-size';
 import { FORM_FIELD_INSTANCE } from './form-field.token';
 import { LU_FORM_FIELD_TRANSLATIONS } from './form-field.translate';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { InputDirective } from './input.directive';
 
 let nextId = 0;
 
@@ -93,6 +93,11 @@ export class FormFieldComponent implements OnChanges, OnDestroy, DoCheck {
 	})
 	rolePresentationLabel = false;
 
+	@Input({
+		transform: booleanAttribute,
+	})
+	inline = false;
+
 	@Input()
 	statusControl: AbstractControl;
 
@@ -119,13 +124,13 @@ export class FormFieldComponent implements OnChanges, OnDestroy, DoCheck {
 	protected invalidStatus = false;
 
 	@Input()
-	inlineMessage: string;
+	inlineMessage: PortalContent;
 
 	/**
 	 * Inline message for when the control is in error state
 	 */
 	@Input()
-	errorInlineMessage: string;
+	errorInlineMessage: PortalContent;
 
 	/**
 	 * State of the inline message, will be ignored if form state is invalid
@@ -138,6 +143,8 @@ export class FormFieldComponent implements OnChanges, OnDestroy, DoCheck {
 
 	@Input()
 	layout: 'default' | 'checkable' | 'fieldset' = 'default';
+
+	hasArrow = false;
 
 	#inputs: InputDirective[] = [];
 	/**

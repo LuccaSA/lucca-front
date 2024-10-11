@@ -1,17 +1,15 @@
 import { Meta, StoryFn } from '@storybook/angular';
 
-interface LinkDisabledStory {
-}
+interface LinkDisabledStory {}
 
 export default {
 	title: 'Documentation/Actions/Link/Disabled',
-	argTypes: {
-	},
+	argTypes: {},
 } as Meta;
 
 function getTemplate(args: LinkDisabledStory): string {
 	return `<span class="link is-disabled">Lien</span>
-<span class="link is-disabled mod-icon">Lien externe <span aria-hidden="true" class="lucca-icon icon-arrowExternal"></span></span>`;
+<span class="link is-disabled mod-icon">Lien externe<!-- no text node here --><span aria-hidden="true" class="lucca-icon icon-arrowExternal"></span></span>`;
 }
 
 const Template: StoryFn<LinkDisabledStory> = (args) => ({
@@ -20,10 +18,8 @@ const Template: StoryFn<LinkDisabledStory> = (args) => ({
 	styles: [
 		`
 		:host {
-			display: block;
-		}
-		span {
-			margin-right: 1rem;
+			display: flex;
+			gap: var(--pr-t-spacings-200);
 		}
 		`,
 	],

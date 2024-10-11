@@ -2,7 +2,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { TextInputComponent } from '@lucca-front/ng/forms';
-import { Meta, StoryObj, moduleMetadata } from '@storybook/angular';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { cleanupTemplate, generateInputs } from 'stories/helpers/stories';
 
 export default {
@@ -42,7 +42,10 @@ export default {
 			description: '[v18.1]',
 		},
 		hiddenLabel: {
-			description: 'Masque le label en le conservant dans le DOM pour les lecteurs d\'écrans'
+			description: 'Masque le label en le conservant dans le DOM pour les lecteurs d’écrans',
+		},
+		autocomplete: {
+			type: 'string',
 		},
 	},
 } as Meta;
@@ -63,14 +66,11 @@ export const Basic: StoryObj<TextInputComponent & { disabled: boolean } & FormFi
 				},
 				argTypes,
 			)}>
-
 	<lu-text-input
 	${generateInputs(inputArgs, argTypes)}
 		[(ngModel)]="example">
 	</lu-text-input>
-
 </lu-form-field>
-
 {{example}}`),
 			moduleMetadata: {
 				imports: [TextInputComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule],
@@ -83,6 +83,7 @@ export const Basic: StoryObj<TextInputComponent & { disabled: boolean } & FormFi
 		hiddenLabel: false,
 		hasClearer: false,
 		hasSearchIcon: false,
+		autocomplete: '',
 		searchIcon: 'search',
 		disabled: false,
 		inlineMessage: 'Helper Text',
@@ -99,8 +100,7 @@ export const PasswordVisiblity: StoryObj<TextInputComponent & { disabled: boolea
 	render: (args, { argTypes }) => {
 		const { counter, label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, ...inputArgs } = args;
 		return {
-			template: `
-<lu-form-field ${generateInputs(
+			template: `<lu-form-field ${generateInputs(
 				{
 					label,
 					hiddenLabel,
@@ -112,14 +112,11 @@ export const PasswordVisiblity: StoryObj<TextInputComponent & { disabled: boolea
 				},
 				argTypes,
 			)}>
-
 	<lu-text-input ${generateInputs(inputArgs, argTypes)}
 		type="password"
 		[(ngModel)]="example">
 	</lu-text-input>
-
 </lu-form-field>
-
 {{example}}`,
 			moduleMetadata: {
 				imports: [TextInputComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule],
@@ -162,16 +159,13 @@ export const WithPrefixAndSuffix: StoryObj<TextInputComponent & { disabled: bool
 				},
 				argTypes,
 			)}>
-
 	<lu-text-input
 		${generateInputs(inputArgs, argTypes)}
 		[prefix]="prefix"
 		[suffix]="suffix"
 		[(ngModel)]="example">
 	</lu-text-input>
-
 </lu-form-field>
-
 {{example}}`),
 			moduleMetadata: {
 				imports: [TextInputComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule],
@@ -190,8 +184,8 @@ export const WithPrefixAndSuffix: StoryObj<TextInputComponent & { disabled: bool
 		hasSearchIcon: false,
 		searchIcon: 'search',
 		prefix: {
-			icon: 'dollar',
-			ariaLabel: 'Dollar',
+			content: '$',
+			ariaLabel: 'dollars',
 		},
 		suffix: {
 			content: '€/j',

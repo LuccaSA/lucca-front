@@ -84,8 +84,10 @@ function getTemplate(args: timepickerBasicStory): string {
 		</fieldset>
 	</div>
 	<div class="inlineMessage" id="helper">
-		<span aria-hidden="true" class="lucca-icon"></span>
-		Helper text
+		<span aria-hidden="true" class="lucca-icon inlineMessage-statusIcon"></span>
+		<p class="inlineMessage-content">
+			Helper text
+		</p>
 	</div>
 </div>
 	`;

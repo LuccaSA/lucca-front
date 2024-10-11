@@ -1,5 +1,5 @@
 import { Directive, inject, OnDestroy, OnInit } from '@angular/core';
-import { ALuSelectInputComponent } from '@lucca-front/ng/core-select';
+import { ALuSelectInputComponent, LuOptionComparer } from '@lucca-front/ng/core-select';
 import { catchError, combineLatest, concatMap, debounceTime, distinctUntilChanged, map, merge, Observable, of, pairwise, scan, startWith, Subject, switchMap, takeUntil, takeWhile, tap } from 'rxjs';
 
 export const LU_SELECT_MAGIC_PAGE_SIZE = 20;
@@ -28,12 +28,12 @@ export abstract class ALuCoreSelectApiDirective<TOption, TParams = Record<string
 	/**
 	 * Compare two options to know if they are the same. For example, compare by id or by JSON
 	 */
-	protected abstract optionComparer: (a: TOption, b: TOption) => boolean;
+	protected abstract optionComparer: LuOptionComparer<TOption>;
 
 	/**
 	 * Return a key to identify the option in for-of loops
 	 */
-	protected optionKey?: (option: TOption) => unknown;
+	protected abstract optionKey: (option: TOption) => unknown;
 
 	/**
 	 * Return the options for the given params and page
@@ -42,10 +42,7 @@ export abstract class ALuCoreSelectApiDirective<TOption, TParams = Record<string
 
 	public ngOnInit(): void {
 		this.select.optionComparer = this.optionComparer;
-
-		if (this.optionKey) {
-			this.select.optionKey = this.optionKey;
-		}
+		this.select.optionKey = this.optionKey;
 
 		this.buildOptions()
 			.pipe(takeUntil(this.destroy$))

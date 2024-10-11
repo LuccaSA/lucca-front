@@ -1,4 +1,4 @@
-@use 'field';
+// no responsive components
 @use 'box';
 @use 'tag';
 @use 'code';
@@ -10,6 +10,7 @@
 @use 'section';
 @use 'collapse';
 @use 'container';
+@use 'errorPage';
 @use 'pagination';
 @use 'titleSection';
 @use 'contentSection';
@@ -24,24 +25,21 @@
 @use 'buttonGroup';
 @use 'actionIcon';
 @use 'menu';
-@use 'radio';
 @use 'radioField';
-@use 'switch';
 @use 'switchField';
 @use 'file';
 @use 'layout';
 @use 'radioButtons';
 @use 'table';
-@use 'checkbox';
 @use 'checkboxField';
 @use 'timeline';
 @use 'button';
-@use 'textfields';
 @use 'textField';
 @use 'navside';
 @use 'form';
 @use 'tableFixed';
-@use 'viewTabs';
+@use 'segmentedControl';
+@use 'skipLinks';
 @use 'grid';
 @use 'tableSticked';
 @use 'timepicker';
@@ -70,8 +68,8 @@
 @use 'scrollBox';
 @use 'toast';
 @use 'popover';
-@use 'plgPush';
 @use 'userTile';
+@use 'plgPush';
 
 // responsive components with media queries
 @use 'dialog';
@@ -110,8 +108,15 @@
 @include indexTable.responsive($at: 'media');
 @include footer.responsive($at: 'media');
 
-// deprecated components
+// deprecated components not loaded by default
 // @use 'gridLegacy'; // caution: grid and gridLegacy cannot be loaded at the same time
 // @use 'emptyStateDeprecated';
 // @use 'tableFixedDeprecated';
 // @use 'tableStickedDeprecated';
+
+// deprecated components
+@use 'field';
+@use 'radio';
+@use 'switch';
+@use 'checkbox';
+@use 'textfields';

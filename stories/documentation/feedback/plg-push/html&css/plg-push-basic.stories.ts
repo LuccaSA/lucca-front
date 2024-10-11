@@ -1,7 +1,6 @@
 import { Meta, StoryFn } from '@storybook/angular';
 
-interface PLGPushBasicStory {
-}
+interface PLGPushBasicStory {}
 
 export default {
 	title: 'Documentation/Feedback/PLG Push/HTML & CSS/Basic',
@@ -18,8 +17,7 @@ function getTemplate(args: PLGPushBasicStory): string {
 		<div class="plgPush-content-description">
 			Bénéficiez de toutes les options liées au télétravail avec Timmi Office.
 			<a class="link mod-icon" href="#" target="_blank" rel="noopener noreferrer">
-				<span>Demander un essai gratuit</span>
-				<span aria-hidden="true" class="lucca-icon icon-arrowExternal"></span>
+				<span class="link-text">Demander un essai gratuit</span><!-- no text node here --><span class="link-icon"><span aria-hidden="true" class="lucca-icon icon-arrowExternal"></span></span>
 				<span class="u-mask">Ouvrir dans une nouvelle fenêtre</span>
 			</a>
 		</div>

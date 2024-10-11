@@ -1,7 +1,8 @@
+@use '@lucca-front/scss/src/commons/utils/namespace';
 @use '@lucca-front/icons/src/commons/utils/icon';
 @use '@lucca-front/scss/src/commons/utils/a11y';
 
-:root {
+@include namespace.appendRootVars {
 	--components-options-item-padding-vertical: var(--pr-t-spacings-50);
 	--components-options-item-padding-horizontal: var(--pr-t-spacings-100);
 	--components-options-item-multiple-padding: 2.25rem;
@@ -120,6 +121,7 @@
 
 			&::before {
 				content: '';
+				background-color: var(--palettes-neutral-0);
 				border-radius: var(--components-options-checkbox-border-radius);
 				box-shadow: inset 0 0 0 2px var(--components-options-checkbox-border-color);
 				display: block;

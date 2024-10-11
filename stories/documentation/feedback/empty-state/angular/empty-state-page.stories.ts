@@ -13,8 +13,11 @@ export default {
 	],
 	render: (args: EmptyStatePageComponent) => {
 		const { heading, description, icon, topRightBackground, topRightForeground, bottomLeftBackground, bottomLeftForeground, contentBackgroundColor, hx } = args;
-		const paramIcon = args.icon === '' ? '' : 'icon="' + args.icon + '"';
-
+		const paramIcon = args.icon === '' ? '' : 'icon="https://cdn.lucca.fr/lucca-front/assets/empty-states/message/' + args.icon + '.svg"';
+		const paramTopRightBackground = args.topRightBackground === '' ? '' : 'topRightBackground="https://cdn.lucca.fr/lucca-front/assets/empty-states/' + args.topRightBackground + '.svg"';
+		const paramTopRightForeground = args.topRightForeground === '' ? '' : 'topRightForeground="https://cdn.lucca.fr/lucca-front/assets/empty-states/' + args.topRightForeground + '.svg"';
+		const paramBottomLeftBackground = args.bottomLeftBackground === '' ? '' : 'bottomLeftBackground="https://cdn.lucca.fr/lucca-front/assets/empty-states/' + args.bottomLeftBackground + '.svg"';
+		const paramBottomLeftForeground = args.bottomLeftForeground === '' ? '' : 'bottomLeftForeground="https://cdn.lucca.fr/lucca-front/assets/empty-states/' + args.bottomLeftForeground + '.svg"';
 		return {
 			styles: [
 				`
@@ -29,11 +32,10 @@ export default {
 	heading="${heading}"
 	description="${description}"
 	${paramIcon}
-	topRightBackground="${topRightBackground}"
-	topRightForeground="${topRightForeground}"
-	bottomLeftBackground="${bottomLeftBackground}"
-	bottomLeftForeground="${bottomLeftForeground}"
-	contentBackgroundColor="${contentBackgroundColor}"
+	${paramTopRightBackground}
+	${paramTopRightForeground}
+	${paramBottomLeftBackground}
+	${paramBottomLeftForeground}
 	hx="${hx}"
 >
 	<button luButton type="button" palette="product">Button</button>
@@ -44,87 +46,87 @@ export default {
 	argTypes: {
 		topRightBackground: {
 			options: [
-				'https://cdn.lucca.fr/lucca-front/assets/empty-states/poplee/bubbles-top-right-01.svg',
-				'https://cdn.lucca.fr/lucca-front/assets/empty-states/poplee/bubbles-top-right-02.svg',
-				'https://cdn.lucca.fr/lucca-front/assets/empty-states/poplee/bubbles-top-right-03.svg',
-				'https://cdn.lucca.fr/lucca-front/assets/empty-states/cleemy/bubbles-top-right-01.svg',
-				'https://cdn.lucca.fr/lucca-front/assets/empty-states/cleemy/bubbles-top-right-02.svg',
-				'https://cdn.lucca.fr/lucca-front/assets/empty-states/cleemy/bubbles-top-right-03.svg',
-				'https://cdn.lucca.fr/lucca-front/assets/empty-states/lucca/bubbles-top-right-01.svg',
-				'https://cdn.lucca.fr/lucca-front/assets/empty-states/lucca/bubbles-top-right-02.svg',
-				'https://cdn.lucca.fr/lucca-front/assets/empty-states/lucca/bubbles-top-right-03.svg',
-				'https://cdn.lucca.fr/lucca-front/assets/empty-states/pagga/bubbles-top-right-01.svg',
-				'https://cdn.lucca.fr/lucca-front/assets/empty-states/pagga/bubbles-top-right-02.svg',
-				'https://cdn.lucca.fr/lucca-front/assets/empty-states/pagga/bubbles-top-right-03.svg',
-				'https://cdn.lucca.fr/lucca-front/assets/empty-states/timmi/bubbles-top-right-01.svg',
-				'https://cdn.lucca.fr/lucca-front/assets/empty-states/timmi/bubbles-top-right-02.svg',
-				'https://cdn.lucca.fr/lucca-front/assets/empty-states/timmi/bubbles-top-right-03.svg',
+				'poplee/bubbles-top-right-01',
+				'poplee/bubbles-top-right-02',
+				'poplee/bubbles-top-right-03',
+				'cleemy/bubbles-top-right-01',
+				'cleemy/bubbles-top-right-02',
+				'cleemy/bubbles-top-right-03',
+				'lucca/bubbles-top-right-01',
+				'lucca/bubbles-top-right-02',
+				'lucca/bubbles-top-right-03',
+				'pagga/bubbles-top-right-01',
+				'pagga/bubbles-top-right-02',
+				'pagga/bubbles-top-right-03',
+				'timmi/bubbles-top-right-01',
+				'timmi/bubbles-top-right-02',
+				'timmi/bubbles-top-right-03',
 			],
 			control: 'select',
 		},
 		topRightForeground: {
 			options: [
-				'https://cdn.lucca.fr/lucca-front/assets/empty-states/generic/coffee-01.svg',
-				'https://cdn.lucca.fr/lucca-front/assets/empty-states/generic/tea-01.svg',
-				'https://cdn.lucca.fr/lucca-front/assets/empty-states/generic/cookie-01.svg',
-				'https://cdn.lucca.fr/lucca-front/assets/empty-states/generic/glasses-01.svg',
-				'https://cdn.lucca.fr/lucca-front/assets/empty-states/generic/plant-01.svg',
-				'https://cdn.lucca.fr/lucca-front/assets/empty-states/generic/plant-02.svg',
-				'https://cdn.lucca.fr/lucca-front/assets/empty-states/generic/polaroids-01.svg',
-				'https://cdn.lucca.fr/lucca-front/assets/empty-states/generic/post-its-01.svg',
-				'https://cdn.lucca.fr/lucca-front/assets/empty-states/generic/success-01.svg',
+				'generic/coffee-01',
+				'generic/tea-01',
+				'generic/cookie-01',
+				'generic/glasses-01',
+				'generic/plant-01',
+				'generic/plant-02',
+				'generic/polaroids-01',
+				'generic/post-its-01',
+				'generic/success-01',
 			],
 			control: 'select',
 		},
 		bottomLeftBackground: {
 			options: [
-				'https://cdn.lucca.fr/lucca-front/assets/empty-states/poplee/bubbles-bottom-left-01.svg',
-				'https://cdn.lucca.fr/lucca-front/assets/empty-states/poplee/bubbles-bottom-left-02.svg',
-				'https://cdn.lucca.fr/lucca-front/assets/empty-states/poplee/bubbles-bottom-left-03.svg',
-				'https://cdn.lucca.fr/lucca-front/assets/empty-states/cleemy/bubbles-bottom-left-01.svg',
-				'https://cdn.lucca.fr/lucca-front/assets/empty-states/cleemy/bubbles-bottom-left-02.svg',
-				'https://cdn.lucca.fr/lucca-front/assets/empty-states/cleemy/bubbles-bottom-left-03.svg',
-				'https://cdn.lucca.fr/lucca-front/assets/empty-states/lucca/bubbles-bottom-left-01.svg',
-				'https://cdn.lucca.fr/lucca-front/assets/empty-states/lucca/bubbles-bottom-left-02.svg',
-				'https://cdn.lucca.fr/lucca-front/assets/empty-states/lucca/bubbles-bottom-left-03.svg',
-				'https://cdn.lucca.fr/lucca-front/assets/empty-states/pagga/bubbles-bottom-left-01.svg',
-				'https://cdn.lucca.fr/lucca-front/assets/empty-states/pagga/bubbles-bottom-left-02.svg',
-				'https://cdn.lucca.fr/lucca-front/assets/empty-states/pagga/bubbles-bottom-left-03.svg',
-				'https://cdn.lucca.fr/lucca-front/assets/empty-states/timmi/bubbles-bottom-left-01.svg',
-				'https://cdn.lucca.fr/lucca-front/assets/empty-states/timmi/bubbles-bottom-left-02.svg',
-				'https://cdn.lucca.fr/lucca-front/assets/empty-states/timmi/bubbles-bottom-left-03.svg',
+				'poplee/bubbles-bottom-left-01',
+				'poplee/bubbles-bottom-left-02',
+				'poplee/bubbles-bottom-left-03',
+				'cleemy/bubbles-bottom-left-01',
+				'cleemy/bubbles-bottom-left-02',
+				'cleemy/bubbles-bottom-left-03',
+				'lucca/bubbles-bottom-left-01',
+				'lucca/bubbles-bottom-left-02',
+				'lucca/bubbles-bottom-left-03',
+				'pagga/bubbles-bottom-left-01',
+				'pagga/bubbles-bottom-left-02',
+				'pagga/bubbles-bottom-left-03',
+				'timmi/bubbles-bottom-left-01',
+				'timmi/bubbles-bottom-left-02',
+				'timmi/bubbles-bottom-left-03',
 			],
 			control: 'select',
 		},
 		bottomLeftForeground: {
 			options: [
-				'https://cdn.lucca.fr/lucca-front/assets/empty-states/cleemy/expenses-01.svg',
-				'https://cdn.lucca.fr/lucca-front/assets/empty-states/cleemy/expenses-02.svg',
-				'https://cdn.lucca.fr/lucca-front/assets/empty-states/cleemy/finance-01.svg',
-				'https://cdn.lucca.fr/lucca-front/assets/empty-states/cleemy/payment-01.svg',
-				'https://cdn.lucca.fr/lucca-front/assets/empty-states/cleemy/procurement-01.svg',
-				'https://cdn.lucca.fr/lucca-front/assets/empty-states/lucca/lucca-01.svg',
-				'https://cdn.lucca.fr/lucca-front/assets/empty-states/pagga/compensation-01.svg',
-				'https://cdn.lucca.fr/lucca-front/assets/empty-states/pagga/mealvoucher-01.svg',
-				'https://cdn.lucca.fr/lucca-front/assets/empty-states/pagga/payroll-01.svg',
-				'https://cdn.lucca.fr/lucca-front/assets/empty-states/pagga/payslips-01.svg',
-				'https://cdn.lucca.fr/lucca-front/assets/empty-states/pagga/wizard-01.svg',
-				'https://cdn.lucca.fr/lucca-front/assets/empty-states/poplee/core-hr-01.svg',
-				'https://cdn.lucca.fr/lucca-front/assets/empty-states/poplee/engagement-01.svg',
-				'https://cdn.lucca.fr/lucca-front/assets/empty-states/poplee/performance-01.svg',
-				'https://cdn.lucca.fr/lucca-front/assets/empty-states/poplee/talent-01.svg',
-				'https://cdn.lucca.fr/lucca-front/assets/empty-states/poplee/training-01.svg',
-				'https://cdn.lucca.fr/lucca-front/assets/empty-states/success/party-favor-01.svg',
-				'https://cdn.lucca.fr/lucca-front/assets/empty-states/timmi/absences-01.svg',
-				'https://cdn.lucca.fr/lucca-front/assets/empty-states/timmi/office-01.svg',
-				'https://cdn.lucca.fr/lucca-front/assets/empty-states/timmi/projects-01.svg',
-				'https://cdn.lucca.fr/lucca-front/assets/empty-states/timmi/time-and-activities-01.svg',
-				'https://cdn.lucca.fr/lucca-front/assets/empty-states/timmi/timesheet-01.svg',
+				'cleemy/expenses-01',
+				'cleemy/expenses-02',
+				'cleemy/finance-01',
+				'cleemy/payment-01',
+				'cleemy/procurement-01',
+				'lucca/lucca-01',
+				'pagga/compensation-01',
+				'pagga/mealvoucher-01',
+				'pagga/payroll-01',
+				'pagga/payslips-01',
+				'pagga/wizard-01',
+				'poplee/core-hr-01',
+				'poplee/engagement-01',
+				'poplee/performance-01',
+				'poplee/talent-01',
+				'poplee/training-01',
+				'success/party-favor-01',
+				'timmi/absences-01',
+				'timmi/office-01',
+				'timmi/projects-01',
+				'timmi/time-and-activities-01',
+				'timmi/timesheet-01',
 			],
 			control: 'select',
 		},
 		icon: {
-			options: ['', 'https://cdn.lucca.fr/lucca-front/assets/empty-states/message/medal-01.svg', 'https://cdn.lucca.fr/lucca-front/assets/empty-states/message/post-it-01.svg'],
+			options: ['', 'medal-01', 'post-it-01'],
 			control: {
 				type: 'select',
 			},
@@ -142,7 +144,7 @@ export default {
 			},
 			description: '[v18.1]',
 		},
-		title: {
+		heading: {
 			description: '[v18.1] Optional',
 		},
 		description: {
@@ -156,10 +158,10 @@ export const Page: StoryObj<EmptyStatePageComponent> = {
 		heading: 'Empty state page',
 		description: 'Description can be a string or a ng-template',
 		icon: '',
-		topRightBackground: 'https://cdn.lucca.fr/lucca-front/assets/empty-states/poplee/bubbles-top-right-01.svg',
-		topRightForeground: 'https://cdn.lucca.fr/lucca-front/assets/empty-states/generic/coffee-01.svg',
-		bottomLeftBackground: 'https://cdn.lucca.fr/lucca-front/assets/empty-states/poplee/bubbles-bottom-left-01.svg',
-		bottomLeftForeground: 'https://cdn.lucca.fr/lucca-front/assets/empty-states/poplee/core-hr-01.svg',
+		topRightBackground: 'poplee/bubbles-top-right-01',
+		topRightForeground: 'generic/coffee-01',
+		bottomLeftBackground: 'poplee/bubbles-bottom-left-01',
+		bottomLeftForeground: 'poplee/core-hr-01',
 		contentBackgroundColor: 'var(--pr-t-elevation-surface-default)',
 		hx: 1,
 	},

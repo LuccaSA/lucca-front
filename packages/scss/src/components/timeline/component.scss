@@ -1,6 +1,7 @@
 @use '@lucca-front/scss/src/commons/utils/reset';
+@use '@lucca-front/scss/src/commons/utils/namespace';
 
-@mixin component($atRoot: 'without: rule') {
+@mixin component($atRoot: namespace.$defaultAtRoot) {
 	list-style-type: none;
 	padding: 0;
 	margin: var(--pr-t-spacings-200) 0;
@@ -35,8 +36,8 @@
 			color: var(--palettes-product-700);
 			font-weight: 600;
 			margin: 0;
-			font-size: var(--sizes-M-fontSize);
-			line-height: var(--sizes-L-lineHeight);
+			font-size: var(--components-timeline-title-fontSize);
+			line-height: var(--components-timeline-title-lineHeight);
 			min-width: 1.5rem;
 		}
 

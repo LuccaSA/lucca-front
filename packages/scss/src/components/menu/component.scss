@@ -1,6 +1,7 @@
 @use '@lucca-front/scss/src/commons/utils/reset';
+@use '@lucca-front/scss/src/commons/utils/namespace';
 
-@mixin component($atRoot: 'without: rule') {
+@mixin component($atRoot: namespace.$defaultAtRoot) {
 	position: relative;
 	column-gap: var(--pr-t-spacings-400);
 	align-items: center;
@@ -27,6 +28,11 @@
 	}
 
 	@at-root ($atRoot) {
+		.menu-containerOptionnal {
+			max-width: var(--commons-container-maxWidth);
+			padding-inline: var(--commons-container-padding);
+		}
+
 		.menu-list {
 			@include reset.list;
 

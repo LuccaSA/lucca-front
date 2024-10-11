@@ -1,15 +1,33 @@
 @use '@lucca-front/scss/src/commons/utils/a11y';
+@use '@lucca-front/scss/src/commons/utils/namespace';
 
 @mixin S {
 	--components-comment-text-fontSize: var(--sizes-S-fontSize);
 	--components-comment-text-lineHeight: var(--sizes-S-lineHeight);
-	--components-comment-info-fontSize: var(--sizes-XS-fontSize);
-	--components-comment-info-lineHeight: var(--sizes-XS-lineHeight);
-	--components-comment-info-content-marginTop: var(--pr-t-spacings-50);
+}
+
+@mixin wrapperS {
+	.comment {
+		@include S;
+	}
 }
 
 @mixin noAvatar {
 	--components-comment-content-margin: 0;
+}
+
+@mixin narrow {
+	@at-root (namespace.$defaultAtRoot) {
+		.comment-infos-content {
+			--components-comment-info-content-display: flex;
+		}
+
+		.comment-infos-name + .comment-infos-date {
+			&::before {
+				--components-comment-info-separator: none;
+			}
+		}
+	}
 }
 
 @mixin wrapperCompact {
@@ -19,5 +37,20 @@
 				@include a11y.mask;
 			}
 		}
+	}
+}
+
+@mixin chatAnswer {
+	.comment {
+		--components-comment-info-direction: row-reverse;
+		--components-comment-background-color: var(--palettes-product-50);
+		--components-comment-align: end;
+		--components-comment-margin: auto;
+		--components-comment-border-radius: var(--commons-borderRadius-L) var(--commons-borderRadius-M) var(--commons-borderRadius-L)
+			var(--commons-borderRadius-L);
+	}
+
+	.comment-content {
+		margin: 0 var(--components-comment-content-margin) 0 0;
 	}
 }

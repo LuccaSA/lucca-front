@@ -13,14 +13,6 @@
 	--components-sortable-offset: 0;
 }
 
-@mixin sortLegacy2 {
-	padding: 0;
-
-	.table-head-row-cell-sortableButton {
-		padding: var(--components-table-padding);
-	}
-}
-
 @mixin sortableLegacy {
 	cursor: pointer;
 
@@ -30,7 +22,6 @@
 		border-radius: var(--commons-borderRadius-M);
 		opacity: 0;
 		margin: 0;
-		margin-left: var(--pr-t-spacings-50);
 		transform: translateY(var(--pr-t-spacings-50));
 		transition-duration: var(--commons-animations-durations-fast);
 		transition-property: opacity, transform;
@@ -59,6 +50,15 @@
 		@include reset.button;
 
 		text-align: left;
+
+		.indexTable & {
+			display: inline-flex;
+			width: fit-content;
+		}
+
+		&::after {
+			margin-left: var(--pr-t-spacings-50);
+		}
 	}
 }
 
@@ -73,8 +73,21 @@
 }
 
 @mixin sortableLegacyAlignRight {
-	&::after {
-		content: none;
+	.table & {
+		&::after {
+			content: none;
+		}
+	}
+
+	.indexTable & {
+		&::before {
+			content: none;
+		}
+
+		&::after {
+			margin-left: 0;
+			margin-right: var(--pr-t-spacings-50);
+		}
 	}
 
 	&::before {
@@ -106,6 +119,12 @@
 
 	&:is(button) {
 		text-align: right;
+	}
+}
+
+@mixin sortableLegacy2AlignRight {
+	&::before {
+		margin-right: 0;
 	}
 }
 

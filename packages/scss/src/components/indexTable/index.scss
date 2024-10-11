@@ -8,6 +8,7 @@
 
 	&.mod-selectable {
 		@include selectable;
+		// Selectable states
 		@include selectableSelectedRow;
 		@include selectableHoveredRow;
 	}
@@ -44,9 +45,16 @@
 		}
 	}
 
-	@include focusedRow;
-	@include hoveredRow;
+	// generic states, non tied to a mod
+	&:not(:has(.indexTable-head[inert='inert'])) {
+		// focus-within
+		@include focusedRow;
 
+		// hover
+		@include hoveredRow;
+	}
+
+	// nested open / closed row
 	@include openClosedRow;
 }
 

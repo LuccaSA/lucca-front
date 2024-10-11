@@ -8,18 +8,17 @@ export default {
 } as Meta;
 
 function getTemplate(args: IndexTableEmptyStateStory): string {
-	return `
-	<table class="indexTable" inert role="presentation">
-		<thead class="indexTable-head">
-			<tr class="indexTable-head-row">
-				<th class="indexTable-head-row-cell" scope="col">Label</th>
-				<th class="indexTable-head-row-cell" scope="col">Label</th>
-				<th class="indexTable-head-row-cell" scope="col">Label</th>
-			</tr>
-		</thead>
-		<tbody class="indexTable-body">
-			<tr class="indexTable-body-row">
-				<td class="indexTable-body-row-cell" colspan="3">
+	return `<table class="indexTable" role="presentation">
+	<thead class="indexTable-head" inert="inert">
+		<tr class="indexTable-head-row">
+			<th class="indexTable-head-row-cell" scope="col">Label</th>
+			<th class="indexTable-head-row-cell" scope="col">Label</th>
+			<th class="indexTable-head-row-cell" scope="col">Label</th>
+		</tr>
+	</thead>
+	<tbody class="indexTable-body">
+		<tr class="indexTable-body-row">
+			<td class="indexTable-body-row-cell" colspan="3">
 				<section class="emptyState">
 					<div class="emptyState-container">
 						<div class="emptyState-content">
@@ -33,11 +32,10 @@ function getTemplate(args: IndexTableEmptyStateStory): string {
 						</div>
 					</div>
 				</section>
-				</td>
-			</tr>
-		</tbody>
-	</table>
-`;
+			</td>
+		</tr>
+	</tbody>
+</table>`;
 }
 
 const Template: StoryFn<IndexTableEmptyStateStory> = (args) => ({

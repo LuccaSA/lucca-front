@@ -15,9 +15,3 @@
 @mixin left {
 	left: var(--commons-navSide-width);
 }
-
-@mixin leftCompact {
-	@include left;
-
-	left: var(--commons-navSide-compact-width);
-}

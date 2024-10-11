@@ -10,7 +10,7 @@ export default {
 function getTemplate(args: CalloutKillableStory): string {
 	return `<div class="callout">
 	<div class="callout-content">
-		<div class="callout-content-description">Caesarem fama studio memorabili ut latius abscessere amplam Nebridius equitum. <a href="#">En savoir plus</a></div>
+		<div class="callout-content-description">Feedback description</div>
 	</div>
 	<button type="button" class="callout-kill"></button>
 </div>`;

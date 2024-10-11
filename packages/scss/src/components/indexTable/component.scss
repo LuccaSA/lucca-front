@@ -1,8 +1,10 @@
 @use 'vars' as *;
 @use '@lucca-front/scss/src/commons/utils/a11y';
+@use '@lucca-front/scss/src/commons/utils/reset';
 @use '@lucca-front/scss/src/components/button/exports' as button;
+@use '@lucca-front/scss/src/commons/utils/namespace';
 
-@mixin component($atRoot: 'without: rule') {
+@mixin component($atRoot: namespace.$defaultAtRoot) {
 	position: relative;
 	display: table;
 	width: 100%;
@@ -86,9 +88,21 @@
 			&:last-child {
 				--components-indexTable-cell-padding-right: var(--components-indexTable-cell-padding);
 			}
+		}
 
-			&:not(:has(button, a, input, textarea, select, details, [tabindex='0']), .mod-allowTextSelection) {
-				pointer-events: none;
+		.indexTable-body-row {
+			&:has(.indexTable-body-row-cell-link) {
+				.indexTable-body-row-cell {
+					&:not(:has(button, a, input, textarea, select, details, [tabindex='0']), .mod-allowTextSelection) {
+						pointer-events: none;
+					}
+				}
+			}
+
+			&:not(:has(.indexTable-body-row-cell-link)) {
+				&:has(.indexTable-body-row-cell-action) {
+					cursor: pointer;
+				}
 			}
 		}
 
@@ -181,8 +195,8 @@
 
 		.indexTable-body-row-cell-checkbox,
 		.indexTable-head-row-cell-checkbox {
-			display: block;
-			margin: 2px 0 0 var(--pr-t-spacings-50);
+			margin: var(--pr-t-spacings-50);
+			margin-right: var(--pr-t-spacings-150);
 		}
 
 		// .indexTable-body-row-cell-action is deprecated
@@ -191,6 +205,8 @@
 		}
 
 		.indexTable-body-row-cell-link {
+			@include reset.button;
+
 			text-decoration: none;
 
 			&::after {
@@ -217,21 +233,26 @@
 		}
 
 		.indexTable-body-row-cellTitle-button {
-			@include button.text;
-			@include button.S;
-			@include button.onlyIconS;
+			// :not(.class) is only there to increase specificity when the class isn’t present
+			// but the class should be present, and this code is temporary
+			&.button,
+			&:not(.button) {
+				@include button.text;
+				@include button.S;
+				@include button.onlyIconS;
 
-			position: static;
+				position: static;
 
-			.lucca-icon {
-				transition: transform var(--commons-animations-durations-fast) ease;
-			}
+				.lucca-icon {
+					transition: transform var(--commons-animations-durations-fast) ease;
+				}
 
-			// Extend button reactive zone to his whole parent
-			&::before {
-				content: '';
-				position: absolute;
-				inset: 0;
+				// Extend button reactive zone to his whole parent
+				&::before {
+					content: '';
+					position: absolute;
+					inset: 0;
+				}
 			}
 		}
 

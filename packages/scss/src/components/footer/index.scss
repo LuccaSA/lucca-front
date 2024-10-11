@@ -9,6 +9,37 @@
 	&.mod-sticky {
 		@include sticky;
 	}
+
+	&.mod-narrow {
+		@include narrow;
+	}
+
+	// default mod
+	// .mod-narrowAtMediaMaxXXX are deprecated
+	&:not([class*='mod-narrow']),
+	&.mod-narrowAtMediaMaxXXS {
+		@include media.max('XXS') {
+			@include narrow;
+		}
+	}
+
+	&.mod-narrowAtMediaMaxXS {
+		@include media.max('XS') {
+			@include narrow;
+		}
+	}
+
+	&.mod-narrowAtMediaMaxS {
+		@include media.max('S') {
+			@include narrow;
+		}
+	}
+
+	&.mod-narrowAtMediaMaxM {
+		@include media.max('M') {
+			@include narrow;
+		}
+	}
 }
 
 @mixin responsive(

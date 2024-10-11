@@ -4,6 +4,10 @@
 	@include vars;
 	@include component;
 
+	&.mod-S {
+		@include S;
+	}
+
 	&.mod-horizontal {
 		@include horizontal;
 	}

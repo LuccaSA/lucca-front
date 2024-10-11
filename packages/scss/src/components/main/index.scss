@@ -20,11 +20,6 @@
 	.mod-withMenu & {
 		@include menu;
 	}
-
-	.navSide.mod-compact ~ &,
-	.mod-withMenuCompact & {
-		@include menuCompact;
-	}
 }
 
 @mixin responsive(

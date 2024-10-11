@@ -1,4 +1,8 @@
-@mixin component($atRoot: 'without: rule') {
+@use '@lucca-front/scss/src/components/title/exports' as title;
+@use '@lucca-front/scss/src/commons/utils/media';
+@use '@lucca-front/scss/src/commons/utils/namespace';
+
+@mixin component($atRoot: namespace.$defaultAtRoot) {
 	display: flex;
 	flex-direction: column;
 	flex-grow: 1;
@@ -10,9 +14,16 @@
 			display: flex;
 			flex-grow: 1;
 			justify-content: center;
-			max-width: var(--components-emptyState-max-width);
+			max-width: var(--components-emptyState-container-maxWidth);
+			left: var(--components-emptyState-container-left);
 			padding: 0;
 			width: 100%;
+			position: sticky;
+
+			.container & {
+				--components-emptyState-container-maxWidth: none;
+				--components-emptyState-container-left: auto;
+			}
 		}
 
 		.emptyState-content {
@@ -28,7 +39,7 @@
 		}
 
 		.emptyState-content-text {
-			padding: 0 var(--pr-t-spacings-50);
+			padding-inline: var(--pr-t-spacings-50);
 		}
 
 		.emptyState-content-heading {

@@ -17,6 +17,7 @@
 	.indexTable-head-row-transparentCell,
 	.indexTable-body-row-transparentCell {
 		width: var(--components-indexTable-row-cell-transparent-width);
+
 		&:first-child {
 			padding-left: 0;
 		}
@@ -189,9 +190,9 @@
 }
 
 @mixin alignRight {
-    text-align: right;
+	text-align: right;
 }
 
 @mixin alignCenter {
-    text-align: center;
+	text-align: center;
 }
