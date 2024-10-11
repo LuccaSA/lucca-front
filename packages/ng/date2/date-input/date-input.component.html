@@ -12,7 +12,7 @@
 			(input)="userTextInput.set(date.value)"
 			(blur)="onTouched?.();inputFocused.set(false)"
 			(focus)="inputFocused.set(true)"
-			[placeholder]="placeholder()"
+			[attr.placeholder]="placeholder()"
 			aria-haspopup="true"
 			role="combobox"
 			(click)="popoverRef.openPopover(true, true)"

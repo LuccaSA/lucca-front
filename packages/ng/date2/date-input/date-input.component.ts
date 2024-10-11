@@ -44,7 +44,7 @@ export class DateInputComponent implements ControlValueAccessor, Validator {
 	#intlDateTimeFormatYear = new Intl.DateTimeFormat(this.#locale, { year: 'numeric' });
 
 	// Contains the current date format (like dd/mm/yy etc) based on current locale
-	#dateFormat = getDateFormat(this.#locale);
+	#dateFormat = getDateFormat(this.#locale).toUpperCase();
 
 	intl = getIntl(LU_DATE2_TRANSLATIONS);
 
@@ -63,7 +63,8 @@ export class DateInputComponent implements ControlValueAccessor, Validator {
 	hideToday = input<boolean, boolean>(false, { transform: booleanAttribute });
 	hasTodayButton = input<boolean, boolean>(false, { transform: booleanAttribute });
 	clearable = input<boolean, boolean>(false, { transform: booleanAttribute });
-	placeholder = input<string>(this.#dateFormat);
+	placeholder = input<string>();
+
 	mode = input<CalendarMode>('day');
 	hideWeekend = input<boolean, boolean>(false, { transform: booleanAttribute });
 

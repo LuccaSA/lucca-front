@@ -6,19 +6,7 @@
 @mixin component($atRoot: 'without: rule') {
 	width: var(--components-calendarWidth);
 
-	&:has(:focus-visible) {
-		.calendar-callout {
-			display: block;
-		}
-	}
-
 	@at-root ($atRoot) {
-		.calendar-callout {
-			padding: 0 var(--pr-t-spacings-150) var(--pr-t-spacings-150);
-			background-color: var(--components-calendarBackground);
-			display: none;
-		}
-
 		.calendar-table {
 			border-spacing: var(--components-calendarBorderSpacing);
 			border: var(--pr-t-spacings-150) solid transparent;
@@ -36,12 +24,6 @@
 			width: calc(var(--components-calendarWrapperWidth) * var(--components-calendarWrapperVisible));
 			background-color: var(--components-calendarWrapperBackground);
 			position: relative;
-
-			&:has(:focus-visible) {
-				.calendar-callout {
-					display: block;
-				}
-			}
 		}
 
 		.calendarWrapper-content {
@@ -70,12 +52,12 @@
 			border-color: transparent var(--components-calendarWrapper-navigationBackground);
 
 			&.mod-prev {
-				left: calc(var(--pr-t-spacings-50) / 2);
+				left: var(--pr-t-spacings-25);
 				border-right: 0;
 			}
 
 			&.mod-next {
-				right: calc(var(--pr-t-spacings-50) / 2);
+				right: var(--pr-t-spacings-25);
 				border-left: 0;
 			}
 		}
