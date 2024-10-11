@@ -68,7 +68,7 @@
 				[(tabbableDate)]="tabbableDate"
 				[getCellInfo]="combinedGetCellInfo"
 				[ranges]="ranges()"
-				(dateClicked)="selectedDate.set($event);currentDate.set($event);popoverRef.close()"
+				(dateClicked)="selectedDate.set($event);currentDate.set($event);popoverRef.close();date.focus()"
 				(nextPage)="move(1)"
 				(previousPage)="move(-1)"
 				[(displayMode)]="calendarMode"
