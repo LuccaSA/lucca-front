@@ -16,8 +16,8 @@
 			aria-haspopup="true"
 			role="combobox"
 			(click)="popoverRef.openPopover(true, true)"
-			(keyup.arrowDown)="popoverRef.opened() ? popoverRef.focusBackToContent($event) : popoverRef.openPopover(true)"
-			(keyup.space)=" popoverRef.opened() ? popoverRef.focusBackToContent($event) : popoverRef.openPopover(true)"
+			(keyup.arrowDown)="popoverRef.opened() ? popoverRef.focusBackToContent($event) : openPopover(popoverRef)"
+			(keyup.space)=" popoverRef.opened() ? popoverRef.focusBackToContent($event) : openPopover(popoverRef)"
 			(keyup.escape)="popoverRef.close()"
 			[disabled]="disabled"
 		/>

@@ -159,6 +159,14 @@ export class DateInputComponent implements ControlValueAccessor, Validator {
 		});
 	}
 
+	openPopover(ref: PopoverDirective): void {
+		ref.openPopover(true, true);
+		// Once popover is opened, aka in the next CD cycle, focus current tabbable date
+		setTimeout(() => {
+			this.calendar()?.focusTabbableDate();
+		});
+	}
+
 	validate(control: AbstractControl<Date, Date>): ValidationErrors {
 		return this.isValidDate(control.value) ? null : { date: true };
 	}
