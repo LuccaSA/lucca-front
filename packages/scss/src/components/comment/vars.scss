@@ -1,5 +1,5 @@
 @mixin vars {
-	--components-comment-max-width: none;
+	--components-comment-max-width: 66ch;
 	--components-comment-text-fontSize: var(--sizes-M-fontSize);
 	--components-comment-text-lineHeight: var(--sizes-M-lineHeight);
 	--components-comment-margin: 0;
