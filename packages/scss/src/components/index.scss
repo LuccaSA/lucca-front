@@ -33,7 +33,6 @@
 @use 'timeline';
 @use 'button';
 @use 'textField';
-@use 'navside';
 @use 'form';
 @use 'tableFixed';
 @use 'skipLinks';
@@ -81,6 +80,7 @@
 @use 'header';
 @use 'errorPage';
 @use 'main';
+@use 'navside';
 
 // responsive components with container queries
 @use 'comment';
@@ -105,10 +105,10 @@
 @use 'pageHeader' with (
 	$defaultResponsive: false
 );
-@use 'indexTable' with (
+@use 'footer' with (
 	$defaultResponsive: false
 );
-@use 'footer' with (
+@use 'indexTable' with (
 	$defaultResponsive: false
 );
 
@@ -121,8 +121,8 @@
 @include emptyState.responsiveBackground($at: 'media');
 @include pageHeader.responsive($at: 'media');
 @include pageHeader.responsiveSearch($at: 'media');
-@include indexTable.responsive($at: 'media');
 @include footer.responsive($at: 'media');
+@include indexTable.responsive($at: 'media');
 
 // deprecated components not loaded by default
 // @use 'gridLegacy'; // caution: grid and gridLegacy cannot be loaded at the same time
