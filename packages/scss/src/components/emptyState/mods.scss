@@ -1,3 +1,6 @@
+@use '@lucca-front/scss/src/components/title/exports' as title;
+@use '@lucca-front/scss/src/commons/utils/media';
+
 @mixin page {
 	--components-emptyState-container-maxWidth: var(--commons-container-maxWidth);
 
