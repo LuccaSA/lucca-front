@@ -23,7 +23,7 @@ Le composant utilise uniquement des objets de type `Date`, le premier jour de la
 Dans le cas ou la donnée attendue doit être un mois ou une année, il est possible de passer par l'input `mode` et spécifier `day`, `month` ou `year` (ce qui correspond au type `CalendarMode`) en fonction de la donnée attendue.
 Dans tous les cas, le date sera au début de la période sélectionnée, exemples:
 
-- Si l'utilisateur sélectionne le 8/10/2024, la date sélectionnée sera `Tue Oct 08 2024 00:00:00 GMT+0200 (heure d’été d’Europe centrale)`
+- Si l'utilisateur sélectionne le 8/10/2024 en mode `day`, la date sélectionnée sera `Tue Oct 08 2024 00:00:00 GMT+0200 (heure d’été d’Europe centrale)`
 - Si l'utilisateur sélectionne 10/2024 en mode `month`, la date sélectionnée sera `Tue Oct 01 2024 00:00:00 GMT+0200 (heure d’été d’Europe centrale)`
 - Si l'utilisateur sélectionne 2024 en mode `year`, la date sélectionnée sera `Mon Jan 01 2024 00:00:00 GMT+0100 (heure normale d’Europe centrale)`
 
