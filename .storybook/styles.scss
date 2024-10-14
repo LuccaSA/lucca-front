@@ -4,6 +4,10 @@
 @import '../packages/scss/src/main-all';
 @import '../packages/ng/styles/main';
 
+storybook-root {
+	display: block;
+}
+
 .demo-utilityWrapper {
 	display: flex;
 	gap: var(--pr-t-spacings-100);
