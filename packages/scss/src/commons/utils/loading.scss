@@ -6,11 +6,12 @@
 		@include keyframe.rotate;
 
 		content: '';
+		
 		width: $size;
 		height: $size;
 		border-radius: var(--commons-borderRadius-full);
 		line-height: 0.8rem;
-		border-width: 3px;
+		border-width: var(--commons-loading-borderWidth);
 		inset: 0;
 		margin: auto;
 		position: absolute;
