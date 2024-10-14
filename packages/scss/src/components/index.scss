@@ -10,7 +10,6 @@
 @use 'section';
 @use 'collapse';
 @use 'container';
-@use 'errorPage';
 @use 'pagination';
 @use 'titleSection';
 @use 'contentSection';
@@ -71,6 +70,13 @@
 @use 'userTile';
 @use 'plgPush';
 
+// deprecated components, no responsive
+@use 'field';
+@use 'radio';
+@use 'switch';
+@use 'checkbox';
+@use 'textfields';
+
 // responsive components with media queries
 @use 'dialog';
 @use 'filters';
@@ -113,10 +119,3 @@
 // @use 'emptyStateDeprecated';
 // @use 'tableFixedDeprecated';
 // @use 'tableStickedDeprecated';
-
-// deprecated components
-@use 'field';
-@use 'radio';
-@use 'switch';
-@use 'checkbox';
-@use 'textfields';
