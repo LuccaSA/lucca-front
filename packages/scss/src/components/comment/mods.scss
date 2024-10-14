@@ -16,20 +16,6 @@
 	--components-comment-content-margin: 0;
 }
 
-@mixin narrow {
-	@at-root (namespace.$defaultAtRoot) {
-		.comment-infos-content {
-			--components-comment-info-content-display: flex;
-		}
-
-		.comment-infos-name + .comment-infos-date {
-			&::before {
-				--components-comment-info-separator: none;
-			}
-		}
-	}
-}
-
 @mixin wrapperCompact {
 	.commentWrapper-item {
 		&:not(:first-child) {
