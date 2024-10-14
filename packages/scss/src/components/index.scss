@@ -37,7 +37,6 @@
 @use 'navside';
 @use 'form';
 @use 'tableFixed';
-@use 'segmentedControl';
 @use 'skipLinks';
 @use 'grid';
 @use 'tableSticked';
@@ -87,12 +86,16 @@
 // responsive components with container queries
 @use 'comment';
 @use 'filterBar';
+// @use 'segmentedControl';
 // @use 'emptyState';
 // @use 'pageHeader';
 // @use 'footer';
 // @use 'indexTable';
 
 // responsive components with default behaviours disabled
+@use 'segmentedControl' with (
+	$defaultResponsive: false
+);
 @use 'emptyState' with (
 	$defaultResponsive: false
 );
@@ -107,6 +110,7 @@
 );
 
 // responsive behaviors reactivated with media queries to avoid breakings
+@include segmentedControl.responsive($at: 'media');
 @include emptyState.responsive($at: 'media');
 @include emptyState.responsiveBackground($at: 'media');
 @include pageHeader.responsive($at: 'media');

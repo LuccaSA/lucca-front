@@ -10,8 +10,3 @@
 		@include numericBadge.S;
 	}
 }
-
-@mixin vertical {
-	--components-segmentedControl-direction: column;
-	--components-segmentedControl-width: auto;
-}
