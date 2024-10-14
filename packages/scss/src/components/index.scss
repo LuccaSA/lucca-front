@@ -7,7 +7,6 @@
 @use 'title';
 @use 'label';
 @use 'divider';
-@use 'section';
 @use 'collapse';
 @use 'container';
 @use 'pagination';
@@ -87,6 +86,7 @@
 @use 'comment';
 @use 'filterBar';
 // @use 'segmentedControl';
+// @use 'section';
 // @use 'emptyState';
 // @use 'pageHeader';
 // @use 'footer';
@@ -94,6 +94,9 @@
 
 // responsive components with default behaviours disabled
 @use 'segmentedControl' with (
+	$defaultResponsive: false
+);
+@use 'section' with (
 	$defaultResponsive: false
 );
 @use 'emptyState' with (
@@ -111,6 +114,9 @@
 
 // responsive behaviors reactivated with media queries to avoid breakings
 @include segmentedControl.responsive($at: 'media');
+@include segmentedControl.responsive($at: 'media', $selector: '.viewTabs'); // deprecated
+@include section.responsive($at: 'media');
+@include section.responsiveThin($at: 'media');
 @include emptyState.responsive($at: 'media');
 @include emptyState.responsiveBackground($at: 'media');
 @include pageHeader.responsive($at: 'media');

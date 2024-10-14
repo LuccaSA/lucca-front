@@ -1,13 +1,3 @@
 @mixin neutral {
-	background-color: var(--pr-t-elevation-surface-default);
-}
-
-@mixin S {
-	padding-left: var(--pr-t-spacings-400);
-	padding-right: var(--pr-t-spacings-400);
-}
-
-@mixin XS {
-	padding-left: var(--pr-t-spacings-200);
-	padding-right: var(--pr-t-spacings-200);
+	--components-section-background: var(--pr-t-elevation-surface-default);
 }

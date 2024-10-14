@@ -1,0 +1,7 @@
+@mixin narrow {
+	--components-section-paddingInline: var(--pr-t-spacings-400);
+}
+
+@mixin thin {
+	--components-section-paddingInline: var(--pr-t-spacings-200);
+}
