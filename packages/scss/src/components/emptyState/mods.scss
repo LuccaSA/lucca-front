@@ -1,11 +1,8 @@
+@use '@lucca-front/scss/src/components/title/exports' as title;
 @use '@lucca-front/scss/src/commons/utils/media';
 
 @mixin page {
 	--components-emptyState-container-maxWidth: var(--commons-container-maxWidth);
-	--components-emptyState-heading-padding: var(--sizes-XXL-verticalPadding);
-	--components-emptyState-heading-fontSize: var(--sizes-XXL-fontSize);
-	--components-emptyState-heading-lineHeight: var(--sizes-XXL-lineHeight);
-	--components-emptyState-heading-fontWeight: 900;
 
 	background-image: var(--components-emptyState-illustration-foreground-bottom-left),
 		var(--components-emptyState-illustration-background-bottom-left), var(--components-emptyState-illustration-foreground-top-right),
@@ -21,6 +18,10 @@
 	.emptyState-content {
 		background-color: var(--components-emptyState-background-color);
 		box-shadow: 0 0 8px 4px var(--components-emptyState-background-color);
+	}
+
+	.emptyState-content-heading {
+		@include title.h1;
 	}
 
 	.emptyState-content-text {

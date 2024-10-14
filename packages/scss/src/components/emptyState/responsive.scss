@@ -14,10 +14,9 @@
 
 @mixin pageHeadingNarrow {
 	&.mod-page {
-		--components-emptyState-heading-padding: var(--sizes-XL-verticalPadding);
-		--components-emptyState-heading-fontSize: var(--sizes-XL-fontSize);
-		--components-emptyState-heading-lineHeight: var(--sizes-XL-lineHeight);
-		--components-emptyState-heading-fontWeight: 700;
+		.emptyState-content-heading {
+			@include title.h2;
+		}
 	}
 }
 
