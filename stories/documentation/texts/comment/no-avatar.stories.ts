@@ -29,6 +29,13 @@ function getTemplate(args: CommentNoAvatarStory): string {
 const Template: StoryFn<CommentNoAvatarStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
+	styles: [
+		`
+		:host {
+			display: block;
+		}
+		`,
+	],
 });
 
 export const NoAvatar = Template.bind({});

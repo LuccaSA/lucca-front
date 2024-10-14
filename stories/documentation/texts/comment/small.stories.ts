@@ -31,7 +31,11 @@ const Template: StoryFn<CommentSmallStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [
-		`.avatar {
+		`
+		:host {
+			display: block;
+		}
+		.avatar {
 			width: 1.5rem;
 			height: 1.5rem;
 			border-radius: 50%;

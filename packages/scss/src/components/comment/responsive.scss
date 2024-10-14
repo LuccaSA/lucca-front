@@ -1,4 +1,5 @@
 @mixin narrow {
 	--components-comment-info-content-direction: column;
 	--components-comment-info-separator: none;
+	--components-comment-info-content-display: flex;
 }
