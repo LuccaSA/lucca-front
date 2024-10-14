@@ -9,7 +9,7 @@ import { COMMENT_BLOCK_INSTANCE, COMMENT_CHAT_INSTANCE } from '../token';
 	standalone: true,
 	imports: [NgTemplateOutlet],
 	templateUrl: './comment-block.component.html',
-
+	styleUrl: './comment-block.component.scss',
 	encapsulation: ViewEncapsulation.None,
 	changeDetection: ChangeDetectionStrategy.OnPush,
 
