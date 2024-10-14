@@ -202,13 +202,6 @@ function getTemplate(args: IndexTableResponsiveCardListNestedStory): string {
 const Template: StoryFn<IndexTableResponsiveCardListNestedStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
-	styles: [
-		`
-		:host {
-			display: block;
-		}
-	`,
-	],
 });
 
 export const ResponsiveCardListNested = Template.bind({});

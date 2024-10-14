@@ -39,13 +39,6 @@ function getTemplate(args: EmptyStatePageStory): string {
 const Template: StoryFn<EmptyStatePageStory> = (args: EmptyStatePageStory) => ({
 	props: args,
 	template: getTemplate(args),
-	styles: [
-		`
-		:host {
-			display: block;
-		}
-	`,
-	],
 });
 
 export const Page = Template.bind({});

@@ -65,13 +65,6 @@ function getTemplate(args: PageHeaderBasicStory): string {
 const Template: StoryFn<PageHeaderBasicStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
-	styles: [
-		`
-		:host {
-			display: block;
-		}
-		`,
-	],
 });
 
 export const BasicPageHeader = Template.bind({});

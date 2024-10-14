@@ -60,7 +60,6 @@ const Template: StoryFn<TableBasicStory> = (args) => ({
 		`
 		:host {
 			margin: -1rem;
-			display: block;
 		}
 		`,
 	],

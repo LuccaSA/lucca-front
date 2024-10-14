@@ -73,12 +73,6 @@ function getTemplate(args: PageHeaderBreadcrumbStory): string {
 const Template: StoryFn<PageHeaderBreadcrumbStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
-	styles: [
-		`
-		:host {
-			display: block;
-		}`,
-	],
 });
 
 export const BreadcrumbPageHeader = Template.bind({});

@@ -58,7 +58,7 @@ function getTemplate(args: TableStickyHeaderStory): string {
 const Template: StoryFn<TableStickyHeaderStory> = (args: TableStickyHeaderStory) => ({
 	props: args,
 	template: getTemplate(args),
-	styles: [`:host {display: block; height: 10rem; overflow: auto;}`],
+	styles: [`:host {height: 10rem; overflow: auto;}`],
 });
 
 export const StickyHeader = Template.bind({});

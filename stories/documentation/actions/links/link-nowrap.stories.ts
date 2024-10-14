@@ -16,13 +16,6 @@ function getTemplate(args: LinkNoWrapStory): string {
 const Template: StoryFn<LinkNoWrapStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
-	styles: [
-		`
-		:host {
-			display: block;
-		}
-		`,
-	],
 });
 
 export const NoWrapLink = Template.bind({});

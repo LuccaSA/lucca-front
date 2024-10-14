@@ -55,13 +55,6 @@ function getTemplate(args: IndexTableResponsiveCardListCustomStory): string {
 const Template: StoryFn<IndexTableResponsiveCardListCustomStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
-	styles: [
-		`
-		:host {
-			display: block;
-		}
-	`,
-	],
 });
 
 export const ResponsiveCardListCustom = Template.bind({});

@@ -26,9 +26,6 @@ const Template: StoryFn<ErrorBasicStory> = (args) => ({
 	template: getTemplate(args),
 	styles: [
 		`
-		:host {
-			display: block;
-		}
 		.errorPage {
 			margin: -1rem;
 			height: 30rem;

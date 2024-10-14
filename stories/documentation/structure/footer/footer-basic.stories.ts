@@ -58,13 +58,6 @@ function getTemplate(args: FooterBasicStory): string {
 const Template: StoryFn<FooterBasicStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
-	styles: [
-		`
-		:host {
-			display: block;
-		}
-	`,
-	],
 });
 
 export const Basic = Template.bind({});

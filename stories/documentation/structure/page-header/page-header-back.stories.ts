@@ -62,12 +62,6 @@ function getTemplate(args: PageHeaderBackStory): string {
 const Template: StoryFn<PageHeaderBackStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
-	styles: [
-		`
-		:host {
-			display: block;
-		}`,
-	],
 });
 
 export const PageHeaderBackStory = Template.bind({});

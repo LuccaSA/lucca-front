@@ -28,13 +28,7 @@ function getTemplate(args: BoxBasicStory): string {
 const Template: StoryFn<BoxBasicStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
-	styles: [
-		`
-		:host {
-			display: block;
-		}`,
-		args.neutral === false ? ':host { background-color: var(--palettes-neutral-0); margin: -15px -15px; padding: 15px 15px; }' : '',
-	],
+	styles: [args.neutral === false ? ':host { background-color: var(--palettes-neutral-0); margin: -15px -15px; padding: 15px 15px; }' : ''],
 });
 
 export const Basic = Template.bind({});

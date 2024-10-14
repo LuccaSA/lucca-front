@@ -59,13 +59,6 @@ function getTemplate(args: IndexTableResponsiveCardListLabelStory): string {
 const Template: StoryFn<IndexTableResponsiveCardListLabelStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
-	styles: [
-		`
-		:host {
-			display: block;
-		}
-	`,
-	],
 });
 
 export const ResponsiveCardListLabel = Template.bind({});

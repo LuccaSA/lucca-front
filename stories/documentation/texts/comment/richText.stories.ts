@@ -36,9 +36,6 @@ const Template: StoryFn<CommentRichTextStory> = (args) => ({
 	template: getTemplate(args),
 	styles: [
 		`
-		:host {
-			display: block;
-		}
 		.avatar {
 			width: 1.5rem;
 			height: 1.5rem;

@@ -56,13 +56,7 @@ function getTemplate(args: ActionBasicStory): string {
 const Template: StoryFn<ActionBasicStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
-	styles: [
-		`
-		:host {
-			display: block;
-		}`,
-		args.mod === 'mod-invert' ? ':host { background-color: #333333; margin: -15px -15px; padding: 15px 15px; }' : '',
-	],
+	styles: [args.mod === 'mod-invert' ? ':host { background-color: #333333; margin: -15px -15px; padding: 15px 15px; }' : ''],
 });
 
 export const BasicAction = Template.bind({});
