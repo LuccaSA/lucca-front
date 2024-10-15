@@ -1,9 +1,9 @@
 ﻿export const Translations = {
 	en: {
-		clear: 'Clear',
+		clear: 'Clear this field',
 	},
 	de: {
-		clear: 'Löschen',
+		clear: 'Den Inhalt aus diesem Feld entfernen',
 	},
 	fr: {
 		clear: 'Vider ce champ',
@@ -18,7 +18,7 @@
 		clear: 'Dit veld leegmaken',
 	},
 	es: {
-		clear: 'Eliminar',
+		clear: 'Vaciar este campo',
 	},
 	pt: {
 		clear: 'Esvaziar este campo',
