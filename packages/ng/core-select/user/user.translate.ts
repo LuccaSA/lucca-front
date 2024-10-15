@@ -8,6 +8,7 @@ export const LU_CORE_SELECT_USER_TRANSLATIONS = new InjectionToken('LuCoreSelect
 
 export interface LuCoreSelectUserTranslations {
 	me: string;
+	includeFormerEmployees: string;
 }
 
 export const luCoreSelectUserTranslations: LuTranslation<LuCoreSelectUserTranslations> = Translations;

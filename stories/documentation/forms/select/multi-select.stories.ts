@@ -2,7 +2,14 @@ import { AsyncPipe, CommonModule, I18nPluralPipe } from '@angular/common';
 import { provideHttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { provideAnimations } from '@angular/platform-browser/animations';
-import { LuCoreSelectTotalCountDirective, LuDisabledOptionDirective, LuDisplayerDirective, LuOptionDirective, LuOptionGroupDirective } from '@lucca-front/ng/core-select';
+import {
+	LuCoreSelectPanelHeaderDirective,
+	LuCoreSelectTotalCountDirective,
+	LuDisabledOptionDirective,
+	LuDisplayerDirective,
+	LuOptionDirective,
+	LuOptionGroupDirective,
+} from '@lucca-front/ng/core-select';
 import { LuCoreSelectApiV3Directive, LuCoreSelectApiV4Directive } from '@lucca-front/ng/core-select/api';
 import { LuCoreSelectEstablishmentsDirective } from '@lucca-front/ng/core-select/establishment';
 import { LuCoreSelectJobQualificationsDirective } from '@lucca-front/ng/core-select/job-qualification';
@@ -16,6 +23,7 @@ import {
 } from '@lucca-front/ng/multi-select';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 import { Meta, applicationConfig, moduleMetadata } from '@storybook/angular';
+import { LuMultiSelection } from 'packages/ng/multi-select/select.model';
 import { interval, map } from 'rxjs';
 import { startWith } from 'rxjs/operators';
 import { HiddenArgType } from 'stories/helpers/common-arg-types';
@@ -24,6 +32,7 @@ import { FilterLegumesPipe, ILegume, LuCoreSelectInputStoryComponent, SortLegume
 
 type LuMultiSelectInputStoryComponent = LuCoreSelectInputStoryComponent & {
 	selectedLegumes: ILegume[];
+	legumeSelection?: LuMultiSelection<ILegume>;
 	maxValuesShown: number;
 	selectLegume(legume: ILegume, legumes: ILegume[]): ILegume[];
 } & LuMultiSelectInputComponent<ILegume>;
@@ -34,6 +43,8 @@ const generateStory = getStoryGenerator<LuMultiSelectInputStoryComponent>({
 		...coreSelectStory.argTypes,
 		selectedLegumes: HiddenArgType,
 		valuesTpl: HiddenArgType,
+		panelHeaderTpl: HiddenArgType,
+		optionKey: HiddenArgType,
 		maxValuesShown: HiddenArgType,
 		selectLegume: HiddenArgType,
 	},
@@ -50,16 +61,16 @@ export const SelectAll = generateStory({
 	[placeholder]="placeholder"
 	[clearable]="clearable"
 	[loading]="loading"
-	[(ngModel)]="selectedLegumes"
+	[(ngModel)]="legumeSelection"
 	[options]="legumes | filterLegumes:clue"
 	(clueChange)="clue = $event"
 />
 
-{{ selectedLegumes | json }}
+{{ legumeSelection | json }}
 `,
 	neededImports: {
-		'@lucca-front/ng/multi-select': ['LuMultiSelectInputComponent'],
-		'@lucca-front/ng/core-select/user': ['LuCoreSelectUsersDirective'],
+		'@lucca-front/ng/multi-select': ['LuMultiSelectInputComponent', 'LuMultiSelectWithSelectAllDirective'],
+		'@lucca-front/ng/core-select/user': ['LuCoreSelectUsersDirective', 'LuCoreSelectTotalCountDirective'],
 	},
 });
 
@@ -209,7 +220,7 @@ export const ApiV3 = generateStory({
 	[maxValuesShown]="maxValuesShown"
 /> {{ selectedAxisSection | json }}`,
 	neededImports: {
-		'@lucca-front/ng/multi-select': ['LuMultiSelectInputComponent'],
+		'@lucca-front/ng/multi-select': ['LuMultiSelectInputComponent', 'LuMultiSelectWithSelectAllDirective'],
 		'@lucca-front/ng/core-select/api': ['LuCoreSelectApiV3Directive'],
 	},
 });
@@ -227,7 +238,7 @@ export const ApiV4 = generateStory({
 	[maxValuesShown]="maxValuesShown"
 />{{ selectedEstablishment | json }}`,
 	neededImports: {
-		'@lucca-front/ng/multi-select': ['LuMultiSelectInputComponent'],
+		'@lucca-front/ng/multi-select': ['LuMultiSelectInputComponent', 'LuMultiSelectWithSelectAllDirective'],
 		'@lucca-front/ng/core-select/api': ['LuCoreSelectApiV4Directive'],
 	},
 });
@@ -244,18 +255,34 @@ export const Establishment = generateStory({
 	[(ngModel)]="selectedEstablishment"
 />{{ selectedEstablishment | json }}`,
 	neededImports: {
-		'@lucca-front/ng/multi-select': ['LuMultiSelectInputComponent'],
+		'@lucca-front/ng/multi-select': ['LuMultiSelectInputComponent', 'LuMultiSelectWithSelectAllDirective'],
 		'@lucca-front/ng/core-select/establishment': ['LuCoreSelectEstablishmentsDirective'],
 	},
 });
 
 export const User = generateStory({
 	name: 'User Select',
-	description: "Pour saisir un utilisateur, il suffit d'utiliser la directive `users`",
+	description: "Pour saisir des utilisateurs, il suffit d'utiliser la directive `users`",
 	template: `<lu-multi-select
 	class="multiSelect"
 	placeholder="Placeholder..."
 	users
+	[(ngModel)]="selectedUsers"
+></lu-multi-select>`,
+	neededImports: {
+		'@lucca-front/ng/multi-select': ['LuMultiSelectInputComponent'],
+		'@lucca-front/ng/core-select/user': ['LuCoreSelectUsersDirective'],
+	},
+});
+
+export const FormerUser = generateStory({
+	name: 'User Select (with former)',
+	description: "Pour saisir des utilisateurs, il suffit d'utiliser la directive `users`",
+	template: `<lu-multi-select
+	class="multiSelect"
+	placeholder="Placeholder..."
+	users
+	enableFormerEmployees
 	[(ngModel)]="selectedUsers"
 ></lu-multi-select>`,
 	neededImports: {
@@ -302,7 +329,7 @@ export const GroupBy = generateStory({
 `,
 	neededImports: {
 		'@lucca-front/ng/core-select': ['LuOptionDirective', 'LuOptionGroupDirective'],
-		'@lucca-front/ng/multi-select': ['LuMultiSelectInputComponent'],
+		'@lucca-front/ng/multi-select': ['LuMultiSelectInputComponent', 'LuMultiSelectWithSelectAllDirective'],
 	},
 	storyPartial: {
 		args: {
@@ -385,6 +412,24 @@ export const AddOption = generateStory({
 	},
 });
 
+export const CustomPanelHeader = generateStory({
+	name: 'Custom Panel Header',
+	description: "Pour customiser l'en-tête du panel, il suffit d'utiliser la directive `luCoreSelectPanelHeader`.",
+	template: `<lu-multi-select
+	#selectRef
+	placeholder="Placeholder..."
+	[(ngModel)]="selectedLegume"
+	[options]="legumes | filterLegumes:clue"
+	(clueChange)="clue = $event"
+>
+	<h1 *luSelectPanelHeader="selectRef">Custom Header</h1>
+</lu-multi-select>`,
+	neededImports: {
+		'@lucca-front/ng/core-select': ['LuCoreSelectPanelHeaderDirective'],
+		'@lucca-front/ng/multi-select': ['LuMultiSelectInputComponent'],
+	},
+});
+
 const meta: Meta<LuMultiSelectInputStoryComponent> = {
 	title: 'Documentation/Forms/MultiSelect',
 	component: LuMultiSelectInputComponent,
@@ -408,6 +453,7 @@ const meta: Meta<LuMultiSelectInputStoryComponent> = {
 				LuCoreSelectEstablishmentsDirective,
 				LuCoreSelectUsersDirective,
 				LuCoreSelectJobQualificationsDirective,
+				LuCoreSelectPanelHeaderDirective,
 				LuDisabledOptionDirective,
 				LuMultiSelectDisplayerInputDirective,
 				LuMultiSelectCounterDisplayerComponent,

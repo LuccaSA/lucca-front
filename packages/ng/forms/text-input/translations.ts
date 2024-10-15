@@ -1,10 +1,10 @@
 ﻿export const Translations = {
 	en: {
-		clear: 'Empty this field',
+		clear: 'Clear this field',
 		togglePasswordVisibility: 'Show password',
 	},
 	de: {
-		clear: 'Dieses Feld leeren',
+		clear: 'Den Inhalt aus diesem Feld entfernen',
 		togglePasswordVisibility: 'Passwort anzeigen',
 	},
 	fr: {
@@ -24,7 +24,7 @@
 		togglePasswordVisibility: 'Wachtwoord weergeven',
 	},
 	es: {
-		clear: 'Vacíe este campo',
+		clear: 'Vaciar este campo',
 		togglePasswordVisibility: 'Ver la contraseña',
 	},
 	pt: {

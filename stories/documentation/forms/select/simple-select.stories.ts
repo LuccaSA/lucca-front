@@ -1,7 +1,7 @@
 import { I18nPluralPipe, SlicePipe } from '@angular/common';
 import { provideHttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-import { LuDisabledOptionDirective, LuDisplayerDirective, LuOptionDirective, LuOptionGroupDirective } from '@lucca-front/ng/core-select';
+import { LuCoreSelectPanelHeaderDirective, LuDisabledOptionDirective, LuDisplayerDirective, LuOptionDirective, LuOptionGroupDirective } from '@lucca-front/ng/core-select';
 import { LuCoreSelectApiV3Directive, LuCoreSelectApiV4Directive } from '@lucca-front/ng/core-select/api';
 import { LuCoreSelectEstablishmentsDirective } from '@lucca-front/ng/core-select/establishment';
 import { LuCoreSelectJobQualificationsDirective } from '@lucca-front/ng/core-select/job-qualification';
@@ -290,6 +290,22 @@ export const UserCustom = generateStory({
 	},
 });
 
+export const FormerUser = generateStory({
+	name: 'User Select (with former)',
+	description: "Pour saisir des utilisateurs, il suffit d'utiliser la directive `users`",
+	template: `<lu-simple-select
+	class="simpleSelect"
+	placeholder="Placeholder..."
+	users
+	enableFormerEmployees
+	[(ngModel)]="selectedUsers"
+></lu-simple-select>`,
+	neededImports: {
+		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent'],
+		'@lucca-front/ng/core-select/user': ['LuCoreSelectUsersDirective'],
+	},
+});
+
 export const Establishment = generateStory({
 	name: 'Establishment Select',
 	description: "Pour saisir un établissement, il suffit d'utiliser la directive `establishments`",
@@ -402,6 +418,24 @@ export const AddOption = generateStory({
 	},
 });
 
+export const CustomPanelHeader = generateStory({
+	name: 'Custom Panel Header',
+	description: "Pour customiser l'en-tête du panel, il suffit d'utiliser la directive `luCoreSelectPanelHeader`.",
+	template: `<lu-simple-select
+	#selectRef
+	placeholder="Placeholder..."
+	[(ngModel)]="selectedLegume"
+	[options]="legumes | filterLegumes:clue"
+	(clueChange)="clue = $event"
+>
+	<h1 *luSelectPanelHeader="selectRef">Custom Header</h1>
+</lu-simple-select>`,
+	neededImports: {
+		'@lucca-front/ng/core-select': ['LuCoreSelectPanelHeaderDirective'],
+		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent'],
+	},
+});
+
 const meta: Meta<LuSimpleSelectInputStoryComponent> = {
 	title: 'Documentation/Forms/SimpleSelect',
 	component: LuSimpleSelectInputComponent,
@@ -424,6 +458,7 @@ const meta: Meta<LuSimpleSelectInputStoryComponent> = {
 				LuCoreSelectLegumesDirective,
 				LuCoreSelectUsersDirective,
 				LuCoreSelectJobQualificationsDirective,
+				LuCoreSelectPanelHeaderDirective,
 				LuDisabledOptionDirective,
 				LuOptionGroupDirective,
 			],
