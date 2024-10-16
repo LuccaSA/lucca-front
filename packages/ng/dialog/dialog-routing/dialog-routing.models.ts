@@ -1,11 +1,9 @@
-import { Deferrable } from './dialog-routing.utils';
+import { Route } from '@angular/router';
 import { LuDialogConfig, LuDialogResult } from '../model';
-import { EnvironmentProviders, Provider } from '@angular/core';
+import { Deferrable } from './dialog-routing.utils';
 
-export interface DialogRouteConfig<C> {
-	path: string;
+export type DialogRouteConfig<C> = {
 	dialogConfigFactory: () => Deferrable<LuDialogConfig<C>>;
-	providers?: (Provider | EnvironmentProviders)[] | undefined;
 	/**
 	 * When the dialog is closed, this callback is called with the result of the dialog.
 	 * This callback is called within injection context, so you can inject services in it.
@@ -16,4 +14,4 @@ export interface DialogRouteConfig<C> {
 	 * This callback is called within injection context, so you can inject services in it.
 	 */
 	onDismissed?: () => unknown;
-}
+} & Omit<Route, 'component'>;

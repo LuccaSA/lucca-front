@@ -25,4 +25,8 @@
 	&:has(.textField-input-value:disabled) {
 		@include disabled;
 	}
+
+	&.mod-autoResize {
+		@include autoResize;
+	}
 }

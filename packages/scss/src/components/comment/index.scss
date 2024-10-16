@@ -22,7 +22,19 @@
 .commentWrapper {
 	@include vars;
 
+	&.mod-S {
+		@include wrapperS;
+	}
+
 	&.mod-compact {
 		@include wrapperCompact;
 	}
+
+	&.mod-chatAnswer {
+		@include chatAnswer;
+	}
+}
+
+.commentWrapperChat {
+	@include chat;
 }

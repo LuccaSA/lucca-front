@@ -42,21 +42,23 @@ export function getStoryGenerator<TComponent>(globalPartial: StoryObj<TComponent
 					language: codeLang || 'html',
 					type: 'code',
 					code,
-			  }
+				}
 			: {
 					language: 'html',
 					type: 'code',
 					code: template,
-			  };
+				};
+
+		const args = { ...globalPartial.args, ...storyPartial?.args };
 
 		return {
 			...globalPartial,
 			...storyPartial,
 			name,
-			args: { ...globalPartial.args, ...storyPartial?.args },
+			args,
 			argTypes: { ...globalPartial.argTypes, ...storyPartial?.argTypes },
-			render: (args) => ({
-				props: args,
+			render: (storyArgs) => ({
+				props: { ...args, ...storyArgs },
 				template,
 			}),
 			parameters: {

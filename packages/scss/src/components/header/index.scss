@@ -11,11 +11,6 @@
 		.mod-withMenu .main-content & {
 			@include left;
 		}
-
-		.navSide.mod-compact ~ .main-content &,
-		.mod-withMenuCompact .main-content & {
-			@include leftCompact;
-		}
 	}
 
 	&.mod-nav {

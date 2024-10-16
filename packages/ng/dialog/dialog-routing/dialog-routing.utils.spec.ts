@@ -1,10 +1,10 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { injectDialogData, LuDialogRef } from '../model';
 import { Component } from '@angular/core';
 import { fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { provideRouter, Route, Router, RouterOutlet } from '@angular/router';
+import { injectDialogData, LuDialogRef } from '../model';
 
 import { EMPTY, Observable, Subject } from 'rxjs';
 
@@ -55,7 +55,19 @@ describe('dialog-routing.utils', () => {
 	});
 
 	describe('dialogRouteFactory', () => {
-		const addTestRoute = dialogRouteFactory(DialogRoutingTestComponent);
+		const guard1 = jest.fn(() => true);
+		const guard2 = jest.fn(() => true);
+
+		beforeEach(() => {
+			guard1.mockReset();
+			guard2.mockReset();
+		});
+
+		const addTestRoute = dialogRouteFactory(DialogRoutingTestComponent, {
+			dialogRouteConfig: {
+				canActivate: [guard1],
+			},
+		});
 
 		it('should work with synchronous data', fakeAsync(() => {
 			// Arrange
@@ -130,6 +142,27 @@ describe('dialog-routing.utils', () => {
 					data: { foo: 'bar' },
 				}),
 			);
+		}));
+
+		it('should work with a guard added on both factoryConfig and factoryCall', fakeAsync(() => {
+			// Arrange
+			const route = addTestRoute({
+				path: 'test/:name',
+				dataFactory: () => ({ foo: 'bar' }),
+				dialogRouteConfig: {
+					canActivate: [guard2],
+				},
+			});
+
+			const { router } = initTest(route);
+
+			// Act
+			router.navigateByUrl('/test/bar');
+			tick();
+
+			// Assert
+			expect(guard1).toHaveBeenCalledTimes(1);
+			expect(guard2).toHaveBeenCalledTimes(1);
 		}));
 
 		function initTest(route: Route) {

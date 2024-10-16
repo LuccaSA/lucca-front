@@ -72,3 +72,18 @@ export function applyFilter<T, TParam>(predicate: (item: T, filterValue: TParam)
 export function handleFieldsRoot<T>(count: number): (items: T[], params: { 'fields.root'?: string }) => { items: T[]; count?: number } {
 	return (items, { 'fields.root': fieldsRoot }) => ({ items, ...(fieldsRoot?.includes('count') ? { count } : {}) });
 }
+
+export function applyV3Fields<T>(count: number): (items: T[], params: { fields?: string }) => { data: { items: T[]; count?: number } } {
+	return (items, params) => {
+		const fields = params['fields']?.split(',') ?? [];
+		const needCount = fields.includes('collection.count');
+		const regularFields = fields.filter((f) => f !== 'collection.count');
+
+		return {
+			data: {
+				items: regularFields.length ? items.map((item) => regularFields.reduce((acc, field) => ({ ...acc, [field]: item[field] }), {} as T)) : needCount ? [] : items,
+				...(needCount ? { count } : {}),
+			},
+		};
+	};
+}

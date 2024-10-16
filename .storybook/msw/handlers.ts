@@ -1,5 +1,5 @@
 import { delay, http, HttpResponse } from 'msw';
-import { applyFilter, applyV3Paging, applyV4Paging, applyV4Sorting, genericHandler, handleFieldsRoot } from './helpers';
+import { applyFilter, applyV3Fields, applyV3Paging, applyV4Paging, applyV4Sorting, genericHandler, handleFieldsRoot } from './helpers';
 import { mockAxisSectionsV3, mockDepartmentsTree, mockEstablishments, mockJobQualifications, mockLegalUnits, mockMe, mockProjectUsers, mockUserPopover, mockUsers } from './mocks';
 
 const usersSearchHandler = genericHandler(
@@ -119,6 +119,7 @@ export const handlers = [
 			mockAxisSectionsV3,
 			// Get and parse params from query params
 			{
+				fields: (f) => f,
 				paging: (p) => p,
 				name: (n) => decodeURIComponent(n.replace('like,', '')),
 			},
@@ -128,7 +129,7 @@ export const handlers = [
 				// Then paging/limiting
 				paging: applyV3Paging,
 			},
-			(items) => ({ data: { items } }),
+			applyV3Fields(mockAxisSectionsV3.length),
 		),
 	),
 

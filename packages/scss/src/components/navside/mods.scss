@@ -1,13 +1,26 @@
 @use '@lucca-front/scss/src/commons/utils/a11y';
+@use '@lucca-front/scss/src/commons/utils/namespace';
 
 @mixin compact {
 	background-color: var(--components-navSide-compact-palette-bg-color);
-	width: var(--commons-navSide-compact-width);
 	text-align: center;
+
+	@at-root {
+		@include namespace.appendRootVars {
+			&:has(.navSide) {
+				--commons-navSide-width: 15rem;
+			}
+
+			// .mod-withMenuCompact is deprecated
+			&:has(.navSide.mod-compact, .mod-withMenuCompact) {
+				--commons-navSide-width: 7.5rem;
+			}
+		}
+	}
 
 	.navSide-mainSection,
 	.navSide-scrollWrapper {
-		width: var(--commons-navSide-compact-width);
+		width: var(--commons-navSide-width);
 	}
 
 	.navSide-item-link {
@@ -31,7 +44,8 @@
 		margin-left: inherit;
 	}
 
-	.numericBadge, .newBadge {
+	.numericBadge,
+	.newBadge {
 		margin-left: inherit;
 	}
 
@@ -51,7 +65,7 @@
 	}
 
 	.navSide-bottomSection {
-		width: var(--commons-navSide-compact-width);
+		width: var(--commons-navSide-width);
 
 		.navSide-item-link {
 			background-color: var(--components-navSide-bottom-section-palette-bg-color);

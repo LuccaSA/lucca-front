@@ -65,7 +65,7 @@
 }
 
 @mixin asideRemoved {
-	grid-template-columns: var(--commons-navSide-compact-width) 1fr;
+	grid-template-columns: var(--commons-navSide-width) 1fr;
 
 	.layout-aside {
 		display: none;

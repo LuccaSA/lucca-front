@@ -10,7 +10,7 @@
 	display: grid;
 
 	@include media.min('L') {
-		grid-template-columns: var(--commons-navSide-compact-width) 1fr var(--components-aside-width);
+		grid-template-columns: var(--commons-navSide-width) 1fr var(--components-aside-width);
 		grid-template-rows: var(--commons-banner-height) 1fr;
 		grid-template-areas:
 			'banner banner banner'
@@ -18,7 +18,7 @@
 	}
 
 	@include media.max('L') {
-		grid-template-columns: var(--commons-navSide-compact-width) 1fr;
+		grid-template-columns: var(--commons-navSide-width) 1fr;
 		grid-template-rows: var(--commons-banner-height) 1fr auto;
 		grid-template-areas:
 			'banner banner'

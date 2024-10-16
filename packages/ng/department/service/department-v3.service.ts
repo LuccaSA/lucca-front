@@ -12,6 +12,9 @@ export interface IApiDepartment {
 	children: IApiDepartment[];
 }
 
+/**
+ * @deprecated use {LuDepartmentService} instead.
+ */
 @Injectable()
 export class LuDepartmentV3Service extends LuApiV3Service<ILuDepartment> implements ILuDepartmentService<ILuDepartment> {
 	protected override _api = `/api/v3/departments`;

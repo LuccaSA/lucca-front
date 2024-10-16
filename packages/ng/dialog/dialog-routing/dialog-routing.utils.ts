@@ -1,10 +1,10 @@
+import { ComponentType } from '@angular/cdk/portal';
 import { InjectionToken } from '@angular/core';
 import { Route } from '@angular/router';
+import { Observable, firstValueFrom, isObservable } from 'rxjs';
+import { LuDialogConfig, LuDialogData } from '../model';
 import { DialogRoutingComponent } from './dialog-routing.component';
 import { DialogRouteConfig } from './dialog-routing.models';
-import { LuDialogConfig, LuDialogData } from '../model';
-import { ComponentType } from '@angular/cdk/portal';
-import { firstValueFrom, isObservable, Observable } from 'rxjs';
 
 export type Deferrable<T> = Promise<T> | Observable<T> | T;
 
@@ -16,21 +16,19 @@ export const DIALOG_ROUTE_CONFIG = new InjectionToken<DialogRouteConfig<unknown>
 
 export function createDialogRoute<C>(config: DialogRouteConfig<C>): Route {
 	return {
-		path: config.path,
+		...config,
 		component: DialogRoutingComponent,
 		providers: [{ provide: DIALOG_ROUTE_CONFIG, useValue: config }, ...[config.providers ?? []]],
 	};
 }
 
-export type DialogFactoryResult<C> = (
-	options: LuDialogData<C> extends never
-		? { path: string; dialogRouteConfig?: Partial<DialogRouteConfig<C>> }
-		: {
-				path: string;
-				dataFactory: () => Deferrable<LuDialogData<C>>;
-				dialogRouteConfig?: Partial<DialogRouteConfig<C>>;
-			},
-) => Route;
+export type DialogFactoryResultOptions<C> = { path: string; dialogRouteConfig?: Partial<Omit<DialogRouteConfig<C>, 'path'>> } & (LuDialogData<C> extends never
+	? { dataFactory?: never }
+	: {
+			dataFactory: () => Deferrable<LuDialogData<C>>;
+		});
+
+export type DialogFactoryResult<C> = (options: DialogFactoryResultOptions<C>) => Route;
 
 export type DialogFactoryConfig<C> = Partial<{
 	dialogConfig: Omit<LuDialogConfig<C>, 'data' | 'content'>;
@@ -38,7 +36,7 @@ export type DialogFactoryConfig<C> = Partial<{
 }>;
 
 export function dialogRouteFactory<C>(component: ComponentType<C>, config?: DialogFactoryConfig<C>): DialogFactoryResult<C> {
-	return ({ path, dataFactory, dialogRouteConfig }: { path: string; dataFactory?: () => Deferrable<LuDialogData<C>>; dialogRouteConfig?: Partial<DialogRouteConfig<C>> }) =>
+	return ({ path, dataFactory, dialogRouteConfig }) =>
 		createDialogRoute({
 			path,
 			dialogConfigFactory: async () => ({
@@ -46,7 +44,35 @@ export function dialogRouteFactory<C>(component: ComponentType<C>, config?: Dial
 				content: component,
 				data: dataFactory ? await deferrableToPromise(dataFactory()) : undefined,
 			}),
-			...config?.dialogRouteConfig,
-			...dialogRouteConfig,
+			...mergeRouteConfig(config?.dialogRouteConfig, dialogRouteConfig),
 		});
+}
+
+function mergeRouteConfig(config1: Partial<Route>, config2: Partial<Route>): Partial<Route> {
+	if (!config1) {
+		return config2;
+	}
+
+	if (!config2) {
+		return config1;
+	}
+
+	const result: Partial<Route> = { ...config1, ...config2 };
+
+	// If both configs have the same key, we merge the arrays
+	const mergedArrays = (['providers', 'canActivate', 'children', 'canDeactivate', 'canLoad', 'canActivateChild'] as const satisfies Array<keyof Route>).filter(
+		(key) => key in config1 && key in config2,
+	);
+
+	for (const key of mergedArrays) {
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+		result[key] = [...(config1[key] ?? []), ...(config2[key] ?? [])];
+	}
+
+	// If both configs have the same data key, we merge the objects
+	if (config1.data && config2.data) {
+		result.data = { ...config1.data, ...config2.data };
+	}
+
+	return result;
 }

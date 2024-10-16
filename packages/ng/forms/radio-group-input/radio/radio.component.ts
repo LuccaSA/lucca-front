@@ -1,10 +1,10 @@
+import { NgIf } from '@angular/common';
 import { booleanAttribute, ChangeDetectionStrategy, Component, HostBinding, inject, Input, OnChanges, ViewEncapsulation } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
+import { LuClass } from '@lucca-front/ng/core';
 import { InputDirective } from '@lucca-front/ng/form-field';
 import { InlineMessageComponent } from '@lucca-front/ng/inline-message';
-import { NgIf } from '@angular/common';
 import { RADIO_GROUP_INSTANCE } from '../radio-group-token';
-import { LuClass } from '@lucca-front/ng/core';
 
 let nextId = 0;
 
@@ -24,6 +24,8 @@ let nextId = 0;
 export class RadioComponent<T = unknown> implements OnChanges {
 	#luClass = inject(LuClass);
 
+	#parentGroup = inject(RADIO_GROUP_INSTANCE);
+
 	@Input({ required: true })
 	value: T;
 
@@ -33,7 +35,9 @@ export class RadioComponent<T = unknown> implements OnChanges {
 	@Input()
 	inlineMessage: string;
 
-	#parentGroup = inject(RADIO_GROUP_INSTANCE);
+	public get arrow() {
+		return this.#parentGroup.arrow;
+	}
 
 	public get formControl() {
 		return this.#parentGroup.ngControl.control;
@@ -49,6 +53,7 @@ export class RadioComponent<T = unknown> implements OnChanges {
 	ngOnChanges(): void {
 		this.#luClass.setState({
 			[`mod-${this.#parentGroup.size}`]: !!this.#parentGroup.size,
+			'mod-withArrow': this.arrow !== undefined,
 		});
 	}
 }

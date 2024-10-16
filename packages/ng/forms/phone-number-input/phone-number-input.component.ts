@@ -2,9 +2,9 @@ import { ChangeDetectionStrategy, Component, computed, forwardRef, inject, Input
 import { AbstractControl, ControlValueAccessor, FormsModule, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors, Validator } from '@angular/forms';
 import { LuDisplayerDirective, LuOptionDirective } from '@lucca-front/ng/core-select';
 import { FormFieldComponent, InputDirective } from '@lucca-front/ng/form-field';
+import { TextInputComponent } from '@lucca-front/ng/forms';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 import { type CountryCallingCode, formatIncompletePhoneNumber, getCountries, getCountryCallingCode, parsePhoneNumber } from 'libphonenumber-js';
-import { TextInputComponent } from '@lucca-front/ng/forms';
 import { CountryCode, E164Number } from './types';
 import { PhoneNumberValidators } from './validators';
 
@@ -64,6 +64,8 @@ export class PhoneNumberInputComponent implements ControlValueAccessor, Validato
 	#locale = inject(LOCALE_ID);
 
 	@Input() label: string;
+
+	@Input() autocomplete?: 'off' | 'tel';
 
 	#onChange?: (value: E164Number) => void;
 

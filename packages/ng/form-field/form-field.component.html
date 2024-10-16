@@ -1,5 +1,5 @@
 @if (layout === 'fieldset') {
-<fieldset class="form-fieldset" [class.mod-S]="size === 'S'">
+<fieldset class="form-fieldset" [class.mod-inline]="inline || hasArrow" [class.mod-S]="size === 'S'">
 	<legend class="formLabel" [class.u-mask]="hiddenLabel" attr.aria-hidden="{{hiddenLabel}}">
 		<ng-container *luPortal="label"></ng-container
 		><!--
