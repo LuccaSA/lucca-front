@@ -6,8 +6,6 @@
 			#date
 			luInput
 			class="textField-input-value"
-			aria-labelledby="dateLabel"
-			aria-describedby="dateMessage"
 			[value]="displayValue()"
 			(input)="userTextInput.set(date.value)"
 			(blur)="onTouched?.();inputFocused.set(false)"
