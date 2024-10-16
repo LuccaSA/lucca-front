@@ -28,19 +28,17 @@
 
 		.calendarWrapper-content {
 			display: flex;
-			overflow: auto;
-			scroll-behavior: smooth;
-			scroll-snap-type: x mandatory;
-			-ms-overflow-style: none;
-			scrollbar-width: none;
-
-			&::-webkit-scrollbar {
-				display: none;
-			}
-
-			&:focus-visible {
-				@include a11y.focusVisible;
-			}
+			// overflow: auto;
+			// scroll-behavior: smooth;
+			// scroll-snap-type: x mandatory;
+			// -ms-overflow-style: none;
+			// scrollbar-width: none;
+			// &::-webkit-scrollbar {
+			// 	display: none;
+			// }
+			// &:focus-visible {
+			// 	@include a11y.focusVisible;
+			// }
 		}
 
 		.calendarWrapper-navigation {
@@ -119,7 +117,7 @@
 			width: fit-content;
 			display: inline-block;
 			padding: var(--pr-t-spacings-50);
-			margin-top: calc(var(--pr-t-spacings-50) * -1);
+			margin-block: calc(var(--pr-t-spacings-50) * -1);
 
 			&:hover {
 				color: var(--palettes-700, var(--palettes-product-700));

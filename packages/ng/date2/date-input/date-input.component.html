@@ -8,9 +8,7 @@
 			id="date"
 			#date
 			luInput
-			class="textField-input-value rangePicker-input-value"
-			aria-labelledby="dateLabel"
-			aria-describedby="dateMessage"
+			class="textField-input-value -rangePicker-input-value"
 			[value]="displayValue()"
 			(input)="userTextInput.set(date.value)"
 			(blur)="onTouched?.();inputFocused.set(false)"
@@ -25,16 +23,14 @@
 			[disabled]="disabled"
 		/>
 		<!--
-		</div>		
+		</div>
 		<div class="rangePicker-content mod-end">
 			<input
 				type="text"
 				id="date"
 				#date
 				luInput
-				class="textField-input-value rangePicker-input-value"
-				aria-labelledby="dateLabel"
-				aria-describedby="dateMessage"
+				class="textField-input-value -rangePicker-input-value"
 				[value]="displayValue()"
 				(input)="userTextInput.set(date.value)"
 				(blur)="onTouched?.();inputFocused.set(false)"
@@ -75,6 +71,29 @@
 </div>
 
 <ng-template #calendar>
+	<!-- 
+	<div class="calendarActionsOptionnal">
+		<ul
+			class="calendarActions"
+			[class.mod-day]="calendarMode() === 'day'"
+			[class.mod-month]="calendarMode() === 'month'"
+			[class.mod-year]="calendarMode() === 'year'"
+		>
+			<li><button type="button" class="button mod-block mod-text mod-S">{{ relativeLabelFor(-1, 'week') }}</button></li>
+			<li><button type="button" class="button mod-block mod-text mod-S">{{ relativeLabelFor(-1, 'month') }}</button></li>
+			<li><button type="button" class="button mod-block mod-text mod-S">{{ relativeLabelFor(-1, 'quarter') }}</button></li>
+			<li><button type="button" class="button mod-block mod-text mod-S">{{ relativeLabelFor(-1, 'year') }}</button></li>
+
+			<li><button type="button" class="button mod-block mod-text mod-S">{{ relativeLabelFor(0, 'week') }}</button></li>
+			<li><button type="button" class="button mod-block mod-text mod-S">{{ relativeLabelFor(0, 'month') }}</button></li>
+			<li><button type="button" class="button mod-block mod-text mod-S">{{ relativeLabelFor(0, 'quarter') }}</button></li>
+			<li><button type="button" class="button mod-block mod-text mod-S">{{ relativeLabelFor(0, 'year') }}</button></li>
+
+			<li><button type="button" class="button mod-block mod-text mod-S">{{ relativeLabelFor(1, 'week') }}</button></li>
+			<li><button type="button" class="button mod-block mod-text mod-S">{{ relativeLabelFor(1, 'month') }}</button></li>
+			<li><button type="button" class="button mod-block mod-text mod-S">{{ relativeLabelFor(1, 'quarter') }}</button></li>
+			<li><button type="button" class="button mod-block mod-text mod-S">{{ relativeLabelFor(1, 'year') }}</button></li>
+		</ul> -->
 	<div class="calendarWrapper" [attr.style]="'--components-calendarWrapperVisible: 1'">
 		<div class="calendarWrapper-navigation mod-prev">
 			<button class="calendarWrapper-navigation-button button" type="button" (click)="prev()" #previousButtonRef>
@@ -104,7 +123,7 @@
 				[mode]="mode()"
 				[hideWeekend]="hideWeekend()"
 			></lu-calendar2>
-			<!--
+
 			<lu-calendar2
 				[enableOverflow]="enableOverflow()"
 				[showOverflow]="showOverflow()"
@@ -119,10 +138,10 @@
 				(nextPage)="move(1)"
 				(previousPage)="move(-1)"
 				[(displayMode)]="calendarMode"
-				[mode]="mode()"
+				[mode]="'year'"
 				[hideWeekend]="hideWeekend()"
 			></lu-calendar2>
-			-->
 		</div>
 	</div>
+	<!-- </div> -->
 </ng-template>

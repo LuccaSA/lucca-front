@@ -1,11 +1,72 @@
 @use '@lucca-front/scss/src/components/calendar';
+@use '@lucca-front/scss/src/commons/utils/reset';
+@use '@lucca-front/scss/src/commons/utils/a11y';
 
 lu-date-input {
-	max-width: var(--components-dateInput-width, 16.25rem);
+	--components-dateInput-maxWidth: auto;
+	--components-dateInput-maxWidthDay: 16.25rem;
+	--components-dateInput-maxWidthYear: 10.75rem;
+	--components-dateInput-maxWidthMonth: 13.5rem;
+
 	display: block;
+	max-width: var(--components-dateInput-maxWidth);
+
+	&.mod-range {
+		&.mod-day {
+			--components-dateInput-maxWidth: var(--components-dateInput-maxWidthDay);
+		}
+
+		&.mod-month {
+			--components-dateInput-maxWidth: var(--components-dateInput-maxWidthMonth);
+		}
+
+		&.mod-year {
+			--components-dateInput-maxWidth: var(--components-dateInput-maxWidthYear);
+		}
+	}
 }
 
-/*
+.calendarActionsOptionnal {
+	display: flex;
+}
+
+.calendarActions {
+	@include reset.list;
+
+	width: 15rem;
+	border-right: 1px solid var(--palettes-neutral-100);
+	padding: var(--pr-t-spacings-50);
+	overflow: auto;
+	position: relative;
+	z-index: 1;
+	border-radius: var(--commons-borderRadius-M) 0 0 var(--commons-borderRadius-M);
+
+	&:focus-visible {
+		@include a11y.focusVisible;
+	}
+
+	&.mod-day {
+		max-height: 17.5rem;
+
+		&:has(+ .calendarWrapper .calendar-todayLink) {
+			max-height: 20rem;
+		}
+	}
+
+	&.mod-month {
+		max-height: 18rem;
+	}
+
+	&.mod-year {
+		max-height: 18rem;
+	}
+
+	.button {
+		justify-content: flex-start;
+		font-weight: 400;
+	}
+}
+
 .rangePicker-content {
 	position: relative;
 	width: var(--components-rangePicker-content-width);
@@ -13,7 +74,7 @@ lu-date-input {
 	&::before {
 		content: '';
 		position: absolute;
-		background-color: var(--palettes-product-100);
+		background-color: var(--components-rangePicker-content-background);
 		border-radius: var(--commons-borderRadius-M);
 		pointer-events: none;
 		inset: var(--pr-t-spacings-50);
@@ -28,6 +89,10 @@ lu-date-input {
 	&.mod-end {
 		--components-rangePicker-content-width: calc(50% + var(--pr-t-spacings-300));
 		--components-rangePicker-content-inlineEnd: calc(var(--pr-t-spacings-800) + var(--pr-t-spacings-50));
+	}
+
+	&:focus-within {
+		--components-rangePicker-content-background: var(--palettes-product-100);
 	}
 }
 
@@ -44,4 +109,3 @@ lu-date-input {
 	padding: var(--pr-t-spacings-50);
 	border-radius: var(--commons-borderRadius-M);
 }
-*/

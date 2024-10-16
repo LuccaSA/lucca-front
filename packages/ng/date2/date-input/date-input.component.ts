@@ -1,7 +1,8 @@
 import { ConnectionPositionPair } from '@angular/cdk/overlay';
 import { booleanAttribute, ChangeDetectionStrategy, Component, computed, effect, ElementRef, forwardRef, inject, input, LOCALE_ID, signal, viewChild, ViewEncapsulation } from '@angular/core';
 import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors, Validator } from '@angular/forms';
-import { getIntl, ɵeffectWithDeps } from '@lucca-front/ng/core';
+import { ButtonComponent } from '@lucca-front/ng/button';
+import { getIntl, LuClass, ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { InputDirective } from '@lucca-front/ng/form-field';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { PopoverDirective } from '@lucca-front/ng/popover2';
@@ -17,7 +18,7 @@ import { comparePeriods, startOfPeriod } from '../utils';
 @Component({
 	selector: 'lu-date-input',
 	standalone: true,
-	imports: [PopoverDirective, Calendar2Component, IconComponent, InputDirective],
+	imports: [PopoverDirective, Calendar2Component, IconComponent, InputDirective, ButtonComponent],
 	templateUrl: './date-input.component.html',
 	styleUrl: './date-input.component.scss',
 	encapsulation: ViewEncapsulation.None,
@@ -33,10 +34,13 @@ import { comparePeriods, startOfPeriod } from '../utils';
 			useExisting: forwardRef(() => DateInputComponent),
 			multi: true,
 		},
+		LuClass,
 	],
 })
 export class DateInputComponent implements ControlValueAccessor, Validator {
 	#locale = inject(LOCALE_ID);
+
+	#luClass = inject(LuClass);
 
 	#intlDateTimeFormat = new Intl.DateTimeFormat(this.#locale);
 
@@ -142,8 +146,17 @@ export class DateInputComponent implements ControlValueAccessor, Validator {
 			},
 			{ allowSignalWrites: true },
 		);
+
 		effect(() => {
 			this.#onChange?.(this.selectedDate());
+		});
+
+		effect(() => {
+			this.#luClass.setState({
+				'mod-day': this.mode() === 'day',
+				'mod-month': this.mode() === 'month',
+				'mod-year': this.mode() === 'year',
+			});
 		});
 
 		ɵeffectWithDeps([this.calendarMode, this.tabbableDate], (calendarMode, tabbableDate) => {
@@ -259,5 +272,11 @@ export class DateInputComponent implements ControlValueAccessor, Validator {
 				this.tabbableDate.set(addMonths(this.tabbableDate(), direction));
 				break;
 		}
+	}
+
+	relativeLabelFor(value: number, period: 'week' | 'month' | 'quarter' | 'year') {
+		const label = new Intl.RelativeTimeFormat(this.#locale, { style: 'long', numeric: 'auto' }).format(value, period);
+
+		return `${label[0].toUpperCase()}${label.slice(1)}`;
 	}
 }
