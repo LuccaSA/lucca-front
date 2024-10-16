@@ -1,4 +1,6 @@
 @use 'exports' as *;
+@use '@lucca-front/scss/src/commons/utils/media';
+@use '@lucca-front/scss/src/commons/utils/container';
 
 .header {
 	@include vars;
@@ -20,4 +22,39 @@
 	&:is(.is-loading, .loading) {
 		@include loading;
 	}
+}
+
+@mixin responsive(
+	$breakpoint: 'S',
+	$breakpoint2: null,
+	$inverted: true,
+	$at: 'media',
+	$containerName: 'header',
+	$responsiveSelector: null,
+	$axis: 'width',
+	$selector: '.header'
+) {
+	@if ($at == 'container') {
+		@include container.auto($containerName);
+	}
+
+	#{if($responsiveSelector, $selector + '.rwd-' + $responsiveSelector, $selector)} {
+		@include media.query(
+			$breakpoint: $breakpoint,
+			$breakpoint2: $breakpoint2,
+			$inverted: $inverted,
+			$at: $at,
+			$containerName: $containerName,
+			$axis: $axis
+		) {
+			@include stickyNarrow;
+			@include stickyLeftNarrow;
+		}
+	}
+}
+
+$defaultResponsive: true !default;
+
+@if $defaultResponsive {
+	@include responsive;
 }

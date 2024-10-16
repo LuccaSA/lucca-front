@@ -1,96 +1,132 @@
-@forward 'field'; //
-@forward 'box'; // 1 Ko
-@forward 'tag'; // 1 Ko
-@forward 'main'; // 1 Ko
-@forward 'code'; // 1 Ko
-@forward 'link'; // 1 Ko
-@forward 'chip'; // 1 Ko
-@forward 'title'; // 1 Ko
-@forward 'label'; // 1 Ko
-@forward 'filterBar'; // 1 Ko
-@forward 'filters'; // 1 Ko
-@forward 'divider'; // 1 Ko
-@forward 'section'; // 1 Ko
-@forward 'collapse'; // 1 Ko
-@forward 'container'; // 1 Ko
-@forward 'errorPage'; // 1 Ko
-@forward 'pageHeader'; // 1 Ko
-@forward 'pagination'; // 1 Ko
-@forward 'titleSection'; // 1 Ko
-@forward 'contentSection'; // 1 Ko
-@forward 'tableOfContent'; // 1 Ko
-@forward 'list'; // 2 Ko
-@forward 'card'; // 2 Ko
-@forward 'gauge'; // 2 Ko
-@forward 'callout'; // 2 Ko
-@forward 'loading'; // 2 Ko
-@forward 'progress'; // 2 Ko
-@forward 'breadcrumbs'; // 2 Ko
-@forward 'buttonGroup'; // 2 Ko
-@forward 'header'; // 3 Ko
-@forward 'actionIcon'; // 3 Ko
-@forward 'menu'; // 4 Ko
-@forward 'radio'; // 4 Ko
-@forward 'radioField'; // new component for radio
-@forward 'switch'; // 4 Ko
-@forward 'switchField'; // new component for switch
-@forward 'file'; // 5 Ko
-@forward 'layout'; // 5 Ko
-@forward 'radioButtons'; // 5 Ko
-@forward 'table'; // 7 Ko
-@forward 'checkbox'; // 7 Ko
-@forward 'checkboxField'; // new component for checkbox
-@forward 'timeline'; // 10 Ko
-@forward 'button'; // 12 Ko
-@forward 'textfields'; // 13 Ko
-@forward 'textField'; // new component for checkbox
-@forward 'navside'; // 15 Ko
-@forward 'form'; // 25 Ko
-@forward 'tableFixed'; // 33 Ko
-@forward 'segmentedControl';
-@forward 'calendar';
-@forward 'skipLinks';
+// no responsive components
+@use 'box';
+@use 'tag';
+@use 'code';
+@use 'link';
+@use 'chip';
+@use 'title';
+@use 'label';
+@use 'divider';
+@use 'collapse';
+@use 'container';
+@use 'pagination';
+@use 'titleSection';
+@use 'contentSection';
+@use 'tableOfContent';
+@use 'list';
+@use 'card';
+@use 'gauge';
+@use 'callout';
+@use 'loading';
+@use 'progress';
+@use 'breadcrumbs';
+@use 'buttonGroup';
+@use 'actionIcon';
+@use 'menu';
+@use 'radioField';
+@use 'switchField';
+@use 'file';
+@use 'layout';
+@use 'radioButtons';
+@use 'table';
+@use 'checkboxField';
+@use 'timeline';
+@use 'button';
+@use 'textField';
+@use 'form';
+@use 'tableFixed';
+@use 'skipLinks';
+@use 'grid';
+@use 'tableSticked';
+@use 'timepicker';
+@use 'notchBox';
+@use 'statusBadge';
+@use 'mobileHeader';
+@use 'clear';
+@use 'newBadge';
+@use 'inlineMessage';
+@use 'numericBadge';
+@use 'mobileNavigation';
+@use 'formLabel';
+@use 'verticalNavigation';
+@use 'sortableList';
+@use 'fieldset';
+@use 'skeleton';
+@use 'calloutDisclosure';
+@use 'calloutPopover';
+@use 'calloutFeedbackList';
+@use 'simpleSelect';
+@use 'multiSelect';
+@use 'avatar';
+@use 'tableSortable';
+@use 'tooltip';
+@use 'userPopover';
+@use 'scrollBox';
+@use 'toast';
+@use 'popover';
+@use 'userTile';
+@use 'plgPush';
+@use 'calendar';
 
-// caution: the two components cannot be loaded at the same time
-@forward 'grid';
-@forward 'tableSticked'; // 8 Ko
-@forward 'timepicker'; //
-@forward 'notchBox';
-@forward 'statusBadge';
-@forward 'mobileHeader';
-@forward 'clear';
-@forward 'newBadge';
-@forward 'inlineMessage';
-@forward 'numericBadge';
-@forward 'mobileNavigation';
-@forward 'footer';
-@forward 'formLabel';
-@forward 'verticalNavigation';
-@forward 'sortableList';
-@forward 'fieldset';
-@forward 'skeleton';
-@forward 'calloutDisclosure';
-@forward 'calloutPopover';
-@forward 'calloutFeedbackList';
-@forward 'simpleSelect';
-@forward 'multiSelect';
-@forward 'emptyState';
-@forward 'dialog';
-@forward 'avatar';
-@forward 'indexTable';
-@forward 'tableSortable';
-@forward 'tooltip';
-@forward 'userPopover';
-@forward 'scrollBox';
-@forward 'comment';
-@forward 'toast'; // 5 Ko
-@forward 'popover';
-@forward 'userTile';
-@forward 'plgPush';
+// deprecated components, no responsive
+@use 'field';
+@use 'radio';
+@use 'switch';
+@use 'checkbox';
+@use 'textfields';
 
-// Deprecated CSS components
-// @forward 'gridLegacy'; // 40 Ko
-// @forward 'emptyStateDeprecated';
+// responsive components with media queries
+@use 'dialog';
+@use 'filters';
+@use 'header';
+@use 'errorPage';
+@use 'main';
+@use 'navside';
 
-// @forward 'tableFixedDeprecated'; // 33 Ko
-// @forward 'tableStickedDeprecated'; // 67 Ko
+// responsive components with container queries
+@use 'comment';
+@use 'filterBar';
+// @use 'segmentedControl';
+// @use 'section'; // deprecated
+// @use 'emptyState';
+// @use 'pageHeader';
+// @use 'footer';
+// @use 'indexTable';
+
+// responsive components with default behaviours disabled
+@use 'segmentedControl' with (
+	$defaultResponsive: false
+);
+@use 'section' with (
+	$defaultResponsive: false
+);
+@use 'emptyState' with (
+	$defaultResponsive: false
+);
+@use 'pageHeader' with (
+	$defaultResponsive: false
+);
+@use 'footer' with (
+	$defaultResponsive: false
+);
+@use 'indexTable' with (
+	$defaultResponsive: false
+);
+
+// responsive behaviors reactivated with media queries to avoid breakings
+@include segmentedControl.responsive($at: 'media');
+@include segmentedControl.responsive($at: 'media', $selector: '.viewTabs'); // deprecated
+@include section.responsive($at: 'media');
+@include section.responsiveThin($at: 'media');
+@include emptyState.responsive($at: 'media');
+@include emptyState.responsiveBackground($at: 'media');
+@include pageHeader.responsive($at: 'media');
+@include pageHeader.responsiveSearch($at: 'media');
+@include footer.responsive($at: 'media');
+@include indexTable.responsive($at: 'media');
+
+// deprecated components not loaded by default
+// @use 'gridLegacy'; // caution: grid and gridLegacy cannot be loaded at the same time
+// @use 'emptyStateDeprecated';
+// @use 'tableFixedDeprecated';
+// @use 'tableStickedDeprecated';

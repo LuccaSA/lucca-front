@@ -1,5 +1,6 @@
 @use 'exports' as *;
 @use '@lucca-front/scss/src/commons/utils/media';
+@use '@lucca-front/scss/src/commons/utils/container';
 
 .footer {
 	@include vars;
@@ -14,6 +15,7 @@
 	}
 
 	// default mod
+	// .mod-narrowAtMediaMaxXXX are deprecated
 	&:not([class*='mod-narrow']),
 	&.mod-narrowAtMediaMaxXXS {
 		@include media.max('XXS') {
@@ -38,4 +40,38 @@
 			@include narrow;
 		}
 	}
+}
+
+@mixin responsive(
+	$breakpoint: 'XXS',
+	$breakpoint2: null,
+	$inverted: true,
+	$at: 'container',
+	$containerName: 'footer',
+	$responsiveSelector: null,
+	$axis: 'width',
+	$selector: '.footer'
+) {
+	@if ($at == 'container') {
+		@include container.auto($containerName);
+	}
+
+	#{if($responsiveSelector, $selector + '.rwd-' + $responsiveSelector, $selector)} {
+		@include media.query(
+			$breakpoint: $breakpoint,
+			$breakpoint2: $breakpoint2,
+			$inverted: $inverted,
+			$at: $at,
+			$containerName: $containerName,
+			$axis: $axis
+		) {
+			@include narrow;
+		}
+	}
+}
+
+$defaultResponsive: true !default;
+
+@if $defaultResponsive {
+	@include responsive;
 }

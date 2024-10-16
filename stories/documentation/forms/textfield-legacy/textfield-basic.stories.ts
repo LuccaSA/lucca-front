@@ -86,13 +86,7 @@ function getTemplate(args: TextfieldBasicStory): string {
 const Template: StoryFn<TextfieldBasicStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
-	styles: [
-		`
-		:host {
-			display: block;
-		}`,
-		args.invert === true ? ':host { background-color: #333333; margin: -15px -15px; padding: 15px 15px; }' : '',
-	],
+	styles: [args.invert === true ? ':host { background-color: #333333; margin: -15px -15px; padding: 15px 15px; }' : ''],
 });
 
 export const Basic = Template.bind({});

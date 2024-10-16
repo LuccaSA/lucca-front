@@ -3,7 +3,6 @@
 @use '@lucca-front/scss/src/commons/utils/reset';
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
-	container: comment / inline-size;
 	display: flex;
 	flex-direction: column;
 	gap: var(--pr-t-spacings-50);

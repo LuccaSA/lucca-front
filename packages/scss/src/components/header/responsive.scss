@@ -1,0 +1,14 @@
+@mixin stickyLeftNarrow {
+	&.mod-sticky {
+		.navSide ~ .main-content & {
+			top: var(--commons-navSide-mobile-toggle-height);
+		}
+	}
+}
+
+@mixin stickyNarrow {
+	&.mod-sticky {
+		top: calc(var(--commons-banner-height) + var(--commons-navSide-mobile-toggle-height));
+		left: 0 !important;
+	}
+}

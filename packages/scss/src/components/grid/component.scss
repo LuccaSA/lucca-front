@@ -15,10 +15,7 @@
 	max-width: var(--grid-max-width, var(--grid-maxWidth));
 
 	@at-root ($atRoot) {
-		.grid-containerWrapper {
-			container-type: inline-size;
-			container-name: grid;
-		}
+		@include container.auto('grid');
 
 		.grid-column {
 			align-self: var(--grid-align, var(--grid-column-align));
@@ -71,7 +68,7 @@
 					}
 				}
 
-				@include container.min($breakpoint, $name: grid) {
+				@include container.min($breakpoint, $containerName: grid) {
 					&[style*='grid-colspanAtContainerMin#{$breakpoint}'] {
 						grid-column-end: span var(--grid-colspanAtContainerMin#{$breakpoint});
 					}

@@ -1,4 +1,6 @@
 @use 'exports' as *;
+@use '@lucca-front/scss/src/commons/utils/media';
+@use '@lucca-front/scss/src/commons/utils/container';
 
 .pageHeader {
 	@include vars;
@@ -15,4 +17,63 @@
 	&.mod-sticky {
 		@include sticky;
 	}
+}
+
+@mixin responsive(
+	$breakpoint: 'S',
+	$breakpoint2: null,
+	$inverted: true,
+	$at: 'container',
+	$containerName: 'pageHeader',
+	$responsiveSelector: null,
+	$axis: 'width',
+	$selector: '.pageHeader'
+) {
+	@if ($at == 'container') {
+		@include container.auto($containerName);
+	}
+
+	#{if($responsiveSelector, $selector + '.rwd-' + $responsiveSelector, $selector)} {
+		@include media.query(
+			$breakpoint: $breakpoint,
+			$breakpoint2: $breakpoint2,
+			$inverted: $inverted,
+			$at: $at,
+			$containerName: $containerName,
+			$axis: $axis
+		) {
+			@include stickyNarrow;
+		}
+	}
+}
+
+@mixin responsiveSearch(
+	$breakpoint: 'XS',
+	$breakpoint2: null,
+	$inverted: true,
+	$at: 'container',
+	$containerName: 'pageHeader',
+	$responsiveSelector: null,
+	$axis: 'width',
+	$selector: '.pageHeader'
+) {
+	#{if($responsiveSelector, $selector + '.rwd-' + $responsiveSelector, $selector)} {
+		@include media.query(
+			$breakpoint: $breakpoint,
+			$breakpoint2: $breakpoint2,
+			$inverted: $inverted,
+			$at: $at,
+			$containerName: $containerName,
+			$axis: $axis
+		) {
+			@include searchNarrow;
+		}
+	}
+}
+
+$defaultResponsive: true !default;
+
+@if $defaultResponsive {
+	@include responsive;
+	@include responsiveSearch;
 }

@@ -99,7 +99,7 @@ function getTemplate(args: TableStickyColumnsAndHeaderWithBreakpointsStory): str
 const Template: StoryFn<TableStickyColumnsAndHeaderWithBreakpointsStory> = (args: TableStickyColumnsAndHeaderWithBreakpointsStory) => ({
 	props: args,
 	template: getTemplate(args),
-	styles: [`:host {display: block; overflow: auto; height: 10rem; white-space: nowrap}`],
+	styles: [`:host {overflow: auto; height: 10rem; white-space: nowrap}`],
 });
 
 export const StickyColumnsAndHeaderWithBreakpoints = Template.bind({});

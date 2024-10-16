@@ -8,11 +8,12 @@ export default {
 } as Meta;
 
 function getTemplate(args: CommentRichTextStory): string {
-	return `<div class="comment">
+	return `
+<div class="comment">
 	<div class="comment-infos">
 		<div class="avatar"></div>
 		<div class="comment-infos-content">
-			<span class="comment-infos-name">Marie Bragoulet</span>&ngsp;
+			<span class="comment-infos-name">Marie Bragoulet</span>
 			<time class="comment-infos-date" datetime="2024-01-04T16:50:00+00:00">Lun. 4 janv. à 16:50</time>
 		</div>
 	</div>
@@ -26,14 +27,16 @@ function getTemplate(args: CommentRichTextStory): string {
 			<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque numquam itaque at facilis iusto inventore.</p>
 		</div>
 	</blockquote>
-</div>`;
+</div>
+`;
 }
 
 const Template: StoryFn<CommentRichTextStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 	styles: [
-		`.avatar {
+		`
+		.avatar {
 			width: 1.5rem;
 			height: 1.5rem;
 			border-radius: 50%;

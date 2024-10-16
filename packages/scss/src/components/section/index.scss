@@ -1,5 +1,6 @@
-@use '@lucca-front/scss/src/commons/utils/media';
 @use 'exports' as *;
+@use '@lucca-front/scss/src/commons/utils/media';
+@use '@lucca-front/scss/src/commons/utils/container';
 
 .section {
 	@include vars;
@@ -10,12 +11,67 @@
 	&.mod-grey {
 		@include neutral;
 	}
+}
 
-	@include media.max('S') {
-		@include S;
+@mixin responsive(
+	$breakpoint: 'S',
+	$breakpoint2: null,
+	$inverted: true,
+	$at: 'container',
+	$containerName: 'section',
+	$responsiveSelector: null,
+	$axis: 'width',
+	$selector: '.section'
+) {
+	@if ($at == 'container') {
+		@include container.auto($containerName);
 	}
 
-	@include media.max('XS') {
-		@include XS;
+	#{if($responsiveSelector, $selector + '.rwd-' + $responsiveSelector, $selector)} {
+		@include media.query(
+			$breakpoint: $breakpoint,
+			$breakpoint2: $breakpoint2,
+			$inverted: $inverted,
+			$at: $at,
+			$containerName: $containerName,
+			$axis: $axis
+		) {
+			@include narrow;
+		}
 	}
+}
+
+@mixin responsiveThin(
+	$breakpoint: 'XS',
+	$breakpoint2: null,
+	$inverted: true,
+	$at: 'container',
+	$containerName: 'section',
+	$responsiveSelector: null,
+	$axis: 'width',
+	$selector: '.section'
+) {
+	@if ($at == 'container') {
+		@include container.auto($containerName);
+	}
+
+	#{if($responsiveSelector, $selector + '.rwd-' + $responsiveSelector, $selector)} {
+		@include media.query(
+			$breakpoint: $breakpoint,
+			$breakpoint2: $breakpoint2,
+			$inverted: $inverted,
+			$at: $at,
+			$containerName: $containerName,
+			$axis: $axis
+		) {
+			@include thin;
+		}
+	}
+}
+
+$defaultResponsive: true !default;
+
+@if $defaultResponsive {
+	@include responsive;
+	@include responsiveThin;
 }
