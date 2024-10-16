@@ -42,6 +42,7 @@
 		}
 
 		.emptyState-content-heading {
+			@include title.component;
 			@include title.h3;
 			margin-bottom: 0;
 		}
