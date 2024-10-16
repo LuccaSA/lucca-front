@@ -4,7 +4,9 @@
 @import '../packages/scss/src/main-all';
 @import '../packages/ng/styles/main';
 
-storybook-root {
+storybook-root,
+[ng-version] {
+	// Apply block display by default to story root for @container purposes
 	display: block;
 }
 
