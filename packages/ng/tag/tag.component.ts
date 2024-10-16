@@ -22,7 +22,7 @@ export class TagComponent {
 	/**
 	 * Which size should the callout be? Defaults to medium
 	 */
-	size: 'M' | 'S' = 'M';
+	size: 'M' | 'L' = 'M';
 
 	@Input()
 	/**
