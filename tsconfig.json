@@ -23,7 +23,7 @@
         "packages/ng/*/public-api.ts"
       ],
       "@lucca/prisme/*": [
-        "packages/prisme/*/public-api.d.ts"
+        "packages/prisme/*/public-api.ts"
       ],
       "@/stories/*": [
         "stories/documentation/*"
