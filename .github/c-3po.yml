@@ -25,3 +25,10 @@ auto-labels:
       path: "(^Jenkinsfile$|^.github/*|^.cd/*)"
     - label: ":book: Documentation changes"
       path: "(^stories/*)"
+check-milestone:
+  enabled: true
+  targetBranches:
+    - "rc"
+    - "master"
+  linkMilestonesToMepBranches:
+    enabled: false
