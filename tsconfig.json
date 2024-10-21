@@ -1,36 +1,50 @@
 /* To learn more about this file see: https://angular.io/config/tsconfig. */
 {
-	"compileOnSave": false,
-	"compilerOptions": {
-		"baseUrl": "./",
-		"outDir": "./dist/out-tsc",
-		"forceConsistentCasingInFileNames": true,
-		"strict": false,
-		"noImplicitOverride": true,
-		"noPropertyAccessFromIndexSignature": true,
-		"noImplicitReturns": true,
-		"noFallthroughCasesInSwitch": true,
-		"esModuleInterop": true,
-		"sourceMap": true,
-		"rootDirs": ["./"],
-		"paths": {
-			"@lucca-front/icons": ["packages/icons/index.d.ts"],
-			"@lucca-front/ng/*": ["packages/ng/*/public-api.ts"],
-			"@/stories/*": ["stories/documentation/*"]
-		},
+  "compileOnSave": false,
+  "compilerOptions": {
+    "baseUrl": "./",
+    "outDir": "./dist/out-tsc",
+    "forceConsistentCasingInFileNames": true,
+    "strict": false,
+    "noImplicitOverride": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "esModuleInterop": true,
+    "sourceMap": true,
+    "rootDirs": [
+      "./"
+    ],
+    "paths": {
+      "@lucca-front/icons": [
+        "packages/icons/index.d.ts"
+      ],
+      "@lucca-front/ng/*": [
+        "packages/ng/*/public-api.ts"
+      ],
+      "@lucca/prisme/*": [
+        "packages/prisme/*/public-api.d.ts"
+      ],
+      "@/stories/*": [
+        "stories/documentation/*"
+      ]
+    },
     "declaration": false,
-		"experimentalDecorators": true,
-		"moduleResolution": "node",
-		"importHelpers": true,
-		"target": "ES2022",
-		"module": "ESNext",
-		"lib": ["ES2022", "dom"],
-		"useDefineForClassFields": false
-	},
-	"angularCompilerOptions": {
-		"enableI18nLegacyMessageIdFormat": false,
-		"strictInjectionParameters": true,
-		"strictInputAccessModifiers": true,
-		"strictTemplates": true
-	}
+    "experimentalDecorators": true,
+    "moduleResolution": "node",
+    "importHelpers": true,
+    "target": "ES2022",
+    "module": "ESNext",
+    "lib": [
+      "ES2022",
+      "dom"
+    ],
+    "useDefineForClassFields": false
+  },
+  "angularCompilerOptions": {
+    "enableI18nLegacyMessageIdFormat": false,
+    "strictInjectionParameters": true,
+    "strictInputAccessModifiers": true,
+    "strictTemplates": true
+  }
 }

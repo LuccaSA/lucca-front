@@ -1,6 +1,6 @@
 {
   "name": "lucca-front",
-  "description": "a library of useful components for web developpement",
+  "description": "a library of useful components for web development",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/LuccaSA/lucca-front.git"
@@ -23,7 +23,7 @@
   ],
   "scripts": {
     "build": "npm run build:ng && npm run build:remaining",
-    "build:ng": "ng run ng:build",
+    "build:ng": "ng run prisme:build && ng run ng:build",
     "build:remaining": "node build.js",
     "start": "ng run ng:storybook",
     "jenkins-test": "jest --no-cache --runInBand",
