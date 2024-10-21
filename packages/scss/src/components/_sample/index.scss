@@ -1,6 +1,6 @@
 // This file contains all the connections required to make the component functional.
 // The component’s mixins are requested, then assigned to classes.
-// To add the component to the list of all existing components, call it from `components/index` with `@forward 'sample';`.
+// To add the component to the list of all existing components, call it from `components/index` with `@use 'sample';`.
 // Modifiers and states are optional and must be prefixed by `.mod-`, `.rwd-` and `.is-`.
 // A responsive mixin and varible define the default behaviour but can be overridden. All this settings must be preserved.
 

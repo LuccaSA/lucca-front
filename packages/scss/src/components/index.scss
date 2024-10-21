@@ -82,48 +82,16 @@
 @use 'errorPage';
 @use 'main';
 @use 'navside';
+@use 'segmentedControl';
+@use 'emptyState';
+@use 'pageHeader';
+@use 'footer';
+@use 'indexTable';
+@use 'section'; // deprecated
 
 // responsive components with container queries
 @use 'comment';
 @use 'filterBar';
-// @use 'segmentedControl';
-// @use 'section'; // deprecated
-// @use 'emptyState';
-// @use 'pageHeader';
-// @use 'footer';
-// @use 'indexTable';
-
-// responsive components with default behaviours disabled
-@use 'segmentedControl' with (
-	$defaultResponsive: false
-);
-@use 'section' with (
-	$defaultResponsive: false
-);
-@use 'emptyState' with (
-	$defaultResponsive: false
-);
-@use 'pageHeader' with (
-	$defaultResponsive: false
-);
-@use 'footer' with (
-	$defaultResponsive: false
-);
-@use 'indexTable' with (
-	$defaultResponsive: false
-);
-
-// responsive behaviors reactivated with media queries to avoid breakings
-@include segmentedControl.responsive($at: 'media');
-@include segmentedControl.responsive($at: 'media', $selector: '.viewTabs'); // deprecated
-@include section.responsive($at: 'media');
-@include section.responsiveThin($at: 'media');
-@include emptyState.responsive($at: 'media');
-@include emptyState.responsiveBackground($at: 'media');
-@include pageHeader.responsive($at: 'media');
-@include pageHeader.responsiveSearch($at: 'media');
-@include footer.responsive($at: 'media');
-@include indexTable.responsive($at: 'media');
 
 // deprecated components not loaded by default
 // @use 'gridLegacy'; // caution: grid and gridLegacy cannot be loaded at the same time
