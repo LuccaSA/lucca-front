@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Directive, Type, booleanAttribute, computed, effect, forwardRef, inject, input, signal, untracked } from '@angular/core';
 import { takeUntilDestroyed, toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { ILuApiCollectionResponse } from '@lucca-front/ng/api';
-import { CORE_SELECT_API_TOTAL_COUNT_PROVIDER, CoreSelectApiTotalCountProvider } from '@lucca-front/ng/core-select';
+import { CORE_SELECT_API_TOTAL_COUNT_PROVIDER, CoreSelectApiTotalCountProvider, sanitizeClueFilter } from '@lucca-front/ng/core-select';
 import { ALuCoreSelectApiDirective } from '@lucca-front/ng/core-select/api';
 import { LuDisplayFormat, LuDisplayFullname } from '@lucca-front/ng/user';
 import { EMPTY, Observable, catchError, combineLatest, debounceTime, map, of, shareReplay, switchMap, take, tap } from 'rxjs';
@@ -57,8 +57,6 @@ export class LuCoreSelectUsersDirective<T extends LuCoreSelectUser = LuCoreSelec
 	includeFormerEmployees = signal(false);
 	searchDelimiter = input<string>(' ');
 
-	protected _url = signal<string | null>(null);
-
 	constructor() {
 		super();
 		this.select.optionTpl.set(LuUserOptionComponent);
@@ -82,13 +80,14 @@ export class LuCoreSelectUsersDirective<T extends LuCoreSelectUser = LuCoreSelec
 			const clue = this.clue();
 			const operationIds = this.operationIds();
 			const appInstanceId = this.appInstanceId();
+			const searchDelimiter = this.searchDelimiter();
 			const formerEmployees = this.includeFormerEmployees();
 
 			return {
 				fields: this.#userFields,
 				...this.filters(),
 				...(orderBy ? { orderBy } : {}),
-				...(clue ? { clue } : {}),
+				...(clue ? { clue: sanitizeClueFilter(clue, searchDelimiter) } : {}),
 				...(operationIds ? { operations: operationIds.join(',') } : {}),
 				...(appInstanceId ? { appInstanceId } : {}),
 				...(formerEmployees ? { formerEmployees } : {}),
