@@ -23,12 +23,18 @@ export default {
 			control: {
 				type: 'select',
 			},
-		}
+		},
+		loading: {
+			control: {
+				type: 'boolean',
+			},
+		},
 	},
 } as Meta;
 
 export const Template: StoryObj<NumericBadgeComponent> = {
 	args: {
 		value: 7,
+		loading: false,
 	},
 };
