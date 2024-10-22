@@ -1,4 +1,4 @@
-import { Directive } from '@angular/core';
+import { Directive, input } from '@angular/core';
 import { LuCoreSelectApiV4Directive } from '@lucca-front/ng/core-select/api';
 
 export interface Legume {
@@ -15,6 +15,6 @@ export interface Legume {
 export class LuCoreSelectLegumesDirective extends LuCoreSelectApiV4Directive<Legume> {
 	public constructor() {
 		super();
-		this.apiV4 = '/api/legumes';
+		this.apiV4 = input('/api/legumes');
 	}
 }
