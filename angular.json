@@ -34,8 +34,8 @@
           "builder": "@angular-eslint/builder:lint",
           "options": {
             "lintFilePatterns": [
-              "packages/**/*.ts",
-              "packages/**/*.html"
+              "packages/ng/**/*.ts",
+              "packages/ng/**/*.html"
             ]
           }
         },
@@ -91,7 +91,7 @@
       }
     },
     "prisme": {
-      "root": "./",
+      "root": "./packages/prisme/",
       "projectType": "library",
       "architect": {
         "build": {
@@ -105,57 +105,9 @@
           "builder": "@angular-eslint/builder:lint",
           "options": {
             "lintFilePatterns": [
-              "packages/**/*.ts",
-              "packages/**/*.html"
+              "packages/prisme/**/*.ts",
+              "packages/prisme/**/*.html"
             ]
-          }
-        },
-        "storybook": {
-          "builder": "@storybook/angular:start-storybook",
-          "options": {
-            "browserTarget": "ng:build",
-            "compodoc": true,
-            "compodocArgs": [
-              "-p",
-              "./tsconfig.compodoc-json.json",
-              "-e",
-              "json",
-              "-d",
-              ".storybook"
-            ],
-            "port": 6006,
-            "styles": [
-              ".storybook/styles.scss"
-            ],
-            "stylePreprocessorOptions": {
-              "includePaths": [
-                "node_modules"
-              ]
-            }
-          }
-        },
-        "build-storybook": {
-          "builder": "@storybook/angular:build-storybook",
-          "options": {
-            "browserTarget": "ng:build",
-            "compodoc": true,
-            "compodocArgs": [
-              "-p",
-              "./tsconfig.compodoc-json.json",
-              "-e",
-              "json",
-              "-d",
-              ".storybook"
-            ],
-            "styles": [
-              ".storybook/styles.scss"
-            ],
-            "stylePreprocessorOptions": {
-              "includePaths": [
-                "packages/ng/styles",
-                "node_modules"
-              ]
-            }
           }
         }
       }

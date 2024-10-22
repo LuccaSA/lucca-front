@@ -23,7 +23,8 @@
   ],
   "scripts": {
     "build": "npm run build:ng && npm run build:remaining",
-    "build:ng": "ng run prisme:build && ng run ng:build",
+    "build:ng": "npm run build:prisme && ng run ng:build",
+    "build:prisme": "ng run prisme:build",
     "build:remaining": "node build.js",
     "start": "ng run ng:storybook",
     "jenkins-test": "jest --no-cache --runInBand",
