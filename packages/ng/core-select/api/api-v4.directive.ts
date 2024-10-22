@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { computed, Directive, forwardRef, inject, input } from '@angular/core';
+import { computed, Directive, forwardRef, inject, input, model } from '@angular/core';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { ILuApiItem } from '@lucca-front/ng/api';
 import { CORE_SELECT_API_TOTAL_COUNT_PROVIDER, CoreSelectApiTotalCountProvider, sanitizeClueFilter } from '@lucca-front/ng/core-select';
@@ -19,7 +19,7 @@ import { ALuCoreSelectApiDirective } from './api.directive';
 	],
 })
 export class LuCoreSelectApiV4Directive<T extends ILuApiItem> extends ALuCoreSelectApiDirective<T> implements CoreSelectApiTotalCountProvider {
-	apiV4 = input.required<string>();
+	apiV4 = model.required<string>();
 	sort = input<string | null>('+name');
 	filters = input<Record<string, string | number | boolean>>({});
 	searchDelimiter = input<string>(' ');

@@ -15,6 +15,6 @@ export interface Legume {
 export class LuCoreSelectLegumesDirective extends LuCoreSelectApiV4Directive<Legume> {
 	public constructor() {
 		super();
-		this.apiV4 = input('/api/legumes');
+		this.apiV4.set('/api/legumes');
 	}
 }
