@@ -147,7 +147,7 @@ export const WithForm: StoryObj = {
 <!--form = new FormGroup({
 			example: new FormControl('', Validators.required)
 		})-->
-		<form [formGroup]="form" class="dialog-formOptional">
+		<form [formGroup]="form" class="dialog-inside-formOptional">
 			<lu-dialog-header>Template driven header with Form inside</lu-dialog-header>
 
 			<lu-dialog-content>
