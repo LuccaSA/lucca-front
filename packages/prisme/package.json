@@ -19,7 +19,6 @@
     "@angular/core": "^18.0.0",
     "@angular/cdk": "^18.0.0",
     "@lucca-front/icons": "*",
-    "@lucca-front/scss": "*",
     "@types/dompurify": "^3.0.0",
     "isomorphic-dompurify": "^2.11.0",
     "date-fns": "^3.6.0",

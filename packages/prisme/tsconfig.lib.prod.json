@@ -4,10 +4,6 @@
   "compilerOptions": {
     "declarationMap": false,
     "paths": {
-      "@lucca-front/ng/*": [
-        "dist/ng/*",
-        "dist/ng"
-      ],
       "@lucca/prisme/*": [
         "dist/prisme/*",
         "dist/prisme"

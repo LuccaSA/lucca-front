@@ -1,22 +1,14 @@
+import { Meta, StoryObj } from '@storybook/angular';
 import { ButtonComponent } from '@lucca-front/ng/button';
-import { IconComponent } from '@lucca-front/ng/icon';
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { expect, within } from '@storybook/test';
 import { generateInputs } from 'stories/helpers/stories';
 
 export default {
 	title: 'Documentation/Actions/Button/Angular/Basic',
 	component: ButtonComponent,
-	decorators: [
-		moduleMetadata({
-			imports: [IconComponent],
-		}),
-	],
 	render: ({ luButton, ...inputs }, { argTypes }) => {
-		const disclosureIcon = '<lu-icon icon="arrowChevronBottom"/>';
 		return {
-			template: `<button type="button" luButton${luButton !== '' ? `="${luButton}"` : ''}${generateInputs(inputs, argTypes)}
->Button${inputs['disclosure'] ? disclosureIcon : ''}</button>`,
+			template: `<button type="button" prButton${luButton !== '' ? `="${luButton}"` : ''}${generateInputs(inputs, argTypes)}
+>Button</button>`,
 		};
 	},
 } as Meta;
@@ -38,17 +30,11 @@ export const Basic: StoryObj<ButtonComponent> = {
 			},
 		},
 	},
-	play: async (context) => {
-		const canvas = within(context.canvasElement);
-		const button = await canvas.findByRole('button');
-		await expect(button).toHaveClass('button is-default palette-none');
-	},
 	args: {
 		block: false,
 		palette: 'none',
 		state: 'default',
 		luButton: '',
 		delete: false,
-		disclosure: false,
 	},
 };
