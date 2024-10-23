@@ -1,0 +1,172 @@
+<div class="textField">
+	<div class="textField-input">
+		<div class="rangePicker-content mod-start">
+			<label for="range-input-start-{{idSuffix}}" class="u-mask">Start</label>
+			<input
+				type="text"
+				#start
+				id="range-input-start-{{idSuffix}}"
+				attr.aria-describedby="range-input-start-{{idSuffix}}-message"
+				luInput
+				luInputStandalone
+				class="textField-input-value rangePicker-input-value"
+				[value]="displayValue()"
+				(input)="userTextInput.set(start.value)"
+				(blur)="onTouched?.();inputFocused.set(false)"
+				(focus)="inputFocused.set(true)"
+				[attr.placeholder]="placeholder()"
+				aria-haspopup="true"
+				role="combobox"
+				(click)="popoverRef.openPopover(true, true)"
+				(keyup.arrowDown)="popoverRef.opened() ? popoverRef.focusBackToContent($event) : openPopover(popoverRef)"
+				(keyup.space)=" popoverRef.opened() ? popoverRef.focusBackToContent($event) : openPopover(popoverRef)"
+				(keyup.escape)="popoverRef.close()"
+				[disabled]="disabled"
+			/>
+		</div>
+		<div class="rangePicker-content mod-end">
+			<label for="range-input-end-{{idSuffix}}" class="u-mask">End</label>
+			<input
+				type="text"
+				#end
+				id="range-input-end-{{idSuffix}}"
+				attr.aria-describedby="range-input-start-{{idSuffix}}-message"
+				luInput
+				luInputStandalone
+				class="textField-input-value rangePicker-input-value"
+				[value]="displayValue()"
+				(input)="userTextInput.set(end.value)"
+				(blur)="onTouched?.();inputFocused.set(false)"
+				(focus)="inputFocused.set(true)"
+				[attr.placeholder]="placeholder()"
+				aria-haspopup="true"
+				role="combobox"
+				(click)="popoverRef.openPopover(true, true)"
+				(keyup.arrowDown)="popoverRef.opened() ? popoverRef.focusBackToContent($event) : openPopover(popoverRef)"
+				(keyup.space)=" popoverRef.opened() ? popoverRef.focusBackToContent($event) : openPopover(popoverRef)"
+				(keyup.escape)="popoverRef.close()"
+				[disabled]="disabled"
+			/>
+		</div>
+		<lu-icon [icon]="'arrowRight'" [size]="'XS'" [alt]="''" class="rangePicker-arrow" />
+		<div class="textField-input-affix">
+			@if (clearable() && date.value !== '') {
+			<button class="textField-input-affix-clear clear" type="button" (click)="clear(date)">
+				<span aria-hidden="true" class="lucca-icon icon-signClose"></span>
+				<span class="u-mask">{{ intl.clear }}</span>
+			</button>
+			}
+			<button
+				[luPopover2]="calendar"
+				[disabled]="disabled"
+				[luPopoverNoCloseButton]="true"
+				#popoverRef="luPopover2"
+				[customPositions]="popoverPositions"
+				tabindex="-1"
+				type="button"
+				class="button mod-onlyIcon mod-text textField-input-affix-toggle"
+			>
+				<lu-icon [icon]="'calendar'" [alt]="intl.pickDate" />
+			</button>
+		</div>
+	</div>
+</div>
+
+<ng-template #calendar>
+	<div class="calendarActionsOptionnal">
+		<ul
+			class="calendarActions"
+			[class.mod-day]="calendarMode() === 'day'"
+			[class.mod-month]="calendarMode() === 'month'"
+			[class.mod-year]="calendarMode() === 'year'"
+		>
+			<li>
+				<button type="button" class="button mod-block mod-text mod-S">{{ relativeLabelFor(-1, 'week') }}</button>
+			</li>
+			<li>
+				<button type="button" class="button mod-block mod-text mod-S">{{ relativeLabelFor(-1, 'month') }}</button>
+			</li>
+			<li>
+				<button type="button" class="button mod-block mod-text mod-S">{{ relativeLabelFor(-1, 'quarter') }}</button>
+			</li>
+			<li>
+				<button type="button" class="button mod-block mod-text mod-S">{{ relativeLabelFor(-1, 'year') }}</button>
+			</li>
+
+			<li>
+				<button type="button" class="button mod-block mod-text mod-S">{{ relativeLabelFor(0, 'week') }}</button>
+			</li>
+			<li>
+				<button type="button" class="button mod-block mod-text mod-S">{{ relativeLabelFor(0, 'month') }}</button>
+			</li>
+			<li>
+				<button type="button" class="button mod-block mod-text mod-S">{{ relativeLabelFor(0, 'quarter') }}</button>
+			</li>
+			<li>
+				<button type="button" class="button mod-block mod-text mod-S">{{ relativeLabelFor(0, 'year') }}</button>
+			</li>
+
+			<li>
+				<button type="button" class="button mod-block mod-text mod-S">{{ relativeLabelFor(1, 'week') }}</button>
+			</li>
+			<li>
+				<button type="button" class="button mod-block mod-text mod-S">{{ relativeLabelFor(1, 'month') }}</button>
+			</li>
+			<li>
+				<button type="button" class="button mod-block mod-text mod-S">{{ relativeLabelFor(1, 'quarter') }}</button>
+			</li>
+			<li>
+				<button type="button" class="button mod-block mod-text mod-S">{{ relativeLabelFor(1, 'year') }}</button>
+			</li>
+		</ul>
+		<div class="calendarWrapper" [attr.style]="'--components-calendarWrapperVisible: 2'">
+			<div class="calendarWrapper-navigation mod-prev">
+				<button class="calendarWrapper-navigation-button button" type="button" (click)="prev()" #previousButtonRef>
+					<span aria-hidden="true" class="lucca-icon icon-chevronLeft"></span><span class="u-mask">{{ intl.previous }}</span>
+				</button>
+			</div>
+			<div class="calendarWrapper-navigation mod-next">
+				<button class="calendarWrapper-navigation-button button" type="button" (click)="next()" #nextButtonRef>
+					<span aria-hidden="true" class="lucca-icon icon-chevronRight"></span><span class="u-mask"> {{ intl.next }}</span>
+				</button>
+			</div>
+			<div class="calendarWrapper-content" tabindex="-1">
+				<lu-calendar2
+					[enableOverflow]="enableOverflow()"
+					[showOverflow]="showOverflow()"
+					[hideToday]="hideToday()"
+					[hasTodayButton]="hasTodayButton()"
+					[date]="currentDate()"
+					(dateChange)="currentDateChangeFromCalendar($event)"
+					[(tabbableDate)]="tabbableDate"
+					[getCellInfo]="combinedGetCellInfo"
+					[ranges]="ranges()"
+					(dateClicked)="selectedDate.set($event);currentDate.set($event);popoverRef.close();date.focus()"
+					(nextPage)="move(1)"
+					(previousPage)="move(-1)"
+					[(displayMode)]="calendarMode"
+					[mode]="mode()"
+					[hideWeekend]="hideWeekend()"
+				></lu-calendar2>
+
+				<lu-calendar2
+					[enableOverflow]="enableOverflow()"
+					[showOverflow]="showOverflow()"
+					[hideToday]="hideToday()"
+					[hasTodayButton]="hasTodayButton()"
+					[date]="currentDate()"
+					(dateChange)="currentDateChangeFromCalendar($event)"
+					[(tabbableDate)]="tabbableDate"
+					[getCellInfo]="combinedGetCellInfo"
+					[ranges]="ranges()"
+					(dateClicked)="selectedDate.set($event);currentDate.set($event);popoverRef.close();date.focus()"
+					(nextPage)="move(1)"
+					(previousPage)="move(-1)"
+					[(displayMode)]="calendarMode"
+					[mode]="'year'"
+					[hideWeekend]="hideWeekend()"
+				></lu-calendar2>
+			</div>
+		</div>
+	</div>
+</ng-template>

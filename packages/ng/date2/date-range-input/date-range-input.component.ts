@@ -1,8 +1,9 @@
 import { ConnectionPositionPair } from '@angular/cdk/overlay';
 import { booleanAttribute, ChangeDetectionStrategy, Component, computed, effect, ElementRef, forwardRef, inject, input, LOCALE_ID, signal, viewChild, ViewEncapsulation } from '@angular/core';
 import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors, Validator } from '@angular/forms';
-import { getIntl, ɵeffectWithDeps } from '@lucca-front/ng/core';
-import { InputDirective } from '@lucca-front/ng/form-field';
+import { ButtonComponent } from '@lucca-front/ng/button';
+import { getIntl, LuClass, ɵeffectWithDeps } from '@lucca-front/ng/core';
+import { FORM_FIELD_INSTANCE, InputDirective } from '@lucca-front/ng/form-field';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { PopoverDirective } from '@lucca-front/ng/popover2';
 import { addMonths, addYears, parse, startOfDay, startOfMonth } from 'date-fns';
@@ -14,29 +15,36 @@ import { getDateFormat } from '../date-format';
 import { LU_DATE2_TRANSLATIONS } from '../date2.translate';
 import { comparePeriods, startOfPeriod } from '../utils';
 
+let nextId = 0;
+
 @Component({
-	selector: 'lu-date-input',
+	selector: 'lu-date-range-input',
 	standalone: true,
-	imports: [PopoverDirective, Calendar2Component, IconComponent, InputDirective],
-	templateUrl: './date-input.component.html',
-	styleUrl: './date-input.component.scss',
+	imports: [PopoverDirective, Calendar2Component, IconComponent, InputDirective, ButtonComponent],
+	templateUrl: './date-range-input.component.html',
+	styleUrl: './date-range-input.component.scss',
 	encapsulation: ViewEncapsulation.None,
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	providers: [
 		{
 			provide: NG_VALUE_ACCESSOR,
-			useExisting: forwardRef(() => DateInputComponent),
+			useExisting: forwardRef(() => DateRangeInputComponent),
 			multi: true,
 		},
 		{
 			provide: NG_VALIDATORS,
-			useExisting: forwardRef(() => DateInputComponent),
+			useExisting: forwardRef(() => DateRangeInputComponent),
 			multi: true,
 		},
+		LuClass,
 	],
 })
-export class DateInputComponent implements ControlValueAccessor, Validator {
+export class DateRangeInputComponent implements ControlValueAccessor, Validator {
 	#locale = inject(LOCALE_ID);
+
+	#luClass = inject(LuClass);
+
+	#formFieldRef = inject(FORM_FIELD_INSTANCE, { optional: true });
 
 	#intlDateTimeFormat = new Intl.DateTimeFormat(this.#locale);
 
@@ -47,6 +55,8 @@ export class DateInputComponent implements ControlValueAccessor, Validator {
 	#dateFormat = getDateFormat(this.#locale).toUpperCase();
 
 	intl = getIntl(LU_DATE2_TRANSLATIONS);
+
+	idSuffix = nextId++;
 
 	// CVA stuff
 	#onChange?: (value: Date) => void;
@@ -127,6 +137,9 @@ export class DateInputComponent implements ControlValueAccessor, Validator {
 	}
 
 	constructor() {
+		if (this.#formFieldRef) {
+			this.#formFieldRef.layout = 'fieldset';
+		}
 		effect(
 			() => {
 				const inputValue = this.userTextInput();
@@ -142,8 +155,17 @@ export class DateInputComponent implements ControlValueAccessor, Validator {
 			},
 			{ allowSignalWrites: true },
 		);
+
 		effect(() => {
 			this.#onChange?.(this.selectedDate());
+		});
+
+		effect(() => {
+			this.#luClass.setState({
+				'mod-day': this.mode() === 'day',
+				'mod-month': this.mode() === 'month',
+				'mod-year': this.mode() === 'year',
+			});
 		});
 
 		ɵeffectWithDeps([this.calendarMode, this.tabbableDate], (calendarMode, tabbableDate) => {
@@ -259,5 +281,11 @@ export class DateInputComponent implements ControlValueAccessor, Validator {
 				this.tabbableDate.set(addMonths(this.tabbableDate(), direction));
 				break;
 		}
+	}
+
+	relativeLabelFor(value: number, period: 'week' | 'month' | 'quarter' | 'year') {
+		const label = new Intl.RelativeTimeFormat(this.#locale, { style: 'long', numeric: 'auto' }).format(value, period);
+
+		return `${label[0].toUpperCase()}${label.slice(1)}`;
 	}
 }
