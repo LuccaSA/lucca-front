@@ -8,7 +8,7 @@ import { LuOptionContext } from '../select.model';
 })
 export class LuDisplayerDirective<TOption, TValue> {
 	@Input('luDisplayerSelect') set select(select: ALuSelectInputComponent<TOption, TValue>) {
-		select.valueTpl = this.templateRef;
+		select.valueTpl.set(this.templateRef);
 	}
 
 	public constructor(private templateRef: TemplateRef<LuOptionContext<TOption>>) {}

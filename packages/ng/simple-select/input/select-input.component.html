@@ -16,7 +16,7 @@
 	[attr.autocomplete]="autocomplete"
 />
 <div class="simpleSelect-value">
-	<ng-container *luOptionOutlet="valueTpl || optionTpl; value: value"></ng-container>
+	<ng-container *luOptionOutlet="displayerTpl(); value: value"></ng-container>
 </div>
 <button
 	*ngIf="clearable && hasValue() && (disabled$ | async) === false"

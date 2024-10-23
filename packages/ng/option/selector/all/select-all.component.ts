@@ -40,6 +40,9 @@ export class LuOptionSelectAllComponent<T> extends ALuOptionOperator<T> implemen
 	public intl = getIntl(LU_OPTION_SELECT_ALL_TRANSLATIONS);
 
 	selectAll() {
+		if (!this.options) {
+			return;
+		}
 		this.onSelectValue.next([...this.options]);
 	}
 	deselectAll() {

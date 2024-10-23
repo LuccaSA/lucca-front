@@ -40,6 +40,9 @@ export class LuTreeOptionSelectAllComponent<T> extends ALuTreeOptionOperator<T> 
 	public intl = getIntl(LU_OPTION_SELECT_ALL_TRANSLATIONS);
 
 	selectAll() {
+		if (!this.flatOptions) {
+			return;
+		}
 		this.onSelectValue.next([...this.flatOptions]);
 	}
 	deselectAll() {

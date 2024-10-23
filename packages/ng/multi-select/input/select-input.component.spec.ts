@@ -3,7 +3,7 @@ import { ComponentFixture, MetadataOverride, TestBed } from '@angular/core/testi
 import { FormControl, NgControl } from '@angular/forms';
 import { LuCoreSelectTotalCountDirective } from '@lucca-front/ng/core-select';
 import { TestEntity, runALuSelectInputComponentTestSuite } from '../../core-select/input/select-input.component.spec';
-import { LuMultiSelectWithSelectAllValue } from '../select.model';
+import { LuMultiSelection } from '../select.model';
 import { LuMultiSelectWithSelectAllDirective } from './select-all';
 import { LuMultiSelectInputComponent } from './select-input.component';
 
@@ -44,7 +44,7 @@ describe('LuMultiSelectInputComponent', () => {
 
 	describe('Select all', () => {
 		let selectAllDirective: LuMultiSelectWithSelectAllDirective<Entity>;
-		let emittedSelectValues: Array<LuMultiSelectWithSelectAllValue<TestEntity> | TestEntity[]>;
+		let emittedSelectValues: Array<LuMultiSelection<TestEntity> | TestEntity[]>;
 
 		const options = [
 			{ id: 1, name: 'test 1' },
@@ -89,7 +89,7 @@ describe('LuMultiSelectInputComponent', () => {
 			expect(emittedSelectValues).toEqual([]);
 		});
 
-		it('should not emit when clicking on select all while selection was empty', () => {
+		it('should emit all when clicking on select all while selection was empty', () => {
 			// Arrange
 			const { componentInstance } = fixture;
 			componentInstance.openPanel();
@@ -100,7 +100,7 @@ describe('LuMultiSelectInputComponent', () => {
 			TestBed.flushEffects();
 
 			// Assert
-			expect(emittedSelectValues).toEqual([]);
+			expect(emittedSelectValues).toEqual([{ mode: 'all' }]);
 		});
 
 		it('should emit mode exclude when clicking on select all then selecting option', () => {
@@ -116,7 +116,7 @@ describe('LuMultiSelectInputComponent', () => {
 			TestBed.flushEffects();
 
 			// Assert
-			expect(emittedSelectValues).toEqual([{ mode: 'exclude', values: [options[0]] }]);
+			expect(emittedSelectValues).toEqual([{ mode: 'all' }, { mode: 'exclude', values: [options[0]] }]);
 		});
 
 		it('should emit mode include when clicking on select all then selecting option', () => {
@@ -133,7 +133,7 @@ describe('LuMultiSelectInputComponent', () => {
 			expect(emittedSelectValues).toEqual([{ mode: 'include', values: [options[0]] }]);
 		});
 
-		it('should reset selection when clicking on select all with included option', () => {
+		it('should set "all" selection when clicking on select all with included option', () => {
 			// Arrange
 			const { componentInstance } = fixture;
 			componentInstance.openPanel();
@@ -149,7 +149,7 @@ describe('LuMultiSelectInputComponent', () => {
 			expect(emittedSelectValues).toEqual([{ mode: 'include', values: [options[0]] }, { mode: 'all' }]);
 		});
 
-		it('should reset selection when clicking on select all with excluded option', () => {
+		it('should set "none" selection when clicking on select all with excluded option', () => {
 			// Arrange
 			const { componentInstance } = fixture;
 			componentInstance.openPanel();
@@ -164,7 +164,7 @@ describe('LuMultiSelectInputComponent', () => {
 			TestBed.flushEffects();
 
 			// Assert
-			expect(emittedSelectValues).toEqual([{ mode: 'exclude', values: [options[0]] }, { mode: 'all' }]);
+			expect(emittedSelectValues).toEqual([{ mode: 'all' }, { mode: 'exclude', values: [options[0]] }, { mode: 'none' }]);
 		});
 
 		it('should emit mode all when clicking on each option', () => {
@@ -180,21 +180,15 @@ describe('LuMultiSelectInputComponent', () => {
 			expect(emittedSelectValues).toEqual([{ mode: 'all' }]);
 		});
 
-		it('should convert array of options to selection', () => {
+		it('should not convert array of options to selection', () => {
 			// Arrange
 			const { componentInstance } = fixture;
 
 			// Act
-			componentInstance.writeValue([options[0]]);
-			TestBed.flushEffects();
+			const act = () => componentInstance.writeValue([options[0]]);
 
 			// Assert
-			expect(emittedSelectValues).toEqual([
-				{
-					mode: 'include',
-					values: [options[0]],
-				},
-			]);
+			expect(act).toThrow('MultiSelectWithSelectAllDirective does not support array values. Pass a LuMultiSelectWithSelectAllValue<TValue>.');
 		});
 	});
 });

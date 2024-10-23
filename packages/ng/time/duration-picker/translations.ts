@@ -6,7 +6,7 @@
 	},
 	de: {
 		timePickerHours: 'Stunden',
-		timePickerTimeSeparator: 'h',
+		timePickerTimeSeparator: 'Std.',
 		timePickerMinutes: 'Minuten',
 	},
 	fr: {

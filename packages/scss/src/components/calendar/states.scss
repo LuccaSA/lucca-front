@@ -1,0 +1,224 @@
+@mixin daysOff {
+	.calendar-table-body-row-cell-action {
+		&:not(:disabled, [aria-disabled=true]) {
+			&:active {
+				--components-calendar-table-body-row-cell-action-stripesColor: var(--palettes-product-900);
+			}
+		}
+	}
+}
+
+@mixin current {
+	.calendar-table-body-row-cell-action {
+		--components-calendar-table-body-row-cell-actionFontWeight: 600;
+		--components-calendar-table-body-row-cell-actionColor: var(--palettes-700, var(--palettes-product-700));
+	}
+}
+
+@mixin selected {
+	&::before {
+		--components-calendar-table-body-row-cellSelectedBeforeContent: '';
+	}
+
+	&.is-daysOff {
+		.calendar-table-body-row-cell-action {
+			--components-calendar-table-body-row-cell-action-stripesColor: var(--palettes-200, var(--palettes-product-200));
+
+			&:active {
+				--components-calendar-table-body-row-cell-action-stripesColor: var(--palettes-900, var(--palettes-product-900));
+			}
+		}
+	}
+}
+
+@mixin extremity {
+	.calendar-table-body-row-cell-action {
+		--components-calendar-table-body-row-cell-actionColor: var(--palettes-0, var(--palettes-product-0));
+		--components-calendar-table-body-row-cell-actionHighlight: var(--palettes-700, var(--palettes-product-700));
+
+		&:hover {
+			--components-calendar-table-body-row-cell-actionHighlight: var(--palettes-600, var(--palettes-product-600));
+			--components-calendar-table-body-row-cell-action-stripesColor: var(--palettes-700, var(--palettes-product-700));
+			--components-calendar-table-body-row-cell-actionOutlineWidth: 0;
+		}
+
+		&:active {
+			--components-calendar-table-body-row-cell-actionHighlight: var(--palettes-800, var(--palettes-product800));
+			--components-calendar-table-body-row-cell-action-stripesColor: var(--palettes-900, var(--palettes-product-900));
+		}
+
+		&:focus-visible {
+			--components-calendar-table-body-row-cell-actionOutlineOffset: 3px;
+		}
+	}
+
+	&.is-selected {
+		.calendar-table-body-row-cell-action {
+			// outline: 2px solid red;
+			--components-calendar-table-body-row-cell-actionColor: var(--palettes-0, var(--palettes-product-0));
+		}
+	}
+
+	&.is-daysOff {
+		.calendar-table-body-row-cell-action {
+			--components-calendar-table-body-row-cell-action-stripesColor: var(--palettes-800, var(--palettes-product-800));
+		}
+	}
+}
+
+@mixin start {
+	@include extremity;
+
+	&::before {
+		left: var(--pr-t-spacings-75);
+		--components-calendar-table-body-row-cellSelectedBeforeBorderRadius: var(--commons-borderRadius-L) 0 0 var(--commons-borderRadius-L);
+	}
+}
+
+@mixin end {
+	@include extremity;
+
+	&::before {
+		right: var(--pr-t-spacings-75);
+		--components-calendar-table-body-row-cellSelectedBeforeBorderRadius: 0 var(--commons-borderRadius-L) var(--commons-borderRadius-L) 0;
+	}
+}
+
+@mixin overflow {
+	.calendar-table-body-row-cell-action,
+	.calendar-table-body-row-cell-action {
+		--components-calendar-table-body-row-cell-actionColor: var(--palettes-neutral-600);
+	}
+}
+
+@mixin selectionInProgressBeforeWeek($parent, $child, $start, $action, $event) {
+	#{$child + $event} {
+		&:has(#{$action}) {
+			@include selected;
+
+			--components-calendar-table-body-row-cellSelectedBeforeBorderRadius: var(--commons-borderRadius-L) 0 0 var(--commons-borderRadius-L);
+		}
+	}
+
+	#{$child + $event} ~ #{$child} {
+		&:has(#{$action}) {
+			@include selected;
+		}
+	}
+
+	~ #{$parent} {
+		&:not(#{$parent}:has(#{$start}) ~ #{$parent}) {
+			#{$child} {
+				&:not(#{$start} ~ #{$child}) {
+					&:has(#{$action}) {
+						@include selected;
+					}
+				}
+			}
+		}
+	}
+	~ #{$parent}:has(#{$start}) {
+		#{$start} {
+			&::before {
+				--components-calendar-table-body-row-cellSelectedBeforeBorderRadius: 0 var(--commons-borderRadius-L) var(--commons-borderRadius-L) 0;
+			}
+		}
+	}
+}
+
+@mixin selectionInProgressAfterWeek($parent, $child, $start, $action, $event) {
+	~ #{$parent} {
+		&:not(&#{$event} ~ #{$parent}) {
+			#{$child} {
+				&:not(#{$child + $event} ~ #{$child}) {
+					&:has(#{$action}) {
+						@include selected;
+
+						#{$event} {
+							--components-calendar-table-body-row-cellSelectedBeforeBorderRadius: 0 var(--commons-borderRadius-L)
+								var(--commons-borderRadius-L) 0;
+						}
+					}
+				}
+			}
+		}
+	}
+
+	#{$start} ~ #{$child} {
+		&:has(#{$action}) {
+			@include selected;
+
+			#{$event} {
+				--components-calendar-table-body-row-cellSelectedBeforeBorderRadius: 0 var(--commons-borderRadius-L) var(--commons-borderRadius-L) 0;
+			}
+		}
+	}
+}
+
+@mixin selectionInProgressSameWeekBeforeDay($parent, $child, $start, $action, $event) {
+	#{$child + $event} ~ #{$child} {
+		&:not(#{$start} ~ #{$child}) {
+			@include selected;
+		}
+	}
+
+	#{$child + $event} {
+		@include selected;
+
+		--components-calendar-table-body-row-cellSelectedBeforeBorderRadius: var(--commons-borderRadius-L) 0 0 var(--commons-borderRadius-L);
+	}
+
+	#{$start} {
+		&::before {
+			--components-calendar-table-body-row-cellSelectedBeforeBorderRadius: 0 var(--commons-borderRadius-L) var(--commons-borderRadius-L) 0;
+		}
+	}
+}
+
+@mixin selectionInProgressSameWeekAfterDay($parent, $child, $start, $action, $event) {
+	#{$start} ~ #{$child} {
+		&:not(#{$child + $event} ~ #{$child}) {
+			&:has(#{$action}) {
+				@include selected;
+
+				#{$event} {
+					--components-calendar-table-body-row-cellSelectedBeforeBorderRadius: 0 var(--commons-borderRadius-L) var(--commons-borderRadius-L)
+						0;
+				}
+			}
+		}
+	}
+}
+
+@mixin selectionInProgress($event) {
+	$parent: '.calendar-table-body-row';
+	$child: '.calendar-table-body-row-cell';
+	$start: #{$child + '.is-start'};
+	$action: '.calendar-table-body-row-cell-action:not(:disabled, [aria-disabled=true])';
+
+	#{$parent} {
+		&:has(#{$start}) {
+			&:has(~ #{$parent} #{$child + $event}) {
+				@include selectionInProgressAfterWeek($parent, $child, $start, $action, $event);
+			}
+		}
+	}
+
+	#{$parent} {
+		&:has(#{$child + $event}) {
+			&:has(~ #{$parent} #{$start}) {
+				@include selectionInProgressBeforeWeek($parent, $child, $start, $action, $event);
+			}
+		}
+	}
+
+	#{$parent} {
+		&:has(#{$start} ~ #{$child + $event}) {
+			@include selectionInProgressSameWeekAfterDay($parent, $child, $start, $action, $event);
+		}
+
+		&:has(#{$child + $event} ~ #{$start}) {
+			@include selectionInProgressSameWeekBeforeDay($parent, $child, $start, $action, $event);
+		}
+	}
+}
