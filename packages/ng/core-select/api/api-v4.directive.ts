@@ -1,8 +1,9 @@
 import { HttpClient } from '@angular/common/http';
-import { Directive, forwardRef, inject, Input } from '@angular/core';
+import { computed, Directive, forwardRef, inject, input, model } from '@angular/core';
+import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { ILuApiItem } from '@lucca-front/ng/api';
-import { CORE_SELECT_API_TOTAL_COUNT_PROVIDER, CoreSelectApiTotalCountProvider } from '@lucca-front/ng/core-select';
-import { BehaviorSubject, combineLatest, debounceTime, map, Observable, ReplaySubject, switchMap, take } from 'rxjs';
+import { CORE_SELECT_API_TOTAL_COUNT_PROVIDER, CoreSelectApiTotalCountProvider, sanitizeClueFilter } from '@lucca-front/ng/core-select';
+import { debounceTime, map, Observable, switchMap } from 'rxjs';
 import { ALuCoreSelectApiDirective } from './api.directive';
 
 @Directive({
@@ -18,41 +19,34 @@ import { ALuCoreSelectApiDirective } from './api.directive';
 	],
 })
 export class LuCoreSelectApiV4Directive<T extends ILuApiItem> extends ALuCoreSelectApiDirective<T> implements CoreSelectApiTotalCountProvider {
-	@Input()
-	public set apiV4(value: string) {
-		this.url$.next(value);
-	}
-
-	@Input()
-	public set sort(value: string | null) {
-		this.sort$.next(value);
-	}
-
-	@Input()
-	public set filters(value: Record<string, string | number | boolean>) {
-		this.filters$.next(value);
-	}
-
-	protected url$ = new ReplaySubject<string>(1);
-	protected sort$ = new BehaviorSubject<string | null>('+name');
-	protected filters$ = new BehaviorSubject<Record<string, string | number | boolean>>({});
+	apiV4 = model.required<string>();
+	sort = input<string | null>('+name');
+	filters = input<Record<string, string | number | boolean>>({});
+	searchDelimiter = input<string>(' ');
 
 	protected httpClient = inject(HttpClient);
 
-	protected override params$: Observable<Record<string, string | number | boolean>> = combineLatest([this.filters$, this.sort$, this.clue$]).pipe(
-		map(([filters, sort, clue]) => ({
-			...filters,
-			...(sort ? { sort } : {}),
-			...(clue ? { search: clue } : {}),
-		})),
+	protected clue = toSignal(this.clue$);
+
+	protected override params$: Observable<Record<string, string | number | boolean>> = toObservable(
+		computed(() => {
+			const sort = this.sort();
+			const clue = this.clue();
+			const searchDelimiter = this.searchDelimiter();
+			return {
+				...this.filters(),
+				...(sort ? { sort } : {}),
+				...(clue ? { search: sanitizeClueFilter(clue, searchDelimiter) } : {}),
+			};
+		}),
 	);
 
-	public totalCount$ = combineLatest([this.url$, this.filters$]).pipe(
+	public totalCount$ = toObservable(computed(() => ({ url: this.apiV4(), filters: this.filters() }))).pipe(
 		debounceTime(250),
-		switchMap(([url, params]) =>
+		switchMap(({ url, filters }) =>
 			this.httpClient.get<{ count: number }>(url, {
 				params: {
-					...params,
+					...filters,
 					['fields.root']: 'count',
 				},
 			}),
@@ -61,19 +55,15 @@ export class LuCoreSelectApiV4Directive<T extends ILuApiItem> extends ALuCoreSel
 	);
 
 	protected override getOptions(params: Record<string, string | number | boolean>, page: number): Observable<T[]> {
-		return this.url$.pipe(
-			take(1),
-			switchMap((url) =>
-				this.httpClient.get<T[] | { items: T[] }>(url, {
-					params: {
-						...params,
-						page: page + 1,
-						limit: this.pageSize,
-					},
-				}),
-			),
-			map((res) => (Array.isArray(res) ? res : res?.items) ?? []),
-		);
+		return this.httpClient
+			.get<T[] | { items: T[] }>(this.apiV4(), {
+				params: {
+					...params,
+					page: page + 1,
+					limit: this.pageSize,
+				},
+			})
+			.pipe(map((res) => (Array.isArray(res) ? res : res?.items) ?? []));
 	}
 
 	protected override optionComparer = (a: T, b: T) => a.id === b.id;
