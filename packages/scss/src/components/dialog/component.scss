@@ -42,6 +42,7 @@
 						'footer';
 					grid-template-rows: auto 1fr auto;
 					flex-grow: 1;
+					min-height: 0;
 
 					&:has(.dialog-content:focus-visible) {
 						&::after {
@@ -62,6 +63,7 @@
 					'footer';
 				grid-template-rows: auto 1fr auto;
 				flex-grow: 1;
+				min-height: 0;
 
 				&:has(.dialog-content:focus-visible) {
 					&::after {
@@ -83,7 +85,7 @@
 				align-self: start;
 				justify-self: end;
 				grid-area: close;
-				display: var(--components-dialog-headerButtonDisplay);
+				display: var(--components-dialog-insideHeaderButtonDisplay);
 			}
 		}
 
