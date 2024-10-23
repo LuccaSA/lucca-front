@@ -15,7 +15,11 @@
 	max-width: var(--grid-max-width, var(--grid-maxWidth));
 
 	@at-root ($atRoot) {
-		@include container.auto('grid');
+		*:has(> .grid:not(.rwd-disableAutoContainer) > .grid-column[style*='AtContainer']),
+		*:has(> .grid:not(.rwd-disableAutoContainer)[class*='AtContainer']) {
+			container-type: inline-size;
+			container-name: grid;
+		}
 
 		.grid-column {
 			align-self: var(--grid-align, var(--grid-column-align));
