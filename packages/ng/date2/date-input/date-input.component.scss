@@ -11,19 +11,19 @@ lu-date-input {
 	display: block;
 	max-width: var(--components-dateInput-maxWidth);
 
-	&.mod-range {
-		&.mod-day {
-			--components-dateInput-maxWidth: var(--components-dateInput-maxWidthDay);
-		}
-
-		&.mod-month {
-			--components-dateInput-maxWidth: var(--components-dateInput-maxWidthMonth);
-		}
-
-		&.mod-year {
-			--components-dateInput-maxWidth: var(--components-dateInput-maxWidthYear);
-		}
+	//&.mod-range {
+	&.mod-day {
+		--components-dateInput-maxWidth: var(--components-dateInput-maxWidthDay);
 	}
+
+	&.mod-month {
+		--components-dateInput-maxWidth: var(--components-dateInput-maxWidthMonth);
+	}
+
+	&.mod-year {
+		--components-dateInput-maxWidth: var(--components-dateInput-maxWidthYear);
+	}
+	//}
 }
 
 .calendarActionsOptionnal {
