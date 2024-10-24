@@ -29,7 +29,7 @@
 
 	@at-root ($atRoot) {
 		.form-header {
-			margin-bottom: var(--spacings-M);
+			margin-bottom: var(--pr-t-spacings-300);
 		}
 
 		.form-header-title {
@@ -56,6 +56,10 @@
 			.formLabel {
 				@include formLabel.label;
 			}
+		}
+
+		.form-divider {
+			margin-block: var(--pr-t-spacings-300);
 		}
 
 		// deprecated
