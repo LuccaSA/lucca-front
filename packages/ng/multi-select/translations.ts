@@ -15,7 +15,7 @@
 	de: {
 		placeholder: 'Wählen Sie eine Option',
 		search: 'Suchen',
-		clear: 'Auswahl löschen',
+		clear: 'Auswahl leeren',
 		clearSearch: 'Suche leeren',
 		emptyResults: 'Keine Ergebnisse für Ihre Suche',
 		emptySelection: 'Wählen Sie zuerst die Items in der Liste links aus.',
@@ -80,7 +80,7 @@
 	es: {
 		placeholder: 'Seleccione una opción',
 		search: 'Buscar',
-		clear: 'Borrar selección',
+		clear: 'Vaciar la selección',
 		clearSearch: 'Vaciar la búsqueda',
 		emptyResults: 'No hay resultados para su búsqueda',
 		emptySelection: 'Seleccione los elementos de la lista de la izquierda para empezar',

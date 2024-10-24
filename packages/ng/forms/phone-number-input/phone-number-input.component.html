@@ -11,6 +11,7 @@
 			(clueChange)="query.set($event)"
 			#selectRef
 			class="phoneNumber-fieldset-select"
+			[autocomplete]="autocomplete ? autocomplete === 'off' ? 'off' : 'tel-country-code'  : null"
 		>
 			<ng-container *luOption="let prefixOption; select: selectRef"
 				><img class="phoneNumber-option-flag" src="https://cdn.lucca.fr/assets/misc/flags/{{prefixOption.country}}.svg" alt="" />{{
@@ -37,6 +38,7 @@
 				luInput
 				luInputStandalone
 				class="textField-input-value"
+				[attr.autocomplete]="autocomplete ? autocomplete === 'off' ? 'off' : 'tel-national'  : null"
 			/>
 		</div>
 	</div>

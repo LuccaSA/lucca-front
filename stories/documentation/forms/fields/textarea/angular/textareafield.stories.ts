@@ -2,7 +2,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { TextareaInputComponent } from '@lucca-front/ng/forms';
-import { Meta, StoryObj, moduleMetadata } from '@storybook/angular';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { cleanupTemplate, generateInputs } from 'stories/helpers/stories';
 
 export default {
@@ -35,15 +35,24 @@ export default {
 		counter: {
 			description: '[v17.4]',
 		},
+		autoResize: {
+			type: 'boolean',
+			description: '[v18.3]',
+		},
+		autoResizeScrollIntoView: {
+			type: 'boolean',
+			if: { arg: 'autoResize', truthy: true },
+			description: '[v18.3]',
+		},
 		hiddenLabel: {
-			description: 'Masque le label en le conservant dans le DOM pour les lecteurs d\'écrans',
+			description: "Masque le label en le conservant dans le DOM pour les lecteurs d'écrans",
 		},
 	},
 } as Meta;
 
 export const Basic: StoryObj<TextareaInputComponent & { disabled: boolean } & FormFieldComponent> = {
 	render: (args, { argTypes }) => {
-		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, counter, ...inputArgs } = args;
+		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, counter, autoResize, autoResizeScrollIntoView, ...inputArgs } = args;
 		return {
 			template: cleanupTemplate(`<lu-form-field ${generateInputs(
 				{
@@ -57,15 +66,12 @@ export const Basic: StoryObj<TextareaInputComponent & { disabled: boolean } & Fo
 				},
 				argTypes,
 			)}>
-
-	<lu-textarea-input
+	<lu-textarea-input autoResizeScrollIntoView="${autoResizeScrollIntoView}" autoResize="${autoResize}"
 	${generateInputs(inputArgs, argTypes)}
 		[(ngModel)]="example">
 	</lu-textarea-input>
-
 </lu-form-field>
-
-{{example}}`),
+`),
 			moduleMetadata: {
 				imports: [TextareaInputComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule],
 			},
@@ -81,6 +87,8 @@ export const Basic: StoryObj<TextareaInputComponent & { disabled: boolean } & Fo
 		placeholder: 'Placeholder',
 		tooltip: 'Je suis un message d’aide',
 		counter: 0,
+		autoResize: false,
+		autoResizeScrollIntoView: false,
 		rows: 3,
 	},
 };

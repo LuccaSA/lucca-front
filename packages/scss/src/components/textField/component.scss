@@ -56,6 +56,7 @@
 			}
 		}
 
+		.textField-input-valueClone,
 		.textField-input-value {
 			border: 0;
 			outline: 0;
@@ -66,6 +67,12 @@
 				var(--component-textField-padding);
 			background-color: transparent;
 			color: var(--component-textField-color);
+			border-radius: var(--commons-borderRadius-M);
+			max-height: var(--component-textField-maxHeight);
+
+			@supports not (height: 1dvh) {
+				--component-textField-maxHeight: var(--component-textField-maxHeightFallback);
+			}
 
 			&::placeholder {
 				color: var(--component-textField-placeholder);

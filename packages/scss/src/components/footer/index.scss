@@ -9,6 +9,11 @@
 		@include sticky;
 	}
 
+	&.mod-narrow {
+		@include narrow;
+	}
+
+	// default mod
 	&:not([class*='mod-narrow']),
 	&.mod-narrowAtMediaMaxXXS {
 		@include media.max('XXS') {

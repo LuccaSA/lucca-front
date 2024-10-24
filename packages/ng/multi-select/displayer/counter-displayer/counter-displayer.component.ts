@@ -1,39 +1,23 @@
 import { AsyncPipe, NgFor, NgIf, NgPlural, NgPluralCase } from '@angular/common';
-import { ChangeDetectionStrategy, Component, DestroyRef, ElementRef, inject, Input, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, ElementRef, Input, OnInit, ViewChild, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
-import { ILuOptionContext, LU_OPTION_CONTEXT, ɵLuOptionOutletDirective } from '@lucca-front/ng/core-select';
-import { InputDirective } from '@lucca-front/ng/form-field';
+import { ɵLuOptionOutletDirective } from '@lucca-front/ng/core-select';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
-import { switchMap } from 'rxjs/operators';
-import { BehaviorSubject, of } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { LuMultiSelectInputComponent } from '../../input';
+import { LuMultiSelectDisplayerInputDirective } from '../displayer-input.directive';
 
 @Component({
 	selector: 'lu-multi-select-counter-displayer',
 	standalone: true,
-	imports: [AsyncPipe, LuTooltipModule, NgIf, NgFor, NgPlural, NgPluralCase, ɵLuOptionOutletDirective, FormsModule, InputDirective],
+	imports: [AsyncPipe, LuTooltipModule, NgIf, NgFor, NgPlural, NgPluralCase, ɵLuOptionOutletDirective, FormsModule, LuMultiSelectDisplayerInputDirective],
 	template: `
 		<div class="multipleSelect-displayer mod-filter" [class.is-filled]="(selectedOptions$ | async)?.length > 0">
-			<input
-				class="multipleSelect-displayer-search"
-				type="text"
-				[attr.aria-expanded]="select.isPanelOpen"
-				[attr.aria-activedescendant]="select.activeDescendant$ | async"
-				[attr.aria-controls]="ariaControls"
-				[disabled]="select.disabled$ | async"
-				[readonly]="!select.searchable"
-				#inputElement
-				ngModel
-				(ngModelChange)="select.clueChanged($event)"
-				[placeholder]="placeholder$ | async"
-				role="combobox"
-				aria-haspopup="listbox"
-				luInput
-			/>
+			<input type="text" #inputElement luMultiSelectDisplayerInput />
 			<div class="multipleSelect-displayer-filter" *ngIf="selectedOptions$ | async as selectedOptions">
 				<div class="multipleSelect-displayer-chip chip mod-unkillable" *ngIf="selectedOptions?.length === 1">
-					<ng-container *luOptionOutlet="select.valueTpl || select.optionTpl; value: selectedOptions[0]"></ng-container>
+					<ng-container *luOptionOutlet="select.displayerTpl(); value: selectedOptions[0]"></ng-container>
 				</div>
 				<ng-container *ngIf="selectedOptions?.length > 1"
 					><span class="multipleSelect-displayer-numericBadge numericBadge">{{ selectedOptions?.length }}</span
@@ -57,27 +41,12 @@ export class LuMultiSelectCounterDisplayerComponent<T> implements OnInit {
 		return this.select.value || [];
 	}
 
-	get ariaControls() {
-		return this.select.ariaControls;
-	}
-
-	context = inject<ILuOptionContext<T[]>>(LU_OPTION_CONTEXT);
-
 	selectedOptions$ = new BehaviorSubject<T[]>([]);
 
 	@Input()
 	set selected(options: T[]) {
 		this.selectedOptions$.next(options);
 	}
-
-	placeholder$ = this.context.option$.pipe(
-		switchMap((options) => {
-			if ((options || []).length > 0) {
-				return of('');
-			}
-			return this.select.placeholder$;
-		}),
-	);
 
 	@Input({ required: true })
 	label: string;

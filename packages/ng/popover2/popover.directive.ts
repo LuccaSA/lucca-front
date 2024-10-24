@@ -263,7 +263,7 @@ export class PopoverDirective implements OnDestroy {
 	}
 
 	@HostListener('keydown.Tab', ['$event'])
-	focusBackToContent(event: KeyboardEvent): void {
+	focusBackToContent(event: Event): void {
 		if (this.opened()) {
 			event.preventDefault();
 			this.#componentRef.grabFocus();

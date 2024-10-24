@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, forwardRef, inject, Input, numberAttribute, OnDestroy, OnInit, TemplateRef, Type, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, forwardRef, inject, Input, model, numberAttribute, OnDestroy, OnInit, TemplateRef, Type, ViewEncapsulation } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { getIntl } from '@lucca-front/ng/core';
 import { ALuSelectInputComponent, LuOptionContext, provideLuSelectLabelsAndIds, provideLuSelectOverlayContainer, ɵLuOptionOutletDirective } from '@lucca-front/ng/core-select';
@@ -40,8 +40,7 @@ import { LuMultiSelectPanelRef } from './panel.model';
 export class LuMultiSelectInputComponent<T> extends ALuSelectInputComponent<T, T[]> implements ControlValueAccessor, OnDestroy, OnInit {
 	intl = getIntl(LU_MULTI_SELECT_TRANSLATIONS);
 
-	@Input()
-	valuesTpl?: TemplateRef<LuOptionContext<T[]>> | Type<unknown> = LuMultiSelectDefaultDisplayerComponent;
+	valuesTpl = model<TemplateRef<LuOptionContext<T[]>> | Type<unknown>>(LuMultiSelectDefaultDisplayerComponent);
 
 	@Input({ transform: numberAttribute })
 	maxValuesShown = 500;
@@ -97,11 +96,11 @@ export class LuMultiSelectInputComponent<T> extends ALuSelectInputComponent<T, T
 		super.bindInputToPanelRefEvents();
 	}
 
-	protected override get hasValue(): boolean {
-		return this.value && this.value.length > 0;
+	hasValue(): boolean {
+		return !!this.value?.length;
 	}
 
-	override clearValue(event: MouseEvent): void {
+	override clearValue(event: Event): void {
 		event.stopPropagation();
 		this.onChange?.([]);
 		this.value = [];

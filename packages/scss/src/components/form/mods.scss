@@ -17,6 +17,16 @@
 	max-width: var(--components-form-maxWidth);
 }
 
+@mixin inline {
+	.form-field {
+		display: inline-grid;
+
+		&:not(:last-of-type) {
+			margin-inline-end: var(--pr-t-spacings-200);
+		}
+	}
+}
+
 @mixin S {
 	.formLabel {
 		@include formLabel.S;
@@ -91,6 +101,7 @@
 
 @mixin withArrow {
 	padding-bottom: var(--pr-t-spacings-200);
+	margin-block: 0;
 
 	.form-field-arrow {
 		@include box.arrow;

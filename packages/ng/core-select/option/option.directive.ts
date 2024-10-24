@@ -8,7 +8,7 @@ import type { LuOptionContext } from '../select.model';
 })
 export class LuOptionDirective<TOption, TValue> {
 	@Input('luOptionSelect') set select(select: ALuSelectInputComponent<TOption, TValue>) {
-		select.optionTpl = this.templateRef;
+		select.optionTpl.set(this.templateRef);
 	}
 
 	public constructor(private templateRef: TemplateRef<LuOptionContext<TOption>>) {}
