@@ -28,15 +28,18 @@ export default {
 		},
 		hideToday: {
 			control: 'boolean',
+			description: 'Masque la mise en valeur du jour en cours.',
 		},
 		hasTodayButton: {
 			control: 'boolean',
 		},
 		enableOverflow: {
 			control: 'boolean',
+			description: 'Autorise la sélection des jours du mois précédent ou suivant sur la vue du mois en cours.',
 		},
 		showOverflow: {
 			control: 'boolean',
+			description: 'Affiche la sélection des jours du mois précédent ou suivant sur la vue du mois en cours.',
 		},
 		clearable: {
 			control: 'boolean',

@@ -1,19 +1,17 @@
 import { CommentBlockComponent, CommentComponent } from '@lucca-front/ng/comment';
 import { LuUserPictureModule } from '@lucca-front/ng/user';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { CommentChatComponent } from 'packages/ng/comment/comment-chat/comment-chat.component';
-import { generateInputs } from '../../../helpers/stories';
+import { generateInputs } from '../../../../helpers/stories';
 
 export default {
 	title: 'Documentation/Texts/Comment/Angular/Basic',
 	decorators: [
 		moduleMetadata({
-			imports: [CommentComponent, CommentBlockComponent, LuUserPictureModule, CommentChatComponent],
+			imports: [CommentComponent, CommentBlockComponent, LuUserPictureModule],
 		}),
 	],
 	render: (args, { argTypes }) => {
 		const avatar = args['noAvatar'] ? '' : '[avatar]="avatarTpl" ';
-		const avatar2 = args['noAvatar'] ? '' : '[avatar]="avatarTpl2" ';
 
 		const { firstName, lastName, compact, small, content } = args;
 
@@ -24,40 +22,11 @@ export default {
 </p>
 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque numquam itaque at facilis iusto inventore.</p>`;
 
-		if (args['chat']) {
-			return {
-				props: {
-					date: new Date(),
-				},
-				template: `<lu-comment-chat>
-	<lu-comment-block ${avatar} ${generateInputs(
-		{
-			compact,
-			small,
-		},
-		argTypes,
-	)} authorName="${firstName} ${lastName}">
-		<ng-template #avatarTpl>
-			<lu-user-picture [user]="{firstName: 'Marie', lastName: 'Bragoulet'}"></lu-user-picture>
-		</ng-template>
-		<lu-comment [date]="date" content="${content}" />
-		<lu-comment [date]="date" content="Lorem ipsum dolor sit amet." />
-		<lu-comment [date]="date" content="${richContent}" />
-	</lu-comment-block>
-	<lu-comment-block [chatAnswer]="true" ${avatar2} ${generateInputs({ compact, small }, argTypes)} authorName="Chloé Alibert">
-		<ng-template #avatarTpl2>
-			<lu-user-picture [user]="{firstName: 'Chloé', lastName: 'Alibert'}"></lu-user-picture>
-		</ng-template>
-		<lu-comment [date]="date" content="${content}" />
-	</lu-comment-block>
-</lu-comment-chat>`,
-			};
-		} else {
-			return {
-				props: {
-					date: new Date(),
-				},
-				template: `
+		return {
+			props: {
+				date: new Date(),
+			},
+			template: `
 			<lu-comment-block ${avatar} ${generateInputs(
 				{
 					compact,
@@ -72,8 +41,12 @@ export default {
 	<lu-comment [date]="date" content="Lorem ipsum dolor sit amet." />
 	<lu-comment [date]="date" content="${richContent}" />
 </lu-comment-block>`,
-			};
-		}
+		};
+	},
+	argTypes: {
+		compact: {
+			description: "N'affiche l'auteur que sur le premier commentaire de <code><lu-comment-block></code>",
+		},
 	},
 } as Meta;
 
@@ -86,6 +59,5 @@ export const Basic: StoryObj = {
 		date: new Date(),
 		firstName: 'Marie',
 		lastName: 'Bragoulet',
-		chat: false,
 	},
 };
