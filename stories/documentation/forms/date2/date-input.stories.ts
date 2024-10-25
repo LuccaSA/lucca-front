@@ -33,11 +33,11 @@ export default {
 		hasTodayButton: {
 			control: 'boolean',
 		},
-		enableOverflow: {
+		disableOverflow: {
 			control: 'boolean',
 			description: 'Autorise la sélection des jours du mois précédent ou suivant sur la vue du mois en cours.',
 		},
-		showOverflow: {
+		hideOverflow: {
 			control: 'boolean',
 			description: 'Affiche la sélection des jours du mois précédent ou suivant sur la vue du mois en cours.',
 		},
@@ -65,8 +65,8 @@ export default {
 
 export const Basic: StoryObj<DateInputComponent> = {
 	args: {
-		enableOverflow: false,
-		showOverflow: false,
+		disableOverflow: false,
+		hideOverflow: false,
 		hideToday: false,
 		hasTodayButton: false,
 		hideWeekend: false,
