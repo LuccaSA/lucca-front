@@ -75,7 +75,7 @@ function getTemplate(): string {
 			</div>
 		</div>
 	</fieldset>
-	<hr class="divider form-divider" />
+	<hr class="divider" />
 	<fieldset class="fieldset" aria-labelledby="fieldsetTitleContent2">
 		<legend class="fieldset-title">
 			<span class="fieldset-title-content" id="fieldsetTitleContent2">
