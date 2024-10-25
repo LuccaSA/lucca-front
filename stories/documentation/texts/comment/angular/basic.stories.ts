@@ -16,18 +16,17 @@ export default {
 		const { firstName, lastName, compact, small, content } = args;
 
 		const richContent = `<h3>Lorem, ipsum.</h3>
-<p>
-	Lorem ipsum, dolor sit amet consectetur adipisicing elit. <strong>Facilis voluptates ex</strong> qui iste libero suscipit cum
-	earum harum animi praesentium, quidem non incidunt vel illum sunt nihil reprehenderit a itaque.
-</p>
-<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque numquam itaque at facilis iusto inventore.</p>`;
+	<p>
+		Lorem ipsum, dolor sit amet consectetur adipisicing elit. <strong>Facilis voluptates ex</strong> qui iste libero suscipit cum
+		earum harum animi praesentium, quidem non incidunt vel illum sunt nihil reprehenderit a itaque.
+	</p>
+	<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque numquam itaque at facilis iusto inventore.</p>`;
 
 		return {
 			props: {
 				date: new Date(),
 			},
-			template: `
-			<lu-comment-block ${avatar} ${generateInputs(
+			template: `<lu-comment-block ${avatar} ${generateInputs(
 				{
 					compact,
 					small,
