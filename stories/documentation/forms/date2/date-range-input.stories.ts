@@ -6,6 +6,7 @@ import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/an
 import { generateInputs } from '../../../helpers/stories';
 import { StoryModelDisplayComponent } from '../../../helpers/story-model-display.component';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
+import { addWeeks, startOfDay } from 'date-fns';
 
 export default {
 	title: 'Documentation/Forms/Date2/DateRangeInput',
@@ -51,15 +52,16 @@ export default {
 		const { min, max, selected, ...flags } = args;
 		return {
 			props: {
+				selected: { start: startOfDay(new Date()), end: startOfDay(addWeeks(new Date(), 2)) },
 				min: min ? new Date(min) : null,
 				max: max ? new Date(max) : null,
 			},
 			template: `
 			<lu-form-field label="Date range example" inlineMessage="Vacances !">
-						<lu-date-range-input ngModel [min]="min" [max]="max" ${generateInputs(flags, argTypes)}></lu-date-range-input>
+						<lu-date-range-input [(ngModel)]="selected" [min]="min" [max]="max" ${generateInputs(flags, argTypes)}></lu-date-range-input>
 			</lu-form-field>
 
-			<pr-story-model-display>{{selected}}</pr-story-model-display>
+			<pr-story-model-display>{{selected | json}}</pr-story-model-display>
 			`,
 		};
 	},
@@ -67,8 +69,6 @@ export default {
 
 export const Basic: StoryObj<DateRangeInputComponent> = {
 	args: {
-		enableOverflow: false,
-		showOverflow: false,
 		hideToday: false,
 		hasTodayButton: false,
 		hideWeekend: false,

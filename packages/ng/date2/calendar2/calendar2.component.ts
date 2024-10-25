@@ -89,6 +89,8 @@ export class Calendar2Component implements OnInit {
 
 	hideWeekend = input<boolean, boolean>(false, { transform: booleanAttribute });
 
+	disableModeChange = input<boolean, boolean>(false, { transform: booleanAttribute });
+
 	// Date used to init the component and as internal focus model
 	date = model.required<Date>();
 

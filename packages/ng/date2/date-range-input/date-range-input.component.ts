@@ -6,14 +6,13 @@ import { getIntl, LuClass, ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { FORM_FIELD_INSTANCE, InputDirective } from '@lucca-front/ng/form-field';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { PopoverDirective } from '@lucca-front/ng/popover2';
-import { addMonths, addYears, parse, startOfDay, startOfMonth } from 'date-fns';
+import { addMonths, addYears, isAfter, startOfMonth } from 'date-fns';
 import { CalendarMode } from '../calendar2/calendar-mode';
 import { Calendar2Component } from '../calendar2/calendar2.component';
 import { CellStatus } from '../calendar2/cell-status';
 import { DateRange } from '../calendar2/date-range';
 import { getDateFormat } from '../date-format';
 import { LU_DATE2_TRANSLATIONS } from '../date2.translate';
-import { comparePeriods, startOfPeriod } from '../utils';
 
 let nextId = 0;
 
@@ -59,7 +58,7 @@ export class DateRangeInputComponent implements ControlValueAccessor, Validator 
 	idSuffix = nextId++;
 
 	// CVA stuff
-	#onChange?: (value: Date) => void;
+	#onChange?: (value: DateRange) => void;
 	onTouched?: () => void;
 	disabled = false;
 
@@ -68,8 +67,8 @@ export class DateRangeInputComponent implements ControlValueAccessor, Validator 
 
 	ranges = input<DateRange[]>([]);
 
-	enableOverflow = input<boolean>(true);
-	showOverflow = input<boolean>(true);
+	selectedRange = signal<DateRange | null>(null);
+
 	hideToday = input<boolean, boolean>(false, { transform: booleanAttribute });
 	hasTodayButton = input<boolean, boolean>(false, { transform: booleanAttribute });
 	clearable = input<boolean, boolean>(false, { transform: booleanAttribute });
@@ -91,42 +90,42 @@ export class DateRangeInputComponent implements ControlValueAccessor, Validator 
 
 	protected currentDate = signal(startOfMonth(new Date()));
 
+	protected currentRightDate = computed(() => addMonths(this.currentDate(), 1));
+
 	protected tabbableDate = signal<Date | null>(null);
 
-	selectedDate = signal<Date | null>(null);
-
 	calendar = viewChild(Calendar2Component);
-
-	displayValue = computed(() => {
-		if (this.selectedDate() && this.isValidDate(this.selectedDate())) {
-			let formatter: Intl.DateTimeFormat;
-			switch (this.mode()) {
-				case 'day':
-					formatter = this.#intlDateTimeFormat;
-					break;
-				case 'month':
-					formatter = this.#intlDateTimeFormatMonth;
-					break;
-				case 'year':
-					formatter = this.#intlDateTimeFormatYear;
-					break;
-			}
-			return formatter.format(this.selectedDate());
-		}
-		return this.userTextInput();
-	});
-
-	userTextInput = signal<string>('');
 
 	combinedGetCellInfo = (date: Date, mode: CalendarMode): CellStatus => {
 		const infoFromInput = this.getCellInfo()?.(date, mode);
 		return {
 			classes: [...(infoFromInput?.classes || [])],
 			disabled: infoFromInput?.disabled || !this.isInMinMax(date, mode),
-			selected: this.selectedDate() && this.calendarMode() === mode && comparePeriods(mode, date, this.selectedDate()),
+			selected: false,
 			label: infoFromInput?.label,
 		};
 	};
+
+	calendarRanges = computed(() => {
+		if (this.selectedRange()) {
+			return [this.selectedRange(), ...this.ranges()];
+		}
+		return this.ranges();
+	});
+
+	startLabel = computed(() => {
+		if (this.selectedRange()?.start) {
+			return this.#intlDateTimeFormat.format(this.selectedRange()?.start);
+		}
+		return '';
+	});
+
+	endLabel = computed(() => {
+		if (this.selectedRange()?.end) {
+			return this.#intlDateTimeFormat.format(this.selectedRange()?.end);
+		}
+		return '';
+	});
 
 	previousButton = viewChild<ElementRef<Element>>('previousButtonRef');
 
@@ -140,24 +139,24 @@ export class DateRangeInputComponent implements ControlValueAccessor, Validator 
 		if (this.#formFieldRef) {
 			this.#formFieldRef.layout = 'fieldset';
 		}
-		effect(
-			() => {
-				const inputValue = this.userTextInput();
-				if (inputValue.length > 0) {
-					const parsed = parse(inputValue, this.#dateFormat, startOfDay(new Date()));
-					if (parsed.getFullYear() > 999) {
-						this.selectedDate.set(startOfDay(parsed));
-						this.currentDate.set(startOfDay(parsed));
-					} else {
-						this.selectedDate.set(parsed);
-					}
-				}
-			},
-			{ allowSignalWrites: true },
-		);
+		// effect(
+		// 	() => {
+		// 		const inputValue = this.userTextInput();
+		// 		if (inputValue.length > 0) {
+		// 			const parsed = parse(inputValue, this.#dateFormat, startOfDay(new Date()));
+		// 			if (parsed.getFullYear() > 999) {
+		// 				this.selectedDate.set(startOfDay(parsed));
+		// 				this.currentDate.set(startOfDay(parsed));
+		// 			} else {
+		// 				this.selectedDate.set(parsed);
+		// 			}
+		// 		}
+		// 	},
+		// 	{ allowSignalWrites: true },
+		// );
 
 		effect(() => {
-			this.#onChange?.(this.selectedDate());
+			this.#onChange?.(this.selectedRange());
 		});
 
 		effect(() => {
@@ -169,9 +168,11 @@ export class DateRangeInputComponent implements ControlValueAccessor, Validator 
 		});
 
 		ɵeffectWithDeps([this.calendarMode, this.tabbableDate], (calendarMode, tabbableDate) => {
-			if (tabbableDate && !comparePeriods(calendarMode, tabbableDate, this.currentDate())) {
-				this.currentDate.set(startOfPeriod(calendarMode, tabbableDate));
-			}
+			// TODO handle tabbable date change from both calendars
+			// if (tabbableDate && !comparePeriods(calendarMode, tabbableDate, this.currentDate())) {
+			// 	this.currentDate.set(startOfPeriod(calendarMode, tabbableDate));
+			// 	console.log('SET CURRENT DATE', startOfPeriod(calendarMode, tabbableDate));
+			// }
 			if (!this.isNavigationButtonFocused && !this.inputFocused()) {
 				this.calendar()?.blurTabbableDate();
 				setTimeout(() => {
@@ -189,8 +190,30 @@ export class DateRangeInputComponent implements ControlValueAccessor, Validator 
 		});
 	}
 
-	validate(control: AbstractControl<Date, Date>): ValidationErrors {
-		return this.isValidDate(control.value) ? null : { date: true };
+	dateClicked(date: Date, popoverRef: PopoverDirective): void {
+		if (this.selectedRange() === null) {
+			this.selectedRange.set({
+				start: date,
+			});
+		} else {
+			if (isAfter(date, this.selectedRange().start)) {
+				this.selectedRange.set({
+					...this.selectedRange(),
+					end: date,
+				});
+				popoverRef.close();
+			} else {
+				this.selectedRange.set({
+					start: date,
+					end: this.selectedRange().start,
+				});
+				popoverRef.close();
+			}
+		}
+	}
+
+	validate(control: AbstractControl<DateRange, DateRange>): ValidationErrors {
+		return this.isValidDate(control.value?.start) ? null : { date: true };
 	}
 
 	isValidDate(date: Date): boolean {
@@ -228,14 +251,14 @@ export class DateRangeInputComponent implements ControlValueAccessor, Validator 
 		return result;
 	}
 
-	writeValue(date: Date): void {
-		if (date) {
-			this.selectedDate.set(startOfDay(date));
-			this.currentDate.set(startOfDay(date));
+	writeValue(value: DateRange): void {
+		if (value) {
+			this.selectedRange.set(value);
+			// this.currentDate.set(startOfDay(date));
 		}
 	}
 
-	registerOnChange(fn: (value: Date) => void): void {
+	registerOnChange(fn: (value: DateRange) => void): void {
 		this.#onChange = fn;
 	}
 
@@ -255,9 +278,10 @@ export class DateRangeInputComponent implements ControlValueAccessor, Validator 
 		this.move(1);
 	}
 
-	clear(input: HTMLInputElement) {
-		input.value = '';
-		this.selectedDate.set(null);
+	clear(start: HTMLInputElement, end: HTMLInputElement) {
+		start.value = '';
+		end.value = '';
+		this.selectedRange.set(null);
 		this.onTouched?.();
 	}
 

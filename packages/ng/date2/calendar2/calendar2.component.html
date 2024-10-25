@@ -1,8 +1,12 @@
 <div class="calendar">
 	@switch (displayMode()) { @case ('day') {
 	<div class="calendar-name" id="calendar-name" aria-live="polite">
-		<button type="button" class="calendar-name-button" (click)="displayMode.set('month')">{{ currentMonthLabel() }}</button>&ngsp;
-		<button type="button" class="calendar-name-button" (click)="displayMode.set('year')">{{ currentYearLabel() }}</button>
+		<button type="button" class="calendar-name-button" (click)="disableModeChange()?null:displayMode.set('month')">
+			{{ currentMonthLabel() }}</button
+		>&ngsp;
+		<button type="button" class="calendar-name-button" (click)="disableModeChange()?null:displayMode.set('year')">
+			{{ currentYearLabel() }}
+		</button>
 		<span class="u-mask">{{ intl.directionKeysTip }} </span>
 	</div>
 	<table class="calendar-table" role="grid" aria-labelledby="calendar-name">
@@ -86,7 +90,9 @@
 	</svg>
 	} @case ('month') {
 	<div class="calendar-name" id="calendar-year-name">
-		<button type="button" class="calendar-name-button" (click)="displayMode.set('year')">{{ currentYearLabel() }}</button>
+		<button type="button" class="calendar-name-button" (click)="disableModeChange()?null:displayMode.set('year')">
+			{{ currentYearLabel() }}
+		</button>
 		<span class="u-mask">{{ intl.directionKeysTip }} </span>
 	</div>
 	<table class="calendar-table" role="grid" aria-labelledby="calendar-year-name">

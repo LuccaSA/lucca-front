@@ -10,8 +10,7 @@
 				luInput
 				luInputStandalone
 				class="textField-input-value rangePicker-input-value"
-				[value]="displayValue()"
-				(input)="userTextInput.set(start.value)"
+				[value]="startLabel()"
 				(blur)="onTouched?.();inputFocused.set(false)"
 				(focus)="inputFocused.set(true)"
 				[attr.placeholder]="placeholder()"
@@ -34,8 +33,7 @@
 				luInput
 				luInputStandalone
 				class="textField-input-value rangePicker-input-value"
-				[value]="displayValue()"
-				(input)="userTextInput.set(end.value)"
+				[value]="endLabel()"
 				(blur)="onTouched?.();inputFocused.set(false)"
 				(focus)="inputFocused.set(true)"
 				[attr.placeholder]="placeholder()"
@@ -50,8 +48,8 @@
 		</div>
 		<lu-icon [icon]="'arrowRight'" [size]="'XS'" [alt]="''" class="rangePicker-arrow" />
 		<div class="textField-input-affix">
-			@if (clearable() && date.value !== '') {
-			<button class="textField-input-affix-clear clear" type="button" (click)="clear(date)">
+			@if (clearable() && (start.value !== '' || end.value !== '')) {
+			<button class="textField-input-affix-clear clear" type="button" (click)="clear(start, end)">
 				<span aria-hidden="true" class="lucca-icon icon-signClose"></span>
 				<span class="u-mask">{{ intl.clear }}</span>
 			</button>
@@ -132,39 +130,36 @@
 			</div>
 			<div class="calendarWrapper-content" tabindex="-1">
 				<lu-calendar2
-					[enableOverflow]="enableOverflow()"
-					[showOverflow]="showOverflow()"
 					[hideToday]="hideToday()"
 					[hasTodayButton]="hasTodayButton()"
 					[date]="currentDate()"
 					(dateChange)="currentDateChangeFromCalendar($event)"
 					[(tabbableDate)]="tabbableDate"
 					[getCellInfo]="combinedGetCellInfo"
-					[ranges]="ranges()"
-					(dateClicked)="selectedDate.set($event);currentDate.set($event);popoverRef.close();date.focus()"
+					[ranges]="calendarRanges()"
+					(dateClicked)="dateClicked($event, popoverRef)"
 					(nextPage)="move(1)"
 					(previousPage)="move(-1)"
 					[(displayMode)]="calendarMode"
 					[mode]="mode()"
 					[hideWeekend]="hideWeekend()"
+					[disableModeChange]="true"
 				></lu-calendar2>
 
 				<lu-calendar2
-					[enableOverflow]="enableOverflow()"
-					[showOverflow]="showOverflow()"
 					[hideToday]="hideToday()"
 					[hasTodayButton]="hasTodayButton()"
-					[date]="currentDate()"
+					[date]="currentRightDate()"
 					(dateChange)="currentDateChangeFromCalendar($event)"
 					[(tabbableDate)]="tabbableDate"
 					[getCellInfo]="combinedGetCellInfo"
-					[ranges]="ranges()"
-					(dateClicked)="selectedDate.set($event);currentDate.set($event);popoverRef.close();date.focus()"
+					[ranges]="calendarRanges()"
+					(dateClicked)="dateClicked($event, popoverRef)"
 					(nextPage)="move(1)"
 					(previousPage)="move(-1)"
 					[(displayMode)]="calendarMode"
-					[mode]="'year'"
 					[hideWeekend]="hideWeekend()"
+					[disableModeChange]="true"
 				></lu-calendar2>
 			</div>
 		</div>
