@@ -21,7 +21,7 @@
 		/>
 
 		<div class="textField-input-affix">
-			@if (clearable() && date.value !== '') {
+			@if (clearable() && !disabled && date.value !== '') {
 			<button class="textField-input-affix-clear clear" type="button" (click)="clear(date)">
 				<span aria-hidden="true" class="lucca-icon icon-signClose"></span>
 				<span class="u-mask">{{ intl.clear }}</span>
@@ -45,12 +45,12 @@
 
 <ng-template #calendar>
 	<div class="calendarWrapper">
-		<div class="calendarWrapper-navigation mod-prev">
+		<div class="calendarWrapper-navigation u-left0">
 			<button class="calendarWrapper-navigation-button button" type="button" (click)="prev()" #previousButtonRef>
 				<span aria-hidden="true" class="lucca-icon icon-chevronLeft"></span><span class="u-mask">{{ intl.previous }}</span>
 			</button>
 		</div>
-		<div class="calendarWrapper-navigation mod-next">
+		<div class="calendarWrapper-navigation u-right0">
 			<button class="calendarWrapper-navigation-button button" type="button" (click)="next()" #nextButtonRef>
 				<span aria-hidden="true" class="lucca-icon icon-chevronRight"></span><span class="u-mask"> {{ intl.next }}</span>
 			</button>

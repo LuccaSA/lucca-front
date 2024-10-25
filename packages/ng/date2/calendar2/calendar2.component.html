@@ -29,7 +29,7 @@
 					[class.is-daysOff]="day.isWeekend"
 					[class.is-overflow]="day.isOverflow"
 					[class.is-current]="day.isCurrent"
-					[attr.aria-selected]="day.status.selected || day.rangeInfo?.range!== undefined"
+					[attr.aria-selected]="day.status.selected || !!day.rangeInfo?.range"
 					[class.is-start]="day.rangeInfo?.isStart || day.status.selected"
 					[class.is-end]="day.rangeInfo?.isEnd || day.status.selected"
 					[class.is-selected]="day.rangeInfo?.range || day.status.selected"
@@ -58,9 +58,6 @@
 				<td class="calendar-table-body-row-cell is-overflow" *luRepeatTimes="isLastWeek ? 7 - week.length : 0"></td>
 			</tr>
 			}
-			<tr class="calendar-table-body-row" *luRepeatTimes="6 - monthGridDisplay().length">
-				<td class="calendar-table-body-row-cell" *luRepeatTimes="7"></td>
-			</tr>
 		</tbody>
 	</table>
 	@if (hasTodayButton()) {

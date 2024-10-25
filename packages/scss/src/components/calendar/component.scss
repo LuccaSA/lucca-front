@@ -7,6 +7,50 @@
 	width: var(--components-calendarWidth);
 
 	@at-root ($atRoot) {
+		.calendarShortcutsOptionnal {
+			display: flex;
+		}
+
+		.calendarShortcuts {
+			@include reset.list;
+
+			width: 13.5rem;
+			border-right: 1px solid var(--palettes-neutral-100);
+			padding: var(--pr-t-spacings-50);
+			overflow: auto;
+			position: relative;
+			z-index: 1;
+			border-radius: var(--commons-borderRadius-M) 0 0 var(--commons-borderRadius-M);
+
+			&:focus-visible {
+				@include a11y.focusVisible;
+			}
+
+			&.mod-day {
+				max-height: 17.5rem;
+
+				&:has(+ .calendarWrapper .calendar-todayLink) {
+					max-height: 20rem;
+				}
+			}
+
+			&.mod-month,
+			&.mod-year {
+				max-height: 18rem;
+			}
+		}
+
+		.calendarShortcutsButton-item-button.button {
+			@include button.block;
+			@include button.text;
+			@include button.S;
+
+			justify-content: flex-start;
+			font-weight: 400;
+			white-space: wrap;
+			text-align: left;
+		}
+
 		.calendar-table {
 			border-spacing: var(--components-calendarBorderSpacing);
 			border: var(--pr-t-spacings-150) solid transparent;
@@ -28,36 +72,27 @@
 
 		.calendarWrapper-content {
 			display: flex;
-			// overflow: auto;
-			// scroll-behavior: smooth;
-			// scroll-snap-type: x mandatory;
-			// -ms-overflow-style: none;
-			// scrollbar-width: none;
-			// &::-webkit-scrollbar {
-			// 	display: none;
-			// }
-			// &:focus-visible {
-			// 	@include a11y.focusVisible;
-			// }
+			overflow: auto;
+			scroll-behavior: smooth;
+			scroll-snap-type: x mandatory;
+			-ms-overflow-style: none;
+			scrollbar-width: none;
+			&::-webkit-scrollbar {
+				display: none;
+			}
+			&:focus-visible {
+				@include a11y.focusVisible;
+			}
 		}
 
 		.calendarWrapper-navigation {
 			position: absolute;
-			top: var(--pr-t-spacings-150);
+			top: 0;
 			background-color: var(--components-calendarWrapper-navigationBackground);
-			border-width: 0 var(--pr-t-spacings-150);
+			border-width: var(--pr-t-spacings-150);
 			border-style: solid;
-			border-color: transparent var(--components-calendarWrapper-navigationBackground);
-
-			&.mod-prev {
-				left: var(--pr-t-spacings-25);
-				border-right: 0;
-			}
-
-			&.mod-next {
-				right: var(--pr-t-spacings-25);
-				border-left: 0;
-			}
+			border-color: var(--components-calendarWrapper-navigationBackground);
+			border-radius: var(--commons-borderRadius-L);
 		}
 
 		.calendarWrapper-navigation-button {

@@ -64,66 +64,68 @@
 				type="button"
 				class="button mod-onlyIcon mod-text textField-input-affix-toggle"
 			>
-				<lu-icon [icon]="'calendar'" [alt]="intl.pickDate" />
+				<lu-icon [icon]="'calendarPlanning'" [alt]="intl.pickDate" />
 			</button>
 		</div>
 	</div>
 </div>
 
 <ng-template #calendar>
-	<div class="calendarActionsOptionnal">
+	<div class="calendarShortcutsOptionnal">
+		@if (calendarShortcuts()) {
 		<ul
-			class="calendarActions"
+			class="calendarShortcuts"
 			[class.mod-day]="calendarMode() === 'day'"
 			[class.mod-month]="calendarMode() === 'month'"
 			[class.mod-year]="calendarMode() === 'year'"
 		>
-			<li>
-				<button type="button" class="button mod-block mod-text mod-S">{{ relativeLabelFor(-1, 'week') }}</button>
+			<li class="calendarShortcutsButton-item">
+				<button type="button" class="calendarShortcutsButton-item-button button">{{ relativeLabelFor(-1, 'week') }}</button>
 			</li>
-			<li>
-				<button type="button" class="button mod-block mod-text mod-S">{{ relativeLabelFor(-1, 'month') }}</button>
+			<li class="calendarShortcutsButton-item">
+				<button type="button" class="calendarShortcutsButton-item-button button">{{ relativeLabelFor(-1, 'month') }}</button>
 			</li>
-			<li>
-				<button type="button" class="button mod-block mod-text mod-S">{{ relativeLabelFor(-1, 'quarter') }}</button>
+			<li class="calendarShortcutsButton-item">
+				<button type="button" class="calendarShortcutsButton-item-button button">{{ relativeLabelFor(-1, 'quarter') }}</button>
 			</li>
-			<li>
-				<button type="button" class="button mod-block mod-text mod-S">{{ relativeLabelFor(-1, 'year') }}</button>
-			</li>
-
-			<li>
-				<button type="button" class="button mod-block mod-text mod-S">{{ relativeLabelFor(0, 'week') }}</button>
-			</li>
-			<li>
-				<button type="button" class="button mod-block mod-text mod-S">{{ relativeLabelFor(0, 'month') }}</button>
-			</li>
-			<li>
-				<button type="button" class="button mod-block mod-text mod-S">{{ relativeLabelFor(0, 'quarter') }}</button>
-			</li>
-			<li>
-				<button type="button" class="button mod-block mod-text mod-S">{{ relativeLabelFor(0, 'year') }}</button>
+			<li class="calendarShortcutsButton-item">
+				<button type="button" class="calendarShortcutsButton-item-button button">{{ relativeLabelFor(-1, 'year') }}</button>
 			</li>
 
-			<li>
-				<button type="button" class="button mod-block mod-text mod-S">{{ relativeLabelFor(1, 'week') }}</button>
+			<li class="calendarShortcutsButton-item">
+				<button type="button" class="calendarShortcutsButton-item-button button">{{ relativeLabelFor(0, 'week') }}</button>
 			</li>
-			<li>
-				<button type="button" class="button mod-block mod-text mod-S">{{ relativeLabelFor(1, 'month') }}</button>
+			<li class="calendarShortcutsButton-item">
+				<button type="button" class="calendarShortcutsButton-item-button button">{{ relativeLabelFor(0, 'month') }}</button>
 			</li>
-			<li>
-				<button type="button" class="button mod-block mod-text mod-S">{{ relativeLabelFor(1, 'quarter') }}</button>
+			<li class="calendarShortcutsButton-item">
+				<button type="button" class="calendarShortcutsButton-item-button button">{{ relativeLabelFor(0, 'quarter') }}</button>
 			</li>
-			<li>
-				<button type="button" class="button mod-block mod-text mod-S">{{ relativeLabelFor(1, 'year') }}</button>
+			<li class="calendarShortcutsButton-item">
+				<button type="button" class="calendarShortcutsButton-item-button button">{{ relativeLabelFor(0, 'year') }}</button>
+			</li>
+
+			<li class="calendarShortcutsButton-item">
+				<button type="button" class="calendarShortcutsButton-item-button button">{{ relativeLabelFor(1, 'week') }}</button>
+			</li>
+			<li class="calendarShortcutsButton-item">
+				<button type="button" class="calendarShortcutsButton-item-button button">{{ relativeLabelFor(1, 'month') }}</button>
+			</li>
+			<li class="calendarShortcutsButton-item">
+				<button type="button" class="calendarShortcutsButton-item-button button">{{ relativeLabelFor(1, 'quarter') }}</button>
+			</li>
+			<li class="calendarShortcutsButton-item">
+				<button type="button" class="calendarShortcutsButton-item-button button">{{ relativeLabelFor(1, 'year') }}</button>
 			</li>
 		</ul>
-		<div class="calendarWrapper" [attr.style]="'--components-calendarWrapperVisible: 2'">
-			<div class="calendarWrapper-navigation mod-prev">
+		}
+		<div class="calendarWrapper mod-range">
+			<div class="calendarWrapper-navigation u-left0">
 				<button class="calendarWrapper-navigation-button button" type="button" (click)="prev()" #previousButtonRef>
 					<span aria-hidden="true" class="lucca-icon icon-chevronLeft"></span><span class="u-mask">{{ intl.previous }}</span>
 				</button>
 			</div>
-			<div class="calendarWrapper-navigation mod-next">
+			<div class="calendarWrapper-navigation u-right0">
 				<button class="calendarWrapper-navigation-button button" type="button" (click)="next()" #nextButtonRef>
 					<span aria-hidden="true" class="lucca-icon icon-chevronRight"></span><span class="u-mask"> {{ intl.next }}</span>
 				</button>

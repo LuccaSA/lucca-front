@@ -88,6 +88,8 @@ export class DateRangeInputComponent implements ControlValueAccessor, Validator 
 
 	inputFocused = signal(false);
 
+	calendarShortcuts = signal(false);
+
 	protected currentDate = signal(startOfMonth(new Date()));
 
 	protected currentRightDate = computed(() => addMonths(this.currentDate(), 1));
