@@ -17,44 +17,40 @@ export default {
 
 		const { firstName, lastName, compact, small, content } = args;
 
-		const richContent = `
-			<h3>Lorem, ipsum.</h3>
-			<p>
-				Lorem ipsum, dolor sit amet consectetur adipisicing elit. <strong>Facilis voluptates ex</strong> qui iste libero suscipit cum
-				earum harum animi praesentium, quidem non incidunt vel illum sunt nihil reprehenderit a itaque.
-			</p>
-			<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque numquam itaque at facilis iusto inventore.</p>
-		`;
+		const richContent = `<h3>Lorem, ipsum.</h3>
+<p>
+	Lorem ipsum, dolor sit amet consectetur adipisicing elit. <strong>Facilis voluptates ex</strong> qui iste libero suscipit cum
+	earum harum animi praesentium, quidem non incidunt vel illum sunt nihil reprehenderit a itaque.
+</p>
+<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque numquam itaque at facilis iusto inventore.</p>`;
 
 		if (args['chat']) {
 			return {
 				props: {
 					date: new Date(),
 				},
-				template: `
-		<lu-comment-chat>
-			<lu-comment-block ${avatar} ${generateInputs(
-				{
-					compact,
-					small,
-				},
-				argTypes,
-			)} authorName="${firstName} ${lastName}">
-				<ng-template #avatarTpl>
-					<lu-user-picture [user]="{firstName: 'Marie', lastName: 'Bragoulet'}"></lu-user-picture>
-				</ng-template>
-				<lu-comment [date]="date" content="${content}" />
-				<lu-comment [date]="date" content="Lorem ipsum dolor sit amet." />
-				<lu-comment [date]="date" content="${richContent}" />
-			</lu-comment-block>
-			<lu-comment-block [chatAnswer]="true" ${avatar2} ${generateInputs({ compact, small }, argTypes)} authorName="Chloé Alibert">
-				<ng-template #avatarTpl2>
-					<lu-user-picture [user]="{firstName: 'Chloé', lastName: 'Alibert'}"></lu-user-picture>
-				</ng-template>
-				<lu-comment [date]="date" content="${content}" />
-			</lu-comment-block>
-		</lu-comment-chat>
-	`,
+				template: `<lu-comment-chat>
+	<lu-comment-block ${avatar} ${generateInputs(
+		{
+			compact,
+			small,
+		},
+		argTypes,
+	)} authorName="${firstName} ${lastName}">
+		<ng-template #avatarTpl>
+			<lu-user-picture [user]="{firstName: 'Marie', lastName: 'Bragoulet'}"></lu-user-picture>
+		</ng-template>
+		<lu-comment [date]="date" content="${content}" />
+		<lu-comment [date]="date" content="Lorem ipsum dolor sit amet." />
+		<lu-comment [date]="date" content="${richContent}" />
+	</lu-comment-block>
+	<lu-comment-block [chatAnswer]="true" ${avatar2} ${generateInputs({ compact, small }, argTypes)} authorName="Chloé Alibert">
+		<ng-template #avatarTpl2>
+			<lu-user-picture [user]="{firstName: 'Chloé', lastName: 'Alibert'}"></lu-user-picture>
+		</ng-template>
+		<lu-comment [date]="date" content="${content}" />
+	</lu-comment-block>
+</lu-comment-chat>`,
 			};
 		} else {
 			return {
@@ -69,14 +65,13 @@ export default {
 				},
 				argTypes,
 			)} authorName="${firstName} ${lastName}">
-				<ng-template #avatarTpl>
-					<lu-user-picture [user]="{firstName: 'Marie', lastName: 'Bragoulet'}"></lu-user-picture>
-				</ng-template>
-				<lu-comment [date]="date" content="${content}" />
-				<lu-comment [date]="date" content="Lorem ipsum dolor sit amet." />
-				<lu-comment [date]="date" content="${richContent}" />
-			</lu-comment-block>
-	`,
+	<ng-template #avatarTpl>
+		<lu-user-picture [user]="{firstName: 'Marie', lastName: 'Bragoulet'}"></lu-user-picture>
+	</ng-template>
+	<lu-comment [date]="date" content="${content}" />
+	<lu-comment [date]="date" content="Lorem ipsum dolor sit amet." />
+	<lu-comment [date]="date" content="${richContent}" />
+</lu-comment-block>`,
 			};
 		}
 	},
