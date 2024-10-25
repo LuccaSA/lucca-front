@@ -32,10 +32,10 @@ export default {
 		hasTodayButton: {
 			control: 'boolean',
 		},
-		enableOverflow: {
+		disableOverflow: {
 			control: 'boolean',
 		},
-		showOverflow: {
+		hideOverflow: {
 			control: 'boolean',
 		},
 		clearable: {
@@ -65,8 +65,8 @@ export default {
 
 export const Basic: StoryObj<DateInputComponent> = {
 	args: {
-		enableOverflow: false,
-		showOverflow: false,
+		disableOverflow: false,
+		hideOverflow: false,
 		hideToday: false,
 		hasTodayButton: false,
 		hideWeekend: false,

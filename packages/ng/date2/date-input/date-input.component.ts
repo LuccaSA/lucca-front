@@ -58,8 +58,8 @@ export class DateInputComponent implements ControlValueAccessor, Validator {
 
 	ranges = input<DateRange[]>([]);
 
-	enableOverflow = input<boolean, boolean>(false, { transform: booleanAttribute });
-	showOverflow = input<boolean, boolean>(false, { transform: booleanAttribute });
+	disableOverflow = input<boolean, boolean>(false, { transform: booleanAttribute });
+	hideOverflow = input<boolean, boolean>(false, { transform: booleanAttribute });
 	hideToday = input<boolean, boolean>(false, { transform: booleanAttribute });
 	hasTodayButton = input<boolean, boolean>(false, { transform: booleanAttribute });
 	clearable = input<boolean, boolean>(false, { transform: booleanAttribute });
