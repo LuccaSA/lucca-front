@@ -54,11 +54,8 @@ export default {
 				min: min ? new Date(min) : null,
 				max: max ? new Date(max) : null,
 			},
-			template: `
-			<lu-date-input [(ngModel)]="selected" [min]="min" [max]="max" ${generateInputs(flags, argTypes)}></lu-date-input>
-
-			<pr-story-model-display>{{selected}}</pr-story-model-display>
-			`,
+			template: `<lu-date-input [(ngModel)]="selected" [min]="min" [max]="max" ${generateInputs(flags, argTypes)}></lu-date-input>
+<pr-story-model-display>{{selected}}</pr-story-model-display>`,
 		};
 	},
 } as Meta;
