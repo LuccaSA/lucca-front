@@ -11,6 +11,7 @@
 				luInputStandalone
 				class="textField-input-value rangePicker-input-value"
 				[value]="startLabel()"
+				(input)="startTextInput.set(start.value)"
 				(blur)="onTouched?.();inputFocused.set(false)"
 				(focus)="inputFocused.set(true)"
 				[attr.placeholder]="placeholder()"
@@ -34,6 +35,7 @@
 				luInputStandalone
 				class="textField-input-value rangePicker-input-value"
 				[value]="endLabel()"
+				(input)="endTextInput.set(end.value)"
 				(blur)="onTouched?.();inputFocused.set(false)"
 				(focus)="inputFocused.set(true)"
 				[attr.placeholder]="placeholder()"
@@ -160,6 +162,7 @@
 					(nextPage)="move(1)"
 					(previousPage)="move(-1)"
 					[(displayMode)]="calendarMode"
+					[mode]="mode()"
 					[hideWeekend]="hideWeekend()"
 					[disableModeChange]="true"
 				></lu-calendar2>

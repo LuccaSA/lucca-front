@@ -52,7 +52,6 @@ export default {
 		const { min, max, selected, ...flags } = args;
 		return {
 			props: {
-				selected: { start: startOfDay(new Date()), end: startOfDay(addWeeks(new Date(), 2)) },
 				min: min ? new Date(min) : null,
 				max: max ? new Date(max) : null,
 			},
