@@ -22,7 +22,7 @@ import { getIntl, LuClass, ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { FORM_FIELD_INSTANCE, InputDirective } from '@lucca-front/ng/form-field';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { PopoverDirective } from '@lucca-front/ng/popover2';
-import { addMonths, addYears, endOfDecade, endOfMonth, endOfYear, isAfter, isBefore, parse, startOfDay, startOfMonth } from 'date-fns';
+import { addMonths, addYears, endOfDecade, endOfMonth, endOfYear, isAfter, isBefore, parse, startOfDay, startOfDecade, startOfMonth, startOfYear } from 'date-fns';
 import { CalendarMode } from '../calendar2/calendar-mode';
 import { Calendar2Component } from '../calendar2/calendar2.component';
 import { CellStatus } from '../calendar2/cell-status';
@@ -118,6 +118,18 @@ export class DateRangeInputComponent implements ControlValueAccessor, Validator 
 				return addYears(this.currentDate(), 10);
 		}
 	});
+
+	protected currentStartDisplayDate = computed(() => {
+		switch (this.mode()) {
+			case 'day':
+				return startOfMonth(this.currentDate());
+			case 'month':
+				return startOfYear(this.currentDate());
+			case 'year':
+				return startOfDecade(this.currentDate());
+		}
+	});
+
 	protected currentEndDisplayDate = computed(() => {
 		switch (this.mode()) {
 			case 'day':
@@ -145,11 +157,11 @@ export class DateRangeInputComponent implements ControlValueAccessor, Validator 
 
 	calendarRanges = computed(() => {
 		if (this.selectedRange()) {
-			if (isBefore(this.selectedRange().start, this.currentDate())) {
+			if (isBefore(this.selectedRange().start, this.currentStartDisplayDate())) {
 				return [
 					{
 						...this.selectedRange(),
-						start: this.currentDate(),
+						start: this.currentStartDisplayDate(),
 						inProgress: true,
 					},
 					...this.ranges(),

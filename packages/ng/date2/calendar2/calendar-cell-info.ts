@@ -1,6 +1,14 @@
 import { DateRange } from './date-range';
 import { CellStatus } from './cell-status';
 
+export interface RangeInfo {
+	range?: DateRange;
+	isStart: boolean;
+	isEnd: boolean;
+	isInProgress: boolean;
+	label?: string;
+}
+
 export interface CalendarCellInfo {
 	day: number;
 	isWeekend: boolean;
@@ -11,13 +19,7 @@ export interface CalendarCellInfo {
 	classes: string[];
 	disabled: boolean;
 	label?: string;
-	rangeInfo: {
-		range?: DateRange;
-		isStart: boolean;
-		isEnd: boolean;
-		isInProgress: boolean;
-		label?: string;
-	};
+	rangeInfo: RangeInfo;
 }
 
 export interface CalendarMonthInfo {
@@ -26,6 +28,7 @@ export interface CalendarMonthInfo {
 	long: string;
 	isCurrent: boolean;
 	status: CellStatus;
+	rangeInfo: RangeInfo;
 }
 
 export interface CalendarYearInfo {
@@ -33,4 +36,5 @@ export interface CalendarYearInfo {
 	label: string;
 	isCurrent: boolean;
 	status: CellStatus;
+	rangeInfo: RangeInfo;
 }

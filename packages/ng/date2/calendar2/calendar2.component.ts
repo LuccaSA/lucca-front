@@ -189,7 +189,7 @@ export class Calendar2Component implements OnInit {
 					short: this.#intlMonthsShort.format(month),
 					long: this.#intlMonthsLong.format(month),
 					isCurrent: isSameMonth(new Date(), month),
-					// Problème de display de ranges ici, on devrait appeler getRangeInfo à un moment
+					rangeInfo: this.getRangeInfo(month, 'month'),
 					status: this.getCellInfo()(month, this.displayMode()),
 				} as CalendarMonthInfo;
 			})
@@ -211,6 +211,7 @@ export class Calendar2Component implements OnInit {
 					date: year,
 					label: this.#intlDateYear.format(year),
 					isCurrent: isSameYear(new Date(), year),
+					rangeInfo: this.getRangeInfo(year, 'year'),
 					status: this.getCellInfo()(year, this.displayMode()),
 				};
 			})
@@ -328,7 +329,14 @@ export class Calendar2Component implements OnInit {
 						end: range.end,
 					});
 				} else {
-					return isSameDay(date, range.start);
+					switch (this.mode()) {
+						case 'day':
+							return isSameDay(date, range.start);
+						case 'month':
+							return isSameMonth(date, range.start);
+						case 'year':
+							return isSameYear(date, range.start);
+					}
 				}
 			}
 			return false;
