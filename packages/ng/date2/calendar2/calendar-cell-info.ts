@@ -15,6 +15,7 @@ export interface CalendarCellInfo {
 		range?: DateRange;
 		isStart: boolean;
 		isEnd: boolean;
+		isInProgress: boolean;
 		label?: string;
 	};
 }

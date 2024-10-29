@@ -22,7 +22,7 @@ import { getIntl, LuClass, ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { FORM_FIELD_INSTANCE, InputDirective } from '@lucca-front/ng/form-field';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { PopoverDirective } from '@lucca-front/ng/popover2';
-import { addMonths, addYears, isAfter, parse, startOfDay, startOfMonth } from 'date-fns';
+import { addMonths, addYears, endOfDecade, endOfMonth, endOfYear, isAfter, isBefore, parse, startOfDay, startOfMonth } from 'date-fns';
 import { CalendarMode } from '../calendar2/calendar-mode';
 import { Calendar2Component } from '../calendar2/calendar2.component';
 import { CellStatus } from '../calendar2/cell-status';
@@ -118,6 +118,16 @@ export class DateRangeInputComponent implements ControlValueAccessor, Validator 
 				return addYears(this.currentDate(), 10);
 		}
 	});
+	protected currentEndDisplayDate = computed(() => {
+		switch (this.mode()) {
+			case 'day':
+				return endOfMonth(this.currentRightDate());
+			case 'month':
+				return endOfYear(this.currentRightDate());
+			case 'year':
+				return endOfDecade(this.currentRightDate());
+		}
+	});
 
 	protected tabbableDate = signal<Date | null>(null);
 
@@ -135,6 +145,26 @@ export class DateRangeInputComponent implements ControlValueAccessor, Validator 
 
 	calendarRanges = computed(() => {
 		if (this.selectedRange()) {
+			if (isBefore(this.selectedRange().start, this.currentDate())) {
+				return [
+					{
+						...this.selectedRange(),
+						start: this.currentDate(),
+						inProgress: true,
+					},
+					...this.ranges(),
+				];
+			}
+			if (isAfter(this.selectedRange().start, this.currentEndDisplayDate())) {
+				return [
+					{
+						...this.selectedRange(),
+						start: this.currentEndDisplayDate(),
+						inProgress: true,
+					},
+					...this.ranges(),
+				];
+			}
 			return [this.selectedRange(), ...this.ranges()];
 		}
 		return this.ranges();
@@ -211,6 +241,7 @@ export class DateRangeInputComponent implements ControlValueAccessor, Validator 
 					if (parsed.getFullYear() > 999) {
 						this.selectedRange.set({
 							...currentRange,
+							scope: this.mode(),
 							[rangeProperty]: parsed,
 						});
 						if (rangeProperty === 'start') {
@@ -219,6 +250,7 @@ export class DateRangeInputComponent implements ControlValueAccessor, Validator 
 					} else {
 						this.selectedRange.set({
 							...currentRange,
+							scope: this.mode(),
 							[rangeProperty]: parsed,
 						});
 					}
@@ -240,17 +272,20 @@ export class DateRangeInputComponent implements ControlValueAccessor, Validator 
 		if (this.selectedRange() === null) {
 			this.selectedRange.set({
 				start: date,
+				scope: this.mode(),
 			});
 		} else {
 			if (isAfter(date, this.selectedRange().start)) {
 				this.selectedRange.set({
 					...this.selectedRange(),
+					scope: this.mode(),
 					end: date,
 				});
 				popoverRef.close();
 			} else {
 				this.selectedRange.set({
 					start: date,
+					scope: this.mode(),
 					end: this.selectedRange().start,
 				});
 				popoverRef.close();

@@ -1,12 +1,10 @@
 <div class="calendar">
 	@switch (displayMode()) { @case ('day') {
 	<div class="calendar-name" id="calendar-name" aria-live="polite">
-		<button type="button" class="calendar-name-button" (click)="disableModeChange()?null:displayMode.set('month')">
-			{{ currentMonthLabel() }}</button
-		>&ngsp;
-		<button type="button" class="calendar-name-button" (click)="disableModeChange()?null:displayMode.set('year')">
-			{{ currentYearLabel() }}
-		</button>
+		@if (disableModeChange()) { {{ currentMonthLabel() }}&ngsp; {{ currentYearLabel() }} } @else {
+		<button type="button" class="calendar-name-button" (click)="displayMode.set('month')">{{ currentMonthLabel() }}</button>&ngsp;
+		<button type="button" class="calendar-name-button" (click)="displayMode.set('year')">{{ currentYearLabel() }}</button>
+		}
 		<span class="u-mask">{{ intl.directionKeysTip }} </span>
 	</div>
 	<table class="calendar-table" role="grid" aria-labelledby="calendar-name">
@@ -32,7 +30,8 @@
 					[attr.aria-selected]="day.status.selected || !!day.rangeInfo?.range"
 					[class.is-start]="day.rangeInfo?.isStart || day.status.selected"
 					[class.is-end]="day.rangeInfo?.isEnd || day.status.selected"
-					[class.is-selected]="day.rangeInfo?.range || day.status.selected"
+					[class.is-fakeStart]="day.rangeInfo?.range.inProgress"
+					[class.is-selected]="(day.rangeInfo?.range && !day.rangeInfo?.range.inProgress) || day.status.selected"
 					[ngClass]="day.classes"
 				>
 					<button
@@ -87,9 +86,9 @@
 	</svg>
 	} @case ('month') {
 	<div class="calendar-name" id="calendar-year-name">
-		<button type="button" class="calendar-name-button" (click)="disableModeChange()?null:displayMode.set('year')">
-			{{ currentYearLabel() }}
-		</button>
+		@if (disableModeChange()) { {{ currentYearLabel() }} } @else {
+		<button type="button" class="calendar-name-button" (click)="displayMode.set('year')">{{ currentYearLabel() }}</button>
+		}
 		<span class="u-mask">{{ intl.directionKeysTip }} </span>
 	</div>
 	<table class="calendar-table" role="grid" aria-labelledby="calendar-year-name">

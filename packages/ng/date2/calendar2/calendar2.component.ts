@@ -12,6 +12,7 @@ import {
 	endOfMonth,
 	endOfWeek,
 	endOfYear,
+	isBefore,
 	isSameDay,
 	isSameMonth,
 	isSameYear,
@@ -31,7 +32,7 @@ import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
 import { WEEK_INFO } from '../calendar.token';
 import { LU_DATE2_TRANSLATIONS } from '../date2.translate';
 import { RepeatTimesDirective } from '../repeat-times.directive';
-import { getIntlWeekDay, getJSFirstDayOfWeek } from '../utils';
+import { getIntlWeekDay, getJSFirstDayOfWeek, startOfPeriod } from '../utils';
 import { CalendarCellInfo, CalendarMonthInfo, CalendarYearInfo } from './calendar-cell-info';
 import { CalendarMode } from './calendar-mode';
 import { Calendar2CellDirective } from './calendar2-cell.directive';
@@ -188,6 +189,7 @@ export class Calendar2Component implements OnInit {
 					short: this.#intlMonthsShort.format(month),
 					long: this.#intlMonthsLong.format(month),
 					isCurrent: isSameMonth(new Date(), month),
+					// Problème de display de ranges ici, on devrait appeler getRangeInfo à un moment
 					status: this.getCellInfo()(month, this.displayMode()),
 				} as CalendarMonthInfo;
 			})
@@ -296,7 +298,7 @@ export class Calendar2Component implements OnInit {
 
 		const classes: string[] = status?.classes || [];
 
-		const rangeInfo = this.getRangeInfo(date, 'day');
+		const rangeInfo = this.getRangeInfo(date, this.displayMode());
 
 		if (rangeInfo?.class) {
 			classes.push(rangeInfo.class);
@@ -318,23 +320,29 @@ export class Calendar2Component implements OnInit {
 
 	getRangeInfo(date: Date, scope: CalendarMode) {
 		const range: DateRange | undefined = this.ranges().find((range: DateRange) => {
-			return (
-				(range.scope || 'day') === scope &&
-				isWithinInterval(date, {
-					start: startOfDay(range.start),
-					end: range.end || endOfMonth(date),
-				})
-			);
+			const isSameScope = (range.scope || 'day') === scope;
+			if (isSameScope) {
+				if (range.end) {
+					return isWithinInterval(date, {
+						start: startOfDay(range.start),
+						end: range.end,
+					});
+				} else {
+					return isSameDay(date, range.start);
+				}
+			}
+			return false;
 		});
 		if (!range) {
 			return null;
 		}
-		const isStart: boolean = range && isSameDay(date, range.start);
+		const isStart: boolean = range && isSameDay(date, range.start) && !range.inProgress;
 		const isEnd: boolean = range && range.end && isSameDay(date, range.end);
 		return {
 			range,
 			isStart,
 			isEnd,
+			isInProgress: range?.inProgress,
 			label: range?.label,
 			class: range?.class,
 		};
