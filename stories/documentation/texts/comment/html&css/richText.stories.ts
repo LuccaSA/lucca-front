@@ -18,7 +18,7 @@ function getTemplate(args: CommentRichTextStory): string {
 		</div>
 	</div>
 	<blockquote class="comment-content">
-		<div class="comment-content-textContainerOptionnal">
+		<div class="comment-content-textContainerOptional">
 			<h3>Lorem, ipsum.</h3>
 			<p>
 				Lorem ipsum, dolor sit amet consectetur adipisicing elit. <strong>Facilis voluptates ex</strong> qui iste libero suscipit cum

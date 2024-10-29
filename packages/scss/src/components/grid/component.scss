@@ -12,7 +12,8 @@
 
 	// workaround for Angular replacing CamelCase by kebab-case
 	// max-width: var(--grid-max-width, var(--grid-maxWidth));
-	max-width: var(--grid-max-width, var(--grid-maxWidth));
+	width: var(--grid-max-width, var(--grid-maxWidth));
+	max-width: 100%;
 
 	@at-root ($atRoot) {
 		*:has(> .grid:not(.rwd-disableAutoContainer) > .grid-column[style*='AtContainer']),

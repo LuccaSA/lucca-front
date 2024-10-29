@@ -22,13 +22,13 @@ import {
 	LuMultiSelectWithSelectAllDirective,
 } from '@lucca-front/ng/multi-select';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
-import { Meta, applicationConfig, moduleMetadata } from '@storybook/angular';
+import { applicationConfig, Meta, moduleMetadata } from '@storybook/angular';
 import { LuMultiSelection } from 'packages/ng/multi-select/select.model';
 import { interval, map } from 'rxjs';
 import { startWith } from 'rxjs/operators';
 import { HiddenArgType } from 'stories/helpers/common-arg-types';
 import { getStoryGenerator } from 'stories/helpers/stories';
-import { FilterLegumesPipe, ILegume, LuCoreSelectInputStoryComponent, SortLegumesPipe, allLegumes, colorNameByColor, coreSelectStory } from './select.utils';
+import { allLegumes, colorNameByColor, coreSelectStory, FilterLegumesPipe, ILegume, LuCoreSelectInputStoryComponent, SortLegumesPipe } from './select.utils';
 
 type LuMultiSelectInputStoryComponent = LuCoreSelectInputStoryComponent & {
 	selectedLegumes: ILegume[];
@@ -57,7 +57,6 @@ export const SelectAll = generateStory({
 	withSelectAll
 	[totalCount]="legumes.length"
 	withSelectAllDisplayerLabel="légumes"
-	class="multiSelect"
 	[placeholder]="placeholder"
 	[clearable]="clearable"
 	[loading]="loading"
@@ -65,9 +64,7 @@ export const SelectAll = generateStory({
 	[options]="legumes | filterLegumes:clue"
 	(clueChange)="clue = $event"
 />
-
-{{ legumeSelection | json }}
-`,
+{{ legumeSelection | json }}`,
 	neededImports: {
 		'@lucca-front/ng/multi-select': ['LuMultiSelectInputComponent', 'LuMultiSelectWithSelectAllDirective'],
 		'@lucca-front/ng/core-select/user': ['LuCoreSelectUsersDirective', 'LuCoreSelectTotalCountDirective'],
@@ -79,7 +76,6 @@ export const Basic = generateStory({
 	description: '',
 	template: `<lu-multi-select
 	#selectRef
-	class="multiSelect"
 	[placeholder]="placeholder"
 	[clearable]="clearable"
 	[loading]="loading"
@@ -110,7 +106,6 @@ export const WithMultiDisplayer = generateStory({
 		"Il est possible de personnaliser le contenu de la valeur sélectionnée en utilisant la directive `luMultiDisplayer`. Le *template* prend le tableau contenant l'ensemble des valeurs sélectionnées.",
 	template: `<lu-multi-select
 	#selectRef
-	class="multiSelect"
 	[clearable]="clearable"
 	[loading]="loading"
 	[(ngModel)]="selectedLegumes"
@@ -138,7 +133,6 @@ export const WithDisplayer = generateStory({
 		"Il est possible de personnaliser le contenu des *chips* dans l'affichage de la valeur sélectionnée en utilisant la directive `luDisplayer`. Le *template* prend une option parmi les valeurs sélectionnées.",
 	template: `<lu-multi-select
 	#selectRef
-	class="multiSelect"
 	[placeholder]="placeholder"
 	[options]="legumes | filterLegumes:clue"
 	(clueChange)="clue = $event"
@@ -167,7 +161,6 @@ export const WithPagination = generateStory({
 	description: "Il est possible de charger les options au fur et à mesure en écoutant l'évènement `(nextPage)`.",
 	template: `<lu-multi-select
 	#selectRef
-	class="multiSelect"
 	placeholder="Placeholder..."
 	[(ngModel)]="selectedLegumes"
 	[options]="legumes.slice(0, page * 10)"
@@ -187,7 +180,6 @@ export const WithDisabledOptions = generateStory({
 	description: "Il est possible de désactiver certaines options en utilisant la directive `luDisabledOption` sur l'option.",
 	template: `<lu-multi-select
 	#selectRef
-	class="multiSelect"
 	placeholder="Placeholder..."
 	[(ngModel)]="selectedLegumes"
 	[options]="legumes | filterLegumes:clue"
@@ -211,7 +203,6 @@ export const ApiV3 = generateStory({
 	name: 'Api V3',
 	description: "Pour récupérer automatiquement les options depuis une api V3 avec pagination et recherche, il suffit d'utiliser la directive `apiV3`.",
 	template: `<lu-multi-select
-	class="multiSelect"
 	placeholder="Placeholder..."
 	apiV3="/api/v3/axisSections"
 	withSelectAll
@@ -229,7 +220,6 @@ export const ApiV4 = generateStory({
 	name: 'Api V4',
 	description: "Pour récupérer automatiquement les options depuis une api V4 avec pagination et recherche, il suffit d'utiliser la directive `apiV4`.",
 	template: `<lu-multi-select
-	class="multiSelect"
 	placeholder="Placeholder..."
 	withSelectAll
 	withSelectAllDisplayerLabel="établissements"
@@ -247,7 +237,6 @@ export const Establishment = generateStory({
 	name: 'Establishment Select',
 	description: "Pour saisir un établissement, il suffit d'utiliser la directive `establishments`",
 	template: `<lu-multi-select
-	class="multiSelect"
 	placeholder="Placeholder..."
 	withSelectAll
 	withSelectAllDisplayerLabel="établissements"
@@ -264,7 +253,6 @@ export const User = generateStory({
 	name: 'User Select',
 	description: "Pour saisir des utilisateurs, il suffit d'utiliser la directive `users`",
 	template: `<lu-multi-select
-	class="multiSelect"
 	placeholder="Placeholder..."
 	users
 	[(ngModel)]="selectedUsers"
@@ -279,7 +267,6 @@ export const FormerUser = generateStory({
 	name: 'User Select (with former)',
 	description: "Pour saisir des utilisateurs, il suffit d'utiliser la directive `users`",
 	template: `<lu-multi-select
-	class="multiSelect"
 	placeholder="Placeholder..."
 	users
 	enableFormerEmployees
@@ -324,9 +311,7 @@ export const GroupBy = generateStory({
 		Légume {{colorNameByColor[group.key]}}{{group.options.length > 1 ? 's' : ''}}
 	</ng-container>
 </lu-multi-select>
-
-{{ selectedLegumes | json }}
-`,
+{{ selectedLegumes | json }}`,
 	neededImports: {
 		'@lucca-front/ng/core-select': ['LuOptionDirective', 'LuOptionGroupDirective'],
 		'@lucca-front/ng/multi-select': ['LuMultiSelectInputComponent', 'LuMultiSelectWithSelectAllDirective'],
@@ -347,7 +332,6 @@ export const testDynamicDisabled = generateStory({
 	},
 	template: `<lu-multi-select
 	#selectRef
-	class="multiSelect"
 	[placeholder]="placeholder"
 	[clearable]="clearable"
 	[loading]="loading"
