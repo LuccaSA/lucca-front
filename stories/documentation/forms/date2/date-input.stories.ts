@@ -28,15 +28,18 @@ export default {
 		},
 		hideToday: {
 			control: 'boolean',
+			description: 'Masque la mise en valeur du jour en cours.',
 		},
 		hasTodayButton: {
 			control: 'boolean',
 		},
-		enableOverflow: {
+		disableOverflow: {
 			control: 'boolean',
+			description: 'Autorise la sélection des jours du mois précédent ou suivant sur la vue du mois en cours.',
 		},
-		showOverflow: {
+		hideOverflow: {
 			control: 'boolean',
+			description: 'Affiche la sélection des jours du mois précédent ou suivant sur la vue du mois en cours.',
 		},
 		clearable: {
 			control: 'boolean',
@@ -54,19 +57,16 @@ export default {
 				min: min ? new Date(min) : null,
 				max: max ? new Date(max) : null,
 			},
-			template: `
-			<lu-date-input [(ngModel)]="selected" [min]="min" [max]="max" ${generateInputs(flags, argTypes)}></lu-date-input>
-
-			<pr-story-model-display>{{selected}}</pr-story-model-display>
-			`,
+			template: `<lu-date-input [(ngModel)]="selected" [min]="min" [max]="max" ${generateInputs(flags, argTypes)}></lu-date-input>
+<pr-story-model-display>{{selected}}</pr-story-model-display>`,
 		};
 	},
 } as Meta;
 
 export const Basic: StoryObj<DateInputComponent> = {
 	args: {
-		enableOverflow: false,
-		showOverflow: false,
+		disableOverflow: false,
+		hideOverflow: false,
 		hideToday: false,
 		hasTodayButton: false,
 		hideWeekend: false,

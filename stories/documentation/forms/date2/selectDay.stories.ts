@@ -40,9 +40,7 @@ export default {
 					return { classes: [] };
 				},
 			},
-			template: `
-				<lu-calendar2 [hideToday]="false" [showOverflow]="true" [enableOverflow]="true" [getCellInfo]="getDayInfo" [date]="currentMonth" mode="day" (dateClicked)="selected($event)"></lu-calendar2>
-			`,
+			template: `<lu-calendar2 [hideToday]="false" [showOverflow]="true" [enableOverflow]="true" [getCellInfo]="getDayInfo" [date]="currentMonth" mode="day" (dateClicked)="selected($event)"></lu-calendar2>`,
 		};
 	},
 } as Meta;
