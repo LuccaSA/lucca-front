@@ -93,7 +93,7 @@ export function generateInputs(inputs: Record<string, unknown>, argTypes: Strict
 	return Object.entries(inputs).reduce((acc, [name, value]) => {
 		const argType = argTypes[name];
 		// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-		if (argType['table'] && argType['table'].category !== 'inputs') {
+		if (!argType || (argType['table'] && argType['table'].category !== 'inputs')) {
 			return acc;
 		}
 		// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
