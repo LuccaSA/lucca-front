@@ -37,6 +37,10 @@
 					box-shadow: none;
 				}
 			}
+
+			&::-webkit-details-marker {
+				display: none;
+			}
 		}
 
 		.calloutDisclosure-summary-icon {
