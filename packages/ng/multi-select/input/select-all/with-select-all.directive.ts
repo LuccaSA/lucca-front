@@ -123,7 +123,7 @@ export class LuMultiSelectWithSelectAllDirective<TValue> extends ɵIsSelectedStr
 			values = [];
 			mode = 'none';
 		} else {
-			values = value.mode === 'exclude' ? value.values : [];
+			values = value.mode === 'exclude' || value.mode === 'include' ? value.values : [];
 			mode = value.mode;
 		}
 

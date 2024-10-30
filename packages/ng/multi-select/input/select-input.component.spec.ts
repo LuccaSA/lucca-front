@@ -190,6 +190,17 @@ describe('LuMultiSelectInputComponent', () => {
 			// Assert
 			expect(act).toThrow('MultiSelectWithSelectAllDirective does not support array values. Pass a LuMultiSelectWithSelectAllValue<TValue>.');
 		});
+
+		it('should work with not empty initial value', () => {
+			// Arrange
+			const { componentInstance } = fixture;
+
+			// Act
+			selectAllDirective.writeValue({ mode: 'include', values: [options[0]] });
+
+			// Assert
+			expect(componentInstance.value).toEqual([options[0]]);
+		});
 	});
 });
 
