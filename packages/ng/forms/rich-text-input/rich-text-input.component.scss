@@ -1,1 +1,22 @@
-@use '@lucca-front/scss/src/components/clear';
+.textField {
+	display: flex;
+	flex-direction: column;
+	flex-grow: 1;
+}
+
+.editor-toolbar {
+	display: flex;
+	flex-direction: row;
+	flex-grow: 1;
+	background-color: var(--palettes-grey-25);
+}
+
+.editorTheme__textBold {
+	font-weight: bold;
+}
+.editorTheme__textItalic {
+	font-style: italic;
+}
+.editorTheme__textStrikethrough {
+	text-decoration: line-through;
+}
