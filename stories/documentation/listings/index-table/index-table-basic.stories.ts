@@ -53,7 +53,7 @@ function getTemplate(args: IndexTableBasicStory): string {
 		<tr class="indexTable-body-row">
 			<td class="indexTable-body-row-cell">
 				<a href="#" class="indexTable-body-row-cell-action">Action</a>
-				Content (width deprecated action)
+				Content (with deprecated action)
 			</td>
 			<td class="indexTable-body-row-cell">Content</td>
 			<td class="indexTable-body-row-cell">Content</td>

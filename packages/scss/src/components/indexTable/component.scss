@@ -14,7 +14,7 @@
 	border-radius: var(--components-indexTable-border-radius);
 	background-color: var(--components-indexTable-background-color);
 	color: var(--palettes-neutral-800);
-	contain: paint;
+	contain: layout;
 
 	@at-root ($atRoot) {
 		.indexTable-head {
