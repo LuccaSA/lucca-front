@@ -1,5 +1,5 @@
 import { CalendarWeekDay, CalendarWeekInfo } from './calendar.token';
-import { Day, isSameDay, isSameMonth, isSameYear, startOfDay, startOfMonth, startOfYear } from 'date-fns';
+import { Day, isSameDay, isSameMonth, isSameYear, startOfDecade, startOfMonth, startOfYear } from 'date-fns';
 import { CalendarMode } from './calendar2/calendar-mode';
 
 export function getIntlWeekDay(date: Date): CalendarWeekDay {
@@ -17,9 +17,9 @@ const modeToComparator: Record<CalendarMode, (a: Date, b: Date) => boolean> = {
 };
 
 const modeToPeriodStart: Record<CalendarMode, (date: Date) => Date> = {
-	day: startOfDay,
-	month: startOfMonth,
-	year: startOfYear,
+	day: startOfMonth,
+	month: startOfYear,
+	year: startOfDecade,
 };
 
 export function comparePeriods(mode: CalendarMode, a: Date, b: Date): boolean {

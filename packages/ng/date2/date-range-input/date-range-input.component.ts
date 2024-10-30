@@ -14,6 +14,7 @@ import {
 	signal,
 	untracked,
 	viewChild,
+	viewChildren,
 	ViewEncapsulation,
 } from '@angular/core';
 import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors, Validator } from '@angular/forms';
@@ -22,13 +23,14 @@ import { getIntl, LuClass, ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { FORM_FIELD_INSTANCE, InputDirective } from '@lucca-front/ng/form-field';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { PopoverDirective } from '@lucca-front/ng/popover2';
-import { addMonths, addYears, endOfDecade, endOfMonth, endOfYear, isAfter, isBefore, parse, startOfDay, startOfDecade, startOfMonth, startOfYear } from 'date-fns';
+import { addMonths, addYears, endOfDecade, endOfMonth, endOfYear, isAfter, isBefore, isSameDay, parse, startOfDay, startOfDecade, startOfMonth, startOfYear, subMonths, subYears } from 'date-fns';
 import { CalendarMode } from '../calendar2/calendar-mode';
 import { Calendar2Component } from '../calendar2/calendar2.component';
 import { CellStatus } from '../calendar2/cell-status';
 import { DateRange } from '../calendar2/date-range';
 import { getDateFormat } from '../date-format';
 import { LU_DATE2_TRANSLATIONS } from '../date2.translate';
+import { startOfPeriod } from '../utils';
 
 let nextId = 0;
 
@@ -109,14 +111,7 @@ export class DateRangeInputComponent implements ControlValueAccessor, Validator 
 	protected currentDate = signal(startOfMonth(new Date()));
 
 	protected currentRightDate = computed(() => {
-		switch (this.mode()) {
-			case 'day':
-				return addMonths(this.currentDate(), 1);
-			case 'month':
-				return addYears(this.currentDate(), 1);
-			case 'year':
-				return addYears(this.currentDate(), 10);
-		}
+		return this.getNextCalendarDate(this.currentDate());
 	});
 
 	protected currentStartDisplayDate = computed(() => {
@@ -143,7 +138,7 @@ export class DateRangeInputComponent implements ControlValueAccessor, Validator 
 
 	protected tabbableDate = signal<Date | null>(null);
 
-	calendar = viewChild(Calendar2Component);
+	calendars = viewChildren(Calendar2Component);
 
 	combinedGetCellInfo = (date: Date, mode: CalendarMode): CellStatus => {
 		const infoFromInput = this.getCellInfo()?.(date, mode);
@@ -204,6 +199,11 @@ export class DateRangeInputComponent implements ControlValueAccessor, Validator 
 
 	nextButton = viewChild<ElementRef<Element>>('nextButtonRef');
 
+	// Which calendar is currently being focused in, used for tabbable date logic
+	focusedCalendarIndex = signal(0);
+
+	focusedCalendar = computed(() => this.calendars()[this.focusedCalendarIndex()]);
+
 	get isNavigationButtonFocused(): boolean {
 		return [this.previousButton()?.nativeElement, this.nextButton()?.nativeElement].includes(document.activeElement);
 	}
@@ -229,18 +229,49 @@ export class DateRangeInputComponent implements ControlValueAccessor, Validator 
 		});
 
 		ɵeffectWithDeps([this.calendarMode, this.tabbableDate], (calendarMode, tabbableDate) => {
-			// TODO handle tabbable date change from both calendars ?
-			// if (tabbableDate && !comparePeriods(calendarMode, tabbableDate, this.currentDate())) {
-			// 	this.currentDate.set(startOfPeriod(calendarMode, tabbableDate));
-			// 	console.log('SET CURRENT DATE', startOfPeriod(calendarMode, tabbableDate));
-			// }
+			if (tabbableDate) {
+				if (isAfter(tabbableDate, this.currentEndDisplayDate())) {
+					this.focusedCalendarIndex.set(0);
+					this.currentDate.set(startOfPeriod(calendarMode, tabbableDate));
+				} else if (isBefore(tabbableDate, this.currentStartDisplayDate())) {
+					this.focusedCalendarIndex.set(1);
+					switch (this.mode()) {
+						case 'day':
+							this.currentDate.set(subMonths(startOfPeriod(calendarMode, tabbableDate), 1));
+							break;
+						case 'month':
+							this.currentDate.set(subYears(startOfPeriod(calendarMode, tabbableDate), 1));
+							break;
+						case 'year':
+							this.currentDate.set(subYears(startOfPeriod(calendarMode, tabbableDate), 10));
+							break;
+					}
+				} else {
+					if (this.focusedCalendarIndex() === 1 && isBefore(tabbableDate, this.currentRightDate())) {
+						this.focusedCalendarIndex.set(0);
+					} else if (this.focusedCalendarIndex() === 0 && (isAfter(tabbableDate, this.currentRightDate()) || isSameDay(tabbableDate, this.currentRightDate()))) {
+						this.focusedCalendarIndex.set(1);
+					}
+				}
+			}
 			if (!this.isNavigationButtonFocused && !this.inputFocused()) {
-				this.calendar()?.blurTabbableDate();
+				this.focusedCalendar()?.blurTabbableDate();
 				setTimeout(() => {
-					this.calendar()?.focusTabbableDate();
+					this.focusedCalendar()?.focusTabbableDate();
 				});
 			}
 		});
+	}
+
+	getNextCalendarDate(date: Date): Date {
+		switch (this.mode()) {
+			case 'day':
+				return addMonths(date, 1);
+			case 'month':
+				return addYears(date, 1);
+			case 'year':
+				return addYears(date, 10);
+		}
 	}
 
 	setupInputEffect(inputSignal: Signal<string>, rangeProperty: 'start' | 'end'): void {
@@ -272,11 +303,17 @@ export class DateRangeInputComponent implements ControlValueAccessor, Validator 
 		);
 	}
 
+	tabbableDateChange(date: Date, calendarIndex: number) {
+		if (calendarIndex == this.focusedCalendarIndex()) {
+			this.tabbableDate.set(date);
+		}
+	}
+
 	openPopover(ref: PopoverDirective): void {
 		ref.openPopover(true, true);
 		// Once popover is opened, aka in the next CD cycle, focus current tabbable date
 		setTimeout(() => {
-			this.calendar()?.focusTabbableDate();
+			this.focusedCalendar()?.focusTabbableDate();
 		});
 	}
 
