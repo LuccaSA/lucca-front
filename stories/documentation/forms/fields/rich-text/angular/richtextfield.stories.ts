@@ -3,7 +3,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { cleanupTemplate, generateInputs } from 'stories/helpers/stories';
-import { RichTextInputComponent } from '@lucca-front/ng/forms/rich-text-input';
+import { RichTextInputComponent } from '@lucca-front/ng/forms';
 
 export default {
 	title: 'Documentation/Forms/Fields/RichTextField/Angular',
@@ -45,10 +45,10 @@ export const Basic: StoryObj<RichTextInputComponent & { disabled: boolean } & Fo
 				},
 				argTypes,
 			)}>
-	<lu-text-input
+	<lu-rich-text-input
 	${generateInputs(inputArgs, argTypes)}
 		[(ngModel)]="example">
-	</lu-text-input>
+	</lu-rich-text-input>
 </lu-form-field>
 {{example}}`),
 			moduleMetadata: {

@@ -51,6 +51,8 @@
     "@lexical/rich-text": "^0.19.0",
     "@lexical/selection": "^0.19.0",
     "@lexical/utils": "^0.19.0",
+    "@milkdown/kit": "^7.5.5",
+    "@milkdown/theme-nord": "^7.5.0",
     "@ngx-formly/core": "^6.3.1",
     "date-fns": "^3.6.0",
     "isomorphic-dompurify": "^2.11.0",
@@ -133,5 +135,6 @@
       "pdfjs-dist": "4.2.67"
     },
     "@lexical/code": "file:./packages/ng/forms/rich-text-input/lexical-code/lexical-code-1.0.0.tgz"
-  }
+  },
+  "packageManager": "pnpm@9.11.0+sha512.0a203ffaed5a3f63242cd064c8fb5892366c103e328079318f78062f24ea8c9d50bc6a47aa3567cabefd824d170e78fa2745ed1f16b132e16436146b7688f19b"
 }
