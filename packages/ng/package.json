@@ -29,9 +29,17 @@
     "@lucca-front/icons": "*",
     "@lucca-front/scss": "*",
     "@types/dompurify": "^3.0.0",
+    "@lexical/history": "^0.19.0",
+    "@lexical/link": "^0.19.0",
+    "@lexical/markdown": "^0.19.0",
+    "@lexical/rich-text": "^0.19.0",
+    "@lexical/selection": "^0.19.0",
+    "@lexical/utils": "^0.19.0",
     "isomorphic-dompurify": "^2.11.0",
     "date-fns": "^3.6.0",
-    "rxjs": "^7.8.0"
+    "rxjs": "^7.8.0",
+    "lexical": "^0.19.0",
+    "marked": "^14.1.0"
   },
   "bugs": {
     "url": "https://github.com/LuccaSA/lucca-front/issues"
