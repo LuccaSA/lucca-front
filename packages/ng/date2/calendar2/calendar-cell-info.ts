@@ -1,11 +1,10 @@
-import { DateRange } from './date-range';
 import { CellStatus } from './cell-status';
+import { DateRange } from './date-range';
 
 export interface RangeInfo {
 	range?: DateRange;
 	isStart: boolean;
 	isEnd: boolean;
-	isInProgress: boolean;
 	label?: string;
 }
 
@@ -20,6 +19,7 @@ export interface CalendarCellInfo {
 	disabled: boolean;
 	label?: string;
 	rangeInfo: RangeInfo;
+	isLastDayOfMonth: boolean;
 }
 
 export interface CalendarMonthInfo {

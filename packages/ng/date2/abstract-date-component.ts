@@ -1,12 +1,17 @@
-import { booleanAttribute, inject, input, LOCALE_ID, signal } from '@angular/core';
-import { DateRange } from './calendar2/date-range';
+import { booleanAttribute, Component, inject, input, LOCALE_ID, signal } from '@angular/core';
+import { addMonths, addYears } from 'date-fns';
 import { getIntl } from '../core/translate';
-import { LU_DATE2_TRANSLATIONS } from './date2.translate';
-import { getDateFormat } from './date-format';
 import { CalendarMode } from './calendar2/calendar-mode';
 import { CellStatus } from './calendar2/cell-status';
-import { addMonths, addYears } from 'date-fns';
+import { DateRange } from './calendar2/date-range';
+import { getDateFormat } from './date-format';
+import { LU_DATE2_TRANSLATIONS } from './date2.translate';
 
+@Component({
+	// eslint-disable-next-line @angular-eslint/component-selector
+	selector: '',
+	template: '',
+})
 export abstract class AbstractDateComponent {
 	protected locale = inject(LOCALE_ID);
 	// Contains the current date format (like dd/mm/yy etc) based on current locale

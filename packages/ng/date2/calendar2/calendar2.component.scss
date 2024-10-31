@@ -1,302 +1,672 @@
 @use '@lucca-front/scss/src/components/calendar';
 @use '@lucca-front/scss/src/components/calendar/states' as calendarState;
 
-$calendar: 'lu-calendar2';
-$row: '.calendar-table-body-row';
-$cell: '#{$row}-cell';
-$action: '#{$cell}-action';
-$start: '#{$cell}.is-fakeStart';
+// $calendar: 'lu-calendar2';
+// $row: '.calendar-table-body-row';
+// $cell: '#{$row}-cell';
+// $action: '#{$cell}-action';
+// $start: '#{$cell}.is-start';
+// $fakeStart: '#{$cell}.is-fakeStart';
+// $end: '#{$cell}.is-end';
 
-@mixin selectBeforeEndTable($event) {
-	#{$row} {
-		&#{$event} {
+// // si les dates de départ et de fin sont sur deux calendriers adjacents visibles
+// // la première ou la dernière semaine d’un mois voit ses cellules de débordement passer en selected
+// #{$calendar} {
+// 	&:has(#{$start}) {
+// 		&:has(~ #{$calendar} #{$end}) {
+// 			& ~ #{$calendar} {
+// 				#{$row}:first-child {
+// 					#{$cell}.is-overflow {
+// 						@include calendarState.selected;
+// 					}
+// 				}
+// 			}
+
+// 			#{$row}:last-child {
+// 				#{$cell}.is-selected {
+// 					& ~ #{$cell}.is-overflow {
+// 						@include calendarState.selected;
+// 					}
+// 				}
+// 			}
+// 		}
+// 	}
+// }
+
+// // la première ou la dernière semaine d’un mois avec un fakeStart
+// // voit ses cellules de débordement passer en selected au survol des cellules
+// .calendarWrapper.mod-range {
+// 	&:has(#{$cell}:not(.is-overflow):hover) {
+// 		#{$row}:first-child {
+// 			&:has(.is-fakeStart) {
+// 				#{$cell}.is-overflow {
+// 					@include calendarState.selected;
+
+// 					& + #{$cell}:not(.is-overflow) {
+// 						&::before {
+// 							border-top-left-radius: 0;
+// 							border-bottom-left-radius: 0;
+// 						}
+// 					}
+// 				}
+// 			}
+// 		}
+
+// 		#{$fakeStart} {
+// 			&:hover {
+// 				&::before {
+// 					--components-calendar-table-body-row-cellSelectedBeforeBorderRadius: 0 var(--commons-borderRadius-L) var(--commons-borderRadius-L)
+// 						0;
+// 				}
+// 			}
+// 		}
+
+// 		#{$row}:last-child {
+// 			&:has(.is-fakeStart) {
+// 				#{$cell}.is-overflow {
+// 					@include calendarState.selected;
+// 				}
+// 			}
+
+// 			#{$fakeStart} {
+// 				&::before {
+// 					border-top-right-radius: 0;
+// 					border-bottom-right-radius: 0;
+// 				}
+
+// 				&:hover {
+// 					&::before {
+// 						--components-calendar-table-body-row-cellSelectedBeforeBorderRadius: var(--commons-borderRadius-L) 0 0
+// 							var(--commons-borderRadius-L);
+// 					}
+// 				}
+// 			}
+// 		}
+// 	}
+// }
+
+// .is-fakeStart {
+// 	&:hover {
+// 		@include calendarState.selected;
+// 	}
+// }
+
+// .is-startInProgress.is-selected {
+// 	&::before {
+// 		--components-calendar-table-body-row-cellSelectedBeforeBorderRadius: var(--commons-borderRadius-L);
+// 	}
+// }
+
+// @mixin selectionBeforeEndTable($event, $calendar: $calendar, $row: $row, $cell: $cell, $action: $action, $start: $start, $end: $end) {
+// 	#{$row} {
+// 		&#{$event} {
+// 			&,
+// 			& ~ #{$row} {
+// 				#{$cell} {
+// 					&#{$event} {
+// 						&::before {
+// 							--components-calendar-table-body-row-cellSelectedBeforeBorderRadius: var(--commons-borderRadius-L) 0 0
+// 								var(--commons-borderRadius-L);
+// 						}
+
+// 						&,
+// 						& ~ #{$cell} {
+// 							@include calendarState.selected;
+// 						}
+// 					}
+// 				}
+// 			}
+
+// 			& ~ #{$row} {
+// 				#{$cell} {
+// 					@include calendarState.selected;
+// 				}
+// 			}
+// 		}
+// 	}
+// }
+
+// @mixin selectionBeforeStartTable($event, $calendar: $calendar, $row: $row, $cell: $cell, $action: $action, $start: $start, $end: $end) {
+// 	~ #{$calendar}:has(#{$start}) {
+// 		#{$row} {
+// 			&:not(:has(#{$start}) ~ #{$row}) {
+// 				#{$cell} {
+// 					&:not(#{$start} ~ #{$cell}) {
+// 						@include calendarState.selected;
+// 					}
+
+// 					&#{$start} {
+// 						&::before {
+// 							--components-calendar-table-body-row-cellSelectedBeforeBorderRadius: 0 var(--commons-borderRadius-L)
+// 								var(--commons-borderRadius-L) 0;
+// 							left: 0;
+// 						}
+// 					}
+// 				}
+// 			}
+// 		}
+// 	}
+// }
+
+// @mixin selectionBeforeAdjacentTable($event, $calendar: $calendar, $row: $row, $cell: $cell, $action: $action, $start: $start, $end: $end) {
+// 	& ~ #{$calendar} {
+// 		&:not(:has(#{$start}) ~ #{$calendar}, :has(#{$start})) {
+// 			#{$cell} {
+// 				@include calendarState.selected;
+// 			}
+// 		}
+// 	}
+// }
+
+// @mixin selectionAfterAdjacentTable($event, $calendar: $calendar, $row: $row, $cell: $cell, $action: $action, $start: $start, $end: $end) {
+// 	#{$row} {
+// 		#{$cell} {
+// 			@include calendarState.selected;
+
+// 			&#{$event} ~ #{$cell} {
+// 				@include calendarState.unselected;
+// 			}
+// 		}
+
+// 		&#{$event} ~ #{$row} {
+// 			#{$cell} {
+// 				@include calendarState.unselected;
+// 			}
+// 		}
+// 	}
+
+// 	&#{$event} ~ #{$calendar} {
+// 		#{$cell} {
+// 			@include calendarState.unselected;
+// 		}
+// 	}
+
+// 	#{$cell}#{$event} {
+// 		&::before {
+// 			--components-calendar-table-body-row-cellSelectedBeforeBorderRadius: 0 var(--commons-borderRadius-L) var(--commons-borderRadius-L) 0;
+// 		}
+// 	}
+// }
+
+// @mixin selectionAfterStartTable($event, $calendar: $calendar, $row: $row, $cell: $cell, $action: $action, $start: $start, $end: $end) {
+// 	#{$start} {
+// 		&,
+// 		~ #{$cell} {
+// 			@include calendarState.selected;
+// 		}
+// 	}
+
+// 	~ #{$row} {
+// 		#{$cell} {
+// 			@include calendarState.selected;
+// 		}
+// 	}
+// }
+
+// @mixin selectionBeforeSameWeek($event, $calendar: $calendar, $row: $row, $cell: $cell, $action: $action, $start: $start, $end: $end) {
+// 	#{$start} {
+// 		&::before {
+// 			--components-calendar-table-body-row-cellSelectedBeforeBorderRadius: 0 var(--commons-borderRadius-L) var(--commons-borderRadius-L) 0;
+// 			left: 0;
+// 		}
+// 	}
+
+// 	#{$cell}#{$event} {
+// 		&::before {
+// 			--components-calendar-table-body-row-cellSelectedBeforeBorderRadius: var(--commons-borderRadius-L) 0 0 var(--commons-borderRadius-L);
+// 		}
+// 	}
+
+// 	#{$cell}#{$event},
+// 	#{$cell}#{$event} ~ #{$cell} {
+// 		&:not(#{$start} ~ #{$cell}) {
+// 			@include calendarState.selected;
+// 		}
+// 	}
+// }
+
+// @mixin selectionAfterSameWeek($event, $calendar: $calendar, $row: $row, $cell: $cell, $action: $action, $start: $start, $end: $end) {
+// 	#{$start} {
+// 		&::before {
+// 			--components-calendar-table-body-row-cellSelectedBeforeBorderRadius: var(--commons-borderRadius-L) 0 0 var(--commons-borderRadius-L);
+// 		}
+
+// 		&,
+// 		& ~ #{$cell} {
+// 			@include calendarState.selected;
+// 		}
+// 	}
+
+// 	#{$cell}#{$event} {
+// 		&::before {
+// 			--components-calendar-table-body-row-cellSelectedBeforeBorderRadius: 0 var(--commons-borderRadius-L) var(--commons-borderRadius-L) 0;
+// 		}
+
+// 		& ~ #{$cell} {
+// 			@include calendarState.unselected;
+// 		}
+// 	}
+// }
+
+// @mixin selectionBeforeAdjacentWeek($event, $calendar: $calendar, $row: $row, $cell: $cell, $action: $action, $start: $start, $end: $end) {
+// 	#{$cell}#{$event} {
+// 		&::before {
+// 			--components-calendar-table-body-row-cellSelectedBeforeBorderRadius: var(--commons-borderRadius-L) 0 0 var(--commons-borderRadius-L);
+// 		}
+// 	}
+
+// 	&,
+// 	~ #{$row} {
+// 		&:not(:has(#{$start}) ~ #{$row}) {
+// 			#{$start} {
+// 				&::before {
+// 					left: 0;
+// 					--components-calendar-table-body-row-cellSelectedBeforeBorderRadius: 0 var(--commons-borderRadius-L) var(--commons-borderRadius-L)
+// 						0;
+// 				}
+// 			}
+
+// 			// sélection de la ligne
+// 			&#{$event} {
+// 				#{$cell}#{$event},
+// 				#{$cell}#{$event} ~ #{$cell} {
+// 					@include calendarState.selected;
+// 				}
+// 			}
+
+// 			// sélection des lignes adjacentes
+// 			& ~ #{$row} {
+// 				&:not(:has(#{$start}) ~ #{$row}) {
+// 					#{$cell} {
+// 						&:not(#{$start} ~ #{$cell}) {
+// 							@include calendarState.selected;
+// 						}
+// 					}
+// 				}
+// 			}
+// 		}
+// 	}
+// }
+
+// @mixin selectionAfterAdjacentWeek($event, $calendar: $calendar, $row: $row, $cell: $cell, $action: $action, $start: $start, $end: $end) {
+// 	// sélection de la ligne
+// 	#{$start} {
+// 		&::before {
+// 			--components-calendar-table-body-row-cellSelectedBeforeBorderRadius: var(--commons-borderRadius-L) 0 0 var(--commons-borderRadius-L);
+// 		}
+
+// 		&,
+// 		& ~ #{$cell} {
+// 			@include calendarState.selected;
+// 		}
+// 	}
+
+// 	// sélection des lignes adjacentes
+// 	& ~ #{$row} {
+// 		#{$cell} {
+// 			&#{$event} {
+// 				&::before {
+// 					--components-calendar-table-body-row-cellSelectedBeforeBorderRadius: 0 var(--commons-borderRadius-L) var(--commons-borderRadius-L)
+// 						0;
+// 				}
+// 			}
+
+// 			@include calendarState.selected;
+
+// 			&#{$event} ~ #{$cell} {
+// 				@include calendarState.unselected;
+// 			}
+// 		}
+
+// 		&#{$event} ~ #{$row} {
+// 			#{$cell} {
+// 				@include calendarState.unselected;
+// 			}
+// 		}
+// 	}
+// }
+
+// @mixin selectionInProgressSameMonth($event, $calendar: $calendar, $row: $row, $cell: $cell, $action: $action, $start: $start, $end: $end) {
+// 	#{$row} {
+// 		&:has(#{$start}) {
+// 			&:has(#{$cell}#{$event} ~ #{$start}) {
+// 				@include selectionBeforeSameWeek(
+// 					$event,
+// 					$calendar: $calendar,
+// 					$row: $row,
+// 					$cell: $cell,
+// 					$action: $action,
+// 					$start: $start,
+// 					$end: $end
+// 				);
+// 			}
+// 		}
+// 	}
+// 	#{$row} {
+// 		&:has(#{$start}) {
+// 			&:has(#{$start} ~ #{$event}) {
+// 				@include selectionAfterSameWeek(
+// 					$event,
+// 					$calendar: $calendar,
+// 					$row: $row,
+// 					$cell: $cell,
+// 					$action: $action,
+// 					$start: $start,
+// 					$end: $end
+// 				);
+// 			}
+// 		}
+// 	}
+
+// 	#{$row} {
+// 		&:has(#{$event}) {
+// 			&:has(~ #{$row} #{$start}) {
+// 				@include selectionBeforeAdjacentWeek(
+// 					$event,
+// 					$calendar: $calendar,
+// 					$row: $row,
+// 					$cell: $cell,
+// 					$action: $action,
+// 					$start: $start,
+// 					$end: $end
+// 				);
+// 			}
+// 		}
+// 	}
+
+// 	#{$row} {
+// 		&:has(#{$start}) {
+// 			&:has(~ #{$event}) {
+// 				@include selectionAfterAdjacentWeek(
+// 					$event,
+// 					$calendar: $calendar,
+// 					$row: $row,
+// 					$cell: $cell,
+// 					$action: $action,
+// 					$start: $start,
+// 					$end: $end
+// 				);
+// 			}
+// 		}
+// 	}
+// }
+
+// @mixin selectionInProgressBeforeMonth(
+// 	$event,
+// 	$calendar: $calendar,
+// 	$row: $row,
+// 	$cell: $cell,
+// 	$action: $action,
+// 	$start: $start,
+// 	$end: $end
+// ) {
+// 	@include selectionBeforeStartTable($event);
+// 	@include selectionBeforeAdjacentTable($event);
+// 	@include selectionBeforeEndTable($event);
+// }
+
+// @mixin selectionInProgressAfterMonth($event, $calendar: $calendar, $row: $row, $cell: $cell, $action: $action, $start: $start, $end: $end) {
+// 	#{$start} {
+// 		&::before {
+// 			--components-calendar-table-body-row-cellSelectedBeforeBorderRadius: var(--commons-borderRadius-L) 0 0 var(--commons-borderRadius-L);
+// 		}
+// 	}
+
+// 	#{$row} {
+// 		&:has(#{$start}) {
+// 			@include selectionAfterStartTable(
+// 				$event,
+// 				$calendar: $calendar,
+// 				$row: $row,
+// 				$cell: $cell,
+// 				$action: $action,
+// 				$start: $start,
+// 				$end: $end
+// 			);
+// 		}
+// 	}
+// 	~ #{$calendar} {
+// 		@include selectionAfterAdjacentTable(
+// 			$event,
+// 			$calendar: $calendar,
+// 			$row: $row,
+// 			$cell: $cell,
+// 			$action: $action,
+// 			$start: $start,
+// 			$end: $end
+// 		);
+// 	}
+// }
+
+// @mixin selectionInProgress($event, $calendar, $row, $cell, $action, $start, $end) {
+// 	#{$calendar} {
+// 		&:has(#{$start}) {
+// 			&:has(~ #{$event}) {
+// 				@include selectionInProgressAfterMonth(
+// 					$event,
+// 					$calendar: $calendar,
+// 					$row: $row,
+// 					$cell: $cell,
+// 					$action: $action,
+// 					$start: $start,
+// 					$end: $end
+// 				);
+// 			}
+// 		}
+
+// 		&:has(#{$event}) {
+// 			&:has(~ #{$calendar} #{$start}) {
+// 				@include selectionInProgressBeforeMonth(
+// 					$event,
+// 					$calendar: $calendar,
+// 					$row: $row,
+// 					$cell: $cell,
+// 					$action: $action,
+// 					$start: $start,
+// 					$end: $end
+// 				);
+// 			}
+// 		}
+
+// 		&:has(#{$event}) {
+// 			&:has(#{$start}) {
+// 				@include selectionInProgressSameMonth(
+// 					$event,
+// 					$calendar: $calendar,
+// 					$row: $row,
+// 					$cell: $cell,
+// 					$action: $action,
+// 					$start: $start,
+// 					$end: $end
+// 				);
+// 			}
+// 		}
+// 	}
+// }
+
+// .calendarWrapper.mod-range {
+// 	&:has(#{$start}, #{$fakeStart}) {
+// 		&:has(#{$action}:focus-visible) {
+// 			@include selectionInProgress(
+// 				$event: ':focus-within',
+// 				$calendar: $calendar,
+// 				$row: $row,
+// 				$cell: $cell,
+// 				$action: $action,
+// 				$start: $start,
+// 				$end: $end
+// 			);
+// 		}
+
+// 		&:not(:has(#{$cell}.is-end)) {
+// 			&:not(:has(#{$cell} #{$cell}-action:focus-visible)) {
+// 				&:has(#{$cell}:not(.is-overflow):hover) {
+// 					@include selectionInProgress(
+// 						$event: ':hover',
+// 						$calendar: $calendar,
+// 						$row: $row,
+// 						$cell: $cell,
+// 						$action: $action,
+// 						$start: $start,
+// 						$end: $end
+// 					);
+
+// 					@include selectionInProgress(
+// 						$event: ':hover',
+// 						$calendar: $calendar,
+// 						$row: $row,
+// 						$cell: $cell,
+// 						$action: $action,
+// 						$start: $fakeStart,
+// 						$end: $end
+// 					);
+// 				}
+// 			}
+// 		}
+// 	}
+// }
+
+.is-fakeStart {
+	outline: 3px solid green;
+}
+
+.is-fakeEnd {
+	outline: 3px solid red;
+}
+
+// Le même mois
+lu-calendar2 {
+	&:has(.is-start) {
+		&:has(.is-end) {
+			outline: 1px solid red;
+			outline-offset: -1px;
+
+			// pas d’overflow à gérer
+		}
+	}
+}
+
+// Sur des mois différents tous visibles
+lu-calendar2 {
+	&:has(.is-start) {
+		&:has(~ lu-calendar2 .is-end) {
+			outline: 1px solid green;
+			outline-offset: -1px;
+
+			// overflow sur la dernière ligne du calendrier
+			tr:last-child {
+				.is-overflow {
+					outline: 1px solid green;
+				}
+			}
+
+			// overflow sur la première ligne du dernier calendrier
+			& ~ lu-calendar2 {
+				tr:first-child {
+					.is-overflow {
+						outline: 1px solid green;
+					}
+				}
+			}
+		}
+	}
+}
+
+// Sur des mois différents avec la première date sur le dernier mois visible et la seconde invisible
+lu-calendar2 {
+	&:has(.is-start) {
+		&:has(.is-fakeEnd) {
+			outline: 1px solid blue;
+			outline-offset: -1px;
+
+			// overflow sur la dernière ligne du calendrier
+			tr:last-child {
+				.is-overflow {
+					outline: 1px solid blue;
+				}
+			}
+		}
+	}
+}
+
+// Sur des mois différents avec la première date sur le premier mois visible et la seconde invisible
+lu-calendar2 {
+	&:has(.is-start) {
+		&:has(~ lu-calendar2 .is-fakeEnd) {
+			outline: 1px solid orange;
+			outline-offset: -1px;
+
+			// overflow sur la dernière ligne du calendrier
+			tr:last-child {
+				.is-overflow {
+					outline: 1px solid orange;
+				}
+			}
+
+			// overflow sur la première et dernière ligne du dernier calendrier
+			~ lu-calendar2 {
+				.is-overflow {
+					outline: 1px solid orange;
+				}
+			}
+		}
+	}
+}
+
+// Sur des mois différents avec la première date invisible et la seconde sur le premier mois visible
+lu-calendar2 {
+	&:has(.is-fakeStart) {
+		&:has(.is-start, .is-end) {
+			outline: 1px solid rebeccapurple;
+			outline-offset: -1px;
+
+			// overflow sur la première ligne du calendrier
+			tr:first-child {
+				.is-overflow {
+					outline: 1px solid rebeccapurple;
+				}
+			}
+		}
+	}
+}
+
+// Sur des mois différents avec la première date invisible et la seconde sur le dernier mois visible
+lu-calendar2 {
+	&:has(.is-fakeStart) {
+		&:has(~ lu-calendar2 .is-start) {
+			outline: 1px solid violet;
+			outline-offset: -1px;
+
+			// overflow sur la première et la dernière ligne du calendrier
+			.is-overflow {
+				outline: 1px solid violet;
+			}
+
+			// overflow sur la première ligne du dernier calendrier
+			& ~ lu-calendar2 {
+				tr:first-child {
+					.is-overflow {
+						outline: 1px solid violet;
+					}
+				}
+			}
+		}
+	}
+}
+
+// Sur des mois différents avec la première et la dernière date invisibles
+lu-calendar2 {
+	&:has(.is-fakeStart) {
+		&:has(~ lu-calendar2 .is-fakeEnd) {
+			outline: 1px solid maroon;
+			outline-offset: -1px;
+
+			// overflow sur la première et la dernière ligne du calendrier
+			// overflow sur la première et la dernière ligne du dernier calendrier
 			&,
-			& ~ #{$row} {
-				#{$cell} {
-					&#{$event} {
-						&::before {
-							--components-calendar-table-body-row-cellSelectedBeforeBorderRadius: var(--commons-borderRadius-L) 0 0 var(--commons-borderRadius-L);
-						}
-
-						&,
-						& ~ #{$cell} {
-							@include calendarState.selected;
-						}
-					}
-				}
-			}
-
-			& ~ #{$row} {
-				#{$cell} {
-					@include calendarState.selected;
-				}
-			}
-		}
-	}
-}
-
-@mixin selectBeforeStartTable($event) {
-	~ #{$calendar}:has(#{$start}) {
-		#{$row} {
-			&:not(:has(#{$start}) ~ #{$row}) {
-				#{$cell} {
-					&:not(#{$start} ~ #{$cell}) {
-						@include calendarState.selected;
-					}
-
-					&#{$start} {
-						&::before {
-							--components-calendar-table-body-row-cellSelectedBeforeBorderRadius: 0 var(--commons-borderRadius-L) var(--commons-borderRadius-L) 0;
-							left: 0;
-						}
-					}
-				}
-			}
-		}
-	}
-}
-
-@mixin selectBeforeAdjacentTable($event) {
-	& ~ #{$calendar} {
-		&:not(:has(#{$start}) ~ #{$calendar}, :has(#{$start})) {
-			#{$cell} {
-				@include calendarState.selected;
-			}
-		}
-	}
-}
-
-@mixin selectAfterAdjacentTable($event) {
-	#{$row} {
-		#{$cell} {
-			@include calendarState.selected;
-
-			&#{$event} ~ #{$cell} {
-				@include calendarState.unselected;
-			}
-		}
-
-		&#{$event} ~ #{$row} {
-			#{$cell} {
-				@include calendarState.unselected;
-			}
-		}
-	}
-
-	&#{$event} ~ #{$calendar} {
-		#{$cell} {
-			@include calendarState.unselected;
-		}
-	}
-
-	#{$cell}#{$event} {
-		&::before {
-			--components-calendar-table-body-row-cellSelectedBeforeBorderRadius: 0 var(--commons-borderRadius-L) var(--commons-borderRadius-L) 0;
-		}
-	}
-}
-
-@mixin selectAfterStartTable($event) {
-	#{$start} {
-		&,
-		~ #{$cell} {
-			@include calendarState.selected;
-		}
-	}
-
-	~ #{$row} {
-		#{$cell} {
-			@include calendarState.selected;
-		}
-	}
-}
-
-@mixin selectBeforeSameWeek($event) {
-	#{$cell}#{$event} {
-		&::before {
-			--components-calendar-table-body-row-cellSelectedBeforeBorderRadius: var(--commons-borderRadius-L) 0 0 var(--commons-borderRadius-L);
-		}
-	}
-
-	#{$cell}#{$event},
-	#{$cell}#{$event} ~ #{$cell} {
-		&:not(#{$start} ~ #{$cell}) {
-			@include calendarState.selected;
-		}
-	}
-}
-
-@mixin selectAfterSameWeek($event) {
-	#{$start} {
-		&,
-		& ~ #{$cell} {
-			@include calendarState.selected;
-		}
-	}
-
-	#{$cell}#{$event} {
-		&::before {
-			--components-calendar-table-body-row-cellSelectedBeforeBorderRadius: 0 var(--commons-borderRadius-L) var(--commons-borderRadius-L) 0;
-		}
-
-		& ~ #{$cell} {
-			@include calendarState.unselected;
-		}
-	}
-}
-
-@mixin selectBeforeAdjacentWeek($event) {
-	#{$cell}#{$event} {
-		&::before {
-			--components-calendar-table-body-row-cellSelectedBeforeBorderRadius: var(--commons-borderRadius-L) 0 0 var(--commons-borderRadius-L);
-		}
-	}
-
-	&,
-	~ #{$row} {
-		&:not(:has(#{$start}) ~ #{$row}) {
-			#{$start} {
-				&::before {
-					left: 0;
-					--components-calendar-table-body-row-cellSelectedBeforeBorderRadius: 0 var(--commons-borderRadius-L) var(--commons-borderRadius-L) 0;
-				}
-			}
-
-			// sélection de la ligne
-			&#{$event} {
-				#{$cell}#{$event},
-				#{$cell}#{$event} ~ #{$cell} {
-					@include calendarState.selected;
-				}
-			}
-
-			// sélection des lignes adjacentes
-			& ~ #{$row} {
-				&:not(:has(#{$start}) ~ #{$row}) {
-					#{$cell} {
-						&:not(#{$start} ~ #{$cell}) {
-							@include calendarState.selected;
-						}
-					}
-				}
-			}
-		}
-	}
-}
-
-@mixin selectAfterAdjacentWeek($event) {
-	// sélection de la ligne
-	#{$start},
-	#{$start} ~ #{$cell} {
-		@include calendarState.selected;
-	}
-
-	// sélection des lignes adjacentes
-	& ~ #{$row} {
-		#{$cell} {
-			&#{$event} {
-				&::before {
-					--components-calendar-table-body-row-cellSelectedBeforeBorderRadius: 0 var(--commons-borderRadius-L) var(--commons-borderRadius-L) 0;
-				}
-			}
-
-			@include calendarState.selected;
-
-			&#{$event} ~ #{$cell} {
-				@include calendarState.unselected;
-			}
-		}
-
-		&#{$event} ~ #{$row} {
-			#{$cell} {
-				@include calendarState.unselected;
-			}
-		}
-	}
-}
-
-@mixin selectionInProgressSameMonth($event) {
-	#{$row} {
-		&:has(#{$start}) {
-			&:has(#{$cell}#{$event} ~ #{$start}) {
-				@include selectBeforeSameWeek($event);
-			}
-		}
-	}
-	#{$row} {
-		&:has(#{$start}) {
-			&:has(#{$start} ~ #{$event}) {
-				@include selectAfterSameWeek($event);
-			}
-		}
-	}
-
-	#{$row} {
-		&:has(#{$event}) {
-			&:has(~ #{$row} #{$start}) {
-				@include selectBeforeAdjacentWeek($event);
-			}
-		}
-	}
-
-	#{$row} {
-		&:has(#{$start}) {
-			&:has(~ #{$event}) {
-				@include selectAfterAdjacentWeek($event);
-			}
-		}
-	}
-}
-
-@mixin selectionInProgressBeforeMonth($event) {
-	@include selectBeforeStartTable($event);
-	@include selectBeforeAdjacentTable($event);
-	@include selectBeforeEndTable($event);
-}
-
-@mixin selectionInProgressAfterMonth($event) {
-	#{$row} {
-		&:has(#{$start}) {
-			@include selectAfterStartTable($event);
-		}
-	}
-	~ #{$calendar} {
-		@include selectAfterAdjacentTable($event);
-	}
-}
-
-@mixin selectionInProgress($event) {
-	#{$calendar} {
-		&:has(#{$start}) {
-			&:has(~ #{$event}) {
-				@include selectionInProgressAfterMonth($event);
-			}
-		}
-
-		&:has(#{$event}) {
-			&:has(~ #{$calendar} #{$start}) {
-				@include selectionInProgressBeforeMonth($event);
-			}
-		}
-
-		&:has(#{$event}) {
-			&:has(#{$start}) {
-				@include selectionInProgressSameMonth($event);
-			}
-		}
-	}
-}
-
-.calendarWrapper.mod-range {
-	&:has(#{$start}) {
-		&:has(#{$action}:focus-visible) {
-			@include selectionInProgress($event: ':focus-within');
-		}
-
-		&:not(:has(#{$cell}.is-end)) {
-			&:not(:has(#{$cell} #{$cell}-action:focus-visible)) {
-				&:has(#{$cell}:not(.is-overflow):hover) {
-					@include selectionInProgress($event: ':hover');
+			& ~ lu-calendar2 {
+				.is-overflow {
+					outline: 1px solid maroon;
 				}
 			}
 		}

@@ -7,5 +7,7 @@ export interface DateRange {
 	end?: Date;
 	label?: string;
 	scope?: CalendarMode;
-	inProgress?: boolean;
+	startsOutside?: boolean;
+	endsOutside?: boolean;
+	outside?: boolean;
 }

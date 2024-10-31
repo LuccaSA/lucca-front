@@ -2,6 +2,8 @@ import { NgClass } from '@angular/common';
 import { booleanAttribute, ChangeDetectionStrategy, Component, computed, effect, ElementRef, inject, input, LOCALE_ID, model, OnInit, output, viewChildren, ViewEncapsulation } from '@angular/core';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { CalloutComponent } from '@lucca-front/ng/callout';
+import { getIntl } from '@lucca-front/ng/core';
+import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
 import {
 	addMonths,
 	addYears,
@@ -12,7 +14,6 @@ import {
 	endOfMonth,
 	endOfWeek,
 	endOfYear,
-	isBefore,
 	isSameDay,
 	isSameMonth,
 	isSameYear,
@@ -27,12 +28,10 @@ import {
 	subYears,
 	WeekOptions,
 } from 'date-fns';
-import { getIntl } from '@lucca-front/ng/core';
-import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
 import { WEEK_INFO } from '../calendar.token';
 import { LU_DATE2_TRANSLATIONS } from '../date2.translate';
 import { RepeatTimesDirective } from '../repeat-times.directive';
-import { getIntlWeekDay, getJSFirstDayOfWeek, startOfPeriod } from '../utils';
+import { getIntlWeekDay, getJSFirstDayOfWeek } from '../utils';
 import { CalendarCellInfo, CalendarMonthInfo, CalendarYearInfo } from './calendar-cell-info';
 import { CalendarMode } from './calendar-mode';
 import { Calendar2CellDirective } from './calendar2-cell.directive';
@@ -316,6 +315,7 @@ export class Calendar2Component implements OnInit {
 			isCurrent: isSameDay(new Date(), date) && !this.hideToday(),
 			rangeInfo,
 			disabled: status?.disabled || (isOverflow && !this.enableOverflow()),
+			isLastDayOfMonth: isSameDay(lastDayOfMonth(date), date),
 		};
 	}
 
@@ -344,13 +344,12 @@ export class Calendar2Component implements OnInit {
 		if (!range) {
 			return null;
 		}
-		const isStart: boolean = range && isSameDay(date, range.start) && !range.inProgress;
-		const isEnd: boolean = range && range.end && isSameDay(date, range.end);
+		const isStart: boolean = range && isSameDay(date, range.start) && !range.startsOutside;
+		const isEnd: boolean = range && range.end && isSameDay(date, range.end) && !range.endsOutside;
 		return {
 			range,
 			isStart,
 			isEnd,
-			isInProgress: range?.inProgress,
 			label: range?.label,
 			class: range?.class,
 		};

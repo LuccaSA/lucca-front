@@ -7,12 +7,12 @@ import { FORM_FIELD_INSTANCE, InputDirective } from '@lucca-front/ng/form-field'
 import { IconComponent } from '@lucca-front/ng/icon';
 import { PopoverDirective } from '@lucca-front/ng/popover2';
 import { addMonths, addYears, endOfDecade, endOfMonth, endOfYear, isAfter, isBefore, isSameDay, parse, startOfDay, startOfDecade, startOfMonth, startOfYear, subMonths, subYears } from 'date-fns';
+import { AbstractDateComponent } from '../abstract-date-component';
 import { CalendarMode } from '../calendar2/calendar-mode';
 import { Calendar2Component } from '../calendar2/calendar2.component';
 import { CellStatus } from '../calendar2/cell-status';
 import { DateRange } from '../calendar2/date-range';
 import { startOfPeriod } from '../utils';
-import { AbstractDateComponent } from '../abstract-date-component';
 
 let nextId = 0;
 
@@ -101,26 +101,28 @@ export class DateRangeInputComponent extends AbstractDateComponent implements Co
 
 	calendarRanges = computed(() => {
 		if (this.selectedRange()) {
-			if (isBefore(this.selectedRange().start, this.currentStartDisplayDate())) {
-				return [
-					{
-						...this.selectedRange(),
-						start: this.currentStartDisplayDate(),
-						inProgress: true,
-					},
-					...this.ranges(),
-				];
+			const startsOutside = isBefore(this.selectedRange().start, this.currentStartDisplayDate()) && isAfter(this.selectedRange().end, this.currentStartDisplayDate());
+			const endsOutside = isAfter(this.selectedRange().end, this.currentEndDisplayDate()) && isBefore(this.selectedRange().start, this.currentEndDisplayDate());
+
+			if (startsOutside || endsOutside) {
+				const outsideRange = {
+					...this.selectedRange(),
+					outside: true,
+				};
+
+				if (startsOutside) {
+					outsideRange.start = this.currentStartDisplayDate();
+					outsideRange.startsOutside = true;
+				}
+
+				if (endsOutside) {
+					outsideRange.end = this.currentEndDisplayDate();
+					outsideRange.endsOutside = true;
+				}
+
+				return [outsideRange, ...this.ranges()];
 			}
-			if (isAfter(this.selectedRange().start, this.currentEndDisplayDate())) {
-				return [
-					{
-						...this.selectedRange(),
-						start: this.currentEndDisplayDate(),
-						inProgress: true,
-					},
-					...this.ranges(),
-				];
-			}
+
 			return [this.selectedRange(), ...this.ranges()];
 		}
 		return this.ranges();
