@@ -33,7 +33,7 @@
 					[class.is-end]="day.rangeInfo?.isEnd || day.status.selected"
 					[class.is-fakeStart]="day.rangeInfo?.range.startsOutside && day.day === 1"
 					[class.is-fakeEnd]="day.rangeInfo?.range.endsOutside && day.isLastDayOfMonth"
-					[class.is-selected]="(day.rangeInfo?.range && !day.rangeInfo?.range.outside) || day.status.selected"
+					[class.is-selected]="(day.rangeInfo?.range && !day.rangeInfo?.range.outside) || day.status.selected || !!day.rangeInfo?.range"
 					[ngClass]="day.classes"
 				>
 					<button

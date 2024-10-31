@@ -27,26 +27,6 @@
 	&:has(.calendar-table-body-row-cell:nth-child(3):last-child) {
 		@include third;
 	}
-
-	// if we have a selection start
-	// &:has(.calendar-table-body-row-cell.is-start) {
-	// 	// but no selection end
-	// 	&:not(:has(.calendar-table-body-row-cell.is-end)) {
-	// 		// and either focus-visible
-	// 		&:has(.calendar-table-body-row-cell-action:focus-visible) {
-	// 			// we call the selection in progress mixin
-	// 			@include selectionInProgress($event: ':focus-within');
-	// 		}
-
-	// 		// or hovering (without focus-visible)
-	// 		&:not(:has(.calendar-table-body-row-cell:focus-within)) {
-	// 			&:has(.calendar-table-body-row-cell:hover) {
-	// 				// we call the selection in progress mixin
-	// 				@include selectionInProgress($event: ':hover');
-	// 			}
-	// 		}
-	// 	}
-	// }
 }
 
 .calendarShortcuts {
@@ -79,5 +59,76 @@
 
 	&.is-end {
 		@include end;
+	}
+}
+
+$calendarComponent: 'lu-calendar2';
+
+// gestion de l’allumage des overflow sur les sélection établies
+#{$calendarComponent} {
+	@include datesAllVisible($calendarComponent) {
+		@include overflowLines($filter: '&:last-child') {
+			@include selected;
+		}
+
+		+ #{$calendarComponent} {
+			@include overflowLines($filter: '&:first-child') {
+				@include selected;
+			}
+		}
+	}
+
+	@include datesFirstVisibleOnLastMonthSecondInvisible {
+		@include overflowLines($filter: '&:last-child') {
+			@include selected;
+		}
+	}
+
+	@include datesFirstVisibleOnFirstMonthSecondInvisible($calendarComponent) {
+		@include overflowLines($filter: '&:last-child') {
+			@include selected;
+		}
+
+		+ #{$calendarComponent} {
+			@include overflowLines {
+				@include selected;
+			}
+		}
+	}
+
+	@include firstDateInvisible {
+		@include secondDateVisible {
+			@include overflowLines($filter: '&:first-child') {
+				@include selected;
+			}
+		}
+	}
+
+	@include firstDateInvisible {
+		@include secondDateVisible($on: '+ #{$calendarComponent}') {
+			@include overflowLines {
+				@include selected;
+			}
+
+			+ #{$calendarComponent} {
+				@include overflowLines($filter: '&:first-child') {
+					@include selected;
+				}
+			}
+		}
+	}
+
+	@include firstDateInvisible {
+		@include secondDateInvisible($calendarComponent) {
+			@include overflowLines {
+				@include selected;
+			}
+
+			+ #{$calendarComponent} {
+				@include overflowLines {
+					@include selected;
+				}
+			}
+		}
 	}
 }
