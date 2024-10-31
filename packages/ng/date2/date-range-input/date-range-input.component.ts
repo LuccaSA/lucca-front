@@ -108,7 +108,7 @@ export class DateRangeInputComponent implements ControlValueAccessor, Validator 
 
 	calendarShortcuts = signal(false);
 
-	protected currentDate = signal(startOfMonth(new Date()));
+	protected currentDate = signal(new Date());
 
 	protected currentRightDate = computed(() => {
 		return this.getNextCalendarDate(this.currentDate());
