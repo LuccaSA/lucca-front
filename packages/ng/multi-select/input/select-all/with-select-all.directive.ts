@@ -130,12 +130,16 @@ export class LuMultiSelectWithSelectAllDirective<TValue> extends ɵIsSelectedStr
 	}
 
 	clearValue($event: Event): void {
-		this.#selectClearValue($event);
 		this.#mode.set('none');
-		this.#values.set([]);
+		this.#selectClearValue($event);
 	}
 
 	#getNextMode(fromMode: LuMultiSelectionMode, values: TValue[]): LuMultiSelectionMode {
+		// Keep 'none' when no value selected
+		if (fromMode === 'none' && values.length === 0) {
+			return 'none';
+		}
+
 		const allSelected = values.length === this.totalCount();
 
 		if (allSelected) {
