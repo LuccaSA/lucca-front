@@ -22,18 +22,20 @@ import {
 	LuMultiSelectWithSelectAllDirective,
 } from '@lucca-front/ng/multi-select';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
-import { applicationConfig, Meta, moduleMetadata } from '@storybook/angular';
+import { Meta, applicationConfig, moduleMetadata } from '@storybook/angular';
 import { LuMultiSelection } from 'packages/ng/multi-select/select.model';
 import { interval, map } from 'rxjs';
 import { startWith } from 'rxjs/operators';
 import { HiddenArgType } from 'stories/helpers/common-arg-types';
 import { getStoryGenerator } from 'stories/helpers/stories';
-import { allLegumes, colorNameByColor, coreSelectStory, FilterLegumesPipe, ILegume, LuCoreSelectInputStoryComponent, SortLegumesPipe } from './select.utils';
+import { FilterLegumesPipe, ILegume, LuCoreSelectInputStoryComponent, SortLegumesPipe, allLegumes, colorNameByColor, coreSelectStory } from './select.utils';
 
 type LuMultiSelectInputStoryComponent = LuCoreSelectInputStoryComponent & {
-	selectedLegumes: ILegume[];
+	selectedLegumes: ILegume[] | LuMultiSelection<ILegume>;
 	legumeSelection?: LuMultiSelection<ILegume>;
 	maxValuesShown: number;
+	selectedAxisSection: LuMultiSelection<{ id: number; name: string }>;
+	selectedEstablishment: LuMultiSelection<{ id: number; name: string }>;
 	selectLegume(legume: ILegume, legumes: ILegume[]): ILegume[];
 } & LuMultiSelectInputComponent<ILegume>;
 
@@ -68,6 +70,11 @@ export const SelectAll = generateStory({
 	neededImports: {
 		'@lucca-front/ng/multi-select': ['LuMultiSelectInputComponent', 'LuMultiSelectWithSelectAllDirective'],
 		'@lucca-front/ng/core-select/user': ['LuCoreSelectUsersDirective', 'LuCoreSelectTotalCountDirective'],
+	},
+	storyPartial: {
+		args: {
+			legumeSelection: { mode: 'none' },
+		},
 	},
 });
 
@@ -214,6 +221,11 @@ export const ApiV3 = generateStory({
 		'@lucca-front/ng/multi-select': ['LuMultiSelectInputComponent', 'LuMultiSelectWithSelectAllDirective'],
 		'@lucca-front/ng/core-select/api': ['LuCoreSelectApiV3Directive'],
 	},
+	storyPartial: {
+		args: {
+			selectedAxisSection: { mode: 'none' },
+		},
+	},
 });
 
 export const ApiV4 = generateStory({
@@ -231,6 +243,11 @@ export const ApiV4 = generateStory({
 		'@lucca-front/ng/multi-select': ['LuMultiSelectInputComponent', 'LuMultiSelectWithSelectAllDirective'],
 		'@lucca-front/ng/core-select/api': ['LuCoreSelectApiV4Directive'],
 	},
+	storyPartial: {
+		args: {
+			selectedEstablishment: { mode: 'none' },
+		},
+	},
 });
 
 export const Establishment = generateStory({
@@ -246,6 +263,11 @@ export const Establishment = generateStory({
 	neededImports: {
 		'@lucca-front/ng/multi-select': ['LuMultiSelectInputComponent', 'LuMultiSelectWithSelectAllDirective'],
 		'@lucca-front/ng/core-select/establishment': ['LuCoreSelectEstablishmentsDirective'],
+	},
+	storyPartial: {
+		args: {
+			selectedEstablishment: { mode: 'none' },
+		},
 	},
 });
 
@@ -297,6 +319,35 @@ export const GroupBy = generateStory({
 	description: "Pour grouper les options, il suffit d'utiliser la directive `luOptionGroup`.",
 	template: `<lu-multi-select
 	#selectRef
+	class="textfield-input"
+	placeholder="Placeholder..."
+	[(ngModel)]="selectedLegumes"
+	[options]="legumes | filterLegumes:clue | sortLegumes:(clue ? ['name', legumeColor] : [legumeColor])"
+	(clueChange)="clue = $event"
+	[maxValuesShown]="maxValuesShown"
+>
+	<ng-container *luOptionGroup="let group by legumeColor; select: selectRef">
+		Légume {{colorNameByColor[group.key]}}{{group.options.length > 1 ? 's' : ''}}
+	</ng-container>
+</lu-multi-select>
+{{ selectedLegumes | json }}`,
+	neededImports: {
+		'@lucca-front/ng/core-select': ['LuOptionDirective', 'LuOptionGroupDirective'],
+		'@lucca-front/ng/multi-select': ['LuMultiSelectInputComponent'],
+	},
+	storyPartial: {
+		args: {
+			legumeColor: (legume: ILegume) => legume.color,
+			colorNameByColor,
+		},
+	},
+});
+
+export const GroupBySelectAll = generateStory({
+	name: 'Group options (with selectAll)',
+	description: "Pour grouper les options, il suffit d'utiliser la directive `luOptionGroup`.",
+	template: `<lu-multi-select
+	#selectRef
 	withSelectAll
 	withSelectAllDisplayerLabel="légumes"
 	[totalCount]="legumes.length"
@@ -313,11 +364,12 @@ export const GroupBy = generateStory({
 </lu-multi-select>
 {{ selectedLegumes | json }}`,
 	neededImports: {
-		'@lucca-front/ng/core-select': ['LuOptionDirective', 'LuOptionGroupDirective'],
+		'@lucca-front/ng/core-select': ['LuOptionDirective', 'LuOptionGroupDirective', 'LuCoreSelectTotalCountDirective'],
 		'@lucca-front/ng/multi-select': ['LuMultiSelectInputComponent', 'LuMultiSelectWithSelectAllDirective'],
 	},
 	storyPartial: {
 		args: {
+			selectedLegumes: { mode: 'none' },
 			legumeColor: (legume: ILegume) => legume.color,
 			colorNameByColor,
 		},
