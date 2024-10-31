@@ -1,8 +1,7 @@
 import { Directive, computed, forwardRef, inject, input, signal } from '@angular/core';
-import { takeUntilDestroyed, toObservable, toSignal } from '@angular/core/rxjs-interop';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { CORE_SELECT_API_TOTAL_COUNT_PROVIDER } from '@lucca-front/ng/core-select';
 import { LuOptionComparer } from '@lucca-front/ng/option';
-import { skip } from 'rxjs';
 import { LuMultiSelection, LuMultiSelectionMode, ɵIsSelectedStrategy } from '../../select.model';
 import { LuMultiSelectInputComponent } from '../select-input.component';
 import { LuMultiSelectAllDisplayerComponent } from './multi-select-all-displayer.component';
@@ -60,10 +59,6 @@ export class LuMultiSelectWithSelectAllDirective<TValue> extends ɵIsSelectedStr
 		this.#select.panelHeaderTpl.set(LuMultiSelectAllHeaderComponent);
 		this.#select.valuesTpl.set(LuMultiSelectAllDisplayerComponent);
 		this.#select.hasValue = () => this.#hasValue();
-
-		toObservable(this.#selectAllValue)
-			.pipe(skip(1), takeUntilDestroyed())
-			.subscribe((value) => this.#onChange?.(value));
 	}
 
 	setSelectAll(selectAll: boolean): void {
@@ -73,6 +68,7 @@ export class LuMultiSelectWithSelectAllDirective<TValue> extends ɵIsSelectedStr
 			this.#values.set([]);
 		}
 		this.#mode.set(selectAll ? 'all' : 'none');
+		this.#onChange?.(this.#selectAllValue());
 	}
 
 	override isSelected(option: TValue, selectedOptions: TValue[], optionComparer: LuOptionComparer<TValue>): boolean {
@@ -108,6 +104,7 @@ export class LuMultiSelectWithSelectAllDirective<TValue> extends ɵIsSelectedStr
 			this.#values.set(values);
 			const oldMode = this.#mode();
 			this.#mode.set(this.#getNextMode(oldMode, values));
+			this.#onChange?.(this.#selectAllValue());
 		});
 	}
 
