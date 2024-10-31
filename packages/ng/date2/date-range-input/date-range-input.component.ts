@@ -1,25 +1,8 @@
 import { ConnectionPositionPair } from '@angular/cdk/overlay';
-import {
-	booleanAttribute,
-	ChangeDetectionStrategy,
-	Component,
-	computed,
-	effect,
-	ElementRef,
-	forwardRef,
-	inject,
-	input,
-	LOCALE_ID,
-	Signal,
-	signal,
-	untracked,
-	viewChild,
-	viewChildren,
-	ViewEncapsulation,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, effect, ElementRef, forwardRef, inject, input, Signal, signal, untracked, viewChild, viewChildren, ViewEncapsulation } from '@angular/core';
 import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors, Validator } from '@angular/forms';
 import { ButtonComponent } from '@lucca-front/ng/button';
-import { getIntl, LuClass, ɵeffectWithDeps } from '@lucca-front/ng/core';
+import { LuClass, ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { FORM_FIELD_INSTANCE, InputDirective } from '@lucca-front/ng/form-field';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { PopoverDirective } from '@lucca-front/ng/popover2';
@@ -28,9 +11,8 @@ import { CalendarMode } from '../calendar2/calendar-mode';
 import { Calendar2Component } from '../calendar2/calendar2.component';
 import { CellStatus } from '../calendar2/cell-status';
 import { DateRange } from '../calendar2/date-range';
-import { getDateFormat } from '../date-format';
-import { LU_DATE2_TRANSLATIONS } from '../date2.translate';
 import { startOfPeriod } from '../utils';
+import { AbstractDateComponent } from '../abstract-date-component';
 
 let nextId = 0;
 
@@ -56,59 +38,28 @@ let nextId = 0;
 		LuClass,
 	],
 })
-export class DateRangeInputComponent implements ControlValueAccessor, Validator {
-	#locale = inject(LOCALE_ID);
-
+export class DateRangeInputComponent extends AbstractDateComponent implements ControlValueAccessor, Validator {
 	#luClass = inject(LuClass);
 
 	#formFieldRef = inject(FORM_FIELD_INSTANCE, { optional: true });
-
-	#intlDateTimeFormat = new Intl.DateTimeFormat(this.#locale);
-
-	#intlDateTimeFormatMonth = new Intl.DateTimeFormat(this.#locale, { month: 'numeric', year: 'numeric' });
-	#intlDateTimeFormatYear = new Intl.DateTimeFormat(this.#locale, { year: 'numeric' });
-
-	// Contains the current date format (like dd/mm/yy etc) based on current locale
-	#dateFormat = getDateFormat(this.#locale);
-
-	intl = getIntl(LU_DATE2_TRANSLATIONS);
 
 	idSuffix = nextId++;
 
 	// CVA stuff
 	#onChange?: (value: DateRange) => void;
-	onTouched?: () => void;
-	disabled = false;
-
-	min = input<Date>(new Date('1/1/1000'));
-	max = input<Date | null>(null);
-
-	ranges = input<DateRange[]>([]);
 
 	selectedRange = signal<DateRange | null>(null);
 
-	hideToday = input<boolean, boolean>(false, { transform: booleanAttribute });
-	hasTodayButton = input<boolean, boolean>(false, { transform: booleanAttribute });
-	clearable = input<boolean, boolean>(false, { transform: booleanAttribute });
 	placeholder = input<string>();
-
-	mode = input<CalendarMode>('day');
-	hideWeekend = input<boolean, boolean>(false, { transform: booleanAttribute });
-
-	getCellInfo = input<((day: Date, mode: CalendarMode) => CellStatus) | null>();
 
 	popoverPositions: ConnectionPositionPair[] = [
 		new ConnectionPositionPair({ originX: 'end', originY: 'bottom' }, { overlayX: 'end', overlayY: 'top' }, 16, 6),
 		new ConnectionPositionPair({ originX: 'end', originY: 'top' }, { overlayX: 'end', overlayY: 'bottom' }, 16, 6),
 	];
 
-	calendarMode = signal<CalendarMode>('day');
-
 	inputFocused = signal(false);
 
 	calendarShortcuts = signal(false);
-
-	protected currentDate = signal(new Date());
 
 	protected currentRightDate = computed(() => {
 		return this.getNextCalendarDate(this.currentDate());
@@ -135,8 +86,6 @@ export class DateRangeInputComponent implements ControlValueAccessor, Validator 
 				return endOfDecade(this.currentRightDate());
 		}
 	});
-
-	protected tabbableDate = signal<Date | null>(null);
 
 	calendars = viewChildren(Calendar2Component);
 
@@ -209,6 +158,7 @@ export class DateRangeInputComponent implements ControlValueAccessor, Validator 
 	}
 
 	constructor() {
+		super();
 		if (this.#formFieldRef) {
 			this.#formFieldRef.layout = 'fieldset';
 		}
@@ -280,7 +230,7 @@ export class DateRangeInputComponent implements ControlValueAccessor, Validator 
 				const inputValue = inputSignal();
 				if (inputValue.length > 0) {
 					const currentRange: DateRange = untracked(this.selectedRange) || ({} as DateRange);
-					const parsed = parse(inputValue, this.#dateFormat, startOfDay(new Date()));
+					const parsed = parse(inputValue, this.dateFormat, startOfDay(new Date()));
 					if (parsed.getFullYear() > 999) {
 						this.selectedRange.set({
 							...currentRange,
@@ -346,41 +296,6 @@ export class DateRangeInputComponent implements ControlValueAccessor, Validator 
 		return this.isValidDate(control.value?.start) ? null : { date: true };
 	}
 
-	isValidDate(date: Date): boolean {
-		return !!date && !isNaN(date.getTime());
-	}
-
-	isInMinMax(date: Date, mode: CalendarMode): boolean {
-		let result = true;
-		if (this.min()) {
-			switch (mode) {
-				case 'day':
-					result = result && this.min().getTime() <= date.getTime();
-					break;
-				case 'month':
-					result = result && this.min().getMonth() <= date.getMonth();
-					break;
-				case 'year':
-					result = result && this.min().getFullYear() <= date.getFullYear();
-					break;
-			}
-		}
-		if (this.max()) {
-			switch (mode) {
-				case 'day':
-					result = result && this.max().getTime() >= date.getTime();
-					break;
-				case 'month':
-					result = result && this.max().getMonth() >= date.getMonth();
-					break;
-				case 'year':
-					result = result && this.max().getFullYear() >= date.getFullYear();
-					break;
-			}
-		}
-		return result;
-	}
-
 	writeValue(value: DateRange): void {
 		if (value) {
 			this.selectedRange.set(value);
@@ -390,22 +305,6 @@ export class DateRangeInputComponent implements ControlValueAccessor, Validator 
 
 	registerOnChange(fn: (value: DateRange) => void): void {
 		this.#onChange = fn;
-	}
-
-	registerOnTouched(fn: () => void): void {
-		this.onTouched = fn;
-	}
-
-	setDisabledState?(isDisabled: boolean): void {
-		this.disabled = isDisabled;
-	}
-
-	prev() {
-		this.move(-1);
-	}
-
-	next() {
-		this.move(1);
 	}
 
 	clear(start: HTMLInputElement, end: HTMLInputElement) {
@@ -423,33 +322,16 @@ export class DateRangeInputComponent implements ControlValueAccessor, Validator 
 	getDateLabelForInput(date: Date): string {
 		switch (this.mode()) {
 			case 'day':
-				return this.#intlDateTimeFormat.format(date);
+				return this.intlDateTimeFormat.format(date);
 			case 'month':
-				return this.#intlDateTimeFormatMonth.format(date);
+				return this.intlDateTimeFormatMonth.format(date);
 			case 'year':
-				return this.#intlDateTimeFormatYear.format(date);
-		}
-	}
-
-	move(direction: 1 | -1): void {
-		switch (this.calendarMode()) {
-			case 'year':
-				this.currentDate.set(addYears(this.currentDate(), direction * 10));
-				this.tabbableDate.set(addYears(this.tabbableDate(), direction * 10));
-				break;
-			case 'month':
-				this.currentDate.set(addYears(this.currentDate(), direction));
-				this.tabbableDate.set(addYears(this.tabbableDate(), direction));
-				break;
-			case 'day':
-				this.currentDate.set(addMonths(this.currentDate(), direction));
-				this.tabbableDate.set(addMonths(this.tabbableDate(), direction));
-				break;
+				return this.intlDateTimeFormatYear.format(date);
 		}
 	}
 
 	relativeLabelFor(value: number, period: 'week' | 'month' | 'quarter' | 'year') {
-		const label = new Intl.RelativeTimeFormat(this.#locale, { style: 'long', numeric: 'auto' }).format(value, period);
+		const label = new Intl.RelativeTimeFormat(this.locale, { style: 'long', numeric: 'auto' }).format(value, period);
 
 		return `${label[0].toUpperCase()}${label.slice(1)}`;
 	}
