@@ -16,7 +16,7 @@ export class LuDepartmentV4Service {
 	api = `/organization/structure/api/departments`;
 	protected _filters: string[] = [];
 	set filters(filters: string[]) {
-		this._filters = filters;
+		this._filters = filters ?? [];
 	}
 	protected _appInstanceId: number | string;
 	set appInstanceId(appInstanceId: number | string) {
