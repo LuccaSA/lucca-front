@@ -1,18 +1,18 @@
 import { LOCALE_ID } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { DateRangeInputComponent } from '@lucca-front/ng/date2';
+import { CalendarShortcut, DateRangeInputComponent } from '@lucca-front/ng/date2';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
-import { IconComponent } from '@lucca-front/ng/icon';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { addWeeks, startOfDay } from 'date-fns';
-import { generateInputs } from '../../../helpers/stories';
+import { addMonths, endOfMonth, endOfWeek, startOfMonth, startOfWeek } from 'date-fns';
+import { cleanupTemplate, generateInputs } from '../../../helpers/stories';
 import { StoryModelDisplayComponent } from '../../../helpers/story-model-display.component';
 
 export default {
 	title: 'Documentation/Forms/Date2/DateRangeInput',
+	component: DateRangeInputComponent,
 	decorators: [
 		moduleMetadata({
-			imports: [DateRangeInputComponent, FormsModule, IconComponent, StoryModelDisplayComponent, FormFieldComponent],
+			imports: [DateRangeInputComponent, FormsModule, StoryModelDisplayComponent, FormFieldComponent],
 		}),
 		applicationConfig({
 			providers: [{ provide: LOCALE_ID, useValue: 'fr-FR' }],
@@ -25,19 +25,7 @@ export default {
 		max: {
 			control: 'date',
 		},
-		selected: {
-			control: 'date',
-		},
 		hideToday: {
-			control: 'boolean',
-		},
-		hasTodayButton: {
-			control: 'boolean',
-		},
-		enableOverflow: {
-			control: 'boolean',
-		},
-		showOverflow: {
 			control: 'boolean',
 		},
 		clearable: {
@@ -52,16 +40,37 @@ export default {
 		const { min, max, selected, ...flags } = args;
 		return {
 			props: {
+				shortcuts: [
+					{
+						label: 'Cette semaine',
+						range: {
+							start: startOfWeek(new Date(), { weekStartsOn: 1 }),
+							end: endOfWeek(new Date(), { weekStartsOn: 1 }),
+						},
+					},
+					{
+						label: 'Cette semaine aux US',
+						range: {
+							start: startOfWeek(new Date(), { weekStartsOn: 0 }),
+							end: endOfWeek(new Date(), { weekStartsOn: 0 }),
+						},
+					},
+					{
+						label: 'Le mois prochain',
+						range: {
+							start: startOfMonth(addMonths(new Date(), 1)),
+							end: endOfMonth(addMonths(new Date(), 1)),
+						},
+					},
+				] as CalendarShortcut[],
 				min: min ? new Date(min) : null,
 				max: max ? new Date(max) : null,
 			},
-			template: `
-			<lu-form-field label="Date range input example" inlineMessage="Inline message example">
-				<lu-date-range-input [(ngModel)]="selected" [min]="min" [max]="max" ${generateInputs(flags, argTypes)}></lu-date-range-input>
+			template: cleanupTemplate(`<lu-form-field label="Date range input example" inlineMessage="Inline message example">
+				<lu-date-range-input [(ngModel)]="selected" [min]="min" [max]="max" [shortcuts]="shortcuts" ${generateInputs(flags, argTypes)}></lu-date-range-input>
 			</lu-form-field>
 
-			<pr-story-model-display>{{selected | json}}</pr-story-model-display>
-			`,
+			<pr-story-model-display>{{selected | json}}</pr-story-model-display>`),
 		};
 	},
 } as Meta;

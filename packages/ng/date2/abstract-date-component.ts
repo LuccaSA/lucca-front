@@ -27,9 +27,6 @@ export abstract class AbstractDateComponent {
 	disabled = false;
 
 	ranges = input<DateRange[]>([]);
-
-	enableOverflow = input<boolean>(true);
-	showOverflow = input<boolean>(true);
 	hideToday = input<boolean, boolean>(false, { transform: booleanAttribute });
 	hasTodayButton = input<boolean, boolean>(false, { transform: booleanAttribute });
 	clearable = input<boolean, boolean>(false, { transform: booleanAttribute });

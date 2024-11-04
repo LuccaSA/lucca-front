@@ -13,6 +13,7 @@ import { Calendar2Component } from '../calendar2/calendar2.component';
 import { CellStatus } from '../calendar2/cell-status';
 import { DateRange } from '../calendar2/date-range';
 import { startOfPeriod } from '../utils';
+import { CalendarShortcut } from './calendar-shortcut';
 
 let nextId = 0;
 
@@ -59,7 +60,7 @@ export class DateRangeInputComponent extends AbstractDateComponent implements Co
 
 	inputFocused = signal(false);
 
-	calendarShortcuts = signal(false);
+	shortcuts = input<CalendarShortcut[]>();
 
 	protected currentRightDate = computed(() => {
 		return this.getNextCalendarDate(this.currentDate());
@@ -301,7 +302,7 @@ export class DateRangeInputComponent extends AbstractDateComponent implements Co
 	writeValue(value: DateRange): void {
 		if (value) {
 			this.selectedRange.set(value);
-			// this.currentDate.set(startOfDay(date));
+			this.currentDate.set(startOfDay(value.start));
 		}
 	}
 
@@ -332,9 +333,7 @@ export class DateRangeInputComponent extends AbstractDateComponent implements Co
 		}
 	}
 
-	relativeLabelFor(value: number, period: 'week' | 'month' | 'quarter' | 'year') {
-		const label = new Intl.RelativeTimeFormat(this.locale, { style: 'long', numeric: 'auto' }).format(value, period);
-
-		return `${label[0].toUpperCase()}${label.slice(1)}`;
+	selectShortcut(shortcut: CalendarShortcut): void {
+		this.selectedRange.set(shortcut.range);
 	}
 }

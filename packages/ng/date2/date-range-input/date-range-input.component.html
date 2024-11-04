@@ -72,51 +72,20 @@
 
 <ng-template #calendar>
 	<div class="calendarShortcutsOptionnal">
-		@if (calendarShortcuts()) {
+		@if (shortcuts()?.length > 0) {
 		<ul
 			class="calendarShortcuts"
 			[class.mod-day]="calendarMode() === 'day'"
 			[class.mod-month]="calendarMode() === 'month'"
 			[class.mod-year]="calendarMode() === 'year'"
 		>
+			@for (shortcut of shortcuts(); track $index) {
 			<li class="calendarShortcutsButton-item">
-				<button type="button" class="calendarShortcutsButton-item-button button">{{ relativeLabelFor(-1, 'week') }}</button>
+				<button type="button" class="calendarShortcutsButton-item-button button" (click)="selectShortcut(shortcut)">
+					{{ shortcut.label }}
+				</button>
 			</li>
-			<li class="calendarShortcutsButton-item">
-				<button type="button" class="calendarShortcutsButton-item-button button">{{ relativeLabelFor(-1, 'month') }}</button>
-			</li>
-			<li class="calendarShortcutsButton-item">
-				<button type="button" class="calendarShortcutsButton-item-button button">{{ relativeLabelFor(-1, 'quarter') }}</button>
-			</li>
-			<li class="calendarShortcutsButton-item">
-				<button type="button" class="calendarShortcutsButton-item-button button">{{ relativeLabelFor(-1, 'year') }}</button>
-			</li>
-
-			<li class="calendarShortcutsButton-item">
-				<button type="button" class="calendarShortcutsButton-item-button button">{{ relativeLabelFor(0, 'week') }}</button>
-			</li>
-			<li class="calendarShortcutsButton-item">
-				<button type="button" class="calendarShortcutsButton-item-button button">{{ relativeLabelFor(0, 'month') }}</button>
-			</li>
-			<li class="calendarShortcutsButton-item">
-				<button type="button" class="calendarShortcutsButton-item-button button">{{ relativeLabelFor(0, 'quarter') }}</button>
-			</li>
-			<li class="calendarShortcutsButton-item">
-				<button type="button" class="calendarShortcutsButton-item-button button">{{ relativeLabelFor(0, 'year') }}</button>
-			</li>
-
-			<li class="calendarShortcutsButton-item">
-				<button type="button" class="calendarShortcutsButton-item-button button">{{ relativeLabelFor(1, 'week') }}</button>
-			</li>
-			<li class="calendarShortcutsButton-item">
-				<button type="button" class="calendarShortcutsButton-item-button button">{{ relativeLabelFor(1, 'month') }}</button>
-			</li>
-			<li class="calendarShortcutsButton-item">
-				<button type="button" class="calendarShortcutsButton-item-button button">{{ relativeLabelFor(1, 'quarter') }}</button>
-			</li>
-			<li class="calendarShortcutsButton-item">
-				<button type="button" class="calendarShortcutsButton-item-button button">{{ relativeLabelFor(1, 'year') }}</button>
-			</li>
+			}
 		</ul>
 		}
 		<div class="calendarWrapper mod-range">

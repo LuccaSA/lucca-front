@@ -39,6 +39,9 @@ export class DateInputComponent extends AbstractDateComponent implements Control
 
 	placeholder = input<string>();
 
+	enableOverflow = input<boolean>(true);
+	showOverflow = input<boolean>(true);
+
 	popoverPositions: ConnectionPositionPair[] = [
 		new ConnectionPositionPair({ originX: 'end', originY: 'bottom' }, { overlayX: 'end', overlayY: 'top' }, 16, 6),
 		new ConnectionPositionPair({ originX: 'end', originY: 'top' }, { overlayX: 'end', overlayY: 'bottom' }, 16, 6),
