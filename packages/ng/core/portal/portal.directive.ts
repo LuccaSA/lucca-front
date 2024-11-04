@@ -30,6 +30,10 @@ export class PortalDirective<T = unknown> implements OnChanges, OnDestroy {
 			this.destroyRenderedText();
 		}
 
+		if (!this.luPortal) {
+			return;
+		}
+
 		if (this.luPortal instanceof TemplateRef) {
 			const context = Object.assign({}, this.luPortalContext);
 			this.embeddedViewRef = this.viewContainerRef.createEmbeddedView<T>(this.luPortal, context);

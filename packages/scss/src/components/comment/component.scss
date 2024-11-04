@@ -1,19 +1,37 @@
 @use '@lucca-front/scss/src/commons/utils/namespace';
+@use '@lucca-front/scss/src/components/avatar/exports' as avatar;
+@use '@lucca-front/scss/src/commons/utils/reset';
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
 	container: comment / inline-size;
 	display: flex;
 	flex-direction: column;
 	gap: var(--pr-t-spacings-50);
-	max-width: 40rem;
+	max-width: var(--components-comment-max-width);
+	align-items: var(--components-comment-align);
+	margin-left: var(--components-comment-margin);
+
+	.avatar {
+		@include avatar.XS;
+	}
 
 	@at-root ($atRoot) {
+		.commentWrapper {
+			display: flex;
+			flex-direction: column;
+			gap: var(--pr-t-spacings-100);
+			margin: 0;
+			padding: 0;
+			list-style-type: none;
+		}
+
 		.comment-infos {
 			display: flex;
 			font-style: normal;
 			gap: var(--pr-t-spacings-100);
 			justify-content: flex-start;
 			align-items: flex-start;
+			flex-direction: var(--components-comment-info-direction);
 		}
 
 		.comment-infos-content {
@@ -45,8 +63,8 @@
 		}
 
 		.comment-content {
-			background: var(--palettes-neutral-50);
-			border-radius: var(--commons-borderRadius-M) var(--commons-borderRadius-L) var(--commons-borderRadius-L);
+			background-color: var(--components-comment-background-color, var(--palettes-neutral-50));
+			border-radius: var(--components-comment-border-radius);
 			display: flex;
 			flex-direction: column;
 			gap: var(--pr-t-spacings-150);
@@ -57,12 +75,17 @@
 
 		.comment-content-text {
 			margin-bottom: 0;
+			overflow-wrap: break-word;
 		}
 
+		// .comment-content-textContainer is deprecated
+		.comment-content-textContainerOptional,
 		.comment-content-textContainer {
 			display: flex;
 			flex-direction: column;
 			gap: var(--pr-t-spacings-100);
+			font-size: var(--components-comment-text-fontSize);
+			line-height: var(--components-comment-text-lineHeight);
 
 			> * {
 				margin: 0;
@@ -73,26 +96,17 @@
 			font-size: var(--components-comment-text-fontSize);
 			line-height: var(--components-comment-text-lineHeight);
 		}
+	}
+}
 
-		.comment-content-textContainer {
-			font-size: var(--components-comment-text-fontSize);
-			line-height: var(--components-comment-text-lineHeight);
-		}
+@mixin chat {
+	@include reset.list;
 
-		.commentWrapper {
-			display: flex;
-			flex-direction: column;
-			gap: var(--pr-t-spacings-100);
-			margin: 0;
-			padding: 0;
-		}
+	display: flex;
+	flex-direction: column;
+	gap: var(--pr-t-spacings-200);
 
-		.commentWrapper-item {
-			list-style: none;
-
-			&.mod-WrapperAvatar ~ &:not(.mod-WrapperAvatar) {
-				padding-left: var(--components-comment-content-margin);
-			}
-		}
+	.comment {
+		--components-comment-max-width: min(66ch, calc(100% - var(--components-comment-content-margin)));
 	}
 }

@@ -1,7 +1,7 @@
+import { AutoFocusTarget, DialogConfig } from '@angular/cdk/dialog';
+import { ComponentType } from '@angular/cdk/overlay';
 import { TemplateRef } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ComponentType } from '@angular/cdk/overlay';
-import { AutoFocusTarget, DialogConfig } from '@angular/cdk/dialog';
 
 const ɵdialogData = Symbol.for('luDialogData');
 const ɵdialogResult = Symbol.for('luDialogResult');

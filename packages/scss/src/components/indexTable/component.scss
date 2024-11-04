@@ -1,5 +1,6 @@
 @use 'vars' as *;
 @use '@lucca-front/scss/src/commons/utils/a11y';
+@use '@lucca-front/scss/src/commons/utils/reset';
 @use '@lucca-front/scss/src/components/button/exports' as button;
 @use '@lucca-front/scss/src/commons/utils/namespace';
 
@@ -97,9 +98,11 @@
 					}
 				}
 			}
-			// .indexTable-body-row-cell-link is deprecated
+
 			&:not(:has(.indexTable-body-row-cell-link)) {
-				cursor: pointer;
+				&:has(.indexTable-body-row-cell-action) {
+					cursor: pointer;
+				}
 			}
 		}
 
@@ -202,6 +205,8 @@
 		}
 
 		.indexTable-body-row-cell-link {
+			@include reset.button;
+
 			text-decoration: none;
 
 			&::after {

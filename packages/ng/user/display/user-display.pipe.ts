@@ -6,7 +6,7 @@ function getFirstCharacter([firstCharacter]: string): string {
 }
 
 function isNotEmptyString(value: string): boolean {
-	return value.length > 0;
+	return value?.length > 0;
 }
 
 export interface LuUserDisplayInput {
@@ -51,7 +51,12 @@ export function luUsersDisplay(users: LuUserDisplayInput[], options: LuUserDispl
 
 export type LuUserDisplaySingleOptions = LuDisplayFormat | { format: LuDisplayFormat };
 
-export type LuUserDisplayMultipleOptions = { format: LuDisplayFormat; separator: string } | { format: LuDisplayFormat; formatter: Intl.ListFormat };
+export type LuUserDisplayMultipleOptions =
+	| { format: LuDisplayFormat; separator: string }
+	| {
+			format: LuDisplayFormat;
+			formatter: Intl.ListFormat;
+	  };
 
 /**
  * Displays a user name according to specified format. Supported formats: f for first name,

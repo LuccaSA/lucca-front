@@ -2,7 +2,7 @@ import { NgClass } from '@angular/common';
 import { booleanAttribute, ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { LuccaIcon } from '@lucca-front/icons';
-import { Palette } from '@lucca-front/ng/core';
+import { DecorativePalette, Palette } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
 
 @Component({
@@ -22,14 +22,14 @@ export class TagComponent {
 	/**
 	 * Which size should the callout be? Defaults to medium
 	 */
-	size: 'M' | 'S' = 'M';
+	size: 'M' | 'L' = 'M';
 
 	@Input()
 	/**
 	 * Which palette should be used for the entire callout.
 	 * Defaults to none (inherits parent palette)
 	 */
-	palette: Palette = 'none';
+	palette: Palette | DecorativePalette = 'none';
 
 	@Input({ transform: booleanAttribute })
 	/**

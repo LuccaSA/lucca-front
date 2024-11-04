@@ -93,6 +93,11 @@ export class FormFieldComponent implements OnChanges, OnDestroy, DoCheck {
 	})
 	rolePresentationLabel = false;
 
+	@Input({
+		transform: booleanAttribute,
+	})
+	inline = false;
+
 	@Input()
 	statusControl: AbstractControl;
 
@@ -119,13 +124,13 @@ export class FormFieldComponent implements OnChanges, OnDestroy, DoCheck {
 	protected invalidStatus = false;
 
 	@Input()
-	inlineMessage: string;
+	inlineMessage: PortalContent;
 
 	/**
 	 * Inline message for when the control is in error state
 	 */
 	@Input()
-	errorInlineMessage: string;
+	errorInlineMessage: PortalContent;
 
 	/**
 	 * State of the inline message, will be ignored if form state is invalid
@@ -138,6 +143,8 @@ export class FormFieldComponent implements OnChanges, OnDestroy, DoCheck {
 
 	@Input()
 	layout: 'default' | 'checkable' | 'fieldset' = 'default';
+
+	hasArrow = false;
 
 	#inputs: InputDirective[] = [];
 	/**

@@ -1,6 +1,9 @@
-import { applicationConfig, Meta, StoryFn } from '@storybook/angular';
-import { provideRouter, Router, RouterLink, RouterOutlet, Routes } from '@angular/router';
+import { JsonPipe } from '@angular/common';
 import { Component, inject, Injectable, signal } from '@angular/core';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { provideRouter, Router, RouterLink, RouterOutlet, Routes } from '@angular/router';
+import { ButtonComponent } from '@lucca-front/ng/button';
+import { CalloutComponent } from '@lucca-front/ng/callout';
 import {
 	DialogCloseDirective,
 	DialogComponent,
@@ -12,12 +15,9 @@ import {
 	injectDialogData,
 	injectDialogRef,
 } from '@lucca-front/ng/dialog';
-import { ButtonComponent } from '@lucca-front/ng/button';
-import { JsonPipe } from '@angular/common';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { NumberInputComponent, TextInputComponent } from '@lucca-front/ng/forms';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
-import { CalloutComponent } from '@lucca-front/ng/callout';
+import { NumberInputComponent, TextInputComponent } from '@lucca-front/ng/forms';
+import { applicationConfig, Meta, StoryFn } from '@storybook/angular';
 
 @Injectable()
 class DataProvider {
@@ -62,7 +62,7 @@ class DismissedComponent {}
 	],
 	template: `
 		<lu-dialog>
-			<form [formGroup]="form" class="dialog-formOptional">
+			<form [formGroup]="form" class="dialog-inside-formOptional">
 				<lu-dialog-header> Dialog opened by route </lu-dialog-header>
 				<lu-dialog-content>
 					<lu-form-field label="Data received by dialog">

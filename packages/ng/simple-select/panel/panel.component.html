@@ -9,6 +9,7 @@
 	[cdkTrapFocusAutoCapture]="true"
 >
 	<div class="lu-picker-content" [class.is-loading]="loading$ | async" (scroll)="onScroll($event)">
+		<ng-container *luPortal="selectInput.panelHeaderTpl()" />
 		<div role="listbox">
 			<ng-container *ngIf="grouping && ctx.groupTemplateLocation === 'group-header'">
 				<div
@@ -31,7 +32,7 @@
 				<lu-select-option
 					*ngFor="let option of options; let index = index; trackBy: trackOptionsBy"
 					[option]="option"
-					[optionTpl]="optionTpl"
+					[optionTpl]="optionTpl()"
 					[optionIndex]="index"
 					[grouping]="ctx.groupTemplateLocation === 'option' ? grouping : undefined"
 					[scrollIntoViewOptions]="{ block: 'center' }"

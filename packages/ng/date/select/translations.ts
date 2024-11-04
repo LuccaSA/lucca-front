@@ -7,7 +7,7 @@
 	de: {
 		placeholderDay: 'TT/MM/JJJJ',
 		placeholderMonth: 'MM/JJJJ',
-		placeholderYear: 'AAAA',
+		placeholderYear: 'JJJJ',
 	},
 	fr: {
 		placeholderDay: 'JJ/MM/AAAA',

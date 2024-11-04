@@ -4,6 +4,10 @@
 @use '@lucca-front/scss/src/commons/utils/namespace';
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
+	.divider {
+		margin-block: var(--pr-t-spacings-300);
+	}
+
 	@at-root ($atRoot) {
 		.form-fieldset {
 			margin: 0;
@@ -12,6 +16,10 @@
 
 			.form-field {
 				margin-block: var(--pr-t-spacings-50);
+
+				&:last-child {
+					margin-block-end: 0;
+				}
 			}
 		}
 	}
@@ -25,7 +33,7 @@
 
 	@at-root ($atRoot) {
 		.form-header {
-			margin-bottom: var(--spacings-M);
+			margin-bottom: var(--pr-t-spacings-300);
 		}
 
 		.form-header-title {

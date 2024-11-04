@@ -1,4 +1,4 @@
-import { booleanAttribute, Component, computed, ElementRef, inject, input, LOCALE_ID, viewChild, ViewEncapsulation } from '@angular/core';
+import { AfterViewInit, booleanAttribute, Component, computed, DestroyRef, ElementRef, inject, input, LOCALE_ID, signal, viewChild, ViewEncapsulation } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormFieldComponent, InputDirective } from '@lucca-front/ng/form-field';
 import { NoopValueAccessorDirective } from '../noop-value-accessor.directive';
@@ -8,7 +8,7 @@ import { getIntl } from '@lucca-front/ng/core';
 import { LU_NUMBERFORMATFIELD_TRANSLATIONS } from './number-format-input.translate';
 import { injectNgControl } from '../inject-ng-control';
 import { NumberFormat, NumberFormatCurrencyDisplay, NumberFormatDirective, NumberFormatOptions, NumberFormatStyle, NumberFormatUnit, NumberFormatUnitDisplay } from '@lucca-front/ng/number-format';
-import { toSignal } from '@angular/core/rxjs-interop';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { startWith } from 'rxjs/operators';
 import { TextInputAddon } from '../text-input/text-input-addon';
 
@@ -20,10 +20,15 @@ import { TextInputAddon } from '../text-input/text-input-addon';
 	hostDirectives: [NoopValueAccessorDirective],
 	encapsulation: ViewEncapsulation.None,
 })
-export class NumberFormatInputComponent {
+export class NumberFormatInputComponent implements AfterViewInit {
 	#locale = inject(LOCALE_ID);
+	#destroyRef = inject(DestroyRef);
 
 	ngControl = injectNgControl();
+
+	ngAfterViewInit(): void {
+		this.ngControl?.valueChanges?.pipe(takeUntilDestroyed(this.#destroyRef), startWith(this.ngControl.value)).subscribe((value) => this.#suffixPrefixValue.set(value as number));
+	}
 
 	formatStyle = input<NumberFormatStyle>('decimal');
 
@@ -51,14 +56,14 @@ export class NumberFormatInputComponent {
 
 	inputElementRef = viewChild<ElementRef<HTMLInputElement>>('inputElement');
 
-	#suffixPrefixValue = toSignal(this.ngControl.valueChanges.pipe(startWith(1)));
+	#suffixPrefixValue = signal(1);
 
 	#numberFormat = computed(() => new NumberFormat(this.formatOptions()));
 	prefixAddon = computed(() => {
 		if (this.useAutoPrefixSuffix() === undefined || this.useAutoPrefixSuffix() === false) {
 			return this.prefix();
 		}
-		const content = this.#numberFormat().getPrefix(this.#suffixPrefixValue() as number);
+		const content = this.#numberFormat().getPrefix(this.#suffixPrefixValue());
 		if (content == null || content.trim() === '') {
 			return undefined;
 		}
@@ -71,7 +76,7 @@ export class NumberFormatInputComponent {
 		if (this.useAutoPrefixSuffix() === undefined || this.useAutoPrefixSuffix() === false) {
 			return this.suffix();
 		}
-		const content = this.#numberFormat().getSuffix(this.#suffixPrefixValue() as number);
+		const content = this.#numberFormat().getSuffix(this.#suffixPrefixValue());
 		if (content == null || content.trim() === '') {
 			return undefined;
 		}
@@ -101,6 +106,4 @@ export class NumberFormatInputComponent {
 		this.ngControl.reset();
 		this.inputElementRef().nativeElement.focus();
 	}
-
-	protected readonly viewChild = viewChild;
 }

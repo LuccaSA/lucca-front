@@ -121,6 +121,7 @@
 
 			&::before {
 				content: '';
+				background-color: var(--palettes-neutral-0);
 				border-radius: var(--components-options-checkbox-border-radius);
 				box-shadow: inset 0 0 0 2px var(--components-options-checkbox-border-color);
 				display: block;

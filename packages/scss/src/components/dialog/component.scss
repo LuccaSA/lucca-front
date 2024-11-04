@@ -28,40 +28,52 @@
 	flex-direction: column;
 
 	@at-root ($atRoot) {
-		// .dialog-form is deprecated
-		// .dialog-formOptional is deprecated
-		.dialog:not(:has(.dialog-inside-formOptional, .dialog-formOptional, .dialog-form)),
-		.dialog-inside-formOptional,
-		.dialog-formOptional,
-		.dialog-form {
-			display: grid;
-			grid-template-areas:
-				'header'
-				'overflow'
-				'footer';
-			grid-template-rows: auto 1fr auto;
+		.dialog-inside {
+			&:has(.dialog-inside-formOptional, .dialog-formOptional, .dialog-form) {
+				display: contents;
 
-			&:has(.dialog-content:focus-visible) {
-				&::after {
-					@include a11y.focusVisible($offset: -4px);
+				.dialog-inside-formOptional,
+				.dialog-formOptional,
+				.dialog-form {
+					display: grid;
+					grid-template-areas:
+						'header'
+						'overflow'
+						'footer';
+					grid-template-rows: auto 1fr auto;
+					flex-grow: 1;
+					min-height: 0;
 
-					content: '';
-					grid-area: overflow;
+					&:has(.dialog-content:focus-visible) {
+						&::after {
+							@include a11y.focusVisible($offset: -4px);
+
+							content: '';
+							grid-area: overflow;
+						}
+					}
 				}
 			}
-		}
 
-		// .dialog-form is deprecated
-		// .dialog-formOptional is deprecated
-		.dialog-inside-formOptional,
-		.dialog-form,
-		.dialog-formOptional {
-			min-height: 0;
-			flex-grow: 1;
-		}
+			&:not(:has(.dialog-inside-formOptional, .dialog-formOptional, .dialog-form)) {
+				display: grid;
+				grid-template-areas:
+					'header'
+					'overflow'
+					'footer';
+				grid-template-rows: auto 1fr auto;
+				flex-grow: 1;
+				min-height: 0;
 
-		.dialog-inside {
-			display: contents;
+				&:has(.dialog-content:focus-visible) {
+					&::after {
+						@include a11y.focusVisible($offset: -4px);
+
+						content: '';
+						grid-area: overflow;
+					}
+				}
+			}
 		}
 
 		.dialog-inside-header-button {
@@ -73,7 +85,7 @@
 				align-self: start;
 				justify-self: end;
 				grid-area: close;
-				display: var(--components-dialog-headerButtonDisplay);
+				display: var(--components-dialog-insideHeaderButtonDisplay);
 			}
 		}
 
@@ -81,6 +93,7 @@
 			&.footer {
 				background-color: transparent;
 				position: relative;
+				overflow: hidden;
 			}
 		}
 
@@ -96,6 +109,7 @@
 		}
 
 		.dialog-inside-content {
+			background-color: var(--components-dialog-insideContent-background);
 			padding: var(--pr-t-spacings-200) var(--pr-t-spacings-300);
 			grid-area: overflow;
 			overflow: auto;
