@@ -60,6 +60,8 @@ export class DateRangeInputComponent extends AbstractDateComponent implements Co
 
 	inputFocused = signal(false);
 
+	editedField = signal<0 | 1>(0);
+
 	shortcuts = input<CalendarShortcut[]>();
 
 	protected currentRightDate = computed(() => {
@@ -270,26 +272,47 @@ export class DateRangeInputComponent extends AbstractDateComponent implements Co
 		});
 	}
 
-	dateClicked(date: Date, popoverRef: PopoverDirective): void {
+	dateClicked(date: Date, popoverRef: PopoverDirective, endField: HTMLInputElement): void {
 		if (this.selectedRange() === null) {
 			this.selectedRange.set({
 				start: date,
 				scope: this.mode(),
 			});
+			endField.focus();
 		} else {
-			if (isAfter(date, this.selectedRange().start)) {
-				this.selectedRange.set({
-					...this.selectedRange(),
-					scope: this.mode(),
-					end: date,
-				});
+			// If we're editing end field
+			if (this.editedField() === 1) {
+				// If end is before start, invert them
+				if (isBefore(date, this.selectedRange().start)) {
+					this.selectedRange.set({
+						start: date,
+						scope: this.mode(),
+						end: this.selectedRange().start,
+					});
+				} else {
+					this.selectedRange.set({
+						...this.selectedRange(),
+						scope: this.mode(),
+						end: date,
+					});
+				}
 				popoverRef.close();
 			} else {
-				this.selectedRange.set({
-					start: date,
-					scope: this.mode(),
-					end: this.selectedRange().start,
-				});
+				// Else, we're editing start field
+				// If start is after end, invert them
+				if (isAfter(date, this.selectedRange().end)) {
+					this.selectedRange.set({
+						start: this.selectedRange().end,
+						scope: this.mode(),
+						end: date,
+					});
+				} else {
+					this.selectedRange.set({
+						...this.selectedRange(),
+						start: date,
+						scope: this.mode(),
+					});
+				}
 				popoverRef.close();
 			}
 		}
