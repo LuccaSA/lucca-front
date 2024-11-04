@@ -1,6 +1,6 @@
 import { booleanAttribute, Component, inject, input, LOCALE_ID, signal } from '@angular/core';
 import { addMonths, addYears } from 'date-fns';
-import { getIntl } from '../core/translate';
+import { getIntl } from '@lucca-front/ng/core';
 import { CalendarMode } from './calendar2/calendar-mode';
 import { CellStatus } from './calendar2/cell-status';
 import { DateRange } from './calendar2/date-range';
