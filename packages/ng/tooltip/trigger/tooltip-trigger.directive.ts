@@ -2,25 +2,26 @@ import { FlexibleConnectedPositionStrategy, HorizontalConnectionPos, OriginConne
 import { ComponentPortal } from '@angular/cdk/portal';
 import {
 	AfterContentInit,
-	booleanAttribute,
 	ChangeDetectorRef,
 	DestroyRef,
 	Directive,
 	ElementRef,
 	HostBinding,
 	HostListener,
-	inject,
 	Input,
-	numberAttribute,
 	OnDestroy,
 	Renderer2,
+	booleanAttribute,
+	inject,
+	numberAttribute,
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { SafeHtml } from '@angular/platform-browser';
 import { LuPopoverPosition } from '@lucca-front/ng/popover';
-import { BehaviorSubject, combineLatest, merge, Observable, startWith, Subject, switchMap, timer } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, combineLatest, merge, startWith, switchMap, timer } from 'rxjs';
 import { debounce, debounceTime, filter, map } from 'rxjs/operators';
 import { LuTooltipPanelComponent } from '../panel';
+import { EllipsisRuler } from './ellipsis.ruler';
 
 let nextId = 0;
 
@@ -35,6 +36,7 @@ export class LuTooltipTriggerDirective implements AfterContentInit, OnDestroy {
 	#host = inject<ElementRef<HTMLElement>>(ElementRef);
 
 	#renderer = inject(Renderer2);
+	#ruler = inject(EllipsisRuler);
 
 	#destroyRef = inject(DestroyRef);
 
@@ -140,7 +142,7 @@ export class LuTooltipTriggerDirective implements AfterContentInit, OnDestroy {
 							}
 							// If not disabled, let's check for ellipsis if needed
 							if (this.luTooltipWhenEllipsis) {
-								return this.hasEllipsis();
+								return this.#ruler.hasEllipsis(this.#host.nativeElement);
 							}
 							// If it's not disabled and is not triggered based on ellipsis, just return true
 							return true;
@@ -215,7 +217,7 @@ export class LuTooltipTriggerDirective implements AfterContentInit, OnDestroy {
 	}
 
 	private setAccessibilityProperties(tabindex: number | null): void {
-		if (this.#disabled || (this.luTooltipWhenEllipsis && !this.hasEllipsis())) {
+		if (this.#disabled || (this.luTooltipWhenEllipsis && !this.#ruler.hasEllipsis(this.#host.nativeElement))) {
 			this.#renderer.removeAttribute(this.#host.nativeElement, 'tabindex');
 			return;
 		}
@@ -228,64 +230,6 @@ export class LuTooltipTriggerDirective implements AfterContentInit, OnDestroy {
 
 		if (!isNatevelyFocusableTag && !hasATabIndex) {
 			this.#renderer.setAttribute(this.#host.nativeElement, 'tabindex', tabindex.toString());
-		}
-	}
-
-	/**
-	 * Hacky af but let's explain everything
-	 * This method checks for ellipsis by cloning the node and checking its width against original element.
-	 *
-	 * We used to do this using scrollWidth but the thing is, it's a rounded value. Sometimes,
-	 * you'd get true while it should be false and vice-versa, because of rounding.
-	 *
-	 * So we duplicate the properties we're interested in on the element to be tested to calculate its ideal size,
-	 * which we then compare with its current size.
-	 *
-	 * @private
-	 */
-	private hasEllipsis(): boolean {
-		if (window.getComputedStyle(this.#host.nativeElement).textOverflow !== 'ellipsis') {
-			return false;
-		}
-
-		const element = this.#host.nativeElement;
-		const elementCloned = this.#renderer.createElement('div') as HTMLDivElement;
-		const parentMasked = this.#renderer.createElement('div') as HTMLDivElement;
-		const elementStyle = window.getComputedStyle(element);
-
-		this.#renderer.addClass(parentMasked, 'u-mask');
-		this.#renderer.setAttribute(parentMasked, 'aria-hidden', 'true');
-
-		this.#renderer.setStyle(elementCloned, 'width', 'fit-content');
-
-		this.#renderer.setStyle(elementCloned, 'padding', elementStyle.padding);
-		this.#renderer.setStyle(elementCloned, 'borderWidth', elementStyle.borderWidth);
-		this.#renderer.setStyle(elementCloned, 'borderStyle', elementStyle.borderStyle);
-		this.#renderer.setStyle(elementCloned, 'boxSizing', elementStyle.boxSizing);
-		this.#renderer.setStyle(elementCloned, 'fontFamily', elementStyle.fontFamily);
-		this.#renderer.setStyle(elementCloned, 'fontWeight', elementStyle.fontWeight);
-		this.#renderer.setStyle(elementCloned, 'fontStyle', elementStyle.fontStyle);
-		this.#renderer.setStyle(elementCloned, 'whiteSpace', 'nowrap');
-		this.#renderer.setStyle(
-			elementCloned,
-			'fontSize',
-			(Number(elementStyle.fontSize.replace('px', '')) / Number(window.getComputedStyle(document.body).fontSize.replace('px', ''))).toString() + 'rem',
-		);
-
-		elementCloned.innerHTML = element.innerHTML;
-
-		this.#renderer.appendChild(parentMasked, elementCloned);
-		this.#renderer.appendChild(document.body, parentMasked);
-
-		try {
-			const elementClonedWidth = elementCloned.getBoundingClientRect().width;
-			const elementWidth = element.getBoundingClientRect().width;
-
-			return elementClonedWidth > elementWidth;
-		} catch (e) {
-			return false;
-		} finally {
-			parentMasked.remove();
 		}
 	}
 
