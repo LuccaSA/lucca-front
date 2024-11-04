@@ -102,6 +102,25 @@ export const handlers = [
 		),
 	),
 
+	http.get('/organization/structure/api/departments/tree', async () => {
+		await delay(300);
+		return HttpResponse.json({
+			node: null,
+			children: mockDepartmentsTree,
+		});
+	}),
+
+	http.get('/api/v3/departments/scopedtree', async () => {
+		await delay(300);
+		return HttpResponse.json({
+			data: {
+				node: null,
+				children: mockDepartmentsTree,
+			},
+			metadata: null,
+		});
+	}),
+
 	http.get('/api/v3/departments/tree', async () => {
 		await delay(300);
 		return HttpResponse.json({

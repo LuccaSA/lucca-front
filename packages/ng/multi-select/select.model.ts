@@ -23,6 +23,6 @@ class DefaultIsSelectedStrategy<TOption> extends ɵIsSelectedStrategy<TOption> {
 	}
 
 	isGroupSelected(options: TOption[], notSelectedOptions: TOption[]): boolean {
-		return notSelectedOptions.length === options.length;
+		return !notSelectedOptions.length && notSelectedOptions.length !== options.length;
 	}
 }
