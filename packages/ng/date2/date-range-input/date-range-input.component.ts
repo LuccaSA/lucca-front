@@ -219,11 +219,11 @@ export class DateRangeInputComponent extends AbstractDateComponent implements Co
 	getNextCalendarDate(date: Date): Date {
 		switch (this.mode()) {
 			case 'day':
-				return addMonths(date, 1);
+				return startOfMonth(addMonths(date, 1));
 			case 'month':
-				return addYears(date, 1);
+				return startOfYear(addYears(date, 1));
 			case 'year':
-				return addYears(date, 10);
+				return startOfDecade(addYears(date, 10));
 		}
 	}
 
