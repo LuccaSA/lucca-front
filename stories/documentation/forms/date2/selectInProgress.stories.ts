@@ -18,28 +18,53 @@ export default {
 	render: (args, { argTypes }) => {
 		return {
 			props: {
-				month1: new Date(2024, 7),
-				month2: new Date(2024, 8),
-				month3: new Date(2024, 9),
-				month4: new Date(2024, 10),
-				month5: new Date(2024, 11),
+				date: new Date(),
 				getDayInfo: (date: Date, mode: CalendarMode) => {
-					if (mode === 'day' && date.getDate() === 17 && date.getMonth() === 9) {
+					if (mode === 'day' && date.getDate() < 8) {
 						return {
-							classes: ['is-start'],
+							classes: ['is-selectionInProgress'],
 						};
 					}
+					if (mode === 'day' && date.getDate() === 8) {
+						return {
+							classes: ['is-endInProgress'],
+						};
+					}
+
+					if (mode === 'day' && date.getDate() > 15 && date.getDate() < 22) {
+						return {
+							classes: ['is-selectionInProgress'],
+						};
+					}
+					if (mode === 'day' && date.getDate() === 15) {
+						return {
+							classes: ['is-startInProgress'],
+						};
+					}
+					if (mode === 'day' && date.getDate() === 22) {
+						return {
+							classes: ['is-endInProgress'],
+						};
+					}
+
+					if (mode === 'day' && date.getDate() > 26) {
+						return {
+							classes: ['is-selectionInProgress'],
+						};
+					}
+					if (mode === 'day' && date.getDate() === 26) {
+						return {
+							classes: ['is-startInProgress'],
+						};
+					}
+
 					return { classes: [] };
 				},
 			},
 			template: `
-				<div class="calendarWrapper mod-range" [attr.style]="'--components-calendarWrapperVisible: 5'">
+				<div class="calendarWrapper">
 					<div class="calendarWrapper-content palette-watermelon">
-						<lu-calendar2 [date]="month1" [getCellInfo]="getDayInfo" />		
-						<lu-calendar2 [date]="month2" [getCellInfo]="getDayInfo" />	
-						<lu-calendar2 [date]="month3" [getCellInfo]="getDayInfo" />
-						<lu-calendar2 [date]="month4" [getCellInfo]="getDayInfo" />
-						<lu-calendar2 [date]="month5" [getCellInfo]="getDayInfo" />
+						<lu-calendar2 [date]="date" [getCellInfo]="getDayInfo" />
 					</div>
 				</div>
 			`,
@@ -47,4 +72,4 @@ export default {
 	},
 } as Meta;
 
-export const selectIsProgress: StoryObj<Calendar2Component> = {};
+export const selectInProgress: StoryObj<Calendar2Component> = {};

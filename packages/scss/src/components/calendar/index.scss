@@ -17,6 +17,10 @@
 			@include range;
 		}
 	}
+
+	&.is-inProgress {
+		@include inProgress;
+	}
 }
 
 .calendar {
@@ -49,7 +53,8 @@
 		@include current;
 	}
 
-	&.is-selected {
+	&.is-selected,
+	&.is-selectionInProgress {
 		@include selected;
 	}
 
@@ -59,6 +64,14 @@
 
 	&.is-end {
 		@include end;
+	}
+
+	&.is-startInProgress {
+		@include startInProgress;
+	}
+
+	&.is-endInProgress {
+		@include endInProgress;
 	}
 }
 

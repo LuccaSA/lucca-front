@@ -1,13 +1,5 @@
 @use '@lucca-front/scss/src/components/calendar';
-@use '@lucca-front/scss/src/components/calendar/states' as calendarState;
-
-// $calendar: 'lu-calendar2';
-// $row: '.calendar-table-body-row';
-// $cell: '#{$row}-cell';
-// $action: '#{$cell}-action';
-// $start: '#{$cell}.is-start';
-// $fakeStart: '#{$cell}.is-fakeStart';
-// $end: '#{$cell}.is-end';
+// @use '@lucca-front/scss/src/components/calendar/states' as calendarState;
 
 // // si les dates de départ et de fin sont sur deux calendriers adjacents visibles
 // // la première ou la dernière semaine d’un mois voit ses cellules de débordement passer en selected
@@ -96,6 +88,14 @@
 // 		--components-calendar-table-body-row-cellSelectedBeforeBorderRadius: var(--commons-borderRadius-L);
 // 	}
 // }
+
+// $calendar: 'lu-calendar2';
+// $row: '.calendar-table-body-row';
+// $cell: '#{$row}-cell';
+// $action: '#{$cell}-action';
+// $start: '#{$cell}.is-start';
+// $fakeStart: '#{$cell}.is-fakeStart';
+// $end: '#{$cell}.is-end';
 
 // @mixin selectionBeforeEndTable($event, $calendar: $calendar, $row: $row, $cell: $cell, $action: $action, $start: $start, $end: $end) {
 // 	#{$row} {
@@ -484,7 +484,7 @@
 // 	}
 // }
 
-// .calendarWrapper.mod-range {
+// .calendarWrapper.mod-range.is-inProgress {
 // 	&:has(#{$start}, #{$fakeStart}) {
 // 		&:has(#{$action}:focus-visible) {
 // 			@include selectionInProgress(

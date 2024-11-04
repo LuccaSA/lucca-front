@@ -27,10 +27,10 @@
 			}
 
 			&.mod-day {
-				max-height: 17.5rem;
+				max-height: 19.25rem;
 
 				&:has(+ .calendarWrapper .calendar-todayLink) {
-					max-height: 20rem;
+					max-height: 21.75rem;
 				}
 			}
 

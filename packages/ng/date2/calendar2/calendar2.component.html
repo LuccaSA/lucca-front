@@ -29,7 +29,6 @@
 					[class.is-current]="day.isCurrent"
 					[attr.aria-selected]="day.status.selected || !!day.rangeInfo?.range"
 					[class.is-start]="day.rangeInfo?.isStart || day.status.selected"
-					[class.is-startInProgress]="day.rangeInfo?.isStart && !day.rangeInfo?.range?.end"
 					[class.is-end]="day.rangeInfo?.isEnd || day.status.selected"
 					[class.is-fakeStart]="day.rangeInfo?.range.startsOutside && day.day === 1"
 					[class.is-fakeEnd]="day.rangeInfo?.range.endsOutside && day.isLastDayOfMonth"
