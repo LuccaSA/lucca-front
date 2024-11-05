@@ -51,7 +51,8 @@
 	}
 
 	&:has(.radioField-input:disabled),
-	&:has(.checkboxField-input:disabled) {
+	&:has(.checkboxField-input:disabled),
+	&:has(.switchField-input:disabled) {
 		.formLabel {
 			@include formLabel.disabled;
 		}
