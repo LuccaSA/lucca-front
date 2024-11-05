@@ -1,16 +1,17 @@
 import { ConnectionPositionPair } from '@angular/cdk/overlay';
-import { ChangeDetectionStrategy, Component, computed, effect, ElementRef, forwardRef, input, signal, viewChild, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, effect, ElementRef, forwardRef, inject, input, LOCALE_ID, signal, viewChild, ViewEncapsulation } from '@angular/core';
 import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors, Validator } from '@angular/forms';
 import { ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { InputDirective } from '@lucca-front/ng/form-field';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { PopoverDirective } from '@lucca-front/ng/popover2';
 import { parse, startOfDay } from 'date-fns';
+import { AbstractDateComponent } from '../abstract-date-component';
 import { CalendarMode } from '../calendar2/calendar-mode';
 import { Calendar2Component } from '../calendar2/calendar2.component';
 import { CellStatus } from '../calendar2/cell-status';
+import { getLocalizedDateFormat } from '../date-format';
 import { comparePeriods, startOfPeriod } from '../utils';
-import { AbstractDateComponent } from '../abstract-date-component';
 
 @Component({
 	selector: 'lu-date-input',
@@ -52,6 +53,10 @@ export class DateInputComponent extends AbstractDateComponent implements Control
 	selectedDate = signal<Date | null>(null);
 
 	calendar = viewChild(Calendar2Component);
+
+	#locale = inject(LOCALE_ID);
+
+	dateFormatLocalized = getLocalizedDateFormat(this.#locale);
 
 	displayValue = computed(() => {
 		if (this.selectedDate() && this.isValidDate(this.selectedDate())) {

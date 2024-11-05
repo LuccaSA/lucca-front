@@ -21,6 +21,7 @@
 				(keyup.arrowDown)="popoverRef.opened() ? popoverRef.focusBackToContent($event) : openPopover(popoverRef)"
 				(keyup.escape)="popoverRef.close()"
 				[disabled]="disabled"
+				[attr.placeholder]="dateFormatLocalized"
 			/>
 		</div>
 		<div class="rangePicker-content mod-end">
@@ -44,6 +45,7 @@
 				(keyup.arrowDown)="popoverRef.opened() ? popoverRef.focusBackToContent($event) : openPopover(popoverRef)"
 				(keyup.escape)="popoverRef.close()"
 				[disabled]="disabled"
+				[attr.placeholder]="dateFormatLocalized"
 			/>
 		</div>
 		<lu-icon [icon]="'arrowRight'" [size]="'XS'" [alt]="''" class="rangePicker-arrow" />

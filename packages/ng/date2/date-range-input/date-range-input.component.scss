@@ -4,14 +4,15 @@
 
 lu-date-range-input {
 	--components-dateInput-maxWidth: auto;
-	--components-dateInput-maxWidthDay: 16.25rem;
-	--components-dateInput-maxWidthYear: 10.75rem;
-	--components-dateInput-maxWidthMonth: 13.5rem;
+	--components-dateInput-maxWidthDay: 18rem;
+	--components-dateInput-maxWidthMonth: 15rem;
+	--components-dateInput-maxWidthYear: 12rem;
 
 	--components-rangePicker-content-inlineStart: calc(var(--pr-t-spacings-100) + var(--pr-t-spacings-25));
 	--components-rangePicker-content-width: calc(50% + var(--pr-t-spacings-300));
 	--components-rangePicker-content-inlineEnd: calc(var(--pr-t-spacings-800) + var(--pr-t-spacings-50));
 	--components-rangePicker-content-background: transparent;
+	--components-rangePicker-content-placeholderColor: var(--palettes-neutral-400);
 
 	display: block;
 	max-width: var(--components-dateInput-maxWidth);
@@ -46,10 +47,15 @@ lu-date-range-input {
 
 	&:focus-within {
 		--components-rangePicker-content-background: var(--palettes-product-100);
+		--components-rangePicker-content-placeholderColor: var(--palettes-product-400);
 
 		.form-fieldset:has(.textField-input-value[aria-invalid='true']) & {
 			--components-rangePicker-content-background: var(--palettes-critical-100);
 		}
+	}
+
+	.form-fieldset:has(.textField-input-value[aria-invalid='true']) & {
+		--components-rangePicker-content-placeholderColor: var(--palettes-critical-400);
 	}
 
 	&.mod-start {
@@ -62,6 +68,10 @@ lu-date-range-input {
 	position: relative;
 	padding-left: var(--components-rangePicker-content-inlineStart);
 	padding-right: var(--components-rangePicker-content-inlineEnd);
+
+	&::placeholder {
+		color: var(--components-rangePicker-content-placeholderColor);
+	}
 
 	.form-fieldset.mod-S & {
 		--components-rangePicker-content-inlineStart: var(--pr-t-spacings-100);
