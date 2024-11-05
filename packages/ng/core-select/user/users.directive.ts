@@ -1,17 +1,30 @@
 import { HttpClient } from '@angular/common/http';
-import { Directive, Type, booleanAttribute, computed, effect, forwardRef, inject, input, signal, untracked } from '@angular/core';
+import { Directive, Provider, Type, booleanAttribute, computed, effect, forwardRef, inject, input, signal, untracked } from '@angular/core';
 import { takeUntilDestroyed, toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { ILuApiCollectionResponse } from '@lucca-front/ng/api';
 import { CORE_SELECT_API_TOTAL_COUNT_PROVIDER, CoreSelectApiTotalCountProvider, sanitizeClueFilter } from '@lucca-front/ng/core-select';
 import { ALuCoreSelectApiDirective } from '@lucca-front/ng/core-select/api';
 import { LuDisplayFormat, LuDisplayFullname } from '@lucca-front/ng/user';
 import { EMPTY, Observable, catchError, combineLatest, debounceTime, map, of, shareReplay, switchMap, take, tap } from 'rxjs';
-import { FORMER_EMPLOYEES_CONTEXT, FormerEmployeesContext, LuCoreSelectFormerEmployeesComponent } from './former-employees.component';
+import { FORMER_EMPLOYEES_CONTEXT, LuCoreSelectFormerEmployeesComponent } from './former-employees.component';
 import { LU_CORE_SELECT_CURRENT_USER_ID } from './me.provider';
 import { LuUserDisplayerComponent } from './user-displayer.component';
 import { LuCoreSelectUserHomonymsService } from './user-homonym.service';
 import { LuUserOptionComponent } from './user-option.component';
 import { LuCoreSelectUser, LuCoreSelectWithAdditionnalInformation } from './user-option.model';
+
+export function provideCoreSelectUsersContext(directiveFn: () => Type<LuCoreSelectUsersDirective>): Provider[] {
+	return [
+		{
+			provide: CORE_SELECT_API_TOTAL_COUNT_PROVIDER,
+			useExisting: forwardRef(directiveFn),
+		},
+		{
+			provide: FORMER_EMPLOYEES_CONTEXT,
+			useExisting: forwardRef(directiveFn),
+		},
+	];
+}
 
 @Directive({
 	// The attribute is already prefixed with "lu-simple-select"
@@ -19,16 +32,7 @@ import { LuCoreSelectUser, LuCoreSelectWithAdditionnalInformation } from './user
 	selector: 'lu-simple-select[users],lu-multi-select[users]',
 	standalone: true,
 	exportAs: 'luUsers',
-	providers: [
-		{
-			provide: CORE_SELECT_API_TOTAL_COUNT_PROVIDER,
-			useExisting: forwardRef(() => LuCoreSelectUsersDirective),
-		},
-		{
-			provide: FORMER_EMPLOYEES_CONTEXT,
-			useExisting: forwardRef(() => LuCoreSelectUsersDirective satisfies Type<FormerEmployeesContext>),
-		},
-	],
+	providers: [provideCoreSelectUsersContext(() => LuCoreSelectUsersDirective)],
 })
 export class LuCoreSelectUsersDirective<T extends LuCoreSelectUser = LuCoreSelectUser>
 	extends ALuCoreSelectApiDirective<LuCoreSelectWithAdditionnalInformation<T>>
