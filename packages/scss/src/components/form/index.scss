@@ -20,6 +20,18 @@
 	&.mod-S {
 		@include S;
 	}
+
+	&:has(~ .box) {
+		.form-field {
+			&.mod-withArrow {
+				@include withArrow;
+
+				&.mod-S {
+					@include withArrowS;
+				}
+			}
+		}
+	}
 }
 
 .form-field {
@@ -29,14 +41,6 @@
 
 	&.mod-XS {
 		@include XS;
-	}
-
-	&.mod-withArrow {
-		@include withArrow;
-
-		&.mod-S {
-			@include withArrowS;
-		}
 	}
 
 	&.mod-checkable,
