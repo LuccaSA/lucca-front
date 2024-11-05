@@ -32,6 +32,11 @@
 			}
 		}
 	}
+
+	&:has(.radioField-input[aria-invalid='true']),
+	&:has(.checkboxField-input[aria-invalid='true']) {
+		@include legendInvalid;
+	}
 }
 
 .form-field {
@@ -50,7 +55,8 @@
 		@include checkable;
 	}
 
-	&:has(.textField-input-value[aria-invalid='true'], .timePicker-fieldset-group-textfield-input[aria-invalid='true']) {
+	&:has(.textField-input-value[aria-invalid='true']),
+	&:has(.timePicker-fieldset-group-textfield-input[aria-invalid='true']) {
 		@include invalid;
 	}
 
