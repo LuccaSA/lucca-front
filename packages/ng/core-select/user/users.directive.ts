@@ -73,7 +73,6 @@ export class LuCoreSelectUsersDirective<T extends LuCoreSelectUser = LuCoreSelec
 	}
 
 	protected defaultUrl = computed(() => (this.appInstanceId() && this.operationIds()?.length ? this.#defaultScopedSearchUrl : this.#defaultSearchUrl));
-	protected displayMeOption$ = toObservable(this.displayMeOption);
 	protected urlOrDefault = computed(() => this.url() ?? this.defaultUrl());
 
 	protected clue = toSignal(this.clue$);
@@ -146,7 +145,7 @@ export class LuCoreSelectUsersDirective<T extends LuCoreSelectUser = LuCoreSelec
 
 	protected override getOptionsPage(params: Record<string, string | number | boolean>, page: number): Observable<{ items: LuCoreSelectWithAdditionnalInformation<T>[]; isLastPage: boolean }> {
 		const hasClue = !!params['clue'];
-		const displayMe = this.displayMeOption && !hasClue;
+		const displayMe = this.displayMeOption() && !hasClue;
 		const prependMe = displayMe && page === 0;
 
 		this.select.loading = true;
