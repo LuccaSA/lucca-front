@@ -1,4 +1,4 @@
-import { Component, ElementRef, forwardRef, OnDestroy, OnInit, viewChild, ViewEncapsulation } from '@angular/core';
+import { Component, ElementRef, forwardRef, inject, OnDestroy, OnInit, viewChild, ViewEncapsulation } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { createEmptyHistoryState, registerHistory } from '@lexical/history';
 import { AutoLinkNode, LinkNode } from '@lexical/link';
@@ -7,12 +7,13 @@ import { HeadingNode, QuoteNode, registerRichText } from '@lexical/rich-text';
 import { mergeRegister } from '@lexical/utils';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { IconComponent } from '@lucca-front/ng/icon';
-import { $createTextNode, $getSelection, CommandPayloadType, createEditor, FORMAT_TEXT_COMMAND, LexicalCommand } from 'lexical';
+import { CommandPayloadType, createEditor, FORMAT_TEXT_COMMAND, LexicalCommand, LexicalEditor } from 'lexical';
 import { CLEAR_FORMAT, FORMAT_HEADINGS, FORMAT_LINK, FORMAT_QUOTE, registerFormatOptions } from './commands';
 import { TagNode } from './tag-node';
+import { LexicalEditorProvider } from './editor.provider';
 
 @Component({
-	selector: 'lu-rich-input',
+	selector: 'lu-rich-text-input',
 	standalone: true,
 	imports: [ButtonComponent, IconComponent],
 	templateUrl: './rich-text-input.component.html',
@@ -24,9 +25,12 @@ import { TagNode } from './tag-node';
 			useExisting: forwardRef(() => RichTextInputComponent),
 			multi: true,
 		},
+		LexicalEditorProvider,
 	],
 })
 export class RichTextInputComponent implements OnInit, OnDestroy, ControlValueAccessor {
+	#editorProvider = inject(LexicalEditorProvider);
+
 	#onChange?: (markdown: string | null) => void;
 	#onTouch?: () => void;
 
@@ -38,35 +42,7 @@ export class RichTextInputComponent implements OnInit, OnDestroy, ControlValueAc
 		CLEAR_FORMAT,
 	};
 
-	editor = createEditor({
-		theme: {
-			text: {
-				strikethrough: 'editorTheme__textStrikethrough',
-				bold: 'editorTheme__textBold',
-				italic: 'editorTheme__textItalic',
-			},
-		},
-		nodes: [HeadingNode, QuoteNode, AutoLinkNode, LinkNode, TagNode],
-	});
-
-	tags = [
-		'Prenom',
-		'Nom',
-		'Email',
-		'Téléphone',
-		'Adresse',
-		'Ville',
-		'Code postal',
-		'Pays',
-		'Entreprise',
-		'Poste',
-		'Service',
-		'Manager',
-		'Collaborateur',
-		'Date de naissance',
-		"Date d'embauche",
-		'Date de départ',
-	];
+	editor?: LexicalEditor;
 
 	#cleanup?: () => void;
 
@@ -75,6 +51,18 @@ export class RichTextInputComponent implements OnInit, OnDestroy, ControlValueAc
 	});
 
 	ngOnInit(): void {
+		this.editor = createEditor({
+			theme: {
+				text: {
+					strikethrough: 'editorTheme__textStrikethrough',
+					bold: 'editorTheme__textBold',
+					italic: 'editorTheme__textItalic',
+				},
+			},
+			nodes: [HeadingNode, QuoteNode, AutoLinkNode, LinkNode, TagNode],
+		});
+
+		this.#editorProvider.editor.set(this.editor);
 		this.editor.setRootElement(this.content().nativeElement);
 		this.#cleanup = mergeRegister(
 			registerRichText(this.editor),
@@ -120,14 +108,5 @@ export class RichTextInputComponent implements OnInit, OnDestroy, ControlValueAc
 	dispatchCommand<T extends LexicalCommand<unknown>>($event: Event, type: T, payload: CommandPayloadType<T>) {
 		$event.preventDefault();
 		this.editor.dispatchCommand(type, payload);
-	}
-
-	insertTag(text: string) {
-		this.editor.update(() => {
-			const selection = $getSelection();
-			const node = new TagNode(text);
-			selection.insertNodes([node]);
-			node.insertAfter($createTextNode(' ')).selectEnd();
-		});
 	}
 }

@@ -1,0 +1,11 @@
+<button
+	luButton="outlined"
+	type="button"
+	size="XS"
+	(click)="dispatchCommand()"
+	[class.mod-toggled]="active()"
+	[luTooltip]="tooltip()"
+	luTooltipOnlyForDisplay
+>
+	<lu-icon [icon]="icon()" [alt]="tooltip()" />
+</button>
