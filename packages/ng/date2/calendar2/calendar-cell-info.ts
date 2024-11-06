@@ -10,16 +10,16 @@ export interface RangeInfo {
 
 export interface CalendarCellInfo {
 	day: number;
-	isWeekend: boolean;
-	isOverflow: boolean;
 	date: Date;
 	status: CellStatus;
-	isCurrent: boolean;
-	classes: string[];
 	disabled: boolean;
+	isWeekend: boolean;
+	isCurrent: boolean;
+	isOverflow: boolean;
+	noButton: boolean;
 	label?: string;
 	rangeInfo: RangeInfo;
-	isLastDayOfMonth: boolean;
+	ngClasses: Record<string, boolean>;
 }
 
 export interface CalendarMonthInfo {

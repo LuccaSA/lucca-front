@@ -40,34 +40,11 @@ export default {
 		const { min, max, selected, ...flags } = args;
 		return {
 			props: {
-				shortcuts: [
-					{
-						label: 'Cette semaine',
-						range: {
-							start: startOfWeek(new Date(), { weekStartsOn: 1 }),
-							end: endOfWeek(new Date(), { weekStartsOn: 1 }),
-						},
-					},
-					{
-						label: 'Cette semaine aux US',
-						range: {
-							start: startOfWeek(new Date(), { weekStartsOn: 0 }),
-							end: endOfWeek(new Date(), { weekStartsOn: 0 }),
-						},
-					},
-					{
-						label: 'Le mois prochain',
-						range: {
-							start: startOfMonth(addMonths(new Date(), 1)),
-							end: endOfMonth(addMonths(new Date(), 1)),
-						},
-					},
-				] as CalendarShortcut[],
 				min: min ? new Date(min) : null,
 				max: max ? new Date(max) : null,
 			},
 			template: cleanupTemplate(`<lu-form-field label="Date range input example" inlineMessage="Inline message example">
-				<lu-date-range-input [(ngModel)]="selected" [min]="min" [max]="max" [shortcuts]="shortcuts" ${generateInputs(flags, argTypes)}></lu-date-range-input>
+				<lu-date-range-input [(ngModel)]="selected" [min]="min" [max]="max" ${generateInputs(flags, argTypes)}></lu-date-range-input>
 			</lu-form-field>
 
 			<pr-story-model-display>{{selected | json}}</pr-story-model-display>`),

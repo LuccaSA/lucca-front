@@ -10,10 +10,13 @@ import {
 	eachDayOfInterval,
 	eachMonthOfInterval,
 	eachYearOfInterval,
+	endOfDay,
 	endOfDecade,
 	endOfMonth,
 	endOfWeek,
 	endOfYear,
+	isAfter,
+	isBefore,
 	isSameDay,
 	isSameMonth,
 	isSameYear,
@@ -123,6 +126,8 @@ export class Calendar2Component implements OnInit {
 
 	dateClicked = output<Date>();
 
+	dateHovered = model<Date | null>(null);
+
 	todayLabel = this.#intlRelativeDay.format(0, 'day');
 	thisMonthLabel = this.#intlRelativeDay.format(0, 'month');
 	thisYearLabel = this.#intlRelativeDay.format(0, 'year');
@@ -150,26 +155,36 @@ export class Calendar2Component implements OnInit {
 			};
 		}, {});
 		// If we want to show days before and after this month
-		if (this.showOverflow()) {
-			// Use last week of previous month
-			const startOfPreviousOverflow = startOfWeek(lastDayOfMonth(this.previousMonth()), this.#weekOptions);
-			const previousOverflow = eachDayOfInterval({
-				start: startOfPreviousOverflow,
-				end: endOfMonth(this.previousMonth()),
-			}).map((date) => this.dateToCellInfo(date, true));
-			if (daysByWeek[startOfPreviousOverflow.getTime()]) {
-				daysByWeek[startOfPreviousOverflow.getTime()] = [...previousOverflow, ...daysByWeek[startOfPreviousOverflow.getTime()]];
+		// Use last week of previous month
+		const startOfPreviousOverflow = startOfWeek(lastDayOfMonth(this.previousMonth()), this.#weekOptions);
+		const previousOverflow = eachDayOfInterval({
+			start: startOfPreviousOverflow,
+			end: endOfMonth(this.previousMonth()),
+		}).map((date) => {
+			if (this.showOverflow()) {
+				return this.dateToCellInfo(date, true);
+			} else {
+				return this.dateToCellInfo(endOfMonth(date), true);
 			}
-			// Use first week of next month
-			const startOfNextMonthOverflow = startOfWeek(startOfMonth(this.nextMonth()), this.#weekOptions);
-			const endOfNextMonthOverflow = endOfWeek(startOfMonth(this.nextMonth()), this.#weekOptions);
-			const nextOverflow = eachDayOfInterval({
-				start: startOfMonth(this.nextMonth()),
-				end: endOfNextMonthOverflow,
-			}).map((date) => this.dateToCellInfo(date, true));
-			if (daysByWeek[startOfNextMonthOverflow.getTime()]) {
-				daysByWeek[startOfNextMonthOverflow.getTime()] = [...daysByWeek[startOfNextMonthOverflow.getTime()], ...nextOverflow];
+		});
+		if (daysByWeek[startOfPreviousOverflow.getTime()]) {
+			daysByWeek[startOfPreviousOverflow.getTime()] = [...previousOverflow, ...daysByWeek[startOfPreviousOverflow.getTime()]];
+		}
+		// Use first week of next month
+		const startOfNextMonthOverflow = startOfWeek(startOfMonth(this.nextMonth()), this.#weekOptions);
+		const endOfNextMonthOverflow = endOfWeek(startOfMonth(this.nextMonth()), this.#weekOptions);
+		const nextOverflow = eachDayOfInterval({
+			start: startOfMonth(this.nextMonth()),
+			end: endOfNextMonthOverflow,
+		}).map((date) => {
+			if (this.showOverflow()) {
+				return this.dateToCellInfo(date, true);
+			} else {
+				return this.dateToCellInfo(startOfMonth(date), true);
 			}
+		});
+		if (daysByWeek[startOfNextMonthOverflow.getTime()]) {
+			daysByWeek[startOfNextMonthOverflow.getTime()] = [...daysByWeek[startOfNextMonthOverflow.getTime()], ...nextOverflow];
 		}
 		return Object.keys(daysByWeek)
 			.sort()
@@ -304,18 +319,41 @@ export class Calendar2Component implements OnInit {
 			classes.push(rangeInfo.class);
 		}
 
+		const isCurrent = isSameDay(new Date(), date) && !this.hideToday();
+		const isWeekend = this.#weekInfo.weekend.includes(getIntlWeekDay(date)) && !this.hideWeekend();
+
+		const isInProgress = rangeInfo?.range && !rangeInfo.range.end && this.dateHovered() !== null;
+
+		const isProgressBody = (isInProgress && isAfter(date, endOfDay(rangeInfo.range.start)) && isBefore(date, startOfDay(this.dateHovered()))) || (isOverflow && isSameDay(date, this.dateHovered()));
+		const isProgressStart = !isOverflow && isInProgress && isSameDay(date, rangeInfo.range.start);
+		const isProgressEnd = !isOverflow && isInProgress && isSameDay(date, this.dateHovered());
+
+		const isSelected = status.selected || (!!rangeInfo?.range && !isInProgress);
+
 		return {
 			day: date.getDate(),
-			isWeekend: this.#weekInfo.weekend.includes(getIntlWeekDay(date)) && !this.hideWeekend(),
-			isOverflow,
 			status,
 			label: status.label || rangeInfo?.label,
 			date,
-			classes,
-			isCurrent: isSameDay(new Date(), date) && !this.hideToday(),
 			rangeInfo,
+			isWeekend,
+			isCurrent,
+			isOverflow,
+			noButton: isOverflow && !this.showOverflow(),
 			disabled: status?.disabled || (isOverflow && !this.enableOverflow()),
-			isLastDayOfMonth: isSameDay(lastDayOfMonth(date), date),
+			ngClasses: {
+				'is-daysOff': isWeekend,
+				'is-overflow': isOverflow,
+				'is-current': isCurrent,
+				'is-start': rangeInfo?.isStart || status.selected,
+				'is-end': rangeInfo?.isEnd || status.selected,
+				'is-selected': isSelected,
+				// Range in progress statuses
+				'is-selectionInProgress': isProgressBody,
+				'is-startInProgress': isProgressStart,
+				'is-endInProgress': isProgressEnd,
+				...classes.reduce((acc, key) => ({ ...acc, [key]: true }), {}),
+			},
 		};
 	}
 
@@ -328,6 +366,20 @@ export class Calendar2Component implements OnInit {
 						start: startOfDay(range.start),
 						end: range.end,
 					});
+				} else if (this.dateHovered() !== null) {
+					// Nominal case: end is after start
+					if (isAfter(this.dateHovered(), startOfDay(range.start))) {
+						return isWithinInterval(date, {
+							start: startOfDay(range.start),
+							end: endOfDay(this.dateHovered()),
+						});
+					} else {
+						// When user clicked end date first and now wants to select a start date
+						return isWithinInterval(date, {
+							start: startOfDay(this.dateHovered()),
+							end: endOfDay(range.start),
+						});
+					}
 				} else {
 					switch (this.mode()) {
 						case 'day':

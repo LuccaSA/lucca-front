@@ -54,6 +54,8 @@ export class DateRangeInputComponent extends AbstractDateComponent implements Co
 
 	selectedRange = signal<DateRange | null>(null);
 
+	dateHovered = signal<Date | null>(null);
+
 	placeholder = input<string>();
 
 	popoverPositions: ConnectionPositionPair[] = [
@@ -107,28 +109,6 @@ export class DateRangeInputComponent extends AbstractDateComponent implements Co
 
 	calendarRanges = computed(() => {
 		if (this.selectedRange()) {
-			const startsOutside = isBefore(this.selectedRange().start, this.currentStartDisplayDate()) && isAfter(this.selectedRange().end, this.currentStartDisplayDate());
-			const endsOutside = isAfter(this.selectedRange().end, this.currentEndDisplayDate()) && isBefore(this.selectedRange().start, this.currentEndDisplayDate());
-
-			if (startsOutside || endsOutside) {
-				const outsideRange = {
-					...this.selectedRange(),
-					outside: true,
-				};
-
-				if (startsOutside) {
-					outsideRange.start = this.currentStartDisplayDate();
-					outsideRange.startsOutside = true;
-				}
-
-				if (endsOutside) {
-					outsideRange.end = this.currentEndDisplayDate();
-					outsideRange.endsOutside = true;
-				}
-
-				return [outsideRange, ...this.ranges()];
-			}
-
 			return [this.selectedRange(), ...this.ranges()];
 		}
 		return this.ranges();
