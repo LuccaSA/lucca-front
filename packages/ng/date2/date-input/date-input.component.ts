@@ -1,6 +1,6 @@
 import { ConnectionPositionPair } from '@angular/cdk/overlay';
 import { booleanAttribute, ChangeDetectionStrategy, Component, computed, effect, ElementRef, forwardRef, inject, input, LOCALE_ID, signal, viewChild, ViewEncapsulation } from '@angular/core';
-import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors, Validator } from '@angular/forms';
+import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors, Validator, Validators } from '@angular/forms';
 import { getIntl, ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { InputDirective } from '@lucca-front/ng/form-field';
 import { IconComponent } from '@lucca-front/ng/icon';
@@ -168,11 +168,14 @@ export class DateInputComponent implements ControlValueAccessor, Validator {
 	}
 
 	validate(control: AbstractControl<Date, Date>): ValidationErrors {
+		if (!control.value && control.hasValidator(Validators.required)) {
+			return { date: true };
+		}
 		return this.isValidDate(control.value) ? null : { date: true };
 	}
 
 	isValidDate(date: Date): boolean {
-		return !!date && !isNaN(date.getTime());
+		return !date || !isNaN(date.getTime());
 	}
 
 	isInMinMax(date: Date, mode: CalendarMode): boolean {
