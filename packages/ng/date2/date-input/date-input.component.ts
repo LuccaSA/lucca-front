@@ -131,8 +131,13 @@ export class DateInputComponent implements ControlValueAccessor, Validator {
 			() => {
 				const inputValue = this.userTextInput();
 				if (inputValue.length > 0) {
-					const parsed = parse(inputValue, this.#dateFormat, startOfDay(new Date()));
-					if (parsed.getFullYear() > 999) {
+					let parsed: Date;
+					try {
+						parsed = parse(inputValue, this.#dateFormat, startOfDay(new Date()));
+					} catch (error) {
+						/* not a correct date */
+					}
+					if (parsed instanceof Date && parsed.getFullYear() > 999) {
 						this.selectedDate.set(startOfDay(parsed));
 						this.currentDate.set(startOfDay(parsed));
 					} else {
@@ -168,9 +173,18 @@ export class DateInputComponent implements ControlValueAccessor, Validator {
 	}
 
 	validate(control: AbstractControl<Date, Date>): ValidationErrors {
+		// null with a formControl required
 		if (!control.value && control.hasValidator(Validators.required)) {
 			return { date: true };
 		}
+		// try to parse the display value cause formControl.value is undefined if date is not parsable
+		try {
+			parse(this.displayValue(), this.#dateFormat, startOfDay(new Date()));
+		} catch (error) {
+			/* not a correct date */
+			return { date: true };
+		}
+		// is form control value is a valid date
 		return this.isValidDate(control.value) ? null : { date: true };
 	}
 
