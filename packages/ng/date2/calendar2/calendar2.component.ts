@@ -16,7 +16,6 @@ import {
 	endOfWeek,
 	endOfYear,
 	isAfter,
-	isBefore,
 	isSameDay,
 	isSameMonth,
 	isSameYear,
@@ -41,6 +40,7 @@ import { Calendar2CellDirective } from './calendar2-cell.directive';
 import { CALENDAR_CELLS, CALENDAR_TABBABLE_DATE } from './calendar2.tokens';
 import { CellStatus } from './cell-status';
 import { DateRange } from './date-range';
+import type { Interval } from 'date-fns/types';
 
 const MODE_HIERARCHY: CalendarMode[] = ['day', 'month', 'year'];
 
@@ -324,11 +324,25 @@ export class Calendar2Component implements OnInit {
 
 		const isInProgress = rangeInfo?.range && !rangeInfo.range.end && this.dateHovered() !== null;
 
-		const isProgressBody = (isInProgress && isAfter(date, endOfDay(rangeInfo.range.start)) && isBefore(date, startOfDay(this.dateHovered()))) || (isOverflow && isSameDay(date, this.dateHovered()));
-		const isProgressStart = !isOverflow && isInProgress && isSameDay(date, rangeInfo.range.start);
-		const isProgressEnd = !isOverflow && isInProgress && isSameDay(date, this.dateHovered());
+		let isProgressBody = false;
+		let isProgressStart = false;
+		let isProgressEnd = false;
 
-		const isSelected = status.selected || (!!rangeInfo?.range && !isInProgress);
+		if (isInProgress) {
+			const hoveredRange: Interval = {
+				start: endOfDay(rangeInfo.range.start),
+				end: startOfDay(this.dateHovered()),
+			};
+			if (isAfter(hoveredRange.start, hoveredRange.end)) {
+				hoveredRange.end = rangeInfo.range.start;
+				hoveredRange.start = this.dateHovered();
+			}
+			isProgressBody = isWithinInterval(startOfDay(date), hoveredRange);
+			isProgressStart = !isOverflow && isSameDay(date, hoveredRange.start);
+			isProgressEnd = !isOverflow && isSameDay(date, hoveredRange.end);
+		}
+
+		const isSelected = status.selected || (!!rangeInfo?.range && !isInProgress && !isOverflow);
 
 		return {
 			day: date.getDate(),
@@ -345,8 +359,8 @@ export class Calendar2Component implements OnInit {
 				'is-daysOff': isWeekend,
 				'is-overflow': isOverflow,
 				'is-current': isCurrent,
-				'is-start': rangeInfo?.isStart || status.selected,
-				'is-end': rangeInfo?.isEnd || status.selected,
+				'is-start': !isOverflow && (rangeInfo?.isStart || status.selected),
+				'is-end': !isOverflow && (rangeInfo?.isEnd || status.selected),
 				'is-selected': isSelected,
 				// Range in progress statuses
 				'is-selectionInProgress': isProgressBody,
