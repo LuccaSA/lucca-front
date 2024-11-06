@@ -20,3 +20,17 @@
 .editorTheme__textStrikethrough {
 	text-decoration: line-through;
 }
+.editor-tagContainer {
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--pr-t-spacings-100);
+	margin-top: var(--pr-t-spacings-200);
+	align-items: center;
+}
+.editor-tag {
+	cursor: pointer;
+	border-radius: var(--pr-t-spacings-50);
+	padding: var(--pr-t-spacings-25) var(--pr-t-spacings-100);
+	color: var(--palettes-neutral-800);
+	background-color: var(--palettes-neutral-200);
+}
