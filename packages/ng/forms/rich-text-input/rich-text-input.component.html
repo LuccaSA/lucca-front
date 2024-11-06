@@ -3,23 +3,9 @@
 		<div #content class="textField-input-value editor-content" contenteditable (keydown)="onKeyDown($event)"></div>
 	</div>
 	<div #toolbar class="editor-toolbar">
-		<button type="button" luButton="text" size="XS" (click)="dispatchCommand($event, commands.FORMAT_TEXT_COMMAND, 'bold')">
-			<lu-icon icon="formatBold"></lu-icon>
-		</button>
-		<button type="button" luButton="text" size="XS" (click)="dispatchCommand($event, commands.FORMAT_TEXT_COMMAND, 'italic')">
-			<lu-icon icon="formatItalic"></lu-icon>
-		</button>
-		<button type="button" luButton="text" size="XS" (click)="dispatchCommand($event, commands.FORMAT_TEXT_COMMAND, 'strikethrough')">
-			<lu-icon icon="formatStrikethrough"></lu-icon>
-		</button>
 		<button type="button" luButton="text" size="XS" (click)="dispatchCommand($event, commands.CLEAR_FORMAT, undefined)">
 			<lu-icon icon="formatClear"></lu-icon>
 		</button>
+		<ng-content />
 	</div>
-</div>
-<div class="editor-tagContainer">
-	<span> Insérer </span>
-	@for(tag of tags; track tag){
-	<span class="editor-tag" (click)="insertTag(tag)">{{tag}}</span>
-	}
 </div>
