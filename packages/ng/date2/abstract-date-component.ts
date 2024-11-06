@@ -1,10 +1,10 @@
-import { booleanAttribute, Component, inject, input, LOCALE_ID, signal } from '@angular/core';
-import { addMonths, addYears } from 'date-fns';
+import { booleanAttribute, Component, computed, inject, input, LOCALE_ID, signal } from '@angular/core';
 import { getIntl } from '@lucca-front/ng/core';
+import { addMonths, addYears } from 'date-fns';
 import { CalendarMode } from './calendar2/calendar-mode';
 import { CellStatus } from './calendar2/cell-status';
 import { DateRange } from './calendar2/date-range';
-import { getDateFormat } from './date-format';
+import { getDateFormat, getLocalizedDateFormat } from './date-format';
 import { LU_DATE2_TRANSLATIONS } from './date2.translate';
 
 @Component({
@@ -40,6 +40,10 @@ export abstract class AbstractDateComponent {
 	max = input<Date | null>(null);
 
 	calendarMode = signal<CalendarMode>('day');
+
+	dateFormatLocalized = computed(() => {
+		return getLocalizedDateFormat(this.locale, this.mode());
+	});
 
 	protected currentDate = signal(new Date());
 

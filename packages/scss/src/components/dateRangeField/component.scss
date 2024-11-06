@@ -1,0 +1,69 @@
+@use '@lucca-front/scss/src/commons/utils/namespace';
+@use '@lucca-front/icons/src/icon/exports' as icon;
+
+@mixin component($atRoot: namespace.$defaultAtRoot) {
+	display: block;
+	max-width: var(--components-dateRangeField-maxWidth);
+	margin: var(--pr-t-spacings-50) 0;
+
+	@at-root ($atRoot) {
+		.dateRangeField-content {
+			position: relative;
+			width: var(--components-dateRangeField-content-width);
+
+			&::before {
+				content: '';
+				position: absolute;
+				background-color: var(--components-dateRangeField-content-background);
+				border-radius: var(--commons-borderRadius-M);
+				pointer-events: none;
+				inset: var(--pr-t-spacings-50);
+				inset-inline-end: calc(var(--components-dateRangeField-content-inlineEnd) - var(--pr-t-spacings-50));
+			}
+
+			&:focus-within {
+				--components-dateRangeField-content-background: var(--palettes-product-100);
+				--components-dateRangeField-content-placeholderColor: var(--palettes-product-400);
+
+				.form-fieldset:has(.dateRangeField-input-value[aria-invalid='true']) & {
+					--components-dateRangeField-content-background: var(--palettes-critical-100);
+				}
+			}
+
+			.form-fieldset:has(.dateRangeField-input-value[aria-invalid='true']) & {
+				--components-dateRangeField-content-placeholderColor: var(--palettes-critical-400);
+			}
+
+			&.mod-start {
+				--components-dateRangeField-content-width: calc(50% - var(--pr-t-spacings-300) - var(--pr-t-spacings-50));
+				--components-dateRangeField-content-inlineEnd: calc(var(--pr-t-spacings-200) + var(--pr-t-spacings-50));
+			}
+		}
+
+		.dateRangeField-input-value {
+			&.textField-input-value {
+				position: relative;
+				padding-left: var(--components-dateRangeField-content-inlineStart);
+				padding-right: var(--components-dateRangeField-content-inlineEnd);
+
+				&::placeholder {
+					color: var(--components-dateRangeField-content-placeholderColor);
+				}
+
+				.form-fieldset.mod-S & {
+					--components-dateRangeField-content-inlineStart: var(--pr-t-spacings-100);
+				}
+			}
+		}
+
+		.dateRangeField-arrow {
+			position: absolute;
+			left: calc(50% - calc(var(--pr-t-spacings-400) + var(--pr-t-spacings-150)));
+			color: var(--palettes-neutral-700);
+			pointer-events: none;
+			border-radius: var(--commons-borderRadius-M);
+
+			@include icon.S;
+		}
+	}
+}

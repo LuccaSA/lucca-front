@@ -1,7 +1,7 @@
 import { ConnectionPositionPair } from '@angular/cdk/overlay';
-import { ChangeDetectionStrategy, Component, computed, effect, ElementRef, forwardRef, inject, input, LOCALE_ID, signal, viewChild, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, effect, ElementRef, forwardRef, inject, input, signal, viewChild, ViewEncapsulation } from '@angular/core';
 import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors, Validator } from '@angular/forms';
-import { ɵeffectWithDeps } from '@lucca-front/ng/core';
+import { LuClass, ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { InputDirective } from '@lucca-front/ng/form-field';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { PopoverDirective } from '@lucca-front/ng/popover2';
@@ -10,7 +10,6 @@ import { AbstractDateComponent } from '../abstract-date-component';
 import { CalendarMode } from '../calendar2/calendar-mode';
 import { Calendar2Component } from '../calendar2/calendar2.component';
 import { CellStatus } from '../calendar2/cell-status';
-import { getLocalizedDateFormat } from '../date-format';
 import { comparePeriods, startOfPeriod } from '../utils';
 
 @Component({
@@ -19,6 +18,9 @@ import { comparePeriods, startOfPeriod } from '../utils';
 	imports: [PopoverDirective, Calendar2Component, IconComponent, InputDirective],
 	templateUrl: './date-input.component.html',
 	styleUrl: './date-input.component.scss',
+	host: {
+		class: 'dateField',
+	},
 	encapsulation: ViewEncapsulation.None,
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	providers: [
@@ -32,11 +34,14 @@ import { comparePeriods, startOfPeriod } from '../utils';
 			useExisting: forwardRef(() => DateInputComponent),
 			multi: true,
 		},
+		LuClass,
 	],
 })
 export class DateInputComponent extends AbstractDateComponent implements ControlValueAccessor, Validator {
 	// CVA stuff
 	#onChange?: (value: Date) => void;
+
+	#luClass = inject(LuClass);
 
 	placeholder = input<string>();
 
@@ -53,10 +58,6 @@ export class DateInputComponent extends AbstractDateComponent implements Control
 	selectedDate = signal<Date | null>(null);
 
 	calendar = viewChild(Calendar2Component);
-
-	#locale = inject(LOCALE_ID);
-
-	dateFormatLocalized = getLocalizedDateFormat(this.#locale);
 
 	displayValue = computed(() => {
 		if (this.selectedDate() && this.isValidDate(this.selectedDate())) {
@@ -116,6 +117,14 @@ export class DateInputComponent extends AbstractDateComponent implements Control
 		);
 		effect(() => {
 			this.#onChange?.(this.selectedDate());
+		});
+
+		effect(() => {
+			this.#luClass.setState({
+				'mod-day': this.mode() === 'day',
+				'mod-month': this.mode() === 'month',
+				'mod-year': this.mode() === 'year',
+			});
 		});
 
 		ɵeffectWithDeps([this.calendarMode, this.tabbableDate], (calendarMode, tabbableDate) => {

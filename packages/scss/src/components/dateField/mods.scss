@@ -1,0 +1,23 @@
+@mixin day {
+	--components-dateField-maxWidth: var(--components-dateField-maxWidthDay);
+}
+
+@mixin month {
+	--components-dateField-maxWidth: var(--components-dateField-maxWidthMonth);
+}
+
+@mixin year {
+	--components-dateField-maxWidth: var(--components-dateField-maxWidthYear);
+}
+
+@mixin dayS {
+	--components-dateField-maxWidth: var(--components-dateField-maxWidthDayS);
+}
+
+@mixin monthS {
+	--components-dateField-maxWidth: var(--components-dateField-maxWidthMonthS);
+}
+
+@mixin yearS {
+	--components-dateField-maxWidth: var(--components-dateField-maxWidthYearS);
+}

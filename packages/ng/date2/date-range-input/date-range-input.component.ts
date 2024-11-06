@@ -1,21 +1,5 @@
 import { ConnectionPositionPair } from '@angular/cdk/overlay';
-import {
-	ChangeDetectionStrategy,
-	Component,
-	computed,
-	effect,
-	ElementRef,
-	forwardRef,
-	inject,
-	input,
-	LOCALE_ID,
-	Signal,
-	signal,
-	untracked,
-	viewChild,
-	viewChildren,
-	ViewEncapsulation,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, effect, ElementRef, forwardRef, inject, input, Signal, signal, untracked, viewChild, viewChildren, ViewEncapsulation } from '@angular/core';
 import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors, Validator } from '@angular/forms';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { LuClass, ɵeffectWithDeps } from '@lucca-front/ng/core';
@@ -28,7 +12,6 @@ import { CalendarMode } from '../calendar2/calendar-mode';
 import { Calendar2Component } from '../calendar2/calendar2.component';
 import { CellStatus } from '../calendar2/cell-status';
 import { DateRange } from '../calendar2/date-range';
-import { getLocalizedDateFormat } from '../date-format';
 import { startOfPeriod } from '../utils';
 import { CalendarShortcut } from './calendar-shortcut';
 
@@ -40,6 +23,9 @@ let nextId = 0;
 	imports: [PopoverDirective, Calendar2Component, IconComponent, InputDirective, ButtonComponent],
 	templateUrl: './date-range-input.component.html',
 	styleUrl: './date-range-input.component.scss',
+	host: {
+		class: 'dateRangeField',
+	},
 	encapsulation: ViewEncapsulation.None,
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	providers: [
@@ -60,10 +46,6 @@ export class DateRangeInputComponent extends AbstractDateComponent implements Co
 	#luClass = inject(LuClass);
 
 	#formFieldRef = inject(FORM_FIELD_INSTANCE, { optional: true });
-
-	#locale = inject(LOCALE_ID);
-
-	dateFormatLocalized = getLocalizedDateFormat(this.#locale);
 
 	idSuffix = nextId++;
 

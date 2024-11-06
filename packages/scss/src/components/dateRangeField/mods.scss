@@ -1,0 +1,31 @@
+@use '@lucca-front/icons/src/icon/exports' as icon;
+
+@mixin day {
+	--components-dateRangeField-maxWidth: var(--components-dateRangeField-maxWidthDay);
+}
+
+@mixin month {
+	--components-dateRangeField-maxWidth: var(--components-dateRangeField-maxWidthMonth);
+}
+
+@mixin year {
+	--components-dateRangeField-maxWidth: var(--components-dateRangeField-maxWidthYear);
+}
+
+@mixin dayS {
+	--components-dateRangeField-maxWidth: var(--components-dateRangeField-maxWidthDayS);
+}
+
+@mixin monthS {
+	--components-dateRangeField-maxWidth: var(--components-dateRangeField-maxWidthMonthS);
+}
+
+@mixin yearS {
+	--components-dateRangeField-maxWidth: var(--components-dateRangeField-maxWidthYearS);
+}
+
+@mixin S {
+	.dateRangeField-arrow {
+		@include icon.XS;
+	}
+}

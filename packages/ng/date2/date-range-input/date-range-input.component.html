@@ -1,6 +1,6 @@
 <div class="textField">
 	<div class="textField-input">
-		<div class="rangePicker-content mod-start">
+		<div class="dateRangeField-content mod-start">
 			<label for="range-input-start-{{idSuffix}}" class="u-mask">Start</label>
 			<input
 				type="text"
@@ -9,7 +9,7 @@
 				attr.aria-describedby="range-input-start-{{idSuffix}}-message"
 				luInput
 				luInputStandalone
-				class="textField-input-value rangePicker-input-value"
+				class="textField-input-value dateRangeField-input-value"
 				[value]="startLabel()"
 				(input)="startTextInput.set(start.value)"
 				(blur)="onTouched?.();inputFocused.set(false)"
@@ -21,10 +21,10 @@
 				(keyup.arrowDown)="popoverRef.opened() ? popoverRef.focusBackToContent($event) : openPopover(popoverRef)"
 				(keyup.escape)="popoverRef.close()"
 				[disabled]="disabled"
-				[attr.placeholder]="dateFormatLocalized"
+				[attr.placeholder]="dateFormatLocalized()"
 			/>
 		</div>
-		<div class="rangePicker-content mod-end">
+		<div class="dateRangeField-content mod-end">
 			<label for="range-input-end-{{idSuffix}}" class="u-mask">End</label>
 			<input
 				type="text"
@@ -33,7 +33,7 @@
 				attr.aria-describedby="range-input-start-{{idSuffix}}-message"
 				luInput
 				luInputStandalone
-				class="textField-input-value rangePicker-input-value"
+				class="textField-input-value dateRangeField-input-value"
 				[value]="endLabel()"
 				(input)="endTextInput.set(end.value)"
 				(blur)="onTouched?.();inputFocused.set(false)"
@@ -45,10 +45,10 @@
 				(keyup.arrowDown)="popoverRef.opened() ? popoverRef.focusBackToContent($event) : openPopover(popoverRef)"
 				(keyup.escape)="popoverRef.close()"
 				[disabled]="disabled"
-				[attr.placeholder]="dateFormatLocalized"
+				[attr.placeholder]="dateFormatLocalized()"
 			/>
 		</div>
-		<lu-icon [icon]="'arrowRight'" [size]="'XS'" [alt]="''" class="rangePicker-arrow" />
+		<lu-icon [icon]="'arrowRight'" [alt]="''" class="dateRangeField-arrow" />
 		<div class="textField-input-affix">
 			@if (clearable() && (start.value !== '' || end.value !== '')) {
 			<button class="textField-input-affix-clear clear" type="button" (click)="clear(start, end)">
