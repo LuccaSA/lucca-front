@@ -17,14 +17,9 @@
 		</button>
 	</div>
 </div>
-<div style="display: flex; flex-wrap: wrap; gap: 4px; margin-top: 4px">
+<div class="editor-tagContainer">
+	<span> Insérer </span>
 	@for(tag of tags; track tag){
-	<span
-		style="border-radius: 4px; padding: 2px 4px"
-		[style.color]="tag.color"
-		[style.backgroundColor]="tag.background"
-		(click)="insertTag(tag)"
-		>{{tag.label}}</span
-	>
+	<span class="editor-tag" (click)="insertTag(tag)">{{tag}}</span>
 	}
 </div>
