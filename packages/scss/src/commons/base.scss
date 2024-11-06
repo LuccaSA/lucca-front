@@ -152,6 +152,14 @@
 			font-weight: 600;
 		}
 
+		summary {
+			list-style: none;
+
+			&::-webkit-details-marker {
+				display:none;
+			}
+		}
+
 		@each $palette in config.$palettesAll {
 			$paletteExists: map.get(config.$palettesInterpolation, $palette);
 
