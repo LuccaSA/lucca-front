@@ -14,6 +14,10 @@ import { LuUserOptionComponent } from './user-option.component';
 import { LuCoreSelectUser, LuCoreSelectWithAdditionnalInformation } from './user-option.model';
 
 export function provideCoreSelectUsersContext(directiveFn: () => Type<LuCoreSelectUsersDirective>): Provider[] {
+	return [...provideBaseCoreSelectUsersContext(directiveFn), { provide: LuCoreSelectUsersDirective, useExisting: forwardRef(directiveFn) }];
+}
+
+function provideBaseCoreSelectUsersContext(directiveFn: () => Type<LuCoreSelectUsersDirective>): Provider[] {
 	return [
 		{
 			provide: CORE_SELECT_API_TOTAL_COUNT_PROVIDER,
@@ -32,7 +36,7 @@ export function provideCoreSelectUsersContext(directiveFn: () => Type<LuCoreSele
 	selector: 'lu-simple-select[users],lu-multi-select[users]',
 	standalone: true,
 	exportAs: 'luUsers',
-	providers: [provideCoreSelectUsersContext(() => LuCoreSelectUsersDirective)],
+	providers: [provideBaseCoreSelectUsersContext(() => LuCoreSelectUsersDirective)],
 })
 export class LuCoreSelectUsersDirective<T extends LuCoreSelectUser = LuCoreSelectUser>
 	extends ALuCoreSelectApiDirective<LuCoreSelectWithAdditionnalInformation<T>>
