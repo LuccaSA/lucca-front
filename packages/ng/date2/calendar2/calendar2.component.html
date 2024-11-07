@@ -37,6 +37,8 @@
 						type="button"
 						[attr.aria-disabled]="day.disabled ? 'true' : null"
 						(click)="day.disabled?null:onCellClicked(day.date)"
+						(focus)="day.isOverflow ? null : dateHovered.set(day.date)"
+						(blur)="day.isOverflow ? null : dateHovered.set(null)"
 						[luTooltip]="day.label"
 					>
 						{{ day.day }} @if (day.isCurrent) {
