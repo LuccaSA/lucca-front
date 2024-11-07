@@ -5,6 +5,7 @@ import { CalloutComponent } from '@lucca-front/ng/callout';
 import { getIntl } from '@lucca-front/ng/core';
 import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
 import {
+	addHours,
 	addMonths,
 	addYears,
 	eachDayOfInterval,
@@ -328,7 +329,7 @@ export class Calendar2Component implements OnInit {
 		let isProgressStart = false;
 		let isProgressEnd = false;
 
-		if (isInProgress) {
+		if (isInProgress && !isSameDay(rangeInfo.range.start, this.dateHovered())) {
 			const hoveredRange: Interval = {
 				start: endOfDay(rangeInfo.range.start),
 				end: startOfDay(this.dateHovered()),
@@ -337,7 +338,14 @@ export class Calendar2Component implements OnInit {
 				hoveredRange.end = rangeInfo.range.start;
 				hoveredRange.start = this.dateHovered();
 			}
-			isProgressBody = isWithinInterval(startOfDay(date), hoveredRange);
+
+			const isEndOfMonthOverflow = isOverflow && isSameDay(date, startOfMonth(date));
+
+			if (isEndOfMonthOverflow) {
+				hoveredRange.end = endOfDay(hoveredRange.end);
+			}
+
+			isProgressBody = isWithinInterval(addHours(startOfDay(date), 12), hoveredRange);
 			isProgressStart = !isOverflow && isSameDay(date, hoveredRange.start);
 			isProgressEnd = !isOverflow && isSameDay(date, hoveredRange.end);
 		}
