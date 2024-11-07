@@ -1,9 +1,8 @@
 import { LOCALE_ID } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { CalendarShortcut, DateRangeInputComponent } from '@lucca-front/ng/date2';
+import { DateRangeInputComponent } from '@lucca-front/ng/date2';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { addMonths, endOfMonth, endOfWeek, startOfMonth, startOfWeek } from 'date-fns';
 import { cleanupTemplate, generateInputs } from '../../../helpers/stories';
 import { StoryModelDisplayComponent } from '../../../helpers/story-model-display.component';
 
@@ -43,7 +42,8 @@ export default {
 				min: min ? new Date(min) : null,
 				max: max ? new Date(max) : null,
 			},
-			template: cleanupTemplate(`<lu-form-field label="Date range input example" inlineMessage="Inline message example">
+
+			template: cleanupTemplate(`<lu-form-field  label="Date range input example" inlineMessage="Inline message example">
 				<lu-date-range-input [(ngModel)]="selected" [min]="min" [max]="max" ${generateInputs(flags, argTypes)}></lu-date-range-input>
 			</lu-form-field>
 
@@ -55,7 +55,7 @@ export default {
 export const Basic: StoryObj<DateRangeInputComponent> = {
 	args: {
 		hideToday: false,
-		hasTodayButton: false,
+
 		hideWeekend: false,
 		clearable: false,
 		mode: 'day',

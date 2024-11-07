@@ -21,7 +21,8 @@
 				inset-inline-end: calc(var(--components-dateRangeField-content-inlineEnd) - var(--pr-t-spacings-50));
 			}
 
-			&:focus-within {
+			&.is-highlighted {
+				// &:focus-within
 				--components-dateRangeField-content-background: var(--palettes-product-100);
 				--components-dateRangeField-content-placeholderColor: var(--palettes-product-400);
 

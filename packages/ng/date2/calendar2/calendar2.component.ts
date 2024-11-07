@@ -31,6 +31,7 @@ import {
 	subYears,
 	WeekOptions,
 } from 'date-fns';
+import type { Interval } from 'date-fns/types';
 import { WEEK_INFO } from '../calendar.token';
 import { LU_DATE2_TRANSLATIONS } from '../date2.translate';
 import { RepeatTimesDirective } from '../repeat-times.directive';
@@ -41,7 +42,6 @@ import { Calendar2CellDirective } from './calendar2-cell.directive';
 import { CALENDAR_CELLS, CALENDAR_TABBABLE_DATE } from './calendar2.tokens';
 import { CellStatus } from './cell-status';
 import { DateRange } from './date-range';
-import type { Interval } from 'date-fns/types';
 
 const MODE_HIERARCHY: CalendarMode[] = ['day', 'month', 'year'];
 
@@ -326,8 +326,8 @@ export class Calendar2Component implements OnInit {
 		const isInProgress = rangeInfo?.range && !rangeInfo.range.end && this.dateHovered() !== null;
 
 		let isProgressBody = false;
-		let isProgressStart = false;
-		let isProgressEnd = false;
+		let isProgressStart = !!rangeInfo?.range && (!rangeInfo.range.end || this.dateHovered() === null);
+		let isProgressEnd = !!rangeInfo?.range && (!rangeInfo.range.end || this.dateHovered() === null);
 
 		if (isInProgress && !isSameDay(rangeInfo.range.start, this.dateHovered())) {
 			const hoveredRange: Interval = {
@@ -350,7 +350,7 @@ export class Calendar2Component implements OnInit {
 			isProgressEnd = !isOverflow && isSameDay(date, hoveredRange.end);
 		}
 
-		const isSelected = status.selected || (!!rangeInfo?.range && !isInProgress && !isOverflow);
+		const isSelected = status.selected || (!!rangeInfo?.range && !isInProgress);
 
 		return {
 			day: date.getDate(),
@@ -361,14 +361,15 @@ export class Calendar2Component implements OnInit {
 			isWeekend,
 			isCurrent,
 			isOverflow,
+			isSelected,
 			noButton: isOverflow && !this.showOverflow(),
 			disabled: status?.disabled || (isOverflow && !this.enableOverflow()),
 			ngClasses: {
 				'is-daysOff': isWeekend,
 				'is-overflow': isOverflow,
 				'is-current': isCurrent,
-				'is-start': !isOverflow && (rangeInfo?.isStart || status.selected),
-				'is-end': !isOverflow && (rangeInfo?.isEnd || status.selected),
+				'is-start': !isOverflow && (rangeInfo?.isStart || status.selected) && !isInProgress,
+				'is-end': !isOverflow && (rangeInfo?.isEnd || status.selected) && !isInProgress,
 				'is-selected': isSelected,
 				// Range in progress statuses
 				'is-selectionInProgress': isProgressBody,
@@ -420,6 +421,7 @@ export class Calendar2Component implements OnInit {
 		}
 		const isStart: boolean = range && isSameDay(date, range.start) && !range.startsOutside;
 		const isEnd: boolean = range && range.end && isSameDay(date, range.end) && !range.endsOutside;
+
 		return {
 			range,
 			isStart,

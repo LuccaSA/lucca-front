@@ -65,7 +65,7 @@ export class DateRangeInputComponent extends AbstractDateComponent implements Co
 
 	inputFocused = signal(false);
 
-	editedField = signal<0 | 1>(0);
+	editedField = signal<-1 | 0 | 1>(-1);
 
 	shortcuts = input<CalendarShortcut[]>();
 
@@ -216,6 +216,7 @@ export class DateRangeInputComponent extends AbstractDateComponent implements Co
 		effect(
 			() => {
 				const inputValue = inputSignal();
+
 				if (inputValue.length > 0) {
 					const currentRange: DateRange = untracked(this.selectedRange) || ({} as DateRange);
 					const parsed = parse(inputValue, this.dateFormat, startOfDay(new Date()));
@@ -255,13 +256,14 @@ export class DateRangeInputComponent extends AbstractDateComponent implements Co
 		});
 	}
 
-	dateClicked(date: Date, popoverRef: PopoverDirective, endField: HTMLInputElement): void {
+	dateClicked(date: Date, popoverRef: PopoverDirective): void {
 		if (this.selectedRange() === null) {
 			this.selectedRange.set({
 				start: date,
 				scope: this.mode(),
 			});
-			endField.focus();
+			//endField.focus();
+			this.editedField.set(1);
 		} else {
 			// If we're editing end field
 			if (this.editedField() === 1) {
@@ -280,6 +282,7 @@ export class DateRangeInputComponent extends AbstractDateComponent implements Co
 					});
 				}
 				popoverRef.close();
+				this.editedField.set(-1);
 			} else {
 				// Else, we're editing start field
 				// If start is after end, invert them
@@ -297,6 +300,7 @@ export class DateRangeInputComponent extends AbstractDateComponent implements Co
 					});
 				}
 				popoverRef.close();
+				this.editedField.set(-1);
 			}
 		}
 	}

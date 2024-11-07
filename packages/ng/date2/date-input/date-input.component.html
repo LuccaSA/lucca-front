@@ -10,14 +10,13 @@
 			(input)="userTextInput.set(date.value)"
 			(blur)="onTouched?.();inputFocused.set(false)"
 			(focus)="inputFocused.set(true)"
-			[attr.placeholder]="placeholder()"
 			aria-haspopup="true"
 			role="combobox"
 			(click)="popoverRef.openPopover(true, true)"
 			(keyup.arrowDown)="popoverRef.opened() ? popoverRef.focusBackToContent($event) : openPopover(popoverRef)"
 			(keyup.escape)="popoverRef.close()"
 			[disabled]="disabled"
-			[attr.placeholder]="dateFormatLocalized()"
+			[attr.placeholder]="placeholder() || dateFormatLocalized()"
 		/>
 
 		<div class="textField-input-affix">

@@ -1,6 +1,6 @@
 <div class="textField">
 	<div class="textField-input">
-		<div class="dateRangeField-content mod-start">
+		<div class="dateRangeField-content mod-start" [class.is-highlighted]="editedField() === 0">
 			<label for="range-input-start-{{idSuffix}}" class="u-mask">Start</label>
 			<input
 				type="text"
@@ -12,9 +12,8 @@
 				class="textField-input-value dateRangeField-input-value"
 				[value]="startLabel()"
 				(input)="startTextInput.set(start.value)"
-				(blur)="onTouched?.();inputFocused.set(false)"
+				(blur)="onTouched?.();inputFocused.set(false);editedField.set(-1)"
 				(focus)="inputFocused.set(true);editedField.set(0)"
-				[attr.placeholder]="placeholder()"
 				aria-haspopup="true"
 				role="combobox"
 				(click)="popoverRef.openPopover(true, true)"
@@ -24,7 +23,7 @@
 				[attr.placeholder]="dateFormatLocalized()"
 			/>
 		</div>
-		<div class="dateRangeField-content mod-end">
+		<div class="dateRangeField-content mod-end" [class.is-highlighted]="editedField() === 1">
 			<label for="range-input-end-{{idSuffix}}" class="u-mask">End</label>
 			<input
 				type="text"
@@ -36,9 +35,8 @@
 				class="textField-input-value dateRangeField-input-value"
 				[value]="endLabel()"
 				(input)="endTextInput.set(end.value)"
-				(blur)="onTouched?.();inputFocused.set(false)"
+				(blur)="onTouched?.();inputFocused.set(false);editedField.set(-1)"
 				(focus)="inputFocused.set(true);editedField.set(1)"
-				[attr.placeholder]="placeholder()"
 				aria-haspopup="true"
 				role="combobox"
 				(click)="popoverRef.openPopover(true, true)"
@@ -65,6 +63,7 @@
 				tabindex="-1"
 				type="button"
 				class="button mod-onlyIcon mod-text textField-input-affix-toggle"
+				(click)="editedField.set(0)"
 			>
 				<lu-icon [icon]="'calendarPlanning'" [alt]="intl.pickDate" />
 			</button>
@@ -101,10 +100,9 @@
 					<span aria-hidden="true" class="lucca-icon icon-chevronRight"></span><span class="u-mask"> {{ intl.next }}</span>
 				</button>
 			</div>
-			<div class="calendarWrapper-content" tabindex="-1">
+			<div class="calendarWrapper-content palette-watermelon" tabindex="-1">
 				<lu-calendar2
 					[hideToday]="hideToday()"
-					[hasTodayButton]="hasTodayButton()"
 					[date]="currentDate()"
 					(dateChange)="currentDateChangeFromCalendar($event)"
 					[tabbableDate]="tabbableDate()"
@@ -112,17 +110,15 @@
 					[getCellInfo]="combinedGetCellInfo"
 					[(dateHovered)]="dateHovered"
 					[ranges]="calendarRanges()"
-					(dateClicked)="dateClicked($event, popoverRef, end)"
+					(dateClicked)="dateClicked($event, popoverRef)"
 					(nextPage)="move(1)"
 					(previousPage)="move(-1)"
 					[mode]="mode()"
 					[hideWeekend]="hideWeekend()"
 					[disableModeChange]="true"
 				></lu-calendar2>
-
 				<lu-calendar2
 					[hideToday]="hideToday()"
-					[hasTodayButton]="hasTodayButton()"
 					[date]="currentRightDate()"
 					(dateChange)="currentDateChangeFromCalendar($event)"
 					[tabbableDate]="tabbableDate()"
@@ -130,7 +126,7 @@
 					[getCellInfo]="combinedGetCellInfo"
 					[(dateHovered)]="dateHovered"
 					[ranges]="calendarRanges()"
-					(dateClicked)="dateClicked($event, popoverRef, end)"
+					(dateClicked)="dateClicked($event, popoverRef)"
 					(nextPage)="move(1)"
 					(previousPage)="move(-1)"
 					[mode]="mode()"

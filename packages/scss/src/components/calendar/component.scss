@@ -68,6 +68,14 @@
 			width: calc(var(--components-calendarWrapperWidth) * var(--components-calendarWrapperVisible));
 			background-color: var(--components-calendarWrapperBackground);
 			position: relative;
+
+			&:has(.calendar-table-body-row-cell-action:focus-visible) {
+				&:has(.calendar-table-body-row-cell-action:hover) {
+					.calendar-table-body-row-cell-action:hover:not(:focus-visible) {
+						outline: none;
+					}
+				}
+			}
 		}
 
 		.calendarWrapper-content {

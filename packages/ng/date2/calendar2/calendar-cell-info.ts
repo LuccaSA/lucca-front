@@ -16,6 +16,7 @@ export interface CalendarCellInfo {
 	isWeekend: boolean;
 	isCurrent: boolean;
 	isOverflow: boolean;
+	isSelected: boolean;
 	noButton: boolean;
 	label?: string;
 	rangeInfo: RangeInfo;
