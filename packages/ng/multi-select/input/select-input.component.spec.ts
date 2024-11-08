@@ -259,6 +259,22 @@ describe('LuMultiSelectInputComponent', () => {
 				expect(emittedSelectValues).toEqual([{ mode: 'all' }, { mode: 'none' }]);
 			});
 
+			it('should emit "none" selection when clicking on select all then unselect each option', () => {
+				// Arrange
+				const { componentInstance } = fixture;
+				componentInstance.openPanel();
+				componentInstance.panelRef.changeDetectorRef.detectChanges();
+
+				// Act
+				selectAllDirective.setSelectAll(true);
+				TestBed.flushEffects();
+				componentInstance.panelRef.emitValue(options);
+				TestBed.flushEffects();
+
+				// Assert
+				expect(emittedSelectValues).toEqual([{ mode: 'all' }, { mode: 'none' }]);
+			});
+
 			it('should not convert array of options to selection', () => {
 				// Arrange
 				const { componentInstance } = fixture;
