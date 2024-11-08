@@ -247,6 +247,23 @@ export class DateRangeInputComponent extends AbstractDateComponent implements Co
 		);
 	}
 
+	inputBlur(): void {
+		this.onTouched?.();
+		this.inputFocused.set(false);
+		this.editedField.set(-1);
+	}
+
+	fixOrderIfNeeded(): void {
+		if (this.selectedRange() && isAfter(this.selectedRange()?.start, this.selectedRange()?.end)) {
+			const range = this.selectedRange();
+			this.selectedRange.set({
+				...range,
+				end: range.start,
+				start: range.end,
+			});
+		}
+	}
+
 	tabbableDateChange(date: Date, calendarIndex: number) {
 		if (calendarIndex == this.focusedCalendarIndex()) {
 			this.tabbableDate.set(date);
