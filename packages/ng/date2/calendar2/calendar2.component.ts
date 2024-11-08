@@ -326,8 +326,8 @@ export class Calendar2Component implements OnInit {
 		const isInProgress = rangeInfo?.range && !rangeInfo.range.end && this.dateHovered() !== null;
 
 		let isProgressBody = false;
-		let isProgressStart = !!rangeInfo?.range && (!rangeInfo.range.end || this.dateHovered() === null);
-		let isProgressEnd = !!rangeInfo?.range && (!rangeInfo.range.end || this.dateHovered() === null);
+		let isProgressStart = !!rangeInfo?.range && !rangeInfo.range.end && this.dateHovered() === null;
+		let isProgressEnd = !!rangeInfo?.range && !rangeInfo.range.end && this.dateHovered() === null;
 
 		if (isInProgress && !isSameDay(rangeInfo.range.start, this.dateHovered())) {
 			const hoveredRange: Interval = {
@@ -419,6 +419,7 @@ export class Calendar2Component implements OnInit {
 		if (!range) {
 			return null;
 		}
+
 		const isStart: boolean = range && isSameDay(date, range.start) && !range.startsOutside;
 		const isEnd: boolean = range && range.end && isSameDay(date, range.end) && !range.endsOutside;
 

@@ -286,6 +286,7 @@ export class DateRangeInputComponent extends AbstractDateComponent implements Co
 				}
 				popoverRef.close();
 				this.editedField.set(-1);
+				this.dateHovered.set(null);
 			} else {
 				// Else, we're editing start field
 				// If start is after end, invert them
@@ -304,6 +305,7 @@ export class DateRangeInputComponent extends AbstractDateComponent implements Co
 				}
 				popoverRef.close();
 				this.editedField.set(-1);
+				this.dateHovered.set(null);
 			}
 		}
 	}
