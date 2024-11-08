@@ -96,16 +96,66 @@
 }
 
 @mixin startInProgress {
+	&:not(:hover) {
+		@include extremity;
+	}
+
+	--components-calendar-table-body-row-cell-action-stripesColor: var(--palettes-200, var(--palettes-product-200));
+
+	&:has(:focus-visible) {
+		&.is-daysOff {
+			.calendar-table-body-row-cell-action {
+				--components-calendar-table-body-row-cell-action-stripesColor: var(--palettes-200, var(--palettes-product-200));
+			}
+		}
+
+		.calendar-table-body-row-cell-action {
+			--components-calendar-table-body-row-cell-actionHighlight: transparent;
+			--components-calendar-table-body-row-cell-actionColor: var(--palettes-neutral-700);
+			--components-calendar-table-body-row-cell-actionOutlineOffset: -1px !important;
+		}
+	}
+
 	&::before {
+		right: 0;
 		--components-calendar-table-body-row-cellSelectedBeforeContent: '';
 		--components-calendar-table-body-row-cellSelectedBeforeBorderRadius: var(--commons-borderRadius-L) 0 0 var(--commons-borderRadius-L);
 	}
 }
 
 @mixin endInProgress {
+	&:not(:hover) {
+		@include extremity;
+	}
+
+	--components-calendar-table-body-row-cell-action-stripesColor: var(--palettes-200, var(--palettes-product-200));
+
+	&:has(:focus-visible) {
+		&.is-daysOff {
+			.calendar-table-body-row-cell-action {
+				--components-calendar-table-body-row-cell-action-stripesColor: var(--palettes-200, var(--palettes-product-200));
+			}
+		}
+
+		.calendar-table-body-row-cell-action {
+			--components-calendar-table-body-row-cell-actionHighlight: transparent;
+			--components-calendar-table-body-row-cell-actionColor: var(--palettes-neutral-700);
+			--components-calendar-table-body-row-cell-actionOutlineOffset: -1px !important;
+		}
+	}
+
 	&::before {
+		left: 0;
 		--components-calendar-table-body-row-cellSelectedBeforeContent: '';
 		--components-calendar-table-body-row-cellSelectedBeforeBorderRadius: 0 var(--commons-borderRadius-L) var(--commons-borderRadius-L) 0;
+	}
+}
+
+@mixin startEndInProgress {
+	@include extremity;
+
+	&::before {
+		--components-calendar-table-body-row-cellSelectedBeforeContent: none;
 	}
 }
 
