@@ -121,7 +121,7 @@ export class DateRangeInputComponent extends AbstractDateComponent implements Co
 		return '';
 	});
 
-	startTextInput = signal('');
+	startTextInput = signal<string | null>(null);
 
 	endLabel = computed(() => {
 		if (this.selectedRange()?.end && this.isValidDate(this.selectedRange()?.end)) {
@@ -130,7 +130,7 @@ export class DateRangeInputComponent extends AbstractDateComponent implements Co
 		return '';
 	});
 
-	endTextInput = signal('');
+	endTextInput = signal<string | null>(null);
 
 	previousButton = viewChild<ElementRef<Element>>('previousButtonRef');
 
@@ -212,13 +212,12 @@ export class DateRangeInputComponent extends AbstractDateComponent implements Co
 		}
 	}
 
-	setupInputEffect(inputSignal: Signal<string>, rangeProperty: 'start' | 'end'): void {
+	setupInputEffect(inputSignal: Signal<string | null>, rangeProperty: 'start' | 'end'): void {
 		effect(
 			() => {
 				const inputValue = inputSignal();
-
-				if (inputValue.length > 0) {
-					const currentRange: DateRange = untracked(this.selectedRange) || ({} as DateRange);
+				const currentRange: DateRange = untracked(this.selectedRange) || ({} as DateRange);
+				if (inputValue?.length > 0) {
 					const parsed = parse(inputValue, this.dateFormat, startOfDay(new Date()));
 					if (parsed.getFullYear() > 999) {
 						this.selectedRange.set({
@@ -236,6 +235,12 @@ export class DateRangeInputComponent extends AbstractDateComponent implements Co
 							[rangeProperty]: parsed,
 						});
 					}
+				} else if (inputValue !== null) {
+					this.selectedRange.set({
+						...currentRange,
+						scope: this.mode(),
+						[rangeProperty]: undefined,
+					});
 				}
 			},
 			{ allowSignalWrites: true },
