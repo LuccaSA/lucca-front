@@ -1,7 +1,7 @@
 @mixin invalid {
 	--component-textField-border: var(--pr-t-color-input-border-critical);
 	--component-textField-background: var(--pr-t-color-input-background-critical);
-	--component-textField-placeholder: var(--palettes-error-400);
+	--component-textField-placeholder: var(--pr-t-color-input-text-placeholder);
 
 	&:hover {
 		--component-textField-border: var(--pr-t-color-input-border-critical-hover);
@@ -10,5 +10,5 @@
 
 @mixin disabled {
 	--component-textField-background: var(--pr-t-color-input-background-disabled);
-	--component-textField-color: var(--palettes-neutral-700); // disabled token candidate
+	--component-textField-color: var(--pr-t-color-input-text-disabled);
 }
