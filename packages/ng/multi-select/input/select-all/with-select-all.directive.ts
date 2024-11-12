@@ -135,32 +135,26 @@ export class LuMultiSelectWithSelectAllDirective<TValue> extends ɵIsSelectedStr
 	}
 
 	#getNextMode(fromMode: LuMultiSelectionMode, values: TValue[]): LuMultiSelectionMode {
-		// Keep 'none' when no value selected
-		if (fromMode === 'none' && values.length === 0) {
-			return 'none';
+		// When none selected, "include" -> "none" and "exclude" -> "all"
+		if (values.length === 0) {
+			return fromMode === 'include' || fromMode === 'none' ? 'none' : 'all';
 		}
 
 		const allSelected = values.length === this.totalCount();
 
+		// When all selected, "include" -> "all" and "exclude" -> "none"
 		if (allSelected) {
-			return 'all';
+			return fromMode === 'include' || fromMode === 'none' ? 'all' : 'none';
 		}
 
-		const someSelected = values.length > 0;
-
 		// The first value selected will transition from "all" to "exclude"
-		if (fromMode === 'all' && someSelected) {
+		if (fromMode === 'all') {
 			return 'exclude';
 		}
 
 		// The first value selected will transition from "none" to "include"
-		if (fromMode === 'none' && someSelected) {
+		if (fromMode === 'none') {
 			return 'include';
-		}
-
-		// When none selected, "include" -> "none" and "exclude" -> "all"
-		if (values.length === 0) {
-			return fromMode === 'include' ? 'none' : 'all';
 		}
 
 		// No match, keep the same mode
