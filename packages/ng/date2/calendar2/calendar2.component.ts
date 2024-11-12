@@ -322,6 +322,7 @@ export class Calendar2Component implements OnInit {
 
 		const isCurrent = isSameDay(new Date(), date) && !this.hideToday();
 		const isWeekend = this.#weekInfo.weekend.includes(getIntlWeekDay(date)) && !this.hideWeekend();
+		const isFirstDayOfMonth = isSameDay(startOfMonth(date), rangeInfo?.range.start);
 
 		const isInProgress = rangeInfo?.range && !rangeInfo.range.end && this.dateHovered() !== null;
 
@@ -331,7 +332,7 @@ export class Calendar2Component implements OnInit {
 
 		if (isInProgress && !isSameDay(rangeInfo.range.start, this.dateHovered())) {
 			const hoveredRange: Interval = {
-				start: endOfDay(rangeInfo.range.start),
+				start: isFirstDayOfMonth ? endOfDay(rangeInfo.range.start) : startOfDay(rangeInfo.range.start),
 				end: startOfDay(this.dateHovered()),
 			};
 			if (isAfter(hoveredRange.start, hoveredRange.end)) {
@@ -375,6 +376,7 @@ export class Calendar2Component implements OnInit {
 				'is-selectionInProgress': isProgressBody,
 				'is-startInProgress': isProgressStart,
 				'is-endInProgress': isProgressEnd,
+
 				...classes.reduce((acc, key) => ({ ...acc, [key]: true }), {}),
 			},
 		};
