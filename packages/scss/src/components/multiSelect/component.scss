@@ -14,7 +14,7 @@
 	cursor: pointer;
 
 	&:hover {
-		--components-multiSelect-border-color: var(--palettes-neutral-400);
+		--components-multiSelect-border-color: var(--pr-t-color-input-border-hover);
 	}
 
 	&:has(.multipleSelect-displayer-search:focus-visible) {
