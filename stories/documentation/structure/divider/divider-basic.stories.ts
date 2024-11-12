@@ -3,7 +3,7 @@ import { Meta, StoryFn } from '@storybook/angular';
 interface DividerBasicStory {}
 
 export default {
-	title: 'Documentation/Structure/Divider/Basic',
+	title: 'Documentation/Structure/Divider',
 } as Meta;
 
 function getTemplate(args: DividerBasicStory): string {
