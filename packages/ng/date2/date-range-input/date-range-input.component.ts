@@ -1,12 +1,14 @@
+import { BreakpointObserver, LayoutModule } from '@angular/cdk/layout';
 import { ConnectionPositionPair } from '@angular/cdk/overlay';
+import { AsyncPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, computed, effect, ElementRef, forwardRef, inject, input, Signal, signal, untracked, viewChild, viewChildren, ViewEncapsulation } from '@angular/core';
 import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors, Validator } from '@angular/forms';
-import { ButtonComponent } from '@lucca-front/ng/button';
 import { LuClass, ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { FORM_FIELD_INSTANCE, InputDirective } from '@lucca-front/ng/form-field';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { PopoverDirective } from '@lucca-front/ng/popover2';
 import { addMonths, addYears, endOfDecade, endOfMonth, endOfYear, isAfter, isBefore, isSameDay, parse, startOfDay, startOfDecade, startOfMonth, startOfYear, subMonths, subYears } from 'date-fns';
+import { map } from 'rxjs';
 import { AbstractDateComponent } from '../abstract-date-component';
 import { CalendarMode } from '../calendar2/calendar-mode';
 import { Calendar2Component } from '../calendar2/calendar2.component';
@@ -20,7 +22,7 @@ let nextId = 0;
 @Component({
 	selector: 'lu-date-range-input',
 	standalone: true,
-	imports: [PopoverDirective, Calendar2Component, IconComponent, InputDirective, ButtonComponent],
+	imports: [PopoverDirective, Calendar2Component, IconComponent, InputDirective, LayoutModule, AsyncPipe],
 	templateUrl: './date-range-input.component.html',
 	styleUrl: './date-range-input.component.scss',
 	host: {
@@ -46,6 +48,10 @@ export class DateRangeInputComponent extends AbstractDateComponent implements Co
 	#luClass = inject(LuClass);
 
 	#formFieldRef = inject(FORM_FIELD_INSTANCE, { optional: true });
+
+	#breakpointObserver = inject(BreakpointObserver);
+
+	displayedCalendars$ = this.#breakpointObserver.observe('(min-width: 40em)').pipe(map((state) => state.matches));
 
 	idSuffix = nextId++;
 

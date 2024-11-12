@@ -17,7 +17,3 @@
 @mixin third {
 	--components-calendarBorderSpacing: 0 var(--pr-t-spacings-200);
 }
-
-@mixin range {
-	--components-calendarWrapperVisible: 2;
-}

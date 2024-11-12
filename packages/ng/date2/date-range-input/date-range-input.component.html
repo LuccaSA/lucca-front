@@ -89,7 +89,7 @@
 			}
 		</ul>
 		}
-		<div class="calendarWrapper mod-range">
+		<div class="calendarWrapper">
 			<div class="calendarWrapper-navigation u-left0">
 				<button class="calendarWrapper-navigation-button button" type="button" (click)="prev()" #previousButtonRef>
 					<span aria-hidden="true" class="lucca-icon icon-chevronLeft"></span><span class="u-mask">{{ intl.previous }}</span>
@@ -117,6 +117,7 @@
 					[hideWeekend]="hideWeekend()"
 					[disableModeChange]="true"
 				></lu-calendar2>
+				@if (displayedCalendars$ | async) {
 				<lu-calendar2
 					[hideToday]="hideToday()"
 					[date]="currentRightDate()"
@@ -133,6 +134,7 @@
 					[hideWeekend]="hideWeekend()"
 					[disableModeChange]="true"
 				></lu-calendar2>
+				}
 			</div>
 		</div>
 	</div>

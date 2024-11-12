@@ -11,12 +11,6 @@
 	&.mod-daysOverflowingHidden {
 		@include daysOverflowingHidden;
 	}
-
-	&.mod-range {
-		@include media.min('XS') {
-			@include range;
-		}
-	}
 }
 
 .calendar {
