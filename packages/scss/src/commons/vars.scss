@@ -14,6 +14,10 @@
 	@include core.cssvars('pr-t-spacings', config.$spacings);
 	--pr-t-spacings-auto: auto;
 
+	@each $key, $map in config.$color {
+		@include core.cssvars('pr-t-color-#{$key}', $map);
+	}
+
 	// VARIABLES
 
 	@include core.cssvars('commons-borderRadius', config.$borderRadius);

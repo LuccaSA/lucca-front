@@ -610,3 +610,15 @@ $textLink: (
 	disabled: var(--palettes-neutral-500),
 	// disabled token candidate
 );
+
+$color: (
+	input: (
+		background: var(--palettes-neutral-0),
+		background-critical: var(--palettes-critical-50),
+		background-disabled: var(--palettes-neutral-100),
+		border: var(--palettes-neutral-300),
+		border-hover: var(--palettes-neutral-400),
+		border-critical: var(--palettes-critical-400),
+		border-critical-hover: var(--palettes-critical-600),
+	),
+);
