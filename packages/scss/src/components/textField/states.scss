@@ -9,7 +9,6 @@
 }
 
 @mixin disabled {
-	--component-textField-border: var(--palettes-neutral-300); // disabled token candidate
 	--component-textField-background: var(--pr-t-color-input-background-disabled);
 	--component-textField-color: var(--palettes-neutral-700); // disabled token candidate
 }
