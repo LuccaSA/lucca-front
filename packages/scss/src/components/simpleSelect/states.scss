@@ -55,7 +55,6 @@
 }
 
 @mixin disabled {
-	--components-simpleSelect-border-color: var(--pr-t-color-input-border-disabled);
 	--components-simpleSelect-background: var(--pr-t-color-input-background-disabled);
 	--components-simpleSelect-placeholder: var(--commons-disabled-placeholder);
 	--components-simpleSelect-value-color: var(--palettes-neutral-700); // disabled token candidate
