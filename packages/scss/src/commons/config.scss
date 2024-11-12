@@ -452,6 +452,13 @@ $elevation: (
 // Tokens : Colors
 $color: (
 	input: (
+		text: var(--palettes-neutral-800),
+		text-placeholder: var(--palettes-neutral-400),
+		text-placeholder-critical: var(--palettes-critical-400),
+		text-suffix: var(--palettes-critical-600),
+		text-disabled: var(--palettes-critical-700),
+		icon: var(--palettes-neutral-600),
+		icon-disabled: var(--palettes-critical-500),
 		background: var(--palettes-neutral-0),
 		background-critical: var(--palettes-critical-50),
 		background-disabled: var(--palettes-neutral-100),
