@@ -6,13 +6,13 @@ import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { cleanupTemplate, generateInputs } from 'stories/helpers/stories';
 import { TextStyleComponent } from '../../../../../../packages/ng/forms/rich-text-input/plugins/text-style';
 import { TagDirective } from '../../../../../../packages/ng/forms/rich-text-input/plugins/tag/tag.directive';
-import { TextStyleDirective } from '../../../../../../packages/ng/forms/rich-text-input/plugins/text-style/tex-style.directive';
+import { TextStyleItalicDirective } from '../../../../../../packages/ng/forms/rich-text-input/plugins/text-style/text-style-italic.directive';
 
 export default {
 	title: 'Documentation/Forms/Fields/RichTextField/Angular',
 	decorators: [
 		moduleMetadata({
-			imports: [RichTextInputComponent, TagDirective, TextStyleComponent, FormFieldComponent, FormsModule, ReactiveFormsModule, BrowserAnimationsModule, TextStyleDirective],
+			imports: [RichTextInputComponent, TagDirective, TextStyleComponent, FormFieldComponent, FormsModule, ReactiveFormsModule, BrowserAnimationsModule, TextStyleItalicDirective],
 		}),
 	],
 	argTypes: {
@@ -73,8 +73,24 @@ export const Basic: StoryObj<RichTextInputComponent & { disabled: boolean } & Fo
 				argTypes,
 			)}> 
 	<lu-rich-text-input
-		luWithTagsPlugin
-		luWithTextStylePlugin
+		[luWithTagsPlugin]="['Prenom',
+												'Nom',
+												'Email',
+												'Téléphone',
+												'Adresse',
+												'Ville',
+												'Code postal',
+												'Pays',
+												'Entreprise',
+												'Poste',
+												'Service',
+												'Manager',
+												'Collaborateur',
+												'Date de naissance',
+												'Date dembauche',
+												'Date de départ',
+												]"
+		luWithItalicPlugin
 	${generateInputs(inputArgs, argTypes)}
 		[(ngModel)]="example">
 	</lu-rich-text-input>
