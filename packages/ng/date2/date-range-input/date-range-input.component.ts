@@ -286,7 +286,7 @@ export class DateRangeInputComponent extends AbstractDateComponent implements Co
 		}
 	}
 
-	openPopover(ref: PopoverDirective, dateToFocus?: Date): void {
+	openPopover(ref: PopoverDirective, dateToFocus?: Date, focusTabbableDate = false): void {
 		ref.openPopover(true, true);
 		// Once popover is opened, aka in the next CD cycle, focus current tabbable date
 		setTimeout(() => {
@@ -294,7 +294,9 @@ export class DateRangeInputComponent extends AbstractDateComponent implements Co
 				this.currentDate.set(dateToFocus);
 				this.tabbableDate.set(dateToFocus);
 			}
-			this.focusedCalendar()?.focusTabbableDate();
+			if (focusTabbableDate) {
+				this.focusedCalendar()?.focusTabbableDate();
+			}
 		});
 	}
 
