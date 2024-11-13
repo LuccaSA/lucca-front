@@ -55,6 +55,10 @@ export class DateRangeInputComponent extends AbstractDateComponent implements Co
 
 	idSuffix = nextId++;
 
+	startTextInputRef = viewChild<ElementRef<HTMLInputElement>>('start');
+
+	endTextInputRef = viewChild<ElementRef<HTMLInputElement>>('end');
+
 	// CVA stuff
 	#onChange?: (value: DateRange) => void;
 
@@ -337,6 +341,7 @@ export class DateRangeInputComponent extends AbstractDateComponent implements Co
 					});
 				}
 				popoverRef.close();
+				this.endTextInputRef().nativeElement.focus();
 				this.editedField.set(-1);
 				this.dateHovered.set(null);
 			} else {
@@ -356,6 +361,7 @@ export class DateRangeInputComponent extends AbstractDateComponent implements Co
 					});
 				}
 				popoverRef.close();
+				this.startTextInputRef().nativeElement.focus();
 				this.editedField.set(-1);
 				this.dateHovered.set(null);
 			}
