@@ -66,7 +66,15 @@ export class DateRangeInputComponent extends AbstractDateComponent implements Co
 
 	popoverPositions: ConnectionPositionPair[] = [
 		new ConnectionPositionPair({ originX: 'start', originY: 'bottom' }, { overlayX: 'start', overlayY: 'top' }, -1, 6),
-		new ConnectionPositionPair({ originX: 'start', originY: 'top' }, { overlayX: 'start', overlayY: 'bottom' }, -1, -32),
+		new ConnectionPositionPair(
+			{ originX: 'start', originY: 'top' },
+			{
+				overlayX: 'start',
+				overlayY: 'bottom',
+			},
+			-1,
+			-32,
+		),
 	];
 
 	inputFocused = signal(false);
@@ -284,6 +292,7 @@ export class DateRangeInputComponent extends AbstractDateComponent implements Co
 		setTimeout(() => {
 			if (dateToFocus) {
 				this.currentDate.set(dateToFocus);
+				this.tabbableDate.set(dateToFocus);
 			}
 			this.focusedCalendar()?.focusTabbableDate();
 		});

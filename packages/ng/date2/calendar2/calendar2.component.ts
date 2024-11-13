@@ -344,8 +344,9 @@ export class Calendar2Component implements OnInit {
 
 			if (isAfter(hoveredRange.start, hoveredRange.end)) {
 				let newStart = hoveredRange.end;
+				const newStartIsFirstDayOfMonth = isSameDay(startOfMonth(hoveredRange.end), hoveredRange.end);
 				if (isDayMode) {
-					newStart = isFirstDayOfMonth ? endOfDay(hoveredRange.end) : startOfDay(hoveredRange.end);
+					newStart = newStartIsFirstDayOfMonth ? endOfDay(hoveredRange.end) : startOfDay(hoveredRange.end);
 				}
 				hoveredRange.end = rangeInfo.range.start;
 				hoveredRange.start = newStart;

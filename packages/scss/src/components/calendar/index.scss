@@ -47,10 +47,7 @@
 		@include selected;
 	}
 
-	&.is-singleDayInProgress {
-		outline: 2px solid red;
-	}
-
+	&.is-singleDayInProgress,
 	&.is-start {
 		@include start;
 	}
