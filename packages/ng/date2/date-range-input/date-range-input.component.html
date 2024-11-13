@@ -77,9 +77,9 @@
 		@if (shortcuts()?.length > 0) {
 		<ul
 			class="calendarShortcuts"
-			[class.mod-day]="calendarMode() === 'day'"
-			[class.mod-month]="calendarMode() === 'month'"
-			[class.mod-year]="calendarMode() === 'year'"
+			[class.mod-day]="mode() === 'day'"
+			[class.mod-month]="mode() === 'month'"
+			[class.mod-year]="mode() === 'year'"
 		>
 			@for (shortcut of shortcuts(); track $index) {
 			<li class="calendarShortcutsButton-item">
@@ -92,12 +92,12 @@
 		}
 		<div class="calendarWrapper">
 			<div class="calendarWrapper-navigation u-left0">
-				<button class="calendarWrapper-navigation-button button" type="button" (click)="prev()" #previousButtonRef>
+				<button class="calendarWrapper-navigation-button button" type="button" (click)="prev(mode())" #previousButtonRef>
 					<span aria-hidden="true" class="lucca-icon icon-chevronLeft"></span><span class="u-mask">{{ intl.previous }}</span>
 				</button>
 			</div>
 			<div class="calendarWrapper-navigation u-right0">
-				<button class="calendarWrapper-navigation-button button" type="button" (click)="next()" #nextButtonRef>
+				<button class="calendarWrapper-navigation-button button" type="button" (click)="next(mode())" #nextButtonRef>
 					<span aria-hidden="true" class="lucca-icon icon-chevronRight"></span><span class="u-mask"> {{ intl.next }}</span>
 				</button>
 			</div>
@@ -112,8 +112,8 @@
 					[(dateHovered)]="dateHovered"
 					[ranges]="calendarRanges()"
 					(dateClicked)="dateClicked($event, popoverRef)"
-					(nextPage)="move(1)"
-					(previousPage)="move(-1)"
+					(nextPage)="move(1, mode())"
+					(previousPage)="move(-1, mode())"
 					[mode]="mode()"
 					[hideWeekend]="hideWeekend()"
 					[disableModeChange]="true"
@@ -129,8 +129,8 @@
 					[(dateHovered)]="dateHovered"
 					[ranges]="calendarRanges()"
 					(dateClicked)="dateClicked($event, popoverRef)"
-					(nextPage)="move(1)"
-					(previousPage)="move(-1)"
+					(nextPage)="move(1, mode())"
+					(previousPage)="move(-1, mode())"
 					[mode]="mode()"
 					[hideWeekend]="hideWeekend()"
 					[disableModeChange]="true"

@@ -35,7 +35,7 @@ import type { Interval } from 'date-fns/types';
 import { WEEK_INFO } from '../calendar.token';
 import { LU_DATE2_TRANSLATIONS } from '../date2.translate';
 import { RepeatTimesDirective } from '../repeat-times.directive';
-import { getIntlWeekDay, getJSFirstDayOfWeek } from '../utils';
+import { comparePeriods, getIntlWeekDay, getJSFirstDayOfWeek } from '../utils';
 import { CalendarCellInfo, CalendarMonthInfo, CalendarYearInfo } from './calendar-cell-info';
 import { CalendarMode } from './calendar-mode';
 import { Calendar2CellDirective } from './calendar2-cell.directive';
@@ -203,9 +203,8 @@ export class Calendar2Component implements OnInit {
 					date: month,
 					short: this.#intlMonthsShort.format(month),
 					long: this.#intlMonthsLong.format(month),
+					...this.dateToCellInfo(month),
 					isCurrent: isSameMonth(new Date(), month),
-					rangeInfo: this.getRangeInfo(month, 'month'),
-					status: this.getCellInfo()(month, this.displayMode()),
 				} as CalendarMonthInfo;
 			})
 			.reduce<CalendarMonthInfo[][]>((all, one, i) => {
@@ -312,6 +311,8 @@ export class Calendar2Component implements OnInit {
 	dateToCellInfo(date: Date, isOverflow = false): CalendarCellInfo {
 		const status = this.getCellInfo()(date, this.displayMode());
 
+		const isDayMode = this.displayMode() === 'day';
+
 		const classes: string[] = status?.classes || [];
 
 		const rangeInfo = this.getRangeInfo(date, this.displayMode());
@@ -320,9 +321,10 @@ export class Calendar2Component implements OnInit {
 			classes.push(rangeInfo.class);
 		}
 
-		const isCurrent = isSameDay(new Date(), date) && !this.hideToday();
-		const isWeekend = this.#weekInfo.weekend.includes(getIntlWeekDay(date)) && !this.hideWeekend();
-		const isFirstDayOfMonth = isSameDay(startOfMonth(date), rangeInfo?.range.start);
+		const isWeekend = isDayMode && this.#weekInfo.weekend.includes(getIntlWeekDay(date)) && !this.hideWeekend();
+		const isFirstDayOfMonth = isDayMode && isSameDay(startOfMonth(date), rangeInfo?.range.start);
+
+		const isCurrent = comparePeriods(this.displayMode(), new Date(), date) && !this.hideToday();
 
 		const isInProgress = rangeInfo?.range && !rangeInfo.range.end && this.dateHovered() !== null;
 
@@ -332,14 +334,22 @@ export class Calendar2Component implements OnInit {
 		let isSingleDayInProgress = false;
 
 		if (isInProgress) {
+			let start = rangeInfo?.range.start;
+			if (isDayMode) {
+				start = isFirstDayOfMonth ? endOfDay(rangeInfo.range.start) : startOfDay(rangeInfo.range.start);
+			}
 			const hoveredRange: Interval = {
-				start: isFirstDayOfMonth ? endOfDay(rangeInfo.range.start) : startOfDay(rangeInfo.range.start),
+				start,
 				end: startOfDay(this.dateHovered()),
 			};
 
 			if (isAfter(hoveredRange.start, hoveredRange.end)) {
+				let newStart = hoveredRange.end;
+				if (isDayMode) {
+					newStart = isFirstDayOfMonth ? endOfDay(hoveredRange.end) : startOfDay(hoveredRange.end);
+				}
 				hoveredRange.end = rangeInfo.range.start;
-				hoveredRange.start = isFirstDayOfMonth ? endOfDay(hoveredRange.end) : startOfDay(hoveredRange.end);
+				hoveredRange.start = newStart;
 			}
 
 			const isEndOfMonthOverflow = isOverflow && isSameDay(date, startOfMonth(date));
@@ -349,8 +359,8 @@ export class Calendar2Component implements OnInit {
 			}
 
 			isProgressBody = isWithinInterval(addHours(startOfDay(date), 12), hoveredRange);
-			isProgressStart = !isOverflow && isSameDay(date, hoveredRange.start);
-			isProgressEnd = !isOverflow && isSameDay(date, hoveredRange.end);
+			isProgressStart = !isOverflow && comparePeriods(this.displayMode(), date, hoveredRange.start as Date);
+			isProgressEnd = !isOverflow && comparePeriods(this.displayMode(), date, hoveredRange.end as Date);
 
 			if (isSameDay(rangeInfo.range.start, this.dateHovered())) {
 				isSingleDayInProgress = !isOverflow && isSameDay(hoveredRange.start, hoveredRange.end) && isSameDay(hoveredRange.start, this.dateHovered());

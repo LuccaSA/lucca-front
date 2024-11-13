@@ -45,12 +45,12 @@
 <ng-template #calendar>
 	<div class="calendarWrapper">
 		<div class="calendarWrapper-navigation u-left0">
-			<button class="calendarWrapper-navigation-button button" type="button" (click)="prev()" #previousButtonRef>
+			<button class="calendarWrapper-navigation-button button" type="button" (click)="prev(calendarMode())" #previousButtonRef>
 				<span aria-hidden="true" class="lucca-icon icon-chevronLeft"></span><span class="u-mask">{{ intl.previous }}</span>
 			</button>
 		</div>
 		<div class="calendarWrapper-navigation u-right0">
-			<button class="calendarWrapper-navigation-button button" type="button" (click)="next()" #nextButtonRef>
+			<button class="calendarWrapper-navigation-button button" type="button" (click)="next(calendarMode())" #nextButtonRef>
 				<span aria-hidden="true" class="lucca-icon icon-chevronRight"></span><span class="u-mask"> {{ intl.next }}</span>
 			</button>
 		</div>
@@ -66,8 +66,8 @@
 				[getCellInfo]="combinedGetCellInfo"
 				[ranges]="ranges()"
 				(dateClicked)="selectedDate.set($event);currentDate.set($event);popoverRef.close();date.focus()"
-				(nextPage)="move(1)"
-				(previousPage)="move(-1)"
+				(nextPage)="move(1, calendarMode())"
+				(previousPage)="move(-1, calendarMode())"
 				[(displayMode)]="calendarMode"
 				[mode]="mode()"
 				[hideWeekend]="hideWeekend()"

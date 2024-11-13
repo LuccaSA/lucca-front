@@ -30,6 +30,7 @@ export interface CalendarMonthInfo {
 	isCurrent: boolean;
 	status: CellStatus;
 	rangeInfo: RangeInfo;
+	ngClasses: Record<string, boolean>;
 }
 
 export interface CalendarYearInfo {

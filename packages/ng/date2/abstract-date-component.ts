@@ -84,12 +84,12 @@ export abstract class AbstractDateComponent {
 		return !!date && !isNaN(date.getTime());
 	}
 
-	prev() {
-		this.move(-1);
+	prev(mode: CalendarMode) {
+		this.move(-1, mode);
 	}
 
-	next() {
-		this.move(1);
+	next(mode: CalendarMode) {
+		this.move(1, mode);
 	}
 
 	registerOnTouched(fn: () => void): void {
@@ -100,8 +100,8 @@ export abstract class AbstractDateComponent {
 		this.disabled = isDisabled;
 	}
 
-	move(direction: 1 | -1): void {
-		switch (this.calendarMode()) {
+	move(direction: 1 | -1, mode: CalendarMode): void {
+		switch (mode) {
 			case 'year':
 				this.currentDate.set(addYears(this.currentDate(), direction * 10));
 				this.tabbableDate.set(addYears(this.tabbableDate(), direction * 10));

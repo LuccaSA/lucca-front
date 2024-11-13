@@ -91,13 +91,15 @@
 	</div>
 	<table class="calendar-table" role="grid" aria-labelledby="calendar-year-name">
 		<tbody class="calendar-table-body">
-			@for (quarter of yearGridDisplay(); track $index; let firstRow = $first; let lastRow = $last) {
+			@for (quarter of yearGridDisplay(); track $index) {
 			<tr class="calendar-table-body-row">
-				@for (month of quarter; track month.date.getTime(); let index = $index; let firstCell = $first; let lastCell = $last) {
+				@for (month of quarter; track month.date.getTime(); let index = $index) {
 				<td
 					class="calendar-table-body-row-cell"
 					[attr.aria-selected]="month.status.selected || !!month.rangeInfo?.range"
-					[ngClass]="month.status.classes"
+					(mouseenter)="dateHovered.set(month.date)"
+					(mouseleave)="dateHovered.set(null)"
+					[ngClass]="month.ngClasses"
 				>
 					<button
 						class="calendar-table-body-row-cell-action"
@@ -106,6 +108,8 @@
 						[luCalendar2Cell]="index"
 						[luCalendar2Date]="month.date"
 						[disabled]="month.status.disabled"
+						(focus)="dateHovered.set(month.date)"
+						(blur)="dateHovered.set(null)"
 						(click)="onCellClicked(month.date)"
 						luCalendar2Mode="month"
 					>
