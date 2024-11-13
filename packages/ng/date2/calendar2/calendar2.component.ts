@@ -326,7 +326,7 @@ export class Calendar2Component implements OnInit {
 
 		const isInProgress = rangeInfo?.range && !rangeInfo.range.end && this.dateHovered() !== null;
 
-		let isProgressBody = false;
+		let isProgressBody = isSameDay(rangeInfo?.range.start, this.dateHovered());
 		let isProgressStart = !!rangeInfo?.range && !rangeInfo.range.end && this.dateHovered() === null;
 		let isProgressEnd = !!rangeInfo?.range && !rangeInfo.range.end && this.dateHovered() === null;
 
