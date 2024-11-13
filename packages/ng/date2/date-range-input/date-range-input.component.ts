@@ -1,6 +1,7 @@
 import { BreakpointObserver, LayoutModule } from '@angular/cdk/layout';
 import { ConnectionPositionPair } from '@angular/cdk/overlay';
 import { ChangeDetectionStrategy, Component, computed, effect, ElementRef, forwardRef, inject, input, Signal, signal, untracked, viewChild, viewChildren, ViewEncapsulation } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors, Validator } from '@angular/forms';
 import { LuClass, ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { FORM_FIELD_INSTANCE, InputDirective } from '@lucca-front/ng/form-field';
@@ -15,7 +16,6 @@ import { CellStatus } from '../calendar2/cell-status';
 import { DateRange } from '../calendar2/date-range';
 import { startOfPeriod } from '../utils';
 import { CalendarShortcut } from './calendar-shortcut';
-import { toSignal } from '@angular/core/rxjs-interop';
 
 let nextId = 0;
 
@@ -65,8 +65,8 @@ export class DateRangeInputComponent extends AbstractDateComponent implements Co
 	placeholder = input<string>();
 
 	popoverPositions: ConnectionPositionPair[] = [
-		new ConnectionPositionPair({ originX: 'start', originY: 'bottom' }, { overlayX: 'start', overlayY: 'top' }, 0, 6),
-		new ConnectionPositionPair({ originX: 'start', originY: 'top' }, { overlayX: 'start', overlayY: 'bottom' }, 0, 6),
+		new ConnectionPositionPair({ originX: 'start', originY: 'bottom' }, { overlayX: 'start', overlayY: 'top' }, -1, 6),
+		new ConnectionPositionPair({ originX: 'start', originY: 'top' }, { overlayX: 'start', overlayY: 'bottom' }, -1, -32),
 	];
 
 	inputFocused = signal(false);

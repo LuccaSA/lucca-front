@@ -326,18 +326,20 @@ export class Calendar2Component implements OnInit {
 
 		const isInProgress = rangeInfo?.range && !rangeInfo.range.end && this.dateHovered() !== null;
 
-		let isProgressBody = isSameDay(rangeInfo?.range.start, this.dateHovered());
+		let isProgressBody = false;
 		let isProgressStart = !!rangeInfo?.range && !rangeInfo.range.end && this.dateHovered() === null;
 		let isProgressEnd = !!rangeInfo?.range && !rangeInfo.range.end && this.dateHovered() === null;
+		let isSingleDayInProgress = false;
 
-		if (isInProgress && !isSameDay(rangeInfo.range.start, this.dateHovered())) {
+		if (isInProgress) {
 			const hoveredRange: Interval = {
 				start: isFirstDayOfMonth ? endOfDay(rangeInfo.range.start) : startOfDay(rangeInfo.range.start),
 				end: startOfDay(this.dateHovered()),
 			};
+
 			if (isAfter(hoveredRange.start, hoveredRange.end)) {
 				hoveredRange.end = rangeInfo.range.start;
-				hoveredRange.start = this.dateHovered();
+				hoveredRange.start = isFirstDayOfMonth ? endOfDay(hoveredRange.end) : startOfDay(hoveredRange.end);
 			}
 
 			const isEndOfMonthOverflow = isOverflow && isSameDay(date, startOfMonth(date));
@@ -349,6 +351,10 @@ export class Calendar2Component implements OnInit {
 			isProgressBody = isWithinInterval(addHours(startOfDay(date), 12), hoveredRange);
 			isProgressStart = !isOverflow && isSameDay(date, hoveredRange.start);
 			isProgressEnd = !isOverflow && isSameDay(date, hoveredRange.end);
+
+			if (isSameDay(rangeInfo.range.start, this.dateHovered())) {
+				isSingleDayInProgress = !isOverflow && isSameDay(hoveredRange.start, hoveredRange.end) && isSameDay(hoveredRange.start, this.dateHovered());
+			}
 		}
 
 		const isSelected = status.selected || (!!rangeInfo?.range && !isInProgress);
@@ -376,6 +382,7 @@ export class Calendar2Component implements OnInit {
 				'is-selectionInProgress': isProgressBody,
 				'is-startInProgress': isProgressStart,
 				'is-endInProgress': isProgressEnd,
+				'is-singleDayInProgress': isSingleDayInProgress,
 
 				...classes.reduce((acc, key) => ({ ...acc, [key]: true }), {}),
 			},
