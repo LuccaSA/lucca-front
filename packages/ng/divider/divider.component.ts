@@ -1,5 +1,4 @@
-import { NgTemplateOutlet } from '@angular/common';
-import { booleanAttribute, Component, ContentChild, ElementRef, HostBinding, inject, Input, OnChanges, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, Component, computed, contentChild, ElementRef, HostBinding, inject, input, Input, OnChanges, ViewEncapsulation } from '@angular/core';
 import { LuClass } from '@lucca-front/ng/core';
 
 @Component({
@@ -9,26 +8,28 @@ import { LuClass } from '@lucca-front/ng/core';
 	templateUrl: './divider.component.html',
 	styleUrls: ['./divider.component.scss'],
 	encapsulation: ViewEncapsulation.None,
-	imports: [NgTemplateOutlet],
 })
 export class DividerComponent implements OnChanges {
 	#luClass = inject(LuClass);
 
-	@ContentChild('content')
-	test: ElementRef;
+	content = contentChild<ElementRef<HTMLElement>>('contentRef');
 
 	@HostBinding('class.divider')
 	divider = true;
 
-	@Input({ transform: booleanAttribute })
-	public withRole = false;
+	withRole = input<boolean, boolean>(false, { transform: booleanAttribute });
 
-	// TODO : fix me + add test if content is empty
+	role = computed(() => {
+		return this.withRole() && this.content()?.nativeElement.innerHTML.trim().length === 0 ? 'separator' : null;
+	});
+
 	@HostBinding('attr.role')
-	public role = this.withRole ? 'separator' : null;
+	get attrRole() {
+		return this.role();
+	}
 
 	@Input()
-	public size: 'M' | 'S';
+	size: 'M' | 'S';
 
 	ngOnChanges(): void {
 		this.updateClasses();
