@@ -2,9 +2,5 @@
 	<div class="textField-input">
 		<div #content class="textField-input-value editor-content" contenteditable (keydown)="onKeyDown($event)"></div>
 	</div>
-	<div #toolbar class="editor-toolbar">
-		<button type="button" luButton="text" size="XS" (click)="dispatchCommand($event, commands.CLEAR_FORMAT, undefined)">
-			<lu-icon icon="formatClear"></lu-icon>
-		</button>
-	</div>
+	<div #toolbar class="editor-toolbar"></div>
 </div>

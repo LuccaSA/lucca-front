@@ -20,7 +20,7 @@ export class TextStyleComponent implements OnInit, OnDestroy {
 
 	public format = input.required<TextFormatType>();
 	public icon = input.required<LuccaIcon>();
-	public tooltip = input<string>();
+	public tooltip = input.required<string>();
 
 	public active = signal(false);
 

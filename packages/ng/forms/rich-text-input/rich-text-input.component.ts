@@ -1,4 +1,4 @@
-import { Component, ElementRef, forwardRef, inject, OnDestroy, OnInit, viewChild, ViewEncapsulation } from '@angular/core';
+import { Component, ElementRef, forwardRef, inject, OnDestroy, OnInit, viewChild, ViewContainerRef, ViewEncapsulation } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { createEmptyHistoryState, registerHistory } from '@lexical/history';
 import { $convertFromMarkdownString, $convertToMarkdownString, TRANSFORMERS } from '@lexical/markdown';
@@ -6,16 +6,14 @@ import { registerRichText } from '@lexical/rich-text';
 import { mergeRegister } from '@lexical/utils';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { IconComponent } from '@lucca-front/ng/icon';
-import { CommandPayloadType, createEditor, FORMAT_TEXT_COMMAND, LexicalCommand, LexicalEditor } from 'lexical';
+import { CommandPayloadType, createEditor, FORMAT_TEXT_COMMAND, LexicalCommand, LexicalEditor, LexicalNode } from 'lexical';
 import { CLEAR_FORMAT, FORMAT_HEADINGS, FORMAT_LINK, FORMAT_QUOTE, registerFormatOptions } from './commands';
 import { LexicalEditorProvider } from './editor.provider';
-import { HostDirective } from './plugins/host.directive';
-import { TagDirective } from './plugins/tag/tag.directive';
 
 @Component({
 	selector: 'lu-rich-text-input',
 	standalone: true,
-	imports: [ButtonComponent, IconComponent, HostDirective, TagDirective],
+	imports: [ButtonComponent, IconComponent],
 	templateUrl: './rich-text-input.component.html',
 	styleUrl: './rich-text-input.component.scss',
 	encapsulation: ViewEncapsulation.None,
@@ -27,11 +25,9 @@ import { TagDirective } from './plugins/tag/tag.directive';
 		},
 		LexicalEditorProvider,
 	],
-	hostDirectives: [HostDirective],
 })
 export class RichTextInputComponent implements OnInit, OnDestroy, ControlValueAccessor {
 	#editorProvider = inject(LexicalEditorProvider);
-	#hostDirective = inject(HostDirective);
 
 	#onChange?: (markdown: string | null) => void;
 	#onTouch?: () => void;
@@ -51,9 +47,10 @@ export class RichTextInputComponent implements OnInit, OnDestroy, ControlValueAc
 		read: ElementRef,
 	});
 
-	ngOnInit(): void {
-		console.log('host', this.#hostDirective.nodes);
+	customNodes = new Set<typeof LexicalNode>();
+	toolbar = viewChild.required('toolbar', { read: ViewContainerRef });
 
+	ngOnInit(): void {
 		this.editor = createEditor({
 			theme: {
 				text: {
@@ -62,7 +59,7 @@ export class RichTextInputComponent implements OnInit, OnDestroy, ControlValueAc
 					italic: 'editorTheme__textItalic',
 				},
 			},
-			nodes: [...this.#hostDirective.nodes],
+			nodes: [...this.customNodes],
 		});
 
 		this.#editorProvider.editor.set(this.editor);

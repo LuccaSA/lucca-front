@@ -1,21 +1,25 @@
 import { RichTextEditorPluginDirective } from '../plugin.model';
-import { Directive, inject } from '@angular/core';
-import { LexicalNode } from 'lexical';
+import { Directive, inject, input, OnInit } from '@angular/core';
 import { TagNode } from '../../tag-node';
-import { HostDirective } from '../host.directive';
+import { RichTextInputComponent } from '../../rich-text-input.component';
+import { TagComponent } from './tag.component';
 
 @Directive({
 	selector: '[luWithTagsPlugin]',
 	standalone: true,
 })
-export class TagDirective implements RichTextEditorPluginDirective {
-	hostDirective = inject(HostDirective);
+export class TagDirective implements RichTextEditorPluginDirective, OnInit {
+	richTextInputComponent: RichTextInputComponent = inject(RichTextInputComponent);
+	customNodes = [TagNode];
 
-	getCustomNodes(): (typeof LexicalNode)[] {
-		return [TagNode];
-	}
+	tags = input.required<string[]>({ alias: 'luWithTagsPlugin' });
 
 	constructor() {
-		this.hostDirective.registerLexicalNode(this.getCustomNodes());
+		this.richTextInputComponent.customNodes.add(this.customNodes[0]);
+	}
+
+	ngOnInit() {
+		const comp = this.richTextInputComponent.toolbar().createComponent(TagComponent);
+		comp.setInput('tags', this.tags());
 	}
 }
