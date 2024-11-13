@@ -16,7 +16,7 @@ import {
 	TemplateRef,
 	ViewContainerRef,
 } from '@angular/core';
-import { ConnectedPosition, ConnectionPositionPair, Overlay, OverlayRef } from '@angular/cdk/overlay';
+import { ConnectedPosition, ConnectionPositionPair, FlexibleConnectedPositionStrategyOrigin, Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
 import { PopoverContentComponent } from './content/popover-content/popover-content.component';
 import { POPOVER_CONFIG, PopoverConfig } from './popover-tokens';
@@ -104,6 +104,12 @@ export class PopoverDirective implements OnDestroy {
 	 * Removes close button entirely, this is bad for a11y but sometimes we want it.
 	 */
 	luPopoverNoCloseButton = false;
+
+	/**
+	 * Allows to anchor the popover to another element instead of the trigger one
+	 * for placement purpose
+	 */
+	luPopoverAnchor = input<FlexibleConnectedPositionStrategyOrigin>(this.#elementRef);
 
 	// We have to type these two for Compodoc to find the right type and tell Storybook these aren't strings
 	luPopoverOpenDelay: InputSignal<number> = input<number>(300);
@@ -215,7 +221,7 @@ export class PopoverDirective implements OnDestroy {
 			this.#overlayRef = this.#overlay.create({
 				positionStrategy: this.#overlay
 					.position()
-					.flexibleConnectedTo(this.#elementRef)
+					.flexibleConnectedTo(this.luPopoverAnchor())
 					.withPositions(this.customPositions || this.#buildPositions()),
 				scrollStrategy: this.#overlay.scrollStrategies.reposition(),
 				hasBackdrop: withBackdrop,

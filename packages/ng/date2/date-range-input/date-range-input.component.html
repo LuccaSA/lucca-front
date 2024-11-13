@@ -1,4 +1,4 @@
-<div class="textField">
+<div class="textField" #popoverAnchor>
 	<div class="textField-input">
 		<div class="dateRangeField-content mod-start" [class.is-highlighted]="editedField() === 0">
 			<label for="range-input-start-{{idSuffix}}" class="u-mask">Start</label>
@@ -58,6 +58,7 @@
 				[luPopover2]="calendar"
 				[disabled]="disabled"
 				[luPopoverNoCloseButton]="true"
+				[luPopoverAnchor]="popoverAnchor"
 				#popoverRef="luPopover2"
 				[customPositions]="popoverPositions"
 				tabindex="-1"
