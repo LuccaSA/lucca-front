@@ -131,13 +131,15 @@
 	</div>
 	<table class="calendar-table" role="grid" aria-labelledby="calendar-decade-name">
 		<tbody class="calendar-table-body">
-			@for (row of decadeGridDisplay(); track $index; let firstRow = $first; let lastRow = $last) {
+			@for (row of decadeGridDisplay(); track $index) {
 			<tr class="calendar-table-body-row">
-				@for (year of row; track year.date.getTime(); let index = $index; let firstCell = $first; let lastCell = $last) {
+				@for (year of row; track year.date.getTime(); let index = $index) {
 				<td
 					class="calendar-table-body-row-cell"
 					[attr.aria-selected]="year.status.selected || !!year.rangeInfo?.range"
-					[ngClass]="year.status.classes"
+					(mouseenter)="dateHovered.set(year.date)"
+					(mouseleave)="dateHovered.set(null)"
+					[ngClass]="year.ngClasses"
 				>
 					<button
 						class="calendar-table-body-row-cell-action"
@@ -146,9 +148,11 @@
 						[disabled]="year.status.disabled"
 						[luCalendar2Date]="year.date"
 						luCalendar2Mode="year"
+						(focus)="dateHovered.set(year.date)"
+						(blur)="dateHovered.set(null)"
 						(click)="onCellClicked(year.date)"
 					>
-						{{ year.label }} @if (year.isCurrent) {
+						{{ year.name }} @if (year.isCurrent) {
 						<span class="u-mask">({{ thisYearLabel }})</span>
 						}
 					</button>

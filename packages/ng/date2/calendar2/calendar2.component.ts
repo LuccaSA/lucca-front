@@ -223,10 +223,9 @@ export class Calendar2Component implements OnInit {
 			.map((year) => {
 				return {
 					date: year,
-					label: this.#intlDateYear.format(year),
+					...this.dateToCellInfo(year),
+					name: this.#intlDateYear.format(year),
 					isCurrent: isSameYear(new Date(), year),
-					rangeInfo: this.getRangeInfo(year, 'year'),
-					status: this.getCellInfo()(year, this.displayMode()),
 				};
 			})
 			.reduce<CalendarYearInfo[][]>((all, one, i) => {
