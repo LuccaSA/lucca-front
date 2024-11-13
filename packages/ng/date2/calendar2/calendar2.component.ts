@@ -320,7 +320,7 @@ export class Calendar2Component implements OnInit {
 		const classes: string[] = status?.classes || [];
 
 		// Let's grab the ranges in which this date is in, which includes the "in progress" one if it exists, using the current hovered date
-		const rangeInfo = this.getRangeInfo(date, this.displayMode());
+		const rangeInfo = this.getRangeInfo(date, this.displayMode(), isOverflow);
 
 		// If the range includes classes, add them to our display classes
 		if (rangeInfo?.class) {
@@ -420,14 +420,14 @@ export class Calendar2Component implements OnInit {
 		};
 	}
 
-	getRangeInfo(date: Date, scope: CalendarMode) {
+	getRangeInfo(date: Date, scope: CalendarMode, isOverflow = false) {
 		const range: DateRange | undefined = this.ranges().find((range: DateRange) => {
 			const isSameScope = (range.scope || 'day') === scope;
 			if (isSameScope) {
 				if (range.end) {
 					return isWithinInterval(date, {
-						start: startOfDay(range.start),
-						end: range.end,
+						start: isOverflow ? endOfDay(range.start) : startOfDay(range.start),
+						end: isOverflow ? startOfDay(range.end) : range.end,
 					});
 				} else if (this.dateHovered() !== null) {
 					// Nominal case: end is after start
@@ -460,8 +460,8 @@ export class Calendar2Component implements OnInit {
 			return null;
 		}
 
-		const isStart: boolean = range && isSameDay(date, range.start) && !range.startsOutside;
-		const isEnd: boolean = range && range.end && isSameDay(date, range.end) && !range.endsOutside;
+		const isStart: boolean = range && isSameDay(date, range.start);
+		const isEnd: boolean = range && range.end && isSameDay(date, range.end);
 
 		return {
 			range,

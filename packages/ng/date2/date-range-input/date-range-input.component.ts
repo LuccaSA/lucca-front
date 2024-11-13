@@ -14,7 +14,7 @@ import { CalendarMode } from '../calendar2/calendar-mode';
 import { Calendar2Component } from '../calendar2/calendar2.component';
 import { CellStatus } from '../calendar2/cell-status';
 import { DateRange } from '../calendar2/date-range';
-import { compareCalendarPeriods, comparePeriods, startOfPeriod } from '../utils';
+import { compareCalendarPeriods, startOfPeriod } from '../utils';
 import { CalendarShortcut } from './calendar-shortcut';
 
 let nextId = 0;
