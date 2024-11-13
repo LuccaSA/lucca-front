@@ -1,6 +1,5 @@
 import { BreakpointObserver, LayoutModule } from '@angular/cdk/layout';
 import { ConnectionPositionPair } from '@angular/cdk/overlay';
-import { AsyncPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, computed, effect, ElementRef, forwardRef, inject, input, Signal, signal, untracked, viewChild, viewChildren, ViewEncapsulation } from '@angular/core';
 import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors, Validator } from '@angular/forms';
 import { LuClass, ɵeffectWithDeps } from '@lucca-front/ng/core';
@@ -16,13 +15,14 @@ import { CellStatus } from '../calendar2/cell-status';
 import { DateRange } from '../calendar2/date-range';
 import { startOfPeriod } from '../utils';
 import { CalendarShortcut } from './calendar-shortcut';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 let nextId = 0;
 
 @Component({
 	selector: 'lu-date-range-input',
 	standalone: true,
-	imports: [PopoverDirective, Calendar2Component, IconComponent, InputDirective, LayoutModule, AsyncPipe],
+	imports: [PopoverDirective, Calendar2Component, IconComponent, InputDirective, LayoutModule],
 	templateUrl: './date-range-input.component.html',
 	styleUrl: './date-range-input.component.scss',
 	host: {
@@ -51,7 +51,7 @@ export class DateRangeInputComponent extends AbstractDateComponent implements Co
 
 	#breakpointObserver = inject(BreakpointObserver);
 
-	displayedCalendars$ = this.#breakpointObserver.observe('(min-width: 40em)').pipe(map((state) => state.matches));
+	hasTwoCalendars = toSignal(this.#breakpointObserver.observe('(min-width: 40em)').pipe(map((state) => state.matches)));
 
 	idSuffix = nextId++;
 
@@ -76,7 +76,7 @@ export class DateRangeInputComponent extends AbstractDateComponent implements Co
 	shortcuts = input<CalendarShortcut[]>();
 
 	protected currentRightDate = computed(() => {
-		return this.getNextCalendarDate(this.currentDate());
+		return this.hasTwoCalendars() ? this.getNextCalendarDate(this.currentDate()) : this.currentDate();
 	});
 
 	protected currentStartDisplayDate = computed(() => {
@@ -178,19 +178,21 @@ export class DateRangeInputComponent extends AbstractDateComponent implements Co
 					this.focusedCalendarIndex.set(0);
 					this.currentDate.set(startOfPeriod(calendarMode, tabbableDate));
 				} else if (isBefore(tabbableDate, this.currentStartDisplayDate())) {
-					this.focusedCalendarIndex.set(1);
+					if (this.hasTwoCalendars()) {
+						this.focusedCalendarIndex.set(1);
+					}
 					switch (this.mode()) {
 						case 'day':
-							this.currentDate.set(subMonths(startOfPeriod(calendarMode, tabbableDate), 1));
+							this.currentDate.set(this.hasTwoCalendars() ? subMonths(startOfPeriod(calendarMode, tabbableDate), 1) : startOfPeriod(calendarMode, tabbableDate));
 							break;
 						case 'month':
-							this.currentDate.set(subYears(startOfPeriod(calendarMode, tabbableDate), 1));
+							this.currentDate.set(this.hasTwoCalendars() ? subYears(startOfPeriod(calendarMode, tabbableDate), 1) : startOfPeriod(calendarMode, tabbableDate));
 							break;
 						case 'year':
-							this.currentDate.set(subYears(startOfPeriod(calendarMode, tabbableDate), 10));
+							this.currentDate.set(this.hasTwoCalendars() ? subYears(startOfPeriod(calendarMode, tabbableDate), 10) : startOfPeriod(calendarMode, tabbableDate));
 							break;
 					}
-				} else {
+				} else if (this.hasTwoCalendars()) {
 					if (this.focusedCalendarIndex() === 1 && isBefore(tabbableDate, this.currentRightDate())) {
 						this.focusedCalendarIndex.set(0);
 					} else if (this.focusedCalendarIndex() === 0 && (isAfter(tabbableDate, this.currentRightDate()) || isSameDay(tabbableDate, this.currentRightDate()))) {

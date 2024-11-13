@@ -118,7 +118,7 @@
 					[hideWeekend]="hideWeekend()"
 					[disableModeChange]="true"
 				></lu-calendar2>
-				@if (displayedCalendars$ | async) {
+				@if (hasTwoCalendars()) {
 				<lu-calendar2
 					[hideToday]="hideToday()"
 					[date]="currentRightDate()"
