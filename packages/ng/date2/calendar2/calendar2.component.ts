@@ -308,32 +308,48 @@ export class Calendar2Component implements OnInit {
 	}
 
 	dateToCellInfo(date: Date, isOverflow = false): CalendarCellInfo {
+		// This method is quite complex and packs a lot of logic, let's try to decompose and explain it.
+
+		// First of all get cell status from the input, if the consumer needs to apply specific statuses to it
 		const status = this.getCellInfo()(date, this.displayMode());
 
+		// We need to store a boolean for day mode, because some logic is specific to day display (like weekends for instance)
 		const isDayMode = this.displayMode() === 'day';
 
+		// Keeping consumer's classes aside
 		const classes: string[] = status?.classes || [];
 
+		// Let's grab the ranges in which this date is in, which includes the "in progress" one if it exists, using the current hovered date
 		const rangeInfo = this.getRangeInfo(date, this.displayMode());
 
+		// If the range includes classes, add them to our display classes
 		if (rangeInfo?.class) {
 			classes.push(rangeInfo.class);
 		}
 
+		// Day specific logic
+		// Is it weekend day? for is-dayOff class toggle
 		const isWeekend = isDayMode && this.#weekInfo.weekend.includes(getIntlWeekDay(date)) && !this.hideWeekend();
+		// Is it first day of month? Mostly used for overflow display logic
 		const isFirstDayOfMonth = isDayMode && isSameDay(startOfMonth(date), rangeInfo?.range.start);
 
+		// Is this the current period? Will match if same day as today, or same month in month display, or same year if year display
 		const isCurrent = comparePeriods(this.displayMode(), new Date(), date) && !this.hideToday();
 
+		// Are we currently in a range that's being created (start date selected, end date is being hovered)
 		const isInProgress = rangeInfo?.range && !rangeInfo.range.end && this.dateHovered() !== null;
 
+		// Progress flags
 		let isProgressBody = false;
 		let isProgressStart = !!rangeInfo?.range && !rangeInfo.range.end && this.dateHovered() === null;
 		let isProgressEnd = !!rangeInfo?.range && !rangeInfo.range.end && this.dateHovered() === null;
+		// Specific case for when start is == end and we're hovering it
 		let isSingleDayInProgress = false;
 
 		if (isInProgress) {
 			let start = rangeInfo?.range.start;
+			// If we're in day mode, depending on if first day of month or not, we want to consider the start or the end of the day,
+			// To make sure we don't conflict with overflow
 			if (isDayMode) {
 				start = isFirstDayOfMonth ? endOfDay(rangeInfo.range.start) : startOfDay(rangeInfo.range.start);
 			}
@@ -342,6 +358,7 @@ export class Calendar2Component implements OnInit {
 				end: startOfDay(this.dateHovered()),
 			};
 
+			// If start is after end, fix this by inverting the two, we always want to work with start before end
 			if (isAfter(hoveredRange.start, hoveredRange.end)) {
 				let newStart = hoveredRange.end;
 				const newStartIsFirstDayOfMonth = isSameDay(startOfMonth(hoveredRange.end), hoveredRange.end);
@@ -352,16 +369,19 @@ export class Calendar2Component implements OnInit {
 				hoveredRange.start = newStart;
 			}
 
+			// if we're working on overflow for after the last day of a month, we want to use end of day as comparison date
 			const isEndOfMonthOverflow = isOverflow && isSameDay(date, startOfMonth(date));
 
 			if (isEndOfMonthOverflow) {
 				hoveredRange.end = endOfDay(hoveredRange.end);
 			}
-
+			// We're progress body if middle of day is in the current range
 			isProgressBody = isWithinInterval(addHours(startOfDay(date), 12), hoveredRange);
+			// Overflow cannot be start status for CSS, same for end
 			isProgressStart = !isOverflow && comparePeriods(this.displayMode(), date, hoveredRange.start as Date);
 			isProgressEnd = !isOverflow && comparePeriods(this.displayMode(), date, hoveredRange.end as Date);
 
+			// This is the case where you clicked a first date and then are hovering it, which requires a specific case for CSS
 			if (isSameDay(rangeInfo.range.start, this.dateHovered())) {
 				isSingleDayInProgress = !isOverflow && isSameDay(hoveredRange.start, hoveredRange.end) && isSameDay(hoveredRange.start, this.dateHovered());
 			}
@@ -381,6 +401,7 @@ export class Calendar2Component implements OnInit {
 			isSelected,
 			noButton: isOverflow && !this.showOverflow(),
 			disabled: status?.disabled || (isOverflow && !this.enableOverflow()),
+			// Compile everything into a list of classes for CSS
 			ngClasses: {
 				'is-daysOff': isWeekend,
 				'is-overflow': isOverflow,

@@ -306,7 +306,6 @@ export class DateRangeInputComponent extends AbstractDateComponent implements Co
 				start: date,
 				scope: this.mode(),
 			});
-			//endField.focus();
 			this.editedField.set(1);
 		} else {
 			// If we're editing end field
