@@ -4,7 +4,7 @@ import { LuClass, Palette } from '@lucca-front/ng/core';
 @Component({
 	selector: 'lu-status-badge',
 	standalone: true,
-	templateUrl: './statusBadge.component.html',
+	template: '{{label}}',
 	styleUrls: ['./statusBadge.component.scss'],
 	encapsulation: ViewEncapsulation.None,
 	providers: [LuClass],
