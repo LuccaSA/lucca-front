@@ -65,6 +65,9 @@ export class DateRangeInputComponent extends AbstractDateComponent implements Co
 
 	#luClass = inject(LuClass);
 
+	// TODO remember to add premade shortcuts
+	// TODO Is role presentation label mandatory?
+
 	#formFieldRef = inject(FORM_FIELD_INSTANCE, { optional: true });
 
 	#breakpointObserver = inject(BreakpointObserver);
@@ -102,6 +105,8 @@ export class DateRangeInputComponent extends AbstractDateComponent implements Co
 	inputFocused = signal(false);
 
 	editedField = signal<-1 | 0 | 1>(-1);
+
+	highlightedField = signal<-1 | 0 | 1>(-1);
 
 	shortcuts = input<CalendarShortcut[]>();
 
@@ -247,6 +252,14 @@ export class DateRangeInputComponent extends AbstractDateComponent implements Co
 		}
 	}
 
+	popoverClosed(): void {
+		if (this.editedField() === 1) {
+			this.endTextInputRef().nativeElement.focus();
+		} else if (this.editedField() === 0) {
+			this.startTextInputRef().nativeElement.focus();
+		}
+	}
+
 	setupInputEffect(inputSignal: Signal<string | null>, rangeProperty: 'start' | 'end'): void {
 		effect(
 			() => {
@@ -285,6 +298,7 @@ export class DateRangeInputComponent extends AbstractDateComponent implements Co
 	inputBlur(): void {
 		this.onTouched?.();
 		this.inputFocused.set(false);
+		this.highlightedField.set(-1);
 	}
 
 	fixOrderIfNeeded(): void {
@@ -375,15 +389,16 @@ export class DateRangeInputComponent extends AbstractDateComponent implements Co
 						scope: this.mode(),
 					});
 				}
-				popoverRef.close();
-				this.startTextInputRef().nativeElement.focus();
-				this.editedField.set(-1);
+				this.editedField.set(1);
 				this.dateHovered.set(null);
 			}
 		}
 	}
 
 	validate(control: AbstractControl<DateRange, DateRange>): ValidationErrors {
+		if (!control.value) {
+			return null;
+		}
 		return this.isValidDate(control.value?.start) ? null : { date: true };
 	}
 
@@ -421,7 +436,8 @@ export class DateRangeInputComponent extends AbstractDateComponent implements Co
 		}
 	}
 
-	selectShortcut(shortcut: CalendarShortcut): void {
+	selectShortcut(shortcut: CalendarShortcut, popover: PopoverDirective): void {
 		this.selectedRange.set(shortcut.range);
+		popover.close();
 	}
 }

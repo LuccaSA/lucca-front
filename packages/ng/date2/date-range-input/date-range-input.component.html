@@ -2,7 +2,7 @@
 	<legend><span class="u-mask">{{ label }}</span></legend>
 	<div class="textField" #popoverAnchor>
 		<div class="textField-input">
-			<div class="dateRangeField-fieldset-content mod-start" [class.is-highlighted]="editedField() === 0">
+			<div class="dateRangeField-fieldset-content mod-start" [class.is-highlighted]="highlightedField() === 0">
 				<label for="range-input-start-{{idSuffix}}" class="u-mask">Start</label>
 				<input
 					type="text"
@@ -25,7 +25,7 @@
 					[attr.placeholder]="dateFormatLocalized()"
 				/>
 			</div>
-			<div class="dateRangeField-fieldset-content mod-end" [class.is-highlighted]="editedField() === 1">
+			<div class="dateRangeField-fieldset-content mod-end" [class.is-highlighted]="highlightedField() === 1">
 				<label for="range-input-end-{{idSuffix}}" class="u-mask">End</label>
 				<input
 					type="text"
@@ -63,6 +63,7 @@
 					[luPopoverAnchor]="popoverAnchor"
 					#popoverRef="luPopover2"
 					[customPositions]="popoverPositions"
+					(luPopoverClosed)="popoverClosed()"
 					tabindex="-1"
 					type="button"
 					class="button mod-onlyIcon mod-text textField-input-affix-toggle"
@@ -86,7 +87,7 @@
 		>
 			@for (shortcut of shortcuts(); track $index) {
 			<li class="calendarShortcutsButton-item">
-				<button type="button" class="calendarShortcutsButton-item-button button" (click)="selectShortcut(shortcut)">
+				<button type="button" class="calendarShortcutsButton-item-button button" (click)="selectShortcut(shortcut, popoverRef)">
 					{{ shortcut.label }}
 				</button>
 			</li>
@@ -106,6 +107,7 @@
 			</div>
 			<div class="calendarWrapper-content" tabindex="-1">
 				<lu-calendar2
+					removeYearOverflow
 					[hideToday]="hideToday()"
 					[date]="currentDate()"
 					(dateChange)="currentDateChangeFromCalendar($event)"
@@ -123,6 +125,7 @@
 				></lu-calendar2>
 				@if (hasTwoCalendars()) {
 				<lu-calendar2
+					removeYearOverflow
 					[hideToday]="hideToday()"
 					[date]="currentRightDate()"
 					(dateChange)="currentDateChangeFromCalendar($event)"

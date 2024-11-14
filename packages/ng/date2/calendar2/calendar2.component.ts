@@ -87,6 +87,8 @@ export class Calendar2Component implements OnInit {
 
 	enableOverflow = input<boolean, boolean>(false, { transform: booleanAttribute });
 
+	removeYearOverflow = input<boolean, boolean>(false, { transform: booleanAttribute });
+
 	hideToday = input<boolean, boolean>(false, { transform: booleanAttribute });
 
 	hasTodayButton = input<boolean, boolean>(false, { transform: booleanAttribute });
@@ -216,8 +218,8 @@ export class Calendar2Component implements OnInit {
 
 	decadeGridDisplay = computed(() => {
 		const yearsOfDecade: Date[] = eachYearOfInterval({
-			start: subYears(this.decade(), 1),
-			end: addYears(endOfDecade(this.decade()), 1),
+			start: this.removeYearOverflow() ? this.decade() : subYears(this.decade(), 1),
+			end: this.removeYearOverflow() ? endOfDecade(this.decade()) : addYears(endOfDecade(this.decade()), 1),
 		});
 		return yearsOfDecade
 			.map((year) => {

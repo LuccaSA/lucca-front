@@ -11,6 +11,7 @@ import {
 	Input,
 	InputSignal,
 	OnDestroy,
+	output,
 	Renderer2,
 	signal,
 	TemplateRef,
@@ -119,6 +120,8 @@ export class PopoverDirective implements OnDestroy {
 	open$ = new Subject<'focus' | 'click' | 'hover'>();
 
 	close$ = new Subject<void>();
+
+	luPopoverClosed = output<void>();
 
 	#listenToMouseLeave = false;
 	#listenToMouseEnter = true;
@@ -259,6 +262,7 @@ export class PopoverDirective implements OnDestroy {
 			this.#componentRef.mouseEnter$.pipe(takeUntilDestroyed(this.#componentRef.destroyRef), takeUntilDestroyed(this.#destroyRef)).subscribe(() => this.open$.next('hover'));
 			this.#componentRef.closed$.pipe(takeUntilDestroyed(this.#componentRef.destroyRef), takeUntilDestroyed(this.#destroyRef)).subscribe(() => {
 				this.opened.set(false);
+				this.luPopoverClosed.emit();
 				this.#listenToMouseLeave = false;
 				if (this.#screenReaderDescription) {
 					this.#screenReaderDescription.remove();
