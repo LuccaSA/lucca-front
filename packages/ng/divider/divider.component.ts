@@ -1,18 +1,19 @@
-import { booleanAttribute, Component, computed, contentChild, ElementRef, HostBinding, inject, input, Input, OnChanges, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, Component, computed, ElementRef, HostBinding, inject, input, Input, OnChanges, ViewChild, ViewEncapsulation } from '@angular/core';
 import { LuClass } from '@lucca-front/ng/core';
 
 @Component({
 	selector: 'lu-divider',
 	standalone: true,
 	providers: [LuClass],
-	templateUrl: './divider.component.html',
+	// templateUrl: './divider.component.html',
+	template: '<ng-content></ng-content>',
 	styleUrls: ['./divider.component.scss'],
 	encapsulation: ViewEncapsulation.None,
 })
 export class DividerComponent implements OnChanges {
 	#luClass = inject(LuClass);
 
-	content = contentChild<ElementRef<HTMLElement>>('contentRef');
+	@ViewChild('content') content: ElementRef;
 
 	@HostBinding('class.divider')
 	divider = true;
@@ -20,7 +21,7 @@ export class DividerComponent implements OnChanges {
 	withRole = input<boolean, boolean>(false, { transform: booleanAttribute });
 
 	role = computed(() => {
-		return this.withRole() && this.content()?.nativeElement.innerHTML.trim().length === 0 ? 'separator' : null;
+		return this.withRole() ? 'separator' : null;
 	});
 
 	@HostBinding('attr.role')

@@ -1,1 +1,2 @@
-<div #contentRef><ng-content></ng-content></div>
+<ng-template #content><ng-content></ng-content></ng-template>
+<ng-container *ngTemplateOutlet="content"></ng-container>
