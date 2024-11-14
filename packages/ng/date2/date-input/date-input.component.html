@@ -1,4 +1,4 @@
-<div class="textField">
+<div class="textField" #popoverAnchor>
 	<div class="textField-input">
 		<input
 			type="text"
@@ -28,6 +28,7 @@
 			}
 			<button
 				[luPopover2]="calendar"
+				[luPopoverAnchor]="popoverAnchor"
 				[disabled]="disabled"
 				[luPopoverNoCloseButton]="true"
 				#popoverRef="luPopover2"

@@ -44,7 +44,9 @@
 
 	&.is-selected,
 	&.is-selectionInProgress {
-		@include selected;
+		&:not(.is-overflow) {
+			@include selected;
+		}
 	}
 
 	&.is-singleDayInProgress,

@@ -1,6 +1,22 @@
 import { BreakpointObserver, LayoutModule } from '@angular/cdk/layout';
 import { ConnectionPositionPair } from '@angular/cdk/overlay';
-import { ChangeDetectionStrategy, Component, computed, effect, ElementRef, forwardRef, inject, input, Signal, signal, untracked, viewChild, viewChildren, ViewEncapsulation } from '@angular/core';
+import {
+	ChangeDetectionStrategy,
+	Component,
+	computed,
+	effect,
+	ElementRef,
+	forwardRef,
+	inject,
+	Input,
+	input,
+	Signal,
+	signal,
+	untracked,
+	viewChild,
+	viewChildren,
+	ViewEncapsulation,
+} from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors, Validator } from '@angular/forms';
 import { LuClass, ɵeffectWithDeps } from '@lucca-front/ng/core';
@@ -45,6 +61,8 @@ let nextId = 0;
 	],
 })
 export class DateRangeInputComponent extends AbstractDateComponent implements ControlValueAccessor, Validator {
+	@Input() label: string;
+
 	#luClass = inject(LuClass);
 
 	#formFieldRef = inject(FORM_FIELD_INSTANCE, { optional: true });
@@ -69,14 +87,14 @@ export class DateRangeInputComponent extends AbstractDateComponent implements Co
 	placeholder = input<string>();
 
 	popoverPositions: ConnectionPositionPair[] = [
-		new ConnectionPositionPair({ originX: 'start', originY: 'bottom' }, { overlayX: 'start', overlayY: 'top' }, -1, 6),
+		new ConnectionPositionPair({ originX: 'start', originY: 'bottom' }, { overlayX: 'start', overlayY: 'top' }, -8, 0),
 		new ConnectionPositionPair(
 			{ originX: 'start', originY: 'top' },
 			{
 				overlayX: 'start',
 				overlayY: 'bottom',
 			},
-			-1,
+			-8,
 			-32,
 		),
 	];
@@ -165,9 +183,6 @@ export class DateRangeInputComponent extends AbstractDateComponent implements Co
 
 	constructor() {
 		super();
-		if (this.#formFieldRef) {
-			this.#formFieldRef.layout = 'fieldset';
-		}
 
 		this.setupInputEffect(this.startTextInput, 'start');
 		this.setupInputEffect(this.endTextInput, 'end');

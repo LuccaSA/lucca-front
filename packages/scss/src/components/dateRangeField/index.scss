@@ -4,7 +4,7 @@
 	@include vars;
 	@include component;
 
-	.form-fieldset.mod-S & {
+	.form-field.mod-S & {
 		@include S;
 	}
 
@@ -12,7 +12,7 @@
 		&.mod-day {
 			@include day;
 
-			.form-fieldset.mod-S & {
+			.form-field.mod-S & {
 				@include dayS;
 			}
 		}
@@ -20,7 +20,7 @@
 		&.mod-month {
 			@include month;
 
-			.form-fieldset.mod-S & {
+			.form-field.mod-S & {
 				@include monthS;
 			}
 		}
@@ -28,7 +28,7 @@
 		&.mod-year {
 			@include year;
 
-			.form-fieldset.mod-S & {
+			.form-field.mod-S & {
 				@include yearS;
 			}
 		}

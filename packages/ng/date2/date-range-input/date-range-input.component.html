@@ -1,76 +1,79 @@
-<div class="textField" #popoverAnchor>
-	<div class="textField-input">
-		<div class="dateRangeField-content mod-start" [class.is-highlighted]="editedField() === 0">
-			<label for="range-input-start-{{idSuffix}}" class="u-mask">Start</label>
-			<input
-				type="text"
-				#start
-				id="range-input-start-{{idSuffix}}"
-				attr.aria-describedby="range-input-start-{{idSuffix}}-message"
-				luInput
-				luInputStandalone
-				class="textField-input-value dateRangeField-input-value"
-				[value]="startLabel()"
-				(input)="startTextInput.set(start.value)"
-				(blur)="inputBlur()"
-				(focus)="inputFocused.set(true);editedField.set(0)"
-				aria-haspopup="true"
-				role="combobox"
-				(click)="editedField.set(0);openPopover(popoverRef, 'start')"
-				(keyup.arrowDown)="popoverRef.opened() ? popoverRef.focusBackToContent($event) : openPopover(popoverRef, 'start', true)"
-				(keyup.escape)="popoverRef.close()"
-				[disabled]="disabled"
-				[attr.placeholder]="dateFormatLocalized()"
-			/>
-		</div>
-		<div class="dateRangeField-content mod-end" [class.is-highlighted]="editedField() === 1">
-			<label for="range-input-end-{{idSuffix}}" class="u-mask">End</label>
-			<input
-				type="text"
-				#end
-				id="range-input-end-{{idSuffix}}"
-				attr.aria-describedby="range-input-start-{{idSuffix}}-message"
-				luInput
-				luInputStandalone
-				class="textField-input-value dateRangeField-input-value"
-				[value]="endLabel()"
-				(input)="endTextInput.set(end.value)"
-				(blur)="inputBlur();fixOrderIfNeeded()"
-				(focus)="inputFocused.set(true);editedField.set(1)"
-				aria-haspopup="true"
-				role="combobox"
-				(click)="editedField.set(1);openPopover(popoverRef, 'end')"
-				(keyup.arrowDown)="popoverRef.opened() ? popoverRef.focusBackToContent($event) : openPopover(popoverRef, 'end', true)"
-				(keyup.escape)="popoverRef.close()"
-				[disabled]="disabled"
-				[attr.placeholder]="dateFormatLocalized()"
-			/>
-		</div>
-		<lu-icon [icon]="'arrowRight'" [alt]="''" class="dateRangeField-arrow" />
-		<div class="textField-input-affix">
-			@if (clearable() && (start.value !== '' || end.value !== '')) {
-			<button class="textField-input-affix-clear clear" type="button" (click)="clear(start, end)">
-				<span aria-hidden="true" class="lucca-icon icon-signClose"></span>
-				<span class="u-mask">{{ intl.clear }}</span>
-			</button>
-			}
-			<button
-				[luPopover2]="calendar"
-				[disabled]="disabled"
-				[luPopoverNoCloseButton]="true"
-				[luPopoverAnchor]="popoverAnchor"
-				#popoverRef="luPopover2"
-				[customPositions]="popoverPositions"
-				tabindex="-1"
-				type="button"
-				class="button mod-onlyIcon mod-text textField-input-affix-toggle"
-				(click)="editedField.set(0)"
-			>
-				<lu-icon [icon]="'calendarPlanning'" [alt]="intl.pickDate" />
-			</button>
+<fieldset class="dateRangeField-fieldset">
+	<legend><span class="u-mask">{{ label }}</span></legend>
+	<div class="textField" #popoverAnchor>
+		<div class="textField-input">
+			<div class="dateRangeField-fieldset-content mod-start" [class.is-highlighted]="editedField() === 0">
+				<label for="range-input-start-{{idSuffix}}" class="u-mask">Start</label>
+				<input
+					type="text"
+					#start
+					id="range-input-start-{{idSuffix}}"
+					attr.aria-describedby="range-input-start-{{idSuffix}}-message"
+					luInput
+					luInputStandalone
+					class="textField-input-value dateRangeField-fieldset-input-value"
+					[value]="startLabel()"
+					(input)="startTextInput.set(start.value)"
+					(blur)="inputBlur()"
+					(focus)="inputFocused.set(true);editedField.set(0)"
+					aria-haspopup="true"
+					role="combobox"
+					(click)="editedField.set(0);openPopover(popoverRef, 'start')"
+					(keyup.arrowDown)="popoverRef.opened() ? popoverRef.focusBackToContent($event) : openPopover(popoverRef, 'start', true)"
+					(keyup.escape)="popoverRef.close()"
+					[disabled]="disabled"
+					[attr.placeholder]="dateFormatLocalized()"
+				/>
+			</div>
+			<div class="dateRangeField-fieldset-content mod-end" [class.is-highlighted]="editedField() === 1">
+				<label for="range-input-end-{{idSuffix}}" class="u-mask">End</label>
+				<input
+					type="text"
+					#end
+					id="range-input-end-{{idSuffix}}"
+					attr.aria-describedby="range-input-start-{{idSuffix}}-message"
+					luInput
+					luInputStandalone
+					class="textField-input-value dateRangeField-fieldset-input-value"
+					[value]="endLabel()"
+					(input)="endTextInput.set(end.value)"
+					(blur)="inputBlur();fixOrderIfNeeded()"
+					(focus)="inputFocused.set(true);editedField.set(1)"
+					aria-haspopup="true"
+					role="combobox"
+					(click)="editedField.set(1);openPopover(popoverRef, 'end')"
+					(keyup.arrowDown)="popoverRef.opened() ? popoverRef.focusBackToContent($event) : openPopover(popoverRef, 'end', true)"
+					(keyup.escape)="popoverRef.close()"
+					[disabled]="disabled"
+					[attr.placeholder]="dateFormatLocalized()"
+				/>
+			</div>
+			<lu-icon [icon]="'arrowRight'" [alt]="''" class="dateRangeField-fieldset-arrow" />
+			<div class="textField-input-affix">
+				@if (clearable() && (start.value !== '' || end.value !== '')) {
+				<button class="textField-input-affix-clear clear" type="button" (click)="clear(start, end)">
+					<span aria-hidden="true" class="lucca-icon icon-signClose"></span>
+					<span class="u-mask">{{ intl.clear }}</span>
+				</button>
+				}
+				<button
+					[luPopover2]="calendar"
+					[disabled]="disabled"
+					[luPopoverNoCloseButton]="true"
+					[luPopoverAnchor]="popoverAnchor"
+					#popoverRef="luPopover2"
+					[customPositions]="popoverPositions"
+					tabindex="-1"
+					type="button"
+					class="button mod-onlyIcon mod-text textField-input-affix-toggle"
+					(click)="editedField.set(0)"
+				>
+					<lu-icon [icon]="'calendarPlanning'" [alt]="intl.pickDate" />
+				</button>
+			</div>
 		</div>
 	</div>
-</div>
+</fieldset>
 
 <ng-template #calendar>
 	<div class="calendarShortcutsOptionnal">
