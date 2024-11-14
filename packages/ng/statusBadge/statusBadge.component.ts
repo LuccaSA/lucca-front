@@ -19,7 +19,7 @@ export class StatusBadgeComponent implements OnChanges {
 	label: string;
 
 	@Input()
-	size: 'M' | 'L' = 'M';
+	size: 'L' = null;
 
 	@Input()
 	palette: Palette = null;

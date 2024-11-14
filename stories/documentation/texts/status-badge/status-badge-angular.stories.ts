@@ -3,7 +3,7 @@ import { Meta, moduleMetadata, StoryFn } from '@storybook/angular';
 
 interface StatusBadgeAngularStory {
 	label: string;
-	L: boolean;
+	size: string;
 	palette: string;
 }
 
@@ -21,9 +21,10 @@ export default {
 				type: 'select',
 			},
 		},
-		L: {
+		size: {
+			options: ['', 'L'],
 			control: {
-				type: 'boolean',
+				type: 'select',
 			},
 		},
 		label: {
@@ -35,9 +36,9 @@ export default {
 } as Meta;
 
 function getTemplate(args: StatusBadgeAngularStory): string {
-	const size = args.L ? `size="L"` : '';
-	const pal = args.palette ? `palette="${args.palette}"` : '';
-	return `<lu-status-badge ${pal} ${size} label="${args.label}" />`;
+	const s = args.size ? `size="${args.size}"` : '';
+	const p = args.palette ? `palette="${args.palette}"` : '';
+	return `<lu-status-badge ${p} ${s} label="${args.label}" />`;
 }
 
 const Template: StoryFn<StatusBadgeAngularStory> = (args) => ({
@@ -46,4 +47,4 @@ const Template: StoryFn<StatusBadgeAngularStory> = (args) => ({
 });
 
 export const Angular = Template.bind({});
-Angular.args = { label: 'Lorem ipsum dolor', palette: '', L: false };
+Angular.args = { label: 'Lorem ipsum dolor', palette: '', size: '' };
