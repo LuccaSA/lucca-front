@@ -1,10 +1,10 @@
 import { DestroyRef, Directive, ElementRef, HostBinding, HostListener, inject, OnInit } from '@angular/core';
 import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { ILuOptionContext, LU_OPTION_CONTEXT } from '@lucca-front/ng/core-select';
-import { LuInputDirective } from '@lucca-front/ng/input';
 import { of } from 'rxjs';
 import { startWith, switchMap } from 'rxjs/operators';
 import { LuMultiSelectInputComponent } from '../input';
+import { InputDirective } from '@lucca-front/ng/form-field';
 
 @Directive({
 	selector: '[luMultiSelectDisplayerInput]',
@@ -15,7 +15,7 @@ import { LuMultiSelectInputComponent } from '../input';
 		class: 'multipleSelect-displayer-search',
 		type: 'text',
 	},
-	hostDirectives: [LuInputDirective],
+	hostDirectives: [InputDirective],
 })
 export class LuMultiSelectDisplayerInputDirective<T> implements OnInit {
 	select = inject<LuMultiSelectInputComponent<T>>(LuMultiSelectInputComponent);
