@@ -40,6 +40,10 @@
 		@include checkboxCheckedDisabled;
 	}
 
+	&:has(.filterPill-checkbox-input[aria-checked='mixed']:disabled) {
+		@include checkboxMixedDisabled;
+	}
+
 	&:has(.filterPill-checkbox-input:focus-visible, .filterPill-label:focus-visible) {
 		@include checkboxFocusVisible;
 	}
