@@ -1,5 +1,5 @@
 import { HorizontalConnectionPos, VerticalConnectionPos } from '@angular/cdk/overlay';
-import { ChangeDetectionStrategy,	Component,	DestroyRef,	HostBinding,	HostListener,	inject,	Signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, HostBinding, HostListener, inject, Signal } from '@angular/core';
 import { SafeHtml } from '@angular/platform-browser';
 import { Subject } from 'rxjs';
 import { NgClass } from '@angular/common';
