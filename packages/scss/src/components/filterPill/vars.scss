@@ -1,0 +1,8 @@
+@mixin vars {
+	--components-filterPills-gap: 0;
+	--components-filterPills-label-fontWeightNormal: 400;
+	--components-filterPills-label-fontWeightChecked: 600;
+	--components-filterPills-borderColor: var(--palettes-neutral-300);
+	--components-filterPills-backgroundColor: var(--palettes-neutral-0);
+	--components-filterPills-color: var(--palettes-neutral-700);
+}

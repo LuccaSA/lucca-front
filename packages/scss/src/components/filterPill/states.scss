@@ -1,0 +1,84 @@
+@use '@lucca-front/scss/src/commons/utils/a11y';
+
+@mixin checkboxChecked {
+	--components-filterPills-label-fontWeight: var(--components-filterPills-label-fontWeightChecked);
+	--components-filterPills-borderColor: var(--palettes-product-300);
+	--components-filterPills-backgroundColor: var(--palettes-product-50);
+	--components-filterPills-color: var(--palettes-product-800);
+
+	.filterPill-checkbox {
+		background-color: var(--palettes-product-700);
+		border-color: var(--palettes-product-700);
+	}
+
+	.filterPill-checkbox-icon-check {
+		transform: scale(1);
+		transition-timing-function: cubic-bezier(0.5, 1, 0.5, 1.5);
+	}
+}
+
+@mixin checkboxMixed {
+	@include checkboxChecked;
+
+	.filterPill-checkbox-icon-check {
+		&::before {
+			content: '\e975'; // Remove when content alternative will have a good support
+			content: '\e975'/ '';
+		}
+	}
+}
+
+@mixin checkboxFocusVisible {
+	@include a11y.focusVisible;
+}
+
+@mixin checkboxHover {
+	.filterPill-checkbox {
+		border-color: var(--palettes-neutral-600);
+	}
+}
+
+@mixin checkboxActive {
+	.filterPill-checkbox {
+		border-color: var(--palettes-neutral-800);
+	}
+}
+
+@mixin checkboxCheckedHover {
+	.filterPill-checkbox {
+		background-color: var(--palettes-product-600);
+		border-color: var(--palettes-product-600);
+	}
+}
+
+@mixin checkboxCheckedActive {
+	.filterPill-checkbox {
+		background-color: var(--palettes-product-800);
+		border-color: var(--palettes-product-800);
+	}
+}
+
+@mixin checkboxDisabled {
+	--components-filterPills-color: var(--palettes-neutral-500);
+
+	.filterPill-label {
+		&::before {
+			cursor: default;
+		}
+	}
+
+	.filterPill-checkbox {
+		border-color: var(--palettes-neutral-500); // disabled token candidate
+	}
+}
+
+@mixin checkboxCheckedDisabled {
+	--components-filterPills-borderColor: var(--palettes-neutral-300);
+	--components-filterPills-backgroundColor: var(--palettes-neutral-50);
+
+	.filterPill-checkbox {
+		background-color: var(--commons-disabled-background);
+		border-color: var(--commons-disabled-background);
+		color: var(--palettes-neutral-500); // disabled token candidate
+	}
+}

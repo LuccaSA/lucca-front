@@ -1,0 +1,101 @@
+@use '@lucca-front/scss/src/commons/utils/namespace';
+@use '@lucca-front/scss/src/commons/utils/a11y';
+
+@mixin component($atRoot: namespace.$defaultAtRoot) {
+	display: flex;
+	gap: var(--components-filterPills-gap);
+	align-items: center;
+	background-color: var(--components-filterPills-backgroundColor);
+	width: fit-content;
+	padding: var(--pr-t-spacings-75);
+	border-radius: var(--commons-borderRadius-L);
+	color: var(--components-filterPills-color);
+	font-size: var(--sizes-S-fontSize);
+	line-height: var(--sizes-S-lineHeight);
+	border: 1px solid var(--components-filterPills-borderColor);
+	position: relative;
+	max-width: 18rem;
+	white-space: nowrap;
+
+	@at-root ($atRoot) {
+		.filterPill-label {
+			text-align: center;
+			font-weight: var(--components-filterPills-label-fontWeight);
+			overflow: hidden;
+			text-overflow: ellipsis;
+			outline: none;
+
+			&::before {
+				content: '';
+				position: absolute;
+				inset: 0;
+				cursor: pointer;
+			}
+		}
+
+		.filterPill-label-placeholder {
+			text-align: center;
+			display: block;
+			height: 0;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			font-weight: var(--components-filterPills-label-fontWeightChecked);
+		}
+
+		.filterPill-checkbox {
+			border: 2px solid var(--palettes-neutral-700);
+			border-radius: 4px;
+			color: var(--palettes-neutral-0);
+			transition-property: color, border-color, background-color;
+			transition-duration: var(--commons-animations-durations-fast);
+			background-color: var(--palettes-neutral-0);
+			cursor: pointer;
+			display: flex;
+
+			@media (prefers-reduced-motion: reduce) {
+				transition-property: none;
+			}
+		}
+
+		.filterPill-checkbox-icon {
+			width: var(--pr-t-spacings-150);
+			height: var(--pr-t-spacings-150);
+		}
+
+		.filterPill-checkbox-icon-check {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			width: 100%;
+			height: 100%;
+			transform: scale(0);
+			transition-property: transform;
+			transition-duration: var(--commons-animations-durations-fast);
+			transition-timing-function: cubic-bezier(0.5, -0.5, 0.5, 0);
+
+			@media (prefers-reduced-motion: reduce) {
+				transition-property: none;
+			}
+
+			&::before {
+				font-weight: 400;
+				font-size: 1rem;
+				direction: ltr;
+				font-family: 'Lucca icons';
+				font-feature-settings: 'liga';
+				font-style: normal;
+				letter-spacing: normal;
+				line-height: 1;
+				text-transform: none;
+				white-space: nowrap;
+				word-wrap: normal;
+				content: '\e97d'; // Remove when content alternative will have a good support
+				content: '\e97d'/ '';
+			}
+		}
+
+		.filterPill-checkbox-input {
+			@include a11y.mask;
+		}
+	}
+}
