@@ -65,9 +65,6 @@ export class DateRangeInputComponent extends AbstractDateComponent implements Co
 
 	#luClass = inject(LuClass);
 
-	// TODO remember to add premade shortcuts
-	// TODO Is role presentation label mandatory?
-
 	#formFieldRef = inject(FORM_FIELD_INSTANCE, { optional: true });
 
 	#breakpointObserver = inject(BreakpointObserver);
@@ -188,6 +185,10 @@ export class DateRangeInputComponent extends AbstractDateComponent implements Co
 
 	constructor() {
 		super();
+
+		if (this.#formFieldRef) {
+			this.#formFieldRef.rolePresentationLabel = true;
+		}
 
 		this.setupInputEffect(this.startTextInput, 'start');
 		this.setupInputEffect(this.endTextInput, 'end');
