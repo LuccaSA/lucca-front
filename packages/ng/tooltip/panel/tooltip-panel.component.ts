@@ -1,5 +1,5 @@
 import { HorizontalConnectionPos, VerticalConnectionPos } from '@angular/cdk/overlay';
-import { ChangeDetectionStrategy, Component, DestroyRef, HostBinding, HostListener, inject } from '@angular/core';
+import { ChangeDetectionStrategy,	Component,	DestroyRef,	HostBinding,	HostListener,	inject,	Signal } from '@angular/core';
 import { SafeHtml } from '@angular/platform-browser';
 import { Subject } from 'rxjs';
 import { NgClass } from '@angular/common';
@@ -32,7 +32,7 @@ export class LuTooltipPanelComponent {
 		this.mouseLeave$.next();
 	}
 
-	content: string | SafeHtml;
+	content: Signal<string | SafeHtml>;
 
 	@HostBinding('attr.id')
 	id: string;
