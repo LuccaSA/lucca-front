@@ -1,25 +1,9 @@
 import { BreakpointObserver, LayoutModule } from '@angular/cdk/layout';
 import { ConnectionPositionPair } from '@angular/cdk/overlay';
-import {
-	ChangeDetectionStrategy,
-	Component,
-	computed,
-	effect,
-	ElementRef,
-	forwardRef,
-	inject,
-	Input,
-	input,
-	Signal,
-	signal,
-	untracked,
-	viewChild,
-	viewChildren,
-	ViewEncapsulation,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, effect, ElementRef, forwardRef, inject, input, Signal, signal, untracked, viewChild, viewChildren, ViewEncapsulation } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors, Validator } from '@angular/forms';
-import { LuClass, ɵeffectWithDeps } from '@lucca-front/ng/core';
+import { LuClass, PortalContent, PortalDirective, ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { FORM_FIELD_INSTANCE, InputDirective } from '@lucca-front/ng/form-field';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { PopoverDirective } from '@lucca-front/ng/popover2';
@@ -38,7 +22,7 @@ let nextId = 0;
 @Component({
 	selector: 'lu-date-range-input',
 	standalone: true,
-	imports: [PopoverDirective, Calendar2Component, IconComponent, InputDirective, LayoutModule],
+	imports: [PopoverDirective, Calendar2Component, IconComponent, InputDirective, LayoutModule, PortalDirective],
 	templateUrl: './date-range-input.component.html',
 	styleUrl: './date-range-input.component.scss',
 	host: {
@@ -61,8 +45,6 @@ let nextId = 0;
 	],
 })
 export class DateRangeInputComponent extends AbstractDateComponent implements ControlValueAccessor, Validator {
-	@Input() label: string;
-
 	#luClass = inject(LuClass);
 
 	#formFieldRef = inject(FORM_FIELD_INSTANCE, { optional: true });
@@ -85,6 +67,8 @@ export class DateRangeInputComponent extends AbstractDateComponent implements Co
 	dateHovered = signal<Date | null>(null);
 
 	placeholder = input<string>();
+
+	label: PortalContent;
 
 	popoverPositions: ConnectionPositionPair[] = [
 		new ConnectionPositionPair({ originX: 'start', originY: 'bottom' }, { overlayX: 'start', overlayY: 'top' }, -8, 0),
@@ -188,6 +172,7 @@ export class DateRangeInputComponent extends AbstractDateComponent implements Co
 
 		if (this.#formFieldRef) {
 			this.#formFieldRef.rolePresentationLabel = true;
+			this.label = this.#formFieldRef.label;
 		}
 
 		this.setupInputEffect(this.startTextInput, 'start');

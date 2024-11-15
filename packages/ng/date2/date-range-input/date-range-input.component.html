@@ -1,5 +1,5 @@
 <fieldset class="dateRangeField-fieldset">
-	<legend><span class="u-mask">{{ label }}</span></legend>
+	<legend><span class="u-mask" *luPortal="label"></span></legend>
 	<div class="textField" #popoverAnchor>
 		<div class="textField-input">
 			<div class="dateRangeField-fieldset-content mod-start" [class.is-highlighted]="highlightedField() === 0">
