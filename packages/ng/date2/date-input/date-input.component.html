@@ -31,6 +31,7 @@
 				[luPopover2]="calendar"
 				[disabled]="disabled"
 				[luPopoverNoCloseButton]="true"
+				[luPopoverDisabled]="noPopover()"
 				#popoverRef="luPopover2"
 				[customPositions]="popoverPositions"
 				tabindex="-1"
@@ -42,6 +43,10 @@
 		</div>
 	</div>
 </div>
+
+@if (noPopover()) {
+<ng-container *ngTemplateOutlet="calendar"></ng-container>
+}
 
 <ng-template #calendar>
 	<div class="calendarWrapper">

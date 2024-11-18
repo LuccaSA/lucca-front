@@ -13,11 +13,12 @@ import { DateRange } from '../calendar2/date-range';
 import { getDateFormat } from '../date-format';
 import { LU_DATE2_TRANSLATIONS } from '../date2.translate';
 import { comparePeriods, startOfPeriod } from '../utils';
+import { NgTemplateOutlet } from '@angular/common';
 
 @Component({
 	selector: 'lu-date-input',
 	standalone: true,
-	imports: [PopoverDirective, Calendar2Component, IconComponent, InputDirective],
+	imports: [PopoverDirective, Calendar2Component, IconComponent, InputDirective, NgTemplateOutlet],
 	templateUrl: './date-input.component.html',
 	styleUrl: './date-input.component.scss',
 	encapsulation: ViewEncapsulation.None,
@@ -69,6 +70,8 @@ export class DateInputComponent implements ControlValueAccessor, Validator {
 	hideWeekend = input<boolean, boolean>(false, { transform: booleanAttribute });
 
 	getCellInfo = input<((day: Date, mode: CalendarMode) => CellStatus) | null>();
+
+	noPopover = input<boolean, boolean>(false, { transform: booleanAttribute });
 
 	popoverPositions: ConnectionPositionPair[] = [
 		new ConnectionPositionPair({ originX: 'end', originY: 'bottom' }, { overlayX: 'end', overlayY: 'top' }, 16, 6),
