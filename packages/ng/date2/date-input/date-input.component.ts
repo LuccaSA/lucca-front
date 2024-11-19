@@ -14,6 +14,8 @@ import { getDateFormat } from '../date-format';
 import { LU_DATE2_TRANSLATIONS } from '../date2.translate';
 import { comparePeriods, startOfPeriod } from '../utils';
 import { NgTemplateOutlet } from '@angular/common';
+import { FILTER_PILL_INPUT_COMPONENT, FilterPillInputComponent } from '../../filter-pills/core/filter-pill-input-component';
+import { LuccaIcon } from '@lucca-front/icons';
 
 @Component({
 	selector: 'lu-date-input',
@@ -34,9 +36,13 @@ import { NgTemplateOutlet } from '@angular/common';
 			useExisting: forwardRef(() => DateInputComponent),
 			multi: true,
 		},
+		{
+			provide: FILTER_PILL_INPUT_COMPONENT,
+			useExisting: forwardRef(() => DateInputComponent),
+		},
 	],
 })
-export class DateInputComponent implements ControlValueAccessor, Validator {
+export class DateInputComponent implements ControlValueAccessor, Validator, FilterPillInputComponent {
 	#locale = inject(LOCALE_ID);
 
 	#intlDateTimeFormat = new Intl.DateTimeFormat(this.#locale);
@@ -70,8 +76,6 @@ export class DateInputComponent implements ControlValueAccessor, Validator {
 	hideWeekend = input<boolean, boolean>(false, { transform: booleanAttribute });
 
 	getCellInfo = input<((day: Date, mode: CalendarMode) => CellStatus) | null>();
-
-	noPopover = input<boolean, boolean>(false, { transform: booleanAttribute });
 
 	popoverPositions: ConnectionPositionPair[] = [
 		new ConnectionPositionPair({ originX: 'end', originY: 'bottom' }, { overlayX: 'end', overlayY: 'top' }, 16, 6),
@@ -125,6 +129,10 @@ export class DateInputComponent implements ControlValueAccessor, Validator {
 
 	nextButton = viewChild<ElementRef<Element>>('nextButtonRef');
 
+	noPopover = false;
+
+	isFilterPillEmpty = signal(true);
+
 	get isNavigationButtonFocused(): boolean {
 		return [this.previousButton()?.nativeElement, this.nextButton()?.nativeElement].includes(document.activeElement);
 	}
@@ -145,9 +153,13 @@ export class DateInputComponent implements ControlValueAccessor, Validator {
 			},
 			{ allowSignalWrites: true },
 		);
-		effect(() => {
-			this.#onChange?.(this.selectedDate());
-		});
+		effect(
+			() => {
+				this.#onChange?.(this.selectedDate());
+				this.isFilterPillEmpty.set(!this.selectedDate());
+			},
+			{ allowSignalWrites: true },
+		);
 
 		ɵeffectWithDeps([this.calendarMode, this.tabbableDate], (calendarMode, tabbableDate) => {
 			if (tabbableDate && !comparePeriods(calendarMode, tabbableDate, this.currentDate())) {
@@ -162,12 +174,23 @@ export class DateInputComponent implements ControlValueAccessor, Validator {
 		});
 	}
 
+	enableFilterPillMode(): void {
+		this.noPopover = true;
+	}
+
+	getDefaultFilterPillIcon(): LuccaIcon {
+		return 'calendarDate';
+	}
+
 	openPopover(ref: PopoverDirective): void {
-		ref.openPopover(true, true);
-		// Once popover is opened, aka in the next CD cycle, focus current tabbable date
-		setTimeout(() => {
-			this.calendar()?.focusTabbableDate();
-		});
+		if (!this.noPopover) {
+			ref.openPopover(true, true);
+			// Once popover is opened, aka in the next CD cycle, focus current tabbable date
+
+			setTimeout(() => {
+				this.calendar()?.focusTabbableDate();
+			});
+		}
 	}
 
 	validate(control: AbstractControl<Date, Date>): ValidationErrors {

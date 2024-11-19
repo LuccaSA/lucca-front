@@ -8,7 +8,7 @@
 	#popoverRef="luPopover2"
 	[attr.aria-expanded]="popoverRef.opened()"
 >
-	{{ valueDisplay() }}
+	LA VALEUR ICI
 </button>
 <button type="button" class="filterPill-clear" (click)="$event.stopPropagation(); clear()">
 	<lu-icon icon="signClose" size="XS" alt="Vider ce champ"></lu-icon>
@@ -19,6 +19,6 @@
 
 <ng-template #pillContent>
 	<div class="pr-u-padding100">
-		<lu-date-input style="max-width: none" [noPopover]="true" [(ngModel)]="value"></lu-date-input>
+		<ng-content></ng-content>
 	</div>
 </ng-template>
