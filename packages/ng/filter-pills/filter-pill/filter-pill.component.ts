@@ -1,19 +1,21 @@
-import { ChangeDetectionStrategy, Component, computed, HostBinding, input, model, Signal, signal, ViewEncapsulation, WritableSignal } from '@angular/core';
-import { ButtonComponent } from '@lucca-front/ng/button';
+import { ChangeDetectionStrategy, Component, computed, HostBinding, input, model, Signal, ViewEncapsulation } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { LuccaIcon } from '@lucca-front/icons';
 import { PopoverDirective } from '@lucca-front/ng/popover2';
 import { DateInputComponent } from '../../date2/date-input/date-input.component';
-import { FormsModule } from '@angular/forms';
 import { IconComponent } from '../../icon/icon.component';
-import { LuccaIcon } from '@lucca-front/icons';
 
 @Component({
 	selector: 'lu-filter-pill',
 	standalone: true,
-	imports: [ButtonComponent, PopoverDirective, DateInputComponent, FormsModule, IconComponent],
+	imports: [PopoverDirective, DateInputComponent, FormsModule, IconComponent],
 	templateUrl: './filter-pill.component.html',
 	styleUrl: './filter-pill.component.scss',
 	encapsulation: ViewEncapsulation.None,
 	changeDetection: ChangeDetectionStrategy.OnPush,
+	host: {
+		class: 'filterPill',
+	},
 })
 export class FilterPillComponent {
 	// Un input "genre" placeholder pour aller dans le bouton, avec valeur par défaut

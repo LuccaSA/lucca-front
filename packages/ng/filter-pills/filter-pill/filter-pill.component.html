@@ -1,17 +1,24 @@
+<label class="filterPill-label" (click)="popoverRef.openPopover(true)">{{ label() }}</label>
 <button
-	luButton
+	class="filterPill-combobox"
 	type="button"
 	role="combobox"
 	[luPopover2]="pillContent"
+	[luPopoverNoCloseButton]="true"
 	#popoverRef="luPopover2"
 	[attr.aria-expanded]="popoverRef.opened()"
 >
-	{{ label() }}: {{ valueDisplay() }}
-	<button type="button" class="filterPill-clear" (click)="$event.stopPropagation();clear()">TODO clear</button>
-	<span class="filterPill-toggle">
-		<lu-icon [icon]="icon()" size="S"></lu-icon>
-	</span>
+	{{ valueDisplay() }}
 </button>
+<button type="button" class="filterPill-clear" (click)="$event.stopPropagation(); clear()">
+	<lu-icon icon="signClose" size="XS" alt="Vider ce champ"></lu-icon>
+</button>
+<button type="button" aria-hidden="true" tabindex="-1" class="filterPill-toggle" (click)="popoverRef.openPopover(true)">
+	<lu-icon [icon]="icon()" size="S"></lu-icon>
+</button>
+
 <ng-template #pillContent>
-	<lu-date-input noPopover [(ngModel)]="value"></lu-date-input>
+	<div class="pr-u-padding100">
+		<lu-date-input style="max-width: none" [noPopover]="true" [(ngModel)]="value"></lu-date-input>
+	</div>
 </ng-template>

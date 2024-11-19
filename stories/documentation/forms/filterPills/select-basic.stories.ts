@@ -37,7 +37,7 @@ function getTemplate(args: SelectBasicStory): string {
 		${args.value ? args.value : 'Sélectionner une valeur'}
 	</button>
 	<button type="button" class="filterPill-clear" >
-		<lu-icon icon="signClose" alt="Vider ce champ" size="S" />
+		<lu-icon icon="signClose" alt="Vider ce champ" size="XS" />
 	</button>
 	<button type="button" aria-hidden="true" tabindex="-1" class="filterPill-toggle">
 		<lu-icon icon="arrowChevronBottom" size="S" />
