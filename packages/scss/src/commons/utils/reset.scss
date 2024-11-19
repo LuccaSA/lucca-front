@@ -33,11 +33,19 @@
 @mixin clearfix($suffix: '') {
 	&::before,
 	&::after {
-		content: ' ';
-		display: table;
+		content: ' ' #{$suffix};
+		display: table #{$suffix};
 	}
 
 	&:after {
-		clear: both;
+		clear: both #{$suffix};
+	}
+}
+
+@mixin summary($suffix: '') {
+	list-style: none #{$suffix};
+
+	&::-webkit-details-marker {
+		display: none #{$suffix};
 	}
 }
