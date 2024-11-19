@@ -1,9 +1,11 @@
 <ng-container *ngIf="hasPicture; else displayInitials">
 	<img class="avatar-picture" [src]="pictureHref" alt="" (error)="pictureError()" [loading]="imageLoadingAttribute" />
 </ng-container>
-
 <ng-template #displayInitials>
 	<div class="avatar-picture" [ngStyle]="style">
 		<span class="avatar-picture-initials">{{ initials }}</span>
 	</div>
 </ng-template>
+@if (label) {
+<span class="avatar-label"><span class="avatar-label-content">{{label}}</span></span>
+}

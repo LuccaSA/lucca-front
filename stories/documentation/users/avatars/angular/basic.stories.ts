@@ -7,13 +7,14 @@ import { bob, georges, squidwards } from '../../user.mocks';
 	selector: 'user-picture-stories',
 	standalone: true,
 	imports: [LuUserPictureModule],
-	template: `<lu-user-picture [user]="user" [displayFormat]="displayFormat" data-testid="lu-user-picture" [class]="sizes" [class.mod-placeholder]="placeholder"></lu-user-picture>`,
+	template: `<lu-user-picture [label]="label" [user]="user" [displayFormat]="displayFormat" data-testid="lu-user-picture" [class]="sizes" [class.mod-placeholder]="placeholder"></lu-user-picture>`,
 })
 class UserPictureStory {
 	@Input() user: ILuUser;
 	@Input() @Optional() sizes: string;
 	@Input() @Optional() placeholder: boolean;
 	@Input() @Optional() displayFormat: LuDisplayInitials;
+	@Input() @Optional() label: string;
 }
 
 export default {
@@ -41,6 +42,11 @@ export default {
 			},
 			description: '[v16.1]',
 		},
+		label: {
+			control: {
+				type: 'text',
+			},
+		},
 	},
 } as Meta;
 
@@ -54,6 +60,7 @@ Basic.args = {
 	sizes: '',
 	placeholder: false,
 	displayFormat: LuDisplayInitials.firstlast,
+	label: '',
 };
 
 const code = `
@@ -79,7 +86,7 @@ class UserPictureStory {
 
 Basic.parameters = {
 	// Disable controls as they are not modifiable because of ComponentWrapper
-	controls: { include: ['user', 'displayFormat', 'sizes', 'placeholder'] },
+	controls: { include: ['user', 'displayFormat', 'sizes', 'placeholder', 'label'] },
 	docs: {
 		source: {
 			language: 'ts',

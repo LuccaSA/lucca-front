@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, OnChanges, Optional, inject, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, Input, OnChanges, Optional, ViewEncapsulation } from '@angular/core';
 import { LU_DEFAULT_DISPLAY_POLICY, LuDisplayFormat, LuDisplayFullname, LuDisplayHybrid, LuDisplayInitials, luUserDisplay } from '../display';
 
 export interface LuUserPictureUserInput {
@@ -45,6 +45,10 @@ export class LuUserPictureComponent implements OnChanges {
 	@Input()
 	@Optional()
 	displayFormat: LuDisplayInitials = displayPictureFormatRecord[inject(LU_DEFAULT_DISPLAY_POLICY)];
+
+	@Input()
+	@Optional()
+	label: string;
 
 	/**
 	 * Image loading attribute

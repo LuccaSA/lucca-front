@@ -8,6 +8,7 @@
 	border-radius: var(--commons-borderRadius-full);
 	width: var(--components-avatar-size);
 	aspect-ratio: 1;
+	position: relative;
 
 	@at-root ($atRoot) {
 		.avatar-picture,
@@ -86,6 +87,22 @@
 			width: var(--components-avatar-size);
 			height: var(--components-avatar-size);
 			font-size: var(--components-avatarWrapper-fontSize);
+		}
+
+		.avatar-label {
+			position: absolute;
+			inset: auto 0 calc(var(--pr-t-spacings-100) * -1);
+			display: flex;
+			justify-content: center;
+		}
+
+		.avatar-label-content {
+			background-color: var(--palettes-600, var(--palettes-lucca-600));
+			color: var(--palettes-0, var(--palettes-lucca-0));
+			border-radius: var(--commons-borderRadius-M);
+			font-size: var(--sizes-XS-fontSize);
+			line-height: var(--sizes-XS-lineHeight);
+			padding: 0 var(--pr-t-spacings-50);
 		}
 	}
 }
