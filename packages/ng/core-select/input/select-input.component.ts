@@ -1,27 +1,27 @@
 /* eslint-disable @angular-eslint/no-output-on-prefix */
 import { OverlayConfig, OverlayContainer } from '@angular/cdk/overlay';
 import {
+	booleanAttribute,
 	ChangeDetectorRef,
+	computed,
 	Directive,
 	ElementRef,
 	EventEmitter,
 	HostBinding,
 	HostListener,
+	inject,
 	Input,
+	model,
 	OnDestroy,
 	OnInit,
 	Output,
 	TemplateRef,
 	Type,
 	ViewChild,
-	booleanAttribute,
-	computed,
-	inject,
-	model,
 } from '@angular/core';
 import { ControlValueAccessor } from '@angular/forms';
-import { PortalContent, getIntl } from '@lucca-front/ng/core';
-import { BehaviorSubject, Observable, ReplaySubject, Subject, defer, map, of, startWith, switchMap, take } from 'rxjs';
+import { getIntl, PortalContent } from '@lucca-front/ng/core';
+import { BehaviorSubject, defer, map, Observable, of, ReplaySubject, startWith, Subject, switchMap, take } from 'rxjs';
 import { LuOptionGrouping, LuSimpleSelectDefaultOptionComponent } from '../option';
 import { LuSelectPanelRef } from '../panel';
 import { CoreSelectAddOptionStrategy, LuOptionComparer, LuOptionContext, SELECT_LABEL, SELECT_LABEL_ID } from '../select.model';
@@ -339,10 +339,12 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 		this.value = value;
 	}
 
-	public updateValue(value: TValue, skipPanelOpen = false): void {
+	public updateValue(value: TValue, skipPanelOpen = false, noClear = false): void {
 		this.value = value;
-		this.emptyClue();
-		this.clueChanged('', skipPanelOpen);
+		if (!noClear) {
+			this.emptyClue();
+			this.clueChanged('', skipPanelOpen);
+		}
 		this.onChange?.(value);
 		this.onTouched?.();
 	}

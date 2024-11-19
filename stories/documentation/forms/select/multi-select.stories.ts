@@ -43,6 +43,9 @@ const generateStory = getStoryGenerator<LuMultiSelectInputStoryComponent>({
 	...coreSelectStory,
 	argTypes: {
 		...coreSelectStory.argTypes,
+		keepSearchAfterSelection: {
+			type: 'boolean',
+		},
 		selectedLegumes: HiddenArgType,
 		valuesTpl: HiddenArgType,
 		panelHeaderTpl: HiddenArgType,
@@ -118,6 +121,7 @@ export const WithMultiDisplayer = generateStory({
 	[(ngModel)]="selectedLegumes"
 	placeholder="Placeholder..."
 	[options]="legumes | filterLegumes:clue"
+	[keepSearchAfterSelection]="keepSearchAfterSelection"
 	(clueChange)="clue = $event"
 >
 	<ng-container *luMultiDisplayer="let values; select: selectRef">
@@ -430,7 +434,12 @@ export const AddOption = generateStory({
 	storyPartial: {
 		argTypes: {
 			addOptionLabel: { control: { type: 'text' } },
-			addOptionStrategy: { control: { type: 'select', options: ['never', 'always', 'if-empty-clue', 'if-not-empty-clue'] } },
+			addOptionStrategy: {
+				control: {
+					type: 'select',
+					options: ['never', 'always', 'if-empty-clue', 'if-not-empty-clue'],
+				},
+			},
 		},
 		args: {
 			addOptionLabel: 'Ajouter un légume',
