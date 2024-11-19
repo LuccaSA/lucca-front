@@ -57,26 +57,26 @@
 		}
 
 		.filterPill-clear {
-			@include reset.button;
-
+			margin-left: var(--pr-t-spacings-50);
 			position: relative;
 			z-index: 1;
-			margin-left: var(--pr-t-spacings-50);
 			display: var(--components-filterPills-clear-display);
-			padding: var(--pr-t-spacings-25);
-			margin-block: calc(var(--pr-t-spacings-25) * -1);
-			width: calc(var(--pr-t-spacings-100) + var(--pr-t-spacings-200));
-			height: calc(var(--pr-t-spacings-100) + var(--pr-t-spacings-200));
-			flex-shrink: 0;
-			border-radius: 50%;
-			background-color: var(--palettes-product-200);
-			background-clip: content-box;
-			align-items: center;
-			justify-content: center;
 
-			&:focus-visible {
-				@include a11y.focusVisible($offset: 0);
-			}
+			// @include reset.button;
+			// padding: var(--pr-t-spacings-25);
+			// margin-block: calc(var(--pr-t-spacings-25) * -1);
+			// width: calc(var(--pr-t-spacings-100) + var(--pr-t-spacings-200));
+			// height: calc(var(--pr-t-spacings-100) + var(--pr-t-spacings-200));
+			// flex-shrink: 0;
+			// border-radius: 50%;
+			// background-color: var(--palettes-product-200);
+			// background-clip: content-box;
+			// align-items: center;
+			// justify-content: center;
+
+			// &:focus-visible {
+			// 	@include a11y.focusVisible($offset: 0);
+			// }
 		}
 
 		.filterPill-combobox {
