@@ -22,9 +22,6 @@ export default {
 		checked: {
 			control: 'boolean',
 		},
-		mixed: {
-			control: 'boolean',
-		},
 		disabled: {
 			control: 'boolean',
 		},
@@ -33,20 +30,19 @@ export default {
 
 function getTemplate(args: CheckboxBasicStory): string {
 	const checkedAttr = args.checked ? `checked="checked"` : ``;
-	const mixedAttr = args.mixed ? `aria-checked="mixed"` : ``;
 	const disabledAttr = args.disabled ? `disabled="disabled"` : ``;
 
 	return `<div class="filterPill">
+	<label for="input1" class="filterPill-label" luTooltip="${args.label}" luTooltipWhenEllipsis="true">
+		${args.label}
+		<span class="filterPill-label-placeholder" aria-hidden="true" data-content-before="${args.label}"></span>
+	</label>
 	<span class="filterPill-checkbox">
-		<input type="checkbox" id="input1" class="filterPill-checkbox-input" ${checkedAttr} ${mixedAttr} ${disabledAttr} />
+		<input type="checkbox" id="input1" class="filterPill-checkbox-input" ${checkedAttr} ${disabledAttr} />
     	<span class="filterPill-checkbox-icon" aria-hidden="true">
       		<span class="filterPill-checkbox-icon-check"></span>
 		</span>
     </span>
-	<label for="input1" class="filterPill-label" luTooltip="${args.label}" luTooltipWhenEllipsis="true" luTooltipOnlyForDisplay="true">
-		${args.label}
-		<span class="filterPill-label-placeholder" aria-hidden="true" data-content-before="${args.label}"></span>
-	</label>
 </div>`;
 }
 
@@ -59,6 +55,5 @@ export const Basic = Template.bind({});
 Basic.args = {
 	label: 'Lorem ipsum dolor',
 	checked: false,
-	mixed: false,
 	disabled: false,
 };
