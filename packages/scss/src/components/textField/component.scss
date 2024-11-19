@@ -87,6 +87,10 @@
 				&:not([rows]) {
 					height: calc(3lh + var(--component-textField-padding) * 2);
 				}
+
+				&[rows='1'] {
+					min-height: calc(1lh + var(--component-textField-padding) * 2);
+				}
 			}
 		}
 
