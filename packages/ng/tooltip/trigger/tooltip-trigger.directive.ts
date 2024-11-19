@@ -2,23 +2,25 @@ import { FlexibleConnectedPositionStrategy, HorizontalConnectionPos, OriginConne
 import { ComponentPortal } from '@angular/cdk/portal';
 import {
 	AfterContentInit,
+	booleanAttribute,
 	ChangeDetectorRef,
 	DestroyRef,
 	Directive,
 	ElementRef,
 	HostBinding,
 	HostListener,
+	inject,
+	input,
 	Input,
+	numberAttribute,
 	OnDestroy,
 	Renderer2,
-	booleanAttribute,
-	inject,
-	numberAttribute,
+	signal,
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { SafeHtml } from '@angular/platform-browser';
 import { LuPopoverPosition } from '@lucca-front/ng/popover';
-import { BehaviorSubject, Observable, Subject, combineLatest, merge, startWith, switchMap, timer } from 'rxjs';
+import { BehaviorSubject, combineLatest, merge, Observable, startWith, Subject, switchMap, timer } from 'rxjs';
 import { debounce, debounceTime, filter, map } from 'rxjs/operators';
 import { LuTooltipPanelComponent } from '../panel';
 import { EllipsisRuler } from './ellipsis.ruler';
@@ -42,8 +44,7 @@ export class LuTooltipTriggerDirective implements AfterContentInit, OnDestroy {
 
 	#cdr = inject(ChangeDetectorRef);
 
-	@Input()
-	luTooltip: string | SafeHtml;
+	luTooltip = input<string | SafeHtml>();
 
 	#openDelay$ = new BehaviorSubject<number>(300);
 
@@ -197,10 +198,10 @@ export class LuTooltipTriggerDirective implements AfterContentInit, OnDestroy {
 			.subscribe(({ overlayX, overlayY }) => {
 				ref.instance.setPanelPosition(overlayX, overlayY);
 			});
-		if (this.luTooltip) {
+		if (this.luTooltip()) {
 			ref.instance.content = this.luTooltip;
 		} else if (this.luTooltipWhenEllipsis) {
-			ref.instance.content = this.#host.nativeElement.innerText;
+			ref.instance.content = signal(this.#host.nativeElement.innerText);
 		}
 		ref.instance.id = this.ariaDescribedBy;
 		// On tooltip leave => trigger close
