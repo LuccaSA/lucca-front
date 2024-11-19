@@ -29,7 +29,7 @@ export default {
 			},
 		},
 		rows: {
-			control: { type: 'number', min: 2 },
+			control: { type: 'number' },
 			description: '[v18.1]',
 		},
 		counter: {
