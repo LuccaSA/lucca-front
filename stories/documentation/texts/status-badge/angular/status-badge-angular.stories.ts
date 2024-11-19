@@ -1,14 +1,14 @@
 import { StatusBadgeComponent } from '@lucca-front/ng/statusBadge';
 import { Meta, moduleMetadata, StoryFn } from '@storybook/angular';
 
-interface StatusBadgeAngularStory {
+interface StatusBadgeBasicStory {
 	label: string;
 	size: string;
 	palette: string;
 }
 
 export default {
-	title: 'Documentation/Texts/StatusBadge',
+	title: 'Documentation/Texts/StatusBadge/Angular',
 	decorators: [
 		moduleMetadata({
 			imports: [StatusBadgeComponent],
@@ -35,16 +35,16 @@ export default {
 	},
 } as Meta;
 
-function getTemplate(args: StatusBadgeAngularStory): string {
+function getTemplate(args: StatusBadgeBasicStory): string {
 	const s = args.size ? `size="${args.size}"` : '';
 	const p = args.palette ? `palette="${args.palette}"` : '';
 	return `<lu-status-badge ${p} ${s} label="${args.label}" />`;
 }
 
-const Template: StoryFn<StatusBadgeAngularStory> = (args) => ({
+const Template: StoryFn<StatusBadgeBasicStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Angular = Template.bind({});
-Angular.args = { label: 'Lorem ipsum dolor', palette: '', size: '' };
+export const Basic = Template.bind({});
+Basic.args = { label: 'Status', palette: '', size: '' };
