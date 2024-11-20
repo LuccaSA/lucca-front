@@ -283,7 +283,7 @@ describe('LuMultiSelectInputComponent', () => {
 				const act = () => componentInstance.writeValue([options[0]]);
 
 				// Assert
-				expect(act).toThrow('MultiSelectWithSelectAllDirective does not support array values. Pass a LuMultiSelectWithSelectAllValue<TValue>.');
+				expect(act).toThrow('MultiSelectWithSelectAllDirective does not support array values. The form value or ngModel must be a LuMultiSelection<TValue>.');
 			});
 
 			it('should work with not empty initial value', () => {
