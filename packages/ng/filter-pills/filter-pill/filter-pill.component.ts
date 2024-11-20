@@ -1,64 +1,116 @@
-import { ChangeDetectionStrategy, Component, computed, contentChild, effect, HostBinding, input, ViewEncapsulation } from '@angular/core';
+import {
+	ChangeDetectionStrategy,
+	Component,
+	computed,
+	contentChild,
+	effect,
+	forwardRef,
+	HostBinding,
+	inject,
+	input,
+	LOCALE_ID,
+	signal,
+	TemplateRef,
+	viewChild,
+	ViewEncapsulation,
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { LuccaIcon } from '@lucca-front/icons';
 import { PopoverDirective } from '@lucca-front/ng/popover2';
 import { IconComponent } from '../../icon/icon.component';
-import { FILTER_PILL_INPUT_COMPONENT } from '../core/filter-pill-input-component';
+import { NgTemplateOutlet } from '@angular/common';
+import { FILTER_PILL_HOST_COMPONENT, FILTER_PILL_INPUT_COMPONENT } from '../core/tokens';
+import { ConnectionPositionPair } from '@angular/cdk/overlay';
 
 @Component({
 	selector: 'lu-filter-pill',
 	standalone: true,
-	imports: [PopoverDirective, FormsModule, IconComponent],
+	imports: [PopoverDirective, FormsModule, IconComponent, NgTemplateOutlet],
 	templateUrl: './filter-pill.component.html',
 	styleUrl: './filter-pill.component.scss',
 	encapsulation: ViewEncapsulation.None,
 	changeDetection: ChangeDetectionStrategy.OnPush,
+	providers: [
+		{
+			provide: FILTER_PILL_HOST_COMPONENT,
+			useExisting: forwardRef(() => FilterPillComponent),
+		},
+	],
 	host: {
 		class: 'filterPill',
 	},
 })
 export class FilterPillComponent {
-	inputComponentRef = contentChild(FILTER_PILL_INPUT_COMPONENT);
-	// Avoir un CVA sur la barre de filtres
-
+	// TODO Avoir un CVA sur la barre de filtres
 	// TODO Selects: Fournir une couche autour d'overlayRef qui décide d'attacher le panel sur un overlay ou un ng-container dans le cas d'un pill
 
-	/**
-	 * lu-multi-select
-	 * 		// injection du parent pour lui set le portalContent
-	 * 		ng-container *luPillDisplayer="let label=label; let placeholder=placeholder; let isEmpty=isEmpty"
-	 *
-	 */
+	#locale = inject(LOCALE_ID);
 
-	// Un input "genre" placeholder pour aller dans le bouton, avec valeur par défaut
-	placeholder = input<string>('TODO i18n placeholder');
+	inputComponentRef = contentChild(FILTER_PILL_INPUT_COMPONENT);
 
-	icon = input<LuccaIcon>('arrowChevronBottom');
+	popoverRef = viewChild(PopoverDirective);
 
-	// DefaultIcon set par l'enfant pour combiner into une icône
+	pillTpl: TemplateRef<unknown>;
+
+	labelTpl = computed(() => this.customLabelTpl() || this.defaultLabelTpl());
+
+	defaultLabelTpl = viewChild<TemplateRef<unknown>>('defaultLabel');
+
+	customLabelTpl = signal<TemplateRef<unknown> | null>(null);
+
+	popoverPositions: ConnectionPositionPair[] = [
+		new ConnectionPositionPair({ originX: 'start', originY: 'bottom' }, { overlayX: 'start', overlayY: 'top' }, -8, 6),
+		new ConnectionPositionPair({ originX: 'start', originY: 'top' }, { overlayX: 'start', overlayY: 'bottom' }, -8, 6),
+	];
 
 	label = input.required<string>();
 
-	#inputIsEmpty = computed(() => this.inputComponentRef()?.isFilterPillEmpty());
+	placeholder = input<string>('TODO i18n placeholder');
+
+	icon = input<LuccaIcon>();
+
+	defaultIcon = computed<LuccaIcon>(() => this.inputComponentRef()?.getDefaultFilterPillIcon?.() || 'arrowChevronBottom');
+
+	displayedIcon = computed(() => this.icon() || this.defaultIcon());
+
+	shouldHideCombobox = computed(() => this.inputComponentRef()?.hideCombobox?.() || false);
+
+	inputIsEmpty = computed(() => this.inputComponentRef()?.isFilterPillEmpty());
+
+	shouldShowColon = computed(() => this.inputComponentRef()?.showColon?.() || !this.inputIsEmpty());
+
+	colonDisplay = computed(() => {
+		if (!this.shouldShowColon()) {
+			return '';
+		}
+		if (this.#locale === 'fr') {
+			return ' :';
+		}
+		return ':';
+	});
 
 	@HostBinding('class.is-empty')
 	get isEmpty() {
-		return this.#inputIsEmpty();
+		return this.inputIsEmpty();
+	}
+
+	@HostBinding('class.is-comboboxHidden')
+	get hideCombobox() {
+		return this.shouldHideCombobox();
 	}
 
 	constructor() {
 		effect(() => {
 			this.inputComponentRef()?.enableFilterPillMode();
+			this.inputComponentRef()?.registerFilterPillClosePopover(this.closePopover);
 		});
 	}
 
-	// Toujours un clear, button.filterPill-clear CSS gère sa visibilité via is-empty
-
-	// à l'ouverture du popover, son premier champ prends le focus
-
-	// Garder en tête le cas de la checkbox pill
+	closePopover = () => {
+		this.popoverRef().close();
+	};
 
 	clear(): void {
-		//TODO
+		this.inputComponentRef()?.clearFilterPillValue();
 	}
 }

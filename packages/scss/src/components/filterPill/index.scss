@@ -21,6 +21,10 @@
 			@include empty;
 		}
 
+		&.is-comboboxHidden {
+			@include comboboxHidden;
+		}
+
 		&:has(.filterPill-combobox[aria-expanded='true']) {
 			@include opened;
 		}

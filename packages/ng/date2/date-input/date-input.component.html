@@ -22,7 +22,7 @@
 
 		<div class="textField-input-affix">
 			@if (clearable() && date.value !== '') {
-			<button class="textField-input-affix-clear clear" type="button" (click)="clear(date)">
+			<button class="textField-input-affix-clear clear" type="button" (click)="clear()">
 				<span aria-hidden="true" class="lucca-icon icon-signClose"></span>
 				<span class="u-mask">{{ intl.clear }}</span>
 			</button>
@@ -48,6 +48,8 @@
 <ng-container *ngTemplateOutlet="calendar"></ng-container>
 }
 
+<div *luFilterPillDisplayer>{{ displayValue() }}</div>
+
 <ng-template #calendar>
 	<div class="calendarWrapper">
 		<div class="calendarWrapper-navigation mod-prev">
@@ -71,7 +73,7 @@
 				[(tabbableDate)]="tabbableDate"
 				[getCellInfo]="combinedGetCellInfo"
 				[ranges]="ranges()"
-				(dateClicked)="selectedDate.set($event);currentDate.set($event);popoverRef.close();date.focus()"
+				(dateClicked)="dateClicked($event, popoverRef)"
 				(nextPage)="move(1)"
 				(previousPage)="move(-1)"
 				[(displayMode)]="calendarMode"

@@ -33,13 +33,13 @@
 				z-index: 1;
 			}
 
-			&::after {
-				content: var(--components-filterPills-label-contentAfter);
-			}
-
-			&:lang(fr) {
-				--components-filterPills-label-contentAfter: var(--components-filterPills-label-contentAfterWithSpace);
-			}
+			//&::after {
+			//	content: var(--components-filterPills-label-contentAfter);
+			//}
+			//
+			//&:lang(fr) {
+			//	--components-filterPills-label-contentAfter: var(--components-filterPills-label-contentAfterWithSpace);
+			//}
 		}
 
 		.filterPill-toggle {

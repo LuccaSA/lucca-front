@@ -54,6 +54,12 @@
 	}
 }
 
+@mixin comboboxHidden {
+	.filterPill-combobox {
+		@include a11y.mask;
+	}
+}
+
 @mixin notEmpty {
 	--components-filterPills-borderColor: var(--palettes-product-300);
 	--components-filterPills-backgroundColor: var(--palettes-product-50);

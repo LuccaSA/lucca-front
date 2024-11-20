@@ -14,13 +14,13 @@ import { getDateFormat } from '../date-format';
 import { LU_DATE2_TRANSLATIONS } from '../date2.translate';
 import { comparePeriods, startOfPeriod } from '../utils';
 import { NgTemplateOutlet } from '@angular/common';
-import { FILTER_PILL_INPUT_COMPONENT, FilterPillInputComponent } from '../../filter-pills/core/filter-pill-input-component';
+import { FILTER_PILL_INPUT_COMPONENT, FilterPillDisplayerDirective, FilterPillInputComponent } from '@lucca-front/ng/filter-pills';
 import { LuccaIcon } from '@lucca-front/icons';
 
 @Component({
 	selector: 'lu-date-input',
 	standalone: true,
-	imports: [PopoverDirective, Calendar2Component, IconComponent, InputDirective, NgTemplateOutlet],
+	imports: [PopoverDirective, Calendar2Component, IconComponent, InputDirective, NgTemplateOutlet, FilterPillDisplayerDirective],
 	templateUrl: './date-input.component.html',
 	styleUrl: './date-input.component.scss',
 	encapsulation: ViewEncapsulation.None,
@@ -94,6 +94,8 @@ export class DateInputComponent implements ControlValueAccessor, Validator, Filt
 
 	calendar = viewChild(Calendar2Component);
 
+	inputRef = viewChild<ElementRef<HTMLInputElement>>('date');
+
 	displayValue = computed(() => {
 		if (this.selectedDate() && this.isValidDate(this.selectedDate())) {
 			let formatter: Intl.DateTimeFormat;
@@ -132,6 +134,8 @@ export class DateInputComponent implements ControlValueAccessor, Validator, Filt
 	noPopover = false;
 
 	isFilterPillEmpty = signal(true);
+
+	filterPillPopoverCloseFn?: () => void;
 
 	get isNavigationButtonFocused(): boolean {
 		return [this.previousButton()?.nativeElement, this.nextButton()?.nativeElement].includes(document.activeElement);
@@ -174,8 +178,16 @@ export class DateInputComponent implements ControlValueAccessor, Validator, Filt
 		});
 	}
 
+	registerFilterPillClosePopover(closeFn: () => void): void {
+		this.filterPillPopoverCloseFn = closeFn;
+	}
+
 	enableFilterPillMode(): void {
 		this.noPopover = true;
+	}
+
+	clearFilterPillValue(): void {
+		this.clear();
 	}
 
 	getDefaultFilterPillIcon(): LuccaIcon {
@@ -259,8 +271,8 @@ export class DateInputComponent implements ControlValueAccessor, Validator, Filt
 		this.move(1);
 	}
 
-	clear(input: HTMLInputElement) {
-		input.value = '';
+	clear() {
+		this.inputRef().nativeElement.value = '';
 		this.selectedDate.set(null);
 		this.onTouched?.();
 	}
@@ -285,5 +297,15 @@ export class DateInputComponent implements ControlValueAccessor, Validator, Filt
 				this.tabbableDate.set(addMonths(this.tabbableDate(), direction));
 				break;
 		}
+	}
+
+	dateClicked(date: Date, popoverRef: PopoverDirective): void {
+		this.selectedDate.set(date);
+		this.currentDate.set(date);
+		if (!this.noPopover) {
+			popoverRef.close();
+			this.inputRef().nativeElement.focus();
+		}
+		this.filterPillPopoverCloseFn?.();
 	}
 }

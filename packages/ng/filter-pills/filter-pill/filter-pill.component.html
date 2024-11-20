@@ -1,23 +1,29 @@
-<label class="filterPill-label" (click)="popoverRef.openPopover(true)">{{ label() }}</label>
+<label class="filterPill-label" (click)="popoverRef.openPopover(true)">
+	<ng-container
+		*ngTemplateOutlet="labelTpl(); context:{label: label(), isEmpty: inputIsEmpty(), placeholder: placeholder()}"
+	></ng-container>
+</label>
 <button
 	class="filterPill-combobox"
 	type="button"
 	role="combobox"
 	[luPopover2]="pillContent"
 	[luPopoverNoCloseButton]="true"
+	[customPositions]="popoverPositions"
 	#popoverRef="luPopover2"
 	[attr.aria-expanded]="popoverRef.opened()"
 >
-	LA VALEUR ICI
+	<ng-container *ngTemplateOutlet="pillTpl; context:{label: label(), isEmpty: inputIsEmpty(), placeholder: placeholder()}"></ng-container>
 </button>
-<button type="button" class="filterPill-clear" (click)="$event.stopPropagation(); clear()">
-	<lu-icon icon="signClose" size="XS" alt="Vider ce champ"></lu-icon>
+<button type="button" class="filterPill-clear clear mod-inverted palette-product" (click)="$event.stopPropagation(); clear()">
+	<span class="u-mask">Vider ce champ</span>
 </button>
 <button type="button" aria-hidden="true" tabindex="-1" class="filterPill-toggle" (click)="popoverRef.openPopover(true)">
-	<lu-icon [icon]="icon()" size="S"></lu-icon>
+	<lu-icon [icon]="displayedIcon()" size="S"></lu-icon>
 </button>
 <ng-template #pillContent>
 	<div class="pr-u-padding100">
 		<ng-content></ng-content>
 	</div>
 </ng-template>
+<ng-template #defaultLabel>{{ label() }}{{ colonDisplay() }}</ng-template>
