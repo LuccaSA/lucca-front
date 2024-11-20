@@ -107,7 +107,7 @@
 			</div>
 			<div class="calendarWrapper-content" tabindex="-1">
 				<lu-calendar2
-					removeYearOverflow
+					[removeYearOverflow]="true"
 					[hideToday]="hideToday()"
 					[date]="currentDate()"
 					(dateChange)="currentDateChangeFromCalendar($event)"
@@ -125,7 +125,7 @@
 				></lu-calendar2>
 				@if (hasTwoCalendars()) {
 				<lu-calendar2
-					removeYearOverflow
+					[removeYearOverflow]="true"
 					[hideToday]="hideToday()"
 					[date]="currentRightDate()"
 					(dateChange)="currentDateChangeFromCalendar($event)"
