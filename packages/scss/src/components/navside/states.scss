@@ -43,16 +43,3 @@
 @mixin mobileHidden {
 	display: none;
 }
-
-@mixin overlay {
-	&,
-	body {
-		touch-action: none;
-		overscroll-behavior: none;
-		-webkit-overflow-scrolling: auto;
-	}
-
-	body {
-		overflow: hidden !important;
-	}
-}

@@ -1,9 +1,12 @@
 // This file contains all the connections required to make the component functional.
 // The component’s mixins are requested, then assigned to classes.
-// To add the component to the list of all existing components, call it from `components/index` with `@forward 'sample';`.
-// Modifiers and states are optional and must be prefixed by `.mod-` and `.is-`.
+// To add the component to the list of all existing components, call it from `components/index` with `@use 'sample';`.
+// Modifiers and states are optional and must be prefixed by `.mod-`, `.rwd-` and `.is-`.
+// A responsive mixin and varible define the default behaviour but can be overridden. All this settings must be preserved.
 
 @use 'exports' as *;
+@use '@lucca-front/scss/src/commons/utils/media';
+@use '@lucca-front/scss/src/commons/utils/container';
 
 .sample {
 	@include vars;
@@ -16,4 +19,38 @@
 	&.is-sampleStateA {
 		@include sampleStateA;
 	}
+}
+
+@mixin responsive(
+	$breakpoint: 'M',
+	$breakpoint2: null,
+	$inverted: false,
+	$at: 'container',
+	$containerName: 'sample',
+	$responsiveSelector: null,
+	$axis: 'width',
+	$selector: '.sample'
+) {
+	@if ($at == 'container') {
+		@include container.auto($containerName);
+	}
+
+	#{if($responsiveSelector, $selector + '.rwd-' + $responsiveSelector, $selector)} {
+		@include media.query(
+			$breakpoint: $breakpoint,
+			$breakpoint2: $breakpoint2,
+			$inverted: $inverted,
+			$at: $at,
+			$containerName: $containerName,
+			$axis: $axis
+		) {
+			@include sampleBehaviour;
+		}
+	}
+}
+
+$defaultResponsive: true !default;
+
+@if $defaultResponsive {
+	@include responsive;
 }

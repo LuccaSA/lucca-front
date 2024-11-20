@@ -56,13 +56,7 @@ function getTemplate(args: LoadingsBasicStory): string {
 const Template: StoryFn<LoadingsBasicStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
-	styles: [
-		`
-		:host {
-			display: block;
-		}`,
-		args.invert === true ? ':host { background-color: #333333;  }' : '',
-	],
+	styles: [args.invert === true ? ':host { background-color: #333333;  }' : ''],
 });
 
 export const Basic = Template.bind({});
