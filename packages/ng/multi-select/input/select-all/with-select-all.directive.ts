@@ -110,7 +110,7 @@ export class LuMultiSelectWithSelectAllDirective<TValue> extends ɵIsSelectedStr
 
 	writeValue(value: TValue[] | LuMultiSelection<TValue>): void {
 		if (Array.isArray(value)) {
-			throw new Error('MultiSelectWithSelectAllDirective does not support array values. Pass a LuMultiSelectWithSelectAllValue<TValue>.');
+			throw new Error('MultiSelectWithSelectAllDirective does not support array values. The form value or ngModel must be a LuMultiSelection<TValue>.');
 		}
 
 		let mode: LuMultiSelectionMode;
