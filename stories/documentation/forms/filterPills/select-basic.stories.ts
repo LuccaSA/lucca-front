@@ -9,7 +9,7 @@ interface SelectBasicStory {
 }
 
 export default {
-	title: 'Documentation/Forms/FiltersPills/Select',
+	title: 'Documentation/Forms/FiltersPills',
 	decorators: [
 		moduleMetadata({
 			imports: [LuTooltipModule, IconComponent],
@@ -36,7 +36,7 @@ function getTemplate(args: SelectBasicStory): string {
 	<button class="filterPill-combobox" type="button" id="input1" role="combobox" aria-expanded="${args.expanded}" ${tooltip} luTooltipWhenEllipsis="true">
 		${args.value ? args.value : 'Sélectionner une valeur'}
 	</button>
-	<button type="button" class="filterPill-clear clear mod-inverted palette-product"><span class="u-mask">Vider ce champ</span></button>
+	<button type="button" class="filterPill-clear clear"><span class="u-mask">Vider ce champ</span></button>
 	<button type="button" aria-hidden="true" tabindex="-1" class="filterPill-toggle">
 		<lu-icon icon="arrowChevronBottom" size="S" />
 	</button>
@@ -48,8 +48,8 @@ const Template: StoryFn<SelectBasicStory> = (args) => ({
 	template: getTemplate(args),
 });
 
-export const Basic = Template.bind({});
-Basic.args = {
+export const Select = Template.bind({});
+Select.args = {
 	label: 'Lorem ipsum',
 	value: 'Lorem ipsum',
 	expanded: false,

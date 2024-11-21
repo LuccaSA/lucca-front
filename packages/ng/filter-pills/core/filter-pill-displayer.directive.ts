@@ -12,12 +12,14 @@ interface FilterPillDisplayerContext {
 	standalone: true,
 })
 export class FilterPillDisplayerDirective {
-	#filterPillComponentRef = inject(FilterPillComponent);
+	#filterPillComponentRef = inject(FilterPillComponent, { optional: true });
 
 	#templateRef = inject(TemplateRef);
 
 	constructor() {
-		this.#filterPillComponentRef.pillTpl = this.#templateRef;
+		if (this.#filterPillComponentRef) {
+			this.#filterPillComponentRef.pillTpl = this.#templateRef;
+		}
 	}
 
 	public static ngTemplateContextGuard(_dir: FilterPillDisplayerDirective, ctx: unknown): ctx is FilterPillDisplayerContext {

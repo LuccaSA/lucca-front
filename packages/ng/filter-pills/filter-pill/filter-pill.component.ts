@@ -1,3 +1,5 @@
+import { ConnectionPositionPair } from '@angular/cdk/overlay';
+import { NgTemplateOutlet } from '@angular/common';
 import {
 	ChangeDetectionStrategy,
 	Component,
@@ -17,15 +19,16 @@ import {
 import { FormsModule } from '@angular/forms';
 import { LuccaIcon } from '@lucca-front/icons';
 import { PopoverDirective } from '@lucca-front/ng/popover2';
+import { FormFieldComponent } from '../../form-field/form-field.component';
 import { IconComponent } from '../../icon/icon.component';
-import { NgTemplateOutlet } from '@angular/common';
 import { FILTER_PILL_HOST_COMPONENT, FILTER_PILL_INPUT_COMPONENT } from '../core/tokens';
-import { ConnectionPositionPair } from '@angular/cdk/overlay';
+
+let nextId = 0;
 
 @Component({
 	selector: 'lu-filter-pill',
 	standalone: true,
-	imports: [PopoverDirective, FormsModule, IconComponent, NgTemplateOutlet],
+	imports: [PopoverDirective, FormsModule, IconComponent, NgTemplateOutlet, FormFieldComponent, FormFieldComponent],
 	templateUrl: './filter-pill.component.html',
 	styleUrl: './filter-pill.component.scss',
 	encapsulation: ViewEncapsulation.None,
@@ -46,6 +49,8 @@ export class FilterPillComponent {
 
 	#locale = inject(LOCALE_ID);
 
+	id = `filterPill-combobox-${nextId++}`;
+
 	inputComponentRef = contentChild(FILTER_PILL_INPUT_COMPONENT);
 
 	popoverRef = viewChild(PopoverDirective);
@@ -59,13 +64,14 @@ export class FilterPillComponent {
 	customLabelTpl = signal<TemplateRef<unknown> | null>(null);
 
 	popoverPositions: ConnectionPositionPair[] = [
-		new ConnectionPositionPair({ originX: 'start', originY: 'bottom' }, { overlayX: 'start', overlayY: 'top' }, -8, 6),
-		new ConnectionPositionPair({ originX: 'start', originY: 'top' }, { overlayX: 'start', overlayY: 'bottom' }, -8, 6),
+		new ConnectionPositionPair({ originX: 'start', originY: 'bottom' }, { overlayX: 'start', overlayY: 'top' }, -14, 14),
+		new ConnectionPositionPair({ originX: 'start', originY: 'top' }, { overlayX: 'start', overlayY: 'bottom' }, -14, -16),
 	];
 
 	label = input.required<string>();
 
-	placeholder = input<string>('TODO i18n placeholder');
+	// TODO i18n placeholder
+	placeholder = input<string>('Sélectionner une valeur');
 
 	icon = input<LuccaIcon>();
 
@@ -84,7 +90,7 @@ export class FilterPillComponent {
 			return '';
 		}
 		if (this.#locale === 'fr') {
-			return ' :';
+			return ' :';
 		}
 		return ':';
 	});

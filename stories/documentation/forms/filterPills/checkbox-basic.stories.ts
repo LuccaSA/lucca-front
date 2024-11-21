@@ -9,7 +9,7 @@ interface CheckboxBasicStory {
 }
 
 export default {
-	title: 'Documentation/Forms/FiltersPills/Checkbox',
+	title: 'Documentation/Forms/FiltersPills',
 	decorators: [
 		moduleMetadata({
 			imports: [LuTooltipModule],
@@ -51,8 +51,8 @@ const Template: StoryFn<CheckboxBasicStory> = (args) => ({
 	template: getTemplate(args),
 });
 
-export const Basic = Template.bind({});
-Basic.args = {
+export const Checkbox = Template.bind({});
+Checkbox.args = {
 	label: 'Lorem ipsum dolor',
 	checked: false,
 	disabled: false,
