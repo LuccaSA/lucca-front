@@ -6,6 +6,7 @@ import { FieldType, FieldTypeConfig } from '@ngx-formly/core';
 	styleUrls: ['formly-field.common.scss', 'select.scss'],
 	templateUrl: './qualification.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
+	standalone: false,
 })
 // eslint-disable-next-line @angular-eslint/component-class-suffix
 export class LuFormlyFieldQualification extends FieldType<FieldTypeConfig> {

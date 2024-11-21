@@ -8,6 +8,7 @@ import { buildAddWrapperExtension } from '../formly.utils';
 	styleUrls: ['flex-layout.scss'],
 	templateUrl: './helper.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
+	standalone: false,
 })
 // eslint-disable-next-line @angular-eslint/component-class-suffix
 export class LuFormlyWrapperHelper extends FieldWrapper {

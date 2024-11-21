@@ -9,6 +9,7 @@ import { buildAddWrapperExtension } from '../formly.utils';
 	styleUrls: ['flex-layout.scss'],
 	templateUrl: './error.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
+	standalone: false,
 })
 // eslint-disable-next-line @angular-eslint/component-class-suffix
 export class LuFormlyWrapperError extends FieldWrapper<FieldTypeConfig> {
@@ -27,6 +28,7 @@ export class LuFormlyWrapperError extends FieldWrapper<FieldTypeConfig> {
 		{{ message }}
 	</div>`,
 	changeDetection: ChangeDetectionStrategy.OnPush,
+	standalone: false,
 })
 // eslint-disable-next-line @angular-eslint/component-class-suffix
 export class LuFormlyErrorMessage {

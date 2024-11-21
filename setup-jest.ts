@@ -1,7 +1,9 @@
 import '@testing-library/jest-dom';
 import { toHaveNoViolations } from 'jest-axe';
-import 'jest-preset-angular/setup-jest';
+import { setupZoneTestEnv } from 'jest-preset-angular/setup-env/zone';
 import { TextDecoder, TextEncoder } from 'util';
+
+setupZoneTestEnv();
 
 expect.extend(toHaveNoViolations);
 
