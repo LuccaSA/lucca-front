@@ -27,7 +27,7 @@ export class FormFieldIdDirective implements OnDestroy {
 
 	@HostBinding('attr.id')
 	get id(): string {
-		return `${this.#formFieldComponent.id}-${this.#suffix}`;
+		return `${this.#formFieldComponent.id()}-${this.#suffix}`;
 	}
 
 	constructor() {
@@ -38,10 +38,10 @@ export class FormFieldIdDirective implements OnDestroy {
 	}
 
 	private applyLabelledBy(): void {
-		this.#formFieldComponent.addLabelledBy(`${this.#formFieldComponent.id}-${this.#suffix}`, this.labelledByStrategy === 'prepend');
+		this.#formFieldComponent.addLabelledBy(`${this.#formFieldComponent.id()}-${this.#suffix}`, this.labelledByStrategy === 'prepend');
 	}
 
 	ngOnDestroy(): void {
-		this.#formFieldComponent.removeLabelledBy(`${this.#formFieldComponent.id}-${this.#suffix}`);
+		this.#formFieldComponent.removeLabelledBy(`${this.#formFieldComponent.id()}-${this.#suffix}`);
 	}
 }
