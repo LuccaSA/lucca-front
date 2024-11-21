@@ -2,7 +2,6 @@ import { FlexibleConnectedPositionStrategy, HorizontalConnectionPos, OriginConne
 import { ComponentPortal } from '@angular/cdk/portal';
 import {
 	AfterContentInit,
-	ChangeDetectorRef,
 	DestroyRef,
 	Directive,
 	ElementRef,
@@ -12,10 +11,13 @@ import {
 	OnDestroy,
 	Renderer2,
 	booleanAttribute,
+	computed,
+	effect,
 	inject,
+	input,
 	numberAttribute,
 } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { takeUntilDestroyed, toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { SafeHtml } from '@angular/platform-browser';
 import { LuPopoverPosition } from '@lucca-front/ng/popover';
 import { BehaviorSubject, Observable, Subject, combineLatest, merge, startWith, switchMap, timer } from 'rxjs';
@@ -24,7 +26,6 @@ import { LuTooltipPanelComponent } from '../panel';
 import { EllipsisRuler } from './ellipsis.ruler';
 
 let nextId = 0;
-
 @Directive({
 	selector: '[luTooltip]',
 	exportAs: 'luTooltip',
@@ -39,8 +40,6 @@ export class LuTooltipTriggerDirective implements AfterContentInit, OnDestroy {
 	#ruler = inject(EllipsisRuler);
 
 	#destroyRef = inject(DestroyRef);
-
-	#cdr = inject(ChangeDetectorRef);
 
 	@Input()
 	luTooltip: string | SafeHtml;
@@ -59,15 +58,7 @@ export class LuTooltipTriggerDirective implements AfterContentInit, OnDestroy {
 		this.#closeDelay$.next(delay);
 	}
 
-	#disabled = false;
-
-	@Input({ transform: booleanAttribute })
-	set luTooltipDisabled(disabled: boolean) {
-		this.#disabled = disabled;
-		if (disabled) {
-			this.setAccessibilityProperties(null);
-		}
-	}
+	luTooltipDisabled = input(false, { transform: booleanAttribute });
 
 	@Input({ transform: booleanAttribute })
 	luTooltipOnlyForDisplay = false;
@@ -75,8 +66,7 @@ export class LuTooltipTriggerDirective implements AfterContentInit, OnDestroy {
 	@Input()
 	luTooltipPosition: LuPopoverPosition = 'above';
 
-	@Input({ transform: booleanAttribute })
-	luTooltipWhenEllipsis = false;
+	luTooltipWhenEllipsis = input(false, { transform: booleanAttribute });
 
 	resize$ = new Observable((observer) => {
 		const resizeObserver = new ResizeObserver(() => {
@@ -87,6 +77,22 @@ export class LuTooltipTriggerDirective implements AfterContentInit, OnDestroy {
 			resizeObserver.disconnect();
 		};
 	});
+
+	#hasEllipsis$ = combineLatest([
+		toObservable(
+			// 1. Group necessary inputs
+			computed(() => ({ whenEllipsis: this.luTooltipWhenEllipsis(), disabled: this.luTooltipDisabled() })),
+		),
+		// Resend resize events to trigger the check
+		this.resize$.pipe(debounceTime(150)),
+	]).pipe(
+		// 2. Keep only necessary inputs
+		filter(([{ whenEllipsis, disabled }]) => !disabled && whenEllipsis),
+		// 3. Check for ellipsis
+		switchMap(() => this.#ruler.hasEllipsis(this.#host.nativeElement)),
+	);
+
+	#hasEllipsis = toSignal(this.#hasEllipsis$, { initialValue: false });
 
 	open$ = new Subject<void>();
 
@@ -121,7 +127,7 @@ export class LuTooltipTriggerDirective implements AfterContentInit, OnDestroy {
 
 	@HostBinding('attr.aria-describedby')
 	get ariaDescribedBy() {
-		if (this.#disabled || this.luTooltipWhenEllipsis || this.luTooltipOnlyForDisplay) {
+		if (this.luTooltipDisabled() || this.luTooltipWhenEllipsis || this.luTooltipOnlyForDisplay) {
 			return null;
 		}
 		return `${this.#generatedId}-panel`;
@@ -136,17 +142,7 @@ export class LuTooltipTriggerDirective implements AfterContentInit, OnDestroy {
 					// We only filter open events because even if it's disabled while opened,
 					// 	we want the tooltip to be able to close itself no matter what
 					const openEvents$ = this.open$.pipe(
-						filter(() => {
-							if (this.#disabled) {
-								return false;
-							}
-							// If not disabled, let's check for ellipsis if needed
-							if (this.luTooltipWhenEllipsis) {
-								return this.#ruler.hasEllipsis(this.#host.nativeElement);
-							}
-							// If it's not disabled and is not triggered based on ellipsis, just return true
-							return true;
-						}),
+						filter(() => !this.luTooltipDisabled() && this.#hasEllipsis()),
 						map(() => 'open'),
 					);
 					return merge(openEvents$, this.close$.pipe(map(() => 'close'))).pipe(
@@ -165,9 +161,12 @@ export class LuTooltipTriggerDirective implements AfterContentInit, OnDestroy {
 				}
 			});
 
-		this.resize$.pipe(takeUntilDestroyed(this.#destroyRef), debounceTime(150)).subscribe(() => {
-			this.setAccessibilityProperties(0);
-			this.#cdr.markForCheck();
+		effect(() => {
+			if (!this.luTooltipDisabled() && this.#hasEllipsis()) {
+				this.setAccessibilityProperties(0);
+			} else {
+				this.setAccessibilityProperties(null);
+			}
 		});
 	}
 
@@ -217,24 +216,23 @@ export class LuTooltipTriggerDirective implements AfterContentInit, OnDestroy {
 	}
 
 	private setAccessibilityProperties(tabindex: number | null): void {
-		if (this.#disabled || (this.luTooltipWhenEllipsis && !this.#ruler.hasEllipsis(this.#host.nativeElement))) {
+		if (tabindex === null) {
 			this.#renderer.removeAttribute(this.#host.nativeElement, 'tabindex');
 			return;
 		}
 
 		const tag = this.#host.nativeElement.tagName.toLowerCase();
 		const nativelyFocusableTags = ['a', 'button', 'input', 'select', 'textarea'];
-		const isNatevelyFocusableTag = nativelyFocusableTags.includes(tag);
+		const isNativelyFocusableTag = nativelyFocusableTags.includes(tag);
 
 		const hasATabIndex = this.#host.nativeElement.getAttribute('tabindex') !== null;
 
-		if (!isNatevelyFocusableTag && !hasATabIndex) {
+		if (!isNativelyFocusableTag && !hasATabIndex) {
 			this.#renderer.setAttribute(this.#host.nativeElement, 'tabindex', tabindex.toString());
 		}
 	}
 
 	ngAfterContentInit(): void {
-		this.setAccessibilityProperties(0);
 		this._id = this.#host.nativeElement.id || this.#generatedId;
 	}
 

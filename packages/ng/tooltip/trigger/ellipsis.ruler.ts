@@ -4,17 +4,11 @@ import { Injectable, inject } from '@angular/core';
 @Injectable({ providedIn: 'root' })
 export class EllipsisRuler {
 	#document = inject(DOCUMENT);
-	readonly elementCloned = this.#document.createElement('div');
 	readonly parentMasked = this.#document.createElement('div');
 
 	constructor() {
 		this.parentMasked.classList.add('u-mask');
 		this.parentMasked.setAttribute('aria-hidden', 'true');
-
-		this.elementCloned.style.width = 'fit-content';
-		this.elementCloned.style.whiteSpace = 'nowrap';
-
-		this.parentMasked.appendChild(this.elementCloned);
 		this.#document.body.appendChild(this.parentMasked);
 	}
 
@@ -27,34 +21,65 @@ export class EllipsisRuler {
 	 *
 	 * So we duplicate the properties we're interested in on the element to be tested to calculate its ideal size,
 	 * which we then compare with its current size.
+	 *
+	 * To avoid doing multiple reflow per check, we wait for the next microtask on each key step of the process:
+	 * - After computing element style
+	 * - After cloning the element and appending it to the DOM
+	 * - After computing the width of the cloned element
+	 * - After removing the cloned element from the DOM
+	 *
+	 * This way, we have 2 reflows per check, no matter how many elements are checked in a row.
 	 */
-	hasEllipsis(element: HTMLElement): boolean {
-		const elementStyle = window.getComputedStyle(element);
+	async hasEllipsis(element: HTMLElement): Promise<boolean> {
+		const elementStyle = getComputedStyle(element);
 
 		if (elementStyle.textOverflow !== 'ellipsis') {
 			return false;
 		}
 
-		Object.assign(this.elementCloned.style, {
-			padding: elementStyle.padding,
-			borderWidth: elementStyle.borderWidth,
-			borderStyle: elementStyle.borderStyle,
-			boxSizing: elementStyle.boxSizing,
-			fontFamily: elementStyle.fontFamily,
-			fontWeight: elementStyle.fontWeight,
-			fontStyle: elementStyle.fontStyle,
-			fontSize: (Number(elementStyle.fontSize.replace('px', '')) / Number(window.getComputedStyle(document.body).fontSize.replace('px', ''))).toString() + 'rem',
+		const { padding, borderWidth, borderStyle, boxSizing, fontFamily, fontWeight, fontStyle } = elementStyle;
+
+		const fontSize = (Number(elementStyle.fontSize.replace('px', '')) / Number(getComputedStyle(document.body).fontSize.replace('px', ''))).toString() + 'rem';
+
+		// When multiple elements are checked in a row, we wait for the next microtask to before cloning the element
+		// to avoid the browser to reflow the page for each tooltip
+		await Promise.resolve();
+
+		const elementCloned = this.#document.createElement('div');
+
+		Object.assign(elementCloned.style, {
+			width: 'fit-content',
+			whiteSpace: 'nowrap',
+			position: 'absolute',
+			visibility: 'hidden',
+			padding,
+			borderWidth,
+			borderStyle,
+			boxSizing,
+			fontFamily,
+			fontWeight,
+			fontStyle,
+			fontSize,
 		});
 
-		this.elementCloned.innerHTML = element.innerHTML;
+		this.parentMasked.appendChild(elementCloned);
+
+		elementCloned.innerHTML = element.innerHTML;
+
+		// To avoid multiple reflows, we wait for the next microtask before calculating the width
+		await Promise.resolve();
 
 		try {
-			const elementClonedWidth = this.elementCloned.getBoundingClientRect().width;
+			const elementClonedWidth = elementCloned.getBoundingClientRect().width;
 			const elementWidth = element.getBoundingClientRect().width;
 
 			return elementClonedWidth > elementWidth;
 		} catch (e) {
 			return false;
+		} finally {
+			// To avoid multiple reflows, we wait for the next microtask before removing the cloned element
+			await Promise.resolve();
+			this.parentMasked.removeChild(elementCloned);
 		}
 	}
 }
