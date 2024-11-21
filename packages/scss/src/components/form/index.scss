@@ -56,7 +56,9 @@
 	}
 
 	&:has(.textField-input-value[aria-invalid='true']),
-	&:has(.timePicker-fieldset-group-textfield-input[aria-invalid='true']) {
+	&:has(.timePicker-fieldset-group-textfield-input[aria-invalid='true']),
+	&:has(.simpleSelect-input[aria-invalid='true']),
+	&:has(.multipleSelect-displayer-search[aria-invalid='true']) {
 		@include invalid;
 	}
 
