@@ -109,6 +109,19 @@ $overflow: 'hidden', 'auto', 'visible', 'scroll';
 			color: var(--palettes-#{$palette}-700) #{$suffix};
 		}
 	}
+
+	@each $palette in list.join(list.join(config.$palettesStates, config.$palettesDefault), config.$palettesProduct) {
+		$paletteExists: map.get(config.$palettesInterpolation, $palette);
+		@if $paletteExists {
+			@each $shade in config.$palettesShades {
+				@if map.get($paletteExists, $shade) {
+					.u-text#{transform.capitalize($palette)}#{$shade} {
+						color: var(--palettes-#{$palette}-#{$shade}) #{$suffix};
+					}
+				}
+			}
+		}
+	}
 }
 
 @mixin borderRadius($suffix: '!important') {
