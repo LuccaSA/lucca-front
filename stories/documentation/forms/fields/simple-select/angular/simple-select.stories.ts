@@ -45,11 +45,16 @@ export default {
 	},
 } as Meta;
 
-export const Basic: StoryObj<LuSimpleSelectInputComponent<unknown> & FormFieldComponent & { disabled: boolean; hasValue: () => boolean }> = {
+export const Basic: StoryObj<
+	LuSimpleSelectInputComponent<unknown> &
+		FormFieldComponent & {
+			disabled: boolean;
+		}
+> = {
 	render: (args, { argTypes }) => {
-		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, hasValue, ...inputArgs } = args;
+		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, ...inputArgs } = args;
 		return {
-			props: { legumes: allLegumes, example: hasValue() ? allLegumes[0] : null },
+			props: { legumes: allLegumes, example: allLegumes[0] },
 			template: `<lu-form-field ${generateInputs(
 				{
 					label,
@@ -85,6 +90,5 @@ export const Basic: StoryObj<LuSimpleSelectInputComponent<unknown> & FormFieldCo
 		inlineMessageState: 'default',
 		loading: false,
 		disabled: false,
-		hasValue: () => false,
 	},
 };
