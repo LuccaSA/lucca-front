@@ -51,7 +51,7 @@ export class DateInputComponent implements ControlValueAccessor, Validator, Filt
 	#intlDateTimeFormatYear = new Intl.DateTimeFormat(this.#locale, { year: 'numeric' });
 
 	// Contains the current date format (like dd/mm/yy etc) based on current locale
-	#dateFormat = getDateFormat(this.#locale).toUpperCase();
+	#dateFormat = getDateFormat(this.#locale);
 
 	intl = getIntl(LU_DATE2_TRANSLATIONS);
 
@@ -150,7 +150,7 @@ export class DateInputComponent implements ControlValueAccessor, Validator, Filt
 					if (parsed.getFullYear() > 999) {
 						this.selectedDate.set(startOfDay(parsed));
 						this.currentDate.set(startOfDay(parsed));
-					} else {
+					} else if (!this.noPopover) {
 						this.selectedDate.set(parsed);
 					}
 				}
