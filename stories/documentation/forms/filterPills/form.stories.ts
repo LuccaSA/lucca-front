@@ -21,14 +21,15 @@ export default {
 } as Meta;
 
 function getTemplate(args: FormBasicStory): string {
-	return `<div class="filterPillsWrapper">
+	return `<div class="filterPillsWrapper -is-beginning -is-ending">
 		<lu-filter-pill label="Date de début"><lu-date-input clearable [(ngModel)]="example1"></lu-date-input></lu-filter-pill>
 		<lu-filter-pill label="Date de début"><lu-date-input clearable [(ngModel)]="example2"></lu-date-input></lu-filter-pill>
 		<lu-filter-pill label="Date de début"><lu-date-input clearable [(ngModel)]="example3"></lu-date-input></lu-filter-pill>
 		<lu-filter-pill label="Date de début"><lu-date-input clearable [(ngModel)]="example4"></lu-date-input></lu-filter-pill>
 		<lu-filter-pill label="Date de début"><lu-date-input clearable [(ngModel)]="example5"></lu-date-input></lu-filter-pill>
 		<lu-filter-pill label="Date de début"><lu-date-input clearable [(ngModel)]="example6"></lu-date-input></lu-filter-pill>
-	</div>`;
+</div>
+`;
 }
 
 const Template: StoryFn<FormBasicStory> = (args) => ({

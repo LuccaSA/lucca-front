@@ -1,4 +1,6 @@
 @use 'exports' as *;
+@use '@lucca-front/scss/src/commons/utils/media';
+@use '@lucca-front/scss/src/commons/utils/container';
 
 .filterPill {
 	@include vars;
@@ -64,5 +66,23 @@
 				@include checkboxCheckedDisabled;
 			}
 		}
+	}
+}
+
+.filterPillsWrapper {
+	@include varsWrapper;
+
+	//@include container.max('XS', $name: 'filterPill') {
+	//	@include media.isTouchDevice {
+	@include scroll;
+	//	}
+	//
+
+	&.is-beginning {
+		@include beginning;
+	}
+
+	&.is-ending {
+		@include ending;
 	}
 }

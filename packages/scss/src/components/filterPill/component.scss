@@ -20,10 +20,19 @@
 	white-space: nowrap;
 
 	@at-root ($atRoot) {
+		*:has(> .filterPillsWrapper) {
+			container-name: filterPill;
+			container-type: inline-size;
+		}
+
 		.filterPillsWrapper {
+			position: relative;
+
+			flex-wrap: nowrap;
+
 			display: flex;
-			gap: var(--pr-t-spacings-100);
 			flex-wrap: wrap;
+			gap: var(--components-filterPillsWrapper-gap);
 		}
 
 		.filterPill_popover {

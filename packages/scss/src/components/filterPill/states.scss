@@ -1,4 +1,5 @@
 @use '@lucca-front/scss/src/commons/utils/a11y';
+@use '@lucca-front/scss/src/commons/utils/reset';
 
 @mixin checkboxChecked {
 	--components-filterPills-borderColor: var(--palettes-product-300);
@@ -68,4 +69,47 @@
 
 @mixin opened {
 	--components-filterPills-toggle-rotation: 0.5turn;
+}
+
+@mixin beginning {
+	--components-filterPillsWrapper-displayBefore: none;
+}
+
+@mixin ending {
+	--components-filterPillsWrapper-displayAfter: none;
+}
+
+@mixin scroll {
+	position: relative;
+	flex-wrap: nowrap;
+	overflow: auto;
+
+	@include reset.overflow;
+
+	&::before,
+	&::after {
+		position: sticky;
+		background-image: linear-gradient(to right, var(--pr-t-elevation-surface-default), transparent);
+		z-index: 2;
+		top: 0;
+		bottom: 0;
+		width: var(--pr-t-spacings-300);
+		pointer-events: none;
+		content: '';
+		outline-offset: -1px;
+		flex-shrink: 0;
+	}
+
+	&::before {
+		left: 0;
+		margin-right: calc(var(--pr-t-spacings-300) * -1 - var(--components-filterPillsWrapper-gap));
+		display: var(--components-filterPillsWrapper-displayBefore);
+	}
+
+	&::after {
+		right: 0;
+		transform: scaleX(-1);
+		margin-left: calc(var(--pr-t-spacings-300) * -1 - var(--components-filterPillsWrapper-gap));
+		display: var(--components-filterPillsWrapper-displayAfter);
+	}
 }

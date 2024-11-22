@@ -33,11 +33,20 @@
 @mixin clearfix($suffix: '') {
 	&::before,
 	&::after {
-		content: ' ';
-		display: table;
+		content: ' ' #{$suffix};
+		display: table #{$suffix};
 	}
 
 	&:after {
-		clear: both;
+		clear: both #{$suffix};
+	}
+}
+
+@mixin overflow($suffix: '') {
+	-ms-overflow-style: none #{$suffix};
+	scrollbar-width: none #{$suffix};
+
+	&::-webkit-scrollbar {
+		display: none #{$suffix};
 	}
 }

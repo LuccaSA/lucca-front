@@ -9,6 +9,7 @@
 	scrollbar-width: thin;
 
 	@media (hover: none) {
+		-ms-overflow-style: none;
 		scrollbar-width: none;
 
 		&::-webkit-scrollbar {
@@ -85,7 +86,7 @@
 				display: block;
 				top: 1px;
 				bottom: 1px;
-				width: calc(var(--components-scrollBox-shadowWidth) / 2);
+				width: calc(var(--components-scrollBox-shadowWidth) / 1.5);
 				pointer-events: none;
 			}
 
