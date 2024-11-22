@@ -6,8 +6,7 @@ import { LuMultiSelectPanelComponent } from '../panel/index';
 import { MULTI_SELECT_INPUT } from '../select.model';
 import { LuMultiSelectPanelRef } from './panel.model';
 import { LuMultiSelectInputComponent } from './select-input.component';
-import { SELECT_ID, SELECT_LABEL_ID } from '../../core-select/select.model';
-import { addAttributesOnCdkContainer } from '../../core-select/input';
+import { addAttributesOnCdkContainer, SELECT_ID, SELECT_LABEL_ID } from '@lucca-front/ng/core-select';
 
 class MultiSelectPanelRef<T> extends LuMultiSelectPanelRef<T> {
 	instance: LuMultiSelectPanelComponent<T>;
@@ -86,7 +85,6 @@ export class LuMultiSelectPanelRefFactory {
 	protected parentInjector = inject(Injector);
 	private selectLabelId = inject(SELECT_LABEL_ID);
 	private selectId = inject(SELECT_ID);
-
 
 	buildPanelRef<T>(selectInput: LuMultiSelectInputComponent<T>, defaultOverlayConfigOverride: OverlayConfig = {}): LuMultiSelectPanelRef<T> {
 		const defaultOverlayConfig = this.buildDefaultOverlayConfig(defaultOverlayConfigOverride);
