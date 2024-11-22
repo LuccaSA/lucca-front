@@ -73,6 +73,14 @@
 			@include inlineMessage.disabled;
 		}
 	}
+
+	&.mod-withArrow {
+		@include withArrow;
+
+		&.mod-S {
+			@include withArrowS;
+		}
+	}
 }
 
 // deprecated
