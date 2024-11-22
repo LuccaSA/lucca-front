@@ -1,5 +1,5 @@
-import { NgIf, NgSwitch, NgSwitchCase, NgTemplateOutlet } from '@angular/common';
-import { booleanAttribute, Component, ContentChildren, DestroyRef, DoCheck, forwardRef, inject, Input, OnChanges, OnDestroy, QueryList, Renderer2, ViewEncapsulation } from '@angular/core';
+import { NgIf, NgTemplateOutlet } from '@angular/common';
+import { booleanAttribute, Component, ContentChildren, DestroyRef, DoCheck, forwardRef, inject, Input, OnChanges, OnDestroy, QueryList, Renderer2, signal, ViewEncapsulation } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { AbstractControl, NG_VALIDATORS, NgControl, ReactiveFormsModule, RequiredValidator, Validator, Validators } from '@angular/forms';
 import { SafeHtml } from '@angular/platform-browser';
@@ -18,7 +18,7 @@ let nextId = 0;
 @Component({
 	selector: 'lu-form-field',
 	standalone: true,
-	imports: [NgIf, NgSwitch, NgSwitchCase, NgTemplateOutlet, InlineMessageComponent, LuTooltipModule, ReactiveFormsModule, IconComponent, IntlParamsPipe, PortalDirective],
+	imports: [NgIf, NgTemplateOutlet, InlineMessageComponent, LuTooltipModule, ReactiveFormsModule, IconComponent, IntlParamsPipe, PortalDirective],
 	templateUrl: './form-field.component.html',
 	styleUrls: ['./form-field.component.scss'],
 	providers: [
@@ -173,7 +173,7 @@ export class FormFieldComponent implements OnChanges, OnDestroy, DoCheck {
 		return this.#inputs;
 	}
 
-	id: string;
+	id = signal<string>('');
 
 	ready$ = new BehaviorSubject<boolean>(false);
 
@@ -220,7 +220,7 @@ export class FormFieldComponent implements OnChanges, OnDestroy, DoCheck {
 				this.#renderer.setAttribute(input.host.nativeElement, 'id', inputId);
 			});
 		// We're using the id from the first input available
-		this.id = this.#inputs[0].host.nativeElement.id;
+		this.id.set(this.#inputs[0].host.nativeElement.id);
 		this.updateAria();
 		this.ready$.next(true);
 	}
@@ -233,8 +233,8 @@ export class FormFieldComponent implements OnChanges, OnDestroy, DoCheck {
 				this.#renderer.setAttribute(input.host.nativeElement, 'aria-describedby', `${input.host.nativeElement.id}-message`);
 			}
 		});
-		if (this.id && !this.#ariaLabelledBy.includes(`${this.id}-label`)) {
-			this.addLabelledBy(`${this.id}-label`);
+		if (this.id() && !this.#ariaLabelledBy.includes(`${this.id()}-label`)) {
+			this.addLabelledBy(`${this.id()}-label`);
 		}
 	}
 
