@@ -22,13 +22,13 @@ import {
 	LuMultiSelectWithSelectAllDirective,
 } from '@lucca-front/ng/multi-select';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
-import { Meta, applicationConfig, moduleMetadata } from '@storybook/angular';
+import { applicationConfig, Meta, moduleMetadata } from '@storybook/angular';
 import { LuMultiSelection } from 'packages/ng/multi-select/select.model';
 import { interval, map } from 'rxjs';
 import { startWith } from 'rxjs/operators';
 import { HiddenArgType } from 'stories/helpers/common-arg-types';
 import { getStoryGenerator } from 'stories/helpers/stories';
-import { FilterLegumesPipe, ILegume, LuCoreSelectInputStoryComponent, SortLegumesPipe, allLegumes, colorNameByColor, coreSelectStory } from './select.utils';
+import { allLegumes, colorNameByColor, coreSelectStory, FilterLegumesPipe, ILegume, LuCoreSelectInputStoryComponent, SortLegumesPipe } from './select.utils';
 
 type LuMultiSelectInputStoryComponent = LuCoreSelectInputStoryComponent & {
 	selectedLegumes: ILegume[] | LuMultiSelection<ILegume>;
@@ -64,6 +64,7 @@ export const SelectAll = generateStory({
 	[loading]="loading"
 	[(ngModel)]="legumeSelection"
 	[options]="legumes | filterLegumes:clue"
+	[keepSearchAfterSelection]="keepSearchAfterSelection"
 	(clueChange)="clue = $event"
 />
 {{ legumeSelection | json }}`,
@@ -74,6 +75,7 @@ export const SelectAll = generateStory({
 	storyPartial: {
 		args: {
 			legumeSelection: { mode: 'none' },
+			keepSearchAfterSelection: false,
 		},
 	},
 });
@@ -86,6 +88,7 @@ export const Basic = generateStory({
 	[placeholder]="placeholder"
 	[clearable]="clearable"
 	[loading]="loading"
+	[keepSearchAfterSelection]="keepSearchAfterSelection"
 	[(ngModel)]="selectedLegumes"
 	[options]="legumes | filterLegumes:clue"
 	(clueChange)="clue = $event"
@@ -98,6 +101,7 @@ export const Basic = generateStory({
 	storyPartial: {
 		args: {
 			selectedLegumes: allLegumes.slice(0, 15),
+			keepSearchAfterSelection: false,
 		},
 		argTypes: {
 			clearable: { control: { type: 'boolean' } },
@@ -118,6 +122,7 @@ export const WithMultiDisplayer = generateStory({
 	[(ngModel)]="selectedLegumes"
 	placeholder="Placeholder..."
 	[options]="legumes | filterLegumes:clue"
+	[keepSearchAfterSelection]="keepSearchAfterSelection"
 	(clueChange)="clue = $event"
 >
 	<ng-container *luMultiDisplayer="let values; select: selectRef">
@@ -130,6 +135,7 @@ export const WithMultiDisplayer = generateStory({
 	storyPartial: {
 		args: {
 			selectedLegumes: [],
+			keepSearchAfterSelection: false,
 		},
 	},
 });
@@ -142,6 +148,7 @@ export const WithDisplayer = generateStory({
 	#selectRef
 	[placeholder]="placeholder"
 	[options]="legumes | filterLegumes:clue"
+	[keepSearchAfterSelection]="keepSearchAfterSelection"
 	(clueChange)="clue = $event"
 	[clearable]="clearable"
 	[loading]="loading"
@@ -159,6 +166,7 @@ export const WithDisplayer = generateStory({
 	storyPartial: {
 		args: {
 			selectedLegumes: allLegumes.slice(0, 5),
+			keepSearchAfterSelection: false,
 		},
 	},
 });
@@ -430,7 +438,12 @@ export const AddOption = generateStory({
 	storyPartial: {
 		argTypes: {
 			addOptionLabel: { control: { type: 'text' } },
-			addOptionStrategy: { control: { type: 'select', options: ['never', 'always', 'if-empty-clue', 'if-not-empty-clue'] } },
+			addOptionStrategy: {
+				control: {
+					type: 'select',
+					options: ['never', 'always', 'if-empty-clue', 'if-not-empty-clue'],
+				},
+			},
 		},
 		args: {
 			addOptionLabel: 'Ajouter un légume',

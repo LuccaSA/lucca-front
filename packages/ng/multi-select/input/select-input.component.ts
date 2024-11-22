@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, forwardRef, inject, Input, model, numberAttribute, OnDestroy, OnInit, TemplateRef, Type, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, forwardRef, inject, Input, model, numberAttribute, OnDestroy, OnInit, TemplateRef, Type, ViewEncapsulation } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { getIntl } from '@lucca-front/ng/core';
 import { ALuSelectInputComponent, LuOptionContext, provideLuSelectLabelsAndIds, provideLuSelectOverlayContainer, ɵLuOptionOutletDirective } from '@lucca-front/ng/core-select';
@@ -45,6 +45,9 @@ export class LuMultiSelectInputComponent<T> extends ALuSelectInputComponent<T, T
 	@Input({ transform: numberAttribute })
 	maxValuesShown = 500;
 
+	@Input({ transform: booleanAttribute })
+	keepSearchAfterSelection = false;
+
 	override _value: T[] = [];
 
 	public override get panelRef(): LuMultiSelectPanelRef<T> | undefined {
@@ -78,7 +81,7 @@ export class LuMultiSelectInputComponent<T> extends ALuSelectInputComponent<T, T
 	}
 
 	public override updateValue(value: T[], skipFocus = false): void {
-		super.updateValue(value, skipFocus);
+		super.updateValue(value, skipFocus, this.keepSearchAfterSelection);
 		if (!skipFocus) {
 			this.focusInput();
 		}
