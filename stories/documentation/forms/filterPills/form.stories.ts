@@ -3,7 +3,7 @@ import { ButtonComponent } from '@lucca-front/ng/button';
 import { DateInputComponent } from '@lucca-front/ng/date2';
 import { FilterPillComponent } from '@lucca-front/ng/filter-pills';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
-import { CheckboxInputComponent } from '@lucca-front/ng/forms';
+import { CheckboxInputComponent, TextInputComponent } from '@lucca-front/ng/forms';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { PopoverDirective } from '@lucca-front/ng/popover2';
 import { ScrollBoxComponent } from '@lucca-front/ng/scrollBox';
@@ -31,6 +31,7 @@ export default {
 				PopoverDirective,
 				FormFieldComponent,
 				CheckboxInputComponent,
+				TextInputComponent,
 			],
 		}),
 	],
@@ -39,26 +40,50 @@ export default {
 
 function getTemplate(args: FormBasicStory): string {
 	return `
-	<lu-scroll-box class="filterPillScrollBoxWrapper">
-		<lu-filter-pill label="Date de début"><lu-date-input clearable [(ngModel)]="example1"></lu-date-input></lu-filter-pill>
-		<lu-filter-pill label="Date de début"><lu-date-input clearable [(ngModel)]="example2"></lu-date-input></lu-filter-pill>
-		<lu-filter-pill label="Date de début"><lu-date-input clearable [(ngModel)]="example3"></lu-date-input></lu-filter-pill>
-		<lu-filter-pill label="Date de début"><lu-date-input clearable [(ngModel)]="example4"></lu-date-input></lu-filter-pill>
-		<lu-filter-pill label="Date de début"><lu-date-input clearable [(ngModel)]="example5"></lu-date-input></lu-filter-pill>
-		<lu-filter-pill label="Date de début"><lu-date-input clearable [(ngModel)]="example6"></lu-date-input></lu-filter-pill>
-		<button type="button" luButton="text" size="S" [luPopover2]="contentOptions" palette="neutral"><lu-icon icon="filtersDescending" alt="Gérer les filtres"></lu-icon></button>
-		<button type="submit" luButton="text" size="S">Appliquer les filtres</button>
-	</lu-scroll-box>
+	<lu-filter-bar [(ngModel)]="group" [(clue)]="change">
+		<lu-scroll-box class="filterPillScrollBoxWrapper">
+			<div class="filterPillScrollBoxWrapper-first"></div>
+			<lu-filter-pill label="Manager"><lu-date-input [(ngModel)]="example1"></lu-date-input></lu-filter-pill>
+			<lu-filter-pill label="Département"><lu-date-input [(ngModel)]="example2"></lu-date-input></lu-filter-pill>
+			<lu-filter-pill label="Établissement"><lu-date-input [(ngModel)]="example3"></lu-date-input></lu-filter-pill>
+			<lu-filter-pill label="Profil"><lu-date-input [(ngModel)]="example4"></lu-date-input></lu-filter-pill>
+			<lu-filter-pill label="Statut"><lu-date-input [(ngModel)]="example5"></lu-date-input></lu-filter-pill>
+			<div class="filterPillScrollBoxWrapper-group">
+				<lu-filter-pill label="Date de début"><lu-date-input [(ngModel)]="example6"></lu-date-input></lu-filter-pill>
+				<button type="button" luButton="text" size="S" [luPopover2]="contentOptions" palette="neutral"><lu-icon icon="filtersDescending" alt="Gérer les filtres"></lu-icon></button>
+				
+				<lu-form-field label="Test" hiddenLabel size="S">
+					<lu-text-input [(ngModel)]="example10" hasSearchIcon hasClearer />
+				</lu-form-field>
+				
+				<button type="submit" size="S" luButton="text">Appliquer les filtres</button>
+				
+				<!--				
+				<button type="submit" size="S" luButton="outlined" class="pr-u-marginLeftAuto">Exporter</button>
+				-->
+			</div>
+			<div class="filterPillScrollBoxWrapper-last"></div>
+		</lu-scroll-box>
+	</lu-filter-bar>
 	<ng-template #contentOptions>
 		<div class="filterPill_popover-content popover-contentOptional">
-			<lu-form-field label="Lorem" class="filterPill_popover-content-formField">
-				<lu-checkbox-input [(ngModel)]="example7" />
+			<lu-form-field label="Manager" class="filterPill_popover-content-formField">
+				<lu-checkbox-input [ngModel]="true" />
 			</lu-form-field>
-			<lu-form-field label="Ipsum" class="filterPill_popover-content-formField">
-				<lu-checkbox-input [(ngModel)]="example8" />
+			<lu-form-field label="Département" class="filterPill_popover-content-formField">
+				<lu-checkbox-input [ngModel]="true" />
 			</lu-form-field>
-			<lu-form-field label="Dolor sit amet" class="filterPill_popover-content-formField">
-				<lu-checkbox-input [(ngModel)]="example9" />
+			<lu-form-field label="Établissement" class="filterPill_popover-content-formField">
+				<lu-checkbox-input [ngModel]="true" />
+			</lu-form-field>
+			<lu-form-field label="Profil" class="filterPill_popover-content-formField">
+				<lu-checkbox-input [ngModel]="true" />
+			</lu-form-field>
+			<lu-form-field label="Statut" class="filterPill_popover-content-formField">
+				<lu-checkbox-input [ngModel]="true" />
+			</lu-form-field>
+			<lu-form-field label="Date de début" class="filterPill_popover-content-formField">
+				<lu-checkbox-input [ngModel]="true" />
 			</lu-form-field>
 		</div>
 	</ng-template>

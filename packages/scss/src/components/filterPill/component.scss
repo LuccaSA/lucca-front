@@ -17,7 +17,7 @@
 	color: var(--components-filterPill-color);
 	font-size: var(--sizes-S-fontSize);
 	line-height: var(--sizes-S-lineHeight);
-	border: 1px solid var(--components-filterPill-borderColor);
+	box-shadow: 0 0 0 1px var(--components-filterPill-borderColor);
 	position: relative;
 	max-width: 18rem;
 	white-space: nowrap;
@@ -35,6 +35,26 @@
 
 			@include media.isTouchDevice {
 				@include overflow.mask;
+			}
+		}
+
+		.filterPillScrollBoxWrapper-first {
+			margin-right: calc(var(--components-scrollBox-gap) * -1);
+		}
+
+		.filterPillScrollBoxWrapper-last {
+			margin-left: calc(var(--components-scrollBox-gap) * -1);
+		}
+
+		.filterPillScrollBoxWrapper-group {
+			display: flex;
+			gap: var(--components-scrollBox-gap);
+			flex-wrap: wrap;
+			flex-grow: 1;
+			background-color: gold;
+
+			@include media.isTouchDevice {
+				display: contents;
 			}
 		}
 
