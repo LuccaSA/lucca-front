@@ -6,7 +6,7 @@ interface StatusBadgeBasicStory {
 }
 
 export default {
-	title: 'Documentation/Texts/StatusBadge/Basic',
+	title: 'Documentation/Texts/StatusBadge/HTML & CSS',
 	argTypes: {
 		palette: {
 			options: ['', 'palette-product', 'palette-success', 'palette-warning', 'palette-error'],

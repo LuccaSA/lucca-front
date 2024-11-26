@@ -42,11 +42,10 @@
 	}
 }
 
-@mixin overflow($suffix: '') {
-	-ms-overflow-style: none #{$suffix};
-	scrollbar-width: none #{$suffix};
+@mixin summary($suffix: '') {
+	list-style: none #{$suffix};
 
-	&::-webkit-scrollbar {
+	&::-webkit-details-marker {
 		display: none #{$suffix};
 	}
 }
