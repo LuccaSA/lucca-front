@@ -1,16 +1,16 @@
 @use '@lucca-front/scss/src/commons/utils/a11y';
 
 @mixin checkboxChecked {
-	--components-filterPills-borderColor: var(--palettes-product-300);
-	--components-filterPills-backgroundColor: var(--palettes-product-50);
-	--components-filterPills-color: var(--palettes-product-800);
+	--components-filterPill-borderColor: var(--palettes-product-300);
+	--components-filterPill-backgroundColor: var(--palettes-product-50);
+	--components-filterPill-color: var(--palettes-product-800);
 
-	--components-filterPills-checkbox-backgroundColor: var(--palettes-product-700);
-	--components-filterPills-checkbox-borderColor: var(--palettes-product-700);
-	--components-filterPills-checkbox-icon-scale: 1;
-	--components-filterPills-checkbox-icon-timingFonction: cubic-bezier(0.5, 1, 0.5, 1.5);
+	--components-filterPill-checkbox-backgroundColor: var(--palettes-product-700);
+	--components-filterPill-checkbox-borderColor: var(--palettes-product-700);
+	--components-filterPill-checkbox-icon-scale: 1;
+	--components-filterPill-checkbox-icon-timingFonction: cubic-bezier(0.5, 1, 0.5, 1.5);
 
-	--components-filterPills-label-fontWeight: var(--components-filterPills-label-fontWeightChecked);
+	--components-filterPill-label-fontWeight: var(--components-filterPill-label-fontWeightChecked);
 }
 
 @mixin focusVisible {
@@ -18,25 +18,25 @@
 }
 
 @mixin hover {
-	--components-filterPills-borderColor: var(--palettes-neutral-400);
-	--components-filterPills-checkbox-borderColor: var(--palettes-neutral-600);
+	--components-filterPill-borderColor: var(--palettes-neutral-400);
+	--components-filterPill-checkbox-borderColor: var(--palettes-neutral-600);
 }
 
 @mixin active {
-	--components-filterPills-backgroundColor: var(--palettes-neutral-25);
-	--components-filterPills-checkbox-borderColor: var(--palettes-neutral-700);
+	--components-filterPill-backgroundColor: var(--palettes-neutral-25);
+	--components-filterPill-checkbox-borderColor: var(--palettes-neutral-700);
 }
 
 @mixin notEmptyHover {
-	--components-filterPills-borderColor: var(--palettes-product-400);
-	--components-filterPills-checkbox-borderColor: var(--palettes-product-600);
-	--components-filterPills-checkbox-backgroundColor: var(--palettes-product-600);
+	--components-filterPill-borderColor: var(--palettes-product-400);
+	--components-filterPill-checkbox-borderColor: var(--palettes-product-600);
+	--components-filterPill-checkbox-backgroundColor: var(--palettes-product-600);
 }
 
 @mixin notEmptyActive {
-	--components-filterPills-backgroundColor: var(--palettes-product-100);
-	--components-filterPills-checkbox-borderColor: var(--palettes-product-700);
-	--components-filterPills-checkbox-backgroundColor: var(--palettes-product-700);
+	--components-filterPill-backgroundColor: var(--palettes-product-100);
+	--components-filterPill-checkbox-borderColor: var(--palettes-product-700);
+	--components-filterPill-checkbox-backgroundColor: var(--palettes-product-700);
 }
 
 @mixin checkboxDisabled {
@@ -46,8 +46,8 @@
 }
 
 @mixin empty {
-	--components-filterPills-label-contentAfter: none;
-	--components-filterPills-clear-display: none;
+	--components-filterPill-label-contentAfter: none;
+	--components-filterPill-clear-display: none;
 
 	.filterPill-combobox {
 		@include a11y.mask;
@@ -61,21 +61,21 @@
 }
 
 @mixin notEmpty {
-	--components-filterPills-borderColor: var(--palettes-product-300);
-	--components-filterPills-backgroundColor: var(--palettes-product-50);
-	--components-filterPills-color: var(--palettes-product-800);
+	--components-filterPill-borderColor: var(--palettes-product-300);
+	--components-filterPill-backgroundColor: var(--palettes-product-50);
+	--components-filterPill-color: var(--palettes-product-800);
 }
 
 @mixin opened {
-	--components-filterPills-toggle-rotation: 0.5turn;
+	--components-filterPill-toggle-rotation: 0.5turn;
 }
 
 @mixin beginning {
-	--components-filterPillsWrapper-displayBefore: none;
+	--components-filterPillWrapper-displayBefore: none;
 }
 
 @mixin ending {
-	--components-filterPillsWrapper-displayAfter: none;
+	--components-filterPillWrapper-displayAfter: none;
 }
 
 @mixin scroll {
@@ -101,14 +101,14 @@
 
 	&::before {
 		left: 0;
-		margin-right: calc(var(--pr-t-spacings-300) * -1 - var(--components-filterPillsWrapper-gap));
-		display: var(--components-filterPillsWrapper-displayBefore);
+		margin-right: calc(var(--pr-t-spacings-300) * -1 - var(--components-filterPillWrapper-gap));
+		display: var(--components-filterPillWrapper-displayBefore);
 	}
 
 	&::after {
 		right: 0;
 		transform: scaleX(-1);
-		margin-left: calc(var(--pr-t-spacings-300) * -1 - var(--components-filterPillsWrapper-gap));
-		display: var(--components-filterPillsWrapper-displayAfter);
+		margin-left: calc(var(--pr-t-spacings-300) * -1 - var(--components-filterPillWrapper-gap));
+		display: var(--components-filterPillWrapper-displayAfter);
 	}
 }

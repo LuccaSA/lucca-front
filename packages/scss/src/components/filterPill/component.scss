@@ -8,16 +8,16 @@
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
 	display: flex;
-	gap: var(--components-filterPills-gap);
+	gap: var(--components-filterPill-gap);
 	align-items: center;
-	background-color: var(--components-filterPills-backgroundColor);
+	background-color: var(--components-filterPill-backgroundColor);
 	width: fit-content;
-	padding: var(--components-filterPills-padding);
+	padding: var(--components-filterPill-padding);
 	border-radius: var(--commons-borderRadius-L);
-	color: var(--components-filterPills-color);
+	color: var(--components-filterPill-color);
 	font-size: var(--sizes-S-fontSize);
 	line-height: var(--sizes-S-lineHeight);
-	border: 1px solid var(--components-filterPills-borderColor);
+	border: 1px solid var(--components-filterPill-borderColor);
 	position: relative;
 	max-width: 18rem;
 	white-space: nowrap;
@@ -38,24 +38,24 @@
 			}
 		}
 
-		.filterPill_popover {
-			padding: var(--pr-t-spacings-100);
-
+		.filterPill_popover-content.popover-contentOptional {
 			--components-dateInput-width: none;
+			--components-popover-padding: var(--pr-t-spacings-100);
+
+			&:has(.filterPill_popover-content-formField) {
+				--components-popover-padding: var(--pr-t-spacings-50);
+			}
+
+			display: flex;
+			flex-direction: column;
+			gap: var(--pr-t-spacings-50);
 
 			.textField-input-affix-toggle {
 				display: none;
 			}
 		}
 
-		.filterPill_popoverOptions {
-			display: flex;
-			flex-direction: column;
-			gap: var(--pr-t-spacings-50);
-			padding: var(--pr-t-spacings-50);
-		}
-
-		.filterPill_popoverOptions-option {
+		.filterPill_popover-content-formField {
 			padding: var(--pr-t-spacings-50) var(--pr-t-spacings-100);
 			border-radius: 4px;
 
@@ -73,7 +73,7 @@
 		}
 
 		.filterPill-label {
-			font-weight: var(--components-filterPills-label-fontWeight);
+			font-weight: var(--components-filterPill-label-fontWeight);
 			overflow: hidden;
 			text-overflow: ellipsis;
 			outline: none;
@@ -83,7 +83,7 @@
 				content: '';
 				position: absolute;
 				inset: 0;
-				cursor: var(--components-filterPills-label-cursor);
+				cursor: var(--components-filterPill-label-cursor);
 				z-index: 1;
 			}
 		}
@@ -98,7 +98,7 @@
 			z-index: 1;
 
 			.icon-arrowChevronBottom {
-				transform: rotate(var(--components-filterPills-toggle-rotation));
+				transform: rotate(var(--components-filterPill-toggle-rotation));
 			}
 		}
 
@@ -107,7 +107,7 @@
 			margin-right: var(--pr-t-spacings-25);
 			position: relative;
 			z-index: 1;
-			display: var(--components-filterPills-clear-display);
+			display: var(--components-filterPill-clear-display);
 
 			@include clear.product;
 		}
@@ -115,7 +115,7 @@
 		.filterPill-combobox {
 			@include reset.button;
 
-			font-weight: var(--components-filterPills-label-fontWeightChecked);
+			font-weight: var(--components-filterPill-label-fontWeightChecked);
 			width: auto;
 			z-index: 1;
 			margin-left: 0.5ch;
@@ -133,16 +133,16 @@
 			height: 0;
 			overflow: hidden;
 			text-overflow: ellipsis;
-			font-weight: var(--components-filterPills-label-fontWeightChecked);
+			font-weight: var(--components-filterPill-label-fontWeightChecked);
 		}
 
 		.filterPill-checkbox {
-			border: 2px solid var(--components-filterPills-checkbox-borderColor);
+			border: 2px solid var(--components-filterPill-checkbox-borderColor);
 			border-radius: 4px;
 			color: var(--palettes-neutral-0);
 			transition-property: color, border-color, background-color;
 			transition-duration: var(--commons-animations-durations-fast);
-			background-color: var(--components-filterPills-checkbox-backgroundColor);
+			background-color: var(--components-filterPill-checkbox-backgroundColor);
 			cursor: pointer;
 			display: flex;
 			order: -1;
@@ -163,10 +163,10 @@
 			justify-content: center;
 			width: 100%;
 			height: 100%;
-			transform: scale(var(--components-filterPills-checkbox-icon-scale));
+			transform: scale(var(--components-filterPill-checkbox-icon-scale));
 			transition-property: transform;
 			transition-duration: var(--commons-animations-durations-fast);
-			transition-timing-function: var(--components-filterPills-checkbox-icon-timingFonction);
+			transition-timing-function: var(--components-filterPill-checkbox-icon-timingFonction);
 
 			@media (prefers-reduced-motion: reduce) {
 				transition-property: none;

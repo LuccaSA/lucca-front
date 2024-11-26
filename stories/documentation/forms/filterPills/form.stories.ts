@@ -47,17 +47,17 @@ function getTemplate(args: FormBasicStory): string {
 		<lu-filter-pill label="Date de début"><lu-date-input clearable [(ngModel)]="example5"></lu-date-input></lu-filter-pill>
 		<lu-filter-pill label="Date de début"><lu-date-input clearable [(ngModel)]="example6"></lu-date-input></lu-filter-pill>
 		<button type="button" luButton="text" size="S" [luPopover2]="contentOptions" palette="neutral"><lu-icon icon="filtersDescending" alt="Gérer les filtres"></lu-icon></button>
-		<button type="button" luButton="text" size="S">Appliquer les filtres</button>
+		<button type="submit" luButton="text" size="S">Appliquer les filtres</button>
 	</lu-scroll-box>
 	<ng-template #contentOptions>
-		<div class="filterPill_popoverOptions">
-			<lu-form-field label="Lorem" class="filterPill_popoverOptions-option">
+		<div class="filterPill_popover-content popover-contentOptional">
+			<lu-form-field label="Lorem" class="filterPill_popover-content-formField">
 				<lu-checkbox-input [(ngModel)]="example7" />
 			</lu-form-field>
-			<lu-form-field label="Ipsum" class="filterPill_popoverOptions-option">
+			<lu-form-field label="Ipsum" class="filterPill_popover-content-formField">
 				<lu-checkbox-input [(ngModel)]="example8" />
 			</lu-form-field>
-			<lu-form-field label="Dolor sit amet" class="filterPill_popoverOptions-option">
+			<lu-form-field label="Dolor sit amet" class="filterPill_popover-content-formField">
 				<lu-checkbox-input [(ngModel)]="example9" />
 			</lu-form-field>
 		</div>

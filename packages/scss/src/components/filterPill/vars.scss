@@ -1,18 +1,18 @@
 @mixin vars {
-	--components-filterPills-gap: 0;
-	--components-filterPills-padding: var(--pr-t-spacings-75) var(--pr-t-spacings-100);
-	--components-filterPills-label-fontWeightNormal: 400;
-	--components-filterPills-label-fontWeightChecked: 600;
-	--components-filterPills-borderColor: var(--palettes-neutral-300);
-	--components-filterPills-backgroundColor: var(--palettes-neutral-0);
-	--components-filterPills-color: var(--palettes-neutral-700);
-	--components-filterPills-label-cursor: pointer;
-	--components-filterPills-checkbox-backgroundColor: var(--palettes-neutral-0);
-	--components-filterPills-checkbox-borderColor: var(--palettes-neutral-700);
-	--components-filterPills-checkbox-icon-scale: 0;
-	--components-filterPills-checkbox-icon-timingFonction: cubic-bezier(0.5, -0.5, 0.5, 0);
-	--components-filterPills-label-contentAfter: ':';
-	--components-filterPills-label-contentAfterWithSpace: '\a0:';
-	--components-filterPills-clear-display: grid;
-	--components-filterPills-toggle-rotation: 0;
+	--components-filterPill-gap: 0;
+	--components-filterPill-padding: var(--pr-t-spacings-75) var(--pr-t-spacings-100);
+	--components-filterPill-label-fontWeightNormal: 400;
+	--components-filterPill-label-fontWeightChecked: 600;
+	--components-filterPill-borderColor: var(--palettes-neutral-300);
+	--components-filterPill-backgroundColor: var(--palettes-neutral-0);
+	--components-filterPill-color: var(--palettes-neutral-700);
+	--components-filterPill-label-cursor: pointer;
+	--components-filterPill-checkbox-backgroundColor: var(--palettes-neutral-0);
+	--components-filterPill-checkbox-borderColor: var(--palettes-neutral-700);
+	--components-filterPill-checkbox-icon-scale: 0;
+	--components-filterPill-checkbox-icon-timingFonction: cubic-bezier(0.5, -0.5, 0.5, 0);
+	--components-filterPill-label-contentAfter: ':';
+	--components-filterPill-label-contentAfterWithSpace: '\a0:';
+	--components-filterPill-clear-display: grid;
+	--components-filterPill-toggle-rotation: 0;
 }
