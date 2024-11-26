@@ -50,8 +50,10 @@
 			display: flex;
 			gap: var(--components-scrollBox-gap);
 			flex-wrap: wrap;
-			flex-grow: 1;
-			background-color: gold;
+
+			&:has(+ .filterPillScrollBoxWrapper-last) {
+				flex-grow: 1;
+			}
 
 			@include media.isTouchDevice {
 				display: contents;

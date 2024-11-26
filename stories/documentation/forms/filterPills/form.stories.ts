@@ -43,6 +43,7 @@ function getTemplate(args: FormBasicStory): string {
 	<lu-filter-bar [(ngModel)]="group" [(clue)]="change">
 		<lu-scroll-box class="filterPillScrollBoxWrapper">
 			<div class="filterPillScrollBoxWrapper-first"></div>
+
 			<lu-filter-pill label="Manager"><lu-date-input [(ngModel)]="example1"></lu-date-input></lu-filter-pill>
 			<lu-filter-pill label="Département"><lu-date-input [(ngModel)]="example2"></lu-date-input></lu-filter-pill>
 			<lu-filter-pill label="Établissement"><lu-date-input [(ngModel)]="example3"></lu-date-input></lu-filter-pill>
@@ -51,8 +52,9 @@ function getTemplate(args: FormBasicStory): string {
 			<div class="filterPillScrollBoxWrapper-group">
 				<lu-filter-pill label="Date de début"><lu-date-input [(ngModel)]="example6"></lu-date-input></lu-filter-pill>
 				<button type="button" luButton="text" size="S" [luPopover2]="contentOptions" palette="neutral"><lu-icon icon="filtersDescending" alt="Gérer les filtres"></lu-icon></button>
-				
-				<lu-form-field label="Test" hiddenLabel size="S">
+			</div>
+			<div class="filterPillScrollBoxWrapper-group">
+				<lu-form-field label="Test" hiddenLabel size="S" style="width: 15rem">
 					<lu-text-input [(ngModel)]="example10" hasSearchIcon hasClearer />
 				</lu-form-field>
 				
@@ -62,13 +64,14 @@ function getTemplate(args: FormBasicStory): string {
 				<button type="submit" size="S" luButton="outlined" class="pr-u-marginLeftAuto">Exporter</button>
 				-->
 			</div>
+
 			<div class="filterPillScrollBoxWrapper-last"></div>
 		</lu-scroll-box>
 	</lu-filter-bar>
 	<ng-template #contentOptions>
-		<div class="filterPill_popover-content popover-contentOptional">
+		<form class="filterPill_popover-content popover-contentOptional">
 			<lu-form-field label="Manager" class="filterPill_popover-content-formField">
-				<lu-checkbox-input [ngModel]="true" />
+				<lu-checkbox-input [ngModel]="true"  />
 			</lu-form-field>
 			<lu-form-field label="Département" class="filterPill_popover-content-formField">
 				<lu-checkbox-input [ngModel]="true" />
@@ -85,7 +88,8 @@ function getTemplate(args: FormBasicStory): string {
 			<lu-form-field label="Date de début" class="filterPill_popover-content-formField">
 				<lu-checkbox-input [ngModel]="true" />
 			</lu-form-field>
-		</div>
+			<button luButton="outlined" size="S" type="submit">Appliquer</button>
+		</form>
 	</ng-template>
 `;
 }
