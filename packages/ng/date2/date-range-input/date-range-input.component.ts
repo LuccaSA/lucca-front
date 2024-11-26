@@ -7,7 +7,7 @@ import { LuClass, PortalContent, PortalDirective, ɵeffectWithDeps } from '@lucc
 import { FORM_FIELD_INSTANCE, InputDirective } from '@lucca-front/ng/form-field';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { PopoverDirective } from '@lucca-front/ng/popover2';
-import { addMonths, addYears, endOfDecade, endOfMonth, endOfYear, isAfter, isBefore, isSameDay, parse, startOfDay, startOfDecade, startOfMonth, startOfYear, sub, subMonths, subYears } from 'date-fns';
+import { addMonths, addYears, endOfDecade, endOfMonth, endOfYear, isAfter, isBefore, isSameDay, parse, startOfDay, startOfDecade, startOfMonth, startOfYear, subMonths, subYears } from 'date-fns';
 import { map } from 'rxjs';
 import { AbstractDateComponent } from '../abstract-date-component';
 import { CalendarMode } from '../calendar2/calendar-mode';
@@ -259,10 +259,9 @@ export class DateRangeInputComponent extends AbstractDateComponent implements Co
 							scope: this.mode(),
 							[rangeProperty]: parsed,
 						});
-						if (rangeProperty === 'start') {
-							this.currentDate.set(startOfDay(parsed));
-						}
-					} else {
+						this.currentDate.set(startOfDay(parsed));
+						this.tabbableDate.set(startOfDay(parsed));
+					} else if (this.isValidDate(parsed)) {
 						this.selectedRange.set({
 							...currentRange,
 							scope: this.mode(),
@@ -305,7 +304,9 @@ export class DateRangeInputComponent extends AbstractDateComponent implements Co
 	}
 
 	openPopover(ref: PopoverDirective, propertyToFocus?: 'start' | 'end', focusTabbableDate = false): void {
-		ref.openPopover(true, true);
+		if (!ref.opened()) {
+			ref.openPopover(true, true);
+		}
 		// Once popover is opened, aka in the next CD cycle, focus current tabbable date
 		setTimeout(() => {
 			this.focusedCalendarIndex.set(0);
@@ -313,14 +314,11 @@ export class DateRangeInputComponent extends AbstractDateComponent implements Co
 				// Specific case: if range is on a single month, focus on it on left calendar
 				// Same goes for focus on start date, we want it on left panel
 				if (propertyToFocus === 'start' || compareCalendarPeriods(this.mode(), this.selectedRange()?.start, this.selectedRange()?.end)) {
-					this.currentDate.set(this.selectedRange()?.start);
-					this.tabbableDate.set(this.selectedRange()?.start);
+					this.currentDate.set(this.selectedRange()?.[propertyToFocus]);
+					this.tabbableDate.set(this.selectedRange()?.[propertyToFocus]);
 				} else {
 					// Compute the date to use for proper focus on left panel, minus one calendar on focus date basically
-					const leftPanelFocus = sub(this.selectedRange()?.end, {
-						months: this.mode() === 'day' ? 1 : 0,
-						years: this.mode() === 'month' ? 1 : this.mode() === 'year' ? 10 : 0,
-					});
+					const leftPanelFocus = this.selectedRange()?.end;
 					this.currentDate.set(leftPanelFocus);
 					this.tabbableDate.set(leftPanelFocus);
 				}
@@ -338,6 +336,7 @@ export class DateRangeInputComponent extends AbstractDateComponent implements Co
 				scope: this.mode(),
 			});
 			this.editedField.set(1);
+			this.highlightedField.set(1);
 		} else {
 			// If we're editing end field
 			if (this.editedField() === 1) {
@@ -364,9 +363,8 @@ export class DateRangeInputComponent extends AbstractDateComponent implements Co
 				// If start is after end, invert them
 				if (isAfter(date, this.selectedRange().end)) {
 					this.selectedRange.set({
-						start: this.selectedRange().end,
+						start: date,
 						scope: this.mode(),
-						end: date,
 					});
 				} else {
 					this.selectedRange.set({
@@ -376,9 +374,14 @@ export class DateRangeInputComponent extends AbstractDateComponent implements Co
 					});
 				}
 				this.editedField.set(1);
+				this.highlightedField.set(1);
 				this.dateHovered.set(null);
 			}
 		}
+	}
+
+	arrowDown(popoverRef: PopoverDirective, fieldToFocus: 'start' | 'end'): void {
+		this.openPopover(popoverRef, fieldToFocus, true);
 	}
 
 	validate(control: AbstractControl<DateRange, DateRange>): ValidationErrors {

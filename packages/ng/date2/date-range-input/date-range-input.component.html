@@ -1,5 +1,9 @@
 <fieldset class="dateRangeField-fieldset">
-	<legend><span class="u-mask" *luPortal="label"></span></legend>
+	<legend>
+		<span class="u-mask">
+			<ng-container *luPortal="label"></ng-container>
+		</span>
+	</legend>
 	<div class="textField" #popoverAnchor>
 		<div class="textField-input">
 			<div class="dateRangeField-fieldset-content mod-start" [class.is-highlighted]="highlightedField() === 0">
@@ -19,7 +23,7 @@
 					aria-haspopup="true"
 					role="combobox"
 					(click)="editedField.set(0);openPopover(popoverRef, 'start')"
-					(keyup.arrowDown)="popoverRef.opened() ? popoverRef.focusBackToContent($event) : openPopover(popoverRef, 'start', true)"
+					(keyup.arrowDown)="arrowDown(popoverRef, 'start')"
 					(keyup.escape)="popoverRef.close()"
 					[disabled]="disabled"
 					[attr.placeholder]="dateFormatLocalized()"
@@ -42,7 +46,7 @@
 					aria-haspopup="true"
 					role="combobox"
 					(click)="editedField.set(1);openPopover(popoverRef, 'end')"
-					(keyup.arrowDown)="popoverRef.opened() ? popoverRef.focusBackToContent($event) : openPopover(popoverRef, 'end', true)"
+					(keyup.arrowDown)="arrowDown(popoverRef, 'end')"
 					(keyup.escape)="popoverRef.close()"
 					[disabled]="disabled"
 					[attr.placeholder]="dateFormatLocalized()"
