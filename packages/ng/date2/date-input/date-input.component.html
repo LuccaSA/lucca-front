@@ -1,8 +1,11 @@
+@if (isFilterPill) {
+<label for="dateInput" class="u-mask">{{ intl.pickDate }}</label>
+}
 <div class="textField">
 	<div class="textField-input">
 		<input
 			type="text"
-			id="date"
+			id="dateInput"
 			#date
 			luInput
 			class="textField-input-value"
@@ -21,7 +24,7 @@
 		/>
 
 		<div class="textField-input-affix">
-			@if (clearable() && date.value !== '') {
+			@if ((clearable() || isFilterPill) && date.value !== '') {
 			<button class="textField-input-affix-clear clear" type="button" (click)="clear()">
 				<span aria-hidden="true" class="lucca-icon icon-signClose"></span>
 				<span class="u-mask">{{ intl.clear }}</span>
@@ -31,7 +34,7 @@
 				[luPopover2]="calendar"
 				[disabled]="disabled"
 				[luPopoverNoCloseButton]="true"
-				[luPopoverDisabled]="noPopover"
+				[luPopoverDisabled]="isFilterPill"
 				#popoverRef="luPopover2"
 				[customPositions]="popoverPositions"
 				tabindex="-1"
@@ -44,7 +47,7 @@
 	</div>
 </div>
 
-@if (noPopover) {
+@if (isFilterPill) {
 <ng-container *ngTemplateOutlet="calendar"></ng-container>
 }
 

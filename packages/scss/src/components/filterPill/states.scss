@@ -1,5 +1,4 @@
 @use '@lucca-front/scss/src/commons/utils/a11y';
-@use '@lucca-front/scss/src/commons/utils/reset';
 
 @mixin checkboxChecked {
 	--components-filterPills-borderColor: var(--palettes-product-300);
@@ -84,7 +83,7 @@
 	flex-wrap: nowrap;
 	overflow: auto;
 
-	@include reset.overflow;
+	// @include reset.overflow;
 
 	&::before,
 	&::after {

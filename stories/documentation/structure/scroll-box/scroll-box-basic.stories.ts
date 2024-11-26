@@ -33,9 +33,9 @@ const Template: StoryFn<ScrollBoxBasicStory> = (args) => ({
 	styles: [
 		`
 		.content {
-			padding-inline: 1rem;
-			background-color: blue;
-			color: white;
+			width: 5rem;
+			flex-shrink: 0;
+			margin-block: 1rem;
 		}	
 	`,
 	],

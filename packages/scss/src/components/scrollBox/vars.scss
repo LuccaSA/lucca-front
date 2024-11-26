@@ -2,4 +2,15 @@
 	--components-scrollBox-backgroundColor: var(--pr-t-elevation-surface-default);
 	--components-scrollBox-shadowColor: var(--palettes-neutral-400);
 	--components-scrollBox-shadowWidth: var(--pr-t-spacings-150);
+	--components-scrollBox-beforeOpacity: 1;
+	--components-scrollBox-afterOpacity: 1;
+	--components-scrollBox-gap: var(--pr-t-spacings-100);
+	--components-scrollBox-scrollBarWidth: thin;
+	--components-scrollBox-paddingInline: 0rem; // units are important here (calc)
+	--components-scrollBox-marginBlock: 0rem;
+	--components-scrollBox-children-marginBlock: 0rem;
+	--components-scrollBox-paddingInline: 0rem;
+	--components-scrollBox-paddingBlock: 0rem;
+	--components-scrollBox-marginInline: 0rem;
+	--components-scrollBox-wrap: nowrap;
 }

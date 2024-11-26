@@ -97,9 +97,9 @@
 }
 
 @mixin betweenWidths($breakpoint1, $breakpoint2, $at: 'media') {
-    @include queries($breakpoint1, $breakpoint2, $at: $at) {
-        @content;
-    }
+	@include queries($breakpoint1, $breakpoint2, $at: $at) {
+		@content;
+	}
 }
 
 // les raccourcis vers les requêtes pour minHeight/maxHeight/betweenHeights
@@ -117,9 +117,9 @@
 }
 
 @mixin betweenHeights($breakpoint1, $breakpoint2, $at: 'media') {
-    @include queries($breakpoint1, $breakpoint2, $property: 'height', $at: $at) {
-        @content;
-    }
+	@include queries($breakpoint1, $breakpoint2, $property: 'height', $at: $at) {
+		@content;
+	}
 }
 
 // Touch detection

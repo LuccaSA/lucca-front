@@ -16,7 +16,7 @@ export default {
 			props: {
 				example: null,
 			},
-			template: `<lu-filter-pill label="Date de début"><lu-date-input clearable [(ngModel)]="example"></lu-date-input></lu-filter-pill>
+			template: `<lu-filter-pill label="Date de début"><lu-date-input [(ngModel)]="example" /></lu-filter-pill>
 
 <pr-story-model-display>{{example}}</pr-story-model-display>
 `,

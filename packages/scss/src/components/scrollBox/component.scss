@@ -1,20 +1,26 @@
 @use '@lucca-front/scss/src/commons/utils/color';
+@use '@lucca-front/scss/src/commons/utils/a11y';
 @use '@lucca-front/scss/src/commons/utils/namespace';
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
 	background-color: var(--components-scrollBox-backgroundColor);
 	position: relative;
 	display: flex;
+	flex-wrap: var(--components-scrollBox-wrap);
+	gap: var(--components-scrollBox-gap);
 	overflow: auto;
-	scrollbar-width: thin;
+	scrollbar-width: var(--components-scrollBox-scrollBarWidth);
+	margin-inline: var(--components-scrollBox-marginInline);
+	padding-inline: var(--components-scrollBox-paddingInline);
+	padding-block: var(--components-scrollBox-paddingBlock);
+	margin-block: var(--components-scrollBox-marginBlock);
 
-	@media (hover: none) {
-		-ms-overflow-style: none;
-		scrollbar-width: none;
+	&:focus-visible {
+		@include a11y.focusVisible($offset: 0);
+	}
 
-		&::-webkit-scrollbar {
-			display: none;
-		}
+	> * {
+		margin-block: var(--components-scrollBox-children-marginBlock);
 	}
 
 	&::before,
@@ -27,6 +33,10 @@
 		top: 0;
 		bottom: 0;
 		background-repeat: no-repeat;
+		outline-offset: -1px;
+		transition-property: opacity;
+		transition-duration: (--commons-animations-durations-fast);
+		z-index: 1;
 		background-size:
 			75% 100%,
 			25% 100%,
@@ -34,7 +44,9 @@
 	}
 
 	&::before {
-		left: 0;
+		opacity: var(--components-scrollBox-beforeOpacity);
+		left: calc(var(--components-scrollBox-paddingInline) * -1);
+		margin-right: calc(var(--components-scrollBox-shadowWidth) * -1 - var(--components-scrollBox-gap));
 		background-position: 0% 50%;
 		background-image: radial-gradient(
 				farthest-side at 0% 50%,
@@ -54,7 +66,9 @@
 	}
 
 	&::after {
-		right: 0;
+		opacity: var(--components-scrollBox-afterOpacity);
+		right: calc(var(--components-scrollBox-paddingInline) * -1);
+		margin-left: calc(var(--components-scrollBox-shadowWidth) * -1 - var(--components-scrollBox-gap));
 		background-position: 100% 50%;
 		background-image: radial-gradient(
 				farthest-side at 100% 50%,
@@ -71,49 +85,5 @@
 				color.transparentize(var(--components-scrollBox-shadowColor), 1) calc(100% - 1px),
 				color.transparentize(var(--palettes-neutral-900), 0)
 			);
-	}
-
-	@at-root ($atRoot) {
-		.scrollBox-inner {
-			flex-shrink: 0;
-			position: relative;
-
-			&::before,
-			&::after {
-				content: '';
-				position: absolute;
-				z-index: 1;
-				display: block;
-				top: 1px;
-				bottom: 1px;
-				width: calc(var(--components-scrollBox-shadowWidth) / 1.5);
-				pointer-events: none;
-			}
-
-			&::before {
-				left: calc(var(--components-scrollBox-shadowWidth) * -1);
-				background-image: linear-gradient(
-					to right,
-					var(--components-scrollBox-backgroundColor) var(--components-scrollBox-shadowWidth),
-					color.transparentize(var(--palettes-neutral-900), 0)
-				);
-			}
-
-			&::after {
-				right: calc(var(--components-scrollBox-shadowWidth) * -1);
-				background-image: linear-gradient(
-					to left,
-					var(--components-scrollBox-backgroundColor) var(--components-scrollBox-shadowWidth),
-					color.transparentize(var(--palettes-neutral-900), 0)
-				);
-			}
-		}
-
-		.scrollBox-inner-content {
-			margin-left: calc(var(--components-scrollBox-shadowWidth) * -1);
-			margin-right: calc(var(--components-scrollBox-shadowWidth) * -1);
-			position: relative;
-			z-index: 2;
-		}
 	}
 }

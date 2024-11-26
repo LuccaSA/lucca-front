@@ -1,13 +1,13 @@
 @mixin product {
-	--components-clear-cross-color: var(--palettes-product-700);
-	--components-clear-background: var(--palettes-neutral-0);
+	--components-clear-cross-color: var(--palettes-neutral-0);
+	--components-clear-background: var(--palettes-product-700);
 
 	&:hover {
-		--components-clear-background: var(--palettes-product-50);
+		--components-clear-background: var(--palettes-product-600);
 	}
 
 	&:active {
-		--components-clear-background: var(--palettes-product-50);
+		--components-clear-background: var(--palettes-product-800);
 	}
 }
 
@@ -30,14 +30,14 @@
 }
 
 @mixin invertedProduct {
-	--components-clear-cross-color: var(--palettes-neutral-0);
-	--components-clear-background: var(--palettes-product-700);
+	--components-clear-cross-color: var(--palettes-product-700);
+	--components-clear-background: var(--palettes-neutral-0);
 
 	&:hover {
-		--components-clear-background: var(--palettes-product-600);
+		--components-clear-background: var(--palettes-product-50);
 	}
 
 	&:active {
-		--components-clear-background: var(--palettes-product-800);
+		--components-clear-background: var(--palettes-product-50);
 	}
 }

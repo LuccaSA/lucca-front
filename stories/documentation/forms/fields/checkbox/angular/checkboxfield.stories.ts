@@ -1,9 +1,9 @@
-import { CheckboxInputComponent } from '@lucca-front/ng/forms';
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { cleanupTemplate, generateInputs } from 'stories/helpers/stories';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
+import { CheckboxInputComponent } from '@lucca-front/ng/forms';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { cleanupTemplate, generateInputs } from 'stories/helpers/stories';
 
 export default {
 	title: 'Documentation/Forms/Fields/CheckboxField/Angular',
@@ -26,10 +26,10 @@ export default {
 			},
 		},
 		mixed: {
-				description: '[v17.4]'
+			description: '[v17.4]',
 		},
 		hiddenLabel: {
-			description: 'Masque le label en le conservant dans le DOM pour les lecteurs d\'écrans',
+			description: "Masque le label en le conservant dans le DOM pour les lecteurs d'écrans",
 		},
 	},
 } as Meta;

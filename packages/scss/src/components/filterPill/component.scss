@@ -1,7 +1,10 @@
 @use '@lucca-front/scss/src/commons/utils/namespace';
 @use '@lucca-front/scss/src/commons/utils/a11y';
 @use '@lucca-front/scss/src/commons/utils/reset';
+@use '@lucca-front/scss/src/commons/utils/overflow';
+@use '@lucca-front/scss/src/commons/utils/media';
 @use '@lucca-front/scss/src/components/clear/exports' as clear;
+@use '@lucca-front/scss/src/components/scrollBox/exports' as scrollBox;
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
 	display: flex;
@@ -20,19 +23,19 @@
 	white-space: nowrap;
 
 	@at-root ($atRoot) {
-		*:has(> .filterPillsWrapper) {
-			container-name: filterPill;
-			container-type: inline-size;
-		}
+		.filterPillScrollBoxWrapper.scrollBox {
+			--components-scrollBox-paddingInline: var(--pr-t-spacings-200);
+			--components-scrollBox-marginInline: calc(var(--components-scrollBox-paddingInline) * -1);
+			--components-scrollBox-paddingBlock: var(--pr-t-spacings-100);
+			--components-scrollBox-marginBlock: calc(var(--components-scrollBox-paddingBlock) * -1);
 
-		.filterPillsWrapper {
-			position: relative;
+			@include media.isNotTouchDevice {
+				@include scrollBox.wrap;
+			}
 
-			flex-wrap: nowrap;
-
-			display: flex;
-			flex-wrap: wrap;
-			gap: var(--components-filterPillsWrapper-gap);
+			@include media.isTouchDevice {
+				@include overflow.mask;
+			}
 		}
 
 		.filterPill_popover {
@@ -45,11 +48,36 @@
 			}
 		}
 
+		.filterPill_popoverOptions {
+			display: flex;
+			flex-direction: column;
+			gap: var(--pr-t-spacings-50);
+			padding: var(--pr-t-spacings-50);
+		}
+
+		.filterPill_popoverOptions-option {
+			padding: var(--pr-t-spacings-50) var(--pr-t-spacings-100);
+			border-radius: 4px;
+
+			&:hover {
+				background-color: var(--palettes-neutral-50);
+			}
+
+			&:has(:checked) {
+				background-color: var(--palettes-product-50);
+
+				&:hover {
+					background-color: var(--palettes-product-100);
+				}
+			}
+		}
+
 		.filterPill-label {
 			font-weight: var(--components-filterPills-label-fontWeight);
 			overflow: hidden;
 			text-overflow: ellipsis;
 			outline: none;
+			text-align: center;
 
 			&::before {
 				content: '';
@@ -75,12 +103,13 @@
 		}
 
 		.filterPill-clear {
-			margin-left: var(--pr-t-spacings-50);
+			margin-left: var(--pr-t-spacings-75);
+			margin-right: var(--pr-t-spacings-25);
 			position: relative;
 			z-index: 1;
 			display: var(--components-filterPills-clear-display);
 
-			@include clear.invertedProduct;
+			@include clear.product;
 		}
 
 		.filterPill-combobox {

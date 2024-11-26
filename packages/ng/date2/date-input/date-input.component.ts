@@ -1,7 +1,10 @@
 import { ConnectionPositionPair } from '@angular/cdk/overlay';
+import { NgTemplateOutlet } from '@angular/common';
 import { booleanAttribute, ChangeDetectionStrategy, Component, computed, effect, ElementRef, forwardRef, inject, input, LOCALE_ID, signal, viewChild, ViewEncapsulation } from '@angular/core';
 import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors, Validator } from '@angular/forms';
+import { LuccaIcon } from '@lucca-front/icons';
 import { getIntl, ɵeffectWithDeps } from '@lucca-front/ng/core';
+import { FILTER_PILL_INPUT_COMPONENT, FilterPillDisplayerDirective, FilterPillInputComponent } from '@lucca-front/ng/filter-pills';
 import { InputDirective } from '@lucca-front/ng/form-field';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { PopoverDirective } from '@lucca-front/ng/popover2';
@@ -13,9 +16,6 @@ import { DateRange } from '../calendar2/date-range';
 import { getDateFormat } from '../date-format';
 import { LU_DATE2_TRANSLATIONS } from '../date2.translate';
 import { comparePeriods, startOfPeriod } from '../utils';
-import { NgTemplateOutlet } from '@angular/common';
-import { FILTER_PILL_INPUT_COMPONENT, FilterPillDisplayerDirective, FilterPillInputComponent } from '@lucca-front/ng/filter-pills';
-import { LuccaIcon } from '@lucca-front/icons';
 
 @Component({
 	selector: 'lu-date-input',
@@ -70,6 +70,7 @@ export class DateInputComponent implements ControlValueAccessor, Validator, Filt
 	hideToday = input<boolean, boolean>(false, { transform: booleanAttribute });
 	hasTodayButton = input<boolean, boolean>(false, { transform: booleanAttribute });
 	clearable = input<boolean, boolean>(false, { transform: booleanAttribute });
+	// TODO: getLocalizedDateFormat
 	placeholder = input<string>();
 
 	mode = input<CalendarMode>('day');
@@ -131,7 +132,7 @@ export class DateInputComponent implements ControlValueAccessor, Validator, Filt
 
 	nextButton = viewChild<ElementRef<Element>>('nextButtonRef');
 
-	noPopover = false;
+	isFilterPill = false;
 
 	isFilterPillEmpty = signal(true);
 
@@ -150,7 +151,7 @@ export class DateInputComponent implements ControlValueAccessor, Validator, Filt
 					if (parsed.getFullYear() > 999) {
 						this.selectedDate.set(startOfDay(parsed));
 						this.currentDate.set(startOfDay(parsed));
-					} else if (!this.noPopover) {
+					} else if (!this.isFilterPill) {
 						this.selectedDate.set(parsed);
 					}
 				}
@@ -183,7 +184,7 @@ export class DateInputComponent implements ControlValueAccessor, Validator, Filt
 	}
 
 	enableFilterPillMode(): void {
-		this.noPopover = true;
+		this.isFilterPill = true;
 	}
 
 	clearFilterPillValue(): void {
@@ -195,7 +196,7 @@ export class DateInputComponent implements ControlValueAccessor, Validator, Filt
 	}
 
 	openPopover(ref: PopoverDirective): void {
-		if (!this.noPopover) {
+		if (!this.isFilterPill) {
 			ref.openPopover(true, true);
 			// Once popover is opened, aka in the next CD cycle, focus current tabbable date
 
@@ -302,7 +303,7 @@ export class DateInputComponent implements ControlValueAccessor, Validator, Filt
 	dateClicked(date: Date, popoverRef: PopoverDirective): void {
 		this.selectedDate.set(date);
 		this.currentDate.set(date);
-		if (!this.noPopover) {
+		if (!this.isFilterPill) {
 			popoverRef.close();
 			this.inputRef().nativeElement.focus();
 		}

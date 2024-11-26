@@ -68,21 +68,3 @@
 		}
 	}
 }
-
-.filterPillsWrapper {
-	@include varsWrapper;
-
-	//@include container.max('XS', $name: 'filterPill') {
-	//	@include media.isTouchDevice {
-	@include scroll;
-	//	}
-	//
-
-	&.is-beginning {
-		@include beginning;
-	}
-
-	&.is-ending {
-		@include ending;
-	}
-}

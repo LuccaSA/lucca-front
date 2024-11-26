@@ -16,9 +16,3 @@
 	--components-filterPills-clear-display: grid;
 	--components-filterPills-toggle-rotation: 0;
 }
-
-@mixin varsWrapper {
-	--components-filterPillsWrapper-displayBefore: block;
-	--components-filterPillsWrapper-displayAfter: block;
-	--components-filterPillsWrapper-gap: var(--pr-t-spacings-100);
-}

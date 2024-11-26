@@ -1,18 +1,1 @@
 //@use '@lucca-front/scss/src/components/scrollBox';
-
-.scrollBox2 {
-	outline: 5px solid;
-	display: flex;
-	gap: 1rem;
-	width: 20rem;
-	overflow: auto;
-	padding-bottom: 2rem;
-
-	&.is-firstVisible {
-		outline-color: red;
-	}
-
-	&.is-lastVisible {
-		outline-color: green;
-	}
-}

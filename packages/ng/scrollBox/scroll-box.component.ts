@@ -10,7 +10,7 @@ import { ChangeDetectionStrategy, Component, ElementRef, HostBinding, inject, On
 	encapsulation: ViewEncapsulation.None,
 	imports: [],
 	host: {
-		class: 'scrollBox2',
+		class: 'scrollBox',
 	},
 })
 export class ScrollBoxComponent implements OnInit {
