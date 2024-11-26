@@ -2,18 +2,19 @@ import { CommonModule } from '@angular/common';
 import { booleanAttribute, ChangeDetectionStrategy, Component, forwardRef, inject, Input, model, numberAttribute, OnDestroy, OnInit, TemplateRef, Type, ViewEncapsulation } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { getIntl } from '@lucca-front/ng/core';
-import { ALuSelectInputComponent, LuOptionContext, provideLuSelectLabelsAndIds } from '@lucca-front/ng/core-select';
+import { ALuSelectInputComponent, LuOptionContext, provideLuSelectLabelsAndIds, ɵLuOptionOutletDirective } from '@lucca-front/ng/core-select';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 import { Subject } from 'rxjs';
 import { LuMultiSelectDefaultDisplayerComponent } from '../displayer/index';
 import { LU_MULTI_SELECT_TRANSLATIONS } from '../select.translate';
 import { LuMultiSelectPanelRefFactory } from './panel-ref.factory';
 import { LuMultiSelectPanelRef } from './panel.model';
+import { IconComponent } from '@lucca-front/ng/icon';
 
 @Component({
 	selector: 'lu-multi-select',
 	standalone: true,
-	imports: [CommonModule, LuTooltipModule],
+	imports: [CommonModule, LuTooltipModule, ɵLuOptionOutletDirective, IconComponent],
 	templateUrl: './select-input.component.html',
 	styleUrls: ['./select-input.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
