@@ -200,7 +200,7 @@ export class DateInputComponent implements ControlValueAccessor, Validator {
 					result = result && this.min().getTime() <= date.getTime();
 					break;
 				case 'month':
-					result = result && this.min().getMonth() <= date.getMonth();
+					result = result && startOfMonth(this.min()).getTime() <= startOfMonth(date).getTime();
 					break;
 				case 'year':
 					result = result && this.min().getFullYear() <= date.getFullYear();
@@ -213,7 +213,7 @@ export class DateInputComponent implements ControlValueAccessor, Validator {
 					result = result && this.max().getTime() >= date.getTime();
 					break;
 				case 'month':
-					result = result && this.max().getMonth() >= date.getMonth();
+					result = result && startOfMonth(this.max()).getTime() >= startOfMonth(date).getTime();
 					break;
 				case 'year':
 					result = result && this.max().getFullYear() >= date.getFullYear();
