@@ -27,6 +27,7 @@
 					(keyup.escape)="popoverRef.close()"
 					[disabled]="disabled"
 					[attr.placeholder]="dateFormatLocalized()"
+					[attr.autocomplete]="autocomplete"
 				/>
 			</div>
 			<div class="dateRangeField-fieldset-content mod-end" [class.is-highlighted]="highlightedField() === 1">
@@ -50,6 +51,7 @@
 					(keyup.escape)="popoverRef.close()"
 					[disabled]="disabled"
 					[attr.placeholder]="dateFormatLocalized()"
+					[attr.autocomplete]="autocomplete"
 				/>
 			</div>
 			<lu-icon [icon]="'arrowRight'" [alt]="''" class="dateRangeField-fieldset-arrow" />

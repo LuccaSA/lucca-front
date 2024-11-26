@@ -1,6 +1,22 @@
 import { BreakpointObserver, LayoutModule } from '@angular/cdk/layout';
 import { ConnectionPositionPair } from '@angular/cdk/overlay';
-import { ChangeDetectionStrategy, Component, computed, effect, ElementRef, forwardRef, inject, input, Signal, signal, untracked, viewChild, viewChildren, ViewEncapsulation } from '@angular/core';
+import {
+	ChangeDetectionStrategy,
+	Component,
+	computed,
+	effect,
+	ElementRef,
+	forwardRef,
+	inject,
+	Input,
+	input,
+	Signal,
+	signal,
+	untracked,
+	viewChild,
+	viewChildren,
+	ViewEncapsulation,
+} from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors, Validator } from '@angular/forms';
 import { LuClass, PortalContent, PortalDirective, ɵeffectWithDeps } from '@lucca-front/ng/core';
@@ -90,6 +106,9 @@ export class DateRangeInputComponent extends AbstractDateComponent implements Co
 	highlightedField = signal<-1 | 0 | 1>(-1);
 
 	shortcuts = input<CalendarShortcut[]>();
+
+	@Input()
+	autocomplete: string;
 
 	protected currentRightDate = computed(() => {
 		return this.hasTwoCalendars() ? this.getNextCalendarDate(this.currentDate()) : this.currentDate();
