@@ -18,8 +18,8 @@ import {
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { LuccaIcon } from '@lucca-front/icons';
+import { IconComponent } from '@lucca-front/ng/icon';
 import { PopoverDirective } from '@lucca-front/ng/popover2';
-import { IconComponent } from '../../icon/icon.component';
 import { FILTER_PILL_HOST_COMPONENT, FILTER_PILL_INPUT_COMPONENT } from '../core';
 
 let nextId = 0;
