@@ -19,16 +19,15 @@ import {
 import { FormsModule } from '@angular/forms';
 import { LuccaIcon } from '@lucca-front/icons';
 import { PopoverDirective } from '@lucca-front/ng/popover2';
-import { FormFieldComponent } from '../../form-field/form-field.component';
 import { IconComponent } from '../../icon/icon.component';
-import { FILTER_PILL_HOST_COMPONENT, FILTER_PILL_INPUT_COMPONENT } from '../core/tokens';
+import { FILTER_PILL_HOST_COMPONENT, FILTER_PILL_INPUT_COMPONENT } from '../core';
 
 let nextId = 0;
 
 @Component({
 	selector: 'lu-filter-pill',
 	standalone: true,
-	imports: [PopoverDirective, FormsModule, IconComponent, NgTemplateOutlet, FormFieldComponent, FormFieldComponent],
+	imports: [PopoverDirective, FormsModule, IconComponent, NgTemplateOutlet],
 	templateUrl: './filter-pill.component.html',
 	styleUrl: './filter-pill.component.scss',
 	encapsulation: ViewEncapsulation.None,
@@ -64,8 +63,24 @@ export class FilterPillComponent {
 	customLabelTpl = signal<TemplateRef<unknown> | null>(null);
 
 	popoverPositions: ConnectionPositionPair[] = [
-		new ConnectionPositionPair({ originX: 'start', originY: 'bottom' }, { overlayX: 'start', overlayY: 'top' }, -14, 14),
-		new ConnectionPositionPair({ originX: 'start', originY: 'top' }, { overlayX: 'start', overlayY: 'bottom' }, -14, -16),
+		new ConnectionPositionPair(
+			{ originX: 'start', originY: 'bottom' },
+			{
+				overlayX: 'start',
+				overlayY: 'top',
+			},
+			-14,
+			14,
+		),
+		new ConnectionPositionPair(
+			{ originX: 'start', originY: 'top' },
+			{
+				overlayX: 'start',
+				overlayY: 'bottom',
+			},
+			-14,
+			-16,
+		),
 	];
 
 	label = input.required<string>();

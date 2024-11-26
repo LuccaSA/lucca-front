@@ -195,6 +195,18 @@ export class DateInputComponent implements ControlValueAccessor, Validator, Filt
 		return 'calendarDate';
 	}
 
+	arrowDown(event: Event, popoverRef: PopoverDirective) {
+		if (this.isFilterPill) {
+			this.calendar()?.focusTabbableDate();
+		} else {
+			if (popoverRef.opened()) {
+				popoverRef.focusBackToContent(event);
+			} else {
+				this.openPopover(popoverRef);
+			}
+		}
+	}
+
 	openPopover(ref: PopoverDirective): void {
 		if (!this.isFilterPill) {
 			ref.openPopover(true, true);
@@ -309,4 +321,6 @@ export class DateInputComponent implements ControlValueAccessor, Validator, Filt
 		}
 		this.filterPillPopoverCloseFn?.();
 	}
+
+	protected readonly close = close;
 }
