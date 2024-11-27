@@ -9,6 +9,7 @@ import { TagComponent } from '../../../../../../packages/ng/forms/rich-text-inpu
 import { ListFormatComponent } from '../../../../../../packages/ng/forms/rich-text-input/plugins/list-format';
 import { TextStyleToolbarComponent } from '../../../../../../packages/ng/forms/rich-text-input/plugins/text-style/text-style-toolbar.component';
 import { ListStyleToolbarComponent } from '../../../../../../packages/ng/forms/rich-text-input/plugins/list-format/list-style-toolbar.component';
+import { HeadingsComponent } from '../../../../../../packages/ng/forms/rich-text-input/plugins/headings';
 
 export default {
 	title: 'Documentation/Forms/Fields/RichTextField/Angular',
@@ -16,6 +17,7 @@ export default {
 		moduleMetadata({
 			imports: [
 				RichTextInputComponent,
+				HeadingsComponent,
 				TextStyleToolbarComponent,
 				ListStyleToolbarComponent,
 				ListFormatComponent,
@@ -64,7 +66,8 @@ export const Basic: StoryObj<RichTextInputComponent & { disabled: boolean; examp
 																				'Date dembauche',
 																				'Date de départ',
 																				]"/>		
-				<lu-rich-text-toolbar-list-style/>										
+				<lu-rich-text-toolbar-list-style/>			
+				<lu-rich-text-plugin-headings/>							
 	</lu-rich-text-input>
 </lu-form-field>
 {{example}}`),
