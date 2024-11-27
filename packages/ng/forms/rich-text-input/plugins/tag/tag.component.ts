@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, inject, input } from '@angular/core';
 import { $createTextNode, $getSelection } from 'lexical';
-import { TagNode } from '../../tag-node';
-import { LexicalEditorProvider } from '../../editor.provider';
+import { RichTextInputComponent } from '../../rich-text-input.component';
+import { TagNode } from './tag-node';
 
 @Component({
 	selector: 'lu-rich-text-plugin-tag',
@@ -11,9 +11,14 @@ import { LexicalEditorProvider } from '../../editor.provider';
 	styleUrl: 'tag.component.scss',
 })
 export class TagComponent {
-	editor = inject(LexicalEditorProvider).editor;
+	public richTextInputComponent: RichTextInputComponent = inject(RichTextInputComponent);
+	public editor = this.richTextInputComponent.editor;
 
 	tags = input<string[]>([]);
+
+	constructor() {
+		this.richTextInputComponent.customNodes.add(TagNode);
+	}
 
 	insertTag(text: string) {
 		this.editor().update(() => {

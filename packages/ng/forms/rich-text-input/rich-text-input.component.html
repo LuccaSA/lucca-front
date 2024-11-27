@@ -2,5 +2,7 @@
 	<div class="textField-input">
 		<div #content class="textField-input-value editor-content" contenteditable (keydown)="onKeyDown($event)"></div>
 	</div>
-	<div #toolbar class="editor-toolbar"></div>
+	<div class="editor-toolbar">
+		<ng-content />
+	</div>
 </div>
