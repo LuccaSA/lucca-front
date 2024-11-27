@@ -3,8 +3,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { $convertFromMarkdownString, $convertToMarkdownString, TRANSFORMERS } from '@lexical/markdown';
 import { registerRichText } from '@lexical/rich-text';
 import { mergeRegister } from '@lexical/utils';
-import { CommandPayloadType, createEditor, FORMAT_TEXT_COMMAND, Klass, LexicalCommand, LexicalEditor, LexicalNode } from 'lexical';
-import { CLEAR_FORMAT, FORMAT_HEADINGS, FORMAT_LINK, FORMAT_QUOTE, registerFormatOptions } from './commands';
+import { CommandPayloadType, createEditor, Klass, LexicalCommand, LexicalEditor, LexicalNode } from 'lexical';
 
 @Component({
 	selector: 'lu-rich-text-input',
@@ -25,14 +24,6 @@ export class RichTextInputComponent implements OnInit, OnDestroy, ControlValueAc
 	#onChange?: (markdown: string | null) => void;
 	#onTouch?: () => void;
 	#cleanup?: () => void;
-
-	readonly commands = {
-		FORMAT_TEXT_COMMAND,
-		FORMAT_HEADINGS,
-		FORMAT_QUOTE,
-		FORMAT_LINK,
-		CLEAR_FORMAT,
-	};
 
 	editor = signal<LexicalEditor | null>(null);
 
@@ -60,7 +51,6 @@ export class RichTextInputComponent implements OnInit, OnDestroy, ControlValueAc
 		this.editor().setRootElement(this.content().nativeElement);
 		this.#cleanup = mergeRegister(
 			registerRichText(this.editor()),
-			registerFormatOptions(this.editor()),
 			// registerCtrlEnterShortcut(this.editor, () => this.ctrlEnter.emit()),
 			// Sync editor state with ngControlValue
 			this.editor().registerUpdateListener(() =>
@@ -81,7 +71,6 @@ export class RichTextInputComponent implements OnInit, OnDestroy, ControlValueAc
 	writeValue(markdown: string | null): void {
 		this.editor().update(() => {
 			$convertFromMarkdownString(markdown ?? '', TRANSFORMERS);
-			console.log(markdown);
 		});
 	}
 
