@@ -5,94 +5,66 @@ import { RichTextInputComponent } from '@lucca-front/ng/forms/rich-text-input';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { cleanupTemplate, generateInputs } from 'stories/helpers/stories';
 import { TextStyleComponent } from '../../../../../../packages/ng/forms/rich-text-input/plugins/text-style';
-import { TagDirective } from '../../../../../../packages/ng/forms/rich-text-input/plugins/tag/tag.directive';
-import { TextStyleItalicDirective } from '../../../../../../packages/ng/forms/rich-text-input/plugins/text-style/text-style-italic.directive';
+import { TagComponent } from '../../../../../../packages/ng/forms/rich-text-input/plugins/tag/tag.component';
+import { ListFormatComponent } from '../../../../../../packages/ng/forms/rich-text-input/plugins/list-format';
+import { TextStyleToolbarComponent } from '../../../../../../packages/ng/forms/rich-text-input/plugins/text-style/text-style-toolbar.component';
+import { ListStyleToolbarComponent } from '../../../../../../packages/ng/forms/rich-text-input/plugins/list-format/list-style-toolbar.component';
 
 export default {
 	title: 'Documentation/Forms/Fields/RichTextField/Angular',
 	decorators: [
 		moduleMetadata({
-			imports: [RichTextInputComponent, TagDirective, TextStyleComponent, FormFieldComponent, FormsModule, ReactiveFormsModule, BrowserAnimationsModule, TextStyleItalicDirective],
+			imports: [
+				RichTextInputComponent,
+				TextStyleToolbarComponent,
+				ListStyleToolbarComponent,
+				ListFormatComponent,
+				TagComponent,
+				TextStyleComponent,
+				FormFieldComponent,
+				FormsModule,
+				ReactiveFormsModule,
+				BrowserAnimationsModule,
+			],
 		}),
 	],
 	argTypes: {
-		size: {
-			options: ['M', 'S', 'XS'],
+		example: {
 			control: {
-				type: 'select',
+				type: 'text',
 			},
-		},
-		inlineMessageState: {
-			options: ['default', 'success', 'warning', 'error'],
-			control: {
-				type: 'select',
-			},
-		},
-		hiddenLabel: {
-			description: 'Masque le label en le conservant dans le DOM pour les lecteurs d’écrans',
-		},
-		tags: {
-			control: {
-				type: 'multi-select',
-			},
-			options: [
-				'Prenom',
-				'Nom',
-				'Email',
-				'Téléphone',
-				'Adresse',
-				'Ville',
-				'Code postal',
-				'Pays',
-				'Entreprise',
-				'Poste',
-				'Service',
-				'Manager',
-				'Collaborateur',
-				'Date de naissance',
-				"Date d'embauche",
-				'Date de départ',
-			],
-			description: 'Liste de tags',
 		},
 	},
 } as Meta;
 
-export const Basic: StoryObj<RichTextInputComponent & { disabled: boolean } & FormFieldComponent & TagDirective> = {
+export const Basic: StoryObj<RichTextInputComponent & { disabled: boolean; example: string } & FormFieldComponent> = {
 	render: (args, { argTypes }) => {
-		const { counter, label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, ...inputArgs } = args;
+		const { example, ...inputArgs } = args;
 		return {
-			template: cleanupTemplate(`<lu-form-field ${generateInputs(
-				{
-					label,
-					hiddenLabel,
-					inlineMessage,
-					inlineMessageState,
-					size,
-				},
-				argTypes,
-			)}> 
+			props: { example },
+			template: cleanupTemplate(`<lu-form-field ${generateInputs({}, argTypes)}> 
 	<lu-rich-text-input
-		[luWithTagsPlugin]="['Prenom',
-												'Nom',
-												'Email',
-												'Téléphone',
-												'Adresse',
-												'Ville',
-												'Code postal',
-												'Pays',
-												'Entreprise',
-												'Poste',
-												'Service',
-												'Manager',
-												'Collaborateur',
-												'Date de naissance',
-												'Date dembauche',
-												'Date de départ',
-												]"
-		luWithItalicPlugin
 	${generateInputs(inputArgs, argTypes)}
 		[(ngModel)]="example">
+			<lu-rich-text-toolbar-text-style/>
+			<lu-rich-text-plugin-tag [tags]="['Prenom',
+																				'Nom',
+																				'Email',
+																				'Téléphone',
+																				'Adresse',
+																				'Ville',
+																				'Code postal',
+																				'Pays',
+																				'Entreprise',
+																				'Poste',
+																				'Service',
+																				'Manager',
+																				'Collaborateur',
+																				'Date de naissance',
+																				'Date dembauche',
+																				'Date de départ',
+																				]"/>		
+				<lu-rich-text-toolbar-list-style/>										
 	</lu-rich-text-input>
 </lu-form-field>
 {{example}}`),
@@ -102,12 +74,6 @@ export const Basic: StoryObj<RichTextInputComponent & { disabled: boolean } & Fo
 		};
 	},
 	args: {
-		label: 'Label',
-		required: true,
-		hiddenLabel: false,
-		disabled: false,
-		inlineMessage: 'Helper Text',
-		inlineMessageState: 'default',
-		tooltip: 'Je suis un message d’aide',
+		example: '*italic* **bold**',
 	},
 };
