@@ -74,7 +74,7 @@ function getTemplate(args: FormBasicStory): string {
 				<button type="button" luButton="text" size="S" [luPopover2]="contentOptions" palette="neutral"><lu-icon icon="filtersDescending" alt="Gérer les filtres"></lu-icon></button>
 			</div>
 			<div class="filterPillScrollBoxWrapper-group">
-				<lu-form-field label="Test" hiddenLabel size="S" style="width: 15rem">
+				<lu-form-field label="Test" hiddenLabel size="S" style="width: 15rem; flex-shrink: 0">
 					<lu-text-input [(ngModel)]="example10" hasSearchIcon hasClearer />
 				</lu-form-field>
 				<button type="submit" size="S" luButton="text" class="u-displayNone">Appliquer les filtres</button>		
