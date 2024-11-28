@@ -4,7 +4,6 @@ import { ChangeDetectionStrategy, Component, ElementRef, HostBinding, inject, On
 	selector: 'lu-scroll-box',
 	standalone: true,
 	template: '<ng-content />',
-	// templateUrl: './scroll-box.component.html',
 	styleUrls: ['./scroll-box.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	encapsulation: ViewEncapsulation.None,

@@ -1,7 +1,7 @@
 @mixin vars {
 	--components-scrollBox-backgroundColor: var(--pr-t-elevation-surface-default);
 	--components-scrollBox-shadowColor: var(--palettes-neutral-400);
-	--components-scrollBox-shadowWidth: var(--pr-t-spacings-150);
+	--components-scrollBox-shadowSize: var(--pr-t-spacings-150);
 	--components-scrollBox-beforeOpacity: 1;
 	--components-scrollBox-afterOpacity: 1;
 	--components-scrollBox-gap: var(--pr-t-spacings-100);

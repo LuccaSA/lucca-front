@@ -14,6 +14,7 @@
 	padding-inline: var(--components-scrollBox-paddingInline);
 	padding-block: var(--components-scrollBox-paddingBlock);
 	margin-block: var(--components-scrollBox-marginBlock);
+	border-radius: var(--commons-borderRadius-M);
 
 	&:focus-visible {
 		@include a11y.focusVisible($offset: 0);
@@ -25,11 +26,9 @@
 		pointer-events: none;
 		position: sticky;
 		flex-shrink: 0;
-		width: var(--components-scrollBox-shadowWidth);
+		width: var(--components-scrollBox-shadowSize);
 		margin-block: calc(var(--components-scrollBox-paddingBlock) * -1);
 		background-repeat: no-repeat;
-		transition-property: opacity;
-		transition-duration: (--commons-animations-durations-fast);
 		z-index: 1;
 		background-size:
 			75% 100%,
@@ -40,7 +39,7 @@
 	&::before {
 		opacity: var(--components-scrollBox-beforeOpacity);
 		left: calc(var(--components-scrollBox-paddingInline) * -1);
-		margin-right: calc(var(--components-scrollBox-shadowWidth) * -1 - var(--components-scrollBox-gap));
+		margin-right: calc(var(--components-scrollBox-shadowSize) * -1 - var(--components-scrollBox-gap));
 		background-position: 0% 50%;
 		background-image: radial-gradient(
 				farthest-side at 0% 50%,
@@ -62,7 +61,7 @@
 	&::after {
 		opacity: var(--components-scrollBox-afterOpacity);
 		right: calc(var(--components-scrollBox-paddingInline) * -1);
-		margin-left: calc(var(--components-scrollBox-shadowWidth) * -1 - var(--components-scrollBox-gap));
+		margin-left: calc(var(--components-scrollBox-shadowSize) * -1 - var(--components-scrollBox-gap));
 		background-position: 100% 50%;
 		background-image: radial-gradient(
 				farthest-side at 100% 50%,

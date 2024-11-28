@@ -70,7 +70,7 @@ function getTemplate(args: FormBasicStory): string {
 			
 
 			<div class="filterPillScrollBoxWrapper-group">
-				<lu-filter-pill label="Échéance"><lu-date-input [(ngModel)]="example6"></lu-date-input></lu-filter-pill>
+				<lu-filter-pill label="Échéance"><lu-date-input [(ngModel)]="example6" /></lu-filter-pill>
 				<button type="button" luButton="text" size="S" [luPopover2]="contentOptions" palette="neutral"><lu-icon icon="filtersDescending" alt="Gérer les filtres"></lu-icon></button>
 			</div>
 			<div class="filterPillScrollBoxWrapper-group">
@@ -104,6 +104,7 @@ function getTemplate(args: FormBasicStory): string {
 				<lu-checkbox-input [ngModel]="false" [ngModelOptions]="{standalone: true}"  />
 			</lu-form-field>
 			<!--
+			<div class="divider"></div>
 			<button luButton="text" size="S" type="submit">Activer ces filtres</button>
 			-->
 		</form>

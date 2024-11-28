@@ -96,6 +96,7 @@
 			width: calc(var(--pr-t-spacings-50) + var(--pr-t-spacings-200));
 			flex-shrink: 0;
 			z-index: 1;
+			color: var(--components-filterPill-toggle-iconColor);
 
 			.icon-arrowChevronBottom {
 				transform: rotate(var(--components-filterPill-toggle-rotation));
@@ -125,6 +126,18 @@
 
 			&:focus-visible {
 				outline: none;
+			}
+
+			// date range
+			&:has(.icon-arrowRight) {
+				display: flex;
+				align-items: center;
+				gap: var(--pr-t-spacings-50);
+				flex-shrink: 0;
+
+				.icon-arrowRight {
+					color: var(--palettes-product-700);
+				}
 			}
 		}
 
