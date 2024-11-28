@@ -40,88 +40,88 @@
 .u-animated {
 	&FadeIn,
 	&FadeOut {
-		@include keyframe.fadeIn;
-
 		animation-name: fadeIn;
+
+		@include keyframe.fadeIn;
 	}
 
 	&ScaleIn,
 	&ScaleOut {
-		@include keyframe.scaleIn;
-
 		animation-name: scaleIn;
+
+		@include keyframe.scaleIn;
 	}
 
 	&ScaleInTop,
 	&ScaleOutTop {
-		@include keyframe.scaleIn;
-
 		animation-name: scaleInTop;
+
+		@include keyframe.scaleIn;
 	}
 
 	&ScaleInRight,
 	&ScaleOutRight {
-		@include keyframe.scaleInRight;
-
 		animation-name: scaleInRight;
+
+		@include keyframe.scaleInRight;
 	}
 
 	&ScaleInBottom,
 	&ScaleOutBottom {
-		@include keyframe.scaleInBottom;
-
 		animation-name: scaleInBottom;
+
+		@include keyframe.scaleInBottom;
 	}
 
 	&ScaleInLeft,
 	&ScaleOutLeft {
-		@include keyframe.scaleInLeft;
-
 		animation-name: scaleInLeft;
+
+		@include keyframe.scaleInLeft;
 	}
 
 	&SlideIn,
 	&SlideInTop,
 	&SlideOut,
 	&SlideOutTop {
-		@include keyframe.slideIn;
-
 		animation-name: slideIn;
+
+		@include keyframe.slideIn;
 	}
 
 	&SlideInRight,
 	&SlideOutRight {
-		@include keyframe.slideInRight;
-
 		animation-name: slideInRight;
+
+		@include keyframe.slideInRight;
 	}
 
 	&SlideInBottom,
 	&SlideOutBottom {
-		@include keyframe.slideInBottom;
-
 		animation-name: slideInBottom;
+
+		@include keyframe.slideInBottom;
 	}
 
 	&SlideInLeft,
 	&SlideOutLeft {
-		@include keyframe.slideInLeft;
-
 		animation-name: slideInLeft;
+
+		@include keyframe.slideInLeft;
 	}
 
 	&Shake {
-		@include keyframe.shake;
-
 		animation-name: shake;
+
+		@include keyframe.shake;
 	}
 
 	&Pulse {
-		@include keyframe.pulse;
-
 		animation-name: pulse;
 		animation-direction: alternate;
 		animation-iteration-count: var(--commons-animations-iteration-count);
+
+		@include keyframe.pulse;
 	}
 
 	&FadeOut,

@@ -6,8 +6,6 @@
 @use '@lucca-front/scss/src/commons/utils/a11y';
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
-	@include keyframe.scaleIn;
-
 	@supports not (height: 1dvh) {
 		--components-dialog-maxHeight: var(--components-dialog-maxHeightFallback);
 	}
@@ -139,4 +137,6 @@
 			inset: 0;
 		}
 	}
+
+	@include keyframe.scaleIn;
 }

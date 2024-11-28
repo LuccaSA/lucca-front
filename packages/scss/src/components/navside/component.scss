@@ -155,8 +155,6 @@
 		}
 
 		.navSide-item-subMenu-item {
-			@include keyframe.slideInLeft;
-
 			opacity: 0;
 			animation-fill-mode: forwards;
 			animation-name: slideInLeft;
@@ -173,6 +171,8 @@
 					--delay: #{$i * 25ms};
 				}
 			}
+
+			@include keyframe.slideInLeft;
 		}
 
 		.navSide-bottomSection {

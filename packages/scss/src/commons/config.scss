@@ -1,3 +1,4 @@
+@use "sass:map";
 @use 'sass:list';
 @use '@lucca-front/scss/src/commons/utils/color';
 
@@ -384,7 +385,7 @@ $colorsRgb: (
 ) !default;
 
 // switch case
-$prod: map-get(
+$prod: map.get(
 	(
 		'brand': $brand,
 		'cleemy': $cleemy,

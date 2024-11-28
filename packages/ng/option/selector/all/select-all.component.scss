@@ -1,4 +1,4 @@
-@import '_definitions';
+@use '_definitions';
 :host {
-	@include optionSelectorStyle;
+	@include definitions.optionSelectorStyle;
 }

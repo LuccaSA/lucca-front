@@ -56,9 +56,9 @@
 }
 
 .cdk-overlay-backdrop.cdk-overlay-backdrop-showing.lu-popup-backdrop {
-	@include keyframe.fadeIn;
-
 	opacity: var(--pr-t-elevation-surface-backdrop);
+
+	@include keyframe.fadeIn;
 }
 
 // MODS
