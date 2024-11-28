@@ -45,6 +45,7 @@ export class LuMultiSelectPanelComponent<T> implements AfterViewInit {
 	options$ = this.selectInput.options$;
 	grouping = this.selectInput.grouping;
 	loading$ = this.selectInput.loading$;
+	searchable = this.selectInput.searchable;
 	optionComparer = this.selectInput.optionComparer;
 	optionKey = this.selectInput.optionKey;
 
@@ -60,7 +61,7 @@ export class LuMultiSelectPanelComponent<T> implements AfterViewInit {
 	public clueChange$ = this.selectInput.clue$;
 	public shouldDisplayAddOption$ = this.selectInput.shouldDisplayAddOption$;
 
-	groupTemplateLocation$ = ɵgetGroupTemplateLocation(!!this.grouping, this.clueChange$, this.options$);
+	groupTemplateLocation$ = ɵgetGroupTemplateLocation(!!this.grouping, this.clueChange$, this.options$, this.searchable);
 
 	onScroll(evt: Event): void {
 		if (!(evt.target instanceof HTMLElement)) {

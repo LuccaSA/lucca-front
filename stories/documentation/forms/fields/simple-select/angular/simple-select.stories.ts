@@ -66,7 +66,7 @@ export const Basic: StoryObj<
 				},
 				argTypes,
 			)}>
-	<lu-simple-select required	${generateInputs(inputArgs, argTypes)}
+	<lu-simple-select ${generateInputs(inputArgs, argTypes)}
 		[options]="legumes | filterLegumes:clue"
 		(clueChange)="clue = $event"
 		[(ngModel)]="example">
