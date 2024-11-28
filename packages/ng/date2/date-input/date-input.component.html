@@ -1,4 +1,4 @@
-<div class="textField">
+<div class="textField" #popoverAnchor>
 	<div class="textField-input">
 		<input
 			type="text"
@@ -10,18 +10,17 @@
 			(input)="userTextInput.set(date.value)"
 			(blur)="onTouched?.();inputFocused.set(false)"
 			(focus)="inputFocused.set(true)"
-			[attr.placeholder]="placeholder()"
 			aria-haspopup="true"
 			role="combobox"
 			(click)="popoverRef.openPopover(true, true)"
 			(keyup.arrowDown)="popoverRef.opened() ? popoverRef.focusBackToContent($event) : openPopover(popoverRef)"
-			(keyup.space)=" popoverRef.opened() ? popoverRef.focusBackToContent($event) : openPopover(popoverRef)"
 			(keyup.escape)="popoverRef.close()"
 			[disabled]="disabled"
+			[attr.placeholder]="placeholder() || dateFormatLocalized()"
 		/>
 
 		<div class="textField-input-affix">
-			@if (clearable() && date.value !== '') {
+			@if (clearable() && !disabled && date.value !== '') {
 			<button class="textField-input-affix-clear clear" type="button" (click)="clear(date)">
 				<span aria-hidden="true" class="lucca-icon icon-signClose"></span>
 				<span class="u-mask">{{ intl.clear }}</span>
@@ -29,6 +28,7 @@
 			}
 			<button
 				[luPopover2]="calendar"
+				[luPopoverAnchor]="popoverAnchor"
 				[disabled]="disabled"
 				[luPopoverNoCloseButton]="true"
 				#popoverRef="luPopover2"
@@ -45,20 +45,20 @@
 
 <ng-template #calendar>
 	<div class="calendarWrapper">
-		<div class="calendarWrapper-navigation mod-prev">
-			<button class="calendarWrapper-navigation-button button" type="button" (click)="prev()" #previousButtonRef>
+		<div class="calendarWrapper-navigation u-left0">
+			<button class="calendarWrapper-navigation-button button" type="button" (click)="prev(calendarMode())" #previousButtonRef>
 				<span aria-hidden="true" class="lucca-icon icon-chevronLeft"></span><span class="u-mask">{{ intl.previous }}</span>
 			</button>
 		</div>
-		<div class="calendarWrapper-navigation mod-next">
-			<button class="calendarWrapper-navigation-button button" type="button" (click)="next()" #nextButtonRef>
+		<div class="calendarWrapper-navigation u-right0">
+			<button class="calendarWrapper-navigation-button button" type="button" (click)="next(calendarMode())" #nextButtonRef>
 				<span aria-hidden="true" class="lucca-icon icon-chevronRight"></span><span class="u-mask"> {{ intl.next }}</span>
 			</button>
 		</div>
 		<div class="calendarWrapper-content" tabindex="-1">
 			<lu-calendar2
-				[enableOverflow]="!disableOverflow()"
-				[showOverflow]="!hideOverflow()"
+				[enableOverflow]="enableOverflow()"
+				[showOverflow]="showOverflow()"
 				[hideToday]="hideToday()"
 				[hasTodayButton]="hasTodayButton()"
 				[date]="currentDate()"
@@ -67,8 +67,8 @@
 				[getCellInfo]="combinedGetCellInfo"
 				[ranges]="ranges()"
 				(dateClicked)="selectedDate.set($event);currentDate.set($event);popoverRef.close();date.focus()"
-				(nextPage)="move(1)"
-				(previousPage)="move(-1)"
+				(nextPage)="move(1, calendarMode())"
+				(previousPage)="move(-1, calendarMode())"
 				[(displayMode)]="calendarMode"
 				[mode]="mode()"
 				[hideWeekend]="hideWeekend()"
