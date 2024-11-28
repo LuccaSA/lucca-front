@@ -23,7 +23,7 @@
 			cursor: text;
 
 			&:hover {
-				--components-timepicker-border: var(--palettes-neutral-400);
+				--components-timepicker-border: var(--pr-t-color-input-border-hover);
 			}
 
 			&:focus-within {

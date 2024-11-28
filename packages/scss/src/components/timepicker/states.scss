@@ -1,16 +1,16 @@
 @use '@lucca-front/scss/src/commons/utils/a11y';
 
 @mixin invalid {
-	--components-timepicker-background: var(--palettes-error-50);
-	--components-timepicker-border: var(--palettes-error-400);
+	--components-timepicker-background: var(--pr-t-color-input-background-critical);
+	--components-timepicker-border: var(--pr-t-color-input-border-critical);
 
 	&:hover {
-		--components-timepicker-border: var(--palettes-error-600);
+		--components-timepicker-border: var(--pr-t-color-input-border-critical-hover);
 	}
 }
 
 @mixin disabled {
-	--components-timepicker-background: var(--commons-disabled-background);
+	--components-timepicker-background: var(--pr-t-color-input-background-disabled);
 	--components-timepicker-border: var(--commons-disabled-placeholder);
-	--components-timepicker-color: var(--palettes-neutral-700); // disabled token candidate
+	--components-timepicker-color: var(--pr-t-color-input-text-disabled);
 }

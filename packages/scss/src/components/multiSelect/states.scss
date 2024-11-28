@@ -5,16 +5,15 @@
 }
 
 @mixin invalid {
-	--components-multiSelect-border-color: var(--palettes-error-400);
-	--components-multiSelect-background: var(--palettes-error-50);
-	--components-multiSelect-placeholder: var(--palettes-error-400);
+	--components-multiSelect-border-color: var(--pr-t-color-input-border-critical);
+	--components-multiSelect-background: var(--pr-t-color-input-background-critical);
+	--components-multiSelect-placeholder: var(--pr-t-color-input-text-placeholder-critical);
 }
 
 @mixin disabled {
-	--components-multiSelect-border-color: var(--palettes-neutral-300); // disabled token candidate
 	--components-multiSelect-background: var(--commons-disabled-background);
 	--components-multiSelect-placeholder: var(--commons-disabled-placeholder);
-	--components-multiSelect-arrow-color: var(--palettes-neutral-500); // disabled token candidate
+	--components-multiSelect-arrow-color: var(--pr-t-color-input-icon-disabled);
 	pointer-events: none;
 }
 
