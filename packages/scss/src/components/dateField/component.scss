@@ -1,0 +1,6 @@
+@use '@lucca-front/scss/src/commons/utils/namespace';
+
+@mixin component($atRoot: namespace.$defaultAtRoot) {
+	max-width: var(--components-dateField-maxWidth);
+	display: block;
+}
