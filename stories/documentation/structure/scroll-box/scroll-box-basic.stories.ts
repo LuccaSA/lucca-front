@@ -14,31 +14,22 @@ export default {
 
 function getTemplate(args: ScrollBoxBasicStory): string {
 	return `<lu-scroll-box>
-	<div class="content">0</div>
-	<div class="content">1</div>
-	<div class="content">2</div>
-	<div class="content">3</div>
-	<div class="content">4</div>
-	<div class="content">5</div>
-	<div class="content">6</div>
-	<div class="content">7</div>
-	<div class="content">8</div>
-	<div class="content">9</div>
+	<button class="button mod-outline mod-S" type="button">button</button>
+	<button class="button mod-outline mod-S" type="button">button</button>
+	<button class="button mod-outline mod-S" type="button">button</button>
+	<button class="button mod-outline mod-S" type="button">button</button>
+	<button class="button mod-outline mod-S" type="button">button</button>
+	<button class="button mod-outline mod-S" type="button">button</button>
+	<button class="button mod-outline mod-S" type="button">button</button>
+	<button class="button mod-outline mod-S" type="button">button</button>
+	<button class="button mod-outline mod-S" type="button">button</button>
+	<button class="button mod-outline mod-S" type="button">button</button>
 </lu-scroll-box>`;
 }
 
 const Template: StoryFn<ScrollBoxBasicStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
-	styles: [
-		`
-		.content {
-			width: 5rem;
-			flex-shrink: 0;
-			margin-block: 1rem;
-		}	
-	`,
-	],
 });
 
 export const Basic = Template.bind({});

@@ -40,9 +40,21 @@
 }
 
 @mixin checkboxDisabled {
+	--components-filterPill-backgroundColor: var(--palettes-neutral-50);
+	--components-filterPill-borderColor: var(--palettes-neutral-300);
+	--components-filterPill-checkbox-borderColor: var(--palettes-neutral-500);
+	--components-filterPill-color: var(--palettes-neutral-500);
+	--components-filterPill-label-cursor: default;
 }
 
 @mixin checkboxCheckedDisabled {
+	--components-filterPill-backgroundColor: var(--palettes-neutral-50);
+	--components-filterPill-borderColor: var(--palettes-neutral-300);
+	--components-filterPill-checkbox-borderColor: var(--palettes-neutral-100);
+	--components-filterPill-checkbox-backgroundColor: var(--palettes-neutral-100);
+	--components-filterPill-color: var(--palettes-neutral-500);
+	--components-filterPill-checkbox-color: var(--palettes-neutral-500);
+	--components-filterPill-label-cursor: default;
 }
 
 @mixin empty {
@@ -76,39 +88,4 @@
 
 @mixin ending {
 	--components-filterPillWrapper-displayAfter: none;
-}
-
-@mixin scroll {
-	position: relative;
-	flex-wrap: nowrap;
-	overflow: auto;
-
-	// @include reset.overflow;
-
-	&::before,
-	&::after {
-		position: sticky;
-		background-image: linear-gradient(to right, var(--pr-t-elevation-surface-default), transparent);
-		z-index: 2;
-		top: 0;
-		bottom: 0;
-		width: var(--pr-t-spacings-300);
-		pointer-events: none;
-		content: '';
-		outline-offset: -1px;
-		flex-shrink: 0;
-	}
-
-	&::before {
-		left: 0;
-		margin-right: calc(var(--pr-t-spacings-300) * -1 - var(--components-filterPillWrapper-gap));
-		display: var(--components-filterPillWrapper-displayBefore);
-	}
-
-	&::after {
-		right: 0;
-		transform: scaleX(-1);
-		margin-left: calc(var(--pr-t-spacings-300) * -1 - var(--components-filterPillWrapper-gap));
-		display: var(--components-filterPillWrapper-displayAfter);
-	}
 }

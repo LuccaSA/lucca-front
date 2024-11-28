@@ -62,7 +62,7 @@
 				@include notEmptyActive;
 			}
 
-			&:has(.filterPill-checkbox-input:checked) {
+			&:has(.filterPill-checkbox-input:disabled) {
 				@include checkboxCheckedDisabled;
 			}
 		}

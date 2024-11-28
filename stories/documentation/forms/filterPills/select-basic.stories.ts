@@ -31,8 +31,9 @@ export default {
 function getTemplate(args: SelectBasicStory): string {
 	const classAttr = args.value !== '' ? `class="filterPill"` : `class="filterPill is-empty"`;
 	const tooltip = args.value !== '' ? `luTooltip="${args.value}"` : ``;
+	const labelDisplayed = args.value ? args.label + ': ' : args.label;
 	return `<div ${classAttr}>
-	<label for="input1" class="filterPill-label" luTooltip="${args.label}" luTooltipWhenEllipsis="true">${args.label}</label>
+	<label for="input1" class="filterPill-label" luTooltip="${args.label}" luTooltipWhenEllipsis="true">${labelDisplayed}</label>
 	<button class="filterPill-combobox" type="button" id="input1" role="combobox" aria-expanded="${args.expanded}" ${tooltip} luTooltipWhenEllipsis="true">
 		${args.value ? args.value : 'Sélectionner une valeur'}
 	</button>

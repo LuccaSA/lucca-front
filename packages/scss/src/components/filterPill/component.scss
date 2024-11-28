@@ -24,17 +24,12 @@
 
 	@at-root ($atRoot) {
 		.filterPillScrollBoxWrapper.scrollBox {
-			--components-scrollBox-paddingInline: var(--pr-t-spacings-200);
-			--components-scrollBox-marginInline: calc(var(--components-scrollBox-paddingInline) * -1);
-			--components-scrollBox-paddingBlock: var(--pr-t-spacings-100);
-			--components-scrollBox-marginBlock: calc(var(--components-scrollBox-paddingBlock) * -1);
-
-			@include media.isNotTouchDevice {
-				@include scrollBox.wrap;
+			@include media.pointer('coarse') {
+				@include overflow.mask;
 			}
 
-			@include media.isTouchDevice {
-				@include overflow.mask;
+			@include media.pointer('coarse', $reversed: true) {
+				@include scrollBox.wrap;
 			}
 		}
 
@@ -55,7 +50,7 @@
 				flex-grow: 1;
 			}
 
-			@include media.isTouchDevice {
+			@include media.pointer('coarse') {
 				display: contents;
 			}
 		}
@@ -74,23 +69,6 @@
 
 			.textField-input-affix-toggle {
 				display: none;
-			}
-		}
-
-		.filterPill_popover-content-formField {
-			padding: var(--pr-t-spacings-50) var(--pr-t-spacings-100);
-			border-radius: 4px;
-
-			&:hover {
-				background-color: var(--palettes-neutral-50);
-			}
-
-			&:has(:checked) {
-				background-color: var(--palettes-product-50);
-
-				&:hover {
-					background-color: var(--palettes-product-100);
-				}
 			}
 		}
 
@@ -161,7 +139,7 @@
 		.filterPill-checkbox {
 			border: 2px solid var(--components-filterPill-checkbox-borderColor);
 			border-radius: 4px;
-			color: var(--palettes-neutral-0);
+			color: var(--components-filterPill-checkbox-color);
 			transition-property: color, border-color, background-color;
 			transition-duration: var(--commons-animations-durations-fast);
 			background-color: var(--components-filterPill-checkbox-backgroundColor);

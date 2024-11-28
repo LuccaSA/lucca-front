@@ -77,32 +77,36 @@ function getTemplate(args: FormBasicStory): string {
 				<lu-form-field label="Test" hiddenLabel size="S" style="width: 15rem; flex-shrink: 0">
 					<lu-text-input [(ngModel)]="example10" hasSearchIcon hasClearer />
 				</lu-form-field>
-				<button type="submit" size="S" luButton="text" class="u-displayNone">Appliquer les filtres</button>		
-				<button type="submit" size="S" luButton="outlined" class="u-marginLeftAuto u-displayNone">Exporter</button>
+				<!--
+				<button type="submit" size="S" luButton="text">Appliquer les filtres</button>		
+				<button type="submit" size="S" luButton="outlined" class="u-marginLeftAuto">Exporter</button>
+				-->
 			</div>
 
 			<div class="filterPillScrollBoxWrapper-last"></div>
 		</lu-scroll-box>
 	</lu-filter-bar>
 	<ng-template #contentOptions>
-		<div class="filterPill_popover-content popover-contentOptional">
-			<lu-form-field label="Inclure les collaborateurs partis" class="filterPill_popover-content-formField">
-				<lu-checkbox-input [ngModel]="true"  />
+		<form class="filterPill_popover-content popover-contentOptional">
+			<lu-form-field label="Inclure les collaborateurs partis" class="filterPill_popover-content-formField mod-selectOption">
+				<lu-checkbox-input [ngModel]="true" [ngModelOptions]="{standalone: true}" />
 			</lu-form-field>	
-			<lu-form-field label="Équipe" class="filterPill_popover-content-formField">
-				<lu-checkbox-input [ngModel]="true" />
+			<lu-form-field label="Équipe" class="filterPill_popover-content-formField mod-selectOption">
+				<lu-checkbox-input [ngModel]="true" [ngModelOptions]="{standalone: true}" />
 			</lu-form-field>
-			<lu-form-field label="Statut" class="filterPill_popover-content-formField">
-				<lu-checkbox-input [ngModel]="false" />
+			<lu-form-field label="Statut" class="filterPill_popover-content-formField mod-selectOption">
+				<lu-checkbox-input [ngModel]="false" [ngModelOptions]="{standalone: true}" />
 			</lu-form-field>
-			<lu-form-field label="Échéance" class="filterPill_popover-content-formField">
-				<lu-checkbox-input [ngModel]="true" />
+			<lu-form-field label="Échéance" class="filterPill_popover-content-formField mod-selectOption">
+				<lu-checkbox-input [ngModel]="true" [ngModelOptions]="{standalone: true}" />
 			</lu-form-field>
-			<lu-form-field label="Fréquence de facturation" class="filterPill_popover-content-formField">
-				<lu-checkbox-input [ngModel]="false"  />
+			<lu-form-field label="Fréquence de facturation" class="filterPill_popover-content-formField mod-selectOption">
+				<lu-checkbox-input [ngModel]="false" [ngModelOptions]="{standalone: true}"  />
 			</lu-form-field>
-			<button luButton="text" size="S" type="submit" class="u-displayNone">Activer ces filtres</button>
-		</div>
+			<!--
+			<button luButton="text" size="S" type="submit">Activer ces filtres</button>
+			-->
+		</form>
 	</ng-template>
 `;
 }

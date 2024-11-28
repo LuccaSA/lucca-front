@@ -19,10 +19,6 @@
 		@include a11y.focusVisible($offset: 0);
 	}
 
-	> * {
-		margin-block: var(--components-scrollBox-children-marginBlock);
-	}
-
 	&::before,
 	&::after {
 		content: '';
@@ -30,10 +26,8 @@
 		position: sticky;
 		flex-shrink: 0;
 		width: var(--components-scrollBox-shadowWidth);
-		top: 0;
-		bottom: 0;
+		margin-block: calc(var(--components-scrollBox-paddingBlock) * -1);
 		background-repeat: no-repeat;
-		outline-offset: -1px;
 		transition-property: opacity;
 		transition-duration: (--commons-animations-durations-fast);
 		z-index: 1;
