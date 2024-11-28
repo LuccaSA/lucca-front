@@ -39,6 +39,10 @@
 		}
 	}
 
+	&.mod-selectOption {
+		@include selectOption;
+	}
+
 	&.mod-checkable,
 	&:has(.radioField),
 	&:has(.checkboxField),

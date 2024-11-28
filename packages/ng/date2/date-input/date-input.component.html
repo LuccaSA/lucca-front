@@ -1,8 +1,11 @@
+@if (isFilterPill) {
+<label for="dateInput" class="u-mask">{{ intl.pickDate }}</label>
+}
 <div class="textField">
 	<div class="textField-input">
 		<input
 			type="text"
-			id="date"
+			id="dateInput"
 			#date
 			luInput
 			class="textField-input-value"
@@ -14,15 +17,21 @@
 			aria-haspopup="true"
 			role="combobox"
 			(click)="popoverRef.openPopover(true, true)"
-			(keyup.arrowDown)="popoverRef.opened() ? popoverRef.focusBackToContent($event) : openPopover(popoverRef)"
+			(keyup.arrowDown)="arrowDown($event, popoverRef)"
 			(keyup.space)=" popoverRef.opened() ? popoverRef.focusBackToContent($event) : openPopover(popoverRef)"
 			(keyup.escape)="popoverRef.close()"
+			(keyup.enter)="isFilterPill?filterPillPopoverCloseFn():null"
 			[disabled]="disabled"
 		/>
 
 		<div class="textField-input-affix">
 			@if (clearable() && date.value !== '') {
-			<button class="textField-input-affix-clear clear" type="button" (click)="clear(date)">
+			<button class="textField-input-affix-clear clear" type="button" (click)="clear()">
+				<span aria-hidden="true" class="lucca-icon icon-signClose"></span>
+				<span class="u-mask">{{ intl.clear }}</span>
+			</button>
+			} @if (isFilterPill && date.value !== '') {
+			<button class="textField-input-affix-clear clear" type="button" (click)="date.value = ''">
 				<span aria-hidden="true" class="lucca-icon icon-signClose"></span>
 				<span class="u-mask">{{ intl.clear }}</span>
 			</button>
@@ -31,6 +40,7 @@
 				[luPopover2]="calendar"
 				[disabled]="disabled"
 				[luPopoverNoCloseButton]="true"
+				[luPopoverDisabled]="isFilterPill"
 				#popoverRef="luPopover2"
 				[customPositions]="popoverPositions"
 				tabindex="-1"
@@ -42,6 +52,12 @@
 		</div>
 	</div>
 </div>
+
+@if (isFilterPill) {
+<ng-container *ngTemplateOutlet="calendar"></ng-container>
+}
+
+<div *luFilterPillDisplayer>{{ displayValue() }}</div>
 
 <ng-template #calendar>
 	<div class="calendarWrapper">
@@ -66,7 +82,7 @@
 				[(tabbableDate)]="tabbableDate"
 				[getCellInfo]="combinedGetCellInfo"
 				[ranges]="ranges()"
-				(dateClicked)="selectedDate.set($event);currentDate.set($event);popoverRef.close();date.focus()"
+				(dateClicked)="dateClicked($event, popoverRef)"
 				(nextPage)="move(1)"
 				(previousPage)="move(-1)"
 				[(displayMode)]="calendarMode"

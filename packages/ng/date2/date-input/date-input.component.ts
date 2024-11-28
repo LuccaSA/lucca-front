@@ -1,7 +1,10 @@
 import { ConnectionPositionPair } from '@angular/cdk/overlay';
+import { NgTemplateOutlet } from '@angular/common';
 import { booleanAttribute, ChangeDetectionStrategy, Component, computed, effect, ElementRef, forwardRef, inject, input, LOCALE_ID, signal, viewChild, ViewEncapsulation } from '@angular/core';
 import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors, Validator } from '@angular/forms';
+import { LuccaIcon } from '@lucca-front/icons';
 import { getIntl, ɵeffectWithDeps } from '@lucca-front/ng/core';
+import { FILTER_PILL_INPUT_COMPONENT, FilterPillDisplayerDirective, FilterPillInputComponent } from '@lucca-front/ng/filter-pills';
 import { InputDirective } from '@lucca-front/ng/form-field';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { PopoverDirective } from '@lucca-front/ng/popover2';
@@ -17,7 +20,7 @@ import { comparePeriods, startOfPeriod } from '../utils';
 @Component({
 	selector: 'lu-date-input',
 	standalone: true,
-	imports: [PopoverDirective, Calendar2Component, IconComponent, InputDirective],
+	imports: [PopoverDirective, Calendar2Component, IconComponent, InputDirective, NgTemplateOutlet, FilterPillDisplayerDirective],
 	templateUrl: './date-input.component.html',
 	styleUrl: './date-input.component.scss',
 	encapsulation: ViewEncapsulation.None,
@@ -33,9 +36,13 @@ import { comparePeriods, startOfPeriod } from '../utils';
 			useExisting: forwardRef(() => DateInputComponent),
 			multi: true,
 		},
+		{
+			provide: FILTER_PILL_INPUT_COMPONENT,
+			useExisting: forwardRef(() => DateInputComponent),
+		},
 	],
 })
-export class DateInputComponent implements ControlValueAccessor, Validator {
+export class DateInputComponent implements ControlValueAccessor, Validator, FilterPillInputComponent {
 	#locale = inject(LOCALE_ID);
 
 	#intlDateTimeFormat = new Intl.DateTimeFormat(this.#locale);
@@ -44,7 +51,7 @@ export class DateInputComponent implements ControlValueAccessor, Validator {
 	#intlDateTimeFormatYear = new Intl.DateTimeFormat(this.#locale, { year: 'numeric' });
 
 	// Contains the current date format (like dd/mm/yy etc) based on current locale
-	#dateFormat = getDateFormat(this.#locale).toUpperCase();
+	#dateFormat = getDateFormat(this.#locale);
 
 	intl = getIntl(LU_DATE2_TRANSLATIONS);
 
@@ -63,6 +70,7 @@ export class DateInputComponent implements ControlValueAccessor, Validator {
 	hideToday = input<boolean, boolean>(false, { transform: booleanAttribute });
 	hasTodayButton = input<boolean, boolean>(false, { transform: booleanAttribute });
 	clearable = input<boolean, boolean>(false, { transform: booleanAttribute });
+	// TODO: getLocalizedDateFormat
 	placeholder = input<string>();
 
 	mode = input<CalendarMode>('day');
@@ -86,6 +94,8 @@ export class DateInputComponent implements ControlValueAccessor, Validator {
 	selectedDate = signal<Date | null>(null);
 
 	calendar = viewChild(Calendar2Component);
+
+	inputRef = viewChild<ElementRef<HTMLInputElement>>('date');
 
 	displayValue = computed(() => {
 		if (this.selectedDate() && this.isValidDate(this.selectedDate())) {
@@ -122,6 +132,12 @@ export class DateInputComponent implements ControlValueAccessor, Validator {
 
 	nextButton = viewChild<ElementRef<Element>>('nextButtonRef');
 
+	isFilterPill = false;
+
+	isFilterPillEmpty = signal(true);
+
+	filterPillPopoverCloseFn?: () => void;
+
 	get isNavigationButtonFocused(): boolean {
 		return [this.previousButton()?.nativeElement, this.nextButton()?.nativeElement].includes(document.activeElement);
 	}
@@ -135,16 +151,20 @@ export class DateInputComponent implements ControlValueAccessor, Validator {
 					if (parsed.getFullYear() > 999) {
 						this.selectedDate.set(startOfDay(parsed));
 						this.currentDate.set(startOfDay(parsed));
-					} else {
+					} else if (!this.isFilterPill) {
 						this.selectedDate.set(parsed);
 					}
 				}
 			},
 			{ allowSignalWrites: true },
 		);
-		effect(() => {
-			this.#onChange?.(this.selectedDate());
-		});
+		effect(
+			() => {
+				this.#onChange?.(this.selectedDate());
+				this.isFilterPillEmpty.set(!this.selectedDate());
+			},
+			{ allowSignalWrites: true },
+		);
 
 		ɵeffectWithDeps([this.calendarMode, this.tabbableDate], (calendarMode, tabbableDate) => {
 			if (tabbableDate && !comparePeriods(calendarMode, tabbableDate, this.currentDate())) {
@@ -159,12 +179,43 @@ export class DateInputComponent implements ControlValueAccessor, Validator {
 		});
 	}
 
-	openPopover(ref: PopoverDirective): void {
-		ref.openPopover(true, true);
-		// Once popover is opened, aka in the next CD cycle, focus current tabbable date
-		setTimeout(() => {
+	registerFilterPillClosePopover(closeFn: () => void): void {
+		this.filterPillPopoverCloseFn = closeFn;
+	}
+
+	enableFilterPillMode(): void {
+		this.isFilterPill = true;
+	}
+
+	clearFilterPillValue(): void {
+		this.clear();
+	}
+
+	getDefaultFilterPillIcon(): LuccaIcon {
+		return 'calendarDate';
+	}
+
+	arrowDown(event: Event, popoverRef: PopoverDirective) {
+		if (this.isFilterPill) {
 			this.calendar()?.focusTabbableDate();
-		});
+		} else {
+			if (popoverRef.opened()) {
+				popoverRef.focusBackToContent(event);
+			} else {
+				this.openPopover(popoverRef);
+			}
+		}
+	}
+
+	openPopover(ref: PopoverDirective): void {
+		if (!this.isFilterPill) {
+			ref.openPopover(true, true);
+			// Once popover is opened, aka in the next CD cycle, focus current tabbable date
+
+			setTimeout(() => {
+				this.calendar()?.focusTabbableDate();
+			});
+		}
 	}
 
 	validate(control: AbstractControl<Date, Date>): ValidationErrors {
@@ -233,8 +284,8 @@ export class DateInputComponent implements ControlValueAccessor, Validator {
 		this.move(1);
 	}
 
-	clear(input: HTMLInputElement) {
-		input.value = '';
+	clear() {
+		this.inputRef().nativeElement.value = '';
 		this.selectedDate.set(null);
 		this.onTouched?.();
 	}
@@ -260,4 +311,16 @@ export class DateInputComponent implements ControlValueAccessor, Validator {
 				break;
 		}
 	}
+
+	dateClicked(date: Date, popoverRef: PopoverDirective): void {
+		this.selectedDate.set(date);
+		this.currentDate.set(date);
+		if (!this.isFilterPill) {
+			popoverRef.close();
+			this.inputRef().nativeElement.focus();
+		}
+		this.filterPillPopoverCloseFn?.();
+	}
+
+	protected readonly close = close;
 }
