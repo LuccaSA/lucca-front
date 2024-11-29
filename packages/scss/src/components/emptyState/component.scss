@@ -56,8 +56,9 @@
 		.emptyState-actions {
 			display: flex;
 			flex-wrap: wrap;
+			align-items: center;
 			margin-top: var(--pr-t-spacings-200);
-			gap: var(--pr-t-spacings-100);
+			gap: var(--pr-t-spacings-200);
 
 			.button {
 				margin: 0;
