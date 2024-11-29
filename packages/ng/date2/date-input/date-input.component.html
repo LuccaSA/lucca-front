@@ -21,6 +21,7 @@
 			(keyup.enter)="isFilterPill?filterPillPopoverCloseFn():null"
 			[disabled]="disabled"
 			[attr.placeholder]="placeholder() || dateFormatLocalized()"
+			[attr.autocomplete]="autocomplete"
 		/>
 
 		<div class="textField-input-affix">

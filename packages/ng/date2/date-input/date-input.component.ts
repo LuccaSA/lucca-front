@@ -1,6 +1,6 @@
 import { ConnectionPositionPair } from '@angular/cdk/overlay';
-import { ChangeDetectionStrategy, Component, computed, effect, ElementRef, forwardRef, inject, input, signal, viewChild, ViewEncapsulation } from '@angular/core';
 import { NgTemplateOutlet } from '@angular/common';
+import { ChangeDetectionStrategy, Component, computed, effect, ElementRef, forwardRef, inject, Input, input, signal, viewChild, ViewEncapsulation } from '@angular/core';
 import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors, Validator } from '@angular/forms';
 import { LuccaIcon } from '@lucca-front/icons';
 import { LuClass, ɵeffectWithDeps } from '@lucca-front/ng/core';
@@ -49,6 +49,9 @@ export class DateInputComponent extends AbstractDateComponent implements Control
 	#onChange?: (value: Date) => void;
 
 	#luClass = inject(LuClass);
+
+	@Input()
+	autocomplete: string;
 
 	placeholder = input<string>();
 
