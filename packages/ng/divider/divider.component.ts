@@ -5,7 +5,6 @@ import { LuClass } from '@lucca-front/ng/core';
 	selector: 'lu-divider',
 	standalone: true,
 	providers: [LuClass],
-	// templateUrl: './divider.component.html',
 	template: '<ng-content></ng-content>',
 	styleUrls: ['./divider.component.scss'],
 	encapsulation: ViewEncapsulation.None,
