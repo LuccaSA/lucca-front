@@ -41,6 +41,7 @@ import { comparePeriods, startOfPeriod } from '../utils';
 			provide: FILTER_PILL_INPUT_COMPONENT,
 			useExisting: forwardRef(() => DateInputComponent),
 		},
+		LuClass,
 	],
 })
 export class DateInputComponent extends AbstractDateComponent implements ControlValueAccessor, Validator, FilterPillInputComponent {
@@ -187,7 +188,7 @@ export class DateInputComponent extends AbstractDateComponent implements Control
 			this.calendar()?.focusTabbableDate();
 		} else {
 			if (popoverRef.opened()) {
-				popoverRef.focusBackToContent(event);
+				this.calendar()?.focusTabbableDate();
 			} else {
 				this.openPopover(popoverRef);
 			}

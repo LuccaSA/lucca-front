@@ -6,6 +6,7 @@ import {
 	computed,
 	contentChild,
 	effect,
+	ElementRef,
 	forwardRef,
 	HostBinding,
 	inject,
@@ -47,6 +48,8 @@ export class FilterPillComponent {
 	// TODO Selects: Fournir une couche autour d'overlayRef qui décide d'attacher le panel sur un overlay ou un ng-container dans le cas d'un pill
 
 	#locale = inject(LOCALE_ID);
+
+	elementRef = inject(ElementRef);
 
 	id = `filterPill-combobox-${nextId++}`;
 
