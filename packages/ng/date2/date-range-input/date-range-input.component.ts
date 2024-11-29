@@ -401,6 +401,9 @@ export class DateRangeInputComponent extends AbstractDateComponent implements Co
 
 	arrowDown(popoverRef: PopoverDirective, fieldToFocus: 'start' | 'end'): void {
 		this.openPopover(popoverRef, fieldToFocus, true);
+		if (this.editedField() === -1) {
+			this.editedField.set(fieldToFocus === 'start' ? 0 : 1);
+		}
 	}
 
 	validate(control: AbstractControl<DateRange, DateRange>): ValidationErrors {
