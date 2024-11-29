@@ -34,7 +34,8 @@ function getTemplate(args: NumericBadgeBasicStory): string {
 	const size = args.size ? ' ' + args.size : '';
 	const palette = args.palette ? args.palette : '';
 	const loading = args.loading ? 'mod-loading' : '';
-	return `<span class="numericBadge ${size} ${palette} ${loading}">${args.value}</span>`;
+	const hidden = args.loading ? 'aria-hidden="true"' : '';
+	return `<span class="numericBadge ${size} ${palette} ${loading}" ${hidden}>${args.value}</span>`;
 }
 
 const Template: StoryFn<NumericBadgeBasicStory> = (args) => ({

@@ -32,6 +32,11 @@ export class NumericBadgeComponent implements OnChanges {
 	@Input()
 	loading: boolean = false;
 
+	@HostBinding('attr.aria-hidden')
+	get ariaHidden() {
+		return this.loading;
+	}
+
 	@Input()
 	/**
 	 * The palette to use for this badge. Defaults to 'none' (inherits parent palette)
