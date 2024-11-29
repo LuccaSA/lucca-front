@@ -1,0 +1,5 @@
+@mixin vars {
+	--components-dataTable-cell-padding-inline: var(--pr-t-spacings-150);
+	--components-dataTable-cell-padding-block: var(--pr-t-spacings-100);
+	--components-dataTable-cell-padding: var(--components-dataTable-cell-padding-block) var(--components-dataTable-cell-padding-inline);
+}
