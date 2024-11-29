@@ -1,0 +1,89 @@
+@use 'exports' as *;
+
+// Faire une repasse CSS vars mods
+
+.dataTable {
+	@include vars;
+	@include component;
+
+	&.mod-cellBorder {
+		@include cellBorder;
+	}
+
+	&.mod-alignTop {
+		@include alignTop;
+	}
+
+	&.mod-layoutFixed {
+		@include layoutFixed;
+	}
+
+	&[class*='mod-layoutFixedAtMediaMin'] {
+		@include layoutFixedWithBreakpoint;
+	}
+
+	&[class*='mod-layoutFixed'] {
+		@include layoutFixedCells;
+	}
+
+	@include collapsedRow;
+}
+
+.dataTable-body-row,
+.dataTable-foot-row {
+	&.mod-group {
+		@include group;
+	}
+}
+
+.dataTable-head-row,
+.dataTable-body-row,
+.dataTable-foot-row {
+	&.mod-selectable {
+		@include selectable;
+	}
+
+	&.mod-draggable {
+		@include draggable;
+	}
+}
+
+.dataTable-head-row-cell,
+.dataTable-body-row-cell,
+.dataTable-foot-row-cell {
+	&.mod-actions {
+		@include actions;
+
+		// .mod-actionsHidden is deprecated &.mod-actionsHidden {
+		// 	@include actionsHidden;
+		// }
+	}
+
+	&.mod-alignCenter {
+		@include alignCenter;
+	}
+
+	&.mod-alignRight {
+		@include alignRight;
+	}
+
+	&.mod-editable {
+		@include editable;
+	}
+
+	&.mod-tree1 {
+		@include tree1;
+	}
+
+	&.mod-tree2 {
+		@include tree2;
+	}
+
+	&.mod-tree3 {
+		@include tree3;
+	}
+
+	&.mod-tree4 {
+		@include tree4;
+	}
+}
