@@ -72,8 +72,8 @@ export class FilterPillComponent {
 				overlayX: 'start',
 				overlayY: 'top',
 			},
-			-14,
-			14,
+			-4,
+			0,
 		),
 		new ConnectionPositionPair(
 			{ originX: 'start', originY: 'top' },
@@ -81,8 +81,8 @@ export class FilterPillComponent {
 				overlayX: 'start',
 				overlayY: 'bottom',
 			},
-			-14,
-			-16,
+			-4,
+			0,
 		),
 	];
 
