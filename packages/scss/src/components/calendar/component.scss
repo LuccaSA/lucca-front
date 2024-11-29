@@ -96,7 +96,8 @@
 			position: absolute;
 			top: 0;
 			background-color: var(--components-calendarWrapper-navigationBackground);
-			border-width: var(--pr-t-spacings-150);
+			border-width: var(--pr-t-spacings-50) var(--pr-t-spacings-150);
+			margin: var(--pr-t-spacings-100) 0;
 			border-style: solid;
 			border-color: var(--components-calendarWrapper-navigationBackground);
 			border-radius: var(--commons-borderRadius-L);

@@ -59,6 +59,10 @@
 			--components-dateInput-width: none;
 			--components-popover-padding: var(--pr-t-spacings-100);
 
+			lu-date-input.dateField {
+				--components-dateField-maxWidth: none;
+			}
+
 			&:has(.filterPill_popover-content-formField) {
 				--components-popover-padding: var(--pr-t-spacings-50);
 			}
