@@ -3,16 +3,16 @@ import { IconComponent } from '@lucca-front/ng/icon';
 import { Meta, moduleMetadata, StoryFn } from '@storybook/angular';
 import { ButtonComponent } from 'dist/ng/button';
 
-interface DividerAngularStory {
+interface DividerBasicStory {
 	size: string;
 	content: string;
 	role: boolean;
-	iconSample: boolean;
-	buttonWrapper: boolean;
+	icon: boolean;
+	button: boolean;
 }
 
 export default {
-	title: 'Documentation/Structure/Divider',
+	title: 'Documentation/Structure/Divider/Angular',
 	decorators: [
 		moduleMetadata({
 			imports: [DividerComponent, ButtonComponent, IconComponent],
@@ -35,13 +35,13 @@ export default {
 				type: 'boolean',
 			},
 		},
-		buttonWrapper: {
+		button: {
 			control: {
 				type: 'boolean',
 			},
-			if: { arg: 'iconSample', truthy: false },
+			if: { arg: 'icon', truthy: false },
 		},
-		iconSample: {
+		icon: {
 			control: {
 				type: 'boolean',
 			},
@@ -49,16 +49,16 @@ export default {
 	},
 } as Meta;
 
-function getTemplate(args: DividerAngularStory): string {
+function getTemplate(args: DividerBasicStory): string {
 	const withRole = args.role ? `withRole` : ``;
 	let sizes = ``;
 	if (args.size === 'S' || args.size === 'M') {
 		sizes = `size="${args.size}"`;
 	}
-	if (args.iconSample) {
+	if (args.icon) {
 		return `<lu-divider ${withRole} ${sizes}><lu-icon icon="heart" /></lu-divider>`;
 	} else {
-		if (args.buttonWrapper) {
+		if (args.button) {
 			return `<lu-divider ${withRole} ${sizes}><button luButton>${args.content}</button></lu-divider>`;
 		} else {
 			return `<lu-divider ${withRole} ${sizes}>${args.content}</lu-divider>`;
@@ -66,16 +66,16 @@ function getTemplate(args: DividerAngularStory): string {
 	}
 }
 
-const Template: StoryFn<DividerAngularStory> = (args) => ({
+const Template: StoryFn<DividerBasicStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Angular = Template.bind({});
-Angular.args = {
+export const Basic = Template.bind({});
+Basic.args = {
 	content: 'Lorem ipsum dolor',
 	size: '',
 	role: false,
-	iconSample: false,
-	buttonWrapper: false,
+	icon: false,
+	button: false,
 };
