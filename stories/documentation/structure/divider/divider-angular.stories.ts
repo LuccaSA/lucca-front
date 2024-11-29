@@ -30,7 +30,6 @@ export default {
 				type: 'select',
 			},
 		},
-		// TODO : if content is empty
 		role: {
 			control: {
 				type: 'boolean',
@@ -52,17 +51,17 @@ export default {
 
 function getTemplate(args: DividerAngularStory): string {
 	const withRole = args.role ? `withRole` : ``;
-	let classes = ``;
+	let sizes = ``;
 	if (args.size === 'S' || args.size === 'M') {
-		classes = `class="mod-${args.size}"`;
+		sizes = `size="${args.size}"`;
 	}
 	if (args.iconSample) {
-		return `<lu-divider ${withRole} ${classes}><lu-icon icon="heart" /></lu-divider>`;
+		return `<lu-divider ${withRole} ${sizes}><lu-icon icon="heart" /></lu-divider>`;
 	} else {
 		if (args.buttonWrapper) {
-			return `<lu-divider ${withRole} ${classes}><button luButton>{{content}}</button></lu-divider>`;
+			return `<lu-divider ${withRole} ${sizes}><button luButton>${args.content}</button></lu-divider>`;
 		} else {
-			return `<lu-divider ${withRole} ${classes}>{{content}}</lu-divider>`;
+			return `<lu-divider ${withRole} ${sizes}>${args.content}</lu-divider>`;
 		}
 	}
 }
