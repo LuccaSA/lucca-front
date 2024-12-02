@@ -1,0 +1,55 @@
+@use '@lucca-front/scss/src/commons/utils/namespace';
+@use '@lucca-front/scss/src/commons/utils/media';
+
+@mixin component($atRoot: namespace.$defaultAtRoot) {
+	overflow: hidden;
+	padding-inline: var(--pr-t-spacings-200);
+
+
+	@at-root ($atRoot) {
+		.fancyBox-content {
+			display: flex;
+			flex-direction: column;
+			margin: 0 auto;
+			min-height: 10rem;
+			min-width: min(20rem, 100%);
+			padding-block: var(--pr-t-spacings-300);
+			width: fit-content;
+			position: relative;
+		}
+
+		.fancyBox-content-box {
+			position: relative;
+			padding: var(--pr-t-spacings-300);
+			background-color: var(--pr-t-elevation-surface-raised);
+			border-radius: 16px;
+			flex-grow: 1;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+
+			&::before,
+			&::after {
+				content: '';
+				position: absolute;
+				z-index: -1;
+				width: 12.5rem;
+				height: 10rem;
+				background-repeat: no-repeat;
+			}
+
+			&::before {
+				bottom: -1.5rem;
+				left: -10rem;
+				background-image: var(--components-fancyBox-background-left);
+			}
+
+			&::after {
+				top: -1.5rem;
+				right: -10rem;
+				background-image: var(--components-fancyBox-background-right);
+			}
+		}
+	}
+}

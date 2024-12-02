@@ -1,0 +1,6 @@
+@use 'exports' as *;
+
+.fancyBox {
+	@include vars;
+	@include component;
+}
