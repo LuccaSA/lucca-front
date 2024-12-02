@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { computed, Directive, forwardRef, inject, input, model } from '@angular/core';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { ILuApiItem } from '@lucca-front/ng/api';
-import { CORE_SELECT_API_TOTAL_COUNT_PROVIDER, CoreSelectApiTotalCountProvider, sanitizeClueFilter } from '@lucca-front/ng/core-select';
+import { CORE_SELECT_API_TOTAL_COUNT_PROVIDER, CoreSelectApiTotalCountProvider, applySearchDelimiter } from '@lucca-front/ng/core-select';
 import { debounceTime, map, Observable, switchMap } from 'rxjs';
 import { ALuCoreSelectApiDirective } from './api.directive';
 
@@ -36,7 +36,7 @@ export class LuCoreSelectApiV4Directive<T extends ILuApiItem> extends ALuCoreSel
 			return {
 				...this.filters(),
 				...(sort ? { sort } : {}),
-				...(clue ? { search: sanitizeClueFilter(clue, searchDelimiter) } : {}),
+				...(clue ? { search: applySearchDelimiter(clue, searchDelimiter) } : {}),
 			};
 		}),
 	);
