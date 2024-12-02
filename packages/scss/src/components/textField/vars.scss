@@ -1,6 +1,6 @@
 @mixin vars {
-	--component-textField-lineHeight: var(--size-M-lightHeight);
-	--component-textField-fontSize: var(--size-M-fontSize);
+	--component-textField-lineHeight: var(--sizes-M-lineHeight);
+	--component-textField-fontSize: var(--sizes-M-fontSize);
 	--component-textField-placeholder: var(--palettes-neutral-400);
 	--component-textField-background: var(--palettes-neutral-0);
 	--component-textField-border: var(--palettes-neutral-300);
@@ -10,6 +10,6 @@
 	--component-textField-affix-padding: var(--component-textField-padding);
 	--component-textField-affix-size: 1.75rem;
 	--component-textField-scrollMargin: 88rem; // un nombre arbitraire suffit pour scrollIntoView
-	--component-textField-maxHeight: calc(100dvh - 10rem);
-	--component-textField-maxHeightFallback: calc(100vh - 10rem);
+	--component-textField-maxHeight: 90dvh;
+	--component-textField-maxHeightFallback: 90vh;
 }

@@ -1,4 +1,5 @@
 @use 'exports' as *;
+@use '@lucca-front/scss/src/commons/utils/media';
 
 .calendarWrapper {
 	@include wrapperVars;
@@ -20,29 +21,14 @@
 	&:has(.calendar-table-body-row-cell:nth-child(3):last-child) {
 		@include third;
 	}
+}
 
-	// if we have a selection start
-	&:has(.calendar-table-body-row-cell.is-start) {
-		// but no selection end
-		&:not(:has(.calendar-table-body-row-cell.is-end)) {
-			// and either focus-visible
-			&:has(.calendar-table-body-row-cell-action:focus-visible) {
-				// we call the selection in progress mixin
-				@include selectionInProgress($event: ':focus-within');
-			}
-
-			// or hovering (without focus-visible)
-			&:not(:has(.calendar-table-body-row-cell:focus-within)) {
-				&:has(.calendar-table-body-row-cell:hover) {
-					// we call the selection in progress mixin
-					@include selectionInProgress($event: ':hover');
-				}
-			}
-		}
+.calendarShortcuts {
+	@include media.max('S') {
+		display: none;
 	}
 }
 
-.calendar-table-body-row-cell,
 .calendar-table-body-row-cell {
 	&.is-daysOff {
 		@include daysOff;
@@ -56,15 +42,35 @@
 		@include current;
 	}
 
-	&.is-selected {
-		@include selected;
+	&.is-selected,
+	&.is-selectionInProgress {
+		&:not(.is-overflow) {
+			@include selected;
+		}
 	}
 
+	&.is-singleDayInProgress,
 	&.is-start {
 		@include start;
 	}
 
 	&.is-end {
 		@include end;
+	}
+
+	&.is-startInProgress {
+		&:not(.is-endInProgress) {
+			@include startInProgress;
+		}
+
+		&.is-endInProgress {
+			@include startEndInProgress;
+		}
+	}
+
+	&.is-endInProgress {
+		&:not(.is-startInProgress) {
+			@include endInProgress;
+		}
 	}
 }

@@ -9,9 +9,7 @@
 	[cdkTrapFocusAutoCapture]="true"
 >
 	<div class="lu-picker-content" [class.is-loading]="loading$ | async" (scroll)="onScroll($event)">
-		@if (selectInput.panelHeaderTpl) {
 		<ng-container *luPortal="selectInput.panelHeaderTpl()" />
-		}
 		<div role="listbox">
 			<ng-container *ngIf="grouping && ctx.groupTemplateLocation === 'group-header'">
 				<div

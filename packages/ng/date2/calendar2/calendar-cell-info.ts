@@ -1,22 +1,26 @@
-import { DateRange } from './date-range';
 import { CellStatus } from './cell-status';
+import { DateRange } from './date-range';
+
+export interface RangeInfo {
+	range?: DateRange;
+	isStart: boolean;
+	isEnd: boolean;
+	label?: string;
+}
 
 export interface CalendarCellInfo {
 	day: number;
-	isWeekend: boolean;
-	isOverflow: boolean;
 	date: Date;
 	status: CellStatus;
-	isCurrent: boolean;
-	classes: string[];
 	disabled: boolean;
+	isWeekend: boolean;
+	isCurrent: boolean;
+	isOverflow: boolean;
+	isSelected: boolean;
+	noButton: boolean;
 	label?: string;
-	rangeInfo: {
-		range?: DateRange;
-		isStart: boolean;
-		isEnd: boolean;
-		label?: string;
-	};
+	rangeInfo: RangeInfo;
+	ngClasses: Record<string, boolean>;
 }
 
 export interface CalendarMonthInfo {
@@ -25,11 +29,15 @@ export interface CalendarMonthInfo {
 	long: string;
 	isCurrent: boolean;
 	status: CellStatus;
+	rangeInfo: RangeInfo;
+	ngClasses: Record<string, boolean>;
 }
 
 export interface CalendarYearInfo {
 	date: Date;
-	label: string;
+	name: string;
 	isCurrent: boolean;
 	status: CellStatus;
+	rangeInfo: RangeInfo;
+	ngClasses: Record<string, boolean>;
 }

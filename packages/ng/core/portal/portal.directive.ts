@@ -30,6 +30,10 @@ export class PortalDirective<T = unknown> implements OnChanges, OnDestroy {
 			this.destroyRenderedText();
 		}
 
+		if (!this.luPortal) {
+			return;
+		}
+
 		if (this.luPortal instanceof TemplateRef) {
 			const context = Object.assign({}, this.luPortalContext);
 			this.embeddedViewRef = this.viewContainerRef.createEmbeddedView<T>(this.luPortal, context);
@@ -78,6 +82,10 @@ export class PortalDirective<T = unknown> implements OnChanges, OnDestroy {
 			this.renderer.removeChild(this.createdTextElement.parentNode, this.createdTextElement);
 			this.createdTextElement = null;
 		}
+	}
+
+	public static ngTemplateContextGuard<T>(_dir: PortalDirective<T>, ctx: unknown): ctx is void {
+		return true;
 	}
 
 	/**
