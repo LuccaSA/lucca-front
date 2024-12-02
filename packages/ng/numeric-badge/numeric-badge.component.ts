@@ -28,7 +28,7 @@ export class NumericBadgeComponent implements OnChanges {
 	 */
 	size: 'XS' | 'S' | 'M';
 
-	@HostBinding('class.mod-loading')
+	@HostBinding('class.is-loading')
 	@Input()
 	loading: boolean = false;
 

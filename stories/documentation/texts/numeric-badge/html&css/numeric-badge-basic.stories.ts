@@ -33,7 +33,7 @@ export default {
 function getTemplate(args: NumericBadgeBasicStory): string {
 	const size = args.size ? ' ' + args.size : '';
 	const palette = args.palette ? args.palette : '';
-	const loading = args.loading ? 'mod-loading' : '';
+	const loading = args.loading ? 'is-loading' : '';
 	const hidden = args.loading ? 'aria-hidden="true"' : '';
 	return `<span class="numericBadge ${size} ${palette} ${loading}" ${hidden}>${args.value}</span>`;
 }

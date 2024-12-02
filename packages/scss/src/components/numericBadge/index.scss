@@ -12,7 +12,15 @@
 		@include XS;
 	}
 
-	&.mod-loading {
+	&.is-loading {
 		@include loading;
+
+		&.mod-S {
+			@include loadingS;
+		}
+
+		&.mod-XS {
+			@include loadingXS;
+		}
 	}
 }

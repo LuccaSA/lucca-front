@@ -10,4 +10,14 @@
 
 	--commons-loading-frontground: var(--components-numericBadge-loadingColor);
 	--components-numericBadge-color: transparent;
+
+	--commons-loading-borderWidth: 2px;
+}
+
+@mixin loadingS {
+	--commons-loading-borderWidth: 1.5px;
+}
+
+@mixin loadingXS {
+	--commons-loading-borderWidth: 1px;
 }
