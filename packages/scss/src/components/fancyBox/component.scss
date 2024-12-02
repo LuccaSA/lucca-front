@@ -7,7 +7,7 @@
 
 
 	@at-root ($atRoot) {
-		.highlightedHeader-content {
+		.fancyBox-content {
 			display: flex;
 			flex-direction: column;
 			margin: 0 auto;
@@ -18,7 +18,7 @@
 			position: relative;
 		}
 
-		.highlightedHeader-content-box {
+		.fancyBox-content-box {
 			position: relative;
 			padding: var(--pr-t-spacings-300);
 			background-color: var(--pr-t-elevation-surface-raised);
@@ -42,13 +42,13 @@
 			&::before {
 				bottom: -1.5rem;
 				left: -10rem;
-				background-image: var(--components-highlightedHeader-background-left);
+				background-image: var(--components-fancyBox-background-left);
 			}
 
 			&::after {
 				top: -1.5rem;
 				right: -10rem;
-				background-image: var(--components-highlightedHeader-background-right);
+				background-image: var(--components-fancyBox-background-right);
 			}
 		}
 	}
