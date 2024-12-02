@@ -19,8 +19,6 @@ export class LinkComponent implements OnDestroy {
 	#renderer = inject(Renderer2);
 	#observer: MutationObserver;
 
-	// TODO : RouterLink - intercepter le click pour le disabled
-
 	@Input({ required: true })
 	label: string;
 
@@ -75,7 +73,7 @@ export class LinkComponent implements OnDestroy {
 			if (this.disabled()) {
 				this.hrefBackup = href();
 				this.#renderer.removeAttribute(this.#elementRef.nativeElement, 'href');
-			} else if (!href()) {
+			} else if (!href() && this.hrefBackup) {
 				this.#renderer.setAttribute(this.#elementRef.nativeElement, 'href', this.hrefBackup);
 			}
 		});
