@@ -64,7 +64,7 @@ export default {
 	},
 } as Meta;
 
-export const Template: StoryObj<FormFieldComponent> = {
+export const Template: StoryObj<FormFieldComponent & { required: boolean }> = {
 	args: {
 		label: 'Label',
 		required: true,
