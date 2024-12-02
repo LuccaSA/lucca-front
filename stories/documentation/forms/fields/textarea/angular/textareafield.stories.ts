@@ -50,7 +50,7 @@ export default {
 	},
 } as Meta;
 
-export const Basic: StoryObj<TextareaInputComponent & { disabled: boolean } & FormFieldComponent> = {
+export const Basic: StoryObj<TextareaInputComponent & { disabled: boolean; required: boolean } & FormFieldComponent> = {
 	render: (args, { argTypes }) => {
 		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, counter, autoResize, autoResizeScrollIntoView, ...inputArgs } = args;
 		return {

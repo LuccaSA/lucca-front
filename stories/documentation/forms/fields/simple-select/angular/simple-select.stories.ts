@@ -45,7 +45,14 @@ export default {
 	},
 } as Meta;
 
-export const Basic: StoryObj<LuSimpleSelectInputComponent<unknown> & FormFieldComponent & { disabled: boolean; hasValue: () => boolean }> = {
+export const Basic: StoryObj<
+	LuSimpleSelectInputComponent<unknown> &
+		FormFieldComponent & {
+			disabled: boolean;
+			hasValue: () => boolean;
+			required: boolean;
+		}
+> = {
 	render: (args, { argTypes }) => {
 		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, hasValue, ...inputArgs } = args;
 		return {
