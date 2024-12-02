@@ -146,9 +146,10 @@
 
 	// We only need one ::before for the card apparence and one ::after for the possible outline
 	.indexTable-body-row-cell {
+		--components-indexTable-cell-paddingBlock: 0;
+
 		position: static;
 		grid-column-start: 1;
-		padding: 0 var(--components-indexTable-cell-padding);
 
 		&::before {
 			--components-indexTable-cell-border-radius-left: var(--components-indexTable-cell-border-radius);
