@@ -15,4 +15,13 @@
 	transition-duration: var(--commons-animations-durations-fast);
 	transition-timing-function: ease;
 	white-space: nowrap;
+	position: relative;
+	transition-duration: var(--commons-animations-durations-fast);
+	transition-property: color;
+
+	&:empty {
+		&::before {
+			content: ' ';
+		}
+	}
 }
