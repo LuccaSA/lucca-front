@@ -1,15 +1,18 @@
 import { provideRouter, RouterLink } from '@angular/router';
 import { LinkComponent } from '@lucca-front/ng/link';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { map } from 'rxjs/operators';
+import { timer } from 'rxjs';
+import { AsyncPipe } from '@angular/common';
 
 export default {
 	title: 'Documentation/Actions/Link/Angular/Basic',
 	decorators: [
 		moduleMetadata({
-			imports: [LinkComponent, RouterLink],
+			imports: [LinkComponent, RouterLink, AsyncPipe],
 		}),
 		applicationConfig({
-			providers: [provideRouter([])],
+			providers: [provideRouter([{ path: 'iframe.html', redirectTo: '', pathMatch: 'full' }])],
 		}),
 	],
 
@@ -18,17 +21,13 @@ export default {
 		const disable = disabled ? 'disabled' : '';
 		const externe = external ? 'external' : '';
 
-		if (disabled) {
-			return {
-				template: `lorem <a href="${href}" luLink ${externe} ${disable}>${label}</a> dolor<br />
-			lorem <a [routerLink]="null" luLink ${externe} ${disable}>${label}</a> dolor`,
-			};
-		} else {
-			return {
-				template: `lorem <a href="${href}" luLink ${externe} ${disable}>${label}</a> dolor<br />
-			lorem <a [routerLink]="'${routerLink}'" luLink ${externe} ${disable}>${label}</a> dolor`,
-			};
-		}
+		return {
+			props: {
+				disabled$: timer(0, 5000).pipe(map((i) => i % 2 == 1)),
+			},
+			template: `lorem <a href="${href}" luLink ${externe} [disabled]="disabled$ | async">${label}</a> dolor<br />
+			lorem <a [luLink]="'${routerLink}'" ${externe}  [disabled]="disabled$ | async">${label}</a> dolor`,
+		};
 	},
 	argTypes: {
 		disabled: {
