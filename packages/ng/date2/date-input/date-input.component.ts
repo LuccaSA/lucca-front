@@ -175,7 +175,7 @@ export class DateInputComponent implements ControlValueAccessor, Validator {
 	validate(control: AbstractControl<Date, Date>): ValidationErrors {
 		// null is not an error but means we'll skip everything else, we'll let the presence of a
 		// Validators.required (or not) decide if it's an error.
-		if ([null, undefined].includes(control.value)) {
+		if (control.value === null || control.value === undefined) {
 			return null;
 		}
 		// try to parse the display value cause formControl.value is undefined if date is not parsable
