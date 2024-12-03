@@ -1,17 +1,19 @@
 @use '@lucca-front/scss/src/commons/utils/namespace';
+@use '@lucca-front/scss/src/components/button/exports' as button;
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
 	border: 0;
 
 	&:where(:empty) {
-		border-top-color: var(--commons-divider-color);
-		border-top-width: var(--commons-divider-width);
 		border-top: var(--commons-divider-border);
-		margin-block: var(--components-divider-margin);
+		margin-block: var(--components-divider-marginBlock);
+		margin-inline: 0;
+		height: auto;
 	}
 
 	&:not(:empty) {
 		--components-divider-margin: 0;
+
 		display: flex;
 		align-items: center;
 		gap: var(--pr-t-spacings-100);
@@ -23,16 +25,18 @@
 
 		&::before,
 		&::after {
-			border-top-color: var(--commons-divider-color);
-			border-top-width: var(--commons-divider-width);
 			border-top: var(--commons-divider-border);
+			min-width: var(--pr-t-spacings-150);
 			flex-grow: 1;
-			min-width: var(--pr-t-spacings-300);
 			content: '';
 		}
 
 		.lucca-icon {
 			color: var(--palettes-neutral-600);
 		}
+	}
+
+	.button {
+		@include button.outlined;
 	}
 }

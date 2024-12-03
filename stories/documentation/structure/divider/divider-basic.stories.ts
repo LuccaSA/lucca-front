@@ -22,7 +22,58 @@ Divider with small button
 Divider with Icon
 <div class="divider"><span aria-hidden="true" class="lucca-icon icon-heart"></span></div>
 Divider with small Icon
-<div class="divider mod-S"><span aria-hidden="true" class="lucca-icon icon-heart"></span></div>`;
+<div class="divider mod-S"><span aria-hidden="true" class="lucca-icon icon-heart"></span></div>
+Vertical divider
+<div class="u-displayFlex u-justifyContentSpaceBetween u-alignItemsCenter pr-u-marginTop100 pr-u-gap400">
+	<div class="u-displayFlex pr-u-gap100">
+		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+		<div class="divider mod-vertical"></div>
+		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+	</div>
+	<div class="u-displayFlex pr-u-gap100">
+		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+		<hr class="divider mod-vertical" />
+		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+	</div>
+</div>
+<div class="u-displayFlex u-justifyContentSpaceBetween u-alignItemsCenter pr-u-marginTop400 pr-u-gap400">
+	<div class="u-displayFlex pr-u-gap200 u-alignItemsCenter">
+		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+		<div class="divider mod-vertical">Text</div>
+		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+	</div>
+	<div class="u-displayFlex pr-u-gap100 u-alignItemsCenter">
+		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+		<div class="divider mod-vertical mod-S">Text</div>
+		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+	</div>
+</div>
+<div class="u-displayFlex u-justifyContentSpaceBetween u-alignItemsCenter pr-u-marginTop400 pr-u-gap400">
+	<div class="u-displayFlex pr-u-gap200 u-alignItemsCenter">
+		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+		<div class="divider mod-vertical"><span aria-hidden="true" class="lucca-icon icon-heart"></span></div>
+		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+	</div>
+	
+	<div class="u-displayFlex pr-u-gap100 u-alignItemsCenter">
+		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+		<div class="divider mod-vertical mod-S"><span aria-hidden="true" class="lucca-icon icon-heart"></span></div>
+		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+	</div>
+</div>
+<div class="u-displayFlex u-justifyContentSpaceBetween u-alignItemsCenter pr-u-marginTop400 pr-u-gap400">
+	<div class="u-displayFlex pr-u-gap200 u-alignItemsCenter">
+		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+		<div class="divider mod-vertical"><button class="button" type="button">Button</button></div>
+		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+	</div>
+	<div class="u-displayFlex pr-u-gap100 u-alignItemsCenter">
+		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+		<div class="divider mod-vertical mod-S"><button class="button" type="button">Button</button></div>
+		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+	</div>
+</div>
+`;
 }
 
 const Template: StoryFn<DividerBasicStory> = (args) => ({
