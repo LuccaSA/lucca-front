@@ -44,7 +44,7 @@ export class DateInputComponent implements ControlValueAccessor, Validator {
 	#intlDateTimeFormatYear = new Intl.DateTimeFormat(this.#locale, { year: 'numeric' });
 
 	// Contains the current date format (like dd/mm/yy etc) based on current locale
-	#dateFormat = getDateFormat(this.#locale).toUpperCase();
+	#dateFormat = getDateFormat(this.#locale);
 
 	intl = getIntl(LU_DATE2_TRANSLATIONS);
 
