@@ -1,6 +1,6 @@
+import { ButtonComponent } from '@lucca-front/ng/button';
 import { EmptyStateSectionComponent } from '@lucca-front/ng/empty-state';
 import { Meta, moduleMetadata, StoryFn } from '@storybook/angular';
-import { ButtonComponent } from '@lucca-front/ng/button';
 
 interface TableBasicStory {
 	withOverflow: boolean;
