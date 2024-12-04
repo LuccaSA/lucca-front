@@ -1,7 +1,7 @@
+import { ButtonComponent } from '@lucca-front/ng/button';
 import { DividerComponent } from '@lucca-front/ng/divider';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { Meta, moduleMetadata, StoryFn } from '@storybook/angular';
-import { ButtonComponent } from 'dist/ng/button';
 
 interface DividerBasicStory {
 	size: string;
