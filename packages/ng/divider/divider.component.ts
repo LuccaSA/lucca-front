@@ -28,6 +28,10 @@ export class DividerComponent implements OnChanges {
 		return this.role();
 	}
 
+	@Input({ transform: booleanAttribute })
+	@HostBinding('class.mod-vertical')
+	vertical: false;
+
 	@Input()
 	size: 'M' | 'S';
 
