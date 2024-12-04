@@ -1,9 +1,11 @@
-import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
-import { ListFormatComponent } from './list-format.component';
-import { ListItemNode, ListNode } from '@lexical/list';
-import { RichTextInputComponent } from '../../rich-text-input.component';
-import { registerListsGlobal } from './list-format.command';
+import { ChangeDetectionStrategy, Component, forwardRef, OnDestroy, viewChildren } from '@angular/core';
 import { mergeRegister } from '@lexical/utils';
+import { Klass, LexicalEditor, LexicalNode } from 'lexical';
+import { RICH_TEXT_PLUGIN_COMPONENT, RichTextPluginComponent } from '../../rich-text-input.component';
+import { registerListsGlobal } from './list-format.command';
+
+import { ListItemNode, ListNode } from '@lexical/list';
+import { ListFormatComponent } from './list-format.component';
 
 @Component({
 	selector: 'lu-rich-text-toolbar-list-style',
@@ -12,22 +14,27 @@ import { mergeRegister } from '@lexical/utils';
 	template: ` <lu-rich-text-plugin-list format="bullet" tooltip="Bullets" icon="formatBulletedList" />
 		<lu-rich-text-plugin-list format="number" tooltip="Numbered" icon="formatNumberedList" />`,
 	imports: [ListFormatComponent],
+	providers: [
+		{
+			provide: RICH_TEXT_PLUGIN_COMPONENT,
+			useExisting: forwardRef(() => ListStyleToolbarComponent),
+		},
+	],
 })
-export class ListStyleToolbarComponent implements OnInit {
-	public richTextInputComponent: RichTextInputComponent = inject(RichTextInputComponent);
-	public editor = this.richTextInputComponent.editor;
-
-	constructor() {
-		this.richTextInputComponent.customNodes.add(ListNode);
-		this.richTextInputComponent.customNodes.add(ListItemNode);
-	}
+export class ListStyleToolbarComponent implements OnDestroy, RichTextPluginComponent {
 	#registeredCommands: () => void = () => {};
 
-	public ngOnInit() {
-		this.#registeredCommands = mergeRegister(registerListsGlobal(this.editor()));
+	pluginComponents = viewChildren(ListFormatComponent);
+
+	setEditorInstance(editor: LexicalEditor): void {
+		this.pluginComponents().forEach((plugin) => plugin.setEditorInstance(editor));
+		this.#registeredCommands = mergeRegister(registerListsGlobal(editor));
+	}
+	getLexicalNodes?(): Klass<LexicalNode>[] {
+		return [ListNode, ListItemNode];
 	}
 
-	public ngOnDestroy() {
+	ngOnDestroy() {
 		this.#registeredCommands();
 	}
 }

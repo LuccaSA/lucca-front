@@ -1,12 +1,13 @@
-import { ChangeDetectionStrategy, Component, inject, input, OnDestroy, OnInit, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, forwardRef, input, OnDestroy, signal } from '@angular/core';
+import { ListType } from '@lexical/list';
+import { mergeRegister } from '@lexical/utils';
+import { LuccaIcon } from '@lucca-front/icons';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { IconComponent } from '@lucca-front/ng/icon';
-import { LuccaIcon } from '@lucca-front/icons';
-import { ListType } from '@lexical/list';
 import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
-import { RichTextInputComponent } from '../../rich-text-input.component';
+import { LexicalEditor } from 'lexical';
+import { RICH_TEXT_PLUGIN_COMPONENT, RichTextPluginComponent } from '../../rich-text-input.component';
 import { FORMAT_LIST, registerListsSelectionChange } from './list-format.command';
-import { mergeRegister } from '@lexical/utils';
 
 @Component({
 	selector: 'lu-rich-text-plugin-list',
@@ -15,21 +16,27 @@ import { mergeRegister } from '@lexical/utils';
 	templateUrl: 'list-format.component.html',
 	styleUrl: '../styles/_buttons.scss',
 	imports: [ButtonComponent, IconComponent, LuTooltipTriggerDirective],
+	providers: [
+		{
+			provide: RICH_TEXT_PLUGIN_COMPONENT,
+			useExisting: forwardRef(() => ListFormatComponent),
+		},
+	],
 })
-export class ListFormatComponent implements OnInit, OnDestroy {
-	public richTextInputComponent: RichTextInputComponent = inject(RichTextInputComponent);
-	public editor = this.richTextInputComponent.editor;
-
+export class ListFormatComponent implements OnDestroy, RichTextPluginComponent {
 	public format = input.required<ListType>();
 	public icon = input.required<LuccaIcon>();
 	public tooltip = input.required<string>();
 
 	public active = signal(false);
 
+	#editor?: LexicalEditor;
+
 	#registeredCommands: () => void = () => {};
 
-	public ngOnInit() {
-		this.#registeredCommands = mergeRegister(registerListsSelectionChange(this.editor(), this.format(), (hasFormat) => this.active.set(hasFormat)));
+	setEditorInstance(editor: LexicalEditor): void {
+		this.#editor = editor;
+		this.#registeredCommands = mergeRegister(registerListsSelectionChange(editor, this.format(), (hasFormat) => this.active.set(hasFormat)));
 	}
 
 	public ngOnDestroy() {
@@ -37,6 +44,6 @@ export class ListFormatComponent implements OnInit, OnDestroy {
 	}
 
 	public dispatchCommand() {
-		this.editor().dispatchCommand(FORMAT_LIST, this.format());
+		this.#editor?.dispatchCommand(FORMAT_LIST, this.format());
 	}
 }

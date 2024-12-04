@@ -1,9 +1,16 @@
-import { Component, ElementRef, forwardRef, OnDestroy, OnInit, signal, viewChild, ViewEncapsulation } from '@angular/core';
+import { AfterViewInit, Component, computed, contentChildren, ElementRef, forwardRef, InjectionToken, OnDestroy, viewChild, ViewEncapsulation } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { $convertFromMarkdownString, $convertToMarkdownString, TRANSFORMERS } from '@lexical/markdown';
 import { registerRichText } from '@lexical/rich-text';
 import { mergeRegister } from '@lexical/utils';
 import { CommandPayloadType, createEditor, Klass, LexicalCommand, LexicalEditor, LexicalNode } from 'lexical';
+
+export interface RichTextPluginComponent {
+	setEditorInstance(editor: LexicalEditor): void;
+	getLexicalNodes?(): Klass<LexicalNode>[];
+}
+
+export const RICH_TEXT_PLUGIN_COMPONENT = new InjectionToken<RichTextPluginComponent>('RichTextPlugin');
 
 @Component({
 	selector: 'lu-rich-text-input',
@@ -20,48 +27,52 @@ import { CommandPayloadType, createEditor, Klass, LexicalCommand, LexicalEditor,
 		},
 	],
 })
-export class RichTextInputComponent implements OnInit, OnDestroy, ControlValueAccessor {
+export class RichTextInputComponent implements AfterViewInit, OnDestroy, ControlValueAccessor {
 	#onChange?: (markdown: string | null) => void;
 	#onTouch?: () => void;
 	#cleanup?: () => void;
 
-	editor = signal<LexicalEditor | null>(null);
+	editor?: LexicalEditor;
 
 	protected content = viewChild.required<string, ElementRef<HTMLElement>>('content', {
 		read: ElementRef,
 	});
 
-	customNodes = new Set<Klass<LexicalNode>>();
+	customNodes = computed(() =>
+		this.pluginComponents()
+			.map((c) => c.getLexicalNodes?.() ?? [])
+			.flat(),
+	);
 
-	ngOnInit(): void {
-		this.editor.set(
-			createEditor({
-				theme: {
-					text: {
-						strikethrough: 'editorTheme__textStrikethrough',
-						bold: 'editorTheme__textBold',
-						italic: 'editorTheme__textItalic',
-						underline: 'editorTheme__textUnderline',
-					},
+	pluginComponents = contentChildren(RICH_TEXT_PLUGIN_COMPONENT, { descendants: true });
+
+	ngAfterViewInit(): void {
+		this.editor = createEditor({
+			theme: {
+				text: {
+					strikethrough: 'editorTheme__textStrikethrough',
+					bold: 'editorTheme__textBold',
+					italic: 'editorTheme__textItalic',
+					underline: 'editorTheme__textUnderline',
 				},
-				nodes: [...this.customNodes],
-			}),
-		);
+			},
+			nodes: [...this.customNodes()],
+		});
 
-		this.editor().setRootElement(this.content().nativeElement);
+		this.editor.setRootElement(this.content().nativeElement);
 		this.#cleanup = mergeRegister(
-			registerRichText(this.editor()),
+			registerRichText(this.editor),
 			// registerCtrlEnterShortcut(this.editor, () => this.ctrlEnter.emit()),
 			// Sync editor state with ngControlValue
-			this.editor().registerUpdateListener(() =>
-				this.editor()
-					.getEditorState()
-					.read(() => {
-						this.#onTouch?.();
-						this.#onChange?.($convertToMarkdownString(TRANSFORMERS));
-					}),
+			this.editor.registerUpdateListener(() =>
+				this.editor.getEditorState().read(() => {
+					this.#onTouch?.();
+					this.#onChange?.($convertToMarkdownString(TRANSFORMERS));
+				}),
 			),
 		);
+
+		this.pluginComponents().forEach((plugin) => plugin.setEditorInstance(this.editor));
 	}
 
 	ngOnDestroy(): void {
@@ -69,7 +80,7 @@ export class RichTextInputComponent implements OnInit, OnDestroy, ControlValueAc
 	}
 
 	writeValue(markdown: string | null): void {
-		this.editor().update(() => {
+		this.editor?.update(() => {
 			$convertFromMarkdownString(markdown ?? '', TRANSFORMERS);
 		});
 	}
@@ -83,7 +94,7 @@ export class RichTextInputComponent implements OnInit, OnDestroy, ControlValueAc
 	}
 
 	setDisabledState?(isDisabled: boolean): void {
-		this.editor().setEditable(!isDisabled);
+		this.editor?.setEditable(!isDisabled);
 	}
 
 	onKeyDown(_$event: KeyboardEvent) {
@@ -92,6 +103,6 @@ export class RichTextInputComponent implements OnInit, OnDestroy, ControlValueAc
 
 	dispatchCommand<T extends LexicalCommand<unknown>>($event: Event, type: T, payload: CommandPayloadType<T>) {
 		$event.preventDefault();
-		this.editor().dispatchCommand(type, payload);
+		this.editor?.dispatchCommand(type, payload);
 	}
 }

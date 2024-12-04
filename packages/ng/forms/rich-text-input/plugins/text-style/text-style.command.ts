@@ -1,17 +1,6 @@
-import {
-	$getSelection,
-	$isRangeSelection,
-	COMMAND_PRIORITY_NORMAL,
-	LexicalEditor,
-	SELECTION_CHANGE_COMMAND,
-	TextFormatType,
-} from 'lexical';
+import { $getSelection, $isRangeSelection, COMMAND_PRIORITY_NORMAL, LexicalEditor, SELECTION_CHANGE_COMMAND, TextFormatType } from 'lexical';
 
-export function registerFormatSelectionChange(
-	editor: LexicalEditor,
-	format: TextFormatType,
-	onselectionchange: (hasFormat: boolean) => void,
-) {
+export function registerFormatSelectionChange(editor: LexicalEditor, format: TextFormatType, onselectionchange: (hasFormat: boolean) => void) {
 	return editor.registerCommand(
 		SELECTION_CHANGE_COMMAND,
 		() => {
