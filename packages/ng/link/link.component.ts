@@ -11,68 +11,21 @@ import { RouterLink } from '@angular/router';
 	styleUrls: ['./link.component.scss'],
 	encapsulation: ViewEncapsulation.None,
 	host: { class: 'link' },
-	hostDirectives: [RouterLink],
+	hostDirectives: [
+		{
+			directive: RouterLink,
+			inputs: ['preserveFragment', 'skipLocationChange', 'replaceUrl', 'queryParams', 'fragment', 'queryParamsHandling', 'state', 'info', 'relativeTo'],
+		},
+	],
 })
 export class LinkComponent implements OnDestroy {
 	intl = getIntl(LU_LINK_TRANSLATIONS);
 
 	#elementRef = inject<ElementRef<HTMLLinkElement>>(ElementRef);
 	#renderer = inject(Renderer2);
-	#observer: MutationObserver;
-
 	#routerLink = inject(RouterLink);
 
-	/**
-	 * RouterLink Input forwarding
-	 */
-	@Input({ transform: booleanAttribute })
-	set preserveFragment(value: RouterLink['preserveFragment']) {
-		this.#routerLink.preserveFragment = value;
-	}
-
-	@Input({ transform: booleanAttribute })
-	set skipLocationChange(value: RouterLink['skipLocationChange']) {
-		this.#routerLink.skipLocationChange = value;
-	}
-
-	@Input({ transform: booleanAttribute })
-	set replaceUrl(value: RouterLink['replaceUrl']) {
-		this.#routerLink.replaceUrl = value;
-	}
-
-	@Input()
-	set queryParams(value: RouterLink['queryParams']) {
-		this.#routerLink.queryParams = value;
-	}
-
-	@Input()
-	set fragment(value: RouterLink['fragment']) {
-		this.#routerLink.fragment = value;
-	}
-
-	@Input()
-	set queryParamsHandling(value: RouterLink['queryParamsHandling']) {
-		this.#routerLink.queryParamsHandling = value;
-	}
-
-	@Input()
-	set state(value: RouterLink['state']) {
-		this.#routerLink.state = value;
-	}
-
-	@Input()
-	set info(value: RouterLink['info']) {
-		this.#routerLink.info = value;
-	}
-
-	@Input()
-	set relativeTo(value: RouterLink['relativeTo']) {
-		this.#routerLink.relativeTo = value;
-	}
-
-	/**
-	 * End RouterLink Input forwarding
-	 */
+	#observer: MutationObserver;
 
 	@Input({ required: true })
 	label: string;
