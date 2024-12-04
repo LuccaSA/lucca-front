@@ -1,11 +1,26 @@
 import { ConnectionPositionPair } from '@angular/cdk/overlay';
-import { booleanAttribute, ChangeDetectionStrategy, Component, computed, effect, ElementRef, forwardRef, inject, input, LOCALE_ID, signal, viewChild, ViewEncapsulation } from '@angular/core';
+import {
+	booleanAttribute,
+	ChangeDetectionStrategy,
+	Component,
+	computed,
+	effect,
+	ElementRef,
+	forwardRef,
+	inject,
+	input,
+	LOCALE_ID,
+	signal,
+	untracked,
+	viewChild,
+	ViewEncapsulation,
+} from '@angular/core';
 import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors, Validator } from '@angular/forms';
 import { getIntl, ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { InputDirective } from '@lucca-front/ng/form-field';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { PopoverDirective } from '@lucca-front/ng/popover2';
-import { addMonths, addYears, isAfter, isBefore, parse, startOfDay, startOfMonth } from 'date-fns';
+import { addMonths, addYears, isAfter, isBefore, isSameDay, parse, startOfDay, startOfMonth } from 'date-fns';
 import { CalendarMode } from '../calendar2/calendar-mode';
 import { Calendar2Component } from '../calendar2/calendar2.component';
 import { CellStatus } from '../calendar2/cell-status';
@@ -85,6 +100,8 @@ export class DateInputComponent implements ControlValueAccessor, Validator {
 
 	selectedDate = signal<Date | null>(null);
 
+	dateFromWriteValue = signal<Date | null>(null);
+
 	calendar = viewChild(Calendar2Component);
 
 	displayValue = computed(() => {
@@ -147,8 +164,11 @@ export class DateInputComponent implements ControlValueAccessor, Validator {
 			},
 			{ allowSignalWrites: true },
 		);
+
 		effect(() => {
-			this.#onChange?.(this.selectedDate());
+			if (!this.#safeCompareDate(untracked(this.dateFromWriteValue), this.selectedDate())) {
+				this.#onChange?.(this.selectedDate());
+			}
 		});
 
 		ɵeffectWithDeps([this.calendarMode, this.tabbableDate], (calendarMode, tabbableDate) => {
@@ -162,6 +182,10 @@ export class DateInputComponent implements ControlValueAccessor, Validator {
 				});
 			}
 		});
+	}
+
+	#safeCompareDate(a: Date, b: Date): boolean {
+		return a === b || (!!a && !!b && isSameDay(a, b));
 	}
 
 	openPopover(ref: PopoverDirective): void {
@@ -236,8 +260,10 @@ export class DateInputComponent implements ControlValueAccessor, Validator {
 
 	writeValue(date: Date): void {
 		if (date) {
-			this.selectedDate.set(startOfDay(date));
-			this.currentDate.set(startOfDay(date));
+			const start = startOfDay(date);
+			this.dateFromWriteValue.set(start);
+			this.selectedDate.set(start);
+			this.currentDate.set(start);
 		}
 	}
 
