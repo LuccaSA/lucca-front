@@ -1,4 +1,6 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, forwardRef, viewChildren } from '@angular/core';
+import { LexicalEditor } from 'lexical';
+import { RICH_TEXT_PLUGIN_COMPONENT, RichTextPluginComponent } from '../../rich-text-input.component';
 import { TextStyleComponent } from './text-style.component';
 
 @Component({
@@ -9,5 +11,17 @@ import { TextStyleComponent } from './text-style.component';
 		<lu-rich-text-plugin-text-style icon="formatTextBold" tooltip="Gras" format="bold" />
 		<lu-rich-text-plugin-text-style icon="formatTextUnderline" tooltip="Underline" format="underline" />`,
 	imports: [TextStyleComponent],
+	providers: [
+		{
+			provide: RICH_TEXT_PLUGIN_COMPONENT,
+			useExisting: forwardRef(() => TextStyleToolbarComponent),
+		},
+	],
 })
-export class TextStyleToolbarComponent {}
+export class TextStyleToolbarComponent implements RichTextPluginComponent {
+	pluginComponents = viewChildren(TextStyleComponent);
+
+	setEditorInstance(editor: LexicalEditor): void {
+		this.pluginComponents().forEach((plugin) => plugin.setEditorInstance(editor));
+	}
+}

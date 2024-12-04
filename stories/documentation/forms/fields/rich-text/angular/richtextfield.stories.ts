@@ -4,12 +4,13 @@ import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { RichTextInputComponent } from '@lucca-front/ng/forms/rich-text-input';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { cleanupTemplate, generateInputs } from 'stories/helpers/stories';
-import { TextStyleComponent } from '../../../../../../packages/ng/forms/rich-text-input/plugins/text-style';
-import { TagComponent } from '../../../../../../packages/ng/forms/rich-text-input/plugins/tag/tag.component';
-import { ListFormatComponent } from '../../../../../../packages/ng/forms/rich-text-input/plugins/list-format';
-import { TextStyleToolbarComponent } from '../../../../../../packages/ng/forms/rich-text-input/plugins/text-style/text-style-toolbar.component';
-import { ListStyleToolbarComponent } from '../../../../../../packages/ng/forms/rich-text-input/plugins/list-format/list-style-toolbar.component';
+import { StoryModelDisplayComponent } from 'stories/helpers/story-model-display.component';
 import { HeadingsComponent } from '../../../../../../packages/ng/forms/rich-text-input/plugins/headings';
+import { ListFormatComponent } from '../../../../../../packages/ng/forms/rich-text-input/plugins/list-format';
+import { ListStyleToolbarComponent } from '../../../../../../packages/ng/forms/rich-text-input/plugins/list-format/list-style-toolbar.component';
+import { TagComponent } from '../../../../../../packages/ng/forms/rich-text-input/plugins/tag/tag.component';
+import { TextStyleComponent } from '../../../../../../packages/ng/forms/rich-text-input/plugins/text-style';
+import { TextStyleToolbarComponent } from '../../../../../../packages/ng/forms/rich-text-input/plugins/text-style/text-style-toolbar.component';
 
 export default {
 	title: 'Documentation/Forms/Fields/RichTextField/Angular',
@@ -27,6 +28,7 @@ export default {
 				FormsModule,
 				ReactiveFormsModule,
 				BrowserAnimationsModule,
+				StoryModelDisplayComponent,
 			],
 		}),
 	],
@@ -44,7 +46,7 @@ export const Basic: StoryObj<RichTextInputComponent & { disabled: boolean; examp
 		const { example, ...inputArgs } = args;
 		return {
 			props: { example },
-			template: cleanupTemplate(`<lu-form-field ${generateInputs({}, argTypes)}> 
+			template: cleanupTemplate(`<lu-form-field ${generateInputs({}, argTypes)}>
 	<lu-rich-text-input
 	${generateInputs(inputArgs, argTypes)}
 		[(ngModel)]="example">
@@ -65,12 +67,12 @@ export const Basic: StoryObj<RichTextInputComponent & { disabled: boolean; examp
 																				'Date de naissance',
 																				'Date dembauche',
 																				'Date de départ',
-																				]"/>		
-				<lu-rich-text-toolbar-list-style/>			
-				<lu-rich-text-plugin-headings/>							
+																				]"/>
+				<lu-rich-text-toolbar-list-style/>
+				<lu-rich-text-plugin-headings/>
 	</lu-rich-text-input>
 </lu-form-field>
-{{example}}`),
+<pr-story-model-display>{{example}}</pr-story-model-display>`),
 			moduleMetadata: {
 				imports: [RichTextInputComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule],
 			},
