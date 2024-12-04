@@ -1,6 +1,6 @@
-import { ChangeDetectionStrategy, Component, inject, input } from '@angular/core';
-import { $createTextNode, $getSelection } from 'lexical';
-import { RichTextInputComponent } from '../../rich-text-input.component';
+import { ChangeDetectionStrategy, Component, forwardRef, input } from '@angular/core';
+import { $createTextNode, $getSelection, Klass, LexicalEditor, LexicalNode } from 'lexical';
+import { RICH_TEXT_PLUGIN_COMPONENT, RichTextPluginComponent } from '../../rich-text-input.component';
 import { TagNode } from './tag-node';
 
 @Component({
@@ -9,19 +9,28 @@ import { TagNode } from './tag-node';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	templateUrl: 'tag.component.html',
 	styleUrl: 'tag.component.scss',
+	providers: [
+		{
+			provide: RICH_TEXT_PLUGIN_COMPONENT,
+			useExisting: forwardRef(() => TagComponent),
+		},
+	],
 })
-export class TagComponent {
-	public richTextInputComponent: RichTextInputComponent = inject(RichTextInputComponent);
-	public editor = this.richTextInputComponent.editor;
-
+export class TagComponent implements RichTextPluginComponent {
 	tags = input<string[]>([]);
 
-	constructor() {
-		this.richTextInputComponent.customNodes.add(TagNode);
+	editor: LexicalEditor | null = null;
+
+	setEditorInstance(editor: LexicalEditor): void {
+		this.editor = editor;
+	}
+
+	getLexicalNodes(): Array<Klass<LexicalNode>> {
+		return [TagNode];
 	}
 
 	insertTag(text: string) {
-		this.editor().update(() => {
+		this.editor.update(() => {
 			const selection = $getSelection();
 			const node = new TagNode(text);
 			selection.insertNodes([node]);
