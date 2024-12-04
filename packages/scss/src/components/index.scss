@@ -90,6 +90,8 @@
 @forward 'plgPush';
 @forward 'dateField';
 @forward 'dateRangeField';
+@forward 'dataTable';
+@forward 'dataTableSticked';
 
 // Deprecated CSS components
 // @forward 'gridLegacy'; // 40 Ko
