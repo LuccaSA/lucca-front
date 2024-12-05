@@ -1,4 +1,5 @@
 @mixin vars {
-	--components-fancyBox-background-left: none;
-	--components-fancyBox-background-right: none;
+	--components-fancyBox-background-left: linear-gradient(var(--palettes-neutral-50), var(--palettes-neutral-50));
+	--components-fancyBox-background-right: linear-gradient(var(--palettes-neutral-50), var(--palettes-neutral-50));
+	--components-fancyBox-foreground: none;
 }
