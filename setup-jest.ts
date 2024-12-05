@@ -13,6 +13,14 @@ Element.prototype.scrollIntoView = () => {};
 // It is used in LF's schematics tests
 Object.assign(global, { TextDecoder, TextEncoder });
 
+class ResizeObserver {
+	observe() {}
+	unobserve() {}
+	disconnect() {}
+}
+
+Object.assign(global, { ResizeObserver });
+
 // xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 // x          Global JEST mocks          x
 // xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
