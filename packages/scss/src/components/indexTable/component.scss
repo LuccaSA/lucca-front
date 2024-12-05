@@ -118,7 +118,6 @@
 		.indexTable-body-row-cell {
 			position: relative;
 			z-index: var(--components-indexTable-cell-z-index, 1);
-			border-radius: var(--components-table-cardList-cell-border-radius);
 			border: var(--commons-divider-width) 0 solid transparent;
 
 			// Apparence of the first cell with a card apparence.

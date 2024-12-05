@@ -328,9 +328,10 @@
 		padding: var(--pr-t-spacings-50);
 		border-radius: var(--commons-borderRadius-L);
 		font-size: var(--sizes-S-fontSize);
-		line-height: var(--sizes-S-line-height);
+		line-height: var(--sizes-S-lineHeight);
 		color: var(--palettes-neutral-800);
 		background-color: var(--pr-t-elevation-surface-default);
+
 		.button {
 			@include button.text;
 			@include button.S;
