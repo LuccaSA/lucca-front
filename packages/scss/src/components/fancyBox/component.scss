@@ -4,7 +4,7 @@
 @mixin component($atRoot: namespace.$defaultAtRoot) {
 	overflow: hidden;
 	padding-inline: var(--pr-t-spacings-200);
-
+	display: block;
 
 	@at-root ($atRoot) {
 		.fancyBox-content {
@@ -20,7 +20,7 @@
 
 		.fancyBox-content-box {
 			position: relative;
-			padding: var(--pr-t-spacings-300);
+			padding: var(--pr-t-spacings-300) var(--pr-t-spacings-700);
 			background-color: var(--pr-t-elevation-surface-raised);
 			border-radius: 16px;
 			flex-grow: 1;
@@ -32,8 +32,8 @@
 			&::before,
 			&::after {
 				content: '';
-				position: absolute;
 				z-index: -1;
+				position: absolute;
 				width: 12.5rem;
 				height: 10rem;
 				background-repeat: no-repeat;
@@ -50,6 +50,16 @@
 				right: -10rem;
 				background-image: var(--components-fancyBox-background-right);
 			}
+		}
+
+		.fancyBox-content-box-foreground {
+			position: absolute;
+			width: 12.5rem;
+			height: 10rem;
+			background-repeat: no-repeat;
+			top: -1.5rem;
+			right: -10rem;
+			background-image: var(--components-fancyBox-foreground);
 		}
 	}
 }
