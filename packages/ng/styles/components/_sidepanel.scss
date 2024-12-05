@@ -45,6 +45,10 @@
 	flex-flow: column;
 	flex-grow: 1;
 	height: 100%;
+
+	.lu-modal-content {
+		height: 100%;
+	}
 }
 
 .lu-sidepanel-container {
