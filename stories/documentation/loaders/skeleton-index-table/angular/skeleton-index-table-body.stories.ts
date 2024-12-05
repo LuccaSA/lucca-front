@@ -39,5 +39,5 @@ const Template: StoryFn<SkeletonIndexTableStory> = (args) => ({
 	],
 });
 
-export const Body = Template.bind({});
-Body.args = {};
+export const TableBodyOnly = Template.bind({});
+TableBodyOnly.args = {};

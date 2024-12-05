@@ -1,14 +1,13 @@
 import { booleanAttribute, ChangeDetectionStrategy, Component, computed, input, Input } from '@angular/core';
 
 @Component({
-	// eslint-disable-next-line @angular-eslint/component-selector
-	selector: 'lu-skeleton-data-table',
+	selector: 'lu-skeleton-table',
 	standalone: true,
-	templateUrl: './skeleton-data-table.component.html',
-	styleUrl: './skeleton-data-table.component.scss',
+	templateUrl: './skeleton-table.component.html',
+	styleUrl: './skeleton-table.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SkeletonDataTableComponent {
+export class SkeletonTableComponent {
 	@Input({ transform: booleanAttribute })
 	tableBodyOnly = false;
 
