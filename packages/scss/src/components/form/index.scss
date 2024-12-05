@@ -46,8 +46,10 @@
 		@include checkable;
 	}
 
-	&:has(.textField-input-value[aria-invalid='true'], .timePicker-fieldset-group-textfield-input[aria-invalid='true']) {
-		@include invalid;
+	&:not(lu-form-field) {
+		&:has(.textField-input-value[aria-invalid='true'], .timePicker-fieldset-group-textfield-input[aria-invalid='true']) {
+			@include invalid;
+		}
 	}
 
 	&:has(.radioField-input:disabled),
@@ -109,8 +111,7 @@
 .checkboxesfield.mod-framed,
 .radiosfield.mod-framed {
 	margin-top: 0;
-	padding: var(--components-field-framed-side-padding) var(--components-field-framed-side-padding)
-		var(--components-field-framed-bottom-padding);
+	padding: var(--components-field-framed-side-padding) var(--components-field-framed-side-padding) var(--components-field-framed-bottom-padding);
 }
 
 .form-group-label {

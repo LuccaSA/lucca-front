@@ -22,7 +22,13 @@ export default {
 	},
 } as Meta;
 
-export const Basic: StoryObj<MultilanguageInputComponent & FormFieldComponent & { disabled: boolean }> = {
+export const Basic: StoryObj<
+	MultilanguageInputComponent &
+		FormFieldComponent & {
+			disabled: boolean;
+			required: boolean;
+		}
+> = {
 	render: (args, { argTypes }) => {
 		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, ...inputArgs } = args;
 		return {

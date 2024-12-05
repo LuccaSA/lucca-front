@@ -18,7 +18,7 @@ export default {
 	],
 } as Meta;
 
-export const Basic: StoryObj<PhoneNumberInputComponent & FormFieldComponent> = {
+export const Basic: StoryObj<PhoneNumberInputComponent & FormFieldComponent & { required: boolean }> = {
 	render: (args, { argTypes }) => {
 		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, errorInlineMessage, size, ...inputArgs } = args;
 

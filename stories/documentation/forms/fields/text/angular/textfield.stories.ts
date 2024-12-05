@@ -4,12 +4,13 @@ import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { TextInputComponent } from '@lucca-front/ng/forms';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { cleanupTemplate, generateInputs } from 'stories/helpers/stories';
+import { AsyncPipe } from '@angular/common';
 
 export default {
 	title: 'Documentation/Forms/Fields/TextField/Angular',
 	decorators: [
 		moduleMetadata({
-			imports: [TextInputComponent, FormFieldComponent, FormsModule, ReactiveFormsModule, BrowserAnimationsModule],
+			imports: [TextInputComponent, FormFieldComponent, FormsModule, ReactiveFormsModule, BrowserAnimationsModule, AsyncPipe],
 		}),
 	],
 	argTypes: {
@@ -50,7 +51,7 @@ export default {
 	},
 } as Meta;
 
-export const Basic: StoryObj<TextInputComponent & { disabled: boolean } & FormFieldComponent> = {
+export const Basic: StoryObj<TextInputComponent & { disabled: boolean; required: boolean } & FormFieldComponent> = {
 	render: (args, { argTypes }) => {
 		const { counter, label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, ...inputArgs } = args;
 		return {
@@ -96,7 +97,12 @@ export const Basic: StoryObj<TextInputComponent & { disabled: boolean } & FormFi
 	},
 };
 
-export const PasswordVisiblity: StoryObj<TextInputComponent & { disabled: boolean } & FormFieldComponent> = {
+export const PasswordVisiblity: StoryObj<
+	TextInputComponent & {
+		disabled: boolean;
+		required: boolean;
+	} & FormFieldComponent
+> = {
 	render: (args, { argTypes }) => {
 		const { counter, label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, ...inputArgs } = args;
 		return {
@@ -139,7 +145,12 @@ export const PasswordVisiblity: StoryObj<TextInputComponent & { disabled: boolea
 	},
 };
 
-export const WithPrefixAndSuffix: StoryObj<TextInputComponent & { disabled: boolean } & FormFieldComponent> = {
+export const WithPrefixAndSuffix: StoryObj<
+	TextInputComponent & {
+		disabled: boolean;
+		required: boolean;
+	} & FormFieldComponent
+> = {
 	render: (args, { argTypes }) => {
 		const { counter, label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, prefix, suffix, ...inputArgs } = args;
 		return {
