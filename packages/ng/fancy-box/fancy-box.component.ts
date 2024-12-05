@@ -13,7 +13,7 @@ import { ChangeDetectionStrategy, Component, HostBinding, Input, ViewEncapsulati
 })
 export class FancyBoxComponent {
 	@Input()
-	foreground: string = null;
+	foreground?: string;
 	@HostBinding('style.--components-fancyBox-foreground')
 	get foregroundStyle(): string {
 		return this.foreground ? `url(${this.foreground})` : ``;
