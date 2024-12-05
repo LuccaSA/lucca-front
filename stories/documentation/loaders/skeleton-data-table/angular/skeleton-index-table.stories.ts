@@ -1,12 +1,12 @@
-import { SkeletonIndexTableComponent } from '@lucca-front/ng/skeleton';
+import { SkeletonDataTableComponent } from '@lucca-front/ng/skeleton';
 import { Meta, StoryObj } from '@storybook/angular';
 
 export default {
-	title: 'Documentation/Loaders/Skeleton/Skeleton IndexTable',
-	component: SkeletonIndexTableComponent,
+	title: 'Documentation/Loaders/Skeleton/Skeleton DataTable',
+	component: SkeletonDataTableComponent,
 } as Meta;
 
-export const Template: StoryObj<SkeletonIndexTableComponent> = {
+export const Template: StoryObj<SkeletonDataTableComponent> = {
 	argTypes: {
 		cols: {
 			control: {

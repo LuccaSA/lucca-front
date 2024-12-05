@@ -1,9 +1,9 @@
 @if (tableBodyOnly) {
-<tbody class="indexTable-body">
+<tbody class="table-body">
 	@for (row of rowsNumber(); track row) {
-	<tr class="indexTable-body-row">
+	<tr class="table-body-row">
 		@for (col of colsNumber(); track col) {
-		<td class="indexTable-body-row-cell">
+		<td class="table-body-row-cell">
 			<span class="skeleton-item" [style.--components-skeleton-text-width]="getRandomPercent()"></span>
 		</td>
 		}
@@ -11,21 +11,21 @@
 	}
 </tbody>
 } @else {
-<table class="indexTable mod-layoutFixed skeleton is-loading" inert="inert">
-	<thead class="indexTable-head">
-		<tr class="indexTable-head-row">
+<table class="table skeleton is-loading" inert="inert">
+	<thead class="table-head">
+		<tr class="table-head-row">
 			@for (col of colsNumber(); track col) {
-			<th class="indexTable-head-row-cell" scope="col">
-				<span class="skeleton-item mod-dark" [style.--components-skeleton-text-width]="getRandomPercent()"></span>
+			<th class="table-head-row-cell">
+				<span class="skeleton-item mod-dark u-textS" [style.--components-skeleton-text-width]="getRandomPercent()"></span>
 			</th>
 			}
 		</tr>
 	</thead>
-	<tbody class="indexTable-body">
+	<tbody class="table-body">
 		@for (row of rowsNumber(); track row) {
-		<tr class="indexTable-body-row">
+		<tr class="table-body-row">
 			@for (col of colsNumber(); track col) {
-			<td class="indexTable-body-row-cell">
+			<td class="table-body-row-cell">
 				<span class="skeleton-item" [style.--components-skeleton-text-width]="getRandomPercent()"></span>
 			</td>
 			}
