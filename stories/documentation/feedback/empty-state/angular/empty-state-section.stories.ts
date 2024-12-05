@@ -18,7 +18,7 @@ export default {
 		return {
 			template: `<lu-empty-state-section hx="${hx}" ${paramIcon} heading="${heading}" description="${description}" palette="${palette}" ${center ? ' center' : ''}>
 	<button luButton type="button" palette="product">Button</button>
-	<button luButton="outlined" type="button" palette="product">Button</button>
+	<button luButton="outlined" type="button">Button</button>
 </lu-empty-state-section>`,
 		};
 	},
