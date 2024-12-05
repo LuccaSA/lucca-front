@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, ViewChild, ViewContainerRef } from 
 import { FieldWrapper } from '@ngx-formly/core';
 
 // wrapper component
+// eslint-disable-next-line @angular-eslint/prefer-standalone
 @Component({
 	selector: 'lu-formly-wrapper-layout',
 	styleUrls: ['flex-layout.scss'],

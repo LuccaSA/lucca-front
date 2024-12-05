@@ -134,7 +134,7 @@ export class DateInputComponent implements ControlValueAccessor, Validator {
 					let parsed: Date;
 					try {
 						parsed = parse(inputValue, this.#dateFormat, startOfDay(new Date()));
-					} catch (error) {
+					} catch {
 						/* not a correct date */
 					}
 					if (parsed instanceof Date && parsed.getFullYear() > 999) {
@@ -180,7 +180,7 @@ export class DateInputComponent implements ControlValueAccessor, Validator {
 		// try to parse the display value cause formControl.value is undefined if date is not parsable
 		try {
 			parse(this.displayValue(), this.#dateFormat, startOfDay(new Date()));
-		} catch (error) {
+		} catch {
 			/* not a correct date */
 			return { date: true };
 		}

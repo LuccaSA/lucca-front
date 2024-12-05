@@ -47,7 +47,7 @@ export class PortalDirective<T = unknown> implements OnChanges, OnDestroy {
 			try {
 				this.componentRef = this.viewContainerRef.createComponent(this.luPortal, { injector });
 				this.componentRef.changeDetectorRef.detectChanges();
-			} catch (e) {
+			} catch {
 				throw new Error('[LuPortal] Angular failed to create component, make sure you are not giving LuPortal an Object that is not a Type<>');
 			}
 		}

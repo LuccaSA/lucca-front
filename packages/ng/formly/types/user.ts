@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FieldType, FieldTypeConfig } from '@ngx-formly/core';
 
+// eslint-disable-next-line @angular-eslint/prefer-standalone
 @Component({
 	selector: 'lu-formly-field-user',
 	styleUrls: ['formly-field.common.scss', 'select.scss'],

@@ -1,9 +1,11 @@
+// eslint-disable-next-line @angular-eslint/prefer-standalone
 import { ChangeDetectionStrategy, Component, Input, ViewChild, ViewContainerRef } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { FieldTypeConfig, FieldWrapper, FormlyFieldConfig } from '@ngx-formly/core';
 import { buildAddWrapperExtension } from '../formly.utils';
 
 // wrapper
+// eslint-disable-next-line @angular-eslint/prefer-standalone
 @Component({
 	selector: 'lu-formly-wrapper-error',
 	styleUrls: ['flex-layout.scss'],
@@ -22,6 +24,7 @@ export class LuFormlyWrapperError extends FieldWrapper<FieldTypeConfig> {
 }
 
 // component that display the right error message
+// eslint-disable-next-line @angular-eslint/prefer-standalone
 @Component({
 	selector: 'lu-formly-error-message',
 	template: `<div class="textfield-messages-error" *ngFor="let message of errorMessages">
