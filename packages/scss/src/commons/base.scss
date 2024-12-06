@@ -157,7 +157,7 @@
 
 		button {
 			&:focus-visible {
-				@include a11y.focusVisible($borderRadius: var(--commons-borderRadius-M));
+				@include a11y.focusVisible();
 			}
 		}
 
