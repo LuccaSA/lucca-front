@@ -157,6 +157,7 @@ export class DateInputComponent implements ControlValueAccessor, Validator {
 					if (parsed instanceof Date && parsed.getFullYear() > 999) {
 						this.selectedDate.set(startOfDay(parsed));
 						this.currentDate.set(startOfDay(parsed));
+						this.tabbableDate.set(startOfDay(parsed));
 					} else {
 						this.selectedDate.set(parsed);
 					}
@@ -194,6 +195,14 @@ export class DateInputComponent implements ControlValueAccessor, Validator {
 		setTimeout(() => {
 			this.calendar()?.focusTabbableDate();
 		});
+	}
+
+	arrowDown(popoverRef: PopoverDirective) {
+		if (popoverRef.opened()) {
+			this.calendar()?.focusTabbableDate();
+		} else {
+			this.openPopover(popoverRef);
+		}
 	}
 
 	validate(control: AbstractControl<Date, Date>): ValidationErrors {
