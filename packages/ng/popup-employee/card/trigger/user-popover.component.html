@@ -1,0 +1,76 @@
+<ng-content></ng-content>
+<ng-template #popoverContent>
+	@if (employee$ | async; as employee) {
+	<div class="lu-popover-content userPopover">
+		<section class="userPopover-details">
+			<div class="userPopover-details-avatar avatar">
+				@switch (userPictureDisplay$ | async) { @case ('img') {
+				<img class="avatar-picture" [src]="userPictureHref$ | async" [alt]="(userInitials$ | async)?.initials" (error)="pictureError()" />
+				} @case ('initials') { @if (userInitials$ | async; as initials) {
+				<div class="avatar-picture" style.background-color="hsl({{initials.color}}, 60%, 60%)">
+					<span class="avatar-picture-initials">{{ initials.initials }}</span>
+				</div>
+				} } }
+			</div>
+			<div class="userPopover-details-info">
+				<h1 class="userPopover-details-info-name u-ellipsis">
+					@if (!employee._links?.hrCard?.href) {
+					<ng-container *ngTemplateOutlet="fullNameDisplay" />
+					} @else {
+					<a class="userPopover-details-info-name-linkOptional" [href]="employee._links?.hrCard?.href">
+						<ng-container *ngTemplateOutlet="fullNameDisplay" />
+					</a>
+					}
+				</h1>
+				<ng-template #fullNameDisplay> {{ employee.firstName }} {{ employee.lastName }}</ng-template>
+				@if (employee.jobTitle) {
+				<p class="userPopover-details-info-detail u-ellipsis">{{ employee.jobTitle }}</p>
+				} @if (employee.userDepartment?.name) {
+				<p class="userPopover-details-info-detail u-ellipsis">{{ employee.userDepartment?.name }}</p>
+				}
+
+				<p class="userPopover-details-info-detail u-marginTopXS">
+					<!-- HORS CONTRAT-->
+					@if (employee.dtContractStart | isFuture) {
+					<span class="userPopover-details-info-detail-workplace">
+						<span aria-hidden="true" class="lucca-icon icon-calendarPlanning mod-S"></span>
+						<span class="userPopover-details-info-detail-link-state">
+							{{ intl.EMPLOYEE_CARD_PANEL_COMING_ON_LABEL | intlParams: { date: (employee.dtContractStart | date: 'shortDate') } }}
+						</span>
+					</span>
+					}
+					<!-- Contrat terminé -->
+					@if (!(employee.dtContractStart | isFuture) && !(employee.dtContractEnd | isFutureOrToday)) {
+					<span class="userPopover-details-info-detail-workplace">
+						<span aria-hidden="true" class="lucca-icon icon-calendarStrikethrough mod-S"></span>
+						<span class="userPopover-details-info-detail-link-state"> {{ intl.EMPLOYEE_CARD_PANEL_EMPLOYEE_HAS_LEAVED_LABEL }} </span>
+					</span>
+					}
+
+					<!-- EN CONTRAT-->
+					@if (employee._links?.schedule && !(employee.dtContractStart | isFuture) && (employee.dtContractEnd | isFutureOrToday)) {
+					<a class="userPopover-details-info-detail-workplace" [href]="employee._links?.schedule?.href">
+						<span
+							aria-hidden="true"
+							class="lucca-icon mod-S"
+							[class.icon-mapPin]="employee.isWorkingNow && employee.currentWorkLocation"
+							[class.icon-calendarPlanning]="!employee.isWorkingNow || !employee.currentWorkLocation"
+						></span>
+						<span class="userPopover-details-info-detail-workplace-state">
+							@if (employee.isWorkingNow) { @if (employee.currentWorkLocation) { {{ employee.currentWorkLocation?.name }} @if
+							(employee.currentWorkLocation?.area) {
+							<span class="u-textLight"> – {{ employee.currentWorkLocation?.area?.name }}</span>
+							} } @if (!employee.currentWorkLocation) { {{ intl.EMPLOYEE_CARD_PANEL_PRESENT_LABEL }} } } @else { @if
+							(!(employee.dtContractStart | isFuture) && (employee.dtContractEnd | isFutureOrToday)) { {{
+							intl.EMPLOYEE_CARD_PANEL_ABSENCE_LABEL }} @if (employee.leaveEndsOn) {
+							<span class="u-textLight"> – {{ employee.leaveEndsOn | leaveEndsDisplay: employee.leaveEndIsFirstHalfDay }} </span>
+							} } }
+						</span>
+					</a>
+					}
+				</p>
+			</div>
+		</section>
+	</div>
+	}
+</ng-template>

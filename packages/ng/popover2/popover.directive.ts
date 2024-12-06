@@ -10,6 +10,7 @@ import {
 	input,
 	Input,
 	InputSignal,
+	model,
 	OnDestroy,
 	output,
 	Renderer2,
@@ -95,7 +96,7 @@ export class PopoverDirective implements OnDestroy {
 	})
 	luPopoverDisabled = false;
 
-	luPopoverTrigger = input<'click' | 'click+hover' | 'hover+focus'>('click');
+	luPopoverTrigger = model<'click' | 'click+hover' | 'hover+focus'>('click');
 
 	@Input()
 	customPositions?: ConnectionPositionPair[];
