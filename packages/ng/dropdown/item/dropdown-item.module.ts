@@ -1,9 +1,11 @@
 import { NgModule } from '@angular/core';
 import { LuDropdownItemDirective } from './dropdown-item.directive';
 
+/**
+ * @deprecated use `LuDropdownItemDirective` instead
+ */
 @NgModule({
-	declarations: [LuDropdownItemDirective],
-	imports: [],
+	imports: [LuDropdownItemDirective],
 	exports: [LuDropdownItemDirective],
 })
 export class LuDropdownItemModule {}
