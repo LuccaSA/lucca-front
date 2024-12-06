@@ -1,6 +1,6 @@
 {
   "name": "lucca-front",
-  "description": "a library of useful components for web developpement",
+  "description": "a library of useful components for web development",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/LuccaSA/lucca-front.git"
@@ -23,7 +23,8 @@
   ],
   "scripts": {
     "build": "npm run build:ng && npm run build:remaining",
-    "build:ng": "ng run ng:build",
+    "build:ng": "npm run build:prisme && ng run ng:build",
+    "build:prisme": "ng run prisme:build",
     "build:remaining": "node build.js",
     "start": "ng run ng:storybook",
     "jenkins-test": "jest --no-cache --runInBand",
@@ -79,12 +80,14 @@
     "@types/jest": "^29.5.1",
     "@types/jest-axe": "^3.5.5",
     "@types/node": "^18.11.10",
-    "@typescript-eslint/eslint-plugin": "^7.11.0",
-    "@typescript-eslint/parser": "^7.11.0",
+    "@typescript-eslint/eslint-plugin": "^7.18.0",
+    "@typescript-eslint/parser": "^7.18.0",
     "@typescript-eslint/utils": "^7.11.0",
     "autoprefixer": "^10.4.14",
     "eslint": "^8.44.0",
     "eslint-config-prettier": "^9.1.0",
+    "eslint-import-resolver-typescript": "^3.6.3",
+    "eslint-plugin-boundaries": "^4.2.2",
     "eslint-plugin-deprecation": "^2.0.0",
     "eslint-plugin-import": "^2.29.1",
     "eslint-plugin-prefer-arrow": "^1.2.3",

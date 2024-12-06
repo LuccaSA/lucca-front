@@ -1,25 +1,17 @@
 {
-  "name": "@lucca-front/ng",
+  "name": "@lucca/prisme",
   "version": "0.0.0",
-  "description": "A library of icons made by the team @Lucca",
+  "description": "Design system made by @lucca",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/LuccaSA/lucca-front.git"
-  },
-  "schematics": "./schematics/collection.json",
-  "ng-update": {
-    "migrations": "./schematics/migrations.json",
-    "packageGroup": [
-      "@lucca-front/ng",
-      "@lucca-front/scss",
-      "@lucca-front/icons"
-    ]
   },
   "license": "MIT",
   "public": true,
   "keywords": [
     "lucca",
-    "angular"
+    "angular",
+    "prisme"
   ],
   "author": "Guilde Front Lucca <guilde-front@lucca.fr>",
   "peerDependencies": {
@@ -27,8 +19,6 @@
     "@angular/core": "^18.0.0",
     "@angular/cdk": "^18.0.0",
     "@lucca-front/icons": "*",
-    "@lucca-front/scss": "*",
-    "@lucca/prisme": "*",
     "@types/dompurify": "^3.0.0",
     "isomorphic-dompurify": "^2.11.0",
     "date-fns": "^3.6.0",
