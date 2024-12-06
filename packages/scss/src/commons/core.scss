@@ -140,3 +140,17 @@ $overflow: 'hidden', 'auto', 'visible', 'scroll';
 @function pxToRem($value) {
 	@return math.div($value, 16px) * 1rem;
 }
+
+@mixin fontFace($family, $weights, $path: '//cdn.lucca.fr/fonts', $style: normal) {
+	@each $keyword, $number in $weights {
+		@font-face {
+			font-family: '#{$family}';
+			src:
+				url('#{$path}/#{$family}/#{$keyword}.woff2') format('woff2'),
+				url('#{$path}/#{$family}/#{$keyword}.woff') format('woff');
+			font-weight: #{$number};
+			font-style: #{$style};
+			font-display: swap;
+		}
+	}
+}
