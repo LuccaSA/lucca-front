@@ -1,8 +1,8 @@
-import { booleanAttribute, Component, ElementRef, Input, numberAttribute, ViewChild, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, Component, ElementRef, input, numberAttribute, viewChild, ViewEncapsulation } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { FormFieldComponent, InputDirective } from '@lucca-front/ng/form-field';
+import { InputDirective } from '@lucca-front/ng/form-field';
 import { NoopValueAccessorDirective } from '../noop-value-accessor.directive';
-import { NgIf, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import { FormFieldIdDirective } from '../form-field-id.directive';
 import { TextInputAddon } from '../text-input/text-input-addon';
 import { getIntl } from '@lucca-front/ng/core';
@@ -12,7 +12,7 @@ import { injectNgControl } from '../inject-ng-control';
 @Component({
 	selector: 'lu-number-input',
 	standalone: true,
-	imports: [FormFieldComponent, InputDirective, NgIf, ReactiveFormsModule, FormFieldIdDirective, NgTemplateOutlet],
+	imports: [InputDirective, ReactiveFormsModule, FormFieldIdDirective, NgTemplateOutlet],
 	templateUrl: './number-input.component.html',
 	hostDirectives: [NoopValueAccessorDirective],
 	encapsulation: ViewEncapsulation.None,
@@ -20,37 +20,28 @@ import { injectNgControl } from '../inject-ng-control';
 export class NumberInputComponent {
 	ngControl = injectNgControl();
 
-	@Input()
-	placeholder: string = '';
+	placeholder = input<string>('');
 
-	@Input({ transform: numberAttribute })
-	step: number = 1;
+	step = input<number, number>(1, { transform: numberAttribute });
 
-	@Input({ transform: booleanAttribute })
-	noSpinButtons = false;
+	noSpinButtons = input<boolean, boolean>(false, { transform: booleanAttribute });
 
-	@Input({ transform: booleanAttribute })
-	hasClearer = false;
+	hasClearer = input<boolean, boolean>(false, { transform: booleanAttribute });
 
-	@ViewChild('inputElement', { static: true })
-	inputElementRef: ElementRef<HTMLInputElement>;
+	inputElementRef = viewChild.required<ElementRef<HTMLInputElement>>('inputElement');
 
-	@Input()
-	prefix: TextInputAddon;
+	prefix = input<TextInputAddon>();
 
-	@Input()
-	suffix: TextInputAddon;
+	suffix = input<TextInputAddon>();
 
-	@Input()
-	min?: number;
+	min = input<number>();
 
-	@Input()
-	max?: number;
+	max = input<number>();
 
 	intl = getIntl(LU_NUMBERFIELD_TRANSLATIONS);
 
 	clearValue(): void {
 		this.ngControl.reset();
-		this.inputElementRef.nativeElement.focus();
+		this.inputElementRef().nativeElement.focus();
 	}
 }
