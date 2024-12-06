@@ -1,15 +1,5 @@
 @if (tableBodyOnly) {
-<tbody class="table-body">
-	@for (row of rowsNumber(); track row) {
-	<tr class="table-body-row">
-		@for (col of colsNumber(); track col) {
-		<td class="table-body-row-cell">
-			<span class="skeleton-item" [style.--components-skeleton-text-width]="getRandomPercent()"></span>
-		</td>
-		}
-	</tr>
-	}
-</tbody>
+<ng-container *ngTemplateOutlet="tbody" />
 } @else {
 <table class="table skeleton is-loading" inert="inert">
 	<thead class="table-head">
@@ -21,6 +11,11 @@
 			}
 		</tr>
 	</thead>
+	<ng-container *ngTemplateOutlet="tbody" />
+</table>
+}
+
+<ng-template #tbody>
 	<tbody class="table-body">
 		@for (row of rowsNumber(); track row) {
 		<tr class="table-body-row">
@@ -32,5 +27,4 @@
 		</tr>
 		}
 	</tbody>
-</table>
-}
+</ng-template>

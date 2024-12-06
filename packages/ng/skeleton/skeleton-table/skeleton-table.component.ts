@@ -1,3 +1,4 @@
+import { NgTemplateOutlet } from '@angular/common';
 import { booleanAttribute, ChangeDetectionStrategy, Component, computed, input, Input } from '@angular/core';
 
 @Component({
@@ -6,6 +7,7 @@ import { booleanAttribute, ChangeDetectionStrategy, Component, computed, input, 
 	templateUrl: './skeleton-table.component.html',
 	styleUrl: './skeleton-table.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
+	imports: [NgTemplateOutlet],
 })
 export class SkeletonTableComponent {
 	@Input({ transform: booleanAttribute })
