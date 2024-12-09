@@ -1,6 +1,21 @@
+@use 'sass:map';
+@use 'sass:math';
+
 @function transparentize($color, $amount: 50%, $space: var(--commons-colorSpace, srgb)) {
-	@if unit($amount) != '%' {
+	@if math.unit($amount) != '%' {
 		$amount: $amount * 100%;
 	}
 	@return color-mix(in $space, $color $amount, transparent);
+}
+
+@mixin palette($name, $shades, $palette: false) {
+	@each $shade in $shades {
+		@if $palette {
+			@if map.get($palette, $shade) {
+				--palettes-#{$shade}: var(--palettes-#{$name}-#{$shade});
+			}
+		} @else {
+			--palettes-#{$shade}: var(--palettes-#{$name}-#{$shade});
+		}
+	}
 }

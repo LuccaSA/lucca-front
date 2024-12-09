@@ -1,10 +1,9 @@
 @use 'sass:map';
-@use 'sass:list';
-
 @use '@lucca-front/scss/src/commons/core';
 @use '@lucca-front/scss/src/commons/config';
 @use '@lucca-front/scss/src/commons/utils/a11y';
 @use '@lucca-front/scss/src/commons/utils/namespace';
+@use '@lucca-front/scss/src/commons/utils/color';
 
 @mixin body {
 	background-color: var(--pr-t-elevation-surface-default);
@@ -132,11 +131,7 @@
 
 			@if $paletteExists {
 				.palette-#{$palette} {
-					@each $shade in config.$palettesShades {
-						@if map.get($paletteExists, $shade) {
-							--palettes-#{$shade}: var(--palettes-#{$palette}-#{$shade});
-						}
-					}
+					@include color.palette($name: $palette, $shades: config.$palettesShades, $palette: $paletteExists);
 				}
 			}
 		}
