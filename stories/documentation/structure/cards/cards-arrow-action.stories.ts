@@ -11,7 +11,7 @@ function getTemplate(args: CardsArrowActionStory): string {
 	<div class="card mod-action">
 		<div class="card-content">
 			<h2 class="card-title">Titre de la carte</h2>
-			<p>Contenu de la carte</p>
+			<div>Contenu de la carte</div>
 		</div>
 		<div class="card-action">
 			<button type="button" class="button mod-onlyIcon mod-text" luTooltip="Modifier">
