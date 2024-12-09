@@ -122,6 +122,7 @@
 			font-size: var(--component-textField-fontSize);
 			border-top-left-radius: var(--commons-borderRadius-M);
 			border-bottom-left-radius: var(--commons-borderRadius-M);
+			flex-shrink: 0;
 
 			~ .textField-input {
 				border-top-left-radius: 0;

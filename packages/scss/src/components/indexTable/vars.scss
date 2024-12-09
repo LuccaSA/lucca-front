@@ -6,7 +6,8 @@
 	// on responsive, row spacing is increased
 	--components-indexTable-row-spacing-responsive: 8px;
 
-	--components-indexTable-cell-padding: var(--pr-t-spacings-100);
+	--components-indexTable-cell-paddingInline: var(--pr-t-spacings-150);
+	--components-indexTable-cell-paddingBlock: var(--pr-t-spacings-100);
 	--components-indexTable-cell-border-radius: var(--commons-borderRadius-L);
 	--components-indexTable-cell-background-color-default: var(--palettes-neutral-0);
 	// shadows

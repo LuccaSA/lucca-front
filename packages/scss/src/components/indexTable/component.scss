@@ -63,7 +63,7 @@
 			z-index: 3;
 
 			&:not(:first-child) {
-				padding-right: var(--components-indexTable-cell-padding);
+				padding-right: var(--components-indexTable-cell-paddingInline);
 			}
 		}
 
@@ -71,23 +71,7 @@
 		.indexTable-body-row-cell,
 		.indexTable-foot-row-cell {
 			vertical-align: top;
-
-			// Because outlined cell apparence can be cropped we need a bigger padding-right. To compensate we also need a smaller padding-left
-			padding: var(--components-indexTable-cell-padding);
-			padding-left: var(--components-indexTable-cell-padding-left, var(--components-indexTable-cell-padding));
-			padding-right: var(--components-indexTable-cell-padding-right, var(--components-indexTable-cell-padding));
-
-			--components-indexTable-cell-padding-right: calc(var(--components-indexTable-cell-padding) + 4px);
-
-			~ .indexTable-head-row-cell,
-			~ .indexTable-body-row-cell,
-			~ .indexTable-foot-row-cell {
-				--components-indexTable-cell-padding-left: calc(var(--components-indexTable-cell-padding) - 4px);
-			}
-
-			&:last-child {
-				--components-indexTable-cell-padding-right: var(--components-indexTable-cell-padding);
-			}
+			padding: var(--components-indexTable-cell-paddingBlock) var(--components-indexTable-cell-paddingInline);
 		}
 
 		.indexTable-body-row {
@@ -118,7 +102,6 @@
 		.indexTable-body-row-cell {
 			position: relative;
 			z-index: var(--components-indexTable-cell-z-index, 1);
-			border-radius: var(--components-table-cardList-cell-border-radius);
 			border: var(--commons-divider-width) 0 solid transparent;
 
 			// Apparence of the first cell with a card apparence.

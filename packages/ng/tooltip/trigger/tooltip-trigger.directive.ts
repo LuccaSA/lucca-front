@@ -27,6 +27,7 @@ import { LuTooltipPanelComponent } from '../panel';
 import { EllipsisRuler } from './ellipsis.ruler';
 
 let nextId = 0;
+
 @Directive({
 	selector: '[luTooltip]',
 	exportAs: 'luTooltip',
@@ -127,7 +128,7 @@ export class LuTooltipTriggerDirective implements AfterContentInit, OnDestroy {
 
 	@HostBinding('attr.aria-describedby')
 	get ariaDescribedBy() {
-		if (this.luTooltipDisabled() || this.luTooltipWhenEllipsis || this.luTooltipOnlyForDisplay) {
+		if (this.luTooltipDisabled() || this.luTooltipWhenEllipsis() || this.luTooltipOnlyForDisplay) {
 			return null;
 		}
 		return `${this.#generatedId}-panel`;
@@ -208,8 +209,10 @@ export class LuTooltipTriggerDirective implements AfterContentInit, OnDestroy {
 			});
 		if (this.luTooltip()) {
 			ref.instance.content = this.luTooltip;
-		} else if (this.luTooltipWhenEllipsis) {
+		} else if (this.luTooltipWhenEllipsis()) {
 			ref.instance.content = signal(this.#host.nativeElement.innerText);
+		} else {
+			ref.instance.content = signal('');
 		}
 		ref.instance.id = this.ariaDescribedBy;
 		// On tooltip leave => trigger close

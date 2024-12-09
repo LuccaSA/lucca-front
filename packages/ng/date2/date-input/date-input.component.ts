@@ -1,11 +1,26 @@
 import { ConnectionPositionPair } from '@angular/cdk/overlay';
-import { booleanAttribute, ChangeDetectionStrategy, Component, computed, effect, ElementRef, forwardRef, inject, input, LOCALE_ID, signal, viewChild, ViewEncapsulation } from '@angular/core';
-import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors, Validator, Validators } from '@angular/forms';
+import {
+	booleanAttribute,
+	ChangeDetectionStrategy,
+	Component,
+	computed,
+	effect,
+	ElementRef,
+	forwardRef,
+	inject,
+	input,
+	LOCALE_ID,
+	signal,
+	untracked,
+	viewChild,
+	ViewEncapsulation,
+} from '@angular/core';
+import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors, Validator } from '@angular/forms';
 import { getIntl, ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { InputDirective } from '@lucca-front/ng/form-field';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { PopoverDirective } from '@lucca-front/ng/popover2';
-import { addMonths, addYears, parse, startOfDay, startOfMonth } from 'date-fns';
+import { addMonths, addYears, isAfter, isBefore, isSameDay, parse, startOfDay, startOfMonth } from 'date-fns';
 import { CalendarMode } from '../calendar2/calendar-mode';
 import { Calendar2Component } from '../calendar2/calendar2.component';
 import { CellStatus } from '../calendar2/cell-status';
@@ -44,7 +59,7 @@ export class DateInputComponent implements ControlValueAccessor, Validator {
 	#intlDateTimeFormatYear = new Intl.DateTimeFormat(this.#locale, { year: 'numeric' });
 
 	// Contains the current date format (like dd/mm/yy etc) based on current locale
-	#dateFormat = getDateFormat(this.#locale).toUpperCase();
+	#dateFormat = getDateFormat(this.#locale);
 
 	intl = getIntl(LU_DATE2_TRANSLATIONS);
 
@@ -84,6 +99,8 @@ export class DateInputComponent implements ControlValueAccessor, Validator {
 	protected tabbableDate = signal<Date | null>(null);
 
 	selectedDate = signal<Date | null>(null);
+
+	dateFromWriteValue = signal<Date | null>(null);
 
 	calendar = viewChild(Calendar2Component);
 
@@ -140,6 +157,7 @@ export class DateInputComponent implements ControlValueAccessor, Validator {
 					if (parsed instanceof Date && parsed.getFullYear() > 999) {
 						this.selectedDate.set(startOfDay(parsed));
 						this.currentDate.set(startOfDay(parsed));
+						this.tabbableDate.set(startOfDay(parsed));
 					} else {
 						this.selectedDate.set(parsed);
 					}
@@ -147,8 +165,11 @@ export class DateInputComponent implements ControlValueAccessor, Validator {
 			},
 			{ allowSignalWrites: true },
 		);
+
 		effect(() => {
-			this.#onChange?.(this.selectedDate());
+			if (!this.#safeCompareDate(untracked(this.dateFromWriteValue), this.selectedDate())) {
+				this.#onChange?.(this.selectedDate());
+			}
 		});
 
 		ɵeffectWithDeps([this.calendarMode, this.tabbableDate], (calendarMode, tabbableDate) => {
@@ -164,6 +185,10 @@ export class DateInputComponent implements ControlValueAccessor, Validator {
 		});
 	}
 
+	#safeCompareDate(a: Date, b: Date): boolean {
+		return a === b || (!!a && !!b && isSameDay(a, b));
+	}
+
 	openPopover(ref: PopoverDirective): void {
 		ref.openPopover(true, true);
 		// Once popover is opened, aka in the next CD cycle, focus current tabbable date
@@ -172,10 +197,19 @@ export class DateInputComponent implements ControlValueAccessor, Validator {
 		});
 	}
 
+	arrowDown(popoverRef: PopoverDirective) {
+		if (popoverRef.opened()) {
+			this.calendar()?.focusTabbableDate();
+		} else {
+			this.openPopover(popoverRef);
+		}
+	}
+
 	validate(control: AbstractControl<Date, Date>): ValidationErrors {
-		// null with a formControl required
-		if (!control.value && control.hasValidator(Validators.required)) {
-			return { date: true };
+		// null is not an error but means we'll skip everything else, we'll let the presence of a
+		// Validators.required (or not) decide if it's an error.
+		if (control.value === null || control.value === undefined) {
+			return null;
 		}
 		// try to parse the display value cause formControl.value is undefined if date is not parsable
 		try {
@@ -184,12 +218,22 @@ export class DateInputComponent implements ControlValueAccessor, Validator {
 			/* not a correct date */
 			return { date: true };
 		}
-		// is form control value is a valid date
-		return this.isValidDate(control.value) ? null : { date: true };
+		// Check date validity
+		if (!this.isValidDate(control.value)) {
+			return { date: true };
+		}
+		// Check min and max
+		if (this.min() && isBefore(control.value, this.min())) {
+			return { min: true };
+		} else if (this.max() && isAfter(control.value, this.max())) {
+			return { max: true };
+		}
+		// Everything is valid
+		return null;
 	}
 
 	isValidDate(date: Date): boolean {
-		return !date || !isNaN(date.getTime());
+		return !isNaN(date?.getTime());
 	}
 
 	isInMinMax(date: Date, mode: CalendarMode): boolean {
@@ -200,7 +244,7 @@ export class DateInputComponent implements ControlValueAccessor, Validator {
 					result = result && this.min().getTime() <= date.getTime();
 					break;
 				case 'month':
-					result = result && this.min().getMonth() <= date.getMonth();
+					result = result && startOfMonth(this.min()).getTime() <= startOfMonth(date).getTime();
 					break;
 				case 'year':
 					result = result && this.min().getFullYear() <= date.getFullYear();
@@ -213,7 +257,7 @@ export class DateInputComponent implements ControlValueAccessor, Validator {
 					result = result && this.max().getTime() >= date.getTime();
 					break;
 				case 'month':
-					result = result && this.max().getMonth() >= date.getMonth();
+					result = result && startOfMonth(this.max()).getTime() >= startOfMonth(date).getTime();
 					break;
 				case 'year':
 					result = result && this.max().getFullYear() >= date.getFullYear();
@@ -225,8 +269,10 @@ export class DateInputComponent implements ControlValueAccessor, Validator {
 
 	writeValue(date: Date): void {
 		if (date) {
-			this.selectedDate.set(startOfDay(date));
-			this.currentDate.set(startOfDay(date));
+			const start = startOfDay(date);
+			this.dateFromWriteValue.set(start);
+			this.selectedDate.set(start);
+			this.currentDate.set(start);
 		}
 	}
 

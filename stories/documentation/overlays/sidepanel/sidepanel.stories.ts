@@ -3,7 +3,7 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 import { LuModal, LuModalModule } from '@lucca-front/ng/modal';
 import { ILuSidepanelContent, LuSidepanel, LuSidepanelModule } from '@lucca-front/ng/sidepanel';
 import { LuToastsModule, LuToastsService } from '@lucca-front/ng/toast';
-import { Meta, StoryFn, applicationConfig } from '@storybook/angular';
+import { applicationConfig, Meta, StoryFn } from '@storybook/angular';
 import { map, shareReplay, timer } from 'rxjs';
 
 @Component({
@@ -54,7 +54,11 @@ class SidepanelDynamicContentComponent implements ILuSidepanelContent {
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class SidepanelStory {
-	constructor(private sidepanel: LuSidepanel, private modal: LuModal, private toastsService: LuToastsService) {}
+	constructor(
+		private sidepanel: LuSidepanel,
+		private modal: LuModal,
+		private toastsService: LuToastsService,
+	) {}
 
 	public openSidepanel() {
 		this.modal.open(SidepanelContentComponent, undefined, { mode: 'sidepanel' });
@@ -65,11 +69,11 @@ class SidepanelStory {
 	}
 
 	public openLegacySidepanel() {
-		this.sidepanel.open(SidepanelContentComponent);
+		this.sidepanel.legacyOpen(SidepanelContentComponent);
 	}
 
 	public openLegacyDynamicContentSidepanel() {
-		this.sidepanel.open(SidepanelDynamicContentComponent);
+		this.sidepanel.legacyOpen(SidepanelDynamicContentComponent);
 	}
 
 	public openUndismissableSidepanel() {
