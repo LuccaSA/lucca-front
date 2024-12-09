@@ -1,0 +1,41 @@
+@use '@lucca-front/scss/src/commons/config';
+@use '@lucca-front/scss/src/commons/utils/media';
+@use 'exports' as *;
+
+.dataTable {
+	@include vars;
+
+	//For both mod-stickyColumn + responsive variant
+	&[class*='mod-stickyColumn'] {
+		@include stickyColumn;
+	}
+
+	&.mod-stickyColumn {
+		@include stickyColumnOffset;
+	}
+
+	@each $breakpoint, $value in config.$breakpoints {
+		@include media.min($breakpoint) {
+			&.mod-stickyColumnAtMediaMin#{$breakpoint} {
+				@include stickyColumnOffset;
+			}
+		}
+	}
+
+	//For both stickyHeader + -withBanner variant
+	&[class*='mod-stickyHeader'] {
+		@include stickyHeaderCommon;
+
+		.mod-stickyHeader-shadow {
+			@include stickyHeaderShadow;
+		}
+	}
+
+	&.mod-stickyHeader {
+		@include stickyHeader;
+	}
+
+	&.mod-stickyHeader-withBanner {
+		@include stickyHeaderBanner;
+	}
+}
