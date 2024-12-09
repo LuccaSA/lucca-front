@@ -588,8 +588,9 @@ $durations: (
 );
 
 $loading: (
-	'frontground': var(--palettes-product-500),
+	'frontground': var(--palettes-500, var(--palettes-product-500)),
 	'speed': 600ms,
+	'borderWidth': 3px,
 );
 
 $textLink: (
