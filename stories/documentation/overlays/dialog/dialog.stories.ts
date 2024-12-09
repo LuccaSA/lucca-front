@@ -78,6 +78,15 @@ export default {
 				type: 'select',
 			},
 		},
+		size: {
+			options: ['fitContent', 'XS', 'S', '', 'L', 'XL', 'maxContent', 'fullScreen'],
+			control: {
+				type: 'select',
+			},
+		},
+		panelClasses: {
+			description: '[v18.3] mod-neutralBackground',
+		},
 	},
 } as Meta;
 
