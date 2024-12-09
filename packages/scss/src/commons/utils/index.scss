@@ -270,12 +270,20 @@
 .u-noSpinButtons {
 	&::-webkit-outer-spin-button,
 	&::-webkit-inner-spin-button {
-		-webkit-appearance: none;
+		-webkit-appearance: none !important;
 	}
 
 	&[type='number'] {
-		-moz-appearance: textfield;
+		-moz-appearance: textfield !important;
 	}
+}
+
+.u-fontFamily {
+	font-family: var(--commons-font-family) !important;
+}
+
+.u-fontFamilyCursive {
+	font-family: var(--commons-font-family-cursive) !important;
 }
 
 @each $elevation in config.$elevations {
