@@ -1,6 +1,4 @@
 @use 'exports' as *;
-@use '@lucca-front/scss/src/components/button/exports' as button;
-@use '@lucca-front/icons/src/icon/exports' as icon;
 
 .divider {
 	@include vars;
@@ -8,17 +6,9 @@
 
 	&.mod-S {
 		@include S;
-
-		.button {
-			@include button.S;
-		}
-
-		.lucca-icon {
-			@include icon.S;
-		}
 	}
 
-	.button {
-		@include button.outlined;
+	&.mod-vertical {
+		@include vertical;
 	}
 }
