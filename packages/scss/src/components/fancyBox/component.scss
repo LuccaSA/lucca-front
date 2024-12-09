@@ -1,10 +1,9 @@
 @use '@lucca-front/scss/src/commons/utils/namespace';
-@use '@lucca-front/scss/src/commons/utils/media';
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
 	overflow: hidden;
 	padding-inline: var(--pr-t-spacings-200);
-
+	display: block;
 
 	@at-root ($atRoot) {
 		.fancyBox-content {
@@ -20,7 +19,7 @@
 
 		.fancyBox-content-box {
 			position: relative;
-			padding: var(--pr-t-spacings-300);
+			padding: var(--pr-t-spacings-300) var(--pr-t-spacings-700);
 			background-color: var(--pr-t-elevation-surface-raised);
 			border-radius: 16px;
 			flex-grow: 1;
@@ -32,24 +31,41 @@
 			&::before,
 			&::after {
 				content: '';
-				position: absolute;
 				z-index: -1;
-				width: 12.5rem;
-				height: 10rem;
+				position: absolute;
+				width: var(--components-fancyBox-imageWidth);
+				height: var(--components-fancyBox-imageHeight);
 				background-repeat: no-repeat;
+				background-size: contain;
+				transition-duration: var(--commons-animations-durations-slow);
 			}
 
 			&::before {
-				bottom: -1.5rem;
-				left: -10rem;
+				transition-property: width, height, bottom, left;
+				bottom: var(--components-fancyBox-offsetBlock);
+				left: var(--components-fancyBox-offsetInline);
 				background-image: var(--components-fancyBox-background-left);
 			}
 
 			&::after {
-				top: -1.5rem;
-				right: -10rem;
+				transition-property: width, height, top, right;
+				top: var(--components-fancyBox-offsetBlock);
+				right: var(--components-fancyBox-offsetInline);
 				background-image: var(--components-fancyBox-background-right);
 			}
+		}
+
+		.fancyBox-content-box-foreground {
+			position: absolute;
+			width: var(--components-fancyBox-imageWidth);
+			height: var(--components-fancyBox-imageHeight);
+			background-repeat: no-repeat;
+			top: var(--components-fancyBox-offsetBlock);
+			right: var(--components-fancyBox-offsetInline);
+			background-image: var(--components-fancyBox-foreground);
+			background-size: contain;
+			transition-property: width, height, top, right;
+			transition-duration: var(--commons-animations-durations-slow);
 		}
 	}
 }
