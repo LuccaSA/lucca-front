@@ -37,15 +37,18 @@
 				height: var(--components-fancyBox-imageHeight);
 				background-repeat: no-repeat;
 				background-size: contain;
+				transition-duration: var(--commons-animations-durations-slow);
 			}
 
 			&::before {
+				transition-property: width, height, bottom, left;
 				bottom: var(--components-fancyBox-offsetBlock);
 				left: var(--components-fancyBox-offsetInline);
 				background-image: var(--components-fancyBox-background-left);
 			}
 
 			&::after {
+				transition-property: width, height, top, right;
 				top: var(--components-fancyBox-offsetBlock);
 				right: var(--components-fancyBox-offsetInline);
 				background-image: var(--components-fancyBox-background-right);
@@ -61,6 +64,8 @@
 			right: var(--components-fancyBox-offsetInline);
 			background-image: var(--components-fancyBox-foreground);
 			background-size: contain;
+			transition-property: width, height, top, right;
+			transition-duration: var(--commons-animations-durations-slow);
 		}
 	}
 }
