@@ -84,6 +84,9 @@ export default {
 				type: 'select',
 			},
 		},
+		panelClasses: {
+			description: '[v18.3] mod-neutralBackground',
+		},
 	},
 } as Meta;
 
