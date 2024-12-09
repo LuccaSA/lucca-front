@@ -2,11 +2,13 @@ import { ChangeDetectionStrategy, Component, ViewChild, ViewContainerRef } from 
 import { FieldWrapper } from '@ngx-formly/core';
 
 // wrapper component
+// eslint-disable-next-line @angular-eslint/prefer-standalone
 @Component({
 	selector: 'lu-formly-wrapper-radiosfield-layout',
 	styleUrls: ['flex-layout.scss'],
 	templateUrl: './radiosfield-layout.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
+	standalone: false,
 })
 // eslint-disable-next-line @angular-eslint/component-class-suffix
 export class LuFormlyWrapperRadiosfieldLayout extends FieldWrapper {

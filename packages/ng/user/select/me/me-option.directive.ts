@@ -44,7 +44,11 @@ export class LuUserMeOptionDirective<U extends ILuUser = ILuUser> implements ILu
 		this._service.operations = operations;
 	}
 	@Input() set luUserMeOptionClue(clue: string) {
-		clue ? this.hideMe() : this.displayMe();
+		if (clue) {
+			this.hideMe();
+		} else {
+			this.displayMe();
+		}
 	}
 
 	set inOptions$(in$: Observable<U[]>) {

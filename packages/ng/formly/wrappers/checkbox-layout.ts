@@ -2,11 +2,13 @@ import { ChangeDetectionStrategy, Component, ViewChild, ViewContainerRef } from 
 import { FieldWrapper } from '@ngx-formly/core';
 
 // wrapper component
+// eslint-disable-next-line @angular-eslint/prefer-standalone
 @Component({
 	selector: 'lu-formly-wrapper-checkbox-layout',
 	styleUrls: ['flex-layout.scss'],
 	templateUrl: './checkbox-layout.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
+	standalone: false,
 })
 // eslint-disable-next-line @angular-eslint/component-class-suffix
 export class LuFormlyWrapperCheckboxLayout extends FieldWrapper {

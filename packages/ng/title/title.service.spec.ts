@@ -1,8 +1,8 @@
 import { Location } from '@angular/common';
 import { Component, Injectable, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { ActivatedRouteSnapshot, Resolve } from '@angular/router';
-import { createRoutingFactory, mockProvider, SpectatorRouting } from '@ngneat/spectator/jest';
+import { ActivatedRouteSnapshot, Resolve, RouterLink, RouterOutlet } from '@angular/router';
+import { SpectatorRouting, createRoutingFactory, mockProvider } from '@ngneat/spectator/jest';
 import { Observable, of, timer } from 'rxjs';
 import { map, skip } from 'rxjs/operators';
 import { ILuTitleTranslateService, LU_TITLE_TRANSLATE_SERVICE } from './title-translate.service';
@@ -22,6 +22,7 @@ class TranslateService implements ILuTitleTranslateService {
 
 @Component({
 	selector: 'lu-app',
+	imports: [RouterOutlet, RouterLink],
 	template: `<router-outlet></router-outlet>
 		<a class="link-2" [routerLink]="['/first']">Stub</a>
 		<a class="link-3" [routerLink]="['/first/1']">Stub</a>
@@ -45,6 +46,7 @@ export class TestNameResolver implements Resolve<string> {
 
 @Component({
 	selector: 'lu-stub',
+	imports: [RouterOutlet],
 	template: `<router-outlet></router-outlet>`,
 })
 export class StubComponent {}
@@ -62,6 +64,7 @@ export class OverrideTitleComponent implements OnInit {
 
 @Component({
 	selector: 'lu-delayed-override-title',
+	imports: [RouterOutlet],
 	template: `<router-outlet></router-outlet>`,
 })
 export class DelayedOverrideTitleComponent implements OnInit {
@@ -95,7 +98,6 @@ describe('TitleService', () => {
 				useClass: TranslateService,
 			},
 		],
-		declarations: [StubComponent, OverrideTitleComponent, OverrideTitlePartComponent, DelayedOverrideTitleComponent],
 		stubsEnabled: false,
 		routes: [
 			{

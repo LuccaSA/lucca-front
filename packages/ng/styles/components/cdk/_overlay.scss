@@ -30,6 +30,10 @@
 	position: absolute;
 	pointer-events: auto;
 	z-index: 1000;
+
+	> * {
+		flex-grow: 1;
+	}
 }
 
 .cdk-overlay-backdrop {

@@ -1,5 +1,4 @@
-import { StoryObj } from '@storybook/angular';
-import { StrictArgTypes } from '@storybook/types';
+import { ArgTypes, StoryObj } from '@storybook/angular';
 
 export interface StoryGeneratorArgs<TComponent> {
 	name: string;
@@ -89,7 +88,7 @@ export function cleanupTemplate(template: string): string {
 		.replace(/ {2,}/gm, ' ');
 }
 
-export function generateInputs(inputs: Record<string, unknown>, argTypes: StrictArgTypes, disableBooleanAttributes = false): string {
+export function generateInputs(inputs: Record<string, unknown>, argTypes: ArgTypes, disableBooleanAttributes = false): string {
 	return Object.entries(inputs).reduce((acc, [name, value]) => {
 		const argType = argTypes[name];
 		// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access

@@ -369,7 +369,11 @@ export abstract class ALuPopoverTrigger<TPanel extends ILuPopoverPanel = ILuPopo
 	protected _setIsPopoverOpen(isOpen: boolean): void {
 		this._popoverOpen = isOpen;
 		// tell the panel it's opening/closing
-		isOpen ? this.panel.onOpen() : this.panel.onClose();
+		if (isOpen) {
+			this.panel.onOpen();
+		} else {
+			this.panel.onClose();
+		}
 	}
 
 	/**
