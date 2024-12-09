@@ -27,7 +27,7 @@ export class FancyBoxComponent {
 	}
 
 	@Input({ required: true })
-	backgroundRight?: string;
+	backgroundRight: string;
 	@HostBinding('style.--components-fancyBox-background-right')
 	get backgroundRightStyle(): string {
 		return this.backgroundRight ? `url(${this.backgroundRight})` : ``;

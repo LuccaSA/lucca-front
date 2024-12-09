@@ -1,5 +1,4 @@
 @use '@lucca-front/scss/src/commons/utils/namespace';
-@use '@lucca-front/scss/src/commons/utils/media';
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
 	overflow: hidden;
@@ -34,32 +33,34 @@
 				content: '';
 				z-index: -1;
 				position: absolute;
-				width: 12.5rem;
-				height: 10rem;
+				width: var(--components-fancyBox-imageWidth);
+				height: var(--components-fancyBox-imageHeight);
 				background-repeat: no-repeat;
+				background-size: contain;
 			}
 
 			&::before {
-				bottom: -1.5rem;
-				left: -10rem;
+				bottom: var(--components-fancyBox-offsetBlock);
+				left: var(--components-fancyBox-offsetInline);
 				background-image: var(--components-fancyBox-background-left);
 			}
 
 			&::after {
-				top: -1.5rem;
-				right: -10rem;
+				top: var(--components-fancyBox-offsetBlock);
+				right: var(--components-fancyBox-offsetInline);
 				background-image: var(--components-fancyBox-background-right);
 			}
 		}
 
 		.fancyBox-content-box-foreground {
 			position: absolute;
-			width: 12.5rem;
-			height: 10rem;
+			width: var(--components-fancyBox-imageWidth);
+			height: var(--components-fancyBox-imageHeight);
 			background-repeat: no-repeat;
-			top: -1.5rem;
-			right: -10rem;
+			top: var(--components-fancyBox-offsetBlock);
+			right: var(--components-fancyBox-offsetInline);
 			background-image: var(--components-fancyBox-foreground);
+			background-size: contain;
 		}
 	}
 }
