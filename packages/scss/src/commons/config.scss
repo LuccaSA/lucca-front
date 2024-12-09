@@ -450,23 +450,21 @@ $elevation: (
 );
 
 // Tokens : Colors
-$color: (
-	input: (
-		text: var(--palettes-neutral-800),
-		text-placeholder: var(--palettes-neutral-400),
-		text-placeholder-critical: var(--palettes-critical-400),
-		text-suffix: var(--palettes-neutral-600),
-		text-disabled: var(--palettes-neutral-700),
-		icon: var(--palettes-neutral-600),
-		icon-disabled: var(--palettes-neutral-500),
-		background: var(--palettes-neutral-0),
-		background-critical: var(--palettes-critical-50),
-		background-disabled: var(--palettes-neutral-100),
-		border: var(--palettes-neutral-300),
-		border-hover: var(--palettes-neutral-400),
-		border-critical: var(--palettes-critical-400),
-		border-critical-hover: var(--palettes-critical-600),
-	),
+$colorInput: (
+	text: var(--palettes-neutral-800),
+	text-placeholder: var(--palettes-neutral-400),
+	text-placeholder-critical: var(--palettes-critical-400),
+	text-suffix: var(--palettes-neutral-600),
+	text-disabled: var(--palettes-neutral-700),
+	icon: var(--palettes-neutral-600),
+	icon-disabled: var(--palettes-neutral-500),
+	background: var(--palettes-neutral-0),
+	background-critical: var(--palettes-critical-50),
+	background-disabled: var(--palettes-neutral-100),
+	border: var(--palettes-neutral-300),
+	border-hover: var(--palettes-neutral-400),
+	border-critical: var(--palettes-critical-400),
+	border-critical-hover: var(--palettes-critical-600),
 );
 
 $breakpoints: (

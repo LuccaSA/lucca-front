@@ -14,9 +14,7 @@
 	@include core.cssvars('pr-t-spacings', config.$spacings);
 	--pr-t-spacings-auto: auto;
 
-	@each $key, $map in config.$color {
-		@include core.cssvars('pr-t-color-#{$key}', $map);
-	}
+	@include core.cssvars('pr-t-color-input', config.$colorInput);
 
 	// VARIABLES
 
