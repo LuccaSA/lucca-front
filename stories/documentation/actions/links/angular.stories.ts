@@ -1,9 +1,7 @@
+import { AsyncPipe } from '@angular/common';
 import { provideRouter, RouterLink } from '@angular/router';
 import { LinkComponent } from '@lucca-front/ng/link';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { map } from 'rxjs/operators';
-import { timer } from 'rxjs';
-import { AsyncPipe } from '@angular/common';
 
 export default {
 	title: 'Documentation/Actions/Link/Angular/Basic',
@@ -22,11 +20,8 @@ export default {
 		const externe = external ? 'external' : '';
 
 		return {
-			props: {
-				disabled$: timer(0, 5000).pipe(map((i) => i % 2 == 1)),
-			},
-			template: `lorem <a href="${href}" luLink ${externe} [disabled]="disabled$ | async">${label}</a> dolor<br />
-			lorem <a [luLink]="'${routerLink}'" ${externe}  [disabled]="disabled$ | async">${label}</a> dolor`,
+			template: `lorem <a href="${href}" luLink ${externe} ${disable}>${label}</a> dolor<br />
+			lorem <a [luLink]="'${routerLink}'" ${externe} ${disable}>${label}</a> dolor`,
 		};
 	},
 	argTypes: {
