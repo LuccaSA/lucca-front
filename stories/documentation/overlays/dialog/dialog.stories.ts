@@ -78,6 +78,12 @@ export default {
 				type: 'select',
 			},
 		},
+		size: {
+			options: ['fitContent', 'XS', 'S', '', 'L', 'XL', 'maxContent', 'fullScreen'],
+			control: {
+				type: 'select',
+			},
+		},
 	},
 } as Meta;
 
