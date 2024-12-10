@@ -1,14 +1,14 @@
+import { DIALOG_DATA } from '@angular/cdk/dialog';
+import { NgComponentOutlet, NgTemplateOutlet } from '@angular/common';
 import { Component, computed, DestroyRef, inject, Injector, OnInit, runInInjectionContext, TemplateRef, viewChild } from '@angular/core';
 import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, Router } from '@angular/router';
-import { LuDialogRef } from '../model';
-import { LuDialogService } from '../dialog.service';
+import { from } from 'rxjs';
 import { provideLuDialog } from '../dialog.providers';
+import { LuDialogService } from '../dialog.service';
+import { LuDialogRef } from '../model';
 import { DialogRouteConfig } from './dialog-routing.models';
 import { deferrableToPromise, DIALOG_ROUTE_CONFIG } from './dialog-routing.utils';
-import { NgComponentOutlet, NgTemplateOutlet } from '@angular/common';
-import { from } from 'rxjs';
-import { DIALOG_DATA } from '@angular/cdk/dialog';
 
 export const defaultOnClosedFn = <C>(router = inject(Router), route = inject(ActivatedRoute), config = inject<DialogRouteConfig<C>>(DIALOG_ROUTE_CONFIG)): void =>
 	void router.navigate(
@@ -87,7 +87,11 @@ export class DialogRoutingComponent<C> implements OnInit {
 
 	#ref?: LuDialogRef<C>;
 
-	async ngOnInit(): Promise<void> {
+	ngOnInit(): void {
+		void this.#openDialog();
+	}
+
+	async #openDialog(): Promise<void> {
 		const dialogConfig = await this.#dialogConfig;
 		this.#ref = this.#dialog.open<C>({
 			...dialogConfig,
@@ -95,7 +99,11 @@ export class DialogRoutingComponent<C> implements OnInit {
 		});
 		this.#ref.result$.pipe(takeUntilDestroyed(this.#destroyRef)).subscribe((result) =>
 			runInInjectionContext(this.injector, () => {
-				this.#config.onClosed ? this.#config.onClosed(result) : defaultOnClosedFn();
+				if (this.#config.onClosed) {
+					this.#config.onClosed(result);
+				} else {
+					defaultOnClosedFn();
+				}
 			}),
 		);
 

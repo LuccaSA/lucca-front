@@ -11,9 +11,9 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "postcss": "8.4.38",
+    "postcss": "8.4.49",
     "postcss-scss": "4.0.9",
-    "postcss-selector-parser": "6.1.0",
+    "postcss-selector-parser": "7.0.0",
     "postcss-value-parser": "4.2.0"
   },
   "volta": {

@@ -18,8 +18,7 @@
 			"@lucca-front/ng/*": ["packages/ng/*/public-api.ts"],
 			"@/stories/*": ["stories/documentation/*"]
 		},
-		"declaration": false,
-		"downlevelIteration": true,
+    "declaration": false,
 		"experimentalDecorators": true,
 		"moduleResolution": "node",
 		"importHelpers": true,

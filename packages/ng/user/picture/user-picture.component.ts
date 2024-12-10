@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component, Input, OnChanges, Optional, inject, ViewEncapsulation } from '@angular/core';
+import { NgStyle } from '@angular/common';
+import { ChangeDetectionStrategy, Component, Input, OnChanges, Optional, ViewEncapsulation, inject } from '@angular/core';
 import { LU_DEFAULT_DISPLAY_POLICY, LuDisplayFormat, LuDisplayFullname, LuDisplayHybrid, LuDisplayInitials, luUserDisplay } from '../display';
 
 export interface LuUserPictureUserInput {
@@ -31,6 +32,7 @@ export const displayPictureFormatRecord: Record<LuDisplayFormat, LuDisplayInitia
  */
 @Component({
 	selector: 'lu-user-picture',
+	imports: [NgStyle],
 	templateUrl: './user-picture.component.html',
 	styleUrls: ['./user-picture.component.scss'],
 	host: { class: 'avatar' },
