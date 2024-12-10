@@ -29,7 +29,7 @@ export class CheckboxInputComponent {
 
 	constructor() {
 		if (this.formField) {
-			this.formField.layout = 'checkable';
+			this.formField.layout.set('checkable');
 		}
 	}
 }

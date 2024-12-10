@@ -76,7 +76,12 @@ export default {
 	},
 } as Meta;
 
-export const Basic: StoryObj<NumberFormatInputComponent & { disabled: boolean } & FormFieldComponent> = {
+export const Basic: StoryObj<
+	NumberFormatInputComponent & {
+		disabled: boolean;
+		required: boolean;
+	} & FormFieldComponent
+> = {
 	render: (args, { argTypes }) => {
 		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, ...inputArgs } = args;
 		return {
@@ -119,7 +124,12 @@ export const Basic: StoryObj<NumberFormatInputComponent & { disabled: boolean } 
 	},
 };
 
-export const WithCurrency: StoryObj<NumberFormatInputComponent & { disabled: boolean } & FormFieldComponent> = {
+export const WithCurrency: StoryObj<
+	NumberFormatInputComponent & {
+		disabled: boolean;
+		required: boolean;
+	} & FormFieldComponent
+> = {
 	render: (args, { argTypes }) => {
 		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, ...inputArgs } = args;
 		return {
@@ -163,7 +173,12 @@ export const WithCurrency: StoryObj<NumberFormatInputComponent & { disabled: boo
 	},
 };
 
-export const WithUnitKm: StoryObj<NumberFormatInputComponent & { disabled: boolean } & FormFieldComponent> = {
+export const WithUnitKm: StoryObj<
+	NumberFormatInputComponent & {
+		disabled: boolean;
+		required: boolean;
+	} & FormFieldComponent
+> = {
 	render: (args, { argTypes }) => {
 		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, ...inputArgs } = args;
 		return {
@@ -207,7 +222,12 @@ export const WithUnitKm: StoryObj<NumberFormatInputComponent & { disabled: boole
 	},
 };
 
-export const WithPercent: StoryObj<NumberFormatInputComponent & { disabled: boolean } & FormFieldComponent> = {
+export const WithPercent: StoryObj<
+	NumberFormatInputComponent & {
+		disabled: boolean;
+		required: boolean;
+	} & FormFieldComponent
+> = {
 	render: (args, { argTypes }) => {
 		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, ...inputArgs } = args;
 		return {
