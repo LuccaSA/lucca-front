@@ -52,7 +52,7 @@ node(label: CI.getSelectedLinuxNode(script:this)) {
 					powershell "Remove-Item \\\\RBX1-SH1-TECH\\lucca-front\\${env.BRANCH_NAME}\\storybook -Recurse"
 					powershell "Copy-Item storybook-static \\\\RBX1-SH1-TECH\\lucca-front\\${env.BRANCH_NAME}\\storybook -Recurse"
 
-					if (version ==~ /v\d+\.\d+\.\d+/) {
+					if (isRelease) {
 						def versionWithoutPrefix = env.BRANCH_NAME.split("\\.")[0..1].join(".");
 						powershell "Remove-Item \\\\RBX1-SH1-TECH\\lucca-front\\${versionWithoutPrefix}\\storybook -Recurse"
 						powershell "Copy-Item storybook-static \\\\RBX1-SH1-TECH\\lucca-front\\${versionWithoutPrefix}\\storybook -Recurse"
@@ -61,7 +61,7 @@ node(label: CI.getSelectedLinuxNode(script:this)) {
 					unstash(name: "compodoc-static")
 					powershell "Remove-Item \\\\RBX1-SH1-TECH\\lucca-front\\${env.BRANCH_NAME}\\compodoc -Recurse"
 					powershell "Copy-Item compodoc-static \\\\RBX1-SH1-TECH\\lucca-front\\${env.BRANCH_NAME}\\compodoc -Recurse"
-					if (version ==~ /v\d+\.\d+\.\d+/) {
+					if (isRelease) {
 						def versionWithoutPrefix = env.BRANCH_NAME.split("\\.")[0..1].join(".");
 						powershell "Remove-Item \\\\RBX1-SH1-TECH\\lucca-front\\${versionWithoutPrefix}\\compodoc -Recurse"
 						powershell "Copy-Item compodoc-static \\\\RBX1-SH1-TECH\\lucca-front\\${versionWithoutPrefix}\\compodoc -Recurse"
