@@ -48,8 +48,6 @@ node(label: CI.getSelectedLinuxNode(script:this)) {
 				stash(name: "compodoc-static", includes: "compodoc-static/**")
 				node("windows") {
 
-					def withoutMinor = env.BRANCH_NAME.split("\\.")[0..1].join(".")
-					
 					unstash(name: "storybook-static")
 					powershell "Remove-Item \\\\RBX1-SH1-TECH\\lucca-front\\${env.BRANCH_NAME}\\storybook -Recurse"
 					powershell "Copy-Item storybook-static \\\\RBX1-SH1-TECH\\lucca-front\\${env.BRANCH_NAME}\\storybook -Recurse"
