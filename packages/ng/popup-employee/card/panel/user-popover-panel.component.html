@@ -13,7 +13,7 @@
 		<section class="userPopover-details">
 			<div [ngSwitch]="userPictureDisplay$ | async" class="userPopover-details-avatar avatar">
 				<ng-container *ngSwitchCase="'img'">
-					<img class="avatar-picture" [src]="userPictureHref$ | async" (error)="pictureError()" />
+					<img class="avatar-picture" [src]="userPictureHref$ | async" alt="" (error)="pictureError()" />
 				</ng-container>
 				<ng-container *ngSwitchCase="'initials'">
 					<div class="avatar-picture" *ngIf="userInitials$ | async as initials" style.background-color="hsl({{initials.color}}, 60%, 60%)">
