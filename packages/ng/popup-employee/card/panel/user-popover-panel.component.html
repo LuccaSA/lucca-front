@@ -13,7 +13,7 @@
 		<section class="userPopover-details">
 			<div [ngSwitch]="userPictureDisplay$ | async" class="userPopover-details-avatar avatar">
 				<ng-container *ngSwitchCase="'img'">
-					<img class="avatar-picture" [src]="userPictureHref$ | async" [alt]="(userInitials$ | async)?.initials" (error)="pictureError()" />
+					<img class="avatar-picture" [src]="userPictureHref$ | async" (error)="pictureError()" />
 				</ng-container>
 				<ng-container *ngSwitchCase="'initials'">
 					<div class="avatar-picture" *ngIf="userInitials$ | async as initials" style.background-color="hsl({{initials.color}}, 60%, 60%)">
@@ -32,16 +32,16 @@
 						<ng-container *ngTemplateOutlet="fullNameDisplay" />
 					</a>
 				</ng-template>
-				<ng-template #fullNameDisplay> {{employee.firstName}} {{employee.lastName}} </ng-template>
-				<p *ngIf="employee.jobTitle" class="userPopover-details-info-detail u-ellipsis">{{employee.jobTitle}}</p>
-				<p *ngIf="employee.userDepartment" class="userPopover-details-info-detail u-ellipsis">{{employee.userDepartment?.name}}</p>
+				<ng-template #fullNameDisplay> {{ employee.firstName }} {{ employee.lastName }}</ng-template>
+				<p *ngIf="employee.jobTitle" class="userPopover-details-info-detail u-ellipsis">{{ employee.jobTitle }}</p>
+				<p *ngIf="employee.userDepartment" class="userPopover-details-info-detail u-ellipsis">{{ employee.userDepartment?.name }}</p>
 
 				<p class="userPopover-details-info-detail u-marginTopXS">
 					<!-- HORS CONTRAT-->
 					<span *ngIf="employee.dtContractStart | isFuture" class="userPopover-details-info-detail-workplace">
 						<span aria-hidden="true" class="lucca-icon icon-calendarPlanning mod-S"></span>
 						<span class="userPopover-details-info-detail-link-state">
-							{{intl.EMPLOYEE_CARD_PANEL_COMING_ON_LABEL | injectParameter : (employee.dtContractStart | date: 'shortDate') }}
+							{{ intl.EMPLOYEE_CARD_PANEL_COMING_ON_LABEL | injectParameter : (employee.dtContractStart | date: 'shortDate') }}
 						</span>
 					</span>
 					<span
@@ -49,7 +49,7 @@
 						class="userPopover-details-info-detail-workplace"
 					>
 						<span aria-hidden="true" class="lucca-icon icon-calendarStrikethrough mod-S"></span>
-						<span class="userPopover-details-info-detail-link-state"> {{intl.EMPLOYEE_CARD_PANEL_EMPLOYEE_HAS_LEAVED_LABEL }} </span>
+						<span class="userPopover-details-info-detail-link-state"> {{ intl.EMPLOYEE_CARD_PANEL_EMPLOYEE_HAS_LEAVED_LABEL }} </span>
 					</span>
 					<!-- EN CONTRAT-->
 					<a
@@ -57,21 +57,20 @@
 						class="userPopover-details-info-detail-workplace"
 						[href]="employee._links?.schedule?.href"
 					>
-						<span
-							aria-hidden="true"
-							class="lucca-icon mod-S"
-							[class.icon-mapPin]="employee.isWorkingNow && employee.currentWorkLocation"
-							[class.icon-calendarPlanning]="!employee.isWorkingNow || !employee.currentWorkLocation"
-						></span>
+						@if (employee.isWorkingNow && employee.currentWorkLocation) {
+						<lu-icon size="S" icon="mapPin" [alt]="intl.EMPLOYEE_CARD_PANEL_WORKING_LOCATION"></lu-icon>
+						} @else if (!employee.isWorkingNow || !employee.currentWorkLocation) {
+						<lu-icon size="S" icon="calendarPlanning" [alt]="intl.EMPLOYEE_CARD_PANEL_PLANNING"></lu-icon>
+						}
 						<span class="userPopover-details-info-detail-workplace-state">
 							<ng-container *ngIf="employee.isWorkingNow === true">
 								<ng-container *ngIf="employee.currentWorkLocation">
 									{{ employee.currentWorkLocation?.name }}
 									<ng-container *ngIf="employee.currentWorkLocation?.area"
-										><span class="u-textLight"> – {{employee.currentWorkLocation?.area?.name}}</span>
+										><span class="u-textLight"> – {{ employee.currentWorkLocation?.area?.name }}</span>
 									</ng-container>
 								</ng-container>
-								<ng-container *ngIf="!employee.currentWorkLocation">{{intl.EMPLOYEE_CARD_PANEL_PRESENT_LABEL }} </ng-container>
+								<ng-container *ngIf="!employee.currentWorkLocation">{{ intl.EMPLOYEE_CARD_PANEL_PRESENT_LABEL }} </ng-container>
 							</ng-container>
 
 							<ng-container *ngIf="employee.isWorkingNow === false">
