@@ -64,11 +64,11 @@ export class FormFieldComponent implements OnDestroy {
 	/**
 	 * Hide field label, while keeping it in DOM for screen readers
 	 */
-	hiddenLabel = input<boolean, boolean>(false, { transform: booleanAttribute });
+	hiddenLabel = input(false, { transform: booleanAttribute });
 
-	rolePresentationLabel = input<boolean, boolean>(false, { transform: booleanAttribute });
+	rolePresentationLabel = input(false, { transform: booleanAttribute });
 
-	inline = input<boolean, boolean>(false, { transform: booleanAttribute });
+	inline = input(false, { transform: booleanAttribute });
 
 	statusControl = input<AbstractControl | null>(null);
 
