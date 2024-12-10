@@ -173,7 +173,7 @@ export class LuTooltipTriggerDirective implements AfterContentInit, OnDestroy {
 			});
 
 		effect(() => {
-			if (!this.luTooltipDisabled() && this.#hasEllipsis()) {
+			if (!this.luTooltipDisabled() && (!this.luTooltipWhenEllipsis() || this.#hasEllipsis())) {
 				this.setAccessibilityProperties(0);
 			} else {
 				this.setAccessibilityProperties(null);

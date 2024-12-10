@@ -38,6 +38,9 @@ export const Basic: StoryObj<NumberInputComponent & { disabled: boolean } & Form
 	render: (args, { argTypes }) => {
 		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, ...inputArgs } = args;
 		return {
+			props: {
+				example: 1000,
+			},
 			template: cleanupTemplate(`<lu-form-field ${generateInputs(
 				{
 					label,
