@@ -22,7 +22,7 @@ import {
 	computed,
 	effect,
 	inject,
-	input,
+	model,
 	linkedSignal,
 	numberAttribute,
 	signal,
@@ -62,7 +62,7 @@ export class LuTooltipTriggerDirective implements OnDestroy {
 	readonly #injector = inject(Injector);
 	readonly #destroyRef = inject(DestroyRef);
 
-	readonly luTooltip = input<string | SafeHtml>();
+	readonly luTooltip = model<string | SafeHtml>();
 
 	readonly luTooltipEnterDelay = input(300, { transform: numberAttribute });
 	readonly luTooltipLeaveDelay = input(100, { transform: numberAttribute });
@@ -73,7 +73,7 @@ export class LuTooltipTriggerDirective implements OnDestroy {
 
 	readonly luTooltipPosition = input<LuPopoverPosition>('above');
 
-	readonly luTooltipWhenEllipsis = input(false, { transform: booleanAttribute });
+	readonly luTooltipWhenEllipsis = model(false);
 
 	readonly luTooltipAnchor = input<FlexibleConnectedPositionStrategyOrigin>(this.#host);
 
