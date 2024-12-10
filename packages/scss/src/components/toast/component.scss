@@ -66,6 +66,10 @@
 			padding: var(--pr-t-spacings-100) 0 var(--pr-t-spacings-100) var(--pr-t-spacings-100);
 		}
 
+		.toast-item-content-description {
+			margin: 0;
+		}
+
 		.toasts-item-kill {
 			// :not(.class) is only there to increase specificity when the class isn’t present
 			// but the class should be present, and this code is temporary
