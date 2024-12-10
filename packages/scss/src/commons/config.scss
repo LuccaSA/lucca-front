@@ -4,12 +4,12 @@
 $importDeprecatedSpacings: true !default;
 $isNamespaced: false !default;
 
-$fontFamily: 'Source Sans Pro' !default;
+$fontFamily: 'SourceSans' !default;
 $fontWeights: (
 	'regular': 400,
 	'semibold': 600,
 	'bold': 700,
-	'extra-black': 900,
+	'black': 800,
 ) !default;
 
 $fontFamilyCursive: 'Caveat' !default;
