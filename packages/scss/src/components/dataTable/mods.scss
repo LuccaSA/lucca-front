@@ -1,0 +1,211 @@
+@use '@lucca-front/scss/src/components/button/exports' as button;
+@use '@lucca-front/scss/src/components/title/exports' as title;
+@use '@lucca-front/scss/src/commons/config';
+@use '@lucca-front/icons/src/commons/utils/icon';
+@use '@lucca-front/scss/src/commons/utils/media';
+
+@mixin cellBorder {
+	.dataTable-head-row-cell,
+	.dataTable-body-row-cell,
+	.dataTable-foot-row-cell {
+		border-inline: 1px solid var(--commons-border-200);
+	}
+}
+
+@mixin alignTop {
+	.dataTable-body-row-cell {
+		vertical-align: top;
+	}
+}
+
+@mixin group {
+	@include buttonExpand;
+	@include title.component;
+	@include title.h4;
+	background-color: var(--palettes-neutral-25);
+}
+
+@mixin selectable {
+	.dataTable-head-row-cell,
+	.dataTable-body-row-cell,
+	.dataTable-foot-row-cell {
+		&:first-child {
+			padding-inline-end: var(--pr-t-spacings-100);
+			width: 2.5rem;
+		}
+	}
+
+	&:has(input[type='checkbox']:checked) {
+		.dataTable-head-row-cell,
+		.dataTable-body-row-cell,
+		.dataTable-foot-row-cell {
+			background-color: var(--palettes-product-50);
+		}
+	}
+}
+
+@mixin draggable {
+	.dataTable-head-row-cell,
+	.dataTable-body-row-cell,
+	.dataTable-foot-row-cell {
+		&:first-child {
+			padding-inline: var(--pr-t-spacings-50);
+			width: 1rem;
+
+			.dataTable-body-row-cell-drag {
+				cursor: move;
+			}
+		}
+	}
+
+	.dataTable-body-row-cell-drag {
+		@include button.S;
+		@include button.onlyIcon;
+		@include button.text;
+		--components-button-padding: var(--pr-t-spacings-50);
+		--components-button-color: var(--palettes-neutral-700);
+		vertical-align: top;
+	}
+}
+
+@mixin buttonExpand {
+	.dataTable-body-row-cell-expand {
+		@include button.S;
+		@include button.onlyIcon;
+		@include button.text;
+		--components-button-padding: var(--pr-t-spacings-25);
+		--components-button-color: var(--palettes-neutral-800);
+		margin-inline-end: var(--pr-t-spacings-100);
+		vertical-align: top;
+	}
+
+	--components-dataTable-tree-extraPadding: calc(1.5rem + var(--pr-t-spacings-100)); // Button size + margin
+
+	&:has(.dataTable-body-row-cell-expand) {
+		--components-dataTable-tree-extraPadding: 0rem;
+	}
+}
+
+@mixin tree1 {
+	@include buttonExpand;
+}
+
+@mixin tree2 {
+	@include buttonExpand;
+	padding-inline-start: calc(
+		var(--components-dataTable-cell-padding-inline) + var(--pr-t-spacings-300) + var(--components-dataTable-tree-extraPadding)
+	);
+}
+
+@mixin tree3 {
+	@include buttonExpand;
+	padding-inline-start: calc(
+		var(--components-dataTable-cell-padding-inline) + var(--pr-t-spacings-300) * 2 + var(--components-dataTable-tree-extraPadding)
+	);
+}
+
+@mixin tree4 {
+	@include buttonExpand;
+	padding-inline-start: calc(
+		var(--components-dataTable-cell-padding-inline) + var(--pr-t-spacings-300) * 3 + var(--components-dataTable-tree-extraPadding)
+	);
+}
+
+@mixin editable {
+	--components-dataTable-cell-padding: var(--pr-t-spacings-50);
+}
+
+@mixin actions {
+	padding: 0;
+	padding-inline-end: var(--pr-t-spacings-50);
+	text-align: right;
+	white-space: nowrap;
+
+	.button {
+		@include button.S;
+		@include button.onlyIcon;
+		@include button.onlyIconS;
+		@include button.text;
+	}
+}
+
+// @mixin actionsHidden {
+// 	@media (hover: hover) {
+// 		> * {
+// 			&:not(.is-loading) {
+// 				opacity: 0;
+// 			}
+// 		}
+
+// 		.dataTable-head-row:hover &,
+// 		.dataTable-body-row:hover &,
+// 		.dataTable-foot-row:hover & {
+// 			> * {
+// 				opacity: 1;
+// 			}
+// 		}
+
+// 		.dataTable-head-row:focus-within &,
+// 		.dataTable-body-row:focus-within &,
+// 		.dataTable-foot-row:focus-within & {
+// 			> * {
+// 				opacity: 1;
+// 			}
+// 		}
+// 	}
+// }
+
+@mixin alignCenter {
+	text-align: center;
+}
+
+@mixin alignRight {
+	text-align: right;
+}
+
+@mixin layoutFixed {
+	table-layout: fixed;
+}
+
+@mixin layoutFixedWithBreakpoint {
+	@each $breakpoint, $value in config.$breakpoints {
+		@include media.min($breakpoint) {
+			&.mod-layoutFixedAtMediaMin#{$breakpoint} {
+				table-layout: fixed;
+			}
+		}
+	}
+}
+
+@mixin layoutFixedCells {
+	.dataTable-head-row-cell,
+	.dataTable-body-row-cell,
+	.dataTable-foot-row-cell {
+		--cell-width: var(--table-layoutFixed-width);
+	}
+
+	&.mod-layoutFixed {
+		.dataTable-head-row-cell,
+		.dataTable-body-row-cell,
+		.dataTable-foot-row-cell {
+			@include cellFixedWidth;
+		}
+	}
+
+	@each $breakpoint, $value in config.$breakpoints {
+		@include media.min($breakpoint) {
+			&.mod-layoutFixedAtMediaMin#{$breakpoint} {
+				.dataTable-head-row-cell,
+				.dataTable-body-row-cell,
+				.dataTable-foot-row-cell {
+					@include cellFixedWidth;
+				}
+			}
+		}
+	}
+}
+
+@mixin cellFixedWidth {
+	min-width: var(--cell-width, auto);
+	width: var(--cell-width, auto);
+}
