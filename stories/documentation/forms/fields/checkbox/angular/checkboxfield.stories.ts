@@ -26,15 +26,15 @@ export default {
 			},
 		},
 		mixed: {
-				description: '[v17.4]'
+			description: '[v17.4]',
 		},
 		hiddenLabel: {
-			description: 'Masque le label en le conservant dans le DOM pour les lecteurs d\'écrans',
+			description: "Masque le label en le conservant dans le DOM pour les lecteurs d'écrans",
 		},
 	},
 } as Meta;
 
-export const Basic: StoryObj<CheckboxInputComponent & FormFieldComponent> = {
+export const Basic: StoryObj<CheckboxInputComponent & FormFieldComponent & { required: boolean }> = {
 	render: (args, { argTypes }) => {
 		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, ...inputArgs } = args;
 		return {

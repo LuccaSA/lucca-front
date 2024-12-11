@@ -104,4 +104,8 @@ export class PortalDirective<T = unknown> implements OnChanges, OnDestroy {
 			this.embeddedViewRef.detectChanges();
 		}
 	}
+
+	public static ngTemplateContextGuard<T>(_dir: PortalDirective<T>, ctx: unknown): ctx is void {
+		return true;
+	}
 }

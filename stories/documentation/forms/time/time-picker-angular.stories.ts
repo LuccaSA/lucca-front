@@ -38,7 +38,7 @@ export default {
 	},
 } as Meta;
 
-export const Basic: StoryObj<TimePickerComponent & FormFieldComponent> = {
+export const Basic: StoryObj<TimePickerComponent & FormFieldComponent & { required: boolean }> = {
 	render: (args, { argTypes }) => {
 		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, forceMeridiemDisplay, ...inputArgs } = args;
 		return {

@@ -49,6 +49,8 @@ export const Basic: StoryObj<
 	LuSimpleSelectInputComponent<unknown> &
 		FormFieldComponent & {
 			disabled: boolean;
+			hasValue: () => boolean;
+			required: boolean;
 		}
 > = {
 	render: (args, { argTypes }) => {

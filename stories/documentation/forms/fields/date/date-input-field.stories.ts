@@ -1,10 +1,10 @@
 import { LOCALE_ID } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { DateInputComponent } from '@lucca-front/ng/date2';
-import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { StoryModelDisplayComponent } from '../../../../helpers/story-model-display.component';
-import { cleanupTemplate, generateInputs } from '../../../../helpers/stories';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
+import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { cleanupTemplate, generateInputs } from '../../../../helpers/stories';
+import { StoryModelDisplayComponent } from '../../../../helpers/story-model-display.component';
 
 export default {
 	title: 'Documentation/Forms/Fields/DateInput/Angular',
@@ -81,7 +81,6 @@ export const Basic: StoryObj<DateInputComponent & FormFieldComponent> = {
 		label: 'Label',
 		tooltip: 'Tooltip message',
 		hiddenLabel: false,
-		required: true,
 		inlineMessage: 'Helper Text',
 		inlineMessageState: 'default',
 		// DateInput
