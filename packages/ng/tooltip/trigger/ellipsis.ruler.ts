@@ -74,7 +74,7 @@ export class EllipsisRuler {
 			const elementWidth = element.getBoundingClientRect().width;
 
 			return elementClonedWidth > elementWidth;
-		} catch (e) {
+		} catch {
 			return false;
 		} finally {
 			// To avoid multiple reflows, we wait for the next microtask before removing the cloned element
