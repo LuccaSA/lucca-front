@@ -66,7 +66,7 @@ export class FormFieldComponent implements OnDestroy {
 	 */
 	hiddenLabel = input(false, { transform: booleanAttribute });
 
-	rolePresentationLabel = input(false, { transform: booleanAttribute });
+	rolePresentationLabel = model(false);
 
 	inline = input(false, { transform: booleanAttribute });
 

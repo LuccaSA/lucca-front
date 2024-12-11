@@ -84,10 +84,6 @@ export class PortalDirective<T = unknown> implements OnChanges, OnDestroy {
 		}
 	}
 
-	public static ngTemplateContextGuard<T>(_dir: PortalDirective<T>, ctx: unknown): ctx is void {
-		return true;
-	}
-
 	/**
 	 * Embeded view context should not be overwritten, but updated.
 	 * @see https://github.com/angular/angular/pull/51887
