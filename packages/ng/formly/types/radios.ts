@@ -1,12 +1,12 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FieldType, FieldTypeConfig } from '@ngx-formly/core';
 
-// eslint-disable-next-line @angular-eslint/prefer-standalone
 @Component({
 	selector: 'lu-formly-field-radios',
 	styleUrls: ['formly-field.common.scss'],
 	templateUrl: './radios.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
+	// eslint-disable-next-line @angular-eslint/prefer-standalone
 	standalone: false,
 })
 // eslint-disable-next-line @angular-eslint/component-class-suffix

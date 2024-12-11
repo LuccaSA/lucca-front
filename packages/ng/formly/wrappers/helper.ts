@@ -3,12 +3,12 @@ import { FieldWrapper } from '@ngx-formly/core';
 import { buildAddWrapperExtension } from '../formly.utils';
 
 // wrapper component
-// eslint-disable-next-line @angular-eslint/prefer-standalone
 @Component({
 	selector: 'lu-formly-wrapper-helper',
 	styleUrls: ['flex-layout.scss'],
 	templateUrl: './helper.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
+	// eslint-disable-next-line @angular-eslint/prefer-standalone
 	standalone: false,
 })
 // eslint-disable-next-line @angular-eslint/component-class-suffix
