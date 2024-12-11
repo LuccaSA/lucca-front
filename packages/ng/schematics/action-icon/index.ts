@@ -15,7 +15,6 @@ export default (options?: { skipInstallation?: boolean }): Rule => {
 		}
 
 		const postCssScss = await import('../lib/local-deps/postcss-scss.js');
-		const angularCompiler = await import('@angular/compiler');
 
 		tree.visit((path, entry) => {
 			if (path.includes('node_modules') || !entry) {
@@ -25,7 +24,7 @@ export default (options?: { skipInstallation?: boolean }): Rule => {
 				migrateFile(path, entry, tree, (content) => migrateScssFile(content, postCssScss));
 			}
 			if (path.endsWith('.html')) {
-				migrateFile(path, entry, tree, (content) => migrateHTMLFile(content, angularCompiler));
+				migrateFile(path, entry, tree, (content) => migrateHTMLFile(content));
 			}
 		});
 	};

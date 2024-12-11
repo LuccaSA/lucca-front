@@ -11,7 +11,7 @@ export function removeContainerIfEmpty(node: Container | undefined): void {
 		return;
 	}
 
-	if (!node.nodes.length) {
+	if (!node.nodes?.length) {
 		const { parent } = node;
 
 		// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access

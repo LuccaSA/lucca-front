@@ -1,7 +1,4 @@
 import {
-	ScriptTarget,
-	SourceFile,
-	Node as TsNode,
 	createSourceFile,
 	forEachChild,
 	isCallExpression,
@@ -11,10 +8,14 @@ import {
 	isObjectLiteralExpression,
 	isPropertyAssignment,
 	isStringLiteral,
+	Node as TsNode,
+	ScriptTarget,
+	SourceFile,
 } from 'typescript';
 import { updateContent } from './file-update';
-import { AngularCompilerLib, HtmlAst, HtmlAstVisitor } from './html-ast';
+import { HtmlAst, HtmlAstVisitor } from './html-ast';
 import { replaceStringLiterals } from './typescript-ast';
+import { ASTWithSource } from '@angular/compiler';
 
 export interface AngularTemplate {
 	offsetStart: number;
@@ -79,11 +80,11 @@ export function orGuard<T, T1 extends T, T2 extends T>(guard1: (item: T) => item
 	return (item): item is T1 | T2 => guard1(item) || guard2(item);
 }
 
-export function replaceComponentInput(componentName: string, inputName: string, oldStringToNewString: Record<string, string>, template: string, angularCompiler: AngularCompilerLib): string {
+export function replaceComponentInput(componentName: string, inputName: string, oldStringToNewString: Record<string, string>, template: string): string {
 	return updateContent(template, (updates) => {
-		const htmlAst = new HtmlAst(template, angularCompiler);
+		const htmlAst = new HtmlAst(template);
 		htmlAst.visitElements(componentName, (el) => {
-			const elAst = new HtmlAstVisitor(el, angularCompiler);
+			const elAst = new HtmlAstVisitor(el);
 
 			elAst.visitAttribute(inputName, (attr) => {
 				if (attr.valueSpan && attr.value in oldStringToNewString) {
@@ -96,7 +97,7 @@ export function replaceComponentInput(componentName: string, inputName: string, 
 			});
 
 			elAst.visitBoundAttribute(inputName, (attr) => {
-				if (attr.valueSpan && attr.value instanceof angularCompiler.ASTWithSource) {
+				if (attr.valueSpan && attr.value instanceof ASTWithSource) {
 					const attrValue = attr.value.source || '';
 					const sourcefile = createSourceFile('', attrValue, ScriptTarget.ESNext);
 
@@ -112,11 +113,11 @@ export function replaceComponentInput(componentName: string, inputName: string, 
 	});
 }
 
-export function replaceComponentInputName(componentName: string, oldInputName: string, newInputName: string, template: string, angularCompiler: AngularCompilerLib): string {
+export function replaceComponentInputName(componentName: string, oldInputName: string, newInputName: string, template: string): string {
 	return updateContent(template, (updates) => {
-		const htmlAst = new HtmlAst(template, angularCompiler);
+		const htmlAst = new HtmlAst(template);
 		htmlAst.visitElements(componentName, (el) => {
-			const elAst = new HtmlAstVisitor(el, angularCompiler);
+			const elAst = new HtmlAstVisitor(el);
 
 			elAst.visitAttribute(oldInputName, (attr) => {
 				if (attr.keySpan) {

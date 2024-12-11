@@ -1,28 +1,38 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
-import { ParsedTemplate, TmplAstBoundAttribute, TmplAstElement, TmplAstNode, TmplAstTextAttribute } from '@angular/compiler';
+import {
+	ASTWithSource,
+	ParsedTemplate,
+	parseTemplate,
+	TmplAstBoundAttribute,
+	TmplAstContent,
+	TmplAstDeferredBlock,
+	TmplAstElement,
+	TmplAstForLoopBlock,
+	TmplAstIfBlock,
+	TmplAstNode,
+	TmplAstSwitchBlock,
+	TmplAstTemplate,
+	TmplAstTextAttribute,
+} from '@angular/compiler';
 import { createSourceFile, ScriptTarget } from 'typescript';
 import { applyUpdates, updateContent } from './file-update.js';
 import { replaceStringLiterals } from './typescript-ast.js';
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
-export type AngularCompilerLib = typeof import('@angular/compiler');
 export type TemplateNode = ParsedTemplate['nodes'] extends Array<infer S> ? S : never;
 
 export class HtmlAstVisitor<TNode extends TemplateNode> {
 	private nodes: TNode[];
 
-	public constructor(
-		nodes: TNode[] | TNode,
-		private lib: AngularCompilerLib,
-	) {
+	public constructor(nodes: TNode[] | TNode) {
 		this.nodes = Array.isArray(nodes) ? nodes : [nodes];
 	}
 
 	public visitElements(elementFilter: string | RegExp, cb: (attr: TmplAstElement) => void): void {
 		this.visitNodes((node) => {
-			if (node instanceof this.lib.TmplAstElement) {
+			if (node instanceof TmplAstElement) {
 				if (this.matchFilter(node.name, elementFilter)) {
 					cb(node);
 				}
@@ -32,7 +42,7 @@ export class HtmlAstVisitor<TNode extends TemplateNode> {
 
 	public visitAttribute(attributeFilter: string | RegExp, cb: (attr: TmplAstTextAttribute) => void): void {
 		this.visitNodes((node) => {
-			if (node instanceof this.lib.TmplAstElement || node instanceof this.lib.TmplAstTemplate || node instanceof this.lib.TmplAstContent) {
+			if (node instanceof TmplAstElement || node instanceof TmplAstTemplate || node instanceof TmplAstContent) {
 				for (const attr of node.attributes) {
 					if (this.matchFilter(attr.name, attributeFilter)) {
 						cb(attr);
@@ -44,7 +54,7 @@ export class HtmlAstVisitor<TNode extends TemplateNode> {
 
 	public visitElementWithAttribute(elementFilter: string | RegExp, attributeFilter: string | RegExp, cb: (elem: TmplAstElement, attr: TmplAstTextAttribute) => void): void {
 		this.visitNodes((node) => {
-			if (node instanceof this.lib.TmplAstElement) {
+			if (node instanceof TmplAstElement) {
 				if (this.matchFilter(node.name, elementFilter)) {
 					for (const attr of node.attributes) {
 						if (this.matchFilter(attr.name, attributeFilter)) {
@@ -58,7 +68,7 @@ export class HtmlAstVisitor<TNode extends TemplateNode> {
 
 	public visitBoundAttribute(attributeFilter: string | RegExp, cb: (attr: TmplAstBoundAttribute) => void): void {
 		this.visitNodes((node) => {
-			if (node instanceof this.lib.TmplAstElement || node instanceof this.lib.TmplAstTemplate) {
+			if (node instanceof TmplAstElement || node instanceof TmplAstTemplate) {
 				for (const input of node.inputs) {
 					if (this.matchFilter(input.name, attributeFilter)) {
 						cb(input);
@@ -75,12 +85,12 @@ export class HtmlAstVisitor<TNode extends TemplateNode> {
 	private visit(cb: (node: TemplateNode) => void, nodes: TemplateNode[]): void {
 		for (const node of nodes) {
 			cb(node);
-			if (node instanceof this.lib.TmplAstIfBlock) {
+			if (node instanceof TmplAstIfBlock) {
 				// Visit @if branches
 				node.branches.forEach((branch) => {
 					this.visit(cb, branch.children);
 				});
-			} else if (node instanceof this.lib.TmplAstForLoopBlock) {
+			} else if (node instanceof TmplAstForLoopBlock) {
 				// Visit @for's children
 				this.visit(cb, node.children);
 
@@ -88,11 +98,11 @@ export class HtmlAstVisitor<TNode extends TemplateNode> {
 					// If we have an @empty block, visit its children too
 					this.visit(cb, node.empty.children);
 				}
-			} else if (node instanceof this.lib.TmplAstSwitchBlock) {
+			} else if (node instanceof TmplAstSwitchBlock) {
 				node.cases.forEach((caseNode) => {
 					this.visit(cb, caseNode.children);
 				});
-			} else if (node instanceof this.lib.TmplAstDeferredBlock || node instanceof this.lib.TmplAstElement || node instanceof this.lib.TmplAstTemplate) {
+			} else if (node instanceof TmplAstDeferredBlock || node instanceof TmplAstElement || node instanceof TmplAstTemplate) {
 				// Visit @defer and classic AST elements
 				this.visit(cb, node.children);
 			}
@@ -105,20 +115,19 @@ export class HtmlAstVisitor<TNode extends TemplateNode> {
 }
 
 export class HtmlAst extends HtmlAstVisitor<TemplateNode> {
-	public constructor(content: string, lib: AngularCompilerLib) {
+	public constructor(content: string) {
 		super(
-			lib.parseTemplate(content, 'migration.html', {
+			parseTemplate(content, 'migration.html', {
 				preserveWhitespaces: true,
 				enableBlockSyntax: true,
 			}).nodes,
-			lib,
 		);
 	}
 }
 
-export function updateCssClassNames(content: string, oldClassToNewClass: Record<string, string>, lib: AngularCompilerLib): string {
+export function updateCssClassNames(content: string, oldClassToNewClass: Record<string, string>): string {
 	return updateContent(content, (updates) => {
-		const root = new HtmlAst(content, lib);
+		const root = new HtmlAst(content);
 		const visitedAttributes = new WeakSet<TmplAstNode>();
 		const cssClassesToUpdate = new Set(Object.keys(oldClassToNewClass));
 
@@ -161,7 +170,7 @@ export function updateCssClassNames(content: string, oldClassToNewClass: Record<
 		});
 
 		root.visitBoundAttribute('ngClass', (boundAttr) => {
-			if (!(boundAttr.value instanceof lib.ASTWithSource)) {
+			if (!(boundAttr.value instanceof ASTWithSource)) {
 				return;
 			}
 
@@ -171,7 +180,7 @@ export function updateCssClassNames(content: string, oldClassToNewClass: Record<
 
 			visitedAttributes.add(boundAttr);
 
-			if (boundAttr.valueSpan && boundAttr.value instanceof lib.ASTWithSource) {
+			if (boundAttr.valueSpan) {
 				const attrValue = boundAttr.value.source || '';
 				const sourcefile = createSourceFile('', attrValue, ScriptTarget.ESNext);
 
@@ -185,9 +194,9 @@ export function updateCssClassNames(content: string, oldClassToNewClass: Record<
 	});
 }
 
-export function extractAllCssClassNames(content: string, lib: AngularCompilerLib): string[] {
+export function extractAllCssClassNames(content: string): string[] {
 	const allClasses = new Set<string>();
-	const root = new HtmlAst(content, lib);
+	const root = new HtmlAst(content);
 
 	root.visitAttribute('class', (classAttr) => classAttr.value.split(' ').forEach((cls) => allClasses.add(cls)));
 
@@ -200,9 +209,9 @@ export function extractAllCssClassNames(content: string, lib: AngularCompilerLib
 	return [...allClasses];
 }
 
-export function extractAllHtmlElementNames(content: string, lib: AngularCompilerLib): string[] {
+export function extractAllHtmlElementNames(content: string): string[] {
 	const allElements = new Set<string>();
-	const root = new HtmlAst(content, lib);
+	const root = new HtmlAst(content);
 
 	root.visitElements(/.*/, (element) => allElements.add(element.name));
 

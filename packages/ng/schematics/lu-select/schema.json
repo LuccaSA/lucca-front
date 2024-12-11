@@ -1,0 +1,7 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "LuccaFrontLuSelect",
+  "title": "Lucca Front lu-select migration into new selects",
+  "type": "object",
+  "properties": {}
+}
