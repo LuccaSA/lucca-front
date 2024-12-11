@@ -1,7 +1,7 @@
 @mixin invalid {
 	--component-textField-border: var(--pr-t-color-input-border-critical);
 	--component-textField-background: var(--pr-t-color-input-background-critical);
-	--component-textField-placeholder: var(--pr-t-color-input-text-placeholder);
+	--component-textField-placeholder: var(--pr-t-color-input-text-placeholder-critical);
 
 	&:hover {
 		--component-textField-border: var(--pr-t-color-input-border-critical-hover);
