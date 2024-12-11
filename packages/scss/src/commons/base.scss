@@ -89,7 +89,7 @@
 
 			@if $paletteExists {
 				.palette-#{$palette} {
-					@include color.palette($name: $palette, $shades: config.$palettesShades, $palette: $paletteExists);
+					@include color.palette($name: $palette, $palette: $paletteExists);
 				}
 			}
 		}

@@ -1,4 +1,3 @@
-@use '@lucca-front/scss/src/commons/config';
 @use '@lucca-front/scss/src/commons/utils/reset';
 @use '@lucca-front/scss/src/commons/utils/namespace';
 @use '@lucca-front/scss/src/commons/utils/color';
@@ -14,7 +13,7 @@
 	gap: var(--components-calloutFeedbackList-gap);
 
 	.button {
-		@include color.palette('neutral', config.$palettesShades);
+		@include color.palette('neutral');
 		@include button.S;
 	}
 
