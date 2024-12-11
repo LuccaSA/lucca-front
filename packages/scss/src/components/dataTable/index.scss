@@ -71,19 +71,7 @@
 		@include editable;
 	}
 
-	&.mod-tree1 {
-		@include tree1;
-	}
-
-	&.mod-tree2 {
-		@include tree2;
-	}
-
-	&.mod-tree3 {
-		@include tree3;
-	}
-
-	&.mod-tree4 {
-		@include tree4;
+	&.mod-tree {
+		@include tree;
 	}
 }
