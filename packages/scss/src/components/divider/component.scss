@@ -4,7 +4,7 @@
 @mixin component($atRoot: namespace.$defaultAtRoot) {
 	border: 0;
 	display: block;
-	margin-block: var(--components-divider-marginBlock);
+	margin-block: var(--components-divider-margin);
 	align-self: var(--components-divider-alignSelf);
 
 	&:where(:empty) {
