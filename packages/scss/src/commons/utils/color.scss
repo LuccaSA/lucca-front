@@ -1,5 +1,6 @@
 @use 'sass:map';
 @use 'sass:math';
+@use '@lucca-front/scss/src/commons/config';
 
 @function transparentize($color, $amount: 50%, $space: var(--commons-colorSpace, srgb)) {
 	@if math.unit($amount) != '%' {
@@ -8,7 +9,7 @@
 	@return color-mix(in $space, $color $amount, transparent);
 }
 
-@mixin palette($name, $shades, $palette: false) {
+@mixin palette($name, $shades: config.$palettesShades, $palette: false) {
 	@each $shade in $shades {
 		@if $palette {
 			@if map.get($palette, $shade) {
