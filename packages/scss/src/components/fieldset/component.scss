@@ -37,6 +37,7 @@
 				transform: rotate(var(--components-fieldset-title-iconRotation));
 				transition-property: transform;
 				transition-duration: var(--commons-animations-durations-fast);
+				color: var(--palettes-neutral-700);
 			}
 		}
 
