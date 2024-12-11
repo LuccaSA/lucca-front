@@ -3,12 +3,18 @@ import { Meta, StoryFn } from '@storybook/angular';
 interface CardsBasicStory {
 	neutral: boolean;
 	disabled: boolean;
+	link: boolean;
 }
 
 export default {
 	title: 'Documentation/Structure/Cards/Basic',
 	argTypes: {
 		disabled: {
+			control: {
+				type: 'boolean',
+			},
+		},
+		link: {
 			control: {
 				type: 'boolean',
 			},
@@ -25,12 +31,15 @@ export default {
 function getTemplate(args: CardsBasicStory): string {
 	const neutral = args.neutral ? `mod-neutral` : ``;
 	const disabled = args.disabled ? `is-disabled` : ``;
-	const click = args.disabled ? `` : `onClick="alert('action')"`;
-	const propagation = args.disabled ? `` : `onClick="event.stopPropagation()"`;
+	const click = args.disabled ? `` : `onClick="console.log('action or navigation')"`;
+	const linkOrButton = args.link
+		? `<a href="#" class="card-title-action" onClick="event.preventDefault()">Titre de la carte</a>`
+		: `<button type="button" class="card-title-action" onClick="event.preventDefault()">Titre de la carte</button>`;
+	const action = args.disabled ? `Titre de la carte` : `${linkOrButton}`;
 	return `<div class="card mod-action ${neutral} ${disabled}" ${click}>
 	<div class="card-content">
-		<h2 class="card-title"><a href="#" class="card-title-action" ${propagation}>Titre de la carte</a></h2>
-		<div>Contenu de la carte</div>
+		<h2 class="card-title">${action}</h2>
+		<p>Contenu de la carte</p>
 	</div>
 </div>`;
 }
@@ -41,4 +50,4 @@ const Template: StoryFn<CardsBasicStory> = (args) => ({
 });
 
 export const Basic = Template.bind({});
-Basic.args = { disabled: false, neutral: false };
+Basic.args = { disabled: false, neutral: false, link: false };

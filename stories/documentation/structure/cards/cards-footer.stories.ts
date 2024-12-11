@@ -11,7 +11,7 @@ function getTemplate(args: CardsFooterStory): string {
 	<div class="card">
 		<div class="card-content">
 			<h2 class="card-title">Titre de la carte</h2>
-			<div>Contenu de la carte</div>
+			<p>Contenu de la carte</p>
 		</div>
 		<footer class="card-footer">
 			<div class="card-footer-right">

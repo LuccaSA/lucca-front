@@ -49,3 +49,15 @@
 		display: none #{$suffix};
 	}
 }
+
+@mixin marginTrim($direction: 'block', $suffix: '') {
+	> * {
+		&:first-child {
+			margin-#{$direction}-start: 0 #{$suffix};
+		}
+
+		&:last-child {
+			margin-#{$direction}-end: 0 #{$suffix};
+		}
+	}
+}

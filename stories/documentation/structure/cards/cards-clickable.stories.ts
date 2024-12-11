@@ -12,7 +12,7 @@ function getTemplate(args: CardsClickableStory): string {
 	<div class="card mod-clickable">
 		<div class="card-content">
 			<h2 class="card-title">Titre de la carte</h2>
-			<div>Contenu de la carte</div>
+			<p>Contenu de la carte</p>
 		</div>
 	</div>
 	`;

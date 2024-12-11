@@ -1,5 +1,6 @@
 @use '@lucca-front/scss/src/commons/utils/namespace';
 @use '@lucca-front/scss/src/commons/utils/a11y';
+@use '@lucca-front/scss/src/commons/utils/reset';
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
 	background-color: var(--components-card-background);
@@ -20,6 +21,8 @@
 	@at-root ($atRoot) {
 		.card-content {
 			padding: var(--components-card-content-padding);
+
+			@include reset.marginTrim;
 		}
 
 		.card-title {
@@ -28,6 +31,8 @@
 		}
 
 		.card-title-action {
+			@include reset.button;
+
 			text-decoration: none;
 
 			&,
