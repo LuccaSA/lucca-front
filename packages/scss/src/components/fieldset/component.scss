@@ -32,6 +32,12 @@
 			justify-content: space-between;
 			gap: var(--components-fieldset-gap);
 			max-width: var(--components-fieldset-contentMaxWidth);
+
+			.lucca-icon {
+				transform: rotate(var(--components-fieldset-title-iconRotation));
+				transition-property: transform;
+				transition-duration: var(--commons-animations-durations-fast);
+			}
 		}
 
 		.fieldset-title-content-text-helper {
