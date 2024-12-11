@@ -62,7 +62,7 @@ function getTemplate(args: FieldsetBasicStory): string {
 				${title}
 				${helper}
 			</span>
-			<span class="lucca-icon" aria-hidden="true" [class.icon-collapse]="expanded" [class.icon-expand]="!expanded"></span>
+			<span class="lucca-icon icon-arrowChevronBottom" aria-hidden="true" ></span>
 		</button>
 	</legend>
 	<div class="fieldset-content" [attr.hidden]="expanded ? null : 'hidden'">

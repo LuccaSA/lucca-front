@@ -15,4 +15,8 @@
 	&.mod-expandable {
 		@include expandable;
 	}
+
+	&:has(.fieldset-title-content[aria-expanded='true']) {
+		@include expanded;
+	}
 }
