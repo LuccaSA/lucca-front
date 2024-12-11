@@ -1,4 +1,3 @@
-@use '@lucca-front/scss/src/commons/config';
 @use '@lucca-front/icons/src/commons/utils/icon';
 @use '@lucca-front/scss/src/commons/utils/reset';
 @use '@lucca-front/scss/src/commons/utils/a11y';
@@ -47,7 +46,7 @@
 			padding: var(--pr-t-spacings-50) 0;
 
 			.button {
-				@include color.palette('neutral', config.$palettesShades);
+				@include color.palette('neutral');
 				@include button.S;
 			}
 		}
