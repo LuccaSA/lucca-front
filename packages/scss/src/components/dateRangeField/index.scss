@@ -1,0 +1,36 @@
+@use 'exports' as *;
+
+.dateRangeField {
+	@include vars;
+	@include component;
+
+	.form-field.mod-S & {
+		@include S;
+	}
+
+	&:not(.mod-auto) {
+		&.mod-day {
+			@include day;
+
+			.form-field.mod-S & {
+				@include dayS;
+			}
+		}
+
+		&.mod-month {
+			@include month;
+
+			.form-field.mod-S & {
+				@include monthS;
+			}
+		}
+
+		&.mod-year {
+			@include year;
+
+			.form-field.mod-S & {
+				@include yearS;
+			}
+		}
+	}
+}

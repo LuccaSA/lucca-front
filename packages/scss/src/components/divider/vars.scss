@@ -1,5 +1,10 @@
 @mixin vars {
 	--components-divider-fontSize: var(--sizes-M-fontSize);
 	--components-divider-lineHeight: var(--sizes-M-lineHeight);
-	--components-divider-margin: var(--pr-t-spacings-50);
+	--components-divider-marginBlock: var(--pr-t-spacings-50);
+	--components-divider-minSize: var(--pr-t-spacings-150);
+	--components-divider-direction: row;
+	--components-divider-iconBottom: 0;
+	--components-divider-justify: normal;
+	--components-divider-alignSelf: '';
 }

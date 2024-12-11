@@ -12,7 +12,7 @@
 	box-shadow: 0 0 0 1px var(--component-textField-border);
 
 	&:hover {
-		--component-textField-border: var(--palettes-neutral-400);
+		--component-textField-border: var(--pr-t-color-input-border-hover);
 	}
 
 	&:has(.textField-input-value:focus-visible) {
@@ -23,7 +23,7 @@
 		pointer-events: auto;
 		width: var(--component-textField-affix-size);
 		height: var(--component-textField-affix-size);
-		color: var(--palettes-neutral-600);
+		color: var(--pr-t-color-input-icon);
 	}
 
 	@at-root ($atRoot) {
@@ -105,7 +105,7 @@
 
 		.textField-input-affix-icon {
 			@include icon.M;
-			color: var(--palettes-neutral-600);
+			color: var(--pr-t-color-input-icon);
 			pointer-events: none;
 		}
 
@@ -117,7 +117,7 @@
 			display: flex;
 			padding-left: var(--component-textField-padding);
 			align-items: center;
-			color: var(--component-textField-prefix-color);
+			color: var(--pr-t-color-input-text-suffix);
 			line-height: var(--component-textField-lineHeight);
 			font-size: var(--component-textField-fontSize);
 			border-top-left-radius: var(--commons-borderRadius-M);
@@ -134,7 +134,7 @@
 			display: flex;
 			padding-right: var(--component-textField-padding);
 			align-items: center;
-			color: var(--component-textField-prefix-color);
+			color: var(--pr-t-color-input-text-suffix);
 			line-height: var(--component-textField-lineHeight);
 			font-size: var(--component-textField-fontSize);
 			border-top-right-radius: var(--commons-borderRadius-M);

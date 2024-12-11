@@ -43,7 +43,9 @@ export default {
 					},
 				] as DateRange[],
 			},
-			template: `<lu-calendar2 [hideToday]="false" [showOverflow]="true" [enableOverflow]="true" [ranges]="ranges" [date]="currentMonth" mode="day" (dateClicked)="selected($event)"></lu-calendar2>`,
+			template: `
+				<lu-calendar2 [hideToday]="false" [showOverflow]="true" [enableOverflow]="true" [ranges]="ranges" [date]="currentMonth" mode="day" (dateClicked)="selected($event)"></lu-calendar2>
+			`,
 		};
 	},
 } as Meta;

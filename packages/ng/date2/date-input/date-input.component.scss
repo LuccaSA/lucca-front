@@ -1,6 +1,2 @@
 @use '@lucca-front/scss/src/components/calendar';
-
-lu-date-input {
-	max-width: var(--components-dateInput-width, 16.25rem);
-	display: block;
-}
+@use '@lucca-front/scss/src/components/dateField';
