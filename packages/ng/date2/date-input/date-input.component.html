@@ -57,8 +57,8 @@
 		</div>
 		<div class="calendarWrapper-content" tabindex="-1">
 			<lu-calendar2
-				[enableOverflow]="enableOverflow()"
-				[showOverflow]="showOverflow()"
+				[enableOverflow]="!disableOverflow()"
+				[showOverflow]="!hideOverflow()"
 				[hideToday]="hideToday()"
 				[hasTodayButton]="hasTodayButton()"
 				[date]="currentDate()"
