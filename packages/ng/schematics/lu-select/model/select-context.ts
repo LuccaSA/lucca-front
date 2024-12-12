@@ -15,6 +15,7 @@ export interface SelectContext {
 	node: TmplAstElement;
 	nodeOffset: number;
 	rejection: Rejection | null;
+	requiredImports?: string[];
 }
 
 export interface LuSelectInputContext extends SelectContext {

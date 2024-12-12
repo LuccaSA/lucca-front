@@ -5,7 +5,7 @@ import { extractNgTemplates } from '../lib/angular-template';
 import { getCommonMigrationRejectionReason, getDataSource, getDisplayer, isRejection, RejectionReason } from './util';
 import { SelectComponent, SelectContext, selectorToComponentName } from './model/select-context';
 import { TmplAstElement } from '@angular/compiler';
-import { Tree, UpdateRecorder } from '@angular-devkit/schematics';
+import { Tree } from '@angular-devkit/schematics';
 
 const selectorToComponentNameRecord = selectorToComponentName as Record<string, SelectComponent>;
 
@@ -60,6 +60,7 @@ function handleLuSelectInputComponent(select: SelectContext, path: string, tree:
 	if (isRejection(dataSource)) {
 		select.rejection = dataSource;
 	} else {
+		select.requiredImports = ['LuSimpleSelectInputComponent'];
 		const displayer = getDisplayer(select);
 		const update = tree.beginUpdate(path);
 		const endSpanOffset = select.node.endSourceSpan?.start.offset || 0;
