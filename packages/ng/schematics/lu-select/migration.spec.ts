@@ -1,16 +1,14 @@
-import * as fs from 'fs';
 import * as path from 'path';
-import { createTreeFromFiles, expectTree, runSchematic } from '../lib/migration-test.js';
+import { createTreeFromFolder, expectTree, runSchematic } from '../lib/migration-test.js';
 
 const collectionPath = path.normalize(path.join(__dirname, '..', 'collection.json'));
 const testsRoot = path.join(__dirname, 'tests');
-const files = fs.readdirSync(testsRoot);
 
 describe('lu-select Migration', () => {
 	it('should handle basic case files', async () => {
 		// Arrange
-		const tree = createTreeFromFiles(testsRoot, files, '.input.');
-		const expectedTree = createTreeFromFiles(testsRoot, files, '.output.');
+		const tree = createTreeFromFolder(path.join(testsRoot, 'input'));
+		const expectedTree = createTreeFromFolder(path.join(testsRoot, 'output'));
 
 		// Act
 		try {
