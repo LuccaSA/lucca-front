@@ -1,6 +1,6 @@
 import { ASTWithSource, TmplAstBoundText, TmplAstElement, TmplAstTemplate } from '@angular/compiler';
 import { LuSelectInputContext, SelectContext } from './model/select-context';
-import { HtmlAst, HtmlAstVisitor } from '../lib/html-ast';
+import { HtmlAstVisitor } from '../lib/html-ast';
 
 export enum RejectionReason {
 	UNSUPPORTED_ATTRIBUTE,
@@ -17,11 +17,13 @@ export interface Rejection {
 
 export interface SelectDataSource {
 	sourceName: string;
+	display: SelectDisplayer;
 }
 
 export interface SelectDisplayer {
 	canBeRemoved: boolean;
-	source?: string;
+	variables?: string;
+	display?: string;
 }
 
 const allowedAttributes = [/class/, /ngModel/, /ngModelChange/, /disabled/, /title/, /formControl/, /required/, /data-.+/, /attr\..+/, /class\..+/, /placeholder/, /title/];
@@ -35,14 +37,14 @@ export function getCommonMigrationRejectionReason(node: TmplAstElement): Rejecti
 	if (unsupportedAttr) {
 		return {
 			reason: RejectionReason.UNSUPPORTED_ATTRIBUTE,
-			details: unsupportedAttr.name,
+			details: unsupportedAttr.name
 		};
 	}
 	const unsupportedInput = node.inputs.find((input) => !allowedAttributes.some((rxp) => rxp.test(input.name)));
 	if (unsupportedInput) {
 		return {
 			reason: RejectionReason.UNSUPPORTED_INPUT,
-			details: unsupportedInput.name,
+			details: unsupportedInput.name
 		};
 	}
 	return null;
@@ -50,7 +52,7 @@ export function getCommonMigrationRejectionReason(node: TmplAstElement): Rejecti
 
 export function getDataSource(select: LuSelectInputContext): SelectDataSource | Rejection {
 	let result: SelectDataSource | Rejection = {
-		reason: RejectionReason.NO_DATA_SOURCE,
+		reason: RejectionReason.NO_DATA_SOURCE
 	};
 	const htmlAstVisitor = new HtmlAstVisitor(select.node);
 	htmlAstVisitor.visitElements(/lu-option-picker(-advanced)?/, (node) => {
@@ -58,7 +60,7 @@ export function getDataSource(select: LuSelectInputContext): SelectDataSource | 
 		const luOption = node.children.find((c) => c instanceof TmplAstTemplate && c.tagName === 'lu-option') as TmplAstTemplate;
 		if (!luOption) {
 			result = {
-				reason: RejectionReason.CUSTOM_PICKER_CONTENT,
+				reason: RejectionReason.CUSTOM_PICKER_CONTENT
 			};
 		} else {
 			// TODO Handle advanced option picker
@@ -83,12 +85,39 @@ export function getDataSource(select: LuSelectInputContext): SelectDataSource | 
 				if (valueName !== ngForImplicitVarName) {
 					result = {
 						reason: RejectionReason.UNSUPPORTED_VALUE_ASSIGNMENT,
-						details: valueName,
+						details: valueName
 					};
 				} else {
-					result = {
-						sourceName: ngForOfName,
-					};
+					// We have found value and it matches, now let's check how it's rendered
+					// Idk why but AST has two levels for a single node in this case
+					const contentHost = luOption.children[0] as TmplAstElement;
+					const templateNodes = contentHost.children.filter(c => c instanceof TmplAstBoundText) as TmplAstBoundText[];
+					const firstTemplateSource = (templateNodes[0]?.value as ASTWithSource)?.source?.trim();
+					// First of all, check if it's a basic ?.name approach, in which case we can remove it
+					if (
+						(templateNodes.length === 1 && firstTemplateSource === `{{ ${valueName} }}`) ||
+						firstTemplateSource === `{{ ${valueName}?.name }}` ||
+						firstTemplateSource === `{{ ${valueName}.name }}`
+					) {
+						result = {
+							sourceName: ngForOfName,
+							display: {
+								canBeRemoved: true
+							}
+						};
+					} else {
+						// Else, we'll have to build an option displayer
+						result = {
+							sourceName: ngForOfName,
+							display: {
+								canBeRemoved: false,
+								variables: luOption.variables.map(v => {
+									return v.value === '$implicit' ? `let ${v.name}` : `let ${v.name}=${v.value}`;
+								}).join('; '),
+								display: luOption.startSourceSpan.end.file.content.slice(select.nodeOffset + luOption.startSourceSpan.end.offset, select.nodeOffset + (luOption.endSourceSpan?.start?.offset || 0))
+							}
+						};
+					}
 				}
 			}
 		}
@@ -100,7 +129,7 @@ export function getDisplayer(select: SelectContext): SelectDisplayer {
 	const displayerHostNode = select.node.children.find((node) => node instanceof TmplAstTemplate && node.templateAttrs.some((attr) => attr.name === 'luDisplayer')) as TmplAstTemplate;
 	if (!displayerHostNode) {
 		return {
-			canBeRemoved: true,
+			canBeRemoved: true
 		};
 	}
 	const displayerVarName = displayerHostNode.variables.find((v) => v.value === '$implicit')?.name;
@@ -118,11 +147,19 @@ export function getDisplayer(select: SelectContext): SelectDisplayer {
 			firstTemplateSource === `{{ ${displayerVarName}.name }}`
 		) {
 			return {
-				canBeRemoved: true,
+				canBeRemoved: true
+			};
+		} else {
+			return {
+				canBeRemoved: false,
+				variables: displayerHostNode.variables.map(v => {
+					return v.value === '$implicit' ? `let ${v.name}` : `let ${v.name}=${v.value}`;
+				}).join('; '),
+				display: displayerHostNode.startSourceSpan.end.file.content.slice(select.nodeOffset + displayerHostNode.startSourceSpan.end.offset, select.nodeOffset + displayerHostNode.endSourceSpan?.start?.offset || 0)
 			};
 		}
 	}
 	return {
-		canBeRemoved: false,
+		canBeRemoved: false
 	};
 }

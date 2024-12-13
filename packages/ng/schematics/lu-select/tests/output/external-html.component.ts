@@ -1,25 +1,27 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
+import { LuOptionDirective } from '@lucca-front/ng/core-select';
+import { LuDisplayerDirective } from '@lucca-front/ng/core-select';
 
 @Component({
-  selector: 'lu-select-schematic-external-html',
-  standalone: true,
-  templateUrl: './external-html.component.html',
-  imports: [FormsModule, LuSimpleSelectInputComponent]
+	selector: 'lu-select-schematic-external-html',
+	standalone: true,
+	templateUrl: './external-html.component.html',
+	imports: [FormsModule, LuSimpleSelectInputComponent, LuOptionDirective, LuDisplayerDirective]
 })
 export class SimpleCaseInputComponent {
-  cultures = [
-    {
-      name: 'Français',
-      code: 'fr-FR'
-    }
-  ];
+	cultures = [
+		{
+			name: 'Français',
+			code: 'fr-FR'
+		}
+	];
 
-  selectedCulture = null;
+	selectedCulture = null;
 
-  defaultOnly = false;
+	defaultOnly = false;
 
-  onCultureChanges(): void {
-  }
+	onCultureChanges(): void {
+	}
 }
