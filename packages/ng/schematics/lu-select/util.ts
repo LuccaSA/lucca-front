@@ -27,7 +27,7 @@ export interface SelectDisplayer {
 	display?: string;
 }
 
-const allowedAttributes = [/class/, /ngModel/, /ngModelChange/, /disabled/, /title/, /formControl/, /required/, /data-.+/, /attr\..+/, /class\..+/, /placeholder/, /title/];
+const allowedAttributes = [/class/, /ngModel/, /ngModelChange/, /disabled/, /title/, /formControl/, /required/, /data-.+/, /attr\..+/, /class\..+/, /placeholder/, /title/, /filters/];
 
 export function isRejection(value: unknown): value is Rejection {
 	return (value as Rejection)?.reason !== undefined && RejectionReason[(value as Rejection).reason] != undefined;

@@ -3,7 +3,7 @@ import ts, { isImportDeclaration, isNamedImports, ScriptTarget, SourceFile } fro
 import { extractComponentImports, insertAngularImportIfNeeded, insertTSImportIfNeeded, removeAngularImport, removeTSImport } from '../lib/angular-component-ast';
 import { extractNgTemplatesIncludingHtml } from '../lib/angular-template';
 import { getCommonMigrationRejectionReason, getDataSource, getDisplayer, isRejection, RejectionReason } from './util';
-import { LuSelectInputContext, SelectComponent, SelectContext, selectorToComponentName, selectorToSelectComponentName } from './model/select-context';
+import { LuSelectInputContext, PremadeApiSelectContext, SelectComponent, SelectContext, selectorToComponentName, selectorToSelectComponentName } from './model/select-context';
 import { TmplAstElement } from '@angular/compiler';
 import { Tree, UpdateRecorder } from '@angular-devkit/schematics';
 import { applyToUpdateRecorder } from '@schematics/angular/utility/change';
@@ -14,7 +14,10 @@ const importSource: Record<string, string> = {
 	LuMultipleSelectInputComponent: '@lucca-front/ng/multiple-select',
 	LuDisplayerDirective: '@lucca-front/ng/core-select',
 	LuOptionDirective: '@lucca-front/ng/core-select',
-	LuInputClearerComponent: '@lucca-front/ng/input'
+	LuInputClearerComponent: '@lucca-front/ng/input',
+	LuCoreSelectEstablishmentsDirective: '@lucca-front/ng/core-select',
+	LuCoreSelectJobQualificationsDirective: '@lucca-front/ng/core-select',
+	LuCoreSelectUsersDirective: '@lucca-front/ng/core-select'
 };
 
 const selectorToComponentNameRecord = selectorToSelectComponentName as Record<string, SelectComponent>;
@@ -36,6 +39,11 @@ export function migrateComponent(sourceFile: SourceFile, path: string, tree: Tre
 			switch (select.component) {
 				case 'LuSelectInputComponent':
 					handleLuSelectInputComponent(select, templateUpdate);
+					break;
+				case 'LuEstablishmentSelectInputComponent':
+				case 'LuQualificationSelectInputComponent':
+				case 'LuUserSelectModule':
+					handlePremadeApiSelect(select, templateUpdate);
 					break;
 			}
 		});
@@ -163,4 +171,21 @@ function handleLuSelectInputComponent(select: LuSelectInputContext, update: Upda
 		update.remove(select.nodeOffset + endSpanOffset + 2, select.tagName.length);
 		update.insertRight(select.nodeOffset + endSpanOffset + 2, `lu-simple-select`);
 	}
+}
+
+function handlePremadeApiSelect(select: PremadeApiSelectContext, update: UpdateRecorder) {
+	const sourceDirective = {
+		LuQualificationSelectInputComponent: { selector: 'jobQualifications', className: 'LuCoreSelectJobQualificationsDirective' },
+		LuUserSelectModule: { selector: 'users', className: 'LuCoreSelectUsersDirective' },
+		LuEstablishmentSelectInputComponent: { selector: 'establishments', className: 'LuCoreSelectEstablishmentsDirective' }
+	}[select.component];
+	select.requiredImports = ['LuSimpleSelectInputComponent', sourceDirective.className];
+	const endSpanOffset = select.node.endSourceSpan?.start.offset || 0;
+	// rename opening tag and insert data directive
+	update.remove(select.nodeOffset + select.node.startSourceSpan.start.offset + 1, select.tagName.length);
+	// rename tag and add options + selector if needed
+	update.insertRight(select.nodeOffset + select.node.startSourceSpan.start.offset + 1, `lu-simple-select ${sourceDirective.selector}`);
+	// rename closing tag
+	update.remove(select.nodeOffset + endSpanOffset + 2, select.tagName.length);
+	update.insertRight(select.nodeOffset + endSpanOffset + 2, `lu-simple-select`);
 }

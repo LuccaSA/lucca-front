@@ -1,16 +1,7 @@
-import ts, {
-	forEachChild,
-	isArrayLiteralExpression,
-	isCallExpression,
-	isDecorator,
-	isIdentifier,
-	isObjectLiteralExpression,
-	isPropertyAssignment,
-	SourceFile
-} from "typescript";
-import { createVisitor } from "./angular-template";
-import { Change, InsertChange, NoopChange, RemoveChange } from "@schematics/angular/utility/change";
-import { getEOL } from "@schematics/angular/utility/eol";
+import ts, { forEachChild, isArrayLiteralExpression, isCallExpression, isDecorator, isIdentifier, isObjectLiteralExpression, isPropertyAssignment, SourceFile } from 'typescript';
+import { createVisitor } from './angular-template';
+import { Change, InsertChange, NoopChange, RemoveChange } from '@schematics/angular/utility/change';
+import { getEOL } from '@schematics/angular/utility/eol';
 
 export interface ProviderEntry {
 	provide: string;
@@ -30,7 +21,7 @@ export function extractProviders(sourceFile: ts.SourceFile): ProviderEntry[] {
 				return;
 			}
 
-			if (decorator.expression.expression.escapedText !== "Component") {
+			if (decorator.expression.expression.escapedText !== 'Component') {
 				return;
 			}
 			const argument = decorator.expression.arguments[0];
@@ -39,7 +30,7 @@ export function extractProviders(sourceFile: ts.SourceFile): ProviderEntry[] {
 			}
 			argument.properties
 				.filter(isPropertyAssignment)
-				.filter((prop) => isIdentifier(prop.name) && prop.name.text === "providers")
+				.filter((prop) => isIdentifier(prop.name) && prop.name.text === 'providers')
 				.map((prop) => prop.initializer)
 				.filter(isArrayLiteralExpression)
 				// Here we're inside the providers
@@ -48,15 +39,15 @@ export function extractProviders(sourceFile: ts.SourceFile): ProviderEntry[] {
 				.filter(isObjectLiteralExpression)
 				.forEach((exp) => {
 					const entry: ProviderEntry = {
-						provide: "",
-						type: "",
-						value: ""
+						provide: '',
+						type: '',
+						value: ''
 					};
 					exp.properties.filter(isPropertyAssignment).forEach((prop) => {
 						if (isIdentifier(prop.name) && isIdentifier(prop.initializer)) {
-							if (prop.name.text === "provide") {
+							if (prop.name.text === 'provide') {
 								entry.provide = prop.initializer.escapedText.toString();
-							} else if (["useClass", "useExisting", "useValue", "useFactory"].includes(prop.name.text)) {
+							} else if (['useClass', 'useExisting', 'useValue', 'useFactory'].includes(prop.name.text)) {
 								entry.type = prop.name.text;
 								entry.value = prop.initializer.escapedText.toString();
 							}
@@ -81,7 +72,7 @@ export function extractComponentImports(sourceFile: ts.SourceFile): string[] {
 				return;
 			}
 
-			if (decorator.expression.expression.escapedText !== "Component") {
+			if (decorator.expression.expression.escapedText !== 'Component') {
 				return;
 			}
 			const argument = decorator.expression.arguments[0];
@@ -90,7 +81,7 @@ export function extractComponentImports(sourceFile: ts.SourceFile): string[] {
 			}
 			argument.properties
 				.filter(isPropertyAssignment)
-				.filter((prop) => isIdentifier(prop.name) && prop.name.text === "imports")
+				.filter((prop) => isIdentifier(prop.name) && prop.name.text === 'imports')
 				.map((prop) => prop.initializer)
 				.filter(isArrayLiteralExpression)
 				// Here we're inside the imports
@@ -124,7 +115,7 @@ export function insertTSImportIfNeeded(sourceFile: SourceFile, fileToEdit: strin
 		// insert import if it's not there
 		// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
 		if (!imports.some((node) => (node.propertyName || node.name)?.text === symbolName)) {
-			// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-assignment
+			// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-assignment,@typescript-eslint/no-unsafe-call
 			const insertPos: number = imports[0].getFullStart() || 0;
 			return new InsertChange(fileToEdit, insertPos, `${symbolName}, `);
 		}
@@ -135,10 +126,10 @@ export function insertTSImportIfNeeded(sourceFile: SourceFile, fileToEdit: strin
 	// no such import declaration exists
 	const eol = getEOL(sourceFile.getText());
 	const insertAtBeginning = allImports.length === 0;
-	const separator = insertAtBeginning ? "" : `${eol}`;
+	const separator = insertAtBeginning ? '' : `${eol}`;
 	const toInsert =
 		`${separator}import { ${symbolName} }` +
-		` from '${fileName}'${insertAtBeginning ? `;${eol}` : ";"}`;
+		` from '${fileName}'${insertAtBeginning ? `;${eol}` : ';'}`;
 
 	const insertPos = allImports[allImports.length - 1].getEnd() || 0;
 	return new InsertChange(fileToEdit, insertPos, toInsert);
@@ -159,7 +150,7 @@ export function insertAngularImportIfNeeded(sourceFile: SourceFile, fileToEdit: 
 				return;
 			}
 
-			if (decorator.expression.expression.escapedText !== "Component") {
+			if (decorator.expression.expression.escapedText !== 'Component') {
 				return;
 			}
 			const argument = decorator.expression.arguments[0];
@@ -168,7 +159,7 @@ export function insertAngularImportIfNeeded(sourceFile: SourceFile, fileToEdit: 
 			}
 			const imports = argument.properties
 				.filter(isPropertyAssignment)
-				.filter((prop) => isIdentifier(prop.name) && prop.name.text === "imports")
+				.filter((prop) => isIdentifier(prop.name) && prop.name.text === 'imports')
 				.map((prop) => prop.initializer)
 				.find(isArrayLiteralExpression)?.elements;
 			if (imports) {
@@ -198,7 +189,7 @@ export function removeAngularImport(sourceFile: SourceFile, fileToEdit: string, 
 				return;
 			}
 
-			if (decorator.expression.expression.escapedText !== "Component") {
+			if (decorator.expression.expression.escapedText !== 'Component') {
 				return;
 			}
 			const argument = decorator.expression.arguments[0];
@@ -207,15 +198,17 @@ export function removeAngularImport(sourceFile: SourceFile, fileToEdit: string, 
 			}
 			const imports = argument.properties
 				.filter(isPropertyAssignment)
-				.filter((prop) => isIdentifier(prop.name) && prop.name?.text === "imports")
+				.filter((prop) => isIdentifier(prop.name) && prop.name?.text === 'imports')
 				.map((prop) => prop.initializer)
 				.find(isArrayLiteralExpression)?.elements;
 			if (imports) {
 				imports.forEach((exp, index) => {
 					if (exp && isIdentifier(exp) && exp.text === symbolName) {
 						removePos = exp.getFullStart();
-						if (index < imports.length - 1) {
-							toRemove += " , ";
+						if (index === 0) {
+							toRemove += ', ';
+						} else if (index < imports.length - 1) {
+							toRemove += ' , ';
 						}
 					}
 				});
@@ -240,7 +233,7 @@ export function removeTSImport(sourceFile: SourceFile, fileToEdit: string, symbo
 	} else {
 		const specifier = namedImports.elements.find(sp => sp.name.text === symbolName);
 		if (specifier) {
-			return new RemoveChange(fileToEdit, specifier.getFullStart(), symbolName + ", ");
+			return new RemoveChange(fileToEdit, specifier.getFullStart(), symbolName + ', ');
 		}
 	}
 	return new NoopChange();

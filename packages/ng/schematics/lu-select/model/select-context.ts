@@ -6,7 +6,10 @@ type ValueOf<T> = T[keyof T];
 
 
 export const selectorToSelectComponentName = {
-	'lu-select': 'LuSelectInputComponent'
+	'lu-select': 'LuSelectInputComponent',
+	'lu-qualification-select': 'LuQualificationSelectInputComponent',
+	'lu-user-select': 'LuUserSelectModule',
+	'lu-establishment-select': 'LuEstablishmentSelectInputComponent'
 } as const;
 
 export const selectorToComponentName = {
@@ -33,4 +36,20 @@ export interface LuSelectInputContext extends BaseSelectContext {
 	component: 'LuSelectInputComponent';
 }
 
-export type SelectContext = LuSelectInputContext;
+export interface LuUserSelectInputContext extends BaseSelectContext {
+	component: 'LuUserSelectModule';
+}
+
+export interface LuEstablishmentSelectInputContext extends BaseSelectContext {
+	component: 'LuEstablishmentSelectInputComponent';
+}
+
+export interface LuQualificationSelectInputContext extends BaseSelectContext {
+	component: 'LuQualificationSelectInputComponent';
+}
+
+export type PremadeApiSelectContext = LuUserSelectInputContext
+	| LuEstablishmentSelectInputContext
+	| LuQualificationSelectInputContext;
+
+export type SelectContext = LuSelectInputContext | PremadeApiSelectContext;
