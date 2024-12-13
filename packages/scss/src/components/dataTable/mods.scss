@@ -8,7 +8,7 @@
 	.dataTable-head-row-cell,
 	.dataTable-body-row-cell,
 	.dataTable-foot-row-cell {
-		border-inline: 1px solid var(--commons-border-200);
+		border: 1px solid var(--commons-border-200);
 	}
 }
 
@@ -99,6 +99,17 @@
 
 @mixin editable {
 	--components-dataTable-cell-padding: var(--pr-t-spacings-50);
+
+	.textField {
+		outline-offset: 2px;
+	}
+
+	.textField-input-valueClone,
+	.textField-input-value {
+		--component-textField-padding: var(--pr-t-spacings-100);
+		padding-top: var(--pr-t-spacings-50);
+		padding-bottom: var(--pr-t-spacings-50);
+	}
 }
 
 @mixin actions {
@@ -107,6 +118,13 @@
 	text-align: right;
 	white-space: nowrap;
 
+	&:is(.dataTable-head-row-cell) {
+		.button {
+			position: relative;
+			bottom: var(--pr-t-spacings-50);
+		}
+	}
+
 	.button {
 		@include button.S;
 		@include button.onlyIcon;
@@ -114,32 +132,6 @@
 		@include button.text;
 	}
 }
-
-// @mixin actionsHidden {
-// 	@media (hover: hover) {
-// 		> * {
-// 			&:not(.is-loading) {
-// 				opacity: 0;
-// 			}
-// 		}
-
-// 		.dataTable-head-row:hover &,
-// 		.dataTable-body-row:hover &,
-// 		.dataTable-foot-row:hover & {
-// 			> * {
-// 				opacity: 1;
-// 			}
-// 		}
-
-// 		.dataTable-head-row:focus-within &,
-// 		.dataTable-body-row:focus-within &,
-// 		.dataTable-foot-row:focus-within & {
-// 			> * {
-// 				opacity: 1;
-// 			}
-// 		}
-// 	}
-// }
 
 @mixin alignCenter {
 	text-align: center;
@@ -164,12 +156,6 @@
 }
 
 @mixin layoutFixedCells {
-	.dataTable-head-row-cell,
-	.dataTable-body-row-cell,
-	.dataTable-foot-row-cell {
-		--cell-width: var(--table-layoutFixed-width);
-	}
-
 	&.mod-layoutFixed {
 		.dataTable-head-row-cell,
 		.dataTable-body-row-cell,
@@ -192,6 +178,6 @@
 }
 
 @mixin cellFixedWidth {
-	min-width: var(--cell-width, auto);
-	width: var(--cell-width, auto);
+	min-width: var(--dataTable-layoutFixed-width, auto);
+	width: var(--dataTable-layoutFixed-width, auto);
 }

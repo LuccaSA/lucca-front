@@ -1,0 +1,27 @@
+@mixin firstColumnVisible {
+	&::before {
+		opacity: 0;
+	}
+}
+
+@mixin lastColumnVisible {
+	&::after {
+		opacity: 0;
+	}
+}
+
+@mixin firstRowVisible {
+	.dataTableShadows {
+		&::before {
+			opacity: 0;
+		}
+	}
+}
+
+@mixin lastRowVisible {
+	.dataTableShadows {
+		&::after {
+			opacity: 0;
+		}
+	}
+}

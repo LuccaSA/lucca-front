@@ -5,6 +5,14 @@ import { Meta, StoryFn } from '@storybook/angular';
 	standalone: true,
 	selector: 'data-table-stories',
 	templateUrl: './data-table.stories.html',
+	styles: [
+		`
+			.dataTable:has(.mod-stickyColumn),
+			.mod-columnsOverflow {
+				white-space: nowrap;
+			}
+		`,
+	],
 })
 class DataTableStory {}
 

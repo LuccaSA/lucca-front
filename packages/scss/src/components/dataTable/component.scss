@@ -1,55 +1,37 @@
 @use '@lucca-front/icons/src/commons/utils/icon';
 @use '@lucca-front/scss/src/commons/utils/namespace';
+@use '@lucca-front/scss/src/commons/utils/a11y';
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
 	display: table;
 	text-align: left;
 	width: 100%;
-	background-color: var(--pr-t-elevation-surface-raised);
-	border: 1px solid var(--commons-border-200);
-	border-radius: var(--commons-borderRadius-L);
-	border-spacing: 0;
 	border-collapse: collapse;
 	border-style: hidden;
-	box-shadow: 0 0 0 1px var(--commons-border-200);
+	// box-shadow: 0 0 0 1px var(--commons-border-200) inset;
 
 	@at-root ($atRoot) {
-		:is(.dataTable-head, .dataTable-body, .dataTable-foot) {
-			&:first-child {
-				:is(.dataTable-head-row, .dataTable-body-row, .dataTable-foot-row) {
-					&:first-child {
-						:is(.dataTable-head-row-cell, .dataTable-body-row-cell, .dataTable-foot-row-cell) {
-							&:first-child {
-								border-top-left-radius: var(--commons-borderRadius-L);
-							}
+		.dataTableWrapper {
+			border-radius: var(--commons-borderRadius-L);
+			overflow: hidden;
+			border: 1px solid var(--commons-border-200);
 
-							&:last-child {
-								border-top-right-radius: var(--commons-borderRadius-L);
-							}
-						}
-					}
-				}
-			}
-			&:last-child {
-				:is(.dataTable-head-row, .dataTable-body-row, .dataTable-foot-row) {
-					&:last-child {
-						:is(.dataTable-head-row-cell, .dataTable-body-row-cell, .dataTable-foot-row-cell) {
-							&:first-child {
-								border-bottom-left-radius: var(--commons-borderRadius-L);
-							}
-
-							&:last-child {
-								border-bottom-right-radius: var(--commons-borderRadius-L);
-							}
-						}
-					}
-				}
+			&:focus-visible {
+				@include a11y.focusVisible;
 			}
 		}
 
 		.dataTable-head {
 			display: table-header-group;
 			vertical-align: bottom;
+
+			.dataTable-head-row {
+				&:first-child {
+					.dataTable-head-row-cell {
+						border-top: 0;
+					}
+				}
+			}
 		}
 
 		.dataTable-head-row {
@@ -59,7 +41,7 @@
 		.dataTable-head-row-cell {
 			color: var(--palettes-neutral-700);
 			padding: var(--components-dataTable-cell-padding);
-			border-block: 1px solid var(--commons-border-200);
+			border-top: 1px solid var(--commons-border-200);
 			display: table-cell;
 			font-weight: 400;
 
@@ -81,11 +63,17 @@
 			display: table-row;
 		}
 
+		.dataTable-head-row-cell,
 		.dataTable-body-row-cell,
 		.dataTable-foot-row-cell {
 			display: table-cell;
+			border-top: 1px solid var(--commons-border-200);
+			background-color: var(--pr-t-elevation-surface-raised);
+		}
+
+		.dataTable-body-row-cell,
+		.dataTable-foot-row-cell {
 			padding: var(--components-dataTable-cell-padding);
-			border-block: 1px solid var(--commons-border-200);
 			vertical-align: middle;
 		}
 
