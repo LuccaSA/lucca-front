@@ -6,3 +6,4 @@ indent_size = unset
 
 [*.ts]
 quote_type = single
+max_line_length = off

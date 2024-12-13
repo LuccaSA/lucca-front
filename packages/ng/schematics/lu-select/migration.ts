@@ -1,20 +1,9 @@
-import { HtmlAst } from '../lib/html-ast.js';
+import { HtmlAst, HtmlAstVisitor } from '../lib/html-ast.js';
 import ts, { isImportDeclaration, isNamedImports, ScriptTarget, SourceFile } from 'typescript';
-import {
-	extractComponentImports,
-	insertAngularImportIfNeeded,
-	insertTSImportIfNeeded,
-	removeAngularImport,
-	removeTSImport
-} from '../lib/angular-component-ast';
+import { extractComponentImports, insertAngularImportIfNeeded, insertTSImportIfNeeded, removeAngularImport, removeTSImport } from '../lib/angular-component-ast';
 import { extractNgTemplatesIncludingHtml } from '../lib/angular-template';
 import { getCommonMigrationRejectionReason, getDataSource, getDisplayer, isRejection, RejectionReason } from './util';
-import {
-	LuSelectInputContext,
-	SelectComponent,
-	SelectContext, selectorToComponentName,
-	selectorToSelectComponentName
-} from './model/select-context';
+import { LuSelectInputContext, SelectComponent, SelectContext, selectorToComponentName, selectorToSelectComponentName } from './model/select-context';
 import { TmplAstElement } from '@angular/compiler';
 import { Tree, UpdateRecorder } from '@angular-devkit/schematics';
 import { applyToUpdateRecorder } from '@schematics/angular/utility/change';
@@ -24,7 +13,8 @@ const importSource: Record<string, string> = {
 	LuSimpleSelectInputComponent: '@lucca-front/ng/simple-select',
 	LuMultipleSelectInputComponent: '@lucca-front/ng/multiple-select',
 	LuDisplayerDirective: '@lucca-front/ng/core-select',
-	LuOptionDirective: '@lucca-front/ng/core-select'
+	LuOptionDirective: '@lucca-front/ng/core-select',
+	LuInputClearerComponent: '@lucca-front/ng/input'
 };
 
 const selectorToComponentNameRecord = selectorToSelectComponentName as Record<string, SelectComponent>;
@@ -91,6 +81,7 @@ function findSelectContexts(sourceFile: ts.SourceFile, basePath: string, tree: T
 }
 
 function updateImports(sourceFile: SourceFile, selects: SelectContext[], path: string, tree: Tree) {
+	// We need to use 3 updates because of inline template updates requiring sourceFile regen after each change
 	const update = tree.beginUpdate(path);
 	const imports = new Set(selects.flatMap(select => select.requiredImports || []));
 	imports.forEach(importToAdd => {
@@ -100,25 +91,28 @@ function updateImports(sourceFile: SourceFile, selects: SelectContext[], path: s
 			console.error(`Can't add import for ${importToAdd} because source is unknown`);
 		}
 	});
+	tree.commitUpdate(update);
+	const componentsCleanupUpdate = tree.beginUpdate(path);
 	// Cleanup unused select component imports
-	const templatesAfterUpdate = extractNgTemplatesIncludingHtml(sourceFile, tree, path);
+	const updatedSourceFile = ts.createSourceFile(path, tree.readText(path), ScriptTarget.ESNext);
+	const templatesAfterUpdate = extractNgTemplatesIncludingHtml(updatedSourceFile, tree, path);
 	templatesAfterUpdate.forEach(template => {
 		Object.entries(selectorToComponentName).forEach(([selector, className]) => {
 			if (!template.content.includes(selector)) {
-				applyToUpdateRecorder(update, [removeTSImport(sourceFile, path, className), removeAngularImport(sourceFile, path, className)]);
+				applyToUpdateRecorder(componentsCleanupUpdate, [removeTSImport(updatedSourceFile, path, className), removeAngularImport(updatedSourceFile, path, className)]);
 			}
 		});
 	});
-	tree.commitUpdate(update);
+	tree.commitUpdate(componentsCleanupUpdate);
 	// Cleanup empty import clauses
 	const cleanupUpdate = tree.beginUpdate(path);
-	const updatedSourceFile = ts.createSourceFile(path, tree.readText(path), ScriptTarget.ESNext);
-	updatedSourceFile.statements
+	const cleanupSourceFile = ts.createSourceFile(path, tree.readText(path), ScriptTarget.ESNext);
+	cleanupSourceFile.statements
 		.filter(isImportDeclaration)
 		.forEach(statement => {
 			if (statement.importClause && statement.importClause.namedBindings && isNamedImports(statement.importClause.namedBindings) && statement.importClause.namedBindings.elements.length === 0) {
 				// +1 for trailing ;
-				cleanupUpdate.remove(statement.getFullStart(), statement.getText(updatedSourceFile).length + 1);
+				cleanupUpdate.remove(statement.getFullStart(), statement.getText(cleanupSourceFile).length + 1);
 			}
 		});
 	tree.commitUpdate(cleanupUpdate);
@@ -126,6 +120,13 @@ function updateImports(sourceFile: SourceFile, selects: SelectContext[], path: s
 
 function handleLuSelectInputComponent(select: LuSelectInputContext, update: UpdateRecorder) {
 	const dataSource = getDataSource(select);
+	let hasClearer = false;
+	new HtmlAstVisitor(select.node).visitElements(/lu-input-clearer/, (node) => {
+		// Doing the check just in case
+		if (node.name === 'lu-input-clearer') {
+			hasClearer = true;
+		}
+	});
 	if (isRejection(dataSource)) {
 		select.rejection = dataSource;
 	} else {
@@ -142,6 +143,9 @@ function handleLuSelectInputComponent(select: LuSelectInputContext, update: Upda
 		}
 		if (dataSource.comparer) {
 			newOpeningTag += ` [optionComparer]="${dataSource.comparer}"`;
+		}
+		if (hasClearer) {
+			newOpeningTag += ` clearable`;
 		}
 		// rename tag and add options + selector if needed
 		update.insertRight(select.nodeOffset + select.node.startSourceSpan.start.offset + 1, newOpeningTag);

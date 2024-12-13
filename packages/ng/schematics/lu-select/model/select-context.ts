@@ -12,7 +12,8 @@ export const selectorToSelectComponentName = {
 export const selectorToComponentName = {
 	...selectorToSelectComponentName,
 	'lu-option-picker': 'LuOptionPickerComponent',
-	'lu-option-item': 'LuOptionItemComponent'
+	'lu-option-item': 'LuOptionItemComponent',
+	'lu-input-clearer': 'LuInputClearerComponent'
 };
 
 export type SelectComponent = ValueOf<typeof selectorToSelectComponentName>;
