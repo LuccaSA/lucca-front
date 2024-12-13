@@ -9,7 +9,12 @@ import {
 } from '../lib/angular-component-ast';
 import { extractNgTemplatesIncludingHtml } from '../lib/angular-template';
 import { getCommonMigrationRejectionReason, getDataSource, getDisplayer, isRejection, RejectionReason } from './util';
-import { LuSelectInputContext, SelectComponent, SelectContext, selectorToComponentName } from './model/select-context';
+import {
+	LuSelectInputContext,
+	SelectComponent,
+	SelectContext, selectorToComponentName,
+	selectorToSelectComponentName
+} from './model/select-context';
 import { TmplAstElement } from '@angular/compiler';
 import { Tree, UpdateRecorder } from '@angular-devkit/schematics';
 import { applyToUpdateRecorder } from '@schematics/angular/utility/change';
@@ -22,9 +27,9 @@ const importSource: Record<string, string> = {
 	LuOptionDirective: '@lucca-front/ng/core-select'
 };
 
-const selectorToComponentNameRecord = selectorToComponentName as Record<string, SelectComponent>;
+const selectorToComponentNameRecord = selectorToSelectComponentName as Record<string, SelectComponent>;
 
-const possibleSelectComponents = Object.values(selectorToComponentName);
+const possibleSelectComponents = Object.values(selectorToSelectComponentName);
 
 export function migrateComponent(sourceFile: SourceFile, path: string, tree: Tree): string {
 	const selects = findSelectContexts(sourceFile, path, tree);
@@ -134,6 +139,9 @@ function handleLuSelectInputComponent(select: LuSelectInputContext, update: Upda
 		let newOpeningTag = `lu-simple-select [options]="${dataSource.sourceName}"`;
 		if (!dataSource.display.canBeRemoved) {
 			newOpeningTag += ` #${dataSource.sourceName}Select`;
+		}
+		if (dataSource.comparer) {
+			newOpeningTag += ` [optionComparer]="${dataSource.comparer}"`;
 		}
 		// rename tag and add options + selector if needed
 		update.insertRight(select.nodeOffset + select.node.startSourceSpan.start.offset + 1, newOpeningTag);

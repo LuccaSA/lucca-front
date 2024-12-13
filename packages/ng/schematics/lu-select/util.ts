@@ -18,6 +18,7 @@ export interface Rejection {
 export interface SelectDataSource {
 	sourceName: string;
 	display: SelectDisplayer;
+	comparer?: string;
 }
 
 export interface SelectDisplayer {
@@ -118,6 +119,11 @@ export function getDataSource(select: LuSelectInputContext): SelectDataSource | 
 							}
 						};
 					}
+				}
+
+				const comparerAST: ASTWithSource | undefined = node.inputs.find(attr => attr.name === 'option-comparer')?.value as ASTWithSource;
+				if (comparerAST?.source && !isRejection(result)) {
+					result.comparer = comparerAST?.source;
 				}
 			}
 		}

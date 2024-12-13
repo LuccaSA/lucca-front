@@ -24,4 +24,6 @@ export class SimpleCaseInputComponent {
 
 	onCultureChanges(): void {
 	}
+
+	testComparer = (a, b) => a === b;
 }

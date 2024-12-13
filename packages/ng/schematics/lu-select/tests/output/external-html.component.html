@@ -7,3 +7,5 @@
     {{ culture?.code }}
   }</ng-container>
 </lu-simple-select>
+
+<lu-simple-select [options]="cultures" [optionComparer]="testComparer" class="textfield textfield-input" [(ngModel)]="selectedCulture"></lu-simple-select>

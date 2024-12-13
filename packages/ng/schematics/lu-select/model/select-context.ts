@@ -1,16 +1,21 @@
-import type { TmplAstElement } from "@angular/compiler";
-import { Rejection } from "../util";
-import { SourceFile } from "typescript";
+import type { TmplAstElement } from '@angular/compiler';
+import { Rejection } from '../util';
+import { SourceFile } from 'typescript';
 
 type ValueOf<T> = T[keyof T];
 
-export const selectorToComponentName = {
-	"lu-select": "LuSelectInputComponent",
-	"lu-option-picker": "LuOptionPickerComponent",
-	"lu-option-item": "LuOptionItemComponent"
+
+export const selectorToSelectComponentName = {
+	'lu-select': 'LuSelectInputComponent'
 } as const;
 
-export type SelectComponent = ValueOf<typeof selectorToComponentName>;
+export const selectorToComponentName = {
+	...selectorToSelectComponentName,
+	'lu-option-picker': 'LuOptionPickerComponent',
+	'lu-option-item': 'LuOptionItemComponent'
+};
+
+export type SelectComponent = ValueOf<typeof selectorToSelectComponentName>;
 
 interface BaseSelectContext {
 	component: SelectComponent;
@@ -24,7 +29,7 @@ interface BaseSelectContext {
 }
 
 export interface LuSelectInputContext extends BaseSelectContext {
-	component: "LuSelectInputComponent";
+	component: 'LuSelectInputComponent';
 }
 
 export type SelectContext = LuSelectInputContext;
