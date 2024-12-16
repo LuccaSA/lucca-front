@@ -5,10 +5,6 @@
 .dataTableWrapper {
 	&:has(.dataTable.mod-stickyHeader) {
 		@include stickyHeader;
-
-		&:has(.dataTable.mod-cellBorder) {
-			@include stickyHeaderWithBorder;
-		}
 	}
 
 	&:has(.dataTable.mod-columnsOverflow) {
