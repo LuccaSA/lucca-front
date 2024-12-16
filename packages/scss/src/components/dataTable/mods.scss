@@ -22,6 +22,7 @@
 	@include buttonExpand;
 	@include title.component;
 	@include title.h4;
+
 	background-color: var(--palettes-neutral-25);
 }
 
@@ -62,8 +63,10 @@
 		@include button.S;
 		@include button.onlyIcon;
 		@include button.text;
+
 		--components-button-padding: var(--pr-t-spacings-50);
 		--components-button-color: var(--palettes-neutral-700);
+
 		vertical-align: top;
 	}
 }
@@ -98,18 +101,7 @@
 }
 
 @mixin editable {
-	--components-dataTable-cell-padding: var(--pr-t-spacings-50);
-
-	.textField {
-		outline-offset: 2px;
-	}
-
-	.textField-input-valueClone,
-	.textField-input-value {
-		--component-textField-padding: var(--pr-t-spacings-100);
-		padding-top: var(--pr-t-spacings-50);
-		padding-bottom: var(--pr-t-spacings-50);
-	}
+	--components-dataTable-cell-padding: var(--pr-t-spacings-75);
 }
 
 @mixin actions {
