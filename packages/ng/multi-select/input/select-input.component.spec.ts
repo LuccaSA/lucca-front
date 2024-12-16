@@ -139,10 +139,11 @@ describe('LuMultiSelectInputComponent', () => {
 				fixture.detectChanges();
 			});
 
-			it('should not emit value on init', () => {
+			it('should not emit value on init', async () => {
 				// Arrange
 				const { componentInstance } = fixture;
 				componentInstance.openPanel();
+				await wait0();
 				componentInstance.panelRef.changeDetectorRef.detectChanges();
 
 				// Act
@@ -152,10 +153,11 @@ describe('LuMultiSelectInputComponent', () => {
 				expect(emittedSelectValues).toEqual([]);
 			});
 
-			it('should emit all when clicking on select all while selection was empty', () => {
+			it('should emit all when clicking on select all while selection was empty', async () => {
 				// Arrange
 				const { componentInstance } = fixture;
 				componentInstance.openPanel();
+				await wait0();
 				componentInstance.panelRef.changeDetectorRef.detectChanges();
 
 				// Act
@@ -166,10 +168,11 @@ describe('LuMultiSelectInputComponent', () => {
 				expect(emittedSelectValues).toEqual([{ mode: 'all' }]);
 			});
 
-			it('should emit mode exclude when clicking on select all then selecting option', () => {
+			it('should emit mode exclude when clicking on select all then selecting option', async () => {
 				// Arrange
 				const { componentInstance } = fixture;
 				componentInstance.openPanel();
+				await wait0();
 				componentInstance.panelRef.changeDetectorRef.detectChanges();
 
 				// Act
@@ -182,10 +185,11 @@ describe('LuMultiSelectInputComponent', () => {
 				expect(emittedSelectValues).toEqual([{ mode: 'all' }, { mode: 'exclude', values: [options[0]] }]);
 			});
 
-			it('should emit mode include when clicking on select all then selecting option', () => {
+			it('should emit mode include when clicking on select all then selecting option', async () => {
 				// Arrange
 				const { componentInstance } = fixture;
 				componentInstance.openPanel();
+				await wait0();
 				componentInstance.panelRef.changeDetectorRef.detectChanges();
 
 				// Act
@@ -196,10 +200,11 @@ describe('LuMultiSelectInputComponent', () => {
 				expect(emittedSelectValues).toEqual([{ mode: 'include', values: [options[0]] }]);
 			});
 
-			it('should set "all" selection when clicking on select all with included option', () => {
+			it('should set "all" selection when clicking on select all with included option', async () => {
 				// Arrange
 				const { componentInstance } = fixture;
 				componentInstance.openPanel();
+				await wait0();
 				componentInstance.panelRef.changeDetectorRef.detectChanges();
 
 				// Act
@@ -212,10 +217,11 @@ describe('LuMultiSelectInputComponent', () => {
 				expect(emittedSelectValues).toEqual([{ mode: 'include', values: [options[0]] }, { mode: 'all' }]);
 			});
 
-			it('should set "none" selection when clicking on select all with excluded option', () => {
+			it('should set "none" selection when clicking on select all with excluded option', async () => {
 				// Arrange
 				const { componentInstance } = fixture;
 				componentInstance.openPanel();
+				await wait0();
 				componentInstance.panelRef.changeDetectorRef.detectChanges();
 
 				// Act
@@ -230,9 +236,10 @@ describe('LuMultiSelectInputComponent', () => {
 				expect(emittedSelectValues).toEqual([{ mode: 'all' }, { mode: 'exclude', values: [options[0]] }, { mode: 'none' }]);
 			});
 
-			it('should emit mode all when clicking on each option', () => {
+			it('should emit mode all when clicking on each option', async () => {
 				const { componentInstance } = fixture;
 				componentInstance.openPanel();
+				await wait0();
 				componentInstance.panelRef.changeDetectorRef.detectChanges();
 
 				// Act
@@ -243,10 +250,11 @@ describe('LuMultiSelectInputComponent', () => {
 				expect(emittedSelectValues).toEqual([{ mode: 'all' }]);
 			});
 
-			it('should emit "none" selection when clicking on select all then clear', () => {
+			it('should emit "none" selection when clicking on select all then clear', async () => {
 				// Arrange
 				const { componentInstance } = fixture;
 				componentInstance.openPanel();
+				await wait0();
 				componentInstance.panelRef.changeDetectorRef.detectChanges();
 
 				// Act
@@ -259,10 +267,11 @@ describe('LuMultiSelectInputComponent', () => {
 				expect(emittedSelectValues).toEqual([{ mode: 'all' }, { mode: 'none' }]);
 			});
 
-			it('should emit "none" selection when clicking on select all then unselect each option', () => {
+			it('should emit "none" selection when clicking on select all then unselect each option', async () => {
 				// Arrange
 				const { componentInstance } = fixture;
 				componentInstance.openPanel();
+				await wait0();
 				componentInstance.panelRef.changeDetectorRef.detectChanges();
 
 				// Act
@@ -306,4 +315,8 @@ function createComponent(override?: MetadataOverride<Component>) {
 	}
 
 	return TestBed.createComponent<LuMultiSelectInputComponent<Entity>>(LuMultiSelectInputComponent);
+}
+
+function wait0() {
+	return new Promise((resolve) => setTimeout(resolve, 0));
 }
