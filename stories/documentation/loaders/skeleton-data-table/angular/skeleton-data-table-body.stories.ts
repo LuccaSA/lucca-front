@@ -14,17 +14,18 @@ export default {
 } as Meta;
 
 function getTemplate(args: SkeletonDataTableStory): string {
-	return `<table class="dataTable skeleton is-loading" inert="inert">
-	<thead class="dataTable-head">
-		<tr class="dataTable-head-row">
-			<th class="dataTable-head-row-cell">Lorem</th>
-			<th class="dataTable-head-row-cell">Ipsum</th>
-			<th class="dataTable-head-row-cell">Dolor</th>
-		</tr>
-	</thead>
-	<lu-skeleton-data-table dataTableBodyOnly [cols]="3" />
-</table>
-	`;
+	return `<div class="dataTableWrapper">
+	<table class="dataTable skeleton is-loading" inert="inert">
+		<thead class="dataTable-head">
+			<tr class="dataTable-head-row">
+				<th class="dataTable-head-row-cell">Lorem</th>
+				<th class="dataTable-head-row-cell">Ipsum</th>
+				<th class="dataTable-head-row-cell">Dolor</th>
+			</tr>
+		</thead>
+		<lu-skeleton-data-table dataTableBodyOnly [cols]="3" />
+	</table>
+</div>`;
 }
 
 const Template: StoryFn<SkeletonDataTableStory> = (args) => ({
@@ -34,7 +35,7 @@ const Template: StoryFn<SkeletonDataTableStory> = (args) => ({
 		`
 		th:first-child {
 			width: 15rem;
-		}	
+		}
 	`,
 	],
 });
