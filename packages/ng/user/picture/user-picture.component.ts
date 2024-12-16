@@ -1,6 +1,6 @@
 import { NgStyle } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Input, OnChanges, Optional, ViewEncapsulation, inject } from '@angular/core';
-import { LU_DEFAULT_DISPLAY_POLICY, LuDisplayFormat, LuDisplayFullname, LuDisplayHybrid, LuDisplayInitials, luUserDisplay } from '../display';
+import { ChangeDetectionStrategy, Component, inject, Input, OnChanges, Optional, ViewEncapsulation } from '@angular/core';
+import { LuDisplayFormat, LuDisplayFullname, LuDisplayHybrid, LuDisplayInitials, luUserDisplay, LU_DEFAULT_DISPLAY_POLICY } from '../display';
 
 export interface LuUserPictureUserInput {
 	picture?: { href: string } | null;
@@ -38,6 +38,7 @@ export const displayPictureFormatRecord: Record<LuDisplayFormat, LuDisplayInitia
 	host: { class: 'avatar' },
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	encapsulation: ViewEncapsulation.None,
+	standalone: true,
 })
 export class LuUserPictureComponent implements OnChanges {
 	/**

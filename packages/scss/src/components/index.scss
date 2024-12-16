@@ -50,6 +50,7 @@
 @forward 'segmentedControl';
 @forward 'calendar';
 @forward 'skipLinks';
+@forward 'fancyBox';
 
 // caution: the two components cannot be loaded at the same time
 @forward 'grid';
@@ -87,6 +88,10 @@
 @forward 'popover';
 @forward 'userTile';
 @forward 'plgPush';
+@forward 'dateField';
+@forward 'dateRangeField';
+@forward 'dataTable';
+@forward 'dataTableSticked';
 
 // Deprecated CSS components
 // @forward 'gridLegacy'; // 40 Ko

@@ -1,0 +1,94 @@
+@use '@lucca-front/icons/src/commons/utils/icon';
+@use '@lucca-front/scss/src/commons/utils/namespace';
+@use '@lucca-front/scss/src/commons/utils/a11y';
+
+@mixin component($atRoot: namespace.$defaultAtRoot) {
+	display: table;
+	text-align: left;
+	width: 100%;
+	border-collapse: collapse;
+	border-style: hidden;
+
+	@at-root ($atRoot) {
+		.dataTableWrapper {
+			border-radius: var(--commons-borderRadius-L);
+			overflow: auto;
+			border: 1px solid var(--commons-border-200);
+
+			&:focus-visible {
+				@include a11y.focusVisible;
+			}
+		}
+
+		.dataTable-head {
+			display: table-header-group;
+			vertical-align: bottom;
+
+			.dataTable-head-row {
+				&:first-child {
+					.dataTable-head-row-cell {
+						border-top: 0;
+					}
+				}
+			}
+		}
+
+		.dataTable-head-row {
+			display: table-row;
+		}
+
+		.dataTable-head-row-cell {
+			color: var(--palettes-neutral-700);
+			padding: var(--components-dataTable-cell-padding);
+			border-top: 1px solid var(--commons-border-200);
+			display: table-cell;
+			font-weight: 400;
+
+			.checkboxField {
+				margin-block-end: 0.125rem;
+			}
+		}
+
+		.dataTable-body {
+			display: table-row-group;
+		}
+
+		.dataTable-foot {
+			display: table-footer-group;
+		}
+
+		.dataTable-body-row,
+		.dataTable-foot-row {
+			display: table-row;
+		}
+
+		.dataTable-head-row-cell,
+		.dataTable-body-row-cell,
+		.dataTable-foot-row-cell {
+			display: table-cell;
+			border-top: 1px solid var(--commons-border-200);
+			background-color: var(--pr-t-elevation-surface-raised);
+		}
+
+		.dataTable-body-row-cell,
+		.dataTable-foot-row-cell {
+			padding: var(--components-dataTable-cell-padding);
+			vertical-align: middle;
+		}
+
+		.dataTable-foot-row-cell {
+			font-weight: 600;
+		}
+
+		.dataTable-body-row-cell-groupLabel {
+			margin-inline-end: var(--pr-t-spacings-100);
+		}
+	}
+
+	.statusBadge,
+	.tag,
+	.avatar {
+		display: flex;
+		width: fit-content;
+	}
+}

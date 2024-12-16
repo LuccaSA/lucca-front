@@ -7,7 +7,7 @@ import { injectNgControl } from '../inject-ng-control';
 @Component({
 	selector: 'lu-switch-input',
 	standalone: true,
-	imports: [FormFieldComponent, ReactiveFormsModule, InputDirective],
+	imports: [ReactiveFormsModule, InputDirective],
 	templateUrl: './switch-input.component.html',
 	hostDirectives: [NoopValueAccessorDirective],
 	encapsulation: ViewEncapsulation.None,
@@ -22,7 +22,7 @@ export class SwitchInputComponent {
 
 	constructor() {
 		if (this.formField) {
-			this.formField.layout = 'checkable';
+			this.formField.layout.set('checkable');
 		}
 	}
 }

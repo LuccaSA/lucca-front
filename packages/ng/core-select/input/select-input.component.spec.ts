@@ -28,37 +28,40 @@ export function runALuSelectInputComponentTestSuite<TValue>(config: LuSelectInpu
 		nativeElement = fixture.nativeElement as HTMLElement;
 	});
 
-	it('should openPanel when ArrowDown', () => {
+	it('should openPanel when ArrowDown', async () => {
 		// Arrange
 		const event = new KeyboardEvent('keydown', { key: 'ArrowDown' });
 
 		// Act
 		nativeElement.dispatchEvent(event);
+		await fixture.whenStable();
 
 		// Assert
 		expect(component.isPanelOpen).toBe(true);
 	});
 
-	it.each(['a', 'A', 'À'])('should openPanel and emit clueChange when pressing %s', (key) => {
+	it.each(['a', 'A', 'À'])('should openPanel and emit clueChange when pressing %s', async (key) => {
 		// Arrange
 		const event = new KeyboardEvent('keydown', { key });
 		const clueChangeSpy = jest.spyOn(component.clueChange, 'emit');
 
 		// Act
 		nativeElement.dispatchEvent(event);
+		await fixture.whenStable();
 
 		// Assert
 		expect(component.isPanelOpen).toBe(true);
 		expect(clueChangeSpy).toHaveBeenCalledWith(key);
 	});
 
-	it('should openPanel and but not emit clueChange when pressing Space', () => {
+	it('should openPanel and but not emit clueChange when pressing Space', async () => {
 		// Arrange
 		const event = new KeyboardEvent('keydown', { key: ' ' });
 		const clueChangeSpy = jest.spyOn(component.clueChange, 'emit');
 
 		// Act
 		nativeElement.dispatchEvent(event);
+		await fixture.whenStable();
 
 		// Assert
 		expect(component.isPanelOpen).toBe(true);

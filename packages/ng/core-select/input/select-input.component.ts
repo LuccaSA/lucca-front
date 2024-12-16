@@ -277,11 +277,26 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 		if (this.isPanelOpen || this.disabled$.value) {
 			return;
 		}
+		/**
+		 * I know what you're thinking, but let me explain:
+		 *
+		 * When setting isPanelOpen$'s internal value to true and then calling clueChanged,
+		 * it creates a race condition which calls this method again from inside clueChanged's code before
+		 * the change is applied inside the Subject, meaning this is called twice and we get a double tap.
+		 *
+		 * The only easy solution is this (or store yet another boolean like "isOpeningPanel" which is, imo, equally ugly.
+		 */
+		setTimeout(() => {
+			if (this.isPanelOpen) {
+				return;
+			}
 
-		this.isPanelOpen$.next(true);
-		this.clueChanged(clue);
-		this._panelRef = this.buildPanelRef();
-		this.bindInputToPanelRefEvents();
+			this.isPanelOpen$.next(true);
+			this.clueChanged(clue);
+			this._panelRef = this.buildPanelRef();
+			this.bindInputToPanelRefEvents();
+		});
+		// Oh and we have to wait for another cycle before focusing the input so it's done once panel is opened for good.
 		setTimeout(() => this.focusInput());
 	}
 

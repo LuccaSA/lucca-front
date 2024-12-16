@@ -17,7 +17,14 @@ function getTemplate(args: ResetStory): string {
 		<ul class="u-listReset">
 			<li>List item</li>
 			<li>List item</li>
-			<li>List item</li>
+			<li>
+				List item
+				<ul>
+					<li>List item</li>
+					<li>List item</li>
+					<li>List item</li>
+				</ul>
+			</li>
 		</ul>
 	</div>
 	<div class="demo-utility">
@@ -26,6 +33,13 @@ function getTemplate(args: ResetStory): string {
 			<dt>Term</dt>
 			<dd>Description</dd>
 		</dl>
+	</div>
+	<div class="demo-utility">
+		<code class="code">u-summaryReset</code>
+		<details>
+			<summary class="u-summaryReset">Summary</summary>
+			Details
+		</details>
 	</div>
 </div>`;
 }

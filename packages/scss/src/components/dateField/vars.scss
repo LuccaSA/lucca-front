@@ -1,0 +1,10 @@
+@mixin vars {
+	--components-dateField-maxWidth: auto;
+	--components-dateField-maxWidthDay: 10rem;
+	--components-dateField-maxWidthMonth: var(--components-dateField-maxWidthDay);
+	--components-dateField-maxWidthYear: var(--components-dateField-maxWidthDay);
+
+	--components-dateField-maxWidthDayS: 9rem;
+	--components-dateField-maxWidthMonthS: var(--components-dateField-maxWidthDayS);
+	--components-dateField-maxWidthYearS: var(--components-dateField-maxWidthDayS);
+}

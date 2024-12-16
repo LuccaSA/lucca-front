@@ -13,6 +13,18 @@ Element.prototype.scrollIntoView = () => {};
 // It is used in LF's schematics tests
 Object.assign(global, { TextDecoder, TextEncoder });
 
+const originalError = console.error;
+const hideCssParseError = (...args: unknown[]) => {
+	if (args[0] && typeof args[0] === 'object' && args[0].constructor.name === 'Error' && args[0]['type'] === 'css parsing') {
+		// JSDOM doesn't support CSS @layer rules and throws verbose errors
+		return;
+	} else {
+		originalError(...args);
+	}
+};
+
+console.error = hideCssParseError;
+
 class ResizeObserver {
 	observe() {}
 	unobserve() {}

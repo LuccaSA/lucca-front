@@ -83,7 +83,6 @@ export const Basic: StoryObj<
 		label: 'Label',
 		tooltip: 'Tooltip message',
 		hiddenLabel: false,
-		required: false,
 		placeholder: 'Placeholder',
 		clearable: true,
 		inlineMessage: 'Helper Text',

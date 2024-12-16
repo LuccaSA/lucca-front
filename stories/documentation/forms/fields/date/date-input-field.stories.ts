@@ -33,11 +33,11 @@ export default {
 		hasTodayButton: {
 			control: 'boolean',
 		},
-		disableOverflow: {
+		enableOverflow: {
 			control: 'boolean',
 			description: 'Autorise la sélection des jours du mois précédent ou suivant sur la vue du mois en cours.',
 		},
-		hideOverflow: {
+		showOverflow: {
 			control: 'boolean',
 			description: 'Affiche la sélection des jours du mois précédent ou suivant sur la vue du mois en cours.',
 		},
@@ -81,7 +81,6 @@ export const Basic: StoryObj<DateInputComponent & FormFieldComponent> = {
 		label: 'Label',
 		tooltip: 'Tooltip message',
 		hiddenLabel: false,
-		required: true,
 		inlineMessage: 'Helper Text',
 		inlineMessageState: 'default',
 		// DateInput
