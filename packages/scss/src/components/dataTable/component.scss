@@ -8,12 +8,11 @@
 	width: 100%;
 	border-collapse: collapse;
 	border-style: hidden;
-	// box-shadow: 0 0 0 1px var(--commons-border-200) inset;
 
 	@at-root ($atRoot) {
 		.dataTableWrapper {
 			border-radius: var(--commons-borderRadius-L);
-			overflow: hidden;
+			overflow: auto;
 			border: 1px solid var(--commons-border-200);
 
 			&:focus-visible {

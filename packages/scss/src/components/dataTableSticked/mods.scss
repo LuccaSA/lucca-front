@@ -6,11 +6,11 @@
 @use '@lucca-front/scss/src/commons/utils/color';
 
 @mixin stickyHeader {
-	overflow: auto;
-
 	.dataTable-head {
 		position: sticky;
 		top: 0;
+		background-color: var(--pr-t-elevation-surface-raised);
+		z-index: 1;
 
 		&::after {
 			content: '';
@@ -21,6 +21,15 @@
 			background-image: linear-gradient(#{color.transparentize(var(--palettes-neutral-400), 0.24)}, transparent);
 			pointer-events: none;
 		}
+	}
+
+	.dataTable-head-row-cell {
+		box-shadow: 0 1px var(--commons-border-200);
+		background-color: transparent;
+		background-image: linear-gradient(var(--palettes-neutral-0), var(--palettes-neutral-0));
+		background-size: 100% calc(100% - 1px);
+		background-position: 0 1px;
+		background-repeat: no-repeat;
 	}
 }
 
@@ -141,5 +150,15 @@
 				right: 0;
 			}
 		}
+	}
+}
+
+@mixin stickyHeaderWithBorder {
+	.dataTable-head-row-cell {
+		background-size: calc(100% - 1px) calc(100% - 1px);
+		background-position: 1px 1px;
+		box-shadow:
+			0 1px var(--commons-border-200),
+			1px 0 var(--commons-border-200);
 	}
 }

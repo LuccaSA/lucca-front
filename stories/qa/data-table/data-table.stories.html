@@ -363,7 +363,7 @@
 
 <section class="contentSection">
 	<h2>Cell border</h2>
-	<p>🚨 Not compatible with sticky header</p>
+	<p>🚨 Borders are not always perfectly aligned when sticky header is activated.</p>
 	<div class="dataTableWrapper">
 		<table class="dataTable mod-cellBorder">
 			<thead class="dataTable-head">
@@ -373,14 +373,15 @@
 				</tr>
 				<tr class="dataTable-head-row">
 					<th class="dataTable-head-row-cell">Label</th>
-					<th class="dataTable-head-row-cell" rowspan="2">Label</th>
-				</tr>
-				<tr class="dataTable-head-row">
-					<th class="dataTable-head-row-cell">Label</th>
 					<th class="dataTable-head-row-cell">Label</th>
 				</tr>
 			</thead>
 			<tbody class="dataTable-body">
+				<tr class="dataTable-body-row">
+					<td class="dataTable-body-row-cell">Text</td>
+					<td class="dataTable-body-row-cell">Text</td>
+					<td class="dataTable-body-row-cell">Text</td>
+				</tr>
 				<tr class="dataTable-body-row">
 					<td class="dataTable-body-row-cell">Text</td>
 					<td class="dataTable-body-row-cell">Text</td>
@@ -621,6 +622,63 @@
 <section class="contentSection">
 	<h2>Sticky column</h2>
 	<div class="dataTableWrapper" style="width: 30rem">
+		<table class="dataTable">
+			<thead class="dataTable-head">
+				<tr class="dataTable-head-row">
+					<th class="dataTable-head-row-cell mod-stickyColumn">Head cell</th>
+					<th class="dataTable-head-row-cell">Head cell</th>
+					<th class="dataTable-head-row-cell">Head cell</th>
+					<th class="dataTable-head-row-cell">Head cell</th>
+					<th class="dataTable-head-row-cell">Head cell</th>
+					<th class="dataTable-head-row-cell">Head cell</th>
+					<th class="dataTable-head-row-cell mod-stickyColumn">Head cell</th>
+				</tr>
+			</thead>
+			<tbody class="dataTable-body">
+				<tr class="dataTable-body-row">
+					<td class="dataTable-body-row-cell mod-stickyColumn">Body cell</td>
+					<td class="dataTable-body-row-cell">Body cell</td>
+					<td class="dataTable-body-row-cell">Body cell</td>
+					<td class="dataTable-body-row-cell">Body cell</td>
+					<td class="dataTable-body-row-cell">Body cell</td>
+					<td class="dataTable-body-row-cell">Body cell</td>
+					<td class="dataTable-body-row-cell mod-stickyColumn">Body cell</td>
+				</tr>
+				<tr class="dataTable-body-row">
+					<td class="dataTable-body-row-cell mod-stickyColumn">Body cell</td>
+					<td class="dataTable-body-row-cell">Body cell</td>
+					<td class="dataTable-body-row-cell">Body cell</td>
+					<td class="dataTable-body-row-cell">Body cell</td>
+					<td class="dataTable-body-row-cell">Body cell</td>
+					<td class="dataTable-body-row-cell">Body cell</td>
+					<td class="dataTable-body-row-cell mod-stickyColumn">Body cell</td>
+				</tr>
+				<tr class="dataTable-body-row">
+					<td class="dataTable-body-row-cell mod-stickyColumn">Body cell</td>
+					<td class="dataTable-body-row-cell">Body cell</td>
+					<td class="dataTable-body-row-cell">Body cell</td>
+					<td class="dataTable-body-row-cell">Body cell</td>
+					<td class="dataTable-body-row-cell">Body cell</td>
+					<td class="dataTable-body-row-cell">Body cell</td>
+					<td class="dataTable-body-row-cell mod-stickyColumn">Body cell</td>
+				</tr>
+				<tr class="dataTable-body-row">
+					<td class="dataTable-body-row-cell mod-stickyColumn">Body cell</td>
+					<td class="dataTable-body-row-cell">Body cell</td>
+					<td class="dataTable-body-row-cell">Body cell</td>
+					<td class="dataTable-body-row-cell">Body cell</td>
+					<td class="dataTable-body-row-cell">Body cell</td>
+					<td class="dataTable-body-row-cell">Body cell</td>
+					<td class="dataTable-body-row-cell mod-stickyColumn">Body cell</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</section>
+
+<section class="contentSection">
+	<h2>Sticky column and sticky header</h2>
+	<div class="dataTableWrapper" style="width: 30rem; height: 10rem">
 		<table class="dataTable mod-stickyHeader">
 			<thead class="dataTable-head">
 				<tr class="dataTable-head-row">
@@ -734,7 +792,7 @@
 </section>
 
 <section class="contentSection">
-	<h2>Débordement vertical</h2>
+	<h2>Vertical overflow</h2>
 	<div class="dataTableWrapper" style="height: 10rem">
 		<div class="dataTableShadows">
 			<table class="dataTable mod-rowsOverflow -is-firstRowVisible -is-lastRowVisible">
@@ -773,7 +831,7 @@
 </section>
 
 <section class="contentSection">
-	<h2>Débordement horizontal</h2>
+	<h2>Horizontal overflow</h2>
 	<div class="dataTableWrapper" style="width: 30rem">
 		<div class="dataTableShadows">
 			<table class="dataTable mod-columnsOverflow -is-firstColumnVisible -is-lastColumnVisible">
@@ -841,7 +899,7 @@
 </section>
 
 <section class="contentSection">
-	<h2>Débordement vertical et horizontal</h2>
+	<h2>Vertical and horizontal overflow</h2>
 	<div class="dataTableWrapper" style="width: 30rem; height: 10rem">
 		<div class="dataTableShadows">
 			<table
