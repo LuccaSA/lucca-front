@@ -287,6 +287,10 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 		 * The only easy solution is this (or store yet another boolean like "isOpeningPanel" which is, imo, equally ugly.
 		 */
 		setTimeout(() => {
+			if (this.isPanelOpen) {
+				return;
+			}
+
 			this.isPanelOpen$.next(true);
 			this.clueChanged(clue);
 			this._panelRef = this.buildPanelRef();
