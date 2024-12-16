@@ -11,6 +11,7 @@ import { ILuDropdownPanel } from '../panel/index';
 @Directive({
 	selector: '[luDropdown]',
 	exportAs: 'LuDropdownTrigger',
+	standalone: true,
 })
 export class LuDropdownTriggerDirective<TPanel extends ILuDropdownPanel = ILuDropdownPanel>
 	extends ALuPopoverTrigger<TPanel, ILuPopoverTarget>
