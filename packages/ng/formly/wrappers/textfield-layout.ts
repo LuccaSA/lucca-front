@@ -7,6 +7,8 @@ import { FieldWrapper } from '@ngx-formly/core';
 	styleUrls: ['flex-layout.scss'],
 	templateUrl: './textfield-layout.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
+	// eslint-disable-next-line @angular-eslint/prefer-standalone
+	standalone: false,
 })
 // eslint-disable-next-line @angular-eslint/component-class-suffix
 export class LuFormlyWrapperTextfieldLayout extends FieldWrapper {

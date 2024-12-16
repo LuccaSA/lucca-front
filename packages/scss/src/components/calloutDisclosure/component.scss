@@ -37,6 +37,10 @@
 					box-shadow: none;
 				}
 			}
+
+			&::-webkit-details-marker {
+				display: none;
+			}
 		}
 
 		.calloutDisclosure-summary-icon {
@@ -48,6 +52,7 @@
 		}
 
 		.calloutDisclosure-summary-chevron {
+			align-self: start;
 			color: var(--palettes-neutral-700);
 			margin-left: auto;
 			transition: transform var(--commons-animations-durations-standard) ease;

@@ -13,7 +13,7 @@
 			aria-haspopup="true"
 			role="combobox"
 			(click)="popoverRef.openPopover(true, true)"
-			(keyup.arrowDown)="popoverRef.opened() ? popoverRef.focusBackToContent($event) : openPopover(popoverRef)"
+			(keyup.arrowDown)="arrowDown(popoverRef)"
 			(keyup.escape)="popoverRef.close()"
 			[disabled]="disabled"
 			[attr.placeholder]="placeholder() || dateFormatLocalized()"
@@ -57,8 +57,8 @@
 		</div>
 		<div class="calendarWrapper-content" tabindex="-1">
 			<lu-calendar2
-				[enableOverflow]="enableOverflow()"
-				[showOverflow]="showOverflow()"
+				[enableOverflow]="!disableOverflow()"
+				[showOverflow]="!hideOverflow()"
 				[hideToday]="hideToday()"
 				[hasTodayButton]="hasTodayButton()"
 				[date]="currentDate()"

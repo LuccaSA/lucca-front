@@ -90,6 +90,8 @@
 		}
 
 		.dialog-inside-footer {
+			grid-area: footer;
+
 			&.footer {
 				background-color: transparent;
 				position: relative;
@@ -106,6 +108,7 @@
 			gap: var(--pr-t-spacings-200);
 			position: relative;
 			z-index: 1;
+			grid-area: header;
 		}
 
 		.dialog-inside-content {

@@ -1,11 +1,11 @@
 import { ConnectionPositionPair } from '@angular/cdk/overlay';
-import { ChangeDetectionStrategy, Component, computed, effect, ElementRef, forwardRef, inject, input, signal, viewChild, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, computed, effect, ElementRef, forwardRef, inject, input, signal, untracked, viewChild, ViewEncapsulation } from '@angular/core';
 import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors, Validator } from '@angular/forms';
 import { LuClass, ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { InputDirective } from '@lucca-front/ng/form-field';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { PopoverDirective } from '@lucca-front/ng/popover2';
-import { parse, startOfDay } from 'date-fns';
+import { isAfter, isBefore, isSameDay, parse, startOfDay } from 'date-fns';
 import { AbstractDateComponent } from '../abstract-date-component';
 import { CalendarMode } from '../calendar2/calendar-mode';
 import { Calendar2Component } from '../calendar2/calendar2.component';
@@ -45,8 +45,8 @@ export class DateInputComponent extends AbstractDateComponent implements Control
 
 	placeholder = input<string>();
 
-	enableOverflow = input<boolean>(true);
-	showOverflow = input<boolean>(true);
+	disableOverflow = input(false, { transform: booleanAttribute });
+	hideOverflow = input(false, { transform: booleanAttribute });
 
 	popoverPositions: ConnectionPositionPair[] = [
 		new ConnectionPositionPair({ originX: 'start', originY: 'bottom' }, { overlayX: 'start', overlayY: 'top' }, -8, 0),
@@ -64,6 +64,8 @@ export class DateInputComponent extends AbstractDateComponent implements Control
 	inputFocused = signal(false);
 
 	selectedDate = signal<Date | null>(null);
+
+	dateFromWriteValue = signal<Date | null>(null);
 
 	calendar = viewChild(Calendar2Component);
 
@@ -112,10 +114,16 @@ export class DateInputComponent extends AbstractDateComponent implements Control
 			() => {
 				const inputValue = this.userTextInput();
 				if (inputValue.length > 0) {
-					const parsed = parse(inputValue, this.dateFormat, startOfDay(new Date()));
-					if (parsed.getFullYear() > 999) {
+					let parsed: Date;
+					try {
+						parsed = parse(inputValue, this.dateFormat, startOfDay(new Date()));
+					} catch {
+						/* not a correct date */
+					}
+					if (parsed instanceof Date && parsed.getFullYear() > 999) {
 						this.selectedDate.set(startOfDay(parsed));
 						this.currentDate.set(startOfDay(parsed));
+						this.tabbableDate.set(startOfDay(parsed));
 					} else {
 						this.selectedDate.set(parsed);
 					}
@@ -123,8 +131,11 @@ export class DateInputComponent extends AbstractDateComponent implements Control
 			},
 			{ allowSignalWrites: true },
 		);
+
 		effect(() => {
-			this.#onChange?.(this.selectedDate());
+			if (!this.#safeCompareDate(untracked(this.dateFromWriteValue), this.selectedDate())) {
+				this.#onChange?.(this.selectedDate());
+			}
 		});
 
 		effect(() => {
@@ -148,6 +159,10 @@ export class DateInputComponent extends AbstractDateComponent implements Control
 		});
 	}
 
+	#safeCompareDate(a: Date, b: Date): boolean {
+		return a === b || (!!a && !!b && isSameDay(a, b));
+	}
+
 	openPopover(ref: PopoverDirective): void {
 		ref.openPopover(true, true);
 		// Once popover is opened, aka in the next CD cycle, focus current tabbable date
@@ -156,14 +171,47 @@ export class DateInputComponent extends AbstractDateComponent implements Control
 		});
 	}
 
+	arrowDown(popoverRef: PopoverDirective) {
+		if (popoverRef.opened()) {
+			this.calendar()?.focusTabbableDate();
+		} else {
+			this.openPopover(popoverRef);
+		}
+	}
+
 	validate(control: AbstractControl<Date, Date>): ValidationErrors {
-		return this.isValidDate(control.value) ? null : { date: true };
+		// null is not an error but means we'll skip everything else, we'll let the presence of a
+		// Validators.required (or not) decide if it's an error.
+		if (control.value === null || control.value === undefined) {
+			return null;
+		}
+		// try to parse the display value cause formControl.value is undefined if date is not parsable
+		try {
+			parse(this.displayValue(), this.dateFormat, startOfDay(new Date()));
+		} catch {
+			/* not a correct date */
+			return { date: true };
+		}
+		// Check date validity
+		if (!this.isValidDate(control.value)) {
+			return { date: true };
+		}
+		// Check min and max
+		if (this.min() && isBefore(control.value, this.min())) {
+			return { min: true };
+		} else if (this.max() && isAfter(control.value, this.max())) {
+			return { max: true };
+		}
+		// Everything is valid
+		return null;
 	}
 
 	writeValue(date: Date): void {
 		if (date) {
-			this.selectedDate.set(startOfDay(date));
-			this.currentDate.set(startOfDay(date));
+			const start = startOfDay(date);
+			this.dateFromWriteValue.set(start);
+			this.selectedDate.set(start);
+			this.currentDate.set(start);
 		}
 	}
 

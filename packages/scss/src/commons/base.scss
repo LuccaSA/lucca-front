@@ -79,6 +79,12 @@
 			}
 		}
 
+		button {
+			&:focus-visible {
+				@include a11y.focusVisible();
+			}
+		}
+
 		strong,
 		b {
 			font-weight: 600;

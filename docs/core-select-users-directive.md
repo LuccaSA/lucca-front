@@ -54,24 +54,18 @@ Il est possible de modifier la source de données utilisée par le composant. Po
 
 ```ts
 import { Directive, forwardRef, inject } from '@angular/core';
-import { LuCoreSelectUsersDirective } from '@lucca-front/ng/core-select/user';
+import { LuCoreSelectUsersDirective, provideCoreSelectUsersContext } from '@lucca-front/ng/core-select/user';
 import { MAGIC_PAGE_SIZE } from '@lucca-front/ng/core-select/api';
 import { Observable, map } from 'rxjs';
 
 import { Person } from '../models';
 import { PersonService } from '../services';
 
-
 @Directive({
   selector: '[appPersons]',
   exportAs: 'appPersons',
   standalone: true,
-  providers: [
-    {
-      provide: LuCoreSelectUsersDirective,
-      useExisting: forwardRef(() => PersonsDirective),
-    },
-  ],
+  providers: [provideCoreSelectUsersContext(() => PersonsDirective)],
 })
 export class PersonsDirective extends LuCoreSelectUsersDirective<Person> {
   #personsService = inject(PersonService);

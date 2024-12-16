@@ -1,5 +1,6 @@
 import { NgIf, NgTemplateOutlet } from '@angular/common';
-import { booleanAttribute, Component, computed, contentChildren, effect, forwardRef, inject, input, model, OnDestroy, Renderer2, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, Component, computed, contentChildren, effect, forwardRef, inject, input, model, OnDestroy, Renderer2, signal, ViewEncapsulation } from '@angular/core';
+import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { AbstractControl, NgControl, ReactiveFormsModule, RequiredValidator, Validators } from '@angular/forms';
 import { SafeHtml } from '@angular/platform-browser';
 import { getIntl, IntlParamsPipe, LuClass, PortalContent, PortalDirective, ɵeffectWithDeps } from '@lucca-front/ng/core';
@@ -7,12 +8,11 @@ import { IconComponent } from '@lucca-front/ng/icon';
 import { InlineMessageComponent, InlineMessageState } from '@lucca-front/ng/inline-message';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 import { BehaviorSubject, merge, switchMap } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { FormFieldSize } from './form-field-size';
 import { FORM_FIELD_INSTANCE } from './form-field.token';
 import { LU_FORM_FIELD_TRANSLATIONS } from './form-field.translate';
 import { InputDirective } from './input.directive';
-import { toObservable, toSignal } from '@angular/core/rxjs-interop';
-import { map } from 'rxjs/operators';
 
 let nextId = 0;
 
@@ -131,7 +131,7 @@ export class FormFieldComponent implements OnDestroy {
 		return this.#inputs;
 	}
 
-	id: string;
+	id = signal<string>('');
 
 	ready$ = new BehaviorSubject<boolean>(false);
 
@@ -183,7 +183,7 @@ export class FormFieldComponent implements OnDestroy {
 				this.#renderer.setAttribute(input.host.nativeElement, 'id', inputId);
 			});
 		// We're using the id from the first input available
-		this.id = this.#inputs[0].host.nativeElement.id;
+		this.id.set(this.#inputs[0].host.nativeElement.id);
 		this.updateAria();
 		this.ready$.next(true);
 	}
@@ -196,8 +196,8 @@ export class FormFieldComponent implements OnDestroy {
 				this.#renderer.setAttribute(input.host.nativeElement, 'aria-describedby', `${input.host.nativeElement.id}-message`);
 			}
 		});
-		if (this.id && !this.#ariaLabelledBy.includes(`${this.id}-label`)) {
-			this.addLabelledBy(`${this.id}-label`);
+		if (this.id() && !this.#ariaLabelledBy.includes(`${this.id()}-label`)) {
+			this.addLabelledBy(`${this.id()}-label`);
 		}
 	}
 

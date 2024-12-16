@@ -41,7 +41,7 @@ export class LuDepartmentFeederComponent extends ALuTreeOptionOperator<ILuDepart
 	}
 
 	@Input() set filters(filters: string[]) {
-		this._service.filters = filters;
+		this._service.filters = filters ?? [];
 	}
 
 	constructor(
