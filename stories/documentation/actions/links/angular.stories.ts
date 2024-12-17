@@ -16,12 +16,12 @@ export default {
 
 	render: (args) => {
 		const { label, disabled, external, href, routerLink, ...inputs } = args;
-		const disable = disabled ? 'disabled' : '';
-		const externe = external ? 'external' : '';
+		const disable = disabled ? ' disabled' : '';
+		const externe = external ? ' external' : '';
 
 		return {
-			template: `lorem <a href="${href}" luLink ${externe} ${disable}>${label}</a> dolor<br />
-lorem <a [luLink]="'${routerLink}'" ${externe} ${disable}>${label}</a> dolor`,
+			template: `<a href="${href}" luLink${externe}${disable}>${label}</a><br />
+<a [luLink]="'${routerLink}'"${externe}${disable}>${label}</a>`,
 		};
 	},
 	argTypes: {
@@ -45,7 +45,7 @@ lorem <a [luLink]="'${routerLink}'" ${externe} ${disable}>${label}</a> dolor`,
 
 export const Basic: StoryObj = {
 	args: {
-		label: `ipsum`,
+		label: `Text link`,
 		href: `https://www.example.org`,
 		routerLink: './#example',
 		disabled: false,
