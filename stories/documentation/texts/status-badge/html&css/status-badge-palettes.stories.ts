@@ -8,7 +8,10 @@ export default {
 } as Meta;
 
 function getTemplate(args: StatusBadgePalettesStory): string {
-	return `<div class="statusBadge palette-product">Status</div><div class="statusBadge palette-success">Status</div><div class="statusBadge palette-warning">Status</div><div class="statusBadge palette-error">Status</div>`;
+	return `<div class="statusBadge palette-product">Status</div>
+<div class="statusBadge palette-success">Status</div>
+<div class="statusBadge palette-warning">Status</div>
+<div class="statusBadge palette-error">Status</div>`;
 }
 
 const Template: StoryFn<StatusBadgePalettesStory> = (args) => ({

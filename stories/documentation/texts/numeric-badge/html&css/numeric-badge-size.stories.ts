@@ -8,7 +8,9 @@ export default {
 } as Meta;
 
 function getTemplate(args: NumericBadgeSizeStory): string {
-	return `<span class="numericBadge">7</span><span class="numericBadge mod-S">7</span><span class="numericBadge mod-XS">7</span>`;
+	return `<span class="numericBadge">7</span>
+<span class="numericBadge mod-S">7</span>
+<span class="numericBadge mod-XS">7</span>`;
 }
 
 const Template: StoryFn<NumericBadgeSizeStory> = (args) => ({
