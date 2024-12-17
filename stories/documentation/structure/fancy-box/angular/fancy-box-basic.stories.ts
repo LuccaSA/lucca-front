@@ -25,16 +25,19 @@ export default {
 			control: {
 				type: 'text',
 			},
+			description: 'URL',
 		},
 		backgroundRight: {
 			control: {
 				type: 'text',
 			},
+			description: 'URL',
 		},
 		foreground: {
 			control: {
 				type: 'text',
 			},
+			description: 'URL',
 		},
 	},
 } as Meta;
@@ -71,7 +74,7 @@ const Template: StoryFn<FancyBoxBasicStory> = (args) => ({
 
 export const Basic = Template.bind({});
 Basic.args = {
-	content: 'Lorem ipsum dolor sit amet.<br />Lorem ipsum dolor sit amet.<br />Lorem ipsum dolor sit amet.<br />Lorem ipsum dolor sit amet.',
+	content: 'Fancy box content',
 	backgroundLeft: '',
 	backgroundRight: '',
 	foreground: '',

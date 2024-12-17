@@ -1,31 +1,14 @@
 import { Meta, StoryFn } from '@storybook/angular';
 
-interface StatusBadgeBasicStory {
-	palette: string;
-	l: boolean;
-}
+interface StatusBadgeBasicStory {}
 
 export default {
-	title: 'Documentation/Texts/StatusBadge/HTML & CSS',
-	argTypes: {
-		palette: {
-			options: ['', 'palette-product', 'palette-success', 'palette-warning', 'palette-error'],
-			control: {
-				type: 'select',
-			},
-		},
-		l: {
-			control: {
-				type: 'boolean',
-			},
-			description: '[v16.2] Taille : Large',
-		},
-	},
+	title: 'Documentation/Texts/StatusBadge/HTML & CSS/Basic',
+	argTypes: {},
 } as Meta;
 
 function getTemplate(args: StatusBadgeBasicStory): string {
-	const l = args.l ? `mod-L` : '';
-	return `<div class="statusBadge ${l} ${args.palette}">Status</div>`;
+	return `<div class="statusBadge">Status</div>`;
 }
 
 const Template: StoryFn<StatusBadgeBasicStory> = (args) => ({
@@ -34,4 +17,4 @@ const Template: StoryFn<StatusBadgeBasicStory> = (args) => ({
 });
 
 export const Basic = Template.bind({});
-Basic.args = { palette: '', l: false };
+Basic.args = {};

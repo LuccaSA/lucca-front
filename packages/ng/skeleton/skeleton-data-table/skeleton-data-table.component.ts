@@ -16,7 +16,7 @@ export class SkeletonDataTableComponent {
 	cols = input<number>(5);
 	colsNumber = computed<unknown[]>(() => new Array(this.cols()));
 
-	rows = input<number>(10);
+	rows = input<number>(8);
 	rowsNumber = computed<unknown[]>(() => new Array(this.rows()));
 
 	getRandomPercent = (min: number = 33, max: number = 66): string => `${Math.floor(Math.random() * (max - min) + min).toString()}%`;

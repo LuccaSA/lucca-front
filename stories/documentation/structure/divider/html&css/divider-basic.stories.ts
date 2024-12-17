@@ -80,7 +80,7 @@ const Template: StoryFn<DividerBasicStory> = (args) => ({
 
 export const Basic = Template.bind({});
 Basic.args = {
-	content: 'Lorem ipsum dolor',
+	content: 'Text',
 	size: '',
 	role: false,
 	icon: false,
