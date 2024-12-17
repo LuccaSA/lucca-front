@@ -14,14 +14,7 @@ function getTemplate(args: QuickActionsStory): string {
 			<tr class="dataTable-head-row">
 				<th class="dataTable-head-row-cell">Label</th>
 				<th class="dataTable-head-row-cell">Label</th>
-				<th class="dataTable-head-row-cell mod-actions">
-					<button class="button" type="button">
-						<span aria-hidden="true" class="lucca-icon icon-officePen"></span><span class="u-mask">Edit</span>
-					</button>
-					<button class="button" type="button">
-						<span aria-hidden="true" class="lucca-icon icon-trashDelete"></span><span class="u-mask">Delete</span>
-					</button>
-				</th>
+				<th class="dataTable-head-row-cell mod-alignRight">Label</th>
 			</tr>
 		</thead>
 		<tbody class="dataTable-body">

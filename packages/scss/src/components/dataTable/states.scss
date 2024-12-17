@@ -1,11 +1,7 @@
-@mixin collapsedRow {
-	.dataTable-body-row {
-		&.is-collapsed {
-			display: none;
-		}
-	}
+@mixin collapsed {
+	--components-dataTable-row-display: none;
+}
 
-	.dataTable-body-row-cell-carret[aria-expanded='false'] .lucca-icon {
-		transform: rotate(180deg);
-	}
+@mixin expanded {
+	--components-dataTable-expand-rotation: 0deg;
 }

@@ -33,7 +33,7 @@
 </section>
 
 <section class="contentSection">
-	<h2>Filter</h2>
+	<h2>Sort</h2>
 	<div class="dataTableWrapper">
 		<table class="dataTable">
 			<thead class="dataTable-head">
@@ -84,7 +84,7 @@
 </section>
 
 <section class="contentSection">
-	<h2>Alignement horizontal</h2>
+	<h2>Horizontal alignement</h2>
 	<div class="dataTableWrapper">
 		<table class="dataTable">
 			<thead class="dataTable-head">
@@ -111,7 +111,7 @@
 </section>
 
 <section class="contentSection">
-	<h2>Alignement vertical</h2>
+	<h2>Vertical alignement</h2>
 	<div class="dataTableWrapper">
 		<table class="dataTable mod-alignTop">
 			<thead class="dataTable-head">
@@ -135,107 +135,128 @@
 </section>
 
 <section class="contentSection">
-	<h2>Lignes sélectionnables</h2>
-	<p>📖 Ajouter form à la guideline.</p>
-	<div class="dataTableWrapper">
-		<table class="dataTable">
-			<thead class="dataTable-head">
-				<tr class="dataTable-head-row mod-selectable">
-					<th class="dataTable-head-row-cell">
-						<span class="checkboxField">
-							<input type="checkbox" class="checkboxField-input" id="CBall" />
-							<span class="checkboxField-icon" aria-hidden="true"><span class="checkboxField-icon-check"></span></span>
-						</span>
-						<label class="u-mask" for="CBall">Label</label>
-					</th>
-					<th class="dataTable-head-row-cell">Label</th>
-					<th class="dataTable-head-row-cell">Label</th>
-					<th class="dataTable-head-row-cell">Label</th>
-				</tr>
-			</thead>
-			<tbody class="dataTable-body">
-				<tr class="dataTable-body-row mod-selectable">
-					<td class="dataTable-body-row-cell">
-						<span class="checkboxField">
-							<input type="checkbox" class="checkboxField-input" id="CB1" checked />
-							<span class="checkboxField-icon" aria-hidden="true"><span class="checkboxField-icon-check"></span></span>
-						</span>
-						<label class="u-mask" for="CB1">Label</label>
-					</td>
-					<td class="dataTable-body-row-cell">Text</td>
-					<td class="dataTable-body-row-cell">Text</td>
-					<td class="dataTable-body-row-cell">Text</td>
-				</tr>
-				<tr class="dataTable-body-row mod-selectable">
-					<td class="dataTable-body-row-cell">
-						<span class="checkboxField">
-							<input type="checkbox" class="checkboxField-input" id="CB2" />
-							<span class="checkboxField-icon" aria-hidden="true"><span class="checkboxField-icon-check"></span></span>
-						</span>
-						<label class="u-mask" for="CB2">Label</label>
-					</td>
-					<td class="dataTable-body-row-cell">Text</td>
-					<td class="dataTable-body-row-cell">Text</td>
-					<td class="dataTable-body-row-cell">Text</td>
-				</tr>
-			</tbody>
-		</table>
-	</div>
+	<h2>Selectable lines</h2>
+	<form action="#">
+		<div class="dataTableWrapper">
+			<table class="dataTable">
+				<thead class="dataTable-head">
+					<tr class="dataTable-head-row mod-selectable">
+						<th class="dataTable-head-row-cell">
+							<span class="checkboxField">
+								<input type="checkbox" class="checkboxField-input" id="CBall" />
+								<span class="checkboxField-icon" aria-hidden="true"><span class="checkboxField-icon-check"></span></span>
+							</span>
+							<label class="u-mask" for="CBall">Label</label>
+						</th>
+						<th class="dataTable-head-row-cell">Label</th>
+						<th class="dataTable-head-row-cell">Label</th>
+						<th class="dataTable-head-row-cell">Label</th>
+					</tr>
+				</thead>
+				<tbody class="dataTable-body">
+					<tr class="dataTable-body-row mod-selectable">
+						<td class="dataTable-body-row-cell">
+							<span class="checkboxField">
+								<input type="checkbox" class="checkboxField-input" id="CB1" checked />
+								<span class="checkboxField-icon" aria-hidden="true"><span class="checkboxField-icon-check"></span></span>
+							</span>
+							<label class="u-mask" for="CB1">Label</label>
+						</td>
+						<td class="dataTable-body-row-cell">Text</td>
+						<td class="dataTable-body-row-cell">Text</td>
+						<td class="dataTable-body-row-cell">Text</td>
+					</tr>
+					<tr class="dataTable-body-row mod-selectable">
+						<td class="dataTable-body-row-cell">
+							<span class="checkboxField">
+								<input type="checkbox" class="checkboxField-input" id="CB2" />
+								<span class="checkboxField-icon" aria-hidden="true"><span class="checkboxField-icon-check"></span></span>
+							</span>
+							<label class="u-mask" for="CB2">Label</label>
+						</td>
+						<td class="dataTable-body-row-cell">Text</td>
+						<td class="dataTable-body-row-cell">Text</td>
+						<td class="dataTable-body-row-cell">Text</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</form>
 </section>
 
 <section class="contentSection">
 	<h2>Editable</h2>
-	<div class="dataTableWrapper">
-		<table class="dataTable">
-			<thead class="dataTable-head">
-				<tr class="dataTable-head-row">
-					<th class="dataTable-head-row-cell">Label</th>
-					<th class="dataTable-head-row-cell">Label</th>
-					<th class="dataTable-head-row-cell">Label</th>
-				</tr>
-			</thead>
-			<tbody class="dataTable-body">
-				<tr class="dataTable-body-row">
-					<td class="dataTable-body-row-cell">Text</td>
-					<td class="dataTable-body-row-cell">Text</td>
-					<td class="dataTable-body-row-cell mod-editable">
-						<div class="form-field">
-							<label class="formLabel u-mask" id="IDlabel1" for="ID1">Label</label>
-							<div class="textField">
-								<span class="textField-suffix" id="IDsuffix1">
-									<span class="textField-label-suffix-item">€</span>
-								</span>
-								<div class="textField-input">
-									<input value="Label" type="text" id="ID1" class="textField-input-value" aria-labelledby="IDlabel1 IDsuffix1" />
+	<form action="#">
+		<div class="dataTableWrapper">
+			<table class="dataTable">
+				<thead class="dataTable-head">
+					<tr class="dataTable-head-row">
+						<th class="dataTable-head-row-cell">Label</th>
+						<th class="dataTable-head-row-cell mod-alignRight">Label</th>
+						<th class="dataTable-head-row-cell mod-alignRight">Label</th>
+					</tr>
+				</thead>
+				<tbody class="dataTable-body">
+					<tr class="dataTable-body-row">
+						<td class="dataTable-body-row-cell">Text</td>
+						<td class="dataTable-body-row-cell mod-alignRight mod-editable">
+							<div class="form-field">
+								<label class="formLabel u-mask" id="IDlabel0" for="ID0">Label</label>
+								<div class="textField mod-valueAlignRight">
+									<div class="textField-input">
+										<input value="Label" type="text" id="ID0" class="textField-input-value" aria-labelledby="IDlabel0" />
+									</div>
 								</div>
 							</div>
-						</div>
-					</td>
-				</tr>
-				<tr class="dataTable-body-row">
-					<td class="dataTable-body-row-cell">Text</td>
-					<td class="dataTable-body-row-cell">Text</td>
-					<td class="dataTable-body-row-cell mod-editable">
-						<div class="form-field">
-							<label class="formLabel u-mask" id="IDlabel2" for="ID2">Label</label>
-							<div class="textField">
-								<span class="textField-suffix" id="IDsuffix2">
-									<span class="textField-label-suffix-item">€</span>
-								</span>
-								<div class="textField-input">
-									<input value="Label" type="text" id="ID2" class="textField-input-value" aria-labelledby="IDlabel2 IDsuffix2" />
+						</td>
+						<td class="dataTable-body-row-cell mod-alignRight mod-editable">
+							<div class="form-field">
+								<label class="formLabel u-mask" id="IDlabel1" for="ID1">Label</label>
+								<div class="textField mod-valueAlignRight">
+									<span class="textField-suffix" id="IDsuffix1">
+										<span class="textField-label-suffix-item">€</span>
+									</span>
+									<div class="textField-input">
+										<input value="Label" type="text" id="ID1" class="textField-input-value" aria-labelledby="IDlabel1 IDsuffix1" />
+									</div>
 								</div>
 							</div>
-						</div>
-					</td>
-				</tr>
-			</tbody>
-		</table>
-	</div>
+						</td>
+					</tr>
+					<tr class="dataTable-body-row">
+						<td class="dataTable-body-row-cell">Text</td>
+						<td class="dataTable-body-row-cell mod-alignRight mod-editable">
+							<div class="form-field">
+								<label class="formLabel u-mask" id="IDlabel2" for="ID2">Label</label>
+								<div class="textField mod-valueAlignRight">
+									<div class="textField-input">
+										<input value="Label" type="text" id="ID2" class="textField-input-value" aria-labelledby="IDlabel2" />
+									</div>
+								</div>
+							</div>
+						</td>
+						<td class="dataTable-body-row-cell mod-alignRight mod-editable">
+							<div class="form-field">
+								<label class="formLabel u-mask" id="IDlabel3" for="ID3">Label</label>
+								<div class="textField mod-valueAlignRight">
+									<span class="textField-suffix" id="IDsuffix3">
+										<span class="textField-label-suffix-item">€</span>
+									</span>
+									<div class="textField-input">
+										<input value="Label" type="text" id="ID3" class="textField-input-value" aria-labelledby="IDlabel3 IDsuffix3" />
+									</div>
+								</div>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</form>
 </section>
 
 <section class="contentSection">
-	<h2>Arborescence</h2>
+	<h2>Tree</h2>
 	<div class="dataTableWrapper">
 		<table class="dataTable">
 			<thead class="dataTable-head">
@@ -248,39 +269,52 @@
 			<tbody class="dataTable-body">
 				<tr class="dataTable-body-row">
 					<td class="dataTable-body-row-cell mod-tree">
-						<button type="button" class="button dataTable-body-row-cell-expand" aria-expanded="true">
-							<span aria-hidden="true" class="lucca-icon icon-arrowChevronTop"></span
-							><span class="u-mask">Afficher 2 lignes supplémentaire</span>
-						</button>
-						Text
+						<div class="dataTable-body-row-cell-expand">
+							<button type="button" class="button dataTable-body-row-cell-expand-button" aria-expanded="true">
+								<span aria-hidden="true" class="lucca-icon icon-arrowChevronTop"></span
+								><span class="u-mask">Afficher 2 lignes supplémentaires</span>
+							</button>
+							Text
+						</div>
 					</td>
 					<td class="dataTable-body-row-cell">Text</td>
 					<td class="dataTable-body-row-cell">Text</td>
 				</tr>
 				<tr class="dataTable-body-row">
 					<td class="dataTable-body-row-cell mod-tree" [attr.style]="'--components-dataTable-treeLevel: 2'">
-						<button type="button" class="button dataTable-body-row-cell-expand" aria-expanded="true">
-							<span aria-hidden="true" class="lucca-icon icon-arrowChevronTop"></span
-							><span class="u-mask">Afficher 2 lignes supplémentaire</span>
-						</button>
-						Text
+						<div class="dataTable-body-row-cell-expand">
+							<button type="button" class="button dataTable-body-row-cell-expand-button" aria-expanded="false">
+								<span aria-hidden="true" class="lucca-icon icon-arrowChevronTop"></span
+								><span class="u-mask">Afficher 1 ligne supplémentaire</span>
+							</button>
+							Text
+						</div>
 					</td>
 					<td class="dataTable-body-row-cell">Text</td>
 					<td class="dataTable-body-row-cell">Text</td>
 				</tr>
-				<tr class="dataTable-body-row">
-					<td class="dataTable-body-row-cell mod-tree" [attr.style]="'--components-dataTable-treeLevel: 3'">Text</td>
+				<tr class="dataTable-body-row is-collapsed">
+					<td class="dataTable-body-row-cell mod-tree" [attr.style]="'--components-dataTable-treeLevel: 2'">Text</td>
 					<td class="dataTable-body-row-cell">Text</td>
 					<td class="dataTable-body-row-cell">Text</td>
 				</tr>
+			</tbody>
+			<tbody class="dataTable-body">
 				<tr class="dataTable-body-row">
 					<td class="dataTable-body-row-cell mod-tree">
-						<button type="button" class="button dataTable-body-row-cell-expand" aria-expanded="false">
-							<span aria-hidden="true" class="lucca-icon icon-arrowChevronTop"></span
-							><span class="u-mask">Afficher 2 lignes supplémentaire</span>
-						</button>
-						Text
+						<div class="dataTable-body-row-cell-expand">
+							<button type="button" class="button dataTable-body-row-cell-expand-button" aria-expanded="false">
+								<span aria-hidden="true" class="lucca-icon icon-arrowChevronTop"></span
+								><span class="u-mask">Afficher 1 ligne supplémentaire</span>
+							</button>
+							Text
+						</div>
 					</td>
+					<td class="dataTable-body-row-cell">Text</td>
+					<td class="dataTable-body-row-cell">Text</td>
+				</tr>
+				<tr class="dataTable-body-row">
+					<td class="dataTable-body-row-cell mod-tree" [attr.style]="'--components-dataTable-treeLevel: 1'">Text</td>
 					<td class="dataTable-body-row-cell">Text</td>
 					<td class="dataTable-body-row-cell">Text</td>
 				</tr>
@@ -291,7 +325,6 @@
 
 <section class="contentSection">
 	<h2>Group</h2>
-	<p>🚧 Flex</p>
 	<div class="dataTableWrapper">
 		<table class="dataTable">
 			<thead class="dataTable-head">
@@ -304,12 +337,14 @@
 			<tbody class="dataTable-body">
 				<tr class="dataTable-body-row mod-group">
 					<td class="dataTable-body-row-cell" colspan="3">
-						<button type="button" class="button dataTable-body-row-cell-expand" aria-expanded="false">
-							<span aria-hidden="true" class="lucca-icon icon-arrowChevronTop"></span
-							><span class="u-mask">Afficher 2 lignes supplémentaires</span>
-						</button>
-						<span class="dataTable-body-row-cell-groupLabel">Text</span>
-						<span class="numericBadge">7</span>
+						<div class="dataTable-body-row-cell-expand">
+							<button type="button" class="button dataTable-body-row-cell-expand-button" aria-expanded="false">
+								<span aria-hidden="true" class="lucca-icon icon-arrowChevronTop"></span
+								><span class="u-mask">Afficher 2 lignes supplémentaires</span>
+							</button>
+							<span class="dataTable-body-row-cell-expand-label">Text</span>
+							<span class="numericBadge">7</span>
+						</div>
 					</td>
 				</tr>
 				<tr class="dataTable-body-row">
@@ -326,12 +361,14 @@
 			<tbody class="dataTable-body">
 				<tr class="dataTable-body-row mod-group">
 					<td class="dataTable-body-row-cell" colspan="3">
-						<button type="button" class="button dataTable-body-row-cell-expand" aria-expanded="false">
-							<span aria-hidden="true" class="lucca-icon icon-arrowChevronTop"></span
-							><span class="u-mask">Afficher 2 lignes supplémentaire</span>
-						</button>
-						<span class="dataTable-body-row-cell-groupLabel">Text</span>
-						<span class="numericBadge">7</span>
+						<div class="dataTable-body-row-cell-expand">
+							<button type="button" class="button dataTable-body-row-cell-expand-button" aria-expanded="true">
+								<span aria-hidden="true" class="lucca-icon icon-arrowChevronTop"></span
+								><span class="u-mask">Afficher 2 lignes supplémentaires</span>
+							</button>
+							<span class="dataTable-body-row-cell-expand-label">Text</span>
+							<span class="numericBadge">7</span>
+						</div>
 					</td>
 				</tr>
 				<tr class="dataTable-body-row">
@@ -351,7 +388,6 @@
 
 <section class="contentSection">
 	<h2>Cell border</h2>
-	<p>🚨 Not compatible with sticky header.</p>
 	<div class="dataTableWrapper">
 		<table class="dataTable mod-cellBorder">
 			<thead class="dataTable-head">
@@ -385,8 +421,41 @@
 </section>
 
 <section class="contentSection">
+	<h2>Cell border with sticky header</h2>
+	<div class="dataTableWrapper" style="height: 10rem">
+		<table class="dataTable mod-cellBorder mod-stickyHeader">
+			<thead class="dataTable-head">
+				<tr class="dataTable-head-row">
+					<th class="dataTable-head-row-cell" rowspan="2">Label</th>
+					<th class="dataTable-head-row-cell" colspan="2">Label</th>
+				</tr>
+				<tr class="dataTable-head-row">
+					<th class="dataTable-head-row-cell">Label</th>
+					<th class="dataTable-head-row-cell">Label</th>
+				</tr>
+			</thead>
+			<tbody class="dataTable-body">
+				<tr class="dataTable-body-row">
+					<td class="dataTable-body-row-cell">Text</td>
+					<td class="dataTable-body-row-cell">Text</td>
+					<td class="dataTable-body-row-cell">Text</td>
+				</tr>
+				<tr class="dataTable-body-row">
+					<td class="dataTable-body-row-cell">Text</td>
+					<td class="dataTable-body-row-cell">Text</td>
+					<td class="dataTable-body-row-cell" rowspan="2">Text</td>
+				</tr>
+				<tr class="dataTable-body-row">
+					<td class="dataTable-body-row-cell">Text</td>
+					<td class="dataTable-body-row-cell">Text</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</section>
+
+<section class="contentSection">
 	<h2>Quick actions</h2>
-	<p>🚧 Touch devices</p>
 	<div class="dataTableWrapper">
 		<table class="dataTable">
 			<thead class="dataTable-head">
@@ -608,7 +677,7 @@
 </section>
 
 <section class="contentSection">
-	<h2>Sticky column</h2>
+	<h2>First sticky column</h2>
 	<div class="dataTableWrapper" style="width: 30rem">
 		<table class="dataTable">
 			<thead class="dataTable-head">
@@ -619,7 +688,7 @@
 					<th class="dataTable-head-row-cell">Head cell</th>
 					<th class="dataTable-head-row-cell">Head cell</th>
 					<th class="dataTable-head-row-cell">Head cell</th>
-					<th class="dataTable-head-row-cell mod-stickyColumn">Head cell</th>
+					<th class="dataTable-head-row-cell">Head cell</th>
 				</tr>
 			</thead>
 			<tbody class="dataTable-body">
@@ -630,7 +699,7 @@
 					<td class="dataTable-body-row-cell">Body cell</td>
 					<td class="dataTable-body-row-cell">Body cell</td>
 					<td class="dataTable-body-row-cell">Body cell</td>
-					<td class="dataTable-body-row-cell mod-stickyColumn">Body cell</td>
+					<td class="dataTable-body-row-cell">Body cell</td>
 				</tr>
 				<tr class="dataTable-body-row">
 					<td class="dataTable-body-row-cell mod-stickyColumn">Body cell</td>
@@ -639,7 +708,7 @@
 					<td class="dataTable-body-row-cell">Body cell</td>
 					<td class="dataTable-body-row-cell">Body cell</td>
 					<td class="dataTable-body-row-cell">Body cell</td>
-					<td class="dataTable-body-row-cell mod-stickyColumn">Body cell</td>
+					<td class="dataTable-body-row-cell">Body cell</td>
 				</tr>
 				<tr class="dataTable-body-row">
 					<td class="dataTable-body-row-cell mod-stickyColumn">Body cell</td>
@@ -648,7 +717,7 @@
 					<td class="dataTable-body-row-cell">Body cell</td>
 					<td class="dataTable-body-row-cell">Body cell</td>
 					<td class="dataTable-body-row-cell">Body cell</td>
-					<td class="dataTable-body-row-cell mod-stickyColumn">Body cell</td>
+					<td class="dataTable-body-row-cell">Body cell</td>
 				</tr>
 				<tr class="dataTable-body-row">
 					<td class="dataTable-body-row-cell mod-stickyColumn">Body cell</td>
@@ -657,7 +726,7 @@
 					<td class="dataTable-body-row-cell">Body cell</td>
 					<td class="dataTable-body-row-cell">Body cell</td>
 					<td class="dataTable-body-row-cell">Body cell</td>
-					<td class="dataTable-body-row-cell mod-stickyColumn">Body cell</td>
+					<td class="dataTable-body-row-cell">Body cell</td>
 				</tr>
 			</tbody>
 		</table>
@@ -665,7 +734,7 @@
 </section>
 
 <section class="contentSection">
-	<h2>Sticky column and sticky header</h2>
+	<h2>First and last sticky column with sticky header</h2>
 	<div class="dataTableWrapper" style="width: 30rem; height: 10rem">
 		<table class="dataTable mod-stickyHeader">
 			<thead class="dataTable-head">
@@ -722,8 +791,7 @@
 </section>
 
 <section class="contentSection">
-	<h2>Sticky columns</h2>
-	<p>🚨 Fixed layout and fixed width for sticky columns are mandatory.</p>
+	<h2>Multiple sticky columns</h2>
 	<div class="dataTableWrapper" style="width: 30rem">
 		<table class="dataTable mod-layoutFixed" [attr.style]="'--dataTable-layoutFixed-width: 5.5rem'">
 			<thead class="dataTable-head">
@@ -949,6 +1017,83 @@
 						<td class="dataTable-body-row-cell">Body cell</td>
 						<td class="dataTable-body-row-cell">Body cell</td>
 						<td class="dataTable-body-row-cell">Body cell</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</section>
+
+<section class="contentSection">
+	<h2>Vertical and horizontal overflow with cell border, sticky header and sticky columns</h2>
+	<div class="dataTableWrapper" style="width: 30rem; height: 15rem">
+		<div class="dataTableShadows">
+			<table
+				class="dataTable mod-columnsOverflow mod-cellBorder mod-rowsOverflow mod-stickyHeader -is-firstColumnVisible -is-firstRowVisible -is-lastColumnVisible -is-lastRowVisible"
+			>
+				<thead class="dataTable-head">
+					<tr class="dataTable-head-row">
+						<th class="dataTable-head-row-cell mod-stickyColumn" rowspan="2">Head cell</th>
+						<th class="dataTable-head-row-cell">Head cell</th>
+						<th class="dataTable-head-row-cell" colspan="2">Head cell</th>
+						<th class="dataTable-head-row-cell">Head cell</th>
+						<th class="dataTable-head-row-cell">Head cell</th>
+						<th class="dataTable-head-row-cell mod-stickyColumn">Head cell</th>
+					</tr>
+					<tr class="dataTable-head-row">
+						<th class="dataTable-head-row-cell">Head cell</th>
+						<th class="dataTable-head-row-cell">Head cell</th>
+						<th class="dataTable-head-row-cell">Head cell</th>
+						<th class="dataTable-head-row-cell">Head cell</th>
+						<th class="dataTable-head-row-cell">Head cell</th>
+						<th class="dataTable-head-row-cell mod-stickyColumn">Head cell</th>
+					</tr>
+				</thead>
+				<tbody class="dataTable-body">
+					<tr class="dataTable-body-row">
+						<td class="dataTable-body-row-cell mod-stickyColumn">Body cell</td>
+						<td class="dataTable-body-row-cell">Body cell</td>
+						<td class="dataTable-body-row-cell">Body cell</td>
+						<td class="dataTable-body-row-cell">Body cell</td>
+						<td class="dataTable-body-row-cell">Body cell</td>
+						<td class="dataTable-body-row-cell">Body cell</td>
+						<td class="dataTable-body-row-cell mod-stickyColumn">Body cell</td>
+					</tr>
+					<tr class="dataTable-body-row">
+						<td class="dataTable-body-row-cell mod-stickyColumn">Body cell</td>
+						<td class="dataTable-body-row-cell">Body cell</td>
+						<td class="dataTable-body-row-cell">Body cell</td>
+						<td class="dataTable-body-row-cell">Body cell</td>
+						<td class="dataTable-body-row-cell">Body cell</td>
+						<td class="dataTable-body-row-cell">Body cell</td>
+						<td class="dataTable-body-row-cell mod-stickyColumn">Body cell</td>
+					</tr>
+					<tr class="dataTable-body-row">
+						<td class="dataTable-body-row-cell mod-stickyColumn">Body cell</td>
+						<td class="dataTable-body-row-cell">Body cell</td>
+						<td class="dataTable-body-row-cell">Body cell</td>
+						<td class="dataTable-body-row-cell">Body cell</td>
+						<td class="dataTable-body-row-cell">Body cell</td>
+						<td class="dataTable-body-row-cell">Body cell</td>
+						<td class="dataTable-body-row-cell mod-stickyColumn">Body cell</td>
+					</tr>
+					<tr class="dataTable-body-row">
+						<td class="dataTable-body-row-cell mod-stickyColumn">Body cell</td>
+						<td class="dataTable-body-row-cell">Body cell</td>
+						<td class="dataTable-body-row-cell">Body cell</td>
+						<td class="dataTable-body-row-cell">Body cell</td>
+						<td class="dataTable-body-row-cell">Body cell</td>
+						<td class="dataTable-body-row-cell">Body cell</td>
+						<td class="dataTable-body-row-cell mod-stickyColumn">Body cell</td>
+					</tr>
+					<tr class="dataTable-body-row">
+						<td class="dataTable-body-row-cell mod-stickyColumn">Body cell</td>
+						<td class="dataTable-body-row-cell">Body cell</td>
+						<td class="dataTable-body-row-cell">Body cell</td>
+						<td class="dataTable-body-row-cell">Body cell</td>
+						<td class="dataTable-body-row-cell">Body cell</td>
+						<td class="dataTable-body-row-cell">Body cell</td>
+						<td class="dataTable-body-row-cell mod-stickyColumn">Body cell</td>
 					</tr>
 				</tbody>
 			</table>
