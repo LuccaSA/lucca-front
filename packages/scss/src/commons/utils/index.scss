@@ -250,15 +250,6 @@
 	font-size: 0.66em !important;
 }
 
-// .u-comma is deprecated
-.u-comma {
-	&:not(:last-child) {
-		&::after {
-			content: ', ' !important;
-		}
-	}
-}
-
 .u-fontWeightRegular {
 	font-weight: 400 !important;
 }
