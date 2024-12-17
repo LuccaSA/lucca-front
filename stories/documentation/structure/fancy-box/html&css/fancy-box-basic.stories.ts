@@ -25,17 +25,19 @@ export default {
 			control: {
 				type: 'text',
 			},
+			description: 'URL injectée dans <code>--components-fancyBox-background-left</code>',
 		},
 		backgroundRight: {
 			control: {
 				type: 'text',
 			},
+			description: 'URL injectée dans <code>--components-fancyBox-background-right</code>',
 		},
 		foreground: {
 			control: {
 				type: 'text',
 			},
-			description: 'URL',
+			description: 'URL injectée dans <code>--components-fancyBox-foreground</code>',
 		},
 	},
 } as Meta;
