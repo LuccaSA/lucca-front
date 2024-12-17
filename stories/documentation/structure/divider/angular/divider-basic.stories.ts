@@ -35,7 +35,7 @@ export default {
 			control: {
 				type: 'boolean',
 			},
-			description: "A préciser que si le divider n'a pas de contenu (le contenu ne sera pas restitué)",
+			description: "À préciser que si le divider n’a pas de contenu (le contenu ne sera pas restitué)",
 		},
 		button: {
 			control: {
