@@ -41,10 +41,9 @@ $overflow: 'hidden', 'auto', 'visible', 'scroll';
 }
 
 @mixin spacings() {
-	$spacings: config.$spacings;
 	@each $boxModel in $boxModel {
 		@each $boxDirection in $boxDirection {
-			@each $key, $value in $spacings {
+			@each $key, $value in config.$spacings {
 				@if $boxModel != 'border' or $value == 0 {
 					@include spacing($boxModel, $boxDirection, $key, $value);
 				}
@@ -57,7 +56,7 @@ $overflow: 'hidden', 'auto', 'visible', 'scroll';
 	}
 
 	@each $gap in $gaps {
-		@each $key, $value in $spacings {
+		@each $key, $value in config.$spacings {
 			@include spacing($gap, $boxDirection: '', $key: $key, $value: $value);
 		}
 	}
