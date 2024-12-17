@@ -21,7 +21,7 @@ export default {
 
 		return {
 			template: `lorem <a href="${href}" luLink ${externe} ${disable}>${label}</a> dolor<br />
-			lorem <a [luLink]="'${routerLink}'" ${externe} ${disable}>${label}</a> dolor`,
+lorem <a [luLink]="'${routerLink}'" ${externe} ${disable}>${label}</a> dolor`,
 		};
 	},
 	argTypes: {
