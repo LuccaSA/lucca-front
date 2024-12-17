@@ -1,6 +1,5 @@
 @use 'sass:list';
 
-$importDeprecatedSpacings: true !default;
 $isNamespaced: false !default;
 
 $fontFamily: 'SourceSans' !default;
@@ -492,17 +491,6 @@ $spacings: (
 	'600': 3rem,
 	'700': 3.5rem,
 	'800': 4rem,
-) !default;
-
-$spacingsDeprecated: (
-	'0': 0,
-	XXS: 0.25rem,
-	XS: 0.5rem,
-	S: 1rem,
-	M: 1.5rem,
-	L: 2rem,
-	XL: 3rem,
-	XXL: 4rem,
 ) !default;
 
 $sizes: (

@@ -30,10 +30,6 @@
 	}
 
 	@include core.cssvars('breakpoints', config.$breakpoints, '-breakAt');
-	@if (config.$importDeprecatedSpacings) {
-		@include core.cssvars('spacings', config.$spacingsDeprecated);
-		--spacings-auto: auto;
-	}
 
 	@each $key, $map in config.$sizes {
 		@include core.cssvars('sizes-#{$key}', $map);

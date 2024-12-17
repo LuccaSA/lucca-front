@@ -1,8 +1,6 @@
 @use 'sass:list';
 
 @use '@lucca-front/icons/src/commons/core' as transform;
-
-@use '@lucca-front/scss/src/commons/config';
 @use '@lucca-front/scss/src/commons/core';
 
 @use '@lucca-front/scss/src/commons/utils/keyframe';
@@ -343,9 +341,6 @@
 }
 
 @include core.spacings;
-@if (config.$importDeprecatedSpacings) {
-	@include core.spacings($token: false);
-}
 @include core.sizes;
 @include core.borderRadius;
 @include core.palettes;
