@@ -77,6 +77,13 @@ function getTemplate(args: OverflowHorizontalStory): string {
 const Template: StoryFn<OverflowHorizontalStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
+	styles: [
+		`
+		.dataTable {
+			white-space: nowrap;
+		}
+		`,
+	],
 });
 
 export const OverflowHorizontal = Template.bind({});

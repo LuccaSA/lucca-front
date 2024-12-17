@@ -79,6 +79,13 @@ function getTemplate(args: OverflowBothStory): string {
 const Template: StoryFn<OverflowBothStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
+	styles: [
+		`
+		.dataTable {
+			white-space: nowrap;
+		}
+		`,
+	],
 });
 
 export const OverflowBoth = Template.bind({});

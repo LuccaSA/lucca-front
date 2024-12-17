@@ -66,6 +66,13 @@ function getTemplate(args: StickyHeaderColumnsStory): string {
 const Template: StoryFn<StickyHeaderColumnsStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
+	styles: [
+		`
+		.dataTable {
+			white-space: nowrap;
+		}
+		`,
+	],
 });
 
 export const StickyHeaderColumns = Template.bind({});

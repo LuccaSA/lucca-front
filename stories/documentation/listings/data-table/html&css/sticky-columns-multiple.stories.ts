@@ -66,6 +66,13 @@ function getTemplate(args: StickyColumnsMultipleStory): string {
 const Template: StoryFn<StickyColumnsMultipleStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
+	styles: [
+		`
+		.dataTable {
+			white-space: nowrap;
+		}
+		`,
+	],
 });
 
 export const StickyColumnsMultiple = Template.bind({});
