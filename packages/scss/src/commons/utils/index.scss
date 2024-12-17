@@ -272,15 +272,6 @@
 	font-family: var(--commons-font-family-cursive) !important;
 }
 
-@each $elevation in config.$elevations {
-	$index: list.index(config.$elevations, $elevation);
-
-	// .u-elevate* is deprecated
-	.u-elevate#{$index} {
-		box-shadow: var(--commons-elevations-elevation-#{$index});
-	}
-}
-
 @include core.classes('float', core.$float);
 @include core.classes('vertical-align', core.$verticalAlign);
 @include core.classes('white-space', core.$whiteSpace);
