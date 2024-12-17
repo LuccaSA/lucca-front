@@ -47,12 +47,15 @@
 
 	--commons-banner-height: 50px;
 	--commons-font-family: '#{config.$fontFamily}', Tahoma, sans-serif;
-	--commons-font-family-cursive: '#{config.$fontFamilyCursive}', cursive;
 	--commons-divider-width: 1px;
 	--commons-divider-style: solid;
 	--commons-divider-border: var(--commons-divider-width) var(--commons-divider-style) var(--commons-divider-color);
 	--commons-border-100: var(--palettes-neutral-100);
 	--commons-border-200: var(--palettes-neutral-200);
+
+	@if (config.$fontFamilyCursive) {
+		--commons-font-family-cursive: '#{config.$fontFamilyCursive}', cursive;
+	}
 
 	// Deprecated
 	--commons-background-base: var(--palettes-neutral-25);
