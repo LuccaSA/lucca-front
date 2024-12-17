@@ -1,41 +1,14 @@
 import { Meta, StoryFn } from '@storybook/angular';
 
-interface NumericBadgeBasicStory {
-	palette: string;
-	size: string;
-	loading: boolean;
-	value: string;
-}
+interface NumericBadgeBasicStory {}
 
 export default {
 	title: 'Documentation/Texts/NumericBadge/HTML & CSS/Basic',
-	argTypes: {
-		palette: {
-			options: ['', 'palette-product'],
-			control: {
-				type: 'radio',
-			},
-		},
-		size: {
-			options: ['', 'mod-S', 'mod-XS'],
-			control: {
-				type: 'radio',
-			},
-		},
-		loading: {
-			control: {
-				type: 'boolean',
-			},
-		},
-	},
+	argTypes: {},
 } as Meta;
 
 function getTemplate(args: NumericBadgeBasicStory): string {
-	const size = args.size ? ' ' + args.size : '';
-	const palette = args.palette ? args.palette : '';
-	const loading = args.loading ? 'is-loading' : '';
-	const hidden = args.loading ? 'aria-hidden="true"' : '';
-	return `<span class="numericBadge ${size} ${palette} ${loading}" ${hidden}>${args.value}</span>`;
+	return `<span class="numericBadge">7</span>`;
 }
 
 const Template: StoryFn<NumericBadgeBasicStory> = (args) => ({
@@ -44,4 +17,4 @@ const Template: StoryFn<NumericBadgeBasicStory> = (args) => ({
 });
 
 export const Basic = Template.bind({});
-Basic.args = { palette: '', size: '', loading: false, value: '7' };
+Basic.args = {};

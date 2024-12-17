@@ -28,6 +28,7 @@ export default {
 			control: {
 				type: 'boolean',
 			},
+			description: '[v19.1]',
 		},
 	},
 } as Meta;
