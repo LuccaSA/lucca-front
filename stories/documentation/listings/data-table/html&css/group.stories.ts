@@ -20,12 +20,14 @@ function getTemplate(args: GroupStory): string {
 		<tbody class="dataTable-body">
 			<tr class="dataTable-body-row mod-group">
 				<td class="dataTable-body-row-cell" colspan="3">
-					<button type="button" class="button dataTable-body-row-cell-expand" aria-expanded="false">
-						<span aria-hidden="true" class="lucca-icon icon-arrowChevronTop"></span
-						><span class="u-mask">Afficher 2 lignes supplémentaires</span>
-					</button>
-					<span class="dataTable-body-row-cell-groupLabel">Text</span>
-					<span class="numericBadge">7</span>
+					<div class="dataTable-body-row-cell-expand">
+						<button type="button" class="dataTable-body-row-cell-expand-button button" aria-expanded="false">
+							<span aria-hidden="true" class="lucca-icon icon-arrowChevronTop"></span
+							><span class="u-mask">Afficher 2 lignes supplémentaires</span>
+						</button>
+						<span class="dataTable-body-row-cell-expand-label">Text</span>
+						<span class="numericBadge">7</span>
+					</div>
 				</td>
 			</tr>
 			<tr class="dataTable-body-row">
@@ -42,12 +44,14 @@ function getTemplate(args: GroupStory): string {
 		<tbody class="dataTable-body">
 			<tr class="dataTable-body-row mod-group">
 				<td class="dataTable-body-row-cell" colspan="3">
-					<button type="button" class="button dataTable-body-row-cell-expand" aria-expanded="false">
-						<span aria-hidden="true" class="lucca-icon icon-arrowChevronTop"></span
-						><span class="u-mask">Afficher 2 lignes supplémentaire</span>
-					</button>
-					<span class="dataTable-body-row-cell-groupLabel">Text</span>
-					<span class="numericBadge">7</span>
+					<div class="dataTable-body-row-cell-expand">
+						<button type="button" class="dataTable-body-row-cell-expand-button button" aria-expanded="true">
+							<span aria-hidden="true" class="lucca-icon icon-arrowChevronTop"></span
+							><span class="u-mask">Afficher 2 lignes supplémentaires</span>
+						</button>
+						<span class="dataTable-body-row-cell-expand-label">Text</span>
+						<span class="numericBadge">7</span>
+					</div>
 				</td>
 			</tr>
 			<tr class="dataTable-body-row">

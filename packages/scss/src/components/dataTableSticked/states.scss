@@ -1,27 +1,15 @@
 @mixin firstColumnVisible {
-	&::before {
-		opacity: 0;
-	}
+	--components-dataTable-shadow-firstColumnOpacity: 0;
 }
 
 @mixin lastColumnVisible {
-	&::after {
-		opacity: 0;
-	}
+	--components-dataTable-shadow-lastColumnOpacity: 0;
 }
 
 @mixin firstRowVisible {
-	.dataTableShadows {
-		&::before {
-			opacity: 0;
-		}
-	}
+	--components-dataTable-shadow-firstRowOpacity: 0;
 }
 
 @mixin lastRowVisible {
-	.dataTableShadows {
-		&::after {
-			opacity: 0;
-		}
-	}
+	--components-dataTable-shadow-lastRowOpacity: 0;
 }

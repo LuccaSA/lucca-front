@@ -20,39 +20,52 @@ function getTemplate(args: TreeStory): string {
 		<tbody class="dataTable-body">
 			<tr class="dataTable-body-row">
 				<td class="dataTable-body-row-cell mod-tree">
-					<button type="button" class="button dataTable-body-row-cell-expand" aria-expanded="true">
-						<span aria-hidden="true" class="lucca-icon icon-arrowChevronTop"></span
-						><span class="u-mask">Afficher 2 lignes supplémentaire</span>
-					</button>
-					Text
+					<div class="dataTable-body-row-cell-expand">
+						<button type="button" class="dataTable-body-row-cell-expand-button button" aria-expanded="true">
+							<span aria-hidden="true" class="lucca-icon icon-arrowChevronTop"></span
+							><span class="u-mask">Afficher 2 lignes supplémentaires</span>
+						</button>
+						Text
+					</div>
 				</td>
 				<td class="dataTable-body-row-cell">Text</td>
 				<td class="dataTable-body-row-cell">Text</td>
 			</tr>
 			<tr class="dataTable-body-row">
 				<td class="dataTable-body-row-cell mod-tree" [attr.style]="'--components-dataTable-treeLevel: 2'">
-					<button type="button" class="button dataTable-body-row-cell-expand" aria-expanded="true">
-						<span aria-hidden="true" class="lucca-icon icon-arrowChevronTop"></span
-						><span class="u-mask">Afficher 2 lignes supplémentaire</span>
-					</button>
-					Text
+					<div class="dataTable-body-row-cell-expand">
+						<button type="button" class="dataTable-body-row-cell-expand-button button" aria-expanded="false">
+							<span aria-hidden="true" class="lucca-icon icon-arrowChevronTop"></span
+							><span class="u-mask">Afficher 1 ligne supplémentaire</span>
+						</button>
+						Text
+					</div>
 				</td>
 				<td class="dataTable-body-row-cell">Text</td>
 				<td class="dataTable-body-row-cell">Text</td>
 			</tr>
-			<tr class="dataTable-body-row">
-				<td class="dataTable-body-row-cell mod-tree" [attr.style]="'--components-dataTable-treeLevel: 3'">Text</td>
+			<tr class="dataTable-body-row is-collapsed">
+				<td class="dataTable-body-row-cell mod-tree" [attr.style]="'--components-dataTable-treeLevel: 2'">Text</td>
 				<td class="dataTable-body-row-cell">Text</td>
 				<td class="dataTable-body-row-cell">Text</td>
 			</tr>
+		</tbody>
+		<tbody class="dataTable-body">
 			<tr class="dataTable-body-row">
 				<td class="dataTable-body-row-cell mod-tree">
-					<button type="button" class="button dataTable-body-row-cell-expand" aria-expanded="false">
-						<span aria-hidden="true" class="lucca-icon icon-arrowChevronTop"></span
-						><span class="u-mask">Afficher 2 lignes supplémentaire</span>
-					</button>
-					Text
+					<div class="dataTable-body-row-cell-expand">
+						<button type="button" class="dataTable-body-row-cell-expand-button button" aria-expanded="false">
+							<span aria-hidden="true" class="lucca-icon icon-arrowChevronTop"></span
+							><span class="u-mask">Afficher 1 ligne supplémentaire</span>
+						</button>
+						Text
+					</div>
 				</td>
+				<td class="dataTable-body-row-cell">Text</td>
+				<td class="dataTable-body-row-cell">Text</td>
+			</tr>
+			<tr class="dataTable-body-row">
+				<td class="dataTable-body-row-cell mod-tree">Text</td>
 				<td class="dataTable-body-row-cell">Text</td>
 				<td class="dataTable-body-row-cell">Text</td>
 			</tr>

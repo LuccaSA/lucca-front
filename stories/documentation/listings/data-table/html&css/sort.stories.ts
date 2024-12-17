@@ -1,13 +1,13 @@
 import { Meta, StoryFn } from '@storybook/angular';
 
-interface FilterStory {}
+interface SortStory {}
 
 export default {
-	title: 'Documentation/Listings/Data table/HTML&CSS/Filter',
+	title: 'Documentation/Listings/Data table/HTML&CSS/Sort',
 	argTypes: {},
 } as Meta;
 
-function getTemplate(args: FilterStory): string {
+function getTemplate(args: SortStory): string {
 	return `<div class="dataTableWrapper">
 	<table class="dataTable">
 		<thead class="dataTable-head">
@@ -57,10 +57,10 @@ function getTemplate(args: FilterStory): string {
 </div>`;
 }
 
-const Template: StoryFn<FilterStory> = (args) => ({
+const Template: StoryFn<SortStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Filter = Template.bind({});
-Filter.args = {};
+export const Sort = Template.bind({});
+Sort.args = {};

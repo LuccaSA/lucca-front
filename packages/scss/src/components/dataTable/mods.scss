@@ -1,47 +1,49 @@
-@use '@lucca-front/scss/src/components/button/exports' as button;
-@use '@lucca-front/scss/src/components/title/exports' as title;
 @use '@lucca-front/scss/src/commons/config';
-@use '@lucca-front/icons/src/commons/utils/icon';
+
 @use '@lucca-front/scss/src/commons/utils/media';
 
+@use '@lucca-front/scss/src/components/button/exports' as button;
+@use '@lucca-front/scss/src/components/title/exports' as title;
+
 @mixin cellBorder {
-	.dataTable-head-row-cell,
-	.dataTable-body-row-cell,
-	.dataTable-foot-row-cell {
-		border: 1px solid var(--commons-border-200);
-	}
+	--components-dataTable-cell-shadow: 0 1px inset var(--commons-border-200), 1px 0 inset var(--commons-border-200);
 }
 
 @mixin alignTop {
-	.dataTable-body-row-cell {
-		vertical-align: top;
+	--components-dataTable-cell-verticalAlign: top;
+}
+
+@mixin buttonExpand {
+	--components-dataTable-tree-extraPadding: calc(1.5rem + var(--pr-t-spacings-100));
+
+	&:has(.dataTable-body-row-cell-expand-button.button) {
+		--components-dataTable-tree-extraPadding: 0rem; // unit is mandatory here
+	}
+
+	.dataTable-body-row-cell-expand-button.button {
+		@include button.S;
+		@include button.onlyIconS;
+		@include button.text;
+
+		--components-button-padding: var(--pr-t-spacings-25);
+		--components-button-color: var(--palettes-neutral-800);
 	}
 }
 
 @mixin group {
 	@include buttonExpand;
+
 	@include title.component;
 	@include title.h4;
 
-	background-color: var(--palettes-neutral-25);
+	--components-dataTable-cell-background: var(--palettes-neutral-25);
 }
 
 @mixin selectable {
-	.dataTable-head-row-cell,
-	.dataTable-body-row-cell,
-	.dataTable-foot-row-cell {
-		&:first-child {
-			padding-inline-end: var(--pr-t-spacings-100);
-			width: 2.5rem;
-		}
-	}
+	--components-dataTable-cellFirst-width: 2.5rem;
 
-	&:has(input[type='checkbox']:checked) {
-		.dataTable-head-row-cell,
-		.dataTable-body-row-cell,
-		.dataTable-foot-row-cell {
-			background-color: var(--palettes-product-50);
-		}
+	&:has(input:checked) {
+		--components-dataTable-cell-background: var(--palettes-product-50);
 	}
 }
 
@@ -50,58 +52,25 @@
 	.dataTable-body-row-cell,
 	.dataTable-foot-row-cell {
 		&:first-child {
-			padding-inline: var(--pr-t-spacings-50);
-			width: 1rem;
+			--components-dataTable-cellFirst-width: 2.5rem;
 
-			.dataTable-body-row-cell-drag {
-				cursor: move;
-			}
+			padding-inline: var(--pr-t-spacings-75);
 		}
-	}
-
-	.dataTable-body-row-cell-drag {
-		@include button.S;
-		@include button.onlyIcon;
-		@include button.text;
-
-		--components-button-padding: var(--pr-t-spacings-50);
-		--components-button-color: var(--palettes-neutral-700);
-
-		vertical-align: top;
-	}
-}
-
-@mixin buttonExpand {
-	.dataTable-body-row-cell-expand {
-		@include button.S;
-		@include button.onlyIcon;
-		@include button.text;
-
-		--components-button-padding: var(--pr-t-spacings-25);
-		--components-button-color: var(--palettes-neutral-800);
-
-		margin-inline-end: var(--pr-t-spacings-100);
-		vertical-align: top;
-	}
-
-	--components-dataTable-tree-extraPadding: calc(1.5rem + var(--pr-t-spacings-100)); // Button size + margin
-
-	&:has(.dataTable-body-row-cell-expand) {
-		--components-dataTable-tree-extraPadding: 0rem;
 	}
 }
 
 @mixin tree {
 	@include buttonExpand;
 
-	padding-inline-start: calc(
+	--components-dataTable-cell-paddingInlineStart: calc(
 		var(--components-dataTable-cell-padding-inline) + var(--pr-t-spacings-300) * calc(var(--components-dataTable-treeLevel) - 1) +
 			var(--components-dataTable-tree-extraPadding)
 	);
 }
 
 @mixin editable {
-	--components-dataTable-cell-padding: var(--pr-t-spacings-75);
+	--components-dataTable-cell-padding: var(--pr-t-spacings-100);
+	--components-dataTable-cell-paddingInlineStart: var(--components-dataTable-cell-padding);
 }
 
 @mixin actions {
@@ -110,41 +79,46 @@
 	text-align: right;
 	white-space: nowrap;
 
-	&:is(.dataTable-head-row-cell) {
-		.button {
-			position: relative;
-			bottom: var(--pr-t-spacings-50);
-		}
-	}
-
 	.button {
 		@include button.S;
 		@include button.onlyIcon;
 		@include button.onlyIconS;
 		@include button.text;
 	}
+
+	&:is(.dataTable-head-row-cell) {
+		.button {
+			position: relative;
+			bottom: var(--pr-t-spacings-50);
+		}
+	}
 }
 
 @mixin alignCenter {
-	text-align: center;
+	--components-dataTable-cell-textAlign: center;
 }
 
 @mixin alignRight {
-	text-align: right;
+	--components-dataTable-cell-textAlign: right;
 }
 
 @mixin layoutFixed {
-	table-layout: fixed;
+	--components-dataTable-tableLayout: fixed;
 }
 
 @mixin layoutFixedWithBreakpoint {
 	@each $breakpoint, $value in config.$breakpoints {
 		@include media.min($breakpoint) {
 			&.mod-layoutFixedAtMediaMin#{$breakpoint} {
-				table-layout: fixed;
+				--components-dataTable-tableLayout: fixed;
 			}
 		}
 	}
+}
+
+@mixin cellFixedWidth {
+	min-width: var(--dataTable-layoutFixed-width, auto);
+	width: var(--dataTable-layoutFixed-width, auto);
 }
 
 @mixin layoutFixedCells {
@@ -167,9 +141,4 @@
 			}
 		}
 	}
-}
-
-@mixin cellFixedWidth {
-	min-width: var(--dataTable-layoutFixed-width, auto);
-	width: var(--dataTable-layoutFixed-width, auto);
 }

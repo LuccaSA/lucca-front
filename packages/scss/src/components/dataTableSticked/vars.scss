@@ -1,2 +1,6 @@
 @mixin vars {
+	--components-dataTable-shadow-firstColumnOpacity: 1;
+	--components-dataTable-shadow-lastColumnOpacity: 1;
+	--components-dataTable-shadow-firstRowOpacity: 1;
+	--components-dataTable-shadow-lastRowOpacity: 1;
 }
