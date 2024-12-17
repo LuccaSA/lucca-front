@@ -1,6 +1,5 @@
 @use 'sass:list';
 
-$importDeprecatedSpacings: true !default;
 $isNamespaced: false !default;
 
 $fontFamily: 'SourceSans' !default;
@@ -494,17 +493,6 @@ $spacings: (
 	'800': 4rem,
 ) !default;
 
-$spacingsDeprecated: (
-	'0': 0,
-	XXS: 0.25rem,
-	XS: 0.5rem,
-	S: 1rem,
-	M: 1.5rem,
-	L: 2rem,
-	XL: 3rem,
-	XXL: 4rem,
-) !default;
-
 $sizes: (
 	XS: (
 		fontSize: 0.75rem,
@@ -550,22 +538,6 @@ $borderRadius: (
 	'full': 9999px,
 ) !default;
 
-// $elevations are deprecated
-$elevations: (
-	'1':
-		'0 1px 2px color-mix(in srgb, var(--palettes-neutral-900) 6%, transparent), 0px 2px 8px color-mix(in srgb, var(--palettes-neutral-900) 4%, transparent)',
-	'2':
-		'0 0 0 1px color-mix(in srgb, var(--palettes-neutral-900) 3%, transparent), 0 1px 2px color-mix(in srgb, var(--palettes-neutral-900) 2%, transparent), 0 2px 6px color-mix(in srgb, var(--palettes-neutral-900) 5%, transparent)',
-	'3':
-		'0 0 0 1px color-mix(in srgb, var(--palettes-neutral-900) 3%, transparent), 0 2px 4px color-mix(in srgb, var(--palettes-neutral-900) 2%, transparent), 0 4px 10px color-mix(in srgb, var(--palettes-neutral-900) 6%, transparent)',
-	'4':
-		'0 0 0 1px color-mix(in srgb, var(--palettes-neutral-900) 3%, transparent), 0 3px 6px color-mix(in srgb, var(--palettes-neutral-900) 4%, transparent), 0 4px 16px color-mix(in srgb, var(--palettes-neutral-900) 8%, transparent)',
-	'5':
-		'0 0 0 1px color-mix(in srgb, var(--palettes-neutral-900) 3%, transparent), 0 4px 8px color-mix(in srgb, var(--palettes-neutral-900) 6%, transparent), 0 12px 32px color-mix(in srgb, var(--palettes-neutral-900) 8%, transparent)',
-	'6':
-		'0 0 0 1px color-mix(in srgb, var(--palettes-neutral-900) 3%, transparent), -2px 2px 8px color-mix(in srgb, var(--palettes-neutral-900) 4%, transparent), -12px 6px 24px color-mix(in srgb, var(--palettes-neutral-900) 6%, transparent)',
-);
-
 // opacity is deprecated
 $disabled: (
 	'opacity': 0.4,
@@ -595,29 +567,10 @@ $loading: (
 $textLink: (
 	color: var(--palettes-product-700),
 	hover: var(--palettes-product-600),
-	disabled: var(--palettes-neutral-500),
-	// disabled token candidate
+	disabled: var(--palettes-neutral-500), // disabled token candidate
 );
 
 // Deprecated
-
-// $boxShadows are deprecated
-$boxShadows: (
-	'XXS':
-		'0 2px 8px color-mix(in srgb, var(--palettes-neutral-900) 2%, transparent), 0 1px 2px color-mix(in srgb, var(--palettes-neutral-900) 15%, transparent)',
-	'XS':
-		'0 1px 2px color-mix(in srgb, var(--palettes-neutral-900) 6%, transparent), 0 2px 8px color-mix(in srgb, var(--palettes-neutral-900) 4%, transparent)',
-	'S':
-		'0 0 0 1px color-mix(in srgb, var(--palettes-neutral-900) 3%, transparent), 0 1px 2px color-mix(in srgb, var(--palettes-neutral-900) 2%, transparent), 0 2px 6px color-mix(in srgb, var(--palettes-neutral-900) 6%, transparent)',
-	'M':
-		'0 0 0 1px color-mix(in srgb, var(--palettes-neutral-900) 3%, transparent), 0 2px 4px color-mix(in srgb, var(--palettes-neutral-900) 2%, transparent), 0 4px 10px color-mix(in srgb, var(--palettes-neutral-900) 6%, transparent)',
-	'L':
-		'0 0 0 1px color-mix(in srgb, var(--palettes-neutral-900) 3%, transparent), 0 3px 6px color-mix(in srgb, var(--palettes-neutral-900) 4%, transparent), 0 4px 16px color-mix(in srgb, var(--palettes-neutral-900) 8%, transparent)',
-	'XL':
-		'0 0 0 1px color-mix(in srgb, var(--palettes-neutral-900) 3%, transparent), 0 4px 8px color-mix(in srgb, var(--palettes-neutral-900) 6%, transparent), 0 12px 32px color-mix(in srgb, var(--palettes-neutral-900) 8%, transparent)',
-	'XXL':
-		'0 0 0 1px color-mix(in srgb, var(--palettes-neutral-900) 3%, transparent), -2px 2px 8px color-mix(in srgb, var(--palettes-neutral-900) 4%, transparent), -12px 6px 24px color-mix(in srgb, var(--palettes-neutral-900) 6%, transparent)',
-);
 
 // $colors are deprecated
 $colors: (

@@ -28,7 +28,6 @@
 @forward 'breadcrumbs'; // 2 Ko
 @forward 'buttonGroup'; // 2 Ko
 @forward 'header'; // 3 Ko
-@forward 'actionIcon'; // 3 Ko
 @forward 'menu'; // 4 Ko
 @forward 'radio'; // 4 Ko
 @forward 'radioField'; // new component for radio
@@ -94,8 +93,5 @@
 @forward 'dataTableSticked';
 
 // Deprecated CSS components
-// @forward 'gridLegacy'; // 40 Ko
-// @forward 'emptyStateDeprecated';
-
 // @forward 'tableFixedDeprecated'; // 33 Ko
 // @forward 'tableStickedDeprecated'; // 67 Ko
