@@ -24,6 +24,6 @@ export const Template: StoryObj<SkeletonTableComponent> = {
 
 	args: {
 		cols: 5,
-		rows: 10,
+		rows: 8,
 	},
 };
