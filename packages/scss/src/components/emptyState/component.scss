@@ -15,7 +15,7 @@
 			flex-grow: 1;
 			justify-content: center;
 			max-width: var(--components-emptyState-container-maxWidth);
-			left: var(--components-emptyState-container-left);
+			inset-inline-start: var(--components-emptyState-container-left);
 			padding: 0;
 			width: 100%;
 			position: sticky;
@@ -46,7 +46,7 @@
 			@include title.component;
 			@include title.h3;
 
-			margin-bottom: 0;
+			margin-block-end: 0;
 		}
 
 		.emptyState-content-description {
@@ -57,7 +57,7 @@
 			display: flex;
 			flex-wrap: wrap;
 			align-items: center;
-			margin-top: var(--pr-t-spacings-200);
+			margin-block-start: var(--pr-t-spacings-200);
 			gap: var(--pr-t-spacings-200);
 
 			.button {

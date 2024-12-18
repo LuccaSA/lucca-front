@@ -26,7 +26,7 @@ const Template: StoryFn<TextfieldSearchAndSuffixStory> = (args) => ({
 		`
 		.textfield {
 			display: inline-flex;
-			margin-right: 1rem;
+			margin-inline-end: 1rem;
 		}`,
 	],
 });

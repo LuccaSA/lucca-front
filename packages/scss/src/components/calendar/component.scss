@@ -15,7 +15,7 @@
 			@include reset.list;
 
 			width: 13.5rem;
-			border-right: 1px solid var(--palettes-neutral-100);
+			border-inline-end: 1px solid var(--palettes-neutral-100);
 			padding: var(--pr-t-spacings-50);
 			overflow: auto;
 			position: relative;
@@ -48,13 +48,13 @@
 			justify-content: flex-start;
 			font-weight: 400;
 			white-space: wrap;
-			text-align: left;
+			text-align: start;
 		}
 
 		.calendar-table {
 			border-spacing: var(--components-calendarBorderSpacing);
 			border: var(--pr-t-spacings-150) solid transparent;
-			border-top: 0;
+			border-block-start: 0;
 			table-layout: fixed;
 			background-color: var(--components-calendarBackground);
 			scroll-snap-align: start end;
@@ -94,7 +94,7 @@
 
 		.calendarWrapper-navigation {
 			position: absolute;
-			top: 0;
+			inset-block-start: 0;
 			background-color: var(--components-calendarWrapper-navigationBackground);
 			border-width: var(--pr-t-spacings-150);
 			border-style: solid;
@@ -145,7 +145,7 @@
 			font-size: var(--sizes-L-fontSize);
 			font-weight: 700;
 			border: var(--pr-t-spacings-150) solid transparent;
-			border-bottom: var(--pr-t-spacings-100) solid transparent;
+			border-block-end: var(--pr-t-spacings-100) solid transparent;
 			text-transform: lowercase;
 			background-color: var(--components-calendarBackground);
 			text-align: center;
@@ -174,7 +174,7 @@
 			}
 
 			& + & {
-				margin-left: calc(var(--pr-t-spacings-100) * -1);
+				margin-inline-start: calc(var(--pr-t-spacings-100) * -1);
 			}
 		}
 
@@ -189,7 +189,7 @@
 			font-size: var(--sizes-S-fontSize);
 			color: var(--palettes-neutral-700);
 			text-transform: uppercase;
-			border-bottom: var(--pr-t-spacings-50) solid transparent;
+			border-block-end: var(--pr-t-spacings-50) solid transparent;
 		}
 
 		.calendar-table-body-row-cell {
@@ -257,8 +257,8 @@
 
 		.calendar-table-body-row-cell-action-stripes {
 			position: absolute;
-			top: 0;
-			left: 0;
+			inset-block-start: 0;
+			inset-inline-start: 0;
 			width: 60px;
 			height: 60px;
 			z-index: -1;

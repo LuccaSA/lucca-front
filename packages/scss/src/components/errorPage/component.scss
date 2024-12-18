@@ -19,10 +19,10 @@
 	}
 
 	.errorPage-section-info {
-		margin-top: 10vh;
+		margin-block-start: 10vh;
 		max-width: 90vw;
 		width: 450px;
-		padding-right: var(--pr-t-spacings-400);
+		padding-inline-end: var(--pr-t-spacings-400);
 	}
 
 	.errorPage-section-info-title {
@@ -36,7 +36,7 @@
 	}
 
 	.errorPage-section-image {
-		margin-top: 10vh;
+		margin-block-start: 10vh;
 		width: 50%;
 		max-width: 580px;
 		min-width: 350px;
@@ -52,13 +52,13 @@
 	}
 
 	.errorPage-section-info {
-		margin-top: var(--pr-t-spacings-400);
-		margin-bottom: var(--pr-t-spacings-400);
+		margin-block-start: var(--pr-t-spacings-400);
+		margin-block-end: var(--pr-t-spacings-400);
 		order: 1;
 		padding: 0;
 	}
 	.errorPage-section-image {
-		margin-top: var(--pr-t-spacings-400);
+		margin-block-start: var(--pr-t-spacings-400);
 		order: 0;
 	}
 }

@@ -25,12 +25,12 @@
 	cursor: grab;
 	&:not(.cdk-drag-placeholder) {
 		&:first-of-type {
-			border-top-left-radius: var(--commons-borderRadius-M);
-			border-top-right-radius: var(--commons-borderRadius-M);
+			border-start-start-radius: var(--commons-borderRadius-M);
+			border-start-end-radius: var(--commons-borderRadius-M);
 		}
 		&:last-of-type {
-			border-bottom-left-radius: var(--commons-borderRadius-M);
-			border-bottom-right-radius: var(--commons-borderRadius-M);
+			border-end-start-radius: var(--commons-borderRadius-M);
+			border-end-end-radius: var(--commons-borderRadius-M);
 		}
 	}
 	&:active {

@@ -1,13 +1,13 @@
 @mixin indeterminate {
 	@keyframes indeterminate {
 		0% {
-			left: calc(100% / -3);
-			right: 100%;
+			inset-inline-start: calc(100% / -3);
+			inset-inline-end: 100%;
 		}
 
 		100% {
-			left: 100%;
-			right: calc(100% / -3);
+			inset-inline-start: 100%;
+			inset-inline-end: calc(100% / -3);
 		}
 	}
 

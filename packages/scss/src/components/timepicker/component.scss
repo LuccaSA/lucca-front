@@ -39,14 +39,14 @@
 			width: var(--pr-t-spacings-200);
 			margin: 0 calc(var(--pr-t-spacings-100) * -1);
 			position: relative;
-			left: calc(var(--pr-t-spacings-25) * -1);
+			inset-inline-start: calc(var(--pr-t-spacings-25) * -1);
 		}
 
 		.timePicker-fieldset-group {
 			position: relative;
 
 			~ .timePicker-fieldset-group {
-				margin-left: calc(var(--pr-t-spacings-50) * -1);
+				margin-inline-start: calc(var(--pr-t-spacings-50) * -1);
 			}
 		}
 
@@ -92,12 +92,12 @@
 
 		.timePicker-fieldset-group-stepper {
 			position: absolute;
-			bottom: calc(var(--components-timepicker-input-height) + var(--pr-t-spacings-150) + 1px);
+			inset-block-end: calc(var(--components-timepicker-input-height) + var(--pr-t-spacings-150) + 1px);
 			border: 0;
 			padding: 0;
 			height: 1rem;
 			width: 1rem;
-			left: 50%;
+			inset-inline-start: 50%;
 			transform: translateX(-50%);
 			background-color: transparent;
 			color: var(--palettes-neutral-600);
@@ -127,8 +127,8 @@
 			}
 
 			+ .timePicker-fieldset-group-stepper {
-				top: calc(var(--components-timepicker-input-height) + var(--pr-t-spacings-150) + 1px);
-				bottom: auto;
+				inset-block-start: calc(var(--components-timepicker-input-height) + var(--pr-t-spacings-150) + 1px);
+				inset-block-end: auto;
 			}
 		}
 
@@ -136,7 +136,7 @@
 			width: calc(var(--components-timepicker-input-width) + var(--components-timepicker-paddingInput-block) * 2);
 			position: relative;
 			align-self: stretch;
-			margin-left: calc(var(--pr-t-spacings-50) * -1);
+			margin-inline-start: calc(var(--pr-t-spacings-50) * -1);
 
 			&::after {
 				content: '';
@@ -145,7 +145,7 @@
 				border-radius: var(--commons-borderRadius-M);
 				display: grid;
 				place-items: center;
-				text-align: right;
+				text-align: end;
 			}
 
 			&:has(input:focus) {

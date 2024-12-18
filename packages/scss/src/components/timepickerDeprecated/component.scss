@@ -49,8 +49,8 @@
 		.timepicker-field-increment {
 			cursor: pointer;
 			position: absolute;
-			bottom: calc(100% + 0.5rem + 1px);
-			left: 0;
+			inset-block-end: calc(100% + 0.5rem + 1px);
+			inset-inline-start: 0;
 			border: 0;
 			height: 1.25rem;
 			background-color: transparent;
@@ -63,8 +63,8 @@
 			padding: 0;
 
 			&:last-child {
-				top: calc(100% + 0.5rem + 1px);
-				bottom: auto;
+				inset-block-start: calc(100% + 0.5rem + 1px);
+				inset-block-end: auto;
 			}
 
 			&:hover {

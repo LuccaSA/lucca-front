@@ -46,12 +46,12 @@
 			height: var(--commons-banner-height);
 			background-color: var(--pr-t-elevation-surface-raised);
 			position: sticky;
-			top: 0;
+			inset-block-start: 0;
 			z-index: 2;
 		}
 
 		.layout-content {
-			top: var(--commons-banner-height);
+			inset-block-start: var(--commons-banner-height);
 			grid-area: content;
 			position: sticky;
 			display: flex;
@@ -66,7 +66,7 @@
 		.layout-content-headers-subheader,
 		.layout-content-headers-header {
 			background-color: var(--pr-t-elevation-surface-raised);
-			top: var(--commons-banner-height);
+			inset-block-start: var(--commons-banner-height);
 			position: sticky;
 
 			@include media.max('S') {
@@ -85,7 +85,7 @@
 		.layout-content-footer {
 			background-color: var(--pr-t-elevation-surface-raised);
 			position: sticky;
-			bottom: 0;
+			inset-block-end: 0;
 
 			@include media.max('S') {
 				position: static;
@@ -95,7 +95,7 @@
 		.layout-navside,
 		.layout-aside {
 			min-height: calc(100vh - var(--commons-banner-height));
-			top: var(--commons-banner-height);
+			inset-block-start: var(--commons-banner-height);
 			display: flex;
 			position: sticky;
 			flex-direction: column;
@@ -130,11 +130,11 @@
 		.layout-navside-footer,
 		.layout-aside-footer {
 			position: sticky;
-			bottom: 0;
+			inset-block-end: 0;
 			background-color: var(--pr-t-elevation-surface-raised);
 
 			@include media.max('S') {
-				margin-top: 0;
+				margin-block-start: 0;
 				position: static;
 			}
 		}
@@ -144,7 +144,7 @@
 			border: 0;
 			margin: 0;
 			padding: 0;
-			top: 0;
+			inset-block-start: 0;
 			position: sticky;
 			color: inherit;
 			font: inherit;

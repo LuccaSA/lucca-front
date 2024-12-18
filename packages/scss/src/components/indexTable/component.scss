@@ -51,7 +51,7 @@
 		.indexTable-body-row-cell,
 		.indexTable-foot-row-cell {
 			display: table-cell;
-			text-align: left;
+			text-align: start;
 			font-weight: 400;
 		}
 
@@ -63,7 +63,7 @@
 			z-index: 3;
 
 			&:not(:first-child) {
-				padding-right: var(--components-indexTable-cell-paddingInline);
+				padding-inline-end: var(--components-indexTable-cell-paddingInline);
 			}
 		}
 
@@ -95,8 +95,8 @@
 		}
 
 		.indexTable-foot-row-cell {
-			padding-top: var(--pr-t-spacings-50);
-			padding-bottom: var(--pr-t-spacings-50);
+			padding-block-start: var(--pr-t-spacings-50);
+			padding-block-end: var(--pr-t-spacings-50);
 		}
 
 		.indexTable-body-row-cell {
@@ -179,7 +179,7 @@
 		.indexTable-body-row-cell-checkbox,
 		.indexTable-head-row-cell-checkbox {
 			margin: var(--pr-t-spacings-50);
-			margin-right: var(--pr-t-spacings-150);
+			margin-inline-end: var(--pr-t-spacings-150);
 		}
 
 		// .indexTable-body-row-cell-action is deprecated
@@ -244,7 +244,7 @@
 		}
 
 		.indexTable-foot-row-cell {
-			text-align: right;
+			text-align: end;
 		}
 
 		// A wrapper is needed for pagination
@@ -253,19 +253,19 @@
 
 			display: flex;
 			flex-direction: column;
-			padding-bottom: var(--pr-t-spacings-100);
+			padding-block-end: var(--pr-t-spacings-100);
 			border-radius: var(--components-indexTable-border-radius);
 			background-color: var(--components-indexTable-background-color);
 
 			.indexTable {
 				flex-grow: 1;
-				padding-bottom: 0;
+				padding-block-end: 0;
 			}
 
 			.pagination {
 				align-self: flex-end;
 				padding: var(--pr-t-spacings-50) 0 0 0;
-				margin-right: var(--pr-t-spacings-100);
+				margin-inline-end: var(--pr-t-spacings-100);
 			}
 		}
 	}

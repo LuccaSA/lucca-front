@@ -55,7 +55,7 @@
 			font-size: var(--sizes-M-fontSize);
 			line-height: var(--sizes-M-lineHeight);
 			min-height: var(--pr-t-spacings-200);
-			margin-bottom: var(--components-field-label-margin-bottom);
+			margin-block-end: var(--components-field-label-margin-bottom);
 			transition-duration: var(--commons-animations-durations-fast);
 			transition-property: all;
 			overflow: hidden;
@@ -71,7 +71,7 @@
 		.checkboxesfield-messages {
 			font-size: var(--sizes-S-fontSize);
 			line-height: var(--sizes-S-lineHeight);
-			margin-top: var(--components-field-message-margin-top);
+			margin-block-start: var(--components-field-message-margin-top);
 
 			> * {
 				margin: 0;

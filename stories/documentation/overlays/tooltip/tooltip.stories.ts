@@ -54,7 +54,7 @@ export default {
 				`
 					h3 {
 						margin: 0;
-						margin-top: var(--pr-t-spacings-200);
+						margin-block-start: var(--pr-t-spacings-200);
 					}
 					.ellipsis-example {
 						width: 11rem;

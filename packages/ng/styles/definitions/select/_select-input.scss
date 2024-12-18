@@ -25,12 +25,12 @@
 			@include icon.generate('arrow_chevron_bottom');
 
 			color: var(--palettes-neutral-600);
-			bottom: var(--components-select-input-padding-vertical);
+			inset-block-end: var(--components-select-input-padding-vertical);
 			font-size: var(--sizes-M-lineHeight);
 			line-height: var(--sizes-M-lineHeight);
 			pointer-events: none;
 			position: absolute;
-			right: var(--components-select-input-padding-horizontal);
+			inset-inline-end: var(--components-select-input-padding-horizontal);
 			transition: transform var(--commons-animations-durations-standard) ease;
 		}
 
@@ -71,14 +71,14 @@
 
 	.lu-select-suffix {
 		position: absolute;
-		bottom: var(--pr-t-spacings-150);
-		right: 2.25rem;
+		inset-block-end: var(--pr-t-spacings-150);
+		inset-inline-end: 2.25rem;
 	}
 
 	.lu-select-clearer {
 		position: absolute;
-		bottom: var(--pr-t-spacings-150);
-		right: 2.25rem;
+		inset-block-end: var(--pr-t-spacings-150);
+		inset-inline-end: 2.25rem;
 	}
 
 	::ng-deep .lu-select-value {
@@ -108,7 +108,7 @@
 		}
 
 		.lu-select-clearer {
-			bottom: var(--pr-t-spacings-100);
+			inset-block-end: var(--pr-t-spacings-100);
 		}
 
 		&::after {
@@ -117,8 +117,8 @@
 		}
 
 		.lu-select-suffix {
-			bottom: 0.5rem;
-			right: 2rem;
+			inset-block-end: 0.5rem;
+			inset-inline-end: 2rem;
 		}
 
 		::ng-deep .lu-select-value {
@@ -126,8 +126,8 @@
 				height: var(--sizes-XS-lineHeight);
 				line-height: var(--sizes-XS-lineHeight);
 				font-size: var(--sizes-XS-fontSize);
-				padding-left: var(--pr-t-spacings-50);
-				padding-right: var(--pr-t-spacings-50);
+				padding-inline-start: var(--pr-t-spacings-50);
+				padding-inline-end: var(--pr-t-spacings-50);
 				gap: var(--pr-t-spacings-50);
 			}
 
@@ -145,8 +145,8 @@
 
 			&::after {
 				color: var(--palettes-neutral-500);
-				bottom: var(--components-select-framed-bottom-padding);
-				right: var(--pr-t-spacings-100);
+				inset-block-end: var(--components-select-framed-bottom-padding);
+				inset-inline-end: var(--pr-t-spacings-100);
 			}
 
 			.lu-select-value {
@@ -161,8 +161,8 @@
 			}
 
 			.lu-select-suffix {
-				bottom: var(--components-select-framed-bottom-padding);
-				right: 1.7rem;
+				inset-block-end: var(--components-select-framed-bottom-padding);
+				inset-inline-end: 1.7rem;
 			}
 		}
 	}
@@ -173,7 +173,7 @@
 		.lu-select-placeholder {
 			padding: 0;
 			height: auto;
-			padding-top: var(--pr-t-spacings-200);
+			padding-block-start: var(--pr-t-spacings-200);
 			color: var(--palettes-neutral-800);
 		}
 	}
@@ -182,18 +182,18 @@
 	:host-context(.textfield.mod-material) {
 		&::after {
 			color: var(--palettes-neutral-500);
-			bottom: 0.6rem;
-			right: 0;
+			inset-block-end: 0.6rem;
+			inset-inline-end: 0;
 		}
 
 		.lu-select-value,
 		.lu-select-placeholder {
-			padding-left: 0;
-			padding-right: 0.8rem;
+			padding-inline-start: 0;
+			padding-inline-end: 0.8rem;
 		}
 
 		.lu-select-suffix {
-			right: calc(2 * var(--components-select-input-padding-horizontal));
+			inset-inline-end: calc(2 * var(--components-select-input-padding-horizontal));
 		}
 
 		&.is-select {
@@ -204,11 +204,11 @@
 
 		&.mod-search {
 			&::after {
-				bottom: 0;
+				inset-block-end: 0;
 			}
 
 			.lu-select-suffix {
-				right: calc(2.75 * var(--components-select-input-padding-horizontal));
+				inset-inline-end: calc(2.75 * var(--components-select-input-padding-horizontal));
 			}
 		}
 	}
@@ -229,7 +229,7 @@
 		.lu-select-display-wrapper {
 			overflow: visible;
 			white-space: normal;
-			margin-bottom: calc(var(--pr-t-spacings-50) * -1);
+			margin-block-end: calc(var(--pr-t-spacings-50) * -1);
 		}
 	}
 
@@ -281,7 +281,7 @@
 	// Clearable
 	:host-context(.textfield-input.is-clearable) {
 		.lu-select-value {
-			padding-right: 3.5rem;
+			padding-inline-end: 3.5rem;
 		}
 	}
 

@@ -90,7 +90,7 @@ function getTemplate(args: CheckboxBasicStory): string {
 	const help = args.help;
 	const messageState = args.messageState ? ' is-' + args.messageState : '';
 
-	return `<div class="form-field${s} pr-u-marginBottom200">
+	return `<div class="form-field${s} pr-u-marginBlockEnd200">
 	<label class="formLabel" for="${id}">
 		Label<sup class="formLabel-required" *ngIf="required" aria-hidden="true">*</sup><span *ngIf="help" class="formLabel-info"><span aria-hidden="true" class="lucca-icon icon-signHelp"></span><span class="u-mask">?</span></span>
 	</label>

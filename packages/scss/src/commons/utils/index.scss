@@ -151,12 +151,16 @@
 	@include reset.clear('both', '!important');
 }
 
+// .u-clearLeft is deprecated
+.u-clearInlineStart,
 .u-clearLeft {
-	@include reset.clear('left', '!important');
+	@include reset.clear('inline-start', '!important');
 }
 
+// .u-clearRight is deprecated
+.u-clearInlineEnd,
 .u-clearRight {
-	@include reset.clear('right', '!important');
+	@include reset.clear('inline-end', '!important');
 }
 
 .u-listReset {
@@ -218,12 +222,12 @@
 
 // .u-textLeft is deprecated
 .u-textLeft {
-	text-align: left !important;
+	text-align: start !important;
 }
 
 // .u-textRight is deprecated
 .u-textRight {
-	text-align: right !important;
+	text-align: end !important;
 }
 
 // .u-textCenter is deprecated

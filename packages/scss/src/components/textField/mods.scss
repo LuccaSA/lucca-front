@@ -51,7 +51,7 @@
 
 @mixin valueAlignRight {
 	.textField-input-value {
-		text-align: right;
+		text-align: end;
 	}
 }
 
@@ -61,7 +61,7 @@
 		display: grid;
 		align-items: normal;
 		min-width: 0;
-		scroll-margin-bottom: var(--component-textField-scrollMargin);
+		scroll-margin-block-end: var(--component-textField-scrollMargin);
 	}
 
 	.textField-input-valueClone,
