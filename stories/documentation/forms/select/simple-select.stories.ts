@@ -391,7 +391,7 @@ export const GroupBy = generateStory({
 export const AddOption = generateStory({
 	name: 'Add option',
 	description: "Pour ajouter une option, il suffit d'utiliser l'input `addOptionStrategy` et de s'abonner à l'output `addOption`. Le label est customisable via l'input `addOptionLabel`.",
-	template: `<div class="u-marginBottomS">There is {{ legumes.length }} legumes in the list.</div>
+	template: `<div class="pr-u-marginBlockEnd200">There is {{ legumes.length }} legumes in the list.</div>
 <lu-simple-select
 	#selectRef
 	placeholder="Placeholder..."

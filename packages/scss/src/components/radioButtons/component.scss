@@ -8,10 +8,10 @@
 	@at-root ($atRoot) {
 		.radioButtons-item {
 			position: relative;
-			margin-left: 1px;
+			margin-inline-start: 1px;
 
 			&:first-child {
-				margin-left: 0;
+				margin-inline-start: 0;
 
 				.radioButtons-item-label {
 					border-radius: var(--commons-borderRadius-M) 0 0 var(--commons-borderRadius-M);

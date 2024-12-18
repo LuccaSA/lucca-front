@@ -61,14 +61,14 @@
 
 		&::before,
 		&::after {
-			top: var(--components-radio-input-top);
+			inset-block-start: var(--components-radio-input-top);
 			height: var(--components-radio-input-size);
 			width: var(--components-radio-input-size);
 			transition-duration: var(--commons-animations-durations-fast);
 			transition-property: background-color, color, transform, border;
 			position: absolute;
 			border-radius: var(--commons-borderRadius-full);
-			left: 0;
+			inset-inline-start: 0;
 			content: '';
 		}
 

@@ -51,8 +51,8 @@
 
 		.calloutPopover-overlay-content {
 			margin: var(--pr-t-spacings-100) var(--pr-t-spacings-150) var(--pr-t-spacings-100) var(--components-calloutPopover-content-margin);
-			padding-top: var(--pr-t-spacings-100);
-			border-top: var(--commons-divider-width) solid var(--palettes-neutral-200);
+			padding-block-start: var(--pr-t-spacings-100);
+			border-block-start: var(--commons-divider-width) solid var(--palettes-neutral-200);
 		}
 	}
 }

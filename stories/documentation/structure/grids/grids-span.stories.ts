@@ -43,7 +43,7 @@ const Template: StoryFn<GridsSpanStory> = (args) => ({
 		}
 
 		.grid + .grid {
-			margin-top: var(--pr-t-spacings-400);
+			margin-block-start: var(--pr-t-spacings-400);
 		}
 		`,
 	],

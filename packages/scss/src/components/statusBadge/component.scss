@@ -20,7 +20,7 @@
 		height: var(--components-statusBadge-dot-size);
 		flex-shrink: 0;
 		width: var(--components-statusBadge-dot-size);
-		top: var(--components-statusBadge-dot-top);
+		inset-block-start: var(--components-statusBadge-dot-top);
 		position: relative;
 	}
 

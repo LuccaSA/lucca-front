@@ -84,8 +84,15 @@
 @mixin actions {
 	padding: 0;
 	padding-inline-end: var(--pr-t-spacings-50);
-	text-align: right;
+	text-align: end;
 	white-space: nowrap;
+
+	&:is(.dataTable-head-row-cell) {
+		.button {
+			position: relative;
+			inset-block-end: var(--pr-t-spacings-50);
+		}
+	}
 
 	.button {
 		@include button.S;

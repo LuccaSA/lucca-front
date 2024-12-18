@@ -23,7 +23,7 @@
 			gap: var(--pr-t-spacings-50);
 			color: var(--components-toasts-color);
 			padding: var(--pr-t-spacings-50);
-			margin-bottom: var(--components-toasts-margin-bottom);
+			margin-block-end: var(--components-toasts-margin-bottom);
 			background-color: var(--palettes-neutral-800);
 			animation-name: toastsItem;
 			animation-duration: var(--commons-animations-durations-standard);

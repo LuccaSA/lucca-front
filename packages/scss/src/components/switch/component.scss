@@ -14,7 +14,7 @@
 
 		.switch-label {
 			padding: 0;
-			padding-left: calc(var(--components-switch-width) + var(--pr-t-spacings-100));
+			padding-inline-start: calc(var(--components-switch-width) + var(--pr-t-spacings-100));
 			color: var(--palettes-neutral-800);
 			transition: color var(--commons-animations-durations-fast);
 			display: inline-block;
@@ -33,11 +33,11 @@
 				display: flex;
 				font-size: var(--components-switch-icon-size);
 				height: var(--components-switch-height);
-				left: 0;
+				inset-inline-start: 0;
 				line-height: var(--components-switch-icon-size);
-				padding-left: calc(var(--components-switch-handler-offset) + var(--components-switch-slider-size));
+				padding-inline-start: calc(var(--components-switch-handler-offset) + var(--components-switch-slider-size));
 				position: absolute;
-				top: var(--components-switch-offset-top);
+				inset-block-start: var(--components-switch-offset-top);
 				transition-duration: var(--commons-animations-durations-fast);
 				transition-timing-function: ease;
 				transition-property: background-color, box-shadow;
@@ -51,9 +51,9 @@
 				content: '';
 				display: block;
 				height: var(--components-switch-slider-size);
-				left: var(--components-switch-handler-offset);
+				inset-inline-start: var(--components-switch-handler-offset);
 				position: absolute;
-				top: calc(var(--components-switch-offset-top) + var(--components-switch-handler-offset));
+				inset-block-start: calc(var(--components-switch-offset-top) + var(--components-switch-handler-offset));
 				transition: all var(--commons-animations-durations-fast) ease;
 				width: var(--components-switch-slider-size);
 			}

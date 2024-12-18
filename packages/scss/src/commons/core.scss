@@ -8,8 +8,8 @@
 
 $contents: '100\\%', 'fit-content';
 $boxModel: 'margin', 'padding', 'border';
-$boxDirection: '', 'top', 'bottom', 'left', 'right', 'inline', 'block';
-$corners: '', 'top-left-', 'top-right-', 'bottom-left-', 'bottom-right-';
+$boxDirection: '', 'top', 'bottom', 'left', 'right', 'inline', 'block', 'block-start', 'block-end', 'inline-start', 'inline-end'; // top, bottom, left and right are deprecated
+$corners: '', 'top-left-', 'top-right-', 'bottom-left-', 'bottom-right-', 'start-start-', 'start-end-', 'end-start-', 'end-end-'; // top-left, top-right, bottom-left and bottom-right are deprecated
 $gaps: 'column-gap', 'row-gap', 'gap';
 $displays: 'block', 'flex', 'grid', 'inline', 'inline-flex', 'inline-block', 'inline-grid', 'contents', 'none';
 $direction: 'column', 'column-reverse', 'row', 'row-reverse';
@@ -19,14 +19,14 @@ $align: 'flex-start', 'flex-end', 'baseline', 'stretch', 'center';
 $flex: '0', '1';
 $basis: '0', 'auto';
 $order: '-1', '1';
-$textAlign: 'left', 'center', 'right';
+$textAlign: 'left', 'center', 'right', 'start', 'end'; // left and right are deprecated
 $visibility: 'visible', 'hidden', 'collapse';
 $fontWeight: '400', '600', '700', '900', 'normal', 'bold';
 $fontStyle: 'normal', 'italic';
 $pointerEvents: 'none', 'auto';
 $scrollBehavior: 'auto', 'smooth';
 $whiteSpace: 'normal', 'nowrap', 'pre-line';
-$float: 'left', 'right';
+$float: 'left', 'right', 'inline-start', 'inline-end'; // left and right are deprecated
 $verticalAlign: 'baseline', 'sub', 'super', 'text-top', 'text-bottom', 'middle', 'top', 'bottom';
 $position: 'absolute', 'relative', 'static', 'fixed', 'sticky';
 $decoration: 'underline', 'line-through', 'none';
@@ -35,7 +35,7 @@ $overflow: 'hidden', 'auto', 'visible', 'scroll';
 /* Tokens */
 
 @mixin spacing($boxModel, $boxDirection, $key, $value, $suffix: '!important') {
-	.pr-u-#{transform.camelize($boxModel)}#{transform.capitalize($boxDirection)}#{transform.capitalize($key)} {
+	.pr-u-#{transform.camelize($boxModel)}#{transform.capitalize(transform.camelize($boxDirection))}#{transform.capitalize($key)} {
 		#{$boxModel}#{if($boxDirection == '', '', '-')}#{$boxDirection}: var(--pr-t-spacings-#{$key}) #{$suffix};
 	}
 }

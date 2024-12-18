@@ -20,13 +20,14 @@
 			border-radius: var(--commons-borderRadius-M) 0 0 var(--commons-borderRadius-M);
 		}
 
-		&:last-child, &.mod-more {
+		&:last-child,
+		&.mod-more {
 			border-radius: 0 var(--commons-borderRadius-M) var(--commons-borderRadius-M) 0;
 		}
 
 		&:not(:first-child) {
 			&.outlined {
-				margin-left: -2px;
+				margin-inline-start: -2px;
 			}
 		}
 

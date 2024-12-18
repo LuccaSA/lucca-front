@@ -9,18 +9,18 @@
 			@include title.h5;
 			color: var(--palettes-neutral-600);
 			padding: 0 var(--components-verticalNavigation-horizontalPadding);
-			margin-bottom: var(--pr-t-spacings-100);
+			margin-block-end: var(--pr-t-spacings-100);
 		}
 
 		.verticalNavigation-list {
 			@include reset.list;
 			background-color: var(--pr-t-elevation-surface-raised);
-			margin-bottom: var(--pr-t-spacings-200);
+			margin-block-end: var(--pr-t-spacings-200);
 		}
 
 		.verticalNavigation-list-item-link-icon {
 			font-size: var(--sizes-M-lineHeight);
-			margin-right: var(--pr-t-spacings-100);
+			margin-inline-end: var(--pr-t-spacings-100);
 		}
 
 		.verticalNavigation-list-item-link {
@@ -50,7 +50,7 @@
 
 		.verticalNavigation-list-item-link-arrow {
 			font-size: var(--sizes-M-lineHeight);
-			margin-left: auto;
+			margin-inline-start: auto;
 			transition: transform var(--commons-animations-durations-standard) ease;
 		}
 	}

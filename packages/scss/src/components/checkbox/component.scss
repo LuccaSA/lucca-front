@@ -34,8 +34,8 @@
 				color: transparent;
 				display: block;
 				text-align: center;
-				margin-top: 2px;
-				margin-right: var(--pr-t-spacings-100);
+				margin-block-start: 2px;
+				margin-inline-end: var(--pr-t-spacings-100);
 				transform: translate3d(0, 0, 0); // Fix box-shadow artifacts
 				text-indent: calc(var(--components-checkbox-input-border-width) * -1);
 			}

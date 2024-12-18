@@ -38,13 +38,13 @@
 			&:before {
 				content: '';
 				position: absolute;
-				top: 0;
-				bottom: 0;
-				left: calc(var(--pr-t-spacings-50) * -1);
+				inset-block-start: 0;
+				inset-block-end: 0;
+				inset-inline-start: calc(var(--pr-t-spacings-50) * -1);
 				width: 2px;
 				background-color: var(--palettes-product-700);
-				border-top-right-radius: var(--commons-borderRadius-M);
-				border-bottom-right-radius: var(--commons-borderRadius-M);
+				border-start-end-radius: var(--commons-borderRadius-M);
+				border-end-end-radius: var(--commons-borderRadius-M);
 			}
 
 			&:hover {
@@ -109,14 +109,14 @@
 	:host-context(.mod-multiple) {
 		.optionItem-value {
 			position: relative;
-			padding-left: var(--components-options-item-multiple-padding);
+			padding-inline-start: var(--components-options-item-multiple-padding);
 
 			&::after,
 			&::before {
 				display: block;
 				position: absolute;
-				left: var(--pr-t-spacings-100);
-				top: var(--pr-t-spacings-75);
+				inset-inline-start: var(--pr-t-spacings-100);
+				inset-block-start: var(--pr-t-spacings-75);
 			}
 
 			&::before {
@@ -179,13 +179,13 @@
 		&.establishmentOption {
 			.optionItem-value {
 				position: relative;
-				padding-left: calc(var(--components-options-checkbox-size) + var(--pr-t-spacings-100) * 2);
+				padding-inline-start: calc(var(--components-options-checkbox-size) + var(--pr-t-spacings-100) * 2);
 			}
 
 			.optionItem-value {
 				&::before,
 				&::after {
-					left: var(--pr-t-spacings-100);
+					inset-inline-start: var(--pr-t-spacings-100);
 				}
 			}
 		}

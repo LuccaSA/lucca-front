@@ -4,7 +4,7 @@
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
 	background-color: var(--pr-t-elevation-surface-raised);
-	bottom: 0;
+	inset-block-end: 0;
 	box-shadow: var(--pr-t-elevation-shadow-overflow);
 	padding: 0 var(--pr-t-spacings-100);
 	position: sticky;
@@ -50,8 +50,8 @@
 			--components-numericBadge-color: var(--palettes-product-800);
 			box-shadow: 0 0 0 2px var(--palettes-neutral-0);
 			position: absolute;
-			left: calc(50% + 5px);
-			top: 5px;
+			inset-inline-start: calc(50% + 5px);
+			inset-block-start: 5px;
 		}
 	}
 }

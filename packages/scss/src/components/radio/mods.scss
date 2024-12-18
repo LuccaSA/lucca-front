@@ -1,8 +1,8 @@
 @mixin inline {
 	display: inline-block;
-	margin-right: var(--pr-t-spacings-300);
-	margin-top: 0;
-	margin-bottom: 0;
+	margin-inline-end: var(--pr-t-spacings-300);
+	margin-block-start: 0;
+	margin-block-end: 0;
 }
 
 @mixin S {
@@ -26,7 +26,7 @@
 
 	.radio-input:checked ~ .radio-label {
 		&::after {
-			transform: scale(.5);
+			transform: scale(0.5);
 		}
 	}
 }
