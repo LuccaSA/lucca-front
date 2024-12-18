@@ -1,6 +1,4 @@
-# CoreSelectUsersDirective
-
-## Mise en place
+### Mise en place
 
 Il faut ajouter un _provider_ global dans votre `AppModule` ou dans votre fichier `app.config.ts` :
 
@@ -10,7 +8,7 @@ Il faut ajouter un _provider_ global dans votre `AppModule` ou dans votre fichie
 }
 ```
 
-## Customisation
+### Customisation
 
 <details>
 

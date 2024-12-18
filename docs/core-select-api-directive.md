@@ -1,5 +1,3 @@
-# CoreSelect API Directives
-
 <details>
 
 <summary>Appeler une API avec un format de retour V3 ou V4 sans customisation de l'affichage (l'entité doit avoir une propriété `name`)</summary>
