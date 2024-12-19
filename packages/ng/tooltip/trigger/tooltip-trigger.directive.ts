@@ -14,7 +14,7 @@ import {
 	computed,
 	effect,
 	inject,
-	input,
+	model,
 	numberAttribute,
 	signal,
 } from '@angular/core';
@@ -43,7 +43,7 @@ export class LuTooltipTriggerDirective implements AfterContentInit, OnDestroy {
 
 	#destroyRef = inject(DestroyRef);
 
-	luTooltip = input<string | SafeHtml>();
+	luTooltip = model<string | SafeHtml>();
 
 	#openDelay$ = new BehaviorSubject<number>(300);
 
@@ -59,7 +59,7 @@ export class LuTooltipTriggerDirective implements AfterContentInit, OnDestroy {
 		this.#closeDelay$.next(delay);
 	}
 
-	luTooltipDisabled = input(false, { transform: booleanAttribute });
+	luTooltipDisabled = model(false);
 
 	@Input({ transform: booleanAttribute })
 	luTooltipOnlyForDisplay = false;
@@ -67,7 +67,7 @@ export class LuTooltipTriggerDirective implements AfterContentInit, OnDestroy {
 	@Input()
 	luTooltipPosition: LuPopoverPosition = 'above';
 
-	luTooltipWhenEllipsis = input(false, { transform: booleanAttribute });
+	luTooltipWhenEllipsis = model(false);
 
 	resize$ = new Observable((observer) => {
 		const resizeObserver = new ResizeObserver(() => {
