@@ -24,6 +24,6 @@ export const Template: StoryObj<SkeletonIndexTableComponent> = {
 
 	args: {
 		cols: 5,
-		rows: 10,
+		rows: 8,
 	},
 };

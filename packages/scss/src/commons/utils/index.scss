@@ -1,8 +1,6 @@
 @use 'sass:list';
 
 @use '@lucca-front/icons/src/commons/core' as transform;
-
-@use '@lucca-front/scss/src/commons/config';
 @use '@lucca-front/scss/src/commons/core';
 
 @use '@lucca-front/scss/src/commons/utils/keyframe';
@@ -245,20 +243,6 @@
 	color: var(--palettes-neutral-700) !important;
 }
 
-// .u-unit is deprecated
-.u-unit {
-	font-size: 0.66em !important;
-}
-
-// .u-comma is deprecated
-.u-comma {
-	&:not(:last-child) {
-		&::after {
-			content: ', ' !important;
-		}
-	}
-}
-
 .u-fontWeightRegular {
 	font-weight: 400 !important;
 }
@@ -284,15 +268,6 @@
 
 .u-fontFamilyCursive {
 	font-family: var(--commons-font-family-cursive) !important;
-}
-
-@each $elevation in config.$elevations {
-	$index: list.index(config.$elevations, $elevation);
-
-	// .u-elevate* is deprecated
-	.u-elevate#{$index} {
-		box-shadow: var(--commons-elevations-elevation-#{$index});
-	}
 }
 
 @include core.classes('float', core.$float);
@@ -366,9 +341,6 @@
 }
 
 @include core.spacings;
-@if (config.$importDeprecatedSpacings) {
-	@include core.spacings($token: false);
-}
 @include core.sizes;
 @include core.borderRadius;
 @include core.palettes;

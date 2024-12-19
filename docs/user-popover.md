@@ -1,8 +1,6 @@
-# Documentation User Popover
-
 La UserPopover est un composant qui apparaît au survol d'un élément et qui affiche différentes informations sur l'utilisateur.
 
-## Setup
+### Setup
 
 Afin de pouvoir installer la UserPopover, vous devez appeler la fonction `provideLuUserPopover` dans votre module racine.
 
@@ -18,7 +16,7 @@ import { provideLuUserPopover } from '@lucca-front/ng/user-popover';
 export class AppModule { }
 ```
 
-## Utilisation
+### Utilisation
 
 Pour utiliser la UserPopover, il vous suffit d'utiliser la directive `[luUserPopover]` et de lui fournir un LuUser
 
@@ -40,9 +38,9 @@ import { LuUserPopoverDirective } from '@lucca-front/ng/user-popover';
 export class MyComponent { }
 ```
 
-## Inputs
+### Inputs
 
-### luEmployeeCard
+#### luEmployeeCard
 
 ```html
 <div [luUserPopover]="user"></div>
@@ -51,7 +49,7 @@ export class MyComponent { }
 Permet de fournir un utilisateur à la UserPopover.
 
 
-### luUserPopoverEnterDelay
+#### luUserPopoverEnterDelay
 
 ```html
 <div [luUserPopover]="user" [luUserPopoverEnterDelay]="200"></div>
@@ -59,7 +57,7 @@ Permet de fournir un utilisateur à la UserPopover.
 
 Permet de définir le délai avant l'affichage du UserPopover en millisecondes. Par défaut 300
 
-### luUserPopoverLeaveDelay
+#### luUserPopoverLeaveDelay
 
 ```html
 <div [luUserPopover]="user" [luUserPopoverLeaveDelay]="200"></div>
@@ -67,7 +65,7 @@ Permet de définir le délai avant l'affichage du UserPopover en millisecondes. 
 
 Permet de définir le délai avant la disparition du UserPopover en millisecondes. Par défaut 100
 
-### luUserPopoverDisabled
+#### luUserPopoverDisabled
 
 ```html	
 <div [luUserPopover]="user" [luUserPopoverDisabled]="true"></div>
@@ -75,7 +73,7 @@ Permet de définir le délai avant la disparition du UserPopover en milliseconde
 
 Permet de désactiver le UserPopover
 
-## Feature Flag
+### Feature Flag
 Au moment où sont écrites ces lignes, la UserPopover est branché sur un feature flag de la librairie `Lucca.Core.FeatureFlags`.
 Il est donc nécessaire de l'activer dans votre application pour pouvoir l'utiliser.
 
@@ -95,7 +93,7 @@ export class AppModule { }
 
 Ce feature flag est temporaire et sera supprimé dans une prochaine version.
 
-## Store et Services
+### Store et Services
 Le User popover est fournit avec un service qui gère la récupération des données, mais aussi qui stocke les informations des utilisateurs déjà récupérés, y compris les images.
 Ce service est un singleton et est donc partagé entre tous les UserPopover de l'application.
 

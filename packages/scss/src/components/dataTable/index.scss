@@ -1,9 +1,10 @@
 @use 'exports' as *;
 
-// Faire une repasse CSS vars mods
+.dataTableWrapper {
+	@include vars;
+}
 
 .dataTable {
-	@include vars;
 	@include component;
 
 	&.mod-cellBorder {
@@ -25,20 +26,13 @@
 	&[class*='mod-layoutFixed'] {
 		@include layoutFixedCells;
 	}
-
-	@include collapsedRow;
 }
 
-.dataTable-body-row,
-.dataTable-foot-row {
+:is(.dataTable-head-row, .dataTable-body-row, .dataTable-foot-row) {
 	&.mod-group {
 		@include group;
 	}
-}
 
-.dataTable-head-row,
-.dataTable-body-row,
-.dataTable-foot-row {
 	&.mod-selectable {
 		@include selectable;
 	}
@@ -48,15 +42,9 @@
 	}
 }
 
-.dataTable-head-row-cell,
-.dataTable-body-row-cell,
-.dataTable-foot-row-cell {
+:is(.dataTable-head-row-cell, .dataTable-body-row-cell, .dataTable-foot-row-cell) {
 	&.mod-actions {
 		@include actions;
-
-		// .mod-actionsHidden is deprecated &.mod-actionsHidden {
-		// 	@include actionsHidden;
-		// }
 	}
 
 	&.mod-alignCenter {
@@ -73,5 +61,25 @@
 
 	&.mod-tree {
 		@include tree;
+	}
+}
+
+.dataTable-body-row {
+	&.is-collapsed {
+		@include collapsed;
+	}
+
+	&:first-child {
+		&:has(.dataTable-body-row-cell-expand-button.button[aria-expanded='false']) {
+			~ .dataTable-body-row {
+				@include collapsed;
+			}
+		}
+	}
+}
+
+.dataTable-body-row-cell-expand-button {
+	&[aria-expanded='true'] {
+		@include expanded;
 	}
 }

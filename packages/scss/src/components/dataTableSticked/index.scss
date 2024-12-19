@@ -3,6 +3,8 @@
 @use 'exports' as *;
 
 .dataTableWrapper {
+	@include vars;
+
 	&:has(.dataTable.mod-stickyHeader) {
 		@include stickyHeader;
 	}
@@ -31,7 +33,11 @@
 		@include lastRowVisible;
 	}
 
-	&:has(.mod-stickyColumn) {
+	&:has(:is(.dataTable-head-row-cell, .dataTable-head-body-cell, .dataTable-foot-row-cell).mod-stickyColumn) {
 		@include stickyColumn;
+
+		&:has(.dataTable.mod-cellBorder) {
+			@include stickyColumnBorder;
+		}
 	}
 }

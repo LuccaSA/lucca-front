@@ -1,33 +1,29 @@
-@use '@lucca-front/scss/src/commons/config';
-
-@use '@lucca-front/scss/src/commons/utils/media';
-@use '@lucca-front/icons/src/commons/utils/icon';
-@use '@lucca-front/scss/src/commons/utils/reset';
 @use '@lucca-front/scss/src/commons/utils/color';
 
 @mixin stickyHeader {
+	--components-dataTable-overflow: auto;
+
 	.dataTable-head {
-		background-color: var(--pr-t-elevation-surface-raised);
 		position: sticky;
-		top: 0;
+		top: -1px;
 		z-index: 1;
 
 		&::after {
 			content: '';
-			margin-top: 1px;
 			left: 0;
 			right: 0;
 			height: var(--pr-t-spacings-100);
 			position: absolute;
 			background-image: linear-gradient(#{color.transparentize(var(--palettes-neutral-400), 0.24)}, transparent);
 			pointer-events: none;
-			box-shadow: 0 -1px var(--commons-border-200);
+			box-shadow: 0 1px var(--commons-border-200) inset;
 		}
 	}
 }
 
 @mixin columnsOverflow {
-	overflow: auto;
+	--components-dataTable-overflow: auto;
+
 	display: flex;
 
 	&::before,
@@ -40,21 +36,23 @@
 		margin-left: calc(var(--pr-t-spacings-100) * -1);
 		top: 0;
 		pointer-events: none;
-		z-index: 1;
+		z-index: 3;
 	}
 
 	&::before {
 		left: 0;
+		opacity: var(--components-dataTable-shadow-firstColumnOpacity);
 	}
 
 	&::after {
 		right: 0;
 		transform: scaleX(-1);
+		opacity: var(--components-dataTable-shadow-lastColumnOpacity);
 	}
 }
 
 @mixin rowsOverflow {
-	overflow: auto;
+	--components-dataTable-overflow: auto;
 
 	.dataTableShadows {
 		display: flex;
@@ -70,21 +68,24 @@
 			margin-top: calc(var(--pr-t-spacings-100) * -1);
 			flex-shrink: 0;
 			pointer-events: none;
+			z-index: 2;
 		}
 
 		&::before {
 			top: 0;
+			opacity: var(--components-dataTable-shadow-firstRowOpacity);
 		}
 
 		&::after {
 			bottom: 0;
 			transform: scaleY(-1);
+			opacity: var(--components-dataTable-shadow-lastRowOpacity);
 		}
 	}
 }
 
 @mixin stickyColumn {
-	overflow: auto;
+	--components-dataTable-overflow: auto;
 
 	%addShadow {
 		content: '';
@@ -104,6 +105,8 @@
 	:is(.dataTable-body-row-cell, .dataTable-head-row-cell, .dataTable-foot-row-cell) {
 		&.mod-stickyColumn {
 			&:has(~ :is(.dataTable-body-row-cell, .dataTable-head-row-cell, .dataTable-foot-row-cell):not(.mod-stickyColumn)) {
+				transform: translateX(-1px);
+
 				&:not(:has(+ :is(.dataTable-body-row-cell, .dataTable-head-row-cell, .dataTable-foot-row-cell).mod-stickyColumn)) {
 					&::after {
 						@extend %addShadow;
@@ -141,6 +144,20 @@
 
 			&:last-child {
 				right: 0;
+			}
+		}
+	}
+}
+
+@mixin stickyColumnBorder {
+	:is(.dataTable-body-row-cell, .dataTable-head-row-cell, .dataTable-foot-row-cell) {
+		&.mod-stickyColumn {
+			&:has(~ :is(.dataTable-body-row-cell, .dataTable-head-row-cell, .dataTable-foot-row-cell):not(.mod-stickyColumn)) {
+				&:not(:has(+ :is(.dataTable-body-row-cell, .dataTable-head-row-cell, .dataTable-foot-row-cell).mod-stickyColumn)) {
+					&::after {
+						box-shadow: 1px 0 var(--commons-border-200) inset;
+					}
+				}
 			}
 		}
 	}
