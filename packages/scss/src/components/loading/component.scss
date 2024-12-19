@@ -1,8 +1,6 @@
 @use '@lucca-front/scss/src/commons/utils/loading';
 
 @mixin component {
-	@include loading.spinner();
-
 	min-height: var(--components-loading-size);
 	padding: var(--components-loading-padding);
 	margin: var(--components-loading-margin);
@@ -12,6 +10,8 @@
 	position: relative;
 	text-align: var(--components-loading-textAlign);
 	vertical-align: top;
+
+	@include loading.spinner();
 
 	&:not(:empty) {
 		--components-loading-padding: 0 0 0 var(--pr-t-spacings-400);

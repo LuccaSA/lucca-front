@@ -3,7 +3,6 @@
 @use '@lucca-front/scss/src/commons/utils/namespace';
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
-	@include button.text;
 	@include button.withIcon;
 
 	--components-button-padding: 0 var(--pr-t-spacings-50);
@@ -20,6 +19,8 @@
 	font-size: var(--components-sortable-fontSize);
 	line-height: var(--components-sortable-lineHeight);
 	color: currentColor;
+
+	@include button.text;
 
 	@at-root ($atRoot) {
 		.tableSortable-arrows {
