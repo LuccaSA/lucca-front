@@ -1,6 +1,6 @@
-@import '../packages/icons/src/main';
-@import '../packages/scss/src/main-all';
-@import '../packages/ng/styles/main';
+@use '../packages/icons/src/main' as icons;
+@use '../packages/scss/src/main-all' as scss;
+@use '../packages/ng/styles/main' as ng;
 
 .demo-utilityWrapper {
 	display: flex;

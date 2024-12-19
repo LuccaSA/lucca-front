@@ -1,3 +1,3 @@
-@import '_definitions';
-@include optionSearcherStyle;
-@include optionPlaceholderStyle;
+@use '_definitions';
+@include definitions.optionSearcherStyle;
+@include definitions.optionPlaceholderStyle;

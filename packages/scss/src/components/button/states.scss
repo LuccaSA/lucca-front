@@ -19,12 +19,12 @@
 }
 
 @mixin loading {
-	@include loading.spinner(var(--components-button-font-size));
-
 	--components-button-opacity: 0.4;
 	--components-button-pointerEvents: none;
 	--components-button-color: transparent;
 	--components-button-userSelect: none;
+
+	@include loading.spinner(var(--components-button-font-size));
 }
 
 @mixin loadingS {

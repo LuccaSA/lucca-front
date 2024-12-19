@@ -6,12 +6,11 @@
 }
 
 @mixin loading {
-	@include loading.spinner(calc(var(--components-numericBadge-size) - var(--pr-t-spacings-100)));
-
 	--commons-loading-frontground: var(--components-numericBadge-loadingColor);
+	--commons-loading-borderWidth: 2px;
 	--components-numericBadge-color: transparent;
 
-	--commons-loading-borderWidth: 2px;
+	@include loading.spinner(calc(var(--components-numericBadge-size) - var(--pr-t-spacings-100)));
 }
 
 @mixin loadingS {
