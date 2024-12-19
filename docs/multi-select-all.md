@@ -17,7 +17,7 @@ class MyComponent {}
 <lu-multi-select users withSelectAll [withSelectAllDisplayerLabel]="'POTATOES' | transloco" />
 ```
 
-#### Cas des selects custom
+#### Affichage personnalisé
 
 Pour avoir un affichage plus parlant pour l'utilisateur, le multi-select doit connaître son nombre d'options. En plus du cas standard vu ci-dessus, il faut ajouter la directive `LuCoreSelectTotalCountDirective`.
 
