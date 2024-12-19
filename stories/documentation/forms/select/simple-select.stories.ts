@@ -8,14 +8,14 @@ import { LuCoreSelectJobQualificationsDirective } from '@lucca-front/ng/core-sel
 import { LuCoreSelectUsersDirective } from '@lucca-front/ng/core-select/user';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 import { LuUserDisplayPipe } from '@lucca-front/ng/user';
-import { Meta, applicationConfig, moduleMetadata } from '@storybook/angular';
+import { applicationConfig, Meta, moduleMetadata } from '@storybook/angular';
 import { HiddenArgType } from 'stories/helpers/common-arg-types';
 import { getStoryGenerator, useDocumentationStory } from 'stories/helpers/stories';
 import { provideCoreSelectCurrentUserId } from '../../../../packages/ng/core-select/user/me.provider';
 import { LuCoreSelectLegumesDirective } from './custom-api-example.component';
 import { LuCoreSelectCustomEstablishmentsDirective } from './custom-establishment-example.component';
 import { LuCoreSelectCustomUsersDirective } from './custom-user-example.component';
-import { FilterLegumesPipe, ILegume, LuCoreSelectInputStoryComponent, SortLegumesPipe, allLegumes, colorNameByColor, coreSelectStory } from './select.utils';
+import { allLegumes, colorNameByColor, coreSelectStory, FilterLegumesPipe, ILegume, LuCoreSelectInputStoryComponent, SortLegumesPipe } from './select.utils';
 
 export type LuSimpleSelectInputStoryComponent = LuCoreSelectInputStoryComponent & {
 	selectedLegume: ILegume | null;
@@ -391,7 +391,7 @@ export const GroupBy = generateStory({
 export const AddOption = generateStory({
 	name: 'Add option',
 	description: "Pour ajouter une option, il suffit d'utiliser l'input `addOptionStrategy` et de s'abonner à l'output `addOption`. Le label est customisable via l'input `addOptionLabel`.",
-	template: `<div class="u-marginBottomS">There is {{ legumes.length }} legumes in the list.</div>
+	template: `<div class="pr-u-marginBottom200">There is {{ legumes.length }} legumes in the list.</div>
 <lu-simple-select
 	#selectRef
 	placeholder="Placeholder..."
