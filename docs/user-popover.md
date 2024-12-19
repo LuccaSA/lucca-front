@@ -1,4 +1,4 @@
-### Setup
+### Mise en place
 
 Afin de pouvoir installer la UserPopover, vous devez appeler la fonction `provideLuUserPopover` dans votre module racine.
 

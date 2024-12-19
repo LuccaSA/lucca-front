@@ -8,19 +8,13 @@ Il faut ajouter un _provider_ global dans votre `AppModule` ou dans votre fichie
 }
 ```
 
-### Customisation
+### Personnalisation
 
-<details>
-
-<summary>S'exclure de la sélection</summary>
+#### S'exclure de la sélection
 
 Il est possible de s'exclure de la liste des utilisateurs sélectionnables grâce à `displayMeOption="false"`.
 
-</details>
-
-<details>
-
-<summary>Modifier l'affichage d'une option (mais pas la source de données)</summary>
+#### Modifier l'affichage d'une option (mais pas la source de données)
 
 Il est possible de modifier l'affichage d'une option en fournissant un template pour les options. Pour cela, il faut ajouter un template avec la directive `luOptionTemplate` dans le composant parent.
 
@@ -39,11 +33,7 @@ Il est possible de modifier l'affichage d'une option en fournissant un template 
 </lu-simple-select>
 ```
 
-</details>
-
-<details>
-
-<summary>Customiser la source de données (et éventuellement le rendu des options)</summary>
+#### Personnaliser la source de données (et éventuellement le rendu des options)
 
 Il est possible de modifier la source de données utilisée par le composant. Pour cela, il faut créer une nouvelle directive qui étend `LuCoreSelectUsersDirective` et qui surcharge la méthode `getOptions`.
 
@@ -90,6 +80,4 @@ Il est ensuite possible de modifier le rendu des options en utilisant des propri
     <div>{{ person.myCustomProperty }}</div>
   </ng-container>
 </lu-simple-select>
-
-</details>
 ```
