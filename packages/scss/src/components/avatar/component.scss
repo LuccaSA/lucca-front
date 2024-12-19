@@ -52,7 +52,7 @@
 			margin-block: calc(var(--components-avatarWrapper-overlap) / 2);
 
 			&:not(:last-child) {
-				margin-right: calc(var(--components-avatarWrapper-overlap) * -1);
+				margin-inline-end: calc(var(--components-avatarWrapper-overlap) * -1);
 			}
 		}
 

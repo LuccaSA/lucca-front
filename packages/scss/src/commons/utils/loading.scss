@@ -6,7 +6,7 @@
 		@include keyframe.rotate;
 
 		content: '';
-		
+
 		width: $size;
 		height: $size;
 		border-radius: var(--commons-borderRadius-full);
@@ -22,7 +22,7 @@
 		animation-timing-function: linear;
 		animation-iteration-count: infinite;
 		border-color: var(--commons-loading-frontground);
-		border-top-color: transparent;
+		border-block-start-color: transparent;
 	}
 }
 

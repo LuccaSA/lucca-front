@@ -8,14 +8,14 @@ export default {
 
 function getTemplate(args: FloatStory): string {
 	return `<div>
-	<div class="u-floatLeft demo-utility"><code class="code">u-floatLeft</code></div>
-	<div class="u-floatRight demo-utility"><code class="code">u-floatRight</code></div>
+	<div class="u-floatInlineStart demo-utility"><code class="code">u-floatInlineStart</code></div>
+	<div class="u-floatInlineEnd demo-utility"><code class="code">u-floatInlineEnd</code></div>
 	<div class="u-clearBoth demo-utility"><code class="code">u-clearBoth</code></div>
 </div>
 <div>
 	<div class="u-clearfix">
-		<div class="u-floatLeft demo-utility"><code class="code">u-floatLeft</code></div>
-		<div class="u-floatRight demo-utility"><code class="code">u-floatRight</code></div>
+		<div class="u-floatInlineStart demo-utility"><code class="code">u-floatInlineStart</code></div>
+		<div class="u-floatInlineEnd demo-utility"><code class="code">u-floatInlineEnd</code></div>
 	</div>
 	<div class="demo-utility"><code class="code">u-clearfix</code></div>
 </div>`;
@@ -33,7 +33,7 @@ const Template: StoryFn<FloatStory> = (args) => ({
 		}
 
 		.demo-utility {
-			margin-bottom: var(--pr-t-spacings-100);
+			margin-block-end: var(--pr-t-spacings-100);
 		}
 		`,
 	],

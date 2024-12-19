@@ -9,7 +9,7 @@
 	gap: var(--pr-t-spacings-50);
 	max-width: var(--components-comment-max-width);
 	align-items: var(--components-comment-align);
-	margin-left: var(--components-comment-margin);
+	margin-inline-start: var(--components-comment-margin);
 
 	.avatar {
 		@include avatar.XS;
@@ -74,7 +74,7 @@
 		}
 
 		.comment-content-text {
-			margin-bottom: 0;
+			margin-block-end: 0;
 			overflow-wrap: break-word;
 		}
 

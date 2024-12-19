@@ -85,7 +85,7 @@ const Template: StoryFn<MenuScrollboxStory> = (args) => ({
 				min-width: 20rem;
 				overflow: hidden;
 				resize: horizontal;
-				padding-bottom: 4rem;
+				padding-block-end: 4rem;
 			}
 		`,
 	],

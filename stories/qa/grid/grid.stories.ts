@@ -14,7 +14,7 @@ import { Meta, StoryFn } from '@storybook/angular';
 				padding: 0.6rem var(--pr-t-spacings-200);
 			}
 			.grid + .grid {
-				margin-top: var(--pr-t-spacings-200);
+				margin-block-start: var(--pr-t-spacings-200);
 			}
 		`,
 	],

@@ -8,13 +8,13 @@ export default {
 
 function getTemplate(args: VerticalAlignStory): string {
 	return `<div class="demo-utility">
-		<div class="u-textAlignLeft"><code class="code">u-textAlignLeft</code></div>
+		<div class="u-textAlignStart"><code class="code">u-textAlignStart</code></div>
 	</div>
 	<div class="demo-utility">
 		<div class="u-textAlignCenter"><code class="code">u-textAlignCenter</code></div>
 	</div>
 	<div class="demo-utility">
-		<div class="u-textAlignRight"><code class="code">u-textAlignRight</code></div>
+		<div class="u-textAlignEnd"><code class="code">u-textAlignEnd</code></div>
 	</div>`;
 }
 

@@ -33,7 +33,7 @@
 
 	@at-root ($atRoot) {
 		.form-header {
-			margin-bottom: var(--pr-t-spacings-300);
+			margin-block-end: var(--pr-t-spacings-300);
 		}
 
 		.form-header-title {
@@ -73,18 +73,18 @@
 			margin: 0;
 			padding: 0 0 var(--components-form-label-margin-bottom);
 			width: 100%;
-			text-align: left;
+			text-align: start;
 		}
 
 		.form-group-legend,
 		.form-group-title {
 			font-size: var(--components-field-framed-title-font-size);
 			line-height: var(--components-field-framed-title-line-height);
-			padding-bottom: var(--pr-t-spacings-50);
+			padding-block-end: var(--pr-t-spacings-50);
 		}
 
 		.form-actions {
-			text-align: right;
+			text-align: end;
 		}
 
 		.form {
@@ -92,7 +92,7 @@
 			.radiosfield,
 			.checkboxesfield,
 			.checkbox.mod-field {
-				margin-bottom: var(--components-form-field-margin-bottom);
+				margin-block-end: var(--components-form-field-margin-bottom);
 			}
 		}
 

@@ -1,7 +1,7 @@
 @use '@lucca-front/scss/src/commons/utils/form';
 
 @mixin inline {
-	margin-right: calc(var(--components-field-input-inline-margin) * 2);
+	margin-inline-end: calc(var(--components-field-input-inline-margin) * 2);
 	display: inline-flex;
 }
 
@@ -12,7 +12,7 @@
 @mixin compact {
 	align-items: center;
 	flex-direction: row;
-	margin-bottom: var(--pr-t-spacings-200);
+	margin-block-end: var(--pr-t-spacings-200);
 	width: calc(
 		var(--components-field-sizes-default) + var(--components-field-compact-label-right-margin) +
 			var(--components-field-compact-label-sizes-default)
@@ -21,10 +21,10 @@
 	.textfield-label,
 	.radiosfield-label,
 	.checkboxesfield-label {
-		margin-right: var(--components-field-compact-label-right-margin);
+		margin-inline-end: var(--components-field-compact-label-right-margin);
 		width: var(--components-field-compact-label-sizes-default);
 		flex: 0 0 auto;
-		margin-bottom: 0;
+		margin-block-end: 0;
 		order: -1;
 	}
 
@@ -35,19 +35,19 @@
 		align-items: center;
 		display: inline-flex;
 		position: absolute;
-		bottom: 0;
-		top: 0;
-		left: 100%;
+		inset-block-end: 0;
+		inset-block-start: 0;
+		inset-inline-start: 100%;
 		width: 100%;
 		margin: 0 0 0 var(--pr-t-spacings-200);
 
 		&.mod-helper {
-			padding-left: calc(var(--components-field-compact-label-sizes-default) + var(--components-field-compact-label-right-margin));
-			bottom: auto;
+			padding-inline-start: calc(var(--components-field-compact-label-sizes-default) + var(--components-field-compact-label-right-margin));
+			inset-block-end: auto;
 			max-width: 100%;
-			top: 100%;
-			left: 0;
-			right: 0;
+			inset-block-start: 100%;
+			inset-inline-start: 0;
+			inset-inline-end: 0;
 		}
 	}
 
@@ -59,7 +59,7 @@
 
 	.radio,
 	.checkbox {
-		margin-right: var(--pr-t-spacings-300);
+		margin-inline-end: var(--pr-t-spacings-300);
 	}
 }
 
@@ -82,9 +82,9 @@
 		transition-property: transform;
 		position: absolute;
 		text-align: center;
-		bottom: 0;
-		left: -1px;
-		right: 0;
+		inset-block-end: 0;
+		inset-inline-start: -1px;
+		inset-inline-end: 0;
 		transform: translateY(0);
 		z-index: 4;
 
@@ -132,8 +132,8 @@
 		gap: var(--components-field-horizontal-spacing);
 
 		.checkbox {
-			margin-top: 0;
-			margin-bottom: 0;
+			margin-block-start: 0;
+			margin-block-end: 0;
 		}
 	}
 
@@ -172,14 +172,14 @@
 	.radiosfield-suffix,
 	.checkboxesfield-suffix {
 		padding: var(--components-field-framed-side-padding);
-		top: auto;
+		inset-block-start: auto;
 		z-index: 10;
-		right: 0;
-		bottom: 0;
+		inset-inline-end: 0;
+		inset-block-end: 0;
 
 		// todo: déplacer dans textfield
 		~ .textfield-input {
-			padding-right: var(--components-field-framed-suffix-padding-right);
+			padding-inline-end: var(--components-field-framed-suffix-padding-right);
 		}
 	}
 }
@@ -275,8 +275,8 @@
 	&::after {
 		color: var(--palettes-neutral-600);
 		padding: var(--components-field-framed-side-padding);
-		bottom: 0;
-		right: 0;
+		inset-block-end: 0;
+		inset-inline-end: 0;
 		z-index: 4;
 	}
 
@@ -285,7 +285,7 @@
 	}
 
 	.textfield-input {
-		padding-right: var(--components-field-framed-suffix-padding-right);
+		padding-inline-end: var(--components-field-framed-suffix-padding-right);
 	}
 }
 

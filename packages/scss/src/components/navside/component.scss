@@ -7,27 +7,27 @@
 @use '@lucca-front/scss/src/components/numericBadge/exports' as numericBadge;
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
-	bottom: 0;
-	left: 0;
-	top: 0;
+	inset-block-end: 0;
+	inset-inline-start: 0;
+	inset-block-start: 0;
 	z-index: 100;
 	position: fixed;
 	display: flex;
 	flex-direction: column;
 	background-color: var(--components-navSide-fullwidth-palette-bg-color);
-	padding-top: var(--components-navSide-padding-top);
+	padding-block-start: var(--components-navSide-padding-top);
 	width: var(--commons-navSide-width);
-	scroll-margin-top: var(--commons-banner-height);
+	scroll-margin-block-start: var(--commons-banner-height);
 
 	.numericBadge {
 		@include numericBadge.S;
 		@include numericBadge.brand;
 
-		margin-left: auto;
+		margin-inline-start: auto;
 	}
 
 	.newBadge {
-		margin-left: auto;
+		margin-inline-start: auto;
 	}
 
 	@at-root ($atRoot) {
@@ -78,7 +78,7 @@
 			cursor: pointer;
 			background-color: transparent;
 			border: 0;
-			text-align: left;
+			text-align: start;
 			width: 100%;
 			height: 100%;
 			align-items: center;
@@ -121,7 +121,7 @@
 			column-gap: var(--pr-t-spacings-150);
 			row-gap: var(--pr-t-spacings-50);
 			align-items: center;
-			margin-left: auto;
+			margin-inline-start: auto;
 		}
 
 		.navSide-item-arrow {
@@ -130,7 +130,7 @@
 			transition-duration: var(--commons-animations-durations-fast);
 			transition-property: transform;
 			transition-timing-function: ease-out;
-			margin-left: auto;
+			margin-inline-start: auto;
 			display: grid;
 			place-items: center;
 			transform: rotate(0);
@@ -225,7 +225,7 @@
 				border-radius: var(--commons-borderRadius-M);
 				flex: 1 1 auto;
 				height: 0.9em;
-				margin-left: 1em;
+				margin-inline-start: 1em;
 			}
 		}
 	}

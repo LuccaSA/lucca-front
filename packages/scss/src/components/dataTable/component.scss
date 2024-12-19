@@ -7,12 +7,12 @@
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
 	display: table;
-	text-align: left;
+	text-align: start;
 	width: calc(100% + 1px);
 	height: calc(100% + 1px);
 	border-spacing: 0;
-	margin-left: -1px;
-	margin-top: -1px;
+	margin-inline-start: -1px;
+	margin-block-start: -1px;
 	table-layout: var(--components-dataTable-tableLayout);
 
 	@at-root ($atRoot) {

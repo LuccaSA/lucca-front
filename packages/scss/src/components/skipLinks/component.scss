@@ -9,7 +9,7 @@
 	padding: 0;
 	z-index: 9010;
 	inset: var(--pr-t-spacings-150);
-	bottom: auto;
+	inset-block-end: auto;
 
 	@at-root ($atRoot) {
 		.skipLinks-action {

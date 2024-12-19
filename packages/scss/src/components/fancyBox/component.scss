@@ -42,15 +42,15 @@
 
 			&::before {
 				transition-property: width, height, bottom, left;
-				bottom: var(--components-fancyBox-offsetBlock);
-				left: var(--components-fancyBox-offsetInline);
+				inset-block-end: var(--components-fancyBox-offsetBlock);
+				inset-inline-start: var(--components-fancyBox-offsetInline);
 				background-image: var(--components-fancyBox-background-left);
 			}
 
 			&::after {
 				transition-property: width, height, top, right;
-				top: var(--components-fancyBox-offsetBlock);
-				right: var(--components-fancyBox-offsetInline);
+				inset-block-start: var(--components-fancyBox-offsetBlock);
+				inset-inline-end: var(--components-fancyBox-offsetInline);
 				background-image: var(--components-fancyBox-background-right);
 			}
 		}
@@ -60,8 +60,8 @@
 			width: var(--components-fancyBox-imageWidth);
 			height: var(--components-fancyBox-imageHeight);
 			background-repeat: no-repeat;
-			top: var(--components-fancyBox-offsetBlock);
-			right: var(--components-fancyBox-offsetInline);
+			inset-block-start: var(--components-fancyBox-offsetBlock);
+			inset-inline-end: var(--components-fancyBox-offsetInline);
 			background-image: var(--components-fancyBox-foreground);
 			background-size: contain;
 			transition-property: width, height, top, right;

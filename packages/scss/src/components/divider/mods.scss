@@ -18,7 +18,7 @@
 	--components-divider-alignSelf: stretch;
 
 	&:where(:empty) {
-		border-left: var(--commons-divider-border);
+		border-inline-start: var(--commons-divider-border);
 	}
 
 	&:not(:empty) {
@@ -28,7 +28,7 @@
 
 		&::before,
 		&::after {
-			border-left: var(--commons-divider-border);
+			border-inline-start: var(--commons-divider-border);
 			min-height: var(--components-divider-minSize);
 		}
 	}

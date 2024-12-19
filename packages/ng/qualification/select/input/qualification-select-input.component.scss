@@ -6,12 +6,12 @@
 	font-size: var(--sizes-S-fontSize);
 	line-height: var(--sizes-S-lineHeight);
 	width: 100%;
-	text-align: left;
+	text-align: start;
 	color: var(--palettes-neutral-600);
 	margin: 0;
 
 	&:first-of-type {
-		border-top-color: transparent;
-		margin-top: 0;
+		border-block-start-color: transparent;
+		margin-block-start: 0;
 	}
 }

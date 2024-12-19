@@ -42,7 +42,7 @@
 		.callout-content-description-actions {
 			display: flex;
 			gap: var(--pr-t-spacings-75);
-			margin-top: var(--pr-t-spacings-50);
+			margin-block-start: var(--pr-t-spacings-50);
 			padding: var(--pr-t-spacings-50) 0;
 
 			.button {

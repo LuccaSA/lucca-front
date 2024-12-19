@@ -14,7 +14,7 @@
 	vertical-align: top;
 	align-items: flex-end;
 	white-space: wrap;
-	left: var(--components-sortable-offset);
+	inset-inline-start: var(--components-sortable-offset);
 	text-align: inherit;
 	flex-direction: var(--components-sortable-direction);
 	font-size: var(--components-sortable-fontSize);
@@ -23,7 +23,7 @@
 
 	@at-root ($atRoot) {
 		.tableSortable-arrows {
-			margin-bottom: var(--components-sortable-arrowsOffset);
+			margin-block-end: var(--components-sortable-arrowsOffset);
 			position: relative;
 			width: 1rem;
 			height: 1rem;

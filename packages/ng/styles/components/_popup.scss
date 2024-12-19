@@ -54,12 +54,12 @@
 
 .lu-modal-header {
 	position: sticky;
-	top: 0;
+	inset-block-start: 0;
 	z-index: 5;
 	background-color: var(--pr-t-elevation-surface-raised);
 	padding: var(--components-popup-padding-vertical) var(--pr-t-spacings-800) var(--components-popup-padding-vertical)
 		var(--components-popup-padding-horizontal);
-	border-bottom: 1px solid var(--commons-border-100);
+	border-block-end: 1px solid var(--commons-border-100);
 }
 
 .lu-modal-header-title {
@@ -70,8 +70,8 @@
 
 .button.lu-modal-header-close {
 	position: absolute;
-	right: 1.25rem;
-	top: var(--pr-t-spacings-150);
+	inset-inline-end: 1.25rem;
+	inset-block-start: var(--pr-t-spacings-150);
 }
 
 .lu-modal-content {
@@ -83,21 +83,21 @@
 		padding: 0;
 
 		&:after {
-			padding-bottom: 0;
+			padding-block-end: 0;
 		}
 	}
 }
 
 .lu-modal-footer {
 	position: sticky;
-	bottom: 0;
+	inset-block-end: 0;
 	z-index: 5;
 	display: flex;
 	align-items: center;
 	justify-content: flex-end;
 	background-color: var(--pr-t-elevation-surface-raised);
 	box-shadow: var(--pr-t-elevation-shadow-overflow);
-	margin-top: auto;
+	margin-block-start: auto;
 	padding: var(--components-popup-padding-vertical) var(--components-popup-padding-horizontal);
 }
 
@@ -134,10 +134,10 @@
 		.lu-modal-content-title {
 			color: var(--palettes-neutral-800);
 			font-size: var(--sizes-XL-fontSize);
-			margin-top: 2.5rem;
+			margin-block-start: 2.5rem;
 		}
 		.button {
-			margin-bottom: 2.5rem;
+			margin-block-end: 2.5rem;
 		}
 		.modal-visual {
 			margin: 4.5rem calc(var(--pr-t-spacings-400) * -1) 0 calc(var(--pr-t-spacings-400) * -1);

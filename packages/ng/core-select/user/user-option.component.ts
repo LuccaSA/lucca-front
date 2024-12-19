@@ -29,7 +29,7 @@ import { LuCoreSelectUsersDirective } from './users.directive';
 			.lu-select-additionalInformation {
 				font-size: 80%;
 				font-style: italic;
-				margin-top: -0.25em;
+				margin-block-start: -0.25em;
 			}
 		`,
 	],

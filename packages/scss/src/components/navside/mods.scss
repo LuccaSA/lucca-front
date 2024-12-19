@@ -45,12 +45,12 @@
 
 	.navSide-item-link-badgesOptional {
 		flex-direction: column;
-		margin-left: inherit;
+		margin-inline-start: inherit;
 	}
 
 	.numericBadge,
 	.newBadge {
-		margin-left: inherit;
+		margin-inline-start: inherit;
 	}
 
 	.navSide-item-placeholder {
@@ -62,8 +62,8 @@
 		}
 
 		&::after {
-			margin-left: 0;
-			margin-top: var(--pr-t-spacings-150);
+			margin-inline-start: 0;
+			margin-block-start: var(--pr-t-spacings-150);
 			width: 100%;
 		}
 	}
@@ -100,7 +100,7 @@
 }
 
 @mixin banner {
-	top: var(--commons-banner-height);
+	inset-block-start: var(--commons-banner-height);
 }
 
 @mixin mobileToggle {
@@ -108,9 +108,9 @@
 }
 
 @mixin mobile {
-	padding-top: var(--commons-navSide-mobile-toggle-height);
+	padding-block-start: var(--commons-navSide-mobile-toggle-height);
 	width: 100%;
-	bottom: auto;
+	inset-block-end: auto;
 
 	.navSide-mainSection,
 	.navSide-scrollWrapper {
@@ -126,9 +126,9 @@
 		&.mod-mobileToggle {
 			height: var(--commons-navSide-mobile-toggle-height);
 			background-color: var(--palettes-product-800);
-			top: 0;
-			left: 0;
-			right: 0;
+			inset-block-start: 0;
+			inset-inline-start: 0;
+			inset-inline-end: 0;
 			z-index: 1;
 			display: block;
 			position: fixed;

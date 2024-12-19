@@ -6,7 +6,7 @@
 	.timeline-step-title {
 		--components-timeline-title-fontSize: var(--sizes-S-fontSize);
 		--components-timeline-title-lineHeight: var(--sizes-M-lineHeight);
-		padding-left: 1.25rem;
+		padding-inline-start: 1.25rem;
 
 		&::before {
 			width: 0.5rem;
@@ -17,7 +17,7 @@
 
 @mixin L {
 	.timeline-step-title {
-		padding-left: 2.25rem;
+		padding-inline-start: 2.25rem;
 		min-width: 2rem;
 
 		&::before {
@@ -28,7 +28,7 @@
 
 	.timeline-step:not([aria-current='step']):not([aria-current='step'] ~ .timeline-step) .timeline-step-title-icon {
 		&::before {
-			left: var(--pr-t-spacings-100);
+			inset-inline-start: var(--pr-t-spacings-100);
 		}
 	}
 }
@@ -36,7 +36,7 @@
 @mixin addStepL {
 	.timeline-step-title-icon {
 		&::before {
-			left: var(--pr-t-spacings-100);
+			inset-inline-start: var(--pr-t-spacings-100);
 		}
 	}
 }
@@ -46,7 +46,7 @@
 	flex-direction: column;
 
 	.timeline-step {
-		margin-top: var(--pr-t-spacings-100);
+		margin-block-start: var(--pr-t-spacings-100);
 		display: block;
 		position: relative;
 		width: 100%;
@@ -57,16 +57,16 @@
 			display: block;
 			height: auto;
 			position: absolute;
-			top: calc(var(--pr-t-spacings-400) + var(--pr-t-spacings-50));
-			bottom: calc(var(--pr-t-spacings-150) * -1);
-			left: 0.45rem; // magic number
+			inset-block-start: calc(var(--pr-t-spacings-400) + var(--pr-t-spacings-50));
+			inset-block-end: calc(var(--pr-t-spacings-150) * -1);
+			inset-inline-start: 0.45rem; // magic number
 			margin: 0;
-			border-left: 2px solid var(--palettes-neutral-200);
+			border-inline-start: 2px solid var(--palettes-neutral-200);
 		}
 
 		&:not(:last-child)[aria-current='step'] {
 			&::after {
-				top: calc(var(--pr-t-spacings-400) + var(--pr-t-spacings-50));
+				inset-block-start: calc(var(--pr-t-spacings-400) + var(--pr-t-spacings-50));
 			}
 		}
 	}
@@ -77,12 +77,12 @@
 		min-width: 0;
 
 		&:before {
-			top: var(--pr-t-spacings-150);
+			inset-block-start: var(--pr-t-spacings-150);
 		}
 	}
 
 	.timeline-step-description {
-		padding-left: var(--pr-t-spacings-400);
+		padding-inline-start: var(--pr-t-spacings-400);
 	}
 
 	.timeline-stepAddBetweenStep {
@@ -93,7 +93,7 @@
 @mixin verticalNotSNotL {
 	.timeline-step-title {
 		&:before {
-			left: 0;
+			inset-inline-start: 0;
 		}
 	}
 }
@@ -101,38 +101,38 @@
 @mixin verticalS {
 	.timeline-step {
 		&::after {
-			bottom: calc(var(--pr-t-spacings-200) * -1);
-			left: 0.45rem; // magic number
-			top: var(--pr-t-spacings-400);
+			inset-block-end: calc(var(--pr-t-spacings-200) * -1);
+			inset-inline-start: 0.45rem; // magic number
+			inset-block-start: var(--pr-t-spacings-400);
 		}
 
 		&[aria-current='step'] {
 			&::after {
-				top: var(--pr-t-spacings-400);
+				inset-block-start: var(--pr-t-spacings-400);
 			}
 		}
 	}
 	.timeline-step-description {
-		padding-left: var(--pr-t-spacings-300);
+		padding-inline-start: var(--pr-t-spacings-300);
 	}
 }
 
 @mixin verticalL {
 	.timeline-step {
 		&::after {
-			bottom: calc(var(--pr-t-spacings-100) * -1);
-			left: 0.95rem; // magic number
-			top: 2.5rem;
+			inset-block-end: calc(var(--pr-t-spacings-100) * -1);
+			inset-inline-start: 0.95rem; // magic number
+			inset-block-start: 2.5rem;
 		}
 
 		&[aria-current='step'] {
 			&::after {
-				top: 2.5rem;
+				inset-block-start: 2.5rem;
 			}
 		}
 	}
 	.timeline-step-description {
-		padding-left: 2.5rem;
+		padding-inline-start: 2.5rem;
 		min-height: var(--pr-t-spacings-400);
 	}
 }
@@ -195,7 +195,7 @@
 
 		&::after {
 			border-color: var(--palettes-200, var(--palettes-product-200));
-			border-bottom-style: solid;
+			border-block-end-style: solid;
 		}
 	}
 }
@@ -208,7 +208,7 @@
 	.timeline-step:not([aria-current='step']):not([aria-current='step'] ~ .timeline-step) {
 		.timeline-step-title {
 			.timeline-step-title-icon::before {
-				left: 0;
+				inset-inline-start: 0;
 			}
 		}
 	}
@@ -256,8 +256,8 @@
 			border-radius: var(--commons-borderRadius-full);
 			background-color: var(--palettes-700, var(--palettes-product-700));
 			position: absolute;
-			left: var(--pr-t-spacings-50);
-			top: 50%;
+			inset-inline-start: var(--pr-t-spacings-50);
+			inset-block-start: 50%;
 			transform: translateY(-50%);
 		}
 	}
@@ -290,7 +290,7 @@
 	.timeline-step:last-child {
 		.timeline-step-title {
 			.timeline-step-title-icon::before {
-				left: 0;
+				inset-inline-start: 0;
 			}
 		}
 	}
@@ -300,7 +300,7 @@
 	.timeline-step:last-child {
 		.timeline-step-title {
 			.timeline-step-title-icon::before {
-				left: var(--pr-t-spacings-100);
+				inset-inline-start: var(--pr-t-spacings-100);
 			}
 		}
 	}
@@ -309,7 +309,7 @@
 @mixin addBetweenStep {
 	.timeline-stepAddBetweenStep {
 		.timeline-step-title {
-			padding-left: 0;
+			padding-inline-start: 0;
 
 			&:before {
 				display: none;
@@ -341,7 +341,7 @@
 
 @mixin addBetweenStepVerticalNotL {
 	.timeline-step:not([aria-current='step']):not([aria-current='step'] ~ .timeline-step) .timeline-step-title-icon::before {
-		left: 0;
+		inset-inline-start: 0;
 	}
 }
 
@@ -349,7 +349,7 @@
 	.timeline-step:not([aria-current='step']):not([aria-current='step'] ~ .timeline-step) .timeline-step-title-icon::before {
 		width: 1.5rem;
 		height: 1.5rem;
-		left: var(--pr-t-spacings-50);
+		inset-inline-start: var(--pr-t-spacings-50);
 	}
 }
 
@@ -369,13 +369,13 @@
 
 @mixin dashed {
 	.timeline-step::after {
-		border-bottom-style: dashed;
+		border-block-end-style: dashed;
 	}
 }
 
 @mixin dashedVertical {
 	.timeline-step::after {
-		border-left-style: dashed;
+		border-inline-start-style: dashed;
 	}
 }
 

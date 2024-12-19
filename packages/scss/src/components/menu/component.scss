@@ -12,9 +12,9 @@
 
 	&::after {
 		content: var(--components-menu-borderContent);
-		border-bottom-width: var(--commons-divider-width);
-		border-bottom-color: var(--commons-divider-color);
-		border-bottom-style: solid;
+		border-block-end-width: var(--commons-divider-width);
+		border-block-end-color: var(--commons-divider-color);
+		border-block-end-style: solid;
 		position: absolute;
 		height: 1px;
 		inset: auto 0 0;
@@ -22,7 +22,7 @@
 
 	// .label is deprecated
 	.label {
-		margin-right: 0;
+		margin-inline-end: 0;
 		background-color: var(--palettes-neutral-100);
 		color: var(--palettes-neutral-700);
 	}
