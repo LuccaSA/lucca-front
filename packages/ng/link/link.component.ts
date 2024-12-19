@@ -1,7 +1,7 @@
 import { booleanAttribute, Component, effect, ElementRef, HostBinding, inject, input, Input, OnDestroy, Renderer2, signal, ViewEncapsulation } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { getIntl } from '@lucca-front/ng/core';
 import { LU_LINK_TRANSLATIONS } from './link.translate';
-import { RouterLink } from '@angular/router';
 
 @Component({
 	// eslint-disable-next-line @angular-eslint/component-selector
