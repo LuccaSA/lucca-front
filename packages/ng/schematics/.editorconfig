@@ -1,0 +1,9 @@
+[*.html]
+max_line_length = off
+indent_style = unset
+trim_trailing_whitespace = true
+indent_size = unset
+
+[*.ts]
+quote_type = single
+max_line_length = off

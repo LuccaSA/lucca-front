@@ -10,12 +10,10 @@ require('@angular-devkit/schematics');
 export default (options?: { skipInstallation?: boolean }): Rule => {
 	const skipInstallation = options?.skipInstallation ?? false;
 
-	return async (tree, context) => {
+	return (tree, context) => {
 		if (!skipInstallation) {
 			installLocalDependencies(context);
 		}
-
-		const angularCompiler = await import('@angular/compiler');
 
 		tree.visit((path, entry) => {
 			if (path.includes('node_modules') || !entry) {
@@ -24,8 +22,8 @@ export default (options?: { skipInstallation?: boolean }): Rule => {
 
 			migrateFile(path, entry, tree, (content) =>
 				updateAngularTemplate(path, content, (template) => {
-					template = replaceComponentInputName('lu-empty-state-page', 'title', 'heading', template, angularCompiler);
-					template = replaceComponentInputName('lu-empty-state-section', 'title', 'heading', template, angularCompiler);
+					template = replaceComponentInputName('lu-empty-state-page', 'title', 'heading', template);
+					template = replaceComponentInputName('lu-empty-state-section', 'title', 'heading', template);
 					return template;
 				}),
 			);

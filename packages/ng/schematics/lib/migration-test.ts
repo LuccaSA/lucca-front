@@ -2,6 +2,7 @@ import { Tree } from '@angular-devkit/schematics';
 import { SchematicTestRunner, UnitTestTree } from '@angular-devkit/schematics/testing';
 import fs from 'fs';
 import path from 'path';
+import { readdirSync } from 'node:fs';
 
 export function createTreeFromFiles(testsRoot: string, files: string[], filePartFilter: string): Tree {
 	const tree = new UnitTestTree(Tree.empty());
@@ -11,6 +12,14 @@ export function createTreeFromFiles(testsRoot: string, files: string[], filePart
 		tree.create(file.replace(filePartFilter, '.'), fs.readFileSync(path.join(testsRoot, file)).toString().replace(/\r/g, ''));
 	}
 
+	return tree;
+}
+
+export function createTreeFromFolder(folder: string): Tree {
+	const tree = new UnitTestTree(Tree.empty());
+	for (const file of readdirSync(folder)) {
+		tree.create(file, fs.readFileSync(path.join(folder, file)).toString().replace(/\r/g, ''));
+	}
 	return tree;
 }
 
@@ -47,7 +56,7 @@ export function expectTree(tree: Tree): { toMatchTree(expectedTree: Tree): void 
 					throw new Error(`Input tree does not contain file: ${path}`);
 				}
 			});
-		},
+		}
 	};
 }
 
