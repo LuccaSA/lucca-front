@@ -1,6 +1,6 @@
-@mixin l {
-  --components-statusBadge-fontSize: var(--sizes-M-fontSize);
-  --components-statusBadge-lineHeight: var(--sizes-S-lineHeight);
-  --components-statusBadge-dot-size: .625rem;
-  --components-statusBadge-dot-top: .325rem;
+@mixin L {
+	--components-statusBadge-fontSize: var(--sizes-M-fontSize);
+	--components-statusBadge-lineHeight: var(--sizes-S-lineHeight);
+	--components-statusBadge-dot-size: 0.625rem;
+	--components-statusBadge-dot-top: 0.325rem;
 }

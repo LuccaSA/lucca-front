@@ -1,27 +1,27 @@
 /* eslint-disable @angular-eslint/no-output-on-prefix */
 import { OverlayConfig, OverlayContainer } from '@angular/cdk/overlay';
 import {
+	booleanAttribute,
 	ChangeDetectorRef,
+	computed,
 	Directive,
 	ElementRef,
 	EventEmitter,
 	HostBinding,
 	HostListener,
+	inject,
 	Input,
+	model,
 	OnDestroy,
 	OnInit,
 	Output,
 	TemplateRef,
 	Type,
 	ViewChild,
-	booleanAttribute,
-	computed,
-	inject,
-	model,
 } from '@angular/core';
 import { ControlValueAccessor } from '@angular/forms';
-import { PortalContent, getIntl } from '@lucca-front/ng/core';
-import { BehaviorSubject, Observable, ReplaySubject, Subject, defer, map, of, startWith, switchMap, take } from 'rxjs';
+import { getIntl, PortalContent } from '@lucca-front/ng/core';
+import { BehaviorSubject, defer, map, Observable, of, ReplaySubject, startWith, Subject, switchMap, take } from 'rxjs';
 import { LuOptionGrouping, LuSimpleSelectDefaultOptionComponent } from '../option';
 import { LuSelectPanelRef } from '../panel';
 import { CoreSelectAddOptionStrategy, LuOptionComparer, LuOptionContext, SELECT_LABEL, SELECT_LABEL_ID } from '../select.model';
@@ -277,11 +277,26 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 		if (this.isPanelOpen || this.disabled$.value) {
 			return;
 		}
+		/**
+		 * I know what you're thinking, but let me explain:
+		 *
+		 * When setting isPanelOpen$'s internal value to true and then calling clueChanged,
+		 * it creates a race condition which calls this method again from inside clueChanged's code before
+		 * the change is applied inside the Subject, meaning this is called twice and we get a double tap.
+		 *
+		 * The only easy solution is this (or store yet another boolean like "isOpeningPanel" which is, imo, equally ugly.
+		 */
+		setTimeout(() => {
+			if (this.isPanelOpen) {
+				return;
+			}
 
-		this.isPanelOpen$.next(true);
-		this.clueChanged(clue);
-		this._panelRef = this.buildPanelRef();
-		this.bindInputToPanelRefEvents();
+			this.isPanelOpen$.next(true);
+			this.clueChanged(clue);
+			this._panelRef = this.buildPanelRef();
+			this.bindInputToPanelRefEvents();
+		});
+		// Oh and we have to wait for another cycle before focusing the input so it's done once panel is opened for good.
 		setTimeout(() => this.focusInput());
 	}
 
@@ -339,10 +354,12 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 		this.value = value;
 	}
 
-	public updateValue(value: TValue, skipPanelOpen = false): void {
+	public updateValue(value: TValue, skipPanelOpen = false, noClear = false): void {
 		this.value = value;
-		this.emptyClue();
-		this.clueChanged('', skipPanelOpen);
+		if (!noClear) {
+			this.emptyClue();
+			this.clueChanged('', skipPanelOpen);
+		}
 		this.onChange?.(value);
 		this.onTouched?.();
 	}

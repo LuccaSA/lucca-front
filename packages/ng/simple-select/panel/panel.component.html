@@ -48,7 +48,7 @@
 			<div class="loading">{{intl.loading}}</div>
 		</div>
 		<div class="lu-picker-content-add" *ngIf="ctx.shouldDisplayAddOption">
-			<button class="button mod-text mod-icon palette-product" type="button" (click)="selectInput.emitAddOption()">
+			<button class="button mod-text mod-withIcon palette-product" type="button" (click)="selectInput.emitAddOption()">
 				<span aria-hidden="true" class="lucca-icon icon-mathsPlus"></span>
 				<ng-container *luPortal="selectInput.addOptionLabel" />
 			</button>

@@ -44,8 +44,12 @@ export class PortalDirective<T = unknown> implements OnChanges, OnDestroy {
 				parent: this.injector,
 				providers: [{ provide: PORTAL_CONTEXT, useValue: this.luPortalContext }],
 			});
-			this.componentRef = this.viewContainerRef.createComponent(this.luPortal, { injector });
-			this.componentRef.changeDetectorRef.detectChanges();
+			try {
+				this.componentRef = this.viewContainerRef.createComponent(this.luPortal, { injector });
+				this.componentRef.changeDetectorRef.detectChanges();
+			} catch {
+				throw new Error('[LuPortal] Angular failed to create component, make sure you are not giving LuPortal an Object that is not a Type<>');
+			}
 		}
 	}
 
@@ -99,5 +103,9 @@ export class PortalDirective<T = unknown> implements OnChanges, OnDestroy {
 			Object.assign(this.embeddedViewRef.context, context);
 			this.embeddedViewRef.detectChanges();
 		}
+	}
+
+	public static ngTemplateContextGuard<T>(_dir: PortalDirective<T>, ctx: unknown): ctx is void {
+		return true;
 	}
 }

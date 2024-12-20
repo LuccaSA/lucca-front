@@ -4,7 +4,7 @@
 		<div class="toast-item-content">
 			<div *ngIf="toast.title"><strong>{{ toast.title }}</strong></div>
 			@if (isStringPortalContent(toast.message)) {
-			<div [innerHtml]="toast.message"></div>
+			<p class="toast-item-content-description" [innerHtml]="toast.message"></p>
 			} @else {
 			<ng-container *luPortal="toast.message"></ng-container>
 			}

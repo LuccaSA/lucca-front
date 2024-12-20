@@ -21,7 +21,6 @@
 @use 'progress';
 @use 'breadcrumbs';
 @use 'buttonGroup';
-@use 'actionIcon';
 @use 'menu';
 @use 'radioField';
 @use 'switchField';
@@ -67,6 +66,11 @@
 @use 'userTile';
 @use 'plgPush';
 @use 'calendar';
+@use 'fancyBox';
+@forward 'dateField';
+@forward 'dateRangeField';
+@forward 'dataTable';
+@forward 'dataTableSticked';
 
 // deprecated components, no responsive
 @use 'field';
@@ -94,7 +98,5 @@
 @use 'filterBar';
 
 // deprecated components not loaded by default
-// @use 'gridLegacy'; // caution: grid and gridLegacy cannot be loaded at the same time
-// @use 'emptyStateDeprecated';
 // @use 'tableFixedDeprecated';
 // @use 'tableStickedDeprecated';

@@ -2,16 +2,21 @@ import { NgClass } from '@angular/common';
 import { booleanAttribute, ChangeDetectionStrategy, Component, computed, effect, ElementRef, inject, input, LOCALE_ID, model, OnInit, output, viewChildren, ViewEncapsulation } from '@angular/core';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { CalloutComponent } from '@lucca-front/ng/callout';
+import { getIntl } from '@lucca-front/ng/core';
+import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
 import {
+	addHours,
 	addMonths,
 	addYears,
 	eachDayOfInterval,
 	eachMonthOfInterval,
 	eachYearOfInterval,
+	endOfDay,
 	endOfDecade,
 	endOfMonth,
 	endOfWeek,
 	endOfYear,
+	isAfter,
 	isSameDay,
 	isSameMonth,
 	isSameYear,
@@ -26,12 +31,11 @@ import {
 	subYears,
 	WeekOptions,
 } from 'date-fns';
-import { getIntl } from '@lucca-front/ng/core';
-import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
+import type { Interval } from 'date-fns/types';
 import { WEEK_INFO } from '../calendar.token';
 import { LU_DATE2_TRANSLATIONS } from '../date2.translate';
 import { RepeatTimesDirective } from '../repeat-times.directive';
-import { getIntlWeekDay, getJSFirstDayOfWeek } from '../utils';
+import { comparePeriods, getIntlWeekDay, getJSFirstDayOfWeek } from '../utils';
 import { CalendarCellInfo, CalendarMonthInfo, CalendarYearInfo } from './calendar-cell-info';
 import { CalendarMode } from './calendar-mode';
 import { Calendar2CellDirective } from './calendar2-cell.directive';
@@ -83,11 +87,15 @@ export class Calendar2Component implements OnInit {
 
 	enableOverflow = input<boolean, boolean>(false, { transform: booleanAttribute });
 
+	removeYearOverflow = input<boolean, boolean>(false, { transform: booleanAttribute });
+
 	hideToday = input<boolean, boolean>(false, { transform: booleanAttribute });
 
 	hasTodayButton = input<boolean, boolean>(false, { transform: booleanAttribute });
 
 	hideWeekend = input<boolean, boolean>(false, { transform: booleanAttribute });
+
+	disableModeChange = input<boolean, boolean>(false, { transform: booleanAttribute });
 
 	// Date used to init the component and as internal focus model
 	date = model.required<Date>();
@@ -121,6 +129,8 @@ export class Calendar2Component implements OnInit {
 
 	dateClicked = output<Date>();
 
+	dateHovered = model<Date | null>(null);
+
 	todayLabel = this.#intlRelativeDay.format(0, 'day');
 	thisMonthLabel = this.#intlRelativeDay.format(0, 'month');
 	thisYearLabel = this.#intlRelativeDay.format(0, 'year');
@@ -148,26 +158,36 @@ export class Calendar2Component implements OnInit {
 			};
 		}, {});
 		// If we want to show days before and after this month
-		if (this.showOverflow()) {
-			// Use last week of previous month
-			const startOfPreviousOverflow = startOfWeek(lastDayOfMonth(this.previousMonth()), this.#weekOptions);
-			const previousOverflow = eachDayOfInterval({
-				start: startOfPreviousOverflow,
-				end: endOfMonth(this.previousMonth()),
-			}).map((date) => this.dateToCellInfo(date, true));
-			if (daysByWeek[startOfPreviousOverflow.getTime()]) {
-				daysByWeek[startOfPreviousOverflow.getTime()] = [...previousOverflow, ...daysByWeek[startOfPreviousOverflow.getTime()]];
+		// Use last week of previous month
+		const startOfPreviousOverflow = startOfWeek(lastDayOfMonth(this.previousMonth()), this.#weekOptions);
+		const previousOverflow = eachDayOfInterval({
+			start: startOfPreviousOverflow,
+			end: endOfMonth(this.previousMonth()),
+		}).map((date) => {
+			if (this.showOverflow()) {
+				return this.dateToCellInfo(date, true);
+			} else {
+				return this.dateToCellInfo(endOfMonth(date), true);
 			}
-			// Use first week of next month
-			const startOfNextMonthOverflow = startOfWeek(startOfMonth(this.nextMonth()), this.#weekOptions);
-			const endOfNextMonthOverflow = endOfWeek(startOfMonth(this.nextMonth()), this.#weekOptions);
-			const nextOverflow = eachDayOfInterval({
-				start: startOfMonth(this.nextMonth()),
-				end: endOfNextMonthOverflow,
-			}).map((date) => this.dateToCellInfo(date, true));
-			if (daysByWeek[startOfNextMonthOverflow.getTime()]) {
-				daysByWeek[startOfNextMonthOverflow.getTime()] = [...daysByWeek[startOfNextMonthOverflow.getTime()], ...nextOverflow];
+		});
+		if (daysByWeek[startOfPreviousOverflow.getTime()]) {
+			daysByWeek[startOfPreviousOverflow.getTime()] = [...previousOverflow, ...daysByWeek[startOfPreviousOverflow.getTime()]];
+		}
+		// Use first week of next month
+		const startOfNextMonthOverflow = startOfWeek(startOfMonth(this.nextMonth()), this.#weekOptions);
+		const endOfNextMonthOverflow = endOfWeek(startOfMonth(this.nextMonth()), this.#weekOptions);
+		const nextOverflow = eachDayOfInterval({
+			start: startOfMonth(this.nextMonth()),
+			end: endOfNextMonthOverflow,
+		}).map((date) => {
+			if (this.showOverflow()) {
+				return this.dateToCellInfo(date, true);
+			} else {
+				return this.dateToCellInfo(startOfMonth(date), true);
 			}
+		});
+		if (daysByWeek[startOfNextMonthOverflow.getTime()]) {
+			daysByWeek[startOfNextMonthOverflow.getTime()] = [...daysByWeek[startOfNextMonthOverflow.getTime()], ...nextOverflow];
 		}
 		return Object.keys(daysByWeek)
 			.sort()
@@ -185,8 +205,8 @@ export class Calendar2Component implements OnInit {
 					date: month,
 					short: this.#intlMonthsShort.format(month),
 					long: this.#intlMonthsLong.format(month),
+					...this.dateToCellInfo(month),
 					isCurrent: isSameMonth(new Date(), month),
-					status: this.getCellInfo()(month, this.displayMode()),
 				} as CalendarMonthInfo;
 			})
 			.reduce<CalendarMonthInfo[][]>((all, one, i) => {
@@ -198,16 +218,16 @@ export class Calendar2Component implements OnInit {
 
 	decadeGridDisplay = computed(() => {
 		const yearsOfDecade: Date[] = eachYearOfInterval({
-			start: subYears(this.decade(), 1),
-			end: addYears(endOfDecade(this.decade()), 1),
+			start: this.removeYearOverflow() ? this.decade() : subYears(this.decade(), 1),
+			end: this.removeYearOverflow() ? endOfDecade(this.decade()) : addYears(endOfDecade(this.decade()), 1),
 		});
 		return yearsOfDecade
 			.map((year) => {
 				return {
 					date: year,
-					label: this.#intlDateYear.format(year),
+					...this.dateToCellInfo(year),
+					name: this.#intlDateYear.format(year),
 					isCurrent: isSameYear(new Date(), year),
-					status: this.getCellInfo()(year, this.displayMode()),
 				};
 			})
 			.reduce<CalendarYearInfo[][]>((all, one, i) => {
@@ -290,45 +310,161 @@ export class Calendar2Component implements OnInit {
 	}
 
 	dateToCellInfo(date: Date, isOverflow = false): CalendarCellInfo {
+		// This method is quite complex and packs a lot of logic, let's try to decompose and explain it.
+
+		// First of all get cell status from the input, if the consumer needs to apply specific statuses to it
 		const status = this.getCellInfo()(date, this.displayMode());
 
+		// We need to store a boolean for day mode, because some logic is specific to day display (like weekends for instance)
+		const isDayMode = this.displayMode() === 'day';
+
+		// Keeping consumer's classes aside
 		const classes: string[] = status?.classes || [];
 
-		const rangeInfo = this.getRangeInfo(date, 'day');
+		// Let's grab the ranges in which this date is in, which includes the "in progress" one if it exists, using the current hovered date
+		const rangeInfo = this.getRangeInfo(date, this.displayMode(), isOverflow);
 
+		// If the range includes classes, add them to our display classes
 		if (rangeInfo?.class) {
 			classes.push(rangeInfo.class);
 		}
 
+		// Day specific logic
+		// Is it weekend day? for is-dayOff class toggle
+		const isWeekend = isDayMode && this.#weekInfo.weekend.includes(getIntlWeekDay(date)) && !this.hideWeekend();
+		// Is it first day of month? Mostly used for overflow display logic
+		const isFirstDayOfMonth = isDayMode && isSameDay(startOfMonth(date), rangeInfo?.range.start);
+
+		// Is this the current period? Will match if same day as today, or same month in month display, or same year if year display
+		const isCurrent = comparePeriods(this.displayMode(), new Date(), date) && !this.hideToday();
+
+		// Are we currently in a range that's being created (start date selected, end date is being hovered)
+		const isInProgress = rangeInfo?.range && !rangeInfo.range.end && this.dateHovered() !== null;
+
+		// Progress flags
+		let isProgressBody = false;
+		let isProgressStart = !!rangeInfo?.range && !rangeInfo.range.end && this.dateHovered() === null;
+		let isProgressEnd = !!rangeInfo?.range && !rangeInfo.range.end && this.dateHovered() === null;
+		// Specific case for when start is == end and we're hovering it
+		let isSingleDayInProgress = false;
+
+		if (isInProgress) {
+			let start = rangeInfo?.range.start;
+			// If we're in day mode, depending on if first day of month or not, we want to consider the start or the end of the day,
+			// To make sure we don't conflict with overflow
+			if (isDayMode) {
+				start = isFirstDayOfMonth ? endOfDay(rangeInfo.range.start) : startOfDay(rangeInfo.range.start);
+			}
+			const hoveredRange: Interval = {
+				start,
+				end: startOfDay(this.dateHovered()),
+			};
+
+			// If start is after end, fix this by inverting the two, we always want to work with start before end
+			if (isAfter(hoveredRange.start, hoveredRange.end)) {
+				let newStart = hoveredRange.end;
+				const newStartIsFirstDayOfMonth = isSameDay(startOfMonth(hoveredRange.end), hoveredRange.end);
+				if (isDayMode) {
+					newStart = newStartIsFirstDayOfMonth ? endOfDay(hoveredRange.end) : startOfDay(hoveredRange.end);
+				}
+				hoveredRange.end = rangeInfo.range.start;
+				hoveredRange.start = newStart;
+			}
+
+			// if we're working on overflow for after the last day of a month, we want to use end of day as comparison date
+			const isEndOfMonthOverflow = isOverflow && isSameDay(date, startOfMonth(date));
+
+			if (isEndOfMonthOverflow) {
+				hoveredRange.end = endOfDay(hoveredRange.end);
+			}
+			// We're progress body if middle of day is in the current range
+			isProgressBody = isWithinInterval(addHours(startOfDay(date), 12), hoveredRange);
+			// Overflow cannot be start status for CSS, same for end
+			isProgressStart = !isOverflow && comparePeriods(this.displayMode(), date, hoveredRange.start as Date);
+			isProgressEnd = !isOverflow && comparePeriods(this.displayMode(), date, hoveredRange.end as Date);
+
+			// This is the case where you clicked a first date and then are hovering it, which requires a specific case for CSS
+			if (isSameDay(rangeInfo.range.start, this.dateHovered())) {
+				isSingleDayInProgress = !isOverflow && isSameDay(hoveredRange.start, hoveredRange.end) && isSameDay(hoveredRange.start, this.dateHovered());
+			}
+		}
+
+		const isSelected = status.selected || (!!rangeInfo?.range && !isInProgress);
+
 		return {
 			day: date.getDate(),
-			isWeekend: this.#weekInfo.weekend.includes(getIntlWeekDay(date)) && !this.hideWeekend(),
-			isOverflow,
 			status,
 			label: status.label || rangeInfo?.label,
 			date,
-			classes,
-			isCurrent: isSameDay(new Date(), date) && !this.hideToday(),
 			rangeInfo,
+			isWeekend,
+			isCurrent,
+			isOverflow,
+			isSelected,
+			noButton: isOverflow && !this.showOverflow(),
 			disabled: status?.disabled || (isOverflow && !this.enableOverflow()),
+			// Compile everything into a list of classes for CSS
+			ngClasses: {
+				'is-daysOff': isWeekend,
+				'is-overflow': isOverflow,
+				'is-current': isCurrent,
+				'is-start': !isOverflow && (rangeInfo?.isStart || status.selected) && !isInProgress,
+				'is-end': !isOverflow && (rangeInfo?.isEnd || status.selected) && !isInProgress,
+				'is-selected': isSelected,
+				// Range in progress statuses
+				'is-selectionInProgress': isProgressBody,
+				'is-startInProgress': isProgressStart,
+				'is-endInProgress': isProgressEnd,
+				'is-singleDayInProgress': isSingleDayInProgress,
+
+				...classes.reduce((acc, key) => ({ ...acc, [key]: true }), {}),
+			},
 		};
 	}
 
-	getRangeInfo(date: Date, scope: CalendarMode) {
+	getRangeInfo(date: Date, scope: CalendarMode, isOverflow = false) {
 		const range: DateRange | undefined = this.ranges().find((range: DateRange) => {
-			return (
-				(range.scope || 'day') === scope &&
-				isWithinInterval(date, {
-					start: startOfDay(range.start),
-					end: range.end || endOfMonth(date),
-				})
-			);
+			const isSameScope = (range.scope || 'day') === scope;
+			if (isSameScope) {
+				if (range.end) {
+					return isWithinInterval(date, {
+						start: isOverflow ? endOfDay(range.start) : startOfDay(range.start),
+						end: isOverflow ? startOfDay(range.end) : range.end,
+					});
+				} else if (this.dateHovered() !== null) {
+					// Nominal case: end is after start
+					if (isAfter(this.dateHovered(), startOfDay(range.start))) {
+						return isWithinInterval(date, {
+							start: startOfDay(range.start),
+							end: endOfDay(this.dateHovered()),
+						});
+					} else {
+						// When user clicked end date first and now wants to select a start date
+						return isWithinInterval(date, {
+							start: startOfDay(this.dateHovered()),
+							end: endOfDay(range.start),
+						});
+					}
+				} else {
+					switch (this.mode()) {
+						case 'day':
+							return isSameDay(date, range.start);
+						case 'month':
+							return isSameMonth(date, range.start);
+						case 'year':
+							return isSameYear(date, range.start);
+					}
+				}
+			}
+			return false;
 		});
 		if (!range) {
 			return null;
 		}
+
 		const isStart: boolean = range && isSameDay(date, range.start);
 		const isEnd: boolean = range && range.end && isSameDay(date, range.end);
+
 		return {
 			range,
 			isStart,

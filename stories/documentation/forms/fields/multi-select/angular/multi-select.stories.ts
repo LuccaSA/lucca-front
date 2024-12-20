@@ -32,7 +32,7 @@ export default {
 			},
 		},
 		hiddenLabel: {
-			description: 'Masque le label en le conservant dans le DOM pour les lecteurs d\'écrans',
+			description: "Masque le label en le conservant dans le DOM pour les lecteurs d'écrans",
 		},
 		clueChange: HiddenArgType,
 		nextPage: HiddenArgType,
@@ -45,7 +45,7 @@ export default {
 	},
 } as Meta;
 
-export const Basic: StoryObj<LuMultiSelectInputComponent<unknown> & FormFieldComponent> = {
+export const Basic: StoryObj<LuMultiSelectInputComponent<unknown> & FormFieldComponent & { required: boolean }> = {
 	render: (args, { argTypes }) => {
 		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, ...inputArgs } = args;
 		return {

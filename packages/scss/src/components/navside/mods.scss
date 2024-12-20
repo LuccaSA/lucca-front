@@ -15,6 +15,10 @@
 			&:has(.navSide.mod-compact, .mod-withMenuCompact) {
 				--commons-navSide-width: 7.5rem;
 			}
+
+			@supports not selector(:has(*)) {
+				--commons-navSide-width: 15rem;
+			}
 		}
 	}
 

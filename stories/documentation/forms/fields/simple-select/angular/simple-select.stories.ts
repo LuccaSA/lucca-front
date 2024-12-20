@@ -45,11 +45,16 @@ export default {
 	},
 } as Meta;
 
-export const Basic: StoryObj<LuSimpleSelectInputComponent<unknown> & FormFieldComponent & { disabled: boolean; hasValue: () => boolean }> = {
+export const Basic: StoryObj<
+	LuSimpleSelectInputComponent<unknown> &
+		FormFieldComponent & {
+			disabled: boolean;
+		}
+> = {
 	render: (args, { argTypes }) => {
-		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, hasValue, ...inputArgs } = args;
+		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, ...inputArgs } = args;
 		return {
-			props: { legumes: allLegumes, example: hasValue() ? allLegumes[0] : null },
+			props: { legumes: allLegumes, example: allLegumes[0] },
 			template: `<lu-form-field ${generateInputs(
 				{
 					label,
@@ -61,7 +66,7 @@ export const Basic: StoryObj<LuSimpleSelectInputComponent<unknown> & FormFieldCo
 				},
 				argTypes,
 			)}>
-	<lu-simple-select required	${generateInputs(inputArgs, argTypes)}
+	<lu-simple-select ${generateInputs(inputArgs, argTypes)}
 		[options]="legumes | filterLegumes:clue"
 		(clueChange)="clue = $event"
 		[(ngModel)]="example">
@@ -78,13 +83,11 @@ export const Basic: StoryObj<LuSimpleSelectInputComponent<unknown> & FormFieldCo
 		label: 'Label',
 		tooltip: 'Tooltip message',
 		hiddenLabel: false,
-		required: false,
 		placeholder: 'Placeholder',
 		clearable: true,
 		inlineMessage: 'Helper Text',
 		inlineMessageState: 'default',
 		loading: false,
 		disabled: false,
-		hasValue: () => false,
 	},
 };

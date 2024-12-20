@@ -10,8 +10,15 @@
 		display: flex;
 		align-self: start;
 		align-items: center;
-		height: calc(var(--components-userTile-title-lineHeight) + var(--components-userTile-info-lineHeight));
 		min-height: var(--components-avatar-size);
+	}
+
+	// .user-tile-label is deprecated
+	&:has(.userTile-content-info, .user-tile-label) {
+		// Apply height to avatar (calculed on title & info height) to avoid img overflow
+		.avatar {
+			height: calc(var(--components-userTile-title-lineHeight) + var(--components-userTile-info-lineHeight));
+		}
 	}
 
 	@at-root ($atRoot) {

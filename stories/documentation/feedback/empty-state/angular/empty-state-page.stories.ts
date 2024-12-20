@@ -39,7 +39,7 @@ export default {
 	hx="${hx}"
 >
 	<button luButton type="button" palette="product">Button</button>
-	<button luButton="outlined" type="button" palette="product">Button</button>
+	<button luButton="outlined" type="button">Button</button>
 </lu-empty-state-page>`,
 		};
 	},

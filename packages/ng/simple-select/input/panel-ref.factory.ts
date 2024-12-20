@@ -1,7 +1,7 @@
 import { Overlay, OverlayConfig, OverlayPositionBuilder, OverlayRef, ScrollStrategyOptions } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
 import { ComponentRef, ElementRef, Injectable, Injector, inject } from '@angular/core';
-import { LuSelectPanelRef } from '@lucca-front/ng/core-select';
+import { addAttributesOnCdkContainer, LuSelectPanelRef, SELECT_ID, SELECT_LABEL_ID } from '@lucca-front/ng/core-select';
 import { takeUntil } from 'rxjs';
 import { LuSelectPanelComponent } from '../panel';
 import { SIMPLE_SELECT_INPUT } from '../select.model';
@@ -71,10 +71,14 @@ export class LuSimpleSelectPanelRefFactory {
 	protected positionBuilder = inject(OverlayPositionBuilder);
 	protected scrollStrategies = inject(ScrollStrategyOptions);
 	protected parentInjector = inject(Injector);
+	private selectLabelId = inject(SELECT_LABEL_ID);
+	private selectId = inject(SELECT_ID);
 
 	buildPanelRef<T>(selectInput: LuSimpleSelectInputComponent<T>, overlayConfigOverride: OverlayConfig = {}): LuSelectPanelRef<T, T> {
 		const overlayConfig = this.buildOverlayConfig(overlayConfigOverride);
 		const overlayRef = this.overlay.create(overlayConfig);
+
+		addAttributesOnCdkContainer(overlayRef, this.selectLabelId, this.selectId);
 
 		return new SelectPanelRef(overlayRef, this.parentInjector, selectInput);
 	}

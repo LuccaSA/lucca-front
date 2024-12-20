@@ -27,6 +27,13 @@ function getTemplate(args: ResetStory): string {
 			<dd>Description</dd>
 		</dl>
 	</div>
+	<div class="demo-utility">
+		<code class="code">u-summaryReset</code>
+		<details>
+			<summary class="u-summaryReset"><span class="tag">v19.1</span><br>Summary</summary>
+			Details
+		</details>
+	</div>
 </div>`;
 }
 

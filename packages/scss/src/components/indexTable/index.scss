@@ -35,6 +35,7 @@
 
 	.indexTable-head-row-cell,
 	.indexTable-body-row-cell,
+	.indexTable-body-row-transparentCell,
 	.indexTable-foot-row-cell {
 		&.mod-alignRight {
 			@include alignRight;

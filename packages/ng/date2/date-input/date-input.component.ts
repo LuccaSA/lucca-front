@@ -1,17 +1,15 @@
 import { ConnectionPositionPair } from '@angular/cdk/overlay';
-import { booleanAttribute, ChangeDetectionStrategy, Component, computed, effect, ElementRef, forwardRef, inject, input, LOCALE_ID, signal, viewChild, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, computed, effect, ElementRef, forwardRef, inject, input, signal, untracked, viewChild, ViewEncapsulation } from '@angular/core';
 import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors, Validator } from '@angular/forms';
-import { getIntl, ɵeffectWithDeps } from '@lucca-front/ng/core';
+import { LuClass, ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { InputDirective } from '@lucca-front/ng/form-field';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { PopoverDirective } from '@lucca-front/ng/popover2';
-import { addMonths, addYears, parse, startOfDay, startOfMonth } from 'date-fns';
+import { isAfter, isBefore, isSameDay, parse, startOfDay } from 'date-fns';
+import { AbstractDateComponent } from '../abstract-date-component';
 import { CalendarMode } from '../calendar2/calendar-mode';
 import { Calendar2Component } from '../calendar2/calendar2.component';
 import { CellStatus } from '../calendar2/cell-status';
-import { DateRange } from '../calendar2/date-range';
-import { getDateFormat } from '../date-format';
-import { LU_DATE2_TRANSLATIONS } from '../date2.translate';
 import { comparePeriods, startOfPeriod } from '../utils';
 
 @Component({
@@ -20,6 +18,9 @@ import { comparePeriods, startOfPeriod } from '../utils';
 	imports: [PopoverDirective, Calendar2Component, IconComponent, InputDirective],
 	templateUrl: './date-input.component.html',
 	styleUrl: './date-input.component.scss',
+	host: {
+		class: 'dateField',
+	},
 	encapsulation: ViewEncapsulation.None,
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	providers: [
@@ -33,57 +34,38 @@ import { comparePeriods, startOfPeriod } from '../utils';
 			useExisting: forwardRef(() => DateInputComponent),
 			multi: true,
 		},
+		LuClass,
 	],
 })
-export class DateInputComponent implements ControlValueAccessor, Validator {
-	#locale = inject(LOCALE_ID);
-
-	#intlDateTimeFormat = new Intl.DateTimeFormat(this.#locale);
-
-	#intlDateTimeFormatMonth = new Intl.DateTimeFormat(this.#locale, { month: 'numeric', year: 'numeric' });
-	#intlDateTimeFormatYear = new Intl.DateTimeFormat(this.#locale, { year: 'numeric' });
-
-	// Contains the current date format (like dd/mm/yy etc) based on current locale
-	#dateFormat = getDateFormat(this.#locale).toUpperCase();
-
-	intl = getIntl(LU_DATE2_TRANSLATIONS);
-
+export class DateInputComponent extends AbstractDateComponent implements ControlValueAccessor, Validator {
 	// CVA stuff
 	#onChange?: (value: Date) => void;
-	onTouched?: () => void;
-	disabled = false;
 
-	min = input<Date>(new Date('1/1/1000'));
-	max = input<Date | null>(null);
+	#luClass = inject(LuClass);
 
-	ranges = input<DateRange[]>([]);
-
-	disableOverflow = input<boolean, boolean>(false, { transform: booleanAttribute });
-	hideOverflow = input<boolean, boolean>(false, { transform: booleanAttribute });
-	hideToday = input<boolean, boolean>(false, { transform: booleanAttribute });
-	hasTodayButton = input<boolean, boolean>(false, { transform: booleanAttribute });
-	clearable = input<boolean, boolean>(false, { transform: booleanAttribute });
 	placeholder = input<string>();
 
-	mode = input<CalendarMode>('day');
-	hideWeekend = input<boolean, boolean>(false, { transform: booleanAttribute });
-
-	getCellInfo = input<((day: Date, mode: CalendarMode) => CellStatus) | null>();
+	disableOverflow = input(false, { transform: booleanAttribute });
+	hideOverflow = input(false, { transform: booleanAttribute });
 
 	popoverPositions: ConnectionPositionPair[] = [
-		new ConnectionPositionPair({ originX: 'end', originY: 'bottom' }, { overlayX: 'end', overlayY: 'top' }, 16, 6),
-		new ConnectionPositionPair({ originX: 'end', originY: 'top' }, { overlayX: 'end', overlayY: 'bottom' }, 16, 6),
+		new ConnectionPositionPair({ originX: 'start', originY: 'bottom' }, { overlayX: 'start', overlayY: 'top' }, -8, 0),
+		new ConnectionPositionPair(
+			{ originX: 'start', originY: 'top' },
+			{
+				overlayX: 'start',
+				overlayY: 'bottom',
+			},
+			-8,
+			-32,
+		),
 	];
-
-	calendarMode = signal<CalendarMode>('day');
 
 	inputFocused = signal(false);
 
-	protected currentDate = signal(startOfMonth(new Date()));
-
-	protected tabbableDate = signal<Date | null>(null);
-
 	selectedDate = signal<Date | null>(null);
+
+	dateFromWriteValue = signal<Date | null>(null);
 
 	calendar = viewChild(Calendar2Component);
 
@@ -92,13 +74,13 @@ export class DateInputComponent implements ControlValueAccessor, Validator {
 			let formatter: Intl.DateTimeFormat;
 			switch (this.mode()) {
 				case 'day':
-					formatter = this.#intlDateTimeFormat;
+					formatter = this.intlDateTimeFormat;
 					break;
 				case 'month':
-					formatter = this.#intlDateTimeFormatMonth;
+					formatter = this.intlDateTimeFormatMonth;
 					break;
 				case 'year':
-					formatter = this.#intlDateTimeFormatYear;
+					formatter = this.intlDateTimeFormatYear;
 					break;
 			}
 			return formatter.format(this.selectedDate());
@@ -127,14 +109,21 @@ export class DateInputComponent implements ControlValueAccessor, Validator {
 	}
 
 	constructor() {
+		super();
 		effect(
 			() => {
 				const inputValue = this.userTextInput();
 				if (inputValue.length > 0) {
-					const parsed = parse(inputValue, this.#dateFormat, startOfDay(new Date()));
-					if (parsed.getFullYear() > 999) {
+					let parsed: Date;
+					try {
+						parsed = parse(inputValue, this.dateFormat, startOfDay(new Date()));
+					} catch {
+						/* not a correct date */
+					}
+					if (parsed instanceof Date && parsed.getFullYear() > 999) {
 						this.selectedDate.set(startOfDay(parsed));
 						this.currentDate.set(startOfDay(parsed));
+						this.tabbableDate.set(startOfDay(parsed));
 					} else {
 						this.selectedDate.set(parsed);
 					}
@@ -142,8 +131,19 @@ export class DateInputComponent implements ControlValueAccessor, Validator {
 			},
 			{ allowSignalWrites: true },
 		);
+
 		effect(() => {
-			this.#onChange?.(this.selectedDate());
+			if (!this.#safeCompareDate(untracked(this.dateFromWriteValue), this.selectedDate())) {
+				this.#onChange?.(this.selectedDate());
+			}
+		});
+
+		effect(() => {
+			this.#luClass.setState({
+				'mod-day': this.mode() === 'day',
+				'mod-month': this.mode() === 'month',
+				'mod-year': this.mode() === 'year',
+			});
 		});
 
 		ɵeffectWithDeps([this.calendarMode, this.tabbableDate], (calendarMode, tabbableDate) => {
@@ -159,6 +159,10 @@ export class DateInputComponent implements ControlValueAccessor, Validator {
 		});
 	}
 
+	#safeCompareDate(a: Date, b: Date): boolean {
+		return a === b || (!!a && !!b && isSameDay(a, b));
+	}
+
 	openPopover(ref: PopoverDirective): void {
 		ref.openPopover(true, true);
 		// Once popover is opened, aka in the next CD cycle, focus current tabbable date
@@ -167,70 +171,52 @@ export class DateInputComponent implements ControlValueAccessor, Validator {
 		});
 	}
 
+	arrowDown(popoverRef: PopoverDirective) {
+		if (popoverRef.opened()) {
+			this.calendar()?.focusTabbableDate();
+		} else {
+			this.openPopover(popoverRef);
+		}
+	}
+
 	validate(control: AbstractControl<Date, Date>): ValidationErrors {
-		return this.isValidDate(control.value) ? null : { date: true };
-	}
-
-	isValidDate(date: Date): boolean {
-		return !!date && !isNaN(date.getTime());
-	}
-
-	isInMinMax(date: Date, mode: CalendarMode): boolean {
-		let result = true;
-		if (this.min()) {
-			switch (mode) {
-				case 'day':
-					result = result && this.min().getTime() <= date.getTime();
-					break;
-				case 'month':
-					result = result && this.min().getMonth() <= date.getMonth();
-					break;
-				case 'year':
-					result = result && this.min().getFullYear() <= date.getFullYear();
-					break;
-			}
+		// null is not an error but means we'll skip everything else, we'll let the presence of a
+		// Validators.required (or not) decide if it's an error.
+		if (control.value === null || control.value === undefined) {
+			return null;
 		}
-		if (this.max()) {
-			switch (mode) {
-				case 'day':
-					result = result && this.max().getTime() >= date.getTime();
-					break;
-				case 'month':
-					result = result && this.max().getMonth() >= date.getMonth();
-					break;
-				case 'year':
-					result = result && this.max().getFullYear() >= date.getFullYear();
-					break;
-			}
+		// try to parse the display value cause formControl.value is undefined if date is not parsable
+		try {
+			parse(this.displayValue(), this.dateFormat, startOfDay(new Date()));
+		} catch {
+			/* not a correct date */
+			return { date: true };
 		}
-		return result;
+		// Check date validity
+		if (!this.isValidDate(control.value)) {
+			return { date: true };
+		}
+		// Check min and max
+		if (this.min() && isBefore(control.value, this.min())) {
+			return { min: true };
+		} else if (this.max() && isAfter(control.value, this.max())) {
+			return { max: true };
+		}
+		// Everything is valid
+		return null;
 	}
 
 	writeValue(date: Date): void {
 		if (date) {
-			this.selectedDate.set(startOfDay(date));
-			this.currentDate.set(startOfDay(date));
+			const start = startOfDay(date);
+			this.dateFromWriteValue.set(start);
+			this.selectedDate.set(start);
+			this.currentDate.set(start);
 		}
 	}
 
 	registerOnChange(fn: (value: Date) => void): void {
 		this.#onChange = fn;
-	}
-
-	registerOnTouched(fn: () => void): void {
-		this.onTouched = fn;
-	}
-
-	setDisabledState?(isDisabled: boolean): void {
-		this.disabled = isDisabled;
-	}
-
-	prev() {
-		this.move(-1);
-	}
-
-	next() {
-		this.move(1);
 	}
 
 	clear(input: HTMLInputElement) {
@@ -242,22 +228,5 @@ export class DateInputComponent implements ControlValueAccessor, Validator {
 	currentDateChangeFromCalendar(date: Date): void {
 		this.tabbableDate.set(date);
 		this.currentDate.set(date);
-	}
-
-	move(direction: 1 | -1): void {
-		switch (this.calendarMode()) {
-			case 'year':
-				this.currentDate.set(addYears(this.currentDate(), direction * 10));
-				this.tabbableDate.set(addYears(this.tabbableDate(), direction * 10));
-				break;
-			case 'month':
-				this.currentDate.set(addYears(this.currentDate(), direction));
-				this.tabbableDate.set(addYears(this.tabbableDate(), direction));
-				break;
-			case 'day':
-				this.currentDate.set(addMonths(this.currentDate(), direction));
-				this.tabbableDate.set(addMonths(this.tabbableDate(), direction));
-				break;
-		}
 	}
 }

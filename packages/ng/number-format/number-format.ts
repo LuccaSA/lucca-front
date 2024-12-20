@@ -4,7 +4,7 @@ const VALUE_TYPES: Intl.NumberFormatPartTypes[] = ['integer', 'decimal', 'fracti
 
 const DIGIT_TYPES: Intl.NumberFormatPartTypes[] = ['integer', 'decimal', 'fraction'];
 
-const SUFFIX_PREFIX_TYPES: Intl.NumberFormatPartTypes[] = ['percent', 'percentSign', 'currency', 'code', 'symbol', 'name', 'unit'];
+const SUFFIX_PREFIX_TYPES: Intl.NumberFormatPartTypes[] = ['percent', 'percentSign', 'currency', 'unit'];
 
 export class NumberFormat {
 	readonly locale: string;

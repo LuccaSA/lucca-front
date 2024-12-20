@@ -23,7 +23,7 @@ function getTemplate(args: UserPopoverStory): string {
 				</h1>
 				<p class="userPopover-details-info-detail u-ellipsis">Technicienne</p>
 				<p class="userPopover-details-info-detail u-ellipsis">SAV</p>
-				<p class="userPopover-details-info-detail u-marginTopXS">
+				<p class="userPopover-details-info-detail">
 					<!--
 					<span class="userPopover-details-info-detail-workplace">
 						<span aria-hidden="true" class="lucca-icon icon-calendarPlanning mod-S"></span>
