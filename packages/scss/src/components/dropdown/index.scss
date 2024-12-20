@@ -1,0 +1,19 @@
+@use 'exports' as *;
+
+// .lu-dropdown-options is deprecated
+.dropdown,
+.lu-dropdown-options {
+	@include vars;
+	@include component;
+}
+
+.dropdown-option-action,
+.lu-dropdown-options-item-action {
+	&.is-disabled {
+		@include disabled;
+	}
+
+	&.mod-delete {
+		@include delete;
+	}
+}
