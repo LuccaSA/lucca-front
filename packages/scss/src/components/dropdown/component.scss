@@ -1,0 +1,74 @@
+@use '@lucca-front/scss/src/commons/utils/namespace';
+
+@use '@lucca-front/scss/src/commons/utils/a11y';
+@use '@lucca-front/scss/src/components/divider/exports' as divider;
+
+@mixin component($atRoot: namespace.$defaultAtRoot) {
+	list-style-type: none;
+	padding: var(--pr-t-spacings-100) 0;
+	margin: 0;
+	min-width: var(--components-dropdown-min-width);
+	max-width: var(--components-dropdown-max-width);
+
+	@at-root ($atRoot) {
+		// .lu-dropdown-content is deprecated
+		.dropdownWrapper,
+		.lu-dropdown-content.lu-popover-content {
+			margin: calc(var(--pr-t-spacings-100) * -1);
+			padding: 0 !important;
+			border-radius: var(--commons-borderRadius-M);
+			max-width: 90vw;
+			max-height: var(--components-dropdown-max-height);
+			overflow-x: hidden;
+			overflow-y: auto;
+		}
+
+		// .lu-dropdown-options-item is deprecated
+		.dropdown-option,
+		.lu-dropdown-options-item {
+			padding: 0 var(--pr-t-spacings-100);
+
+			&.mod-divider {
+				padding: var(--pr-t-spacings-50) 0;
+			}
+		}
+
+		// .lu-dropdown-options-item-action is deprecated
+		.dropdown-option-action,
+		.lu-dropdown-options-item-action {
+			align-items: flex-start;
+			border: 0;
+			border-radius: var(--commons-borderRadius-M);
+			color: var(--components-dropdown-optionColor);
+			background-color: var(--components-dropdown-option-actionBackground);
+			display: flex;
+			gap: var(--pr-t-spacings-100);
+			line-height: var(--sizes-M-lineHeight);
+			padding: var(--pr-t-spacings-100) var(--pr-t-spacings-100);
+			text-align: left;
+			transition: background-color var(--commons-animations-durations-standard);
+			text-decoration: none;
+			width: 100%;
+			pointer-events: var(--components-dropdown-option-actionEvents);
+			cursor: pointer;
+
+			.lucca-icon {
+				font-size: var(--sizes-M-lineHeight);
+			}
+
+			&,
+			&:hover {
+				color: var(--components-dropdown-option-actionColor);
+			}
+
+			&:hover,
+			&:focus-visible {
+				--components-dropdown-option-actionBackground: var(--palettes-neutral-50);
+			}
+
+			&:focus-visible {
+				@include a11y.focusVisible();
+			}
+		}
+	}
+}
