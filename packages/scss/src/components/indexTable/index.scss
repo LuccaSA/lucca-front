@@ -1,5 +1,6 @@
 @use 'exports' as *;
 @use '@lucca-front/scss/src/commons/utils/media';
+@use '@lucca-front/scss/src/commons/utils/container';
 
 .indexTable {
 	@include vars;
@@ -45,25 +46,6 @@
 		}
 	}
 
-	// Responsive
-	@include media.max('S') {
-		&.mod-responsiveCardList {
-			@include responsiveCardList;
-		}
-
-		&.mod-selectable.mod-responsiveCardList {
-			@include selectableResponsiveCardList;
-		}
-
-		&.mod-stackable.mod-responsiveCardList {
-			@include stackableResponsiveCardList;
-		}
-
-		&.mod-selectable.mod-stackable.mod-responsiveCardList {
-			@include selectableStackableResponsiveCardList;
-		}
-	}
-
 	// generic states, non tied to a mod
 	&:not(:has(.indexTable-head[inert='inert'])) {
 		// focus-within
@@ -75,4 +57,41 @@
 
 	// nested open / closed row
 	@include openClosedRow;
+}
+
+@mixin responsive(
+	$breakpoint: 'S',
+	$breakpoint2: null,
+	$inverted: true,
+	$at: 'media',
+	$containerName: 'indexTable',
+	$responsiveSelector: null,
+	$axis: 'width',
+	$selector: '.indexTable'
+) {
+	@if ($at == 'container') {
+		@include container.auto($containerName);
+	}
+
+	#{if($responsiveSelector, $selector + '.rwd-' + $responsiveSelector, $selector)} {
+		@include media.query(
+			$breakpoint: $breakpoint,
+			$breakpoint2: $breakpoint2,
+			$inverted: $inverted,
+			$at: $at,
+			$containerName: $containerName,
+			$axis: $axis
+		) {
+			@include cardList;
+			@include selectableCardList;
+			@include stackableCardList;
+			@include selectableStackableCardList;
+		}
+	}
+}
+
+$defaultResponsive: true !default;
+
+@if $defaultResponsive {
+	@include responsive;
 }

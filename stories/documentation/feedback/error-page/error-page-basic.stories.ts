@@ -3,7 +3,7 @@ import { Meta, StoryFn } from '@storybook/angular';
 interface ErrorBasicStory {}
 
 export default {
-	title: 'Documentation/Feedback/Error/Basic',
+	title: 'Documentation/Feedback/ErrorPage/Basic',
 } as Meta;
 
 function getTemplate(args: ErrorBasicStory): string {
@@ -27,6 +27,7 @@ const Template: StoryFn<ErrorBasicStory> = (args) => ({
 	styles: [
 		`
 		.errorPage {
+			margin: -1rem;
 			height: 30rem;
 		}`,
 	],

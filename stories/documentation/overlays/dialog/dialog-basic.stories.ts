@@ -40,7 +40,6 @@ const Template: StoryFn<DialogBasicStory> = (args: DialogBasicStory) => ({
 	styles: [
 		`
 			:host {
-				display: block;
 				height: 30rem;
 			}
 		`,

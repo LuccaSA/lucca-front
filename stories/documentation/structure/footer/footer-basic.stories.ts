@@ -33,26 +33,25 @@ function getTemplate(args: FooterBasicStory): string {
 	const responsive = args.responsive;
 	const container = args.container;
 	if (container) {
-		return `
-	<footer class="footer ${sticky} ${responsive}">
-		<div class="footer-containerOptional">
-			<div class="footer-content">Content</div>
-			<div class="footer-actions">
-				<button type="button" class="button">Button</button>
-				<button type="button" class="button mod-outlined">Button</button>
-			</div>
-		</div>
-	</footer>
-`;
-	} else {
-		return `
-	<footer class="footer ${sticky} ${responsive}">
+		return `<footer class="footer ${sticky} ${responsive}">
+	<div class="footer-containerOptional">
 		<div class="footer-content">Content</div>
 		<div class="footer-actions">
 			<button type="button" class="button">Button</button>
 			<button type="button" class="button mod-outlined">Button</button>
 		</div>
-	</footer>`;
+	</div>
+</footer>
+`;
+	} else {
+		return `<footer class="footer rwd-disableAutoContainer ${sticky}">
+	<div class="footer-content">Content</div>
+	<div class="footer-actions">
+		<button type="button" class="button">Button</button>
+		<button type="button" class="button mod-outlined">Button</button>
+	</div>
+</footer>
+	`;
 	}
 }
 

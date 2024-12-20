@@ -1,4 +1,6 @@
 @use 'exports' as *;
+@use '@lucca-front/scss/src/commons/utils/media';
+@use '@lucca-front/scss/src/commons/utils/container';
 
 .filterBar {
 	@include vars;
@@ -7,4 +9,63 @@
 	&.mod-neutral {
 		@include neutral;
 	}
+}
+
+@mixin responsive(
+	$breakpoint: 'S',
+	$breakpoint2: null,
+	$inverted: false,
+	$at: 'container',
+	$containerName: 'filterBar',
+	$responsiveSelector: null,
+	$axis: 'width',
+	$selector: '.filterBar'
+) {
+	@if ($at == 'container') {
+		@include container.auto($containerName);
+	}
+
+	#{if($responsiveSelector, $selector + '.rwd-' + $responsiveSelector, $selector)} {
+		@include media.query(
+			$breakpoint: $breakpoint,
+			$breakpoint2: $breakpoint2,
+			$inverted: $inverted,
+			$at: $at,
+			$containerName: $containerName,
+			$axis: $axis
+		) {
+			@include narrow;
+		}
+	}
+}
+
+@mixin responsiveActions(
+	$breakpoint: 'XS',
+	$breakpoint2: null,
+	$inverted: false,
+	$at: 'container',
+	$containerName: 'filterBar',
+	$responsiveSelector: null,
+	$axis: 'width',
+	$selector: '.filterBar'
+) {
+	#{if($responsiveSelector, $selector + '.rwd-' + $responsiveSelector, $selector)} {
+		@include media.query(
+			$breakpoint: $breakpoint,
+			$breakpoint2: $breakpoint2,
+			$inverted: $inverted,
+			$at: $at,
+			$containerName: $containerName,
+			$axis: $axis
+		) {
+			@include actionsNarrow;
+		}
+	}
+}
+
+$defaultResponsive: true !default;
+
+@if $defaultResponsive {
+	@include responsive;
+	@include responsiveActions;
 }

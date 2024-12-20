@@ -11,9 +11,6 @@ import { LuSafeExternalSvgPipe } from '@lucca-front/ng/safe-content';
 	styleUrl: './empty-state-page.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	encapsulation: ViewEncapsulation.None,
-	host: {
-		class: 'emptyState-wrapper',
-	},
 })
 export class EmptyStatePageComponent {
 	@Input()
