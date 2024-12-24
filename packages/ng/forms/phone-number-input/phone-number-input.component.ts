@@ -4,7 +4,8 @@ import { LuDisplayerDirective, LuOptionDirective } from '@lucca-front/ng/core-se
 import { FormFieldComponent, InputDirective } from '@lucca-front/ng/form-field';
 import { TextInputComponent } from '@lucca-front/ng/forms';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
-import { type CountryCallingCode, formatIncompletePhoneNumber, getCountries, getCountryCallingCode, parsePhoneNumber } from 'libphonenumber-js';
+import { type CountryCallingCode, formatIncompletePhoneNumber, getCountries, getCountryCallingCode, parsePhoneNumber, getExampleNumber } from 'libphonenumber-js';
+import examples from 'libphonenumber-js/mobile/examples';
 import { CountryCode, E164Number } from './types';
 import { PhoneNumberValidators } from './validators';
 
@@ -67,6 +68,8 @@ export class PhoneNumberInputComponent implements ControlValueAccessor, Validato
 
 	@Input() autocomplete?: 'off' | 'tel';
 
+	autoPlaceholder = input<boolean>(false);
+
 	#onChange?: (value: E164Number) => void;
 
 	#onTouched?: () => void;
@@ -115,6 +118,11 @@ export class PhoneNumberInputComponent implements ControlValueAccessor, Validato
 	countryCodeSelected = signal<CountryCode | undefined>(undefined);
 
 	countryCode = computed(() => this.countryCodeSelected() ?? this.defaultCountryCode());
+
+	placeholder = computed(() => {
+		const exampleNumber = this.autoPlaceholder() !== false ? getExampleNumber(this.countryCode(), examples) : undefined;
+		return exampleNumber?.formatNational() ?? '';
+	});
 
 	displayedNumber = signal<string | undefined>(undefined);
 
