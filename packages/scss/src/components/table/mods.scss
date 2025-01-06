@@ -117,6 +117,10 @@
 		&:last-child {
 			padding-right: var(--components-table-card-padding);
 		}
+
+		&.mod-actions {
+			padding-right: var(--pr-t-spacings-100);
+		}
 	}
 }
 

@@ -1,0 +1,71 @@
+@use '@lucca-front/scss/src/commons/utils/namespace';
+
+@mixin component($atRoot: namespace.$defaultAtRoot) {
+	overflow: hidden;
+	padding-inline: var(--pr-t-spacings-200);
+	display: block;
+
+	@at-root ($atRoot) {
+		.fancyBox-content {
+			display: flex;
+			flex-direction: column;
+			margin: 0 auto;
+			min-height: 10rem;
+			min-width: min(20rem, 100%);
+			padding-block: var(--pr-t-spacings-300);
+			width: fit-content;
+			position: relative;
+		}
+
+		.fancyBox-content-box {
+			position: relative;
+			padding: var(--pr-t-spacings-300) var(--pr-t-spacings-700);
+			background-color: var(--pr-t-elevation-surface-raised);
+			border-radius: 16px;
+			flex-grow: 1;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+
+			&::before,
+			&::after {
+				content: '';
+				z-index: -1;
+				position: absolute;
+				width: var(--components-fancyBox-imageWidth);
+				height: var(--components-fancyBox-imageHeight);
+				background-repeat: no-repeat;
+				background-size: contain;
+				transition-duration: var(--commons-animations-durations-slow);
+			}
+
+			&::before {
+				transition-property: width, height, bottom, left;
+				bottom: var(--components-fancyBox-offsetBlock);
+				left: var(--components-fancyBox-offsetInline);
+				background-image: var(--components-fancyBox-background-left);
+			}
+
+			&::after {
+				transition-property: width, height, top, right;
+				top: var(--components-fancyBox-offsetBlock);
+				right: var(--components-fancyBox-offsetInline);
+				background-image: var(--components-fancyBox-background-right);
+			}
+		}
+
+		.fancyBox-content-box-foreground {
+			position: absolute;
+			width: var(--components-fancyBox-imageWidth);
+			height: var(--components-fancyBox-imageHeight);
+			background-repeat: no-repeat;
+			top: var(--components-fancyBox-offsetBlock);
+			right: var(--components-fancyBox-offsetInline);
+			background-image: var(--components-fancyBox-foreground);
+			background-size: contain;
+			transition-property: width, height, top, right;
+			transition-duration: var(--commons-animations-durations-slow);
+		}
+	}
+}

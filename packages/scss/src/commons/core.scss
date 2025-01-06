@@ -34,40 +34,30 @@ $overflow: 'hidden', 'auto', 'visible', 'scroll';
 
 /* Tokens */
 
-@mixin spacing($boxModel, $boxDirection, $key, $value, $suffix: '!important', $token: true) {
-	@if $token {
-		.pr-u-#{transform.camelize($boxModel)}#{transform.capitalize($boxDirection)}#{transform.capitalize($key)} {
-			#{$boxModel}#{if($boxDirection == '', '', '-')}#{$boxDirection}: var(--pr-t-spacings-#{$key}) #{$suffix};
-		}
-	} @else {
-		.u-#{transform.camelize($boxModel)}#{transform.capitalize($boxDirection)}#{transform.capitalize($key)} {
-			#{$boxModel}#{if($boxDirection == '', '', '-')}#{$boxDirection}: var(--spacings-#{$key}) #{$suffix};
-		}
+@mixin spacing($boxModel, $boxDirection, $key, $value, $suffix: '!important') {
+	.pr-u-#{transform.camelize($boxModel)}#{transform.capitalize($boxDirection)}#{transform.capitalize($key)} {
+		#{$boxModel}#{if($boxDirection == '', '', '-')}#{$boxDirection}: var(--pr-t-spacings-#{$key}) #{$suffix};
 	}
 }
 
-@mixin spacings($token: true) {
-	$spacings: config.$spacingsDeprecated;
-	@if $token {
-		$spacings: config.$spacings;
-	}
+@mixin spacings() {
 	@each $boxModel in $boxModel {
 		@each $boxDirection in $boxDirection {
-			@each $key, $value in $spacings {
+			@each $key, $value in config.$spacings {
 				@if $boxModel != 'border' or $value == 0 {
-					@include spacing($boxModel, $boxDirection, $key, $value, $token: $token);
+					@include spacing($boxModel, $boxDirection, $key, $value);
 				}
 			}
 
 			@if $boxModel == 'margin' {
-				@include spacing($boxModel, $boxDirection, $key: 'auto', $value: auto, $token: $token);
+				@include spacing($boxModel, $boxDirection, $key: 'auto', $value: auto);
 			}
 		}
 	}
 
 	@each $gap in $gaps {
-		@each $key, $value in $spacings {
-			@include spacing($gap, $boxDirection: '', $key: $key, $value: $value, $token: $token);
+		@each $key, $value in config.$spacings {
+			@include spacing($gap, $boxDirection: '', $key: $key, $value: $value);
 		}
 	}
 }
@@ -115,7 +105,7 @@ $overflow: 'hidden', 'auto', 'visible', 'scroll';
 	@each $corner in $corners {
 		@each $key, $value in config.$borderRadius {
 			.u-border#{transform.capitalize(transform.camelize($corner))}Radius#{transform.capitalize($key)} {
-				border-#{$corner}radius: $value #{$suffix};
+				border-#{$corner}radius: var(--commons-borderRadius-#{$key}) #{$suffix};
 			}
 		}
 	}
@@ -139,4 +129,18 @@ $overflow: 'hidden', 'auto', 'visible', 'scroll';
 
 @function pxToRem($value) {
 	@return math.div($value, 16px) * 1rem;
+}
+
+@mixin fontFace($family, $weights, $path: '//cdn.lucca.fr/fonts', $style: normal) {
+	@each $keyword, $number in $weights {
+		@font-face {
+			font-family: '#{$family}';
+			src:
+				url('#{$path}/#{$family}/#{$keyword}.woff2') format('woff2'),
+				url('#{$path}/#{$family}/#{$keyword}.woff') format('woff');
+			font-weight: #{$number};
+			font-style: #{$style};
+			font-display: swap;
+		}
+	}
 }

@@ -20,6 +20,23 @@
 	&.mod-S {
 		@include S;
 	}
+
+	&:has(~ .box) {
+		.form-field {
+			&.mod-withArrow {
+				@include withArrow;
+
+				&.mod-S {
+					@include withArrowS;
+				}
+			}
+		}
+	}
+
+	&:has(.radioField-input[aria-invalid='true']),
+	&:has(.checkboxField-input[aria-invalid='true']) {
+		@include legendInvalid;
+	}
 }
 
 .form-field {
@@ -50,18 +67,34 @@
 		@include checkable;
 	}
 
-	&:has(.textField-input-value[aria-invalid='true'], .timePicker-fieldset-group-textfield-input[aria-invalid='true']) {
-		@include invalid;
+	&:not(lu-form-field) {
+		&:has(
+				.textField-input-value[aria-invalid='true'],
+				.timePicker-fieldset-group-textfield-input[aria-invalid='true'],
+				.simpleSelect-input[aria-invalid='true'],
+				.multipleSelect-displayer-search[aria-invalid='true']
+			) {
+			@include invalid;
+		}
 	}
 
 	&:has(.radioField-input:disabled),
-	&:has(.checkboxField-input:disabled) {
+	&:has(.checkboxField-input:disabled),
+	&:has(.switchField-input:disabled) {
 		.formLabel {
 			@include formLabel.disabled;
 		}
 
 		.inlineMessage {
 			@include inlineMessage.disabled;
+		}
+	}
+
+	&.mod-withArrow {
+		@include withArrow;
+
+		&.mod-S {
+			@include withArrowS;
 		}
 	}
 }

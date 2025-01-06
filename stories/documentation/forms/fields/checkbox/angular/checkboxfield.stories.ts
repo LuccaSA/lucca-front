@@ -34,7 +34,7 @@ export default {
 	},
 } as Meta;
 
-export const Basic: StoryObj<CheckboxInputComponent & FormFieldComponent> = {
+export const Basic: StoryObj<CheckboxInputComponent & FormFieldComponent & { required: boolean }> = {
 	render: (args, { argTypes }) => {
 		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, ...inputArgs } = args;
 		return {

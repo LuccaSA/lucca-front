@@ -28,7 +28,6 @@
 @forward 'breadcrumbs'; // 2 Ko
 @forward 'buttonGroup'; // 2 Ko
 @forward 'header'; // 3 Ko
-@forward 'actionIcon'; // 3 Ko
 @forward 'menu'; // 4 Ko
 @forward 'radio'; // 4 Ko
 @forward 'radioField'; // new component for radio
@@ -50,6 +49,7 @@
 @forward 'segmentedControl';
 @forward 'calendar';
 @forward 'skipLinks';
+@forward 'fancyBox';
 
 // caution: the two components cannot be loaded at the same time
 @forward 'grid';
@@ -89,11 +89,10 @@
 @forward 'plgPush';
 @forward 'dateField';
 @forward 'dateRangeField';
+@forward 'dataTable';
+@forward 'dataTableSticked';
 @forward 'filterPill';
 
 // Deprecated CSS components
-// @forward 'gridLegacy'; // 40 Ko
-// @forward 'emptyStateDeprecated';
-
 // @forward 'tableFixedDeprecated'; // 33 Ko
 // @forward 'tableStickedDeprecated'; // 67 Ko

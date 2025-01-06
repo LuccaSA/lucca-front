@@ -34,10 +34,13 @@ export default {
 	},
 } as Meta;
 
-export const Basic: StoryObj<NumberInputComponent & { disabled: boolean } & FormFieldComponent> = {
+export const Basic: StoryObj<NumberInputComponent & { disabled: boolean; required: boolean } & FormFieldComponent> = {
 	render: (args, { argTypes }) => {
 		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, ...inputArgs } = args;
 		return {
+			props: {
+				example: 1000,
+			},
 			template: cleanupTemplate(`<lu-form-field ${generateInputs(
 				{
 					label,
@@ -77,7 +80,12 @@ export const Basic: StoryObj<NumberInputComponent & { disabled: boolean } & Form
 	},
 };
 
-export const WithPrefixAndSuffix: StoryObj<NumberInputComponent & { disabled: boolean } & FormFieldComponent> = {
+export const WithPrefixAndSuffix: StoryObj<
+	NumberInputComponent & {
+		disabled: boolean;
+		required: boolean;
+	} & FormFieldComponent
+> = {
 	render: (args, { argTypes }) => {
 		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, prefix, suffix, ...inputArgs } = args;
 		return {

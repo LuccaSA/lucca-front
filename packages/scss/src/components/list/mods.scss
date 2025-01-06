@@ -42,7 +42,7 @@
 	// if no hover on list item
 	@media (hover: hover) {
 		&:not(:hover) {
-			.actionIcon {
+			.button {
 				&:not(:focus) {
 					@include a11y.mask;
 					opacity: 0;

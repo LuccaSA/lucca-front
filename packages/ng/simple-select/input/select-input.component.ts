@@ -3,7 +3,7 @@ import { AsyncPipe, NgIf } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation, forwardRef, inject } from '@angular/core';
 import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { getIntl } from '@lucca-front/ng/core';
-import { ALuSelectInputComponent, LuSelectPanelRef, provideLuSelectLabelsAndIds, provideLuSelectOverlayContainer, ɵLuOptionOutletDirective } from '@lucca-front/ng/core-select';
+import { ALuSelectInputComponent, LuSelectPanelRef, provideLuSelectLabelsAndIds, ɵLuOptionOutletDirective } from '@lucca-front/ng/core-select';
 import { InputDirective } from '@lucca-front/ng/form-field';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { LU_SIMPLE_SELECT_TRANSLATIONS } from '../select.translate';
@@ -27,7 +27,6 @@ import { LuSimpleSelectPanelRefFactory } from './panel-ref.factory';
 			useExisting: forwardRef(() => LuSimpleSelectInputComponent),
 		},
 		LuSimpleSelectPanelRefFactory,
-		provideLuSelectOverlayContainer(),
 		provideLuSelectLabelsAndIds(),
 	],
 	encapsulation: ViewEncapsulation.None,

@@ -14,7 +14,6 @@ export class CalloutFeedbackItemDescriptionDirective {}
 	imports: [],
 	templateUrl: './callout-feedback-item.component.html',
 	styleUrls: ['./callout-feedback-item.component.scss'],
-	// eslint-disable-next-line @angular-eslint/no-host-metadata-property
 	host: {
 		class: 'calloutFeedbackList-item',
 	},

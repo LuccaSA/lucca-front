@@ -59,7 +59,7 @@ export class LuDepartmentSelectInputComponent<
 
 	@Input() appInstanceId: number | string;
 	@Input() operations: number[];
-	@Input() filters: string[];
+	@Input() filters: string[] = [];
 
 	public intl = getIntl(LU_DEPARTMENT_SELECT_INPUT_TRANSLATIONS);
 

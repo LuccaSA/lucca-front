@@ -10,7 +10,7 @@ export default {
 		<span aria-hidden="true" class="calloutDisclosure-summary-chevron lucca-icon icon-arrowChevronBottom"></span>
 	</summary>
 	<div class="calloutDisclosure-details">
-		<ul class="calloutFeedbackList palette-neutral">
+		<ul class="calloutFeedbackList">
 	  	<li class="calloutFeedbackList-item">
 				<span class="calloutFeedbackList-item-description">Feedback description.</span>
 				<div class="calloutFeedbackList-item-actions">

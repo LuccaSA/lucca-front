@@ -1,8 +1,6 @@
 @use 'sass:list';
 
 @use '@lucca-front/icons/src/commons/core' as transform;
-
-@use '@lucca-front/scss/src/commons/config';
 @use '@lucca-front/scss/src/commons/core';
 
 @use '@lucca-front/scss/src/commons/utils/keyframe';
@@ -245,20 +243,6 @@
 	color: var(--palettes-neutral-700) !important;
 }
 
-// .u-unit is deprecated
-.u-unit {
-	font-size: 0.66em !important;
-}
-
-// .u-comma is deprecated
-.u-comma {
-	&:not(:last-child) {
-		&::after {
-			content: ', ' !important;
-		}
-	}
-}
-
 .u-fontWeightRegular {
 	font-weight: 400 !important;
 }
@@ -270,21 +254,20 @@
 .u-noSpinButtons {
 	&::-webkit-outer-spin-button,
 	&::-webkit-inner-spin-button {
-		-webkit-appearance: none;
+		-webkit-appearance: none !important;
 	}
 
 	&[type='number'] {
-		-moz-appearance: textfield;
+		-moz-appearance: textfield !important;
 	}
 }
 
-@each $elevation in config.$elevations {
-	$index: list.index(config.$elevations, $elevation);
+.u-fontFamily {
+	font-family: var(--commons-font-family) !important;
+}
 
-	// .u-elevate* is deprecated
-	.u-elevate#{$index} {
-		box-shadow: var(--commons-elevations-elevation-#{$index});
-	}
+.u-fontFamilyCursive {
+	font-family: var(--commons-font-family-cursive) !important;
 }
 
 @include core.classes('float', core.$float);
@@ -358,9 +341,6 @@
 }
 
 @include core.spacings;
-@if (config.$importDeprecatedSpacings) {
-	@include core.spacings($token: false);
-}
 @include core.sizes;
 @include core.borderRadius;
 @include core.palettes;

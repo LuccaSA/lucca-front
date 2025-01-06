@@ -190,8 +190,8 @@ export class DateRangeInputComponent extends AbstractDateComponent implements Co
 		super();
 
 		if (this.#formFieldRef) {
-			this.#formFieldRef.rolePresentationLabel = true;
-			this.label = this.#formFieldRef.label;
+			this.#formFieldRef.rolePresentationLabel.set(true);
+			this.label = this.#formFieldRef.label();
 		}
 
 		this.setupInputEffect(this.startTextInput, 'start');

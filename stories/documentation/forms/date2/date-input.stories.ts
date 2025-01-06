@@ -30,13 +30,6 @@ export default {
 		hideToday: {
 			control: 'boolean',
 		},
-
-		enableOverflow: {
-			control: 'boolean',
-		},
-		showOverflow: {
-			control: 'boolean',
-		},
 		clearable: {
 			control: 'boolean',
 		},

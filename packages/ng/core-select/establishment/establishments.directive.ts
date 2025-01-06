@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { DestroyRef, Directive, OnInit, computed, forwardRef, inject, input } from '@angular/core';
 import { takeUntilDestroyed, toObservable, toSignal } from '@angular/core/rxjs-interop';
-import { CORE_SELECT_API_TOTAL_COUNT_PROVIDER, CoreSelectApiTotalCountProvider, sanitizeClueFilter } from '@lucca-front/ng/core-select';
+import { CORE_SELECT_API_TOTAL_COUNT_PROVIDER, CoreSelectApiTotalCountProvider, applySearchDelimiter } from '@lucca-front/ng/core-select';
 import { ALuCoreSelectApiDirective } from '@lucca-front/ng/core-select/api';
 import { Observable, debounceTime, filter, map, switchMap } from 'rxjs';
 import { LuEstablishmentGroupingComponent } from './establishment-grouping.component';
@@ -74,7 +74,7 @@ export class LuCoreSelectEstablishmentsDirective<T extends LuCoreSelectEstablish
 				...this.filters(),
 				...(clue
 					? // When the clue is not empty, sort establishments by name
-						{ search: sanitizeClueFilter(clue, searchDelimiter), sort: 'name' }
+						{ search: applySearchDelimiter(clue, searchDelimiter), sort: 'name' }
 					: // When the clue is empty, establishments are grouped by legal unit, so sort them by legal unit name and then by name
 						{ sort: 'legalunit.name,name' }),
 				...(operationIds ? { operations: operationIds.join(',') } : {}),

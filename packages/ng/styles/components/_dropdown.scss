@@ -1,5 +1,6 @@
 @use '@lucca-front/scss/src/commons/utils/namespace';
 @use '@lucca-front/scss/src/commons/utils/a11y';
+@use '@lucca-front/scss/src/components/divider/exports' as divider;
 
 @include namespace.appendRootVars {
 	--components-dropdown-min-width: 10rem;
@@ -23,6 +24,11 @@
 	margin: 0;
 	min-width: var(--components-dropdown-min-width);
 	max-width: var(--components-dropdown-max-width);
+}
+
+.lu-dropdown-options-divider {
+	@include divider.vars;
+	@include divider.component;
 }
 
 .lu-dropdown-options-item {

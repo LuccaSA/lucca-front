@@ -29,7 +29,7 @@ export default {
 			},
 		},
 		rows: {
-			control: { type: 'number', min: 2 },
+			control: { type: 'number' },
 			description: '[v18.1]',
 		},
 		counter: {
@@ -50,7 +50,7 @@ export default {
 	},
 } as Meta;
 
-export const Basic: StoryObj<TextareaInputComponent & { disabled: boolean } & FormFieldComponent> = {
+export const Basic: StoryObj<TextareaInputComponent & { disabled: boolean; required: boolean } & FormFieldComponent> = {
 	render: (args, { argTypes }) => {
 		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, counter, autoResize, autoResizeScrollIntoView, ...inputArgs } = args;
 		return {

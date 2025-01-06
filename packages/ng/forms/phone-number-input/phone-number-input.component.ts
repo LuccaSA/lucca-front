@@ -30,7 +30,7 @@ function tryParsePhoneNumber(phoneNumber: string, countryCode?: CountryCode): Pa
 			nationalNumber: parsedNumber.formatNational(),
 			isValid: parsedNumber.isValid(),
 		};
-	} catch (e) {
+	} catch {
 		return {
 			number: phoneNumber as E164Number,
 			nationalNumber: phoneNumber,
@@ -136,7 +136,7 @@ export class PhoneNumberInputComponent implements ControlValueAccessor, Validato
 			} else {
 				this.displayedNumber.set(undefined);
 			}
-		} catch (e) {
+		} catch {
 			this.displayedNumber.set(value);
 		}
 		this.formatNationalNumber();
@@ -179,7 +179,7 @@ export class PhoneNumberInputComponent implements ControlValueAccessor, Validato
 			}
 			this.#onChange?.(number);
 			return;
-		} catch (e) {
+		} catch {
 			this.#onChange?.(displayedNumber as E164Number);
 		}
 	}
@@ -198,7 +198,7 @@ export class PhoneNumberInputComponent implements ControlValueAccessor, Validato
 			} else if (countryCode) {
 				this.displayedNumber.set(formatIncompletePhoneNumber(displayedNumber, countryCode));
 			}
-		} catch (e) {
+		} catch {
 			// do nothing
 		}
 	}
