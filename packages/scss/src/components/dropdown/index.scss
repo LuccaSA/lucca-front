@@ -1,13 +1,13 @@
 @use 'exports' as *;
 
-// .lu-dropdown-options is deprecated
+// .lu-dropdown-content is deprecated
 .dropdown,
-.lu-dropdown-options {
+.lu-dropdown-content.lu-popover-content {
 	@include vars;
 	@include component;
 }
 
-.dropdown-option-action,
+.dropdown-list-option-action,
 .lu-dropdown-options-item-action {
 	&.is-disabled {
 		@include disabled;

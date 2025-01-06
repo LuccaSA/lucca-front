@@ -17,20 +17,20 @@ const Template: StoryFn = (args) => ({
 	template: `
 	<button type="button" class="button" [luDropdown]="dropdown">Dropdown with options</button>
 <lu-dropdown #dropdown>
-	<li class="dropdown-option">
-		<span class="dropdown-option-action is-disabled" luDropdownItem>
+	<li class="dropdown-list-option">
+		<span class="dropdown-list-option-action is-disabled" luDropdownItem>
 			<lu-icon icon="eye" />
 			Prévisualiser
 		</span>
 	</li>
-	<li class="dropdown-option">
-		<a routerLink="." fragment="link2" class="dropdown-option-action" luDropdownItem>
+	<li class="dropdown-list-option">
+		<a routerLink="." fragment="link2" class="dropdown-list-option-action" luDropdownItem>
 			<lu-icon icon="officePen" />
 			Éditer
 		</a>
 	</li>
-	<li class="dropdown-option">
-		<button type="button" class="dropdown-option-action mod-delete" luDropdownItem>
+	<li class="dropdown-list-option">
+		<button type="button" class="dropdown-list-option-action mod-delete" luDropdownItem>
 			<lu-icon icon="trashDelete" />
 			Supprimer
 		</button>

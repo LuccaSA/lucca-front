@@ -1,6 +1,6 @@
 // import { UP_ARROW, DOWN_ARROW, TAB } from '@angular/cdk/keycodes';
 import { NgClass } from '@angular/common';
-import { AfterViewInit, ChangeDetectionStrategy, Component, ContentChildren, EventEmitter, Input, OnDestroy, Output, QueryList, TemplateRef, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, ContentChildren, EventEmitter, Input, OnDestroy, Output, QueryList, TemplateRef, ViewChild, ViewEncapsulation } from '@angular/core';
 import { ALuPopoverPanel, ILuPopoverPanel, luTransformPopover } from '@lucca-front/ng/popover';
 import { merge, Observable, Subscription } from 'rxjs';
 import { debounceTime, delay, map, share, startWith, switchMap } from 'rxjs/operators';
@@ -10,10 +10,12 @@ import { ALuDropdownItem, ILuDropdownItem } from '../item/index';
 	selector: 'lu-dropdown',
 	imports: [NgClass],
 	templateUrl: './dropdown-panel.component.html',
+	styleUrls: ['./dropdown-panel.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	animations: [luTransformPopover],
 	exportAs: 'LuDropdownPanel',
 	standalone: true,
+	encapsulation: ViewEncapsulation.None,
 })
 export class LuDropdownPanelComponent extends ALuPopoverPanel implements ILuPopoverPanel, OnDestroy, AfterViewInit {
 	/**
