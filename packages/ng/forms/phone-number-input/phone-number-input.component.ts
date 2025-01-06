@@ -68,7 +68,7 @@ export class PhoneNumberInputComponent implements ControlValueAccessor, Validato
 
 	@Input() autocomplete?: 'off' | 'tel';
 
-	autoPlaceholder = input<boolean>(false);
+	autoPlaceholder = input<boolean>(true);
 
 	#onChange?: (value: E164Number) => void;
 
