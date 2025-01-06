@@ -1,0 +1,8 @@
+@mixin delete {
+	--components-dropdown-option-actionColor: var(--palettes-error-800);
+
+	&:hover,
+	&:focus-visible {
+		--components-dropdown-option-actionBackground: var(--palettes-error-50);
+	}
+}
