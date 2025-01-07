@@ -1,5 +1,3 @@
-### Mise en place
-
 #### Cas `establishments` / `job-qualifications` / `users` / `apiV4` / `apiV3`
 
 Il suffit d'importer `LuMultiSelectWithSelectAllDirective` et d'ajouter `withSelectAll` et `withSelectAllDisplayerLabel` sur la balise `lu-multi-select`.
@@ -35,7 +33,7 @@ class MyComponent {}
 <lu-multi-select withSelectAll [withSelectAllDisplayerLabel]="'POTATOES' | transloco" [totalCount]="123" />
 ```
 
-### Implications
+#### Implications
 
 L'utilisation de `withSelectAll` apporte un certain nombre de changements :
 
@@ -55,9 +53,7 @@ L'utilisation de `withSelectAll` apporte un certain nombre de changements :
   export type LuMultiSelectionMode = 'include' | 'exclude' | 'none' | 'all';
   ```
 
-### Exemples
-
-#### Dans une barre de filtres
+### Exemple : Barre de filtres
 
 On pourra utiliser la fonction `selectionToQueryParams` qui permet de créer un objet utilisable en query params à partir d'une `LuMultiSelection`.
 
@@ -86,6 +82,6 @@ class ExpenseListComponent {
 
 :warning: Il est nécessaire que l'API cible accepte un `ApiFilter` en paramètre pour que le filtre sur `ownerId` cela fonctionne.
 
-#### Dans un formulaire avec sauvegarde des données
+### Exemple : Formulaire avec sauvegarde des données
 
 Dans ce cas, il faut voir avec le backend pour que en payload, les valeurs soient envoyées sous forme de Selection et pas sous forme de tableau.
