@@ -15,5 +15,5 @@ export interface FilterPillInputComponent {
 
 	onFilterPillClosed?(): void;
 
-	getDefaultFilterPillIcon(): LuccaIcon;
+	getDefaultFilterPillIcon?(): LuccaIcon;
 }

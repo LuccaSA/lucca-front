@@ -37,6 +37,8 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 
 	protected coreIntl = getIntl(LU_CORE_SELECT_TRANSLATIONS);
 
+	protected afterCloseFn?: () => void;
+
 	@ViewChild('inputElement')
 	private inputElementRef: ElementRef<HTMLInputElement>;
 
@@ -267,8 +269,10 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 		}
 	}
 
-	clearValue(event: Event): void {
-		event.stopPropagation();
+	clearValue(event?: Event): void {
+		if (event) {
+			event.stopPropagation();
+		}
 		this.updateValue(null, true);
 		this.inputElementRef.nativeElement.focus();
 	}
@@ -348,6 +352,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 		this.isPanelOpen$.next(false);
 		this.panelRef.close();
 		this._panelRef = undefined;
+		this.afterCloseFn?.();
 	}
 
 	public writeValue(value: TValue): void {
