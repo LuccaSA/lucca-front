@@ -8,7 +8,7 @@ import { IconComponent } from '@lucca-front/ng/icon';
 import { InlineMessageComponent, InlineMessageState } from '@lucca-front/ng/inline-message';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 import { BehaviorSubject, merge, switchMap } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, startWith } from 'rxjs/operators';
 import { FormFieldSize } from './form-field-size';
 import { FORM_FIELD_INSTANCE } from './form-field.token';
 import { LU_FORM_FIELD_TRANSLATIONS } from './form-field.translate';
@@ -49,9 +49,21 @@ export class FormFieldComponent implements OnDestroy {
 	ownRequiredValidators = computed(() => this.requiredValidators().filter((c) => !this.ignoredRequiredValidators().has(c)));
 	ownControls = computed(() => this.ngControls().filter((c) => !this.ignoredControls().has(c)));
 
-	refreshedOwnControls = toSignal(toObservable(this.ownControls).pipe(switchMap((controls) => merge(...controls.map((c) => c.control.events)).pipe(map(() => [...controls])))), {
-		initialValue: [],
-	});
+	refreshedOwnControls = toSignal(
+		toObservable(this.ownControls).pipe(
+			switchMap((controls) => {
+				return merge(...controls.map((c) => c.control.events)).pipe(
+					// We need to use startWith here so the observable will also emit when new controls are added on the fly,
+					// before they even emit any control-related event
+					startWith(void 0),
+					map(() => [...controls]),
+				);
+			}),
+		),
+		{
+			initialValue: [],
+		},
+	);
 
 	isInputRequired = computed(() => {
 		const hasRequiredFormControl = this.refreshedOwnControls().some((c) => c.control.hasValidator(Validators.required));
