@@ -25,7 +25,7 @@ function getTemplate(args: IndexTableResponsiveCardListCustomStory): string {
 		text-align: right;
 	}
 </style>
-<table class="indexTable mod-responsiveCardList myTable u-marginBottomL" >
+<table class="indexTable mod-responsiveCardList myTable pr-u-marginBottom300" >
 	<thead class="indexTable-head">
 		<tr class="indexTable-head-row">
 			<th class="indexTable-head-row-cell" scope="col">Lorem</th>
