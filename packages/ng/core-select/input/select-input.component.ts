@@ -15,6 +15,7 @@ import {
 	OnDestroy,
 	OnInit,
 	Output,
+	signal,
 	TemplateRef,
 	Type,
 	ViewChild,
@@ -38,6 +39,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	protected coreIntl = getIntl(LU_CORE_SELECT_TRANSLATIONS);
 
 	protected afterCloseFn?: () => void;
+	protected filterPillMode = false;
 
 	@ViewChild('inputElement')
 	private inputElementRef: ElementRef<HTMLInputElement>;
@@ -130,12 +132,16 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	@Output() previousPage = new EventEmitter<void>();
 	@Output() addOption = new EventEmitter<string>();
 
+	public valueSignal = signal<TValue>(null);
+
 	public get value(): TValue {
 		return this._value;
 	}
 
 	protected set value(value: TValue) {
+		// TODO remove once migrated to signal, but there's an override
 		this._value = value;
+		this.valueSignal.set(value);
 		this.changeDetectorRef.markForCheck();
 	}
 
@@ -349,9 +355,11 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 		this.activeDescendant$.next('');
 		this.changeDetectorRef.markForCheck();
 		this.onTouched?.();
-		this.isPanelOpen$.next(false);
-		this.panelRef.close();
-		this._panelRef = undefined;
+		if (!this.filterPillMode) {
+			this.isPanelOpen$.next(false);
+			this.panelRef.close();
+			this._panelRef = undefined;
+		}
 		this.afterCloseFn?.();
 	}
 

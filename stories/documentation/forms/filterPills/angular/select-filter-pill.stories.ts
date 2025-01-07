@@ -4,12 +4,13 @@ import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { StoryModelDisplayComponent } from '../../../../helpers/story-model-display.component';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 import { allLegumes } from '@/stories/forms/select/select.utils';
+import { JsonPipe } from '@angular/common';
 
 export default {
 	title: 'Documentation/Forms/FiltersPills/Select/Angular',
 	decorators: [
 		moduleMetadata({
-			imports: [FilterPillComponent, LuSimpleSelectInputComponent, FormsModule, StoryModelDisplayComponent],
+			imports: [FilterPillComponent, LuSimpleSelectInputComponent, FormsModule, StoryModelDisplayComponent, JsonPipe],
 		}),
 	],
 	render: (args, context) => {
@@ -20,7 +21,7 @@ export default {
 			},
 			template: `<lu-filter-pill label="Légume"><lu-simple-select [(ngModel)]="example" [options]="legumes" /></lu-filter-pill>
 
-<pr-story-model-display>{{example}}</pr-story-model-display>
+<pr-story-model-display>{{example | json}}</pr-story-model-display>
 `,
 		};
 	},

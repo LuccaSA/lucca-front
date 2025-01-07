@@ -1,32 +1,43 @@
-<input
-	class="simpleSelect-input"
-	type="text"
-	role="combobox"
-	aria-haspopup="listbox"
-	[attr.aria-activedescendant]="activeDescendant$ | async"
-	[attr.aria-expanded]="isPanelOpen"
-	[attr.aria-controls]="ariaControls"
-	placeholder="{{inputPlaceholder}}"
-	[ngModel]="clue"
-	(ngModelChange)="clueChanged($event)"
-	[readonly]="!searchable"
-	[disabled]="disabled$ | async"
-	luInput
-	#inputElement
-	[attr.autocomplete]="autocomplete"
-/>
-<div class="simpleSelect-value">
-	<ng-container *luOptionOutlet="displayerTpl(); value: value"></ng-container>
+<div class="simpleSelect">
+	<input
+		class="simpleSelect-input"
+		type="text"
+		role="combobox"
+		aria-haspopup="listbox"
+		[attr.aria-activedescendant]="activeDescendant$ | async"
+		[attr.aria-expanded]="isPanelOpen"
+		[attr.aria-controls]="ariaControls"
+		placeholder="{{inputPlaceholder}}"
+		[ngModel]="clue"
+		(ngModelChange)="clueChanged($event)"
+		[readonly]="!searchable"
+		[disabled]="disabled$ | async"
+		luInput
+		#inputElement
+		[attr.autocomplete]="autocomplete"
+	/>
+	<div class="simpleSelect-value">
+		<ng-container *ngTemplateOutlet="currentValueDisplayerTpl"></ng-container>
+	</div>
+	<button
+		*ngIf="clearable && hasValue() && (disabled$ | async) === false"
+		class="simpleSelect-clear clear"
+		role="button"
+		type="button"
+		(click)="clearValue($event)"
+		(keydown.space)="clearValue($event)"
+	>
+		<span class="u-mask">{{ intl.clear }}</span>
+	</button>
+	@if (!filterPillMode) {
+		<span aria-hidden="true" class="simpleSelect-arrow lucca-icon icon-arrowChevronBottom"></span>
+	}
 </div>
-<button
-	*ngIf="clearable && hasValue() && (disabled$ | async) === false"
-	class="simpleSelect-clear clear"
-	role="button"
-	type="button"
-	(click)="clearValue($event)"
-	(keydown.space)="clearValue($event)"
->
-	<span class="u-mask">{{ intl.clear }}</span>
-</button>
-<span aria-hidden="true" class="simpleSelect-arrow lucca-icon icon-arrowChevronBottom"></span>
 <ng-container #filterPillPanelAnchor></ng-container>
+<ng-container *luFilterPillDisplayer>
+	<ng-container *ngTemplateOutlet="currentValueDisplayerTpl"></ng-container>
+</ng-container>
+
+<ng-template #currentValueDisplayerTpl>
+	<ng-container *luOptionOutlet="displayerTpl(); value: value"></ng-container>
+</ng-template>
