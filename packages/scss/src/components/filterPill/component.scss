@@ -126,6 +126,20 @@
 			.textField-input-affix-toggle {
 				display: none;
 			}
+
+			.lu-picker-content {
+				animation: none;
+				box-shadow: none;
+				border-radius: 0;
+				background-color: transparent;
+				padding: 0.25rem;
+				margin: 0.25rem -0.5rem -0.5rem;
+			}
+
+			.simpleSelect {
+				position: relative;
+				z-index: 1;
+			}
 		}
 
 		.filterPill-label {
@@ -159,7 +173,7 @@
 			}
 		}
 
-		.filterPill-clear {
+		.filterPill-clear.clear {
 			margin-left: var(--pr-t-spacings-75);
 			margin-right: var(--pr-t-spacings-25);
 			position: relative;
