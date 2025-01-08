@@ -1,9 +1,9 @@
-import { AfterViewInit, Component, computed, contentChildren, ElementRef, forwardRef, InjectionToken, OnDestroy, viewChild, ViewEncapsulation } from '@angular/core';
+import { AfterViewInit, Component, computed, contentChildren, ElementRef, forwardRef, inject, InjectionToken, OnDestroy, viewChild, ViewEncapsulation } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { $convertFromMarkdownString, $convertToMarkdownString, TRANSFORMERS } from '@lexical/markdown';
 import { registerRichText } from '@lexical/rich-text';
 import { mergeRegister } from '@lexical/utils';
 import { CommandPayloadType, createEditor, Klass, LexicalCommand, LexicalEditor, LexicalNode } from 'lexical';
+import { RICH_TEXT_FORMATER, RichTextFormater } from './rich-text-formater';
 
 export interface RichTextPluginComponent {
 	setEditorInstance(editor: LexicalEditor): void;
@@ -28,6 +28,8 @@ export const RICH_TEXT_PLUGIN_COMPONENT = new InjectionToken<RichTextPluginCompo
 	],
 })
 export class RichTextInputComponent implements AfterViewInit, OnDestroy, ControlValueAccessor {
+	readonly richTextFormater: RichTextFormater = inject(RICH_TEXT_FORMATER);
+
 	#onChange?: (markdown: string | null) => void;
 	#onTouch?: () => void;
 	#cleanup?: () => void;
@@ -64,12 +66,15 @@ export class RichTextInputComponent implements AfterViewInit, OnDestroy, Control
 			registerRichText(this.editor),
 			// registerCtrlEnterShortcut(this.editor, () => this.ctrlEnter.emit()),
 			// Sync editor state with ngControlValue
-			this.editor.registerUpdateListener(() =>
-				this.editor.getEditorState().read(() => {
-					this.#onTouch?.();
-					this.#onChange?.($convertToMarkdownString(TRANSFORMERS));
-				}),
-			),
+			this.editor.registerUpdateListener(() => {
+				this.richTextFormater
+					.format(this.editor)
+					.then((markdown) => {
+						this.#onTouch?.();
+						this.#onChange?.(markdown);
+					})
+					.catch(() => void 0);
+			}),
 		);
 
 		this.pluginComponents().forEach((plugin) => plugin.setEditorInstance(this.editor));
@@ -81,7 +86,10 @@ export class RichTextInputComponent implements AfterViewInit, OnDestroy, Control
 
 	writeValue(markdown: string | null): void {
 		this.editor?.update(() => {
-			$convertFromMarkdownString(markdown ?? '', TRANSFORMERS);
+			this.richTextFormater
+				.parse(this.editor, markdown)
+				.then(() => {})
+				.catch(() => {});
 		});
 	}
 

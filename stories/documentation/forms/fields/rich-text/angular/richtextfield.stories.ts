@@ -46,7 +46,7 @@ export const Basic: StoryObj<RichTextInputComponent & { disabled: boolean; examp
 		const { example, ...inputArgs } = args;
 		return {
 			props: { example },
-			template: cleanupTemplate(`<lu-form-field ${generateInputs({}, argTypes)}>
+			template: cleanupTemplate(`<lu-form-field label="toto">
 	<lu-rich-text-input
 	${generateInputs(inputArgs, argTypes)}
 		[(ngModel)]="example">
@@ -79,6 +79,6 @@ export const Basic: StoryObj<RichTextInputComponent & { disabled: boolean; examp
 		};
 	},
 	args: {
-		example: '*italic* **bold**',
+		example: '<i>italic</i> <b>bold</b>',
 	},
 };
