@@ -1,10 +1,15 @@
+@use '@lucca-front/icons/src/icon/exports' as icon;
+
 @use '@lucca-front/scss/src/commons/utils/namespace';
 @use '@lucca-front/scss/src/commons/utils/a11y';
 @use '@lucca-front/scss/src/commons/utils/reset';
 @use '@lucca-front/scss/src/commons/utils/overflow';
 @use '@lucca-front/scss/src/commons/utils/media';
+
 @use '@lucca-front/scss/src/components/clear/exports' as clear;
 @use '@lucca-front/scss/src/components/scrollBox/exports' as scrollBox;
+@use '@lucca-front/scss/src/components/divider/exports' as divider;
+@use '@lucca-front/scss/src/components/segmentedControl/exports' as segmentedControl;
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
 	display: flex;
@@ -17,12 +22,59 @@
 	color: var(--components-filterPill-color);
 	font-size: var(--sizes-S-fontSize);
 	line-height: var(--sizes-S-lineHeight);
-	box-shadow: 0 0 0 1px var(--components-filterPill-borderColor);
+	box-shadow: var(--components-filterPill-shadow);
 	position: relative;
 	max-width: 18rem;
 	white-space: nowrap;
+	transition-property: box-shadow;
+	transition-duration: var(--commons-animations-durations-fast);
+
+	&:is(button) {
+		--components-filterPill-backgroundColor: var(--pr-t-elevation-surface-raised);
+
+		border: 0;
+		padding: var(--pr-t-spacings-75);
+		cursor: pointer;
+
+		&:focus-visible {
+			@include a11y.focusVisible($offset: 3px);
+		}
+	}
 
 	@at-root ($atRoot) {
+		.filterBar-divider.divider {
+			@include divider.vertical;
+
+			margin-inline: var(--pr-t-spacings-50);
+
+			@include media.max(XXS) {
+				width: 100%;
+				margin-inline: 0;
+			}
+		}
+
+		.filterBar-segmentedControl.segmentedControl {
+			@include segmentedControl.S;
+
+			@include media.max(XXS) {
+				--components-segmentedControl-direction: row;
+				--components-segmentedControl-width: 100%;
+			}
+
+			@include media.pointer('coarse') {
+				--components-segmentedControl-wrap: nowrap;
+				--components-segmentedControl-whiteSpace: nowrap;
+				--components-segmentedControl-width: auto;
+			}
+		}
+		.filterPill-icon {
+			display: flex;
+
+			.lucca-icon {
+				@include icon.S;
+			}
+		}
+
 		.filterPillScrollBoxWrapper.scrollBox {
 			@include media.pointer('coarse') {
 				@include overflow.mask;

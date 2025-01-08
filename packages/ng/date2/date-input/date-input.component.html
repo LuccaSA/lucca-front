@@ -1,7 +1,7 @@
 @if (isFilterPill) {
-	<label for="dateInput" class="u-mask">{{ intl.pickDate }}</label>
+<label for="dateInput" class="u-mask">{{ intl.pickDate }}</label>
 }
-<div class="textField" #popoverAnchor>
+<div class="textField dateField-textField" #popoverAnchor>
 	<div class="textField-input">
 		<input
 			type="text"
@@ -26,16 +26,15 @@
 
 		<div class="textField-input-affix">
 			@if (clearable() && !disabled && date.value !== '') {
-				<button class="textField-input-affix-clear clear" type="button" (click)="clear()">
-					<span aria-hidden="true" class="lucca-icon icon-signClose"></span>
-					<span class="u-mask">{{ intl.clear }}</span>
-				</button>
-			}
-			@if (isFilterPill && date.value !== '') {
-				<button class="textField-input-affix-clear clear" type="button" (click)="date.value = ''">
-					<span aria-hidden="true" class="lucca-icon icon-signClose"></span>
-					<span class="u-mask">{{ intl.clear }}</span>
-				</button>
+			<button class="textField-input-affix-clear clear" type="button" (click)="clear()">
+				<span aria-hidden="true" class="lucca-icon icon-signClose"></span>
+				<span class="u-mask">{{ intl.clear }}</span>
+			</button>
+			} @if (isFilterPill && date.value !== '') {
+			<button class="textField-input-affix-clear clear" type="button" (click)="date.value = ''">
+				<span aria-hidden="true" class="lucca-icon icon-signClose"></span>
+				<span class="u-mask">{{ intl.clear }}</span>
+			</button>
 			}
 			<button
 				[luPopover2]="calendar"
@@ -56,7 +55,7 @@
 </div>
 
 @if (isFilterPill) {
-	<ng-container *ngTemplateOutlet="calendar"></ng-container>
+<ng-container *ngTemplateOutlet="calendar"></ng-container>
 }
 
 <div *luFilterPillDisplayer>{{ displayValue() }}</div>
@@ -64,23 +63,19 @@
 <ng-template #calendar>
 	<div class="calendarWrapper">
 		<div class="calendarWrapper-navigation u-left0">
-			<button class="calendarWrapper-navigation-button button" type="button" (click)="prev(calendarMode())"
-			        #previousButtonRef>
-				<span aria-hidden="true" class="lucca-icon icon-chevronLeft"></span><span
-				class="u-mask">{{ intl.previous }}</span>
+			<button class="calendarWrapper-navigation-button button" type="button" (click)="prev(calendarMode())" #previousButtonRef>
+				<span aria-hidden="true" class="lucca-icon icon-chevronLeft"></span><span class="u-mask">{{ intl.previous }}</span>
 			</button>
 		</div>
 		<div class="calendarWrapper-navigation u-right0">
-			<button class="calendarWrapper-navigation-button button" type="button" (click)="next(calendarMode())"
-			        #nextButtonRef>
-				<span aria-hidden="true" class="lucca-icon icon-chevronRight"></span><span
-				class="u-mask"> {{ intl.next }}</span>
+			<button class="calendarWrapper-navigation-button button" type="button" (click)="next(calendarMode())" #nextButtonRef>
+				<span aria-hidden="true" class="lucca-icon icon-chevronRight"></span><span class="u-mask"> {{ intl.next }}</span>
 			</button>
 		</div>
 		<div class="calendarWrapper-content" tabindex="-1">
 			<lu-calendar2
-				[enableOverflow]="enableOverflow()"
-				[showOverflow]="showOverflow()"
+				[enableOverflow]="!disableOverflow()"
+				[showOverflow]="!hideOverflow()"
 				[hideToday]="hideToday()"
 				[hasTodayButton]="hasTodayButton()"
 				[date]="currentDate()"

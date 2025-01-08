@@ -3,7 +3,7 @@
 	--components-filterPill-padding: var(--pr-t-spacings-75) var(--pr-t-spacings-100);
 	--components-filterPill-label-fontWeightNormal: 400;
 	--components-filterPill-label-fontWeightChecked: 600;
-	--components-filterPill-borderColor: var(--palettes-neutral-300);
+	--components-filterPill-borderColor: var(--palettes-neutral-100);
 	--components-filterPill-backgroundColor: var(--palettes-neutral-0);
 	--components-filterPill-color: var(--palettes-neutral-700);
 	--components-filterPill-label-cursor: pointer;
@@ -17,4 +17,5 @@
 	--components-filterPill-clear-display: grid;
 	--components-filterPill-toggle-rotation: 0;
 	--components-filterPill-toggle-iconColor: var(--palettes-neutral-600);
+	--components-filterPill-shadow: 0 0 0 1px var(--components-filterPill-borderColor);
 }

@@ -5,14 +5,16 @@
 	margin: 0;
 	list-style-type: none;
 	display: flex;
-	flex-wrap: wrap;
+	flex-wrap: var(--components-segmentedControl-wrap);
 	width: var(--components-segmentedControl-width);
 	flex-direction: var(--components-segmentedControl-direction);
-	box-shadow: 0 0 0 var(--commons-divider-width) var(--palettes-neutral-300);
+	box-shadow: 0 0 0 var(--commons-divider-width) var(--palettes-neutral-100);
 	border-radius: var(--components-segmentedControl-borderRadius);
 	background-color: var(--palettes-neutral-0);
 	font-size: var(--components-segmentedControl-fontSize);
 	line-height: var(--components-segmentedControl-lineHeight);
+	gap: var(--commons-divider-width);
+	white-space: var(--components-segmentedControl-whiteSpace);
 
 	@at-root ($atRoot) {
 		.segmentedControl-item-input {
@@ -37,7 +39,7 @@
 				content: '';
 				border-width: 0;
 				inset: var(--components-segmentedControl-dividerInset);
-				border-color: var(--palettes-grey-200);
+				border-color: var(--palettes-grey-100);
 				position: absolute;
 				border-style: solid;
 			}
@@ -80,25 +82,13 @@
 				@include a11y.focusVisible($offset: 3px);
 			}
 
-			&::before {
-				content: var(--components-segmentedControl-backgroundContent);
-				z-index: -1;
-				position: absolute;
-				background-color: var(--palettes-neutral-50);
-				inset: var(--pr-t-spacings-75);
-				bottom: calc(var(--pr-t-spacings-75) - var(--commons-divider-width));
-				border-radius: var(--commons-borderRadius-M);
-				transition-property: scale, opacity;
-				transition-duration: var(--commons-animations-durations-standard);
-				opacity: 0;
-				scale: 0;
+			&:hover {
+				--components-segmentedControl-shadow: var(--palettes-product-400);
+				--components-segmentedControl-zIndex: 1;
 			}
 
-			&:hover {
-				&::before {
-					opacity: 1;
-					scale: 1;
-				}
+			&:active {
+				--components-segmentedControl-background: var(--palettes-neutral-25);
 			}
 		}
 

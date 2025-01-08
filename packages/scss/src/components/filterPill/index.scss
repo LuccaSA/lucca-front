@@ -14,32 +14,38 @@
 		@include active;
 	}
 
+	&:disabled {
+		@include disabled;
+	}
+
 	&:has(.filterPill-combobox:focus-visible, .filterPill-checkbox-input:focus-visible, .filterPill-label:focus-visible) {
 		@include focusVisible;
 	}
 
-	&:not(:has(.filterPill-checkbox-input)) {
-		&.is-empty {
-			@include empty;
-		}
-
-		&.is-comboboxHidden {
-			@include comboboxHidden;
-		}
-
-		&:has(.filterPill-combobox[aria-expanded='true']) {
-			@include opened;
-		}
-
-		&:not(.is-empty) {
-			@include notEmpty;
-
-			&:has(.filterPill-label:hover) {
-				@include notEmptyHover;
+	&:not(button) {
+		&:not(:has(.filterPill-checkbox-input)) {
+			&.is-empty {
+				@include empty;
 			}
 
-			&:has(.filterPill-label:active) {
-				@include notEmptyActive;
+			&.is-comboboxHidden {
+				@include comboboxHidden;
+			}
+
+			&:has(.filterPill-combobox[aria-expanded='true']) {
+				@include opened;
+			}
+
+			&:not(.is-empty) {
+				@include notEmpty;
+
+				&:has(.filterPill-label:hover) {
+					@include notEmptyHover;
+				}
+
+				&:has(.filterPill-label:active) {
+					@include notEmptyActive;
+				}
 			}
 		}
 	}

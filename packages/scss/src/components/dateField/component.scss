@@ -3,4 +3,9 @@
 @mixin component($atRoot: namespace.$defaultAtRoot) {
 	max-width: var(--components-dateField-maxWidth);
 	display: block;
+
+	.dateField-textField {
+		position: relative;
+		z-index: 1;
+	}
 }
