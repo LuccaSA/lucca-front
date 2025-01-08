@@ -27,9 +27,10 @@ import { LuOptionGrouping, LuSimpleSelectDefaultOptionComponent } from '../optio
 import { LuSelectPanelRef } from '../panel';
 import { CoreSelectAddOptionStrategy, LuOptionComparer, LuOptionContext, SELECT_LABEL, SELECT_LABEL_ID } from '../select.model';
 import { LU_CORE_SELECT_TRANSLATIONS } from '../select.translate';
+import { FilterPillInputComponent } from '../../filter-pills/core';
 
 @Directive()
-export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDestroy, OnInit, ControlValueAccessor {
+export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDestroy, OnInit, ControlValueAccessor, FilterPillInputComponent {
 	protected changeDetectorRef = inject(ChangeDetectorRef);
 	protected overlayContainerRef: HTMLElement = inject(OverlayContainer).getContainerElement();
 
@@ -135,6 +136,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	@Output() addOption = new EventEmitter<string>();
 
 	public valueSignal = signal<TValue>(null);
+	isFilterPillEmpty = computed(() => this.valueSignal() === null);
 
 	public get value(): TValue {
 		return this._value;
@@ -286,7 +288,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	}
 
 	openPanel(clue: string = ''): void {
-		if (this.isPanelOpen || this.disabled$.value) {
+		if (this.filterPillMode || this.isPanelOpen || this.disabled$.value) {
 			return;
 		}
 		/**
@@ -382,5 +384,25 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	// Ensure nextPage/previousPage does not emit too often
 	#pageChanged(pageEmitter: EventEmitter<void>): Observable<void> {
 		return this.options$.pipe(switchMap(() => pageEmitter.pipe(take(1))));
+	}
+
+	// Filter pill interface
+	clearFilterPillValue(): void {
+		this.clearValue();
+	}
+
+	registerFilterPillClosePopover(closeFn: () => void): void {
+		this.afterCloseFn = closeFn;
+	}
+
+	registerFilterPillUpdatePosition(updatePositionFn: () => void): void {
+		this.updatePositionFn = updatePositionFn;
+	}
+
+	enableFilterPillMode() {
+		this.bindInputToPanelRefEvents();
+		this.isPanelOpen$.next(true);
+		this.filterPillMode = true;
+		this._panelRef.closed.subscribe(this.afterCloseFn);
 	}
 }
