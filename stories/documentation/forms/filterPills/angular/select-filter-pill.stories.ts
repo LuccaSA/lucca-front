@@ -19,7 +19,7 @@ export default {
 				example: null,
 				legumes: allLegumes,
 			},
-			template: `<lu-filter-pill label="Légume"><lu-simple-select [(ngModel)]="example"	[options]="legumes | filterLegumes:clue"(clueChange)="clue = $event" /></lu-filter-pill>
+			template: `<lu-filter-pill label="Légume"><lu-simple-select [(ngModel)]="example"	[options]="legumes | filterLegumes:clue" (clueChange)="clue = $event" /></lu-filter-pill>
 
 <pr-story-model-display>{{example | json}}</pr-story-model-display>
 `,

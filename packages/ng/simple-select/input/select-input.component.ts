@@ -63,6 +63,10 @@ export class LuSimpleSelectInputComponent<T> extends ALuSelectInputComponent<T, 
 		this.afterCloseFn = closeFn;
 	}
 
+	registerFilterPillUpdatePosition(updatePositionFn: () => void): void {
+		this.updatePositionFn = updatePositionFn;
+	}
+
 	enableFilterPillMode() {
 		this._panelRef = this.panelRefFactory.buildAndAttachPanelRef(this, this.filterPillPanelAnchorRef());
 		this.bindInputToPanelRefEvents();

@@ -127,11 +127,16 @@ export class FilterPillComponent {
 		effect(() => {
 			this.inputComponentRef()?.enableFilterPillMode();
 			this.inputComponentRef()?.registerFilterPillClosePopover(this.closePopover);
+			this.inputComponentRef()?.registerFilterPillUpdatePosition(this.updatePosition);
 		});
 	}
 
 	closePopover = () => {
 		this.popoverRef().close();
+	};
+
+	updatePosition = () => {
+		this.popoverRef().updatePosition();
 	};
 
 	clear(): void {

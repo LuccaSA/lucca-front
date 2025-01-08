@@ -8,6 +8,8 @@ export interface FilterPillInputComponent {
 
 	registerFilterPillClosePopover(closeFn: () => void): void;
 
+	registerFilterPillUpdatePosition?(updateFn: () => void): void;
+
 	hideCombobox?: Signal<boolean>;
 	showColon?: Signal<boolean>;
 

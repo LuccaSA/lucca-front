@@ -39,6 +39,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	protected coreIntl = getIntl(LU_CORE_SELECT_TRANSLATIONS);
 
 	protected afterCloseFn?: () => void;
+	protected updatePositionFn?: () => void;
 	protected filterPillMode = false;
 
 	@ViewChild('inputElement')
@@ -112,6 +113,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 			// which is before the panel size has been modified by the arrival of the new options
 			setTimeout(() => {
 				this.panelRef.updatePosition();
+				this.updatePositionFn?.();
 			});
 		}
 	}
