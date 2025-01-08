@@ -7,21 +7,26 @@ import { Meta, StoryFn, applicationConfig } from '@storybook/angular';
 	selector: 'tooltip-stories',
 	standalone: true,
 	imports: [LuTooltipModule],
-	template: `<div class="test width200" luTooltip luTooltipWhenEllipsis>Lorem ipsum dolor sit amet consectetur adipisicing elit.</div>
+	template: `
+		<h1>With ellipsis (should be green)</h1>
+		<div class="test ellipsis width400 fontSize2" luTooltip luTooltipWhenEllipsis>Lorem ipsum dolor sit amet consectetur adipisicing elit.</div>
+		<div class="test ellipsis width400 paddingRight" luTooltip luTooltipWhenEllipsis>Lorem ipsum dolor sit amet consectetur adipisicing elit.</div>
+		<div class="test ellipsis width400 paddingLeft" luTooltip luTooltipWhenEllipsis>Lorem ipsum dolor sit amet consectetur adipisicing elit.</div>
+		<div class="test ellipsis width400 paddingRight paddingLeft" luTooltip luTooltipWhenEllipsis>Lorem ipsum dolor sit amet consectetur adipisicing elit.</div>
+		<div class="test ellipsis width400 borderRight" luTooltip luTooltipWhenEllipsis>Lorem ipsum dolor sit amet consectetur adipisicing elit.</div>
+		<div class="test ellipsis width400 borderLeft" luTooltip luTooltipWhenEllipsis>Lorem ipsum dolor sit amet consectetur adipisicing elit.</div>
+		<div class="test ellipsis width400 borderLeft borderRight" luTooltip luTooltipWhenEllipsis>Lorem ipsum dolor sit amet consectetur adipisicing elit.</div>
+
+		<h1 class="pr-u-marginTop300">Without ellipsis (should be black)</h1>
+		<div class="test width200" luTooltip luTooltipWhenEllipsis>Lorem ipsum dolor sit amet consectetur adipisicing elit.</div>
 		<div class="test ellipsis resize" luTooltip luTooltipWhenEllipsis>Lorem ipsum dolor sit amet consectetur adipisicing elit.</div>
 		<div class="test ellipsis width400" luTooltip luTooltipWhenEllipsis>Lorem ipsum dolor sit amet consectetur adipisicing elit.</div>
 		<div class="test ellipsis width400 fontWeight" luTooltip luTooltipWhenEllipsis>Lorem ipsum dolor sit amet consectetur adipisicing elit.</div>
 		<div class="test ellipsis width400 fontWeight" luTooltip luTooltipWhenEllipsis>Lorem ipsum dolor sit amet consectetur adipisicing.</div>
-		<div class="test ellipsis width400 fontSize2" luTooltip luTooltipWhenEllipsis>Lorem ipsum dolor sit amet consectetur adipisicing elit.</div>
 		<div class="test ellipsis width400 fontSize2" luTooltip luTooltipWhenEllipsis>Lorem ipsum dolor sit amet.</div>
-		<div class="test ellipsis width400 paddingRight" luTooltip luTooltipWhenEllipsis>Lorem ipsum dolor sit amet consectetur adipisicing elit.</div>
-		<div class="test ellipsis width400 paddingLeft" luTooltip luTooltipWhenEllipsis>Lorem ipsum dolor sit amet consectetur adipisicing elit.</div>
-		<div class="test ellipsis width400 paddingRight paddingLeft" luTooltip luTooltipWhenEllipsis>Lorem ipsum dolor sit amet consectetur adipisicing elit.</div>
 		<div class="test ellipsis width400 paddingRight paddingLeft" luTooltip luTooltipWhenEllipsis>Lorem ipsum dolor sit amet consectetur.</div>
-		<div class="test ellipsis width400 borderRight" luTooltip luTooltipWhenEllipsis>Lorem ipsum dolor sit amet consectetur adipisicing elit.</div>
-		<div class="test ellipsis width400 borderLeft" luTooltip luTooltipWhenEllipsis>Lorem ipsum dolor sit amet consectetur adipisicing elit.</div>
-		<div class="test ellipsis width400 borderLeft borderRight" luTooltip luTooltipWhenEllipsis>Lorem ipsum dolor sit amet consectetur adipisicing elit.</div>
-		<div class="test ellipsis width400 borderLeft borderRight" luTooltip luTooltipWhenEllipsis>Lorem ipsum dolor sit amet consectetur.</div>`,
+		<div class="test ellipsis width400 borderLeft borderRight" luTooltip luTooltipWhenEllipsis>Lorem ipsum dolor sit amet consectetur.</div>
+	`,
 	styles: [
 		`
 			.ellipsis {
