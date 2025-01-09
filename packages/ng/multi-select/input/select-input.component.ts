@@ -47,6 +47,9 @@ export class LuMultiSelectInputComponent<T> extends ALuSelectInputComponent<T, T
 	@Input({ transform: booleanAttribute })
 	keepSearchAfterSelection = false;
 
+	@Input()
+	inlineInput = false;
+
 	override _value: T[] = [];
 
 	public override get panelRef(): LuMultiSelectPanelRef<T> | undefined {

@@ -479,6 +479,66 @@ export const CustomPanelHeader = generateStory({
 	},
 });
 
+
+const artichaudLong: ILegume = { name: 'Artichaud mais en plus long', index: 32, color: 'green' };
+export const FixWidth = generateStory({
+	name: 'FixWidth',
+	description: '',
+	template: `<div class="u-displayFlex u-flexDirectionColumn pr-u-gap200">
+<lu-multi-select
+	#selectRef
+	[placeholder]="placeholder"
+	[clearable]="clearable"
+	[keepSearchAfterSelection]="keepSearchAfterSelection"
+	[(ngModel)]="selectedLegumes"
+	[options]="legumes | filterLegumes:clue"
+	(clueChange)="clue = $event"
+	[maxValuesShown]="1"
+	style="width: 270px"
+>
+</lu-multi-select>
+<lu-multi-select
+	#selectRef
+	[placeholder]="placeholder"
+	[clearable]="clearable"
+	[keepSearchAfterSelection]="keepSearchAfterSelection"
+	[(ngModel)]="selectedLegumes"
+	[options]="legumes | filterLegumes:clue"
+	(clueChange)="clue = $event"
+	[maxValuesShown]="1"
+	style="width: 270px"
+	[inlineInput]="true"
+>
+</lu-multi-select>
+<lu-multi-select
+	#selectRef
+	[placeholder]="placeholder"
+	[clearable]="clearable"
+	[keepSearchAfterSelection]="keepSearchAfterSelection"
+	[(ngModel)]="selectedLegumes"
+	[options]="legumes"
+	[maxValuesShown]="1"
+	style="width: 270px"
+	[inlineInput]="true"
+>
+</lu-multi-select>
+</div>`,
+	neededImports: {
+		'@lucca-front/ng/multi-select': ['LuMultiSelectInputComponent'],
+	},
+	storyPartial: {
+		args: {
+			legumes: [ artichaudLong, ...allLegumes],
+			selectedLegumes: [ artichaudLong, allLegumes[0]],
+			keepSearchAfterSelection: false,
+		},
+		argTypes: {
+			clearable: { control: { type: 'boolean' } },
+			placeholder: { control: { type: 'text' } },
+		},
+	},
+});
+
 const meta: Meta<LuMultiSelectInputStoryComponent> = {
 	title: 'Documentation/Forms/MultiSelect',
 	component: LuMultiSelectInputComponent,

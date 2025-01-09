@@ -1,5 +1,5 @@
 import { AsyncPipe, NgFor, NgIf, NgPlural, NgPluralCase } from '@angular/common';
-import { ChangeDetectionStrategy, Component, DestroyRef, ElementRef, OnInit, ViewChild, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, ElementRef, OnInit, ViewChild, inject, Input } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { getIntl } from '@lucca-front/ng/core';
@@ -15,7 +15,7 @@ import { LuMultiSelectDisplayerInputDirective } from './displayer-input.directiv
 	standalone: true,
 	imports: [AsyncPipe, LuTooltipModule, NgIf, NgFor, NgPlural, NgPluralCase, ɵLuOptionOutletDirective, FormsModule, LuMultiSelectDisplayerInputDirective],
 	template: `
-		<div class="multipleSelect-displayer">
+		<div class="multipleSelect-displayer" [class.inline]="select.inlineInput">
 			<input #inputElement (keydown.backspace)="inputBackspace()" luMultiSelectDisplayerInput />
 			<div *ngFor="let option of displayedOptions$ | async; let index = index" class="multipleSelect-displayer-chip chip" [class.mod-unkillable]="select.disabled$ | async">
 				<span class="multipleSelect-displayer-chip-value"><ng-container *luOptionOutlet="select.displayerTpl(); value: option"></ng-container></span>
@@ -23,7 +23,7 @@ import { LuMultiSelectDisplayerInputDirective } from './displayer-input.directiv
 					<span class="u-mask">{{ intl.removeOption }}</span>
 				</button>
 			</div>
-			<div class="multipleSelect-displayer-chip chip" *ngIf="overflowOptions$ | async as overflow">+ {{ overflow }}</div>
+			<div class="multipleSelect-displayer-chip chip unshrinkable-chip" *ngIf="overflowOptions$ | async as overflow">+ {{ overflow }}</div>
 		</div>
 	`,
 	styleUrls: ['./default-displayer.component.scss'],
