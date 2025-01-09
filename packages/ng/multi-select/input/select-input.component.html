@@ -9,7 +9,10 @@
 >
 	<span class="u-mask">{{ intl.clear }}</span>
 </button>
-<span aria-hidden="true" class="multipleSelect-arrow lucca-icon icon-arrowChevronBottom"></span>
+
+@if (!filterPillMode) {
+	<span aria-hidden="true" class="multipleSelect-arrow lucca-icon icon-arrowChevronBottom"></span>
+}
 
 <ng-container #filterPillPanelAnchor></ng-container>
 <ng-container *luFilterPillDisplayer>

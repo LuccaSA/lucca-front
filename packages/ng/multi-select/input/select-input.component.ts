@@ -3,6 +3,7 @@ import {
 	booleanAttribute,
 	ChangeDetectionStrategy,
 	Component,
+	computed,
 	forwardRef,
 	inject,
 	Input,
@@ -60,6 +61,8 @@ import { FILTER_PILL_INPUT_COMPONENT, FilterPillDisplayerDirective } from '../..
 export class LuMultiSelectInputComponent<T> extends ALuSelectInputComponent<T, T[]> implements ControlValueAccessor, OnDestroy, OnInit {
 	intl = getIntl(LU_MULTI_SELECT_TRANSLATIONS);
 
+	showColon: false;
+
 	valuesTpl = model<TemplateRef<LuOptionContext<T[]>> | Type<unknown>>(LuMultiSelectDefaultDisplayerComponent);
 
 	@Input({ transform: numberAttribute })
@@ -69,6 +72,8 @@ export class LuMultiSelectInputComponent<T> extends ALuSelectInputComponent<T, T
 	keepSearchAfterSelection = false;
 
 	filterPillPanelAnchorRef = viewChild('filterPillPanelAnchor', { read: ViewContainerRef });
+
+	override isFilterPillEmpty = computed(() => this.valueSignal()?.length === 0);
 
 	override _value: T[] = [];
 
