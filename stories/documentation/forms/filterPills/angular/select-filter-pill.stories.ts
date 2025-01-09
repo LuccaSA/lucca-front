@@ -25,7 +25,7 @@ export default {
 
 <pr-story-model-display>{{example | json}}</pr-story-model-display>
 
-<lu-filter-pill label="Légumes"><lu-multi-select [(ngModel)]="examples"	[options]="legumes | filterLegumes:clue" (clueChange)="clue = $event" /></lu-filter-pill>
+<lu-filter-pill label="Légume"><lu-multi-select [(ngModel)]="examples"	[options]="legumes | filterLegumes:clue" (clueChange)="clue = $event" filterPillLabelPlural="légumes" /></lu-filter-pill>
 
 <pr-story-model-display>{{examples | json}}</pr-story-model-display>
 `,

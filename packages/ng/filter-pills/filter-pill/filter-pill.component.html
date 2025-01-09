@@ -1,6 +1,6 @@
 <label [attr.for]="id" class="filterPill-label">
 	<ng-container
-		*ngTemplateOutlet="labelTpl(); context:{label: label(), isEmpty: inputIsEmpty(), placeholder: placeholder()}"
+		*ngTemplateOutlet="labelTpl(); context:{label: label(), isEmpty: inputIsEmpty(), placeholder: placeholder(), colon: colonDisplay()}"
 	></ng-container>
 </label>
 <button
@@ -16,7 +16,8 @@
 	#comboboxRef
 	[attr.aria-expanded]="popoverRef.opened()"
 >
-	<ng-container *ngTemplateOutlet="pillTpl; context:{label: label(), isEmpty: inputIsEmpty(), placeholder: placeholder()}"></ng-container>
+	<ng-container
+		*ngTemplateOutlet="pillTpl; context:{label: label(), isEmpty: inputIsEmpty(), placeholder: placeholder()}"></ng-container>
 </button>
 <!-- TODO i18n alternative -->
 <button type="button" class="filterPill-clear clear" (click)="$event.stopPropagation(); clear(); comboboxRef.focus()">

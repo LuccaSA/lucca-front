@@ -26,12 +26,12 @@ import { LuMultiSelectDefaultDisplayerComponent } from '../displayer/index';
 import { LU_MULTI_SELECT_TRANSLATIONS } from '../select.translate';
 import { LuMultiSelectPanelRefFactory } from './panel-ref.factory';
 import { LuMultiSelectPanelRef } from './panel.model';
-import { FILTER_PILL_INPUT_COMPONENT, FilterPillDisplayerDirective } from '../../filter-pills/core';
+import { FILTER_PILL_INPUT_COMPONENT, FilterPillDisplayerDirective, FilterPillLabelDirective } from '@lucca-front/ng/filter-pills';
 
 @Component({
 	selector: 'lu-multi-select',
 	standalone: true,
-	imports: [CommonModule, LuTooltipModule, ɵLuOptionOutletDirective, FilterPillDisplayerDirective],
+	imports: [CommonModule, LuTooltipModule, ɵLuOptionOutletDirective, FilterPillDisplayerDirective, FilterPillLabelDirective],
 	templateUrl: './select-input.component.html',
 	styleUrls: ['./select-input.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
@@ -69,6 +69,11 @@ export class LuMultiSelectInputComponent<T> extends ALuSelectInputComponent<T, T
 
 	@Input({ transform: booleanAttribute })
 	keepSearchAfterSelection = false;
+
+	@Input()
+	filterPillLabelPlural: string;
+
+	hideCombobox = computed(() => this.valueSignal()?.length > 1);
 
 	filterPillPanelAnchorRef = viewChild('filterPillPanelAnchor', { read: ViewContainerRef });
 
@@ -138,11 +143,12 @@ export class LuMultiSelectInputComponent<T> extends ALuSelectInputComponent<T, T
 		return !!this.value?.length;
 	}
 
-	override clearValue(event: Event): void {
-		event.stopPropagation();
+	override clearValue(event?: Event): void {
+		event?.stopPropagation();
 		this.onChange?.([]);
 		this.value = [];
 		this.focusInput$.next({ keepClue: true });
+		this.panelRef?.updateSelectedOptions([]);
 	}
 
 	override ngOnDestroy() {

@@ -5,6 +5,7 @@ interface FilterPillLabelContext {
 	label: string;
 	placeholder: string;
 	isEmpty: boolean;
+	colon: string;
 }
 
 @Directive({

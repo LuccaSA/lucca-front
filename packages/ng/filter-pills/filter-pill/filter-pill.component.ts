@@ -45,8 +45,6 @@ let nextId = 0;
 })
 export class FilterPillComponent {
 	// TODO Avoir un CVA sur la barre de filtres
-	// TODO Selects: Fournir une couche autour d'overlayRef qui décide d'attacher le panel sur un overlay ou un ng-container dans le cas d'un pill
-
 	#locale = inject(LOCALE_ID);
 
 	elementRef = inject(ElementRef);

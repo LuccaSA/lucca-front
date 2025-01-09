@@ -1,4 +1,4 @@
-<ng-container *ngTemplateOutlet="currentValueDisplayerTpl"></ng-container>
+<ng-container *luOptionOutlet="valuesTpl(); value: value || []"></ng-container>
 
 <button
 	*ngIf="hasValue() && clearable && (disabled$ | async) === false"
@@ -16,9 +16,20 @@
 
 <ng-container #filterPillPanelAnchor></ng-container>
 <ng-container *luFilterPillDisplayer>
-	<ng-container *ngTemplateOutlet="currentValueDisplayerTpl"></ng-container>
+	<div class="multipleSelect-displayer-filter">
+		@if (value?.length === 1) {
+			<div class="multipleSelect-pill-displayer-chip">
+				<ng-container *luOptionOutlet="displayerTpl(); value: value[0]"></ng-container>
+			</div>
+		}
+	</div>
 </ng-container>
-
-<ng-template #currentValueDisplayerTpl>
-	<ng-container *luOptionOutlet="valuesTpl(); value: value || []"></ng-container>
-</ng-template>
+<ng-container *luFilterPillLabel="let label= label;let colon = colon">
+	@if (value?.length > 1) {
+		<span class="multipleSelect-pill-displayer-label">{{ value?.length }}&nbsp;{{ filterPillLabelPlural }}</span>
+	} @else {
+		{{ label }}@if (value?.length === 1) {
+			{{ colon }}
+		}
+	}
+</ng-container>
