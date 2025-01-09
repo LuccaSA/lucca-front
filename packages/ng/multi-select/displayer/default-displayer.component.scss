@@ -3,3 +3,15 @@
 	width: 100%;
 	min-width: 0;
 }
+
+.unshrinkable-chip {
+	flex-shrink: 0;
+}
+
+.multipleSelect-displayer.inline {
+	flex-wrap: nowrap;
+}
+
+input[readonly] {
+	min-width: 0;
+}
