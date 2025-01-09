@@ -45,7 +45,7 @@ export class LuDepartmentV4Service {
 				>(`/api/v3/departments/scopedtree?fields=id,name&${[`appInstanceId=${this._appInstanceId}`, `operations=${this._operations.join(',')}`, this._filters.join(',')].filter((f) => !!f).join('&')}`)
 				.pipe(map((response) => response.data));
 		} else {
-			call = this._http.get<IApiDepartment>(`${this.api}/tree`, { params: { uniqueOperation: this.uniqueOperation } });
+			call = this._http.get<IApiDepartment>(`${this.api}/tree`, { params: { uniqueOperation: this._uniqueOperation } });
 		}
 
 		return call.pipe(
