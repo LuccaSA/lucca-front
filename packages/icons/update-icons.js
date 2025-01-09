@@ -41,7 +41,7 @@ writeFileSync(join(__dirname, './icons-list.ts'), list);
 
 const scssConfig = `${generatedWarning}// to test locally (without the CDN)
 // $font-path: '../../font/lucca-icons' !default;
-$font-path: '//cdn.lucca.fr/lucca-front/icons/font/lucca-icons' !default;
+$font-path: '//cdn.lucca.fr/transverse/prisme/icons/font/lucca-icons' !default;
 $font-name: 'Lucca icons' !default;
 
 $icons: (
