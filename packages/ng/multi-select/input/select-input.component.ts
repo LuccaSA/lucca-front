@@ -26,13 +26,12 @@ import { LuMultiSelectDefaultDisplayerComponent } from '../displayer/index';
 import { LU_MULTI_SELECT_TRANSLATIONS } from '../select.translate';
 import { LuMultiSelectPanelRefFactory } from './panel-ref.factory';
 import { LuMultiSelectPanelRef } from './panel.model';
-import { IconComponent } from '@lucca-front/ng/icon';
 import { FILTER_PILL_INPUT_COMPONENT, FilterPillDisplayerDirective } from '../../filter-pills/core';
 
 @Component({
 	selector: 'lu-multi-select',
 	standalone: true,
-	imports: [CommonModule, LuTooltipModule, ɵLuOptionOutletDirective, IconComponent, FilterPillDisplayerDirective],
+	imports: [CommonModule, LuTooltipModule, ɵLuOptionOutletDirective, FilterPillDisplayerDirective],
 	templateUrl: './select-input.component.html',
 	styleUrls: ['./select-input.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
@@ -112,6 +111,10 @@ export class LuMultiSelectInputComponent<T> extends ALuSelectInputComponent<T, T
 		if (!skipFocus) {
 			this.focusInput();
 		}
+	}
+
+	updatePosition() {
+		this.updatePositionFn?.();
 	}
 
 	protected override buildPanelRef(): LuMultiSelectPanelRef<T> {
