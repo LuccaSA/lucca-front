@@ -51,6 +51,7 @@ export class FormFieldComponent implements OnDestroy {
 
 	refreshedOwnControls = toSignal(
 		toObservable(this.ownControls).pipe(
+			map((controls) => controls.filter((c) => c.control)),
 			switchMap((controls) => {
 				return merge(...controls.map((c) => c.control.events)).pipe(
 					// We need to use startWith here so the observable will also emit when new controls are added on the fly,
