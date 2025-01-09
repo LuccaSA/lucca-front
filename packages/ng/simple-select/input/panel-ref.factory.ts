@@ -84,7 +84,7 @@ class SelectPanelDOMHostRef<T> extends BaseSelectPanelRef<T> {
 	}
 
 	override updatePosition() {
-		//TODO
+		// do nothing, this is not a panel so repositioning is handled by the input.
 	}
 
 	override close(): void {

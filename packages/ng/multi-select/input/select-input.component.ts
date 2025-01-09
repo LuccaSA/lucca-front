@@ -1,5 +1,21 @@
 import { CommonModule } from '@angular/common';
-import { booleanAttribute, ChangeDetectionStrategy, Component, forwardRef, inject, Input, model, numberAttribute, OnDestroy, OnInit, TemplateRef, Type, ViewEncapsulation } from '@angular/core';
+import {
+	booleanAttribute,
+	ChangeDetectionStrategy,
+	Component,
+	forwardRef,
+	inject,
+	Input,
+	model,
+	numberAttribute,
+	OnDestroy,
+	OnInit,
+	TemplateRef,
+	Type,
+	viewChild,
+	ViewContainerRef,
+	ViewEncapsulation,
+} from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { getIntl } from '@lucca-front/ng/core';
 import { ALuSelectInputComponent, LuOptionContext, provideLuSelectLabelsAndIds, ɵLuOptionOutletDirective } from '@lucca-front/ng/core-select';
@@ -10,11 +26,12 @@ import { LU_MULTI_SELECT_TRANSLATIONS } from '../select.translate';
 import { LuMultiSelectPanelRefFactory } from './panel-ref.factory';
 import { LuMultiSelectPanelRef } from './panel.model';
 import { IconComponent } from '@lucca-front/ng/icon';
+import { FILTER_PILL_INPUT_COMPONENT, FilterPillDisplayerDirective } from '../../filter-pills/core';
 
 @Component({
 	selector: 'lu-multi-select',
 	standalone: true,
-	imports: [CommonModule, LuTooltipModule, ɵLuOptionOutletDirective, IconComponent],
+	imports: [CommonModule, LuTooltipModule, ɵLuOptionOutletDirective, IconComponent, FilterPillDisplayerDirective],
 	templateUrl: './select-input.component.html',
 	styleUrls: ['./select-input.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
@@ -30,6 +47,10 @@ import { IconComponent } from '@lucca-front/ng/icon';
 		},
 		provideLuSelectLabelsAndIds(),
 		LuMultiSelectPanelRefFactory,
+		{
+			provide: FILTER_PILL_INPUT_COMPONENT,
+			useExisting: forwardRef(() => LuMultiSelectInputComponent),
+		},
 	],
 	host: {
 		class: 'multiSelect',
@@ -46,6 +67,8 @@ export class LuMultiSelectInputComponent<T> extends ALuSelectInputComponent<T, T
 
 	@Input({ transform: booleanAttribute })
 	keepSearchAfterSelection = false;
+
+	filterPillPanelAnchorRef = viewChild('filterPillPanelAnchor', { read: ViewContainerRef });
 
 	override _value: T[] = [];
 
@@ -96,6 +119,11 @@ export class LuMultiSelectInputComponent<T> extends ALuSelectInputComponent<T, T
 		}
 
 		super.bindInputToPanelRefEvents();
+	}
+
+	override enableFilterPillMode() {
+		this._panelRef = this.panelRefFactory.buildAndAttachPanelRef(this, this.filterPillPanelAnchorRef());
+		super.enableFilterPillMode();
 	}
 
 	hasValue(): boolean {

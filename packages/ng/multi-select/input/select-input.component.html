@@ -1,4 +1,4 @@
-<ng-container *luOptionOutlet="valuesTpl(); value: value || []"></ng-container>
+<ng-container *ngTemplateOutlet="currentValueDisplayerTpl"></ng-container>
 
 <button
 	*ngIf="hasValue() && clearable && (disabled$ | async) === false"
@@ -10,3 +10,12 @@
 	<span class="u-mask">{{ intl.clear }}</span>
 </button>
 <span aria-hidden="true" class="multipleSelect-arrow lucca-icon icon-arrowChevronBottom"></span>
+
+<ng-container #filterPillPanelAnchor></ng-container>
+<ng-container *luFilterPillDisplayer>
+	<ng-container *ngTemplateOutlet="currentValueDisplayerTpl"></ng-container>
+</ng-container>
+
+<ng-template #currentValueDisplayerTpl>
+	<ng-container *luOptionOutlet="valuesTpl(); value: value || []"></ng-container>
+</ng-template>
