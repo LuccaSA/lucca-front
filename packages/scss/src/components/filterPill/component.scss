@@ -47,15 +47,21 @@
 
 			margin-inline: var(--pr-t-spacings-50);
 
+			// TODO, move this to index
 			@include media.max(XXS) {
 				width: 100%;
 				margin-inline: 0;
+			}
+
+			&:not(:has(+ .filterPill, + .filterPillScrollBoxWrapper-group)) {
+				display: none;
 			}
 		}
 
 		.filterBar-segmentedControl.segmentedControl {
 			@include segmentedControl.S;
 
+			// TODO, move this to index
 			@include media.max(XXS) {
 				--components-segmentedControl-direction: row;
 				--components-segmentedControl-width: 100%;
@@ -76,6 +82,15 @@
 		}
 
 		.filterPillScrollBoxWrapper.scrollBox {
+			align-items: flex-start;
+
+			&:has(.filterPillScrollBoxWrapper-export) {
+				// TODO, move this to index
+				@include media.min('XXS') {
+					flex-wrap: nowrap;
+				}
+			}
+
 			@include media.pointer('coarse') {
 				@include overflow.mask;
 			}
@@ -86,11 +101,11 @@
 		}
 
 		.filterPillScrollBoxWrapper-first {
-			margin-right: calc(var(--components-scrollBox-gap) * -1);
+			margin-inline-end: calc(var(--components-scrollBox-gap) * -1);
 		}
 
 		.filterPillScrollBoxWrapper-last {
-			margin-left: calc(var(--components-scrollBox-gap) * -1);
+			margin-inline-start: calc(var(--components-scrollBox-gap) * -1);
 		}
 
 		.filterPillScrollBoxWrapper-group {
@@ -132,8 +147,8 @@
 				box-shadow: none;
 				border-radius: 0;
 				background-color: transparent;
-				padding: 0.25rem;
-				margin: 0.25rem -0.5rem -0.5rem;
+				padding: var(--pr-t-spacings-50);
+				margin: var(--pr-t-spacings-50) var(--pr-t-spacings-100) var(--pr-t-spacings-100);
 			}
 
 			.simpleSelect {
@@ -162,7 +177,7 @@
 			@include reset.button;
 
 			display: flex;
-			margin-left: var(--pr-t-spacings-50);
+			margin-inline-start: var(--pr-t-spacings-50);
 			width: calc(var(--pr-t-spacings-50) + var(--pr-t-spacings-200));
 			flex-shrink: 0;
 			z-index: 1;
@@ -174,8 +189,8 @@
 		}
 
 		.filterPill-clear.clear {
-			margin-left: var(--pr-t-spacings-75);
-			margin-right: var(--pr-t-spacings-25);
+			margin-inline-start: var(--pr-t-spacings-75);
+			margin-inline-end: var(--pr-t-spacings-25);
 			position: relative;
 			z-index: 1;
 			display: var(--components-filterPill-clear-display);
@@ -189,7 +204,7 @@
 			font-weight: var(--components-filterPill-label-fontWeightChecked);
 			width: auto;
 			z-index: 1;
-			margin-left: 0.5ch;
+			margin-inline-start: 0.5ch;
 			min-width: 0;
 			overflow: hidden;
 			text-overflow: ellipsis;
@@ -274,6 +289,11 @@
 
 		.filterPill-checkbox-input {
 			@include a11y.mask;
+		}
+
+		.filterPillScrollBoxWrapper-export {
+			margin-inline-start: auto;
+			padding-inline-start: var(--pr-t-spacings-200);
 		}
 	}
 }

@@ -49,76 +49,82 @@ function getTemplate(args: FormBasicStory): string {
 			<lu-scroll-box class="filterPillScrollBoxWrapper">
 				<div class="filterPillScrollBoxWrapper-first"></div>
 
-				<ul class="segmentedControl filterBar-segmentedControl" role="presentation">
-					<li class="segmentedControl-item">
-						<input type="radio" class="segmentedControl-item-input" name="tab" id="tab1" checked="checked" />
-						<label for="tab1" class="segmentedControl-item-action">
-							Tous
-						</label>
-					</li>
-					<li class="segmentedControl-item">
-						<input type="radio" class="segmentedControl-item-input" name="tab" id="tab2" />
-						<label for="tab2" class="segmentedControl-item-action">
-							En cours d’approbation
-							<span class="numericBadge" *ngIf="withNumericBadge">8</span>
-						</label>
-					</li>
-					<li class="segmentedControl-item">
-						<input type="radio" class="segmentedControl-item-input" name="tab" id="tab3" />
-						<label for="tab3" class="segmentedControl-item-action">
-							Approuvés
-							<span class="numericBadge" *ngIf="withNumericBadge">88</span>
-						</label>
-					</li>
-					<li class="segmentedControl-item">
-						<input type="radio" class="segmentedControl-item-input" name="tab" id="tab4" />
-						<label for="tab4" class="segmentedControl-item-action">
-							Clos
-						</label>
-					</li>
-				</ul>
-
-				<lu-divider class="filterBar-divider" />
-
-				<button class="filterPill" type="button" luTooltip="Filtres supplémentaires" luTooltipOnlyForDisplay [luPopover2]="contentOptions">
-					<lu-icon class="filterPill-icon" icon="filtersDescending" alt="Filtres supplémentaires"></lu-icon>
-				</button>
-
-				<div class="filterPill">
-					<label for="input1" class="filterPill-label" luTooltip="Inclure les collaborateurs partis" luTooltipWhenEllipsis="true">
-						Inclure les collaborateurs partis
-						<span class="filterPill-label-placeholder" aria-hidden="true" data-content-before="Inclure les collaborateurs partis"></span>
-					</label>
-					<span class="filterPill-checkbox">
-						<input type="checkbox" id="input1" class="filterPill-checkbox-input" />
-						<span class="filterPill-checkbox-icon" aria-hidden="true">
-							<span class="filterPill-checkbox-icon-check"></span>
-						</span>
-					</span>
-				</div>
-
-
-				<div class="filterPill">
-					<label for="input1" class="filterPill-label" luTooltip="Département" luTooltipWhenEllipsis="true">Équipe :</label>
-					<button class="filterPill-combobox" type="button" id="input1" role="combobox" aria-expanded="false" luTooltipWhenEllipsis="true">
-						Finance
-					</button>
-					<button type="button" class="filterPill-clear clear"><span class="u-mask">Vider ce champ</span></button>
-					<button type="button" aria-hidden="true" tabindex="-1" class="filterPill-toggle">
-						<lu-icon icon="arrowChevronBottom" size="S" />
-					</button>
-				</div>
-
-				<lu-filter-pill label="Échéance"><lu-date-input [ngModel]="example6" [ngModelOptions]="{standalone: true}" /></lu-filter-pill>
-
 				<!--
 				<div class="filterPillScrollBoxWrapper-group">
+				-->
+
+					<ul class="segmentedControl filterBar-segmentedControl" role="presentation">
+						<li class="segmentedControl-item">
+							<input type="radio" class="segmentedControl-item-input" name="tab" id="tab1" checked="checked" />
+							<label for="tab1" class="segmentedControl-item-action">
+								Tous
+							</label>
+						</li>
+						<li class="segmentedControl-item">
+							<input type="radio" class="segmentedControl-item-input" name="tab" id="tab2" />
+							<label for="tab2" class="segmentedControl-item-action">
+								En cours d’approbation
+								<span class="numericBadge" *ngIf="withNumericBadge">8</span>
+							</label>
+						</li>
+						<li class="segmentedControl-item">
+							<input type="radio" class="segmentedControl-item-input" name="tab" id="tab3" />
+							<label for="tab3" class="segmentedControl-item-action">
+								Approuvés
+								<span class="numericBadge" *ngIf="withNumericBadge">88</span>
+							</label>
+						</li>
+						<li class="segmentedControl-item">
+							<input type="radio" class="segmentedControl-item-input" name="tab" id="tab4" />
+							<label for="tab4" class="segmentedControl-item-action">
+								Clos
+							</label>
+						</li>
+					</ul>
+
+					<lu-divider class="filterBar-divider" />
+
+					<button class="filterPill" type="button" luTooltip="Filtres supplémentaires" luTooltipOnlyForDisplay [luPopover2]="contentOptions">
+						<lu-icon class="filterPill-icon" icon="filtersDescending" alt="Filtres supplémentaires"></lu-icon>
+					</button>
+
+					<div class="filterPill">
+						<label for="input1" class="filterPill-label" luTooltip="Inclure les collaborateurs partis" luTooltipWhenEllipsis="true">
+							Inclure les collaborateurs partis
+							<span class="filterPill-label-placeholder" aria-hidden="true" data-content-before="Inclure les collaborateurs partis"></span>
+						</label>
+						<span class="filterPill-checkbox">
+							<input type="checkbox" id="input1" class="filterPill-checkbox-input" />
+							<span class="filterPill-checkbox-icon" aria-hidden="true">
+								<span class="filterPill-checkbox-icon-check"></span>
+							</span>
+						</span>
+					</div>
+
+
+					<div class="filterPill">
+						<label for="input1" class="filterPill-label" luTooltip="Département" luTooltipWhenEllipsis="true">Équipe :</label>
+						<button class="filterPill-combobox" type="button" id="input1" role="combobox" aria-expanded="false" luTooltipWhenEllipsis="true">
+							Finance
+						</button>
+						<button type="button" class="filterPill-clear clear"><span class="u-mask">Vider ce champ</span></button>
+						<button type="button" aria-hidden="true" tabindex="-1" class="filterPill-toggle">
+							<lu-icon icon="arrowChevronBottom" size="S" />
+						</button>
+					</div>
+
+					<lu-filter-pill label="Échéance"><lu-date-input [ngModel]="example6" [ngModelOptions]="{standalone: true}" /></lu-filter-pill>
+
 					<lu-form-field label="Test" hiddenLabel size="S" style="width: 15rem; flex-shrink: 0">
 						<lu-text-input [ngModel]="example10" [ngModelOptions]="{standalone: true}" hasSearchIcon hasClearer />
 					</lu-form-field>
 
-					<button type="submit" size="S" luButton="text">Appliquer les filtres</button>
-					<button type="submit" size="S" luButton="outlined" class="u-marginLeftAuto">Exporter</button>
+					<button type="submit" size="S" luButton="text" palette="product">Appliquer les filtres</button>
+				<!--
+				</div>
+
+				<div class="filterPillScrollBoxWrapper-export">
+					<button type="submit" size="S" luButton="outlined">Exporter</button>
 				</div>
 				-->
 
@@ -126,6 +132,7 @@ function getTemplate(args: FormBasicStory): string {
 			</lu-scroll-box>
 		</lu-filter-bar>
 	</form>
+
 	<ng-template #contentOptions>
 		<form class="filterPill_popover-content popover-contentOptional">
 			<lu-form-field label="Inclure les collaborateurs partis" class="filterPill_popover-content-formField mod-selectOption">

@@ -65,7 +65,7 @@
 			margin: 0;
 			padding: var(--components-segmentedControl-padding);
 			background-color: var(--components-segmentedControl-background);
-			box-shadow: 0 0 0 var(--commons-divider-width) var(--components-segmentedControl-shadow);
+			box-shadow: var(--components-segmentedControl-shadow);
 			border-radius: var(--components-segmentedControl-borderRadius);
 			gap: var(--pr-t-spacings-100);
 			color: var(--components-segmentedControl-color);
@@ -77,13 +77,16 @@
 			cursor: var(--components-segmentedControl-cursor);
 			z-index: var(--components-segmentedControl-zIndex);
 			font: inherit;
+			transition-property: box-shadow;
+			transition-duration: var(--commons-animations-durations-fast);
 
 			&:focus-visible {
 				@include a11y.focusVisible($offset: 3px);
 			}
 
 			&:hover {
-				--components-segmentedControl-shadow: var(--palettes-product-400);
+				--components-segmentedControl-shadow: 0 0 0 var(--commons-divider-width) var(--palettes-product-400),
+					var(--pr-t-elevation-shadow-hover);
 				--components-segmentedControl-zIndex: 1;
 			}
 
