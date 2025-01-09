@@ -48,6 +48,42 @@
 		@include XS;
 	}
 
+	&.mod-width10 {
+		@include width10;
+	}
+
+	&.mod-width15 {
+		@include width15;
+	}
+
+	&.mod-width20 {
+		@include width20;
+	}
+
+	&.mod-width25 {
+		@include width25;
+	}
+
+	&.mod-width30 {
+		@include width30;
+	}
+
+	&.mod-width35 {
+		@include width35;
+	}
+
+	&.mod-width40 {
+		@include width40;
+	}
+
+	&.mod-width45 {
+		@include width45;
+	}
+
+	&.mod-width50 {
+		@include width50;
+	}
+
 	&.mod-checkable,
 	&:has(.radioField),
 	&:has(.checkboxField),
