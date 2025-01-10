@@ -99,6 +99,26 @@
 	}
 }
 
+@mixin width20 {
+	width: 10rem;
+}
+
+@mixin width30 {
+	width: 15rem;
+}
+
+@mixin width40 {
+	width: 20rem;
+}
+
+@mixin width50 {
+	width: 25rem;
+}
+
+@mixin width60 {
+	width: 30rem;
+}
+
 @mixin withArrow {
 	padding-bottom: var(--pr-t-spacings-200);
 	margin-block-end: 0;
