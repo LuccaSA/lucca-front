@@ -99,40 +99,24 @@
 	}
 }
 
-@mixin width10 {
-	width: 5rem;
-}
-
-@mixin width15 {
-	width: 7.5rem;
-}
-
 @mixin width20 {
 	width: 10rem;
-}
-
-@mixin width25 {
-	width: 12.5rem;
 }
 
 @mixin width30 {
 	width: 15rem;
 }
 
-@mixin width35 {
-	width: 17.5rem;
-}
-
 @mixin width40 {
 	width: 20rem;
 }
 
-@mixin width45 {
-	width: 22.5rem;
-}
-
 @mixin width50 {
 	width: 25rem;
+}
+
+@mixin width60 {
+	width: 30rem;
 }
 
 @mixin withArrow {
