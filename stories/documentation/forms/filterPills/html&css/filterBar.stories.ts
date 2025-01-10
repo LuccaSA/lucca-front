@@ -12,14 +12,14 @@ import { Meta, moduleMetadata, StoryFn } from '@storybook/angular';
 import { DividerComponent } from 'dist/ng/divider';
 import { StoryModelDisplayComponent } from 'stories/helpers/story-model-display.component';
 
-interface FormBasicStory {
+interface FilterBarBasicStory {
 	label: string;
 	value: string;
 	expanded: boolean;
 }
 
 export default {
-	title: 'Documentation/Forms/FiltersPills',
+	title: 'Documentation/Forms/FiltersPills/FilterBar/HTML&CSS',
 	decorators: [
 		moduleMetadata({
 			imports: [
@@ -42,17 +42,15 @@ export default {
 	argTypes: {},
 } as Meta;
 
-function getTemplate(args: FormBasicStory): string {
+function getTemplate(args: FilterBarBasicStory): string {
 	return `
 	<form class="pr-u-marginBlock200">
 		<lu-filter-bar [ngModel]="group" [ngModelOptions]="{standalone: true}">
 			<lu-scroll-box class="filterPillScrollBoxWrapper">
 				<div class="filterPillScrollBoxWrapper-first"></div>
 
-				<!--
-				<div class="filterPillScrollBoxWrapper-group">
-				-->
 
+				<div class="filterPillScrollBoxWrapper-group">
 					<ul class="segmentedControl filterBar-segmentedControl" role="presentation">
 						<li class="segmentedControl-item">
 							<input type="radio" class="segmentedControl-item-input" name="tab" id="tab1" checked="checked" />
@@ -101,7 +99,6 @@ function getTemplate(args: FormBasicStory): string {
 						</span>
 					</div>
 
-
 					<div class="filterPill">
 						<label for="input1" class="filterPill-label" luTooltip="Département" luTooltipWhenEllipsis="true">Équipe :</label>
 						<button class="filterPill-combobox" type="button" id="input1" role="combobox" aria-expanded="false" luTooltipWhenEllipsis="true">
@@ -120,13 +117,11 @@ function getTemplate(args: FormBasicStory): string {
 					</lu-form-field>
 
 					<button type="submit" size="S" luButton="text" palette="product">Appliquer les filtres</button>
-				<!--
-				</div>
 
+				</div>
 				<div class="filterPillScrollBoxWrapper-export">
 					<button type="submit" size="S" luButton="outlined">Exporter</button>
 				</div>
-				-->
 
 				<div class="filterPillScrollBoxWrapper-last"></div>
 			</lu-scroll-box>
@@ -159,10 +154,10 @@ function getTemplate(args: FormBasicStory): string {
 `;
 }
 
-const Template: StoryFn<FormBasicStory> = (args) => ({
+const Template: StoryFn<FilterBarBasicStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Form = Template.bind({});
-Form.args = {};
+export const FilterBar = Template.bind({});
+FilterBar.args = {};

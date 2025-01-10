@@ -5,7 +5,7 @@ import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { StoryModelDisplayComponent } from '../../../../helpers/story-model-display.component';
 
 export default {
-	title: 'Documentation/Forms/FiltersPills/Angular',
+	title: 'Documentation/Forms/FiltersPills/Date/Angular',
 	decorators: [
 		moduleMetadata({
 			imports: [FilterPillComponent, DateInputComponent, FormsModule, StoryModelDisplayComponent],

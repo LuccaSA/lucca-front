@@ -9,7 +9,7 @@ interface SelectBasicStory {
 }
 
 export default {
-	title: 'Documentation/Forms/FiltersPills',
+	title: 'Documentation/Forms/FiltersPills/Select/HTML&CSS',
 	decorators: [
 		moduleMetadata({
 			imports: [LuTooltipModule, IconComponent],
@@ -41,7 +41,7 @@ function getTemplate(args: SelectBasicStory): string {
 		<lu-icon icon="arrowRight" size="XS" alt="au" />
 		10/10/2020
 	-->
-		${args.value ? args.value : 'Sélectionner une valeur'}	
+		${args.value ? args.value : 'Sélectionner une valeur'}
 	</button>
 	<button type="button" class="filterPill-clear clear"><span class="u-mask">Vider ce champ</span></button>
 	<button type="button" aria-hidden="true" tabindex="-1" class="filterPill-toggle">

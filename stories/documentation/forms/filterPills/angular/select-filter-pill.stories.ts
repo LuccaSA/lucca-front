@@ -1,11 +1,11 @@
-import { FormsModule } from '@angular/forms';
-import { FilterPillComponent } from '@lucca-front/ng/filter-pills';
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { StoryModelDisplayComponent } from '../../../../helpers/story-model-display.component';
-import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 import { allLegumes, FilterLegumesPipe } from '@/stories/forms/select/select.utils';
 import { JsonPipe } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { FilterPillComponent } from '@lucca-front/ng/filter-pills';
+import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { LuMultiSelectInputComponent } from '../../../../../packages/ng/multi-select/input';
+import { StoryModelDisplayComponent } from '../../../../helpers/story-model-display.component';
 
 export default {
 	title: 'Documentation/Forms/FiltersPills/Select/Angular',
@@ -24,6 +24,8 @@ export default {
 			template: `<lu-filter-pill label="Légume"><lu-simple-select [(ngModel)]="example"	[options]="legumes | filterLegumes:clue" (clueChange)="clue = $event" /></lu-filter-pill>
 
 <pr-story-model-display>{{example | json}}</pr-story-model-display>
+
+<hr class="divider pr-u-marginBlock400" />
 
 <lu-filter-pill label="Légume"><lu-multi-select [(ngModel)]="examples"	[options]="legumes | filterLegumes:clue" (clueChange)="clue = $event" filterPillLabelPlural="légumes" /></lu-filter-pill>
 

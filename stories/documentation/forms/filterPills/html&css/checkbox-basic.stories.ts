@@ -9,7 +9,7 @@ interface CheckboxBasicStory {
 }
 
 export default {
-	title: 'Documentation/Forms/FiltersPills',
+	title: 'Documentation/Forms/FiltersPills/Checkbox/HTML&CSS',
 	decorators: [
 		moduleMetadata({
 			imports: [LuTooltipModule],
