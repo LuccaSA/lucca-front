@@ -32,13 +32,16 @@ import { CellStatus } from '../calendar2/cell-status';
 import { DateRange } from '../calendar2/date-range';
 import { compareCalendarPeriods, startOfPeriod } from '../utils';
 import { CalendarShortcut } from './calendar-shortcut';
+import { FILTER_PILL_INPUT_COMPONENT, FilterPillDisplayerDirective, FilterPillInputComponent } from '@lucca-front/ng/filter-pills';
+import { LuccaIcon } from '@lucca-front/icons';
+import { NgTemplateOutlet } from '@angular/common';
 
 let nextId = 0;
 
 @Component({
 	selector: 'lu-date-range-input',
 	standalone: true,
-	imports: [PopoverDirective, Calendar2Component, IconComponent, InputDirective, LayoutModule, PortalDirective],
+	imports: [PopoverDirective, Calendar2Component, IconComponent, InputDirective, LayoutModule, PortalDirective, NgTemplateOutlet, FilterPillDisplayerDirective],
 	templateUrl: './date-range-input.component.html',
 	styleUrl: './date-range-input.component.scss',
 	host: {
@@ -57,10 +60,14 @@ let nextId = 0;
 			useExisting: forwardRef(() => DateRangeInputComponent),
 			multi: true,
 		},
+		{
+			provide: FILTER_PILL_INPUT_COMPONENT,
+			useExisting: forwardRef(() => DateRangeInputComponent),
+		},
 		LuClass,
 	],
 })
-export class DateRangeInputComponent extends AbstractDateComponent implements ControlValueAccessor, Validator {
+export class DateRangeInputComponent extends AbstractDateComponent implements ControlValueAccessor, Validator, FilterPillInputComponent {
 	#luClass = inject(LuClass);
 
 	#formFieldRef = inject(FORM_FIELD_INSTANCE, { optional: true });
@@ -181,6 +188,12 @@ export class DateRangeInputComponent extends AbstractDateComponent implements Co
 	focusedCalendarIndex = signal(0);
 
 	focusedCalendar = computed(() => this.calendars()[this.focusedCalendarIndex()]);
+
+	isFilterPill = false;
+
+	isFilterPillEmpty = computed(() => this.selectedRange() === null);
+
+	filterPillPopoverCloseFn?: () => void;
 
 	get isNavigationButtonFocused(): boolean {
 		return [this.previousButton()?.nativeElement, this.nextButton()?.nativeElement].includes(document.activeElement);
@@ -373,7 +386,8 @@ export class DateRangeInputComponent extends AbstractDateComponent implements Co
 						end: date,
 					});
 				}
-				popoverRef.close();
+				popoverRef?.close();
+				this.filterPillPopoverCloseFn?.();
 				this.endTextInputRef().nativeElement.focus();
 				this.editedField.set(-1);
 				this.dateHovered.set(null);
@@ -449,6 +463,23 @@ export class DateRangeInputComponent extends AbstractDateComponent implements Co
 
 	selectShortcut(shortcut: CalendarShortcut, popover: PopoverDirective): void {
 		this.selectedRange.set(shortcut.range);
-		popover.close();
+		popover?.close();
+		this.filterPillPopoverCloseFn?.();
+	}
+
+	registerFilterPillClosePopover(closeFn: () => void): void {
+		this.filterPillPopoverCloseFn = closeFn;
+	}
+
+	enableFilterPillMode(): void {
+		this.isFilterPill = true;
+	}
+
+	clearFilterPillValue(): void {
+		this.clear(this.startTextInputRef().nativeElement, this.endTextInputRef().nativeElement);
+	}
+
+	getDefaultFilterPillIcon(): LuccaIcon {
+		return 'calendarDate';
 	}
 }

@@ -57,10 +57,10 @@
 			<lu-icon [icon]="'arrowRight'" [alt]="''" class="dateRangeField-fieldset-arrow" />
 			<div class="textField-input-affix">
 				@if (clearable() && (start.value !== '' || end.value !== '')) {
-				<button class="textField-input-affix-clear clear" type="button" (click)="clear(start, end)">
-					<span aria-hidden="true" class="lucca-icon icon-signClose"></span>
-					<span class="u-mask">{{ intl.clear }}</span>
-				</button>
+					<button class="textField-input-affix-clear clear" type="button" (click)="clear(start, end)">
+						<span aria-hidden="true" class="lucca-icon icon-signClose"></span>
+						<span class="u-mask">{{ intl.clear }}</span>
+					</button>
 				}
 				<button
 					[luPopover2]="calendar"
@@ -85,30 +85,34 @@
 <ng-template #calendar>
 	<div class="calendarShortcutsOptionnal">
 		@if (shortcuts()?.length > 0) {
-		<ul
-			class="calendarShortcuts"
-			[class.mod-day]="mode() === 'day'"
-			[class.mod-month]="mode() === 'month'"
-			[class.mod-year]="mode() === 'year'"
-		>
-			@for (shortcut of shortcuts(); track $index) {
-			<li class="calendarShortcutsButton-item">
-				<button type="button" class="calendarShortcutsButton-item-button button" (click)="selectShortcut(shortcut, popoverRef)">
-					{{ shortcut.label }}
-				</button>
-			</li>
-			}
-		</ul>
+			<ul
+				class="calendarShortcuts"
+				[class.mod-day]="mode() === 'day'"
+				[class.mod-month]="mode() === 'month'"
+				[class.mod-year]="mode() === 'year'"
+			>
+				@for (shortcut of shortcuts(); track $index) {
+					<li class="calendarShortcutsButton-item">
+						<button type="button" class="calendarShortcutsButton-item-button button"
+						        (click)="selectShortcut(shortcut, popoverRef)">
+							{{ shortcut.label }}
+						</button>
+					</li>
+				}
+			</ul>
 		}
 		<div class="calendarWrapper">
 			<div class="calendarWrapper-navigation u-left0">
-				<button class="calendarWrapper-navigation-button button" type="button" (click)="prev(mode())" #previousButtonRef>
-					<span aria-hidden="true" class="lucca-icon icon-chevronLeft"></span><span class="u-mask">{{ intl.previous }}</span>
+				<button class="calendarWrapper-navigation-button button" type="button" (click)="prev(mode())"
+				        #previousButtonRef>
+					<span aria-hidden="true" class="lucca-icon icon-chevronLeft"></span><span
+					class="u-mask">{{ intl.previous }}</span>
 				</button>
 			</div>
 			<div class="calendarWrapper-navigation u-right0">
 				<button class="calendarWrapper-navigation-button button" type="button" (click)="next(mode())" #nextButtonRef>
-					<span aria-hidden="true" class="lucca-icon icon-chevronRight"></span><span class="u-mask"> {{ intl.next }}</span>
+					<span aria-hidden="true" class="lucca-icon icon-chevronRight"></span><span
+					class="u-mask"> {{ intl.next }}</span>
 				</button>
 			</div>
 			<div class="calendarWrapper-content" tabindex="-1">
@@ -130,25 +134,36 @@
 					[disableModeChange]="true"
 				></lu-calendar2>
 				@if (hasTwoCalendars()) {
-				<lu-calendar2
-					[removeYearOverflow]="true"
-					[hideToday]="hideToday()"
-					[date]="currentRightDate()"
-					(dateChange)="currentDateChangeFromCalendar($event)"
-					[tabbableDate]="tabbableDate()"
-					(tabbableDateChange)="tabbableDateChange($event, 1)"
-					[getCellInfo]="combinedGetCellInfo"
-					[(dateHovered)]="dateHovered"
-					[ranges]="calendarRanges()"
-					(dateClicked)="dateClicked($event, popoverRef)"
-					(nextPage)="move(1, mode())"
-					(previousPage)="move(-1, mode())"
-					[mode]="mode()"
-					[hideWeekend]="hideWeekend()"
-					[disableModeChange]="true"
-				></lu-calendar2>
+					<lu-calendar2
+						[removeYearOverflow]="true"
+						[hideToday]="hideToday()"
+						[date]="currentRightDate()"
+						(dateChange)="currentDateChangeFromCalendar($event)"
+						[tabbableDate]="tabbableDate()"
+						(tabbableDateChange)="tabbableDateChange($event, 1)"
+						[getCellInfo]="combinedGetCellInfo"
+						[(dateHovered)]="dateHovered"
+						[ranges]="calendarRanges()"
+						(dateClicked)="dateClicked($event, popoverRef)"
+						(nextPage)="move(1, mode())"
+						(previousPage)="move(-1, mode())"
+						[mode]="mode()"
+						[hideWeekend]="hideWeekend()"
+						[disableModeChange]="true"
+					></lu-calendar2>
 				}
 			</div>
 		</div>
 	</div>
 </ng-template>
+
+
+@if (isFilterPill) {
+	<ng-container *ngTemplateOutlet="calendar"></ng-container>
+}
+
+<ng-container *luFilterPillDisplayer>
+	{{ startLabel() }}
+	<lu-icon [icon]="'arrowRight'" [alt]="''" class="dateRangeField-fieldset-arrow" />
+	{{ endLabel() }}
+</ng-container>
