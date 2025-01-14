@@ -284,30 +284,35 @@ export class DateRangeInputComponent extends AbstractDateComponent implements Co
 		effect(
 			() => {
 				const inputValue = inputSignal();
-				const currentRange: DateRange = untracked(this.selectedRange) || ({} as DateRange);
+				let currentRange: DateRange = untracked(this.selectedRange) || ({} as DateRange);
 				if (inputValue?.length > 0) {
 					const parsed = parse(inputValue, this.dateFormat, startOfDay(new Date()));
 					if (parsed.getFullYear() > 999) {
-						this.selectedRange.set({
+						currentRange = {
 							...currentRange,
 							scope: this.mode(),
 							[rangeProperty]: parsed,
-						});
+						};
 						this.currentDate.set(startOfDay(parsed));
 						this.tabbableDate.set(startOfDay(parsed));
 					} else if (this.isValidDate(parsed)) {
-						this.selectedRange.set({
+						currentRange = {
 							...currentRange,
 							scope: this.mode(),
 							[rangeProperty]: parsed,
-						});
+						};
 					}
 				} else if (inputValue !== null) {
-					this.selectedRange.set({
+					currentRange = {
 						...currentRange,
 						scope: this.mode(),
 						[rangeProperty]: undefined,
-					});
+					};
+				}
+				if (!currentRange.start && !currentRange.end) {
+					this.selectedRange.set(null);
+				} else {
+					this.selectedRange.set(currentRange);
 				}
 			},
 			{ allowSignalWrites: true },
@@ -338,6 +343,9 @@ export class DateRangeInputComponent extends AbstractDateComponent implements Co
 	}
 
 	openPopover(ref: PopoverDirective, propertyToFocus?: 'start' | 'end', focusTabbableDate = false): void {
+		if (this.isFilterPill) {
+			return;
+		}
 		if (!ref.opened()) {
 			ref.openPopover(true, true);
 		}
