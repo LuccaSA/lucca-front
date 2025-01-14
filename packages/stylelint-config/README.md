@@ -12,7 +12,7 @@ This package is a shareable stylelint configuration.
 ## Install
 
 ```
-npm uninstall stylelint && npm i --save-dev @lucca/stylelint-config
+npm i --save-dev stylelint @lucca/stylelint-config
 ```
 
 ## Avoid conflicts
