@@ -12,7 +12,6 @@ export default {
 			// TODO Decide how to handle these rules.
 			files: ['**/*.scss'],
 			rules: {
-				'block-no-empty': null,
 				'comment-empty-line-before': null,
 				'custom-property-pattern': null,
 				'declaration-property-value-disallowed-list': null,

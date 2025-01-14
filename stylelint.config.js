@@ -12,6 +12,7 @@ module.exports = {
 			// TODO: Fix those rules after removing them.
 			files: ['**/*.scss'],
 			rules: {
+				'block-no-empty': null,
 				'no-descending-specificity': null,
 				'no-duplicate-selectors': null,
 			},
