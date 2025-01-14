@@ -12,7 +12,6 @@ export default {
 			// TODO Decide how to handle these rules.
 			files: ['**/*.scss'],
 			rules: {
-				'custom-property-pattern': null,
 				'declaration-property-value-disallowed-list': null,
 			},
 		},
