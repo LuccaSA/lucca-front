@@ -30,8 +30,8 @@
     "test": "jest --maxWorkers=4 --isolatedModules=true --detectOpenHandles --watchAll",
     "build-compodoc": "compodoc -p ./tsconfig.compodoc-html.json -d compodoc-static",
     "build-storybook": "ng run ng:build-storybook",
-    "lint": "ng lint",
-    "lint:scss": "stylelint --config .stylelintrc packages/scss/src/**/*.scss",
+    "lint:ng": "ng lint",
+    "lint:scss": "stylelint packages/**/*.scss",
     "icons:update": "node ./packages/icons/update-icons.js",
     "i18n:update": "lucca translate lokalise && prettier --write 'packages/ng/**/translations.ts'"
   },

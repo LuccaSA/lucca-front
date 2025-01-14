@@ -35,7 +35,8 @@ node(label: CI.getSelectedLinuxNode(script:this)) {
 
 			npmScript(script: 'build')
 			npmScript(script: 'jenkins-test', skip: isPR)
-			npmScript(script: 'lint', skip: isPR)
+			npmScript(script: 'lint:ng', skip: isPR)
+			npmScript(script: 'lint:scss', skip: isPR)
 
 			def shouldDeploy = isPR || isRc || isMaster || isRelease || isPreRelease
 			loggableStage('Deploy', !shouldDeploy) {
@@ -57,7 +58,7 @@ node(label: CI.getSelectedLinuxNode(script:this)) {
 						powershell "Remove-Item \\\\RBX1-SH1-TECH\\lucca-front\\${versionWithoutPrefix}\\storybook -Recurse"
 						powershell "Copy-Item storybook-static \\\\RBX1-SH1-TECH\\lucca-front\\${versionWithoutPrefix}\\storybook -Recurse"
 					}
-					
+
 					unstash(name: "compodoc-static")
 					powershell "Remove-Item \\\\RBX1-SH1-TECH\\lucca-front\\${env.BRANCH_NAME}\\compodoc -Recurse"
 					powershell "Copy-Item compodoc-static \\\\RBX1-SH1-TECH\\lucca-front\\${env.BRANCH_NAME}\\compodoc -Recurse"
