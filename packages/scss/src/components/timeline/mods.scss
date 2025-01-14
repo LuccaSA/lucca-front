@@ -76,7 +76,7 @@
 		min-height: var(--pr-t-spacings-300);
 		min-width: 0;
 
-		&:before {
+		&::before {
 			top: var(--pr-t-spacings-150);
 		}
 	}
@@ -92,7 +92,7 @@
 
 @mixin verticalNotSNotL {
 	.timeline-step-title {
-		&:before {
+		&::before {
 			left: 0;
 		}
 	}
@@ -179,7 +179,7 @@
 @mixin checkedPastStep {
 	.timeline-step:not([aria-current='step']):not([aria-current='step'] ~ .timeline-step):not(.timeline-stepAddBetweenStep) {
 		.timeline-step-title {
-			&:before {
+			&::before {
 				content: '';
 			}
 
@@ -237,7 +237,7 @@
 
 		&:last-child {
 			.timeline-step-title {
-				&:before {
+				&::before {
 					display: none;
 				}
 
@@ -316,7 +316,7 @@
 		.timeline-step-title {
 			padding-left: 0;
 
-			&:before {
+			&::before {
 				display: none;
 			}
 		}
