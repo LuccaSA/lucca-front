@@ -105,11 +105,6 @@ export default {
 				ignorePseudoElements: ['ng-deep'],
 			},
 		],
-		'value-keyword-case': [
-			'lower',
-			{
-				severity: 'warning',
-			},
-		],
+		'value-keyword-case': null,
 	},
 };
