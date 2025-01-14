@@ -13,6 +13,7 @@ module.exports = {
 			files: ['**/*.scss'],
 			rules: {
 				'block-no-empty': null,
+				'font-family-no-missing-generic-family-keyword': null,
 				'no-descending-specificity': null,
 				'no-duplicate-selectors': null,
 				'scss/at-mixin-argumentless-call-parentheses': null,
