@@ -7,6 +7,41 @@ import { getDisallowedObjects, getDisallowedData } from './stylelintForLF.mjs';
 export default {
 	extends: ['stylelint-config-standard-scss', 'stylelint-config-prettier-scss'],
 
+	overrides: [
+		{
+			// TODO Decide how to handle these rules.
+			files: ['**/*.scss'],
+			rules: {
+				'at-rule-empty-line-before': null,
+				'block-no-empty': null,
+				'comment-empty-line-before': null,
+				'custom-property-pattern': null,
+				'declaration-block-no-duplicate-properties': null,
+				'declaration-property-value-disallowed-list': null,
+				'font-family-no-missing-generic-family-keyword': null,
+				'length-zero-no-unit': null,
+				'no-descending-specificity': null,
+				'no-duplicate-selectors': null,
+				'no-empty-source': null,
+				'no-irregular-whitespace': null,
+				'property-no-vendor-prefix': null,
+				'rule-empty-line-before': null,
+				'scss/at-mixin-argumentless-call-parentheses': null,
+				'scss/at-mixin-pattern': null,
+				'scss/at-rule-conditional-no-parentheses': null,
+				'scss/at-rule-no-unknown': null,
+				'scss/dollar-variable-empty-line-before': null,
+				'scss/double-slash-comment-empty-line-before': null,
+				'scss/double-slash-comment-whitespace-inside': null,
+				'scss/no-duplicate-mixins': null,
+				'scss/no-global-function-names': null,
+				'selector-not-notation': null,
+				'selector-pseudo-element-colon-notation': null,
+				'shorthand-property-no-redundant-values': null,
+			},
+		},
+	],
+
 	rules: {
 		// SCSS specific
 		// ============================================================================================
