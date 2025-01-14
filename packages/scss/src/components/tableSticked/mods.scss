@@ -9,17 +9,17 @@
 	min-width: 100%;
 	background-color: var(--palettes-neutral-0);
 
-	//All stickies columns
+	// All stickies columns
 	[class*='mod-stickyColumn-'] {
 		background-color: var(--palettes-neutral-0);
 		z-index: 3;
 	}
 
-	//Left sticked columns
+	// Left sticked columns
 	[class*='mod-stickyColumn-left'] {
 		left: var(--components-tableSticked-column-sticky-offset);
 
-		//left sticked columns shadow
+		// left sticked columns shadow
 		&.mod-stickyColumn-shadow,
 		.stickyColumn-shadow-wrapper::before {
 			left: calc(var(--components-tableSticked-column-sticky-offset) - var(--components-tableSticked-column-sticky-shadow-width));
@@ -30,11 +30,11 @@
 		}
 	}
 
-	//Right sticked columns
+	// Right sticked columns
 	[class*='mod-stickyColumn-right'] {
 		right: var(--components-tableSticked-column-sticky-offset);
 
-		//right sticked columns shadow
+		// right sticked columns shadow
 		.stickyColumn-shadow-wrapper {
 			justify-items: end;
 			width: calc(var(--components-tableSticked-column-sticky-shadow-width) * 3);
@@ -50,7 +50,7 @@
 		}
 	}
 
-	//Sticky columns drop shadow
+	// Sticky columns drop shadow
 	.mod-stickyColumn-shadow {
 		display: none;
 		width: 0;

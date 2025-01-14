@@ -76,7 +76,7 @@
 		z-index: 3;
 	}
 
-	//hide box-shadow from underneath rows that slighly appear on edges of the sticky header when scrolling
+	// hide box-shadow from underneath rows that slighly appear on edges of the sticky header when scrolling
 	.indexTable-head-row-cell {
 		position: relative;
 		&::before,
@@ -271,7 +271,7 @@
 			transition: opacity ease var(--commons-animations-durations-fast);
 		}
 
-		//If there are 4 actions or more, the buttons are hidden (not on touch device) and replaced should be replaced with a dropdown
+		// If there are 4 actions or more, the buttons are hidden (not on touch device) and replaced should be replaced with a dropdown
 		&:has(.indexTable-body-row-cell-subActionDropdownTrigger) {
 			.indexTable-body-row-cell-subAction {
 				display: none;
@@ -298,7 +298,7 @@
 		@include cellFixedWidth;
 	}
 
-	//Layout fixed at breakpoint
+	// Layout fixed at breakpoint
 	@each $breakpoint, $value in config.$breakpoints {
 		@include media.min($breakpoint) {
 			&.mod-layoutFixedAtMediaMin#{$breakpoint} {

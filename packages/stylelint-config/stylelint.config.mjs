@@ -28,7 +28,6 @@ export default {
 				'scss/at-rule-no-unknown': null,
 				'scss/dollar-variable-empty-line-before': null,
 				'scss/double-slash-comment-empty-line-before': null,
-				'scss/double-slash-comment-whitespace-inside': null,
 				'selector-not-notation': null,
 				'selector-pseudo-element-colon-notation': null,
 				'shorthand-property-no-redundant-values': null,
