@@ -14,7 +14,6 @@ export default {
 			rules: {
 				'custom-property-pattern': null,
 				'declaration-property-value-disallowed-list': null,
-				'property-no-vendor-prefix': null,
 			},
 		},
 	],
