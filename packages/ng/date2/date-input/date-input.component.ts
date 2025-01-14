@@ -135,7 +135,7 @@ export class DateInputComponent extends AbstractDateComponent implements Control
 	@HostBinding('class.mod-filterPill')
 	isFilterPill = false;
 
-	isFilterPillEmpty = computed(() => this.selectedDate() !== null);
+	isFilterPillEmpty = computed(() => !this.selectedDate());
 
 	filterPillPopoverCloseFn?: () => void;
 
