@@ -22,7 +22,6 @@ export default {
 				'scss/at-rule-no-unknown': null,
 				'selector-not-notation': null,
 				'selector-pseudo-element-colon-notation': null,
-				'shorthand-property-no-redundant-values': null,
 			},
 		},
 	],
