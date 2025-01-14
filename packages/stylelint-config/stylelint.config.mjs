@@ -6,17 +6,6 @@ import { getDisallowedObjects, getDisallowedData } from './stylelintForLF.mjs';
 
 export default {
 	extends: ['stylelint-config-standard-scss', 'stylelint-config-prettier-scss'],
-
-	overrides: [
-		{
-			// TODO Decide how to handle these rules.
-			files: ['**/*.scss'],
-			rules: {
-				'declaration-property-value-disallowed-list': null,
-			},
-		},
-	],
-
 	rules: {
 		// SCSS specific
 		// ============================================================================================
