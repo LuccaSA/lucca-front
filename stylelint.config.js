@@ -9,6 +9,13 @@ module.exports = {
 	ignoreFiles: ['**/tests/**'],
 	overrides: [
 		{
+			// Allow common component files to be empty.
+			files: ['packages/ng/**/*.scss', '**/component.scss', '**/mods.scss', '**/states.scss', '**/vars.scss'],
+			rules: {
+				'no-empty-source': null,
+			},
+		},
+		{
 			// TODO: Fix those rules after removing them.
 			files: ['**/*.scss'],
 			rules: {
