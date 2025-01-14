@@ -23,6 +23,7 @@ module.exports = {
 				'font-family-no-missing-generic-family-keyword': null,
 				'no-descending-specificity': null,
 				'no-duplicate-selectors': null,
+				'property-no-vendor-prefix': null,
 				'scss/at-mixin-argumentless-call-parentheses': null,
 				'scss/at-mixin-pattern': null,
 				'scss/at-rule-conditional-no-parentheses': null,
