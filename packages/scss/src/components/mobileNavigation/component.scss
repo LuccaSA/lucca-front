@@ -32,7 +32,7 @@
 			text-decoration: none;
 
 			&:focus-visible {
-				@include a11y.focusVisible($offset: 0px);
+				@include a11y.focusVisible($offset: 0);
 			}
 
 			.lucca-icon {

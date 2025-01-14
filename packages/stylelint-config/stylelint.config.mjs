@@ -15,7 +15,6 @@ export default {
 				'custom-property-pattern': null,
 				'declaration-property-value-disallowed-list': null,
 				'font-family-no-missing-generic-family-keyword': null,
-				'length-zero-no-unit': null,
 				'no-empty-source': null,
 				'property-no-vendor-prefix': null,
 			},
