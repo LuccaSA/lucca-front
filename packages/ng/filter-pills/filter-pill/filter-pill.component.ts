@@ -9,6 +9,7 @@ import {
 	ElementRef,
 	forwardRef,
 	HostBinding,
+	HostListener,
 	inject,
 	input,
 	LOCALE_ID,
@@ -50,6 +51,8 @@ export class FilterPillComponent {
 	elementRef = inject(ElementRef);
 
 	id = `filterPill-combobox-${nextId++}`;
+
+	layout = computed(() => this.inputComponentRef()?.filterPillLayout?.() || 'default');
 
 	inputComponentRef = contentChild(FILTER_PILL_INPUT_COMPONENT);
 
@@ -127,6 +130,11 @@ export class FilterPillComponent {
 			this.inputComponentRef()?.registerFilterPillClosePopover(this.closePopover);
 			this.inputComponentRef()?.registerFilterPillUpdatePosition?.(this.updatePosition);
 		});
+	}
+
+	@HostListener('click')
+	hostClick(): void {
+		this.inputComponentRef()?.onFilterPillClick?.();
 	}
 
 	closePopover = () => {
