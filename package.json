@@ -65,6 +65,7 @@
     "@angular/cli": "^19.0.2",
     "@angular/compiler-cli": "^19.0.1",
     "@compodoc/compodoc": "^1.1.24",
+    "@lucca/stylelint-config": "file:packages/stylelint-config",
     "@ngneat/spectator": "^19.1.2",
     "@storybook/addon-a11y": "^8.4.6",
     "@storybook/addon-docs": "^8.4.6",
@@ -103,9 +104,6 @@
     "prettier": "^3.2.5",
     "sass": "^1.62.1",
     "storybook": "^8.4.5",
-    "stylelint": "^14.15.0",
-    "stylelint-config-prettier": "^9.0.4",
-    "stylelint-prettier": "^2.0.0",
     "ts-node": "~10.9.1",
     "typescript": "5.6.3"
   },

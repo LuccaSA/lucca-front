@@ -6,6 +6,9 @@ This package is a shareable stylelint configuration.
 
 [Prettier should be used](https://stylelint.io/#how-itll-help-you) to handle coding style-guides when possible.
 
+* This configuration lints your code with default CSS & SCSS rules, and adapts some of them for Lucca Front specifics
+* It will trigger warnings for deprecated LF features and errors for deleted LF features.
+
 ## Install
 
 ```
@@ -77,7 +80,7 @@ The configuration from your local repository should be applied right away.
 
 ### VS Code
 
-⚠️ A [VSCode extension bug](https://github.com/stylelint/vscode-stylelint/issues/490#issuecomment-1966934533) might prevent you from using stylelint 16+.
+⚠️ A [VSCode extension bug](https://github.com/stylelint/vscode-stylelint/issues/490#issuecomment-1966934533) might prevent you from using stylelint 16+. A [hackfix](https://github.com/stylelint/vscode-stylelint/issues/490#issuecomment-2156218548) is available.
 
 Follow instructions on the [extension page](https://marketplace.visualstudio.com/items?itemName=stylelint.vscode-stylelint).
 
