@@ -18,7 +18,6 @@ export default {
 				'length-zero-no-unit': null,
 				'no-empty-source': null,
 				'property-no-vendor-prefix': null,
-				'scss/at-mixin-argumentless-call-parentheses': null,
 				'scss/at-mixin-pattern': null,
 				'scss/at-rule-conditional-no-parentheses': null,
 				'scss/at-rule-no-unknown': null,
