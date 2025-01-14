@@ -16,7 +16,6 @@ export default {
 				'block-no-empty': null,
 				'comment-empty-line-before': null,
 				'custom-property-pattern': null,
-				'declaration-block-no-duplicate-properties': null,
 				'declaration-property-value-disallowed-list': null,
 				'font-family-no-missing-generic-family-keyword': null,
 				'length-zero-no-unit': null,

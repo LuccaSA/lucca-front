@@ -234,7 +234,6 @@
 }
 
 @mixin framed {
-	margin-bottom: 0;
 	background-color: var(--palettes-neutral-0);
 	padding: 0;
 	box-shadow: form.fakeBorderOverlay(var(--palettes-neutral-200));

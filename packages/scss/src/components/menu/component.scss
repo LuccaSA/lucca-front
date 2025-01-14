@@ -2,7 +2,6 @@
 @use '@lucca-front/scss/src/commons/utils/namespace';
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
-	position: relative;
 	column-gap: var(--pr-t-spacings-400);
 	align-items: center;
 	display: flex;
