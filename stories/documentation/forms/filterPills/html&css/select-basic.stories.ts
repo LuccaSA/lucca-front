@@ -35,13 +35,7 @@ function getTemplate(args: SelectBasicStory): string {
 	return `<div ${classAttr}>
 	<label for="input1" class="filterPill-label" luTooltip="${args.label}" luTooltipWhenEllipsis="true">${labelDisplayed}</label>
 	<button class="filterPill-combobox" type="button" id="input1" role="combobox" aria-expanded="${args.expanded}" ${tooltip} luTooltipWhenEllipsis="true">
-	<!--
-		<span class="u-mask">Du</span>
-		10/10/2000
-		<lu-icon icon="arrowRight" size="XS" alt="au" />
-		10/10/2020
-	-->
-		${args.value ? args.value : 'Sélectionner une valeur'}
+		${args.value ? args.value : 'Aucune valeur sélectionnée'}
 	</button>
 	<button type="button" class="filterPill-clear clear"><span class="u-mask">Vider ce champ</span></button>
 	<button type="button" aria-hidden="true" tabindex="-1" class="filterPill-toggle">
@@ -55,8 +49,8 @@ const Template: StoryFn<SelectBasicStory> = (args) => ({
 	template: getTemplate(args),
 });
 
-export const Select = Template.bind({});
-Select.args = {
+export const Basic = Template.bind({});
+Basic.args = {
 	label: 'Lorem ipsum',
 	value: 'Lorem ipsum',
 	expanded: false,

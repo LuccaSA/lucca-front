@@ -22,6 +22,7 @@ import { FormsModule } from '@angular/forms';
 import { LuccaIcon } from '@lucca-front/icons';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { PopoverDirective } from '@lucca-front/ng/popover2';
+import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 import { FILTER_PILL_HOST_COMPONENT, FILTER_PILL_INPUT_COMPONENT } from '../core';
 
 let nextId = 0;
@@ -29,7 +30,7 @@ let nextId = 0;
 @Component({
 	selector: 'lu-filter-pill',
 	standalone: true,
-	imports: [PopoverDirective, FormsModule, IconComponent, NgTemplateOutlet],
+	imports: [PopoverDirective, FormsModule, IconComponent, NgTemplateOutlet, LuTooltipModule],
 	templateUrl: './filter-pill.component.html',
 	styleUrl: './filter-pill.component.scss',
 	encapsulation: ViewEncapsulation.None,
@@ -90,7 +91,7 @@ export class FilterPillComponent {
 	label = input.required<string>();
 
 	// TODO i18n placeholder
-	placeholder = input<string>('Sélectionner une valeur');
+	placeholder = input<string>('Aucune valeur sélectionnée');
 
 	icon = input<LuccaIcon>();
 

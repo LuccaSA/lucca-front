@@ -5,6 +5,7 @@ import {
 	Component,
 	computed,
 	forwardRef,
+	HostBinding,
 	inject,
 	Input,
 	model,
@@ -72,6 +73,11 @@ export class LuMultiSelectInputComponent<T> extends ALuSelectInputComponent<T, T
 
 	@Input()
 	filterPillLabelPlural: string;
+
+	@HostBinding('class.mod-filterPill')
+	public get filterPillClass() {
+		return this.filterPillMode;
+	}
 
 	hideCombobox = computed(() => this.valueSignal()?.length > 1);
 

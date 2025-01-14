@@ -23,11 +23,11 @@ import {
 import { ControlValueAccessor } from '@angular/forms';
 import { getIntl, PortalContent } from '@lucca-front/ng/core';
 import { BehaviorSubject, defer, map, Observable, of, ReplaySubject, startWith, Subject, switchMap, take } from 'rxjs';
+import { FilterPillInputComponent } from '../../filter-pills/core';
 import { LuOptionGrouping, LuSimpleSelectDefaultOptionComponent } from '../option';
 import { LuSelectPanelRef } from '../panel';
 import { CoreSelectAddOptionStrategy, LuOptionComparer, LuOptionContext, SELECT_LABEL, SELECT_LABEL_ID } from '../select.model';
 import { LU_CORE_SELECT_TRANSLATIONS } from '../select.translate';
-import { FilterPillInputComponent } from '../../filter-pills/core';
 
 @Directive()
 export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDestroy, OnInit, ControlValueAccessor, FilterPillInputComponent {

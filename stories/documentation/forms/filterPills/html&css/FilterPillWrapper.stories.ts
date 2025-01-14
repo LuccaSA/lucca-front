@@ -12,14 +12,14 @@ import { Meta, moduleMetadata, StoryFn } from '@storybook/angular';
 import { DividerComponent } from 'dist/ng/divider';
 import { StoryModelDisplayComponent } from 'stories/helpers/story-model-display.component';
 
-interface FilterBarBasicStory {
+interface FilterPillBarBasicStory {
 	label: string;
 	value: string;
 	expanded: boolean;
 }
 
 export default {
-	title: 'Documentation/Forms/FiltersPills/FilterBar/HTML&CSS',
+	title: 'Documentation/Forms/FiltersPills/FilterPillBar/HTML&CSS',
 	decorators: [
 		moduleMetadata({
 			imports: [
@@ -42,16 +42,15 @@ export default {
 	argTypes: {},
 } as Meta;
 
-function getTemplate(args: FilterBarBasicStory): string {
+function getTemplate(args: FilterPillBarBasicStory): string {
 	return `
 	<form class="pr-u-marginBlock200">
-		<lu-filter-bar [ngModel]="group" [ngModelOptions]="{standalone: true}">
+		<lu-filter-pill-wrapper [ngModel]="group" [ngModelOptions]="{standalone: true}">
 			<lu-scroll-box class="filterPillScrollBoxWrapper">
 				<div class="filterPillScrollBoxWrapper-first"></div>
 
-
 				<div class="filterPillScrollBoxWrapper-group">
-					<ul class="segmentedControl filterBar-segmentedControl" role="presentation">
+					<ul class="segmentedControl filterPillBar-segmentedControl" role="presentation">
 						<li class="segmentedControl-item">
 							<input type="radio" class="segmentedControl-item-input" name="tab" id="tab1" checked="checked" />
 							<label for="tab1" class="segmentedControl-item-action">
@@ -80,7 +79,7 @@ function getTemplate(args: FilterBarBasicStory): string {
 						</li>
 					</ul>
 
-					<lu-divider class="filterBar-divider" />
+					<lu-divider class="filterPillBar-divider" />
 
 					<button class="filterPill" type="button" luTooltip="Filtres supplémentaires" luTooltipOnlyForDisplay [luPopover2]="contentOptions">
 						<lu-icon class="filterPill-icon" icon="filtersDescending" alt="Filtres supplémentaires"></lu-icon>
@@ -125,7 +124,7 @@ function getTemplate(args: FilterBarBasicStory): string {
 
 				<div class="filterPillScrollBoxWrapper-last"></div>
 			</lu-scroll-box>
-		</lu-filter-bar>
+		</lu-filter-pill-wrapper>
 	</form>
 
 	<ng-template #contentOptions>
@@ -145,19 +144,15 @@ function getTemplate(args: FilterBarBasicStory): string {
 			<lu-form-field label="Fréquence de facturation" class="filterPill_popover-content-formField mod-selectOption">
 				<lu-checkbox-input [ngModel]="false" [ngModelOptions]="{standalone: true}"  />
 			</lu-form-field>
-			<!--
-			<lu-divider />
-			<button luButton="text" size="S" type="submit">Activer ces filtres</button>
-			-->
 		</form>
 	</ng-template>
 `;
 }
 
-const Template: StoryFn<FilterBarBasicStory> = (args) => ({
+const Template: StoryFn<FilterPillBarBasicStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const FilterBar = Template.bind({});
-FilterBar.args = {};
+export const Basic = Template.bind({});
+Basic.args = {};

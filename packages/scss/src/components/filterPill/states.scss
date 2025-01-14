@@ -68,6 +68,8 @@
 }
 
 @mixin comboboxHidden {
+	--components-filterPill-label-fontWeight: var(--components-filterPill-label-fontWeightChecked);
+
 	.filterPill-combobox {
 		@include a11y.mask;
 	}
@@ -85,11 +87,11 @@
 }
 
 @mixin beginning {
-	--components-filterPillWrapper-displayBefore: none;
+	--components-filterPillBar-displayBefore: none;
 }
 
 @mixin ending {
-	--components-filterPillWrapper-displayAfter: none;
+	--components-filterPillBar-displayAfter: none;
 }
 
 @mixin disabled {

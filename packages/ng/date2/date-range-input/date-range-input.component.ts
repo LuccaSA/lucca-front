@@ -1,5 +1,6 @@
 import { BreakpointObserver, LayoutModule } from '@angular/cdk/layout';
 import { ConnectionPositionPair } from '@angular/cdk/overlay';
+import { NgTemplateOutlet } from '@angular/common';
 import {
 	ChangeDetectionStrategy,
 	Component,
@@ -7,6 +8,7 @@ import {
 	effect,
 	ElementRef,
 	forwardRef,
+	HostBinding,
 	inject,
 	Input,
 	input,
@@ -19,7 +21,9 @@ import {
 } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors, Validator } from '@angular/forms';
+import { LuccaIcon } from '@lucca-front/icons';
 import { LuClass, PortalContent, PortalDirective, ɵeffectWithDeps } from '@lucca-front/ng/core';
+import { FILTER_PILL_INPUT_COMPONENT, FilterPillDisplayerDirective, FilterPillInputComponent } from '@lucca-front/ng/filter-pills';
 import { FORM_FIELD_INSTANCE, InputDirective } from '@lucca-front/ng/form-field';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { PopoverDirective } from '@lucca-front/ng/popover2';
@@ -32,9 +36,6 @@ import { CellStatus } from '../calendar2/cell-status';
 import { DateRange } from '../calendar2/date-range';
 import { compareCalendarPeriods, startOfPeriod } from '../utils';
 import { CalendarShortcut } from './calendar-shortcut';
-import { FILTER_PILL_INPUT_COMPONENT, FilterPillDisplayerDirective, FilterPillInputComponent } from '@lucca-front/ng/filter-pills';
-import { LuccaIcon } from '@lucca-front/icons';
-import { NgTemplateOutlet } from '@angular/common';
 
 let nextId = 0;
 
@@ -189,6 +190,7 @@ export class DateRangeInputComponent extends AbstractDateComponent implements Co
 
 	focusedCalendar = computed(() => this.calendars()[this.focusedCalendarIndex()]);
 
+	@HostBinding('class.mod-filterPill')
 	isFilterPill = false;
 
 	isFilterPillEmpty = computed(() => this.selectedRange() === null);

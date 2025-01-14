@@ -1,15 +1,30 @@
 import { ConnectionPositionPair } from '@angular/cdk/overlay';
 import { NgTemplateOutlet } from '@angular/common';
-import { ChangeDetectionStrategy, Component, computed, effect, ElementRef, forwardRef, inject, Input, input, signal, untracked, viewChild, ViewEncapsulation, booleanAttribute } from '@angular/core';
+import {
+	booleanAttribute,
+	ChangeDetectionStrategy,
+	Component,
+	computed,
+	effect,
+	ElementRef,
+	forwardRef,
+	HostBinding,
+	inject,
+	Input,
+	input,
+	signal,
+	untracked,
+	viewChild,
+	ViewEncapsulation,
+} from '@angular/core';
 import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors, Validator } from '@angular/forms';
 import { LuccaIcon } from '@lucca-front/icons';
-import { FILTER_PILL_INPUT_COMPONENT, FilterPillDisplayerDirective, FilterPillInputComponent } from '@lucca-front/ng/filter-pills';
 import { LuClass, ɵeffectWithDeps } from '@lucca-front/ng/core';
+import { FILTER_PILL_INPUT_COMPONENT, FilterPillDisplayerDirective, FilterPillInputComponent } from '@lucca-front/ng/filter-pills';
 import { InputDirective } from '@lucca-front/ng/form-field';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { PopoverDirective } from '@lucca-front/ng/popover2';
-import { isAfter, isBefore, isSameDay } from 'date-fns';
-import { parse, startOfDay } from 'date-fns';
+import { isAfter, isBefore, isSameDay, parse, startOfDay } from 'date-fns';
 import { AbstractDateComponent } from '../abstract-date-component';
 import { CalendarMode } from '../calendar2/calendar-mode';
 import { Calendar2Component } from '../calendar2/calendar2.component';
@@ -117,6 +132,7 @@ export class DateInputComponent extends AbstractDateComponent implements Control
 
 	nextButton = viewChild<ElementRef<Element>>('nextButtonRef');
 
+	@HostBinding('class.mod-filterPill')
 	isFilterPill = false;
 
 	isFilterPillEmpty = signal(true);

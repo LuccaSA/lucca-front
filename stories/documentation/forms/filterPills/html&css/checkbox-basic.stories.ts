@@ -51,8 +51,8 @@ const Template: StoryFn<CheckboxBasicStory> = (args) => ({
 	template: getTemplate(args),
 });
 
-export const Checkbox = Template.bind({});
-Checkbox.args = {
+export const Basic = Template.bind({});
+Basic.args = {
 	label: 'Lorem ipsum dolor',
 	checked: false,
 	disabled: false,

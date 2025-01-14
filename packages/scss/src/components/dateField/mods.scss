@@ -21,3 +21,16 @@
 @mixin yearS {
 	--components-dateField-maxWidth: var(--components-dateField-maxWidthYearS);
 }
+
+@mixin filterPill {
+	--components-dateField-maxWidth: none;
+
+	.textField-input-affix-toggle {
+		display: none;
+	}
+
+	.dateField-textField.textField {
+		position: relative;
+		z-index: 1;
+	}
+}
