@@ -21,7 +21,6 @@ export default {
 				'length-zero-no-unit': null,
 				'no-descending-specificity': null,
 				'no-empty-source': null,
-				'no-irregular-whitespace': null,
 				'property-no-vendor-prefix': null,
 				'rule-empty-line-before': null,
 				'scss/at-mixin-argumentless-call-parentheses': null,
