@@ -7,6 +7,7 @@
 			display: none;
 		}
 	}
+
 	.indexTable-body-row-cellTitle-button[aria-expanded='false'] .lucca-icon {
 		transform: rotate(180deg);
 	}
@@ -29,6 +30,7 @@
 			) {
 			--components-indexTable-cell-subAction-opacity: 1;
 		}
+
 		&:has(.indexTable-body-row-cell-action:focus-visible, .indexTable-body-row-cell-link:focus-visible) {
 			--components-indexTable-outline-opacity: 1;
 		}

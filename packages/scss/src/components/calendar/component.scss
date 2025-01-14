@@ -84,9 +84,11 @@
 			scroll-snap-type: x mandatory;
 			-ms-overflow-style: none;
 			scrollbar-width: none;
+
 			&::-webkit-scrollbar {
 				display: none;
 			}
+
 			&:focus-visible {
 				@include a11y.focusVisible;
 			}

@@ -28,15 +28,19 @@
 
 	&.mod-vertical {
 		@include vertical;
+
 		&:not(.mod-S):not(.mod-L) {
 			@include verticalNotSNotL();
 		}
+
 		&.mod-S {
 			@include verticalS;
 		}
+
 		&.mod-L {
 			@include verticalL;
 		}
+
 		&.mod-progress {
 			@include verticalProgress;
 		}
@@ -44,14 +48,18 @@
 
 	&.mod-addStep {
 		@include addStep;
+
 		&.mod-L {
 			@include addStepL;
 		}
+
 		&.mod-vertical {
 			@include addStepVertical;
+
 			&:not(.mod-L) {
 				@include addStepVerticalNotL;
 			}
+
 			&.mod-L {
 				@include addStepVerticalL;
 			}
@@ -72,9 +80,11 @@
 
 	&.mod-addBetweenStep {
 		@include addBetweenStep;
+
 		&.mod-vertical:not(.mod-L) {
 			@include addBetweenStepVerticalNotL();
 		}
+
 		&.mod-L {
 			@include addBetweenStepL;
 		}
