@@ -135,7 +135,7 @@ export class DateInputComponent extends AbstractDateComponent implements Control
 	@HostBinding('class.mod-filterPill')
 	isFilterPill = false;
 
-	isFilterPillEmpty = signal(true);
+	isFilterPillEmpty = computed(() => this.selectedDate() !== null);
 
 	filterPillPopoverCloseFn?: () => void;
 
@@ -162,6 +162,8 @@ export class DateInputComponent extends AbstractDateComponent implements Control
 					} else if (!this.isFilterPill) {
 						this.selectedDate.set(parsed);
 					}
+				} else {
+					this.selectedDate.set(null);
 				}
 			},
 			{ allowSignalWrites: true },
@@ -170,7 +172,6 @@ export class DateInputComponent extends AbstractDateComponent implements Control
 		effect(() => {
 			if (!this.#safeCompareDate(untracked(this.dateFromWriteValue), this.selectedDate())) {
 				this.#onChange?.(this.selectedDate());
-				this.isFilterPillEmpty.set(!this.selectedDate());
 			}
 		});
 
