@@ -1,6 +1,6 @@
 @use '@lucca-front/icons/src/commons/utils/icon';
+@use 'definitions';
 
-@use '_definitions';
 @include definitions.selectInputStyle;
 
 :host {
