@@ -31,13 +31,6 @@
 	}
 }
 
-@mixin checkedHover {
-	~ .checkboxField-icon {
-		background-color: var(--palettes-product-600);
-		border-color: var(--palettes-product-600);
-	}
-}
-
 @mixin checkedActive {
 	~ .checkboxField-icon {
 		background-color: var(--palettes-product-800);

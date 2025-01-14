@@ -19,13 +19,6 @@
 	}
 }
 
-@mixin checkedHover {
-	~ .radioField-icon {
-		background-color: var(--palettes-product-600);
-		border-color: var(--palettes-product-600);
-	}
-}
-
 @mixin checkedActive {
 	~ .radioField-icon {
 		background-color: var(--palettes-product-800);

@@ -32,7 +32,6 @@ export default {
 				'scss/dollar-variable-empty-line-before': null,
 				'scss/double-slash-comment-empty-line-before': null,
 				'scss/double-slash-comment-whitespace-inside': null,
-				'scss/no-duplicate-mixins': null,
 				'scss/no-global-function-names': null,
 				'selector-not-notation': null,
 				'selector-pseudo-element-colon-notation': null,
