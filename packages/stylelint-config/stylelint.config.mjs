@@ -24,7 +24,6 @@ export default {
 				'scss/at-mixin-pattern': null,
 				'scss/at-rule-conditional-no-parentheses': null,
 				'scss/at-rule-no-unknown': null,
-				'scss/dollar-variable-empty-line-before': null,
 				'selector-not-notation': null,
 				'selector-pseudo-element-colon-notation': null,
 				'shorthand-property-no-redundant-values': null,
@@ -45,6 +44,13 @@ export default {
 			'^(([a-z][a-zA-Z0-9]*)((-(([a-z0-9]+[a-zA-Z0-9]*)|([A-Z]+))+)*)|[A-Z]+)$',
 			{
 				message: `Expected @mixin name to match pattern foo(-bar(Baz)*)*`,
+			},
+		],
+		'scss/dollar-variable-empty-line-before': [
+			'always',
+			{
+				except: ['first-nested'],
+				ignore: ['after-comment', 'after-dollar-variable'],
 			},
 		],
 		'scss/dollar-variable-pattern': [
