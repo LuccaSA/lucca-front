@@ -12,7 +12,6 @@ export default {
 			// TODO Decide how to handle these rules.
 			files: ['**/*.scss'],
 			rules: {
-				'at-rule-empty-line-before': null,
 				'block-no-empty': null,
 				'comment-empty-line-before': null,
 				'custom-property-pattern': null,
@@ -74,8 +73,8 @@ export default {
 		'at-rule-empty-line-before': [
 			'always',
 			{
-				except: ['blockless-after-blockless', 'first-nested'],
-				ignore: ['after-comment'],
+				except: ['first-nested'],
+				ignore: ['after-comment', 'blockless-after-same-name-blockless'],
 				ignoreAtRules: ['else'],
 			},
 		],
