@@ -7,5 +7,14 @@
 module.exports = {
 	extends: ['./packages/stylelint-config'],
 	ignoreFiles: ['**/tests/**'],
+	overrides: [
+		{
+			// TODO: Fix those rules after removing them.
+			files: ['**/*.scss'],
+			rules: {
+				'no-duplicate-selectors': null,
+			},
+		},
+	],
 	rules: {},
 };

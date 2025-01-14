@@ -20,7 +20,6 @@ export default {
 				'font-family-no-missing-generic-family-keyword': null,
 				'length-zero-no-unit': null,
 				'no-descending-specificity': null,
-				'no-duplicate-selectors': null,
 				'no-empty-source': null,
 				'no-irregular-whitespace': null,
 				'property-no-vendor-prefix': null,
