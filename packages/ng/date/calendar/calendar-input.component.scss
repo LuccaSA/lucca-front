@@ -91,7 +91,7 @@
 		color: var(--palettes-product-700);
 		font-weight: 600;
 
-		&:after {
+		&::after {
 			content: '';
 			position: absolute;
 			bottom: var(--pr-t-spacings-50);
@@ -128,7 +128,7 @@
 		}
 
 		&.is-today {
-			&:after {
+			&::after {
 				background-color: var(--palettes-neutral-0) !important;
 				transition: background-color var(--commons-animations-durations-fast);
 			}

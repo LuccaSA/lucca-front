@@ -44,7 +44,7 @@
 			}
 		}
 
-		&:focus-visible ~ .radio-label:before {
+		&:focus-visible ~ .radio-label::before {
 			@include a11y.focusVisible;
 		}
 	}

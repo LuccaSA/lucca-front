@@ -21,7 +21,6 @@ export default {
 				'scss/at-rule-conditional-no-parentheses': null,
 				'scss/at-rule-no-unknown': null,
 				'selector-not-notation': null,
-				'selector-pseudo-element-colon-notation': null,
 			},
 		},
 	],

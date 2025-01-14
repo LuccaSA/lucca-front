@@ -35,7 +35,7 @@
 		&.is-selected {
 			background-color: var(--palettes-product-50);
 
-			&:before {
+			&::before {
 				content: '';
 				position: absolute;
 				top: 0;
