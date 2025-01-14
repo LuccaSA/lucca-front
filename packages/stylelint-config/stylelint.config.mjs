@@ -18,7 +18,6 @@ export default {
 				'length-zero-no-unit': null,
 				'no-empty-source': null,
 				'property-no-vendor-prefix': null,
-				'selector-not-notation': null,
 			},
 		},
 	],
