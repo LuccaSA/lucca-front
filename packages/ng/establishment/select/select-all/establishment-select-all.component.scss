@@ -3,6 +3,7 @@
 :host {
 	@include optionSelectorStyle;
 }
+
 button[disabled]:hover {
 	// TODO: remove hover animation when disabled
 }

@@ -24,6 +24,7 @@
 		.stickyColumn-shadow-wrapper::before {
 			left: calc(var(--components-tableSticked-column-sticky-offset) - var(--components-tableSticked-column-sticky-shadow-width));
 		}
+
 		.stickyColumn-shadow-wrapper::after {
 			left: var(--components-tableSticked-column-sticky-offset);
 			background-image: linear-gradient(to right, var(--components-tableSticked-column-sticky-shadow-color), transparent);
@@ -40,10 +41,12 @@
 			width: calc(var(--components-tableSticked-column-sticky-shadow-width) * 3);
 			right: calc(var(--components-tableSticked-column-sticky-shadow-width) * -1);
 		}
+
 		&.mod-stickyColumn-shadow,
 		.stickyColumn-shadow-wrapper::before {
 			right: calc(var(--components-tableSticked-column-sticky-offset) - var(--components-tableSticked-column-sticky-shadow-width));
 		}
+
 		.stickyColumn-shadow-wrapper::after {
 			right: var(--components-tableSticked-column-sticky-offset);
 			background-image: linear-gradient(to left, var(--components-tableSticked-column-sticky-shadow-color), transparent);
@@ -73,9 +76,11 @@
 			position: sticky;
 			grid-area: cell;
 		}
+
 		&::after {
 			width: var(--components-tableSticked-column-sticky-shadow-width);
 		}
+
 		&::before {
 			z-index: 1;
 			width: var(--components-tableSticked-column-sticky-shadow-width);
@@ -90,6 +95,7 @@
 
 		position: sticky;
 	}
+
 	.mod-stickyColumn-shadow {
 		display: table-cell;
 	}
@@ -103,6 +109,7 @@
 	.table-head-row-cell {
 		top: 0;
 	}
+
 	.mod-stickyHeader-shadow .table-body-row-cell {
 		top: calc(var(--table-stickyHeader-shadow-offset) + var(--components-tableSticked-column-sticky-shadow-width));
 	}
@@ -112,6 +119,7 @@
 	.table-head-row-cell {
 		top: var(--commons-banner-height);
 	}
+
 	.mod-stickyHeader-shadow .table-body-row-cell {
 		top: calc(
 			var(--table-stickyHeader-shadow-offset) + var(--commons-banner-height) + var(--components-tableSticked-column-sticky-shadow-width)
@@ -121,10 +129,12 @@
 
 @mixin stickyHeaderCommon {
 	margin-top: var(--components-tableSticked-column-sticky-shadow-width);
+
 	.table-head-row-cell {
 		background-color: var(--palettes-neutral-0);
 		position: sticky;
 		z-index: 5;
+
 		&[class*='mod-stickyColumn'] {
 			z-index: 7;
 		}

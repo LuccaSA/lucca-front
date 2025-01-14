@@ -112,6 +112,7 @@
 			}
 		}
 	}
+
 	.timeline-step-description {
 		padding-left: var(--pr-t-spacings-300);
 	}
@@ -131,6 +132,7 @@
 			}
 		}
 	}
+
 	.timeline-step-description {
 		padding-left: 2.5rem;
 		min-height: var(--pr-t-spacings-400);
@@ -154,6 +156,7 @@
 
 @mixin number {
 	counter-reset: timeline;
+
 	.timeline-step:not(.timeline-stepAddBetweenStep) {
 		.timeline-step-title {
 			counter-increment: timeline;
@@ -188,6 +191,7 @@
 				background-color: transparent;
 				color: var(--palettes-700, var(--palettes-product-700));
 			}
+
 			&::before {
 				background-color: var(--palettes-100, var(--palettes-product-100));
 			}
@@ -236,6 +240,7 @@
 				&:before {
 					display: none;
 				}
+
 				.timeline-step-title-icon::before {
 					@include icon.generate('maths_plus');
 					display: flex;
@@ -316,6 +321,7 @@
 			}
 		}
 	}
+
 	.timeline-stepAddBetweenStep-title {
 		@include reset.button;
 		width: auto;
@@ -332,6 +338,7 @@
 			}
 		}
 	}
+
 	.timeline-step:not([aria-current='step']):not([aria-current='step'] ~ .timeline-step) .timeline-step-title-icon::before {
 		@include icon.generate('maths_plus');
 		display: flex;
