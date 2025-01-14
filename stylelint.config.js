@@ -16,6 +16,7 @@ module.exports = {
 				'no-descending-specificity': null,
 				'no-duplicate-selectors': null,
 				'scss/at-mixin-argumentless-call-parentheses': null,
+				'scss/at-mixin-pattern': null,
 			},
 		},
 	],
