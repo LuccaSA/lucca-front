@@ -3,12 +3,9 @@
 @use '@lucca-front/scss/src/commons/utils/namespace';
 @use '@lucca-front/scss/src/commons/utils/a11y';
 @use '@lucca-front/scss/src/commons/utils/reset';
-@use '@lucca-front/scss/src/commons/utils/overflow';
 @use '@lucca-front/scss/src/commons/utils/media';
 
 @use '@lucca-front/scss/src/components/clear/exports' as clear;
-@use '@lucca-front/scss/src/components/scrollBox/exports' as scrollBox;
-@use '@lucca-front/scss/src/components/divider/exports' as divider;
 @use '@lucca-front/scss/src/components/segmentedControl/exports' as segmentedControl;
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
@@ -43,35 +40,13 @@
 
 	@at-root ($atRoot) {
 		.filterPillBar-divider.divider {
-			@include divider.vertical;
-
-			margin-inline: var(--pr-t-spacings-50);
-
-			// TODO: filterPills – move this to index
-			@include media.max(XXS) {
-				width: 100%;
-				margin-inline: 0;
-			}
-
-			&:not(:has(+ .filterPill, + .filterPillScrollBoxWrapper-group)) {
+			&:not(:has(+ .filterPill, + .filterPillBar-scrollBox-group)) {
 				display: none;
 			}
 		}
 
 		.filterPillBar-segmentedControl.segmentedControl {
 			@include segmentedControl.S;
-
-			// TODO: filterPills –  move this to index
-			@include media.max(XXS) {
-				--components-segmentedControl-direction: row;
-				--components-segmentedControl-width: 100%;
-			}
-
-			@include media.pointer('coarse') {
-				--components-segmentedControl-wrap: nowrap;
-				--components-segmentedControl-whiteSpace: nowrap;
-				--components-segmentedControl-width: auto;
-			}
 		}
 
 		.filterPill-icon {
@@ -82,44 +57,27 @@
 			}
 		}
 
-		.filterPillScrollBoxWrapper.scrollBox {
+		.filterPillBar-scrollBox.scrollBox {
 			align-items: flex-start;
-
-			&:has(.filterPillScrollBoxWrapper-export) {
-				// TODO: filterPills –  move this to index
-				@include media.min('XXS') {
-					flex-wrap: nowrap;
-				}
-			}
-
-			@include media.pointer('coarse') {
-				@include overflow.mask;
-			}
-
-			@include media.pointer('coarse', $reversed: true) {
-				@include scrollBox.wrap;
-			}
 		}
 
-		.filterPillScrollBoxWrapper-first {
+		.filterPillBar-scrollBox-first {
+			display: var(--components-filterPillBar-extremitiesDisplay);
 			margin-inline-end: calc(var(--components-scrollBox-gap) * -1);
 		}
 
-		.filterPillScrollBoxWrapper-last {
+		.filterPillBar-scrollBox-last {
+			display: var(--components-filterPillBar-extremitiesDisplay);
 			margin-inline-start: calc(var(--components-scrollBox-gap) * -1);
 		}
 
-		.filterPillScrollBoxWrapper-group {
+		.filterPillBar-scrollBox-group {
 			display: flex;
 			gap: var(--components-scrollBox-gap);
 			flex-wrap: wrap;
 
-			&:has(+ .filterPillScrollBoxWrapper-last) {
+			&:has(+ .filterPillBar-scrollBox-last) {
 				flex-grow: 1;
-			}
-
-			@include media.pointer('coarse') {
-				display: contents;
 			}
 		}
 
@@ -270,7 +228,7 @@
 			@include a11y.mask;
 		}
 
-		.filterPillScrollBoxWrapper-export {
+		.filterPillBar-scrollBox-export {
 			margin-inline-start: auto;
 			padding-inline-start: var(--pr-t-spacings-200);
 		}

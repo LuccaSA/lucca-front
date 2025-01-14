@@ -11,4 +11,5 @@
 	--components-scrollBox-marginInline: calc(var(--components-scrollBox-paddingInline) * -1);
 	--components-scrollBox-marginBlock: calc(var(--components-scrollBox-paddingBlock) * -1);
 	--components-scrollBox-wrap: nowrap;
+	--components-scrollBox-pseudoElementsContent: '';
 }

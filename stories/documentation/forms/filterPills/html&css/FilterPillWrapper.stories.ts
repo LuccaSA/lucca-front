@@ -45,11 +45,11 @@ export default {
 function getTemplate(args: FilterPillBarBasicStory): string {
 	return `
 	<form class="pr-u-marginBlock200">
-		<lu-filter-pill-wrapper [ngModel]="group" [ngModelOptions]="{standalone: true}">
-			<lu-scroll-box class="filterPillScrollBoxWrapper">
-				<div class="filterPillScrollBoxWrapper-first"></div>
+		<div class="filterPillBar" [ngModel]="group" [ngModelOptions]="{standalone: true}">
+			<lu-scroll-box class="filterPillBar-scrollBox">
+				<div class="filterPillBar-scrollBox-first"></div>
 
-				<div class="filterPillScrollBoxWrapper-group">
+				<div class="filterPillBar-scrollBox-group">
 					<ul class="segmentedControl filterPillBar-segmentedControl" role="presentation">
 						<li class="segmentedControl-item">
 							<input type="radio" class="segmentedControl-item-input" name="tab" id="tab1" checked="checked" />
@@ -118,13 +118,13 @@ function getTemplate(args: FilterPillBarBasicStory): string {
 					<button type="submit" size="S" luButton="text" palette="product">Appliquer les filtres</button>
 
 				</div>
-				<div class="filterPillScrollBoxWrapper-export">
+				<div class="filterPillBar-scrollBox-export">
 					<button type="submit" size="S" luButton="outlined">Exporter</button>
 				</div>
 
-				<div class="filterPillScrollBoxWrapper-last"></div>
+				<div class="filterPillBar-scrollBox-last"></div>
 			</lu-scroll-box>
-		</lu-filter-pill-wrapper>
+		</div>
 	</form>
 
 	<ng-template #contentOptions>

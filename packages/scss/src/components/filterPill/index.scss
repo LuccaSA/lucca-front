@@ -1,6 +1,5 @@
 @use 'exports' as *;
 @use '@lucca-front/scss/src/commons/utils/media';
-@use '@lucca-front/scss/src/commons/utils/container';
 
 .filterPill {
 	@include vars;
@@ -72,5 +71,25 @@
 				@include checkboxCheckedDisabled;
 			}
 		}
+	}
+}
+
+.filterPillBar {
+	@include barVars;
+
+	@include media.max(XXS) {
+		@include compact;
+	}
+
+	@include media.min(XXS) {
+		@include notCompact;
+	}
+
+	@include media.pointer(coarse) {
+		@include touch;
+	}
+
+	@include media.pointer(coarse, $reversed: true) {
+		@include noTouch;
 	}
 }

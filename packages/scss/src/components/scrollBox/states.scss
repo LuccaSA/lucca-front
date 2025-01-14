@@ -5,3 +5,8 @@
 @mixin lastVisible {
 	--components-scrollBox-afterOpacity: 0;
 }
+
+@mixin disabled {
+	--components-scrollBox-wrap: wrap;
+	--components-scrollBox-pseudoElementsContent: none;
+}

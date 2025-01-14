@@ -22,7 +22,7 @@
 
 	&::before,
 	&::after {
-		content: '';
+		content: var(--components-scrollBox-pseudoElementsContent);
 		pointer-events: none;
 		position: sticky;
 		flex-shrink: 0;

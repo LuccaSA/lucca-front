@@ -19,3 +19,7 @@
 	--components-filterPill-toggle-iconColor: var(--palettes-neutral-600);
 	--components-filterPill-shadow: 0 0 0 1px var(--components-filterPill-borderColor);
 }
+
+@mixin barVars {
+	--components-filterPillBar-extremitiesDisplay: none;
+}

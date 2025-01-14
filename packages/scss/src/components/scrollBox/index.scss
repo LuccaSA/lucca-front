@@ -11,4 +11,8 @@
 	&.is-lastVisible {
 		@include lastVisible;
 	}
+
+	&.is-disabled {
+		@include disabled;
+	}
 }
