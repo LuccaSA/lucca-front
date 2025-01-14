@@ -82,7 +82,7 @@
 	&.mod-noPadding {
 		padding: 0;
 
-		&:after {
+		&::after {
 			padding-bottom: 0;
 		}
 	}
@@ -131,16 +131,19 @@
 				content: none;
 			}
 		}
+
 		.lu-modal-content-title {
 			color: var(--palettes-neutral-800);
 			font-size: var(--sizes-XL-fontSize);
 			margin-top: 2.5rem;
 		}
+
 		.button {
 			margin-bottom: 2.5rem;
 		}
+
 		.modal-visual {
-			margin: 4.5rem calc(var(--pr-t-spacings-400) * -1) 0 calc(var(--pr-t-spacings-400) * -1);
+			margin: 4.5rem calc(var(--pr-t-spacings-400) * -1) 0;
 		}
 
 		.modal-visual-illustration {

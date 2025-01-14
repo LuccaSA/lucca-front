@@ -37,7 +37,7 @@
 		display: table #{$suffix};
 	}
 
-	&:after {
+	&::after {
 		clear: both #{$suffix};
 	}
 }
