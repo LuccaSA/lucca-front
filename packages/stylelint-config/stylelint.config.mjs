@@ -19,7 +19,6 @@ export default {
 				'no-empty-source': null,
 				'property-no-vendor-prefix': null,
 				'scss/at-rule-conditional-no-parentheses': null,
-				'scss/at-rule-no-unknown': null,
 				'selector-not-notation': null,
 			},
 		},
