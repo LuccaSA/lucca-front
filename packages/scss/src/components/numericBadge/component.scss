@@ -11,8 +11,6 @@
 	background-color: var(--components-numericBadge-background);
 	color: var(--components-numericBadge-color);
 	border-radius: var(--components-numericBadge-borderRadius);
-	transition-property: background-color, color;
-	transition-duration: var(--commons-animations-durations-fast);
 	transition-timing-function: ease;
 	white-space: nowrap;
 	position: relative;
