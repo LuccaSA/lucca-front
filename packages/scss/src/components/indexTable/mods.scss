@@ -41,6 +41,7 @@
 	.indexTable-body-row-cell {
 		// because we can't set an individual spacing for each row, transparent border are used for this
 		border-bottom: var(--components-indexTable-row-stack-border-bottom) solid transparent;
+
 		// stack apparence
 		background-image: var(--components-indexTable-row-stack2-background-image, none),
 			var(--components-indexTable-row-stack3-background-image, none);
@@ -120,6 +121,7 @@
 	.indexTable-foot-row {
 		position: relative;
 		display: grid;
+
 		// Grid layout by default is a basic one column template.
 		// The user can override this and build a specific layout by using --components-indexTable-row-responsive-grid-template-columns, --components-indexTable-row-responsive-grid-template-rows and --components-indexTable-row-responsive-grid-template-areas
 		grid-template-columns: var(--components-indexTable-row-responsive-grid-template-columns, 1fr);
@@ -129,6 +131,7 @@
 		align-items: center;
 		padding: var(--components-indexTable-row-spacing-responsive) 0;
 		margin-bottom: var(--components-indexTable-row-spacing-responsive);
+
 		// "Title" lines that do not contain "card" cells are smaller
 		&:not(:has(.indexTable-body-row-cell)) {
 			padding: 0;
@@ -194,6 +197,7 @@
 	}
 	.indexTable-body-row-transparentCell {
 		width: auto;
+
 		// we add a padding-left to keep a correct indent between lvl 1 and lvl 2 titles in nested tables. * .75 is just for cosmetic
 		&:first-child[colspan='2'] + .indexTable-body-row-transparentCell {
 			padding-left: calc(var(--components-indexTable-row-cell-transparent-width) * 0.75);
