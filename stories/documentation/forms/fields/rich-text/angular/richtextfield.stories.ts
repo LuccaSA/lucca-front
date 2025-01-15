@@ -2,6 +2,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import {
+	ClearFormatComponent,
 	HeadingsComponent,
 	LinkComponent,
 	ListFormatComponent,
@@ -23,6 +24,7 @@ export default {
 				RichTextInputComponent,
 				HeadingsComponent,
 				LinkComponent,
+				ClearFormatComponent,
 				TextStyleToolbarComponent,
 				ListStyleToolbarComponent,
 				ListFormatComponent,
@@ -75,6 +77,7 @@ export const Basic: StoryObj<RichTextInputComponent & { disabled: boolean; examp
 				<lu-rich-text-toolbar-list-style/>
 				<lu-rich-text-plugin-headings/>
 				<lu-rich-text-plugin-link/>
+				<lu-rich-text-plugin-clear-format/>
 	</lu-rich-text-input>
 </lu-form-field>
 <pr-story-model-display>{{example}}</pr-story-model-display>`),

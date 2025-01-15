@@ -5,3 +5,4 @@ export * from './plugins/list-format';
 export * from './plugins/tag';
 export * from './plugins/text-style';
 export * from './plugins/link';
+export * from './plugins/clear-format';
