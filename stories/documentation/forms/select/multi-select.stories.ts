@@ -293,6 +293,22 @@ export const User = generateStory({
 	},
 });
 
+export const UserWithSelectAll = generateStory({
+	name: 'User Select (select all)',
+	description: "Pour saisir des utilisateurs, il suffit d'utiliser la directive `users` et `withSelectAll`",
+	template: `<lu-multi-select
+	placeholder="Placeholder..."
+	users
+	withSelectAll
+	withSelectAllDisplayerLabel="utilisateurs"
+	[(ngModel)]="selectedUsers"
+></lu-multi-select>`,
+	neededImports: {
+		'@lucca-front/ng/multi-select': ['LuMultiSelectInputComponent'],
+		'@lucca-front/ng/core-select/user': ['LuCoreSelectUsersDirective'],
+	},
+});
+
 export const FormerUser = generateStory({
 	name: 'User Select (with former)',
 	description: "Pour saisir des utilisateurs, il suffit d'utiliser la directive `users`",

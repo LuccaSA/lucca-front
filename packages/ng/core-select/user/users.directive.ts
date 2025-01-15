@@ -78,7 +78,10 @@ export class LuCoreSelectUsersDirective<T extends LuCoreSelectUser = LuCoreSelec
 
 		effect(() => {
 			const enableFormerEmployees = this.enableFormerEmployees();
-			untracked(() => this.select.panelHeaderTpl.set(enableFormerEmployees ? LuCoreSelectFormerEmployeesComponent : undefined));
+
+			if (enableFormerEmployees) {
+				untracked(() => this.select.panelHeaderTpl.set(LuCoreSelectFormerEmployeesComponent));
+			}
 		});
 	}
 
@@ -139,7 +142,7 @@ export class LuCoreSelectUsersDirective<T extends LuCoreSelectUser = LuCoreSelec
 			this.httpClient.get<{ count: number }>(url, {
 				params: {
 					...filters,
-					['fields.root']: 'count',
+					fields: 'collection.count',
 				},
 			}),
 		),
