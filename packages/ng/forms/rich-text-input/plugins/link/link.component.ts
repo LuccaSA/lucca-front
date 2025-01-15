@@ -10,6 +10,8 @@ import { AutoLinkNode, LinkNode } from '@lexical/link';
 import { RICH_TEXT_PLUGIN_COMPONENT, RichTextPluginComponent } from '../../rich-text-input.component';
 import { getSelectedNode } from '../../utils';
 import { LinkDialogComponent } from './link-dialog';
+import { getIntl } from '@lucca-front/ng/core';
+import { LU_RICH_TEXT_INPUT_TRANSLATIONS } from "../../rich-text-input.translate";
 
 @Component({
 	selector: 'lu-rich-text-plugin-link',
@@ -31,6 +33,7 @@ export class LinkComponent implements OnDestroy, RichTextPluginComponent {
 
 	public readonly active = signal(false);
 	#editor?: LexicalEditor;
+	intl = getIntl(LU_RICH_TEXT_INPUT_TRANSLATIONS);
 
 	#registeredCommands: () => void = () => {};
 

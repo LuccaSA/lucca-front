@@ -5,6 +5,8 @@ import { CLEAR_FORMAT, registerClearFormat } from './clear-format.command';
 import { LexicalEditor } from 'lexical';
 import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
 import { RICH_TEXT_PLUGIN_COMPONENT, RichTextPluginComponent } from '../../rich-text-input.component';
+import { getIntl } from '@lucca-front/ng/core';
+import { LU_RICH_TEXT_INPUT_TRANSLATIONS } from "../../rich-text-input.translate";
 
 @Component({
 	selector: 'lu-rich-text-plugin-clear-format',
@@ -22,6 +24,8 @@ import { RICH_TEXT_PLUGIN_COMPONENT, RichTextPluginComponent } from '../../rich-
 export class ClearFormatComponent implements RichTextPluginComponent, OnDestroy {
 	#editor?: LexicalEditor;
 	#registeredCommands: () => void = () => {};
+
+	intl = getIntl(LU_RICH_TEXT_INPUT_TRANSLATIONS);
 
 	public setEditorInstance(editor: LexicalEditor) {
 		this.#editor = editor;

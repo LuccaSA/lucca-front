@@ -11,6 +11,8 @@ import { RICH_TEXT_PLUGIN_COMPONENT, RichTextPluginComponent } from '../../rich-
 
 import { HeadingNode } from '@lexical/rich-text';
 import { FORMAT_HEADINGS, registerHeadings, registerHeadingsSelectionChange } from './headings.command';
+import { getIntl } from '@lucca-front/ng/core';
+import { LU_RICH_TEXT_INPUT_TRANSLATIONS } from "../../rich-text-input.translate";
 
 @Component({
 	selector: 'lu-rich-text-plugin-headings',
@@ -30,14 +32,16 @@ export class HeadingsComponent implements OnDestroy, RichTextPluginComponent {
 
 	public maxHeadingLevel = input<1 | 2 | 3 | 4 | 5 | 6>(6);
 
+	intl = getIntl(LU_RICH_TEXT_INPUT_TRANSLATIONS);
+
 	public readonly headingLabels: Record<CommandPayloadType<typeof FORMAT_HEADINGS>, [string, number]> = {
-		paragraph: ['Paragraph', 0],
-		h1: ['Heading 1', 1],
-		h2: ['Heading 2', 2],
-		h3: ['Heading 3', 3],
-		h4: ['Heading 4', 4],
-		h5: ['Heading 5', 5],
-		h6: ['Heading 6', 6],
+		paragraph: [ this.intl.headings0, 0 ],
+		h1: [ this.intl.headings1, 1 ],
+		h2: [ this.intl.headings2, 2 ],
+		h3: [ this.intl.headings3, 3 ],
+		h4: [ this.intl.headings4, 4 ],
+		h5: [ this.intl.headings5, 5 ],
+		h6: [ this.intl.headings6, 6 ],
 	};
 	public readonly headingOptions = computed<CommandPayloadType<typeof FORMAT_HEADINGS>[]>(
 		() => Object.keys(this.headingLabels).slice(0, this.maxHeadingLevel() + 1) as CommandPayloadType<typeof FORMAT_HEADINGS>[],

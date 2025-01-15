@@ -1,4 +1,4 @@
-<lu-form-field [label]="'RTE_HEADINGS_TOOL'" size="XS" hiddenLabel>
+<lu-form-field [label]="intl.headingsLabel" size="XS" hiddenLabel>
 	<lu-simple-select [options]="headingOptions()" [formControl]="formControl" #selectRef>
 		<ng-container *luOption="let heading; select: selectRef">{{ headingLabels[heading][0] }}</ng-container>
 	</lu-simple-select>
