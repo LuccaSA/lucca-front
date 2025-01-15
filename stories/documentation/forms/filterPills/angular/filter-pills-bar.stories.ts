@@ -23,7 +23,7 @@ export default {
 				barState: {},
 			},
 			template: `
-				<lu-filter-pills-bar [(pillsState)]="barState" [addonBefore]="beforeTpl" [addonAfter]="afterTpl">
+				<lu-filter-pills-bar [toggleButton]="true" [(pillsState)]="barState" [addonBefore]="beforeTpl" [addonAfter]="afterTpl">
 					<ng-template #beforeTpl>
 						<ul class="segmentedControl filterPillBar-segmentedControl" role="presentation">
 							<li class="segmentedControl-item">

@@ -6,8 +6,7 @@
 		<ng-container *luPortal="addonBefore()"></ng-container>
 
 		<lu-divider class="filterPillBar-divider" />
-		}
-
+		} @if (toggleButton) {
 		<button
 			class="filterPill"
 			type="button"
@@ -18,6 +17,7 @@
 		>
 			<lu-icon class="filterPill-icon" icon="filtersDescending" alt="Filtres supplémentaires"></lu-icon>
 		</button>
+		}
 
 		<ng-content></ng-content>
 	</div>
