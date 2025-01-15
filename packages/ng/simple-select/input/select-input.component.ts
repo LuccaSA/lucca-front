@@ -1,11 +1,11 @@
 import { OverlayModule } from '@angular/cdk/overlay';
-import { AsyncPipe, NgIf } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation, forwardRef, inject } from '@angular/core';
+import { AsyncPipe, NgIf, NgTemplateOutlet } from '@angular/common';
+import { ChangeDetectionStrategy, Component, forwardRef, HostBinding, inject, Input, viewChild, ViewContainerRef, ViewEncapsulation } from '@angular/core';
 import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { getIntl } from '@lucca-front/ng/core';
 import { ALuSelectInputComponent, LuSelectPanelRef, provideLuSelectLabelsAndIds, ɵLuOptionOutletDirective } from '@lucca-front/ng/core-select';
 import { InputDirective } from '@lucca-front/ng/form-field';
-import { IconComponent } from '@lucca-front/ng/icon';
+import { FILTER_PILL_INPUT_COMPONENT, FilterPillDisplayerDirective } from '../../filter-pills/core';
 import { LU_SIMPLE_SELECT_TRANSLATIONS } from '../select.translate';
 import { LuSimpleSelectPanelRefFactory } from './panel-ref.factory';
 
@@ -15,7 +15,7 @@ import { LuSimpleSelectPanelRefFactory } from './panel-ref.factory';
 	styleUrls: ['./select-input.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	standalone: true,
-	imports: [AsyncPipe, ɵLuOptionOutletDirective, NgIf, OverlayModule, IconComponent, FormsModule, InputDirective],
+	imports: [AsyncPipe, ɵLuOptionOutletDirective, NgIf, OverlayModule, FormsModule, InputDirective, FilterPillDisplayerDirective, NgTemplateOutlet],
 	providers: [
 		{
 			provide: NG_VALUE_ACCESSOR,
@@ -28,17 +28,25 @@ import { LuSimpleSelectPanelRefFactory } from './panel-ref.factory';
 		},
 		LuSimpleSelectPanelRefFactory,
 		provideLuSelectLabelsAndIds(),
+		{
+			provide: FILTER_PILL_INPUT_COMPONENT,
+			useExisting: forwardRef(() => LuSimpleSelectInputComponent),
+		},
 	],
 	encapsulation: ViewEncapsulation.None,
-	host: {
-		class: 'simpleSelect',
-	},
 })
 export class LuSimpleSelectInputComponent<T> extends ALuSelectInputComponent<T, T> implements ControlValueAccessor {
 	intl = getIntl(LU_SIMPLE_SELECT_TRANSLATIONS);
 
+	@HostBinding('class.mod-filterPill')
+	public get filterPillClass() {
+		return this.filterPillMode;
+	}
+
 	@Input()
 	autocomplete?: string;
+
+	filterPillPanelAnchorRef = viewChild('filterPillPanelAnchor', { read: ViewContainerRef });
 
 	protected panelRefFactory = inject(LuSimpleSelectPanelRefFactory);
 
@@ -48,5 +56,10 @@ export class LuSimpleSelectInputComponent<T> extends ALuSelectInputComponent<T, 
 
 	protected hasValue(): boolean {
 		return this.value !== null && this.value !== undefined;
+	}
+
+	override enableFilterPillMode() {
+		this._panelRef = this.panelRefFactory.buildAndAttachPanelRef(this, this.filterPillPanelAnchorRef());
+		super.enableFilterPillMode();
 	}
 }

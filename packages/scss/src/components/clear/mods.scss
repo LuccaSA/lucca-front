@@ -1,4 +1,35 @@
 @mixin product {
+	--components-clear-cross-color: var(--palettes-neutral-0);
+	--components-clear-background: var(--palettes-product-700);
+
+	&:hover {
+		--components-clear-background: var(--palettes-product-600);
+	}
+
+	&:active {
+		--components-clear-background: var(--palettes-product-800);
+	}
+}
+
+@mixin S {
+	--components-clear-size: 0.75rem;
+	--icon-size: 0.75rem;
+}
+
+@mixin inverted {
+	--components-clear-cross-color: var(--palettes-neutral-700);
+	--components-clear-background: var(--palettes-neutral-0);
+
+	&:hover {
+		--components-clear-background: var(--palettes-neutral-50);
+	}
+
+	&:active {
+		--components-clear-background: var(--palettes-neutral-100);
+	}
+}
+
+@mixin invertedProduct {
 	--components-clear-cross-color: var(--palettes-product-700);
 	--components-clear-background: var(--palettes-neutral-0);
 
@@ -9,9 +40,4 @@
 	&:active {
 		--components-clear-background: var(--palettes-product-50);
 	}
-}
-
-@mixin S {
-	--components-clear-size: 0.75rem;
-	--icon-size: 0.75rem;
 }

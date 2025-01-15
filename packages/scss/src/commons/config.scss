@@ -444,6 +444,8 @@ $elevation: (
 			'0 0 0 1px color-mix(in srgb, var(--palettes-neutral-400) 8%, transparent), 0 0 4px color-mix(in srgb, var(--palettes-neutral-400) 32%, transparent), 0 0 8px color-mix(in srgb, var(--palettes-neutral-400) 24%, transparent)',
 		'overlay':
 			'0 0 0 1px color-mix(in srgb, var(--palettes-neutral-400) 8%, transparent), 0 4px 8px color-mix(in srgb, var(--palettes-neutral-400) 24%, transparent), 0 4px 12px 2px color-mix(in srgb, var(--palettes-neutral-400) 8%, transparent)',
+		'hover':
+			'0 1px 2px 0 color-mix(in srgb, var(--palettes-neutral-400) 24%, transparent), 0 2px 2px 0 color-mix(in srgb, var(--palettes-neutral-400) 12%, transparent)',
 	),
 );
 

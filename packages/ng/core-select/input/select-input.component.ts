@@ -15,6 +15,7 @@ import {
 	OnDestroy,
 	OnInit,
 	Output,
+	signal,
 	TemplateRef,
 	Type,
 	ViewChild,
@@ -22,13 +23,14 @@ import {
 import { ControlValueAccessor } from '@angular/forms';
 import { getIntl, PortalContent } from '@lucca-front/ng/core';
 import { BehaviorSubject, defer, map, Observable, of, ReplaySubject, startWith, Subject, switchMap, take } from 'rxjs';
+import { FilterPillInputComponent } from '../../filter-pills/core';
 import { LuOptionGrouping, LuSimpleSelectDefaultOptionComponent } from '../option';
 import { LuSelectPanelRef } from '../panel';
 import { CoreSelectAddOptionStrategy, LuOptionComparer, LuOptionContext, SELECT_LABEL, SELECT_LABEL_ID } from '../select.model';
 import { LU_CORE_SELECT_TRANSLATIONS } from '../select.translate';
 
 @Directive()
-export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDestroy, OnInit, ControlValueAccessor {
+export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDestroy, OnInit, ControlValueAccessor, FilterPillInputComponent {
 	protected changeDetectorRef = inject(ChangeDetectorRef);
 	protected overlayContainerRef: HTMLElement = inject(OverlayContainer).getContainerElement();
 
@@ -36,6 +38,10 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	protected labelId: string = inject(SELECT_LABEL_ID);
 
 	protected coreIntl = getIntl(LU_CORE_SELECT_TRANSLATIONS);
+
+	protected afterCloseFn?: () => void;
+	protected updatePositionFn?: () => void;
+	protected filterPillMode = false;
 
 	@ViewChild('inputElement')
 	private inputElementRef: ElementRef<HTMLInputElement>;
@@ -108,6 +114,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 			// which is before the panel size has been modified by the arrival of the new options
 			setTimeout(() => {
 				this.panelRef.updatePosition();
+				this.updatePositionFn?.();
 			});
 		}
 	}
@@ -128,12 +135,17 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	@Output() previousPage = new EventEmitter<void>();
 	@Output() addOption = new EventEmitter<string>();
 
+	public valueSignal = signal<TValue>(null);
+	isFilterPillEmpty = computed(() => this.valueSignal() === null);
+
 	public get value(): TValue {
 		return this._value;
 	}
 
 	protected set value(value: TValue) {
+		// TODO remove once migrated to signal, but there's an override
 		this._value = value;
+		this.valueSignal.set(value);
 		this.changeDetectorRef.markForCheck();
 	}
 
@@ -267,14 +279,16 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 		}
 	}
 
-	clearValue(event: Event): void {
-		event.stopPropagation();
+	clearValue(event?: Event): void {
+		if (event) {
+			event.stopPropagation();
+		}
 		this.updateValue(null, true);
 		this.inputElementRef.nativeElement.focus();
 	}
 
 	openPanel(clue: string = ''): void {
-		if (this.isPanelOpen || this.disabled$.value) {
+		if (this.filterPillMode || this.isPanelOpen || this.disabled$.value) {
 			return;
 		}
 		/**
@@ -345,9 +359,12 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 		this.activeDescendant$.next('');
 		this.changeDetectorRef.markForCheck();
 		this.onTouched?.();
-		this.isPanelOpen$.next(false);
-		this.panelRef.close();
-		this._panelRef = undefined;
+		if (!this.filterPillMode) {
+			this.isPanelOpen$.next(false);
+			this.panelRef.close();
+			this._panelRef = undefined;
+		}
+		this.afterCloseFn?.();
 	}
 
 	public writeValue(value: TValue): void {
@@ -367,5 +384,25 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	// Ensure nextPage/previousPage does not emit too often
 	#pageChanged(pageEmitter: EventEmitter<void>): Observable<void> {
 		return this.options$.pipe(switchMap(() => pageEmitter.pipe(take(1))));
+	}
+
+	// Filter pill interface
+	clearFilterPillValue(): void {
+		this.clearValue();
+	}
+
+	registerFilterPillClosePopover(closeFn: () => void): void {
+		this.afterCloseFn = closeFn;
+	}
+
+	registerFilterPillUpdatePosition(updatePositionFn: () => void): void {
+		this.updatePositionFn = updatePositionFn;
+	}
+
+	enableFilterPillMode() {
+		this.bindInputToPanelRefEvents();
+		this.isPanelOpen$.next(true);
+		this.filterPillMode = true;
+		this._panelRef.closed.subscribe(this.afterCloseFn);
 	}
 }

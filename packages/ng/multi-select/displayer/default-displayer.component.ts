@@ -70,7 +70,9 @@ export class LuMultiSelectDefaultDisplayerComponent<T> implements OnInit {
 		);
 		setTimeout(() => {
 			this.select.panelRef?.updatePosition();
+			this.select.updatePosition();
 			this.inputElementRef.nativeElement.focus();
+			this.select.panelRef?.updateSelectedOptions(this.value);
 		});
 	}
 

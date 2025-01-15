@@ -48,6 +48,18 @@
 		@include XS;
 	}
 
+	&.mod-withArrow {
+		@include withArrow;
+
+		&.mod-S {
+			@include withArrowS;
+		}
+	}
+
+	&.mod-selectOption {
+		@include selectOption;
+	}
+
 	&.mod-checkable,
 	&:has(.radioField),
 	&:has(.checkboxField),
