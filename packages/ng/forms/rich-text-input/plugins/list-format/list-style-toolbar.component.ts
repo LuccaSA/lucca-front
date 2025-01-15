@@ -6,13 +6,16 @@ import { registerListsGlobal } from './list-format.command';
 
 import { ListItemNode, ListNode } from '@lexical/list';
 import { ListFormatComponent } from './list-format.component';
+import { getIntl } from '@lucca-front/ng/core';
+import { LU_RICH_TEXT_INPUT_TRANSLATIONS } from "../../rich-text-input.translate";
 
 @Component({
 	selector: 'lu-rich-text-toolbar-list-style',
 	standalone: true,
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	template: ` <lu-rich-text-plugin-list format="bullet" tooltip="Bullets" icon="formatBulletedList" />
-		<lu-rich-text-plugin-list format="number" tooltip="Numbered" icon="formatNumberedList" />`,
+	template: `
+		<lu-rich-text-plugin-list format="bullet" [tooltip]="intl.listsBulletLabel" icon="formatBulletedList"/>
+		<lu-rich-text-plugin-list format="number" [tooltip]="intl.listsNumberedLabel" icon="formatNumberedList"/>`,
 	imports: [ListFormatComponent],
 	providers: [
 		{
@@ -25,6 +28,8 @@ export class ListStyleToolbarComponent implements OnDestroy, RichTextPluginCompo
 	#registeredCommands: () => void = () => {};
 
 	pluginComponents = viewChildren(ListFormatComponent);
+
+	intl = getIntl(LU_RICH_TEXT_INPUT_TRANSLATIONS);
 
 	setEditorInstance(editor: LexicalEditor): void {
 		this.pluginComponents().forEach((plugin) => plugin.setEditorInstance(editor));

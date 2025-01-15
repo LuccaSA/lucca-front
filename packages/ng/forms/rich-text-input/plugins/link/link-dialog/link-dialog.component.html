@@ -1,7 +1,7 @@
 <lu-dialog>
 	<form class="dialog-form" (submit)="save()" [formGroup]="formGroup">
 		<lu-dialog-content>
-			<lu-form-field [label]="'RTE_LINK_TOOL_HREF_LABEL'">
+			<lu-form-field [label]="intl.linksHref">
 				<lu-text-input formControlName="href" />
 			</lu-form-field>
 		</lu-dialog-content>
@@ -13,13 +13,13 @@
 					palette="error"
 					[disabled]="!dialogData"
 					(click)="deleteLink()"
-					[luTooltip]="'RTE_LINK_TOOL_DELETE'"
+					[luTooltip]="intl.linksDelete"
 					luTooltipOnlyForDisplay
 				>
-					<lu-icon icon="trashDelete" [alt]="'RTE_LINK_TOOL_DELETE'" />
+					<lu-icon icon="trashDelete" [alt]="intl.linksDelete" />
 				</button>
-				<button type="submit" luButton [disabled]="formGroup.pristine">{{ "RTE_LINK_TOOL_SUBMIT" }}</button>
-				<button type="button" luButton="text" luDialogDismiss>{{ "RTE_LINK_TOOL_CANCEL" }}</button>
+				<button type="submit" luButton [disabled]="formGroup.pristine">{{ intl.linksSubmit }}</button>
+				<button type="button" luButton="text" luDialogDismiss>{{ intl.linksCancel }}</button>
 			</div>
 		</lu-dialog-footer>
 	</form>

@@ -3,10 +3,10 @@
 	type="button"
 	size="XS"
 	(click)="dispatchCommand()"
-	[luTooltip]="'RTE_LINK_TOOL'"
+	[luTooltip]="intl.linksLabel"
 	[class.mod-toggled]="active()"
 	luTooltipOnlyForDisplay
 >
-	<lu-icon icon="formatLink" [alt]="'RTE_LINK_TOOL'" />
-	<span class="button-text" [attr.aria-hidden]="!active()"> {{ "RTE_LINK_TOOL_EDIT_LABEL"}} </span>
+	<lu-icon icon="formatLink" [alt]="intl.linksLabel" />
+	<span class="button-text" [attr.aria-hidden]="!active()"> {{ intl.linksLabel }} </span>
 </button>

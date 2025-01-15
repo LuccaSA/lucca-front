@@ -6,6 +6,8 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
+import { getIntl } from '@lucca-front/ng/core';
+import { LU_RICH_TEXT_INPUT_TRANSLATIONS } from "../../../rich-text-input.translate";
 
 @Component({
 	selector: 'lu-rich-text-plugin-link-dialog',
@@ -28,6 +30,8 @@ import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
 export class LinkDialogComponent {
 	public readonly dialogData = injectDialogData<string>();
 	public readonly dialogRef = injectDialogRef<string | undefined>();
+
+	intl = getIntl(LU_RICH_TEXT_INPUT_TRANSLATIONS);
 
 	public readonly formGroup = new FormGroup({
 		href: new FormControl<string>(this.dialogData, Validators.required),

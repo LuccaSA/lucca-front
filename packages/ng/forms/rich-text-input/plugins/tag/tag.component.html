@@ -1,5 +1,5 @@
 <div class="editor-tagContainer">
-	<span> Insérer </span>
+	<span>{{ intl.tagsAction }}</span>
 	@for(tag of tags(); track tag){
 	<span class="editor-tag" (click)="insertTag(tag)">{{tag}}</span>
 	}
