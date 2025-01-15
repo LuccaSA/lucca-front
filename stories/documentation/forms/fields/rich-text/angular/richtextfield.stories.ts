@@ -1,16 +1,19 @@
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
-import { RichTextInputComponent } from '@lucca-front/ng/forms/rich-text-input';
+import {
+	HeadingsComponent,
+	LinkComponent,
+	ListFormatComponent,
+	ListStyleToolbarComponent,
+	RichTextInputComponent,
+	TagComponent,
+	TextStyleComponent,
+	TextStyleToolbarComponent,
+} from '@lucca-front/ng/forms/rich-text-input';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { cleanupTemplate, generateInputs } from 'stories/helpers/stories';
 import { StoryModelDisplayComponent } from 'stories/helpers/story-model-display.component';
-import { HeadingsComponent } from '../../../../../../packages/ng/forms/rich-text-input/plugins/headings';
-import { ListFormatComponent } from '../../../../../../packages/ng/forms/rich-text-input/plugins/list-format';
-import { ListStyleToolbarComponent } from '../../../../../../packages/ng/forms/rich-text-input/plugins/list-format/list-style-toolbar.component';
-import { TagComponent } from '../../../../../../packages/ng/forms/rich-text-input/plugins/tag/tag.component';
-import { TextStyleComponent } from '../../../../../../packages/ng/forms/rich-text-input/plugins/text-style';
-import { TextStyleToolbarComponent } from '../../../../../../packages/ng/forms/rich-text-input/plugins/text-style/text-style-toolbar.component';
 
 export default {
 	title: 'Documentation/Forms/Fields/RichTextField/Angular',
@@ -19,6 +22,7 @@ export default {
 			imports: [
 				RichTextInputComponent,
 				HeadingsComponent,
+				LinkComponent,
 				TextStyleToolbarComponent,
 				ListStyleToolbarComponent,
 				ListFormatComponent,
@@ -70,6 +74,7 @@ export const Basic: StoryObj<RichTextInputComponent & { disabled: boolean; examp
 																				]"/>
 				<lu-rich-text-toolbar-list-style/>
 				<lu-rich-text-plugin-headings/>
+				<lu-rich-text-plugin-link/>
 	</lu-rich-text-input>
 </lu-form-field>
 <pr-story-model-display>{{example}}</pr-story-model-display>`),
@@ -79,6 +84,6 @@ export const Basic: StoryObj<RichTextInputComponent & { disabled: boolean; examp
 		};
 	},
 	args: {
-		example: '<i>italic</i> <b>bold</b>',
+		example: '*italic* **bold**',
 	},
 };
