@@ -6,7 +6,6 @@ import { LuOptionDirective } from '@lucca-front/ng/core-select';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 import { CommandPayloadType, Klass, LexicalEditor, LexicalNode } from 'lexical';
-import { isNotNil } from 'packages/ng/time/core/misc.utils';
 import { filter } from 'rxjs';
 import { RICH_TEXT_PLUGIN_COMPONENT, RichTextPluginComponent } from '../../rich-text-input.component';
 
@@ -53,7 +52,10 @@ export class HeadingsComponent implements OnDestroy, RichTextPluginComponent {
 			registerHeadings(editor),
 			registerHeadingsSelectionChange(editor, (value) => this.formControl.setValue(value, { emitEvent: false })),
 		);
-		this.formControl.valueChanges.pipe(takeUntilDestroyed(this.#destroyRef), filter(isNotNil)).subscribe((heading) => editor.dispatchCommand(FORMAT_HEADINGS, heading));
+		this.formControl.valueChanges.pipe(
+			takeUntilDestroyed(this.#destroyRef),
+			filter(Boolean),
+		).subscribe((heading) => editor.dispatchCommand(FORMAT_HEADINGS, heading));
 	}
 
 	getLexicalNodes(): Klass<LexicalNode>[] {
