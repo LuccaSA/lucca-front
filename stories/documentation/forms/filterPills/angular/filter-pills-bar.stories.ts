@@ -1,12 +1,11 @@
 import { allLegumes } from '@/stories/forms/select/select.utils';
-import { FilterPillComponent, FilterPillsBarComponent } from '@lucca-front/ng/filter-pills';
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { CheckboxInputComponent } from '@lucca-front/ng/forms';
 import { FormsModule } from '@angular/forms';
-import { DateRangeInputComponent } from '@lucca-front/ng/date2';
-import { DateInputComponent } from '@lucca-front/ng/date2';
-import { StoryModelDisplayComponent } from '../../../../helpers/story-model-display.component';
 import { ButtonComponent } from '@lucca-front/ng/button';
+import { DateInputComponent, DateRangeInputComponent } from '@lucca-front/ng/date2';
+import { FilterPillComponent, FilterPillsBarComponent } from '@lucca-front/ng/filter-pills';
+import { CheckboxInputComponent } from '@lucca-front/ng/forms';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { StoryModelDisplayComponent } from '../../../../helpers/story-model-display.component';
 
 export default {
 	title: 'Documentation/Forms/FiltersPills/FilterPillBar/Angular',

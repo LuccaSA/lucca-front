@@ -98,3 +98,7 @@
 	--components-filterPill-backgroundColor: var(--pr-t-elevation-surface-sunken);
 	--components-filterPill-borderColor: var(--palettes-neutral-300);
 }
+
+@mixin hidden {
+	--components-filterPill-display: none;
+}

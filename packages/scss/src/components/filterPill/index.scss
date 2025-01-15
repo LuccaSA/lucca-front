@@ -21,6 +21,10 @@
 		@include focusVisible;
 	}
 
+	&.is-hidden {
+		@include hidden;
+	}
+
 	&:not(button) {
 		&:not(:has(.filterPill-checkbox-input)) {
 			&.is-empty {

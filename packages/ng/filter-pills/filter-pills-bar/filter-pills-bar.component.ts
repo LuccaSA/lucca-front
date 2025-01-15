@@ -1,12 +1,13 @@
+import { ConnectionPositionPair } from '@angular/cdk/overlay';
 import { ChangeDetectionStrategy, Component, computed, contentChildren, effect, input, model, untracked, ViewEncapsulation } from '@angular/core';
-import { IconComponent } from '@lucca-front/ng/icon';
-import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
-import { PopoverDirective } from '@lucca-front/ng/popover2';
-import { DividerComponent } from '@lucca-front/ng/divider';
-import { ScrollBoxComponent } from '@lucca-front/ng/scrollBox';
-import { PortalContent, PortalDirective } from '@lucca-front/ng/core';
-import { FilterPillComponent } from '../filter-pill/filter-pill.component';
 import { FormsModule } from '@angular/forms';
+import { PortalContent, PortalDirective } from '@lucca-front/ng/core';
+import { DividerComponent } from '@lucca-front/ng/divider';
+import { IconComponent } from '@lucca-front/ng/icon';
+import { PopoverDirective } from '@lucca-front/ng/popover2';
+import { ScrollBoxComponent } from '@lucca-front/ng/scrollBox';
+import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
+import { FilterPillComponent } from '../filter-pill/filter-pill.component';
 
 @Component({
 	selector: 'lu-filter-pills-bar',
@@ -22,6 +23,27 @@ import { FormsModule } from '@angular/forms';
 export class FilterPillsBarComponent {
 	addonBefore = input<PortalContent | null>(null);
 	addonAfter = input<PortalContent | null>(null);
+
+	popoverPositions: ConnectionPositionPair[] = [
+		new ConnectionPositionPair(
+			{ originX: 'start', originY: 'bottom' },
+			{
+				overlayX: 'start',
+				overlayY: 'top',
+			},
+			-4,
+			0,
+		),
+		new ConnectionPositionPair(
+			{ originX: 'start', originY: 'top' },
+			{
+				overlayX: 'start',
+				overlayY: 'bottom',
+			},
+			-4,
+			0,
+		),
+	];
 
 	pills = contentChildren(FilterPillComponent, { descendants: true });
 

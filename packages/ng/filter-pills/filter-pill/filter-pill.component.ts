@@ -69,7 +69,7 @@ export class FilterPillComponent {
 
 	name = input.required<string>();
 
-	@HostBinding('class.u-mask')
+	@HostBinding('class.is-hidden')
 	hidden = false;
 
 	popoverPositions: ConnectionPositionPair[] = [

@@ -9,7 +9,7 @@
 @use '@lucca-front/scss/src/components/segmentedControl/exports' as segmentedControl;
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
-	display: flex;
+	display: var(--components-filterPill-display);
 	gap: var(--components-filterPill-gap);
 	align-items: center;
 	background-color: var(--components-filterPill-backgroundColor);

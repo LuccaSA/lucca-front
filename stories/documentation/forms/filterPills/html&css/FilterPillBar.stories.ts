@@ -44,7 +44,7 @@ export default {
 
 function getTemplate(args: FilterPillBarBasicStory): string {
 	return `
-	<form class="pr-u-marginBlock200">
+	<form>
 		<div class="filterPillBar" [ngModel]="group" [ngModelOptions]="{standalone: true}">
 			<lu-scroll-box class="filterPillBar-scrollBox">
 				<div class="filterPillBar-scrollBox-first"></div>
