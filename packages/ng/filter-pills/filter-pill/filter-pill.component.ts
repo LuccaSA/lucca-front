@@ -67,6 +67,11 @@ export class FilterPillComponent {
 
 	customLabelTpl = signal<TemplateRef<unknown> | null>(null);
 
+	name = input.required<string>();
+
+	@HostBinding('class.u-mask')
+	hidden = false;
+
 	popoverPositions: ConnectionPositionPair[] = [
 		new ConnectionPositionPair(
 			{ originX: 'start', originY: 'bottom' },

@@ -21,13 +21,13 @@ export default {
 				examples: [],
 				legumes: allLegumes,
 			},
-			template: `<lu-filter-pill label="Légume"><lu-simple-select [(ngModel)]="example"	[options]="legumes | filterLegumes:clue" (clueChange)="clue = $event" /></lu-filter-pill>
+			template: `<lu-filter-pill label="Légume" name="legume"><lu-simple-select [(ngModel)]="example"	[options]="legumes | filterLegumes:clue" (clueChange)="clue = $event" /></lu-filter-pill>
 
 <pr-story-model-display>{{example | json}}</pr-story-model-display>
 
 <hr class="divider pr-u-marginBlock400" />
 
-<lu-filter-pill label="Légume"><lu-multi-select [(ngModel)]="examples"	[options]="legumes | filterLegumes:clue" (clueChange)="clue = $event" filterPillLabelPlural="légumes" /></lu-filter-pill>
+<lu-filter-pill label="Légume" name="legume"><lu-multi-select [(ngModel)]="examples"	[options]="legumes | filterLegumes:clue" (clueChange)="clue = $event" filterPillLabelPlural="légumes" /></lu-filter-pill>
 
 <pr-story-model-display>{{examples | json}}</pr-story-model-display>
 `,

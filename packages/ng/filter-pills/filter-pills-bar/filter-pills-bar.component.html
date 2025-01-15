@@ -1,0 +1,35 @@
+<lu-scroll-box class="filterPillBar-scrollBox">
+	<div class="filterPillBar-scrollBox-first"></div>
+
+
+	<div class="filterPillBar-scrollBox-group">
+		@if (addonBefore()) {
+			<ng-container *luPortal="addonBefore()"></ng-container>
+
+			<lu-divider class="filterPillBar-divider" />
+		}
+
+		<button class="filterPill" type="button" luTooltip="Filtres supplémentaires" luTooltipOnlyForDisplay
+		        [luPopover2]="contentOptionsTpl">
+			<lu-icon class="filterPill-icon" icon="filtersDescending" alt="Filtres supplémentaires"></lu-icon>
+		</button>
+
+		<ng-content></ng-content>
+	</div>
+
+	@if (addonAfter()) {
+		<div class="filterPillBar-scrollBox-export">
+			<ng-container *luPortal="addonAfter()"></ng-container>
+		</div>
+	}
+
+	<div class="filterPillBar-scrollBox-last"></div>
+</lu-scroll-box>
+
+<ng-template #contentOptionsTpl>
+	@for (pill of pills(); track pill.name()) {
+		<input type="checkbox" [ngModel]="pillsState()[pill.name()]"
+		       (ngModelChange)="togglePill(pill.name())">
+		{{ pill.label() }}
+	}
+</ng-template>

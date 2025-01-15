@@ -19,13 +19,13 @@ export default {
 				examplePeriod: null,
 				checkboxValue: false,
 			},
-			template: `<lu-filter-pill label="Date de début"><lu-date-input [(ngModel)]="example" /></lu-filter-pill>
+			template: `<lu-filter-pill label="Date de début" name="startDate"><lu-date-input [(ngModel)]="example" /></lu-filter-pill>
 
 <pr-story-model-display>{{example}}</pr-story-model-display>
 
 <hr class="divider pr-u-marginBlock400" />
 
-<lu-filter-pill label="Période"><lu-date-range-input [(ngModel)]="examplePeriod"/></lu-filter-pill>
+<lu-filter-pill label="Période" name="periode"><lu-date-range-input [(ngModel)]="examplePeriod"/></lu-filter-pill>
 
 <pr-story-model-display>{{examplePeriod | json}}</pr-story-model-display>
 `,

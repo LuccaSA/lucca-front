@@ -19,7 +19,7 @@ export default {
 				examplePeriod: null,
 				checkboxValue: false,
 			},
-			template: `<lu-filter-pill label="Inclure les collaborateurs partis"><lu-checkbox-input [(ngModel)]="checkboxValue"></lu-checkbox-input></lu-filter-pill>
+			template: `<lu-filter-pill label="Inclure les collaborateurs partis" name="includeFormerEmployees"><lu-checkbox-input [(ngModel)]="checkboxValue"></lu-checkbox-input></lu-filter-pill>
 
 <pr-story-model-display>{{checkboxValue}}</pr-story-model-display>
 `,
