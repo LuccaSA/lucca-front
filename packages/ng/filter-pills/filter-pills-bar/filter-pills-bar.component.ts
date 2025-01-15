@@ -1,5 +1,5 @@
 import { ConnectionPositionPair } from '@angular/cdk/overlay';
-import { ChangeDetectionStrategy, Component, computed, contentChildren, effect, Input, input, model, untracked, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, computed, contentChildren, effect, input, model, untracked, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { PortalContent, PortalDirective } from '@lucca-front/ng/core';
 import { DividerComponent } from '@lucca-front/ng/divider';
@@ -24,8 +24,7 @@ export class FilterPillsBarComponent {
 	addonBefore = input<PortalContent | null>(null);
 	addonAfter = input<PortalContent | null>(null);
 
-	@Input()
-	toggleButton = false;
+	toggleButton = input<boolean, boolean>(false, { transform: booleanAttribute });
 
 	popoverPositions: ConnectionPositionPair[] = [
 		new ConnectionPositionPair(

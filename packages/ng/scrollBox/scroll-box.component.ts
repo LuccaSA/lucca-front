@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ElementRef, HostBinding, inject, OnInit, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, HostBinding, inject, OnInit, signal, ViewEncapsulation } from '@angular/core';
 
 @Component({
 	selector: 'lu-scroll-box',
@@ -16,19 +16,25 @@ export class ScrollBoxComponent implements OnInit {
 	#elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
 
 	@HostBinding('class.is-firstVisible')
-	isFirstVisible = false;
+	get isFirstVisibleClass() {
+		return this.isFirstVisible();
+	}
+	isFirstVisible = signal(false);
 
 	@HostBinding('class.is-lastVisible')
-	isLastVisible = false;
+	get isLastVisibleClass() {
+		return this.isLastVisible();
+	}
+	isLastVisible = signal(false);
 
 	initObserver(element: Element, isFirst: boolean) {
 		new IntersectionObserver(
 			(entries) => {
 				entries.forEach((entry) => {
 					if (isFirst) {
-						this.isFirstVisible = entry.isIntersecting;
+						this.isFirstVisible.set(entry.isIntersecting);
 					} else {
-						this.isLastVisible = entry.isIntersecting;
+						this.isLastVisible.set(entry.isIntersecting);
 					}
 				});
 			},

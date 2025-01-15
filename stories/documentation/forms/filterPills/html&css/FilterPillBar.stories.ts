@@ -125,6 +125,7 @@ function getTemplate(args: FilterPillBarBasicStory): string {
 				<div class="filterPillBar-scrollBox-last"></div>
 			</lu-scroll-box>
 		</div>
+
 	</form>
 
 	<ng-template #contentOptions>

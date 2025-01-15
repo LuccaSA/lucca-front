@@ -1,29 +1,57 @@
-import { allLegumes } from '@/stories/forms/select/select.utils';
+import { allLegumes, FilterLegumesPipe } from '@/stories/forms/select/select.utils';
 import { FormsModule } from '@angular/forms';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { DateInputComponent, DateRangeInputComponent } from '@lucca-front/ng/date2';
 import { FilterPillComponent, FilterPillsBarComponent } from '@lucca-front/ng/filter-pills';
 import { CheckboxInputComponent } from '@lucca-front/ng/forms';
+import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { generateInputs } from 'stories/helpers/stories';
 import { StoryModelDisplayComponent } from '../../../../helpers/story-model-display.component';
 
 export default {
 	title: 'Documentation/Forms/FiltersPills/FilterPillBar/Angular',
 	decorators: [
 		moduleMetadata({
-			imports: [FilterPillsBarComponent, FilterPillComponent, CheckboxInputComponent, FormsModule, DateRangeInputComponent, DateInputComponent, StoryModelDisplayComponent, ButtonComponent],
+			imports: [
+				FilterPillsBarComponent,
+				FilterPillComponent,
+				CheckboxInputComponent,
+				FormsModule,
+				DateRangeInputComponent,
+				DateInputComponent,
+				StoryModelDisplayComponent,
+				ButtonComponent,
+				LuSimpleSelectInputComponent,
+				FilterLegumesPipe,
+			],
 		}),
 	],
-	render: (args, context) => {
+	render: (args, { argTypes }) => {
 		return {
 			props: {
 				example: null,
+				example2: null,
 				examplePeriod: null,
 				legumes: allLegumes,
 				barState: {},
+				barState2: { includeFormerEmployees: false },
 			},
+
 			template: `
-				<lu-filter-pills-bar [toggleButton]="true" [(pillsState)]="barState" [addonBefore]="beforeTpl" [addonAfter]="afterTpl">
+				<lu-filter-pills-bar [(pillsState)]="barState">
+					<lu-filter-pill label="Légumes" name="vegetables">
+						<lu-simple-select [(ngModel)]="example"	[options]="legumes | filterLegumes:clue" (clueChange)="clue = $event" />
+					</lu-filter-pill>
+					<lu-filter-pill label="Lorem ipsum" name="loremIpsum">
+						<lu-checkbox-input [ngModel]="false"></lu-checkbox-input>
+					</lu-filter-pill>
+					<button type="submit" size="S" luButton="text" palette="product">Appliquer les filtres</button>
+				</lu-filter-pills-bar>
+
+				<hr class="divider pr-u-marginBlock400" />
+
+				<lu-filter-pills-bar ${generateInputs(args, argTypes)} [(pillsState)]="barState2" [addonBefore]="beforeTpl" [addonAfter]="afterTpl">
 					<ng-template #beforeTpl>
 						<ul class="segmentedControl filterPillBar-segmentedControl" role="presentation">
 							<li class="segmentedControl-item">
@@ -53,9 +81,15 @@ export default {
 						</ul>
 					</ng-template>
 
-					<lu-filter-pill label="Inclure les collaborateurs partis"  name="includeFormerEmployees"><lu-checkbox-input [ngModel]="false"></lu-checkbox-input></lu-filter-pill>
-					<lu-filter-pill label="Date de début" name="startDate"><lu-date-input [(ngModel)]="example" /></lu-filter-pill>
-					<lu-filter-pill label="Période" name="periode"><lu-date-range-input [(ngModel)]="examplePeriod"/></lu-filter-pill>
+					<lu-filter-pill label="Inclure les collaborateurs partis" name="includeFormerEmployees">
+						<lu-checkbox-input [ngModel]="false"></lu-checkbox-input>
+					</lu-filter-pill>
+					<lu-filter-pill label="Date de début" name="startDate">
+						<lu-date-input [(ngModel)]="example2" />
+					</lu-filter-pill>
+					<lu-filter-pill label="Période" name="periode">
+						<lu-date-range-input [(ngModel)]="examplePeriod"/>
+					</lu-filter-pill>
 
 					<ng-template #afterTpl>
 						<button type="submit" size="S" luButton="outlined">Exporter</button>
@@ -63,11 +97,15 @@ export default {
 				</lu-filter-pills-bar>
 
 				<pr-story-model-display>
-					{{barState | json}}
+					{{barState2 | json}}
 				</pr-story-model-display>
 			`,
 		};
 	},
 } as Meta;
 
-export const Basic: StoryObj<FilterPillComponent> = {};
+export const Basic: StoryObj<FilterPillsBarComponent> = {
+	args: {
+		toggleButton: false,
+	},
+};

@@ -29,7 +29,7 @@
 		width: var(--components-scrollBox-shadowSize);
 		margin-block: calc(var(--components-scrollBox-paddingBlock) * -1);
 		background-repeat: no-repeat;
-		z-index: 1;
+		z-index: 10;
 		align-self: stretch;
 		background-size:
 			75% 100%,

@@ -6,7 +6,7 @@
 		<ng-container *luPortal="addonBefore()"></ng-container>
 
 		<lu-divider class="filterPillBar-divider" />
-		} @if (toggleButton) {
+		} @if (toggleButton()) {
 		<button
 			class="filterPill"
 			type="button"
@@ -32,7 +32,7 @@
 </lu-scroll-box>
 
 <ng-template #contentOptionsTpl>
-	<div class="filterPill_popover-content popover-contentOptional">
+	<form class="filterPill_popover-content popover-contentOptional">
 		@for (pill of pills(); track pill.name(); let index = $index) {
 
 		<div class="form-field mod-selectOption filterPill_popover-content-formField">
@@ -41,6 +41,7 @@
 				<input
 					type="checkbox"
 					class="checkboxField-input"
+					[name]="pill.name()"
 					[attr.id]="'filterPillOptions' + index"
 					[ngModel]="pillsState()[pill.name()]"
 					(ngModelChange)="togglePill(pill.name())"
@@ -49,5 +50,5 @@
 			</span>
 		</div>
 		}
-	</div>
+	</form>
 </ng-template>

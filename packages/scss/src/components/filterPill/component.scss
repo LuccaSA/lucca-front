@@ -40,7 +40,7 @@
 
 	@at-root ($atRoot) {
 		.filterPillBar-divider.divider {
-			&:not(:has(+ .filterPill, + .filterPillBar-scrollBox-group)) {
+			&:not(:has(~ .filterPill:not(.is-hidden))) {
 				display: none;
 			}
 		}
