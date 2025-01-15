@@ -29,6 +29,11 @@ export class LuDepartmentV4Service {
 		this._operations = operations;
 	}
 
+	protected _uniqueOperation: number;
+	set uniqueOperation(uniqueOperation: number) {
+		this._uniqueOperation = uniqueOperation;
+	}
+
 	constructor(private _http: HttpClient) {}
 
 	getTrees() {
@@ -39,6 +44,8 @@ export class LuDepartmentV4Service {
 					ILuApiResponse<IApiDepartment>
 				>(`/api/v3/departments/scopedtree?fields=id,name&${[`appInstanceId=${this._appInstanceId}`, `operations=${this._operations.join(',')}`, this._filters.join(',')].filter((f) => !!f).join('&')}`)
 				.pipe(map((response) => response.data));
+		} else if (this._uniqueOperation) {
+			call = this._http.get<IApiDepartment>(`${this.api}/tree`, { params: { uniqueOperation: this._uniqueOperation } });
 		} else {
 			call = this._http.get<IApiDepartment>(`${this.api}/tree`);
 		}

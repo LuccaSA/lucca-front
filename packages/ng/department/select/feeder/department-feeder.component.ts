@@ -44,6 +44,10 @@ export class LuDepartmentFeederComponent extends ALuTreeOptionOperator<ILuDepart
 		this._service.filters = filters ?? [];
 	}
 
+	@Input() set uniqueOperation(uniqueOperation: number) {
+		this._service.uniqueOperation = uniqueOperation;
+	}
+
 	constructor(
 		@Inject(ALuDepartmentService)
 		@Optional()
