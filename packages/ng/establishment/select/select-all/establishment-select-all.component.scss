@@ -1,7 +1,9 @@
-@import "_definitions";
+@use '_definitions';
+
 :host {
-	@include optionSelectorStyle;
+	@include definitions.optionSelectorStyle;
 }
+
 button[disabled]:hover {
 	// TODO: remove hover animation when disabled
 }

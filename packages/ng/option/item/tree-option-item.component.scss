@@ -1,5 +1,5 @@
-@import '_definitions';
-@include optionItemStyle;
+@use '_definitions';
+@include definitions.optionItemStyle;
 
 :host {
 	--components-options-tree-multiple-padding: 2.25rem;

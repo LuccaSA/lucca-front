@@ -2,8 +2,6 @@
 @use '@lucca-front/scss/src/commons/utils/namespace';
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
-	@include keyframe.scaleIn;
-
 	background-color: var(--components-tooltip-background-color);
 	color: var(--components-tooltip-color);
 	padding: var(--pr-t-spacings-50) var(--pr-t-spacings-100);
@@ -18,6 +16,8 @@
 	animation-name: scaleIn;
 	animation-duration: var(--commons-animations-durations-fast);
 	animation-iteration-count: 1;
+
+	@include keyframe.scaleIn;
 
 	&:empty {
 		display: none;
