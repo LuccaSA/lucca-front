@@ -1,5 +1,5 @@
 import { ConnectionPositionPair } from '@angular/cdk/overlay';
-import { booleanAttribute, ChangeDetectionStrategy, Component, computed, contentChildren, effect, input, model, untracked, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, contentChildren, effect, input, model, untracked, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { PortalContent, PortalDirective } from '@lucca-front/ng/core';
 import { DividerComponent } from '@lucca-front/ng/divider';
