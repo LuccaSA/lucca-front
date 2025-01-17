@@ -1,4 +1,4 @@
-import { Component, ElementRef, computed, inject, viewChild } from '@angular/core';
+import { Component, computed, ElementRef, inject, viewChild } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { getIntl } from '@lucca-front/ng/core';
 import { ɵLuOptionOutletDirective } from '@lucca-front/ng/core-select';
@@ -30,7 +30,7 @@ import { MULTI_SELECT_WITH_SELECT_ALL_CONTEXT } from './select-all.models';
 							}
 						</div>
 					} @else {
-						<lu-numeric-badge [value]="displayerCount()" />
+						<lu-numeric-badge class="multipleSelect-displayer-numericBadge" [value]="displayerCount()" />
 						<span class="multipleSelect-displayer-label"> {{ displayerLabel() }} </span>
 					}
 				</div>
