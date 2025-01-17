@@ -24,8 +24,6 @@ export class FilterPillsBarComponent {
 	addonBefore = input<PortalContent | null>(null);
 	addonAfter = input<PortalContent | null>(null);
 
-	toggleButton = input<boolean, boolean>(false, { transform: booleanAttribute });
-
 	popoverPositions: ConnectionPositionPair[] = [
 		new ConnectionPositionPair(
 			{ originX: 'start', originY: 'bottom' },

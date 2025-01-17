@@ -23,7 +23,7 @@ import {
 import { ControlValueAccessor } from '@angular/forms';
 import { getIntl, PortalContent } from '@lucca-front/ng/core';
 import { BehaviorSubject, defer, map, Observable, of, ReplaySubject, startWith, Subject, switchMap, take } from 'rxjs';
-import { FilterPillInputComponent } from '../../filter-pills/core';
+import { FilterPillInputComponent } from '@lucca-front/ng/filter-pills';
 import { LuOptionGrouping, LuSimpleSelectDefaultOptionComponent } from '../option';
 import { LuSelectPanelRef } from '../panel';
 import { CoreSelectAddOptionStrategy, LuOptionComparer, LuOptionContext, SELECT_LABEL, SELECT_LABEL_ID } from '../select.model';

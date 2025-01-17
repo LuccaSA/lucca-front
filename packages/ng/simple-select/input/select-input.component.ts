@@ -5,7 +5,7 @@ import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/f
 import { getIntl } from '@lucca-front/ng/core';
 import { ALuSelectInputComponent, LuSelectPanelRef, provideLuSelectLabelsAndIds, ɵLuOptionOutletDirective } from '@lucca-front/ng/core-select';
 import { InputDirective } from '@lucca-front/ng/form-field';
-import { FILTER_PILL_INPUT_COMPONENT, FilterPillDisplayerDirective } from '../../filter-pills/core';
+import { FILTER_PILL_INPUT_COMPONENT, FilterPillDisplayerDirective } from '@lucca-front/ng/filter-pills';
 import { LU_SIMPLE_SELECT_TRANSLATIONS } from '../select.translate';
 import { LuSimpleSelectPanelRefFactory } from './panel-ref.factory';
 

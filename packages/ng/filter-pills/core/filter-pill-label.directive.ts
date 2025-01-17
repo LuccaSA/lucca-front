@@ -13,12 +13,14 @@ interface FilterPillLabelContext {
 	standalone: true,
 })
 export class FilterPillLabelDirective {
-	#filterPillComponentRef = inject(FilterPillComponent);
+	#filterPillComponentRef = inject(FilterPillComponent, { optional: true });
 
 	#templateRef = inject(TemplateRef);
 
 	constructor() {
-		this.#filterPillComponentRef.customLabelTpl.set(this.#templateRef);
+		if (this.#filterPillComponentRef) {
+			this.#filterPillComponentRef.customLabelTpl.set(this.#templateRef);
+		}
 	}
 
 	public static ngTemplateContextGuard(_dir: FilterPillLabelDirective, ctx: unknown): ctx is FilterPillLabelContext {

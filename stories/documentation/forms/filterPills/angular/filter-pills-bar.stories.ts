@@ -54,7 +54,7 @@ export default {
 
 				<hr class="divider pr-u-marginBlock400" />
 
-				<lu-filter-pills-bar ${generateInputs(args, argTypes)} [(pillsState)]="barState2" [addonBefore]="beforeTpl" [addonAfter]="afterTpl">
+				<lu-filter-pills-bar [(pillsState)]="barState2" [addonBefore]="beforeTpl" [addonAfter]="afterTpl">
 					<ng-template #beforeTpl>
 						<ul class="segmentedControl filterPillBar-segmentedControl" role="presentation">
 							<li class="segmentedControl-item">
@@ -105,7 +105,5 @@ export default {
 } as Meta;
 
 export const Basic: StoryObj<FilterPillsBarComponent> = {
-	args: {
-		toggleButton: false,
-	},
+	args: {},
 };

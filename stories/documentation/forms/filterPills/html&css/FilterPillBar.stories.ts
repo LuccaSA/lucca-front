@@ -9,7 +9,7 @@ import { PopoverDirective } from '@lucca-front/ng/popover2';
 import { ScrollBoxComponent } from '@lucca-front/ng/scrollBox';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 import { Meta, moduleMetadata, StoryFn } from '@storybook/angular';
-import { DividerComponent } from 'dist/ng/divider';
+import { DividerComponent } from '@lucca-front/ng/divider';
 import { StoryModelDisplayComponent } from 'stories/helpers/story-model-display.component';
 
 interface FilterPillBarBasicStory {
