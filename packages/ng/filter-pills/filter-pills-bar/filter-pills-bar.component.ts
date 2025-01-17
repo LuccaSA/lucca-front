@@ -49,24 +49,28 @@ export class FilterPillsBarComponent {
 
 	pills = contentChildren(FilterPillComponent, { descendants: true });
 
+	optionalPills = computed(() => this.pills().filter((pill) => pill.optional()));
+
 	pillsState = model<Record<string, boolean>>({});
 
 	pillsByName = computed<Record<string, FilterPillComponent>>(() =>
-		this.pills().reduce(
-			(acc, pill) => ({
+		this.optionalPills().reduce((acc, pill) => {
+			if (!pill.name()) {
+				throw new Error(`Optional FilterPillComponent must have a name but component with label "${pill.label()}" does not have one.`);
+			}
+			return {
 				...acc,
 				[pill.name()]: pill,
-			}),
-			{},
-		),
+			};
+		}, {}),
 	);
 
 	constructor() {
 		effect(() => {
 			const state = untracked(this.pillsState);
-			this.pills().forEach((pill) => {
+			this.optionalPills().forEach((pill) => {
 				if (state[pill.name()] === undefined) {
-					state[pill.name()] = true;
+					state[pill.name()] = false;
 				}
 			});
 			this.pillsState.set(state);

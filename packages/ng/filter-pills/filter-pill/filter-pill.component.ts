@@ -1,6 +1,7 @@
 import { ConnectionPositionPair } from '@angular/cdk/overlay';
 import { NgTemplateOutlet } from '@angular/common';
 import {
+	booleanAttribute,
 	ChangeDetectionStrategy,
 	Component,
 	computed,
@@ -67,7 +68,9 @@ export class FilterPillComponent {
 
 	customLabelTpl = signal<TemplateRef<unknown> | null>(null);
 
-	name = input.required<string>();
+	name = input<string>();
+
+	optional = input<boolean, boolean>(false, { transform: booleanAttribute });
 
 	@HostBinding('class.is-hidden')
 	hidden = false;
