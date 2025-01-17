@@ -40,13 +40,16 @@ export default {
 
 			template: `
 				<lu-filter-pills-bar [(pillsState)]="barState">
+
 					<lu-filter-pill label="Légumes" name="vegetables">
 						<lu-simple-select [(ngModel)]="example"	[options]="legumes | filterLegumes:clue" (clueChange)="clue = $event" />
 					</lu-filter-pill>
+
 					<lu-filter-pill label="Lorem ipsum" name="loremIpsum">
 						<lu-checkbox-input [ngModel]="false"></lu-checkbox-input>
 					</lu-filter-pill>
-					<button type="submit" size="S" luButton="text" palette="product">Appliquer les filtres</button>
+
+
 				</lu-filter-pills-bar>
 
 				<hr class="divider pr-u-marginBlock400" />

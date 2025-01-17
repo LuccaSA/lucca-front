@@ -490,6 +490,6 @@ export class DateRangeInputComponent extends AbstractDateComponent implements Co
 	}
 
 	getDefaultFilterPillIcon(): LuccaIcon {
-		return 'calendarDate';
+		return 'calendarPlanning';
 	}
 }
