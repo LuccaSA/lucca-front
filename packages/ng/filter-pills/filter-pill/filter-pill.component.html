@@ -1,36 +1,42 @@
-@if (layout() === 'default') {
-<label [attr.for]="id" class="filterPill-label">
-	<ng-container
-		*ngTemplateOutlet="labelTpl(); context:{label: label(), isEmpty: inputIsEmpty(), placeholder: placeholder(), colon: colonDisplay()}"
-	></ng-container>
-</label>
-<button
-	[attr.id]="id"
-	class="filterPill-combobox"
-	type="button"
-	role="combobox"
-	[luPopover2]="pillContent"
-	[luPopoverNoCloseButton]="true"
-	[customPositions]="popoverPositions"
-	[luPopoverAnchor]="elementRef"
-	#popoverRef="luPopover2"
-	#comboboxRef
-	[attr.aria-expanded]="popoverRef.opened()"
->
-	<ng-container *ngTemplateOutlet="pillTpl; context:{label: label(), isEmpty: inputIsEmpty()}"></ng-container>
-	@if (inputIsEmpty()) { {{ placeholder() }} }
-</button>
-<!-- TODO i18n alternative -->
-<button type="button" class="filterPill-clear clear" (click)="$event.stopPropagation(); clear(); comboboxRef.focus()">
-	<span class="u-mask">Vider ce champ</span>
-</button>
-<button type="button" aria-hidden="true" tabindex="-1" class="filterPill-toggle" (click)="popoverRef.openPopover(true)">
-	<lu-icon [icon]="displayedIcon()" size="S"></lu-icon>
-</button>
-} @else {
-<ng-container
-	*ngTemplateOutlet="labelTpl(); context:{label: label(), isEmpty: inputIsEmpty(), placeholder: placeholder(), colon: colonDisplay()}"
-></ng-container>
+@if (!isHidden()) {
+	@if (layout() === 'default') {
+		<label [attr.for]="id" class="filterPill-label">
+			<ng-container
+				*ngTemplateOutlet="labelTpl(); context:{label: label(), isEmpty: inputIsEmpty(), placeholder: placeholder(), colon: colonDisplay()}"
+			></ng-container>
+		</label>
+		<button
+			[attr.id]="id"
+			class="filterPill-combobox"
+			type="button"
+			role="combobox"
+			[luPopover2]="pillContent"
+			[luPopoverNoCloseButton]="true"
+			[customPositions]="popoverPositions"
+			[luPopoverAnchor]="elementRef"
+			#popoverRef="luPopover2"
+			#comboboxRef
+			[attr.aria-expanded]="popoverRef.opened()"
+		>
+			<ng-container *ngTemplateOutlet="pillTpl; context:{label: label(), isEmpty: inputIsEmpty()}"></ng-container>
+			@if (inputIsEmpty()) {
+				{{ placeholder() }}
+			}
+		</button>
+		<!-- TODO i18n alternative -->
+		<button type="button" class="filterPill-clear clear"
+		        (click)="$event.stopPropagation(); clear(); comboboxRef.focus()">
+			<span class="u-mask">Vider ce champ</span>
+		</button>
+		<button type="button" aria-hidden="true" tabindex="-1" class="filterPill-toggle"
+		        (click)="popoverRef.openPopover(true)">
+			<lu-icon [icon]="displayedIcon()" size="S"></lu-icon>
+		</button>
+	} @else {
+		<ng-container
+			*ngTemplateOutlet="labelTpl(); context:{label: label(), isEmpty: inputIsEmpty(), placeholder: placeholder(), colon: colonDisplay()}"
+		></ng-container>
+	}
 }
 <ng-template #pillContent>
 	<div class="filterPill_popover-content popover-contentOptional">

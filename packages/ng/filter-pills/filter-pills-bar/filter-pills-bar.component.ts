@@ -1,5 +1,5 @@
 import { ConnectionPositionPair } from '@angular/cdk/overlay';
-import { ChangeDetectionStrategy, Component, computed, contentChildren, effect, input, model, untracked, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, contentChildren, input, signal, TemplateRef, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { PortalContent, PortalDirective } from '@lucca-front/ng/core';
 import { DividerComponent } from '@lucca-front/ng/divider';
@@ -8,10 +8,11 @@ import { PopoverDirective } from '@lucca-front/ng/popover2';
 import { ScrollBoxComponent } from '@lucca-front/ng/scrollBox';
 import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
 import { FilterPillComponent } from '../filter-pill/filter-pill.component';
+import { NgTemplateOutlet } from '@angular/common';
 
 @Component({
 	selector: 'lu-filter-pills-bar',
-	imports: [IconComponent, LuTooltipTriggerDirective, PopoverDirective, DividerComponent, ScrollBoxComponent, PortalDirective, FormsModule],
+	imports: [IconComponent, LuTooltipTriggerDirective, PopoverDirective, DividerComponent, ScrollBoxComponent, FormsModule, NgTemplateOutlet],
 	templateUrl: './filter-pills-bar.component.html',
 	styleUrl: './filter-pills-bar.component.scss',
 	encapsulation: ViewEncapsulation.None,
@@ -21,8 +22,8 @@ import { FilterPillComponent } from '../filter-pill/filter-pill.component';
 	},
 })
 export class FilterPillsBarComponent {
-	addonBefore = input<PortalContent | null>(null);
-	addonAfter = input<PortalContent | null>(null);
+	addonBefore = signal<TemplateRef<unknown> | null>(null);
+	addonAfter = signal<TemplateRef<unknown> | null>(null);
 
 	popoverPositions: ConnectionPositionPair[] = [
 		new ConnectionPositionPair(
@@ -48,45 +49,4 @@ export class FilterPillsBarComponent {
 	pills = contentChildren(FilterPillComponent, { descendants: true });
 
 	optionalPills = computed(() => this.pills().filter((pill) => pill.optional()));
-
-	pillsState = model<Record<string, boolean>>({});
-
-	pillsByName = computed<Record<string, FilterPillComponent>>(() =>
-		this.optionalPills().reduce((acc, pill) => {
-			if (!pill.name()) {
-				throw new Error(`Optional FilterPillComponent must have a name but component with label "${pill.label()}" does not have one.`);
-			}
-			return {
-				...acc,
-				[pill.name()]: pill,
-			};
-		}, {}),
-	);
-
-	constructor() {
-		effect(() => {
-			const state = untracked(this.pillsState);
-			this.optionalPills().forEach((pill) => {
-				if (state[pill.name()] === undefined) {
-					state[pill.name()] = false;
-				}
-			});
-			this.pillsState.set(state);
-		});
-
-		effect(() => {
-			const pillsByName = untracked(this.pillsByName);
-			Object.entries(this.pillsState()).forEach(([name, enabled]) => {
-				pillsByName[name].hidden = !enabled;
-			});
-		});
-	}
-
-	togglePill(name: string) {
-		const state = this.pillsState();
-		this.pillsState.set({
-			...state,
-			[name]: !state[name],
-		});
-	}
 }

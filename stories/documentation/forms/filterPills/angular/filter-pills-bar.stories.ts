@@ -2,11 +2,10 @@ import { allLegumes, FilterLegumesPipe } from '@/stories/forms/select/select.uti
 import { FormsModule } from '@angular/forms';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { DateInputComponent, DateRangeInputComponent } from '@lucca-front/ng/date2';
-import { FilterPillComponent, FilterPillsBarComponent } from '@lucca-front/ng/filter-pills';
+import { FilterPillAddonAfterDirective, FilterPillAddonBeforeDirective, FilterPillComponent, FilterPillsBarComponent } from '@lucca-front/ng/filter-pills';
 import { CheckboxInputComponent } from '@lucca-front/ng/forms';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { generateInputs } from 'stories/helpers/stories';
 import { StoryModelDisplayComponent } from '../../../../helpers/story-model-display.component';
 
 export default {
@@ -24,6 +23,8 @@ export default {
 				ButtonComponent,
 				LuSimpleSelectInputComponent,
 				FilterLegumesPipe,
+				FilterPillAddonAfterDirective,
+				FilterPillAddonBeforeDirective,
 			],
 		}),
 	],
@@ -34,18 +35,16 @@ export default {
 				example2: null,
 				examplePeriod: null,
 				legumes: allLegumes,
-				barState: {},
-				barState2: { includeFormerEmployees: false },
 			},
 
 			template: `
-				<lu-filter-pills-bar [(pillsState)]="barState">
+				<lu-filter-pills-bar>
 
-					<lu-filter-pill label="Légumes" name="vegetables">
+					<lu-filter-pill label="Légumes">
 						<lu-simple-select [(ngModel)]="example"	[options]="legumes | filterLegumes:clue" (clueChange)="clue = $event" />
 					</lu-filter-pill>
 
-					<lu-filter-pill label="Lorem ipsum" name="loremIpsum">
+					<lu-filter-pill label="Lorem ipsum">
 						<lu-checkbox-input [ngModel]="false"></lu-checkbox-input>
 					</lu-filter-pill>
 
@@ -54,9 +53,8 @@ export default {
 
 				<hr class="divider pr-u-marginBlock400" />
 
-				<lu-filter-pills-bar [(pillsState)]="barState2" [addonBefore]="beforeTpl" [addonAfter]="afterTpl">
-					<ng-template #beforeTpl>
-						<ul class="segmentedControl filterPillBar-segmentedControl" role="presentation">
+				<lu-filter-pills-bar>
+						<ul *luFilterPillAddonBefore class="segmentedControl filterPillBar-segmentedControl" role="presentation">
 							<li class="segmentedControl-item">
 								<input type="radio" class="segmentedControl-item-input" name="tab" id="tab1" checked="checked" />
 								<label for="tab1" class="segmentedControl-item-action">
@@ -82,7 +80,6 @@ export default {
 								</label>
 							</li>
 						</ul>
-					</ng-template>
 
 					<lu-filter-pill label="Inclure les collaborateurs partis" optional name="includeFormerEmployees"><lu-checkbox-input [ngModel]="false"></lu-checkbox-input></lu-filter-pill>
 					<lu-filter-pill label="Date de début">
@@ -91,14 +88,8 @@ export default {
 						<lu-date-range-input [(ngModel)]="examplePeriod"/>
 					</lu-filter-pill>
 
-					<ng-template #afterTpl>
-						<button type="submit" size="S" luButton="outlined">Exporter</button>
-					</ng-template>
+					<button  *luFilterPillAddonAfter type="submit" size="S" luButton="outlined">Exporter</button>
 				</lu-filter-pills-bar>
-
-				<pr-story-model-display>
-					{{barState2 | json}}
-				</pr-story-model-display>
 			`,
 		};
 	},

@@ -14,6 +14,7 @@ import {
 	inject,
 	input,
 	LOCALE_ID,
+	model,
 	signal,
 	TemplateRef,
 	viewChild,
@@ -47,7 +48,6 @@ let nextId = 0;
 	},
 })
 export class FilterPillComponent {
-	// TODO Avoir un CVA sur la barre de filtres
 	#locale = inject(LOCALE_ID);
 
 	elementRef = inject(ElementRef);
@@ -73,7 +73,13 @@ export class FilterPillComponent {
 	optional = input<boolean, boolean>(false, { transform: booleanAttribute });
 
 	@HostBinding('class.is-hidden')
-	hidden = false;
+	get isHiddenClass() {
+		return this.isHidden();
+	}
+
+	displayed = model(false);
+
+	protected isHidden = computed(() => this.optional() && !this.displayed());
 
 	popoverPositions: ConnectionPositionPair[] = [
 		new ConnectionPositionPair(
