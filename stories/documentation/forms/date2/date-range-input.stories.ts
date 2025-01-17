@@ -93,10 +93,7 @@ export const WithShortcuts: StoryObj<DateRangeInputComponent> = {
 				<lu-date-range-input [(ngModel)]="selected" [min]="min" [max]="max" [shortcuts]="shortcuts" ${generateInputs(flags, argTypes)}></lu-date-range-input>
 			</lu-form-field>
 
-			<pr-story-model-display>{{selected | json}}</pr-story-model-display>
-
-			<h3>Shortcuts:</h3>
-			<pre>{{shortcutsStr}}</pre>`),
+			<pr-story-model-display>{{selected | json}}</pr-story-model-display>`),
 		};
 	},
 	args: {
