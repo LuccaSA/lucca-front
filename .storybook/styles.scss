@@ -24,7 +24,7 @@
 	.deprecated {
 		&,
 		& + code {
-			opacity: 0.25;
+			opacity: 0.25; //
 
 			.showDeprecated:not(:checked) ~ .icons & {
 				display: none;
