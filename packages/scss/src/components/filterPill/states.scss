@@ -20,7 +20,7 @@
 @mixin hover {
 	--components-filterPill-borderColor: var(--palettes-product-400);
 	--components-filterPill-checkbox-borderColor: var(--palettes-neutral-600);
-	--components-filterPill-shadow: 0 0 0 1px var(--components-filterPill-borderColor), var(--pr-t-elevation-shadow-hover);
+	--components-filterPill-shadow: 0 0 0 1px var(--components-filterPill-borderColor), var(--pr-t-elevation-shadow-raised);
 }
 
 @mixin active {
