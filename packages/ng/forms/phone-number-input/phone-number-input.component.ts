@@ -68,7 +68,7 @@ export class PhoneNumberInputComponent implements ControlValueAccessor, Validato
 
 	@Input() autocomplete?: 'off' | 'tel';
 
-	autoPlaceholder = input<boolean>(true);
+	noAutoPlaceholder = input<boolean>(false);
 
 	#onChange?: (value: E164Number) => void;
 
@@ -120,7 +120,7 @@ export class PhoneNumberInputComponent implements ControlValueAccessor, Validato
 	countryCode = computed(() => this.countryCodeSelected() ?? this.defaultCountryCode());
 
 	placeholder = computed(() => {
-		const exampleNumber = this.autoPlaceholder() !== false ? getExampleNumber(this.countryCode(), examples) : undefined;
+		const exampleNumber = this.noAutoPlaceholder() === false ? getExampleNumber(this.countryCode(), examples) : undefined;
 		return exampleNumber?.formatNational() ?? '';
 	});
 
