@@ -109,22 +109,27 @@
 
 @mixin width20 {
 	width: 10rem;
+	max-width: 100%;
 }
 
 @mixin width30 {
 	width: 15rem;
+	max-width: 100%;
 }
 
 @mixin width40 {
 	width: 20rem;
+	max-width: 100%;
 }
 
 @mixin width50 {
 	width: 25rem;
+	max-width: 100%;
 }
 
 @mixin width60 {
 	width: 30rem;
+	max-width: 100%;
 }
 
 @mixin withArrow {
