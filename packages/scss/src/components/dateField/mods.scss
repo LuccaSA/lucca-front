@@ -25,6 +25,7 @@
 @mixin filterPill {
 	--components-dateField-maxWidth: none;
 
+	.textField-input-affix-clear,
 	.textField-input-affix-toggle {
 		display: none;
 	}
