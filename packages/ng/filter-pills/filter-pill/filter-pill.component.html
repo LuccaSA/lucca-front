@@ -17,9 +17,9 @@
 			#popoverRef="luPopover2"
 			#comboboxRef
 			[attr.aria-expanded]="popoverRef.opened()"
-			(keydown.arrowDown)="$event.preventDefault();popoverRef.openPopover(true)"
-			(keydown.arrowUp)="$event.preventDefault();popoverRef.openPopover(true)"
-			(keydown.enter)="$event.preventDefault();popoverRef.openPopover(true)"
+			(keyup.arrowDown)="$event.preventDefault();popoverRef.openPopover(true)"
+			(keyup.arrowUp)="$event.preventDefault();popoverRef.openPopover(true)"
+			(keyup.enter)="$event.preventDefault();popoverRef.openPopover(true)"
 		>
 			<ng-container *ngTemplateOutlet="pillTpl; context:{label: label(), isEmpty: inputIsEmpty()}"></ng-container>
 			@if (inputIsEmpty()) {
