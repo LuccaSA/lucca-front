@@ -425,7 +425,9 @@ export class DateRangeInputComponent extends AbstractDateComponent implements Co
 
 	arrowDown(popoverRef: PopoverDirective, fieldToFocus: 'start' | 'end'): void {
 		this.openPopover(popoverRef, fieldToFocus, true);
-		if (this.editedField() === -1) {
+		if (this.isFilterPill) {
+			this.focusedCalendar()?.focusTabbableDate();
+		} else if (this.editedField() === -1) {
 			this.editedField.set(fieldToFocus === 'start' ? 0 : 1);
 		}
 	}
