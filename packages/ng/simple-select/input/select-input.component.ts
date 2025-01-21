@@ -4,8 +4,8 @@ import { ChangeDetectionStrategy, Component, forwardRef, HostBinding, inject, In
 import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { getIntl } from '@lucca-front/ng/core';
 import { ALuSelectInputComponent, LuSelectPanelRef, provideLuSelectLabelsAndIds, ɵLuOptionOutletDirective } from '@lucca-front/ng/core-select';
-import { InputDirective } from '@lucca-front/ng/form-field';
 import { FILTER_PILL_INPUT_COMPONENT, FilterPillDisplayerDirective } from '@lucca-front/ng/filter-pills';
+import { InputDirective } from '@lucca-front/ng/form-field';
 import { LU_SIMPLE_SELECT_TRANSLATIONS } from '../select.translate';
 import { LuSimpleSelectPanelRefFactory } from './panel-ref.factory';
 
@@ -13,6 +13,7 @@ import { LuSimpleSelectPanelRefFactory } from './panel-ref.factory';
 	selector: 'lu-simple-select',
 	templateUrl: './select-input.component.html',
 	styleUrls: ['./select-input.component.scss'],
+	host: { class: 'simpleSelect' },
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	standalone: true,
 	imports: [AsyncPipe, ɵLuOptionOutletDirective, NgIf, OverlayModule, FormsModule, InputDirective, FilterPillDisplayerDirective, NgTemplateOutlet],
