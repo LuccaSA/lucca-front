@@ -1,0 +1,8 @@
+@mixin vars {
+	--components-dropdown-min-width: 10rem;
+	--components-dropdown-max-width: 30rem;
+	--components-dropdown-max-height: 60vh;
+	--components-dropdown-option-actionColor: currentColor;
+	--components-dropdown-option-actionBackground: transparent;
+	--components-dropdown-option-actionEvents: auto;
+}
