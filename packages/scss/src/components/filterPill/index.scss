@@ -5,24 +5,22 @@
 	@include vars;
 	@include component;
 
-	&:hover {
-		@include hover;
+	&:not(:has(.filterPill-combobox:disabled)) {
+		&:hover {
+			@include hover;
+		}
+
+		&:active {
+			@include active;
+		}
+
+		&:has(.filterPill-combobox:focus-visible, .filterPill-checkbox-input:focus-visible, .filterPill-label:focus-visible) {
+			@include focusVisible;
+		}
 	}
 
-	&:active {
-		@include active;
-	}
-
-	&:disabled {
+	&:has(.filterPill-combobox:disabled) {
 		@include disabled;
-	}
-
-	&:has(.filterPill-combobox:focus-visible, .filterPill-checkbox-input:focus-visible, .filterPill-label:focus-visible) {
-		@include focusVisible;
-	}
-
-	&.is-hidden {
-		@include hidden;
 	}
 
 	&:not(button) {
@@ -39,18 +37,24 @@
 				@include opened;
 			}
 
-			&:not(.is-empty) {
-				@include notEmpty;
+			&:not(:has(.filterPill-combobox:disabled)) {
+				&:not(.is-empty) {
+					@include notEmpty;
 
-				&:has(.filterPill-label:hover) {
-					@include notEmptyHover;
-				}
+					&:has(.filterPill-label:hover) {
+						@include notEmptyHover;
+					}
 
-				&:has(.filterPill-label:active) {
-					@include notEmptyActive;
+					&:has(.filterPill-label:active) {
+						@include notEmptyActive;
+					}
 				}
 			}
 		}
+	}
+
+	&.is-hidden {
+		@include hidden;
 	}
 
 	&:has(.filterPill-checkbox-input) {

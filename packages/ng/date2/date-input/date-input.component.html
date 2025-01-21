@@ -18,7 +18,6 @@
 			(click)="popoverRef.openPopover(true, true)"
 			(keyup.arrowDown)="arrowDown(popoverRef)"
 			(keyup.escape)="popoverRef.close()"
-			(keyup.enter)="isFilterPill?filterPillPopoverCloseFn():null"
 			[disabled]="disabled"
 			[attr.placeholder]="placeholder() || dateFormatLocalized()"
 			[attr.autocomplete]="autocomplete"

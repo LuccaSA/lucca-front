@@ -6,6 +6,7 @@ interface SelectBasicStory {
 	label: string;
 	value: string;
 	expanded: boolean;
+	disabled: boolean;
 }
 
 export default {
@@ -25,6 +26,9 @@ export default {
 		expanded: {
 			control: 'boolean',
 		},
+		disabled: {
+			control: 'boolean',
+		},
 	},
 } as Meta;
 
@@ -32,9 +36,10 @@ function getTemplate(args: SelectBasicStory): string {
 	const classAttr = args.value !== '' ? `class="filterPill"` : `class="filterPill is-empty"`;
 	const tooltip = args.value !== '' ? `luTooltip="${args.value}"` : ``;
 	const labelDisplayed = args.value ? args.label + ': ' : args.label;
+	const disabled = args.disabled ? 'disabled="disabled"' : null;
 	return `<div ${classAttr}>
 	<label for="input1" class="filterPill-label" luTooltip="${args.label}" luTooltipWhenEllipsis="true">${labelDisplayed}</label>
-	<button class="filterPill-combobox" type="button" id="input1" role="combobox" aria-expanded="${args.expanded}" ${tooltip} luTooltipWhenEllipsis="true">
+	<button ${disabled} class="filterPill-combobox" type="button" id="input1" role="combobox" aria-expanded="${args.expanded}" ${tooltip} luTooltipWhenEllipsis="true">
 		${args.value ? args.value : 'Aucune valeur sélectionnée'}
 	</button>
 	<button type="button" class="filterPill-clear clear"><span class="u-mask">Vider ce champ</span></button>
@@ -54,4 +59,5 @@ Basic.args = {
 	label: 'Lorem ipsum',
 	value: 'Lorem ipsum',
 	expanded: false,
+	disabled: true,
 };

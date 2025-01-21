@@ -1,14 +1,13 @@
 import { ConnectionPositionPair } from '@angular/cdk/overlay';
-import { ChangeDetectionStrategy, Component, computed, contentChildren, input, signal, TemplateRef, ViewEncapsulation } from '@angular/core';
+import { NgTemplateOutlet } from '@angular/common';
+import { ChangeDetectionStrategy, Component, computed, contentChildren, signal, TemplateRef, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { PortalContent, PortalDirective } from '@lucca-front/ng/core';
 import { DividerComponent } from '@lucca-front/ng/divider';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { PopoverDirective } from '@lucca-front/ng/popover2';
 import { ScrollBoxComponent } from '@lucca-front/ng/scrollBox';
 import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
 import { FilterPillComponent } from '../filter-pill/filter-pill.component';
-import { NgTemplateOutlet } from '@angular/common';
 
 @Component({
 	selector: 'lu-filter-pills-bar',

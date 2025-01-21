@@ -3,7 +3,8 @@ import { FormsModule } from '@angular/forms';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { DateInputComponent, DateRangeInputComponent } from '@lucca-front/ng/date2';
 import { FilterPillAddonAfterDirective, FilterPillAddonBeforeDirective, FilterPillComponent, FilterPillsBarComponent } from '@lucca-front/ng/filter-pills';
-import { CheckboxInputComponent } from '@lucca-front/ng/forms';
+import { FormFieldComponent } from '@lucca-front/ng/form-field';
+import { CheckboxInputComponent, TextInputComponent } from '@lucca-front/ng/forms';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { StoryModelDisplayComponent } from '../../../../helpers/story-model-display.component';
@@ -25,6 +26,8 @@ export default {
 				FilterLegumesPipe,
 				FilterPillAddonAfterDirective,
 				FilterPillAddonBeforeDirective,
+				FormFieldComponent,
+				TextInputComponent,
 			],
 		}),
 	],
@@ -48,6 +51,9 @@ export default {
 						<lu-checkbox-input [ngModel]="false"></lu-checkbox-input>
 					</lu-filter-pill>
 
+					<lu-form-field label="Test" hiddenLabel size="S" style="width: 15rem; flex-shrink: 0">
+						<lu-text-input [ngModel]="example10" [ngModelOptions]="{standalone: true}" hasSearchIcon hasClearer />
+					</lu-form-field>
 
 				</lu-filter-pills-bar>
 

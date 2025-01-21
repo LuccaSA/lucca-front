@@ -91,7 +91,9 @@
 			}
 
 			&:active {
-				--components-segmentedControl-background: var(--palettes-neutral-25);
+				--components-segmentedControl-background: var(--palettes-neutral-0);
+				--components-segmentedControl-shadow: 0 0 0 var(--commons-divider-width) var(--palettes-product-500),
+					var(--pr-t-elevation-shadow-raised);
 			}
 		}
 

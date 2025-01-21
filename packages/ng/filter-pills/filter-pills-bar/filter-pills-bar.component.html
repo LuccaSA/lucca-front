@@ -3,30 +3,29 @@
 
 	<div class="filterPillBar-scrollBox-group">
 		@if (addonBefore()) {
-			<ng-container *ngTemplateOutlet="addonBefore()"></ng-container>
+		<ng-container *ngTemplateOutlet="addonBefore()"></ng-container>
 
-			<lu-divider class="filterPillBar-divider" />
-		}
-		@if (optionalPills().length > 0) {
-			<button
-				class="filterPill"
-				type="button"
-				luTooltip="Filtres supplémentaires"
-				luTooltipOnlyForDisplay
-				[luPopover2]="contentOptionsTpl"
-				[customPositions]="popoverPositions"
-			>
-				<lu-icon class="filterPill-icon" icon="filtersDescending" alt="Filtres supplémentaires"></lu-icon>
-			</button>
+		<lu-divider class="filterPillBar-divider" />
+		} @if (optionalPills().length > 0) {
+		<button
+			class="filterPill"
+			type="button"
+			luTooltip="Filtres supplémentaires"
+			luTooltipOnlyForDisplay
+			[luPopover2]="contentOptionsTpl"
+			[customPositions]="popoverPositions"
+		>
+			<lu-icon class="filterPill-icon" icon="filtersDescending" alt="Filtres supplémentaires"></lu-icon>
+		</button>
 		}
 
 		<ng-content></ng-content>
 	</div>
 
 	@if (addonAfter()) {
-		<div class="filterPillBar-scrollBox-export">
-			<ng-container *ngTemplateOutlet="addonAfter()"></ng-container>
-		</div>
+	<div class="filterPillBar-scrollBox-export">
+		<ng-container *ngTemplateOutlet="addonAfter()"></ng-container>
+	</div>
 	}
 
 	<div class="filterPillBar-scrollBox-last"></div>
@@ -35,9 +34,9 @@
 <ng-template #contentOptionsTpl>
 	<form class="filterPill_popover-content popover-contentOptional">
 		@for (pill of optionalPills(); track pill.name(); let index = $index) {
-			<div class="form-field mod-selectOption filterPill_popover-content-formField">
-				<label class="formLabel" [attr.for]="'filterPillOptions' + index">{{ pill.label() }}</label>
-				<span class="checkboxField">
+		<div class="form-field mod-selectOption filterPill_popover-content-formField">
+			<label class="formLabel" [attr.for]="'filterPillOptions' + index">{{ pill.label() }}</label>
+			<span class="checkboxField">
 				<input
 					type="checkbox"
 					class="checkboxField-input"
@@ -47,7 +46,7 @@
 				/>
 				<span class="checkboxField-icon" aria-hidden="true"><span class="checkboxField-icon-check"></span></span>
 			</span>
-			</div>
+		</div>
 		}
 	</form>
 </ng-template>

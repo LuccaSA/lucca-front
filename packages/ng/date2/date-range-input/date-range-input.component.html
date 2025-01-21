@@ -157,10 +157,11 @@
 <ng-container *ngTemplateOutlet="calendar"></ng-container>
 }
 
-<ng-container *luFilterPillDisplayer>
+<ng-container *luFilterPillDisplayer="let empty = isEmpty">
+	@if (!empty) {
 	<!-- TODO: trads -->
 	<span class="u-mask">Du</span>
 	{{ startLabel() }}
 	<lu-icon [icon]="'arrowRight'" size="XS" [alt]="'au'" />
-	{{ endLabel() }}
+	{{ endLabel() }} }
 </ng-container>
