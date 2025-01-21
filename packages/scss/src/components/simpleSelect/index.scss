@@ -1,6 +1,7 @@
 @use 'exports' as *;
 
-.simpleSelect {
+lu-simple-select:not(.simpleSelect),
+.simpleSelect:not(lu-simple-select) {
 	@include vars;
 	@include component;
 
@@ -20,6 +21,14 @@
 		}
 	}
 
+	&:has(.simpleSelect-input[aria-invalid='true']) {
+		@include invalid;
+	}
+
+	&:has(.simpleSelect-input:disabled) {
+		@include disabled;
+	}
+
 	&.is-searchFilled {
 		@include searchFilled;
 	}
@@ -32,16 +41,6 @@
 		}
 	}
 
-	&:has(.simpleSelect-input[aria-invalid='true']) {
-		@include invalid;
-	}
-
-	&:has(.simpleSelect-input:disabled) {
-		@include disabled;
-	}
-}
-
-lu-simple-select {
 	&.mod-filterPill {
 		@include filterPill;
 	}

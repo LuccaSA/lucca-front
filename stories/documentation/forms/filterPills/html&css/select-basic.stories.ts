@@ -59,5 +59,5 @@ Basic.args = {
 	label: 'Lorem ipsum',
 	value: 'Lorem ipsum',
 	expanded: false,
-	disabled: true,
+	disabled: false,
 };
