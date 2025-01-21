@@ -1,6 +1,5 @@
 @use 'exports' as *;
 
-lu-simple-select:not(.simpleSelect),
 .simpleSelect:not(lu-simple-select) {
 	@include vars;
 	@include component;
