@@ -48,12 +48,18 @@ export default {
 		autocomplete: {
 			type: 'string',
 		},
+		width: {
+			options: [null, 20, 30, 40, 50, 60],
+			control: {
+				type: 'select',
+			},
+		},
 	},
 } as Meta;
 
 export const Basic: StoryObj<TextInputComponent & { disabled: boolean; required: boolean } & FormFieldComponent> = {
 	render: (args, { argTypes }) => {
-		const { counter, label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, ...inputArgs } = args;
+		const { counter, label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, width, ...inputArgs } = args;
 		return {
 			template: cleanupTemplate(`<lu-form-field ${generateInputs(
 				{
@@ -64,6 +70,7 @@ export const Basic: StoryObj<TextInputComponent & { disabled: boolean; required:
 					inlineMessageState,
 					size,
 					counter,
+					width,
 				},
 				argTypes,
 			)}>
