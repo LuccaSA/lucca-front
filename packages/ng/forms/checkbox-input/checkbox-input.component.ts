@@ -1,10 +1,10 @@
 import { booleanAttribute, Component, forwardRef, inject, Input, signal, Signal, ViewEncapsulation } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
+import { FILTER_PILL_INPUT_COMPONENT, FilterPillInputComponent, FilterPillLabelDirective, FilterPillLayout } from '@lucca-front/ng/filter-pills';
 import { FORM_FIELD_INSTANCE, FormFieldComponent, InputDirective } from '@lucca-front/ng/form-field';
+import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
 import { injectNgControl } from '../inject-ng-control';
 import { NoopValueAccessorDirective } from '../noop-value-accessor.directive';
-import { FILTER_PILL_INPUT_COMPONENT, FilterPillInputComponent, FilterPillLabelDirective, FilterPillLayout } from '@lucca-front/ng/filter-pills';
-import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
 
 let nextId = 0;
 
@@ -63,7 +63,5 @@ export class CheckboxInputComponent implements FilterPillInputComponent {
 		this.isFilterPill = true;
 	}
 
-	onFilterPillClick(): void {
-		this.ngControl.control.patchValue(!this.ngControl.control.value);
-	}
+	onFilterPillClick(): void {}
 }
