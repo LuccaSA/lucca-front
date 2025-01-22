@@ -402,9 +402,9 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	}
 
 	enableFilterPillMode() {
-		this.bindInputToPanelRefEvents();
 		this.isPanelOpen$.next(true);
 		this.filterPillMode = true;
 		this._panelRef.closed.subscribe(this.afterCloseFn);
+		this.bindInputToPanelRefEvents();
 	}
 }
