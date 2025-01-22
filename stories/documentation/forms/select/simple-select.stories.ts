@@ -365,7 +365,6 @@ export const GroupBy = generateStory({
 	description: "Pour grouper les options, il suffit d'utiliser la directive `luOptionGroup`.",
 	template: `<lu-simple-select
 	#selectRef
-	class="textfield-input"
 	placeholder="Placeholder…"
 	[(ngModel)]="selectedLegume"
 	[options]="legumes | filterLegumes:clue | sortLegumes:(clue ? ['name', legumeColor] : [legumeColor])"
