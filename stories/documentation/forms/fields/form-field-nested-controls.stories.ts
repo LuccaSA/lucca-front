@@ -2,9 +2,7 @@ import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { FormFieldComponent, InputDirective } from '@lucca-front/ng/form-field';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { RadioGroupInputComponent } from '../../../../packages/ng/forms/radio-group-input/radio-group-input.component';
-import { RadioComponent } from '../../../../packages/ng/forms/radio-group-input/radio/radio.component';
-import { TextInputComponent } from '../../../../packages/ng/forms/text-input/text-input.component';
+import { RadioComponent, RadioGroupInputComponent, TextInputComponent } from '@lucca-front/ng/forms';
 import { JsonPipe } from '@angular/common';
 import { StoryModelDisplayComponent } from '../../../helpers/story-model-display.component';
 

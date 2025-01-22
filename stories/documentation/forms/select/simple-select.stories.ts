@@ -11,7 +11,7 @@ import { LuUserDisplayPipe } from '@lucca-front/ng/user';
 import { applicationConfig, Meta, moduleMetadata } from '@storybook/angular';
 import { HiddenArgType } from 'stories/helpers/common-arg-types';
 import { getStoryGenerator, useDocumentationStory } from 'stories/helpers/stories';
-import { provideCoreSelectCurrentUserId } from '../../../../packages/ng/core-select/user/me.provider';
+import { provideCoreSelectCurrentUserId } from '@lucca-front/ng/core-select/user';
 import { LuCoreSelectLegumesDirective } from './custom-api-example.component';
 import { LuCoreSelectCustomEstablishmentsDirective } from './custom-establishment-example.component';
 import { LuCoreSelectCustomUsersDirective } from './custom-user-example.component';
@@ -408,12 +408,24 @@ export const AddOption = generateStory({
 	storyPartial: {
 		argTypes: {
 			addOptionLabel: { control: { type: 'text' } },
-			addOptionStrategy: { control: { type: 'radio', options: ['never', 'always', 'if-empty-clue', 'if-not-empty-clue'] } },
+			addOptionStrategy: {
+				control: {
+					type: 'radio',
+					options: ['never', 'always', 'if-empty-clue', 'if-not-empty-clue'],
+				},
+			},
 		},
 		args: {
 			addOptionLabel: 'Ajouter un légume',
 			addOptionStrategy: 'always',
-			addLegume: (name: string, existing: ILegume[]) => [...existing, { name: name || 'Légume sans titre', index: existing.length, color: existing[0].color }],
+			addLegume: (name: string, existing: ILegume[]) => [
+				...existing,
+				{
+					name: name || 'Légume sans titre',
+					index: existing.length,
+					color: existing[0].color,
+				},
+			],
 		},
 	},
 });

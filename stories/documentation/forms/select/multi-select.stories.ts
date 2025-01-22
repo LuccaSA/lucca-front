@@ -23,7 +23,7 @@ import {
 } from '@lucca-front/ng/multi-select';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 import { applicationConfig, Meta, moduleMetadata } from '@storybook/angular';
-import { LuMultiSelection } from 'packages/ng/multi-select/select.model';
+import { LuMultiSelection } from '@lucca-front/ng/multi-select';
 import { interval, map } from 'rxjs';
 import { startWith } from 'rxjs/operators';
 import { HiddenArgType } from 'stories/helpers/common-arg-types';
