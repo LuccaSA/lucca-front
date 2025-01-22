@@ -43,12 +43,13 @@
 			(click)="ampmDisplay() === 'AM' ? anteMeridiemRef.focus() : postMeridiemRef.focus()"
 		>
 			<div class="timePicker-fieldset-meridiem-ante">
-				<label for="anteMeridiem">AM</label>
+				<label [attr.for]="'anteMeridiem-' + idSuffix">AM</label>
 				<input
 					#anteMeridiemRef
 					type="radio"
 					name="meridiem"
-					id="anteMeridiem"
+					[attr.id]="'anteMeridiem-' + idSuffix"
+					class="timePicker-fieldset-meridiem-ante-input"
 					value="AM"
 					[ngModel]="ampmDisplay()"
 					(ngModelChange)="switchMeridiem($event)"
@@ -58,12 +59,13 @@
 				/>
 			</div>
 			<div class="timePicker-fieldset-meridiem-post">
-				<label for="postMeridiem">PM</label>
+				<label [attr.for]="'postMeridiem-' + idSuffix">PM</label>
 				<input
 					#postMeridiemRef
 					type="radio"
 					name="meridiem"
-					id="postMeridiem"
+					[attr.id]="'postMeridiem-' + idSuffix"
+					class="timePicker-fieldset-meridiem-post-input"
 					value="PM"
 					[ngModel]="ampmDisplay()"
 					(ngModelChange)="switchMeridiem($event)"
