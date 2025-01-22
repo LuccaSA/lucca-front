@@ -56,6 +56,13 @@ export class LuSimpleSelectInputComponent<T> extends ALuSelectInputComponent<T, 
 		return this.panelRefFactory.buildPanelRef(this, this.overlayConfig);
 	}
 
+	inputSpace(event: Event): void {
+		if (this.clue.length === 0) {
+			event.preventDefault();
+			this.panelRef?.selectCurrentlyHighlightedValue();
+		}
+	}
+
 	protected hasValue(): boolean {
 		return this.value !== null && this.value !== undefined;
 	}
