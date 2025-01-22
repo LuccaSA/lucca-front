@@ -47,7 +47,7 @@
 				<input
 					#anteMeridiemRef
 					type="radio"
-					name="meridiem"
+					[attr.name]="'meridiem-' + idSuffix"
 					[attr.id]="'anteMeridiem-' + idSuffix"
 					class="timePicker-fieldset-meridiem-ante-input"
 					value="AM"
@@ -63,7 +63,7 @@
 				<input
 					#postMeridiemRef
 					type="radio"
-					name="meridiem"
+					[attr.name]="'meridiem-' + idSuffix"
 					[attr.id]="'postMeridiem-' + idSuffix"
 					class="timePicker-fieldset-meridiem-post-input"
 					value="PM"
