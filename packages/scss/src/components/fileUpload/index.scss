@@ -1,0 +1,22 @@
+@use 'exports' as *;
+
+.fileUpload {
+	@include vars;
+	@include component;
+
+	&:hover {
+		@include hover;
+	}
+
+	&.mod-S {
+		@include S;
+	}
+
+	&.mod-XS {
+		@include XS;
+	}
+
+	&.is-droppable {
+		@include droppable;
+	}
+}

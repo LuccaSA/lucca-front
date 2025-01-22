@@ -1,0 +1,19 @@
+@mixin S {
+	--components-fileUpload-button-display: none;
+	--components-fileUpload-padding: var(--pr-t-spacings-200);
+	--components-fileUpload-textAlign: left;
+	--components-fileUpload-flexDirection: row;
+	--components-fileUpload-instruction-alignItems: stretch;
+	--components-fileUpload-instruction-display: block;
+	--components-fileUpload-instruction-maxWidth: none;
+	--components-fileUpload-instruction-action-fontWeight: 600;
+	--components-fileUpload-instruction-action-color: var(--palettes-product-700);
+}
+
+@mixin XS {
+	--components-fileUpload-button-display: none;
+	--components-fileUpload-instruction-display: none;
+	--components-fileUpload-padding: var(--pr-t-spacings-200);
+	--components-fileUpload-flexDirection: row;
+	--components-fileUpload-display: inline-flex;
+}

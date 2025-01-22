@@ -1,0 +1,64 @@
+@use '@lucca-front/scss/src/commons/utils/namespace';
+
+@use '@lucca-front/scss/src/commons/utils/a11y';
+
+@mixin component($atRoot: namespace.$defaultAtRoot) {
+	position: relative;
+	border: 1px var(--components-fileUpload-borderStyle) var(--components-fileUpload-borderColor);
+	overflow: hidden;
+	border-radius: var(--commons-borderRadius-L);
+	background-color: var(--components-fileUpload-backgroundColor);
+	padding: var(--components-fileUpload-padding);
+	text-align: var(--components-fileUpload-textAlign);
+	display: var(--components-fileUpload-display);
+	flex-direction: var(--components-fileUpload-flexDirection);
+	align-items: flex-start;
+	gap: var(--pr-t-spacings-200);
+	color: var(--palettes-neutral-800);
+
+	&:has(.fileUpload-input:focus-visible) {
+		@include a11y.focusVisible;
+	}
+
+	@at-root ($atRoot) {
+		.fileUpload-status {
+			width: 3rem;
+			height: 3rem;
+		}
+
+		.fileUpload-input {
+			position: absolute;
+			inset: calc(var(--pr-t-spacings-400) * -1) 0 0;
+			opacity: 0.0001;
+			cursor: pointer;
+			z-index: 1;
+		}
+
+		.fileUpload-instruction {
+			display: var(--components-fileUpload-instruction-display);
+			flex-direction: column;
+			align-items: var(--components-fileUpload-instruction-alignItems);
+			max-width: var(--components-fileUpload-instruction-maxWidth);
+		}
+
+		.fileUpload-instruction-action {
+			display: block;
+		}
+
+		.fileUpload-instruction-action-click {
+			color: var(--components-fileUpload-instruction-action-color);
+			font-weight: var(--components-fileUpload-instruction-action-fontWeight);
+		}
+
+		.fileUpload-instruction-size,
+		.fileUpload-instruction-formats {
+			color: var(--palettes-neutral-600);
+			font-size: var(--sizes-S-fontSize);
+			line-height: var(--sizes-S-lineHeight);
+		}
+
+		.fileUpload-button {
+			display: var(--components-fileUpload-button-display);
+		}
+	}
+}
