@@ -48,7 +48,7 @@ const MODE_HIERARCHY: CalendarMode[] = ['day', 'month', 'year'];
 @Component({
 	selector: 'lu-calendar2',
 	standalone: true,
-	imports: [RepeatTimesDirective, ButtonComponent, Calendar2CellDirective, NgClass, CalloutComponent, LuTooltipTriggerDirective],
+	imports: [RepeatTimesDirective, Calendar2CellDirective, NgClass, LuTooltipTriggerDirective],
 	templateUrl: './calendar2.component.html',
 	styleUrl: './calendar2.component.scss',
 	encapsulation: ViewEncapsulation.None,
