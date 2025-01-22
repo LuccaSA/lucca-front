@@ -239,6 +239,13 @@ export class DateInputComponent extends AbstractDateComponent implements Control
 		}
 	}
 
+	spaceDown(event: Event, popoverRef: PopoverDirective) {
+		if (this.userTextInput()?.length === 0) {
+			event.preventDefault();
+			this.openPopover(popoverRef);
+		}
+	}
+
 	validate(control: AbstractControl<Date, Date>): ValidationErrors {
 		// null is not an error but means we'll skip everything else, we'll let the presence of a
 		// Validators.required (or not) decide if it's an error.
