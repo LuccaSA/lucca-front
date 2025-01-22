@@ -1,0 +1,9 @@
+@mixin droppable {
+	--components-fileUpload-borderStyle: solid;
+	--components-fileUpload-backgroundColor: var(--palettes-product-50);
+	--components-fileUpload-borderColor: var(--palettes-product-600);
+}
+
+@mixin hover {
+	--components-fileUpload-borderColor: var(--palettes-product-600);
+}

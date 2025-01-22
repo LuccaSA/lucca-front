@@ -1,0 +1,16 @@
+@mixin vars {
+	--components-fileUpload-button-display: block;
+	--components-fileUpload-padding: var(--pr-t-spacings-600) var(--pr-t-spacings-300);
+	--components-fileUpload-textAlign: center;
+	--components-fileUpload-flexDirection: column;
+	--components-fileUpload-instruction-display: flex;
+	--components-fileUpload-instruction-alignItems: center;
+	--components-fileUpload-width: auto;
+	--components-fileUpload-display: flex;
+	--components-fileUpload-instruction-maxWidth: 30rem;
+	--components-fileUpload-instruction-action-fontWeight: 400;
+	--components-fileUpload-instruction-action-color: inherit;
+	--components-fileUpload-borderColor: var(--palettes-neutral-300);
+	--components-fileUpload-borderStyle: dashed;
+	--components-fileUpload-backgroundColor: var(--pr-t-elevation-surface-raised);
+}
