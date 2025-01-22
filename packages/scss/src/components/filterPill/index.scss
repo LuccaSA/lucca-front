@@ -10,8 +10,10 @@
 			@include hover;
 		}
 
-		&:active {
-			@include active;
+		&:is(button) {
+			&:active {
+				@include active;
+			}
 		}
 
 		&:has(.filterPill-combobox:focus-visible, .filterPill-checkbox-input:focus-visible, .filterPill-label:focus-visible) {
@@ -24,6 +26,10 @@
 	}
 
 	&:not(button) {
+		&:has(.filterPill-combobox:active, .filterPill-checkbox-input:active) {
+			@include active;
+		}
+
 		&:not(:has(.filterPill-checkbox-input)) {
 			&.is-empty {
 				@include empty;

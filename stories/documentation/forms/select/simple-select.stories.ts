@@ -294,7 +294,6 @@ export const FormerUser = generateStory({
 	name: 'User Select (with former)',
 	description: "Pour saisir des utilisateurs, il suffit d'utiliser la directive `users`",
 	template: `<lu-simple-select
-	class="simpleSelect"
 	placeholder="Placeholder…"
 	users
 	enableFormerEmployees

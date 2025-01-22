@@ -7,11 +7,13 @@
 	--components-simpleSelect-padding: var(--pr-t-spacings-75);
 	--components-simpleSelect-gap: var(--pr-t-spacings-75);
 
-	.simpleSelect-arrow {
-		@include icon.S;
+	.simpleSelect-field-icon {
+		.lucca-icon {
+			@include icon.S;
+		}
 	}
 
-	.simpleSelect-clear {
+	.simpleSelect-field-clear {
 		// :not(.class) is only there to increase specificity when the class isn’t present
 		// but the class should be present, and this code is temporary
 		&.clear,
@@ -27,11 +29,13 @@
 	--components-simpleSelect-padding: var(--pr-t-spacings-50);
 	--components-simpleSelect-gap: var(--pr-t-spacings-50);
 
-	.simpleSelect-arrow {
-		@include icon.XS;
+	.simpleSelect-field-icon {
+		.lucca-icon {
+			@include icon.XS;
+		}
 	}
 
-	.simpleSelect-clear {
+	.simpleSelect-field-clear {
 		// :not(.class) is only there to increase specificity when the class isn’t present
 		// but the class should be present, and this code is temporary
 		&.clear,
@@ -45,7 +49,7 @@
 	width: 21rem;
 	max-width: calc(100vw - 2.5rem);
 
-	.simpleSelect {
+	.simpleSelect-field {
 		position: relative;
 		z-index: 1;
 	}
@@ -61,11 +65,5 @@
 		background-color: transparent;
 		padding: var(--pr-t-spacings-50);
 		margin: var(--pr-t-spacings-50) calc(var(--pr-t-spacings-100) * -1) calc(var(--pr-t-spacings-100) * -1);
-	}
-
-	&.is-searchFilled {
-		.simpleSelect-value {
-			display: none;
-		}
 	}
 }

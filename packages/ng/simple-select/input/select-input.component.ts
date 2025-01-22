@@ -6,6 +6,7 @@ import { getIntl } from '@lucca-front/ng/core';
 import { ALuSelectInputComponent, LuSelectPanelRef, provideLuSelectLabelsAndIds, ɵLuOptionOutletDirective } from '@lucca-front/ng/core-select';
 import { FILTER_PILL_INPUT_COMPONENT, FilterPillDisplayerDirective } from '@lucca-front/ng/filter-pills';
 import { InputDirective } from '@lucca-front/ng/form-field';
+import { IconComponent } from '@lucca-front/ng/icon';
 import { LU_SIMPLE_SELECT_TRANSLATIONS } from '../select.translate';
 import { LuSimpleSelectPanelRefFactory } from './panel-ref.factory';
 
@@ -16,7 +17,7 @@ import { LuSimpleSelectPanelRefFactory } from './panel-ref.factory';
 	host: { class: 'simpleSelect' },
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	standalone: true,
-	imports: [AsyncPipe, ɵLuOptionOutletDirective, NgIf, OverlayModule, FormsModule, InputDirective, FilterPillDisplayerDirective, NgTemplateOutlet],
+	imports: [AsyncPipe, ɵLuOptionOutletDirective, NgIf, OverlayModule, FormsModule, InputDirective, FilterPillDisplayerDirective, NgTemplateOutlet, IconComponent],
 	providers: [
 		{
 			provide: NG_VALUE_ACCESSOR,

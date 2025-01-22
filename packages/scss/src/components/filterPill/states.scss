@@ -25,7 +25,7 @@
 
 @mixin active {
 	--components-filterPill-backgroundColor: var(--palettes-neutral-0);
-	--components-filterPill-checkbox-borderColor: var(--palettes-neutral-500);
+	--components-filterPill-borderColor: var(--palettes-product-500);
 }
 
 @mixin notEmptyHover {
