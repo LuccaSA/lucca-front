@@ -219,6 +219,8 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 				this.panelRef?.close();
 				break;
 			case 'Tab':
+				// If we are in a filterpill, this will close it on tab press, but we want it to not lose any
+				// displayed stuff and properly close on focus exit
 				this.panelRef?.close();
 				break;
 			case 'Enter':
