@@ -6,6 +6,8 @@ import { NoopValueAccessorDirective } from '../noop-value-accessor.directive';
 import { FILTER_PILL_INPUT_COMPONENT, FilterPillInputComponent, FilterPillLabelDirective, FilterPillLayout } from '@lucca-front/ng/filter-pills';
 import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
 
+let nextId = 0;
+
 @Component({
 	selector: 'lu-checkbox-input',
 	standalone: true,
@@ -28,6 +30,7 @@ export class CheckboxInputComponent implements FilterPillInputComponent {
 	formField = inject<FormFieldComponent>(FORM_FIELD_INSTANCE, { optional: true });
 
 	isFilterPill = false;
+	filterPillInputId = `lu-checkbox-pill-input-${nextId++}`;
 
 	filterPillLayout: Signal<FilterPillLayout> = signal('checkable');
 	isFilterPillEmpty: Signal<boolean> = signal(false);
