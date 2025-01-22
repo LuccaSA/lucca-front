@@ -25,7 +25,9 @@
 
 @mixin active {
 	--components-filterPill-backgroundColor: var(--palettes-neutral-0);
-	--components-filterPill-borderColor: var(--palettes-product-500);
+	box-shadow:
+		0 0 0 1px var(--palettes-product-500),
+		var(--pr-t-elevation-shadow-raised);
 }
 
 @mixin notEmptyHover {
