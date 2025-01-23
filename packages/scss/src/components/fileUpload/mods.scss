@@ -8,6 +8,8 @@
 	--components-fileUpload-instruction-maxWidth: none;
 	--components-fileUpload-instruction-action-fontWeight: 600;
 	--components-fileUpload-instruction-action-color: var(--palettes-product-700);
+	--components-fileUpload-alignItems: flex-start;
+	--components-fileUpload-instruction-filename-position: static;
 }
 
 @mixin XS {

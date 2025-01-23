@@ -13,4 +13,7 @@
 	--components-fileUpload-borderColor: var(--palettes-neutral-300);
 	--components-fileUpload-borderStyle: dashed;
 	--components-fileUpload-backgroundColor: var(--pr-t-elevation-surface-raised);
+	--components-fileUpload-alignItems: center;
+	--components-fileUpload-instruction-filename-color: inherit;
+	--components-fileUpload-instruction-filename-position: relative;
 }
