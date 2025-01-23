@@ -26,7 +26,7 @@ function getTemplate(args: FileUploadBasicStory): string {
 		<div class="fileUpload-status" [innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/empty-states/icons/iconPaperActionSuccess.svg' | luSafeExternalSvg"></div>
 		<div class="fileUpload-instruction">
 			<!--<span class="fileUpload-instruction-action">Déposez le fichier ici ou <span class="fileUpload-instruction-action-click">cliquez pour le sélectionner</span>. </span>-->
-			<span class="fileUpload-instruction-filename">fileName.ext</span>
+			<span class="fileUpload-instruction-filename">filename.ext</span>
 			<span class="fileUpload-instruction-action">Remplacez-le en cliquant ou en déposant un nouveau fichier. </span>
 			<span class="fileUpload-instruction-formats">Formats acceptés : PDF, PNG, JPG, JPEG, DOC, XLS. </span>
 			<span class="fileUpload-instruction-size">Poids maximum : 5 Mo. </span>

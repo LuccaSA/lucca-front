@@ -9,7 +9,11 @@
 	--components-fileUpload-instruction-action-fontWeight: 600;
 	--components-fileUpload-instruction-action-color: var(--palettes-product-700);
 	--components-fileUpload-alignItems: flex-start;
+	--components-fileUpload-minHeight: none;
 	--components-fileUpload-instruction-filename-position: static;
+	--components-fileUpload-instruction-filename-marginTop: 0;
+	--components-fileUpload-status-minHeight: auto;
+	--components-fileUpload-justifyContent: flex-start;
 }
 
 @mixin XS {
@@ -18,4 +22,6 @@
 	--components-fileUpload-padding: var(--pr-t-spacings-200);
 	--components-fileUpload-flexDirection: row;
 	--components-fileUpload-display: inline-flex;
+	--components-fileUpload-minHeight: auto;
+	--components-fileUpload-status-minHeight: auto;
 }

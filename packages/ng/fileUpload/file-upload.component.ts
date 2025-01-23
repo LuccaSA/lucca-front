@@ -23,10 +23,18 @@ export class FileUploadComponent implements OnChanges {
 	@HostBinding('class.is-droppable')
 	droppable = false;
 
+	@Input({
+		transform: booleanAttribute,
+	})
+	multiple = false;
+
+	@Input()
+	state?: 'loading' | 'critical' | 'success';
+
 	@Input()
 	size?: 'XS' | 'S';
 
 	ngOnChanges(): void {
-		this.#luClass.setState({ [`mod-${this.size}`]: !!this.size });
+		this.#luClass.setState({ [`is-${this.state}`]: !!this.state, [`mod-${this.size}`]: !!this.size });
 	}
 }
