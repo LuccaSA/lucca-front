@@ -7,3 +7,12 @@
 @mixin hover {
 	--components-fileUpload-borderColor: var(--palettes-product-600);
 }
+
+@mixin success {
+	--components-fileUpload-instruction-filename-color: var(--palettes-success-800);
+}
+
+@mixin critical {
+	--components-fileUpload-instruction-filename-color: var(--palettes-critical-800);
+	--components-fileUpload-backgroundColor: var(--palettes-critical-50);
+}

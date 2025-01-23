@@ -12,7 +12,7 @@
 	text-align: var(--components-fileUpload-textAlign);
 	display: var(--components-fileUpload-display);
 	flex-direction: var(--components-fileUpload-flexDirection);
-	align-items: flex-start;
+	align-items: var(--components-fileUpload-alignItems);
 	gap: var(--pr-t-spacings-200);
 	color: var(--palettes-neutral-800);
 
@@ -22,8 +22,9 @@
 
 	@at-root ($atRoot) {
 		.fileUpload-status {
-			width: 3rem;
-			height: 3rem;
+			min-width: var(--pr-t-spacings-600);
+			min-height: var(--pr-t-spacings-600);
+			display: flex;
 		}
 
 		.fileUpload-input {
@@ -59,6 +60,14 @@
 
 		.fileUpload-button {
 			display: var(--components-fileUpload-button-display);
+		}
+
+		.fileUpload-instruction-filename {
+			display: block;
+			font-weight: 600;
+			color: var(--components-fileUpload-instruction-filename-color);
+			bottom: var(--pr-t-spacings-200);
+			position: var(--components-fileUpload-instruction-filename-position);
 		}
 	}
 }

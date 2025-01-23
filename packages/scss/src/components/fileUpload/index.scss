@@ -16,6 +16,14 @@
 		@include XS;
 	}
 
+	&.is-success {
+		@include success;
+	}
+
+	&.is-critical {
+		@include critical;
+	}
+
 	&.is-droppable {
 		@include droppable;
 	}
