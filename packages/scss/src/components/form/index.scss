@@ -48,10 +48,6 @@
 		@include XS;
 	}
 
-	&[class*='mod-width'] {
-		@include width;
-	}
-
 	&.mod-width20 {
 		@include width20;
 	}
@@ -77,10 +73,6 @@
 	&:has(.checkboxField),
 	&:has(.switchField) {
 		@include checkable;
-
-		&[class*='mod-width'] {
-			@include widthCheckable;
-		}
 	}
 
 	&:not(lu-form-field) {

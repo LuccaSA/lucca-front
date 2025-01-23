@@ -99,14 +99,6 @@
 	}
 }
 
-@mixin width {
-	display: inline-flex;
-}
-
-@mixin widthCheckable {
-	display: inline-grid;
-}
-
 @mixin width20 {
 	width: 10rem;
 	max-width: 100%;
