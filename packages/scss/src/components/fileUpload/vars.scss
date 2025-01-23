@@ -1,5 +1,6 @@
 @mixin vars {
 	--components-fileUpload-button-display: block;
+	--components-fileUpload-button-visibility: visible;
 	--components-fileUpload-padding: var(--pr-t-spacings-600) var(--pr-t-spacings-300);
 	--components-fileUpload-textAlign: center;
 	--components-fileUpload-flexDirection: column;
@@ -15,5 +16,9 @@
 	--components-fileUpload-backgroundColor: var(--pr-t-elevation-surface-raised);
 	--components-fileUpload-alignItems: center;
 	--components-fileUpload-instruction-filename-color: inherit;
+	--components-fileUpload-instruction-filename-marginTop: calc(var(--pr-t-spacings-300) * -1);
+	--components-fileUpload-minHeight: 20rem;
+	--components-fileUpload-status-minHeight: var(--pr-t-spacings-800);
 	--components-fileUpload-instruction-filename-position: relative;
+	--components-fileUpload-justifyContent: center;
 }

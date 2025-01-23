@@ -16,12 +16,20 @@
 		@include XS;
 	}
 
+	&.is-loading {
+		@include loading;
+	}
+
 	&.is-success {
 		@include success;
 	}
 
 	&.is-critical {
 		@include critical;
+
+		&:hover {
+			@include criticalHover;
+		}
 	}
 
 	&.is-droppable {

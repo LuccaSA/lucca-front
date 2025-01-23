@@ -6,6 +6,8 @@ import { generateInputs } from 'stories/helpers/stories';
 interface FileUploadBasicStory {
 	size: string;
 	droppable: boolean;
+	state: string;
+	multiple: boolean;
 }
 
 export default {
@@ -17,7 +19,18 @@ export default {
 				type: 'radio',
 			},
 		},
+		state: {
+			options: [null, 'loading', 'success', 'critical'],
+			control: {
+				type: 'radio',
+			},
+		},
 		droppable: {
+			control: {
+				type: 'boolean',
+			},
+		},
+		multiple: {
 			control: {
 				type: 'boolean',
 			},
@@ -40,5 +53,7 @@ export const Basic = {
 	args: {
 		size: null,
 		droppable: false,
+		state: null,
+		multiple: false,
 	},
 };

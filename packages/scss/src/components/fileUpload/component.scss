@@ -13,8 +13,10 @@
 	display: var(--components-fileUpload-display);
 	flex-direction: var(--components-fileUpload-flexDirection);
 	align-items: var(--components-fileUpload-alignItems);
+	justify-content: var(--components-fileUpload-justifyContent);
 	gap: var(--pr-t-spacings-200);
 	color: var(--palettes-neutral-800);
+	min-height: var(--components-fileUpload-minHeight);
 
 	&:has(.fileUpload-input:focus-visible) {
 		@include a11y.focusVisible;
@@ -23,7 +25,7 @@
 	@at-root ($atRoot) {
 		.fileUpload-status {
 			min-width: var(--pr-t-spacings-600);
-			min-height: var(--pr-t-spacings-600);
+			min-height: var(--components-fileUpload-status-minHeight);
 			display: flex;
 		}
 
@@ -59,6 +61,7 @@
 		}
 
 		.fileUpload-button {
+			visibility: var(--components-fileUpload-button-visibility);
 			display: var(--components-fileUpload-button-display);
 		}
 
@@ -66,7 +69,8 @@
 			display: block;
 			font-weight: 600;
 			color: var(--components-fileUpload-instruction-filename-color);
-			bottom: var(--pr-t-spacings-200);
+			margin-top: var(--components-fileUpload-instruction-filename-marginTop);
+			bottom: var(--pr-t-spacings-100);
 			position: var(--components-fileUpload-instruction-filename-position);
 		}
 	}
