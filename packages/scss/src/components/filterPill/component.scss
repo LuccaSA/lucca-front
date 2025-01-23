@@ -129,6 +129,8 @@
 			cursor: var(--components-filterPill-label-cursor);
 
 			.icon-arrowChevronBottom {
+				transition-property: transform;
+				transition-duration: var(--commons-animations-durations-fast);
 				transform: rotate(var(--components-filterPill-toggle-rotation));
 			}
 		}

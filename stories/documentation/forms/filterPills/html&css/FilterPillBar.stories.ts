@@ -1,6 +1,7 @@
 import { FormsModule } from '@angular/forms';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { DateInputComponent } from '@lucca-front/ng/date2';
+import { DividerComponent } from '@lucca-front/ng/divider';
 import { FilterPillComponent } from '@lucca-front/ng/filter-pills';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { CheckboxInputComponent, TextInputComponent } from '@lucca-front/ng/forms';
@@ -9,7 +10,6 @@ import { PopoverDirective } from '@lucca-front/ng/popover2';
 import { ScrollBoxComponent } from '@lucca-front/ng/scrollBox';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 import { Meta, moduleMetadata, StoryFn } from '@storybook/angular';
-import { DividerComponent } from '@lucca-front/ng/divider';
 import { StoryModelDisplayComponent } from 'stories/helpers/story-model-display.component';
 
 interface FilterPillBarBasicStory {
@@ -111,7 +111,7 @@ function getTemplate(args: FilterPillBarBasicStory): string {
 
 					<lu-filter-pill label="Échéance"><lu-date-input [ngModel]="example6" [ngModelOptions]="{standalone: true}" /></lu-filter-pill>
 
-					<lu-form-field label="Test" hiddenLabel size="S" style="width: 15rem; flex-shrink: 0">
+					<lu-form-field label="Test" hiddenLabel>
 						<lu-text-input [ngModel]="example10" [ngModelOptions]="{standalone: true}" hasSearchIcon hasClearer />
 					</lu-form-field>
 

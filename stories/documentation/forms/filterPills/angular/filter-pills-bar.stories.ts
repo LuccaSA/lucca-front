@@ -51,7 +51,7 @@ export default {
 						<lu-checkbox-input [ngModel]="false"></lu-checkbox-input>
 					</lu-filter-pill>
 
-					<lu-form-field label="Test" hiddenLabel size="S" style="width: 15rem; flex-shrink: 0">
+					<lu-form-field label="Test" hiddenLabel>
 						<lu-text-input [ngModel]="example10" [ngModelOptions]="{standalone: true}" hasSearchIcon hasClearer />
 					</lu-form-field>
 

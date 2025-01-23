@@ -85,7 +85,7 @@
 }
 
 @mixin opened {
-	--components-filterPill-toggle-rotation: 0.5turn;
+	--components-filterPill-toggle-rotation: -0.5turn;
 }
 
 @mixin beginning {

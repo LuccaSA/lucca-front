@@ -10,6 +10,7 @@
 	border-radius: var(--component-textField-borderRadius);
 	background-color: var(--component-textField-background);
 	box-shadow: 0 0 0 1px var(--component-textField-border);
+	width: var(--component-textField-width);
 
 	&:hover {
 		box-shadow: 0 0 0 1px var(--component-textField-borderHover);
