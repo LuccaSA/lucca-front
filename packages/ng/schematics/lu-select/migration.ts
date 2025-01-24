@@ -4,10 +4,10 @@ import { extractComponentImports, insertAngularImportIfNeeded, insertTSImportIfN
 import { extractNgTemplatesIncludingHtml } from '../lib/angular-template';
 import { getCommonMigrationRejectionReason, getDataSource, getDisplayer, isRejection, RejectionReason } from './util';
 import { LuSelectInputContext, PremadeApiSelectContext, SelectComponent, SelectContext, selectorToComponentName, selectorToSelectComponentName } from './model/select-context';
-import { TmplAstElement } from '@angular/compiler';
 import { Tree, UpdateRecorder } from '@angular-devkit/schematics';
 import { applyToUpdateRecorder } from '@schematics/angular/utility/change';
 import { getEOL } from '@schematics/angular/utility/eol';
+import { TmplAstElement } from '@angular/compiler';
 
 const importSource: Record<string, string> = {
 	LuSimpleSelectInputComponent: '@lucca-front/ng/simple-select',
@@ -32,19 +32,31 @@ export function migrateComponent(sourceFile: SourceFile, path: string, tree: Tre
 		// If paths are the same, it's an inline template so we'll use the same updateRecord, else create a different one
 		const templateUpdate = isInlineTemplate ? tsUpdate : tree.beginUpdate(selects[0].filePath);
 		selects.forEach((select) => {
-			if (select.rejection) {
-				// TODO put a comment in the result file about why it's rejected
-				console.log('REJECTED', select.component, RejectionReason[select.rejection.reason], select.rejection.details);
+			if (!select.rejection) {
+				switch (select.component) {
+					case 'LuSelectInputComponent':
+						handleLuSelectInputComponent(select, templateUpdate);
+						break;
+					case 'LuEstablishmentSelectInputComponent':
+					case 'LuQualificationSelectInputComponent':
+					case 'LuUserSelectModule':
+						handlePremadeApiSelect(select, templateUpdate);
+						break;
+				}
 			}
-			switch (select.component) {
-				case 'LuSelectInputComponent':
-					handleLuSelectInputComponent(select, templateUpdate);
-					break;
-				case 'LuEstablishmentSelectInputComponent':
-				case 'LuQualificationSelectInputComponent':
-				case 'LuUserSelectModule':
-					handlePremadeApiSelect(select, templateUpdate);
-					break;
+			// We're not checking using else here because handle** methods can also add a rejection reason
+			// We want to handle both cases (before handling and after) here
+			if (select.rejection) {
+				let detailedReason = '';
+				const contextBefore = select.node.startSourceSpan.start.getContext(20, 2)?.before || '';
+				const indentBefore = contextBefore.slice(contextBefore.lastIndexOf('\n') + 1);
+				switch (select.rejection.reason) {
+					case RejectionReason.DATA_SERVICE_OVERRIDE:
+						detailedReason = `${select.rejection.details} overriden in providers`;
+						break;
+				}
+
+				templateUpdate.insertLeft(select.nodeOffset + select.node.startSourceSpan.start.offset, `<!-- [lu-select migration] REJECTED: ${detailedReason} -->\n${indentBefore}`);
 			}
 		});
 		tree.commitUpdate(tsUpdate);
@@ -73,7 +85,7 @@ function findSelectContexts(sourceFile: ts.SourceFile, basePath: string, tree: T
 						tagName: node.name,
 						nodeOffset: template.offsetStart,
 						component: selectComponentClass,
-						rejection: getCommonMigrationRejectionReason(node),
+						rejection: getCommonMigrationRejectionReason(node, sourceFile),
 						filePath: template.filePath,
 						componentTS: template.componentTS
 					};

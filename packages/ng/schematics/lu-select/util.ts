@@ -1,6 +1,8 @@
 import { ASTWithSource, TmplAstBoundText, TmplAstElement, TmplAstTemplate } from '@angular/compiler';
 import { LuSelectInputContext, SelectContext } from './model/select-context';
 import { HtmlAstVisitor } from '../lib/html-ast';
+import ts from 'typescript';
+import { extractProviders } from '../lib/angular-component-ast';
 
 export enum RejectionReason {
 	UNSUPPORTED_ATTRIBUTE,
@@ -8,6 +10,7 @@ export enum RejectionReason {
 	CUSTOM_PICKER_CONTENT,
 	NO_DATA_SOURCE,
 	UNSUPPORTED_VALUE_ASSIGNMENT,
+	DATA_SERVICE_OVERRIDE
 }
 
 export interface Rejection {
@@ -33,7 +36,7 @@ export function isRejection(value: unknown): value is Rejection {
 	return (value as Rejection)?.reason !== undefined && RejectionReason[(value as Rejection).reason] != undefined;
 }
 
-export function getCommonMigrationRejectionReason(node: TmplAstElement): Rejection | null {
+export function getCommonMigrationRejectionReason(node: TmplAstElement, sourceFile: ts.SourceFile): Rejection | null {
 	const unsupportedAttr = node.attributes.find((attr) => !allowedAttributes.some((rxp) => rxp.test(attr.name)));
 	if (unsupportedAttr) {
 		return {
@@ -47,6 +50,18 @@ export function getCommonMigrationRejectionReason(node: TmplAstElement): Rejecti
 			reason: RejectionReason.UNSUPPORTED_INPUT,
 			details: unsupportedInput.name
 		};
+	}
+	const providers = extractProviders(sourceFile);
+	if (providers.length > 0) {
+		switch (node.name) {
+			case 'lu-establishment-select':
+				if (providers.some(p => p.provide === 'ALuEstablishmentService')) {
+					return {
+						reason: RejectionReason.DATA_SERVICE_OVERRIDE,
+						details: 'ALuEstablishmentService'
+					};
+				}
+		}
 	}
 	return null;
 }
