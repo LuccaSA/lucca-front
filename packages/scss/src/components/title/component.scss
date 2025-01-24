@@ -1,7 +1,7 @@
 @use '@lucca-front/scss/src/commons/config';
 @mixin component($suffix: '') {
 	// no suffix here
-	margin-top: 0;
+	margin-block-start: 0;
 	color: var(--palettes-neutral-900);
 	text-rendering: geometricPrecision;
 	text-wrap: pretty;
@@ -12,11 +12,11 @@
 	line-height: var(--sizes-lineHeight) #{$suffix};
 
 	@if config.$deprecatedTitleSpacings {
-		margin-bottom: var(--pr-t-spacings-200);
-		padding-top: var(--sizes-verticalPadding) #{$suffix};
-		padding-bottom: var(--sizes-verticalPadding) #{$suffix};
+		margin-block-end: var(--pr-t-spacings-200);
+		padding-block-start: var(--sizes-verticalPadding) #{$suffix};
+		padding-block-end: var(--sizes-verticalPadding) #{$suffix};
 	} @else {
 		padding: 0 #{$suffix};
-		margin-bottom: 0;
+		margin-block-end: 0;
 	}
 }

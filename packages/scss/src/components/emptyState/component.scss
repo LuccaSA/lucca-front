@@ -47,9 +47,9 @@
 			@include title.component;
 			@include title.h3;
 
-			margin-bottom: var(--pr-t-spacings-50);
+			margin-block-end: var(--pr-t-spacings-50);
 			@if config.$deprecatedTitleSpacings {
-				margin-bottom: 0;
+				margin-block-end: 0;
 			}
 		}
 
