@@ -1,6 +1,7 @@
 @use 'sass:list';
 
 $isNamespaced: false !default;
+$deprecatedTitleSpacings: false !default;
 
 $fontFamily: 'SourceSans' !default;
 $fontWeights: (
