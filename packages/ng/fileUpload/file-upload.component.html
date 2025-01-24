@@ -1,4 +1,11 @@
-<input [attr.multiple]="multiple ? 'multiple' : null" class="fileUpload-input" type="file" title="" accept=".xls,.xlsx,.csv" />
+<input
+	[attr.aria-describedby]="'fileUpload-instruction-' + idSuffix"
+	[attr.multiple]="multiple ? 'multiple' : null"
+	class="fileUpload-input"
+	type="file"
+	title=""
+	accept=".xls,.xlsx,.csv"
+/>
 
 @switch (state) { @case ('loading') {
 <div class="fileUpload-status"><div class="loading mod-L"></div></div>
@@ -19,19 +26,22 @@
 ></div>
 }}
 
-<div class="fileUpload-instruction">
-	@if (state === 'success' || state === 'critical') {
-	<span class="fileUpload-instruction-filename">filename.ext</span>
-	} @if (state !== 'success' && state !== 'critical') {
-	<span class="fileUpload-instruction-action">
+<div class="fileUpload-instruction" [attr.id]="'fileUpload-instruction-' + idSuffix">
+	@if ((state === 'success' || state === 'critical') && (!multiple)) {
+	<span class="fileUpload-instruction-filename" aria-hidden="true">filename.ext</span>
+	} @if ((state !== 'success' && state !== 'critical') || ((state === 'success' || state === 'critical') && size === 'S' && multiple)) {
+	<span class="fileUpload-instruction-action" aria-hidden="true">
 		@if (multiple) { Déposez les fichiers ici ou
-		<span class="fileUpload-instruction-action-click">cliquez pour les sélectionner </span>.} @else { Déposez le fichier ici ou
-		<span class="fileUpload-instruction-action-click">cliquez pour le sélectionner </span>. }
+		<span class="fileUpload-instruction-action-click">cliquez pour les sélectionner</span>.} @else { Déposez le fichier ici ou
+		<span class="fileUpload-instruction-action-click">cliquez pour le sélectionner</span>. }
 	</span>
 	} @if (state === 'success' || state === 'critical') { @if (size !== 'S' ) {
-	<span class="fileUpload-instruction-action">Remplacez-le en cliquant ou en déposant un nouveau fichier. </span>
+	<span class="fileUpload-instruction-action" aria-hidden="true">
+		@if (multiple) { Cliquez ou déposez des nouveaux fichiers. } @else { Remplacez-le en cliquant ou en déposant un nouveau fichier. }</span
+	>
 	} }
 	<span class="fileUpload-instruction-formats">Formats acceptés : PDF, PNG, JPG, JPEG, DOC, XLS. </span>
 	<span class="fileUpload-instruction-size">Poids maximum : 5 Mo. </span>
 </div>
-<span class="fileUpload-button button">@if (multiple) {Sélectionner des fichiers} @else {Sélectionner un fichier}</span>
+
+<span class="fileUpload-button button" aria-hidden="true">@if (multiple) {Sélectionner des fichiers} @else {Sélectionner un fichier}</span>

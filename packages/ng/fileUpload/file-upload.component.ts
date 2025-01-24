@@ -2,6 +2,8 @@ import { booleanAttribute, Component, HostBinding, inject, Input, OnChanges, Vie
 import { LuClass } from '@lucca-front/ng/core';
 import { LuSafeExternalSvgPipe } from '@lucca-front/ng/safe-content';
 
+let nextId = 0;
+
 @Component({
 	selector: 'lu-file-upload',
 	standalone: true,
@@ -37,4 +39,6 @@ export class FileUploadComponent implements OnChanges {
 	ngOnChanges(): void {
 		this.#luClass.setState({ [`is-${this.state}`]: !!this.state, [`mod-${this.size}`]: !!this.size });
 	}
+
+	idSuffix = nextId++;
 }
