@@ -64,6 +64,7 @@ export class LuCoreSelectUsersDirective<T extends LuCoreSelectUser = LuCoreSelec
 	url = input<string | null>(null);
 	orderBy = input<string | null>(null);
 	operationIds = input<number[] | null>(null);
+	uniqueOperationIds = input<number[] | null>(null);
 	appInstanceId = input<number | null>(null);
 	enableFormerEmployees = input(false, { transform: booleanAttribute });
 	displayMeOption = input(true);
@@ -95,6 +96,7 @@ export class LuCoreSelectUsersDirective<T extends LuCoreSelectUser = LuCoreSelec
 			const orderBy = this.orderBy();
 			const clue = this.clue();
 			const operationIds = this.operationIds();
+			const uniqueOperationIds = this.uniqueOperationIds();
 			const appInstanceId = this.appInstanceId();
 			const searchDelimiter = this.searchDelimiter();
 			const formerEmployees = this.includeFormerEmployees();
@@ -105,6 +107,7 @@ export class LuCoreSelectUsersDirective<T extends LuCoreSelectUser = LuCoreSelec
 				...(orderBy ? { orderBy } : {}),
 				...(clue ? { clue: applySearchDelimiter(clue, searchDelimiter) } : {}),
 				...(operationIds ? { operations: operationIds.join(',') } : {}),
+				...(uniqueOperationIds ? { uniqueOperations: uniqueOperationIds.join(',') } : {}),
 				...(appInstanceId ? { appInstanceId } : {}),
 				...(formerEmployees ? { formerEmployees } : {}),
 			};
