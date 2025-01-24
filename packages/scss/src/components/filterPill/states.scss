@@ -30,13 +30,13 @@
 		var(--pr-t-elevation-shadow-raised);
 }
 
-@mixin notEmptyHover {
+@mixin filledHover {
 	--components-filterPill-borderColor: var(--palettes-product-400);
 	--components-filterPill-checkbox-borderColor: var(--palettes-product-600);
 	--components-filterPill-checkbox-backgroundColor: var(--palettes-product-600);
 }
 
-@mixin notEmptyActive {
+@mixin filledActive {
 	--components-filterPill-backgroundColor: var(--palettes-product-100);
 	--components-filterPill-checkbox-borderColor: var(--palettes-product-700);
 	--components-filterPill-checkbox-backgroundColor: var(--palettes-product-700);
@@ -60,28 +60,20 @@
 	--components-filterPill-label-cursor: default;
 }
 
-@mixin empty {
-	--components-filterPill-label-contentAfter: none;
-	--components-filterPill-clear-display: none;
+@mixin filled {
+	--components-filterPill-borderColor: var(--palettes-product-300);
+	--components-filterPill-backgroundColor: var(--palettes-product-50);
+	--components-filterPill-color: var(--palettes-product-800);
+	--components-filterPill-toggle-iconColor: var(--palettes-product-700);
+}
 
+@mixin notFilled {
 	.filterPill-combobox {
 		@include a11y.mask;
 	}
 }
 
 @mixin comboboxHidden {
-	--components-filterPill-label-fontWeight: var(--components-filterPill-label-fontWeightChecked);
-
-	.filterPill-combobox {
-		@include a11y.mask;
-	}
-}
-
-@mixin notEmpty {
-	--components-filterPill-borderColor: var(--palettes-product-300);
-	--components-filterPill-backgroundColor: var(--palettes-product-50);
-	--components-filterPill-color: var(--palettes-product-800);
-	--components-filterPill-toggle-iconColor: var(--palettes-product-700);
 }
 
 @mixin opened {
@@ -99,11 +91,17 @@
 @mixin disabled {
 	--components-filterPill-clear-display: none;
 	--components-filterPill-backgroundColor: var(--palettes-neutral-50);
-	--components-filterPill-borderColor: var(--palettes-neutral-300);
+	--components-filterPill-borderColor: var(--palettes-neutral-300) !important;
 	--components-filterPill-color: var(--palettes-neutral-500);
 	--components-filterPill-toggle-iconColor: var(--palettes-neutral-500);
 	--components-filterPill-label-cursor: default;
 	--components-filterPill-arrowColor: var(--palettes-neutral-500);
+	--components-filterPill-shadow: 0 0 0 1px var(--components-filterPill-borderColor);
+
+	box-shadow: var(--components-filterPill-shadow);
+
+	// TODO
+	//--components-filterPill-checkbox-borderColor: var(--palettes-neutral-600);
 }
 
 @mixin hidden {

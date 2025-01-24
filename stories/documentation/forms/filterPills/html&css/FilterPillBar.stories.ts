@@ -81,7 +81,7 @@ function getTemplate(args: FilterPillBarBasicStory): string {
 
 					<lu-divider class="filterPillBar-divider" />
 
-					<button class="filterPill" type="button" luTooltip="Filtres supplémentaires" luTooltipOnlyForDisplay [luPopover2]="contentOptions">
+					<button class="filterPill mod-button" type="button" luTooltip="Filtres supplémentaires" luTooltipOnlyForDisplay [luPopover2]="contentOptions">
 						<lu-icon class="filterPill-icon" icon="filtersDescending" alt="Filtres supplémentaires"></lu-icon>
 					</button>
 
@@ -98,7 +98,7 @@ function getTemplate(args: FilterPillBarBasicStory): string {
 						</span>
 					</div>
 
-					<div class="filterPill">
+					<div class="filterPill is-filled">
 						<label for="input1" class="filterPill-label" luTooltip="Département" luTooltipWhenEllipsis="true">Équipe :</label>
 						<button class="filterPill-combobox" type="button" id="input1" role="combobox" aria-expanded="false" luTooltipWhenEllipsis="true">
 							Finance

@@ -26,18 +26,8 @@
 	white-space: nowrap;
 	transition-property: box-shadow;
 	transition-duration: var(--commons-animations-durations-fast);
-
-	&:is(button) {
-		--components-filterPill-backgroundColor: var(--pr-t-elevation-surface-raised);
-
-		border: 0;
-		padding: var(--pr-t-spacings-75);
-		cursor: pointer;
-
-		&:focus-visible {
-			@include a11y.focusVisible($offset: 3px);
-		}
-	}
+	--components-filterPill-label-contentAfter: none;
+	--components-filterPill-clear-display: none;
 
 	@at-root ($atRoot) {
 		.filterPillBar-divider.divider {
@@ -96,7 +86,7 @@
 			flex-direction: column;
 			gap: var(--pr-t-spacings-50);
 
-			&:has(.filterPill_popover-content-formField) {
+			&:has(.filterPill_popover-content-option) {
 				--components-popover-padding: var(--pr-t-spacings-50);
 			}
 		}
@@ -157,20 +147,17 @@
 			text-overflow: ellipsis;
 			cursor: var(--components-filterPill-label-cursor);
 
+			display: flex;
+			align-items: center;
+			gap: var(--pr-t-spacings-50);
+			flex-shrink: 0;
+
 			&:focus-visible {
 				outline: none;
 			}
 
-			// date range
-			&:has(.icon-arrowRight) {
-				display: flex;
-				align-items: center;
-				gap: var(--pr-t-spacings-50);
-				flex-shrink: 0;
-
-				.icon-arrowRight {
-					color: var(--components-filterPill-arrowColor);
-				}
+			.lucca-icon {
+				color: var(--components-filterPill-arrowColor);
 			}
 		}
 

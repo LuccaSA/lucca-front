@@ -1,109 +1,79 @@
 @use 'exports' as *;
-@use '@lucca-front/scss/src/commons/utils/media';
 
 .filterPill {
 	@include vars;
 	@include component;
 
-	&:not(:has(.filterPill-combobox:disabled)) {
+	&:not(.is-filled) {
+		@include notFilled;
+	}
+
+	&:hover {
+		@include hover;
+	}
+
+	&:focus-within {
+		@include focusVisible;
+	}
+
+	&:active,
+	&:has(:active) {
+		@include active;
+	}
+
+	&.is-comboboxHidden {
+		@include comboboxHidden;
+	}
+
+	&:has(.filterPill-combobox[aria-expanded='true']) {
+		@include opened;
+	}
+
+	&.is-filled {
+		@include filled;
+
 		&:hover {
-			@include hover;
+			@include filledHover;
 		}
 
-		&:is(button) {
-			&:active {
-				@include active;
+		&:has(.filterPill-combobox:active) {
+			@include filledActive;
+		}
+	}
+
+	&.mod-checkbox {
+		@include checkbox;
+
+		&:has(.filterPill-checkbox-input:checked) {
+			@include checkboxChecked;
+
+			&:hover {
+				@include filledHover;
+			}
+
+			&:has(.filterPill-combobox:active) {
+				@include filledActive;
 			}
 		}
 
-		&:has(.filterPill-combobox:focus-visible, .filterPill-checkbox-input:focus-visible, .filterPill-label:focus-visible) {
-			@include focusVisible;
+		&:has(.filterPill-checkbox-input:disabled) {
+			@include checkboxDisabled;
+
+			&:has(.filterPill-checkbox-input:checked) {
+				@include checkboxCheckedDisabled;
+			}
 		}
+	}
+
+	&.mod-button {
+		@include button;
 	}
 
 	&:has(.filterPill-combobox:disabled) {
 		@include disabled;
 	}
 
-	&:not(button) {
-		&:has(.filterPill-combobox:active, .filterPill-toggle:active, .filterPill-checkbox-input:active) {
-			@include active;
-		}
-
-		&:not(:has(.filterPill-checkbox-input)) {
-			&.is-empty {
-				@include empty;
-			}
-
-			&.is-comboboxHidden {
-				@include comboboxHidden;
-			}
-
-			&:has(.filterPill-combobox[aria-expanded='true']) {
-				@include opened;
-			}
-
-			&:not(:has(.filterPill-combobox:disabled)) {
-				&:not(.is-empty) {
-					@include notEmpty;
-
-					&:has(.filterPill-label:hover) {
-						@include notEmptyHover;
-					}
-
-					&:has(.filterPill-label:active) {
-						@include notEmptyActive;
-					}
-				}
-			}
-		}
-	}
-
 	&.is-hidden {
 		@include hidden;
-	}
-
-	&:has(.filterPill-checkbox-input) {
-		@include checkbox;
-
-		&:has(.filterPill-checkbox-input:disabled) {
-			@include checkboxDisabled;
-		}
-
-		&:has(.filterPill-checkbox-input:checked) {
-			@include checkboxChecked;
-
-			&:has(.filterPill-label:hover) {
-				@include notEmptyHover;
-			}
-
-			&:has(.filterPill-label:hover) {
-				@include notEmptyActive;
-			}
-
-			&:has(.filterPill-checkbox-input:disabled) {
-				@include checkboxCheckedDisabled;
-			}
-		}
-	}
-}
-
-.filterPillBar {
-	@include barVars;
-
-	@include media.max(XXS) {
-		@include compact;
-	}
-
-	@include media.min(XXS) {
-		@include notCompact;
-	}
-
-	@include media.pointer(coarse) {
-		@include touch;
-	}
-
-	@include media.pointer(coarse, $reversed: true) {
-		@include noTouch;
 	}
 }

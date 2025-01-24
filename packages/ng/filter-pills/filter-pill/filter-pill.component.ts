@@ -131,9 +131,16 @@ export class FilterPillComponent {
 		return ':';
 	});
 
-	@HostBinding('class.is-empty')
-	get isEmpty() {
-		return this.inputIsEmpty();
+	modCheckbox = computed(() => this.layout() === 'checkable');
+
+	@HostBinding('class.mod-checkbox')
+	get isModCheckbox() {
+		return this.modCheckbox();
+	}
+
+	@HostBinding('class.is-filled')
+	get isFilled() {
+		return !this.inputIsEmpty();
 	}
 
 	@HostBinding('class.is-comboboxHidden')

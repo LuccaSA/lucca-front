@@ -1,14 +1,7 @@
 @use '@lucca-front/scss/src/commons/utils/overflow';
-@use '@lucca-front/scss/src/commons/utils/a11y';
 
 @use '@lucca-front/scss/src/components/divider/exports' as divider;
 @use '@lucca-front/scss/src/components/scrollBox/exports' as scrollBox;
-
-@mixin checkbox {
-	--components-filterPill-gap: var(--pr-t-spacings-100);
-	--components-filterPill-padding: var(--pr-t-spacings-75) var(--pr-t-spacings-150);
-	--components-filterPill-label-contentAfter: none;
-}
 
 @mixin compact {
 	.filterPillBar-segmentedControl.segmentedControl {
@@ -53,20 +46,8 @@
 	}
 }
 
-@mixin noTouch {
+@mixin notTouch {
 	.filterPillBar-scrollBox.scrollBox {
 		@include scrollBox.disabled;
-	}
-}
-
-@mixin button {
-	--components-filterPill-backgroundColor: var(--pr-t-elevation-surface-raised);
-
-	border: 0;
-	padding: var(--pr-t-spacings-75);
-	cursor: pointer;
-
-	&:focus-visible {
-		@include a11y.focusVisible($offset: 3px);
 	}
 }
