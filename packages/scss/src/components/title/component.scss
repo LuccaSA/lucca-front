@@ -12,11 +12,17 @@
 	line-height: var(--sizes-lineHeight) #{$suffix};
 
 	@if config.$deprecatedTitleSpacings {
-		margin-block-end: var(--pr-t-spacings-200);
+		// no suffix here
+		margin-block-end: var(--pr-t-spacings-headings);
+
+		// suffix here
 		padding-block-start: var(--sizes-verticalPadding) #{$suffix};
 		padding-block-end: var(--sizes-verticalPadding) #{$suffix};
 	} @else {
-		padding: 0 #{$suffix};
+		// no suffix here
 		margin-block-end: 0;
+
+		// suffix here
+		padding: 0 #{$suffix};
 	}
 }

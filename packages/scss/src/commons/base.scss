@@ -55,7 +55,10 @@
 		}
 
 		p {
-			margin: 0 0 var(--pr-t-spacings-200);
+			margin: 0;
+			@if config.$deprecatedParagraphSpacings {
+				margin: 0 0 var(--pr-t-spacings-paragraph);
+			}
 		}
 
 		abbr {
