@@ -12,6 +12,7 @@
 	}
 
 	@include core.cssvars('pr-t-spacings', config.$spacings);
+	--pr-t-spacings-headings: var(--pr-t-spacings-200);
 	--pr-t-spacings-auto: auto;
 
 	@include core.cssvars('pr-t-color-input', config.$colorInput);
