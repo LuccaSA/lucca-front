@@ -1,0 +1,11 @@
+@mixin vars {
+	--components-fileUploaded-informations-display: block;
+	--components-fileUploaded-informations-children-display: inline-block;
+	--components-fileUploaded-status-img-width: 56px;
+	--components-fileUploaded-status-img-height: var(--components-fileUploaded-status-img-width);
+	--components-fileUploaded-padding: var(--pr-t-spacings-75);
+	--components-fileUploaded-gap: var(--components-fileUploaded-padding);
+	--components-fileUploaded-flexDirection: row;
+	--components-fileUploaded-width: auto;
+	--components-fileUploaded-alignItems: center;
+}
