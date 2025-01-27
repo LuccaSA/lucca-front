@@ -64,7 +64,7 @@
 			text-decoration: none;
 			width: auto;
 			z-index: 1;
-			scroll-margin-inline: var(--spacings-S);
+			scroll-margin-inline: var(--pr-t-spacings-200);
 
 			&::after {
 				background-color: var(--palettes-700, var(--palettes-product-700));

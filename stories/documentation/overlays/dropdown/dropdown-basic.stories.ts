@@ -37,20 +37,20 @@ class DropdownStoriesModule {}
 
 /* 3. Ajouter le composant <lu-dropdown #dropdown></lu-dropdown> avec la référence de la directive */
 <lu-dropdown #dropdown>
-	<li class="lu-dropdown-options-item">
-		<a routerLink="." fragment="link1" class="lu-dropdown-options-item-action is-disabled" luDropdownItem>
+	<li class="dropdown-list-option">
+		<span class="dropdown-list-option-action is-disabled" luDropdownItem>
 			<span aria-hidden="true" class="lucca-icon icon-eye"></span>
 			Prévisualiser
 		</a>
 	</li>
-	<li class="lu-dropdown-options-item">
-		<a routerLink="." fragment="link2" class="lu-dropdown-options-item-action" luDropdownItem>
+	<li class="dropdown-list-option">
+		<a routerLink="." fragment="link2" class="dropdown-list-option-action" luDropdownItem>
 			<span aria-hidden="true" class="lucca-icon icon-officePen"></span>
 			Editer
 		</a>
 	</li>
-	<li class="lu-dropdown-options-item">
-		<button type="button" class="lu-dropdown-options-item-action mod-delete" luDropdownItem>
+	<li class="dropdown-list-option">
+		<button type="button" class="dropdown-list-option-action mod-delete" luDropdownItem>
 			<span aria-hidden="true" class="lucca-icon icon-trashDelete"></span>
 			Supprimer
 		</button>

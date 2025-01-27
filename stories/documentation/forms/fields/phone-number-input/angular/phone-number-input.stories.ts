@@ -77,5 +77,6 @@ export const Basic: StoryObj<PhoneNumberInputComponent & FormFieldComponent & { 
 		errorInlineMessage: 'Invalid Phone Number',
 		inlineMessageState: 'default',
 		disabled: false,
+		noAutoPlaceholder: false,
 	},
 };

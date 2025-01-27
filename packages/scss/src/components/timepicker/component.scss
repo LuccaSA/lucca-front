@@ -76,7 +76,7 @@
 
 			&:focus-visible {
 				& + .timePicker-fieldset-group-textfield-display {
-					background-color: var(--palettes-primary-100);
+					background-color: var(--palettes-product-100);
 				}
 			}
 		}
@@ -150,7 +150,7 @@
 
 			&:has(input:focus) {
 				&::after {
-					background-color: var(--palettes-primary-100);
+					background-color: var(--palettes-product-100);
 				}
 			}
 
