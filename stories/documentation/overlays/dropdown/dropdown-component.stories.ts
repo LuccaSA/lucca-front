@@ -27,18 +27,18 @@ const code = `
 <lu-dropdown #dropdown>
 
   /* Ajouter la directive luDropdownItem pour lié le parent luDropdown à ses enfants */
-  <li class="lu-dropdown-options-item">
-    <a luDropdownItem routerLink="." fragment="link2" class="lu-dropdown-options-item-action">Link 2</a>
+  <li class="dropdown-list-option">
+    <a luDropdownItem routerLink="." fragment="link2" class="dropdown-list-option-action">Link 2</a>
   </li>
 
   /* Vous pouvez disable un enfant avec 'is-disabled' */
-  <li class="lu-dropdown-options-item">
-    <a luDropdownItem routerLink="." fragment="link1" class="lu-dropdown-options-item-action is-disabled">Link 1</a>
+  <li class="dropdown-list-option">
+    <span class="dropdown-list-option-action is-disabled">Link 1</a>
   </li>
 
   /* Vous pouvez également utiliser un <button></button> au lieu d'un <a></a>. */
-  <li class="lu-dropdown-options-item">
-    <button type="button" luDropdownItem class="lu-dropdown-options-item-action">Button 4</button>
+  <li class="dropdown-list-option">
+    <button type="button" luDropdownItem class="dropdown-list-option-action">Button 4</button>
   </li>
 
 </lu-dropdown>
