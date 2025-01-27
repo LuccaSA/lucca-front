@@ -61,6 +61,37 @@ export function getCommonMigrationRejectionReason(node: TmplAstElement, sourceFi
 						details: 'ALuEstablishmentService'
 					};
 				}
+				break;
+			case 'lu-user-select':
+				if (providers.some(p => p.provide === 'ALuUserService')) {
+					return {
+						reason: RejectionReason.DATA_SERVICE_OVERRIDE,
+						details: 'ALuUserService'
+					};
+				}
+				if (providers.some(p => p.provide === 'ALuUserHomonymsService')) {
+					return {
+						reason: RejectionReason.DATA_SERVICE_OVERRIDE,
+						details: 'ALuUserHomonymsService'
+					};
+				}
+				break;
+			case 'lu-qualification-select':
+				if (providers.some(p => p.provide === 'ALuQualificationService')) {
+					return {
+						reason: RejectionReason.DATA_SERVICE_OVERRIDE,
+						details: 'ALuUserService'
+					};
+				}
+				break;
+			case 'lu-api-select':
+				if (providers.some(p => p.provide === 'ALuApiService')) {
+					return {
+						reason: RejectionReason.DATA_SERVICE_OVERRIDE,
+						details: 'ALuUserService'
+					};
+				}
+				break;
 		}
 	}
 	return null;
@@ -176,7 +207,7 @@ export function getDisplayer(select: SelectContext): SelectDisplayer {
 				variables: displayerHostNode.variables.map(v => {
 					return v.value === '$implicit' ? `let ${v.name}` : `let ${v.name}=${v.value}`;
 				}).join('; '),
-				display: displayerHostNode.startSourceSpan.end.file.content.slice(select.nodeOffset + displayerHostNode.startSourceSpan.end.offset, select.nodeOffset + displayerHostNode.endSourceSpan?.start?.offset || 0)
+				display: displayerHostNode.startSourceSpan.end.file.content.slice(select.nodeOffset + displayerHostNode.startSourceSpan.end.offset, select.nodeOffset + (displayerHostNode.endSourceSpan?.start?.offset || 0))
 			};
 		}
 	}

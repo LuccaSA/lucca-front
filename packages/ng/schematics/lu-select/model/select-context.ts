@@ -53,3 +53,5 @@ export type PremadeApiSelectContext = LuUserSelectInputContext
 	| LuQualificationSelectInputContext;
 
 export type SelectContext = LuSelectInputContext | PremadeApiSelectContext;
+
+export type RejectedSelectContext = SelectContext & { rejection: Rejection };

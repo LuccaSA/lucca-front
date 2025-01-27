@@ -3,7 +3,7 @@ import ts, { isImportDeclaration, isNamedImports, ScriptTarget, SourceFile } fro
 import { extractComponentImports, insertAngularImportIfNeeded, insertTSImportIfNeeded, removeAngularImport, removeTSImport } from '../lib/angular-component-ast';
 import { extractNgTemplatesIncludingHtml } from '../lib/angular-template';
 import { getCommonMigrationRejectionReason, getDataSource, getDisplayer, isRejection, RejectionReason } from './util';
-import { LuSelectInputContext, PremadeApiSelectContext, SelectComponent, SelectContext, selectorToComponentName, selectorToSelectComponentName } from './model/select-context';
+import { LuSelectInputContext, PremadeApiSelectContext, RejectedSelectContext, SelectComponent, SelectContext, selectorToComponentName, selectorToSelectComponentName } from './model/select-context';
 import { Tree, UpdateRecorder } from '@angular-devkit/schematics';
 import { applyToUpdateRecorder } from '@schematics/angular/utility/change';
 import { getEOL } from '@schematics/angular/utility/eol';
@@ -47,16 +47,7 @@ export function migrateComponent(sourceFile: SourceFile, path: string, tree: Tre
 			// We're not checking using else here because handle** methods can also add a rejection reason
 			// We want to handle both cases (before handling and after) here
 			if (select.rejection) {
-				let detailedReason = '';
-				const contextBefore = select.node.startSourceSpan.start.getContext(20, 2)?.before || '';
-				const indentBefore = contextBefore.slice(contextBefore.lastIndexOf('\n') + 1);
-				switch (select.rejection.reason) {
-					case RejectionReason.DATA_SERVICE_OVERRIDE:
-						detailedReason = `${select.rejection.details} overriden in providers`;
-						break;
-				}
-
-				templateUpdate.insertLeft(select.nodeOffset + select.node.startSourceSpan.start.offset, `<!-- [lu-select migration] REJECTED: ${detailedReason} -->\n${indentBefore}`);
+				insertRejectionComment(templateUpdate, select as RejectedSelectContext);
 			}
 		});
 		tree.commitUpdate(tsUpdate);
@@ -68,6 +59,19 @@ export function migrateComponent(sourceFile: SourceFile, path: string, tree: Tre
 		updateImports(updatedSourceFile, selects, path, tree);
 	}
 	return tree.readText(path);
+}
+
+function insertRejectionComment(update: UpdateRecorder, select: RejectedSelectContext): void {
+	let detailedReason = '';
+	const contextBefore = select.node.startSourceSpan.start.getContext(20, 2)?.before || '';
+	const indentBefore = contextBefore.slice(contextBefore.lastIndexOf('\n') + 1);
+	switch (select.rejection.reason) {
+		case RejectionReason.DATA_SERVICE_OVERRIDE:
+			detailedReason = `${select.rejection.details} overriden in providers`;
+			break;
+	}
+
+	update.insertLeft(select.nodeOffset + select.node.startSourceSpan.start.offset, `<!-- [lu-select migration] REJECTED: ${detailedReason} -->\n${indentBefore}`);
 }
 
 function findSelectContexts(sourceFile: ts.SourceFile, basePath: string, tree: Tree): SelectContext[] {

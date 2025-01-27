@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { ALuEstablishmentService, LuEstablishmentSelectInputComponent } from '@lucca-front/ng/establishment';
+import { LuEstablishmentSelectInputComponent, ALuEstablishmentService } from '@lucca-front/ng/establishment';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
-import { LuCoreSelectJobQualificationsDirective, LuCoreSelectUsersDirective } from '@lucca-front/ng/core-select';
+import { LuCoreSelectJobQualificationsDirective } from '@lucca-front/ng/core-select';
+import { LuCoreSelectUsersDirective } from '@lucca-front/ng/core-select';
 
 @Component({
 	selector: 'lu-select-schematic-api-selects',
