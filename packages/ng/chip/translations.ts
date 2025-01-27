@@ -9,13 +9,16 @@
 		delete: 'Supprimer',
 	},
 	it: {
-		delete: 'Cancellare',
+		delete: 'Eliminare',
 	},
 	nl: {
-		delete: 'Verwijder',
+		delete: 'Verwijderen',
+	},
+	'nl-BE': {
+		delete: 'Verwijderen',
 	},
 	es: {
-		delete: 'Borrar',
+		delete: 'Eliminar',
 	},
 	pt: {
 		delete: 'Eliminar',
