@@ -53,11 +53,13 @@
 
 			&::before {
 				@include icon.generate('confirm');
+
 				font-size: var(--component-switchField-label-input-icon-fontSize);
 			}
 
 			&::after {
 				@include icon.generate('cross');
+
 				font-size: var(--component-switchField-label-input-icon-fontSize);
 			}
 		}

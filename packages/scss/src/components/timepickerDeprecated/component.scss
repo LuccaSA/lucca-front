@@ -12,6 +12,7 @@
 
 	&:focus-within {
 		@include a11y.focusVisible($offset: 3px);
+
 		background-color: transparent;
 	}
 

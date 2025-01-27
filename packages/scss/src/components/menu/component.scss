@@ -102,7 +102,6 @@
 		.menu-link-placeholder {
 			&::after {
 				content: attr(data-content-after);
-
 				display: block;
 				height: 0;
 				overflow: hidden;

@@ -105,6 +105,7 @@
 
 		.textField-input-affix-icon {
 			@include icon.M;
+
 			color: var(--pr-t-color-input-icon);
 			pointer-events: none;
 		}

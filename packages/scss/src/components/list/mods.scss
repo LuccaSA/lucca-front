@@ -45,6 +45,7 @@
 			.button {
 				&:not(:focus) {
 					@include a11y.mask;
+
 					opacity: 0;
 				}
 			}

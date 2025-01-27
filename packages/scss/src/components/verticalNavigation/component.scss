@@ -7,6 +7,7 @@
 	@at-root ($atRoot) {
 		.verticalNavigation-sectionTitle {
 			@include title.h5;
+
 			color: var(--palettes-neutral-600);
 			padding: 0 var(--components-verticalNavigation-horizontalPadding);
 			margin-bottom: var(--pr-t-spacings-100);
@@ -14,6 +15,7 @@
 
 		.verticalNavigation-list {
 			@include reset.list;
+
 			background-color: var(--pr-t-elevation-surface-raised);
 			margin-bottom: var(--pr-t-spacings-200);
 		}
@@ -25,6 +27,7 @@
 
 		.verticalNavigation-list-item-link {
 			@include reset.button;
+
 			display: flex;
 			padding: var(--pr-t-spacings-100) var(--components-verticalNavigation-horizontalPadding);
 			border-radius: var(--commons-borderRadius-M);
@@ -36,6 +39,7 @@
 
 			&:hover {
 				--components-verticalNavigation-link-background: var(--palettes-neutral-50);
+
 				color: var(--components-verticalNavigation-link-color);
 			}
 

@@ -6,6 +6,7 @@
 :host {
 	&::after {
 		@include icon.generate('calendar_date');
+
 		transform: none !important;
 	}
 }

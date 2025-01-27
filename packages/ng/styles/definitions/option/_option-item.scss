@@ -161,6 +161,7 @@
 
 				&.is-selected {
 					--components-options-checkbox-color: var(--commons-disabled-background);
+
 					background-color: transparent;
 
 					&::after {

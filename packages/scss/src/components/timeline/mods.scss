@@ -6,6 +6,7 @@
 	.timeline-step-title {
 		--components-timeline-title-fontSize: var(--sizes-S-fontSize);
 		--components-timeline-title-lineHeight: var(--sizes-M-lineHeight);
+
 		padding-left: 1.25rem;
 
 		&::before {
@@ -243,6 +244,7 @@
 
 				.timeline-step-title-icon::before {
 					@include icon.generate('maths_plus');
+
 					display: flex;
 				}
 			}
@@ -324,6 +326,7 @@
 
 	.timeline-stepAddBetweenStep-title {
 		@include reset.button;
+
 		width: auto;
 
 		&:hover {
@@ -341,6 +344,7 @@
 
 	.timeline-step:not([aria-current='step']):not([aria-current='step'] ~ .timeline-step) .timeline-step-title-icon::before {
 		@include icon.generate('maths_plus');
+
 		display: flex;
 		transition: background-color var(--commons-animations-durations-fast);
 	}

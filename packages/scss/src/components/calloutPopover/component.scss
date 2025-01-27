@@ -40,12 +40,14 @@
 		.calloutPopover-overlay-head-title {
 			@include title.component;
 			@include title.h4;
+
 			margin: 0;
 			padding: 0;
 		}
 
 		.calloutPopover-overlay-head-icon {
 			@include icon.M;
+
 			color: var(--palettes-700, var(--palettes-neutral-700));
 		}
 

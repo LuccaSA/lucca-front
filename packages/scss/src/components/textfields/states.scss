@@ -22,6 +22,7 @@
 
 	~ .textfield-clear {
 		--components-clear-cross-color: var(--palettes-neutral-500) !important; // disabled token candidate
+
 		pointer-events: none;
 	}
 }

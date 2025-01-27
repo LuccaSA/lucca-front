@@ -71,6 +71,7 @@
 
 		.multipleSelect-arrow {
 			@include icon.M;
+
 			color: var(--components-multiSelect-arrow-color);
 			transition-property: transform;
 			transition-duration: var(--commons-animations-durations-standard);

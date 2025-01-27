@@ -216,6 +216,7 @@
 
 	.indexTable-body-row-cell {
 		--components-indexTable-cell-inset-x-left: var(--components-indexTable-row-cell-transparent-width);
+
 		grid-column-start: 2;
 	}
 }
@@ -252,6 +253,7 @@
 		&::before {
 			left: var(--components-indexTable-cell-inset-x-left, 0);
 			right: 50%;
+
 			--components-indexTable-row-stack2-background-position: left -2px bottom 6px;
 			--components-indexTable-row-stack3-background-position: left 1px bottom 2px;
 		}
@@ -259,6 +261,7 @@
 		&::after {
 			left: 50%;
 			right: 0;
+
 			--components-indexTable-row-stack2-background-position: right -2px bottom 6px;
 			--components-indexTable-row-stack3-background-position: right 1px bottom 2px;
 		}

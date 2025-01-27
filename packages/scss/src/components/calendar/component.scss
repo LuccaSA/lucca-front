@@ -228,6 +228,7 @@
 			&:disabled,
 			&[aria-disabled='true'] {
 				--components-calendar-table-body-row-cell-actionColor: var(--palettes-neutral-500);
+
 				text-decoration: line-through;
 				cursor: default;
 			}
