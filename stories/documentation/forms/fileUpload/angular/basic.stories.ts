@@ -3,13 +3,6 @@ import { FileUploadComponent } from '@lucca-front/ng/fileUpload';
 import { applicationConfig, Meta, moduleMetadata } from '@storybook/angular';
 import { generateInputs } from 'stories/helpers/stories';
 
-interface FileUploadBasicStory {
-	size: string;
-	droppable: boolean;
-	state: string;
-	multiple: boolean;
-}
-
 export default {
 	title: 'Documentation/FileUpload/Angular/Basic',
 	argTypes: {

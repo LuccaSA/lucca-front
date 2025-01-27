@@ -1,50 +1,39 @@
 import { provideHttpClient } from '@angular/common/http';
-import { FileUploadComponent } from '@lucca-front/ng/fileUpload';
+import { FileUploadedComponent } from '@lucca-front/ng/fileUploaded';
 import { applicationConfig, Meta, moduleMetadata } from '@storybook/angular';
 import { generateInputs } from 'stories/helpers/stories';
 
-interface FileUploadBasicStory {
-	size: string;
-	droppable: boolean;
-	state: string;
-	multiple: boolean;
-}
-
 export default {
-	title: 'Documentation/FileUpload/Angular/Basic',
+	title: 'Documentation/FileUpload/Angular/File',
 	argTypes: {
 		size: {
-			options: [null, 'S', 'XS'],
+			options: [null, 'S', 'L'],
 			control: {
 				type: 'radio',
 			},
 		},
 		state: {
-			options: [null, 'loading', 'success', 'critical'],
+			options: ['loading', 'success'],
 			control: {
 				type: 'radio',
 			},
 		},
-		droppable: {
+		format: {
+			options: ['img', 'file', 'pdf'],
 			control: {
-				type: 'boolean',
-			},
-		},
-		multiple: {
-			control: {
-				type: 'boolean',
+				type: 'radio',
 			},
 		},
 	},
 	decorators: [
 		moduleMetadata({
-			imports: [FileUploadComponent],
+			imports: [FileUploadedComponent],
 		}),
 		applicationConfig({ providers: [provideHttpClient()] }),
 	],
 	render: (args, { argTypes }) => {
 		return {
-			template: `<lu-file-upload ${generateInputs(args, argTypes)} />`,
+			template: `<lu-file-uploaded ${generateInputs(args, argTypes)} />`,
 		};
 	},
 } as Meta;
@@ -52,8 +41,7 @@ export default {
 export const Basic = {
 	args: {
 		size: null,
-		droppable: false,
 		state: null,
-		multiple: false,
+		format: 'img',
 	},
 };
