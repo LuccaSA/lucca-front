@@ -6,6 +6,15 @@ import { getDisallowedObjects, getDisallowedData } from './stylelintForLF.mjs';
 
 export default {
 	extends: ['stylelint-config-standard-scss', 'stylelint-config-prettier-scss'],
+	overrides: [
+		{
+			// Allow common component files to be empty.
+			files: ['**/vars.scss'],
+			rules: {
+				'custom-property-empty-line-before': null,
+			},
+		},
+	],
 	rules: {
 		// SCSS specific
 		// ============================================================================================
