@@ -18,19 +18,47 @@ export default {
 
 function getTemplate(args: FileUploadFileStory): string {
 	return `
-<div class="fileUpload_file">
-<div class="fileUpload_file-status">
-	<img src="https://dummyimage.com/112" alt="" width="56" height="56" loading="lazy" />
+<div class="fileUploaded">
+	<div class="fileUploaded-status">
+		<img class="fileUploaded-status-img" src="https://dummyimage.com/360" alt="" width="56" height="56" loading="lazy" />
+	</div>
+	<div class="fileUploaded-informations">
+		<span class="fileUploaded-informations-filename">filename.ext</span>
+		<span class="fileUploaded-informations-extension">Fichier EXT</span>
+		<span class="fileUploaded-informations-size">88,8 Mo</span>
+	</div>
+	<button class="fileUploaded-button button" type="button" luTooltip="Supprimer le fichier" luTooltipOnlyForDisplay luTooltipPosition="before">
+		<span class="lucca-icon icon-trash" aria-hidden="true"></span>
+		<span class="u-mask">Supprimer le fichier « filename.ext »</span>
+	</button>
 </div>
-<div class="fileUpload_file-informations">
-	<span class="fileUpload_file-informations-filename">filename.ext</span>
-	<span class="fileUpload_file-informations-extension">Fichier EXT</span>
-	<span class="fileUpload_file-informations-size">2,3 Mo</span>
+<div class="fileUploaded mod-S">
+	<div class="fileUploaded-status">
+		<img class="fileUploaded-status-img" src="https://dummyimage.com/360" alt="" width="56" height="56" loading="lazy" />
+	</div>
+	<div class="fileUploaded-informations">
+		<span class="fileUploaded-informations-filename">filename.ext</span>
+		<span class="fileUploaded-informations-extension">Fichier EXT</span>
+		<span class="fileUploaded-informations-size">88,8 Mo</span>
+	</div>
+	<button class="fileUploaded-button button" type="button" luTooltip="Supprimer le fichier" luTooltipOnlyForDisplay luTooltipPosition="before">
+		<span class="lucca-icon icon-trash" aria-hidden="true"></span>
+		<span class="u-mask">Supprimer le fichier « filename.ext »</span>
+	</button>
 </div>
-<button class="fileUpload_file-button button" type="button" luTooltip="Supprimer le fichier" luTooltipOnlyForDisplay luTooltipPosition="before">
-	<span class="lucca-icon icon-trash" aria-hidden="true"></span>
-	<span class="u-mask">Supprimer le fichier « filename.ext »</span>
-</button>
+<div class="fileUploaded mod-L">
+	<div class="fileUploaded-status">
+		<img class="fileUploaded-status-img" src="https://dummyimage.com/360" alt="" width="56" height="56" loading="lazy" />
+	</div>
+	<div class="fileUploaded-informations">
+		<span class="fileUploaded-informations-filename">filename.ext</span>
+		<span class="fileUploaded-informations-extension">Fichier EXT</span>
+		<span class="fileUploaded-informations-size">88,8 Mo</span>
+	</div>
+	<button class="fileUploaded-button button" type="button" luTooltip="Supprimer le fichier" luTooltipOnlyForDisplay luTooltipPosition="before">
+		<span class="lucca-icon icon-trash" aria-hidden="true"></span>
+		<span class="u-mask">Supprimer le fichier « filename.ext »</span>
+	</button>
 </div>`;
 }
 

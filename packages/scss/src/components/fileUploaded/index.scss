@@ -1,0 +1,14 @@
+@use 'exports' as *;
+
+.fileUploaded {
+	@include vars;
+	@include component;
+
+	&.mod-S {
+		@include S;
+	}
+
+	&.mod-L {
+		@include L;
+	}
+}
