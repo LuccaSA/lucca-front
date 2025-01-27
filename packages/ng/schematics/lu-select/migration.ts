@@ -69,6 +69,10 @@ function insertRejectionComment(update: UpdateRecorder, select: RejectedSelectCo
 		case RejectionReason.DATA_SERVICE_OVERRIDE:
 			detailedReason = `${select.rejection.details} overriden in providers`;
 			break;
+		case RejectionReason.UNSUPPORTED_ATTRIBUTE:
+		case RejectionReason.UNSUPPORTED_INPUT:
+			detailedReason = `Unsupported input: ${select.rejection.details}`;
+			break;
 	}
 
 	update.insertLeft(select.nodeOffset + select.node.startSourceSpan.start.offset, `<!-- [lu-select migration] REJECTED: ${detailedReason} -->\n${indentBefore}`);

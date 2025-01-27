@@ -61,6 +61,12 @@ export function getCommonMigrationRejectionReason(node: TmplAstElement, sourceFi
 						details: 'ALuEstablishmentService'
 					};
 				}
+				if (providers.some(p => p.provide === 'ALuLegalUnitService')) {
+					return {
+						reason: RejectionReason.DATA_SERVICE_OVERRIDE,
+						details: 'ALuLegalUnitService'
+					};
+				}
 				break;
 			case 'lu-user-select':
 				if (providers.some(p => p.provide === 'ALuUserService')) {
