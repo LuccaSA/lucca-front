@@ -104,7 +104,7 @@
     "prettier": "^3.2.5",
     "sass": "^1.62.1",
     "storybook": "^8.4.5",
-    "stylelint": "^16.13.2",
+    "stylelint": "^16.14.0",
     "ts-node": "~10.9.1",
     "typescript": "5.6.3"
   },

@@ -25,7 +25,7 @@
 	},
 	"homepage": "https://github.com/LuccaSA/lucca-front#readme",
 	"peerDependencies": {
-		"stylelint": "^16.13.2",
+		"stylelint": "^16.14.0",
 		"stylelint-config-prettier-scss": "^1.0.0",
 		"stylelint-config-standard-scss": "^14.0.0"
 	}
