@@ -74,6 +74,8 @@ export class FormFieldComponent implements OnDestroy {
 
 	tooltip = input<string | SafeHtml | null>(null);
 
+	width = input<20 | 30 | 40 | 50 | 60>(null);
+
 	invalidStatus = computed(() => {
 		const isInvalidOverride = this.invalid() !== undefined && this.invalid() !== null;
 		if (isInvalidOverride) {
@@ -151,6 +153,7 @@ export class FormFieldComponent implements OnDestroy {
 				[`mod-${this.size()}`]: !!this.size(),
 				'mod-checkable': this.layout() === 'checkable',
 				'form-field': this.layout() !== 'fieldset',
+				[`mod-width${this.width()}`]: !!this.width(),
 			});
 		});
 	}
