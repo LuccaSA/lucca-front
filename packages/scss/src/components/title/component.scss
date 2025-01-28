@@ -11,7 +11,7 @@
 	font-size: var(--sizes-fontSize) #{$suffix};
 	line-height: var(--sizes-lineHeight) #{$suffix};
 
-	@if config.$deprecatedTitleSpacings {
+	@if config.$deprecatedSpacings {
 		// no suffix here
 		margin-block-end: var(--pr-t-spacings-headings);
 

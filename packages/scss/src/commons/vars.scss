@@ -12,8 +12,13 @@
 	}
 
 	@include core.cssvars('pr-t-spacings', config.$spacings);
-	--pr-t-spacings-headings: var(--pr-t-spacings-200);
-	--pr-t-spacings-paragraph: var(--pr-t-spacings-200);
+	--pr-t-spacings-headings: var(--pr-t-spacings-200); // Remove?
+	--pr-t-spacings-h1: var(--pr-t-spacings-300);
+	--pr-t-spacings-h2: var(--pr-t-spacings-300) var(--pr-t-spacings-150);
+	--pr-t-spacings-h3: var(--pr-t-spacings-300) var(--pr-t-spacings-150);
+	--pr-t-spacings-h4: var(--pr-t-spacings-150);
+	--pr-t-spacings-paragraph: var(--pr-t-spacings-150);
+	--pr-t-spacings-list: var(--pr-t-spacings-150);
 	--pr-t-spacings-auto: auto;
 
 	@include core.cssvars('pr-t-color-input', config.$colorInput);
