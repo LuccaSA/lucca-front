@@ -76,6 +76,9 @@ function insertRejectionComment(update: UpdateRecorder, select: RejectedSelectCo
 		case RejectionReason.SELECT_ALL:
 			detailedReason = `lu-option-select-all requires manual work and API support to be migrated`;
 			break;
+		case RejectionReason.TREE_OPTION_PICKER:
+			detailedReason = `Tree selects don't have their "modern" implementation yet`;
+			break;
 	}
 
 	update.insertLeft(select.nodeOffset + select.node.startSourceSpan.start.offset, `<!-- [lu-select migration] REJECTED: ${detailedReason || RejectionReason[select.rejection.reason]} -->\n${indentBefore}`);

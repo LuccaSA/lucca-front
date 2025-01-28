@@ -12,6 +12,7 @@ export enum RejectionReason {
 	UNSUPPORTED_VALUE_ASSIGNMENT,
 	DATA_SERVICE_OVERRIDE,
 	SELECT_ALL,
+	TREE_OPTION_PICKER,
 }
 
 export interface Rejection {
@@ -109,16 +110,22 @@ export function getDataSource(select: LuSelectInputContext): SelectDataSource | 
 		reason: RejectionReason.NO_DATA_SOURCE
 	};
 	const htmlAstVisitor = new HtmlAstVisitor(select.node);
-	let hasSelectAll = false;
+	let rejected = false;
 	// First of all, check that there's no lu-option-select-all, because this is a rejection reason
-	htmlAstVisitor.visitElements(/lu-option-select-all/, () => {
-		hasSelectAll = true;
-		result = {
-			reason: RejectionReason.SELECT_ALL
-		};
+	htmlAstVisitor.visitElements(/(lu-option-select-all)|(lu-tree-.*)/, (node) => {
+		rejected = true;
+		if (node.name === 'lu-option-select-all') {
+			result = {
+				reason: RejectionReason.SELECT_ALL
+			};
+		} else {
+			result = {
+				reason: RejectionReason.TREE_OPTION_PICKER
+			};
+		}
 	});
-	// If we have a select all, don't go further
-	if (hasSelectAll) {
+	// If we have a rejection from template elements, don't go further
+	if (rejected) {
 		return result;
 	}
 

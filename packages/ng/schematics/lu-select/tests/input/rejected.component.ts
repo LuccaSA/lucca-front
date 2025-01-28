@@ -24,6 +24,11 @@ import { LuOptionItemComponent, LuOptionSelectAllComponent } from '@lucca-front/
 			</lu-option-picker-advanced>
 			<lu-input-clearer></lu-input-clearer>
 		</lu-select>
+		<lu-select class="textfield-input">
+			<lu-tree-option *ngFor="let culture of cultures" [value]="culture">
+				{{ culture?.name }}
+			</lu-tree-option>
+		</lu-select>
 	`,
 	providers: [
 		{
