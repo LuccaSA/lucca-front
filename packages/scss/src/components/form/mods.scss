@@ -100,28 +100,23 @@
 }
 
 @mixin width20 {
-	width: 10rem;
-	max-width: 100%;
+	--components-form-field-width: 10rem;
 }
 
 @mixin width30 {
-	width: 15rem;
-	max-width: 100%;
+	--components-form-field-width: 15rem;
 }
 
 @mixin width40 {
-	width: 20rem;
-	max-width: 100%;
+	--components-form-field-width: 20rem;
 }
 
 @mixin width50 {
-	width: 25rem;
-	max-width: 100%;
+	--components-form-field-width: 25rem;
 }
 
 @mixin width60 {
-	width: 30rem;
-	max-width: 100%;
+	--components-form-field-width: 30rem;
 }
 
 @mixin withArrow {
