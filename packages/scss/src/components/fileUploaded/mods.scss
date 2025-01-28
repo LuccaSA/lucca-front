@@ -1,15 +1,21 @@
 @mixin S {
 	--components-fileUploaded-informations-children-display: none;
-	--components-fileUploaded-status-img-width: 32px;
+	--components-fileUploaded-status-width: 32px;
 	--components-fileUploaded-padding: var(--pr-t-spacings-50);
 	--components-fileUploaded-gap: var(--components-fileUploaded-padding);
+	--components-fileUploaded-status-svg-width: 32px;
 }
 
 @mixin L {
 	--components-fileUploaded-width: fit-content;
 	--components-fileUploaded-flexDirection: column;
 	--components-fileUploaded-alignItems: flex-end;
-	--components-fileUploaded-status-img-width: 180px;
-	--components-fileUploaded-status-img-height: 142px;
+	--components-fileUploaded-status-width: 180px;
+	--components-fileUploaded-status-height: 142px;
 	--components-fileUploaded-informations-display: none;
+	--components-fileUploaded-status-svg-width: 96px;
+}
+
+@mixin fileSuccess {
+	--components-fileUploaded-status-backgroundColor: var(--palettes-neutral-25);
 }

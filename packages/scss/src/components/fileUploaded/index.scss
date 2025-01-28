@@ -11,4 +11,17 @@
 	&.mod-L {
 		@include L;
 	}
+
+	&.mod-word,
+	&.mod-file,
+	&.mod-excel,
+	&.mod-powerpoint {
+		&.is-success {
+			@include fileSuccess;
+		}
+	}
+
+	&.is-critical {
+		@include critical;
+	}
 }

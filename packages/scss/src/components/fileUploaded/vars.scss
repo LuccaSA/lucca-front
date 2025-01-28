@@ -1,11 +1,14 @@
 @mixin vars {
 	--components-fileUploaded-informations-display: block;
 	--components-fileUploaded-informations-children-display: inline-block;
-	--components-fileUploaded-status-img-width: 56px;
-	--components-fileUploaded-status-img-height: var(--components-fileUploaded-status-img-width);
+	--components-fileUploaded-status-width: 56px;
+	--components-fileUploaded-status-height: var(--components-fileUploaded-status-width);
 	--components-fileUploaded-padding: var(--pr-t-spacings-75);
 	--components-fileUploaded-gap: var(--components-fileUploaded-padding);
 	--components-fileUploaded-flexDirection: row;
 	--components-fileUploaded-width: auto;
 	--components-fileUploaded-alignItems: center;
+	--components-fileUploaded-status-backgroundColor: transparent;
+	--components-fileUploaded-status-svg-width: 48px;
+	--components-fileUploaded-status-svg-height: var(--components-fileUploaded-status-svg-width);
 }

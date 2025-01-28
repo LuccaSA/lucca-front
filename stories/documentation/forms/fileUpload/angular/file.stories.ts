@@ -13,13 +13,13 @@ export default {
 			},
 		},
 		state: {
-			options: ['loading', 'success'],
+			options: ['loading', 'success', 'critical'],
 			control: {
 				type: 'radio',
 			},
 		},
 		format: {
-			options: ['img', 'file', 'pdf'],
+			options: ['img', 'file', 'word', 'excel', 'powerpoint'],
 			control: {
 				type: 'radio',
 			},
@@ -41,7 +41,7 @@ export default {
 export const Basic = {
 	args: {
 		size: null,
-		state: null,
 		format: 'img',
+		state: 'success',
 	},
 };

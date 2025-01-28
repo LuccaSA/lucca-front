@@ -19,12 +19,23 @@
 			display: flex;
 			border-radius: var(--commons-borderRadius-M);
 			overflow: hidden;
+			width: var(--components-fileUploaded-status-width);
+			height: var(--components-fileUploaded-status-height);
+			justify-content: center;
+			align-items: center;
+			color: var(--palettes-neutral-700);
+			background-color: var(--components-fileUploaded-status-backgroundColor);
+		}
+
+		.fileUploaded-status-svg {
+			width: var(--components-fileUploaded-status-svg-width);
+			height: var(--components-fileUploaded-status-svg-height);
 		}
 
 		.fileUploaded-status-img {
 			object-fit: cover;
-			width: var(--components-fileUploaded-status-img-width);
-			height: var(--components-fileUploaded-status-img-height);
+			width: 100%;
+			height: 100%;
 		}
 
 		.fileUploaded-button {
