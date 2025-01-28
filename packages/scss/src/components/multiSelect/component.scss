@@ -55,6 +55,12 @@
 			background-color: transparent;
 			cursor: pointer;
 
+			&:not(:focus) {
+				&:placeholder-shown {
+					@include a11y.mask;
+				}
+			}
+
 			&::placeholder {
 				color: var(--components-multiSelect-placeholder);
 			}

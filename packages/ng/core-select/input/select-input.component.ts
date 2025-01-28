@@ -295,7 +295,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 			this.clueChanged(clue);
 			this._panelRef = this.buildPanelRef();
 			this.bindInputToPanelRefEvents();
-		});
+		}, 10);
 		// Oh and we have to wait for another cycle before focusing the input so it's done once panel is opened for good.
 		setTimeout(() => this.focusInput());
 	}
