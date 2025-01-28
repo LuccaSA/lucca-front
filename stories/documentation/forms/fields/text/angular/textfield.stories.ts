@@ -1,10 +1,10 @@
+import { AsyncPipe } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { TextInputComponent } from '@lucca-front/ng/forms';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { cleanupTemplate, generateInputs } from 'stories/helpers/stories';
-import { AsyncPipe } from '@angular/common';
 
 export default {
 	title: 'Documentation/Forms/Fields/TextField/Angular',
@@ -48,12 +48,18 @@ export default {
 		autocomplete: {
 			type: 'string',
 		},
+		width: {
+			options: [null, 20, 30, 40, 50, 60],
+			control: {
+				type: 'select',
+			},
+		},
 	},
 } as Meta;
 
 export const Basic: StoryObj<TextInputComponent & { disabled: boolean; required: boolean } & FormFieldComponent> = {
 	render: (args, { argTypes }) => {
-		const { counter, label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, ...inputArgs } = args;
+		const { counter, label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, width, ...inputArgs } = args;
 		return {
 			template: cleanupTemplate(`<lu-form-field ${generateInputs(
 				{
@@ -64,6 +70,7 @@ export const Basic: StoryObj<TextInputComponent & { disabled: boolean; required:
 					inlineMessageState,
 					size,
 					counter,
+					width,
 				},
 				argTypes,
 			)}>
