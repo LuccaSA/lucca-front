@@ -30,6 +30,7 @@ interface BaseSelectContext {
 	requiredImports?: string[];
 	filePath: string;
 	componentTS: SourceFile;
+	multiple?: { start: number, end: number };
 }
 
 export interface LuSelectInputContext extends BaseSelectContext {

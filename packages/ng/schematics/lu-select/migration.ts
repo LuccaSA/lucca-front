@@ -7,11 +7,11 @@ import { LuSelectInputContext, PremadeApiSelectContext, RejectedSelectContext, S
 import { Tree, UpdateRecorder } from '@angular-devkit/schematics';
 import { applyToUpdateRecorder } from '@schematics/angular/utility/change';
 import { getEOL } from '@schematics/angular/utility/eol';
-import { TmplAstElement } from '@angular/compiler';
+import { ASTWithSource, TmplAstElement } from '@angular/compiler';
 
 const importSource: Record<string, string> = {
 	LuSimpleSelectInputComponent: '@lucca-front/ng/simple-select',
-	LuMultipleSelectInputComponent: '@lucca-front/ng/multiple-select',
+	LuMultiSelectInputComponent: '@lucca-front/ng/multi-select',
 	LuDisplayerDirective: '@lucca-front/ng/core-select',
 	LuOptionDirective: '@lucca-front/ng/core-select',
 	LuInputClearerComponent: '@lucca-front/ng/input',
@@ -79,6 +79,9 @@ function insertRejectionComment(update: UpdateRecorder, select: RejectedSelectCo
 		case RejectionReason.TREE_OPTION_PICKER:
 			detailedReason = `Tree selects don't have their "modern" implementation yet`;
 			break;
+		case RejectionReason.CONDITIONAL_MULTIPLE:
+			detailedReason = `conditional multiple isn't supported by the schematic, you might want to use @if to surround this and run the migration again`;
+			break;
 	}
 
 	update.insertLeft(select.nodeOffset + select.node.startSourceSpan.start.offset, `<!-- [lu-select migration] REJECTED: ${detailedReason || RejectionReason[select.rejection.reason]} -->\n${indentBefore}`);
@@ -93,15 +96,23 @@ function findSelectContexts(sourceFile: ts.SourceFile, basePath: string, tree: T
 		htmlAst.visitNodes((node) => {
 			if (node instanceof TmplAstElement) {
 				const selectComponentClass = selectorToComponentNameRecord[node.name];
+				const multipleInput = node.inputs.find(attr => attr.name === 'multiple');
+				const unsupportedMultiple = multipleInput && (multipleInput.value as ASTWithSource)?.source !== 'true';
+				const multipleAttr = node.attributes.find(attr => attr.name === 'multiple');
+				const multipleFromInput = multipleInput && (multipleInput.value as ASTWithSource)?.source === 'true' ? { start: multipleInput?.sourceSpan?.start?.offset, end: multipleInput?.sourceSpan?.end?.offset + 1 } : null;
+				const multipleFromAttr = multipleAttr && (multipleAttr.value === 'true' || multipleAttr.value === '') ? { start: multipleAttr?.sourceSpan?.start?.offset, end: multipleAttr?.sourceSpan?.end?.offset + 1 } : null;
 				if (selectComponentClass) {
 					const context = {
 						node,
 						tagName: node.name,
 						nodeOffset: template.offsetStart,
 						component: selectComponentClass,
-						rejection: getCommonMigrationRejectionReason(node, sourceFile),
+						rejection: unsupportedMultiple ? {
+							reason: RejectionReason.CONDITIONAL_MULTIPLE
+						} : getCommonMigrationRejectionReason(node, sourceFile),
 						filePath: template.filePath,
-						componentTS: template.componentTS
+						componentTS: template.componentTS,
+						multiple: multipleFromAttr || multipleFromInput
 					};
 
 					selects.push(context as SelectContext);
@@ -164,14 +175,18 @@ function handleLuSelectInputComponent(select: LuSelectInputContext, update: Upda
 	if (isRejection(dataSource)) {
 		select.rejection = dataSource;
 	} else {
-		select.requiredImports = ['LuSimpleSelectInputComponent'];
+		select.requiredImports = select.multiple ? ['LuMultiSelectInputComponent'] : ['LuSimpleSelectInputComponent'];
+		const tag = select.multiple ? 'lu-multi-select' : 'lu-simple-select';
+		if (select.multiple) {
+			update.remove(select.nodeOffset + select.multiple.start, select.multiple.end - select.multiple.start);
+		}
 		const displayer = getDisplayer(select);
 		const endSpanOffset = select.node.endSourceSpan?.start.offset || 0;
 		// Remove content
 		update.remove(select.nodeOffset + select.node.startSourceSpan.end.offset, endSpanOffset - select.node.startSourceSpan.end.offset);
 		// rename opening tag and insert options
 		update.remove(select.nodeOffset + select.node.startSourceSpan.start.offset + 1, select.tagName.length);
-		let newOpeningTag = `lu-simple-select [options]="${dataSource.sourceName}"`;
+		let newOpeningTag = `${tag} [options]="${dataSource.sourceName}"`;
 		if (!dataSource.display.canBeRemoved) {
 			newOpeningTag += ` #${dataSource.sourceName}Select`;
 		}
@@ -195,7 +210,7 @@ function handleLuSelectInputComponent(select: LuSelectInputContext, update: Upda
 		}
 		// rename closing tag
 		update.remove(select.nodeOffset + endSpanOffset + 2, select.tagName.length);
-		update.insertRight(select.nodeOffset + endSpanOffset + 2, `lu-simple-select`);
+		update.insertRight(select.nodeOffset + endSpanOffset + 2, tag);
 	}
 }
 
@@ -205,13 +220,17 @@ function handlePremadeApiSelect(select: PremadeApiSelectContext, update: UpdateR
 		LuUserSelectModule: { selector: 'users', className: 'LuCoreSelectUsersDirective' },
 		LuEstablishmentSelectInputComponent: { selector: 'establishments', className: 'LuCoreSelectEstablishmentsDirective' }
 	}[select.component];
-	select.requiredImports = ['LuSimpleSelectInputComponent', sourceDirective.className];
+	select.requiredImports = select.multiple ? ['LuMultiSelectInputComponent', sourceDirective.className] : ['LuSimpleSelectInputComponent', sourceDirective.className];
+	const tag = select.multiple ? 'lu-multi-select' : 'lu-simple-select';
+	if (select.multiple) {
+		update.remove(select.nodeOffset + select.multiple.start, select.multiple.end - select.multiple.start);
+	}
 	const endSpanOffset = select.node.endSourceSpan?.start.offset || 0;
 	// rename opening tag and insert data directive
 	update.remove(select.nodeOffset + select.node.startSourceSpan.start.offset + 1, select.tagName.length);
 	// rename tag and add options + selector if needed
-	update.insertRight(select.nodeOffset + select.node.startSourceSpan.start.offset + 1, `lu-simple-select ${sourceDirective.selector}`);
+	update.insertRight(select.nodeOffset + select.node.startSourceSpan.start.offset + 1, `${tag} ${sourceDirective.selector}`);
 	// rename closing tag
 	update.remove(select.nodeOffset + endSpanOffset + 2, select.tagName.length);
-	update.insertRight(select.nodeOffset + endSpanOffset + 2, `lu-simple-select`);
+	update.insertRight(select.nodeOffset + endSpanOffset + 2, tag);
 }

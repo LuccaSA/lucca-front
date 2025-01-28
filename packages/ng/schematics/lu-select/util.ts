@@ -13,6 +13,7 @@ export enum RejectionReason {
 	DATA_SERVICE_OVERRIDE,
 	SELECT_ALL,
 	TREE_OPTION_PICKER,
+	CONDITIONAL_MULTIPLE
 }
 
 export interface Rejection {
@@ -32,7 +33,7 @@ export interface SelectDisplayer {
 	display?: string;
 }
 
-const allowedAttributes = [/class/, /ngModel/, /ngModelChange/, /disabled/, /title/, /formControl/, /required/, /data-.+/, /attr\..+/, /class\..+/, /placeholder/, /title/, /filters/];
+const allowedAttributes = [/class/, /ngModel/, /ngModelChange/, /disabled/, /title/, /formControl/, /required/, /data-.+/, /attr\..+/, /class\..+/, /placeholder/, /title/, /filters/, /multiple/];
 
 export function isRejection(value: unknown): value is Rejection {
 	return (value as Rejection)?.reason !== undefined && RejectionReason[(value as Rejection).reason] != undefined;
