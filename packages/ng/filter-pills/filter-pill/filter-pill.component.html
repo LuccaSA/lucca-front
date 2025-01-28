@@ -23,9 +23,8 @@
 	<ng-container *ngTemplateOutlet="pillTpl; context:{label: label(), isEmpty: inputIsEmpty()}"></ng-container>
 	@if (inputIsEmpty() && !disabled()) { {{ placeholder() }} }
 </button>
-<!-- TODO i18n alternative -->
 <button type="button" class="filterPill-clear clear" (click)="$event.stopPropagation(); clear(); comboboxRef.focus()">
-	<span class="u-mask">Vider ce champ</span>
+	<span class="u-mask">{{ intl.clear }}</span>
 </button>
 <button
 	type="button"

@@ -26,8 +26,6 @@
 	white-space: nowrap;
 	transition-property: box-shadow;
 	transition-duration: var(--commons-animations-durations-fast);
-	--components-filterPill-label-contentAfter: none;
-	--components-filterPill-clear-display: none;
 
 	@at-root ($atRoot) {
 		.filterPillBar-divider.divider {

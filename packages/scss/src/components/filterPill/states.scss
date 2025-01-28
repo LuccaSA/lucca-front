@@ -65,6 +65,7 @@
 	--components-filterPill-backgroundColor: var(--palettes-product-50);
 	--components-filterPill-color: var(--palettes-product-800);
 	--components-filterPill-toggle-iconColor: var(--palettes-product-700);
+	--components-filterPill-clear-display: grid;
 }
 
 @mixin notFilled {

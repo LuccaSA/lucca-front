@@ -10,12 +10,12 @@
 		<button
 			class="filterPill mod-button"
 			type="button"
-			luTooltip="Filtres supplémentaires"
+			[luTooltip]="intl.additionalFilters"
 			luTooltipOnlyForDisplay
 			[luPopover2]="contentOptionsTpl"
 			[customPositions]="popoverPositions"
 		>
-			<lu-icon class="filterPill-icon" icon="filtersDescending" alt="Filtres supplémentaires"></lu-icon>
+			<lu-icon class="filterPill-icon" icon="filtersDescending" [attr.alt]="intl.additionalFilters"></lu-icon>
 		</button>
 		}
 

@@ -22,10 +22,12 @@ import {
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { LuccaIcon } from '@lucca-front/icons';
+import { getIntl } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { PopoverDirective } from '@lucca-front/ng/popover2';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 import { FILTER_PILL_HOST_COMPONENT, FILTER_PILL_INPUT_COMPONENT } from '../core';
+import { LU_FILTER_PILLS_TRANSLATIONS } from '../filter-pills.translate';
 
 let nextId = 0;
 
@@ -48,6 +50,8 @@ let nextId = 0;
 	},
 })
 export class FilterPillComponent {
+	intl = getIntl(LU_FILTER_PILLS_TRANSLATIONS);
+
 	#locale = inject(LOCALE_ID);
 
 	elementRef = inject(ElementRef);
@@ -106,8 +110,7 @@ export class FilterPillComponent {
 
 	label = input.required<string>();
 
-	// TODO i18n placeholder
-	placeholder = input<string>('Aucune valeur sélectionnée');
+	placeholder = input<string>(this.intl.placeholder);
 
 	icon = input<LuccaIcon>();
 
