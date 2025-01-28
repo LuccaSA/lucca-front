@@ -15,7 +15,7 @@ export const selectorToSelectComponentName = {
 export const selectorToComponentName = {
 	...selectorToSelectComponentName,
 	'lu-option-picker': 'LuOptionPickerComponent',
-	'lu-option-item': 'LuOptionItemComponent',
+	'lu-option': 'LuOptionItemComponent',
 	'lu-input-clearer': 'LuInputClearerComponent'
 };
 

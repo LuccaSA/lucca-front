@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { LuEstablishmentSelectInputComponent, ALuEstablishmentService } from '@lucca-front/ng/establishment';
 import { LuUserSelectModule } from '@lucca-front/ng/user';
 import { LuDepartmentSelectInputComponent } from '@lucca-front/ng/department';
+import { LuSelectInputComponent } from '@lucca-front/ng/select';
+import { LuOptionItemComponent, LuOptionSelectAllComponent } from '@lucca-front/ng/option';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 import { LuCoreSelectJobQualificationsDirective } from '@lucca-front/ng/core-select';
 import { LuCoreSelectUsersDirective } from '@lucca-front/ng/core-select';
@@ -17,6 +19,16 @@ import { LuCoreSelectUsersDirective } from '@lucca-front/ng/core-select';
 		<!-- [lu-select migration] REJECTED: ALuEstablishmentService overriden in providers -->
 		<lu-establishment-select placeholder="Select an establishment" class="textfield-input"></lu-establishment-select>
 		<lu-department-select placeholder="Select an establishment" class="textfield-input"></lu-department-select>
+		<!-- [lu-select migration] REJECTED: lu-option-select-all requires manual work and API support to be migrated -->
+		<lu-select class="textfield-input">
+			<lu-option *ngFor="let culture of cultures" [value]="culture">
+				{{ culture?.name }}
+			</lu-option>
+			<lu-option-picker-advanced>
+				<lu-option-select-all></lu-option-select-all>
+			</lu-option-picker-advanced>
+			<lu-input-clearer></lu-input-clearer>
+		</lu-select>
 	`,
 	providers: [
 		{
@@ -24,7 +36,7 @@ import { LuCoreSelectUsersDirective } from '@lucca-front/ng/core-select';
 			useClass: WhateverClassName
 		}
 	],
-	imports: [LuEstablishmentSelectInputComponent, LuDepartmentSelectInputComponent, LuUserSelectModule, LuSimpleSelectInputComponent, LuCoreSelectJobQualificationsDirective, LuCoreSelectUsersDirective]
+	imports: [LuEstablishmentSelectInputComponent, LuUserSelectModule, LuSelectInputComponent, LuOptionSelectAllComponent, LuOptionItemComponent, LuDepartmentSelectInputComponent, LuSimpleSelectInputComponent, LuCoreSelectJobQualificationsDirective, LuCoreSelectUsersDirective]
 })
 export class ApiSelectsComponent {
 }

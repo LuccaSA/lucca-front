@@ -73,9 +73,12 @@ function insertRejectionComment(update: UpdateRecorder, select: RejectedSelectCo
 		case RejectionReason.UNSUPPORTED_INPUT:
 			detailedReason = `Unsupported input: ${select.rejection.details}`;
 			break;
+		case RejectionReason.SELECT_ALL:
+			detailedReason = `lu-option-select-all requires manual work and API support to be migrated`;
+			break;
 	}
 
-	update.insertLeft(select.nodeOffset + select.node.startSourceSpan.start.offset, `<!-- [lu-select migration] REJECTED: ${detailedReason} -->\n${indentBefore}`);
+	update.insertLeft(select.nodeOffset + select.node.startSourceSpan.start.offset, `<!-- [lu-select migration] REJECTED: ${detailedReason || RejectionReason[select.rejection.reason]} -->\n${indentBefore}`);
 }
 
 function findSelectContexts(sourceFile: ts.SourceFile, basePath: string, tree: Tree): SelectContext[] {
@@ -111,7 +114,7 @@ function findSelectContexts(sourceFile: ts.SourceFile, basePath: string, tree: T
 function updateImports(sourceFile: SourceFile, selects: SelectContext[], path: string, tree: Tree) {
 	// We need to use 3 updates because of inline template updates requiring sourceFile regen after each change
 	const update = tree.beginUpdate(path);
-	const imports = new Set(selects.flatMap(select => select.requiredImports || []));
+	const imports = new Set(selects.filter(s => !s.rejection).flatMap(select => select.requiredImports || []));
 	imports.forEach(importToAdd => {
 		if (importSource[importToAdd]) {
 			applyToUpdateRecorder(update, [insertTSImportIfNeeded(sourceFile, path, importToAdd, importSource[importToAdd]), insertAngularImportIfNeeded(sourceFile, path, importToAdd)]);

@@ -10,7 +10,8 @@ export enum RejectionReason {
 	CUSTOM_PICKER_CONTENT,
 	NO_DATA_SOURCE,
 	UNSUPPORTED_VALUE_ASSIGNMENT,
-	DATA_SERVICE_OVERRIDE
+	DATA_SERVICE_OVERRIDE,
+	SELECT_ALL,
 }
 
 export interface Rejection {
@@ -108,6 +109,19 @@ export function getDataSource(select: LuSelectInputContext): SelectDataSource | 
 		reason: RejectionReason.NO_DATA_SOURCE
 	};
 	const htmlAstVisitor = new HtmlAstVisitor(select.node);
+	let hasSelectAll = false;
+	// First of all, check that there's no lu-option-select-all, because this is a rejection reason
+	htmlAstVisitor.visitElements(/lu-option-select-all/, () => {
+		hasSelectAll = true;
+		result = {
+			reason: RejectionReason.SELECT_ALL
+		};
+	});
+	// If we have a select all, don't go further
+	if (hasSelectAll) {
+		return result;
+	}
+
 	htmlAstVisitor.visitElements(/lu-option-picker(-advanced)?/, (node) => {
 		// If picker doesn't have option as direct child, reject, we can't migrate this kind of custom stuff
 		const luOption = node.children.find((c) => c instanceof TmplAstTemplate && c.tagName === 'lu-option') as TmplAstTemplate;
