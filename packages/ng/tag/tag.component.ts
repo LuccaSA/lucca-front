@@ -48,7 +48,7 @@ export class TagComponent {
 	 * Which icon should we display in the callout if any?
 	 * Defaults to no icon.
 	 */
-	icon: LuccaIcon;
+	icon: LuccaIcon | undefined;
 
 	get tagClasses() {
 		return {
