@@ -1,8 +1,8 @@
 @use 'exports' as *;
 
 .calloutPopover {
-	@include vars;
 	@include component;
+	@include vars;
 
 	&.mod-S {
 		@include S;
