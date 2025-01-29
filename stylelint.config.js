@@ -20,7 +20,7 @@ module.exports = {
 			files: ['**/*.scss'],
 			rules: {
 				// 'block-no-empty': null,
-				// 'font-family-no-missing-generic-family-keyword': null,
+				'no-descending-specificity': null,
 				// 'no-descending-specificity': null,
 				// 'no-duplicate-selectors': null,
 				// 'property-no-vendor-prefix': null,
