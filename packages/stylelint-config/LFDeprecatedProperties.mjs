@@ -1,3 +1,6 @@
+// WARNING!
+// Always check for variables with regular expressions. A string will match all the value, not part of it.
+
 export default [
 	{
 		objectPattern: /--commons-boxShadow-X*(S|M|L)/,
@@ -20,7 +23,7 @@ export default [
 		versionDeleted: '20.1.0',
 	},
 	{
-		objectPattern: '--commons-navSide-compact-width',
+		objectPattern: /--commons-navSide-compact-width/,
 		versionDeprecated: '18.3.0',
 		versionDeleted: '20.1.0',
 	},
