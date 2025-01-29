@@ -1,6 +1,6 @@
-@import 'definitions/select/select-input';
-@import 'definitions/select/select-clearer';
-@import 'definitions/option/option-item';
-@import 'definitions/option/option-searcher';
-@import 'definitions/option/option-selector';
-@import 'definitions/option/option-placeholder';
+@forward 'definitions/select/select-input';
+@forward 'definitions/select/select-clearer';
+@forward 'definitions/option/option-item';
+@forward 'definitions/option/option-searcher';
+@forward 'definitions/option/option-selector';
+@forward 'definitions/option/option-placeholder';

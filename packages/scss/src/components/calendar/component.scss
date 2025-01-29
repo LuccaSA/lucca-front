@@ -121,13 +121,13 @@
 
 		.calendar-todayLink {
 			&.link {
-				@include link.decorationHover;
-
 				text-transform: capitalize;
 				display: block;
 				margin: auto;
 				padding: var(--pr-t-spacings-100);
 				line-height: var(--sizes-M-lineHeight);
+
+				@include link.decorationHover;
 
 				&:focus-visible {
 					@include a11y.focusVisible($offset: -4px, $borderRadius: 8px);

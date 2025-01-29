@@ -4,10 +4,10 @@
 	block-size: 75px;
 
 	&::after {
-		@include loading.gradient;
-
 		inset: 0;
 		position: absolute;
 		content: '';
+
+		@include loading.gradient;
 	}
 }

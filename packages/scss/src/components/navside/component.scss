@@ -156,13 +156,13 @@
 		}
 
 		.navSide-item-subMenu-item {
-			@include keyframe.slideInLeft;
-
 			opacity: 0;
 			animation-fill-mode: forwards;
 			animation-name: slideInLeft;
 			animation-duration: var(--commons-animations-durations-fast);
 			animation-delay: var(--delay);
+
+			@include keyframe.slideInLeft;
 
 			@media (prefers-reduced-motion) {
 				animation: none;
@@ -221,12 +221,12 @@
 			}
 
 			&::after {
-				@include loading.gradient($color: var(--palettes-navigation-700));
-
 				border-radius: var(--commons-borderRadius-M);
 				flex: 1 1 auto;
 				block-size: 0.9em;
 				margin-inline-start: 1em;
+
+				@include loading.gradient($color: var(--palettes-navigation-700));
 			}
 		}
 	}

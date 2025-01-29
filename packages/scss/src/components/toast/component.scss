@@ -77,16 +77,16 @@
 			// but the class should be present, and this code is temporary
 			&.button,
 			&:not(.button) {
+				align-self: flex-start;
+				border-radius: var(--commons-borderRadius-L);
+				animation-name: timer;
+
 				@include button.onlyIcon;
 				@include button.text;
 				@include button.inverted;
 
 				@keyframes timer {
 				}
-
-				align-self: flex-start;
-				border-radius: var(--commons-borderRadius-L);
-				animation-name: timer;
 			}
 		}
 	}

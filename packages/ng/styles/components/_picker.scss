@@ -1,3 +1,5 @@
+@use 'popover';
+
 .lu-picker-panel {
 	@extend %popover-panel;
 }

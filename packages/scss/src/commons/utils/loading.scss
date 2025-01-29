@@ -3,10 +3,7 @@
 
 @mixin spinner($size: 1.5rem) {
 	&::after {
-		@include keyframe.rotate;
-
 		content: '';
-
 		inline-size: $size;
 		block-size: $size;
 		border-radius: var(--commons-borderRadius-full);
@@ -23,19 +20,12 @@
 		animation-iteration-count: infinite;
 		border-color: var(--commons-loading-frontground);
 		border-block-start-color: transparent;
+    
+		@include keyframe.rotate;
 	}
 }
 
 @mixin gradient($backgroundColor: transparent, $color: color.transparentize(var(--palettes-neutral-900), 0.1)) {
-	@keyframes loadingGradient {
-		0% {
-			background-position: 100% 0%;
-		}
-		100% {
-			background-position: -100% 0%;
-		}
-	}
-
 	animation-name: loadingGradient;
 	animation-duration: 2s;
 	animation-timing-function: linear;
@@ -45,4 +35,13 @@
 	background-repeat: no-repeat;
 	background-image: linear-gradient(315deg, $backgroundColor 40%, $color 50%, $backgroundColor 100%);
 	background-size: 400% 100%;
+
+	@keyframes loadingGradient {
+		0% {
+			background-position: 100% 0%;
+		}
+		100% {
+			background-position: -100% 0%;
+		}
+	}
 }

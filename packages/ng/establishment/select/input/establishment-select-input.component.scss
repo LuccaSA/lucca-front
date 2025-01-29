@@ -1,5 +1,5 @@
-@import '_definitions';
-@include selectInputStyle;
+@use '_definitions';
+@include definitions.selectInputStyle;
 
 .lu-picker-header {
 	.option-selector {
