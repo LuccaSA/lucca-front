@@ -2,6 +2,13 @@
 @use '@lucca-front/scss/src/commons/utils/namespace';
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
+	background-color: var(--components-progress-background);
+	border-radius: var(--commons-borderRadius-full);
+	height: var(--components-progress-height);
+	margin: var(--components-progress-margin-vertical) var(--components-progress-margin-horizontal);
+	position: relative;
+	overflow: hidden;
+
 	@keyframes progress {
 		0% {
 			transform: scale(0, 1);
@@ -13,13 +20,6 @@
 			opacity: 0.3;
 		}
 	}
-
-	background-color: var(--components-progress-background);
-	border-radius: var(--commons-borderRadius-full);
-	height: var(--components-progress-height);
-	margin: var(--components-progress-margin-vertical) var(--components-progress-margin-horizontal);
-	position: relative;
-	overflow: hidden;
 
 	@at-root ($atRoot) {
 		.progress-bar {
