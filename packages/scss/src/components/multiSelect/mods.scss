@@ -49,7 +49,7 @@
 		grid-row-start: 1;
 		display: flex;
 		gap: var(--pr-t-spacings-50);
-		min-width: 0;
+		min-inline-size: 0;
 	}
 
 	.multipleSelect-displayer-search {

@@ -27,7 +27,7 @@ import { Meta, StoryFn, applicationConfig } from '@storybook/angular';
 			}
 
 			.width200 {
-				width: 200px;
+				inline-size: 200px;
 			}
 
 			:host {

@@ -16,8 +16,7 @@
 	background-color: var(--pr-t-elevation-surface-default);
 	inset-block-start: var(--commons-banner-height);
 	position: sticky;
-	inset-inline-start: 0;
-	inset-inline-end: 0;
+	inset-inline: 0;
 	z-index: 99;
 
 	@include media.max('S') {

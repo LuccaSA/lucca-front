@@ -131,7 +131,7 @@
 	&::before {
 		@include icon.generate('arrow_chevron_bottom');
 
-		height: 0;
+		block-size: 0;
 		vertical-align: text-top;
 	}
 }

@@ -17,7 +17,7 @@ import { CalloutComponent } from '@lucca-front/ng/callout';
 			display: block;
 		}
 		pr-story-model-display .callout-content {
-			min-width: 0;
+			min-inline-size: 0;
 		}
 
 		pr-story-model-display pre {

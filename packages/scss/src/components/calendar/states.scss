@@ -146,6 +146,7 @@
 
 	&::before {
 		inset-inline-start: 0;
+
 		--components-calendar-table-body-row-cellSelectedBeforeContent: '';
 		--components-calendar-table-body-row-cellSelectedBeforeBorderRadius: 0 var(--commons-borderRadius-L) var(--commons-borderRadius-L) 0;
 	}

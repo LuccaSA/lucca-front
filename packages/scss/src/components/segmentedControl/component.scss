@@ -6,7 +6,7 @@
 	list-style-type: none;
 	display: flex;
 	flex-wrap: wrap;
-	width: var(--components-segmentedControl-width);
+	inline-size: var(--components-segmentedControl-width);
 	flex-direction: var(--components-segmentedControl-direction);
 	box-shadow: 0 0 0 var(--commons-divider-width) var(--palettes-neutral-300);
 	border-radius: var(--components-segmentedControl-borderRadius);
@@ -58,7 +58,7 @@
 		//.viewTabs-item-tab is deprecated
 		.segmentedControl-item-action,
 		.viewTabs-item-tab {
-			width: 100%;
+			inline-size: 100%;
 			border: 0;
 			margin: 0;
 			padding: var(--components-segmentedControl-padding);

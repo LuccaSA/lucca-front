@@ -16,7 +16,7 @@
 
 	.indexTable-head-row-transparentCell,
 	.indexTable-body-row-transparentCell {
-		width: var(--components-indexTable-row-cell-transparent-width);
+		inline-size: var(--components-indexTable-row-cell-transparent-width);
 
 		&:first-child {
 			padding-inline-start: 0;
@@ -52,8 +52,10 @@
 
 		// apparence of the first cell with a card apparence.
 		// we do this because there migh be one or two cells before without background and containing a checkbox
-		--components-indexTable-row-stack2-background-position: left calc(-2px + var(--components-indexTable-cell-inset-x-left, 0px)) bottom -10px;
-		--components-indexTable-row-stack3-background-position: left calc(1px + var(--components-indexTable-cell-inset-x-left, 0px)) bottom -14px;
+		--components-indexTable-row-stack2-background-position: left calc(-2px + var(--components-indexTable-cell-inset-x-left, 0px))
+			bottom -10px;
+		--components-indexTable-row-stack3-background-position: left calc(1px + var(--components-indexTable-cell-inset-x-left, 0px))
+			bottom -14px;
 
 		// apparence of the nexts cells
 		& ~ .indexTable-body-row-cell {
@@ -63,8 +65,10 @@
 
 		// apparence of the last cell with a card apparence
 		&:last-child {
-			--components-indexTable-row-stack2-background-position: right calc(-2px + var(--components-indexTable-cell-inset-x-right, 0px)) bottom -10px;
-			--components-indexTable-row-stack3-background-position: right calc(1px + var(--components-indexTable-cell-inset-x-right, 0px)) bottom -14px;
+			--components-indexTable-row-stack2-background-position: right calc(-2px + var(--components-indexTable-cell-inset-x-right, 0px))
+				bottom -10px;
+			--components-indexTable-row-stack3-background-position: right calc(1px + var(--components-indexTable-cell-inset-x-right, 0px))
+				bottom -14px;
 		}
 	}
 }
@@ -127,7 +131,8 @@
 		grid-auto-rows: auto;
 		grid-template-areas: var(--components-indexTable-row-responsive-grid-template-areas, none);
 		align-items: center;
-		padding: var(--components-indexTable-row-spacing-responsive) 0;
+		padding-block: var(--components-indexTable-row-spacing-responsive);
+		padding-inline: 0;
 		margin-block-end: var(--components-indexTable-row-spacing-responsive);
 		// "Title" lines that do not contain "card" cells are smaller
 		&:not(:has(.indexTable-body-row-cell)) {
@@ -193,7 +198,7 @@
 			);
 	}
 	.indexTable-body-row-transparentCell {
-		width: auto;
+		inline-size: auto;
 		// we add a padding-inline-start to keep a correct indent between lvl 1 and lvl 2 titles in nested tables. * .75 is just for cosmetic
 		&:first-child[colspan='2'] + .indexTable-body-row-transparentCell {
 			padding-inline-start: calc(var(--components-indexTable-row-cell-transparent-width) * 0.75);
@@ -253,7 +258,7 @@
 
 @mixin actions {
 	// ~ equivalent to width: min-content for a table-cell but prevent line-break;
-	width: 1%;
+	inline-size: 1%;
 	padding: var(--pr-t-spacings-50);
 	white-space: nowrap;
 
@@ -312,9 +317,9 @@
 }
 
 @mixin cellFixedWidth {
-	min-width: var(--cell-width, auto);
-	max-width: var(--cell-width, auto);
-	width: var(--cell-width, auto);
+	min-inline-size: var(--cell-width, auto);
+	max-inline-size: var(--cell-width, auto);
+	inline-size: var(--cell-width, auto);
 }
 
 @mixin massSelection {

@@ -29,7 +29,7 @@
 		&::before,
 		&::after {
 			border-inline-start: var(--commons-divider-border);
-			min-height: var(--components-divider-minSize);
+			min-block-size: var(--components-divider-minSize);
 		}
 	}
 }

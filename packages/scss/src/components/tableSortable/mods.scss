@@ -53,7 +53,7 @@
 
 		.indexTable & {
 			display: inline-flex;
-			width: fit-content;
+			inline-size: fit-content;
 		}
 
 		&::after {

@@ -9,8 +9,8 @@
 		padding-inline-start: 1.25rem;
 
 		&::before {
-			width: 0.5rem;
-			height: 0.5rem;
+			inline-size: 0.5rem;
+			block-size: 0.5rem;
 		}
 	}
 }
@@ -18,11 +18,11 @@
 @mixin L {
 	.timeline-step-title {
 		padding-inline-start: 2.25rem;
-		min-width: 2rem;
+		min-inline-size: 2rem;
 
 		&::before {
-			width: 1.5rem;
-			height: 1.5rem;
+			inline-size: 1.5rem;
+			block-size: 1.5rem;
 		}
 	}
 
@@ -49,13 +49,13 @@
 		margin-block-start: var(--pr-t-spacings-100);
 		display: block;
 		position: relative;
-		width: 100%;
+		inline-size: 100%;
 
 		// line
 		&:not(:last-child)::after {
 			content: '';
 			display: block;
-			height: auto;
+			block-size: auto;
 			position: absolute;
 			inset-block-start: calc(var(--pr-t-spacings-400) + var(--pr-t-spacings-50));
 			inset-block-end: calc(var(--pr-t-spacings-150) * -1);
@@ -72,9 +72,10 @@
 	}
 
 	.timeline-step-title {
-		margin: var(--pr-t-spacings-100) 0;
-		min-height: var(--pr-t-spacings-300);
-		min-width: 0;
+		margin-block: var(--pr-t-spacings-100);
+		margin-inline: 0;
+		min-block-size: var(--pr-t-spacings-300);
+		min-inline-size: 0;
 
 		&:before {
 			inset-block-start: var(--pr-t-spacings-150);
@@ -86,7 +87,7 @@
 	}
 
 	.timeline-stepAddBetweenStep {
-		min-height: 3rem;
+		min-block-size: 3rem;
 	}
 }
 
@@ -133,15 +134,15 @@
 	}
 	.timeline-step-description {
 		padding-inline-start: 2.5rem;
-		min-height: var(--pr-t-spacings-400);
+		min-block-size: var(--pr-t-spacings-400);
 	}
 }
 
 @mixin verticalProgress {
 	.timeline-step[aria-current='step'] {
 		&::after {
-			height: unset;
-			width: 2px;
+			block-size: unset;
+			inline-size: 2px;
 			border: none;
 			background: linear-gradient(
 				180deg,
@@ -248,8 +249,8 @@
 		&::before {
 			content: '';
 			color: var(--palettes-0, var(--palettes-text, var(--palettes-product-0)));
-			width: 1rem;
-			height: 1rem;
+			inline-size: 1rem;
+			block-size: 1rem;
 			display: flex;
 			align-items: center;
 			justify-content: center;
@@ -318,7 +319,7 @@
 	}
 	.timeline-stepAddBetweenStep-title {
 		@include reset.button;
-		width: auto;
+		inline-size: auto;
 
 		&:hover {
 			.timeline-step-title-icon::before {
@@ -347,8 +348,8 @@
 
 @mixin addBetweenStepL {
 	.timeline-step:not([aria-current='step']):not([aria-current='step'] ~ .timeline-step) .timeline-step-title-icon::before {
-		width: 1.5rem;
-		height: 1.5rem;
+		inline-size: 1.5rem;
+		block-size: 1.5rem;
 		inset-inline-start: var(--pr-t-spacings-50);
 	}
 }
@@ -357,7 +358,7 @@
 	.timeline-step[aria-current='step'] {
 		&::after {
 			border: none;
-			height: 2px;
+			block-size: 2px;
 			background: linear-gradient(
 				90deg,
 				var(--palettes-700, var(--palettes-product-700)) var(--progress),

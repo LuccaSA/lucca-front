@@ -22,9 +22,8 @@
 		pointer-events: none;
 		position: sticky;
 		flex-shrink: 0;
-		width: var(--components-scrollBox-shadowWidth);
-		inset-block-start: 0;
-		inset-block-end: 0;
+		inline-size: var(--components-scrollBox-shadowWidth);
+		inset-block: 0;
 		background-repeat: no-repeat;
 		background-size:
 			75% 100%,
@@ -85,7 +84,7 @@
 				display: block;
 				inset-block-start: 1px;
 				inset-block-end: 1px;
-				width: calc(var(--components-scrollBox-shadowWidth) / 2);
+				inline-size: calc(var(--components-scrollBox-shadowWidth) / 2);
 				pointer-events: none;
 			}
 

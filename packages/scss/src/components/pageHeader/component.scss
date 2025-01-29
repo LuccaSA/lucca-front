@@ -44,14 +44,14 @@
 
 			.textfield.mod-search {
 				@include media.max('XS') {
-					width: 100%;
+					inline-size: 100%;
 					flex: auto;
 				}
 			}
 		}
 
 		.pageHeader-description {
-			max-width: var(--components-pageHeader-description-max-width);
+			max-inline-size: var(--components-pageHeader-description-max-width);
 			margin-block-start: var(--pr-t-spacings-100);
 			color: var(--palettes-neutral-700);
 		}

@@ -17,7 +17,7 @@
 @mixin button($suffix: '') {
 	padding: 0 #{$suffix};
 	border: 0 #{$suffix};
-	width: 100% #{$suffix};
+	inline-size: 100% #{$suffix};
 	background-color: transparent #{$suffix};
 	color: inherit #{$suffix};
 	text-align: start #{$suffix};

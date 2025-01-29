@@ -1,12 +1,12 @@
 @mixin component {
 	position: relative;
 	.notchBox-wrapper {
-		width: 100%;
-		min-height: var(--component-notchbox-box-min-height);
-		padding: var(--component-notchbox-box-padding-top, var(--component-notchbox-box-padding))
-			var(--component-notchbox-box-padding-right, var(--component-notchbox-box-padding))
-			var(--component-notchbox-box-padding-bottom, var(--component-notchbox-box-padding))
-			var(--component-notchbox-box-padding-left, var(--component-notchbox-box-padding));
+		inline-size: 100%;
+		min-block-size: var(--component-notchbox-box-min-height);
+		padding-block: var(--component-notchbox-box-padding-top, var(--component-notchbox-box-padding))
+			var(--component-notchbox-box-padding-bottom, var(--component-notchbox-box-padding));
+		padding-inline: var(--component-notchbox-box-padding-left, var(--component-notchbox-box-padding))
+			var(--component-notchbox-box-padding-right, var(--component-notchbox-box-padding));
 		border-radius: var(--component-notchbox-box-radius);
 		background:
 			linear-gradient(var(--component-notchbox-box-background-color), var(--component-notchbox-box-background-color))
@@ -59,8 +59,8 @@
 		inset-block-end: var(--component-notchbox-badge-bottom, auto);
 		inset-inline-start: var(--component-notchbox-badge-left, auto);
 		inset-inline-end: var(--component-notchbox-badge-right, auto);
-		width: var(--component-notchbox-badge-actualWidth);
-		height: var(--component-notchbox-badge-actualHeight);
+		inline-size: var(--component-notchbox-badge-actualWidth);
+		block-size: var(--component-notchbox-badge-actualHeight);
 		border-radius: var(--component-notchbox-badge-radius);
 		background-color: var(--component-notchbox-badge-background-color);
 	}

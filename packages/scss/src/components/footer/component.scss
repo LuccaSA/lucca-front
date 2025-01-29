@@ -2,7 +2,8 @@
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
 	background-color: var(--pr-t-elevation-surface-raised);
-	padding: var(--pr-t-spacings-200) var(--components-footer-paddingInline);
+	padding-block: var(--pr-t-spacings-200);
+	padding-inline: var(--components-footer-paddingInline);
 	display: flex;
 	justify-content: space-between;
 	gap: var(--pr-t-spacings-200);
@@ -33,7 +34,7 @@
 			flex-grow: 1;
 			justify-content: space-between;
 			flex-direction: var(--components-footer-direction);
-			max-width: calc(var(--commons-container-maxWidth) - var(--components-footer-paddingInline) * 2);
+			max-inline-size: calc(var(--commons-container-maxWidth) - var(--components-footer-paddingInline) * 2);
 		}
 	}
 }

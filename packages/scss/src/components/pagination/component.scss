@@ -3,7 +3,8 @@
 @mixin component($atRoot: namespace.$defaultAtRoot) {
 	display: flex;
 	flex-wrap: wrap;
-	padding: var(--pr-t-spacings-100) var(--pr-t-spacings-150);
+	padding-block: var(--pr-t-spacings-100);
+	padding-inline: var(--pr-t-spacings-150);
 	justify-content: flex-end;
 
 	> *:not(:last-child) {
@@ -20,14 +21,14 @@
 		}
 
 		.pagination-count-separator {
-			margin: 0 var(--pr-t-spacings-50);
+			margin-block: 0;
+			margin-inline: var(--pr-t-spacings-50);
 		}
 
 		.pagination-navigation {
 			list-style: none;
 			padding: 0;
-			margin-block-start: 0;
-			margin-block-end: 0;
+			margin-block: 0 0;
 
 			> *:not(:last-child) {
 				margin-inline-end: var(--pr-t-spacings-50);

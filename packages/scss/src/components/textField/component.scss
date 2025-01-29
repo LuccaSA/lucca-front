@@ -21,8 +21,8 @@
 
 	.textField-input-affix-toggle {
 		pointer-events: auto;
-		width: var(--component-textField-affix-size);
-		height: var(--component-textField-affix-size);
+		inline-size: var(--component-textField-affix-size);
+		block-size: var(--component-textField-affix-size);
 		color: var(--pr-t-color-input-icon);
 	}
 
@@ -30,7 +30,7 @@
 		.textField-input {
 			display: flex;
 			align-items: center;
-			width: 100%;
+			inline-size: 100%;
 			border-radius: var(--commons-borderRadius-M);
 			background-color: var(--component-textField-background);
 			position: relative;
@@ -62,14 +62,14 @@
 			outline: 0;
 			line-height: var(--component-textField-lineHeight);
 			font-size: var(--component-textField-fontSize);
-			width: 100%;
-			padding: var(--component-textField-padding) var(--component-textField-affix-padding) var(--component-textField-padding)
-				var(--component-textField-padding);
+			inline-size: 100%;
+			padding-block: var(--component-textField-padding) var(--component-textField-padding);
+			padding-inline: var(--component-textField-padding) var(--component-textField-affix-padding);
 			background-color: transparent;
 			color: var(--component-textField-color);
 
 			&:is(textarea, div) {
-				max-height: var(--component-textField-maxHeight);
+				max-block-size: var(--component-textField-maxHeight);
 
 				@supports not (height: 1dvh) {
 					--component-textField-maxHeight: var(--component-textField-maxHeightFallback);
@@ -81,15 +81,15 @@
 			}
 
 			&:is(textarea) {
-				resize: vertical;
-				min-height: calc(2lh + var(--component-textField-padding) * 2);
+				resize: block;
+				min-block-size: calc(2lh + var(--component-textField-padding) * 2);
 
 				&:not([rows]) {
-					height: calc(3lh + var(--component-textField-padding) * 2);
+					block-size: calc(3lh + var(--component-textField-padding) * 2);
 				}
 
 				&[rows='1'] {
-					min-height: calc(1lh + var(--component-textField-padding) * 2);
+					min-block-size: calc(1lh + var(--component-textField-padding) * 2);
 				}
 			}
 		}

@@ -9,7 +9,7 @@
 
 	&:where(:empty) {
 		margin-inline: 0;
-		height: auto;
+		block-size: auto;
 
 		&:not(.mod-vertical) {
 			border-block-start: var(--commons-divider-border);
@@ -42,7 +42,7 @@
 			&::before,
 			&::after {
 				border-block-start: var(--commons-divider-border);
-				min-width: var(--components-divider-minSize);
+				min-inline-size: var(--components-divider-minSize);
 			}
 		}
 

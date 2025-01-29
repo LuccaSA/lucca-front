@@ -4,8 +4,8 @@
 @use '@lucca-front/scss/src/commons/utils/reset';
 
 @mixin stickyColumn($shadowColor: #2a3551) {
-	width: auto;
-	min-width: 100%;
+	inline-size: auto;
+	min-inline-size: 100%;
 	background-color: var(--pr-t-elevation-surface-raised);
 
 	.table-head-row-cell,
@@ -19,9 +19,9 @@
 
 		&.mod-stickyColumn-shadow {
 			z-index: 1;
-			min-width: var(--components-tableFixed-column-sticky-shadow-width);
-			max-width: var(--components-tableFixed-column-sticky-shadow-width);
-			width: var(--components-tableFixed-column-sticky-shadow-width);
+			min-inline-size: var(--components-tableFixed-column-sticky-shadow-width);
+			max-inline-size: var(--components-tableFixed-column-sticky-shadow-width);
+			inline-size: var(--components-tableFixed-column-sticky-shadow-width);
 			padding: 0;
 			background: transparent;
 		}
@@ -66,11 +66,10 @@
 				&.mod-stickyColumn-shadowMask,
 				&.mod-columnSticky-shadowMask {
 					&::before {
-						width: var(--components-tableFixed-column-sticky-shadow-width);
+						inline-size: var(--components-tableFixed-column-sticky-shadow-width);
 						inset-inline-start: calc(var(--components-tableFixed-column-sticky-shadow-width) * -1);
 						background: var(--pr-t-elevation-surface-raised);
-						inset-block-start: 0;
-						inset-block-end: 0;
+						inset-block: 0;
 						z-index: 4;
 						position: absolute;
 						content: '';
@@ -97,7 +96,7 @@
 }
 
 @mixin shadow {
-	width: 0;
+	inline-size: 0;
 	position: static;
 }
 
@@ -121,7 +120,7 @@
 
 @mixin wrapper {
 	inset-block-end: calc(var(--commons-divider-width) * -1);
-	width: var(--components-tableFixed-column-sticky-shadow-width);
+	inline-size: var(--components-tableFixed-column-sticky-shadow-width);
 	border-block-end-width: var(--commons-divider-width);
 	border-block-end-color: var(--commons-divider-color);
 	border-block-end-style: solid;
@@ -130,11 +129,11 @@
 	inset-block-start: 0;
 
 	&::after {
-		width: var(--components-tableFixed-column-sticky-shadow-width);
+		inline-size: var(--components-tableFixed-column-sticky-shadow-width);
 		position: sticky;
 		display: block;
 		background-color: transparent;
-		height: 100%;
+		block-size: 100%;
 		content: '';
 	}
 }
@@ -159,7 +158,7 @@
 	.table-foot-row-cell {
 		inset-block-start: calc(var(--sticky-header-shadow-offset-top) + var(--components-tableFixed-column-sticky-shadow-width));
 		z-index: 4;
-		height: 0;
+		block-size: 0;
 		padding: 0;
 		border: 0;
 		position: sticky;
@@ -168,15 +167,15 @@
 
 	.stickyHeader-shadow-wrapper {
 		inset-block-start: calc(var(--components-tableFixed-column-sticky-shadow-width) * -1);
-		width: 100%;
-		height: 0;
+		inline-size: 100%;
+		block-size: 0;
 		border: 0;
 
 		&::after {
 			inset-block-start: calc(var(--sticky-header-shadow-offset-top) + var(--components-tableFixed-column-sticky-shadow-width));
-			height: var(--components-tableFixed-column-sticky-shadow-width);
+			block-size: var(--components-tableFixed-column-sticky-shadow-width);
 			background-image: linear-gradient(to bottom, color.adjust($shadowColor, $alpha: -0.75), color.adjust($shadowColor, $alpha: -1));
-			width: 100%;
+			inline-size: 100%;
 			opacity: 0.5;
 		}
 	}

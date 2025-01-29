@@ -3,7 +3,7 @@
 @mixin component {
 	@include loading.spinner();
 
-	min-height: var(--components-loading-size);
+	min-block-size: var(--components-loading-size);
 	padding: var(--components-loading-padding);
 	margin: var(--components-loading-margin);
 	display: var(--components-loading-display);
@@ -18,8 +18,8 @@
 	}
 
 	&::after {
-		width: var(--components-loading-size);
-		height: var(--components-loading-size);
+		inline-size: var(--components-loading-size);
+		block-size: var(--components-loading-size);
 		margin: var(--components-loading-spinnerMargin);
 	}
 }

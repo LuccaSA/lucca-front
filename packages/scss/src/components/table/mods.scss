@@ -216,10 +216,9 @@
 	@at-root ($atRoot) {
 		.table-body-row-cell-handler,
 		.table-foot-row-cell-handler {
-			inset-block-start: 0;
-			inset-block-end: 0;
+			inset-block: 0;
 			inset-inline-start: 0;
-			width: var(--pr-t-spacings-400);
+			inline-size: var(--pr-t-spacings-400);
 			position: absolute;
 			cursor: move;
 
@@ -228,7 +227,7 @@
 
 				color: var(--palettes-neutral-600);
 				font-size: var(--sizes-M-lineHeight);
-				height: 100%;
+				block-size: 100%;
 				margin: auto;
 				display: flex;
 				align-items: center;
@@ -252,7 +251,7 @@
 	.table-foot-row-cell {
 		&:first-child {
 			padding-inline-end: var(--pr-t-spacings-100);
-			width: var(--pr-t-spacings-200);
+			inline-size: var(--pr-t-spacings-200);
 		}
 	}
 
@@ -291,7 +290,7 @@
 	}
 
 	.table-head-row-cell-wrapper {
-		max-width: calc(100% - var(--pr-t-spacings-400));
+		max-inline-size: calc(100% - var(--pr-t-spacings-400));
 		display: inline-block;
 		vertical-align: top;
 	}
@@ -305,7 +304,7 @@
 
 @mixin avatar {
 	padding-inline-end: 0;
-	width: var(--pr-t-spacings-400);
+	inline-size: var(--pr-t-spacings-400);
 }
 
 @mixin actions {

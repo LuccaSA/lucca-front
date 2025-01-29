@@ -7,8 +7,8 @@
 
 		content: '';
 
-		width: $size;
-		height: $size;
+		inline-size: $size;
+		block-size: $size;
 		border-radius: var(--commons-borderRadius-full);
 		line-height: 0.8rem;
 		border-width: var(--commons-loading-borderWidth);

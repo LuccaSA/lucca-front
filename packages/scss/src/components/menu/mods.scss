@@ -20,8 +20,8 @@
 
 	// .label is deprecated
 	.label {
-		height: var(--sizes-S-lineHeight);
-		min-width: var(--sizes-S-lineHeight);
+		block-size: var(--sizes-S-lineHeight);
+		min-inline-size: var(--sizes-S-lineHeight);
 		line-height: var(--sizes-S-lineHeight);
 		padding: 0;
 	}

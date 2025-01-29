@@ -1,6 +1,6 @@
 @mixin optionSearcherStyle {
 	.textfield.mod-search {
-		width: 100%;
+		inline-size: 100%;
 	}
 
 	.textfield-input {
@@ -8,7 +8,8 @@
 	}
 
 	.checkbox.mod-formerEmployee {
-		padding: var(--pr-t-spacings-50) var(--components-options-item-padding-horizontal);
+		padding-block: var(--pr-t-spacings-50);
+		padding-inline: var(--components-options-item-padding-horizontal);
 		border-block-end: var(--commons-divider-width) solid var(--commons-divider-color);
 		background-color: var(--palettes-neutral-50);
 		font-style: italic;

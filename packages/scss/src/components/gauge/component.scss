@@ -2,7 +2,7 @@
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
 	border-radius: var(--commons-borderRadius-full);
-	height: var(--components-gauge-height);
+	block-size: var(--components-gauge-height);
 	overflow: hidden;
 	position: relative;
 	background-color: var(--components-gauge-background);

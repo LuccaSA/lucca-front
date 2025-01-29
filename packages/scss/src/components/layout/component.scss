@@ -6,7 +6,7 @@
 @use '@lucca-front/scss/src/commons/utils/namespace';
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
-	min-height: 100vh;
+	min-block-size: 100vh;
 	display: grid;
 
 	@include media.min('L') {
@@ -38,12 +38,12 @@
 
 	@at-root ($atRoot) {
 		.layout-content-container {
-			max-width: math.div(map.get(config.$breakpoints, 'M'), 16px) * 1rem;
+			max-inline-size: math.div(map.get(config.$breakpoints, 'M'), 16px) * 1rem;
 		}
 
 		.layout-banner {
 			grid-area: banner;
-			height: var(--commons-banner-height);
+			block-size: var(--commons-banner-height);
 			background-color: var(--pr-t-elevation-surface-raised);
 			position: sticky;
 			inset-block-start: 0;
@@ -94,7 +94,7 @@
 
 		.layout-navside,
 		.layout-aside {
-			min-height: calc(100vh - var(--commons-banner-height));
+			min-block-size: calc(100vh - var(--commons-banner-height));
 			inset-block-start: var(--commons-banner-height);
 			display: flex;
 			position: sticky;
@@ -102,7 +102,7 @@
 			align-self: self-start;
 
 			@include media.max('S') {
-				min-height: 0;
+				min-block-size: 0;
 			}
 		}
 
@@ -110,13 +110,13 @@
 			grid-area: aside;
 
 			@include media.max('L') {
-				min-height: 0;
+				min-block-size: 0;
 				position: static;
 			}
 		}
 
 		.layout-navside {
-			max-height: calc(100vh - var(--commons-banner-height));
+			max-block-size: calc(100vh - var(--commons-banner-height));
 			grid-area: navside;
 			z-index: 2;
 			overflow: auto;

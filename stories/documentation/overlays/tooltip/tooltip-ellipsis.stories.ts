@@ -45,11 +45,11 @@ import { Meta, StoryFn, applicationConfig } from '@storybook/angular';
 			}
 
 			.width200 {
-				width: 200px;
+				inline-size: 200px;
 			}
 
 			.width400 {
-				width: 400px;
+				inline-size: 400px;
 			}
 
 			.paddingInlineEnd {
@@ -69,7 +69,7 @@ import { Meta, StoryFn, applicationConfig } from '@storybook/angular';
 			}
 
 			.resize {
-				resize: horizontal;
+				resize: inline;
 			}
 
 			:host {

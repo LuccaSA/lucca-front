@@ -37,7 +37,8 @@
 }
 
 .optionItem-value {
-	padding: var(--components-options-item-padding-vertical) var(--components-options-item-padding-horizontal);
+	padding-block: var(--components-options-item-padding-vertical);
+	padding-inline: var(--components-options-item-padding-horizontal);
 }
 
 .optionItem-icons {
@@ -62,8 +63,8 @@
 
 .optionItem-icon-shape {
 	fill: var(--components-options-item-icon-color);
-	width: 1.4rem;
-	height: 1.4rem;
+	inline-size: 1.4rem;
+	block-size: 1.4rem;
 }
 
 :host-context(.lu-picker-panel) {

@@ -30,7 +30,7 @@
 			outline: none;
 			position: relative;
 			z-index: 1;
-			min-width: 0;
+			min-inline-size: 0;
 			cursor: pointer;
 
 			&::placeholder {
@@ -41,7 +41,7 @@
 		.simpleSelect-value {
 			grid-column-start: 1;
 			grid-row-start: 1;
-			width: 100%;
+			inline-size: 100%;
 			font-size: var(--components-simpleSelect-fontSize);
 			line-height: var(--components-simpleSelect-lineHeight);
 			color: var(--components-simpleSelect-value-color);

@@ -7,8 +7,9 @@
 @mixin component($atRoot: namespace.$defaultAtRoot) {
 	position: relative;
 	display: table;
-	width: 100%;
-	padding: 0 var(--components-indexTable-padding) calc(var(--components-indexTable-padding) - var(--components-indexTable-row-spacing));
+	inline-size: 100%;
+	padding-block: 0 calc(var(--components-indexTable-padding) - var(--components-indexTable-row-spacing));
+	padding-inline: var(--components-indexTable-padding);
 	border-collapse: separate;
 	border-spacing: 0 var(--components-indexTable-row-spacing);
 	border-radius: var(--components-indexTable-border-radius);
@@ -58,7 +59,8 @@
 		.indexTable-head-row-transparentCell,
 		.indexTable-body-row-transparentCell {
 			vertical-align: middle;
-			padding: var(--pr-t-spacings-50) 0;
+			padding-block: var(--pr-t-spacings-50);
+			padding-inline: 0;
 			position: relative;
 			z-index: 3;
 
@@ -71,7 +73,8 @@
 		.indexTable-body-row-cell,
 		.indexTable-foot-row-cell {
 			vertical-align: top;
-			padding: var(--components-indexTable-cell-paddingBlock) var(--components-indexTable-cell-paddingInline);
+			padding-block: var(--components-indexTable-cell-paddingBlock);
+			padding-inline: var(--components-indexTable-cell-paddingInline);
 		}
 
 		.indexTable-body-row {
@@ -95,8 +98,7 @@
 		}
 
 		.indexTable-foot-row-cell {
-			padding-block-start: var(--pr-t-spacings-50);
-			padding-block-end: var(--pr-t-spacings-50);
+			padding-block: var(--pr-t-spacings-50);
 		}
 
 		.indexTable-body-row-cell {
@@ -178,7 +180,8 @@
 
 		.indexTable-body-row-cell-checkbox,
 		.indexTable-head-row-cell-checkbox {
-			margin: var(--pr-t-spacings-50);
+			margin-block: var(--pr-t-spacings-50);
+			margin-inline-start: var(--pr-t-spacings-50);
 			margin-inline-end: var(--pr-t-spacings-150);
 		}
 
@@ -264,7 +267,8 @@
 
 			.pagination {
 				align-self: flex-end;
-				padding: var(--pr-t-spacings-50) 0 0 0;
+				padding-block: var(--pr-t-spacings-50) 0;
+				padding-inline: 0;
 				margin-inline-end: var(--pr-t-spacings-100);
 			}
 		}

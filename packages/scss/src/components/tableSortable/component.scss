@@ -25,8 +25,8 @@
 		.tableSortable-arrows {
 			margin-block-end: var(--components-sortable-arrowsOffset);
 			position: relative;
-			width: 1rem;
-			height: 1rem;
+			inline-size: 1rem;
+			block-size: 1rem;
 		}
 
 		.tableSortable-arrows-ascending,

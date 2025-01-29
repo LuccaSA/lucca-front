@@ -3,7 +3,7 @@
 @mixin component($atRoot: namespace.$defaultAtRoot) {
 	background-color: var(--components-filters-background);
 	box-shadow: 0 1px 0 0 var(--commons-border-200);
-	min-height: var(--components-filters-height);
+	min-block-size: var(--components-filters-height);
 	align-items: center;
 	display: flex;
 	position: relative;
@@ -31,7 +31,7 @@
 
 	.textfield.mod-framed {
 		border-inline-end: var(--commons-divider-width) solid var(--commons-divider-color);
-		max-width: 16rem;
+		max-inline-size: 16rem;
 
 		.textfield-input {
 			box-shadow: none !important;

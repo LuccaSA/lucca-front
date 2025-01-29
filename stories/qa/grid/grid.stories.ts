@@ -10,8 +10,9 @@ import { Meta, StoryFn } from '@storybook/angular';
 			.gridDemo {
 				background-color: #eee;
 				border-radius: 3px;
-				min-height: 2.7rem;
-				padding: 0.6rem var(--pr-t-spacings-200);
+				min-block-size: 2.7rem;
+				padding-block: 0.6rem;
+				padding-inline: var(--pr-t-spacings-200);
 			}
 			.grid + .grid {
 				margin-block-start: var(--pr-t-spacings-200);

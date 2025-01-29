@@ -10,9 +10,8 @@
 
 		&::after {
 			content: '';
-			inset-inline-start: 0;
-			inset-inline-end: 0;
-			height: var(--pr-t-spacings-100);
+			inset-inline: 0;
+			block-size: var(--pr-t-spacings-100);
 			position: absolute;
 			background-image: linear-gradient(#{color.transparentize(var(--palettes-neutral-400), 0.24)}, transparent);
 			pointer-events: none;
@@ -30,7 +29,7 @@
 	&::after {
 		content: '';
 		position: sticky;
-		width: var(--pr-t-spacings-100);
+		inline-size: var(--pr-t-spacings-100);
 		background-image: linear-gradient(to right, #{color.transparentize(var(--palettes-neutral-400), 0.24)}, transparent);
 		flex-shrink: 0;
 		margin-inline-start: calc(var(--pr-t-spacings-100) * -1);
@@ -63,7 +62,7 @@
 			content: '';
 			position: sticky;
 			display: block;
-			height: var(--pr-t-spacings-100);
+			block-size: var(--pr-t-spacings-100);
 			background-image: linear-gradient(to bottom, #{color.transparentize(var(--palettes-neutral-400), 0.24)}, transparent);
 			margin-block-start: calc(var(--pr-t-spacings-100) * -1);
 			flex-shrink: 0;
@@ -90,10 +89,9 @@
 	%addShadow {
 		content: '';
 		position: absolute;
-		inset-block-start: 0;
-		inset-block-end: 0;
+		inset-block: 0;
 		inset-inline-start: 100%;
-		width: var(--pr-t-spacings-100);
+		inline-size: var(--pr-t-spacings-100);
 		pointer-events: none;
 		background-image: linear-gradient(to right, #{color.transparentize(var(--palettes-neutral-400), 0.24)}, transparent);
 	}

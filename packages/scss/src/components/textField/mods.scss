@@ -60,7 +60,7 @@
 	.textField-input {
 		display: grid;
 		align-items: normal;
-		min-width: 0;
+		min-inline-size: 0;
 		scroll-margin-block-end: var(--component-textField-scrollMargin);
 	}
 
@@ -70,7 +70,7 @@
 		overflow-wrap: break-word;
 		grid-area: 1 / 1 / 2 / 2;
 		resize: none;
-		min-width: 0;
+		min-inline-size: 0;
 		overflow: auto;
 	}
 

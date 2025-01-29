@@ -1,13 +1,15 @@
 @use '@lucca-front/scss/src/commons/utils/a11y';
 
 @mixin icon {
-	padding: var(--pr-t-spacings-100) var(--pr-t-spacings-300) var(--pr-t-spacings-100) var(--pr-t-spacings-600);
+	padding-block: var(--pr-t-spacings-100);
+	padding-inline: var(--pr-t-spacings-600) var(--pr-t-spacings-300);
 }
 
 @mixin S {
-	padding: var(--pr-t-spacings-100) var(--pr-t-spacings-200);
+	padding-block: var(--pr-t-spacings-100);
+	padding-inline: var(--pr-t-spacings-200);
 	text-align: start;
-	min-height: 0;
+	min-block-size: 0;
 
 	.file-input {
 		// todo: extract state
@@ -61,6 +63,7 @@
 	}
 
 	.file-progress {
-		margin: var(--pr-t-spacings-100) 0;
+		margin-block: var(--pr-t-spacings-100);
+		margin-inline: 0;
 	}
 }

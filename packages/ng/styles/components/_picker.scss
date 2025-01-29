@@ -5,7 +5,7 @@
 .lu-picker-content {
 	@extend %popover-content;
 
-	max-height: 20rem;
+	max-block-size: 20rem;
 	padding: var(--pr-t-spacings-50);
 	overflow-y: auto;
 	display: block;
@@ -38,7 +38,8 @@
 	font-size: var(--sizes-S-fontSize);
 	line-height: var(--sizes-S-lineHeight);
 	font-weight: 600;
-	padding: var(--components-options-item-padding-vertical) var(--components-options-item-padding-horizontal);
+	padding-block: var(--components-options-item-padding-vertical);
+	padding-inline: var(--components-options-item-padding-horizontal);
 	color: var(--palettes-neutral-600);
 	position: sticky;
 	inset-block-start: 0;
@@ -56,11 +57,12 @@
 	background-color: var(--palettes-neutral-0);
 	box-shadow: var(--pr-t-elevation-shadow-overflow);
 	padding: var(--pr-t-spacings-50);
-	margin: 0 calc(var(--pr-t-spacings-50) * -1);
+	margin-block: 0;
+	margin-inline: calc(var(--pr-t-spacings-50) * -1);
 	transform: translateY(var(--pr-t-spacings-50));
 
 	.button {
-		width: 100%;
+		inline-size: 100%;
 		justify-content: left;
 	}
 }
@@ -83,8 +85,7 @@
 	background-color: var(--pr-t-elevation-surface-raised);
 	position: sticky;
 	inset-block-start: 0;
-	inset-inline-start: 0;
-	inset-inline-end: 0;
+	inset-inline: 0;
 	display: block;
 	z-index: 1;
 	margin-block-end: var(--pr-t-spacings-50);
@@ -92,7 +93,7 @@
 }
 
 .lu-picker-textfield {
-	width: 100%;
+	inline-size: 100%;
 	padding-block-end: var(--pr-t-spacings-100);
 
 	.textfield-input {
@@ -105,17 +106,16 @@
 	background-color: var(--pr-t-elevation-surface-raised);
 	position: sticky;
 	inset-block-end: 0;
-	inset-inline-start: 0;
-	inset-inline-end: 0;
+	inset-inline: 0;
 	display: block;
 	z-index: 1;
 }
 
 .lu-date-picker-panel {
-	width: var(--components-calendar-width);
+	inline-size: var(--components-calendar-width);
 
 	.lu-picker-content {
-		max-height: none;
+		max-block-size: none;
 	}
 }
 

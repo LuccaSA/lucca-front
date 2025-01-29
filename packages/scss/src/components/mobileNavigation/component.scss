@@ -6,7 +6,8 @@
 	background-color: var(--pr-t-elevation-surface-raised);
 	inset-block-end: 0;
 	box-shadow: var(--pr-t-elevation-shadow-overflow);
-	padding: 0 var(--pr-t-spacings-100);
+	padding-block: 0;
+	padding-inline: var(--pr-t-spacings-100);
 	position: sticky;
 
 	@at-root ($atRoot) {
@@ -27,7 +28,8 @@
 			font-size: var(--sizes-XS-fontSize);
 			gap: var(--pr-t-spacings-50);
 			line-height: var(--sizes-XS-lineHeight);
-			padding: var(--pr-t-spacings-100) var(--pr-t-spacings-50);
+			padding-block: var(--pr-t-spacings-100);
+			padding-inline: var(--pr-t-spacings-50);
 			position: relative;
 			text-decoration: none;
 

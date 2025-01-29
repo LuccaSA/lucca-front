@@ -48,7 +48,7 @@ export class EllipsisRuler {
 		const elementCloned = this.#document.createElement('div');
 
 		Object.assign(elementCloned.style, {
-			width: 'fit-content',
+			inlineSize: 'fit-content',
 			whiteSpace: 'nowrap',
 			position: 'absolute',
 			visibility: 'hidden',

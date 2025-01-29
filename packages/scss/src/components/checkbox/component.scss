@@ -20,8 +20,8 @@
 				@include icon.generate('sign_confirm');
 
 				background-color: var(--palettes-neutral-0);
-				width: var(--components-checkbox-input-size);
-				height: var(--components-checkbox-input-size);
+				inline-size: var(--components-checkbox-input-size);
+				block-size: var(--components-checkbox-input-size);
 				border-radius: 6px;
 				transition-duration: var(--commons-animations-durations-fast);
 				transition-property: border-color, color, background-color;

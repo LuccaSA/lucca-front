@@ -3,7 +3,7 @@
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
 	display: block;
-	max-width: var(--components-dateRangeField-maxWidth);
+	max-inline-size: var(--components-dateRangeField-maxWidth);
 
 	@at-root ($atRoot) {
 		.dateRangeField-fieldset {
@@ -14,7 +14,7 @@
 
 		.dateRangeField-fieldset-content {
 			position: relative;
-			width: var(--components-dateRangeField-content-width);
+			inline-size: var(--components-dateRangeField-content-width);
 
 			&::before {
 				content: '';

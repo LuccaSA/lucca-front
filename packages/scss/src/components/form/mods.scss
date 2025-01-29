@@ -14,7 +14,7 @@
 @use '@lucca-front/scss/src/components/box/exports' as box;
 
 @mixin maxWidth {
-	max-width: var(--components-form-maxWidth);
+	max-inline-size: var(--components-form-maxWidth);
 }
 
 @mixin inline {
@@ -203,8 +203,8 @@
 			inset-block-end: 0;
 			inset-inline-end: 0;
 			z-index: 10;
-			padding: var(--components-field-framed-label-top-offset) var(--components-field-framed-side-padding)
-				var(--components-field-framed-bottom-padding);
+			padding-block: var(--components-field-framed-label-top-offset) var(--components-field-framed-bottom-padding);
+			padding-inline: var(--components-field-framed-side-padding);
 		}
 	}
 }
@@ -218,8 +218,7 @@
 		+ .checkbox,
 		+ .radio,
 		+ .select {
-			inset-block-start: 0;
-			inset-block-end: auto;
+			inset-block: 0 auto;
 		}
 	}
 }
@@ -273,7 +272,8 @@
 		display: block;
 		margin-block-start: var(--components-field-framed-side-padding);
 		margin-block-end: 0;
-		padding: 0 var(--components-field-framed-side-padding) var(--components-field-framed-bottom-padding);
+		padding-block: 0 var(--components-field-framed-bottom-padding);
+		padding-inline: var(--components-field-framed-side-padding);
 	}
 
 	&.is-disabled,

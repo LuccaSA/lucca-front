@@ -8,14 +8,14 @@
 @mixin S {
 	.radio-label {
 		line-height: var(--sizes-S-lineHeight);
-		min-height: var(--sizes-S-lineHeight);
+		min-block-size: var(--sizes-S-lineHeight);
 		font-size: var(--sizes-S-fontSize);
 		padding: var(--components-radio-S-label-padding);
 
 		&::before,
 		&::after {
-			height: var(--components-radio-S-input-size);
-			width: var(--components-radio-S-input-size);
+			block-size: var(--components-radio-S-input-size);
+			inline-size: var(--components-radio-S-input-size);
 		}
 	}
 

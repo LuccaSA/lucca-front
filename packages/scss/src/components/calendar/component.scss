@@ -4,7 +4,7 @@
 @use '@lucca-front/scss/src/components/link/exports' as link;
 
 @mixin component($atRoot: 'without: rule') {
-	width: var(--components-calendarWidth);
+	inline-size: var(--components-calendarWidth);
 
 	@at-root ($atRoot) {
 		.calendarShortcutsOptionnal {
@@ -14,7 +14,7 @@
 		.calendarShortcuts {
 			@include reset.list;
 
-			width: 13.5rem;
+			inline-size: 13.5rem;
 			border-inline-end: 1px solid var(--palettes-neutral-100);
 			padding: var(--pr-t-spacings-50);
 			overflow: auto;
@@ -27,16 +27,16 @@
 			}
 
 			&.mod-day {
-				max-height: 19.25rem;
+				max-block-size: 19.25rem;
 
 				&:has(+ .calendarWrapper .calendar-todayLink) {
-					max-height: 21.75rem;
+					max-block-size: 21.75rem;
 				}
 			}
 
 			&.mod-month,
 			&.mod-year {
-				max-height: 18rem;
+				max-block-size: 18rem;
 			}
 		}
 
@@ -60,7 +60,7 @@
 			scroll-snap-align: start end;
 			flex-shrink: 0;
 			flex-grow: 0;
-			width: 100%;
+			inline-size: 100%;
 			empty-cells: hide;
 		}
 
@@ -141,7 +141,8 @@
 
 		.calendar-name {
 			line-height: var(--sizes-L-lineHeight);
-			padding: var(--pr-t-spacings-50) calc(var(--pr-t-spacings-300) + var(--pr-t-spacings-100));
+			padding-block: var(--pr-t-spacings-50);
+			padding-inline: calc(var(--pr-t-spacings-300) + var(--pr-t-spacings-100));
 			font-size: var(--sizes-L-fontSize);
 			font-weight: 700;
 			border: var(--pr-t-spacings-150) solid transparent;
@@ -156,7 +157,7 @@
 
 			border-radius: var(--commons-borderRadius-L);
 			text-align: inherit;
-			width: fit-content;
+			inline-size: fit-content;
 			display: inline-block;
 			padding: var(--pr-t-spacings-50);
 			margin-block: calc(var(--pr-t-spacings-50) * -1);
@@ -217,7 +218,7 @@
 			color: var(--components-calendar-table-body-row-cell-actionColor);
 			background-color: var(--components-calendar-table-body-row-cell-actionHighlight);
 			display: var(--components-calendar-table-body-row-cell-actionDisplay);
-			height: var(--pr-t-spacings-400);
+			block-size: var(--pr-t-spacings-400);
 			text-transform: lowercase;
 			box-shadow:
 				0 0 0 1px var(--components-calendar-table-body-row-cell-actionHighlight),
@@ -259,8 +260,8 @@
 			position: absolute;
 			inset-block-start: 0;
 			inset-inline-start: 0;
-			width: 60px;
-			height: 60px;
+			inline-size: 60px;
+			block-size: 60px;
 			z-index: -1;
 			display: var(--components-calendar-table-body-row-cell-action-stripesDisplay);
 		}

@@ -80,11 +80,11 @@ const Template: StoryFn<MenuScrollboxStory> = (args) => ({
 		`
 			:host {
 				display: block;
-				max-width: 100%;
-				width: 25rem;
-				min-width: 20rem;
+				max-inline-size: 100%;
+				inline-size: 25rem;
+				min-inline-size: 20rem;
 				overflow: hidden;
-				resize: horizontal;
+				resize: inline;
 				padding-block-end: 4rem;
 			}
 		`,

@@ -24,7 +24,7 @@ export default {
 		},
 		luPopoverNoCloseButton: {
 			description: '[v18.2]',
-		}
+		},
 	},
 } as Meta;
 
@@ -55,7 +55,7 @@ export const Basic: StoryObj<PopoverDirective> = {
 				`
 	.demo {
 		display: flex;
-		min-height: 20rem;
+		min-block-size: 20rem;
 		align-items: center;
 		justify-content: center;
 	}`,

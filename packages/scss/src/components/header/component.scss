@@ -4,7 +4,7 @@
 @mixin component($atRoot: namespace.$defaultAtRoot) {
 	box-shadow: var(--pr-t-elevation-shadow-overflow);
 	background-color: var(--components-header-background);
-	min-height: var(--components-header-height);
+	min-block-size: var(--components-header-height);
 	padding: var(--components-header-padding);
 	position: relative;
 	display: flex;
@@ -22,7 +22,7 @@
 		}
 
 		.header-nav {
-			height: var(--components-header-height);
+			block-size: var(--components-header-height);
 			padding-inline-start: calc(var(--components-header-height) + var(--pr-t-spacings-200));
 			align-items: flex-start;
 			display: flex;
@@ -38,8 +38,8 @@
 			border-inline-end-width: var(--commons-divider-width);
 			border-inline-end-style: solid;
 			color: var(--palettes-neutral-500);
-			height: var(--components-header-height);
-			width: var(--components-header-height);
+			block-size: var(--components-header-height);
+			inline-size: var(--components-header-height);
 			line-height: var(--components-header-height);
 			font-size: 1.3rem;
 			inset-inline-start: 0;

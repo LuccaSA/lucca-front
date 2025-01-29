@@ -202,15 +202,15 @@ export const ApiV4 = generateStory({
 
 const optionStyle = `
 	display: inline-block;
-	width: 1rem;
-	height: 1rem;
+	inline-size: 1rem;
+	blocks-size: 1rem;
 	border-radius: 50%;
 	border: 1px solid var(--palettes-neutral-900);
 `;
 const displayerStyle = `
 	display: inline-block;
-	width: 10rem;
-	height: 1rem;
+	inline-size: 10rem;
+	block-size: 1rem;
 	border: 1px solid var(--palettes-neutral-900);
 `;
 

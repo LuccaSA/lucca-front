@@ -50,9 +50,9 @@
 
 	.lu-select-value {
 		line-height: var(--sizes-M-lineHeight);
-		min-height: calc(var(--components-select-framed-bottom-padding) + var(--sizes-M-lineHeight));
-		padding: var(--components-select-input-padding-vertical) 3.5rem var(--components-select-input-padding-vertical)
-			var(--components-select-input-padding-horizontal);
+		min-block-size: calc(var(--components-select-framed-bottom-padding) + var(--sizes-M-lineHeight));
+		padding-block: var(--components-select-input-padding-vertical);
+		padding-inline: 3.5rem var(--components-select-input-padding-horizontal);
 		transition: all var(--commons-animations-durations-standard);
 		display: none;
 	}
@@ -60,9 +60,9 @@
 	.lu-select-placeholder {
 		color: var(--palettes-neutral-400);
 		line-height: var(--sizes-M-lineHeight);
-		min-height: calc(var(--components-select-framed-bottom-padding) + var(--sizes-M-lineHeight));
-		padding: var(--components-select-input-padding-vertical) 3.5rem var(--components-select-input-padding-vertical)
-			var(--components-select-input-padding-horizontal);
+		min-block-size: calc(var(--components-select-framed-bottom-padding) + var(--sizes-M-lineHeight));
+		padding-block: var(--components-select-input-padding-vertical);
+		padding-inline: 3.5rem var(--components-select-input-padding-horizontal);
 		transition: all var(--commons-animations-durations-standard);
 		overflow: hidden;
 		text-overflow: ellipsis;
@@ -84,8 +84,9 @@
 	::ng-deep .lu-select-value {
 		.chip {
 			vertical-align: baseline;
-			max-width: 100%;
-			margin: 0 var(--pr-t-spacings-50) var(--pr-t-spacings-50) 0;
+			max-inline-size: 100%;
+			margin-block: 0 var(--pr-t-spacings-50);
+			margin-inline: 0 var(--pr-t-spacings-50);
 			text-overflow: ellipsis;
 			overflow: hidden;
 			vertical-align: top;
@@ -104,7 +105,7 @@
 		.lu-select-placeholder {
 			font-size: var(--sizes-S-fontSize);
 			line-height: var(--sizes-XS-lineHeight);
-			min-height: calc(var(--components-select-framed-bottom-padding) + var(--sizes-XS-lineHeight));
+			min-block-size: calc(var(--components-select-framed-bottom-padding) + var(--sizes-XS-lineHeight));
 		}
 
 		.lu-select-clearer {
@@ -123,7 +124,7 @@
 
 		::ng-deep .lu-select-value {
 			.chip {
-				height: var(--sizes-XS-lineHeight);
+				block-size: var(--sizes-XS-lineHeight);
 				line-height: var(--sizes-XS-lineHeight);
 				font-size: var(--sizes-XS-fontSize);
 				padding-inline-start: var(--pr-t-spacings-50);
@@ -141,7 +142,8 @@
 	:host-context(.textfield.mod-framed),
 	:host-context(.form.mod-framed) {
 		&.textfield-input {
-			padding: var(--components-select-framed-top-padding) 0 0;
+			padding-block: var(--components-select-framed-top-padding) 0;
+			padding-inline: 0;
 
 			&::after {
 				color: var(--palettes-neutral-500);
@@ -150,14 +152,14 @@
 			}
 
 			.lu-select-value {
-				padding: 0 calc(var(--components-select-framed-side-padding) * 3) var(--components-select-framed-bottom-padding)
-					var(--components-select-framed-side-padding);
+				padding-block: 0 var(--components-select-framed-bottom-padding);
+				padding-inline: var(--components-select-framed-side-padding) calc(var(--components-select-framed-side-padding) * 3);
 			}
 
 			.lu-select-placeholder {
 				color: var(--palettes-neutral-400);
-				padding: 0 calc(var(--components-select-framed-side-padding) * 3) var(--components-select-framed-bottom-padding)
-					var(--components-select-framed-side-padding);
+				padding-block: 0 var(--components-select-framed-bottom-padding);
+				padding-inline: var(--components-select-framed-side-padding) calc(var(--components-select-framed-side-padding) * 3);
 			}
 
 			.lu-select-suffix {
@@ -172,7 +174,7 @@
 		.lu-select-value,
 		.lu-select-placeholder {
 			padding: 0;
-			height: auto;
+			block-size: auto;
 			padding-block-start: var(--pr-t-spacings-200);
 			color: var(--palettes-neutral-800);
 		}
@@ -222,7 +224,7 @@
 	// Multiple
 	:host(.mod-multiple) {
 		.lu-select-value {
-			height: auto;
+			block-size: auto;
 			align-items: center;
 		}
 

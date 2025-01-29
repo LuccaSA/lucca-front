@@ -53,11 +53,11 @@ export default {
 			styles: [
 				`
 					h3 {
-						margin: 0;
-						margin-block-start: var(--pr-t-spacings-200);
+						margin-block: var(--pr-t-spacings-200) 0;
+						margin-inline: 0;
 					}
 					.ellipsis-example {
-						width: 11rem;
+						inline-size: 11rem;
 					}
 				`,
 			],

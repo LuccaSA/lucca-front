@@ -16,7 +16,7 @@
 		border-block-end-color: var(--commons-divider-color);
 		border-block-end-style: solid;
 		position: absolute;
-		height: 1px;
+		block-size: 1px;
 		inset: auto 0 0;
 	}
 
@@ -29,7 +29,7 @@
 
 	@at-root ($atRoot) {
 		.menu-containerOptionnal {
-			max-width: var(--commons-container-maxWidth);
+			max-inline-size: var(--commons-container-maxWidth);
 			padding-inline: var(--commons-container-padding);
 		}
 
@@ -62,7 +62,7 @@
 			transition-property: color;
 			position: relative;
 			text-decoration: none;
-			width: auto;
+			inline-size: auto;
 			z-index: 1;
 			scroll-margin-inline: var(--pr-t-spacings-200);
 
@@ -70,8 +70,8 @@
 				background-color: var(--palettes-700, var(--palettes-product-700));
 				border-radius: var(--components-menu-listItemActionRadius);
 				transition-duration: var(--commons-animations-durations-fast);
-				height: var(--components-menu-listItemActionRadiusHeight);
-				width: var(--components-menu-listItemActionRadiusWidth);
+				block-size: var(--components-menu-listItemActionRadiusHeight);
+				inline-size: var(--components-menu-listItemActionRadiusWidth);
 				transform: var(--components-menu-listItemActionTransform);
 				inset: var(--components-menu-listItemActionInset);
 				transition-property: transform;
@@ -105,7 +105,7 @@
 				content: attr(data-content-after);
 
 				display: block;
-				height: 0;
+				block-size: 0;
 				overflow: hidden;
 				font-weight: 600;
 			}

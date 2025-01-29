@@ -43,7 +43,8 @@
 			display: flex;
 			gap: var(--pr-t-spacings-75);
 			margin-block-start: var(--pr-t-spacings-50);
-			padding: var(--pr-t-spacings-50) 0;
+			padding-block: var(--pr-t-spacings-50);
+			padding-inline: 0;
 
 			.button {
 				@include color.palette('neutral');
@@ -63,8 +64,8 @@
 			text-align: center;
 			transition-duration: var(--commons-animations-durations-fast);
 			transition-property: background-color;
-			height: var(--components-callout-kill-size);
-			width: var(--components-callout-kill-size);
+			block-size: var(--components-callout-kill-size);
+			inline-size: var(--components-callout-kill-size);
 
 			&:focus-visible {
 				@include a11y.focusVisible($borderRadius: var(--commons-borderRadius-M));

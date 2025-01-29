@@ -13,7 +13,7 @@
 
 	.progress-bar {
 		animation: indeterminate var(--components-progress-duration) infinite;
-		width: calc(100% / 3) !important;
+		inline-size: calc(100% / 3) !important;
 		animation-timing-function: linear;
 	}
 }

@@ -25,7 +25,8 @@
 	}
 
 	.user-info {
-		margin: auto 0;
+		margin-block: auto;
+		margin-inline: 0;
 	}
 
 	&.mod-wordBreak {
