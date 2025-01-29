@@ -22,11 +22,11 @@
 	}
 
 	ul {
-		margin-block-end: var(--pr-t-spacings-paragraph);
+		margin-block-end: var(--pr-t-spacings-150);
 	}
 
 	li {
-		margin-bottom: 0.25rem;
+		margin-bottom: var(--pr-t-spacings-50);
 	}
 
 	@at-root ($atRoot) {
