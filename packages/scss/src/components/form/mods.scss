@@ -286,10 +286,8 @@
 
 		&::before,
 		&::after {
-			inset-inline-start: auto !important;
-			inset-block-end: auto !important;
-			inset-inline-end: var(--components-field-framed-side-padding) !important;
-			inset-block-start: var(--components-field-framed-side-padding) !important;
+			inset-block: var(--components-field-framed-side-padding) auto !important;
+			inset-inline: auto var(--components-field-framed-side-padding) !important;
 		}
 	}
 }

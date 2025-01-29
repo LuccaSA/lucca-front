@@ -69,12 +69,7 @@
 		white-space: nowrap;
 	}
 
-	.lu-select-suffix {
-		position: absolute;
-		inset-block-end: var(--pr-t-spacings-150);
-		inset-inline-end: 2.25rem;
-	}
-
+	.lu-select-suffix,
 	.lu-select-clearer {
 		position: absolute;
 		inset-block-end: var(--pr-t-spacings-150);
@@ -127,8 +122,7 @@
 				block-size: var(--sizes-XS-lineHeight);
 				line-height: var(--sizes-XS-lineHeight);
 				font-size: var(--sizes-XS-fontSize);
-				padding-inline-start: var(--pr-t-spacings-50);
-				padding-inline-end: var(--pr-t-spacings-50);
+				padding-inline: var(--pr-t-spacings-50);
 				gap: var(--pr-t-spacings-50);
 			}
 

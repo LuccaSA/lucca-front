@@ -39,8 +39,7 @@
 			&:before {
 				content: '';
 				position: absolute;
-				inset-block-start: 0;
-				inset-block-end: 0;
+				inset-block: 0;
 				inset-inline-start: calc(var(--pr-t-spacings-50) * -1);
 				inline-size: 2px;
 				background-color: var(--palettes-product-700);

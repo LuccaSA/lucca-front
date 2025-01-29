@@ -148,8 +148,7 @@
 
 @mixin stickyColumnBreakpoint {
 	.table-head-row-cell {
-		inset-inline-start: auto !important;
-		inset-inline-end: auto !important;
+		inset-inline: auto !important;
 	}
 }
 

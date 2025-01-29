@@ -3,11 +3,9 @@
 }
 
 @mixin S {
-	padding-inline-start: var(--pr-t-spacings-400);
-	padding-inline-end: var(--pr-t-spacings-400);
+	padding-inline: var(--pr-t-spacings-400);
 }
 
 @mixin XS {
-	padding-inline-start: var(--pr-t-spacings-200);
-	padding-inline-end: var(--pr-t-spacings-200);
+	padding-inline: var(--pr-t-spacings-200);
 }

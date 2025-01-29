@@ -82,8 +82,7 @@
 				position: absolute;
 				z-index: 1;
 				display: block;
-				inset-block-start: 1px;
-				inset-block-end: 1px;
+				inset-block: 1px;
 				inline-size: calc(var(--components-scrollBox-shadowWidth) / 2);
 				pointer-events: none;
 			}
@@ -108,8 +107,7 @@
 		}
 
 		.scrollBox-inner-content {
-			margin-inline-start: calc(var(--components-scrollBox-shadowWidth) * -1);
-			margin-inline-end: calc(var(--components-scrollBox-shadowWidth) * -1);
+			margin-inline: calc(var(--components-scrollBox-shadowWidth) * -1);
 			position: relative;
 			z-index: 2;
 		}
