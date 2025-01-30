@@ -1,10 +1,10 @@
 @mixin vars {
 	--components-form-maxWidth: 40rem;
-	--components-form-group-margin-block-end: 1.2rem;
-	--components-form-field-margin-block-end: var(--pr-t-spacings-200);
+	--components-form-group-margin-bottom: 1.2rem;
+	--components-form-field-margin-bottom: var(--pr-t-spacings-200);
 	--components-form-field-width: auto;
 	--components-form-label-font-size: var(--sizes-M-fontSize);
-	--components-form-label-margin-block-end: var(--pr-t-spacings-50);
+	--components-form-label-margin-bottom: var(--pr-t-spacings-50);
 	--components-field-framed-side-padding: var(--pr-t-spacings-200);
 	--components-field-framed-top-padding: var(--pr-t-spacings-400);
 	--components-field-framed-bottom-padding: var(--pr-t-spacings-200);
@@ -14,5 +14,5 @@
 	--components-field-framed-textarea-max-height: 80vh;
 	--components-field-framed-title-font-size: 1.125rem;
 	--components-field-framed-title-line-height: var(--sizes-M-lineHeight);
-	--components-field-framed-suffix-padding-inline-end: var(--pr-t-spacings-600);
+	--components-field-framed-suffix-padding-right: var(--pr-t-spacings-600);
 }
