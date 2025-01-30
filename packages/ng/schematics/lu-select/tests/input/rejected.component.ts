@@ -14,7 +14,7 @@ import { LuOptionItemComponent, LuOptionSelectAllComponent } from '@lucca-front/
 		<lu-user-select placeholder="Select a user" class="textfield-input" data-testid="lu-select"></lu-user-select>
 		<lu-user-select placeholder="Select a user" class="textfield-input" data-testid="lu-select" blabla="foo"></lu-user-select>
 		<lu-establishment-select placeholder="Select an establishment" class="textfield-input"></lu-establishment-select>
-		<lu-department-select placeholder="Select an establishment" class="textfield-input"></lu-department-select>
+		<lu-department-select placeholder="Select a department" class="textfield-input"></lu-department-select>
 		<lu-select class="textfield-input">
 			<lu-option *ngFor="let culture of cultures" [value]="culture">
 				{{ culture?.name }}

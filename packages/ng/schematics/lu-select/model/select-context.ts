@@ -9,7 +9,8 @@ export const selectorToSelectComponentName = {
 	'lu-select': 'LuSelectInputComponent',
 	'lu-qualification-select': 'LuQualificationSelectInputComponent',
 	'lu-user-select': 'LuUserSelectModule',
-	'lu-establishment-select': 'LuEstablishmentSelectInputComponent'
+	'lu-establishment-select': 'LuEstablishmentSelectInputComponent',
+	'lu-department-select': 'LuDepartmentSelectInputComponent'
 } as const;
 
 export const selectorToComponentName = {
@@ -49,9 +50,14 @@ export interface LuQualificationSelectInputContext extends BaseSelectContext {
 	component: 'LuQualificationSelectInputComponent';
 }
 
+export interface LuDepartmentSelectInputComponentContext extends BaseSelectContext {
+	component: 'LuDepartmentSelectInputComponent';
+}
+
 export type PremadeApiSelectContext = LuUserSelectInputContext
 	| LuEstablishmentSelectInputContext
-	| LuQualificationSelectInputContext;
+	| LuQualificationSelectInputContext
+	| LuDepartmentSelectInputComponentContext;
 
 export type SelectContext = LuSelectInputContext | PremadeApiSelectContext;
 

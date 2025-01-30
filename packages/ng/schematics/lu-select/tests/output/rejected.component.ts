@@ -18,7 +18,8 @@ import { LuCoreSelectUsersDirective } from '@lucca-front/ng/core-select';
 		<lu-user-select placeholder="Select a user" class="textfield-input" data-testid="lu-select" blabla="foo"></lu-user-select>
 		<!-- [lu-select migration] REJECTED: ALuEstablishmentService overriden in providers -->
 		<lu-establishment-select placeholder="Select an establishment" class="textfield-input"></lu-establishment-select>
-		<lu-department-select placeholder="Select an establishment" class="textfield-input"></lu-department-select>
+		<!-- [lu-select migration] REJECTED: Tree selects don't have their "modern" implementation yet -->
+		<lu-department-select placeholder="Select a department" class="textfield-input"></lu-department-select>
 		<!-- [lu-select migration] REJECTED: lu-option-select-all requires manual work and API support to be migrated -->
 		<lu-select class="textfield-input">
 			<lu-option *ngFor="let culture of cultures" [value]="culture">

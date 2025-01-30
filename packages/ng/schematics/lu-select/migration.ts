@@ -42,6 +42,11 @@ export function migrateComponent(sourceFile: SourceFile, path: string, tree: Tre
 					case 'LuUserSelectModule':
 						handlePremadeApiSelect(select, templateUpdate);
 						break;
+					case 'LuDepartmentSelectInputComponent':
+						select.rejection = {
+							reason: RejectionReason.TREE_OPTION_PICKER
+						};
+						break;
 				}
 			}
 			// We're not checking using else here because handle** methods can also add a rejection reason
