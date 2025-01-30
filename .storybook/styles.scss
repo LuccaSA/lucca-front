@@ -33,7 +33,7 @@
 	}
 }
 
-.demo-qa-table {
+.demo-QAtable {
 	border: 1px solid var(--commons-border-200);
 	border-collapse: collapse;
 
@@ -45,4 +45,11 @@
 			white-space: nowrap;
 		}
 	}
+}
+
+.demo-QAtable-list {
+	display: flex;
+	gap: var(--pr-t-spacings-100);
+	align-items: center;
+	flex-wrap: wrap;
 }
