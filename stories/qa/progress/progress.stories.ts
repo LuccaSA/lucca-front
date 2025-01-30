@@ -5,6 +5,7 @@ import { Meta, StoryFn } from '@storybook/angular';
 	standalone: true,
 	selector: 'progress-stories',
 	templateUrl: './progress.stories.html',
+	styles: ['.progress .progress-bar { animation-play-state: paused; }'],
 })
 class ProgressStory {}
 
