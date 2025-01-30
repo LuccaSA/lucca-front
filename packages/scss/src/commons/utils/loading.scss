@@ -20,7 +20,7 @@
 		animation-iteration-count: infinite;
 		border-color: var(--commons-loading-frontground);
 		border-block-start-color: transparent;
-    
+
 		@include keyframe.rotate;
 	}
 }

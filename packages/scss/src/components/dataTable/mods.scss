@@ -104,7 +104,7 @@
 	&:is(.dataTable-head-row-cell) {
 		.button {
 			position: relative;
-			bottom: var(--pr-t-spacings-50);
+			inset-block-end: var(--pr-t-spacings-50);
 		}
 	}
 }

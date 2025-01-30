@@ -164,8 +164,8 @@
 					calc(var(--components-indexTable-cell-inset-x-left, 0px) - var(--components-indexTable-outline-offset));
 				border-radius: var(--components-indexTable-outline-border-radius-left) var(--components-indexTable-outline-border-radius-right)
 					var(--components-indexTable-outline-border-radius-right) var(--components-indexTable-outline-border-radius-left);
-				border-width: var(--components-indexTable-outline-border-width) var(--components-indexTable-outline-border-width-right)
-					var(--components-indexTable-outline-border-width) var(--components-indexTable-outline-border-width-left);
+				border-block-width: var(--components-indexTable-outline-border-width);
+				border-inline-width: var(--components-indexTable-outline-border-width-left) var(--components-indexTable-outline-border-width-right);
 				border-style: solid;
 				border-color: var(--components-indexTable-outline-color);
 				opacity: var(--components-indexTable-outline-opacity, 0);
