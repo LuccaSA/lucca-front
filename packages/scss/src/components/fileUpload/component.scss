@@ -18,7 +18,11 @@
 	justify-content: var(--components-fileUpload-justifyContent);
 	gap: var(--pr-t-spacings-200);
 	color: var(--palettes-neutral-800);
+<<<<<<< Updated upstream
 	min-height: var(--components-fileUpload-minHeight);
+=======
+	min-block-size: var(--components-fileUpload-minHeight);
+>>>>>>> Stashed changes
 
 	&:has(.fileUpload-input:focus-visible) {
 		@include a11y.focusVisible;
@@ -26,8 +30,13 @@
 
 	@at-root ($atRoot) {
 		.fileUpload-status {
+<<<<<<< Updated upstream
 			min-width: var(--pr-t-spacings-600);
 			min-height: var(--components-fileUpload-status-minHeight);
+=======
+			min-inline-size: var(--pr-t-spacings-600);
+			min-block-size: var(--components-fileUpload-status-minHeight);
+>>>>>>> Stashed changes
 			display: flex;
 		}
 
@@ -47,7 +56,11 @@
 			display: var(--components-fileUpload-instruction-display);
 			flex-direction: column;
 			align-items: var(--components-fileUpload-instruction-alignItems);
+<<<<<<< Updated upstream
 			max-width: var(--components-fileUpload-instruction-maxWidth);
+=======
+			max-inline-size: var(--components-fileUpload-instruction-maxWidth);
+>>>>>>> Stashed changes
 		}
 
 		.fileUpload-instruction-action {
@@ -75,8 +88,13 @@
 			display: block;
 			font-weight: 600;
 			color: var(--components-fileUpload-instruction-filename-color);
+<<<<<<< Updated upstream
 			margin-top: var(--components-fileUpload-instruction-filename-marginTop);
 			bottom: var(--pr-t-spacings-100);
+=======
+			margin-block-start: var(--components-fileUpload-instruction-filename-marginTop);
+			inset-block-end: var(--pr-t-spacings-100);
+>>>>>>> Stashed changes
 			position: var(--components-fileUpload-instruction-filename-position);
 		}
 	}
