@@ -461,6 +461,7 @@ export class DateRangeInputComponent extends AbstractDateComponent implements Co
 		end.value = '';
 		this.selectedRange.set(null);
 		this.onTouched?.();
+		this.startTextInputRef().nativeElement.focus();
 	}
 
 	currentDateChangeFromCalendar(date: Date): void {
