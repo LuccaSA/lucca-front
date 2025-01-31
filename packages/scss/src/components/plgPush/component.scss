@@ -28,8 +28,8 @@
 			flex-shrink: 0;
 			align-items: center;
 			justify-content: center;
-			height: var(--components-plgPush-icon-size);
-			width: var(--components-plgPush-icon-size);
+			block-size: var(--components-plgPush-icon-size);
+			inline-size: var(--components-plgPush-icon-size);
 		}
 
 		.plgPush-icons-front {

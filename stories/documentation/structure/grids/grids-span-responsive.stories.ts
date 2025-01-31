@@ -28,7 +28,7 @@ const Template: StoryFn<GridsSpanStory> = (args) => ({
 			padding: var(--pr-t-spacings-200);
 			border-radius: 1rem;
 			text-align: center;
-			height: 100%;
+			block-size: 100%;
 			display: flex;
 			align-items: center;
 			justify-content: center;

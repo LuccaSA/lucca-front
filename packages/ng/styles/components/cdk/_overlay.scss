@@ -9,11 +9,11 @@
 .cdk-overlay-container {
 	position: fixed;
 	z-index: 1000;
-	height: 100%;
-	left: 0;
+	block-size: 100%;
+	inset-inline-start: 0;
 	pointer-events: none;
-	top: 0;
-	width: 100%;
+	inset-block-start: 0;
+	inline-size: 100%;
 }
 
 .cdk-overlay-connected-position-bounding-box {
@@ -21,8 +21,8 @@
 	z-index: 1000;
 	display: flex;
 	flex-direction: column;
-	min-width: 1px;
-	min-height: 1px;
+	min-inline-size: 1px;
+	min-block-size: 1px;
 }
 
 .cdk-overlay-pane {
@@ -37,13 +37,10 @@
 }
 
 .cdk-overlay-backdrop {
-	bottom: 0;
-	left: 0;
 	opacity: 0;
 	pointer-events: auto;
 	position: absolute;
-	right: 0;
-	top: 0;
+	inset: 0;
 	transition: opacity var(--commons-animations-durations-fast) ease-in-out;
 	z-index: 1000;
 
@@ -60,9 +57,9 @@
 }
 
 .cdk-overlay-backdrop.cdk-overlay-backdrop-showing.lu-popup-backdrop {
-	@include keyframe.fadeIn;
-
 	opacity: var(--pr-t-elevation-surface-backdrop);
+
+	@include keyframe.fadeIn;
 }
 
 // MODS
@@ -72,7 +69,7 @@
 	// Option picker
 
 	&.mod-optionPicker {
-		min-width: 13rem;
-		max-width: 30rem;
+		min-inline-size: 13rem;
+		max-inline-size: 30rem;
 	}
 }

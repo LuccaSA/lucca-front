@@ -27,7 +27,7 @@ const Template: StoryFn<ErrorBasicStory> = (args) => ({
 	styles: [
 		`
 		.errorPage {
-			height: 30rem;
+			block-size: 30rem;
 		}`,
 	],
 });

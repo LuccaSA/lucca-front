@@ -8,12 +8,12 @@
 	@at-root ($atRoot) {
 		.switchField-icon {
 			display: block;
-			width: var(--component-switchField-label-input-width);
-			height: var(--component-switchField-label-input-height);
+			inline-size: var(--component-switchField-label-input-width);
+			block-size: var(--component-switchField-label-input-height);
 			border: 2px solid var(--palettes-neutral-500);
 			border-radius: var(--component-switchField-label-input-height);
 			position: relative;
-			top: var(--pr-t-spacings-25);
+			inset-block-start: var(--pr-t-spacings-25);
 			color: var(--palettes-neutral-0);
 			transition-property: color, border-color, background-color;
 			transition-duration: var(--commons-animations-durations-fast);
@@ -31,12 +31,12 @@
 			&::before {
 				content: '';
 				position: absolute;
-				width: 50%;
+				inline-size: 50%;
 				aspect-ratio: 1;
 				background-color: var(--palettes-neutral-0);
 				border-radius: var(--commons-borderRadius-full);
-				left: 0;
-				top: 0;
+				inset-inline-start: 0;
+				inset-block-start: 0;
 				transition-property: left;
 				transition-duration: var(--commons-animations-durations-fast);
 				transition-timing-function: cubic-bezier(0.5, 1, 0.5, 1.5);
@@ -48,8 +48,8 @@
 			display: flex;
 			align-items: center;
 			justify-content: center;
-			width: 100%;
-			height: 100%;
+			inline-size: 100%;
+			block-size: 100%;
 
 			&::before {
 				@include icon.generate('confirm');
@@ -65,8 +65,8 @@
 		.switchField-input {
 			position: absolute;
 			z-index: 1;
-			width: var(--component-switchField-label-input-width);
-			height: var(--component-switchField-label-input-height);
+			inline-size: var(--component-switchField-label-input-width);
+			block-size: var(--component-switchField-label-input-height);
 			opacity: 0.0001;
 			cursor: pointer;
 

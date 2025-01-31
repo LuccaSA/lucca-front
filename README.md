@@ -168,4 +168,4 @@ In order to work on Lucca Front, we use Storybook to display components.
 
 ## TODO
 
-- [ ] Gestion de l'espace
+- [ ] Gestion de l’espace

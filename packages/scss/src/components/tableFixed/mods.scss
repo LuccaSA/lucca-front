@@ -44,6 +44,6 @@
 }
 
 @mixin cellFixedWidth {
-	min-width: var(--cell-width, auto);
-	width: var(--cell-width, auto);
+	min-inline-size: var(--cell-width, auto);
+	inline-size: var(--cell-width, auto);
 }

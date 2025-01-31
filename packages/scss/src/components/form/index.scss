@@ -48,6 +48,26 @@
 		@include XS;
 	}
 
+	&.mod-width20 {
+		@include width20;
+	}
+
+	&.mod-width30 {
+		@include width30;
+	}
+
+	&.mod-width40 {
+		@include width40;
+	}
+
+	&.mod-width50 {
+		@include width50;
+	}
+
+	&.mod-width60 {
+		@include width60;
+	}
+
 	&.mod-checkable,
 	&:has(.radioField),
 	&:has(.checkboxField),
@@ -133,9 +153,9 @@
 
 .checkboxesfield.mod-framed,
 .radiosfield.mod-framed {
-	margin-top: 0;
-	padding: var(--components-field-framed-side-padding) var(--components-field-framed-side-padding)
-		var(--components-field-framed-bottom-padding);
+	margin-block-start: 0;
+	padding-block: var(--components-field-framed-side-padding) var(--components-field-framed-bottom-padding);
+	padding-inline: var(--components-field-framed-side-padding);
 }
 
 .form-group-label {
