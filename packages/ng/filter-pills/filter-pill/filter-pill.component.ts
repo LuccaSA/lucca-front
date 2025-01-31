@@ -76,7 +76,7 @@ export class FilterPillComponent {
 
 	optional = input<boolean, boolean>(false, { transform: booleanAttribute });
 
-	disabled = input<boolean, boolean>(false, { transform: booleanAttribute });
+	disabled = computed(() => this.inputComponentRef()?.filterPillDisabled?.() || false);
 
 	@HostBinding('class.is-hidden')
 	get isHiddenClass() {

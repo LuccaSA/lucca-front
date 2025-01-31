@@ -30,6 +30,7 @@ import { CalendarMode } from '../calendar2/calendar-mode';
 import { Calendar2Component } from '../calendar2/calendar2.component';
 import { CellStatus } from '../calendar2/cell-status';
 import { comparePeriods, startOfPeriod } from '../utils';
+import { isDisabled } from '@testing-library/user-event/utils/misc/isDisabled';
 
 @Component({
 	selector: 'lu-date-input',
@@ -73,6 +74,8 @@ export class DateInputComponent extends AbstractDateComponent implements Control
 
 	disableOverflow = input(false, { transform: booleanAttribute });
 	hideOverflow = input(false, { transform: booleanAttribute });
+
+	filterPillDisabled = signal(false);
 
 	popoverPositions: ConnectionPositionPair[] = [
 		new ConnectionPositionPair({ originX: 'start', originY: 'bottom' }, { overlayX: 'start', overlayY: 'top' }, -8, 0),
@@ -284,6 +287,10 @@ export class DateInputComponent extends AbstractDateComponent implements Control
 
 	registerOnChange(fn: (value: Date) => void): void {
 		this.#onChange = fn;
+	}
+
+	override setDisabledState(isDisabled: boolean) {
+		this.filterPillDisabled.set(isDisabled);
 	}
 
 	clear() {

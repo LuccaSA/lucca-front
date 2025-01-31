@@ -197,6 +197,8 @@ export class DateRangeInputComponent extends AbstractDateComponent implements Co
 
 	filterPillPopoverCloseFn?: () => void;
 
+	filterPillDisabled = signal(false);
+
 	get isNavigationButtonFocused(): boolean {
 		return [this.previousButton()?.nativeElement, this.nextButton()?.nativeElement].includes(document.activeElement);
 	}
@@ -448,6 +450,10 @@ export class DateRangeInputComponent extends AbstractDateComponent implements Co
 
 	registerOnChange(fn: (value: DateRange) => void): void {
 		this.#onChange = fn;
+	}
+
+	override setDisabledState(isDisabled: boolean) {
+		this.filterPillDisabled.set(isDisabled);
 	}
 
 	clear(start: HTMLInputElement, end: HTMLInputElement) {

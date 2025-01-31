@@ -10,6 +10,8 @@ export interface FilterPillInputComponent {
 	hideCombobox?: Signal<boolean>;
 	showColon?: Signal<boolean>;
 
+	filterPillDisabled?: Signal<boolean>;
+
 	clearFilterPillValue(): void;
 
 	registerFilterPillClosePopover(closeFn: () => void): void;

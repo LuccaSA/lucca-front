@@ -42,6 +42,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	protected afterCloseFn?: () => void;
 	protected updatePositionFn?: () => void;
 	protected filterPillMode = false;
+	filterPillDisabled = signal(false);
 
 	@ViewChild('inputElement')
 	private inputElementRef: ElementRef<HTMLInputElement>;
@@ -266,6 +267,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 
 	setDisabledState(isDisabled: boolean): void {
 		this.disabled$.next(isDisabled);
+		this.filterPillDisabled.set(isDisabled);
 		this.changeDetectorRef.markForCheck();
 	}
 
