@@ -13,7 +13,7 @@
 
 	@if config.$deprecatedSpacings {
 		// no suffix here
-		margin-block-end: var(--pr-t-spacings-headings);
+		margin-block-end: var(--pr-t-spacings-200);
 
 		// suffix here
 		padding-block-start: var(--sizes-verticalPadding) #{$suffix};
