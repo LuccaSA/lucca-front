@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
+import { ButtonComponent } from '@lucca-front/ng/button';
 import { Meta, StoryFn } from '@storybook/angular';
 
 @Component({
 	standalone: true,
 	selector: 'button-stories',
 	templateUrl: './button.stories.html',
+	imports: [ButtonComponent],
 })
 class ButtonStory {}
 
