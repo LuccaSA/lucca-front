@@ -52,7 +52,10 @@ export function migrateComponent(sourceFile: SourceFile, path: string, tree: Tre
 			// We're not checking using else here because handle** methods can also add a rejection reason
 			// We want to handle both cases (before handling and after) here
 			if (select.rejection) {
+				console.log(`\x1b[31mCouldn't migrate ${select.component} in ${path}: ${RejectionReason[select.rejection.reason]}\x1b[0m`);
 				insertRejectionComment(templateUpdate, select as RejectedSelectContext);
+			} else {
+				console.log(`\x1b[36mMigrated ${select.component} in ${path}\x1b[0m`);
 			}
 		});
 		tree.commitUpdate(tsUpdate);
@@ -223,7 +226,8 @@ function handlePremadeApiSelect(select: PremadeApiSelectContext, update: UpdateR
 	const sourceDirective = {
 		LuQualificationSelectInputComponent: { selector: 'jobQualifications', className: 'LuCoreSelectJobQualificationsDirective' },
 		LuUserSelectModule: { selector: 'users', className: 'LuCoreSelectUsersDirective' },
-		LuEstablishmentSelectInputComponent: { selector: 'establishments', className: 'LuCoreSelectEstablishmentsDirective' }
+		LuEstablishmentSelectInputComponent: { selector: 'establishments', className: 'LuCoreSelectEstablishmentsDirective' },
+		LuDepartmentSelectInputComponent: { selector: 'departments', className: 'LuCoreSelectDepartmentsDirective' } // Cannot happen because it's rejected but we need it to prevent compilation errors
 	}[select.component];
 	select.requiredImports = select.multiple ? ['LuMultiSelectInputComponent', sourceDirective.className] : ['LuSimpleSelectInputComponent', sourceDirective.className];
 	const tag = select.multiple ? 'lu-multi-select' : 'lu-simple-select';
