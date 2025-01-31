@@ -52,7 +52,7 @@
 		line-height: var(--sizes-M-lineHeight);
 		min-block-size: calc(var(--components-select-framed-bottom-padding) + var(--sizes-M-lineHeight));
 		padding-block: var(--components-select-input-padding-vertical);
-		padding-inline: 3.5rem var(--components-select-input-padding-horizontal);
+		padding-inline: var(--components-select-input-padding-horizontal) 3.5rem;
 		transition: all var(--commons-animations-durations-standard);
 		display: none;
 	}
@@ -62,7 +62,7 @@
 		line-height: var(--sizes-M-lineHeight);
 		min-block-size: calc(var(--components-select-framed-bottom-padding) + var(--sizes-M-lineHeight));
 		padding-block: var(--components-select-input-padding-vertical);
-		padding-inline: 3.5rem var(--components-select-input-padding-horizontal);
+		padding-inline: var(--components-select-input-padding-horizontal) 3.5rem;
 		transition: all var(--commons-animations-durations-standard);
 		overflow: hidden;
 		text-overflow: ellipsis;
@@ -184,8 +184,7 @@
 
 		.lu-select-value,
 		.lu-select-placeholder {
-			padding-inline-start: 0;
-			padding-inline-end: 0.8rem;
+			padding-inline: 0 0.8rem;
 		}
 
 		.lu-select-suffix {
