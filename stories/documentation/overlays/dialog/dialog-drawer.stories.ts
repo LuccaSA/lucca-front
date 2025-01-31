@@ -38,7 +38,6 @@ const Template: StoryFn<DialogDrawerStory> = (args: DialogDrawerStory) => ({
 	styles: [
 		`
 			:host {
-				display: block;
 				height: 30rem;
 			}
 		`,

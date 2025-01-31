@@ -1,5 +1,4 @@
 @use '@lucca-front/scss/src/components/title/exports' as title;
-@use '@lucca-front/scss/src/commons/utils/media';
 @use '@lucca-front/scss/src/commons/utils/namespace';
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
@@ -45,7 +44,6 @@
 		.emptyState-content-heading {
 			@include title.component;
 			@include title.h3;
-
 			margin-bottom: 0;
 		}
 

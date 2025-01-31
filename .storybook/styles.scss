@@ -2,6 +2,12 @@
 @use '../packages/scss/src/main-all' as scss;
 @use '../packages/ng/styles/main' as ng;
 
+storybook-root,
+[ng-version] {
+	// Apply block display by default to story root for @container purposes
+	display: block;
+}
+
 .demo-utilityWrapper {
 	display: flex;
 	gap: var(--pr-t-spacings-100);
