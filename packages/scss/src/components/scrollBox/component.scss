@@ -27,8 +27,8 @@
 		position: sticky;
 		flex-shrink: 0;
 		inline-size: var(--components-scrollBox-shadowSize);
-		margin-block: calc(var(--components-scrollBox-paddingBlock) * -1);
 		inset-block: 0;
+		margin-block: calc(var(--components-scrollBox-paddingBlock) * -1);
 		background-repeat: no-repeat;
 		z-index: 10;
 		align-self: stretch;
