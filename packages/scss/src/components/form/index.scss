@@ -153,9 +153,9 @@
 
 .checkboxesfield.mod-framed,
 .radiosfield.mod-framed {
-	margin-top: 0;
-	padding: var(--components-field-framed-side-padding) var(--components-field-framed-side-padding)
-		var(--components-field-framed-bottom-padding);
+	margin-block-start: 0;
+	padding-block: var(--components-field-framed-side-padding) var(--components-field-framed-bottom-padding);
+	padding-inline: var(--components-field-framed-side-padding);
 }
 
 .form-group-label {

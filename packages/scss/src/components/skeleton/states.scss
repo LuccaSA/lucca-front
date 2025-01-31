@@ -13,7 +13,7 @@
 				--components-skeleton-text-offset: 0.5rem;
 			}
 
-			height: var(--sizes-#{$size}-lineHeight);
+			block-size: var(--sizes-#{$size}-lineHeight);
 		}
 	}
 }
@@ -21,9 +21,9 @@
 @mixin skeletonTitleSizing($titles...) {
 	@each $title in $titles {
 		&:is(.u-#{$title}, #{$title}) {
-			height: auto;
+			block-size: auto;
 			line-height: var(--sizes-lineHeight);
-			min-height: var(--sizes-lineHeight);
+			min-block-size: var(--sizes-lineHeight);
 
 			@if ($title == 'h1') {
 				--components-skeleton-text-offset: 0.5rem;
@@ -63,8 +63,8 @@
 				calc(var(--components-skeleton-text-offset) + 1px) calc(100% - var(--components-skeleton-text-width, 100%))
 					calc(var(--components-skeleton-text-offset) - 1px) 0 var(--components-skeleton-text-clipPathRound)
 			);
-			height: var(--sizes-M-lineHeight);
-			width: 100%;
+			block-size: var(--sizes-M-lineHeight);
+			inline-size: 100%;
 		}
 	}
 

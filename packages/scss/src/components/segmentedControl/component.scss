@@ -6,7 +6,7 @@
 	list-style-type: none;
 	display: flex;
 	flex-wrap: wrap;
-	width: var(--components-segmentedControl-width);
+	inline-size: var(--components-segmentedControl-width);
 	flex-direction: var(--components-segmentedControl-direction);
 	box-shadow: 0 0 0 var(--commons-divider-width) var(--palettes-neutral-300);
 	border-radius: var(--components-segmentedControl-borderRadius);
@@ -43,22 +43,22 @@
 			}
 
 			&::before {
-				right: calc(var(--commons-divider-width) * -1);
-				border-left-width: var(--commons-divider-width);
-				left: auto;
+				inset-inline-end: calc(var(--commons-divider-width) * -1);
+				border-inline-start-width: var(--commons-divider-width);
+				inset-inline-start: auto;
 			}
 
 			&::after {
-				bottom: calc(var(--commons-divider-width) * -1);
-				border-top-width: var(--commons-divider-width);
-				top: auto;
+				inset-block-end: calc(var(--commons-divider-width) * -1);
+				border-block-start-width: var(--commons-divider-width);
+				inset-block-start: auto;
 			}
 		}
 
 		//.viewTabs-item-tab is deprecated
 		.segmentedControl-item-action,
 		.viewTabs-item-tab {
-			width: 100%;
+			inline-size: 100%;
 			border: 0;
 			margin: 0;
 			padding: var(--components-segmentedControl-padding);
@@ -86,7 +86,7 @@
 				position: absolute;
 				background-color: var(--palettes-neutral-50);
 				inset: var(--pr-t-spacings-75);
-				bottom: calc(var(--pr-t-spacings-75) - var(--commons-divider-width));
+				inset-block-end: calc(var(--pr-t-spacings-75) - var(--commons-divider-width));
 				border-radius: var(--commons-borderRadius-M);
 				transition-property: scale, opacity;
 				transition-duration: var(--commons-animations-durations-standard);

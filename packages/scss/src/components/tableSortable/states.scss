@@ -29,7 +29,7 @@
 
 @mixin sortedAlignRight {
 	.table-head-row-cell-sortableButton {
-		text-align: right;
+		text-align: end;
 
 		&::before {
 			@include icon.generate('arrow_bottom');

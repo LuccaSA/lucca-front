@@ -1,7 +1,7 @@
 @use '@lucca-front/scss/src/commons/utils/loading';
 
 @mixin loading {
-	height: 75px;
+	block-size: 75px;
 
 	&::after {
 		inset: 0;

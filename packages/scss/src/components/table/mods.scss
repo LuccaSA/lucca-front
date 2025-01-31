@@ -52,7 +52,7 @@
 }
 
 @mixin card {
-	border-top: 0;
+	border-block-start: 0;
 
 	:where(.table-head, .table-body, .table-foot) {
 		&:first-child {
@@ -60,11 +60,11 @@
 				&:first-child {
 					:where(.table-head-row-cell, .table-body-row-cell) {
 						&:first-child {
-							border-top-left-radius: var(--components-card-border-radius);
+							border-start-start-radius: var(--components-card-border-radius);
 						}
 
 						&:last-child {
-							border-top-right-radius: var(--components-card-border-radius);
+							border-start-end-radius: var(--components-card-border-radius);
 						}
 					}
 				}
@@ -76,11 +76,11 @@
 				&:last-child {
 					:where(.table-body-row-cell, .table-foot-row-cell) {
 						&:first-child {
-							border-bottom-left-radius: var(--components-card-border-radius);
+							border-end-start-radius: var(--components-card-border-radius);
 						}
 
 						&:last-child {
-							border-bottom-right-radius: var(--components-card-border-radius);
+							border-end-end-radius: var(--components-card-border-radius);
 						}
 					}
 				}
@@ -89,7 +89,7 @@
 	}
 
 	.table-head-row-cell {
-		border-top: 0;
+		border-block-start: 0;
 	}
 
 	.table-body,
@@ -97,7 +97,7 @@
 		&:last-child {
 			.table-body-row-cell,
 			.table-foot-row-cell {
-				border-bottom: none;
+				border-block-end: none;
 			}
 		}
 	}
@@ -111,15 +111,15 @@
 	.table-body-row-cell,
 	.table-foot-row-cell {
 		&:first-child {
-			padding-left: var(--components-table-card-padding);
+			padding-inline-start: var(--components-table-card-padding);
 		}
 
 		&:last-child {
-			padding-right: var(--components-table-card-padding);
+			padding-inline-end: var(--components-table-card-padding);
 		}
 
 		&.mod-actions {
-			padding-right: var(--pr-t-spacings-100);
+			padding-inline-end: var(--pr-t-spacings-100);
 		}
 	}
 }
@@ -132,7 +132,7 @@
 	.table-head-row-cell,
 	.table-body-row-cell,
 	.table-foot-row-cell {
-		border-top: none;
+		border-block-start: none;
 	}
 }
 
@@ -141,11 +141,11 @@
 	.table-body-row-cell,
 	.table-foot-row-cell {
 		&:first-child {
-			padding-left: 0;
+			padding-inline-start: 0;
 		}
 
 		&:last-child {
-			padding-right: 0;
+			padding-inline-end: 0;
 		}
 	}
 }
@@ -186,7 +186,7 @@
 
 			font-size: var(--sizes-M-lineHeight);
 			font-weight: 400;
-			margin-right: var(--pr-t-spacings-100);
+			margin-inline-end: var(--pr-t-spacings-100);
 			transition-duration: var(--commons-animations-durations-fast);
 			transition-property: transform;
 			vertical-align: top;
@@ -207,7 +207,7 @@
 	.table-body-row-cell,
 	.table-foot-row-cell {
 		&:first-child {
-			padding-left: var(--pr-t-spacings-600);
+			padding-inline-start: var(--pr-t-spacings-600);
 		}
 	}
 }
@@ -216,10 +216,9 @@
 	@at-root ($atRoot) {
 		.table-body-row-cell-handler,
 		.table-foot-row-cell-handler {
-			top: 0;
-			bottom: 0;
-			left: 0;
-			width: var(--pr-t-spacings-400);
+			inset-block: 0;
+			inset-inline-start: 0;
+			inline-size: var(--pr-t-spacings-400);
 			position: absolute;
 			cursor: move;
 
@@ -228,7 +227,7 @@
 
 				color: var(--palettes-neutral-600);
 				font-size: var(--sizes-M-lineHeight);
-				height: 100%;
+				block-size: 100%;
 				margin: auto;
 				display: flex;
 				align-items: center;
@@ -240,7 +239,7 @@
 	.table-body-row-cell,
 	.table-foot-row-cell {
 		&:first-child {
-			padding-left: var(--pr-t-spacings-400);
+			padding-inline-start: var(--pr-t-spacings-400);
 			position: relative;
 		}
 	}
@@ -251,8 +250,8 @@
 	.table-body-row-cell,
 	.table-foot-row-cell {
 		&:first-child {
-			padding-right: var(--pr-t-spacings-100);
-			width: var(--pr-t-spacings-200);
+			padding-inline-end: var(--pr-t-spacings-100);
+			inline-size: var(--pr-t-spacings-200);
 		}
 	}
 
@@ -280,7 +279,7 @@
 @mixin twoLines($atRoot: namespace.$defaultAtRoot) {
 	@at-root ($atRoot) {
 		.table-head-row-cell-secondLine {
-			margin-top: var(--pr-t-spacings-50);
+			margin-block-start: var(--pr-t-spacings-50);
 			display: block;
 			font-weight: 400;
 		}
@@ -291,30 +290,30 @@
 	}
 
 	.table-head-row-cell-wrapper {
-		max-width: calc(100% - var(--pr-t-spacings-400));
+		max-inline-size: calc(100% - var(--pr-t-spacings-400));
 		display: inline-block;
 		vertical-align: top;
 	}
 
 	.table-head-row-cell-secondLine {
-		margin-top: var(--pr-t-spacings-50);
+		margin-block-start: var(--pr-t-spacings-50);
 		display: block;
 		font-weight: 400;
 	}
 }
 
 @mixin avatar {
-	padding-right: 0;
-	width: var(--pr-t-spacings-400);
+	padding-inline-end: 0;
+	inline-size: var(--pr-t-spacings-400);
 }
 
 @mixin actions {
 	padding: 0.3rem;
-	padding-right: var(--pr-t-spacings-100);
-	padding-left: 0;
+	padding-inline-end: var(--pr-t-spacings-100);
+	padding-inline-start: 0;
 	transition-duration: var(--commons-animations-durations-fast);
 	transition-property: opacity;
-	text-align: right;
+	text-align: end;
 	white-space: nowrap;
 }
 
@@ -349,7 +348,7 @@
 }
 
 @mixin alignRight {
-	text-align: right;
+	text-align: end;
 }
 
 @mixin noOffset {
@@ -357,11 +356,11 @@
 	.table-body-row-cell,
 	.table-foot-row-cell {
 		&:first-child {
-			padding-left: 0;
+			padding-inline-start: 0;
 		}
 
 		&:last-child {
-			padding-right: 0;
+			padding-inline-end: 0;
 		}
 	}
 }

@@ -14,7 +14,7 @@
 @use '@lucca-front/scss/src/components/box/exports' as box;
 
 @mixin maxWidth {
-	max-width: var(--components-form-maxWidth);
+	max-inline-size: var(--components-form-maxWidth);
 }
 
 @mixin inline {
@@ -91,11 +91,11 @@
 	}
 
 	.checkboxField {
-		top: var(--component-checkboxField-top);
+		inset-block-start: var(--component-checkboxField-top);
 	}
 
 	.radioField {
-		top: var(--component-radioField-top);
+		inset-block-start: var(--component-radioField-top);
 	}
 }
 
@@ -120,7 +120,7 @@
 }
 
 @mixin withArrow {
-	padding-bottom: var(--pr-t-spacings-200);
+	padding-block-end: var(--pr-t-spacings-200);
 	margin-block-end: 0;
 
 	.form-field-arrow {
@@ -141,7 +141,7 @@
 }
 
 @mixin withArrowS {
-	padding-bottom: var(--pr-t-spacings-100);
+	padding-block-end: var(--pr-t-spacings-100);
 
 	.form-field-arrow {
 		@include box.arrowS;
@@ -200,11 +200,11 @@
 		+ .radio,
 		+ .select {
 			position: absolute;
-			bottom: 0;
-			right: 0;
+			inset-block-end: 0;
+			inset-inline-end: 0;
 			z-index: 10;
-			padding: var(--components-field-framed-label-top-offset) var(--components-field-framed-side-padding)
-				var(--components-field-framed-bottom-padding);
+			padding-block: var(--components-field-framed-label-top-offset) var(--components-field-framed-bottom-padding);
+			padding-inline: var(--components-field-framed-side-padding);
 		}
 	}
 }
@@ -218,8 +218,7 @@
 		+ .checkbox,
 		+ .radio,
 		+ .select {
-			top: 0;
-			bottom: auto;
+			inset-block: 0 auto;
 		}
 	}
 }
@@ -234,12 +233,12 @@
 }
 
 @mixin framed {
-	margin-bottom: 0;
+	margin-block-end: 0;
 	background-color: var(--palettes-neutral-0);
 	padding: 0;
 	box-shadow: form.fakeBorderOverlay(var(--palettes-neutral-200));
 	transition: background-color var(--commons-animations-durations-standard);
-	margin-bottom: 0 !important;
+	margin-block-end: 0 !important;
 
 	&::before,
 	&::after {
@@ -271,9 +270,10 @@
 	.radiosfield,
 	.checkboxesfield {
 		display: block;
-		margin-top: var(--components-field-framed-side-padding);
-		margin-bottom: 0;
-		padding: 0 var(--components-field-framed-side-padding) var(--components-field-framed-bottom-padding);
+		margin-block-start: var(--components-field-framed-side-padding);
+		margin-block-end: 0;
+		padding-block: 0 var(--components-field-framed-bottom-padding);
+		padding-inline: var(--components-field-framed-side-padding);
 	}
 
 	&.is-disabled,
@@ -286,10 +286,8 @@
 
 		&::before,
 		&::after {
-			left: auto !important;
-			bottom: auto !important;
-			right: var(--components-field-framed-side-padding) !important;
-			top: var(--components-field-framed-side-padding) !important;
+			inset-block: var(--components-field-framed-side-padding) auto !important;
+			inset-inline: auto var(--components-field-framed-side-padding) !important;
 		}
 	}
 }
@@ -319,14 +317,14 @@
 @mixin fieldMaterialFilled($fieldname) {
 	~ .#{$fieldname}-label {
 		font-size: var(--sizes-S-fontSize);
-		top: 0;
+		inset-block-start: 0;
 	}
 }
 
 %isRequired {
 	color: var(--palettes-error-700);
 	display: inline-block;
-	margin-left: 0.2em;
+	margin-inline-start: 0.2em;
 	content: '*';
 	content: '*' / '';
 }

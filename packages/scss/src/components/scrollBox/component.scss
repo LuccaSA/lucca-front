@@ -22,9 +22,8 @@
 		pointer-events: none;
 		position: sticky;
 		flex-shrink: 0;
-		width: var(--components-scrollBox-shadowWidth);
-		top: 0;
-		bottom: 0;
+		inline-size: var(--components-scrollBox-shadowWidth);
+		inset-block: 0;
 		background-repeat: no-repeat;
 		background-size:
 			75% 100%,
@@ -33,7 +32,7 @@
 	}
 
 	&::before {
-		left: 0;
+		inset-inline-start: 0;
 		background-position: 0% 50%;
 		background-image: radial-gradient(
 				farthest-side at 0% 50%,
@@ -53,7 +52,7 @@
 	}
 
 	&::after {
-		right: 0;
+		inset-inline-end: 0;
 		background-position: 100% 50%;
 		background-image: radial-gradient(
 				farthest-side at 100% 50%,
@@ -83,14 +82,13 @@
 				position: absolute;
 				z-index: 1;
 				display: block;
-				top: 1px;
-				bottom: 1px;
-				width: calc(var(--components-scrollBox-shadowWidth) / 2);
+				inset-block: 1px;
+				inline-size: calc(var(--components-scrollBox-shadowWidth) / 2);
 				pointer-events: none;
 			}
 
 			&::before {
-				left: calc(var(--components-scrollBox-shadowWidth) * -1);
+				inset-inline-start: calc(var(--components-scrollBox-shadowWidth) * -1);
 				background-image: linear-gradient(
 					to right,
 					var(--components-scrollBox-backgroundColor) var(--components-scrollBox-shadowWidth),
@@ -99,7 +97,7 @@
 			}
 
 			&::after {
-				right: calc(var(--components-scrollBox-shadowWidth) * -1);
+				inset-inline-end: calc(var(--components-scrollBox-shadowWidth) * -1);
 				background-image: linear-gradient(
 					to left,
 					var(--components-scrollBox-backgroundColor) var(--components-scrollBox-shadowWidth),
@@ -109,8 +107,7 @@
 		}
 
 		.scrollBox-inner-content {
-			margin-left: calc(var(--components-scrollBox-shadowWidth) * -1);
-			margin-right: calc(var(--components-scrollBox-shadowWidth) * -1);
+			margin-inline: calc(var(--components-scrollBox-shadowWidth) * -1);
 			position: relative;
 			z-index: 2;
 		}

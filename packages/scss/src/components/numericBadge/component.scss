@@ -2,8 +2,8 @@
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
-	height: var(--components-numericBadge-size);
-	min-width: var(--components-numericBadge-size);
+	block-size: var(--components-numericBadge-size);
+	min-inline-size: var(--components-numericBadge-size);
 	padding: var(--pr-t-spacings-50);
 	font-size: var(--components-numericBadge-fontSize);
 	line-height: var(--components-numericBadge-lineHeight);

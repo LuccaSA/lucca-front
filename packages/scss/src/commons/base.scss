@@ -13,12 +13,12 @@
 	line-height: var(--sizes-M-lineHeight);
 
 	@supports (-webkit-touch-callout: none) {
-		min-height: -webkit-fill-available;
+		min-block-size: -webkit-fill-available;
 	}
 }
 
 @mixin html {
-	height: -webkit-fill-available;
+	block-size: -webkit-fill-available;
 }
 
 @mixin base($atRoot: namespace.$defaultAtRoot) {
@@ -55,7 +55,8 @@
 		}
 
 		p {
-			margin: 0 0 var(--pr-t-spacings-200);
+			margin-block: 0 var(--pr-t-spacings-200);
+			margin-inline: 0;
 		}
 
 		abbr {

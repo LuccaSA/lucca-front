@@ -8,7 +8,8 @@
 	font-size: var(--components-statusBadge-fontSize);
 	gap: var(--pr-t-spacings-50);
 	line-height: var(--components-statusBadge-lineHeight);
-	padding: calc(var(--pr-t-spacings-50) / 2) var(--pr-t-spacings-100) calc(var(--pr-t-spacings-50) / 2) var(--pr-t-spacings-75);
+	padding-block: calc(var(--pr-t-spacings-50) / 2) calc(var(--pr-t-spacings-50) / 2);
+	padding-inline: var(--pr-t-spacings-75) var(--pr-t-spacings-100);
 	white-space: nowrap;
 	font-weight: normal;
 
@@ -17,10 +18,10 @@
 		border-radius: var(--commons-borderRadius-full);
 		content: '\a0'; // Unbreakable space to avoid vertical alignement issues with inline-flex in some contexts like tables
 		display: block;
-		height: var(--components-statusBadge-dot-size);
+		block-size: var(--components-statusBadge-dot-size);
 		flex-shrink: 0;
-		width: var(--components-statusBadge-dot-size);
-		top: var(--components-statusBadge-dot-top);
+		inline-size: var(--components-statusBadge-dot-size);
+		inset-block-start: var(--components-statusBadge-dot-top);
 		position: relative;
 	}
 

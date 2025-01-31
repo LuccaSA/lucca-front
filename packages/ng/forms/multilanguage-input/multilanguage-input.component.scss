@@ -2,7 +2,7 @@
 
 .popover-contentOptional {
 	padding: var(--pr-t-spacings-100) !important;
-	max-height: 20rem;
+	max-block-size: 20rem;
 	overflow: auto;
 
 	&:focus-visible {

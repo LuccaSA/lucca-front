@@ -6,7 +6,7 @@
 	border-color: var(--components-card-border-color);
 	border-width: 1px;
 	display: block;
-	margin-bottom: var(--pr-t-spacings-200);
+	margin-block-end: var(--pr-t-spacings-200);
 	border-style: solid;
 	position: relative;
 	transition-duration: var(--commons-animations-durations-fast);
@@ -19,30 +19,30 @@
 
 		.card-title {
 			padding: 0;
-			margin-bottom: var(--pr-t-spacings-100);
+			margin-block-end: var(--pr-t-spacings-100);
 		}
 
 		.card-action {
 			display: flex;
 			align-items: center;
 			justify-content: center;
-			border-left: 1px solid var(--commons-border-200);
-			padding-left: var(--pr-t-spacings-200);
-			margin-left: var(--pr-t-spacings-200);
+			border-inline-start: 1px solid var(--commons-border-200);
+			padding-inline-start: var(--pr-t-spacings-200);
+			margin-inline-start: var(--pr-t-spacings-200);
 		}
 
 		.card-footer {
 			padding: var(--components-card-footer-padding);
-			border-top-color: var(--components-card-border-color);
-			border-top-width: 1px;
-			border-top-style: solid;
+			border-block-start-color: var(--components-card-border-color);
+			border-block-start-width: 1px;
+			border-block-start-style: solid;
 			align-items: center;
 			display: flex;
-			min-height: 3rem;
+			min-block-size: 3rem;
 		}
 
 		.card-footer-right {
-			margin-left: auto;
+			margin-inline-start: auto;
 			display: inline-flex;
 			gap: var(--pr-t-spacings-200);
 		}

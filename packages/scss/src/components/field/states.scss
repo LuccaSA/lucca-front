@@ -75,18 +75,18 @@
 	&::before,
 	&::after {
 		content: '' !important;
-		right: var(--pr-t-spacings-100) !important;
-		bottom: 0.7rem !important;
+		inset-inline-end: var(--pr-t-spacings-100) !important;
+		inset-block-end: 0.7rem !important;
 		z-index: 2 !important;
-		left: inherit !important;
-		top: inherit !important;
+		inset-inline-start: inherit !important;
+		inset-block-start: inherit !important;
 		position: absolute !important;
 	}
 
 	.textfield-input,
 	.radiosfield-input,
 	.checkboxesfield-input {
-		padding-right: var(--pr-t-spacings-400);
+		padding-inline-end: var(--pr-t-spacings-400);
 	}
 }
 
@@ -132,17 +132,17 @@
 		animation-name: success;
 		animation-duration: 3s;
 		border-radius: var(--commons-borderRadius-full);
-		bottom: 0.85rem;
+		inset-block-end: 0.85rem;
 		font-size: 1.2rem;
-		height: 1rem;
-		right: 0.4rem;
+		block-size: 1rem;
+		inset-inline-end: 0.4rem;
 		z-index: 1;
 	}
 
 	.textfield-input,
 	.radiosfield-input,
 	.checkboxesfield-input {
-		padding-right: var(--pr-t-spacings-400);
+		padding-inline-end: var(--pr-t-spacings-400);
 	}
 }
 
