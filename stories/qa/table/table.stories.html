@@ -519,19 +519,19 @@
 			<tr class="table-head-row">
 				<th class="table-head-row-cell">
 					Head cell
-					<div class="textfield mod-search mod-block mod-S pr-u-marginTop100">
+					<div class="textfield mod-search mod-block mod-S pr-u-marginBlockStart100">
 						<input class="textfield-input" type="text" placeholder="Search" />
 					</div>
 				</th>
 				<th class="table-head-row-cell">
 					Head cell
-					<div class="textfield mod-search mod-block mod-S pr-u-marginTop100">
+					<div class="textfield mod-search mod-block mod-S pr-u-marginBlockStart100">
 						<input class="textfield-input" type="text" placeholder="Search" />
 					</div>
 				</th>
 				<th class="table-head-row-cell">
 					Head cell
-					<div class="textfield mod-search mod-block mod-S pr-u-marginTop100">
+					<div class="textfield mod-search mod-block mod-S pr-u-marginBlockStart100">
 						<input class="textfield-input" type="text" placeholder="Search" />
 					</div>
 				</th>
@@ -598,7 +598,7 @@
 <!-- Sticky Header -->
 <section class="contentSection">
 	<h2>Sticky header</h2>
-	<div style="max-height: 150px" class="u-overflowAuto">
+	<div style="max-block-size: 150px" class="u-overflowAuto">
 		<table class="table mod-layoutFixed mod-stickyHeader">
 			<thead class="table-head">
 				<tr class="table-head-row">
@@ -647,7 +647,7 @@
 		<code class="code">.table-body-row.mod-stickyHeader-shadow</code> must be equal to the table header height</em
 	>
 	<h2>Sticky header with shadow on scroll</h2>
-	<div style="max-height: 150px" class="u-overflowAuto">
+	<div style="max-block-size: 150px" class="u-overflowAuto">
 		<table class="table mod-layoutFixed mod-stickyHeader" [attr.style]="'--table-stickyHeader-shadow-offset: 37px'">
 			<thead class="table-head">
 				<tr class="table-head-row">
@@ -754,7 +754,7 @@
 <!-- Sticky columns -->
 <section class="contentSection">
 	<h2>Sticky columns</h2>
-	<div style="max-width: 100%" class="u-overflowAuto">
+	<div style="max-inline-size: 100%" class="u-overflowAuto">
 		<table class="table mod-layoutFixed mod-stickyColumn">
 			<thead class="table-head">
 				<tr class="table-head-row">
@@ -845,7 +845,7 @@
 <!-- Sticky columns with shadow-->
 <section class="contentSection u-whiteSpaceNowrap">
 	<h2>Sticky columns with shadow on scroll</h2>
-	<div style="max-width: 100%" class="u-overflowAuto">
+	<div style="max-inline-size: 100%" class="u-overflowAuto">
 		<table class="table mod-layoutFixedAtMediaMinS mod-stickyColumnAtMediaMinS">
 			<thead class="table-head">
 				<tr class="table-head-row">
@@ -1057,7 +1057,7 @@
 <!-- All in -->
 <section class="contentSection u-whiteSpaceNowrap">
 	<h2>Sticky columns + header with shadow on scroll starting at breakpoint S</h2>
-	<div style="max-width: 100%; max-height: 150px" class="u-overflowAuto">
+	<div style="max-inline-size: 100%; max-block-size: 150px" class="u-overflowAuto">
 		<table
 			class="table mod-layoutFixedAtMediaMinS mod-stickyColumnAtMediaMinS mod-stickyHeader"
 			[attr.style]="'--table-stickyHeader-shadow-offset: 2.25rem'"

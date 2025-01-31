@@ -39,7 +39,7 @@
 	&::after {
 		color: var(--palettes-neutral-0);
 		font-size: calc(1.5 * var(--components-button-font-size));
-		height: var(--components-button-line-height);
+		block-size: var(--components-button-line-height);
 		inset: 0;
 		margin: auto;
 		position: absolute;

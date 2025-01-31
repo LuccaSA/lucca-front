@@ -37,7 +37,7 @@ function getTemplate(args: MenuScrollboxStory): string {
 	const noBorder = args.noBorder ? ` mod-noBorder` : '';
 	const header = args.header ? ` mod-header` : '';
 	const s = args.s ? ` mod-S` : '';
-	return `<lu-scroll-box>		
+	return `<lu-scroll-box>
 	<div class="menu_firstChild"></div>
 	<nav class="menu${s}${noBorder}${header}">
 		<ul class="menu-list">
@@ -102,11 +102,21 @@ const Template: StoryFn<MenuScrollboxStory> = (args) => ({
 	template: getTemplate(args),
 	styles: [
 		`
-		/* to fix a weird bug in mod-S */
-		.menu_lastChild {
-			margin-right: 1px;
-		}
-	`,
+			/* to fix a weird bug in mod-S */
+			.menu_lastChild {
+				margin-right: 1px;
+			}
+
+			:host {
+				display: block;
+				max-inline-size: 100%;
+				inline-size: 25rem;
+				min-inline-size: 20rem;
+				overflow: hidden;
+				resize: inline;
+				padding-block-end: 4rem;
+			}
+		`,
 	],
 });
 

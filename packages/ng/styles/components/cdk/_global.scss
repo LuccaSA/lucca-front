@@ -1,9 +1,9 @@
 .cdk-global-overlay-wrapper {
-	height: 100%;
-	left: 0;
+	block-size: 100%;
+	inset-inline-start: 0;
+	inset-block-start: 0;
 	pointer-events: none;
-	top: 0;
-	width: 100%;
+	inline-size: 100%;
 	display: flex;
 	position: absolute;
 	z-index: 1000;

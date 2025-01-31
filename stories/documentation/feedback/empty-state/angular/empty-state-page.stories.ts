@@ -24,7 +24,7 @@ export default {
 :host{
 	display: flex;
 	flex-direction: column;
-	min-height: 30rem;
+	min-block-size: 30rem;
 }
 `,
 			],

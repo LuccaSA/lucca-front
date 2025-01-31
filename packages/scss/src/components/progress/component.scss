@@ -4,8 +4,9 @@
 @mixin component($atRoot: namespace.$defaultAtRoot) {
 	background-color: var(--components-progress-background);
 	border-radius: var(--commons-borderRadius-full);
-	height: var(--components-progress-height);
-	margin: var(--components-progress-margin-vertical) var(--components-progress-margin-horizontal);
+	block-size: var(--components-progress-height);
+	margin-block: var(--components-progress-margin-vertical);
+	margin-inline: var(--components-progress-margin-horizontal);
 	position: relative;
 	overflow: hidden;
 
@@ -26,10 +27,9 @@
 			background-color: var(--palettes-700, var(--components-progress-bar-background));
 			transition-duration: var(--commons-animations-durations-fast);
 			transition-property: background-color, width;
-			bottom: 0;
-			left: 0;
+			inset-block: 0;
+			inset-inline-start: 0;
 			position: absolute;
-			top: 0;
 
 			&::after {
 				animation: progress var(--components-progress-duration) infinite;

@@ -3,7 +3,7 @@
 @mixin component($atRoot: namespace.$defaultAtRoot) {
 	background-color: var(--components-filters-background);
 	box-shadow: 0 1px 0 0 var(--commons-border-200);
-	min-height: var(--components-filters-height);
+	min-block-size: var(--components-filters-height);
 	align-items: center;
 	display: flex;
 	position: relative;
@@ -13,25 +13,25 @@
 		.filters-sectionLeft {
 			align-items: center;
 			display: flex;
-			padding-right: var(--pr-t-spacings-400);
+			padding-inline-end: var(--pr-t-spacings-400);
 		}
 
 		.filters-sectionRight {
 			align-items: center;
 			display: flex;
-			margin-left: auto;
-			padding-left: var(--pr-t-spacings-400);
+			margin-inline-start: auto;
+			padding-inline-start: var(--pr-t-spacings-400);
 
 			.textfield.mod-framed {
-				border-left: var(--commons-divider-width) solid var(--commons-divider-color);
-				border-right: 0 !important;
+				border-inline-start: var(--commons-divider-width) solid var(--commons-divider-color);
+				border-inline-end: 0 !important;
 			}
 		}
 	}
 
 	.textfield.mod-framed {
-		border-right: var(--commons-divider-width) solid var(--commons-divider-color);
-		max-width: 16rem;
+		border-inline-end: var(--commons-divider-width) solid var(--commons-divider-color);
+		max-inline-size: 16rem;
 
 		.textfield-input {
 			box-shadow: none !important;

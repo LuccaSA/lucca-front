@@ -7,8 +7,8 @@
 	margin: calc(var(--pr-t-spacings-100) * -1);
 	padding: 0 !important;
 	border-radius: var(--commons-borderRadius-M);
-	max-width: 90vw;
-	max-height: var(--components-dropdown-max-height);
+	max-inline-size: 90vw;
+	max-block-size: var(--components-dropdown-max-height);
 	overflow-x: hidden;
 	overflow-y: auto;
 
@@ -17,19 +17,22 @@
 		.dropdown-list,
 		.lu-dropdown-options {
 			list-style-type: none;
-			padding: var(--pr-t-spacings-100) 0;
+			padding-block: var(--pr-t-spacings-100);
+			padding-inline: 0;
 			margin: 0;
-			min-width: var(--components-dropdown-min-width);
-			max-width: var(--components-dropdown-max-width);
+			min-inline-size: var(--components-dropdown-min-width);
+			max-inline-size: var(--components-dropdown-max-width);
 		}
 
 		// .lu-dropdown-options-item is deprecated
 		.dropdown-list-option,
 		.lu-dropdown-options-item {
-			padding: 0 var(--pr-t-spacings-100);
+			padding-block: 0;
+			padding-inline: var(--pr-t-spacings-100);
 
 			&.mod-divider {
-				padding: var(--pr-t-spacings-50) 0;
+				padding-block: var(--pr-t-spacings-50);
+				padding-inline: 0;
 			}
 		}
 
@@ -44,11 +47,11 @@
 			display: flex;
 			gap: var(--pr-t-spacings-100);
 			line-height: var(--sizes-M-lineHeight);
-			padding: var(--pr-t-spacings-100) var(--pr-t-spacings-100);
+			padding: var(--pr-t-spacings-100);
 			text-align: left;
 			transition: background-color var(--commons-animations-durations-standard);
 			text-decoration: none;
-			width: 100%;
+			inline-size: 100%;
 			pointer-events: var(--components-dropdown-option-actionEvents);
 			cursor: pointer;
 

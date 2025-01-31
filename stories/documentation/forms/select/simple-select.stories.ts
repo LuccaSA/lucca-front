@@ -202,15 +202,15 @@ export const ApiV4 = generateStory({
 
 const optionStyle = `
 	display: inline-block;
-	width: 1rem;
-	height: 1rem;
+	inline-size: 1rem;
+	blocks-size: 1rem;
 	border-radius: 50%;
 	border: 1px solid var(--palettes-neutral-900);
 `;
 const displayerStyle = `
 	display: inline-block;
-	width: 10rem;
-	height: 1rem;
+	inline-size: 10rem;
+	block-size: 1rem;
 	border: 1px solid var(--palettes-neutral-900);
 `;
 
@@ -389,7 +389,7 @@ export const GroupBy = generateStory({
 export const AddOption = generateStory({
 	name: 'Add option',
 	description: "Pour ajouter une option, il suffit d'utiliser l'input `addOptionStrategy` et de s'abonner à l'output `addOption`. Le label est customisable via l'input `addOptionLabel`.",
-	template: `<div class="u-marginBottomS">There is {{ legumes.length }} legumes in the list.</div>
+	template: `<div class="pr-u-marginBlockEnd200">There is {{ legumes.length }} legumes in the list.</div>
 <lu-simple-select
 	#selectRef
 	placeholder="Placeholder…"

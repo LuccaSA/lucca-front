@@ -62,7 +62,7 @@ function getTemplate(args: segmentedControlTabsStory): string {
 		</button>
 	</li>
 </ul>
-<div class="pr-u-marginTop200"></div>
+<div class="pr-u-marginBlockStart200"></div>
 <div class="segmentedControl_panel" [class.is-active]="tabActive === 1" role="tabpanel" id="panel1" aria-labelledby="tab1" tabindex="0">
 	Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit, maxime animi perferendis explicabo est eaque ipsa rem, sit quasi sunt corporis iure distinctio. Deleniti deserunt aspernatur est placeat, assumenda provident.
 </div>
