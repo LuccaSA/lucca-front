@@ -11,8 +11,8 @@
 	grid-template-areas: 'main';
 	align-items: normal;
 	flex-shrink: 0;
-	width: var(--components-clear-size);
-	height: var(--components-clear-size);
+	inline-size: var(--components-clear-size);
+	block-size: var(--components-clear-size);
 	border-radius: var(--commons-borderRadius-full);
 
 	&::before,

@@ -8,8 +8,8 @@
 	box-shadow: var(--pr-t-elevation-shadow-overlay);
 	border-radius: var(--commons-borderRadius-L);
 	position: relative;
-	min-height: var(--pr-t-spacings-500);
-	min-width: var(--pr-t-spacings-500);
+	min-block-size: var(--pr-t-spacings-500);
+	min-inline-size: var(--pr-t-spacings-500);
 	animation: popup var(--commons-animations-durations-fast) ease 1 forwards;
 
 	// need of a higher specificity
@@ -23,8 +23,8 @@
 		padding: 0;
 		border-radius: 50%;
 		position: absolute;
-		left: calc(var(--pr-t-spacings-100) * -1);
-		top: calc(var(--pr-t-spacings-100) * -1);
+		inset-inline-start: calc(var(--pr-t-spacings-100) * -1);
+		inset-block-start: calc(var(--pr-t-spacings-100) * -1);
 		z-index: 2;
 
 		&:not(:focus-visible) {
@@ -34,7 +34,8 @@
 
 	@at-root ($atRoot) {
 		.popover-contentOptional {
-			padding: var(--pr-t-spacings-100) var(--pr-t-spacings-150);
+			padding-block: var(--pr-t-spacings-100);
+			padding-inline: var(--pr-t-spacings-150);
 		}
 
 		.popover-close {
@@ -45,8 +46,8 @@
 			padding: 0;
 			border-radius: 50%;
 			position: absolute;
-			left: calc(var(--pr-t-spacings-100) * -1);
-			top: calc(var(--pr-t-spacings-100) * -1);
+			inset-inline-start: calc(var(--pr-t-spacings-100) * -1);
+			inset-block-start: calc(var(--pr-t-spacings-100) * -1);
 			z-index: 2;
 
 			&:not(:focus-visible) {

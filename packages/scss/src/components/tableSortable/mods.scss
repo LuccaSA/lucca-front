@@ -50,22 +50,22 @@
 	&:is(button) {
 		@include reset.button;
 
-		text-align: left;
+		text-align: start;
 
 		.indexTable & {
 			display: inline-flex;
-			width: fit-content;
+			inline-size: fit-content;
 		}
 
 		&::after {
-			margin-left: var(--pr-t-spacings-50);
+			margin-inline-start: var(--pr-t-spacings-50);
 		}
 	}
 }
 
 @mixin sortableLegacyS {
 	&::after {
-		margin-top: 0;
+		margin-block-start: 0;
 	}
 }
 
@@ -86,8 +86,8 @@
 		}
 
 		&::after {
-			margin-left: 0;
-			margin-right: var(--pr-t-spacings-50);
+			margin-inline-start: 0;
+			margin-inline-end: var(--pr-t-spacings-50);
 		}
 	}
 
@@ -97,7 +97,7 @@
 		border-radius: var(--commons-borderRadius-M);
 		opacity: 0;
 		margin: 0;
-		margin-right: var(--pr-t-spacings-50);
+		margin-inline-end: var(--pr-t-spacings-50);
 		transform: translateY(var(--pr-t-spacings-50));
 		transition-duration: var(--commons-animations-durations-fast);
 		transition-property: opacity, transform;
@@ -120,13 +120,13 @@
 	}
 
 	&:is(button) {
-		text-align: right;
+		text-align: end;
 	}
 }
 
 @mixin sortableLegacy2AlignRight {
 	&::before {
-		margin-right: 0;
+		margin-inline-end: 0;
 	}
 }
 

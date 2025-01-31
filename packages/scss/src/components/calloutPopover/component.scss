@@ -28,8 +28,8 @@
 		}
 
 		.calloutPopover-overlay {
-			width: var(--components-calloutPopover-width);
-			max-width: 100vw;
+			inline-size: var(--components-calloutPopover-width);
+			max-inline-size: 100vw;
 		}
 
 		.calloutPopover-overlay-head {
@@ -52,9 +52,12 @@
 		}
 
 		.calloutPopover-overlay-content {
-			margin: var(--pr-t-spacings-100) var(--pr-t-spacings-150) var(--pr-t-spacings-100) var(--components-calloutPopover-content-margin);
-			padding-top: var(--pr-t-spacings-100);
-			border-top: var(--commons-divider-width) solid var(--palettes-neutral-200);
+			margin-block-start: var(--pr-t-spacings-100);
+			margin-inline-end: var(--pr-t-spacings-150);
+			margin-block-end: var(--pr-t-spacings-100);
+			margin-inline-start: var(--components-calloutPopover-content-margin);
+			padding-block-start: var(--pr-t-spacings-100);
+			border-block-start: var(--commons-divider-width) solid var(--palettes-neutral-200);
 		}
 	}
 }

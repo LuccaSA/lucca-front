@@ -4,9 +4,10 @@
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
 	background-color: var(--pr-t-elevation-surface-raised);
-	bottom: 0;
+	inset-block-end: 0;
 	box-shadow: var(--pr-t-elevation-shadow-overflow);
-	padding: 0 var(--pr-t-spacings-100);
+	padding-block: 0;
+	padding-inline: var(--pr-t-spacings-100);
 	position: sticky;
 
 	@at-root ($atRoot) {
@@ -28,7 +29,8 @@
 			font-size: var(--sizes-XS-fontSize);
 			gap: var(--pr-t-spacings-50);
 			line-height: var(--sizes-XS-lineHeight);
-			padding: var(--pr-t-spacings-100) var(--pr-t-spacings-50);
+			padding-block: var(--pr-t-spacings-100);
+			padding-inline: var(--pr-t-spacings-50);
 			position: relative;
 			text-decoration: none;
 
@@ -52,8 +54,8 @@
 
 			box-shadow: 0 0 0 2px var(--palettes-neutral-0);
 			position: absolute;
-			left: calc(50% + 5px);
-			top: 5px;
+			inset-inline-start: calc(50% + 5px);
+			inset-block-start: 5px;
 		}
 	}
 }

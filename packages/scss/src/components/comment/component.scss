@@ -7,9 +7,9 @@
 	display: flex;
 	flex-direction: column;
 	gap: var(--pr-t-spacings-50);
-	max-width: var(--components-comment-max-width);
+	max-inline-size: var(--components-comment-max-width);
 	align-items: var(--components-comment-align);
-	margin-left: var(--components-comment-margin);
+	margin-inline-start: var(--components-comment-margin);
 
 	.avatar {
 		@include avatar.XS;
@@ -68,13 +68,15 @@
 			display: flex;
 			flex-direction: column;
 			gap: var(--pr-t-spacings-150);
-			margin: 0 0 0 var(--components-comment-content-margin);
-			max-width: fit-content;
-			padding: var(--pr-t-spacings-100) var(--pr-t-spacings-150);
+			margin-block: 0;
+			margin-inline: var(--components-comment-content-margin) 0;
+			max-inline-size: fit-content;
+			padding-block: var(--pr-t-spacings-100);
+			padding-inline: var(--pr-t-spacings-150);
 		}
 
 		.comment-content-text {
-			margin-bottom: 0;
+			margin-block-end: 0;
 			overflow-wrap: break-word;
 		}
 

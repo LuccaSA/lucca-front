@@ -15,11 +15,12 @@
 }
 
 .optionGroupName {
-	padding: var(--components-options-item-padding-vertical) var(--components-options-item-padding-horizontal) var(--pr-t-spacings-50);
+	padding-block: var(--components-options-item-padding-vertical) var(--pr-t-spacings-50);
+	padding-inline: var(--components-options-item-padding-horizontal);
 	border-radius: 0;
 	font-size: var(--sizes-S-fontSize);
 	line-height: var(--sizes-S-lineHeight);
-	width: 100%;
+	inline-size: 100%;
 	justify-content: flex-start;
 	font-weight: 600;
 	color: var(--palettes-neutral-600);

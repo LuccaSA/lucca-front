@@ -81,7 +81,7 @@
 	@include extremity;
 
 	&::before {
-		left: var(--pr-t-spacings-75);
+		inset-inline-start: var(--pr-t-spacings-75);
 
 		--components-calendar-table-body-row-cellSelectedBeforeBorderRadius: var(--commons-borderRadius-L) 0 0 var(--commons-borderRadius-L);
 	}
@@ -91,7 +91,7 @@
 	@include extremity;
 
 	&::before {
-		right: var(--pr-t-spacings-75);
+		inset-inline-end: var(--pr-t-spacings-75);
 
 		--components-calendar-table-body-row-cellSelectedBeforeBorderRadius: 0 var(--commons-borderRadius-L) var(--commons-borderRadius-L) 0;
 	}
@@ -119,7 +119,7 @@
 	}
 
 	&::before {
-		right: 0;
+		inset-inline-end: 0;
 
 		--components-calendar-table-body-row-cellSelectedBeforeContent: '';
 		--components-calendar-table-body-row-cellSelectedBeforeBorderRadius: var(--commons-borderRadius-L) 0 0 var(--commons-borderRadius-L);
@@ -148,7 +148,7 @@
 	}
 
 	&::before {
-		left: 0;
+		inset-inline-start: 0;
 
 		--components-calendar-table-body-row-cellSelectedBeforeContent: '';
 		--components-calendar-table-body-row-cellSelectedBeforeBorderRadius: 0 var(--commons-borderRadius-L) var(--commons-borderRadius-L) 0;

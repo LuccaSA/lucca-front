@@ -28,12 +28,13 @@
 @mixin componentDeprecated($atRoot: namespace.$defaultAtRoot) {
 	padding: 0;
 	border: 0;
-	margin: 0 0 var(--components-form-group-margin-bottom);
+	margin-block: 0 var(--components-form-group-margin-bottom);
+	margin-inline: 0;
 	position: relative;
 
 	@at-root ($atRoot) {
 		.form-header {
-			margin-bottom: var(--pr-t-spacings-300);
+			margin-block-end: var(--pr-t-spacings-300);
 		}
 
 		.form-header-title {
@@ -57,7 +58,7 @@
 			flex-direction: column;
 			gap: var(--pr-t-spacings-50);
 			width: var(--components-form-field-width);
-			max-width: 100%;
+			max-inline-size: 100%;
 
 			.formLabel {
 				@include formLabel.label;
@@ -73,20 +74,21 @@
 			font-weight: 600;
 			font-size: var(--components-form-label-font-size);
 			margin: 0;
-			padding: 0 0 var(--components-form-label-margin-bottom);
-			width: 100%;
-			text-align: left;
+			padding-block: 0 var(--components-form-label-margin-bottom);
+			padding-inline: 0;
+			inline-size: 100%;
+			text-align: start;
 		}
 
 		.form-group-legend,
 		.form-group-title {
 			font-size: var(--components-field-framed-title-font-size);
 			line-height: var(--components-field-framed-title-line-height);
-			padding-bottom: var(--pr-t-spacings-50);
+			padding-block-end: var(--pr-t-spacings-50);
 		}
 
 		.form-actions {
-			text-align: right;
+			text-align: end;
 		}
 
 		.form {
@@ -94,7 +96,7 @@
 			.radiosfield,
 			.checkboxesfield,
 			.checkbox.mod-field {
-				margin-bottom: var(--components-form-field-margin-bottom);
+				margin-block-end: var(--components-form-field-margin-bottom);
 			}
 		}
 

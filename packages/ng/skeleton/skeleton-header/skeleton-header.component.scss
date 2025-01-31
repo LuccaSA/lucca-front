@@ -4,7 +4,7 @@
 
 .pageHeader.skeleton.is-loading {
 	.pageHeader-content-actions {
-		width: 100px;
+		inline-size: 100px;
 
 		@include media.max('XS') {
 			display: none;

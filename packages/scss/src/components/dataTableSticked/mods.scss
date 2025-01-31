@@ -5,14 +5,13 @@
 
 	.dataTable-head {
 		position: sticky;
-		top: -1px;
+		inset-block-start: -1px;
 		z-index: 1;
 
 		&::after {
 			content: '';
-			left: 0;
-			right: 0;
-			height: var(--pr-t-spacings-100);
+			inset-inline: 0;
+			block-size: var(--pr-t-spacings-100);
 			position: absolute;
 			background-image: linear-gradient(#{color.transparentize(var(--palettes-neutral-400), 0.24)}, transparent);
 			pointer-events: none;
@@ -30,22 +29,22 @@
 	&::after {
 		content: '';
 		position: sticky;
-		width: var(--pr-t-spacings-100);
+		inline-size: var(--pr-t-spacings-100);
 		background-image: linear-gradient(to right, #{color.transparentize(var(--palettes-neutral-400), 0.24)}, transparent);
 		flex-shrink: 0;
-		margin-left: calc(var(--pr-t-spacings-100) * -1);
-		top: 0;
+		margin-inline-start: calc(var(--pr-t-spacings-100) * -1);
+		inset-block-start: 0;
 		pointer-events: none;
 		z-index: 3;
 	}
 
 	&::before {
-		left: 0;
+		inset-inline-start: 0;
 		opacity: var(--components-dataTable-shadow-firstColumnOpacity);
 	}
 
 	&::after {
-		right: 0;
+		inset-inline-end: 0;
 		transform: scaleX(-1);
 		opacity: var(--components-dataTable-shadow-lastColumnOpacity);
 	}
@@ -63,21 +62,21 @@
 			content: '';
 			position: sticky;
 			display: block;
-			height: var(--pr-t-spacings-100);
+			block-size: var(--pr-t-spacings-100);
 			background-image: linear-gradient(to bottom, #{color.transparentize(var(--palettes-neutral-400), 0.24)}, transparent);
-			margin-top: calc(var(--pr-t-spacings-100) * -1);
+			margin-block-start: calc(var(--pr-t-spacings-100) * -1);
 			flex-shrink: 0;
 			pointer-events: none;
 			z-index: 2;
 		}
 
 		&::before {
-			top: 0;
+			inset-block-start: 0;
 			opacity: var(--components-dataTable-shadow-firstRowOpacity);
 		}
 
 		&::after {
-			bottom: 0;
+			inset-block-end: 0;
 			transform: scaleY(-1);
 			opacity: var(--components-dataTable-shadow-lastRowOpacity);
 		}
@@ -90,10 +89,9 @@
 	%addShadow {
 		content: '';
 		position: absolute;
-		top: 0;
-		bottom: 0;
-		left: 100%;
-		width: var(--pr-t-spacings-100);
+		inset-block: 0;
+		inset-inline-start: 100%;
+		inline-size: var(--pr-t-spacings-100);
 		pointer-events: none;
 		background-image: linear-gradient(to right, #{color.transparentize(var(--palettes-neutral-400), 0.24)}, transparent);
 	}
@@ -120,8 +118,8 @@
 				&::after {
 					@extend %addShadow;
 
-					left: auto;
-					right: 100%;
+					inset-inline-start: auto;
+					inset-inline-end: 100%;
 					transform: scaleX(-1);
 				}
 
@@ -139,11 +137,11 @@
 			position: sticky;
 
 			&:first-child {
-				left: 0;
+				inset-inline-start: 0;
 			}
 
 			&:last-child {
-				right: 0;
+				inset-inline-end: 0;
 			}
 		}
 	}

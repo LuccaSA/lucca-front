@@ -100,7 +100,7 @@ class TestDialogComponent {
 	selector: 'dialog-routing-stories',
 	standalone: true,
 	template: `
-		<div class="pr-u-marginBottom200">
+		<div class="pr-u-marginBlockEnd200">
 			<button luButton type="button" routerLink="/dialog">Navigate to /dialog</button>
 		</div>
 
@@ -222,7 +222,7 @@ class DismissedComponent {}
 	selector: 'dialog-routing-stories',
 	standalone: true,
 	template: \`
-	<div class="pr-u-marginBottom200">
+	<div class="pr-u-marginBlockEnd200">
 		<button luButton type="button" routerLink="/dialog">Navigate to /dialog</button>
 	</div>
 
