@@ -109,18 +109,21 @@ function getMessage(objectData) {
 		const daysAgo = Math.ceil((objectData.dateDeprecated.getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24));
 		const daysAgoString = new Intl.RelativeTimeFormat().format(daysAgo, 'day');
 
-		messageDeprecated = ` | ${daysAgoString} (${objectData.dateDeprecated.toLocaleDateString()}, LF ${objectData.versionDeprecated})`;
+		messageDeprecated = ` | since ${objectData.dateDeprecated.toLocaleDateString()} (${daysAgoString}, LF ${objectData.versionDeprecated})`;
 	}
 
 	if (objectData.dateDeleted) {
 		const daysLeft = Math.ceil((objectData.dateDeleted.getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24));
 		const dayString = new Intl.RelativeTimeFormat().format(daysLeft, 'day');
 
-		status = 'deleted';
-		messageDeleted = ` | ${dayString} (${objectData.dateDeleted.toLocaleDateString()}, LF ${objectData.versionDeleted})`;
+		if (daysLeft <= 0) {
+			status = 'deleted';
+		}
+
+		messageDeleted = ` | until ${objectData.dateDeleted.toLocaleDateString()} (${dayString}, LF ${objectData.versionDeleted})`;
 	}
 
-	return `${status}${messageDeprecated}${messageDeleted}: ${pattern}`;
+	return `${status}${messageDeprecated}${messageDeleted} | ${pattern}`;
 }
 
 /**
