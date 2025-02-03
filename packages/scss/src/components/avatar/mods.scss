@@ -37,6 +37,20 @@
 	--components-avatar-placeholder-size: 2.5rem;
 }
 
+@mixin block {
+	--components-avatar-display: block;
+}
+
+@mixin wrapperSingleLine {
+	--components-avatarWrapper-marginBlock: 0;
+}
+
+@mixin wrapper {
+	.avatar {
+		@include block;
+	}
+}
+
 @mixin wrapperXL {
 	.avatar,
 	.avatarWrapper-item-action {
@@ -53,6 +67,7 @@
 
 @mixin wrapperS {
 	--components-avatarWrapper-overlap: var(--pr-t-spacings-50);
+	--components-avatarWrapper-marginBlock: var(--pr-t-spacings-25);
 
 	.avatar,
 	.avatarWrapper-item-action {
@@ -62,6 +77,7 @@
 
 @mixin wrapperXS {
 	--components-avatarWrapper-overlap: var(--pr-t-spacings-50);
+	--components-avatarWrapper-marginBlock: var(--pr-t-spacings-25);
 
 	.avatar,
 	.avatarWrapper-item-action {

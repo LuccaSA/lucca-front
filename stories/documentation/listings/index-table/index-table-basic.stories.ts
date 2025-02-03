@@ -1,10 +1,16 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { LuUserPictureComponent } from '@lucca-front/ng/user';
+import { Meta, moduleMetadata, StoryFn } from '@storybook/angular';
 
 interface IndexTableBasicStory {}
 
 export default {
 	title: 'Documentation/Listings/Index Table/Basic',
 	argTypes: {},
+	decorators: [
+		moduleMetadata({
+			imports: [LuUserPictureComponent],
+		}),
+	],
 } as Meta;
 
 function getTemplate(args: IndexTableBasicStory): string {

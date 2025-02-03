@@ -3,7 +3,7 @@
 @use '@lucca-front/scss/src/commons/utils/namespace';
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
-	display: inline-block;
+	display: var(--components-avatar-display);
 	vertical-align: middle;
 	border-radius: var(--commons-borderRadius-full);
 	inline-size: var(--components-avatar-size);
@@ -49,7 +49,7 @@
 		}
 
 		.avatarWrapper-item {
-			margin-block: calc(var(--components-avatarWrapper-overlap) / 2);
+			margin-block: var(--components-avatarWrapper-marginBlock);
 
 			&:not(:last-child) {
 				margin-inline-end: calc(var(--components-avatarWrapper-overlap) * -1);

@@ -5,6 +5,7 @@
 	--components-avatar-scale: 1;
 	--components-avatar-background: var(--pr-t-elevation-surface-default);
 	--components-avatar-placeholder-size: 1.25rem;
+	--components-avatar-display: inline-block;
 }
 
 @mixin varsWrapper {
@@ -12,4 +13,5 @@
 
 	--components-avatarWrapper-fontSize: var(--sizes-M-fontSize);
 	--components-avatarWrapper-overlap: var(--pr-t-spacings-100);
+	--components-avatarWrapper-marginBlock: var(--pr-t-spacings-50);
 }
