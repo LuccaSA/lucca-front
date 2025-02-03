@@ -310,9 +310,11 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 			}
 
 			this.isPanelOpen$.next(true);
+
 			if (this.searchable) {
 				this.clueChanged(clue);
 			}
+
 			this._panelRef = this.buildPanelRef();
 			this.bindInputToPanelRefEvents();
 		});
