@@ -30,11 +30,13 @@
 	.errorPage-section-info-title {
 		@include title.component;
 		@include title.XXXL;
+		margin-block-end: var(--pr-t-spacings-50);
 	}
 
 	.errorPage-section-info-text {
 		font-size: var(--sizes-L-fontSize);
 		line-height: var(--sizes-L-lineHeight);
+		margin-block-end: var(--pr-t-spacings-150);
 	}
 
 	.errorPage-section-image {
