@@ -2,6 +2,7 @@
 @use 'sass:map';
 
 $isNamespaced: false !default;
+$deprecatedSpacings: false !default;
 
 $fontFamily: 'SourceSans' !default;
 $fontWeights: (
