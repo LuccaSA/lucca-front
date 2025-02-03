@@ -90,8 +90,14 @@
 	inset-inline: 0;
 	display: block;
 	z-index: 1;
-	margin-block-end: var(--pr-t-spacings-50);
+	min-height: 1px;
+	outline: 1px solid red;
+	padding-block-end: var(--pr-t-spacings-50);
 	box-shadow: 0 -4px 0 var(--pr-t-spacings-100) var(--pr-t-elevation-surface-raised); // Avoid showing options list while scrolling due to header sticky potisionning
+
+	* {
+		display: none;
+	}
 }
 
 .lu-picker-textfield {
