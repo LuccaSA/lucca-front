@@ -48,7 +48,7 @@ export default {
 					</lu-filter-pill>
 
 					<lu-filter-pill label="Lorem ipsum">
-						<lu-checkbox-input disabled [ngModel]="false"></lu-checkbox-input>
+						<lu-checkbox-input disabled checked [ngModel]="false"></lu-checkbox-input>
 					</lu-filter-pill>
 
 					<lu-form-field label="Test" hiddenLabel>

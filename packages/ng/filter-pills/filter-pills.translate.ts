@@ -9,6 +9,7 @@ export const LU_FILTER_PILLS_TRANSLATIONS = new InjectionToken('LuFilterPillsTra
 export interface LuFilterPillsLabel {
 	clear: string;
 	placeholder: string;
+	additionalFilters: string;
 }
 
 export const luFilterPillsTranslations: LuTranslation<LuFilterPillsLabel> = Translations;

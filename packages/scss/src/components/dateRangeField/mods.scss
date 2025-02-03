@@ -54,6 +54,13 @@
 	.dateRangeField-fieldset-textField.textField {
 		position: relative;
 		z-index: 1;
+		margin-block-start: var(--pr-t-spacings-50);
+		margin-inline: var(--pr-t-spacings-50);
+	}
+
+	.calendarWrapper {
+		margin-inline: calc(var(--pr-t-spacings-100) * -1);
+		margin-block-end: calc(var(--pr-t-spacings-100) * -1);
 	}
 }
 

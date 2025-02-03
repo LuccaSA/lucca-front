@@ -48,6 +48,8 @@
 	--components-filterPill-checkbox-borderColor: var(--palettes-neutral-500);
 	--components-filterPill-color: var(--palettes-neutral-500);
 	--components-filterPill-label-cursor: default;
+
+	box-shadow: 0 0 0 1px var(--components-filterPill-borderColor);
 }
 
 @mixin checkboxCheckedDisabled {

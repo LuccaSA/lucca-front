@@ -12,10 +12,6 @@
 		@include hover;
 	}
 
-	&:focus-within {
-		@include focusVisible;
-	}
-
 	&:active,
 	&:has(:active) {
 		@include active;
@@ -23,6 +19,10 @@
 
 	&.is-comboboxHidden {
 		@include comboboxHidden;
+	}
+
+	&:has(.filterPill-combobox:focus-visible) {
+		@include focusVisible;
 	}
 
 	&:has(.filterPill-combobox[aria-expanded='true']) {
