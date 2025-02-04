@@ -20,7 +20,7 @@ import {
 import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors, Validator } from '@angular/forms';
 import { LuccaIcon } from '@lucca-front/icons';
 import { LuClass, ɵeffectWithDeps } from '@lucca-front/ng/core';
-import { FILTER_PILL_INPUT_COMPONENT, FilterPillDisplayerDirective, FilterPillInputComponent } from '@lucca-front/ng/filter-pills';
+import { FilterPillDisplayerDirective, FilterPillInputComponent, FILTER_PILL_INPUT_COMPONENT } from '@lucca-front/ng/filter-pills';
 import { InputDirective } from '@lucca-front/ng/form-field';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { PopoverDirective } from '@lucca-front/ng/popover2';
@@ -30,7 +30,6 @@ import { CalendarMode } from '../calendar2/calendar-mode';
 import { Calendar2Component } from '../calendar2/calendar2.component';
 import { CellStatus } from '../calendar2/cell-status';
 import { comparePeriods, startOfPeriod } from '../utils';
-import { isDisabled } from '@testing-library/user-event/utils/misc/isDisabled';
 
 @Component({
 	selector: 'lu-date-input',

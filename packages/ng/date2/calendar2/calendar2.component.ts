@@ -1,7 +1,5 @@
 import { NgClass } from '@angular/common';
 import { booleanAttribute, ChangeDetectionStrategy, Component, computed, effect, ElementRef, inject, input, LOCALE_ID, model, OnInit, output, viewChildren, ViewEncapsulation } from '@angular/core';
-import { ButtonComponent } from '@lucca-front/ng/button';
-import { CalloutComponent } from '@lucca-front/ng/callout';
 import { getIntl } from '@lucca-front/ng/core';
 import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
 import {
