@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, HostBinding, inject, Input, OnChanges, SimpleChanges, ViewEncapsulation } from '@angular/core';
 import { LuClass, Palette } from '@lucca-front/ng/core';
-import { LuTooltipModule } from '../tooltip/tooltip.module';
+import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 
 @Component({
 	selector: 'lu-numeric-badge',
