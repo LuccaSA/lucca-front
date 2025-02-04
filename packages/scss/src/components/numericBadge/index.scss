@@ -23,4 +23,8 @@
 			@include loadingXS;
 		}
 	}
+
+	&:focus-within {
+		@include focusVisible;
+	}
 }
