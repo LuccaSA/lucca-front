@@ -10,10 +10,11 @@ require('@angular-devkit/schematics');
 export default (options?: { skipInstallation?: boolean }): Rule => {
 	const skipInstallation = options?.skipInstallation ?? false;
 
-	return (tree, context) => {
+	return async (tree, context) => {
 		if (!skipInstallation) {
 			installLocalDependencies(context);
 		}
+		const angularCompiler = await import('@angular/compiler');
 
 		tree.visit((path, entry) => {
 			if (path.includes('node_modules') || !entry) {
@@ -22,7 +23,7 @@ export default (options?: { skipInstallation?: boolean }): Rule => {
 			if (path.endsWith('.ts')) {
 				migrateFile(path, entry, tree, (content) => {
 					const sourceFile = ts.createSourceFile(path, content, ScriptTarget.ESNext);
-					return migrateComponent(sourceFile, path, tree);
+					return migrateComponent(sourceFile, path, tree, angularCompiler);
 				});
 			}
 		});

@@ -7,7 +7,6 @@ import { applyUpdates, FileUpdate, updateContent } from './file-update';
 import { createSourceFile, forEachChild, isStringLiteral, ScriptTarget } from 'typescript';
 import { replaceStringLiterals } from './typescript-ast';
 import { createVisitor, extractNgTemplates } from './angular-template';
-import { ASTWithSource } from '@angular/compiler';
 
 interface Mappings {
 	classes: Record<string, string>;
@@ -19,7 +18,7 @@ export class CssMapper {
 	private mappings: Mappings = {
 		classes: this.expand(this.rawMappings.classes),
 		variables: this.expand(this.rawMappings.variables),
-		mixins: this.expand(this.rawMappings.mixins),
+		mixins: this.expand(this.rawMappings.mixins)
 	};
 	private classesToUpdate = new Set(Object.keys(this.mappings.classes));
 	private varsToUpdate = new Set(Object.keys(this.mappings.variables));
@@ -27,11 +26,13 @@ export class CssMapper {
 	constructor(
 		private tree: Tree,
 		private rawMappings: Mappings,
-		private mappingProps?: Record<string, Record<string, string>>,
-	) {}
+		private mappingProps?: Record<string, Record<string, string>>
+	) {
+	}
 
 	async run() {
 		const postCssScss = await import('../lib/local-deps/postcss-scss.js');
+		const angularCompiler = await import('@angular/compiler');
 		const { postcssValueParser } = await import('../lib/local-deps/postcss-value-parser.js');
 		const { postcssSelectorParser } = await import('../lib/local-deps/postcss-selector-parser.js');
 		this.tree.visit((path, entry) => {
@@ -42,10 +43,10 @@ export class CssMapper {
 				migrateFile(path, entry, this.tree, (content) => this.migrateScssFile(content, postCssScss, postcssValueParser, postcssSelectorParser));
 			}
 			if (path.endsWith('.html')) {
-				migrateFile(path, entry, this.tree, (content) => this.migrateHTMLFile(content));
+				migrateFile(path, entry, this.tree, (content) => this.migrateHTMLFile(content, angularCompiler));
 			}
 			if (path.endsWith('.ts')) {
-				migrateFile(path, entry, this.tree, (content) => this.migrateTsFile(path, content));
+				migrateFile(path, entry, this.tree, (content) => this.migrateTsFile(path, content, angularCompiler));
 			}
 		});
 	}
@@ -60,23 +61,23 @@ export class CssMapper {
 		return root.toResult({ syntax: { stringify: postCssScss.stringify } }).css;
 	}
 
-	private migrateHTMLFile(content: string): string {
-		content = updateCssClassNames(content, this.mappings.classes);
+	private migrateHTMLFile(content: string, compiler: AngularCompilerLib): string {
+		content = updateCssClassNames(content, this.mappings.classes, compiler);
 
 		return updateContent(content, (updates) => {
-			const htmlAst = new HtmlAst(content);
+			const htmlAst = new HtmlAst(content, compiler);
 			htmlAst.visitElements(/.*/, (elem) => {
-				const elAst = new HtmlAstVisitor(elem);
+				const elAst = new HtmlAstVisitor(elem, compiler);
 				elAst.visitBoundAttribute(/.*/, (attr) => {
-					if (attr.valueSpan && attr.value instanceof ASTWithSource) {
+					if (attr.valueSpan && attr.value instanceof compiler.ASTWithSource) {
 						const attrValue = attr.value.source || '';
 						const sourcefile = createSourceFile('', attrValue, ScriptTarget.ESNext);
 
 						updates.push(
 							...replaceStringLiterals(sourcefile, this.mappings.classes).map((update) => ({
 								...update,
-								position: (attr.valueSpan?.start.offset ?? 0) + update.position,
-							})),
+								position: (attr.valueSpan?.start.offset ?? 0) + update.position
+							}))
 						);
 					}
 				});
@@ -85,7 +86,7 @@ export class CssMapper {
 						updates.push({
 							position: attr.valueSpan.start.offset,
 							oldContent: attr.value,
-							newContent: this.updateCssText(attr.value),
+							newContent: this.updateCssText(attr.value)
 						});
 					}
 				});
@@ -93,14 +94,14 @@ export class CssMapper {
 		});
 	}
 
-	private migrateTsFile(fileName: string, content: string): string {
+	private migrateTsFile(fileName: string, content: string, compiler: AngularCompilerLib): string {
 		const sourcefile = createSourceFile(fileName, content, ScriptTarget.ESNext);
 		const templates = extractNgTemplates(sourcefile);
 
 		const updates: FileUpdate[] = templates.map((tpl) => ({
 			position: tpl.offsetStart,
 			oldContent: tpl.content,
-			newContent: updateCssClassNames(tpl.content, this.mappings.classes),
+			newContent: updateCssClassNames(tpl.content, this.mappings.classes, compiler)
 		}));
 
 		forEachChild(
@@ -112,10 +113,10 @@ export class CssMapper {
 					updates.push({
 						position,
 						oldContent: node.text,
-						newContent: newText,
+						newContent: newText
 					});
 				}
-			}),
+			})
 		);
 
 		return applyUpdates(content, updates);
@@ -174,7 +175,7 @@ export class CssMapper {
 				}
 
 				return values;
-			}),
+			})
 		) as Record<string, string>;
 	}
 }

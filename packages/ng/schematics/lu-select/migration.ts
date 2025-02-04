@@ -1,4 +1,4 @@
-import { HtmlAst, HtmlAstVisitor } from '../lib/html-ast.js';
+import { AngularCompilerLib, HtmlAst, HtmlAstVisitor } from '../lib/html-ast.js';
 import ts, { isImportDeclaration, isNamedImports, ScriptTarget, SourceFile } from 'typescript';
 import { extractComponentImports, insertAngularImportIfNeeded, insertTSImportIfNeeded, removeAngularImport, removeTSImport } from '../lib/angular-component-ast';
 import { extractNgTemplatesIncludingHtml } from '../lib/angular-template';
@@ -7,7 +7,6 @@ import { LuSelectInputContext, PremadeApiSelectContext, RejectedSelectContext, S
 import { Tree, UpdateRecorder } from '@angular-devkit/schematics';
 import { applyToUpdateRecorder } from '@schematics/angular/utility/change';
 import { getEOL } from '@schematics/angular/utility/eol';
-import { ASTWithSource, TmplAstElement } from '@angular/compiler';
 
 const importSource: Record<string, string> = {
 	LuSimpleSelectInputComponent: '@lucca-front/ng/simple-select',
@@ -24,8 +23,8 @@ const selectorToComponentNameRecord = selectorToSelectComponentName as Record<st
 
 const possibleSelectComponents = Object.values(selectorToSelectComponentName);
 
-export function migrateComponent(sourceFile: SourceFile, path: string, tree: Tree): string {
-	const selects = findSelectContexts(sourceFile, path, tree);
+export function migrateComponent(sourceFile: SourceFile, path: string, tree: Tree, compiler: AngularCompilerLib): string {
+	const selects = findSelectContexts(sourceFile, path, tree, compiler);
 	if (selects.length > 0) {
 		const tsUpdate = tree.beginUpdate(path);
 		const isInlineTemplate = selects[0].filePath === path;
@@ -35,7 +34,7 @@ export function migrateComponent(sourceFile: SourceFile, path: string, tree: Tre
 			if (!select.rejection) {
 				switch (select.component) {
 					case 'LuSelectInputComponent':
-						handleLuSelectInputComponent(select, templateUpdate);
+						handleLuSelectInputComponent(select, templateUpdate, compiler);
 						break;
 					case 'LuEstablishmentSelectInputComponent':
 					case 'LuQualificationSelectInputComponent':
@@ -95,19 +94,19 @@ function insertRejectionComment(update: UpdateRecorder, select: RejectedSelectCo
 	update.insertLeft(select.nodeOffset + select.node.startSourceSpan.start.offset, `<!-- [lu-select migration] REJECTED: ${detailedReason || RejectionReason[select.rejection.reason]} -->\n${indentBefore}`);
 }
 
-function findSelectContexts(sourceFile: ts.SourceFile, basePath: string, tree: Tree): SelectContext[] {
+function findSelectContexts(sourceFile: ts.SourceFile, basePath: string, tree: Tree, compiler: AngularCompilerLib): SelectContext[] {
 	const imports = extractComponentImports(sourceFile);
 	if (possibleSelectComponents.some((c) => imports.includes(c))) {
 		const selects: SelectContext[] = [];
 		const template = extractNgTemplatesIncludingHtml(sourceFile, tree, basePath)[0];
-		const htmlAst = new HtmlAst(template.content);
+		const htmlAst = new HtmlAst(template.content, compiler);
 		htmlAst.visitNodes((node) => {
-			if (node instanceof TmplAstElement) {
+			if (node instanceof compiler.TmplAstElement) {
 				const selectComponentClass = selectorToComponentNameRecord[node.name];
 				const multipleInput = node.inputs.find(attr => attr.name === 'multiple');
-				const unsupportedMultiple = multipleInput && (multipleInput.value as ASTWithSource)?.source !== 'true';
+				const unsupportedMultiple = (multipleInput?.value instanceof compiler.ASTWithSource) && multipleInput.value.source !== 'true';
 				const multipleAttr = node.attributes.find(attr => attr.name === 'multiple');
-				const multipleFromInput = multipleInput && (multipleInput.value as ASTWithSource)?.source === 'true' ? { start: multipleInput?.sourceSpan?.start?.offset, end: multipleInput?.sourceSpan?.end?.offset + 1 } : null;
+				const multipleFromInput = (multipleInput?.value instanceof compiler.ASTWithSource) && multipleInput.value.source === 'true' ? { start: multipleInput?.sourceSpan?.start?.offset, end: multipleInput?.sourceSpan?.end?.offset + 1 } : null;
 				const multipleFromAttr = multipleAttr && (multipleAttr.value === 'true' || multipleAttr.value === '') ? { start: multipleAttr?.sourceSpan?.start?.offset, end: multipleAttr?.sourceSpan?.end?.offset + 1 } : null;
 				if (selectComponentClass) {
 					const context = {
@@ -117,7 +116,7 @@ function findSelectContexts(sourceFile: ts.SourceFile, basePath: string, tree: T
 						component: selectComponentClass,
 						rejection: unsupportedMultiple ? {
 							reason: RejectionReason.CONDITIONAL_MULTIPLE
-						} : getCommonMigrationRejectionReason(node, sourceFile),
+						} : getCommonMigrationRejectionReason(node, sourceFile, compiler),
 						filePath: template.filePath,
 						componentTS: template.componentTS,
 						multiple: multipleFromAttr || multipleFromInput
@@ -171,10 +170,10 @@ function updateImports(sourceFile: SourceFile, selects: SelectContext[], path: s
 	tree.commitUpdate(cleanupUpdate);
 }
 
-function handleLuSelectInputComponent(select: LuSelectInputContext, update: UpdateRecorder) {
-	const dataSource = getDataSource(select);
+function handleLuSelectInputComponent(select: LuSelectInputContext, update: UpdateRecorder, compiler: AngularCompilerLib) {
+	const dataSource = getDataSource(select, compiler);
 	let hasClearer = false;
-	new HtmlAstVisitor(select.node).visitElements(/lu-input-clearer/, (node) => {
+	new HtmlAstVisitor(select.node, compiler).visitElements(/lu-input-clearer/, (node) => {
 		// Doing the check just in case
 		if (node.name === 'lu-input-clearer') {
 			hasClearer = true;
@@ -188,7 +187,7 @@ function handleLuSelectInputComponent(select: LuSelectInputContext, update: Upda
 		if (select.multiple) {
 			update.remove(select.nodeOffset + select.multiple.start, select.multiple.end - select.multiple.start);
 		}
-		const displayer = getDisplayer(select);
+		const displayer = getDisplayer(select, compiler);
 		const endSpanOffset = select.node.endSourceSpan?.start.offset || 0;
 		// Remove content
 		update.remove(select.nodeOffset + select.node.startSourceSpan.end.offset, endSpanOffset - select.node.startSourceSpan.end.offset);
