@@ -1,16 +1,17 @@
 @use '@lucca-front/scss/src/commons/utils/a11y';
+@use '@lucca-front/scss/src/commons/utils/namespace';
 @use '@lucca-front/scss/src/components/numericBadge/exports' as numericBadge;
 
-@mixin component($atRoot: 'without: rule') {
+@mixin component($atRoot: namespace.$defaultAtRoot) {
 	display: flex;
 
 	@at-root ($atRoot) {
 		.radioButtons-item {
 			position: relative;
-			margin-left: 1px;
+			margin-inline-start: 1px;
 
 			&:first-child {
-				margin-left: 0;
+				margin-inline-start: 0;
 
 				.radioButtons-item-label {
 					border-radius: var(--commons-borderRadius-M) 0 0 var(--commons-borderRadius-M);
@@ -49,7 +50,7 @@
 			transition-property: background-color, color, box-shadow;
 			overflow: hidden;
 			position: relative;
-			height: 100%;
+			block-size: 100%;
 			cursor: pointer;
 		}
 
@@ -74,7 +75,7 @@
 						color: var(--palettes-product-800);
 
 						.numericBadge {
-							@include numericBadge.product;
+							@include numericBadge.inherit;
 						}
 					}
 				}

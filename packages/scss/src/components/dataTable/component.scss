@@ -1,0 +1,131 @@
+@use '@lucca-front/icons/src/commons/utils/icon';
+
+@use '@lucca-front/scss/src/commons/utils/namespace';
+@use '@lucca-front/scss/src/commons/utils/a11y';
+
+@use '@lucca-front/scss/src/components/button/exports' as button;
+
+@mixin component($atRoot: namespace.$defaultAtRoot) {
+	display: table;
+	text-align: start;
+	inline-size: calc(100% + 1px);
+	block-size: calc(100% + 1px);
+	border-spacing: 0;
+	margin-inline-start: -1px;
+	margin-block-start: -1px;
+	table-layout: var(--components-dataTable-tableLayout);
+
+	@at-root ($atRoot) {
+		.dataTableWrapper {
+			border-radius: var(--commons-borderRadius-L);
+			border: 1px solid var(--commons-border-200);
+			overflow: var(--components-dataTable-overflow);
+			background-color: var(--components-dataTable-cell-background);
+
+			&:focus-visible {
+				@include a11y.focusVisible;
+			}
+		}
+
+		.dataTable-head-row-cell {
+			color: var(--palettes-neutral-700);
+			padding: var(--components-dataTable-cell-padding);
+			display: table-cell;
+			font-weight: 400;
+
+			.checkboxField {
+				margin-block-end: 0.125rem;
+			}
+		}
+
+		.dataTable-head {
+			display: table-header-group;
+			vertical-align: bottom;
+		}
+
+		.dataTable-body {
+			display: table-row-group;
+		}
+
+		.dataTable-foot {
+			display: table-footer-group;
+		}
+
+		.dataTable-head-row,
+		.dataTable-body-row,
+		.dataTable-foot-row {
+			display: var(--components-dataTable-row-display);
+		}
+
+		.dataTable-head-row-cell,
+		.dataTable-body-row-cell,
+		.dataTable-foot-row-cell {
+			display: table-cell;
+			box-shadow: var(--components-dataTable-cell-shadow);
+			background-color: var(--components-dataTable-cell-background);
+			text-align: var(--components-dataTable-cell-textAlign);
+
+			&:first-child {
+				inline-size: var(--components-dataTable-cellFirst-width);
+			}
+		}
+
+		.dataTable-body-row-cell,
+		.dataTable-foot-row-cell {
+			padding: var(--components-dataTable-cell-padding);
+			padding-inline-start: var(--components-dataTable-cell-paddingInlineStart);
+			vertical-align: middle;
+		}
+
+		.dataTable-head-row {
+			&:first-child {
+				.dataTable-head-row-cell {
+					--components-dataTable-cell-shadow: none;
+				}
+			}
+		}
+
+		.dataTable-body-row-cell {
+			vertical-align: var(--components-dataTable-cell-verticalAlign);
+		}
+
+		.dataTable-foot-row-cell {
+			font-weight: 600;
+		}
+
+		.dataTable-body-row-cell-expand {
+			display: flex;
+			gap: var(--pr-t-spacings-100);
+			align-items: flex-start;
+		}
+
+		.dataTable-body-row-cell-expand-button.button {
+			vertical-align: top;
+
+			.lucca-icon {
+				transform: rotate(var(--components-dataTable-expand-rotation));
+				transition-property: transform;
+				transition-duration: var(--commons-animations-durations-fast);
+			}
+		}
+
+		.dataTable-body-row-cell-drag.button {
+			@include button.S;
+			@include button.onlyIcon;
+			@include button.text;
+
+			--components-button-padding: var(--pr-t-spacings-50);
+			--components-button-color: var(--palettes-neutral-700);
+
+			cursor: move;
+			vertical-align: top;
+		}
+	}
+
+	.statusBadge,
+	.tag,
+	.avatar {
+		display: flex;
+		inline-size: fit-content;
+	}
+}

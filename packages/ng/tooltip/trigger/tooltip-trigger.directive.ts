@@ -2,7 +2,6 @@ import { FlexibleConnectedPositionStrategy, HorizontalConnectionPos, OriginConne
 import { ComponentPortal } from '@angular/cdk/portal';
 import {
 	AfterContentInit,
-	ChangeDetectorRef,
 	DestroyRef,
 	Directive,
 	ElementRef,
@@ -12,20 +11,26 @@ import {
 	OnDestroy,
 	Renderer2,
 	booleanAttribute,
+	computed,
+	effect,
 	inject,
+	input,
 	numberAttribute,
+	signal,
 } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { takeUntilDestroyed, toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { SafeHtml } from '@angular/platform-browser';
 import { LuPopoverPosition } from '@lucca-front/ng/popover';
 import { BehaviorSubject, Observable, Subject, combineLatest, merge, startWith, switchMap, timer } from 'rxjs';
 import { debounce, debounceTime, filter, map } from 'rxjs/operators';
 import { LuTooltipPanelComponent } from '../panel';
+import { EllipsisRuler } from './ellipsis.ruler';
 
 let nextId = 0;
 
 @Directive({
 	selector: '[luTooltip]',
+	exportAs: 'luTooltip',
 	standalone: true,
 })
 export class LuTooltipTriggerDirective implements AfterContentInit, OnDestroy {
@@ -34,13 +39,11 @@ export class LuTooltipTriggerDirective implements AfterContentInit, OnDestroy {
 	#host = inject<ElementRef<HTMLElement>>(ElementRef);
 
 	#renderer = inject(Renderer2);
+	#ruler = inject(EllipsisRuler);
 
 	#destroyRef = inject(DestroyRef);
 
-	#cdr = inject(ChangeDetectorRef);
-
-	@Input()
-	luTooltip: string | SafeHtml;
+	luTooltip = input<string | SafeHtml>();
 
 	#openDelay$ = new BehaviorSubject<number>(300);
 
@@ -56,15 +59,7 @@ export class LuTooltipTriggerDirective implements AfterContentInit, OnDestroy {
 		this.#closeDelay$.next(delay);
 	}
 
-	#disabled = false;
-
-	@Input({ transform: booleanAttribute })
-	set luTooltipDisabled(disabled: boolean) {
-		this.#disabled = disabled;
-		if (disabled) {
-			this.setAccessibilityProperties(null);
-		}
-	}
+	luTooltipDisabled = input(false, { transform: booleanAttribute });
 
 	@Input({ transform: booleanAttribute })
 	luTooltipOnlyForDisplay = false;
@@ -72,8 +67,7 @@ export class LuTooltipTriggerDirective implements AfterContentInit, OnDestroy {
 	@Input()
 	luTooltipPosition: LuPopoverPosition = 'above';
 
-	@Input({ transform: booleanAttribute })
-	luTooltipWhenEllipsis = false;
+	luTooltipWhenEllipsis = input(false, { transform: booleanAttribute });
 
 	resize$ = new Observable((observer) => {
 		const resizeObserver = new ResizeObserver(() => {
@@ -84,6 +78,22 @@ export class LuTooltipTriggerDirective implements AfterContentInit, OnDestroy {
 			resizeObserver.disconnect();
 		};
 	});
+
+	#hasEllipsis$ = combineLatest([
+		toObservable(
+			// 1. Group necessary inputs
+			computed(() => ({ whenEllipsis: this.luTooltipWhenEllipsis(), disabled: this.luTooltipDisabled() })),
+		),
+		// Resend resize events to trigger the check
+		this.resize$.pipe(debounceTime(150)),
+	]).pipe(
+		// 2. Keep only necessary inputs
+		filter(([{ whenEllipsis, disabled }]) => !disabled && whenEllipsis),
+		// 3. Check for ellipsis
+		switchMap(() => this.#ruler.hasEllipsis(this.#host.nativeElement)),
+	);
+
+	#hasEllipsis = toSignal(this.#hasEllipsis$, { initialValue: false });
 
 	open$ = new Subject<void>();
 
@@ -101,7 +111,9 @@ export class LuTooltipTriggerDirective implements AfterContentInit, OnDestroy {
 
 	@HostListener('focus')
 	onFocus() {
-		this.open$.next();
+		if (this.#host.nativeElement.getAttribute('aria-expanded') !== 'true') {
+			this.open$.next();
+		}
 	}
 
 	@HostListener('blur')
@@ -116,7 +128,7 @@ export class LuTooltipTriggerDirective implements AfterContentInit, OnDestroy {
 
 	@HostBinding('attr.aria-describedby')
 	get ariaDescribedBy() {
-		if (this.#disabled || this.luTooltipWhenEllipsis || this.luTooltipOnlyForDisplay) {
+		if (this.luTooltipDisabled() || this.luTooltipWhenEllipsis() || this.luTooltipOnlyForDisplay) {
 			return null;
 		}
 		return `${this.#generatedId}-panel`;
@@ -132,12 +144,12 @@ export class LuTooltipTriggerDirective implements AfterContentInit, OnDestroy {
 					// 	we want the tooltip to be able to close itself no matter what
 					const openEvents$ = this.open$.pipe(
 						filter(() => {
-							if (this.#disabled) {
+							if (this.luTooltipDisabled()) {
 								return false;
 							}
 							// If not disabled, let's check for ellipsis if needed
-							if (this.luTooltipWhenEllipsis) {
-								return this.hasEllipsis();
+							if (this.luTooltipWhenEllipsis()) {
+								return this.#hasEllipsis();
 							}
 							// If it's not disabled and is not triggered based on ellipsis, just return true
 							return true;
@@ -160,9 +172,12 @@ export class LuTooltipTriggerDirective implements AfterContentInit, OnDestroy {
 				}
 			});
 
-		this.resize$.pipe(takeUntilDestroyed(this.#destroyRef), debounceTime(150)).subscribe(() => {
-			this.setAccessibilityProperties(0);
-			this.#cdr.markForCheck();
+		effect(() => {
+			if (!this.luTooltipDisabled() && (!this.luTooltipWhenEllipsis() || this.#hasEllipsis())) {
+				this.setAccessibilityProperties(0);
+			} else {
+				this.setAccessibilityProperties(null);
+			}
 		});
 	}
 
@@ -192,10 +207,12 @@ export class LuTooltipTriggerDirective implements AfterContentInit, OnDestroy {
 			.subscribe(({ overlayX, overlayY }) => {
 				ref.instance.setPanelPosition(overlayX, overlayY);
 			});
-		if (this.luTooltip) {
+		if (this.luTooltip()) {
 			ref.instance.content = this.luTooltip;
-		} else if (this.luTooltipWhenEllipsis) {
-			ref.instance.content = this.#host.nativeElement.innerText;
+		} else if (this.luTooltipWhenEllipsis()) {
+			ref.instance.content = signal(this.#host.nativeElement.innerText);
+		} else {
+			ref.instance.content = signal('');
 		}
 		ref.instance.id = this.ariaDescribedBy;
 		// On tooltip leave => trigger close
@@ -212,67 +229,23 @@ export class LuTooltipTriggerDirective implements AfterContentInit, OnDestroy {
 	}
 
 	private setAccessibilityProperties(tabindex: number | null): void {
-		if (this.#disabled || (this.luTooltipWhenEllipsis && !this.hasEllipsis())) {
+		if (tabindex === null) {
 			this.#renderer.removeAttribute(this.#host.nativeElement, 'tabindex');
 			return;
 		}
 
 		const tag = this.#host.nativeElement.tagName.toLowerCase();
 		const nativelyFocusableTags = ['a', 'button', 'input', 'select', 'textarea'];
-		const isNatevelyFocusableTag = nativelyFocusableTags.includes(tag);
+		const isNativelyFocusableTag = nativelyFocusableTags.includes(tag);
 
 		const hasATabIndex = this.#host.nativeElement.getAttribute('tabindex') !== null;
 
-		if (!isNatevelyFocusableTag && !hasATabIndex) {
+		if (!isNativelyFocusableTag && !hasATabIndex) {
 			this.#renderer.setAttribute(this.#host.nativeElement, 'tabindex', tabindex.toString());
 		}
 	}
 
-	/**
-	 * Hacky af but let's explain everything
-	 * This method checks for ellipsis by cloning the node and checking its width against original element.
-	 *
-	 * We used to do this using scrollWidth but the thing is, it's a rounded value. Sometimes,
-	 * you'd get true while it should be false and vice-versa, because of rounding.
-	 *
-	 * We could also use getBoundingClientRect() but it only considers text content, meaning that if ellipsis is caused by
-	 * any margin or padding, it won't be detected
-	 *
-	 * @private
-	 */
-	private hasEllipsis(): boolean {
-		if (window.getComputedStyle(this.#host.nativeElement).textOverflow !== 'ellipsis') {
-			return false;
-		}
-
-		const mask = this.#renderer.createElement('div') as HTMLDivElement;
-		const clone = this.#host.nativeElement.cloneNode(true) as HTMLElement;
-
-		this.#renderer.setStyle(clone, 'position', 'fixed');
-		this.#renderer.setStyle(clone, 'overflow', 'visible');
-		this.#renderer.setStyle(clone, 'white-space', 'nowrap');
-		this.#renderer.setStyle(clone, 'visibility', 'hidden');
-		this.#renderer.setStyle(clone, 'width', 'fit-content');
-
-		this.#renderer.addClass(mask, 'u-mask');
-		this.#renderer.setAttribute(mask, 'aria-hidden', 'true');
-		this.#renderer.appendChild(mask, clone);
-
-		this.#renderer.appendChild(this.#host.nativeElement.parentElement, mask);
-		try {
-			const fullWidth = clone.getBoundingClientRect().width;
-			const displayWidth = this.#host.nativeElement.getBoundingClientRect().width;
-
-			return fullWidth > displayWidth;
-		} catch (e) {
-			return false;
-		} finally {
-			mask.remove();
-		}
-	}
-
 	ngAfterContentInit(): void {
-		this.setAccessibilityProperties(0);
 		this._id = this.#host.nativeElement.id || this.#generatedId;
 	}
 

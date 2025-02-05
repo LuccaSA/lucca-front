@@ -1,11 +1,12 @@
 @use '@lucca-front/icons/src/commons/utils/icon';
+@use '@lucca-front/scss/src/commons/utils/namespace';
 
-@mixin component($atRoot: 'without: rule') {
+@mixin component($atRoot: namespace.$defaultAtRoot) {
 	display: block;
 
 	@at-root ($atRoot) {
 		.collapse-title {
-			margin-bottom: var(--pr-t-spacings-50);
+			margin-block-end: var(--pr-t-spacings-50);
 			display: inline-flex;
 			overflow: hidden;
 			cursor: pointer;
@@ -23,7 +24,7 @@
 				@include icon.generate('arrow_chevron_right');
 
 				font-size: var(--sizes-XS-fontSize);
-				margin-right: var(--pr-t-spacings-50);
+				margin-inline-end: var(--pr-t-spacings-50);
 				transition-duration: var(--commons-animations-durations-fast);
 				transition-property: transform;
 				vertical-align: middle;

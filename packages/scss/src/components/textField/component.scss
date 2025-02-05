@@ -2,13 +2,18 @@
 @use '@lucca-front/scss/src/components/inlineMessage/exports' as inlineMessage;
 @use '@lucca-front/scss/src/commons/utils/a11y';
 @use '@lucca-front/icons/src/icon/exports' as icon;
+@use '@lucca-front/scss/src/commons/utils/namespace';
 
-@mixin component($atRoot: 'without: rule') {
+@mixin component($atRoot: namespace.$defaultAtRoot) {
 	display: flex;
 	align-items: stretch;
 	border-radius: var(--commons-borderRadius-M);
 	background-color: var(--component-textField-background);
 	box-shadow: 0 0 0 1px var(--component-textField-border);
+
+	&:hover {
+		--component-textField-border: var(--pr-t-color-input-border-hover);
+	}
 
 	&:has(.textField-input-value:focus-visible) {
 		@include a11y.focusVisible($offset: 3px);
@@ -16,23 +21,19 @@
 
 	.textField-input-affix-toggle {
 		pointer-events: auto;
-		width: var(--component-textField-affix-size);
-		height: var(--component-textField-affix-size);
-		color: var(--palettes-neutral-600);
+		inline-size: var(--component-textField-affix-size);
+		block-size: var(--component-textField-affix-size);
+		color: var(--pr-t-color-input-icon);
 	}
 
 	@at-root ($atRoot) {
 		.textField-input {
 			display: flex;
 			align-items: center;
-			width: 100%;
+			inline-size: 100%;
 			border-radius: var(--commons-borderRadius-M);
 			background-color: var(--component-textField-background);
 			position: relative;
-
-			&:hover {
-				--component-textField-border: var(--palettes-neutral-400);
-			}
 
 			&:has(.textField-input-affix-icon) {
 				--component-textField-affix-padding: 2.5rem;
@@ -55,27 +56,40 @@
 			}
 		}
 
+		.textField-input-valueClone,
 		.textField-input-value {
 			border: 0;
 			outline: 0;
 			line-height: var(--component-textField-lineHeight);
 			font-size: var(--component-textField-fontSize);
-			width: 100%;
-			padding: var(--component-textField-padding) var(--component-textField-affix-padding) var(--component-textField-padding)
-				var(--component-textField-padding);
+			inline-size: 100%;
+			padding-block: var(--component-textField-padding) var(--component-textField-padding);
+			padding-inline: var(--component-textField-padding) var(--component-textField-affix-padding);
 			background-color: transparent;
 			color: var(--component-textField-color);
+
+			&:is(textarea, div) {
+				max-block-size: var(--component-textField-maxHeight);
+
+				@supports not (height: 1dvh) {
+					--component-textField-maxHeight: var(--component-textField-maxHeightFallback);
+				}
+			}
 
 			&::placeholder {
 				color: var(--component-textField-placeholder);
 			}
 
 			&:is(textarea) {
-				resize: vertical;
-				min-height: calc(2lh + var(--component-textField-padding) * 2);
+				resize: block;
+				min-block-size: calc(2lh + var(--component-textField-padding) * 2);
 
 				&:not([rows]) {
-					height: calc(3lh + var(--component-textField-padding) * 2);
+					block-size: calc(3lh + var(--component-textField-padding) * 2);
+				}
+
+				&[rows='1'] {
+					min-block-size: calc(1lh + var(--component-textField-padding) * 2);
 				}
 			}
 		}
@@ -85,13 +99,13 @@
 			align-items: center;
 			gap: var(--pr-t-spacings-100);
 			position: absolute;
-			right: var(--pr-t-spacings-100);
+			inset-inline-end: var(--pr-t-spacings-100);
 			pointer-events: none;
 		}
 
 		.textField-input-affix-icon {
 			@include icon.M;
-			color: var(--palettes-neutral-600);
+			color: var(--pr-t-color-input-icon);
 			pointer-events: none;
 		}
 
@@ -101,35 +115,36 @@
 
 		.textField-prefix {
 			display: flex;
-			padding-left: var(--component-textField-padding);
+			padding-inline-start: var(--component-textField-padding);
 			align-items: center;
-			color: var(--component-textField-prefix-color);
+			color: var(--pr-t-color-input-text-suffix);
 			line-height: var(--component-textField-lineHeight);
 			font-size: var(--component-textField-fontSize);
-			border-top-left-radius: var(--commons-borderRadius-M);
-			border-bottom-left-radius: var(--commons-borderRadius-M);
+			border-start-start-radius: var(--commons-borderRadius-M);
+			border-end-start-radius: var(--commons-borderRadius-M);
+			flex-shrink: 0;
 
 			~ .textField-input {
-				border-top-left-radius: 0;
-				border-bottom-left-radius: 0;
+				border-start-start-radius: 0;
+				border-end-start-radius: 0;
 			}
 		}
 
 		.textField-suffix {
 			display: flex;
-			padding-right: var(--component-textField-padding);
+			padding-inline-end: var(--component-textField-padding);
 			align-items: center;
-			color: var(--component-textField-prefix-color);
+			color: var(--pr-t-color-input-text-suffix);
 			line-height: var(--component-textField-lineHeight);
 			font-size: var(--component-textField-fontSize);
-			border-top-right-radius: var(--commons-borderRadius-M);
-			border-bottom-right-radius: var(--commons-borderRadius-M);
+			border-start-end-radius: var(--commons-borderRadius-M);
+			border-end-end-radius: var(--commons-borderRadius-M);
 			order: 1;
 			flex-shrink: 0;
 
 			~ .textField-input {
-				border-top-right-radius: 0;
-				border-bottom-right-radius: 0;
+				border-start-end-radius: 0;
+				border-end-end-radius: 0;
 			}
 		}
 	}

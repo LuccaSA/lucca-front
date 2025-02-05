@@ -11,6 +11,8 @@
 		EMPLOYEE_CARD_PANEL_UNTIL_TOMORROW_MORNING_LABEL: 'Until tomorrow morning',
 		EMPLOYEE_CARD_PANEL_UNTIL_DATE_LABEL: 'Until {{date}} inclusive',
 		EMPLOYEE_CARD_PANEL_UNTIL_MORNING_DATE_LABEL: 'Until {{date}} morning',
+		EMPLOYEE_CARD_PANEL_WORKING_LOCATION: 'Location',
+		EMPLOYEE_CARD_PANEL_PLANNING: 'Planning',
 	},
 	de: {
 		EMPLOYEE_CARD_PANEL_COMING_ON_LABEL: 'Geplanter Dienstantritt am {{date}}',
@@ -24,6 +26,8 @@
 		EMPLOYEE_CARD_PANEL_UNTIL_TOMORROW_MORNING_LABEL: 'Bis morgen Vormittag',
 		EMPLOYEE_CARD_PANEL_UNTIL_DATE_LABEL: 'Bis einschließlich {{date}}',
 		EMPLOYEE_CARD_PANEL_UNTIL_MORNING_DATE_LABEL: 'Bis {{date}} morgens',
+		EMPLOYEE_CARD_PANEL_WORKING_LOCATION: 'Standort',
+		EMPLOYEE_CARD_PANEL_PLANNING: 'Planning',
 	},
 	fr: {
 		EMPLOYEE_CARD_PANEL_COMING_ON_LABEL: 'Arrivée prévue le {{date}}',
@@ -37,6 +41,8 @@
 		EMPLOYEE_CARD_PANEL_UNTIL_TOMORROW_MORNING_LABEL: 'Jusqu’à demain matin',
 		EMPLOYEE_CARD_PANEL_UNTIL_DATE_LABEL: "Jusqu'au {{date}} inclus",
 		EMPLOYEE_CARD_PANEL_UNTIL_MORNING_DATE_LABEL: "Jusqu'au {{date}} matin",
+		EMPLOYEE_CARD_PANEL_WORKING_LOCATION: 'Emplacement',
+		EMPLOYEE_CARD_PANEL_PLANNING: 'Planning',
 	},
 	it: {
 		EMPLOYEE_CARD_PANEL_COMING_ON_LABEL: 'Arrivo previsto il{{date}}',
@@ -50,6 +56,8 @@
 		EMPLOYEE_CARD_PANEL_UNTIL_TOMORROW_MORNING_LABEL: 'Fino a domani mattina',
 		EMPLOYEE_CARD_PANEL_UNTIL_DATE_LABEL: 'Fino al {{date}} incluso',
 		EMPLOYEE_CARD_PANEL_UNTIL_MORNING_DATE_LABEL: 'Fino al mattino del {{date}}',
+		EMPLOYEE_CARD_PANEL_WORKING_LOCATION: 'Posizione',
+		EMPLOYEE_CARD_PANEL_PLANNING: 'Planning',
 	},
 	nl: {
 		EMPLOYEE_CARD_PANEL_COMING_ON_LABEL: 'Verwachte aankomst op {{date}}',
@@ -63,6 +71,8 @@
 		EMPLOYEE_CARD_PANEL_UNTIL_TOMORROW_MORNING_LABEL: 'Tot morgenochtend',
 		EMPLOYEE_CARD_PANEL_UNTIL_DATE_LABEL: 'Tot en met {{date}}',
 		EMPLOYEE_CARD_PANEL_UNTIL_MORNING_DATE_LABEL: 'Tot {{date}} ochtend',
+		EMPLOYEE_CARD_PANEL_WORKING_LOCATION: 'Locatie',
+		EMPLOYEE_CARD_PANEL_PLANNING: 'Planning',
 	},
 	'nl-BE': {
 		EMPLOYEE_CARD_PANEL_COMING_ON_LABEL: 'Verwachte aankomst op {{date}}',
@@ -76,6 +86,8 @@
 		EMPLOYEE_CARD_PANEL_UNTIL_TOMORROW_MORNING_LABEL: 'Tot morgenochtend',
 		EMPLOYEE_CARD_PANEL_UNTIL_DATE_LABEL: 'Tot en met {{date}}',
 		EMPLOYEE_CARD_PANEL_UNTIL_MORNING_DATE_LABEL: 'Tot {{date}} ochtend',
+		EMPLOYEE_CARD_PANEL_WORKING_LOCATION: 'Locatie',
+		EMPLOYEE_CARD_PANEL_PLANNING: 'Planning',
 	},
 	es: {
 		EMPLOYEE_CARD_PANEL_COMING_ON_LABEL: 'Llegada prevista el {{date}}',
@@ -89,6 +101,8 @@
 		EMPLOYEE_CARD_PANEL_UNTIL_TOMORROW_MORNING_LABEL: 'Hasta mañana por la mañana',
 		EMPLOYEE_CARD_PANEL_UNTIL_DATE_LABEL: 'Hasta el {{date}} incluido',
 		EMPLOYEE_CARD_PANEL_UNTIL_MORNING_DATE_LABEL: 'Hasta el {{date}} por la mañana',
+		EMPLOYEE_CARD_PANEL_WORKING_LOCATION: 'Ubicación',
+		EMPLOYEE_CARD_PANEL_PLANNING: 'Planning',
 	},
 	pt: {
 		EMPLOYEE_CARD_PANEL_COMING_ON_LABEL: 'Chegada prevista para {{date}}',
@@ -102,5 +116,7 @@
 		EMPLOYEE_CARD_PANEL_UNTIL_TOMORROW_MORNING_LABEL: 'Até amanhã de manhã',
 		EMPLOYEE_CARD_PANEL_UNTIL_DATE_LABEL: 'Até {{date}} incluído',
 		EMPLOYEE_CARD_PANEL_UNTIL_MORNING_DATE_LABEL: 'Até {{date}} de manhã',
+		EMPLOYEE_CARD_PANEL_WORKING_LOCATION: 'Localização',
+		EMPLOYEE_CARD_PANEL_PLANNING: 'Planning',
 	},
 };

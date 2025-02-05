@@ -42,7 +42,11 @@
 @mixin uploaded {
 	~ .file-content {
 		.file-title {
-			color: var(--palettes-success-700);
+			color: var(--palettes-success-800);
+		}
+
+		.file-icon {
+			color: var(--palettes-success-800);
 		}
 
 		.file-formats {
@@ -58,7 +62,11 @@
 @mixin invalid {
 	~ .file-content {
 		.file-title {
-			color: var(--palettes-error-700);
+			color: var(--palettes-error-800);
+		}
+
+		.file-icon {
+			color: var(--palettes-error-800);
 		}
 
 		.file-formats {

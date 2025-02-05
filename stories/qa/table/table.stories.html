@@ -474,6 +474,41 @@
 			</tfoot>
 		</table>
 	</div>
+
+	<div class="card">
+		<table class="table mod-card">
+			<thead class="table-head">
+				<tr class="table-head-row">
+					<th class="table-head-row-cell">Table head</th>
+					<th class="table-head-row-cell mod-alignRight">Table head</th>
+				</tr>
+			</thead>
+			<tbody class="table-body">
+				<tr class="table-body-row">
+					<td class="table-body-row-cell">Table cell</td>
+					<td class="table-body-row-cell mod-actions">
+						<button class="button mod-onlyIcon mod-text" type="button">
+							<span aria-hidden="true" class="lucca-icon icon-officePen"></span><span class="u-mask">Edit</span>
+						</button>
+						<button class="button mod-onlyIcon mod-text" type="button">
+							<span aria-hidden="true" class="lucca-icon icon-trashDelete"></span><span class="u-mask">Delete</span>
+						</button>
+					</td>
+				</tr>
+				<tr class="table-body-row">
+					<td class="table-body-row-cell">Table cell</td>
+					<td class="table-body-row-cell mod-actions">
+						<button class="button mod-onlyIcon mod-text" type="button">
+							<span aria-hidden="true" class="lucca-icon icon-officePen"></span><span class="u-mask">Edit</span>
+						</button>
+						<button class="button mod-onlyIcon mod-text" type="button">
+							<span aria-hidden="true" class="lucca-icon icon-trashDelete"></span><span class="u-mask">Delete</span>
+						</button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
 </section>
 
 <section class="contentSection">
@@ -484,19 +519,19 @@
 			<tr class="table-head-row">
 				<th class="table-head-row-cell">
 					Head cell
-					<div class="textfield mod-search mod-block mod-S pr-u-marginTop100">
+					<div class="textfield mod-search mod-block mod-S pr-u-marginBlockStart100">
 						<input class="textfield-input" type="text" placeholder="Search" />
 					</div>
 				</th>
 				<th class="table-head-row-cell">
 					Head cell
-					<div class="textfield mod-search mod-block mod-S pr-u-marginTop100">
+					<div class="textfield mod-search mod-block mod-S pr-u-marginBlockStart100">
 						<input class="textfield-input" type="text" placeholder="Search" />
 					</div>
 				</th>
 				<th class="table-head-row-cell">
 					Head cell
-					<div class="textfield mod-search mod-block mod-S pr-u-marginTop100">
+					<div class="textfield mod-search mod-block mod-S pr-u-marginBlockStart100">
 						<input class="textfield-input" type="text" placeholder="Search" />
 					</div>
 				</th>
@@ -562,8 +597,8 @@
 </section>
 <!-- Sticky Header -->
 <section class="contentSection">
-	<h2 class="u-marginTopM">Sticky header</h2>
-	<div style="max-height: 150px" class="u-overflowAuto">
+	<h2>Sticky header</h2>
+	<div style="max-block-size: 150px" class="u-overflowAuto">
 		<table class="table mod-layoutFixed mod-stickyHeader">
 			<thead class="table-head">
 				<tr class="table-head-row">
@@ -611,8 +646,8 @@
 		><b>Tip: </b>The value of <code class="code">--sticky-header-shadow-offset-top</code> on
 		<code class="code">.table-body-row.mod-stickyHeader-shadow</code> must be equal to the table header height</em
 	>
-	<h2 class="u-marginTopM">Sticky header with shadow on scroll</h2>
-	<div style="max-height: 150px" class="u-overflowAuto">
+	<h2>Sticky header with shadow on scroll</h2>
+	<div style="max-block-size: 150px" class="u-overflowAuto">
 		<table class="table mod-layoutFixed mod-stickyHeader" [attr.style]="'--table-stickyHeader-shadow-offset: 37px'">
 			<thead class="table-head">
 				<tr class="table-head-row">
@@ -692,7 +727,7 @@
 			</tr>
 		</tbody>
 	</table>
-	<h2 class="u-marginTopM">Fixed layout columns starting at breakpoint S</h2>
+	<h2>Fixed layout columns starting at breakpoint S</h2>
 	<table class="table mod-layoutFixedAtMediaMinS">
 		<thead class="table-head">
 			<tr class="table-head-row">
@@ -719,7 +754,7 @@
 <!-- Sticky columns -->
 <section class="contentSection">
 	<h2>Sticky columns</h2>
-	<div style="max-width: 100%" class="u-overflowAuto">
+	<div style="max-inline-size: 100%" class="u-overflowAuto">
 		<table class="table mod-layoutFixed mod-stickyColumn">
 			<thead class="table-head">
 				<tr class="table-head-row">
@@ -810,7 +845,7 @@
 <!-- Sticky columns with shadow-->
 <section class="contentSection u-whiteSpaceNowrap">
 	<h2>Sticky columns with shadow on scroll</h2>
-	<div style="max-width: 100%" class="u-overflowAuto">
+	<div style="max-inline-size: 100%" class="u-overflowAuto">
 		<table class="table mod-layoutFixedAtMediaMinS mod-stickyColumnAtMediaMinS">
 			<thead class="table-head">
 				<tr class="table-head-row">
@@ -1021,8 +1056,8 @@
 </section>
 <!-- All in -->
 <section class="contentSection u-whiteSpaceNowrap">
-	<h2 class="u-marginTopM">Sticky columns + header with shadow on scroll starting at breakpoint S</h2>
-	<div style="max-width: 100%; max-height: 150px" class="u-overflowAuto">
+	<h2>Sticky columns + header with shadow on scroll starting at breakpoint S</h2>
+	<div style="max-inline-size: 100%; max-block-size: 150px" class="u-overflowAuto">
 		<table
 			class="table mod-layoutFixedAtMediaMinS mod-stickyColumnAtMediaMinS mod-stickyHeader"
 			[attr.style]="'--table-stickyHeader-shadow-offset: 2.25rem'"

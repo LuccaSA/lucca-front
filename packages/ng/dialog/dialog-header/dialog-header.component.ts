@@ -45,8 +45,7 @@ export class DialogHeaderComponent implements OnInit {
 				this.#renderer.setAttribute(header, 'id', id);
 				this.#renderer.addClass(header, 'dialog-inside-header-container-title');
 			}
-			// TODO change this to _addAriaLabelledBy once cdk is > 17.1
-			(this.#ref.cdkRef.containerInstance as CdkDialogContainer)._ariaLabelledByQueue.push(id);
+			(this.#ref.cdkRef.containerInstance as CdkDialogContainer)?._addAriaLabelledBy(id);
 		});
 	}
 }

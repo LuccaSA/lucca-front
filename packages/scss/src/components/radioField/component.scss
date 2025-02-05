@@ -1,10 +1,11 @@
 @use '@lucca-front/icons/src/commons/utils/icon';
 @use '@lucca-front/scss/src/commons/utils/a11y';
+@use '@lucca-front/scss/src/commons/utils/namespace';
 
-@mixin component($atRoot: 'without: rule') {
+@mixin component($atRoot: namespace.$defaultAtRoot) {
 	position: relative;
-	width: fit-content;
-	height: fit-content;
+	inline-size: fit-content;
+	block-size: fit-content;
 	display: grid;
 	grid-template-areas: 'radio';
 	grid-template-columns: var(--component-radioField-size);
@@ -39,8 +40,8 @@
 			display: flex;
 			align-items: center;
 			justify-content: center;
-			width: 100%;
-			height: 100%;
+			inline-size: 100%;
+			block-size: 100%;
 			transform: scale(0);
 			transition-property: transform;
 			transition-duration: var(--commons-animations-durations-fast);
@@ -62,9 +63,11 @@
 
 		.radioField-input {
 			z-index: 1;
-			opacity: 0;
+			opacity: 0.0001;
 			cursor: pointer;
 			grid-area: radio;
+			inline-size: 100%;
+			block-size: 100%;
 		}
 	}
 }

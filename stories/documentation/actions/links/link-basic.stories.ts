@@ -1,17 +1,16 @@
 import { Meta, StoryFn } from '@storybook/angular';
 
-interface LinkBasicStory {
-}
+interface LinkBasicStory {}
 
 export default {
 	title: 'Documentation/Actions/Link/Basic',
-	argTypes: {
-	},
+	argTypes: {},
 } as Meta;
 
 function getTemplate(args: LinkBasicStory): string {
-	return `<a href="#" class="link">Lien</a>
-<a class="link mod-icon" href="#" target="_blank">Lien externe <span aria-hidden="true" class="lucca-icon icon-arrowExternal"></span><span class="u-mask">Ouvrir dans une nouvelle fenêtre</span></a>`;
+	return `<a href="#" class="link">Text link</a>
+<a class="link mod-icon" href="#" target="_blank">Text link<!-- no text node here --><span aria-hidden="true" class="lucca-icon icon-arrowExternal"></span><span class="u-mask">Open in a new window</span></a>
+`;
 }
 
 const Template: StoryFn<LinkBasicStory> = (args) => ({
@@ -20,10 +19,8 @@ const Template: StoryFn<LinkBasicStory> = (args) => ({
 	styles: [
 		`
 		:host {
-			display: block;
-		}
-		a {
-			margin-right: 1rem;
+			display: flex;
+			gap: var(--pr-t-spacings-200);
 		}
 		`,
 	],

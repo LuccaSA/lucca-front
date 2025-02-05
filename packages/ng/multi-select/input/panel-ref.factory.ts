@@ -6,9 +6,11 @@ import { LuMultiSelectPanelComponent } from '../panel/index';
 import { MULTI_SELECT_INPUT } from '../select.model';
 import { LuMultiSelectPanelRef } from './panel.model';
 import { LuMultiSelectInputComponent } from './select-input.component';
+import { addAttributesOnCdkContainer, SELECT_ID, SELECT_LABEL_ID } from '@lucca-front/ng/core-select';
 
 class MultiSelectPanelRef<T> extends LuMultiSelectPanelRef<T> {
 	instance: LuMultiSelectPanelComponent<T>;
+	changeDetectorRef: ChangeDetectorRef;
 	private panelRef: ComponentRef<LuMultiSelectPanelComponent<T>>;
 	private portalRef: ComponentPortal<LuMultiSelectPanelComponent<T>>;
 
@@ -31,6 +33,7 @@ class MultiSelectPanelRef<T> extends LuMultiSelectPanelRef<T> {
 		this.portalRef = new ComponentPortal<LuMultiSelectPanelComponent<T>>(LuMultiSelectPanelComponent, undefined, injector);
 		this.panelRef = overlayRef.attach(this.portalRef);
 		this.instance = this.panelRef.instance;
+		this.changeDetectorRef = this.panelRef.changeDetectorRef;
 
 		overlayRef
 			.backdropClick()
@@ -80,6 +83,8 @@ export class LuMultiSelectPanelRefFactory {
 	protected positionBuilder = inject(OverlayPositionBuilder);
 	protected scrollStrategies = inject(ScrollStrategyOptions);
 	protected parentInjector = inject(Injector);
+	private selectLabelId = inject(SELECT_LABEL_ID);
+	private selectId = inject(SELECT_ID);
 
 	buildPanelRef<T>(selectInput: LuMultiSelectInputComponent<T>, defaultOverlayConfigOverride: OverlayConfig = {}): LuMultiSelectPanelRef<T> {
 		const defaultOverlayConfig = this.buildDefaultOverlayConfig(defaultOverlayConfigOverride);
@@ -88,6 +93,8 @@ export class LuMultiSelectPanelRefFactory {
 
 		overlayRef.hostElement.style.transitionProperty = 'height';
 		overlayRef.hostElement.style.transitionDuration = 'var(--commons-animations-durations-standard)';
+
+		addAttributesOnCdkContainer(overlayRef, this.selectLabelId, this.selectId);
 
 		return new MultiSelectPanelRef(overlayRef, this.parentInjector, selectInput, defaultOverlayConfig.positionStrategy);
 	}

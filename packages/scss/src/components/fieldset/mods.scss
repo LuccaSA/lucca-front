@@ -1,4 +1,11 @@
+@use '@lucca-front/scss/src/components/title/exports' as title;
 @use '@lucca-front/scss/src/commons/utils/a11y';
+
+@mixin S {
+	.fieldset-title {
+		@include title.h4;
+	}
+}
 
 @mixin horizontal {
 	grid-template-columns: 1fr auto;

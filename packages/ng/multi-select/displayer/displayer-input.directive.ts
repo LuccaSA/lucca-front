@@ -1,9 +1,10 @@
-import { DestroyRef, Directive, ElementRef, HostBinding, inject, OnInit } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { DestroyRef, Directive, ElementRef, HostBinding, HostListener, inject, OnInit } from '@angular/core';
+import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { ILuOptionContext, LU_OPTION_CONTEXT } from '@lucca-front/ng/core-select';
+import { of } from 'rxjs';
 import { startWith, switchMap } from 'rxjs/operators';
 import { LuMultiSelectInputComponent } from '../input';
-import { of } from 'rxjs';
+import { InputDirective } from '@lucca-front/ng/form-field';
 
 @Directive({
 	selector: '[luMultiSelectDisplayerInput]',
@@ -12,7 +13,9 @@ import { of } from 'rxjs';
 		'aria-haspopup': 'listbox',
 		role: 'combobox',
 		class: 'multipleSelect-displayer-search',
+		type: 'text',
 	},
+	hostDirectives: [InputDirective],
 })
 export class LuMultiSelectDisplayerInputDirective<T> implements OnInit {
 	select = inject<LuMultiSelectInputComponent<T>>(LuMultiSelectInputComponent);
@@ -24,50 +27,61 @@ export class LuMultiSelectDisplayerInputDirective<T> implements OnInit {
 	destroyRef = inject(DestroyRef);
 
 	@HostBinding('attr.aria-expanded')
-	panelOpen = false;
+	get panelOpen() {
+		return this.#panelOpen();
+	}
 
 	@HostBinding('attr.aria-activedescendant')
-	activeDescendant = '';
+	get activeDescendant() {
+		return this.#activeDescendant();
+	}
 
 	@HostBinding('attr.aria-controls')
-	controls = this.select?.ariaControls;
+	get controls() {
+		return this.select.ariaControls;
+	}
 
 	@HostBinding('disabled')
-	disabled = false;
+	get disabled() {
+		return this.#disabled();
+	}
 
 	@HostBinding('placeholder')
-	placeholder = '';
+	get placeholder() {
+		return this.#placeholder();
+	}
+
+	@HostBinding('readonly')
+	get readonly() {
+		return !this.select.searchable;
+	}
+
+	@HostListener('input')
+	onInput() {
+		this.select.clueChanged(this.elementRef.nativeElement.value);
+	}
+
+	#panelOpen = toSignal(this.select.isPanelOpen$);
+	#activeDescendant = toSignal(this.select.activeDescendant$);
+	#disabled = toSignal(this.select.disabled$);
+	#placeholder = toSignal(
+		this.context.option$.pipe(
+			startWith([]),
+			switchMap((options) => {
+				if ((options || []).length > 0) {
+					return of('');
+				}
+				return this.select.placeholder$;
+			}),
+		),
+	);
 
 	ngOnInit(): void {
-		this.context.option$
-			.pipe(
-				startWith([]),
-				switchMap((options) => {
-					if ((options || []).length > 0) {
-						return of('');
-					}
-					return this.select.placeholder$;
-				}),
-				takeUntilDestroyed(this.destroyRef),
-			)
-			.subscribe((placeholder) => {
-				this.placeholder = placeholder;
-			});
-		this.select.isPanelOpen$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((open) => {
-			this.panelOpen = open;
-		});
-		this.select.activeDescendant$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((activeDescendant) => {
-			// Pushing this to next cycle to avoid expression has changed while it was checked
-			setTimeout(() => {
-				this.activeDescendant = activeDescendant;
-			}, 1);
-		});
-		this.context.isDisabled$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((disabled) => {
-			this.disabled = disabled;
-		});
-		this.select.focusInput$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {
-			this.elementRef.nativeElement.value = '';
-			this.select.clueChanged('');
+		this.select.focusInput$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((data?: { keepClue: boolean }) => {
+			if (!data?.keepClue) {
+				this.elementRef.nativeElement.value = '';
+				this.select.clueChanged('');
+			}
 			this.elementRef.nativeElement.focus();
 		});
 		this.select.emptyClue$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {

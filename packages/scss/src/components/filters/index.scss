@@ -15,10 +15,3 @@
 		@include stickyNavSide;
 	}
 }
-
-.navSide.mod-compact ~ .main-content,
-.mod-withMenuCompact .main-content {
-	.filters.mod-sticky {
-		@include stickyNavSideCompact;
-	}
-}

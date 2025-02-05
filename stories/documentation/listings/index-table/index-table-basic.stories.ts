@@ -19,7 +19,14 @@ function getTemplate(args: IndexTableBasicStory): string {
 	<tbody class="indexTable-body">
 		<tr class="indexTable-body-row">
 			<td class="indexTable-body-row-cell">
-				<a href="#" class="indexTable-body-row-cell-link">Content</a>
+				<a href="#" class="indexTable-body-row-cell-link">Content <code class="code">a</code></a>
+			</td>
+			<td class="indexTable-body-row-cell">Content</td>
+			<td class="indexTable-body-row-cell">Content</td>
+		</tr>
+		<tr class="indexTable-body-row">
+			<td class="indexTable-body-row-cell">
+				<button type="button" class="indexTable-body-row-cell-link">Content <code class="code">button</code></button>
 			</td>
 			<td class="indexTable-body-row-cell">Content</td>
 			<td class="indexTable-body-row-cell">Content</td>
@@ -46,9 +53,9 @@ function getTemplate(args: IndexTableBasicStory): string {
 		<tr class="indexTable-body-row">
 			<td class="indexTable-body-row-cell">
 				<a href="#" class="indexTable-body-row-cell-action">Action</a>
-				Content
+				Content (width deprecated action)
 			</td>
-			<td class="indexTable-body-row-cell">Content with deprecated action</td>
+			<td class="indexTable-body-row-cell">Content</td>
 			<td class="indexTable-body-row-cell">Content</td>
 		</tr>
 	</tbody>

@@ -1,7 +1,8 @@
 @use '@lucca-front/scss/src/commons/utils/a11y';
 @use '@lucca-front/scss/src/commons/utils/container';
+@use '@lucca-front/scss/src/commons/utils/namespace';
 
-@mixin component($atRoot: 'without: rule') {
+@mixin component($atRoot: namespace.$defaultAtRoot) {
 	background-color: var(--components-filterBar-backgroundColor);
 	border-radius: var(--commons-borderRadius-L);
 	border: var(--commons-divider-width) solid var(--commons-border-200);

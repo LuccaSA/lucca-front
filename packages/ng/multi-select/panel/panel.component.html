@@ -16,6 +16,8 @@
 		aria-multiselectable="true"
 		(scroll)="onScroll($event)"
 	>
+		<ng-container *luPortal="selectInput.panelHeaderTpl()" />
+
 		<div class="lu-picker-content-option">
 			<ng-container *ngIf="grouping && ctx.groupTemplateLocation === 'group-header'">
 				<div
@@ -27,13 +29,13 @@
 					<div class="lu-picker-content-option-group-title" role="presentation">
 						<ng-container *luPortal="grouping.content; context: { $implicit: group }" />
 						<button
-							*ngIf="group.options | luNotSelectedOptions:selectedOptions:optionComparer as notSelectedOptions"
+							*ngIf="group.options | luOptionsGroupContext:selectedOptions:optionComparer as groupCtx"
 							type="button"
 							class="link"
 							[id]="selectId + '-group-' + group.key"
-							(click)="toggleOptions(notSelectedOptions, group.options)"
+							(click)="toggleOptions(groupCtx.notSelectedOptions, group.options)"
 						>
-							{{ notSelectedOptions.length ? intl.selectAll : intl.unselectAll }}
+							{{ groupCtx.isGroupSelected ? intl.unselectAll : intl.selectAll }}
 						</button>
 					</div>
 					<ng-template [ngTemplateOutlet]="optionsList" [ngTemplateOutletContext]="{ $implicit: group.options }" />
@@ -47,7 +49,7 @@
 				<lu-select-option
 					*ngFor="let option of options; let index = index; trackBy: trackOptionsBy"
 					[option]="option"
-					[optionTpl]="optionTpl"
+					[optionTpl]="optionTpl()"
 					[optionIndex]="index"
 					[grouping]="ctx.groupTemplateLocation === 'option' ? grouping : undefined"
 					[scrollIntoViewOptions]="{ block: 'nearest' }"
@@ -60,11 +62,10 @@
 			</div>
 		</div>
 		<div *ngIf="loading$ | async" class="lu-picker-content-loading">
-			<div class="loading"></div>
-			<span>{{intl.loading}}</span>
+			<div class="loading">{{intl.loading}}</div>
 		</div>
 		<div class="lu-picker-content-add" *ngIf="ctx.shouldDisplayAddOption">
-			<button class="button mod-text mod-icon palette-product" type="button" (click)="selectInput.emitAddOption()">
+			<button class="button mod-text mod-withIcon palette-product" type="button" (click)="selectInput.emitAddOption()">
 				<span aria-hidden="true" class="lucca-icon icon-mathsPlus"></span>
 				<ng-container *luPortal="selectInput.addOptionLabel" />
 			</button>

@@ -1,9 +1,11 @@
 @use '@lucca-front/scss/src/commons/utils/reset';
+@use '@lucca-front/scss/src/commons/utils/namespace';
 
-@mixin component($atRoot: 'without: rule') {
+@mixin component($atRoot: namespace.$defaultAtRoot) {
 	list-style-type: none;
 	padding: 0;
-	margin: var(--pr-t-spacings-200) 0;
+	margin-block: var(--pr-t-spacings-200);
+	margin-inline: 0;
 	display: flex;
 	align-items: center;
 
@@ -18,7 +20,7 @@
 					content: '';
 					display: flex;
 					flex-grow: 1;
-					border-bottom: 2px solid var(--palettes-neutral-200);
+					border-block-end: 2px solid var(--palettes-neutral-200);
 					margin: var(--pr-t-spacings-100);
 				}
 			}
@@ -29,15 +31,15 @@
 		}
 
 		.timeline-step-title {
-			padding-left: 1.75rem;
+			padding-inline-start: 1.75rem;
 			position: relative;
 			display: block;
 			color: var(--palettes-product-700);
 			font-weight: 600;
 			margin: 0;
-			font-size: var(--sizes-M-fontSize);
-			line-height: var(--sizes-L-lineHeight);
-			min-width: 1.5rem;
+			font-size: var(--components-timeline-title-fontSize);
+			line-height: var(--components-timeline-title-lineHeight);
+			min-inline-size: 1.5rem;
 		}
 
 		.timeline-step-title,
@@ -45,16 +47,16 @@
 			&::before {
 				content: '';
 				color: var(--palettes-product-0);
-				width: 1rem;
-				height: 1rem;
+				inline-size: 1rem;
+				block-size: 1rem;
 				display: flex;
 				align-items: center;
 				justify-content: center;
 				border-radius: var(--commons-borderRadius-full);
 				background-color: var(--palettes-product-700);
 				position: absolute;
-				left: var(--pr-t-spacings-50);
-				top: 50%;
+				inset-inline-start: var(--pr-t-spacings-50);
+				inset-block-start: 50%;
 				transform: translateY(-50%);
 			}
 		}
@@ -66,7 +68,7 @@
 			text-decoration: none;
 			cursor: default;
 			display: inline-block;
-			width: auto;
+			inline-size: auto;
 
 			&:not([disabled]) {
 				&:hover,

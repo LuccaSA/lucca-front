@@ -12,6 +12,14 @@ export default {
 			imports: [FormFieldComponent, InputDirective, BrowserAnimationsModule, FormsModule],
 		}),
 	],
+	argTypes: {
+		width: {
+			options: [null, 20, 30, 40, 50, 60],
+			control: {
+				type: 'select',
+			},
+		},
+	},
 	render: (args, { argTypes }) => {
 		const { required, ...fieldArgs } = args;
 		return {
@@ -33,7 +41,7 @@ export default {
 	},
 } as Meta;
 
-export const Template: StoryObj<FormFieldComponent> = {
+export const Template: StoryObj<FormFieldComponent & { required: boolean }> = {
 	args: {
 		label: 'Label',
 		required: true,
@@ -45,5 +53,6 @@ export const Template: StoryObj<FormFieldComponent> = {
 		invalid: false,
 		counter: null,
 		rolePresentationLabel: false,
+		width: null,
 	},
 };

@@ -32,7 +32,6 @@ In your file styles.scss, add imports files and components you want to import to
 @forward '@lucca-front/ng/src/main';
 
 // Import SCSS components
-@forward '@lucca-front/scss/src/components/actionIcon';
 @forward '@lucca-front/scss/src/components/box';
 @forward '@lucca-front/scss/src/components/breadcrumbs';
 @forward '@lucca-front/scss/src/components/button';
@@ -47,7 +46,6 @@ In your file styles.scss, add imports files and components you want to import to
 @forward '@lucca-front/scss/src/components/container';
 @forward '@lucca-front/scss/src/components/contentSection';
 @forward '@lucca-front/scss/src/components/divider';
-@forward '@lucca-front/scss/src/components/emptyState';
 @forward '@lucca-front/scss/src/components/errorPage';
 @forward '@lucca-front/scss/src/components/field';
 @forward '@lucca-front/scss/src/components/file';
@@ -55,7 +53,6 @@ In your file styles.scss, add imports files and components you want to import to
 @forward '@lucca-front/scss/src/components/form';
 @forward '@lucca-front/scss/src/components/formLabel';
 @forward '@lucca-front/scss/src/components/gauge';
-@forward '@lucca-front/scss/src/components/grid';
 @forward '@lucca-front/scss/src/components/grid';
 @forward '@lucca-front/scss/src/components/header';
 @forward '@lucca-front/scss/src/components/label';
@@ -171,4 +168,4 @@ In order to work on Lucca Front, we use Storybook to display components.
 
 ## TODO
 
-- [ ] Gestion de l'espace
+- [ ] Gestion de l’espace

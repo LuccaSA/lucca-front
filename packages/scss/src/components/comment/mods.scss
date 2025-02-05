@@ -1,8 +1,15 @@
 @use '@lucca-front/scss/src/commons/utils/a11y';
+@use '@lucca-front/scss/src/commons/utils/namespace';
 
 @mixin S {
 	--components-comment-text-fontSize: var(--sizes-S-fontSize);
 	--components-comment-text-lineHeight: var(--sizes-S-lineHeight);
+}
+
+@mixin wrapperS {
+	.comment {
+		@include S;
+	}
 }
 
 @mixin noAvatar {
@@ -10,7 +17,7 @@
 }
 
 @mixin narrow {
-	@at-root {
+	@at-root (namespace.$defaultAtRoot) {
 		.comment-infos-content {
 			--components-comment-info-content-display: flex;
 		}
@@ -30,5 +37,21 @@
 				@include a11y.mask;
 			}
 		}
+	}
+}
+
+@mixin chatAnswer {
+	.comment {
+		--components-comment-info-direction: row-reverse;
+		--components-comment-background-color: var(--palettes-product-50);
+		--components-comment-align: end;
+		--components-comment-margin: auto;
+		--components-comment-border-radius: var(--commons-borderRadius-L) var(--commons-borderRadius-M) var(--commons-borderRadius-L)
+			var(--commons-borderRadius-L);
+	}
+
+	.comment-content {
+		margin-block: 0;
+		margin-inline: 0 var(--components-comment-content-margin);
 	}
 }

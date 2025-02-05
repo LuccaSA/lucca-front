@@ -17,6 +17,9 @@ export default {
 				type: 'select',
 			},
 		},
+		label: {
+			description: '[v18.2] PortalContent',
+		},
 	},
 } as Meta;
 

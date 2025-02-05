@@ -1,4 +1,6 @@
-@mixin component($atRoot: 'without: rule') {
+@use '@lucca-front/scss/src/commons/utils/namespace';
+
+@mixin component($atRoot: namespace.$defaultAtRoot) {
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
@@ -6,7 +8,7 @@
 	border: 0;
 	padding: 0;
 	margin: 0;
-	max-width: 100%;
+	max-inline-size: 100%;
 
 	.textfield-input,
 	.radiosfield-input,
@@ -39,7 +41,7 @@
 			color: var(--components-field-input-color);
 			outline: none;
 			position: relative;
-			width: 100%;
+			inline-size: 100%;
 
 			&::placeholder {
 				color: var(--palettes-neutral-200);
@@ -52,8 +54,8 @@
 			color: var(--components-field-label-color);
 			font-size: var(--sizes-M-fontSize);
 			line-height: var(--sizes-M-lineHeight);
-			min-height: var(--pr-t-spacings-200);
-			margin-bottom: var(--components-field-label-margin-bottom);
+			min-block-size: var(--pr-t-spacings-200);
+			margin-block-end: var(--components-field-label-margin-bottom);
 			transition-duration: var(--commons-animations-durations-fast);
 			transition-property: all;
 			overflow: hidden;
@@ -69,7 +71,7 @@
 		.checkboxesfield-messages {
 			font-size: var(--sizes-S-fontSize);
 			line-height: var(--sizes-S-lineHeight);
-			margin-top: var(--components-field-message-margin-top);
+			margin-block-start: var(--components-field-message-margin-top);
 
 			> * {
 				margin: 0;

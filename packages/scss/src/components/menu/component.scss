@@ -1,6 +1,7 @@
 @use '@lucca-front/scss/src/commons/utils/reset';
+@use '@lucca-front/scss/src/commons/utils/namespace';
 
-@mixin component($atRoot: 'without: rule') {
+@mixin component($atRoot: namespace.$defaultAtRoot) {
 	position: relative;
 	column-gap: var(--pr-t-spacings-400);
 	align-items: center;
@@ -11,22 +12,27 @@
 
 	&::after {
 		content: var(--components-menu-borderContent);
-		border-bottom-width: var(--commons-divider-width);
-		border-bottom-color: var(--commons-divider-color);
-		border-bottom-style: solid;
+		border-block-end-width: var(--commons-divider-width);
+		border-block-end-color: var(--commons-divider-color);
+		border-block-end-style: solid;
 		position: absolute;
-		height: 1px;
+		block-size: 1px;
 		inset: auto 0 0;
 	}
 
 	// .label is deprecated
 	.label {
-		margin-right: 0;
+		margin-inline-end: 0;
 		background-color: var(--palettes-neutral-100);
 		color: var(--palettes-neutral-700);
 	}
 
 	@at-root ($atRoot) {
+		.menu-containerOptionnal {
+			max-inline-size: var(--commons-container-maxWidth);
+			padding-inline: var(--commons-container-padding);
+		}
+
 		.menu-list {
 			@include reset.list;
 
@@ -56,16 +62,16 @@
 			transition-property: color;
 			position: relative;
 			text-decoration: none;
-			width: auto;
+			inline-size: auto;
 			z-index: 1;
-			scroll-margin-inline: var(--spacings-S);
+			scroll-margin-inline: var(--pr-t-spacings-200);
 
 			&::after {
 				background-color: var(--palettes-700, var(--palettes-product-700));
 				border-radius: var(--components-menu-listItemActionRadius);
 				transition-duration: var(--commons-animations-durations-fast);
-				height: var(--components-menu-listItemActionRadiusHeight);
-				width: var(--components-menu-listItemActionRadiusWidth);
+				block-size: var(--components-menu-listItemActionRadiusHeight);
+				inline-size: var(--components-menu-listItemActionRadiusWidth);
 				transform: var(--components-menu-listItemActionTransform);
 				inset: var(--components-menu-listItemActionInset);
 				transition-property: transform;
@@ -99,7 +105,7 @@
 				content: attr(data-content-after);
 
 				display: block;
-				height: 0;
+				block-size: 0;
 				overflow: hidden;
 				font-weight: 600;
 			}

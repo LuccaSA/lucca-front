@@ -1,4 +1,6 @@
-@mixin component($atRoot: 'without: rule') {
+@use '@lucca-front/scss/src/commons/utils/namespace';
+
+@mixin component($atRoot: namespace.$defaultAtRoot) {
 	border-radius: var(--components-box-border-radius);
 	margin: var(--components-box-margin);
 	padding: var(--components-box-padding);
@@ -10,8 +12,8 @@
 		.box-close {
 			position: absolute;
 			font-size: var(--sizes-M-fontSize);
-			right: var(--pr-t-spacings-50);
-			top: var(--pr-t-spacings-50);
+			inset-inline-end: var(--pr-t-spacings-50);
+			inset-block-start: var(--pr-t-spacings-50);
 			z-index: 1;
 		}
 	}

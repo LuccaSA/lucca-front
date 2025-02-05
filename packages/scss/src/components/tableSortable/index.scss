@@ -6,10 +6,21 @@
 .table-head-row-cell-sortableButton,
 .indexTable-head-row-cell-sortableButton {
 	@include vars;
+}
+
+// :not(.class) is only there to increase specificity when the class isn’t present
+// but the class should be present, and this code is temporary
+// .table-head-row-cell-sortableButton is deprecated
+// .indexTable-head-row-cell-sortableButton is deprecated
+.tableSortable.button,
+.tableSortable:not(.button),
+.table-head-row-cell-sortableButton,
+.indexTable-head-row-cell-sortableButton {
 	@include component;
 }
 
 .table-head-row-cell,
+.dataTable-head-row-cell,
 .indexTable-head-row-cell {
 	&.mod-alignRight {
 		// .table-head-row-cell-sortableButton is deprecated
@@ -58,7 +69,8 @@
 .table-head-row-cell {
 	&:not(:has(.tableSortable-arrows)) {
 		&.mod-sortable,
-		.table-head-row-cell-sortableButton {
+		.table-head-row-cell-sortableButton,
+		.indexTable-head-row-cell-sortableButton {
 			@include sortableLegacy;
 
 			.table.mod-S & {
@@ -91,8 +103,13 @@
 
 		&.mod-alignRight {
 			&.mod-sortable,
-			.table-head-row-cell-sortableButton {
+			.table-head-row-cell-sortableButton,
+			.indexTable-head-row-cell-sortableButton {
 				@include sortableLegacyAlignRight;
+			}
+
+			&.mod-sortable {
+				@include sortableLegacy2AlignRight;
 			}
 
 			&:is(.is-sorted-descending, .sortedDescending) {

@@ -48,9 +48,9 @@ export class LuDateSelectInputComponent<D> extends ALuSelectInputComponent<D> im
 	get format(): string {
 		switch (this.granularity) {
 			case ELuDateGranularity.year:
-				return 'Y';
+				return 'y';
 			case ELuDateGranularity.month:
-				return 'MM/Y';
+				return 'MM/y';
 			case ELuDateGranularity.day:
 			default:
 				return 'shortDate';

@@ -473,6 +473,7 @@ export const IconsList = [
 	{ icon: 'signShieldError', deprecated: false },
 	{ icon: 'signShieldSuccess', deprecated: false },
 	{ icon: 'signShieldWarning', deprecated: false },
+	{ icon: 'signWebhook', deprecated: false },
 	{ icon: 'signSuccess', deprecated: false },
 	{ icon: 'success', deprecated: true },
 	{ icon: 'signTranslation', deprecated: false },

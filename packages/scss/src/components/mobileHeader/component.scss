@@ -1,11 +1,14 @@
-@mixin component($atRoot: 'without: rule') {
+@use '@lucca-front/scss/src/commons/utils/namespace';
+
+@mixin component($atRoot: namespace.$defaultAtRoot) {
 	display: flex;
 	align-items: center;
 	gap: var(--pr-t-spacings-100);
 	background-color: var(--pr-t-elevation-surface-raised);
 	box-shadow: 0 1px 0 var(--commons-border-100);
-	padding: var(--pr-t-spacings-75) var(--pr-t-spacings-150);
-	min-height: 3.5rem;
+	padding-block: var(--pr-t-spacings-75);
+	padding-inline: var(--pr-t-spacings-150);
+	min-block-size: 3.5rem;
 
 	@at-root ($atRoot) {
 		.mobileHeader-title {

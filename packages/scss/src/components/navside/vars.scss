@@ -1,11 +1,8 @@
-@mixin vars($atRoot: 'without: rule') {
-	@at-root ($atRoot) {
-		:root {
-			--commons-navSide-width: 15rem;
-			--commons-navSide-compact-width: 7.5rem;
-			--commons-navSide-mobile-toggle-height: 3.5rem;
-		}
-	}
+@use '@lucca-front/scss/src/commons/utils/namespace';
+@use '@lucca-front/scss/src/commons/utils/media';
+
+@mixin vars($atRoot: namespace.$defaultAtRoot) {
+	// for this component some variables are placed in common
 
 	--components-navSide-offset-top: 0;
 	--components-navSide-padding-top: 0;

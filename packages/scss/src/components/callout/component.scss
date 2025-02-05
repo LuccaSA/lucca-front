@@ -1,9 +1,11 @@
 @use '@lucca-front/icons/src/commons/utils/icon';
 @use '@lucca-front/scss/src/commons/utils/reset';
 @use '@lucca-front/scss/src/commons/utils/a11y';
+@use '@lucca-front/scss/src/commons/utils/color';
 @use '@lucca-front/scss/src/components/button/exports' as button;
+@use '@lucca-front/scss/src/commons/utils/namespace';
 
-@mixin component($atRoot: 'without: rule') {
+@mixin component($atRoot: namespace.$defaultAtRoot) {
 	align-items: flex-start;
 	position: relative;
 	border-radius: var(--commons-borderRadius-L);
@@ -40,10 +42,12 @@
 		.callout-content-description-actions {
 			display: flex;
 			gap: var(--pr-t-spacings-75);
-			margin-top: var(--pr-t-spacings-50);
-			padding: var(--pr-t-spacings-50) 0;
+			margin-block-start: var(--pr-t-spacings-50);
+			padding-block: var(--pr-t-spacings-50);
+			padding-inline: 0;
 
 			.button {
+				@include color.palette('neutral');
 				@include button.S;
 			}
 		}
@@ -60,8 +64,8 @@
 			text-align: center;
 			transition-duration: var(--commons-animations-durations-fast);
 			transition-property: background-color;
-			height: var(--components-callout-kill-size);
-			width: var(--components-callout-kill-size);
+			block-size: var(--components-callout-kill-size);
+			inline-size: var(--components-callout-kill-size);
 
 			&:focus-visible {
 				@include a11y.focusVisible($borderRadius: var(--commons-borderRadius-M));

@@ -1,25 +1,15 @@
 import { AbstractControl } from '@angular/forms';
-import { ValidatePhoneNumberLengthResult } from './types';
-import { validatePhoneNumberLength } from 'libphonenumber-js';
-
-const INVALID_FLAGS: ValidatePhoneNumberLengthResult[] = ['INVALID_COUNTRY', 'NOT_A_NUMBER', 'TOO_SHORT', 'TOO_LONG', 'INVALID_LENGTH'];
+import { validatePhoneNumberLength, isValidPhoneNumber, CountryCode } from 'libphonenumber-js';
 
 export class PhoneNumberValidators {
-	static validPhoneNumber(control: AbstractControl<string>) {
+	static validPhoneNumber(control: AbstractControl<string>, countryCode?: CountryCode) {
 		if (control.value) {
-			// First, we check if current value is an invalid flag
-			if (INVALID_FLAGS.includes(control.value as ValidatePhoneNumberLengthResult)) {
-				return {
-					validPhoneNumber: control.value as ValidatePhoneNumberLengthResult,
-				};
+			const reason = validatePhoneNumberLength(control.value, countryCode);
+			if (reason) {
+				return { validPhoneNumber: reason };
 			}
-			// Then we check if current value is invalid, which can happen if it was set from server
-			// Note that validatePhoneNumberLength returns an error or undefined
-			const validationError = validatePhoneNumberLength(control.value);
-			if (validationError) {
-				return {
-					validPhoneNumber: validationError,
-				};
+			if (!isValidPhoneNumber(control.value, countryCode)) {
+				return { validPhoneNumber: 'INVALID' };
 			}
 		}
 		// Else, everything is fine !

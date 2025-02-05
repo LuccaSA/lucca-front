@@ -1,0 +1,9 @@
+@mixin disabled {
+	--components-dropdown-option-actionColor: var(--commons-disabled-placeholder);
+	--components-dropdown-option-actionEvents: none;
+
+	&,
+	&:hover {
+		--components-dropdown-option-actionBackground: var(--palettes-neutral-0);
+	}
+}

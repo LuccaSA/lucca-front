@@ -1,9 +1,11 @@
-@mixin component {
+@use '@lucca-front/scss/src/commons/utils/namespace';
+
+@mixin component($atRoot: namespace.$defaultAtRoot) {
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
-	height: var(--components-numericBadge-size);
-	min-width: var(--components-numericBadge-size);
+	block-size: var(--components-numericBadge-size);
+	min-inline-size: var(--components-numericBadge-size);
 	padding: var(--pr-t-spacings-50);
 	font-size: var(--components-numericBadge-fontSize);
 	line-height: var(--components-numericBadge-lineHeight);
@@ -15,4 +17,19 @@
 	transition-duration: var(--commons-animations-durations-fast);
 	transition-timing-function: ease;
 	white-space: nowrap;
+	position: relative;
+	transition-duration: var(--commons-animations-durations-fast);
+	transition-property: color;
+
+	&:empty {
+		&::before {
+			content: ' ';
+		}
+	}
+
+	@at-root ($atRoot) {
+		.numericBadge-value {
+			outline: none;
+		}
+	}
 }

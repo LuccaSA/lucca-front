@@ -1,9 +1,10 @@
 @use '@lucca-front/scss/src/components/dialog';
 
 .dialog .cdk-dialog-container {
+	flex-grow: 1;
+	inline-size: auto;
+	block-size: auto;
 	display: flex;
 	flex-direction: column;
-	width: auto;
-	height: auto;
-	flex-grow: 1;
+	min-block-size: 0;
 }

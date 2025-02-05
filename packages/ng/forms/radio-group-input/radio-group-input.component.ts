@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, forwardRef, inject, Input, ViewEncapsulation } from '@angular/core';
-import { FORM_FIELD_INSTANCE, FormFieldComponent, InputDirective } from '@lucca-front/ng/form-field';
+import { ChangeDetectionStrategy, Component, forwardRef, inject, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import { FORM_FIELD_INSTANCE, FormFieldComponent } from '@lucca-front/ng/form-field';
 import { injectNgControl } from '../inject-ng-control';
 import { NoopValueAccessorDirective } from '../noop-value-accessor.directive';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -10,7 +10,7 @@ let nextId = 0;
 @Component({
 	selector: 'lu-radio-group-input',
 	standalone: true,
-	imports: [InputDirective, ReactiveFormsModule],
+	imports: [ReactiveFormsModule],
 	hostDirectives: [NoopValueAccessorDirective],
 	template: '<ng-content></ng-content>',
 	styleUrl: './radio-group-input.component.scss',
@@ -23,7 +23,7 @@ let nextId = 0;
 		},
 	],
 })
-export class RadioGroupInputComponent {
+export class RadioGroupInputComponent implements OnInit {
 	formField = inject<FormFieldComponent>(FORM_FIELD_INSTANCE, { optional: true });
 
 	ngControl = injectNgControl();
@@ -33,9 +33,18 @@ export class RadioGroupInputComponent {
 
 	name = `radio-group-${nextId++}`;
 
+	@Input()
+	arrow?: 'neutral' | 'default';
+
 	constructor() {
 		if (this.formField) {
-			this.formField.layout = 'fieldset';
+			this.formField.layout.set('fieldset');
+		}
+	}
+
+	ngOnInit(): void {
+		if (this.formField) {
+			this.formField.hasArrow = this.arrow !== undefined;
 		}
 	}
 }

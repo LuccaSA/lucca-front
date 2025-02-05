@@ -1,36 +1,27 @@
-@use 'sass:math';
-@use 'sass:map';
-
-@use '@lucca-front/scss/src/commons/config';
-
-@function pxToRem($value) {
-	@return math.div($value, 16px) * 1rem;
-}
-
 @mixin center {
-	--components-container-marginInline: auto;
+	--commons-container-marginInline: auto;
 }
 
 @mixin S {
-	--components-container-padding: var(--pr-t-spacings-200);
+	--commons-container-padding: var(--pr-t-spacings-200);
 }
 
 @mixin maxM {
-	--components-container-max-width: #{pxToRem(map.get(config.$breakpoints, 'M'))};
+	--commons-container-maxWidth: var(--commons-container-maxWidthM);
 }
 
 @mixin maxL {
-	--components-container-max-width: #{pxToRem(map.get(config.$breakpoints, 'L'))};
+	--commons-container-maxWidth: var(--commons-container-maxWidthL);
 }
 
 @mixin maxXL {
-	--components-container-max-width: #{pxToRem(map.get(config.$breakpoints, 'XL'))};
+	--commons-container-maxWidth: var(--commons-container-maxWidthXL);
 }
 
 @mixin maxXXL {
-	--components-container-max-width: #{pxToRem(map.get(config.$breakpoints, 'XXL'))};
+	--commons-container-maxWidth: var(--commons-container-maxWidthXXL);
 }
 
 @mixin maxXXXL {
-	--components-container-max-width: #{pxToRem(map.get(config.$breakpoints, 'XXXL'))};
+	--commons-container-maxWidth: var(--commons-container-maxWidthXXXL);
 }

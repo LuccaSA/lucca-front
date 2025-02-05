@@ -1,0 +1,11 @@
+@use 'exports' as *;
+@use '@lucca-front/scss/src/commons/utils/media';
+
+.fancyBox {
+	@include vars;
+	@include component;
+
+	@include media.max('XS') {
+		@include narrow;
+	}
+}

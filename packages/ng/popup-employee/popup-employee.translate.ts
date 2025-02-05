@@ -18,6 +18,8 @@ export interface LuPopupEmployeeTranslations {
 	EMPLOYEE_CARD_PANEL_UNTIL_TOMORROW_MORNING_LABEL: string;
 	EMPLOYEE_CARD_PANEL_UNTIL_DATE_LABEL: string;
 	EMPLOYEE_CARD_PANEL_UNTIL_MORNING_DATE_LABEL: string;
+	EMPLOYEE_CARD_PANEL_WORKING_LOCATION: string;
+	EMPLOYEE_CARD_PANEL_PLANNING: string;
 }
 
 export const luPopupEmployeeTranslations: LuTranslation<LuPopupEmployeeTranslations> = Translations;

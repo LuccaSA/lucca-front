@@ -1,7 +1,8 @@
+@use '@lucca-front/scss/src/commons/utils/namespace';
 @use '@lucca-front/icons/src/commons/utils/icon';
 @use '@lucca-front/scss/src/commons/utils/a11y';
 
-:root {
+@include namespace.appendRootVars {
 	--components-options-item-padding-vertical: var(--pr-t-spacings-50);
 	--components-options-item-padding-horizontal: var(--pr-t-spacings-100);
 	--components-options-item-multiple-padding: 2.25rem;
@@ -26,8 +27,9 @@
 	.optionItem-value {
 		position: relative;
 		border-radius: var(--commons-borderRadius-M);
-		display: flex;
-		padding: var(--components-options-item-padding-vertical) var(--components-options-item-padding-horizontal);
+		display: block;
+		padding-block: var(--components-options-item-padding-vertical);
+		padding-inline: var(--components-options-item-padding-horizontal);
 		transition: background-color 50ms;
 		cursor: pointer;
 
@@ -37,13 +39,12 @@
 			&:before {
 				content: '';
 				position: absolute;
-				top: 0;
-				bottom: 0;
-				left: calc(var(--pr-t-spacings-50) * -1);
-				width: 2px;
+				inset-block: 0;
+				inset-inline-start: calc(var(--pr-t-spacings-50) * -1);
+				inline-size: 2px;
 				background-color: var(--palettes-product-700);
-				border-top-right-radius: var(--commons-borderRadius-M);
-				border-bottom-right-radius: var(--commons-borderRadius-M);
+				border-start-end-radius: var(--commons-borderRadius-M);
+				border-end-end-radius: var(--commons-borderRadius-M);
 			}
 
 			&:hover {
@@ -108,25 +109,26 @@
 	:host-context(.mod-multiple) {
 		.optionItem-value {
 			position: relative;
-			padding-left: var(--components-options-item-multiple-padding);
+			padding-inline-start: var(--components-options-item-multiple-padding);
 
 			&::after,
 			&::before {
 				display: block;
 				position: absolute;
-				left: var(--pr-t-spacings-100);
-				top: var(--pr-t-spacings-75);
+				inset-inline-start: var(--pr-t-spacings-100);
+				inset-block-start: var(--pr-t-spacings-75);
 			}
 
 			&::before {
 				content: '';
+				background-color: var(--palettes-neutral-0);
 				border-radius: var(--components-options-checkbox-border-radius);
 				box-shadow: inset 0 0 0 2px var(--components-options-checkbox-border-color);
 				display: block;
-				height: var(--components-options-checkbox-size);
+				block-size: var(--components-options-checkbox-size);
 				transition-property: background-color, box-shadow;
 				transition-duration: var(--commons-animations-durations-fast);
-				width: var(--components-options-checkbox-size);
+				inline-size: var(--components-options-checkbox-size);
 			}
 
 			&::after {
@@ -139,7 +141,7 @@
 				text-align: center;
 				transform: scale(0);
 				transition: all 100ms;
-				width: var(--components-options-checkbox-size);
+				inline-size: var(--components-options-checkbox-size);
 			}
 
 			&.is-selected {
@@ -177,13 +179,13 @@
 		&.establishmentOption {
 			.optionItem-value {
 				position: relative;
-				padding-left: calc(var(--components-options-checkbox-size) + var(--pr-t-spacings-100) * 2);
+				padding-inline-start: calc(var(--components-options-checkbox-size) + var(--pr-t-spacings-100) * 2);
 			}
 
 			.optionItem-value {
 				&::before,
 				&::after {
-					left: var(--pr-t-spacings-100);
+					inset-inline-start: var(--pr-t-spacings-100);
 				}
 			}
 		}

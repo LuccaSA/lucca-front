@@ -26,14 +26,14 @@ export default {
 			},
 		},
 		hiddenLabel: {
-			description: 'Masque le label en le conservant dans le DOM pour les lecteurs d\'écrans',
+			description: "Masque le label en le conservant dans le DOM pour les lecteurs d'écrans",
 		},
 	},
 } as Meta;
 
-export const Basic: StoryObj<RadioGroupInputComponent & FormFieldComponent> = {
+export const Basic: StoryObj<RadioGroupInputComponent & FormFieldComponent & { required: boolean }> = {
 	render: (args, { argTypes }) => {
-		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, ...inputArgs } = args;
+		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, inline, ...inputArgs } = args;
 		return {
 			props: {
 				example: 1,
@@ -46,6 +46,7 @@ export const Basic: StoryObj<RadioGroupInputComponent & FormFieldComponent> = {
 					inlineMessage,
 					inlineMessageState,
 					size,
+					inline,
 				},
 				argTypes,
 			)}>
@@ -67,5 +68,6 @@ export const Basic: StoryObj<RadioGroupInputComponent & FormFieldComponent> = {
 		required: true,
 		inlineMessage: 'Helper message',
 		inlineMessageState: 'default',
+		inline: false,
 	},
 };

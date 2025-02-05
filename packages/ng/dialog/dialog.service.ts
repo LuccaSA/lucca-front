@@ -1,8 +1,8 @@
-import { inject, Injectable, Injector, Renderer2 } from '@angular/core';
-import { LuDialogConfig, LuDialogRef, LuDialogResult } from './model';
 import { Dialog, DialogRef } from '@angular/cdk/dialog';
+import { inject, Injectable, Injector, Renderer2 } from '@angular/core';
 import { isObservable, merge, of, take } from 'rxjs';
 import { filter, switchMap, takeUntil } from 'rxjs/operators';
+import { LuDialogConfig, LuDialogRef, LuDialogResult } from './model';
 import { DISMISSED_VALUE } from './model/dialog-ref';
 
 @Injectable()
@@ -35,7 +35,7 @@ export class LuDialogService {
 			ariaLabel: config.ariaLabel,
 			// If focus is first-input, focus dialog and let the component do the rest
 			// Else, just set it to config value or default to first-tabbable
-			autoFocus: config.autoFocus === 'first-input' ? 'dialog' : config.autoFocus ?? 'first-tabbable',
+			autoFocus: config.autoFocus === 'first-input' ? 'dialog' : (config.autoFocus ?? 'first-tabbable'),
 			templateContext: () => ({ dialogRef: luDialogRef }),
 			injector: this.#injector,
 			providers: (ref: DialogRef<LuDialogResult<C>, C>) => {

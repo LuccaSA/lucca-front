@@ -1,28 +1,30 @@
 /* eslint-disable @angular-eslint/no-output-on-prefix */
 import { OverlayConfig, OverlayContainer } from '@angular/cdk/overlay';
 import {
+	booleanAttribute,
 	ChangeDetectorRef,
+	computed,
 	Directive,
 	ElementRef,
 	EventEmitter,
 	HostBinding,
 	HostListener,
+	inject,
 	Input,
+	model,
 	OnDestroy,
 	OnInit,
 	Output,
 	TemplateRef,
 	Type,
 	ViewChild,
-	booleanAttribute,
-	inject,
 } from '@angular/core';
 import { ControlValueAccessor } from '@angular/forms';
-import { PortalContent, getIntl } from '@lucca-front/ng/core';
-import { BehaviorSubject, Observable, ReplaySubject, Subject, defer, map, of, startWith, switchMap, take } from 'rxjs';
+import { getIntl, PortalContent } from '@lucca-front/ng/core';
+import { BehaviorSubject, defer, map, Observable, of, ReplaySubject, startWith, Subject, switchMap, take } from 'rxjs';
 import { LuOptionGrouping, LuSimpleSelectDefaultOptionComponent } from '../option';
 import { LuSelectPanelRef } from '../panel';
-import { CoreSelectAddOptionStrategy, LuOptionContext, SELECT_LABEL, SELECT_LABEL_ID } from '../select.model';
+import { CoreSelectAddOptionStrategy, LuOptionComparer, LuOptionContext, SELECT_LABEL, SELECT_LABEL_ID } from '../select.model';
 import { LU_CORE_SELECT_TRANSLATIONS } from '../select.translate';
 
 @Directive()
@@ -65,7 +67,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 
 	@HostBinding('class.is-selected')
 	protected get isSelectedClass(): boolean {
-		return this.hasValue;
+		return this.hasValue();
 	}
 
 	@HostBinding('class.is-searchFilled')
@@ -73,7 +75,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 		return this.clue?.length > 0;
 	}
 
-	protected abstract readonly hasValue: boolean;
+	protected abstract hasValue(): boolean;
 
 	public get isPanelOpen(): boolean {
 		return this.isPanelOpen$.value;
@@ -110,10 +112,15 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 		}
 	}
 
-	@Input() optionComparer: (option1: TOption, option2: TOption) => boolean = (option1, option2) => JSON.stringify(option1) === JSON.stringify(option2);
+	@Input() optionComparer: LuOptionComparer<TOption> = (option1, option2) => JSON.stringify(option1) === JSON.stringify(option2);
 	@Input() optionKey: (option: TOption) => unknown = (option) => option;
-	@Input() optionTpl?: TemplateRef<LuOptionContext<TOption>> | Type<unknown> = LuSimpleSelectDefaultOptionComponent;
-	@Input() valueTpl?: TemplateRef<LuOptionContext<TOption>> | Type<unknown>;
+
+	optionTpl = model<TemplateRef<LuOptionContext<TOption>> | Type<unknown>>(LuSimpleSelectDefaultOptionComponent);
+	valueTpl = model<TemplateRef<LuOptionContext<TOption>> | Type<unknown> | undefined>();
+	panelHeaderTpl = model<TemplateRef<void> | Type<unknown> | undefined>();
+
+	displayerTpl = computed(() => this.valueTpl() || this.optionTpl());
+
 	grouping?: LuOptionGrouping<TOption, unknown>;
 
 	@Output() clueChange = new EventEmitter<string>();
@@ -225,7 +232,12 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 				}
 				break;
 			default:
-				this.panelRef?.handleKeyManagerEvent($event);
+				// For any other key, forward it to the panel if it's open
+				if (this.isPanelOpen) {
+					this.panelRef?.handleKeyManagerEvent($event);
+				} else if ($event.key.length === 1) {
+					this.openPanel($event.key);
+				}
 				break;
 		}
 	}
@@ -265,11 +277,30 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 		if (this.isPanelOpen || this.disabled$.value) {
 			return;
 		}
+		/**
+		 * I know what you're thinking, but let me explain:
+		 *
+		 * When setting isPanelOpen$'s internal value to true and then calling clueChanged,
+		 * it creates a race condition which calls this method again from inside clueChanged's code before
+		 * the change is applied inside the Subject, meaning this is called twice and we get a double tap.
+		 *
+		 * The only easy solution is this (or store yet another boolean like "isOpeningPanel" which is, imo, equally ugly.
+		 */
+		setTimeout(() => {
+			if (this.isPanelOpen) {
+				return;
+			}
 
-		this.isPanelOpen$.next(true);
-		this.clueChanged(clue);
-		this._panelRef = this.buildPanelRef();
-		this.bindInputToPanelRefEvents();
+			this.isPanelOpen$.next(true);
+
+			if (this.searchable) {
+				this.clueChanged(clue);
+			}
+
+			this._panelRef = this.buildPanelRef();
+			this.bindInputToPanelRefEvents();
+		});
+		// Oh and we have to wait for another cycle before focusing the input so it's done once panel is opened for good.
 		setTimeout(() => this.focusInput());
 	}
 
@@ -327,10 +358,12 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 		this.value = value;
 	}
 
-	public updateValue(value: TValue, skipPanelOpen = false): void {
+	public updateValue(value: TValue, skipPanelOpen = false, noClear = false): void {
 		this.value = value;
-		this.emptyClue();
-		this.clueChanged('', skipPanelOpen);
+		if (!noClear) {
+			this.emptyClue();
+			this.clueChanged('', skipPanelOpen);
+		}
 		this.onChange?.(value);
 		this.onTouched?.();
 	}

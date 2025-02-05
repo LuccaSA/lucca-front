@@ -34,6 +34,7 @@
 		<input
 			luInput
 			[type]="type"
+			[attr.autocomplete]="autocomplete ? autocomplete : null"
 			class="textField-input-value"
 			[placeholder]="placeholder"
 			[formControl]="ngControl.control"
@@ -49,7 +50,7 @@
 			<button
 				[attr.aria-pressed]="showPassword"
 				type="button"
-				class="button mod-onlyIcon mod-text textField-input-affix-passwordToggle"
+				class="button mod-onlyIcon mod-text textField-input-affix-toggle"
 				(click)="togglePasswordVisibility()"
 				*ngIf="hasTogglePasswordVisibilityIcon()"
 			>

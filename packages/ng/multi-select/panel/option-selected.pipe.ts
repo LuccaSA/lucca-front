@@ -1,11 +1,15 @@
-import { Pipe, PipeTransform } from '@angular/core';
+import { Pipe, PipeTransform, inject } from '@angular/core';
+import { LuOptionComparer } from '@lucca-front/ng/core-select';
+import { ɵIsSelectedStrategy } from '../select.model';
 
 @Pipe({
 	name: 'luIsOptionSelected',
 	standalone: true,
 })
-export class LuIsOptionSelectedPipe implements PipeTransform {
-	transform<T>(option: T, comparer: (option1: T, option2: T) => boolean, selectedOptions: T[]): boolean {
-		return selectedOptions.some((selectedOption) => comparer(option, selectedOption));
+export class LuIsOptionSelectedPipe<T> implements PipeTransform {
+	#selectionStrategy = inject<ɵIsSelectedStrategy<T>>(ɵIsSelectedStrategy);
+
+	transform(option: T, comparer: LuOptionComparer<T>, selectedOptions: T[]): boolean {
+		return this.#selectionStrategy.isSelected(option, selectedOptions, comparer);
 	}
 }

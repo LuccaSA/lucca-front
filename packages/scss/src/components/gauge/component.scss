@@ -1,6 +1,8 @@
-@mixin component($atRoot: 'without: rule') {
+@use '@lucca-front/scss/src/commons/utils/namespace';
+
+@mixin component($atRoot: namespace.$defaultAtRoot) {
 	border-radius: var(--commons-borderRadius-full);
-	height: var(--components-gauge-height);
+	block-size: var(--components-gauge-height);
 	overflow: hidden;
 	position: relative;
 	background-color: var(--components-gauge-background);
@@ -8,14 +10,15 @@
 	@at-root ($atRoot) {
 		.gauge-bar {
 			color: var(--palettes-700, var(--palettes-product-700));
-			border-bottom-width: var(--components-gauge-height);
+			border-block-end-width: var(--components-gauge-height);
 			transition-duration: var(--commons-animations-durations-standard);
 			transition-property: border-color, width, height;
-			top: 0;
-			left: 0;
+			inset-block-start: 0;
+			inset-inline-start: 0;
 			position: absolute;
-			border-bottom-style: solid;
+			border-block-end-style: solid;
 			border-color: currentColor;
+			border-radius: var(--commons-borderRadius-full);
 		}
 	}
 }

@@ -11,12 +11,13 @@ import {
 	Input,
 	InputSignal,
 	OnDestroy,
+	output,
 	Renderer2,
 	signal,
 	TemplateRef,
 	ViewContainerRef,
 } from '@angular/core';
-import { ConnectedPosition, ConnectionPositionPair, Overlay, OverlayRef } from '@angular/cdk/overlay';
+import { ConnectedPosition, ConnectionPositionPair, FlexibleConnectedPositionStrategyOrigin, Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
 import { PopoverContentComponent } from './content/popover-content/popover-content.component';
 import { POPOVER_CONFIG, PopoverConfig } from './popover-tokens';
@@ -65,6 +66,7 @@ const defaultPositionPairs: Record<PopoverPosition, ConnectionPositionPair> = {
 	host: {
 		'[attr.aria-expanded]': 'opened()',
 	},
+	exportAs: 'luPopover2',
 	standalone: true,
 })
 export class PopoverDirective implements OnDestroy {
@@ -104,6 +106,12 @@ export class PopoverDirective implements OnDestroy {
 	 */
 	luPopoverNoCloseButton = false;
 
+	/**
+	 * Allows to anchor the popover to another element instead of the trigger one
+	 * for placement purpose
+	 */
+	luPopoverAnchor = input<FlexibleConnectedPositionStrategyOrigin>(this.#elementRef);
+
 	// We have to type these two for Compodoc to find the right type and tell Storybook these aren't strings
 	luPopoverOpenDelay: InputSignal<number> = input<number>(300);
 
@@ -112,6 +120,8 @@ export class PopoverDirective implements OnDestroy {
 	open$ = new Subject<'focus' | 'click' | 'hover'>();
 
 	close$ = new Subject<void>();
+
+	luPopoverClosed = output<void>();
 
 	#listenToMouseLeave = false;
 	#listenToMouseEnter = true;
@@ -201,13 +211,20 @@ export class PopoverDirective implements OnDestroy {
 		}
 	}
 
+	close(): void {
+		if (this.opened()) {
+			this.#componentRef?.close();
+			this.#listenToMouseLeave = true;
+		}
+	}
+
 	openPopover(withBackdrop = false, disableFocusHandler = false): void {
 		if (!this.opened() && !this.luPopoverDisabled) {
 			this.opened.set(true);
 			this.#overlayRef = this.#overlay.create({
 				positionStrategy: this.#overlay
 					.position()
-					.flexibleConnectedTo(this.#elementRef)
+					.flexibleConnectedTo(this.luPopoverAnchor())
 					.withPositions(this.customPositions || this.#buildPositions()),
 				scrollStrategy: this.#overlay.scrollStrategies.reposition(),
 				hasBackdrop: withBackdrop,
@@ -245,6 +262,7 @@ export class PopoverDirective implements OnDestroy {
 			this.#componentRef.mouseEnter$.pipe(takeUntilDestroyed(this.#componentRef.destroyRef), takeUntilDestroyed(this.#destroyRef)).subscribe(() => this.open$.next('hover'));
 			this.#componentRef.closed$.pipe(takeUntilDestroyed(this.#componentRef.destroyRef), takeUntilDestroyed(this.#destroyRef)).subscribe(() => {
 				this.opened.set(false);
+				this.luPopoverClosed.emit();
 				this.#listenToMouseLeave = false;
 				if (this.#screenReaderDescription) {
 					this.#screenReaderDescription.remove();
@@ -255,7 +273,7 @@ export class PopoverDirective implements OnDestroy {
 	}
 
 	@HostListener('keydown.Tab', ['$event'])
-	focusBackToContent(event: KeyboardEvent): void {
+	focusBackToContent(event: Event): void {
 		if (this.opened()) {
 			event.preventDefault();
 			this.#componentRef.grabFocus();

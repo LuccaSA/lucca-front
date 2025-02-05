@@ -11,6 +11,7 @@
 
 .checkboxField-input {
 	&[aria-checked='mixed'] {
+		@include checked;
 		@include mixed;
 	}
 
@@ -20,25 +21,49 @@
 
 	&:hover {
 		@include hover;
+
+		&[aria-checked='mixed'] {
+			@include checkedHover;
+		}
 	}
 
 	&:active {
 		@include active;
+
+		&[aria-checked='mixed'] {
+			@include checkedActive;
+		}
 	}
 
 	&:disabled {
 		@include disabled;
+
+		&[aria-checked='mixed'] {
+			@include checkedDisabled;
+		}
 	}
 
 	&[aria-invalid='true'] {
 		@include invalid;
 
+		&[aria-checked='mixed'] {
+			@include checkedInvalid;
+		}
+
 		&:hover {
 			@include invalidHover;
+
+			&[aria-checked='mixed'] {
+				@include checkedInvalidHover;
+			}
 		}
 
 		&:active {
 			@include invalidActive;
+
+			&[aria-checked='mixed'] {
+				@include checkedInvalidActive;
+			}
 		}
 	}
 

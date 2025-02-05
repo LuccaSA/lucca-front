@@ -27,7 +27,7 @@
 }
 
 @mixin mobileOpen {
-	height: 100vh;
+	block-size: 100vh;
 	overflow-x: hidden;
 	overflow-y: auto;
 
@@ -37,7 +37,7 @@
 }
 
 @mixin mobileOpenBanner {
-	height: calc(100vh - var(--commons-banner-height));
+	block-size: calc(100vh - var(--commons-banner-height));
 }
 
 @mixin mobileHidden {

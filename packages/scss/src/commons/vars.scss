@@ -14,6 +14,8 @@
 	@include core.cssvars('pr-t-spacings', config.$spacings);
 	--pr-t-spacings-auto: auto;
 
+	@include core.cssvars('pr-t-color-input', config.$colorInput);
+
 	// VARIABLES
 
 	@include core.cssvars('commons-borderRadius', config.$borderRadius);
@@ -22,19 +24,11 @@
 	@include core.cssvars('commons-disabled', config.$disabled);
 	@include core.cssvars('commons-loading', config.$loading);
 	@include core.cssvars('commons-text-link', config.$textLink);
+	@include core.cssvars('breakpoints', config.$breakpoints, '-breakAt');
 
 	@each $palette in config.$palettesAll {
 		@include core.cssvars('palettes-#{$palette}', map.get(config.$palettesInterpolation, $palette));
 	}
-
-	@include core.cssvars('breakpoints', config.$breakpoints, '-breakAt');
-	@if (config.$importDeprecatedSpacings) {
-		@include core.cssvars('spacings', config.$spacingsDeprecated);
-		--spacings-auto: auto;
-	}
-
-	@include core.cssvars('commons-elevations-elevation', config.$elevations);
-	@include core.cssvars('commons-boxShadow', config.$boxShadows); // deprecated
 
 	@each $key, $map in config.$sizes {
 		@include core.cssvars('sizes-#{$key}', $map);
@@ -51,7 +45,22 @@
 	--commons-border-100: var(--palettes-neutral-100);
 	--commons-border-200: var(--palettes-neutral-200);
 
+	@if (config.$fontFamilyCursive) {
+		--commons-font-family-cursive: '#{config.$fontFamilyCursive}', cursive;
+	}
+
 	// Deprecated
 	--commons-background-base: var(--palettes-neutral-25);
 	--commons-divider-color: var(--palettes-neutral-200);
+
+	@each $breakpoint, $value in config.$breakpoints {
+		--commons-container-maxWidth#{$breakpoint}: #{core.pxToRem($value)};
+	}
+
+	--commons-container-maxWidth: var(--commons-container-maxWidthXXL);
+	--commons-container-padding: 3.5rem;
+
+	--commons-navSide-width: 0rem; // unit is required for calc
+	--commons-navSide-compact-width: 7.5rem;
+	--commons-navSide-mobile-toggle-height: 3.5rem;
 }

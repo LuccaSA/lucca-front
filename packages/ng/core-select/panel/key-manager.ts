@@ -3,11 +3,12 @@ import { DestroyRef, EventEmitter, Injectable, QueryList, inject } from '@angula
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Observable, asyncScheduler, debounceTime, filter, map, observeOn, take } from 'rxjs';
 import { ɵLuOptionComponent } from '../option';
+import { LuOptionComparer } from '../select.model';
 
 interface CoreSelectKeyManagerOptions<T> {
 	queryList: QueryList<ɵLuOptionComponent<T>>;
 	options$: Observable<T[]>;
-	optionComparer: (a: T, b: T) => boolean;
+	optionComparer: LuOptionComparer<T>;
 	activeOptionIdChanged$: EventEmitter<string>;
 	clueChange$: Observable<string>;
 }

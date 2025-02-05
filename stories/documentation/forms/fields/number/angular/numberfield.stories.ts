@@ -29,15 +29,18 @@ export default {
 			},
 		},
 		hiddenLabel: {
-			description: 'Masque le label en le conservant dans le DOM pour les lecteurs d\'écrans',
+			description: "Masque le label en le conservant dans le DOM pour les lecteurs d'écrans",
 		},
 	},
 } as Meta;
 
-export const Basic: StoryObj<NumberInputComponent & { disabled: boolean } & FormFieldComponent> = {
+export const Basic: StoryObj<NumberInputComponent & { disabled: boolean; required: boolean } & FormFieldComponent> = {
 	render: (args, { argTypes }) => {
 		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, ...inputArgs } = args;
 		return {
+			props: {
+				example: 1000,
+			},
 			template: cleanupTemplate(`<lu-form-field ${generateInputs(
 				{
 					label,
@@ -49,14 +52,11 @@ export const Basic: StoryObj<NumberInputComponent & { disabled: boolean } & Form
 				},
 				argTypes,
 			)}>
-
 	<lu-number-input
 	${generateInputs(inputArgs, argTypes)}
 		[(ngModel)]="example">
 	</lu-number-input>
-
 </lu-form-field>
-
 {{example}}`),
 			moduleMetadata: {
 				imports: [NumberInputComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule],
@@ -80,7 +80,12 @@ export const Basic: StoryObj<NumberInputComponent & { disabled: boolean } & Form
 	},
 };
 
-export const WithPrefixAndSuffix: StoryObj<NumberInputComponent & { disabled: boolean } & FormFieldComponent> = {
+export const WithPrefixAndSuffix: StoryObj<
+	NumberInputComponent & {
+		disabled: boolean;
+		required: boolean;
+	} & FormFieldComponent
+> = {
 	render: (args, { argTypes }) => {
 		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, prefix, suffix, ...inputArgs } = args;
 		return {
@@ -99,16 +104,13 @@ export const WithPrefixAndSuffix: StoryObj<NumberInputComponent & { disabled: bo
 				},
 				argTypes,
 			)}>
-
 	<lu-number-input
 		${generateInputs(inputArgs, argTypes)}
 		[prefix]="prefix"
 		[suffix]="suffix"
 		[(ngModel)]="example">
 	</lu-number-input>
-
 </lu-form-field>
-
 {{example}}`),
 			moduleMetadata: {
 				imports: [NumberInputComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule],
@@ -124,8 +126,8 @@ export const WithPrefixAndSuffix: StoryObj<NumberInputComponent & { disabled: bo
 		disabled: false,
 		hasClearer: false,
 		prefix: {
-			icon: 'dollar',
-			ariaLabel: 'Dollar',
+			content: '$',
+			ariaLabel: 'dollars',
 		},
 		suffix: {
 			content: '€/j',

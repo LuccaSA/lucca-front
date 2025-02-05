@@ -1,6 +1,7 @@
 @use '@lucca-front/scss/src/components/title/exports' as title;
+@use '@lucca-front/scss/src/commons/utils/namespace';
 
-@mixin component($atRoot: 'without: rule') {
+@mixin component($atRoot: namespace.$defaultAtRoot) {
 	border: 0;
 	margin: 0;
 	padding: 0;
@@ -15,8 +16,8 @@
 
 			padding: 0;
 			margin: 0;
-			width: 100%;
-			min-height: var(--pr-t-spacings-300);
+			inline-size: 100%;
+			min-block-size: var(--pr-t-spacings-300);
 			display: contents;
 		}
 
@@ -24,13 +25,20 @@
 			border: 0;
 			padding: 0;
 			margin: 0;
-			width: 100%;
+			inline-size: 100%;
 			background-color: transparent;
-			text-align: left;
+			text-align: start;
 			display: flex;
 			justify-content: space-between;
 			gap: var(--components-fieldset-gap);
-			max-width: var(--components-fieldset-contentMaxWidth);
+			max-inline-size: var(--components-fieldset-contentMaxWidth);
+
+			.lucca-icon {
+				transform: rotate(var(--components-fieldset-title-iconRotation));
+				transition-property: transform;
+				transition-duration: var(--commons-animations-durations-fast);
+				color: var(--palettes-neutral-700);
+			}
 		}
 
 		.fieldset-title-content-text-helper {
@@ -42,7 +50,7 @@
 		}
 
 		.fieldset-content {
-			min-width: 0;
+			min-inline-size: 0;
 		}
 	}
 }

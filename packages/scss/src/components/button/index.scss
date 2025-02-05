@@ -44,9 +44,7 @@
 		}
 	}
 
-	// .mod-icon is deprecated
-	&.mod-withIcon,
-	&.mod-icon {
+	&.mod-withIcon {
 		@include withIcon;
 
 		&.mod-S {

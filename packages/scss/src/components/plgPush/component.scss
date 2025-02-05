@@ -2,8 +2,9 @@
 @use '@lucca-front/scss/src/commons/utils/reset';
 @use '@lucca-front/scss/src/commons/utils/a11y';
 @use '@lucca-front/scss/src/components/link/exports' as link;
+@use '@lucca-front/scss/src/commons/utils/namespace';
 
-@mixin component($atRoot: 'without: rule') {
+@mixin component($atRoot: namespace.$defaultAtRoot) {
 	display: flex;
 	align-items: flex-start;
 	gap: var(--pr-t-spacings-100);
@@ -14,6 +15,12 @@
 	border-radius: var(--commons-borderRadius-L);
 	background-color: var(--palettes-brand-50);
 
+	.link {
+		@include link.brand;
+
+		display: inline-block;
+	}
+
 	@at-root ($atRoot) {
 		.plgPush-icons {
 			position: relative;
@@ -21,8 +28,8 @@
 			flex-shrink: 0;
 			align-items: center;
 			justify-content: center;
-			height: var(--components-plgPush-icon-size);
-			width: var(--components-plgPush-icon-size);
+			block-size: var(--components-plgPush-icon-size);
+			inline-size: var(--components-plgPush-icon-size);
 		}
 
 		.plgPush-icons-front {
@@ -52,11 +59,6 @@
 			align-items: center;
 			gap: var(--pr-t-spacings-25);
 			padding: var(--pr-t-spacings-0);
-		}
-
-		.link {
-			@include link.brand;
-			display: inline-block;
 		}
 	}
 }

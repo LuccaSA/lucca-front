@@ -1,9 +1,8 @@
 /* eslint-disable @angular-eslint/no-input-rename */
 
 import { OverlayModule } from '@angular/cdk/overlay';
-import { AsyncPipe, DatePipe, NgClass, NgIf, NgOptimizedImage, NgSwitch, NgSwitchCase, NgTemplateOutlet } from '@angular/common';
+import { AsyncPipe, DatePipe, NgClass, NgIf, NgSwitch, NgSwitchCase, NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Inject, Input, OnDestroy, Output, TemplateRef, ViewChild, ViewEncapsulation } from '@angular/core';
-import { RouterLink } from '@angular/router';
 import { ALuPopoverPanel, luTransformPopover } from '@lucca-front/ng/popover';
 import { ILuUser, LuUserPictureModule } from '@lucca-front/ng/user';
 import { BehaviorSubject, combineLatest, Observable, of, ReplaySubject, Subscription } from 'rxjs';
@@ -18,6 +17,7 @@ import { isFutureOrTodayPipe, IsFuturePipe } from '../pipe/is-future.pipe';
 import { LeaveEndsDisplayPipe } from '../pipe/leave-ends-display.pipe';
 import { ILuUserPopoverPanel } from './user-popover-panel.model';
 import { catchError, map, switchMap, tap } from 'rxjs/operators';
+import { IconComponent } from '@lucca-front/ng/icon';
 
 @Component({
 	standalone: true,
@@ -32,7 +32,6 @@ import { catchError, map, switchMap, tap } from 'rxjs/operators';
 	imports: [
 		LuUserPictureModule,
 		NgClass,
-		RouterLink,
 		NgIf,
 		NgTemplateOutlet,
 		DatePipe,
@@ -44,7 +43,7 @@ import { catchError, map, switchMap, tap } from 'rxjs/operators';
 		InjectParameterPipe,
 		NgSwitch,
 		NgSwitchCase,
-		NgOptimizedImage,
+		IconComponent,
 	],
 })
 export class LuUserPopoverPanelComponent extends ALuPopoverPanel implements ILuUserPopoverPanel, OnDestroy {

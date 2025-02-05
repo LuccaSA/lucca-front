@@ -13,12 +13,12 @@ import { LuCoreSelectUsersDirective } from './users.directive';
 	imports: [NgIf, AsyncPipe, LuUserDisplayPipe],
 	template: `
 		<ng-container *ngIf="context.option$ | async as user">
-			<div *ngIf="userDirective.displayMeOption && user.id === userDirective.currentUserId && hasEmptyClue$ | async; else notMe">
-				<b>{{ intl.me }} {{ user | luUserDisplay: userDirective.displayFormat }}</b>
+			<div *ngIf="userDirective.displayMeOption() && user.id === userDirective.currentUserId && hasEmptyClue$ | async; else notMe">
+				<b>{{ intl.me }} {{ user | luUserDisplay: userDirective.displayFormat() }}</b>
 			</div>
 
 			<ng-template #notMe>
-				<div>{{ user | luUserDisplay: userDirective.displayFormat }}</div>
+				<div>{{ user | luUserDisplay: userDirective.displayFormat() }}</div>
 			</ng-template>
 			<div class="lu-select-additionalInformation" *ngIf="user.additionalInformation">({{ user.additionalInformation }})</div>
 		</ng-container>
@@ -29,7 +29,7 @@ import { LuCoreSelectUsersDirective } from './users.directive';
 			.lu-select-additionalInformation {
 				font-size: 80%;
 				font-style: italic;
-				margin-top: -0.25em;
+				margin-block-start: -0.25em;
 			}
 		`,
 	],

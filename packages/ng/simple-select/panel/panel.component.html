@@ -9,6 +9,7 @@
 	[cdkTrapFocusAutoCapture]="true"
 >
 	<div class="lu-picker-content" [class.is-loading]="loading$ | async" (scroll)="onScroll($event)">
+		<ng-container *luPortal="selectInput.panelHeaderTpl()" />
 		<div role="listbox">
 			<ng-container *ngIf="grouping && ctx.groupTemplateLocation === 'group-header'">
 				<div
@@ -31,7 +32,7 @@
 				<lu-select-option
 					*ngFor="let option of options; let index = index; trackBy: trackOptionsBy"
 					[option]="option"
-					[optionTpl]="optionTpl"
+					[optionTpl]="optionTpl()"
 					[optionIndex]="index"
 					[grouping]="ctx.groupTemplateLocation === 'option' ? grouping : undefined"
 					[scrollIntoViewOptions]="{ block: 'center' }"
@@ -44,11 +45,10 @@
 			</div>
 		</div>
 		<div *ngIf="loading$ | async" class="lu-picker-content-loading">
-			<div class="loading"></div>
-			<span>{{intl.loading}}</span>
+			<div class="loading">{{intl.loading}}</div>
 		</div>
 		<div class="lu-picker-content-add" *ngIf="ctx.shouldDisplayAddOption">
-			<button class="button mod-text mod-icon palette-product" type="button" (click)="selectInput.emitAddOption()">
+			<button class="button mod-text mod-withIcon palette-product" type="button" (click)="selectInput.emitAddOption()">
 				<span aria-hidden="true" class="lucca-icon icon-mathsPlus"></span>
 				<ng-container *luPortal="selectInput.addOptionLabel" />
 			</button>

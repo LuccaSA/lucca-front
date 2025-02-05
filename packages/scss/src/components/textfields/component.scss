@@ -1,17 +1,20 @@
-@mixin component($atRoot: 'without: rule') {
+@use '@lucca-front/scss/src/commons/utils/namespace';
+
+@mixin component($atRoot: namespace.$defaultAtRoot) {
 	vertical-align: middle;
-	width: var(--components-textfield-sizes-default);
+	inline-size: var(--components-textfield-sizes-default);
 
 	@at-root ($atRoot) {
 		.textfield-input {
-			min-width: 0;
+			min-inline-size: 0;
 			border: 0;
 			box-shadow: 0 0 0 1px var(--palettes-neutral-300);
 			line-height: var(--sizes-M-lineHeight);
 			-webkit-appearance: none;
 			background-color: var(--palettes-neutral-0);
 			border-radius: var(--components-textfield-border-radius);
-			padding: var(--components-textfield-input-padding-vertical) var(--components-textfield-input-padding-horizontal);
+			padding-block: var(--components-textfield-input-padding-vertical);
+			padding-inline: var(--components-textfield-input-padding-horizontal);
 			transition-property: box-shadow, background-color, color;
 			transition-duration: var(--commons-animations-durations-fast);
 
@@ -31,8 +34,8 @@
 
 		.textfield-suffix {
 			color: var(--palettes-neutral-600);
-			top: calc(var(--components-textfield-suffix-top) + var(--components-textfield-input-padding-vertical));
-			right: var(--components-textfield-input-padding-horizontal);
+			inset-block-start: calc(var(--components-textfield-suffix-top) + var(--components-textfield-input-padding-vertical));
+			inset-inline-end: var(--components-textfield-input-padding-horizontal);
 			position: absolute;
 			pointer-events: none;
 			line-height: var(--sizes-M-lineHeight);
@@ -50,14 +53,16 @@
 			position: absolute;
 			transform-origin: right top;
 			transform: scaleY(0);
-			margin: 3px 0 0;
-			max-height: 15rem;
+			margin-block-start: 3px;
+			margin-inline: 0;
+			margin-block-end: 0;
+			max-block-size: 15rem;
 			opacity: 0;
 			padding: 0;
-			left: 0;
-			top: 100%;
+			inset-inline-start: 0;
+			inset-block-start: 100%;
 			z-index: 999;
-			width: 100%;
+			inline-size: 100%;
 		}
 
 		.textfield-options-mark {
@@ -69,7 +74,8 @@
 		.textfield-options-entry {
 			transition-duration: var(--commons-animations-durations-fast);
 			transition-property: background-color;
-			padding: var(--pr-t-spacings-100) var(--pr-t-spacings-200);
+			padding-block: var(--pr-t-spacings-100);
+			padding-inline: var(--pr-t-spacings-200);
 			cursor: pointer;
 		}
 	}

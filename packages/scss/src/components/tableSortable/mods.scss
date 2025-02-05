@@ -49,21 +49,22 @@
 	&:is(button) {
 		@include reset.button;
 
-		text-align: left;
+		text-align: start;
 
 		.indexTable & {
-			display: flex;
+			display: inline-flex;
+			inline-size: fit-content;
 		}
 
 		&::after {
-			margin-left: var(--pr-t-spacings-50);
+			margin-inline-start: var(--pr-t-spacings-50);
 		}
 	}
 }
 
 @mixin sortableLegacyS {
 	&::after {
-		margin-top: 0;
+		margin-block-start: 0;
 	}
 }
 
@@ -72,8 +73,21 @@
 }
 
 @mixin sortableLegacyAlignRight {
-	&::after {
-		content: none;
+	.table & {
+		&::after {
+			content: none;
+		}
+	}
+
+	.indexTable & {
+		&::before {
+			content: none;
+		}
+
+		&::after {
+			margin-inline-start: 0;
+			margin-inline-end: var(--pr-t-spacings-50);
+		}
 	}
 
 	&::before {
@@ -82,7 +96,7 @@
 		border-radius: var(--commons-borderRadius-M);
 		opacity: 0;
 		margin: 0;
-		margin-right: var(--pr-t-spacings-50);
+		margin-inline-end: var(--pr-t-spacings-50);
 		transform: translateY(var(--pr-t-spacings-50));
 		transition-duration: var(--commons-animations-durations-fast);
 		transition-property: opacity, transform;
@@ -104,7 +118,13 @@
 	}
 
 	&:is(button) {
-		text-align: right;
+		text-align: end;
+	}
+}
+
+@mixin sortableLegacy2AlignRight {
+	&::before {
+		margin-inline-end: 0;
 	}
 }
 

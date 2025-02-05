@@ -1,17 +1,15 @@
 import { Meta, StoryFn } from '@storybook/angular';
 
-interface LinkDecorationHoverStory {
-}
+interface LinkDecorationHoverStory {}
 
 export default {
 	title: 'Documentation/Actions/Link/DecorationHover',
-	argTypes: {
-	},
+	argTypes: {},
 } as Meta;
 
 function getTemplate(args: LinkDecorationHoverStory): string {
-	return `<a href="#" class="link mod-decorationHover">Lien</a>
-<a class="link mod-decorationHover mod-icon" href="#" target="_blank">Lien externe <span aria-hidden="true" class="lucca-icon icon-arrowExternal"></span><span class="u-mask">Ouvrir dans une nouvelle fenêtre</span></a>`;
+	return `<a href="#" class="link mod-decorationHover">Text link</a>
+<a class="link mod-decorationHover mod-icon" href="#" target="_blank">Text link<!-- no text node here --><span aria-hidden="true" class="lucca-icon icon-arrowExternal"></span><span class="u-mask">Open in a new window</span></a>`;
 }
 
 const Template: StoryFn<LinkDecorationHoverStory> = (args) => ({
@@ -20,10 +18,8 @@ const Template: StoryFn<LinkDecorationHoverStory> = (args) => ({
 	styles: [
 		`
 		:host {
-			display: block;
-		}
-		a {
-			margin-right: 1rem;
+			display: flex;
+			gap: var(--pr-t-spacings-200);
 		}
 		`,
 	],

@@ -19,16 +19,27 @@ export default {
 		value: {
 			description: 'Doit obligatoirement contenir une valeur numérique (ex: 7, "3/5", "+2", etc.)',
 		},
+		maxValue: {
+			type: 'number',
+		},
 		size: {
 			control: {
 				type: 'select',
 			},
-		}
+		},
+		loading: {
+			control: {
+				type: 'boolean',
+			},
+			description: '[v19.1]',
+		},
 	},
 } as Meta;
 
 export const Template: StoryObj<NumericBadgeComponent> = {
 	args: {
 		value: 7,
+		maxValue: 999,
+		loading: false,
 	},
 };

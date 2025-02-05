@@ -4,14 +4,14 @@
 		<div class="toast-item-content">
 			<div *ngIf="toast.title"><strong>{{ toast.title }}</strong></div>
 			@if (isStringPortalContent(toast.message)) {
-			<div [innerHtml]="toast.message"></div>
+			<p class="toast-item-content-description" [innerHtml]="toast.message"></p>
 			} @else {
 			<ng-container *luPortal="toast.message"></ng-container>
 			}
 		</div>
 		<button
 			type="button"
-			class="toasts-item-kill"
+			class="toasts-item-kill button"
 			(click)="removeToast(toast)"
 			(animationend)="(!isOnlyDismissibleManually(toast) && toast.duration > 0) ? removeToast(toast) : null"
 			[style.animation-duration]="(!isOnlyDismissibleManually(toast) && toast.duration > 0) ? toast.duration + 'ms' : null"
