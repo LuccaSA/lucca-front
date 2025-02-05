@@ -30,6 +30,7 @@
 	.errorPage-section-info-title {
 		@include title.component;
 		@include title.XXXL;
+
 		margin-block-end: var(--pr-t-spacings-50);
 	}
 

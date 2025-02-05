@@ -6,7 +6,6 @@
 	position: relative;
 	inline-size: fit-content;
 	block-size: fit-content;
-
 	display: grid;
 	grid-template-areas: 'checkbox';
 	grid-template-columns: var(--component-checkboxField-size);

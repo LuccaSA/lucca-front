@@ -24,13 +24,10 @@
 		.grid-column {
 			align-self: var(--grid-align, var(--grid-column-align));
 			justify-self: var(--grid-justify, var(--grid-column-justify));
-
 			grid-column-start: var(--grid-column, var(--grid-column-start));
 			grid-row-start: var(--grid-row, var(--grid-row-start));
-
 			grid-column-end: span var(--grid-colspan, var(--grid-column-end));
 			grid-row-end: span var(--grid-rowspan, var(--grid-row-end));
-
 			min-inline-size: 0;
 
 			@each $breakpoint, $value in config.$breakpoints {

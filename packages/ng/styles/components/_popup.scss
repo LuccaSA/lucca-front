@@ -84,7 +84,7 @@
 	&.mod-noPadding {
 		padding: 0;
 
-		&:after {
+		&::after {
 			padding-block-end: 0;
 		}
 	}

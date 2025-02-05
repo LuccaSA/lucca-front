@@ -1,4 +1,5 @@
 @use '@lucca-front/scss/src/commons/config';
+
 @mixin component($suffix: '') {
 	// no suffix here
 	margin-block-start: 0;
