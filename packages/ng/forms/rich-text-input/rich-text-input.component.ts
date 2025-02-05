@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, computed, contentChildren, ElementRef, forwardRef, inject, InjectionToken, OnDestroy, viewChild, ViewEncapsulation } from '@angular/core';
+import { Component, computed, contentChildren, ElementRef, forwardRef, inject, InjectionToken, OnDestroy, OnInit, viewChild, ViewEncapsulation } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { registerRichText } from '@lexical/rich-text';
 import { mergeRegister } from '@lexical/utils';
@@ -28,7 +28,7 @@ export const RICH_TEXT_PLUGIN_COMPONENT = new InjectionToken<RichTextPluginCompo
 		},
 	],
 })
-export class RichTextInputComponent implements AfterViewInit, OnDestroy, ControlValueAccessor {
+export class RichTextInputComponent implements OnInit, OnDestroy, ControlValueAccessor {
 	readonly richTextFormater: RichTextFormater = inject(RICH_TEXT_FORMATER);
 
 	#onChange?: (markdown: string | null) => void;
@@ -49,7 +49,7 @@ export class RichTextInputComponent implements AfterViewInit, OnDestroy, Control
 
 	pluginComponents = contentChildren(RICH_TEXT_PLUGIN_COMPONENT, { descendants: true });
 
-	ngAfterViewInit(): void {
+	ngOnInit(): void {
 		this.editor = createEditor({
 			theme: {
 				text: {

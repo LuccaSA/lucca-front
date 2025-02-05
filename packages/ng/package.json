@@ -35,9 +35,7 @@
     "@lexical/selection": "^0.23.1",
     "@lexical/utils": "^0.23.1",
     "date-fns": "^3.6.0",
-    "rxjs": "^7.8.0",
-    "lexical": "^0.19.0",
-    "marked": "^14.1.0"
+    "rxjs": "^7.8.0"
   },
   "optionalDependencies": {
     "@lexical/html": "^0.23.1",
