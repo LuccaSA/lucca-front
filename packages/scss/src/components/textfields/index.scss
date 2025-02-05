@@ -106,7 +106,7 @@
 
 		&.textfield-input {
 			&.mod-icon {
-				@include SInputIcon;
+				@include inputIconS;
 			}
 		}
 	}
@@ -116,7 +116,7 @@
 
 		&.textfield-input {
 			&.mod-icon {
-				@include XSInputIcon;
+				@include inputIconXS;
 			}
 		}
 	}

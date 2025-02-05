@@ -121,12 +121,12 @@
 	}
 }
 
-@mixin SInputIcon {
+@mixin inputIconS {
 	line-height: var(--sizes-XS-lineHeight);
 	font-size: var(--sizes-S-fontSize);
 }
 
-@mixin XSInputIcon {
+@mixin inputIconXS {
 	line-height: var(--sizes-XS-lineHeight);
 	font-size: var(--sizes-S-fontSize);
 }
