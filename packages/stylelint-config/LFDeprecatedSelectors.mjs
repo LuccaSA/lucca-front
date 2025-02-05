@@ -1,6 +1,7 @@
 export default [
 	{
-		objectPattern: /(\.button|\.mod-icon){2}/,
+		// Any combination of .button and .mod-icon with any non-whitespace character between
+		objectPattern: /\.(button|mod-icon)[\S]*\.(button|mod-icon)`/,
 		versionDeprecated: '17.2.0',
 		versionDeleted: '19.1.0',
 	},
