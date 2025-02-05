@@ -77,7 +77,7 @@
 @mixin focusVisible {
 	~ .checkboxField-icon {
 		&::after {
-			@include a11y.focusVisible();
+			@include a11y.focusVisible;
 		}
 	}
 }

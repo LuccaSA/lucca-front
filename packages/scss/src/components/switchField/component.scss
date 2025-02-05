@@ -88,7 +88,7 @@
 
 			&:focus-visible {
 				~ .switchField-icon {
-					@include a11y.focusVisible();
+					@include a11y.focusVisible;
 				}
 			}
 		}

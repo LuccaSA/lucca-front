@@ -19,7 +19,7 @@
 	}
 
 	&:focus-visible {
-		@include a11y.focusVisible();
+		@include a11y.focusVisible;
 	}
 
 	@at-root ($atRoot) {

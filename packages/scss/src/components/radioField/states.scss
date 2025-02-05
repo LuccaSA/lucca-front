@@ -65,7 +65,7 @@
 @mixin focusVisible {
 	~ .radioField-icon {
 		&::after {
-			@include a11y.focusVisible();
+			@include a11y.focusVisible;
 		}
 	}
 }

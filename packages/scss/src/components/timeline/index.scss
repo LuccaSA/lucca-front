@@ -30,7 +30,7 @@
 		@include vertical;
 
 		&:not(.mod-S):not(.mod-L) {
-			@include verticalNotSNotL();
+			@include verticalNotSNotL;
 		}
 
 		&.mod-S {
@@ -82,7 +82,7 @@
 		@include addBetweenStep;
 
 		&.mod-vertical:not(.mod-L) {
-			@include addBetweenStepVerticalNotL();
+			@include addBetweenStepVerticalNotL;
 		}
 
 		&.mod-L {
