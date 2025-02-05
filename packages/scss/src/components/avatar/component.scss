@@ -49,7 +49,7 @@
 		}
 
 		.avatarWrapper-item {
-			margin-block: calc(var(--components-avatarWrapper-overlap) / 2);
+			margin-block: var(--components-avatarWrapper-marginBlock);
 
 			&:not(:last-child) {
 				margin-right: calc(var(--components-avatarWrapper-overlap) * -1);

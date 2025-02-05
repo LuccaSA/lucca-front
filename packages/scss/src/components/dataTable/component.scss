@@ -128,4 +128,8 @@
 		display: flex;
 		width: fit-content;
 	}
+
+	.avatarWrapper {
+		margin-block: calc(var(--components-avatarWrapper-marginBlock) * -1);
+	}
 }
