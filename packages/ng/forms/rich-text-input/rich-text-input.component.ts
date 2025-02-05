@@ -66,14 +66,16 @@ export class RichTextInputComponent implements AfterViewInit, OnDestroy, Control
 			registerRichText(this.editor),
 			// registerCtrlEnterShortcut(this.editor, () => this.ctrlEnter.emit()),
 			// Sync editor state with ngControlValue
-			this.editor.registerUpdateListener(() => {
-				this.richTextFormater
-					.format(this.editor)
-					.then((markdown) => {
-						this.#onTouch?.();
-						this.#onChange?.(markdown);
-					})
-					.catch(() => void 0);
+			this.editor.registerUpdateListener((changes) => {
+				if (changes.dirtyElements.size) {
+					this.richTextFormater
+						.format(this.editor)
+						.then((markdown) => {
+							this.#onTouch?.();
+							this.#onChange?.(markdown);
+						})
+						.catch(() => void 0);
+				}
 			}),
 		);
 
