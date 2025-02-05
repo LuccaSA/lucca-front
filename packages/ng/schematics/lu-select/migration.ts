@@ -3,7 +3,7 @@ import ts, { isImportDeclaration, isNamedImports, ScriptTarget, SourceFile } fro
 import { extractComponentImports, insertAngularImportIfNeeded, insertTSImportIfNeeded, removeAngularImport, removeTSImport } from '../lib/angular-component-ast';
 import { extractNgTemplatesIncludingHtml } from '../lib/angular-template';
 import { getCommonMigrationRejectionReason, getDataSource, getDisplayer, isRejection, RejectionReason } from './util';
-import { LuSelectInputContext, PremadeApiSelectContext, RejectedSelectContext, SelectComponent, SelectContext, selectorToComponentName, selectorToSelectComponentName } from './model/select-context';
+import { LuApiSelectInputComponentContext, LuSelectInputContext, PremadeApiSelectContext, RejectedSelectContext, SelectComponent, SelectContext, selectorToComponentName, selectorToSelectComponentName } from './model/select-context';
 import { Tree, UpdateRecorder } from '@angular-devkit/schematics';
 import { applyToUpdateRecorder } from '@schematics/angular/utility/change';
 import { getEOL } from '@schematics/angular/utility/eol';
@@ -16,7 +16,9 @@ const importSource: Record<string, string> = {
 	LuInputClearerComponent: '@lucca-front/ng/input',
 	LuCoreSelectEstablishmentsDirective: '@lucca-front/ng/core-select',
 	LuCoreSelectJobQualificationsDirective: '@lucca-front/ng/core-select',
-	LuCoreSelectUsersDirective: '@lucca-front/ng/core-select'
+	LuCoreSelectUsersDirective: '@lucca-front/ng/core-select',
+	LuCoreSelectApiV3Directive: '@lucca-front/ng/core-select/api',
+	LuCoreSelectApiV4Directive: '@lucca-front/ng/core-select/api'
 };
 
 const selectorToComponentNameRecord = selectorToSelectComponentName as Record<string, SelectComponent>;
@@ -36,6 +38,9 @@ export function migrateComponent(sourceFile: SourceFile, path: string, tree: Tre
 					case 'LuSelectInputComponent':
 						handleLuSelectInputComponent(select, templateUpdate, compiler);
 						break;
+					case 'LuApiSelectInputComponent':
+						handleApiSelectInputComponent(select, templateUpdate, compiler);
+						break;
 					case 'LuEstablishmentSelectInputComponent':
 					case 'LuQualificationSelectInputComponent':
 					case 'LuUserSelectModule':
@@ -51,10 +56,10 @@ export function migrateComponent(sourceFile: SourceFile, path: string, tree: Tre
 			// We're not checking using else here because handle** methods can also add a rejection reason
 			// We want to handle both cases (before handling and after) here
 			if (select.rejection) {
-				console.log(`\x1b[31mCouldn't migrate ${select.component} in ${path}: ${RejectionReason[select.rejection.reason]}\x1b[0m`);
+				//console.log(`\x1b[31mCouldn't migrate ${select.component} in ${path}: ${RejectionReason[select.rejection.reason]}\x1b[0m`);
 				insertRejectionComment(templateUpdate, select as RejectedSelectContext);
 			} else {
-				console.log(`\x1b[36mMigrated ${select.component} in ${path}\x1b[0m`);
+				//console.log(`\x1b[36mMigrated ${select.component} in ${path}\x1b[0m`);
 			}
 		});
 		tree.commitUpdate(tsUpdate);
@@ -188,7 +193,7 @@ function handleLuSelectInputComponent(select: LuSelectInputContext, update: Upda
 			update.remove(select.nodeOffset + select.multiple.start, select.multiple.end - select.multiple.start);
 		}
 		const displayer = getDisplayer(select, compiler);
-		const endSpanOffset = select.node.endSourceSpan?.start.offset || 0;
+		const endSpanOffset = select.node.endSourceSpan?.start.offset || -1;
 		// Remove content
 		update.remove(select.nodeOffset + select.node.startSourceSpan.end.offset, endSpanOffset - select.node.startSourceSpan.end.offset);
 		// rename opening tag and insert options
@@ -215,9 +220,12 @@ function handleLuSelectInputComponent(select: LuSelectInputContext, update: Upda
 			select.requiredImports.push('LuDisplayerDirective');
 			update.insertRight(select.nodeOffset + select.node.startSourceSpan.end.offset, `${getEOL(select.node.startSourceSpan.end.file.content)}  <ng-container *luDisplayer="${displayer.variables}">${displayer.display}</ng-container>${getEOL(select.node.startSourceSpan.end.file.content)}`);
 		}
-		// rename closing tag
-		update.remove(select.nodeOffset + endSpanOffset + 2, select.tagName.length);
-		update.insertRight(select.nodeOffset + endSpanOffset + 2, tag);
+		// If it's not a self closing tag
+		if (select.node.startSourceSpan.start.offset !== select.node.endSourceSpan?.start.offset) {
+			// rename closing tag
+			update.remove(select.nodeOffset + endSpanOffset + 2, select.tagName.length);
+			update.insertRight(select.nodeOffset + endSpanOffset + 2, tag);
+		}
 	}
 }
 
@@ -233,12 +241,80 @@ function handlePremadeApiSelect(select: PremadeApiSelectContext, update: UpdateR
 	if (select.multiple) {
 		update.remove(select.nodeOffset + select.multiple.start, select.multiple.end - select.multiple.start);
 	}
-	const endSpanOffset = select.node.endSourceSpan?.start.offset || 0;
+	const endSpanOffset = select.node.endSourceSpan?.start.offset || -1;
 	// rename opening tag and insert data directive
 	update.remove(select.nodeOffset + select.node.startSourceSpan.start.offset + 1, select.tagName.length);
 	// rename tag and add options + selector if needed
 	update.insertRight(select.nodeOffset + select.node.startSourceSpan.start.offset + 1, `${tag} ${sourceDirective.selector}`);
-	// rename closing tag
-	update.remove(select.nodeOffset + endSpanOffset + 2, select.tagName.length);
-	update.insertRight(select.nodeOffset + endSpanOffset + 2, tag);
+	// If it's not a self closing tag
+	if (select.node.startSourceSpan.start.offset !== select.node.endSourceSpan?.start.offset) {
+		// rename closing tag
+		update.remove(select.nodeOffset + endSpanOffset + 2, select.tagName.length);
+		update.insertRight(select.nodeOffset + endSpanOffset + 2, tag);
+	}
+}
+
+function handleApiSelectInputComponent(select: LuApiSelectInputComponentContext, update: UpdateRecorder, compiler: AngularCompilerLib) {
+	let apiStandard: 'v3' | 'v4' = 'v3';
+	let apiEndpoint: string = '';
+	let oldApiInput = { pos: 0, length: 0 };
+	let oldApiStandard = { pos: 0, length: 0 };
+	select.node.attributes.forEach(attr => {
+		if (attr.name === 'api') {
+			apiEndpoint = attr.value;
+			oldApiInput = {
+				pos: attr.sourceSpan.start.offset,
+				length: attr.sourceSpan.end.offset - attr.sourceSpan.start.offset
+			};
+		}
+		if (attr.name === 'standard') {
+			apiStandard = attr.value as 'v3' | 'v4';
+			oldApiStandard = {
+				pos: attr.sourceSpan.start.offset,
+				length: attr.sourceSpan.end.offset - attr.sourceSpan.start.offset
+			};
+		}
+	});
+	select.node.inputs.forEach(input => {
+		if (input.name === 'api' && input.value instanceof compiler.ASTWithSource) {
+			apiEndpoint = input.value?.source || '';
+			oldApiInput = {
+				pos: input.sourceSpan.start.offset,
+				length: input.sourceSpan.end.offset - input.sourceSpan.start.offset
+			};
+		}
+		if (input.name === 'standard' && input.value instanceof compiler.ASTWithSource) {
+			apiStandard = (input.value?.source || 'v3') as 'v3' | 'v4';
+			oldApiStandard = {
+				pos: input.sourceSpan.start.offset,
+				length: input.sourceSpan.end.offset - input.sourceSpan.start.offset
+			};
+		}
+	});
+	const sourceDirective = {
+		'v3': { selector: 'apiV3', className: 'LuCoreSelectApiV3Directive' },
+		'v4': { selector: 'apiV4', className: 'LuCoreSelectApiV4Directive' }
+	}[apiStandard];
+	select.requiredImports = select.multiple ? ['LuMultiSelectInputComponent', sourceDirective.className] : ['LuSimpleSelectInputComponent', sourceDirective.className];
+	const tag = select.multiple ? 'lu-multi-select' : 'lu-simple-select';
+	if (select.multiple) {
+		update.remove(select.nodeOffset + select.multiple.start, select.multiple.end - select.multiple.start);
+	}
+	const endSpanOffset = select.node.endSourceSpan?.start.offset || -1;
+	// rename opening tag and insert data directive
+	update.remove(select.nodeOffset + select.node.startSourceSpan.start.offset + 1, select.tagName.length);
+	if (oldApiInput.length > 0) {
+		update.remove(select.nodeOffset + oldApiInput.pos, oldApiInput.length + 1);
+	}
+	if (oldApiStandard.length > 0) {
+		update.remove(select.nodeOffset + oldApiStandard.pos, oldApiStandard.length + 1);
+	}
+	// rename tag and add options + selector if needed
+	update.insertRight(select.nodeOffset + select.node.startSourceSpan.start.offset + 1, `${tag} ${sourceDirective.selector}="${apiEndpoint}"`);
+	// If it's not a self closing tag
+	if (select.node.startSourceSpan.start.offset !== select.node.endSourceSpan?.start.offset) {
+		// rename closing tag
+		update.remove(select.nodeOffset + endSpanOffset + 2, select.tagName.length);
+		update.insertRight(select.nodeOffset + endSpanOffset + 2, tag);
+	}
 }

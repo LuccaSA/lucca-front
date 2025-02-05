@@ -1,0 +1,18 @@
+{
+	"extends": [
+		"../../.eslintrc"
+	],
+	"overrides": [
+		{
+			"files": [
+				"*.ts"
+			],
+			"rules": {
+				// OUR RULES
+				"no-console": [
+					"ignore"
+				]
+			}
+		}
+	]
+}
