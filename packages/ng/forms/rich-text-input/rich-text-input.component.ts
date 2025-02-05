@@ -2,8 +2,9 @@ import { AfterViewInit, Component, computed, contentChildren, ElementRef, forwar
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { registerRichText } from '@lexical/rich-text';
 import { mergeRegister } from '@lexical/utils';
-import { CommandPayloadType, createEditor, Klass, LexicalCommand, LexicalEditor, LexicalNode } from 'lexical';
+import { createEditor, Klass, LexicalEditor, LexicalNode } from 'lexical';
 import { RICH_TEXT_FORMATER, RichTextFormater } from './rich-text-formater';
+import { createEmptyHistoryState, registerHistory } from '@lexical/history';
 
 export interface RichTextPluginComponent {
 	setEditorInstance(editor: LexicalEditor): void;
@@ -64,8 +65,7 @@ export class RichTextInputComponent implements AfterViewInit, OnDestroy, Control
 		this.editor.setRootElement(this.content().nativeElement);
 		this.#cleanup = mergeRegister(
 			registerRichText(this.editor),
-			// registerCtrlEnterShortcut(this.editor, () => this.ctrlEnter.emit()),
-			// Sync editor state with ngControlValue
+			registerHistory(this.editor, createEmptyHistoryState(), 300),
 			this.editor.registerUpdateListener((changes) => {
 				if (changes.dirtyElements.size) {
 					this.richTextFormater
@@ -105,14 +105,5 @@ export class RichTextInputComponent implements AfterViewInit, OnDestroy, Control
 
 	setDisabledState?(isDisabled: boolean): void {
 		this.editor?.setEditable(!isDisabled);
-	}
-
-	onKeyDown(_$event: KeyboardEvent) {
-		// later
-	}
-
-	dispatchCommand<T extends LexicalCommand<unknown>>($event: Event, type: T, payload: CommandPayloadType<T>) {
-		$event.preventDefault();
-		this.editor?.dispatchCommand(type, payload);
 	}
 }
