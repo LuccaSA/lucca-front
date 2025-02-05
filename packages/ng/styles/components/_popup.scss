@@ -38,6 +38,41 @@
 	&.mod-XL {
 		inline-size: var(--components-popup-XL);
 	}
+
+	&.mod-commInApp {
+		inline-size: 30rem;
+
+		.lu-modal-content {
+			text-align: center;
+
+			&::after {
+				content: none;
+			}
+		}
+
+		.lu-modal-content-title {
+			color: var(--palettes-neutral-800);
+			font-size: var(--sizes-XL-fontSize);
+			margin-block-start: 2.5rem;
+		}
+
+		.button {
+			margin-block-end: 2.5rem;
+		}
+
+		.modal-visual {
+			margin-block: 4.5rem 0;
+			margin-inline: calc(var(--pr-t-spacings-400) * -1);
+		}
+
+		.modal-visual-illustration {
+			vertical-align: bottom;
+		}
+
+		.lu-modal-footer {
+			display: none;
+		}
+	}
 }
 
 .lu-modal-panel-inner {
@@ -120,43 +155,6 @@
 		max-block-size: stretch;
 		block-size: 100vh;
 		block-size: stretch;
-	}
-}
-
-.lu-popup-panel {
-	&.mod-commInApp {
-		inline-size: 30rem;
-
-		.lu-modal-content {
-			text-align: center;
-
-			&::after {
-				content: none;
-			}
-		}
-
-		.lu-modal-content-title {
-			color: var(--palettes-neutral-800);
-			font-size: var(--sizes-XL-fontSize);
-			margin-block-start: 2.5rem;
-		}
-
-		.button {
-			margin-block-end: 2.5rem;
-		}
-
-		.modal-visual {
-			margin-block: 4.5rem 0;
-			margin-inline: calc(var(--pr-t-spacings-400) * -1);
-		}
-
-		.modal-visual-illustration {
-			vertical-align: bottom;
-		}
-
-		.lu-modal-footer {
-			display: none;
-		}
 	}
 }
 

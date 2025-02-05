@@ -42,10 +42,6 @@
 			display: table-row;
 		}
 
-		.indexTable-body-row {
-			border-radius: var(--commons-borderRadius-L);
-		}
-
 		.indexTable-head-row-transparentCell,
 		.indexTable-body-row-transparentCell,
 		.indexTable-head-row-cell,
@@ -78,6 +74,8 @@
 		}
 
 		.indexTable-body-row {
+			border-radius: var(--commons-borderRadius-L);
+
 			&:has(.indexTable-body-row-cell-link) {
 				.indexTable-body-row-cell {
 					&:not(:has(button, a, input, textarea, select, details, [tabindex='0']), .mod-allowTextSelection) {
@@ -98,6 +96,7 @@
 		}
 
 		.indexTable-foot-row-cell {
+			text-align: end;
 			padding-block: var(--pr-t-spacings-50);
 		}
 
@@ -245,10 +244,6 @@
 
 		.indexTable-body-row-cellTitle-title {
 			font-weight: 600;
-		}
-
-		.indexTable-foot-row-cell {
-			text-align: end;
 		}
 
 		// A wrapper is needed for pagination

@@ -50,6 +50,7 @@ export default {
 			},
 		],
 		'scss/comment-no-empty': null,
+		'block-no-empty': null,
 
 		// Generic rules
 		// ============================================================================================

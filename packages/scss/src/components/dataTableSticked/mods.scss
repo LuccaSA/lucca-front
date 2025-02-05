@@ -100,8 +100,18 @@
 		content: none;
 	}
 
-	:is(.dataTable-body-row-cell, .dataTable-head-row-cell, .dataTable-foot-row-cell) {
+	:is(.dataTable-head-row-cell, .dataTable-body-row-cell, .dataTable-foot-row-cell) {
 		&.mod-stickyColumn {
+			position: sticky;
+
+			&:first-child {
+				inset-inline-start: 0;
+			}
+
+			&:last-child {
+				inset-inline-end: 0;
+			}
+
 			&:has(~ :is(.dataTable-body-row-cell, .dataTable-head-row-cell, .dataTable-foot-row-cell):not(.mod-stickyColumn)) {
 				transform: translateX(-1px);
 
@@ -128,20 +138,6 @@
 						@extend %removeShadow;
 					}
 				}
-			}
-		}
-	}
-
-	:is(.dataTable-head-row-cell, .dataTable-body-row-cell, .dataTable-foot-row-cell) {
-		&.mod-stickyColumn {
-			position: sticky;
-
-			&:first-child {
-				inset-inline-start: 0;
-			}
-
-			&:last-child {
-				inset-inline-end: 0;
 			}
 		}
 	}

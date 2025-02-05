@@ -218,15 +218,13 @@
 		box-shadow: 0 2px 0 0 var(--palettes-#{$state}-700);
 	}
 
-	&:focus {
-		box-shadow: 0 2px 0 0 var(--palettes-#{$state}-700);
-	}
-
 	~ .textfield-label {
 		color: var(--palettes-#{$state}-700);
 	}
 
 	&:focus {
+		box-shadow: 0 2px 0 0 var(--palettes-#{$state}-700);
+
 		~ .textfield-label {
 			color: var(--palettes-#{$state}-700);
 		}

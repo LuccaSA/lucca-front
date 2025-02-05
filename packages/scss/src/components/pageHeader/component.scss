@@ -28,10 +28,6 @@
 			display: flex;
 			align-items: center;
 			flex-wrap: wrap;
-			row-gap: var(--pr-t-spacings-200);
-		}
-
-		.pageHeader-content-actions {
 			gap: var(--pr-t-spacings-200);
 
 			.button {

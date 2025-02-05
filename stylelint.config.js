@@ -19,16 +19,13 @@ module.exports = {
 			// TODO: Fix those rules after removing them.
 			files: ['**/*.scss'],
 			rules: {
-				'block-no-empty': null,
-				'no-descending-specificity': null,
-				'no-descending-specificity': null,
-				'no-duplicate-selectors': null,
 				'property-no-vendor-prefix': null,
 				'scss/at-mixin-argumentless-call-parentheses': null,
 				'scss/at-mixin-pattern': null,
 				'scss/at-rule-conditional-no-parentheses': null,
 				'scss/at-rule-no-unknown': null,
 				'selector-not-notation': null,
+				'no-descending-specificity': null,
 			},
 		},
 	],

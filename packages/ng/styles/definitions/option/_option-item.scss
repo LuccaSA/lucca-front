@@ -181,9 +181,7 @@
 			.optionItem-value {
 				position: relative;
 				padding-inline-start: calc(var(--components-options-checkbox-size) + var(--pr-t-spacings-100) * 2);
-			}
 
-			.optionItem-value {
 				&::before,
 				&::after {
 					inset-inline-start: var(--pr-t-spacings-100);
