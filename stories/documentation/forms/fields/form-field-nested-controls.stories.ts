@@ -1,9 +1,9 @@
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { FormFieldComponent, InputDirective } from '@lucca-front/ng/form-field';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { RadioComponent, RadioGroupInputComponent, TextInputComponent } from '@lucca-front/ng/forms';
 import { JsonPipe } from '@angular/common';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormFieldComponent, InputDirective } from '@lucca-front/ng/form-field';
+import { RadioComponent, RadioGroupInputComponent, TextInputComponent } from '@lucca-front/ng/forms';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { StoryModelDisplayComponent } from '../../../helpers/story-model-display.component';
 
 export default {
@@ -67,7 +67,7 @@ export const Template: StoryObj<FormFieldComponent & { required: boolean }> = {
 		label: 'Label',
 		required: true,
 		hiddenLabel: false,
-		inlineMessage: 'Helper Text',
+		inlineMessage: 'Helper text',
 		errorInlineMessage: 'Error helper text',
 		inlineMessageState: 'default',
 		tooltip: 'You expected me to be helpful but this is a story!',
