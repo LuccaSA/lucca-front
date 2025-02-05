@@ -1,3 +1,5 @@
+@use '@lucca-front/scss/src/commons/utils/overflow';
+
 @mixin active {
 	background-color: var(--components-navSide-fullwidth-palette-selected-bg);
 	color: var(--components-navSide-fullwidth-palette-selected-text);
@@ -45,14 +47,5 @@
 }
 
 @mixin overlay {
-	&,
-	body {
-		touch-action: none;
-		overscroll-behavior: none;
-		-webkit-overflow-scrolling: auto;
-	}
-
-	body {
-		overflow: hidden !important;
-	}
+	@include overflow.scrollblock;
 }
