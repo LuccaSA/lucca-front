@@ -18,6 +18,7 @@ export default {
 	rules: {
 		// SCSS specific
 		// ============================================================================================
+		'scss/at-rule-conditional-no-parentheses': null,
 		'scss/at-function-pattern': [
 			'^(([a-z][a-zA-Z0-9]*)((-(([a-z0-9]+[a-zA-Z0-9]*)|([A-Z]+))+)*)|[A-Z]+)$',
 			{
@@ -50,7 +51,6 @@ export default {
 			},
 		],
 		'scss/comment-no-empty': null,
-		'block-no-empty': null,
 
 		// Generic rules
 		// ============================================================================================
@@ -68,6 +68,7 @@ export default {
 				ignoreAtRules: ['else'],
 			},
 		],
+		'block-no-empty': null,
 		'color-hex-length': null,
 		'custom-property-empty-line-before': [
 			'always',
