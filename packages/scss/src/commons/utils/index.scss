@@ -258,11 +258,11 @@
 .u-noSpinButtons {
 	&::-webkit-outer-spin-button,
 	&::-webkit-inner-spin-button {
-		-webkit-appearance: none !important;
+		appearance: none !important;
 	}
 
 	&[type='number'] {
-		-moz-appearance: textfield !important;
+		appearance: textfield !important;
 	}
 }
 
