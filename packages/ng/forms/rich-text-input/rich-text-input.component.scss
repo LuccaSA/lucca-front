@@ -11,6 +11,10 @@
 	background-color: var(--palettes-grey-25);
 }
 
+.editor-content {
+	overflow: auto;
+}
+
 .editorTheme__textBold {
 	font-weight: bold;
 }

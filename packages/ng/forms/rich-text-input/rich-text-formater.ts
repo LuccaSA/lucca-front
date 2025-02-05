@@ -1,5 +1,6 @@
 import { InjectionToken } from '@angular/core';
 import { $getRoot, $insertNodes, LexicalEditor } from 'lexical';
+import { sanitize } from 'isomorphic-dompurify';
 
 export abstract class RichTextFormater {
 	abstract parse(editor: LexicalEditor, text?: string | null): Promise<void>;
@@ -26,7 +27,12 @@ export class MarkdownFormater extends RichTextFormater {
 export class HTMLFormater extends RichTextFormater {
 	override async parse(editor: LexicalEditor, htmlString?: string | null): Promise<void> {
 		const parser = new DOMParser();
-		const dom = parser.parseFromString(htmlString, 'text/html');
+		const dom = parser.parseFromString(
+			sanitize(htmlString, {
+				FORBID_ATTR: ['style'],
+			}),
+			'text/html',
+		);
 		const lexicalHtml = await import('@lexical/html');
 
 		editor.update(() => {
@@ -46,7 +52,9 @@ export class HTMLFormater extends RichTextFormater {
 		const lexicalHTML = await import('@lexical/html');
 		let result = '';
 		editor.getEditorState().read(() => (result = lexicalHTML.$generateHtmlFromNodes(editor)));
-		return result;
+		return sanitize(result, {
+			FORBID_ATTR: ['style'],
+		});
 	}
 }
 
