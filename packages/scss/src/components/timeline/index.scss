@@ -29,7 +29,7 @@
 	&.mod-vertical {
 		@include vertical;
 
-		&:not(.mod-S):not(.mod-L) {
+		&:not(.mod-S, .mod-L) {
 			@include verticalNotSNotL;
 		}
 

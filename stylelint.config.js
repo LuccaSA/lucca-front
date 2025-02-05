@@ -19,7 +19,6 @@ module.exports = {
 			// TODO: Fix those rules after removing them.
 			files: ['**/*.scss'],
 			rules: {
-				'selector-not-notation': null,
 				'no-descending-specificity': null,
 			},
 		},

@@ -27,6 +27,7 @@
 		}
 	}
 
+	// stylelint-disable-next-line selector-not-notation
 	.timeline-step:not([aria-current='step']):not([aria-current='step'] ~ .timeline-step) .timeline-step-title-icon {
 		&::before {
 			inset-inline-start: var(--pr-t-spacings-100);
@@ -179,6 +180,7 @@
 }
 
 @mixin checkedPastStep {
+	// stylelint-disable-next-line selector-not-notation
 	.timeline-step:not([aria-current='step']):not([aria-current='step'] ~ .timeline-step):not(.timeline-stepAddBetweenStep) {
 		.timeline-step-title {
 			&::before {
@@ -208,6 +210,7 @@
 }
 
 @mixin checkedPastStepVerticalNotL {
+	// stylelint-disable-next-line selector-not-notation
 	.timeline-step:not([aria-current='step']):not([aria-current='step'] ~ .timeline-step) {
 		.timeline-step-title {
 			.timeline-step-title-icon::before {
@@ -340,6 +343,7 @@
 		}
 	}
 
+	// stylelint-disable-next-line selector-not-notation
 	.timeline-step:not([aria-current='step']):not([aria-current='step'] ~ .timeline-step) .timeline-step-title-icon::before {
 		@include icon.generate('maths_plus');
 
@@ -349,12 +353,14 @@
 }
 
 @mixin addBetweenStepVerticalNotL {
+	// stylelint-disable-next-line selector-not-notation
 	.timeline-step:not([aria-current='step']):not([aria-current='step'] ~ .timeline-step) .timeline-step-title-icon::before {
 		inset-inline-start: 0;
 	}
 }
 
 @mixin addBetweenStepL {
+	// stylelint-disable-next-line selector-not-notation
 	.timeline-step:not([aria-current='step']):not([aria-current='step'] ~ .timeline-step) .timeline-step-title-icon::before {
 		inline-size: 1.5rem;
 		block-size: 1.5rem;
