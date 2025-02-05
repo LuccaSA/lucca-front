@@ -28,6 +28,7 @@
 		$breakpoint: pxToEm(map.get(config.$breakpoints, $breakpoint));
 	}
 
+	// stylelint-disable-next-line scss/at-rule-no-unknown
 	@#{$at} #{$name} #{$reversed} (min-#{$property}: #{$breakpoint}) {
 		@content;
 	}
@@ -55,11 +56,13 @@
 		$breakpoint1: $breakpointTmp;
 	}
 
+	// stylelint-disable scss/at-rule-no-unknown
 	@#{$at} #{$name} (min-#{$property}: #{$breakpoint1}) {
 		@#{$at} #{$name} #{$reversed} (min-#{$property}: #{$breakpoint2}) {
 			@content;
 		}
 	}
+	// stylelint-enable
 }
 
 // les raccourcis vers les requêtes pour min/max/between
@@ -97,9 +100,9 @@
 }
 
 @mixin betweenWidths($breakpoint1, $breakpoint2, $at: 'media') {
-    @include queries($breakpoint1, $breakpoint2, $at: $at) {
-        @content;
-    }
+	@include queries($breakpoint1, $breakpoint2, $at: $at) {
+		@content;
+	}
 }
 
 // les raccourcis vers les requêtes pour minHeight/maxHeight/betweenHeights
@@ -117,9 +120,9 @@
 }
 
 @mixin betweenHeights($breakpoint1, $breakpoint2, $at: 'media') {
-    @include queries($breakpoint1, $breakpoint2, $property: 'height', $at: $at) {
-        @content;
-    }
+	@include queries($breakpoint1, $breakpoint2, $property: 'height', $at: $at) {
+		@content;
+	}
 }
 
 // Touch detection
