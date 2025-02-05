@@ -33,12 +33,20 @@
 		"editor.defaultFormatter": "esbenp.prettier-vscode"
 	},
 	"[scss]": {
-		"editor.formatOnSave": true,
-		"editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "stylelint.vscode-stylelint",
+    "editor.codeActionsOnSave": {
+      "source.fixAll.stylelint": "explicit"
+    },
 	},
 	"[markdown]": {
 		"editor.codeActionsOnSave": {
 			"source.fixAll.markdownlint": "explicit"
 		}
-	}
+	},
+  "stylelint.reportInvalidScopeDisables": true,
+  "stylelint.reportNeedlessDisables": true,
+  "stylelint.snippet": ["css", "scss"],
+  "stylelint.validate": ["css", "scss"],
+  "stylelint.customSyntax": "postcss-scss"
 }

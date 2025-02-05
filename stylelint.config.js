@@ -15,13 +15,8 @@ module.exports = {
 				'no-empty-source': null,
 			},
 		},
-		{
-			// TODO: Fix those rules after removing them.
-			files: ['**/*.scss'],
-			rules: {
-				'no-descending-specificity': null,
-			},
-		},
 	],
-	rules: {},
+	rules: {
+		'no-descending-specificity': null,
+	},
 };
