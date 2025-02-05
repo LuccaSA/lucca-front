@@ -1,92 +1,110 @@
-<h1>Cards</h1>
-
-<!-- Basics -->
-<section class="contentSection">
-	<h2>Basics</h2>
-	<div class="card">
-		<div class="card-content">
-			<h2 class="card-title">Title</h2>
-			<p>I'm a card of content</p>
-		</div>
-	</div>
-</section>
-
-<!-- Action -->
-<section class="contentSection">
-	<h2>Action</h2>
-	<div class="card mod-action">
-		<div class="card-content">
-			<h2 class="card-title">Title</h2>
-			<p>I'm a card of content</p>
-		</div>
-	</div>
-</section>
-
-<!-- Action -->
-<section class="contentSection">
-	<h2>Action</h2>
-	<div class="card mod-action">
-		<div class="card-content">
-			<h2 class="card-title">Title</h2>
-			<p>I'm a card of content</p>
-		</div>
-		<div class="card-action">
-			<button type="button" class="button mod-onlyIcon mod-text" luTooltip="Modifier">
-				<span aria-hidden="true" class="lucca-icon icon-arrowRight"></span>
-				<span class="u-mask">Accéder</span>
-			</button>
-		</div>
-	</div>
-</section>
-
-<!-- Neutral -->
-<section class="contentSection">
-	<h2>Neutral</h2>
-	<div class="card mod-neutral">
-		<div class="card-content">
-			<h2 class="card-title">Title</h2>
-			<p>I'm a card of content</p>
-		</div>
-	</div>
-</section>
-
-<!-- Footer -->
-<section class="contentSection">
-	<h2>Cards with footer</h2>
-	<div class="card mod-column">
-		<div class="card-content">
-			<h2 class="card-title">Title</h2>
-			<div>Card content</div>
-		</div>
-		<footer class="card-footer">
-			<div class="card-footer-right">
-				<button type="button" class="button palette-product">Confirm</button>
-				<button type="button" class="button mod-text">Cancel</button>
-			</div>
-		</footer>
-	</div>
-</section>
-
-<!-- States -->
-<section class="contentSection">
-	<h2 class="card-title">States</h2>
-	<a href class="card mod-clickable">
-		<div class="card-content">Hover me!</div>
-	</a>
-	<div class="card is-disabled">
-		<div class="card-content">I'm disabled :(</div>
-	</div>
-</section>
-
-<!-- Elevated -->
-<section class="contentSection">
-	<div class="card mod-elevated">
-		<div class="card-content">
-			<h2 class="card-title">Title</h2>
-			<p>I'm a card of content</p>
-		</div>
-	</div>
-</section>
+<table class="demo-QAtable">
+	<tbody>
+		<tr>
+			<td>Default</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<div class="card">
+						<div class="card-content">
+							<h2 class="card-title">Title</h2>
+							<p>I'm a card of content</p>
+						</div>
+					</div>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Action</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<div class="card mod-action">
+						<div class="card-content">
+							<h2 class="card-title">Title</h2>
+							<p>I'm a card of content</p>
+						</div>
+					</div>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Action arrow</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<div class="card mod-action">
+						<div class="card-content">
+							<h2 class="card-title">Title</h2>
+							<p>I'm a card of content</p>
+						</div>
+						<div class="card-action">
+							<button type="button" class="button mod-onlyIcon mod-text" luTooltip="Modifier">
+								<span aria-hidden="true" class="lucca-icon icon-arrowRight"></span>
+								<span class="u-mask">Accéder</span>
+							</button>
+						</div>
+					</div>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Neutral</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<div class="card mod-neutral">
+						<div class="card-content">
+							<h2 class="card-title">Title</h2>
+							<p>I'm a card of content</p>
+						</div>
+					</div>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Footer</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<div class="card mod-column">
+						<div class="card-content">
+							<h2 class="card-title">Title</h2>
+							<div>Card content</div>
+						</div>
+						<footer class="card-footer">
+							<div class="card-footer-right">
+								<button type="button" class="button palette-product">Confirm</button>
+								<button type="button" class="button mod-text">Cancel</button>
+							</div>
+						</footer>
+					</div>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>States</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<a href class="card mod-clickable">
+						<div class="card-content">Hover me!</div>
+					</a>
+					<div class="card is-disabled">
+						<div class="card-content">I'm disabled :(</div>
+					</div>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Elevated</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<div class="card mod-elevated">
+						<div class="card-content">
+							<h2 class="card-title">Title</h2>
+							<p>I'm a card of content</p>
+						</div>
+					</div>
+				</div>
+			</td>
+		</tr>
+	</tbody>
+</table>
 
 <!-- To tell the ui-diff tool that the page has finished rendering -->
 <span id="ready"></span>

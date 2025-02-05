@@ -44,6 +44,10 @@
 		&:first-child {
 			white-space: nowrap;
 		}
+
+		&:has(.demo-QAtable-list.mod-white) {
+			background-color: white;
+		}
 	}
 }
 
@@ -52,4 +56,8 @@
 	gap: var(--pr-t-spacings-100);
 	align-items: center;
 	flex-wrap: wrap;
+
+	&.mod-white {
+		background-color: white;
+	}
 }
