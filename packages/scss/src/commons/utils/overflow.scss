@@ -1,0 +1,9 @@
+@mixin scrollblock($suffix: '') {
+	&,
+	body {
+		touch-action: none #{$suffix};
+		overscroll-behavior: none #{$suffix};
+		-webkit-overflow-scrolling: auto #{$suffix};
+		overflow: hidden #{$suffix};
+	}
+}

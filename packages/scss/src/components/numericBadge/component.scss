@@ -1,4 +1,6 @@
-@mixin component {
+@use '@lucca-front/scss/src/commons/utils/namespace';
+
+@mixin component($atRoot: namespace.$defaultAtRoot) {
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
@@ -21,6 +23,12 @@
 		&::before {
 			// stylelint-disable-next-line no-irregular-whitespace -- Don’t wrap content because of a space.
 			content: ' ';
+		}
+	}
+
+	@at-root ($atRoot) {
+		.numericBadge-value {
+			outline: none;
 		}
 	}
 }
