@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, HostBinding, inject, Input, OnChanges, SimpleChanges, ViewEncapsulation } from '@angular/core';
 import { LuClass, Palette } from '@lucca-front/ng/core';
+import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 
 @Component({
 	selector: 'lu-numeric-badge',
@@ -7,6 +8,7 @@ import { LuClass, Palette } from '@lucca-front/ng/core';
 	templateUrl: './numeric-badge.component.html',
 	styleUrls: ['./numeric-badge.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
+	imports: [LuTooltipModule],
 	providers: [LuClass],
 	host: {
 		class: 'numericBadge',
@@ -38,6 +40,9 @@ export class NumericBadgeComponent implements OnChanges {
 	}
 
 	@Input()
+	maxValue = 999;
+
+	@Input()
 	/**
 	 * The palette to use for this badge. Defaults to 'none' (inherits parent palette)
 	 */
@@ -48,4 +53,12 @@ export class NumericBadgeComponent implements OnChanges {
 			this.#luClass.setState({ [`palette-${this.palette}`]: !!this.palette, [`mod-${this.size}`]: !!this.size });
 		}
 	}
+
+	displayValue = () => {
+		if (typeof this.value === 'number') {
+			return this.value > this.maxValue ? `${this.maxValue}+` : this.value;
+		} else {
+			return this.value;
+		}
+	};
 }
