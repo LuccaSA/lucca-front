@@ -66,8 +66,7 @@ export class DateInputComponent extends AbstractDateComponent implements Control
 
 	#luClass = inject(LuClass);
 
-	@Input()
-	autocomplete: string;
+	autocomplete = input<string>('');
 
 	placeholder = input<string>();
 

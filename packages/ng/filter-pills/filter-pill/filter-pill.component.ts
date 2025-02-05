@@ -17,6 +17,7 @@ import {
 	model,
 	signal,
 	TemplateRef,
+	untracked,
 	viewChild,
 	ViewEncapsulation,
 } from '@angular/core';
@@ -153,9 +154,14 @@ export class FilterPillComponent {
 
 	constructor() {
 		effect(() => {
-			this.inputComponentRef()?.enableFilterPillMode();
-			this.inputComponentRef()?.registerFilterPillClosePopover(this.closePopover);
-			this.inputComponentRef()?.registerFilterPillUpdatePosition?.(this.updatePosition);
+			const ref = this.inputComponentRef();
+			if (ref) {
+				untracked(() => {
+					ref.enableFilterPillMode();
+					ref.registerFilterPillClosePopover(this.closePopover);
+					ref.registerFilterPillUpdatePosition?.(this.updatePosition);
+				});
+			}
 		});
 	}
 

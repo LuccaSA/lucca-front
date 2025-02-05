@@ -28,6 +28,7 @@ import { LuOptionGrouping, LuSimpleSelectDefaultOptionComponent } from '../optio
 import { LuSelectPanelRef } from '../panel';
 import { CoreSelectAddOptionStrategy, LuOptionComparer, LuOptionContext, SELECT_LABEL, SELECT_LABEL_ID } from '../select.model';
 import { LU_CORE_SELECT_TRANSLATIONS } from '../select.translate';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 @Directive()
 export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDestroy, OnInit, ControlValueAccessor, FilterPillInputComponent {
@@ -42,7 +43,6 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	protected afterCloseFn?: () => void;
 	protected updatePositionFn?: () => void;
 	protected filterPillMode = false;
-	filterPillDisabled = signal(false);
 
 	@ViewChild('inputElement')
 	private inputElementRef: ElementRef<HTMLInputElement>;
@@ -50,6 +50,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	public placeholder$ = new BehaviorSubject('');
 
 	public disabled$ = new BehaviorSubject(false);
+	filterPillDisabled = toSignal(this.disabled$);
 
 	@Input()
 	set placeholder(value: string) {
@@ -267,7 +268,6 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 
 	setDisabledState(isDisabled: boolean): void {
 		this.disabled$.next(isDisabled);
-		this.filterPillDisabled.set(isDisabled);
 		this.changeDetectorRef.markForCheck();
 	}
 
