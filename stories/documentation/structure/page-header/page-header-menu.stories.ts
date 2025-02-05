@@ -1,11 +1,11 @@
 import { Meta, StoryFn } from '@storybook/angular';
 
-interface PageHeaderMenuStory {
+interface PageHeaderHorizontalNavigationStory {
 	sticky: boolean;
 }
 
 export default {
-	title: 'Documentation/Structure/PageHeader/Menu',
+	title: 'Documentation/Structure/PageHeader/HorizontalNavigation',
 	argTypes: {
 		sticky: {
 			control: {
@@ -15,11 +15,11 @@ export default {
 	},
 } as Meta;
 
-function getTemplate(args: PageHeaderMenuStory): string {
+function getTemplate(args: PageHeaderHorizontalNavigationStory): string {
 	const sticky = args.sticky ? `mod-sticky` : '';
 
 	return `
-	<header class="pageHeader mod-withMenu">
+	<header class="pageHeader mod-withHorizontalNavigation ${sticky}">
 		<div class="pageHeader-content">
 			<div class="pageHeader-content-title">
 				<h1 class="pr-u-margin0">H1. Page title</h1>
@@ -58,31 +58,31 @@ function getTemplate(args: PageHeaderMenuStory): string {
 				<a target="_blank">Lien<span aria-hidden="true" class="lucca-icon icon-arrowExternal mod-XS pr-u-marginInlineStart50"></span></a>.
 			</p>
 		</div>
-		<nav class="menu">
-			<ul class="menu-list">
-				<li class="menu-list-item">
+		<nav class="horizontalNavigation">
+			<ul class="horizontalNavigation-list">
+				<li class="horizontalNavigation-list-item">
 					<a
-						class="menu-list-item-action"
+						class="horizontalNavigation-list-item-action"
 						href="#"
 						aria-current="page"
 					>
-						Tab
+						Page
 					</a>
 				</li>
-				<li class="menu-list-item">
+				<li class="horizontalNavigation-list-item">
 					<a
-						class="menu-list-item-action"
+						class="horizontalNavigation-list-item-action"
 						href="#"
 					>
-						Tab
+						Page
 					</a>
 				</li>
-				<li class="menu-list-item">
+				<li class="horizontalNavigation-list-item">
 					<a
-						class="menu-list-item-action"
+						class="horizontalNavigation-list-item-action"
 						href="#"
 					>
-						Tab
+						Page
 					</a>
 				</li>
 			</ul>
@@ -91,10 +91,10 @@ function getTemplate(args: PageHeaderMenuStory): string {
 	`;
 }
 
-const Template: StoryFn<PageHeaderMenuStory> = (args) => ({
+const Template: StoryFn<PageHeaderHorizontalNavigationStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const MenuPageHeader = Template.bind({});
-MenuPageHeader.args = { sticky: false };
+export const HorizontalNavigationPageHeader = Template.bind({});
+HorizontalNavigationPageHeader.args = { sticky: false };

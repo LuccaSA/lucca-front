@@ -4,8 +4,10 @@
 	@include vars;
 	@include component;
 
+	// .mod-withMenu is deprecated
+	&.mod-withHorizontalNavigation,
 	&.mod-withMenu {
-		@include menu;
+		@include horizontalNavigation;
 	}
 
 	&.mod-withBreadcrumbs {

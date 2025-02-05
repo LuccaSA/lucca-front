@@ -1,0 +1,19 @@
+@mixin vars {
+	--components-horizontalNavigation-borderContent: '';
+	--components-horizontalNavigation-listPadding: 0;
+	--components-horizontalNavigation-listItemActionPadding: var(--pr-t-spacings-200) 0;
+	--components-horizontalNavigation-listGap: 0 var(--pr-t-spacings-400);
+	--components-horizontalNavigation-listDirection: row;
+	--components-horizontalNavigation-listAlign: flex-end;
+	--components-horizontalNavigation-listItemActionAlign: center;
+	--components-horizontalNavigation-listItemActionDisplay: inline-flex;
+	--components-horizontalNavigation-listItemActionTransform: scale(0, 1);
+	--components-horizontalNavigation-listItemActionColor: var(--palettes-neutral-800);
+	--components-horizontalNavigation-listItemActionSize: 2px;
+	--components-horizontalNavigation-listItemActionFontSize: inherit;
+	--components-horizontalNavigation-listItemActionLineHeight: inherit;
+	--components-horizontalNavigation-listItemActionInset: auto 0 0 0;
+	--components-horizontalNavigation-listItemActionRadius: var(--commons-borderRadius-M) var(--commons-borderRadius-M) 0 0;
+	--components-horizontalNavigation-listItemActionRadiusWidth: auto;
+	--components-horizontalNavigation-listItemActionRadiusHeight: var(--components-horizontalNavigation-listItemActionSize);
+}

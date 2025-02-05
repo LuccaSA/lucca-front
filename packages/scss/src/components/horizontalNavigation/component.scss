@@ -8,10 +8,10 @@
 	display: flex;
 	position: relative;
 	flex-wrap: wrap;
-	padding: var(--components-menu-listPadding);
+	padding: var(--components-horizontalNavigation-listPadding);
 
 	&::after {
-		content: var(--components-menu-borderContent);
+		content: var(--components-horizontalNavigation-borderContent);
 		border-block-end-width: var(--commons-divider-width);
 		border-block-end-color: var(--commons-divider-color);
 		border-block-end-style: solid;
@@ -28,34 +28,40 @@
 	}
 
 	@at-root ($atRoot) {
+		// .menu-containerOptionnal is deprecated
+		.horizontalNavigation-containerOptionnal,
 		.menu-containerOptionnal {
 			max-inline-size: var(--commons-container-maxWidth);
 			padding-inline: var(--commons-container-padding);
 		}
 
+		// .menu-list is deprecated
+		.horizontalNavigation-list,
 		.menu-list {
 			@include reset.list;
 
-			align-items: var(--components-menu-listAlign);
-			gap: var(--components-menu-listGap);
-			flex-direction: var(--components-menu-listDirection);
+			align-items: var(--components-horizontalNavigation-listAlign);
+			gap: var(--components-horizontalNavigation-listGap);
+			flex-direction: var(--components-horizontalNavigation-listDirection);
 			display: flex;
 			flex-grow: 1;
 			flex-wrap: wrap;
 		}
 
 		// .menu-link is deprecated
+		// .menu-list-item-action is deprecated
+		.horizontalNavigation-list-item-action,
 		.menu-list-item-action,
 		.menu-link {
 			@include reset.button;
 
-			font-size: var(--components-menu-listItemActionFontSize);
-			line-height: var(--components-menu-listItemActionLineHeight);
-			padding: var(--components-menu-listItemActionPadding);
+			font-size: var(--components-horizontalNavigation-listItemActionFontSize);
+			line-height: var(--components-horizontalNavigation-listItemActionLineHeight);
+			padding: var(--components-horizontalNavigation-listItemActionPadding);
 			border-radius: var(--commons-borderRadius-M);
-			color: var(--components-menu-listItemActionColor);
-			display: var(--components-menu-listItemActionDisplay);
-			text-align: var(--components-menu-listItemActionAlign);
+			color: var(--components-horizontalNavigation-listItemActionColor);
+			display: var(--components-horizontalNavigation-listItemActionDisplay);
+			text-align: var(--components-horizontalNavigation-listItemActionAlign);
 			transition-duration: var(--commons-animations-durations-fast);
 			gap: var(--pr-t-spacings-100);
 			align-items: center;
@@ -68,12 +74,12 @@
 
 			&::after {
 				background-color: var(--palettes-700, var(--palettes-product-700));
-				border-radius: var(--components-menu-listItemActionRadius);
+				border-radius: var(--components-horizontalNavigation-listItemActionRadius);
 				transition-duration: var(--commons-animations-durations-fast);
-				block-size: var(--components-menu-listItemActionRadiusHeight);
-				inline-size: var(--components-menu-listItemActionRadiusWidth);
-				transform: var(--components-menu-listItemActionTransform);
-				inset: var(--components-menu-listItemActionInset);
+				block-size: var(--components-horizontalNavigation-listItemActionRadiusHeight);
+				inline-size: var(--components-horizontalNavigation-listItemActionRadiusWidth);
+				transform: var(--components-horizontalNavigation-listItemActionTransform);
+				inset: var(--components-horizontalNavigation-listItemActionInset);
 				transition-property: transform;
 				display: block;
 				position: absolute;
@@ -94,12 +100,14 @@
 					}
 
 					&::after {
-						--components-menu-listItemActionTransform: scale(0.75, 1);
+						--components-horizontalNavigation-listItemActionTransform: scale(0.75, 1);
 					}
 				}
 			}
 		}
 
+		// .menu-link-placeholder is deprecated
+		.horizontalNavigation-link-placeholder,
 		.menu-link-placeholder {
 			&::after {
 				content: attr(data-content-after);
