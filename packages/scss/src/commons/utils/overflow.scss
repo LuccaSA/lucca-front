@@ -1,4 +1,4 @@
-@mixin block($suffix: '') {
+@mixin scrollblock($suffix: '') {
 	&,
 	body {
 		touch-action: none #{$suffix};

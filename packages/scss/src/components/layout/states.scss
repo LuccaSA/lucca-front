@@ -2,7 +2,7 @@
 @use '@lucca-front/scss/src/commons/utils/overflow';
 
 @mixin overlay {
-	@include overflow.block;
+	@include overflow.scrollblock;
 }
 
 @mixin active {

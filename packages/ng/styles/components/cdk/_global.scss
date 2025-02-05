@@ -15,5 +15,5 @@
 	position: static !important;
 	width: auto !important;
 
-	@include overflow.block('!important');
+	@include overflow.scrollblock('!important');
 }

@@ -47,5 +47,5 @@
 }
 
 @mixin overlay {
-	@include overflow.block;
+	@include overflow.scrollblock;
 }
