@@ -99,28 +99,28 @@ export default {
 			},
 		],
 		'number-max-precision': 5,
-		// 'property-disallowed-list': [
-		// 	getDisallowedObjects(LFDeprecatedProperties),
-		// 	{
-		// 		url: 'https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/95175f',
-		// 		message: (property) => getDisallowedData(LFDeprecatedProperties, property).message,
-		// 		severity: (property) => getDisallowedData(LFDeprecatedProperties, property).severity,
-		// 	},
-		// ],
+		'property-disallowed-list': [
+			getDisallowedObjects(LFDeprecatedProperties),
+			{
+				url: 'https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/95175f',
+				message: (property) => getDisallowedData(LFDeprecatedProperties, property).message,
+				severity: (property) => getDisallowedData(LFDeprecatedProperties, property).severity,
+			},
+		],
 		'property-no-unknown': [
 			true,
 			{
 				ignoreProperties: ['scrollbar-3dlight-color'],
 			},
 		],
-		// 'declaration-property-value-disallowed-list': [
-		// 	{ '/.*/': getDisallowedObjects(LFDeprecatedProperties) },
-		// 	{
-		// 		url: 'https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/95175f',
-		// 		message: (property, value) => getDisallowedData(LFDeprecatedProperties, value).message,
-		// 		severity: (property, value) => getDisallowedData(LFDeprecatedProperties, value).severity,
-		// 	},
-		// ],
+		'declaration-property-value-disallowed-list': [
+			{ '/.*/': getDisallowedObjects(LFDeprecatedProperties) },
+			{
+				url: 'https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/95175f',
+				message: (property, value) => getDisallowedData(LFDeprecatedProperties, value).message,
+				severity: (property, value) => getDisallowedData(LFDeprecatedProperties, value).severity,
+			},
+		],
 		'selector-class-pattern': [
 			'^([a-z][a-zA-Z0-9]*)(((-|_)(([a-z0-9]+[a-zA-Z0-9]*)|([A-Z]+))+)*)$',
 			{
@@ -133,16 +133,16 @@ export default {
 				message: (selectorId) => `Expected "${selectorId}" to match pattern #foo(-bar(Baz)*)*`,
 			},
 		],
-		// 'selector-disallowed-list': [
-		// 	getDisallowedObjects(LFDeprecatedSelectors),
-		// 	{
-		// 		splitList: true,
-		// 		reportDisables: true,
-		// 		url: 'https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/95175f',
-		// 		message: (selector) => getDisallowedData(LFDeprecatedSelectors, selector).message,
-		// 		severity: (selector) => getDisallowedData(LFDeprecatedSelectors, selector).severity,
-		// 	},
-		// ],
+		'selector-disallowed-list': [
+			getDisallowedObjects(LFDeprecatedSelectors),
+			{
+				splitList: true,
+				reportDisables: true,
+				url: 'https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/95175f',
+				message: (selector) => getDisallowedData(LFDeprecatedSelectors, selector).message,
+				severity: (selector) => getDisallowedData(LFDeprecatedSelectors, selector).severity,
+			},
+		],
 		'selector-pseudo-element-no-unknown': [
 			true,
 			{
