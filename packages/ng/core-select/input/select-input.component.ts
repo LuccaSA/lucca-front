@@ -20,15 +20,15 @@ import {
 	Type,
 	ViewChild,
 } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { ControlValueAccessor } from '@angular/forms';
 import { getIntl, PortalContent } from '@lucca-front/ng/core';
-import { BehaviorSubject, defer, map, Observable, of, ReplaySubject, startWith, Subject, switchMap, take } from 'rxjs';
 import { FilterPillInputComponent } from '@lucca-front/ng/filter-pills';
+import { BehaviorSubject, defer, map, Observable, of, ReplaySubject, startWith, Subject, switchMap, take } from 'rxjs';
 import { LuOptionGrouping, LuSimpleSelectDefaultOptionComponent } from '../option';
 import { LuSelectPanelRef } from '../panel';
 import { CoreSelectAddOptionStrategy, LuOptionComparer, LuOptionContext, SELECT_LABEL, SELECT_LABEL_ID } from '../select.model';
 import { LU_CORE_SELECT_TRANSLATIONS } from '../select.translate';
-import { toSignal } from '@angular/core/rxjs-interop';
 
 @Directive()
 export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDestroy, OnInit, ControlValueAccessor, FilterPillInputComponent {
@@ -295,6 +295,9 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 		if (this.filterPillMode || this.isPanelOpen || this.disabled$.value) {
 			return;
 		}
+
+		this.focusInput();
+
 		/**
 		 * I know what you're thinking, but let me explain:
 		 *
@@ -318,8 +321,6 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 			this._panelRef = this.buildPanelRef();
 			this.bindInputToPanelRefEvents();
 		});
-		// Oh and we have to wait for another cycle before focusing the input so it's done once panel is opened for good.
-		setTimeout(() => this.focusInput());
 	}
 
 	emitAddOption(): void {
