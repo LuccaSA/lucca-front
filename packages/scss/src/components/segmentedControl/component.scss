@@ -5,14 +5,16 @@
 	margin: 0;
 	list-style-type: none;
 	display: flex;
-	flex-wrap: wrap;
-	width: var(--components-segmentedControl-width);
+	flex-wrap: var(--components-segmentedControl-wrap);
+	inline-size: var(--components-segmentedControl-width);
 	flex-direction: var(--components-segmentedControl-direction);
-	box-shadow: 0 0 0 var(--commons-divider-width) var(--palettes-neutral-300);
+	box-shadow: 0 0 0 var(--commons-divider-width) var(--palettes-neutral-100);
 	border-radius: var(--components-segmentedControl-borderRadius);
 	background-color: var(--palettes-neutral-0);
 	font-size: var(--components-segmentedControl-fontSize);
 	line-height: var(--components-segmentedControl-lineHeight);
+	gap: var(--commons-divider-width);
+	white-space: var(--components-segmentedControl-whiteSpace);
 
 	@at-root ($atRoot) {
 		.segmentedControl-item-input {
@@ -37,33 +39,33 @@
 				content: '';
 				border-width: 0;
 				inset: var(--components-segmentedControl-dividerInset);
-				border-color: var(--palettes-neutral-200);
+				border-color: var(--palettes-neutral-100);
 				position: absolute;
 				border-style: solid;
 			}
 
 			&::before {
-				right: calc(var(--commons-divider-width) * -1);
-				border-left-width: var(--commons-divider-width);
-				left: auto;
+				inset-inline-end: calc(var(--commons-divider-width) * -1);
+				border-inline-start-width: var(--commons-divider-width);
+				inset-inline-start: auto;
 			}
 
 			&::after {
-				bottom: calc(var(--commons-divider-width) * -1);
-				border-top-width: var(--commons-divider-width);
-				top: auto;
+				inset-block-end: calc(var(--commons-divider-width) * -1);
+				border-block-start-width: var(--commons-divider-width);
+				inset-block-start: auto;
 			}
 		}
 
 		//.viewTabs-item-tab is deprecated
 		.segmentedControl-item-action,
 		.viewTabs-item-tab {
-			width: 100%;
+			inline-size: 100%;
 			border: 0;
 			margin: 0;
 			padding: var(--components-segmentedControl-padding);
 			background-color: var(--components-segmentedControl-background);
-			box-shadow: 0 0 0 var(--commons-divider-width) var(--components-segmentedControl-shadow);
+			box-shadow: var(--components-segmentedControl-shadow);
 			border-radius: var(--components-segmentedControl-borderRadius);
 			gap: var(--pr-t-spacings-100);
 			color: var(--components-segmentedControl-color);
@@ -75,30 +77,23 @@
 			cursor: var(--components-segmentedControl-cursor);
 			z-index: var(--components-segmentedControl-zIndex);
 			font: inherit;
+			transition-property: box-shadow;
+			transition-duration: var(--commons-animations-durations-fast);
 
 			&:focus-visible {
 				@include a11y.focusVisible($offset: 3px);
 			}
 
-			&::before {
-				content: var(--components-segmentedControl-backgroundContent);
-				z-index: -1;
-				position: absolute;
-				background-color: var(--palettes-neutral-50);
-				inset: var(--pr-t-spacings-75);
-				bottom: calc(var(--pr-t-spacings-75) - var(--commons-divider-width));
-				border-radius: var(--commons-borderRadius-M);
-				transition-property: scale, opacity;
-				transition-duration: var(--commons-animations-durations-standard);
-				opacity: 0;
-				scale: 0;
+			&:hover {
+				--components-segmentedControl-shadow: 0 0 0 var(--commons-divider-width) var(--palettes-product-400),
+					var(--pr-t-elevation-shadow-raised);
+				--components-segmentedControl-zIndex: 1;
 			}
 
-			&:hover {
-				&::before {
-					opacity: 1;
-					scale: 1;
-				}
+			&:active {
+				--components-segmentedControl-background: var(--palettes-neutral-0);
+				--components-segmentedControl-shadow: 0 0 0 var(--commons-divider-width) var(--palettes-product-500),
+					var(--pr-t-elevation-shadow-raised);
 			}
 		}
 

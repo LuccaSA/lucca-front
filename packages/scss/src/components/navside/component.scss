@@ -7,27 +7,26 @@
 @use '@lucca-front/scss/src/components/numericBadge/exports' as numericBadge;
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
-	bottom: 0;
-	left: 0;
-	top: 0;
+	inset-block: 0;
+	inset-inline-start: 0;
 	z-index: 100;
 	position: fixed;
 	display: flex;
 	flex-direction: column;
 	background-color: var(--components-navSide-fullwidth-palette-bg-color);
-	padding-top: var(--components-navSide-padding-top);
-	width: var(--commons-navSide-width);
-	scroll-margin-top: var(--commons-banner-height);
+	padding-block-start: var(--components-navSide-padding-top);
+	inline-size: var(--commons-navSide-width);
+	scroll-margin-block-start: var(--commons-banner-height);
 
 	.numericBadge {
 		@include numericBadge.S;
 		@include numericBadge.brand;
 
-		margin-left: auto;
+		margin-inline-start: auto;
 	}
 
 	.newBadge {
-		margin-left: auto;
+		margin-inline-start: auto;
 	}
 
 	@at-root ($atRoot) {
@@ -35,13 +34,13 @@
 			display: flex;
 			flex-direction: column;
 			flex-grow: 1;
-			min-height: 0;
+			min-block-size: 0;
 		}
 
 		.navSide-mainSection {
 			flex-grow: 1;
 			display: block;
-			height: 100%;
+			block-size: 100%;
 			overflow-x: hidden;
 			overflow-y: auto;
 			position: relative;
@@ -57,7 +56,7 @@
 			}
 
 			&::-webkit-scrollbar {
-				width: var(--components-navSide-scrollbar-width);
+				inline-size: var(--components-navSide-scrollbar-width);
 			}
 
 			&::-webkit-scrollbar-thumb {
@@ -67,7 +66,7 @@
 		}
 
 		.navSide-scrollWrapper {
-			width: var(--commons-navSide-width);
+			inline-size: var(--commons-navSide-width);
 			padding: var(--pr-t-spacings-100);
 			margin: 0;
 			list-style-type: none;
@@ -78,9 +77,9 @@
 			cursor: pointer;
 			background-color: transparent;
 			border: 0;
-			text-align: left;
-			width: 100%;
-			height: 100%;
+			text-align: start;
+			inline-size: 100%;
+			block-size: 100%;
 			align-items: center;
 			display: flex;
 			column-gap: var(--pr-t-spacings-150);
@@ -112,7 +111,8 @@
 		.navSide-item-link {
 			font-size: var(--sizes-S-fontSize);
 			line-height: var(--sizes-S-lineHeight);
-			padding: var(--pr-t-spacings-150) var(--pr-t-spacings-200);
+			padding-block: var(--pr-t-spacings-150);
+			padding-inline: var(--pr-t-spacings-200);
 			font-weight: 600;
 		}
 
@@ -121,7 +121,7 @@
 			column-gap: var(--pr-t-spacings-150);
 			row-gap: var(--pr-t-spacings-50);
 			align-items: center;
-			margin-left: auto;
+			margin-inline-start: auto;
 		}
 
 		.navSide-item-arrow {
@@ -130,7 +130,7 @@
 			transition-duration: var(--commons-animations-durations-fast);
 			transition-property: transform;
 			transition-timing-function: ease-out;
-			margin-left: auto;
+			margin-inline-start: auto;
 			display: grid;
 			place-items: center;
 			transform: rotate(0);
@@ -149,19 +149,20 @@
 
 		.navSide-item-subMenu-link {
 			font-weight: 400;
-			padding: var(--pr-t-spacings-100) var(--pr-t-spacings-200) var(--pr-t-spacings-100) var(--pr-t-spacings-600);
+			padding-block: var(--pr-t-spacings-100);
+			padding-inline: var(--pr-t-spacings-600) var(--pr-t-spacings-200);
 			font-size: var(--sizes-S-fontSize);
 			line-height: var(--sizes-S-lineHeight);
 		}
 
 		.navSide-item-subMenu-item {
-			@include keyframe.slideInLeft;
-
 			opacity: 0;
 			animation-fill-mode: forwards;
 			animation-name: slideInLeft;
 			animation-duration: var(--commons-animations-durations-fast);
 			animation-delay: var(--delay);
+
+			@include keyframe.slideInLeft;
 
 			@media (prefers-reduced-motion) {
 				animation: none;
@@ -176,13 +177,13 @@
 		}
 
 		.navSide-bottomSection {
-			height: var(--components-navSide-bottom-section-height);
-			width: var(--commons-navSide-width);
+			block-size: var(--components-navSide-bottom-section-height);
+			inline-size: var(--commons-navSide-width);
 			z-index: 1;
 
 			.navSide-item,
 			.navSide-item-link {
-				height: 100%;
+				block-size: 100%;
 				background-color: transparent;
 				padding: 0.5em;
 			}
@@ -215,17 +216,17 @@
 			&::before {
 				background-color: var(--palettes-navigation-700);
 				border-radius: 1em;
-				height: 1em;
-				width: 1em;
+				block-size: 1em;
+				inline-size: 1em;
 			}
 
 			&::after {
-				@include loading.gradient($color: var(--palettes-navigation-700));
-
 				border-radius: var(--commons-borderRadius-M);
 				flex: 1 1 auto;
-				height: 0.9em;
-				margin-left: 1em;
+				block-size: 0.9em;
+				margin-inline-start: 1em;
+
+				@include loading.gradient($color: var(--palettes-navigation-700));
 			}
 		}
 	}

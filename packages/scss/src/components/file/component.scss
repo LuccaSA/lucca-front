@@ -2,8 +2,8 @@
 
 @mixin component {
 	padding: var(--pr-t-spacings-300);
-	max-width: 30rem;
-	min-height: 17.5rem;
+	max-inline-size: 30rem;
+	min-block-size: 17.5rem;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -12,14 +12,15 @@
 
 	.file-icon {
 		font-size: var(--sizes-M-lineHeight);
-		margin: 0 var(--pr-t-spacings-50);
+		margin-block: 0;
+		margin-inline: var(--pr-t-spacings-50);
 		display: none;
 	}
 
 	.file-title {
 		font-size: var(--sizes-M-fontSize);
 		line-height: var(--sizes-M-lineHeight);
-		margin-bottom: 0;
+		margin-block-end: 0;
 		font-weight: 600;
 		display: block;
 		position: relative;
@@ -29,19 +30,20 @@
 	.file-or {
 		font-size: var(--sizes-S-fontSize);
 		line-height: var(--sizes-S-lineHeight);
-		margin-bottom: var(--pr-t-spacings-50);
+		margin-block-end: var(--pr-t-spacings-50);
 		display: block;
 		position: relative;
 		color: var(--palettes-neutral-600);
 
 		&:not(:empty) {
-			margin-bottom: var(--pr-t-spacings-100);
+			margin-block-end: var(--pr-t-spacings-100);
 			color: var(--palettes-neutral-800);
 		}
 	}
 
 	.file-progress {
-		margin: var(--pr-t-spacings-200) 0 var(--pr-t-spacings-100);
+		margin-block: var(--pr-t-spacings-200) var(--pr-t-spacings-100);
+		margin-inline: 0;
 		display: block;
 	}
 
@@ -49,7 +51,7 @@
 		&:not(:empty) {
 			font-size: var(--sizes-S-fontSize);
 			line-height: var(--sizes-S-lineHeight);
-			margin-bottom: var(--pr-t-spacings-200);
+			margin-block-end: var(--pr-t-spacings-200);
 			color: var(--palettes-neutral-600);
 			display: block;
 		}
@@ -73,10 +75,10 @@
 
 	.file-input {
 		position: absolute;
-		left: 0;
-		top: 0;
-		width: 100%;
-		height: 100%;
+		inset-inline-start: 0;
+		inset-block-start: 0;
+		inline-size: 100%;
+		block-size: 100%;
 		opacity: 0.0001;
 		z-index: 1;
 		font-size: 0;

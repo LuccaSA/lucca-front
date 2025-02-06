@@ -8,11 +8,13 @@
 
 			display: flex;
 			background-color: var(--palettes-700, var(--palettes-product-700));
-			padding-left: var(--components-switch-handler-offset);
+			padding-inline-start: var(--components-switch-handler-offset);
 		}
 
 		&::after {
-			left: calc(var(--components-switch-width) - var(--components-switch-slider-size) - var(--components-switch-handler-offset));
+			inset-inline-start: calc(
+				var(--components-switch-width) - var(--components-switch-slider-size) - var(--components-switch-handler-offset)
+			);
 		}
 	}
 }

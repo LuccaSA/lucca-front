@@ -1,0 +1,23 @@
+@use 'exports' as *;
+@use '@lucca-front/scss/src/commons/utils/media';
+
+.filterPillBar {
+	@include vars;
+	@include component;
+
+	@include media.max(XXS) {
+		@include compact;
+	}
+
+	@include media.min(XXS) {
+		@include notCompact;
+	}
+
+	@include media.pointer(coarse) {
+		@include touch;
+	}
+
+	@include media.pointer(coarse, $reversed: true) {
+		@include notTouch;
+	}
+}

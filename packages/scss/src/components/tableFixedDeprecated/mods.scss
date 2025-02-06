@@ -3,7 +3,7 @@
 }
 
 @mixin layoutFixedCell($i) {
-	min-width: $i * 1rem;
-	max-width: $i * 1rem;
-	width: $i * 1rem;
+	min-inline-size: $i * 1rem;
+	max-inline-size: $i * 1rem;
+	inline-size: $i * 1rem;
 }

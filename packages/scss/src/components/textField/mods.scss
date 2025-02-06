@@ -51,7 +51,7 @@
 
 @mixin valueAlignRight {
 	.textField-input-value {
-		text-align: right;
+		text-align: end;
 	}
 }
 
@@ -60,8 +60,8 @@
 	.textField-input {
 		display: grid;
 		align-items: normal;
-		min-width: 0;
-		scroll-margin-bottom: var(--component-textField-scrollMargin);
+		min-inline-size: 0;
+		scroll-margin-block-end: var(--component-textField-scrollMargin);
 	}
 
 	.textField-input-valueClone,
@@ -70,7 +70,7 @@
 		overflow-wrap: break-word;
 		grid-area: 1 / 1 / 2 / 2;
 		resize: none;
-		min-width: 0;
+		min-inline-size: 0;
 		overflow: auto;
 	}
 
@@ -81,4 +81,13 @@
 			content: ' ';
 		}
 	}
+}
+
+@mixin filterPill {
+	--component-textField-borderRadius: var(--commons-borderRadius-L);
+	--component-textField-border: var(--palettes-neutral-100);
+	--component-textField-borderHover: var(--palettes-product-400);
+	--component-textField-width: 15rem;
+
+	@include S;
 }

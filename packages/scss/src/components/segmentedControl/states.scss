@@ -2,7 +2,7 @@
 
 @mixin selected {
 	--components-segmentedControl-background: var(--palettes-product-50);
-	--components-segmentedControl-shadow: var(--palettes-product-500);
+	--components-segmentedControl-shadow: 0 0 0 var(--commons-divider-width) var(--palettes-product-500);
 	--components-segmentedControl-color: var(--palettes-product-800);
 	--components-segmentedControl-cursor: default;
 	--components-segmentedControl-backgroundContent: none;

@@ -1,33 +1,58 @@
 import { Overlay, OverlayConfig, OverlayPositionBuilder, OverlayRef, ScrollStrategyOptions } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
-import { ComponentRef, ElementRef, Injectable, Injector, inject } from '@angular/core';
+import { ComponentRef, ElementRef, inject, Injectable, Injector, ViewContainerRef } from '@angular/core';
 import { addAttributesOnCdkContainer, LuSelectPanelRef, SELECT_ID, SELECT_LABEL_ID } from '@lucca-front/ng/core-select';
 import { takeUntil } from 'rxjs';
 import { LuSelectPanelComponent } from '../panel';
 import { SIMPLE_SELECT_INPUT } from '../select.model';
 import { LuSimpleSelectInputComponent } from './select-input.component';
 
-class SelectPanelRef<T> extends LuSelectPanelRef<T, T> {
+abstract class BaseSelectPanelRef<T> extends LuSelectPanelRef<T, T> {
+	protected readonly portalRef: ComponentPortal<LuSelectPanelComponent<T>>;
 	instance: LuSelectPanelComponent<T>;
-	private panelRef: ComponentRef<LuSelectPanelComponent<T>>;
-	private portalRef: ComponentPortal<LuSelectPanelComponent<T>>;
 
-	constructor(
-		private overlayRef: OverlayRef,
-		parentInjector: Injector,
-		selectInput: LuSimpleSelectInputComponent<T>,
-	) {
+	protected panelRef: ComponentRef<LuSelectPanelComponent<T>>;
+
+	protected constructor(parentInjector: Injector, selectInput: LuSimpleSelectInputComponent<T>) {
 		super();
 
-		const injector = Injector.create({
+		this.portalRef = new ComponentPortal<LuSelectPanelComponent<T>>(LuSelectPanelComponent, undefined, this.createInjector(selectInput, parentInjector));
+	}
+
+	protected createInjector(selectInput: LuSimpleSelectInputComponent<T>, parentInjector: Injector): Injector {
+		return Injector.create({
 			providers: [
 				{ provide: LuSelectPanelRef, useValue: this },
 				{ provide: SIMPLE_SELECT_INPUT, useValue: selectInput },
 			],
 			parent: parentInjector,
 		});
+	}
 
-		this.portalRef = new ComponentPortal<LuSelectPanelComponent<T>>(LuSelectPanelComponent, undefined, injector);
+	override handleKeyManagerEvent(event: KeyboardEvent) {
+		this.instance.keyManager.onKeydown(event);
+	}
+
+	emitValue(value: T): void {
+		this.valueChanged.emit(value);
+		this.close();
+	}
+
+	selectCurrentlyHighlightedValue(): void {
+		if (this.instance.keyManager.activeItem) {
+			this.emitValue(this.instance.keyManager.activeItem.option);
+		}
+		this.close();
+	}
+}
+
+class SelectPanelRef<T> extends BaseSelectPanelRef<T> {
+	constructor(
+		private overlayRef: OverlayRef,
+		parentInjector: Injector,
+		selectInput: LuSimpleSelectInputComponent<T>,
+	) {
+		super(parentInjector, selectInput);
 		this.panelRef = overlayRef.attach(this.portalRef);
 		this.instance = this.panelRef.instance;
 
@@ -37,30 +62,33 @@ class SelectPanelRef<T> extends LuSelectPanelRef<T, T> {
 			.subscribe(() => this.close());
 	}
 
-	emitValue(value: T): void {
-		this.valueChanged.emit(value);
-		this.close();
-	}
-
-	override handleKeyManagerEvent(event: KeyboardEvent) {
-		this.instance.keyManager.onKeydown(event);
-	}
-
 	override close(): void {
 		super.close();
 		this.panelRef.destroy();
 		this.overlayRef.detach();
 	}
 
-	selectCurrentlyHighlightedValue(): void {
-		if (this.instance.keyManager.activeItem) {
-			this.emitValue(this.instance.keyManager.activeItem.option);
-		}
-		this.close();
-	}
-
 	updatePosition(): void {
 		this.overlayRef.updatePosition();
+	}
+}
+
+class SelectPanelDOMHostRef<T> extends BaseSelectPanelRef<T> {
+	constructor(host: ViewContainerRef, parentInjector: Injector, selectInput: LuSimpleSelectInputComponent<T>) {
+		super(parentInjector, selectInput);
+		this.panelRef = host.createComponent(this.portalRef.component, {
+			injector: this.portalRef.injector,
+			projectableNodes: this.portalRef.projectableNodes,
+		});
+		this.instance = this.panelRef.instance;
+	}
+
+	override updatePosition() {
+		// do nothing, this is not a panel so repositioning is handled by the input.
+	}
+
+	override close(): void {
+		this.closed.emit();
 	}
 }
 
@@ -81,6 +109,10 @@ export class LuSimpleSelectPanelRefFactory {
 		addAttributesOnCdkContainer(overlayRef, this.selectLabelId, this.selectId);
 
 		return new SelectPanelRef(overlayRef, this.parentInjector, selectInput);
+	}
+
+	buildAndAttachPanelRef<T>(selectInput: LuSimpleSelectInputComponent<T>, host: ViewContainerRef): LuSelectPanelRef<T, T> {
+		return new SelectPanelDOMHostRef(host, this.parentInjector, selectInput);
 	}
 
 	protected buildOverlayConfig(overlayConfigOverride: OverlayConfig = {}): OverlayConfig {

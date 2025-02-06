@@ -26,6 +26,10 @@
 
 	&.is-selected {
 		@include selected;
+  }
+  
+	&.mod-filterPill {
+		@include filterPill;
 	}
 }
 

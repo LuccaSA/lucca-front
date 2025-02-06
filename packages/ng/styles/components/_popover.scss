@@ -1,7 +1,7 @@
 %popover-panel {
 	display: flex;
 	flex-direction: column;
-	max-height: calc(100vh + 48px);
+	max-block-size: calc(100vh + 48px);
 	position: relative;
 
 	&.is-above {
@@ -54,5 +54,6 @@
 .lu-popover-content {
 	@extend %popover-content;
 
-	padding: var(--pr-t-spacings-100) var(--pr-t-spacings-150);
+	padding-block: var(--pr-t-spacings-100);
+	padding-inline: var(--pr-t-spacings-150);
 }

@@ -1,20 +1,38 @@
 import { CommonModule } from '@angular/common';
-import { booleanAttribute, ChangeDetectionStrategy, Component, forwardRef, inject, Input, model, numberAttribute, OnDestroy, OnInit, TemplateRef, Type, ViewEncapsulation } from '@angular/core';
+import {
+	booleanAttribute,
+	ChangeDetectionStrategy,
+	Component,
+	computed,
+	forwardRef,
+	HostBinding,
+	inject,
+	Input,
+	model,
+	numberAttribute,
+	OnDestroy,
+	OnInit,
+	TemplateRef,
+	Type,
+	viewChild,
+	ViewContainerRef,
+	ViewEncapsulation,
+} from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { getIntl } from '@lucca-front/ng/core';
 import { ALuSelectInputComponent, LuOptionContext, provideLuSelectLabelsAndIds, ɵLuOptionOutletDirective } from '@lucca-front/ng/core-select';
+import { FILTER_PILL_INPUT_COMPONENT, FilterPillDisplayerDirective, FilterPillLabelDirective } from '@lucca-front/ng/filter-pills';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 import { Subject } from 'rxjs';
 import { LuMultiSelectDefaultDisplayerComponent } from '../displayer/index';
 import { LU_MULTI_SELECT_TRANSLATIONS } from '../select.translate';
 import { LuMultiSelectPanelRefFactory } from './panel-ref.factory';
 import { LuMultiSelectPanelRef } from './panel.model';
-import { IconComponent } from '@lucca-front/ng/icon';
 
 @Component({
 	selector: 'lu-multi-select',
 	standalone: true,
-	imports: [CommonModule, LuTooltipModule, ɵLuOptionOutletDirective, IconComponent],
+	imports: [CommonModule, LuTooltipModule, ɵLuOptionOutletDirective, FilterPillDisplayerDirective, FilterPillLabelDirective],
 	templateUrl: './select-input.component.html',
 	styleUrls: ['./select-input.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
@@ -30,6 +48,10 @@ import { IconComponent } from '@lucca-front/ng/icon';
 		},
 		provideLuSelectLabelsAndIds(),
 		LuMultiSelectPanelRefFactory,
+		{
+			provide: FILTER_PILL_INPUT_COMPONENT,
+			useExisting: forwardRef(() => LuMultiSelectInputComponent),
+		},
 	],
 	host: {
 		class: 'multiSelect',
@@ -39,6 +61,8 @@ import { IconComponent } from '@lucca-front/ng/icon';
 export class LuMultiSelectInputComponent<T> extends ALuSelectInputComponent<T, T[]> implements ControlValueAccessor, OnDestroy, OnInit {
 	intl = getIntl(LU_MULTI_SELECT_TRANSLATIONS);
 
+	showColon: false;
+
 	valuesTpl = model<TemplateRef<LuOptionContext<T[]>> | Type<unknown>>(LuMultiSelectDefaultDisplayerComponent);
 
 	@Input({ transform: numberAttribute })
@@ -46,6 +70,20 @@ export class LuMultiSelectInputComponent<T> extends ALuSelectInputComponent<T, T
 
 	@Input({ transform: booleanAttribute })
 	keepSearchAfterSelection = false;
+
+	@Input()
+	filterPillLabelPlural: string;
+
+	@HostBinding('class.mod-filterPill')
+	public get filterPillClass() {
+		return this.filterPillMode;
+	}
+
+	hideCombobox = computed(() => this.valueSignal()?.length > 1);
+
+	filterPillPanelAnchorRef = viewChild('filterPillPanelAnchor', { read: ViewContainerRef });
+
+	override isFilterPillEmpty = computed(() => this.valueSignal()?.length === 0);
 
 	override _value: T[] = [];
 
@@ -86,6 +124,10 @@ export class LuMultiSelectInputComponent<T> extends ALuSelectInputComponent<T, T
 		}
 	}
 
+	updatePosition() {
+		this.updatePositionFn?.();
+	}
+
 	protected override buildPanelRef(): LuMultiSelectPanelRef<T> {
 		return this.panelRefFactory.buildPanelRef(this, this.overlayConfig);
 	}
@@ -98,15 +140,21 @@ export class LuMultiSelectInputComponent<T> extends ALuSelectInputComponent<T, T
 		super.bindInputToPanelRefEvents();
 	}
 
+	override enableFilterPillMode() {
+		this._panelRef = this.panelRefFactory.buildAndAttachPanelRef(this, this.filterPillPanelAnchorRef());
+		super.enableFilterPillMode();
+	}
+
 	hasValue(): boolean {
 		return !!this.value?.length;
 	}
 
-	override clearValue(event: Event): void {
-		event.stopPropagation();
+	override clearValue(event?: Event): void {
+		event?.stopPropagation();
 		this.onChange?.([]);
 		this.value = [];
 		this.focusInput$.next({ keepClue: true });
+		this.panelRef?.updateSelectedOptions([]);
 	}
 
 	override ngOnDestroy() {
