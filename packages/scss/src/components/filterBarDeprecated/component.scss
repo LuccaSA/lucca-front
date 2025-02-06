@@ -10,18 +10,18 @@
 	container-type: inline-size;
 	padding: var(--pr-t-spacings-200);
 
-	&:has(.filterBar-footer-toggleButton[aria-expanded='false']) {
-		.filterBar-toggledFilters {
+	&:has(.filterBarDeprecated-footer-toggleButton[aria-expanded='false']) {
+		.filterBarDeprecated-toggledFilters {
 			display: none;
 		}
 	}
 
 	@at-root ($atRoot) {
-		.filterBar-toggledFilters {
+		.filterBarDeprecated-toggledFilters {
 			margin-block-start: var(--pr-t-spacings-200);
 		}
 
-		.filterBar-footer {
+		.filterBarDeprecated-footer {
 			border-block-start: var(--commons-divider-width) solid var(--commons-border-200);
 			display: flex;
 			flex-direction: column;
@@ -35,7 +35,7 @@
 				display: none;
 			}
 
-			&:has(.filterBar-footer-actions:only-child:empty) {
+			&:has(.filterBarDeprecated-footer-actions:only-child:empty) {
 				display: none;
 			}
 
@@ -45,14 +45,14 @@
 			}
 		}
 
-		.filterBar-footer-toggleButton {
+		.filterBarDeprecated-footer-toggleButton {
 			&[aria-expanded='false'] {
-				.filterBar-footer-toggleButton-labelAlternative {
+				.filterBarDeprecated-footer-toggleButton-labelAlternative {
 					display: none;
 				}
 			}
 			&[aria-expanded='true'] {
-				.filterBar-footer-toggleButton-label {
+				.filterBarDeprecated-footer-toggleButton-label {
 					@include a11y.mask;
 				}
 				.lucca-icon {
@@ -64,7 +64,7 @@
 			}
 		}
 
-		.filterBar-footer-actions {
+		.filterBarDeprecated-footer-actions {
 			display: flex;
 			flex-direction: column;
 			flex-wrap: wrap;

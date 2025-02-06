@@ -1,13 +1,13 @@
 import { Meta, StoryFn } from '@storybook/angular';
 
-interface FilterBarBasicStory {}
+interface FilterBarDeprecatedBasicStory {}
 
 export default {
-	title: 'Documentation/Structure/FilterBar/Basic',
+	title: 'Documentation/Structure/FilterBarDeprecated/Basic',
 } as Meta;
 
-function getTemplate(args: FilterBarBasicStory): string {
-	return `<form class="filterBar">
+function getTemplate(args: FilterBarDeprecatedBasicStory): string {
+	return `<form class="filterBarDeprecated">
 	<div class="grid" style="--grid-columns: 4; --grid-colspan: 4; --grid-align: end">
 		<div class="grid-column" style="--grid-colspanAtMediaMinS: 2; --grid-colspanAtMediaMinM: 1">
 			<div class="form-field">
@@ -50,7 +50,7 @@ function getTemplate(args: FilterBarBasicStory): string {
 			</div>
 		</div>
 	</div>
-	<div class="grid filterBar-toggledFilters" style="--grid-columns: 4; --grid-colspan: 4; --grid-align: end">
+	<div class="grid filterBarDeprecated-toggledFilters" style="--grid-columns: 4; --grid-colspan: 4; --grid-align: end">
 		<div class="grid-column" style="--grid-colspanAtMediaMinS: 2; --grid-colspanAtMediaMinM: 1">
 			<div class="form-field">
 				<label class="formLabel" id="IDlabel" for="ID">Label</label>
@@ -92,13 +92,13 @@ function getTemplate(args: FilterBarBasicStory): string {
 			</div>
 		</div>
 	</div>
-	<div class="filterBar-footer">
-		<button type="button" class="button mod-text mod-withIcon filterBar-footer-toggleButton" aria-expanded="true">
+	<div class="filterBarDeprecated-footer">
+		<button type="button" class="button mod-text mod-withIcon filterBarDeprecated-footer-toggleButton" aria-expanded="true">
 			<span aria-hidden="true" class="lucca-icon icon-arrowChevronBottom"></span>
-			<span class="filterBar-footer-toggleButton-labelAlternative" data-content-before="Moins de filtres" aria-hidden="true"></span>
-			<span class="filterBar-footer-toggleButton-label">Plus de filtres</span>
+			<span class="filterBarDeprecated-footer-toggleButton-labelAlternative" data-content-before="Moins de filtres" aria-hidden="true"></span>
+			<span class="filterBarDeprecated-footer-toggleButton-label">Plus de filtres</span>
 		</button>
-		<div class="filterBar-footer-actions">
+		<div class="filterBarDeprecated-footer-actions">
 			<span>8 résultats sur 88</span>
 			<button type="reset" class="button mod-text palette-product">Réinitialiser les filtres</button>
 			<button type="submit" class="button">Appliquer les filtres</button>
@@ -107,7 +107,7 @@ function getTemplate(args: FilterBarBasicStory): string {
 </form>`;
 }
 
-const Template: StoryFn<FilterBarBasicStory> = (args) => ({
+const Template: StoryFn<FilterBarDeprecatedBasicStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 });
