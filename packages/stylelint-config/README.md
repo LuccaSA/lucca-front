@@ -80,7 +80,7 @@ The configuration from your local repository should be applied right away.
 
 ### VS Code
 
-⚠️ A [VSCode extension bug](https://github.com/stylelint/vscode-stylelint/issues/490#issuecomment-1966934533) might prevent you from using stylelint 16+. A [hackfix](https://github.com/stylelint/vscode-stylelint/issues/490#issuecomment-2156218548) is available.
+⚠️ A [VSCode extension bug](https://github.com/stylelint/vscode-stylelint/issues/490#issuecomment-1966934533) might prevent you from using stylelint 16+. See below for a fix through VS-code settings.
 
 Follow instructions on the [extension page](https://marketplace.visualstudio.com/items?itemName=stylelint.vscode-stylelint).
 
@@ -97,10 +97,21 @@ Those settings in _.vscode/settings.json_ should be fine:
   "stylelint.reportInvalidScopeDisables": true,
   "stylelint.reportNeedlessDisables": true,
   "stylelint.snippet": ["css", "scss"],
-  "stylelint.validate": ["css", "scss"]
+  "stylelint.validate": ["css", "scss"],
 ```
 
 Please note **the VSCode extension does not take overrides into account**.
+
+#### bug: double slash comments appended to the nearest property
+
+A [hackfix](https://github.com/stylelint/vscode-stylelint/issues/490#issuecomment-2156218548) is available.
+
+Add the following line in _.vscode/settings.json_ if the issue arises:
+
+```json
+  "stylelint.customSyntax": "postcss-scss"
+```
+
 
 ### JetStorm
 
