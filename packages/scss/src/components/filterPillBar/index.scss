@@ -3,6 +3,7 @@
 
 .filterPillBar {
 	@include vars;
+	@include component;
 
 	@include media.max(XXS) {
 		@include compact;

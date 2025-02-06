@@ -28,54 +28,6 @@
 	transition-duration: var(--commons-animations-durations-fast);
 
 	@at-root ($atRoot) {
-		.filterPillBar-divider.divider {
-			&:not(:has(~ .filterPill:not(.is-hidden))) {
-				display: none;
-			}
-		}
-
-		.filterPillBar-segmentedControl.segmentedControl {
-			@include segmentedControl.S;
-		}
-
-		.filterPill-icon {
-			display: flex;
-
-			.lucca-icon {
-				@include icon.S;
-			}
-		}
-
-		.filterPillBar-scrollBox.scrollBox {
-			align-items: flex-start;
-		}
-
-		.filterPillBar-scrollBox-first {
-			display: var(--components-filterPillBar-extremitiesDisplay);
-			margin-inline-end: calc(var(--components-scrollBox-gap) * -1);
-		}
-
-		.filterPillBar-scrollBox-last {
-			display: var(--components-filterPillBar-extremitiesDisplay);
-			margin-inline-start: calc(var(--components-scrollBox-gap) * -1);
-		}
-
-		.filterPillBar-scrollBox-group {
-			display: flex;
-			gap: var(--components-scrollBox-gap);
-			flex-wrap: wrap;
-
-			&:has(+ .filterPillBar-scrollBox-last) {
-				flex-grow: 1;
-			}
-		}
-
-		.filterPillBar {
-			.textField {
-				@include textField.filterPill;
-			}
-		}
-
 		.filterPill_popover-content.popover-contentOptional {
 			--components-dateInput-width: none;
 
@@ -85,6 +37,31 @@
 
 			&:has(.filterPill_popover-content-option) {
 				--components-popover-padding: var(--pr-t-spacings-50);
+			}
+		}
+
+		.filterPill_popover-content-option {
+			padding: var(--pr-t-spacings-50) var(--pr-t-spacings-100);
+			border-radius: 4px;
+
+			&:hover {
+				background-color: var(--palettes-neutral-50);
+			}
+
+			&:has(:checked) {
+				background-color: var(--palettes-product-50);
+
+				&:hover {
+					background-color: var(--palettes-product-100);
+				}
+			}
+		}
+
+		.filterPill-icon {
+			display: flex;
+
+			.lucca-icon {
+				@include icon.S;
 			}
 		}
 
@@ -221,11 +198,6 @@
 
 		.filterPill-checkbox-input {
 			@include a11y.mask;
-		}
-
-		.filterPillBar-scrollBox-export {
-			margin-inline-start: auto;
-			padding-inline-start: var(--pr-t-spacings-200);
 		}
 	}
 }
