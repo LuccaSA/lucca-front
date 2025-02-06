@@ -38,3 +38,11 @@
 		opacity: 1;
 	}
 }
+
+@mixin selected {
+	.multipleSelect-displayer-search {
+		&:not(:focus) {
+			@include a11y.mask;
+		}
+	}
+}
