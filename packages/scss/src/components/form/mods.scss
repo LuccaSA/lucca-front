@@ -155,24 +155,8 @@
 	}
 }
 
-@mixin width20 {
-	--components-form-field-width: 10rem;
-}
-
-@mixin width30 {
-	--components-form-field-width: 15rem;
-}
-
-@mixin width40 {
-	--components-form-field-width: 20rem;
-}
-
-@mixin width50 {
-	--components-form-field-width: 25rem;
-}
-
-@mixin width60 {
-	--components-form-field-width: 30rem;
+@mixin width($value) {
+	--components-form-field-width: #{math.div($value, 2) * 1rem};
 }
 
 @mixin withArrow {
