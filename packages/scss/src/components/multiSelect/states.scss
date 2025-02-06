@@ -41,6 +41,7 @@
 
 @mixin selected {
 	.multipleSelect-displayer-search {
+		&[readonly],
 		&:not(:focus) {
 			@include a11y.mask;
 		}
