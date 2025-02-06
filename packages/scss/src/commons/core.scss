@@ -132,7 +132,7 @@ $overflow: 'hidden', 'auto', 'visible', 'scroll';
 	@return math.div($value, 16px) * 1rem;
 }
 
-@mixin fontFace($family, $weights, $path: '//cdn.lucca.fr/fonts', $style: normal) {
+@mixin fontFace($family, $weights, $path: '//cdn.lucca.fr/transverse/fonts', $style: normal) {
 	@each $keyword, $number in $weights {
 		@font-face {
 			font-family: '#{$family}';

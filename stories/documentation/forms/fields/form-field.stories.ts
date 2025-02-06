@@ -1,7 +1,7 @@
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { FormFieldComponent, InputDirective } from '@lucca-front/ng/form-field';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormFieldComponent, InputDirective } from '@lucca-front/ng/form-field';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { generateInputs } from '../../../helpers/stories';
 
 export default {
@@ -46,7 +46,7 @@ export const Template: StoryObj<FormFieldComponent & { required: boolean }> = {
 		label: 'Label',
 		required: true,
 		hiddenLabel: false,
-		inlineMessage: 'Helper Text',
+		inlineMessage: 'Helper text',
 		errorInlineMessage: 'Error helper text',
 		inlineMessageState: 'default',
 		tooltip: 'You expected me to be helpful but this is a story!',

@@ -5,17 +5,16 @@ import { LuCoreSelectNoClueDirective, LuCoreSelectPanelHeaderDirective, LuDisabl
 import { LuCoreSelectApiV3Directive, LuCoreSelectApiV4Directive } from '@lucca-front/ng/core-select/api';
 import { LuCoreSelectEstablishmentsDirective } from '@lucca-front/ng/core-select/establishment';
 import { LuCoreSelectJobQualificationsDirective } from '@lucca-front/ng/core-select/job-qualification';
-import { LuCoreSelectUsersDirective } from '@lucca-front/ng/core-select/user';
+import { LuCoreSelectUsersDirective, provideCoreSelectCurrentUserId } from '@lucca-front/ng/core-select/user';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 import { LuUserDisplayPipe } from '@lucca-front/ng/user';
-import { Meta, applicationConfig, moduleMetadata } from '@storybook/angular';
+import { applicationConfig, Meta, moduleMetadata } from '@storybook/angular';
 import { HiddenArgType } from 'stories/helpers/common-arg-types';
 import { getStoryGenerator, useDocumentationStory } from 'stories/helpers/stories';
-import { provideCoreSelectCurrentUserId } from '../../../../packages/ng/core-select/user/me.provider';
 import { LuCoreSelectLegumesDirective } from './custom-api-example.component';
 import { LuCoreSelectCustomEstablishmentsDirective } from './custom-establishment-example.component';
 import { LuCoreSelectCustomUsersDirective } from './custom-user-example.component';
-import { FilterLegumesPipe, ILegume, LuCoreSelectInputStoryComponent, SortLegumesPipe, allLegumes, colorNameByColor, coreSelectStory } from './select.utils';
+import { allLegumes, colorNameByColor, coreSelectStory, FilterLegumesPipe, ILegume, LuCoreSelectInputStoryComponent, SortLegumesPipe } from './select.utils';
 
 export type LuSimpleSelectInputStoryComponent = LuCoreSelectInputStoryComponent & {
 	selectedLegume: ILegume | null;
@@ -422,12 +421,24 @@ export const AddOption = generateStory({
 	storyPartial: {
 		argTypes: {
 			addOptionLabel: { control: { type: 'text' } },
-			addOptionStrategy: { control: { type: 'radio', options: ['never', 'always', 'if-empty-clue', 'if-not-empty-clue'] } },
+			addOptionStrategy: {
+				control: {
+					type: 'radio',
+					options: ['never', 'always', 'if-empty-clue', 'if-not-empty-clue'],
+				},
+			},
 		},
 		args: {
 			addOptionLabel: 'Ajouter un légume',
 			addOptionStrategy: 'always',
-			addLegume: (name: string, existing: ILegume[]) => [...existing, { name: name || 'Légume sans titre', index: existing.length, color: existing[0].color }],
+			addLegume: (name: string, existing: ILegume[]) => [
+				...existing,
+				{
+					name: name || 'Légume sans titre',
+					index: existing.length,
+					color: existing[0].color,
+				},
+			],
 		},
 	},
 });

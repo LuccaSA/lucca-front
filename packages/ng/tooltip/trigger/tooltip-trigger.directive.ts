@@ -8,6 +8,7 @@ import {
 	HostBinding,
 	HostListener,
 	Input,
+	NgZone,
 	OnDestroy,
 	Renderer2,
 	booleanAttribute,
@@ -40,6 +41,7 @@ export class LuTooltipTriggerDirective implements AfterContentInit, OnDestroy {
 
 	#renderer = inject(Renderer2);
 	#ruler = inject(EllipsisRuler);
+	#zone = inject(NgZone, { optional: true });
 
 	#destroyRef = inject(DestroyRef);
 
@@ -90,7 +92,7 @@ export class LuTooltipTriggerDirective implements AfterContentInit, OnDestroy {
 		// 2. Keep only necessary inputs
 		filter(([{ whenEllipsis, disabled }]) => !disabled && whenEllipsis),
 		// 3. Check for ellipsis
-		switchMap(() => this.#ruler.hasEllipsis(this.#host.nativeElement)),
+		switchMap(() => this.runOutsideZoneJS(() => this.#ruler.hasEllipsis(this.#host.nativeElement))),
 	);
 
 	#hasEllipsis = toSignal(this.#hasEllipsis$, { initialValue: false });
@@ -247,6 +249,10 @@ export class LuTooltipTriggerDirective implements AfterContentInit, OnDestroy {
 
 	ngAfterContentInit(): void {
 		this._id = this.#host.nativeElement.id || this.#generatedId;
+	}
+
+	private runOutsideZoneJS<T>(callback: () => T): T {
+		return this.#zone ? this.#zone.runOutsideAngular(callback) : callback();
 	}
 
 	/**********************
