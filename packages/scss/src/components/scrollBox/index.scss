@@ -3,4 +3,16 @@
 .scrollBox {
 	@include vars;
 	@include component;
+
+	&.is-firstVisible {
+		@include firstVisible;
+	}
+
+	&.is-lastVisible {
+		@include lastVisible;
+	}
+
+	&.is-disabled {
+		@include disabled;
+	}
 }

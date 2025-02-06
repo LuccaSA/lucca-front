@@ -29,4 +29,8 @@
 	&.mod-autoResize {
 		@include autoResize;
 	}
+
+	&.mod-filterPill {
+		@include filterPill;
+	}
 }

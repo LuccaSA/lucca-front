@@ -1,4 +1,5 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { ScrollBoxComponent } from '@lucca-front/ng/scrollBox';
+import { Meta, moduleMetadata, StoryFn } from '@storybook/angular';
 
 interface MenuScrollboxStory {
 	noBorder: boolean;
@@ -25,52 +26,75 @@ export default {
 			},
 		},
 	},
+	decorators: [
+		moduleMetadata({
+			imports: [ScrollBoxComponent],
+		}),
+	],
 } as Meta;
 
 function getTemplate(args: MenuScrollboxStory): string {
 	const noBorder = args.noBorder ? ` mod-noBorder` : '';
 	const header = args.header ? ` mod-header` : '';
 	const s = args.s ? ` mod-S` : '';
-	return `<nav class="menu${s}${noBorder}${header}">
-	<div class="scrollBox">
-		<div class="scrollBox-inner">
-			<div class="scrollBox-inner-content">
-				<ul class="menu-list">
-					<li class="menu-list-item">
-						<a href="#" class="menu-list-item-action" aria-current="page">
-							Menu 1
-						</a>
-					</li>
-					<li class="menu-list-item">
-						<a href="#" class="menu-list-item-action">
-							Menu 2
-						</a>
-					</li>
-					<li class="menu-list-item">
-						<a href="#" class="menu-list-item-action">
-							Menu 3
-						</a>
-					</li>
-					<li class="menu-list-item">
-						<a href="#" class="menu-list-item-action">
-							Menu 4
-						</a>
-					</li>
-					<li class="menu-list-item">
-						<a href="#" class="menu-list-item-action">
-							Menu 5
-						</a>
-					</li>
-					<li class="menu-list-item">
-						<a href="#" class="menu-list-item-action">
-							Menu 6
-						</a>
-					</li>
-				</ul>
-			</div>
-		</div>
-	</div>
-</nav>`;
+	return `<lu-scroll-box>
+	<div class="menu_firstChild"></div>
+	<nav class="menu${s}${noBorder}${header}">
+		<ul class="menu-list">
+			<li class="menu-list-item">
+				<a href="#" class="menu-list-item-action" aria-current="page">
+					Menu 1
+				</a>
+			</li>
+			<li class="menu-list-item">
+				<a href="#" class="menu-list-item-action">
+					Menu 2
+				</a>
+			</li>
+			<li class="menu-list-item">
+				<a href="#" class="menu-list-item-action">
+					Menu 3
+				</a>
+			</li>
+			<li class="menu-list-item">
+				<a href="#" class="menu-list-item-action">
+					Menu 4
+				</a>
+			</li>
+			<li class="menu-list-item">
+				<a href="#" class="menu-list-item-action">
+					Menu 5
+				</a>
+			</li>
+			<li class="menu-list-item">
+				<a href="#" class="menu-list-item-action">
+					Menu 6
+				</a>
+			</li>
+			<li class="menu-list-item">
+				<a href="#" class="menu-list-item-action">
+					Menu 7
+				</a>
+			</li>
+			<li class="menu-list-item">
+				<a href="#" class="menu-list-item-action">
+					Menu 8
+				</a>
+			</li>
+			<li class="menu-list-item">
+				<a href="#" class="menu-list-item-action">
+					Menu 9
+				</a>
+			</li>
+			<li class="menu-list-item">
+				<a href="#" class="menu-list-item-action">
+					Menu 10
+				</a>
+			</li>
+		</ul>
+	</nav>
+	<div class="menu_lastChild"></div>
+</lu-scroll-box>`;
 }
 
 const Template: StoryFn<MenuScrollboxStory> = (args) => ({
@@ -78,6 +102,11 @@ const Template: StoryFn<MenuScrollboxStory> = (args) => ({
 	template: getTemplate(args),
 	styles: [
 		`
+			/* to fix a weird bug in mod-S */
+			.menu_lastChild {
+				margin-right: 1px;
+			}
+
 			:host {
 				display: block;
 				max-inline-size: 100%;
