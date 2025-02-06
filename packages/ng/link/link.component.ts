@@ -1,11 +1,11 @@
 import { booleanAttribute, Component, effect, ElementRef, HostBinding, inject, input, Input, OnDestroy, Renderer2, signal, ViewEncapsulation } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { getIntl } from '@lucca-front/ng/core';
 import { LU_LINK_TRANSLATIONS } from './link.translate';
-import { RouterLink } from '@angular/router';
 
 @Component({
 	// eslint-disable-next-line @angular-eslint/component-selector
-	selector: 'a[luLink]',
+	selector: 'a[luLink], button[luLink]',
 	standalone: true,
 	templateUrl: './link.component.html',
 	styleUrls: ['./link.component.scss'],
@@ -26,9 +26,6 @@ export class LinkComponent implements OnDestroy {
 	#routerLink = inject(RouterLink);
 
 	#observer: MutationObserver;
-
-	@Input({ required: true })
-	label: string;
 
 	routerLinkCommands = input<RouterLink['routerLink'] | null>(null, { alias: 'luLink' });
 
