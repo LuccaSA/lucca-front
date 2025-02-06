@@ -21,7 +21,7 @@ import {
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { getIntl } from '@lucca-front/ng/core';
 import { ALuSelectInputComponent, LuOptionContext, provideLuSelectLabelsAndIds, ɵLuOptionOutletDirective } from '@lucca-front/ng/core-select';
-import { FILTER_PILL_INPUT_COMPONENT, FilterPillDisplayerDirective, FilterPillLabelDirective } from '@lucca-front/ng/filter-pills';
+import { FilterPillDisplayerDirective, FilterPillLabelDirective, FILTER_PILL_INPUT_COMPONENT } from '@lucca-front/ng/filter-pills';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 import { Subject } from 'rxjs';
 import { LuMultiSelectDefaultDisplayerComponent } from '../displayer/index';

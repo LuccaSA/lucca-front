@@ -1,12 +1,10 @@
-# DateInput
-
 DateInput (`lu-date-input`) est le composant qui vient remplacer et moderniser `lu-date-picker`, il est fait pour s'intégrer dans un `lu-form-field` comme tous les composants `lu-***-input`.
 
-## Utilisation
+### Utilisation
 
 Le composant s'utilise via la balise `lu-form-field` et supporte `ngModel` ainsi que `formControl` comme tous les composants d'input nouvelle génération au sein de lucca-front.
 
-## Configuration
+### Configuration
 
 Il est possible d'utiliser `lu-date-input` de plusieurs façons différentes, via ses inputs, tout d'abord:
 
@@ -18,7 +16,7 @@ Il est possible d'utiliser `lu-date-input` de plusieurs façons différentes, vi
 
 Le composant utilise uniquement des objets de type `Date`, le premier jour de la semaine ainsi que les jours du weekend sont récupérés via la locale Angular, car à ce jour, l'implémentation proposée dans `Intl` n'est pas présente dans Firefox.
 
-## Configuration avancée
+### Configuration avancée
 
 Dans le cas ou la donnée attendue doit être un mois ou une année, il est possible de passer par l'input `mode` et spécifier `day`, `month` ou `year` (ce qui correspond au type `CalendarMode`) en fonction de la donnée attendue.
 Dans tous les cas, le date sera au début de la période sélectionnée, exemples:

@@ -68,7 +68,7 @@ export const Basic: StoryObj<CheckboxInputComponent & FormFieldComponent & { req
 		hiddenLabel: false,
 		required: true,
 		mixed: false,
-		inlineMessage: 'Helper Text',
+		inlineMessage: 'Helper text',
 		inlineMessageState: 'default',
 	},
 };

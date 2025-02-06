@@ -1,19 +1,24 @@
+import { AsyncPipe, DecimalPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
-import { Meta, StoryFn, applicationConfig } from '@storybook/angular';
+import { applicationConfig, Meta, StoryFn } from '@storybook/angular';
+import { BehaviorSubject, combineLatest, map, shareReplay, switchMap, timer } from 'rxjs';
 
 @Component({
 	selector: 'tooltip-stories',
 	standalone: true,
-	imports: [LuTooltipModule, ButtonComponent],
+	imports: [LuTooltipModule, ButtonComponent, AsyncPipe, DecimalPipe],
 	template: `
-		<button luButton (click)="displayed = !displayed">Toggle dislay</button>
+		<p>Ellapsed: {{ (timer$ | async) / 10 | number: '1.1-1' }}s</p>
+		<p>Blocked time: {{ (diff$ | async) / 1000 | number: '1.1-1' }}s</p>
+
+		<button luButton (click)="toggleDisplay()">Toggle dislay</button>
 
 		@if (displayed) {
 			@for (cell of cells; track $index) {
-				<div class="ellipsis width200" luTooltip>{{ cell }}</div>
+				<div class="ellipsis width200" luTooltip luTooltipWhenEllipsis>{{ cell }}</div>
 			}
 		}
 	`,
@@ -42,8 +47,21 @@ import { Meta, StoryFn, applicationConfig } from '@storybook/angular';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class TooltipStory {
+	reset$ = new BehaviorSubject<void>(undefined);
+	timer$ = this.reset$.pipe(
+		switchMap(() => timer(0, 100)),
+		shareReplay(1),
+	);
+	from$ = this.reset$.pipe(map(() => Date.now()));
+	diff$ = combineLatest({ timer: this.timer$, from: this.from$ }).pipe(map(({ from, timer }) => Date.now() - from - 100 * timer));
+
 	displayed = false;
-	cells = new Array(1_000).fill(0).map((_, i) => 'a'.repeat(i + 1));
+	cells = new Array(1_000).fill(0).map((_, i) => 'a'.repeat((i + 1) % 100));
+
+	toggleDisplay() {
+		this.displayed = !this.displayed;
+		this.reset$.next();
+	}
 }
 
 export default {
