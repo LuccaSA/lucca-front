@@ -10,7 +10,6 @@ import {
 	forwardRef,
 	HostBinding,
 	inject,
-	Input,
 	input,
 	signal,
 	untracked,
