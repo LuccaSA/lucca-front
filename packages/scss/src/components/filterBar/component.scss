@@ -15,41 +15,41 @@
 	}
 
 	@at-root ($atRoot) {
-		.filterPillBar-divider.divider {
+		.filterBar-divider.divider {
 			&:not(:has(~ .filterPill:not(.is-hidden))) {
 				display: none;
 			}
 		}
 
-		.filterPillBar-segmentedControl.segmentedControl {
+		.filterBar-segmentedControl.segmentedControl {
 			@include segmentedControl.S;
 		}
 
-		.filterPillBar-scrollBox.scrollBox {
+		.filterBar-scrollBox.scrollBox {
 			align-items: flex-start;
 		}
 
-		.filterPillBar-scrollBox-first {
-			display: var(--components-filterPillBar-extremitiesDisplay);
+		.filterBar-scrollBox-first {
+			display: var(--components-filterBar-extremitiesDisplay);
 			margin-inline-end: calc(var(--components-scrollBox-gap) * -1);
 		}
 
-		.filterPillBar-scrollBox-last {
-			display: var(--components-filterPillBar-extremitiesDisplay);
+		.filterBar-scrollBox-last {
+			display: var(--components-filterBar-extremitiesDisplay);
 			margin-inline-start: calc(var(--components-scrollBox-gap) * -1);
 		}
 
-		.filterPillBar-scrollBox-group {
+		.filterBar-scrollBox-group {
 			display: flex;
 			gap: var(--components-scrollBox-gap);
 			flex-wrap: wrap;
 
-			&:has(+ .filterPillBar-scrollBox-last) {
+			&:has(+ .filterBar-scrollBox-last) {
 				flex-grow: 1;
 			}
 		}
 
-		.filterPillBar-scrollBox-export {
+		.filterBar-scrollBox-export {
 			margin-inline-start: auto;
 			padding-inline-start: var(--pr-t-spacings-200);
 		}

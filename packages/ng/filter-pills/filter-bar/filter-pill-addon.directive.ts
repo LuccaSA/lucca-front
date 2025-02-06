@@ -1,5 +1,5 @@
 import { Directive, inject, TemplateRef } from '@angular/core';
-import { FilterPillsBarComponent } from './filter-pills-bar.component';
+import { FilterBarComponent } from './filter-bar.component';
 
 @Directive({
 	selector: '[luFilterPillAddonBefore]',
@@ -7,7 +7,7 @@ import { FilterPillsBarComponent } from './filter-pills-bar.component';
 })
 export class FilterPillAddonBeforeDirective {
 	constructor() {
-		inject(FilterPillsBarComponent).addonBefore.set(inject(TemplateRef));
+		inject(FilterBarComponent).addonBefore.set(inject(TemplateRef));
 	}
 
 	public static ngTemplateContextGuard(_dir: FilterPillAddonBeforeDirective, ctx: unknown): ctx is void {
@@ -21,7 +21,7 @@ export class FilterPillAddonBeforeDirective {
 })
 export class FilterPillAddonAfterDirective {
 	constructor() {
-		inject(FilterPillsBarComponent).addonAfter.set(inject(TemplateRef));
+		inject(FilterBarComponent).addonAfter.set(inject(TemplateRef));
 	}
 
 	public static ngTemplateContextGuard(_dir: FilterPillAddonAfterDirective, ctx: unknown): ctx is void {

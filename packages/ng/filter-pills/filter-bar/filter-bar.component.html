@@ -1,11 +1,11 @@
-<lu-scroll-box class="filterPillBar-scrollBox">
-	<div class="filterPillBar-scrollBox-first"></div>
+<lu-scroll-box class="filterBar-scrollBox">
+	<div class="filterBar-scrollBox-first"></div>
 
-	<div class="filterPillBar-scrollBox-group">
+	<div class="filterBar-scrollBox-group">
 		@if (addonBefore()) {
 		<ng-container *ngTemplateOutlet="addonBefore()"></ng-container>
 
-		<lu-divider class="filterPillBar-divider" />
+		<lu-divider class="filterBar-divider" />
 		} @if (optionalPills().length > 0) {
 		<button
 			class="filterPill mod-button"
@@ -24,12 +24,12 @@
 	</div>
 
 	@if (addonAfter()) {
-	<div class="filterPillBar-scrollBox-export">
+	<div class="filterBar-scrollBox-export">
 		<ng-container *ngTemplateOutlet="addonAfter()"></ng-container>
 	</div>
 	}
 
-	<div class="filterPillBar-scrollBox-last"></div>
+	<div class="filterBar-scrollBox-last"></div>
 </lu-scroll-box>
 
 <ng-template #contentOptionsTpl>

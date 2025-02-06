@@ -1,7 +1,7 @@
 @use 'exports' as *;
 @use '@lucca-front/scss/src/commons/utils/media';
 
-.filterPillBar {
+.filterBar {
 	@include vars;
 	@include component;
 

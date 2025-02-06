@@ -2,7 +2,7 @@ import { allLegumes, FilterLegumesPipe } from '@/stories/forms/select/select.uti
 import { FormsModule } from '@angular/forms';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { DateInputComponent, DateRangeInputComponent } from '@lucca-front/ng/date2';
-import { FilterPillAddonAfterDirective, FilterPillAddonBeforeDirective, FilterPillComponent, FilterPillsBarComponent } from '@lucca-front/ng/filter-pills';
+import { FilterBarComponent, FilterPillAddonAfterDirective, FilterPillAddonBeforeDirective, FilterPillComponent } from '@lucca-front/ng/filter-pills';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { CheckboxInputComponent, TextInputComponent } from '@lucca-front/ng/forms';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
@@ -10,11 +10,11 @@ import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { StoryModelDisplayComponent } from '../../../../helpers/story-model-display.component';
 
 export default {
-	title: 'Documentation/Forms/FiltersPills/FilterPillBar/Angular',
+	title: 'Documentation/Forms/FiltersPills/FilterBar/Angular',
 	decorators: [
 		moduleMetadata({
 			imports: [
-				FilterPillsBarComponent,
+				FilterBarComponent,
 				FilterPillComponent,
 				CheckboxInputComponent,
 				FormsModule,
@@ -41,7 +41,7 @@ export default {
 			},
 
 			template: `
-				<lu-filter-pills-bar>
+				<lu-filter-bar>
 
 					<lu-filter-pill label="Légumes">
 						<lu-simple-select disabled [(ngModel)]="example"	[options]="legumes | filterLegumes:clue" (clueChange)="clue = $event" />
@@ -55,12 +55,12 @@ export default {
 						<lu-text-input [ngModel]="example10" [ngModelOptions]="{standalone: true}" hasSearchIcon hasClearer />
 					</lu-form-field>
 
-				</lu-filter-pills-bar>
+				</lu-filter-bar>
 
 				<hr class="divider pr-u-marginBlock400" />
 
-				<lu-filter-pills-bar>
-					<ul *luFilterPillAddonBefore class="segmentedControl filterPillBar-segmentedControl" role="presentation">
+				<lu-filter-bar>
+					<ul *luFilterPillAddonBefore class="segmentedControl filterBar-segmentedControl" role="presentation">
 						<li class="segmentedControl-item">
 							<input type="radio" class="segmentedControl-item-input" name="tab" id="tab1" checked="checked" />
 							<label for="tab1" class="segmentedControl-item-action">
@@ -97,12 +97,12 @@ export default {
 					</lu-filter-pill>
 
 					<button  *luFilterPillAddonAfter type="submit" size="S" luButton="outlined">Exporter</button>
-				</lu-filter-pills-bar>
+				</lu-filter-bar>
 			`,
 		};
 	},
 } as Meta;
 
-export const Basic: StoryObj<FilterPillsBarComponent> = {
+export const Basic: StoryObj<FilterBarComponent> = {
 	args: {},
 };

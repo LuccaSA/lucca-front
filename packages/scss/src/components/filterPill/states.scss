@@ -84,11 +84,11 @@
 }
 
 @mixin beginning {
-	--components-filterPillBar-displayBefore: none;
+	--components-filterBar-displayBefore: none;
 }
 
 @mixin ending {
-	--components-filterPillBar-displayAfter: none;
+	--components-filterBar-displayAfter: none;
 }
 
 @mixin disabled {
