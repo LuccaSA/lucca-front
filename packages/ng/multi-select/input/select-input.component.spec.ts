@@ -328,5 +328,5 @@ function createComponent(override?: MetadataOverride<Component>) {
 }
 
 function waitForPanel() {
-	return new Promise((resolve) => setTimeout(resolve, 11));
+	return new Promise((resolve) => setTimeout(resolve));
 }
