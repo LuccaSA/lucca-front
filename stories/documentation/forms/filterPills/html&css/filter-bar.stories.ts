@@ -12,14 +12,14 @@ import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 import { Meta, moduleMetadata, StoryFn } from '@storybook/angular';
 import { StoryModelDisplayComponent } from 'stories/helpers/story-model-display.component';
 
-interface FilterPillBarBasicStory {
+interface FilterBarBasicStory {
 	label: string;
 	value: string;
 	expanded: boolean;
 }
 
 export default {
-	title: 'Documentation/Forms/FiltersPills/FilterPillBar/HTML&CSS',
+	title: 'Documentation/Forms/FiltersPills/FilterBar/HTML&CSS',
 	decorators: [
 		moduleMetadata({
 			imports: [
@@ -42,15 +42,15 @@ export default {
 	argTypes: {},
 } as Meta;
 
-function getTemplate(args: FilterPillBarBasicStory): string {
+function getTemplate(args: FilterBarBasicStory): string {
 	return `
 	<form>
-		<div class="filterPillBar" [ngModel]="group" [ngModelOptions]="{standalone: true}">
-			<lu-scroll-box class="filterPillBar-scrollBox">
-				<div class="filterPillBar-scrollBox-first"></div>
+		<div class="filterBar" [ngModel]="group" [ngModelOptions]="{standalone: true}">
+			<lu-scroll-box class="filterBar-scrollBox">
+				<div class="filterBar-scrollBox-first"></div>
 
-				<div class="filterPillBar-scrollBox-group">
-					<ul class="segmentedControl filterPillBar-segmentedControl" role="presentation">
+				<div class="filterBar-scrollBox-group">
+					<ul class="segmentedControl filterBar-segmentedControl" role="presentation">
 						<li class="segmentedControl-item">
 							<input type="radio" class="segmentedControl-item-input" name="tab" id="tab1" checked="checked" />
 							<label for="tab1" class="segmentedControl-item-action">
@@ -79,7 +79,7 @@ function getTemplate(args: FilterPillBarBasicStory): string {
 						</li>
 					</ul>
 
-					<lu-divider class="filterPillBar-divider" />
+					<lu-divider class="filterBar-divider" />
 
 					<button class="filterPill mod-button" type="button" luTooltip="Filtres supplémentaires" luTooltipOnlyForDisplay [luPopover2]="contentOptions">
 						<lu-icon class="filterPill-icon" icon="filtersDescending" alt="Filtres supplémentaires"></lu-icon>
@@ -118,11 +118,11 @@ function getTemplate(args: FilterPillBarBasicStory): string {
 					<button type="submit" size="S" luButton="text" palette="product">Appliquer les filtres</button>
 
 				</div>
-				<div class="filterPillBar-scrollBox-export">
+				<div class="filterBar-scrollBox-export">
 					<button type="submit" size="S" luButton="outlined">Exporter</button>
 				</div>
 
-				<div class="filterPillBar-scrollBox-last"></div>
+				<div class="filterBar-scrollBox-last"></div>
 			</lu-scroll-box>
 		</div>
 
@@ -150,7 +150,7 @@ function getTemplate(args: FilterPillBarBasicStory): string {
 `;
 }
 
-const Template: StoryFn<FilterPillBarBasicStory> = (args) => ({
+const Template: StoryFn<FilterBarBasicStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 });

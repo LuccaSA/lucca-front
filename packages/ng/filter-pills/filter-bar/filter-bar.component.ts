@@ -12,17 +12,17 @@ import { FilterPillComponent } from '../filter-pill/filter-pill.component';
 import { LU_FILTER_PILLS_TRANSLATIONS } from '../filter-pills.translate';
 
 @Component({
-	selector: 'lu-filter-pills-bar',
+	selector: 'lu-filter-bar',
 	imports: [IconComponent, LuTooltipTriggerDirective, PopoverDirective, DividerComponent, ScrollBoxComponent, FormsModule, NgTemplateOutlet],
-	templateUrl: './filter-pills-bar.component.html',
-	styleUrl: './filter-pills-bar.component.scss',
+	templateUrl: './filter-bar.component.html',
+	styleUrl: './filter-bar.component.scss',
 	encapsulation: ViewEncapsulation.None,
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	host: {
-		class: 'filterPillBar',
+		class: 'filterBar',
 	},
 })
-export class FilterPillsBarComponent {
+export class FilterBarComponent {
 	intl = getIntl(LU_FILTER_PILLS_TRANSLATIONS);
 
 	addonBefore = signal<TemplateRef<unknown> | null>(null);

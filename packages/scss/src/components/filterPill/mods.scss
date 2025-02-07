@@ -10,50 +10,50 @@
 }
 
 @mixin compact {
-	.filterPillBar-segmentedControl.segmentedControl {
+	.filterBar-segmentedControl.segmentedControl {
 		--components-segmentedControl-direction: row;
 		--components-segmentedControl-width: 100%;
 	}
 
-	.filterPillBar-divider.divider {
+	.filterBar-divider.divider {
 		width: 100%;
 	}
 }
 
 @mixin notCompact {
-	.filterPillBar-divider.divider {
+	.filterBar-divider.divider {
 		@include divider.vertical;
 
 		margin-inline: var(--pr-t-spacings-50);
 	}
 
-	.filterPillBar-scrollBox.scrollBox {
-		&:has(.filterPillBar-scrollBox-export) {
+	.filterBar-scrollBox.scrollBox {
+		&:has(.filterBar-scrollBox-export) {
 			flex-wrap: nowrap;
 		}
 	}
 }
 
 @mixin touch {
-	--components-filterPillBar-extremitiesDisplay: block;
+	--components-filterBar-extremitiesDisplay: block;
 
-	.filterPillBar-segmentedControl.segmentedControl {
+	.filterBar-segmentedControl.segmentedControl {
 		--components-segmentedControl-whiteSpace: nowrap;
 		--components-segmentedControl-width: auto;
 		--components-segmentedControl-wrap: nowrap;
 	}
 
-	.filterPillBar-scrollBox.scrollBox {
+	.filterBar-scrollBox.scrollBox {
 		@include overflow.hide;
 	}
 
-	.filterPillBar-scrollBox-group {
+	.filterBar-scrollBox-group {
 		display: contents;
 	}
 }
 
 @mixin noTouch {
-	.filterPillBar-scrollBox.scrollBox {
+	.filterBar-scrollBox.scrollBox {
 		@include scrollBox.disabled;
 	}
 }
