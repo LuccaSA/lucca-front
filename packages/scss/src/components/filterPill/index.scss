@@ -44,6 +44,10 @@
 	&.mod-checkbox {
 		@include checkbox;
 
+		&:has(.filterPill-checkbox-input:focus-visible) {
+			@include focusVisible;
+		}
+
 		&:has(.filterPill-checkbox-input:checked) {
 			@include checkboxChecked;
 
