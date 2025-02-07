@@ -8,6 +8,9 @@ import ts, { ScriptTarget } from 'typescript';
 require('@angular-devkit/schematics');
 
 export default (options?: { skipInstallation?: boolean }): Rule => {
+	// TODO Ajouter une classe LFSchematicContext qui permet de transporter le contexte via une instance exposée en const.
+	// Ajouter les méthodes de log Error, warning, success, info
+	// Voir pour y porter un dry-run (et @angular/compiler ?)
 	const skipInstallation = options?.skipInstallation ?? false;
 
 	return async (tree, context) => {

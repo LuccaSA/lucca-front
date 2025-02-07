@@ -1,7 +1,7 @@
-import { LuSelectInputContext, SelectContext } from "./model/select-context";
-import { AngularCompilerLib, HtmlAstVisitor } from "../lib/html-ast";
-import ts from "typescript";
-import { extractProviders } from "../lib/angular-component-ast";
+import { LuSelectInputContext, SelectContext } from './model/select-context';
+import { AngularCompilerLib, HtmlAstVisitor } from '../lib/html-ast';
+import ts from 'typescript';
+import { extractProviders } from '../lib/angular-component-ast';
 
 export enum RejectionReason {
 	UNSUPPORTED_ATTRIBUTE,
@@ -59,47 +59,47 @@ export function getCommonMigrationRejectionReason(node: unknown, sourceFile: ts.
 		const providers = extractProviders(sourceFile);
 		if (providers.length > 0) {
 			switch (node.name) {
-				case "lu-establishment-select":
-					if (providers.some(p => p.provide === "ALuEstablishmentService")) {
+				case 'lu-establishment-select':
+					if (providers.some(p => p.provide === 'ALuEstablishmentService')) {
 						return {
 							reason: RejectionReason.DATA_SERVICE_OVERRIDE,
-							details: "ALuEstablishmentService"
+							details: 'ALuEstablishmentService'
 						};
 					}
-					if (providers.some(p => p.provide === "ALuLegalUnitService")) {
+					if (providers.some(p => p.provide === 'ALuLegalUnitService')) {
 						return {
 							reason: RejectionReason.DATA_SERVICE_OVERRIDE,
-							details: "ALuLegalUnitService"
-						};
-					}
-					break;
-				case "lu-user-select":
-					if (providers.some(p => p.provide === "ALuUserService")) {
-						return {
-							reason: RejectionReason.DATA_SERVICE_OVERRIDE,
-							details: "ALuUserService"
-						};
-					}
-					if (providers.some(p => p.provide === "ALuUserHomonymsService")) {
-						return {
-							reason: RejectionReason.DATA_SERVICE_OVERRIDE,
-							details: "ALuUserHomonymsService"
+							details: 'ALuLegalUnitService'
 						};
 					}
 					break;
-				case "lu-qualification-select":
-					if (providers.some(p => p.provide === "ALuQualificationService")) {
+				case 'lu-user-select':
+					if (providers.some(p => p.provide === 'ALuUserService')) {
 						return {
 							reason: RejectionReason.DATA_SERVICE_OVERRIDE,
-							details: "ALuUserService"
+							details: 'ALuUserService'
+						};
+					}
+					if (providers.some(p => p.provide === 'ALuUserHomonymsService')) {
+						return {
+							reason: RejectionReason.DATA_SERVICE_OVERRIDE,
+							details: 'ALuUserHomonymsService'
 						};
 					}
 					break;
-				case "lu-api-select":
-					if (providers.some(p => p.provide === "ALuApiService")) {
+				case 'lu-qualification-select':
+					if (providers.some(p => p.provide === 'ALuQualificationService')) {
 						return {
 							reason: RejectionReason.DATA_SERVICE_OVERRIDE,
-							details: "ALuUserService"
+							details: 'ALuUserService'
+						};
+					}
+					break;
+				case 'lu-api-select':
+					if (providers.some(p => p.provide === 'ALuApiService')) {
+						return {
+							reason: RejectionReason.DATA_SERVICE_OVERRIDE,
+							details: 'ALuApiService'
 						};
 					}
 					break;
@@ -118,7 +118,7 @@ export function getDataSource(select: LuSelectInputContext, compiler: AngularCom
 	// First of all, check that there's no lu-option-select-all, because this is a rejection reason
 	htmlAstVisitor.visitElements(/(lu-option-select-all)|(lu-tree-.*)/, (node) => {
 		rejected = true;
-		if (node.name === "lu-option-select-all") {
+		if (node.name === 'lu-option-select-all') {
 			result = {
 				reason: RejectionReason.SELECT_ALL
 			};
@@ -135,28 +135,28 @@ export function getDataSource(select: LuSelectInputContext, compiler: AngularCom
 
 	htmlAstVisitor.visitElements(/lu-option-picker(-advanced)?/, (node) => {
 		// If picker doesn't have option as direct child, reject, we can't migrate this kind of custom stuff
-		const luOption = node.children.find((c) => c instanceof compiler.TmplAstTemplate && c.tagName === "lu-option");
+		const luOption = node.children.find((c) => c instanceof compiler.TmplAstTemplate && c.tagName === 'lu-option');
 		if (luOption === undefined) {
 			result = {
 				reason: RejectionReason.CUSTOM_PICKER_CONTENT
 			};
 		} else {
 			// TODO Handle advanced option picker
-			if (luOption instanceof compiler.TmplAstTemplate && node.name === "lu-option-picker") {
-				let valueName: string = "";
-				let ngForOfName: string = "";
-				let ngForImplicitVarName: string = "";
+			if (luOption instanceof compiler.TmplAstTemplate && node.name === 'lu-option-picker') {
+				let valueName: string = '';
+				let ngForOfName: string = '';
+				let ngForImplicitVarName: string = '';
 				// If that's a simple option picker, lu-option should have dataSource in its ngFor
 				luOption.templateAttrs.forEach((attr) => {
-					if (attr.name === "ngForOf" && attr.value instanceof compiler.ASTWithSource) {
-						ngForOfName = attr.value.source || "";
-						ngForImplicitVarName = luOption.variables.find((v) => v.value === "$implicit")?.name || "";
+					if (attr.name === 'ngForOf' && attr.value instanceof compiler.ASTWithSource) {
+						ngForOfName = attr.value.source || '';
+						ngForImplicitVarName = luOption.variables.find((v) => v.value === '$implicit')?.name || '';
 					}
 				});
 				// Grab assigned value to make sure it's a supported one
 				luOption.inputs.forEach((attr) => {
-					if (attr.name === "value" && attr.value instanceof compiler.ASTWithSource) {
-						valueName = attr.value.source || "";
+					if (attr.name === 'value' && attr.value instanceof compiler.ASTWithSource) {
+						valueName = attr.value.source || '';
 					}
 				});
 				// If value is bound to something else than the iteration variable, we don't handle it
@@ -193,8 +193,8 @@ export function getDataSource(select: LuSelectInputContext, compiler: AngularCom
 									display: {
 										canBeRemoved: false,
 										variables: luOption.variables.map(v => {
-											return v.value === "$implicit" ? `let ${v.name}` : `let ${v.name}=${v.value}`;
-										}).join("; "),
+											return v.value === '$implicit' ? `let ${v.name}` : `let ${v.name}=${v.value}`;
+										}).join('; '),
 										display: luOption.startSourceSpan.end.file.content.slice(select.nodeOffset + luOption.startSourceSpan.end.offset, select.nodeOffset + (luOption.endSourceSpan?.start?.offset || 0))
 									}
 								};
@@ -203,7 +203,7 @@ export function getDataSource(select: LuSelectInputContext, compiler: AngularCom
 					}
 				}
 
-				const comparerAST = node.inputs.find(attr => attr.name === "option-comparer")?.value;
+				const comparerAST = node.inputs.find(attr => attr.name === 'option-comparer')?.value;
 				if (comparerAST instanceof compiler.ASTWithSource && comparerAST?.source && !isRejection(result)) {
 					result.comparer = comparerAST?.source;
 				}
@@ -215,14 +215,14 @@ export function getDataSource(select: LuSelectInputContext, compiler: AngularCom
 
 export function getDisplayer(select: SelectContext, compiler: AngularCompilerLib): SelectDisplayer {
 
-	const displayerHostNode = select.node.children.find((node) => node instanceof compiler.TmplAstTemplate && node.templateAttrs.some((attr) => attr.name === "luDisplayer"));
+	const displayerHostNode = select.node.children.find((node) => node instanceof compiler.TmplAstTemplate && node.templateAttrs.some((attr) => attr.name === 'luDisplayer'));
 	if (!displayerHostNode) {
 		return {
 			canBeRemoved: true
 		};
 	}
 	if (displayerHostNode instanceof compiler.TmplAstTemplate) {
-		const displayerVarName = displayerHostNode.variables.find((v) => v.value === "$implicit")?.name;
+		const displayerVarName = displayerHostNode.variables.find((v) => v.value === '$implicit')?.name;
 		const templateNodes: unknown[] = [];
 		new HtmlAstVisitor(displayerHostNode.children, compiler).visitNodes((c) => {
 			if (c instanceof compiler.TmplAstBoundText) {
@@ -245,8 +245,8 @@ export function getDisplayer(select: SelectContext, compiler: AngularCompilerLib
 					return {
 						canBeRemoved: false,
 						variables: displayerHostNode.variables.map(v => {
-							return v.value === "$implicit" ? `let ${v.name}` : `let ${v.name}=${v.value}`;
-						}).join("; "),
+							return v.value === '$implicit' ? `let ${v.name}` : `let ${v.name}=${v.value}`;
+						}).join('; '),
 						display: displayerHostNode.startSourceSpan.end.file.content.slice(select.nodeOffset + displayerHostNode.startSourceSpan.end.offset, select.nodeOffset + (displayerHostNode.endSourceSpan?.start?.offset || 0))
 					};
 				}
