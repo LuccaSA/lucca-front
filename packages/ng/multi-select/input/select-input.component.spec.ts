@@ -61,6 +61,7 @@ describe('LuMultiSelectInputComponent', () => {
 					useValue: searchControl,
 				},
 			],
+			teardown: { destroyAfterEach: false },
 		});
 	});
 
@@ -143,7 +144,7 @@ describe('LuMultiSelectInputComponent', () => {
 				// Arrange
 				const { componentInstance } = fixture;
 				componentInstance.openPanel();
-				await wait0();
+				await waitForPanel();
 				componentInstance.panelRef.changeDetectorRef.detectChanges();
 
 				// Act
@@ -157,7 +158,7 @@ describe('LuMultiSelectInputComponent', () => {
 				// Arrange
 				const { componentInstance } = fixture;
 				componentInstance.openPanel();
-				await wait0();
+				await waitForPanel();
 				componentInstance.panelRef.changeDetectorRef.detectChanges();
 
 				// Act
@@ -172,7 +173,7 @@ describe('LuMultiSelectInputComponent', () => {
 				// Arrange
 				const { componentInstance } = fixture;
 				componentInstance.openPanel();
-				await wait0();
+				await waitForPanel();
 				componentInstance.panelRef.changeDetectorRef.detectChanges();
 
 				// Act
@@ -189,7 +190,7 @@ describe('LuMultiSelectInputComponent', () => {
 				// Arrange
 				const { componentInstance } = fixture;
 				componentInstance.openPanel();
-				await wait0();
+				await waitForPanel();
 				componentInstance.panelRef.changeDetectorRef.detectChanges();
 
 				// Act
@@ -204,7 +205,7 @@ describe('LuMultiSelectInputComponent', () => {
 				// Arrange
 				const { componentInstance } = fixture;
 				componentInstance.openPanel();
-				await wait0();
+				await waitForPanel();
 				componentInstance.panelRef.changeDetectorRef.detectChanges();
 
 				// Act
@@ -221,7 +222,7 @@ describe('LuMultiSelectInputComponent', () => {
 				// Arrange
 				const { componentInstance } = fixture;
 				componentInstance.openPanel();
-				await wait0();
+				await waitForPanel();
 				componentInstance.panelRef.changeDetectorRef.detectChanges();
 
 				// Act
@@ -233,13 +234,20 @@ describe('LuMultiSelectInputComponent', () => {
 				TestBed.flushEffects();
 
 				// Assert
-				expect(emittedSelectValues).toEqual([{ mode: 'all' }, { mode: 'exclude', values: [options[0]] }, { mode: 'none' }]);
+				expect(emittedSelectValues).toEqual([
+					{ mode: 'all' },
+					{
+						mode: 'exclude',
+						values: [options[0]],
+					},
+					{ mode: 'none' },
+				]);
 			});
 
 			it('should emit mode all when clicking on each option', async () => {
 				const { componentInstance } = fixture;
 				componentInstance.openPanel();
-				await wait0();
+				await waitForPanel();
 				componentInstance.panelRef.changeDetectorRef.detectChanges();
 
 				// Act
@@ -254,13 +262,15 @@ describe('LuMultiSelectInputComponent', () => {
 				// Arrange
 				const { componentInstance } = fixture;
 				componentInstance.openPanel();
-				await wait0();
+				await waitForPanel();
 				componentInstance.panelRef.changeDetectorRef.detectChanges();
 
 				// Act
 				selectAllDirective.setSelectAll(true);
 				TestBed.flushEffects();
-				selectAllDirective.clearValue({ stopPropagation: () => {} } as Event);
+				selectAllDirective.clearValue({
+					stopPropagation: () => {},
+				} as Event);
 				TestBed.flushEffects();
 
 				// Assert
@@ -271,7 +281,7 @@ describe('LuMultiSelectInputComponent', () => {
 				// Arrange
 				const { componentInstance } = fixture;
 				componentInstance.openPanel();
-				await wait0();
+				await waitForPanel();
 				componentInstance.panelRef.changeDetectorRef.detectChanges();
 
 				// Act
@@ -317,6 +327,6 @@ function createComponent(override?: MetadataOverride<Component>) {
 	return TestBed.createComponent<LuMultiSelectInputComponent<Entity>>(LuMultiSelectInputComponent);
 }
 
-function wait0() {
-	return new Promise((resolve) => setTimeout(resolve, 0));
+function waitForPanel() {
+	return new Promise((resolve) => setTimeout(resolve));
 }

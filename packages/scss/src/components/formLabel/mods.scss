@@ -18,7 +18,12 @@
 	--components-formLabel-cursor: pointer;
 }
 
-@mixin counter {
+@mixin widthAuto {
 	--components-formLabel-width: auto;
+}
+
+@mixin counter {
+	@include widthAuto;
+	
 	--components-formLabel-paddingRight: var(--pr-t-spacings-600);
 }

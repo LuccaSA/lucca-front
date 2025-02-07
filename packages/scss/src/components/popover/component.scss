@@ -34,8 +34,7 @@
 
 	@at-root ($atRoot) {
 		.popover-contentOptional {
-			padding-block: var(--pr-t-spacings-100);
-			padding-inline: var(--pr-t-spacings-150);
+			padding: var(--components-popover-padding);
 		}
 
 		.popover-close {

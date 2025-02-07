@@ -1,7 +1,6 @@
 @use '@lucca-front/scss/src/commons/utils/a11y';
 
-.popover-contentOptional {
-	padding: var(--pr-t-spacings-100) !important;
+.multilanguage_popover-content.popover-contentOptional {
 	max-block-size: 20rem;
 	overflow: auto;
 

@@ -1,5 +1,15 @@
 @mixin vars {
 	--components-scrollBox-backgroundColor: var(--pr-t-elevation-surface-default);
 	--components-scrollBox-shadowColor: var(--palettes-neutral-400);
-	--components-scrollBox-shadowWidth: var(--pr-t-spacings-150);
+	--components-scrollBox-shadowSize: var(--pr-t-spacings-150);
+	--components-scrollBox-beforeOpacity: 1;
+	--components-scrollBox-afterOpacity: 1;
+	--components-scrollBox-gap: var(--pr-t-spacings-100);
+	--components-scrollBox-scrollBarWidth: thin;
+	--components-scrollBox-paddingInline: var(--pr-t-spacings-200);
+	--components-scrollBox-paddingBlock: var(--pr-t-spacings-100);
+	--components-scrollBox-marginInline: calc(var(--components-scrollBox-paddingInline) * -1);
+	--components-scrollBox-marginBlock: calc(var(--components-scrollBox-paddingBlock) * -1);
+	--components-scrollBox-wrap: nowrap;
+	--components-scrollBox-pseudoElementsContent: '';
 }

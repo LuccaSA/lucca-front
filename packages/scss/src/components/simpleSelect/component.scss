@@ -2,23 +2,26 @@
 @use '@lucca-front/scss/src/commons/utils/namespace';
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
-	display: grid;
-	grid-template-columns: 1fr auto auto;
-	align-items: center;
-	box-shadow: 0 0 0 1px var(--components-simpleSelect-border-color);
-	background-color: var(--components-simpleSelect-background);
-	border-radius: var(--commons-borderRadius-M);
-	padding: var(--components-simpleSelect-padding);
-	overflow: hidden;
-	outline: none;
-	cursor: pointer;
-
-	&:hover {
-		--components-simpleSelect-border-color: var(--pr-t-color-input-border-hover);
-	}
+	display: block;
 
 	@at-root ($atRoot) {
-		.simpleSelect-input {
+		.simpleSelect-field {
+			display: grid;
+			grid-template-columns: 1fr auto auto;
+			align-items: center;
+			box-shadow: 0 0 0 1px var(--components-simpleSelect-border-color);
+			background-color: var(--components-simpleSelect-background);
+			border-radius: var(--commons-borderRadius-M);
+			padding: var(--components-simpleSelect-padding);
+			overflow: hidden;
+			outline: none;
+			cursor: pointer;
+
+			&:hover {
+				--components-simpleSelect-border-color: var(--pr-t-color-input-border-hover);
+			}
+		}
+		.simpleSelect-field-input {
 			grid-column-start: 1;
 			grid-row-start: 1;
 			font-size: var(--components-simpleSelect-fontSize);
@@ -38,7 +41,7 @@
 			}
 		}
 
-		.simpleSelect-value {
+		.simpleSelect-field-value {
 			grid-column-start: 1;
 			grid-row-start: 1;
 			inline-size: 100%;
@@ -51,18 +54,20 @@
 			transition: color var(--commons-animations-durations-fast) ease;
 		}
 
-		.simpleSelect-clear {
+		.simpleSelect-field-clear {
 			grid-column-start: -2;
 			margin-inline-start: var(--components-simpleSelect-gap);
 		}
 
-		.simpleSelect-arrow {
+		.simpleSelect-field-icon {
 			grid-column-start: -1;
 			margin-inline-start: var(--components-simpleSelect-gap);
 			color: var(--components-simpleSelect-arrow-color);
 			transition: transform var(--commons-animations-durations-standard) ease;
 
-			@include icon.M;
+			.lucca-icon {
+				@include icon.M;
+			}
 		}
 	}
 }

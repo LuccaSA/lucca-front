@@ -1,0 +1,10 @@
+@use 'exports' as *;
+
+.filterBarDeprecated {
+	@include vars;
+	@include component;
+
+	&.mod-neutral {
+		@include neutral;
+	}
+}

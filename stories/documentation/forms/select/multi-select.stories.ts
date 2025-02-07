@@ -19,11 +19,11 @@ import {
 	LuMultiSelectCounterDisplayerComponent,
 	LuMultiSelectDisplayerInputDirective,
 	LuMultiSelectInputComponent,
+	LuMultiSelection,
 	LuMultiSelectWithSelectAllDirective,
 } from '@lucca-front/ng/multi-select';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 import { applicationConfig, Meta, moduleMetadata } from '@storybook/angular';
-import { LuMultiSelection } from 'packages/ng/multi-select/select.model';
 import { interval, map } from 'rxjs';
 import { startWith } from 'rxjs/operators';
 import { HiddenArgType } from 'stories/helpers/common-arg-types';
@@ -285,6 +285,22 @@ export const User = generateStory({
 	template: `<lu-multi-select
 	placeholder="Placeholder..."
 	users
+	[(ngModel)]="selectedUsers"
+></lu-multi-select>`,
+	neededImports: {
+		'@lucca-front/ng/multi-select': ['LuMultiSelectInputComponent'],
+		'@lucca-front/ng/core-select/user': ['LuCoreSelectUsersDirective'],
+	},
+});
+
+export const UserWithSelectAll = generateStory({
+	name: 'User Select (select all)',
+	description: "Pour saisir des utilisateurs, il suffit d'utiliser la directive `users` et `withSelectAll`",
+	template: `<lu-multi-select
+	placeholder="Placeholder..."
+	users
+	withSelectAll
+	withSelectAllDisplayerLabel="utilisateurs"
 	[(ngModel)]="selectedUsers"
 ></lu-multi-select>`,
 	neededImports: {

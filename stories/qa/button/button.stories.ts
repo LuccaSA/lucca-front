@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ButtonComponent } from '@lucca-front/ng/button';
 import { Meta, StoryFn } from '@storybook/angular';
 
 @Component({
@@ -6,6 +7,7 @@ import { Meta, StoryFn } from '@storybook/angular';
 	selector: 'button-stories',
 	templateUrl: './button.stories.html',
 	styles: ['.button::after { animation-play-state: paused; }'],
+	imports: [ButtonComponent],
 })
 class ButtonStory {}
 

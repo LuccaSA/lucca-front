@@ -76,5 +76,9 @@
 			transition-property: transform;
 			transition-duration: var(--commons-animations-durations-standard);
 		}
+
+		.multipleSelect-pill-displayer-label {
+			font-weight: 600;
+		}
 	}
 }

@@ -125,15 +125,20 @@
 	}
 }
 
-// Touch detection
+@mixin pointer($query, $any: false, $reversed: false) {
+	@#{if($reversed, 'media not', 'media')} (#{if($any, 'any-', '')}pointer: #{$query}) {
+		@content;
+	}
+}
+
 @mixin isTouchDevice {
-	@media (any-pointer: coarse) {
+	@include pointer(coarse, $any: true) {
 		@content;
 	}
 }
 
 @mixin isNotTouchDevice {
-	@media not (any-pointer: coarse) {
+	@include pointer(coarse, $any: true, $reversed: true) {
 		@content;
 	}
 }

@@ -7,12 +7,13 @@
 @mixin component($atRoot: namespace.$defaultAtRoot) {
 	display: flex;
 	align-items: stretch;
-	border-radius: var(--commons-borderRadius-M);
+	border-radius: var(--component-textField-borderRadius);
 	background-color: var(--component-textField-background);
 	box-shadow: 0 0 0 1px var(--component-textField-border);
+	width: var(--component-textField-width);
 
 	&:hover {
-		--component-textField-border: var(--pr-t-color-input-border-hover);
+		box-shadow: 0 0 0 1px var(--component-textField-borderHover);
 	}
 
 	&:has(.textField-input-value:focus-visible) {
@@ -31,7 +32,7 @@
 			display: flex;
 			align-items: center;
 			inline-size: 100%;
-			border-radius: var(--commons-borderRadius-M);
+			border-radius: var(--component-textField-borderRadius);
 			background-color: var(--component-textField-background);
 			position: relative;
 

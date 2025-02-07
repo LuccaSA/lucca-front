@@ -1,7 +1,5 @@
 import { NgClass } from '@angular/common';
 import { booleanAttribute, ChangeDetectionStrategy, Component, computed, effect, ElementRef, inject, input, LOCALE_ID, model, OnInit, output, viewChildren, ViewEncapsulation } from '@angular/core';
-import { ButtonComponent } from '@lucca-front/ng/button';
-import { CalloutComponent } from '@lucca-front/ng/callout';
 import { getIntl } from '@lucca-front/ng/core';
 import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
 import {
@@ -48,7 +46,7 @@ const MODE_HIERARCHY: CalendarMode[] = ['day', 'month', 'year'];
 @Component({
 	selector: 'lu-calendar2',
 	standalone: true,
-	imports: [RepeatTimesDirective, ButtonComponent, Calendar2CellDirective, NgClass, CalloutComponent, LuTooltipTriggerDirective],
+	imports: [RepeatTimesDirective, Calendar2CellDirective, NgClass, LuTooltipTriggerDirective],
 	templateUrl: './calendar2.component.html',
 	styleUrl: './calendar2.component.scss',
 	encapsulation: ViewEncapsulation.None,

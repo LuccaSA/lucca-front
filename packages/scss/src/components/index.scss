@@ -7,7 +7,7 @@
 @forward 'chip'; // 1 Ko
 @forward 'title'; // 1 Ko
 @forward 'label'; // 1 Ko
-@forward 'filterBar'; // 1 Ko
+@forward 'filterBarDeprecated'; // 1 Ko
 @forward 'filters'; // 1 Ko
 @forward 'divider'; // 1 Ko
 @forward 'section'; // 1 Ko
@@ -91,6 +91,8 @@
 @forward 'dateRangeField';
 @forward 'dataTable';
 @forward 'dataTableSticked';
+@forward 'filterPill';
+@forward 'filterBar';
 @forward 'dropdown';
 @forward 'textFlow';
 

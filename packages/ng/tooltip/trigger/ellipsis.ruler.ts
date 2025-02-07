@@ -1,8 +1,15 @@
 import { DOCUMENT } from '@angular/common';
-import { Injectable, inject } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
+import { filter, firstValueFrom, shareReplay, timer } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class EllipsisRuler {
+	// As EllipsisRuler is a singleton, we can use shareReplay so the first subscriber starts the timer and the last one stops it
+	// The timer allows us to alternate between read and write phases
+	#interval = timer(100, 100).pipe(shareReplay({ refCount: true, bufferSize: 1 }));
+	#readPhase = this.#interval.pipe(filter((n) => n % 2 === 0));
+	#writePhase = this.#interval.pipe(filter((n) => n % 2 === 1));
+
 	#document = inject(DOCUMENT);
 	readonly parentMasked = this.#document.createElement('div');
 
@@ -31,7 +38,13 @@ export class EllipsisRuler {
 	 * This way, we have 2 reflows per check, no matter how many elements are checked in a row.
 	 */
 	async hasEllipsis(element: HTMLElement): Promise<boolean> {
-		const elementStyle = getComputedStyle(element);
+		let elementStyle: CSSStyleDeclaration;
+		let bodyStyle: CSSStyleDeclaration;
+
+		await this.#readOperation(() => {
+			elementStyle = getComputedStyle(element);
+			bodyStyle = getComputedStyle(document.body);
+		});
 
 		if (elementStyle.textOverflow !== 'ellipsis') {
 			return false;
@@ -39,47 +52,63 @@ export class EllipsisRuler {
 
 		const { padding, borderWidth, borderStyle, boxSizing, fontFamily, fontWeight, fontStyle } = elementStyle;
 
-		const fontSize = (Number(elementStyle.fontSize.replace('px', '')) / Number(getComputedStyle(document.body).fontSize.replace('px', ''))).toString() + 'rem';
+		const fontSize = (Number(elementStyle.fontSize.replace('px', '')) / Number(bodyStyle.fontSize.replace('px', ''))).toString() + 'rem';
 
-		// When multiple elements are checked in a row, we wait for the next microtask to before cloning the element
-		// to avoid the browser to reflow the page for each tooltip
-		await Promise.resolve();
+		let elementCloned: HTMLDivElement;
 
-		const elementCloned = this.#document.createElement('div');
+		await this.#writeOperation(() => {
+			elementCloned = this.#document.createElement('div');
 
-		Object.assign(elementCloned.style, {
-			inlineSize: 'fit-content',
-			whiteSpace: 'nowrap',
-			position: 'absolute',
-			visibility: 'hidden',
-			padding,
-			borderWidth,
-			borderStyle,
-			boxSizing,
-			fontFamily,
-			fontWeight,
-			fontStyle,
-			fontSize,
+			Object.assign(elementCloned.style, {
+				inlineSize: 'fit-content',
+				whiteSpace: 'nowrap',
+				position: 'absolute',
+				visibility: 'hidden',
+				padding,
+				borderWidth,
+				borderStyle,
+				boxSizing,
+				fontFamily,
+				fontWeight,
+				fontStyle,
+				fontSize,
+			});
+
+			this.parentMasked.appendChild(elementCloned);
+
+			elementCloned.innerHTML = element.innerHTML;
 		});
 
-		this.parentMasked.appendChild(elementCloned);
-
-		elementCloned.innerHTML = element.innerHTML;
-
 		// To avoid multiple reflows, we wait for the next microtask before calculating the width
-		await Promise.resolve();
 
 		try {
-			const elementClonedWidth = elementCloned.getBoundingClientRect().width;
-			const elementWidth = element.getBoundingClientRect().width;
+			let clonedElementWidth: number;
+			let elementWidth: number;
 
-			return elementClonedWidth > elementWidth;
+			await this.#readOperation(() => {
+				clonedElementWidth = elementCloned.getBoundingClientRect().width;
+				elementWidth = element.getBoundingClientRect().width;
+			});
+
+			return clonedElementWidth > elementWidth;
 		} catch {
 			return false;
 		} finally {
-			// To avoid multiple reflows, we wait for the next microtask before removing the cloned element
-			await Promise.resolve();
-			this.parentMasked.removeChild(elementCloned);
+			await this.#writeOperation(() => {
+				this.parentMasked.removeChild(elementCloned);
+			});
 		}
+	}
+
+	// To avoid multiple reflows, we wait for the next read phase before computing/reading element style
+	async #readOperation(operation: () => void): Promise<void> {
+		await firstValueFrom(this.#readPhase);
+		operation();
+	}
+
+	// To avoid multiple reflows, we wait for the next write before inserting/removing the cloned element
+	async #writeOperation(operation: () => void): Promise<void> {
+		await firstValueFrom(this.#writePhase);
+		operation();
 	}
 }
