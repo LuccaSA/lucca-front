@@ -18,6 +18,11 @@
       "type": "boolean",
       "description": "Enable verbose logging.",
       "default": false
+    },
+    "noComments": {
+      "type": "boolean",
+      "description": "Don't put comments about select migration rejections in result files.",
+      "default": false
     }
   }
 }

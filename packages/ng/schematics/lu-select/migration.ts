@@ -26,7 +26,7 @@ const selectorToComponentNameRecord = selectorToSelectComponentName as Record<st
 
 const possibleSelectComponents = Object.values(selectorToSelectComponentName);
 
-export function migrateComponent(sourceFile: SourceFile, path: string, tree: Tree): string {
+export function migrateComponent(sourceFile: SourceFile, path: string, tree: Tree, noComments = false): string {
 	const selects = findSelectContexts(sourceFile, path, tree);
 	if (selects.length > 0) {
 		const tsUpdate = tree.beginUpdate(path);
@@ -58,7 +58,9 @@ export function migrateComponent(sourceFile: SourceFile, path: string, tree: Tre
 			// We want to handle both cases (before handling and after) here
 			if (select.rejection) {
 				currentSchematicContext.logFailure(`Couldn't migrate ${select.component} in ${path}: ${RejectionReason[select.rejection.reason]}`);
-				insertRejectionComment(templateUpdate, select as RejectedSelectContext);
+				if (!noComments) {
+					insertRejectionComment(templateUpdate, select as RejectedSelectContext);
+				}
 			} else {
 				currentSchematicContext.logSuccess(`Migrated ${select.component} in ${path}`);
 			}
