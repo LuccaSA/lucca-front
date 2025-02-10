@@ -13,12 +13,12 @@
 	line-height: var(--sizes-M-lineHeight);
 
 	@supports (-webkit-touch-callout: none) {
-		min-height: -webkit-fill-available;
+		min-block-size: -webkit-fill-available;
 	}
 }
 
 @mixin html {
-	height: -webkit-fill-available;
+	block-size: -webkit-fill-available;
 }
 
 @mixin base($atRoot: namespace.$defaultAtRoot) {
@@ -55,7 +55,19 @@
 		}
 
 		p {
-			margin: 0 0 var(--pr-t-spacings-200);
+			margin: 0;
+			@if config.$deprecatedSpacings {
+				margin-block-end: var(--pr-t-spacings-150);
+			}
+		}
+
+		ul,
+		ol {
+			margin: 0;
+			padding-inline-start: var(--pr-t-spacings-400);
+			@if config.$deprecatedSpacings {
+				margin-block-end: var(--pr-t-spacings-150);
+			}
 		}
 
 		abbr {
@@ -76,6 +88,12 @@
 
 			&:focus-visible {
 				@include a11y.focusVisible($borderRadius: var(--commons-borderRadius-M));
+			}
+		}
+
+		button {
+			&:focus-visible {
+				@include a11y.focusVisible();
 			}
 		}
 

@@ -1,5 +1,9 @@
-@mixin layoutFixed($i) {
-	min-width: $i * 1rem;
-	max-width: $i * 1rem;
-	width: $i * 1rem;
+@mixin layoutFixed {
+	table-layout: fixed;
+}
+
+@mixin layoutFixedCell($i) {
+	min-inline-size: $i * 1rem;
+	max-inline-size: $i * 1rem;
+	inline-size: $i * 1rem;
 }

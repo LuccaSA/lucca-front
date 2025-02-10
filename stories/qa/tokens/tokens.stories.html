@@ -35,19 +35,6 @@
 	</div>
 </section>
 <h2>Spacings</h2>
-<h3>Deprecated (.u-)</h3>
-<section class="contentSection">
-	<div class="demo-spacings">
-		<div class="demo-spacing"><div>0</div></div>
-		<div class="demo-spacing u-paddingXXS"><div>XXS</div></div>
-		<div class="demo-spacing u-paddingXS"><div>XS</div></div>
-		<div class="demo-spacing u-paddingS"><div>S</div></div>
-		<div class="demo-spacing u-paddingM"><div>M</div></div>
-		<div class="demo-spacing u-paddingL"><div>L</div></div>
-		<div class="demo-spacing u-paddingXL"><div>XL</div></div>
-		<div class="demo-spacing u-paddingXXL"><div>XXL</div></div>
-	</div>
-</section>
 <h3>Tokens (.pr-u-)</h3>
 <section class="contentSection">
 	<div class="demo-spacings">
@@ -81,8 +68,8 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		height: 5rem;
-		width: 5rem;
+		inline-size: 5rem;
+		block-size: 5rem;
 		border-radius: var(--commons-borderRadius-L);
 	}
 
@@ -91,11 +78,11 @@
 	}
 
 	.demo-surface-under {
-		width: 2rem;
-		height: 2rem;
+		inline-size: 2rem;
+		block-size: 2rem;
 		position: absolute;
-		top: -1rem;
-		right: -1rem;
+		inset-block-start: -1rem;
+		inset-inline-end: -1rem;
 		background-color: var(--palettes-neutral-0);
 		border-radius: var(--commons-borderRadius-full);
 	}
@@ -113,8 +100,8 @@
 
 	.demo-spacing div {
 		background-color: var(--pr-t-elevation-surface-raised);
-		width: 2.5rem;
-		height: 2.5rem;
+		inline-size: 2.5rem;
+		block-size: 2.5rem;
 		display: inline-flex;
 		align-items: center;
 		justify-content: center;

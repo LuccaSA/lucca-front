@@ -1,0 +1,15 @@
+@mixin firstColumnVisible {
+	--components-dataTable-shadow-firstColumnOpacity: 0;
+}
+
+@mixin lastColumnVisible {
+	--components-dataTable-shadow-lastColumnOpacity: 0;
+}
+
+@mixin firstRowVisible {
+	--components-dataTable-shadow-firstRowOpacity: 0;
+}
+
+@mixin lastRowVisible {
+	--components-dataTable-shadow-lastRowOpacity: 0;
+}

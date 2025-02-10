@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Directive, OnInit, computed, forwardRef, inject, input } from '@angular/core';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
-import { CORE_SELECT_API_TOTAL_COUNT_PROVIDER, CoreSelectApiTotalCountProvider, sanitizeClueFilter } from '@lucca-front/ng/core-select';
+import { CORE_SELECT_API_TOTAL_COUNT_PROVIDER, CoreSelectApiTotalCountProvider, applySearchDelimiter } from '@lucca-front/ng/core-select';
 import { ALuCoreSelectApiDirective } from '@lucca-front/ng/core-select/api';
 import { Observable, debounceTime, map, switchMap } from 'rxjs';
 import { LuJobQualificationGroupingComponent } from './job-qualification-grouping.component';
@@ -61,7 +61,7 @@ export class LuCoreSelectJobQualificationsDirective<T extends LuCoreSelectJobQua
 				...filters,
 				...(clue
 					? {
-							search: sanitizeClueFilter(clue, this.searchDelimiter()),
+							search: applySearchDelimiter(clue, this.searchDelimiter()),
 							sort: 'name',
 						}
 					: { sort: 'job.name,level.position' }),

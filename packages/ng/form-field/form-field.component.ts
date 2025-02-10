@@ -1,5 +1,6 @@
 import { NgIf, NgTemplateOutlet } from '@angular/common';
-import { booleanAttribute, Component, computed, contentChildren, effect, forwardRef, inject, input, model, OnDestroy, Renderer2, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, Component, computed, contentChildren, effect, forwardRef, inject, input, model, OnDestroy, Renderer2, signal, ViewEncapsulation } from '@angular/core';
+import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { AbstractControl, NgControl, ReactiveFormsModule, RequiredValidator, Validators } from '@angular/forms';
 import { SafeHtml } from '@angular/platform-browser';
 import { getIntl, IntlParamsPipe, LuClass, PortalContent, PortalDirective, ɵeffectWithDeps } from '@lucca-front/ng/core';
@@ -7,12 +8,11 @@ import { IconComponent } from '@lucca-front/ng/icon';
 import { InlineMessageComponent, InlineMessageState } from '@lucca-front/ng/inline-message';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 import { BehaviorSubject, merge, switchMap } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
 import { FormFieldSize } from './form-field-size';
 import { FORM_FIELD_INSTANCE } from './form-field.token';
 import { LU_FORM_FIELD_TRANSLATIONS } from './form-field.translate';
 import { InputDirective } from './input.directive';
-import { toObservable, toSignal } from '@angular/core/rxjs-interop';
-import { map } from 'rxjs/operators';
 
 let nextId = 0;
 
@@ -49,9 +49,22 @@ export class FormFieldComponent implements OnDestroy {
 	ownRequiredValidators = computed(() => this.requiredValidators().filter((c) => !this.ignoredRequiredValidators().has(c)));
 	ownControls = computed(() => this.ngControls().filter((c) => !this.ignoredControls().has(c)));
 
-	refreshedOwnControls = toSignal(toObservable(this.ownControls).pipe(switchMap((controls) => merge(...controls.map((c) => c.control.events)).pipe(map(() => [...controls])))), {
-		initialValue: [],
-	});
+	refreshedOwnControls = toSignal(
+		toObservable(this.ownControls).pipe(
+			map((controls) => controls.filter((c) => c.control)),
+			switchMap((controls) => {
+				return merge(...controls.map((c) => c.control.events)).pipe(
+					// We need to use startWith here so the observable will also emit when new controls are added on the fly,
+					// before they even emit any control-related event
+					startWith(void 0),
+					map(() => [...controls]),
+				);
+			}),
+		),
+		{
+			initialValue: [],
+		},
+	);
 
 	isInputRequired = computed(() => {
 		const hasRequiredFormControl = this.refreshedOwnControls().some((c) => c.control.hasValidator(Validators.required));
@@ -73,6 +86,8 @@ export class FormFieldComponent implements OnDestroy {
 	statusControl = input<AbstractControl | null>(null);
 
 	tooltip = input<string | SafeHtml | null>(null);
+
+	width = input<20 | 30 | 40 | 50 | 60>(null);
 
 	invalidStatus = computed(() => {
 		const isInvalidOverride = this.invalid() !== undefined && this.invalid() !== null;
@@ -131,7 +146,7 @@ export class FormFieldComponent implements OnDestroy {
 		return this.#inputs;
 	}
 
-	id: string;
+	id = signal<string>('');
 
 	ready$ = new BehaviorSubject<boolean>(false);
 
@@ -151,6 +166,7 @@ export class FormFieldComponent implements OnDestroy {
 				[`mod-${this.size()}`]: !!this.size(),
 				'mod-checkable': this.layout() === 'checkable',
 				'form-field': this.layout() !== 'fieldset',
+				[`mod-width${this.width()}`]: !!this.width(),
 			});
 		});
 	}
@@ -183,7 +199,7 @@ export class FormFieldComponent implements OnDestroy {
 				this.#renderer.setAttribute(input.host.nativeElement, 'id', inputId);
 			});
 		// We're using the id from the first input available
-		this.id = this.#inputs[0].host.nativeElement.id;
+		this.id.set(this.#inputs[0].host.nativeElement.id);
 		this.updateAria();
 		this.ready$.next(true);
 	}
@@ -196,8 +212,8 @@ export class FormFieldComponent implements OnDestroy {
 				this.#renderer.setAttribute(input.host.nativeElement, 'aria-describedby', `${input.host.nativeElement.id}-message`);
 			}
 		});
-		if (this.id && !this.#ariaLabelledBy.includes(`${this.id}-label`)) {
-			this.addLabelledBy(`${this.id}-label`);
+		if (this.id() && !this.#ariaLabelledBy.includes(`${this.id()}-label`)) {
+			this.addLabelledBy(`${this.id()}-label`);
 		}
 	}
 

@@ -29,7 +29,7 @@ export default {
 			},
 		},
 		rows: {
-			control: { type: 'number', min: 2 },
+			control: { type: 'number' },
 			description: '[v18.1]',
 		},
 		counter: {
@@ -82,7 +82,7 @@ export const Basic: StoryObj<TextareaInputComponent & { disabled: boolean; requi
 		required: true,
 		hiddenLabel: false,
 		disabled: false,
-		inlineMessage: 'Helper Text',
+		inlineMessage: 'Helper text',
 		inlineMessageState: 'default',
 		placeholder: 'Placeholder',
 		tooltip: 'Je suis un message d’aide',

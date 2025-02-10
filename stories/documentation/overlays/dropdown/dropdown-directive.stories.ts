@@ -1,5 +1,6 @@
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { LuDropdownModule, LuDropdownTriggerDirective } from '@lucca-front/ng/dropdown';
+import { IconComponent } from '@lucca-front/ng/icon';
 import { Meta, StoryFn, applicationConfig } from '@storybook/angular';
 
 export default {
@@ -11,26 +12,26 @@ export default {
 const Template: StoryFn = (args) => ({
 	props: args,
 	moduleMetadata: {
-		imports: [LuDropdownModule],
+		imports: [LuDropdownModule, IconComponent],
 	},
 	template: `
 	<button type="button" class="button" [luDropdown]="dropdown">Dropdown with options</button>
 <lu-dropdown #dropdown>
-	<li class="lu-dropdown-options-item">
-		<a routerLink="." fragment="link1" class="lu-dropdown-options-item-action is-disabled" luDropdownItem>
-			<span aria-hidden="true" class="lucca-icon icon-eye"></span>
+	<li class="dropdown-list-option">
+		<span class="dropdown-list-option-action is-disabled" luDropdownItem>
+			<lu-icon icon="eye" />
 			Prévisualiser
+		</span>
+	</li>
+	<li class="dropdown-list-option">
+		<a routerLink="." fragment="link2" class="dropdown-list-option-action" luDropdownItem>
+			<lu-icon icon="officePen" />
+			Éditer
 		</a>
 	</li>
-	<li class="lu-dropdown-options-item">
-		<a routerLink="." fragment="link2" class="lu-dropdown-options-item-action" luDropdownItem>
-			<span aria-hidden="true" class="lucca-icon icon-officePen"></span>
-			Editer
-		</a>
-	</li>
-	<li class="lu-dropdown-options-item">
-		<button type="button" class="lu-dropdown-options-item-action mod-delete" luDropdownItem>
-			<span aria-hidden="true" class="lucca-icon icon-trashDelete"></span>
+	<li class="dropdown-list-option">
+		<button type="button" class="dropdown-list-option-action mod-delete" luDropdownItem>
+			<lu-icon icon="trashDelete" />
 			Supprimer
 		</button>
 	</li>

@@ -1,17 +1,40 @@
 import { HttpClient } from '@angular/common/http';
-import { Directive, Type, booleanAttribute, computed, effect, forwardRef, inject, input, signal, untracked } from '@angular/core';
+import { Directive, Provider, Type, booleanAttribute, computed, effect, forwardRef, inject, input, signal, untracked } from '@angular/core';
 import { takeUntilDestroyed, toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { ILuApiCollectionResponse } from '@lucca-front/ng/api';
-import { CORE_SELECT_API_TOTAL_COUNT_PROVIDER, CoreSelectApiTotalCountProvider, sanitizeClueFilter } from '@lucca-front/ng/core-select';
+import { CORE_SELECT_API_TOTAL_COUNT_PROVIDER, CoreSelectApiTotalCountProvider, applySearchDelimiter } from '@lucca-front/ng/core-select';
 import { ALuCoreSelectApiDirective } from '@lucca-front/ng/core-select/api';
 import { LuDisplayFormat, LuDisplayFullname } from '@lucca-front/ng/user';
 import { EMPTY, Observable, catchError, combineLatest, debounceTime, map, of, shareReplay, switchMap, take, tap } from 'rxjs';
-import { FORMER_EMPLOYEES_CONTEXT, FormerEmployeesContext, LuCoreSelectFormerEmployeesComponent } from './former-employees.component';
+import { FORMER_EMPLOYEES_CONTEXT, LuCoreSelectFormerEmployeesComponent } from './former-employees.component';
 import { LU_CORE_SELECT_CURRENT_USER_ID } from './me.provider';
 import { LuUserDisplayerComponent } from './user-displayer.component';
 import { LuCoreSelectUserHomonymsService } from './user-homonym.service';
 import { LuUserOptionComponent } from './user-option.component';
 import { LuCoreSelectUser, LuCoreSelectWithAdditionnalInformation } from './user-option.model';
+
+export function provideCoreSelectUsersContext(directiveFn: () => Type<LuCoreSelectUsersDirective>): Provider[] {
+	return [
+		...provideBaseCoreSelectUsersContext(directiveFn),
+		{
+			provide: LuCoreSelectUsersDirective,
+			useExisting: forwardRef(directiveFn),
+		},
+	];
+}
+
+function provideBaseCoreSelectUsersContext(directiveFn: () => Type<LuCoreSelectUsersDirective>): Provider[] {
+	return [
+		{
+			provide: CORE_SELECT_API_TOTAL_COUNT_PROVIDER,
+			useExisting: forwardRef(directiveFn),
+		},
+		{
+			provide: FORMER_EMPLOYEES_CONTEXT,
+			useExisting: forwardRef(directiveFn),
+		},
+	];
+}
 
 @Directive({
 	// The attribute is already prefixed with "lu-simple-select"
@@ -19,16 +42,7 @@ import { LuCoreSelectUser, LuCoreSelectWithAdditionnalInformation } from './user
 	selector: 'lu-simple-select[users],lu-multi-select[users]',
 	standalone: true,
 	exportAs: 'luUsers',
-	providers: [
-		{
-			provide: CORE_SELECT_API_TOTAL_COUNT_PROVIDER,
-			useExisting: forwardRef(() => LuCoreSelectUsersDirective),
-		},
-		{
-			provide: FORMER_EMPLOYEES_CONTEXT,
-			useExisting: forwardRef(() => LuCoreSelectUsersDirective satisfies Type<FormerEmployeesContext>),
-		},
-	],
+	providers: [provideBaseCoreSelectUsersContext(() => LuCoreSelectUsersDirective)],
 })
 export class LuCoreSelectUsersDirective<T extends LuCoreSelectUser = LuCoreSelectUser>
 	extends ALuCoreSelectApiDirective<LuCoreSelectWithAdditionnalInformation<T>>
@@ -50,6 +64,7 @@ export class LuCoreSelectUsersDirective<T extends LuCoreSelectUser = LuCoreSelec
 	url = input<string | null>(null);
 	orderBy = input<string | null>(null);
 	operationIds = input<number[] | null>(null);
+	uniqueOperationIds = input<number[] | null>(null);
 	appInstanceId = input<number | null>(null);
 	enableFormerEmployees = input(false, { transform: booleanAttribute });
 	displayMeOption = input(true);
@@ -64,12 +79,14 @@ export class LuCoreSelectUsersDirective<T extends LuCoreSelectUser = LuCoreSelec
 
 		effect(() => {
 			const enableFormerEmployees = this.enableFormerEmployees();
-			untracked(() => this.select.panelHeaderTpl.set(enableFormerEmployees ? LuCoreSelectFormerEmployeesComponent : undefined));
+
+			if (enableFormerEmployees) {
+				untracked(() => this.select.panelHeaderTpl.set(LuCoreSelectFormerEmployeesComponent));
+			}
 		});
 	}
 
 	protected defaultUrl = computed(() => (this.appInstanceId() && this.operationIds()?.length ? this.#defaultScopedSearchUrl : this.#defaultSearchUrl));
-	protected displayMeOption$ = toObservable(this.displayMeOption);
 	protected urlOrDefault = computed(() => this.url() ?? this.defaultUrl());
 
 	protected clue = toSignal(this.clue$);
@@ -79,6 +96,7 @@ export class LuCoreSelectUsersDirective<T extends LuCoreSelectUser = LuCoreSelec
 			const orderBy = this.orderBy();
 			const clue = this.clue();
 			const operationIds = this.operationIds();
+			const uniqueOperationIds = this.uniqueOperationIds();
 			const appInstanceId = this.appInstanceId();
 			const searchDelimiter = this.searchDelimiter();
 			const formerEmployees = this.includeFormerEmployees();
@@ -87,8 +105,9 @@ export class LuCoreSelectUsersDirective<T extends LuCoreSelectUser = LuCoreSelec
 				fields: this.#userFields,
 				...this.filters(),
 				...(orderBy ? { orderBy } : {}),
-				...(clue ? { clue: sanitizeClueFilter(clue, searchDelimiter) } : {}),
+				...(clue ? { clue: applySearchDelimiter(clue, searchDelimiter) } : {}),
 				...(operationIds ? { operations: operationIds.join(',') } : {}),
+				...(uniqueOperationIds ? { uniqueOperations: uniqueOperationIds.join(',') } : {}),
 				...(appInstanceId ? { appInstanceId } : {}),
 				...(formerEmployees ? { formerEmployees } : {}),
 			};
@@ -106,7 +125,15 @@ export class LuCoreSelectUsersDirective<T extends LuCoreSelectUser = LuCoreSelec
 	);
 
 	protected me$ = this.meParams$.pipe(
-		switchMap((params) => this.httpClient.get<ILuApiCollectionResponse<{ item: T }>>(this.urlOrDefault(), { params }).pipe(catchError(() => EMPTY))),
+		switchMap((params) =>
+			this.httpClient
+				.get<
+					ILuApiCollectionResponse<{
+						item: T;
+					}>
+				>(this.urlOrDefault(), { params })
+				.pipe(catchError(() => EMPTY)),
+		),
 		map((res) => res.data.items.map(({ item }) => item)[0] ?? null),
 		takeUntilDestroyed(),
 		shareReplay(1),
@@ -118,7 +145,7 @@ export class LuCoreSelectUsersDirective<T extends LuCoreSelectUser = LuCoreSelec
 			this.httpClient.get<{ count: number }>(url, {
 				params: {
 					...filters,
-					['fields.root']: 'count',
+					fields: 'collection.count',
 				},
 			}),
 		),
@@ -140,9 +167,15 @@ export class LuCoreSelectUsersDirective<T extends LuCoreSelectUser = LuCoreSelec
 			.pipe(map((res) => res.data.items.map(({ item }) => item)));
 	}
 
-	protected override getOptionsPage(params: Record<string, string | number | boolean>, page: number): Observable<{ items: LuCoreSelectWithAdditionnalInformation<T>[]; isLastPage: boolean }> {
+	protected override getOptionsPage(
+		params: Record<string, string | number | boolean>,
+		page: number,
+	): Observable<{
+		items: LuCoreSelectWithAdditionnalInformation<T>[];
+		isLastPage: boolean;
+	}> {
 		const hasClue = !!params['clue'];
-		const displayMe = this.displayMeOption && !hasClue;
+		const displayMe = this.displayMeOption() && !hasClue;
 		const prependMe = displayMe && page === 0;
 
 		this.select.loading = true;
@@ -162,7 +195,16 @@ export class LuCoreSelectUsersDirective<T extends LuCoreSelectUser = LuCoreSelec
 			}),
 		);
 
-		return page$.pipe(switchMap((page) => this.#userHomonymsService.handleHomonyms(page.items, this.displayFormat()).pipe(map((items) => ({ items, isLastPage: page.isLastPage })))));
+		return page$.pipe(
+			switchMap((page) =>
+				this.#userHomonymsService.handleHomonyms(page.items, this.displayFormat()).pipe(
+					map((items) => ({
+						items,
+						isLastPage: page.isLastPage,
+					})),
+				),
+			),
+		);
 	}
 
 	protected override optionComparer = (a: T, b: T) => a.id === b.id;

@@ -14,7 +14,7 @@ function getTemplate(args: PageHeaderBackStory): string {
 	<header class="pageHeader">
 		<div class="pageHeader-content">
 			<div class="pageHeader-content-title">
-				<nav class="pageHeader-content-title-back">
+				<nav role="presentation" class="pageHeader-content-title-back">
 					<a href="#" class="button mod-onlyIcon mod-text">
 						<span class="lucca-icon icon-arrowLeft" aria-hidden="true"></span>
 						<span class="u-mask">Page parente</span>
@@ -50,7 +50,7 @@ function getTemplate(args: PageHeaderBackStory): string {
 			</div>
 		</div>
 		<div class="pageHeader-description">
-			<p class="pr-u-marginBottom0">
+			<p class="pr-u-marginBlockEnd0">
 				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac justo scelerisque, blandit nibh quis, imperdiet justo.
 				Nullam condimentum nulla et neque ultricies bibendum.
 			</p>

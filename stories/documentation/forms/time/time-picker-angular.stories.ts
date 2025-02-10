@@ -42,25 +42,15 @@ export const Basic: StoryObj<TimePickerComponent & FormFieldComponent & { requir
 	render: (args, { argTypes }) => {
 		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, forceMeridiemDisplay, ...inputArgs } = args;
 		return {
-			template: cleanupTemplate(`<lu-form-field [label]="labelID" [rolePresentationLabel]="true" ${generateInputs(
-				{
-					hiddenLabel,
-					tooltip,
-					inlineMessage,
-					inlineMessageState,
-					size,
-				},
-				argTypes,
-			)}>
-<lu-time-picker label="${label}" ${generateInputs(inputArgs, argTypes)} ${forceMeridiemDisplay !== null ? `[forceMeridiemDisplay]="${forceMeridiemDisplay}"` : ''}
-	[(ngModel)]="example">
-	</lu-time-picker>
+			template: cleanupTemplate(`
+<lu-form-field [label]="labelID" [rolePresentationLabel]="true" ${generateInputs({ hiddenLabel, tooltip, inlineMessage, inlineMessageState, size }, argTypes)}>
+<lu-time-picker label="${label}" ${generateInputs(inputArgs, argTypes)} ${forceMeridiemDisplay !== null ? `[forceMeridiemDisplay]="${forceMeridiemDisplay}"` : ''} [(ngModel)]="example" />
 	<ng-template #labelID>
 			<span aria-hidden="true">${label}</span>
 		</ng-template>
 </lu-form-field>
-
-{{example}}`),
+{{example}}
+`),
 		};
 	},
 	args: {

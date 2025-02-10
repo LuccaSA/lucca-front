@@ -4,7 +4,8 @@ import { LuDisplayerDirective, LuOptionDirective } from '@lucca-front/ng/core-se
 import { FormFieldComponent, InputDirective } from '@lucca-front/ng/form-field';
 import { TextInputComponent } from '@lucca-front/ng/forms';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
-import { type CountryCallingCode, formatIncompletePhoneNumber, getCountries, getCountryCallingCode, parsePhoneNumber } from 'libphonenumber-js';
+import { type CountryCallingCode, formatIncompletePhoneNumber, getCountries, getCountryCallingCode, parsePhoneNumber, getExampleNumber } from 'libphonenumber-js';
+import examples from 'libphonenumber-js/mobile/examples';
 import { CountryCode, E164Number } from './types';
 import { PhoneNumberValidators } from './validators';
 
@@ -30,7 +31,7 @@ function tryParsePhoneNumber(phoneNumber: string, countryCode?: CountryCode): Pa
 			nationalNumber: parsedNumber.formatNational(),
 			isValid: parsedNumber.isValid(),
 		};
-	} catch (e) {
+	} catch {
 		return {
 			number: phoneNumber as E164Number,
 			nationalNumber: phoneNumber,
@@ -66,6 +67,8 @@ export class PhoneNumberInputComponent implements ControlValueAccessor, Validato
 	@Input() label: string;
 
 	@Input() autocomplete?: 'off' | 'tel';
+
+	noAutoPlaceholder = input<boolean>(false);
 
 	#onChange?: (value: E164Number) => void;
 
@@ -116,6 +119,11 @@ export class PhoneNumberInputComponent implements ControlValueAccessor, Validato
 
 	countryCode = computed(() => this.countryCodeSelected() ?? this.defaultCountryCode());
 
+	placeholder = computed(() => {
+		const exampleNumber = this.noAutoPlaceholder() === false ? getExampleNumber(this.countryCode(), examples) : undefined;
+		return exampleNumber?.formatNational() ?? '';
+	});
+
 	displayedNumber = signal<string | undefined>(undefined);
 
 	prefixEntry = computed(() => this.#prefixEntries().find((p) => p.country === this.countryCode()));
@@ -136,7 +144,7 @@ export class PhoneNumberInputComponent implements ControlValueAccessor, Validato
 			} else {
 				this.displayedNumber.set(undefined);
 			}
-		} catch (e) {
+		} catch {
 			this.displayedNumber.set(value);
 		}
 		this.formatNationalNumber();
@@ -179,7 +187,7 @@ export class PhoneNumberInputComponent implements ControlValueAccessor, Validato
 			}
 			this.#onChange?.(number);
 			return;
-		} catch (e) {
+		} catch {
 			this.#onChange?.(displayedNumber as E164Number);
 		}
 	}
@@ -198,7 +206,7 @@ export class PhoneNumberInputComponent implements ControlValueAccessor, Validato
 			} else if (countryCode) {
 				this.displayedNumber.set(formatIncompletePhoneNumber(displayedNumber, countryCode));
 			}
-		} catch (e) {
+		} catch {
 			// do nothing
 		}
 	}

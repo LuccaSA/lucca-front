@@ -38,6 +38,9 @@ export const Basic: StoryObj<NumberInputComponent & { disabled: boolean; require
 	render: (args, { argTypes }) => {
 		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, ...inputArgs } = args;
 		return {
+			props: {
+				example: 1000,
+			},
 			template: cleanupTemplate(`<lu-form-field ${generateInputs(
 				{
 					label,
@@ -66,7 +69,7 @@ export const Basic: StoryObj<NumberInputComponent & { disabled: boolean; require
 		hiddenLabel: false,
 		hasClearer: true,
 		disabled: false,
-		inlineMessage: 'Helper Text',
+		inlineMessage: 'Helper text',
 		inlineMessageState: 'default',
 		placeholder: 'Placeholder',
 		tooltip: 'Je suis un message d’aide',
@@ -130,7 +133,7 @@ export const WithPrefixAndSuffix: StoryObj<
 			content: '€/j',
 			ariaLabel: 'euros par jour',
 		},
-		inlineMessage: 'Helper Text',
+		inlineMessage: 'Helper text',
 		inlineMessageState: 'default',
 		step: 1,
 		min: 0,

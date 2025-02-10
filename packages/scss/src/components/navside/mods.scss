@@ -15,18 +15,23 @@
 			&:has(.navSide.mod-compact, .mod-withMenuCompact) {
 				--commons-navSide-width: 7.5rem;
 			}
+
+			@supports not selector(:has(*)) {
+				--commons-navSide-width: 15rem;
+			}
 		}
 	}
 
 	.navSide-mainSection,
 	.navSide-scrollWrapper {
-		width: var(--commons-navSide-width);
+		inline-size: var(--commons-navSide-width);
 	}
 
 	.navSide-item-link {
 		color: var(--components-navSide-compact-palette-text);
 		font-size: var(--components-navSide-compact-font-size);
-		padding: var(--pr-t-spacings-150) var(--pr-t-spacings-100);
+		padding-block: var(--pr-t-spacings-150);
+		padding-inline: var(--pr-t-spacings-100);
 		flex-direction: column;
 		justify-content: center;
 		position: relative;
@@ -41,31 +46,31 @@
 
 	.navSide-item-link-badgesOptional {
 		flex-direction: column;
-		margin-left: inherit;
+		margin-inline-start: inherit;
 	}
 
 	.numericBadge,
 	.newBadge {
-		margin-left: inherit;
+		margin-inline-start: inherit;
 	}
 
 	.navSide-item-placeholder {
 		flex-direction: column;
 
 		&::before {
-			height: 1.5em;
-			width: 1.5em;
+			block-size: 1.5em;
+			inline-size: 1.5em;
 		}
 
 		&::after {
-			margin-left: 0;
-			margin-top: var(--pr-t-spacings-150);
-			width: 100%;
+			margin-inline-start: 0;
+			margin-block-start: var(--pr-t-spacings-150);
+			inline-size: 100%;
 		}
 	}
 
 	.navSide-bottomSection {
-		width: var(--commons-navSide-width);
+		inline-size: var(--commons-navSide-width);
 
 		.navSide-item-link {
 			background-color: var(--components-navSide-bottom-section-palette-bg-color);
@@ -96,7 +101,7 @@
 }
 
 @mixin banner {
-	top: var(--commons-banner-height);
+	inset-block-start: var(--commons-banner-height);
 }
 
 @mixin mobileToggle {
@@ -104,14 +109,14 @@
 }
 
 @mixin mobile {
-	padding-top: var(--commons-navSide-mobile-toggle-height);
-	width: 100%;
-	bottom: auto;
+	padding-block-start: var(--commons-navSide-mobile-toggle-height);
+	inline-size: 100%;
+	inset-block-end: auto;
 
 	.navSide-mainSection,
 	.navSide-scrollWrapper {
-		width: 100%;
-		height: auto;
+		inline-size: 100%;
+		block-size: auto;
 	}
 
 	.navSide-scrollWrapper {
@@ -120,11 +125,10 @@
 
 	.navSide-item {
 		&.mod-mobileToggle {
-			height: var(--commons-navSide-mobile-toggle-height);
+			block-size: var(--commons-navSide-mobile-toggle-height);
 			background-color: var(--palettes-product-800);
-			top: 0;
-			left: 0;
-			right: 0;
+			inset-block-start: 0;
+			inset-inline: 0;
 			z-index: 1;
 			display: block;
 			position: fixed;
@@ -142,7 +146,7 @@
 
 	.navSide-bottomSection {
 		background-color: transparent;
-		width: auto;
-		height: auto;
+		inline-size: auto;
+		block-size: auto;
 	}
 }

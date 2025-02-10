@@ -3,7 +3,6 @@ import { FormsModule } from '@angular/forms';
 import { Calendar2Component } from '@lucca-front/ng/date2';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { setDate } from 'date-fns';
-import { DateRange } from 'packages/ng/date2/calendar2/date-range';
 
 export default {
 	title: 'Documentation/Forms/Date2/Calendar',
@@ -41,7 +40,7 @@ export default {
 						start: setDate(new Date(), 26),
 						end: setDate(new Date(), 29),
 					},
-				] as DateRange[],
+				],
 			},
 			template: `
 				<lu-calendar2 [hideToday]="false" [showOverflow]="true" [enableOverflow]="true" [ranges]="ranges" [date]="currentMonth" mode="day" (dateClicked)="selected($event)"></lu-calendar2>

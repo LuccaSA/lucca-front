@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { LuDropdownPanelComponent } from './dropdown-panel.component';
-import { CommonModule } from '@angular/common';
 
+/**
+ * @deprecated use `LuDropdownPanelComponent` instead
+ */
 @NgModule({
-	declarations: [LuDropdownPanelComponent],
-	imports: [CommonModule],
+	imports: [LuDropdownPanelComponent],
 	exports: [LuDropdownPanelComponent],
 })
 export class LuDropdownPanelModule {}

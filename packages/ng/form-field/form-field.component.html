@@ -17,7 +17,7 @@
 	<ng-container *ngTemplateOutlet="projectionTpl"></ng-container>
 	@if (inlineMessage() || (invalidStatus() ? errorInlineMessage() : false)) {
 	<lu-inline-message
-		id="{{id}}-message"
+		id="{{id()}}-message"
 		[label]="(invalidStatus() && errorInlineMessage()) ? errorInlineMessage() : inlineMessage()"
 		[state]="invalidStatus() ? 'error' : inlineMessageState()"
 	></lu-inline-message>
@@ -28,8 +28,8 @@
 	class="formLabel"
 	[class.is-error]="invalidStatus()"
 	[class.mod-counter]="counter() > 0"
-	id="{{id}}-label"
-	for="{{id}}"
+	id="{{id()}}-label"
+	for="{{id()}}"
 	[class.u-mask]="hiddenLabel()"
 	attr.role="{{rolePresentationLabel() ? 'presentation' : null}}"
 >
@@ -45,7 +45,7 @@
 		[color]="invalidStatus() ? 'error' : 'inherit'"
 	></lu-icon>
 	} @if (counter() > 0) {
-	<span class="formLabel-counter" [class.u-textError]="contentLength > counter()" id="{{id}}-counter" aria-live="polite">
+	<span class="formLabel-counter" [class.u-textError]="contentLength > counter()" id="{{id()}}-counter" aria-live="polite">
 		<span aria-hidden="true">{{ contentLength }}/{{ counter() }}</span>
 		<span class="u-mask">{{ intl.counter | intlParams: { current: contentLength, max: counter() } }}</span>
 	</span>
@@ -54,7 +54,7 @@
 <ng-container *ngTemplateOutlet="projectionTpl"></ng-container>
 @if (inlineMessage() || (invalidStatus() ? errorInlineMessage() : false)) {
 <lu-inline-message
-	id="{{id}}-message"
+	id="{{id()}}-message"
 	[label]="(invalidStatus() && errorInlineMessage()) ? errorInlineMessage() : inlineMessage()"
 	[state]="invalidStatus() ? 'error' : inlineMessageState()"
 ></lu-inline-message>

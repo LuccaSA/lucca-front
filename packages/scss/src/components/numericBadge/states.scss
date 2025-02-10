@@ -1,4 +1,5 @@
 @use '@lucca-front/scss/src/commons/utils/loading';
+@use '@lucca-front/scss/src/commons/utils/a11y';
 
 @mixin disabled {
 	background-color: var(--palettes-neutral-200); // disabled token candidate
@@ -6,12 +7,11 @@
 }
 
 @mixin loading {
-	@include loading.spinner(calc(var(--components-numericBadge-size) - var(--pr-t-spacings-100)));
-
 	--commons-loading-frontground: var(--components-numericBadge-loadingColor);
+	--commons-loading-borderWidth: 2px;
 	--components-numericBadge-color: transparent;
 
-	--commons-loading-borderWidth: 2px;
+	@include loading.spinner(calc(var(--components-numericBadge-size) - var(--pr-t-spacings-100)));
 }
 
 @mixin loadingS {
@@ -20,4 +20,8 @@
 
 @mixin loadingXS {
 	--commons-loading-borderWidth: 1px;
+}
+
+@mixin focusVisible {
+	@include a11y.focusVisible;
 }

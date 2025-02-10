@@ -27,6 +27,7 @@ export default {
 			control: {
 				type: 'boolean',
 			},
+			description: 'À préciser que si le divider n’a pas de contenu (le contenu ne sera pas restitué)',
 		},
 		button: {
 			control: {
@@ -70,7 +71,7 @@ const Template: StoryFn<DividerBasicStory> = (args) => ({
 	styles: [
 		`
 		:host:has(.mod-vertical) {
-			min-height: var(--pr-t-spacings-500);
+			min-block-size: var(--pr-t-spacings-500);
 			display: flex;
 			justify-content: center;
 		}
@@ -80,7 +81,7 @@ const Template: StoryFn<DividerBasicStory> = (args) => ({
 
 export const Basic = Template.bind({});
 Basic.args = {
-	content: 'Lorem ipsum dolor',
+	content: 'Text',
 	size: '',
 	role: false,
 	icon: false,

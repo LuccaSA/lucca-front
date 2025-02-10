@@ -5,7 +5,9 @@ import { Meta, StoryFn } from '@storybook/angular';
 	standalone: true,
 	selector: 'loadings-stories',
 	templateUrl: './loadings.stories.html',
-	styles: ['.demo-invert { background: #444; display: inline-block; padding: var(--pr-t-spacings-100) var(--pr-t-spacings-200); margin: 0 var(--pr-t-spacings-100); border-radius: 3px; }'],
+	styles: [
+		'.loading::after { animation-play-state: paused; } .demo-invert { background: #444; display: inline-block; padding-block: var(--pr-t-spacings-100); padding-inline: var(--pr-t-spacings-200); margin-block: 0; margin-inline: var(--pr-t-spacings-100); border-radius: 3px; }',
+	],
 })
 class LoadingsStory {}
 

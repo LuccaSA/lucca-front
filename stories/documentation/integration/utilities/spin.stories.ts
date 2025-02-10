@@ -21,8 +21,8 @@ const Template: StoryFn<SpinStory> = (args) => ({
 	styles: [
 		`
 		.textfield {
-			float: left;
-			margin-right: 1rem;
+			float: inline-start;
+			margin-inline-end: 1rem;
 		}
 		}`,
 	],

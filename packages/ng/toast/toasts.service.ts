@@ -25,7 +25,7 @@ export class LuToastsService {
 
 	private getToast(toastInput: LuToastInput): LuToast {
 		const id = this.generateId();
-		const duration = this.isOnlyDismissibleManually(toastInput) ? toastInput.duration : toastInput.duration ?? defaultToastDuration;
+		const duration = this.isOnlyDismissibleManually(toastInput) ? toastInput.duration : (toastInput.duration ?? defaultToastDuration);
 
 		return { ...toastInput, id, duration };
 	}

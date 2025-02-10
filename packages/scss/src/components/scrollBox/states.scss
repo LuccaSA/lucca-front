@@ -1,2 +1,12 @@
-@mixin state {
+@mixin firstVisible {
+	--components-scrollBox-beforeOpacity: 0;
+}
+
+@mixin lastVisible {
+	--components-scrollBox-afterOpacity: 0;
+}
+
+@mixin disabled {
+	--components-scrollBox-wrap: wrap;
+	--components-scrollBox-pseudoElementsContent: none;
 }

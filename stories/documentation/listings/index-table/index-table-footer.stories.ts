@@ -13,7 +13,7 @@ function getTemplate(args: IndexTableFooterStory): string {
 		<tr class="indexTable-head-row">
 			<th class="indexTable-head-row-cell" scope="col">Label</th>
 			<th class="indexTable-head-row-cell" scope="col">Label</th>
-			<th class="indexTable-head-row-cell u-textRight" scope="col">Amount</th>
+			<th class="indexTable-head-row-cell mod-alignRight" scope="col">Amount</th>
 		</tr>
 	</thead>
 	<tbody class="indexTable-body">
@@ -22,14 +22,14 @@ function getTemplate(args: IndexTableFooterStory): string {
 				<a href="#" class="indexTable-body-row-cell-link">Content</a>
 			</td>
 			<td class="indexTable-body-row-cell">Content</td>
-			<td class="indexTable-body-row-cell u-textRight">100,00 €</td>
+			<td class="indexTable-body-row-cell mod-alignRight">100,00 €</td>
 		</tr>
 		<tr class="indexTable-body-row">
 			<td class="indexTable-body-row-cell">
 				<a href="#" class="indexTable-body-row-cell-link">Content</a>
 			</td>
 			<td class="indexTable-body-row-cell">Content</td>
-			<td class="indexTable-body-row-cell u-textRight">50,00 €</td>
+			<td class="indexTable-body-row-cell mod-alignRight">50,00 €</td>
 		</tr>
 	</tbody>
 	<tfoot class="indexTable-foot">
@@ -45,7 +45,7 @@ function getTemplate(args: IndexTableFooterStory): string {
 		<tr class="indexTable-head-row">
 			<th class="indexTable-head-row-cell" scope="col">Label</th>
 			<th class="indexTable-head-row-cell" scope="col">Label</th>
-			<th class="indexTable-head-row-cell u-textRight" scope="col">Amount</th>
+			<th class="indexTable-head-row-cell mod-alignRight" scope="col">Amount</th>
 		</tr>
 	</thead>
 	<tbody class="indexTable-body">
@@ -54,7 +54,7 @@ function getTemplate(args: IndexTableFooterStory): string {
 				<a href="#" class="indexTable-body-row-cell-link">Content</a>
 			</td>
 			<td class="indexTable-body-row-cell">Content</td>
-			<td class="indexTable-body-row-cell u-textRight">126,00 €</td>
+			<td class="indexTable-body-row-cell mod-alignRight">126,00 €</td>
 		</tr>
 		<tr class="indexTable-foot-row">
 			<td class="indexTable-foot-row-cell" colspan="3">
@@ -68,7 +68,7 @@ function getTemplate(args: IndexTableFooterStory): string {
 				<a href="#" class="indexTable-body-row-cell-link">Content</a>
 			</td>
 			<td class="indexTable-body-row-cell">Content</td>
-			<td class="indexTable-body-row-cell u-textRight">133,00 €</td>
+			<td class="indexTable-body-row-cell mod-alignRight">133,00 €</td>
 		</tr>
 		<tr class="indexTable-foot-row">
 			<td class="indexTable-foot-row-cell" colspan="3">
@@ -84,7 +84,7 @@ const Template: StoryFn<IndexTableFooterStory> = (args) => ({
 	template: getTemplate(args),
 	styles: [
 		`.indexTable:not(:last-child) {
-			margin-bottom: var(--pr-t-spacings-100);
+			margin-block-end: var(--pr-t-spacings-100);
 		}`,
 	],
 });

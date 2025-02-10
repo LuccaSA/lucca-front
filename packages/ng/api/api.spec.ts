@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient } from '@angular/common/http';
 import { fakeAsync, tick } from '@angular/core/testing';
 import { fireEvent, render, screen } from '@testing-library/angular';
 import { createMock } from '@testing-library/angular/jest-utils';
@@ -22,12 +22,12 @@ describe('lu-api-select', () => {
 			<span class="textfield-label">Api V3 Select</span>
 		</label>
 
-		<label class="textfield pr-u-marginTop300">
+		<label class="textfield pr-u-marginBlockStart300">
 			<lu-api-select class="textfield-input" standard="v4" [api]="apiV4" sort="job.name,level.position"> </lu-api-select>
 			<span class="textfield-label">Api V4 Select</span>
 		</label>
 
-		<label class="textfield pr-u-marginTop300">
+		<label class="textfield pr-u-marginBlockStart300">
 			<lu-api-select class="textfield-input" [disabled]="true" standard="v4" [api]="apiV4" sort="job.name,level.position"> </lu-api-select>
 			<span class="textfield-label">Api V4 Select</span>
 		</label>`;
@@ -35,7 +35,8 @@ describe('lu-api-select', () => {
 	it('should display dialog with a click on a lu select ', async () => {
 		// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		await render(apiSelectStoryTemplate, {
-			imports: [LuApiSelectInputComponent, HttpClientModule],
+			imports: [LuApiSelectInputComponent],
+			providers: [provideHttpClient()],
 		});
 
 		const luSelectElement = screen.getByTestId('lu-select');
@@ -48,7 +49,8 @@ describe('lu-api-select', () => {
 	it('should trigger search when clue is typed in', fakeAsync(async () => {
 		// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		await render(apiSelectStoryTemplate, {
-			imports: [LuApiSelectInputComponent, HttpClientModule],
+			imports: [LuApiSelectInputComponent],
+			providers: [provideHttpClient()],
 			componentProviders: [
 				{
 					provide: ALuApiService,
@@ -71,7 +73,8 @@ describe('lu-api-select', () => {
 
 	it('should check a11y', async () => {
 		await render(apiSelectStoryTemplate, {
-			imports: [LuApiSelectInputComponent, HttpClientModule],
+			imports: [LuApiSelectInputComponent],
+			providers: [provideHttpClient()],
 		});
 		const luSelectElement = screen.getByTestId('lu-select');
 

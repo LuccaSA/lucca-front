@@ -1,0 +1,43 @@
+@use '@lucca-front/scss/src/commons/config';
+@use '@lucca-front/scss/src/commons/utils/media';
+@use 'exports' as *;
+
+.dataTableWrapper {
+	@include vars;
+
+	&:has(.dataTable.mod-stickyHeader) {
+		@include stickyHeader;
+	}
+
+	&:has(.dataTable.mod-columnsOverflow) {
+		@include columnsOverflow;
+	}
+
+	&:has(.dataTable.is-firstColumnVisible) {
+		@include firstColumnVisible;
+	}
+
+	&:has(.dataTable.is-lastColumnVisible) {
+		@include lastColumnVisible;
+	}
+
+	&:has(.dataTable.mod-rowsOverflow) {
+		@include rowsOverflow;
+	}
+
+	&:has(.dataTable.is-firstRowVisible) {
+		@include firstRowVisible;
+	}
+
+	&:has(.dataTable.is-lastRowVisible) {
+		@include lastRowVisible;
+	}
+
+	&:has(:is(.dataTable-head-row-cell, .dataTable-head-body-cell, .dataTable-foot-row-cell).mod-stickyColumn) {
+		@include stickyColumn;
+
+		&:has(.dataTable.mod-cellBorder) {
+			@include stickyColumnBorder;
+		}
+	}
+}

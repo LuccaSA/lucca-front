@@ -3,13 +3,13 @@ lu-phone-number-input {
 		border: 0;
 		padding: 0;
 		gap: var(--pr-t-spacings-100);
-		width: 17.5rem;
+		inline-size: 17.5rem;
 		display: flex;
 	}
 
 	.phoneNumber-fieldset-select {
-		.simpleSelect-input {
-			width: 21px;
+		.simpleSelect-field-input {
+			inline-size: 21px;
 		}
 	}
 

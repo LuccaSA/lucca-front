@@ -20,6 +20,23 @@
 	&.mod-S {
 		@include S;
 	}
+
+	&:has(~ .box) {
+		.form-field {
+			&.mod-withArrow {
+				@include withArrow;
+
+				&.mod-S {
+					@include withArrowS;
+				}
+			}
+		}
+	}
+
+	&:has(.radioField-input[aria-invalid='true']),
+	&:has(.checkboxField-input[aria-invalid='true']) {
+		@include legendInvalid;
+	}
 }
 
 .form-field {
@@ -31,11 +48,9 @@
 		@include XS;
 	}
 
-	&.mod-withArrow {
-		@include withArrow;
-
-		&.mod-S {
-			@include withArrowS;
+	@each $value in config.$fieldsWidth {
+		&.mod-width#{$value} {
+			@include width($value);
 		}
 	}
 
@@ -47,19 +62,33 @@
 	}
 
 	&:not(lu-form-field) {
-		&:has(.textField-input-value[aria-invalid='true'], .timePicker-fieldset-group-textfield-input[aria-invalid='true']) {
+		&:has(
+				.textField-input-value[aria-invalid='true'],
+				.timePicker-fieldset-group-textfield-input[aria-invalid='true'],
+				.simpleSelect-field-input[aria-invalid='true'],
+				.multipleSelect-displayer-search[aria-invalid='true']
+			) {
 			@include invalid;
 		}
 	}
 
 	&:has(.radioField-input:disabled),
-	&:has(.checkboxField-input:disabled) {
+	&:has(.checkboxField-input:disabled),
+	&:has(.switchField-input:disabled) {
 		.formLabel {
 			@include formLabel.disabled;
 		}
 
 		.inlineMessage {
 			@include inlineMessage.disabled;
+		}
+	}
+
+	&.mod-withArrow {
+		@include withArrow;
+
+		&.mod-S {
+			@include withArrowS;
 		}
 	}
 }
@@ -110,8 +139,9 @@
 
 .checkboxesfield.mod-framed,
 .radiosfield.mod-framed {
-	margin-top: 0;
-	padding: var(--components-field-framed-side-padding) var(--components-field-framed-side-padding) var(--components-field-framed-bottom-padding);
+	margin-block-start: 0;
+	padding-block: var(--components-field-framed-side-padding) var(--components-field-framed-bottom-padding);
+	padding-inline: var(--components-field-framed-side-padding);
 }
 
 .form-group-label {

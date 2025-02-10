@@ -11,30 +11,29 @@
 .lu-popup-panel {
 	&.mod-sidepanel {
 		position: fixed !important;
-		top: 0;
-		right: 0;
-		bottom: 0;
-		width: var(--components-sidepanel-M);
-		max-width: 100%;
-		max-height: 100vh;
+		inset-block: 0;
+		inset-inline-end: 0;
+		inline-size: var(--components-sidepanel-M);
+		max-inline-size: 100%;
+		max-block-size: 100vh;
 		border-radius: 0;
 		animation-name: sidepanel;
 		transform-origin: center center;
 
 		&.mod-XS {
-			width: var(--components-sidepanel-XS);
+			inline-size: var(--components-sidepanel-XS);
 		}
 
 		&.mod-S {
-			width: var(--components-sidepanel-S);
+			inline-size: var(--components-sidepanel-S);
 		}
 
 		&.mod-L {
-			width: var(--components-sidepanel-L);
+			inline-size: var(--components-sidepanel-L);
 		}
 
 		&.mod-XL {
-			width: var(--components-sidepanel-XL);
+			inline-size: var(--components-sidepanel-XL);
 		}
 	}
 }
@@ -44,7 +43,11 @@
 	display: flex;
 	flex-flow: column;
 	flex-grow: 1;
-	height: 100%;
+	block-size: 100%;
+
+	.lu-modal-content {
+		block-size: 100%;
+	}
 }
 
 .lu-sidepanel-container {

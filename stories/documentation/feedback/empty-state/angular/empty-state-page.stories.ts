@@ -24,7 +24,7 @@ export default {
 :host{
 	display: flex;
 	flex-direction: column;
-	min-height: 30rem;
+	min-block-size: 30rem;
 }
 `,
 			],
@@ -39,7 +39,7 @@ export default {
 	hx="${hx}"
 >
 	<button luButton type="button" palette="product">Button</button>
-	<button luButton="outlined" type="button" palette="product">Button</button>
+	<button luButton="outlined" type="button">Button</button>
 </lu-empty-state-page>`,
 		};
 	},

@@ -1,9 +1,9 @@
-<div class="textfield mod-outlined mod-search pr-u-marginBottom300">
+<div class="textfield mod-outlined mod-search pr-u-marginBlockEnd300">
 	<span class="textfield-label">Rechercher une icône</span>
 	<input type="text" class="textfield-input" [(ngModel)]="filter" (ngModelChange)="updateIcons($event)" />
 </div>
 
-<input type="checkbox" id="showDeprecatedIcons" class="showDeprecated pr-u-marginBottom300" />
+<input type="checkbox" id="showDeprecatedIcons" class="showDeprecated pr-u-marginBlockEnd300" />
 <label for="showDeprecatedIcons"> Afficher les icônes dépréciées</label>
 
 <div class="icons">
@@ -15,8 +15,8 @@
 
 <style>
 	.demo-icon {
-		width: 33%;
-		float: left;
+		inline-size: 33%;
+		float: inline-start;
 		cursor: pointer;
 	}
 </style>

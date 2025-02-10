@@ -2,9 +2,9 @@
 
 .dialog .cdk-dialog-container {
 	flex-grow: 1;
-	width: auto;
-	height: auto;
+	inline-size: auto;
+	block-size: auto;
 	display: flex;
 	flex-direction: column;
-	min-height: 0;
+	min-block-size: 0;
 }

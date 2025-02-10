@@ -36,19 +36,19 @@
 					[optionIndex]="index"
 					[grouping]="ctx.groupTemplateLocation === 'option' ? grouping : undefined"
 					[scrollIntoViewOptions]="{ block: 'center' }"
-					[isSelected]="option | luIsOptionSelected:optionComparer:selected"
+					[isSelected]="option | luIsOptionSelected:optionComparer:selected()"
 					(click)="panelRef.emitValue(option)"
 				/>
 			</ng-template>
 			<div class="lu-picker-content-option-emptyState" *ngIf="ctx.options.length === 0 && (loading$ | async) === false">
-				{{intl.emptyResults}}
+				{{ intl.emptyResults }}
 			</div>
 		</div>
 		<div *ngIf="loading$ | async" class="lu-picker-content-loading">
-			<div class="loading">{{intl.loading}}</div>
+			<div class="loading">{{ intl.loading }}</div>
 		</div>
 		<div class="lu-picker-content-add" *ngIf="ctx.shouldDisplayAddOption">
-			<button class="button mod-text mod-icon palette-product" type="button" (click)="selectInput.emitAddOption()">
+			<button class="button mod-text mod-withIcon palette-product" type="button" (click)="selectInput.emitAddOption()">
 				<span aria-hidden="true" class="lucca-icon icon-mathsPlus"></span>
 				<ng-container *luPortal="selectInput.addOptionLabel" />
 			</button>

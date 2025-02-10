@@ -11,7 +11,6 @@ import {
 	LuOptionComparer,
 	LuTreeOptionItemComponent,
 	LuTreeOptionPickerAdvancedComponent,
-	LuTreeOptionPickerComponent,
 	LuTreeOptionSearcherComponent,
 	LuTreeOptionSelectAllComponent,
 } from '@lucca-front/ng/option';
@@ -31,7 +30,6 @@ import { LU_DEPARTMENT_SELECT_INPUT_TRANSLATIONS } from './department-select-inp
 		OverlayModule,
 		A11yModule,
 		LuInputClearerComponent,
-		LuTreeOptionPickerComponent,
 		LuTreeOptionPickerAdvancedComponent,
 		LuDepartmentFeederComponent,
 		LuTreeOptionSearcherComponent,
@@ -59,7 +57,8 @@ export class LuDepartmentSelectInputComponent<
 
 	@Input() appInstanceId: number | string;
 	@Input() operations: number[];
-	@Input() filters: string[];
+	@Input() filters: string[] = [];
+	@Input() uniqueOperation: number;
 
 	public intl = getIntl(LU_DEPARTMENT_SELECT_INPUT_TRANSLATIONS);
 

@@ -79,7 +79,7 @@ export const Basic: StoryObj<
 		label: 'Label',
 		required: true,
 		hiddenLabel: false,
-		inlineMessage: 'Helper Text',
+		inlineMessage: 'Helper text',
 		inlineMessageState: 'default',
 		placeholder: 'Placeholder',
 		tooltip: 'Je suis un message d’aide',

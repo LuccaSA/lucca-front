@@ -17,12 +17,13 @@ import {
 import { isoDurationToDateFnsDuration } from '../core/duration.utils';
 import { ceilToNearest, circularize, floorToNearest, roundToNearest } from '../core/math.utils';
 import { isNil, isNotNil, PickerControlDirection } from '../core/misc.utils';
+import { RepeatOnHoldDirective } from '../core/repeat-on-hold.directive';
 import { TimePickerPartComponent } from '../core/time-picker-part.component';
 import { DEFAULT_MIN_TIME, DEFAULT_TIME_DECIMAL_PIPE_FORMAT, TimeChangeEvent } from './time-picker.model';
 import { LU_TIME_PICKER_TRANSLATIONS } from './time-picker.translate';
-import { RepeatOnHoldDirective } from '../core/repeat-on-hold.directive';
 
 const MAX_TIME = '23:59:59';
+let nextId = 0;
 
 @Component({
 	selector: 'lu-time-picker',
@@ -43,6 +44,8 @@ const MAX_TIME = '23:59:59';
 export class TimePickerComponent extends BasePickerComponent {
 	protected intl = getIntl(LU_TIME_PICKER_TRANSLATIONS);
 	protected localeId = inject(LOCALE_ID);
+
+	idSuffix = nextId++;
 
 	@ViewChild('anteMeridiemRef')
 	anteMeridiemRef: ElementRef<HTMLInputElement>;
@@ -104,7 +107,8 @@ export class TimePickerComponent extends BasePickerComponent {
 
 	protected override focusPart(type: 'hours' | 'minutes' | 'meridiem') {
 		if (type === 'meridiem') {
-			this.ampmDisplay() === 'AM' ? this.anteMeridiemRef?.nativeElement?.focus() : this.postMeridiemRef?.nativeElement?.focus();
+			const elementToFocus = this.ampmDisplay() === 'AM' ? this.anteMeridiemRef?.nativeElement : this.postMeridiemRef?.nativeElement;
+			elementToFocus?.focus();
 		} else {
 			super.focusPart(type);
 		}
@@ -158,7 +162,7 @@ export class TimePickerComponent extends BasePickerComponent {
 				});
 				this.value.set(value);
 				this.onChange?.(value);
-			} catch (e) {
+			} catch {
 				// do nothing
 			}
 		}

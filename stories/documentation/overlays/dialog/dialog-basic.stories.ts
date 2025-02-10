@@ -41,7 +41,7 @@ const Template: StoryFn<DialogBasicStory> = (args: DialogBasicStory) => ({
 		`
 			:host {
 				display: block;
-				height: 30rem;
+				block-size: 30rem;
 			}
 		`,
 	],
@@ -63,6 +63,7 @@ export default {
 			control: {
 				type: 'boolean',
 			},
+			description: '[v18.3]',
 		},
 	},
 } as Meta;

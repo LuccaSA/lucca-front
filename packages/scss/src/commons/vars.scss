@@ -24,19 +24,11 @@
 	@include core.cssvars('commons-disabled', config.$disabled);
 	@include core.cssvars('commons-loading', config.$loading);
 	@include core.cssvars('commons-text-link', config.$textLink);
+	@include core.cssvars('breakpoints', config.$breakpoints, '-breakAt');
 
 	@each $palette in config.$palettesAll {
 		@include core.cssvars('palettes-#{$palette}', map.get(config.$palettesInterpolation, $palette));
 	}
-
-	@include core.cssvars('breakpoints', config.$breakpoints, '-breakAt');
-	@if (config.$importDeprecatedSpacings) {
-		@include core.cssvars('spacings', config.$spacingsDeprecated);
-		--spacings-auto: auto;
-	}
-
-	@include core.cssvars('commons-elevations-elevation', config.$elevations);
-	@include core.cssvars('commons-boxShadow', config.$boxShadows); // deprecated
 
 	@each $key, $map in config.$sizes {
 		@include core.cssvars('sizes-#{$key}', $map);
@@ -47,12 +39,15 @@
 
 	--commons-banner-height: 50px;
 	--commons-font-family: '#{config.$fontFamily}', Tahoma, sans-serif;
-	--commons-font-family-cursive: '#{config.$fontFamilyCursive}', cursive;
 	--commons-divider-width: 1px;
 	--commons-divider-style: solid;
 	--commons-divider-border: var(--commons-divider-width) var(--commons-divider-style) var(--commons-divider-color);
 	--commons-border-100: var(--palettes-neutral-100);
 	--commons-border-200: var(--palettes-neutral-200);
+
+	@if (config.$fontFamilyCursive) {
+		--commons-font-family-cursive: '#{config.$fontFamilyCursive}', cursive;
+	}
 
 	// Deprecated
 	--commons-background-base: var(--palettes-neutral-25);

@@ -1,6 +1,6 @@
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { CalloutComponent, CalloutFeedbackItemComponent, CalloutFeedbackListComponent } from '@lucca-front/ng/callout';
-import { Meta, StoryObj, moduleMetadata } from '@storybook/angular';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { HiddenArgType, PaletteArgType } from 'stories/helpers/common-arg-types';
 import { generateInputs } from 'stories/helpers/stories';
 
@@ -46,9 +46,11 @@ export default {
 		},
 		heading: {
 			type: 'string',
+			description: 'Optional',
 		},
 		description: {
 			type: 'string',
+			description: 'Required',
 		},
 		removedChange: HiddenArgType,
 	},

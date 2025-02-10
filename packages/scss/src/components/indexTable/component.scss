@@ -7,8 +7,9 @@
 @mixin component($atRoot: namespace.$defaultAtRoot) {
 	position: relative;
 	display: table;
-	width: 100%;
-	padding: 0 var(--components-indexTable-padding) calc(var(--components-indexTable-padding) - var(--components-indexTable-row-spacing));
+	inline-size: 100%;
+	padding-block: 0 calc(var(--components-indexTable-padding) - var(--components-indexTable-row-spacing));
+	padding-inline: var(--components-indexTable-padding);
 	border-collapse: separate;
 	border-spacing: 0 var(--components-indexTable-row-spacing);
 	border-radius: var(--components-indexTable-border-radius);
@@ -51,19 +52,20 @@
 		.indexTable-body-row-cell,
 		.indexTable-foot-row-cell {
 			display: table-cell;
-			text-align: left;
+			text-align: start;
 			font-weight: 400;
 		}
 
 		.indexTable-head-row-transparentCell,
 		.indexTable-body-row-transparentCell {
 			vertical-align: middle;
-			padding: var(--pr-t-spacings-50) 0;
+			padding-block: var(--pr-t-spacings-50);
+			padding-inline: 0;
 			position: relative;
 			z-index: 3;
 
 			&:not(:first-child) {
-				padding-right: var(--components-indexTable-cell-padding);
+				padding-inline-end: var(--components-indexTable-cell-paddingInline);
 			}
 		}
 
@@ -71,23 +73,8 @@
 		.indexTable-body-row-cell,
 		.indexTable-foot-row-cell {
 			vertical-align: top;
-
-			// Because outlined cell apparence can be cropped we need a bigger padding-right. To compensate we also need a smaller padding-left
-			padding: var(--components-indexTable-cell-padding);
-			padding-left: var(--components-indexTable-cell-padding-left, var(--components-indexTable-cell-padding));
-			padding-right: var(--components-indexTable-cell-padding-right, var(--components-indexTable-cell-padding));
-
-			--components-indexTable-cell-padding-right: calc(var(--components-indexTable-cell-padding) + 4px);
-
-			~ .indexTable-head-row-cell,
-			~ .indexTable-body-row-cell,
-			~ .indexTable-foot-row-cell {
-				--components-indexTable-cell-padding-left: calc(var(--components-indexTable-cell-padding) - 4px);
-			}
-
-			&:last-child {
-				--components-indexTable-cell-padding-right: var(--components-indexTable-cell-padding);
-			}
+			padding-block: var(--components-indexTable-cell-paddingBlock);
+			padding-inline: var(--components-indexTable-cell-paddingInline);
 		}
 
 		.indexTable-body-row {
@@ -111,14 +98,12 @@
 		}
 
 		.indexTable-foot-row-cell {
-			padding-top: var(--pr-t-spacings-50);
-			padding-bottom: var(--pr-t-spacings-50);
+			padding-block: var(--pr-t-spacings-50);
 		}
 
 		.indexTable-body-row-cell {
 			position: relative;
 			z-index: var(--components-indexTable-cell-z-index, 1);
-			border-radius: var(--components-table-cardList-cell-border-radius);
 			border: var(--commons-divider-width) 0 solid transparent;
 
 			// Apparence of the first cell with a card apparence.
@@ -179,8 +164,8 @@
 					calc(var(--components-indexTable-cell-inset-x-left, 0px) - var(--components-indexTable-outline-offset));
 				border-radius: var(--components-indexTable-outline-border-radius-left) var(--components-indexTable-outline-border-radius-right)
 					var(--components-indexTable-outline-border-radius-right) var(--components-indexTable-outline-border-radius-left);
-				border-width: var(--components-indexTable-outline-border-width) var(--components-indexTable-outline-border-width-right)
-					var(--components-indexTable-outline-border-width) var(--components-indexTable-outline-border-width-left);
+				border-block-width: var(--components-indexTable-outline-border-width);
+				border-inline-width: var(--components-indexTable-outline-border-width-left) var(--components-indexTable-outline-border-width-right);
 				border-style: solid;
 				border-color: var(--components-indexTable-outline-color);
 				opacity: var(--components-indexTable-outline-opacity, 0);
@@ -195,8 +180,9 @@
 
 		.indexTable-body-row-cell-checkbox,
 		.indexTable-head-row-cell-checkbox {
-			margin: var(--pr-t-spacings-50);
-			margin-right: var(--pr-t-spacings-150);
+			margin-block: var(--pr-t-spacings-50);
+			margin-inline-start: var(--pr-t-spacings-50);
+			margin-inline-end: var(--pr-t-spacings-150);
 		}
 
 		// .indexTable-body-row-cell-action is deprecated
@@ -261,7 +247,7 @@
 		}
 
 		.indexTable-foot-row-cell {
-			text-align: right;
+			text-align: end;
 		}
 
 		// A wrapper is needed for pagination
@@ -270,19 +256,20 @@
 
 			display: flex;
 			flex-direction: column;
-			padding-bottom: var(--pr-t-spacings-100);
+			padding-block-end: var(--pr-t-spacings-100);
 			border-radius: var(--components-indexTable-border-radius);
 			background-color: var(--components-indexTable-background-color);
 
 			.indexTable {
 				flex-grow: 1;
-				padding-bottom: 0;
+				padding-block-end: 0;
 			}
 
 			.pagination {
 				align-self: flex-end;
-				padding: var(--pr-t-spacings-50) 0 0 0;
-				margin-right: var(--pr-t-spacings-100);
+				padding-block: var(--pr-t-spacings-50) 0;
+				padding-inline: 0;
+				margin-inline-end: var(--pr-t-spacings-100);
 			}
 		}
 	}
