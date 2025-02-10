@@ -1,11 +1,11 @@
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { allLegumes, FilterLegumesPipe } from '@/stories/forms/select/select.utils';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LuOptionDirective } from '@lucca-front/ng/core-select';
-import { allLegumes, FilterLegumesPipe } from '@/stories/forms/select/select.utils';
-import { HiddenArgType } from '../../../../../helpers/common-arg-types';
-import { LuMultiSelectInputComponent } from '@lucca-front/ng/multi-select';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
+import { LuMultiSelectInputComponent } from '@lucca-front/ng/multi-select';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { HiddenArgType } from '../../../../../helpers/common-arg-types';
 import { generateInputs } from '../../../../../helpers/stories';
 
 export default {
@@ -81,7 +81,7 @@ export const Basic: StoryObj<LuMultiSelectInputComponent<unknown> & FormFieldCom
 		required: false,
 		placeholder: 'Placeholder',
 		clearable: true,
-		inlineMessage: 'Helper Text',
+		inlineMessage: 'Helper text',
 		inlineMessageState: 'default',
 		loading: false,
 	},
