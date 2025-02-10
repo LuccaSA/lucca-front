@@ -1,5 +1,5 @@
 import { DOCUMENT } from '@angular/common';
-import { Injectable, inject } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { filter, firstValueFrom, shareReplay, timer } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
@@ -60,7 +60,7 @@ export class EllipsisRuler {
 			elementCloned = this.#document.createElement('div');
 
 			Object.assign(elementCloned.style, {
-				width: 'fit-content',
+				inlineSize: 'fit-content',
 				whiteSpace: 'nowrap',
 				position: 'absolute',
 				visibility: 'hidden',

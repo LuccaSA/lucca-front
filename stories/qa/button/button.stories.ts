@@ -6,6 +6,7 @@ import { Meta, StoryFn } from '@storybook/angular';
 	standalone: true,
 	selector: 'button-stories',
 	templateUrl: './button.stories.html',
+	styles: ['.button::after { animation-play-state: paused; }'],
 	imports: [ButtonComponent],
 })
 class ButtonStory {}

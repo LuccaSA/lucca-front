@@ -36,7 +36,7 @@
 				<p *ngIf="employee.jobTitle" class="userPopover-details-info-detail u-ellipsis">{{ employee.jobTitle }}</p>
 				<p *ngIf="employee.userDepartment" class="userPopover-details-info-detail u-ellipsis">{{ employee.userDepartment?.name }}</p>
 
-				<p class="userPopover-details-info-detail pr-u-marginTop100">
+				<p class="userPopover-details-info-detail pr-u-marginBlockStart100">
 					<!-- HORS CONTRAT-->
 					<span *ngIf="employee.dtContractStart | isFuture" class="userPopover-details-info-detail-workplace">
 						<span aria-hidden="true" class="lucca-icon icon-calendarPlanning mod-S"></span>

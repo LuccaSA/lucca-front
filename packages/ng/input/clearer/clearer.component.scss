@@ -1,2 +1,3 @@
-@import '_definitions';
-@include selectClearerStyle;
+@use '_definitions';
+
+@include definitions.selectClearerStyle;

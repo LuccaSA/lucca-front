@@ -19,13 +19,13 @@
 }
 
 @mixin draggable {
-	padding-left: var(--pr-t-spacings-200);
+	padding-inline-start: var(--pr-t-spacings-200);
 
 	.list-item-handler {
 		color: var(--palettes-neutral-400);
 		font-size: 1.3rem;
-		left: 0;
-		width: 2.4rem;
+		inset-inline-start: 0;
+		inline-size: 2.4rem;
 		text-align: center;
 		position: absolute;
 		cursor: move;

@@ -1,85 +1,57 @@
-@use '@lucca-front/scss/src/commons/utils/a11y';
-@use '@lucca-front/scss/src/commons/utils/container';
+@use '@lucca-front/icons/src/icon/exports' as icon;
+
 @use '@lucca-front/scss/src/commons/utils/namespace';
+@use '@lucca-front/scss/src/commons/utils/a11y';
+@use '@lucca-front/scss/src/commons/utils/reset';
+@use '@lucca-front/scss/src/commons/utils/media';
+
+@use '@lucca-front/scss/src/components/clear/exports' as clear;
+@use '@lucca-front/scss/src/components/segmentedControl/exports' as segmentedControl;
+@use '@lucca-front/scss/src/components/textField/exports' as textField;
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
-	background-color: var(--components-filterBar-backgroundColor);
-	border-radius: var(--commons-borderRadius-L);
-	border: var(--commons-divider-width) solid var(--commons-border-200);
-	container-name: filterBar;
-	container-type: inline-size;
-	padding: var(--pr-t-spacings-200);
-
-	&:has(.filterBar-footer-toggleButton[aria-expanded='false']) {
-		.filterBar-toggledFilters {
-			display: none;
-		}
+	.textField {
+		@include textField.filterPill;
 	}
 
 	@at-root ($atRoot) {
-		.filterBar-toggledFilters {
-			margin-block-start: var(--pr-t-spacings-200);
-		}
-
-		.filterBar-footer {
-			border-block-start: var(--commons-divider-width) solid var(--commons-border-200);
-			display: flex;
-			flex-direction: column;
-			flex-wrap: wrap;
-			gap: var(--pr-t-spacings-100);
-			justify-content: center;
-			margin-block-start: var(--pr-t-spacings-200);
-			padding-block-start: var(--pr-t-spacings-200);
-
-			&:empty {
+		.filterBar-divider.divider {
+			&:not(:has(~ .filterPill:not(.is-hidden))) {
 				display: none;
 			}
-
-			&:has(.filterBar-footer-actions:only-child:empty) {
-				display: none;
-			}
-
-			@include container.min('S', $name: 'filterBar') {
-				flex-direction: row;
-				justify-content: space-between;
-			}
 		}
 
-		.filterBar-footer-toggleButton {
-			&[aria-expanded='false'] {
-				.filterBar-footer-toggleButton-labelAlternative {
-					display: none;
-				}
-			}
-			&[aria-expanded='true'] {
-				.filterBar-footer-toggleButton-label {
-					@include a11y.mask;
-				}
-				.lucca-icon {
-					transform: rotate(180deg);
-				}
-			}
-			.lucca-icon {
-				transition: transform var(--commons-animations-durations-standard);
-			}
+		.filterBar-segmentedControl.segmentedControl {
+			@include segmentedControl.S;
 		}
 
-		.filterBar-footer-actions {
+		.filterBar-scrollBox.scrollBox {
+			align-items: flex-start;
+		}
+
+		.filterBar-scrollBox-first {
+			display: var(--components-filterBar-extremitiesDisplay);
+			margin-inline-end: calc(var(--components-scrollBox-gap) * -1);
+		}
+
+		.filterBar-scrollBox-last {
+			display: var(--components-filterBar-extremitiesDisplay);
+			margin-inline-start: calc(var(--components-scrollBox-gap) * -1);
+		}
+
+		.filterBar-scrollBox-group {
 			display: flex;
-			flex-direction: column;
+			gap: var(--components-scrollBox-gap);
 			flex-wrap: wrap;
-			gap: var(--pr-t-spacings-200);
-			justify-content: center;
-			text-align: center;
 
-			@include container.min('XS', $name: 'filterBar') {
-				align-items: center;
-				flex-direction: row;
+			&:has(+ .filterBar-scrollBox-last) {
+				flex-grow: 1;
 			}
+		}
 
-			@include container.min('S', $name: 'filterBar') {
-				margin-inline-start: auto;
-			}
+		.filterBar-scrollBox-export {
+			margin-inline-start: auto;
+			padding-inline-start: var(--pr-t-spacings-200);
 		}
 	}
 }

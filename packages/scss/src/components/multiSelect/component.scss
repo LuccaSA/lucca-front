@@ -30,11 +30,11 @@
 		}
 
 		.multipleSelect-displayer-chip {
-			min-width: 0;
+			min-inline-size: 0;
 		}
 
 		.multipleSelect-displayer-chip-value {
-			max-width: 8rem;
+			max-inline-size: 8rem;
 			white-space: nowrap;
 			overflow: hidden;
 			text-overflow: ellipsis;
@@ -42,8 +42,8 @@
 
 		.multipleSelect-displayer-search {
 			display: block;
-			min-width: 2rem;
-			width: auto;
+			min-inline-size: 2rem;
+			inline-size: auto;
 			flex: 1;
 			order: 1;
 			border: 0;
@@ -66,7 +66,7 @@
 		}
 
 		.multipleSelect-clear {
-			margin-bottom: var(--pr-t-spacings-50);
+			margin-block-end: var(--pr-t-spacings-50);
 		}
 
 		.multipleSelect-arrow {
@@ -74,6 +74,10 @@
 			color: var(--components-multiSelect-arrow-color);
 			transition-property: transform;
 			transition-duration: var(--commons-animations-durations-standard);
+		}
+
+		.multipleSelect-pill-displayer-label {
+			font-weight: 600;
 		}
 	}
 }

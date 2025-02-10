@@ -82,10 +82,17 @@
 }
 
 @mixin actions {
-	padding: 0;
-	padding-inline-end: var(--pr-t-spacings-50);
-	text-align: right;
+	padding-block: 0;
+	padding-inline: 0 var(--pr-t-spacings-50);
+	text-align: end;
 	white-space: nowrap;
+
+	&:is(.dataTable-head-row-cell) {
+		.button {
+			position: relative;
+			inset-block-end: var(--pr-t-spacings-50);
+		}
+	}
 
 	.button {
 		@include button.S;
@@ -97,7 +104,7 @@
 	&:is(.dataTable-head-row-cell) {
 		.button {
 			position: relative;
-			bottom: var(--pr-t-spacings-50);
+			inset-block-end: var(--pr-t-spacings-50);
 		}
 	}
 }
@@ -125,8 +132,8 @@
 }
 
 @mixin cellFixedWidth {
-	min-width: var(--dataTable-layoutFixed-width, auto);
-	width: var(--dataTable-layoutFixed-width, auto);
+	min-inline-size: var(--dataTable-layoutFixed-width, auto);
+	inline-size: var(--dataTable-layoutFixed-width, auto);
 }
 
 @mixin layoutFixedCells {

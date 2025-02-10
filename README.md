@@ -173,4 +173,4 @@ Translations are hosted by Lokalise on `Lucca.Front` project and must be importe
 
 ## TODO
 
-- [ ] Gestion de l'espace
+- [ ] Gestion de l’espace

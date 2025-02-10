@@ -40,7 +40,7 @@ import { MULTI_SELECT_WITH_SELECT_ALL_CONTEXT } from './select-all.models';
 	styles: `
 		:host {
 			display: block;
-			width: 100%;
+			inline-size: 100%;
 		}
 	`,
 })

@@ -4,7 +4,7 @@
 			<ng-container *luPortal="label"></ng-container>
 		</span>
 	</legend>
-	<div class="textField" #popoverAnchor>
+	<div class="dateRangeField-fieldset-textField textField" #popoverAnchor>
 		<div class="textField-input">
 			<div class="dateRangeField-fieldset-content mod-start" [class.is-highlighted]="highlightedField() === 0">
 				<label for="range-input-start-{{idSuffix}}" class="u-mask">Start</label>
@@ -23,8 +23,8 @@
 					aria-haspopup="true"
 					role="combobox"
 					(click)="editedField.set(0);openPopover(popoverRef, 'start')"
-					(keyup.arrowDown)="arrowDown(popoverRef, 'start')"
-					(keyup.escape)="popoverRef.close()"
+					(keydown.arrowDown)="arrowDown(popoverRef, 'start')"
+					(keydown.escape)="popoverRef.close()"
 					[disabled]="disabled"
 					[attr.placeholder]="dateFormatLocalized()"
 					[attr.autocomplete]="autocomplete"
@@ -47,8 +47,8 @@
 					aria-haspopup="true"
 					role="combobox"
 					(click)="editedField.set(1);openPopover(popoverRef, 'end')"
-					(keyup.arrowDown)="arrowDown(popoverRef, 'end')"
-					(keyup.escape)="popoverRef.close()"
+					(keydown.arrowDown)="arrowDown(popoverRef, 'end')"
+					(keydown.escape)="popoverRef.close()"
 					[disabled]="disabled"
 					[attr.placeholder]="dateFormatLocalized()"
 					[attr.autocomplete]="autocomplete"
@@ -152,3 +152,15 @@
 		</div>
 	</div>
 </ng-template>
+
+@if (isFilterPill) {
+<ng-container *ngTemplateOutlet="calendar"></ng-container>
+}
+
+<ng-container *luFilterPillDisplayer="let empty = isEmpty">
+	@if (!empty) {
+	<span class="u-mask">{{ intl.from }}</span>
+	{{ startLabel() }}
+	<lu-icon [icon]="'arrowRight'" size="XS" [alt]="intl.to" />
+	{{ endLabel() }} }
+</ng-container>

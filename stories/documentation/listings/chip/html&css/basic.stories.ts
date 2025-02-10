@@ -6,7 +6,7 @@ interface ChipBasicStory {
 }
 
 export default {
-	title: 'Documentation/Listings/Chip/Basic',
+	title: 'Documentation/Listings/Chip/HTML&CSS/Basic',
 	argTypes: {
 		product: {
 			control: {

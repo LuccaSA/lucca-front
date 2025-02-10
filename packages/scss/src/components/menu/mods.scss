@@ -15,13 +15,13 @@
 
 	// .menu-link is deprecated
 	.menu-link {
-		margin-right: var(--pr-t-spacings-300);
+		margin-inline-end: var(--pr-t-spacings-300);
 	}
 
 	// .label is deprecated
 	.label {
-		height: var(--sizes-S-lineHeight);
-		min-width: var(--sizes-S-lineHeight);
+		block-size: var(--sizes-S-lineHeight);
+		min-inline-size: var(--sizes-S-lineHeight);
 		line-height: var(--sizes-S-lineHeight);
 		padding: 0;
 	}

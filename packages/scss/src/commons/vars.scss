@@ -24,12 +24,11 @@
 	@include core.cssvars('commons-disabled', config.$disabled);
 	@include core.cssvars('commons-loading', config.$loading);
 	@include core.cssvars('commons-text-link', config.$textLink);
+	@include core.cssvars('breakpoints', config.$breakpoints, '-breakAt');
 
 	@each $palette in config.$palettesAll {
 		@include core.cssvars('palettes-#{$palette}', map.get(config.$palettesInterpolation, $palette));
 	}
-
-	@include core.cssvars('breakpoints', config.$breakpoints, '-breakAt');
 
 	@each $key, $map in config.$sizes {
 		@include core.cssvars('sizes-#{$key}', $map);

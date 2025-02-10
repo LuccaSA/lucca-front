@@ -1,12 +1,12 @@
-@import '_definitions';
-@include selectInputStyle;
+@use '_definitions';
+@include definitions.selectInputStyle;
 
 .lu-select-value {
-	padding-right: 3.5rem;
+	padding-inline-end: 3.5rem;
 }
 
 .lu-select-additionalInformation {
 	font-size: 80%;
 	font-style: italic;
-	margin-top: -.25em;
+	margin-block-start: -0.25em;
 }

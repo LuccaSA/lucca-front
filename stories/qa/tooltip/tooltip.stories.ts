@@ -32,7 +32,7 @@ import { BehaviorSubject, combineLatest, map, shareReplay, switchMap, timer } fr
 			}
 
 			.width200 {
-				width: 200px;
+				inline-size: 200px;
 			}
 
 			:host {
