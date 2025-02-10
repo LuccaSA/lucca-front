@@ -1,4 +1,4 @@
-import { AngularCompilerLib, HtmlAst, HtmlAstVisitor } from '../lib/html-ast.js';
+import { HtmlAst, HtmlAstVisitor } from '../lib/html-ast.js';
 import ts, { isImportDeclaration, isNamedImports, ScriptTarget, SourceFile } from 'typescript';
 import { extractComponentImports, insertAngularImportIfNeeded, insertTSImportIfNeeded, removeAngularImport, removeTSImport } from '../lib/angular-component-ast';
 import { extractNgTemplatesIncludingHtml } from '../lib/angular-template';
@@ -7,6 +7,7 @@ import { LuApiSelectInputComponentContext, LuSelectInputContext, PremadeApiSelec
 import { Tree, UpdateRecorder } from '@angular-devkit/schematics';
 import { applyToUpdateRecorder } from '@schematics/angular/utility/change';
 import { getEOL } from '@schematics/angular/utility/eol';
+import { currentSchematicContext } from '../lib/lf-schematic-context';
 
 const importSource: Record<string, string> = {
 	LuSimpleSelectInputComponent: '@lucca-front/ng/simple-select',
@@ -25,8 +26,8 @@ const selectorToComponentNameRecord = selectorToSelectComponentName as Record<st
 
 const possibleSelectComponents = Object.values(selectorToSelectComponentName);
 
-export function migrateComponent(sourceFile: SourceFile, path: string, tree: Tree, compiler: AngularCompilerLib): string {
-	const selects = findSelectContexts(sourceFile, path, tree, compiler);
+export function migrateComponent(sourceFile: SourceFile, path: string, tree: Tree): string {
+	const selects = findSelectContexts(sourceFile, path, tree);
 	if (selects.length > 0) {
 		const tsUpdate = tree.beginUpdate(path);
 		const isInlineTemplate = selects[0].filePath === path;
@@ -36,10 +37,10 @@ export function migrateComponent(sourceFile: SourceFile, path: string, tree: Tre
 			if (!select.rejection) {
 				switch (select.component) {
 					case 'LuSelectInputComponent':
-						handleLuSelectInputComponent(select, templateUpdate, compiler);
+						handleLuSelectInputComponent(select, templateUpdate);
 						break;
 					case 'LuApiSelectInputComponent':
-						handleApiSelectInputComponent(select, templateUpdate, compiler);
+						handleApiSelectInputComponent(select, templateUpdate);
 						break;
 					case 'LuEstablishmentSelectInputComponent':
 					case 'LuQualificationSelectInputComponent':
@@ -56,10 +57,10 @@ export function migrateComponent(sourceFile: SourceFile, path: string, tree: Tre
 			// We're not checking using else here because handle** methods can also add a rejection reason
 			// We want to handle both cases (before handling and after) here
 			if (select.rejection) {
-				//console.log(`\x1b[31mCouldn't migrate ${select.component} in ${path}: ${RejectionReason[select.rejection.reason]}\x1b[0m`);
+				currentSchematicContext.logFailure(`Couldn't migrate ${select.component} in ${path}: ${RejectionReason[select.rejection.reason]}`);
 				insertRejectionComment(templateUpdate, select as RejectedSelectContext);
 			} else {
-				//console.log(`\x1b[36mMigrated ${select.component} in ${path}\x1b[0m`);
+				currentSchematicContext.logSuccess(`Migrated ${select.component} in ${path}`);
 			}
 		});
 		tree.commitUpdate(tsUpdate);
@@ -99,19 +100,19 @@ function insertRejectionComment(update: UpdateRecorder, select: RejectedSelectCo
 	update.insertLeft(select.nodeOffset + select.node.startSourceSpan.start.offset, `<!-- [lu-select migration] REJECTED: ${detailedReason || RejectionReason[select.rejection.reason]} -->\n${indentBefore}`);
 }
 
-function findSelectContexts(sourceFile: ts.SourceFile, basePath: string, tree: Tree, compiler: AngularCompilerLib): SelectContext[] {
+function findSelectContexts(sourceFile: ts.SourceFile, basePath: string, tree: Tree): SelectContext[] {
 	const imports = extractComponentImports(sourceFile);
 	if (possibleSelectComponents.some((c) => imports.includes(c))) {
 		const selects: SelectContext[] = [];
 		const template = extractNgTemplatesIncludingHtml(sourceFile, tree, basePath)[0];
-		const htmlAst = new HtmlAst(template.content, compiler);
+		const htmlAst = new HtmlAst(template.content);
 		htmlAst.visitNodes((node) => {
-			if (node instanceof compiler.TmplAstElement) {
+			if (node instanceof currentSchematicContext.angularCompiler.TmplAstElement) {
 				const selectComponentClass = selectorToComponentNameRecord[node.name];
 				const multipleInput = node.inputs.find(attr => attr.name === 'multiple');
-				const unsupportedMultiple = (multipleInput?.value instanceof compiler.ASTWithSource) && multipleInput.value.source !== 'true';
+				const unsupportedMultiple = (multipleInput?.value instanceof currentSchematicContext.angularCompiler.ASTWithSource) && multipleInput.value.source !== 'true';
 				const multipleAttr = node.attributes.find(attr => attr.name === 'multiple');
-				const multipleFromInput = (multipleInput?.value instanceof compiler.ASTWithSource) && multipleInput.value.source === 'true' ? { start: multipleInput?.sourceSpan?.start?.offset, end: multipleInput?.sourceSpan?.end?.offset + 1 } : null;
+				const multipleFromInput = (multipleInput?.value instanceof currentSchematicContext.angularCompiler.ASTWithSource) && multipleInput.value.source === 'true' ? { start: multipleInput?.sourceSpan?.start?.offset, end: multipleInput?.sourceSpan?.end?.offset + 1 } : null;
 				const multipleFromAttr = multipleAttr && (multipleAttr.value === 'true' || multipleAttr.value === '') ? { start: multipleAttr?.sourceSpan?.start?.offset, end: multipleAttr?.sourceSpan?.end?.offset + 1 } : null;
 				if (selectComponentClass) {
 					const context = {
@@ -121,7 +122,7 @@ function findSelectContexts(sourceFile: ts.SourceFile, basePath: string, tree: T
 						component: selectComponentClass,
 						rejection: unsupportedMultiple ? {
 							reason: RejectionReason.CONDITIONAL_MULTIPLE
-						} : getCommonMigrationRejectionReason(node, sourceFile, compiler),
+						} : getCommonMigrationRejectionReason(node, sourceFile),
 						filePath: template.filePath,
 						componentTS: template.componentTS,
 						multiple: multipleFromAttr || multipleFromInput
@@ -175,10 +176,10 @@ function updateImports(sourceFile: SourceFile, selects: SelectContext[], path: s
 	tree.commitUpdate(cleanupUpdate);
 }
 
-function handleLuSelectInputComponent(select: LuSelectInputContext, update: UpdateRecorder, compiler: AngularCompilerLib) {
-	const dataSource = getDataSource(select, compiler);
+function handleLuSelectInputComponent(select: LuSelectInputContext, update: UpdateRecorder) {
+	const dataSource = getDataSource(select);
 	let hasClearer = false;
-	new HtmlAstVisitor(select.node, compiler).visitElements(/lu-input-clearer/, (node) => {
+	new HtmlAstVisitor(select.node).visitElements(/lu-input-clearer/, (node) => {
 		// Doing the check just in case
 		if (node.name === 'lu-input-clearer') {
 			hasClearer = true;
@@ -192,7 +193,7 @@ function handleLuSelectInputComponent(select: LuSelectInputContext, update: Upda
 		if (select.multiple) {
 			update.remove(select.nodeOffset + select.multiple.start, select.multiple.end - select.multiple.start);
 		}
-		const displayer = getDisplayer(select, compiler);
+		const displayer = getDisplayer(select);
 		const endSpanOffset = select.node.endSourceSpan?.start.offset || -1;
 		// Remove content
 		update.remove(select.nodeOffset + select.node.startSourceSpan.end.offset, endSpanOffset - select.node.startSourceSpan.end.offset);
@@ -254,7 +255,7 @@ function handlePremadeApiSelect(select: PremadeApiSelectContext, update: UpdateR
 	}
 }
 
-function handleApiSelectInputComponent(select: LuApiSelectInputComponentContext, update: UpdateRecorder, compiler: AngularCompilerLib) {
+function handleApiSelectInputComponent(select: LuApiSelectInputComponentContext, update: UpdateRecorder) {
 	let apiStandard: 'v3' | 'v4' = 'v3';
 	let apiEndpoint: string = '';
 	let oldApiInput = { pos: 0, length: 0 };
@@ -276,14 +277,14 @@ function handleApiSelectInputComponent(select: LuApiSelectInputComponentContext,
 		}
 	});
 	select.node.inputs.forEach(input => {
-		if (input.name === 'api' && input.value instanceof compiler.ASTWithSource) {
+		if (input.name === 'api' && input.value instanceof currentSchematicContext.angularCompiler.ASTWithSource) {
 			apiEndpoint = input.value?.source || '';
 			oldApiInput = {
 				pos: input.sourceSpan.start.offset,
 				length: input.sourceSpan.end.offset - input.sourceSpan.start.offset
 			};
 		}
-		if (input.name === 'standard' && input.value instanceof compiler.ASTWithSource) {
+		if (input.name === 'standard' && input.value instanceof currentSchematicContext.angularCompiler.ASTWithSource) {
 			apiStandard = (input.value?.source || 'v3') as 'v3' | 'v4';
 			oldApiStandard = {
 				pos: input.sourceSpan.start.offset,

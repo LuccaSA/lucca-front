@@ -1,7 +1,8 @@
 import { LuSelectInputContext, SelectContext } from './model/select-context';
-import { AngularCompilerLib, HtmlAstVisitor } from '../lib/html-ast';
+import { HtmlAstVisitor } from '../lib/html-ast';
 import ts from 'typescript';
 import { extractProviders } from '../lib/angular-component-ast';
+import { currentSchematicContext } from '../lib/lf-schematic-context';
 
 export enum RejectionReason {
 	UNSUPPORTED_ATTRIBUTE,
@@ -40,8 +41,8 @@ export function isRejection(value: unknown): value is Rejection {
 	return (value as Rejection)?.reason !== undefined && RejectionReason[(value as Rejection).reason] != undefined;
 }
 
-export function getCommonMigrationRejectionReason(node: unknown, sourceFile: ts.SourceFile, compiler: AngularCompilerLib): Rejection | null {
-	if (node instanceof compiler.TmplAstElement) {
+export function getCommonMigrationRejectionReason(node: unknown, sourceFile: ts.SourceFile): Rejection | null {
+	if (node instanceof currentSchematicContext.angularCompiler.TmplAstElement) {
 		const unsupportedAttr = node.attributes.find((attr) => !allowedAttributes.some((rxp) => rxp.test(attr.name)));
 		if (unsupportedAttr) {
 			return {
@@ -109,11 +110,11 @@ export function getCommonMigrationRejectionReason(node: unknown, sourceFile: ts.
 	return null;
 }
 
-export function getDataSource(select: LuSelectInputContext, compiler: AngularCompilerLib): SelectDataSource | Rejection {
+export function getDataSource(select: LuSelectInputContext): SelectDataSource | Rejection {
 	let result: SelectDataSource | Rejection = {
 		reason: RejectionReason.NO_DATA_SOURCE
 	};
-	const htmlAstVisitor = new HtmlAstVisitor(select.node, compiler);
+	const htmlAstVisitor = new HtmlAstVisitor(select.node);
 	let rejected = false;
 	// First of all, check that there's no lu-option-select-all, because this is a rejection reason
 	htmlAstVisitor.visitElements(/(lu-option-select-all)|(lu-tree-.*)/, (node) => {
@@ -135,27 +136,27 @@ export function getDataSource(select: LuSelectInputContext, compiler: AngularCom
 
 	htmlAstVisitor.visitElements(/lu-option-picker(-advanced)?/, (node) => {
 		// If picker doesn't have option as direct child, reject, we can't migrate this kind of custom stuff
-		const luOption = node.children.find((c) => c instanceof compiler.TmplAstTemplate && c.tagName === 'lu-option');
+		const luOption = node.children.find((c) => c instanceof currentSchematicContext.angularCompiler.TmplAstTemplate && c.tagName === 'lu-option');
 		if (luOption === undefined) {
 			result = {
 				reason: RejectionReason.CUSTOM_PICKER_CONTENT
 			};
 		} else {
 			// TODO Handle advanced option picker
-			if (luOption instanceof compiler.TmplAstTemplate && node.name === 'lu-option-picker') {
+			if (luOption instanceof currentSchematicContext.angularCompiler.TmplAstTemplate && node.name === 'lu-option-picker') {
 				let valueName: string = '';
 				let ngForOfName: string = '';
 				let ngForImplicitVarName: string = '';
 				// If that's a simple option picker, lu-option should have dataSource in its ngFor
 				luOption.templateAttrs.forEach((attr) => {
-					if (attr.name === 'ngForOf' && attr.value instanceof compiler.ASTWithSource) {
+					if (attr.name === 'ngForOf' && attr.value instanceof currentSchematicContext.angularCompiler.ASTWithSource) {
 						ngForOfName = attr.value.source || '';
 						ngForImplicitVarName = luOption.variables.find((v) => v.value === '$implicit')?.name || '';
 					}
 				});
 				// Grab assigned value to make sure it's a supported one
 				luOption.inputs.forEach((attr) => {
-					if (attr.name === 'value' && attr.value instanceof compiler.ASTWithSource) {
+					if (attr.name === 'value' && attr.value instanceof currentSchematicContext.angularCompiler.ASTWithSource) {
 						valueName = attr.value.source || '';
 					}
 				});
@@ -169,10 +170,10 @@ export function getDataSource(select: LuSelectInputContext, compiler: AngularCom
 					// We have found value and it matches, now let's check how it's rendered
 					// Idk why but AST has two levels for a single node in this case
 					const contentHost = luOption.children[0];
-					if (contentHost instanceof compiler.TmplAstElement) {
-						const templateNodes = contentHost.children.filter(c => c instanceof compiler.TmplAstBoundText);
+					if (contentHost instanceof currentSchematicContext.angularCompiler.TmplAstElement) {
+						const templateNodes = contentHost.children.filter(c => c instanceof currentSchematicContext.angularCompiler.TmplAstBoundText);
 						const firstValue = templateNodes[0];
-						if (firstValue instanceof compiler.TmplAstBoundText && firstValue.value instanceof compiler.ASTWithSource) {
+						if (firstValue instanceof currentSchematicContext.angularCompiler.TmplAstBoundText && firstValue.value instanceof currentSchematicContext.angularCompiler.ASTWithSource) {
 							const firstTemplateSource = firstValue.value.source?.trim();
 							// First of all, check if it's a basic ?.name approach, in which case we can remove it
 							if (
@@ -204,7 +205,7 @@ export function getDataSource(select: LuSelectInputContext, compiler: AngularCom
 				}
 
 				const comparerAST = node.inputs.find(attr => attr.name === 'option-comparer')?.value;
-				if (comparerAST instanceof compiler.ASTWithSource && comparerAST?.source && !isRejection(result)) {
+				if (comparerAST instanceof currentSchematicContext.angularCompiler.ASTWithSource && comparerAST?.source && !isRejection(result)) {
 					result.comparer = comparerAST?.source;
 				}
 			}
@@ -213,25 +214,25 @@ export function getDataSource(select: LuSelectInputContext, compiler: AngularCom
 	return result;
 }
 
-export function getDisplayer(select: SelectContext, compiler: AngularCompilerLib): SelectDisplayer {
+export function getDisplayer(select: SelectContext): SelectDisplayer {
 
-	const displayerHostNode = select.node.children.find((node) => node instanceof compiler.TmplAstTemplate && node.templateAttrs.some((attr) => attr.name === 'luDisplayer'));
+	const displayerHostNode = select.node.children.find((node) => node instanceof currentSchematicContext.angularCompiler.TmplAstTemplate && node.templateAttrs.some((attr) => attr.name === 'luDisplayer'));
 	if (!displayerHostNode) {
 		return {
 			canBeRemoved: true
 		};
 	}
-	if (displayerHostNode instanceof compiler.TmplAstTemplate) {
+	if (displayerHostNode instanceof currentSchematicContext.angularCompiler.TmplAstTemplate) {
 		const displayerVarName = displayerHostNode.variables.find((v) => v.value === '$implicit')?.name;
 		const templateNodes: unknown[] = [];
-		new HtmlAstVisitor(displayerHostNode.children, compiler).visitNodes((c) => {
-			if (c instanceof compiler.TmplAstBoundText) {
+		new HtmlAstVisitor(displayerHostNode.children).visitNodes((c) => {
+			if (c instanceof currentSchematicContext.angularCompiler.TmplAstBoundText) {
 				templateNodes.push(c);
 			}
 		});
 		if (templateNodes?.length > 0) {
 			const firstValue = templateNodes[0];
-			if (firstValue instanceof compiler.TmplAstBoundText && firstValue.value instanceof compiler.ASTWithSource) {
+			if (firstValue instanceof currentSchematicContext.angularCompiler.TmplAstBoundText && firstValue.value instanceof currentSchematicContext.angularCompiler.ASTWithSource) {
 				const firstTemplateSource = firstValue.value.source?.trim();
 				if (
 					(templateNodes.length === 1 && firstTemplateSource === `{{ ${displayerVarName} }}`) ||

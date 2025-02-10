@@ -3,5 +3,21 @@
   "$id": "LuccaFrontLuSelect",
   "title": "Lucca Front lu-select migration into new selects",
   "type": "object",
-  "properties": {}
+  "properties": {
+    "dryRun": {
+      "type": "boolean",
+      "description": "Run through the migration without making any changes.",
+      "default": false
+    },
+    "skipInstall": {
+      "type": "boolean",
+      "description": "Skip installing dependencies.",
+      "default": false
+    },
+    "verbose": {
+      "type": "boolean",
+      "description": "Enable verbose logging.",
+      "default": false
+    }
+  }
 }

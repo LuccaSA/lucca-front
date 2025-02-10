@@ -1,17 +1,14 @@
 import type { Rule } from '@angular-devkit/schematics';
 import { CssMapper } from '../lib/css-mapper';
-import { installLocalDependencies } from '../lib/local-deps/installer';
+import { currentSchematicContext, SchematicContextOpts } from '../lib/lf-schematic-context';
 
 // Nx need to see "@angular-devkit/schematics" in order to run this migration correctly (see https://github.com/nrwl/nx/blob/d9fed4b832bf01d1b9a44ae9e486a5e5cd2d2253/packages/nx/src/command-line/migrate/migrate.ts#L1729-L1738)
 require('@angular-devkit/schematics');
 
-export default (options?: { skipInstallation?: boolean }): Rule => {
-	const skipInstallation = options?.skipInstallation ?? false;
+export default (options?: SchematicContextOpts): Rule => {
 
 	return async (tree, context) => {
-		if (!skipInstallation) {
-			installLocalDependencies(context);
-		}
+		await currentSchematicContext.init(context, options);
 
 		await new CssMapper(
 			tree,
@@ -33,12 +30,12 @@ export default (options?: { skipInstallation?: boolean }): Rule => {
 					'u-paddingBlock{tshirt}': 'pr-u-paddingBlock{tshirt}',
 					'u-gap{tshirt}': 'pr-u-gap{tshirt}',
 					'u-rowGap{tshirt}': 'pr-u-rowGap{tshirt}',
-					'u-columnGap{tshirt}': 'pr-u-columnGap{tshirt}',
+					'u-columnGap{tshirt}': 'pr-u-columnGap{tshirt}'
 				},
 				variables: {
-					'--spacings-{tshirt}': `--pr-t-spacings-{tshirt}`,
+					'--spacings-{tshirt}': `--pr-t-spacings-{tshirt}`
 				},
-				mixins: {},
+				mixins: {}
 			},
 			{
 				tshirt: {
@@ -50,9 +47,9 @@ export default (options?: { skipInstallation?: boolean }): Rule => {
 					M: '300',
 					L: '400',
 					XL: '600',
-					XXL: '800',
-				},
-			},
+					XXL: '800'
+				}
+			}
 		).run();
 	};
 };
