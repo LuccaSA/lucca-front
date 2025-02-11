@@ -53,6 +53,7 @@ export default {
 			control: {
 				type: 'select',
 			},
+			description: '[v19.2]',
 		},
 	},
 } as Meta;

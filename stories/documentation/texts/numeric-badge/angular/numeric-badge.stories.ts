@@ -21,6 +21,7 @@ export default {
 		},
 		maxValue: {
 			type: 'number',
+			description: '[v19.2]',
 		},
 		size: {
 			control: {
