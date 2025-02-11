@@ -18,7 +18,6 @@ export default {
 	rules: {
 		// SCSS specific
 		// ============================================================================================
-		'scss/at-rule-conditional-no-parentheses': null,
 		'scss/at-function-pattern': [
 			'^(([a-z][a-zA-Z0-9]*)((-(([a-z0-9]+[a-zA-Z0-9]*)|([A-Z]+))+)*)|[A-Z]+)$',
 			{
@@ -31,6 +30,8 @@ export default {
 				message: `Expected @mixin name to match pattern foo(-bar(Baz)*)*`,
 			},
 		],
+		'scss/at-rule-conditional-no-parentheses': null,
+		'scss/comment-no-empty': null,
 		'scss/dollar-variable-empty-line-before': [
 			'always',
 			{
@@ -50,7 +51,6 @@ export default {
 				message: (placeholder) => `Expected "${placeholder}" to match pattern %foo(-bar(Baz)*)*`,
 			},
 		],
-		'scss/comment-no-empty': null,
 
 		// Generic rules
 		// ============================================================================================
@@ -92,6 +92,14 @@ export default {
 				except: ['after-comment', 'after-declaration', 'first-nested'],
 			},
 		],
+		'declaration-property-value-disallowed-list': [
+			{ '/.*/': getDisallowedObjects(LFDeprecatedProperties) },
+			{
+				url: 'https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/95175f',
+				message: (property, value) => getDisallowedData(LFDeprecatedProperties, value).message,
+				severity: (property, value) => getDisallowedData(LFDeprecatedProperties, value).severity,
+			},
+		],
 		'keyframes-name-pattern': [
 			'^([a-z][a-zA-Z0-9]*)((-(([a-z0-9]+[a-zA-Z0-9]*)|([A-Z]+))+)*)$',
 			{
@@ -113,24 +121,10 @@ export default {
 				ignoreProperties: ['scrollbar-3dlight-color'],
 			},
 		],
-		'declaration-property-value-disallowed-list': [
-			{ '/.*/': getDisallowedObjects(LFDeprecatedProperties) },
-			{
-				url: 'https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/95175f',
-				message: (property, value) => getDisallowedData(LFDeprecatedProperties, value).message,
-				severity: (property, value) => getDisallowedData(LFDeprecatedProperties, value).severity,
-			},
-		],
 		'selector-class-pattern': [
 			'^([a-z][a-zA-Z0-9]*)(((-|_)(([a-z0-9]+[a-zA-Z0-9]*)|([A-Z]+))+)*)$',
 			{
 				message: (selectorClass) => `Expected "${selectorClass}" to match pattern .foo(-bar(Baz)*)*`,
-			},
-		],
-		'selector-id-pattern': [
-			'^([a-z][a-zA-Z0-9]*)(((-|_)(([a-z0-9]+[a-zA-Z0-9]*)|([A-Z]+))+)*)$',
-			{
-				message: (selectorId) => `Expected "${selectorId}" to match pattern #foo(-bar(Baz)*)*`,
 			},
 		],
 		'selector-disallowed-list': [
@@ -141,6 +135,12 @@ export default {
 				url: 'https://prisme.lucca.io/94310e217/p/40c515-cycle-de-vie-des-composants/b/95175f',
 				message: (selector) => getDisallowedData(LFDeprecatedSelectors, selector).message,
 				severity: (selector) => getDisallowedData(LFDeprecatedSelectors, selector).severity,
+			},
+		],
+		'selector-id-pattern': [
+			'^([a-z][a-zA-Z0-9]*)(((-|_)(([a-z0-9]+[a-zA-Z0-9]*)|([A-Z]+))+)*)$',
+			{
+				message: (selectorId) => `Expected "${selectorId}" to match pattern #foo(-bar(Baz)*)*`,
 			},
 		],
 		'selector-pseudo-element-no-unknown': [
