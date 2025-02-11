@@ -69,7 +69,7 @@ export default {
 	<lu-filter-pill label="Inclure les collaborateurs partis" optional name="includeFormerEmployees">
 		<lu-checkbox-input [ngModel]="false"></lu-checkbox-input>
 	</lu-filter-pill>
-	<lu-filter-pill label="Date de début" optional name="toto">
+	<lu-filter-pill label="Date de début" optional name="startingDate">
 		<lu-date-input [(ngModel)]="example1" /></lu-filter-pill>
 	<lu-filter-pill label="Période">
 		<lu-date-range-input [(ngModel)]="examplePeriod"/>
