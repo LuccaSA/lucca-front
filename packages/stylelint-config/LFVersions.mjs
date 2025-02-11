@@ -1,9 +1,22 @@
-export default {
-	'17.2.0': '2024-01-16',
-	'17.3.0': '2024-02-27',
-	'17.4.0': '2024-04-16',
-	'18.1.0': '2024-06-19',
-	'18.3.0': '2024-10-25',
-	'19.1.0': '2024-12-17',
-	'20.1.0': '2025-06-18',
-};
+const githubMilestones = await fetch('https://api.github.com/repos/LuccaSA/lucca-front/milestones?state=all&sort=due_on&direction=desc');
+
+const LFVersions = {};
+
+if (githubMilestones.ok) {
+	const milestones = await githubMilestones.json();
+
+	for (const milestone of milestones) {
+		let version = milestone.title;
+
+		if (version) {
+			const date = new Date(milestone.due_on);
+			// If version doesn't have patch version, add it as .0
+			if (version.split('.').length === 2) {
+				version += '.0';
+			}
+			LFVersions[version] = date.toLocaleDateString();
+		}
+	}
+}
+
+export default LFVersions;
