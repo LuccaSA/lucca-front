@@ -3,7 +3,16 @@ import ts, { isImportDeclaration, isNamedImports, ScriptTarget, SourceFile } fro
 import { extractComponentImports, insertAngularImportIfNeeded, insertTSImportIfNeeded, removeAngularImport, removeTSImport } from '../lib/angular-component-ast';
 import { extractNgTemplatesIncludingHtml } from '../lib/angular-template';
 import { getCommonMigrationRejectionReason, getDataSource, getDisplayer, isRejection, RejectionReason } from './util';
-import { LuApiSelectInputComponentContext, LuSelectInputContext, PremadeApiSelectContext, RejectedSelectContext, SelectComponent, SelectContext, selectorToComponentName, selectorToSelectComponentName } from './model/select-context';
+import {
+	LuApiSelectInputComponentContext,
+	LuSelectInputContext,
+	PremadeApiSelectContext,
+	RejectedSelectContext,
+	SelectComponent,
+	SelectContext,
+	selectorToComponentName,
+	selectorToSelectComponentName,
+} from './model/select-context';
 import { Tree, UpdateRecorder } from '@angular-devkit/schematics';
 import { applyToUpdateRecorder } from '@schematics/angular/utility/change';
 import { getEOL } from '@schematics/angular/utility/eol';
@@ -19,7 +28,7 @@ const importSource: Record<string, string> = {
 	LuCoreSelectJobQualificationsDirective: '@lucca-front/ng/core-select',
 	LuCoreSelectUsersDirective: '@lucca-front/ng/core-select',
 	LuCoreSelectApiV3Directive: '@lucca-front/ng/core-select/api',
-	LuCoreSelectApiV4Directive: '@lucca-front/ng/core-select/api'
+	LuCoreSelectApiV4Directive: '@lucca-front/ng/core-select/api',
 };
 
 const selectorToComponentNameRecord = selectorToSelectComponentName as Record<string, SelectComponent>;
@@ -49,7 +58,7 @@ export function migrateComponent(sourceFile: SourceFile, path: string, tree: Tre
 						break;
 					case 'LuDepartmentSelectInputComponent':
 						select.rejection = {
-							reason: RejectionReason.TREE_OPTION_PICKER
+							reason: RejectionReason.TREE_OPTION_PICKER,
 						};
 						break;
 				}
@@ -99,7 +108,10 @@ function insertRejectionComment(update: UpdateRecorder, select: RejectedSelectCo
 			break;
 	}
 
-	update.insertLeft(select.nodeOffset + select.node.startSourceSpan.start.offset, `<!-- [lu-select migration] REJECTED: ${detailedReason || RejectionReason[select.rejection.reason]} -->\n${indentBefore}`);
+	update.insertLeft(
+		select.nodeOffset + select.node.startSourceSpan.start.offset,
+		`<!-- [lu-select migration] REJECTED: ${detailedReason || RejectionReason[select.rejection.reason]} -->\n${indentBefore}`,
+	);
 }
 
 function findSelectContexts(sourceFile: ts.SourceFile, basePath: string, tree: Tree): SelectContext[] {
@@ -111,23 +123,29 @@ function findSelectContexts(sourceFile: ts.SourceFile, basePath: string, tree: T
 		htmlAst.visitNodes((node) => {
 			if (node instanceof currentSchematicContext.angularCompiler.TmplAstElement) {
 				const selectComponentClass = selectorToComponentNameRecord[node.name];
-				const multipleInput = node.inputs.find(attr => attr.name === 'multiple');
-				const unsupportedMultiple = (multipleInput?.value instanceof currentSchematicContext.angularCompiler.ASTWithSource) && multipleInput.value.source !== 'true';
-				const multipleAttr = node.attributes.find(attr => attr.name === 'multiple');
-				const multipleFromInput = (multipleInput?.value instanceof currentSchematicContext.angularCompiler.ASTWithSource) && multipleInput.value.source === 'true' ? { start: multipleInput?.sourceSpan?.start?.offset, end: multipleInput?.sourceSpan?.end?.offset + 1 } : null;
-				const multipleFromAttr = multipleAttr && (multipleAttr.value === 'true' || multipleAttr.value === '') ? { start: multipleAttr?.sourceSpan?.start?.offset, end: multipleAttr?.sourceSpan?.end?.offset + 1 } : null;
+				const multipleInput = node.inputs.find((attr) => attr.name === 'multiple');
+				const unsupportedMultiple = multipleInput?.value instanceof currentSchematicContext.angularCompiler.ASTWithSource && multipleInput.value.source !== 'true';
+				const multipleAttr = node.attributes.find((attr) => attr.name === 'multiple');
+				const multipleFromInput =
+					multipleInput?.value instanceof currentSchematicContext.angularCompiler.ASTWithSource && multipleInput.value.source === 'true'
+						? { start: multipleInput?.sourceSpan?.start?.offset, end: multipleInput?.sourceSpan?.end?.offset + 1 }
+						: null;
+				const multipleFromAttr =
+					multipleAttr && (multipleAttr.value === 'true' || multipleAttr.value === '') ? { start: multipleAttr?.sourceSpan?.start?.offset, end: multipleAttr?.sourceSpan?.end?.offset + 1 } : null;
 				if (selectComponentClass) {
 					const context = {
 						node,
 						tagName: node.name,
 						nodeOffset: template.offsetStart,
 						component: selectComponentClass,
-						rejection: unsupportedMultiple ? {
-							reason: RejectionReason.CONDITIONAL_MULTIPLE
-						} : getCommonMigrationRejectionReason(node, sourceFile),
+						rejection: unsupportedMultiple
+							? {
+									reason: RejectionReason.CONDITIONAL_MULTIPLE,
+								}
+							: getCommonMigrationRejectionReason(node, sourceFile),
 						filePath: template.filePath,
 						componentTS: template.componentTS,
-						multiple: multipleFromAttr || multipleFromInput
+						multiple: multipleFromAttr || multipleFromInput,
 					};
 
 					selects.push(context as SelectContext);
@@ -143,8 +161,8 @@ function findSelectContexts(sourceFile: ts.SourceFile, basePath: string, tree: T
 function updateImports(sourceFile: SourceFile, selects: SelectContext[], path: string, tree: Tree) {
 	// We need to use 3 updates because of inline template updates requiring sourceFile regen after each change
 	const update = tree.beginUpdate(path);
-	const imports = new Set(selects.filter(s => !s.rejection).flatMap(select => select.requiredImports || []));
-	imports.forEach(importToAdd => {
+	const imports = new Set(selects.filter((s) => !s.rejection).flatMap((select) => select.requiredImports || []));
+	imports.forEach((importToAdd) => {
 		if (importSource[importToAdd]) {
 			applyToUpdateRecorder(update, [insertTSImportIfNeeded(sourceFile, path, importToAdd, importSource[importToAdd]), insertAngularImportIfNeeded(sourceFile, path, importToAdd)]);
 		} else {
@@ -156,7 +174,7 @@ function updateImports(sourceFile: SourceFile, selects: SelectContext[], path: s
 	// Cleanup unused select component imports
 	const updatedSourceFile = ts.createSourceFile(path, tree.readText(path), ScriptTarget.ESNext);
 	const templatesAfterUpdate = extractNgTemplatesIncludingHtml(updatedSourceFile, tree, path);
-	templatesAfterUpdate.forEach(template => {
+	templatesAfterUpdate.forEach((template) => {
 		Object.entries(selectorToComponentName).forEach(([selector, className]) => {
 			if (!template.content.includes(selector)) {
 				applyToUpdateRecorder(componentsCleanupUpdate, [removeTSImport(updatedSourceFile, path, className), removeAngularImport(updatedSourceFile, path, className)]);
@@ -167,14 +185,12 @@ function updateImports(sourceFile: SourceFile, selects: SelectContext[], path: s
 	// Cleanup empty import clauses
 	const cleanupUpdate = tree.beginUpdate(path);
 	const cleanupSourceFile = ts.createSourceFile(path, tree.readText(path), ScriptTarget.ESNext);
-	cleanupSourceFile.statements
-		.filter(isImportDeclaration)
-		.forEach(statement => {
-			if (statement.importClause && statement.importClause.namedBindings && isNamedImports(statement.importClause.namedBindings) && statement.importClause.namedBindings.elements.length === 0) {
-				// +1 for trailing ;
-				cleanupUpdate.remove(statement.getFullStart(), statement.getText(cleanupSourceFile).length + 1);
-			}
-		});
+	cleanupSourceFile.statements.filter(isImportDeclaration).forEach((statement) => {
+		if (statement.importClause && statement.importClause.namedBindings && isNamedImports(statement.importClause.namedBindings) && statement.importClause.namedBindings.elements.length === 0) {
+			// +1 for trailing ;
+			cleanupUpdate.remove(statement.getFullStart(), statement.getText(cleanupSourceFile).length + 1);
+		}
+	});
 	tree.commitUpdate(cleanupUpdate);
 }
 
@@ -216,12 +232,18 @@ function handleLuSelectInputComponent(select: LuSelectInputContext, update: Upda
 		if (!dataSource.display.canBeRemoved) {
 			// If we need to create an option displayer, add it
 			select.requiredImports.push('LuOptionDirective');
-			update.insertRight(select.nodeOffset + select.node.startSourceSpan.end.offset, `${getEOL(select.node.startSourceSpan.end.file.content)}  <ng-container *luOption="${dataSource.display.variables}; select: ${dataSource.sourceName}Select">${dataSource.display.display}</ng-container>${getEOL(select.node.startSourceSpan.end.file.content)}`);
+			update.insertRight(
+				select.nodeOffset + select.node.startSourceSpan.end.offset,
+				`${getEOL(select.node.startSourceSpan.end.file.content)}  <ng-container *luOption="${dataSource.display.variables}; select: ${dataSource.sourceName}Select">${dataSource.display.display}</ng-container>${getEOL(select.node.startSourceSpan.end.file.content)}`,
+			);
 		}
 		if (!displayer.canBeRemoved) {
 			// Create new displayer
 			select.requiredImports.push('LuDisplayerDirective');
-			update.insertRight(select.nodeOffset + select.node.startSourceSpan.end.offset, `${getEOL(select.node.startSourceSpan.end.file.content)}  <ng-container *luDisplayer="${displayer.variables}">${displayer.display}</ng-container>${getEOL(select.node.startSourceSpan.end.file.content)}`);
+			update.insertRight(
+				select.nodeOffset + select.node.startSourceSpan.end.offset,
+				`${getEOL(select.node.startSourceSpan.end.file.content)}  <ng-container *luDisplayer="${displayer.variables}">${displayer.display}</ng-container>${getEOL(select.node.startSourceSpan.end.file.content)}`,
+			);
 		}
 		// If it's not a self closing tag
 		if (select.node.startSourceSpan.start.offset !== select.node.endSourceSpan?.start.offset) {
@@ -237,7 +259,7 @@ function handlePremadeApiSelect(select: PremadeApiSelectContext, update: UpdateR
 		LuQualificationSelectInputComponent: { selector: 'jobQualifications', className: 'LuCoreSelectJobQualificationsDirective' },
 		LuUserSelectModule: { selector: 'users', className: 'LuCoreSelectUsersDirective' },
 		LuEstablishmentSelectInputComponent: { selector: 'establishments', className: 'LuCoreSelectEstablishmentsDirective' },
-		LuDepartmentSelectInputComponent: { selector: 'departments', className: 'LuCoreSelectDepartmentsDirective' } // Cannot happen because it's rejected but we need it to prevent compilation errors
+		LuDepartmentSelectInputComponent: { selector: 'departments', className: 'LuCoreSelectDepartmentsDirective' }, // Cannot happen because it's rejected but we need it to prevent compilation errors
 	}[select.component];
 	select.requiredImports = select.multiple ? ['LuMultiSelectInputComponent', sourceDirective.className] : ['LuSimpleSelectInputComponent', sourceDirective.className];
 	const tag = select.multiple ? 'lu-multi-select' : 'lu-simple-select';
@@ -262,41 +284,41 @@ function handleApiSelectInputComponent(select: LuApiSelectInputComponentContext,
 	let apiEndpoint: string = '';
 	let oldApiInput = { pos: 0, length: 0 };
 	let oldApiStandard = { pos: 0, length: 0 };
-	select.node.attributes.forEach(attr => {
+	select.node.attributes.forEach((attr) => {
 		if (attr.name === 'api') {
 			apiEndpoint = attr.value;
 			oldApiInput = {
 				pos: attr.sourceSpan.start.offset,
-				length: attr.sourceSpan.end.offset - attr.sourceSpan.start.offset
+				length: attr.sourceSpan.end.offset - attr.sourceSpan.start.offset,
 			};
 		}
 		if (attr.name === 'standard') {
 			apiStandard = attr.value as 'v3' | 'v4';
 			oldApiStandard = {
 				pos: attr.sourceSpan.start.offset,
-				length: attr.sourceSpan.end.offset - attr.sourceSpan.start.offset
+				length: attr.sourceSpan.end.offset - attr.sourceSpan.start.offset,
 			};
 		}
 	});
-	select.node.inputs.forEach(input => {
+	select.node.inputs.forEach((input) => {
 		if (input.name === 'api' && input.value instanceof currentSchematicContext.angularCompiler.ASTWithSource) {
 			apiEndpoint = input.value?.source || '';
 			oldApiInput = {
 				pos: input.sourceSpan.start.offset,
-				length: input.sourceSpan.end.offset - input.sourceSpan.start.offset
+				length: input.sourceSpan.end.offset - input.sourceSpan.start.offset,
 			};
 		}
 		if (input.name === 'standard' && input.value instanceof currentSchematicContext.angularCompiler.ASTWithSource) {
 			apiStandard = (input.value?.source || 'v3') as 'v3' | 'v4';
 			oldApiStandard = {
 				pos: input.sourceSpan.start.offset,
-				length: input.sourceSpan.end.offset - input.sourceSpan.start.offset
+				length: input.sourceSpan.end.offset - input.sourceSpan.start.offset,
 			};
 		}
 	});
 	const sourceDirective = {
-		'v3': { selector: 'apiV3', className: 'LuCoreSelectApiV3Directive' },
-		'v4': { selector: 'apiV4', className: 'LuCoreSelectApiV4Directive' }
+		v3: { selector: 'apiV3', className: 'LuCoreSelectApiV3Directive' },
+		v4: { selector: 'apiV4', className: 'LuCoreSelectApiV4Directive' },
 	}[apiStandard];
 	select.requiredImports = select.multiple ? ['LuMultiSelectInputComponent', sourceDirective.className] : ['LuSimpleSelectInputComponent', sourceDirective.className];
 	const tag = select.multiple ? 'lu-multi-select' : 'lu-simple-select';

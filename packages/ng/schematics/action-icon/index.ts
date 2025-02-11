@@ -1,5 +1,4 @@
 import type { Rule } from '@angular-devkit/schematics';
-import { installLocalDependencies } from '../lib/local-deps/installer';
 import { migrateFile } from '../lib/schematics';
 import { migrateHTMLFile, migrateScssFile } from './migration';
 import { currentSchematicContext, SchematicContextOpts } from '../lib/lf-schematic-context';
@@ -9,7 +8,6 @@ import { currentSchematicContext, SchematicContextOpts } from '../lib/lf-schemat
 require('@angular-devkit/schematics');
 
 export default (options?: SchematicContextOpts): Rule => {
-
 	return async (tree, context) => {
 		await currentSchematicContext.init(context, options);
 

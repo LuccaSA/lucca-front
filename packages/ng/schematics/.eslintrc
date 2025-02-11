@@ -1,6 +1,7 @@
 {
 	"extends": [
-		"../../.eslintrc"
+		"../../../.eslintrc",
+		"plugin:prettier/recommended"
 	],
 	"overrides": [
 		{
@@ -10,8 +11,15 @@
 			"rules": {
 				// OUR RULES
 				"no-console": [
-					"ignore"
-				]
+					0
+				],
+				"@typescript-eslint/no-require-imports": [
+					0
+				],
+				"@typescript-eslint/no-unsafe-assignment": [
+					0
+				],
+				"array-element-newline": "off"
 			}
 		}
 	]

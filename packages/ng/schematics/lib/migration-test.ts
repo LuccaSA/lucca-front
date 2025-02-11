@@ -3,7 +3,6 @@ import { SchematicTestRunner, UnitTestTree } from '@angular-devkit/schematics/te
 import fs from 'fs';
 import path from 'path';
 import { readdirSync } from 'node:fs';
-import { currentSchematicContext } from './lf-schematic-context';
 
 export function createTreeFromFiles(testsRoot: string, files: string[], filePartFilter: string): Tree {
 	const tree = new UnitTestTree(Tree.empty());
@@ -57,7 +56,7 @@ export function expectTree(tree: Tree): { toMatchTree(expectedTree: Tree): void 
 					throw new Error(`Input tree does not contain file: ${path}`);
 				}
 			});
-		}
+		},
 	};
 }
 

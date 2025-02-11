@@ -107,9 +107,7 @@ export function insertTSImportIfNeeded(sourceFile: SourceFile, fileToEdit: strin
 
 	if (relevantImports.length > 0) {
 		const imports = relevantImports.flatMap((node) => {
-			return node.importClause?.namedBindings && ts.isNamedImports(node.importClause.namedBindings)
-				? node.importClause.namedBindings.elements
-				: [];
+			return node.importClause?.namedBindings && ts.isNamedImports(node.importClause.namedBindings) ? node.importClause.namedBindings.elements : [];
 		});
 
 		// insert import if it's not there
@@ -127,9 +125,7 @@ export function insertTSImportIfNeeded(sourceFile: SourceFile, fileToEdit: strin
 	const eol = getEOL(sourceFile.getText());
 	const insertAtBeginning = allImports.length === 0;
 	const separator = insertAtBeginning ? '' : `${eol}`;
-	const toInsert =
-		`${separator}import { ${symbolName} }` +
-		` from '${fileName}'${insertAtBeginning ? `;${eol}` : ';'}`;
+	const toInsert = `${separator}import { ${symbolName} }` + ` from '${fileName}'${insertAtBeginning ? `;${eol}` : ';'}`;
 
 	const insertPos = allImports[allImports.length - 1].getEnd() || 0;
 	return new InsertChange(fileToEdit, insertPos, toInsert);
@@ -196,17 +192,19 @@ export function removeAngularImport(sourceFile: SourceFile, fileToEdit: string, 
 			if (!argument || !isObjectLiteralExpression(argument)) {
 				return;
 			}
-			const imports = argument.properties
+			const importExpression = argument.properties
 				.filter(isPropertyAssignment)
 				.filter((prop) => isIdentifier(prop.name) && prop.name?.text === 'imports')
 				.map((prop) => prop.initializer)
-				.find(isArrayLiteralExpression)?.elements;
+				.find(isArrayLiteralExpression);
+			const imports = importExpression?.elements;
 			if (imports) {
 				imports.forEach((exp, index) => {
 					if (exp && isIdentifier(exp) && exp.text === symbolName) {
 						removePos = exp.getFullStart();
 						if (index === 0) {
-							toRemove += ', ';
+							removePos = importExpression.elements[0].getStart(sourceFile) || 0;
+							toRemove += ',';
 						} else if (index < imports.length - 1) {
 							toRemove += ' , ';
 						}
@@ -222,7 +220,7 @@ export function removeAngularImport(sourceFile: SourceFile, fileToEdit: string, 
 }
 
 export function removeTSImport(sourceFile: SourceFile, fileToEdit: string, symbolName: string): Change {
-	const importDeclaration = sourceFile.statements.filter(ts.isImportDeclaration).find(declaration => declaration.importClause?.namedBindings?.getText(sourceFile).includes(symbolName));
+	const importDeclaration = sourceFile.statements.filter(ts.isImportDeclaration).find((declaration) => declaration.importClause?.namedBindings?.getText(sourceFile).includes(symbolName));
 	if (!importDeclaration) {
 		return new NoopChange();
 	}
@@ -231,7 +229,7 @@ export function removeTSImport(sourceFile: SourceFile, fileToEdit: string, symbo
 	if (namedImports.elements.length === 1) {
 		return new RemoveChange(fileToEdit, importDeclaration.getFullStart(), importDeclaration?.getText(sourceFile) + getEOL(sourceFile.text));
 	} else {
-		const specifier = namedImports.elements.find(sp => sp.name.text === symbolName);
+		const specifier = namedImports.elements.find((sp) => sp.name.text === symbolName);
 		if (specifier) {
 			return new RemoveChange(fileToEdit, specifier.getFullStart(), symbolName + ', ');
 		}

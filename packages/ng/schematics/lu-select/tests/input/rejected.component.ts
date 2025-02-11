@@ -5,6 +5,7 @@ import { LuUserSelectModule } from '@lucca-front/ng/user';
 import { LuDepartmentSelectInputComponent } from '@lucca-front/ng/department';
 import { LuSelectInputComponent } from '@lucca-front/ng/select';
 import { LuOptionItemComponent, LuOptionSelectAllComponent } from '@lucca-front/ng/option';
+import { EstablishmentServiceOverride } from '../establishment-service-override';
 
 @Component({
 	selector: 'lu-select-schematic-api-selects',
@@ -44,10 +45,18 @@ import { LuOptionItemComponent, LuOptionSelectAllComponent } from '@lucca-front/
 	providers: [
 		{
 			provide: ALuEstablishmentService,
-			useClass: WhateverClassName
+			useClass: EstablishmentServiceOverride
 		}
 	],
-	imports: [LuQualificationSelectInputComponent, LuEstablishmentSelectInputComponent, LuUserSelectModule, LuSelectInputComponent, LuOptionSelectAllComponent, LuOptionItemComponent, LuDepartmentSelectInputComponent]
+	imports: [
+		LuQualificationSelectInputComponent,
+		LuEstablishmentSelectInputComponent,
+		LuUserSelectModule,
+		LuSelectInputComponent,
+		LuOptionSelectAllComponent,
+		LuOptionItemComponent,
+		LuDepartmentSelectInputComponent
+	]
 })
 export class ApiSelectsComponent {
 }
