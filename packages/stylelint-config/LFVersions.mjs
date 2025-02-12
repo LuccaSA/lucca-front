@@ -13,14 +13,14 @@ try {
 	if (cache.createdAt && Date.now() - cache.createdAt < 1000 * 60 * 60) {
 		LFVersions = cache.LFVersions;
 	}
-	console.log('Using cache');
+	console.log(`Using cached data in ${CACHE_FILE_PATH}…`);
 } catch (e) {
 	// Whatever, no cache file means we'll fetch anyways
 }
 
 if (LFVersions === null) {
 	LFVersions = {};
-	console.log('Fetching from GitHub');
+	console.log(`Fetching from Github to ${CACHE_FILE_PATH}…`);
 	const githubMilestones = await fetch('https://api.github.com/repos/LuccaSA/lucca-front/milestones?state=all&sort=due_on&direction=desc');
 
 	if (githubMilestones.ok) {
