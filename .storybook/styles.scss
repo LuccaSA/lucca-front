@@ -66,4 +66,9 @@ storybook-root,
 	&.mod-white {
 		background-color: white;
 	}
+
+	&.mod-column {
+		flex-direction: column;
+		align-items: flex-start;
+	}
 }
