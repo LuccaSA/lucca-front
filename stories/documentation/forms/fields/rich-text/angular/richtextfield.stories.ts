@@ -8,7 +8,6 @@ import {
 	ListFormatComponent,
 	ListStyleToolbarComponent,
 	RichTextInputComponent,
-	TagComponent,
 	TextStyleComponent,
 	TextStyleToolbarComponent,
 } from '@lucca-front/ng/forms/rich-text-input';
@@ -28,7 +27,6 @@ export default {
 				TextStyleToolbarComponent,
 				ListStyleToolbarComponent,
 				ListFormatComponent,
-				TagComponent,
 				TextStyleComponent,
 				FormFieldComponent,
 				FormsModule,
@@ -46,7 +44,6 @@ export default {
 		},
 	},
 } as Meta;
-
 export const Basic: StoryObj<RichTextInputComponent & { disabled: boolean; example: string } & FormFieldComponent> = {
 	render: (args, { argTypes }) => {
 		const { example, ...inputArgs } = args;
@@ -57,23 +54,6 @@ export const Basic: StoryObj<RichTextInputComponent & { disabled: boolean; examp
 	${generateInputs(inputArgs, argTypes)}
 		[(ngModel)]="example">
 			<lu-rich-text-toolbar-text-style/>
-			<lu-rich-text-plugin-tag [tags]="['Prenom',
-																				'Nom',
-																				'Email',
-																				'Téléphone',
-																				'Adresse',
-																				'Ville',
-																				'Code postal',
-																				'Pays',
-																				'Entreprise',
-																				'Poste',
-																				'Service',
-																				'Manager',
-																				'Collaborateur',
-																				'Date de naissance',
-																				'Date dembauche',
-																				'Date de départ',
-																				]"/>
 				<lu-rich-text-toolbar-list-style/>
 				<lu-rich-text-plugin-headings/>
 				<lu-rich-text-plugin-link/>
