@@ -78,8 +78,6 @@ function getDateForVersion(version) {
 			return date;
 		}
 	}
-
-	return;
 }
 
 /**
@@ -130,7 +128,7 @@ function getMessage(objectData) {
  * Get severity based on version used.
  *
  * @param {String} objectData
- * @return {"warning"|"error"}
+ * @return {'warning'|'error'}
  */
 function getSeverity(objectData) {
 	if (currentLFVersion < objectData.versionDeleted) {
