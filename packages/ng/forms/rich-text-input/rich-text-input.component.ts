@@ -1,10 +1,27 @@
-import { Component, computed, contentChildren, ElementRef, forwardRef, inject, InjectionToken, OnDestroy, OnInit, viewChild, ViewEncapsulation } from '@angular/core';
+import {
+	ChangeDetectionStrategy,
+	Component,
+	computed,
+	contentChildren,
+	ElementRef,
+	forwardRef,
+	inject,
+	InjectionToken,
+	input,
+	OnDestroy,
+	OnInit,
+	signal,
+	viewChild,
+	ViewEncapsulation,
+} from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { createEmptyHistoryState, registerHistory } from '@lexical/history';
 import { registerRichText } from '@lexical/rich-text';
 import { mergeRegister } from '@lexical/utils';
+
+import { $canShowPlaceholderCurry } from '@lexical/text';
 import { createEditor, Klass, LexicalEditor, LexicalNode } from 'lexical';
 import { RICH_TEXT_FORMATER, RichTextFormater } from './rich-text-formater';
-import { createEmptyHistoryState, registerHistory } from '@lexical/history';
 
 export interface RichTextPluginComponent {
 	setEditorInstance(editor: LexicalEditor): void;
@@ -27,9 +44,11 @@ export const RICH_TEXT_PLUGIN_COMPONENT = new InjectionToken<RichTextPluginCompo
 			multi: true,
 		},
 	],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RichTextInputComponent implements OnInit, OnDestroy, ControlValueAccessor {
 	readonly richTextFormater: RichTextFormater = inject(RICH_TEXT_FORMATER);
+	readonly placeholder = input('');
 
 	#onChange?: (markdown: string | null) => void;
 	#onTouch?: () => void;
@@ -40,6 +59,8 @@ export class RichTextInputComponent implements OnInit, OnDestroy, ControlValueAc
 	protected content = viewChild.required<string, ElementRef<HTMLElement>>('content', {
 		read: ElementRef,
 	});
+
+	currentCanShowPlaceholder = signal(false);
 
 	customNodes = computed(() =>
 		this.pluginComponents()
@@ -76,6 +97,8 @@ export class RichTextInputComponent implements OnInit, OnDestroy, ControlValueAc
 						})
 						.catch(() => void 0);
 				}
+				const currentCanShowPlaceholder = this.editor.getEditorState().read($canShowPlaceholderCurry(this.editor.isComposing()));
+				this.currentCanShowPlaceholder.set(currentCanShowPlaceholder);
 			}),
 		);
 

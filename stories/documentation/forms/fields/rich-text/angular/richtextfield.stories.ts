@@ -88,5 +88,6 @@ export const Basic: StoryObj<RichTextInputComponent & { disabled: boolean; examp
 	},
 	args: {
 		example: '*italic* **bold**',
+		placeholder: 'Enter some text...',
 	},
 };

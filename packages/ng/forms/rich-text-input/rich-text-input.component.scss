@@ -27,3 +27,18 @@
 .editorTheme__textUnderline {
 	text-decoration: underline;
 }
+
+.richtext-input-placeholder {
+	font-size: 15px;
+	color: #999;
+	overflow: hidden;
+	position: absolute;
+	text-overflow: ellipsis;
+	top: 0;
+	left: 0;
+	user-select: none;
+	white-space: nowrap;
+	display: inline-block;
+	pointer-events: none;
+	padding: var(--pr-t-spacings-100);
+}
