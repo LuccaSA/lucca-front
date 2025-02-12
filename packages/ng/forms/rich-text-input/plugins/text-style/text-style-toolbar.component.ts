@@ -3,15 +3,13 @@ import { LexicalEditor } from 'lexical';
 import { RICH_TEXT_PLUGIN_COMPONENT, RichTextPluginComponent } from '../../rich-text-input.component';
 import { TextStyleComponent } from './text-style.component';
 import { getIntl } from '@lucca-front/ng/core';
-import { LU_RICH_TEXT_INPUT_TRANSLATIONS } from "../../rich-text-input.translate";
+import { LU_RICH_TEXT_INPUT_TRANSLATIONS } from '../../rich-text-input.translate';
 
 @Component({
 	selector: 'lu-rich-text-toolbar-text-style',
 	standalone: true,
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	template: `<lu-rich-text-plugin-text-style icon="formatTextItalic" [tooltip]="intl.stylesItalic" format="italic" />
-		<lu-rich-text-plugin-text-style icon="formatTextBold" [tooltip]="intl.stylesBold" format="bold" />
-		<lu-rich-text-plugin-text-style icon="formatTextUnderline" [tooltip]="intl.stylesUnderline" format="underline" />`,
+	templateUrl: `text-style-toolbar.component.html`,
 	imports: [TextStyleComponent],
 	providers: [
 		{

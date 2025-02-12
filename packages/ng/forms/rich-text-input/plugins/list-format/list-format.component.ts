@@ -11,7 +11,6 @@ import { FORMAT_LIST, registerListsSelectionChange } from './list-format.command
 
 @Component({
 	selector: 'lu-rich-text-plugin-list',
-	standalone: true,
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	templateUrl: 'list-format.component.html',
 	styleUrl: '../styles/_buttons.scss',

@@ -8,7 +8,11 @@
 	display: flex;
 	flex-direction: row;
 	flex-grow: 1;
+	flex-wrap: wrap;
+	gap: var(--pr-t-spacings-50);
+	align-items: center;
 	background-color: var(--palettes-grey-25);
+	padding: var(--pr-t-spacings-75);
 }
 
 .editor-content {

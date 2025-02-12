@@ -29,7 +29,7 @@ export class HTMLFormater extends RichTextFormater {
 		const parser = new DOMParser();
 		const dom = parser.parseFromString(
 			sanitize(htmlString, {
-				FORBID_ATTR: ['style'],
+				FORBID_ATTR: ['style', 'class'],
 			}),
 			'text/html',
 		);

@@ -11,11 +11,10 @@ import { RICH_TEXT_PLUGIN_COMPONENT, RichTextPluginComponent } from '../../rich-
 import { getSelectedNode } from '../../utils';
 import { LinkDialogComponent } from './link-dialog';
 import { getIntl } from '@lucca-front/ng/core';
-import { LU_RICH_TEXT_INPUT_TRANSLATIONS } from "../../rich-text-input.translate";
+import { LU_RICH_TEXT_INPUT_TRANSLATIONS } from '../../rich-text-input.translate';
 
 @Component({
 	selector: 'lu-rich-text-plugin-link',
-	standalone: true,
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	templateUrl: './link.component.html',
 	styleUrl: '../styles/_buttons.scss',

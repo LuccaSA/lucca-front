@@ -1,20 +1,5 @@
-import {
-	$createParagraphNode,
-	$createRangeSelection,
-	$createTextNode,
-	$getRoot,
-	$getSelection,
-	$isRangeSelection,
-	createEditor,
-	LexicalEditor,
-	LexicalNode,
-	RootNode,
-	TextNode,
-} from 'lexical';
-import {
-	getSelectedNode,
-	replaceTextNodeContentPartWith,
-} from '@shared/components/rich-text-editor/utils/lexical.utils';
+import { $createParagraphNode, $createRangeSelection, $createTextNode, $getRoot, $getSelection, $isRangeSelection, createEditor, LexicalEditor, LexicalNode, RootNode, TextNode } from 'lexical';
+import { getSelectedNode, replaceTextNodeContentPartWith } from './lexical.utils';
 
 describe('Lexical Utils', () => {
 	// Do not mock LexicalEditor: we need most functionalities for tests to have sense
@@ -40,9 +25,7 @@ describe('Lexical Utils', () => {
 				p.append(text);
 				root.append(p);
 
-				replaceTextNodeContentPartWith(text, 1, 3, () =>
-					$createTextNode('hello'),
-				);
+				replaceTextNodeContentPartWith(text, 1, 3, () => $createTextNode('hello'));
 				expect(root.getTextContent()).toEqual('thellot');
 			});
 		});
@@ -59,9 +42,7 @@ describe('Lexical Utils', () => {
 				p.append(text);
 				root.append(p);
 
-				replaceTextNodeContentPartWith(text, 1, 3, () =>
-					$createTextNode('hello'),
-				);
+				replaceTextNodeContentPartWith(text, 1, 3, () => $createTextNode('hello'));
 				expect(root.getAllTextNodes()[0].getFormat()).toEqual(1);
 				expect(root.getAllTextNodes()[1].getFormat()).toEqual(0);
 				expect(root.getAllTextNodes()[2].getFormat()).toEqual(1);

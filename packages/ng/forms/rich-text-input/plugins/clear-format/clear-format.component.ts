@@ -6,11 +6,10 @@ import { LexicalEditor } from 'lexical';
 import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
 import { RICH_TEXT_PLUGIN_COMPONENT, RichTextPluginComponent } from '../../rich-text-input.component';
 import { getIntl } from '@lucca-front/ng/core';
-import { LU_RICH_TEXT_INPUT_TRANSLATIONS } from "../../rich-text-input.translate";
+import { LU_RICH_TEXT_INPUT_TRANSLATIONS } from '../../rich-text-input.translate';
 
 @Component({
 	selector: 'lu-rich-text-plugin-clear-format',
-	standalone: true,
 	templateUrl: 'clear-format.component.html',
 	imports: [ButtonComponent, IconComponent, LuTooltipTriggerDirective],
 	changeDetection: ChangeDetectionStrategy.OnPush,

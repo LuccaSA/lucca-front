@@ -7,11 +7,10 @@ import { ButtonComponent } from '@lucca-front/ng/button';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
 import { getIntl } from '@lucca-front/ng/core';
-import { LU_RICH_TEXT_INPUT_TRANSLATIONS } from "../../../rich-text-input.translate";
+import { LU_RICH_TEXT_INPUT_TRANSLATIONS } from '../../../rich-text-input.translate';
 
 @Component({
 	selector: 'lu-rich-text-plugin-link-dialog',
-	standalone: true,
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	templateUrl: 'link-dialog.component.html',
 	imports: [

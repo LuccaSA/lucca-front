@@ -9,7 +9,6 @@ import { registerFormatSelectionChange } from './text-style.command';
 
 @Component({
 	selector: 'lu-rich-text-plugin-text-style',
-	standalone: true,
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	templateUrl: './text-style.component.html',
 	styleUrl: '../styles/_buttons.scss',

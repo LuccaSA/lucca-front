@@ -1,10 +1,4 @@
-import {
-	$createTextNode,
-	ElementNode,
-	LexicalNode,
-	RangeSelection,
-	TextNode,
-} from 'lexical';
+import { $createTextNode, ElementNode, LexicalNode, RangeSelection, TextNode } from 'lexical';
 import { $isAtNodeEnd } from '@lexical/selection';
 
 /**
@@ -15,12 +9,7 @@ import { $isAtNodeEnd } from '@lexical/selection';
  *
  * Returns the new node created by the replacer.
  */
-export function replaceTextNodeContentPartWith<TNode extends LexicalNode>(
-	textNode: TextNode,
-	fromIndex: number,
-	toIndex: number,
-	replacer: (text: string) => TNode,
-): TNode {
+export function replaceTextNodeContentPartWith<TNode extends LexicalNode>(textNode: TextNode, fromIndex: number, toIndex: number, replacer: (text: string) => TNode): TNode {
 	const safeFrom = Math.min(toIndex, fromIndex);
 	const safeTo = Math.max(toIndex, fromIndex);
 	const text = textNode.getTextContent();
@@ -51,9 +40,7 @@ export function replaceTextNodeContentPartWith<TNode extends LexicalNode>(
  * LICENSE file in the root directory of this source tree.
  *
  */
-export function getSelectedNode(
-	selection: RangeSelection,
-): TextNode | ElementNode {
+export function getSelectedNode(selection: RangeSelection): TextNode | ElementNode {
 	const anchor = selection.anchor;
 	const focus = selection.focus;
 	const anchorNode = selection.anchor.getNode();

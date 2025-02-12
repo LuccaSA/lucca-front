@@ -3,7 +3,7 @@ export const Translations = {
 		clearFormat: 'Clear',
 		linksCancel: 'Cancel',
 		linksDelete: 'Delete',
-		linksHref: 'Href',
+		linksHref: 'URL',
 		linksLabel: 'Add link',
 		linksSubmit: 'Submit',
 		listsNumberedLabel: 'Numbered',
@@ -16,9 +16,8 @@ export const Translations = {
 		headings4: 'Heading 4',
 		headings5: 'Heading 5',
 		headings6: 'Heading 6',
-		tagsAction: 'Insert',
 		stylesItalic: 'Italic',
 		stylesBold: 'Bold',
-		stylesUnderline: 'Underline'
-	}
+		stylesUnderline: 'Underline',
+	},
 };

@@ -1,6 +1,6 @@
-import { InjectionToken } from "@angular/core";
+import { InjectionToken } from '@angular/core';
 import { LuTranslation } from '@lucca-front/ng/core';
-import { Translations } from "./translations";
+import { Translations } from './translations';
 
 export const LU_RICH_TEXT_INPUT_TRANSLATIONS = new InjectionToken('LuRichTextInputTranslations', {
 	factory: () => luRichTextInputTranslations,
@@ -26,8 +26,6 @@ export interface ILuRichTextInputLabel {
 	headings4: string;
 	headings5: string;
 	headings6: string;
-
-	tagsAction: string;
 
 	stylesItalic: string;
 	stylesBold: string;
