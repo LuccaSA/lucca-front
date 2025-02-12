@@ -21,7 +21,7 @@ import { mergeRegister } from '@lexical/utils';
 
 import { $canShowPlaceholderCurry } from '@lexical/text';
 import { createEditor, Klass, LexicalEditor, LexicalNode } from 'lexical';
-import { RICH_TEXT_FORMATER, RichTextFormater } from './rich-text-formater';
+import { RICH_TEXT_FORMATER, RichTextFormater } from './formaters/rich-text-formater';
 
 export interface RichTextPluginComponent {
 	setEditorInstance(editor: LexicalEditor): void;
@@ -89,13 +89,9 @@ export class RichTextInputComponent implements OnInit, OnDestroy, ControlValueAc
 			registerHistory(this.editor, createEmptyHistoryState(), 300),
 			this.editor.registerUpdateListener((changes) => {
 				if (changes.dirtyElements.size) {
-					this.richTextFormater
-						.format(this.editor)
-						.then((markdown) => {
-							this.#onTouch?.();
-							this.#onChange?.(markdown);
-						})
-						.catch(() => void 0);
+					const result = this.richTextFormater.format(this.editor);
+					this.#onTouch?.();
+					this.#onChange?.(result);
 				}
 				const currentCanShowPlaceholder = this.editor.getEditorState().read($canShowPlaceholderCurry(this.editor.isComposing()));
 				this.currentCanShowPlaceholder.set(currentCanShowPlaceholder);
@@ -111,10 +107,7 @@ export class RichTextInputComponent implements OnInit, OnDestroy, ControlValueAc
 
 	writeValue(markdown: string | null): void {
 		this.editor?.update(() => {
-			this.richTextFormater
-				.parse(this.editor, markdown)
-				.then(() => {})
-				.catch(() => {});
+			this.richTextFormater.parse(this.editor, markdown);
 		});
 	}
 

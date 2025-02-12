@@ -6,6 +6,7 @@ import {
 	HeadingsComponent,
 	LinkComponent,
 	ListStyleToolbarComponent,
+	MarkdownFormater,
 	RichTextInputComponent,
 	TextStyleComponent,
 	TextStyleToolbarComponent,
@@ -13,6 +14,7 @@ import {
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { cleanupTemplate, generateInputs } from 'stories/helpers/stories';
 import { StoryModelDisplayComponent } from 'stories/helpers/story-model-display.component';
+import { RICH_TEXT_FORMATER } from '../../../../../../packages/ng/forms/rich-text-input/formaters/rich-text-formater';
 
 export default {
 	title: 'Documentation/Forms/Fields/RichTextField/Angular',
@@ -31,6 +33,12 @@ export default {
 				ReactiveFormsModule,
 				BrowserAnimationsModule,
 				StoryModelDisplayComponent,
+			],
+			providers: [
+				{
+					provide: RICH_TEXT_FORMATER,
+					useFactory: () => new MarkdownFormater(),
+				},
 			],
 		}),
 	],
