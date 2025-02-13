@@ -2,6 +2,7 @@
 @use '@lucca-front/scss/src/commons/utils/a11y';
 @use '@lucca-front/icons/src/icon/exports' as icon;
 @use '@lucca-front/scss/src/commons/utils/namespace';
+@use '@lucca-front/scss/src/commons/utils/keyframe';
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
 	display: flex;
@@ -69,11 +70,19 @@
 			margin-block-end: var(--pr-t-spacings-50);
 		}
 
-		.multipleSelect-arrow {
+		.multipleSelect-arrow,
+		.multipleSelect-searchIcon {
 			@include icon.M;
 			color: var(--components-multiSelect-arrow-color);
 			transition-property: transform;
 			transition-duration: var(--commons-animations-durations-standard);
+			animation-duration: var(--commons-animations-durations-fast);
+			animation-name: fadeIn;
+			@include keyframe.fadeIn;
+		}
+
+		.multipleSelect-searchIcon {
+			display: none;
 		}
 
 		.multipleSelect-pill-displayer-label {
