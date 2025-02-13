@@ -54,6 +54,10 @@ storybook-root,
 		&:has(.demo-QAtable-list.mod-white) {
 			background-color: white;
 		}
+
+		&:has(.demo-QAtable-list.mod-black) {
+			background-color: #333333;
+		}
 	}
 }
 
