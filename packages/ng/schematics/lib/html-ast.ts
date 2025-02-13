@@ -1,28 +1,27 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
-import { ParsedTemplate, TmplAstBoundAttribute, TmplAstElement, TmplAstNode, TmplAstTextAttribute } from '@angular/compiler';
+import type { ParsedTemplate, TmplAstBoundAttribute, TmplAstElement, TmplAstNode, TmplAstTextAttribute } from '@angular/compiler';
 import { createSourceFile, ScriptTarget } from 'typescript';
 import { applyUpdates, updateContent } from './file-update.js';
 import { replaceStringLiterals } from './typescript-ast.js';
+import { currentSchematicContext } from './lf-schematic-context';
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
-export type AngularCompilerLib = typeof import('@angular/compiler');
 export type TemplateNode = ParsedTemplate['nodes'] extends Array<infer S> ? S : never;
 
 export class HtmlAstVisitor<TNode extends TemplateNode> {
 	private nodes: TNode[];
 
 	public constructor(
-		nodes: TNode[] | TNode,
-		private lib: AngularCompilerLib,
+		nodes: TNode[] | TNode
 	) {
 		this.nodes = Array.isArray(nodes) ? nodes : [nodes];
 	}
 
 	public visitElements(elementFilter: string | RegExp, cb: (attr: TmplAstElement) => void): void {
 		this.visitNodes((node) => {
-			if (node instanceof this.lib.TmplAstElement) {
+			if (node instanceof currentSchematicContext.angularCompiler.TmplAstElement) {
 				if (this.matchFilter(node.name, elementFilter)) {
 					cb(node);
 				}
@@ -32,7 +31,7 @@ export class HtmlAstVisitor<TNode extends TemplateNode> {
 
 	public visitAttribute(attributeFilter: string | RegExp, cb: (attr: TmplAstTextAttribute) => void): void {
 		this.visitNodes((node) => {
-			if (node instanceof this.lib.TmplAstElement || node instanceof this.lib.TmplAstTemplate || node instanceof this.lib.TmplAstContent) {
+			if (node instanceof currentSchematicContext.angularCompiler.TmplAstElement || node instanceof currentSchematicContext.angularCompiler.TmplAstTemplate || node instanceof currentSchematicContext.angularCompiler.TmplAstContent) {
 				for (const attr of node.attributes) {
 					if (this.matchFilter(attr.name, attributeFilter)) {
 						cb(attr);
@@ -44,7 +43,7 @@ export class HtmlAstVisitor<TNode extends TemplateNode> {
 
 	public visitElementWithAttribute(elementFilter: string | RegExp, attributeFilter: string | RegExp, cb: (elem: TmplAstElement, attr: TmplAstTextAttribute) => void): void {
 		this.visitNodes((node) => {
-			if (node instanceof this.lib.TmplAstElement) {
+			if (node instanceof currentSchematicContext.angularCompiler.TmplAstElement) {
 				if (this.matchFilter(node.name, elementFilter)) {
 					for (const attr of node.attributes) {
 						if (this.matchFilter(attr.name, attributeFilter)) {
@@ -58,7 +57,7 @@ export class HtmlAstVisitor<TNode extends TemplateNode> {
 
 	public visitBoundAttribute(attributeFilter: string | RegExp, cb: (attr: TmplAstBoundAttribute) => void): void {
 		this.visitNodes((node) => {
-			if (node instanceof this.lib.TmplAstElement || node instanceof this.lib.TmplAstTemplate) {
+			if (node instanceof currentSchematicContext.angularCompiler.TmplAstElement || node instanceof currentSchematicContext.angularCompiler.TmplAstTemplate) {
 				for (const input of node.inputs) {
 					if (this.matchFilter(input.name, attributeFilter)) {
 						cb(input);
@@ -75,12 +74,12 @@ export class HtmlAstVisitor<TNode extends TemplateNode> {
 	private visit(cb: (node: TemplateNode) => void, nodes: TemplateNode[]): void {
 		for (const node of nodes) {
 			cb(node);
-			if (node instanceof this.lib.TmplAstIfBlock) {
+			if (node instanceof currentSchematicContext.angularCompiler.TmplAstIfBlock) {
 				// Visit @if branches
 				node.branches.forEach((branch) => {
 					this.visit(cb, branch.children);
 				});
-			} else if (node instanceof this.lib.TmplAstForLoopBlock) {
+			} else if (node instanceof currentSchematicContext.angularCompiler.TmplAstForLoopBlock) {
 				// Visit @for's children
 				this.visit(cb, node.children);
 
@@ -88,11 +87,11 @@ export class HtmlAstVisitor<TNode extends TemplateNode> {
 					// If we have an @empty block, visit its children too
 					this.visit(cb, node.empty.children);
 				}
-			} else if (node instanceof this.lib.TmplAstSwitchBlock) {
+			} else if (node instanceof currentSchematicContext.angularCompiler.TmplAstSwitchBlock) {
 				node.cases.forEach((caseNode) => {
 					this.visit(cb, caseNode.children);
 				});
-			} else if (node instanceof this.lib.TmplAstDeferredBlock || node instanceof this.lib.TmplAstElement || node instanceof this.lib.TmplAstTemplate) {
+			} else if (node instanceof currentSchematicContext.angularCompiler.TmplAstDeferredBlock || node instanceof currentSchematicContext.angularCompiler.TmplAstElement || node instanceof currentSchematicContext.angularCompiler.TmplAstTemplate) {
 				// Visit @defer and classic AST elements
 				this.visit(cb, node.children);
 			}
@@ -105,20 +104,19 @@ export class HtmlAstVisitor<TNode extends TemplateNode> {
 }
 
 export class HtmlAst extends HtmlAstVisitor<TemplateNode> {
-	public constructor(content: string, lib: AngularCompilerLib) {
+	public constructor(content: string) {
 		super(
-			lib.parseTemplate(content, 'migration.html', {
+			currentSchematicContext.angularCompiler.parseTemplate(content, 'migration.html', {
 				preserveWhitespaces: true,
-				enableBlockSyntax: true,
-			}).nodes,
-			lib,
+				enableBlockSyntax: true
+			}).nodes
 		);
 	}
 }
 
-export function updateCssClassNames(content: string, oldClassToNewClass: Record<string, string>, lib: AngularCompilerLib): string {
+export function updateCssClassNames(content: string, oldClassToNewClass: Record<string, string>): string {
 	return updateContent(content, (updates) => {
-		const root = new HtmlAst(content, lib);
+		const root = new HtmlAst(content);
 		const visitedAttributes = new WeakSet<TmplAstNode>();
 		const cssClassesToUpdate = new Set(Object.keys(oldClassToNewClass));
 
@@ -136,7 +134,7 @@ export function updateCssClassNames(content: string, oldClassToNewClass: Record<
 				updates.push({
 					position: offset,
 					oldContent: classAttr.value,
-					newContent: classes.map((cl) => oldClassToNewClass[cl] || cl).join(' '),
+					newContent: classes.map((cl) => oldClassToNewClass[cl] || cl).join(' ')
 				});
 			}
 		});
@@ -156,12 +154,12 @@ export function updateCssClassNames(content: string, oldClassToNewClass: Record<
 			updates.push({
 				position: boundAttr.keySpan.start.offset,
 				oldContent: boundAttr.keySpan.details || '',
-				newContent: boundAttr.keySpan.details?.replace(`class.${cl}`, `class.${oldClassToNewClass[cl]}`) || '',
+				newContent: boundAttr.keySpan.details?.replace(`class.${cl}`, `class.${oldClassToNewClass[cl]}`) || ''
 			});
 		});
 
 		root.visitBoundAttribute('ngClass', (boundAttr) => {
-			if (!(boundAttr.value instanceof lib.ASTWithSource)) {
+			if (!(boundAttr.value instanceof currentSchematicContext.angularCompiler.ASTWithSource)) {
 				return;
 			}
 
@@ -171,23 +169,23 @@ export function updateCssClassNames(content: string, oldClassToNewClass: Record<
 
 			visitedAttributes.add(boundAttr);
 
-			if (boundAttr.valueSpan && boundAttr.value instanceof lib.ASTWithSource) {
+			if (boundAttr.valueSpan && boundAttr.value instanceof currentSchematicContext.angularCompiler.ASTWithSource) {
 				const attrValue = boundAttr.value.source || '';
 				const sourcefile = createSourceFile('', attrValue, ScriptTarget.ESNext);
 
 				updates.push({
 					position: boundAttr.valueSpan.start.offset,
 					oldContent: attrValue,
-					newContent: applyUpdates(attrValue, replaceStringLiterals(sourcefile, oldClassToNewClass)),
+					newContent: applyUpdates(attrValue, replaceStringLiterals(sourcefile, oldClassToNewClass))
 				});
 			}
 		});
 	});
 }
 
-export function extractAllCssClassNames(content: string, lib: AngularCompilerLib): string[] {
+export function extractAllCssClassNames(content: string): string[] {
 	const allClasses = new Set<string>();
-	const root = new HtmlAst(content, lib);
+	const root = new HtmlAst(content);
 
 	root.visitAttribute('class', (classAttr) => classAttr.value.split(' ').forEach((cls) => allClasses.add(cls)));
 
@@ -200,9 +198,9 @@ export function extractAllCssClassNames(content: string, lib: AngularCompilerLib
 	return [...allClasses];
 }
 
-export function extractAllHtmlElementNames(content: string, lib: AngularCompilerLib): string[] {
+export function extractAllHtmlElementNames(content: string): string[] {
 	const allElements = new Set<string>();
-	const root = new HtmlAst(content, lib);
+	const root = new HtmlAst(content);
 
 	root.visitElements(/.*/, (element) => allElements.add(element.name));
 
