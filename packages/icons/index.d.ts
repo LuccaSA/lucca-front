@@ -4,6 +4,8 @@
  ***********************************************/
 
 export type LuccaIcon =
+	| 'soundMegaphone'
+	| 'emojiSmile'
 	| 'app'
 	| 'apps'
 	| 'nineTiles'
