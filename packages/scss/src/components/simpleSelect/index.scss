@@ -12,6 +12,13 @@
 		}
 	}
 
+	&:has(.simpleSelect-field-input:focus-visible),
+	&:has(.simpleSelect-field-input[aria-expanded='true']) {
+		&:not(:has(.simpleSelect-field-input:read-only)) {
+			@include searchable;
+		}
+	}
+
 	&:has(.simpleSelect-field-input[aria-invalid='true']) {
 		@include invalid;
 	}

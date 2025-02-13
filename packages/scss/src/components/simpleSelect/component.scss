@@ -1,5 +1,6 @@
 @use '@lucca-front/icons/src/icon/exports' as icon;
 @use '@lucca-front/scss/src/commons/utils/namespace';
+@use '@lucca-front/scss/src/commons/utils/keyframe';
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
 	display: block;
@@ -64,9 +65,16 @@
 			margin-inline-start: var(--components-simpleSelect-gap);
 			color: var(--components-simpleSelect-arrow-color);
 			transition: transform var(--commons-animations-durations-standard) ease;
+			animation-duration: var(--commons-animations-durations-fast);
+			animation-name: fadeIn;
+			@include keyframe.fadeIn;
 
 			.lucca-icon {
 				@include icon.M;
+			}
+
+			&.mod-search {
+				display: none;
 			}
 		}
 	}
