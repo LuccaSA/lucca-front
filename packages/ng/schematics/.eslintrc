@@ -1,0 +1,26 @@
+{
+	"extends": [
+		"../../../.eslintrc",
+		"plugin:prettier/recommended"
+	],
+	"overrides": [
+		{
+			"files": [
+				"*.ts"
+			],
+			"rules": {
+				// OUR RULES
+				"no-console": [
+					0
+				],
+				"@typescript-eslint/no-require-imports": [
+					0
+				],
+				"@typescript-eslint/no-unsafe-assignment": [
+					0
+				],
+				"array-element-newline": "off"
+			}
+		}
+	]
+}

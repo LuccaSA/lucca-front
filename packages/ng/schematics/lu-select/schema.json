@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema",
-  "$id": "LuccaFrontTokensSpacing",
-  "title": "Lucca Front Tokens Spacing Schema",
+  "$id": "LuccaFrontLuSelect",
+  "title": "Lucca Front lu-select migration into new selects",
   "type": "object",
   "properties": {
     "dryRun": {
@@ -17,6 +17,11 @@
     "verbose": {
       "type": "boolean",
       "description": "Enable verbose logging.",
+      "default": false
+    },
+    "noComments": {
+      "type": "boolean",
+      "description": "Don't put comments about select migration rejections in result files.",
       "default": false
     }
   }
