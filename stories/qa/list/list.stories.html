@@ -1,132 +1,128 @@
-<h1>List</h1>
-
-<!-- Basics -->
-<section class="contentSection">
-	<h2>List</h2>
-	<ul class="list">
-		<li class="list-item">
-			<div class="list-item-content">
-				<h4 class="list-item-content-title">List item title 1</h4>
-				<p class="list-item-content-description">List item description 1</p>
-			</div>
-			<div class="list-item-actions">
-				<button type="button" class="button mod-text mod-onlyIcon mod-S" type="button">
-					<span aria-hidden="true" class="lucca-icon icon-officePen"></span>
-					<span class="u-mask">Edit</span>
-				</button>
-				<button type="button" class="button mod-text mod-onlyIcon mod-S" type="button">
-					<span aria-hidden="true" class="lucca-icon icon-trashDelete"></span>
-					<span class="u-mask">Delete</span>
-				</button>
-			</div>
-		</li>
-		<li class="list-item">
-			<div class="list-item-content">
-				<h4 class="list-item-content-title">List item title 2</h4>
-				<p class="list-item-content-description">List item description 2</p>
-			</div>
-			<div class="list-item-actions">
-				<button type="button" class="button mod-text mod-onlyIcon mod-S" type="button">
-					<span aria-hidden="true" class="lucca-icon icon-officePen"></span>
-					<span class="u-mask">Edit</span>
-				</button>
-				<button type="button" class="button mod-text mod-onlyIcon mod-S" type="button">
-					<span aria-hidden="true" class="lucca-icon icon-trashDelete"></span>
-					<span class="u-mask">Delete</span>
-				</button>
-			</div>
-		</li>
-		<li class="list-item">
-			<div class="list-item-content">
-				<h4 class="list-item-content-title">List item title 3</h4>
-				<p class="list-item-content-description">List item description 3</p>
-			</div>
-			<div class="list-item-actions">
-				<button type="button" class="button mod-text mod-onlyIcon mod-S" type="button">
-					<span aria-hidden="true" class="lucca-icon icon-officePen"></span>
-					<span class="u-mask">Edit</span>
-				</button>
-				<button type="button" class="button mod-text mod-onlyIcon mod-S" type="button">
-					<span aria-hidden="true" class="lucca-icon icon-trashDelete"></span>
-					<span class="u-mask">Delete</span>
-				</button>
-			</div>
-		</li>
-	</ul>
-	<em><b>Tip:</b> Just remove <code class="code">list-item-actions</code> to have a full width content list.</em>
-</section>
-<section class="contentSection">
-	<h2>Clickable list element</h2>
-	<ul class="list">
-		<li class="list-item mod-clickable">
-			<div class="list-item-content">
-				<h4 class="list-item-content-title">List item title 1</h4>
-				<p class="list-item-content-description">List item description 1</p>
-			</div>
-			<div class="list-item-actions">
-				<button type="button" class="button mod-text mod-onlyIcon mod-S" type="button">
-					<span aria-hidden="true" class="lucca-icon icon-officePen"></span>
-					<span class="u-mask">Edit</span>
-				</button>
-				<button type="button" class="button mod-text mod-onlyIcon mod-S" type="button">
-					<span aria-hidden="true" class="lucca-icon icon-trashDelete"></span>
-					<span class="u-mask">Delete</span>
-				</button>
-			</div>
-		</li>
-		<li class="list-item mod-clickable">
-			<div class="list-item-content">
-				<h4 class="list-item-content-title">List item title 2</h4>
-				<p class="list-item-content-description">List item description 2</p>
-			</div>
-			<div class="list-item-actions">
-				<button type="button" class="button mod-text mod-onlyIcon mod-S" type="button">
-					<span aria-hidden="true" class="lucca-icon icon-officePen"></span>
-					<span class="u-mask">Edit</span>
-				</button>
-				<button type="button" class="button mod-text mod-onlyIcon mod-S" type="button">
-					<span aria-hidden="true" class="lucca-icon icon-trashDelete"></span>
-					<span class="u-mask">Delete</span>
-				</button>
-			</div>
-		</li>
-	</ul>
-
-	<em><b>Tip:</b> Put your click on <code class="code">list-item</code>.</em><br />
-	<em
-		><b>Tip:</b> To prevent a double <code class="code">list-item</code> / <code class="code">Button</code>
-		click, you can use
-		<code class="code">.preventDefault()</code> & <code class="code">.stopPropagation()</code> on
-		<code class="code">button mod-text mod-onlyIcon mod-S</code> click function.</em
-	><br />
-	<em><b>Tip:</b> You can also use a <code class="code">div</code> / <code class="code">a</code> list structure.</em>
-</section>
-
-<section class="contentSection">
-	<h2>Draggable list</h2>
-	<ul class="list">
-		<li class="list-item mod-draggable">
-			<div class="list-item-handler"></div>
-			<div class="list-item-content">
-				<h4 class="list-item-content-title">List item title 1</h4>
-				<p class="list-item-content-description">List item description 1</p>
-			</div>
-			<button class="clear list-clear" type="button">
-				<span class="u-mask">clear</span>
-			</button>
-		</li>
-		<li class="list-item mod-draggable">
-			<div class="list-item-handler"></div>
-			<div class="list-item-content">
-				<h4 class="list-item-content-title">List item title 2</h4>
-				<p class="list-item-content-description">List item description 2</p>
-			</div>
-			<button class="clear list-clear" type="button">
-				<span class="u-mask">clear</span>
-			</button>
-		</li>
-	</ul>
-</section>
+<table class="demo-QAtable">
+	<tbody>
+		<tr>
+			<td>Default</td>
+			<td style="width: 100%">
+				<ul class="list">
+					<li class="list-item">
+						<div class="list-item-content">
+							<h4 class="list-item-content-title">List item title 1</h4>
+							<p class="list-item-content-description">List item description 1</p>
+						</div>
+						<div class="list-item-actions">
+							<button type="button" class="button mod-text mod-onlyIcon mod-S" type="button">
+								<span aria-hidden="true" class="lucca-icon icon-officePen"></span>
+								<span class="u-mask">Edit</span>
+							</button>
+							<button type="button" class="button mod-text mod-onlyIcon mod-S" type="button">
+								<span aria-hidden="true" class="lucca-icon icon-trashDelete"></span>
+								<span class="u-mask">Delete</span>
+							</button>
+						</div>
+					</li>
+					<li class="list-item">
+						<div class="list-item-content">
+							<h4 class="list-item-content-title">List item title 2</h4>
+							<p class="list-item-content-description">List item description 2</p>
+						</div>
+						<div class="list-item-actions">
+							<button type="button" class="button mod-text mod-onlyIcon mod-S" type="button">
+								<span aria-hidden="true" class="lucca-icon icon-officePen"></span>
+								<span class="u-mask">Edit</span>
+							</button>
+							<button type="button" class="button mod-text mod-onlyIcon mod-S" type="button">
+								<span aria-hidden="true" class="lucca-icon icon-trashDelete"></span>
+								<span class="u-mask">Delete</span>
+							</button>
+						</div>
+					</li>
+					<li class="list-item">
+						<div class="list-item-content">
+							<h4 class="list-item-content-title">List item title 3</h4>
+							<p class="list-item-content-description">List item description 3</p>
+						</div>
+						<div class="list-item-actions">
+							<button type="button" class="button mod-text mod-onlyIcon mod-S" type="button">
+								<span aria-hidden="true" class="lucca-icon icon-officePen"></span>
+								<span class="u-mask">Edit</span>
+							</button>
+							<button type="button" class="button mod-text mod-onlyIcon mod-S" type="button">
+								<span aria-hidden="true" class="lucca-icon icon-trashDelete"></span>
+								<span class="u-mask">Delete</span>
+							</button>
+						</div>
+					</li>
+				</ul>
+			</td>
+		</tr>
+		<tr>
+			<td>Clickable</td>
+			<td>
+				<ul class="list">
+					<li class="list-item mod-clickable">
+						<div class="list-item-content">
+							<h4 class="list-item-content-title">List item title 1</h4>
+							<p class="list-item-content-description">List item description 1</p>
+						</div>
+						<div class="list-item-actions">
+							<button type="button" class="button mod-text mod-onlyIcon mod-S" type="button">
+								<span aria-hidden="true" class="lucca-icon icon-officePen"></span>
+								<span class="u-mask">Edit</span>
+							</button>
+							<button type="button" class="button mod-text mod-onlyIcon mod-S" type="button">
+								<span aria-hidden="true" class="lucca-icon icon-trashDelete"></span>
+								<span class="u-mask">Delete</span>
+							</button>
+						</div>
+					</li>
+					<li class="list-item mod-clickable">
+						<div class="list-item-content">
+							<h4 class="list-item-content-title">List item title 2</h4>
+							<p class="list-item-content-description">List item description 2</p>
+						</div>
+						<div class="list-item-actions">
+							<button type="button" class="button mod-text mod-onlyIcon mod-S" type="button">
+								<span aria-hidden="true" class="lucca-icon icon-officePen"></span>
+								<span class="u-mask">Edit</span>
+							</button>
+							<button type="button" class="button mod-text mod-onlyIcon mod-S" type="button">
+								<span aria-hidden="true" class="lucca-icon icon-trashDelete"></span>
+								<span class="u-mask">Delete</span>
+							</button>
+						</div>
+					</li>
+				</ul>
+			</td>
+		</tr>
+		<tr>
+			<td>Draggrable</td>
+			<td>
+				<ul class="list">
+					<li class="list-item mod-draggable">
+						<div class="list-item-handler"></div>
+						<div class="list-item-content">
+							<h4 class="list-item-content-title">List item title 1</h4>
+							<p class="list-item-content-description">List item description 1</p>
+						</div>
+						<button class="clear list-clear" type="button">
+							<span class="u-mask">clear</span>
+						</button>
+					</li>
+					<li class="list-item mod-draggable">
+						<div class="list-item-handler"></div>
+						<div class="list-item-content">
+							<h4 class="list-item-content-title">List item title 2</h4>
+							<p class="list-item-content-description">List item description 2</p>
+						</div>
+						<button class="clear list-clear" type="button">
+							<span class="u-mask">clear</span>
+						</button>
+					</li>
+				</ul>
+			</td>
+		</tr>
+	</tbody>
+</table>
 
 <!-- To tell the ui-diff tool that the page has finished rendering -->
 <span id="ready"></span>
