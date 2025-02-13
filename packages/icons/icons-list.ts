@@ -4,6 +4,8 @@
  ***********************************************/
 
 export const IconsList = [
+	{ icon: 'soundMegaphone', deprecated: false },
+	{ icon: 'emojiSmile', deprecated: false },
 	{ icon: 'app', deprecated: false },
 	{ icon: 'apps', deprecated: true },
 	{ icon: 'nineTiles', deprecated: true },
