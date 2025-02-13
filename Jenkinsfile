@@ -35,8 +35,8 @@ node(label: CI.getSelectedLinuxNode(script:this)) {
 
 			npmScript(script: 'build')
 			npmScript(script: 'jenkins-test', skip: isPR)
-			npmScript(script: 'lint:ng', skip: isPR)
-			npmScript(script: 'lint:scss', skip: isPR)
+			npmScript(script: 'lint:nglint', skip: isPR)
+			npmScript(script: 'lint:stylelint', skip: isPR)
 
 			def shouldDeploy = isPR || isRc || isMaster || isRelease || isPreRelease
 			loggableStage('Deploy', !shouldDeploy) {
