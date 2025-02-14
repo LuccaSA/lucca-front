@@ -65,9 +65,6 @@
 			margin-inline-start: var(--components-simpleSelect-gap);
 			color: var(--components-simpleSelect-arrow-color);
 			transition: transform var(--commons-animations-durations-standard) ease;
-			animation-duration: var(--commons-animations-durations-fast);
-			animation-name: fadeIn;
-			@include keyframe.fadeIn;
 
 			.lucca-icon {
 				@include icon.M;

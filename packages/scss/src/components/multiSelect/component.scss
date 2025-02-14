@@ -76,9 +76,6 @@
 			color: var(--components-multiSelect-arrow-color);
 			transition-property: transform;
 			transition-duration: var(--commons-animations-durations-standard);
-			animation-duration: var(--commons-animations-durations-fast);
-			animation-name: fadeIn;
-			@include keyframe.fadeIn;
 		}
 
 		.multipleSelect-searchIcon {
