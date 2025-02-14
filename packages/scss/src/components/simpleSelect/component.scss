@@ -1,6 +1,5 @@
 @use '@lucca-front/icons/src/icon/exports' as icon;
 @use '@lucca-front/scss/src/commons/utils/namespace';
-@use '@lucca-front/scss/src/commons/utils/keyframe';
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
 	display: block;
