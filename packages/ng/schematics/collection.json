@@ -30,6 +30,11 @@
       "description": "Replace actionIcon usages with button mod-onlyIcon",
       "factory": "./action-icon/index",
       "schema": "./action-icon/schema.json"
+    },
+    "cdn-urls": {
+      "description": "Replace cdn urls with their new location",
+      "factory": "./cdn-urls/index",
+      "schema": "./cdn-urls/schema.json"
     }
   }
 }
