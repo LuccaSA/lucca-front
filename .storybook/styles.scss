@@ -54,6 +54,10 @@ storybook-root,
 		&:has(.demo-QAtable-list.mod-white) {
 			background-color: white;
 		}
+
+		&:has(.demo-QAtable-list.mod-black) {
+			background-color: #333333;
+		}
 	}
 }
 
@@ -65,5 +69,10 @@ storybook-root,
 
 	&.mod-white {
 		background-color: white;
+	}
+
+	&.mod-column {
+		flex-direction: column;
+		align-items: flex-start;
 	}
 }

@@ -24,10 +24,17 @@
 		@include expanded;
 	}
 
+	&:has(.multipleSelect-displayer-search:focus-visible),
+	&:has([aria-expanded='true']) {
+		&:not(:has(.multipleSelect-displayer-search:read-only)) {
+			@include searchable;
+		}
+	}
+
 	&.is-selected {
 		@include selected;
-  }
-  
+	}
+
 	&.mod-filterPill {
 		@include filterPill;
 	}
