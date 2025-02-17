@@ -1,5 +1,5 @@
 {
-	"name": "@lucca/stylelint-config",
+	"name": "@lucca-front/stylelint-config",
 	"version": "0.0.0",
 	"description": "Lucca Front stylelint configuration",
 	"repository": {

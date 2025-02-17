@@ -12,7 +12,7 @@ This package is a shareable stylelint configuration.
 ## Install
 
 ```
-npm i --save-dev stylelint @lucca/stylelint-config
+npm i --save-dev stylelint @lucca-front/stylelint-config
 ```
 
 ## Avoid conflicts
@@ -27,7 +27,7 @@ Use this package in a _stylelint.config.js_ file in your repository:
 
 ```js
 module.exports = {
-	extends: ['@lucca/stylelint-config'],
+	extends: ['@lucca-front/stylelint-config'],
 	rules: {},
 };
 ```
@@ -72,7 +72,7 @@ Please add a comment if you're doing so: use `styleling-disable[-*] -- comment`.
 
 ## Testing locally
 
-In your stylelint configuration, temporarily replace `extends: ['@lucca/stylelint-config'],` by `extends: ['RELATIVE_PATH_TO/stylelint-config'],`.
+In your stylelint configuration, temporarily replace `extends: ['@lucca-front/stylelint-config'],` by `extends: ['RELATIVE_PATH_TO/stylelint-config'],`.
 
 The configuration from your local repository should be applied right away.
 
