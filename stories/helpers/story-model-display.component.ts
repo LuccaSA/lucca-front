@@ -13,11 +13,11 @@ import { CalloutComponent } from '@lucca-front/ng/callout';
 	</lu-callout>`,
 	styles: `
 		pr-story-model-display {
-			margin-top: var(--pr-t-spacings-400);
+			margin-block-start: var(--pr-t-spacings-400);
 			display: block;
 		}
 		pr-story-model-display .callout-content {
-			min-width: 0;
+			min-inline-size: 0;
 		}
 
 		pr-story-model-display pre {

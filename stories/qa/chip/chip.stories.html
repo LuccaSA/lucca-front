@@ -1,81 +1,60 @@
-<h1>Chips</h1>
-
-<!-- Basics -->
-<section class="contentSection">
-	<h2>Basics</h2>
-	<div class="chip">
-		John Doe
-		<button type="button" class="chip-kill">
-			<span class="u-mask">delete</span>
-		</button>
-	</div>
-	<div class="chip">
-		John Doe
-		<button type="button" class="chip-kill">
-			<span class="u-mask">delete</span>
-		</button>
-	</div>
-	<div class="chip">
-		John Doe
-		<button type="button" class="chip-kill">
-			<span class="u-mask">delete</span>
-		</button>
-	</div>
-</section>
-
-<!-- Palette -->
-<section class="contentSection">
-	<h2>Palette</h2>
-	<div class="chip palette-product">
-		John Doe
-		<button type="button" class="chip-kill">
-			<span class="u-mask">delete</span>
-		</button>
-	</div>
-	<div class="chip palette-product">
-		John Doe
-		<button type="button" class="chip-kill">
-			<span class="u-mask">delete</span>
-		</button>
-	</div>
-	<div class="chip palette-product">
-		John Doe
-		<button type="button" class="chip-kill">
-			<span class="u-mask">delete</span>
-		</button>
-	</div>
-</section>
-
-<!-- Unkillable -->
-<section class="contentSection">
-	<h2>Unkillable</h2>
-	<div data-xrayhtml>
-		<div class="chip">John Doe</div>
-		<div class="chip">John Doe</div>
-		<div class="chip">John Doe</div>
-	</div>
-</section>
-
-<!-- Disabled -->
-<section class="contentSection">
-	<h2>Disabled</h2>
-	<div data-xrayhtml>
-		<div class="chip is-disabled">
-			John Doe
-			<button type="button" class="chip-kill">
-				<span class="u-mask">delete</span>
-			</button>
-		</div>
-		<div class="chip is-disabled">John Doe</div>
-		<div class="chip is-disabled palette-product">
-			John Doe
-			<button type="button" class="chip-kill">
-				<span class="u-mask">delete</span>
-			</button>
-		</div>
-		<div class="chip is-disabled palette-product">John Doe</div>
-	</div>
-</section>
+<table class="demo-QAtable">
+	<tbody>
+		<tr>
+			<td>Default</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<div class="chip">
+						John Doe
+						<button type="button" class="chip-kill">
+							<span class="u-mask">delete</span>
+						</button>
+					</div>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Product</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<div class="chip palette-product">
+						John Doe
+						<button type="button" class="chip-kill">
+							<span class="u-mask">delete</span>
+						</button>
+					</div>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Unkillable</td>
+			<td>
+				<div class="demo-QAtable-list"><div class="chip">John Doe</div></div>
+			</td>
+		</tr>
+		<tr>
+			<td>Disabled</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<div class="chip is-disabled">
+						John Doe
+						<button type="button" class="chip-kill">
+							<span class="u-mask">delete</span>
+						</button>
+					</div>
+					<div class="chip is-disabled">John Doe</div>
+					<div class="chip is-disabled palette-product">
+						John Doe
+						<button type="button" class="chip-kill">
+							<span class="u-mask">delete</span>
+						</button>
+					</div>
+					<div class="chip is-disabled palette-product">John Doe</div>
+				</div>
+			</td>
+		</tr>
+	</tbody>
+</table>
 
 <!-- To tell the ui-diff tool that the page has finished rendering -->
 <span id="ready"></span>

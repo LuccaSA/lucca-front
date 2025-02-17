@@ -5,8 +5,8 @@
 @use '@lucca-front/scss/src/commons/utils/reset';
 
 @mixin stickyColumn {
-	width: auto;
-	min-width: 100%;
+	inline-size: auto;
+	min-inline-size: 100%;
 	background-color: var(--palettes-neutral-0);
 
 	//All stickies columns
@@ -17,35 +17,39 @@
 
 	//Left sticked columns
 	[class*='mod-stickyColumn-left'] {
-		left: var(--components-tableSticked-column-sticky-offset);
+		inset-inline-start: var(--components-tableSticked-column-sticky-offset);
 
 		//left sticked columns shadow
 		&.mod-stickyColumn-shadow,
 		.stickyColumn-shadow-wrapper::before {
-			left: calc(var(--components-tableSticked-column-sticky-offset) - var(--components-tableSticked-column-sticky-shadow-width));
+			inset-inline-start: calc(
+				var(--components-tableSticked-column-sticky-offset) - var(--components-tableSticked-column-sticky-shadow-width)
+			);
 		}
 		.stickyColumn-shadow-wrapper::after {
-			left: var(--components-tableSticked-column-sticky-offset);
+			inset-inline-start: var(--components-tableSticked-column-sticky-offset);
 			background-image: linear-gradient(to right, var(--components-tableSticked-column-sticky-shadow-color), transparent);
 		}
 	}
 
 	//Right sticked columns
 	[class*='mod-stickyColumn-right'] {
-		right: var(--components-tableSticked-column-sticky-offset);
+		inset-inline-end: var(--components-tableSticked-column-sticky-offset);
 
 		//right sticked columns shadow
 		.stickyColumn-shadow-wrapper {
 			justify-items: end;
-			width: calc(var(--components-tableSticked-column-sticky-shadow-width) * 3);
-			right: calc(var(--components-tableSticked-column-sticky-shadow-width) * -1);
+			inline-size: calc(var(--components-tableSticked-column-sticky-shadow-width) * 3);
+			inset-inline-end: calc(var(--components-tableSticked-column-sticky-shadow-width) * -1);
 		}
 		&.mod-stickyColumn-shadow,
 		.stickyColumn-shadow-wrapper::before {
-			right: calc(var(--components-tableSticked-column-sticky-offset) - var(--components-tableSticked-column-sticky-shadow-width));
+			inset-inline-end: calc(
+				var(--components-tableSticked-column-sticky-offset) - var(--components-tableSticked-column-sticky-shadow-width)
+			);
 		}
 		.stickyColumn-shadow-wrapper::after {
-			right: var(--components-tableSticked-column-sticky-offset);
+			inset-inline-end: var(--components-tableSticked-column-sticky-offset);
 			background-image: linear-gradient(to left, var(--components-tableSticked-column-sticky-shadow-color), transparent);
 		}
 	}
@@ -53,19 +57,18 @@
 	//Sticky columns drop shadow
 	.mod-stickyColumn-shadow {
 		display: none;
-		width: 0;
-		min-width: 0;
+		inline-size: 0;
+		min-inline-size: 0;
 		padding: 0;
 	}
 
 	.stickyColumn-shadow-wrapper {
 		position: absolute;
-		top: 0;
-		bottom: 0;
+		inset-block: 0;
 		display: grid;
 		grid-template-columns: calc(var(--components-tableSticked-column-sticky-shadow-width) * 2);
 		grid-template-areas: 'cell';
-		width: calc(var(--components-tableSticked-column-sticky-shadow-width) * 2);
+		inline-size: calc(var(--components-tableSticked-column-sticky-shadow-width) * 2);
 
 		&::before,
 		&::after {
@@ -74,11 +77,11 @@
 			grid-area: cell;
 		}
 		&::after {
-			width: var(--components-tableSticked-column-sticky-shadow-width);
+			inline-size: var(--components-tableSticked-column-sticky-shadow-width);
 		}
 		&::before {
 			z-index: 1;
-			width: var(--components-tableSticked-column-sticky-shadow-width);
+			inline-size: var(--components-tableSticked-column-sticky-shadow-width);
 			background-color: var(--palettes-neutral-0);
 		}
 	}
@@ -101,26 +104,26 @@
 
 @mixin stickyHeader {
 	.table-head-row-cell {
-		top: 0;
+		inset-block-start: 0;
 	}
 	.mod-stickyHeader-shadow .table-body-row-cell {
-		top: calc(var(--table-stickyHeader-shadow-offset) + var(--components-tableSticked-column-sticky-shadow-width));
+		inset-block-start: calc(var(--table-stickyHeader-shadow-offset) + var(--components-tableSticked-column-sticky-shadow-width));
 	}
 }
 
 @mixin stickyHeaderBanner {
 	.table-head-row-cell {
-		top: var(--commons-banner-height);
+		inset-block-start: var(--commons-banner-height);
 	}
 	.mod-stickyHeader-shadow .table-body-row-cell {
-		top: calc(
+		inset-block-start: calc(
 			var(--table-stickyHeader-shadow-offset) + var(--commons-banner-height) + var(--components-tableSticked-column-sticky-shadow-width)
 		);
 	}
 }
 
 @mixin stickyHeaderCommon {
-	margin-top: var(--components-tableSticked-column-sticky-shadow-width);
+	margin-block-start: var(--components-tableSticked-column-sticky-shadow-width);
 	.table-head-row-cell {
 		background-color: var(--palettes-neutral-0);
 		position: sticky;
@@ -138,9 +141,9 @@
 @mixin stickyHeaderShadow {
 	[class*='row-cell'] {
 		position: sticky;
-		top: var(--table-stickyHeader-shadow-offset);
+		inset-block-start: var(--table-stickyHeader-shadow-offset);
 		z-index: 4;
-		height: 0;
+		block-size: 0;
 		padding: 0;
 		border: 0;
 		background: transparent;
@@ -148,16 +151,16 @@
 
 	.stickyHeader-shadow-wrapper {
 		position: absolute;
-		top: calc(var(--components-tableSticked-column-sticky-shadow-width) * -1);
-		width: 100%;
-		height: 0;
+		inset-block-start: calc(var(--components-tableSticked-column-sticky-shadow-width) * -1);
+		inline-size: 100%;
+		block-size: 0;
 		border: 0;
 
 		&::after {
 			content: '';
 			display: block;
-			height: var(--components-tableSticked-column-sticky-shadow-width);
-			width: 100%;
+			block-size: var(--components-tableSticked-column-sticky-shadow-width);
+			inline-size: 100%;
 			background-image: linear-gradient(to bottom, var(--components-tableSticked-column-sticky-shadow-color), transparent);
 		}
 	}
@@ -165,7 +168,7 @@
 	+ .table-body-row,
 	+ .table-foot-row {
 		[class*='row-cell'] {
-			border-top: 0;
+			border-block-start: 0;
 		}
 	}
 }

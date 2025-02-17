@@ -2,7 +2,7 @@
 @use '@lucca-front/scss/src/commons/utils/namespace';
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
-	margin-bottom: 1.2rem;
+	margin-block-end: 1.2rem;
 
 	.titleSection-title,
 	h1,
@@ -11,7 +11,7 @@
 	h4,
 	h5,
 	h6 {
-		margin-bottom: 0;
+		margin-block-end: 0;
 	}
 
 	.u-h1,
@@ -20,7 +20,7 @@
 	.u-h4,
 	.u-h5,
 	.u-h6 {
-		margin-bottom: 0 !important;
+		margin-block-end: 0 !important;
 	}
 
 	@at-root ($atRoot) {

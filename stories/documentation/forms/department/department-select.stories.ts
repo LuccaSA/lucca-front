@@ -15,6 +15,7 @@ import { Meta, StoryFn, applicationConfig } from '@storybook/angular';
 				[appInstanceId]="appInstanceId"
 				[operations]="operations"
 				[filters]="filters"
+				[uniqueOperation]="uniqueOpration"
 				placeholder="Select a departement"
 				data-testid="lu-select"
 			></lu-department-select>
@@ -27,6 +28,7 @@ import { Meta, StoryFn, applicationConfig } from '@storybook/angular';
 				[appInstanceId]="appInstanceId"
 				[operations]="operations"
 				[filters]="filters"
+				[uniqueOperation]="uniqueOpration"
 				placeholder="Select a departement"
 				multiple="true"
 				data-testid="lu-select"
@@ -39,6 +41,7 @@ class DepartmentStory {
 	@Input() appInstanceId: number = null;
 	@Input() operations: number[] = [];
 	@Input() filters: string[] = [];
+	@Input() uniqueOpration: number = null;
 }
 
 export default {
@@ -67,6 +70,7 @@ import { LuDepartmentSelectInputComponent } from '@lucca-front/ng/department';
 			[appInstanceId]="appInstanceId"
 			[operations]="operations"
 			[filters]="filters"
+			[uniqueOperation]="uniqueOpration"
 		></lu-department-select>
 	</label>
 	\`,
@@ -75,6 +79,7 @@ class DepartmentStory {
 	@Input() appInstanceId: number = null;
 	@Input() operations: number[] = [];
 	@Input() filters: string[] = [];
+	@Input() uniqueOpration: number = null;
 }`;
 // Select.args = {
 // 	appInstanceId: 15,

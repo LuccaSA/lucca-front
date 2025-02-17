@@ -1,28 +1,26 @@
 @use '@lucca-front/scss/src/commons/utils/media';
 
 @mixin sticky {
-	top: var(--commons-banner-height);
+	inset-block-start: var(--commons-banner-height);
 	position: fixed;
-	left: 0;
-	right: 0;
+	inset-inline: 0;
 
 	@include media.max('S') {
-		top: calc(var(--commons-banner-height) + var(--commons-navSide-mobile-toggle-height));
-		left: 0 !important;
+		inset-block-start: calc(var(--commons-banner-height) + var(--commons-navSide-mobile-toggle-height));
+		inset-inline-start: 0 !important;
 	}
 }
 
 @mixin nav {
 	align-items: center;
-	padding-bottom: 0;
-	padding-left: 0;
-	padding-top: 0;
+	padding-inline-start: 0;
+	padding-block: 0;
 }
 
 @mixin left {
-	left: var(--commons-navSide-width);
+	inset-inline-start: var(--commons-navSide-width);
 
 	@include media.max('S') {
-		top: var(--commons-navSide-mobile-toggle-height);
+		inset-block-start: var(--commons-navSide-mobile-toggle-height);
 	}
 }

@@ -1,0 +1,18 @@
+@mixin hide($suffix: '') {
+	-ms-overflow-style: none #{$suffix};
+	scrollbar-width: none #{$suffix};
+
+	&::-webkit-scrollbar {
+		display: none #{$suffix};
+  }
+}
+
+@mixin scrollblock($suffix: '') {
+	&,
+	body {
+		touch-action: none #{$suffix};
+		overscroll-behavior: none #{$suffix};
+		-webkit-overflow-scrolling: auto #{$suffix};
+		overflow: hidden #{$suffix};
+	}
+}

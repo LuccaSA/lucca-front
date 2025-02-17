@@ -1,3 +1,4 @@
+@use '@lucca-front/scss/src/commons/utils/media';
 @use 'exports' as *;
 
 .dateRangeField {
@@ -8,7 +9,15 @@
 		@include S;
 	}
 
-	&:not(.mod-auto) {
+	&.mod-filterPill {
+		@include filterPill;
+
+		@include media.max('XS') {
+			@include filterPillCompact;
+		}
+	}
+
+	&:not(.mod-auto, .mod-filterPill) {
 		&.mod-day {
 			@include day;
 

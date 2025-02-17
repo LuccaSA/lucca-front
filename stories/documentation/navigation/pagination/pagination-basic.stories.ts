@@ -9,8 +9,8 @@ export default {
 
 function getTemplate(args: PaginationBasicStory): string {
 	return `
-	<nav class="pagination" role="navigation" aria-labelledby="pagination-count">
-		<div id="pagination-count" class="pagination-count">
+	<nav class="pagination" role="navigation" aria-label="Pagination des résultats">
+		<div class="pagination-count">
 			<span class="pagination-count-current">
 				<span class="u-mask">Résultats de </span>
 				1<span aria-hidden="true"> – </span>

@@ -1,1 +1,3 @@
-{{value}}
+<span class="numericBadge-value" [luTooltip]="value" [luTooltipDisabled]="typeof this.value !== 'number' || loading || maxValue >= +value"
+	>{{this.displayValue()}}</span
+>

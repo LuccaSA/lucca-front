@@ -16,7 +16,7 @@
 	}
 
 	.calloutDisclosure-details {
-		margin-left: calc(var(--components-calloutDisclosure-paddingHorizontal) + 2rem);
+		margin-inline-start: calc(var(--components-calloutDisclosure-paddingHorizontal) + 2rem);
 	}
 
 	.calloutFeedbackList {
@@ -30,6 +30,6 @@
 	}
 
 	.calloutDisclosure-details {
-		margin-left: var(--components-calloutDisclosure-paddingHorizontal);
+		margin-inline-start: var(--components-calloutDisclosure-paddingHorizontal);
 	}
 }

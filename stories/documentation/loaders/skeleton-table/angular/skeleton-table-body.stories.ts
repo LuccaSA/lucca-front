@@ -33,8 +33,8 @@ const Template: StoryFn<SkeletonTableStory> = (args) => ({
 	styles: [
 		`
 		th:first-child {
-			width: 15rem;
-		}	
+			inline-size: 15rem;
+		}
 	`,
 	],
 });

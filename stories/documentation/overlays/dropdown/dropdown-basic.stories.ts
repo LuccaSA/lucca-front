@@ -41,7 +41,7 @@ class DropdownStoriesModule {}
 		<span class="dropdown-list-option-action is-disabled" luDropdownItem>
 			<span aria-hidden="true" class="lucca-icon icon-eye"></span>
 			Prévisualiser
-		</a>
+		</span>
 	</li>
 	<li class="dropdown-list-option">
 		<a routerLink="." fragment="link2" class="dropdown-list-option-action" luDropdownItem>

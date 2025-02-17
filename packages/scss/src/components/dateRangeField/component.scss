@@ -3,7 +3,7 @@
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
 	display: block;
-	max-width: var(--components-dateRangeField-maxWidth);
+	max-inline-size: var(--components-dateRangeField-maxWidth);
 
 	@at-root ($atRoot) {
 		.dateRangeField-fieldset {
@@ -14,7 +14,7 @@
 
 		.dateRangeField-fieldset-content {
 			position: relative;
-			width: var(--components-dateRangeField-content-width);
+			inline-size: var(--components-dateRangeField-content-width);
 
 			&::before {
 				content: '';
@@ -48,8 +48,8 @@
 		.dateRangeField-fieldset-input-value {
 			&.textField-input-value {
 				position: relative;
-				padding-left: var(--components-dateRangeField-content-inlineStart);
-				padding-right: var(--components-dateRangeField-content-inlineEnd);
+				padding-inline-start: var(--components-dateRangeField-content-inlineStart);
+				padding-inline-end: var(--components-dateRangeField-content-inlineEnd);
 
 				&::placeholder {
 					color: var(--components-dateRangeField-content-placeholderColor);
@@ -63,7 +63,7 @@
 
 		.dateRangeField-fieldset-arrow {
 			position: absolute;
-			left: calc(50% - calc(var(--pr-t-spacings-400) + var(--pr-t-spacings-150)));
+			inset-inline-start: calc(50% - calc(var(--pr-t-spacings-400) + var(--pr-t-spacings-150)));
 			color: var(--palettes-neutral-700);
 			pointer-events: none;
 			border-radius: var(--commons-borderRadius-M);

@@ -1,15 +1,17 @@
 .demo-animation {
 	padding: 1rem;
 	text-align: center;
-	margin: 0.5rem 0 0.25rem;
+	margin-block-start: 0.5rem 0.25rem;
+	margin-inline: 0;
 }
 
 .animated-block {
 	background-color: var(--palettes-neutral-0);
 	border: 1px solid var(--palettes-neutral-200);
-	padding: 0.5em 1em;
-	height: 60px;
-	width: 100%;
+	padding-block: 0.5em;
+	padding-inline: 1em;
+	block-size: 60px;
+	inline-size: 100%;
 }
 
 .scss-demo-block {
@@ -18,8 +20,8 @@
 }
 
 .ng-demo-block {
-	height: 100px;
+	block-size: 100px;
 	h3 .button {
-		margin-left: 1rem;
+		margin-inline-start: 1rem;
 	}
 }

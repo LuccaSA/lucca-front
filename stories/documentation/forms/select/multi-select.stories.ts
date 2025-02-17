@@ -19,11 +19,11 @@ import {
 	LuMultiSelectCounterDisplayerComponent,
 	LuMultiSelectDisplayerInputDirective,
 	LuMultiSelectInputComponent,
+	LuMultiSelection,
 	LuMultiSelectWithSelectAllDirective,
 } from '@lucca-front/ng/multi-select';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 import { applicationConfig, Meta, moduleMetadata } from '@storybook/angular';
-import { LuMultiSelection } from 'packages/ng/multi-select/select.model';
 import { interval, map } from 'rxjs';
 import { startWith } from 'rxjs/operators';
 import { HiddenArgType } from 'stories/helpers/common-arg-types';
@@ -293,6 +293,22 @@ export const User = generateStory({
 	},
 });
 
+export const UserWithSelectAll = generateStory({
+	name: 'User Select (select all)',
+	description: "Pour saisir des utilisateurs, il suffit d'utiliser la directive `users` et `withSelectAll`",
+	template: `<lu-multi-select
+	placeholder="Placeholder..."
+	users
+	withSelectAll
+	withSelectAllDisplayerLabel="utilisateurs"
+	[(ngModel)]="selectedUsers"
+></lu-multi-select>`,
+	neededImports: {
+		'@lucca-front/ng/multi-select': ['LuMultiSelectInputComponent'],
+		'@lucca-front/ng/core-select/user': ['LuCoreSelectUsersDirective'],
+	},
+});
+
 export const FormerUser = generateStory({
 	name: 'User Select (with former)',
 	description: "Pour saisir des utilisateurs, il suffit d'utiliser la directive `users`",
@@ -421,7 +437,7 @@ export const testDynamicDisabled = generateStory({
 export const AddOption = generateStory({
 	name: 'Add option',
 	description: "Pour ajouter une option, il suffit d'utiliser l'input `addOptionStrategy` et de s'abonner à l'output `addOption`. Le label est customisable via l'input `addOptionLabel`.",
-	template: `<div class="u-marginBottomS">There is {{ legumes.length }} legumes in the list.</div>
+	template: `<div class="pr-u-marginBlockEnd200">There is {{ legumes.length }} legumes in the list.</div>
 <lu-multi-select
 	#selectRef
 	placeholder="Placeholder..."

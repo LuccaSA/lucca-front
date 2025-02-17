@@ -5,7 +5,7 @@
 
 // to test locally (without the CDN)
 // $font-path: '../../font/lucca-icons' !default;
-$font-path: '//cdn.lucca.fr/lucca-front/icons/font/lucca-icons' !default;
+$font-path: '//cdn.lucca.fr/transverse/prisme/icons/font/lucca-icons' !default;
 $font-name: 'Lucca icons' !default;
 $isNamespaced: false !default;
 
@@ -318,6 +318,7 @@ $icons: (
 	'location': '\e949',
 	'map_pin': '\e967',
 	'pin': '\e967',
+	'map_plan': '\ea06',
 	'maths_divide': '\e954',
 	'divide': '\e954',
 	'maths_equals': '\e93d',
@@ -374,6 +375,7 @@ $icons: (
 	'office_compass': '\e9a0',
 	'compass': '\e9a0',
 	'office_electrical_plug': '\e9bd',
+	'office_first_aid': '\ea07',
 	'office_pen': '\e928',
 	'edit': '\e928',
 	'edit_mini': '\e928',
@@ -389,6 +391,7 @@ $icons: (
 	'people_add': '\e902',
 	'user_add': '\e902',
 	'adduser': '\e902',
+	'people_arrow_up': '\ea05',
 	'people_group': '\e93c',
 	'user_group': '\e93c',
 	'group': '\e93c',
@@ -479,12 +482,12 @@ $icons: (
 	'sign_shield_error': '\e9fd',
 	'sign_shield_success': '\e9fe',
 	'sign_shield_warning': '\ea00',
-	'sign_webhook': '\ea04',
 	'sign_success': '\e9ed',
 	'success': '\e9ed',
 	'sign_translation': '\e9fc',
 	'sign_warning': '\e992',
 	'warning': '\e992',
+	'sign_webhook': '\ea04',
 	'star': '\e961',
 	'unstared': '\e961',
 	'star_filled': '\e97f',

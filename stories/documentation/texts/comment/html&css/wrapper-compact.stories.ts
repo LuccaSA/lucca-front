@@ -62,8 +62,8 @@ const Template: StoryFn<CommentWrapperCompactStory> = (args) => ({
 	template: getTemplate(args),
 	styles: [
 		`.avatar {
-			width: 1.5rem;
-			height: 1.5rem;
+			inline-size: 1.5rem;
+			block-size: 1.5rem;
 			border-radius: 50%;
 			background: var(--palettes-neutral-100) url("https://cdn.lucca.fr/lucca-front/avatars/finn.png") center;
 			background-size: cover;

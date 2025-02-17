@@ -105,6 +105,11 @@ export class LuMultiSelectWithSelectAllDirective<TValue> extends ɵIsSelectedStr
 			const oldMode = this.#mode();
 			this.#mode.set(this.#getNextMode(oldMode, values));
 			this.#onChange?.(this.#selectAllValue());
+
+			// When all values are selected/unselected one by one, we should reset internal select value to avoid weird behavior when selecting/unselecting after that
+			if (values.length && (this.#mode() === 'all' || this.#mode() === 'none')) {
+				this.#selectWriteValue([]);
+			}
 		});
 	}
 

@@ -114,7 +114,7 @@ const Template: StoryFn<ArrowBasicStory> = (args) => ({
 		:host {
 			display: block;
 		}`,
-		args.neutral === true ? ':host { background-color: var(--palettes-neutral-0); margin: -15px -15px; padding: 15px 15px; }' : '',
+		args.neutral === true ? ':host { background-color: var(--palettes-neutral-0); margin: -15px; padding: 15px; }' : '',
 	],
 });
 

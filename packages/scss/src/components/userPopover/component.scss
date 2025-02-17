@@ -2,8 +2,8 @@
 @use '@lucca-front/scss/src/commons/utils/namespace';
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
-	width: 23.5rem;
-	max-width: calc(100vw - var(--pr-t-spacings-200) * 2);
+	inline-size: 23.5rem;
+	max-inline-size: calc(100vw - var(--pr-t-spacings-200) * 2);
 	padding: var(--pr-t-spacings-200);
 
 	@at-root ($atRoot) {
@@ -14,7 +14,7 @@
 		}
 
 		.userPopover-details-info {
-			min-width: 0;
+			min-inline-size: 0;
 		}
 
 		.userPopover-details-info-name {
@@ -39,7 +39,7 @@
 		}
 
 		.userPopover-details-info-detail {
-			margin-bottom: 0;
+			margin-block-end: 0;
 			font-size: var(--sizes-S-fontSize);
 			line-height: var(--sizes-S-lineHeight);
 		}
@@ -71,7 +71,8 @@
 		&:not(.avatar) {
 			@include avatar.XXXL;
 
-			margin: var(--pr-t-spacings-50) 0;
+			margin-block: var(--pr-t-spacings-50);
+			margin-inline: 0;
 		}
 	}
 }

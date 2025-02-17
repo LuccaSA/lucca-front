@@ -7,6 +7,8 @@ export const LU_DATE2_TRANSLATIONS = new InjectionToken('LuDate2Translations', {
 });
 
 export interface Date2Translate {
+	from: string;
+	to: string;
 	directionKeysTip: string;
 	pickDate: string;
 	previous: string;

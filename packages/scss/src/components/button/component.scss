@@ -12,8 +12,8 @@
 	padding: var(--components-button-padding);
 	transition-property: background-color, color, border-color, box-shadow;
 	transition-duration: var(--commons-animations-durations-fast);
-	width: var(--components-button-width);
-	min-width: var(--components-button-minWidth);
+	inline-size: var(--components-button-width);
+	min-inline-size: var(--components-button-minWidth);
 	font-size: var(--components-button-font-size);
 	gap: var(--components-button-gap);
 	pointer-events: var(--components-button-pointerEvents);

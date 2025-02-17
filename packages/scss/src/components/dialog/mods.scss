@@ -23,8 +23,6 @@
 }
 
 @mixin drawer {
-	@include keyframe.slideFromRight;
-
 	--components-dialog-animationOpening: slideFromRight;
 	--components-dialog-maxHeight: none;
 	--components-dialog-maxHeightFallback: var(--components-dialog-maxHeight);
@@ -32,11 +30,11 @@
 	--components-dialog-maxWidth: calc(100vw - var(--pr-t-spacings-200));
 	--components-dialog-borderRadius: var(--commons-borderRadius-L) 0 0 var(--commons-borderRadius-L);
 	--components-dialog-inset: 0 0 0 auto;
+
+	@include keyframe.slideFromRight;
 }
 
 @mixin fromBottom {
-	@include keyframe.slideFromBottom;
-
 	--components-dialog-animationOpening: slideFromBottom;
 	--components-dialog-maxHeight: calc(100dvh - var(--pr-t-spacings-200));
 	--components-dialog-maxHeightFallback: calc(100vh - var(--pr-t-spacings-200));
@@ -46,6 +44,8 @@
 
 	--components-dialog-width: 100%;
 	--components-dialog-height: fit-content;
+
+	@include keyframe.slideFromBottom;
 }
 
 @mixin maxContent {

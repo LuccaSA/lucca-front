@@ -25,12 +25,12 @@
 			@include icon.generate('arrow_chevron_bottom');
 
 			color: var(--palettes-neutral-600);
-			bottom: var(--components-select-input-padding-vertical);
+			inset-block-end: var(--components-select-input-padding-vertical);
 			font-size: var(--sizes-M-lineHeight);
 			line-height: var(--sizes-M-lineHeight);
 			pointer-events: none;
 			position: absolute;
-			right: var(--components-select-input-padding-horizontal);
+			inset-inline-end: var(--components-select-input-padding-horizontal);
 			transition: transform var(--commons-animations-durations-standard) ease;
 		}
 
@@ -50,9 +50,9 @@
 
 	.lu-select-value {
 		line-height: var(--sizes-M-lineHeight);
-		min-height: calc(var(--components-select-framed-bottom-padding) + var(--sizes-M-lineHeight));
-		padding: var(--components-select-input-padding-vertical) 3.5rem var(--components-select-input-padding-vertical)
-			var(--components-select-input-padding-horizontal);
+		min-block-size: calc(var(--components-select-framed-bottom-padding) + var(--sizes-M-lineHeight));
+		padding-block: var(--components-select-input-padding-vertical);
+		padding-inline: var(--components-select-input-padding-horizontal) 3.5rem;
 		transition: all var(--commons-animations-durations-standard);
 		display: none;
 	}
@@ -60,32 +60,28 @@
 	.lu-select-placeholder {
 		color: var(--palettes-neutral-400);
 		line-height: var(--sizes-M-lineHeight);
-		min-height: calc(var(--components-select-framed-bottom-padding) + var(--sizes-M-lineHeight));
-		padding: var(--components-select-input-padding-vertical) 3.5rem var(--components-select-input-padding-vertical)
-			var(--components-select-input-padding-horizontal);
+		min-block-size: calc(var(--components-select-framed-bottom-padding) + var(--sizes-M-lineHeight));
+		padding-block: var(--components-select-input-padding-vertical);
+		padding-inline: var(--components-select-input-padding-horizontal) 3.5rem;
 		transition: all var(--commons-animations-durations-standard);
 		overflow: hidden;
 		text-overflow: ellipsis;
 		white-space: nowrap;
 	}
 
-	.lu-select-suffix {
-		position: absolute;
-		bottom: var(--pr-t-spacings-150);
-		right: 2.25rem;
-	}
-
+	.lu-select-suffix,
 	.lu-select-clearer {
 		position: absolute;
-		bottom: var(--pr-t-spacings-150);
-		right: 2.25rem;
+		inset-block-end: var(--pr-t-spacings-150);
+		inset-inline-end: 2.25rem;
 	}
 
 	::ng-deep .lu-select-value {
 		.chip {
 			vertical-align: baseline;
-			max-width: 100%;
-			margin: 0 var(--pr-t-spacings-50) var(--pr-t-spacings-50) 0;
+			max-inline-size: 100%;
+			margin-block: 0 var(--pr-t-spacings-50);
+			margin-inline: 0 var(--pr-t-spacings-50);
 			text-overflow: ellipsis;
 			overflow: hidden;
 			vertical-align: top;
@@ -104,11 +100,11 @@
 		.lu-select-placeholder {
 			font-size: var(--sizes-S-fontSize);
 			line-height: var(--sizes-XS-lineHeight);
-			min-height: calc(var(--components-select-framed-bottom-padding) + var(--sizes-XS-lineHeight));
+			min-block-size: calc(var(--components-select-framed-bottom-padding) + var(--sizes-XS-lineHeight));
 		}
 
 		.lu-select-clearer {
-			bottom: var(--pr-t-spacings-100);
+			inset-block-end: var(--pr-t-spacings-100);
 		}
 
 		&::after {
@@ -117,17 +113,16 @@
 		}
 
 		.lu-select-suffix {
-			bottom: 0.5rem;
-			right: 2rem;
+			inset-block-end: 0.5rem;
+			inset-inline-end: 2rem;
 		}
 
 		::ng-deep .lu-select-value {
 			.chip {
-				height: var(--sizes-XS-lineHeight);
+				block-size: var(--sizes-XS-lineHeight);
 				line-height: var(--sizes-XS-lineHeight);
 				font-size: var(--sizes-XS-fontSize);
-				padding-left: var(--pr-t-spacings-50);
-				padding-right: var(--pr-t-spacings-50);
+				padding-inline: var(--pr-t-spacings-50);
 				gap: var(--pr-t-spacings-50);
 			}
 
@@ -141,28 +136,29 @@
 	:host-context(.textfield.mod-framed),
 	:host-context(.form.mod-framed) {
 		&.textfield-input {
-			padding: var(--components-select-framed-top-padding) 0 0;
+			padding-block: var(--components-select-framed-top-padding) 0;
+			padding-inline: 0;
 
 			&::after {
 				color: var(--palettes-neutral-500);
-				bottom: var(--components-select-framed-bottom-padding);
-				right: var(--pr-t-spacings-100);
+				inset-block-end: var(--components-select-framed-bottom-padding);
+				inset-inline-end: var(--pr-t-spacings-100);
 			}
 
 			.lu-select-value {
-				padding: 0 calc(var(--components-select-framed-side-padding) * 3) var(--components-select-framed-bottom-padding)
-					var(--components-select-framed-side-padding);
+				padding-block: 0 var(--components-select-framed-bottom-padding);
+				padding-inline: var(--components-select-framed-side-padding) calc(var(--components-select-framed-side-padding) * 3);
 			}
 
 			.lu-select-placeholder {
 				color: var(--palettes-neutral-400);
-				padding: 0 calc(var(--components-select-framed-side-padding) * 3) var(--components-select-framed-bottom-padding)
-					var(--components-select-framed-side-padding);
+				padding-block: 0 var(--components-select-framed-bottom-padding);
+				padding-inline: var(--components-select-framed-side-padding) calc(var(--components-select-framed-side-padding) * 3);
 			}
 
 			.lu-select-suffix {
-				bottom: var(--components-select-framed-bottom-padding);
-				right: 1.7rem;
+				inset-block-end: var(--components-select-framed-bottom-padding);
+				inset-inline-end: 1.7rem;
 			}
 		}
 	}
@@ -172,8 +168,8 @@
 		.lu-select-value,
 		.lu-select-placeholder {
 			padding: 0;
-			height: auto;
-			padding-top: var(--pr-t-spacings-200);
+			block-size: auto;
+			padding-block-start: var(--pr-t-spacings-200);
 			color: var(--palettes-neutral-800);
 		}
 	}
@@ -182,18 +178,17 @@
 	:host-context(.textfield.mod-material) {
 		&::after {
 			color: var(--palettes-neutral-500);
-			bottom: 0.6rem;
-			right: 0;
+			inset-block-end: 0.6rem;
+			inset-inline-end: 0;
 		}
 
 		.lu-select-value,
 		.lu-select-placeholder {
-			padding-left: 0;
-			padding-right: 0.8rem;
+			padding-inline: 0 0.8rem;
 		}
 
 		.lu-select-suffix {
-			right: calc(2 * var(--components-select-input-padding-horizontal));
+			inset-inline-end: calc(2 * var(--components-select-input-padding-horizontal));
 		}
 
 		&.is-select {
@@ -204,11 +199,11 @@
 
 		&.mod-search {
 			&::after {
-				bottom: 0;
+				inset-block-end: 0;
 			}
 
 			.lu-select-suffix {
-				right: calc(2.75 * var(--components-select-input-padding-horizontal));
+				inset-inline-end: calc(2.75 * var(--components-select-input-padding-horizontal));
 			}
 		}
 	}
@@ -222,14 +217,14 @@
 	// Multiple
 	:host(.mod-multiple) {
 		.lu-select-value {
-			height: auto;
+			block-size: auto;
 			align-items: center;
 		}
 
 		.lu-select-display-wrapper {
 			overflow: visible;
 			white-space: normal;
-			margin-bottom: calc(var(--pr-t-spacings-50) * -1);
+			margin-block-end: calc(var(--pr-t-spacings-50) * -1);
 		}
 	}
 
@@ -281,7 +276,7 @@
 	// Clearable
 	:host-context(.textfield-input.is-clearable) {
 		.lu-select-value {
-			padding-right: 3.5rem;
+			padding-inline-end: 3.5rem;
 		}
 	}
 

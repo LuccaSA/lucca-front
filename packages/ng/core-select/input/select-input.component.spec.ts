@@ -40,7 +40,22 @@ export function runALuSelectInputComponentTestSuite<TValue>(config: LuSelectInpu
 		expect(component.isPanelOpen).toBe(true);
 	});
 
-	it.each(['a', 'A', 'À'])('should openPanel and emit clueChange when pressing %s', async (key) => {
+	it.each(['a', 'A', 'À'])('should openPanel and emit clueChange when pressing %s and select is searchable', async (key) => {
+		// Arrange
+		const event = new KeyboardEvent('keydown', { key });
+		const clueChangeSpy = jest.spyOn(component.clueChange, 'emit');
+		component.clueChange.subscribe(); // Emulate a `(clueChange)=""` binding
+
+		// Act
+		nativeElement.dispatchEvent(event);
+		await fixture.whenStable();
+
+		// Assert
+		expect(component.isPanelOpen).toBe(true);
+		expect(clueChangeSpy).toHaveBeenCalledWith(key);
+	});
+
+	it.each(['a', 'A', 'À'])('should openPanel and not emit clueChange when pressing %s and select is not searchable', async (key) => {
 		// Arrange
 		const event = new KeyboardEvent('keydown', { key });
 		const clueChangeSpy = jest.spyOn(component.clueChange, 'emit');
@@ -51,7 +66,7 @@ export function runALuSelectInputComponentTestSuite<TValue>(config: LuSelectInpu
 
 		// Assert
 		expect(component.isPanelOpen).toBe(true);
-		expect(clueChangeSpy).toHaveBeenCalledWith(key);
+		expect(clueChangeSpy).not.toHaveBeenCalled();
 	});
 
 	it('should openPanel and but not emit clueChange when pressing Space', async () => {

@@ -1,21 +1,20 @@
 @mixin inline {
 	display: inline-block;
-	margin-right: var(--pr-t-spacings-300);
-	margin-top: 0;
-	margin-bottom: 0;
+	margin-inline-end: var(--pr-t-spacings-300);
+	margin-block: 0;
 }
 
 @mixin S {
 	.radio-label {
 		line-height: var(--sizes-S-lineHeight);
-		min-height: var(--sizes-S-lineHeight);
+		min-block-size: var(--sizes-S-lineHeight);
 		font-size: var(--sizes-S-fontSize);
 		padding: var(--components-radio-S-label-padding);
 
 		&::before,
 		&::after {
-			height: var(--components-radio-S-input-size);
-			width: var(--components-radio-S-input-size);
+			block-size: var(--components-radio-S-input-size);
+			inline-size: var(--components-radio-S-input-size);
 		}
 	}
 
@@ -26,7 +25,7 @@
 
 	.radio-input:checked ~ .radio-label {
 		&::after {
-			transform: scale(.5);
+			transform: scale(0.5);
 		}
 	}
 }

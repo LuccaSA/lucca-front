@@ -1,5 +1,5 @@
 <div class="timePicker-fieldset-group-textfield">
-	<label class="formLabel u-mask" id="{{inputId}}-label" for="{{inputId}}-input">{{ label() }}</label>
+	<label class="formLabel u-mask" [attr.id]="inputId + '-label'" [attr.for]="inputId + '-input'">{{ label() }}</label>
 	<div class="timePicker-fieldset-group-textfield">
 		<input
 			#timePickerInput
@@ -7,9 +7,9 @@
 			luInput
 			luInputStandalone
 			inputmode="numeric"
-			id="{{inputId}}-input"
+			[attr.id]="inputId + '-input'"
 			class="timePicker-fieldset-group-textfield-input"
-			attr.aria-labelledby="{{inputId}}-label"
+			[attr.aria-labelledby]="inputId + '-label'"
 			autocomplete="off"
 			[value]="hideValue() ? null : value()"
 			(input)="keysInputHandler($event)"

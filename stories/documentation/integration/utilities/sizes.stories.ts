@@ -39,7 +39,7 @@ const Template: StoryFn<SizesStory> = (args) => ({
 
 				&:last-child {
 					grid-template-columns: 1fr 1fr 1fr;
-					height: 10rem;
+					block-size: 10rem;
 				}
 			}
 		}

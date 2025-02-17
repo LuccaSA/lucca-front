@@ -29,3 +29,41 @@
 		@include icon.XS;
 	}
 }
+
+@mixin filterPill {
+	--components-dateRangeField-maxWidth: none;
+
+	.dateRangeField-fieldset-content {
+		--components-dateRangeField-content-inlineEnd: var(--pr-t-spacings-100);
+		--components-dateRangeField-content-width: calc(50% - var(--pr-t-spacings-100));
+
+		&.mod-start {
+			--components-dateRangeField-content-width: calc(50% + var(--pr-t-spacings-100));
+			--components-dateRangeField-content-inlineEnd: var(--pr-t-spacings-300);
+		}
+	}
+
+	.textField-input-affix-toggle {
+		display: none;
+	}
+
+	.dateRangeField-fieldset-arrow {
+		left: calc(50% - var(--pr-t-spacings-100) - var(--pr-t-spacings-25));
+	}
+
+	.dateRangeField-fieldset-textField.textField {
+		position: relative;
+		z-index: 1;
+		margin-block-start: var(--pr-t-spacings-50);
+		margin-inline: var(--pr-t-spacings-50);
+	}
+
+	.calendarWrapper {
+		margin-inline: calc(var(--pr-t-spacings-100) * -1);
+		margin-block-end: calc(var(--pr-t-spacings-100) * -1);
+	}
+}
+
+@mixin filterPillCompact {
+	--components-dateRangeField-maxWidth: 17.25rem;
+}

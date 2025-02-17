@@ -16,4 +16,8 @@ export class RepeatTimesDirective {
 			this.viewContainerRef.createEmbeddedView(this.templateRef);
 		}
 	}
+
+	public static ngTemplateContextGuard(_dir: RepeatTimesDirective, ctx: unknown): ctx is void {
+		return true;
+	}
 }

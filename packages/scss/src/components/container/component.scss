@@ -1,6 +1,6 @@
 @mixin component {
 	padding: var(--commons-container-padding);
-	max-width: var(--commons-container-maxWidth);
+	max-inline-size: var(--commons-container-maxWidth);
 	margin-inline: var(--commons-container-marginInline);
 	position: relative;
 }

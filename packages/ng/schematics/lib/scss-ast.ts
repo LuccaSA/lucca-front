@@ -11,7 +11,7 @@ export function removeContainerIfEmpty(node: Container | undefined): void {
 		return;
 	}
 
-	if (!node.nodes.length) {
+	if (!node.nodes?.length) {
 		const { parent } = node;
 
 		// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
@@ -97,8 +97,8 @@ export function updateCSSClassNamesInRules(root: Root, mappingOldToNew: Record<s
 			 * In sass we can do such a thing:
 			 * .foo {
 			 * 		padding: {
-			 * 			top: 10px;
-			 * 			bottom: 10px;
+			 * 			block-start: 10px;
+			 * 			block-end: 10px;
 			 * 		}
 			 * }
 			 * "padding:" is considered as a rule but its selector cannot be parsed using postScssSelectorParser

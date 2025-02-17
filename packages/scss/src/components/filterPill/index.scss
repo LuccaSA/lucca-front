@@ -1,0 +1,83 @@
+@use 'exports' as *;
+
+.filterPill {
+	@include vars;
+	@include component;
+
+	&:not(.is-filled) {
+		@include notFilled;
+	}
+
+	&:hover {
+		@include hover;
+	}
+
+	&:active,
+	&:has(:active) {
+		@include active;
+	}
+
+	&.is-comboboxHidden {
+		@include comboboxHidden;
+	}
+
+	&:has(.filterPill-combobox:focus-visible) {
+		@include focusVisible;
+	}
+
+	&:has(.filterPill-combobox[aria-expanded='true']) {
+		@include opened;
+	}
+
+	&.is-filled {
+		@include filled;
+
+		&:hover {
+			@include filledHover;
+		}
+
+		&:has(.filterPill-combobox:active) {
+			@include filledActive;
+		}
+	}
+
+	&.mod-checkbox {
+		@include checkbox;
+
+		&:has(.filterPill-checkbox-input:focus-visible) {
+			@include focusVisible;
+		}
+
+		&:has(.filterPill-checkbox-input:checked) {
+			@include checkboxChecked;
+
+			&:hover {
+				@include filledHover;
+			}
+
+			&:has(.filterPill-combobox:active) {
+				@include filledActive;
+			}
+		}
+
+		&:has(.filterPill-checkbox-input:disabled) {
+			@include checkboxDisabled;
+
+			&:has(.filterPill-checkbox-input:checked) {
+				@include checkboxCheckedDisabled;
+			}
+		}
+	}
+
+	&.mod-button {
+		@include button;
+	}
+
+	&:has(.filterPill-combobox:disabled) {
+		@include disabled;
+	}
+
+	&.is-hidden {
+		@include hidden;
+	}
+}

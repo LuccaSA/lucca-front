@@ -47,7 +47,7 @@ const Template: StoryFn<GaugeBasicStory> = (args) => ({
 		`
 		:host {
 			display: block;
-			height: 4rem;
+			block-size: 4rem;
 		}`,
 	],
 });

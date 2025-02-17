@@ -25,7 +25,8 @@
 	}
 
 	.user-info {
-		margin: auto 0;
+		margin-block: auto;
+		margin-inline: 0;
 	}
 
 	&.mod-wordBreak {
@@ -43,8 +44,8 @@
 		flex-direction: column;
 
 		lu-user-picture {
-			margin-right: 0;
-			margin-bottom: 0.8em;
+			margin-inline-end: 0;
+			margin-block-end: 0.8em;
 		}
 
 		.user-info {

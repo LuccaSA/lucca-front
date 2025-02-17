@@ -10,7 +10,8 @@
 	font-size: var(--sizes-S-fontSize);
 	line-height: var(--sizes-XS-lineHeight);
 	font-weight: 600;
-	padding: var(--pr-t-spacings-50) var(--pr-t-spacings-100);
+	padding-block: var(--pr-t-spacings-50);
+	padding-inline: var(--pr-t-spacings-100);
 
 	.label-icon {
 		margin: 0;

@@ -39,7 +39,7 @@ const Template: StoryFn<DialogDrawerStory> = (args: DialogDrawerStory) => ({
 		`
 			:host {
 				display: block;
-				height: 30rem;
+				block-size: 30rem;
 			}
 		`,
 	],

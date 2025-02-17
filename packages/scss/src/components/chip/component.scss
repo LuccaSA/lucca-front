@@ -12,7 +12,8 @@
 	gap: var(--pr-t-spacings-100);
 	position: relative;
 	vertical-align: middle;
-	padding: calc(var(--pr-t-spacings-50) / 2) var(--pr-t-spacings-100);
+	padding-block: calc(var(--pr-t-spacings-50) / 2);
+	padding-inline: var(--pr-t-spacings-100);
 	font-size: var(--components-chip-fontSize);
 	line-height: var(--components-chip-lineHeight);
 
@@ -25,8 +26,8 @@
 			grid-template-rows: 1fr;
 			grid-template-areas: 'main';
 			place-items: center;
-			width: var(--pr-t-spacings-300);
-			height: var(--pr-t-spacings-300);
+			inline-size: var(--pr-t-spacings-300);
+			block-size: var(--pr-t-spacings-300);
 			margin: calc(var(--pr-t-spacings-75) * -1);
 			flex-shrink: 0;
 			cursor: pointer;
@@ -35,8 +36,8 @@
 			&::after {
 				content: '';
 				grid-area: main;
-				width: var(--components-chip-kill-size);
-				height: var(--components-chip-kill-size);
+				inline-size: var(--components-chip-kill-size);
+				block-size: var(--components-chip-kill-size);
 			}
 
 			&::before {

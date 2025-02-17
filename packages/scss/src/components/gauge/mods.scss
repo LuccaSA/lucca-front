@@ -3,12 +3,12 @@
 }
 
 @mixin vertical {
-	width: var(--components-gauge-height);
-	height: 100%;
+	inline-size: var(--components-gauge-height);
+	block-size: 100%;
 
 	.gauge-bar {
-		border-left-width: var(--components-gauge-height);
-		border-bottom-width: 0;
-		border-left-style: solid;
+		border-inline-start-width: var(--components-gauge-height);
+		border-inline-start-style: solid;
+		border-block-end-width: 0;
 	}
 }

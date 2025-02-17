@@ -21,3 +21,24 @@
 @mixin yearS {
 	--components-dateField-maxWidth: var(--components-dateField-maxWidthYearS);
 }
+
+@mixin filterPill {
+	--components-dateField-maxWidth: none;
+
+	.textField-input-affix-clear,
+	.textField-input-affix-toggle {
+		display: none;
+	}
+
+	.dateField-textField.textField {
+		position: relative;
+		z-index: 1;
+		margin-block-start: var(--pr-t-spacings-50);
+		margin-inline: var(--pr-t-spacings-50);
+	}
+
+	.calendarWrapper {
+		margin-inline: calc(var(--pr-t-spacings-100) * -1);
+		margin-block-end: calc(var(--pr-t-spacings-100) * -1);
+	}
+}

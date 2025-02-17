@@ -38,8 +38,8 @@ const Template: StoryFn<TextfieldPasswordStory> = (args) => ({
 	styles: [
 		`
 		.textfield {
-			float: left;
-			margin-right: 1rem;
+			float: inline-start;
+			margin-inline-end: 1rem;
 		}`,
 	],
 });

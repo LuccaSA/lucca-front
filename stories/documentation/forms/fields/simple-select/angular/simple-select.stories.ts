@@ -85,7 +85,7 @@ export const Basic: StoryObj<
 		hiddenLabel: false,
 		placeholder: 'Placeholder',
 		clearable: true,
-		inlineMessage: 'Helper Text',
+		inlineMessage: 'Helper text',
 		inlineMessageState: 'default',
 		loading: false,
 		disabled: false,

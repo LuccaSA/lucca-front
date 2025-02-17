@@ -43,7 +43,7 @@ const Template: StoryFn<TextfieldSizeStory> = (args) => ({
 	template: getTemplate(args),
 	styles: [
 		`.form-field {
-			margin-bottom: var(--pr-t-spacings-200);
+			margin-block-end: var(--pr-t-spacings-200);
 		}`,
 	],
 });

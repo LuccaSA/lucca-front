@@ -20,13 +20,14 @@
 			border-radius: var(--commons-borderRadius-M) 0 0 var(--commons-borderRadius-M);
 		}
 
-		&:last-child, &.mod-more {
+		&:last-child,
+		&.mod-more {
 			border-radius: 0 var(--commons-borderRadius-M) var(--commons-borderRadius-M) 0;
 		}
 
 		&:not(:first-child) {
 			&.outlined {
-				margin-left: -2px;
+				margin-inline-start: -2px;
 			}
 		}
 
@@ -46,7 +47,7 @@
 		flex-grow: 1;
 
 		.button:not(.mod-more) {
-			width: 100%;
+			inline-size: 100%;
 			border-radius: 0;
 		}
 
@@ -67,15 +68,15 @@
 		flex-wrap: wrap;
 
 		.button.mod-more {
-			height: 100%;
-			min-height: 2.25rem;
+			block-size: 100%;
+			min-block-size: 2.25rem;
 
 			&.mod-S {
-				min-height: 2rem;
+				min-block-size: 2rem;
 			}
 
 			&.mod-XS {
-				min-height: 1.5rem;
+				min-block-size: 1.5rem;
 			}
 
 			&::before {

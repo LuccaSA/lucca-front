@@ -1,2 +1,2 @@
-@import '_definitions';
-@include optionSearcherStyle;
+@use '_definitions';
+@include definitions.optionSearcherStyle;

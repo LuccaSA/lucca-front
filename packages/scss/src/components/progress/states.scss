@@ -1,6 +1,6 @@
 @mixin state {
 	.progress-bar {
-		width: 100% !important;
+		inline-size: 100% !important;
 
 		&::after {
 			display: none;

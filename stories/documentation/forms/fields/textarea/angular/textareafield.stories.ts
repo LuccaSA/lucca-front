@@ -82,7 +82,7 @@ export const Basic: StoryObj<TextareaInputComponent & { disabled: boolean; requi
 		required: true,
 		hiddenLabel: false,
 		disabled: false,
-		inlineMessage: 'Helper Text',
+		inlineMessage: 'Helper text',
 		inlineMessageState: 'default',
 		placeholder: 'Placeholder',
 		tooltip: 'Je suis un message d’aide',

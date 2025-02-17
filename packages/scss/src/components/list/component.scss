@@ -3,16 +3,16 @@
 @mixin component($atRoot: namespace.$defaultAtRoot) {
 	background-color: var(--pr-t-elevation-surface-raised);
 	box-shadow: var(--pr-t-elevation-shadow-raised);
-	margin-bottom: var(--components-list-margin-bottom);
+	margin-block-end: var(--components-list-margin-bottom);
 	list-style: none;
 	padding: 0;
 
 	@at-root ($atRoot) {
 		.list-item {
-			border-bottom-width: var(--commons-divider-width);
-			border-bottom-color: var(--commons-divider-color);
+			border-block-end-width: var(--commons-divider-width);
+			border-block-end-color: var(--commons-divider-color);
+			border-block-end-style: solid;
 			color: var(--palettes-neutral-800);
-			border-bottom-style: solid;
 			align-items: center;
 			display: flex;
 			position: relative;
@@ -27,7 +27,7 @@
 			padding: var(--components-list-padding);
 			color: var(--palettes-neutral-800);
 			text-decoration: none;
-			width: 100%;
+			inline-size: 100%;
 		}
 
 		.list-item-content-title {
@@ -42,9 +42,9 @@
 			padding: var(--components-list-padding);
 			transition-duration: var(--commons-animations-durations-fast);
 			transition-property: all;
-			margin-left: auto;
+			margin-inline-start: auto;
 			white-space: nowrap;
-			padding-left: 0;
+			padding-inline-start: 0;
 		}
 	}
 }

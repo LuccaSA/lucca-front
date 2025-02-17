@@ -1,20 +1,19 @@
+@use '@lucca-front/scss/src/commons/utils/overflow';
+
 .cdk-global-overlay-wrapper {
-	height: 100%;
-	left: 0;
+	block-size: 100%;
+	inset-inline-start: 0;
+	inset-block-start: 0;
 	pointer-events: none;
-	top: 0;
-	width: 100%;
+	inline-size: 100%;
 	display: flex;
 	position: absolute;
 	z-index: 1000;
 }
 
 .cdk-global-scrollblock {
-	&,
-	body {
-		touch-action: none;
-		overscroll-behavior: none;
-		-webkit-overflow-scrolling: auto;
-		overflow: hidden;
-	}
+	position: static !important;
+	width: auto !important;
+
+	@include overflow.scrollblock('!important');
 }

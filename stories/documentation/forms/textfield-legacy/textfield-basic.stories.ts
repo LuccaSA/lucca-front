@@ -91,7 +91,7 @@ const Template: StoryFn<TextfieldBasicStory> = (args) => ({
 		:host {
 			display: block;
 		}`,
-		args.invert === true ? ':host { background-color: #333333; margin: -15px -15px; padding: 15px 15px; }' : '',
+		args.invert === true ? ':host { background-color: #333333; margin: -15px; padding: 15px; }' : '',
 	],
 });
 

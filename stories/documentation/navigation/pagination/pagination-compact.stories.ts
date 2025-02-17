@@ -9,7 +9,7 @@ export default {
 
 function getTemplate(args: PaginationCompactStory): string {
 	return `
-	<nav class="pagination mod-compact" role="navigation" aria-labelledby="pagination-count">
+	<nav class="pagination mod-compact" role="navigation" aria-label="Pagination">
 		<div class="pagination-scrolling">
 			<button type="button" class="button mod-onlyIcon mod-text mod-S" disabled>
 				<span aria-hidden="true" class="lucca-icon icon-arrowChevronLeft"></span>

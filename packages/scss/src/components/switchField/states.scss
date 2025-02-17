@@ -4,7 +4,7 @@
 		border-color: var(--palettes-product-700);
 
 		&::before {
-			left: 50%;
+			inset-inline-start: 50%;
 		}
 	}
 

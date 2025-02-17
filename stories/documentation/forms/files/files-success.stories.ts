@@ -15,13 +15,13 @@ function getTemplate(args: FilesSuccessStory): string {
 			<span aria-hidden="true" class="file-icon lucca-icon icon-signSuccess"></span>
 			<span aria-hidden="true" class="file-icon lucca-icon icon-signError"></span>
 			<span class="file-titleName">
-				<span class="file-title pr-u-marginBottom0">File uploaded</span>
+				<span class="file-title pr-u-marginBlockEnd0">File uploaded</span>
 				<span class="file-name">filename.xls</span>
 			</span>
 			<span class="file-or">It’s the wrong file?</span>
 			<span class="file-button button mod-outlined">Select another file</span>
 			<span class="u-mask"> – </span>
-			<span class="file-formats pr-u-marginTop100">Supported file formats: .xls, .xlsx .csv</span>
+			<span class="file-formats pr-u-marginBlockStart100">Supported file formats: .xls, .xlsx .csv</span>
 			<span class="file-progress progress">
 				<span class="progress-bar" style="width: 50%"></span>
 			</span>
@@ -34,7 +34,7 @@ function getTemplate(args: FilesSuccessStory): string {
 			<span aria-hidden="true" class="file-icon lucca-icon icon-signSuccess"></span>
 			<span aria-hidden="true" class="file-icon lucca-icon icon-signError"></span>
 			<span class="file-titleName">
-				<span class="file-title pr-u-marginBottom0">File uploaded</span>
+				<span class="file-title pr-u-marginBlockEnd0">File uploaded</span>
 				<span class="file-formats">Supported file formats: .xls, .xlsx .csv</span>
 				<span class="file-name">filename.xls</span>
 			</span>
@@ -53,7 +53,7 @@ const Template: StoryFn<FilesSuccessStory> = (args) => ({
 	template: getTemplate(args),
 	styles: [
 		`.file {
-			margin-bottom: 1rem;
+			margin-block-end: 1rem;
 		}`,
 	],
 });

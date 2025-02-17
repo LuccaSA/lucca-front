@@ -38,7 +38,7 @@ const Template: StoryFn<TextfieldMessagesStory> = (args) => ({
 		`
 		.textfield {
 			display: inline-flex;
-			margin-right: 1rem;
+			margin-inline-end: 1rem;
 		}`,
 	],
 });

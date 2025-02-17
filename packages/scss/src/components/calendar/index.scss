@@ -14,8 +14,8 @@
 }
 
 .calendar {
-	@include component;
 	@include vars;
+	@include component;
 
 	// if rows have three columns (display for months and years)
 	&:has(.calendar-table-body-row-cell:nth-child(3):last-child) {

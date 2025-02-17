@@ -2,7 +2,7 @@ import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { DurationPickerComponent } from '../../../../packages/ng/time/duration-picker/duration-picker.component';
+import { DurationPickerComponent } from '@lucca-front/ng/time';
 import { cleanupTemplate, generateInputs } from '../../../helpers/stories';
 
 export default {

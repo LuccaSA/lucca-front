@@ -23,6 +23,7 @@ import { DEFAULT_MIN_TIME, DEFAULT_TIME_DECIMAL_PIPE_FORMAT, TimeChangeEvent } f
 import { LU_TIME_PICKER_TRANSLATIONS } from './time-picker.translate';
 
 const MAX_TIME = '23:59:59';
+let nextId = 0;
 
 @Component({
 	selector: 'lu-time-picker',
@@ -43,6 +44,8 @@ const MAX_TIME = '23:59:59';
 export class TimePickerComponent extends BasePickerComponent {
 	protected intl = getIntl(LU_TIME_PICKER_TRANSLATIONS);
 	protected localeId = inject(LOCALE_ID);
+
+	idSuffix = nextId++;
 
 	@ViewChild('anteMeridiemRef')
 	anteMeridiemRef: ElementRef<HTMLInputElement>;

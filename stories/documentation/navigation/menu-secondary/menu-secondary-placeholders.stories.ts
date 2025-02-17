@@ -42,7 +42,7 @@ const Template: StoryFn<MenuSecondaryPlaceholderStory> = (args) => ({
 		`
 		.navSide {
 			position: relative;
-			max-height: 30rem;
+			max-block-size: 30rem;
 		}`,
 	],
 });

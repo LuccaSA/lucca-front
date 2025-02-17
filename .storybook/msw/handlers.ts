@@ -21,6 +21,7 @@ const usersSearchHandler = genericHandler(
 		data: {
 			items: items.map((item) => ({ relevance: 1, item })),
 		},
+		count: items.length,
 	}),
 );
 

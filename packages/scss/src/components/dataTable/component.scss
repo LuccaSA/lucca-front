@@ -7,12 +7,12 @@
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
 	display: table;
-	text-align: left;
-	width: calc(100% + 1px);
-	height: calc(100% + 1px);
+	text-align: start;
+	inline-size: calc(100% + 1px);
+	block-size: calc(100% + 1px);
 	border-spacing: 0;
-	margin-left: -1px;
-	margin-top: -1px;
+	margin-inline-start: -1px;
+	margin-block-start: -1px;
 	table-layout: var(--components-dataTable-tableLayout);
 
 	@at-root ($atRoot) {
@@ -66,7 +66,7 @@
 			text-align: var(--components-dataTable-cell-textAlign);
 
 			&:first-child {
-				width: var(--components-dataTable-cellFirst-width);
+				inline-size: var(--components-dataTable-cellFirst-width);
 			}
 		}
 
@@ -126,6 +126,6 @@
 	.tag,
 	.avatar {
 		display: flex;
-		width: fit-content;
+		inline-size: fit-content;
 	}
 }

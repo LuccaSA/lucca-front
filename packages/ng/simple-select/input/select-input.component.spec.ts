@@ -20,6 +20,6 @@ describe('LuSimpleSelectInputComponent', () => {
 		getFixture: () => fixture,
 		exampleValue: { id: 1, name: 'test' },
 		emptyValue: null,
-		clearerSelector: '.simpleSelect-clear',
+		clearerSelector: '.simpleSelect-field-clear',
 	});
 });

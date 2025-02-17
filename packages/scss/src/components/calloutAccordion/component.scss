@@ -21,7 +21,8 @@
 		.calloutAccordion-summary {
 			display: flex;
 			gap: var(--pr-t-spacings-150);
-			padding: var(--pr-t-spacings-100) var(--pr-t-spacings-150);
+			padding-block: var(--pr-t-spacings-100);
+			padding-inline: var(--pr-t-spacings-150);
 			cursor: pointer;
 
 			&:focus-visible {
@@ -39,13 +40,15 @@
 
 		.calloutAccordion-summary-chevron {
 			color: var(--palettes-neutral-700);
-			margin-left: auto;
+			margin-inline-start: auto;
 		}
 
 		.calloutAccordion-details {
-			margin: 0 3rem;
-			padding: var(--pr-t-spacings-100) 0 var(--pr-t-spacings-200);
-			border-top: 1px solid var(--palettes-200, var(--palettes-neutral-200));
+			margin-block: 0;
+			margin-inline: 3rem;
+			padding-block: var(--pr-t-spacings-100) var(--pr-t-spacings-200);
+			padding-inline: 0;
+			border-block-start: 1px solid var(--palettes-200, var(--palettes-neutral-200));
 		}
 	}
 }

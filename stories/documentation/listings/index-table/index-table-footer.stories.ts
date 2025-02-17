@@ -84,7 +84,7 @@ const Template: StoryFn<IndexTableFooterStory> = (args) => ({
 	template: getTemplate(args),
 	styles: [
 		`.indexTable:not(:last-child) {
-			margin-bottom: var(--pr-t-spacings-100);
+			margin-block-end: var(--pr-t-spacings-100);
 		}`,
 	],
 });

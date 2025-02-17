@@ -5,6 +5,7 @@ import { Meta, StoryFn, moduleMetadata } from '@storybook/angular';
 	standalone: true,
 	selector: 'numeric-badge-stories',
 	templateUrl: './numeric-badge.stories.html',
+	styles: ['.numericBadge::after { animation-play-state: paused; }'],
 })
 class NumericBadgeStory {}
 

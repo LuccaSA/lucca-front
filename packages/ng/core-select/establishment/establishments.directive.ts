@@ -33,6 +33,7 @@ export class LuCoreSelectEstablishmentsDirective<T extends LuCoreSelectEstablish
 	url = input<string>('/organization/structure/api/establishments');
 	filters = input<Record<string, string | number | boolean> | null>(null);
 	operationIds = input<number[] | null>(null);
+	uniqueOperationIds = input<number[] | null>(null);
 	appInstanceId = input<number | null>(null);
 	searchDelimiter = input<string>(' ');
 
@@ -67,6 +68,7 @@ export class LuCoreSelectEstablishmentsDirective<T extends LuCoreSelectEstablish
 	protected override params$: Observable<Record<string, string | number | boolean>> = toObservable(
 		computed(() => {
 			const operationIds = this.operationIds();
+			const uniqueOperationIds = this.uniqueOperationIds();
 			const appInstanceId = this.appInstanceId();
 			const clue = this.clue();
 			const searchDelimiter = this.searchDelimiter();
@@ -78,6 +80,7 @@ export class LuCoreSelectEstablishmentsDirective<T extends LuCoreSelectEstablish
 					: // When the clue is empty, establishments are grouped by legal unit, so sort them by legal unit name and then by name
 						{ sort: 'legalunit.name,name' }),
 				...(operationIds ? { operations: operationIds.join(',') } : {}),
+				...(uniqueOperationIds ? { uniqueOperations: uniqueOperationIds.join(',') } : {}),
 				...(appInstanceId ? { appInstanceId } : {}),
 			};
 		}),

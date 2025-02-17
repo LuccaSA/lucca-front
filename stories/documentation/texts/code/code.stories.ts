@@ -31,7 +31,7 @@ const Template: StoryFn<TextCodeStory> = (args) => ({
 		`
 		:host {
 			display: block;
-			min-height: 145px;
+			min-block-size: 145px;
 		}`,
 	],
 });

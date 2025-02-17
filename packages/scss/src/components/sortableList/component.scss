@@ -10,9 +10,9 @@
 
 	@at-root ($atRoot) {
 		.sortableList-item {
-			border-bottom-width: var(--commons-divider-width);
-			border-bottom-color: var(--commons-divider-color);
-			border-bottom-style: solid;
+			border-block-end-width: var(--commons-divider-width);
+			border-block-end-color: var(--commons-divider-color);
+			border-block-end-style: solid;
 			color: var(--palettes-neutral-800);
 			display: flex;
 			position: relative;
@@ -28,7 +28,7 @@
 		.sortableList-item-content {
 			color: var(--palettes-neutral-800);
 			text-decoration: none;
-			width: 100%;
+			inline-size: 100%;
 		}
 
 		.sortableList-item-content-description {
@@ -45,9 +45,9 @@
 		}
 
 		.sortableList-item-actions {
-			margin-left: auto;
+			margin-inline-start: auto;
 			white-space: nowrap;
-			padding-left: 0;
+			padding-inline-start: 0;
 		}
 
 		.sortableList-item-handler {
@@ -62,7 +62,7 @@
 		}
 
 		.sortableList-clear {
-			margin-top: var(--pr-t-spacings-50);
+			margin-block-start: var(--pr-t-spacings-50);
 		}
 	}
 }

@@ -44,7 +44,7 @@ function getTemplate(args: TextareaBasicStory): string {
 		<div class="inlineMessage" id="IDmessage">
 			<span aria-hidden="true" class="lucca-icon inlineMessage-statusIcon"></span>
 			<p class="inlineMessage-content">
-				Helper Text
+				Helper text
 			</p>
 		</div>
 	</div>`;

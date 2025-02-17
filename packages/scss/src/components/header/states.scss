@@ -1,13 +1,13 @@
 @use '@lucca-front/scss/src/commons/utils/loading';
 
 @mixin loading {
-	height: 75px;
+	block-size: 75px;
 
 	&::after {
-		@include loading.gradient;
-
 		inset: 0;
 		position: absolute;
 		content: '';
+
+		@include loading.gradient;
 	}
 }

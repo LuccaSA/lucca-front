@@ -40,7 +40,7 @@ class FakeLocaleIdDirective implements OnChanges {
 
 		<p>Choisissez une langue</p>
 
-		<div class="pr-u-marginBottom300" style="display: flex; gap: var(--pr-t-spacings-100)">
+		<div class="pr-u-marginBlockEnd300" style="display: flex; gap: var(--pr-t-spacings-100)">
 			<button luButton="outline" (click)="locale = 'fr'">FR</button>
 			<button luButton="outline" (click)="locale = 'en'">EN</button>
 			<button luButton="outline" (click)="locale = 'pt'">PT</button>
@@ -48,7 +48,7 @@ class FakeLocaleIdDirective implements OnChanges {
 
 		<h2>Choisir la date</h2>
 
-		<div class="pr-u-marginBottom300" style="display: flex; gap: var(--pr-t-spacings-100)">
+		<div class="pr-u-marginBlockEnd300" style="display: flex; gap: var(--pr-t-spacings-100)">
 			<button luButton="outline" (click)="setDate('one-hour-ago')">Il y a une heure</button>
 			<button luButton="outline" (click)="setDate('one-minute-ago')">Il y a une minute</button>
 			<button luButton="outline" (click)="setDate('now')">Maintenant</button>
@@ -58,7 +58,7 @@ class FakeLocaleIdDirective implements OnChanges {
 
 		<h2>Modifier la date</h2>
 
-		<div class="pr-u-marginBottom300" style="display: flex; gap: var(--pr-t-spacings-100)">
+		<div class="pr-u-marginBlockEnd300" style="display: flex; gap: var(--pr-t-spacings-100)">
 			<button luButton="outline" (click)="updateDate('minus-one-hour')">-1 hour</button>
 			<button luButton="outline" (click)="updateDate('add-one-hour')">+1 hour</button>
 			<button luButton="outline" (click)="updateDate('minus-one-minute')">-1 minute</button>
@@ -69,8 +69,8 @@ class FakeLocaleIdDirective implements OnChanges {
 
 		<h2>Résultat</h2>
 
-		<lu-callout *fakeLocaleId="locale" class="pr-u-marginBottom300">
-			Résultat: <b>{{ date | luHumanizeDate : allowedUnits | async }}</b>
+		<lu-callout *fakeLocaleId="locale" class="pr-u-marginBlockEnd300">
+			Résultat: <b>{{ date | luHumanizeDate: allowedUnits | async }}</b>
 		</lu-callout>
 	`,
 })

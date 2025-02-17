@@ -1,6 +1,4 @@
-# Radio input
-
-# Utilisation
+### Utilisation
 
 Au sein de votre template, l'utilisation de l'input radio se fait via deux composants distincts:
 
@@ -22,7 +20,7 @@ Exemple:
 
 Comme tous les `lu-***-input`, il est recommandé de les utiliser dans un `lu-form-field` même si vous n'avez pas de label à afficher, afin d'assurer une bonne accessibilité (le label est obligatoire mais vous pouvez le rendre caché pour que seules les technologies d'assistance puissent le voir).
 
-## lu-radio
+#### lu-radio
 
 Le composant `lu-radio` porte les valeurs, les options que vous souhaitez proposer.
 

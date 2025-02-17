@@ -7,7 +7,7 @@ export default {
 			styles: [
 				`
 				.calloutDisclosure {
-					margin-bottom: var(--pr-t-spacings-100);
+					margin-block-end: var(--pr-t-spacings-100);
 				}
 			`,
 			],
