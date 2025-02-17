@@ -1,93 +1,86 @@
-<h1>Switch</h1>
-
-<section class="contentSection">
-	<!-- Basics -->
-	<h2>Default</h2>
-	<div class="grid">
-		<div class="grid-column" style="--grid-colspan: 4">
-			<div class="form-group">
-				<div>
-					<label class="switch">
-						<input class="switch-input" type="checkbox" />
-						<span class="switch-label">Label</span>
-					</label>
+<table class="demo-QAtable">
+	<tbody>
+		<tr>
+			<td>Default</td>
+			<td>
+				<div class="grid">
+					<div class="grid-column" style="--grid-colspan: 4">
+						<div>
+							<label class="switch">
+								<input class="switch-input" type="checkbox" />
+								<span class="switch-label">Label</span>
+							</label>
+						</div>
+						<div>
+							<label class="switch">
+								<input class="switch-input" type="checkbox" checked />
+								<span class="switch-label">Label</span>
+							</label>
+						</div>
+					</div>
+					<div class="grid-column" style="--grid-colspan: 4">
+						<div>
+							<label class="switch">
+								<input class="switch-input" type="checkbox" disabled />
+								<span class="switch-label">Label</span>
+							</label>
+						</div>
+						<div>
+							<label class="switch">
+								<input class="switch-input" type="checkbox" disabled checked />
+								<span class="switch-label">Label</span>
+							</label>
+						</div>
+					</div>
 				</div>
-				<div>
-					<label class="switch">
-						<input class="switch-input" type="checkbox" checked />
-						<span class="switch-label">Label</span>
-					</label>
+			</td>
+		</tr>
+		<tr>
+			<td>Small</td>
+			<td>
+				<div class="grid">
+					<div class="grid-column" style="--grid-colspan: 4">
+						<div class="switch mod-S">
+							<input class="switch-input" type="checkbox" id="switch0" />
+							<label class="switch-label" for="switch0">Label</label>
+						</div>
+						<div class="switch mod-S">
+							<input class="switch-input" type="checkbox" id="switch1" checked />
+							<label class="switch-label" for="switch1">Label</label>
+						</div>
+					</div>
+					<div class="grid-column" style="--grid-colspan: 4">
+						<div class="switch mod-S">
+							<input class="switch-input" type="checkbox" id="switch2" disabled />
+							<label class="switch-label" for="switch2">Label</label>
+						</div>
+						<div class="switch mod-S">
+							<input class="switch-input" type="checkbox" id="switch3" disabled checked />
+							<label class="switch-label" for="switch3">Label</label>
+						</div>
+					</div>
 				</div>
-			</div>
-		</div>
-		<div class="grid-column" style="--grid-colspan: 4">
-			<div class="form-group">
-				<div>
-					<label class="switch">
-						<input class="switch-input" type="checkbox" disabled />
-						<span class="switch-label">Label</span>
-					</label>
-				</div>
-				<div>
-					<label class="switch">
-						<input class="switch-input" type="checkbox" disabled checked />
-						<span class="switch-label">Label</span>
-					</label>
-				</div>
-			</div>
-		</div>
-	</div>
-	<em><strong>Tip:</strong> To disable a switch, add a <code class="code">disabled</code> attribute to the checkbox input</em>
-</section>
-
-<section class="contentSection">
-	<h2>mod-S</h2>
-	<!-- mod-S -->
-	<div class="grid">
-		<div class="grid-column" style="--grid-colspan: 4">
-			<div class="form-group">
-				<div class="switch mod-S">
-					<input class="switch-input" type="checkbox" id="switch0" />
-					<label class="switch-label" for="switch0">Label</label>
-				</div>
-				<div class="switch mod-S">
-					<input class="switch-input" type="checkbox" id="switch1" checked />
-					<label class="switch-label" for="switch1">Label</label>
-				</div>
-			</div>
-		</div>
-		<div class="grid-column" style="--grid-colspan: 4">
-			<div class="form-group">
-				<div class="switch mod-S">
-					<input class="switch-input" type="checkbox" id="switch2" disabled />
-					<label class="switch-label" for="switch2">Label</label>
-				</div>
-				<div class="switch mod-S">
-					<input class="switch-input" type="checkbox" id="switch3" disabled checked />
-					<label class="switch-label" for="switch3">Label</label>
-				</div>
-			</div>
-		</div>
-	</div>
-	<em><b>Tip:</b> To disable a switch, add a <code class="code">disabled</code> attribute to the checkbox input</em>
-</section>
-
-<!-- Inline switch -->
-<section class="contentSection">
-	<h2>mod-inline</h2>
-	<label class="switch mod-inline">
-		<input class="switch-input" type="checkbox" checked id="switch4" />
-		<label class="switch-label" for="switch4">Label</label>
-	</label>
-	<label class="switch mod-inline">
-		<input class="switch-input" type="checkbox" checked id="switch5" />
-		<label class="switch-label" for="switch5">Label</label>
-	</label>
-	<label class="switch mod-inline">
-		<input class="switch-input" type="checkbox" checked id="switch6" />
-		<label class="switch-label" for="switch6">Label</label>
-	</label>
-</section>
+			</td>
+		</tr>
+		<tr>
+			<td>Inline</td>
+			<td>
+				<label class="switch mod-inline">
+					<input class="switch-input" type="checkbox" checked id="switch4" />
+					<label class="switch-label" for="switch4">Label</label>
+				</label>
+				<label class="switch mod-inline">
+					<input class="switch-input" type="checkbox" checked id="switch5" />
+					<label class="switch-label" for="switch5">Label</label>
+				</label>
+				<label class="switch mod-inline">
+					<input class="switch-input" type="checkbox" checked id="switch6" />
+					<label class="switch-label" for="switch6">Label</label>
+				</label>
+			</td>
+		</tr>
+	</tbody>
+</table>
 
 <!-- To tell the ui-diff tool that the page has finished rendering -->
 <span id="ready"></span>
