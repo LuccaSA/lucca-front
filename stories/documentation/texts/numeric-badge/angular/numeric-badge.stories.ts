@@ -1,5 +1,6 @@
 import { NumericBadgeComponent } from '@lucca-front/ng/numeric-badge';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { generateInputs } from 'stories/helpers/stories';
 
 export default {
 	title: 'Documentation/Texts/NumericBadge/Angular/Basic',
@@ -37,6 +38,11 @@ export default {
 			},
 			description: '[v19.1]',
 		},
+	},
+	render: (args, { argTypes }) => {
+		return {
+			template: `<lu-numeric-badge ${generateInputs(args, argTypes)}/>`,
+		};
 	},
 } as Meta;
 

@@ -16,7 +16,7 @@
 			>
 				{{ submitLabel$ | async }}
 				<lu-numeric-badge
-					[disableTooltip]="true"
+					disableTooltip
 					palette="product"
 					*ngIf="hasSubmitCounter$ | async"
 					[value]="submitCounter$ | async"

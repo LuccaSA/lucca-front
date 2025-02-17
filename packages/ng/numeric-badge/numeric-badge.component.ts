@@ -42,7 +42,7 @@ export class NumericBadgeComponent implements OnChanges {
 	@Input()
 	maxValue: number = 999;
 
-	disableTooltip = input<boolean, boolean>(false, { transform: booleanAttribute });
+	disableTooltip = input(false, { transform: booleanAttribute });
 
 	@Input()
 	/**
@@ -58,7 +58,7 @@ export class NumericBadgeComponent implements OnChanges {
 
 	displayValue = () => {
 		if (typeof this.value === 'number') {
-			return this.value > this.maxValue ? `${this.maxValue}+` : this.value;
+			return +this.value > this.maxValue ? `${this.maxValue}+` : this.value;
 		} else {
 			return this.value;
 		}
