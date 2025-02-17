@@ -17,10 +17,13 @@ export default {
 			},
 		},
 		value: {
-			description: 'Doit obligatoirement contenir une valeur numérique (ex: 7, "3/5", "+2", etc.)',
+			description: 'Doit obligatoirement contenir une valeur numérique (ex: 7, "3/5", "999+", etc.)',
 		},
 		maxValue: {
 			type: 'number',
+		},
+		disableTooltip: {
+			type: 'boolean',
 		},
 		size: {
 			control: {
@@ -41,5 +44,6 @@ export const Template: StoryObj<NumericBadgeComponent> = {
 		value: 7,
 		maxValue: 999,
 		loading: false,
+		disableTooltip: false,
 	},
 };
