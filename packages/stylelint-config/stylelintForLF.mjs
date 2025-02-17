@@ -102,6 +102,11 @@ function getMessage(objectData) {
 	let status = 'deprecated';
 	let messageDeprecated = '';
 	let messageDeleted = '';
+	let messageLFVersionWarning = '';
+
+	if (!currentLFVersion) {
+		messageLFVersionWarning = ' | LF version not found';
+	}
 
 	if (objectData.dateDeprecated) {
 		const daysAgo = Math.ceil((objectData.dateDeprecated.getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24));
@@ -121,7 +126,7 @@ function getMessage(objectData) {
 		messageDeleted = ` | until ${objectData.dateDeleted.toLocaleDateString()} (${dayString}, LF ${objectData.versionDeleted})`;
 	}
 
-	return `${status}${messageDeprecated}${messageDeleted} | ${pattern}`;
+	return `${status}${messageLFVersionWarning}${messageDeprecated}${messageDeleted} | ${pattern}`;
 }
 
 /**
@@ -131,6 +136,10 @@ function getMessage(objectData) {
  * @return {'warning'|'error'}
  */
 function getSeverity(objectData) {
+	if (!currentLFVersion) {
+		return 'warning';
+	}
+
 	if (currentLFVersion < objectData.versionDeleted) {
 		return 'warning';
 	}
