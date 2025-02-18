@@ -34,12 +34,13 @@ module.exports = {
 
 ### For your CI
 
-Add the relevant scripts to lint the code in Jenkins. Something like:
+Add the relevant script to lint the code in Jenkins.
 
 ```json
-"ngLint": "ng lint",
-"stylelint": "stylelint \"./SOME_PATH/**/*.scss\"",
+"stylelint": "stylelint \"./**/*.scss\"",
 ```
+
+You can be more specific and restrict the path of scss files being linted:  `"stylelint": "stylelint \"./SOME_PATH/**/*.scss\""`,
 
 ### Breaking the rules
 
@@ -47,7 +48,7 @@ Add the relevant scripts to lint the code in Jenkins. Something like:
 
 You can [apply specific rules with overrides](https://stylelint.io/user-guide/configure/#overrides) as needed.
 
-Rules can be disabled while incrementally fixing your code. Set them to `null`:
+Rules can be disabled while incrementally fixing your code. Set them to `null`. The following example will ignore the `no-descending-specificity` rule in all SCSS files within `_some-path_ :
 
 ```js
 module.exports = {
@@ -68,13 +69,14 @@ module.exports = {
 
 If needed, each rule can be ignored with [stylelint-(dis|en)able](https://stylelint.io/user-guide/ignore-code).
 
-Please add a comment if you're doing so: use `styleling-disable[-*] -- comment`.
+Please explain why with a comment if you're doing so. Use `styleling-disable[-*] -- Comment` and enable stylelint back as soon as possible: `styleling-enable`.
 
 ## Testing locally
 
-In your stylelint configuration, temporarily replace `extends: ['@lucca-front/stylelint-config'],` by `extends: ['RELATIVE_PATH_TO/stylelint-config'],`.
+1. From the root of this package, run `npm pack`. This will generate a _.tgz_ file.
+2. From the root of the project you want to lint, run `npm i PATH_TO_LUCCA_FRONT_REPOSITORY/packages/stylelint-config/lucca-front-stylelint-config-0.0.0.tgz`.
 
-The configuration from your local repository should be applied right away.
+The configuration from your local repository should be applied right away. *If in doubt, restart your editor.*
 
 ## Configuring your editor
 
@@ -82,9 +84,8 @@ The configuration from your local repository should be applied right away.
 
 ⚠️ A [VSCode extension bug](https://github.com/stylelint/vscode-stylelint/issues/490#issuecomment-1966934533) might prevent you from using stylelint 16+. See below for a fix through VS-code settings.
 
-Follow instructions on the [extension page](https://marketplace.visualstudio.com/items?itemName=stylelint.vscode-stylelint).
-
-Those settings in _.vscode/settings.json_ should be fine:
+Those settings in _.vscode/settings.json_ should be fine, but you can also follow instructions on the [extension page](https://marketplace.visualstudio.com/items?itemName=stylelint.vscode-stylelint):
+:
 
 ```json
   "[scss]": {
@@ -111,7 +112,6 @@ Add the following line in _.vscode/settings.json_ if the issue arises:
 ```json
   "stylelint.customSyntax": "postcss-scss"
 ```
-
 
 ### JetStorm
 
