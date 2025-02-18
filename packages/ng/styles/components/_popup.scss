@@ -93,7 +93,7 @@
 	z-index: 5;
 	background-color: var(--pr-t-elevation-surface-raised);
 	padding-block: var(--components-popup-padding-vertical);
-	padding-inline: var(--pr-t-spacings-800) var(--components-popup-padding-horizontal);
+	padding-inline: var(--components-popup-padding-horizontal) var(--pr-t-spacings-800);
 	border-block-end: 1px solid var(--commons-border-100);
 }
 

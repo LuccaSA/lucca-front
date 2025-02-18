@@ -69,6 +69,10 @@
 			.lucca-icon {
 				@include icon.M;
 			}
+
+			&.mod-search {
+				display: none;
+			}
 		}
 	}
 }

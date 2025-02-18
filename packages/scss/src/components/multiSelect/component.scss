@@ -69,12 +69,17 @@
 			margin-block-end: var(--pr-t-spacings-50);
 		}
 
-		.multipleSelect-arrow {
+		.multipleSelect-arrow,
+		.multipleSelect-searchIcon {
 			@include icon.M;
 
 			color: var(--components-multiSelect-arrow-color);
 			transition-property: transform;
 			transition-duration: var(--commons-animations-durations-standard);
+		}
+
+		.multipleSelect-searchIcon {
+			display: none;
 		}
 
 		.multipleSelect-pill-displayer-label {

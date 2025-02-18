@@ -53,6 +53,7 @@ export default {
 			control: {
 				type: 'select',
 			},
+			description: '[v19.2]',
 		},
 	},
 } as Meta;
@@ -92,7 +93,7 @@ export const Basic: StoryObj<TextInputComponent & { disabled: boolean; required:
 		hasClearer: false,
 		hasSearchIcon: false,
 		autocomplete: '',
-		searchIcon: 'search',
+		searchIcon: 'searchMagnifyingGlass',
 		disabled: false,
 		inlineMessage: 'Helper text',
 		inlineMessageState: 'default',
@@ -142,7 +143,7 @@ export const PasswordVisiblity: StoryObj<
 		hiddenLabel: false,
 		hasClearer: true,
 		hasSearchIcon: false,
-		searchIcon: 'search',
+		searchIcon: 'searchMagnifyingGlass',
 		disabled: false,
 		inlineMessage: 'Helper text',
 		inlineMessageState: 'default',
@@ -200,7 +201,7 @@ export const WithPrefixAndSuffix: StoryObj<
 		disabled: false,
 		hasClearer: false,
 		hasSearchIcon: false,
-		searchIcon: 'search',
+		searchIcon: 'searchMagnifyingGlass',
 		prefix: {
 			content: '$',
 			ariaLabel: 'dollars',

@@ -43,6 +43,7 @@
 
 	.lu-select-display-wrapper {
 		display: block;
+		width: 100%;
 		text-overflow: ellipsis;
 		white-space: nowrap;
 		overflow: hidden;
@@ -78,6 +79,8 @@
 
 	::ng-deep .lu-select-value {
 		.chip {
+			display: inline-block;
+			vertical-align: baseline;
 			max-inline-size: 100%;
 			margin-block: 0 var(--pr-t-spacings-50);
 			margin-inline: 0 var(--pr-t-spacings-50);

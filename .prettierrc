@@ -5,23 +5,31 @@
 	"endOfLine": "auto",
 	"overrides": [
 		{
-			"files": [".component.html", ".page.html"],
+			"files": [
+				".component.html",
+				".page.html"
+			],
 			"options": {
 				"parser": "angular"
 			}
 		},
 		{
-			"files": ["*.html"],
+			"files": [
+				"*.html"
+			],
 			"options": {
 				"parser": "html",
 				"singleQuote": false
 			}
 		},
 		{
-			"files": ["*.ts"],
+			"files": [
+				"*.ts"
+			],
 			"options": {
 				"parser": "typescript",
-				"printWidth": 200
+				"printWidth": 200,
+				"singleQuote": true
 			}
 		}
 	]
