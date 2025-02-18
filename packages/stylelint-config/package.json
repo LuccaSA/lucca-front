@@ -7,9 +7,6 @@
 		"url": "git+https://github.com/LuccaSA/lucca-front.git"
 	},
 	"main": "stylelint.config.mjs",
-	"files": [
-		"index.js"
-	],
 	"keywords": [
 		"stylelint",
 		"stylelint-config",
