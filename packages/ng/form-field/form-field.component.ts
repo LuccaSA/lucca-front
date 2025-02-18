@@ -92,7 +92,7 @@ export class FormFieldComponent implements OnDestroy {
 	invalidStatus = computed(() => {
 		const isInvalidOverride = this.invalid() !== undefined && this.invalid() !== null;
 		if (isInvalidOverride) {
-			return isInvalidOverride;
+			return this.invalid();
 		}
 		const statusControlOverride = this.statusControl();
 		if (statusControlOverride) {
