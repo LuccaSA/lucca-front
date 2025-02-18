@@ -30,7 +30,7 @@ import { MULTI_SELECT_WITH_SELECT_ALL_CONTEXT } from './select-all.models';
 							}
 						</div>
 					} @else {
-						<lu-numeric-badge class="multipleSelect-displayer-numericBadge" [value]="displayerCount()" />
+						<lu-numeric-badge disableTooltip class="multipleSelect-displayer-numericBadge" [value]="displayerCount()" />
 						<span class="multipleSelect-displayer-label"> {{ displayerLabel() }} </span>
 					}
 				</div>
