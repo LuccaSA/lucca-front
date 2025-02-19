@@ -6,6 +6,7 @@ import { CellStatus } from './calendar2/cell-status';
 import { DateRange } from './calendar2/date-range';
 import { getDateFormat, getLocalizedDateFormat } from './date-format';
 import { LU_DATE2_TRANSLATIONS } from './date2.translate';
+import { transformStringToDate } from './utils';
 
 @Component({
 	// eslint-disable-next-line @angular-eslint/component-selector
@@ -36,8 +37,12 @@ export abstract class AbstractDateComponent {
 
 	getCellInfo = input<((day: Date, mode: CalendarMode) => CellStatus) | null>();
 
-	min = input<Date>(new Date('1/1/1000'));
-	max = input<Date | null>(null);
+	min = input(new Date('1/1/1000'), {
+		transform: transformStringToDate,
+	});
+	max = input(null, {
+		transform: transformStringToDate,
+	});
 
 	calendarMode = signal<CalendarMode>('day');
 
