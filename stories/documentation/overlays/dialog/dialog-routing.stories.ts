@@ -1,6 +1,6 @@
 import { JsonPipe } from '@angular/common';
-import { Component, inject, Injectable, signal } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { Component, computed, inject, Injectable, signal } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { provideRouter, Router, RouterLink, RouterOutlet, Routes } from '@angular/router';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { CalloutComponent } from '@lucca-front/ng/callout';
@@ -16,7 +16,7 @@ import {
 	injectDialogRef,
 } from '@lucca-front/ng/dialog';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
-import { NumberInputComponent, TextInputComponent } from '@lucca-front/ng/forms';
+import { CheckboxInputComponent, NumberInputComponent, TextInputComponent } from '@lucca-front/ng/forms';
 import { applicationConfig, Meta, StoryFn } from '@storybook/angular';
 
 @Injectable()
@@ -55,27 +55,33 @@ class DismissedComponent {}
 		ButtonComponent,
 		DialogDismissDirective,
 		DialogCloseDirective,
-		ReactiveFormsModule,
 		NumberInputComponent,
 		TextInputComponent,
 		FormFieldComponent,
+		CheckboxInputComponent,
+		FormsModule,
 	],
 	template: `
 		<lu-dialog>
-			<form [formGroup]="form" class="dialog-inside-formOptional">
-				<lu-dialog-header> Dialog opened by route </lu-dialog-header>
+			<form class="dialog-inside-formOptional">
+				<lu-dialog-header>
+					<h1>Dialog opened by route</h1>
+				</lu-dialog-header>
 				<lu-dialog-content>
 					<lu-form-field label="Data received by dialog">
-						<lu-number-input [formControl]="form.controls.dataNum"></lu-number-input>
+						<lu-number-input [(ngModel)]="dataNum" name="num"></lu-number-input>
 					</lu-form-field>
-					<lu-form-field label="Additionnal data to submit">
-						<lu-text-input [formControl]="form.controls.dataString"></lu-text-input>
+					<lu-form-field label="Additionnal data to submit" class="pr-u-marginBlockStart200">
+						<lu-text-input [(ngModel)]="dataString" name="string"></lu-text-input>
+					</lu-form-field>
+					<lu-form-field label="I agree to allow this dialog to close" class="pr-u-marginBlockStart200">
+						<lu-checkbox-input [(ngModel)]="allowThisDialogToClose" name="canDeactivate" />
 					</lu-form-field>
 				</lu-dialog-content>
 				<lu-dialog-footer>
 					<div class="footer-actions">
-						<button type="submit" (click)="submit(); $event.preventDefault()">Submit</button>
-						<button type="button" luDialogDismiss>Dismiss</button>
+						<button luButton type="submit" (click)="submit(); $event.preventDefault()">Submit</button>
+						<button luButton="outline" type="button" luDialogDismiss>Dismiss</button>
 					</div>
 				</lu-dialog-footer>
 			</form>
@@ -86,13 +92,18 @@ class TestDialogComponent {
 	data = injectDialogData<number>();
 	ref = injectDialogRef<{ dataNum?: number; dataString?: string }>();
 
-	form = new FormGroup({
-		dataNum: new FormControl<number | null>(this.data),
-		dataString: new FormControl<string | null>(''),
-	});
+	allowThisDialogToClose = signal(true);
+
+	dataNum = signal(this.data);
+	dataString = signal('');
+
+	formValue = computed(() => ({
+		dataNum: this.dataNum(),
+		dataString: this.dataString(),
+	}));
 
 	submit() {
-		this.ref.close(this.form.value);
+		this.ref.close(this.formValue());
 	}
 }
 
@@ -144,6 +155,7 @@ const routes: Routes = [
 		dataFactory: (service = inject(DataProvider)) => service.dummy(),
 		dialogRouteConfig: {
 			// Can be overridden here
+			canDeactivate: [(c) => c.allowThisDialogToClose()],
 		},
 	}),
 	{ path: 'closed', component: ClosedComponent },
