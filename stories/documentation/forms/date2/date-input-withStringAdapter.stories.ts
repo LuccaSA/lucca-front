@@ -57,4 +57,4 @@ export default {
 	},
 } as Meta;
 
-export const WithStringAdapter: StoryObj<DateInputComponent> = {};
+export const DateInputWithStringAdapter: StoryObj<DateInputComponent> = {};

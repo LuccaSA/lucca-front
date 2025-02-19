@@ -1,5 +1,5 @@
-import { inject, InjectionToken, LOCALE_ID } from '@angular/core';
 import { getLocaleFirstDayOfWeek, getLocaleWeekEndRange } from '@angular/common';
+import { inject, InjectionToken, LOCALE_ID } from '@angular/core';
 
 export type CalendarWeekDay = 1 | 2 | 3 | 4 | 5 | 6 | 7;
 

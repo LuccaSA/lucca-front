@@ -6,3 +6,4 @@ export * from './date-input/date-input.component';
 export * from './date-input/with-string-adapter.directive';
 export * from './date-range-input/calendar-shortcut';
 export * from './date-range-input/date-range-input.component';
+export * from './date-range-input/with-string-adapter.directive';

@@ -1,5 +1,6 @@
-import { CalendarWeekDay, CalendarWeekInfo } from './calendar.token';
 import { Day, isSameDay, isSameMonth, isSameYear, startOfDecade, startOfMonth, startOfYear } from 'date-fns';
+import { isNil } from '../time/core/misc.utils';
+import { CalendarWeekDay, CalendarWeekInfo } from './calendar.token';
 import { CalendarMode } from './calendar2/calendar-mode';
 
 export function getIntlWeekDay(date: Date): CalendarWeekDay {
@@ -38,4 +39,14 @@ export function compareCalendarPeriods(mode: CalendarMode, a: Date, b: Date): bo
 
 export function startOfPeriod(mode: CalendarMode, date: Date): Date {
 	return modeToPeriodStart[mode](date);
+}
+
+export function transformStringToDate(value: Date | null | undefined | string): Date | null {
+	if (isNil(value)) {
+		return null;
+	}
+	if (value instanceof Date) {
+		return value;
+	}
+	return new Date(value);
 }
