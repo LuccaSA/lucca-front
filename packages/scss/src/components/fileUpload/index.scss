@@ -10,10 +10,10 @@
 
 	&.mod-S {
 		@include S;
-	}
 
-	&.mod-XS {
-		@include XS;
+		&.is-loading {
+			@include loadingS;
+		}
 	}
 
 	&.is-loading {

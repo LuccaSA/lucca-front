@@ -21,4 +21,7 @@
 	--components-fileUpload-status-minHeight: var(--pr-t-spacings-800);
 	--components-fileUpload-instruction-filename-position: relative;
 	--components-fileUpload-justifyContent: center;
+	--components-fileUpload-status-position: static;
+	--components-fileUpload-status-image-inset: var(--pr-t-spacings-75);
+	--components-fileUpload-status-image-size: calc(100% - var(--pr-t-spacings-75) * 2);
 }

@@ -6,26 +6,36 @@ import { generateInputs } from 'stories/helpers/stories';
 export default {
 	title: 'Documentation/FileUpload/Angular/Basic',
 	argTypes: {
-		size: {
-			options: [null, 'S', 'XS'],
+		small: {
 			control: {
-				type: 'radio',
+				type: 'boolean',
 			},
 		},
 		state: {
-			options: [null, 'loading', 'success', 'critical'],
+			options: [null, 'loading', 'critical'],
 			control: {
 				type: 'radio',
 			},
 		},
-		droppable: {
+
+		multiple: {
 			control: {
 				type: 'boolean',
 			},
 		},
-		multiple: {
+		bitmap: {
 			control: {
 				type: 'boolean',
+			},
+		},
+		maxWeight: {
+			control: {
+				type: 'number',
+			},
+		},
+		accept: {
+			control: {
+				type: 'object',
 			},
 		},
 	},
@@ -36,17 +46,37 @@ export default {
 		applicationConfig({ providers: [provideHttpClient()] }),
 	],
 	render: (args, { argTypes }) => {
+		const { accept, bitmap, ...mainArgs } = args;
+
 		return {
-			template: `<lu-file-upload ${generateInputs(args, argTypes)} />`,
+			props: {
+				accept,
+				bitmap,
+			},
+			template: `<lu-file-upload ${generateInputs(mainArgs, argTypes)} [accept]="accept" [bitmap]="bitmap" />`,
 		};
 	},
 } as Meta;
 
 export const Basic = {
 	args: {
-		size: null,
-		droppable: false,
+		small: false,
 		state: null,
 		multiple: false,
+		accept: [
+			{
+				format: '.xls',
+				name: 'XLS',
+			},
+			{
+				format: '.xlsm',
+			},
+			{
+				format: '.csv',
+				name: 'CSV',
+			},
+		],
+		maxWeight: 5,
+		bitmap: false,
 	},
 };

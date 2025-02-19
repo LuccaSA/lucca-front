@@ -21,9 +21,14 @@
 }
 
 @mixin loading {
-	--components-fileUpload-button-visibility: hidden;
+	--components-fileUpload-instruction-display: none;
+	--components-fileUpload-button-display: none;
 }
 
 @mixin criticalHover {
 	--components-fileUpload-borderColor: var(--palettes-critical-600);
+}
+
+@mixin loadingS {
+	--components-fileUpload-instruction-display: block;
 }
