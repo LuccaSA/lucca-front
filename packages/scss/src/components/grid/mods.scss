@@ -4,6 +4,7 @@
 
 @mixin auto {
 	--grid-template-columns: none;
+
 	grid-auto-columns: 1fr;
 
 	.grid-column {

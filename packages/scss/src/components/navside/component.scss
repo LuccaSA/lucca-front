@@ -44,7 +44,6 @@
 			overflow-x: hidden;
 			overflow-y: auto;
 			position: relative;
-
 			scrollbar-face-color: var(--components-navSide-scrollbar-thumb-color);
 			scrollbar-arrow-color: var(--components-navSide-scrollbar-arrow-color);
 			scrollbar-track-color: var(--components-navSide-scrollbar-bg-color);
@@ -133,7 +132,6 @@
 			margin-inline-start: auto;
 			display: grid;
 			place-items: center;
-			transform: rotate(0);
 			flex-shrink: 0;
 			transform-origin: 50% 50%;
 			transform: rotate(90deg);
