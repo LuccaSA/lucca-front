@@ -145,29 +145,26 @@ export class DateInputComponent extends AbstractDateComponent implements Control
 
 	constructor() {
 		super();
-		effect(
-			() => {
-				const inputValue = this.userTextInput();
-				if (inputValue.length > 0) {
-					let parsed: Date;
-					try {
-						parsed = parse(inputValue, this.dateFormat, startOfDay(new Date()));
-					} catch {
-						/* not a correct date */
-					}
-					if (parsed instanceof Date && parsed.getFullYear() > 999) {
-						this.selectedDate.set(startOfDay(parsed));
-						this.currentDate.set(startOfDay(parsed));
-						this.tabbableDate.set(startOfDay(parsed));
-					} else if (!this.isFilterPill) {
-						this.selectedDate.set(parsed);
-					}
-				} else {
-					this.selectedDate.set(null);
+		effect(() => {
+			const inputValue = this.userTextInput();
+			if (inputValue.length > 0) {
+				let parsed: Date;
+				try {
+					parsed = parse(inputValue, this.dateFormat, startOfDay(new Date()));
+				} catch {
+					/* not a correct date */
 				}
-			},
-			{ allowSignalWrites: true },
-		);
+				if (parsed instanceof Date && parsed.getFullYear() > 999) {
+					this.selectedDate.set(startOfDay(parsed));
+					this.currentDate.set(startOfDay(parsed));
+					this.tabbableDate.set(startOfDay(parsed));
+				} else if (!this.isFilterPill) {
+					this.selectedDate.set(parsed);
+				}
+			} else {
+				this.selectedDate.set(null);
+			}
+		});
 
 		effect(() => {
 			if (!this.#safeCompareDate(untracked(this.dateFromWriteValue), this.selectedDate())) {

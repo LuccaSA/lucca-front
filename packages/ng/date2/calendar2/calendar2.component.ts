@@ -249,14 +249,11 @@ export class Calendar2Component implements OnInit {
 	});
 
 	constructor() {
-		effect(
-			() => {
-				if (this.tabbableDate() === null) {
-					this.tabbableDate.set(this.date());
-				}
-			},
-			{ allowSignalWrites: true },
-		);
+		effect(() => {
+			if (this.tabbableDate() === null) {
+				this.tabbableDate.set(this.date());
+			}
+		});
 	}
 
 	focusTabbableDate(): void {
