@@ -42,13 +42,13 @@ export default {
 		const { min, max, selected, ...flags } = args;
 		return {
 			props: {
-				selected: selected || new Date(),
+				selected: selected || new Date().toISOString().substring(0, 10),
 				min: min ? new Date(min) : null,
 				max: max ? new Date(max) : null,
 			},
 			template: `
 			<lu-form-field label="Date input example" inlineMessage="Inline message example">
-				<lu-date-input [(ngModel)]="selected" [min]="min" [max]="max" ${generateInputs(flags, argTypes)}></lu-date-input>
+				<lu-date-input [(ngModel)]="selected" [min]="min" [max]="max" format="date-iso" ${generateInputs(flags, argTypes)}></lu-date-input>
 			</lu-form-field>
 
 			<pr-story-model-display>{{selected}}</pr-story-model-display>

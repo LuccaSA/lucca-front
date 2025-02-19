@@ -28,13 +28,14 @@ import { FORM_FIELD_INSTANCE, InputDirective } from '@lucca-front/ng/form-field'
 import { IconComponent } from '@lucca-front/ng/icon';
 import { PopoverDirective } from '@lucca-front/ng/popover2';
 import { addMonths, addYears, endOfDecade, endOfMonth, endOfYear, isAfter, isBefore, isSameDay, parse, startOfDay, startOfDecade, startOfMonth, startOfYear, subMonths, subYears } from 'date-fns';
+import { isNotNil } from 'packages/ng/time/core/misc.utils';
 import { map } from 'rxjs';
 import { AbstractDateComponent } from '../abstract-date-component';
 import { CalendarMode } from '../calendar2/calendar-mode';
 import { Calendar2Component } from '../calendar2/calendar2.component';
 import { CellStatus } from '../calendar2/cell-status';
-import { DateRange } from '../calendar2/date-range';
-import { compareCalendarPeriods, startOfPeriod } from '../utils';
+import { DateRange, DateRangeInput } from '../calendar2/date-range';
+import { compareCalendarPeriods, startOfPeriod, transformDateRangeInputToDateRange, transformDateRangeToDateRangeInput } from '../utils';
 import { CalendarShortcut } from './calendar-shortcut';
 
 let nextId = 0;
@@ -431,22 +432,27 @@ export class DateRangeInputComponent extends AbstractDateComponent implements Co
 		}
 	}
 
-	validate(control: AbstractControl<DateRange, DateRange>): ValidationErrors {
+	validate(control: AbstractControl<DateRange | DateRangeInput | null>): ValidationErrors | null {
 		if (!control.value) {
 			return null;
 		}
-		return this.isValidDate(control.value?.start) ? null : { date: true };
+		const dateRange = this.inDateISOFormat() ? transformDateRangeInputToDateRange(control.value) : (control.value as DateRange);
+
+		return this.isValidDate(dateRange.start) ? null : { date: true };
 	}
 
-	writeValue(value: DateRange): void {
-		if (value) {
-			this.selectedRange.set(value);
-			this.currentDate.set(startOfDay(value.start));
+	writeValue(dateRange: DateRange | DateRangeInput | null): void {
+		if (isNotNil(dateRange)) {
+			const _dateRange = transformDateRangeInputToDateRange(dateRange);
+			this.selectedRange.set(_dateRange);
+			this.currentDate.set(startOfDay(dateRange.start));
 		}
 	}
 
-	registerOnChange(fn: (value: DateRange) => void): void {
-		this.#onChange = fn;
+	registerOnChange(fn: (value: DateRange | DateRangeInput | null) => void): void {
+		this.#onChange = (dateRange: DateRange | null) => {
+			fn(dateRange && this.inDateISOFormat() ? transformDateRangeToDateRangeInput(dateRange) : dateRange);
+		};
 	}
 
 	override setDisabledState(isDisabled: boolean) {
