@@ -24,8 +24,12 @@ export class FileUploadComponent implements OnChanges {
 	#luClass = inject(LuClass);
 	#locale = inject(LOCALE_ID);
 
+	idSuffix = nextId++;
+
 	@HostBinding('class.is-droppable')
 	droppable = false;
+
+	files: File[] = [];
 
 	@Input({
 		transform: booleanAttribute,
@@ -57,12 +61,13 @@ export class FileUploadComponent implements OnChanges {
 
 	acceptAttribute = computed(() => this.accept().map((e) => e.format));
 
-	// TODO: watch lucca files
-	maxWeight = input<number>(0);
+	// TODO: Check base max weight in Lucca Files
+	maxWeight = input<number>(80 * MEGA_BYTE);
 
-	// TODO
-	@Input()
-	bitmap = false;
+	// TODO this is filled by the consumer to decide if we want to display image preview when possible.
+	bitmap = input(false, { transform: booleanAttribute });
+
+	bitmapPreviews: string[] = [];
 
 	maxWeightDisplay = computed(() => {
 		let unit = 'byte';
@@ -96,13 +101,16 @@ export class FileUploadComponent implements OnChanges {
 		return this.small();
 	}
 
-	ngOnChanges(): void {
-		this.#luClass.setState({ [`is-${this.state}`]: !!this.state });
+	filesChange(event: Event) {
+		this.droppable = false;
+		const host = event.target as HTMLInputElement;
+		this.state = 'loading';
+		if (this.bitmap()) {
+			this.bitmapPreviews = [URL.createObjectURL(host.files[0])];
+		}
 	}
 
-	idSuffix = nextId++;
-
-	change() {
-		this.droppable = false;
+	ngOnChanges(): void {
+		this.#luClass.setState({ [`is-${this.state}`]: !!this.state });
 	}
 }
