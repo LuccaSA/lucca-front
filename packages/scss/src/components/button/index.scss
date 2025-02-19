@@ -8,6 +8,10 @@
 		@include block;
 	}
 
+	&.mod-nowrap {
+		@include nowrap;
+	}
+
 	&.mod-S {
 		@include S;
 	}

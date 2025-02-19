@@ -1,4 +1,4 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, ContentChild, ElementRef, inject, Input, OnChanges, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, ContentChild, ElementRef, HostBinding, inject, input, Input, OnChanges, ViewEncapsulation } from '@angular/core';
 import { LuClass, Palette } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
 
@@ -44,6 +44,13 @@ export class ButtonComponent implements OnChanges {
 	 * We just make this explicit here.
 	 */
 	luButton: '' | 'outlined' | 'text' | 'text-invert' = '';
+
+	nowrap = input(false, { transform: booleanAttribute });
+
+	@HostBinding('class.mod-nowrap')
+	get classNowrap() {
+		return this.nowrap();
+	}
 
 	#iconComponentRef?: ElementRef<HTMLElement>;
 

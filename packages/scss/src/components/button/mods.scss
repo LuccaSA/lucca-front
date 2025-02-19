@@ -186,3 +186,7 @@
 		--components-button-backgroundColor: var(--palettes-error-200);
 	}
 }
+
+@mixin nowrap {
+	--components-button-textWrap: nowrap;
+}
