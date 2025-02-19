@@ -186,3 +186,15 @@
 		--components-button-backgroundColor: var(--palettes-error-200);
 	}
 }
+
+@mixin withArrow {
+	.icon-arrowChevronBottom {
+		transition-property: transform;
+		transition-duration: var(--commons-animations-durations-fast);
+		transform: var(--components-button-arrow-transform);
+	}
+
+	&[aria-expanded='true'] {
+		--components-button-arrow-transform: rotate(-180deg);
+	}
+}

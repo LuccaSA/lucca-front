@@ -16,6 +16,10 @@
 		@include XS;
 	}
 
+	&.mod-withArrow {
+		@include withArrow;
+	}
+
 	// .mod-outline is deprecated
 	&.mod-outlined,
 	&.mod-outline {
