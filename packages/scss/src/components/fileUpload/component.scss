@@ -2,7 +2,6 @@
 
 @use '@lucca-front/scss/src/commons/utils/a11y';
 @use '@lucca-front/scss/src/components/button/exports' as button;
-@use '@lucca-front/scss/src/components/loading/exports' as loading;
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
 	position: relative;
@@ -38,10 +37,19 @@
 			min-block-size: var(--components-fileUpload-status-minHeight);
 >>>>>>> Stashed changes
 			display: flex;
+			align-items: center;
+			justify-content: center;
+			position: var(--components-fileUpload-status-position);
 		}
 
-		.fileUpload-status-loading {
-			@include loading.L;
+		.fileUpload-status-image {
+			position: absolute;
+			inset: var(--components-fileUpload-status-image-inset);
+			width: var(--components-fileUpload-status-image-size);
+			height: var(--components-fileUpload-status-image-size);
+			object-fit: cover;
+			border-radius: var(--commons-borderRadius-M);
+			opacity: 0.5;
 		}
 
 		.fileUpload-input {

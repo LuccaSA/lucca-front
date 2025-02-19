@@ -12,16 +12,9 @@
 	--components-fileUpload-minHeight: none;
 	--components-fileUpload-instruction-filename-position: static;
 	--components-fileUpload-instruction-filename-marginTop: 0;
-	--components-fileUpload-status-minHeight: auto;
+	--components-fileUpload-status-minHeight: var(--pr-t-spacings-600);
 	--components-fileUpload-justifyContent: flex-start;
-}
-
-@mixin XS {
-	--components-fileUpload-button-display: none;
-	--components-fileUpload-instruction-display: none;
-	--components-fileUpload-padding: var(--pr-t-spacings-200);
-	--components-fileUpload-flexDirection: row;
-	--components-fileUpload-display: inline-flex;
-	--components-fileUpload-minHeight: auto;
-	--components-fileUpload-status-minHeight: auto;
+	--components-fileUpload-status-position: relative;
+	--components-fileUpload-status-image-inset: calc(var(--pr-t-spacings-75) * -2 + 2px);
+	--components-fileUpload-status-image-size: calc(100% + var(--pr-t-spacings-75) * 3 + 2px);
 }
