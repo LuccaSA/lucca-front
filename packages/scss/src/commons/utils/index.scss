@@ -303,6 +303,7 @@
 @include core.classes('font-weight', core.$fontWeight);
 @include core.classes('font-style', core.$fontStyle);
 @include core.classes('pointer-events', core.$pointerEvents);
+@include core.classes('cursor', core.$cursor);
 @include core.classes('text-align', core.$textAlign);
 @include core.classes('text-decoration', core.$decoration);
 @include core.classes('overflow', core.$overflow);
