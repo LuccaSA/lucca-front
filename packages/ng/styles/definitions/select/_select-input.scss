@@ -79,14 +79,12 @@
 
 	::ng-deep .lu-select-value {
 		.chip {
-			display: inline-block;
-			vertical-align: baseline;
+			display: inline-flex;
 			max-inline-size: 100%;
 			margin-block: 0 var(--pr-t-spacings-50);
 			margin-inline: 0 var(--pr-t-spacings-50);
 			text-overflow: ellipsis;
 			overflow: hidden;
-			vertical-align: top;
 			white-space: nowrap;
 		}
 	}
