@@ -23,7 +23,7 @@ export default {
 				type: 'boolean',
 			},
 		},
-		bitmap: {
+		preview: {
 			control: {
 				type: 'boolean',
 			},
@@ -69,7 +69,6 @@ export const Basic = {
 			},
 			{
 				format: '.jpeg',
-				name: 'JPEG',
 			},
 			{
 				format: '.png',
@@ -77,6 +76,6 @@ export const Basic = {
 			},
 		],
 		maxWeight: 5,
-		bitmap: false,
+		preview: true,
 	},
 };

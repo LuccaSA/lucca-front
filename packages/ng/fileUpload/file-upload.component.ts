@@ -65,7 +65,7 @@ export class FileUploadComponent implements OnChanges {
 	maxWeight = input<number>(80 * MEGA_BYTE);
 
 	// TODO this is filled by the consumer to decide if we want to display image preview when possible.
-	bitmap = input(false, { transform: booleanAttribute });
+	preview = input(true, { transform: booleanAttribute });
 
 	bitmapPreviews: string[] = [];
 
@@ -105,7 +105,7 @@ export class FileUploadComponent implements OnChanges {
 		this.droppable = false;
 		const host = event.target as HTMLInputElement;
 		this.state = 'loading';
-		if (this.bitmap()) {
+		if (this.preview()) {
 			this.bitmapPreviews = [URL.createObjectURL(host.files[0])];
 		}
 	}
