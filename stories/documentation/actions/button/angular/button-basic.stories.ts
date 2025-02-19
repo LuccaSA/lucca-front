@@ -29,11 +29,6 @@ export const Basic: StoryObj<ButtonComponent> = {
 				type: 'select',
 			},
 		},
-		nowrap: {
-			control: {
-				type: 'boolean',
-			},
-		},
 	},
 	args: {
 		block: false,
@@ -41,6 +36,5 @@ export const Basic: StoryObj<ButtonComponent> = {
 		state: 'default',
 		luButton: '',
 		delete: false,
-		nowrap: false,
 	},
 };
