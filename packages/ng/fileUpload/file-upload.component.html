@@ -12,7 +12,7 @@
 />
 @switch (state) { @case ('loading') {
 <div class="fileUpload-status">
-	@if (bitmap() && bitmapPreviews.length > 0) {
+	@if (preview() && bitmapPreviews.length > 0) {
 	<img class="fileUpload-status-image" [src]="bitmapPreviews[0]" [alt]="files[0].name" />
 	}
 	<div class="fileUpload-status-loading loading"></div>
