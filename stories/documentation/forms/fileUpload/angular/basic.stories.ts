@@ -46,14 +46,13 @@ export default {
 		applicationConfig({ providers: [provideHttpClient()] }),
 	],
 	render: (args, { argTypes }) => {
-		const { accept, bitmap, ...mainArgs } = args;
+		const { accept, ...mainArgs } = args;
 
 		return {
 			props: {
 				accept,
-				bitmap,
 			},
-			template: `<lu-file-upload ${generateInputs(mainArgs, argTypes)} [accept]="accept" [bitmap]="bitmap" />`,
+			template: `<lu-file-upload ${generateInputs(mainArgs, argTypes)} [accept]="accept"/>`,
 		};
 	},
 } as Meta;
@@ -65,15 +64,16 @@ export const Basic = {
 		multiple: false,
 		accept: [
 			{
-				format: '.xls',
-				name: 'XLS',
+				format: '.jpg',
+				name: 'JPG',
 			},
 			{
-				format: '.xlsm',
+				format: '.jpeg',
+				name: 'JPEG',
 			},
 			{
-				format: '.csv',
-				name: 'CSV',
+				format: '.png',
+				name: 'PNG',
 			},
 		],
 		maxWeight: 5,
