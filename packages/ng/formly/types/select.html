@@ -8,7 +8,9 @@
 	[placeholder]="props.placeholder"
 >
 	<ng-container *luDisplayer="let option">
-		<span [class.chip]="props['multiple']" [class.mod-unkillable]="props['multiple']">{{ option.name }}</span>
+		<span [class.chip]="props['multiple']" [class.mod-unkillable]="props['multiple']"
+			><span class="u-ellipsis">{{ option.name }}</span></span
+		>
 	</ng-container>
 	<lu-option-picker>
 		<lu-option *ngFor="let option of _options" [value]="option"> {{ option.name }} </lu-option>
