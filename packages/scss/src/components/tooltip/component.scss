@@ -17,6 +17,7 @@
 	animation-name: scaleIn;
 	animation-duration: var(--commons-animations-durations-fast);
 	animation-iteration-count: 1;
+	word-wrap: break-word;
 
 	@include keyframe.scaleIn;
 
