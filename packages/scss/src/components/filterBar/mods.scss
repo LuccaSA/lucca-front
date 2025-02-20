@@ -16,9 +16,9 @@
 
 @mixin notCompact {
 	.filterBar-divider.divider {
-		@include divider.vertical;
-
 		margin-inline: var(--pr-t-spacings-50);
+
+		@include divider.vertical;
 	}
 
 	.filterBar-scrollBox.scrollBox {

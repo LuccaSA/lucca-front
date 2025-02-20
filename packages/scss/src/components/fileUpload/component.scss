@@ -1,6 +1,7 @@
 @use '@lucca-front/scss/src/commons/utils/namespace';
 
 @use '@lucca-front/scss/src/commons/utils/a11y';
+@use '@lucca-front/scss/src/commons/utils/reset';
 @use '@lucca-front/scss/src/components/button/exports' as button;
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
@@ -28,6 +29,12 @@
 	}
 
 	@at-root ($atRoot) {
+		.fileUpload-wrapper {
+			display: flex;
+			flex-direction: column;
+			gap: 1rem;
+		}
+
 		.fileUpload-status {
 <<<<<<< Updated upstream
 			min-width: var(--pr-t-spacings-600);
@@ -42,14 +49,22 @@
 			position: var(--components-fileUpload-status-position);
 		}
 
-		.fileUpload-status-image {
+		.fileUpload-status-preview {
 			position: absolute;
-			inset: var(--components-fileUpload-status-image-inset);
-			width: var(--components-fileUpload-status-image-size);
-			height: var(--components-fileUpload-status-image-size);
-			object-fit: cover;
+			inset: var(--components-fileUpload-status-img-inset);
+			inline-size: var(--components-fileUpload-status-img-size);
+			block-size: var(--components-fileUpload-status-img-size);
 			border-radius: var(--commons-borderRadius-M);
+			background-color: var(--palettes-neutral-25);
+			display: flex;
+			overflow: hidden;
+		}
+
+		.fileUpload-status-preview-img {
+			object-fit: cover;
 			opacity: 0.5;
+			width: 100%;
+			height: 100%;
 		}
 
 		.fileUpload-input {
@@ -87,7 +102,7 @@
 			line-height: var(--sizes-S-lineHeight);
 		}
 
-		.fileUpload-button {
+		.fileUpload-button.button {
 			visibility: var(--components-fileUpload-button-visibility);
 			display: var(--components-fileUpload-button-display);
 		}
@@ -104,6 +119,20 @@
 			inset-block-end: var(--pr-t-spacings-100);
 >>>>>>> Stashed changes
 			position: var(--components-fileUpload-instruction-filename-position);
+		}
+
+		.fileUpload-toolbar {
+			@include reset.list;
+
+			border-radius: var(--commons-borderRadius-L);
+			position: absolute;
+			display: flex;
+			gap: var(--pr-t-spacings-50);
+			padding: var(--pr-t-spacings-50);
+			box-shadow: var(--pr-t-elevation-shadow-overlay);
+			background-color: var(--pr-t-elevation-surface-raised);
+			z-index: 1;
+			inset-block-end: var(--pr-t-spacings-150);
 		}
 	}
 }

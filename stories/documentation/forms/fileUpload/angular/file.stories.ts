@@ -1,5 +1,5 @@
 import { provideHttpClient } from '@angular/common/http';
-import { FileUploadedComponent } from '@lucca-front/ng/fileUploaded';
+import { FileUploadedComponent } from '@lucca-front/ng/fileUpload';
 import { applicationConfig, Meta, moduleMetadata } from '@storybook/angular';
 import { generateInputs } from 'stories/helpers/stories';
 
@@ -19,7 +19,7 @@ export default {
 			},
 		},
 		format: {
-			options: ['img', 'file', 'word', 'excel', 'powerpoint'],
+			options: ['file', 'word', 'excel', 'powerpoint'],
 			control: {
 				type: 'radio',
 			},
@@ -40,8 +40,10 @@ export default {
 
 export const Basic = {
 	args: {
-		size: null,
-		format: 'img',
+		fileSize: 1024,
+		fileFormat: 'img',
+		fileName: 'filename',
+		fileUrl: '#',
 		state: 'success',
 	},
 };

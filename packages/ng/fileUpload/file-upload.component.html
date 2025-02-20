@@ -1,47 +1,90 @@
-<input
-	[attr.aria-describedby]="'fileUpload-instruction-' + idSuffix"
-	[attr.multiple]="multiple ? 'multiple' : null"
-	class="fileUpload-input"
-	type="file"
-	title=""
-	[attr.accept]="acceptAttribute().length > 0 ? acceptAttribute() : null"
-	luInput
-	(dragenter)="droppable = true"
-	(dragleave)="droppable = false"
-	(change)="filesChange($event)"
-/>
-@switch (state) { @case ('loading') {
-<div class="fileUpload-status">
-	@if (preview() && bitmapPreviews.length > 0) {
-	<img class="fileUpload-status-image" [src]="bitmapPreviews[0]" [alt]="files[0].name" />
-	}
-	<div class="fileUpload-status-loading loading"></div>
-</div>
-} @default {
-<div
-	class="fileUpload-status"
-	[innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/empty-states/icons/iconPaperAction.svg' | luSafeExternalSvg"
-></div>
-}}
+<div class="fileUpload" [class.mod-droppable]="droppable" [class.mod-S]="size() === 'S'" [class.is-hidden]="!multiple && files.length > 0">
+	<input
+		[attr.aria-describedby]="'fileUpload-instruction-' + idSuffix"
+		[attr.multiple]="multiple ? 'multiple' : null"
+		class="fileUpload-input"
+		type="file"
+		title=""
+		[attr.accept]="acceptAttribute().length > 0 ? acceptAttribute() : null"
+		luInput
+		(dragenter)="droppable = true"
+		(dragleave)="droppable = false"
+		(change)="filesChange($event)"
+		#inputRef
+	/>
+	@switch (state) { @case ('loading') {
+	<div class="fileUpload-status">
+		@if (!disablePreview() && !multiple && bitmapPreviews.length > 0) {
+		<div class="fileUpload-status-preview">
+			<img class="fileUpload-status-preview-img" [src]="bitmapPreviews[0]" alt="" />
+		</div>
+		}
+		<div class="fileUpload-status-loading loading"></div>
+	</div>
+	} @default { @if (acceptOnlyImages()) {
+	<div
+		class="fileUpload-status"
+		[innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/empty-states/icons/iconPictureAction.svg' | luSafeExternalSvg"
+	></div>
+	} @else {
+	<div
+		class="fileUpload-status"
+		[innerHtml]="'https://cdn.lucca.fr/transverse/prisme/visuals/empty-states/icons/iconPaperAction.svg' | luSafeExternalSvg"
+	></div>
+	} }}
 
-<div class="fileUpload-instruction" [attr.id]="'fileUpload-instruction-' + idSuffix">
-	@if (( state === 'critical') && (!multiple)) {
-	<span class="fileUpload-instruction-filename" aria-hidden="true">filename.ext</span>
-	} @if ((state !== 'critical') || ((state === 'critical') && small && multiple)) {
-	<span class="fileUpload-instruction-action" aria-hidden="true">
-		@if (multiple) { Déposez les fichiers ici ou
-		<span class="fileUpload-instruction-action-click">cliquez pour les sélectionner</span>. } @else { Déposez le fichier ici ou
-		<span class="fileUpload-instruction-action-click">cliquez pour le sélectionner</span>. }
-	</span>
-	} @if (state === 'critical') { @if (!small) {
-	<span class="fileUpload-instruction-action" aria-hidden="true">
-		@if (multiple) { Cliquez ou déposez des nouveaux fichiers. } @else { Remplacez-le en cliquant ou en déposant un nouveau fichier. }</span
+	<div class="fileUpload-instruction" [attr.id]="'fileUpload-instruction-' + idSuffix">
+		@if (( state === 'critical') && !multiple) {
+		<span class="fileUpload-instruction-filename" aria-hidden="true">filename.ext</span>
+		} @if ((state !== 'critical') || ((state === 'critical') && size() === 'S' && multiple)) {
+		<span class="fileUpload-instruction-action" aria-hidden="true">
+			@if (multiple) { Déposez les fichiers ici ou
+			<span class="fileUpload-instruction-action-click">cliquez pour les sélectionner</span>. } @else { Déposez le fichier ici ou
+			<span class="fileUpload-instruction-action-click">cliquez pour le sélectionner</span>. }
+		</span>
+		} @if (state === 'critical') { @if (size() !== 'S') {
+		<span class="fileUpload-instruction-action" aria-hidden="true">
+			@if (multiple) { Cliquez ou déposez des nouveaux fichiers. } @else { Remplacez-le en cliquant ou en déposant un nouveau fichier.
+			}</span
+		>
+		} } @if (acceptNames().length) {
+		<span class="fileUpload-instruction-formats">
+			@if (acceptNames().length > 1) {Formats acceptés :} @else { Format accepté : } {{acceptNames().join(', ')}}.
+		</span>
+		} @if (fileMaxSize()) {
+		<span class="fileUpload-instruction-size">Poids maximum@if (multiple) { d’un fichier} : {{ maxSizeDisplay() }}. </span>
+		}
+	</div>
+
+	<span class="fileUpload-button button" aria-hidden="true"
+		>@if (multiple) {Sélectionner des fichiers} @else {Sélectionner un fichier}</span
 	>
-	} } @if (accept().length > 0) {
-	<span class="fileUpload-instruction-formats">Format accepté : {{acceptNames()}}. </span>
-	} @if (maxWeight()) {
-	<span class="fileUpload-instruction-size">Poids maximum : {{ maxWeightDisplay() }}. </span>
+
+	@if (state === 'loading' && !multiple) {
+	<ul class="fileUpload-toolbar">
+		<!--
+	<li>
+	<button type="button" luButton="text" luTooltip="Modifier" luTooltipOnlyForDisplay>
+		<lu-icon icon="officePen" alt="Modifier" size="S" />
+	</button>
+	</li>
+	-->
+		<!-- TODO: click -->
+		<li>
+			<button type="button" luButton="text" luTooltip="Supprimer" luTooltipOnlyForDisplay (click)="abort(inputRef)">
+				<lu-icon icon="trashDelete" alt="Supprimer le fichier « {{files[0].name}} »" size="S" />
+			</button>
+		</li>
+	</ul>
 	}
 </div>
-
-<span class="fileUpload-button button" aria-hidden="true">@if (multiple) {Sélectionner des fichiers} @else {Sélectionner un fichier}</span>
+@for (file of files; track file.name; let index = $index) {
+<lu-file-uploaded
+	[fileUrl]="bitmapPreviews[index]"
+	[size]="size()"
+	[fileName]="file.name"
+	[fileFormat]="file.type"
+	[fileSize]="file.size"
+	(deleteFile)="abort(inputRef)"
+/>
+}

@@ -20,6 +20,10 @@
 		@include loading;
 	}
 
+	&.is-hidden {
+		@include hidden;
+	}
+
 	&.is-success {
 		@include success;
 	}

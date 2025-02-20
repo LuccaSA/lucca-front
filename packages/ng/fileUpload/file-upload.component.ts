@@ -1,12 +1,14 @@
-import { booleanAttribute, Component, computed, HostBinding, inject, input, Input, LOCALE_ID, OnChanges, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, Component, computed, inject, input, Input, LOCALE_ID, OnChanges, ViewEncapsulation } from '@angular/core';
+import { ButtonComponent } from '@lucca-front/ng/button';
 import { LuClass } from '@lucca-front/ng/core';
 import { InputDirective } from '@lucca-front/ng/form-field';
+import { IconComponent } from '@lucca-front/ng/icon';
 import { LuSafeExternalSvgPipe } from '@lucca-front/ng/safe-content';
+import { LuTooltipModule } from '@lucca-front/ng/tooltip';
+import { FileUploadedComponent } from './fileUploaded/file-uploaded.component';
+import { formatSize, MEGA_BYTE } from './formatter';
 
 let nextId = 0;
-const KILO_BYTE = 1000;
-const MEGA_BYTE = KILO_BYTE * 1000;
-const GIGA_BYTE = MEGA_BYTE * 1000;
 
 @Component({
 	selector: 'lu-file-upload',
@@ -14,11 +16,9 @@ const GIGA_BYTE = MEGA_BYTE * 1000;
 	templateUrl: './file-upload.component.html',
 	styleUrls: ['./file-upload.component.scss'],
 	encapsulation: ViewEncapsulation.None,
-	imports: [LuSafeExternalSvgPipe, InputDirective],
+	imports: [LuSafeExternalSvgPipe, InputDirective, ButtonComponent, IconComponent, LuTooltipModule, FileUploadedComponent],
 	providers: [LuClass],
-	host: {
-		class: 'fileUpload',
-	},
+	host: { class: 'fileUpload-wrapper' },
 })
 export class FileUploadComponent implements OnChanges {
 	#luClass = inject(LuClass);
@@ -26,7 +26,6 @@ export class FileUploadComponent implements OnChanges {
 
 	idSuffix = nextId++;
 
-	@HostBinding('class.is-droppable')
 	droppable = false;
 
 	files: File[] = [];
@@ -46,71 +45,47 @@ export class FileUploadComponent implements OnChanges {
 		}>
 	>([]);
 
-	listingFormatter = new Intl.ListFormat(this.#locale, {
-		style: 'short',
-		type: 'disjunction',
-	});
-
 	acceptNames = computed(() =>
-		this.listingFormatter.format(
-			this.accept()
-				.filter((e) => e.name)
-				.map((e) => e.name),
-		),
+		this.accept()
+			.filter((e) => e.name)
+			.map((e) => e.name),
 	);
 
 	acceptAttribute = computed(() => this.accept().map((e) => e.format));
 
 	// TODO: Check base max weight in Lucca Files
-	maxWeight = input<number>(80 * MEGA_BYTE);
+	fileMaxSize = input<number>(80 * MEGA_BYTE);
 
 	// TODO this is filled by the consumer to decide if we want to display image preview when possible.
-	preview = input(true, { transform: booleanAttribute });
+	disablePreview = input(false, { transform: booleanAttribute });
 
 	bitmapPreviews: string[] = [];
 
-	maxWeightDisplay = computed(() => {
-		let unit = 'byte';
-		let value = this.maxWeight();
+	maxSizeDisplay = computed(() => formatSize(this.#locale, this.fileMaxSize()));
 
-		if (this.maxWeight() >= GIGA_BYTE) {
-			unit = 'gigabyte';
-			value /= GIGA_BYTE;
-		} else if (this.maxWeight() >= MEGA_BYTE) {
-			unit = 'megabyte';
-			value /= MEGA_BYTE;
-		} else if (this.maxWeight() >= KILO_BYTE) {
-			unit = 'kilobyte';
-			value /= KILO_BYTE;
-		}
+	size = input<'S' | 'M'>('M');
 
-		const weightFormatter = Intl.NumberFormat(this.#locale, {
-			notation: 'compact',
-			style: 'unit',
-			unit: unit,
-			unitDisplay: 'narrow',
-		});
-
-		return weightFormatter.format(value);
-	});
-
-	small = input<boolean, boolean>(false, { transform: booleanAttribute });
-
-	@HostBinding('class.mod-S')
-	get isSmall() {
-		return this.small();
-	}
+	acceptOnlyImages = input<boolean, boolean>(false, { transform: booleanAttribute });
 
 	filesChange(event: Event) {
 		this.droppable = false;
 		const host = event.target as HTMLInputElement;
 		this.state = 'loading';
-		if (this.preview()) {
-			this.bitmapPreviews = [URL.createObjectURL(host.files[0])];
+		this.files = Array.from(host.files);
+		if (!this.disablePreview()) {
+			this.bitmapPreviews = this.files.map((file) => URL.createObjectURL(file));
 		}
 	}
 
 	ngOnChanges(): void {
 		this.#luClass.setState({ [`is-${this.state}`]: !!this.state });
+	}
+
+	abort(input: HTMLInputElement) {
+		input.value = null;
+
+		this.bitmapPreviews = [];
+		this.files = [];
+		this.state = null;
 	}
 }
