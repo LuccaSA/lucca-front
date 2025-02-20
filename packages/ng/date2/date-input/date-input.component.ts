@@ -24,7 +24,6 @@ import { InputDirective } from '@lucca-front/ng/form-field';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { PopoverDirective } from '@lucca-front/ng/popover2';
 import { isAfter, isBefore, isSameDay, parse, startOfDay } from 'date-fns';
-import { isNotNil } from 'packages/ng/time/core/misc.utils';
 import { AbstractDateComponent } from '../abstract-date-component';
 import { CalendarMode } from '../calendar2/calendar-mode';
 import { Calendar2Component } from '../calendar2/calendar2.component';
@@ -273,7 +272,7 @@ export class DateInputComponent extends AbstractDateComponent implements Control
 	}
 
 	writeValue(date: Date | string | null): void {
-		if (isNotNil(date)) {
+		if (date != null) {
 			const _date = transformDateInputToDate(date);
 			const start = startOfDay(_date);
 			this.dateFromWriteValue.set(start);
