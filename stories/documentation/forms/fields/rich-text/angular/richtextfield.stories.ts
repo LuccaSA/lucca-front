@@ -12,6 +12,7 @@ import {
 	TextStyleToolbarComponent,
 } from '@lucca-front/ng/forms/rich-text-input';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { DividerComponent } from 'dist/ng/divider';
 import { cleanupTemplate, generateInputs } from 'stories/helpers/stories';
 import { StoryModelDisplayComponent } from 'stories/helpers/story-model-display.component';
 import { RICH_TEXT_FORMATER } from '../../../../../../packages/ng/forms/rich-text-input/formaters/rich-text-formater';
@@ -33,6 +34,7 @@ export default {
 				ReactiveFormsModule,
 				BrowserAnimationsModule,
 				StoryModelDisplayComponent,
+				DividerComponent,
 			],
 			providers: [
 				{
@@ -59,11 +61,18 @@ export const Basic: StoryObj<RichTextInputComponent & { disabled: boolean; examp
 	<lu-rich-text-input
 	${generateInputs(inputArgs, argTypes)}
 		[(ngModel)]="example">
-			<lu-rich-text-toolbar-text-style/>
-				<lu-rich-text-toolbar-list-style/>
-				<lu-rich-text-plugin-headings/>
-				<lu-rich-text-plugin-link/>
-				<lu-rich-text-plugin-clear-format/>
+				<div class="u-width100% u-displayFlex u-justifyContentSpaceBetween pr-u-gap100">
+					<div class="u-displayFlex  pr-u-gap100">
+						<lu-rich-text-toolbar-text-style/>
+						<lu-divider [vertical]="true"/>
+						<lu-rich-text-toolbar-list-style/>
+						<lu-divider [vertical]="true"/>
+						<lu-rich-text-plugin-headings/>
+						<lu-divider [vertical]="true"/>
+						<lu-rich-text-plugin-link/>
+					</div>
+					<lu-rich-text-plugin-clear-format/>
+				</div>
 	</lu-rich-text-input>
 </lu-form-field>
 <pr-story-model-display>{{example}}</pr-story-model-display>`),
