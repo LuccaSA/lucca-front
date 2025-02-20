@@ -32,3 +32,7 @@
 @mixin loadingS {
 	--components-fileUpload-instruction-display: block;
 }
+
+@mixin hidden {
+	--components-fileUpload-display: none;
+}

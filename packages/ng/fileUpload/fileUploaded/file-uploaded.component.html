@@ -1,9 +1,9 @@
 <div class="fileUploaded-status">
-	@switch (state) { @case ('loading') {
+	@if (fileUrl() && state() !== 'critical') {
+	<img class="fileUploaded-status-img" [src]="fileUrl()" alt="" width="56" height="56" loading="lazy" />
+	} @else { @switch (state()) { @case ('loading') {
 	<div class="fileUploaded-status-loading loading"></div>
-	} @case ('success') { @switch (format) { @case ('img') {
-	<img class="fileUploaded-status-img" src="https://dummyimage.com/360" alt="" width="56" height="56" loading="lazy" />
-	} @case ('file') {
+	} @case ('success') { @switch (format()) { @case ('file') {
 	<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="none" viewBox="0 0 32 32" class="fileUploaded-status-svg">
 		<rect width="417" height="161" x="-128.5" y="-64.5" stroke="#9747FF" stroke-dasharray="10 5" rx="16.5" />
 		<path
@@ -83,12 +83,12 @@
 			mask="url(#a)"
 		/>
 	</svg>
-	} } } }
+	} } } }}
 </div>
 <div class="fileUploaded-informations">
-	<span class="fileUploaded-informations-filename">filename.ext</span>
-	<span class="fileUploaded-informations-extension">Fichier EXT</span>
-	<span class="fileUploaded-informations-size">88,8 Mo</span>
+	<span class="fileUploaded-informations-filename">{{ fileName() }}</span>
+	<span class="fileUploaded-informations-extension">Fichier {{ fileFormat().split('/')[1] | uppercase }}</span>
+	<span class="fileUploaded-informations-size">{{ fileSizeDisplay() }}</span>
 </div>
 <button
 	class="fileUploaded-button button"
@@ -96,7 +96,8 @@
 	luTooltip="Supprimer le fichier"
 	luTooltipOnlyForDisplay
 	luTooltipPosition="before"
+	(click)="deleteFile.emit()"
 >
-	<span class="lucca-icon icon-trash" aria-hidden="true"></span>
-	<span class="u-mask">Supprimer le fichier « filename.ext »</span>
+	<!-- TODO -->
+	<lu-icon icon="trashDelete" alt="Supprimer le fichier « {{fileName()}} »" />
 </button>

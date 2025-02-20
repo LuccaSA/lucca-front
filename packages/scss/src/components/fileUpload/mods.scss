@@ -15,6 +15,6 @@
 	--components-fileUpload-status-minHeight: var(--pr-t-spacings-600);
 	--components-fileUpload-justifyContent: flex-start;
 	--components-fileUpload-status-position: relative;
-	--components-fileUpload-status-image-inset: calc(var(--pr-t-spacings-75) * -2 + 2px);
-	--components-fileUpload-status-image-size: calc(100% + var(--pr-t-spacings-75) * 3 + 2px);
+	--components-fileUpload-status-img-inset: 0;
+	--components-fileUpload-status-img-size: var(--pr-t-spacings-600);
 }

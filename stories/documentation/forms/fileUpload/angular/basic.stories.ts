@@ -23,12 +23,12 @@ export default {
 				type: 'boolean',
 			},
 		},
-		preview: {
+		disablePreview: {
 			control: {
 				type: 'boolean',
 			},
 		},
-		maxWeight: {
+		fileMaxWeight: {
 			control: {
 				type: 'number',
 			},
@@ -36,6 +36,11 @@ export default {
 		accept: {
 			control: {
 				type: 'object',
+			},
+		},
+		acceptOnlyImages: {
+			control: {
+				type: 'boolean',
 			},
 		},
 	},
@@ -62,6 +67,7 @@ export const Basic = {
 		small: false,
 		state: null,
 		multiple: false,
+		acceptOnlyImages: false,
 		accept: [
 			{
 				format: '.jpg',
@@ -75,7 +81,7 @@ export const Basic = {
 				name: 'PNG',
 			},
 		],
-		maxWeight: 5,
-		preview: true,
+		fileMaxWeight: 5000000,
+		disablePreview: false,
 	},
 };
