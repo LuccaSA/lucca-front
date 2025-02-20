@@ -6,19 +6,18 @@ import {
 	HeadingsComponent,
 	LinkComponent,
 	ListStyleToolbarComponent,
-	MarkdownFormater,
+	provideLuRichTextMarkdownFormater,
 	RichTextInputComponent,
 	TextStyleComponent,
 	TextStyleToolbarComponent,
 } from '@lucca-front/ng/forms/rich-text-input';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { DividerComponent } from 'dist/ng/divider';
+import { DividerComponent } from '@lucca-front/ng/divider';
 import { cleanupTemplate, generateInputs } from 'stories/helpers/stories';
 import { StoryModelDisplayComponent } from 'stories/helpers/story-model-display.component';
-import { RICH_TEXT_FORMATER } from '../../../../../../packages/ng/forms/rich-text-input/formaters/rich-text-formater';
 
 export default {
-	title: 'Documentation/Forms/Fields/RichTextField/Angular',
+	title: 'Documentation/Forms/Fields/RichTextInput/Angular',
 	decorators: [
 		moduleMetadata({
 			imports: [
@@ -36,12 +35,7 @@ export default {
 				StoryModelDisplayComponent,
 				DividerComponent,
 			],
-			providers: [
-				{
-					provide: RICH_TEXT_FORMATER,
-					useFactory: () => new MarkdownFormater(),
-				},
-			],
+			providers: [provideLuRichTextMarkdownFormater()],
 		}),
 	],
 	argTypes: {

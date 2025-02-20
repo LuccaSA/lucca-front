@@ -1,6 +1,7 @@
 import { LexicalEditor } from 'lexical';
-import { RichTextFormater } from './rich-text-formater';
+import { RICH_TEXT_FORMATER, RichTextFormater } from './rich-text-formater';
 import { $convertFromMarkdownString, $convertToMarkdownString, Transformer, TRANSFORMERS } from '@lexical/markdown';
+import { Provider } from '@angular/core';
 
 export class MarkdownFormater extends RichTextFormater {
 	#transformers = TRANSFORMERS;
@@ -24,4 +25,11 @@ export class MarkdownFormater extends RichTextFormater {
 		editor.getEditorState().read(() => (result = $convertToMarkdownString(this.#transformers)));
 		return result;
 	}
+}
+
+export function provideLuRichTextMarkdownFormater(transformers?: Transformer[]): Provider {
+	return {
+		provide: RICH_TEXT_FORMATER,
+		useFactory: () => new MarkdownFormater(transformers),
+	};
 }

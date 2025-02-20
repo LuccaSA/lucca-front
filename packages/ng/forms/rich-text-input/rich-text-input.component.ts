@@ -21,7 +21,7 @@ import { mergeRegister } from '@lexical/utils';
 
 import { $canShowPlaceholderCurry } from '@lexical/text';
 import { createEditor, Klass, LexicalEditor, LexicalNode } from 'lexical';
-import { RICH_TEXT_FORMATER, RichTextFormater } from './formaters/rich-text-formater';
+import { RICH_TEXT_FORMATER, RichTextFormater } from './formaters';
 
 export interface RichTextPluginComponent {
 	setEditorInstance(editor: LexicalEditor): void;
