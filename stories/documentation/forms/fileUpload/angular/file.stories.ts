@@ -7,7 +7,7 @@ export default {
 	title: 'Documentation/FileUpload/Angular/File',
 	argTypes: {
 		size: {
-			options: [null, 'S', 'L'],
+			options: ['S', 'M'],
 			control: {
 				type: 'radio',
 			},
@@ -40,10 +40,15 @@ export default {
 
 export const Basic = {
 	args: {
-		fileSize: 1024,
-		fileFormat: 'img',
-		fileName: 'filename',
-		fileUrl: '#',
+		size: 'M',
+		fileSize: 28420,
+		fileType: 'image/png',
+		fileName: 'dummyimage.png',
+		filePreviewUrl: 'https://dummyimage.com/500',
+		fileUrl: 'https://dummyimage.com/5000',
 		state: 'success',
+		typeMedia: false,
+		downloadable: false,
+		deletable: true,
 	},
 };

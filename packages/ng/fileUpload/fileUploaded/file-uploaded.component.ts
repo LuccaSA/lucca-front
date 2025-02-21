@@ -1,5 +1,6 @@
 import { UpperCasePipe } from '@angular/common';
 import { booleanAttribute, Component, computed, effect, HostBinding, inject, input, LOCALE_ID, output, ViewEncapsulation } from '@angular/core';
+import { ButtonComponent } from '@lucca-front/ng/button';
 import { LuClass } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
@@ -13,7 +14,7 @@ let nextId = 0;
 	templateUrl: './file-uploaded.component.html',
 	styleUrls: ['./file-uploaded.component.scss'],
 	encapsulation: ViewEncapsulation.None,
-	imports: [IconComponent, UpperCasePipe, LuTooltipModule],
+	imports: [IconComponent, UpperCasePipe, LuTooltipModule, ButtonComponent],
 	providers: [LuClass],
 	host: {
 		class: 'fileUploaded',
@@ -29,13 +30,21 @@ export class FileUploadedComponent {
 
 	size = input<'S' | 'M'>('M');
 
-	@HostBinding('class.mod-media')
+	downloadable = input<boolean, boolean>(false, { transform: booleanAttribute });
+	deletable = input<boolean, boolean>(false, { transform: booleanAttribute });
+
 	typeMedia = input<boolean, boolean>(false, { transform: booleanAttribute });
 
+	@HostBinding('class.mod-media')
+	get typeMediaAttr() {
+		return this.typeMedia();
+	}
+
 	fileName = input.required<string>();
-	fileFormat = input.required<string>();
+	fileType = input.required<string>();
 	fileSize = input.required<number>();
 	fileUrl = input<string | null>(null);
+	filePreviewUrl = input<string | null>(null);
 
 	deleteFile = output();
 
