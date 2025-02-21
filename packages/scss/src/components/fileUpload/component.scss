@@ -19,6 +19,7 @@
 	gap: var(--pr-t-spacings-200);
 	color: var(--palettes-neutral-800);
 	min-block-size: var(--components-fileUpload-minHeight);
+	grid-column: 1 / -1;
 
 	&:has(.fileUpload-input:focus-visible) {
 		@include a11y.focusVisible;
@@ -26,9 +27,9 @@
 
 	@at-root ($atRoot) {
 		.fileUpload-wrapper {
-			display: flex;
-			flex-direction: column;
-			gap: 1rem;
+			display: grid;
+			grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
+			gap: var(--pr-t-spacings-100);
 		}
 
 		.fileUpload-status {

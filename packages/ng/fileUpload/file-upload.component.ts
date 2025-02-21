@@ -1,4 +1,5 @@
-import { booleanAttribute, Component, computed, inject, input, Input, LOCALE_ID, OnChanges, ViewEncapsulation } from '@angular/core';
+import { TitleCasePipe } from '@angular/common';
+import { booleanAttribute, Component, computed, inject, input, Input, LOCALE_ID, ViewEncapsulation } from '@angular/core';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { LuClass } from '@lucca-front/ng/core';
 import { InputDirective } from '@lucca-front/ng/form-field';
@@ -16,12 +17,11 @@ let nextId = 0;
 	templateUrl: './file-upload.component.html',
 	styleUrls: ['./file-upload.component.scss'],
 	encapsulation: ViewEncapsulation.None,
-	imports: [LuSafeExternalSvgPipe, InputDirective, ButtonComponent, IconComponent, LuTooltipModule, FileUploadedComponent],
+	imports: [LuSafeExternalSvgPipe, InputDirective, ButtonComponent, IconComponent, LuTooltipModule, FileUploadedComponent, TitleCasePipe],
 	providers: [LuClass],
 	host: { class: 'fileUpload-wrapper' },
 })
-export class FileUploadComponent implements OnChanges {
-	#luClass = inject(LuClass);
+export class FileUploadComponent {
 	#locale = inject(LOCALE_ID);
 
 	idSuffix = nextId++;
@@ -35,8 +35,7 @@ export class FileUploadComponent implements OnChanges {
 	})
 	multiple = false;
 
-	@Input()
-	state?: 'loading' | 'critical';
+	state = input<null | 'loading' | 'critical'>(null);
 
 	accept = input<
 		Array<{
@@ -65,20 +64,26 @@ export class FileUploadComponent implements OnChanges {
 
 	size = input<'S' | 'M'>('M');
 
-	acceptOnlyImages = input<boolean, boolean>(false, { transform: booleanAttribute });
+	typeMedia = input<boolean, boolean>(false, { transform: booleanAttribute });
+
+	illustration = computed(() => {
+		if (this.typeMedia()) {
+			return 'https://cdn.lucca.fr/transverse/prisme/visuals/empty-states/icons/iconPictureAction.svg';
+		} else {
+			return 'https://cdn.lucca.fr/transverse/prisme/visuals/empty-states/icons/iconPaperAction.svg';
+		}
+	});
 
 	filesChange(event: Event) {
-		this.droppable = false;
+		// TODO loading state
 		const host = event.target as HTMLInputElement;
-		this.state = 'loading';
+
+		this.droppable = false;
 		this.files = Array.from(host.files);
+
 		if (!this.disablePreview()) {
 			this.bitmapPreviews = this.files.map((file) => URL.createObjectURL(file));
 		}
-	}
-
-	ngOnChanges(): void {
-		this.#luClass.setState({ [`is-${this.state}`]: !!this.state });
 	}
 
 	abort(input: HTMLInputElement) {

@@ -13,6 +13,7 @@
 	align-items: var(--components-fileUploaded-alignItems);
 	gap: var(--components-fileUploaded-gap);
 	inline-size: var(--components-fileUploaded-width);
+	grid-column: 1 / -1;
 
 	@at-root ($atRoot) {
 		.fileUploaded-status {
@@ -25,6 +26,7 @@
 			align-items: center;
 			color: var(--palettes-neutral-700);
 			background-color: var(--components-fileUploaded-status-backgroundColor);
+			flex-shrink: 0;
 		}
 
 		.fileUploaded-status-svg {
@@ -52,6 +54,7 @@
 
 		.fileUploaded-informations-filename {
 			display: block;
+			hyphens: auto;
 		}
 
 		.fileUploaded-informations-extension,

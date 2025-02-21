@@ -6,9 +6,10 @@ import { generateInputs } from 'stories/helpers/stories';
 export default {
 	title: 'Documentation/FileUpload/Angular/Basic',
 	argTypes: {
-		small: {
+		size: {
+			options: ['S', 'M'],
 			control: {
-				type: 'boolean',
+				type: 'radio',
 			},
 		},
 		state: {
@@ -38,7 +39,7 @@ export default {
 				type: 'object',
 			},
 		},
-		acceptOnlyImages: {
+		typeMedia: {
 			control: {
 				type: 'boolean',
 			},
@@ -64,10 +65,10 @@ export default {
 
 export const Basic = {
 	args: {
-		small: false,
+		size: 'M',
 		state: null,
 		multiple: false,
-		acceptOnlyImages: false,
+		typeMedia: false,
 		accept: [
 			{
 				format: '.jpg',
@@ -79,6 +80,10 @@ export const Basic = {
 			{
 				format: '.png',
 				name: 'PNG',
+			},
+			{
+				format: '.gif',
+				name: 'GIF',
 			},
 		],
 		fileMaxWeight: 5000000,
