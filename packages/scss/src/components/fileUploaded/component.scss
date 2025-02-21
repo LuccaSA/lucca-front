@@ -12,49 +12,32 @@
 	flex-direction: var(--components-fileUploaded-flexDirection);
 	align-items: var(--components-fileUploaded-alignItems);
 	gap: var(--components-fileUploaded-gap);
-<<<<<<< Updated upstream
-	width: var(--components-fileUploaded-width);
-=======
 	inline-size: var(--components-fileUploaded-width);
->>>>>>> Stashed changes
+	grid-column: 1 / -1;
 
 	@at-root ($atRoot) {
 		.fileUploaded-status {
 			display: flex;
 			border-radius: var(--commons-borderRadius-M);
 			overflow: hidden;
-<<<<<<< Updated upstream
-			width: var(--components-fileUploaded-status-width);
-			height: var(--components-fileUploaded-status-height);
-=======
 			inline-size: var(--components-fileUploaded-status-width);
 			block-size: var(--components-fileUploaded-status-height);
->>>>>>> Stashed changes
 			justify-content: center;
 			align-items: center;
 			color: var(--palettes-neutral-700);
 			background-color: var(--components-fileUploaded-status-backgroundColor);
+			flex-shrink: 0;
 		}
 
 		.fileUploaded-status-svg {
-<<<<<<< Updated upstream
-			width: var(--components-fileUploaded-status-svg-width);
-			height: var(--components-fileUploaded-status-svg-height);
-=======
 			inline-size: var(--components-fileUploaded-status-svg-width);
 			block-size: var(--components-fileUploaded-status-svg-height);
->>>>>>> Stashed changes
 		}
 
 		.fileUploaded-status-img {
 			object-fit: cover;
-<<<<<<< Updated upstream
-			width: 100%;
-			height: 100%;
-=======
 			inline-size: 100%;
 			block-size: 100%;
->>>>>>> Stashed changes
 		}
 
 		.fileUploaded-button {
@@ -71,6 +54,7 @@
 
 		.fileUploaded-informations-filename {
 			display: block;
+			hyphens: auto;
 		}
 
 		.fileUploaded-informations-extension,
@@ -82,22 +66,14 @@
 		}
 
 		.fileUploaded-informations-extension + .fileUploaded-informations-size {
-<<<<<<< Updated upstream
-			margin-left: var(--pr-t-spacings-200);
-=======
 			margin-inline-start: var(--pr-t-spacings-200);
->>>>>>> Stashed changes
 			position: relative;
 
 			&::before {
 				content: '';
 				position: absolute;
 				inset: var(--pr-t-spacings-50) auto var(--pr-t-spacings-50) calc(var(--pr-t-spacings-100) * -1);
-<<<<<<< Updated upstream
-				width: var(--commons-divider-width);
-=======
 				inline-size: var(--commons-divider-width);
->>>>>>> Stashed changes
 				background-color: var(--commons-divider-color);
 			}
 		}

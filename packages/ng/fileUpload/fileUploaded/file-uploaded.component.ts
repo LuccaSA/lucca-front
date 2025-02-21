@@ -1,5 +1,5 @@
 import { UpperCasePipe } from '@angular/common';
-import { Component, computed, effect, inject, input, LOCALE_ID, output, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, Component, computed, effect, HostBinding, inject, input, LOCALE_ID, output, ViewEncapsulation } from '@angular/core';
 import { LuClass } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
@@ -28,6 +28,9 @@ export class FileUploadedComponent {
 	format = input<'file' | 'word' | 'excel' | 'powerpoint'>('file');
 
 	size = input<'S' | 'M'>('M');
+
+	@HostBinding('class.mod-media')
+	typeMedia = input<boolean, boolean>(false, { transform: booleanAttribute });
 
 	fileName = input.required<string>();
 	fileFormat = input.required<string>();

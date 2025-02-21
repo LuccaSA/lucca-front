@@ -8,9 +8,13 @@
 		@include S;
 	}
 
-	&.mod-L {
-		@include L;
+	&.mod-media {
+		@include media;
 	}
+
+	// &.mod-L {
+	// 	@include L;
+	// }
 
 	&.mod-word,
 	&.mod-file,
