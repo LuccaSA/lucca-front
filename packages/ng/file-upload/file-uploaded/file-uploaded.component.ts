@@ -6,8 +6,6 @@ import { IconComponent } from '@lucca-front/ng/icon';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 import { formatSize } from '../formatter';
 
-let nextId = 0;
-
 @Component({
 	selector: 'lu-file-uploaded',
 	standalone: true,
@@ -31,6 +29,7 @@ export class FileUploadedComponent {
 	size = input<'S' | 'M'>('M');
 
 	downloadable = input<boolean, boolean>(false, { transform: booleanAttribute });
+
 	deletable = input<boolean, boolean>(false, { transform: booleanAttribute });
 
 	typeMedia = input<boolean, boolean>(false, { transform: booleanAttribute });
@@ -55,6 +54,4 @@ export class FileUploadedComponent {
 			this.#luClass.setState({ [`is-${this.state()}`]: !!this.state(), [`mod-${this.size()}`]: !!this.size(), [`mod-${this.format()}`]: !!this.format() });
 		});
 	}
-
-	idSuffix = nextId++;
 }
