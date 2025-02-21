@@ -104,7 +104,7 @@ export class Calendar2Component implements OnInit {
 
 	displayMode = model<CalendarMode>('year');
 
-	ranges = input<DateRange[]>([]);
+	ranges = input<readonly DateRange[]>([]);
 
 	getCellInfo = input<(date: Date, displayMode: CalendarMode) => CellStatus>((_date: Date) => ({
 		classes: [],
