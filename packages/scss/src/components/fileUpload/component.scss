@@ -1,7 +1,6 @@
 @use '@lucca-front/scss/src/commons/utils/namespace';
 
 @use '@lucca-front/scss/src/commons/utils/a11y';
-@use '@lucca-front/scss/src/commons/utils/reset';
 @use '@lucca-front/scss/src/components/button/exports' as button;
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
@@ -102,20 +101,6 @@
 			margin-block-start: var(--components-fileUpload-instruction-filename-marginTop);
 			inset-block-end: var(--pr-t-spacings-100);
 			position: var(--components-fileUpload-instruction-filename-position);
-		}
-
-		.fileUpload-toolbar {
-			@include reset.list;
-
-			border-radius: var(--commons-borderRadius-L);
-			position: absolute;
-			display: flex;
-			gap: var(--pr-t-spacings-50);
-			padding: var(--pr-t-spacings-50);
-			box-shadow: var(--pr-t-elevation-shadow-overlay);
-			background-color: var(--pr-t-elevation-surface-raised);
-			z-index: 1;
-			inset-block-end: var(--pr-t-spacings-150);
 		}
 	}
 }

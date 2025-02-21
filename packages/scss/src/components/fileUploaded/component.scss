@@ -1,6 +1,8 @@
 @use '@lucca-front/scss/src/commons/utils/namespace';
 
 @use '@lucca-front/scss/src/commons/utils/a11y';
+@use '@lucca-front/scss/src/commons/utils/text';
+
 @use '@lucca-front/scss/src/components/button/exports' as button;
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
@@ -14,6 +16,11 @@
 	gap: var(--components-fileUploaded-gap);
 	inline-size: var(--components-fileUploaded-width);
 	grid-column: 1 / -1;
+	position: relative;
+
+	&:has(.fileUploaded-status:focus-visible) {
+		@include a11y.focusVisible;
+	}
 
 	@at-root ($atRoot) {
 		.fileUploaded-status {
@@ -27,6 +34,8 @@
 			color: var(--palettes-neutral-700);
 			background-color: var(--components-fileUploaded-status-backgroundColor);
 			flex-shrink: 0;
+			aspect-ratio: var(--components-fileUploaded-status-aspectRatio);
+			outline: none;
 		}
 
 		.fileUploaded-status-svg {
@@ -50,11 +59,13 @@
 			flex-grow: 1;
 			padding: var(--pr-t-spacings-50);
 			display: var(--components-fileUploaded-informations-display);
+			min-width: 0;
 		}
 
 		.fileUploaded-informations-filename {
+			@include text.ellipsis;
+
 			display: block;
-			hyphens: auto;
 		}
 
 		.fileUploaded-informations-extension,

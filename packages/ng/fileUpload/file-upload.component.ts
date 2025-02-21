@@ -1,4 +1,3 @@
-import { TitleCasePipe } from '@angular/common';
 import { booleanAttribute, Component, computed, inject, input, Input, LOCALE_ID, ViewEncapsulation } from '@angular/core';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { LuClass } from '@lucca-front/ng/core';
@@ -17,7 +16,7 @@ let nextId = 0;
 	templateUrl: './file-upload.component.html',
 	styleUrls: ['./file-upload.component.scss'],
 	encapsulation: ViewEncapsulation.None,
-	imports: [LuSafeExternalSvgPipe, InputDirective, ButtonComponent, IconComponent, LuTooltipModule, FileUploadedComponent, TitleCasePipe],
+	imports: [LuSafeExternalSvgPipe, InputDirective, ButtonComponent, IconComponent, LuTooltipModule, FileUploadedComponent],
 	providers: [LuClass],
 	host: { class: 'fileUpload-wrapper' },
 })
@@ -35,7 +34,7 @@ export class FileUploadComponent {
 	})
 	multiple = false;
 
-	state = input<null | 'loading' | 'critical'>(null);
+	state = input<null | 'loading' | 'success' | 'critical'>(null);
 
 	accept = input<
 		Array<{

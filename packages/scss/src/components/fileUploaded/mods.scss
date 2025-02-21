@@ -21,6 +21,9 @@
 }
 
 @mixin media {
-	--components-fileUploaded-informations-display: none;
+	// --components-fileUploaded-informations-display: none;
 	grid-column: auto;
+	--components-fileUploaded-status-width: 100%;
+	--components-fileUploaded-status-height: auto;
+	--components-fileUploaded-status-aspectRatio: 1;
 }

@@ -1,6 +1,6 @@
-<div class="fileUploaded-status">
-	@if (fileUrl() && state() !== 'critical') {
-	<img class="fileUploaded-status-img" [src]="fileUrl()" alt="" width="56" height="56" loading="lazy" />
+<div class="fileUploaded-status" [luTooltip]="fileName()" [luTooltipDisabled]="!typeMediaAttr">
+	@if (filePreviewUrl() && state() !== 'critical') {
+	<img class="fileUploaded-status-img" [src]="filePreviewUrl()" alt="" width="56" height="56" loading="lazy" />
 	} @else { @switch (state()) { @case ('loading') {
 	<div class="fileUploaded-status-loading loading"></div>
 	} @case ('success') { @switch (format()) { @case ('file') {
@@ -85,19 +85,44 @@
 	</svg>
 	} } } }}
 </div>
+@if (!typeMedia()) {
 <div class="fileUploaded-informations">
-	<span class="fileUploaded-informations-filename">{{ fileName() }}</span>
-	<span class="fileUploaded-informations-extension">Fichier {{ fileFormat().split('/')[1] | uppercase }}</span>
+	<span class="fileUploaded-informations-filename" luTooltip luTooltipWhenEllipsis>{{ fileName() }}</span>
+	<span class="fileUploaded-informations-extension">Fichier {{ fileType().split('/')[1] | uppercase }}</span>
 	<span class="fileUploaded-informations-size">{{ fileSizeDisplay() }}</span>
 </div>
-<button
-	class="fileUploaded-button button"
-	type="button"
-	luTooltip="Supprimer le fichier"
-	luTooltipOnlyForDisplay
-	luTooltipPosition="before"
-	(click)="deleteFile.emit()"
->
-	<!-- TODO -->
-	<lu-icon icon="trashDelete" alt="Supprimer le fichier « {{fileName()}} »" />
-</button>
+} @if (downloadable() || deletable()) {
+<div class="fileToolbar" [class.mod-invisible]="!typeMedia()">
+	<ul class="fileToolbar-list">
+		@if (downloadable()) {
+		<li class="fileToolbar-list-item">
+			<a
+				[attr.href]="fileUrl()"
+				download="download"
+				class="fileToolbar-list-item-button"
+				type="button"
+				luButton
+				luTooltip="Télécharger"
+				luTooltipOnlyForDisplay
+			>
+				<lu-icon class="fileToolbar-list-item-button-icon" icon="arrowDownload" alt="Télécharger le fichier « {{fileName()}} »" />
+			</a>
+		</li>
+		} @if (deletable()) {
+		<li class="fileToolbar-list-item">
+			<button
+				class="fileToolbar-list-item-button"
+				type="button"
+				luButton
+				luTooltip="Supprimer"
+				luTooltipOnlyForDisplay
+				(click)="deleteFile.emit()"
+			>
+				<lu-icon class="fileToolbar-list-item-button-icon" icon="trashDelete" alt="Supprimer le fichier « {{fileName()}} »" />
+			</button>
+		</li>
+		}
+	</ul>
+</div>
+
+}

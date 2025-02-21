@@ -13,7 +13,7 @@ export default {
 			},
 		},
 		state: {
-			options: [null, 'loading', 'critical'],
+			options: [null, 'loading', 'success', 'critical'],
 			control: {
 				type: 'radio',
 			},
@@ -29,7 +29,7 @@ export default {
 				type: 'boolean',
 			},
 		},
-		fileMaxWeight: {
+		fileMaxSize: {
 			control: {
 				type: 'number',
 			},
@@ -85,8 +85,12 @@ export const Basic = {
 				format: '.gif',
 				name: 'GIF',
 			},
+			{
+				format: '.svg',
+				name: 'SVG',
+			},
 		],
-		fileMaxWeight: 5000000,
+		fileMaxSize: 5000000,
 		disablePreview: false,
 	},
 };
