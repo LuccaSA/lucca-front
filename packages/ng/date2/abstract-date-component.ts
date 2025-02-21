@@ -26,7 +26,7 @@ export abstract class AbstractDateComponent {
 	onTouched?: () => void;
 	disabled = false;
 
-	ranges = input<DateRange[]>([]);
+	ranges = input<readonly DateRange[]>([]);
 	hideToday = input<boolean, boolean>(false, { transform: booleanAttribute });
 	hasTodayButton = input<boolean, boolean>(false, { transform: booleanAttribute });
 	clearable = input<boolean, boolean>(false, { transform: booleanAttribute });

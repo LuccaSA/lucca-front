@@ -109,7 +109,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 		}
 	}
 
-	@Input() set options(options: TOption[]) {
+	@Input() set options(options: readonly TOption[]) {
 		this.options$.next(options);
 		if (this.panelRef) {
 			// We have to put it in a setTimeout so it'll be triggered AFTER the DOM is updated and not right now,
@@ -168,7 +168,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 
 	protected _value?: TValue;
 
-	options$ = new ReplaySubject<TOption[]>(1);
+	options$ = new ReplaySubject<readonly TOption[]>(1);
 	loading$ = new BehaviorSubject(false);
 	clue: string | null = null;
 	// This is the clue stored after we selected an option to know if we should emit an empty clue on open or not

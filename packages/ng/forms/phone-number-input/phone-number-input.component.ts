@@ -4,7 +4,7 @@ import { LuDisplayerDirective, LuOptionDirective } from '@lucca-front/ng/core-se
 import { FormFieldComponent, InputDirective } from '@lucca-front/ng/form-field';
 import { TextInputComponent } from '@lucca-front/ng/forms';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
-import { type CountryCallingCode, formatIncompletePhoneNumber, getCountries, getCountryCallingCode, parsePhoneNumber, getExampleNumber } from 'libphonenumber-js';
+import { type CountryCallingCode, formatIncompletePhoneNumber, getCountries, getCountryCallingCode, getExampleNumber, parsePhoneNumber } from 'libphonenumber-js';
 import examples from 'libphonenumber-js/mobile/examples';
 import { CountryCode, E164Number } from './types';
 import { PhoneNumberValidators } from './validators';
@@ -89,7 +89,7 @@ export class PhoneNumberInputComponent implements ControlValueAccessor, Validato
 	 *
 	 * You can use CountryCode to make sure it's properly typed on your end, string is also accepted
 	 */
-	allowedCountries = input<Array<CountryCode | string>>([]);
+	allowedCountries = input<ReadonlyArray<CountryCode | string>>([]);
 
 	#prefixEntries = computed(() => {
 		const whitelist = this.allowedCountries();

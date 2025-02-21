@@ -6,7 +6,7 @@ export type GroupTemplateLocation = 'group-header' | 'option' | 'none';
  * In order to avoid a blinking when we go from empty clue to a clue
  * We need to delay the change of group displayer location by waiting for the options to be updated.
  */
-export function getGroupTemplateLocation(hasGrouping: boolean, clueChange$: Observable<string>, options$: Observable<unknown[]>, searchable = true): Observable<GroupTemplateLocation> {
+export function getGroupTemplateLocation(hasGrouping: boolean, clueChange$: Observable<string>, options$: Observable<readonly unknown[]>, searchable = true): Observable<GroupTemplateLocation> {
 	if (hasGrouping) {
 		const getGroupTemplateLocation$ = (hasClue: boolean) =>
 			options$.pipe(

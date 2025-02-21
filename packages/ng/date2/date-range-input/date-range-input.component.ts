@@ -113,7 +113,7 @@ export class DateRangeInputComponent extends AbstractDateComponent implements Co
 
 	highlightedField = signal<-1 | 0 | 1>(-1);
 
-	shortcuts = input<CalendarShortcut[]>();
+	shortcuts = input<readonly CalendarShortcut[]>();
 
 	@Input()
 	autocomplete: string;
