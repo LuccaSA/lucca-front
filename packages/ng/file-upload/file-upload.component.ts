@@ -1,12 +1,13 @@
-import { booleanAttribute, Component, computed, inject, input, Input, LOCALE_ID, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, Component, computed, inject, input, Input, LOCALE_ID, signal, ViewEncapsulation } from '@angular/core';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { LuClass } from '@lucca-front/ng/core';
 import { InputDirective } from '@lucca-front/ng/form-field';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { LuSafeExternalSvgPipe } from '@lucca-front/ng/safe-content';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
-import { FileUploadedComponent } from './fileUploaded/file-uploaded.component';
+import { FileUploadedComponent } from './file-uploaded/file-uploaded.component';
 import { formatSize, MEGA_BYTE } from './formatter';
+import { FileUploadedEntry } from './file-uploaded-entry';
 
 let nextId = 0;
 
@@ -27,14 +28,14 @@ export class FileUploadComponent {
 
 	droppable = false;
 
-	files: File[] = [];
+	files: FileUploadedEntry[] = [];
 
 	@Input({
 		transform: booleanAttribute,
 	})
 	multiple = false;
 
-	state = input<null | 'loading' | 'success' | 'critical'>(null);
+	state = signal<null | 'loading' | 'success' | 'critical'>(null);
 
 	accept = input<
 		Array<{
@@ -54,10 +55,7 @@ export class FileUploadComponent {
 	// TODO: Check base max weight in Lucca Files
 	fileMaxSize = input<number>(80 * MEGA_BYTE);
 
-	// TODO this is filled by the consumer to decide if we want to display image preview when possible.
 	disablePreview = input(false, { transform: booleanAttribute });
-
-	bitmapPreviews: string[] = [];
 
 	maxSizeDisplay = computed(() => formatSize(this.#locale, this.fileMaxSize()));
 
@@ -74,22 +72,26 @@ export class FileUploadComponent {
 	});
 
 	filesChange(event: Event) {
-		// TODO loading state
 		const host = event.target as HTMLInputElement;
-
 		this.droppable = false;
-		this.files = Array.from(host.files);
-
-		if (!this.disablePreview()) {
-			this.bitmapPreviews = this.files.map((file) => URL.createObjectURL(file));
+		const upload: FileUploadedEntry[] = Array.from(host.files).map((file) => {
+			if (!this.disablePreview() && file.type.startsWith('image/')) {
+				return { file, state: 'loading', preview: URL.createObjectURL(file) };
+			}
+			return { file, state: 'loading' };
+		});
+		if (!this.multiple) {
+			this.state.set('loading');
+			this.files = upload;
+		} else {
+			this.files.push(...upload);
 		}
 	}
 
 	abort(input: HTMLInputElement) {
 		input.value = null;
 
-		this.bitmapPreviews = [];
 		this.files = [];
-		this.state = null;
+		this.state.set(null);
 	}
 }

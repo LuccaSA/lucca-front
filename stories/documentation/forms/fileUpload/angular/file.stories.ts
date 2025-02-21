@@ -1,5 +1,5 @@
 import { provideHttpClient } from '@angular/common/http';
-import { FileUploadedComponent } from '@lucca-front/ng/fileUpload';
+import { FileUploadedComponent } from '@lucca-front/ng/file-upload';
 import { applicationConfig, Meta, moduleMetadata } from '@storybook/angular';
 import { generateInputs } from 'stories/helpers/stories';
 

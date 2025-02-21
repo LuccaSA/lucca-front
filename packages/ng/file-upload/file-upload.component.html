@@ -1,0 +1,100 @@
+<div
+	class="fileUpload"
+	[class.is-droppable]="droppable"
+	[class.is-loading]="state() === 'loading'"
+	[class.is-critical]="state() === 'critical'"
+	[class.mod-S]="size() === 'S'"
+	[class.is-hidden]="!multiple && files.length > 0 && state() === 'success'"
+>
+	<input
+		[attr.aria-describedby]="'fileUpload-instruction-' + idSuffix"
+		[attr.multiple]="multiple ? 'multiple' : null"
+		class="fileUpload-input"
+		type="file"
+		title=""
+		[attr.accept]="acceptAttribute().length > 0 ? acceptAttribute() : null"
+		luInput
+		(dragenter)="droppable = true"
+		(dragleave)="droppable = false"
+		(change)="filesChange($event)"
+		#inputRef
+	/>
+	@switch (state()) {
+		@case ('loading') {
+			<div class="fileUpload-status">
+				@if (!disablePreview() && !multiple && files[0].preview) {
+					<div class="fileUpload-status-preview">
+						<img class="fileUpload-status-preview-img" [src]="files[0].preview" [alt]="files[0].file.name" />
+					</div>
+				}
+				<div class="fileUpload-status-loading loading"></div>
+			</div>
+		}
+		@default {
+			<div class="fileUpload-status" [innerHtml]="illustration() | luSafeExternalSvg"></div>
+		}
+	}
+	<div class="fileUpload-instruction" [attr.id]="'fileUpload-instruction-' + idSuffix">
+		<span class="fileUpload-instruction-action" aria-hidden="true">
+			@if (multiple) {
+				Déposez les fichiers ici ou
+				<span class="fileUpload-instruction-action-click">cliquez pour les sélectionner</span>.
+			} @else {
+				Déposez le fichier ici ou
+				<span class="fileUpload-instruction-action-click">cliquez pour le sélectionner</span>.
+			}
+		</span>
+		@if (acceptNames().length) {
+			<span class="fileUpload-instruction-formats">
+			@if (acceptNames().length > 1) {
+				Formats acceptés :
+			} @else {
+				Format accepté :
+			} {{ acceptNames().join(', ') }}.
+		</span>
+		}
+		@if (fileMaxSize()) {
+			<span class="fileUpload-instruction-size">Poids maximum@if (multiple) {
+				d’un fichier
+			} : {{ maxSizeDisplay() }}. </span>
+		}
+	</div>
+	<span class="fileUpload-button button" aria-hidden="true"
+	>@if (multiple) {
+		Sélectionner des fichiers
+	} @else {
+		Sélectionner un fichier
+	}</span
+	>
+
+	@if (state() === 'loading' && !multiple) {
+		<div class="fileToolbar">
+			<ul class="fileToolbar-list">
+				<li class="fileToolbar-list-item">
+					<button
+						class="fileToolbar-list-item-button"
+						type="button"
+						luButton
+						luTooltip="Supprimer"
+						luTooltipOnlyForDisplay
+						(click)="abort(inputRef)">
+						<lu-icon class="fileToolbar-list-item-button-icon" icon="trashDelete"
+						         alt="Supprimer le fichier « {{files[0].file.name}} »" />
+					</button>
+				</li>
+			</ul>
+		</div>
+	}
+</div>
+@for (entry of files; track entry.file.name) {
+	<lu-file-uploaded
+		[filePreviewUrl]="entry.preview"
+		[size]="size()"
+		[fileName]="entry.file.name"
+		[fileType]="entry.file.type"
+		[fileSize]="entry.file.size"
+		(deleteFile)="abort(inputRef)"
+		[typeMedia]="typeMedia()"
+		[deletable]="true"
+	/>
+}
