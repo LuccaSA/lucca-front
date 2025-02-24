@@ -7,7 +7,7 @@ import { getIntl, IntlParamsPipe, LuClass, PortalContent, PortalDirective, ɵeff
 import { IconComponent } from '@lucca-front/ng/icon';
 import { InlineMessageComponent, InlineMessageState } from '@lucca-front/ng/inline-message';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
-import { BehaviorSubject, merge, switchMap } from 'rxjs';
+import { BehaviorSubject, combineLatest, merge, switchMap } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { FormFieldSize } from './form-field-size';
 import { FORM_FIELD_INSTANCE } from './form-field.token';
@@ -38,6 +38,8 @@ export class FormFieldComponent implements OnDestroy {
 
 	#renderer = inject(Renderer2);
 
+	#controlsRefresh$ = new BehaviorSubject<void>(null);
+
 	formFieldChildren = contentChildren(FormFieldComponent, { descendants: true });
 
 	requiredValidators = contentChildren(RequiredValidator, { descendants: true });
@@ -50,8 +52,8 @@ export class FormFieldComponent implements OnDestroy {
 	ownControls = computed(() => this.ngControls().filter((c) => !this.ignoredControls().has(c)));
 
 	refreshedOwnControls = toSignal(
-		toObservable(this.ownControls).pipe(
-			map((controls) => controls.filter((c) => c.control)),
+		combineLatest([toObservable(this.ownControls), this.#controlsRefresh$]).pipe(
+			map(([controls]) => controls.filter((c) => c.control)),
 			switchMap((controls) => {
 				return merge(...controls.map((c) => c.control.events)).pipe(
 					// We need to use startWith here so the observable will also emit when new controls are added on the fly,
@@ -169,6 +171,10 @@ export class FormFieldComponent implements OnDestroy {
 				[`mod-width${this.width()}`]: !!this.width(),
 			});
 		});
+	}
+
+	refreshControls(): void {
+		this.#controlsRefresh$.next();
 	}
 
 	addLabelledBy(id: string, prepend = false): void {
