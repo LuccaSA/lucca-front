@@ -8,6 +8,8 @@ import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 import { FileUploadedComponent } from './file-uploaded/file-uploaded.component';
 import { formatSize, MEGA_BYTE } from './formatter';
 import { FileUploadedEntry } from './file-uploaded-entry';
+import { FileUploadService } from './service/file-upload.service';
+import { FileUploadTestService } from './service/file-upload-test.service';
 
 let nextId = 0;
 
@@ -23,6 +25,8 @@ let nextId = 0;
 })
 export class FileUploadComponent {
 	#locale = inject(LOCALE_ID);
+
+	#uploadService: FileUploadService = new FileUploadTestService();
 
 	idSuffix = nextId++;
 
@@ -80,6 +84,22 @@ export class FileUploadComponent {
 			}
 			return { file, state: 'loading' };
 		});
+		upload.forEach((file) => {
+			this.#uploadService.upload(file.file).subscribe({
+				next: () => {
+					file.state = 'success';
+					if (!this.multiple) {
+						this.state.set('success');
+					}
+				},
+				error: () => {
+					file.state = 'critical';
+					if (!this.multiple) {
+						this.state.set('critical');
+					}
+				},
+			});
+		});
 		if (!this.multiple) {
 			this.state.set('loading');
 			this.files = upload;
@@ -90,7 +110,6 @@ export class FileUploadComponent {
 
 	abort(input: HTMLInputElement) {
 		input.value = null;
-
 		this.files = [];
 		this.state.set(null);
 	}
