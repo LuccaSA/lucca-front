@@ -7,42 +7,19 @@ export default {
 	title: 'Documentation/FileUpload/Angular/Basic',
 	argTypes: {
 		size: {
-			options: ['S', 'M'],
+			options: ['S', null],
 			control: {
 				type: 'radio',
 			},
 		},
-		state: {
-			options: [null, 'loading', 'success', 'critical'],
+		illustration: {
+			options: ['paper', 'picture'],
 			control: {
-				type: 'radio',
+				type: 'select',
 			},
 		},
-
-		multiple: {
-			control: {
-				type: 'boolean',
-			},
-		},
-		disablePreview: {
-			control: {
-				type: 'boolean',
-			},
-		},
-		fileMaxSize: {
-			control: {
-				type: 'number',
-			},
-		},
-		accept: {
-			control: {
-				type: 'object',
-			},
-		},
-		typeMedia: {
-			control: {
-				type: 'boolean',
-			},
+		displayMedia: {
+			if: { arg: 'multiple', truthy: true },
 		},
 	},
 	decorators: [
@@ -65,10 +42,9 @@ export default {
 
 export const Basic = {
 	args: {
-		size: 'M',
-		state: null,
+		size: null,
 		multiple: false,
-		typeMedia: false,
+		displayMedia: false,
 		accept: [
 			{
 				format: '.jpg',
@@ -92,5 +68,6 @@ export const Basic = {
 		],
 		fileMaxSize: 5000000,
 		disablePreview: false,
+		illustration: 'paper',
 	},
 };

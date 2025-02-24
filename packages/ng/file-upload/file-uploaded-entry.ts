@@ -1,5 +1,5 @@
 export interface FileUploadedEntry {
 	file: File;
-	state: 'loading' | 'success' | 'critical';
+	state: 'loading' | 'success' | 'error';
 	preview?: string;
 }

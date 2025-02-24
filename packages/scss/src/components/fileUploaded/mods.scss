@@ -4,26 +4,25 @@
 	--components-fileUploaded-padding: var(--pr-t-spacings-50);
 	--components-fileUploaded-gap: var(--components-fileUploaded-padding);
 	--components-fileUploaded-status-svg-width: 32px;
-}
-
-// @mixin L {
-// 	--components-fileUploaded-width: fit-content;
-// 	--components-fileUploaded-flexDirection: column;
-// 	--components-fileUploaded-alignItems: flex-end;
-// 	--components-fileUploaded-status-width: 180px;
-// 	--components-fileUploaded-status-height: 142px;
-// 	--components-fileUploaded-informations-display: none;
-// 	--components-fileUploaded-status-svg-width: 96px;
-// }
-
-@mixin fileSuccess {
-	--components-fileUploaded-status-backgroundColor: var(--palettes-neutral-25);
+	--components-fileUploaded-status-borderRadius: var(--commons-borderRadius-M);
+	--components-fileUploaded-status-margin: 0;
+	--components-fileUploaded-minHeight: auto;
 }
 
 @mixin media {
-	// --components-fileUploaded-informations-display: none;
-	grid-column: auto;
+	--components-fileUploaded-padding: var(--pr-t-spacings-75);
+	--components-fileUploaded-gridColumn: auto;
 	--components-fileUploaded-status-width: 100%;
 	--components-fileUploaded-status-height: auto;
 	--components-fileUploaded-status-aspectRatio: 1;
+	--components-fileUploaded-status-margin: 0;
+}
+
+@mixin single {
+	--components-fileUploaded-padding: var(--pr-t-spacings-75);
+	--components-fileUploaded-status-aspectRatio: auto;
+	--components-fileUploaded-status-width: 100%;
+	--components-fileUploaded-status-height: calc(20rem - 1rem + 2px);
+	--components-fileUploaded-informations-children-display: none;
+	--components-fileUploaded-status-margin: 0;
 }

@@ -28,11 +28,11 @@
 		@include success;
 	}
 
-	&.is-critical {
-		@include critical;
+	&.is-error {
+		@include error;
 
 		&:hover {
-			@include criticalHover;
+			@include errorHover;
 		}
 	}
 

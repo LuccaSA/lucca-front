@@ -14,6 +14,7 @@
 	box-shadow: var(--pr-t-elevation-shadow-overlay);
 	background-color: var(--pr-t-elevation-surface-raised);
 	z-index: 1;
+	display: var(--components-fileToolbar-display);
 
 	@at-root ($atRoot) {
 		.fileToolbar-list {
@@ -21,14 +22,11 @@
 
 			display: flex;
 			gap: var(--pr-t-spacings-50);
-			padding: var(--pr-t-spacings-50);
-		}
-		.fileToolbar-list-item-button.button {
-			@include button.text;
+			padding: var(--components-fileToolbar-list-padding);
 		}
 
-		.fileToolbar-list-item-button-icon {
-			@include icon.S;
+		.fileToolbar-list-item-button.button {
+			@include button.text;
 		}
 	}
 }

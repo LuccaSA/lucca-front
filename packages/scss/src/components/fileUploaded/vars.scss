@@ -1,15 +1,22 @@
 @mixin vars {
-	--components-fileUploaded-informations-display: block;
-	--components-fileUploaded-informations-children-display: inline-block;
-	--components-fileUploaded-status-width: 56px;
-	--components-fileUploaded-status-height: var(--components-fileUploaded-status-width);
 	--components-fileUploaded-padding: var(--pr-t-spacings-75);
 	--components-fileUploaded-gap: var(--components-fileUploaded-padding);
 	--components-fileUploaded-flexDirection: row;
 	--components-fileUploaded-width: auto;
 	--components-fileUploaded-alignItems: center;
-	--components-fileUploaded-status-backgroundColor: transparent;
-	--components-fileUploaded-status-svg-width: 48px;
-	--components-fileUploaded-status-svg-height: var(--components-fileUploaded-status-svg-width);
+	--components-fileUploaded-gridColumn: 1 / -1;
+	--components-fileUploaded-borderColor: var(--palettes-neutral-100);
+	--components-fileUploaded-minHeight: calc(5rem + 2px);
+
+	--components-fileUploaded-status-width: 56px;
+	--components-fileUploaded-status-height: var(--components-fileUploaded-status-width);
+	--components-fileUploaded-status-margin: var(--pr-t-spacings-75);
+	--components-fileUploaded-status-backgroundColor: var(--palettes-neutral-25);
 	--components-fileUploaded-status-aspectRatio: auto;
+	--components-fileUploaded-status-borderRadius: var(--commons-borderRadius-L);
+	--components-fileUploaded-status-img-opacity: 1;
+	--components-fileUploaded-status-svg-width: 32px;
+	--components-fileUploaded-status-svg-height: var(--components-fileUploaded-status-svg-width);
+
+	--components-fileUploaded-informations-children-display: inline-block;
 }
