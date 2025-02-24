@@ -1,3 +1,8 @@
-@mixin critical {
-	background-color: red;
+@mixin error {
+	--components-fileUploaded-borderColor: var(--palettes-critical-600);
+}
+
+@mixin loading {
+	--components-fileUploaded-status-backgroundColor: transparent;
+	--components-fileUploaded-status-img-opacity: 0.5;
 }

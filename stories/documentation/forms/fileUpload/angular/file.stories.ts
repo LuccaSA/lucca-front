@@ -7,13 +7,13 @@ export default {
 	title: 'Documentation/FileUpload/Angular/File',
 	argTypes: {
 		size: {
-			options: ['S', 'M'],
+			options: ['S', null],
 			control: {
 				type: 'radio',
 			},
 		},
 		state: {
-			options: ['loading', 'success', 'critical'],
+			options: [null, 'loading', 'error'],
 			control: {
 				type: 'radio',
 			},
@@ -22,6 +22,12 @@ export default {
 			options: ['file', 'word', 'excel', 'powerpoint'],
 			control: {
 				type: 'radio',
+			},
+		},
+		display: {
+			options: [null, 'media', 'single'],
+			control: {
+				type: 'select',
 			},
 		},
 	},
@@ -40,15 +46,16 @@ export default {
 
 export const Basic = {
 	args: {
-		size: 'M',
+		size: null,
 		fileSize: 28420,
 		fileType: 'image/png',
 		fileName: 'dummyimage.png',
 		filePreviewUrl: 'https://dummyimage.com/500',
-		fileUrl: 'https://dummyimage.com/5000',
-		state: 'success',
-		typeMedia: false,
+		state: null,
+		display: null,
 		downloadable: false,
 		deletable: true,
+		viewable: false,
+		format: 'file',
 	},
 };

@@ -13,11 +13,10 @@
 	--components-fileUpload-button-visibility: hidden;
 }
 
-@mixin critical {
+@mixin error {
 	--components-fileUpload-instruction-filename-color: var(--palettes-critical-800);
 	--components-fileUpload-backgroundColor: var(--palettes-critical-50);
 	--components-fileUpload-borderColor: var(--palettes-critical-400);
-	--components-fileUpload-button-visibility: hidden;
 }
 
 @mixin loading {
@@ -25,7 +24,7 @@
 	--components-fileUpload-button-display: none;
 }
 
-@mixin criticalHover {
+@mixin errorHover {
 	--components-fileUpload-borderColor: var(--palettes-critical-600);
 }
 

@@ -1,15 +1,15 @@
-import { booleanAttribute, Component, computed, inject, input, Input, LOCALE_ID, signal, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, Component, computed, inject, input, LOCALE_ID, signal, ViewEncapsulation } from '@angular/core';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { LuClass } from '@lucca-front/ng/core';
 import { InputDirective } from '@lucca-front/ng/form-field';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { LuSafeExternalSvgPipe } from '@lucca-front/ng/safe-content';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
+import { FileUploadedEntry } from './file-uploaded-entry';
 import { FileUploadedComponent } from './file-uploaded/file-uploaded.component';
 import { formatSize, MEGA_BYTE } from './formatter';
-import { FileUploadedEntry } from './file-uploaded-entry';
-import { FileUploadService } from './service/file-upload.service';
 import { FileUploadTestService } from './service/file-upload-test.service';
+import { FileUploadService } from './service/file-upload.service';
 
 let nextId = 0;
 
@@ -34,12 +34,9 @@ export class FileUploadComponent {
 
 	files: FileUploadedEntry[] = [];
 
-	@Input({
-		transform: booleanAttribute,
-	})
-	multiple = false;
+	multiple = input(false, { transform: booleanAttribute });
 
-	state = signal<null | 'loading' | 'success' | 'critical'>(null);
+	state = signal<'loading' | 'success' | 'error' | null>(null);
 
 	accept = input<
 		Array<{
@@ -63,12 +60,14 @@ export class FileUploadComponent {
 
 	maxSizeDisplay = computed(() => formatSize(this.#locale, this.fileMaxSize()));
 
-	size = input<'S' | 'M'>('M');
+	size = input<'S' | null>(null);
 
-	typeMedia = input<boolean, boolean>(false, { transform: booleanAttribute });
+	displayMedia = input<boolean, boolean>(false, { transform: booleanAttribute });
 
-	illustration = computed(() => {
-		if (this.typeMedia()) {
+	illustration = input<'picture' | 'paper'>('paper');
+
+	illustrationUrl = computed(() => {
+		if (this.illustration() === 'picture') {
 			return 'https://cdn.lucca.fr/transverse/prisme/visuals/empty-states/icons/iconPictureAction.svg';
 		} else {
 			return 'https://cdn.lucca.fr/transverse/prisme/visuals/empty-states/icons/iconPaperAction.svg';
@@ -88,14 +87,16 @@ export class FileUploadComponent {
 			this.#uploadService.upload(file.file).subscribe({
 				next: () => {
 					file.state = 'success';
+
 					if (!this.multiple) {
 						this.state.set('success');
 					}
 				},
 				error: () => {
-					file.state = 'critical';
+					file.state = 'error';
+
 					if (!this.multiple) {
-						this.state.set('critical');
+						this.state.set('error');
 					}
 				},
 			});

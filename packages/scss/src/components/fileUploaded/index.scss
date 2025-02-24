@@ -12,20 +12,21 @@
 		@include media;
 	}
 
-	// &.mod-L {
-	// 	@include L;
-	// }
+	&.mod-single {
+		@include single;
+	}
 
 	&.mod-word,
 	&.mod-file,
 	&.mod-excel,
 	&.mod-powerpoint {
-		&.is-success {
-			@include fileSuccess;
-		}
 	}
 
-	&.is-critical {
-		@include critical;
+	&.is-error {
+		@include error;
+	}
+
+	&.is-loading {
+		@include loading;
 	}
 }

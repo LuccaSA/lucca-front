@@ -6,7 +6,7 @@
 @use '@lucca-front/scss/src/components/button/exports' as button;
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
-	border: 1px solid var(--palettes-neutral-100);
+	border: 1px solid var(--components-fileUploaded-borderColor);
 	padding: var(--components-fileUploaded-padding);
 	border-radius: var(--commons-borderRadius-L);
 	background-color: var(--pr-t-elevation-surface-raised);
@@ -15,8 +15,9 @@
 	align-items: var(--components-fileUploaded-alignItems);
 	gap: var(--components-fileUploaded-gap);
 	inline-size: var(--components-fileUploaded-width);
-	grid-column: 1 / -1;
 	position: relative;
+	grid-column: var(--components-fileUploaded-gridColumn);
+	min-height: var(--components-fileUploaded-minHeight);
 
 	&:has(.fileUploaded-status:focus-visible) {
 		@include a11y.focusVisible;
@@ -25,7 +26,7 @@
 	@at-root ($atRoot) {
 		.fileUploaded-status {
 			display: flex;
-			border-radius: var(--commons-borderRadius-M);
+			border-radius: var(--components-fileUploaded-status-borderRadius);
 			overflow: hidden;
 			inline-size: var(--components-fileUploaded-status-width);
 			block-size: var(--components-fileUploaded-status-height);
@@ -36,6 +37,7 @@
 			flex-shrink: 0;
 			aspect-ratio: var(--components-fileUploaded-status-aspectRatio);
 			outline: none;
+			margin: var(--components-fileUploaded-status-margin);
 		}
 
 		.fileUploaded-status-svg {
@@ -47,25 +49,25 @@
 			object-fit: cover;
 			inline-size: 100%;
 			block-size: 100%;
+			opacity: var(--components-fileUploaded-status-img-opacity);
 		}
 
-		.fileUploaded-button {
-			@include button.S;
-			@include button.onlyIconS;
-			@include button.text;
+		.fileUploaded-status-loading {
+			position: absolute;
 		}
 
 		.fileUploaded-informations {
 			flex-grow: 1;
 			padding: var(--pr-t-spacings-50);
-			display: var(--components-fileUploaded-informations-display);
+			display: flex;
 			min-width: 0;
+			flex-wrap: wrap;
 		}
 
 		.fileUploaded-informations-filename {
 			@include text.ellipsis;
 
-			display: block;
+			width: 100%;
 		}
 
 		.fileUploaded-informations-extension,
@@ -87,6 +89,10 @@
 				inline-size: var(--commons-divider-width);
 				background-color: var(--commons-divider-color);
 			}
+		}
+
+		.fileUploaded-informations-inlineMessage.inlineMessage {
+			//display: inline-flex;
 		}
 	}
 }

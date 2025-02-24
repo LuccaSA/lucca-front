@@ -3,6 +3,7 @@ import { booleanAttribute, Component, computed, effect, HostBinding, inject, inp
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { LuClass } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
+import { InlineMessageComponent } from '@lucca-front/ng/inline-message';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 import { formatSize } from '../formatter';
 
@@ -12,7 +13,7 @@ import { formatSize } from '../formatter';
 	templateUrl: './file-uploaded.component.html',
 	styleUrls: ['./file-uploaded.component.scss'],
 	encapsulation: ViewEncapsulation.None,
-	imports: [IconComponent, UpperCasePipe, LuTooltipModule, ButtonComponent],
+	imports: [IconComponent, UpperCasePipe, LuTooltipModule, ButtonComponent, InlineMessageComponent],
 	providers: [LuClass],
 	host: {
 		class: 'fileUploaded',
@@ -22,27 +23,31 @@ export class FileUploadedComponent {
 	#luClass = inject(LuClass);
 	#locale = inject(LOCALE_ID);
 
-	state = input<'loading' | 'critical' | 'success'>('loading');
+	state = input<'loading' | 'error' | null>(null);
 
 	format = input<'file' | 'word' | 'excel' | 'powerpoint'>('file');
 
-	size = input<'S' | 'M'>('M');
+	size = input<'S' | null>(null);
 
 	downloadable = input<boolean, boolean>(false, { transform: booleanAttribute });
-
 	deletable = input<boolean, boolean>(false, { transform: booleanAttribute });
+	viewable = input<boolean, boolean>(false, { transform: booleanAttribute });
 
-	typeMedia = input<boolean, boolean>(false, { transform: booleanAttribute });
+	display = input<'media' | 'single' | null>(null);
 
 	@HostBinding('class.mod-media')
-	get typeMediaAttr() {
-		return this.typeMedia();
+	get displayMediaClass() {
+		return this.display() === 'media';
+	}
+
+	@HostBinding('class.mod-single')
+	get multipleClass() {
+		return this.display() === 'single';
 	}
 
 	fileName = input.required<string>();
 	fileType = input.required<string>();
 	fileSize = input.required<number>();
-	fileUrl = input<string | null>(null);
 	filePreviewUrl = input<string | null>(null);
 
 	deleteFile = output();
