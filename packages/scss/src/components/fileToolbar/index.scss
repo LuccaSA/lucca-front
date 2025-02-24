@@ -1,0 +1,14 @@
+@use 'exports' as *;
+
+.fileToolbar {
+	@include vars;
+	@include component;
+
+	&.mod-invisible {
+		@include invisible;
+	}
+
+	&.mod-S {
+		@include S;
+	}
+}

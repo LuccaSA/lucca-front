@@ -1,0 +1,98 @@
+@use '@lucca-front/scss/src/commons/utils/namespace';
+
+@use '@lucca-front/scss/src/commons/utils/a11y';
+@use '@lucca-front/scss/src/commons/utils/text';
+
+@use '@lucca-front/scss/src/components/button/exports' as button;
+
+@mixin component($atRoot: namespace.$defaultAtRoot) {
+	border: 1px solid var(--components-fileUploaded-borderColor);
+	padding: var(--components-fileUploaded-padding);
+	border-radius: var(--commons-borderRadius-L);
+	background-color: var(--pr-t-elevation-surface-raised);
+	display: flex;
+	flex-direction: var(--components-fileUploaded-flexDirection);
+	align-items: var(--components-fileUploaded-alignItems);
+	gap: var(--components-fileUploaded-gap);
+	inline-size: var(--components-fileUploaded-width);
+	position: relative;
+	grid-column: var(--components-fileUploaded-gridColumn);
+	min-height: var(--components-fileUploaded-minHeight);
+
+	&:has(.fileUploaded-status:focus-visible) {
+		@include a11y.focusVisible;
+	}
+
+	@at-root ($atRoot) {
+		.fileUploaded-status {
+			display: flex;
+			border-radius: var(--components-fileUploaded-status-borderRadius);
+			overflow: hidden;
+			inline-size: var(--components-fileUploaded-status-width);
+			block-size: var(--components-fileUploaded-status-height);
+			justify-content: center;
+			align-items: center;
+			color: var(--palettes-neutral-700);
+			background-color: var(--components-fileUploaded-status-backgroundColor);
+			flex-shrink: 0;
+			aspect-ratio: var(--components-fileUploaded-status-aspectRatio);
+			outline: none;
+			margin: var(--components-fileUploaded-status-margin);
+		}
+
+		.fileUploaded-status-svg {
+			inline-size: var(--components-fileUploaded-status-svg-width);
+			block-size: var(--components-fileUploaded-status-svg-height);
+		}
+
+		.fileUploaded-status-img {
+			object-fit: cover;
+			inline-size: 100%;
+			block-size: 100%;
+			opacity: var(--components-fileUploaded-status-img-opacity);
+		}
+
+		.fileUploaded-status-loading {
+			position: absolute;
+		}
+
+		.fileUploaded-informations {
+			flex-grow: 1;
+			padding: var(--pr-t-spacings-50);
+			display: flex;
+			min-width: 0;
+			flex-wrap: wrap;
+		}
+
+		.fileUploaded-informations-filename {
+			@include text.ellipsis;
+
+			width: 100%;
+		}
+
+		.fileUploaded-informations-extension,
+		.fileUploaded-informations-size {
+			color: var(--palettes-neutral-600);
+			font-size: var(--sizes-S-fontSize);
+			line-height: var(--sizes-S-lineHeight);
+			display: var(--components-fileUploaded-informations-children-display);
+		}
+
+		.fileUploaded-informations-extension + .fileUploaded-informations-size {
+			margin-inline-start: var(--pr-t-spacings-200);
+			position: relative;
+
+			&::before {
+				content: '';
+				position: absolute;
+				inset: var(--pr-t-spacings-50) auto var(--pr-t-spacings-50) calc(var(--pr-t-spacings-100) * -1);
+				inline-size: var(--commons-divider-width);
+				background-color: var(--commons-divider-color);
+			}
+		}
+
+		.fileUploaded-informations-inlineMessage.inlineMessage {
+			//display: inline-flex;
+		}
+	}
+}
