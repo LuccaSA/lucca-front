@@ -86,15 +86,18 @@
 		</div>
 	}
 </div>
-@for (entry of files; track entry.file.name) {
-	<lu-file-uploaded
-		[filePreviewUrl]="entry.preview"
-		[size]="size()"
-		[fileName]="entry.file.name"
-		[fileType]="entry.file.type"
-		[fileSize]="entry.file.size"
-		(deleteFile)="abort(inputRef)"
-		[typeMedia]="typeMedia()"
-		[deletable]="true"
-	/>
+@if (state() === 'success' || multiple) {
+	@for (entry of files; track entry.file.name) {
+		<lu-file-uploaded
+			[filePreviewUrl]="entry.preview"
+			[size]="size()"
+			[state]="entry.state"
+			[fileName]="entry.file.name"
+			[fileType]="entry.file.type"
+			[fileSize]="entry.file.size"
+			(deleteFile)="abort(inputRef)"
+			[typeMedia]="typeMedia()"
+			[deletable]="true"
+		/>
+	}
 }
