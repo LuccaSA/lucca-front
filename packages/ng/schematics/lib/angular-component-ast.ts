@@ -1,4 +1,4 @@
-import ts, { forEachChild, isArrayLiteralExpression, isCallExpression, isDecorator, isIdentifier, isObjectLiteralExpression, isPropertyAssignment, SourceFile } from 'typescript';
+import { forEachChild, isArrayLiteralExpression, isCallExpression, isDecorator, isIdentifier, isImportDeclaration, isNamedImports, isObjectLiteralExpression, isPropertyAssignment, isStringLiteralLike, NamedImports, SourceFile } from 'typescript';
 import { createVisitor } from './angular-template';
 import { Change, InsertChange, NoopChange, RemoveChange } from '@schematics/angular/utility/change';
 import { getEOL } from '@schematics/angular/utility/eol';
@@ -9,7 +9,7 @@ export interface ProviderEntry {
 	value: string;
 }
 
-export function extractProviders(sourceFile: ts.SourceFile): ProviderEntry[] {
+export function extractProviders(sourceFile: SourceFile): ProviderEntry[] {
 	const providerEntries: ProviderEntry[] = [];
 	forEachChild(
 		sourceFile,
@@ -60,7 +60,7 @@ export function extractProviders(sourceFile: ts.SourceFile): ProviderEntry[] {
 	return providerEntries;
 }
 
-export function extractComponentImports(sourceFile: ts.SourceFile): string[] {
+export function extractComponentImports(sourceFile: SourceFile): string[] {
 	const imports: string[] = [];
 	forEachChild(
 		sourceFile,
@@ -98,16 +98,16 @@ export function extractComponentImports(sourceFile: ts.SourceFile): string[] {
 
 // Simplified version of https://github.com/angular/angular-cli/blob/main/packages/schematics/angular/utility/ast-utils.ts#L24 for our use case
 export function insertTSImportIfNeeded(sourceFile: SourceFile, fileToEdit: string, symbolName: string, fileName: string): Change {
-	const allImports = sourceFile.statements.filter(ts.isImportDeclaration);
+	const allImports = sourceFile.statements.filter(isImportDeclaration);
 
 	// get nodes that map to import statements from the file fileName
 	const relevantImports = allImports.filter((node) => {
-		return ts.isStringLiteralLike(node.moduleSpecifier) && node.moduleSpecifier?.text === fileName;
+		return isStringLiteralLike(node.moduleSpecifier) && node.moduleSpecifier?.text === fileName;
 	});
 
 	if (relevantImports.length > 0) {
 		const imports = relevantImports.flatMap((node) => {
-			return node.importClause?.namedBindings && ts.isNamedImports(node.importClause.namedBindings) ? node.importClause.namedBindings.elements : [];
+			return node.importClause?.namedBindings && isNamedImports(node.importClause.namedBindings) ? node.importClause.namedBindings.elements : [];
 		});
 
 		// insert import if it's not there
@@ -220,11 +220,11 @@ export function removeAngularImport(sourceFile: SourceFile, fileToEdit: string, 
 }
 
 export function removeTSImport(sourceFile: SourceFile, fileToEdit: string, symbolName: string): Change {
-	const importDeclaration = sourceFile.statements.filter(ts.isImportDeclaration).find((declaration) => declaration.importClause?.namedBindings?.getText(sourceFile).includes(symbolName));
+	const importDeclaration = sourceFile.statements.filter(isImportDeclaration).find((declaration) => declaration.importClause?.namedBindings?.getText(sourceFile).includes(symbolName));
 	if (!importDeclaration) {
 		return new NoopChange();
 	}
-	const namedImports = importDeclaration.importClause?.namedBindings as ts.NamedImports;
+	const namedImports = importDeclaration.importClause?.namedBindings as NamedImports;
 	/// If it's the only import from this entrypoint, bye bye
 	if (namedImports.elements.length === 1) {
 		return new RemoveChange(fileToEdit, importDeclaration.getFullStart(), importDeclaration?.getText(sourceFile) + getEOL(sourceFile.text));
