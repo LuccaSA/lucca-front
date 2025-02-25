@@ -6,13 +6,13 @@ This package is a shareable stylelint configuration.
 
 [Prettier should be used](https://stylelint.io/#how-itll-help-you) to handle coding style-guides when possible.
 
-* This configuration lints your code with default CSS & SCSS rules, and adapts some of them for Lucca Front specifics
-* It will trigger warnings for deprecated LF features and errors for deleted LF features.
+- This configuration lints your code with default CSS & SCSS rules, and adapts some of them for Lucca Front specifics
+- It will trigger warnings for deprecated LF features and errors for deleted LF features.
 
 ## Install
 
 ```
-npm i --save-dev stylelint @lucca-front/stylelint-config
+npm i --save-dev stylelint @lucca/stylelint-config-prisme
 ```
 
 ## Avoid conflicts
@@ -27,8 +27,8 @@ Use this package in a _stylelint.config.js_ file in your repository:
 
 ```js
 module.exports = {
-	extends: ['@lucca-front/stylelint-config'],
-	rules: {},
+  extends: ['@lucca/stylelint-config-prisme'],
+  rules: {},
 };
 ```
 
@@ -40,7 +40,7 @@ Add the relevant script to lint the code in Jenkins.
 "stylelint": "stylelint \"./**/*.scss\"",
 ```
 
-You can be more specific and restrict the path of scss files being linted:  `"stylelint": "stylelint \"./SOME_PATH/**/*.scss\""`,
+You can be more specific and restrict the path of scss files being linted: `"stylelint": "stylelint \"./SOME_PATH/**/*.scss\""`,
 
 ### Breaking the rules
 
@@ -48,20 +48,20 @@ You can be more specific and restrict the path of scss files being linted:  `"st
 
 You can [apply specific rules with overrides](https://stylelint.io/user-guide/configure/#overrides) as needed.
 
-Rules can be disabled while incrementally fixing your code. Set them to `null`. The following example will ignore the `no-descending-specificity` rule in all SCSS files within `_some-path_ :
+Rules can be disabled while incrementally fixing your code. Set them to `null`. The following example will ignore the `no-descending-specificity` rule in all SCSS files within `*some-path* :
 
 ```js
 module.exports = {
-	extends: ['@lucca-front/stylelint-config'],
-	overrides: [
-		{
-			files: ['some-path/**/*.scss'],
-			rules: {
-				'no-descending-specificity': null,
-			}
-		},
-	],
-	rules: {};
+ extends: ['@lucca/stylelint-config-prisme'],
+ overrides: [
+  {
+   files: ['some-path/**/*.scss'],
+   rules: {
+    'no-descending-specificity': null,
+   }
+  },
+ ],
+ rules: {};
 };
 ```
 
@@ -76,7 +76,7 @@ Please explain why with a comment if you're doing so. Use `styleling-disable[-*]
 1. From the root of this package, run `npm pack`. This will generate a _.tgz_ file.
 2. From the root of the project you want to lint, run `npm i PATH_TO_LUCCA_FRONT_REPOSITORY/packages/stylelint-config/lucca-front-stylelint-config-0.0.0.tgz`.
 
-The configuration from your local repository should be applied right away. *If in doubt, restart your editor.*
+The configuration from your local repository should be applied right away. _If in doubt, restart your editor._
 
 ## Configuring your editor
 
