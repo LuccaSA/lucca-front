@@ -1,0 +1,26 @@
+@use 'exports' as *;
+
+.highlightData {
+	@include vars;
+	@include component;
+
+	&.mod-light {
+		@include light;
+	}
+
+	&.mod-dark {
+		@include dark;
+	}
+
+	&.mod-infos {
+		@include infos;
+	}
+
+	&.mod-S {
+		@include S;
+	}
+
+	&:has(.highlightData-illustrations) {
+		@include illustrations;
+	}
+}

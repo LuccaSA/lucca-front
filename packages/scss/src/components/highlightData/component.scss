@@ -1,0 +1,49 @@
+@use '@lucca-front/scss/src/commons/utils/namespace';
+@use '@lucca-front/scss/src/components/title/exports' as title;
+
+@mixin component($atRoot: namespace.$defaultAtRoot) {
+	display: flex;
+	flex-direction: var(--components-highlightData-direction);
+	justify-content: space-between;
+	gap: var(--components-highlightData-gap);
+	align-items: var(--components-highlightData-align);
+	background-color: var(--components-highlightData-background);
+	border-radius: var(--commons-borderRadius-L);
+	overflow: hidden;
+	padding: var(--components-highlightData-padding);
+	position: relative;
+
+	@at-root ($atRoot) {
+		.highlightData-content {
+			margin: 0;
+			flex-grow: 1;
+		}
+
+		.highlightData-content-title {
+			font-size: var(--components-highlightData-title-fontSize);
+			line-height: var(--components-highlightData-title-lineHeight);
+			color: var(--palettes-neutral-700);
+		}
+
+		.highlightData-content-value {
+			@include title.component;
+			@include title.h1;
+			margin: 0;
+		}
+
+		.highlightData-illustrations {
+			display: grid;
+			place-content: center;
+			position: absolute;
+			inset-block-end: 0;
+			inset-inline-end: 0;
+		}
+
+		.highlightData-illustrations-back,
+		.highlightData-illustrations-front {
+			grid-area: 1 / 1;
+			block-size: var(--components-highlightData-illustrations-height);
+			inline-size: var(--components-highlightData-illustrations-width);
+		}
+	}
+}
