@@ -1,3 +1,5 @@
+// stylelint-disable custom-property-empty-line-before -- Complex code with visual grouping of declarations.
+
 %commons {
 	--smooth: 1px;
 	--component-notchbox-notch-radius-outer: var(--component-notchbox-notch-radius);
@@ -124,6 +126,7 @@
 		var(--component-notchbox-notch-position) + var(--component-notchbox-notch-width) / 2 - var(--component-notchbox-notch-percent-offset2) +
 			var(--smooth) * 2
 	);
+
 	/** badge */
 	--component-notchbox-badge-actualWidth: var(--component-notchbox-badge-height);
 	--component-notchbox-badge-actualHeight: var(--component-notchbox-badge-width);

@@ -30,6 +30,7 @@
 	.errorPage-section-info-title {
 		@include title.component;
 		@include title.XXXL;
+
 		margin-block-end: var(--pr-t-spacings-50);
 	}
 
@@ -60,6 +61,7 @@
 		order: 1;
 		padding: 0;
 	}
+
 	.errorPage-section-image {
 		margin-block-start: var(--pr-t-spacings-400);
 		order: 0;

@@ -5,12 +5,12 @@
 @use '@lucca-front/scss/src/commons/utils/namespace';
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
-	property: value;
-	property: var(--components-sample-property1);
+	// property: value;
+	// property: var(--components-sample-property1);
 
 	@at-root ($atRoot) {
 		.sample-subComponent {
-			property: var(--components-sample-property2);
+			// property: var(--components-sample-property2);
 		}
 	}
 }

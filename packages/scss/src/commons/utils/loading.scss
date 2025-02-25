@@ -13,7 +13,6 @@
 		margin: auto;
 		position: absolute;
 		border-style: solid;
-
 		animation-name: rotate;
 		animation-duration: var(--commons-loading-speed);
 		animation-timing-function: linear;
@@ -40,6 +39,7 @@
 		0% {
 			background-position: 100% 0%;
 		}
+
 		100% {
 			background-position: -100% 0%;
 		}
