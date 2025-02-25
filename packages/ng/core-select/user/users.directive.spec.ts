@@ -139,7 +139,7 @@ describe('LuCoreSelectUsersDirective', () => {
 		tick(MAGIC_OPTION_SCROLL_DELAY);
 
 		// Assert (Page 1)
-		let options: LuCoreSelectUser[];
+		let options: readonly LuCoreSelectUser[];
 		simpleSelect.options$.subscribe((o) => (options = o));
 
 		expect(options).toEqual([meUser, ...page1]);
