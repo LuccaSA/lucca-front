@@ -14,7 +14,7 @@
     "scss",
     "css"
   ],
-  "public": true,
+  "private": false,
   "author": "The product design team <design@lucca.fr>",
   "license": "MIT",
   "bugs": {
