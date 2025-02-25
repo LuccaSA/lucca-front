@@ -435,7 +435,7 @@ export class DateRangeInputComponent extends AbstractDateComponent implements Co
 		if (!control.value) {
 			return null;
 		}
-		const dateRange = this.inDateISOFormat() ? transformDateRangeInputToDateRange(control.value) : (control.value as DateRange);
+		const dateRange = transformDateRangeInputToDateRange(control.value);
 
 		return this.isValidDate(dateRange.start) ? null : { date: true };
 	}

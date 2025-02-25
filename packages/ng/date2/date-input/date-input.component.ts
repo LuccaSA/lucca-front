@@ -249,7 +249,7 @@ export class DateInputComponent extends AbstractDateComponent implements Control
 		if (control.value === null || control.value === undefined) {
 			return null;
 		}
-		const date = this.inDateISOFormat() ? transformDateInputToDate(control.value) : (control.value as Date);
+		const date = transformDateInputToDate(control.value);
 		// try to parse the display value cause formControl.value is undefined if date is not parsable
 		try {
 			parse(this.displayValue(), this.dateFormat, startOfDay(new Date()));
