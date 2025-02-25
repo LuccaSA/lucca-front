@@ -98,6 +98,8 @@ node(label: CI.getSelectedLinuxNode(script:this)) {
 				publishNpmOnReleaseTag(publishFolder: 'dist/icons')
 				publishNpmOnReleaseTag(publishFolder: 'dist/scss')
 				publishNpmOnReleaseTag(publishFolder: 'dist/ng')
+
+				publishNpmOnReleaseTag(publishFolder: 'packages/stylelint-config'); // No need for * replacements for this package, it does not depend directly on LF
 			}
 		}
 	} catch(err) {
