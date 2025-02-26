@@ -12,11 +12,9 @@ export function registerClearFormat(editor: LexicalEditor) {
 				const selection = $getSelection();
 
 				if ($isRangeSelection(selection)) {
-					const anchor = selection.anchor;
-					const focus = selection.focus;
-					const nodes = selection.getNodes();
+					const { anchor, focus } = selection;
 
-					nodes.forEach((node) => {
+					selection.getNodes().forEach((node) => {
 						if ($isTextNode(node)) {
 							// use selection offsets if within current node
 							const start = node.getKey() === anchor.key ? anchor.offset : 0;
