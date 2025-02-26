@@ -1,7 +1,10 @@
 import { NgClass, UpperCasePipe } from '@angular/common';
 import { booleanAttribute, Component, computed, inject, input, LOCALE_ID, output, ViewEncapsulation } from '@angular/core';
+import { FormControl, FormsModule } from '@angular/forms';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { DividerComponent } from '@lucca-front/ng/divider';
+import { FormFieldComponent } from '@lucca-front/ng/form-field';
+import { TextInputComponent } from '@lucca-front/ng/forms';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { InlineMessageComponent } from '@lucca-front/ng/inline-message';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
@@ -13,7 +16,7 @@ import { formatSize } from '../formatter';
 	templateUrl: './file-uploaded.component.html',
 	styleUrls: ['./file-uploaded.component.scss'],
 	encapsulation: ViewEncapsulation.None,
-	imports: [IconComponent, UpperCasePipe, LuTooltipModule, ButtonComponent, InlineMessageComponent, DividerComponent, NgClass],
+	imports: [IconComponent, UpperCasePipe, LuTooltipModule, ButtonComponent, InlineMessageComponent, DividerComponent, NgClass, FormFieldComponent, TextInputComponent, FormsModule],
 	host: {
 		class: 'u-displayContents',
 	},
@@ -32,6 +35,8 @@ export class FileUploadedComponent {
 	downloadable = input<boolean, boolean>(false, { transform: booleanAttribute });
 	deletable = input<boolean, boolean>(false, { transform: booleanAttribute });
 	viewable = input<boolean, boolean>(false, { transform: booleanAttribute });
+
+	withPassword = input<boolean, boolean>(false, { transform: booleanAttribute });
 
 	display = input<'media' | 'single' | null>(null);
 
@@ -53,4 +58,6 @@ export class FileUploadedComponent {
 			'mod-single': this.display() === 'single',
 		};
 	});
+
+	passwordControl: FormControl;
 }

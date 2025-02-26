@@ -176,3 +176,20 @@
 	</dd>
 	}
 </dl>
+
+<div class="box mod-withArrow mod-neutral pr-u-marginBlockStart150">
+	<div class="box-arrow mod-neutral" style="inset-block-end: 100%"></div>
+	<lu-form-field label="Mot de passe">
+		<div class="u-displayFlex pr-u-gap100">
+			<lu-text-input
+				class="u-flexGrow1"
+				required
+				hasClearer
+				searchIcon="searchMagnifyingGlass"
+				type="password"
+				[(ngModel)]="passwordControl"
+			/>
+			<button luButton type="button">Valider le mot de passe</button>
+		</div>
+	</lu-form-field>
+</div>

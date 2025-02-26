@@ -58,5 +58,6 @@ export const Basic = {
 		viewable: false,
 		format: 'file',
 		inlineMessageError: 'Virus contenu dans le fichier sélectionné.',
+		withPassword: false,
 	},
 };
