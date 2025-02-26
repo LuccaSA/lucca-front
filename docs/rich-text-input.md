@@ -25,11 +25,11 @@ Avant toute utilisation du composant, il est nécessaire de définir le formateu
 Deux formateurs par défaut sont disponibles, à provide au niveau du composant parent de l'input :
 * HTML
 ```ts
-provideLuRichTextHTMLFormater()
+provideLuRichTextHTMLFormatter()
 ```
 * Markdown (avec une liste optionnelle de `Transformer` markdown pour les noeuds custom)
 ```ts
-provideLuRichTextMarkdownFormater(transformers)
+provideLuRichTextMarkdownFormatter(transformers)
 ```
 
 Exemple d'utilisation :
@@ -137,10 +137,10 @@ export class MyCustomRichTextPluginComponent implements OnDestroy, RichTextPlugi
 
 ### Ajout de formateurs personnalisés
 
-Il est possible d'ajouter des formateurs personnalisés pour le `lu-rich-text-input`. Pour cela, il faut créer une classe qui implémente l'interface `RichTextFormater`.
+Il est possible d'ajouter des formateurs personnalisés pour le `lu-rich-text-input`. Pour cela, il faut créer une classe qui implémente l'interface `RichTextFormatter`.
 
 ```ts
-export class MyCustomFormater implements RichTextFormater {
+export class MyCustomFormatter implements RichTextFormatter {
   override parse(editor: LexicalEditor, text?: string | null): void {
     // Conversion d'une string pour alimenter l'éditeur Lexical
   }
@@ -150,10 +150,10 @@ export class MyCustomFormater implements RichTextFormater {
   }
 }
 
-export function provideLuRichTextCustomFormater(): Provider {
+export function provideLuRichTextCustomFormatter(): Provider {
   return {
-    provide: RICH_TEXT_FORMATER,
-    useFactory: () => new MyCustomFormater(),
+    provide: RICH_TEXT_FORMATTER,
+    useFactory: () => new MyCustomFormatter(),
   };
 }
 

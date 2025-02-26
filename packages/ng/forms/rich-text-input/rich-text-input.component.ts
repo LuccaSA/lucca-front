@@ -21,7 +21,7 @@ import { mergeRegister } from '@lexical/utils';
 
 import { $canShowPlaceholderCurry } from '@lexical/text';
 import { createEditor, Klass, LexicalEditor, LexicalNode } from 'lexical';
-import { RICH_TEXT_FORMATER, RichTextFormater } from './formaters';
+import { RICH_TEXT_FORMATTER, RichTextFormatter } from './formatters';
 
 export interface RichTextPluginComponent {
 	setEditorInstance(editor: LexicalEditor): void;
@@ -47,7 +47,7 @@ export const RICH_TEXT_PLUGIN_COMPONENT = new InjectionToken<RichTextPluginCompo
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RichTextInputComponent implements OnInit, OnDestroy, ControlValueAccessor {
-	readonly richTextFormater: RichTextFormater = inject(RICH_TEXT_FORMATER);
+	readonly richTextFormatter = inject<RichTextFormatter>(RICH_TEXT_FORMATTER);
 	readonly placeholder = input('');
 
 	#onChange?: (markdown: string | null) => void;
@@ -89,7 +89,7 @@ export class RichTextInputComponent implements OnInit, OnDestroy, ControlValueAc
 			registerHistory(this.editor, createEmptyHistoryState(), 300),
 			this.editor.registerUpdateListener((changes) => {
 				if (changes.dirtyElements.size) {
-					const result = this.richTextFormater.format(this.editor);
+					const result = this.richTextFormatter.format(this.editor);
 					this.#onTouch?.();
 					this.#onChange?.(result);
 				}
@@ -107,7 +107,7 @@ export class RichTextInputComponent implements OnInit, OnDestroy, ControlValueAc
 
 	writeValue(markdown: string | null): void {
 		this.editor?.update(() => {
-			this.richTextFormater.parse(this.editor, markdown);
+			this.richTextFormatter.parse(this.editor, markdown);
 		});
 	}
 

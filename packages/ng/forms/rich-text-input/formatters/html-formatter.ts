@@ -1,10 +1,10 @@
 import { $getRoot, $insertNodes, LexicalEditor } from 'lexical';
-import { RICH_TEXT_FORMATER, RichTextFormater } from './rich-text-formater';
+import { RICH_TEXT_FORMATTER, RichTextFormatter } from './rich-text-formatter';
 import { sanitize } from 'isomorphic-dompurify';
 import { $generateHtmlFromNodes, $generateNodesFromDOM } from '@lexical/html';
 import { Provider } from '@angular/core';
 
-export class HTMLFormater extends RichTextFormater {
+export class HtmlFormatter extends RichTextFormatter {
 	override parse(editor: LexicalEditor, htmlString?: string | null): void {
 		const parser = new DOMParser();
 		const dom = parser.parseFromString(
@@ -36,9 +36,9 @@ export class HTMLFormater extends RichTextFormater {
 	}
 }
 
-export function provideLuRichTextHTMLFormater(): Provider {
+export function provideLuRichTextHTMLFormatter(): Provider {
 	return {
-		provide: RICH_TEXT_FORMATER,
-		useFactory: () => new HTMLFormater(),
+		provide: RICH_TEXT_FORMATTER,
+		useFactory: () => new HtmlFormatter(),
 	};
 }

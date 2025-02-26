@@ -6,7 +6,7 @@ import {
 	HeadingsComponent,
 	LinkComponent,
 	ListStyleToolbarComponent,
-	provideLuRichTextMarkdownFormater,
+	provideLuRichTextMarkdownFormatter,
 	RichTextInputComponent,
 	TextStyleComponent,
 	TextStyleToolbarComponent,
@@ -35,7 +35,7 @@ export default {
 				StoryModelDisplayComponent,
 				DividerComponent,
 			],
-			providers: [provideLuRichTextMarkdownFormater()],
+			providers: [provideLuRichTextMarkdownFormatter()],
 		}),
 	],
 	argTypes: {
