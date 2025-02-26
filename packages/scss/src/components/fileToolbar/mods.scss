@@ -1,6 +1,6 @@
 @use '@lucca-front/scss/src/components/button/exports' as button;
 
-@mixin invisible {
+@mixin disablePositioning {
 	--components-fileToolbar-display: contents;
 }
 

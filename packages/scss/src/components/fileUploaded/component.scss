@@ -8,91 +8,106 @@
 @mixin component($atRoot: namespace.$defaultAtRoot) {
 	border: 1px solid var(--components-fileUploaded-borderColor);
 	padding: var(--components-fileUploaded-padding);
+	margin: 0;
 	border-radius: var(--commons-borderRadius-L);
 	background-color: var(--pr-t-elevation-surface-raised);
-	display: flex;
-	flex-direction: var(--components-fileUploaded-flexDirection);
-	align-items: var(--components-fileUploaded-alignItems);
-	gap: var(--components-fileUploaded-gap);
-	inline-size: var(--components-fileUploaded-width);
+	gap: 0 var(--components-fileUploaded-gap);
 	position: relative;
 	grid-column: var(--components-fileUploaded-gridColumn);
 	min-height: var(--components-fileUploaded-minHeight);
+	display: var(--components-fileUploaded-display);
+	align-items: center;
+	grid-template-columns: auto 1fr auto;
+	grid-template-areas: var(--components-fileUploaded-gridTemplateAreas);
 
-	&:has(.fileUploaded-status:focus-visible) {
+	&:has(.fileUploaded-filename-tooltip:focus-visible, .fileUploaded-status-content:focus-visible) {
 		@include a11y.focusVisible;
 	}
 
 	@at-root ($atRoot) {
 		.fileUploaded-status {
-			display: flex;
 			border-radius: var(--components-fileUploaded-status-borderRadius);
 			overflow: hidden;
 			inline-size: var(--components-fileUploaded-status-width);
 			block-size: var(--components-fileUploaded-status-height);
-			justify-content: center;
-			align-items: center;
 			color: var(--palettes-neutral-700);
 			background-color: var(--components-fileUploaded-status-backgroundColor);
 			flex-shrink: 0;
 			aspect-ratio: var(--components-fileUploaded-status-aspectRatio);
-			outline: none;
 			margin: var(--components-fileUploaded-status-margin);
+			grid-area: picture;
+			display: flex;
 		}
 
-		.fileUploaded-status-svg {
-			inline-size: var(--components-fileUploaded-status-svg-width);
-			block-size: var(--components-fileUploaded-status-svg-height);
+		.fileUploaded-status-content {
+			display: flex;
+			inline-size: 100%;
+			block-size: 100%;
+			outline: none;
+			justify-content: center;
+			align-items: center;
 		}
 
-		.fileUploaded-status-img {
+		.fileUploaded-status-content-svg {
+			inline-size: var(--components-fileUploaded-status-content-svg-width);
+			block-size: var(--components-fileUploaded-status-content-svg-height);
+		}
+
+		.fileUploaded-status-content-img {
 			object-fit: cover;
 			inline-size: 100%;
 			block-size: 100%;
-			opacity: var(--components-fileUploaded-status-img-opacity);
+			opacity: var(--components-fileUploaded-status-content-img-opacity);
 		}
 
-		.fileUploaded-status-loading {
+		.fileUploaded-status-content-loading {
 			position: absolute;
 		}
 
-		.fileUploaded-informations {
-			flex-grow: 1;
-			padding: var(--pr-t-spacings-50);
-			display: flex;
-			min-width: 0;
-			flex-wrap: wrap;
+		.fileUploaded-toolbar {
+			grid-area: toolbar;
+			margin: 0;
 		}
 
-		.fileUploaded-informations-filename {
+		.fileUploaded-filename {
+			grid-area: title;
+			align-self: var(--components-fileUploaded-filename-alignSelf);
+			min-width: 0;
+		}
+
+		.fileUploaded-filename-tooltip {
 			@include text.ellipsis;
 
-			width: 100%;
+			outline: none;
 		}
 
-		.fileUploaded-informations-extension,
-		.fileUploaded-informations-size {
+		.fileUploaded-description {
+			grid-area: description;
+			align-self: start;
 			color: var(--palettes-neutral-600);
 			font-size: var(--sizes-S-fontSize);
 			line-height: var(--sizes-S-lineHeight);
-			display: var(--components-fileUploaded-informations-children-display);
+			display: var(--components-fileUploaded-description-display);
+			margin: 0;
+			gap: var(--pr-t-spacings-100);
+			min-width: 0;
 		}
 
-		.fileUploaded-informations-extension + .fileUploaded-informations-size {
-			margin-inline-start: var(--pr-t-spacings-200);
-			position: relative;
+		.fileUploaded-description-format {
+			@include text.ellipsis;
 
-			&::before {
-				content: '';
-				position: absolute;
-				inset: var(--pr-t-spacings-50) auto var(--pr-t-spacings-50) calc(var(--pr-t-spacings-100) * -1);
-				inline-size: var(--commons-divider-width);
-				background-color: var(--commons-divider-color);
+			border-radius: var(--commons-borderRadius-M);
+
+			&:focus-visible {
+				@include a11y.focusVisible;
 			}
 		}
 
-		.fileUploaded-informations-inlineMessage.inlineMessage {
-			//display: inline-flex;
+		.fileUploaded-inlineMessage {
+			grid-area: description;
+			margin: 0;
+			align-self: start;
+			min-width: 0;
 		}
 	}
 }

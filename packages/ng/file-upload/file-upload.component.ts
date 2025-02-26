@@ -62,6 +62,8 @@ export class FileUploadComponent {
 
 	size = input<'S' | null>(null);
 
+	password = input<boolean, boolean>(false, { transform: booleanAttribute });
+
 	displayMedia = input<boolean, boolean>(false, { transform: booleanAttribute });
 
 	illustration = input<'picture' | 'paper'>('paper');
