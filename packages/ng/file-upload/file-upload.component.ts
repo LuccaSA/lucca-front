@@ -90,20 +90,20 @@ export class FileUploadComponent {
 				next: () => {
 					file.state = 'success';
 
-					if (!this.multiple) {
+					if (!this.multiple()) {
 						this.state.set('success');
 					}
 				},
 				error: () => {
 					file.state = 'error';
 
-					if (!this.multiple) {
+					if (!this.multiple()) {
 						this.state.set('error');
 					}
 				},
 			});
 		});
-		if (!this.multiple) {
+		if (!this.multiple()) {
 			this.state.set('loading');
 			this.files = upload;
 		} else {
