@@ -69,7 +69,8 @@
 	}
 </div>
 @if (state() === 'success' || multiple) { @for (entry of files; track entry.file.name) {
-<lu-file-uploaded
+<dl
+	lu-file-uploaded
 	[filePreviewUrl]="entry.preview"
 	[size]="size()"
 	[state]="entry.state"
@@ -79,5 +80,7 @@
 	(deleteFile)="abort(inputRef)"
 	[deletable]="true"
 	[display]="displayMedia() && multiple() ? 'media' : multiple() ? null : 'single'"
-/>
-} }
+></dl>
+} } @if (password()) {
+<div class="form-field-arrow mod-neutral u-displayBlock"></div>
+}

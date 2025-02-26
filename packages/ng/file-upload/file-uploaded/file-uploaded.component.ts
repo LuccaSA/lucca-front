@@ -2,18 +2,20 @@ import { UpperCasePipe } from '@angular/common';
 import { booleanAttribute, Component, computed, effect, HostBinding, inject, input, LOCALE_ID, output, ViewEncapsulation } from '@angular/core';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { LuClass } from '@lucca-front/ng/core';
+import { DividerComponent } from '@lucca-front/ng/divider';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { InlineMessageComponent } from '@lucca-front/ng/inline-message';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 import { formatSize } from '../formatter';
 
 @Component({
-	selector: 'lu-file-uploaded',
+	// eslint-disable-next-line @angular-eslint/component-selector
+	selector: 'dl[lu-file-uploaded]',
 	standalone: true,
 	templateUrl: './file-uploaded.component.html',
 	styleUrls: ['./file-uploaded.component.scss'],
 	encapsulation: ViewEncapsulation.None,
-	imports: [IconComponent, UpperCasePipe, LuTooltipModule, ButtonComponent, InlineMessageComponent],
+	imports: [IconComponent, UpperCasePipe, LuTooltipModule, ButtonComponent, InlineMessageComponent, DividerComponent],
 	providers: [LuClass],
 	host: {
 		class: 'fileUploaded',

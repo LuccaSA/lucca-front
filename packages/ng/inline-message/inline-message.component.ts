@@ -2,12 +2,13 @@ import { NgIf } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject, Input, OnChanges, ViewEncapsulation } from '@angular/core';
 import { LuClass, PortalContent, PortalDirective } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
+import { LuTooltipModule } from '../tooltip/tooltip.module';
 import { InlineMessageState } from './inline-message-state';
 
 @Component({
 	selector: 'lu-inline-message',
 	standalone: true,
-	imports: [NgIf, IconComponent, PortalDirective],
+	imports: [NgIf, IconComponent, PortalDirective, LuTooltipModule],
 	providers: [LuClass],
 	templateUrl: './inline-message.component.html',
 	styleUrls: ['./inline-message.component.scss'],
@@ -28,6 +29,9 @@ export class InlineMessageComponent implements OnChanges {
 
 	@Input()
 	size: 'S' | 'M';
+
+	@Input()
+	withTooltip = false;
 
 	ngOnChanges(): void {
 		this.#luClass.setState({

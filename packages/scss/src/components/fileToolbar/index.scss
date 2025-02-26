@@ -4,8 +4,8 @@
 	@include vars;
 	@include component;
 
-	&.mod-invisible {
-		@include invisible;
+	&.mod-disablePositioning {
+		@include disablePositioning;
 	}
 
 	&.mod-S {
