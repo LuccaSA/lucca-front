@@ -6,6 +6,7 @@
 			[options]="prefixesDisplay()"
 			[ngModel]="prefixEntry()"
 			(ngModelChange)="updatePrefix($event)"
+			[ngModelOptions]="{ standalone: true }"
 			[optionKey]="getPrefixKey"
 			[optionComparer]="prefixComparator"
 			(clueChange)="query.set($event)"
@@ -34,6 +35,7 @@
 				id="phoneNumberFieldsetTextfieldInput"
 				[ngModel]="displayedNumber()"
 				(ngModelChange)="updateNumber($event)"
+				[ngModelOptions]="{ standalone: true }"
 				(blur)="touched();formatNationalNumber()"
 				luInput
 				luInputStandalone

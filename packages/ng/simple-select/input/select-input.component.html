@@ -10,6 +10,7 @@
 		placeholder="{{inputPlaceholder}}"
 		[ngModel]="clue"
 		(ngModelChange)="clueChanged($event)"
+		[ngModelOptions]="{ standalone: true }"
 		[readonly]="!searchable"
 		[disabled]="disabled$ | async"
 		(keyup.space)="inputSpace($event)"
