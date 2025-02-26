@@ -40,7 +40,7 @@ export default {
 				accept,
 			},
 			template: `
-			<lu-form-field label="Label" class="--mod-withArrow">
+			<lu-form-field label="Label">
 				<lu-file-upload ${generateInputs(mainArgs, argTypes)} [accept]="accept"/>
 			</lu-form-field>
 			<!--

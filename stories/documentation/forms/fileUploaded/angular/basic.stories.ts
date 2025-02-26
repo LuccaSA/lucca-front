@@ -39,7 +39,7 @@ export default {
 	],
 	render: (args, { argTypes }) => {
 		return {
-			template: `<dl lu-file-uploaded ${generateInputs(args, argTypes)}></dl>`,
+			template: `<lu-file-uploaded ${generateInputs(args, argTypes)} />`,
 		};
 	},
 } as Meta;
@@ -57,5 +57,6 @@ export const Basic = {
 		deletable: true,
 		viewable: false,
 		format: 'file',
+		inlineMessageError: 'Virus contenu dans le fichier sélectionné.',
 	},
 };

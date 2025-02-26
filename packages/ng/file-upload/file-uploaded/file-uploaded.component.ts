@@ -1,7 +1,6 @@
-import { UpperCasePipe } from '@angular/common';
-import { booleanAttribute, Component, computed, effect, HostBinding, inject, input, LOCALE_ID, output, ViewEncapsulation } from '@angular/core';
+import { NgClass, UpperCasePipe } from '@angular/common';
+import { booleanAttribute, Component, computed, inject, input, LOCALE_ID, output, ViewEncapsulation } from '@angular/core';
 import { ButtonComponent } from '@lucca-front/ng/button';
-import { LuClass } from '@lucca-front/ng/core';
 import { DividerComponent } from '@lucca-front/ng/divider';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { InlineMessageComponent } from '@lucca-front/ng/inline-message';
@@ -9,23 +8,22 @@ import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 import { formatSize } from '../formatter';
 
 @Component({
-	// eslint-disable-next-line @angular-eslint/component-selector
-	selector: 'dl[lu-file-uploaded]',
+	selector: 'lu-file-uploaded',
 	standalone: true,
 	templateUrl: './file-uploaded.component.html',
 	styleUrls: ['./file-uploaded.component.scss'],
 	encapsulation: ViewEncapsulation.None,
-	imports: [IconComponent, UpperCasePipe, LuTooltipModule, ButtonComponent, InlineMessageComponent, DividerComponent],
-	providers: [LuClass],
+	imports: [IconComponent, UpperCasePipe, LuTooltipModule, ButtonComponent, InlineMessageComponent, DividerComponent, NgClass],
 	host: {
-		class: 'fileUploaded',
+		class: 'u-displayContents',
 	},
 })
 export class FileUploadedComponent {
-	#luClass = inject(LuClass);
 	#locale = inject(LOCALE_ID);
 
-	state = input<'loading' | 'error' | null>(null);
+	state = input<'success' | 'loading' | 'error' | null>(null);
+
+	inlineMessageError = input<string | null>(null);
 
 	format = input<'file' | 'word' | 'excel' | 'powerpoint'>('file');
 
@@ -37,16 +35,6 @@ export class FileUploadedComponent {
 
 	display = input<'media' | 'single' | null>(null);
 
-	@HostBinding('class.mod-media')
-	get displayMediaClass() {
-		return this.display() === 'media';
-	}
-
-	@HostBinding('class.mod-single')
-	get multipleClass() {
-		return this.display() === 'single';
-	}
-
 	fileName = input.required<string>();
 	fileType = input.required<string>();
 	fileSize = input.required<number>();
@@ -56,9 +44,13 @@ export class FileUploadedComponent {
 
 	fileSizeDisplay = computed(() => formatSize(this.#locale, this.fileSize()));
 
-	constructor() {
-		effect(() => {
-			this.#luClass.setState({ [`is-${this.state()}`]: !!this.state(), [`mod-${this.size()}`]: !!this.size(), [`mod-${this.format()}`]: !!this.format() });
-		});
-	}
+	dlClasses = computed(() => {
+		return {
+			[`is-${this.state()}`]: !!this.state(),
+			[`mod-${this.size()}`]: !!this.size(),
+			[`mod-${this.format()}`]: !!this.format(),
+			'mod-media': this.display() === 'media',
+			'mod-single': this.display() === 'single',
+		};
+	});
 }
