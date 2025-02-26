@@ -1,6 +1,7 @@
 import { NgClass } from '@angular/common';
-import { ChangeDetectionStrategy, Component, HostBinding, input, Input, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, computed, effect, HostBinding, inject, input, ViewEncapsulation } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { LuClass } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
 @Component({
 	selector: 'lu-highlight-data',
@@ -10,25 +11,27 @@ import { IconComponent } from '@lucca-front/ng/icon';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	encapsulation: ViewEncapsulation.None,
 	imports: [IconComponent, NgClass, RouterLink],
-
+	providers: [LuClass],
 	host: {
 		class: 'highlightData',
 	},
 })
 export class HighlightDataComponent {
-	@Input({ required: true })
-	heading: string;
-
-	@Input()
+	#luClass = inject(LuClass);
 	/**
 	 * ...
 	 */
-	bubble: '01' | '02' | '03' | 'O4';
-
-	/**
-	 * ...
-	 */
+	heading = input.required<string>();
+	value = input.required<string>();
+	bubble = input<'01' | '02' | '03' | 'O4'>();
 	theme = input<'white' | 'light' | 'dark'>('white');
+
+	bubbleTheme = computed(() => {
+		if (this.theme() === 'dark') {
+			return 'dark';
+		}
+		return 'light';
+	});
 
 	@HostBinding('class.mod-light')
 	get lightClass() {
@@ -40,11 +43,20 @@ export class HighlightDataComponent {
 		return this.theme() === 'dark';
 	}
 
-	@Input()
-	/**
-	 * ...
-	 */
-	illustration: 'calculator' | 'calendar' | 'cleemy-card' | 'coffee' | 'headphone' | 'mail' | 'manifying-glass' | 'medallon' | 'piggy-bank' | 'polaroid-female' | 'polaroid-male' | 'polaroids';
+	illustration = input<
+		'calculator' | 'calendar' | 'cleemy-card' | 'coffee' | 'headphone' | 'mail' | 'manifying-glass' | 'medallon' | 'piggy-bank' | 'polaroid-female' | 'polaroid-male' | 'polaroids'
+	>();
+	size = input<'S' | 'M' | null>(null);
+	infos = input(false, { transform: booleanAttribute });
+
+	constructor() {
+		effect(() => {
+			this.#luClass.setState({
+				[`mod-${this.size()}`]: !!this.size(),
+				'mod-infos': this.infos(),
+			});
+		});
+	}
 
 	// @Input()
 	// /**
@@ -73,10 +85,10 @@ export class HighlightDataComponent {
 	//  * Defaults to no icon.
 	//  */
 	// icon: LuccaIcon | undefined;
-	get highlightDataClasses() {
-		return {
-			[`mod-${this.theme}`]: !!this.theme,
-			//[`palette-${this.palette}`]: !!this.palette,
-		};
-	}
+	// get highlightDataClasses() {
+	// 	return {
+	// 		[`mod-${this.theme}`]: !!this.theme,
+	// 		//[`palette-${this.palette}`]: !!this.palette,
+	// 	};
+	// }
 }

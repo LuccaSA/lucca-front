@@ -31,7 +31,7 @@
 					</div>
 				</div>
 			</td>
-			<td><lu-highlight-data heading="Hello" illustration="piggy-bank" bubble="01"></lu-highlight-data></td>
+			<td><lu-highlight-data heading="Hello" value="123" illustration="piggy-bank" bubble="01"></lu-highlight-data></td>
 		</tr>
 		<tr>
 			<td>Only bubble</td>
@@ -50,7 +50,7 @@
 					</div>
 				</div>
 			</td>
-			<td><lu-highlight-data heading="Hello" bubble="01"></lu-highlight-data></td>
+			<td><lu-highlight-data heading="Hello" value="123" bubble="01"></lu-highlight-data></td>
 		</tr>
 		<tr>
 			<td>No illustration</td>
@@ -62,10 +62,10 @@
 					</dl>
 				</div>
 			</td>
-			<td><lu-highlight-data heading="Hello"></lu-highlight-data></td>
+			<td><lu-highlight-data heading="Hello" value="123"></lu-highlight-data></td>
 		</tr>
 		<tr>
-			<td>Actions</td>
+			<td>Actions & illustration</td>
 			<td>
 				<div class="highlightData">
 					<dl class="highlightData-content">
@@ -87,10 +87,14 @@
 					</div>
 				</div>
 			</td>
-			<td></td>
+			<td>
+				<lu-highlight-data heading="Hello" value="123" bubble="01" illustration="polaroid-male"
+					><button luButton="outlined" type="button">Action</button></lu-highlight-data
+				>
+			</td>
 		</tr>
 		<tr>
-			<td>Actions & illustration</td>
+			<td>Actions</td>
 			<td>
 				<div class="highlightData">
 					<dl class="highlightData-content">
@@ -100,7 +104,9 @@
 					<button type="button" class="button mod-outlined">Action</button>
 				</div>
 			</td>
-			<td></td>
+			<td>
+				<lu-highlight-data heading="Hello" value="123"><button luButton="outlined" type="button">Action</button></lu-highlight-data>
+			</td>
 		</tr>
 		<tr>
 			<td>Link</td>
@@ -113,7 +119,9 @@
 					<a href="#" class="link">Link</a>
 				</div>
 			</td>
-			<td></td>
+			<td>
+				<lu-highlight-data heading="Hello" value="123"><a luLink>Link</a></lu-highlight-data>
+			</td>
 		</tr>
 		<tr>
 			<td>Light</td>
@@ -139,7 +147,9 @@
 					</div>
 				</div>
 			</td>
-			<td><lu-highlight-data heading="Hello" bubble="01" theme="light"></lu-highlight-data></td>
+			<td>
+				<lu-highlight-data heading="Hello" value="123" bubble="01" illustration="piggy-bank" theme="light"></lu-highlight-data>
+			</td>
 		</tr>
 		<tr>
 			<td>Dark</td>
@@ -153,7 +163,7 @@
 						<img
 							alt=""
 							class="highlightData-illustrations-back"
-							src="https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/lucca/bubbles-light-01.svg"
+							src="https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/lucca/bubbles-dark-01.svg"
 						/>
 						<img
 							alt=""
@@ -163,7 +173,7 @@
 					</div>
 				</div>
 			</td>
-			<td><lu-highlight-data heading="Hello" bubble="01" theme="dark"></lu-highlight-data></td>
+			<td><lu-highlight-data heading="Hello" value="123" bubble="01" illustration="piggy-bank" theme="dark"></lu-highlight-data></td>
 		</tr>
 		<tr>
 			<td>Infos</td>
@@ -187,7 +197,7 @@
 					</div>
 				</div>
 			</td>
-			<td></td>
+			<td><lu-highlight-data heading="Hello" value="123" bubble="01" illustration="piggy-bank" infos></lu-highlight-data></td>
 		</tr>
 		<tr>
 			<td>Small</td>
@@ -211,7 +221,7 @@
 					</div>
 				</div>
 			</td>
-			<td></td>
+			<td><lu-highlight-data heading="Hello" value="123" bubble="01" illustration="piggy-bank" size="S"></lu-highlight-data></td>
 		</tr>
 		<tr>
 			<td>Infos + Small</td>
@@ -235,7 +245,7 @@
 					</div>
 				</div>
 			</td>
-			<td></td>
+			<td><lu-highlight-data heading="Hello" value="123" bubble="01" illustration="piggy-bank" size="S" infos></lu-highlight-data></td>
 		</tr>
 
 		<tr>
@@ -263,7 +273,14 @@
 					</div>
 				</div>
 			</td>
-			<td></td>
+			<td>
+				<lu-highlight-data
+					heading="Hello"
+					value="Content Content Content Content Content Content Content Content Content Content Content Content Content Content"
+					bubble="01"
+					illustration="piggy-bank"
+				></lu-highlight-data>
+			</td>
 		</tr>
 	</tbody>
 </table>

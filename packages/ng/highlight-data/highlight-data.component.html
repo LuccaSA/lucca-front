@@ -1,20 +1,21 @@
 <dl class="highlightData-content">
-	<dt class="highlightData-content-title">{{ heading }}</dt>
-	<dd class="highlightData-content-value">Content</dd>
+	<dt class="highlightData-content-title">{{ heading() }}</dt>
+	<dd class="highlightData-content-value">{{ value() }}</dd>
 </dl>
-@if (bubble || illustration) {
+<ng-content></ng-content>
+@if (bubble() || illustration()) {
 <div class="highlightData-illustrations">
-	@if (bubble) {
+	@if (bubble()) {
 	<img
 		alt=""
 		class="highlightData-illustrations-back"
-		[attr.src]="'https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/lucca/bubbles-light-'+bubble+'.svg'"
+		[attr.src]="'https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/lucca/bubbles-'+bubbleTheme()+'-'+bubble()+'.svg'"
 	/>
-	} @if (illustration) {
+	} @if (illustration()) {
 	<img
 		alt=""
 		class="highlightData-illustrations-front"
-		[attr.src]="'https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/generic/'+illustration+'.svg'"
+		[attr.src]="'https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/generic/'+illustration()+'.svg'"
 	/>
 	}
 </div>
