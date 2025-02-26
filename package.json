@@ -133,7 +133,6 @@
   "overrides": {
     "@compodoc/compodoc": {
       "pdfjs-dist": "4.2.67"
-    },
-    "@lexical/code": "file:./packages/ng/forms/rich-text-input/lexical-code/lexical-code-1.0.0.tgz"
+    }
   }
 }
