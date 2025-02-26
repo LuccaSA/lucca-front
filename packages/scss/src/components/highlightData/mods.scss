@@ -26,10 +26,8 @@
 }
 
 @mixin illustrations {
+	--components-highlightData-display: flex;
+	--components-highlightData-alignItem: start;
+	--components-highlightData-action-padding: var(--pr-t-spacings-150);
 	padding-inline-end: calc(var(--components-highlightData-illustrations-width) + var(--components-highlightData-padding-inline));
-
-	// Illustration + Action
-	--components-highlightData-direction: column;
-	--components-highlightData-align: flex-start;
-	--components-highlightData-gap: var(--pr-t-spacings-100);
 }

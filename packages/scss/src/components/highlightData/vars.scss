@@ -1,15 +1,15 @@
 @mixin vars {
+	--components-highlightData-display: grid;
+	--components-highlightData-alignItem: center;
 	--components-highlightData-background: var(--pr-t-elevation-surface-raised);
 	--components-highlightData-padding-inline: var(--pr-t-spacings-300);
 	--components-highlightData-padding-block: var(--pr-t-spacings-200);
 	--components-highlightData-padding: var(--components-highlightData-padding-block) var(--components-highlightData-padding-inline);
-	--components-highlightData-direction: row;
-	--components-highlightData-align: center;
 	--components-highlightData-gap: var(--components-highlightData-padding-inline);
 	--components-highlightData-title-fontSize: var(--sizes-S-fontSize);
 	--components-highlightData-title-lineHeight: var(--sizes-S-lineHeight);
 	--components-highlightData-title-color: var(--palettes-neutral-200);
+	--components-highlightData-action-padding: 0;
 	--components-highlightData-illustrations-width: 96px;
 	--components-highlightData-illustrations-height: 80px;
-	--components-highlightData-illustrations-bubbles: 'https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/lucca/bubbles-light-01.svg';
 }

@@ -1,12 +1,9 @@
 @use '@lucca-front/scss/src/commons/utils/namespace';
+@use '@lucca-front/scss/src/commons/utils/reset';
 @use '@lucca-front/scss/src/components/title/exports' as title;
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
-	display: flex;
-	flex-direction: var(--components-highlightData-direction);
-	justify-content: space-between;
-	gap: var(--components-highlightData-gap);
-	align-items: var(--components-highlightData-align);
+	display: block;
 	background-color: var(--components-highlightData-background);
 	border-radius: var(--commons-borderRadius-L);
 	overflow: hidden;
@@ -15,20 +12,37 @@
 
 	@at-root ($atRoot) {
 		.highlightData-content {
-			margin: 0;
-			flex-grow: 1;
+			@include reset.list($list: 'dl');
+			display: var(--components-highlightData-display);
+			grid-template-columns: 1fr auto;
+			grid-template-areas:
+				'title action'
+				'value action';
+			align-items: var(--components-highlightData-alignItem);
+			flex-direction: column;
+			column-gap: var(--components-highlightData-gap);
 		}
 
 		.highlightData-content-title {
+			grid-area: title;
 			font-size: var(--components-highlightData-title-fontSize);
 			line-height: var(--components-highlightData-title-lineHeight);
 			color: var(--palettes-neutral-700);
 		}
 
 		.highlightData-content-value {
+			grid-area: value;
 			@include title.component;
 			@include title.h1;
-			margin: 0;
+		}
+
+		.highlightData-content-action {
+			grid-area: action;
+			padding-block-start: var(--components-highlightData-action-padding);
+
+			&:empty {
+				display: none;
+			}
 		}
 
 		.highlightData-illustrations {
