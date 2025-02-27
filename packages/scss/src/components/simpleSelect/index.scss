@@ -12,10 +12,12 @@
 		}
 	}
 
-	&:has(.simpleSelect-field-input:focus-visible),
-	&:has(.simpleSelect-field-input[aria-expanded='true']) {
-		&:not(:has(.simpleSelect-field-input:read-only)) {
-			@include searchable;
+	&:not(.mod-noClueIcon) {
+		&:has(.simpleSelect-field-input:focus-visible),
+		&:has(.simpleSelect-field-input[aria-expanded='true']) {
+			&:not(:has(.simpleSelect-field-input:read-only)) {
+				@include searchable;
+			}
 		}
 	}
 
