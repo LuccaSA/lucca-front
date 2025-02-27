@@ -1,6 +1,6 @@
 import * as os from 'node:os';
 import { readFileSync, writeFileSync } from 'node:fs';
-import { join } from '@angular/compiler-cli';
+import { join } from 'path';
 
 let LFVersions = null;
 
