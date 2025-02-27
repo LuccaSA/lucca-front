@@ -7,8 +7,8 @@
 	--components-fileUploaded-gridTemplateAreas: 'picture title toolbar' 'picture description toolbar';
 	--components-fileUploaded-display: grid;
 
-	--components-fileUploaded-status-width: 56px;
-	--components-fileUploaded-status-height: var(--components-fileUploaded-status-width);
+	--components-fileUploaded-status-inlineSize: 56px;
+	--components-fileUploaded-status-blockSize: var(--components-fileUploaded-status-inlineSize);
 	--components-fileUploaded-status-margin: var(--pr-t-spacings-75);
 	--components-fileUploaded-status-backgroundColor: var(--palettes-neutral-25);
 	--components-fileUploaded-status-aspectRatio: auto;
