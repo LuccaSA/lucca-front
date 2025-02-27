@@ -100,6 +100,14 @@
 		content: none;
 	}
 
+	.dataTable-head-row-cell {
+		&.mod-stickyColumn {
+			&:first-child {
+				z-index: 1;
+			}
+		}
+	}
+
 	:is(.dataTable-head-row-cell, .dataTable-body-row-cell, .dataTable-foot-row-cell) {
 		&.mod-stickyColumn {
 			position: sticky;

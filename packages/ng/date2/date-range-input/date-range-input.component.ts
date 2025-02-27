@@ -113,7 +113,7 @@ export class DateRangeInputComponent extends AbstractDateComponent implements Co
 
 	highlightedField = signal<-1 | 0 | 1>(-1);
 
-	shortcuts = input<CalendarShortcut[]>();
+	shortcuts = input<readonly CalendarShortcut[]>();
 
 	@Input()
 	autocomplete: string;
@@ -283,42 +283,39 @@ export class DateRangeInputComponent extends AbstractDateComponent implements Co
 	}
 
 	setupInputEffect(inputSignal: Signal<string | null>, rangeProperty: 'start' | 'end'): void {
-		effect(
-			() => {
-				const inputValue = inputSignal();
-				let currentRange: DateRange = untracked(this.selectedRange) || ({} as DateRange);
-				if (inputValue?.length > 0) {
-					const parsed = parse(inputValue, this.dateFormat, startOfDay(new Date()));
-					if (parsed.getFullYear() > 999) {
-						currentRange = {
-							...currentRange,
-							scope: this.mode(),
-							[rangeProperty]: parsed,
-						};
-						this.currentDate.set(startOfDay(parsed));
-						this.tabbableDate.set(startOfDay(parsed));
-					} else if (this.isValidDate(parsed)) {
-						currentRange = {
-							...currentRange,
-							scope: this.mode(),
-							[rangeProperty]: parsed,
-						};
-					}
-				} else if (inputValue !== null) {
+		effect(() => {
+			const inputValue = inputSignal();
+			let currentRange: DateRange = untracked(this.selectedRange) || ({} as DateRange);
+			if (inputValue?.length > 0) {
+				const parsed = parse(inputValue, this.dateFormat, startOfDay(new Date()));
+				if (parsed.getFullYear() > 999) {
 					currentRange = {
 						...currentRange,
 						scope: this.mode(),
-						[rangeProperty]: undefined,
+						[rangeProperty]: parsed,
+					};
+					this.currentDate.set(startOfDay(parsed));
+					this.tabbableDate.set(startOfDay(parsed));
+				} else if (this.isValidDate(parsed)) {
+					currentRange = {
+						...currentRange,
+						scope: this.mode(),
+						[rangeProperty]: parsed,
 					};
 				}
-				if (!currentRange.start && !currentRange.end) {
-					this.selectedRange.set(null);
-				} else {
-					this.selectedRange.set(currentRange);
-				}
-			},
-			{ allowSignalWrites: true },
-		);
+			} else if (inputValue !== null) {
+				currentRange = {
+					...currentRange,
+					scope: this.mode(),
+					[rangeProperty]: undefined,
+				};
+			}
+			if (!currentRange.start && !currentRange.end) {
+				this.selectedRange.set(null);
+			} else {
+				this.selectedRange.set(currentRange);
+			}
+		});
 	}
 
 	inputBlur(): void {
