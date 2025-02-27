@@ -1,5 +1,5 @@
 import { HtmlAst, HtmlAstVisitor } from '../lib/html-ast.js';
-import ts, { isImportDeclaration, isNamedImports, ScriptTarget, SourceFile } from 'typescript';
+import { createSourceFile, isImportDeclaration, isNamedImports, ScriptTarget, SourceFile } from 'typescript';
 import { extractComponentImports, insertAngularImportIfNeeded, insertTSImportIfNeeded, removeAngularImport, removeTSImport } from '../lib/angular-component-ast';
 import { extractNgTemplatesIncludingHtml } from '../lib/angular-template';
 import { getCommonMigrationRejectionReason, getDataSource, getDisplayer, isRejection, RejectionReason } from './util';
@@ -11,7 +11,7 @@ import {
 	SelectComponent,
 	SelectContext,
 	selectorToComponentName,
-	selectorToSelectComponentName,
+	selectorToSelectComponentName
 } from './model/select-context';
 import { Tree, UpdateRecorder } from '@angular-devkit/schematics';
 import { applyToUpdateRecorder } from '@schematics/angular/utility/change';
@@ -28,7 +28,7 @@ const importSource: Record<string, string> = {
 	LuCoreSelectJobQualificationsDirective: '@lucca-front/ng/core-select',
 	LuCoreSelectUsersDirective: '@lucca-front/ng/core-select',
 	LuCoreSelectApiV3Directive: '@lucca-front/ng/core-select/api',
-	LuCoreSelectApiV4Directive: '@lucca-front/ng/core-select/api',
+	LuCoreSelectApiV4Directive: '@lucca-front/ng/core-select/api'
 };
 
 const selectorToComponentNameRecord = selectorToSelectComponentName as Record<string, SelectComponent>;
@@ -58,7 +58,7 @@ export function migrateComponent(sourceFile: SourceFile, path: string, tree: Tre
 						break;
 					case 'LuDepartmentSelectInputComponent':
 						select.rejection = {
-							reason: RejectionReason.TREE_OPTION_PICKER,
+							reason: RejectionReason.TREE_OPTION_PICKER
 						};
 						break;
 				}
@@ -79,7 +79,7 @@ export function migrateComponent(sourceFile: SourceFile, path: string, tree: Tre
 			tree.commitUpdate(templateUpdate);
 		}
 		// We have to rebuild sourceFile in case of an inline template, since we just modified it
-		const updatedSourceFile = isInlineTemplate ? ts.createSourceFile(path, tree.readText(path), ScriptTarget.ESNext) : sourceFile;
+		const updatedSourceFile = isInlineTemplate ? createSourceFile(path, tree.readText(path), ScriptTarget.ESNext) : sourceFile;
 		updateImports(updatedSourceFile, selects, path, tree);
 	}
 	return tree.readText(path);
@@ -110,11 +110,11 @@ function insertRejectionComment(update: UpdateRecorder, select: RejectedSelectCo
 
 	update.insertLeft(
 		select.nodeOffset + select.node.startSourceSpan.start.offset,
-		`<!-- [lu-select migration] REJECTED: ${detailedReason || RejectionReason[select.rejection.reason]} -->\n${indentBefore}`,
+		`<!-- [lu-select migration] REJECTED: ${detailedReason || RejectionReason[select.rejection.reason]} -->\n${indentBefore}`
 	);
 }
 
-function findSelectContexts(sourceFile: ts.SourceFile, basePath: string, tree: Tree): SelectContext[] {
+function findSelectContexts(sourceFile: SourceFile, basePath: string, tree: Tree): SelectContext[] {
 	const imports = extractComponentImports(sourceFile);
 	if (possibleSelectComponents.some((c) => imports.includes(c))) {
 		const selects: SelectContext[] = [];
@@ -140,12 +140,12 @@ function findSelectContexts(sourceFile: ts.SourceFile, basePath: string, tree: T
 						component: selectComponentClass,
 						rejection: unsupportedMultiple
 							? {
-									reason: RejectionReason.CONDITIONAL_MULTIPLE,
-								}
+								reason: RejectionReason.CONDITIONAL_MULTIPLE
+							}
 							: getCommonMigrationRejectionReason(node, sourceFile),
 						filePath: template.filePath,
 						componentTS: template.componentTS,
-						multiple: multipleFromAttr || multipleFromInput,
+						multiple: multipleFromAttr || multipleFromInput
 					};
 
 					selects.push(context as SelectContext);
@@ -172,7 +172,7 @@ function updateImports(sourceFile: SourceFile, selects: SelectContext[], path: s
 	tree.commitUpdate(update);
 	const componentsCleanupUpdate = tree.beginUpdate(path);
 	// Cleanup unused select component imports
-	const updatedSourceFile = ts.createSourceFile(path, tree.readText(path), ScriptTarget.ESNext);
+	const updatedSourceFile = createSourceFile(path, tree.readText(path), ScriptTarget.ESNext);
 	const templatesAfterUpdate = extractNgTemplatesIncludingHtml(updatedSourceFile, tree, path);
 	templatesAfterUpdate.forEach((template) => {
 		Object.entries(selectorToComponentName).forEach(([selector, className]) => {
@@ -184,7 +184,7 @@ function updateImports(sourceFile: SourceFile, selects: SelectContext[], path: s
 	tree.commitUpdate(componentsCleanupUpdate);
 	// Cleanup empty import clauses
 	const cleanupUpdate = tree.beginUpdate(path);
-	const cleanupSourceFile = ts.createSourceFile(path, tree.readText(path), ScriptTarget.ESNext);
+	const cleanupSourceFile = createSourceFile(path, tree.readText(path), ScriptTarget.ESNext);
 	cleanupSourceFile.statements.filter(isImportDeclaration).forEach((statement) => {
 		if (statement.importClause && statement.importClause.namedBindings && isNamedImports(statement.importClause.namedBindings) && statement.importClause.namedBindings.elements.length === 0) {
 			// +1 for trailing ;
@@ -234,7 +234,7 @@ function handleLuSelectInputComponent(select: LuSelectInputContext, update: Upda
 			select.requiredImports.push('LuOptionDirective');
 			update.insertRight(
 				select.nodeOffset + select.node.startSourceSpan.end.offset,
-				`${getEOL(select.node.startSourceSpan.end.file.content)}  <ng-container *luOption="${dataSource.display.variables}; select: ${dataSource.sourceName}Select">${dataSource.display.display}</ng-container>${getEOL(select.node.startSourceSpan.end.file.content)}`,
+				`${getEOL(select.node.startSourceSpan.end.file.content)}  <ng-container *luOption="${dataSource.display.variables}; select: ${dataSource.sourceName}Select">${dataSource.display.display}</ng-container>${getEOL(select.node.startSourceSpan.end.file.content)}`
 			);
 		}
 		if (!displayer.canBeRemoved) {
@@ -242,7 +242,7 @@ function handleLuSelectInputComponent(select: LuSelectInputContext, update: Upda
 			select.requiredImports.push('LuDisplayerDirective');
 			update.insertRight(
 				select.nodeOffset + select.node.startSourceSpan.end.offset,
-				`${getEOL(select.node.startSourceSpan.end.file.content)}  <ng-container *luDisplayer="${displayer.variables}">${displayer.display}</ng-container>${getEOL(select.node.startSourceSpan.end.file.content)}`,
+				`${getEOL(select.node.startSourceSpan.end.file.content)}  <ng-container *luDisplayer="${displayer.variables}">${displayer.display}</ng-container>${getEOL(select.node.startSourceSpan.end.file.content)}`
 			);
 		}
 		// If it's not a self closing tag
@@ -259,7 +259,7 @@ function handlePremadeApiSelect(select: PremadeApiSelectContext, update: UpdateR
 		LuQualificationSelectInputComponent: { selector: 'jobQualifications', className: 'LuCoreSelectJobQualificationsDirective' },
 		LuUserSelectModule: { selector: 'users', className: 'LuCoreSelectUsersDirective' },
 		LuEstablishmentSelectInputComponent: { selector: 'establishments', className: 'LuCoreSelectEstablishmentsDirective' },
-		LuDepartmentSelectInputComponent: { selector: 'departments', className: 'LuCoreSelectDepartmentsDirective' }, // Cannot happen because it's rejected but we need it to prevent compilation errors
+		LuDepartmentSelectInputComponent: { selector: 'departments', className: 'LuCoreSelectDepartmentsDirective' } // Cannot happen because it's rejected but we need it to prevent compilation errors
 	}[select.component];
 	select.requiredImports = select.multiple ? ['LuMultiSelectInputComponent', sourceDirective.className] : ['LuSimpleSelectInputComponent', sourceDirective.className];
 	const tag = select.multiple ? 'lu-multi-select' : 'lu-simple-select';
@@ -289,14 +289,14 @@ function handleApiSelectInputComponent(select: LuApiSelectInputComponentContext,
 			apiEndpoint = attr.value;
 			oldApiInput = {
 				pos: attr.sourceSpan.start.offset,
-				length: attr.sourceSpan.end.offset - attr.sourceSpan.start.offset,
+				length: attr.sourceSpan.end.offset - attr.sourceSpan.start.offset
 			};
 		}
 		if (attr.name === 'standard') {
 			apiStandard = attr.value as 'v3' | 'v4';
 			oldApiStandard = {
 				pos: attr.sourceSpan.start.offset,
-				length: attr.sourceSpan.end.offset - attr.sourceSpan.start.offset,
+				length: attr.sourceSpan.end.offset - attr.sourceSpan.start.offset
 			};
 		}
 	});
@@ -305,20 +305,20 @@ function handleApiSelectInputComponent(select: LuApiSelectInputComponentContext,
 			apiEndpoint = input.value?.source || '';
 			oldApiInput = {
 				pos: input.sourceSpan.start.offset,
-				length: input.sourceSpan.end.offset - input.sourceSpan.start.offset,
+				length: input.sourceSpan.end.offset - input.sourceSpan.start.offset
 			};
 		}
 		if (input.name === 'standard' && input.value instanceof currentSchematicContext.angularCompiler.ASTWithSource) {
 			apiStandard = (input.value?.source || 'v3') as 'v3' | 'v4';
 			oldApiStandard = {
 				pos: input.sourceSpan.start.offset,
-				length: input.sourceSpan.end.offset - input.sourceSpan.start.offset,
+				length: input.sourceSpan.end.offset - input.sourceSpan.start.offset
 			};
 		}
 	});
 	const sourceDirective = {
 		v3: { selector: 'apiV3', className: 'LuCoreSelectApiV3Directive' },
-		v4: { selector: 'apiV4', className: 'LuCoreSelectApiV4Directive' },
+		v4: { selector: 'apiV4', className: 'LuCoreSelectApiV4Directive' }
 	}[apiStandard];
 	select.requiredImports = select.multiple ? ['LuMultiSelectInputComponent', sourceDirective.className] : ['LuSimpleSelectInputComponent', sourceDirective.className];
 	const tag = select.multiple ? 'lu-multi-select' : 'lu-simple-select';

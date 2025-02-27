@@ -1,5 +1,5 @@
 import { NgIf, NgTemplateOutlet } from '@angular/common';
-import { booleanAttribute, Component, computed, contentChildren, effect, forwardRef, inject, input, model, OnDestroy, Renderer2, signal, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, Component, computed, contentChildren, effect, forwardRef, inject, input, model, numberAttribute, OnDestroy, Renderer2, signal, ViewEncapsulation } from '@angular/core';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { AbstractControl, NgControl, ReactiveFormsModule, RequiredValidator, Validators } from '@angular/forms';
 import { SafeHtml } from '@angular/platform-browser';
@@ -15,6 +15,8 @@ import { LU_FORM_FIELD_TRANSLATIONS } from './form-field.translate';
 import { InputDirective } from './input.directive';
 
 let nextId = 0;
+
+type FormFieldWidth = 20 | 30 | 40 | 50 | 60;
 
 @Component({
 	selector: 'lu-form-field',
@@ -87,12 +89,14 @@ export class FormFieldComponent implements OnDestroy {
 
 	tooltip = input<string | SafeHtml | null>(null);
 
-	width = input<20 | 30 | 40 | 50 | 60>(null);
+	width = input<FormFieldWidth, FormFieldWidth | `${FormFieldWidth}`>(null, {
+		transform: numberAttribute as (value: FormFieldWidth | `${FormFieldWidth}`) => FormFieldWidth,
+	});
 
 	invalidStatus = computed(() => {
 		const isInvalidOverride = this.invalid() !== undefined && this.invalid() !== null;
 		if (isInvalidOverride) {
-			return isInvalidOverride;
+			return this.invalid();
 		}
 		const statusControlOverride = this.statusControl();
 		if (statusControlOverride) {

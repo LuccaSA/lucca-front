@@ -24,10 +24,12 @@
 		@include expanded;
 	}
 
-	&:has(.multipleSelect-displayer-search:focus-visible),
-	&:has([aria-expanded='true']) {
-		&:not(:has(.multipleSelect-displayer-search:read-only)) {
-			@include searchable;
+	&:not(.mod-noClueIcon) {
+		&:has(.multipleSelect-displayer-search:focus-visible),
+		&:has([aria-expanded='true']) {
+			&:not(:has(.multipleSelect-displayer-search:read-only)) {
+				@include searchable;
+			}
 		}
 	}
 
