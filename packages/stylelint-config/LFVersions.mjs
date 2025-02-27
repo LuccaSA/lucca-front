@@ -4,23 +4,33 @@ import { join } from 'path';
 
 let LFVersions = null;
 
+// Check if the `showCachePath` parameter is present when executing the script.
+const showCachePath = process.argv.includes('showCachePath');
 const CACHE_FILE_PATH = join(os.tmpdir(), 'stylelint-LFVersions.json');
 
 try {
 	const cacheFile = readFileSync(CACHE_FILE_PATH, 'utf8');
 	const cache = JSON.parse(cacheFile);
+
 	// If cache is older than 1 hour, don't use it
 	if (cache.createdAt && Date.now() - cache.createdAt < 1000 * 60 * 60) {
 		LFVersions = cache.LFVersions;
 	}
-	console.info(`Using cached data in ${CACHE_FILE_PATH}…`);
+
+	if (showCachePath) {
+		console.info(`Using cached data in ${CACHE_FILE_PATH}…`);
+	}
 } catch (e) {
 	// Whatever, no cache file means we'll fetch anyways
 }
 
 if (LFVersions === null) {
 	LFVersions = {};
-	console.info(`Fetching from Github to ${CACHE_FILE_PATH}…`);
+
+	if (showCachePath) {
+		console.info(`Fetching from Github to ${CACHE_FILE_PATH}…`);
+	}
+
 	const githubMilestones = await fetch('https://api.github.com/repos/LuccaSA/lucca-front/milestones?state=all&sort=due_on&direction=desc');
 
 	if (githubMilestones.ok) {
@@ -31,10 +41,12 @@ if (LFVersions === null) {
 
 			if (version) {
 				const date = new Date(milestone.due_on);
+
 				// If version doesn't have patch version, add it as .0
 				if (version.split('.').length === 2) {
 					version += '.0';
 				}
+
 				LFVersions[version] = date.toLocaleDateString();
 			}
 		}

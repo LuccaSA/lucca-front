@@ -1,4 +1,4 @@
-# lucca-front / Stylelint config
+# lucca-prisme / Stylelint config
 
 This package is a shareable stylelint configuration.
 
@@ -41,6 +41,16 @@ Add the relevant script to lint the code in Jenkins.
 ```
 
 You can be more specific and restrict the path of scss files being linted: `"stylelint": "stylelint \"./SOME_PATH/**/*.scss\""`,
+
+### `showCachePath` parameter
+
+To avoid hitting Github’s rate limit, the script caches Milestones versions in a local file. Knowing which file has been created can be useful, but also hard to find.
+
+Webstorm has an [issue with outputting the information during the linting](https://youtrack.jetbrains.com/issue/WEB-71871/stylelint-console.log-written-in-the-linted-file-instead-of-console), so outputting the path is optional with a parameter:
+
+```sh
+npx stylelint \"./**/*.scss\" showCachePath
+```
 
 ### Breaking the rules
 
