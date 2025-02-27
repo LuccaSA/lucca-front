@@ -1,6 +1,6 @@
 @mixin S {
 	--components-fileUploaded-description-display: none;
-	--components-fileUploaded-status-width: 32px;
+	--components-fileUploaded-status-inlineSize: 32px;
 	--components-fileUploaded-padding: var(--pr-t-spacings-50);
 	--components-fileUploaded-status-content-svg-width: 32px;
 	--components-fileUploaded-status-borderRadius: var(--commons-borderRadius-M);
@@ -13,8 +13,8 @@
 @mixin media {
 	--components-fileUploaded-padding: var(--pr-t-spacings-75);
 	--components-fileUploaded-gridColumn: auto;
-	--components-fileUploaded-status-width: 100%;
-	--components-fileUploaded-status-height: auto;
+	--components-fileUploaded-status-inlineSize: 100%;
+	--components-fileUploaded-status-blockSize: auto;
 	--components-fileUploaded-status-aspectRatio: 1;
 	--components-fileUploaded-status-margin: 0;
 	--components-fileUploaded-display: block;
@@ -23,8 +23,8 @@
 @mixin single {
 	--components-fileUploaded-padding: var(--pr-t-spacings-75);
 	--components-fileUploaded-status-aspectRatio: auto;
-	--components-fileUploaded-status-width: 100%;
-	--components-fileUploaded-status-height: calc(20rem - 1rem + 2px);
+	--components-fileUploaded-status-inlineSize: 100%;
+	--components-fileUploaded-status-blockSize: calc(20rem - 1rem + 2px);
 	--components-fileUploaded-status-margin: 0;
 	--components-fileUploaded-description-display: none;
 	--components-fileUploaded-display: block;

@@ -28,8 +28,8 @@
 		.fileUploaded-status {
 			border-radius: var(--components-fileUploaded-status-borderRadius);
 			overflow: hidden;
-			inline-size: var(--components-fileUploaded-status-width);
-			block-size: var(--components-fileUploaded-status-height);
+			inline-size: var(--components-fileUploaded-status-inlineSize);
+			block-size: var(--components-fileUploaded-status-blockSize);
 			color: var(--palettes-neutral-700);
 			background-color: var(--components-fileUploaded-status-backgroundColor);
 			flex-shrink: 0;
