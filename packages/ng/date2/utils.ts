@@ -46,7 +46,7 @@ export function startOfPeriod(mode: CalendarMode, date: Date): Date {
 function stringToDateISO(value: string): Date {
 	const res = parse(value, DATE_ISO_FORMAT, new Date());
 	if (isNaN(+res)) {
-		throw new Error('Invalid date: your input should be a valid iso date string (yyyy-MM-dd)');
+		throw new Error('Invalid date: your input should be a valid iso date string (yyyy-MM-dd), received: ' + value);
 	}
 	return res;
 }
