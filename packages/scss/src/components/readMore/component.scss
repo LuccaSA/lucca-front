@@ -1,0 +1,59 @@
+@use '@lucca-front/scss/src/commons/utils/namespace';
+
+@use '@lucca-front/scss/src/components/button/exports' as button;
+
+@mixin component($atRoot: namespace.$defaultAtRoot) {
+	position: relative;
+	display: block;
+
+	@at-root ($atRoot) {
+		.readMore-button.button {
+			@include button.outlined;
+			@include button.XS;
+
+			position: absolute;
+			inset: auto 0 var(--pr-t-spacings-50) auto;
+			display: var(--components-readMore-button-display);
+			z-index: 1;
+
+			.icon-chevronBottom {
+				transition-property: transform;
+				transition-duration: var(--commons-animations-durations-fast);
+			}
+
+			&[aria-expanded='true'] {
+				.icon-chevronBottom {
+					transform: rotate(-180deg);
+				}
+			}
+		}
+
+		.readMore-textFlow {
+			display: -webkit-box;
+			-webkit-line-clamp: var(--components-readMore-lineClamp);
+			-webkit-box-orient: vertical;
+			overflow: hidden;
+			padding: var(--pr-t-spacings-50);
+			margin: calc(var(--pr-t-spacings-50) * -1);
+
+			> p {
+				&:first-child {
+					margin-block-start: 0;
+				}
+
+				&:last-child {
+					margin-block-end: 0;
+
+					&::after {
+						content: var(--components-readMore-textFlow-lastChild-content) / '';
+						visibility: hidden;
+						white-space: nowrap;
+						padding-inline-end: var(--components-readMore-textFlow-lastChild-paddingInlineEnd);
+						line-height: var(--sizes-XS-lineHeight);
+						font-size: var(--sizes-XS-fontSize);
+					}
+				}
+			}
+		}
+	}
+}

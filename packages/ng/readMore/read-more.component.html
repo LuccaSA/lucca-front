@@ -1,0 +1,20 @@
+<button
+	[luTooltip]="label()"
+	[luTooltipDisabled]="!onlyIcon()"
+	[luTooltipPosition]="'before'"
+	[luTooltipOnlyForDisplay]
+	type="button"
+	aria-hidden="true"
+	[attr.aria-expanded]="expanded()"
+	class="readMore-button button"
+	[class.mod-onlyIcon]="onlyIcon()"
+	(click)="expanded.set(!expanded())"
+>
+	@if (onlyIcon()) {
+	<span class="u-mask">{{label()}}</span>
+	} @else { {{label()}} }
+	<lu-icon icon="chevronBottom" />
+</button>
+<div class="readMore-textFlow textFlow" #textFlow>
+	<ng-content />
+</div>

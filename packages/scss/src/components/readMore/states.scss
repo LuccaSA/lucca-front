@@ -1,0 +1,7 @@
+@mixin expanded {
+	--components-readMore-lineClamp: 9999 !important;
+}
+
+@mixin disabled {
+	--components-readMore-button-display: none;
+}
