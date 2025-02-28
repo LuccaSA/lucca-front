@@ -9,52 +9,55 @@
 	min-inline-size: 100%;
 	background-color: var(--palettes-neutral-0);
 
-	//All stickies columns
+	// All stickies columns
 	[class*='mod-stickyColumn-'] {
 		background-color: var(--palettes-neutral-0);
 		z-index: 3;
 	}
 
-	//Left sticked columns
+	// Left sticked columns
 	[class*='mod-stickyColumn-left'] {
 		inset-inline-start: var(--components-tableSticked-column-sticky-offset);
 
-		//left sticked columns shadow
+		// left sticked columns shadow
 		&.mod-stickyColumn-shadow,
 		.stickyColumn-shadow-wrapper::before {
 			inset-inline-start: calc(
 				var(--components-tableSticked-column-sticky-offset) - var(--components-tableSticked-column-sticky-shadow-width)
 			);
 		}
+
 		.stickyColumn-shadow-wrapper::after {
 			inset-inline-start: var(--components-tableSticked-column-sticky-offset);
 			background-image: linear-gradient(to right, var(--components-tableSticked-column-sticky-shadow-color), transparent);
 		}
 	}
 
-	//Right sticked columns
+	// Right sticked columns
 	[class*='mod-stickyColumn-right'] {
 		inset-inline-end: var(--components-tableSticked-column-sticky-offset);
 
-		//right sticked columns shadow
+		// right sticked columns shadow
 		.stickyColumn-shadow-wrapper {
 			justify-items: end;
 			inline-size: calc(var(--components-tableSticked-column-sticky-shadow-width) * 3);
 			inset-inline-end: calc(var(--components-tableSticked-column-sticky-shadow-width) * -1);
 		}
+
 		&.mod-stickyColumn-shadow,
 		.stickyColumn-shadow-wrapper::before {
 			inset-inline-end: calc(
 				var(--components-tableSticked-column-sticky-offset) - var(--components-tableSticked-column-sticky-shadow-width)
 			);
 		}
+
 		.stickyColumn-shadow-wrapper::after {
 			inset-inline-end: var(--components-tableSticked-column-sticky-offset);
 			background-image: linear-gradient(to left, var(--components-tableSticked-column-sticky-shadow-color), transparent);
 		}
 	}
 
-	//Sticky columns drop shadow
+	// Sticky columns drop shadow
 	.mod-stickyColumn-shadow {
 		display: none;
 		inline-size: 0;
@@ -76,9 +79,11 @@
 			position: sticky;
 			grid-area: cell;
 		}
+
 		&::after {
 			inline-size: var(--components-tableSticked-column-sticky-shadow-width);
 		}
+
 		&::before {
 			z-index: 1;
 			inline-size: var(--components-tableSticked-column-sticky-shadow-width);
@@ -93,6 +98,7 @@
 
 		position: sticky;
 	}
+
 	.mod-stickyColumn-shadow {
 		display: table-cell;
 	}
@@ -106,6 +112,7 @@
 	.table-head-row-cell {
 		inset-block-start: 0;
 	}
+
 	.mod-stickyHeader-shadow .table-body-row-cell {
 		inset-block-start: calc(var(--table-stickyHeader-shadow-offset) + var(--components-tableSticked-column-sticky-shadow-width));
 	}
@@ -115,6 +122,7 @@
 	.table-head-row-cell {
 		inset-block-start: var(--commons-banner-height);
 	}
+
 	.mod-stickyHeader-shadow .table-body-row-cell {
 		inset-block-start: calc(
 			var(--table-stickyHeader-shadow-offset) + var(--commons-banner-height) + var(--components-tableSticked-column-sticky-shadow-width)
@@ -124,10 +132,12 @@
 
 @mixin stickyHeaderCommon {
 	margin-block-start: var(--components-tableSticked-column-sticky-shadow-width);
+
 	.table-head-row-cell {
 		background-color: var(--palettes-neutral-0);
 		position: sticky;
 		z-index: 5;
+
 		&[class*='mod-stickyColumn'] {
 			z-index: 7;
 		}

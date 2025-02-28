@@ -2,7 +2,6 @@
 @use '@lucca-front/scss/src/commons/utils/namespace';
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
-	position: relative;
 	column-gap: var(--pr-t-spacings-400);
 	align-items: center;
 	display: flex;
@@ -107,7 +106,6 @@
 		.menu-link-placeholder {
 			&::after {
 				content: attr(data-content-after);
-
 				display: block;
 				block-size: 0;
 				overflow: hidden;

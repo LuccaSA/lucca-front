@@ -110,6 +110,18 @@
 
 	:is(.dataTable-head-row-cell, .dataTable-body-row-cell, .dataTable-foot-row-cell) {
 		&.mod-stickyColumn {
+			position: sticky;
+
+			&:first-child {
+				inset-inline-start: 0;
+			}
+
+			&:last-child {
+				inset-inline-end: 0;
+
+				--components-dataTable-cell-shadow: 0 1px inset var(--commons-border-200), 1px 0 var(--palettes-neutral-0); // white shadow is for Chrome
+			}
+
 			&:has(~ :is(.dataTable-body-row-cell, .dataTable-head-row-cell, .dataTable-foot-row-cell):not(.mod-stickyColumn)) {
 				transform: translateX(-1px);
 
@@ -136,21 +148,6 @@
 						@extend %removeShadow;
 					}
 				}
-			}
-		}
-	}
-
-	:is(.dataTable-head-row-cell, .dataTable-body-row-cell, .dataTable-foot-row-cell) {
-		&.mod-stickyColumn {
-			position: sticky;
-
-			&:first-child {
-				inset-inline-start: 0;
-			}
-
-			&:last-child {
-				inset-inline-end: 0;
-				--components-dataTable-cell-shadow: 0 1px inset var(--commons-border-200), 1px 0 var(--palettes-neutral-0); // white shadow is for Chrome
 			}
 		}
 	}

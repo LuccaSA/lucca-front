@@ -1,5 +1,6 @@
 @mixin component {
 	position: relative;
+
 	.notchBox-wrapper {
 		inline-size: 100%;
 		min-block-size: var(--component-notchbox-box-min-height);
@@ -53,6 +54,7 @@
 		background-repeat: no-repeat;
 		filter: drop-shadow(var(--component-notchbox-box-shadow));
 	}
+
 	.notchBox-badge {
 		position: absolute;
 		inset-block-start: var(--component-notchbox-badge-top, auto);

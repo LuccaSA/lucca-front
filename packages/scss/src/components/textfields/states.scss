@@ -22,6 +22,7 @@
 
 	~ .textfield-clear {
 		--components-clear-cross-color: var(--palettes-neutral-500) !important; // disabled token candidate
+
 		pointer-events: none;
 	}
 }
@@ -217,15 +218,13 @@
 		box-shadow: 0 2px 0 0 var(--palettes-#{$state}-700);
 	}
 
-	&:focus {
-		box-shadow: 0 2px 0 0 var(--palettes-#{$state}-700);
-	}
-
 	~ .textfield-label {
 		color: var(--palettes-#{$state}-700);
 	}
 
 	&:focus {
+		box-shadow: 0 2px 0 0 var(--palettes-#{$state}-700);
+
 		~ .textfield-label {
 			color: var(--palettes-#{$state}-700);
 		}
