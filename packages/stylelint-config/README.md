@@ -123,6 +123,8 @@ Add the following line in _.vscode/settings.json_ if the issue arises:
   "stylelint.customSyntax": "postcss-scss"
 ```
 
-### JetStorm
+### WebStorm
 
 You might need to rename _stylelint.config.js_ to _stylelint.config.cjs_ (_CommonJS_) and [adapt the code in consequence](https://stylelint.io/user-guide/configure).
+
+In [Stylelint settings](https://www.jetbrains.com/help/webstorm/using-stylelint-code-quality-tool.html#ws_stylelint_configure), make sure _Run for files_ is for SCSS files (`**/*.{scss}`). It is only for CSS files by default (`**/*.{css}`).
