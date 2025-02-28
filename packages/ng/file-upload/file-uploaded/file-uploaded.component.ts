@@ -9,6 +9,7 @@ import { IconComponent } from '@lucca-front/ng/icon';
 import { InlineMessageComponent } from '@lucca-front/ng/inline-message';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 import { formatSize } from '../formatter';
+import { FileUploadEntry } from '../file-upload-entry';
 
 @Component({
 	selector: 'lu-file-uploaded',
@@ -28,24 +29,25 @@ export class FileUploadedComponent {
 
 	inlineMessageError = input<string | null>(null);
 
+	entry = input.required<FileUploadEntry>();
+
 	format = input<'file' | 'word' | 'excel' | 'powerpoint'>('file');
 
-	size = input<'S' | null>(null);
+	size = input<'S' | 'M' | null>(null);
 
-	downloadable = input<boolean, boolean>(false, { transform: booleanAttribute });
-	deletable = input<boolean, boolean>(false, { transform: booleanAttribute });
-	viewable = input<boolean, boolean>(false, { transform: booleanAttribute });
-
-	withPassword = input<boolean, boolean>(false, { transform: booleanAttribute });
+	downloadable = input(false, { transform: booleanAttribute });
+	deletable = input(false, { transform: booleanAttribute });
+	viewable = input(false, { transform: booleanAttribute });
+	withPassword = input(false, { transform: booleanAttribute });
 
 	display = input<'media' | 'single' | null>(null);
 
-	fileName = input.required<string>();
-	fileType = input.required<string>();
-	fileSize = input.required<number>();
-	filePreviewUrl = input<string | null>(null);
-
 	deleteFile = output();
+
+	fileName = computed(() => this.entry().name);
+	fileType = computed(() => this.entry().type);
+	fileSize = computed(() => this.entry().size);
+	filePreviewUrl = computed(() => this.entry().preview);
 
 	fileSizeDisplay = computed(() => formatSize(this.#locale, this.fileSize()));
 

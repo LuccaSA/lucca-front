@@ -1,15 +1,12 @@
-import { booleanAttribute, Component, computed, inject, input, LOCALE_ID, signal, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, Component, computed, inject, input, LOCALE_ID, output, signal, ViewEncapsulation } from '@angular/core';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { LuClass } from '@lucca-front/ng/core';
 import { InputDirective } from '@lucca-front/ng/form-field';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { LuSafeExternalSvgPipe } from '@lucca-front/ng/safe-content';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
-import { FileUploadedEntry } from './file-uploaded-entry';
-import { FileUploadedComponent } from './file-uploaded/file-uploaded.component';
+import { FileUploadEntry } from './file-upload-entry';
 import { formatSize, MEGA_BYTE } from './formatter';
-import { FileUploadTestService } from './service/file-upload-test.service';
-import { FileUploadService } from './service/file-upload.service';
 
 let nextId = 0;
 
@@ -19,20 +16,20 @@ let nextId = 0;
 	templateUrl: './file-upload.component.html',
 	styleUrls: ['./file-upload.component.scss'],
 	encapsulation: ViewEncapsulation.None,
-	imports: [LuSafeExternalSvgPipe, InputDirective, ButtonComponent, IconComponent, LuTooltipModule, FileUploadedComponent],
+	imports: [LuSafeExternalSvgPipe, InputDirective, ButtonComponent, IconComponent, LuTooltipModule],
 	providers: [LuClass],
 	host: { class: 'fileUpload-wrapper' },
 })
 export class FileUploadComponent {
 	#locale = inject(LOCALE_ID);
 
-	#uploadService: FileUploadService = new FileUploadTestService();
-
 	idSuffix = nextId++;
 
 	droppable = false;
 
-	files: FileUploadedEntry[] = [];
+	files: FileUploadEntry[] = [];
+
+	fileUploaded = output<File>();
 
 	multiple = input(false, { transform: booleanAttribute });
 
@@ -53,7 +50,6 @@ export class FileUploadComponent {
 
 	acceptAttribute = computed(() => this.accept().map((e) => e.format));
 
-	// TODO: Check base max weight in Lucca Files
 	fileMaxSize = input<number>(80 * MEGA_BYTE);
 
 	disablePreview = input(false, { transform: booleanAttribute });
@@ -79,29 +75,15 @@ export class FileUploadComponent {
 	filesChange(event: Event) {
 		const host = event.target as HTMLInputElement;
 		this.droppable = false;
-		const upload: FileUploadedEntry[] = Array.from(host.files).map((file) => {
-			if (!this.disablePreview() && file.type.startsWith('image/')) {
-				return { file, state: 'loading', preview: URL.createObjectURL(file) };
-			}
-			return { file, state: 'loading' };
-		});
-		upload.forEach((file) => {
-			this.#uploadService.upload(file.file).subscribe({
-				next: () => {
-					file.state = 'success';
-
-					if (!this.multiple()) {
-						this.state.set('success');
-					}
-				},
-				error: () => {
-					file.state = 'error';
-
-					if (!this.multiple()) {
-						this.state.set('error');
-					}
-				},
-			});
+		const upload: FileUploadEntry[] = Array.from(host.files).map((file) => {
+			return {
+				file,
+				name: file.name,
+				size: file.size,
+				type: file.type,
+				state: 'loading',
+				preview: !this.disablePreview() && file.type.startsWith('image/') ? URL.createObjectURL(file) : undefined,
+			};
 		});
 		if (!this.multiple()) {
 			this.state.set('loading');
@@ -111,9 +93,22 @@ export class FileUploadComponent {
 		}
 	}
 
-	abort(input: HTMLInputElement) {
-		input.value = null;
-		this.files = [];
-		this.state.set(null);
+	abort(input: HTMLInputElement, index: number) {
+		if (this.files.length === 1) {
+			input.value = null;
+			this.files = [];
+			this.state.set(null);
+		} else {
+			// Input.files is read-only, so we need to create a new DataTransfer object
+			const data = new DataTransfer();
+			for (let i = 0; i < this.files.length; i++) {
+				if (i !== index) {
+					data.items.add(this.files[i].file);
+				}
+			}
+			input.files = data.files;
+			this.state.set(null);
+			this.files.splice(index, 1);
+		}
 	}
 }
