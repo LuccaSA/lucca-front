@@ -82,6 +82,7 @@
 				.indexTable-body-row-cell {
 					&:not(:has(button, a, input, textarea, select, details, [tabindex='0']), .mod-allowTextSelection) {
 						pointer-events: none;
+						//outline: 1px solid green;
 					}
 				}
 			}
@@ -191,8 +192,6 @@
 		}
 
 		.indexTable-body-row-cell-link {
-			@include reset.button;
-
 			text-decoration: none;
 
 			&::after {
@@ -208,6 +207,10 @@
 
 			&:focus-visible {
 				outline: none;
+			}
+
+			&:is(button) {
+				@include reset.button;
 			}
 		}
 
@@ -272,5 +275,17 @@
 				margin-inline-end: var(--pr-t-spacings-100);
 			}
 		}
+	}
+
+	.statusBadge,
+	.tag {
+		margin-top: var(--pr-t-spacings-25);
+	}
+
+	.statusBadge,
+	.tag,
+	.avatar {
+		display: flex;
+		inline-size: fit-content;
 	}
 }
