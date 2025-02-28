@@ -1,6 +1,6 @@
 import * as os from 'node:os';
 import { readFileSync, writeFileSync } from 'node:fs';
-import { join } from 'path';
+import { join } from 'node:path';
 
 let LFVersions = null;
 
