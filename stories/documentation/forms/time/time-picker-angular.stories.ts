@@ -26,8 +26,8 @@ export default {
 			},
 		},
 		hiddenLabel: {
-			description: 'Masque le label en le conservant dans le DOM pour les lecteurs d\'écrans',
-    },
+			description: "Masque le label en le conservant dans le DOM pour les lecteurs d'écrans",
+		},
 		forceMeridiemDisplay: {
 			options: [null, false, true],
 			control: {
