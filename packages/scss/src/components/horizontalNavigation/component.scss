@@ -61,7 +61,7 @@
 			padding: var(--components-horizontalNavigation-listItemActionPadding);
 			border-radius: var(--commons-borderRadius-M);
 			color: var(--components-horizontalNavigation-listItemActionColor);
-			display: var(--components-horizontalNavigation-listItemActionDisplay);
+			display: inline-flex;
 			text-align: var(--components-horizontalNavigation-listItemActionAlign);
 			transition-duration: var(--commons-animations-durations-fast);
 			gap: var(--pr-t-spacings-100);

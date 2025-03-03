@@ -1,4 +1,4 @@
-import { Component, Input, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, Component, HostBinding, input, ViewEncapsulation } from '@angular/core';
 
 @Component({
 	selector: 'lu-horizontal-navigation',
@@ -12,17 +12,25 @@ import { Component, Input, ViewEncapsulation } from '@angular/core';
 	},
 })
 export class HorizontalNavigationComponent {
-	@Input({
-		required: true,
-	})
-	links;
+	links = input();
 
-	@Input()
-	noBorder = false;
+	noBorder = input(false, { transform: booleanAttribute });
+	container = input(false, { transform: booleanAttribute });
+	vertical = input(false, { transform: booleanAttribute });
+	size = input<null | 'S'>(null);
 
-	@Input()
-	size?: undefined | 'S';
+	@HostBinding('class.mod-noBorder')
+	get hasNoBorder() {
+		return this.noBorder();
+	}
 
-	@Input()
-	header = true;
+	@HostBinding('class.mod-S')
+	get isSizeS() {
+		return this.size() === 'S';
+	}
+
+	@HostBinding('class.mod-vertical')
+	get isVertical() {
+		return this.vertical();
+	}
 }

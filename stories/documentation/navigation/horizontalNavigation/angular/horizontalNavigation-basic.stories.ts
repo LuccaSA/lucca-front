@@ -1,27 +1,26 @@
 import { HorizontalNavigationComponent } from '@lucca-front/ng/horizontalNavigation';
-import { Meta, moduleMetadata, StoryFn } from '@storybook/angular';
-
-interface HorizontalNavigationAngularBasicStory {
-	size: string;
-	content: string;
-	role: boolean;
-	icon: boolean;
-	button: boolean;
-	vertical: boolean;
-}
+import { Meta, moduleMetadata } from '@storybook/angular';
+import { generateInputs } from 'stories/helpers/stories';
 
 export default {
 	title: 'Documentation/Navigation/HorizontalNavigation/Angular',
+	argTypes: {
+		size: {
+			options: [null, 'S'],
+			control: {
+				type: 'select',
+			},
+		},
+	},
 	decorators: [
 		moduleMetadata({
 			imports: [HorizontalNavigationComponent],
 		}),
 	],
-	argTypes: {},
-} as Meta;
-
-function getTemplate(args: HorizontalNavigationAngularBasicStory): string {
-	return `<lu-horizontal-navigation [links]="[
+	render: (args, { argTypes }) => {
+		return {
+			template: `
+<lu-horizontal-navigation [links]="[
 		{
 			route: '#1',
 			label: 'Page 1',
@@ -40,13 +39,17 @@ function getTemplate(args: HorizontalNavigationAngularBasicStory): string {
 			label: 'Page 4',
 			counter: 8
 		},
-	]" />`;
-}
+	]" ${generateInputs(args, argTypes)} />
+			`,
+		};
+	},
+} as Meta;
 
-const Template: StoryFn<HorizontalNavigationAngularBasicStory> = (args) => ({
-	props: args,
-	template: getTemplate(args),
-});
-
-export const Basic = Template.bind({});
-Basic.args = {};
+export const Basic = {
+	args: {
+		noBorder: false,
+		container: false,
+		size: 'S',
+		vertical: false,
+	},
+};

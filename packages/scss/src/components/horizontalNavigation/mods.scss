@@ -55,7 +55,6 @@
 	.menu-list-item-action {
 		--components-horizontalNavigation-listItemActionPadding: var(--pr-t-spacings-50) var(--pr-t-spacings-200);
 		--components-horizontalNavigation-listItemActionAlign: left;
-		--components-horizontalNavigation-listItemActionDisplay: block;
 
 		&::after {
 			--components-horizontalNavigation-listItemActionTransform: scale(1, 0);
