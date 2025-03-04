@@ -61,5 +61,5 @@ export class FileUploadedComponent {
 		};
 	});
 
-	passwordControl: FormControl;
+	password: string;
 }
