@@ -42,7 +42,7 @@
 			display: flex;
 			flex-wrap: wrap;
 			align-content: flex-start;
-			margin-block: calc(var(--components-avatarWrapper-marginBlock) * -1);
+			row-gap: var(--components-avatarWrapper-rowGap);
 
 			.avatar {
 				box-shadow: 0 0 0 var(--components-avatar-border) var(--components-avatar-background);
@@ -50,8 +50,6 @@
 		}
 
 		.avatarWrapper-item {
-			margin-block: var(--components-avatarWrapper-marginBlock);
-
 			&:not(:last-child) {
 				margin-right: calc(var(--components-avatarWrapper-overlap) * -1);
 			}
