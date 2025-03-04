@@ -20,6 +20,7 @@
 		@include stickyHeader;
 	}
 
+	// Allow selection of mod-layoutFixed with or without breakpoints like mod-layoutFixedAtMediaMinXS or mod-layoutFixedAtMediaMaxL
 	&[class*='mod-layoutFixed'] {
 		@include layoutFixed;
 	}
