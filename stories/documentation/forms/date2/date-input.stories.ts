@@ -43,13 +43,14 @@ export default {
 		},
 	},
 	render: (args, { argTypes }) => {
-		const { selected, min, max, ...flags } = args;
-		const defaultDate = args['format'] === 'date' ? new Date() : new Date().toISOString().substring(0, 10);
+		const { min, max, ...flags } = args;
+		const selected = args['selected'] ? new Date(args['selected']) : new Date();
+		const defaultDate = args['format'] === 'date' ? selected : selected.toISOString().substring(0, 10);
 		const minValue = args['format'] === 'date' ? new Date(args['min']) : new Date(args['min'] ?? 0)?.toISOString().substring(0, 10);
 		const maxValue = args['format'] === 'date' ? new Date(args['max']) : new Date(args['max'] ?? 0)?.toISOString().substring(0, 10);
 		return {
 			props: {
-				selected: selected || defaultDate,
+				selected: defaultDate,
 				min: args['min'] ? minValue : null,
 				max: args['max'] ? maxValue : null,
 			},
