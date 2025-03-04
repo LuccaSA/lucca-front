@@ -9,6 +9,7 @@
 			[optionKey]="getPrefixKey"
 			[optionComparer]="prefixComparator"
 			(clueChange)="query.set($event)"
+			noClueIcon
 			#selectRef
 			class="phoneNumber-fieldset-select"
 			[autocomplete]="autocomplete ? autocomplete === 'off' ? 'off' : 'tel-country-code'  : null"

@@ -1,6 +1,5 @@
-<button class="dialog-inside-header-button button" type="button" luButton (click)="close()" *ngIf="dismissible">
-	<lu-icon icon="signClose"></lu-icon>
-	<span class="u-mask">{{ intl.close }}</span>
+<button class="dialog-inside-header-button button" type="button" (click)="close()" *ngIf="dismissible">
+	<lu-icon icon="signClose" [alt]="intl.close"></lu-icon>
 </button>
 
 <div class="dialog-inside-header-container">

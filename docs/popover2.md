@@ -1,13 +1,11 @@
-# Popover2
-
 Popover2 est la nouvelle version de LuPopover, il a été choisi de partir sur une implémentation différente et donc, afin d'éviter les impacts d'un breaking change,
 une nouvelle directive a vu le jour `luPopover2`, dans un nouveau point d'entrée, `@lucca-front/ng/popover2`.
 
-## Mise en place
+### Mise en place
 
 Popover2 est fait pour être simple à utiliser, il suffit de l'importer dans votre environement avec `configureLuPopover()` (à placer dans les providers de votre `AppModule` ou lors du bootstrap de `AppComponent` si vous êtes en full standalone).
 
-## Utilisation
+### Utilisation
 
 Pour utiliser `Popover2` dans un template, il suffit d'appliquer la directive `[luPopover2]` en renseignant en input une référence à un `ng-template`, exemple:
 
@@ -20,7 +18,7 @@ Pour utiliser `Popover2` dans un template, il suffit d'appliquer la directive `[
 </ng-template>
 ```
 
-## Paramètres et position
+### Paramètres et position
 
 Seule la référence au `ng-template` est obligatoire, mais la directive propose des paramètres pour divers usages:
 

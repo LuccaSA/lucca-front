@@ -9,8 +9,8 @@ export default {
 
 function getTemplate(args: PaginationPagesStory): string {
 	return `
-	<nav class="pagination" role="navigation" aria-labelledby="pagination-navigation">
-		<ul id="pagination-navigation" class="pagination-navigation">
+	<nav class="pagination" role="navigation" aria-label="Pagination">
+		<ul class="pagination-navigation">
 			<li class="pagination-navigation-item is-active" aria-current="page"><span class="u-mask">Vous êtes sur la page </span>1</li>
 			<li class="pagination-navigation-item"><a href="#">2</a></li>
 			<li class="pagination-navigation-item"><a href="#">3</a></li>

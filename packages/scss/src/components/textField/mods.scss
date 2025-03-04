@@ -82,3 +82,12 @@
 		}
 	}
 }
+
+@mixin filterPill {
+	--component-textField-borderRadius: var(--commons-borderRadius-L);
+	--component-textField-border: var(--palettes-neutral-100);
+	--component-textField-borderHover: var(--palettes-product-400);
+	--component-textField-width: 15rem;
+
+	@include S;
+}

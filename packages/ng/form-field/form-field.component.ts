@@ -1,5 +1,5 @@
 import { NgIf, NgTemplateOutlet } from '@angular/common';
-import { booleanAttribute, Component, computed, contentChildren, effect, forwardRef, inject, input, model, OnDestroy, Renderer2, signal, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, Component, computed, contentChildren, effect, forwardRef, inject, input, model, numberAttribute, OnDestroy, Renderer2, signal, ViewEncapsulation } from '@angular/core';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { AbstractControl, NgControl, ReactiveFormsModule, RequiredValidator, Validators } from '@angular/forms';
 import { SafeHtml } from '@angular/platform-browser';
@@ -8,13 +8,15 @@ import { IconComponent } from '@lucca-front/ng/icon';
 import { InlineMessageComponent, InlineMessageState } from '@lucca-front/ng/inline-message';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 import { BehaviorSubject, merge, switchMap } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, startWith } from 'rxjs/operators';
 import { FormFieldSize } from './form-field-size';
 import { FORM_FIELD_INSTANCE } from './form-field.token';
 import { LU_FORM_FIELD_TRANSLATIONS } from './form-field.translate';
 import { InputDirective } from './input.directive';
 
 let nextId = 0;
+
+type FormFieldWidth = 20 | 30 | 40 | 50 | 60;
 
 @Component({
 	selector: 'lu-form-field',
@@ -49,9 +51,22 @@ export class FormFieldComponent implements OnDestroy {
 	ownRequiredValidators = computed(() => this.requiredValidators().filter((c) => !this.ignoredRequiredValidators().has(c)));
 	ownControls = computed(() => this.ngControls().filter((c) => !this.ignoredControls().has(c)));
 
-	refreshedOwnControls = toSignal(toObservable(this.ownControls).pipe(switchMap((controls) => merge(...controls.map((c) => c.control.events)).pipe(map(() => [...controls])))), {
-		initialValue: [],
-	});
+	refreshedOwnControls = toSignal(
+		toObservable(this.ownControls).pipe(
+			map((controls) => controls.filter((c) => c.control)),
+			switchMap((controls) => {
+				return merge(...controls.map((c) => c.control.events)).pipe(
+					// We need to use startWith here so the observable will also emit when new controls are added on the fly,
+					// before they even emit any control-related event
+					startWith(void 0),
+					map(() => [...controls]),
+				);
+			}),
+		),
+		{
+			initialValue: [],
+		},
+	);
 
 	isInputRequired = computed(() => {
 		const hasRequiredFormControl = this.refreshedOwnControls().some((c) => c.control.hasValidator(Validators.required));
@@ -74,12 +89,14 @@ export class FormFieldComponent implements OnDestroy {
 
 	tooltip = input<string | SafeHtml | null>(null);
 
-	width = input<20 | 30 | 40 | 50 | 60>(null);
+	width = input<FormFieldWidth, FormFieldWidth | `${FormFieldWidth}`>(null, {
+		transform: numberAttribute as (value: FormFieldWidth | `${FormFieldWidth}`) => FormFieldWidth,
+	});
 
 	invalidStatus = computed(() => {
 		const isInvalidOverride = this.invalid() !== undefined && this.invalid() !== null;
 		if (isInvalidOverride) {
-			return isInvalidOverride;
+			return this.invalid();
 		}
 		const statusControlOverride = this.statusControl();
 		if (statusControlOverride) {

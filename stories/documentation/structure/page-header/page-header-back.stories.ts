@@ -14,7 +14,7 @@ function getTemplate(args: PageHeaderBackStory): string {
 	<header class="pageHeader">
 		<div class="pageHeader-content">
 			<div class="pageHeader-content-title">
-				<nav class="pageHeader-content-title-back">
+				<nav role="presentation" class="pageHeader-content-title-back">
 					<a href="#" class="button mod-onlyIcon mod-text">
 						<span class="lucca-icon icon-arrowLeft" aria-hidden="true"></span>
 						<span class="u-mask">Page parente</span>

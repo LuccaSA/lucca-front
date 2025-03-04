@@ -1,6 +1,4 @@
-La UserPopover est un composant qui apparaît au survol d'un élément et qui affiche différentes informations sur l'utilisateur.
-
-### Setup
+### Mise en place
 
 Afin de pouvoir installer la UserPopover, vous devez appeler la fonction `provideLuUserPopover` dans votre module racine.
 

@@ -21,7 +21,7 @@
 			opacity: 0.3;
 		}
 	}
-  
+
 	@at-root ($atRoot) {
 		.progress-bar {
 			background-color: var(--palettes-700, var(--components-progress-bar-background));

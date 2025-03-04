@@ -1,16 +1,8 @@
 @use '@lucca-front/scss/src/commons/utils/media';
+@use '@lucca-front/scss/src/commons/utils/overflow';
 
 @mixin overlay {
-	&,
-	body {
-		touch-action: none;
-		overscroll-behavior: none;
-		-webkit-overflow-scrolling: auto;
-	}
-
-	body {
-		overflow: hidden !important;
-	}
+	@include overflow.scrollblock;
 }
 
 @mixin active {

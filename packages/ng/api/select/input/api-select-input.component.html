@@ -7,7 +7,7 @@
 <div class="lu-select-suffix">
 	<lu-input-clearer></lu-input-clearer>
 </div>
-<span [class.chip]="multiple" *luDisplayer="let option">{{ option.name }}</span>
+<span [class.chip]="multiple" *luDisplayer="let option"><span class="u-ellipsis">{{ option.name }}</span></span>
 <lu-option-picker-advanced [option-comparer]="byId">
 	<header class="lu-picker-header">
 		<lu-api-paged-searcher

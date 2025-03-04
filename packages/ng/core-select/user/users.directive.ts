@@ -63,7 +63,8 @@ export class LuCoreSelectUsersDirective<T extends LuCoreSelectUser = LuCoreSelec
 	filters = input<Record<string, string | number | boolean>>({});
 	url = input<string | null>(null);
 	orderBy = input<string | null>(null);
-	operationIds = input<number[] | null>(null);
+	operationIds = input<readonly number[] | null>(null);
+	uniqueOperationIds = input<readonly number[] | null>(null);
 	appInstanceId = input<number | null>(null);
 	enableFormerEmployees = input(false, { transform: booleanAttribute });
 	displayMeOption = input(true);
@@ -78,7 +79,10 @@ export class LuCoreSelectUsersDirective<T extends LuCoreSelectUser = LuCoreSelec
 
 		effect(() => {
 			const enableFormerEmployees = this.enableFormerEmployees();
-			untracked(() => this.select.panelHeaderTpl.set(enableFormerEmployees ? LuCoreSelectFormerEmployeesComponent : undefined));
+
+			if (enableFormerEmployees) {
+				untracked(() => this.select.panelHeaderTpl.set(LuCoreSelectFormerEmployeesComponent));
+			}
 		});
 	}
 
@@ -92,6 +96,7 @@ export class LuCoreSelectUsersDirective<T extends LuCoreSelectUser = LuCoreSelec
 			const orderBy = this.orderBy();
 			const clue = this.clue();
 			const operationIds = this.operationIds();
+			const uniqueOperationIds = this.uniqueOperationIds();
 			const appInstanceId = this.appInstanceId();
 			const searchDelimiter = this.searchDelimiter();
 			const formerEmployees = this.includeFormerEmployees();
@@ -102,6 +107,7 @@ export class LuCoreSelectUsersDirective<T extends LuCoreSelectUser = LuCoreSelec
 				...(orderBy ? { orderBy } : {}),
 				...(clue ? { clue: applySearchDelimiter(clue, searchDelimiter) } : {}),
 				...(operationIds ? { operations: operationIds.join(',') } : {}),
+				...(uniqueOperationIds ? { uniqueOperations: uniqueOperationIds.join(',') } : {}),
 				...(appInstanceId ? { appInstanceId } : {}),
 				...(formerEmployees ? { formerEmployees } : {}),
 			};
@@ -139,7 +145,7 @@ export class LuCoreSelectUsersDirective<T extends LuCoreSelectUser = LuCoreSelec
 			this.httpClient.get<{ count: number }>(url, {
 				params: {
 					...filters,
-					['fields.root']: 'count',
+					fields: 'collection.count',
 				},
 			}),
 		),

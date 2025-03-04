@@ -7,6 +7,24 @@
 	class="multipleSelect-clear clear"
 	(click)="clearValue($event)"
 >
-	<span class="u-mask">{{intl.clear}}</span>
+	<span class="u-mask">{{ intl.clear }}</span>
 </button>
+
+@if (!filterPillMode) {
 <span aria-hidden="true" class="multipleSelect-arrow lucca-icon icon-arrowChevronBottom"></span>
+<span aria-hidden="true" class="multipleSelect-searchIcon lucca-icon icon-searchMagnifyingGlass"></span>
+}
+
+<ng-container #filterPillPanelAnchor></ng-container>
+<ng-container *luFilterPillDisplayer>
+	<div class="multipleSelect-displayer-filter">
+		@if (value?.length === 1) {
+		<div class="multipleSelect-pill-displayer-chip"><ng-container *luOptionOutlet="displayerTpl(); value: value[0]"></ng-container></div>
+		}
+	</div>
+</ng-container>
+<ng-container *luFilterPillLabel="let label= label; let colon = colon">
+	@if (value?.length > 1) {
+	<span class="multipleSelect-pill-displayer-label">{{ value?.length }}&nbsp;{{ filterPillLabelPlural }}</span>
+	} @else { {{ label }}@if (value?.length === 1) {{{ colon }}} }
+</ng-container>

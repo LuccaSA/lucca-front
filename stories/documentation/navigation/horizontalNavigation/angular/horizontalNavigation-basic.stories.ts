@@ -49,7 +49,7 @@ export const Basic = {
 	args: {
 		noBorder: false,
 		container: false,
-		size: 'S',
+		size: null,
 		vertical: false,
 	},
 };

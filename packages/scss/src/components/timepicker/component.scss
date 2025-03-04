@@ -156,13 +156,13 @@
 				}
 			}
 
-			&:has(#anteMeridiem:checked) {
+			&:has(.timePicker-fieldset-meridiem-ante-input:checked) {
 				&::after {
 					content: 'AM';
 				}
 			}
 
-			&:has(#postMeridiem:checked) {
+			&:has(.timePicker-fieldset-meridiem-post-input:checked) {
 				&::after {
 					content: 'PM';
 				}

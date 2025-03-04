@@ -36,6 +36,8 @@ $palettesAll: list.join(
 	$palettesDeprecated
 );
 
+$fieldsWidth: 20, 30, 40, 50, 60 !default;
+
 // Palettes
 
 $brand: (
@@ -441,7 +443,7 @@ $elevation: (
 	),
 	shadow: (
 		'raised':
-			'0 0 0 1px color-mix(in srgb, var(--palettes-neutral-400) 8%, transparent), 0 1px 2px color-mix(in srgb, var(--palettes-neutral-400) 4%, transparent), 0 2px 4px color-mix(in srgb, var(--palettes-neutral-400) 2%, transparent)',
+			'0 0 0 1px color-mix(in srgb, var(--palettes-neutral-400) 8%, transparent), 0 1px 2px color-mix(in srgb, var(--palettes-neutral-400) 40%, transparent), 0 2px 4px color-mix(in srgb, var(--palettes-neutral-400) 20%, transparent)',
 		'overflow':
 			'0 0 0 1px color-mix(in srgb, var(--palettes-neutral-400) 8%, transparent), 0 0 4px color-mix(in srgb, var(--palettes-neutral-400) 32%, transparent), 0 0 8px color-mix(in srgb, var(--palettes-neutral-400) 24%, transparent)',
 		'overlay':
@@ -569,8 +571,7 @@ $loading: (
 $textLink: (
 	color: var(--palettes-product-700),
 	hover: var(--palettes-product-600),
-	disabled: var(--palettes-neutral-500),
-	// disabled token candidate
+	disabled: var(--palettes-neutral-500), // disabled token candidate
 );
 
 // Deprecated

@@ -1,9 +1,8 @@
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Meta, moduleMetadata, StoryFn } from '@storybook/angular';
-import { FormFieldComponent } from '../../../../packages/ng/form-field/form-field.component';
-import { RadioGroupInputComponent } from '../../../../packages/ng/forms/radio-group-input/radio-group-input.component';
-import { RadioComponent } from '../../../../packages/ng/forms/radio-group-input/radio/radio.component';
+import { FormFieldComponent } from '@lucca-front/ng/form-field';
+import { RadioComponent, RadioGroupInputComponent } from '@lucca-front/ng/forms';
 
 interface ArrowBasicStory {
 	s: boolean;

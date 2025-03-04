@@ -1,60 +1,78 @@
-<!-- Basics -->
-<section class="contentSection">
-	<fieldset class="fieldset" aria-labelledby="fieldsetTitleContent">
-		<legend class="fieldset-title">
-			<span class="fieldset-title-content" id="fieldsetTitleContent">
-				<span class="fieldset-title-content-text">
-					Fieldset title
-					<span class="fieldset-title-content-text-helper">Helper message</span>
-				</span>
-			</span>
-		</legend>
-		<div class="fieldset-content">[Content]</div>
-	</fieldset>
-</section>
+<table class="demo-QAtable">
+	<tbody>
+		<tr>
+			<td>Default</td>
+			<td>
+				<fieldset class="fieldset" aria-labelledby="fieldsetTitleContent">
+					<legend class="fieldset-title">
+						<span class="fieldset-title-content" id="fieldsetTitleContent">
+							<span class="fieldset-title-content-text">
+								Fieldset title
+								<span class="fieldset-title-content-text-helper">Helper message</span>
+							</span>
+						</span>
+					</legend>
+					<div class="fieldset-content">[Content]</div>
+				</fieldset>
+			</td>
+		</tr>
+		<tr>
+			<td>Small</td>
+			<td>
+				<fieldset class="fieldset mod-S" aria-labelledby="fieldsetTitleContentSmall">
+					<legend class="fieldset-title">
+						<span class="fieldset-title-content" id="fieldsetTitleContentSmall">
+							<span class="fieldset-title-content-text">
+								Fieldset title
+								<span class="fieldset-title-content-text-helper">Helper message</span>
+							</span>
+						</span>
+					</legend>
+					<div class="fieldset-content">[Content]</div>
+				</fieldset>
+			</td>
+		</tr>
+		<tr>
+			<td>Horizontal</td>
+			<td>
+				<fieldset class="fieldset mod-horizontal" aria-labelledby="fieldsetTitleContentHorizontal">
+					<legend class="fieldset-title">
+						<span class="fieldset-title-content" id="fieldsetTitleContentHorizontal">
+							<span class="fieldset-title-content-text">
+								Fieldset title
+								<span class="fieldset-title-content-text-helper">Helper message</span>
+							</span>
+						</span>
+					</legend>
+					<div class="fieldset-content">[Content]</div>
+				</fieldset>
+			</td>
+		</tr>
+		<tr>
+			<td>Expandable</td>
+			<td>
+				<fieldset class="fieldset mod-expandable" aria-labelledby="fieldsetTitleContentExpandable">
+					<legend class="fieldset-title">
+						<button type="button" class="fieldset-title-content" id="fieldsetTitleContentExpandable" [attr.aria-expanded]="expanded">
+							<span class="fieldset-title-content-text">
+								Fieldset title
+								<span class="fieldset-title-content-text-helper">Helper message</span>
+							</span>
+							<span class="lucca-icon icon-arrowChevronBottom" aria-hidden="true"></span>
+						</button>
+					</legend>
+					<div class="fieldset-content">[Content]</div>
+				</fieldset>
+			</td>
+		</tr>
+	</tbody>
+</table>
 
-<!-- Small -->
-<section class="contentSection">
-	<fieldset class="fieldset mod-S" aria-labelledby="fieldsetTitleContentSmall">
-		<legend class="fieldset-title">
-			<span class="fieldset-title-content" id="fieldsetTitleContentSmall">
-				<span class="fieldset-title-content-text">
-					Fieldset title
-					<span class="fieldset-title-content-text-helper">Helper message</span>
-				</span>
-			</span>
-		</legend>
-		<div class="fieldset-content">[Content]</div>
-	</fieldset>
-</section>
+<style>
+	.fieldset {
+		min-width: 30rem;
+	}
+</style>
 
-<!-- Horizontal -->
-<section class="contentSection">
-	<fieldset class="fieldset mod-horizontal" aria-labelledby="fieldsetTitleContentHorizontal">
-		<legend class="fieldset-title">
-			<span class="fieldset-title-content" id="fieldsetTitleContentHorizontal">
-				<span class="fieldset-title-content-text">
-					Fieldset title
-					<span class="fieldset-title-content-text-helper">Helper message</span>
-				</span>
-			</span>
-		</legend>
-		<div class="fieldset-content">[Content]</div>
-	</fieldset>
-</section>
-
-<!-- Expandable -->
-<section class="contentSection">
-	<fieldset class="fieldset mod-expandable" aria-labelledby="fieldsetTitleContentExpandable">
-		<legend class="fieldset-title">
-			<button type="button" class="fieldset-title-content" id="fieldsetTitleContentExpandable" [attr.aria-expanded]="expanded">
-				<span class="fieldset-title-content-text">
-					Fieldset title
-					<span class="fieldset-title-content-text-helper">Helper message</span>
-				</span>
-				<span class="lucca-icon icon-arrowChevronBottom" aria-hidden="true"></span>
-			</button>
-		</legend>
-		<div class="fieldset-content">[Content]</div>
-	</fieldset>
-</section>
+<!-- To tell the ui-diff tool that the page has finished rendering -->
+<span id="ready"></span>
