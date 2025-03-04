@@ -1,6 +1,6 @@
 import { NgClass, UpperCasePipe } from '@angular/common';
 import { booleanAttribute, Component, computed, inject, input, LOCALE_ID, output, ViewEncapsulation } from '@angular/core';
-import { FormControl, FormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { DividerComponent } from '@lucca-front/ng/divider';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
@@ -12,17 +12,17 @@ import { formatSize } from '../formatter';
 import { FileUploadEntry } from '../file-upload-entry';
 
 @Component({
-	selector: 'lu-file-uploaded',
+	selector: 'lu-file-entry',
 	standalone: true,
-	templateUrl: './file-uploaded.component.html',
-	styleUrls: ['./file-uploaded.component.scss'],
+	templateUrl: './file-entry.component.html',
+	styleUrls: ['./file-entry.component.scss'],
 	encapsulation: ViewEncapsulation.None,
 	imports: [IconComponent, UpperCasePipe, LuTooltipModule, ButtonComponent, InlineMessageComponent, DividerComponent, NgClass, FormFieldComponent, TextInputComponent, FormsModule],
 	host: {
 		class: 'u-displayContents',
 	},
 })
-export class FileUploadedComponent {
+export class FileEntryComponent {
 	#locale = inject(LOCALE_ID);
 
 	state = input<'success' | 'loading' | 'error' | null>(null);
@@ -61,5 +61,5 @@ export class FileUploadedComponent {
 		};
 	});
 
-	password: string;
+	password?: string;
 }
