@@ -4,24 +4,29 @@ import { getIntl } from '@lucca-front/ng/core';
 import { ILuOptionContext, LU_OPTION_CONTEXT } from '@lucca-front/ng/core-select';
 import { LuUserDisplayPipe } from '@lucca-front/ng/user';
 import { map, startWith } from 'rxjs';
+import { LuOptionOutletDirective } from '../option/option-outlet.directive';
 import { LuCoreSelectUser, LuCoreSelectWithAdditionnalInformation } from './user-option.model';
 import { LU_CORE_SELECT_USER_TRANSLATIONS } from './user.translate';
 import { LuCoreSelectUsersDirective } from './users.directive';
 
 @Component({
 	selector: 'lu-user-option',
-	imports: [NgIf, AsyncPipe, LuUserDisplayPipe],
+	imports: [NgIf, AsyncPipe, LuUserDisplayPipe, LuOptionOutletDirective],
 	template: `
 		<ng-container *ngIf="context.option$ | async as user">
 			<div *ngIf="userDirective.displayMeOption() && user.id === userDirective.currentUserId && hasEmptyClue$ | async; else notMe">
-				<b>{{ intl.me }} {{ user | luUserDisplay: userDirective.displayFormat() }}</b>
+				<b>{{ intl.me }} <ng-container *luOptionOutlet="customUserOptionTpl() || defaultUserTpl; value: user" /></b>
 			</div>
 
 			<ng-template #notMe>
-				<div>{{ user | luUserDisplay: userDirective.displayFormat() }}</div>
+				<div *luOptionOutlet="customUserOptionTpl() || defaultUserTpl; value: user"></div>
 			</ng-template>
 			<div class="lu-select-additionalInformation" *ngIf="user.additionalInformation">({{ user.additionalInformation }})</div>
 		</ng-container>
+
+		<ng-template #defaultUserTpl let-user>
+			{{ user | luUserDisplay: userDirective.displayFormat() }}
+		</ng-template>
 	`,
 	standalone: true,
 	styles: [
@@ -42,4 +47,5 @@ export class LuUserOptionComponent {
 		startWith(this.userDirective.select.clue),
 		map((clue) => !clue),
 	);
+	protected customUserOptionTpl = this.userDirective.customUserOptionTpl;
 }
