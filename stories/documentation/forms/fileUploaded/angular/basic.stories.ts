@@ -1,5 +1,5 @@
 import { provideHttpClient } from '@angular/common/http';
-import { FileUploadedComponent } from '@lucca-front/ng/file-upload';
+import { FileEntryComponent } from '@lucca-front/ng/file-upload';
 import { applicationConfig, Meta, moduleMetadata } from '@storybook/angular';
 import { generateInputs } from 'stories/helpers/stories';
 
@@ -33,7 +33,7 @@ export default {
 	},
 	decorators: [
 		moduleMetadata({
-			imports: [FileUploadedComponent],
+			imports: [FileEntryComponent],
 		}),
 		applicationConfig({ providers: [provideHttpClient()] }),
 	],
