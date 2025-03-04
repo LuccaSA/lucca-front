@@ -4,7 +4,7 @@ import { applicationConfig, Meta, moduleMetadata } from '@storybook/angular';
 import { generateInputs } from 'stories/helpers/stories';
 
 export default {
-	title: 'Documentation/FileUploaded/Angular/Basic',
+	title: 'Documentation/FileEntry/Angular/Basic',
 	argTypes: {
 		size: {
 			options: ['S', null],
@@ -39,7 +39,7 @@ export default {
 	],
 	render: (args, { argTypes }) => {
 		return {
-			template: `<lu-file-uploaded ${generateInputs(args, argTypes)} />`,
+			template: `<lu-file-entry${generateInputs(args, argTypes)} />`,
 		};
 	},
 } as Meta;
