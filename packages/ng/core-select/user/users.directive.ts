@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
-import { Directive, Provider, Type, booleanAttribute, computed, effect, forwardRef, inject, input, signal, untracked } from '@angular/core';
+import { Directive, Input, Provider, TemplateRef, Type, booleanAttribute, computed, effect, forwardRef, inject, input, model, signal, untracked } from '@angular/core';
 import { takeUntilDestroyed, toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { ILuApiCollectionResponse } from '@lucca-front/ng/api';
-import { CORE_SELECT_API_TOTAL_COUNT_PROVIDER, CoreSelectApiTotalCountProvider, applySearchDelimiter } from '@lucca-front/ng/core-select';
+import { CORE_SELECT_API_TOTAL_COUNT_PROVIDER, CoreSelectApiTotalCountProvider, LuOptionContext, applySearchDelimiter } from '@lucca-front/ng/core-select';
 import { ALuCoreSelectApiDirective } from '@lucca-front/ng/core-select/api';
 import { LuDisplayFormat, LuDisplayFullname } from '@lucca-front/ng/user';
 import { EMPTY, Observable, catchError, combineLatest, debounceTime, map, of, shareReplay, switchMap, take, tap } from 'rxjs';
@@ -68,6 +68,7 @@ export class LuCoreSelectUsersDirective<T extends LuCoreSelectUser = LuCoreSelec
 	appInstanceId = input<number | null>(null);
 	enableFormerEmployees = input(false, { transform: booleanAttribute });
 	displayMeOption = input(true);
+	customUserOptionTpl = model<TemplateRef<LuOptionContext<T>> | Type<unknown> | undefined>();
 
 	includeFormerEmployees = signal(false);
 	searchDelimiter = input<string>(' ');
@@ -209,4 +210,20 @@ export class LuCoreSelectUsersDirective<T extends LuCoreSelectUser = LuCoreSelec
 
 	protected override optionComparer = (a: T, b: T) => a.id === b.id;
 	protected override optionKey = (option: T) => option.id;
+}
+
+@Directive({
+	selector: '[luUserOption]',
+	standalone: true,
+})
+export class LuCoreSelectUserOptionDirective<T extends LuCoreSelectUser = LuCoreSelectUser> {
+	#templateRef = inject(TemplateRef<LuOptionContext<T>>);
+
+	@Input({ alias: 'luUserOptionUsersRef' }) set usersDirective(usersDirective: LuCoreSelectUsersDirective<T>) {
+		usersDirective.customUserOptionTpl.set(this.#templateRef);
+	}
+
+	public static ngTemplateContextGuard<T extends LuCoreSelectUser>(_dir: LuCoreSelectUserOptionDirective<T>, ctx: unknown): ctx is { $implicit: T } {
+		return true;
+	}
 }
