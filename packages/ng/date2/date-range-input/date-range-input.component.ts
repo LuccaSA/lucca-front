@@ -33,8 +33,8 @@ import { AbstractDateComponent } from '../abstract-date-component';
 import { CalendarMode } from '../calendar2/calendar-mode';
 import { Calendar2Component } from '../calendar2/calendar2.component';
 import { CellStatus } from '../calendar2/cell-status';
-import { DateRange } from '../calendar2/date-range';
-import { compareCalendarPeriods, startOfPeriod } from '../utils';
+import { DateRange, DateRangeInput } from '../calendar2/date-range';
+import { compareCalendarPeriods, startOfPeriod, transformDateRangeInputToDateRange, transformDateRangeToDateRangeInput } from '../utils';
 import { CalendarShortcut } from './calendar-shortcut';
 
 let nextId = 0;
@@ -283,42 +283,39 @@ export class DateRangeInputComponent extends AbstractDateComponent implements Co
 	}
 
 	setupInputEffect(inputSignal: Signal<string | null>, rangeProperty: 'start' | 'end'): void {
-		effect(
-			() => {
-				const inputValue = inputSignal();
-				let currentRange: DateRange = untracked(this.selectedRange) || ({} as DateRange);
-				if (inputValue?.length > 0) {
-					const parsed = parse(inputValue, this.dateFormat, startOfDay(new Date()));
-					if (parsed.getFullYear() > 999) {
-						currentRange = {
-							...currentRange,
-							scope: this.mode(),
-							[rangeProperty]: parsed,
-						};
-						this.currentDate.set(startOfDay(parsed));
-						this.tabbableDate.set(startOfDay(parsed));
-					} else if (this.isValidDate(parsed)) {
-						currentRange = {
-							...currentRange,
-							scope: this.mode(),
-							[rangeProperty]: parsed,
-						};
-					}
-				} else if (inputValue !== null) {
+		effect(() => {
+			const inputValue = inputSignal();
+			let currentRange: DateRange = untracked(this.selectedRange) || ({} as DateRange);
+			if (inputValue?.length > 0) {
+				const parsed = parse(inputValue, this.dateFormat, startOfDay(new Date()));
+				if (parsed.getFullYear() > 999) {
 					currentRange = {
 						...currentRange,
 						scope: this.mode(),
-						[rangeProperty]: undefined,
+						[rangeProperty]: parsed,
+					};
+					this.currentDate.set(startOfDay(parsed));
+					this.tabbableDate.set(startOfDay(parsed));
+				} else if (this.isValidDate(parsed)) {
+					currentRange = {
+						...currentRange,
+						scope: this.mode(),
+						[rangeProperty]: parsed,
 					};
 				}
-				if (!currentRange.start && !currentRange.end) {
-					this.selectedRange.set(null);
-				} else {
-					this.selectedRange.set(currentRange);
-				}
-			},
-			{ allowSignalWrites: true },
-		);
+			} else if (inputValue !== null) {
+				currentRange = {
+					...currentRange,
+					scope: this.mode(),
+					[rangeProperty]: undefined,
+				};
+			}
+			if (!currentRange.start && !currentRange.end) {
+				this.selectedRange.set(null);
+			} else {
+				this.selectedRange.set(currentRange);
+			}
+		});
 	}
 
 	inputBlur(): void {
@@ -434,22 +431,27 @@ export class DateRangeInputComponent extends AbstractDateComponent implements Co
 		}
 	}
 
-	validate(control: AbstractControl<DateRange, DateRange>): ValidationErrors {
+	validate(control: AbstractControl<DateRange | DateRangeInput | null>): ValidationErrors | null {
 		if (!control.value) {
 			return null;
 		}
-		return this.isValidDate(control.value?.start) ? null : { date: true };
+		const dateRange = transformDateRangeInputToDateRange(control.value);
+
+		return this.isValidDate(dateRange.start) ? null : { date: true };
 	}
 
-	writeValue(value: DateRange): void {
-		if (value) {
-			this.selectedRange.set(value);
-			this.currentDate.set(startOfDay(value.start));
+	writeValue(dateRange: DateRange | DateRangeInput | null): void {
+		if (dateRange != null) {
+			const _dateRange = transformDateRangeInputToDateRange(dateRange);
+			this.selectedRange.set(_dateRange);
+			this.currentDate.set(startOfDay(dateRange.start));
 		}
 	}
 
-	registerOnChange(fn: (value: DateRange) => void): void {
-		this.#onChange = fn;
+	registerOnChange(fn: (value: DateRange | DateRangeInput | null) => void): void {
+		this.#onChange = (dateRange: DateRange | null) => {
+			fn(dateRange && this.inDateISOFormat() ? transformDateRangeToDateRangeInput(dateRange) : dateRange);
+		};
 	}
 
 	override setDisabledState(isDisabled: boolean) {
