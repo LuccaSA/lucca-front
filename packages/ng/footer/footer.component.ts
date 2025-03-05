@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgTemplateOutlet } from '@angular/common';
 import { booleanAttribute, Component, input, ViewEncapsulation } from '@angular/core';
 
 @Component({
@@ -8,7 +8,7 @@ import { booleanAttribute, Component, input, ViewEncapsulation } from '@angular/
 	styleUrls: ['./footer.component.scss'],
 	templateUrl: './footer.component.html',
 	encapsulation: ViewEncapsulation.None,
-	imports: [CommonModule],
+	imports: [CommonModule, NgTemplateOutlet],
 })
 export class FooterComponent {
 	sticky = input(false, { transform: booleanAttribute });

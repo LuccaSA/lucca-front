@@ -1,8 +1,18 @@
+@if (container()) {
 <footer class="footer" [class.mod-sticky]="sticky()" [ngClass]="breakpointClass">
-	<div class="footer-containerOptional" [class.u-displayContents]="!container()">
-		<div class="footer-content"><ng-content /></div>
-		<div class="footer-actions">
-			<ng-content select="[footerActions]"></ng-content>
-		</div>
+	<div class="footer-containerOptional">
+		<ng-container *ngTemplateOutlet="footerContent" />
 	</div>
 </footer>
+} @else {
+<footer class="footer" [class.mod-sticky]="sticky()" [ngClass]="breakpointClass">
+	<ng-container *ngTemplateOutlet="footerContent" />
+</footer>
+}
+
+<ng-template #footerContent>
+	<div class="footer-content"><ng-content /></div>
+	<div class="footer-actions">
+		<ng-content select="[footerActions]"></ng-content>
+	</div>
+</ng-template>
