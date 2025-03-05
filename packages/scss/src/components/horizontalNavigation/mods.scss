@@ -13,6 +13,11 @@
 		--components-horizontalNavigation-listItemActionFontSize: var(--sizes-S-fontSize);
 		--components-horizontalNavigation-listItemActionLineHeight: var(--sizes-S-lineHeight);
 		--components-horizontalNavigation-listItemActionPadding: var(--pr-t-spacings-150) 0;
+
+		&::before {
+			inset-block: calc(var(--components-horizontalNavigation-listItemActionPaddingBlock) - var(--pr-t-spacings-50));
+			inset-inline: calc(var(--components-horizontalNavigation-listItemActionPaddingInline) - var(--pr-t-spacings-50));
+		}
 	}
 
 	// .menu-link is deprecated
@@ -55,6 +60,11 @@
 	.menu-list-item-action {
 		--components-horizontalNavigation-listItemActionPadding: var(--pr-t-spacings-50) var(--pr-t-spacings-200);
 		--components-horizontalNavigation-listItemActionAlign: left;
+
+		&:before {
+			inset-block: calc(var(--components-horizontalNavigation-listItemActionPaddingBlock) - var(--pr-t-spacings-150));
+			inset-inline: calc(var(--components-horizontalNavigation-listItemActionPaddingInline) + var(--pr-t-spacings-100));
+		}
 
 		&::after {
 			--components-horizontalNavigation-listItemActionTransform: scale(1, 0);

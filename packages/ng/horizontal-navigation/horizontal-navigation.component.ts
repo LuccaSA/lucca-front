@@ -1,18 +1,21 @@
-import { booleanAttribute, Component, HostBinding, input, ViewEncapsulation } from '@angular/core';
+import { NgTemplateOutlet } from '@angular/common';
+import { booleanAttribute, Component, contentChildren, HostBinding, input, ViewEncapsulation } from '@angular/core';
+import { HorizontalNavigationLinkDirective } from './horizontal-navigation-link.directive';
 
 @Component({
 	selector: 'lu-horizontal-navigation',
 	standalone: true,
-	templateUrl: './horizontalNavigation.component.html',
-	styleUrls: ['./horizontalNavigation.component.scss'],
+	templateUrl: './horizontal-navigation.component.html',
+	styleUrls: ['./horizontal-navigation.component.scss'],
 	encapsulation: ViewEncapsulation.None,
+	imports: [NgTemplateOutlet],
 	host: {
 		class: 'horizontalNavigation',
 		role: 'navigation',
 	},
 })
 export class HorizontalNavigationComponent {
-	links = input();
+	links = contentChildren(HorizontalNavigationLinkDirective);
 
 	noBorder = input(false, { transform: booleanAttribute });
 	container = input(false, { transform: booleanAttribute });

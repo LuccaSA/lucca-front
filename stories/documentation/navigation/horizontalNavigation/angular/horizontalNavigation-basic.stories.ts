@@ -1,5 +1,9 @@
-import { HorizontalNavigationComponent } from '@lucca-front/ng/horizontalNavigation';
-import { Meta, moduleMetadata } from '@storybook/angular';
+import { provideRouter } from '@angular/router';
+import { HorizontalNavigationComponent } from '@lucca-front/ng/horizontal-navigation';
+import { NumericBadgeComponent } from '@lucca-front/ng/numeric-badge';
+
+import { applicationConfig, Meta, moduleMetadata } from '@storybook/angular';
+import { HorizontalNavigationLinkDirective } from 'packages/ng/horizontal-navigation/horizontal-navigation-link.directive';
 import { generateInputs } from 'stories/helpers/stories';
 
 export default {
@@ -14,32 +18,25 @@ export default {
 	},
 	decorators: [
 		moduleMetadata({
-			imports: [HorizontalNavigationComponent],
+			imports: [HorizontalNavigationComponent, HorizontalNavigationLinkDirective, NumericBadgeComponent],
+		}),
+		applicationConfig({
+			providers: [provideRouter([])],
 		}),
 	],
 	render: (args, { argTypes }) => {
+		const { numericBadge, ...otherArgs } = args;
+		const numericBadgeElement = numericBadge ? `<lu-numeric-badge [value]="888" />` : ``;
+
 		return {
 			template: `
-<lu-horizontal-navigation [links]="[
-		{
-			route: '#1',
-			label: 'Page 1',
-		},
-		{
-			route: '#2',
-			label: 'Page 2',
-		},
-		{
-			route: '#3',
-			label: 'Page 3',
-			disabled: true
-		},
-		{
-			route: '#4',
-			label: 'Page 4',
-			counter: 8
-		},
-	]" ${generateInputs(args, argTypes)} />
+<lu-horizontal-navigation ${generateInputs(otherArgs, argTypes)}>
+	<a *luHorizontalNavigationLink class="horizontalNavigation-list-item-action" href="#1" aria-current="page">Page 1 ${numericBadgeElement}</a>
+	<a *luHorizontalNavigationLink class="horizontalNavigation-list-item-action" href="#2">Page 2 ${numericBadgeElement}</a>
+	<a *luHorizontalNavigationLink class="horizontalNavigation-list-item-action is-disabled">Page 3 ${numericBadgeElement}</a>
+</lu-horizontal-navigation>
+
+
 			`,
 		};
 	},
@@ -51,5 +48,6 @@ export const Basic = {
 		container: false,
 		size: null,
 		vertical: false,
+		numericBadge: false,
 	},
 };

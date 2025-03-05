@@ -80,8 +80,8 @@
 			&:before {
 				content: '';
 				position: absolute;
-				inset-block: calc(var(--components-horizontalNavigation-listItemActionPaddingBlock) - var(--pr-t-spacings-25));
-				inset-inline: calc(var(--components-horizontalNavigation-listItemActionPaddingInline) - var(--pr-t-spacings-25));
+				inset-block: calc(var(--components-horizontalNavigation-listItemActionPaddingBlock));
+				inset-inline: calc(var(--components-horizontalNavigation-listItemActionPaddingInline) - var(--pr-t-spacings-100));
 				border-radius: var(--commons-borderRadius-L);
 			}
 
@@ -101,7 +101,7 @@
 			}
 
 			&:focus-visible {
-				outline: none;
+				outline: none !important;
 
 				&::before {
 					@include a11y.focusVisible;
@@ -124,6 +124,10 @@
 						--components-horizontalNavigation-listItemActionTransform: scale(0.75, 1);
 					}
 				}
+			}
+
+			.link-text {
+				text-decoration: none;
 			}
 		}
 
