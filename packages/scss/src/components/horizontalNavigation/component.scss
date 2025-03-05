@@ -80,8 +80,8 @@
 			&:before {
 				content: '';
 				position: absolute;
-				inset-block: calc(var(--components-horizontalNavigation-listItemActionPaddingBlock));
-				inset-inline: calc(var(--components-horizontalNavigation-listItemActionPaddingInline) - var(--pr-t-spacings-100));
+				inset-block: calc(var(--components-horizontalNavigation-listItemActionPaddingBlock) - var(--pr-t-spacings-25));
+				inset-inline: calc(var(--components-horizontalNavigation-listItemActionPaddingInline) - var(--pr-t-spacings-25));
 				border-radius: var(--commons-borderRadius-L);
 			}
 
