@@ -4,6 +4,7 @@
 	size="XS"
 	(click)="dispatchCommand()"
 	[class.mod-toggled]="active()"
+	[attr.aria-pressed]="active()"
 	[luTooltip]="tooltip()"
 	luTooltipOnlyForDisplay
 >

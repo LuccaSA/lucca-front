@@ -22,6 +22,7 @@ import { mergeRegister } from '@lexical/utils';
 import { $canShowPlaceholderCurry } from '@lexical/text';
 import { createEditor, Klass, LexicalEditor, LexicalNode } from 'lexical';
 import { RICH_TEXT_FORMATTER, RichTextFormatter } from './formatters';
+import { InputDirective } from '@lucca-front/ng/form-field';
 
 export interface RichTextPluginComponent {
 	setEditorInstance(editor: LexicalEditor): void;
@@ -33,7 +34,7 @@ export const RICH_TEXT_PLUGIN_COMPONENT = new InjectionToken<RichTextPluginCompo
 @Component({
 	selector: 'lu-rich-text-input',
 	standalone: true,
-	imports: [],
+	imports: [InputDirective],
 	templateUrl: './rich-text-input.component.html',
 	styleUrl: './rich-text-input.component.scss',
 	encapsulation: ViewEncapsulation.None,

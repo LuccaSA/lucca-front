@@ -43,28 +43,24 @@ Exemple d'utilisation :
 
 ### Barre d'outils
 
-La barre d'outils du `lu-rich-text-input` est configuré directement depuis le template. Plusieurs outils préconfigurés sont disponibles.
+La barre d'outils du `lu-rich-text-input` est configuré directement depuis le template. 
 
-Le layout de la barre d'outil est donc à la charge du composant parent.
-
-
+Pour plus de simplicité, une barre d'outil par défaut est mise à disposition.
 ````angular2html
 <lu-rich-text-input placeholder="Enter some text..." [(ngModel)]="example">
-    <div
-      class="u-width100% u-displayFlex u-justifyContentSpaceBetween pr-u-gap100"
-    >
-      <div class="u-displayFlex pr-u-gap100">
-        <lu-rich-text-toolbar-text-style />
-        <lu-divider [vertical]="true" />
-        <lu-rich-text-toolbar-list-style />
-        <lu-divider [vertical]="true" />
-        <lu-rich-text-plugin-headings />
-        <lu-divider [vertical]="true" />
-        <lu-rich-text-plugin-link />
-      </div>
-      <lu-rich-text-plugin-clear-format />
-    </div>
-  </lu-rich-text-input>
+  <lu-rich-text-input-toolbar />
+</lu-rich-text-input>
+````
+
+Il est aussi possible de créer une barre d'outil personnalisée en assemblant les outils existant et en y ajoutant de nouvelles fonctionnalités. Le layout de la barre d'outil est alors à la charge du composant parent.
+````angular2html
+<lu-rich-text-input placeholder="Enter some text..." [(ngModel)]="example">
+  <lu-rich-text-toolbar-list-style />
+  <lu-divider [vertical]="true" />
+  <lu-rich-text-plugin-headings />
+  <lu-divider [vertical]="true" />
+  <lu-rich-text-plugin-link />
+</lu-rich-text-input>
 ````
 
 #### Styles

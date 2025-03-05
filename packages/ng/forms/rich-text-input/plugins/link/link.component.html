@@ -5,6 +5,7 @@
 	(click)="dispatchCommand()"
 	[luTooltip]="intl.linksLabel"
 	[class.mod-toggled]="active()"
+	[attr.aria-pressed]="active()"
 	luTooltipOnlyForDisplay
 >
 	<lu-icon icon="formatLink" [alt]="intl.linksLabel" />
