@@ -18,9 +18,6 @@ import { IconComponent } from '@lucca-front/ng/icon';
 })
 export class HighlightDataComponent {
 	#luClass = inject(LuClass);
-	/**
-	 * ...
-	 */
 	heading = input.required<string>();
 	value = input.required<string>();
 	bubble = input<1 | 2 | 3 | 4 | number>();
@@ -28,6 +25,10 @@ export class HighlightDataComponent {
 		return `https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/${this.palette()}/bubbles-${this.bubbleTheme()}-${this.bubble()}.svg`;
 	});
 	theme = input<'white' | 'light' | 'dark'>('white');
+	/**
+	 * Apply product name to illustration URL and CSS component palette
+	 * This specific palette must be set up on config.scss
+	 */
 	palette = input<'lucca' | 'cleemy' | 'timmi' | 'poplee' | 'coreHR' | 'pagga' | 'cc' | string>('lucca');
 
 	bubbleTheme = computed(() => {
@@ -47,6 +48,10 @@ export class HighlightDataComponent {
 		return this.theme() === 'dark';
 	}
 
+	/**
+	 * Main illustration
+	 * An URL can be apply for custom images
+	 */
 	illustration = input<
 		'calculator' | 'calendar' | 'cleemy-card' | 'coffee' | 'headphone' | 'mail' | 'manifying-glass' | 'medallon' | 'piggy-bank' | 'polaroid-female' | 'polaroid-male' | 'polaroids' | string
 	>();
@@ -57,6 +62,9 @@ export class HighlightDataComponent {
 		return `https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/generic/${this.illustration()}.svg`;
 	});
 	size = input<'S' | 'M' | null>(null);
+	/**
+	 * Adjust layout to text value
+	 */
 	infos = input(false, { transform: booleanAttribute });
 
 	constructor() {
