@@ -1,0 +1,23 @@
+@use 'exports' as *;
+@use '@lucca-front/scss/src/commons/utils/a11y';
+
+.inputCard {
+	@include vars;
+	@include component;
+
+	&:not(:has(.inputCard-header-input:checked), .is-open) {
+		@include collapsed;
+	}
+
+	&:hover {
+		@include hover;
+	}
+
+	&:has(.inputCard-header-input:focus-visible) {
+		@include a11y.focusVisible;
+	}
+
+	&:has(.inputCard-header-input:disabled) {
+		opacity: 0.25;
+	}
+}
