@@ -30,4 +30,12 @@
 	li {
 		margin-block: var(--pr-t-spacings-50);
 	}
+
+	& > :first-child {
+  	margin-block-start: unset;
+	}
+
+	& > :last-child {
+  	margin-block-end: unset;
+	}
 }
