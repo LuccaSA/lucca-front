@@ -42,6 +42,10 @@
 	}
 }
 
+.multipleSelect-displayer-filter {
+	min-inline-size: 0;
+}
+
 .multipleSelect-displayer {
 	&.mod-filter {
 		@include displayerFilter;
