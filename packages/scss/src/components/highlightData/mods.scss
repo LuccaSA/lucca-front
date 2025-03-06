@@ -1,11 +1,11 @@
 @use '@lucca-front/scss/src/components/title/exports' as title;
 
 @mixin light {
-	--components-highlightData-background: var(--palettes-product-50);
+	--components-highlightData-background: var(--palettes-50, var(--palettes-product-50));
 }
 
 @mixin dark {
-	--components-highlightData-background: var(--palettes-product-100);
+	--components-highlightData-background: var(--palettes-100, var(--palettes-product-100));
 }
 
 @mixin infos {

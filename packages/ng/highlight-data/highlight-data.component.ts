@@ -64,6 +64,7 @@ export class HighlightDataComponent {
 			this.#luClass.setState({
 				[`mod-${this.size()}`]: !!this.size(),
 				'mod-infos': this.infos(),
+				[`palette-${this.palette()}`]: !!this.palette(),
 			});
 		});
 	}
