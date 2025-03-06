@@ -1,0 +1,24 @@
+@use '@lucca-front/scss/src/commons/utils/namespace';
+@use '@lucca-front/scss/src/components/radioField/exports' as radioField;
+
+@mixin component($atRoot: namespace.$defaultAtRoot) {
+	padding: var(--pr-t-spacings-200);
+	border-radius: 1rem;
+	border: solid 1px var(--components-inputCard-borderColor);
+	margin: 1rem;
+	overflow: hidden;
+
+	@at-root ($atRoot) {
+		.inputCard-content {
+			display: var(--components-inputCard-content-display);
+			padding-block-start: var(--pr-t-spacings-200);
+		}
+
+		.inputCard-header-input {
+			// TODO: Add `noOutline` to radioField component.
+			@include radioField.noOutline;
+
+			outline: none !important;
+		}
+	}
+}
