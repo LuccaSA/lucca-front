@@ -31,8 +31,8 @@ export default {
 		return {
 			template: `
 <lu-horizontal-navigation ${generateInputs(otherArgs, argTypes)}>
-	<a *luHorizontalNavigationLink class="horizontalNavigation-list-item-action" href="#1" aria-current="page">Page 1 ${numericBadgeElement}</a>
-	<a *luHorizontalNavigationLink class="horizontalNavigation-list-item-action" href="#2">Page 2 ${numericBadgeElement}</a>
+	<a *luHorizontalNavigationLink class="horizontalNavigation-list-item-action" routerLink="/" ariaCurrentWhenActive="page">Page 1 ${numericBadgeElement}</a>
+	<a *luHorizontalNavigationLink class="horizontalNavigation-list-item-action" href="#2" aria-current="page">Page 2 ${numericBadgeElement}</a>
 	<a *luHorizontalNavigationLink class="horizontalNavigation-list-item-action is-disabled">Page 3 ${numericBadgeElement}</a>
 </lu-horizontal-navigation>
 

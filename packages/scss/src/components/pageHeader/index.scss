@@ -6,10 +6,12 @@
 
 	// .mod-withMenu is deprecated
 	&.mod-withHorizontalNavigation,
+	&:has(.horizontalNavigation),
 	&.mod-withMenu {
 		@include horizontalNavigation;
 	}
 
+	&:has(.breadcrumbs),
 	&.mod-withBreadcrumbs {
 		@include breadcrumbs;
 	}

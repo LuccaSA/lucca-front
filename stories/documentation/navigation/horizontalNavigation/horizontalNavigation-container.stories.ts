@@ -10,7 +10,7 @@ export default {
 function getTemplate(args: HorizontalNavigationContainerStory): string {
 	return `
 	<nav class="horizontalNavigation">
-		<div class="horizontalNavigation-containerOptionnal">
+		<div class="horizontalNavigation-containerOptional">
 			<ul class="horizontalNavigation-list">
 				<li class="horizontalNavigation-list-item">
 					<a href="#" class="horizontalNavigation-list-item-action" aria-current="page">

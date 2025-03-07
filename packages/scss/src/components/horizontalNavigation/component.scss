@@ -29,9 +29,9 @@
 	}
 
 	@at-root ($atRoot) {
-		// .menu-containerOptionnal is deprecated
-		.horizontalNavigation-containerOptionnal,
-		.menu-containerOptionnal {
+		// .menu-containerOptional is deprecated
+		.horizontalNavigation-containerOptional,
+		.menu-containerOptional {
 			max-inline-size: var(--commons-container-maxWidth);
 			padding-inline: var(--commons-container-padding);
 		}

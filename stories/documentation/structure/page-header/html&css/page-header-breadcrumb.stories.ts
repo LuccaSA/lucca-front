@@ -5,7 +5,7 @@ interface PageHeaderBreadcrumbStory {
 }
 
 export default {
-	title: 'Documentation/Structure/PageHeader/Breadcrumb',
+	title: 'Documentation/Structure/PageHeader/HTML&CSS/Breadcrumb',
 	argTypes: {
 		sticky: {
 			control: {

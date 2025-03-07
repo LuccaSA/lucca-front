@@ -1,4 +1,5 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { ScrollBoxComponent } from '@lucca-front/ng/scrollBox';
+import { Meta, moduleMetadata, StoryFn } from '@storybook/angular';
 
 interface HorizontalNavigationScrollboxStory {
 	noBorder: boolean;
@@ -8,6 +9,11 @@ interface HorizontalNavigationScrollboxStory {
 
 export default {
 	title: 'Documentation/Navigation/HorizontalNavigation/Scrollbox',
+	decorators: [
+		moduleMetadata({
+			imports: [ScrollBoxComponent],
+		}),
+	],
 	argTypes: {
 		noBorder: {
 			control: {
@@ -28,49 +34,47 @@ export default {
 } as Meta;
 
 function getTemplate(args: HorizontalNavigationScrollboxStory): string {
-	const noBorder = args.noBorder ? ` mod-noBorder` : '';
-	const header = args.header ? ` mod-header` : '';
-	const s = args.s ? ` mod-S` : '';
-	return `<nav class="horizontalNavigation ${s}${noBorder}${header}">
-	<div class="scrollBox">
-		<div class="scrollBox-inner">
-			<div class="scrollBox-inner-content">
-				<ul class="horizontalNavigation-list">
-					<li class="horizontalNavigation-list-item">
-						<a href="#" class="horizontalNavigation-list-item-action" aria-current="page">
-							Page 1
-						</a>
-					</li>
-					<li class="horizontalNavigation-list-item">
-						<a href="#" class="horizontalNavigation-list-item-action">
-							Page 2
-						</a>
-					</li>
-					<li class="horizontalNavigation-list-item">
-						<a href="#" class="horizontalNavigation-list-item-action">
-							Page 3
-						</a>
-					</li>
-					<li class="horizontalNavigation-list-item">
-						<a href="#" class="horizontalNavigation-list-item-action">
-							Page 4
-						</a>
-					</li>
-					<li class="horizontalNavigation-list-item">
-						<a href="#" class="horizontalNavigation-list-item-action">
-							Page 5
-						</a>
-					</li>
-					<li class="horizontalNavigation-list-item">
-						<a href="#" class="horizontalNavigation-list-item-action">
-							Page 6
-						</a>
-					</li>
-				</ul>
-			</div>
-		</div>
-	</div>
-</nav>`;
+	const noBorder = args.noBorder ? `mod-noBorder` : ``;
+	const header = args.header ? `mod-header` : ``;
+	const s = args.s ? `mod-S` : ``;
+	return `<lu-scroll-box [attr.style]="'--components-scrollBox-gap: 0px; --components-scrollBox-paddingInline: 0px; --components-scrollBox-marginInline: calc(var(--pr-t-spacings-200) * -1)'">
+	<div></div>
+	<nav class="horizontalNavigation ${s} ${noBorder} ${header}">
+		<ul class="horizontalNavigation-list">
+			<li class="horizontalNavigation-list-item">
+				<a href="#" class="horizontalNavigation-list-item-action" aria-current="page">
+					Page 1
+				</a>
+			</li>
+			<li class="horizontalNavigation-list-item">
+				<a href="#" class="horizontalNavigation-list-item-action">
+					Page 2
+				</a>
+			</li>
+			<li class="horizontalNavigation-list-item">
+				<a href="#" class="horizontalNavigation-list-item-action">
+					Page 3
+				</a>
+			</li>
+			<li class="horizontalNavigation-list-item">
+				<a href="#" class="horizontalNavigation-list-item-action">
+					Page 4
+				</a>
+			</li>
+			<li class="horizontalNavigation-list-item">
+				<a href="#" class="horizontalNavigation-list-item-action">
+					Page 5
+				</a>
+			</li>
+			<li class="horizontalNavigation-list-item">
+				<a href="#" class="horizontalNavigation-list-item-action">
+					Page 6
+				</a>
+			</li>
+		</ul>
+	</nav>
+	<div style="margin-left: -1px"></div>
+</lu-scroll-box>`;
 }
 
 const Template: StoryFn<HorizontalNavigationScrollboxStory> = (args) => ({
@@ -78,16 +82,9 @@ const Template: StoryFn<HorizontalNavigationScrollboxStory> = (args) => ({
 	template: getTemplate(args),
 	styles: [
 		`
-			:host {
-				display: block;
-				max-inline-size: 100%;
-				inline-size: 25rem;
-				min-inline-size: 20rem;
-				overflow: hidden;
-				resize: inline;
-				padding-block-end: 4rem;
-			}
-		`,
+		:host {
+		}
+	`,
 	],
 });
 

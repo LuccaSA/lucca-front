@@ -1,0 +1,19 @@
+<header class="pageHeader">
+	<ng-content select="[pageHeaderBreadcrumbs]" />
+	<div class="pageHeader-content">
+		<div class="pageHeader-content-title">
+			<ng-content />
+		</div>
+		<div class="pageHeader-content-actions">
+			<ng-content select="[pageHeaderActions]" />
+		</div>
+	</div>
+	<div class="pageHeader-description">
+		@if (descriptionIsString()) {
+		<p class="pageHeader-description-paragraph">{{description()}}</p>
+		} @else {
+		<ng-container *luPortal="description()" />
+		}
+	</div>
+	<ng-content select="[pageHeaderNavigation]" />
+</header>

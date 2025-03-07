@@ -27,14 +27,11 @@
 		}
 
 		.pageHeader-content-actions {
+			gap: var(--pr-t-spacings-150);
 			display: flex;
 			align-items: center;
 			flex-wrap: wrap;
 			row-gap: var(--pr-t-spacings-200);
-		}
-
-		.pageHeader-content-actions {
-			gap: var(--pr-t-spacings-150);
 
 			.button {
 				margin: 0;
@@ -50,12 +47,20 @@
 					flex: auto;
 				}
 			}
+
+			&:empty {
+				display: none;
+			}
 		}
 
 		.pageHeader-description {
 			max-inline-size: var(--components-pageHeader-description-max-width);
 			margin-block-start: var(--pr-t-spacings-100);
 			color: var(--palettes-neutral-700);
+		}
+
+		.pageHeader-description-paragraph {
+			margin: 0;
 		}
 	}
 }
