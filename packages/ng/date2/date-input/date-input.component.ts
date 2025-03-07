@@ -113,7 +113,12 @@ export class DateInputComponent extends AbstractDateComponent implements Control
 			}
 			return formatter.format(this.selectedDate());
 		}
-		return this.userTextInput();
+		const textInput = this.userTextInput();
+		// If we are initializing the component, we don't want to display the value
+		if (textInput === 'ɵ') {
+			return '';
+		}
+		return textInput;
 	});
 
 	// We need to use a "magic key" here to avoid sending a null value change on initialization
@@ -164,6 +169,7 @@ export class DateInputComponent extends AbstractDateComponent implements Control
 					this.currentDate.set(startOfDay(parsed));
 					this.tabbableDate.set(startOfDay(parsed));
 				} else if (!this.isFilterPill) {
+					console.log({ parsed });
 					this.selectedDate.set(parsed);
 				}
 			} else {
