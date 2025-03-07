@@ -1,17 +1,16 @@
 import { AsyncPipe, NgIf } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { getIntl } from '@lucca-front/ng/core';
-import { ILuOptionContext, LU_OPTION_CONTEXT } from '@lucca-front/ng/core-select';
+import { ILuOptionContext, LU_OPTION_CONTEXT, ɵLuOptionOutletDirective } from '@lucca-front/ng/core-select';
 import { LuUserDisplayPipe } from '@lucca-front/ng/user';
 import { map, startWith } from 'rxjs';
-import { LuOptionOutletDirective } from '../option/option-outlet.directive';
 import { LuCoreSelectUser, LuCoreSelectWithAdditionnalInformation } from './user-option.model';
 import { LU_CORE_SELECT_USER_TRANSLATIONS } from './user.translate';
 import { LuCoreSelectUsersDirective } from './users.directive';
 
 @Component({
 	selector: 'lu-user-option',
-	imports: [NgIf, AsyncPipe, LuUserDisplayPipe, LuOptionOutletDirective],
+	imports: [NgIf, AsyncPipe, LuUserDisplayPipe, ɵLuOptionOutletDirective],
 	template: `
 		<ng-container *ngIf="context.option$ | async as user">
 			<div *ngIf="userDirective.displayMeOption() && user.id === userDirective.currentUserId && hasEmptyClue$ | async; else notMe">
