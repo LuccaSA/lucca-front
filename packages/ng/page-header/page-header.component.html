@@ -2,7 +2,17 @@
 	<ng-content select="[pageHeaderBreadcrumbs]" />
 	<div class="pageHeader-content">
 		<div class="pageHeader-content-title">
-			<ng-content />
+			<div class="pageHeader-content-title-back">
+				<ng-content select="[pageHeaderBackAction]" />
+			</div>
+			@if (labelIsString()) {
+			<h1 class="pageHeader-content-title-content"><ng-container *luPortal="label()" /></h1>
+			} @else {
+			<ng-container *luPortal="label()" />
+			}
+			<div class="pageHeader-content-title-actions">
+				<ng-content select="[pageHeaderTitleActions]" />
+			</div>
 		</div>
 		<div class="pageHeader-content-actions">
 			<ng-content select="[pageHeaderActions]" />

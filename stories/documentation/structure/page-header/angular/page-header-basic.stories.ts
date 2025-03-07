@@ -18,6 +18,10 @@ export default {
 			control: 'text',
 			if: { arg: 'descriptionPortalContent', truthy: false },
 		},
+		label: {
+			control: 'text',
+			if: { arg: 'labelPortalContent', truthy: false },
+		},
 	},
 	decorators: [
 		moduleMetadata({
@@ -39,7 +43,21 @@ export default {
 		}),
 	],
 	render: (args, { argTypes }) => {
-		const { descriptionPortalContent, breadcrumbs, actions, navigation, ...otherArgs } = args;
+		const { descriptionPortalContent, labelPortalContent, breadcrumbs, actions, navigation, backAction, titleActions, ...otherArgs } = args;
+		const titleActionsContainer = titleActions
+			? `<ng-container pageHeaderTitleActions>
+	<button type="button" luButton="text" luTooltip="Modifier" luTooltipOnlyForDisplay><lu-icon icon="officePen" alt="Modifier" /></button>
+	<button type="button" luButton="text" luTooltip="Copier" luTooltipOnlyForDisplay><lu-icon icon="fileCopy" alt="Copier" /></button>
+	<button type="button" luButton="text" luTooltip="Supprimer" luTooltipOnlyForDisplay><lu-icon icon="trashDelete" alt="Supprimer" /></button>
+</ng-container>`
+			: ``;
+		const backActionContainer = backAction
+			? `<ng-container pageHeaderBackAction>
+		<a href="#" luButton="text">
+			<lu-icon icon="arrowLeft" alt="Retour" />
+		</a>
+</ng-container>`
+			: ``;
 		const navigationContainer = navigation
 			? `<ng-container pageHeaderNavigation>
 	<lu-horizontal-navigation >
@@ -88,7 +106,8 @@ export default {
 	</ng-container>`
 			: ``;
 		const desc = descriptionPortalContent ? `[description]="description"` : ``;
-		const template = descriptionPortalContent
+		const title = labelPortalContent ? `[label]="label"` : ``;
+		const templateDescription = descriptionPortalContent
 			? `<ng-template #description>
 	<p>
 		Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac justo scelerisque, blandit nibh quis, imperdiet justo.
@@ -97,17 +116,20 @@ export default {
 	</p>
 </ng-template>`
 			: ``;
+		const templateLabel = labelPortalContent
+			? `<ng-template #label><h1 luTooltip="Tooltip">
+		H1. Page title
+</h1>
+</ng-template>`
+			: ``;
 		return {
 			template: `
-			${template}
-<lu-page-header ${desc} ${generateInputs(otherArgs, argTypes)}>
+${templateDescription}
+${templateLabel}
+<lu-page-header ${desc} ${title} ${generateInputs(otherArgs, argTypes)}>
 	${breadcrumbsContainer}
-	<h1>H1. Page title</h1>
-	<div>
-		<button type="button" luButton="text" luTooltip="Modifier" luTooltipOnlyForDisplay><lu-icon icon="officePen" alt="Modifier" /></button>
-		<button type="button" luButton="text" luTooltip="Copier" luTooltipOnlyForDisplay><lu-icon icon="fileCopy" alt="Copier" /></button>
-		<button type="button" luButton="text" luTooltip="Supprimer" luTooltipOnlyForDisplay><lu-icon icon="trashDelete" alt="Supprimer" /></button>
-	</div>
+	${backActionContainer}
+	${titleActionsContainer}
 	${actionsContainer}
 	${navigationContainer}
 </lu-page-header>
@@ -118,10 +140,14 @@ export default {
 
 export const Basic = {
 	args: {
-		descriptionPortalContent: false,
+		label: 'H1. Page title',
+		labelPortalContent: false,
 		description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac justo scelerisque, blandit nibh quis, imperdiet justo. Nullam condimentum nulla et neque ultricies bibendum.',
+		descriptionPortalContent: false,
 		breadcrumbs: false,
 		actions: false,
+		titleActions: false,
 		navigation: false,
+		backAction: false,
 	},
 };

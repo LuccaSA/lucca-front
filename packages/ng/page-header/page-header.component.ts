@@ -11,8 +11,10 @@ import { PortalContent, PortalDirective } from '@lucca-front/ng/core';
 })
 export class PageHeaderComponent {
 	description = input<PortalContent | null>(null);
+	label = input<PortalContent | null>(null);
 
 	descriptionIsString = computed(() => this.isStringPortalContent(this.description()));
+	labelIsString = computed(() => this.isStringPortalContent(this.label()));
 
 	public isStringPortalContent(message: PortalContent): message is string {
 		return typeof message === 'string';
