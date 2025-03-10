@@ -5,7 +5,7 @@ interface PageHeaderBasicStory {
 }
 
 export default {
-	title: 'Documentation/Structure/PageHeader/Basic',
+	title: 'Documentation/Structure/PageHeader/HTML&CSS/Basic',
 	argTypes: {
 		sticky: {
 			control: {

@@ -7,7 +7,7 @@ interface FooterBasicStory {
 }
 
 export default {
-	title: 'Documentation/Structure/Footer/Basic',
+	title: 'Documentation/Structure/Footer/HTML&CSS/Basic',
 	argTypes: {
 		sticky: {
 			control: {

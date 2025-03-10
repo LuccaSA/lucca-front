@@ -1,6 +1,6 @@
 import { Meta, StoryFn } from '@storybook/angular';
 
-interface MenuCountStory {
+interface HorizontalNavigationCountStory {
 	noBorder: boolean;
 	header: boolean;
 	s: boolean;
@@ -9,7 +9,7 @@ interface MenuCountStory {
 }
 
 export default {
-	title: 'Documentation/Navigation/Menu/Count',
+	title: 'Documentation/Navigation/HorizontalNavigation/Count',
 	argTypes: {
 		noBorder: {
 			control: {
@@ -40,30 +40,30 @@ export default {
 	},
 } as Meta;
 
-function getTemplate(args: MenuCountStory): string {
+function getTemplate(args: HorizontalNavigationCountStory): string {
 	const noBorder = args.noBorder ? `mod-noBorder` : '';
 	const header = args.header ? `mod-header` : '';
 	const s = args.s ? `mod-S` : '';
 	const vertical = args.vertical ? `mod-vertical` : '';
 	if (args.disabled)
 		return `
-	<nav class="menu ${s} ${noBorder} ${header} ${vertical}">
-		<ul class="menu-list">
-			<li class="menu-list-item">
-				<a href="#" class="menu-list-item-action" aria-current="page">
-					Menu
+	<nav class="horizontalNavigation ${s} ${noBorder} ${header} ${vertical}">
+		<ul class="horizontalNavigation-list">
+			<li class="horizontalNavigation-list-item">
+				<a href="#" class="horizontalNavigation-list-item-action" aria-current="page">
+					Page
 					<span class="numericBadge">9</span>
 				</a>
 			</li>
-			<li class="menu-list-item">
-				<a href="#" class="menu-list-item-action">
-					Menu
+			<li class="horizontalNavigation-list-item">
+				<a href="#" class="horizontalNavigation-list-item-action">
+					Page
 					<span class="numericBadge">9</span>
 				</a>
 			</li>
-			<li class="menu-list-item">
-				<a class="menu-list-item-action is-disabled">
-					Menu
+			<li class="horizontalNavigation-list-item">
+				<a class="horizontalNavigation-list-item-action is-disabled">
+					Page
 					<span class="numericBadge">9</span>
 				</a>
 			</li>
@@ -72,23 +72,23 @@ function getTemplate(args: MenuCountStory): string {
 	`;
 	else {
 		return `
-	<nav class="menu ${s} ${noBorder} ${header} ${vertical}">
-		<ul class="menu-list">
-			<li class="menu-list-item">
-				<a href="#" class="menu-list-item-action" aria-current="page">
-					Menu
+	<nav class="horizontalNavigation ${s} ${noBorder} ${header} ${vertical}">
+		<ul class="horizontalNavigation-list">
+			<li class="horizontalNavigation-list-item">
+				<a href="#" class="horizontalNavigation-list-item-action" aria-current="page">
+					Page
 					<span class="numericBadge">9</span>
 				</a>
 			</li>
-			<li class="menu-list-item">
-				<a href="#" class="menu-list-item-action">
-					Menu
+			<li class="horizontalNavigation-list-item">
+				<a href="#" class="horizontalNavigation-list-item-action">
+					Page
 					<span class="numericBadge">9</span>
 				</a>
 			</li>
-			<li class="menu-list-item">
-				<a href="#" class="menu-list-item-action">
-					Menu
+			<li class="horizontalNavigation-list-item">
+				<a href="#" class="horizontalNavigation-list-item-action">
+					Page
 					<span class="numericBadge">9</span>
 				</a>
 			</li>
@@ -98,7 +98,7 @@ function getTemplate(args: MenuCountStory): string {
 	}
 }
 
-const Template: StoryFn<MenuCountStory> = (args) => ({
+const Template: StoryFn<HorizontalNavigationCountStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 });

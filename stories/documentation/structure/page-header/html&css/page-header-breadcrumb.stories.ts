@@ -1,11 +1,11 @@
 import { Meta, StoryFn } from '@storybook/angular';
 
-interface PageHeaderMenuStory {
+interface PageHeaderBreadcrumbStory {
 	sticky: boolean;
 }
 
 export default {
-	title: 'Documentation/Structure/PageHeader/Menu',
+	title: 'Documentation/Structure/PageHeader/HTML&CSS/Breadcrumb',
 	argTypes: {
 		sticky: {
 			control: {
@@ -15,11 +15,19 @@ export default {
 	},
 } as Meta;
 
-function getTemplate(args: PageHeaderMenuStory): string {
+function getTemplate(args: PageHeaderBreadcrumbStory): string {
 	const sticky = args.sticky ? `mod-sticky` : '';
 
 	return `
-	<header class="pageHeader mod-withMenu">
+	<header class="pageHeader mod-withBreadcrumbs ${sticky}">
+		<nav class="breadcrumbs" aria-describedby="breadcrumbs-title">
+			<p id="breadcrumbs-title" class="u-mask">Breadcrumbs</p>
+			<ol class="breadcrumbs-list">
+				<li class="breadcrumbs-list-item"><a class="breadcrumbs-list-item-action">Page 0</a></li>
+				<li class="breadcrumbs-list-item"><a class="breadcrumbs-list-item-action">Page 1</a></li>
+				<li class="breadcrumbs-list-item"><span aria-current="page" class="breadcrumbs-list-item-action">Page 2</span></li>
+			</ol>
+		</nav>
 		<div class="pageHeader-content">
 			<div class="pageHeader-content-title">
 				<h1 class="pr-u-margin0">H1. Page title</h1>
@@ -58,43 +66,14 @@ function getTemplate(args: PageHeaderMenuStory): string {
 				<a target="_blank">Lien<span aria-hidden="true" class="lucca-icon icon-arrowExternal mod-XS pr-u-marginInlineStart50"></span></a>.
 			</p>
 		</div>
-		<nav class="menu">
-			<ul class="menu-list">
-				<li class="menu-list-item">
-					<a
-						class="menu-list-item-action"
-						href="#"
-						aria-current="page"
-					>
-						Tab
-					</a>
-				</li>
-				<li class="menu-list-item">
-					<a
-						class="menu-list-item-action"
-						href="#"
-					>
-						Tab
-					</a>
-				</li>
-				<li class="menu-list-item">
-					<a
-						class="menu-list-item-action"
-						href="#"
-					>
-						Tab
-					</a>
-				</li>
-			</ul>
-		</nav>
 	</header>
 	`;
 }
 
-const Template: StoryFn<PageHeaderMenuStory> = (args) => ({
+const Template: StoryFn<PageHeaderBreadcrumbStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const MenuPageHeader = Template.bind({});
-MenuPageHeader.args = { sticky: false };
+export const BreadcrumbPageHeader = Template.bind({});
+BreadcrumbPageHeader.args = { sticky: false };

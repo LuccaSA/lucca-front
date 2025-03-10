@@ -1,7 +1,7 @@
 @use '@lucca-front/scss/src/components/numericBadge/exports' as numericBadge;
 
 @mixin active {
-	--components-menu-listItemActionColor: var(--palettes-700, var(--palettes-product-700));
+	--components-horizontalNavigation-listItemActionColor: var(--palettes-700, var(--palettes-product-700));
 
 	// .label is deprecated
 	.label {
@@ -10,12 +10,12 @@
 	}
 
 	&::after {
-		--components-menu-listItemActionTransform: scale(1);
+		--components-horizontalNavigation-listItemActionTransform: scale(1);
 	}
 
 	&:focus-visible {
 		&::after {
-			--components-menu-listItemActionTransform: scale(0.75, 1);
+			--components-horizontalNavigation-listItemActionTransform: scale(0.75, 1);
 		}
 	}
 
@@ -39,6 +39,6 @@
 
 @mixin activeVertical {
 	&::after {
-		--components-menu-listItemActionTransform: scale(1);
+		--components-horizontalNavigation-listItemActionTransform: scale(1);
 	}
 }

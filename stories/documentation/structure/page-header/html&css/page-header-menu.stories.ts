@@ -1,11 +1,11 @@
 import { Meta, StoryFn } from '@storybook/angular';
 
-interface PageHeaderBreadcrumbStory {
+interface PageHeaderHorizontalNavigationStory {
 	sticky: boolean;
 }
 
 export default {
-	title: 'Documentation/Structure/PageHeader/Breadcrumb',
+	title: 'Documentation/Structure/PageHeader/HTML&CSS/HorizontalNavigation',
 	argTypes: {
 		sticky: {
 			control: {
@@ -15,19 +15,11 @@ export default {
 	},
 } as Meta;
 
-function getTemplate(args: PageHeaderBreadcrumbStory): string {
+function getTemplate(args: PageHeaderHorizontalNavigationStory): string {
 	const sticky = args.sticky ? `mod-sticky` : '';
 
 	return `
-	<header class="pageHeader mod-withBreadcrumbs ${sticky}">
-		<nav class="breadcrumbs" aria-describedby="breadcrumbs-title">
-			<p id="breadcrumbs-title" class="u-mask">Breadcrumbs</p>
-			<ol class="breadcrumbs-list">
-				<li class="breadcrumbs-list-item"><a class="breadcrumbs-list-item-action">Page 0</a></li>
-				<li class="breadcrumbs-list-item"><a class="breadcrumbs-list-item-action">Page 1</a></li>
-				<li class="breadcrumbs-list-item"><span aria-current="page" class="breadcrumbs-list-item-action">Page 2</span></li>
-			</ol>
-		</nav>
+	<header class="pageHeader mod-withHorizontalNavigation ${sticky}">
 		<div class="pageHeader-content">
 			<div class="pageHeader-content-title">
 				<h1 class="pr-u-margin0">H1. Page title</h1>
@@ -66,14 +58,43 @@ function getTemplate(args: PageHeaderBreadcrumbStory): string {
 				<a target="_blank">Lien<span aria-hidden="true" class="lucca-icon icon-arrowExternal mod-XS pr-u-marginInlineStart50"></span></a>.
 			</p>
 		</div>
+		<nav class="horizontalNavigation">
+			<ul class="horizontalNavigation-list">
+				<li class="horizontalNavigation-list-item">
+					<a
+						class="horizontalNavigation-list-item-action"
+						href="#"
+						aria-current="page"
+					>
+						Page
+					</a>
+				</li>
+				<li class="horizontalNavigation-list-item">
+					<a
+						class="horizontalNavigation-list-item-action"
+						href="#"
+					>
+						Page
+					</a>
+				</li>
+				<li class="horizontalNavigation-list-item">
+					<a
+						class="horizontalNavigation-list-item-action"
+						href="#"
+					>
+						Page
+					</a>
+				</li>
+			</ul>
+		</nav>
 	</header>
 	`;
 }
 
-const Template: StoryFn<PageHeaderBreadcrumbStory> = (args) => ({
+const Template: StoryFn<PageHeaderHorizontalNavigationStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const BreadcrumbPageHeader = Template.bind({});
-BreadcrumbPageHeader.args = { sticky: false };
+export const HorizontalNavigationPageHeader = Template.bind({});
+HorizontalNavigationPageHeader.args = { sticky: false };

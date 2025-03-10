@@ -5,7 +5,7 @@ interface PageHeaderBackStory {
 }
 
 export default {
-	title: 'Documentation/Structure/PageHeader/Back',
+	title: 'Documentation/Structure/PageHeader/HTML&CSS/Back',
 	argTypes: {},
 } as Meta;
 
