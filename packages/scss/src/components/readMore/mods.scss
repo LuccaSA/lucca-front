@@ -1,0 +1,9 @@
+@use '@lucca-front/scss/src/components/button/exports' as button;
+
+@mixin onlyIcon() {
+	--components-readMore-textFlow-lastChild-paddingInlineEnd: var(--pr-t-spacings-300);
+
+	.readMore-button {
+		@include button.onlyIconXS;
+	}
+}

@@ -1,0 +1,18 @@
+@use 'exports' as *;
+
+.readMore {
+	@include vars;
+	@include component;
+
+	&:has(.readMore-button[aria-expanded='true'], .readMore-textFlow:focus-within) {
+		@include expanded;
+	}
+
+	&:has(.readMore-button.mod-onlyIcon) {
+		@include onlyIcon;
+	}
+
+	&.is-disabled {
+		@include disabled;
+	}
+}
