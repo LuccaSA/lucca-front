@@ -1,0 +1,11 @@
+<div class="textField">
+	<div class="textField-input">
+		<div #content class="textField-input-value editor-content" contenteditable [attr.aria-placeholder]="placeholder()" luInput></div>
+		@if (currentCanShowPlaceholder()) {
+		<div aria-hidden="true" class="richtext-input-placeholder">{{ placeholder() }}</div>
+		}
+	</div>
+	<div class="editor-toolbar">
+		<ng-content />
+	</div>
+</div>
