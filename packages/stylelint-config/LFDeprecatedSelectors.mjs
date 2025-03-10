@@ -1,6 +1,7 @@
 export default [
 	{
 		// Any combination of .button and .mod-icon with any non-whitespace character between
+		// SEE https://regex101.com/r/6yQzje.
 		objectPattern: /(\.button|\.mod-icon)[\S]*(\.button|\.mod-icon)/,
 		versionDeprecated: '17.2.0',
 		versionDeleted: '19.1.0',
@@ -21,7 +22,7 @@ export default [
 		versionDeleted: '19.1.0',
 	},
 	{
-		objectPattern: /\.u-elevate*/,
+		objectPattern: /\.u-elevate.*/,
 		versionDeprecated: '19.1.0',
 		versionDeleted: '19.1.0',
 	},
@@ -63,5 +64,16 @@ export default [
 		objectPattern: ['.comment-content-textContainer', '.dialog-form', '.dialog-formOptional', '.mod-withMenuCompact'],
 		versionDeprecated: '18.3.0',
 		versionDeleted: '20.1.0',
+	},
+	{
+		objectPattern: /\.lu-dropdown-(content|options|options-item|options-item-action)/,
+		versionDeprecated: '19.2.0',
+		versionDeleted: '21.1.0',
+	},
+	{
+		// SEE https://regex101.com/r/1Nv5vW.
+		objectPattern: /\.filterBar(?!Deprecated)-?/,
+		versionDeprecated: '19.2.0',
+		versionDeleted: '21.1.0',
 	},
 ];
