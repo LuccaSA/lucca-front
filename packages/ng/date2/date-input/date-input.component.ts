@@ -28,7 +28,7 @@ import { AbstractDateComponent } from '../abstract-date-component';
 import { CalendarMode } from '../calendar2/calendar-mode';
 import { Calendar2Component } from '../calendar2/calendar2.component';
 import { CellStatus } from '../calendar2/cell-status';
-import { comparePeriods, startOfPeriod } from '../utils';
+import { comparePeriods, startOfPeriod, transformDateInputToDate, transformDateToDateISO } from '../utils';
 
 @Component({
 	selector: 'lu-date-input',
@@ -61,7 +61,7 @@ import { comparePeriods, startOfPeriod } from '../utils';
 })
 export class DateInputComponent extends AbstractDateComponent implements ControlValueAccessor, Validator, FilterPillInputComponent {
 	// CVA stuff
-	#onChange?: (value: Date) => void;
+	#onChange?: (value: Date | null) => void;
 
 	#luClass = inject(LuClass);
 
@@ -244,12 +244,13 @@ export class DateInputComponent extends AbstractDateComponent implements Control
 		}
 	}
 
-	validate(control: AbstractControl<Date, Date>): ValidationErrors {
+	validate(control: AbstractControl<Date | string | null>): ValidationErrors | null {
 		// null is not an error but means we'll skip everything else, we'll let the presence of a
 		// Validators.required (or not) decide if it's an error.
 		if (control.value === null || control.value === undefined) {
 			return null;
 		}
+		const date = transformDateInputToDate(control.value);
 		// try to parse the display value cause formControl.value is undefined if date is not parsable
 		try {
 			parse(this.displayValue(), this.dateFormat, startOfDay(new Date()));
@@ -258,30 +259,33 @@ export class DateInputComponent extends AbstractDateComponent implements Control
 			return { date: true };
 		}
 		// Check date validity
-		if (!this.isValidDate(control.value)) {
+		if (!this.isValidDate(date)) {
 			return { date: true };
 		}
 		// Check min and max
-		if (this.min() && isBefore(control.value, this.min())) {
+		if (this.min() && isBefore(date, this.min())) {
 			return { min: true };
-		} else if (this.max() && isAfter(control.value, this.max())) {
+		} else if (this.max() && isAfter(date, this.max())) {
 			return { max: true };
 		}
 		// Everything is valid
 		return null;
 	}
 
-	writeValue(date: Date): void {
-		if (date) {
-			const start = startOfDay(date);
+	writeValue(date: Date | string | null): void {
+		if (date != null) {
+			const _date = transformDateInputToDate(date);
+			const start = startOfDay(_date);
 			this.dateFromWriteValue.set(start);
 			this.selectedDate.set(start);
 			this.currentDate.set(start);
 		}
 	}
 
-	registerOnChange(fn: (value: Date) => void): void {
-		this.#onChange = fn;
+	registerOnChange(fn: (value: Date | string | null) => void): void {
+		this.#onChange = (date: Date | null) => {
+			fn(date && this.inDateISOFormat() ? transformDateToDateISO(date) : date);
+		};
 	}
 
 	override setDisabledState(isDisabled: boolean) {

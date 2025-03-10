@@ -18,6 +18,8 @@ release-drafter:
   releasedBranches:
     - "master"
   flavor: "condensed"
+  slackChannels:
+    - "#lib-front-verbose"
 auto-labels:
   enabled: true
   properties:
