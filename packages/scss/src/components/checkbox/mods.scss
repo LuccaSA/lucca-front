@@ -6,6 +6,7 @@
 
 @mixin S {
 	--components-checkbox-input-size: 1rem;
+
 	line-height: var(--sizes-S-lineHeight);
 
 	.checkbox-label {

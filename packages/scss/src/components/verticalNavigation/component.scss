@@ -7,6 +7,7 @@
 	@at-root ($atRoot) {
 		.verticalNavigation-sectionTitle {
 			@include title.h5;
+
 			color: var(--palettes-neutral-600);
 			padding-block: 0;
 			padding-inline: var(--components-verticalNavigation-horizontalPadding);
@@ -15,6 +16,7 @@
 
 		.verticalNavigation-list {
 			@include reset.list;
+
 			background-color: var(--pr-t-elevation-surface-raised);
 			margin-block-end: var(--pr-t-spacings-200);
 		}
@@ -26,6 +28,7 @@
 
 		.verticalNavigation-list-item-link {
 			@include reset.button;
+
 			display: flex;
 			padding-block: var(--pr-t-spacings-100);
 			padding-inline: var(--components-verticalNavigation-horizontalPadding);
@@ -38,11 +41,12 @@
 
 			&:hover {
 				--components-verticalNavigation-link-background: var(--palettes-neutral-50);
+
 				color: var(--components-verticalNavigation-link-color);
 			}
 
 			&:focus-visible {
-				@include a11y.focusVisible();
+				@include a11y.focusVisible;
 			}
 
 			&:active {

@@ -57,6 +57,7 @@
 
 			&::before {
 				@include icon.generate('drag');
+
 				vertical-align: top;
 			}
 		}

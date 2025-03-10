@@ -13,6 +13,7 @@
 	@at-root ($atRoot) {
 		.mobileNavigation-list {
 			@include reset.list;
+
 			display: flex;
 		}
 
@@ -34,7 +35,7 @@
 			text-decoration: none;
 
 			&:focus-visible {
-				@include a11y.focusVisible($offset: 0px);
+				@include a11y.focusVisible($offset: 0);
 			}
 
 			.lucca-icon {
@@ -50,6 +51,7 @@
 		.mobileNavigation-list-item-link-counter {
 			--components-numericBadge-background: var(--palettes-product-200);
 			--components-numericBadge-color: var(--palettes-product-800);
+
 			box-shadow: 0 0 0 2px var(--palettes-neutral-0);
 			position: absolute;
 			inset-inline-start: calc(50% + 5px);

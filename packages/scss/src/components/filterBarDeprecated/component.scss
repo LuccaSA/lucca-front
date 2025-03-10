@@ -51,14 +51,17 @@
 					display: none;
 				}
 			}
+
 			&[aria-expanded='true'] {
 				.filterBarDeprecated-footer-toggleButton-label {
 					@include a11y.mask;
 				}
+
 				.lucca-icon {
 					transform: rotate(180deg);
 				}
 			}
+
 			.lucca-icon {
 				transition: transform var(--commons-animations-durations-standard);
 			}
