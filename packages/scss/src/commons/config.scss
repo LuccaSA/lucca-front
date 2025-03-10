@@ -24,9 +24,13 @@ $palettesStates: 'critical', 'error', 'warning', 'success';
 $palettesDefault: 'brand', 'neutral', 'navigation';
 $palettesProduct: 'product';
 $palettesOtherProduct: () !default;
-$palettesDecorative: 'kiwi', 'lime', 'cucumber', 'mint', 'glacier', 'lagoon', 'blueberry', 'lavender', 'grape', 'watermelon', 'pumpkin',
-	'pineapple' !default;
+$palettesDecorative:
+	'kiwi', 'lime', 'cucumber', 'mint', 'glacier', 'lagoon', 'blueberry', 'lavender', 'grape', 'watermelon', 'pumpkin', 'pineapple' !default;
 $palettesDeprecated: ('lucca', 'grey', 'primary', 'secondary') !default;
+
+@if $palettesOtherProduct == 'all' {
+	$palettesOtherProduct: ('pagga', 'poplee', 'coreHR', 'timmi', 'cleemy', 'cc');
+}
 
 $palettesAll: list.join(
 	list.join(
