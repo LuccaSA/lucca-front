@@ -24,7 +24,7 @@ export default {
 	render: (args, { argTypes }) => {
 		const { lineClamp, label, onlyIcon, ..._mainArgs } = args;
 
-		const inlineStyle = `[attr.style]="'--components-readMore-textFlow-lastChild-content: ${label};--components-readMore-lineClamp: ${lineClamp}'"`;
+		const inlineStyle = `[attr.style]="'--components-readMore-textFlow-lastChild-content: \\'${label}\\';--components-readMore-lineClamp: ${lineClamp}'"`;
 
 		const buttonLabel = onlyIcon ? `<span class="u-mask">${label}</span>` : label;
 
