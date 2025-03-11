@@ -24,15 +24,11 @@ function getTemplate(args: TextFlowBasicStory): string {
 	<p>Paragraph</p>
 	<h4>Heading 4</h4>
 	<ol>
-	<li>List item</li>
-	<li>List item</li>
-	<li>List item</li>
+		<li>List item</li>
+		<li>List item</li>
+		<li>List item</li>
 	</ol>
-</div>
-
-<!-- To tell the ui-diff tool that the page has finished rendering -->
-<span id="ready"></span>
-`;
+</div>`;
 }
 
 const Template: StoryFn<TextFlowBasicStory> = (args) => ({

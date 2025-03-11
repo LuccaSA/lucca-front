@@ -1,109 +1,110 @@
-<h1>Grids</h1>
-
-<!-- Basics -->
-<section class="contentSection">
-	<h2>Grid</h2>
-	<div class="grid">
-		<div class="grid-column" style="--grid-colspan: 6">
-			<div class="gridDemo">--grid-colspan: 6</div>
-		</div>
-		<div class="grid-column" style="--grid-colspan: 6">
-			<div class="gridDemo">--grid-colspan: 6</div>
-		</div>
-	</div>
-	<div class="grid">
-		<div class="grid-column" style="--grid-colspan: 12; --grid-colspanAtMediaMinXS: 4">
-			<div class="gridDemo">--grid-colspan: 12; --grid-colspanAtMediaMinXS: 4</div>
-		</div>
-		<div class="grid-column" style="--grid-colspan: 12; --grid-colspanAtMediaMinXS: 8">
-			<div class="gridDemo">--grid-colspan: 12; --grid-colspanAtMediaMinXS: 8</div>
-		</div>
-	</div>
-	<div class="grid">
-		<div class="grid-column" style="--grid-colspan: 12; --grid-colspanAtMediaMinS: 7">
-			<div class="gridDemo">grid-colspanAtMediaMinS: 7</div>
-		</div>
-		<div class="grid-column" style="--grid-colspan: 12; --grid-colspanAtMediaMinS: 5">
-			<div class="gridDemo">grid-colspanAtMediaMinS: 5</div>
-		</div>
-	</div>
-	<div class="grid">
-		<div class="grid-column" style="--grid-colspan: 12; --grid-colspanAtMediaMinS: 6; --grid-colspanAtMediaMinM: 3">
-			<div class="gridDemo">--grid-colspan: 12; --grid-colspanAtMediaMinS: 6; --grid-colspanAtMediaMinM: 3</div>
-		</div>
-		<div class="grid-column" style="--grid-colspan: 12; --grid-colspanAtMediaMinS: 6; --grid-colspanAtMediaMinM: 3">
-			<div class="gridDemo">--grid-colspan: 12; --grid-colspanAtMediaMinS: 6; --grid-colspanAtMediaMinM: 3</div>
-		</div>
-		<div class="grid-column" style="--grid-colspan: 12; --grid-colspanAtMediaMinS: 6; --grid-colspanAtMediaMinM: 3">
-			<div class="gridDemo">--grid-colspan: 12; --grid-colspanAtMediaMinS: 6; --grid-colspanAtMediaMinM: 3</div>
-		</div>
-		<div class="grid-column" style="--grid-colspan: 12; --grid-colspanAtMediaMinS: 6; --grid-colspanAtMediaMinM: 3">
-			<div class="gridDemo">--grid-colspan: 12; --grid-colspanAtMediaMinS: 6; --grid-colspanAtMediaMinM: 3</div>
-		</div>
-	</div>
-</section>
-
-<!-- Auto width -->
-<section class="contentSection">
-	<h2>Auto width</h2>
-	<div class="grid mod-auto">
-		<div class="grid-column"><div class="gridDemo">grid mod-auto</div></div>
-		<div class="grid-column"><div class="gridDemo">grid mod-auto</div></div>
-		<div class="grid-column"><div class="gridDemo">grid mod-auto</div></div>
-		<div class="grid-column"><div class="gridDemo">grid mod-auto</div></div>
-		<div class="grid-column"><div class="gridDemo">grid mod-auto</div></div>
-	</div>
-</section>
-<!-- Horizontal alignment -->
-<section class="contentSection">
-	<h2>Horizontal alignment</h2>
-	<p>You can align the content horizontaly inside the column:</p>
-	<div class="grid" style="--grid-columns: 1">
-		<div class="grid-column" style="--grid-justify: start"><div class="gridDemo"></div></div>
-	</div>
-	<div class="grid" style="--grid-columns: 1">
-		<div class="grid-column" style="--grid-justify: center"><div class="gridDemo"></div></div>
-	</div>
-	<div class="grid" style="--grid-columns: 1">
-		<div class="grid-column" style="--grid-justify: end"><div class="gridDemo"></div></div>
-	</div>
-</section>
-
-<!-- Vertical alignment -->
-<section class="contentSection">
-	<h2>Vertical alignment</h2>
-	<p>You can align columns verticaly inside the grid:</p>
-	<div class="grid mod-topAtMediaMinXXXS">
-		<div class="grid-6atMediaMinXXXS"><div class="gridDemo" style="height: 100px"></div></div>
-		<div class="grid-6atMediaMinXXXS"><div class="gridDemo"></div></div>
-	</div>
-	<div class="grid mod-middleAtMediaMinXXXS">
-		<div class="grid-6atMediaMinXXXS"><div class="gridDemo" style="height: 100px"></div></div>
-		<div class="grid-6atMediaMinXXXS"><div class="gridDemo"></div></div>
-	</div>
-	<div class="grid mod-bottomAtMediaMinXXXS">
-		<div class="grid-6atMediaMinXXXS"><div class="gridDemo" style="height: 100px"></div></div>
-		<div class="grid-6atMediaMinXXXS"><div class="gridDemo"></div></div>
-	</div>
-</section>
-
-<!-- Reorder -->
-<section class="contentSection">
-	<h2>Reorder</h2>
-	<p>You can reorder columns with utilities:</p>
-	<div class="grid mod-dense" style="--grid-columns: 4">
-		<div class="grid-column" style="--grid-column: 2"><div class="gridDemo">1 --grid-column: 2</div></div>
-		<div class="grid-column" style="--grid-column: 3"><div class="gridDemo">2 --grid-column: 3</div></div>
-		<div class="grid-column" style="--grid-column: 1"><div class="gridDemo">3 --grid-column: 1</div></div>
-		<div class="grid-column"><div class="gridDemo">4</div></div>
-	</div>
-	<div class="grid mod-dense" style="--grid-columns: 4">
-		<div class="grid-column"><div class="gridDemo">1</div></div>
-		<div class="grid-column" style="--grid-columnAtMediaMinM: 4"><div class="gridDemo">2 --grid-columnAtMediaMinM: 4</div></div>
-		<div class="grid-column"><div class="gridDemo">3</div></div>
-		<div class="grid-column"><div class="gridDemo">4</div></div>
-	</div>
-</section>
+<table class="demo-QAtable">
+	<tbody>
+		<tr>
+			<td>Default</td>
+			<td>
+				<div class="grid">
+					<div class="grid-column" style="--grid-colspan: 6">
+						<div class="gridDemo">--grid-colspan: 6</div>
+					</div>
+					<div class="grid-column" style="--grid-colspan: 6">
+						<div class="gridDemo">--grid-colspan: 6</div>
+					</div>
+				</div>
+				<div class="grid">
+					<div class="grid-column" style="--grid-colspan: 12; --grid-colspanAtMediaMinXS: 4">
+						<div class="gridDemo">--grid-colspan: 12; --grid-colspanAtMediaMinXS: 4</div>
+					</div>
+					<div class="grid-column" style="--grid-colspan: 12; --grid-colspanAtMediaMinXS: 8">
+						<div class="gridDemo">--grid-colspan: 12; --grid-colspanAtMediaMinXS: 8</div>
+					</div>
+				</div>
+				<div class="grid">
+					<div class="grid-column" style="--grid-colspan: 12; --grid-colspanAtMediaMinS: 7">
+						<div class="gridDemo">grid-colspanAtMediaMinS: 7</div>
+					</div>
+					<div class="grid-column" style="--grid-colspan: 12; --grid-colspanAtMediaMinS: 5">
+						<div class="gridDemo">grid-colspanAtMediaMinS: 5</div>
+					</div>
+				</div>
+				<div class="grid">
+					<div class="grid-column" style="--grid-colspan: 12; --grid-colspanAtMediaMinS: 6; --grid-colspanAtMediaMinM: 3">
+						<div class="gridDemo">--grid-colspan: 12; --grid-colspanAtMediaMinS: 6; --grid-colspanAtMediaMinM: 3</div>
+					</div>
+					<div class="grid-column" style="--grid-colspan: 12; --grid-colspanAtMediaMinS: 6; --grid-colspanAtMediaMinM: 3">
+						<div class="gridDemo">--grid-colspan: 12; --grid-colspanAtMediaMinS: 6; --grid-colspanAtMediaMinM: 3</div>
+					</div>
+					<div class="grid-column" style="--grid-colspan: 12; --grid-colspanAtMediaMinS: 6; --grid-colspanAtMediaMinM: 3">
+						<div class="gridDemo">--grid-colspan: 12; --grid-colspanAtMediaMinS: 6; --grid-colspanAtMediaMinM: 3</div>
+					</div>
+					<div class="grid-column" style="--grid-colspan: 12; --grid-colspanAtMediaMinS: 6; --grid-colspanAtMediaMinM: 3">
+						<div class="gridDemo">--grid-colspan: 12; --grid-colspanAtMediaMinS: 6; --grid-colspanAtMediaMinM: 3</div>
+					</div>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Auto width</td>
+			<td>
+				<div class="grid mod-auto">
+					<div class="grid-column"><div class="gridDemo">grid mod-auto</div></div>
+					<div class="grid-column"><div class="gridDemo">grid mod-auto</div></div>
+					<div class="grid-column"><div class="gridDemo">grid mod-auto</div></div>
+					<div class="grid-column"><div class="gridDemo">grid mod-auto</div></div>
+					<div class="grid-column"><div class="gridDemo">grid mod-auto</div></div>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Horizontal alignement</td>
+			<td>
+				<div class="grid" style="--grid-columns: 1">
+					<div class="grid-column" style="--grid-justify: start"><div class="gridDemo"></div></div>
+				</div>
+				<div class="grid" style="--grid-columns: 1">
+					<div class="grid-column" style="--grid-justify: center"><div class="gridDemo"></div></div>
+				</div>
+				<div class="grid" style="--grid-columns: 1">
+					<div class="grid-column" style="--grid-justify: end"><div class="gridDemo"></div></div>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Vertical alignment</td>
+			<td>
+				<div class="grid mod-topAtMediaMinXXXS">
+					<div class="grid-6atMediaMinXXXS"><div class="gridDemo" style="height: 100px"></div></div>
+					<div class="grid-6atMediaMinXXXS"><div class="gridDemo"></div></div>
+				</div>
+				<div class="grid mod-middleAtMediaMinXXXS">
+					<div class="grid-6atMediaMinXXXS"><div class="gridDemo" style="height: 100px"></div></div>
+					<div class="grid-6atMediaMinXXXS"><div class="gridDemo"></div></div>
+				</div>
+				<div class="grid mod-bottomAtMediaMinXXXS">
+					<div class="grid-6atMediaMinXXXS"><div class="gridDemo" style="height: 100px"></div></div>
+					<div class="grid-6atMediaMinXXXS"><div class="gridDemo"></div></div>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>Reorder</td>
+			<td>
+				<div class="grid mod-dense" style="--grid-columns: 4">
+					<div class="grid-column" style="--grid-column: 2"><div class="gridDemo">1 --grid-column: 2</div></div>
+					<div class="grid-column" style="--grid-column: 3"><div class="gridDemo">2 --grid-column: 3</div></div>
+					<div class="grid-column" style="--grid-column: 1"><div class="gridDemo">3 --grid-column: 1</div></div>
+					<div class="grid-column"><div class="gridDemo">4</div></div>
+				</div>
+				<div class="grid mod-dense" style="--grid-columns: 4">
+					<div class="grid-column"><div class="gridDemo">1</div></div>
+					<div class="grid-column" style="--grid-columnAtMediaMinM: 4"><div class="gridDemo">2 --grid-columnAtMediaMinM: 4</div></div>
+					<div class="grid-column"><div class="gridDemo">3</div></div>
+					<div class="grid-column"><div class="gridDemo">4</div></div>
+				</div>
+			</td>
+		</tr>
+	</tbody>
+</table>
 
 <!-- To tell the ui-diff tool that the page has finished rendering -->
 <span id="ready"></span>

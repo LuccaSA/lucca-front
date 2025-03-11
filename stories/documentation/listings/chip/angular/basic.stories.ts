@@ -5,7 +5,7 @@ interface ChipBasicStory {
 	content: string;
 	unkillable: boolean;
 	disabled: boolean;
-	paletteProduct: boolean;
+	product: boolean;
 }
 
 export default {
@@ -26,7 +26,7 @@ export default {
 				type: 'boolean',
 			},
 		},
-		paletteProduct: {
+		product: {
 			control: {
 				type: 'boolean',
 			},
@@ -40,10 +40,10 @@ export default {
 } as Meta;
 
 function getTemplate(args: ChipBasicStory): string {
-	const unkillable = args.unkillable ? `unkillable` : ``;
-	const paletteProduct = args.paletteProduct ? `palette="product"` : ``;
-	const disabled = args.disabled ? `disabled` : ``;
-	return `<lu-chip ${disabled} ${unkillable} ${paletteProduct}>
+	const unkillable = args.unkillable ? ` unkillable` : ``;
+	const product = args.product ? ` palette="product"` : ``;
+	const disabled = args.disabled ? ` disabled` : ``;
+	return `<lu-chip${disabled}${unkillable}${product}>
 	${args.content}
 </lu-chip>
 `;
@@ -56,8 +56,8 @@ const Template: StoryFn<ChipBasicStory> = (args) => ({
 
 export const Basic = Template.bind({});
 Basic.args = {
-	content: 'Lorem',
+	content: 'Label',
 	unkillable: false,
 	disabled: false,
-	paletteProduct: false,
+	product: false,
 };

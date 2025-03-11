@@ -25,6 +25,13 @@ export default {
 				type: 'select',
 			},
 		},
+		width: {
+			options: [null, 20, 30, 40, 50, 60],
+			control: {
+				type: 'select',
+			},
+			description: '[v19.2]',
+		},
 		inlineMessageState: {
 			options: ['default', 'success', 'warning', 'error'],
 			control: {
@@ -47,7 +54,7 @@ export default {
 
 export const Basic: StoryObj<LuMultiSelectInputComponent<unknown> & FormFieldComponent & { required: boolean }> = {
 	render: (args, { argTypes }) => {
-		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, ...inputArgs } = args;
+		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, width, ...inputArgs } = args;
 		return {
 			props: { legumes: allLegumes, example: [] },
 			template: `<lu-form-field ${generateInputs(
@@ -58,6 +65,7 @@ export const Basic: StoryObj<LuMultiSelectInputComponent<unknown> & FormFieldCom
 					inlineMessage,
 					inlineMessageState,
 					size,
+					width,
 				},
 				argTypes,
 			)}>

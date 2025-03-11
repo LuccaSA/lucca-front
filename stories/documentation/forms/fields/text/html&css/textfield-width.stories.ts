@@ -21,7 +21,7 @@ function getTemplate(args: TextfieldWidthStory): string {
 			Helper text
 		</p>
 	</div>
-</div><br>
+</div>
 <div class="form-field mod-width30">
 	<label class="formLabel" id="ID30label" for="ID30">Label</label>
 	<div class="textField">
@@ -35,7 +35,7 @@ function getTemplate(args: TextfieldWidthStory): string {
 			Helper text
 		</p>
 	</div>
-</div><br>
+</div>
 <div class="form-field mod-width40">
 	<label class="formLabel" id="ID40label" for="ID40">Label</label>
 	<div class="textField">
@@ -49,7 +49,7 @@ function getTemplate(args: TextfieldWidthStory): string {
 			Helper text
 		</p>
 	</div>
-</div><br>
+</div>
 <div class="form-field mod-width50">
 	<label class="formLabel" id="ID50label" for="ID50">Label</label>
 	<div class="textField">
@@ -63,7 +63,7 @@ function getTemplate(args: TextfieldWidthStory): string {
 			Helper text
 		</p>
 	</div>
-</div><br>
+</div>
 <div class="form-field mod-width60">
 	<label class="formLabel" id="ID60label" for="ID60">Label</label>
 	<div class="textField">

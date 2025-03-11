@@ -13,7 +13,7 @@ export default {
 	],
 	render: ({ luButton, ...inputs }, { argTypes }) => {
 		return {
-			template: `<button type="button" luButton${luButton !== '' ? `="${luButton}"` : ''}${generateInputs(inputs, argTypes)}>Button<lu-numeric-badge value="7" palette="product"></lu-numeric-badge></button>`,
+			template: `<button type="button" luButton${luButton !== '' ? `="${luButton}"` : ''}${generateInputs(inputs, argTypes)}>Button<lu-numeric-badge disableTooltip [value]="9999"></lu-numeric-badge></button>`,
 		};
 	},
 } as Meta;
@@ -33,7 +33,7 @@ export const Basic: StoryObj<ButtonComponent> = {
 			control: {
 				type: 'select',
 			},
-		}
+		},
 	},
 	args: {
 		block: false,

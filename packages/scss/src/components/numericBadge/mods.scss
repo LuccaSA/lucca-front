@@ -16,7 +16,7 @@
 
 @mixin inherit {
 	--components-numericBadge-background: var(--palettes-200, var(--palettes-product-200));
-	--components-numericBadge-color: var(--palettes-800, var(--palettes-product-700));
+	--components-numericBadge-color: var(--palettes-800, var(--palettes-product-800));
 }
 
 @mixin brand {

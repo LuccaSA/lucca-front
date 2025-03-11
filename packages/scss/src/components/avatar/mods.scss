@@ -53,6 +53,7 @@
 
 @mixin wrapperS {
 	--components-avatarWrapper-overlap: var(--pr-t-spacings-50);
+	--components-avatarWrapper-rowGap: var(--pr-t-spacings-25);
 
 	.avatar,
 	.avatarWrapper-item-action {
@@ -62,6 +63,7 @@
 
 @mixin wrapperXS {
 	--components-avatarWrapper-overlap: var(--pr-t-spacings-50);
+	--components-avatarWrapper-rowGap: var(--pr-t-spacings-25);
 
 	.avatar,
 	.avatarWrapper-item-action {

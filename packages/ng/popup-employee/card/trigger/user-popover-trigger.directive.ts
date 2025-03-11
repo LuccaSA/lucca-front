@@ -11,10 +11,6 @@ import { Observable } from 'rxjs';
 import { USER_POPOVER_IS_ACTIVATED } from '../../user-popover.providers';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
-/**
- * This directive is intended to be used in conjunction with an lu-dropdown tag.  It is
- * responsible for toggling the display of the provided dropdown instance.
- */
 @Directive({
 	// eslint-disable-next-line @angular-eslint/directive-selector
 	selector: '[luUserPopover]',

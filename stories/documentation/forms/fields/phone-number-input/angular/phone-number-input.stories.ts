@@ -1,10 +1,10 @@
+import { LOCALE_ID } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { PhoneNumberInputComponent } from '@lucca-front/ng/forms/phone-number-input';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { cleanupTemplate, generateInputs } from 'stories/helpers/stories';
-import { LOCALE_ID } from '@angular/core';
 
 export default {
 	title: 'Documentation/Forms/Fields/PhoneNumberField/Angular',
@@ -66,6 +66,9 @@ export const Basic: StoryObj<PhoneNumberInputComponent & FormFieldComponent & { 
 			control: {
 				type: 'select',
 			},
+		},
+		noAutoPlaceholder: {
+			description: '[v19.2]',
 		},
 	},
 	args: {

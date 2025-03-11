@@ -50,10 +50,11 @@ export default {
 	},
 } as Meta;
 
-export const Basic: StoryObj<TextareaInputComponent & { disabled: boolean; required: boolean } & FormFieldComponent> = {
+export const Basic: StoryObj<TextareaInputComponent & { disabled: boolean; required: boolean; value: string } & FormFieldComponent> = {
 	render: (args, { argTypes }) => {
-		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, counter, autoResize, autoResizeScrollIntoView, ...inputArgs } = args;
+		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, counter, autoResize, autoResizeScrollIntoView, value, ...inputArgs } = args;
 		return {
+			props: { example: value },
 			template: cleanupTemplate(`<lu-form-field ${generateInputs(
 				{
 					label,
@@ -68,8 +69,7 @@ export const Basic: StoryObj<TextareaInputComponent & { disabled: boolean; requi
 			)}>
 	<lu-textarea-input autoResizeScrollIntoView="${autoResizeScrollIntoView}" autoResize="${autoResize}"
 	${generateInputs(inputArgs, argTypes)}
-		[(ngModel)]="example">
-	</lu-textarea-input>
+		[(ngModel)]="example" />
 </lu-form-field>
 `),
 			moduleMetadata: {
@@ -90,5 +90,6 @@ export const Basic: StoryObj<TextareaInputComponent & { disabled: boolean; requi
 		autoResize: false,
 		autoResizeScrollIntoView: false,
 		rows: 3,
+		value: '',
 	},
 };

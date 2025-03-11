@@ -18,7 +18,7 @@ export function createDialogRoute<C>(config: DialogRouteConfig<C>): Route {
 	return {
 		...config,
 		component: DialogRoutingComponent,
-		providers: [{ provide: DIALOG_ROUTE_CONFIG, useValue: config }, ...[config.providers ?? []]],
+		providers: [{ provide: DIALOG_ROUTE_CONFIG, useValue: config }, ...(config.providers ?? [])],
 	};
 }
 

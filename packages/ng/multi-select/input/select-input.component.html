@@ -12,13 +12,16 @@
 
 @if (!filterPillMode) {
 <span aria-hidden="true" class="multipleSelect-arrow lucca-icon icon-arrowChevronBottom"></span>
+<span aria-hidden="true" class="multipleSelect-searchIcon lucca-icon icon-searchMagnifyingGlass"></span>
 }
 
 <ng-container #filterPillPanelAnchor></ng-container>
 <ng-container *luFilterPillDisplayer>
 	<div class="multipleSelect-displayer-filter">
 		@if (value?.length === 1) {
-		<div class="multipleSelect-pill-displayer-chip"><ng-container *luOptionOutlet="displayerTpl(); value: value[0]"></ng-container></div>
+		<div class="multipleSelect-pill-displayer-chip">
+			<ng-container *luOptionOutlet="displayerTpl(); value: value[0]"></ng-container>
+		</div>
 		}
 	</div>
 </ng-container>

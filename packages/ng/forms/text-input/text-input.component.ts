@@ -64,7 +64,7 @@ export class TextInputComponent {
 	/**
 	 * Search icon to use for when `hasSearchIcon` is true, defaults to 'search'
 	 */
-	searchIcon: LuccaIcon = 'search';
+	searchIcon: LuccaIcon = 'searchMagnifyingGlass';
 
 	showPassword: boolean = false;
 

@@ -159,7 +159,7 @@ describe('ALuCoreSelectApiDirective', () => {
 		// // Assert
 		expect(testApi.getOptions).toHaveBeenCalledTimes(3);
 
-		let options: TestEntity[];
+		let options: readonly TestEntity[];
 
 		select.options$.subscribe((o) => (options = o));
 
@@ -204,7 +204,7 @@ describe('ALuCoreSelectApiDirective', () => {
 		spectator.tick(MAGIC_OPTION_SCROLL_DELAY);
 
 		// Assert
-		let options: TestEntity[];
+		let options: readonly TestEntity[];
 		select.options$.subscribe((o) => (options = o));
 		expect(options).toEqual([
 			{ id: 1, name: 'test 1' },

@@ -1,62 +1,80 @@
-<h1 class="demo-divider">Footer</h1>
-
-<!-- Basics -->
-<section class="contentSection">
-	<h2>Basic</h2>
-	<footer class="footer">
-		<div class="footer-actions">
-			<button type="button" class="button">Button</button>
-			<button type="button" class="button mod-outlined">Button</button>
-			<button type="button" class="button mod-text">Button</button>
-		</div>
-	</footer>
-</section>
-
-<h2>With content</h2>
-<section class="contentSection">
-	<footer class="footer">
-		<div class="footer-content">Content</div>
-		<div class="footer-actions">
-			<button type="button" class="button">Button</button>
-			<button type="button" class="button mod-outlined">Button</button>
-			<button type="button" class="button mod-text">Button</button>
-		</div>
-	</footer>
-</section>
-
-<h2>Sticky</h2>
-<section class="contentSection" style="height: 10rem; overflow: auto">
-	<div style="height: 10rem">Content</div>
-	<footer class="footer mod-sticky">
-		<div class="footer-actions">
-			<button type="button" class="button">Button</button>
-			<button type="button" class="button mod-outlined">Button</button>
-			<button type="button" class="button mod-text">Button</button>
-		</div>
-	</footer>
-</section>
-
-<h2>Container</h2>
-<footer class="footer">
-	<div class="footer-containerOptional">
-		<div class="footer-content">Content</div>
-		<div class="footer-actions">
-			<button type="button" class="button">Button</button>
-			<button type="button" class="button mod-outlined">Button</button>
-		</div>
-	</div>
-</footer>
-
-<h2>Container deprecated</h2>
-<footer class="footer">
-	<div class="footer-containerOptional container mod-maxL">
-		<div class="footer-content">Content</div>
-		<div class="footer-actions">
-			<button type="button" class="button">Button</button>
-			<button type="button" class="button mod-outlined">Button</button>
-		</div>
-	</div>
-</footer>
+<table class="demo-QAtable">
+	<tbody>
+		<tr>
+			<td>Default</td>
+			<td>
+				<footer class="footer">
+					<div class="footer-actions">
+						<button type="button" class="button">Button</button>
+						<button type="button" class="button mod-outlined">Button</button>
+						<button type="button" class="button mod-text">Button</button>
+					</div>
+				</footer>
+			</td>
+		</tr>
+		<tr>
+			<td>With content</td>
+			<td>
+				<footer class="footer">
+					<div class="footer-content">Content</div>
+					<div class="footer-actions">
+						<button type="button" class="button">Button</button>
+						<button type="button" class="button mod-outlined">Button</button>
+						<button type="button" class="button mod-text">Button</button>
+					</div>
+				</footer>
+			</td>
+		</tr>
+		<tr>
+			<td>Sticky</td>
+			<td>
+				<section class="contentSection" style="height: 10rem; overflow: auto">
+					<div style="height: 10rem">Content</div>
+					<footer class="footer mod-sticky">
+						<div class="footer-actions">
+							<button type="button" class="button">Button</button>
+							<button type="button" class="button mod-outlined">Button</button>
+							<button type="button" class="button mod-text">Button</button>
+						</div>
+					</footer>
+				</section>
+			</td>
+		</tr>
+		<tr>
+			<td>Container</td>
+			<td>
+				<footer class="footer">
+					<div class="footer-containerOptional">
+						<div class="footer-content">Content</div>
+						<div class="footer-actions">
+							<button type="button" class="button">Button</button>
+							<button type="button" class="button mod-outlined">Button</button>
+						</div>
+					</div>
+				</footer>
+			</td>
+		</tr>
+		<tr>
+			<td>Container deprecated</td>
+			<td>
+				<footer class="footer">
+					<div class="footer-containerOptional container mod-maxL">
+						<div class="footer-content">Content</div>
+						<div class="footer-actions">
+							<button type="button" class="button">Button</button>
+							<button type="button" class="button mod-outlined">Button</button>
+						</div>
+					</div>
+				</footer>
+			</td>
+		</tr>
+	</tbody>
+</table>
+<style>
+	.footer {
+		min-width: 30rem;
+	}
+</style>
 
 <!-- To tell the ui-diff tool that the page has finished rendering -->
 <span id="ready"></span>

@@ -28,12 +28,12 @@
 	.indexTable-body-row {
 		&.mod-stack2,
 		&.mod-stack3 {
-			--components-indexTable-row-stack-border-block-end: var(--components-indexTable-stack2-row-spacing);
+			--components-indexTable-row-stack-border-bottom: var(--components-indexTable-stack2-row-spacing);
 			--components-indexTable-row-stack2-background-image: var(--components-indexTable-stack-svg);
 		}
 
 		&.mod-stack3 {
-			--components-indexTable-row-stack-border-block-end: var(--components-indexTable-stack3-row-spacing);
+			--components-indexTable-row-stack-border-bottom: var(--components-indexTable-stack3-row-spacing);
 			--components-indexTable-row-stack3-background-image: var(--components-indexTable-stack-svg);
 		}
 	}
@@ -42,10 +42,10 @@
 		// because we can't set an individual spacing for each row, transparent border are used for this
 		border-block-end: var(--components-indexTable-row-stack-border-bottom) solid transparent;
 		// stack apparence
-		background-image: var(--components-indexTable-row-stack2-background-image, none),
-			var(--components-indexTable-row-stack3-background-image, none);
-		background-position: var(--components-indexTable-row-stack2-background-position, 0 0),
-			var(--components-indexTable-row-stack3-background-position, 0 0);
+		background-image:
+			var(--components-indexTable-row-stack2-background-image, none), var(--components-indexTable-row-stack3-background-image, none);
+		background-position:
+			var(--components-indexTable-row-stack2-background-position, 0 0), var(--components-indexTable-row-stack3-background-position, 0 0);
 		background-repeat: no-repeat, no-repeat;
 		transition-property: background-image, background-position;
 		transition-duration: var(--commons-animations-durations-fast);
@@ -178,6 +178,7 @@
 		display: flex;
 		flex-direction: column;
 		margin-block-start: var(--pr-t-spacings-50);
+
 		&::before {
 			content: attr(data-label);
 			font-weight: 600;
@@ -229,10 +230,10 @@
 			position: absolute;
 			inset-block-start: 0;
 			inset-block-end: calc((var(--components-indexTable-row-spacing-responsive) + var(--components-indexTable-stack3-row-spacing)) * -1);
-			background-image: var(--components-indexTable-row-stack2-background-image, none),
-				var(--components-indexTable-row-stack3-background-image, none);
-			background-position: var(--components-indexTable-row-stack2-background-position, 0 0),
-				var(--components-indexTable-row-stack3-background-position, 0 0);
+			background-image:
+				var(--components-indexTable-row-stack2-background-image, none), var(--components-indexTable-row-stack3-background-image, none);
+			background-position:
+				var(--components-indexTable-row-stack2-background-position, 0 0), var(--components-indexTable-row-stack3-background-position, 0 0);
 			background-repeat: no-repeat, no-repeat;
 			transition-property: background-image, background-position;
 			transition-duration: var(--commons-animations-durations-fast);

@@ -5,7 +5,7 @@ import { LU_LINK_TRANSLATIONS } from './link.translate';
 
 @Component({
 	// eslint-disable-next-line @angular-eslint/component-selector
-	selector: 'a[luLink]',
+	selector: 'a[luLink], button[luLink]',
 	standalone: true,
 	templateUrl: './link.component.html',
 	styleUrls: ['./link.component.scss'],
@@ -26,9 +26,6 @@ export class LinkComponent implements OnDestroy {
 	#routerLink = inject(RouterLink);
 
 	#observer: MutationObserver;
-
-	@Input({ required: true })
-	label: string;
 
 	routerLinkCommands = input<RouterLink['routerLink'] | null>(null, { alias: 'luLink' });
 

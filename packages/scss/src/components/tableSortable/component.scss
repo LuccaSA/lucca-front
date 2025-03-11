@@ -3,17 +3,14 @@
 @use '@lucca-front/scss/src/commons/utils/namespace';
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
-	@include button.withIcon;
-
-	--components-button-padding: 0 var(--pr-t-spacings-50);
-	--components-button-gap: var(--pr-t-spacings-25);
-
 	user-select: none;
 	font-weight: var(--components-sortable-fontWeight);
 	vertical-align: top;
 	align-items: flex-end;
 	white-space: wrap;
 	inset-inline-start: var(--components-sortable-offset);
+	padding: 0 var(--pr-t-spacings-50);
+	gap: var(--pr-t-spacings-25);
 	text-align: inherit;
 	flex-direction: var(--components-sortable-direction);
 	font-size: var(--components-sortable-fontSize);
