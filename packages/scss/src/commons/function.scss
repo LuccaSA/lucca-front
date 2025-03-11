@@ -1,0 +1,16 @@
+@use 'sass:math';
+@use 'sass:list';
+
+@function pxToRem($value) {
+	@return math.div($value, 16px) * 1rem;
+}
+
+@function flatMap($lists...) {
+	$result: ();
+
+	@each $list in $lists {
+		$result: list.join($result, $list);
+	}
+
+	@return $result;
+}
