@@ -159,7 +159,7 @@
 			</div>
 		</dd>
 	}
-	@if (downloadable() || deletable()) {
+	@if (downloadable() || deletable) {
 		<dd class="fileUploaded-toolbar">
 			<div class="fileToolbar" [class.mod-disablePositioning]="display() === null"
 			     [class.mod-S]="size() === 'S' && display() === null">
@@ -184,7 +184,7 @@
 							</button>
 						</li>
 					}
-					@if (deletable()) {
+					@if (deletable) {
 						<li class="fileToolbar-list-item">
 							<button
 								class="fileToolbar-list-item-button"
@@ -193,7 +193,7 @@
 								luButton
 								luTooltip="Supprimer"
 								luTooltipOnlyForDisplay
-								(click)="deleteFile.emit()"
+								(click)="deleteFile$.next()"
 							>
 								<lu-icon class="fileToolbar-list-item-button-icon" icon="trashDelete"
 								         alt="Supprimer le fichier « {{fileName()}} »" />
@@ -205,20 +205,22 @@
 		</dd>
 	}
 </dl>
-
-<div class="box mod-withArrow mod-neutral pr-u-marginBlockStart150">
-	<div class="box-arrow mod-neutral" style="inset-block-end: 100%"></div>
-	<lu-form-field label="Mot de passe">
-		<div class="u-displayFlex pr-u-gap100">
-			<lu-text-input
-				class="u-flexGrow1"
-				required
-				hasClearer
-				searchIcon="searchMagnifyingGlass"
-				type="password"
-				[(ngModel)]="password"
-			/>
-			<button luButton type="button">Valider le mot de passe</button>
-		</div>
-	</lu-form-field>
-</div>
+@if (withPassword) {
+	<div class="box mod-withArrow mod-neutral pr-u-marginBlockStart150">
+		<div class="box-arrow mod-neutral" style="inset-block-end: 100%"></div>
+		<lu-form-field label="Mot de passe">
+			<div class="u-displayFlex pr-u-gap100">
+				<lu-text-input
+					class="u-flexGrow1"
+					required
+					hasClearer
+					searchIcon="searchMagnifyingGlass"
+					type="password"
+					[ngModel]="password()"
+					(ngModelChange)="passwordChange$.next($event)"
+				/>
+				<button luButton type="button">Valider le mot de passe</button>
+			</div>
+		</lu-form-field>
+	</div>
+}
