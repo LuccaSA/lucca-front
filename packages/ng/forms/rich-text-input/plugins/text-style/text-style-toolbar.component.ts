@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component, forwardRef, viewChildren } from '@angular/core';
+import { getIntl } from '@lucca-front/ng/core';
 import { LexicalEditor } from 'lexical';
 import { RICH_TEXT_PLUGIN_COMPONENT, RichTextPluginComponent } from '../../rich-text-input.component';
-import { TextStyleComponent } from './text-style.component';
-import { getIntl } from '@lucca-front/ng/core';
 import { LU_RICH_TEXT_INPUT_TRANSLATIONS } from '../../rich-text-input.translate';
+import { TextStyleComponent } from './text-style.component';
 
 @Component({
 	selector: 'lu-rich-text-toolbar-text-style',

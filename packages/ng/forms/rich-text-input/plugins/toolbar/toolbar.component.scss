@@ -1,17 +1,3 @@
 :host {
-	width: 100%;
-}
-
-.richTextToolbar {
-	width: 100%;
-	display: flex;
-	justify-content: space-between;
-	gap: var(--pr-t-spacings-100);
-	flex-wrap: wrap;
-}
-
-.richTextToolbar-left {
-	display: flex;
-	flex-wrap: wrap;
-	gap: var(--pr-t-spacings-100);
+	display: contents;
 }

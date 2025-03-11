@@ -2,23 +2,19 @@
 	<form class="dialog-form" (submit)="save()" [formGroup]="formGroup">
 		<lu-dialog-content>
 			<lu-form-field [label]="intl.linksHref">
-				<lu-text-input formControlName="href" />
+				<lu-text-input formControlName="href" type="url" placeholder="https://www.example.com/" />
 			</lu-form-field>
 		</lu-dialog-content>
 		<lu-dialog-footer>
-			<div class="footer-actions">
-				<button
-					type="button"
-					luButton="text"
-					palette="error"
-					[disabled]="!dialogData"
-					(click)="deleteLink()"
-					[luTooltip]="intl.linksDelete"
-					luTooltipOnlyForDisplay
-				>
-					<lu-icon icon="trashDelete" [alt]="intl.linksDelete" />
+			@if (dialogData) {
+			<div class="footer-content">
+				<button type="button" luButton="text" delete (click)="deleteLink()" [luTooltip]="intl.linksDelete" luTooltipOnlyForDisplay>
+					{{intl.linksDelete}}
 				</button>
-				<button type="submit" luButton [disabled]="formGroup.pristine">{{ intl.linksSubmit }}</button>
+			</div>
+			}
+			<div class="footer-actions">
+				<button type="submit" luButton>{{ intl.linksSubmit }}</button>
 				<button type="button" luButton="text" luDialogDismiss>{{ intl.linksCancel }}</button>
 			</div>
 		</lu-dialog-footer>

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, forwardRef, input, OnDestroy, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, forwardRef, input, OnDestroy, signal, viewChild } from '@angular/core';
 import { LuccaIcon } from '@lucca-front/icons';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { IconComponent } from '@lucca-front/ng/icon';
@@ -11,7 +11,7 @@ import { registerFormatSelectionChange } from './text-style.command';
 	selector: 'lu-rich-text-plugin-text-style',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	templateUrl: './text-style.component.html',
-	styleUrl: '../styles/_buttons.scss',
+	styleUrl: './text-style.component.scss',
 	imports: [ButtonComponent, IconComponent, LuTooltipTriggerDirective],
 	providers: [
 		{
@@ -25,7 +25,12 @@ export class TextStyleComponent implements OnDestroy, RichTextPluginComponent {
 	public icon = input.required<LuccaIcon>();
 	public tooltip = input.required<string>();
 
+	public tabindex = signal<number>(-1);
+
 	public active = signal(false);
+
+	public element = viewChild('element', { read: ElementRef<HTMLButtonElement> });
+
 	#editor?: LexicalEditor;
 
 	#registeredCommands: () => void = () => {};
@@ -43,5 +48,9 @@ export class TextStyleComponent implements OnDestroy, RichTextPluginComponent {
 		this.#editor.dispatchCommand(FORMAT_TEXT_COMMAND, this.format());
 		// force update selection
 		this.#editor.dispatchCommand(SELECTION_CHANGE_COMMAND, undefined);
+	}
+
+	focus() {
+		(this.element() as ElementRef<HTMLButtonElement>).nativeElement.focus();
 	}
 }

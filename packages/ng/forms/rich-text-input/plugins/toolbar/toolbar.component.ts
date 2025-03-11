@@ -1,12 +1,12 @@
 import { ChangeDetectionStrategy, Component, forwardRef, viewChildren } from '@angular/core';
-import { TextStyleToolbarComponent } from '../text-style';
-import { DividerComponent } from '../../../../divider/divider.component';
-import { ListStyleToolbarComponent } from '../list-format';
+import { DividerComponent } from '@lucca-front/ng/divider';
+import { Klass, LexicalEditor, LexicalNode } from 'lexical';
+import { RICH_TEXT_PLUGIN_COMPONENT, RichTextPluginComponent } from '../../rich-text-input.component';
+import { ClearFormatComponent } from '../clear-format';
 import { HeadingsComponent } from '../headings';
 import { LinkComponent } from '../link';
-import { ClearFormatComponent } from '../clear-format';
-import { RICH_TEXT_PLUGIN_COMPONENT, RichTextPluginComponent } from '../../rich-text-input.component';
-import { Klass, LexicalEditor, LexicalNode } from 'lexical';
+import { ListStyleToolbarComponent } from '../list-format';
+import { TextStyleToolbarComponent } from '../text-style';
 
 @Component({
 	selector: 'lu-rich-text-input-toolbar',

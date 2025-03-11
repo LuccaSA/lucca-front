@@ -16,6 +16,7 @@
 		luInput
 		#inputElement
 		[attr.autocomplete]="autocomplete"
+		[attr.tabindex]="inputTabindex()"
 	/>
 	<div class="simpleSelect-field-value">
 		<ng-container *ngTemplateOutlet="currentValueDisplayerTpl"></ng-container>

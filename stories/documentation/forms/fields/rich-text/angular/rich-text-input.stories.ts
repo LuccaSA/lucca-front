@@ -1,9 +1,9 @@
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DividerComponent } from '@lucca-front/ng/divider';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { provideLuRichTextMarkdownFormatter, RichTextInputComponent, RichTextInputToolbarComponent } from '@lucca-front/ng/forms/rich-text-input';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { DividerComponent } from '@lucca-front/ng/divider';
 import { cleanupTemplate, generateInputs } from 'stories/helpers/stories';
 import { StoryModelDisplayComponent } from 'stories/helpers/story-model-display.component';
 
@@ -28,7 +28,7 @@ export const Basic: StoryObj<RichTextInputComponent & { disabled: boolean; examp
 		const { example, ...inputArgs } = args;
 		return {
 			props: { example },
-			template: cleanupTemplate(`<lu-form-field label="toto">
+			template: cleanupTemplate(`<lu-form-field label="Label">
 	<lu-rich-text-input
 	${generateInputs(inputArgs, argTypes)}
 		[(ngModel)]="example">
@@ -42,7 +42,7 @@ export const Basic: StoryObj<RichTextInputComponent & { disabled: boolean; examp
 		};
 	},
 	args: {
-		example: '*italic* **bold**',
-		placeholder: 'Enter some text...',
+		example: 'Lorem **ipsum** dolor',
+		placeholder: 'Placeholder…',
 	},
 };

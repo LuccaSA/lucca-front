@@ -15,6 +15,7 @@
 	--pr-t-spacings-auto: auto;
 
 	@include core.cssvars('pr-t-color-input', config.$colorInput);
+	--pr-t-radius-input: var(--commons-borderRadius-M);
 
 	// VARIABLES
 

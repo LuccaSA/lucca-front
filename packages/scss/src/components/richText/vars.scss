@@ -1,0 +1,6 @@
+@mixin vars {
+	--components-richText-borderColor: var(--pr-t-color-input-border);
+	--components-richText-backgroundColor: var(--pr-t-color-input-background);
+	--components-richText-color: var(--pr-t-color-input-text);
+	--components-richText-toolbar-backgroundColor: var(--palettes-grey-25);
+}

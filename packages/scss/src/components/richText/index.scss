@@ -1,0 +1,22 @@
+@use 'exports' as *;
+
+.richText {
+	@include vars;
+	@include component;
+
+	&:hover {
+		@include hover;
+	}
+
+	&.is-error {
+		@include error;
+
+		&:hover {
+			@include errorHover;
+		}
+	}
+
+	&.is-disabled {
+		@include disabled;
+	}
+}

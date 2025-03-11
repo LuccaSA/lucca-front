@@ -1,3 +1,13 @@
-<button luButton="text" type="button" size="XS" (click)="dispatchCommand()" [luTooltip]="intl.clearFormat" luTooltipOnlyForDisplay>
+<button
+	#element
+	luButton="text"
+	type="button"
+	size="XS"
+	(click)="dispatchCommand()"
+	[luTooltip]="intl.clearFormat"
+	luTooltipOnlyForDisplay
+	[attr.tabindex]="tabindex()"
+	class="richText-toolbar-button"
+>
 	<lu-icon icon="formatClear" [alt]="intl.clearFormat" />
 </button>

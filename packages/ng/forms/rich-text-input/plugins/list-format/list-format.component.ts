@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, forwardRef, input, OnDestroy, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, forwardRef, input, OnDestroy, signal, viewChild } from '@angular/core';
 import { ListType } from '@lexical/list';
 import { mergeRegister } from '@lexical/utils';
 import { LuccaIcon } from '@lucca-front/icons';
@@ -13,7 +13,6 @@ import { FORMAT_LIST, registerListsSelectionChange } from './list-format.command
 	selector: 'lu-rich-text-plugin-list',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	templateUrl: 'list-format.component.html',
-	styleUrl: '../styles/_buttons.scss',
 	imports: [ButtonComponent, IconComponent, LuTooltipTriggerDirective],
 	providers: [
 		{
@@ -26,6 +25,8 @@ export class ListFormatComponent implements OnDestroy, RichTextPluginComponent {
 	public format = input.required<ListType>();
 	public icon = input.required<LuccaIcon>();
 	public tooltip = input.required<string>();
+
+	public tabindex = signal<number>(-1);
 
 	public active = signal(false);
 
@@ -44,5 +45,11 @@ export class ListFormatComponent implements OnDestroy, RichTextPluginComponent {
 
 	public dispatchCommand() {
 		this.#editor?.dispatchCommand(FORMAT_LIST, this.format());
+	}
+
+	public element = viewChild('element', { read: ElementRef<HTMLButtonElement> });
+
+	focus() {
+		(this.element() as ElementRef<HTMLButtonElement>).nativeElement.focus();
 	}
 }

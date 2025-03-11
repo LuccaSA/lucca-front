@@ -19,7 +19,7 @@
 	// .mod-outline is deprecated
 	&.mod-outlined,
 	&.mod-outline {
-		&:where(:not(.is-success, .is-error)) {
+		&:where(:not(.is-success, .is-error, .is-active, [aria-pressed='true'])) {
 			@include outlined;
 		}
 
@@ -33,7 +33,7 @@
 	// .mod-link deprecated
 	&.mod-text,
 	&.mod-link {
-		&:where(:not(.is-success, .is-error)) {
+		&:where(:not(.is-success, .is-error, .is-active, [aria-pressed='true'])) {
 			@include text;
 		}
 
@@ -128,5 +128,10 @@
 	&.is-disabled,
 	&.disabled {
 		@include disabled;
+	}
+
+	&.is-active,
+	&[aria-pressed='true'] {
+		@include active;
 	}
 }

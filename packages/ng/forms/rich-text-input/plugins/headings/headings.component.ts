@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, DestroyRef, forwardRef, inject, input, OnDestroy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, DestroyRef, forwardRef, inject, input, OnDestroy, signal, viewChild } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { mergeRegister } from '@lexical/utils';
@@ -10,9 +10,9 @@ import { filter } from 'rxjs';
 import { RICH_TEXT_PLUGIN_COMPONENT, RichTextPluginComponent } from '../../rich-text-input.component';
 
 import { HeadingNode } from '@lexical/rich-text';
-import { FORMAT_HEADINGS, registerHeadings, registerHeadingsSelectionChange } from './headings.command';
 import { getIntl } from '@lucca-front/ng/core';
 import { LU_RICH_TEXT_INPUT_TRANSLATIONS } from '../../rich-text-input.translate';
+import { FORMAT_HEADINGS, registerHeadings, registerHeadingsSelectionChange } from './headings.command';
 
 @Component({
 	selector: 'lu-rich-text-plugin-headings',
@@ -28,6 +28,8 @@ import { LU_RICH_TEXT_INPUT_TRANSLATIONS } from '../../rich-text-input.translate
 })
 export class HeadingsComponent implements OnDestroy, RichTextPluginComponent {
 	readonly #destroyRef = inject(DestroyRef);
+
+	public tabindex = signal<number>(-1);
 
 	public maxHeadingLevel = input<1 | 2 | 3 | 4 | 5 | 6>(6);
 
@@ -64,5 +66,11 @@ export class HeadingsComponent implements OnDestroy, RichTextPluginComponent {
 
 	public ngOnDestroy() {
 		this.#registeredCommands();
+	}
+
+	public element = viewChild<LuSimpleSelectInputComponent<string>>('selectRef');
+
+	focus() {
+		this.element().focusInput();
 	}
 }

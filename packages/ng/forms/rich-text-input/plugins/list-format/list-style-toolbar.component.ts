@@ -5,9 +5,9 @@ import { RICH_TEXT_PLUGIN_COMPONENT, RichTextPluginComponent } from '../../rich-
 import { registerListsGlobal } from './list-format.command';
 
 import { ListItemNode, ListNode } from '@lexical/list';
-import { ListFormatComponent } from './list-format.component';
 import { getIntl } from '@lucca-front/ng/core';
 import { LU_RICH_TEXT_INPUT_TRANSLATIONS } from '../../rich-text-input.translate';
+import { ListFormatComponent } from './list-format.component';
 
 @Component({
 	selector: 'lu-rich-text-toolbar-list-style',

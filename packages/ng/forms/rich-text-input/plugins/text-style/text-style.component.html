@@ -1,12 +1,14 @@
 <button
+	#element
 	luButton="text"
 	type="button"
 	size="XS"
 	(click)="dispatchCommand()"
-	[class.mod-toggled]="active()"
 	[attr.aria-pressed]="active()"
 	[luTooltip]="tooltip()"
 	luTooltipOnlyForDisplay
+	[attr.tabindex]="tabindex()"
+	class="richText-toolbar-button"
 >
 	<lu-icon [icon]="icon()" [alt]="tooltip()" />
 </button>

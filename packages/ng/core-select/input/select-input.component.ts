@@ -10,6 +10,7 @@ import {
 	HostBinding,
 	HostListener,
 	inject,
+	input,
 	Input,
 	model,
 	OnDestroy,
@@ -123,6 +124,8 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 
 	@Input() optionComparer: LuOptionComparer<TOption> = (option1, option2) => JSON.stringify(option1) === JSON.stringify(option2);
 	@Input() optionKey: (option: TOption) => unknown = (option) => option;
+
+	inputTabindex = input<number>(0);
 
 	optionTpl = model<TemplateRef<LuOptionContext<TOption>> | Type<unknown>>(LuSimpleSelectDefaultOptionComponent);
 	valueTpl = model<TemplateRef<LuOptionContext<TOption>> | Type<unknown> | undefined>();
@@ -347,7 +350,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 		this.panelRef.closed.subscribe(() => this.closePanel());
 	}
 
-	protected focusInput(): void {
+	focusInput(): void {
 		if (this.inputElementRef) {
 			this.inputElementRef.nativeElement.focus();
 		}

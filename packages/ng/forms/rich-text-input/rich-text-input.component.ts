@@ -10,9 +10,11 @@ import {
 	input,
 	OnDestroy,
 	OnInit,
+	Signal,
 	signal,
 	viewChild,
 	ViewEncapsulation,
+	WritableSignal,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { createEmptyHistoryState, registerHistory } from '@lexical/history';
@@ -20,13 +22,19 @@ import { registerRichText } from '@lexical/rich-text';
 import { mergeRegister } from '@lexical/utils';
 
 import { $canShowPlaceholderCurry } from '@lexical/text';
+import { FormFieldComponent, InputDirective } from '@lucca-front/ng/form-field';
+
 import { createEditor, Klass, LexicalEditor, LexicalNode } from 'lexical';
 import { RICH_TEXT_FORMATTER, RichTextFormatter } from './formatters';
-import { InputDirective } from '@lucca-front/ng/form-field';
 
 export interface RichTextPluginComponent {
 	setEditorInstance(editor: LexicalEditor): void;
 	getLexicalNodes?(): Klass<LexicalNode>[];
+
+	tabindex?: WritableSignal<number>;
+	focus?(): void;
+
+	pluginComponents?: Signal<readonly RichTextPluginComponent[]>;
 }
 
 export const RICH_TEXT_PLUGIN_COMPONENT = new InjectionToken<RichTextPluginComponent>('RichTextPlugin');
@@ -50,6 +58,10 @@ export const RICH_TEXT_PLUGIN_COMPONENT = new InjectionToken<RichTextPluginCompo
 export class RichTextInputComponent implements OnInit, OnDestroy, ControlValueAccessor {
 	readonly richTextFormatter = inject<RichTextFormatter>(RICH_TEXT_FORMATTER);
 	readonly placeholder = input('');
+	readonly #formField = inject(FormFieldComponent, { optional: true });
+
+	allPlugins: RichTextPluginComponent[];
+	focusedPlugin: number = 0;
 
 	#onChange?: (markdown: string | null) => void;
 	#onTouch?: () => void;
@@ -71,14 +83,16 @@ export class RichTextInputComponent implements OnInit, OnDestroy, ControlValueAc
 
 	pluginComponents = contentChildren(RICH_TEXT_PLUGIN_COMPONENT, { descendants: true });
 
+	formFieldId = computed(() => this.#formField?.id());
+
 	ngOnInit(): void {
 		this.editor = createEditor({
 			theme: {
 				text: {
-					strikethrough: 'editorTheme__textStrikethrough',
-					bold: 'editorTheme__textBold',
-					italic: 'editorTheme__textItalic',
-					underline: 'editorTheme__textUnderline',
+					strikethrough: 'u-textDecorationLineThrough',
+					bold: 'u-fontWeightBold',
+					italic: 'u-fontStyleItalic',
+					underline: 'u-textDecorationUnderline',
 				},
 			},
 			nodes: [...this.customNodes()],
@@ -100,10 +114,24 @@ export class RichTextInputComponent implements OnInit, OnDestroy, ControlValueAc
 		);
 
 		this.pluginComponents().forEach((plugin) => plugin.setEditorInstance(this.editor));
+
+		this.allPlugins = this.findPlugins(this.pluginComponents());
+
+		this.allPlugins[this.focusedPlugin].tabindex.set(0);
 	}
 
 	ngOnDestroy(): void {
 		this.#cleanup?.();
+	}
+
+	findPlugins(plugins: readonly RichTextPluginComponent[]): RichTextPluginComponent[] {
+		return plugins.flatMap((p) => {
+			if (p.pluginComponents) {
+				return this.findPlugins(p.pluginComponents());
+			} else {
+				return p;
+			}
+		});
 	}
 
 	writeValue(markdown: string | null): void {
@@ -122,5 +150,12 @@ export class RichTextInputComponent implements OnInit, OnDestroy, ControlValueAc
 
 	setDisabledState?(isDisabled: boolean): void {
 		this.editor?.setEditable(!isDisabled);
+	}
+
+	focusSiblingPlugin(direction: -1 | 1) {
+		this.allPlugins[this.focusedPlugin].tabindex.set(-1);
+		this.focusedPlugin = this.focusedPlugin + direction < 0 ? this.allPlugins.length - 1 : (this.focusedPlugin + direction) % this.allPlugins.length;
+		this.allPlugins[this.focusedPlugin].tabindex.set(0);
+		this.allPlugins[this.focusedPlugin].focus();
 	}
 }

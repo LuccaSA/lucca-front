@@ -1,0 +1,54 @@
+@use '@lucca-front/scss/src/commons/utils/namespace';
+
+@use '@lucca-front/scss/src/commons/utils/a11y';
+
+@mixin component($atRoot: namespace.$defaultAtRoot) {
+	display: flex;
+	flex-direction: column;
+	flex-grow: 1;
+	overflow: auto;
+	background-color: var(--components-richText-backgroundColor);
+	color: var(--components-richText-color);
+	border-color: var(--components-richText-borderColor);
+	border-style: solid;
+	border-width: 1px;
+	border-radius: var(--pr-t-radius-input);
+
+	&:has(.richText-content:focus-visible) {
+		@include a11y.focusVisible;
+	}
+
+	@at-root ($atRoot) {
+		.richText-toolbar {
+			display: flex;
+			flex-wrap: wrap;
+			align-items: center;
+			background-color: var(--components-richText-toolbar-backgroundColor);
+			padding: var(--pr-t-spacings-100);
+			border-radius: 0 0 var(--commons-borderRadius-M) var(--commons-borderRadius-M);
+
+			.richText-toolbar-divider.divider {
+				--components-divider-marginInline: 1rem;
+			}
+		}
+
+		.richText-toolbar-group {
+			display: flex;
+			flex-wrap: wrap;
+			align-items: center;
+			gap: var(--pr-t-spacings-50);
+		}
+
+		.richText-content {
+			padding: var(--pr-t-spacings-100);
+		}
+
+		.richText-content-placeholder {
+			position: absolute;
+			pointer-events: none;
+			padding: var(--pr-t-spacings-100);
+			user-select: none;
+			color: var(--pr-t-color-input-text-placeholder);
+		}
+	}
+}

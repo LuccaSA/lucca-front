@@ -1,11 +1,16 @@
-<div class="textField">
-	<div class="textField-input">
-		<div #content class="textField-input-value editor-content" contenteditable [attr.aria-placeholder]="placeholder()" luInput></div>
-		@if (currentCanShowPlaceholder()) {
-		<div aria-hidden="true" class="richtext-input-placeholder">{{ placeholder() }}</div>
-		}
-	</div>
-	<div class="editor-toolbar">
+<div class="richText">
+	<div #content luInput contenteditable="true" class="richText-content" [attr.aria-placeholder]="placeholder()"></div>
+	@if (currentCanShowPlaceholder()) {
+	<div aria-hidden="true" class="richText-content-placeholder">{{ placeholder() }}</div>
+	}
+	<div
+		class="richText-toolbar"
+		(keydown.arrowleft)="focusSiblingPlugin(-1)"
+		(keydown.arrowRight)="focusSiblingPlugin(1)"
+		role="toolbar"
+		[attr.aria-labelledby]="formFieldId() + '-label'"
+		[attr.aria-controls]="formFieldId()"
+	>
 		<ng-content />
 	</div>
 </div>

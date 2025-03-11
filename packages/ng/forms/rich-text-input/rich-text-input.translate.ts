@@ -30,6 +30,7 @@ export interface ILuRichTextInputLabel {
 	stylesItalic: string;
 	stylesBold: string;
 	stylesUnderline: string;
+	stylesStrikethrough: string;
 }
 
 export const luRichTextInputTranslations: LuTranslation<ILuRichTextInputLabel> = Translations;
