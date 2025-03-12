@@ -32,8 +32,8 @@ export class LuCoreSelectEstablishmentsDirective<T extends LuCoreSelectEstablish
 
 	url = input<string>('/organization/structure/api/establishments');
 	filters = input<Record<string, string | number | boolean> | null>(null);
-	operationIds = input<number[] | null>(null);
-	uniqueOperationIds = input<number[] | null>(null);
+	operationIds = input<readonly number[] | null>(null);
+	uniqueOperationIds = input<readonly number[] | null>(null);
 	appInstanceId = input<number | null>(null);
 	searchDelimiter = input<string>(' ');
 
