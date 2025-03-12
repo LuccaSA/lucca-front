@@ -6,7 +6,6 @@
 		groupTemplateLocation: groupTemplateLocation$ | async,
 		shouldDisplayAddOption: shouldDisplayAddOption$ | async,
 	} as ctx"
-	[cdkTrapFocusAutoCapture]="true"
 >
 	<div class="lu-picker-content" [class.is-loading]="loading$ | async" (scroll)="onScroll($event)">
 		<ng-container *luPortal="selectInput.panelHeaderTpl()" />
