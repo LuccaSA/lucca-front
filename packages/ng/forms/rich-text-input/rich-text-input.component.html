@@ -1,5 +1,14 @@
-<div class="richText">
-	<div #content luInput contenteditable="true" class="richText-content" [attr.aria-placeholder]="placeholder()"></div>
+<div class="richText" [class.is-disabled]="disabled()" [class.is-error]="error()">
+	<div
+		#content
+		luInput
+		class="richText-content"
+		role="textbox"
+		[attr.contenteditable]="!disabled()"
+		[attr.aria-disabled]="disabled()"
+		[attr.aria-placeholder]="currentCanShowPlaceholder() ? placeholder() : null"
+		[attr.aria-labelledby]="formFieldId() + '-label'"
+	></div>
 	@if (currentCanShowPlaceholder()) {
 	<div aria-hidden="true" class="richText-content-placeholder">{{ placeholder() }}</div>
 	}

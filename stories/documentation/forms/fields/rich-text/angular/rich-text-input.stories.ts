@@ -1,9 +1,10 @@
+import { LOCALE_ID } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DividerComponent } from '@lucca-front/ng/divider';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { provideLuRichTextMarkdownFormatter, RichTextInputComponent, RichTextInputToolbarComponent } from '@lucca-front/ng/forms/rich-text-input';
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { cleanupTemplate, generateInputs } from 'stories/helpers/stories';
 import { StoryModelDisplayComponent } from 'stories/helpers/story-model-display.component';
 
@@ -14,20 +15,17 @@ export default {
 			imports: [RichTextInputToolbarComponent, FormFieldComponent, FormsModule, ReactiveFormsModule, BrowserAnimationsModule, StoryModelDisplayComponent, DividerComponent],
 			providers: [provideLuRichTextMarkdownFormatter()],
 		}),
+		applicationConfig({
+			providers: [{ provide: LOCALE_ID, useValue: 'fr' }],
+		}),
 	],
-	argTypes: {
-		example: {
-			control: {
-				type: 'text',
-			},
-		},
-	},
+	argTypes: {},
 } as Meta;
-export const Basic: StoryObj<RichTextInputComponent & { disabled: boolean; example: string } & FormFieldComponent> = {
+export const Basic: StoryObj<RichTextInputComponent & { value: string } & FormFieldComponent> = {
 	render: (args, { argTypes }) => {
-		const { example, ...inputArgs } = args;
+		const { value, ...inputArgs } = args;
 		return {
-			props: { example },
+			props: { value },
 			template: cleanupTemplate(`<lu-form-field label="Label">
 	<lu-rich-text-input
 	${generateInputs(inputArgs, argTypes)}
@@ -35,14 +33,16 @@ export const Basic: StoryObj<RichTextInputComponent & { disabled: boolean; examp
 			<lu-rich-text-input-toolbar />
 	</lu-rich-text-input>
 </lu-form-field>
-<pr-story-model-display>{{example}}</pr-story-model-display>`),
+<pr-story-model-display>{{value}}</pr-story-model-display>`),
 			moduleMetadata: {
 				imports: [RichTextInputComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule],
 			},
 		};
 	},
 	args: {
-		example: 'Lorem **ipsum** dolor',
+		value: 'Lorem **ipsum** dolor',
 		placeholder: 'Placeholder…',
+		disabled: false,
+		error: false,
 	},
 };

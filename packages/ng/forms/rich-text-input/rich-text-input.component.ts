@@ -1,4 +1,5 @@
 import {
+	booleanAttribute,
 	ChangeDetectionStrategy,
 	Component,
 	computed,
@@ -74,6 +75,8 @@ export class RichTextInputComponent implements OnInit, OnDestroy, ControlValueAc
 	});
 
 	currentCanShowPlaceholder = signal(false);
+	disabled = input<boolean, boolean>(false, { transform: booleanAttribute });
+	error = input<boolean, boolean>(false, { transform: booleanAttribute });
 
 	customNodes = computed(() =>
 		this.pluginComponents()
@@ -148,6 +151,7 @@ export class RichTextInputComponent implements OnInit, OnDestroy, ControlValueAc
 		this.#onTouch = onTouch;
 	}
 
+	// TODO ?
 	setDisabledState?(isDisabled: boolean): void {
 		this.editor?.setEditable(!isDisabled);
 	}
