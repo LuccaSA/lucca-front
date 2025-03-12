@@ -1,8 +1,8 @@
 import { LuSelectInputContext, SelectContext } from './model/select-context';
 import { HtmlAstVisitor } from '../lib/html-ast';
-import ts from 'typescript';
 import { extractProviders } from '../lib/angular-component-ast';
 import { currentSchematicContext } from '../lib/lf-schematic-context';
+import { SourceFile } from 'typescript';
 
 export enum RejectionReason {
 	UNSUPPORTED_ATTRIBUTE,
@@ -41,7 +41,7 @@ export function isRejection(value: unknown): value is Rejection {
 	return (value as Rejection)?.reason !== undefined && RejectionReason[(value as Rejection).reason] != undefined;
 }
 
-export function getCommonMigrationRejectionReason(node: unknown, sourceFile: ts.SourceFile): Rejection | null {
+export function getCommonMigrationRejectionReason(node: unknown, sourceFile: SourceFile): Rejection | null {
 	if (node instanceof currentSchematicContext.angularCompiler.TmplAstElement) {
 		const unsupportedAttr = node.attributes.find((attr) => !allowedAttributes.some((rxp) => rxp.test(attr.name)));
 		if (unsupportedAttr) {

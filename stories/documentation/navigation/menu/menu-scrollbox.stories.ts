@@ -37,7 +37,7 @@ function getTemplate(args: MenuScrollboxStory): string {
 	const noBorder = args.noBorder ? ` mod-noBorder` : '';
 	const header = args.header ? ` mod-header` : '';
 	const s = args.s ? ` mod-S` : '';
-	return `<lu-scroll-box>
+	return `<lu-scroll-box [attr.style]="'--components-scrollBox-marginInline: 0'">
 	<div class="menu_firstChild"></div>
 	<nav class="menu${s}${noBorder}${header}">
 		<ul class="menu-list">

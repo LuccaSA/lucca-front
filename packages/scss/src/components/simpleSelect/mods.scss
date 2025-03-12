@@ -47,7 +47,7 @@
 
 @mixin filterPill {
 	width: 21rem;
-	max-width: calc(100vw - 2.5rem);
+	max-inline-size: calc(100vw - 2.5rem);
 
 	.simpleSelect-field {
 		position: relative;

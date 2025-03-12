@@ -15,6 +15,7 @@
 					class="textfield-input"
 					[ngModel]="_value"
 					(ngModelChange)="_onInput($event)"
+					[ngModelOptions]="{ standalone: true }"
 					(keydown.enter)="_onEnter()"
 					[min]="min"
 					[max]="max"
@@ -24,6 +25,7 @@
 			<lu-calendar
 				[ngModel]="_value"
 				(ngModelChange)="_onCalendar($event)"
+				[ngModelOptions]="{ standalone: true }"
 				[min]="min"
 				[max]="max"
 				[granularity]="granularity"

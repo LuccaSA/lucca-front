@@ -21,6 +21,7 @@
 			border: 1px solid var(--commons-border-200);
 			overflow: var(--components-dataTable-overflow);
 			background-color: var(--components-dataTable-cell-background);
+			contain: paint; // Fix overflow on webkit when table has scroll
 
 			&:focus-visible {
 				@include a11y.focusVisible;

@@ -13,7 +13,7 @@ import { LuCoreSelectUserHomonymsService } from './user-homonym.service';
 import { LuUserOptionComponent } from './user-option.component';
 import { LuCoreSelectUser, LuCoreSelectWithAdditionnalInformation } from './user-option.model';
 
-export function provideCoreSelectUsersContext(directiveFn: () => Type<LuCoreSelectUsersDirective>): Provider[] {
+export function provideCoreSelectUsersContext<T extends LuCoreSelectUser = LuCoreSelectUser>(directiveFn: () => Type<LuCoreSelectUsersDirective<T>>): Provider[] {
 	return [
 		...provideBaseCoreSelectUsersContext(directiveFn),
 		{
@@ -23,7 +23,7 @@ export function provideCoreSelectUsersContext(directiveFn: () => Type<LuCoreSele
 	];
 }
 
-function provideBaseCoreSelectUsersContext(directiveFn: () => Type<LuCoreSelectUsersDirective>): Provider[] {
+function provideBaseCoreSelectUsersContext<T extends LuCoreSelectUser = LuCoreSelectUser>(directiveFn: () => Type<LuCoreSelectUsersDirective<T>>): Provider[] {
 	return [
 		{
 			provide: CORE_SELECT_API_TOTAL_COUNT_PROVIDER,
@@ -63,8 +63,8 @@ export class LuCoreSelectUsersDirective<T extends LuCoreSelectUser = LuCoreSelec
 	filters = input<Record<string, string | number | boolean>>({});
 	url = input<string | null>(null);
 	orderBy = input<string | null>(null);
-	operationIds = input<number[] | null>(null);
-	uniqueOperationIds = input<number[] | null>(null);
+	operationIds = input<readonly number[] | null>(null);
+	uniqueOperationIds = input<readonly number[] | null>(null);
 	appInstanceId = input<number | null>(null);
 	enableFormerEmployees = input(false, { transform: booleanAttribute });
 	displayMeOption = input(true);

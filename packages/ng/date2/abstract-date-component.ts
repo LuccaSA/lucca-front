@@ -3,9 +3,11 @@ import { getIntl } from '@lucca-front/ng/core';
 import { addMonths, addYears } from 'date-fns';
 import { CalendarMode } from './calendar2/calendar-mode';
 import { CellStatus } from './calendar2/cell-status';
-import { DateRange } from './calendar2/date-range';
+import { DateRange, DateRangeInput } from './calendar2/date-range';
 import { getDateFormat, getLocalizedDateFormat } from './date-format';
+import { DATE_FORMAT, DateFormat } from './date.const';
 import { LU_DATE2_TRANSLATIONS } from './date2.translate';
+import { transformDateInputToDate, transformDateRangeInputToDateRange } from './utils';
 
 @Component({
 	// eslint-disable-next-line @angular-eslint/component-selector
@@ -26,7 +28,10 @@ export abstract class AbstractDateComponent {
 	onTouched?: () => void;
 	disabled = false;
 
-	ranges = input<DateRange[]>([]);
+	format = input<DateFormat>(DATE_FORMAT.DATE);
+	protected inDateISOFormat = computed(() => this.format() === DATE_FORMAT.DATE_ISO);
+
+	ranges = input([], { transform: (v: readonly DateRange[] | readonly DateRangeInput[]) => v.map(transformDateRangeInputToDateRange) });
 	hideToday = input<boolean, boolean>(false, { transform: booleanAttribute });
 	hasTodayButton = input<boolean, boolean>(false, { transform: booleanAttribute });
 	clearable = input<boolean, boolean>(false, { transform: booleanAttribute });
@@ -36,8 +41,12 @@ export abstract class AbstractDateComponent {
 
 	getCellInfo = input<((day: Date, mode: CalendarMode) => CellStatus) | null>();
 
-	min = input<Date>(new Date('1/1/1000'));
-	max = input<Date | null>(null);
+	min = input(new Date('1/1/1000'), {
+		transform: transformDateInputToDate,
+	});
+	max = input(null, {
+		transform: transformDateInputToDate,
+	});
 
 	calendarMode = signal<CalendarMode>('day');
 
