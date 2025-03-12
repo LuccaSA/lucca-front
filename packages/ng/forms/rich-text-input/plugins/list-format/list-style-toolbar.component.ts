@@ -24,7 +24,7 @@ import { ListFormatComponent } from './list-format.component';
 export class ListStyleToolbarComponent implements OnDestroy, RichTextPluginComponent {
 	#registeredCommands: () => void = () => {};
 
-	pluginComponents = viewChildren(ListFormatComponent);
+	pluginComponents = viewChildren(RICH_TEXT_PLUGIN_COMPONENT);
 
 	intl = getIntl(LU_RICH_TEXT_INPUT_TRANSLATIONS);
 
@@ -34,6 +34,10 @@ export class ListStyleToolbarComponent implements OnDestroy, RichTextPluginCompo
 	}
 	getLexicalNodes?(): Klass<LexicalNode>[] {
 		return [ListNode, ListItemNode];
+	}
+
+	setDisabledState(isDisabled: boolean) {
+		this.pluginComponents().forEach((plugin) => plugin.setDisabledState(isDisabled));
 	}
 
 	ngOnDestroy() {

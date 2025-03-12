@@ -21,18 +21,20 @@ export default {
 	],
 	argTypes: {},
 } as Meta;
-export const Basic: StoryObj<RichTextInputComponent & { value: string } & FormFieldComponent> = {
+export const Basic: StoryObj<RichTextInputComponent & { value: string; disabled: boolean; required: boolean } & FormFieldComponent> = {
 	render: (args, { argTypes }) => {
-		const { value, ...inputArgs } = args;
+		const { value, disabled, required, ...inputArgs } = args;
 		return {
-			props: { value },
-			template: cleanupTemplate(`<lu-form-field label="Label">
+			props: { value, disabled, required },
+			template: cleanupTemplate(`<form>
+<lu-form-field label="Label">
 	<lu-rich-text-input
-	${generateInputs(inputArgs, argTypes)}
-		[(ngModel)]="example">
+	${generateInputs(inputArgs, argTypes)} name="richText"
+		[(ngModel)]="value" [disabled]="disabled" [required]="required">
 			<lu-rich-text-input-toolbar />
 	</lu-rich-text-input>
 </lu-form-field>
+</form>
 <pr-story-model-display>{{value}}</pr-story-model-display>`),
 			moduleMetadata: {
 				imports: [RichTextInputComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule],
@@ -43,6 +45,6 @@ export const Basic: StoryObj<RichTextInputComponent & { value: string } & FormFi
 		value: 'Lorem **ipsum** dolor',
 		placeholder: 'Placeholder…',
 		disabled: false,
-		error: false,
+		required: false,
 	},
 };

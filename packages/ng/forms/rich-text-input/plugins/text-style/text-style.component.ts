@@ -26,8 +26,8 @@ export class TextStyleComponent implements OnDestroy, RichTextPluginComponent {
 	public tooltip = input.required<string>();
 
 	public tabindex = signal<number>(-1);
-
 	public active = signal(false);
+	public isDisabled = signal(false);
 
 	public element = viewChild('element', { read: ElementRef<HTMLButtonElement> });
 
@@ -40,14 +40,18 @@ export class TextStyleComponent implements OnDestroy, RichTextPluginComponent {
 		this.#registeredCommands = registerFormatSelectionChange(this.#editor, this.format(), (hasFormat) => this.active.set(hasFormat));
 	}
 
-	public ngOnDestroy() {
+	ngOnDestroy() {
 		this.#registeredCommands();
 	}
 
-	public dispatchCommand() {
+	dispatchCommand() {
 		this.#editor.dispatchCommand(FORMAT_TEXT_COMMAND, this.format());
 		// force update selection
 		this.#editor.dispatchCommand(SELECTION_CHANGE_COMMAND, undefined);
+	}
+
+	setDisabledState(isDisabled: boolean) {
+		this.isDisabled.set(isDisabled);
 	}
 
 	focus() {

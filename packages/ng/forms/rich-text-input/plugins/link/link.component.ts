@@ -29,9 +29,12 @@ import { FORMAT_LINK, registerLink, registerLinkSelectionChange } from './link.c
 export class LinkComponent implements OnDestroy, RichTextPluginComponent {
 	readonly #luDialogService = inject(LuDialogService);
 
-	public tabindex = signal<number>(-1);
+	readonly element = viewChild('element', { read: ElementRef<HTMLButtonElement> });
 
-	public readonly active = signal(false);
+	readonly tabindex = signal<number>(-1);
+	readonly active = signal(false);
+	readonly isDisabled = signal(false);
+
 	#editor?: LexicalEditor;
 	intl = getIntl(LU_RICH_TEXT_INPUT_TRANSLATIONS);
 
@@ -49,11 +52,11 @@ export class LinkComponent implements OnDestroy, RichTextPluginComponent {
 		return [LinkNode, AutoLinkNode];
 	}
 
-	public ngOnDestroy() {
+	ngOnDestroy() {
 		this.#registeredCommands();
 	}
 
-	public dispatchCommand() {
+	dispatchCommand() {
 		this.#editor?.read(() => {
 			let url = '';
 			const selection = $getSelection();
@@ -82,9 +85,11 @@ export class LinkComponent implements OnDestroy, RichTextPluginComponent {
 		});
 	}
 
-	public element = viewChild('element', { read: ElementRef<HTMLButtonElement> });
-
 	focus() {
 		(this.element() as ElementRef<HTMLButtonElement>).nativeElement.focus();
+	}
+
+	setDisabledState(isDisabled: boolean): void {
+		this.isDisabled.set(isDisabled);
 	}
 }

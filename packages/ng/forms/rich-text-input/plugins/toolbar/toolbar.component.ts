@@ -32,4 +32,8 @@ export class RichTextInputToolbarComponent implements RichTextPluginComponent {
 	getLexicalNodes(): Klass<LexicalNode>[] {
 		return this.pluginComponents().reduce((acc, plugin) => [...acc, ...(plugin.getLexicalNodes?.() || [])], [] as Klass<LexicalNode>[]);
 	}
+
+	setDisabledState(isDisabled: boolean): void {
+		this.pluginComponents().forEach((plugin) => plugin.setDisabledState(isDisabled));
+	}
 }

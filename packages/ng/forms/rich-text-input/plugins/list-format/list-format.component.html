@@ -8,6 +8,7 @@
 	luTooltipOnlyForDisplay
 	[attr.aria-pressed]="active()"
 	[attr.tabindex]="tabindex()"
+	[disabled]="isDisabled()"
 	class="richText-toolbar-button"
 >
 	<lu-icon [icon]="icon()" [alt]="tooltip()" />

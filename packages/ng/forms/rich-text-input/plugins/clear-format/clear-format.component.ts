@@ -24,23 +24,28 @@ export class ClearFormatComponent implements RichTextPluginComponent, OnDestroy 
 	#editor?: LexicalEditor;
 	#registeredCommands: () => void = () => {};
 
-	intl = getIntl(LU_RICH_TEXT_INPUT_TRANSLATIONS);
+	readonly intl = getIntl(LU_RICH_TEXT_INPUT_TRANSLATIONS);
 
-	public element = viewChild('element', { read: ElementRef<HTMLButtonElement> });
+	readonly element = viewChild('element', { read: ElementRef<HTMLButtonElement> });
 
-	public tabindex = signal<number>(-1);
+	readonly tabindex = signal<number>(-1);
+	readonly isDisabled = signal(false);
 
-	public setEditorInstance(editor: LexicalEditor) {
+	setEditorInstance(editor: LexicalEditor) {
 		this.#editor = editor;
 		this.#registeredCommands = registerClearFormat(editor);
 	}
 
-	public ngOnDestroy() {
+	ngOnDestroy() {
 		this.#registeredCommands();
 	}
 
-	public dispatchCommand() {
+	dispatchCommand() {
 		this.#editor.dispatchCommand(CLEAR_FORMAT, undefined);
+	}
+
+	setDisabledState(isDisabled: boolean) {
+		this.isDisabled.set(isDisabled);
 	}
 
 	focus() {

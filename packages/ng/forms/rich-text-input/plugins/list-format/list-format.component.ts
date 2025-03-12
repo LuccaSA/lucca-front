@@ -26,9 +26,11 @@ export class ListFormatComponent implements OnDestroy, RichTextPluginComponent {
 	public icon = input.required<LuccaIcon>();
 	public tooltip = input.required<string>();
 
-	public tabindex = signal<number>(-1);
+	public element = viewChild('element', { read: ElementRef<HTMLButtonElement> });
 
+	public tabindex = signal<number>(-1);
 	public active = signal(false);
+	public isDisabled = signal(false);
 
 	#editor?: LexicalEditor;
 
@@ -39,15 +41,17 @@ export class ListFormatComponent implements OnDestroy, RichTextPluginComponent {
 		this.#registeredCommands = mergeRegister(registerListsSelectionChange(editor, this.format(), (hasFormat) => this.active.set(hasFormat)));
 	}
 
-	public ngOnDestroy() {
+	ngOnDestroy() {
 		this.#registeredCommands();
 	}
 
-	public dispatchCommand() {
-		this.#editor?.dispatchCommand(FORMAT_LIST, this.format());
+	setDisabledState(isDisabled: boolean) {
+		this.isDisabled.set(isDisabled);
 	}
 
-	public element = viewChild('element', { read: ElementRef<HTMLButtonElement> });
+	dispatchCommand() {
+		this.#editor?.dispatchCommand(FORMAT_LIST, this.format());
+	}
 
 	focus() {
 		(this.element() as ElementRef<HTMLButtonElement>).nativeElement.focus();

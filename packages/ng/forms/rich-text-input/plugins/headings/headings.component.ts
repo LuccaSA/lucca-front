@@ -29,13 +29,16 @@ import { FORMAT_HEADINGS, registerHeadings, registerHeadingsSelectionChange } fr
 export class HeadingsComponent implements OnDestroy, RichTextPluginComponent {
 	readonly #destroyRef = inject(DestroyRef);
 
-	public tabindex = signal<number>(-1);
+	readonly element = viewChild<LuSimpleSelectInputComponent<string>>('selectRef');
 
-	public maxHeadingLevel = input<1 | 2 | 3 | 4 | 5 | 6>(6);
+	readonly tabindex = signal<number>(-1);
+	readonly maxHeadingLevel = input<1 | 2 | 3 | 4 | 5 | 6>(6);
+	readonly headingOptions = computed<CommandPayloadType<typeof FORMAT_HEADINGS>[]>(
+		() => Object.keys(this.headingLabels).slice(0, this.maxHeadingLevel() + 1) as CommandPayloadType<typeof FORMAT_HEADINGS>[],
+	);
 
-	intl = getIntl(LU_RICH_TEXT_INPUT_TRANSLATIONS);
-
-	public readonly headingLabels: Record<CommandPayloadType<typeof FORMAT_HEADINGS>, [string, number]> = {
+	readonly intl = getIntl(LU_RICH_TEXT_INPUT_TRANSLATIONS);
+	readonly headingLabels: Record<CommandPayloadType<typeof FORMAT_HEADINGS>, [string, number]> = {
 		paragraph: [this.intl.headings0, 0],
 		h1: [this.intl.headings1, 1],
 		h2: [this.intl.headings2, 2],
@@ -44,11 +47,7 @@ export class HeadingsComponent implements OnDestroy, RichTextPluginComponent {
 		h5: [this.intl.headings5, 5],
 		h6: [this.intl.headings6, 6],
 	};
-	public readonly headingOptions = computed<CommandPayloadType<typeof FORMAT_HEADINGS>[]>(
-		() => Object.keys(this.headingLabels).slice(0, this.maxHeadingLevel() + 1) as CommandPayloadType<typeof FORMAT_HEADINGS>[],
-	);
-
-	public readonly formControl = new FormControl<CommandPayloadType<typeof FORMAT_HEADINGS> | null>('paragraph');
+	readonly formControl = new FormControl<CommandPayloadType<typeof FORMAT_HEADINGS> | null>('paragraph');
 
 	#registeredCommands: () => void = () => {};
 
@@ -64,13 +63,19 @@ export class HeadingsComponent implements OnDestroy, RichTextPluginComponent {
 		return [HeadingNode];
 	}
 
-	public ngOnDestroy() {
+	ngOnDestroy() {
 		this.#registeredCommands();
 	}
 
-	public element = viewChild<LuSimpleSelectInputComponent<string>>('selectRef');
-
 	focus() {
 		this.element().focusInput();
+	}
+
+	setDisabledState(isDisabled: boolean) {
+		if (isDisabled) {
+			this.formControl.disable();
+		} else {
+			this.formControl.enable();
+		}
 	}
 }
