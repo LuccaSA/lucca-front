@@ -195,7 +195,7 @@
 	padding-inline-start: var(--pr-t-spacings-150);
 }
 
-@mixin withArrow {
+@mixin disclosure {
 	@include iconOnRight;
 
 	.icon-arrowChevronBottom {
