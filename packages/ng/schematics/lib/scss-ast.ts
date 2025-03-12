@@ -200,7 +200,6 @@ export function commentNode(node: AtRule | Declaration, comment: string, postCss
 			return new postCss.Comment({ text: text.trim(), raws: { inline: true, right: '', left: leadingSpaces } });
 		});
 
-	 
 	const originalBefore = node.raws.before;
 
 	node.replaceWith(commentNode, ...commentCodeNodes);

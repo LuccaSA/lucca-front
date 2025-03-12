@@ -19,7 +19,7 @@ import { LuMultiSelectDisplayerInputDirective } from './displayer-input.directiv
 			<input #inputElement (keydown.backspace)="inputBackspace()" (keydown.space)="inputSpace($event)" luMultiSelectDisplayerInput />
 			<div *ngFor="let option of displayedOptions$ | async; let index = index" class="multipleSelect-displayer-chip chip" [class.mod-unkillable]="select.disabled$ | async">
 				<span class="multipleSelect-displayer-chip-value"><ng-container *luOptionOutlet="select.displayerTpl(); value: option"></ng-container></span>
-				<button *ngIf="!(select.disabled$ | async)" type="button" class="chip-kill" (click)="unselectOption(option, $event)">
+				<button *ngIf="(select.disabled$ | async) === false" type="button" class="chip-kill" (click)="unselectOption(option, $event)">
 					<span class="u-mask">{{ intl.removeOption }}</span>
 				</button>
 			</div>

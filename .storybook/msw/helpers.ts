@@ -81,6 +81,7 @@ export function applyV3Fields<T>(count: number): (items: T[], params: { fields?:
 
 		return {
 			data: {
+				// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 				items: regularFields.length ? items.map((item) => regularFields.reduce((acc, field) => ({ ...acc, [field]: item[field] }), {} as T)) : needCount ? [] : items,
 				...(needCount ? { count } : {}),
 			},
