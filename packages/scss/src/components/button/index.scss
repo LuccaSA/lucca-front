@@ -58,6 +58,14 @@
 		&.mod-XS {
 			@include withIconXS;
 		}
+
+		&.mod-iconOnLeft {
+			@include iconOnLeft;
+		}
+
+		&.mod-iconOnRight {
+			@include iconOnRight;
+		}
 	}
 
 	&.mod-onlyIcon {

@@ -187,7 +187,17 @@
 	}
 }
 
+@mixin iconOnRight {
+	padding-inline-end: var(--pr-t-spacings-150);
+}
+
+@mixin iconOnLeft {
+	padding-inline-start: var(--pr-t-spacings-150);
+}
+
 @mixin withArrow {
+	@include iconOnRight;
+
 	.icon-arrowChevronBottom {
 		transition-property: transform;
 		transition-duration: var(--commons-animations-durations-fast);
