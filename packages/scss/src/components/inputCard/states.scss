@@ -1,3 +1,8 @@
 @mixin collapsed {
 	--components-inputCard-content-display: none;
 }
+
+@mixin active {
+	--components-inputCard-borderColor: var(--palettes-product-700);
+	--components-inputCard-backgroundColor: var(--palettes-product-50);
+}
