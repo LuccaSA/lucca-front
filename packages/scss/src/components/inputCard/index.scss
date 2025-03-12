@@ -5,19 +5,23 @@
 	@include vars;
 	@include component;
 
-	&:not(:has(.inputCard-header-input:checked), .is-open) {
+	&:has(.inputCard-header-field-input:checked) {
+		@include active;
+	}
+
+	&:not(:has(.inputCard-header-field-input:checked), .is-open) {
 		@include collapsed;
 	}
 
-	&:hover {
+	&:not(:has(.inputCard-header-field-input:disabled)):hover {
 		@include hover;
 	}
 
-	&:has(.inputCard-header-input:focus-visible) {
+	&:has(.inputCard-header-field-input:focus-visible) {
 		@include a11y.focusVisible;
 	}
 
-	&:has(.inputCard-header-input:disabled) {
+	&:has(.inputCard-header-field-input:disabled) {
 		opacity: 0.25;
 	}
 }

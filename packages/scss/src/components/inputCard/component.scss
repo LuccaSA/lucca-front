@@ -2,23 +2,53 @@
 @use '@lucca-front/scss/src/components/radioField/exports' as radioField;
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
+	position: relative;
+	margin-block: var(--pr-t-spacings-200);
 	padding: var(--pr-t-spacings-200);
 	border-radius: 1rem;
-	border: solid 1px var(--components-inputCard-borderColor);
-	margin: 1rem;
+	box-shadow: 0 0 0 1px var(--components-inputCard-borderColor);
 	overflow: hidden;
+	background-color: var(--components-inputCard-backgroundColor);
 
 	@at-root ($atRoot) {
+		.inputCard {
+			.inputCard-header-field {
+				position: static;
+			}
+
+			.inputCard-header-field-label {
+				position: static;
+				width: 100%;
+				font-weight: 600;
+			}
+		}
+
 		.inputCard-content {
 			display: var(--components-inputCard-content-display);
 			padding-block-start: var(--pr-t-spacings-200);
+			padding-inline-start: calc(var(--pr-t-spacings-300) + var(--pr-t-spacings-50));
+		}
+
+		// TODO: Add `noOutline` to radioField component.
+		.radioField-input:focus-visible ~ .radioField-icon::after {
+			outline: none;
 		}
 
 		.inputCard-header-input {
 			// TODO: Add `noOutline` to radioField component.
-			@include radioField.noOutline;
+			//@include radioField.noOutline;
 
 			outline: none !important;
 		}
-	}
+
+		.inputCard-header-field-label {
+			&::after {
+				content: "";
+				position: absolute;
+				inset: 0;
+				width: 100%;
+				height: 100%;
+			}
+		}
+		}
 }
