@@ -24,8 +24,8 @@
 				[luTooltip]="fileName() + ' – ' + fileSizeDisplay()"
 				[luTooltipDisabled]="this.display() !== 'media' && this.display() !== 'single'"
 			>
-				@if (filePreviewUrl()) {
-					<img class="fileUploaded-status-content-img" [src]="filePreviewUrl()" alt="" loading="lazy" />
+				@if (previewUrl()) {
+					<img class="fileUploaded-status-content-img" [src]="previewUrl()" alt="" loading="lazy" />
 					@if (state() === 'loading') {
 						<div class="fileUploaded-status-content-loading loading"></div>
 					}

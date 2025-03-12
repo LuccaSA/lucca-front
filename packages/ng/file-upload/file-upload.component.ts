@@ -1,11 +1,10 @@
-import { booleanAttribute, Component, computed, inject, input, LOCALE_ID, output, signal, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, Component, computed, inject, input, LOCALE_ID, output, ViewEncapsulation } from '@angular/core';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { LuClass } from '@lucca-front/ng/core';
 import { InputDirective } from '@lucca-front/ng/form-field';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { LuSafeExternalSvgPipe } from '@lucca-front/ng/safe-content';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
-import { UploadEntry } from './file-upload-entry';
 import { formatSize, MEGA_BYTE } from './formatter';
 
 let nextId = 0;
@@ -27,12 +26,12 @@ export class FileUploadComponent {
 
 	droppable = false;
 
-	filePicked = output<UploadEntry>();
+	filePicked = output<File>();
 
 	multiple = input(false, { transform: booleanAttribute });
 
 	// TODO voir avec Vincent niveau inté
-	state = signal<'loading' | 'success' | 'error' | null>(null);
+	state = input<'loading' | 'success' | 'error' | null>(null);
 
 	accept = input<
 		Array<{
@@ -74,19 +73,11 @@ export class FileUploadComponent {
 	filesChange(event: Event) {
 		const host = event.target as HTMLInputElement;
 		this.droppable = false;
-		const uploads: UploadEntry[] = Array.from(host.files).map((file) => {
-			return {
-				file,
-				name: file.name,
-				size: file.size,
-				type: file.type,
-				state: 'loading',
-				preview: file.type.startsWith('image/') ? URL.createObjectURL(file) : undefined,
-			};
-		});
-		for (const upload of uploads) {
-			this.filePicked.emit(upload);
+		for (const file of Array.from(host.files)) {
+			this.filePicked.emit(file);
 		}
+		host.value = null;
+		// TODO single file upload?
 		// this.state.set('loading');
 	}
 }
