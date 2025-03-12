@@ -9,7 +9,7 @@ import { IconComponent } from '@lucca-front/ng/icon';
 import { InlineMessageComponent } from '@lucca-front/ng/inline-message';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 import { formatSize } from '../formatter';
-import { FileEntry, UploadEntry } from '../file-upload-entry';
+import { FileEntry } from '../file-upload-entry';
 import { Subject } from 'rxjs';
 import { outputFromObservable } from '@angular/core/rxjs-interop';
 
@@ -31,7 +31,7 @@ export class FileEntryComponent {
 
 	inlineMessageError = input<string | null>(null);
 
-	entry = input.required<UploadEntry | FileEntry>();
+	entry = input.required<FileEntry>();
 
 	format = input<'file' | 'word' | 'excel' | 'powerpoint'>('file');
 
@@ -64,7 +64,7 @@ export class FileEntryComponent {
 	fileName = computed(() => this.entry().name);
 	fileType = computed(() => this.entry().type);
 	fileSize = computed(() => this.entry().size);
-	filePreviewUrl = computed(() => this.entry().preview);
+	previewUrl = input<string>('');
 
 	fileSizeDisplay = computed(() => formatSize(this.#locale, this.fileSize()));
 
