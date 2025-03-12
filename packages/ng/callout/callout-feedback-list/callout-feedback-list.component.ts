@@ -2,7 +2,6 @@ import { ChangeDetectionStrategy, Component, inject, Input, OnChanges, ViewEncap
 import { LuClass, Palette } from '@lucca-front/ng/core';
 
 @Component({
-	// eslint-disable-next-line @angular-eslint/component-selector
 	selector: 'ul[lu-callout-feedback-list]',
 	standalone: true,
 	template: '<ng-content></ng-content>',

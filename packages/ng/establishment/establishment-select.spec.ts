@@ -1,6 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-call */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
-/* eslint-disable @typescript-eslint/no-unsafe-argument */
 import { HttpClientModule } from '@angular/common/http';
 import { discardPeriodicTasks, fakeAsync, tick } from '@angular/core/testing';
 import { RenderTemplateOptions, fireEvent, render, screen } from '@testing-library/angular';
@@ -71,8 +68,6 @@ describe('establishment select', () => {
 
 	describe('Basic', () => {
 		it('should display dialog with a click on a lu select ', async () => {
-			// eslint-disable-next-line @typescript-eslint/no-explicit-any
-
 			await render(testingStoryTemplate, rendererTemplateOptions);
 
 			const luSelectElement = screen.getByTestId('lu-select');
@@ -85,7 +80,6 @@ describe('establishment select', () => {
 		it('should trigger search when clue is typed in', fakeAsync(async () => {
 			discardPeriodicTasks();
 
-			// eslint-disable-next-line @typescript-eslint/no-explicit-any
 			await render(testingStoryTemplate, rendererTemplateOptions);
 			const luSelectElement = await screen.findByTestId('lu-select');
 
@@ -111,7 +105,6 @@ describe('establishment select', () => {
 
 	describe('multiple', () => {
 		it('should display dialog with a click on a lu select ', async () => {
-			// eslint-disable-next-line @typescript-eslint/no-explicit-any
 			await render(testingStoryTemplate, rendererTemplateOptions);
 			const luSelectElement = screen.getByTestId('lu-select-multiple');
 			await userEvent.click(luSelectElement);
@@ -120,7 +113,6 @@ describe('establishment select', () => {
 		});
 
 		it('should select all establishment', fakeAsync(async () => {
-			// eslint-disable-next-line @typescript-eslint/no-explicit-any
 			await render(testingStoryTemplate, rendererTemplateOptions);
 
 			const luSelectElement = await screen.findByTestId('lu-select-multiple');
@@ -136,7 +128,6 @@ describe('establishment select', () => {
 		}));
 
 		it('should deselect all establishment', fakeAsync(async () => {
-			// eslint-disable-next-line @typescript-eslint/no-explicit-any
 			await render(testingStoryTemplate, rendererTemplateOptions);
 			const luSelectElement = await screen.findByTestId('lu-select-multiple');
 			fireEvent.click(luSelectElement);
