@@ -14,6 +14,7 @@ export interface ILuRichTextInputLabel {
 	linksHref: string;
 	linksLabel: string;
 	linksSubmit: string;
+	linksPlaceholder: string;
 
 	listsNumberedLabel: string;
 	listsBulletLabel: string;
