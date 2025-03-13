@@ -1,5 +1,8 @@
 @mixin vars {
 	--components-inputCard-content-display: block;
 	--components-inputCard-borderColor: var(--palettes-neutral-200);
-	--components-inputCard-backgroundColor: transparent;
+	--components-inputCardHeader-backgroundColor: transparent;
+	// 1.25rem = radio field input size
+	// var(--pr-t-spacings-100)= radio field gap
+	--components-inputCardContent-paddingInlineStart : calc(var(--pr-t-spacings-200) + 1.25rem + var(--pr-t-spacings-100));
 }

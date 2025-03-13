@@ -2,7 +2,10 @@
 	--components-inputCard-content-display: none;
 }
 
+@mixin open {
+	--components-inputCardHeader-backgroundColor: var(--palettes-product-50);
+}
+
 @mixin active {
 	--components-inputCard-borderColor: var(--palettes-product-700);
-	--components-inputCard-backgroundColor: var(--palettes-product-50);
 }
