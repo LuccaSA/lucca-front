@@ -1,8 +1,9 @@
 import { Highlightable } from '@angular/cdk/a11y';
 import { AsyncPipe, NgIf } from '@angular/common';
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, HostBinding, Input, OnDestroy, TemplateRef, Type, ViewChild, inject } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, HostBinding, Input, OnDestroy, TemplateRef, Type, ViewChild, inject, input } from '@angular/core';
 import { PortalDirective } from '@lucca-front/ng/core';
 import { BehaviorSubject, Subscription, asyncScheduler, observeOn } from 'rxjs';
+import { GroupTemplateLocation } from '../panel/panel.utils';
 import { LuOptionContext, SELECT_ID } from '../select.model';
 import { LuOptionGrouping } from './group.directive';
 import { LuOptionGroupPipe } from './group.pipe';
@@ -33,11 +34,15 @@ export class LuOptionComponent<T> implements Highlightable, AfterViewInit, OnDes
 	@Input() option?: T;
 	@Input() grouping?: LuOptionGrouping<T, unknown>;
 
+	groupIndex = input<number>();
+
 	@Input()
 	public optionIndex = 0;
 
 	@Input()
 	scrollIntoViewOptions: ScrollIntoViewOptions = {};
+
+	groupTemplateLocation = input<GroupTemplateLocation>();
 
 	isHighlighted$ = new BehaviorSubject(false);
 
@@ -57,7 +62,9 @@ export class LuOptionComponent<T> implements Highlightable, AfterViewInit, OnDes
 
 	@HostBinding('attr.id')
 	public get id(): string {
-		return `lu-select-${this.selectId}-option-${this.optionIndex}`;
+		const groupPart = this.groupIndex() === undefined ? `` : `-group-${this.groupIndex()}`;
+
+		return `lu-select-${this.selectId}${groupPart}-option-${this.optionIndex}`;
 	}
 
 	protected elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
