@@ -116,7 +116,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 			// We have to put it in a setTimeout so it'll be triggered AFTER the DOM is updated and not right now,
 			// which is before the panel size has been modified by the arrival of the new options
 			setTimeout(() => {
-				this.panelRef.updatePosition();
+				this.panelRef?.updatePosition();
 				this.updatePositionFn?.();
 			});
 		}
@@ -417,9 +417,16 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	}
 
 	enableFilterPillMode() {
-		this.isPanelOpen$.next(true);
 		this.filterPillMode = true;
 		this._panelRef.closed.subscribe(this.afterCloseFn);
 		this.bindInputToPanelRefEvents();
+	}
+
+	onFilterPillOpened(): void {
+		this.isPanelOpen$.next(true);
+	}
+
+	onFilterPillClosed(): void {
+		this.isPanelOpen$.next(false);
 	}
 }
