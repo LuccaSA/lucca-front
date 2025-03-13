@@ -1,4 +1,5 @@
 import {
+	booleanAttribute,
 	ChangeDetectionStrategy,
 	Component,
 	computed,
@@ -25,10 +26,10 @@ import { mergeRegister } from '@lexical/utils';
 import { $canShowPlaceholderCurry } from '@lexical/text';
 import { FormFieldComponent, InputDirective } from '@lucca-front/ng/form-field';
 
-import { createEditor, Klass, LexicalEditor, LexicalNode } from 'lexical';
-import { RICH_TEXT_FORMATTER, RichTextFormatter } from './formatters';
 import { toSignal } from '@angular/core/rxjs-interop';
+import { createEditor, Klass, LexicalEditor, LexicalNode } from 'lexical';
 import { map } from 'rxjs/operators';
+import { RICH_TEXT_FORMATTER, RichTextFormatter } from './formatters';
 
 export interface RichTextPluginComponent {
 	setEditorInstance(editor: LexicalEditor): void;
@@ -71,6 +72,7 @@ export class RichTextInputComponent implements OnInit, OnDestroy, ControlValueAc
 	#cleanup?: () => void;
 
 	placeholder = input<string>('');
+	disableSpeelcheck = input<boolean, boolean>(false, { transform: booleanAttribute });
 
 	content = viewChild.required<string, ElementRef<HTMLElement>>('content', {
 		read: ElementRef,

@@ -9,6 +9,7 @@
 		[attr.aria-placeholder]="currentCanShowPlaceholder() ? placeholder() : null"
 		[attr.aria-labelledby]="formFieldId() + '-label'"
 		[attr.aria-invalid]="isInvalid()"
+		[attr.spellcheck]="!disableSpeelcheck()"
 	></div>
 	@if (currentCanShowPlaceholder()) {
 	<div aria-hidden="true" class="richText-content-placeholder">{{ placeholder() }}</div>
