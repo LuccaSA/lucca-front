@@ -3,7 +3,7 @@ import { Meta, StoryFn } from '@storybook/angular';
 interface BreadcrumbsCompactStory {}
 
 export default {
-	title: 'Documentation/Navigation/Breadcrumbs/Compact',
+	title: 'Documentation/Navigation/Breadcrumbs/HTML&CSS/Compact',
 } as Meta;
 
 function getTemplate(args: BreadcrumbsCompactStory): string {

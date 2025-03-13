@@ -1,3 +1,4 @@
+import { ButtonComponent } from '@lucca-front/ng/button';
 import { FooterComponent } from '@lucca-front/ng/footer';
 import { Meta, moduleMetadata } from '@storybook/angular';
 import { generateInputs } from 'stories/helpers/stories';
@@ -14,7 +15,7 @@ export default {
 	},
 	decorators: [
 		moduleMetadata({
-			imports: [FooterComponent],
+			imports: [FooterComponent, ButtonComponent],
 		}),
 	],
 	render: (args, { argTypes }) => {
@@ -27,8 +28,8 @@ export default {
 <lu-footer ${narrow} ${force} ${generateInputs(otherArgs, argTypes)}>
 	Content
 	<ng-container footerActions>
-		<button type="button" class="button">Button</button>
-    <button type="button" class="button mod-outlined">Button</button>
+		<button type="button" luButton>Button</button>
+    <button type="button" luButton="outlined">Button</button>
 	</ng-container>
 </lu-footer>
 			`,

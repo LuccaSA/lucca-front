@@ -1,0 +1,8 @@
+<p [attr.id]="id" class="u-mask">Fil d’ariane</p>
+<ol class="breadcrumbs-list">
+	@for (link of links(); track $index) {
+	<li class="breadcrumbs-list-item">
+		<ng-container *ngTemplateOutlet="link.template" />
+	</li>
+	}
+</ol>
