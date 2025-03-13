@@ -4,29 +4,23 @@
 @mixin component($atRoot: namespace.$defaultAtRoot) {
 	position: relative;
 	margin-block: var(--pr-t-spacings-200);
-	padding: var(--pr-t-spacings-200);
 	border-radius: 1rem;
 	box-shadow: 0 0 0 1px var(--components-inputCard-borderColor);
 	overflow: hidden;
-	background-color: var(--components-inputCard-backgroundColor);
+	background-color: var(--palettes-neutral-0);
 
 	@at-root ($atRoot) {
-		.inputCard {
-			.inputCard-header-field {
-				position: static;
-			}
-
-			.inputCard-header-field-label {
-				position: static;
-				width: 100%;
-				font-weight: 600;
-			}
+		.inputCard-header {
+			margin: 0 !important;
+			padding: var(--pr-t-spacings-200);
+			background-color: var(--components-inputCardHeader-backgroundColor);
 		}
 
 		.inputCard-content {
 			display: var(--components-inputCard-content-display);
-			padding-block-start: var(--pr-t-spacings-200);
-			padding-inline-start: calc(var(--pr-t-spacings-300) + var(--pr-t-spacings-50));
+			padding: var(--pr-t-spacings-200);
+			padding-inline-start: var(--components-inputCardContent-paddingInlineStart);
+			border-top: solid 1px var(--palettes-product-100);
 		}
 
 		// TODO: Add `noOutline` to radioField component.
@@ -41,7 +35,9 @@
 			outline: none !important;
 		}
 
-		.inputCard-header-field-label {
+		.inputCard-header-label {
+			position: static !important;
+
 			&::after {
 				content: "";
 				position: absolute;
