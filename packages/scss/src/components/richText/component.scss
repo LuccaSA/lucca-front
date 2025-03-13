@@ -42,6 +42,10 @@
 		.richText-content {
 			padding: var(--pr-t-spacings-100);
 			outline: none;
+			overflow: auto;
+			height: var(--components-richText-content-height);
+			box-sizing: content-box;
+			max-height: 60vh;
 		}
 
 		.richText-content-placeholder {

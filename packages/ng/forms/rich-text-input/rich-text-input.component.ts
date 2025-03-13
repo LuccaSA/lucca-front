@@ -73,6 +73,7 @@ export class RichTextInputComponent implements OnInit, OnDestroy, ControlValueAc
 
 	placeholder = input<string>('');
 	disableSpeelcheck = input<boolean, boolean>(false, { transform: booleanAttribute });
+	autoResize = input<boolean, boolean>(false, { transform: booleanAttribute });
 
 	content = viewChild.required<string, ElementRef<HTMLElement>>('content', {
 		read: ElementRef,

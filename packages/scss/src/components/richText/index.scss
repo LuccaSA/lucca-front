@@ -8,6 +8,10 @@
 		@include hover;
 	}
 
+	&.mod-autoResize {
+		@include autoResize;
+	}
+
 	&.is-error {
 		@include error;
 
