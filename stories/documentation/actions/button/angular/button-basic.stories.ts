@@ -1,5 +1,5 @@
-import { Meta, StoryObj } from '@storybook/angular';
 import { ButtonComponent } from '@lucca-front/ng/button';
+import { Meta, StoryObj } from '@storybook/angular';
 import { generateInputs } from 'stories/helpers/stories';
 
 export default {
@@ -28,7 +28,7 @@ export const Basic: StoryObj<ButtonComponent> = {
 			control: {
 				type: 'select',
 			},
-		}
+		},
 	},
 	args: {
 		block: false,
