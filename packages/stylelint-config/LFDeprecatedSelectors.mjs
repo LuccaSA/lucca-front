@@ -28,10 +28,6 @@ export default [
 	},
 	{
 		objectPattern: [
-			'.user-info',
-			'.user-tile-title',
-			'.user-tile-label',
-			'.user-tile-footnote',
 			'.columnSticky',
 			'.table-head-row-cell-sortableButton',
 			'.indexTable-head-row-cell-sortableButton',
@@ -46,12 +42,12 @@ export default [
 		versionDeleted: '20.1.0',
 	},
 	{
-		objectPattern: /\.user-info.+/,
+		objectPattern: /\.user-info/,
 		versionDeprecated: '18.1.0',
 		versionDeleted: '20.1.0',
 	},
 	{
-		objectPattern: /\.user-tile.+/,
+		objectPattern: /\.user-tile-(title|label|footnote)/,
 		versionDeprecated: '18.1.0',
 		versionDeleted: '20.1.0',
 	},
