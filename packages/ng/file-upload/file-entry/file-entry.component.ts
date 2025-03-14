@@ -48,9 +48,6 @@ export class FileEntryComponent {
 		return this.passwordChange$.observed;
 	}
 
-	// TODO story simple/multiple avec fake service cdk qui attend 1s
-	// TODO ajouter une doc md avec Olivier pour parler du combo avec le service lucca files et son intégration
-
 	display = input<'media' | 'single' | null>(null);
 
 	deleteFile$ = new Subject<void>();

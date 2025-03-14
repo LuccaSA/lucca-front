@@ -1,0 +1,44 @@
+<div
+	class="fileUpload"
+	[class.is-droppable]="droppable"
+	[class.mod-S]="size() === 'S'"
+	[class.is-hidden]="false"
+>
+	<input
+		[attr.aria-describedby]="'fileUpload-instruction-' + idSuffix"
+		multiple="multiple"
+		class="fileUpload-input"
+		type="file"
+		title=""
+		[attr.accept]="acceptAttribute().length > 0 ? acceptAttribute() : null"
+		luInput
+		(dragenter)="droppable = true"
+		(dragleave)="droppable = false"
+		(change)="filesChange($event)"
+		#inputRef
+	/>
+	<div class="fileUpload-status" [innerHtml]="illustrationUrl() | luSafeExternalSvg"></div>
+	<div class="fileUpload-instruction" [attr.id]="'fileUpload-instruction-' + idSuffix">
+		<span class="fileUpload-instruction-action" aria-hidden="true">
+				Déposez les fichiers ici ou
+				<span class="fileUpload-instruction-action-click">cliquez pour les sélectionner</span>.
+		</span>
+		@if (acceptNames().length) {
+			<span class="fileUpload-instruction-formats">
+			@if (acceptNames().length > 1) {
+				Formats acceptés :
+			} @else {
+				Format accepté :
+			} {{ acceptNames().join(', ') }}.
+		</span>
+		}
+		@if (fileMaxSize()) {
+			<span class="fileUpload-instruction-size">Poids maximum
+				d’un fichier
+			 : {{ maxSizeDisplay() }}. </span>
+		}
+		<span class="u-mask">Les fichiers déjà déposés sont listés après.</span>
+	</div>
+	<span class="fileUpload-button button" aria-hidden="true">
+		Sélectionner des fichiers</span>
+</div>
