@@ -13,6 +13,10 @@
 	border-style: solid;
 	border-width: 1px;
 	border-radius: var(--pr-t-radius-input);
+	resize: var(--components-richText-resize);
+	min-height: calc(var(--components-richText-minHeight) + var(--pr-t-spacings-800) + var(--pr-t-spacings-25));
+	max-height: var(--components-richText-maxHeight);
+	height: calc(var(--components-richText-height) + var(--pr-t-spacings-800) + var(--pr-t-spacings-25));
 
 	&:has(.richText-content:focus-visible) {
 		@include a11y.focusVisible;
@@ -22,6 +26,7 @@
 		.richText-toolbar {
 			display: flex;
 			flex-wrap: wrap;
+			row-gap: var(--pr-t-spacings-100);
 			align-items: center;
 			background-color: var(--components-richText-toolbar-backgroundColor);
 			padding: var(--pr-t-spacings-100);
@@ -43,9 +48,7 @@
 			padding: var(--pr-t-spacings-100);
 			outline: none;
 			overflow: auto;
-			height: var(--components-richText-content-height);
-			box-sizing: content-box;
-			max-height: 60vh;
+			flex-grow: 1;
 		}
 
 		.richText-content-placeholder {
