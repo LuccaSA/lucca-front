@@ -1,0 +1,20 @@
+<lu-dialog>
+	<form class="dialog-form" (submit)="save()" [formGroup]="formGroup">
+		<lu-dialog-content>
+			<lu-form-field [label]="intl.linksHref">
+				<lu-text-input formControlName="href" type="url" [placeholder]="intl.linksPlaceholder" />
+			</lu-form-field>
+		</lu-dialog-content>
+		<lu-dialog-footer>
+			@if (dialogData) {
+			<div class="footer-content">
+				<button type="button" luButton="text" delete (click)="deleteLink()">{{intl.linksDelete}}</button>
+			</div>
+			}
+			<div class="footer-actions">
+				<button type="submit" luButton>{{ intl.linksSubmit }}</button>
+				<button type="button" luButton="text" luDialogDismiss>{{ intl.linksCancel }}</button>
+			</div>
+		</lu-dialog-footer>
+	</form>
+</lu-dialog>
