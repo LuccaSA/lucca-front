@@ -4,9 +4,10 @@
 @mixin component($atRoot: namespace.$defaultAtRoot) {
 	position: relative;
 	margin-block: var(--pr-t-spacings-200);
-	border-radius: 1rem;
-	box-shadow: 0 0 0 1px var(--components-inputCard-borderColor);
 	overflow: hidden;
+	border: solid 1px var(--components-inputCard-borderColor);
+	border-radius: 1rem;
+	box-shadow: var(--components-inputCard-boxShadow);
 	background-color: var(--palettes-neutral-0);
 
 	@at-root ($atRoot) {
@@ -39,12 +40,12 @@
 			position: static !important;
 
 			&::after {
-				content: "";
+				content: '';
 				position: absolute;
 				inset: 0;
 				width: 100%;
 				height: 100%;
 			}
 		}
-		}
+	}
 }
