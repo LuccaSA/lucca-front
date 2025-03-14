@@ -6,7 +6,7 @@
 	@include component;
 
 	&:has(.inputCard-header-input:checked) {
-		@include active;
+		@include checked;
 	}
 
 	&:has(.inputCard-header-input:checked),
@@ -27,6 +27,6 @@
 	}
 
 	&:has(.inputCard-header-input:disabled) {
-		opacity: 0.25;
+		@include disabled;
 	}
 }

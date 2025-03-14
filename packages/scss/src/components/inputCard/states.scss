@@ -6,6 +6,15 @@
 	--components-inputCardHeader-backgroundColor: var(--palettes-product-50);
 }
 
-@mixin active {
-	--components-inputCard-borderColor: var(--palettes-product-700);
+@mixin hover {
+	--components-inputCard-boxShadow: var(--pr-t-elevation-shadow-raised);
+}
+
+@mixin disabled {
+	--components-inputCardHeader-backgroundColor: var(--palettes-neutral-25);
+	--components-inputCardHeader-borderColor: var(--palettes-neutral-50);
+}
+
+@mixin checked {
+	--components-inputCard-borderColor: var(--palettes-product-300);
 }
