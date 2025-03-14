@@ -1,5 +1,6 @@
 import { FormsModule } from '@angular/forms';
 import { provideRouter } from '@angular/router';
+import { BreadcrumbsComponent } from '@lucca-front/ng/breadcrumbs';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { TextInputComponent } from '@lucca-front/ng/forms';
@@ -9,6 +10,7 @@ import { PageHeaderComponent } from '@lucca-front/ng/page-header';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 import { applicationConfig, Meta, moduleMetadata } from '@storybook/angular';
 import { LinkComponent } from 'dist/ng/link';
+import { BreadcrumbsLinkDirective } from 'packages/ng/breadcrumbs/breadcrumbs-link.directive';
 import { generateInputs } from 'stories/helpers/stories';
 
 export default {
@@ -36,6 +38,8 @@ export default {
 				FormsModule,
 				HorizontalNavigationComponent,
 				HorizontalNavigationLinkDirective,
+				BreadcrumbsComponent,
+				BreadcrumbsLinkDirective,
 			],
 		}),
 		applicationConfig({
@@ -87,22 +91,11 @@ export default {
 			: ``;
 		const breadcrumbsContainer = breadcrumbs
 			? `<ng-container pageHeaderBreadcrumbs>
-		<nav class="breadcrumbs" aria-describedby="breadcrumbs-title">
-			<p id="breadcrumbs-title" class="u-mask">Breadcrumbs</p>
-			<ol class="breadcrumbs-list">
-				<li class="breadcrumbs-list-item">
-					<a href="#" class="breadcrumbs-list-item-action">Page 0</a>
-				</li>
-				<li class="breadcrumbs-list-item">
-					<a href="#" class="breadcrumbs-list-item-action">Page 1</a>
-				</li>
-				<li class="breadcrumbs-list-item">
-					<span aria-current="page" class="breadcrumbs-list-item-action">
-						Page 2
-					</span>
-				</li>
-			</ol>
-		</nav>
+		<lu-breadcrumbs>
+			<a *luBreadcrumbsLink class="breadcrumbs-list-item-action" routerLink="/" ariaCurrentWhenActive="page">Page 0</a>
+			<a *luBreadcrumbsLink class="breadcrumbs-list-item-action" ariaCurrentWhenActive="page" href="#2">Page 1</a>
+			<a *luBreadcrumbsLink class="breadcrumbs-list-item-action" aria-current="page">Page 2</a>
+		</lu-breadcrumbs>
 	</ng-container>`
 			: ``;
 		const desc = descriptionPortalContent ? `[description]="description"` : ``;
