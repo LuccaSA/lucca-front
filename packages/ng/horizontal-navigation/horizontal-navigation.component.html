@@ -1,0 +1,18 @@
+@if (container()) {
+<div class="horizontalNavigation-containerOptional">
+	<ng-container *ngTemplateOutlet="horizontalNavigationList" />
+</div>
+
+} @else {
+<ng-container *ngTemplateOutlet="horizontalNavigationList" />
+}
+
+<ng-template #horizontalNavigationList>
+	<ul class="horizontalNavigation-list">
+		@for (link of links(); track $index) {
+		<li class="horizontalNavigation-list-item">
+			<ng-container *ngTemplateOutlet="link.template" />
+		</li>
+		}
+	</ul>
+</ng-template>
