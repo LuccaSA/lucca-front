@@ -6,14 +6,13 @@
 		groupTemplateLocation: groupTemplateLocation$ | async,
 		shouldDisplayAddOption: shouldDisplayAddOption$ | async,
 	} as ctx"
-	[cdkTrapFocusAutoCapture]="true"
 >
 	<div class="lu-picker-content" [class.is-loading]="loading$ | async" (scroll)="onScroll($event)">
 		<ng-container *luPortal="selectInput.panelHeaderTpl()" />
 		<div role="listbox">
 			<ng-container *ngIf="grouping && ctx.groupTemplateLocation === 'group-header'">
 				<div
-					*ngFor="let group of ctx.options | luOptionGroup:grouping.selector; trackBy: trackGroupsBy"
+					*ngFor="let group of ctx.options | luOptionGroup:grouping.selector; trackBy: trackGroupsBy; let groupIndex = index"
 					class="lu-picker-content-option-group"
 					role="group"
 					[attr.aria-labelledby]="selectId + '-group-' + group.key"
@@ -21,20 +20,22 @@
 					<span class="lu-picker-content-option-group-title" role="presentation" [id]="selectId + '-group-' + group.key">
 						<ng-container *luPortal="grouping.content; context: { $implicit: group }" />
 					</span>
-					<ng-template [ngTemplateOutlet]="optionsList" [ngTemplateOutletContext]="{ $implicit: group.options }" />
+					<ng-template [ngTemplateOutlet]="optionsList" [ngTemplateOutletContext]="{ $implicit: group.options, groupIndex: groupIndex }" />
 				</div>
 			</ng-container>
 			<ng-container *ngIf="!grouping || ctx.groupTemplateLocation !== 'group-header'">
 				<ng-template [ngTemplateOutlet]="optionsList" [ngTemplateOutletContext]="{ $implicit: ctx.options }" />
 			</ng-container>
 
-			<ng-template #optionsList let-options>
+			<ng-template #optionsList let-options let-groupIndex="groupIndex">
 				<lu-select-option
 					*ngFor="let option of options; let index = index; trackBy: trackOptionsBy"
 					[option]="option"
 					[optionTpl]="optionTpl()"
 					[optionIndex]="index"
-					[grouping]="ctx.groupTemplateLocation === 'option' ? grouping : undefined"
+					[groupTemplateLocation]="ctx.groupTemplateLocation"
+					[groupIndex]="groupIndex"
+					[grouping]="grouping"
 					[scrollIntoViewOptions]="{ block: 'center' }"
 					[isSelected]="option | luIsOptionSelected:optionComparer:selected()"
 					(click)="panelRef.emitValue(option)"

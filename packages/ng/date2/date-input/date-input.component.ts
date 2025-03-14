@@ -113,10 +113,16 @@ export class DateInputComponent extends AbstractDateComponent implements Control
 			}
 			return formatter.format(this.selectedDate());
 		}
-		return this.userTextInput();
+		const textInput = this.userTextInput();
+		// If we are initializing the component, we don't want to display the value
+		if (textInput === 'ɵ') {
+			return '';
+		}
+		return textInput;
 	});
 
-	userTextInput = signal<string>('');
+	// We need to use a "magic key" here to avoid sending a null value change on initialization
+	userTextInput = signal<string>('ɵ');
 
 	combinedGetCellInfo = (date: Date, mode: CalendarMode): CellStatus => {
 		const infoFromInput = this.getCellInfo()?.(date, mode);
@@ -147,6 +153,10 @@ export class DateInputComponent extends AbstractDateComponent implements Control
 		super();
 		effect(() => {
 			const inputValue = this.userTextInput();
+			// If we are initializing the component, we don't want to parse the value
+			if (inputValue === 'ɵ') {
+				return;
+			}
 			if (inputValue.length > 0) {
 				let parsed: Date;
 				try {
