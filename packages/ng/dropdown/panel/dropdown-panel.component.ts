@@ -42,7 +42,6 @@ export class LuDropdownPanelComponent extends ALuPopoverPanel implements ILuPopo
 	/** Event emitted when the popover is closed. */
 	// eslint-disable-next-line @angular-eslint/no-output-native
 	@Output() override close = new EventEmitter<void>();
-	// eslint-disable-next-line @angular-eslint/no-output-native
 	@Output() override open = new EventEmitter<void>();
 	@Output() override hovered = new EventEmitter<boolean>();
 

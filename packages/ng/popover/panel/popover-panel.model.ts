@@ -188,7 +188,6 @@ export abstract class ALuPopoverPanel<T = unknown> implements ILuPopoverPanel<T>
 	}
 
 	/** does nothing but must be overridable */
-	// eslint-disable-next-line @typescript-eslint/no-empty-function
 	onMouseDown() {}
 
 	_handleKeydown(event: KeyboardEvent) {

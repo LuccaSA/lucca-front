@@ -1,4 +1,3 @@
-/* eslint-disable @angular-eslint/no-output-on-prefix */
 import { OverlayConfig, OverlayContainer } from '@angular/cdk/overlay';
 import {
 	booleanAttribute,
