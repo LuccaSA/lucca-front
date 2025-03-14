@@ -5,11 +5,20 @@
 	@include vars;
 	@include component;
 
+	&:has(.inputCard-header-input:checked) {
+		@include active;
+	}
+
+	&:has(.inputCard-header-input:checked),
+	&.is-open {
+		@include open;
+	}
+
 	&:not(:has(.inputCard-header-input:checked), .is-open) {
 		@include collapsed;
 	}
 
-	&:hover {
+	&:not(:has(.inputCard-header-input:disabled)):hover {
 		@include hover;
 	}
 
