@@ -3,7 +3,7 @@ import { Meta, StoryFn } from '@storybook/angular';
 interface SmallStory {}
 
 export default {
-	title: 'Documentation/Structure/Highlight data/HTML&CSS/Small',
+	title: 'Documentation/Structure/Highlight data/HTML&CSS/Sizes',
 	argTypes: {},
 } as Meta;
 
