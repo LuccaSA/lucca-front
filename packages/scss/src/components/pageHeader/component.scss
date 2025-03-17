@@ -50,10 +50,10 @@
 				}
 			}
 
-			.textfield.mod-search {
+			.textfield.mod-search,
+			.form-field:has(.icon-searchMagnifyingGlass) {
 				@include media.max('XS') {
-					inline-size: 100%;
-					flex: auto;
+					flex-basis: 100%;
 				}
 			}
 		}

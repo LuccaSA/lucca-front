@@ -16,13 +16,11 @@ import { generateInputs } from 'stories/helpers/stories';
 export default {
 	title: 'Documentation/Structure/PageHeader/Angular/Basic',
 	argTypes: {
-		description: {
-			control: 'text',
-			if: { arg: 'descriptionPortalContent', truthy: false },
-		},
 		label: {
-			control: 'text',
-			if: { arg: 'labelPortalContent', truthy: false },
+			description: 'PortalContent',
+		},
+		description: {
+			description: 'PortalContent',
 		},
 	},
 	decorators: [
@@ -47,7 +45,7 @@ export default {
 		}),
 	],
 	render: (args, { argTypes }) => {
-		const { descriptionPortalContent, labelPortalContent, breadcrumbs, actions, navigation, backAction, titleActions, ...otherArgs } = args;
+		const { breadcrumbs, actions, navigation, backAction, titleActions, ...otherArgs } = args;
 		const titleActionsContainer = titleActions
 			? `<ng-container pageHeaderTitleActions>
 	<button type="button" luButton="text" luTooltip="Modifier" luTooltipOnlyForDisplay><lu-icon icon="officePen" alt="Modifier" /></button>
@@ -98,28 +96,10 @@ export default {
 		</lu-breadcrumbs>
 	</ng-container>`
 			: ``;
-		const desc = descriptionPortalContent ? `[description]="description"` : ``;
-		const title = labelPortalContent ? `[label]="label"` : ``;
-		const templateDescription = descriptionPortalContent
-			? `<ng-template #description>
-	<p>
-		Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac justo scelerisque, blandit nibh quis, imperdiet justo.
-		Nullam condimentum nulla et neque ultricies bibendum
-		<a href="#" luLink external>Lien</a>.
-	</p>
-</ng-template>`
-			: ``;
-		const templateLabel = labelPortalContent
-			? `<ng-template #label><h1 luTooltip="Tooltip">
-		H1. Page title
-</h1>
-</ng-template>`
-			: ``;
+
 		return {
 			template: `
-${templateDescription}
-${templateLabel}
-<lu-page-header ${desc} ${title} ${generateInputs(otherArgs, argTypes)}>
+<lu-page-header ${generateInputs(otherArgs, argTypes)}>
 	${breadcrumbsContainer}
 	${backActionContainer}
 	${titleActionsContainer}
@@ -134,9 +114,7 @@ ${templateLabel}
 export const Basic = {
 	args: {
 		label: 'H1. Page title',
-		labelPortalContent: false,
 		description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac justo scelerisque, blandit nibh quis, imperdiet justo. Nullam condimentum nulla et neque ultricies bibendum.',
-		descriptionPortalContent: false,
 		breadcrumbs: false,
 		actions: false,
 		titleActions: false,

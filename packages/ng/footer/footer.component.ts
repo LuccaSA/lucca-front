@@ -14,6 +14,7 @@ export class FooterComponent {
 	sticky = input(false, { transform: booleanAttribute });
 	container = input(false, { transform: booleanAttribute });
 	forceNarrow = input(false, { transform: booleanAttribute });
+	dialog = input(false, { transform: booleanAttribute });
 	narrowAtMediaMax = input<'XXS' | 'XS' | 'S' | 'M'>('XXS');
 
 	get breakpointClass() {
