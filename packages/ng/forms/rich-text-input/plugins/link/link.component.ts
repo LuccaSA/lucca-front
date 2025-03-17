@@ -18,6 +18,9 @@ import { FORMAT_LINK, registerLink, registerLinkSelectionChange } from './link.c
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	templateUrl: './link.component.html',
 	imports: [ButtonComponent, IconComponent, LuTooltipTriggerDirective],
+	host: {
+		class: 'richText-toolbar-col-group',
+	},
 	providers: [
 		provideLuDialog(),
 		{

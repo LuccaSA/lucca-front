@@ -1,11 +1,5 @@
-<lu-form-field [label]="intl.headingsLabel" size="S" hiddenLabel>
-	<lu-simple-select
-		class="richText-toolbar-simpleSelect"
-		[options]="headingOptions()"
-		[formControl]="formControl"
-		#selectRef
-		[inputTabindex]="tabindex()"
-	>
+<lu-form-field [label]="intl.headingsLabel" size="S" hiddenLabel class="mod-width20">
+	<lu-simple-select [options]="headingOptions()" [formControl]="formControl" #selectRef [inputTabindex]="tabindex()">
 		<ng-container *luOption="let heading; select: selectRef">{{ headingLabels[heading][0] }}</ng-container>
 	</lu-simple-select>
 </lu-form-field>

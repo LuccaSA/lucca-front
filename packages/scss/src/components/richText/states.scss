@@ -1,6 +1,3 @@
-@use '@lucca-front/scss/src/components/button/exports' as button;
-@use '@lucca-front/scss/src/components/simpleSelect/exports' as simpleSelect;
-
 @mixin hover {
 	--components-richText-borderColor: var(--pr-t-color-input-border-hover);
 }
@@ -10,19 +7,12 @@
 	--components-richText-toolbar-backgroundColor: var(--pr-t-color-input-background-disabled);
 	--components-richText-color: var(--pr-t-color-input-text-disabled);
 	--components-richText-borderColor: var(--pr-t-color-input-border);
-
-	.richText-toolbar-button.button {
-		@include button.disabled;
-	}
-
-	.richText-toolbar-simpleSelect.simpleSelect {
-		@include simpleSelect.disabled;
-	}
 }
 
 @mixin error {
 	--components-richText-borderColor: var(--pr-t-color-input-border-critical);
 	--components-richText-backgroundColor: var(--pr-t-color-input-background-critical);
+	--components-richText-placeholder-color: var(--pr-t-color-input-text-placeholder-critical);
 }
 
 @mixin errorHover {

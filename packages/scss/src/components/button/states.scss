@@ -82,4 +82,9 @@
 	&:focus-visible {
 		@include a11y.focusVisible;
 	}
+
+	&:disabled {
+		--components-button-color: var(--commons-disabled-background);
+		--components-button-backgroundColor: var(--palettes-neutral-500);
+	}
 }

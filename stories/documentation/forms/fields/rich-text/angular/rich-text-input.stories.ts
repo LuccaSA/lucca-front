@@ -28,7 +28,7 @@ export const Basic: StoryObj<RichTextInputComponent & { value: string; disabled:
 			props: { value, disabled, required },
 			template: cleanupTemplate(`<lu-form-field label="Label">
 	<lu-rich-text-input
-	${generateInputs(inputArgs, argTypes)} name="richText"
+	${generateInputs(inputArgs, argTypes)}
 		[(ngModel)]="value" [disabled]="disabled" [required]="required">
 			<lu-rich-text-input-toolbar />
 	</lu-rich-text-input>
@@ -45,6 +45,6 @@ export const Basic: StoryObj<RichTextInputComponent & { value: string; disabled:
 		disabled: false,
 		required: false,
 		disableSpeelcheck: false,
-		autoResize: false,
+		autoResize: true,
 	},
 };

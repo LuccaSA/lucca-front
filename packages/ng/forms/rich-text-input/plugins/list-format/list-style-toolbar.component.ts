@@ -13,6 +13,10 @@ import { ListFormatComponent } from './list-format.component';
 	selector: 'lu-rich-text-toolbar-list-style',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	templateUrl: `list-style-toolbar.component.html`,
+	host: {
+		class: 'richText-toolbar-col-group',
+		role: 'radiogroup',
+	},
 	providers: [
 		{
 			provide: RICH_TEXT_PLUGIN_COMPONENT,

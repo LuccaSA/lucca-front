@@ -19,6 +19,9 @@ import { FORMAT_HEADINGS, registerHeadings, registerHeadingsSelectionChange } fr
 	templateUrl: './headings.component.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	imports: [LuSimpleSelectInputComponent, FormFieldComponent, ReactiveFormsModule, LuOptionDirective],
+	host: {
+		class: 'richText-toolbar-col-group',
+	},
 	providers: [
 		{
 			provide: RICH_TEXT_PLUGIN_COMPONENT,

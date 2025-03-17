@@ -13,6 +13,9 @@ import { CLEAR_FORMAT, registerClearFormat } from './clear-format.command';
 	templateUrl: 'clear-format.component.html',
 	imports: [ButtonComponent, IconComponent, LuTooltipTriggerDirective],
 	changeDetection: ChangeDetectionStrategy.OnPush,
+	host: {
+		class: 'richText-toolbar-col-group',
+	},
 	providers: [
 		{
 			provide: RICH_TEXT_PLUGIN_COMPONENT,

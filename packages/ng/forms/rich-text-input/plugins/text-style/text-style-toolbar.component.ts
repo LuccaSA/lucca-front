@@ -11,6 +11,9 @@ import { TextStyleComponent } from './text-style.component';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	templateUrl: `text-style-toolbar.component.html`,
 	imports: [TextStyleComponent],
+	host: {
+		class: 'richText-toolbar-col-group',
+	},
 	providers: [
 		{
 			provide: RICH_TEXT_PLUGIN_COMPONENT,

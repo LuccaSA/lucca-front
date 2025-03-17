@@ -1,5 +1,4 @@
 import { ChangeDetectionStrategy, Component, forwardRef, viewChildren } from '@angular/core';
-import { DividerComponent } from '@lucca-front/ng/divider';
 import { Klass, LexicalEditor, LexicalNode } from 'lexical';
 import { RICH_TEXT_PLUGIN_COMPONENT, RichTextPluginComponent } from '../../rich-text-input.component';
 import { ClearFormatComponent } from '../clear-format';
@@ -14,7 +13,7 @@ import { TextStyleToolbarComponent } from '../text-style';
 	styleUrl: 'toolbar.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	standalone: true,
-	imports: [TextStyleToolbarComponent, DividerComponent, ListStyleToolbarComponent, HeadingsComponent, LinkComponent, ClearFormatComponent],
+	imports: [TextStyleToolbarComponent, ListStyleToolbarComponent, HeadingsComponent, LinkComponent, ClearFormatComponent],
 	providers: [
 		{
 			provide: RICH_TEXT_PLUGIN_COMPONENT,

@@ -14,6 +14,9 @@ import { FORMAT_LIST, registerListsSelectionChange } from './list-format.command
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	templateUrl: 'list-format.component.html',
 	imports: [ButtonComponent, IconComponent, LuTooltipTriggerDirective],
+	host: {
+		class: 'richText-toolbar-col-group',
+	},
 	providers: [
 		{
 			provide: RICH_TEXT_PLUGIN_COMPONENT,

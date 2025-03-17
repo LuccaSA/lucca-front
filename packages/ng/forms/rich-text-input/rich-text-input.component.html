@@ -16,8 +16,8 @@
 	}
 	<div
 		class="richText-toolbar"
-		(keydown.arrowleft)="focusSiblingPlugin(-1)"
-		(keydown.arrowRight)="focusSiblingPlugin(1)"
+		(keydown.arrowleft)="$event.preventDefault(); focusSiblingPlugin(-1)"
+		(keydown.arrowRight)="$event.preventDefault(); focusSiblingPlugin(1)"
 		role="toolbar"
 		[attr.aria-labelledby]="formFieldId() + '-label'"
 		[attr.aria-controls]="formFieldId()"
