@@ -61,7 +61,7 @@ export class HighlightDataComponent {
 		}
 		return `https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/generic/${this.illustration()}.svg`;
 	});
-	size = input<'S' | 'M' | null>(null);
+	size = input<'XS' | 'S' | 'M' | null>(null);
 	/**
 	 * Adjust layout to text value
 	 */

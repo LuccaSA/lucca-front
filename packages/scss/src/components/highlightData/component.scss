@@ -25,8 +25,8 @@
 
 		.highlightData-content-title {
 			grid-area: title;
-			font-size: var(--components-highlightData-title-fontSize);
-			line-height: var(--components-highlightData-title-lineHeight);
+			font-size: var(--sizes-S-fontSize);
+			line-height: var(--sizes-S-lineHeight);
 			color: var(--palettes-neutral-700);
 		}
 
@@ -34,6 +34,7 @@
 			grid-area: value;
 			@include title.component;
 			@include title.h1;
+			order: var(--components-highlightData-value-order);
 		}
 
 		.highlightData-content-action {

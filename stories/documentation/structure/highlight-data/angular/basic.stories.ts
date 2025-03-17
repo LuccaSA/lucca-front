@@ -56,7 +56,7 @@ export const Template: StoryObj<HighlightDataComponent & { action: string }> = {
 			type: 'boolean',
 		},
 		size: {
-			options: [null, 'S'],
+			options: [null, 'S', 'XS'],
 			control: {
 				type: 'select',
 			},

@@ -25,12 +25,39 @@ function getTemplate(args: SmallStory): string {
 			src="https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/generic/piggy-bank.svg"
 		/>
 	</div>
+</div>
+<div class="highlightData mod-XS">
+	<dl class="highlightData-content">
+		<dt class="highlightData-content-title">Title</dt>
+		<dd class="highlightData-content-value">Content</dd>
+	</dl>
+	<div class="highlightData-illustrations">
+		<img
+			alt=""
+			class="highlightData-illustrations-back"
+			src="https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/lucca/bubbles-light-1.svg"
+		/>
+		<img
+			alt=""
+			class="highlightData-illustrations-front"
+			src="https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/generic/piggy-bank.svg"
+		/>
+	</div>
 </div>`;
 }
 
 const Template: StoryFn<SmallStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
+	styles: [
+		`
+			:host {
+				display: flex;
+				flex-direction: column;
+				gap: var(--pr-t-spacings-100);
+			}
+		`,
+	],
 });
 
 export const Small = Template.bind({});

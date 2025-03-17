@@ -9,20 +9,25 @@
 }
 
 @mixin infos {
-	.highlightData-content-value {
-		@include title.h2;
-	}
+	--components-highlightData-value-order: -1;
 }
 
 @mixin S {
+	.highlightData-content-value {
+		@include title.h2;
+	}
+
+	--components-highlightData-illustrations-width: 82px;
+	--components-highlightData-illustrations-height: 68px;
+}
+
+@mixin XS {
 	.highlightData-content-value {
 		@include title.h3;
 	}
 
 	--components-highlightData-illustrations-width: 77px;
 	--components-highlightData-illustrations-height: 64px;
-	--components-highlightData-padding-inline: var(--pr-t-spacings-200);
-	--components-highlightData-padding-block: var(--pr-t-spacings-150);
 }
 
 @mixin illustrations {
