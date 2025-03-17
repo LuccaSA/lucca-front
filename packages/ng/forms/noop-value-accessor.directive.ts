@@ -14,12 +14,9 @@ import { Directive } from '@angular/core';
 	],
 })
 export class NoopValueAccessorDirective implements ControlValueAccessor {
-	// eslint-disable-next-line @typescript-eslint/no-empty-function
 	writeValue(): void {}
 
-	// eslint-disable-next-line @typescript-eslint/no-empty-function
 	registerOnChange(): void {}
 
-	// eslint-disable-next-line @typescript-eslint/no-empty-function
 	registerOnTouched(): void {}
 }
