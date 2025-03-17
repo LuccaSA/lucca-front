@@ -26,11 +26,11 @@ export default {
 		return {
 			template: `
 <lu-footer ${narrow} ${force} ${generateInputs(otherArgs, argTypes)}>
-	Content
-	<ng-container footerActions>
-		<button type="button" luButton>Button</button>
-    <button type="button" luButton="outlined">Button</button>
+	<ng-container footerContent>
+		Content
 	</ng-container>
+	<button type="button" luButton>Button</button>
+	<button type="button" luButton="outlined">Button</button>
 </lu-footer>
 			`,
 		};

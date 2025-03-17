@@ -1,6 +1,4 @@
-import { ButtonComponent } from '@lucca-front/ng/button';
-import { DialogFooterComponent } from '@lucca-front/ng/dialog';
-import { Meta, moduleMetadata, StoryFn } from '@storybook/angular';
+import { Meta, StoryFn } from '@storybook/angular';
 
 interface DialogBasicStory {
 	size: string;
@@ -24,12 +22,12 @@ function getTemplate(args: DialogBasicStory): string {
 				</div>
 			</header>
 			<div class="dialog-inside-content">dialog</div>
-			<lu-dialog-footer>
+			<footer class="dialog-inside-footer footer">
 				<div class="footer-actions">
-					<button type="button" luButton>Action</button>
-					<button type="button" luButton="outlined">Action</button>
+					<button type="submit" class="button">Action</button>
+					<button type="button" class="button mod-text">Action</button>
 				</div>
-			</lu-dialog-footer>
+			</footer>
 		</form>
 	</div>
 </div>
@@ -68,11 +66,6 @@ export default {
 			description: '[v18.3]',
 		},
 	},
-	decorators: [
-		moduleMetadata({
-			imports: [ButtonComponent, DialogFooterComponent],
-		}),
-	],
 } as Meta;
 
 export const Basic = Template.bind({});

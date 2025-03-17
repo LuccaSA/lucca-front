@@ -11,8 +11,6 @@
 }
 
 <ng-template #footerContent>
-	<div class="footer-content"><ng-content /></div>
-	<div class="footer-actions">
-		<ng-content select="[footerActions]"></ng-content>
-	</div>
+	<div class="footer-content"><ng-content select="[footerContent]" /></div>
+	<div class="footer-actions"><ng-content /></div>
 </ng-template>

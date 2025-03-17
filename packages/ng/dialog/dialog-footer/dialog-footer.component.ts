@@ -1,13 +1,14 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
-import { FooterComponent } from '@lucca-front/ng/footer';
 
 @Component({
 	selector: 'lu-dialog-footer',
 	standalone: true,
-	template: '<lu-footer dialog><ng-content /></lu-footer>',
+	template: `<ng-content />`,
 	styleUrl: './dialog-footer.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	encapsulation: ViewEncapsulation.None,
-	imports: [FooterComponent],
+	host: {
+		class: 'dialog-inside-footer footer',
+	},
 })
 export class DialogFooterComponent {}
