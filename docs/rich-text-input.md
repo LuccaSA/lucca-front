@@ -123,23 +123,42 @@ Il est aussi possible de créer une barre d'outil personnalisée en assemblant l
 
 ### Ajout d'outils personnalisés
 
-Les outils sont des composants implémentant l'interface `RichTextPluginComponent`. Cette interface définit deux méthodes :
+Les outils sont des composants implémentant l'interface `RichTextPluginComponent`. Cette interface est utilisée pour les outils et les barres d'outils.
+Elle définit plusieurs méthodes et propriétés:
 
 - `setEditorInstance(editor: LexicalEditor)` : Permet de récupérer l'instance de l'éditeur lexical lors de sa création, ce qui permet par exemple de s'abonner aux évènements Lexical.
-- `getLexicalNodes()` : Optionnel. Renvoie les noeuds Lexical à ajouter à l'éditeur Lexical.
+- `setDisabledState(isDisabled: boolean)` : Permet de gérer l'état désactivé de l'outil.
+- `getLexicalNodes()` : Optionnel. Renvoie les noeuds Lexical spécifiques à l'outil.
+- `focus()` : Optionnel. Permet de définir le comportement de focus de l'outil.
+- `pluginComponents`: Optionnel. `Signal` renvoyant les plugin internes à l'outil, s'il y en a (utilisé par exemple pour les barres d'outils).
+- `tabindex`: Optionnel. `WritableSignal<number>` à appliquer sur l'élément de l'outil qui prend le tabindex lors de la navigation clavier.
 
-Attention: si l'outil s'abonne à des évènements Lexical, il est faut penser à se désabonner lors de la destruction de l'outil.
+Attention: si l'outil s'abonne à des évènements Lexical, il est faut penser à se désabonner lors de la destruction du composant.
 
 ```ts
 export class MyCustomRichTextPluginComponent implements OnDestroy, RichTextPluginComponent {
+  isDisabled = signal(false);
+  // élément à focus
+  element = viewChild('element', { read: ElementRef<HTMLButtonElement> });
+  // outils intégrés
+  pluginComponents = viewChildren(RICH_TEXT_PLUGIN_COMPONENT);
+  
   #registeredCommands: () => void = () => {};
 
   setEditorInstance(editor: LexicalEditor): void {
     this.#registeredCommands = mergeRegister(registerCustomLexicalCommand(editor));
   }
-
+  
+  setDisabledState(isDisabled: boolean) {
+    this.isDisabled.set(isDisabled);
+  }
+  
   getLexicalNodes(): Klass<LexicalNode>[] {
     return [MyCustomNode];
+  }
+
+  focus() {
+    (this.element() as ElementRef<HTMLButtonElement>).nativeElement.focus();
   }
 
   ngOnDestroy() {
