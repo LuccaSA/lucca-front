@@ -142,6 +142,7 @@ export class DateInputComponent extends AbstractDateComponent implements Control
 	isFilterPill = false;
 
 	isFilterPillEmpty = computed(() => !this.selectedDate());
+	isFilterPillClearable = computed(() => this.clearable());
 
 	filterPillPopoverCloseFn?: () => void;
 

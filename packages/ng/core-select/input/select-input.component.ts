@@ -147,6 +147,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 
 	public valueSignal = signal<TValue>(null);
 	isFilterPillEmpty = computed(() => this.valueSignal() === null);
+	isFilterPillClearable = computed(() => this.clearable);
 
 	public get value(): TValue {
 		return this._value;
