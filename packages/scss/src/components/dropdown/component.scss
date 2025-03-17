@@ -1,5 +1,5 @@
+@use '@lucca-front/icons/src/icon/exports' as icon;
 @use '@lucca-front/scss/src/commons/utils/namespace';
-
 @use '@lucca-front/scss/src/commons/utils/a11y';
 @use '@lucca-front/scss/src/components/divider/exports' as divider;
 
@@ -17,7 +17,7 @@
 		.dropdown-list,
 		.lu-dropdown-options {
 			list-style-type: none;
-			padding-block: var(--pr-t-spacings-100);
+			padding-block: var(--pr-t-spacings-50);
 			padding-inline: 0;
 			margin: 0;
 			min-inline-size: var(--components-dropdown-min-width);
@@ -28,11 +28,10 @@
 		.dropdown-list-option,
 		.lu-dropdown-options-item {
 			padding-block: 0;
-			padding-inline: var(--pr-t-spacings-100);
+			padding-inline: var(--pr-t-spacings-50);
 
 			&.mod-divider {
-				padding-block: var(--pr-t-spacings-50);
-				padding-inline: 0;
+				padding: 0;
 			}
 		}
 
@@ -47,16 +46,17 @@
 			display: flex;
 			gap: var(--pr-t-spacings-100);
 			line-height: var(--sizes-M-lineHeight);
-			padding: var(--pr-t-spacings-100);
+			padding: var(--pr-t-spacings-50) var(--pr-t-spacings-100);
 			text-align: left;
-			transition: background-color var(--commons-animations-durations-standard);
+			transition: background-color var(--commons-animations-durations-fast);
 			text-decoration: none;
 			inline-size: 100%;
 			pointer-events: var(--components-dropdown-option-actionEvents);
 			cursor: pointer;
 
 			.lucca-icon {
-				font-size: var(--sizes-M-lineHeight);
+				@include icon.S;
+				margin-block-start: var(--pr-t-spacings-25);
 			}
 
 			&,
@@ -66,6 +66,10 @@
 
 			&:hover,
 			&:focus-visible {
+				--components-dropdown-option-actionBackground: var(--palettes-neutral-25);
+			}
+
+			&:active {
 				--components-dropdown-option-actionBackground: var(--palettes-neutral-50);
 			}
 
