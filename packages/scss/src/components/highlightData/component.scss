@@ -1,5 +1,6 @@
 @use '@lucca-front/scss/src/commons/utils/namespace';
 @use '@lucca-front/scss/src/commons/utils/reset';
+@use '@lucca-front/scss/src/commons/utils/color';
 @use '@lucca-front/scss/src/components/title/exports' as title;
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
@@ -38,6 +39,7 @@
 		}
 
 		.highlightData-content-action {
+			@include color.palette('neutral');
 			grid-area: action;
 			padding-block-start: var(--components-highlightData-action-padding);
 
