@@ -68,7 +68,7 @@ export const Template: StoryObj<HighlightDataComponent & { action: string }> = {
 			},
 		},
 		palette: {
-			options: ['lucca', 'cleemy', 'timmi', 'poplee', 'coreHR', 'pagga', 'cc'],
+			options: ['lucca', 'cleemy', 'timmi', 'poplee', 'coreHR', 'pagga', 'cc', 'success', 'warning', 'error'],
 			control: {
 				type: 'select',
 			},
