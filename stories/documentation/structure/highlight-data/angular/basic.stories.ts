@@ -52,7 +52,7 @@ export const Template: StoryObj<HighlightDataComponent & { action: string }> = {
 				type: 'select',
 			},
 		},
-		infos: {
+		valueFirst: {
 			type: 'boolean',
 		},
 		size: {
@@ -86,7 +86,7 @@ export const Template: StoryObj<HighlightDataComponent & { action: string }> = {
 		value: 'Content',
 		bubble: 1,
 		illustration: 'piggy-bank',
-		infos: false,
+		valueFirst: false,
 		size: null,
 		theme: null,
 		palette: null,

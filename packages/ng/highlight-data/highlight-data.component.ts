@@ -65,13 +65,13 @@ export class HighlightDataComponent {
 	/**
 	 * Adjust layout to text value
 	 */
-	infos = input(false, { transform: booleanAttribute });
+	valueFirst = input(false, { transform: booleanAttribute });
 
 	constructor() {
 		effect(() => {
 			this.#luClass.setState({
 				[`mod-${this.size()}`]: !!this.size(),
-				'mod-infos': this.infos(),
+				'mod-valueFirst': this.valueFirst(),
 				[`palette-${this.palette()}`]: !!this.palette(),
 			});
 		});

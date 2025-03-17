@@ -1,14 +1,14 @@
 import { Meta, StoryFn } from '@storybook/angular';
 
-interface InfosStory {}
+interface ValueFirstStory {}
 
 export default {
-	title: 'Documentation/Structure/Highlight data/HTML&CSS/Infos',
+	title: 'Documentation/Structure/Highlight data/HTML&CSS/ValueFirst',
 	argTypes: {},
 } as Meta;
 
-function getTemplate(args: InfosStory): string {
-	return `<div class="highlightData mod-infos">
+function getTemplate(args: ValueFirstStory): string {
+	return `<div class="highlightData mod-valueFirst">
 	<dl class="highlightData-content">
 		<dt class="highlightData-content-title">Title</dt>
 		<dd class="highlightData-content-value">Content</dd>
@@ -28,10 +28,10 @@ function getTemplate(args: InfosStory): string {
 </div>`;
 }
 
-const Template: StoryFn<InfosStory> = (args) => ({
+const Template: StoryFn<ValueFirstStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Infos = Template.bind({});
-Infos.args = {};
+export const ValueFirst = Template.bind({});
+ValueFirst.args = {};

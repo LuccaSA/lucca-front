@@ -8,7 +8,7 @@
 	--components-highlightData-background: var(--palettes-100, var(--palettes-product-100));
 }
 
-@mixin infos {
+@mixin valueFirst {
 	--components-highlightData-value-order: -1;
 }
 
