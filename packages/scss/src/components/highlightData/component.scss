@@ -12,6 +12,7 @@
 	position: relative;
 
 	@at-root ($atRoot) {
+
 		.highlightData-content {
 			@include reset.list($list: 'dl');
 			display: var(--components-highlightData-display);
@@ -39,12 +40,20 @@
 		}
 
 		.highlightData-content-action {
-			@include color.palette('neutral');
 			grid-area: action;
 			padding-block-start: var(--components-highlightData-action-padding);
-
+			
 			&:empty {
 				display: none;
+			}
+
+			.link {
+				--commons-text-link-color: var(--palettes-700, var(--palettes-product-700));
+				--commons-text-link-hover: var(--palettes-600, var(--palettes-product-600));
+			}
+
+			.button {
+				@include color.palette('neutral');
 			}
 		}
 
