@@ -299,6 +299,7 @@ export class DateInputComponent extends AbstractDateComponent implements Control
 
 	override setDisabledState(isDisabled: boolean) {
 		this.filterPillDisabled.set(isDisabled);
+		super.setDisabledState(isDisabled);
 	}
 
 	clear() {
