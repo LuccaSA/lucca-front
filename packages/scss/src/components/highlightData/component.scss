@@ -39,6 +39,13 @@
 			order: var(--components-highlightData-value-order);
 		}
 
+		.highlightData-content-subText {
+			font-size: var(--sizes-XS-fontSize);
+			line-height: var(--sizes-XS-lineHeight);
+			color: var(--palettes-neutral-700);
+			margin-block-start: var(--pr-t-spacings-100) !important; // Override list reset
+		}
+
 		.highlightData-content-action {
 			grid-area: action;
 			padding-block-start: var(--components-highlightData-action-padding);

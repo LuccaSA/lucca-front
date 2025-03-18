@@ -20,6 +20,7 @@ export class HighlightDataComponent {
 	#luClass = inject(LuClass);
 	heading = input.required<string>();
 	value = input.required<string>();
+	subText = input<string>();
 	bubble = input<1 | 2 | 3 | 4 | number>();
 	bubbleSrc = computed(() => {
 		return `https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/${this.palette()}/bubbles-${this.bubbleTheme()}-${this.bubble()}.svg`;

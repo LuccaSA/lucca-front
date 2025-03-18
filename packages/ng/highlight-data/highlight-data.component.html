@@ -1,6 +1,9 @@
 <dl class="highlightData-content">
 	<dt class="highlightData-content-title">{{ heading() }}</dt>
 	<dd class="highlightData-content-value">{{ value() }}</dd>
+	@if (subText()) {
+		<dd class="highlightData-content-subText">{{ subText() }}</dd>
+	}
 	<dd class="highlightData-content-action"><ng-content></ng-content></dd>
 </dl>
 
