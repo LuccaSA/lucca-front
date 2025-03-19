@@ -151,6 +151,7 @@ export class DateInputComponent extends AbstractDateComponent implements Control
 
 	constructor() {
 		super();
+
 		effect(() => {
 			const inputValue = this.userTextInput();
 			// If we are initializing the component, we don't want to parse the value
