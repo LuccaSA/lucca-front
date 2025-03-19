@@ -75,7 +75,7 @@ function getTemplate(args: MenuSecondaryBasicStory): string {
 								</a>
 							</li>
 							<li class="navSide-item-subMenu-item">
-								<a href="#" class="navSide-item-subMenu-link is-active">
+								<a href="#" class="navSide-item-subMenu-link">
 									Section 2.3
 									<span class="numericBadge"><span class="u-mask">, </span>9</span>
 								</a>
@@ -93,7 +93,7 @@ function getTemplate(args: MenuSecondaryBasicStory): string {
 						</ul>
 					</li>
 					<li class="navSide-item">
-						<a href="#" class="navSide-item-link">
+						<a href="#" class="navSide-item-link is-active">
 							<span aria-hidden="true" class="lucca-icon icon-chartVerticalBar"></span>
 							<span class="navSide-item-link-title">Section 3</span>
 							<span class="newBadge">New</span>

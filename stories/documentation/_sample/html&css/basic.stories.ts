@@ -1,22 +1,23 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { Meta } from '@storybook/angular';
+import { cleanupTemplate } from 'stories/helpers/stories';
 
 interface SampleBasicStory {}
 
 export default {
 	title: 'Documentation/Sample/HTML&CSS/Basic',
 	argTypes: {},
+	render: (args: SampleBasicStory) => {
+		return {
+			template: cleanupTemplate(`
+
+	<div class="sample  ">
+		sample
+
+		</div>
+
+`),
+		};
+	},
 } as Meta;
 
-function getTemplate(args: SampleBasicStory): string {
-	return `<div class="sample">
-	sample
-</div>`;
-}
-
-const Template: StoryFn<SampleBasicStory> = (args) => ({
-	props: args,
-	template: getTemplate(args),
-});
-
-export const Basic = Template.bind({});
-Basic.args = {};
+export const Basic = {};

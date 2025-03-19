@@ -170,12 +170,17 @@ export class FilterPillComponent {
 		this.inputComponentRef()?.onFilterPillClick?.();
 	}
 
+	popoverOpened(): void {
+		this.inputComponentRef()?.onFilterPillOpened?.();
+	}
+
 	closePopover = () => {
 		this.popoverRef().close();
+		this.inputComponentRef()?.onFilterPillClosed?.();
 	};
 
 	updatePosition = () => {
-		this.popoverRef().updatePosition();
+		this.popoverRef()?.updatePosition();
 	};
 
 	clear(): void {

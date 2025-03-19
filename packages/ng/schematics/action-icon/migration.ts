@@ -18,7 +18,7 @@ export function migrateScssFile(content: string, postCssScss: PostCssScssLib): s
 export function migrateHTMLFile(content: string): string {
 	return updateContent(content, (updates) => {
 		const htmlAst = new HtmlAst(content);
-		htmlAst.visitElementWithAttribute(/.*/, 'class', (elem, attr) => {
+		htmlAst.visitElementWithAttribute(/.*/, 'class', (_elem, attr) => {
 			const classes = attr.value;
 			if (classes.includes('actionIcon') && attr.valueSpan) {
 				let newClasses: string;

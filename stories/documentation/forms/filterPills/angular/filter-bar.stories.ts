@@ -7,8 +7,11 @@ import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { CheckboxInputComponent, TextInputComponent } from '@lucca-front/ng/forms';
 import { NumericBadgeComponent } from '@lucca-front/ng/numeric-badge';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { StoryModelDisplayComponent } from '../../../../helpers/story-model-display.component';
+import { provideHttpClient } from '@angular/common/http';
+import { LuCoreSelectApiV4Directive } from '@lucca-front/ng/core-select/api';
+import { LuMultiSelectInputComponent } from '@lucca-front/ng/multi-select';
 
 export default {
 	title: 'Documentation/Forms/FiltersPills/FilterBar/Angular',
@@ -30,8 +33,11 @@ export default {
 				FormFieldComponent,
 				TextInputComponent,
 				NumericBadgeComponent,
+				LuCoreSelectApiV4Directive,
+				LuMultiSelectInputComponent,
 			],
 		}),
+		applicationConfig({ providers: [provideHttpClient()] }),
 	],
 	render: (args, { argTypes }) => {
 		return {
@@ -75,6 +81,9 @@ export default {
 		<lu-date-input [(ngModel)]="example1" /></lu-filter-pill>
 	<lu-filter-pill label="Période">
 		<lu-date-range-input [(ngModel)]="examplePeriod"/>
+	</lu-filter-pill>
+	<lu-filter-pill label="Multi ApiV4" optional name="multiv4">
+		<lu-multi-select [ngModel]="[]" apiV4="/organization/structure/api/establishments"	filterPillLabelPlural="établissements" />
 	</lu-filter-pill>
 	<lu-form-field label="Test" hiddenLabel>
 		<lu-text-input [ngModel]="example2" [ngModelOptions]="{standalone: true}" hasSearchIcon hasClearer />

@@ -68,7 +68,7 @@
 	padding: 0;
 	gap: 0;
 	width: 21rem;
-	max-width: calc(100vw - 2.5rem);
+	max-inline-size: calc(100vw - 2.5rem);
 
 	&:has(.multipleSelect-displayer-search:focus-visible) {
 		outline: none;

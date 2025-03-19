@@ -22,7 +22,7 @@
 	line-height: var(--sizes-S-lineHeight);
 	box-shadow: var(--components-filterPill-shadow);
 	position: relative;
-	max-width: 18rem;
+	max-inline-size: 18rem;
 	white-space: nowrap;
 	transition-property: box-shadow;
 	transition-duration: var(--commons-animations-durations-fast);
@@ -71,6 +71,7 @@
 			text-overflow: ellipsis;
 			outline: none;
 			text-align: center;
+			flex-shrink: 0;
 
 			&::before {
 				content: '';
@@ -124,7 +125,6 @@
 			display: flex;
 			align-items: center;
 			gap: var(--pr-t-spacings-50);
-			flex-shrink: 0;
 
 			&:focus-visible {
 				outline: none;

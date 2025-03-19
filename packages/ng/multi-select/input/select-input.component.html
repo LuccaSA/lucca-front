@@ -19,7 +19,9 @@
 <ng-container *luFilterPillDisplayer>
 	<div class="multipleSelect-displayer-filter">
 		@if (value?.length === 1) {
-		<div class="multipleSelect-pill-displayer-chip"><ng-container *luOptionOutlet="displayerTpl(); value: value[0]"></ng-container></div>
+		<div class="multipleSelect-pill-displayer-chip">
+			<ng-container *luOptionOutlet="displayerTpl(); value: value[0]"></ng-container>
+		</div>
 		}
 	</div>
 </ng-container>
