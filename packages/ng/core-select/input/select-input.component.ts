@@ -60,7 +60,13 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 
 	@Input({ transform: booleanAttribute })
 	@HostBinding('class.is-clearable')
-	clearable = false;
+	set clearable(value: boolean) {
+		this.#clearable.set(value);
+	}
+	get clearable(): boolean {
+		return this.#clearable();
+	}
+	#clearable = signal(false);
 
 	get searchable(): boolean {
 		return this.clueChange.observed;
@@ -147,7 +153,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 
 	public valueSignal = signal<TValue>(null);
 	isFilterPillEmpty = computed(() => this.valueSignal() === null);
-	isFilterPillClearable = computed(() => this.clearable);
+	isFilterPillClearable = computed(() => this.#clearable());
 
 	public get value(): TValue {
 		return this._value;
