@@ -445,6 +445,8 @@ export class DateRangeInputComponent extends AbstractDateComponent implements Co
 			const _dateRange = transformDateRangeInputToDateRange(dateRange);
 			this.selectedRange.set(_dateRange);
 			this.currentDate.set(startOfDay(dateRange.start));
+		} else {
+			this.clear(this.startTextInputRef().nativeElement, this.endTextInputRef().nativeElement);
 		}
 	}
 
@@ -456,6 +458,7 @@ export class DateRangeInputComponent extends AbstractDateComponent implements Co
 
 	override setDisabledState(isDisabled: boolean) {
 		this.filterPillDisabled.set(isDisabled);
+		super.setDisabledState(isDisabled);
 	}
 
 	clear(start: HTMLInputElement, end: HTMLInputElement) {
