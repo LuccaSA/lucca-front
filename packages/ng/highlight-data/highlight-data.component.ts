@@ -30,7 +30,7 @@ export class HighlightDataComponent {
 	 * Apply product name to illustration URL and CSS component palette
 	 * This specific palette must be set up on config.scss
 	 */
-	palette = input<'lucca' | 'cleemy' | 'timmi' | 'poplee' | 'coreHR' | 'pagga' | 'cc' | 'success' | 'warning' | 'error' | string>('lucca');
+	palette = input<'lucca' | 'cleemy' | 'timmi' | 'poplee' | 'coreHR' | 'pagga' | 'cc' | 'success' | 'warning' | 'critical' | string>('lucca');
 
 	bubbleTheme = computed(() => {
 		if (this.theme() === 'dark') {
