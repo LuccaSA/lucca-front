@@ -288,6 +288,8 @@ export class DateInputComponent extends AbstractDateComponent implements Control
 			this.dateFromWriteValue.set(start);
 			this.selectedDate.set(start);
 			this.currentDate.set(start);
+		} else {
+			this.clear();
 		}
 	}
 
