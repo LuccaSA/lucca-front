@@ -8,6 +8,8 @@ import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { LuMultiSelectInputComponent } from '../../../../../packages/ng/multi-select/input';
 import { StoryModelDisplayComponent } from '../../../../helpers/story-model-display.component';
+import { LuOptionDirective } from '../../../../../packages/ng/core-select/option';
+import { LuMultiDisplayerDirective } from '../../../../../packages/ng/multi-select/displayer';
 
 export default {
 	title: 'Documentation/Forms/FiltersPills/FilterPills/Angular',
@@ -26,6 +28,8 @@ export default {
 				FormFieldComponent,
 				TextInputComponent,
 				FilterLegumesPipe,
+				LuOptionDirective,
+				LuMultiDisplayerDirective,
 			],
 		}),
 	],
@@ -34,6 +38,7 @@ export default {
 			props: {
 				simpleSelect: null,
 				multiSelect: [],
+				customMultiSelect: [],
 				date: null,
 				dateRange: null,
 				legumes: allLegumes,
@@ -48,6 +53,23 @@ export default {
 <lu-filter-pill label="Légume" name="legume">
 	<lu-multi-select [(ngModel)]="multiSelect"	[options]="legumes | filterLegumes:clue" (clueChange)="clue = $event" filterPillLabelPlural="légumes" />
 </lu-filter-pill>
+
+<lu-filter-pill label="Légume Custom" name="legume-custom">
+	<lu-multi-select #multiSelectWithCustomDisplayerAndOption [(ngModel)]="customMultiSelect"
+	[options]="legumes | filterLegumes:clue"
+	clearable (clueChange)="clue = $event"
+	filterPillLabelPlural="légumes">
+
+	<ng-container *luOption="let legume; select: multiSelectWithCustomDisplayerAndOption">
+		🥕 {{ legume.name }} 🥕
+	</ng-container>
+	<ng-container *luMultiDisplayer="let legume; select: multiSelectWithCustomDisplayerAndOption">
+	{{ legume.name }}
+	</ng-container>
+
+	</lu-multi-select>
+</lu-filter-pill>
+
 <lu-filter-pill label="Date de début">
 	<lu-date-input [(ngModel)]="date" />
 </lu-filter-pill>
