@@ -1,6 +1,6 @@
 @use 'exports' as *;
 
-.fileUploaded {
+.fileEntry {
 	@include vars;
 	@include component;
 
@@ -10,20 +10,22 @@
 
 	&.mod-media {
 		@include media;
-	}
 
-	&.mod-single {
-		@include single;
-	}
-
-	&.mod-word,
-	&.mod-file,
-	&.mod-excel,
-	&.mod-powerpoint {
+		&.mod-S {
+			@include mediaS;
+		}
 	}
 
 	&.is-error {
 		@include error;
+
+		&.mod-S {
+			@include errorS;
+		}
+
+		&.mod-media {
+			@include errorMedia;
+		}
 	}
 
 	&.is-loading {

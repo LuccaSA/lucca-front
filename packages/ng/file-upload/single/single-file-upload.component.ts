@@ -3,8 +3,8 @@ import { InputDirective } from '@lucca-front/ng/form-field';
 import { LuSafeExternalSvgPipe } from '@lucca-front/ng/safe-content';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 import { BaseFileUploadComponent } from '../base-file-upload/base-file-upload.component';
-import { FileEntry } from '../file-upload-entry';
 import { FileEntryComponent } from '../file-entry/file-entry.component';
+import { FileEntry } from '../file-upload-entry';
 
 @Component({
 	selector: 'lu-single-file-upload',
@@ -13,7 +13,6 @@ import { FileEntryComponent } from '../file-entry/file-entry.component';
 	styleUrls: ['./single-file-upload.component.scss'],
 	encapsulation: ViewEncapsulation.None,
 	imports: [LuSafeExternalSvgPipe, InputDirective, LuTooltipModule, FileEntryComponent],
-	host: { class: 'fileUpload-wrapper' },
 })
 export class SingleFileUploadComponent extends BaseFileUploadComponent {
 	entry = input<FileEntry | null>(null);

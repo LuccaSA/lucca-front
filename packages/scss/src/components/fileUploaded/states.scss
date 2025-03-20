@@ -1,9 +1,0 @@
-@mixin error {
-	--components-fileUploaded-borderColor: var(--palettes-critical-600);
-	--components-fileUploaded-gridTemplateAreas: 'picture title toolbar' 'picture description toolbar';
-}
-
-@mixin loading {
-	--components-fileUploaded-status-backgroundColor: transparent;
-	--components-fileUploaded-status-content-img-opacity: 0.08;
-}

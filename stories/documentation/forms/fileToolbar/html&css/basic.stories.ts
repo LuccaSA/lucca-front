@@ -4,7 +4,7 @@ import { Meta, moduleMetadata } from '@storybook/angular';
 import { ButtonComponent } from 'dist/ng/button';
 
 export default {
-	title: 'Documentation/FileToolbar/HTML&CSS/Basic',
+	title: 'Documentation/File/FileToolbar/HTML&CSS/Basic',
 	decorators: [
 		moduleMetadata({
 			imports: [ButtonComponent, IconComponent, LuTooltipModule],

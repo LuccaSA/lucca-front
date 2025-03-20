@@ -1,0 +1,24 @@
+@mixin vars {
+	--components-fileEntry-padding: var(--pr-t-spacings-150);
+	--components-fileEntry-gap: var(--components-fileEntry-padding);
+	--components-fileEntry-gridColumn: 1 / -1;
+	--components-fileEntry-borderColor: var(--palettes-neutral-100);
+	--components-fileEntry-minHeight: auto;
+	--components-fileEntry-gridTemplateAreas: 'picture title toolbar' 'picture description toolbar';
+
+	--components-fileEntry-status-backgroundColor: var(--palettes-neutral-25);
+
+	--components-fileEntry-status-borderRadius: var(--commons-borderRadius-L);
+	--components-fileEntry-status-content-img-opacity: 1;
+	--components-fileEntry-status-content-svg-width: 32px;
+	--components-fileEntry-status-content-svg-height: var(--components-fileEntry-status-content-svg-width);
+
+	--components-fileEntry-filename-alignSelf: end;
+
+	--components-fileEntry-status-inlineSize: 48px;
+	--components-fileEntry-status-blockSize: var(--components-fileEntry-status-inlineSize);
+	--components-fileEntry-status-margin: 0;
+	--components-fileEntry-description-display: flex;
+	--components-fileEntry-display: grid;
+	--components-fileEntry-status-content-padding: 0;
+}

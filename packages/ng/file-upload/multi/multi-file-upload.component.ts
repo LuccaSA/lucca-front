@@ -11,6 +11,5 @@ import { BaseFileUploadComponent } from '../base-file-upload/base-file-upload.co
 	styleUrls: ['./multi-file-upload.component.scss'],
 	encapsulation: ViewEncapsulation.None,
 	imports: [LuSafeExternalSvgPipe, InputDirective, LuTooltipModule],
-	host: { class: 'fileUpload-wrapper' },
 })
 export class MultiFileUploadComponent extends BaseFileUploadComponent {}

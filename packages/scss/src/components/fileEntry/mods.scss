@@ -1,0 +1,39 @@
+@use '@lucca-front/icons/src/icon/exports' as icon;
+
+@mixin S {
+	--components-fileEntry-padding: var(--pr-t-spacings-50);
+	--components-fileEntry-status-inlineSize: 32px;
+	--components-fileEntry-description-display: none;
+	--components-fileEntry-gridTemplateAreas: 'picture title title toolbar';
+	--components-fileEntry-filename-alignSelf: center;
+	--components-fileEntry-status-borderRadius: var(--commons-borderRadius-M);
+
+	.fileEntry-status-content-icon {
+		@include icon.S;
+	}
+}
+
+@mixin mediaS {
+	--components-fileEntry-description-display: none;
+	--components-fileEntry-status-content-svg-width: 32px;
+	--components-fileEntry-status-borderRadius: var(--commons-borderRadius-M);
+	--components-fileEntry-minHeight: calc(5rem + 2px);
+	--components-fileEntry-gridTemplateAreas: 'picture title title toolbar';
+	--components-fileEntry-filename-alignSelf: center;
+	--components-fileEntry-padding: var(--pr-t-spacings-75);
+	--components-fileEntry-gridColumn: auto;
+	--components-fileEntry-status-inlineSize: 100%;
+	--components-fileEntry-status-blockSize: auto;
+	--components-fileEntry-status-aspectRatio: 1;
+	--components-fileEntry-display: block;
+}
+
+@mixin media {
+	--components-fileEntry-padding: var(--pr-t-spacings-75);
+	--components-fileEntry-status-aspectRatio: auto;
+	--components-fileEntry-status-inlineSize: 100%;
+	--components-fileEntry-status-blockSize: calc(20rem - 1rem + 2px);
+	--components-fileEntry-description-display: none;
+	--components-fileEntry-display: block;
+	--components-fileEntry-gridColumn: 1 / -1;
+}

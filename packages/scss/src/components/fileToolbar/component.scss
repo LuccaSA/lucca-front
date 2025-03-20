@@ -27,6 +27,7 @@
 
 		.fileToolbar-list-item-button.button {
 			@include button.text;
+			@include button.S;
 		}
 	}
 }

@@ -1,0 +1,140 @@
+@use '@lucca-front/scss/src/commons/utils/namespace';
+
+@use '@lucca-front/scss/src/commons/utils/a11y';
+@use '@lucca-front/scss/src/commons/utils/text';
+
+@mixin component($atRoot: namespace.$defaultAtRoot) {
+	border: 1px solid var(--components-fileEntry-borderColor);
+	padding: var(--components-fileEntry-padding);
+	margin: 0;
+	border-radius: var(--commons-borderRadius-L);
+	background-color: var(--pr-t-elevation-surface-raised);
+	gap: 0 var(--components-fileEntry-gap);
+	position: relative;
+	grid-column: var(--components-fileEntry-gridColumn);
+	min-height: var(--components-fileEntry-minHeight);
+	display: var(--components-fileEntry-display);
+	align-items: center;
+	grid-template-columns: auto 1fr auto;
+	grid-template-areas: var(--components-fileEntry-gridTemplateAreas);
+
+	&:has(.fileEntry-filename-tooltip:focus-visible, .fileEntry-status-content:focus-visible) {
+		@include a11y.focusVisible;
+	}
+
+	@at-root ($atRoot) {
+		.fileEntryDisplayWrapper {
+			display: grid;
+			grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
+			gap: var(--pr-t-spacings-100);
+
+			&:empty {
+				display: none;
+			}
+
+			.form-field:has(.fileUpload) + & {
+				margin-top: var(--pr-t-spacings-100);
+			}
+		}
+
+		.fileEntry-status {
+			border-radius: var(--components-fileEntry-status-borderRadius);
+			overflow: hidden;
+			inline-size: var(--components-fileEntry-status-inlineSize);
+			block-size: var(--components-fileEntry-status-blockSize);
+			color: var(--palettes-neutral-700);
+			background-color: var(--components-fileEntry-status-backgroundColor);
+			flex-shrink: 0;
+			aspect-ratio: var(--components-fileEntry-status-aspectRatio);
+			margin: var(--components-fileEntry-status-margin);
+			grid-area: picture;
+			display: flex;
+		}
+
+		.fileEntry-status-content {
+			display: flex;
+			inline-size: 100%;
+			block-size: 100%;
+			outline: none;
+			justify-content: center;
+			align-items: center;
+			padding: var(--components-fileEntry-status-content-padding);
+		}
+
+		.fileEntry-status-content-icon {
+			color: var(--palettes-critical-700);
+		}
+
+		.fileEntry-status-content-inlineMessage.inlineMessage {
+			flex-direction: column;
+			align-items: center;
+			text-align: center;
+		}
+
+		.fileEntry-status-content-svg {
+			inline-size: var(--components-fileEntry-status-content-svg-width);
+			block-size: var(--components-fileEntry-status-content-svg-height);
+		}
+
+		.fileEntry-status-content-img {
+			object-fit: cover;
+			inline-size: 100%;
+			block-size: 100%;
+			opacity: var(--components-fileEntry-status-content-img-opacity);
+		}
+
+		.fileEntry-status-content-loading {
+			position: absolute;
+		}
+
+		.fileEntry-toolbar {
+			grid-area: toolbar;
+			margin: 0;
+		}
+
+		.fileEntry-filename {
+			grid-area: title;
+			align-self: var(--components-fileEntry-filename-alignSelf);
+			min-width: 0;
+		}
+
+		.fileEntry-filename-tooltip {
+			@include text.ellipsis;
+
+			outline: none;
+		}
+
+		.fileEntry-description {
+			grid-area: description;
+			align-self: start;
+			color: var(--palettes-neutral-600);
+			font-size: var(--sizes-S-fontSize);
+			line-height: var(--sizes-S-lineHeight);
+			display: var(--components-fileEntry-description-display);
+			margin: 0;
+			gap: var(--pr-t-spacings-100);
+			min-width: 0;
+		}
+
+		.fileEntry-description-format {
+			@include text.ellipsis;
+
+			border-radius: var(--commons-borderRadius-M);
+
+			&:focus-visible {
+				@include a11y.focusVisible;
+			}
+		}
+
+		.fileEntry-inlineMessage {
+			grid-area: description;
+			margin: 0;
+			align-self: start;
+			min-width: 0;
+
+			.inlineMessage-statusIcon {
+				display: none;
+			}
+		}
+	}
+}
