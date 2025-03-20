@@ -19,13 +19,13 @@
 	--components-fileUpload-borderColor: var(--palettes-critical-400);
 }
 
+@mixin errorHover {
+	--components-fileUpload-borderColor: var(--palettes-critical-600);
+}
+
 @mixin loading {
 	--components-fileUpload-instruction-display: none;
 	--components-fileUpload-button-display: none;
-}
-
-@mixin errorHover {
-	--components-fileUpload-borderColor: var(--palettes-critical-600);
 }
 
 @mixin loadingS {

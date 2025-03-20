@@ -4,7 +4,7 @@ import { applicationConfig, Meta, moduleMetadata } from '@storybook/angular';
 import { generateInputs } from 'stories/helpers/stories';
 
 export default {
-	title: 'Documentation/FileEntry/Angular/Basic',
+	title: 'Documentation/File/FileEntry/Angular/Basic',
 	argTypes: {
 		size: {
 			options: ['S', null],
@@ -24,12 +24,6 @@ export default {
 				type: 'radio',
 			},
 		},
-		display: {
-			options: [null, 'media', 'single'],
-			control: {
-				type: 'select',
-			},
-		},
 	},
 	decorators: [
 		moduleMetadata({
@@ -38,26 +32,34 @@ export default {
 		applicationConfig({ providers: [provideHttpClient()] }),
 	],
 	render: (args, { argTypes }) => {
+		const { fileName, fileSize, fileType, deletable, withPassword, ...otherArgs } = args;
+
+		const deletableParam = deletable ? `(deleteFile)="deleteFile()"` : ``;
+		const withPasswordParam = withPassword ? `(passwordChange)="passwordChange()"` : ``;
+
 		return {
-			template: `<lu-file-entry${generateInputs(args, argTypes)} />`,
+			template: `<lu-file-entry ${deletableParam} ${withPasswordParam} [entry]="{
+			name: '${fileName}',
+			size: ${fileSize},
+			type: '${fileType}',
+		}"  ${generateInputs(otherArgs, argTypes)} />`,
 		};
 	},
 } as Meta;
 
 export const Basic = {
 	args: {
+		media: false,
 		size: null,
 		fileSize: 28420,
 		fileType: 'image/png',
 		fileName: 'dummyimage.png',
-		filePreviewUrl: 'https://dummyimage.com/500',
+		previewUrl: 'https://dummyimage.com/500',
 		state: null,
-		display: null,
+		inlineMessageError: 'Virus contenu dans le fichier sélectionné.',
 		downloadable: false,
 		deletable: true,
-		viewable: false,
 		format: 'file',
-		inlineMessageError: 'Virus contenu dans le fichier sélectionné.',
 		withPassword: false,
 	},
 };

@@ -15,29 +15,21 @@
 	flex-direction: var(--components-fileUpload-flexDirection);
 	align-items: var(--components-fileUpload-alignItems);
 	justify-content: var(--components-fileUpload-justifyContent);
-	gap: var(--pr-t-spacings-200);
+	gap: var(--pr-t-spacings-150);
 	color: var(--palettes-neutral-800);
 	min-block-size: var(--components-fileUpload-minHeight);
-	grid-column: 1 / -1;
 
 	&:has(.fileUpload-input:focus-visible) {
 		@include a11y.focusVisible;
 	}
 
 	@at-root ($atRoot) {
-		.fileUpload-wrapper {
-			display: grid;
-			grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
-			gap: var(--pr-t-spacings-100);
-		}
-
 		.fileUpload-status {
 			min-inline-size: var(--pr-t-spacings-600);
-			min-block-size: var(--components-fileUpload-status-minHeight);
+			min-block-size: var(--pr-t-spacings-600);
 			display: flex;
 			align-items: center;
 			justify-content: center;
-			position: var(--components-fileUpload-status-position);
 		}
 
 		.fileUpload-status-preview {
@@ -75,6 +67,7 @@
 
 		.fileUpload-instruction-action {
 			display: block;
+			margin-bottom: var(--fileUpload-instruction-action-marginBottom);
 		}
 
 		.fileUpload-instruction-action-click {

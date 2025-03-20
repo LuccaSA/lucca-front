@@ -6,6 +6,7 @@
 	--components-fileUpload-flexDirection: column;
 	--components-fileUpload-instruction-display: flex;
 	--components-fileUpload-instruction-alignItems: center;
+	--fileUpload-instruction-action-marginBottom: var(--pr-t-spacings-50);
 	--components-fileUpload-width: auto;
 	--components-fileUpload-display: flex;
 	--components-fileUpload-instruction-maxWidth: 30rem;
@@ -18,10 +19,8 @@
 	--components-fileUpload-instruction-filename-color: inherit;
 	--components-fileUpload-instruction-filename-marginTop: calc(var(--pr-t-spacings-300) * -1);
 	--components-fileUpload-minHeight: 20rem;
-	--components-fileUpload-status-minHeight: var(--pr-t-spacings-800);
 	--components-fileUpload-instruction-filename-position: relative;
 	--components-fileUpload-justifyContent: center;
-	--components-fileUpload-status-position: static;
 	--components-fileUpload-status-img-inset: var(--pr-t-spacings-75);
 	--components-fileUpload-status-img-size: calc(100% - var(--pr-t-spacings-75) * 2);
 }

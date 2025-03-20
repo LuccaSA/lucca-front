@@ -33,8 +33,6 @@ export class BaseFileUploadComponent {
 
 	fileMaxSize = input<number>(80 * MEGA_BYTE);
 
-	disablePreview = input(false, { transform: booleanAttribute });
-
 	maxSizeDisplay = computed(() => formatSize(this.locale, this.fileMaxSize()));
 
 	size = input<'S' | null>(null);

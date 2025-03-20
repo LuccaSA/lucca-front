@@ -1,14 +1,13 @@
 import { HttpErrorResponse, HttpStatusCode, provideHttpClient } from '@angular/common/http';
 import { Injectable, Pipe, PipeTransform, signal } from '@angular/core';
-import { FileEntry, FileEntryComponent, SingleFileUploadComponent } from '@lucca-front/ng/file-upload';
+import { FileEntry, FileEntryComponent, MultiFileUploadComponent, SingleFileUploadComponent } from '@lucca-front/ng/file-upload';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { TextInputComponent } from '@lucca-front/ng/forms';
 import { LuInputDirective } from '@lucca-front/ng/input';
 import { applicationConfig, Meta, moduleMetadata } from '@storybook/angular';
 import { ButtonComponent } from 'dist/ng/button';
-import { generateInputs } from 'stories/helpers/stories';
 import { map, Observable, switchMap, throwError, timer } from 'rxjs';
-import { MultiFileUploadComponent } from '../../../../../packages/ng/file-upload/multi/multi-file-upload.component';
+import { generateInputs } from 'stories/helpers/stories';
 
 type LuccaFileUploadResultId = string;
 
@@ -73,7 +72,7 @@ class FileUploadToLFEntryPipe implements PipeTransform {
 	providedIn: 'root',
 })
 class MockFileUploadService {
-	errorSettings: ErrorSettings = 'all';
+	errorSettings: ErrorSettings = 'none';
 	callNumber = 0;
 
 	uploadFile(file: File): Observable<LuccaFileUploadResult> {
@@ -111,7 +110,7 @@ class MockFileUploadService {
 }
 
 export default {
-	title: 'Documentation/FileUpload/Angular/Basic',
+	title: 'Documentation/File/FileUpload/Angular/Basic',
 	argTypes: {
 		size: {
 			options: ['S', null],
@@ -125,9 +124,6 @@ export default {
 				type: 'select',
 			},
 		},
-		displayMedia: {
-			if: { arg: 'multiple', truthy: true },
-		},
 	},
 	decorators: [
 		moduleMetadata({
@@ -139,7 +135,7 @@ export default {
 
 export const Multi = {
 	render: (args, { argTypes }) => {
-		const { accept, ...mainArgs } = args;
+		const { accept, media, size, ...mainArgs } = args;
 		const service = new MockFileUploadService();
 		const uploads = signal([] as FileUpload<LuccaFileUploadResult>[]);
 		const fileUploadFeature = {
@@ -173,6 +169,9 @@ export const Multi = {
 			fileUploads: uploads,
 		};
 		const previewCache = new Map<File, string>();
+		const mediaParam = media ? `media` : ``;
+		const sizeParam = size ? `size="S"` : ``;
+
 		return {
 			props: {
 				accept,
@@ -186,7 +185,7 @@ export const Multi = {
 					}
 					if (previewCache.has(fileUpload.file)) {
 						return previewCache.get(fileUpload.file);
-					} else if (fileUpload.state === 'success' && fileUpload.file.type.startsWith('image/')) {
+					} else if (fileUpload.state !== 'error' && fileUpload.file.type.startsWith('image/')) {
 						const url = URL.createObjectURL(fileUpload.file);
 						previewCache.set(fileUpload.file, url);
 						return url;
@@ -196,17 +195,20 @@ export const Multi = {
 			},
 			template: `
 			<lu-form-field label="Label">
-				<lu-multi-file-upload ${generateInputs(mainArgs, argTypes)} [accept]="accept" (filePicked)="fileUploadFeature.uploadFiles([$event])"/>
+				<lu-multi-file-upload ${sizeParam} ${generateInputs(mainArgs, argTypes)} [accept]="accept" (filePicked)="fileUploadFeature.uploadFiles([$event])" />
 			</lu-form-field>
-			@for(fileUpload of fileUploadFeature.fileUploads(); track $index){
-				<lu-file-entry [entry]="fileUpload | fileUploadToLFEntry" [state]="fileUpload.state" [previewUrl]="getPreviewUrl(fileUpload)" [inlineMessageError]="fileUpload.error?.detail" (deleteFile)="deleteFile(fileUpload)"></lu-file-entry>
-			}
+			<div class="fileEntryDisplayWrapper">
+				@for(fileUpload of fileUploadFeature.fileUploads(); track $index) {
+					<lu-file-entry ${sizeParam} ${mediaParam} [entry]="fileUpload | fileUploadToLFEntry" [state]="fileUpload.state" [previewUrl]="getPreviewUrl(fileUpload)" [inlineMessageError]="fileUpload.error?.detail" (deleteFile)="deleteFile(fileUpload)" />
+				}
+			</div>
 			`,
 		};
 	},
 	args: {
 		size: null,
-		displayMedia: false,
+
+		media: false,
 		accept: [
 			{
 				format: '.jpg',
@@ -229,7 +231,6 @@ export const Multi = {
 			},
 		],
 		fileMaxSize: 5000000,
-		disablePreview: false,
 		illustration: 'paper',
 	},
 };
@@ -249,7 +250,6 @@ export const Single = {
 	},
 	args: {
 		size: null,
-		displayMedia: false,
 		accept: [
 			{
 				format: '.jpg',
@@ -272,7 +272,6 @@ export const Single = {
 			},
 		],
 		fileMaxSize: 5000000,
-		disablePreview: false,
 		illustration: 'paper',
 	},
 };
