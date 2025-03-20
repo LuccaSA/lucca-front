@@ -44,7 +44,7 @@ export const Basic: StoryObj<RichTextInputComponent & { value: string; disabled:
 		placeholder: 'Placeholder…',
 		disabled: false,
 		required: false,
-		disableSpeelcheck: false,
+		disableSpellcheck: false,
 		autoResize: true,
 	},
 };
