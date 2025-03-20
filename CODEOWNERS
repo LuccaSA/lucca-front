@@ -9,11 +9,12 @@
 Jenkinsfile           @LuccaSA/ux-admins
 .cd                   @LuccaSA/ux-admins
 
-#
-packages/ng           @LuccaSA/ux-admins @LuccaSA/guilde-front
-packages/ng/**/*.scss @LuccaSA/ux-devs
-packages/icons        @LuccaSA/ux-devs
-packages/scss         @LuccaSA/ux-devs
+# Packages
+packages/ng               @LuccaSA/ux-admins @LuccaSA/guilde-front
+packages/ng/**/*.scss     @LuccaSA/ux-devs
+packages/icons            @LuccaSA/ux-devs
+packages/scss             @LuccaSA/ux-devs
+packages/stylelint-config @LuccaSA/ux-devs @LuccaSA/guilde-front
 
 # Storybook
 stories               @LuccaSA/ux-devs

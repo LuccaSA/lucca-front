@@ -11,7 +11,7 @@
 	text-align: var(--components-loading-textAlign);
 	vertical-align: top;
 
-	@include loading.spinner();
+	@include loading.spinner;
 
 	&:not(:empty) {
 		--components-loading-padding: 0 0 0 var(--pr-t-spacings-400);
