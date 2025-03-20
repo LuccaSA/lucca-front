@@ -21,7 +21,12 @@ export class BaseFileUploadComponent {
 			format: string;
 			name?: string;
 		}>
-	>([]);
+	>([
+		{
+			format: '*',
+			name: 'tous',
+		},
+	]);
 
 	acceptNames = computed(() =>
 		this.accept()
@@ -30,6 +35,10 @@ export class BaseFileUploadComponent {
 	);
 
 	acceptAttribute = computed(() => this.accept().map((e) => e.format));
+
+	acceptAll = computed(() => {
+		return this.acceptAttribute().some((str) => str.includes('*'));
+	});
 
 	fileMaxSize = input<number>(80 * MEGA_BYTE);
 

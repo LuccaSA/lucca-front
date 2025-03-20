@@ -20,7 +20,7 @@
 		</span>
 		@if (acceptNames().length) {
 		<span class="fileUpload-instruction-formats">
-			@if (acceptNames().length > 1) { Formats acceptés : } @else { Format accepté : } {{ acceptNames().join(', ') }}.
+			@if (acceptNames().length > 1 || acceptAll()) { Formats acceptés : } @else { Format accepté : } {{ acceptNames().join(', ') }}.
 		</span>
 		} @if (fileMaxSize()) {
 		<span class="fileUpload-instruction-size">Poids maximum d’un fichier : {{ maxSizeDisplay() }}. </span>

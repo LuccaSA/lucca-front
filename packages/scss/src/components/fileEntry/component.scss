@@ -9,7 +9,7 @@
 	margin: 0;
 	border-radius: var(--commons-borderRadius-L);
 	background-color: var(--pr-t-elevation-surface-raised);
-	gap: 0 var(--components-fileEntry-gap);
+	gap: 0 var(--components-fileEntry-gapInline);
 	position: relative;
 	grid-column: var(--components-fileEntry-gridColumn);
 	min-height: var(--components-fileEntry-minHeight);
@@ -120,6 +120,7 @@
 			@include text.ellipsis;
 
 			border-radius: var(--commons-borderRadius-M);
+			max-width: 20ch;
 
 			&:focus-visible {
 				@include a11y.focusVisible;

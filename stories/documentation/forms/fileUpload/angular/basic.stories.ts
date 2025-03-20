@@ -99,7 +99,7 @@ class MockFileUploadService {
 							new HttpErrorResponse({
 								error: {
 									status: 400,
-									detail: 'An error occured',
+									detail: 'Virus détecté dans le fichier.',
 								} as LuccaFileUploadError,
 							}),
 					),
@@ -170,7 +170,8 @@ export const Multi = {
 		};
 		const previewCache = new Map<File, string>();
 		const mediaParam = media ? `media` : ``;
-		const sizeParam = size ? `size="S"` : ``;
+		const sizeSFileUploadParam = size ? `size="S"` : ``;
+		const sizeSFileEntryParam = media ? `size="S"` : sizeSFileUploadParam;
 
 		return {
 			props: {
@@ -195,11 +196,11 @@ export const Multi = {
 			},
 			template: `
 			<lu-form-field label="Label">
-				<lu-multi-file-upload ${sizeParam} ${generateInputs(mainArgs, argTypes)} [accept]="accept" (filePicked)="fileUploadFeature.uploadFiles([$event])" />
+				<lu-multi-file-upload ${sizeSFileUploadParam} ${generateInputs(mainArgs, argTypes)} [accept]="accept" (filePicked)="fileUploadFeature.uploadFiles([$event])" />
 			</lu-form-field>
 			<div class="fileEntryDisplayWrapper">
 				@for(fileUpload of fileUploadFeature.fileUploads(); track $index) {
-					<lu-file-entry ${sizeParam} ${mediaParam} [entry]="fileUpload | fileUploadToLFEntry" [state]="fileUpload.state" [previewUrl]="getPreviewUrl(fileUpload)" [inlineMessageError]="fileUpload.error?.detail" (deleteFile)="deleteFile(fileUpload)" />
+					<lu-file-entry ${sizeSFileEntryParam} ${mediaParam} [entry]="fileUpload | fileUploadToLFEntry" [state]="fileUpload.state" [previewUrl]="getPreviewUrl(fileUpload)" [inlineMessageError]="fileUpload.error?.detail" (deleteFile)="deleteFile(fileUpload)" />
 				}
 			</div>
 			`,
@@ -207,27 +208,11 @@ export const Multi = {
 	},
 	args: {
 		size: null,
-
 		media: false,
 		accept: [
 			{
-				format: '.jpg',
-				name: 'JPG',
-			},
-			{
-				format: '.jpeg',
-			},
-			{
-				format: '.png',
-				name: 'PNG',
-			},
-			{
-				format: '.gif',
-				name: 'GIF',
-			},
-			{
-				format: '.svg',
-				name: 'SVG',
+				format: '*',
+				name: 'tous',
 			},
 		],
 		fileMaxSize: 5000000,
@@ -252,23 +237,8 @@ export const Single = {
 		size: null,
 		accept: [
 			{
-				format: '.jpg',
-				name: 'JPG',
-			},
-			{
-				format: '.jpeg',
-			},
-			{
-				format: '.png',
-				name: 'PNG',
-			},
-			{
-				format: '.gif',
-				name: 'GIF',
-			},
-			{
-				format: '.svg',
-				name: 'SVG',
+				format: 'image/*',
+				name: 'tous les formats d’images',
 			},
 		],
 		fileMaxSize: 5000000,

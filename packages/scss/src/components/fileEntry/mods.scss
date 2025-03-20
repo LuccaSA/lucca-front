@@ -7,6 +7,8 @@
 	--components-fileEntry-gridTemplateAreas: 'picture title title toolbar';
 	--components-fileEntry-filename-alignSelf: center;
 	--components-fileEntry-status-borderRadius: var(--commons-borderRadius-M);
+	--components-fileEntry-gapInline: var(--pr-t-spacings-75);
+	--components-fileEntry-status-content-svg-width: 24px;
 
 	.fileEntry-status-content-icon {
 		@include icon.S;
@@ -26,14 +28,17 @@
 	--components-fileEntry-status-blockSize: auto;
 	--components-fileEntry-status-aspectRatio: 1;
 	--components-fileEntry-display: block;
+	--components-fileEntry-status-content-svg-width: 64px;
 }
 
 @mixin media {
+	--components-fileEntry-status-borderRadius: var(--commons-borderRadius-M);
 	--components-fileEntry-padding: var(--pr-t-spacings-75);
 	--components-fileEntry-status-aspectRatio: auto;
 	--components-fileEntry-status-inlineSize: 100%;
-	--components-fileEntry-status-blockSize: calc(20rem - 1rem + 2px);
+	--components-fileEntry-status-blockSize: calc(21.5rem - 1rem + 2px);
 	--components-fileEntry-description-display: none;
 	--components-fileEntry-display: block;
 	--components-fileEntry-gridColumn: 1 / -1;
+	--components-fileEntry-status-content-svg-width: 64px;
 }

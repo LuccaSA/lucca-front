@@ -18,12 +18,6 @@ export default {
 				type: 'radio',
 			},
 		},
-		format: {
-			options: ['file', 'word', 'excel', 'powerpoint'],
-			control: {
-				type: 'radio',
-			},
-		},
 	},
 	decorators: [
 		moduleMetadata({
@@ -56,10 +50,9 @@ export const Basic = {
 		fileName: 'dummyimage.png',
 		previewUrl: 'https://dummyimage.com/500',
 		state: null,
-		inlineMessageError: 'Virus contenu dans le fichier sélectionné.',
+		inlineMessageError: 'Virus détecté dans le fichier.',
 		downloadable: false,
 		deletable: true,
-		format: 'file',
 		withPassword: false,
 	},
 };

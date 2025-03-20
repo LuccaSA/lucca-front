@@ -8,6 +8,10 @@
 		@include hover;
 	}
 
+	&.mod-dropzone {
+		@include dropzone;
+	}
+
 	&.mod-S {
 		@include S;
 
