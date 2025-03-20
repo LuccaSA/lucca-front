@@ -31,7 +31,6 @@ export class FormFieldIdDirective implements OnDestroy {
 	}
 
 	constructor() {
-		// eslint-disable-next-line @typescript-eslint/no-unsafe-argument
 		this.#formFieldComponent.ready$.pipe(filter(Boolean), take(1)).subscribe(() => {
 			this.applyLabelledBy();
 		});

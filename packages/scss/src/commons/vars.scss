@@ -3,6 +3,7 @@
 
 @use '@lucca-front/scss/src/commons/config';
 @use '@lucca-front/scss/src/commons/core';
+@use '@lucca-front/scss/src/commons/function';
 
 @mixin vars {
 	// TOKENS
@@ -54,7 +55,7 @@
 	--commons-divider-color: var(--palettes-neutral-200);
 
 	@each $breakpoint, $value in config.$breakpoints {
-		--commons-container-maxWidth#{$breakpoint}: #{core.pxToRem($value)};
+		--commons-container-maxWidth#{$breakpoint}: #{function.pxToRem($value)};
 	}
 
 	--commons-container-maxWidth: var(--commons-container-maxWidthXXL);

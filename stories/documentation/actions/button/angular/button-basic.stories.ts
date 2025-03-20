@@ -1,5 +1,5 @@
-import { Meta, StoryObj } from '@storybook/angular';
 import { ButtonComponent } from '@lucca-front/ng/button';
+import { Meta, StoryObj } from '@storybook/angular';
 import { generateInputs } from 'stories/helpers/stories';
 import { expect, within } from '@storybook/test';
 
