@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
-import { LuModal, LuModalModule } from '@lucca-front/ng/modal';
-import { ILuSidepanelContent, LuSidepanel, LuSidepanelModule } from '@lucca-front/ng/sidepanel';
+import { ILuModalContent, LuModal, LuModalModule } from '@lucca-front/ng/modal';
+import { LuSidepanel, LuSidepanelModule } from '@lucca-front/ng/sidepanel';
 import { LuToastsModule, LuToastsService } from '@lucca-front/ng/toast';
 import { applicationConfig, Meta, StoryFn } from '@storybook/angular';
 import { map, shareReplay, timer } from 'rxjs';
@@ -12,7 +12,7 @@ import { map, shareReplay, timer } from 'rxjs';
 	template: '<p>General Kenobi</p>',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-class SidepanelContentComponent implements ILuSidepanelContent {
+class SidepanelContentComponent implements ILuModalContent {
 	title = 'Hello there';
 	submitAction = () => timer(500);
 }
@@ -23,7 +23,7 @@ class SidepanelContentComponent implements ILuSidepanelContent {
 	template: '<p>General Kenobi</p>',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-class SidepanelDynamicContentComponent implements ILuSidepanelContent {
+class SidepanelDynamicContentComponent implements ILuModalContent {
 	counter$ = timer(0, 1000).pipe(shareReplay({ refCount: true, bufferSize: 1 }));
 
 	title = this.counter$.pipe(map((n) => `Title #${n}`));
@@ -116,7 +116,7 @@ class SidepanelStoriesModule {}
 	selector: 'sidepanel-content',
 	template: '<p>General Kenobi</p>'
 })
-class SidepanelContentComponent implements ILuSidepanelContent {
+class SidepanelContentComponent implements ILuModalContent {
 	title = 'Hello there';
 	submitAction = () => {};
 }
