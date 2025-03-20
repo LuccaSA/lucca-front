@@ -33,8 +33,6 @@ export class FileEntryComponent {
 
 	entry = input.required<FileEntry>();
 
-	format = input<'file' | 'word' | 'excel' | 'powerpoint'>('file');
-
 	size = input<'S' | null>(null);
 
 	downloadable = input(false, { transform: booleanAttribute });
@@ -60,6 +58,7 @@ export class FileEntryComponent {
 	fileName = computed(() => this.entry().name);
 	fileType = computed(() => this.entry().type);
 	fileSize = computed(() => this.entry().size);
+	fileExtension = computed(() => this.fileName().split('.').at(-1));
 
 	fileSizeDisplay = computed(() => formatSize(this.#locale, this.fileSize()));
 	fileTypeDisplay = computed(() => `Fichier ${this.fileType().split('/')[1].toUpperCase()}`);

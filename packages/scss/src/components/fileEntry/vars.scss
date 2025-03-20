@@ -1,6 +1,6 @@
 @mixin vars {
 	--components-fileEntry-padding: var(--pr-t-spacings-150);
-	--components-fileEntry-gap: var(--components-fileEntry-padding);
+	--components-fileEntry-gapInline: var(--components-fileEntry-padding);
 	--components-fileEntry-gridColumn: 1 / -1;
 	--components-fileEntry-borderColor: var(--palettes-neutral-100);
 	--components-fileEntry-minHeight: auto;

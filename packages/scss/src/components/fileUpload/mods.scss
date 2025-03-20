@@ -17,3 +17,8 @@
 	--components-fileUpload-status-img-inset: 0;
 	--components-fileUpload-status-img-size: var(--pr-t-spacings-600);
 }
+
+@mixin dropzone {
+	position: fixed;
+	inset: var(--pr-t-spacings-200);
+}

@@ -29,7 +29,16 @@
 			<img class="fileEntry-status-content-img" [src]="previewUrl()" alt="" loading="lazy" />
 			} @if (state() === 'loading') {
 			<div class="fileEntry-status-content-loading loading"></div>
-			} @if (!previewUrl() && state() !== 'loading') { }
+			} @if (!previewUrl() && state() !== 'loading') { @if (fileExtension() === 'docx' || fileExtension() === 'doc' || fileExtension() ===
+			'pages') {
+			<img class="fileEntry-status-content-svg" src="https://dummyimage.com/64/1443AE/FFF&text=W" alt="" width="32" height="32" />
+			} @else if (fileExtension() === 'xlsx' || fileExtension() === 'xls' || fileExtension() === 'number') {
+			<img class="fileEntry-status-content-svg" src="https://dummyimage.com/64/146B31/FFF&text=X" alt="" width="32" height="32" />
+			} @else if (fileExtension() === 'pptx' || fileExtension() === 'ppt' || fileExtension() === 'keynote') {
+			<img class="fileEntry-status-content-svg" src="https://dummyimage.com/64/B42A16/FFF&text=P" alt="" width="32" height="32" />
+			} @else {
+			<img class="fileEntry-status-content-svg" src="https://dummyimage.com/64/445473/FFF&text=!" alt="" width="32" height="32" />
+			}}
 		</div>
 		}
 	</dd>
@@ -48,9 +57,9 @@
 				<li class="fileToolbar-list-item">
 					<button
 						class="fileToolbar-list-item-button"
+						[class.palette-critical]="state() === 'error'"
 						type="button"
 						luButton
-						delete
 						luTooltip="Supprimer"
 						luTooltipOnlyForDisplay
 						(click)="deleteFile$.next()"
