@@ -1,6 +1,7 @@
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { Meta, StoryObj } from '@storybook/angular';
 import { generateInputs } from 'stories/helpers/stories';
+import { expect, within } from '@storybook/test';
 
 export default {
 	title: 'Documentation/Actions/Button/Angular/Basic',
@@ -29,6 +30,11 @@ export const Basic: StoryObj<ButtonComponent> = {
 				type: 'select',
 			},
 		},
+	},
+	play: async (context) => {
+		const canvas = within(context.canvasElement);
+		const button = await canvas.findByRole('button');
+		await expect(button).toHaveClass('button is-default palette-none');
 	},
 	args: {
 		block: false,
