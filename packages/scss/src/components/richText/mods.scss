@@ -1,0 +1,5 @@
+@mixin autoResize {
+	--components-richText-minHeight: 3lh;
+	--components-richText-height: auto;
+	--components-richText-resize: none;
+}

@@ -1,0 +1,90 @@
+@use '@lucca-front/scss/src/commons/utils/namespace';
+
+@use '@lucca-front/scss/src/commons/utils/a11y';
+
+@mixin component($atRoot: namespace.$defaultAtRoot) {
+	display: flex;
+	flex-direction: column;
+	flex-grow: 1;
+	overflow: auto;
+	background-color: var(--components-richText-backgroundColor);
+	color: var(--components-richText-color);
+	border-color: var(--components-richText-borderColor);
+	border-style: solid;
+	border-width: 1px;
+	border-radius: var(--pr-t-radius-input);
+	resize: var(--components-richText-resize);
+	min-height: calc(var(--components-richText-minHeight) + var(--pr-t-spacings-800) + var(--pr-t-spacings-25));
+	max-height: var(--components-richText-maxHeight);
+	height: calc(var(--components-richText-height) + var(--pr-t-spacings-800) + var(--pr-t-spacings-25));
+
+	&:has(.richText-content:focus-visible) {
+		@include a11y.focusVisible;
+	}
+
+	@at-root ($atRoot) {
+		.richText-toolbar {
+			display: flex;
+			align-items: flex-end;
+			justify-content: space-between;
+			gap: var(--pr-t-spacings-400);
+			background-color: var(--components-richText-toolbar-backgroundColor);
+			border-radius: 0 0 var(--commons-borderRadius-M) var(--commons-borderRadius-M);
+			overflow: hidden;
+			flex-shrink: 0;
+
+			&:empty {
+				display: none;
+			}
+		}
+
+		.richText-toolbar-col {
+			display: flex;
+			flex-wrap: wrap;
+			align-items: center;
+			row-gap: var(--pr-t-spacings-100);
+			padding: var(--pr-t-spacings-100);
+			margin-left: calc(var(--pr-t-spacings-400) * -1);
+		}
+
+		.richText-toolbar-col-group {
+			display: flex;
+			flex-wrap: wrap;
+			align-items: center;
+
+			&:not(:only-child) {
+				position: relative;
+				margin-left: var(--pr-t-spacings-400);
+
+				&::before {
+					content: '';
+					position: absolute;
+					inset: var(--pr-t-spacings-100) auto var(--pr-t-spacings-100) calc(var(--pr-t-spacings-400) / -2);
+					width: 2px;
+					border-radius: var(--commons-borderRadius-full);
+					background-color: var(--palettes-neutral-300);
+				}
+			}
+
+			// no nesting of groups within groups
+			.richText-toolbar-col-group {
+				display: contents;
+			}
+		}
+
+		.richText-content {
+			padding: var(--pr-t-spacings-100);
+			outline: none;
+			overflow: auto;
+			flex-grow: 1;
+		}
+
+		.richText-content-placeholder {
+			position: absolute;
+			pointer-events: none;
+			padding: var(--pr-t-spacings-100);
+			user-select: none;
+			color: var(--components-richText-placeholder-color);
+		}
+	}
+}
