@@ -1,5 +1,5 @@
 import { HttpErrorResponse, HttpStatusCode, provideHttpClient } from '@angular/common/http';
-import { Injectable, Pipe, PipeTransform, signal } from '@angular/core';
+import { Injectable, LOCALE_ID, Pipe, PipeTransform, signal } from '@angular/core';
 import { FileEntry, FileEntryComponent, MultiFileUploadComponent, SingleFileUploadComponent } from '@lucca-front/ng/file-upload';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { TextInputComponent } from '@lucca-front/ng/forms';
@@ -129,13 +129,16 @@ export default {
 		moduleMetadata({
 			imports: [MultiFileUploadComponent, SingleFileUploadComponent, FormFieldComponent, TextInputComponent, LuInputDirective, ButtonComponent, FileUploadToLFEntryPipe, FileEntryComponent],
 		}),
+		applicationConfig({
+			providers: [{ provide: LOCALE_ID, useValue: 'fr-FR' }],
+		}),
 		applicationConfig({ providers: [provideHttpClient()] }),
 	],
 } as Meta;
 
 export const Multi = {
 	render: (args, { argTypes }) => {
-		const { accept, media, size, ...mainArgs } = args;
+		const { media, size, ...mainArgs } = args;
 		const service = new MockFileUploadService();
 		const uploads = signal([] as FileUpload<LuccaFileUploadResult>[]);
 		const fileUploadFeature = {
@@ -175,7 +178,6 @@ export const Multi = {
 
 		return {
 			props: {
-				accept,
 				fileUploadFeature,
 				deleteFile: (upload: FileUpload<LuccaFileUploadResult>) => {
 					uploads.set([...uploads().filter(({ file: f }) => f !== upload.file)]);
@@ -195,13 +197,15 @@ export const Multi = {
 				},
 			},
 			template: `
+			<div lang="fr">
 			<lu-form-field label="Label">
-				<lu-multi-file-upload ${sizeSFileUploadParam} ${generateInputs(mainArgs, argTypes)} [accept]="accept" (filePicked)="fileUploadFeature.uploadFiles([$event])" />
+				<lu-multi-file-upload ${sizeSFileUploadParam} ${generateInputs(mainArgs, argTypes)} (filePicked)="fileUploadFeature.uploadFiles([$event])" />
 			</lu-form-field>
 			<div class="fileEntryDisplayWrapper">
 				@for(fileUpload of fileUploadFeature.fileUploads(); track $index) {
 					<lu-file-entry ${sizeSFileEntryParam} ${mediaParam} [entry]="fileUpload | fileUploadToLFEntry" [state]="fileUpload.state" [previewUrl]="getPreviewUrl(fileUpload)" [inlineMessageError]="fileUpload.error?.detail" (deleteFile)="deleteFile(fileUpload)" />
 				}
+			</div>
 			</div>
 			`,
 		};
@@ -209,12 +213,6 @@ export const Multi = {
 	args: {
 		size: null,
 		media: false,
-		accept: [
-			{
-				format: '*',
-				name: 'tous',
-			},
-		],
 		fileMaxSize: 5000000,
 		illustration: 'paper',
 	},
@@ -225,9 +223,9 @@ export const Single = {
 		const multi = Multi.render(args, { argTypes });
 		const { accept, ...mainArgs } = args;
 		return {
-			...multi,
-			template: `<lu-form-field label="Label">
-				@let fileUpload = fileUploadFeature.fileUploads()[0];
+			props: { ...multi.props, accept },
+			template: `@let fileUpload = fileUploadFeature.fileUploads()[0];
+			<lu-form-field label="Label">
 				<lu-single-file-upload ${generateInputs(mainArgs, argTypes)} [accept]="accept" (filePicked)="fileUploadFeature.uploadFiles([$event])"
 				 [entry]="fileUpload | fileUploadToLFEntry" [state]="fileUpload?.state" [previewUrl]="getPreviewUrl(fileUpload)" [inlineMessageError]="fileUpload?.error?.detail" (deleteFile)="deleteFile(fileUpload)"/>
 			</lu-form-field>`,

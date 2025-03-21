@@ -3,10 +3,11 @@
 	<div class="fileUpload-instruction" [attr.id]="'fileUpload-instruction-' + idSuffix">
 		@if (acceptNames().length) {
 		<span class="fileUpload-instruction-formats">
-			@if (acceptNames().length > 1 || acceptAll()) { Formats acceptés : } @else { Format accepté : } {{ acceptNames().join(', ') }}.
+			@if (acceptNames().length > 1 || acceptAll()) { {{ intl.acceptedFormat.other }} } @else { {{ intl.acceptedFormat.one }} } {{
+			acceptNames().join(', ') }}.
 		</span>
 		} @if (fileMaxSize()) {
-		<span class="fileUpload-instruction-size">Poids maximum d’un fichier : {{ maxSizeDisplay() }}. </span>
+		<span class="fileUpload-instruction-size">{{ intl.maxWeight.other | intlParams: {maxSizeDisplay: maxSizeDisplay()} }}</span>
 		}
 	</div>
 </div>

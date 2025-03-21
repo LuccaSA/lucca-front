@@ -1,4 +1,5 @@
 import { Component, input, output, ViewEncapsulation } from '@angular/core';
+import { IntlParamsPipe } from '@lucca-front/ng/core';
 import { InputDirective } from '@lucca-front/ng/form-field';
 import { LuSafeExternalSvgPipe } from '@lucca-front/ng/safe-content';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
@@ -12,7 +13,7 @@ import { FileEntry } from '../file-upload-entry';
 	templateUrl: './single-file-upload.component.html',
 	styleUrls: ['./single-file-upload.component.scss'],
 	encapsulation: ViewEncapsulation.None,
-	imports: [LuSafeExternalSvgPipe, InputDirective, LuTooltipModule, FileEntryComponent],
+	imports: [LuSafeExternalSvgPipe, InputDirective, LuTooltipModule, FileEntryComponent, IntlParamsPipe],
 })
 export class SingleFileUploadComponent extends BaseFileUploadComponent {
 	entry = input<FileEntry | null>(null);
