@@ -1,6 +1,8 @@
 import { NgTemplateOutlet } from '@angular/common';
 import { booleanAttribute, Component, computed, contentChildren, HostBinding, input, ViewEncapsulation } from '@angular/core';
+import { getIntl } from '@lucca-front/ng/core';
 import { BreadcrumbsLinkDirective } from './breadcrumbs-link.directive';
+import { LU_BREADCRUMBS_TRANSLATIONS } from './breadcrumbs.translate';
 
 let nextId = 0;
 
@@ -16,13 +18,13 @@ let nextId = 0;
 	},
 })
 export class BreadcrumbsComponent {
-	disableCompact = input<boolean, boolean>(false, { transform: booleanAttribute });
+	intl = getIntl(LU_BREADCRUMBS_TRANSLATIONS);
+
+	disableCompact = input(false, { transform: booleanAttribute });
 
 	links = contentChildren(BreadcrumbsLinkDirective);
 
-	isCompact = computed(() => {
-		return this.links().length <= 2 && !this.disableCompact();
-	});
+	isCompact = computed(() => this.links().length <= 2 && !this.disableCompact());
 
 	@HostBinding('attr.aria-describedby')
 	id = `breadcrumbs-title-${nextId++}`;

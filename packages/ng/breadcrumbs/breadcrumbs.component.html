@@ -1,4 +1,4 @@
-<p [attr.id]="id" class="u-mask">Fil d’ariane</p>
+<p [attr.id]="id" class="u-mask">{{ intl.breadcrumbs }}</p>
 <ol class="breadcrumbs-list">
 	@for (link of links(); track $index) {
 	<li class="breadcrumbs-list-item">
