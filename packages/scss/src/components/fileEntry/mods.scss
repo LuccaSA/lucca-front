@@ -15,22 +15,6 @@
 	}
 }
 
-@mixin mediaS {
-	--components-fileEntry-description-display: none;
-	--components-fileEntry-status-content-svg-width: 32px;
-	--components-fileEntry-status-borderRadius: var(--commons-borderRadius-M);
-	--components-fileEntry-minHeight: calc(5rem + 2px);
-	--components-fileEntry-gridTemplateAreas: 'picture title title toolbar';
-	--components-fileEntry-filename-alignSelf: center;
-	--components-fileEntry-padding: var(--pr-t-spacings-75);
-	--components-fileEntry-gridColumn: auto;
-	--components-fileEntry-status-inlineSize: 100%;
-	--components-fileEntry-status-blockSize: auto;
-	--components-fileEntry-status-aspectRatio: 1;
-	--components-fileEntry-display: block;
-	--components-fileEntry-status-content-svg-width: 64px;
-}
-
 @mixin media {
 	--components-fileEntry-status-borderRadius: var(--commons-borderRadius-M);
 	--components-fileEntry-padding: var(--pr-t-spacings-75);
@@ -40,5 +24,12 @@
 	--components-fileEntry-description-display: none;
 	--components-fileEntry-display: block;
 	--components-fileEntry-gridColumn: 1 / -1;
-	--components-fileEntry-status-content-svg-width: 64px;
+	--components-fileEntry-status-content-svg-width: 48px;
+}
+
+@mixin mediaS {
+	--components-fileEntry-minHeight: calc(5rem + 2px);
+	--components-fileEntry-gridColumn: auto;
+	--components-fileEntry-status-blockSize: auto;
+	--components-fileEntry-status-aspectRatio: 1;
 }

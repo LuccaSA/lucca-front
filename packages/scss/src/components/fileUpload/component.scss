@@ -68,11 +68,11 @@
 		.fileUpload-instruction-action {
 			display: block;
 			margin-bottom: var(--fileUpload-instruction-action-marginBottom);
-		}
 
-		.fileUpload-instruction-action-click {
-			color: var(--components-fileUpload-instruction-action-color);
-			font-weight: var(--components-fileUpload-instruction-action-fontWeight);
+			span {
+				color: var(--components-fileUpload-instruction-action-color);
+				font-weight: var(--components-fileUpload-instruction-action-fontWeight);
+			}
 		}
 
 		.fileUpload-instruction-size,

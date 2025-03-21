@@ -18,6 +18,9 @@ export default {
 				type: 'radio',
 			},
 		},
+		previewUrl: {
+			if: { arg: 'iconOverride', truthy: false },
+		},
 	},
 	decorators: [
 		moduleMetadata({
@@ -48,10 +51,11 @@ export const Basic = {
 		fileSize: 28420,
 		fileType: 'image/png',
 		fileName: 'dummyimage.png',
+		iconOverride: '',
 		previewUrl: 'https://dummyimage.com/500',
 		state: null,
 		inlineMessageError: 'Virus détecté dans le fichier.',
-		downloadable: false,
+		downloadURL: '',
 		deletable: true,
 		withPassword: false,
 	},

@@ -3,7 +3,7 @@ import { FileDropzoneComponent } from '@lucca-front/ng/file-upload';
 import { applicationConfig, Meta, moduleMetadata } from '@storybook/angular';
 
 export default {
-	title: 'Documentation/File/FileDropzone/HTML&CSS/Basic',
+	title: 'Documentation/File/FileDropzone/Angular/Basic',
 	argTypes: {},
 	decorators: [
 		moduleMetadata({

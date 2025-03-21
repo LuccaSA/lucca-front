@@ -9,14 +9,14 @@
 	</dd>
 	} @else {
 	<dd class="fileEntry-description">
-		<span class="fileEntry-description-format" luTooltip luTooltipWhenEllipsis>{{ fileTypeDisplay()}}</span><span class="u-mask"> – </span>
+		<span class="fileEntry-description-format" luTooltip luTooltipWhenEllipsis>{{ fileTypeDisplay() }}</span><span class="u-mask"> – </span>
 		<lu-divider vertical />
 		<span class="fileEntry-description-size">{{ fileSizeDisplay() }}</span>
 	</dd>
 	} }
 	<dd class="fileEntry-status">
 		@if (state() === 'error' && inlineMessageError()) {
-		<div class="fileEntry-status-content" [luTooltip]="generateTooltip()">
+		<div class="fileEntry-status-content" [luTooltip]="tooltip()">
 			@if (media()) {
 			<lu-inline-message class="fileEntry-status-content-inlineMessage" [label]="inlineMessageError()" [state]="'error'" />
 			} @else {
@@ -24,34 +24,40 @@
 			}
 		</div>
 		} @else {
-		<div class="fileEntry-status-content" [luTooltip]="generateTooltip()">
+		<div class="fileEntry-status-content" [luTooltip]="tooltip()">
 			@if (previewUrl() && state() !== 'error') {
 			<img class="fileEntry-status-content-img" [src]="previewUrl()" alt="" loading="lazy" />
 			} @if (state() === 'loading') {
 			<div class="fileEntry-status-content-loading loading"></div>
-			} @if (!previewUrl() && state() !== 'loading') { @if (fileExtension() === 'docx' || fileExtension() === 'doc' || fileExtension() ===
-			'pages') {
-			<img class="fileEntry-status-content-svg" src="https://dummyimage.com/64/1443AE/FFF&text=W" alt="" width="32" height="32" />
-			} @else if (fileExtension() === 'xlsx' || fileExtension() === 'xls' || fileExtension() === 'number') {
-			<img class="fileEntry-status-content-svg" src="https://dummyimage.com/64/146B31/FFF&text=X" alt="" width="32" height="32" />
-			} @else if (fileExtension() === 'pptx' || fileExtension() === 'ppt' || fileExtension() === 'keynote') {
-			<img class="fileEntry-status-content-svg" src="https://dummyimage.com/64/B42A16/FFF&text=P" alt="" width="32" height="32" />
-			} @else {
-			<img class="fileEntry-status-content-svg" src="https://dummyimage.com/64/445473/FFF&text=!" alt="" width="32" height="32" />
-			}}
+			} @if (!previewUrl() && state() !== 'loading') {
+			<img class="fileEntry-status-content-svg" [attr.src]="iconOverride() || fileEntryIconSrc()" alt="" width="32" height="32" />
+			}
 		</div>
 		}
 	</dd>
-	@if (downloadable() || deletable) {
+	@if (downloadURL() || deletable) {
 	<dd class="fileEntry-toolbar">
 		<div class="fileToolbar" [class.mod-disablePositioning]="!media()" [class.mod-S]="size() === 'S'">
 			<ul class="fileToolbar-list">
-				@if (downloadable()) {
+				@if (downloadURL()) {
 				<li class="fileToolbar-list-item">
-					<!-- TODO click -->
-					<button class="fileToolbar-list-item-button" type="button" luButton luTooltip="Télécharger" luTooltipOnlyForDisplay>
-						<lu-icon class="fileToolbar-list-item-button-icon" icon="arrowDownload" alt="Télécharger le fichier « {{fileName()}} »" />
-					</button>
+					<a
+						[href]="downloadURL()"
+						target="_blank"
+						rel="noopener noreferrer"
+						download="download"
+						class="fileToolbar-list-item-button"
+						type="button"
+						luButton
+						[luTooltip]="intl.download"
+						luTooltipOnlyForDisplay
+					>
+						<lu-icon
+							class="fileToolbar-list-item-button-icon"
+							icon="arrowDownload"
+							[alt]="intl.downloadFile | intlParams: {fileName: fileName()}"
+						/>
+					</a>
 				</li>
 				} @if (deletable) {
 				<li class="fileToolbar-list-item">
@@ -60,11 +66,15 @@
 						[class.palette-critical]="state() === 'error'"
 						type="button"
 						luButton
-						luTooltip="Supprimer"
+						[luTooltip]="intl.delete"
 						luTooltipOnlyForDisplay
 						(click)="deleteFile$.next()"
 					>
-						<lu-icon class="fileToolbar-list-item-button-icon" icon="trashDelete" alt="Supprimer le fichier « {{fileName()}} »" />
+						<lu-icon
+							class="fileToolbar-list-item-button-icon"
+							icon="trashDelete"
+							[alt]="intl.deleteFile | intlParams: {fileName: fileName()}"
+						/>
 					</button>
 				</li>
 				}
@@ -75,8 +85,8 @@
 </dl>
 @if (withPassword) {
 <div class="box mod-withArrow mod-neutral pr-u-marginBlockStart150">
-	<div class="box-arrow mod-neutral" style="inset-block-end: 100%"></div>
-	<lu-form-field label="Mot de passe">
+	<div class="box-arrow mod-neutral"></div>
+	<lu-form-field [label]="intl.password">
 		<div class="u-displayFlex pr-u-gap100">
 			<lu-text-input
 				class="u-flexGrow1"
@@ -87,7 +97,7 @@
 				[ngModel]="password()"
 				(ngModelChange)="passwordChange$.next($event)"
 			/>
-			<button luButton type="button">Valider le mot de passe</button>
+			<button luButton type="button">{{ intl.confirmPassword }}</button>
 		</div>
 	</lu-form-field>
 </div>

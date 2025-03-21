@@ -1,4 +1,6 @@
 import { booleanAttribute, Component, computed, inject, input, LOCALE_ID, output } from '@angular/core';
+import { getIntl } from '@lucca-front/ng/core';
+import { LU_FILE_UPLOAD_TRANSLATIONS } from '../file-upload.translate';
 import { formatSize, MEGA_BYTE } from '../formatter';
 
 let nextId = 0;
@@ -14,6 +16,8 @@ export class BaseFileUploadComponent {
 
 	protected droppable = false;
 
+	intl = getIntl(LU_FILE_UPLOAD_TRANSLATIONS);
+
 	filePicked = output<File>();
 
 	accept = input<
@@ -24,7 +28,7 @@ export class BaseFileUploadComponent {
 	>([
 		{
 			format: '*',
-			name: 'tous',
+			name: this.intl.all,
 		},
 	]);
 
