@@ -4,8 +4,6 @@
  ***********************************************/
 
 export const IconsList = [
-	{ icon: 'soundMegaphone', deprecated: false },
-	{ icon: 'emojiSmile', deprecated: false },
 	{ icon: 'app', deprecated: false },
 	{ icon: 'apps', deprecated: true },
 	{ icon: 'nineTiles', deprecated: true },
@@ -187,6 +185,7 @@ export const IconsList = [
 	{ icon: 'deviceVideo', deprecated: false },
 	{ icon: 'dotsDrag', deprecated: false },
 	{ icon: 'drag', deprecated: true },
+	{ icon: 'emojiSmile', deprecated: false },
 	{ icon: 'eye', deprecated: false },
 	{ icon: 'watch', deprecated: true },
 	{ icon: 'eyeStrikethrough', deprecated: false },
@@ -388,6 +387,7 @@ export const IconsList = [
 	{ icon: 'userAdd', deprecated: true },
 	{ icon: 'adduser', deprecated: true },
 	{ icon: 'peopleArrowUp', deprecated: false },
+	{ icon: 'peopleEdit', deprecated: false },
 	{ icon: 'peopleGroup', deprecated: false },
 	{ icon: 'userGroup', deprecated: true },
 	{ icon: 'group', deprecated: true },
@@ -452,6 +452,7 @@ export const IconsList = [
 	{ icon: 'settingsTools', deprecated: false },
 	{ icon: 'tools', deprecated: true },
 	{ icon: 'share', deprecated: false },
+	{ icon: 'signAt', deprecated: false },
 	{ icon: 'signBan', deprecated: false },
 	{ icon: 'forbidden', deprecated: true },
 	{ icon: 'signCancel', deprecated: false },
@@ -484,6 +485,7 @@ export const IconsList = [
 	{ icon: 'signWarning', deprecated: false },
 	{ icon: 'warning', deprecated: true },
 	{ icon: 'signWebhook', deprecated: false },
+	{ icon: 'soundMegaphone', deprecated: false },
 	{ icon: 'star', deprecated: false },
 	{ icon: 'unstared', deprecated: true },
 	{ icon: 'starFilled', deprecated: false },
