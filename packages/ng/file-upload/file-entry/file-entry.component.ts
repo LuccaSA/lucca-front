@@ -71,38 +71,26 @@ export class FileEntryComponent {
 	previewUrl = input<string>('');
 
 	fileEntryIconSrc = computed(() => {
-		const fileTypeLastPart = this.fileType().split('/')[1];
+		const fileExtension = this.fileName().split('.').pop();
 		const fileEntryIconRoot = 'https://cdn.lucca.fr/transverse/prisme/visuals/file-entry/';
 		const fileEntryIconExtension = '.svg';
 
-		let fileEntryIcontype = 'default';
-
-		if (
-			fileTypeLastPart === 'msword' ||
-			fileTypeLastPart === 'vnd.msword' ||
-			fileTypeLastPart === 'vnd.openxmlformats-officedocument.wordprocessingml.document' ||
-			fileTypeLastPart === 'vnd.oasis.opendocument.text'
-		) {
-			fileEntryIcontype = 'document';
+		switch (fileExtension) {
+			case 'pdf':
+			case 'xls':
+			case 'xlsx':
+			case 'doc':
+			case 'csv':
+				return fileEntryIconRoot + fileExtension + fileEntryIconExtension;
+			case 'jpg':
+			case 'jpeg':
+			case 'png':
+			case 'gif':
+			case 'svg':
+				return fileEntryIconRoot + 'image' + fileEntryIconExtension;
+			default:
+				return fileEntryIconRoot + 'default' + fileEntryIconExtension;
 		}
-		if (
-			fileTypeLastPart === 'ms-powerpoint' ||
-			fileTypeLastPart === 'vnd.ms-powerpoint' ||
-			fileTypeLastPart === 'vnd.openxmlformats-officedocument.presentationml.presentation' ||
-			fileTypeLastPart === 'vnd.oasis.opendocument.presentation'
-		) {
-			fileEntryIcontype = 'presentation';
-		}
-		if (
-			fileTypeLastPart === 'ms-excel' ||
-			fileTypeLastPart === 'vnd.ms-excel' ||
-			fileTypeLastPart === 'vnd.openxmlformats-officedocument.spreadsheetml.sheet' ||
-			fileTypeLastPart === 'vnd.oasis.opendocument.spreadsheet'
-		) {
-			fileEntryIcontype = 'spreadsheet';
-		}
-
-		return fileEntryIconRoot + fileEntryIcontype + fileEntryIconExtension;
 	});
 
 	tooltip = computed(() => {
