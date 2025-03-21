@@ -1,7 +1,7 @@
 import { NgIf } from '@angular/common';
 import { booleanAttribute, ChangeDetectionStrategy, Component, inject, Input, OnChanges, ViewEncapsulation } from '@angular/core';
 import { LuClass, PortalContent, PortalDirective } from '@lucca-front/ng/core';
-import { LuTooltipModule } from '../tooltip/tooltip.module';
+import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 import { InlineMessageState } from './inline-message-state';
 
 @Component({
