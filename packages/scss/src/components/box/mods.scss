@@ -46,6 +46,11 @@
 @mixin withArrow {
 	--components-box-border-radius: var(--commons-borderRadius-M);
 	--components-box-padding: var(--pr-t-spacings-200);
+
+	.box-arrow {
+		--components-box-arrow-bottom: 100%;
+		--components-box-arrow-left: var(--pr-t-spacings-75);
+	}
 }
 
 @mixin arrowS {

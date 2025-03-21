@@ -1,0 +1,17 @@
+@mixin error {
+	--components-fileEntry-borderColor: var(--palettes-critical-600);
+	--components-fileEntry-gridTemplateAreas: 'picture title toolbar' 'picture description toolbar';
+	--components-fileEntry-status-backgroundColor: var(--palettes-critical-50);
+}
+
+@mixin loading {
+	--components-fileEntry-status-content-img-opacity: 0.08;
+}
+
+@mixin errorMedia {
+	--components-fileEntry-status-content-padding: var(--pr-t-spacings-100);
+}
+
+@mixin errorS {
+	--components-fileEntry-status-blockSize: 100%;
+}
