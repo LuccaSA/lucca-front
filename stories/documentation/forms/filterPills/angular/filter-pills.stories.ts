@@ -43,16 +43,16 @@ export default {
 	<lu-checkbox-input [ngModel]="false"></lu-checkbox-input>
 </lu-filter-pill>
 <lu-filter-pill label="Légume" name="legume">
-		<lu-simple-select [(ngModel)]="simpleSelect"	[options]="legumes | filterLegumes:clue" clearable (clueChange)="clue = $event" />
+		<lu-simple-select [(ngModel)]="simpleSelect" [options]="legumes | filterLegumes:clue" (clueChange)="clue = $event" />
 </lu-filter-pill>
 <lu-filter-pill label="Légume" name="legume">
-	<lu-multi-select [(ngModel)]="multiSelect"	[options]="legumes | filterLegumes:clue" clearable (clueChange)="clue = $event" filterPillLabelPlural="légumes" />
+	<lu-multi-select [(ngModel)]="multiSelect" [clearable]="false"	[options]="legumes | filterLegumes:clue" (clueChange)="clue = $event" filterPillLabelPlural="légumes" />
 </lu-filter-pill>
 <lu-filter-pill label="Date de début">
-	<lu-date-input [(ngModel)]="date" clearable />
+	<lu-date-input [(ngModel)]="date" />
 </lu-filter-pill>
 <lu-filter-pill label="Période">
-	<lu-date-range-input [(ngModel)]="dateRange" clearable/>
+	<lu-date-range-input [(ngModel)]="dateRange"/>
 </lu-filter-pill>`,
 			styles: [
 				`

@@ -61,12 +61,15 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	@Input({ transform: booleanAttribute })
 	@HostBinding('class.is-clearable')
 	set clearable(value: boolean) {
-		this.#clearable.set(value);
+		this.#inputClearable.set(value);
 	}
 	get clearable(): boolean {
 		return this.#clearable();
 	}
-	#clearable = signal(false);
+	#clearable = computed(() => this.#inputClearable() ?? this.#defaultFilterPillClearable() ?? this.#defaultClearable);
+	#defaultFilterPillClearable = signal<boolean | null>(null);
+	#inputClearable = signal<boolean | null>(null);
+	#defaultClearable = false;
 
 	get searchable(): boolean {
 		return this.clueChange.observed;
@@ -425,6 +428,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 
 	enableFilterPillMode() {
 		this.filterPillMode = true;
+		this.#defaultFilterPillClearable.set(true);
 		this._panelRef.closed.subscribe(this.afterCloseFn);
 		this.bindInputToPanelRefEvents();
 	}
