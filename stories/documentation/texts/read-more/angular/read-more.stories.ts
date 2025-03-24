@@ -13,14 +13,10 @@ export default {
 				step: 1,
 			},
 		},
-		label: {
+		surface: {
+			options: [null, 'raised', 'sunken'],
 			control: {
-				type: 'text',
-			},
-		},
-		onlyIcon: {
-			control: {
-				type: 'boolean',
+				type: 'select',
 			},
 		},
 	},
@@ -32,7 +28,7 @@ export default {
 	render: (args, { argTypes }) => {
 		return {
 			template: `
-<lu-read-more ${generateInputs(args, argTypes)}>
+<lu-read-more class="mod-sunken" ${generateInputs(args, argTypes)}>
 	<p>
 		Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dignissimos ut maiores ullam facere voluptatum odio eum? Debitis natus nulla fugit
 		<a href="#">deleniti</a>
@@ -57,7 +53,7 @@ export default {
 export const Basic = {
 	args: {
 		lineClamp: 5,
-		label: 'Lire la suite',
-		onlyIcon: false,
+		openOnly: false,
+		surface: null,
 	},
 };

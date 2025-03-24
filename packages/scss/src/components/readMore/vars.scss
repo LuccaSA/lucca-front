@@ -1,5 +1,5 @@
 @mixin vars {
 	--components-readMore-lineClamp: 5;
-	--components-readMore-button-display: flex;
-	--components-readMore-textFlow-lastChild-paddingInlineEnd: var(--pr-t-spacings-500);
+	--components-readMore-link-display: flex;
+	--components-readMore-link-backgroudColor: var(--pr-t-elevation-surface-default);
 }

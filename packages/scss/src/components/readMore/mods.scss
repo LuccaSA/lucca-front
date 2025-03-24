@@ -1,9 +1,7 @@
-@use '@lucca-front/scss/src/components/button/exports' as button;
+@mixin raised {
+	--components-readMore-link-backgroudColor: var(--pr-t-elevation-surface-raised);
+}
 
-@mixin onlyIcon() {
-	--components-readMore-textFlow-lastChild-paddingInlineEnd: var(--pr-t-spacings-300);
-
-	.readMore-button {
-		@include button.onlyIconXS;
-	}
+@mixin sunken {
+	--components-readMore-link-backgroudColor: var(--pr-t-elevation-surface-sunken);
 }

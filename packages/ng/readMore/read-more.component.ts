@@ -1,6 +1,4 @@
 import { booleanAttribute, Component, ElementRef, HostBinding, input, OnInit, signal, viewChild, ViewEncapsulation } from '@angular/core';
-import { IconComponent } from '@lucca-front/ng/icon';
-import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 
 @Component({
 	selector: 'lu-read-more',
@@ -8,15 +6,18 @@ import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 	templateUrl: './read-more.component.html',
 	styleUrls: ['./read-more.component.scss'],
 	encapsulation: ViewEncapsulation.None,
-	imports: [IconComponent, LuTooltipModule],
+
 	host: {
 		class: 'readMore',
 	},
 })
 export class ReadMoreComponent implements OnInit {
 	lineClamp = input<number>(5);
-	label = input<string>('Lire la suite');
-	onlyIcon = input<boolean, boolean>(false, { transform: booleanAttribute });
+	openOnly = input(false, { transform: booleanAttribute });
+	surface = input<null | 'sunken' | 'raised' | string>(null);
+
+	label = signal<string>('Lire plus');
+	labelToggle = 'Lire moins';
 
 	textFlowRef = viewChild<ElementRef<HTMLDivElement>>('textFlow');
 
@@ -28,14 +29,23 @@ export class ReadMoreComponent implements OnInit {
 	}
 
 	@HostBinding('style.--components-readMore-textFlow-lastChild-content') get labelText() {
-		if (this.onlyIcon()) {
-			return `""`;
-		}
-		return `"${this.label()}"`;
+		return `"${this.labelToggle}"`;
 	}
 
 	@HostBinding('class.is-disabled') get isDisabled() {
 		return !this.expanded() && !this.isClamped();
+	}
+
+	@HostBinding('class.mod-openOnly') get isOpenOnly() {
+		return this.openOnly();
+	}
+
+	@HostBinding('class.mod-sunken') get surfaceSunken() {
+		return this.surface() === 'sunken';
+	}
+
+	@HostBinding('class.mod-raised') get surfaceRaised() {
+		return this.surface() === 'raised';
 	}
 
 	ngOnInit(): void {
@@ -44,5 +54,15 @@ export class ReadMoreComponent implements OnInit {
 
 			this.isClamped.set(textFlowElement.scrollHeight > textFlowElement.clientHeight);
 		}).observe(this.textFlowRef().nativeElement);
+	}
+
+	toggleExpanded() {
+		this.expanded.set(!this.expanded());
+
+		if (this.expanded()) {
+			this.label.set(this.labelToggle);
+		} else {
+			this.label.set('Lire plus');
+		}
 	}
 }

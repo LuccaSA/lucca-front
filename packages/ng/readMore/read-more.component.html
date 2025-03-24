@@ -1,19 +1,12 @@
 <button
-	[luTooltip]="label()"
-	[luTooltipDisabled]="!onlyIcon()"
-	[luTooltipPosition]="'before'"
-	[luTooltipOnlyForDisplay]
+	tabindex="-1"
 	type="button"
 	aria-hidden="true"
 	[attr.aria-expanded]="expanded()"
-	class="readMore-button button"
-	[class.mod-onlyIcon]="onlyIcon()"
-	(click)="expanded.set(!expanded())"
+	class="readMore-link link"
+	(click)="toggleExpanded()"
 >
-	@if (onlyIcon()) {
-	<span class="u-mask">{{label()}}</span>
-	} @else { {{label()}} }
-	<lu-icon icon="chevronBottom" />
+	{{ label() }}
 </button>
 <div class="readMore-textFlow textFlow" #textFlow>
 	<ng-content />

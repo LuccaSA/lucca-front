@@ -1,31 +1,23 @@
 @use '@lucca-front/scss/src/commons/utils/namespace';
 
-@use '@lucca-front/scss/src/components/button/exports' as button;
+@use '@lucca-front/scss/src/commons/utils/a11y';
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
 	position: relative;
 	display: block;
 
 	@at-root ($atRoot) {
-		.readMore-button.button {
-			@include button.outlined;
-			@include button.XS;
-
+		.readMore-link.link {
 			position: absolute;
 			inset: auto 0 var(--pr-t-spacings-50) auto;
-			display: var(--components-readMore-button-display);
+			display: var(--components-readMore-link-display);
+			flex-direction: column;
 			z-index: 1;
-
-			.icon-chevronBottom {
-				transition-property: transform;
-				transition-duration: var(--commons-animations-durations-fast);
-			}
-
-			&[aria-expanded='true'] {
-				.icon-chevronBottom {
-					transform: rotate(-180deg);
-				}
-			}
+			line-height: var(--sizes-M-lineHeight);
+			background-image: linear-gradient(to right, transparent, var(--components-readMore-link-backgroudColor) var(--pr-t-spacings-150));
+			padding-inline-start: var(--pr-t-spacings-200);
+			font-weight: 600;
+			text-decoration: none;
 		}
 
 		.readMore-textFlow {
@@ -48,9 +40,7 @@
 						content: var(--components-readMore-textFlow-lastChild-content) / '';
 						visibility: hidden;
 						white-space: nowrap;
-						padding-inline-end: var(--components-readMore-textFlow-lastChild-paddingInlineEnd);
-						line-height: var(--sizes-XS-lineHeight);
-						font-size: var(--sizes-XS-fontSize);
+						padding-inline-start: var(--pr-t-spacings-200);
 					}
 				}
 			}
