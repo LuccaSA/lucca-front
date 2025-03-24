@@ -273,10 +273,8 @@ export class DateInputComponent extends AbstractDateComponent implements Control
 			return { date: true };
 		}
 		// Check min and max
-		if (this.min() && isBefore(date, this.min())) {
-			return { min: true };
-		} else if (this.max() && isAfter(date, this.max())) {
-			return { max: true };
+		if (!this.isInMinMax(date, this.mode())) {
+			return { minMax: true };
 		}
 		// Everything is valid
 		return null;

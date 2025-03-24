@@ -1,6 +1,6 @@
 import { booleanAttribute, Component, computed, effect, inject, input, LOCALE_ID, signal } from '@angular/core';
 import { getIntl } from '@lucca-front/ng/core';
-import { addMonths, addYears, startOfDay, startOfMonth } from 'date-fns';
+import { addMonths, addYears, isAfter, isBefore, isSameMonth, startOfDay, startOfMonth } from 'date-fns';
 import { CalendarMode } from './calendar2/calendar-mode';
 import { CellStatus } from './calendar2/cell-status';
 import { DateRange, DateRangeInput } from './calendar2/date-range';
@@ -78,7 +78,7 @@ export abstract class AbstractDateComponent {
 					result = result && this.min().getTime() <= date.getTime();
 					break;
 				case 'month':
-					result = result && this.min().getMonth() + startOfMonth(this.min()).getTime() <= date.getMonth() + startOfMonth(date).getTime();
+					result = (result && isBefore(startOfMonth(this.min()), startOfMonth(date))) || isSameMonth(this.min(), date);
 					break;
 				case 'year':
 					result = result && this.min().getFullYear() <= date.getFullYear();
@@ -91,7 +91,7 @@ export abstract class AbstractDateComponent {
 					result = result && this.max().getTime() >= date.getTime();
 					break;
 				case 'month':
-					result = result && this.max().getMonth() + startOfMonth(this.max()).getTime() >= date.getMonth() + startOfMonth(date).getTime();
+					result = (result && isAfter(startOfMonth(this.max()), startOfMonth(date))) || isSameMonth(this.max(), date);
 					break;
 				case 'year':
 					result = result && this.max().getFullYear() >= date.getFullYear();
