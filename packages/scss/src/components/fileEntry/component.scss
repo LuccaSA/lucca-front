@@ -137,5 +137,25 @@
 				display: none;
 			}
 		}
+
+		.fileEntry_box.box {
+			margin-top: var(--pr-t-spacings-150);
+		}
+
+		.fileEntry_box-field {
+			display: flex;
+			flex-wrap: wrap;
+			gap: var(--pr-t-spacings-100);
+		}
+
+		.fileEntry_box-field-textField {
+			flex-grow: 1;
+		}
+
+		.fileEntry_box-field-button.button {
+			flex-grow: 1;
+			flex-basis: 0;
+			min-width: fit-content;
+		}
 	}
 }
