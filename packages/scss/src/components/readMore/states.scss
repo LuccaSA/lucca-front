@@ -1,5 +1,6 @@
 @mixin expanded {
 	--components-readMore-lineClamp: 9999 !important;
+	--components-readMore-link-paddingInlineStart: var(--pr-t-spacings-100);
 }
 
 @mixin disabled {
