@@ -1,0 +1,107 @@
+@use '@lucca-front/scss/src/components/numericBadge/exports' as numericBadge;
+
+@mixin header {
+	--components-horizontalNavigation-listPadding: 0 var(--pr-t-spacings-500);
+}
+
+@mixin S {
+	// .menu-link is deprecated
+	// .menu-list-item-action is deprecated
+	.horizontalNavigation-list-item-action,
+	.menu-list-item-action,
+	.menu-link {
+		--components-horizontalNavigation-listItemActionFontSize: var(--sizes-S-fontSize);
+		--components-horizontalNavigation-listItemActionLineHeight: var(--sizes-S-lineHeight);
+		--components-horizontalNavigation-listItemActionPadding: var(--pr-t-spacings-150) 0;
+
+		&::before {
+			inset-block: calc(var(--components-horizontalNavigation-listItemActionPaddingBlock) - var(--pr-t-spacings-75));
+			inset-inline: calc(var(--components-horizontalNavigation-listItemActionPaddingInline) - var(--pr-t-spacings-25));
+		}
+	}
+
+	// .menu-link is deprecated
+	.menu-link {
+		margin-inline-end: var(--pr-t-spacings-300);
+	}
+
+	// .label is deprecated
+	.label {
+		block-size: var(--sizes-S-lineHeight);
+		min-inline-size: var(--sizes-S-lineHeight);
+		line-height: var(--sizes-S-lineHeight);
+		padding: 0;
+	}
+
+	.numericBadge {
+		@include numericBadge.S;
+	}
+}
+
+@mixin noBorder {
+	&::after {
+		--components-horizontalNavigation-borderContent: none;
+	}
+}
+
+@mixin vertical {
+	@include noBorder;
+
+	// .menu-list is deprecated
+	.horizontalNavigation-list,
+	.menu-list {
+		--components-horizontalNavigation-listDirection: column;
+		--components-horizontalNavigation-listGap: 0;
+		--components-horizontalNavigation-listAlign: stretch;
+	}
+
+	// .menu-list-item-action is deprecated
+	.horizontalNavigation-list-item-action,
+	.menu-list-item-action {
+		--components-horizontalNavigation-listItemActionPadding: var(--pr-t-spacings-50) var(--pr-t-spacings-200);
+		--components-horizontalNavigation-listItemActionAlign: left;
+
+		&:before {
+			inset-block: calc(
+				var(--components-horizontalNavigation-listItemActionPaddingBlock) - var(--pr-t-spacings-150) - var(--pr-t-spacings-25)
+			);
+			inset-inline: calc(
+				var(--components-horizontalNavigation-listItemActionPaddingInline) + var(--pr-t-spacings-150) + var(--pr-t-spacings-25)
+			);
+		}
+
+		&::after {
+			--components-horizontalNavigation-listItemActionTransform: scale(1, 0);
+			--components-horizontalNavigation-listItemActionInset: 0 auto 0 0;
+			--components-horizontalNavigation-listItemActionRadius: 0 var(--commons-borderRadius-M) var(--commons-borderRadius-M) 0;
+			--components-horizontalNavigation-listItemActionRadiusWidth: var(--components-horizontalNavigation-listItemActionSize);
+			--components-horizontalNavigation-listItemActionRadiusHeight: auto;
+		}
+
+		&,
+		&[aria-current='page'] {
+			&:hover {
+				&::after {
+					--components-horizontalNavigation-listItemActionTransform: scale(1, 0.75);
+				}
+			}
+		}
+	}
+}
+
+@mixin verticalS {
+	// .menu-list-item-action is deprecated
+	.horizontalNavigation-list-item-action,
+	.menu-list-item-action {
+		--components-horizontalNavigation-listItemActionPadding: var(--pr-t-spacings-50) var(--pr-t-spacings-150);
+
+		&:before {
+			inset-block: calc(
+				var(--components-horizontalNavigation-listItemActionPaddingBlock) - var(--pr-t-spacings-150) - var(--pr-t-spacings-25)
+			);
+			inset-inline: calc(
+				var(--components-horizontalNavigation-listItemActionPaddingInline) + var(--pr-t-spacings-100) + var(--pr-t-spacings-25)
+			);
+		}
+	}
+}
