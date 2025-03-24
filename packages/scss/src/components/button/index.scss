@@ -16,6 +16,10 @@
 		@include XS;
 	}
 
+	&.mod-disclosure {
+		@include disclosure;
+	}
+
 	// .mod-outline is deprecated
 	&.mod-outlined,
 	&.mod-outline {
@@ -53,6 +57,14 @@
 
 		&.mod-XS {
 			@include withIconXS;
+		}
+
+		&.mod-iconOnLeft {
+			@include iconOnLeft;
+		}
+
+		&.mod-iconOnRight {
+			@include iconOnRight;
 		}
 	}
 

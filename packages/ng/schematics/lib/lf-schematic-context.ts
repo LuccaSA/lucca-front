@@ -1,5 +1,6 @@
-import { installLocalDependencies } from './local-deps/installer';
+/* eslint-disable no-console */
 import { SchematicContext } from '@angular-devkit/schematics';
+import { installLocalDependencies } from './local-deps/installer';
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore

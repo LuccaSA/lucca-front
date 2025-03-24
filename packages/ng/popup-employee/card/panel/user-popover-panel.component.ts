@@ -1,5 +1,3 @@
-/* eslint-disable @angular-eslint/no-input-rename */
-
 import { OverlayModule } from '@angular/cdk/overlay';
 import { AsyncPipe, DatePipe, NgClass, NgIf, NgSwitch, NgSwitchCase, NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Inject, Input, OnDestroy, Output, TemplateRef, ViewChild, ViewEncapsulation } from '@angular/core';
@@ -8,20 +6,19 @@ import { ILuUser, LuUserPictureModule } from '@lucca-front/ng/user';
 import { BehaviorSubject, combineLatest, Observable, of, ReplaySubject, Subscription } from 'rxjs';
 
 import { getIntl } from '@lucca-front/ng/core';
-import { LuUserPopover } from '../../user-popover.model';
+import { IconComponent } from '@lucca-front/ng/icon';
+import { catchError, map, switchMap, tap } from 'rxjs/operators';
 import { LU_POPUP_EMPLOYEE_TRANSLATIONS } from '../../popup-employee.translate';
-import { LuUserPopoverStore } from '../../service/user-popover.store';
 import { ILuUserPopoverStore } from '../../service/user-popover-service.model';
+import { LuUserPopoverStore } from '../../service/user-popover.store';
+import { LuUserPopover } from '../../user-popover.model';
 import { InjectParameterPipe } from '../pipe/inject-parameter.pipe';
 import { isFutureOrTodayPipe, IsFuturePipe } from '../pipe/is-future.pipe';
 import { LeaveEndsDisplayPipe } from '../pipe/leave-ends-display.pipe';
 import { ILuUserPopoverPanel } from './user-popover-panel.model';
-import { catchError, map, switchMap, tap } from 'rxjs/operators';
-import { IconComponent } from '@lucca-front/ng/icon';
 
 @Component({
 	standalone: true,
-	// eslint-disable-next-line @angular-eslint/component-selector
 	selector: 'lu-user-popover-panel',
 	templateUrl: './user-popover-panel.component.html',
 	styleUrls: ['./user-popover-panel.component.scss'],
@@ -127,7 +124,6 @@ export class LuUserPopoverPanelComponent extends ALuPopoverPanel implements ILuU
 	/** Event emitted when the popover is closed. */
 	// eslint-disable-next-line @angular-eslint/no-output-native
 	@Output() public override close = new EventEmitter<void>();
-	// eslint-disable-next-line @angular-eslint/no-output-native
 	@Output() public override open = new EventEmitter<void>();
 	@Output() public override hovered = new EventEmitter<boolean>();
 

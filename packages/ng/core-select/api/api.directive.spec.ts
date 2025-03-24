@@ -178,7 +178,7 @@ describe('ALuCoreSelectApiDirective', () => {
 		testApi.setPageSize(2);
 
 		const getPageSpy = jest.spyOn(testApi, 'getOptionsPage');
-		getPageSpy.mockImplementation((params, page) => {
+		getPageSpy.mockImplementation((_params, page) => {
 			// Emit one list, then the same list with one more item
 			return of(
 				{

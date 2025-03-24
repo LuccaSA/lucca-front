@@ -26,7 +26,6 @@
 }
 
 @mixin popin {
-	@include block;
 	@include L;
 }
 
@@ -38,7 +37,6 @@
 }
 
 @mixin fullPage {
-	@include block;
 	@include L;
 
 	// legacy, approximate centering
