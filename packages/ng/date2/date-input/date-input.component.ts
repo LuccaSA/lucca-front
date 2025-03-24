@@ -23,7 +23,7 @@ import { FILTER_PILL_INPUT_COMPONENT, FilterPillDisplayerDirective, FilterPillIn
 import { InputDirective } from '@lucca-front/ng/form-field';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { PopoverDirective } from '@lucca-front/ng/popover2';
-import { isAfter, isBefore, isSameDay, parse, startOfDay } from 'date-fns';
+import { isSameDay, parse, startOfDay } from 'date-fns';
 import { AbstractDateComponent } from '../abstract-date-component';
 import { CalendarMode } from '../calendar2/calendar-mode';
 import { Calendar2Component } from '../calendar2/calendar2.component';
