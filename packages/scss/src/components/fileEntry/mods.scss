@@ -8,7 +8,7 @@
 	--components-fileEntry-filename-alignSelf: center;
 	--components-fileEntry-status-borderRadius: var(--commons-borderRadius-M);
 	--components-fileEntry-gapInline: var(--pr-t-spacings-75);
-	--components-fileEntry-status-content-svg-width: 24px;
+	--components-fileEntry-status-content-svg-width: 40px;
 
 	.fileEntry-status-content-icon {
 		@include icon.S;
@@ -24,7 +24,7 @@
 	--components-fileEntry-description-display: none;
 	--components-fileEntry-display: block;
 	--components-fileEntry-gridColumn: 1 / -1;
-	--components-fileEntry-status-content-svg-width: 48px;
+	--components-fileEntry-status-content-svg-width: 72px;
 }
 
 @mixin mediaS {

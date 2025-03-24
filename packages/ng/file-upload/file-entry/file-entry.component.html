@@ -84,12 +84,12 @@
 	}
 </dl>
 @if (withPassword) {
-<div class="box mod-withArrow mod-neutral pr-u-marginBlockStart150">
+<div class="fileEntry_box box mod-withArrow mod-neutral">
 	<div class="box-arrow mod-neutral"></div>
 	<lu-form-field [label]="intl.password">
-		<div class="u-displayFlex pr-u-gap100">
+		<div class="fileEntry_box-field">
 			<lu-text-input
-				class="u-flexGrow1"
+				class="fileEntry_box-field-textField"
 				required
 				hasClearer
 				searchIcon="searchMagnifyingGlass"
@@ -97,7 +97,7 @@
 				[ngModel]="password()"
 				(ngModelChange)="passwordChange$.next($event)"
 			/>
-			<button luButton type="button">{{ intl.confirmPassword }}</button>
+			<button class="fileEntry_box-field-button" luButton type="button">{{ intl.confirmPassword }}</button>
 		</div>
 	</lu-form-field>
 </div>
