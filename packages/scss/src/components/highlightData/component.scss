@@ -65,7 +65,7 @@
 		}
 
 		.highlightData-illustrations {
-			display: grid;
+			display: var(--components-highlightData-illustrations-display);
 			place-content: center;
 			position: absolute;
 			inset-block-end: 0;

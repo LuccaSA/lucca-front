@@ -38,7 +38,5 @@
 }
 
 @mixin narrow {
-	.highlightData-illustrations {
-		display: none;
-	}
+	--components-highlightData-illustrations-display: none;
 }
