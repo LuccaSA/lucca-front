@@ -14,8 +14,8 @@
 			flex-direction: column;
 			z-index: 1;
 			line-height: var(--sizes-M-lineHeight);
-			background-image: linear-gradient(to right, transparent, var(--components-readMore-link-backgroudColor) var(--pr-t-spacings-150));
-			padding-inline-start: var(--pr-t-spacings-200);
+			background-image: linear-gradient(to right, transparent, var(--components-readMore-link-backgroudColor) var(--pr-t-spacings-400));
+			padding-inline-start: var(--pr-t-spacings-500);
 			font-weight: 600;
 			text-decoration: none;
 		}
@@ -40,7 +40,8 @@
 						content: var(--components-readMore-textFlow-lastChild-content) / '';
 						visibility: hidden;
 						white-space: nowrap;
-						padding-inline-start: var(--pr-t-spacings-200);
+						font-weight: 600;
+						padding-inline-start: var(--pr-t-spacings-500);
 					}
 				}
 			}

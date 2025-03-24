@@ -14,7 +14,7 @@ export default {
 			},
 		},
 		surface: {
-			options: [null, 'raised', 'sunken'],
+			options: [null, 'raised', 'sunken', '#0F0'],
 			control: {
 				type: 'select',
 			},
@@ -28,7 +28,7 @@ export default {
 	render: (args, { argTypes }) => {
 		return {
 			template: `
-<lu-read-more class="mod-sunken" ${generateInputs(args, argTypes)}>
+<lu-read-more ${generateInputs(args, argTypes)}>
 	<p>
 		Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dignissimos ut maiores ullam facere voluptatum odio eum? Debitis natus nulla fugit
 		<a href="#">deleniti</a>

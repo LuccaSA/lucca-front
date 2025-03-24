@@ -48,6 +48,13 @@ export class ReadMoreComponent implements OnInit {
 		return this.surface() === 'raised';
 	}
 
+	@HostBinding('style.--components-readMore-link-backgroudColor') get backgroundColor() {
+		if (this.surface() === 'sunken' || this.surface() === 'raised' || this.surface() === null) {
+			return null;
+		}
+		return `${this.surface()}`;
+	}
+
 	ngOnInit(): void {
 		new ResizeObserver(() => {
 			const textFlowElement = this.textFlowRef()?.nativeElement;
