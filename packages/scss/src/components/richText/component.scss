@@ -1,5 +1,6 @@
 @use '@lucca-front/scss/src/commons/utils/namespace';
 
+@use '@lucca-front/scss/src/commons/utils/keyframe';
 @use '@lucca-front/scss/src/commons/utils/a11y';
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
@@ -32,6 +33,13 @@
 			border-radius: 0 0 var(--commons-borderRadius-M) var(--commons-borderRadius-M);
 			overflow: hidden;
 			flex-shrink: 0;
+			animation-name: fadeIn;
+			animation-duration: var(--commons-animations-durations-fast);
+			animation-delay: var(--commons-animations-durations-fast);
+			opacity: 0;
+			animation-fill-mode: forwards;
+
+			@include keyframe.fadeIn;
 
 			&:empty {
 				display: none;
