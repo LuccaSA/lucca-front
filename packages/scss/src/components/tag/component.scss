@@ -15,7 +15,8 @@
 	display: inline-flex;
 	align-items: center;
 	text-align: center;
-	vertical-align: baseline;
+	vertical-align: top;
+	margin-block-start: var(--pr-t-spacings-25);
 	white-space: nowrap;
 	font-weight: normal;
 	border: 0;
