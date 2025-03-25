@@ -30,24 +30,11 @@ $palettesDecorative: 'kiwi', 'lime', 'cucumber', 'mint', 'glacier', 'lagoon', 'b
 	'pineapple' !default;
 $palettesDeprecated: ('lucca', 'grey', 'primary', 'secondary') !default;
 
-@if $palettesOtherProduct == 'all' {
-	$palettesOtherProduct: ('pagga', 'poplee', 'coreHR', 'timmi', 'cleemy', 'cc');
-}
-
-$palettesAll: function.flatMap(
-	$palettesStates,
-	$palettesDefault,
-	$palettesProduct,
-	$palettesOtherProduct,
-	$palettesDecorative,
-	$palettesDeprecated
-);
-
 $fieldsWidth: 20, 30, 40, 50, 60 !default;
 
 // Palettes
 
-$brand: (
+$orange: (
 	// text is deprecated
 	text: #ffffff,
 	0: #ffffff,
@@ -63,7 +50,7 @@ $brand: (
 	900: #611405
 );
 
-$cleemy: (
+$green: (
 	// text is deprecated
 	text: #ffffff,
 	0: #ffffff,
@@ -79,7 +66,7 @@ $cleemy: (
 	900: #00333d
 ) !default;
 
-$pagga: (
+$pink: (
 	// text is deprecated
 	text: #ffffff,
 	0: #ffffff,
@@ -95,7 +82,7 @@ $pagga: (
 	900: #61005c
 ) !default;
 
-$timmi: (
+$violet: (
 	// text is deprecated
 	text: #ffffff,
 	0: #ffffff,
@@ -111,7 +98,7 @@ $timmi: (
 	900: #24075a
 ) !default;
 
-$poplee: (
+$blue: (
 	// text is deprecated
 	text: #ffffff,
 	0: #ffffff,
@@ -127,7 +114,7 @@ $poplee: (
 	900: #003c5c
 ) !default;
 
-$coreHR: (
+$darkBlue: (
 	text: #ffffff,
 	0: #ffffff,
 	50: #e6f2fe,
@@ -142,7 +129,7 @@ $coreHR: (
 	900: #002e5c,
 ) !default;
 
-$cc: (
+$fuchsia: (
 	// text is deprecated
 	text: #ffffff,
 	0: #ffffff,
@@ -392,25 +379,14 @@ $pineapple: (
 	900: #7a6400,
 ) !default;
 
-// https://sass-lang.com/documentation/variables/#advanced-variable-functions
-$productsInterpolation: (
-	'brand': $brand,
-	'cleemy': $cleemy,
-	'timmi': $timmi,
-	'poplee': $poplee,
-	'coreHR': $coreHR,
-	'pagga': $pagga,
-	'cc': $cc,
-);
+$products: ('brand', 'violet', 'green', 'blue', 'pink', 'darkBlue', 'fuchsia') !default;
+$palettes: ($orange, $violet, $green, $blue, $pink, $darkBlue, $fuchsia) !default;
 
+$productsInterpolation: function.combineToMap($products, $palettes);
+
+// https://sass-lang.com/documentation/variables/#advanced-variable-functions
 $palettesInterpolation: (
-	'lucca': $brand,
-	'brand': $brand,
-	'grey': $neutral,
 	'neutral': $neutral,
-	'primary': map.get($productsInterpolation, $product),
-	'secondary': map.get($productsInterpolation, $product),
-	'product': map.get($productsInterpolation, $product),
 	'navigation': $navigation,
 	'success': $success,
 	'error': $critical,
@@ -428,12 +404,32 @@ $palettesInterpolation: (
 	'watermelon': $watermelon,
 	'pumpkin': $pumpkin,
 	'pineapple': $pineapple,
-	'pagga': $pagga,
-	'poplee': $poplee,
-	'coreHR': $coreHR,
-	'timmi': $timmi,
-	'cleemy': $cleemy,
-	'cc': $cc,
+	// lucca is deprecated
+	'lucca': $orange,
+	// grey is deprecated
+	'grey': $neutral,
+	'product': map.get($productsInterpolation, $product),
+	// primary is deprecated
+	'primary': map.get($productsInterpolation, $product),
+	// secondary is deprecated
+	'secondary': map.get($productsInterpolation, $product),
+);
+
+$palettesInterpolation: map.merge($productsInterpolation, $palettesInterpolation);
+
+$palettesAllProducts: map.keys($productsInterpolation);
+
+@if $palettesOtherProduct == 'all' {
+	$palettesOtherProduct: $palettesAllProducts;
+}
+
+$palettesAll: function.flatMap(
+	$palettesStates,
+	$palettesDefault,
+	$palettesProduct,
+	$palettesOtherProduct,
+	$palettesDecorative,
+	$palettesDeprecated
 );
 
 // Tokens : Elevation

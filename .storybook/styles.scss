@@ -1,4 +1,14 @@
 @use '@lucca-front/scss/src/commons/config' with (
+	$products: (
+		'lucca',
+		'timeAndActivities',
+		'spendManagement',
+		'talentManagement',
+		'compensationAndBenefits',
+		'employeeAdministration',
+		'cloudControl',
+	),
+	$product: 'lucca',
 	$palettesOtherProduct: 'all'
 );
 

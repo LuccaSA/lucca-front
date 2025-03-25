@@ -1,7 +1,7 @@
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { Meta, StoryObj } from '@storybook/angular';
-import { generateInputs } from 'stories/helpers/stories';
 import { expect, within } from '@storybook/test';
+import { generateInputs } from 'stories/helpers/stories';
 
 export default {
 	title: 'Documentation/Actions/Button/Angular/Basic',
@@ -9,7 +9,19 @@ export default {
 	render: ({ luButton, ...inputs }, { argTypes }) => {
 		return {
 			template: `<button type="button" luButton${luButton !== '' ? `="${luButton}"` : ''}${generateInputs(inputs, argTypes)}
->Button</button>`,
+>Button</button>
+<br /><br />
+<button luButton palette="timeAndActivities">Button</button>
+<br /><br />
+<button luButton palette="spendManagement">Button</button>
+<br /><br />
+<button luButton palette="talentManagement">Button</button>
+<br /><br />
+<button luButton palette="compensationAndBenefits">Button</button>
+<br /><br />
+<button luButton palette="employeeAdministration">Button</button>
+<br /><br />
+<button luButton palette="cloudControl">Button</button>`,
 		};
 	},
 } as Meta;
