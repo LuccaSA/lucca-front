@@ -28,7 +28,7 @@
 @forward 'breadcrumbs'; // 2 Ko
 @forward 'buttonGroup'; // 2 Ko
 @forward 'header'; // 3 Ko
-@forward 'menu'; // 4 Ko
+@forward 'horizontalNavigation'; // 4 Ko
 @forward 'radio'; // 4 Ko
 @forward 'radioField'; // new component for radio
 @forward 'switch'; // 4 Ko
@@ -95,6 +95,7 @@
 @forward 'filterBar';
 @forward 'dropdown';
 @forward 'textFlow';
+@forward 'highlightData';
 
 // Deprecated CSS components
 // @forward 'tableFixedDeprecated'; // 33 Ko

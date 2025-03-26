@@ -1,0 +1,82 @@
+@use '@lucca-front/scss/src/commons/utils/namespace';
+@use '@lucca-front/scss/src/commons/utils/reset';
+@use '@lucca-front/scss/src/commons/utils/color';
+@use '@lucca-front/scss/src/components/title/exports' as title;
+
+@mixin component($atRoot: namespace.$defaultAtRoot) {
+	display: block;
+	background-color: var(--components-highlightData-background);
+	border-radius: var(--commons-borderRadius-L);
+	overflow: hidden;
+	padding: var(--components-highlightData-padding);
+	position: relative;
+
+	@at-root ($atRoot) {
+
+		.highlightData-content {
+			@include reset.list($list: 'dl');
+			display: var(--components-highlightData-display);
+			grid-template-columns: 1fr auto;
+			grid-template-areas:
+				'title action'
+				'value action';
+			align-items: var(--components-highlightData-alignItem);
+			flex-direction: column;
+			column-gap: var(--components-highlightData-gap);
+		}
+
+		.highlightData-content-title {
+			grid-area: title;
+			font-size: var(--sizes-S-fontSize);
+			line-height: var(--sizes-S-lineHeight);
+			color: var(--palettes-neutral-700);
+		}
+
+		.highlightData-content-value {
+			grid-area: value;
+			@include title.component;
+			@include title.h1;
+			order: var(--components-highlightData-value-order);
+		}
+
+		.highlightData-content-subText {
+			font-size: var(--sizes-XS-fontSize);
+			line-height: var(--sizes-XS-lineHeight);
+			color: var(--palettes-neutral-700);
+			margin-block-start: var(--pr-t-spacings-100) !important; // Override list reset
+		}
+
+		.highlightData-content-action {
+			grid-area: action;
+			padding-block-start: var(--components-highlightData-action-padding);
+			
+			&:empty {
+				display: none;
+			}
+
+			.link {
+				--commons-text-link-color: var(--palettes-700, var(--palettes-product-700));
+				--commons-text-link-hover: var(--palettes-600, var(--palettes-product-600));
+			}
+
+			.button {
+				@include color.palette('neutral');
+			}
+		}
+
+		.highlightData-illustrations {
+			display: var(--components-highlightData-illustrations-display);
+			place-content: center;
+			position: absolute;
+			inset-block-end: 0;
+			inset-inline-end: 0;
+		}
+
+		.highlightData-illustrations-back,
+		.highlightData-illustrations-front {
+			grid-area: 1 / 1;
+			block-size: var(--components-highlightData-illustrations-height);
+			inline-size: var(--components-highlightData-illustrations-width);
+		}
+	}
+}
