@@ -21,8 +21,3 @@ export type LuModalConfig = ILuPopupConfig &
 	LuModalModeWithPosition & {
 		changeDetection: ChangeDetectionStrategy;
 	};
-
-/**
- * @deprecated Use LuModalConfig instead.
- */
-export type ILuModalConfig = LuModalConfig;

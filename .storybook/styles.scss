@@ -1,3 +1,7 @@
+@use '@lucca-front/scss/src/commons/config' with (
+	$palettesOtherProduct: 'all'
+);
+
 @use '../packages/icons/src/main' as icons;
 @use '../packages/scss/src/main-all' as scss;
 @use '../packages/ng/styles/main' as ng;

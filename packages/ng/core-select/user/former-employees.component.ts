@@ -19,7 +19,7 @@ export const FORMER_EMPLOYEES_CONTEXT = new InjectionToken<FormerEmployeesContex
 	template: `
 		<div class="formerEmployeeDisplayer">
 			<lu-form-field [label]="intl.includeFormerEmployees">
-				<lu-checkbox-input class="formerEmployeeDisplayer-checkbox" [(ngModel)]="context.includeFormerEmployees" />
+				<lu-checkbox-input class="formerEmployeeDisplayer-checkbox" [(ngModel)]="context.includeFormerEmployees" [ngModelOptions]="{ standalone: true }" />
 			</lu-form-field>
 		</div>
 	`,
