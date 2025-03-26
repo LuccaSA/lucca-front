@@ -1,13 +1,12 @@
 import { A11yModule } from '@angular/cdk/a11y';
 import { AsyncPipe, NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
-import { AfterViewInit, ChangeDetectionStrategy, Component, QueryList, TrackByFunction, ViewChildren, inject, computed } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, QueryList, TrackByFunction, ViewChildren, computed, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { PortalDirective, getIntl } from '@lucca-front/ng/core';
+import { PortalDirective } from '@lucca-front/ng/core';
 import { CoreSelectKeyManager, LuOptionGroup, LuSelectPanelRef, SELECT_ID, ɵLuOptionComponent, ɵLuOptionGroupPipe, ɵgetGroupTemplateLocation } from '@lucca-front/ng/core-select';
 import { EMPTY } from 'rxjs';
 import { LuSimpleSelectInputComponent } from '../input/select-input.component';
 import { SIMPLE_SELECT_INPUT } from '../select.model';
-import { LU_SIMPLE_SELECT_TRANSLATIONS } from '../select.translate';
 import { LuIsOptionSelectedPipe } from './option-selected.pipe';
 
 @Component({
@@ -23,7 +22,7 @@ export class LuSelectPanelComponent<T> implements AfterViewInit {
 	public selectInput = inject<LuSimpleSelectInputComponent<T>>(SIMPLE_SELECT_INPUT);
 	public panelRef = inject<LuSelectPanelRef<T, T>>(LuSelectPanelRef);
 	public selectId = inject(SELECT_ID);
-	public intl = getIntl(LU_SIMPLE_SELECT_TRANSLATIONS);
+	public intl = this.selectInput.intl;
 
 	options$ = this.selectInput.options$;
 	grouping = this.selectInput.grouping;

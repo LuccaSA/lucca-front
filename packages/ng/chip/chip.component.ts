@@ -1,5 +1,5 @@
-import { booleanAttribute, Component, HostBinding, Input, ViewEncapsulation } from '@angular/core';
-import { getIntl } from '@lucca-front/ng/core';
+import { booleanAttribute, Component, HostBinding, input, Input, ViewEncapsulation } from '@angular/core';
+import { intlInputOptions } from '@lucca-front/ng/core';
 import { LU_CHIP_TRANSLATIONS } from './chip.translate';
 
 @Component({
@@ -13,7 +13,7 @@ import { LU_CHIP_TRANSLATIONS } from './chip.translate';
 	},
 })
 export class ChipComponent {
-	intl = getIntl(LU_CHIP_TRANSLATIONS);
+	intl = input(...intlInputOptions(LU_CHIP_TRANSLATIONS));
 
 	@Input({ transform: booleanAttribute })
 	unkillable = false;

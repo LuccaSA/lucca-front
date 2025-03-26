@@ -1,8 +1,8 @@
 import { Overlay, OverlayModule } from '@angular/cdk/overlay';
 import { CommonModule } from '@angular/common';
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, Inject, Input, OnInit, Optional, Renderer2, Self, ViewContainerRef, forwardRef } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, Inject, Input, OnInit, Optional, Renderer2, Self, ViewContainerRef, forwardRef, input } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { getIntl } from '@lucca-front/ng/core';
+import { intlInputOptions } from '@lucca-front/ng/core';
 import { LuInputClearerComponent, LuInputDisplayerDirective } from '@lucca-front/ng/input';
 import { ILuOptionPickerPanel, LuOptionComparer, LuOptionItemComponent, LuOptionPickerAdvancedComponent } from '@lucca-front/ng/option';
 import { ILuInputWithPicker } from '@lucca-front/ng/picker';
@@ -77,7 +77,7 @@ export class LuEstablishmentSelectInputComponent<
 		return this.isSearching ? 'name' : 'legalunit.name,name';
 	}
 
-	public intl = getIntl(LU_ESTABLISHMENT_SELECT_INPUT_TRANSLATIONS);
+	public intl = input(...intlInputOptions(LU_ESTABLISHMENT_SELECT_INPUT_TRANSLATIONS));
 
 	constructor(
 		protected override _changeDetectorRef: ChangeDetectorRef,

@@ -47,7 +47,7 @@
 	} @if (counter() > 0) {
 	<span class="formLabel-counter" [class.u-textError]="contentLength > counter()" id="{{id()}}-counter" aria-live="polite">
 		<span aria-hidden="true">{{ contentLength }}/{{ counter() }}</span>
-		<span class="u-mask">{{ intl.counter | intlParams: { current: contentLength, max: counter() } }}</span>
+		<span class="u-mask">{{ intl().counter | intlParams: { current: contentLength, max: counter() } }}</span>
 	</span>
 	}
 </label>

@@ -403,14 +403,14 @@ export const GroupBy = generateStory({
 
 export const AddOption = generateStory({
 	name: 'Add option',
-	description: "Pour ajouter une option, il suffit d'utiliser l'input `addOptionStrategy` et de s'abonner à l'output `addOption`. Le label est customisable via l'input `addOptionLabel`.",
+	description: "Pour ajouter une option, il suffit d'utiliser l'input `addOptionStrategy` et de s'abonner à l'output `addOption`. Le label est customisable via l'input `intl`.",
 	template: `<div class="pr-u-marginBlockEnd200">There is {{ legumes.length }} legumes in the list.</div>
 <lu-simple-select
 	#selectRef
 	placeholder="Placeholder…"
 	[(ngModel)]="selectedLegume"
 	[options]="legumes | filterLegumes:clue"
-	[addOptionLabel]="addOptionLabel || ('Ajouter ' + (clue || 'un légume'))"
+	[intl]="{ addOption: 'Ajouter ' + (clue || 'un légume') }"
 	[addOptionStrategy]="addOptionStrategy"
 	(clueChange)="clue = $event"
 	(addOption)="legumes = addLegume($event, legumes); selectedLegume = legumes[legumes.length - 1]"

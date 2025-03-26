@@ -1,5 +1,5 @@
 @if (isFilterPill) {
-<label for="dateInput" class="u-mask">{{ intl.pickDate }}</label>
+<label for="dateInput" class="u-mask">{{ intl().pickDate }}</label>
 }
 <div class="textField dateField-textField" #popoverAnchor>
 	<div class="textField-input">
@@ -28,12 +28,12 @@
 			@if (clearable() && !disabled && date.value !== '') {
 			<button class="textField-input-affix-clear clear" type="button" (click)="clear()">
 				<span aria-hidden="true" class="lucca-icon icon-signClose"></span>
-				<span class="u-mask">{{ intl.clear }}</span>
+				<span class="u-mask">{{ intl().clear }}</span>
 			</button>
 			} @if (isFilterPill && !isFilterPillEmpty()) {
 			<button class="textField-input-affix-clear clear" type="button" (click)="clear()">
 				<span aria-hidden="true" class="lucca-icon icon-signClose"></span>
-				<span class="u-mask">{{ intl.clear }}</span>
+				<span class="u-mask">{{ intl().clear }}</span>
 			</button>
 			}
 			<button
@@ -48,7 +48,7 @@
 				type="button"
 				class="button mod-onlyIcon mod-text textField-input-affix-toggle"
 			>
-				<lu-icon [icon]="'calendarDate'" [alt]="intl.pickDate"></lu-icon>
+				<lu-icon [icon]="'calendarDate'" [alt]="intl().pickDate"></lu-icon>
 			</button>
 		</div>
 	</div>
@@ -64,12 +64,12 @@
 	<div class="calendarWrapper">
 		<div class="calendarWrapper-navigation u-left0">
 			<button class="calendarWrapper-navigation-button button" type="button" (click)="prev(calendarMode())" #previousButtonRef>
-				<span aria-hidden="true" class="lucca-icon icon-chevronLeft"></span><span class="u-mask">{{ intl.previous }}</span>
+				<span aria-hidden="true" class="lucca-icon icon-chevronLeft"></span><span class="u-mask">{{ intl().previous }}</span>
 			</button>
 		</div>
 		<div class="calendarWrapper-navigation u-right0">
 			<button class="calendarWrapper-navigation-button button" type="button" (click)="next(calendarMode())" #nextButtonRef>
-				<span aria-hidden="true" class="lucca-icon icon-chevronRight"></span><span class="u-mask"> {{ intl.next }}</span>
+				<span aria-hidden="true" class="lucca-icon icon-chevronRight"></span><span class="u-mask"> {{ intl().next }}</span>
 			</button>
 		</div>
 		<div class="calendarWrapper-content" tabindex="-1">

@@ -1,6 +1,6 @@
-import { ChangeDetectorRef, Directive, ElementRef, forwardRef, HostListener, Input, OnInit, Renderer2 } from '@angular/core';
+import { ChangeDetectorRef, Directive, ElementRef, forwardRef, HostListener, input, Input, OnInit, Renderer2 } from '@angular/core';
 import { AbstractControl, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors, Validator } from '@angular/forms';
-import { ALuDateAdapter, ELuDateGranularity, getIntl, LuDateGranularity } from '@lucca-front/ng/core';
+import { ALuDateAdapter, ELuDateGranularity, intlInputOptions, LuDateGranularity } from '@lucca-front/ng/core';
 import { ALuInput } from '@lucca-front/ng/input';
 import { LU_DATE_INPUT_TRANSLATIONS } from './date-input.translate';
 
@@ -29,7 +29,8 @@ export class LuDateInputDirective<D> extends ALuInput<D, HTMLInputElement> imple
 	@Input() override set placeholder(p: string) {
 		this._elementRef.nativeElement.placeholder = p;
 	}
-	private _intl = getIntl(LU_DATE_INPUT_TRANSLATIONS);
+	intl = input(...intlInputOptions(LU_DATE_INPUT_TRANSLATIONS));
+
 	constructor(
 		_changeDetectorRef: ChangeDetectorRef,
 		_elementRef: ElementRef<HTMLInputElement>,
@@ -41,14 +42,14 @@ export class LuDateInputDirective<D> extends ALuInput<D, HTMLInputElement> imple
 	ngOnInit() {
 		switch (this.granularity) {
 			case ELuDateGranularity.year:
-				this.placeholder = this._intl.placeholderYear;
+				this.placeholder = this.intl().placeholderYear;
 				break;
 			case ELuDateGranularity.month:
-				this.placeholder = this._intl.placeholderMonth;
+				this.placeholder = this.intl().placeholderMonth;
 				break;
 			case ELuDateGranularity.day:
 			default:
-				this.placeholder = this._intl.placeholderDay;
+				this.placeholder = this.intl().placeholderDay;
 				break;
 		}
 	}

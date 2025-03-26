@@ -23,7 +23,7 @@ import {
 } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ControlValueAccessor } from '@angular/forms';
-import { getIntl, PortalContent } from '@lucca-front/ng/core';
+import { intlInputOptions, PortalContent } from '@lucca-front/ng/core';
 import { FilterPillInputComponent } from '@lucca-front/ng/filter-pills';
 import { BehaviorSubject, defer, map, Observable, of, ReplaySubject, startWith, Subject, switchMap, take } from 'rxjs';
 import { LuOptionGrouping, LuSimpleSelectDefaultOptionComponent } from '../option';
@@ -39,7 +39,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	protected labelElement: HTMLElement | undefined = inject(SELECT_LABEL);
 	protected labelId: string = inject(SELECT_LABEL_ID);
 
-	protected coreIntl = getIntl(LU_CORE_SELECT_TRANSLATIONS);
+	coreIntl = input(...intlInputOptions(LU_CORE_SELECT_TRANSLATIONS));
 
 	protected afterCloseFn?: () => void;
 	protected updatePositionFn?: () => void;
@@ -66,8 +66,11 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 		return this.clueChange.observed;
 	}
 
+	/**
+	 * @deprecated use `[coreIntl]="{addOption: ''}"` input instead
+	 */
 	@Input()
-	addOptionLabel: PortalContent = this.coreIntl.addOption;
+	addOptionLabel?: PortalContent;
 
 	@Input()
 	set addOptionStrategy(strategy: CoreSelectAddOptionStrategy) {
