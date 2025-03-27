@@ -100,6 +100,11 @@ export const WithDisplayer = generateStory({
 		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent', 'LuDisplayerDirective'],
 	},
 	storyPartial: {
+		play: async (context) => {
+			Basic.play(context);
+			const input = within(context.canvasElement).getByRole('combobox');
+			await expect(input.parentElement).toHaveTextContent(new RegExp(`🥗🥗.+`));
+		},
 		args: {
 			selectedLegume: allLegumes[4],
 		},
@@ -185,6 +190,17 @@ export const WithDisabledOptions = generateStory({
 		'@lucca-front/ng/core-select': ['LuOptionDirective'],
 		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent', 'LuDisabledOptionDirective'],
 	},
+	storyPartial: {
+		play: async(context) => {
+			await Basic.play(context);
+			const input = within(context.canvasElement).getByRole('combobox');
+			await userEvent.click(input);
+			await waitForAngular();
+			const panel = within(screen.getByRole('listbox'));
+			const options = await panel.findAllByRole('option');
+			await expect(options[1].firstChild).toHaveClass('is-disabled');
+		}
+	}
 });
 
 export const ApiV3 = generateStory({
@@ -536,12 +552,23 @@ export const CustomPanelHeader = generateStory({
 	[options]="legumes | filterLegumes:clue"
 	(clueChange)="clue = $event"
 >
-	<h1 *luSelectPanelHeader="selectRef">Custom Header</h1>
+	<h1 *luSelectPanelHeader="selectRef" data-testid="custom-header">Custom Header</h1>
 </lu-simple-select>`,
 	neededImports: {
 		'@lucca-front/ng/core-select': ['LuCoreSelectPanelHeaderDirective'],
 		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent'],
 	},
+	storyPartial: {
+		play: async (context) => {
+			await Basic.play(context);
+			const input = within(context.canvasElement).getByRole('combobox');
+			await userEvent.click(input);
+			await waitForAngular();
+			await expect(screen.getByRole('listbox')).toBeVisible();
+			const panel = within(screen.getByRole('listbox').parentElement);
+			await expect(panel.getByTestId("custom-header")).toBeInTheDocument();
+		}
+	}
 });
 
 const meta: Meta<LuSimpleSelectInputStoryComponent> = {
