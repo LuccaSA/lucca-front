@@ -1,8 +1,12 @@
+@use '@lucca-front/scss/src/commons/utils/a11y';
+
 @mixin expanded {
 	--components-readMore-lineClamp: 9999 !important;
 	--components-readMore-link-paddingInlineStart: var(--pr-t-spacings-100);
 }
 
 @mixin disabled {
-	--components-readMore-link-display: none;
+	.readMore-link.link {
+		@include a11y.mask;
+	}
 }

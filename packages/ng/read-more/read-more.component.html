@@ -1,7 +1,7 @@
 <button
-	tabindex="-1"
 	type="button"
 	aria-hidden="true"
+	[attr.tabindex]="isClamped() ? null : '-1'"
 	[attr.aria-expanded]="expanded()"
 	class="readMore-link link"
 	(click)="toggleExpanded()"

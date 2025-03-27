@@ -9,8 +9,8 @@
 	@at-root ($atRoot) {
 		.readMore-link.link {
 			position: absolute;
+			display: flex;
 			inset: auto 0 var(--pr-t-spacings-50) auto;
-			display: var(--components-readMore-link-display);
 			flex-direction: column;
 			z-index: 1;
 			line-height: var(--sizes-M-lineHeight);
@@ -22,10 +22,26 @@
 			padding-inline-start: var(--components-readMore-link-paddingInlineStart);
 			font-weight: 600;
 			text-decoration: none;
+
+			&::before {
+				content: '';
+				position: absolute;
+				inset: 0;
+				inset-inline-start: var(--components-readMore-link-paddingInlineStart);
+				border-radius: var(--commons-borderRadius-M);
+			}
+
+			&:focus-visible {
+				outline: none;
+
+				&::before {
+					@include a11y.focusVisible;
+				}
+			}
 		}
 
 		%after {
-			content: var(--components-readMore-textContent-lastChild-content) / '';
+			content: var(--components-readMore-content-lastChild-content) / '';
 			visibility: hidden;
 			white-space: nowrap;
 			font-weight: 600;

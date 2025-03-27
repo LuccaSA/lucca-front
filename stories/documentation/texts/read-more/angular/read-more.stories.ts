@@ -55,6 +55,10 @@ export default {
 	Explicabo deleniti perspiciatis inventore odit ratione et illum temporibus, culpa facilis debitis porro delectus,
 	perferendis ducimus reiciendis. Voluptatem nam nemo quia sint quisquam! Possimus itaque quae eius labore neque it.
 </lu-read-more>
+<lu-divider />
+<lu-read-more ${generateInputs(args, argTypes)}>
+	Lorem ipsum dolor.
+</lu-read-more>
 			`,
 		};
 	},

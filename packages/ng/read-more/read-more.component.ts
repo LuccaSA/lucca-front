@@ -35,7 +35,7 @@ export class ReadMoreComponent implements OnInit {
 		return this.lineClamp();
 	}
 
-	@HostBinding('style.--components-readMore-textContent-lastChild-content') get labelText() {
+	@HostBinding('style.--components-readMore-content-lastChild-content') get labelText() {
 		return `'${this.labelReadLess}'`;
 	}
 

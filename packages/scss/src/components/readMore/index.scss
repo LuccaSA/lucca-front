@@ -4,7 +4,7 @@
 	@include vars;
 	@include component;
 
-	&:has(.readMore-link[aria-expanded='true'], .readMore-textContent:focus-within) {
+	&:has(.readMore-link[aria-expanded='true'], .readMore-content:focus-within) {
 		@include expanded;
 	}
 
