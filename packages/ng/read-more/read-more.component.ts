@@ -18,6 +18,7 @@ export class ReadMoreComponent implements OnInit {
 
 	lineClamp = input<number>(5);
 	openOnly = input(false, { transform: booleanAttribute });
+	textFlow = input(false, { transform: booleanAttribute });
 	surface = input<null | 'sunken' | 'default' | string>(null);
 
 	labelReadMore = this.intl.readMore;
@@ -25,7 +26,7 @@ export class ReadMoreComponent implements OnInit {
 
 	label = signal<string>(this.labelReadMore);
 
-	textFlowRef = viewChild<ElementRef<HTMLDivElement>>('textFlow');
+	contentRef = viewChild<ElementRef<HTMLDivElement>>('content');
 
 	expanded = signal(false);
 	isClamped = signal(false);
@@ -34,7 +35,7 @@ export class ReadMoreComponent implements OnInit {
 		return this.lineClamp();
 	}
 
-	@HostBinding('style.--components-readMore-textFlow-lastChild-content') get labelText() {
+	@HostBinding('style.--components-readMore-textContent-lastChild-content') get labelText() {
 		return `'${this.labelReadLess}'`;
 	}
 
@@ -64,10 +65,10 @@ export class ReadMoreComponent implements OnInit {
 
 	ngOnInit(): void {
 		new ResizeObserver(() => {
-			const textFlowElement = this.textFlowRef()?.nativeElement;
+			const contentElement = this.contentRef()?.nativeElement;
 
-			this.isClamped.set(textFlowElement.scrollHeight > textFlowElement.clientHeight);
-		}).observe(this.textFlowRef().nativeElement);
+			this.isClamped.set(contentElement.scrollHeight > contentElement.clientHeight);
+		}).observe(this.contentRef().nativeElement);
 	}
 
 	toggleExpanded() {

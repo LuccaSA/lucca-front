@@ -8,6 +8,6 @@
 >
 	{{ label() }}
 </button>
-<div class="readMore-textFlow textFlow" #textFlow>
+<div class="readMore-content" [class.textFlow]="textFlow()" #content>
 	<ng-content />
 </div>

@@ -1,3 +1,4 @@
+import { DividerComponent } from '@lucca-front/ng/divider';
 import { ReadMoreComponent } from '@lucca-front/ng/read-more';
 import { Meta, moduleMetadata } from '@storybook/angular';
 import { generateInputs } from 'stories/helpers/stories';
@@ -22,7 +23,7 @@ export default {
 	},
 	decorators: [
 		moduleMetadata({
-			imports: [ReadMoreComponent],
+			imports: [ReadMoreComponent, DividerComponent],
 		}),
 	],
 	render: (args, { argTypes }) => {
@@ -45,6 +46,15 @@ export default {
 		perferendis ducimus reiciendis. Voluptatem nam nemo quia sint quisquam! Possimus itaque quae eius labore neque it.
 	</p>
 </lu-read-more>
+<lu-divider />
+<lu-read-more ${generateInputs(args, argTypes)}>
+	Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dignissimos ut maiores ullam facere voluptatum odio eum? Debitis natus nulla fugit
+	esse ipsum sint voluptatibus! Debitis voluptates impedit blanditiis natus.
+	Vitae veritatis non aliquam obcaecati illum voluptatum, voluptas dignissimos perspiciatis velit odit, magnam
+	culpa totam nemo, magni cum? Magni sapiente voluptatibus temporibus. Quas reprehenderit deleniti sit veniam, molestias obcaecati.
+	Explicabo deleniti perspiciatis inventore odit ratione et illum temporibus, culpa facilis debitis porro delectus,
+	perferendis ducimus reiciendis. Voluptatem nam nemo quia sint quisquam! Possimus itaque quae eius labore neque it.
+</lu-read-more>
 			`,
 		};
 	},
@@ -54,6 +64,7 @@ export const Basic = {
 	args: {
 		lineClamp: 5,
 		openOnly: false,
-		surface: null,
+		surface: 'default',
+		textFlow: false,
 	},
 };
