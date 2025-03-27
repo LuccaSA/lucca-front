@@ -7,7 +7,7 @@ import { CalloutComponent } from '@lucca-front/ng/callout';
 	standalone: true,
 	imports: [CalloutComponent],
 	template: ` <lu-callout icon="settingsGear" size="S" heading="NgModel value">
-		<pre class="code">
+		<pre class="code" data-testid="pr-ng-model">
 			<ng-content></ng-content>
 		</pre>
 	</lu-callout>`,
@@ -16,6 +16,7 @@ import { CalloutComponent } from '@lucca-front/ng/callout';
 			margin-block-start: var(--pr-t-spacings-400);
 			display: block;
 		}
+
 		pr-story-model-display .callout-content {
 			min-inline-size: 0;
 		}
