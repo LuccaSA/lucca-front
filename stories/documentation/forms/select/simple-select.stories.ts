@@ -28,7 +28,8 @@ const generateStory = getStoryGenerator<LuSimpleSelectInputStoryComponent>({
 		...coreSelectStory.argTypes,
 		selectedLegume: HiddenArgType,
 	},
-	play: async ({ canvasElement }) => {
+	play: async ({ canvasElement, step }) => {
+		// Mouse interactions
 		const input = within(canvasElement).getByRole('combobox');
 		await userEvent.click(input);
 		await waitForAngular();
@@ -39,6 +40,28 @@ const generateStory = getStoryGenerator<LuSimpleSelectInputStoryComponent>({
 		await userEvent.click(options[0]);
 		await waitForAngular();
 		await expect(input.parentElement).toHaveTextContent(optionText);
+
+		await step('Keyboard interactions', async () => {
+			await userEvent.tab();
+			await expect(input).toHaveFocus();
+			await userEvent.keyboard('{ArrowDown}');
+			await waitForAngular();
+			await expect(screen.getByRole('listbox')).toBeVisible();
+			await userEvent.keyboard('{Escape}');
+			await waitForAngular();
+			await expect(screen.queryByText('listbox')).toBeNull();
+			await expect(input).toHaveFocus();
+			await userEvent.keyboard('{Space}');
+			await waitForAngular();
+			await expect(screen.getByRole('listbox')).toBeVisible();
+			await userEvent.keyboard('{Escape}');
+			await waitForAngular();
+			await userEvent.keyboard('{Enter}');
+			await waitForAngular();
+			await expect(screen.getByRole('listbox')).toBeVisible();
+			await userEvent.keyboard('{Escape}');
+			await waitForAngular();
+		});
 	},
 });
 
@@ -191,7 +214,7 @@ export const WithDisabledOptions = generateStory({
 		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent', 'LuDisabledOptionDirective'],
 	},
 	storyPartial: {
-		play: async(context) => {
+		play: async (context) => {
 			await Basic.play(context);
 			const input = within(context.canvasElement).getByRole('combobox');
 			await userEvent.click(input);
@@ -199,8 +222,8 @@ export const WithDisabledOptions = generateStory({
 			const panel = within(screen.getByRole('listbox'));
 			const options = await panel.findAllByRole('option');
 			await expect(options[1].firstChild).toHaveClass('is-disabled');
-		}
-	}
+		},
+	},
 });
 
 export const ApiV3 = generateStory({
@@ -566,9 +589,9 @@ export const CustomPanelHeader = generateStory({
 			await waitForAngular();
 			await expect(screen.getByRole('listbox')).toBeVisible();
 			const panel = within(screen.getByRole('listbox').parentElement);
-			await expect(panel.getByTestId("custom-header")).toBeInTheDocument();
-		}
-	}
+			await expect(panel.getByTestId('custom-header')).toBeInTheDocument();
+		},
+	},
 });
 
 const meta: Meta<LuSimpleSelectInputStoryComponent> = {
