@@ -1,4 +1,6 @@
 import { booleanAttribute, Component, ElementRef, HostBinding, input, OnInit, signal, viewChild, ViewEncapsulation } from '@angular/core';
+import { getIntl } from '../core/translate';
+import { LU_READMORE_TRANSLATIONS } from './read-more.translate';
 
 @Component({
 	selector: 'lu-read-more',
@@ -12,12 +14,16 @@ import { booleanAttribute, Component, ElementRef, HostBinding, input, OnInit, si
 	},
 })
 export class ReadMoreComponent implements OnInit {
+	intl = getIntl(LU_READMORE_TRANSLATIONS);
+
 	lineClamp = input<number>(5);
 	openOnly = input(false, { transform: booleanAttribute });
 	surface = input<null | 'sunken' | 'raised' | string>(null);
 
-	label = signal<string>('Lire plus');
-	labelToggle = 'Lire moins';
+	labelReadMore = this.intl.readMore;
+	labelReadLess = this.intl.readLess;
+
+	label = signal<string>(this.labelReadMore);
 
 	textFlowRef = viewChild<ElementRef<HTMLDivElement>>('textFlow');
 
@@ -29,7 +35,7 @@ export class ReadMoreComponent implements OnInit {
 	}
 
 	@HostBinding('style.--components-readMore-textFlow-lastChild-content') get labelText() {
-		return `"${this.labelToggle}"`;
+		return `'${this.labelReadLess}'`;
 	}
 
 	@HostBinding('class.is-disabled') get isDisabled() {
@@ -67,9 +73,9 @@ export class ReadMoreComponent implements OnInit {
 		this.expanded.set(!this.expanded());
 
 		if (this.expanded()) {
-			this.label.set(this.labelToggle);
+			this.label.set(this.labelReadLess);
 		} else {
-			this.label.set('Lire plus');
+			this.label.set(this.labelReadMore);
 		}
 	}
 }

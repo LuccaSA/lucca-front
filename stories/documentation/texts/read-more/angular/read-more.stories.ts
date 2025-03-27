@@ -1,4 +1,4 @@
-import { ReadMoreComponent } from '@lucca-front/ng/readMore';
+import { ReadMoreComponent } from '@lucca-front/ng/read-more';
 import { Meta, moduleMetadata } from '@storybook/angular';
 import { generateInputs } from 'stories/helpers/stories';
 
