@@ -18,8 +18,8 @@
 		}
 	}
 
-	&.mod-raised {
-		@include raised;
+	&.mod-default {
+		@include default;
 	}
 
 	&.mod-sunken {

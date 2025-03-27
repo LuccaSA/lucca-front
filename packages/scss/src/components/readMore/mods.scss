@@ -1,5 +1,5 @@
-@mixin raised {
-	--components-readMore-link-backgroudColor: var(--pr-t-elevation-surface-raised);
+@mixin default {
+	--components-readMore-link-backgroudColor: var(--pr-t-elevation-surface-default);
 }
 
 @mixin sunken {

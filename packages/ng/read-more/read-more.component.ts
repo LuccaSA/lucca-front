@@ -18,7 +18,7 @@ export class ReadMoreComponent implements OnInit {
 
 	lineClamp = input<number>(5);
 	openOnly = input(false, { transform: booleanAttribute });
-	surface = input<null | 'sunken' | 'raised' | string>(null);
+	surface = input<null | 'sunken' | 'default' | string>(null);
 
 	labelReadMore = this.intl.readMore;
 	labelReadLess = this.intl.readLess;
@@ -50,14 +50,15 @@ export class ReadMoreComponent implements OnInit {
 		return this.surface() === 'sunken';
 	}
 
-	@HostBinding('class.mod-raised') get surfaceRaised() {
-		return this.surface() === 'raised';
+	@HostBinding('class.mod-default') get surfaceRaised() {
+		return this.surface() === 'default';
 	}
 
 	@HostBinding('style.--components-readMore-link-backgroudColor') get backgroundColor() {
-		if (this.surface() === 'sunken' || this.surface() === 'raised' || this.surface() === null) {
+		if (this.surface() === 'sunken' || this.surface() === 'default' || this.surface() === null) {
 			return null;
 		}
+		console.log('pasnull');
 		return `${this.surface()}`;
 	}
 

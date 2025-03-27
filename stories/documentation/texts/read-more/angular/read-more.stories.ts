@@ -14,7 +14,7 @@ export default {
 			},
 		},
 		surface: {
-			options: [null, 'raised', 'sunken', '#0b1732'],
+			options: [null, 'default', 'sunken', '#0b1732'],
 			control: {
 				type: 'select',
 			},
