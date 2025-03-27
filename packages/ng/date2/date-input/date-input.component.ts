@@ -308,6 +308,7 @@ export class DateInputComponent extends AbstractDateComponent implements Control
 	clear() {
 		this.inputRef().nativeElement.value = '';
 		this.selectedDate.set(null);
+		this.#onChange?.(null);
 		this.onTouched?.();
 	}
 
@@ -319,6 +320,7 @@ export class DateInputComponent extends AbstractDateComponent implements Control
 	dateClicked(date: Date, popoverRef: PopoverDirective): void {
 		this.selectedDate.set(date);
 		this.currentDate.set(date);
+		this.tabbableDate.set(date);
 		if (!this.isFilterPill) {
 			popoverRef.close();
 			this.inputRef().nativeElement.focus();
