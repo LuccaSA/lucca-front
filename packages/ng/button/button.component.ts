@@ -4,7 +4,7 @@ import { IconComponent } from '@lucca-front/ng/icon';
 
 @Component({
 	// eslint-disable-next-line @angular-eslint/component-selector
-	selector: 'button[luButton],a[luButton]',
+	selector: 'button[luButton], a[luButton]',
 	standalone: true,
 	providers: [LuClass],
 	template: '<ng-content></ng-content>',
@@ -72,8 +72,8 @@ export class ButtonComponent implements OnChanges {
 		const ngClassConfig = {
 			[`mod-${this.size}`]: !!this.size,
 			[`mod-block`]: this.block,
-			[`palette-${this.palette}`]: !!this.palette,
-			[`is-${this.state}`]: !!this.state,
+			[`palette-${this.palette}`]: this.palette === 'none' ? null : !!this.palette,
+			[`is-${this.state}`]: this.state === 'default' ? null : !!this.state,
 			['mod-onlyIcon']: this.iconOnly,
 			['mod-withIcon']: this.#iconComponentRef !== undefined,
 			['mod-delete']: this.delete,

@@ -5,6 +5,7 @@
 
 $isNamespaced: false !default;
 $deprecatedSpacings: false !default;
+$deprecatedNaming: false !default;
 
 $fontFamily: 'SourceSans' !default;
 $fontWeights: (
@@ -20,15 +21,13 @@ $fontWeightsCursive: (
 	'bold': 700,
 ) !default;
 
-$product: 'brand' !default;
 $palettesShades: text, 0, 25, 50, 100, 200, 300, 400, 500, 600, 700, 800, 900; // text is deprecated
 $palettesStates: 'critical', 'error', 'warning', 'success';
-$palettesDefault: 'brand', 'neutral', 'navigation';
-$palettesProduct: 'product';
+$palettesDefault: 'product', 'neutral', 'navigation';
 $palettesOtherProduct: () !default;
 $palettesDecorative: 'kiwi', 'lime', 'cucumber', 'mint', 'glacier', 'lagoon', 'blueberry', 'lavender', 'grape', 'watermelon', 'pumpkin',
 	'pineapple' !default;
-$palettesDeprecated: ('lucca', 'grey', 'primary', 'secondary') !default;
+$palettesDeprecated: 'brand', 'grey', 'primary', 'secondary' !default;
 
 $fieldsWidth: 20, 30, 40, 50, 60 !default;
 
@@ -82,7 +81,7 @@ $pink: (
 	900: #61005c
 ) !default;
 
-$violet: (
+$purple: (
 	// text is deprecated
 	text: #ffffff,
 	0: #ffffff,
@@ -379,10 +378,38 @@ $pineapple: (
 	900: #7a6400,
 ) !default;
 
-$products: ('brand', 'violet', 'green', 'blue', 'pink', 'darkBlue', 'fuchsia') !default;
-$palettes: ($orange, $violet, $green, $blue, $pink, $darkBlue, $fuchsia) !default;
+$product: 'lucca' !default;
+$brand: 'lucca';
+$productsNaming: (
+	'lucca',
+	'timeAndActivities',
+	'spendManagement',
+	'talentManagement',
+	'compensationAndBenefits',
+	'employeeAdministration',
+	'cloudControl'
+);
 
-$productsInterpolation: function.combineToMap($products, $palettes);
+@if $deprecatedNaming {
+	$brand: 'brand';
+	$productsNaming: ('brand', 'timmi', 'cleemy', 'poplee', 'pagga', 'corehr', 'cc');
+
+	@if $brand == 'lucca' {
+		$brand: 'brand';
+	}
+
+	@if $product == 'lucca' {
+		$product: 'brand';
+	}
+
+	@if $palettesDeprecated == ('brand', 'grey', 'primary', 'secondary') {
+		$palettesDeprecated: ('lucca', 'grey', 'primary', 'secondary');
+	}
+}
+
+$palettesNaming: ($orange, $purple, $green, $blue, $pink, $darkBlue, $fuchsia) !default;
+
+$productsInterpolation: function.combineToMap($productsNaming, $palettesNaming);
 
 // https://sass-lang.com/documentation/variables/#advanced-variable-functions
 $palettesInterpolation: (
@@ -404,14 +431,12 @@ $palettesInterpolation: (
 	'watermelon': $watermelon,
 	'pumpkin': $pumpkin,
 	'pineapple': $pineapple,
-	// lucca is deprecated
+	'brand': $orange,
 	'lucca': $orange,
-	// grey is deprecated
-	'grey': $neutral,
 	'product': map.get($productsInterpolation, $product),
-	// primary is deprecated
+	// deprecated
+	'grey': $neutral,
 	'primary': map.get($productsInterpolation, $product),
-	// secondary is deprecated
 	'secondary': map.get($productsInterpolation, $product),
 );
 
@@ -424,9 +449,10 @@ $palettesAllProducts: map.keys($productsInterpolation);
 }
 
 $palettesAll: function.flatMap(
+	$product,
+	$brand,
 	$palettesStates,
 	$palettesDefault,
-	$palettesProduct,
 	$palettesOtherProduct,
 	$palettesDecorative,
 	$palettesDeprecated
