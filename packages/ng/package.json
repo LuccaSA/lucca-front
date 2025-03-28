@@ -32,6 +32,15 @@
     "date-fns": "^3.6.0",
     "rxjs": "^7.8.0"
   },
+  "optionalDependencies": {
+    "@lexical/html": "^0.23.1",
+    "@lexical/markdown": "^0.23.1",
+    "@lexical/history": "^0.23.1",
+    "@lexical/link": "^0.23.1",
+    "@lexical/rich-text": "^0.23.1",
+    "@lexical/selection": "^0.23.1",
+    "@lexical/utils": "^0.23.1"
+  },
   "bugs": {
     "url": "https://github.com/LuccaSA/lucca-front/issues"
   }
