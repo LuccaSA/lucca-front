@@ -1,9 +1,9 @@
-import { CommonModule, NgFor } from '@angular/common';
+import { NgFor } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Meta, StoryObj } from '@storybook/angular';
 import { IconsList } from '@lucca-front/icons/icons-list';
 import { IconComponent } from '@lucca-front/ng/icon';
+import { Meta, StoryObj } from '@storybook/angular';
 
 @Component({
 	selector: 'icon-basic-stories',
@@ -20,7 +20,7 @@ class IconStory {
 	}
 
 	public copyIcon(icon: string): void {
-		navigator.clipboard.writeText(`<lu-icon icon="${icon}"></lu-icon>`);
+		navigator.clipboard.writeText(`<lu-icon icon="${icon}" />`);
 	}
 }
 
@@ -29,7 +29,7 @@ export default {
 	component: IconStory,
 } as Meta;
 
-const code = `<lu-icon icon="heart"></lu-icon>`;
+const code = `<lu-icon icon="heart" />`;
 
 export const Template: StoryObj<IconStory> = {
 	parameters: {

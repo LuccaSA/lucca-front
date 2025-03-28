@@ -9,7 +9,7 @@
 	(blur)="hideContent(null)"
 >
 	@if (state | luCalloutIcon: icon; as calloutIcon) {
-	<lu-icon class="calloutPopover-icon" [icon]="calloutIcon"></lu-icon>
+	<lu-icon class="calloutPopover-icon" [icon]="calloutIcon" />
 	} {{buttonLabel}}
 </button>
 <ng-template #overlayContentRef>
@@ -21,7 +21,7 @@
 		(mouseleave)="hideContent($event)"
 	>
 		<div class="calloutPopover-overlay-head">
-			<lu-icon class="calloutPopover-overlay-head-icon" [ngClass]="calloutOverlayHeadClasses" *ngIf="icon" [icon]="icon"></lu-icon>
+			<lu-icon class="calloutPopover-overlay-head-icon" [ngClass]="calloutOverlayHeadClasses" *ngIf="icon" [icon]="icon" />
 			<strong class="calloutPopover-overlay-head-title">
 				<ng-container *luPortal="heading"></ng-container>
 			</strong>

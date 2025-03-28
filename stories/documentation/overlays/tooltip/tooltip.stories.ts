@@ -83,7 +83,7 @@ export default {
 	luTooltipWhenEllipsis
 >Ce texte est affiché entièrement. Le tooltip n'apparait pas au survol.</div>
 <h3>Tooltip et icône (avec alternative)</h3>
-<lu-icon icon="star" alt="Favoris" luTooltip="Favoris" luTooltipOnlyForDisplay="true"></lu-icon>
+<lu-icon icon="star" alt="Favoris" luTooltip="Favoris" luTooltipOnlyForDisplay="true" />
 `,
 		};
 	},

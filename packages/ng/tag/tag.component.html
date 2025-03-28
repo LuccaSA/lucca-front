@@ -1,11 +1,11 @@
 @if (link) {
 <a [routerLink]="link" class="tag" [ngClass]="tagClasses" [class.mod-outlined]="outlined">
 	@if (icon) {
-	<lu-icon [icon]="icon"></lu-icon><span class="tag-content">{{ label }}</span> } @else { {{ label }} }</a
+	<lu-icon [icon]="icon" /><span class="tag-content">{{ label }}</span> } @else { {{ label }} }</a
 >
 } @else {
 <span class="tag" [ngClass]="tagClasses" [class.mod-outlined]="outlined">
 	@if (icon) {
-	<lu-icon [icon]="icon"></lu-icon><span class="tag-content">{{ label }}</span> } @else { {{ label }} }</span
+	<lu-icon [icon]="icon" /><span class="tag-content">{{ label }}</span> } @else { {{ label }} }</span
 >
 }
