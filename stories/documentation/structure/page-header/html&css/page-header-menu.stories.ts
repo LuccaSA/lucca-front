@@ -58,7 +58,7 @@ function getTemplate(args: PageHeaderHorizontalNavigationStory): string {
 				<a target="_blank">Lien<span aria-hidden="true" class="lucca-icon icon-arrowExternal mod-XS pr-u-marginInlineStart50"></span></a>.
 			</p>
 		</div>
-		<nav class="horizontalNavigation">
+		<div class="horizontalNavigation">
 			<ul class="horizontalNavigation-list">
 				<li class="horizontalNavigation-list-item">
 					<a
@@ -86,7 +86,7 @@ function getTemplate(args: PageHeaderHorizontalNavigationStory): string {
 					</a>
 				</li>
 			</ul>
-		</nav>
+		</div>
 	</header>
 	`;
 }
