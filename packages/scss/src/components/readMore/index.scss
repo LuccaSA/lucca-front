@@ -1,0 +1,28 @@
+@use 'exports' as *;
+
+.readMore {
+	@include vars;
+	@include component;
+
+	&:has(.readMore-link[aria-expanded='true'], .readMore-content:focus-within) {
+		@include expanded;
+	}
+
+	&.is-disabled {
+		@include disabled;
+	}
+
+	&.mod-openOnly {
+		&:has(.readMore-link[aria-expanded='true']) {
+			@include disabled;
+		}
+	}
+
+	&.mod-default {
+		@include default;
+	}
+
+	&.mod-sunken {
+		@include sunken;
+	}
+}
