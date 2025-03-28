@@ -1,4 +1,5 @@
 @use '@lucca-front/scss/src/commons/config' with (
+	$deprecatedNaming: false,
 	$palettesOtherProduct: 'all'
 );
 
