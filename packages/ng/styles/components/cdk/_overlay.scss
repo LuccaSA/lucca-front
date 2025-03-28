@@ -34,6 +34,11 @@
 	> * {
 		flex-grow: 1;
 	}
+
+	&.mod-optionPicker {
+		min-inline-size: 13rem;
+		max-inline-size: 30rem;
+	}
 }
 
 .cdk-overlay-backdrop {
@@ -51,6 +56,7 @@
 	&.cdk-overlay-dark-backdrop {
 		background-color: color.transparentize(var(--palettes-neutral-900), 0.6);
 	}
+
 	&.cdk-overlay-transparent-backdrop {
 		background: 0 0;
 	}
@@ -60,16 +66,4 @@
 	opacity: var(--pr-t-elevation-surface-backdrop);
 
 	@include keyframe.fadeIn;
-}
-
-// MODS
-// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
-
-.cdk-overlay-pane {
-	// Option picker
-
-	&.mod-optionPicker {
-		min-inline-size: 13rem;
-		max-inline-size: 30rem;
-	}
 }

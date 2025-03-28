@@ -7,9 +7,11 @@
 			display: none;
 		}
 	}
+
 	.indexTable-body-row-cellTitle-button[aria-expanded='false'] .lucca-icon {
 		transform: rotate(180deg);
 	}
+
 	// subTotal in header are not displayed when the row is open
 	.indexTable-body-row:has(.indexTable-body-row-cellTitle-button[aria-expanded='true']) {
 		.indexTable-body-row-subTotal {
@@ -28,6 +30,7 @@
 			) {
 			--components-indexTable-cell-subAction-opacity: 1;
 		}
+
 		&:has(.indexTable-body-row-cell-action:focus-visible, .indexTable-body-row-cell-link:focus-visible) {
 			--components-indexTable-outline-opacity: 1;
 		}
@@ -62,8 +65,10 @@
 @mixin selectedCells {
 	// !important here for overriding a potential overrided non blank row background color
 	--components-indexTable-cell-background-color: var(--components-indexTable-cell-background-color-selected) !important;
+
 	// !important here if for overriding a potential selectableHoveredRow reset
 	--components-indexTable-cell-shadow: var(--components-indexTable-cell-shadow-selected) !important;
+
 	// if selected stackable row : we also change the stacks background color
 	--components-indexTable-stack-svg: var(--components-indexTable-stack-svg-selected);
 }
