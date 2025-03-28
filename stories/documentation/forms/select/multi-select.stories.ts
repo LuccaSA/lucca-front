@@ -436,14 +436,14 @@ export const testDynamicDisabled = generateStory({
 
 export const AddOption = generateStory({
 	name: 'Add option',
-	description: "Pour ajouter une option, il suffit d'utiliser l'input `addOptionStrategy` et de s'abonner à l'output `addOption`. Le label est customisable via l'input `addOptionLabel`.",
+	description: "Pour ajouter une option, il suffit d'utiliser l'input `addOptionStrategy` et de s'abonner à l'output `addOption`. Le label est customisable via l'input `intl`.",
 	template: `<div class="pr-u-marginBlockEnd200">There is {{ legumes.length }} legumes in the list.</div>
 <lu-multi-select
 	#selectRef
 	placeholder="Placeholder..."
 	[(ngModel)]="selectedLegumes"
 	[options]="legumes | filterLegumes:clue"
-	[addOptionLabel]="'Ajouter ' + (clue || 'un légume')"
+	[intl]="{ addOption: 'Ajouter ' + (clue || 'un légume') }"
 	[addOptionStrategy]="addOptionStrategy"
 	(clueChange)="clue = $event"
 	(addOption)="legumes = addLegume($event, legumes); selectedLegumes = selectLegume(legumes[legumes.length - 1], selectedLegumes)"
@@ -453,7 +453,6 @@ export const AddOption = generateStory({
 	},
 	storyPartial: {
 		argTypes: {
-			addOptionLabel: { control: { type: 'text' } },
 			addOptionStrategy: {
 				control: {
 					type: 'select',
@@ -462,7 +461,6 @@ export const AddOption = generateStory({
 			},
 		},
 		args: {
-			addOptionLabel: 'Ajouter un légume',
 			addOptionStrategy: 'always',
 			addLegume: (name: string, existing: ILegume[]) => [
 				...existing,

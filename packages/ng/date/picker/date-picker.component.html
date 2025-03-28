@@ -13,6 +13,7 @@
 				<input
 					luDateInput
 					class="textfield-input"
+					[intl]="intl()"
 					[ngModel]="_value"
 					(ngModelChange)="_onInput($event)"
 					[ngModelOptions]="{ standalone: true }"

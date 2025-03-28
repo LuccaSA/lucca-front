@@ -3,13 +3,13 @@
 /* eslint-disable @angular-eslint/no-output-native */
 import { A11yModule } from '@angular/cdk/a11y';
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, EventEmitter, forwardRef, Input, Output, TemplateRef, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, forwardRef, input, Input, Output, TemplateRef, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ALuDateAdapter, ELuDateGranularity, LuDateGranularity } from '@lucca-front/ng/core';
+import { ALuDateAdapter, ELuDateGranularity, intlInputOptions, LuDateGranularity } from '@lucca-front/ng/core';
 import { ALuPickerPanel } from '@lucca-front/ng/picker';
 import { luTransformPopover } from '@lucca-front/ng/popover';
 import { LuCalendarInputComponent } from '../calendar';
-import { LuDateInputDirective } from '../input';
+import { LU_DATE_INPUT_TRANSLATIONS, LuDateInputDirective } from '../input';
 
 @Component({
 	selector: 'lu-date-picker',
@@ -28,6 +28,8 @@ import { LuDateInputDirective } from '../input';
 })
 export class LuDatePickerComponent<D = Date> extends ALuPickerPanel<D> {
 	_value: D;
+
+	intl = input(...intlInputOptions(LU_DATE_INPUT_TRANSLATIONS));
 
 	@Input() min?: D;
 	@Input() max?: D;

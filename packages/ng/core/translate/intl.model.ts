@@ -1,4 +1,4 @@
-import { inject, InjectionToken, LOCALE_ID } from '@angular/core';
+import { inject, InjectionToken, InputOptionsWithTransform, LOCALE_ID } from '@angular/core';
 import { ILuTranslation, LuTranslation } from './translation.model';
 
 export function getIntl<T>(translationsToken: InjectionToken<LuTranslation<T>> | InjectionToken<ILuTranslation<T>>): T {
@@ -15,4 +15,17 @@ export function getIntl<T>(translationsToken: InjectionToken<LuTranslation<T>> |
 	}
 
 	return translations['en'] ?? translations['en-GB'] ?? translations['en-US'];
+}
+
+export function intlInputOptions<T>(token: InjectionToken<LuTranslation<T>>): [T, InputOptionsWithTransform<T, Partial<T>>] {
+	const base = getIntl(token);
+	return [
+		base,
+		{
+			transform: (patch: Partial<T>): T => ({
+				...base,
+				...patch,
+			}),
+		},
+	];
 }
