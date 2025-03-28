@@ -79,18 +79,9 @@
 
 		.indexTable-body-row {
 			&:has(.indexTable-body-row-cell-link) {
-				$interactiveElementList: "button, a, input, textarea, select, details, [tabindex='0']";
-
 				.indexTable-body-row-cell {
-					&:not(:has(#{$interactiveElementList}), .mod-allowTextSelection) {
+					&:not(:has(button, a, input, textarea, select, details, [tabindex='0']), .mod-allowTextSelection) {
 						pointer-events: none;
-					}
-
-					#{$interactiveElementList} {
-						&:not(.indexTable-body-row-cell-link) {
-							position: relative;
-							z-index: 1;
-						}
 					}
 				}
 			}
