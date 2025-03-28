@@ -1,6 +1,6 @@
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { IconComponent } from '@lucca-front/ng/icon';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { generateInputs } from 'stories/helpers/stories';
 
 export default {
@@ -16,7 +16,7 @@ export default {
 			template: `<button type="button" luButton${luButton !== '' ? `="${luButton}"` : ''}${generateInputs(
 				inputs,
 				argTypes,
-			)}><lu-icon icon="signInfo"></lu-icon><span class="u-mask">Alt text</span>${label}</button>`,
+			)}><lu-icon icon="signInfo" /><span class="u-mask">Alt text</span>${label}</button>`,
 		};
 	},
 } as Meta;
@@ -24,7 +24,7 @@ export default {
 export const Basic: StoryObj<ButtonComponent & { label: string }> = {
 	argTypes: {
 		label: {
-			description: 'La présence d\'un label augmente le padding horizontal automatiquement via la classe <code>mod-withIcon</code>',
+			description: "La présence d'un label augmente le padding horizontal automatiquement via la classe <code>mod-withIcon</code>",
 		},
 		luButton: {
 			options: ['', 'outlined', 'text', 'text-invert'],
@@ -39,7 +39,7 @@ export const Basic: StoryObj<ButtonComponent & { label: string }> = {
 			control: {
 				type: 'select',
 			},
-		}
+		},
 	},
 	args: {
 		block: false,
