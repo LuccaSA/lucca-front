@@ -27,7 +27,6 @@ export default {
 		moduleMetadata({
 			imports: [
 				PageHeaderComponent,
-				LinkComponent,
 				ButtonComponent,
 				IconComponent,
 				LuTooltipModule,
