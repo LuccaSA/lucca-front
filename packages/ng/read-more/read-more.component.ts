@@ -1,7 +1,7 @@
 import { booleanAttribute, Component, ElementRef, HostBinding, input, OnInit, signal, viewChild, ViewEncapsulation } from '@angular/core';
-
 import { getIntl } from '@lucca-front/ng/core';
 import { LU_READMORE_TRANSLATIONS } from './read-more.translate';
+
 
 @Component({
 	selector: 'lu-read-more',
