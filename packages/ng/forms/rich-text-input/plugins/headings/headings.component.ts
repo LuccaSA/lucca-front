@@ -20,7 +20,7 @@ import { FORMAT_HEADINGS, registerHeadings, registerHeadingsSelectionChange } fr
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	imports: [LuSimpleSelectInputComponent, FormFieldComponent, ReactiveFormsModule, LuOptionDirective],
 	host: {
-		class: 'richText-toolbar-col-group',
+		class: 'richTextField-toolbar-col-group',
 	},
 	providers: [
 		{

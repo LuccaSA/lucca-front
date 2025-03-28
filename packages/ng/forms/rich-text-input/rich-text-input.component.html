@@ -1,8 +1,8 @@
-<div class="richText" [class.is-disabled]="isDisabled()" [class.is-error]="isError()" [class.mod-autoResize]="autoResize()">
+<div class="richTextField" [class.is-disabled]="isDisabled()" [class.is-error]="isError()" [class.mod-autoResize]="autoResize()">
 	<div
 		#content
 		luInput
-		class="richText-content textFlow"
+		class="richTextField-content textFlow"
 		role="textbox"
 		[attr.contenteditable]="!isDisabled()"
 		[attr.aria-disabled]="isDisabled()"
@@ -13,10 +13,10 @@
 		(blur)="touch()"
 	></div>
 	@if (currentCanShowPlaceholder()) {
-	<div aria-hidden="true" class="richText-content-placeholder">{{ placeholder() }}</div>
+	<div aria-hidden="true" class="richTextField-content-placeholder">{{ placeholder() }}</div>
 	}
 	<div
-		class="richText-toolbar"
+		class="richTextField-toolbar"
 		(keydown.arrowleft)="$event.preventDefault(); focusSiblingPlugin(-1)"
 		(keydown.arrowRight)="$event.preventDefault(); focusSiblingPlugin(1)"
 		role="toolbar"

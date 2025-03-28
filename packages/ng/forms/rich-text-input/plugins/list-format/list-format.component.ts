@@ -15,7 +15,7 @@ import { FORMAT_LIST, registerListsSelectionChange } from './list-format.command
 	templateUrl: 'list-format.component.html',
 	imports: [ButtonComponent, IconComponent, LuTooltipTriggerDirective],
 	host: {
-		class: 'richText-toolbar-col-group',
+		class: 'richTextField-toolbar-col-group',
 	},
 	providers: [
 		{

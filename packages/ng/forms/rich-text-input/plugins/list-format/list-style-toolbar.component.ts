@@ -14,7 +14,7 @@ import { ListFormatComponent } from './list-format.component';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	templateUrl: `list-style-toolbar.component.html`,
 	host: {
-		class: 'richText-toolbar-col-group',
+		class: 'richTextField-toolbar-col-group',
 		role: 'radiogroup',
 	},
 	providers: [

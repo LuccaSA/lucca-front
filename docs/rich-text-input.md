@@ -67,11 +67,11 @@ Il est aussi possible de créer une barre d'outil personnalisée en assemblant l
 
 ```angular2html
 <lu-rich-text-input placeholder="Enter some text..." [(ngModel)]="example">
-  <div class="richText-toolbar-col">
+  <div class="richTextField-toolbar-col">
     <lu-rich-text-toolbar-list-style />
     <lu-rich-text-plugin-headings />
   </div>
-  <div class="richText-toolbar-col">
+  <div class="richTextField-toolbar-col">
     <lu-rich-text-plugin-link />
   </div>
 </lu-rich-text-input>
@@ -144,17 +144,17 @@ export class MyCustomRichTextPluginComponent implements OnDestroy, RichTextPlugi
   element = viewChild('element', { read: ElementRef<HTMLButtonElement> });
   // outils intégrés
   pluginComponents = viewChildren(RICH_TEXT_PLUGIN_COMPONENT);
-  
+
   #registeredCommands: () => void = () => {};
 
   setEditorInstance(editor: LexicalEditor): void {
     this.#registeredCommands = mergeRegister(registerCustomLexicalCommand(editor));
   }
-  
+
   setDisabledState(isDisabled: boolean) {
     this.isDisabled.set(isDisabled);
   }
-  
+
   getLexicalNodes(): Klass<LexicalNode>[] {
     return [MyCustomNode];
   }

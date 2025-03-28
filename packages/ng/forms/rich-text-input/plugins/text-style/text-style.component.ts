@@ -14,7 +14,7 @@ import { registerFormatSelectionChange } from './text-style.command';
 	styleUrl: './text-style.component.scss',
 	imports: [ButtonComponent, IconComponent, LuTooltipTriggerDirective],
 	host: {
-		class: 'richText-toolbar-col-group',
+		class: 'richTextField-toolbar-col-group',
 	},
 	providers: [
 		{

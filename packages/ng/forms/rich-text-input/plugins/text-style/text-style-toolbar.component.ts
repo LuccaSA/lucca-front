@@ -12,7 +12,7 @@ import { TextStyleComponent } from './text-style.component';
 	templateUrl: `text-style-toolbar.component.html`,
 	imports: [TextStyleComponent],
 	host: {
-		class: 'richText-toolbar-col-group',
+		class: 'richTextField-toolbar-col-group',
 	},
 	providers: [
 		{

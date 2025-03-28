@@ -1,20 +1,20 @@
 @mixin hover {
-	--components-richText-borderColor: var(--pr-t-color-input-border-hover);
+	--components-richTextField-borderColor: var(--pr-t-color-input-border-hover);
 }
 
 @mixin disabled {
-	--components-richText-backgroundColor: var(--pr-t-color-input-background-disabled);
-	--components-richText-toolbar-backgroundColor: var(--pr-t-color-input-background-disabled);
-	--components-richText-color: var(--pr-t-color-input-text-disabled);
-	--components-richText-borderColor: var(--pr-t-color-input-border);
+	--components-richTextField-backgroundColor: var(--pr-t-color-input-background-disabled);
+	--components-richTextField-toolbar-backgroundColor: var(--pr-t-color-input-background-disabled);
+	--components-richTextField-color: var(--pr-t-color-input-text-disabled);
+	--components-richTextField-borderColor: var(--pr-t-color-input-border);
 }
 
 @mixin error {
-	--components-richText-borderColor: var(--pr-t-color-input-border-critical);
-	--components-richText-backgroundColor: var(--pr-t-color-input-background-critical);
-	--components-richText-placeholder-color: var(--pr-t-color-input-text-placeholder-critical);
+	--components-richTextField-borderColor: var(--pr-t-color-input-border-critical);
+	--components-richTextField-backgroundColor: var(--pr-t-color-input-background-critical);
+	--components-richTextField-placeholder-color: var(--pr-t-color-input-text-placeholder-critical);
 }
 
 @mixin errorHover {
-	--components-richText-borderColor: var(--pr-t-color-input-border-critical-hover);
+	--components-richTextField-borderColor: var(--pr-t-color-input-border-critical-hover);
 }

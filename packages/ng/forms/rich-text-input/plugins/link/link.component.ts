@@ -19,7 +19,7 @@ import { FORMAT_LINK, registerLink, registerLinkSelectionChange } from './link.c
 	templateUrl: './link.component.html',
 	imports: [ButtonComponent, IconComponent, LuTooltipTriggerDirective],
 	host: {
-		class: 'richText-toolbar-col-group',
+		class: 'richTextField-toolbar-col-group',
 	},
 	providers: [
 		provideLuDialog(),
