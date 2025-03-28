@@ -11,7 +11,6 @@ import { HorizontalNavigationLinkDirective } from './horizontal-navigation-link.
 	imports: [NgTemplateOutlet],
 	host: {
 		class: 'horizontalNavigation',
-		role: 'navigation',
 	},
 })
 export class HorizontalNavigationComponent {
