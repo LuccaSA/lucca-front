@@ -1,8 +1,8 @@
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { IconComponent } from '@lucca-front/ng/icon';
-import { generateInputs } from 'stories/helpers/stories';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { expect, within } from '@storybook/test';
+import { generateInputs } from 'stories/helpers/stories';
 import { Basic as ButtonBasic } from './button-basic.stories';
 
 export default {
@@ -18,7 +18,7 @@ export default {
 			template: `<button type="button" luButton${luButton !== '' ? `="${luButton}"` : ''}${generateInputs(
 				inputs,
 				argTypes,
-			)}><lu-icon icon="signInfo"></lu-icon><span class="u-mask">Alt text</span>${label}</button>`,
+			)}><lu-icon icon="signInfo" /><span class="u-mask">Alt text</span>${label}</button>`,
 		};
 	},
 } as Meta;
