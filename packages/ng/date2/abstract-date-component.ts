@@ -26,7 +26,7 @@ export abstract class AbstractDateComponent {
 	intl = getIntl(LU_DATE2_TRANSLATIONS);
 
 	onTouched?: () => void;
-	disabled = false;
+	disabled = signal<boolean>(false);
 
 	format = input<DateFormat>(DATE_FORMAT.DATE);
 	protected inDateISOFormat = computed(() => this.format() === DATE_FORMAT.DATE_ISO);
@@ -118,7 +118,7 @@ export abstract class AbstractDateComponent {
 	}
 
 	setDisabledState?(isDisabled: boolean): void {
-		this.disabled = isDisabled;
+		this.disabled.set(isDisabled);
 	}
 
 	move(direction: 1 | -1, mode: CalendarMode): void {
