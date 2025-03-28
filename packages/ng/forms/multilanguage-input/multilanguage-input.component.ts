@@ -48,7 +48,7 @@ export class MultilanguageInputComponent implements ControlValueAccessor {
 
 	#formFieldRef = inject(FORM_FIELD_INSTANCE);
 
-	formFieldSize = this.#formFieldRef.size();
+	formFieldSize = this.#formFieldRef.size;
 
 	protected onTouched = () => {};
 
