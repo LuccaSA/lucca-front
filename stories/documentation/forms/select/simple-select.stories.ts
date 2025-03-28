@@ -150,6 +150,22 @@ export const WithClue = generateStory({
 		'@lucca-front/ng/core-select': ['LuOptionDirective'],
 		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent'],
 	},
+	storyPartial: {
+		play: async (context) => {
+			await Basic.play(context);
+			const canvas = within(context.canvasElement);
+			const input = canvas.getByRole('combobox');
+			await userEvent.tab();
+			await userEvent.type(input, 'artichaut');
+			await waitForAngular();
+			await expect(screen.getByRole('listbox')).toBeVisible();
+			const panel = within(screen.getByRole('listbox'));
+			const options = await panel.findAllByRole('option');
+			await expect(options.length).toBe(1);
+			await userEvent.keyboard('{Enter}');
+			await expect(input.parentElement).toHaveTextContent('Artichaut');
+		},
+	},
 });
 
 export const WithPagination = generateStory({
