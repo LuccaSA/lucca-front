@@ -2,7 +2,6 @@ import { booleanAttribute, Component, ElementRef, HostBinding, input, OnInit, si
 import { getIntl } from '@lucca-front/ng/core';
 import { LU_READMORE_TRANSLATIONS } from './read-more.translate';
 
-
 @Component({
 	selector: 'lu-read-more',
 	standalone: true,
@@ -60,7 +59,6 @@ export class ReadMoreComponent implements OnInit {
 		if (this.surface() === 'sunken' || this.surface() === 'default' || this.surface() === null) {
 			return null;
 		}
-		console.log('pasnull');
 		return `${this.surface()}`;
 	}
 
