@@ -127,16 +127,19 @@ $overflow: 'hidden', 'auto', 'visible', 'scroll';
 	}
 }
 
-@mixin fontFace($family, $weights, $path: '//cdn.lucca.fr/transverse/fonts', $style: normal) {
+@mixin fontFace($family, $weights, $styles, $path: '//cdn.lucca.fr/transverse/fonts') {
 	@each $keyword, $number in $weights {
-		@font-face {
-			font-family: '#{$family}';
-			src:
-				url('#{$path}/#{$family}/#{$keyword}.woff2') format('woff2'),
-				url('#{$path}/#{$family}/#{$keyword}.woff') format('woff');
-			font-weight: #{$number};
-			font-style: #{$style};
-			font-display: swap;
+		@each $style in $styles {
+			@debug $style;
+			@font-face {
+				font-family: '#{$family}';
+				src:
+					url('#{$path}/#{$family}/#{$keyword}#{if($style == 'normal', '', '-' + $style)}.woff2') format('woff2'),
+					url('#{$path}/#{$family}/#{$keyword}#{if($style == 'normal', '', '-' + $style)}.woff') format('woff');
+				font-weight: #{$number};
+				font-style: #{$style};
+				font-display: swap;
+			}
 		}
 	}
 }
