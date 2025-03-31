@@ -1,0 +1,13 @@
+<div class="highlightSection-content">
+	<ng-content />
+</div>
+
+@if (bubbleTop() || bubbleBottom()) {
+<div class="highlightSection-illustrations">
+	@if (bubbleTop()) {
+	<img alt="" class="highlightSection-illustrations-back-top" [attr.src]="bubbleTopSrc()" />
+	}@if (bubbleBottom()) {
+	<img alt="" class="highlightSection-illustrations-back-bottom" [attr.src]="bubbleBottomSrc()" />
+	}
+</div>
+}

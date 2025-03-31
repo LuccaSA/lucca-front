@@ -1,0 +1,31 @@
+@use '@lucca-front/scss/src/components/title/exports' as title;
+
+@mixin dark {
+	--components-highlightSection-background: var(--palettes-100, var(--palettes-product-100));
+}
+
+@mixin light {
+	--components-highlightSection-background: var(--palettes-50, var(--palettes-product-50));
+}
+
+@mixin S {
+	--components-highlightSection-illustrations-width: 82px;
+	--components-highlightSection-illustrations-height: 68px;
+}
+
+@mixin XS {
+	--components-highlightSection-illustrations-width: 77px;
+	--components-highlightSection-illustrations-height: 64px;
+}
+
+@mixin illustrationsTop {
+	--components-highlightSection-inlinePaddingEnd: var(--components-highlightSection-illustrations-width);
+}
+
+@mixin illustrationsBottom {
+	--components-highlightSection-inlinePaddingStart: var(--components-highlightSection-illustrations-width);
+}
+
+@mixin narrow {
+	--components-highlightSection-illustrations-display: none;
+}

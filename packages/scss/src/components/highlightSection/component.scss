@@ -1,0 +1,54 @@
+@use '@lucca-front/scss/src/commons/utils/namespace';
+@use '@lucca-front/scss/src/commons/utils/reset';
+@use '@lucca-front/scss/src/commons/utils/color';
+@use '@lucca-front/scss/src/components/title/exports' as title;
+
+// Bubbles are reused from highlight data.
+// The image rotates around the corner we want to keep, then translated to math previous dimension in that axis.
+
+// Content should not bleed on the illustrations.
+
+@mixin component($atRoot: namespace.$defaultAtRoot) {
+	display: block;
+	position: relative;
+	padding-block: var(--components-highlightSection-padding-block);
+	padding-inline: var(--components-highlightSection-padding-inline);
+	border-radius: var(--commons-borderRadius-L);
+	overflow: hidden;
+	background-color: var(--components-highlightSection-background);
+
+	@at-root ($atRoot) {
+		.highlightSection-content {
+			display: var(--components-highlightSection-display);
+			position: relative;
+			z-index: 1;
+		}
+
+		.highlightSection-illustrations {
+			position: absolute;
+			inset: 0;
+		}
+
+		[class^='highlightSection-illustrations-'] {
+			position: absolute;
+			block-size: var(--components-highlightSection-illustrations-height);
+			inline-size: var(--components-highlightSection-illustrations-width);
+		}
+
+		.highlightSection-illustrations-back-top {
+			inset-block-start: 0;
+			inset-inline-end: 0;
+			rotate: -90deg;
+			transform-origin: top right;
+			translate: calc(var(--components-highlightSection-illustrations-height) * -1) 0;
+		}
+
+		.highlightSection-illustrations-back-bottom {
+			inset-block-end: 0;
+			inset-inline-start: 0;
+			rotate: 90deg;
+			transform-origin: bottom right;
+			translate: calc(var(--components-highlightSection-illustrations-width) * -1) 0;
+		}
+	}
+}
