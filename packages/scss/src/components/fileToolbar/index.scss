@@ -6,9 +6,9 @@
 
 	&.mod-disablePositioning {
 		@include disablePositioning;
-	}
 
-	&.mod-S {
-		@include S;
+		&.mod-S {
+			@include disablePositioningS;
+		}
 	}
 }

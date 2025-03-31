@@ -3,6 +3,8 @@
 @use '@lucca-front/scss/src/commons/utils/a11y';
 @use '@lucca-front/scss/src/commons/utils/text';
 
+@use '@lucca-front/icons/src/icon/exports' as icon;
+
 @mixin component($atRoot: namespace.$defaultAtRoot) {
 	border: 1px solid var(--components-fileEntry-borderColor);
 	padding: var(--components-fileEntry-padding);
@@ -69,6 +71,10 @@
 			flex-direction: column;
 			align-items: center;
 			text-align: center;
+
+			.inlineMessage-statusIcon:first-child {
+				@include icon.M;
+			}
 		}
 
 		.fileEntry-status-content-svg {

@@ -4,11 +4,6 @@
 	--components-fileToolbar-display: contents;
 }
 
-@mixin S {
+@mixin disablePositioningS {
 	--components-fileToolbar-list-padding: 0;
-
-	.fileToolbar-list-item-button.button {
-		@include button.S;
-		@include button.onlyIconS;
-	}
 }

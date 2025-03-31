@@ -2,6 +2,7 @@
 	--components-fileEntry-borderColor: var(--palettes-critical-600);
 	--components-fileEntry-gridTemplateAreas: 'picture title toolbar' 'picture description toolbar';
 	--components-fileEntry-status-backgroundColor: var(--palettes-critical-50);
+	--components-fileEntry-minHeight: 3.75rem;
 }
 
 @mixin loading {

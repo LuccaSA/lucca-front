@@ -15,7 +15,7 @@
 	flex-direction: var(--components-fileUpload-flexDirection);
 	align-items: var(--components-fileUpload-alignItems);
 	justify-content: var(--components-fileUpload-justifyContent);
-	gap: var(--pr-t-spacings-150);
+	gap: var(--pr-t-spacings-200);
 	color: var(--palettes-neutral-800);
 	min-block-size: var(--components-fileUpload-minHeight);
 
@@ -30,6 +30,8 @@
 			display: flex;
 			align-items: center;
 			justify-content: center;
+
+			--components-emptyState-icon-action-color: var(--palettes-600, var(--palettes-brand-600));
 		}
 
 		.fileUpload-status-preview {
@@ -63,15 +65,23 @@
 			flex-direction: column;
 			align-items: var(--components-fileUpload-instruction-alignItems);
 			max-inline-size: var(--components-fileUpload-instruction-maxWidth);
+			grid-template-columns: auto 1fr;
 		}
 
 		.fileUpload-instruction-action {
 			display: block;
 			margin-bottom: var(--fileUpload-instruction-action-marginBottom);
+			grid-column: span 2;
 
 			span {
 				color: var(--components-fileUpload-instruction-action-color);
 				font-weight: var(--components-fileUpload-instruction-action-fontWeight);
+			}
+		}
+
+		.fileUpload-instruction-size {
+			&::before {
+				content: var(--components-fileUpload-instruction-size-beforeContent);
 			}
 		}
 
