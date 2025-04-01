@@ -18,16 +18,6 @@
 	--components-highlightSection-illustrations-height: 64px;
 }
 
-// Content should not bleed on the illustrations, so we add padding accordingly.
-
-@mixin illustrationsTop {
-	--components-highlightSection-inlinePaddingEnd: var(--components-highlightSection-illustrations-width);
-}
-
-@mixin illustrationsBottom {
-	--components-highlightSection-inlinePaddingStart: var(--components-highlightSection-illustrations-width);
-}
-
 @mixin narrow {
 	--components-highlightSection-illustrations-display: none;
 }

@@ -1,6 +1,3 @@
-// TODO ui: Actually, inline paddings are added based on which bubbles are present.
-//          Make mods for paddings, in order to decide if we add padding or not.
-
 @mixin vars {
 	--components-highlightSection-display: block;
 	--components-highlightSection-padding-block: var(--pr-t-spacings-150);

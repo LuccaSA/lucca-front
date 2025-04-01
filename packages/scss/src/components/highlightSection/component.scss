@@ -14,6 +14,16 @@
 			display: var(--components-highlightSection-display);
 			position: relative;
 			z-index: 1;
+
+			// Content should not bleed on the illustrations, so we allow to add padding accordingly.
+
+			.highlightSection-u-inlinePaddingStart {
+				padding-inline-start: var(--components-highlightSection-illustrations-width);
+			}
+
+			.highlightSection-u-inlinePaddingEnd {
+				padding-inline-end: var(--components-highlightSection-illustrations-width);
+			}
 		}
 
 		.highlightSection-illustrations {

@@ -19,12 +19,4 @@
 	&.mod-XS {
 		@include XS;
 	}
-
-	&:has([class^='highlightSection-illustrations'][class$='top']) {
-		@include illustrationsTop;
-	}
-
-	&:has([class^='highlightSection-illustrations'][class$='bottom']) {
-		@include illustrationsBottom;
-	}
 }
