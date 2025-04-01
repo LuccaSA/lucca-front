@@ -69,4 +69,12 @@
 	@media (prefers-contrast: more) {
 		@include core.cssvars('pr-t-color-input', config.$colorInputContrasted);
 	}
+
+	@if (config.$prefersContrast == 'more') {
+		@include core.cssvars('pr-t-color-input', config.$colorInputContrasted);
+	}
+
+	.u-prefersContrastMore {
+		@include core.cssvars('pr-t-color-input', config.$colorInputContrasted);
+	}
 }
