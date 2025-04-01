@@ -114,7 +114,7 @@ export class LuEstablishmentSelectInputComponent<
 		this._changeDetectorRef.detectChanges();
 	}
 
-	trackById(idx: number, item: ILuEstablishment): number {
+	trackById(_idx: number, item: ILuEstablishment): number {
 		return item.id;
 	}
 }

@@ -1,0 +1,40 @@
+@use '@lucca-front/scss/src/commons/utils/namespace';
+
+@mixin component($atRoot: namespace.$defaultAtRoot) {
+	h1 {
+		margin-block: var(--pr-t-spacings-300);
+	}
+
+	h2 {
+		margin-block: var(--pr-t-spacings-300) var(--pr-t-spacings-150);
+	}
+
+	h3 {
+		margin-block: var(--pr-t-spacings-200) var(--pr-t-spacings-150);
+	}
+
+	h4 {
+		margin-block: var(--pr-t-spacings-150);
+	}
+
+	p {
+		margin-block: var(--pr-t-spacings-100);
+	}
+
+	ul,
+	ol {
+		margin-block: var(--pr-t-spacings-100);
+	}
+
+	li {
+		margin-block: var(--pr-t-spacings-50);
+	}
+
+	& > :first-child {
+		margin-block-start: 0;
+	}
+
+	& > :last-child {
+		margin-block-end: 0;
+	}
+}

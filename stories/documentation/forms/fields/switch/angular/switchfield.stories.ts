@@ -1,9 +1,9 @@
-import { CheckboxInputComponent, SwitchInputComponent } from '@lucca-front/ng/forms';
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { cleanupTemplate, generateInputs } from 'stories/helpers/stories';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
+import { CheckboxInputComponent, SwitchInputComponent } from '@lucca-front/ng/forms';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { generateInputs } from 'stories/helpers/stories';
 
 export default {
 	title: 'Documentation/Forms/Fields/SwitchField/Angular',
@@ -26,12 +26,12 @@ export default {
 			},
 		},
 		hiddenLabel: {
-			description: 'Masque le label en le conservant dans le DOM pour les lecteurs d\'écrans',
+			description: "Masque le label en le conservant dans le DOM pour les lecteurs d'écrans",
 		},
 	},
 } as Meta;
 
-export const Basic: StoryObj<SwitchInputComponent & FormFieldComponent> = {
+export const Basic: StoryObj<SwitchInputComponent & FormFieldComponent & { required: boolean }> = {
 	render: (args, { argTypes }) => {
 		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, ...inputArgs } = args;
 		return {
@@ -66,7 +66,7 @@ export const Basic: StoryObj<SwitchInputComponent & FormFieldComponent> = {
 		tooltip: 'Tooltip message',
 		hiddenLabel: false,
 		required: true,
-		inlineMessage: 'Helper Text',
+		inlineMessage: 'Helper text',
 		inlineMessageState: 'default',
 	},
 };

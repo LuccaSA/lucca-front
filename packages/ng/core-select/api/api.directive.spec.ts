@@ -35,7 +35,13 @@ class TestDirective extends ALuCoreSelectApiDirective<TestEntity> {
 		this.pageSize = size;
 	}
 
-	public override getOptionsPage(params: Record<string, string | number | boolean>, page: number): Observable<{ items: TestEntity[]; isLastPage: boolean }> {
+	public override getOptionsPage(
+		params: Record<string, string | number | boolean>,
+		page: number,
+	): Observable<{
+		items: TestEntity[];
+		isLastPage: boolean;
+	}> {
 		return super.getOptionsPage(params, page);
 	}
 }
@@ -74,6 +80,7 @@ describe('ALuCoreSelectApiDirective', () => {
 
 	it('should query options when ArrowDown keydown on the select', fakeAsync(() => {
 		spectator.dispatchKeyboardEvent('lu-simple-select', 'keydown', 'ArrowDown');
+		spectator.tick(10); // Wait for panel to be opened
 		spectator.tick(MAGIC_OPTION_SCROLL_DELAY); // Avoid "1 periodic timer(s) still in the queue." because of the setTimeout in the option component
 
 		expect(testApi.getOptions).toHaveBeenCalledTimes(1);
@@ -83,6 +90,7 @@ describe('ALuCoreSelectApiDirective', () => {
 	it('should query options once when searching while the select is closed', fakeAsync(() => {
 		spectator.tick(); // Component initialization uses a setTimeout :see_no_evil:
 		select.clueChanged('test');
+		spectator.tick(10); // Wait for panel to be opened
 		spectator.tick(MAGIC_DEBOUNCE_DURATION);
 		spectator.tick();
 
@@ -123,6 +131,7 @@ describe('ALuCoreSelectApiDirective', () => {
 		);
 
 		select.clueChanged('test');
+		spectator.tick(10); // Wait for panel to be opened
 		spectator.tick(MAGIC_DEBOUNCE_DURATION);
 		spectator.tick();
 
@@ -150,7 +159,7 @@ describe('ALuCoreSelectApiDirective', () => {
 		// // Assert
 		expect(testApi.getOptions).toHaveBeenCalledTimes(3);
 
-		let options: TestEntity[];
+		let options: readonly TestEntity[];
 
 		select.options$.subscribe((o) => (options = o));
 
@@ -169,7 +178,7 @@ describe('ALuCoreSelectApiDirective', () => {
 		testApi.setPageSize(2);
 
 		const getPageSpy = jest.spyOn(testApi, 'getOptionsPage');
-		getPageSpy.mockImplementation((params, page) => {
+		getPageSpy.mockImplementation((_params, page) => {
 			// Emit one list, then the same list with one more item
 			return of(
 				{
@@ -195,7 +204,7 @@ describe('ALuCoreSelectApiDirective', () => {
 		spectator.tick(MAGIC_OPTION_SCROLL_DELAY);
 
 		// Assert
-		let options: TestEntity[];
+		let options: readonly TestEntity[];
 		select.options$.subscribe((o) => (options = o));
 		expect(options).toEqual([
 			{ id: 1, name: 'test 1' },

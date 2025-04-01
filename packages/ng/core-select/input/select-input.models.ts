@@ -1,7 +1,5 @@
-import { Overlay, OverlayContainer } from '@angular/cdk/overlay';
-import { Platform } from '@angular/cdk/platform';
-import { DOCUMENT } from '@angular/common';
-import { ElementRef, Injectable, Provider, inject } from '@angular/core';
+import { OverlayRef } from '@angular/cdk/overlay';
+import { ElementRef, Provider, inject } from '@angular/core';
 import { SELECT_ID, SELECT_LABEL, SELECT_LABEL_ID } from '../select.model';
 
 let selectId = 0;
@@ -40,28 +38,10 @@ export function provideLuSelectLabelsAndIds(): Provider[] {
 	];
 }
 
-@Injectable()
-class LuSelectOverlayContainer extends OverlayContainer {
-	private selectLabelId = inject(SELECT_LABEL_ID);
-	private selectId = inject(SELECT_ID);
-
-	constructor() {
-		super(inject(DOCUMENT), inject(Platform));
+export function addAttributesOnCdkContainer(overlayRef: OverlayRef, selectLabelId: string, selectId: number) {
+	const potentialCdkOverlayContainer = overlayRef?.overlayElement?.parentElement?.parentElement;
+	if (potentialCdkOverlayContainer && potentialCdkOverlayContainer.className.includes('cdk-overlay-container')) {
+		potentialCdkOverlayContainer.setAttribute('aria-labelledby', selectLabelId);
+		potentialCdkOverlayContainer.id = `lu-select-overlay-container-${selectId}`;
 	}
-
-	protected override _createContainer(): void {
-		super._createContainer();
-		this._containerElement.setAttribute('aria-labelledby', this.selectLabelId);
-		this._containerElement.id = `lu-select-overlay-container-${this.selectId}`;
-	}
-}
-
-export function provideLuSelectOverlayContainer(): Provider[] {
-	return [
-		Overlay,
-		{
-			provide: OverlayContainer,
-			useClass: LuSelectOverlayContainer,
-		},
-	];
 }

@@ -1,0 +1,203 @@
+@use '@lucca-front/icons/src/icon/exports' as icon;
+
+@use '@lucca-front/scss/src/commons/utils/namespace';
+@use '@lucca-front/scss/src/commons/utils/a11y';
+@use '@lucca-front/scss/src/commons/utils/reset';
+@use '@lucca-front/scss/src/commons/utils/media';
+
+@use '@lucca-front/scss/src/components/clear/exports' as clear;
+@use '@lucca-front/scss/src/components/segmentedControl/exports' as segmentedControl;
+@use '@lucca-front/scss/src/components/textField/exports' as textField;
+
+@mixin component($atRoot: namespace.$defaultAtRoot) {
+	display: var(--components-filterPill-display);
+	gap: var(--components-filterPill-gap);
+	align-items: center;
+	background-color: var(--components-filterPill-backgroundColor);
+	width: fit-content;
+	padding: var(--components-filterPill-padding);
+	border-radius: var(--commons-borderRadius-L);
+	color: var(--components-filterPill-color);
+	font-size: var(--sizes-S-fontSize);
+	line-height: var(--sizes-S-lineHeight);
+	box-shadow: var(--components-filterPill-shadow);
+	position: relative;
+	max-inline-size: 18rem;
+	white-space: nowrap;
+	transition-property: box-shadow;
+	transition-duration: var(--commons-animations-durations-fast);
+
+	@at-root ($atRoot) {
+		.filterPill_popover-content.popover-contentOptional {
+			--components-dateInput-width: none;
+
+			display: flex;
+			flex-direction: column;
+			gap: var(--pr-t-spacings-50);
+
+			&:has(.filterPill_popover-content-option) {
+				--components-popover-padding: var(--pr-t-spacings-50);
+			}
+		}
+
+		.filterPill_popover-content-option {
+			padding: var(--pr-t-spacings-50) var(--pr-t-spacings-100);
+			border-radius: 4px;
+
+			&:hover {
+				background-color: var(--palettes-neutral-50);
+			}
+
+			&:has(:checked) {
+				background-color: var(--palettes-product-50);
+
+				&:hover {
+					background-color: var(--palettes-product-100);
+				}
+			}
+		}
+
+		.filterPill-icon {
+			display: flex;
+
+			.lucca-icon {
+				@include icon.S;
+			}
+		}
+
+		.filterPill-label {
+			font-weight: var(--components-filterPill-label-fontWeight);
+			overflow: hidden;
+			text-overflow: ellipsis;
+			outline: none;
+			text-align: center;
+			flex-shrink: 0;
+
+			&::before {
+				content: '';
+				position: absolute;
+				inset: 0;
+				cursor: var(--components-filterPill-label-cursor);
+				z-index: 1;
+			}
+		}
+
+		.filterPill-toggle {
+			@include reset.button;
+
+			display: flex;
+			margin-inline-start: var(--pr-t-spacings-50);
+			width: calc(var(--pr-t-spacings-50) + var(--pr-t-spacings-200));
+			flex-shrink: 0;
+			z-index: 1;
+			color: var(--components-filterPill-toggle-iconColor);
+			cursor: var(--components-filterPill-label-cursor);
+
+			.icon-arrowChevronBottom {
+				transition-property: transform;
+				transition-duration: var(--commons-animations-durations-fast);
+				transform: rotate(var(--components-filterPill-toggle-rotation));
+			}
+		}
+
+		.filterPill-clear.clear {
+			margin-inline-start: var(--pr-t-spacings-75);
+			margin-inline-end: var(--pr-t-spacings-25);
+			position: relative;
+			z-index: 1;
+			display: var(--components-filterPill-clear-display);
+
+			@include clear.product;
+		}
+
+		.filterPill-combobox {
+			@include reset.button;
+
+			font-weight: var(--components-filterPill-label-fontWeightChecked);
+			width: auto;
+			z-index: 1;
+			margin-inline-start: 0.5ch;
+			min-width: 0;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			cursor: var(--components-filterPill-label-cursor);
+
+			display: flex;
+			align-items: center;
+			gap: var(--pr-t-spacings-50);
+
+			&:focus-visible {
+				outline: none;
+			}
+
+			.lucca-icon {
+				color: var(--components-filterPill-arrowColor);
+			}
+		}
+
+		.filterPill-label-placeholder {
+			display: block;
+			height: 0;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			font-weight: var(--components-filterPill-label-fontWeightChecked);
+		}
+
+		.filterPill-checkbox {
+			border: 2px solid var(--components-filterPill-checkbox-borderColor);
+			border-radius: 4px;
+			color: var(--components-filterPill-checkbox-color);
+			transition-property: color, border-color, background-color;
+			transition-duration: var(--commons-animations-durations-fast);
+			background-color: var(--components-filterPill-checkbox-backgroundColor);
+			cursor: pointer;
+			display: flex;
+			order: -1;
+
+			@media (prefers-reduced-motion: reduce) {
+				transition-property: none;
+			}
+		}
+
+		.filterPill-checkbox-icon {
+			width: var(--pr-t-spacings-150);
+			height: var(--pr-t-spacings-150);
+		}
+
+		.filterPill-checkbox-icon-check {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			width: 100%;
+			height: 100%;
+			transform: scale(var(--components-filterPill-checkbox-icon-scale));
+			transition-property: transform;
+			transition-duration: var(--commons-animations-durations-fast);
+			transition-timing-function: var(--components-filterPill-checkbox-icon-timingFonction);
+
+			@media (prefers-reduced-motion: reduce) {
+				transition-property: none;
+			}
+
+			&::before {
+				font-weight: 400;
+				font-size: 1rem;
+				direction: ltr;
+				font-family: 'Lucca icons';
+				font-feature-settings: 'liga';
+				font-style: normal;
+				letter-spacing: normal;
+				line-height: 1;
+				text-transform: none;
+				white-space: nowrap;
+				word-wrap: normal;
+				content: '\e97d'; // Remove when content alternative will have a good support
+				content: '\e97d'/ '';
+			}
+		}
+
+		.filterPill-checkbox-input {
+			@include a11y.mask;
+		}
+	}
+}

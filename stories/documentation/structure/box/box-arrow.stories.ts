@@ -55,7 +55,6 @@ function getTemplate(args: ArrowBasicStory): string {
 		class="radioField-input"
 		id="IDradioA"
 		name="radioName2"
-		aria-describedby="IDmessageRadioA"
 		checked
 		/>
 		<span class="radioField-icon" aria-hidden="true">
@@ -72,7 +71,6 @@ function getTemplate(args: ArrowBasicStory): string {
 		class="radioField-input"
 		id="IDradioB"
 		name="radioName2"
-		aria-describedby="IDmessageRadioB"
 		/>
 		<span class="radioField-icon" aria-hidden="true">
 		<span class="radioField-icon-check"></span>
@@ -114,7 +112,7 @@ const Template: StoryFn<ArrowBasicStory> = (args) => ({
 		:host {
 			display: block;
 		}`,
-		args.neutral === true ? ':host { background-color: var(--palettes-neutral-0); margin: -15px -15px; padding: 15px 15px; }' : '',
+		args.neutral === true ? ':host { background-color: var(--palettes-neutral-0); margin: -15px; padding: 15px; }' : '',
 	],
 });
 

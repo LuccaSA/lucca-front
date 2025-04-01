@@ -7,7 +7,7 @@
 @forward 'chip'; // 1 Ko
 @forward 'title'; // 1 Ko
 @forward 'label'; // 1 Ko
-@forward 'filterBar'; // 1 Ko
+@forward 'filterBarDeprecated'; // 1 Ko
 @forward 'filters'; // 1 Ko
 @forward 'divider'; // 1 Ko
 @forward 'section'; // 1 Ko
@@ -28,8 +28,7 @@
 @forward 'breadcrumbs'; // 2 Ko
 @forward 'buttonGroup'; // 2 Ko
 @forward 'header'; // 3 Ko
-@forward 'actionIcon'; // 3 Ko
-@forward 'menu'; // 4 Ko
+@forward 'horizontalNavigation'; // 4 Ko
 @forward 'radio'; // 4 Ko
 @forward 'radioField'; // new component for radio
 @forward 'switch'; // 4 Ko
@@ -90,10 +89,16 @@
 @forward 'plgPush';
 @forward 'dateField';
 @forward 'dateRangeField';
+@forward 'dataTable';
+@forward 'dataTableSticked';
+@forward 'filterPill';
+@forward 'filterBar';
+@forward 'dropdown';
+@forward 'textFlow';
+@forward 'richText';
+@forward 'readMore';
+@forward 'highlightData';
 
 // Deprecated CSS components
-// @forward 'gridLegacy'; // 40 Ko
-// @forward 'emptyStateDeprecated';
-
 // @forward 'tableFixedDeprecated'; // 33 Ko
 // @forward 'tableStickedDeprecated'; // 67 Ko

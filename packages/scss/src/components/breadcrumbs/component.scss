@@ -3,6 +3,8 @@
 @use '@lucca-front/scss/src/commons/utils/namespace';
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
+	display: block;
+
 	@at-root ($atRoot) {
 		.breadcrumbs-list {
 			display: flex;
@@ -24,7 +26,8 @@
 
 					color: var(--palettes-neutral-700);
 					font-size: var(--sizes-XS-lineHeight);
-					padding: 0 var(--pr-t-spacings-50);
+					padding-block: 0;
+					padding-inline: var(--pr-t-spacings-50);
 				}
 			}
 		}

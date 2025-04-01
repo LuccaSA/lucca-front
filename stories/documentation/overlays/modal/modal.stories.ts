@@ -1,7 +1,7 @@
 import { Component, inject, Input, Type } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { ButtonComponent } from '@lucca-front/ng/button';
-import { ILuModalContent, LU_MODAL_DATA, LuModal, LuModalConfig, LuModalModule } from '@lucca-front/ng/modal';
+import { ILuModalContent, LuModal, LuModalConfig, LuModalModule, LU_MODAL_DATA } from '@lucca-front/ng/modal';
 import { LuToastsModule, LuToastsService } from '@lucca-front/ng/toast';
 import { applicationConfig, Meta, moduleMetadata } from '@storybook/angular';
 import { map, shareReplay, timer } from 'rxjs';
@@ -123,7 +123,7 @@ class ModalStories {
 				: baseOptions;
 		const data = this.message ? { message: this.message } : {};
 
-		const ref = this.modal.open(cmp, data, options);
+		const ref = this.modal.legacyOpen(cmp, data, options);
 
 		if (this.undismissable) {
 			ref.onBackdropClick.subscribe(() => {

@@ -1,0 +1,86 @@
+@use 'exports' as *;
+
+.dataTableWrapper {
+	@include vars;
+}
+
+.dataTable {
+	@include component;
+
+	&.mod-cellBorder {
+		@include cellBorder;
+	}
+
+	&.mod-alignTop {
+		@include alignTop;
+	}
+
+	&.mod-layoutFixed {
+		@include layoutFixed;
+	}
+
+	&[class*='mod-layoutFixedAtMediaMin'] {
+		@include layoutFixedWithBreakpoint;
+	}
+
+	// Allow selection of mod-layoutFixed with or without breakpoints like mod-layoutFixedAtMediaMinXS or mod-layoutFixedAtMediaMaxL
+	&[class*='mod-layoutFixed'] {
+		@include layoutFixedCells;
+	}
+}
+
+:is(.dataTable-head-row, .dataTable-body-row, .dataTable-foot-row) {
+	&.mod-group {
+		@include group;
+	}
+
+	&.mod-selectable {
+		@include selectable;
+	}
+
+	&.mod-draggable {
+		@include draggable;
+	}
+}
+
+:is(.dataTable-head-row-cell, .dataTable-body-row-cell, .dataTable-foot-row-cell) {
+	&.mod-actions {
+		@include actions;
+	}
+
+	&.mod-alignCenter {
+		@include alignCenter;
+	}
+
+	&.mod-alignRight {
+		@include alignRight;
+	}
+
+	&.mod-editable {
+		@include editable;
+	}
+
+	&.mod-tree {
+		@include tree;
+	}
+}
+
+.dataTable-body-row {
+	&.is-collapsed {
+		@include collapsed;
+	}
+
+	&:first-child {
+		&:has(.dataTable-body-row-cell-expand-button.button[aria-expanded='false']) {
+			~ .dataTable-body-row {
+				@include collapsed;
+			}
+		}
+	}
+}
+
+.dataTable-body-row-cell-expand-button {
+	&[aria-expanded='true'] {
+		@include expanded;
+	}
+}

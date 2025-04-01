@@ -1,4 +1,9 @@
 @mixin vars {
 	--components-fancyBox-background-left: none;
 	--components-fancyBox-background-right: none;
+	--components-fancyBox-foreground: none;
+	--components-fancyBox-imageWidth: 12.5rem;
+	--components-fancyBox-imageHeight: 10rem;
+	--components-fancyBox-offsetInline: -10rem;
+	--components-fancyBox-offsetBlock: -1.5rem;
 }

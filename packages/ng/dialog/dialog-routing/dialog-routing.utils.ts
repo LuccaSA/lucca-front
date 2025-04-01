@@ -1,7 +1,7 @@
 import { ComponentType } from '@angular/cdk/portal';
 import { InjectionToken } from '@angular/core';
 import { Route } from '@angular/router';
-import { Observable, firstValueFrom, isObservable } from 'rxjs';
+import { Observable, firstValueFrom, from, isObservable, of } from 'rxjs';
 import { LuDialogConfig, LuDialogData } from '../model';
 import { DialogRoutingComponent } from './dialog-routing.component';
 import { DialogRouteConfig } from './dialog-routing.models';
@@ -12,13 +12,19 @@ export async function deferrableToPromise<T>(deferrable: Promise<T> | Observable
 	return isObservable(deferrable) ? firstValueFrom(deferrable) : deferrable;
 }
 
+export function deferrableToObservable<T>(deferrable: Promise<T> | Observable<T> | T): Observable<T> {
+	return isObservable(deferrable) ? deferrable : deferrable instanceof Promise ? from(deferrable) : of(deferrable);
+}
+
 export const DIALOG_ROUTE_CONFIG = new InjectionToken<DialogRouteConfig<unknown>>('DIALOG_ROUTE_CONFIG');
 
 export function createDialogRoute<C>(config: DialogRouteConfig<C>): Route {
+	// Remove `canDeactivate` from the route config and handle it in the dialog component
+	const { canDeactivate, ...rest } = config;
 	return {
-		...config,
+		...rest,
 		component: DialogRoutingComponent,
-		providers: [{ provide: DIALOG_ROUTE_CONFIG, useValue: config }, ...[config.providers ?? []]],
+		providers: [{ provide: DIALOG_ROUTE_CONFIG, useValue: config }, ...(config.providers ?? [])],
 	};
 }
 

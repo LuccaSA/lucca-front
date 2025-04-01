@@ -1,7 +1,7 @@
 import { AsyncPipe, NgIf } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { getIntl } from '@lucca-front/ng/core';
-import { ILuOptionContext, LU_OPTION_CONTEXT } from '@lucca-front/ng/core-select';
+import { ILuOptionContext, LU_OPTION_CONTEXT, ɵLuOptionOutletDirective } from '@lucca-front/ng/core-select';
 import { LuUserDisplayPipe } from '@lucca-front/ng/user';
 import { map, startWith } from 'rxjs';
 import { LuCoreSelectUser, LuCoreSelectWithAdditionnalInformation } from './user-option.model';
@@ -10,18 +10,22 @@ import { LuCoreSelectUsersDirective } from './users.directive';
 
 @Component({
 	selector: 'lu-user-option',
-	imports: [NgIf, AsyncPipe, LuUserDisplayPipe],
+	imports: [NgIf, AsyncPipe, LuUserDisplayPipe, ɵLuOptionOutletDirective],
 	template: `
 		<ng-container *ngIf="context.option$ | async as user">
-			<div *ngIf="userDirective.displayMeOption && user.id === userDirective.currentUserId && hasEmptyClue$ | async; else notMe">
-				<b>{{ intl.me }} {{ user | luUserDisplay: userDirective.displayFormat() }}</b>
+			<div *ngIf="userDirective.displayMeOption() && user.id === userDirective.currentUserId && hasEmptyClue$ | async; else notMe">
+				<b>{{ intl.me }} <ng-container *luOptionOutlet="customUserOptionTpl() || defaultUserTpl; value: user" /></b>
 			</div>
 
 			<ng-template #notMe>
-				<div>{{ user | luUserDisplay: userDirective.displayFormat() }}</div>
+				<div *luOptionOutlet="customUserOptionTpl() || defaultUserTpl; value: user"></div>
 			</ng-template>
 			<div class="lu-select-additionalInformation" *ngIf="user.additionalInformation">({{ user.additionalInformation }})</div>
 		</ng-container>
+
+		<ng-template #defaultUserTpl let-user>
+			{{ user | luUserDisplay: userDirective.displayFormat() }}
+		</ng-template>
 	`,
 	standalone: true,
 	styles: [
@@ -29,7 +33,7 @@ import { LuCoreSelectUsersDirective } from './users.directive';
 			.lu-select-additionalInformation {
 				font-size: 80%;
 				font-style: italic;
-				margin-top: -0.25em;
+				margin-block-start: -0.25em;
 			}
 		`,
 	],
@@ -42,4 +46,5 @@ export class LuUserOptionComponent {
 		startWith(this.userDirective.select.clue),
 		map((clue) => !clue),
 	);
+	protected customUserOptionTpl = this.userDirective.customUserOptionTpl;
 }

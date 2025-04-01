@@ -19,11 +19,11 @@ import {
 	LuMultiSelectCounterDisplayerComponent,
 	LuMultiSelectDisplayerInputDirective,
 	LuMultiSelectInputComponent,
+	LuMultiSelection,
 	LuMultiSelectWithSelectAllDirective,
 } from '@lucca-front/ng/multi-select';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 import { applicationConfig, Meta, moduleMetadata } from '@storybook/angular';
-import { LuMultiSelection } from 'packages/ng/multi-select/select.model';
 import { interval, map } from 'rxjs';
 import { startWith } from 'rxjs/operators';
 import { HiddenArgType } from 'stories/helpers/common-arg-types';
@@ -31,9 +31,11 @@ import { getStoryGenerator } from 'stories/helpers/stories';
 import { allLegumes, colorNameByColor, coreSelectStory, FilterLegumesPipe, ILegume, LuCoreSelectInputStoryComponent, SortLegumesPipe } from './select.utils';
 
 type LuMultiSelectInputStoryComponent = LuCoreSelectInputStoryComponent & {
-	selectedLegumes: ILegume[];
+	selectedLegumes: ILegume[] | LuMultiSelection<ILegume>;
 	legumeSelection?: LuMultiSelection<ILegume>;
 	maxValuesShown: number;
+	selectedAxisSection: LuMultiSelection<{ id: number; name: string }>;
+	selectedEstablishment: LuMultiSelection<{ id: number; name: string }>;
 	selectLegume(legume: ILegume, legumes: ILegume[]): ILegume[];
 } & LuMultiSelectInputComponent<ILegume>;
 
@@ -62,12 +64,19 @@ export const SelectAll = generateStory({
 	[loading]="loading"
 	[(ngModel)]="legumeSelection"
 	[options]="legumes | filterLegumes:clue"
+	[keepSearchAfterSelection]="keepSearchAfterSelection"
 	(clueChange)="clue = $event"
 />
 {{ legumeSelection | json }}`,
 	neededImports: {
 		'@lucca-front/ng/multi-select': ['LuMultiSelectInputComponent', 'LuMultiSelectWithSelectAllDirective'],
 		'@lucca-front/ng/core-select/user': ['LuCoreSelectUsersDirective', 'LuCoreSelectTotalCountDirective'],
+	},
+	storyPartial: {
+		args: {
+			legumeSelection: { mode: 'none' },
+			keepSearchAfterSelection: false,
+		},
 	},
 });
 
@@ -79,6 +88,7 @@ export const Basic = generateStory({
 	[placeholder]="placeholder"
 	[clearable]="clearable"
 	[loading]="loading"
+	[keepSearchAfterSelection]="keepSearchAfterSelection"
 	[(ngModel)]="selectedLegumes"
 	[options]="legumes | filterLegumes:clue"
 	(clueChange)="clue = $event"
@@ -91,6 +101,7 @@ export const Basic = generateStory({
 	storyPartial: {
 		args: {
 			selectedLegumes: allLegumes.slice(0, 15),
+			keepSearchAfterSelection: false,
 		},
 		argTypes: {
 			clearable: { control: { type: 'boolean' } },
@@ -111,6 +122,7 @@ export const WithMultiDisplayer = generateStory({
 	[(ngModel)]="selectedLegumes"
 	placeholder="Placeholder..."
 	[options]="legumes | filterLegumes:clue"
+	[keepSearchAfterSelection]="keepSearchAfterSelection"
 	(clueChange)="clue = $event"
 >
 	<ng-container *luMultiDisplayer="let values; select: selectRef">
@@ -123,6 +135,7 @@ export const WithMultiDisplayer = generateStory({
 	storyPartial: {
 		args: {
 			selectedLegumes: [],
+			keepSearchAfterSelection: false,
 		},
 	},
 });
@@ -135,6 +148,7 @@ export const WithDisplayer = generateStory({
 	#selectRef
 	[placeholder]="placeholder"
 	[options]="legumes | filterLegumes:clue"
+	[keepSearchAfterSelection]="keepSearchAfterSelection"
 	(clueChange)="clue = $event"
 	[clearable]="clearable"
 	[loading]="loading"
@@ -152,6 +166,7 @@ export const WithDisplayer = generateStory({
 	storyPartial: {
 		args: {
 			selectedLegumes: allLegumes.slice(0, 5),
+			keepSearchAfterSelection: false,
 		},
 	},
 });
@@ -214,6 +229,11 @@ export const ApiV3 = generateStory({
 		'@lucca-front/ng/multi-select': ['LuMultiSelectInputComponent', 'LuMultiSelectWithSelectAllDirective'],
 		'@lucca-front/ng/core-select/api': ['LuCoreSelectApiV3Directive'],
 	},
+	storyPartial: {
+		args: {
+			selectedAxisSection: { mode: 'none' },
+		},
+	},
 });
 
 export const ApiV4 = generateStory({
@@ -231,6 +251,11 @@ export const ApiV4 = generateStory({
 		'@lucca-front/ng/multi-select': ['LuMultiSelectInputComponent', 'LuMultiSelectWithSelectAllDirective'],
 		'@lucca-front/ng/core-select/api': ['LuCoreSelectApiV4Directive'],
 	},
+	storyPartial: {
+		args: {
+			selectedEstablishment: { mode: 'none' },
+		},
+	},
 });
 
 export const Establishment = generateStory({
@@ -247,6 +272,11 @@ export const Establishment = generateStory({
 		'@lucca-front/ng/multi-select': ['LuMultiSelectInputComponent', 'LuMultiSelectWithSelectAllDirective'],
 		'@lucca-front/ng/core-select/establishment': ['LuCoreSelectEstablishmentsDirective'],
 	},
+	storyPartial: {
+		args: {
+			selectedEstablishment: { mode: 'none' },
+		},
+	},
 });
 
 export const User = generateStory({
@@ -255,6 +285,22 @@ export const User = generateStory({
 	template: `<lu-multi-select
 	placeholder="Placeholder..."
 	users
+	[(ngModel)]="selectedUsers"
+></lu-multi-select>`,
+	neededImports: {
+		'@lucca-front/ng/multi-select': ['LuMultiSelectInputComponent'],
+		'@lucca-front/ng/core-select/user': ['LuCoreSelectUsersDirective'],
+	},
+});
+
+export const UserWithSelectAll = generateStory({
+	name: 'User Select (select all)',
+	description: "Pour saisir des utilisateurs, il suffit d'utiliser la directive `users` et `withSelectAll`",
+	template: `<lu-multi-select
+	placeholder="Placeholder..."
+	users
+	withSelectAll
+	withSelectAllDisplayerLabel="utilisateurs"
 	[(ngModel)]="selectedUsers"
 ></lu-multi-select>`,
 	neededImports: {
@@ -297,6 +343,35 @@ export const GroupBy = generateStory({
 	description: "Pour grouper les options, il suffit d'utiliser la directive `luOptionGroup`.",
 	template: `<lu-multi-select
 	#selectRef
+	class="textfield-input"
+	placeholder="Placeholder..."
+	[(ngModel)]="selectedLegumes"
+	[options]="legumes | filterLegumes:clue | sortLegumes:(clue ? ['name', legumeColor] : [legumeColor])"
+	(clueChange)="clue = $event"
+	[maxValuesShown]="maxValuesShown"
+>
+	<ng-container *luOptionGroup="let group by legumeColor; select: selectRef">
+		Légume {{colorNameByColor[group.key]}}{{group.options.length > 1 ? 's' : ''}}
+	</ng-container>
+</lu-multi-select>
+{{ selectedLegumes | json }}`,
+	neededImports: {
+		'@lucca-front/ng/core-select': ['LuOptionDirective', 'LuOptionGroupDirective'],
+		'@lucca-front/ng/multi-select': ['LuMultiSelectInputComponent'],
+	},
+	storyPartial: {
+		args: {
+			legumeColor: (legume: ILegume) => legume.color,
+			colorNameByColor,
+		},
+	},
+});
+
+export const GroupBySelectAll = generateStory({
+	name: 'Group options (with selectAll)',
+	description: "Pour grouper les options, il suffit d'utiliser la directive `luOptionGroup`.",
+	template: `<lu-multi-select
+	#selectRef
 	withSelectAll
 	withSelectAllDisplayerLabel="légumes"
 	[totalCount]="legumes.length"
@@ -313,11 +388,12 @@ export const GroupBy = generateStory({
 </lu-multi-select>
 {{ selectedLegumes | json }}`,
 	neededImports: {
-		'@lucca-front/ng/core-select': ['LuOptionDirective', 'LuOptionGroupDirective'],
+		'@lucca-front/ng/core-select': ['LuOptionDirective', 'LuOptionGroupDirective', 'LuCoreSelectTotalCountDirective'],
 		'@lucca-front/ng/multi-select': ['LuMultiSelectInputComponent', 'LuMultiSelectWithSelectAllDirective'],
 	},
 	storyPartial: {
 		args: {
+			selectedLegumes: { mode: 'none' },
 			legumeColor: (legume: ILegume) => legume.color,
 			colorNameByColor,
 		},
@@ -361,7 +437,7 @@ export const testDynamicDisabled = generateStory({
 export const AddOption = generateStory({
 	name: 'Add option',
 	description: "Pour ajouter une option, il suffit d'utiliser l'input `addOptionStrategy` et de s'abonner à l'output `addOption`. Le label est customisable via l'input `addOptionLabel`.",
-	template: `<div class="u-marginBottomS">There is {{ legumes.length }} legumes in the list.</div>
+	template: `<div class="pr-u-marginBlockEnd200">There is {{ legumes.length }} legumes in the list.</div>
 <lu-multi-select
 	#selectRef
 	placeholder="Placeholder..."
@@ -378,7 +454,12 @@ export const AddOption = generateStory({
 	storyPartial: {
 		argTypes: {
 			addOptionLabel: { control: { type: 'text' } },
-			addOptionStrategy: { control: { type: 'select', options: ['never', 'always', 'if-empty-clue', 'if-not-empty-clue'] } },
+			addOptionStrategy: {
+				control: {
+					type: 'select',
+					options: ['never', 'always', 'if-empty-clue', 'if-not-empty-clue'],
+				},
+			},
 		},
 		args: {
 			addOptionLabel: 'Ajouter un légume',

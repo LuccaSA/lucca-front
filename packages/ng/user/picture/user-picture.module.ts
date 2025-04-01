@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { LuUserDisplayModule } from '../display/index';
 import { LuUserPictureComponent } from './user-picture.component';
 
+/**
+ * @deprecated use `LuUserPictureComponent` instead
+ */
 @NgModule({
-	imports: [CommonModule, LuUserDisplayModule],
-	declarations: [LuUserPictureComponent],
+	imports: [LuUserPictureComponent],
 	exports: [LuUserPictureComponent],
 })
 export class LuUserPictureModule {}

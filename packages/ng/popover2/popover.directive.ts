@@ -124,6 +124,8 @@ export class PopoverDirective implements OnDestroy {
 
 	luPopoverClosed = output<void>();
 
+	luPopoverOpened = output<void>();
+
 	#listenToMouseLeave = false;
 	#listenToMouseEnter = true;
 
@@ -222,6 +224,7 @@ export class PopoverDirective implements OnDestroy {
 	openPopover(withBackdrop = false, disableFocusHandler = false): void {
 		if (!this.opened() && !this.luPopoverDisabled) {
 			this.opened.set(true);
+			this.luPopoverOpened.emit();
 			this.#overlayRef = this.#overlay.create({
 				positionStrategy: this.#overlay
 					.position()

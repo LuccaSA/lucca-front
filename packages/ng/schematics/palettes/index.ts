@@ -1,17 +1,15 @@
 import type { Rule } from '@angular-devkit/schematics';
 import { CssMapper } from '../lib/css-mapper';
-import { installLocalDependencies } from '../lib/local-deps/installer';
+import { currentSchematicContext, SchematicContextOpts } from '../lib/lf-schematic-context';
 
 // Nx need to see "@angular-devkit/schematics" in order to run this migration correctly (see https://github.com/nrwl/nx/blob/d9fed4b832bf01d1b9a44ae9e486a5e5cd2d2253/packages/nx/src/command-line/migrate/migrate.ts#L1729-L1738)
+// eslint-disable-next-line @typescript-eslint/no-require-imports
 require('@angular-devkit/schematics');
 
-export default (options?: { skipInstallation?: boolean }): Rule => {
-	const skipInstallation = options?.skipInstallation ?? false;
+export default (options?: SchematicContextOpts): Rule => {
 
 	return async (tree, context) => {
-		if (!skipInstallation) {
-			installLocalDependencies(context);
-		}
+		await currentSchematicContext.init(context, options);
 
 		await new CssMapper(
 			tree,
@@ -20,16 +18,16 @@ export default (options?: { skipInstallation?: boolean }): Rule => {
 					'palette-grey': 'palette-neutral',
 					'palette-primary': 'palette-product',
 					'palette-secondary': 'palette-product',
-					'palette-lucca': 'palette-brand',
+					'palette-lucca': 'palette-brand'
 				},
 				variables: {
 					'--palettes-grey-{val}': `--palettes-neutral-{val}`,
 					'--palettes-primary-{val}': `--palettes-product-{val}`,
 					'--palettes-secondary-{val}': `--palettes-product-{val}`,
 					'--palettes-lucca-{val}': `--palettes-brand-{val}`,
-					'--colors-grey-{val}': `--colors-neutral-{val}`,
+					'--colors-grey-{val}': `--colors-neutral-{val}`
 				},
-				mixins: {},
+				mixins: {}
 			},
 			{
 				val: {
@@ -43,9 +41,9 @@ export default (options?: { skipInstallation?: boolean }): Rule => {
 					600: '600',
 					700: '700',
 					800: '800',
-					900: '900',
-				},
-			},
+					900: '900'
+				}
+			}
 		).run();
 	};
 };

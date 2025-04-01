@@ -1,3 +1,5 @@
+import { Tree } from '@angular-devkit/schematics';
+import { dirname, join } from 'path';
 import {
 	ScriptTarget,
 	SourceFile,
@@ -10,16 +12,63 @@ import {
 	isNoSubstitutionTemplateLiteral,
 	isObjectLiteralExpression,
 	isPropertyAssignment,
-	isStringLiteral,
+	isStringLiteral
 } from 'typescript';
 import { updateContent } from './file-update';
-import { AngularCompilerLib, HtmlAst, HtmlAstVisitor } from './html-ast';
+import { HtmlAst, HtmlAstVisitor } from './html-ast';
+import { currentSchematicContext } from './lf-schematic-context';
 import { replaceStringLiterals } from './typescript-ast';
 
 export interface AngularTemplate {
 	offsetStart: number;
 	offsetEnd: number;
 	content: string;
+	filePath: string;
+	componentTS: SourceFile;
+}
+
+export function extractNgTemplatesIncludingHtml(sourceFile: SourceFile, tree: Tree, path: string): AngularTemplate[] {
+	const templates: AngularTemplate[] = [...extractNgTemplates(sourceFile).map((tmpl) => ({ ...tmpl, filePath: path }))];
+	forEachChild(
+		sourceFile,
+		createVisitor(isDecorator, (decorator) => {
+			if (!isCallExpression(decorator.expression)) {
+				return;
+			}
+			if (!isIdentifier(decorator.expression.expression)) {
+				return;
+			}
+
+			if (decorator.expression.expression.escapedText !== 'Component') {
+				return;
+			}
+
+			const argument = decorator.expression.arguments[0];
+			if (!argument || !isObjectLiteralExpression(argument)) {
+				return;
+			}
+
+			templates.push(
+				...argument.properties
+					.filter(isPropertyAssignment)
+					.filter((prop) => isIdentifier(prop.name) && prop.name.text === 'templateUrl')
+					.map((prop) => prop.initializer)
+					.filter(orGuard(isStringLiteral, isNoSubstitutionTemplateLiteral))
+					.map((initializer) => {
+						const filePath = join(dirname(sourceFile.fileName), initializer.text);
+						const content = tree.readText(filePath);
+						return {
+							offsetStart: 0,
+							offsetEnd: content.length,
+							content,
+							filePath,
+							componentTS: sourceFile
+						};
+					})
+			);
+		})
+	);
+	return templates;
 }
 
 export function extractNgTemplates(sourcefile: SourceFile): AngularTemplate[];
@@ -57,9 +106,11 @@ export function extractNgTemplates(fileNameOrSourceFile: string | SourceFile, co
 						offsetStart: initializer.getStart(sourcefile) + initializer.getLeadingTriviaWidth(sourcefile),
 						offsetEnd: initializer.getEnd(),
 						content: 'rawText' in initializer && initializer.rawText ? initializer.rawText : initializer.text,
-					})),
+						filePath: sourcefile.fileName,
+						componentTS: sourcefile
+					}))
 			);
-		}),
+		})
 	);
 
 	return templates;
@@ -79,32 +130,32 @@ export function orGuard<T, T1 extends T, T2 extends T>(guard1: (item: T) => item
 	return (item): item is T1 | T2 => guard1(item) || guard2(item);
 }
 
-export function replaceComponentInput(componentName: string, inputName: string, oldStringToNewString: Record<string, string>, template: string, angularCompiler: AngularCompilerLib): string {
+export function replaceComponentInput(componentName: string, inputName: string, oldStringToNewString: Record<string, string>, template: string): string {
 	return updateContent(template, (updates) => {
-		const htmlAst = new HtmlAst(template, angularCompiler);
+		const htmlAst = new HtmlAst(template);
 		htmlAst.visitElements(componentName, (el) => {
-			const elAst = new HtmlAstVisitor(el, angularCompiler);
+			const elAst = new HtmlAstVisitor(el);
 
 			elAst.visitAttribute(inputName, (attr) => {
 				if (attr.valueSpan && attr.value in oldStringToNewString) {
 					updates.push({
 						position: attr.valueSpan.start.offset,
 						oldContent: attr.value,
-						newContent: oldStringToNewString[attr.value],
+						newContent: oldStringToNewString[attr.value]
 					});
 				}
 			});
 
 			elAst.visitBoundAttribute(inputName, (attr) => {
-				if (attr.valueSpan && attr.value instanceof angularCompiler.ASTWithSource) {
+				if (attr.valueSpan && attr.value instanceof currentSchematicContext.angularCompiler.ASTWithSource) {
 					const attrValue = attr.value.source || '';
 					const sourcefile = createSourceFile('', attrValue, ScriptTarget.ESNext);
 
 					updates.push(
 						...replaceStringLiterals(sourcefile, oldStringToNewString).map((update) => ({
 							...update,
-							position: (attr.valueSpan?.start.offset ?? 0) + update.position,
-						})),
+							position: (attr.valueSpan?.start.offset ?? 0) + update.position
+						}))
 					);
 				}
 			});
@@ -112,18 +163,18 @@ export function replaceComponentInput(componentName: string, inputName: string, 
 	});
 }
 
-export function replaceComponentInputName(componentName: string, oldInputName: string, newInputName: string, template: string, angularCompiler: AngularCompilerLib): string {
+export function replaceComponentInputName(componentName: string, oldInputName: string, newInputName: string, template: string): string {
 	return updateContent(template, (updates) => {
-		const htmlAst = new HtmlAst(template, angularCompiler);
+		const htmlAst = new HtmlAst(template);
 		htmlAst.visitElements(componentName, (el) => {
-			const elAst = new HtmlAstVisitor(el, angularCompiler);
+			const elAst = new HtmlAstVisitor(el);
 
 			elAst.visitAttribute(oldInputName, (attr) => {
 				if (attr.keySpan) {
 					updates.push({
 						position: attr.keySpan.start.offset,
 						oldContent: oldInputName,
-						newContent: newInputName,
+						newContent: newInputName
 					});
 				}
 			});
@@ -133,7 +184,7 @@ export function replaceComponentInputName(componentName: string, oldInputName: s
 					updates.push({
 						position: attr.keySpan.start.offset,
 						oldContent: oldInputName,
-						newContent: newInputName,
+						newContent: newInputName
 					});
 				}
 			});
@@ -158,8 +209,8 @@ export function updateAngularTemplate(fileName: string, content: string, updater
 			...templates.map((tpl) => ({
 				position: tpl.offsetStart,
 				oldContent: tpl.content,
-				newContent: updater(tpl.content),
-			})),
+				newContent: updater(tpl.content)
+			}))
 		);
 	});
 }

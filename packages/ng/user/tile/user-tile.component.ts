@@ -1,6 +1,6 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, inject, ViewEncapsulation } from '@angular/core';
-import { LU_DEFAULT_DISPLAY_POLICY, LuDisplayFormat } from '../display/index';
-import { displayPictureFormatRecord } from '../picture/user-picture.component';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, Input, ViewEncapsulation } from '@angular/core';
+import { LuDisplayFormat, LuUserDisplayPipe, LU_DEFAULT_DISPLAY_POLICY } from '../display/index';
+import { displayPictureFormatRecord, LuUserPictureComponent } from '../picture/user-picture.component';
 
 export interface LuUserTileUserInput {
 	picture?: { href: string } | null;
@@ -15,11 +15,13 @@ export interface LuUserTileUserInput {
  */
 @Component({
 	selector: 'lu-user-tile',
+	imports: [LuUserDisplayPipe, LuUserPictureComponent],
 	templateUrl: './user-tile.component.html',
 	styleUrls: ['./user-tile.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	host: { class: 'userTile' },
 	encapsulation: ViewEncapsulation.None,
+	standalone: true,
 })
 export class LuUserTileComponent {
 	readonly #defaultFormat = inject(LU_DEFAULT_DISPLAY_POLICY);

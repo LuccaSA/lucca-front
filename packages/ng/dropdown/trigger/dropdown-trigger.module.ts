@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { LuDropdownTriggerDirective } from './dropdown-trigger.directive';
-import { OverlayModule } from '@angular/cdk/overlay';
 
+/**
+ * @deprecated use `LuDropdownTriggerDirective` instead
+ */
 @NgModule({
-	declarations: [LuDropdownTriggerDirective],
-	imports: [OverlayModule],
+	imports: [LuDropdownTriggerDirective],
 	exports: [LuDropdownTriggerDirective],
 })
 export class LuDropdownTriggerModule {}

@@ -1,6 +1,0 @@
-@use 'exports' as *;
-
-.emptyState {
-	@include vars;
-	@include component;
-}

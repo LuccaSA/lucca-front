@@ -1,6 +1,7 @@
 @use '@lucca-front/scss/src/commons/utils/reset';
-@use '@lucca-front/scss/src/components/button/exports' as button;
 @use '@lucca-front/scss/src/commons/utils/namespace';
+@use '@lucca-front/scss/src/commons/utils/color';
+@use '@lucca-front/scss/src/components/button/exports' as button;
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
 	@include reset.list;
@@ -12,6 +13,7 @@
 	gap: var(--components-calloutFeedbackList-gap);
 
 	.button {
+		@include color.palette('neutral');
 		@include button.S;
 	}
 

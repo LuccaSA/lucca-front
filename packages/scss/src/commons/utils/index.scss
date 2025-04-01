@@ -1,8 +1,6 @@
 @use 'sass:list';
 
 @use '@lucca-front/icons/src/commons/core' as transform;
-
-@use '@lucca-front/scss/src/commons/config';
 @use '@lucca-front/scss/src/commons/core';
 
 @use '@lucca-front/scss/src/commons/utils/keyframe';
@@ -40,88 +38,88 @@
 .u-animated {
 	&FadeIn,
 	&FadeOut {
-		@include keyframe.fadeIn;
-
 		animation-name: fadeIn;
+
+		@include keyframe.fadeIn;
 	}
 
 	&ScaleIn,
 	&ScaleOut {
-		@include keyframe.scaleIn;
-
 		animation-name: scaleIn;
+
+		@include keyframe.scaleIn;
 	}
 
 	&ScaleInTop,
 	&ScaleOutTop {
-		@include keyframe.scaleIn;
-
 		animation-name: scaleInTop;
+
+		@include keyframe.scaleIn;
 	}
 
 	&ScaleInRight,
 	&ScaleOutRight {
-		@include keyframe.scaleInRight;
-
 		animation-name: scaleInRight;
+
+		@include keyframe.scaleInRight;
 	}
 
 	&ScaleInBottom,
 	&ScaleOutBottom {
-		@include keyframe.scaleInBottom;
-
 		animation-name: scaleInBottom;
+
+		@include keyframe.scaleInBottom;
 	}
 
 	&ScaleInLeft,
 	&ScaleOutLeft {
-		@include keyframe.scaleInLeft;
-
 		animation-name: scaleInLeft;
+
+		@include keyframe.scaleInLeft;
 	}
 
 	&SlideIn,
 	&SlideInTop,
 	&SlideOut,
 	&SlideOutTop {
-		@include keyframe.slideIn;
-
 		animation-name: slideIn;
+
+		@include keyframe.slideIn;
 	}
 
 	&SlideInRight,
 	&SlideOutRight {
-		@include keyframe.slideInRight;
-
 		animation-name: slideInRight;
+
+		@include keyframe.slideInRight;
 	}
 
 	&SlideInBottom,
 	&SlideOutBottom {
-		@include keyframe.slideInBottom;
-
 		animation-name: slideInBottom;
+
+		@include keyframe.slideInBottom;
 	}
 
 	&SlideInLeft,
 	&SlideOutLeft {
-		@include keyframe.slideInLeft;
-
 		animation-name: slideInLeft;
+
+		@include keyframe.slideInLeft;
 	}
 
 	&Shake {
-		@include keyframe.shake;
-
 		animation-name: shake;
+
+		@include keyframe.shake;
 	}
 
 	&Pulse {
-		@include keyframe.pulse;
-
 		animation-name: pulse;
 		animation-direction: alternate;
 		animation-iteration-count: var(--commons-animations-iteration-count);
+
+		@include keyframe.pulse;
 	}
 
 	&FadeOut,
@@ -153,12 +151,16 @@
 	@include reset.clear('both', '!important');
 }
 
+// .u-clearLeft is deprecated
+.u-clearInlineStart,
 .u-clearLeft {
-	@include reset.clear('left', '!important');
+	@include reset.clear('inline-start', '!important');
 }
 
+// .u-clearRight is deprecated
+.u-clearInlineEnd,
 .u-clearRight {
-	@include reset.clear('right', '!important');
+	@include reset.clear('inline-end', '!important');
 }
 
 .u-listReset {
@@ -220,12 +222,12 @@
 
 // .u-textLeft is deprecated
 .u-textLeft {
-	text-align: left !important;
+	text-align: start !important;
 }
 
 // .u-textRight is deprecated
 .u-textRight {
-	text-align: right !important;
+	text-align: end !important;
 }
 
 // .u-textCenter is deprecated
@@ -245,20 +247,6 @@
 	color: var(--palettes-neutral-700) !important;
 }
 
-// .u-unit is deprecated
-.u-unit {
-	font-size: 0.66em !important;
-}
-
-// .u-comma is deprecated
-.u-comma {
-	&:not(:last-child) {
-		&::after {
-			content: ', ' !important;
-		}
-	}
-}
-
 .u-fontWeightRegular {
 	font-weight: 400 !important;
 }
@@ -270,20 +258,25 @@
 .u-noSpinButtons {
 	&::-webkit-outer-spin-button,
 	&::-webkit-inner-spin-button {
-		-webkit-appearance: none;
+		-webkit-appearance: none !important;
 	}
 
 	&[type='number'] {
-		-moz-appearance: textfield;
+		-moz-appearance: textfield !important;
 	}
 }
 
-@each $elevation in config.$elevations {
-	$index: list.index(config.$elevations, $elevation);
+.u-fontFamily {
+	font-family: var(--commons-font-family) !important;
+}
 
-	// .u-elevate* is deprecated
-	.u-elevate#{$index} {
-		box-shadow: var(--commons-elevations-elevation-#{$index});
+.u-fontFamilyCursive {
+	font-family: var(--commons-font-family-cursive) !important;
+}
+
+.pr-u-focusVisible {
+	&:focus-visible {
+		@include a11y.focusVisible;
 	}
 }
 
@@ -301,10 +294,17 @@
 @include core.classes('order', core.$order);
 @include core.classes('align-self', core.$align);
 @include core.classes('position', core.$position);
+
 @include core.classes('width', core.$contents);
 @include core.classes('height', core.$contents);
 @include core.classes('min-width', '0');
 @include core.classes('min-height', '0');
+
+@include core.classes('inline-size', core.$contents);
+@include core.classes('block-size', core.$contents);
+@include core.classes('min-inline-size', '0');
+@include core.classes('min-block-size', '0');
+
 @include core.classes('visibility', core.$visibility);
 @include core.classes('font-weight', core.$fontWeight);
 @include core.classes('font-style', core.$fontStyle);
@@ -358,9 +358,6 @@
 }
 
 @include core.spacings;
-@if (config.$importDeprecatedSpacings) {
-	@include core.spacings($token: false);
-}
 @include core.sizes;
 @include core.borderRadius;
 @include core.palettes;

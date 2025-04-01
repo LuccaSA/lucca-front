@@ -8,8 +8,7 @@ export default {
 } as Meta;
 
 function getTemplate(args: CheckboxBasicStory): string {
-	return `
-<div class="form-field">
+	return `<div class="form-field">
 	<label class="formLabel" for="ID">Label</label>
 	<span class="checkboxField">
 		<input type="checkbox" class="checkboxField-input" id="ID" aria-describedby="IDmessage" aria-required="true" />

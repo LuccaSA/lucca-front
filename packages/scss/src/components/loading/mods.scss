@@ -26,7 +26,6 @@
 }
 
 @mixin popin {
-	@include block;
 	@include L;
 }
 
@@ -38,9 +37,9 @@
 }
 
 @mixin fullPage {
-	@include block;
 	@include L;
 
 	// legacy, approximate centering
+	--components-loading-margin: 0 auto;
 	--components-loading-transform: translateY(35vh);
 }

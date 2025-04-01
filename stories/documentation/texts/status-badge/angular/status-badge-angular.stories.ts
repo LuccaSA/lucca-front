@@ -16,10 +16,11 @@ export default {
 	],
 	argTypes: {
 		palette: {
-			options: ['', 'product', 'success', 'warning', 'error'],
+			options: ['', 'product', 'neutral', 'success', 'warning', 'error'],
 			control: {
 				type: 'select',
 			},
+			description: '[v19.2] Neutral',
 		},
 		size: {
 			options: ['', 'L'],

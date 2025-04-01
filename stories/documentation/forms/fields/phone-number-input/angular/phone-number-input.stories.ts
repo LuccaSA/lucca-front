@@ -1,10 +1,10 @@
+import { LOCALE_ID } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { PhoneNumberInputComponent } from '@lucca-front/ng/forms/phone-number-input';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { cleanupTemplate, generateInputs } from 'stories/helpers/stories';
-import { LOCALE_ID } from '@angular/core';
 
 export default {
 	title: 'Documentation/Forms/Fields/PhoneNumberField/Angular',
@@ -18,7 +18,7 @@ export default {
 	],
 } as Meta;
 
-export const Basic: StoryObj<PhoneNumberInputComponent & FormFieldComponent> = {
+export const Basic: StoryObj<PhoneNumberInputComponent & FormFieldComponent & { required: boolean }> = {
 	render: (args, { argTypes }) => {
 		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, errorInlineMessage, size, ...inputArgs } = args;
 
@@ -67,6 +67,9 @@ export const Basic: StoryObj<PhoneNumberInputComponent & FormFieldComponent> = {
 				type: 'select',
 			},
 		},
+		noAutoPlaceholder: {
+			description: '[v19.2]',
+		},
 	},
 	args: {
 		label: 'Phone',
@@ -77,5 +80,6 @@ export const Basic: StoryObj<PhoneNumberInputComponent & FormFieldComponent> = {
 		errorInlineMessage: 'Invalid Phone Number',
 		inlineMessageState: 'default',
 		disabled: false,
+		noAutoPlaceholder: false,
 	},
 };

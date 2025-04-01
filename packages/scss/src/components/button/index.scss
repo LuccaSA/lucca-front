@@ -16,6 +16,10 @@
 		@include XS;
 	}
 
+	&.mod-disclosure {
+		@include disclosure;
+	}
+
 	// .mod-outline is deprecated
 	&.mod-outlined,
 	&.mod-outline {
@@ -44,9 +48,7 @@
 		}
 	}
 
-	// .mod-icon is deprecated
-	&.mod-withIcon,
-	&.mod-icon {
+	&.mod-withIcon {
 		@include withIcon;
 
 		&.mod-S {
@@ -55,6 +57,14 @@
 
 		&.mod-XS {
 			@include withIconXS;
+		}
+
+		&.mod-iconOnLeft {
+			@include iconOnLeft;
+		}
+
+		&.mod-iconOnRight {
+			@include iconOnRight;
 		}
 	}
 

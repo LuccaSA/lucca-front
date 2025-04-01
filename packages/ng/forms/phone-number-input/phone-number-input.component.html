@@ -6,9 +6,11 @@
 			[options]="prefixesDisplay()"
 			[ngModel]="prefixEntry()"
 			(ngModelChange)="updatePrefix($event)"
+			[ngModelOptions]="{ standalone: true }"
 			[optionKey]="getPrefixKey"
 			[optionComparer]="prefixComparator"
 			(clueChange)="query.set($event)"
+			noClueIcon
 			#selectRef
 			class="phoneNumber-fieldset-select"
 			[autocomplete]="autocomplete ? autocomplete === 'off' ? 'off' : 'tel-country-code'  : null"
@@ -34,11 +36,13 @@
 				id="phoneNumberFieldsetTextfieldInput"
 				[ngModel]="displayedNumber()"
 				(ngModelChange)="updateNumber($event)"
+				[ngModelOptions]="{ standalone: true }"
 				(blur)="touched();formatNationalNumber()"
 				luInput
 				luInputStandalone
 				class="textField-input-value"
 				[attr.autocomplete]="autocomplete ? autocomplete === 'off' ? 'off' : 'tel-national'  : null"
+				[placeholder]="placeholder()"
 			/>
 		</div>
 	</div>

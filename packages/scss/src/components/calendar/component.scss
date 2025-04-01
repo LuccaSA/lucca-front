@@ -4,18 +4,18 @@
 @use '@lucca-front/scss/src/components/link/exports' as link;
 
 @mixin component($atRoot: 'without: rule') {
-	width: var(--components-calendarWidth);
+	inline-size: var(--components-calendarWidth);
 
 	@at-root ($atRoot) {
-		.calendarShortcutsOptionnal {
+		.calendarShortcutsOptional {
 			display: flex;
 		}
 
 		.calendarShortcuts {
 			@include reset.list;
 
-			width: 13.5rem;
-			border-right: 1px solid var(--palettes-neutral-100);
+			inline-size: 13.5rem;
+			border-inline-end: 1px solid var(--palettes-neutral-100);
 			padding: var(--pr-t-spacings-50);
 			overflow: auto;
 			position: relative;
@@ -27,16 +27,16 @@
 			}
 
 			&.mod-day {
-				max-height: 19.25rem;
+				max-block-size: 19.25rem;
 
 				&:has(+ .calendarWrapper .calendar-todayLink) {
-					max-height: 21.75rem;
+					max-block-size: 21.75rem;
 				}
 			}
 
 			&.mod-month,
 			&.mod-year {
-				max-height: 18rem;
+				max-block-size: 18rem;
 			}
 		}
 
@@ -48,19 +48,19 @@
 			justify-content: flex-start;
 			font-weight: 400;
 			white-space: wrap;
-			text-align: left;
+			text-align: start;
 		}
 
 		.calendar-table {
 			border-spacing: var(--components-calendarBorderSpacing);
 			border: var(--pr-t-spacings-150) solid transparent;
-			border-top: 0;
+			border-block-start: 0;
 			table-layout: fixed;
 			background-color: var(--components-calendarBackground);
 			scroll-snap-align: start end;
 			flex-shrink: 0;
 			flex-grow: 0;
-			width: 100%;
+			inline-size: 100%;
 			empty-cells: hide;
 		}
 
@@ -84,6 +84,7 @@
 			scroll-snap-type: x mandatory;
 			-ms-overflow-style: none;
 			scrollbar-width: none;
+
 			&::-webkit-scrollbar {
 				display: none;
 			}
@@ -94,7 +95,7 @@
 
 		.calendarWrapper-navigation {
 			position: absolute;
-			top: 0;
+			inset-block-start: 0;
 			background-color: var(--components-calendarWrapper-navigationBackground);
 			border-width: var(--pr-t-spacings-150);
 			border-style: solid;
@@ -121,13 +122,13 @@
 
 		.calendar-todayLink {
 			&.link {
-				@include link.decorationHover;
-
 				text-transform: capitalize;
 				display: block;
 				margin: auto;
 				padding: var(--pr-t-spacings-100);
 				line-height: var(--sizes-M-lineHeight);
+
+				@include link.decorationHover;
 
 				&:focus-visible {
 					@include a11y.focusVisible($offset: -4px, $borderRadius: 8px);
@@ -141,11 +142,12 @@
 
 		.calendar-name {
 			line-height: var(--sizes-L-lineHeight);
-			padding: var(--pr-t-spacings-50) calc(var(--pr-t-spacings-300) + var(--pr-t-spacings-100));
+			padding-block: var(--pr-t-spacings-50);
+			padding-inline: calc(var(--pr-t-spacings-300) + var(--pr-t-spacings-100));
 			font-size: var(--sizes-L-fontSize);
 			font-weight: 700;
 			border: var(--pr-t-spacings-150) solid transparent;
-			border-bottom: var(--pr-t-spacings-100) solid transparent;
+			border-block-end: var(--pr-t-spacings-100) solid transparent;
 			text-transform: lowercase;
 			background-color: var(--components-calendarBackground);
 			text-align: center;
@@ -156,7 +158,7 @@
 
 			border-radius: var(--commons-borderRadius-L);
 			text-align: inherit;
-			width: fit-content;
+			inline-size: fit-content;
 			display: inline-block;
 			padding: var(--pr-t-spacings-50);
 			margin-block: calc(var(--pr-t-spacings-50) * -1);
@@ -174,7 +176,7 @@
 			}
 
 			& + & {
-				margin-left: calc(var(--pr-t-spacings-100) * -1);
+				margin-inline-start: calc(var(--pr-t-spacings-100) * -1);
 			}
 		}
 
@@ -189,7 +191,7 @@
 			font-size: var(--sizes-S-fontSize);
 			color: var(--palettes-neutral-700);
 			text-transform: uppercase;
-			border-bottom: var(--pr-t-spacings-50) solid transparent;
+			border-block-end: var(--pr-t-spacings-50) solid transparent;
 		}
 
 		.calendar-table-body-row-cell {
@@ -217,7 +219,7 @@
 			color: var(--components-calendar-table-body-row-cell-actionColor);
 			background-color: var(--components-calendar-table-body-row-cell-actionHighlight);
 			display: var(--components-calendar-table-body-row-cell-actionDisplay);
-			height: var(--pr-t-spacings-400);
+			block-size: var(--pr-t-spacings-400);
 			text-transform: lowercase;
 			box-shadow:
 				0 0 0 1px var(--components-calendar-table-body-row-cell-actionHighlight),
@@ -257,10 +259,10 @@
 
 		.calendar-table-body-row-cell-action-stripes {
 			position: absolute;
-			top: 0;
-			left: 0;
-			width: 60px;
-			height: 60px;
+			inset-block-start: 0;
+			inset-inline-start: 0;
+			inline-size: 60px;
+			block-size: 60px;
 			z-index: -1;
 			display: var(--components-calendar-table-body-row-cell-action-stripesDisplay);
 		}

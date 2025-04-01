@@ -15,7 +15,12 @@
 				(click)="submit()"
 			>
 				{{ submitLabel$ | async }}
-				<lu-numeric-badge palette="product" *ngIf="hasSubmitCounter$ | async" [value]="submitCounter$ | async"></lu-numeric-badge>
+				<lu-numeric-badge
+					disableTooltip
+					palette="product"
+					*ngIf="hasSubmitCounter$ | async"
+					[value]="submitCounter$ | async"
+				></lu-numeric-badge>
 			</button>
 			<button luButton type="button" class="button mod-text" (click)="dismiss()">{{ cancelLabel$ | async }}</button>
 		</div>

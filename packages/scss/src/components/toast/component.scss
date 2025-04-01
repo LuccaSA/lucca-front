@@ -2,7 +2,7 @@
 @use '@lucca-front/scss/src/commons/utils/namespace';
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
-	max-width: var(--components-toasts-maxwidth);
+	max-inline-size: var(--components-toasts-maxwidth);
 	display: flex;
 	flex-direction: column;
 	align-items: flex-end;
@@ -23,7 +23,7 @@
 			gap: var(--pr-t-spacings-50);
 			color: var(--components-toasts-color);
 			padding: var(--pr-t-spacings-50);
-			margin-bottom: var(--components-toasts-margin-bottom);
+			margin-block-end: var(--components-toasts-margin-bottom);
 			background-color: var(--palettes-neutral-800);
 			animation-name: toastsItem;
 			animation-duration: var(--commons-animations-durations-standard);
@@ -55,7 +55,8 @@
 		.toast-item-icon {
 			background: var(--palettes-700, var(--palettes-product-700));
 			border-radius: var(--commons-borderRadius-L);
-			padding: var(--pr-t-spacings-100) var(--pr-t-spacings-50);
+			padding-block: var(--pr-t-spacings-100);
+			padding-inline: var(--pr-t-spacings-50);
 		}
 
 		.toast-item-content {
@@ -63,7 +64,12 @@
 			flex-grow: 1;
 			flex-direction: column;
 			gap: var(--pr-t-spacings-50);
-			padding: var(--pr-t-spacings-100) 0 var(--pr-t-spacings-100) var(--pr-t-spacings-100);
+			padding-block: var(--pr-t-spacings-100);
+			padding-inline: var(--pr-t-spacings-100) 0;
+		}
+
+		.toast-item-content-description {
+			margin: 0;
 		}
 
 		.toasts-item-kill {
@@ -71,16 +77,16 @@
 			// but the class should be present, and this code is temporary
 			&.button,
 			&:not(.button) {
+				align-self: flex-start;
+				border-radius: var(--commons-borderRadius-L);
+				animation-name: timer;
+
 				@include button.onlyIcon;
 				@include button.text;
 				@include button.inverted;
 
 				@keyframes timer {
 				}
-
-				align-self: flex-start;
-				border-radius: var(--commons-borderRadius-L);
-				animation-name: timer;
 			}
 		}
 	}

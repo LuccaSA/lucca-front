@@ -1,27 +1,36 @@
 import { Component } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
-import { Meta, StoryFn, applicationConfig } from '@storybook/angular';
+import { applicationConfig, Meta, StoryFn } from '@storybook/angular';
 
 @Component({
 	selector: 'tooltip-stories',
 	standalone: true,
 	imports: [LuTooltipModule],
-	template: `<div class="test width200" luTooltip luTooltipWhenEllipsis>Lorem ipsum dolor sit amet consectetur adipisicing elit.</div>
+	template: ` <h1>With ellipsis (should be green)</h1>
+		<div class="test ellipsis width400 fontSize2" luTooltip luTooltipWhenEllipsis>Lorem ipsum dolor sit amet consectetur adipisicing elit.</div>
+		<div class="test ellipsis width400 paddingRight" luTooltip luTooltipWhenEllipsis>Lorem ipsum dolor sit amet consectetur adipisicing elit.</div>
+		<div class="test ellipsis width400 paddingLeft" luTooltip luTooltipWhenEllipsis>Lorem ipsum dolor sit amet consectetur adipisicing elit.</div>
+		<div class="test ellipsis width400 paddingRight paddingLeft" luTooltip luTooltipWhenEllipsis>Lorem ipsum dolor sit amet consectetur adipisicing elit.</div>
+		<div class="test ellipsis width400 borderRight" luTooltip luTooltipWhenEllipsis>Lorem ipsum dolor sit amet consectetur adipisicing elit.</div>
+		<div class="test ellipsis width400 borderLeft" luTooltip luTooltipWhenEllipsis>Lorem ipsum dolor sit amet consectetur adipisicing elit.</div>
+		<div class="test ellipsis width400 borderLeft borderRight" luTooltip luTooltipWhenEllipsis>Lorem ipsum dolor sit amet consectetur adipisicing elit.</div>
+
+		<h1 class="pr-u-marginTop300">Without ellipsis (should be black)</h1>
+		<div class="test width200" luTooltip luTooltipWhenEllipsis>Lorem ipsum dolor sit amet consectetur adipisicing elit.</div>
 		<div class="test ellipsis resize" luTooltip luTooltipWhenEllipsis>Lorem ipsum dolor sit amet consectetur adipisicing elit.</div>
 		<div class="test ellipsis width400" luTooltip luTooltipWhenEllipsis>Lorem ipsum dolor sit amet consectetur adipisicing elit.</div>
 		<div class="test ellipsis width400 fontWeight" luTooltip luTooltipWhenEllipsis>Lorem ipsum dolor sit amet consectetur adipisicing elit.</div>
 		<div class="test ellipsis width400 fontWeight" luTooltip luTooltipWhenEllipsis>Lorem ipsum dolor sit amet consectetur adipisicing.</div>
-		<div class="test ellipsis width400 fontSize2" luTooltip luTooltipWhenEllipsis>Lorem ipsum dolor sit amet consectetur adipisicing elit.</div>
 		<div class="test ellipsis width400 fontSize2" luTooltip luTooltipWhenEllipsis>Lorem ipsum dolor sit amet.</div>
-		<div class="test ellipsis width400 paddingRight" luTooltip luTooltipWhenEllipsis>Lorem ipsum dolor sit amet consectetur adipisicing elit.</div>
-		<div class="test ellipsis width400 paddingLeft" luTooltip luTooltipWhenEllipsis>Lorem ipsum dolor sit amet consectetur adipisicing elit.</div>
-		<div class="test ellipsis width400 paddingRight paddingLeft" luTooltip luTooltipWhenEllipsis>Lorem ipsum dolor sit amet consectetur adipisicing elit.</div>
-		<div class="test ellipsis width400 paddingRight paddingLeft" luTooltip luTooltipWhenEllipsis>Lorem ipsum dolor sit amet consectetur.</div>
-		<div class="test ellipsis width400 borderRight" luTooltip luTooltipWhenEllipsis>Lorem ipsum dolor sit amet consectetur adipisicing elit.</div>
-		<div class="test ellipsis width400 borderLeft" luTooltip luTooltipWhenEllipsis>Lorem ipsum dolor sit amet consectetur adipisicing elit.</div>
-		<div class="test ellipsis width400 borderLeft borderRight" luTooltip luTooltipWhenEllipsis>Lorem ipsum dolor sit amet consectetur adipisicing elit.</div>
-		<div class="test ellipsis width400 borderLeft borderRight" luTooltip luTooltipWhenEllipsis>Lorem ipsum dolor sit amet consectetur.</div>`,
+		<div class="test ellipsis width400 paddingInlineEnd" luTooltip luTooltipWhenEllipsis>Lorem ipsum dolor sit amet consectetur adipisicing elit.</div>
+		<div class="test ellipsis width400 paddingInlineStart" luTooltip luTooltipWhenEllipsis>Lorem ipsum dolor sit amet consectetur adipisicing elit.</div>
+		<div class="test ellipsis width400 paddingInlineEnd paddingInlineStart" luTooltip luTooltipWhenEllipsis>Lorem ipsum dolor sit amet consectetur adipisicing elit.</div>
+		<div class="test ellipsis width400 paddingInlineEnd paddingInlineStart" luTooltip luTooltipWhenEllipsis>Lorem ipsum dolor sit amet consectetur.</div>
+		<div class="test ellipsis width400 borderInlineEnd" luTooltip luTooltipWhenEllipsis>Lorem ipsum dolor sit amet consectetur adipisicing elit.</div>
+		<div class="test ellipsis width400 borderInlineStart" luTooltip luTooltipWhenEllipsis>Lorem ipsum dolor sit amet consectetur adipisicing elit.</div>
+		<div class="test ellipsis width400 borderInlineStart borderInlineEnd" luTooltip luTooltipWhenEllipsis>Lorem ipsum dolor sit amet consectetur adipisicing elit.</div>
+		<div class="test ellipsis width400 borderInlineStart borderInlineEnd" luTooltip luTooltipWhenEllipsis>Lorem ipsum dolor sit amet consectetur.</div>`,
 	styles: [
 		`
 			.ellipsis {
@@ -32,7 +41,7 @@ import { Meta, StoryFn, applicationConfig } from '@storybook/angular';
 			}
 
 			.test {
-				padding-bottom: 1rem;
+				padding-block-end: 1rem;
 				border: 1px solid;
 			}
 
@@ -45,31 +54,31 @@ import { Meta, StoryFn, applicationConfig } from '@storybook/angular';
 			}
 
 			.width200 {
-				width: 200px;
+				inline-size: 200px;
 			}
 
 			.width400 {
-				width: 400px;
+				inline-size: 400px;
 			}
 
-			.paddingRight {
-				padding-right: 50px;
+			.paddingInlineEnd {
+				padding-inline-end: 50px;
 			}
 
-			.paddingLeft {
-				padding-left: 50px;
+			.paddingInlineStart {
+				padding-inline-start: 50px;
 			}
 
-			.borderRight {
-				border-right-width: 50px;
+			.borderInlineEnd {
+				border-inline-end-width: 50px;
 			}
 
-			.borderLeft {
-				border-left-width: 50px;
+			.borderInlineStart {
+				border-inline-start-width: 50px;
 			}
 
 			.resize {
-				resize: horizontal;
+				resize: inline;
 			}
 
 			:host {

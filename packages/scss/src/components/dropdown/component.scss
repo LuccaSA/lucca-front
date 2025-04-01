@@ -1,0 +1,81 @@
+@use '@lucca-front/icons/src/icon/exports' as icon;
+@use '@lucca-front/scss/src/commons/utils/namespace';
+@use '@lucca-front/scss/src/commons/utils/a11y';
+@use '@lucca-front/scss/src/components/divider/exports' as divider;
+
+@mixin component($atRoot: namespace.$defaultAtRoot) {
+	margin: calc(var(--pr-t-spacings-100) * -1);
+	padding: 0 !important;
+	border-radius: var(--commons-borderRadius-M);
+	max-inline-size: 90vw;
+	max-block-size: var(--components-dropdown-max-height);
+	overflow-x: hidden;
+	overflow-y: auto;
+
+	@at-root ($atRoot) {
+		// .lu-dropdown-options is deprecated
+		.dropdown-list,
+		.lu-dropdown-options {
+			list-style-type: none;
+			padding-block: var(--pr-t-spacings-50);
+			padding-inline: 0;
+			margin: 0;
+			min-inline-size: var(--components-dropdown-min-width);
+			max-inline-size: var(--components-dropdown-max-width);
+		}
+
+		// .lu-dropdown-options-item is deprecated
+		.dropdown-list-option,
+		.lu-dropdown-options-item {
+			padding-block: 0;
+			padding-inline: var(--pr-t-spacings-50);
+
+			&.mod-divider {
+				padding: 0;
+			}
+		}
+
+		// .lu-dropdown-options-item-action is deprecated
+		.dropdown-list-option-action,
+		.lu-dropdown-options-item-action {
+			align-items: flex-start;
+			border: 0;
+			border-radius: var(--commons-borderRadius-M);
+			color: var(--components-dropdown-optionColor);
+			background-color: var(--components-dropdown-option-actionBackground);
+			display: flex;
+			gap: var(--pr-t-spacings-100);
+			line-height: var(--sizes-M-lineHeight);
+			padding: var(--pr-t-spacings-50) var(--pr-t-spacings-100);
+			text-align: left;
+			transition: background-color var(--commons-animations-durations-fast);
+			text-decoration: none;
+			inline-size: 100%;
+			pointer-events: var(--components-dropdown-option-actionEvents);
+			cursor: pointer;
+
+			.lucca-icon {
+				@include icon.S;
+				margin-block-start: var(--pr-t-spacings-25);
+			}
+
+			&,
+			&:hover {
+				color: var(--components-dropdown-option-actionColor);
+			}
+
+			&:hover,
+			&:focus-visible {
+				--components-dropdown-option-actionBackground: var(--palettes-neutral-25);
+			}
+
+			&:active {
+				--components-dropdown-option-actionBackground: var(--palettes-neutral-50);
+			}
+
+			&:focus-visible {
+				@include a11y.focusVisible();
+			}
+		}
+	}
+}

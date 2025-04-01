@@ -131,7 +131,7 @@
 	&::before {
 		@include icon.generate('arrow_chevron_bottom');
 
-		height: 0;
+		block-size: 0;
 		vertical-align: text-top;
 	}
 }
@@ -184,5 +184,27 @@
 	&:active {
 		--components-button-color: var(--palettes-error-700);
 		--components-button-backgroundColor: var(--palettes-error-200);
+	}
+}
+
+@mixin iconOnRight {
+	padding-inline-end: var(--pr-t-spacings-150);
+}
+
+@mixin iconOnLeft {
+	padding-inline-start: var(--pr-t-spacings-150);
+}
+
+@mixin disclosure {
+	@include iconOnRight;
+
+	.icon-arrowChevronBottom {
+		transition-property: transform;
+		transition-duration: var(--commons-animations-durations-fast);
+		transform: var(--components-button-arrow-transform);
+	}
+
+	&[aria-expanded='true'] {
+		--components-button-arrow-transform: rotate(-180deg);
 	}
 }

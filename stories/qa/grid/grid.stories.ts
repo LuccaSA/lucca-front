@@ -8,13 +8,14 @@ import { Meta, StoryFn } from '@storybook/angular';
 	styles: [
 		`
 			.gridDemo {
-				background-color: #eee;
+				background-color: var(--pr-t-elevation-surface-sunken);
 				border-radius: 3px;
-				min-height: 2.7rem;
-				padding: 0.6rem var(--pr-t-spacings-200);
+				min-block-size: 2.7rem;
+				padding-block: 0.6rem;
+				padding-inline: var(--pr-t-spacings-200);
 			}
 			.grid + .grid {
-				margin-top: var(--pr-t-spacings-200);
+				margin-block-start: var(--pr-t-spacings-200);
 			}
 		`,
 	],

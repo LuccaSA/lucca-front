@@ -26,8 +26,8 @@ export default {
 			},
 		},
 		hiddenLabel: {
-			description: 'Masque le label en le conservant dans le DOM pour les lecteurs d\'écrans',
-    },
+			description: "Masque le label en le conservant dans le DOM pour les lecteurs d'écrans",
+		},
 		forceMeridiemDisplay: {
 			options: [null, false, true],
 			control: {
@@ -38,29 +38,19 @@ export default {
 	},
 } as Meta;
 
-export const Basic: StoryObj<TimePickerComponent & FormFieldComponent> = {
+export const Basic: StoryObj<TimePickerComponent & FormFieldComponent & { required: boolean }> = {
 	render: (args, { argTypes }) => {
 		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, forceMeridiemDisplay, ...inputArgs } = args;
 		return {
-			template: cleanupTemplate(`<lu-form-field [label]="labelID" [rolePresentationLabel]="true" ${generateInputs(
-				{
-					hiddenLabel,
-					tooltip,
-					inlineMessage,
-					inlineMessageState,
-					size,
-				},
-				argTypes,
-			)}>
-<lu-time-picker label="${label}" ${generateInputs(inputArgs, argTypes)} ${forceMeridiemDisplay !== null ? `[forceMeridiemDisplay]="${forceMeridiemDisplay}"` : ''}
-	[(ngModel)]="example">
-	</lu-time-picker>
+			template: cleanupTemplate(`
+<lu-form-field [label]="labelID" [rolePresentationLabel]="true" ${generateInputs({ hiddenLabel, tooltip, inlineMessage, inlineMessageState, size }, argTypes)}>
+<lu-time-picker label="${label}" ${generateInputs(inputArgs, argTypes)} ${forceMeridiemDisplay !== null ? `[forceMeridiemDisplay]="${forceMeridiemDisplay}"` : ''} [(ngModel)]="example" />
 	<ng-template #labelID>
 			<span aria-hidden="true">${label}</span>
 		</ng-template>
 </lu-form-field>
-
-{{example}}`),
+{{example}}
+`),
 		};
 	},
 	args: {

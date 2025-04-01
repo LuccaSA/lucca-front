@@ -1,0 +1,7 @@
+@mixin collapsed {
+	--components-dataTable-row-display: none;
+}
+
+@mixin expanded {
+	--components-dataTable-expand-rotation: 0deg;
+}

@@ -35,10 +35,10 @@ function getTemplate(args: NotchBoxNotchPositioningStory): string {
 		<div class="notchBox-wrapper">
 			<div class="notchBox-wrapper-content">
 				<strong>Notch can be positionned by using a finite, fixed unit (px, em, rem...) instead of the default % positionning</strong><br/>
-				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas vehicula lacinia nisl in maximus. 
-				Maecenas nec enim non nulla faucibus posuere.Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-				Maecenas vehicula lacinia nisl in maximus. Maecenas nec enim non nulla faucibus posuere.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas vehicula lacinia nisl in maximus. 
-				Maecenas nec enim non nulla faucibus posuere.Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas vehicula lacinia nisl in maximus.
+				Maecenas nec enim non nulla faucibus posuere.Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+				Maecenas vehicula lacinia nisl in maximus. Maecenas nec enim non nulla faucibus posuere.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas vehicula lacinia nisl in maximus.
+				Maecenas nec enim non nulla faucibus posuere.Lorem ipsum dolor sit amet, consectetur adipiscing elit.
 				Maecenas vehicula lacinia nisl in maximus. Maecenas nec enim non nulla faucibus posuere.
 				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas vehicula lacinia nisl in maximus.
 				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas vehicula lacinia nisl in maximus.

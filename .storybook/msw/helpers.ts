@@ -16,13 +16,13 @@ export function genericHandler<T, TRawParams extends Record<string, (param: stri
 		await delay(300);
 		const url = new URL(request.url);
 		let entities = baseResponse;
-		let allParams: Record<string, unknown> = {};
+		const allParams: Record<string, unknown> = {};
 
 		for (const [paramKey, parserFn] of Object.entries(parserByQueryParam)) {
 			if (!url.searchParams.has(paramKey)) {
 				continue;
 			}
-			allParams[paramKey] = parserFn(url.searchParams.get(paramKey)!);
+			allParams[paramKey] = parserFn(url.searchParams.get(paramKey));
 		}
 
 		for (const paramName of Object.keys(allParams)) {
@@ -81,6 +81,7 @@ export function applyV3Fields<T>(count: number): (items: T[], params: { fields?:
 
 		return {
 			data: {
+				// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 				items: regularFields.length ? items.map((item) => regularFields.reduce((acc, field) => ({ ...acc, [field]: item[field] }), {} as T)) : needCount ? [] : items,
 				...(needCount ? { count } : {}),
 			},

@@ -1,0 +1,44 @@
+@use '@lucca-front/scss/src/components/numericBadge/exports' as numericBadge;
+
+@mixin active {
+	--components-horizontalNavigation-listItemActionColor: var(--palettes-700, var(--palettes-product-700));
+
+	// .label is deprecated
+	.label {
+		background-color: var(--palettes-100, var(--palettes-product-100));
+		color: var(--palettes-700, var(--palettes-product-700));
+	}
+
+	&::after {
+		--components-horizontalNavigation-listItemActionTransform: scale(1);
+	}
+
+	&:focus-visible {
+		&::after {
+			--components-horizontalNavigation-listItemActionTransform: scale(0.75, 1);
+		}
+	}
+
+	.numericBadge {
+		@include numericBadge.inherit;
+	}
+}
+
+@mixin disabled {
+	// .label is deprecated
+	&,
+	.label {
+		color: var(--palettes-neutral-500); // disabled token candidate
+		pointer-events: none;
+	}
+
+	.numericBadge {
+		@include numericBadge.disabled;
+	}
+}
+
+@mixin activeVertical {
+	&::after {
+		--components-horizontalNavigation-listItemActionTransform: scale(1);
+	}
+}

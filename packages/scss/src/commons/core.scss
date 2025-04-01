@@ -1,15 +1,15 @@
+@use 'sass:meta';
 @use 'sass:string';
-@use 'sass:map';
-@use 'sass:math';
-@use 'sass:list';
 
 @use '@lucca-front/scss/src/commons/config';
 @use '@lucca-front/icons/src/commons/core' as transform;
 
 $contents: '100\\%', 'fit-content';
 $boxModel: 'margin', 'padding', 'border';
-$boxDirection: '', 'top', 'bottom', 'left', 'right', 'inline', 'block';
-$corners: '', 'top-left-', 'top-right-', 'bottom-left-', 'bottom-right-';
+$boxDirection:
+	'', 'top', 'bottom', 'left', 'right', 'inline', 'block', 'block-start', 'block-end', 'inline-start', 'inline-end'; // top, bottom, left and right are deprecated
+$corners:
+	'', 'top-left-', 'top-right-', 'bottom-left-', 'bottom-right-', 'start-start-', 'start-end-', 'end-start-', 'end-end-'; // top-left, top-right, bottom-left and bottom-right are deprecated
 $gaps: 'column-gap', 'row-gap', 'gap';
 $displays: 'block', 'flex', 'grid', 'inline', 'inline-flex', 'inline-block', 'inline-grid', 'contents', 'none';
 $direction: 'column', 'column-reverse', 'row', 'row-reverse';
@@ -19,14 +19,14 @@ $align: 'flex-start', 'flex-end', 'baseline', 'stretch', 'center';
 $flex: '0', '1';
 $basis: '0', 'auto';
 $order: '-1', '1';
-$textAlign: 'left', 'center', 'right';
+$textAlign: 'left', 'center', 'right', 'start', 'end'; // left and right are deprecated
 $visibility: 'visible', 'hidden', 'collapse';
 $fontWeight: '400', '600', '700', '900', 'normal', 'bold';
 $fontStyle: 'normal', 'italic';
 $pointerEvents: 'none', 'auto';
 $scrollBehavior: 'auto', 'smooth';
 $whiteSpace: 'normal', 'nowrap', 'pre-line';
-$float: 'left', 'right';
+$float: 'left', 'right', 'inline-start', 'inline-end'; // left and right are deprecated
 $verticalAlign: 'baseline', 'sub', 'super', 'text-top', 'text-bottom', 'middle', 'top', 'bottom';
 $position: 'absolute', 'relative', 'static', 'fixed', 'sticky';
 $decoration: 'underline', 'line-through', 'none';
@@ -34,40 +34,30 @@ $overflow: 'hidden', 'auto', 'visible', 'scroll';
 
 /* Tokens */
 
-@mixin spacing($boxModel, $boxDirection, $key, $value, $suffix: '!important', $token: true) {
-	@if $token {
-		.pr-u-#{transform.camelize($boxModel)}#{transform.capitalize($boxDirection)}#{transform.capitalize($key)} {
-			#{$boxModel}#{if($boxDirection == '', '', '-')}#{$boxDirection}: var(--pr-t-spacings-#{$key}) #{$suffix};
-		}
-	} @else {
-		.u-#{transform.camelize($boxModel)}#{transform.capitalize($boxDirection)}#{transform.capitalize($key)} {
-			#{$boxModel}#{if($boxDirection == '', '', '-')}#{$boxDirection}: var(--spacings-#{$key}) #{$suffix};
-		}
+@mixin spacing($boxModel, $boxDirection, $key, $value, $suffix: '!important') {
+	.pr-u-#{transform.camelize($boxModel)}#{transform.capitalize(transform.camelize($boxDirection))}#{transform.capitalize($key)} {
+		#{$boxModel}#{if($boxDirection == '', '', '-')}#{$boxDirection}: var(--pr-t-spacings-#{$key}) #{$suffix};
 	}
 }
 
-@mixin spacings($token: true) {
-	$spacings: config.$spacingsDeprecated;
-	@if $token {
-		$spacings: config.$spacings;
-	}
+@mixin spacings {
 	@each $boxModel in $boxModel {
 		@each $boxDirection in $boxDirection {
-			@each $key, $value in $spacings {
+			@each $key, $value in config.$spacings {
 				@if $boxModel != 'border' or $value == 0 {
-					@include spacing($boxModel, $boxDirection, $key, $value, $token: $token);
+					@include spacing($boxModel, $boxDirection, $key, $value);
 				}
 			}
 
 			@if $boxModel == 'margin' {
-				@include spacing($boxModel, $boxDirection, $key: 'auto', $value: auto, $token: $token);
+				@include spacing($boxModel, $boxDirection, $key: 'auto', $value: auto);
 			}
 		}
 	}
 
 	@each $gap in $gaps {
-		@each $key, $value in $spacings {
-			@include spacing($gap, $boxDirection: '', $key: $key, $value: $value, $token: $token);
+		@each $key, $value in config.$spacings {
+			@include spacing($gap, $boxDirection: '', $key: $key, $value: $value);
 		}
 	}
 }
@@ -115,16 +105,16 @@ $overflow: 'hidden', 'auto', 'visible', 'scroll';
 	@each $corner in $corners {
 		@each $key, $value in config.$borderRadius {
 			.u-border#{transform.capitalize(transform.camelize($corner))}Radius#{transform.capitalize($key)} {
-				border-#{$corner}radius: $value #{$suffix};
+				border-#{$corner}radius: var(--commons-borderRadius-#{$key}) #{$suffix};
 			}
 		}
 	}
 }
 
 @mixin rosetta($before, $after, $iterations) {
-	@if type-of($iterations) == map {
+	@if meta.type-of($iterations) == map {
 		@each $iterationBefore, $iterationAfter in $iterations {
-			@if type-of($iterationAfter) == string {
+			@if meta.type-of($iterationAfter) == string {
 				#{$before}-#{$iterationBefore}: var(#{$after}-#{$iterationAfter});
 			} @else {
 				#{$before}-#{$iterationBefore}: #{$iterationAfter};
@@ -137,6 +127,16 @@ $overflow: 'hidden', 'auto', 'visible', 'scroll';
 	}
 }
 
-@function pxToRem($value) {
-	@return math.div($value, 16px) * 1rem;
+@mixin fontFace($family, $weights, $path: '//cdn.lucca.fr/transverse/fonts', $style: normal) {
+	@each $keyword, $number in $weights {
+		@font-face {
+			font-family: '#{$family}';
+			src:
+				url('#{$path}/#{$family}/#{$keyword}.woff2') format('woff2'),
+				url('#{$path}/#{$family}/#{$keyword}.woff') format('woff');
+			font-weight: #{$number};
+			font-style: #{$style};
+			font-display: swap;
+		}
+	}
 }

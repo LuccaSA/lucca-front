@@ -1,7 +1,7 @@
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { FormFieldComponent, InputDirective } from '@lucca-front/ng/form-field';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormFieldComponent, InputDirective } from '@lucca-front/ng/form-field';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { generateInputs } from '../../../helpers/stories';
 
 export default {
@@ -12,6 +12,14 @@ export default {
 			imports: [FormFieldComponent, InputDirective, BrowserAnimationsModule, FormsModule],
 		}),
 	],
+	argTypes: {
+		width: {
+			options: [null, 20, 30, 40, 50, 60],
+			control: {
+				type: 'select',
+			},
+		},
+	},
 	render: (args, { argTypes }) => {
 		const { required, ...fieldArgs } = args;
 		return {
@@ -33,17 +41,18 @@ export default {
 	},
 } as Meta;
 
-export const Template: StoryObj<FormFieldComponent> = {
+export const Template: StoryObj<FormFieldComponent & { required: boolean }> = {
 	args: {
 		label: 'Label',
 		required: true,
 		hiddenLabel: false,
-		inlineMessage: 'Helper Text',
+		inlineMessage: 'Helper text',
 		errorInlineMessage: 'Error helper text',
 		inlineMessageState: 'default',
 		tooltip: 'You expected me to be helpful but this is a story!',
 		invalid: false,
 		counter: null,
 		rolePresentationLabel: false,
+		width: null,
 	},
 };

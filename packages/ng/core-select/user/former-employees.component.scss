@@ -2,8 +2,10 @@
 	display: block;
 	background-color: var(--palettes-neutral-0);
 	border-block-end: 1px solid var(--commons-border-200);
-	padding: 0 var(--pr-t-spacings-50) var(--components-options-item-padding-vertical);
-	margin: 0 calc(-1 * var(--pr-t-spacings-50)) var(--components-options-item-padding-vertical);
+	padding-block: 0 var(--components-options-item-padding-vertical);
+	padding-inline: var(--pr-t-spacings-50);
+	margin-block: 0 var(--components-options-item-padding-vertical);
+	margin-inline: calc(-1 * var(--pr-t-spacings-50));
 }
 
 .formerEmployeeDisplayer {
@@ -24,12 +26,14 @@
 
 	::ng-deep {
 		.formLabel {
-			width: 100%;
-			padding: var(--components-options-item-padding-vertical) 0;
+			inline-size: 100%;
+			padding-block: var(--components-options-item-padding-vertical);
+			padding-inline: 0;
 		}
 	}
 }
 
 .formerEmployeeDisplayer-checkbox {
-	margin: var(--components-options-item-padding-vertical) 0 0 var(--components-options-item-padding-horizontal);
+	margin-block: var(--components-options-item-padding-vertical) 0;
+	margin-inline: var(--components-options-item-padding-horizontal) 0;
 }

@@ -54,11 +54,11 @@ export default {
 		<lu-dialog-content>Template-driven content</lu-dialog-content>
 
 		<lu-dialog-footer>
+
 			<div class="footer-content">Optional footer text</div>
-			<div class="footer-actions">
-				<button type="button" luButton luDialogClose>Confirm</button>
-				<button type="button" luButton="text" luDialogDismiss>Cancel</button>
-			</div>
+
+			<button type="button" luButton luDialogClose>Confirm</button>
+			<button type="button" luButton="text" luDialogDismiss>Cancel</button>
 		</lu-dialog-footer>
 	</lu-dialog>
 </ng-template>`,
@@ -77,6 +77,15 @@ export default {
 			control: {
 				type: 'select',
 			},
+		},
+		size: {
+			options: ['fitContent', 'XS', 'S', '', 'L', 'XL', 'maxContent', 'fullScreen'],
+			control: {
+				type: 'select',
+			},
+		},
+		panelClasses: {
+			description: '[v18.3] mod-neutralBackground',
 		},
 	},
 } as Meta;

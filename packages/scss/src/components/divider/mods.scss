@@ -1,4 +1,35 @@
+@use '@lucca-front/scss/src/components/button/exports' as button;
+@use '@lucca-front/icons/src/icon/exports' as icon;
+
 @mixin S {
 	--components-divider-fontSize: var(--sizes-S-fontSize);
 	--components-divider-lineHeight: var(--sizes-S-lineHeight);
+
+	.button {
+		@include button.S;
+	}
+
+	.lucca-icon {
+		@include icon.S;
+	}
+}
+
+@mixin vertical {
+	--components-divider-alignSelf: stretch;
+
+	&:where(:empty) {
+		border-inline-start: var(--commons-divider-border);
+	}
+
+	&:not(:empty) {
+		--components-divider-direction: column;
+		--components-divider-iconBottom: var(--pr-t-spacings-25);
+		--components-divider-justify: center;
+
+		&::before,
+		&::after {
+			border-inline-start: var(--commons-divider-border);
+			min-block-size: var(--components-divider-minSize);
+		}
+	}
 }

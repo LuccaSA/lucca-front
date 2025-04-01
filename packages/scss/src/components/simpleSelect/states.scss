@@ -1,64 +1,75 @@
 @use '@lucca-front/scss/src/commons/utils/a11y';
 
-@mixin focused {
-	@include a11y.focusVisible($offset: 3px);
+@mixin searchable {
+	.simpleSelect-field-icon {
+		display: none;
 
-	.simpleSelect-value {
+		&.mod-search {
+			display: inline-flex;
+			transform: none;
+		}
+	}
+}
+
+@mixin focused {
+	.simpleSelect-field {
+		@include a11y.focusVisible($offset: 3px);
+	}
+
+	.simpleSelect-field-value {
 		color: var(--components-simpleSelect-value-color);
 	}
 }
 
 @mixin focusedExpanded {
-	.simpleSelect-value {
+	.simpleSelect-field-value {
 		color: var(--components-simpleSelect-placeholder);
 	}
 
-	.simpleSelect-arrow {
+	.simpleSelect-field-icon {
 		transform: rotate(-180deg);
 	}
 }
 
 @mixin searchFilled {
-	.simpleSelect-value {
+	.simpleSelect-field-value {
 		display: none;
 	}
 }
 
 @mixin selected {
-	.simpleSelect-input {
+	.simpleSelect-field-input {
 		&::placeholder {
 			color: transparent;
 		}
-	}
-
-	.simpleSelect-value {
-		display: flex;
 	}
 }
 
 @mixin selectedSearchFilled {
-	.simpleSelect-input {
+	.simpleSelect-field-input {
 		&::placeholder {
 			color: transparent;
 		}
 	}
 
-	.simpleSelect-value {
+	.simpleSelect-field-value {
 		display: none;
 	}
 }
 
 @mixin invalid {
-	--components-simpleSelect-border-color: var(--palettes-error-400);
-	--components-simpleSelect-background: var(--palettes-error-50);
-	--components-simpleSelect-placeholder: var(--palettes-error-400);
+	--components-simpleSelect-border-color: var(--pr-t-color-input-border-critical);
+	--components-simpleSelect-background: var(--pr-t-color-input-background-critical);
+	--components-simpleSelect-placeholder: var(--pr-t-color-input-text-placeholder-critical);
 }
 
 @mixin disabled {
-	--components-simpleSelect-border-color: var(--palettes-neutral-300); // disabled token candidate
-	--components-simpleSelect-background: var(--commons-disabled-background);
-	--components-simpleSelect-placeholder: var(--commons-disabled-placeholder);
-	--components-simpleSelect-value-color: var(--palettes-neutral-700); // disabled token candidate
-	--components-simpleSelect-arrow-color: var(--palettes-neutral-500); // disabled token candidate
-	pointer-events: none;
+	--components-simpleSelect-background: var(--pr-t-color-input-background-disabled);
+	--components-simpleSelect-placeholder: var(--commons-disabled-placeholder); // Deprecated: no placeholder with disabled state
+	--components-simpleSelect-value-color: var(--pr-t-color-input-text-disabled);
+	--components-simpleSelect-arrow-color: var(--pr-t-color-input-icon-disabled);
+
+	.simpleSelect-field {
+		pointer-events: none;
+	}
 }
