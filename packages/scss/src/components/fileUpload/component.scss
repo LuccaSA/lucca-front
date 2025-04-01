@@ -65,11 +65,13 @@
 			flex-direction: column;
 			align-items: var(--components-fileUpload-instruction-alignItems);
 			max-inline-size: var(--components-fileUpload-instruction-maxWidth);
+			line-height: var(--sizes-S-lineHeight);
 		}
 
 		.fileUpload-instruction-action {
 			display: block;
 			margin-bottom: var(--fileUpload-instruction-action-marginBottom);
+			line-height: var(--sizes-M-lineHeight);
 
 			span {
 				color: var(--components-fileUpload-instruction-action-color);
@@ -81,7 +83,6 @@
 		.fileUpload-instruction-formats {
 			color: var(--palettes-neutral-600);
 			font-size: var(--sizes-S-fontSize);
-			line-height: var(--sizes-S-lineHeight);
 			vertical-align: top;
 		}
 
