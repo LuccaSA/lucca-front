@@ -1,6 +1,7 @@
 @use '@lucca-front/scss/src/commons/utils/namespace';
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
+	container: highlightSection / inline-size;
 	display: block;
 	position: relative;
 	padding-block: var(--components-highlightSection-padding-block);
@@ -27,6 +28,7 @@
 		}
 
 		.highlightSection-illustrations {
+			display: var(--components-highlightSection-illustrations-display);
 			position: absolute;
 			inset: 0;
 		}

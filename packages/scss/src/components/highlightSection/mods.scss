@@ -19,5 +19,17 @@
 }
 
 @mixin narrow {
-	--components-highlightSection-illustrations-display: none;
+	.highlightSection-content {
+		.highlightSection-u-inlinePaddingStart {
+			padding-inline-start: initial;
+		}
+
+		.highlightSection-u-inlinePaddingEnd {
+			padding-inline-end: initial;
+		}
+	}
+
+	.highlightSection-illustrations {
+		--components-highlightSection-illustrations-display: none;
+	}
 }

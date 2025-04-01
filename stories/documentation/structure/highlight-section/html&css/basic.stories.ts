@@ -12,8 +12,10 @@ function getTemplate(args: SampleBasicStory): string {
 	<div class="highlightSection-content">
 		<div class="textFlow">
 			<h2>Title</h2>
-			<p>First paragraph. Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+			<p class="highlightSection-u-inlinePaddingEnd">First paragraph with an <code>inline-padding-end</code>. This should avoid overlaying the top-right image in case it does not contain a background.</p>
 			<p>Second paragraph shows a <a luLink>Link</a>.</p>
+			<p class="highlightSection-u-inlinePaddingStart">Third paragraph with an <code>inline-padding-start</code>.</p>
+			<p class="highlightSection-u-inlinePaddingStart highlightSection-u-inlinePaddingEnd">Fourth paragraph with <code>inline-padding-start</code> and <code>inline-padding-end</code>.</p>
 		</div>
 	</div>
 
@@ -23,6 +25,7 @@ function getTemplate(args: SampleBasicStory): string {
 			class="highlightSection-illustrations-back-top"
 			src="https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/lucca/bubbles-light-1.svg"
 		/>
+
 		<img
 			alt=""
 			class="highlightSection-illustrations-back-bottom"
