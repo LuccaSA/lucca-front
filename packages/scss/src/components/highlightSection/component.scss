@@ -1,12 +1,4 @@
 @use '@lucca-front/scss/src/commons/utils/namespace';
-@use '@lucca-front/scss/src/commons/utils/reset';
-@use '@lucca-front/scss/src/commons/utils/color';
-@use '@lucca-front/scss/src/components/title/exports' as title;
-
-// Bubbles are reused from highlight data.
-// The image rotates around the corner we want to keep, then translated to math previous dimension in that axis.
-
-// Content should not bleed on the illustrations.
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
 	display: block;
@@ -34,6 +26,9 @@
 			block-size: var(--components-highlightSection-illustrations-height);
 			inline-size: var(--components-highlightSection-illustrations-width);
 		}
+
+		// Bubbles are reused from highlight data.
+		// The image rotates around the corner we want to keep, then translated to match previous dimension in that axis.
 
 		.highlightSection-illustrations-back-top {
 			inset-block-start: 0;

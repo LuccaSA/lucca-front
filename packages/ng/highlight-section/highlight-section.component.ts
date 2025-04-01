@@ -5,7 +5,7 @@ import { LuClass } from '@lucca-front/ng/core';
 	selector: 'lu-highlight-section',
 	standalone: true,
 	templateUrl: './highlight-section.component.html',
-	styleUrls: ['./highlight-section.component.scss'],
+	styleUrl: './highlight-section.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	encapsulation: ViewEncapsulation.None,
 	providers: [LuClass],
