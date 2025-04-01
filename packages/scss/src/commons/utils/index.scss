@@ -274,6 +274,10 @@
 	font-family: var(--commons-font-family-cursive) !important;
 }
 
+.u-fontFamilyBrand {
+	font-family: var(--commons-font-family-brand) !important;
+}
+
 .pr-u-focusVisible {
 	&:focus-visible {
 		@include a11y.focusVisible;
