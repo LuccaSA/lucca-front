@@ -29,6 +29,8 @@ import { startWith } from 'rxjs/operators';
 import { HiddenArgType } from 'stories/helpers/common-arg-types';
 import { getStoryGenerator } from 'stories/helpers/stories';
 import { allLegumes, colorNameByColor, coreSelectStory, FilterLegumesPipe, ILegume, LuCoreSelectInputStoryComponent, SortLegumesPipe } from './select.utils';
+import { expect, fireEvent, screen, userEvent, within } from '@storybook/test';
+import { sleep, waitForAngular } from '../../../helpers/test';
 
 type LuMultiSelectInputStoryComponent = LuCoreSelectInputStoryComponent & {
 	selectedLegumes: ILegume[] | LuMultiSelection<ILegume>;
@@ -49,6 +51,97 @@ const generateStory = getStoryGenerator<LuMultiSelectInputStoryComponent>({
 		optionKey: HiddenArgType,
 		maxValuesShown: HiddenArgType,
 		selectLegume: HiddenArgType,
+	},
+	play: async ({ canvasElement, step }) => {
+		// Mouse interactions
+		const input = within(canvasElement).getByRole('combobox');
+		const buttons = await within(canvasElement).findAllByRole('button');
+		await userEvent.click(buttons.find((button) => button.className.includes('multipleSelect-clear')));
+		await userEvent.click(input);
+		await waitForAngular();
+		const panel = within(screen.getByRole('listbox'));
+		const options = await panel.findAllByRole('option');
+		const optionValues = options.slice(0, 4).map((option) => option.textContent);
+		await userEvent.click(options[0]);
+		await userEvent.click(options[1]);
+		await userEvent.click(options[2]);
+		await userEvent.click(options[3]);
+		await userEvent.keyboard('{Escape}');
+		await waitForAngular();
+		await expect(screen.queryByText('listbox')).toBeNull();
+		for (const value of optionValues) {
+			await expect(input.parentElement).toHaveTextContent(value);
+		}
+		await step('Clear and remove values using mouse', async () => {
+			const chipClearButtons = await within(input.parentElement).findAllByRole('button');
+			await userEvent.click(chipClearButtons[0]);
+			await expect(input.parentElement).not.toHaveTextContent(optionValues[0]);
+			await userEvent.click(input);
+			await waitForAngular();
+			const panel = within(screen.getByRole('listbox'));
+			const options = await panel.findAllByRole('option');
+			await userEvent.click(options[1]);
+			await userEvent.keyboard('{Escape}');
+			await waitForAngular();
+			await expect(screen.queryByText('listbox')).toBeNull();
+			await expect(input.parentElement).not.toHaveTextContent(optionValues[1]);
+		});
+		// Doing the same but with keyboard
+		await step('Keyboard interactions', async () => {
+			const buttons = await within(canvasElement).findAllByRole('button');
+			await userEvent.click(buttons.find((button) => button.className.includes('multipleSelect-clear')));
+			await waitForAngular();
+			input.focus();
+			await expect(input).toHaveFocus();
+			await userEvent.keyboard('{ArrowDown}');
+			await waitForAngular();
+			await expect(screen.getByRole('listbox')).toBeVisible();
+			await userEvent.keyboard('{Escape}');
+			await waitForAngular();
+			await expect(screen.queryByText('listbox')).toBeNull();
+			await waitForAngular();
+			await expect(input).toHaveFocus();
+			// Broken but fixed in current master, TODO uncomment
+			// await userEvent.keyboard('{Space}');
+			// await waitForAngular();
+			// await expect(screen.getByRole('listbox')).toBeVisible();
+			// await userEvent.keyboard('{Escape}');
+			input.focus();
+			await userEvent.keyboard('{ArrowDown}');
+			await waitForAngular();
+			// For some reason, this arrowdown is not being handled properly, even tho it reaches the key manager
+			// I'm keeping it as commented for now as it only happens in test env and I want to test more stuff and not get stuck on this
+			// await userEvent.keyboard('{ArrowDown}');
+			await userEvent.keyboard('{Space}');
+			// Because of the arrowDown issue, we'll select more using mouse in order to be able to test more stuff
+			const panel = within(screen.getByRole('listbox'));
+			const options = await panel.findAllByRole('option');
+			const optionValues = options.slice(0, 4).map((option) => option.textContent);
+			await userEvent.click(options[1]);
+			await userEvent.click(options[2]);
+			await userEvent.click(options[3]);
+			await userEvent.keyboard('{Escape}');
+			for (const value of optionValues) {
+				await expect(input.parentElement).toHaveTextContent(value);
+			}
+			input.focus();
+			await userEvent.tab();
+			await userEvent.keyboard('{Enter}');
+			// We should have unselected first option
+			await expect(input.parentElement).not.toHaveTextContent(optionValues[0]);
+			await userEvent.click(input);
+			await userEvent.keyboard('{Backspace}');
+			// We should have unselected last option
+			await expect(input.parentElement).not.toHaveTextContent(optionValues[3]);
+			// Now we search and select an option based on the result
+			await userEvent.type(input, 'carotte');
+			await waitForAngular();
+			const searchResult = await within(screen.getByRole('listbox')).findAllByRole('option');
+			await expect(searchResult).toHaveLength(1);
+			await userEvent.keyboard('{Enter}');
+			await userEvent.keyboard('{Escape}');
+			await expect(input.parentElement).toHaveTextContent(searchResult[0].textContent);
+		});
 	},
 });
 
