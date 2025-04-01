@@ -10,7 +10,7 @@
 	position: absolute;
 	transform: translateX(-50%);
 	inset-inline-start: 50%;
-	inset-block-end: var(--pr-t-spacings-150);
+	inset-block-end: var(--components-fileToolbar-insetBlockEnd);
 	box-shadow: var(--pr-t-elevation-shadow-overlay);
 	background-color: var(--pr-t-elevation-surface-raised);
 	z-index: 1;

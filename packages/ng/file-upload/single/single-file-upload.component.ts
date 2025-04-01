@@ -1,4 +1,4 @@
-import { Component, input, output, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, Component, input, output, ViewEncapsulation } from '@angular/core';
 import { IntlParamsPipe } from '@lucca-front/ng/core';
 import { InputDirective } from '@lucca-front/ng/form-field';
 import { LuSafeExternalSvgPipe } from '@lucca-front/ng/safe-content';
@@ -25,4 +25,6 @@ export class SingleFileUploadComponent extends BaseFileUploadComponent {
 	previewUrl = input<string | null>(null);
 
 	deleteFile = output<void>();
+
+	displayFileName = input(false, { transform: booleanAttribute });
 }

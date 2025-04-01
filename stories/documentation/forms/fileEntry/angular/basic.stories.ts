@@ -21,6 +21,9 @@ export default {
 		previewUrl: {
 			if: { arg: 'iconOverride', truthy: false },
 		},
+		displayFileName: {
+			if: { arg: 'media', truthy: true },
+		},
 	},
 	decorators: [
 		moduleMetadata({
@@ -47,6 +50,7 @@ export default {
 export const Basic = {
 	args: {
 		media: false,
+		displayFileName: false,
 		size: null,
 		fileSize: 28420,
 		fileType: 'image/png',

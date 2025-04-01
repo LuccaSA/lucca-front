@@ -6,12 +6,13 @@
 	--components-fileEntry-minHeight: auto;
 	--components-fileEntry-gridTemplateAreas: 'picture title toolbar' 'picture description toolbar';
 
-	--components-fileEntry-status-backgroundColor: var(--palettes-neutral-25);
+	--components-fileEntry-status-content-inside-backgroundColor: var(--palettes-neutral-25);
 
 	--components-fileEntry-status-borderRadius: var(--commons-borderRadius-L);
 	--components-fileEntry-status-content-img-opacity: 1;
-	--components-fileEntry-status-content-svg-width: 56px;
+	--components-fileEntry-status-content-svg-width: 48px;
 	--components-fileEntry-status-content-svg-height: var(--components-fileEntry-status-content-svg-width);
+	--components-fileEntry-status-content-svg-margin: 0;
 
 	--components-fileEntry-filename-alignSelf: end;
 
@@ -21,4 +22,6 @@
 	--components-fileEntry-description-display: flex;
 	--components-fileEntry-display: grid;
 	--components-fileEntry-status-content-padding: 0;
+
+	--components-fileEntry-status-content-inside-insetBlockEnd: 0;
 }

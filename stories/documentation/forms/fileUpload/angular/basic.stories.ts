@@ -138,7 +138,7 @@ export default {
 
 export const Multi = {
 	render: (args, { argTypes }) => {
-		const { media, size, ...mainArgs } = args;
+		const { media, size, displayFileName, ...mainArgs } = args;
 		const service = new MockFileUploadService();
 		const uploads = signal([] as FileUpload<LuccaFileUploadResult>[]);
 		const fileUploadFeature = {
@@ -173,6 +173,7 @@ export const Multi = {
 		};
 		const previewCache = new Map<File, string>();
 		const mediaParam = media ? `media` : ``;
+		const displayFileNameParam = displayFileName && media ? `displayFileName` : ``;
 		const sizeSFileUploadParam = size ? `size="S"` : ``;
 		const sizeSFileEntryParam = media ? `size="S"` : sizeSFileUploadParam;
 
@@ -203,7 +204,7 @@ export const Multi = {
 			</lu-form-field>
 			<div class="fileEntryDisplayWrapper">
 				@for(fileUpload of fileUploadFeature.fileUploads(); track $index) {
-					<lu-file-entry ${sizeSFileEntryParam} ${mediaParam} [entry]="fileUpload | fileUploadToLFEntry" [state]="fileUpload.state" [previewUrl]="getPreviewUrl(fileUpload)" [inlineMessageError]="fileUpload.error?.detail" (deleteFile)="deleteFile(fileUpload)" />
+					<lu-file-entry ${sizeSFileEntryParam} ${displayFileNameParam} ${mediaParam} [entry]="fileUpload | fileUploadToLFEntry" [state]="fileUpload.state" [previewUrl]="getPreviewUrl(fileUpload)" [inlineMessageError]="fileUpload.error?.detail" (deleteFile)="deleteFile(fileUpload)" />
 				}
 			</div>
 			</div>
@@ -213,6 +214,7 @@ export const Multi = {
 	args: {
 		size: null,
 		media: false,
+		displayFileName: false,
 		fileMaxSize: 5000000,
 		illustration: 'paper',
 	},
@@ -241,5 +243,6 @@ export const Single = {
 		],
 		fileMaxSize: 5000000,
 		illustration: 'paper',
+		displayFileName: false,
 	},
 };

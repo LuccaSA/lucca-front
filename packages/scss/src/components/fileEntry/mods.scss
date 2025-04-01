@@ -8,9 +8,9 @@
 	--components-fileEntry-filename-alignSelf: center;
 	--components-fileEntry-status-borderRadius: var(--commons-borderRadius-M);
 	--components-fileEntry-gapInline: var(--pr-t-spacings-75);
-	--components-fileEntry-status-content-svg-width: 40px;
+	--components-fileEntry-status-content-svg-margin: calc(var(--pr-t-spacings-100) * -1);
 
-	.fileEntry-status-content-icon {
+	.fileEntry-status-content-inside-icon {
 		@include icon.S;
 	}
 }
@@ -25,6 +25,10 @@
 	--components-fileEntry-display: block;
 	--components-fileEntry-gridColumn: 1 / -1;
 	--components-fileEntry-status-content-svg-width: 72px;
+
+	&:has(.fileEntry-status-content-fileName) {
+		--components-fileEntry-status-content-inside-insetBlockEnd: calc(var(--pr-t-spacings-400) + var(--pr-t-spacings-25));
+	}
 }
 
 @mixin mediaS {

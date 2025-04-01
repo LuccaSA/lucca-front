@@ -15,25 +15,31 @@
 	</dd>
 	} }
 	<dd class="fileEntry-status">
-		@if (state() === 'error' && inlineMessageError()) {
 		<div class="fileEntry-status-content" [luTooltip]="tooltip()">
-			@if (media()) {
-			<lu-inline-message class="fileEntry-status-content-inlineMessage" [label]="inlineMessageError()" [state]="'error'" />
+			@if (state() === 'error' && inlineMessageError()) { @if (media()) {
+			<div class="fileEntry-status-content-inside">
+				<lu-inline-message class="fileEntry-status-content-inlineMessage" [label]="inlineMessageError()" [state]="'error'" />
+			</div>
 			} @else {
-			<lu-icon class="fileEntry-status-content-icon" icon="signError" />
-			}
-		</div>
-		} @else {
-		<div class="fileEntry-status-content" [luTooltip]="tooltip()">
-			@if (previewUrl() && state() !== 'error') {
-			<img class="fileEntry-status-content-img" [src]="previewUrl()" alt="" loading="lazy" />
+			<div class="fileEntry-status-content-inside">
+				<lu-icon class="fileEntry-status-content-inside-icon" icon="signError" />
+			</div>
+			} } @else { @if (previewUrl() && state() !== 'error') {
+			<div class="fileEntry-status-content-inside">
+				<img class="fileEntry-status-content-inside-img" [src]="previewUrl()" alt="" loading="lazy" />
+			</div>
 			} @if (state() === 'loading') {
-			<div class="fileEntry-status-content-loading loading"></div>
+			<div class="fileEntry-status-content-inside">
+				<div class="fileEntry-status-content-inside-loading loading"></div>
+			</div>
 			} @if (!previewUrl() && state() !== 'loading') {
-			<img class="fileEntry-status-content-svg" [attr.src]="iconOverride() || fileEntryIconSrc()" alt="" width="32" height="32" />
+			<div class="fileEntry-status-content-inside">
+				<img class="fileEntry-status-content-inside-svg" [attr.src]="iconOverride() || fileEntryIconSrc()" alt="" width="32" height="32" />
+			</div>
+			} } @if (displayFileName() && media()) {
+			<div class="fileEntry-status-content-fileName" aria-hidden="true">{{ fileName() }}</div>
 			}
 		</div>
-		}
 	</dd>
 	@if (downloadURL() || deletable) {
 	<dd class="fileEntry-toolbar">

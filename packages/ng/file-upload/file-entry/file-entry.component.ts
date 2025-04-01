@@ -33,6 +33,8 @@ export class FileEntryComponent {
 
 	state = input<'success' | 'loading' | 'error' | null>(null);
 
+	displayFileName = input(false, { transform: booleanAttribute });
+
 	inlineMessageError = input<string | null>(null);
 
 	entry = input.required<FileEntry>();

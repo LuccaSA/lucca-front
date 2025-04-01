@@ -22,13 +22,13 @@
 		&.mod-S {
 			@include errorS;
 		}
-
-		&.mod-media {
-			@include errorMedia;
-		}
 	}
 
 	&.is-loading {
 		@include loading;
+
+		&.mod-S {
+			@include loadingS;
+		}
 	}
 }
