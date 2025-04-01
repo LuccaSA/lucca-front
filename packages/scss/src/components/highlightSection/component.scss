@@ -6,7 +6,7 @@
 	padding-block: var(--components-highlightSection-padding-block);
 	padding-inline: var(--components-highlightSection-padding-inline);
 	border-radius: var(--commons-borderRadius-L);
-	overflow: hidden;
+	contain: paint;
 	background-color: var(--components-highlightSection-background);
 
 	@at-root ($atRoot) {
