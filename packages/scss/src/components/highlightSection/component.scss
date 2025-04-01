@@ -18,11 +18,11 @@
 			// Content should not bleed on the illustrations, so we allow to add padding accordingly.
 
 			.highlightSection-u-inlinePaddingStart {
-				padding-inline-start: var(--components-highlightSection-illustrations-width);
+				padding-inline-start: var(--components-highlightSection-illustrations-height);
 			}
 
 			.highlightSection-u-inlinePaddingEnd {
-				padding-inline-end: var(--components-highlightSection-illustrations-width);
+				padding-inline-end: var(--components-highlightSection-illustrations-height);
 			}
 		}
 
