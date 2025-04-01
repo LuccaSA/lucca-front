@@ -65,23 +65,15 @@
 			flex-direction: column;
 			align-items: var(--components-fileUpload-instruction-alignItems);
 			max-inline-size: var(--components-fileUpload-instruction-maxWidth);
-			grid-template-columns: auto 1fr;
 		}
 
 		.fileUpload-instruction-action {
 			display: block;
 			margin-bottom: var(--fileUpload-instruction-action-marginBottom);
-			grid-column: span 2;
 
 			span {
 				color: var(--components-fileUpload-instruction-action-color);
 				font-weight: var(--components-fileUpload-instruction-action-fontWeight);
-			}
-		}
-
-		.fileUpload-instruction-size {
-			&::before {
-				content: var(--components-fileUpload-instruction-size-beforeContent);
 			}
 		}
 
@@ -90,6 +82,7 @@
 			color: var(--palettes-neutral-600);
 			font-size: var(--sizes-S-fontSize);
 			line-height: var(--sizes-S-lineHeight);
+			vertical-align: top;
 		}
 
 		.fileUpload-button.button {

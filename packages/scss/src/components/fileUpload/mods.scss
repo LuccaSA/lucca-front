@@ -4,7 +4,7 @@
 	--components-fileUpload-textAlign: left;
 	--components-fileUpload-flexDirection: row;
 	--components-fileUpload-instruction-alignItems: stretch;
-	--components-fileUpload-instruction-display: grid;
+	--components-fileUpload-instruction-display: block;
 	--components-fileUpload-instruction-maxWidth: none;
 	--components-fileUpload-instruction-action-fontWeight: 600;
 	--fileUpload-instruction-action-marginBottom: 0;
@@ -16,7 +16,6 @@
 	--components-fileUpload-justifyContent: flex-start;
 	--components-fileUpload-status-img-inset: 0;
 	--components-fileUpload-status-img-size: var(--pr-t-spacings-600);
-	--components-fileUpload-instruction-size-beforeContent: ' ';
 }
 
 @mixin dropzone {
