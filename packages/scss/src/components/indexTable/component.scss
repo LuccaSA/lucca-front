@@ -277,7 +277,15 @@
 	.statusBadge,
 	.tag,
 	.avatar {
-		display: flex;
-		width: fit-content;
+		vertical-align: top;
+	}
+
+	.statusBadge,
+	.tag {
+		margin-block-start: var(--pr-t-spacings-25);
+	}
+
+	.avatarWrapper {
+		display: inline-flex;
 	}
 }

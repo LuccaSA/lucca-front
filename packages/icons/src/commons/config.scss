@@ -10,8 +10,6 @@ $font-name: 'Lucca icons' !default;
 $isNamespaced: false !default;
 
 $icons: (
-	'sound_megaphone': '\ea08',
-	'emoji_smile': '\ea09',
 	'app': '\e959',
 	'apps': '\e959',
 	'nine_tiles': '\e959',
@@ -193,6 +191,7 @@ $icons: (
 	'device_video': '\e9e5',
 	'dots_drag': '\e9a4',
 	'drag': '\e9a4',
+	'emoji_smile': '\ea09',
 	'eye': '\e993',
 	'watch': '\e993',
 	'eye_strikethrough': '\e98e',
@@ -381,6 +380,7 @@ $icons: (
 	'office_pen': '\e928',
 	'edit': '\e928',
 	'edit_mini': '\e928',
+	'office_pen_star': '\ea0c',
 	'office_pen_writing': '\e929',
 	'edit_write': '\e929',
 	'editFrame': '\e929',
@@ -394,6 +394,7 @@ $icons: (
 	'user_add': '\e902',
 	'adduser': '\e902',
 	'people_arrow_up': '\ea05',
+	'people_edit': '\ea0a',
 	'people_group': '\e93c',
 	'user_group': '\e93c',
 	'group': '\e93c',
@@ -458,6 +459,7 @@ $icons: (
 	'settings_tools': '\e989',
 	'tools': '\e989',
 	'share': '\e906',
+	'sign_at': '\ea0b',
 	'sign_ban': '\e936',
 	'forbidden': '\e936',
 	'sign_cancel': '\e963',
@@ -490,6 +492,7 @@ $icons: (
 	'sign_warning': '\e992',
 	'warning': '\e992',
 	'sign_webhook': '\ea04',
+	'sound_megaphone': '\ea08',
 	'star': '\e961',
 	'unstared': '\e961',
 	'star_filled': '\e97f',
