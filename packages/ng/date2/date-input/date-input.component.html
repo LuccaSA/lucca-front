@@ -19,13 +19,13 @@
 			(keydown.arrowDown)="arrowDown(popoverRef)"
 			(keydown.escape)="popoverRef.close()"
 			(keydown.space)="spaceDown($event, popoverRef)"
-			[disabled]="disabled"
+			[disabled]="disabled()"
 			[attr.placeholder]="placeholder() || dateFormatLocalized()"
 			[attr.autocomplete]="autocomplete()"
 		/>
 
 		<div class="textField-input-affix">
-			@if (clearable() && !disabled && date.value !== '') {
+			@if (clearable() && !disabled() && date.value !== '') {
 			<button class="textField-input-affix-clear clear" type="button" (click)="clear()">
 				<span aria-hidden="true" class="lucca-icon icon-signClose"></span>
 				<span class="u-mask">{{ intl.clear }}</span>
@@ -39,7 +39,7 @@
 			<button
 				[luPopover2]="calendar"
 				[luPopoverAnchor]="popoverAnchor"
-				[disabled]="disabled"
+				[disabled]="disabled()"
 				[luPopoverNoCloseButton]="true"
 				[luPopoverDisabled]="isFilterPill"
 				#popoverRef="luPopover2"
