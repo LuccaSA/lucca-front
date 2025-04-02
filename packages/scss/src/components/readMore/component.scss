@@ -1,0 +1,76 @@
+@use '@lucca-front/scss/src/commons/utils/namespace';
+
+@use '@lucca-front/scss/src/commons/utils/a11y';
+
+@mixin component($atRoot: namespace.$defaultAtRoot) {
+	position: relative;
+	display: block;
+
+	@at-root ($atRoot) {
+		.readMore-link.link {
+			position: absolute;
+			display: flex;
+			inset: auto 0 var(--pr-t-spacings-50) auto;
+			flex-direction: column;
+			z-index: 1;
+			line-height: var(--sizes-M-lineHeight);
+			background-image: linear-gradient(
+				to right,
+				transparent,
+				var(--components-readMore-link-backgroudColor) calc(var(--components-readMore-link-paddingInlineStart) - var(--pr-t-spacings-100))
+			);
+			padding-inline-start: var(--components-readMore-link-paddingInlineStart);
+			font-weight: 600;
+			text-decoration: none;
+
+			&::before {
+				content: '';
+				position: absolute;
+				inset: 0;
+				inset-inline-start: var(--components-readMore-link-paddingInlineStart);
+				border-radius: var(--commons-borderRadius-M);
+			}
+
+			&:focus-visible {
+				outline: none;
+
+				&::before {
+					@include a11y.focusVisible;
+				}
+			}
+		}
+
+		%after {
+			content: var(--components-readMore-content-lastChild-content) / '';
+			visibility: hidden;
+			white-space: nowrap;
+			font-weight: 600;
+			padding-inline-start: var(--components-readMore-link-paddingInlineStart);
+		}
+
+		.readMore-content {
+			display: -webkit-box;
+			-webkit-line-clamp: var(--components-readMore-lineClamp);
+			-webkit-box-orient: vertical;
+			overflow: hidden;
+			padding: var(--pr-t-spacings-50);
+			margin: calc(var(--pr-t-spacings-50) * -1);
+
+			&:not(:has(> p)) {
+				&::after {
+					@extend %after;
+				}
+			}
+
+			&:has(> p) {
+				> * {
+					&:last-child {
+						&::after {
+							@extend %after;
+						}
+					}
+				}
+			}
+		}
+	}
+}

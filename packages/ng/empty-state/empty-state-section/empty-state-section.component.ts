@@ -1,7 +1,8 @@
 import { NgClass, NgIf } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation, booleanAttribute } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation, booleanAttribute, numberAttribute } from '@angular/core';
 import { Palette, PortalContent, PortalDirective } from '@lucca-front/ng/core';
 import { LuSafeExternalSvgPipe } from '@lucca-front/ng/safe-content';
+import { Hx } from '../empty-state.model';
 
 @Component({
 	selector: 'lu-empty-state-section',
@@ -33,8 +34,10 @@ export class EmptyStateSectionComponent {
 	@Input()
 	description: PortalContent;
 
-	@Input()
-	hx: 1 | 2 | 3 | 4 | 5 | 6 = 3;
+	@Input({
+		transform: numberAttribute as (value: Hx | `${Hx}`) => Hx,
+	})
+	hx: Hx = 3;
 
 	get emptyStateClasses() {
 		return {

@@ -1,4 +1,4 @@
-import { booleanAttribute, ChangeDetectionStrategy, ChangeDetectorRef, Component, DestroyRef, ElementRef, inject, Input, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, ChangeDetectorRef, Component, DestroyRef, ElementRef, inject, input, Input, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ReactiveFormsModule } from '@angular/forms';
 import { InputDirective } from '@lucca-front/ng/form-field';
@@ -38,6 +38,8 @@ export class TextareaInputComponent implements OnInit {
 		transform: booleanAttribute,
 	})
 	autoResizeScrollIntoView = false;
+
+	disableSpeelcheck = input<boolean, boolean>(false, { transform: booleanAttribute });
 
 	cloneValue = '';
 

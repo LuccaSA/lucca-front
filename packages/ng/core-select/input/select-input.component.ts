@@ -125,6 +125,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	@Input() optionKey: (option: TOption) => unknown = (option) => option;
 
 	noClueIcon = input(false, { transform: booleanAttribute });
+	inputTabindex = input<number>(0);
 
 	@HostBinding('class.mod-noClueIcon')
 	protected get isNoClueIconClass(): boolean {
@@ -354,7 +355,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 		this.panelRef.closed.subscribe(() => this.closePanel());
 	}
 
-	protected focusInput(): void {
+	focusInput(): void {
 		if (this.inputElementRef) {
 			this.inputElementRef.nativeElement.focus();
 		}

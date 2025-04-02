@@ -1,6 +1,6 @@
-import { booleanAttribute, Component, computed, inject, input, LOCALE_ID, signal } from '@angular/core';
+import { booleanAttribute, Component, computed, effect, inject, input, LOCALE_ID, signal } from '@angular/core';
 import { getIntl } from '@lucca-front/ng/core';
-import { addMonths, addYears } from 'date-fns';
+import { addMonths, addYears, startOfDay } from 'date-fns';
 import { CalendarMode } from './calendar2/calendar-mode';
 import { CellStatus } from './calendar2/cell-status';
 import { DateRange, DateRangeInput } from './calendar2/date-range';
@@ -47,6 +47,9 @@ export abstract class AbstractDateComponent {
 	max = input(null, {
 		transform: transformDateInputToDate,
 	});
+	focusedDate = input(null, {
+		transform: transformDateInputToDate,
+	});
 
 	calendarMode = signal<CalendarMode>('day');
 
@@ -57,6 +60,15 @@ export abstract class AbstractDateComponent {
 	protected currentDate = signal(new Date());
 
 	protected tabbableDate = signal<Date | null>(null);
+
+	protected constructor() {
+		effect(() => {
+			const focusedDate = this.focusedDate();
+			if (focusedDate) {
+				this.currentDate.set(startOfDay(focusedDate));
+			}
+		});
+	}
 
 	isInMinMax(date: Date, mode: CalendarMode): boolean {
 		let result = true;

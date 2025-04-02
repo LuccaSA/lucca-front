@@ -4,8 +4,6 @@
  ***********************************************/
 
 export type LuccaIcon =
-	| 'soundMegaphone'
-	| 'emojiSmile'
 	| 'app'
 	| 'apps'
 	| 'nineTiles'
@@ -187,6 +185,7 @@ export type LuccaIcon =
 	| 'deviceVideo'
 	| 'dotsDrag'
 	| 'drag'
+	| 'emojiSmile'
 	| 'eye'
 	| 'watch'
 	| 'eyeStrikethrough'
@@ -375,6 +374,7 @@ export type LuccaIcon =
 	| 'officePen'
 	| 'edit'
 	| 'editMini'
+	| 'officePenStar'
 	| 'officePenWriting'
 	| 'editWrite'
 	| 'editFrame'
@@ -388,6 +388,7 @@ export type LuccaIcon =
 	| 'userAdd'
 	| 'adduser'
 	| 'peopleArrowUp'
+	| 'peopleEdit'
 	| 'peopleGroup'
 	| 'userGroup'
 	| 'group'
@@ -452,6 +453,7 @@ export type LuccaIcon =
 	| 'settingsTools'
 	| 'tools'
 	| 'share'
+	| 'signAt'
 	| 'signBan'
 	| 'forbidden'
 	| 'signCancel'
@@ -484,6 +486,7 @@ export type LuccaIcon =
 	| 'signWarning'
 	| 'warning'
 	| 'signWebhook'
+	| 'soundMegaphone'
 	| 'star'
 	| 'unstared'
 	| 'starFilled'
