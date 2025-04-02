@@ -1,5 +1,6 @@
 @use 'sass:math';
 @use 'sass:list';
+@use 'sass:map';
 
 @function pxToRem($value) {
 	@return math.div($value, 16px) * 1rem;
@@ -10,6 +11,18 @@
 
 	@each $list in $lists {
 		$result: list.join($result, $list);
+	}
+
+	@return $result;
+}
+
+@function combineToMap($list1, $list2) {
+	$result: ();
+	$index: 1;
+
+	@each $key, $val in $list1 {
+		$result: map.set($result, $key, list.nth($list2, $index));
+		$index: $index + 1;
 	}
 
 	@return $result;
