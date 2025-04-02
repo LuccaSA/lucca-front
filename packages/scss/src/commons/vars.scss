@@ -67,14 +67,20 @@
 	--commons-navSide-mobile-toggle-height: 3.5rem;
 
 	@media (prefers-contrast: more) {
-		@include core.cssvars('pr-t-color-input', config.$colorInputContrasted);
+		@media (forced-colors: none) {
+			@include core.cssvars('pr-t-color-input', config.$colorInputContrasted);
+		}
 	}
 
 	@if (config.$prefersContrast == 'more') {
-		@include core.cssvars('pr-t-color-input', config.$colorInputContrasted);
+		@media (forced-colors: none) {
+			@include core.cssvars('pr-t-color-input', config.$colorInputContrasted);
+		}
 	}
 
 	.u-prefersContrastMore {
-		@include core.cssvars('pr-t-color-input', config.$colorInputContrasted);
+		@media (forced-colors: none) {
+			@include core.cssvars('pr-t-color-input', config.$colorInputContrasted);
+		}
 	}
 }
