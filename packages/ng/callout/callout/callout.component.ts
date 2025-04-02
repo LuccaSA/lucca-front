@@ -1,7 +1,7 @@
 import { NgClass } from '@angular/common';
-import { booleanAttribute, ChangeDetectionStrategy, Component, EventEmitter, HostBinding, Input, Output, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, EventEmitter, HostBinding, input, Input, Output, ViewEncapsulation } from '@angular/core';
 import { LuccaIcon } from '@lucca-front/icons';
-import { getIntl, Palette, PortalContent, PortalDirective } from '@lucca-front/ng/core';
+import { intlInputOptions, Palette, PortalContent, PortalDirective } from '@lucca-front/ng/core';
 import { CalloutIconPipe } from '../callout-icon.pipe';
 import { CalloutState } from '../callout-state';
 import { LU_CALLOUT_TRANSLATIONS } from '../callout.translate';
@@ -73,7 +73,7 @@ export class CalloutComponent {
 	@Output()
 	removedChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-	public intl = getIntl(LU_CALLOUT_TRANSLATIONS);
+	public intl = input(...intlInputOptions(LU_CALLOUT_TRANSLATIONS));
 
 	get calloutClasses() {
 		const palette = getCalloutPalette(this.state, this.palette);

@@ -20,7 +20,7 @@ import {
 } from '@angular/core';
 import { AbstractControl, NgControl, ReactiveFormsModule, RequiredValidator, Validators } from '@angular/forms';
 import { SafeHtml } from '@angular/platform-browser';
-import { getIntl, IntlParamsPipe, LuClass, PortalContent, PortalDirective, ɵeffectWithDeps } from '@lucca-front/ng/core';
+import { intlInputOptions, IntlParamsPipe, LuClass, PortalContent, PortalDirective, ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { InlineMessageComponent, InlineMessageState } from '@lucca-front/ng/inline-message';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
@@ -50,7 +50,7 @@ type FormFieldWidth = 20 | 30 | 40 | 50 | 60;
 	encapsulation: ViewEncapsulation.None,
 })
 export class FormFieldComponent implements OnDestroy, DoCheck {
-	intl = getIntl(LU_FORM_FIELD_TRANSLATIONS);
+	intl = input(...intlInputOptions(LU_FORM_FIELD_TRANSLATIONS));
 
 	#luClass = inject(LuClass);
 	#injector = inject(Injector);
