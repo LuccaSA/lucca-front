@@ -16,7 +16,8 @@ import { LuCoreSelectApiV3Directive } from '@lucca-front/ng/core-select/api';
 		<lu-multi-select establishments placeholder="Select an establishment" class="textfield-input"></lu-multi-select>
 		<lu-simple-select apiV3="/api/v3/legalEntities/scope" data-test-id="LegalEntitiesLuAPISelect" [placeholder]="'ALL_ESTABLISHMENTS' | translate" class="textfield-input" [filters]="scopedFilters" orderBy="name,asc" [formControl]="legalEntitiesFC" />
 	`,
-	imports: [LuSimpleSelectInputComponent, LuCoreSelectJobQualificationsDirective, LuCoreSelectUsersDirective, LuCoreSelectEstablishmentsDirective, LuMultiSelectInputComponent, LuCoreSelectApiV3Directive]
+	imports: [LuSimpleSelectInputComponent, LuCoreSelectJobQualificationsDirective, LuCoreSelectUsersDirective, LuCoreSelectEstablishmentsDirective, LuMultiSelectInputComponent, LuCoreSelectApiV3Directive
+	]
 })
 export class ApiSelectsComponent {
 }

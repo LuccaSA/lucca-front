@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { LuSelectInputComponent } from '@lucca-front/ng/select';
-import { LuOptionItemComponent, LuOptionPickerComponent } from '@lucca-front/ng/option';
+import {
+	LuOptionItemComponent,
+	LuOptionPickerComponent
+} from '@lucca-front/ng/option';
 import { FormsModule } from '@angular/forms';
 import { LuInputClearerComponent } from '@lucca-front/ng/input';
 

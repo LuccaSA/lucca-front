@@ -14,7 +14,12 @@ import { LuApiSelectInputComponent } from '@lucca-front/ng/api';
 		<lu-establishment-select multiple placeholder="Select an establishment" class="textfield-input"></lu-establishment-select>
 		<lu-api-select api="/api/v3/legalEntities/scope" data-test-id="LegalEntitiesLuAPISelect" [placeholder]="'ALL_ESTABLISHMENTS' | translate" class="textfield-input" [filters]="scopedFilters" orderBy="name,asc" [formControl]="legalEntitiesFC" />
 	`,
-	imports: [LuUserSelectModule, LuQualificationSelectInputComponent, LuEstablishmentSelectInputComponent, LuApiSelectInputComponent]
+	imports: [
+		LuUserSelectModule,
+		LuQualificationSelectInputComponent,
+		LuEstablishmentSelectInputComponent,
+		LuApiSelectInputComponent
+	]
 })
 export class ApiSelectsComponent {
 }

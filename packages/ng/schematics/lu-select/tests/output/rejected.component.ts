@@ -56,9 +56,7 @@ import { LuCoreSelectUsersDirective } from '@lucca-front/ng/core-select';
 			useClass: EstablishmentServiceOverride
 		}
 	],
-	imports: [
-		
-		LuEstablishmentSelectInputComponent,
+	imports: [LuEstablishmentSelectInputComponent,
 		LuUserSelectModule,
 		LuSelectInputComponent,
 		LuOptionSelectAllComponent,
