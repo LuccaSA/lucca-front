@@ -374,6 +374,7 @@ export type LuccaIcon =
 	| 'officePen'
 	| 'edit'
 	| 'editMini'
+	| 'officePenStar'
 	| 'officePenWriting'
 	| 'editWrite'
 	| 'editFrame'

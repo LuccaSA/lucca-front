@@ -374,6 +374,7 @@ export const IconsList = [
 	{ icon: 'officePen', deprecated: false },
 	{ icon: 'edit', deprecated: true },
 	{ icon: 'editMini', deprecated: true },
+	{ icon: 'officePenStar', deprecated: false },
 	{ icon: 'officePenWriting', deprecated: false },
 	{ icon: 'editWrite', deprecated: true },
 	{ icon: 'editFrame', deprecated: true },
