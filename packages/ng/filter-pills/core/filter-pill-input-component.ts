@@ -5,6 +5,7 @@ export type FilterPillLayout = 'checkable';
 
 export interface FilterPillInputComponent {
 	isFilterPillEmpty: Signal<boolean>;
+	isFilterPillClearable: Signal<boolean>;
 	// If this is not here, we'll consider it's using default layout
 	filterPillLayout?: Signal<FilterPillLayout>;
 	hideCombobox?: Signal<boolean>;
