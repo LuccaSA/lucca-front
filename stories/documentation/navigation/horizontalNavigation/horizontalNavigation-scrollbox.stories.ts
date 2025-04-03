@@ -38,7 +38,6 @@ function getTemplate(args: HorizontalNavigationScrollboxStory): string {
 	const header = args.header ? `mod-header` : ``;
 	const s = args.s ? `mod-S` : ``;
 	return `<lu-scroll-box [attr.style]="'--components-scrollBox-gap: 0px; --components-scrollBox-paddingInline: 0px; --components-scrollBox-marginInline: calc(var(--pr-t-spacings-200) * -1)'">
-	<div></div>
 	<div class="horizontalNavigation ${s} ${noBorder} ${header}">
 		<ul class="horizontalNavigation-list">
 			<li class="horizontalNavigation-list-item">
@@ -72,20 +71,13 @@ function getTemplate(args: HorizontalNavigationScrollboxStory): string {
 				</a>
 			</li>
 		</ul>
-	</nav>
-	<div style="margin-left: -1px"></div>
+	</div>
 </lu-scroll-box>`;
 }
 
 const Template: StoryFn<HorizontalNavigationScrollboxStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
-	styles: [
-		`
-		:host {
-		}
-	`,
-	],
 });
 
 export const Scrollbox = Template.bind({});
