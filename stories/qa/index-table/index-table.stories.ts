@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { TagComponent } from '@lucca-front/ng/tag';
 import { LuUserPictureComponent } from '@lucca-front/ng/user';
 import { Meta, StoryFn } from '@storybook/angular';
-import { StatusBadgeComponent } from 'dist/ng/statusBadge';
+import { StatusBadgeComponent } from '@lucca-front/ng/statusBadge';
 
 @Component({
 	standalone: true,
