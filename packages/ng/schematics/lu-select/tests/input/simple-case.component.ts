@@ -11,7 +11,7 @@ import { LuInputClearerComponent } from '@lucca-front/ng/input';
 	selector: 'lu-select-schematic-simple-case',
 	standalone: true,
 	template: `
-		<lu-select class="textfield textfield-input" [(ngModel)]="selectedCulture" (ngModelChange)="onCultureChanges()" [disabled]="defaultOnly">
+		<lu-select class="textfield textfield-input" [(ngModel)]="selectedCulture" (ngModelChange)="onCultureChanges()" [disabled]="defaultOnly" id="foo">
 			<span *luDisplayer="let culture">
 				{{ culture?.name }}
 			</span>
