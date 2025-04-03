@@ -6,10 +6,10 @@ import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { TextInputComponent } from '@lucca-front/ng/forms';
 import { HorizontalNavigationComponent, HorizontalNavigationLinkDirective } from '@lucca-front/ng/horizontal-navigation';
 import { IconComponent } from '@lucca-front/ng/icon';
+import { LinkComponent } from '@lucca-front/ng/link';
 import { PageHeaderComponent } from '@lucca-front/ng/page-header';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 import { applicationConfig, Meta, moduleMetadata } from '@storybook/angular';
-import { LinkComponent } from 'dist/ng/link';
 import { BreadcrumbsLinkDirective } from 'packages/ng/breadcrumbs/breadcrumbs-link.directive';
 import { generateInputs } from 'stories/helpers/stories';
 

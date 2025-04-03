@@ -38,7 +38,7 @@
     "nglint:fix": "npm run nglint -- --fix",
     "stylelint:fix": "npm run stylelint -- --fix",
     "icons:update": "node ./packages/icons/update-icons.js",
-    "i18n:update": "lucca translate lokalise --clear-cache && lucca translate lokalise && prettier --write 'packages/ng/**/translations.ts'"
+    "i18n:update": "lucca translate lokalise && prettier --write 'packages/ng/**/translations.ts'"
   },
   "dependencies": {
     "@angular/animations": "^19.0.1",
@@ -50,10 +50,19 @@
     "@angular/platform-browser": "^19.0.1",
     "@angular/platform-browser-dynamic": "^19.0.1",
     "@angular/router": "^19.0.1",
+    "@lexical/history": "^0.23.1",
+    "@lexical/html": "^0.23.1",
+    "@lexical/link": "^0.23.1",
+    "@lexical/markdown": "^0.23.1",
+    "@lexical/rich-text": "^0.23.1",
+    "@lexical/selection": "^0.23.1",
+    "@lexical/utils": "^0.23.1",
     "@ngx-formly/core": "^6.3.11",
     "date-fns": "^3.6.0",
     "isomorphic-dompurify": "^2.17.0",
+    "lexical": "^0.23.0",
     "libphonenumber-js": "^1.11.5",
+    "marked": "^14.1.0",
     "normalize.css": "^8.0.1",
     "rxjs": "^7.8.1",
     "tslib": "^2.6.2",

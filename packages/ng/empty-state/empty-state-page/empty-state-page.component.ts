@@ -1,7 +1,8 @@
 import { NgIf } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, numberAttribute, ViewEncapsulation } from '@angular/core';
 import { PortalContent, PortalDirective } from '@lucca-front/ng/core';
 import { LuSafeExternalSvgPipe } from '@lucca-front/ng/safe-content';
+import { Hx } from '../empty-state.model';
 
 @Component({
 	selector: 'lu-empty-state-page',
@@ -54,11 +55,16 @@ export class EmptyStatePageComponent {
 	contentBackgroundColor = 'var(--pr-t-elevation-surface-default)';
 
 	@Input()
+	slotTop: PortalContent;
+
+	@Input()
 	heading: string;
 
 	@Input()
 	description: PortalContent;
 
-	@Input()
-	hx: 1 | 2 | 3 | 4 | 5 | 6 = 1;
+	@Input({
+		transform: numberAttribute as (value: Hx | `${Hx}`) => Hx,
+	})
+	hx: Hx = 1;
 }

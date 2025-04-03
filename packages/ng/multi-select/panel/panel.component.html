@@ -52,6 +52,7 @@
 					[optionTpl]="optionTpl()"
 					[optionIndex]="index"
 					[grouping]="ctx.groupTemplateLocation === 'option' ? grouping : undefined"
+					[groupTemplateLocation]="ctx.groupTemplateLocation"
 					[scrollIntoViewOptions]="{ block: 'nearest' }"
 					[isSelected]="option | luIsOptionSelected:optionComparer:selectedOptions"
 					(click)="toggleOption(option)"

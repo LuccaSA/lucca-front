@@ -57,9 +57,11 @@ export class LuSimpleSelectInputComponent<T> extends ALuSelectInputComponent<T, 
 	}
 
 	inputSpace(event: Event): void {
-		if (this.clue.length === 0) {
-			event.preventDefault();
-			this.panelRef?.selectCurrentlyHighlightedValue();
+		if (this.filterPillMode) {
+			if (this.clue.length === 0) {
+				event.preventDefault();
+				this.panelRef?.selectCurrentlyHighlightedValue();
+			}
 		}
 	}
 

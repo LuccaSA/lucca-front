@@ -151,6 +151,7 @@ export class DateInputComponent extends AbstractDateComponent implements Control
 
 	constructor() {
 		super();
+
 		effect(() => {
 			const inputValue = this.userTextInput();
 			// If we are initializing the component, we don't want to parse the value
@@ -289,6 +290,8 @@ export class DateInputComponent extends AbstractDateComponent implements Control
 			this.dateFromWriteValue.set(start);
 			this.selectedDate.set(start);
 			this.currentDate.set(start);
+		} else {
+			this.clear();
 		}
 	}
 
@@ -300,11 +303,13 @@ export class DateInputComponent extends AbstractDateComponent implements Control
 
 	override setDisabledState(isDisabled: boolean) {
 		this.filterPillDisabled.set(isDisabled);
+		super.setDisabledState(isDisabled);
 	}
 
 	clear() {
 		this.inputRef().nativeElement.value = '';
 		this.selectedDate.set(null);
+		this.#onChange?.(null);
 		this.onTouched?.();
 	}
 
@@ -316,6 +321,7 @@ export class DateInputComponent extends AbstractDateComponent implements Control
 	dateClicked(date: Date, popoverRef: PopoverDirective): void {
 		this.selectedDate.set(date);
 		this.currentDate.set(date);
+		this.tabbableDate.set(date);
 		if (!this.isFilterPill) {
 			popoverRef.close();
 			this.inputRef().nativeElement.focus();

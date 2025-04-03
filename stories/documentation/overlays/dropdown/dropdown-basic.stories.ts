@@ -23,19 +23,10 @@ const Template: StoryFn<DropdownBasicStory> = (args) => ({
 	props: args,
 });
 
-const code = `
-/* 1. Importer LuDropdownModule */
-import { LuDropdownModule } from '@lucca-front/ng/dropdown';
-
-@NgModule({
-	imports: [LuDropdownModule]
-})
-class DropdownStoriesModule {}
-
-/* 2. Ajouter un bouton détenant la directive [luDropdown]="dropdown" */
+const code = `/* 1. Ajouter un bouton détenant la directive [luDropdown]="dropdown" */
 <button type="button" class="button" [luDropdown]="dropdown">Open dropdown</button>
 
-/* 3. Ajouter le composant <lu-dropdown #dropdown></lu-dropdown> avec la référence de la directive */
+/* 2. Ajouter le composant <lu-dropdown #dropdown></lu-dropdown> avec la référence de la directive */
 <lu-dropdown #dropdown>
 	<li class="dropdown-list-option">
 		<span class="dropdown-list-option-action is-disabled" luDropdownItem>
@@ -55,8 +46,7 @@ class DropdownStoriesModule {}
 			Supprimer
 		</button>
 	</li>
-</lu-dropdown>
-`;
+</lu-dropdown>`;
 
 export const Basic = Template.bind({});
 Basic.args = {};
