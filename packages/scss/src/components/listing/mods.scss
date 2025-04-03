@@ -1,0 +1,7 @@
+@mixin ordered {
+	list-style-type: decimal;
+}
+
+@mixin checklist {
+	padding-inline-start: 0;
+}

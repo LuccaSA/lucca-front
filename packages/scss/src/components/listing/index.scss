@@ -1,0 +1,15 @@
+@use 'exports' as *;
+
+.listing {
+	@include vars;
+	@include component;
+
+	&.mod-ordered,
+	&:is(ol) {
+		@include ordered;
+	}
+
+	&.mod-checklist {
+		@include checklist;
+	}
+}
