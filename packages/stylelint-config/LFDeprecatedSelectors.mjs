@@ -72,4 +72,8 @@ export default [
 		versionDeprecated: '19.2.0',
 		versionDeleted: '21.1.0',
 	},
+	{
+		objectPattern: /\.menu-?/,
+		versionDeprecated: '19.3.0',
+	},
 ];
