@@ -56,7 +56,7 @@ import { LuInputClearerComponent } from '@lucca-front/ng/input';
 			</lu-option-picker>
 		</lu-select>
 	`,
-	imports: [LuSelectInputComponent, LuOptionPickerComponent, LuOptionItemComponent, LuInputClearerComponent, FormsModule]
+	imports: [FormsModule,LuSelectInputComponent, LuOptionPickerComponent, LuOptionItemComponent, LuInputClearerComponent]
 })
 export class SimpleCaseComponent {
 	cultures = [

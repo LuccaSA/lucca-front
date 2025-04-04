@@ -12,7 +12,7 @@ import { LuMultiSelectInputComponent } from '@lucca-front/ng/multi-select';
 		<lu-multi-select [options]="cultures" clearable class="textfield textfield-input" [(ngModel)]="selectedCultures" (ngModelChange)="onCultureChanges()" [disabled]="defaultOnly"></lu-multi-select>
 		<lu-multi-select [options]="cultures" clearable class="textfield textfield-input" [(ngModel)]="selectedCultures" (ngModelChange)="onCultureChanges()" [disabled]="defaultOnly"></lu-multi-select>
 	`,
-	imports: [FormsModule, LuSimpleSelectInputComponent, LuMultiSelectInputComponent]
+	imports: [FormsModule,LuSimpleSelectInputComponent, LuMultiSelectInputComponent]
 })
 export class SimpleCaseComponent {
 	cultures = [

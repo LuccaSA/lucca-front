@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
-import { LuCoreSelectJobQualificationsDirective } from '@lucca-front/ng/core-select';
-import { LuCoreSelectUsersDirective } from '@lucca-front/ng/core-select';
-import { LuCoreSelectEstablishmentsDirective } from '@lucca-front/ng/core-select';
+import { LuCoreSelectJobQualificationsDirective } from '@lucca-front/ng/core-select/job-qualification';
+import { LuCoreSelectUsersDirective } from '@lucca-front/ng/core-select/user';
+import { LuCoreSelectEstablishmentsDirective } from '@lucca-front/ng/core-select/establishment';
 import { LuMultiSelectInputComponent } from '@lucca-front/ng/multi-select';
 import { LuCoreSelectApiV3Directive } from '@lucca-front/ng/core-select/api';
 

@@ -207,7 +207,7 @@ export function removeAngularImport(sourceFile: SourceFile, fileToEdit: string, 
 						} else {
 							removePos = exp.getFullStart();
 						}
-						while ([' ', '\n', '\t', ','].includes(sourceFile.text.charAt(removePos - 1))) {
+						while (['\n', '\t'].includes(sourceFile.text.charAt(removePos - 1))) {
 							removePos--;
 							toRemove++;
 						}
