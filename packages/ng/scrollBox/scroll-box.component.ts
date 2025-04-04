@@ -1,9 +1,9 @@
-import { ChangeDetectionStrategy, Component, ElementRef, HostBinding, inject, OnInit, signal, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, HostBinding, OnInit, signal, viewChild, ViewEncapsulation } from '@angular/core';
 
 @Component({
 	selector: 'lu-scroll-box',
 	standalone: true,
-	template: '<ng-content />',
+	templateUrl: './scroll-box.component.html',
 	styleUrls: ['./scroll-box.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	encapsulation: ViewEncapsulation.None,
@@ -13,7 +13,8 @@ import { ChangeDetectionStrategy, Component, ElementRef, HostBinding, inject, On
 	},
 })
 export class ScrollBoxComponent implements OnInit {
-	#elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
+	firstRef = viewChild<ElementRef<HTMLElement>>('first');
+	lastRef = viewChild<ElementRef<HTMLElement>>('last');
 
 	@HostBinding('class.is-firstVisible')
 	get isFirstVisibleClass() {
@@ -45,16 +46,7 @@ export class ScrollBoxComponent implements OnInit {
 	}
 
 	ngOnInit() {
-		const children = this.#elementRef.nativeElement.children;
-
-		[].forEach.call(children, (child, index) => {
-			if (index === 0) {
-				this.initObserver(child as Element, true);
-			}
-
-			if (index === children.length - 1) {
-				this.initObserver(child as Element, false);
-			}
-		});
+		this.initObserver(this.firstRef().nativeElement, true);
+		this.initObserver(this.lastRef().nativeElement, false);
 	}
 }
