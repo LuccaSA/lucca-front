@@ -1,5 +1,6 @@
 @mixin active {
 	--components-verticalNavigation-link-background: var(--palettes-product-100);
+
 	color: var(--components-verticalNavigation-link-color);
 
 	&:hover {
@@ -13,6 +14,7 @@
 
 @mixin disabled {
 	--components-verticalNavigation-link-background: transparent;
+
 	color: var(--palettes-neutral-500); // disabled token candidate
 	pointer-events: none;
 }

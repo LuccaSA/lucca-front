@@ -61,7 +61,7 @@
 		--components-horizontalNavigation-listItemActionPadding: var(--pr-t-spacings-50) var(--pr-t-spacings-200);
 		--components-horizontalNavigation-listItemActionAlign: left;
 
-		&:before {
+		&::before {
 			inset-block: calc(
 				var(--components-horizontalNavigation-listItemActionPaddingBlock) - var(--pr-t-spacings-150) - var(--pr-t-spacings-25)
 			);
@@ -95,7 +95,7 @@
 	.menu-list-item-action {
 		--components-horizontalNavigation-listItemActionPadding: var(--pr-t-spacings-50) var(--pr-t-spacings-150);
 
-		&:before {
+		&::before {
 			inset-block: calc(
 				var(--components-horizontalNavigation-listItemActionPaddingBlock) - var(--pr-t-spacings-150) - var(--pr-t-spacings-25)
 			);

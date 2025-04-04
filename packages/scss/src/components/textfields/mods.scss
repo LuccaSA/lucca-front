@@ -121,12 +121,12 @@
 	}
 }
 
-@mixin SInputIcon {
+@mixin inputIconS {
 	line-height: var(--sizes-XS-lineHeight);
 	font-size: var(--sizes-S-fontSize);
 }
 
-@mixin XSInputIcon {
+@mixin inputIconXS {
 	line-height: var(--sizes-XS-lineHeight);
 	font-size: var(--sizes-S-fontSize);
 }
@@ -299,6 +299,7 @@
 		background-color: transparent;
 		padding-block: var(--pr-t-spacings-200) 0;
 		padding-inline: var(--pr-t-spacings-200) 2.5rem;
+
 		// todo: déplacer dans filters ?
 		block-size: var(--components-filters-height);
 		border-radius: 0;
