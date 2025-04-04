@@ -1,0 +1,12 @@
+@mixin vars {
+	--components-highlightSection-display: block;
+	--components-highlightSection-padding-block: var(--pr-t-spacings-150);
+	--components-highlightSection-inlinePaddingStart: var(--pr-t-spacings-200);
+	--components-highlightSection-inlinePaddingEnd: var(--pr-t-spacings-200);
+	--components-highlightSection-padding-inline: var(--components-highlightSection-inlinePaddingStart)
+		var(--components-highlightSection-inlinePaddingEnd);
+	--components-highlightSection-background: var(--pr-t-elevation-surface-raised);
+	--components-highlightSection-illustrations-display: ;
+	--components-highlightSection-illustrations-width: 86px;
+	--components-highlightSection-illustrations-height: 72px;
+}
