@@ -1,6 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-call */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
-/* eslint-disable @typescript-eslint/no-unsafe-argument */
 import { provideHttpClient } from '@angular/common/http';
 import { fakeAsync, tick } from '@angular/core/testing';
 import { fireEvent, render, screen } from '@testing-library/angular';
@@ -33,7 +30,6 @@ describe('lu-api-select', () => {
 		</label>`;
 
 	it('should display dialog with a click on a lu select ', async () => {
-		// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		await render(apiSelectStoryTemplate, {
 			imports: [LuApiSelectInputComponent],
 			providers: [provideHttpClient()],
@@ -47,7 +43,6 @@ describe('lu-api-select', () => {
 	});
 
 	it('should trigger search when clue is typed in', fakeAsync(async () => {
-		// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		await render(apiSelectStoryTemplate, {
 			imports: [LuApiSelectInputComponent],
 			providers: [provideHttpClient()],

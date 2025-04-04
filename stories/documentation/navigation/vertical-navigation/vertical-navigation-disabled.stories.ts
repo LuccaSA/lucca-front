@@ -7,7 +7,7 @@ export default {
 } as Meta;
 
 function getTemplate(args: VerticalNavigationDisabledStory): string {
-	return `<nav class="verticalNavigation">
+	return `<div class="verticalNavigation">
 	<h3 class="verticalNavigation-sectionTitle">Section title</h3>
 	<ul class="verticalNavigation-list">
 		<li class="verticalNavigation-list-item">
@@ -33,7 +33,7 @@ function getTemplate(args: VerticalNavigationDisabledStory): string {
 			</ul>
 		</li>
 	</ul>
-</nav>`;
+</div>`;
 }
 
 const Template: StoryFn<VerticalNavigationDisabledStory> = (args) => ({

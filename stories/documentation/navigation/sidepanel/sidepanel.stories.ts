@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
-import { ILuSidepanelContent, LuSidepanel, LuSidepanelModule } from '@lucca-front/ng/sidepanel';
+import { ILuModalContent } from '@lucca-front/ng/modal';
+import { LuSidepanel, LuSidepanelModule } from '@lucca-front/ng/sidepanel';
 import { applicationConfig, Meta, StoryFn } from '@storybook/angular';
 
 @Component({
@@ -8,7 +9,7 @@ import { applicationConfig, Meta, StoryFn } from '@storybook/angular';
 	standalone: true,
 	template: '<p>General Kenobi</p>',
 })
-class SidepanelContentComponent implements ILuSidepanelContent {
+class SidepanelContentComponent implements ILuModalContent {
 	title = 'Hello there';
 	submitAction = () => {};
 }

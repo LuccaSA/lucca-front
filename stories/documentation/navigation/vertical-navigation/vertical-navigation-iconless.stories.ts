@@ -7,7 +7,7 @@ export default {
 } as Meta;
 
 function getTemplate(args: VerticalNavigationIconlessStory): string {
-	return `<nav class="verticalNavigation mod-iconless">
+	return `<div class="verticalNavigation mod-iconless">
 	<h3 class="verticalNavigation-sectionTitle">Section title</h3>
 	<ul class="verticalNavigation-list">
 		<li class="verticalNavigation-list-item">
@@ -33,7 +33,7 @@ function getTemplate(args: VerticalNavigationIconlessStory): string {
 			</ul>
 		</li>
 	</ul>
-</nav>`;
+</div>`;
 }
 
 const Template: StoryFn<VerticalNavigationIconlessStory> = (args) => ({

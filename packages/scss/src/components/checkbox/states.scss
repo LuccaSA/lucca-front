@@ -3,7 +3,7 @@
 
 @mixin disabled {
 	~ .checkbox-label {
-		color: var(--palettes-neutral-500); // disabled token candidate
+		color: var(--palettes-neutral-600); // disabled token candidate
 		cursor: default;
 
 		&::before {
@@ -11,13 +11,13 @@
 		}
 
 		.checkbox-label-helper {
-			color: var(--palettes-neutral-500); // disabled token candidate
+			color: var(--palettes-neutral-600); // disabled token candidate
 		}
 	}
 
 	&:checked ~ .checkbox-label {
 		&::before {
-			color: var(--palettes-neutral-500); // disabled token candidate
+			color: var(--palettes-neutral-600); // disabled token candidate
 			background-color: var(--commons-disabled-background);
 			border-color: var(--commons-disabled-background);
 		}

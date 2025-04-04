@@ -5,4 +5,8 @@
 	&:focus-visible {
 		--components-dropdown-option-actionBackground: var(--palettes-error-50);
 	}
+
+	&:active {
+		--components-dropdown-option-actionBackground: var(--palettes-error-100);
+	}
 }

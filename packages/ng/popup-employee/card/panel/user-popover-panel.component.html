@@ -58,9 +58,9 @@
 						[href]="employee._links?.schedule?.href"
 					>
 						@if (employee.isWorkingNow && employee.currentWorkLocation) {
-						<lu-icon size="S" icon="mapPin" [alt]="intl.EMPLOYEE_CARD_PANEL_WORKING_LOCATION"></lu-icon>
+						<lu-icon size="S" icon="mapPin" [alt]="intl.EMPLOYEE_CARD_PANEL_WORKING_LOCATION" />
 						} @else if (!employee.isWorkingNow || !employee.currentWorkLocation) {
-						<lu-icon size="S" icon="calendarPlanning" [alt]="intl.EMPLOYEE_CARD_PANEL_PLANNING"></lu-icon>
+						<lu-icon size="S" icon="calendarPlanning" [alt]="intl.EMPLOYEE_CARD_PANEL_PLANNING" />
 						}
 						<span class="userPopover-details-info-detail-workplace-state">
 							<ng-container *ngIf="employee.isWorkingNow === true">

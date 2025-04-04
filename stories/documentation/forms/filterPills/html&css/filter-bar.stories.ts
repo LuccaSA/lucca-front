@@ -82,7 +82,7 @@ function getTemplate(args: FilterBarBasicStory): string {
 					<lu-divider class="filterBar-divider" />
 
 					<button class="filterPill mod-button" type="button" luTooltip="Filtres supplémentaires" luTooltipOnlyForDisplay [luPopover2]="contentOptions">
-						<lu-icon class="filterPill-icon" icon="filtersDescending" alt="Filtres supplémentaires"></lu-icon>
+						<lu-icon class="filterPill-icon" icon="filtersDescending" alt="Filtres supplémentaires" />
 					</button>
 
 					<div class="filterPill">

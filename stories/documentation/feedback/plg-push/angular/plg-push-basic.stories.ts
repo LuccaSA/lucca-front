@@ -17,7 +17,7 @@ export default {
 			template: `<lu-plg-push ${generateInputs(inputs, context.argTypes)}>
 	${description}
 	<a class="link mod-icon" href="${linkURL}" target="_blank" rel="noopener noreferrer">
-		<span class="link-text">${linkLabel}</span><!-- no text node here --><span class="link-icon"><lu-icon class="u-displayContents" icon="arrowExternal" alt="Ouvrir dans une nouvelle fenêtre"></lu-icon></span>
+		<span class="link-text">${linkLabel}</span><!-- no text node here --><span class="link-icon"><lu-icon class="u-displayContents" icon="arrowExternal" alt="Ouvrir dans une nouvelle fenêtre" /></span>
 	</a>
 </lu-plg-push>`,
 		};

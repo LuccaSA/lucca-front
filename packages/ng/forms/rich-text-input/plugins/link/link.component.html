@@ -1,0 +1,15 @@
+<button
+	#element
+	luButton="text"
+	type="button"
+	size="S"
+	(click)="dispatchCommand()"
+	[luTooltip]="intl.linksLabel"
+	[attr.aria-pressed]="active()"
+	luTooltipOnlyForDisplay
+	[attr.tabindex]="tabindex()"
+	[disabled]="isDisabled()"
+	class="richTextField-toolbar-button"
+>
+	<lu-icon icon="formatLink" [alt]="intl.linksLabel" />
+</button>

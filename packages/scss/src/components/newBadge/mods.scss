@@ -1,0 +1,4 @@
+@mixin inverted {
+	--components-newBadge-color: var(--palettes-brand-700);
+	--components-newBadge-backgroundColor: var(--palettes-brand-0);
+}

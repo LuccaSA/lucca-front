@@ -1,0 +1,15 @@
+<button
+	#element
+	luButton="text"
+	type="button"
+	size="S"
+	(click)="dispatchCommand()"
+	[attr.aria-pressed]="active()"
+	[luTooltip]="tooltip()"
+	luTooltipOnlyForDisplay
+	[attr.tabindex]="tabindex()"
+	class="richTextField-toolbar-button"
+	[disabled]="isDisabled()"
+>
+	<lu-icon [icon]="icon()" [alt]="tooltip()" />
+</button>

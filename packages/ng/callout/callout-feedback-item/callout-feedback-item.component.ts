@@ -8,7 +8,6 @@ import { Component, Directive, ViewEncapsulation } from '@angular/core';
 export class CalloutFeedbackItemDescriptionDirective {}
 
 @Component({
-	// eslint-disable-next-line @angular-eslint/component-selector
 	selector: 'li[lu-callout-feedback-item]',
 	standalone: true,
 	imports: [],

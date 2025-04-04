@@ -1,3 +1,5 @@
+import { Tree } from '@angular-devkit/schematics';
+import { dirname, join } from 'path';
 import {
 	ScriptTarget,
 	SourceFile,
@@ -14,10 +16,8 @@ import {
 } from 'typescript';
 import { updateContent } from './file-update';
 import { HtmlAst, HtmlAstVisitor } from './html-ast';
-import { replaceStringLiterals } from './typescript-ast';
-import { dirname, join } from 'path';
-import { Tree } from '@angular-devkit/schematics';
 import { currentSchematicContext } from './lf-schematic-context';
+import { replaceStringLiterals } from './typescript-ast';
 
 export interface AngularTemplate {
 	offsetStart: number;

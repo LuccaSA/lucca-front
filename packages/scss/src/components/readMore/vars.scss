@@ -1,0 +1,5 @@
+@mixin vars {
+	--components-readMore-lineClamp: 5;
+	--components-readMore-link-backgroudColor: var(--pr-t-elevation-surface-raised);
+	--components-readMore-link-paddingInlineStart: var(--pr-t-spacings-500);
+}

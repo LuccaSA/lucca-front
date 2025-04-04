@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
-import { LuQualificationSelectModule } from './select/qualification-select.module';
+import { LuQualificationSelectInputComponent } from './select/input/qualification-select-input.component';
 
 /**
  * @deprecated prefer SimpleSelect or MultipleSelect with jobQualifications directive
  */
 @NgModule({
-	imports: [LuQualificationSelectModule],
-	exports: [LuQualificationSelectModule],
+	imports: [LuQualificationSelectInputComponent],
+	exports: [LuQualificationSelectInputComponent],
 })
 export class LuQualificationModule {}

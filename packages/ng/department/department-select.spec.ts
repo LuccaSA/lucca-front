@@ -1,6 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-call */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
-/* eslint-disable @typescript-eslint/no-unsafe-argument */
 import { HttpClientModule } from '@angular/common/http';
 import { ILuTree } from '@lucca-front/ng/core';
 import { fireEvent, render, screen } from '@testing-library/angular';
@@ -39,7 +36,6 @@ describe('department select', () => {
 </label>`;
 
 	it('should display dialog with a click on a lu select ', async () => {
-		// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		await render(departmentStoryTemplate, {
 			imports: [LuDepartmentSelectInputComponent, HttpClientModule],
 		});
@@ -52,7 +48,6 @@ describe('department select', () => {
 	});
 
 	it('should filters results when clue is typed in', async () => {
-		// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		await render(departmentStoryTemplate, {
 			imports: [LuDepartmentSelectInputComponent, HttpClientModule],
 			componentProviders: [

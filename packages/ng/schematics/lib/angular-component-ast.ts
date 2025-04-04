@@ -1,7 +1,7 @@
-import { forEachChild, isArrayLiteralExpression, isCallExpression, isDecorator, isIdentifier, isImportDeclaration, isNamedImports, isObjectLiteralExpression, isPropertyAssignment, isStringLiteralLike, NamedImports, SourceFile } from 'typescript';
-import { createVisitor } from './angular-template';
 import { Change, InsertChange, NoopChange, RemoveChange } from '@schematics/angular/utility/change';
 import { getEOL } from '@schematics/angular/utility/eol';
+import { forEachChild, isArrayLiteralExpression, isCallExpression, isDecorator, isIdentifier, isImportDeclaration, isNamedImports, isObjectLiteralExpression, isPropertyAssignment, isStringLiteralLike, NamedImports, SourceFile } from 'typescript';
+import { createVisitor } from './angular-template';
 
 export interface ProviderEntry {
 	provide: string;

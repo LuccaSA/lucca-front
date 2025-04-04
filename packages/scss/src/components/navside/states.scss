@@ -1,9 +1,14 @@
 @use '@lucca-front/scss/src/commons/utils/overflow';
+@use '@lucca-front/scss/src/components/newBadge/exports' as newBadge;
 
 @mixin active {
 	background-color: var(--components-navSide-fullwidth-palette-selected-bg);
 	color: var(--components-navSide-fullwidth-palette-selected-text);
 	opacity: 1;
+
+	.newBadge {
+		@include newBadge.inverted;
+	}
 }
 
 @mixin expanded {

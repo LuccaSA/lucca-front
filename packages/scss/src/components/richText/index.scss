@@ -1,0 +1,26 @@
+@use 'exports' as *;
+
+.richTextField {
+	@include vars;
+	@include component;
+
+	&:hover {
+		@include hover;
+	}
+
+	&.mod-autoResize {
+		@include autoResize;
+	}
+
+	&.is-error {
+		@include error;
+
+		&:hover {
+			@include errorHover;
+		}
+	}
+
+	&.is-disabled {
+		@include disabled;
+	}
+}
