@@ -199,6 +199,7 @@
 				content: '';
 				position: absolute;
 				inset: 0 -9999px;
+				z-index: -1;
 			}
 
 			&,
