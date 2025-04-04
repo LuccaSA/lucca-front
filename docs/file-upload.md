@@ -16,7 +16,7 @@ Then, you'll just need to manage the upload of these files via LuccaFiles for mo
 
 Once the files are sent, the display management changes depending on the approach, single or multi.
 
-### Single File Upload
+### Multiple File Upload
 
 ```html
 
@@ -31,7 +31,7 @@ Once the files are sent, the display management changes depending on the approac
 </div>
 ```
 
-### Multiple File Upload
+### Single File Upload
 
 ```html
 

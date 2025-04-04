@@ -1,15 +1,12 @@
-import { booleanAttribute, Component, computed, inject, input, LOCALE_ID, output } from '@angular/core';
+import { booleanAttribute, Directive, computed, inject, input, LOCALE_ID, output } from '@angular/core';
 import { getIntl } from '@lucca-front/ng/core';
 import { LU_FILE_UPLOAD_TRANSLATIONS } from '../file-upload.translate';
 import { formatSize, MEGA_BYTE } from '../formatter';
 
 let nextId = 0;
 
-@Component({
-	selector: 'lu-base-file-upload',
-	template: '',
-})
-export class BaseFileUploadComponent {
+@Directive()
+export abstract class BaseFileUploadComponent {
 	protected locale = inject(LOCALE_ID);
 
 	protected idSuffix = nextId++;
