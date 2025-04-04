@@ -90,7 +90,7 @@ export default {
 		const calendar = within(calendarComponent);
 		// We can at least check for this year, checking for the month would be harder due to locale considerations
 		await expect(calendar.getByText(today.getFullYear())).toBeInTheDocument();
-		await expect(calendar.getByText(today.getDate()).parentElement).toHaveAttribute('aria-selected', 'true');
+		await expect(calendar.getAllByText(today.getDate()).find((el) => !el.parentElement.className.includes('is-overflow')).parentElement).toHaveAttribute('aria-selected', 'true');
 		// We pick 15 because it should show only once
 		// Fallback if we're the 15th, pick 16
 		const targetDay = today.getDate() === 15 ? 16 : 15;
