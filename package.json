@@ -102,7 +102,7 @@
     "postcss-scss": "^4.0.6",
     "postcss-selector-parser": "^7.0.0",
     "postcss-value-parser": "^4.2.0",
-    "prettier": "^3.2.5",
+    "prettier": "^3.5.1",
     "sass": "^1.62.1",
     "storybook": "^8.4.5",
     "stylelint": "^14.15.0",

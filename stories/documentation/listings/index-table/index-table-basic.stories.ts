@@ -39,6 +39,13 @@ function getTemplate(args: IndexTableBasicStory): string {
 			<td class="indexTable-body-row-cell">Content</td>
 		</tr>
 		<tr class="indexTable-body-row">
+			<td class="indexTable-body-row-cell">Content</td>
+			<td class="indexTable-body-row-cell">Content</td>
+			<td class="indexTable-body-row-cell">
+				<a href="#" class="indexTable-body-row-cell-link">Content <code class="code">a</code></a>
+			</td>
+		</tr>
+		<tr class="indexTable-body-row">
 			<td class="indexTable-body-row-cell">
 				<button type="button" class="indexTable-body-row-cell-link">Content <code class="code">button</code></button>
 			</td>

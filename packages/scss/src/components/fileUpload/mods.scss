@@ -1,0 +1,24 @@
+@mixin S {
+	--components-fileUpload-button-display: none;
+	--components-fileUpload-padding: var(--pr-t-spacings-150) var(--pr-t-spacings-200);
+	--components-fileUpload-textAlign: left;
+	--components-fileUpload-flexDirection: row;
+	--components-fileUpload-instruction-alignItems: stretch;
+	--components-fileUpload-instruction-display: block;
+	--components-fileUpload-instruction-maxWidth: none;
+	--components-fileUpload-instruction-action-fontWeight: 600;
+	--fileUpload-instruction-action-marginBottom: 0;
+	--components-fileUpload-instruction-action-color: var(--palettes-product-700);
+	--components-fileUpload-alignItems: flex-start;
+	--components-fileUpload-minHeight: none;
+	--components-fileUpload-instruction-filename-position: static;
+	--components-fileUpload-instruction-filename-marginTop: 0;
+	--components-fileUpload-justifyContent: flex-start;
+	--components-fileUpload-status-img-inset: 0;
+	--components-fileUpload-status-img-size: var(--pr-t-spacings-600);
+}
+
+@mixin dropzone {
+	position: fixed;
+	inset: var(--pr-t-spacings-200);
+}
