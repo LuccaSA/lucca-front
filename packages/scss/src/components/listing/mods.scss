@@ -1,8 +1,38 @@
+@use '@lucca-front/icons/src/commons/utils/icon';
+
 @mixin ordered {
-	list-style-type: decimal;
+	--components-listing-listStyleType: decimal;
 }
 
 @mixin icons {
-	padding-inline-start: 0;
+	--components-listing-paddingInlineStart: 0;
 	--components-listing-item-display: flex;
+}
+
+@mixin checklist {
+	@include icons;
+
+	.listing-item-icon.lucca-icon {
+		&:not([class*='icon-']) {
+			@include icon.generate('sign_confirm');
+		}
+	}
+}
+
+@mixin nested($level: 1) {
+	@if $level == 1 {
+		--components-listing-listStyleType: circle;
+	}
+	@if $level == 2 {
+		--components-listing-listStyleType: square;
+	}
+}
+
+@mixin nestedOrdered($level: 1) {
+	@if $level == 1 {
+		--components-listing-listStyleType: lower-alpha;
+	}
+	@if $level == 2 {
+		--components-listing-listStyleType: lower-roman;
+	}
 }

@@ -9,7 +9,29 @@
 		@include ordered;
 	}
 
+	.listing {
+		@include nested;
+
+		&.mod-ordered,
+		&:is(ol) {
+			@include nestedOrdered;
+		}
+
+		.listing {
+			@include nested(2);
+
+			&.mod-ordered,
+			&:is(ol) {
+				@include nestedOrdered(2);
+			}
+		}
+	}
+
 	&.mod-icons {
 		@include icons;
+	}
+
+	&.mod-checklist {
+		@include checklist;
 	}
 }

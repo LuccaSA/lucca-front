@@ -3,23 +3,27 @@
 @mixin component($atRoot: namespace.$defaultAtRoot) {
 	padding: 0;
 	margin: 0;
-	padding-inline-start: calc(var(--pr-t-spacings-300) + var(--pr-t-spacings-50));
-	list-style-type: disc;
+	padding-inline-start: var(--components-listing-paddingInlineStart);
 	display: flex;
 	flex-direction: column;
-	gap: 4px;
+	gap: var(--pr-t-spacings-50);
+	list-style-type: var(--components-listing-listStyleType);
 
 	@at-root ($atRoot) {
 		.listing-item {
 			display: var(--components-listing-item-display);
 			align-items: flex-start;
-			gap: 0.5rem;
+			gap: var(--pr-t-spacings-100);
+
+			&::marker {
+				line-height: 1;
+			}
 		}
 
 		.listing-item-icon {
-			width: 1.25rem;
-			height: 1.25rem;
-			margin-top: 2px;
+			width: calc(var(--pr-t-spacings-200) + var(--pr-t-spacings-50));
+			aspect-ratio: 1;
+			margin-top: var(--pr-t-spacings-25);
 			background-color: var(--palettes-100, var(--palettes-neutral-100));
 			color: var(--palettes-700, var(--palettes-neutral-700));
 			border-radius: var(--commons-borderRadius-XL);
