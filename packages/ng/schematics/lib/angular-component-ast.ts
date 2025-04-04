@@ -237,7 +237,12 @@ export function removeTSImport(sourceFile: SourceFile, fileToEdit: string, symbo
 	} else {
 		const specifier = namedImports.elements.find((sp) => sp.name.text === symbolName);
 		if (specifier) {
-			return new RemoveChange(fileToEdit, specifier.getFullStart(), symbolName + ', ');
+			let size = specifier?.getWidth(sourceFile);
+			const start = specifier.getStart(sourceFile);
+			while ([' ', '\n', '\t', ','].includes(sourceFile.text.charAt(start + size))) {
+				size++;
+			}
+			return new RemoveChange(fileToEdit, start, ' '.repeat(size));
 		}
 	}
 	return new NoopChange();

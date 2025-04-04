@@ -1,5 +1,9 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import {
+	type ILuUser,
+	LuUserDisplayPipe,
+  } from '@lucca-front/ng/user';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 import { LuMultiSelectInputComponent } from '@lucca-front/ng/multi-select';
 

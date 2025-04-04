@@ -6,6 +6,11 @@ import {
 } from '@lucca-front/ng/option';
 import { FormsModule } from '@angular/forms';
 import { LuInputClearerComponent } from '@lucca-front/ng/input';
+import {
+	type ILuUser,
+	LuUserDisplayPipe,
+  LuUserSelectModule,
+} from '@lucca-front/ng/user';
 
 @Component({
 	selector: 'lu-select-schematic-simple-case',
@@ -56,7 +61,7 @@ import { LuInputClearerComponent } from '@lucca-front/ng/input';
 			</lu-option-picker>
 		</lu-select>
 	`,
-	imports: [FormsModule,LuSelectInputComponent, LuOptionPickerComponent, LuOptionItemComponent, LuInputClearerComponent]
+	imports: [FormsModule,LuSelectInputComponent, LuOptionPickerComponent, LuOptionItemComponent, LuInputClearerComponent, LuUserSelectModule]
 })
 export class SimpleCaseComponent {
 	cultures = [
