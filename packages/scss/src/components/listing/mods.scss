@@ -2,6 +2,7 @@
 	list-style-type: decimal;
 }
 
-@mixin checklist {
+@mixin icons {
 	padding-inline-start: 0;
+	--components-listing-item-display: flex;
 }
