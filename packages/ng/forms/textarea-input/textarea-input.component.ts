@@ -1,4 +1,5 @@
-import { booleanAttribute, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, inject, Input, ViewChild, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, ChangeDetectorRef, Component, DestroyRef, ElementRef, inject, input, Input, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ReactiveFormsModule } from '@angular/forms';
 import { InputDirective } from '@lucca-front/ng/form-field';
 import { injectNgControl } from '../inject-ng-control';
@@ -13,13 +14,14 @@ import { NoopValueAccessorDirective } from '../noop-value-accessor.directive';
 	encapsulation: ViewEncapsulation.None,
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TextareaInputComponent {
+export class TextareaInputComponent implements OnInit {
 	@ViewChild('parent')
 	parent?: ElementRef<HTMLElement>;
 
 	ngControl = injectNgControl();
 
 	#cdr = inject(ChangeDetectorRef);
+	#destroyRef = inject(DestroyRef);
 
 	@Input()
 	placeholder: string = '';
@@ -37,6 +39,8 @@ export class TextareaInputComponent {
 	})
 	autoResizeScrollIntoView = false;
 
+	disableSpeelcheck = input<boolean, boolean>(false, { transform: booleanAttribute });
+
 	cloneValue = '';
 
 	updateScroll(value: string) {
@@ -49,5 +53,9 @@ export class TextareaInputComponent {
 				block: 'end',
 			});
 		}
+	}
+
+	ngOnInit(): void {
+		this.ngControl.valueChanges.pipe(takeUntilDestroyed(this.#destroyRef)).subscribe((value) => this.updateScroll(value as string));
 	}
 }

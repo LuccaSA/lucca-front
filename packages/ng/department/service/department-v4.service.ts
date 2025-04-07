@@ -1,7 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-return */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/no-unsafe-call */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Params } from '@angular/router';
@@ -28,22 +24,27 @@ export class LuDepartmentV4Service {
 		this._operations = operations;
 	}
 
+	protected _uniqueOperation: number;
+	set uniqueOperation(uniqueOperation: number) {
+		this._uniqueOperation = uniqueOperation;
+	}
+
 	constructor(private _http: HttpClient) {}
 
 	getTrees() {
-		let params: Params = {};
+		let params: Params = this._filters.reduce((acc, curr) => {
+			const split = curr.split('=');
+			return { ...acc, [split[0]]: split[1] };
+		}, {});
 
 		if (this._appInstanceId && this._operations?.length) {
-			const splittedFilters = this._filters.reduce((acc, curr) => {
-				const split = curr.split('=');
-				return { ...acc, [split[0]]: split[1] };
-			}, {});
-
 			params = {
-				...splittedFilters,
+				...params,
 				appInstanceId: this._appInstanceId,
 				operations: this._operations.join(','),
 			};
+		} else if (this._uniqueOperation) {
+			params = { ...params, uniqueOperation: this._uniqueOperation };
 		}
 
 		const call = this._http.get<IApiDepartment>(`${this.api}/tree`, { params });

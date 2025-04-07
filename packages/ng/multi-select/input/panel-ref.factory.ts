@@ -1,25 +1,20 @@
 import { ConnectedPosition, Overlay, OverlayConfig, OverlayPositionBuilder, OverlayRef, PositionStrategy, ScrollStrategyOptions } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
-import { ChangeDetectorRef, ComponentRef, ElementRef, Injectable, Injector, inject } from '@angular/core';
+import { ChangeDetectorRef, ComponentRef, ElementRef, inject, Injectable, Injector, ViewContainerRef } from '@angular/core';
 import { takeUntil } from 'rxjs';
-import { LuMultiSelectPanelComponent } from '../panel/index';
+import { LuMultiSelectPanelComponent } from '../panel';
 import { MULTI_SELECT_INPUT } from '../select.model';
 import { LuMultiSelectPanelRef } from './panel.model';
 import { LuMultiSelectInputComponent } from './select-input.component';
 import { addAttributesOnCdkContainer, SELECT_ID, SELECT_LABEL_ID } from '@lucca-front/ng/core-select';
 
-class MultiSelectPanelRef<T> extends LuMultiSelectPanelRef<T> {
+abstract class BaseMultiSelectPanelRef<T> extends LuMultiSelectPanelRef<T> {
+	protected readonly portalRef: ComponentPortal<LuMultiSelectPanelComponent<T>>;
 	instance: LuMultiSelectPanelComponent<T>;
-	changeDetectorRef: ChangeDetectorRef;
-	private panelRef: ComponentRef<LuMultiSelectPanelComponent<T>>;
-	private portalRef: ComponentPortal<LuMultiSelectPanelComponent<T>>;
 
-	constructor(
-		private overlayRef: OverlayRef,
-		parentInjector: Injector,
-		selectInput: LuMultiSelectInputComponent<T>,
-		protected defaultPositionStrategy: PositionStrategy,
-	) {
+	protected panelRef: ComponentRef<LuMultiSelectPanelComponent<T>>;
+
+	protected constructor(parentInjector: Injector, selectInput: LuMultiSelectInputComponent<T>) {
 		super();
 
 		const injector = Injector.create({
@@ -29,8 +24,40 @@ class MultiSelectPanelRef<T> extends LuMultiSelectPanelRef<T> {
 			],
 			parent: parentInjector,
 		});
-
 		this.portalRef = new ComponentPortal<LuMultiSelectPanelComponent<T>>(LuMultiSelectPanelComponent, undefined, injector);
+	}
+
+	override handleKeyManagerEvent(event: KeyboardEvent) {
+		this.instance.keyManager.onKeydown(event);
+	}
+
+	emitValue(value: T[]): void {
+		this.valueChanged.emit(value);
+	}
+
+	selectCurrentlyHighlightedValue(): void {
+		if (this.instance.keyManager.activeItem) {
+			this.instance.toggleOption(this.instance.keyManager.activeItem.option);
+		}
+	}
+
+	updateSelectedOptions(selectedOptions: T[]): void {
+		this.instance.selectedOptions = selectedOptions;
+		// Run change detection on the panel component
+		this.panelRef.injector.get(ChangeDetectorRef).markForCheck();
+	}
+}
+
+class MultiSelectPanelRef<T> extends BaseMultiSelectPanelRef<T> {
+	changeDetectorRef: ChangeDetectorRef;
+
+	constructor(
+		private overlayRef: OverlayRef,
+		parentInjector: Injector,
+		selectInput: LuMultiSelectInputComponent<T>,
+		protected defaultPositionStrategy: PositionStrategy,
+	) {
+		super(parentInjector, selectInput);
 		this.panelRef = overlayRef.attach(this.portalRef);
 		this.instance = this.panelRef.instance;
 		this.changeDetectorRef = this.panelRef.changeDetectorRef;
@@ -39,16 +66,6 @@ class MultiSelectPanelRef<T> extends LuMultiSelectPanelRef<T> {
 			.backdropClick()
 			.pipe(takeUntil(this.closed))
 			.subscribe(() => this.close());
-	}
-
-	emitValue(value: T[]): void {
-		this.valueChanged.emit(value);
-	}
-
-	updateSelectedOptions(selectedOptions: T[]): void {
-		this.instance.selectedOptions = selectedOptions;
-		// Run change detection on the panel component
-		this.panelRef.injector.get(ChangeDetectorRef).markForCheck();
 	}
 
 	useDefaultPosition(): void {
@@ -64,15 +81,30 @@ class MultiSelectPanelRef<T> extends LuMultiSelectPanelRef<T> {
 		this.panelRef.destroy();
 		this.overlayRef.detach();
 	}
+}
 
-	handleKeyManagerEvent(event: KeyboardEvent) {
-		this.instance.keyManager.onKeydown(event);
+class MultiSelectPanelDOMHostRef<T> extends BaseMultiSelectPanelRef<T> {
+	override changeDetectorRef?: ChangeDetectorRef;
+
+	constructor(host: ViewContainerRef, parentInjector: Injector, selectInput: LuMultiSelectInputComponent<T>) {
+		super(parentInjector, selectInput);
+		this.panelRef = host.createComponent(this.portalRef.component, {
+			injector: this.portalRef.injector,
+			projectableNodes: this.portalRef.projectableNodes,
+		});
+		this.instance = this.panelRef.instance;
 	}
 
-	selectCurrentlyHighlightedValue(): void {
-		if (this.instance.keyManager.activeItem) {
-			this.instance.toggleOption(this.instance.keyManager.activeItem.option);
-		}
+	override updatePosition() {
+		// do nothing, this is not a panel so repositioning is handled by the input.
+	}
+
+	override close(): void {
+		this.closed.emit();
+	}
+
+	useDefaultPosition(): void {
+		// do nothing, this is not a panel so repositioning is handled by the input.
 	}
 }
 
@@ -97,6 +129,10 @@ export class LuMultiSelectPanelRefFactory {
 		addAttributesOnCdkContainer(overlayRef, this.selectLabelId, this.selectId);
 
 		return new MultiSelectPanelRef(overlayRef, this.parentInjector, selectInput, defaultOverlayConfig.positionStrategy);
+	}
+
+	buildAndAttachPanelRef<T>(selectInput: LuMultiSelectInputComponent<T>, host: ViewContainerRef): LuMultiSelectPanelRef<T> {
+		return new MultiSelectPanelDOMHostRef(host, this.parentInjector, selectInput);
 	}
 
 	protected buildDefaultOverlayConfig(overlayConfigOverride: OverlayConfig = {}): OverlayConfig {

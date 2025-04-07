@@ -13,7 +13,7 @@
 	gap: var(--pr-t-spacings-50);
 	cursor: var(--components-tag-cursor);
 	display: inline-flex;
-	align-items: baseline;
+	align-items: center;
 	text-align: center;
 	vertical-align: baseline;
 	white-space: nowrap;
@@ -28,7 +28,7 @@
 	}
 
 	.lucca-icon {
-		@include icon.XXS;
+		@include icon.XS;
 	}
 
 	@at-root ($atRoot) {

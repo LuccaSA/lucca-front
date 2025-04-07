@@ -28,12 +28,12 @@
 	.indexTable-body-row {
 		&.mod-stack2,
 		&.mod-stack3 {
-			--components-indexTable-row-stack-border-block-end: var(--components-indexTable-stack2-row-spacing);
+			--components-indexTable-row-stack-border-bottom: var(--components-indexTable-stack2-row-spacing);
 			--components-indexTable-row-stack2-background-image: var(--components-indexTable-stack-svg);
 		}
 
 		&.mod-stack3 {
-			--components-indexTable-row-stack-border-block-end: var(--components-indexTable-stack3-row-spacing);
+			--components-indexTable-row-stack-border-bottom: var(--components-indexTable-stack3-row-spacing);
 			--components-indexTable-row-stack3-background-image: var(--components-indexTable-stack-svg);
 		}
 	}
@@ -178,6 +178,7 @@
 		display: flex;
 		flex-direction: column;
 		margin-block-start: var(--pr-t-spacings-50);
+
 		&::before {
 			content: attr(data-label);
 			font-weight: 600;
@@ -293,14 +294,15 @@
 }
 
 @mixin layoutFixed {
-	table-layout: fixed;
-
 	[class*='row-cell'] {
 		--cell-width: calc(var(--components-indexTable-cell-fixed-width, var(--components-index-table-cell-fixed-width)) * 1rem);
 	}
 
-	&.mod-layoutFixed [class*='row-cell'] {
-		@include cellFixedWidth;
+	&.mod-layoutFixed {
+		table-layout: fixed;
+		[class*='row-cell'] {
+			@include cellFixedWidth;
+		}
 	}
 
 	//Layout fixed at breakpoint

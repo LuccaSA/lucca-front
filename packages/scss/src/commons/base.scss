@@ -23,10 +23,16 @@
 
 @mixin base($atRoot: namespace.$defaultAtRoot) {
 	@at-root ($atRoot) {
-		@include core.fontFace(config.$fontFamily, config.$fontWeights);
+		@if config.$fontFamily {
+			@include core.fontFace(config.$fontFamily, config.$fontWeights, config.$fontStyles);
+		}
 
 		@if config.$fontFamilyCursive {
-			@include core.fontFace(config.$fontFamilyCursive, config.$fontWeightsCursive);
+			@include core.fontFace(config.$fontFamilyCursive, config.$fontWeightsCursive, config.$fontStylesCursive);
+		}
+
+		@if config.$fontFamilyBrand {
+			@include core.fontFace(config.$fontFamilyBrand, config.$fontWeightsBrand, config.$fontStylesBrand);
 		}
 
 		*,

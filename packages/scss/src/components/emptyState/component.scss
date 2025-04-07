@@ -67,6 +67,10 @@
 			.button {
 				margin: 0;
 			}
+
+			&:empty {
+				display: none;
+			}
 		}
 	}
 }

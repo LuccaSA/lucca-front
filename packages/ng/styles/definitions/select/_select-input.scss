@@ -43,6 +43,7 @@
 
 	.lu-select-display-wrapper {
 		display: block;
+		width: 100%;
 		text-overflow: ellipsis;
 		white-space: nowrap;
 		overflow: hidden;
@@ -73,18 +74,17 @@
 	.lu-select-clearer {
 		position: absolute;
 		inset-block-end: var(--pr-t-spacings-150);
-		inset-inline-end: 2.25rem;
+		inset-inline-end: 2.5rem;
 	}
 
 	::ng-deep .lu-select-value {
 		.chip {
-			vertical-align: baseline;
+			display: inline-flex;
 			max-inline-size: 100%;
 			margin-block: 0 var(--pr-t-spacings-50);
 			margin-inline: 0 var(--pr-t-spacings-50);
 			text-overflow: ellipsis;
 			overflow: hidden;
-			vertical-align: top;
 			white-space: nowrap;
 		}
 	}

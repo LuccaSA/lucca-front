@@ -166,6 +166,11 @@ In order to work on Lucca Front, we use Storybook to display components.
 - Install node `volta install node@lts`
 - Run storybook `npm start`
 
+## Translations
+
+Translations are hosted by Lokalise on `Lucca.Front` project and must be imported by launching the command at project root: `npm run i18n:update`.
+[Full translations documentation] (https://www.notion.so/Lucca-Front-Traductions-Lokalise-173d278ab26e801b8462f90e1a93dd50)
+
 ## TODO
 
 - [ ] Gestion de l’espace

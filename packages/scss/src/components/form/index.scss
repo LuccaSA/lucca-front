@@ -48,24 +48,10 @@
 		@include XS;
 	}
 
-	&.mod-width20 {
-		@include width20;
-	}
-
-	&.mod-width30 {
-		@include width30;
-	}
-
-	&.mod-width40 {
-		@include width40;
-	}
-
-	&.mod-width50 {
-		@include width50;
-	}
-
-	&.mod-width60 {
-		@include width60;
+	@each $value in config.$fieldsWidth {
+		&.mod-width#{$value} {
+			@include width($value);
+		}
 	}
 
 	&.mod-checkable,
@@ -79,7 +65,7 @@
 		&:has(
 				.textField-input-value[aria-invalid='true'],
 				.timePicker-fieldset-group-textfield-input[aria-invalid='true'],
-				.simpleSelect-input[aria-invalid='true'],
+				.simpleSelect-field-input[aria-invalid='true'],
 				.multipleSelect-displayer-search[aria-invalid='true']
 			) {
 			@include invalid;

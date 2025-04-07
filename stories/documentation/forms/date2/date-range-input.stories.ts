@@ -1,6 +1,6 @@
 import { LOCALE_ID } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { DateRangeInputComponent } from '@lucca-front/ng/date2';
+import { CalendarShortcut, DateRangeInputComponent, PremadeShortcuts } from '@lucca-front/ng/date2';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { cleanupTemplate, generateInputs } from '../../../helpers/stories';
@@ -30,21 +30,31 @@ export default {
 		clearable: {
 			control: 'boolean',
 		},
+		format: {
+			control: 'select',
+			options: ['date', 'date-iso'],
+		},
 		mode: {
 			control: 'select',
 			options: ['day', 'month', 'year'],
 		},
+		focusedDate: {
+			control: 'date',
+		},
 	},
 	render: (args, { argTypes }) => {
-		const { min, max, selected, ...flags } = args;
+		const { selected, min, max, focusedDate, ...flags } = args;
+		const minValue = args['format'] === 'date' ? new Date(args['min']) : new Date(args['min'] ?? 0)?.toISOString().substring(0, 10);
+		const maxValue = args['format'] === 'date' ? new Date(args['max']) : new Date(args['max'] ?? 0)?.toISOString().substring(0, 10);
+		const focusedDateValue = args['format'] === 'date' ? new Date(args['focusedDate']) : new Date(args['focusedDate'] ?? 0)?.toISOString().substring(0, 10);
 		return {
 			props: {
-				min: min ? new Date(min) : null,
-				max: max ? new Date(max) : null,
+				min: args['min'] ? minValue : null,
+				max: args['max'] ? maxValue : null,
+				focusedDate: args['focusedDate'] ? focusedDateValue : null,
 			},
-
 			template: cleanupTemplate(`<lu-form-field label="Date range input example" inlineMessage="Inline message example">
-				<lu-date-range-input [(ngModel)]="selected" [min]="min" [max]="max" ${generateInputs(flags, argTypes)}></lu-date-range-input>
+				<lu-date-range-input [(ngModel)]="selected" [min]="min" [max]="max" [focusedDate]="focusedDate" ${generateInputs(flags, argTypes)}></lu-date-range-input>
 			</lu-form-field>
 
 			<pr-story-model-display>{{selected | json}}</pr-story-model-display>`),
@@ -53,6 +63,50 @@ export default {
 } as Meta;
 
 export const Basic: StoryObj<DateRangeInputComponent> = {
+	args: {
+		hideToday: false,
+		hideWeekend: false,
+		clearable: false,
+		mode: 'day',
+		format: 'date',
+	},
+};
+
+const shortcutsStr =
+	"[\n	{\n		label: 'Since start of week',\n		range: PremadeShortcuts['SinceStartOfWeek']('fr'),\n	},\n	{\n		label: 'Last week',\n		range: PremadeShortcuts['LastWeek']('fr'),\n	},\n	{\n		label: 'Last month',\n		range: PremadeShortcuts['LastMonth']('fr'),\n	},\n]";
+
+export const WithShortcuts: StoryObj<DateRangeInputComponent> = {
+	render: (args: any, { argTypes }) => {
+		const { min, max, selected, ...flags } = args;
+		return {
+			props: {
+				min: min ? new Date(min) : null,
+				max: max ? new Date(max) : null,
+				shortcuts: [
+					{
+						label: 'Since start of week',
+						range: PremadeShortcuts['SinceStartOfWeek']('fr'),
+					},
+					{
+						label: 'Last week',
+						range: PremadeShortcuts['LastWeek']('fr'),
+					},
+					{
+						label: 'Last month',
+						range: PremadeShortcuts['LastMonth']('fr'),
+					},
+				] as CalendarShortcut[],
+				shortcutsStr,
+			},
+
+			template: cleanupTemplate(`
+			<lu-form-field label="Date range input example" inlineMessage="Inline message example">
+				<lu-date-range-input [(ngModel)]="selected" [min]="min" [max]="max" [shortcuts]="shortcuts" ${generateInputs(flags, argTypes)}></lu-date-range-input>
+			</lu-form-field>
+
+			<pr-story-model-display>{{selected | json}}</pr-story-model-display>`),
+		};
+	},
 	args: {
 		hideToday: false,
 

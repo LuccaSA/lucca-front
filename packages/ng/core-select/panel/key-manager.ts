@@ -7,7 +7,7 @@ import { LuOptionComparer } from '../select.model';
 
 interface CoreSelectKeyManagerOptions<T> {
 	queryList: QueryList<ɵLuOptionComponent<T>>;
-	options$: Observable<T[]>;
+	options$: Observable<readonly T[]>;
 	optionComparer: LuOptionComparer<T>;
 	activeOptionIdChanged$: EventEmitter<string>;
 	clueChange$: Observable<string>;

@@ -8,7 +8,7 @@ import { Meta, StoryFn } from '@storybook/angular';
 	styles: [
 		`
 			.gridDemo {
-				background-color: #eee;
+				background-color: var(--pr-t-elevation-surface-sunken);
 				border-radius: 3px;
 				min-block-size: 2.7rem;
 				padding-block: 0.6rem;

@@ -1,10 +1,12 @@
 import { LOCALE_ID } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { DateInputComponent } from '@lucca-front/ng/date2';
-import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { StoryModelDisplayComponent } from '../../../../helpers/story-model-display.component';
-import { cleanupTemplate, generateInputs } from '../../../../helpers/stories';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
+import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { cleanupTemplate, generateInputs } from '../../../../helpers/stories';
+import { StoryModelDisplayComponent } from '../../../../helpers/story-model-display.component';
+import { expect, within, screen, userEvent } from '@storybook/test';
+import { expectNgModelDisplay, waitForAngular } from '../../../../helpers/test';
 
 export default {
 	title: 'Documentation/Forms/Fields/DateInput/Angular',
@@ -73,6 +75,37 @@ export default {
 <pr-story-model-display>{{selected}}</pr-story-model-display>`),
 		};
 	},
+	play: async ({ canvasElement, args, context }) => {
+		const canvas = within(canvasElement);
+		await waitForAngular();
+		// Get input using label text to make sure the label link is properly done, we're adding ? for the tooltip
+		const input = canvas.getByLabelText(`${args['label']}${args['tooltip'] ? '?' : ''}`, { selector: 'input' });
+		await userEvent.click(input);
+		await waitForAngular();
+		// We have to get table by role using the screen as matcher, as overlay isn't in the canvas itself
+		const table = screen.getByRole('grid');
+		// Not ideal but we need to do this until we have a better way to get the calendar component
+		const calendarComponent = table.parentElement.parentElement;
+		const today = new Date();
+		const calendar = within(calendarComponent);
+		// We can at least check for this year, checking for the month would be harder due to locale considerations
+		await expect(calendar.getByText(today.getFullYear())).toBeInTheDocument();
+		await expect(calendar.getByText(today.getDate()).parentElement).toHaveAttribute('aria-selected', 'true');
+		// We pick 15 because it should show only once
+		// Fallback if we're the 15th, pick 16
+		const targetDay = today.getDate() === 15 ? 16 : 15;
+		await userEvent.click(calendar.getByText(targetDay.toString()));
+		await waitForAngular();
+		await expectNgModelDisplay(canvasElement, new Date(today.getFullYear(), today.getMonth(), targetDay).toString());
+
+		await context.step('Invalid date', async () => {
+			await userEvent.clear(input);
+			await userEvent.type(input, 'not a date');
+			await userEvent.keyboard('{Escape}');
+			await expectNgModelDisplay(canvasElement, 'Invalid Date');
+			await expect(input).toHaveAttribute('aria-invalid', 'true');
+		});
+	},
 } as Meta;
 
 export const Basic: StoryObj<DateInputComponent & FormFieldComponent> = {
@@ -81,7 +114,7 @@ export const Basic: StoryObj<DateInputComponent & FormFieldComponent> = {
 		label: 'Label',
 		tooltip: 'Tooltip message',
 		hiddenLabel: false,
-		inlineMessage: 'Helper Text',
+		inlineMessage: 'Helper text',
 		inlineMessageState: 'default',
 		// DateInput
 		disableOverflow: false,

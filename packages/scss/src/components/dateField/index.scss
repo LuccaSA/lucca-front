@@ -4,7 +4,11 @@
 	@include vars;
 	@include component;
 
-	&:not(.mod-auto) {
+	&.mod-filterPill {
+		@include filterPill;
+	}
+
+	&:not(.mod-auto, .mod-filterPill) {
 		&.mod-day {
 			@include day;
 

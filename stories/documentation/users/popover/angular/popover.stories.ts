@@ -3,7 +3,7 @@ import { Component, Input } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { LuUserPopoverDirective, provideLuUserPopover } from '@lucca-front/ng/popup-employee';
 import { Meta, StoryFn, applicationConfig } from '@storybook/angular';
-import { ILuUser } from '../../../../../packages/ng/user/user.model';
+import { ILuUser } from '@lucca-front/ng/user';
 
 @Component({
 	selector: 'user-popover-story',

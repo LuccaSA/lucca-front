@@ -1,6 +1,6 @@
+import { isNotNil } from '@lucca-front/ng/core';
 import { Duration } from 'date-fns';
 import { ISO8601Duration } from './date-primitives';
-import { isNotNil } from './misc.utils';
 
 export type NonNullableDateFnsDuration = {
 	years: number;

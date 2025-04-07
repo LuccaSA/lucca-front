@@ -21,6 +21,7 @@
 			border: 1px solid var(--commons-border-200);
 			overflow: var(--components-dataTable-overflow);
 			background-color: var(--components-dataTable-cell-background);
+			contain: paint; // Fix overflow on webkit when table has scroll
 
 			&:focus-visible {
 				@include a11y.focusVisible;
@@ -125,7 +126,15 @@
 	.statusBadge,
 	.tag,
 	.avatar {
-		display: flex;
-		inline-size: fit-content;
+		vertical-align: top;
+	}
+
+	.statusBadge,
+	.tag {
+		margin-block-start: var(--pr-t-spacings-25);
+	}
+
+	.avatarWrapper {
+		display: inline-flex;
 	}
 }

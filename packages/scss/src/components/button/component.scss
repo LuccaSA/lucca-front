@@ -28,7 +28,7 @@
 	position: relative;
 	text-decoration: none;
 	vertical-align: middle;
-	white-space: nowrap;
+	text-wrap: balance;
 	text-align: center;
 	font-weight: 600;
 	border: 0;
@@ -56,7 +56,7 @@
 
 	&:hover {
 		--components-button-color: var(--palettes-0, var(--palettes-text, var(--palettes-product-0)));
-		--components-button-backgroundColor: var(--palettes-600, var(--palettes-product-600));
+		--components-button-backgroundColor: var(--palettes-800, var(--palettes-product-800));
 	}
 
 	&:focus-visible {
@@ -64,7 +64,7 @@
 	}
 
 	&:active {
-		--components-button-backgroundColor: var(--palettes-800, var(--palettes-product-800));
+		--components-button-backgroundColor: var(--palettes-900, var(--palettes-product-900));
 	}
 
 	&:disabled {

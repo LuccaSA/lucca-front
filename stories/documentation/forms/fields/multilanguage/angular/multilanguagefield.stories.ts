@@ -19,6 +19,13 @@ export default {
 				type: 'select',
 			},
 		},
+		width: {
+			options: [null, 20, 30, 40, 50, 60],
+			control: {
+				type: 'select',
+			},
+			description: '[v19.2]',
+		},
 	},
 } as Meta;
 
@@ -30,7 +37,7 @@ export const Basic: StoryObj<
 		}
 > = {
 	render: (args, { argTypes }) => {
-		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, ...inputArgs } = args;
+		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, width, ...inputArgs } = args;
 		return {
 			props: {
 				example: [
@@ -60,6 +67,7 @@ export const Basic: StoryObj<
 					inlineMessage,
 					inlineMessageState,
 					size,
+					width,
 				},
 				argTypes,
 			)}>
@@ -79,7 +87,7 @@ export const Basic: StoryObj<
 		label: 'Label',
 		required: true,
 		hiddenLabel: false,
-		inlineMessage: 'Helper Text',
+		inlineMessage: 'Helper text',
 		inlineMessageState: 'default',
 		placeholder: 'Placeholder',
 		tooltip: 'Je suis un message d’aide',

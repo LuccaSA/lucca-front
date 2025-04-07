@@ -199,6 +199,7 @@
 				content: '';
 				position: absolute;
 				inset: 0 -9999px;
+				z-index: -1;
 			}
 
 			&,
@@ -272,5 +273,20 @@
 				margin-inline-end: var(--pr-t-spacings-100);
 			}
 		}
+	}
+
+	.statusBadge,
+	.tag,
+	.avatar {
+		vertical-align: top;
+	}
+
+	.statusBadge,
+	.tag {
+		margin-block-start: var(--pr-t-spacings-25);
+	}
+
+	.avatarWrapper {
+		display: inline-flex;
 	}
 }

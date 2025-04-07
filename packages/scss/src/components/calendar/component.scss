@@ -7,7 +7,7 @@
 	inline-size: var(--components-calendarWidth);
 
 	@at-root ($atRoot) {
-		.calendarShortcutsOptionnal {
+		.calendarShortcutsOptional {
 			display: flex;
 		}
 
@@ -84,6 +84,7 @@
 			scroll-snap-type: x mandatory;
 			-ms-overflow-style: none;
 			scrollbar-width: none;
+
 			&::-webkit-scrollbar {
 				display: none;
 			}

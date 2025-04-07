@@ -27,6 +27,62 @@
 	}
 }
 
+@mixin selectOption {
+	padding: var(--pr-t-spacings-50) var(--pr-t-spacings-100);
+	position: relative;
+	border-radius: var(--commons-borderRadius-M);
+
+	.formLabel {
+		@include formLabel.widthAuto;
+
+		position: static;
+
+		&::after {
+			content: '';
+			position: absolute;
+			inset: 0;
+		}
+	}
+
+	&:not(:has(.checkboxField-input:disabled, .checkboxField-input.is-disabled)) {
+		&:hover {
+			background-color: var(--palettes-neutral-50);
+		}
+
+		&:has(
+				.checkboxField-input:checked,
+				.checkboxField-input.is-checked,
+				.checkboxField-input[aria-checked='mixed'],
+				.checkboxField-input.is-mixed
+			) {
+			background-color: var(--palettes-product-50);
+
+			&:hover {
+				background-color: var(--palettes-product-100);
+			}
+		}
+
+		&:has(.checkboxField-input[aria-invalid='true'], .checkboxField-input.is-invalid) {
+			&:hover {
+				background-color: var(--palettes-error-50);
+			}
+
+			&:has(
+					.checkboxField-input:checked,
+					.checkboxField-input.is-checked,
+					.checkboxField-input[aria-checked='mixed'],
+					.checkboxField-input.is-mixed
+				) {
+				background-color: var(--palettes-error-50);
+
+				&:hover {
+					background-color: var(--palettes-error-100);
+				}
+			}
+		}
+	}
+}
+
 @mixin S {
 	.formLabel {
 		@include formLabel.S;
@@ -99,24 +155,8 @@
 	}
 }
 
-@mixin width20 {
-	--components-form-field-width: 10rem;
-}
-
-@mixin width30 {
-	--components-form-field-width: 15rem;
-}
-
-@mixin width40 {
-	--components-form-field-width: 20rem;
-}
-
-@mixin width50 {
-	--components-form-field-width: 25rem;
-}
-
-@mixin width60 {
-	--components-form-field-width: 30rem;
+@mixin width($value) {
+	--components-form-field-width: #{math.div($value, 2) * 1rem};
 }
 
 @mixin withArrow {

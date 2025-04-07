@@ -1,6 +1,3 @@
-/* eslint-disable @angular-eslint/no-output-on-prefix */
-/* eslint-disable @angular-eslint/no-input-rename */
-
 import { FlexibleConnectedPositionStrategy, Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
 import { AfterViewInit, Directive, ElementRef, HostBinding, HostListener, inject, Input, OnDestroy, ViewContainerRef } from '@angular/core';
@@ -11,12 +8,7 @@ import { Observable } from 'rxjs';
 import { USER_POPOVER_IS_ACTIVATED } from '../../user-popover.providers';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
-/**
- * This directive is intended to be used in conjunction with an lu-dropdown tag.  It is
- * responsible for toggling the display of the provided dropdown instance.
- */
 @Directive({
-	// eslint-disable-next-line @angular-eslint/directive-selector
 	selector: '[luUserPopover]',
 	standalone: true,
 	exportAs: 'LuUserPopoverDirective',
@@ -81,7 +73,6 @@ export class LuUserPopoverDirective extends ALuPopoverTrigger<LuUserPopoverPanel
 
 	// }
 
-	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 	protected override _portal: ComponentPortal<LuUserPopoverPanelComponent>;
 	protected _user: ILuUser = { id: 0, firstName: '', lastName: '' };
 
@@ -179,7 +170,6 @@ export class LuUserPopoverDirective extends ALuPopoverTrigger<LuUserPopoverPanel
 		return !isNatevelyFocusableTag && !hasATabIndex;
 	}
 
-	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 	private _setTabindex(i: number = null): void {
 		this._elementRef.nativeElement.setAttribute('tabindex', `${i}`);
 	}

@@ -12,7 +12,7 @@ export default {
 		}),
 	],
 	render: (args: EmptyStatePageComponent) => {
-		const { heading, description, icon, topRightBackground, topRightForeground, bottomLeftBackground, bottomLeftForeground, contentBackgroundColor, hx } = args;
+		const { heading, description, slotTop, icon, topRightBackground, topRightForeground, bottomLeftBackground, bottomLeftForeground, contentBackgroundColor, hx } = args;
 		const paramIcon = args.icon === '' ? '' : 'icon="https://cdn.lucca.fr/lucca-front/assets/empty-states/message/' + args.icon + '.svg"';
 		const paramTopRightBackground = args.topRightBackground === '' ? '' : 'topRightBackground="https://cdn.lucca.fr/lucca-front/assets/empty-states/' + args.topRightBackground + '.svg"';
 		const paramTopRightForeground = args.topRightForeground === '' ? '' : 'topRightForeground="https://cdn.lucca.fr/lucca-front/assets/empty-states/' + args.topRightForeground + '.svg"';
@@ -30,6 +30,7 @@ export default {
 			],
 			template: `<lu-empty-state-page
 	heading="${heading}"
+	slotTop="${slotTop}"
 	description="${description}"
 	${paramIcon}
 	${paramTopRightBackground}
@@ -150,6 +151,9 @@ export default {
 		description: {
 			description: '[v18.1] Optional',
 		},
+		slotTop: {
+			description: '[v19.3] Optional, Add content above heading.',
+		},
 	},
 } as Meta;
 
@@ -157,6 +161,7 @@ export const Page: StoryObj<EmptyStatePageComponent> = {
 	args: {
 		heading: 'Empty state page',
 		description: 'Description can be a string or a ng-template',
+		slotTop: '',
 		icon: '',
 		topRightBackground: 'poplee/bubbles-top-right-01',
 		topRightForeground: 'generic/coffee-01',

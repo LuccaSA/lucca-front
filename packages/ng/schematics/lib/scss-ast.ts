@@ -11,7 +11,7 @@ export function removeContainerIfEmpty(node: Container | undefined): void {
 		return;
 	}
 
-	if (!node.nodes.length) {
+	if (!node.nodes?.length) {
 		const { parent } = node;
 
 		// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
@@ -200,7 +200,6 @@ export function commentNode(node: AtRule | Declaration, comment: string, postCss
 			return new postCss.Comment({ text: text.trim(), raws: { inline: true, right: '', left: leadingSpaces } });
 		});
 
-	// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 	const originalBefore = node.raws.before;
 
 	node.replaceWith(commentNode, ...commentCodeNodes);

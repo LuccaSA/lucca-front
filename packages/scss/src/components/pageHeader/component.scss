@@ -4,6 +4,8 @@
 @mixin component($atRoot: namespace.$defaultAtRoot) {
 	padding: var(--components-pageHeader-padding);
 
+	// .menu is deprecated
+	.horizontalNavigation,
 	.menu {
 		margin-block-start: var(--pr-t-spacings-100);
 	}
@@ -22,17 +24,23 @@
 			column-gap: var(--pr-t-spacings-100);
 			align-items: center;
 			flex-wrap: wrap;
+			min-height: var(--pr-t-spacings-500);
+		}
+
+		.pageHeader-content-actions,
+		.pageHeader-content-title-back,
+		.pageHeader-content-title-actions {
+			&:empty {
+				display: none;
+			}
 		}
 
 		.pageHeader-content-actions {
+			gap: var(--pr-t-spacings-150);
 			display: flex;
 			align-items: center;
 			flex-wrap: wrap;
 			row-gap: var(--pr-t-spacings-200);
-		}
-
-		.pageHeader-content-actions {
-			gap: var(--pr-t-spacings-200);
 
 			.button {
 				margin: 0;
@@ -42,10 +50,10 @@
 				}
 			}
 
-			.textfield.mod-search {
+			.textfield.mod-search,
+			.form-field:has(.icon-searchMagnifyingGlass) {
 				@include media.max('XS') {
-					inline-size: 100%;
-					flex: auto;
+					flex-basis: 100%;
 				}
 			}
 		}
@@ -54,6 +62,10 @@
 			max-inline-size: var(--components-pageHeader-description-max-width);
 			margin-block-start: var(--pr-t-spacings-100);
 			color: var(--palettes-neutral-700);
+		}
+
+		.pageHeader-description-paragraph {
+			margin: 0;
 		}
 	}
 }

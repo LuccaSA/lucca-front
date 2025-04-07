@@ -33,22 +33,35 @@ export default {
 		clearable: {
 			control: 'boolean',
 		},
+		format: {
+			control: 'select',
+			options: ['date', 'date-iso'],
+		},
 		mode: {
 			control: 'select',
 			options: ['day', 'month', 'year'],
 		},
+		focusedDate: {
+			control: 'date',
+		}
 	},
 	render: (args, { argTypes }) => {
-		const { min, max, selected, ...flags } = args;
+		const { min, max, focusedDate, ...flags } = args;
+		const selected = args['selected'] ? new Date(args['selected']) : null;
+		const defaultDate = args['format'] === 'date' ? selected : selected.toISOString().substring(0, 10);
+		const minValue = args['format'] === 'date' ? new Date(args['min']) : new Date(args['min'] ?? 0)?.toISOString().substring(0, 10);
+		const maxValue = args['format'] === 'date' ? new Date(args['max']) : new Date(args['max'] ?? 0)?.toISOString().substring(0, 10);
+		const focusedDateValue = args['format'] === 'date' ? new Date(args['focusedDate']) : new Date(args['focusedDate'] ?? 0)?.toISOString().substring(0, 10);
 		return {
 			props: {
-				selected: selected || new Date(),
-				min: min ? new Date(min) : null,
-				max: max ? new Date(max) : null,
+				selected: defaultDate,
+				min: args['min'] ? minValue : null,
+				max: args['max'] ? maxValue : null,
+				focusedDate: args['focusedDate'] ? focusedDateValue : null,
 			},
 			template: `
 			<lu-form-field label="Date input example" inlineMessage="Inline message example">
-				<lu-date-input [(ngModel)]="selected" [min]="min" [max]="max" ${generateInputs(flags, argTypes)}></lu-date-input>
+				<lu-date-input [(ngModel)]="selected" [min]="min" [max]="max" [focusedDate]="focusedDate" ${generateInputs(flags, argTypes)}></lu-date-input>
 			</lu-form-field>
 
 			<pr-story-model-display>{{selected}}</pr-story-model-display>
@@ -65,5 +78,6 @@ export const Basic: StoryObj<DateInputComponent> = {
 		hideWeekend: false,
 		clearable: false,
 		mode: 'day',
+		format: 'date',
 	},
 };

@@ -1,0 +1,16 @@
+@if (container()) {
+<footer class="footer" [class.dialog-inside-footer]="dialog()" [class.mod-sticky]="sticky()" [class]="breakpointClass">
+	<div class="footer-containerOptional">
+		<ng-container *ngTemplateOutlet="footerContent" />
+	</div>
+</footer>
+} @else {
+<footer class="footer" [class.dialog-inside-footer]="dialog()" [class.mod-sticky]="sticky()" [class]="breakpointClass">
+	<ng-container *ngTemplateOutlet="footerContent" />
+</footer>
+}
+
+<ng-template #footerContent>
+	<div class="footer-content"><ng-content select="[footerContent]" /></div>
+	<div class="footer-actions"><ng-content /></div>
+</ng-template>

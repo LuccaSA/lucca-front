@@ -1,7 +1,7 @@
 import { NgClass } from '@angular/common';
 import { booleanAttribute, ChangeDetectionStrategy, Component, computed, ElementRef, forwardRef, inject, Input, input, LOCALE_ID, model, output, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { getIntl } from '@lucca-front/ng/core';
+import { getIntl, isNil, isNotNil } from '@lucca-front/ng/core';
 import { BasePickerComponent } from '../core/base-picker.component';
 import { ISO8601Time } from '../core/date-primitives';
 import {
@@ -16,13 +16,14 @@ import {
 } from '../core/date.utils';
 import { isoDurationToDateFnsDuration } from '../core/duration.utils';
 import { ceilToNearest, circularize, floorToNearest, roundToNearest } from '../core/math.utils';
-import { isNil, isNotNil, PickerControlDirection } from '../core/misc.utils';
+import { PickerControlDirection } from '../core/misc.utils';
 import { RepeatOnHoldDirective } from '../core/repeat-on-hold.directive';
 import { TimePickerPartComponent } from '../core/time-picker-part.component';
 import { DEFAULT_MIN_TIME, DEFAULT_TIME_DECIMAL_PIPE_FORMAT, TimeChangeEvent } from './time-picker.model';
 import { LU_TIME_PICKER_TRANSLATIONS } from './time-picker.translate';
 
 const MAX_TIME = '23:59:59';
+let nextId = 0;
 
 @Component({
 	selector: 'lu-time-picker',
@@ -43,6 +44,8 @@ const MAX_TIME = '23:59:59';
 export class TimePickerComponent extends BasePickerComponent {
 	protected intl = getIntl(LU_TIME_PICKER_TRANSLATIONS);
 	protected localeId = inject(LOCALE_ID);
+
+	idSuffix = nextId++;
 
 	@ViewChild('anteMeridiemRef')
 	anteMeridiemRef: ElementRef<HTMLInputElement>;

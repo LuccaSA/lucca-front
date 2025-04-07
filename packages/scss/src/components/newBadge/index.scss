@@ -3,4 +3,8 @@
 .newBadge {
 	@include vars;
 	@include component;
+
+	&.mod-inverted {
+		@include inverted;
+	}
 }

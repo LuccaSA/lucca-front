@@ -1,20 +1,38 @@
 import { NgIf, NgTemplateOutlet } from '@angular/common';
-import { booleanAttribute, Component, computed, contentChildren, effect, forwardRef, inject, input, model, OnDestroy, Renderer2, signal, ViewEncapsulation } from '@angular/core';
-import { toObservable, toSignal } from '@angular/core/rxjs-interop';
+import {
+	afterNextRender,
+	booleanAttribute,
+	Component,
+	computed,
+	contentChildren,
+	DoCheck,
+	effect,
+	forwardRef,
+	inject,
+	Injector,
+	input,
+	model,
+	numberAttribute,
+	OnDestroy,
+	Renderer2,
+	signal,
+	ViewEncapsulation,
+} from '@angular/core';
 import { AbstractControl, NgControl, ReactiveFormsModule, RequiredValidator, Validators } from '@angular/forms';
 import { SafeHtml } from '@angular/platform-browser';
 import { getIntl, IntlParamsPipe, LuClass, PortalContent, PortalDirective, ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { InlineMessageComponent, InlineMessageState } from '@lucca-front/ng/inline-message';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
-import { BehaviorSubject, merge, switchMap } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { BehaviorSubject } from 'rxjs';
 import { FormFieldSize } from './form-field-size';
 import { FORM_FIELD_INSTANCE } from './form-field.token';
 import { LU_FORM_FIELD_TRANSLATIONS } from './form-field.translate';
 import { InputDirective } from './input.directive';
 
 let nextId = 0;
+
+type FormFieldWidth = 20 | 30 | 40 | 50 | 60;
 
 @Component({
 	selector: 'lu-form-field',
@@ -31,11 +49,11 @@ let nextId = 0;
 	],
 	encapsulation: ViewEncapsulation.None,
 })
-export class FormFieldComponent implements OnDestroy {
+export class FormFieldComponent implements OnDestroy, DoCheck {
 	intl = getIntl(LU_FORM_FIELD_TRANSLATIONS);
 
 	#luClass = inject(LuClass);
-
+	#injector = inject(Injector);
 	#renderer = inject(Renderer2);
 
 	formFieldChildren = contentChildren(FormFieldComponent, { descendants: true });
@@ -43,21 +61,14 @@ export class FormFieldComponent implements OnDestroy {
 	requiredValidators = contentChildren(RequiredValidator, { descendants: true });
 	ngControls = contentChildren(NgControl, { descendants: true });
 
-	ignoredRequiredValidators = computed(() => new Set(this.formFieldChildren().flatMap((f: FormFieldComponent) => f.requiredValidators())));
-	ignoredControls = computed(() => new Set(this.formFieldChildren().flatMap((f: FormFieldComponent) => f.ngControls())));
+	ignoredRequiredValidators = computed(() => new Set(this.formFieldChildren().flatMap((f) => f.requiredValidators())));
+	ignoredControls = computed(() => new Set(this.formFieldChildren().flatMap((f) => f.ngControls())));
 
 	ownRequiredValidators = computed(() => this.requiredValidators().filter((c) => !this.ignoredRequiredValidators().has(c)));
 	ownControls = computed(() => this.ngControls().filter((c) => !this.ignoredControls().has(c)));
 
-	refreshedOwnControls = toSignal(toObservable(this.ownControls).pipe(switchMap((controls) => merge(...controls.map((c) => c.control.events)).pipe(map(() => [...controls])))), {
-		initialValue: [],
-	});
-
-	isInputRequired = computed(() => {
-		const hasRequiredFormControl = this.refreshedOwnControls().some((c) => c.control.hasValidator(Validators.required));
-		const hasRequiredNgModel = this.ownRequiredValidators().some((c) => booleanAttribute(c.required));
-		return hasRequiredNgModel || hasRequiredFormControl;
-	});
+	#hasInputRequired = signal(false);
+	isInputRequired = this.#hasInputRequired.asReadonly();
 
 	label = input.required<PortalContent>();
 
@@ -74,19 +85,12 @@ export class FormFieldComponent implements OnDestroy {
 
 	tooltip = input<string | SafeHtml | null>(null);
 
-	width = input<20 | 30 | 40 | 50 | 60>(null);
-
-	invalidStatus = computed(() => {
-		const isInvalidOverride = this.invalid() !== undefined && this.invalid() !== null;
-		if (isInvalidOverride) {
-			return isInvalidOverride;
-		}
-		const statusControlOverride = this.statusControl();
-		if (statusControlOverride) {
-			return statusControlOverride.invalid && this.refreshedOwnControls().some((c) => c.touched);
-		}
-		return this.refreshedOwnControls().some((c) => c.invalid && c.touched);
+	width = input<FormFieldWidth, FormFieldWidth | `${FormFieldWidth}`>(null, {
+		transform: numberAttribute as (value: FormFieldWidth | `${FormFieldWidth}`) => FormFieldWidth,
 	});
+
+	#invalidStatus = signal(false);
+	invalidStatus = this.#invalidStatus.asReadonly();
 
 	invalid = input<boolean | null, boolean>(null, { transform: booleanAttribute });
 
@@ -206,5 +210,35 @@ export class FormFieldComponent implements OnDestroy {
 
 	ngOnDestroy(): void {
 		this.ready$.complete();
+	}
+
+	ngDoCheck(): void {
+		afterNextRender(
+			() => {
+				this.#hasInputRequired.set(this.#isInputRequired());
+				this.#invalidStatus.set(this.#hasInvalidStatus());
+			},
+			{
+				injector: this.#injector,
+			},
+		);
+	}
+
+	#isInputRequired(): boolean {
+		const hasRequiredFormControl = this.ownControls().some((c) => c.control?.hasValidator(Validators.required));
+		const hasRequiredNgModel = this.ownRequiredValidators().some((c) => booleanAttribute(c.required));
+		return hasRequiredNgModel || hasRequiredFormControl;
+	}
+
+	#hasInvalidStatus(): boolean {
+		const isInvalidOverride = this.invalid() !== undefined && this.invalid() !== null;
+		if (isInvalidOverride) {
+			return this.invalid();
+		}
+		const statusControlOverride = this.statusControl();
+		if (statusControlOverride) {
+			return statusControlOverride.invalid && this.ownControls().some((c) => c?.touched);
+		}
+		return this.ownControls().some((c) => c.invalid && c.touched);
 	}
 }

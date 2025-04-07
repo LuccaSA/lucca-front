@@ -7,6 +7,7 @@
 			[placeholder]="placeholder()"
 			[(ngModel)]="invariant().value"
 			(ngModelChange)="valueChange()"
+			[ngModelOptions]="{ standalone: true }"
 			(blur)="onTouched?.()"
 			[disabled]="disabledInternal()"
 			#inputElement
@@ -23,7 +24,7 @@
 				<span aria-hidden="true" class="lucca-icon icon-signTranslation"></span>
 			</button>
 			<ng-template #popoverMultilanguage>
-				<div class="popover-contentOptional" [style.width.px]="inputElement.clientWidth + 16">
+				<div class="popover-contentOptional multilanguage_popover-content" [style.width.px]="inputElement.clientWidth + 16">
 					<div class="u-displayFlex pr-u-gap100 u-flexDirectionColumn">
 						@for (row of panelInputs(); track row.cultureCode) {
 						<lu-form-field [label]="intl.translateTo | intlParams: {lang: getLocaleDisplayName(row.cultureCode)}" hiddenLabel>
@@ -31,6 +32,7 @@
 								[suffix]="{content: row.cultureCode, ariaLabel: ''}"
 								[(ngModel)]="row.value"
 								(ngModelChange)="valueChange()"
+								[ngModelOptions]="{ standalone: true }"
 								[disabled]="disabledInternal()"
 							></lu-text-input>
 						</lu-form-field>

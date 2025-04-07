@@ -1,5 +1,5 @@
-import { Meta, moduleMetadata, StoryFn } from '@storybook/angular';
-// import { SampleComponent } from 'dist/ng/sample';
+import { Meta, moduleMetadata } from '@storybook/angular';
+import { cleanupTemplate } from 'stories/helpers/stories';
 
 interface SampleBasicStory {
 	content: string;
@@ -19,21 +19,13 @@ export default {
 			// imports: [SampleComponent],
 		}),
 	],
+	render: (args: SampleBasicStory) => {
+		return {
+			template: cleanupTemplate(`<luSample>
+	${args.content}
+</luSample>`),
+		};
+	},
 } as Meta;
 
-function getTemplate(args: SampleBasicStory): string {
-	return `<luSample>
-	${args.content}
-</luSample>
-`;
-}
-
-const Template: StoryFn<SampleBasicStory> = (args) => ({
-	props: args,
-	template: getTemplate(args),
-});
-
-export const Basic = Template.bind({});
-Basic.args = {
-	content: 'sample',
-};
+export const Basic = { args: { content: 'Sample' } };

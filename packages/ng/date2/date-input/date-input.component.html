@@ -1,8 +1,11 @@
-<div class="textField" #popoverAnchor>
+@if (isFilterPill) {
+<label for="dateInput" class="u-mask">{{ intl.pickDate }}</label>
+}
+<div class="textField dateField-textField" #popoverAnchor>
 	<div class="textField-input">
 		<input
 			type="text"
-			id="date"
+			id="dateInput"
 			#date
 			luInput
 			class="textField-input-value"
@@ -13,15 +16,22 @@
 			aria-haspopup="true"
 			role="combobox"
 			(click)="popoverRef.openPopover(true, true)"
-			(keyup.arrowDown)="arrowDown(popoverRef)"
-			(keyup.escape)="popoverRef.close()"
+			(keydown.arrowDown)="arrowDown(popoverRef)"
+			(keydown.escape)="popoverRef.close()"
+			(keydown.space)="spaceDown($event, popoverRef)"
 			[disabled]="disabled"
 			[attr.placeholder]="placeholder() || dateFormatLocalized()"
+			[attr.autocomplete]="autocomplete()"
 		/>
 
 		<div class="textField-input-affix">
 			@if (clearable() && !disabled && date.value !== '') {
-			<button class="textField-input-affix-clear clear" type="button" (click)="clear(date)">
+			<button class="textField-input-affix-clear clear" type="button" (click)="clear()">
+				<span aria-hidden="true" class="lucca-icon icon-signClose"></span>
+				<span class="u-mask">{{ intl.clear }}</span>
+			</button>
+			} @if (isFilterPill && !isFilterPillEmpty()) {
+			<button class="textField-input-affix-clear clear" type="button" (click)="clear()">
 				<span aria-hidden="true" class="lucca-icon icon-signClose"></span>
 				<span class="u-mask">{{ intl.clear }}</span>
 			</button>
@@ -31,17 +41,24 @@
 				[luPopoverAnchor]="popoverAnchor"
 				[disabled]="disabled"
 				[luPopoverNoCloseButton]="true"
+				[luPopoverDisabled]="isFilterPill"
 				#popoverRef="luPopover2"
 				[customPositions]="popoverPositions"
 				tabindex="-1"
 				type="button"
 				class="button mod-onlyIcon mod-text textField-input-affix-toggle"
 			>
-				<lu-icon [icon]="'calendarDate'" [alt]="intl.pickDate"></lu-icon>
+				<lu-icon [icon]="'calendarDate'" [alt]="intl.pickDate" />
 			</button>
 		</div>
 	</div>
 </div>
+
+@if (isFilterPill) {
+<ng-container *ngTemplateOutlet="calendar"></ng-container>
+}
+
+<div *luFilterPillDisplayer>{{ displayValue() }}</div>
 
 <ng-template #calendar>
 	<div class="calendarWrapper">
@@ -66,7 +83,7 @@
 				[(tabbableDate)]="tabbableDate"
 				[getCellInfo]="combinedGetCellInfo"
 				[ranges]="ranges()"
-				(dateClicked)="selectedDate.set($event);currentDate.set($event);popoverRef.close();date.focus()"
+				(dateClicked)="dateClicked($event, popoverRef)"
 				(nextPage)="move(1, calendarMode())"
 				(previousPage)="move(-1, calendarMode())"
 				[(displayMode)]="calendarMode"
