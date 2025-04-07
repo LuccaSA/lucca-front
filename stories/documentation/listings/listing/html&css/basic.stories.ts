@@ -86,18 +86,21 @@ export default {
 							<ul class="listing mod-icons">
 								<li class="listing-item">
 										<span class="listing-item-icon lucca-icon mod-S" aria-hidden="true"></span>
+										<span class="u-mask">Validé</span>
 										<div class="listing-item-content">
 											item
 										</div>
 								</li>
 								<li class="listing-item">
-										<span class="listing-item-icon lucca-icon mod-S" aria-hidden="true"></span>
+										<span class="listing-item-icon lucca-icon icon-minus palette-neutral mod-S" aria-hidden="true"></span>
+										<span class="u-mask">En attente</span>
 										<div class="listing-item-content">
 											item
 										</div>
 								</li>
 								<li class="listing-item">
-										<span class="listing-item-icon lucca-icon mod-S" aria-hidden="true"></span>
+										<span class="listing-item-icon lucca-icon icon-cross palette-critical mod-S" aria-hidden="true"></span>
+										<span class="u-mask">Non-validé</span>
 										<div class="listing-item-content">
 											item
 										</div>
