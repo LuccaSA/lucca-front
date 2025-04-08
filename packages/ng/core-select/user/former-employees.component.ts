@@ -1,12 +1,12 @@
-import { Component, InjectionToken, WritableSignal, inject } from '@angular/core';
+import { Component, InjectionToken, Signal, WritableSignal, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { getIntl } from '@lucca-front/ng/core';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { CheckboxInputComponent } from '@lucca-front/ng/forms';
-import { LU_CORE_SELECT_USER_TRANSLATIONS } from './user.translate';
+import { LuCoreSelectUserTranslations } from './user.translate';
 
 export interface FormerEmployeesContext {
 	includeFormerEmployees: WritableSignal<boolean>;
+	intl: Signal<LuCoreSelectUserTranslations>;
 }
 
 export const FORMER_EMPLOYEES_CONTEXT = new InjectionToken<FormerEmployeesContext>('FormerEmployeesContext');
@@ -18,13 +18,12 @@ export const FORMER_EMPLOYEES_CONTEXT = new InjectionToken<FormerEmployeesContex
 	imports: [FormsModule, CheckboxInputComponent, FormFieldComponent],
 	template: `
 		<div class="formerEmployeeDisplayer">
-			<lu-form-field [label]="intl.includeFormerEmployees">
+			<lu-form-field [label]="context.intl().includeFormerEmployees">
 				<lu-checkbox-input class="formerEmployeeDisplayer-checkbox" [(ngModel)]="context.includeFormerEmployees" [ngModelOptions]="{ standalone: true }" />
 			</lu-form-field>
 		</div>
 	`,
 })
 export class LuCoreSelectFormerEmployeesComponent {
-	readonly intl = getIntl(LU_CORE_SELECT_USER_TRANSLATIONS);
 	readonly context = inject(FORMER_EMPLOYEES_CONTEXT);
 }
