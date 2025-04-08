@@ -19,3 +19,7 @@
 		@include toggle;
 	}
 }
+
+.box-arrow {
+	@include arrow;
+}
