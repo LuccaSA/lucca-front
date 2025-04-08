@@ -48,3 +48,5 @@ compodoc-static
 /playwright-report/
 /blob-report/
 /playwright/.cache/
+/coverage/
+junit.xml
