@@ -23,7 +23,7 @@ export default {
 	render: (args, { argTypes }) => {
 		const { required, ...fieldArgs } = args;
 		return {
-			template: `<lu-form-field ${generateInputs(fieldArgs, argTypes)}>
+			template: `<lu-form-field extraDescribedBy="extra-message" ${generateInputs(fieldArgs, argTypes)}>
 	<div class="textField">
 		<div class="textField-input">
 			<textarea
