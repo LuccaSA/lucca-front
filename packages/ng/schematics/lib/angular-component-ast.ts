@@ -174,7 +174,7 @@ export function removeAngularImport(sourceFile: SourceFile, fileToEdit: string, 
 		return new NoopChange();
 	}
 	let removePos = 0;
-	let toRemove = symbolName;
+	let toRemove = 0;
 	forEachChild(
 		sourceFile,
 		createVisitor(isDecorator, (decorator) => {
@@ -201,12 +201,18 @@ export function removeAngularImport(sourceFile: SourceFile, fileToEdit: string, 
 			if (imports) {
 				imports.forEach((exp, index) => {
 					if (exp && isIdentifier(exp) && exp.text === symbolName) {
-						removePos = exp.getFullStart();
+						toRemove = exp.getFullWidth();
 						if (index === 0) {
 							removePos = importExpression.elements[0].getStart(sourceFile) || 0;
-							toRemove += ',';
-						} else if (index < imports.length - 1) {
-							toRemove += ' , ';
+						} else {
+							removePos = exp.getFullStart();
+						}
+						while (['\n', '\t'].includes(sourceFile.text.charAt(removePos - 1))) {
+							removePos--;
+							toRemove++;
+						}
+						while ([' ', '\n', '\t', ','].includes(sourceFile.text.charAt(removePos + toRemove))) {
+							toRemove++;
 						}
 					}
 				});
@@ -214,7 +220,7 @@ export function removeAngularImport(sourceFile: SourceFile, fileToEdit: string, 
 		})
 	);
 	if (removePos > 0) {
-		return new RemoveChange(fileToEdit, removePos, toRemove);
+		return new RemoveChange(fileToEdit, removePos, ' '.repeat(toRemove));
 	}
 	return new NoopChange();
 }
@@ -231,7 +237,12 @@ export function removeTSImport(sourceFile: SourceFile, fileToEdit: string, symbo
 	} else {
 		const specifier = namedImports.elements.find((sp) => sp.name.text === symbolName);
 		if (specifier) {
-			return new RemoveChange(fileToEdit, specifier.getFullStart(), symbolName + ', ');
+			let size = specifier?.getWidth(sourceFile);
+			const start = specifier.getStart(sourceFile);
+			while ([' ', '\n', '\t', ','].includes(sourceFile.text.charAt(start + size))) {
+				size++;
+			}
+			return new RemoveChange(fileToEdit, start, ' '.repeat(size));
 		}
 	}
 	return new NoopChange();
