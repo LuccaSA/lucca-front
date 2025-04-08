@@ -47,6 +47,7 @@
 	&.active {
 		@include active;
 	}
+
 	// .disabled is deprecated
 	// [disabled] is deprecated
 	&.is-disabled,

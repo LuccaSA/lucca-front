@@ -95,6 +95,7 @@
 
 // deprecated
 
+// stylelint-disable no-duplicate-selectors -- deprecated
 .form {
 	@include vars;
 }
@@ -165,3 +166,4 @@
 		}
 	}
 }
+// stylelint-enable

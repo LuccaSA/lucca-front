@@ -14,6 +14,7 @@
 	@at-root ($atRoot) {
 		.highlightData-content {
 			@include reset.list($list: 'dl');
+
 			display: var(--components-highlightData-display);
 			grid-template-columns: 1fr auto;
 			grid-template-areas:
@@ -33,8 +34,10 @@
 
 		.highlightData-content-value {
 			grid-area: value;
+
 			@include title.component;
 			@include title.h1;
+
 			order: var(--components-highlightData-value-order);
 		}
 
