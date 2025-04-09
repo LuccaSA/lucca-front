@@ -35,7 +35,7 @@ export interface SelectDisplayer {
 
 const allowedAttributes = [/class/, /ngModel/, /ngModelChange/, /ngClass/, /disabled/,
 	/title/, /formControl/, /formControlName/, /required/, /data-.+/, /attr\..+/, /class\..+/,
-	/placeholder/, /title/, /filters/, /multiple/, /api/, /orderBy/, /fields/];
+	/placeholder/, /title/, /filters/, /multiple/, /api/, /orderBy/, /fields/, /id/, /luTooltip/];
 
 export function isRejection(value: unknown): value is Rejection {
 	return (value as Rejection)?.reason !== undefined && RejectionReason[(value as Rejection).reason] != undefined;
