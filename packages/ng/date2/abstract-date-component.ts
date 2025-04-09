@@ -34,7 +34,7 @@ export abstract class AbstractDateComponent {
 	ranges = input([], { transform: (v: readonly DateRange[] | readonly DateRangeInput[]) => v.map(transformDateRangeInputToDateRange) });
 	hideToday = input<boolean, boolean>(false, { transform: booleanAttribute });
 	hasTodayButton = input<boolean, boolean>(false, { transform: booleanAttribute });
-	clearable = input<boolean, boolean>(false, { transform: booleanAttribute });
+	clearable = input<boolean, boolean>(null, { transform: booleanAttribute });
 
 	mode = input<CalendarMode>('day');
 	hideWeekend = input<boolean, boolean>(false, { transform: booleanAttribute });

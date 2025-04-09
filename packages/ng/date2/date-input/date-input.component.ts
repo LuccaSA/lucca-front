@@ -142,6 +142,9 @@ export class DateInputComponent extends AbstractDateComponent implements Control
 	isFilterPill = false;
 
 	isFilterPillEmpty = computed(() => !this.selectedDate());
+	isFilterPillClearable = computed(() => this.clearable() ?? this.#defaultFilterPillClearable() ?? this.#defaultClearable);
+	#defaultClearable = false;
+	#defaultFilterPillClearable = signal<boolean | null>(null);
 
 	filterPillPopoverCloseFn?: () => void;
 
@@ -214,6 +217,7 @@ export class DateInputComponent extends AbstractDateComponent implements Control
 
 	enableFilterPillMode(): void {
 		this.isFilterPill = true;
+		this.#defaultFilterPillClearable.set(true);
 	}
 
 	clearFilterPillValue(): void {
