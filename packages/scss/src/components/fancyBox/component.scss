@@ -4,6 +4,8 @@
 	overflow: hidden;
 	padding-inline: var(--pr-t-spacings-200);
 	display: block;
+	position: relative;
+	z-index: 0;
 
 	@at-root ($atRoot) {
 		.fancyBox-content {
