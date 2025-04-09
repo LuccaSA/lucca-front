@@ -24,9 +24,11 @@
 	<ng-container *ngTemplateOutlet="pillTpl; context:{label: label(), isEmpty: inputIsEmpty()}"></ng-container>
 	@if (inputIsEmpty() && !disabled()) { {{ placeholder() }} }
 </button>
+@if (inputIsClearable()) {
 <button type="button" class="filterPill-clear clear" (click)="$event.stopPropagation(); clear(); comboboxRef.focus()">
 	<span class="u-mask">{{ intl.clear }}</span>
 </button>
+}
 <button
 	type="button"
 	aria-hidden="true"

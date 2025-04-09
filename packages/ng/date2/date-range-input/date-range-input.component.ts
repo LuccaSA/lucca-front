@@ -194,6 +194,9 @@ export class DateRangeInputComponent extends AbstractDateComponent implements Co
 	isFilterPill = false;
 
 	isFilterPillEmpty = computed(() => this.selectedRange() === null);
+	isFilterPillClearable = computed(() => this.clearable() ?? this.#defaultFilterPillClearable() ?? this.#defaultClearable);
+	#defaultClearable = false;
+	#defaultFilterPillClearable = signal<boolean | null>(null);
 
 	filterPillPopoverCloseFn?: () => void;
 
@@ -497,6 +500,7 @@ export class DateRangeInputComponent extends AbstractDateComponent implements Co
 
 	enableFilterPillMode(): void {
 		this.isFilterPill = true;
+		this.#defaultFilterPillClearable.set(true);
 	}
 
 	clearFilterPillValue(): void {

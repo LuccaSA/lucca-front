@@ -34,6 +34,7 @@ export class CheckboxInputComponent implements FilterPillInputComponent {
 
 	filterPillLayout: Signal<FilterPillLayout> = signal('checkable');
 	isFilterPillEmpty: Signal<boolean> = signal(true);
+	isFilterPillClearable: Signal<boolean> = signal(false);
 	hideCombobox: Signal<boolean> = signal(true);
 	showColon: Signal<boolean> = signal(false);
 

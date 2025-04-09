@@ -23,7 +23,7 @@ import { FILTER_PILL_INPUT_COMPONENT, FilterPillDisplayerDirective, FilterPillIn
 import { InputDirective } from '@lucca-front/ng/form-field';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { PopoverDirective } from '@lucca-front/ng/popover2';
-import { isAfter, isBefore, isSameDay, parse, startOfDay } from 'date-fns';
+import { isSameDay, parse, startOfDay } from 'date-fns';
 import { AbstractDateComponent } from '../abstract-date-component';
 import { CalendarMode } from '../calendar2/calendar-mode';
 import { Calendar2Component } from '../calendar2/calendar2.component';
@@ -142,6 +142,9 @@ export class DateInputComponent extends AbstractDateComponent implements Control
 	isFilterPill = false;
 
 	isFilterPillEmpty = computed(() => !this.selectedDate());
+	isFilterPillClearable = computed(() => this.clearable() ?? this.#defaultFilterPillClearable() ?? this.#defaultClearable);
+	#defaultClearable = false;
+	#defaultFilterPillClearable = signal<boolean | null>(null);
 
 	filterPillPopoverCloseFn?: () => void;
 
@@ -215,6 +218,7 @@ export class DateInputComponent extends AbstractDateComponent implements Control
 
 	enableFilterPillMode(): void {
 		this.isFilterPill = true;
+		this.#defaultFilterPillClearable.set(true);
 	}
 
 	clearFilterPillValue(): void {
@@ -274,10 +278,8 @@ export class DateInputComponent extends AbstractDateComponent implements Control
 			return { date: true };
 		}
 		// Check min and max
-		if (this.min() && isBefore(date, this.min())) {
-			return { min: true };
-		} else if (this.max() && isAfter(date, this.max())) {
-			return { max: true };
+		if (!this.isInMinMax(date, this.mode())) {
+			return { minMax: true };
 		}
 		// Everything is valid
 		return null;
