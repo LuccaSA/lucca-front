@@ -284,7 +284,7 @@
 	padding: var(--pr-t-spacings-50);
 	white-space: nowrap;
 
-	.button {
+	:where(.button) {
 		@include button.S;
 		@include button.text;
 		@include button.onlyIconS;

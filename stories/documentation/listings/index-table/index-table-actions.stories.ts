@@ -30,7 +30,7 @@ function getTemplate(args: IndexTableActionsStory): string {
 				<button type="button" class="button indexTable-body-row-cell-subAction">
 					<span aria-hidden="true" class="lucca-icon icon-officePen"></span>
 				</button>
-				<button type="button" class="button indexTable-body-row-cell-subAction">
+				<button type="button" class="button mod-delete indexTable-body-row-cell-subAction">
 					<span aria-hidden="true" class="lucca-icon icon-trashDelete"></span>
 				</button>
 			</td>

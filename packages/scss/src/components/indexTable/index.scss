@@ -30,7 +30,7 @@
 		@include massSelection;
 	}
 
-	.indexTable-body-row-cell.mod-actions {
+	:where(.indexTable-body-row-cell.mod-actions) {
 		@include actions;
 	}
 
