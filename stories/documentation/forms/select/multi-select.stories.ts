@@ -192,6 +192,22 @@ export const SelectAll = generateStory({
 		},
 		play: async (context) => {
 			await basePlay(context);
+			const input = within(context.canvasElement).getByRole('combobox');
+			const buttons = within(context.canvasElement).queryAllByRole('button');
+			if (buttons.length > 0) {
+				const clearButton = buttons.find((button) => button.className.includes('multipleSelect-clear'));
+				if (clearButton) {
+					await userEvent.click(clearButton);
+				}
+			}
+			await userEvent.click(input);
+			await waitForAngular();
+			const panel = within(screen.getByRole('listbox'));
+			const selectAllCheckbox = panel.getByLabelText('Tout sélectionner');
+			await userEvent.click(selectAllCheckbox);
+			const options = await panel.findAllByRole('option');
+			const optionValues = options.map((option) => option.textContent);
+			await checkValues(input, optionValues);
 		},
 	},
 });
