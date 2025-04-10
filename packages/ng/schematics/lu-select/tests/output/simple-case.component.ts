@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	type ILuUser,
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	LuUserDisplayPipe,
   } from '@lucca-front/ng/user';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';

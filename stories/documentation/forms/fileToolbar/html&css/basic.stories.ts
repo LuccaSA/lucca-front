@@ -1,7 +1,7 @@
 import { IconComponent } from '@lucca-front/ng/icon';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 import { Meta, moduleMetadata } from '@storybook/angular';
-import { ButtonComponent } from 'dist/ng/button';
+import { ButtonComponent } from '@lucca-front/ng/button';
 
 export default {
 	title: 'Documentation/File/FileToolbar/HTML&CSS/Basic',

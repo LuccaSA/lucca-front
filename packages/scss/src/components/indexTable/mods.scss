@@ -321,6 +321,7 @@
 
 	&.mod-layoutFixed {
 		table-layout: fixed;
+
 		[class*='row-cell'] {
 			@include cellFixedWidth;
 		}
