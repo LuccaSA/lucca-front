@@ -91,11 +91,11 @@ export function cleanupTemplate(template: string): string {
 export function generateInputs(inputs: Record<string, unknown>, argTypes: ArgTypes, disableBooleanAttributes = false): string {
 	return Object.entries(inputs).reduce((acc, [name, value]) => {
 		const argType = argTypes[name];
-		// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+
 		if (!argType || (argType['table'] && argType['table'].category !== 'inputs')) {
 			return acc;
 		}
-		// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+
 		const defaultValue: unknown = argType['table']?.defaultValue?.summary;
 		if (value === defaultValue || value === null || value === undefined) {
 			return acc;

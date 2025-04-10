@@ -1,10 +1,12 @@
-@use '_definitions';
+@use 'definitions';
+
 @include definitions.selectInputStyle;
 
 .lu-picker-header {
 	.option-selector {
 		display: none;
 	}
+
 	&.mod-multiple {
 		.option-selector {
 			display: inherit;

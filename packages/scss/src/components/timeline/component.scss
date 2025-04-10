@@ -42,8 +42,9 @@
 			min-inline-size: 1.5rem;
 		}
 
-		.timeline-step-title,
-		.timeline-step:not([aria-current='step']):not([aria-current='step'] ~ .timeline-step) .timeline-step-title-icon {
+		// stylelint-disable-next-line selector-not-notation
+		.timeline-step:not([aria-current='step']):not([aria-current='step'] ~ .timeline-step) .timeline-step-title-icon,
+		.timeline-step-title {
 			&::before {
 				content: '';
 				color: var(--palettes-product-0);

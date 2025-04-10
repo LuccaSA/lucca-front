@@ -1,0 +1,9 @@
+@use '@lucca-front/scss/src/components/button/exports' as button;
+
+@mixin disablePositioning {
+	--components-fileToolbar-display: contents;
+}
+
+@mixin disablePositioningS {
+	--components-fileToolbar-list-padding: 0;
+}

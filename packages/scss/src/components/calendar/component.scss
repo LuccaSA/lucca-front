@@ -7,7 +7,7 @@
 	inline-size: var(--components-calendarWidth);
 
 	@at-root ($atRoot) {
-		.calendarShortcutsOptionnal {
+		.calendarShortcutsOptional {
 			display: flex;
 		}
 
@@ -88,6 +88,7 @@
 			&::-webkit-scrollbar {
 				display: none;
 			}
+
 			&:focus-visible {
 				@include a11y.focusVisible;
 			}
@@ -228,6 +229,7 @@
 			&:disabled,
 			&[aria-disabled='true'] {
 				--components-calendar-table-body-row-cell-actionColor: var(--palettes-neutral-500);
+
 				text-decoration: line-through;
 				cursor: default;
 			}

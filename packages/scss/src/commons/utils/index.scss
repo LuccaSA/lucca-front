@@ -258,11 +258,11 @@
 .u-noSpinButtons {
 	&::-webkit-outer-spin-button,
 	&::-webkit-inner-spin-button {
-		-webkit-appearance: none !important;
+		appearance: none !important;
 	}
 
 	&[type='number'] {
-		-moz-appearance: textfield !important;
+		appearance: textfield !important;
 	}
 }
 
@@ -272,6 +272,16 @@
 
 .u-fontFamilyCursive {
 	font-family: var(--commons-font-family-cursive) !important;
+}
+
+.u-fontFamilyBrand {
+	font-family: var(--commons-font-family-brand) !important;
+}
+
+.pr-u-focusVisible {
+	&:focus-visible {
+		@include a11y.focusVisible;
+	}
 }
 
 @include core.classes('float', core.$float);

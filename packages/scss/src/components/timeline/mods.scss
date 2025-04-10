@@ -6,6 +6,7 @@
 	.timeline-step-title {
 		--components-timeline-title-fontSize: var(--sizes-S-fontSize);
 		--components-timeline-title-lineHeight: var(--sizes-M-lineHeight);
+
 		padding-inline-start: 1.25rem;
 
 		&::before {
@@ -26,6 +27,7 @@
 		}
 	}
 
+	// stylelint-disable-next-line selector-not-notation
 	.timeline-step:not([aria-current='step']):not([aria-current='step'] ~ .timeline-step) .timeline-step-title-icon {
 		&::before {
 			inset-inline-start: var(--pr-t-spacings-100);
@@ -77,7 +79,7 @@
 		min-block-size: var(--pr-t-spacings-300);
 		min-inline-size: 0;
 
-		&:before {
+		&::before {
 			inset-block-start: var(--pr-t-spacings-150);
 		}
 	}
@@ -93,7 +95,7 @@
 
 @mixin verticalNotSNotL {
 	.timeline-step-title {
-		&:before {
+		&::before {
 			inset-inline-start: 0;
 		}
 	}
@@ -113,6 +115,7 @@
 			}
 		}
 	}
+
 	.timeline-step-description {
 		padding-inline-start: var(--pr-t-spacings-300);
 	}
@@ -132,6 +135,7 @@
 			}
 		}
 	}
+
 	.timeline-step-description {
 		padding-inline-start: 2.5rem;
 		min-block-size: var(--pr-t-spacings-400);
@@ -155,6 +159,7 @@
 
 @mixin number {
 	counter-reset: timeline;
+
 	.timeline-step:not(.timeline-stepAddBetweenStep) {
 		.timeline-step-title {
 			counter-increment: timeline;
@@ -175,9 +180,11 @@
 }
 
 @mixin checkedPastStep {
+	// stylelint-disable-next-line selector-not-notation
 	.timeline-step:not([aria-current='step']):not([aria-current='step'] ~ .timeline-step):not(.timeline-stepAddBetweenStep) {
 		.timeline-step-title {
-			&:before {
+			&::before {
+				background-color: var(--palettes-100, var(--palettes-product-100));
 				content: '';
 			}
 
@@ -188,9 +195,6 @@
 				display: flex;
 				background-color: transparent;
 				color: var(--palettes-700, var(--palettes-product-700));
-			}
-			&::before {
-				background-color: var(--palettes-100, var(--palettes-product-100));
 			}
 		}
 
@@ -206,6 +210,7 @@
 }
 
 @mixin checkedPastStepVerticalNotL {
+	// stylelint-disable-next-line selector-not-notation
 	.timeline-step:not([aria-current='step']):not([aria-current='step'] ~ .timeline-step) {
 		.timeline-step-title {
 			.timeline-step-title-icon::before {
@@ -234,11 +239,13 @@
 
 		&:last-child {
 			.timeline-step-title {
-				&:before {
+				&::before {
 					display: none;
 				}
+
 				.timeline-step-title-icon::before {
 					@include icon.generate('maths_plus');
+
 					display: flex;
 				}
 			}
@@ -312,13 +319,15 @@
 		.timeline-step-title {
 			padding-inline-start: 0;
 
-			&:before {
+			&::before {
 				display: none;
 			}
 		}
 	}
+
 	.timeline-stepAddBetweenStep-title {
 		@include reset.button;
+
 		inline-size: auto;
 
 		&:hover {
@@ -333,20 +342,25 @@
 			}
 		}
 	}
+
+	// stylelint-disable-next-line selector-not-notation
 	.timeline-step:not([aria-current='step']):not([aria-current='step'] ~ .timeline-step) .timeline-step-title-icon::before {
 		@include icon.generate('maths_plus');
+
 		display: flex;
 		transition: background-color var(--commons-animations-durations-fast);
 	}
 }
 
 @mixin addBetweenStepVerticalNotL {
+	// stylelint-disable-next-line selector-not-notation
 	.timeline-step:not([aria-current='step']):not([aria-current='step'] ~ .timeline-step) .timeline-step-title-icon::before {
 		inset-inline-start: 0;
 	}
 }
 
 @mixin addBetweenStepL {
+	// stylelint-disable-next-line selector-not-notation
 	.timeline-step:not([aria-current='step']):not([aria-current='step'] ~ .timeline-step) .timeline-step-title-icon::before {
 		inline-size: 1.5rem;
 		block-size: 1.5rem;

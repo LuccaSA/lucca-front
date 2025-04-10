@@ -60,7 +60,7 @@
 		.textField-input-valueClone,
 		.textField-input-value {
 			border: 0;
-			outline: 0;
+			outline: none;
 			line-height: var(--component-textField-lineHeight);
 			font-size: var(--component-textField-fontSize);
 			inline-size: 100%;
@@ -106,6 +106,7 @@
 
 		.textField-input-affix-icon {
 			@include icon.M;
+
 			color: var(--pr-t-color-input-icon);
 			pointer-events: none;
 		}

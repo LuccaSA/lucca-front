@@ -1,0 +1,29 @@
+{
+  "name": "@lucca/stylelint-config-prisme",
+  "version": "0.0.0",
+  "description": "Lucca Front stylelint configuration",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LuccaSA/lucca-front.git"
+  },
+  "main": "stylelint.config.mjs",
+  "keywords": [
+    "stylelint",
+    "stylelint-config",
+    "lucca",
+    "scss",
+    "css"
+  ],
+  "private": false,
+  "author": "The product design team <design@lucca.fr>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/LuccaSA/lucca-front/issues"
+  },
+  "homepage": "https://github.com/LuccaSA/lucca-front#readme",
+  "peerDependencies": {
+    "stylelint": "^16.17.0",
+    "stylelint-config-prettier-scss": "^1.0.0",
+    "stylelint-config-standard-scss": "^14.0.0"
+  }
+}

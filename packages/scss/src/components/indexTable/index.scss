@@ -7,6 +7,7 @@
 
 	&.mod-selectable {
 		@include selectable;
+
 		// Selectable states
 		@include selectableSelectedRow;
 		@include selectableHoveredRow;
@@ -20,6 +21,7 @@
 		@include stickyHeader;
 	}
 
+	// Allow selection of mod-layoutFixed with or without breakpoints like mod-layoutFixedAtMediaMinXS or mod-layoutFixedAtMediaMaxL
 	&[class*='mod-layoutFixed'] {
 		@include layoutFixed;
 	}
@@ -28,7 +30,7 @@
 		@include massSelection;
 	}
 
-	.indexTable-body-row-cell.mod-actions {
+	:where(.indexTable-body-row-cell.mod-actions) {
 		@include actions;
 	}
 

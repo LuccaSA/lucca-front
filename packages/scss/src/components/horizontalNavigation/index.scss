@@ -1,0 +1,58 @@
+@use 'exports' as *;
+
+// .menu is deprecated
+.horizontalNavigation,
+.menu {
+	@include vars;
+	@include component;
+
+	&.mod-header {
+		@include header;
+	}
+
+	&.mod-S {
+		@include S;
+	}
+
+	&.mod-noBorder {
+		@include noBorder;
+	}
+
+	&.mod-vertical {
+		@include vertical;
+
+		// .menu-list-item-action is deprecated
+		.horizontalNavigation-list-item-action,
+		.menu-list-item-action {
+			&[aria-current='page'],
+			&.is-active {
+				@include activeVertical;
+			}
+		}
+
+		&.mod-S {
+			@include verticalS;
+		}
+	}
+}
+
+// .menu-link is deprecated
+// .menu-list-item-action is deprecated
+.horizontalNavigation-list-item-action,
+.menu-list-item-action,
+.menu-link {
+	// .active is deprecated
+	&[aria-current='page'],
+	&.is-active,
+	&.active {
+		@include active;
+	}
+
+	// .disabled is deprecated
+	// [disabled] is deprecated
+	&.is-disabled,
+	&.disabled,
+	&[disabled] {
+		@include disabled;
+	}
+}

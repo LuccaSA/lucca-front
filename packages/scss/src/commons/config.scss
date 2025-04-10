@@ -1,6 +1,8 @@
 @use 'sass:list';
 @use 'sass:map';
 
+@use '@lucca-front/scss/src/commons/function';
+
 $isNamespaced: false !default;
 $deprecatedSpacings: false !default;
 
@@ -11,12 +13,22 @@ $fontWeights: (
 	'bold': 700,
 	'black': 800,
 ) !default;
+$fontStyles: ('normal') !default;
+
+$fontFamilyBrand: false !default;
+$fontWeightsBrand: (
+	'regular': 400,
+	'bold': 700,
+	'black': 800,
+) !default;
+$fontStylesBrand: ('normal', 'italic') !default;
 
 $fontFamilyCursive: false !default;
 $fontWeightsCursive: (
 	'regular': 400,
 	'bold': 700,
 ) !default;
+$fontStylesCursive: ('normal') !default;
 
 $product: 'brand' !default;
 $palettesShades: text, 0, 25, 50, 100, 200, 300, 400, 500, 600, 700, 800, 900; // text is deprecated
@@ -28,11 +40,16 @@ $palettesDecorative: 'kiwi', 'lime', 'cucumber', 'mint', 'glacier', 'lagoon', 'b
 	'pineapple' !default;
 $palettesDeprecated: ('lucca', 'grey', 'primary', 'secondary') !default;
 
-$palettesAll: list.join(
-	list.join(
-		list.join(list.join(list.join($palettesStates, $palettesDefault), $palettesProduct), $palettesOtherProduct),
-		$palettesDecorative
-	),
+@if $palettesOtherProduct == 'all' {
+	$palettesOtherProduct: ('pagga', 'poplee', 'coreHR', 'timmi', 'cleemy', 'cc');
+}
+
+$palettesAll: function.flatMap(
+	$palettesStates,
+	$palettesDefault,
+	$palettesProduct,
+	$palettesOtherProduct,
+	$palettesDecorative,
 	$palettesDeprecated
 );
 
@@ -52,7 +69,7 @@ $brand: (
 	500: #ff9361,
 	600: #ff7b3d,
 	700: #e06029,
-	800: #b43409,
+	800: #ae2e03,
 	900: #611405
 );
 
@@ -385,29 +402,25 @@ $pineapple: (
 	900: #7a6400,
 ) !default;
 
-// switch case
-$prod: map.get(
-	(
-		'brand': $brand,
-		'cleemy': $cleemy,
-		'timmi': $timmi,
-		'poplee': $poplee,
-		'coreHR': $coreHR,
-		'pagga': $pagga,
-		'cc': $cc,
-	),
-	$product
+// https://sass-lang.com/documentation/variables/#advanced-variable-functions
+$productsInterpolation: (
+	'brand': $brand,
+	'cleemy': $cleemy,
+	'timmi': $timmi,
+	'poplee': $poplee,
+	'coreHR': $coreHR,
+	'pagga': $pagga,
+	'cc': $cc,
 );
 
-// https://sass-lang.com/documentation/variables/#advanced-variable-functions
 $palettesInterpolation: (
 	'lucca': $brand,
 	'brand': $brand,
 	'grey': $neutral,
 	'neutral': $neutral,
-	'primary': $prod,
-	'secondary': $prod,
-	'product': $prod,
+	'primary': map.get($productsInterpolation, $product),
+	'secondary': map.get($productsInterpolation, $product),
+	'product': map.get($productsInterpolation, $product),
 	'navigation': $navigation,
 	'success': $success,
 	'error': $critical,
@@ -570,7 +583,7 @@ $loading: (
 
 $textLink: (
 	color: var(--palettes-product-700),
-	hover: var(--palettes-product-600),
+	hover: var(--palettes-product-800),
 	disabled: var(--palettes-neutral-500), // disabled token candidate
 );
 
