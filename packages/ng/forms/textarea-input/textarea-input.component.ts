@@ -2,6 +2,7 @@ import { booleanAttribute, ChangeDetectionStrategy, ChangeDetectorRef, Component
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ReactiveFormsModule } from '@angular/forms';
 import { InputDirective } from '@lucca-front/ng/form-field';
+import { startWith } from 'rxjs';
 import { injectNgControl } from '../inject-ng-control';
 import { NoopValueAccessorDirective } from '../noop-value-accessor.directive';
 
@@ -54,6 +55,6 @@ export class TextareaInputComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
-		this.ngControl.valueChanges.pipe(takeUntilDestroyed(this.#destroyRef)).subscribe((value) => this.updateScroll(value as string));
+		this.ngControl.valueChanges.pipe(takeUntilDestroyed(this.#destroyRef), startWith(this.ngControl.value)).subscribe((value) => this.updateScroll(value as string));
 	}
 }
