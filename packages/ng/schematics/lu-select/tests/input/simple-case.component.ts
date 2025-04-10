@@ -7,7 +7,9 @@ import {
 import { FormsModule } from '@angular/forms';
 import { LuInputClearerComponent } from '@lucca-front/ng/input';
 import {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	type ILuUser,
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	LuUserDisplayPipe,
   LuUserSelectModule,
 } from '@lucca-front/ng/user';
