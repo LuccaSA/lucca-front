@@ -384,6 +384,7 @@ export const IconsList = [
 	{ icon: 'cut', deprecated: true },
 	{ icon: 'officeSupplies', deprecated: false },
 	{ icon: 'supplies', deprecated: true },
+	{ icon: 'peopleAccessibility', deprecated: false },
 	{ icon: 'peopleAdd', deprecated: false },
 	{ icon: 'userAdd', deprecated: true },
 	{ icon: 'adduser', deprecated: true },
