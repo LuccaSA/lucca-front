@@ -5,9 +5,9 @@ import { ActivatedRouteSnapshot, RouterLink, RouterOutlet, TitleStrategy } from 
 import { SpectatorRouting, createRoutingFactory, mockProvider } from '@ngneat/spectator/jest';
 import { of, timer } from 'rxjs';
 import { map, skip } from 'rxjs/operators';
-import { ILuTitleTranslateService, LU_TITLE_TRANSLATE_SERVICE } from './title-translate.service';
+import { ILuTitleTranslateService } from './title-translate.service';
 import { TitleSeparator } from './title.model';
-import { APP_TITLE, LuTitleStrategy } from './title.strategy';
+import { LuTitleStrategy, provideLuTitleStrategy } from './title.strategy';
 
 class TranslateService implements ILuTitleTranslateService {
 	translate(key: string, args: Record<string, unknown> = null): string {
@@ -82,18 +82,10 @@ describe('TitleService', () => {
 		component: AppComponent,
 		providers: [
 			mockProvider(Title),
-			{
-				provide: LU_TITLE_TRANSLATE_SERVICE,
-				useClass: TranslateService,
-			},
-			{
-				provide: TitleStrategy,
-				useClass: LuTitleStrategy,
-			},
-			{
-				provide: APP_TITLE,
-				useValue: 'BU',
-			},
+			provideLuTitleStrategy({
+				appTitle: () => 'BU',
+				translateService: () => new TranslateService(),
+			}),
 		],
 		stubsEnabled: false,
 		routes: [
