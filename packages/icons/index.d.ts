@@ -384,6 +384,7 @@ export type LuccaIcon =
 	| 'cut'
 	| 'officeSupplies'
 	| 'supplies'
+	| 'peopleAccessibility'
 	| 'peopleAdd'
 	| 'userAdd'
 	| 'adduser'
