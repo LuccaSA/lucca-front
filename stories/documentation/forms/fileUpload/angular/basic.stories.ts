@@ -5,7 +5,7 @@ import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { TextInputComponent } from '@lucca-front/ng/forms';
 import { LuInputDirective } from '@lucca-front/ng/input';
 import { applicationConfig, Meta, moduleMetadata } from '@storybook/angular';
-import { ButtonComponent } from 'dist/ng/button';
+import { ButtonComponent } from '@lucca-front/ng/button';
 import { map, Observable, switchMap, throwError, timer } from 'rxjs';
 import { generateInputs } from 'stories/helpers/stories';
 
