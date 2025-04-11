@@ -20,19 +20,17 @@ export default {
 	],
 	render: (args, { argTypes }) => {
 		const { narrowAtMediaMax, forceNarrow, ...otherArgs } = args;
-		const narrow = forceNarrow ? `` : `narrowAtMediaMax=${narrowAtMediaMax}`;
-		const force = forceNarrow ? `forceNarrow` : ``;
+		const narrow = forceNarrow ? `` : ` narrowAtMediaMax=${narrowAtMediaMax}`;
+		const force = forceNarrow ? ` forceNarrow` : ``;
 
 		return {
-			template: `
-<lu-footer ${narrow} ${force} ${generateInputs(otherArgs, argTypes)}>
+			template: `<lu-footer${narrow}${force}${generateInputs(otherArgs, argTypes)}>
 	<ng-container footerContent>
 		Content
 	</ng-container>
 	<button type="button" luButton>Button</button>
 	<button type="button" luButton="outlined">Button</button>
-</lu-footer>
-			`,
+</lu-footer>`,
 		};
 	},
 } as Meta;
