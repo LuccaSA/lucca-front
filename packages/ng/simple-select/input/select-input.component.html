@@ -16,7 +16,7 @@
 		(keyup.space)="inputSpace($event)"
 		luInput
 		#inputElement
-		[attr.autocomplete]="autocomplete"
+		[attr.autocomplete]="autocomplete()"
 		[attr.tabindex]="inputTabindex()"
 	/>
 	<div class="simpleSelect-field-value">
