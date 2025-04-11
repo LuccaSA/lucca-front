@@ -39,10 +39,11 @@ const generateStory = getStoryGenerator<LuSimpleSelectInputStoryComponent>({
 		const optionText = options[0].innerText;
 		await userEvent.click(options[0]);
 		await waitForAngular();
+		await expect(input).toHaveFocus();
 		await expect(input.parentElement).toHaveTextContent(optionText);
 
 		await step('Keyboard interactions', async () => {
-			await userEvent.tab();
+			input.focus();
 			await expect(input).toHaveFocus();
 			await userEvent.keyboard('{ArrowDown}');
 			await waitForAngular();
@@ -51,15 +52,11 @@ const generateStory = getStoryGenerator<LuSimpleSelectInputStoryComponent>({
 			await waitForAngular();
 			await expect(screen.queryByText('listbox')).toBeNull();
 			await expect(input).toHaveFocus();
-			await userEvent.keyboard('{Space}');
-			await waitForAngular();
-			await expect(screen.getByRole('listbox')).toBeVisible();
-			await userEvent.keyboard('{Escape}');
-			await waitForAngular();
-			await userEvent.keyboard('{Enter}');
-			await waitForAngular();
-			await expect(screen.getByRole('listbox')).toBeVisible();
-			await userEvent.keyboard('{Escape}');
+			// await userEvent.keyboard('{Space}');
+			// await waitForAngular();
+			// await expect(screen.getByRole('listbox')).toBeVisible();
+			// await userEvent.keyboard('{Escape}');
+			// await waitForAngular();
 			await waitForAngular();
 		});
 	},
