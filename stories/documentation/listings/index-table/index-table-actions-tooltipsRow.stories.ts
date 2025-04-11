@@ -33,46 +33,48 @@ function getTemplate(args: IndexTableActionsTooltipsRowStory): string {
 		</tr>
 	</thead>
 	<tbody class="indexTable-body">
-		<!-- (click) with navigation on table row -->
-		<tr class="indexTable-body-row" (click)="message('Primary action')">
-			<td class="indexTable-body-row-cell u-cursorPointer">
+		<tr class="indexTable-body-row">
+			<td class="indexTable-body-row-cell u-cursorPointer" (click)="message('Primary action')">
 				<!-- real link with navigation and stopPropagation to prevent double navigation -->
 				<!-- u-widthFitContent to contain de width and center the tooltip -->
 				<!-- preventDefault is only here for demonstration -->
 				<a href="#primaryNavigation" luTooltip="Primary action (you can click)" class="indexTable-body-row-cell-link u-widthFitContent u-ellipsis" (click)=" $event.preventDefault(); $event.stopPropagation(); message('Primary action')">Tooltip for the row <code class="code">a</code></a>
 			</td>
-			<td class="indexTable-body-row-cell u-cursorPointer"><div class="u-ellipsis" luTooltip luTooltipWhenEllipsis>Tooltip when ellipsis</div></td>
-			<!-- stopPropagation on the table data cell with a mod-allowTextSelection -->
-			<td class="indexTable-body-row-cell u-whiteSpaceNowrap mod-allowTextSelection" (click)="$event.stopPropagation()">Selectable</td>
-			<td class="indexTable-body-row-cell u-cursorPointer">
+			<td class="indexTable-body-row-cell u-cursorPointer" (click)="message('Primary action')">
+				<div class="u-ellipsis" luTooltip luTooltipWhenEllipsis>Tooltip when ellipsis</div>
+			</td>
+			<td class="indexTable-body-row-cell u-whiteSpaceNowrap mod-allowTextSelection">Selectable</td>
+			<td class="indexTable-body-row-cell u-cursorPointer" (click)="message('Primary action')">
 				<!-- u-widthFitContent to contain the width and center the tooltip -->
 				<div class="u-ellipsis u-widthFitContent pr-u-focusVisible u-borderRadiusM" luTooltip="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.">Tooltip</div>
 			</td>
-			<td class="indexTable-body-row-cell u-cursorPointer u-whiteSpaceNowrap">Content</td>
-			<!-- stopPropagation on the table data cell with secondary action -->
-			<td class="indexTable-body-row-cell mod-alignRight mod-actions" (click)="$event.stopPropagation()">
+			<td class="indexTable-body-row-cell u-cursorPointer u-whiteSpaceNowrap" (click)="message('Primary action')">
+				Content
+			</td>
+			<td class="indexTable-body-row-cell mod-alignRight mod-actions">
 				<button luTooltip="Secondary action (you can click)" luTooltipOnlyForDisplay (click)="message('Secondary action')" type="button" class="button mod-delete indexTable-body-row-cell-subAction">
 					<span aria-hidden="true" class="lucca-icon icon-trashDelete"></span>
 				</button>
 			</td>
 		</tr>
-		<!-- (click) with action on table row -->
-		<tr class="indexTable-body-row" (click)="message('Primary action')">
-			<td class="indexTable-body-row-cell u-cursorPointer">
+		<tr class="indexTable-body-row">
+			<td class="indexTable-body-row-cell u-cursorPointer" (click)="message('Primary action')">
 				<!-- nothing here, the event will be bubbling -->
 				<!-- u-widthFitContent to contain de width and center the tooltip -->
 				<button luTooltip="Primary action (you can click)" type="button" class="indexTable-body-row-cell-link u-widthFitContent u-ellipsis">Tooltip for the row <code class="code">button</code></button>
 			</td>
-			<td class="indexTable-body-row-cell u-cursorPointer"><div class="u-ellipsis" luTooltip luTooltipWhenEllipsis>Tooltip when ellipsis</div></td>
-			<!-- stopPropagation on the table data cell with a mod-allowTextSelection -->
-			<td class="indexTable-body-row-cell u-whiteSpaceNowrap mod-allowTextSelection" (click)="$event.stopPropagation()">Selectable</td>
+			<td class="indexTable-body-row-cell u-cursorPointer" (click)="message('Primary action')">
+				<div class="u-ellipsis" luTooltip luTooltipWhenEllipsis>Tooltip when ellipsis</div>
+			</td>
+			<td class="indexTable-body-row-cell u-whiteSpaceNowrap mod-allowTextSelection">Selectable</td>
 			<!-- u-widthFitContent to contain de width and center the tooltip -->
-			<td class="indexTable-body-row-cell u-cursorPointer">
+			<td class="indexTable-body-row-cell u-cursorPointer" (click)="message('Primary action')">
 				<div class="u-ellipsis u-widthFitContent pr-u-focusVisible u-borderRadiusM" luTooltip="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.">Tooltip</div>
 			</td>
-			<td class="indexTable-body-row-cell u-cursorPointer u-whiteSpaceNowrap">Content</td>
-			<!-- stopPropagation to prevent bubbling -->
-			<td class="indexTable-body-row-cell mod-alignRight mod-actions" (click)="$event.stopPropagation()">
+			<td class="indexTable-body-row-cell u-cursorPointer u-whiteSpaceNowrap" (click)="message('Primary action')">
+				Content
+			</td>
+			<td class="indexTable-body-row-cell mod-alignRight mod-actions">
 				<button luTooltip="Secondary action (you can click)" luTooltipOnlyForDisplay (click)="message('Secondary action')" type="button" class="button mod-delete indexTable-body-row-cell-subAction">
 					<span aria-hidden="true" class="lucca-icon icon-trashDelete"></span>
 				</button>
