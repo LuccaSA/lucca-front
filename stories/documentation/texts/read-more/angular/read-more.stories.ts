@@ -18,7 +18,7 @@ export default {
 			control: {
 				type: 'select',
 			},
-			description: 'Par défaut : Raised'
+			description: 'Par défaut : Raised'
 		},
 		textflow: {
 			description: 'Applique les espacements de Text flow'
