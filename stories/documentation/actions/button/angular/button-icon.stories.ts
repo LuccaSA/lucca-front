@@ -14,11 +14,17 @@ export default {
 		}),
 	],
 	render: ({ luButton, label, ...inputs }, { argTypes }) => {
+		let iconSign = "signInfo";
+		const labelCopy = label;
+		if(inputs['disclosure'] === true ) {
+			iconSign = "arrowChevronBottom";
+			label = "";
+		}
 		return {
 			template: `<button type="button" luButton${luButton !== '' ? `="${luButton}"` : ''}${generateInputs(
 				inputs,
 				argTypes,
-			)}><lu-icon icon="signInfo" /><span class="u-mask">Alt text</span>${label}</button>`,
+			)}>${inputs['disclosure'] ? labelCopy : ''}<lu-icon icon="${iconSign}" alt="Alt text" />${label}</button>`,
 		};
 	},
 } as Meta;
@@ -58,7 +64,8 @@ export const Basic: StoryObj<ButtonComponent & { label: string }> = {
 		palette: 'none',
 		state: 'default',
 		luButton: '',
-		label: '',
+		label: 'Label',
 		delete: false,
+		disclosure: false,
 	},
 };

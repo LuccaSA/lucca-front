@@ -1,11 +1,11 @@
 import { HttpErrorResponse, HttpStatusCode, provideHttpClient } from '@angular/common/http';
 import { Injectable, LOCALE_ID, Pipe, PipeTransform, signal } from '@angular/core';
+import { ButtonComponent } from '@lucca-front/ng/button';
 import { FileEntry, FileEntryComponent, MultiFileUploadComponent, SingleFileUploadComponent } from '@lucca-front/ng/file-upload';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { TextInputComponent } from '@lucca-front/ng/forms';
 import { LuInputDirective } from '@lucca-front/ng/input';
 import { applicationConfig, Meta, moduleMetadata } from '@storybook/angular';
-import { ButtonComponent } from '@lucca-front/ng/button';
 import { map, Observable, switchMap, throwError, timer } from 'rxjs';
 import { generateInputs } from 'stories/helpers/stories';
 
@@ -118,6 +118,9 @@ export default {
 				type: 'radio',
 			},
 		},
+		fileMaxSize: {
+			description: 'In bytes'
+		},
 		illustration: {
 			options: ['paper', 'picture'],
 			control: {
@@ -172,10 +175,10 @@ export const Multi = {
 			fileUploads: uploads,
 		};
 		const previewCache = new Map<File, string>();
-		const mediaParam = media ? `media` : ``;
-		const displayFileNameParam = displayFileName && media ? `displayFileName` : ``;
-		const sizeSFileUploadParam = size ? `size="S"` : ``;
-		const sizeSFileEntryParam = media ? `size="S"` : sizeSFileUploadParam;
+		const mediaParam = media ? ` media` : ``;
+		const displayFileNameParam = displayFileName && media ? ` displayFileName` : ``;
+		const sizeSFileUploadParam = size ? ` size="S"` : ``;
+		const sizeSFileEntryParam = media ? ` size="S"` : sizeSFileUploadParam;
 
 		return {
 			props: {
@@ -197,18 +200,16 @@ export const Multi = {
 					return null;
 				},
 			},
-			template: `
-			<div lang="fr">
-			<lu-form-field label="Label">
-				<lu-multi-file-upload ${sizeSFileUploadParam} ${generateInputs(mainArgs, argTypes)} (filePicked)="fileUploadFeature.uploadFiles([$event])" />
-			</lu-form-field>
-			<div class="fileEntryDisplayWrapper">
-				@for(fileUpload of fileUploadFeature.fileUploads(); track $index) {
-					<lu-file-entry ${sizeSFileEntryParam} ${displayFileNameParam} ${mediaParam} [entry]="fileUpload | fileUploadToLFEntry" [state]="fileUpload.state" [previewUrl]="getPreviewUrl(fileUpload)" [inlineMessageError]="fileUpload.error?.detail" (deleteFile)="deleteFile(fileUpload)" />
-				}
-			</div>
-			</div>
-			`,
+			template: `<div lang="fr">
+	<lu-form-field label="Label">
+		<lu-multi-file-upload${sizeSFileUploadParam}${generateInputs(mainArgs, argTypes)} (filePicked)="fileUploadFeature.uploadFiles([$event])" />
+	</lu-form-field>
+	<div class="fileEntryDisplayWrapper">
+		@for(fileUpload of fileUploadFeature.fileUploads(); track $index) {
+			<lu-file-entry${sizeSFileEntryParam}${displayFileNameParam}${mediaParam} [entry]="fileUpload | fileUploadToLFEntry" [state]="fileUpload.state" [previewUrl]="getPreviewUrl(fileUpload)" [inlineMessageError]="fileUpload.error?.detail" (deleteFile)="deleteFile(fileUpload)" />
+		}
+	</div>
+</div>`,
 		};
 	},
 	args: {
@@ -227,10 +228,10 @@ export const Single = {
 		return {
 			props: { ...multi.props, accept },
 			template: `@let fileUpload = fileUploadFeature.fileUploads()[0];
-			<lu-form-field label="Label">
-				<lu-single-file-upload ${generateInputs(mainArgs, argTypes)} [accept]="accept" (filePicked)="fileUploadFeature.uploadFiles([$event])"
-				 [entry]="fileUpload | fileUploadToLFEntry" [state]="fileUpload?.state" [previewUrl]="getPreviewUrl(fileUpload)" [inlineMessageError]="fileUpload?.error?.detail" (deleteFile)="deleteFile(fileUpload)"/>
-			</lu-form-field>`,
+<lu-form-field label="Label">
+	<lu-single-file-upload${generateInputs(mainArgs, argTypes)} [accept]="accept" (filePicked)="fileUploadFeature.uploadFiles([$event])"
+		[entry]="fileUpload | fileUploadToLFEntry" [state]="fileUpload?.state" [previewUrl]="getPreviewUrl(fileUpload)" [inlineMessageError]="fileUpload?.error?.detail" (deleteFile)="deleteFile(fileUpload)"/>
+</lu-form-field>`,
 		};
 	},
 	args: {
