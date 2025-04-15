@@ -11,6 +11,7 @@ import { applyToUpdateRecorder } from '@schematics/angular/utility/change';
 interface HtmlIcon {
 	node: TmplAstElement;
 	icon: string;
+	size?: string;
 	alt?: string;
 	altSpan?: TmplAstElement;
 	nodeOffset: number;
@@ -60,6 +61,9 @@ export function migrateComponent(sourceFile: SourceFile, path: string, tree: Tre
 			if (icon.alt) {
 				openingTag += ` alt="${icon.alt}"`;
 			}
+			if(icon.size) {
+				openingTag += ` size="${icon.size}"`;
+			}
 			templateUpdate.insertRight(icon.nodeOffset + icon.node.startSourceSpan.start.offset + 1, openingTag);
 			// Self close this tag
 			templateUpdate.insertRight(icon.nodeOffset + icon.node.startSourceSpan.end.offset - 1, '/');
@@ -72,10 +76,12 @@ export function migrateComponent(sourceFile: SourceFile, path: string, tree: Tre
 			if(classesNode && classesNode.keySpan){
 				const classes = classesNode.value;
 				const cleanedClasses = classes.split(' ').filter(c => {
-					return !['lucca-icon', `icon-${icon.icon}`].includes(c);
+					return !['lucca-icon', `icon-${icon.icon}`, `mod-${icon.size}`].includes(c);
 				}).join(' ');
-				templateUpdate.remove(icon.nodeOffset + classesNode.keySpan.start.offset, classesNode.sourceSpan.toString().length);
-				// TODO if remaining classes after cleanup, write them
+				templateUpdate.remove(icon.nodeOffset + classesNode.keySpan.start.offset - 1, classesNode.sourceSpan.toString().length + 1);
+				if(cleanedClasses) {
+					templateUpdate.insertRight(icon.nodeOffset + classesNode.keySpan.start.offset, `class="${cleanedClasses}"`);
+				}
 			}
 
 		});
@@ -101,10 +107,12 @@ function findHTMLIcons(sourceFile: SourceFile, basePath: string, tree: Tree): Ht
 				if (classes?.includes("lucca-icon")){
 					const iconClass = classes.split(' ').find(c => c.startsWith('icon-'));
 					if (iconClass) {
+						const iconSize = classes.split(' ').find(c => /mod-(XS|S|M|L|XL|XXL)/.test(c));
 						const iconName = iconClass.replace('icon-', '');
 						const icon: HtmlIcon = {
 							node: node,
 							icon: iconName,
+							size: iconSize?.replace('mod-', ''),
 							nodeOffset: template.offsetStart,
 							filePath: template.filePath,
 							componentTS: sourceFile
