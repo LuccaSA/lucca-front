@@ -11,7 +11,7 @@ import { currentSchematicContext } from './lf-schematic-context';
 export type TemplateNode = ParsedTemplate['nodes'] extends Array<infer S> ? S : never;
 
 export class HtmlAstVisitor<TNode extends TemplateNode> {
-	private nodes: TNode[];
+	public readonly nodes: TNode[];
 
 	public constructor(
 		nodes: TNode[] | TNode

@@ -117,8 +117,9 @@ function findHTMLIcons(sourceFile: SourceFile, basePath: string, tree: Tree): Ht
 							filePath: template.filePath,
 							componentTS: sourceFile
 						}
-						if(isInterestingNode(parent)) {
-							const altSpan= parent.children.find(child => {
+						const siblings = isInterestingNode(parent) ? parent?.children : htmlAst.nodes;
+						if(siblings.length > 0) {
+							const altSpan= siblings.find(child => {
 								if(isInterestingNode(child)) {
 									const childClasses = child.attributes.find(attr => attr.name === 'class')?.value;
 									return childClasses === 'u-mask';
