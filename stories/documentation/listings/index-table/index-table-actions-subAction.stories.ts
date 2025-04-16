@@ -1,13 +1,12 @@
 import { Meta, StoryFn } from '@storybook/angular';
 
-interface IndexTableActionsStory {}
+interface IndexTableActionsSubActionStory {}
 
 export default {
-	title: 'Documentation/Listings/Index Table/Actions',
-	argTypes: {},
+	title: 'Documentation/Listings/Index Table/Actions/SubAction',
 } as Meta;
 
-function getTemplate(args: IndexTableActionsStory): string {
+function getTemplate(args: IndexTableActionsSubActionStory): string {
 	return `<table class="indexTable">
 	<thead class="indexTable-head">
 		<tr class="indexTable-head-row">
@@ -28,6 +27,9 @@ function getTemplate(args: IndexTableActionsStory): string {
 			<td class="indexTable-body-row-cell">Content</td>
 			<td class="indexTable-body-row-cell mod-actions">
 				<button type="button" class="button indexTable-body-row-cell-subAction">
+					<span aria-hidden="true" class="lucca-icon icon-copy"></span>
+				</button>
+				<button type="button" class="button indexTable-body-row-cell-subAction">
 					<span aria-hidden="true" class="lucca-icon icon-officePen"></span>
 				</button>
 				<button type="button" class="button mod-delete indexTable-body-row-cell-subAction">
@@ -36,13 +38,13 @@ function getTemplate(args: IndexTableActionsStory): string {
 			</td>
 		</tr>
 	</tbody>
-</table>`;
+</table>
+`;
 }
 
-const Template: StoryFn<IndexTableActionsStory> = (args) => ({
+const Template: StoryFn<IndexTableActionsSubActionStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const Actions = Template.bind({});
-Actions.args = {};
+export const SubActions = Template.bind({});

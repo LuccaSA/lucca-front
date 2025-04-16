@@ -1,13 +1,12 @@
 import { Meta, StoryFn } from '@storybook/angular';
 
-interface IndexTableActionsTouchDetectionStory {}
+interface IndexTableActionsDropdownStory {}
 
 export default {
-	title: 'Documentation/Listings/Index Table/Actions touch detection',
-	argTypes: {},
+	title: 'Documentation/Listings/Index Table/Actions/Dropdown',
 } as Meta;
 
-function getTemplate(args: IndexTableActionsTouchDetectionStory): string {
+function getTemplate(args: IndexTableActionsDropdownStory): string {
 	return `<table class="indexTable">
 	<thead class="indexTable-head">
 		<tr class="indexTable-head-row">
@@ -27,32 +26,19 @@ function getTemplate(args: IndexTableActionsTouchDetectionStory): string {
 			<td class="indexTable-body-row-cell">Content</td>
 			<td class="indexTable-body-row-cell">Content</td>
 			<td class="indexTable-body-row-cell mod-actions">
-				<button type="button" class="button indexTable-body-row-cell-subAction">
-					<span aria-hidden="true" class="lucca-icon icon-officePen"></span>
-				</button>
-				<button type="button" class="button indexTable-body-row-cell-subAction">
-					<span aria-hidden="true" class="lucca-icon icon-copy"></span>
-				</button>
-				<button type="button" class="button indexTable-body-row-cell-subAction">
-					<span aria-hidden="true" class="lucca-icon icon-archive"></span>
-				</button>
-				<button type="button" class="button indexTable-body-row-cell-subAction">
-					<span aria-hidden="true" class="lucca-icon icon-trashDelete"></span>
-				</button>
-				<!-- Implement dropdown on this button clic-->
 				<button type="button" class="button indexTable-body-row-cell-subActionDropdownTrigger mod-text mod-onlyIcon mod-S">
 					<span aria-hidden="true" class="lucca-icon icon-ellipsis"></span>
 				</button>
 			</td>
 		</tr>
 	</tbody>
-</table>`;
+</table>
+`;
 }
 
-const Template: StoryFn<IndexTableActionsTouchDetectionStory> = (args) => ({
+const Template: StoryFn<IndexTableActionsDropdownStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const ActionsTouchDetection = Template.bind({});
-ActionsTouchDetection.args = {};
+export const Dropdown = Template.bind({});
