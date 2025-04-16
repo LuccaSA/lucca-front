@@ -183,10 +183,6 @@
 	@include text.ellipsis('!important');
 }
 
-.u-maxWidth100\% {
-	max-width: 100%;
-}
-
 .u-h1,
 .u-h2,
 .u-h3,
@@ -312,6 +308,7 @@
 @include core.classes('block-size', core.$contents);
 @include core.classes('min-inline-size', '0');
 @include core.classes('min-block-size', '0');
+@include core.classes('max-inline-size', core.$contents);
 
 @include core.classes('visibility', core.$visibility);
 @include core.classes('font-weight', core.$fontWeight);

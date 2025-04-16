@@ -31,8 +31,8 @@ function getTemplate(args: IndexTableActionsTooltipsCellStory): string {
 				<!-- real link with navigation and stopPropagation to prevent double navigation -->
 				<!-- preventDefault is only here for demonstration -->
 				<a href="#" class="indexTable-body-row-cell-link" (click)=" $event.preventDefault(); $event.stopPropagation(); message('Primary action')"><span class="u-mask">See details</span></a>
-				<!-- u-widthFitContent and u-maxWidth100% to contain de width and center the tooltip -->
-				<div class="u-ellipsis u-widthFitContent u-maxWidth100% pr-u-focusVisible u-borderRadiusM" luTooltip="Primary action (you can click)">Tooltip for the cell <code class="code">a</code></div>
+				<!-- u-widthFitContent and u-maxInlineSize100% to contain de width and center the tooltip -->
+				<div class="u-ellipsis u-widthFitContent u-maxInlineSize100% pr-u-focusVisible u-borderRadiusM" luTooltip="Primary action (you can click)">Tooltip for the cell <code class="code">a</code></div>
 			</td>
 			<td class="indexTable-body-row-cell u-cursorPointer" (click)="message('Primary action')">
 				<div class="u-ellipsis" luTooltip luTooltipWhenEllipsis>Tooltip when ellipsis</div>
@@ -53,8 +53,8 @@ function getTemplate(args: IndexTableActionsTooltipsCellStory): string {
 			<td class="indexTable-body-row-cell u-cursorPointer" (click)="message('Primary action')">
 				<!-- nothing here, the event will be bubbling -->
 				<button type="button" class="indexTable-body-row-cell-link"><span class="u-mask">See details</span></button>
-				<!-- u-widthFitContent and u-maxWidth100% to contain de width and center the tooltip -->
-				<div class="u-ellipsis u-widthFitContent u-maxWidth100% pr-u-focusVisible u-borderRadiusM" luTooltip="Primary action (you can click)">Tooltip for the cell <code class="code">button</code></div>
+				<!-- u-widthFitContent and u-maxInlineSize100% to contain de width and center the tooltip -->
+				<div class="u-ellipsis u-widthFitContent u-maxInlineSize100% pr-u-focusVisible u-borderRadiusM" luTooltip="Primary action (you can click)">Tooltip for the cell <code class="code">button</code></div>
 			</td>
 			<td class="indexTable-body-row-cell u-cursorPointer" (click)="message('Primary action')">
 				<div class="u-ellipsis" luTooltip luTooltipWhenEllipsis>Tooltip when ellipsis</div>
