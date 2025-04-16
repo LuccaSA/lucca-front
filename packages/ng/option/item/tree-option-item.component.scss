@@ -103,7 +103,6 @@
 }
 
 @for $i from 1 through 10 {
-
 	// Single
 	:host-context(.lu-picker-panel #{repeat($i, 'lu-tree-option')}) {
 		.optionItem-value {
