@@ -119,7 +119,7 @@ export default {
 			},
 		},
 		fileMaxSize: {
-			description: 'In bytes'
+			description: 'In bytes',
 		},
 		illustration: {
 			options: ['paper', 'picture'],
@@ -200,16 +200,14 @@ export const Multi = {
 					return null;
 				},
 			},
-			template: `<div lang="fr">
-	<lu-form-field label="Label">
+			template: `<lu-form-field label="Label">
 		<lu-multi-file-upload${sizeSFileUploadParam}${generateInputs(mainArgs, argTypes)} (filePicked)="fileUploadFeature.uploadFiles([$event])" />
 	</lu-form-field>
 	<div class="fileEntryDisplayWrapper">
 		@for(fileUpload of fileUploadFeature.fileUploads(); track $index) {
 			<lu-file-entry${sizeSFileEntryParam}${displayFileNameParam}${mediaParam} [entry]="fileUpload | fileUploadToLFEntry" [state]="fileUpload.state" [previewUrl]="getPreviewUrl(fileUpload)" [inlineMessageError]="fileUpload.error?.detail" (deleteFile)="deleteFile(fileUpload)" />
 		}
-	</div>
-</div>`,
+	</div>`,
 		};
 	},
 	args: {
