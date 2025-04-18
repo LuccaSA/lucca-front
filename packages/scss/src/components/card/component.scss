@@ -1,4 +1,6 @@
 @use '@lucca-front/scss/src/commons/utils/namespace';
+@use '@lucca-front/scss/src/commons/utils/a11y';
+@use '@lucca-front/scss/src/commons/utils/reset';
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
 	background-color: var(--components-card-background);
@@ -12,14 +14,35 @@
 	transition-duration: var(--commons-animations-durations-fast);
 	transition-property: background-color, box-shadow, color;
 
+	&:has(.card-title-action:focus-visible) {
+		@include a11y.focusVisible;
+	}
+
 	@at-root ($atRoot) {
 		.card-content {
 			padding: var(--components-card-content-padding);
+
+			@include reset.marginTrim;
 		}
 
 		.card-title {
 			padding: 0;
 			margin-block-end: var(--pr-t-spacings-100);
+		}
+
+		.card-title-action {
+			@include reset.button;
+
+			text-decoration: none;
+
+			&,
+			&:hover {
+				color: currentColor;
+			}
+
+			&:focus-visible {
+				outline: none;
+			}
 		}
 
 		.card-action {
