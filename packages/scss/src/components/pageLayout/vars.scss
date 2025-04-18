@@ -1,0 +1,7 @@
+@mixin vars {
+	--components-pageLayout-BlockSize: 100dvh;
+	--components-pageLayout-bannerBlockSize: var(--commons-banner-height);
+	--components-pageLayout-gridTemplate: "banner " auto
+																				"navSide" auto
+																				"content" 1fr
+}

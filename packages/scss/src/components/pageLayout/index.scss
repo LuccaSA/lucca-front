@@ -1,0 +1,14 @@
+
+
+@use 'exports' as *;
+@use '@lucca-front/scss/src/commons/utils/media';
+
+.pageLayout,
+body:not(:has(.pageLayout)):has(.pageLayout-content) {
+	@include vars;
+	@include component;
+
+	@include media.min('S') {
+		@include wide;
+	}
+}

@@ -1,0 +1,28 @@
+
+@use '@lucca-front/scss/src/commons/utils/namespace';
+
+@mixin component($atRoot: namespace.$defaultAtRoot) {
+	min-block-size: var(--components-pageLayout-BlockSize);
+	display: grid;
+	grid-template: var(--components-pageLayout-gridTemplate);
+
+	@at-root ($atRoot) {
+		.pageLayout-banner {
+			grid-area: banner;
+			position: sticky;
+			top: 0;
+			z-index: 1;
+		}
+
+		.pageLayout-navSide {
+			grid-area: navSide;
+			position: sticky;
+			inset-block-start: var(--components-pageLayout-bannerBlockSize);
+			max-block-size: calc(var(--components-pageLayout-BlockSize) - var(--components-pageLayout-bannerBlockSize));
+		}
+
+		.pageLayout-content {
+			grid-area: content;
+		}
+	}
+}

@@ -1,0 +1,5 @@
+@mixin wide {
+	--components-pageLayout-gridTemplate: "banner  banner " auto
+																				"navSide content" 1fr
+																				/ auto 1fr;
+}
