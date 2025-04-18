@@ -9,6 +9,7 @@ export type LuccaIcon =
 	| 'nineTiles'
 	| 'mosaic'
 	| 'tiles'
+	| 'appWidget'
 	| 'arrowBackward'
 	| 'backward'
 	| 'arrowBottom'

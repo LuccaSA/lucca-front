@@ -9,6 +9,7 @@ export const IconsList = [
 	{ icon: 'nineTiles', deprecated: true },
 	{ icon: 'mosaic', deprecated: true },
 	{ icon: 'tiles', deprecated: true },
+	{ icon: 'appWidget', deprecated: false },
 	{ icon: 'arrowBackward', deprecated: false },
 	{ icon: 'backward', deprecated: true },
 	{ icon: 'arrowBottom', deprecated: false },
