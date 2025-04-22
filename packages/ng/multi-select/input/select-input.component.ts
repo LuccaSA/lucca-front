@@ -12,6 +12,7 @@ import {
 	numberAttribute,
 	OnDestroy,
 	OnInit,
+	signal,
 	TemplateRef,
 	Type,
 	viewChild,
@@ -28,6 +29,7 @@ import { LuMultiSelectDefaultDisplayerComponent } from '../displayer/index';
 import { LU_MULTI_SELECT_TRANSLATIONS } from '../select.translate';
 import { LuMultiSelectPanelRefFactory } from './panel-ref.factory';
 import { LuMultiSelectPanelRef } from './panel.model';
+import { KeyManagerElement } from '../../core-select/key-manager-element';
 
 @Component({
 	selector: 'lu-multi-select',

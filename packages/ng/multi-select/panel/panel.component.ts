@@ -1,6 +1,6 @@
 import { A11yModule } from '@angular/cdk/a11y';
 import { AsyncPipe, NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
-import { AfterViewInit, ChangeDetectionStrategy, Component, QueryList, TrackByFunction, ViewChildren, inject } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, TrackByFunction, inject, viewChildren, Signal, WritableSignal, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { PortalDirective, getIntl } from '@lucca-front/ng/core';
 import { CoreSelectKeyManager, LuOptionGroup, SELECT_ID, ɵLuOptionComponent, ɵLuOptionGroupPipe, ɵLuOptionOutletDirective, ɵgetGroupTemplateLocation } from '@lucca-front/ng/core-select';
@@ -12,6 +12,7 @@ import { LU_MULTI_SELECT_TRANSLATIONS } from '../select.translate';
 import { LuOptionsGroupContextPipe } from './option-group-context.pipe';
 import { LuIsOptionSelectedPipe } from './option-selected.pipe';
 import { ɵLuMultiSelectSelectedChipDirective } from './selected-chip.directive';
+import { KeyManagerElement } from '../../core-select/key-manager-element';
 
 @Component({
 	selector: 'lu-select-panel',
@@ -55,7 +56,7 @@ export class LuMultiSelectPanelComponent<T> implements AfterViewInit {
 	selectedOptions: T[] = this.selectInput.value || [];
 	optionTpl = this.selectInput.optionTpl;
 
-	@ViewChildren(ɵLuOptionComponent) optionsQL: QueryList<ɵLuOptionComponent<T>>;
+	options = viewChildren<ɵLuOptionComponent<T>>(ɵLuOptionComponent);
 	keyManager = inject<CoreSelectKeyManager<T>>(CoreSelectKeyManager);
 
 	public clueChange$ = this.selectInput.clue$;
@@ -78,7 +79,7 @@ export class LuMultiSelectPanelComponent<T> implements AfterViewInit {
 	}
 
 	ngAfterViewInit(): void {
-		if (!this.optionsQL) {
+		if (!this.options()) {
 			return;
 		}
 
@@ -87,11 +88,14 @@ export class LuMultiSelectPanelComponent<T> implements AfterViewInit {
 	}
 
 	toggleOption(option: T): void {
-		const matchingOption = this.selectedOptions.find((o) => this.optionComparer(o, option));
-		this.selectedOptions = matchingOption ? this.selectedOptions.filter((o) => o !== matchingOption) : [...this.selectedOptions, option];
+		// ɵ is used for internal options (like select all)
+		if (!option?.toString().startsWith('ɵ')) {
+			const matchingOption = this.selectedOptions.find((o) => this.optionComparer(o, option));
+			this.selectedOptions = matchingOption && option ? this.selectedOptions.filter((o) => o !== matchingOption) : [...this.selectedOptions, option];
+		}
 		this.panelRef.emitValue(this.selectedOptions);
 		setTimeout(() => this.panelRef.updatePosition());
-		this.keyManager.setActiveItem(this.optionsQL.toArray().findIndex((o) => o.option === option));
+		this.keyManager.setActiveItem(this.options().findIndex((o) => o.option === option) + this.selectInput.additionalElementsBefore().length);
 	}
 
 	toggleOptions(notSelectedOptions: T[], groupOptions: T[]): void {
@@ -109,7 +113,9 @@ export class LuMultiSelectPanelComponent<T> implements AfterViewInit {
 
 	protected initKeyManager(): void {
 		this.keyManager.init({
-			queryList: this.optionsQL,
+			additionalElementsBefore: this.selectInput.additionalElementsBefore,
+			queryList: this.options,
+			additionalElementsAfter: this.selectInput.additionalElementsAfter,
 			options$: this.options$,
 			optionComparer: this.optionComparer,
 			activeOptionIdChanged$: this.panelRef.activeOptionIdChanged,

@@ -29,6 +29,7 @@ import { LuOptionGrouping, LuSimpleSelectDefaultOptionComponent } from '../optio
 import { LuSelectPanelRef } from '../panel';
 import { CoreSelectAddOptionStrategy, LuOptionComparer, LuOptionContext, SELECT_LABEL, SELECT_LABEL_ID } from '../select.model';
 import { LU_CORE_SELECT_TRANSLATIONS } from '../select.translate';
+import { KeyManagerElement } from '../key-manager-element';
 
 @Directive()
 export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDestroy, OnInit, ControlValueAccessor, FilterPillInputComponent {
@@ -144,6 +145,9 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	optionTpl = model<TemplateRef<LuOptionContext<TOption>> | Type<unknown>>(LuSimpleSelectDefaultOptionComponent);
 	valueTpl = model<TemplateRef<LuOptionContext<TOption>> | Type<unknown> | undefined>();
 	panelHeaderTpl = model<TemplateRef<void> | Type<unknown> | undefined>();
+	// For a11y on panel header and possibly footer
+	additionalElementsBefore = signal<KeyManagerElement<TOption>[]>([]);
+	additionalElementsAfter = signal<KeyManagerElement<TOption>[]>([]);
 
 	displayerTpl = computed(() => this.valueTpl() || this.optionTpl());
 

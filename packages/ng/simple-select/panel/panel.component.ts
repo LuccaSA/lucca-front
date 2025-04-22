@@ -1,6 +1,6 @@
 import { A11yModule } from '@angular/cdk/a11y';
 import { AsyncPipe, NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
-import { AfterViewInit, ChangeDetectionStrategy, Component, QueryList, TrackByFunction, ViewChildren, inject, computed } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, QueryList, TrackByFunction, ViewChildren, inject, computed, viewChildren } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { PortalDirective, getIntl } from '@lucca-front/ng/core';
 import { CoreSelectKeyManager, LuOptionGroup, LuSelectPanelRef, SELECT_ID, ɵLuOptionComponent, ɵLuOptionGroupPipe, ɵgetGroupTemplateLocation } from '@lucca-front/ng/core-select';
@@ -38,7 +38,7 @@ export class LuSelectPanelComponent<T> implements AfterViewInit {
 	initialValue: T | undefined = this.selectInput.value;
 	optionTpl = this.selectInput.optionTpl;
 
-	@ViewChildren(ɵLuOptionComponent) optionsQL: QueryList<ɵLuOptionComponent<T>>;
+	options = viewChildren<ɵLuOptionComponent<T>>(ɵLuOptionComponent);
 
 	public keyManager = inject<CoreSelectKeyManager<T>>(CoreSelectKeyManager);
 
@@ -64,7 +64,7 @@ export class LuSelectPanelComponent<T> implements AfterViewInit {
 
 	ngAfterViewInit(): void {
 		this.keyManager.init({
-			queryList: this.optionsQL,
+			queryList: this.options,
 			options$: this.options$,
 			optionComparer: this.optionComparer,
 			activeOptionIdChanged$: this.panelRef.activeOptionIdChanged,

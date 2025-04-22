@@ -1,4 +1,3 @@
-import { Highlightable } from '@angular/cdk/a11y';
 import { AsyncPipe, NgIf } from '@angular/common';
 import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, HostBinding, Input, OnDestroy, TemplateRef, Type, ViewChild, inject, input } from '@angular/core';
 import { PortalDirective } from '@lucca-front/ng/core';
@@ -9,6 +8,7 @@ import { LuOptionGrouping } from './group.directive';
 import { LuOptionGroupPipe } from './group.pipe';
 import { LuOptionOutletDirective } from './option-outlet.directive';
 import { ILuOptionContext, LU_OPTION_CONTEXT } from './option.token';
+import { KeyManagerElement } from '../key-manager-element';
 
 export const MAGIC_OPTION_SCROLL_DELAY = 15;
 
@@ -20,7 +20,7 @@ export const MAGIC_OPTION_SCROLL_DELAY = 15;
 	standalone: true,
 	imports: [AsyncPipe, LuOptionOutletDirective, NgIf, PortalDirective, LuOptionGroupPipe],
 })
-export class LuOptionComponent<T> implements Highlightable, AfterViewInit, OnDestroy {
+export class LuOptionComponent<T> implements KeyManagerElement<T>, AfterViewInit, OnDestroy {
 	@HostBinding('class.optionItem')
 	public hasOptionItemClass = true;
 

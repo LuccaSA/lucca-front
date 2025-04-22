@@ -1,12 +1,14 @@
 import { ActiveDescendantKeyManager } from '@angular/cdk/a11y';
-import { DestroyRef, EventEmitter, Injectable, QueryList, inject } from '@angular/core';
+import { computed, DestroyRef, EventEmitter, inject, Injectable, Injector, Signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { Observable, asyncScheduler, debounceTime, filter, map, observeOn, take } from 'rxjs';
-import { ɵLuOptionComponent } from '../option';
+import { asyncScheduler, debounceTime, filter, map, Observable, observeOn, take } from 'rxjs';
 import { LuOptionComparer } from '../select.model';
+import { KeyManagerElement } from '../key-manager-element';
 
 interface CoreSelectKeyManagerOptions<T> {
-	queryList: QueryList<ɵLuOptionComponent<T>>;
+	queryList: Signal<readonly KeyManagerElement<T>[]>;
+	additionalElementsBefore?: Signal<readonly KeyManagerElement<T>[]>;
+	additionalElementsAfter?: Signal<readonly KeyManagerElement<T>[]>;
 	options$: Observable<readonly T[]>;
 	optionComparer: LuOptionComparer<T>;
 	activeOptionIdChanged$: EventEmitter<string>;
@@ -16,13 +18,17 @@ interface CoreSelectKeyManagerOptions<T> {
 @Injectable()
 export class CoreSelectKeyManager<T> {
 	#destroyRef = inject(DestroyRef);
-	#cdkKeyManager?: ActiveDescendantKeyManager<ɵLuOptionComponent<T>>;
+	#cdkKeyManager?: ActiveDescendantKeyManager<KeyManagerElement<T>>;
 	#hasSearchChanged = false;
 	#options?: CoreSelectKeyManagerOptions<T>;
+	#injector = inject(Injector);
 
 	init(options: CoreSelectKeyManagerOptions<T>): void {
 		this.#options = options;
-		this.#cdkKeyManager = new ActiveDescendantKeyManager(options.queryList).withHomeAndEnd();
+		const keyManagerItems = computed(() => {
+			return [...(options.additionalElementsBefore ? options.additionalElementsBefore() : []), ...options.queryList(), ...(options.additionalElementsAfter ? options.additionalElementsAfter() : [])];
+		});
+		this.#cdkKeyManager = new ActiveDescendantKeyManager(keyManagerItems, this.#injector).withHomeAndEnd();
 		this.#bindClueChange(options.clueChange$);
 		this.#bindOptionsChange(options);
 		this.#bindActiveOptionIdChanged(options.activeOptionIdChanged$);
@@ -33,7 +39,7 @@ export class CoreSelectKeyManager<T> {
 		this.#cdkKeyManager?.onKeydown(event);
 	}
 
-	get activeItem(): ɵLuOptionComponent<T> | undefined {
+	get activeItem(): KeyManagerElement<T> | undefined {
 		return this.#cdkKeyManager?.activeItem;
 	}
 
@@ -91,7 +97,7 @@ export class CoreSelectKeyManager<T> {
 				takeUntilDestroyed(this.#destroyRef),
 			)
 			.subscribe(() => {
-				if (queryList.length === 0) {
+				if (queryList().length === 0) {
 					this.#cdkKeyManager.setActiveItem(-1);
 				} else if (this.#hasSearchChanged) {
 					this.#hasSearchChanged = false;
