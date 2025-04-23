@@ -4,7 +4,7 @@
 	position: relative;
 	overflow: hidden;
 	border: solid 1px var(--components-inputCard-borderColor);
-	border-radius: 1rem;
+	border-radius: var(--commons-borderRadius-L);
 	box-shadow: var(--components-inputCard-boxShadow);
 	background-color: var(--palettes-neutral-0);
 
@@ -42,6 +42,7 @@
 
 		.inputCard-header-label {
 			position: static !important;
+			font-weight: 600 !important;
 
 			&::after {
 				content: '';
