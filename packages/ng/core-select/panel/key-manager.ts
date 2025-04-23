@@ -90,14 +90,14 @@ export class CoreSelectKeyManager<T> {
 	 * 	- set to first item if search has changed
 	 * 	- set to first item if no active item
 	 */
-	#bindOptionsChange({ options$, queryList }: CoreSelectKeyManagerOptions<T>): void {
+	#bindOptionsChange({ options$, queryList, additionalElementsBefore }: CoreSelectKeyManagerOptions<T>): void {
 		options$
 			.pipe(
 				debounceTime(0), // Wait until QueryList is updated
 				takeUntilDestroyed(this.#destroyRef),
 			)
 			.subscribe(() => {
-				if (queryList().length === 0) {
+				if (queryList().length === 0 && additionalElementsBefore()?.length === 0) {
 					this.#cdkKeyManager.setActiveItem(-1);
 				} else if (this.#hasSearchChanged) {
 					this.#hasSearchChanged = false;

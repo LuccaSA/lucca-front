@@ -44,9 +44,9 @@ abstract class BaseSelectPanelRef<T> extends LuSelectPanelRef<T, T> {
 				this.instance.keyManager.activeItem.toggleActive();
 			} else {
 				this.emitValue(this.instance.keyManager.activeItem.option);
+				this.close();
 			}
 		}
-		this.close();
 	}
 }
 
