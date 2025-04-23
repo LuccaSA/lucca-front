@@ -4,6 +4,9 @@ import { KeyManagerElement } from '../key-manager-element';
 import { IconComponent } from '../../icon/icon.component';
 import { LuMultiSelectInputComponent } from '../../multi-select/input';
 import { MULTI_SELECT_INPUT } from '../../multi-select/select.model';
+import { LuSimpleSelectInputComponent } from '../../simple-select/input';
+import { SIMPLE_SELECT_INPUT } from '../../simple-select/select.model';
+import { ALuSelectInputComponent } from '../input';
 
 @Component({
 	selector: 'lu-add-option',
@@ -17,7 +20,10 @@ import { MULTI_SELECT_INPUT } from '../../multi-select/select.model';
 	},
 })
 export class AddOptionComponent implements KeyManagerElement<string>, OnDestroy {
-	#selectInput = inject<LuMultiSelectInputComponent<unknown>>(MULTI_SELECT_INPUT);
+	#multiSelectInput = inject<LuMultiSelectInputComponent<unknown>>(MULTI_SELECT_INPUT, { optional: true });
+	#simpleSelectInput = inject<LuSimpleSelectInputComponent<unknown>>(SIMPLE_SELECT_INPUT, { optional: true });
+
+	#selectInput: ALuSelectInputComponent<unknown, unknown> = this.#multiSelectInput || this.#simpleSelectInput;
 
 	label = input<PortalContent>();
 
