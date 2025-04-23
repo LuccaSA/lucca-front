@@ -3,12 +3,15 @@
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
 	position: relative;
-	margin-block: var(--pr-t-spacings-200);
 	overflow: hidden;
 	border: solid 1px var(--components-inputCard-borderColor);
 	border-radius: 1rem;
 	box-shadow: var(--components-inputCard-boxShadow);
 	background-color: var(--palettes-neutral-0);
+
+	& + & {
+		margin-block-start: var(--pr-t-spacings-200);
+	}
 
 	@at-root ($atRoot) {
 		.inputCard-header {
