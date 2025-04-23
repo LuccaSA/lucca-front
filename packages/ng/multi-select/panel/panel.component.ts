@@ -1,9 +1,18 @@
 import { A11yModule } from '@angular/cdk/a11y';
 import { AsyncPipe, NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
-import { AfterViewInit, ChangeDetectionStrategy, Component, TrackByFunction, inject, viewChildren, Signal, WritableSignal, signal } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, TrackByFunction, inject, viewChildren } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { PortalDirective, getIntl } from '@lucca-front/ng/core';
-import { CoreSelectKeyManager, LuOptionGroup, SELECT_ID, ɵLuOptionComponent, ɵLuOptionGroupPipe, ɵLuOptionOutletDirective, ɵgetGroupTemplateLocation } from '@lucca-front/ng/core-select';
+import {
+	CoreSelectKeyManager,
+	LuOptionGroup,
+	SELECT_ID,
+	ɵLuOptionComponent,
+	ɵLuOptionGroupPipe,
+	ɵLuOptionOutletDirective,
+	ɵgetGroupTemplateLocation,
+	AddOptionComponent,
+} from '@lucca-front/ng/core-select';
 import { EMPTY } from 'rxjs';
 import { LuMultiSelectInputComponent } from '../input';
 import { LuMultiSelectPanelRef } from '../input/panel.model';
@@ -12,7 +21,6 @@ import { LU_MULTI_SELECT_TRANSLATIONS } from '../select.translate';
 import { LuOptionsGroupContextPipe } from './option-group-context.pipe';
 import { LuIsOptionSelectedPipe } from './option-selected.pipe';
 import { ɵLuMultiSelectSelectedChipDirective } from './selected-chip.directive';
-import { KeyManagerElement } from '../../core-select/key-manager-element';
 
 @Component({
 	selector: 'lu-select-panel',
@@ -34,6 +42,7 @@ import { KeyManagerElement } from '../../core-select/key-manager-element';
 		NgTemplateOutlet,
 		PortalDirective,
 		LuOptionsGroupContextPipe,
+		AddOptionComponent,
 	],
 	providers: [CoreSelectKeyManager],
 })

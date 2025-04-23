@@ -7,3 +7,4 @@ export * from './select.model';
 export * from './select.translate';
 export * from './select.utils';
 export * from './key-manager-element';
+export * from './add-option/add-option.component';

@@ -37,10 +37,10 @@ abstract class BaseMultiSelectPanelRef<T> extends LuMultiSelectPanelRef<T> {
 
 	selectCurrentlyHighlightedValue(): void {
 		if (this.instance.keyManager.activeItem) {
-			this.instance.toggleOption(this.instance.keyManager.activeItem.option);
 			if (this.instance.keyManager.activeItem.toggleActive) {
 				this.instance.keyManager.activeItem.toggleActive();
 			}
+			this.instance.toggleOption(this.instance.keyManager.activeItem.option);
 		}
 	}
 
