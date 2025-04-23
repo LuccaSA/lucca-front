@@ -8,7 +8,11 @@
 	} as ctx"
 >
 	<div class="lu-picker-content" [class.is-loading]="loading$ | async" (scroll)="onScroll($event)">
-		<ng-container *luPortal="selectInput.panelHeaderTpl()" />
+		@if (selectInput.panelHeaderTpl(); as tpl) {
+			<div luCoreSelectPanelElement>
+				<ng-container *luPortal="tpl" />
+			</div>
+		}
 		<div role="listbox">
 			<ng-container *ngIf="grouping && ctx.groupTemplateLocation === 'group-header'">
 				<div
@@ -30,6 +34,7 @@
 			<ng-template #optionsList let-options let-groupIndex="groupIndex">
 				<lu-select-option
 					*ngFor="let option of options; let index = index; trackBy: trackOptionsBy"
+					luCoreSelectPanelElement
 					[option]="option"
 					[optionTpl]="optionTpl()"
 					[optionIndex]="index"
@@ -39,7 +44,7 @@
 					[scrollIntoViewOptions]="{ block: 'center' }"
 					[isSelected]="option | luIsOptionSelected:optionComparer:selected()"
 					[class.withAddOption]="ctx.shouldDisplayAddOption"
-					(click)="panelRef.emitValue(option)"
+					(selected)="panelRef.emitValue(option)"
 				/>
 			</ng-template>
 			<div class="lu-picker-content-option-emptyState" *ngIf="ctx.options.length === 0 && (loading$ | async) === false">

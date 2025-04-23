@@ -1,14 +1,14 @@
 import { AsyncPipe, NgIf } from '@angular/common';
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, HostBinding, Input, OnDestroy, TemplateRef, Type, ViewChild, inject, input } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, effect, ElementRef, HostBinding, inject, Input, input, OnDestroy, TemplateRef, Type, ViewChild } from '@angular/core';
 import { PortalDirective } from '@lucca-front/ng/core';
-import { BehaviorSubject, Subscription, asyncScheduler, observeOn } from 'rxjs';
+import { asyncScheduler, observeOn, Subscription } from 'rxjs';
 import { GroupTemplateLocation } from '../panel/panel.utils';
 import { LuOptionContext, SELECT_ID } from '../select.model';
 import { LuOptionGrouping } from './group.directive';
 import { LuOptionGroupPipe } from './group.pipe';
 import { LuOptionOutletDirective } from './option-outlet.directive';
 import { ILuOptionContext, LU_OPTION_CONTEXT } from './option.token';
-import { KeyManagerElement } from '../key-manager-element';
+import { CoreSelectPanelElement } from '../panel/selectable-item';
 
 export const MAGIC_OPTION_SCROLL_DELAY = 15;
 
@@ -18,18 +18,16 @@ export const MAGIC_OPTION_SCROLL_DELAY = 15;
 	styleUrls: ['./option.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	standalone: true,
-	imports: [AsyncPipe, LuOptionOutletDirective, NgIf, PortalDirective, LuOptionGroupPipe],
+	imports: [LuOptionOutletDirective, NgIf, PortalDirective, LuOptionGroupPipe],
 })
-export class LuOptionComponent<T> implements KeyManagerElement<T>, AfterViewInit, OnDestroy {
+export class LuOptionComponent<T> implements AfterViewInit, OnDestroy {
+	protected selectableItem = inject(CoreSelectPanelElement);
+
 	@HostBinding('class.optionItem')
 	public hasOptionItemClass = true;
 
 	@Input()
 	public optionTpl: TemplateRef<LuOptionContext<T>> | Type<unknown> | undefined;
-
-	@Input()
-	@HostBinding('attr.aria-selected')
-	isSelected = false;
 
 	@Input() option?: T;
 	@Input() grouping?: LuOptionGrouping<T, unknown>;
@@ -44,8 +42,6 @@ export class LuOptionComponent<T> implements KeyManagerElement<T>, AfterViewInit
 
 	groupTemplateLocation = input<GroupTemplateLocation>();
 
-	isHighlighted$ = new BehaviorSubject(false);
-
 	/**
 	 * Whether option is disabled. Used by ListKeyManager.
 	 */
@@ -57,11 +53,7 @@ export class LuOptionComponent<T> implements KeyManagerElement<T>, AfterViewInit
 	private cdr = inject(ChangeDetectorRef);
 	private subscription?: Subscription;
 
-	@HostBinding('attr.role')
-	public role = 'option';
-
-	@HostBinding('attr.id')
-	public get id(): string {
+	get id(): string {
 		const groupPart = this.groupIndex() === undefined ? `` : `-group-${this.groupIndex()}`;
 
 		return `lu-select-${this.selectId}${groupPart}-option-${this.optionIndex}`;
@@ -69,6 +61,17 @@ export class LuOptionComponent<T> implements KeyManagerElement<T>, AfterViewInit
 
 	protected elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
 	protected selectId = inject(SELECT_ID);
+
+	constructor() {
+		this.selectableItem.id = this.id;
+		effect(() => {
+			if (this.selectableItem.isHighlighted()) {
+				setTimeout(() => {
+					this.elementRef.nativeElement.scrollIntoView(this.scrollIntoViewOptions);
+				}, MAGIC_OPTION_SCROLL_DELAY);
+			}
+		});
+	}
 
 	ngOnDestroy(): void {
 		this.subscription?.unsubscribe();
@@ -79,19 +82,6 @@ export class LuOptionComponent<T> implements KeyManagerElement<T>, AfterViewInit
 			this.disabled = isDisabled;
 			this.cdr.markForCheck();
 		});
-	}
-
-	setActiveStyles(): void {
-		this.isHighlighted$.next(true);
-		// Somehow, adding this small delay works, even tho 0ms delay doesn't, I think there's
-		// a race condition somewhere that I can't find so this will just fix it for now.
-		setTimeout(() => {
-			this.elementRef.nativeElement.scrollIntoView(this.scrollIntoViewOptions);
-		}, MAGIC_OPTION_SCROLL_DELAY);
-	}
-
-	setInactiveStyles(): void {
-		this.isHighlighted$.next(false);
 	}
 
 	selectOption($event: Event): void {

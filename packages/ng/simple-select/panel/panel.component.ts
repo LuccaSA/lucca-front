@@ -1,9 +1,19 @@
 import { A11yModule } from '@angular/cdk/a11y';
 import { AsyncPipe, NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
-import { AfterViewInit, ChangeDetectionStrategy, Component, QueryList, TrackByFunction, ViewChildren, inject, computed, viewChildren } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, computed, inject, TrackByFunction, viewChildren } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { PortalDirective, getIntl } from '@lucca-front/ng/core';
-import { CoreSelectKeyManager, LuOptionGroup, LuSelectPanelRef, SELECT_ID, ɵLuOptionComponent, ɵLuOptionGroupPipe, ɵgetGroupTemplateLocation, AddOptionComponent } from '@lucca-front/ng/core-select';
+import { getIntl, PortalDirective } from '@lucca-front/ng/core';
+import {
+	AddOptionComponent,
+	CoreSelectKeyManager,
+	LuOptionGroup,
+	LuSelectPanelRef,
+	SELECT_ID,
+	ɵCoreSelectPanelElement,
+	ɵgetGroupTemplateLocation,
+	ɵLuOptionComponent,
+	ɵLuOptionGroupPipe,
+} from '@lucca-front/ng/core-select';
 import { EMPTY } from 'rxjs';
 import { LuSimpleSelectInputComponent } from '../input/select-input.component';
 import { SIMPLE_SELECT_INPUT } from '../select.model';
@@ -16,7 +26,20 @@ import { LuIsOptionSelectedPipe } from './option-selected.pipe';
 	styleUrls: ['./panel.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	standalone: true,
-	imports: [A11yModule, AsyncPipe, FormsModule, NgIf, NgFor, NgTemplateOutlet, ɵLuOptionGroupPipe, ɵLuOptionComponent, LuIsOptionSelectedPipe, PortalDirective, AddOptionComponent],
+	imports: [
+		A11yModule,
+		AsyncPipe,
+		FormsModule,
+		NgIf,
+		NgFor,
+		NgTemplateOutlet,
+		ɵLuOptionGroupPipe,
+		ɵLuOptionComponent,
+		LuIsOptionSelectedPipe,
+		PortalDirective,
+		AddOptionComponent,
+		ɵCoreSelectPanelElement,
+	],
 	providers: [CoreSelectKeyManager],
 })
 export class LuSelectPanelComponent<T> implements AfterViewInit {
@@ -38,7 +61,7 @@ export class LuSelectPanelComponent<T> implements AfterViewInit {
 	initialValue: T | undefined = this.selectInput.value;
 	optionTpl = this.selectInput.optionTpl;
 
-	options = viewChildren<ɵLuOptionComponent<T>>(ɵLuOptionComponent);
+	options = viewChildren<ɵCoreSelectPanelElement<T>>(ɵCoreSelectPanelElement);
 
 	public keyManager = inject<CoreSelectKeyManager<T>>(CoreSelectKeyManager);
 
@@ -64,9 +87,7 @@ export class LuSelectPanelComponent<T> implements AfterViewInit {
 
 	ngAfterViewInit(): void {
 		this.keyManager.init({
-			additionalElementsBefore: this.selectInput.additionalElementsBefore,
 			queryList: this.options,
-			additionalElementsAfter: this.selectInput.additionalElementsAfter,
 			options$: this.options$,
 			optionComparer: this.optionComparer,
 			activeOptionIdChanged$: this.panelRef.activeOptionIdChanged,

@@ -1,16 +1,12 @@
-import { ChangeDetectionStrategy, Component, inject, input, output, signal, ViewEncapsulation, OnDestroy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, input, output, ViewEncapsulation } from '@angular/core';
 import { PortalContent, PortalDirective } from '../../core/portal';
-import { KeyManagerElement } from '../key-manager-element';
 import { IconComponent } from '../../icon/icon.component';
-import { LuMultiSelectInputComponent } from '../../multi-select/input';
-import { MULTI_SELECT_INPUT } from '../../multi-select/select.model';
-import { LuSimpleSelectInputComponent } from '../../simple-select/input';
-import { SIMPLE_SELECT_INPUT } from '../../simple-select/select.model';
-import { ALuSelectInputComponent } from '../input';
+import { CoreSelectPanelElement } from '../panel/selectable-item';
+import { outputToObservable, takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
 	selector: 'lu-add-option',
-	imports: [PortalDirective, IconComponent],
+	imports: [PortalDirective, IconComponent, CoreSelectPanelElement],
 	templateUrl: './add-option.component.html',
 	styleUrl: './add-option.component.scss',
 	encapsulation: ViewEncapsulation.None,
@@ -19,12 +15,8 @@ import { ALuSelectInputComponent } from '../input';
 		class: 'lu-picker-content-add',
 	},
 })
-export class AddOptionComponent implements KeyManagerElement<string>, OnDestroy {
-	#multiSelectInput = inject<LuMultiSelectInputComponent<unknown>>(MULTI_SELECT_INPUT, { optional: true });
-	#simpleSelectInput = inject<LuSimpleSelectInputComponent<unknown>>(SIMPLE_SELECT_INPUT, { optional: true });
-
-	#selectInput: ALuSelectInputComponent<unknown, unknown> = this.#multiSelectInput || this.#simpleSelectInput;
-
+export class AddOptionComponent {
+	readonly #selectableItem = inject(CoreSelectPanelElement);
 	label = input<PortalContent>();
 
 	addOption = output<void>();
@@ -33,33 +25,11 @@ export class AddOptionComponent implements KeyManagerElement<string>, OnDestroy 
 
 	option = 'ɵAddOption';
 
-	highlighted = signal(false);
-
-	toggleActive(): void {
-		this.addOption.emit();
-	}
-
 	constructor() {
-		this.#selectInput.additionalElementsAfter.set([...this.#selectInput.additionalElementsAfter(), this]);
-	}
-
-	ngOnDestroy(): void {
-		this.#selectInput.additionalElementsAfter.set(this.#selectInput.additionalElementsAfter().filter((el) => el !== this));
-	}
-
-	setActiveStyles(): void {
-		this.highlighted.set(true);
-	}
-
-	setInactiveStyles(): void {
-		this.highlighted.set(false);
-	}
-
-	getLabel(): string {
-		const label = this.label();
-		if (typeof label === 'string') {
-			return label;
-		}
-		return '';
+		outputToObservable(this.#selectableItem.selected)
+			.pipe(takeUntilDestroyed())
+			.subscribe(() => {
+				this.addOption.emit();
+			});
 	}
 }

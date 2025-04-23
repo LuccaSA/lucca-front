@@ -1,4 +1,4 @@
-<div class="addOption palette-product" [class.highlighted]="highlighted()" (click)="addOption.emit()" [id]="id">
+<div class="addOption palette-product" (click)="addOption.emit()" [id]="id" luCoreSelectPanelElement>
 	<lu-icon icon="mathsPlus"/>
 	<ng-container *luPortal="label()" />
 </div>
