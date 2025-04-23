@@ -1,5 +1,4 @@
 @use '@lucca-front/scss/src/commons/utils/namespace';
-@use '@lucca-front/scss/src/components/radioField/exports' as radioField;
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
 	position: relative;
