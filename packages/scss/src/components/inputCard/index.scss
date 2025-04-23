@@ -29,4 +29,8 @@
 	&:has(.inputCard-header-input:disabled) {
 		@include disabled;
 	}
+
+	&.mod-maximized {
+		@include modMaximized;
+	}
 }

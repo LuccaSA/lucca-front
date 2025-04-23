@@ -15,13 +15,15 @@
 	@at-root ($atRoot) {
 		.inputCard-header {
 			margin: 0 !important;
-			padding: var(--pr-t-spacings-200);
+			padding-inline: var(--components-inputCard-paddingInline);
+			padding-block: var(--components-inputCard-paddingBlock);
 			background-color: var(--components-inputCardHeader-backgroundColor);
 		}
 
 		.inputCard-content {
 			display: var(--components-inputCard-content-display);
-			padding: var(--pr-t-spacings-200);
+			padding-inline: var(--components-inputCard-paddingInline);
+			padding-block: var(--components-inputCard-paddingBlock);
 			padding-inline-start: var(--components-inputCardContent-paddingInlineStart);
 			border-top: solid 1px var(--palettes-product-100);
 		}
