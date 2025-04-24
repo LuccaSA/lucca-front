@@ -1,5 +1,21 @@
-import { AsyncPipe, NgIf } from '@angular/common';
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, effect, ElementRef, HostBinding, inject, Input, input, OnDestroy, TemplateRef, Type, ViewChild } from '@angular/core';
+import { NgIf } from '@angular/common';
+import {
+	AfterViewInit,
+	ChangeDetectionStrategy,
+	ChangeDetectorRef,
+	Component,
+	effect,
+	ElementRef,
+	HostBinding,
+	inject,
+	Input,
+	input,
+	OnDestroy,
+	OnInit,
+	TemplateRef,
+	Type,
+	ViewChild,
+} from '@angular/core';
 import { PortalDirective } from '@lucca-front/ng/core';
 import { asyncScheduler, observeOn, Subscription } from 'rxjs';
 import { GroupTemplateLocation } from '../panel/panel.utils';
@@ -20,7 +36,7 @@ export const MAGIC_OPTION_SCROLL_DELAY = 15;
 	standalone: true,
 	imports: [LuOptionOutletDirective, NgIf, PortalDirective, LuOptionGroupPipe],
 })
-export class LuOptionComponent<T> implements AfterViewInit, OnDestroy {
+export class LuOptionComponent<T> implements AfterViewInit, OnDestroy, OnInit {
 	protected selectableItem = inject(CoreSelectPanelElement);
 
 	@HostBinding('class.optionItem')
@@ -63,7 +79,6 @@ export class LuOptionComponent<T> implements AfterViewInit, OnDestroy {
 	protected selectId = inject(SELECT_ID);
 
 	constructor() {
-		this.selectableItem.id = this.id;
 		effect(() => {
 			if (this.selectableItem.isHighlighted()) {
 				setTimeout(() => {
@@ -71,6 +86,10 @@ export class LuOptionComponent<T> implements AfterViewInit, OnDestroy {
 				}, MAGIC_OPTION_SCROLL_DELAY);
 			}
 		});
+	}
+
+	ngOnInit(): void {
+		this.selectableItem.id = this.id;
 	}
 
 	ngOnDestroy(): void {

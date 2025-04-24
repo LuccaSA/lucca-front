@@ -38,11 +38,15 @@ export class LuMultiSelectAllHeaderComponent {
 	highlighted = signal(false);
 
 	constructor() {
+		this.#selectableItem.id = `multi-select-select-all`;
 		effect(() => {
 			if (this.#selectableItem.isHighlighted()) {
 				setTimeout(() => {
 					this.#elementRef.nativeElement.scrollIntoView();
-				}, 15);
+				}, 50);
+			}
+			if (this.isSelected()) {
+				this.#selectableItem.isSelected.set(true);
 			}
 		});
 		outputToObservable(this.#selectableItem.selected)

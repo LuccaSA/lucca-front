@@ -21,10 +21,6 @@ export class AddOptionComponent {
 
 	addOption = output<void>();
 
-	id = 'picker-content-add';
-
-	option = 'ɵAddOption';
-
 	constructor() {
 		outputToObservable(this.#selectableItem.selected)
 			.pipe(takeUntilDestroyed())

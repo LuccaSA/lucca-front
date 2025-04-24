@@ -31,7 +31,7 @@
 					[attr.aria-labelledby]="selectId + '-group-' + group.key"
 				>
 					@let groupCtx = group.options | luOptionsGroupContext:selectedOptions:optionComparer;
-					<div luCoreSelectPanelElement
+					<div luCoreSelectPanelElement [elementId]="selectId + '-group-' + group.key"
 						class="lu-picker-content-option-group-title"
 						role="presentation"
 						(selected)="toggleOptions(groupCtx.notSelectedOptions, group.options)">
@@ -39,7 +39,6 @@
 						<button
 							type="button"
 							class="link"
-							[id]="selectId + '-group-' + group.key"
 							(click)="toggleOptions(groupCtx.notSelectedOptions, group.options)"
 						>
 							{{ groupCtx.isGroupSelected ? intl.unselectAll : intl.selectAll }}
@@ -64,6 +63,7 @@
 					[scrollIntoViewOptions]="{ block: 'nearest' }"
 					[isSelected]="option | luIsOptionSelected:optionComparer:selectedOptions"
 					(selected)="toggleOption(option)"
+					(click)="toggleOption(option)"
 					[class.withAddOption]="ctx.shouldDisplayAddOption"
 				/>
 			</ng-template>

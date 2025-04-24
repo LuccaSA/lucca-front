@@ -3,9 +3,9 @@
 	[class.is-disabled]="disabled"
 	(click)="selectOption($event)"
 >
-	<ng-container *luOptionOutlet="optionTpl; value: option" />
+	<ng-container *luOptionOutlet="optionTpl; value: selectableItem.option()" />
 
 	<div *ngIf="groupTemplateLocation() === 'option'" class="optionItem-value-group">
-		<ng-container *luPortal="grouping.content; context: { $implicit: option | luOptionGroup:grouping.selector }" />
+		<ng-container *luPortal="grouping.content; context: { $implicit: selectableItem.option() | luOptionGroup:grouping.selector }" />
 	</div>
 </div>

@@ -45,6 +45,7 @@
 					[isSelected]="option | luIsOptionSelected:optionComparer:selected()"
 					[class.withAddOption]="ctx.shouldDisplayAddOption"
 					(selected)="panelRef.emitValue(option)"
+					(click)="panelRef.emitValue(option)"
 				/>
 			</ng-template>
 			<div class="lu-picker-content-option-emptyState" *ngIf="ctx.options.length === 0 && (loading$ | async) === false">

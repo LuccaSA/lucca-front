@@ -99,7 +99,7 @@ export class LuMultiSelectPanelComponent<T> implements AfterViewInit {
 		this.selectedOptions = matchingOption && option ? this.selectedOptions.filter((o) => o !== matchingOption) : [...this.selectedOptions, option];
 		this.panelRef.emitValue(this.selectedOptions);
 		setTimeout(() => this.panelRef.updatePosition());
-		this.keyManager.setActiveItem(this.options().findIndex((o) => o.option === option));
+		this.keyManager.setActiveItem(this.options().findIndex((o) => o.option() === option));
 	}
 
 	toggleOptions(notSelectedOptions: T[], groupOptions: T[]): void {

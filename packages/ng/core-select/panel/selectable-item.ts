@@ -1,11 +1,11 @@
 import { Highlightable } from '@angular/cdk/a11y';
-import { Directive, input, output, signal } from '@angular/core';
+import { Directive, input, model, output, signal } from '@angular/core';
 
 @Directive({
 	standalone: true,
 	selector: '[luCoreSelectPanelElement]',
 	host: {
-		'[attr.id]': 'id',
+		'[attr.id]': 'id || elementId()',
 		'[attr.aria-selected]': 'isSelected()',
 		'[class.is-highlighted]': 'isHighlighted()',
 		role: 'option',
@@ -15,7 +15,9 @@ import { Directive, input, output, signal } from '@angular/core';
 export class CoreSelectPanelElement<T> implements Highlightable {
 	id: string;
 
-	isSelected = input(false);
+	elementId = input<string>('');
+
+	isSelected = model(false);
 
 	option = input<T>();
 
