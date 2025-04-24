@@ -163,6 +163,7 @@ export type LuccaIcon =
 	| 'clipboard'
 	| 'paste'
 	| 'completion'
+	| 'cornersFocus'
 	| 'cornersFullscreenExit'
 	| 'fullscreenExit'
 	| 'cornersFullscreenOpen'

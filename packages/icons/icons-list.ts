@@ -163,6 +163,7 @@ export const IconsList = [
 	{ icon: 'clipboard', deprecated: false },
 	{ icon: 'paste', deprecated: true },
 	{ icon: 'completion', deprecated: false },
+	{ icon: 'cornersFocus', deprecated: false },
 	{ icon: 'cornersFullscreenExit', deprecated: false },
 	{ icon: 'fullscreenExit', deprecated: true },
 	{ icon: 'cornersFullscreenOpen', deprecated: false },
