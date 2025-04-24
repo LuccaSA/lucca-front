@@ -1,28 +1,52 @@
 
 @use '@lucca-front/scss/src/commons/utils/namespace';
+@use '@lucca-front/scss/src/commons/utils/a11y';
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
-	min-block-size: var(--components-pageLayout-BlockSize);
+	block-size: 100dvh;
 	display: grid;
 	grid-template: var(--components-pageLayout-gridTemplate);
 
 	@at-root ($atRoot) {
+		.pageLayout-start {
+			grid-area: start;
+		}
+
+		.pageLayout-end {
+			grid-area: end;
+		}
+
+		.pageLayout-start,
+		.pageLayout-end,
+		.pageLayout-navSide {
+			&:empty {
+				display: none;
+			}
+		}
+
 		.pageLayout-banner {
 			grid-area: banner;
-			position: sticky;
-			top: 0;
-			z-index: 1;
+			position: relative;
 		}
 
 		.pageLayout-navSide {
 			grid-area: navSide;
-			position: sticky;
-			inset-block-start: var(--components-pageLayout-bannerBlockSize);
-			max-block-size: calc(var(--components-pageLayout-BlockSize) - var(--components-pageLayout-bannerBlockSize));
+			overflow-y: auto;
+			overflow-x: hidden;
 		}
 
 		.pageLayout-content {
+			position: relative;
 			grid-area: content;
+			overflow: auto;
+		}
+
+		.pageLayout-banner,
+		.pageLayout-navSide,
+		.pageLayout-content {
+			&:focus-visible {
+				@include a11y.focusVisible($offset: -4px, $borderRadius: var(--commons-borderRadius-L));
+			}
 		}
 	}
 }

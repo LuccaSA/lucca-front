@@ -10,11 +10,5 @@
 	@include media.min('S') {
 		@include wide;
 	}
-
-	@include media.max('S') {
-		&.mod-mobileNavSideBottom {
-			@include mobileNavSideBottom;
-		}
-	}
 }
 
