@@ -89,7 +89,7 @@ export class LuOptionComponent<T> implements AfterViewInit, OnDestroy, OnInit {
 	}
 
 	ngOnInit(): void {
-		this.selectableItem.id = this.id;
+		this.selectableItem.id.set(this.id);
 	}
 
 	ngOnDestroy(): void {

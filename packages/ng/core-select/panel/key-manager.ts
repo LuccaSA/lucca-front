@@ -1,5 +1,5 @@
 import { ActiveDescendantKeyManager } from '@angular/cdk/a11y';
-import { DestroyRef, EventEmitter, inject, Injectable, Injector, Signal } from '@angular/core';
+import { computed, DestroyRef, EventEmitter, inject, Injectable, Injector, Signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { asyncScheduler, debounceTime, filter, map, Observable, observeOn, take } from 'rxjs';
 import { LuOptionComparer } from '../select.model';
@@ -21,9 +21,16 @@ export class CoreSelectKeyManager<T> {
 	#options?: CoreSelectKeyManagerOptions<T>;
 	#injector = inject(Injector);
 
+	#queryList: Signal<CoreSelectPanelElement<T>[]>;
+
 	init(options: CoreSelectKeyManagerOptions<T>): void {
 		this.#options = options;
-		this.#cdkKeyManager = new ActiveDescendantKeyManager(options.queryList, this.#injector).withHomeAndEnd();
+		this.#queryList = computed(() => {
+			return [...options.queryList()].sort((a: CoreSelectPanelElement<T>, b: CoreSelectPanelElement<T>) => {
+				return a.idAttribute().localeCompare(b.idAttribute());
+			});
+		});
+		this.#cdkKeyManager = new ActiveDescendantKeyManager(this.#queryList, this.#injector).withHomeAndEnd();
 		this.#bindClueChange(options.clueChange$);
 		this.#bindOptionsChange(options);
 		this.#bindActiveOptionIdChanged(options.activeOptionIdChanged$);
@@ -73,7 +80,7 @@ export class CoreSelectKeyManager<T> {
 	#bindActiveOptionIdChanged(activeOptionIdChanged$: EventEmitter<string>): void {
 		this.#cdkKeyManager.change
 			.pipe(
-				map(() => this.#cdkKeyManager.activeItem?.id),
+				map(() => this.#cdkKeyManager.activeItem?.idAttribute()),
 				takeUntilDestroyed(this.#destroyRef),
 			)
 			.subscribe((activeDescendant) => activeOptionIdChanged$.emit(activeDescendant));
@@ -85,14 +92,14 @@ export class CoreSelectKeyManager<T> {
 	 * 	- set to first item if search has changed
 	 * 	- set to first item if no active item
 	 */
-	#bindOptionsChange({ options$, queryList }: CoreSelectKeyManagerOptions<T>): void {
+	#bindOptionsChange({ options$ }: CoreSelectKeyManagerOptions<T>): void {
 		options$
 			.pipe(
 				debounceTime(0), // Wait until QueryList is updated
 				takeUntilDestroyed(this.#destroyRef),
 			)
 			.subscribe(() => {
-				if (queryList().length === 0) {
+				if (this.#queryList().length === 0) {
 					this.#cdkKeyManager.setActiveItem(-1);
 				} else if (this.#hasSearchChanged) {
 					this.#hasSearchChanged = false;

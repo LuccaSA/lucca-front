@@ -1,11 +1,11 @@
 import { Highlightable } from '@angular/cdk/a11y';
-import { Directive, input, model, output, signal } from '@angular/core';
+import { computed, Directive, input, model, output, signal } from '@angular/core';
 
 @Directive({
 	standalone: true,
 	selector: '[luCoreSelectPanelElement]',
 	host: {
-		'[attr.id]': 'id || elementId()',
+		'[attr.id]': 'idAttribute()',
 		'[attr.aria-selected]': 'isSelected()',
 		'[class.is-highlighted]': 'isHighlighted()',
 		role: 'option',
@@ -13,9 +13,11 @@ import { Directive, input, model, output, signal } from '@angular/core';
 })
 // eslint-disable-next-line @angular-eslint/directive-class-suffix
 export class CoreSelectPanelElement<T> implements Highlightable {
-	id: string;
+	id = signal<string>('');
 
 	elementId = input<string>('');
+
+	idAttribute = computed(() => this.id() || this.elementId());
 
 	isSelected = model(false);
 

@@ -38,7 +38,7 @@ export class LuMultiSelectAllHeaderComponent {
 	highlighted = signal(false);
 
 	constructor() {
-		this.#selectableItem.id = `multi-select-select-all`;
+		this.#selectableItem.id.set(`multi-select-select-all`);
 		effect(() => {
 			if (this.#selectableItem.isHighlighted()) {
 				setTimeout(() => {
