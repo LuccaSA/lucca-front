@@ -12,7 +12,7 @@
 		@include autoResize;
 	}
 
-	&.is-error {
+	&:has(.richTextField-content[aria-invalid='true']) {
 		@include error;
 
 		&:hover {
