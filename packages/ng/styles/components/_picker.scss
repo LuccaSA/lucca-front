@@ -51,6 +51,16 @@
 	gap: var(--pr-t-spacings-100);
 	justify-content: space-between;
 	box-shadow: calc(var(--pr-t-spacings-50) * -0.5) calc(var(--pr-t-spacings-50) * -0.5) 0 2px var(--pr-t-elevation-surface-raised); // Mask background options scrolling behind
+
+	.link {
+		text-decoration: none;
+	}
+
+	&.is-highlighted {
+		.link {
+			text-decoration: underline;
+		}
+	}
 }
 
 .lu-picker-content-add {
