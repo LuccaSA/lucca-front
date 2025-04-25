@@ -17,9 +17,9 @@
 		(scroll)="onScroll($event)"
 	>
 		@if (selectInput.panelHeaderTpl(); as tpl) {
-			<div luCoreSelectPanelElement>
-				<ng-container *luPortal="tpl" />
-			</div>
+		<div luCoreSelectPanelElement>
+			<ng-container *luPortal="tpl" />
+		</div>
 		}
 
 		<div class="lu-picker-content-option">
@@ -31,19 +31,19 @@
 					attr.aria-labelledby="lu-select-{{selectId}}-group-{{groupIndex}}"
 				>
 					@let groupCtx = group.options | luOptionsGroupContext:selectedOptions:optionComparer;
-					<div luCoreSelectPanelElement elementId="lu-select-{{selectId}}-group-{{groupIndex}}"
+					<div
+						luCoreSelectPanelElement
+						elementId="lu-select-{{selectId}}-group-{{groupIndex}}"
 						class="lu-picker-content-option-group-title"
 						role="presentation"
-						(selected)="toggleOptions(groupCtx.notSelectedOptions, group.options)">
+						(selected)="toggleOptions(groupCtx.notSelectedOptions, group.options)"
+					>
 						<span #groupingTitleRef>
 							<ng-container *luPortal="grouping.content; context: { $implicit: group }" />
 						</span>
-						<button
-							type="button"
-							class="link"
-							(click)="toggleOptions(groupCtx.notSelectedOptions, group.options)"
-						>
-							<span class="u-mask">{{groupingTitleRef.innerText}}&nbsp;– </span>{{ groupCtx.isGroupSelected ? intl.unselectAll : intl.selectAll }}
+						<button type="button" class="link" (click)="toggleOptions(groupCtx.notSelectedOptions, group.options)">
+							<span class="u-mask">{{ groupingTitleRef.innerText }}&nbsp;– </span>{{ groupCtx.isGroupSelected ? intl.unselectAll :
+							intl.selectAll }}
 						</button>
 					</div>
 					<ng-template [ngTemplateOutlet]="optionsList" [ngTemplateOutletContext]="{ $implicit: group.options, groupIndex: groupIndex }" />
@@ -71,17 +71,23 @@
 				/>
 			</ng-template>
 			<div class="lu-picker-content-option-emptyState" *ngIf="ctx.options.length === 0 && (loading$ | async) === false">
-				{{intl.emptyResults}}
+				{{ intl.emptyResults }}
 			</div>
 		</div>
 		<div *ngIf="loading$ | async" class="lu-picker-content-loading">
-			<div class="loading">{{intl.loading}}</div>
+			<div class="loading">{{ intl.loading }}</div>
 		</div>
-		@if(ctx.shouldDisplayAddOption){
-			<div class="addOption palette-product" (click)="selectInput.emitAddOption()" (selected)="selectInput.emitAddOption()" elementId="picker-content-add" luCoreSelectPanelElement>
-				<lu-icon icon="mathsPlus"/>
-				<ng-container *luPortal="selectInput.addOptionLabel" />
-			</div>
+		@if (ctx.shouldDisplayAddOption) {
+		<div
+			class="addOption palette-product"
+			(click)="selectInput.emitAddOption()"
+			(selected)="selectInput.emitAddOption()"
+			elementId="picker-content-add"
+			luCoreSelectPanelElement
+		>
+			<lu-icon icon="mathsPlus" />
+			<ng-container *luPortal="selectInput.addOptionLabel" />
+		</div>
 		}
 	</div>
 </div>

@@ -12,7 +12,6 @@ import {
 	numberAttribute,
 	OnDestroy,
 	OnInit,
-	signal,
 	TemplateRef,
 	Type,
 	viewChild,

@@ -18,6 +18,7 @@
 	:host {
 		display: block;
 		scroll-margin: var(--pr-t-spacings-50);
+
 		&.withAddOption {
 			scroll-margin-block-end: var(--pr-t-spacings-600);
 		}

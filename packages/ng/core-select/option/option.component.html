@@ -1,8 +1,4 @@
-<div
-	class="optionItem-value"
-	[class.is-disabled]="disabled"
-	(click)="selectOption($event)"
->
+<div class="optionItem-value" [class.is-disabled]="disabled" (click)="selectOption($event)">
 	<ng-container *luOptionOutlet="optionTpl; value: selectableItem.option()" />
 
 	<div *ngIf="groupTemplateLocation() === 'option'" class="optionItem-value-group">
