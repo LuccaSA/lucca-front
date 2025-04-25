@@ -284,10 +284,15 @@
 	padding: var(--pr-t-spacings-50);
 	white-space: nowrap;
 
-	:where(.button) {
+	.button {
 		@include button.S;
 		@include button.text;
 		@include button.onlyIconS;
+
+		&.mod-delete {
+			// For specificity purpose. Could be removed if we decide to remove automatic CSS imports in Angular components 
+			@include button.delete;
+		}
 	}
 
 	// All devices expect touch ones : subActions are hidden and appears when their row is hover or selected
