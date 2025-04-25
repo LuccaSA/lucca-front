@@ -28,7 +28,7 @@ export class TextareaInputComponent implements OnInit {
 	placeholder: string = '';
 
 	@Input()
-	rows?: number;
+	rows?: number = 3;
 
 	@Input({
 		transform: booleanAttribute,
