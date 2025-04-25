@@ -3,16 +3,7 @@ import { AsyncPipe, NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
 import { AfterViewInit, ChangeDetectionStrategy, Component, inject, TrackByFunction, viewChildren } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { getIntl, PortalDirective } from '@lucca-front/ng/core';
-import {
-	AddOptionComponent,
-	CoreSelectKeyManager,
-	LuOptionGroup,
-	SELECT_ID,
-	ɵCoreSelectPanelElement,
-	ɵgetGroupTemplateLocation,
-	ɵLuOptionComponent,
-	ɵLuOptionGroupPipe,
-} from '@lucca-front/ng/core-select';
+import { CoreSelectKeyManager, LuOptionGroup, SELECT_ID, ɵCoreSelectPanelElement, ɵgetGroupTemplateLocation, ɵLuOptionComponent, ɵLuOptionGroupPipe } from '@lucca-front/ng/core-select';
 import { EMPTY } from 'rxjs';
 import { LuMultiSelectInputComponent } from '../input';
 import { LuMultiSelectPanelRef } from '../input/panel.model';
@@ -20,6 +11,7 @@ import { MULTI_SELECT_INPUT } from '../select.model';
 import { LU_MULTI_SELECT_TRANSLATIONS } from '../select.translate';
 import { LuOptionsGroupContextPipe } from './option-group-context.pipe';
 import { LuIsOptionSelectedPipe } from './option-selected.pipe';
+import { IconComponent } from '@lucca-front/ng/icon';
 
 @Component({
 	selector: 'lu-select-panel',
@@ -39,8 +31,8 @@ import { LuIsOptionSelectedPipe } from './option-selected.pipe';
 		NgTemplateOutlet,
 		PortalDirective,
 		LuOptionsGroupContextPipe,
-		AddOptionComponent,
 		ɵCoreSelectPanelElement,
+		IconComponent,
 	],
 	providers: [CoreSelectKeyManager],
 })

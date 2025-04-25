@@ -8,20 +8,11 @@
 	margin-inline: calc(-1 * var(--pr-t-spacings-50));
 }
 
-
-:host-context(.is-highlighted) {
-	background-color: lime;
-}
-
-:host-context([aria-selected="true"]) {
-	background-color: red;
-}
-
 .formerEmployeeDisplayer {
 	border-radius: var(--commons-borderRadius-M);
 	cursor: pointer;
 
-	&:hover, &.highlighted {
+	&:hover, &.highlighted, :host-context(.is-highlighted) & {
 		background-color: var(--palettes-neutral-50);
 	}
 

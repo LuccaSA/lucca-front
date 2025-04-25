@@ -1,5 +1,5 @@
 import { Highlightable } from '@angular/cdk/a11y';
-import { computed, Directive, input, model, output, signal } from '@angular/core';
+import { computed, Directive, ElementRef, inject, input, model, output, signal } from '@angular/core';
 
 @Directive({
 	standalone: true,
@@ -13,6 +13,8 @@ import { computed, Directive, input, model, output, signal } from '@angular/core
 })
 // eslint-disable-next-line @angular-eslint/directive-class-suffix
 export class CoreSelectPanelElement<T> implements Highlightable {
+	readonly elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
+
 	id = signal<string>('');
 
 	elementId = input<string>('');

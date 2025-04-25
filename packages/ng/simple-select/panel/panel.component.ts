@@ -4,7 +4,6 @@ import { AfterViewInit, ChangeDetectionStrategy, Component, computed, inject, Tr
 import { FormsModule } from '@angular/forms';
 import { getIntl, PortalDirective } from '@lucca-front/ng/core';
 import {
-	AddOptionComponent,
 	CoreSelectKeyManager,
 	LuOptionGroup,
 	LuSelectPanelRef,
@@ -19,6 +18,7 @@ import { LuSimpleSelectInputComponent } from '../input/select-input.component';
 import { SIMPLE_SELECT_INPUT } from '../select.model';
 import { LU_SIMPLE_SELECT_TRANSLATIONS } from '../select.translate';
 import { LuIsOptionSelectedPipe } from './option-selected.pipe';
+import { IconComponent } from '@lucca-front/ng/icon';
 
 @Component({
 	selector: 'lu-select-panel',
@@ -26,20 +26,7 @@ import { LuIsOptionSelectedPipe } from './option-selected.pipe';
 	styleUrls: ['./panel.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	standalone: true,
-	imports: [
-		A11yModule,
-		AsyncPipe,
-		FormsModule,
-		NgIf,
-		NgFor,
-		NgTemplateOutlet,
-		ɵLuOptionGroupPipe,
-		ɵLuOptionComponent,
-		LuIsOptionSelectedPipe,
-		PortalDirective,
-		AddOptionComponent,
-		ɵCoreSelectPanelElement,
-	],
+	imports: [A11yModule, AsyncPipe, FormsModule, NgIf, NgFor, NgTemplateOutlet, ɵLuOptionGroupPipe, ɵLuOptionComponent, LuIsOptionSelectedPipe, PortalDirective, ɵCoreSelectPanelElement, IconComponent],
 	providers: [CoreSelectKeyManager],
 })
 export class LuSelectPanelComponent<T> implements AfterViewInit {

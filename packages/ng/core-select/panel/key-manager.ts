@@ -26,8 +26,15 @@ export class CoreSelectKeyManager<T> {
 	init(options: CoreSelectKeyManagerOptions<T>): void {
 		this.#options = options;
 		this.#queryList = computed(() => {
-			return [...options.queryList()].sort((a: CoreSelectPanelElement<T>, b: CoreSelectPanelElement<T>) => {
-				return a.idAttribute().localeCompare(b.idAttribute());
+			return [...options.queryList()].sort((a, b) => {
+				const comparison = a.elementRef.nativeElement.compareDocumentPosition(b.elementRef.nativeElement);
+				if (comparison & Node.DOCUMENT_POSITION_FOLLOWING) {
+					return -1;
+				}
+				if (comparison & Node.DOCUMENT_POSITION_PRECEDING) {
+					return 1;
+				}
+				return 0;
 			});
 		});
 		this.#cdkKeyManager = new ActiveDescendantKeyManager(this.#queryList, this.#injector).withHomeAndEnd();

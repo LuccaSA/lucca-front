@@ -1,3 +1,5 @@
+@use "@lucca-front/scss/src/components/button/exports" as button;
+
 .optionItem-groupKey {
 	padding-block: var(--components-options-item-padding-vertical) var(--pr-t-spacings-50);
 	padding-inline: var(--components-options-item-padding-horizontal);
@@ -7,4 +9,19 @@
 	text-align: start;
 	color: var(--palettes-neutral-600);
 	margin: 0;
+}
+
+.addOption {
+	@include button.vars;
+	@include button.component;
+	@include button.block;
+	@include button.withIcon;
+	@include button.text;
+
+	justify-content: left;
+
+	&.is-highlighted {
+		--components-button-color: var(--palettes-700, var(--palettes-neutral-700));
+		--components-button-backgroundColor: var(--palettes-100, var(--palettes-neutral-100));
+	}
 }

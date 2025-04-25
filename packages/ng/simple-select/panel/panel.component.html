@@ -56,7 +56,10 @@
 			<div class="loading">{{ intl.loading }}</div>
 		</div>
 		@if(ctx.shouldDisplayAddOption) {
-			<lu-add-option (addOption)="selectInput.emitAddOption()" [label]="selectInput.addOptionLabel"/>
+			<div class="addOption palette-product" (click)="selectInput.emitAddOption()" (selected)="selectInput.emitAddOption()" elementId="picker-content-add" luCoreSelectPanelElement>
+				<lu-icon icon="mathsPlus"/>
+				<ng-container *luPortal="selectInput.addOptionLabel" />
+			</div>
 		}
 	</div>
 </div>
