@@ -1,5 +1,5 @@
 import { LexicalEditor } from 'lexical';
-import { RICH_TEXT_FORMATTER, RichTextFormatter } from './rich-text-formatter';
+import { RICH_TEXT_FORMATTER, RichTextFormatter } from '@lucca-front/ng/forms/rich-text-input';
 import {
 	$convertFromMarkdownString,
 	$convertToMarkdownString,
