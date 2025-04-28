@@ -1,6 +1,8 @@
 import { dirname, join } from 'path';
 import { fileURLToPath, URL } from 'url';
 
+console.log(fileURLToPath(new URL('../', import.meta.url)));
+
 export default {
 	framework: {
 		name: getAbsolutePath('@storybook/angular'),
@@ -29,7 +31,7 @@ export default {
 						test: /\.(js|ts)$/,
 						loader: '@jsdevtools/coverage-istanbul-loader',
 						enforce: 'post',
-						include: join(process.cwd()),
+						include: fileURLToPath(new URL('../', import.meta.url)),
 						exclude: [/\.(e2e|spec)\.ts$/, /node_modules/, /(ngfactory|ngstyle)\.js/, /polyfills.ts/],
 					},
 				],
