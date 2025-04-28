@@ -3,6 +3,7 @@
 .cdk-drag-placeholder {
 	box-shadow: form.fakeBorderOverlay(var(--palettes-neutral-200));
 	background-color: var(--palettes-neutral-100);
+
 	* {
 		opacity: 0;
 	}
@@ -23,20 +24,24 @@
 
 .dragDrop-item {
 	cursor: grab;
+
 	&:not(.cdk-drag-placeholder) {
 		&:first-of-type {
 			border-start-start-radius: var(--commons-borderRadius-M);
 			border-start-end-radius: var(--commons-borderRadius-M);
 		}
+
 		&:last-of-type {
 			border-end-start-radius: var(--commons-borderRadius-M);
 			border-end-end-radius: var(--commons-borderRadius-M);
 		}
 	}
+
 	&:active {
 		cursor: grabbing;
 	}
 }
+
 .dragDrop-item-content {
 	padding: var(--pr-t-spacings-100);
 }
@@ -54,6 +59,7 @@
 	.dragDrop-item {
 		cursor: grabbing;
 	}
+
 	.cdk-drag:not(.cdk-drag-placeholder) {
 		transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 	}

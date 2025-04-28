@@ -1,6 +1,6 @@
-import { booleanAttribute, Component, computed, inject, input, LOCALE_ID, signal } from '@angular/core';
+import { booleanAttribute, Component, computed, effect, inject, input, LOCALE_ID, signal } from '@angular/core';
 import { getIntl } from '@lucca-front/ng/core';
-import { addMonths, addYears } from 'date-fns';
+import { addMonths, addYears, isAfter, isBefore, isSameMonth, startOfDay, startOfMonth } from 'date-fns';
 import { CalendarMode } from './calendar2/calendar-mode';
 import { CellStatus } from './calendar2/cell-status';
 import { DateRange, DateRangeInput } from './calendar2/date-range';
@@ -26,7 +26,7 @@ export abstract class AbstractDateComponent {
 	intl = getIntl(LU_DATE2_TRANSLATIONS);
 
 	onTouched?: () => void;
-	disabled = false;
+	disabled = signal<boolean>(false);
 
 	format = input<DateFormat>(DATE_FORMAT.DATE);
 	protected inDateISOFormat = computed(() => this.format() === DATE_FORMAT.DATE_ISO);
@@ -34,7 +34,7 @@ export abstract class AbstractDateComponent {
 	ranges = input([], { transform: (v: readonly DateRange[] | readonly DateRangeInput[]) => v.map(transformDateRangeInputToDateRange) });
 	hideToday = input<boolean, boolean>(false, { transform: booleanAttribute });
 	hasTodayButton = input<boolean, boolean>(false, { transform: booleanAttribute });
-	clearable = input<boolean, boolean>(false, { transform: booleanAttribute });
+	clearable = input<boolean, boolean>(null, { transform: booleanAttribute });
 
 	mode = input<CalendarMode>('day');
 	hideWeekend = input<boolean, boolean>(false, { transform: booleanAttribute });
@@ -45,6 +45,9 @@ export abstract class AbstractDateComponent {
 		transform: transformDateInputToDate,
 	});
 	max = input(null, {
+		transform: transformDateInputToDate,
+	});
+	focusedDate = input(null, {
 		transform: transformDateInputToDate,
 	});
 
@@ -58,6 +61,15 @@ export abstract class AbstractDateComponent {
 
 	protected tabbableDate = signal<Date | null>(null);
 
+	protected constructor() {
+		effect(() => {
+			const focusedDate = this.focusedDate();
+			if (focusedDate) {
+				this.currentDate.set(startOfDay(focusedDate));
+			}
+		});
+	}
+
 	isInMinMax(date: Date, mode: CalendarMode): boolean {
 		let result = true;
 		if (this.min()) {
@@ -66,7 +78,7 @@ export abstract class AbstractDateComponent {
 					result = result && this.min().getTime() <= date.getTime();
 					break;
 				case 'month':
-					result = result && this.min().getMonth() <= date.getMonth();
+					result = (result && isBefore(startOfMonth(this.min()), startOfMonth(date))) || isSameMonth(this.min(), date);
 					break;
 				case 'year':
 					result = result && this.min().getFullYear() <= date.getFullYear();
@@ -79,7 +91,7 @@ export abstract class AbstractDateComponent {
 					result = result && this.max().getTime() >= date.getTime();
 					break;
 				case 'month':
-					result = result && this.max().getMonth() >= date.getMonth();
+					result = (result && isAfter(startOfMonth(this.max()), startOfMonth(date))) || isSameMonth(this.max(), date);
 					break;
 				case 'year':
 					result = result && this.max().getFullYear() >= date.getFullYear();
@@ -106,7 +118,7 @@ export abstract class AbstractDateComponent {
 	}
 
 	setDisabledState?(isDisabled: boolean): void {
-		this.disabled = isDisabled;
+		this.disabled.set(isDisabled);
 	}
 
 	move(direction: 1 | -1, mode: CalendarMode): void {

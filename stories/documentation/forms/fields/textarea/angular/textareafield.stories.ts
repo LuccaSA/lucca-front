@@ -91,5 +91,6 @@ export const Basic: StoryObj<TextareaInputComponent & { disabled: boolean; requi
 		autoResizeScrollIntoView: false,
 		rows: 3,
 		value: '',
+		disableSpeelcheck: false,
 	},
 };

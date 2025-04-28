@@ -9,7 +9,7 @@ export default {
 
 function getTemplate(args: HorizontalNavigationContainerStory): string {
 	return `
-	<nav class="horizontalNavigation">
+	<div class="horizontalNavigation">
 		<div class="horizontalNavigation-containerOptional">
 			<ul class="horizontalNavigation-list">
 				<li class="horizontalNavigation-list-item">
@@ -29,7 +29,7 @@ function getTemplate(args: HorizontalNavigationContainerStory): string {
 				</li>
 			</ul>
 		</div>
-	</nav>
+	</div>
 	`;
 }
 

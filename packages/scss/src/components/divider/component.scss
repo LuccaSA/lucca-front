@@ -4,11 +4,13 @@
 @mixin component($atRoot: namespace.$defaultAtRoot) {
 	border: 0;
 	display: block;
-	margin-block: var(--components-divider-margin);
+	margin-block: var(--components-divider-marginBlock);
+	margin-inline: var(--components-divider-marginInline);
 	align-self: var(--components-divider-alignSelf);
 
 	&:where(:empty) {
-		margin-inline: 0;
+		--components-divider-marginInline: 0;
+
 		block-size: auto;
 
 		&:not(.mod-vertical) {
@@ -36,6 +38,8 @@
 
 		.lucca-icon {
 			color: var(--palettes-neutral-600);
+			position: relative;
+			inset-block-end: var(--components-divider-iconBottom);
 		}
 
 		&:not(.mod-vertical) {
@@ -44,11 +48,6 @@
 				border-block-start: var(--commons-divider-border);
 				min-inline-size: var(--components-divider-minSize);
 			}
-		}
-
-		.lucca-icon {
-			position: relative;
-			inset-block-end: var(--components-divider-iconBottom);
 		}
 	}
 

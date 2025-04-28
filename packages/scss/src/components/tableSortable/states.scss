@@ -21,7 +21,7 @@
 
 		&:focus-visible {
 			&::after {
-				@include a11y.focusVisible();
+				@include a11y.focusVisible;
 			}
 		}
 	}
@@ -50,7 +50,7 @@
 
 		&:focus-visible {
 			&::before {
-				@include a11y.focusVisible();
+				@include a11y.focusVisible;
 			}
 		}
 	}

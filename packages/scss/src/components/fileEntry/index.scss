@@ -1,0 +1,34 @@
+@use 'exports' as *;
+
+.fileEntry {
+	@include vars;
+	@include component;
+
+	&.mod-S {
+		@include S;
+	}
+
+	&.mod-media {
+		@include media;
+
+		&.mod-S {
+			@include mediaS;
+		}
+	}
+
+	&.is-error {
+		@include error;
+
+		&.mod-S {
+			@include errorS;
+		}
+	}
+
+	&.is-loading {
+		@include loading;
+
+		&.mod-S {
+			@include loadingS;
+		}
+	}
+}

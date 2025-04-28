@@ -59,7 +59,16 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 
 	@Input({ transform: booleanAttribute })
 	@HostBinding('class.is-clearable')
-	clearable = false;
+	set clearable(value: boolean) {
+		this.#inputClearable.set(value);
+	}
+	get clearable(): boolean {
+		return this.#clearable();
+	}
+	#clearable = computed(() => this.#inputClearable() ?? this.#defaultFilterPillClearable() ?? this.#defaultClearable);
+	#defaultFilterPillClearable = signal<boolean | null>(null);
+	#inputClearable = signal<boolean | null>(null);
+	#defaultClearable = false;
 
 	get searchable(): boolean {
 		return this.clueChange.observed;
@@ -125,6 +134,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	@Input() optionKey: (option: TOption) => unknown = (option) => option;
 
 	noClueIcon = input(false, { transform: booleanAttribute });
+	inputTabindex = input<number>(0);
 
 	@HostBinding('class.mod-noClueIcon')
 	protected get isNoClueIconClass(): boolean {
@@ -146,6 +156,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 
 	public valueSignal = signal<TValue>(null);
 	isFilterPillEmpty = computed(() => this.valueSignal() === null);
+	isFilterPillClearable = computed(() => this.#clearable());
 
 	public get value(): TValue {
 		return this._value;
@@ -354,7 +365,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 		this.panelRef.closed.subscribe(() => this.closePanel());
 	}
 
-	protected focusInput(): void {
+	focusInput(): void {
 		if (this.inputElementRef) {
 			this.inputElementRef.nativeElement.focus();
 		}
@@ -418,6 +429,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 
 	enableFilterPillMode() {
 		this.filterPillMode = true;
+		this.#defaultFilterPillClearable.set(true);
 		this._panelRef.closed.subscribe(this.afterCloseFn);
 		this.bindInputToPanelRefEvents();
 	}

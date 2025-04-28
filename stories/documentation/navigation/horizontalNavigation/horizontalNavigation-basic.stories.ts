@@ -46,7 +46,7 @@ function getTemplate(args: HorizontalNavigationBasicStory): string {
 	const vertical = args.vertical ? `mod-vertical` : '';
 	if (args.disabled)
 		return `
-	<nav class="horizontalNavigation ${s} ${noBorder} ${header} ${vertical}">
+	<div class="horizontalNavigation ${s} ${noBorder} ${header} ${vertical}">
 		<ul class="horizontalNavigation-list">
 			<li class="horizontalNavigation-list-item">
 				<a href="#" class="horizontalNavigation-list-item-action" aria-current="page">
@@ -64,11 +64,11 @@ function getTemplate(args: HorizontalNavigationBasicStory): string {
 				</a>
 			</li>
 		</ul>
-	</nav>
+	</div>
 	`;
 	else
 		return `
-	<nav class="horizontalNavigation ${s} ${noBorder} ${header} ${vertical}">
+	<div class="horizontalNavigation ${s} ${noBorder} ${header} ${vertical}">
 		<ul class="horizontalNavigation-list">
 			<li class="horizontalNavigation-list-item">
 				<a href="#" class="horizontalNavigation-list-item-action" aria-current="page">
@@ -86,7 +86,7 @@ function getTemplate(args: HorizontalNavigationBasicStory): string {
 				</a>
 			</li>
 		</ul>
-	</nav>
+	</div>
 	`;
 }
 

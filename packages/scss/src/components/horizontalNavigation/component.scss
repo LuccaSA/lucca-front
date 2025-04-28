@@ -3,7 +3,6 @@
 @use '@lucca-front/scss/src/commons/utils/namespace';
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
-	position: relative;
 	column-gap: var(--pr-t-spacings-400);
 	align-items: center;
 	display: flex;
@@ -77,7 +76,7 @@
 			z-index: 1;
 			scroll-margin-inline: var(--pr-t-spacings-200);
 
-			&:before {
+			&::before {
 				content: '';
 				position: absolute;
 				inset-block: calc(var(--components-horizontalNavigation-listItemActionPaddingBlock) - var(--pr-t-spacings-25));
@@ -136,7 +135,6 @@
 		.menu-link-placeholder {
 			&::after {
 				content: attr(data-content-after);
-
 				display: block;
 				block-size: 0;
 				overflow: hidden;

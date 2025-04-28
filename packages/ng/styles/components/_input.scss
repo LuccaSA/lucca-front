@@ -29,6 +29,15 @@
 			@include field.fieldFramedError('textfield');
 		}
 	}
+
+	.checkbox,
+	.radio {
+		&.is-error,
+		&.is-invalid,
+		&.ng-invalid.ng-touched {
+			@include field.fieldFramedError('radiosfield');
+		}
+	}
 }
 
 .radiosfield,
@@ -41,17 +50,6 @@
 			&.is-error {
 				@include field.fieldFramedError('radiosfield');
 			}
-		}
-	}
-}
-
-.form.mod-framed {
-	.checkbox,
-	.radio {
-		&.is-error,
-		&.is-invalid,
-		&.ng-invalid.ng-touched {
-			@include field.fieldFramedError('radiosfield');
 		}
 	}
 }

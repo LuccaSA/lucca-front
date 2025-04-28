@@ -95,7 +95,12 @@
 @forward 'filterBar';
 @forward 'dropdown';
 @forward 'textFlow';
+@forward 'richText';
+@forward 'readMore';
 @forward 'highlightData';
+@forward 'fileUpload';
+@forward 'fileEntry';
+@forward 'fileToolbar';
 
 // Deprecated CSS components
 // @forward 'tableFixedDeprecated'; // 33 Ko

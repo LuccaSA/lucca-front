@@ -25,17 +25,6 @@
 			}
 		}
 
-		.radioButtons-item-input {
-			@include a11y.mask;
-
-			&:checked,
-			&:focus {
-				~ .radioButtons-item-label {
-					z-index: 2;
-				}
-			}
-		}
-
 		.radioButtons-item-label {
 			display: flex;
 			align-items: center;
@@ -55,6 +44,15 @@
 		}
 
 		.radioButtons-item-input {
+			@include a11y.mask;
+
+			&:checked,
+			&:focus {
+				~ .radioButtons-item-label {
+					z-index: 2;
+				}
+			}
+
 			&:not(:disabled, .is-disabled) {
 				~ .radioButtons-item-label {
 					&:hover {

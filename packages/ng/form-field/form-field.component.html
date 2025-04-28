@@ -5,13 +5,7 @@
 		><!--
 	--><sup class="formLabel-required" aria-hidden="true" *ngIf="isInputRequired()">*</sup>
 		@if (tooltip()) {
-		<lu-icon
-			class="formLabel-info"
-			icon="signHelp"
-			[alt]="'?'"
-			[luTooltip]="tooltip()"
-			[color]="invalidStatus() ? 'error' : 'inherit'"
-		></lu-icon>
+		<lu-icon class="formLabel-info" icon="signHelp" [alt]="'?'" [luTooltip]="tooltip()" [color]="invalidStatus() ? 'error' : 'inherit'" />
 		}
 	</legend>
 	<ng-container *ngTemplateOutlet="projectionTpl"></ng-container>
@@ -37,13 +31,7 @@
 	><!--
 	--><sup class="formLabel-required" aria-hidden="true" *ngIf="isInputRequired()">*</sup>
 	@if (tooltip()) {
-	<lu-icon
-		class="formLabel-info"
-		icon="signHelp"
-		[alt]="'?'"
-		[luTooltip]="tooltip()"
-		[color]="invalidStatus() ? 'error' : 'inherit'"
-	></lu-icon>
+	<lu-icon class="formLabel-info" icon="signHelp" [alt]="'?'" [luTooltip]="tooltip()" [color]="invalidStatus() ? 'error' : 'inherit'" />
 	} @if (counter() > 0) {
 	<span class="formLabel-counter" [class.u-textError]="contentLength > counter()" id="{{id()}}-counter" aria-live="polite">
 		<span aria-hidden="true">{{ contentLength }}/{{ counter() }}</span>

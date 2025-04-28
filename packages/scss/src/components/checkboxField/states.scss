@@ -31,13 +31,6 @@
 	}
 }
 
-@mixin checkedHover {
-	~ .checkboxField-icon {
-		background-color: var(--palettes-product-600);
-		border-color: var(--palettes-product-600);
-	}
-}
-
 @mixin checkedActive {
 	~ .checkboxField-icon {
 		background-color: var(--palettes-product-800);
@@ -49,7 +42,7 @@
 	~ .checkboxField-icon {
 		background-color: var(--commons-disabled-background);
 		border-color: var(--commons-disabled-background);
-		color: var(--palettes-neutral-500); // disabled token candidate
+		color: var(--palettes-neutral-600); // disabled token candidate
 	}
 }
 
@@ -84,7 +77,7 @@
 @mixin focusVisible {
 	~ .checkboxField-icon {
 		&::after {
-			@include a11y.focusVisible();
+			@include a11y.focusVisible;
 		}
 	}
 }

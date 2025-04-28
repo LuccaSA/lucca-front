@@ -16,6 +16,7 @@
 	--pr-t-spacings-auto: auto;
 
 	@include core.cssvars('pr-t-color-input', config.$colorInput);
+	--pr-t-radius-input: var(--commons-borderRadius-M);
 
 	// VARIABLES
 
@@ -46,8 +47,16 @@
 	--commons-border-100: var(--palettes-neutral-100);
 	--commons-border-200: var(--palettes-neutral-200);
 
+	@if (config.$fontFamily) {
+		--commons-font-family: '#{config.$fontFamily}', Tahoma, sans-serif;
+	}
+
 	@if (config.$fontFamilyCursive) {
 		--commons-font-family-cursive: '#{config.$fontFamilyCursive}', cursive;
+	}
+
+	@if (config.$fontFamilyBrand) {
+		--commons-font-family-brand: '#{config.$fontFamilyBrand}', sans-serif;
 	}
 
 	// Deprecated
