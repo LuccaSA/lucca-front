@@ -1,0 +1,57 @@
+
+@use '@lucca-front/scss/src/commons/utils/namespace';
+@use '@lucca-front/scss/src/commons/utils/a11y';
+
+@mixin component($atRoot: namespace.$defaultAtRoot) {
+	min-block-size: var(--components-bodyLayout-minBlockSize);
+	overflow: auto;
+	display: grid;
+	padding: 0;
+	grid-template: var(--components-bodyLayout-gridTemplate);
+
+	@at-root ($atRoot) {
+		.bodyLayout {
+			display: contents;
+		}
+
+		.bodyLayout-start {
+			grid-area: start;
+		}
+
+		.bodyLayout-end {
+			grid-area: end;
+		}
+
+		.bodyLayout-start,
+		.bodyLayout-end,
+		.bodyLayout-navSide {
+			&:empty {
+				display: none;
+			}
+		}
+
+		.bodyLayout-banner {
+			grid-area: banner;
+			position: relative;
+			position: sticky;
+			inset-block-start: var(--components-bodyLayout-startBlockSize);
+			z-index: 1;
+			block-size: var(--components-bodyLayout-bannerBlockSize);
+		}
+
+		.bodyLayout-navSide {
+			overflow-y: auto;
+			overflow-x: hidden;
+			grid-area: navSide;
+			position: sticky;
+			inset-block: var(--components-bodyLayout-navSideInsetBlock);
+			block-size: var(--components-bodyLayout-navSideBlockSize);
+			// z-index: 1;
+		}
+
+		.bodyLayout-main {
+			grid-area: main;
+			// position: relative;
+		}
+	}
+}

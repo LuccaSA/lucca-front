@@ -1,0 +1,32 @@
+
+
+@use 'exports' as *;
+//@use '@lucca-front/scss/src/commons/utils/media';
+
+.mainLayout {
+	@include vars;
+	@include component;
+
+	&.mod-headerSticky {
+		@include headerSticky;
+	}
+
+	&.mod-footerSticky {
+		@include footerSticky;
+	}
+
+	&.mod-cols {
+		@include cols;
+	}
+}
+
+
+// .bodyLayout.mod-mobileNavSideBottom {
+// 	.mainLayout-footer {
+// 		bottom: calc(var(--components-bodyLayout-endBlockSize) + var(--components-bodyLayout-navSideBlockSize));
+
+// 		@include media.min('S') {
+// 			bottom: 0;
+// 		}
+// 	}
+// }

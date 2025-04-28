@@ -1,0 +1,14 @@
+@mixin headerSticky {
+	--components-mainLayout-headerPosition: sticky;
+}
+
+@mixin footerSticky {
+	--components-mainLayout-footerPosition: sticky;
+}
+
+@mixin cols {
+	--components-mainLayoutGridTemplate: "header content" 1fr
+																			 "footer footer"  auto
+																			/ auto   1fr;
+}
+

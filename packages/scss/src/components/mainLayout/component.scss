@@ -1,0 +1,33 @@
+
+@use '@lucca-front/scss/src/commons/utils/namespace';
+
+@mixin component($atRoot: namespace.$defaultAtRoot) {
+	display: grid;
+	align-self: stretch;
+	grid-template: var(--components-mainLayoutGridTemplate);
+
+	@at-root ($atRoot) {
+		.mainLayout-header {
+			grid-area: header;
+			inset-block-start: var(--components-mainLayout-headerInsetBlockStart);
+			position: var(--components-mainLayout-headerPosition);
+		}
+
+		.mainLayout-content {
+			grid-area: content;
+		}
+
+		.mainLayout-header,
+		.mainLayout-footer {
+			&:empty {
+				display: none;
+			}
+		}
+
+		.mainLayout-footer {
+			grid-area: footer;
+			position: var(--components-mainLayout-footerPosition);
+			inset-block-end: var(--components-mainLayout-footerInsetBlockEnd);
+		}
+	}
+}

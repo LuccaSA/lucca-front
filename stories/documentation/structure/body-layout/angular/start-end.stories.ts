@@ -1,33 +1,30 @@
-import { PageLayoutComponent } from '@lucca-front/ng/page-layout';
+import { BodyLayoutComponent } from '@lucca-front/ng/body-layout';
 import { Meta, moduleMetadata } from '@storybook/angular';
 import { cleanupTemplate } from 'stories/helpers/stories';
 
-interface PageLayoutAngularStartEndStory {
+interface BodyLayoutAngularStartEndStory {
 	content: string;
 }
 
 export default {
-	title: 'Documentation/Structure/Page Layout/Angular/StartEnd',
+	title: 'Documentation/Structure/Body Layout/Angular/StartEnd',
 	argTypes: {},
 	decorators: [
 		moduleMetadata({
-			imports: [PageLayoutComponent],
+			imports: [BodyLayoutComponent],
 		}),
 	],
-	render: (args: PageLayoutAngularStartEndStory) => {
+	render: (args: BodyLayoutAngularStartEndStory) => {
 		return {
-			styles: [
-				`.story .pageLayout { block-size: 20rem } :host ::ng-deep .pageLayout-banner { background-color: var(--palettes-neutral-0) } :host ::ng-deep .pageLayout-navSide { background-color: var(--palettes-navigation-800); color: var(--palettes-neutral-0) }`,
-			],
-			template: cleanupTemplate(`<div class="story">
-	<lu-page-layout>
-		<ng-container pageLayoutStart>start</ng-container>
-		<ng-container pageLayoutBanner>banner</ng-container>
-		<ng-container pageLayoutNavSide>navSide</ng-container>
-		<ng-container pageLayoutContent>content</ng-container>
-		<ng-container pageLayoutEnd>end</ng-container>
-	</lu-page-layout>
-</div>`),
+			styles: [`.bodyLayout { --components-bodyLayout-startBlockSize: 1.5rem !important; --components-bodyLayout-endBlockSize: 1.5rem !important }`],
+			template: cleanupTemplate(`<lu-body-layout>
+	<ng-container bodyLayoutStart>start</ng-container>
+	<ng-container bodyLayoutBanner>banner</ng-container>
+	<ng-container bodyLayoutNavSide>navSide</ng-container>
+	<ng-container bodyLayoutMain>main</ng-container>
+	<ng-container bodyLayoutEnd>end</ng-container>
+</lu-body-layout>
+`),
 		};
 	},
 } as Meta;
