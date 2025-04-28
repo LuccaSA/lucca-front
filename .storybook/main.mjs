@@ -1,8 +1,6 @@
 import { dirname, join } from 'path';
 import { fileURLToPath, URL } from 'url';
 
-console.log(fileURLToPath(new URL('../', import.meta.url)));
-
 export default {
 	framework: {
 		name: getAbsolutePath('@storybook/angular'),
