@@ -16,15 +16,21 @@
 			overflow: auto;
 		}
 
-		.mainLayout-header,
-		.mainLayout-footer {
-			&:empty {
-				display: none;
-			}
+		.mainLayout-aside {
+			grid-area: aside;
+			overflow: auto;
 		}
 
 		.mainLayout-footer {
 			grid-area: footer;
+		}
+
+		.mainLayout-header,
+		.mainLayout-footer,
+		.mainLayout-aside {
+			&:empty {
+				display: none;
+			}
 		}
 	}
 }

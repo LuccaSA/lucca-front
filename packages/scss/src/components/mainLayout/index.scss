@@ -4,7 +4,7 @@
 	@include vars;
 	@include component;
 
-	&.mod-cols {
-		@include cols;
+	&.mod-withAside {
+		@include aside;
 	}
 }
