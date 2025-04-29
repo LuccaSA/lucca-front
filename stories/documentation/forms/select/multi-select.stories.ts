@@ -55,6 +55,9 @@ const generateStory = getStoryGenerator<LuMultiSelectInputStoryComponent>({
 });
 
 async function checkValues(input: HTMLElement, values: string[]) {
+	if (values.length === 0) {
+		await expect(input.parentElement.getElementsByTagName('lu-numeric-badge').length).toBe(0);
+	}
 	// If it's a counter displayer
 	if (input.parentElement.getElementsByTagName('lu-numeric-badge').length > 0) {
 		const counter = input.parentElement.getElementsByTagName('lu-numeric-badge')[0];
@@ -141,9 +144,10 @@ const basePlay = async ({ canvasElement, step }) => {
 		await userEvent.click(options[1]);
 		await userEvent.click(options[2]);
 		await userEvent.click(options[3]);
+		const allOptions = await panel.findAllByRole('option');
 		await userEvent.keyboard('{Escape}');
-		const firstOption = await panel.findAllByRole('option').then((opt) => opt[0]);
-		if (firstOption.id.includes('select-all')) {
+		if (allOptions.some((opt) => opt.id.includes('select-all'))) {
+			console.log('WE ARE WITH SELECT ALL');
 			const valuesWithSelectAll = options.map((opt) => opt.textContent);
 			valuesWithSelectAll.splice(1, 3);
 			await checkValues(input, valuesWithSelectAll);

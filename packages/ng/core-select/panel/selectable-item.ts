@@ -1,5 +1,6 @@
 import { Highlightable } from '@angular/cdk/a11y';
 import { computed, Directive, ElementRef, inject, input, model, output, signal } from '@angular/core';
+import { CoreSelectPanelInstance, SELECT_PANEL_INSTANCE } from './panel.instance';
 
 @Directive({
 	standalone: true,
@@ -15,6 +16,8 @@ import { computed, Directive, ElementRef, inject, input, model, output, signal }
 export class CoreSelectPanelElement<T> implements Highlightable {
 	readonly elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
 
+	readonly #panelRef = inject<CoreSelectPanelInstance<T>>(SELECT_PANEL_INSTANCE);
+
 	id = signal<string>('');
 
 	elementId = input<string>('');
@@ -28,6 +31,10 @@ export class CoreSelectPanelElement<T> implements Highlightable {
 	isHighlighted = signal(false);
 
 	selected = output<void>();
+
+	constructor() {
+		this.#panelRef.options.set([...this.#panelRef.options(), this]);
+	}
 
 	setActiveStyles(): void {
 		this.isHighlighted.set(true);

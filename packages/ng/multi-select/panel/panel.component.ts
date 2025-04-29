@@ -1,6 +1,6 @@
 import { A11yModule } from '@angular/cdk/a11y';
 import { AsyncPipe, NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
-import { AfterViewInit, ChangeDetectionStrategy, Component, inject, TrackByFunction, viewChildren } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, computed, forwardRef, inject, signal, TrackByFunction, viewChildren } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { getIntl, PortalDirective } from '@lucca-front/ng/core';
 import { CoreSelectKeyManager, LuOptionGroup, SELECT_ID, ɵCoreSelectPanelElement, ɵgetGroupTemplateLocation, ɵLuOptionComponent, ɵLuOptionGroupPipe } from '@lucca-front/ng/core-select';
@@ -12,6 +12,7 @@ import { LU_MULTI_SELECT_TRANSLATIONS } from '../select.translate';
 import { LuOptionsGroupContextPipe } from './option-group-context.pipe';
 import { LuIsOptionSelectedPipe } from './option-selected.pipe';
 import { IconComponent } from '@lucca-front/ng/icon';
+import { CoreSelectPanelInstance, SELECT_PANEL_INSTANCE } from '../../core-select/panel/panel.instance';
 
 @Component({
 	selector: 'lu-select-panel',
@@ -34,9 +35,15 @@ import { IconComponent } from '@lucca-front/ng/icon';
 		ɵCoreSelectPanelElement,
 		IconComponent,
 	],
-	providers: [CoreSelectKeyManager],
+	providers: [
+		CoreSelectKeyManager,
+		{
+			provide: SELECT_PANEL_INSTANCE,
+			useExisting: forwardRef(() => LuMultiSelectPanelComponent),
+		},
+	],
 })
-export class LuMultiSelectPanelComponent<T> implements AfterViewInit {
+export class LuMultiSelectPanelComponent<T> implements AfterViewInit, CoreSelectPanelInstance {
 	protected selectInput = inject<LuMultiSelectInputComponent<T>>(MULTI_SELECT_INPUT);
 	panelRef = inject<LuMultiSelectPanelRef<T>>(LuMultiSelectPanelRef);
 	selectId = inject(SELECT_ID);
@@ -55,7 +62,8 @@ export class LuMultiSelectPanelComponent<T> implements AfterViewInit {
 	selectedOptions: T[] = this.selectInput.value || [];
 	optionTpl = this.selectInput.optionTpl;
 
-	options = viewChildren<ɵCoreSelectPanelElement<T>>(ɵCoreSelectPanelElement);
+	options = signal<ɵCoreSelectPanelElement<T>[]>([]);
+
 	keyManager = inject<CoreSelectKeyManager<T>>(CoreSelectKeyManager);
 
 	public clueChange$ = this.selectInput.clue$;

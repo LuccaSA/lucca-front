@@ -1,4 +1,4 @@
-import { Component, computed, effect, ElementRef, inject, signal } from '@angular/core';
+import { Component, computed, effect, ElementRef, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { getIntl } from '@lucca-front/ng/core';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
@@ -12,9 +12,10 @@ import { outputToObservable, takeUntilDestroyed } from '@angular/core/rxjs-inter
 	selector: 'lu-multi-select-all-header',
 	standalone: true,
 	imports: [FormsModule, CheckboxInputComponent, FormFieldComponent],
+	hostDirectives: [ɵCoreSelectPanelElement],
 	styleUrls: ['./multi-select-all-header.component.scss'],
 	template: `
-		<div class="multiSelectAllDisplayer" [class.highlighted]="highlighted()">
+		<div class="multiSelectAllDisplayer">
 			<lu-form-field [label]="intl.selectAll">
 				<lu-checkbox-input
 					class="multiSelectAllDisplayer-checkbox"
@@ -34,8 +35,6 @@ export class LuMultiSelectAllHeaderComponent {
 	readonly isSelected = computed(() => this.selectAllContext.mode() === 'all' || this.mixed());
 	readonly #selectableItem = inject(ɵCoreSelectPanelElement);
 	readonly #elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
-
-	highlighted = signal(false);
 
 	constructor() {
 		this.#selectableItem.id.set(`multi-select-select-all`);

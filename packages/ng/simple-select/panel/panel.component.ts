@@ -1,6 +1,6 @@
 import { A11yModule } from '@angular/cdk/a11y';
 import { AsyncPipe, NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
-import { AfterViewInit, ChangeDetectionStrategy, Component, computed, inject, TrackByFunction, viewChildren } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, computed, forwardRef, inject, signal, TrackByFunction } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { getIntl, PortalDirective } from '@lucca-front/ng/core';
 import {
@@ -19,6 +19,7 @@ import { SIMPLE_SELECT_INPUT } from '../select.model';
 import { LU_SIMPLE_SELECT_TRANSLATIONS } from '../select.translate';
 import { LuIsOptionSelectedPipe } from './option-selected.pipe';
 import { IconComponent } from '@lucca-front/ng/icon';
+import { CoreSelectPanelInstance, SELECT_PANEL_INSTANCE } from '../../core-select/panel/panel.instance';
 
 @Component({
 	selector: 'lu-select-panel',
@@ -27,9 +28,15 @@ import { IconComponent } from '@lucca-front/ng/icon';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	standalone: true,
 	imports: [A11yModule, AsyncPipe, FormsModule, NgIf, NgFor, NgTemplateOutlet, ɵLuOptionGroupPipe, ɵLuOptionComponent, LuIsOptionSelectedPipe, PortalDirective, ɵCoreSelectPanelElement, IconComponent],
-	providers: [CoreSelectKeyManager],
+	providers: [
+		CoreSelectKeyManager,
+		{
+			provide: SELECT_PANEL_INSTANCE,
+			useExisting: forwardRef(() => LuSelectPanelComponent),
+		},
+	],
 })
-export class LuSelectPanelComponent<T> implements AfterViewInit {
+export class LuSelectPanelComponent<T> implements AfterViewInit, CoreSelectPanelInstance<T> {
 	public selectInput = inject<LuSimpleSelectInputComponent<T>>(SIMPLE_SELECT_INPUT);
 	public panelRef = inject<LuSelectPanelRef<T, T>>(LuSelectPanelRef);
 	public selectId = inject(SELECT_ID);
@@ -48,7 +55,7 @@ export class LuSelectPanelComponent<T> implements AfterViewInit {
 	initialValue: T | undefined = this.selectInput.value;
 	optionTpl = this.selectInput.optionTpl;
 
-	options = viewChildren<ɵCoreSelectPanelElement<T>>(ɵCoreSelectPanelElement);
+	options = signal<ɵCoreSelectPanelElement<T>[]>([]);
 
 	public keyManager = inject<CoreSelectKeyManager<T>>(CoreSelectKeyManager);
 

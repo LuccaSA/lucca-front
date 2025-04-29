@@ -4,7 +4,6 @@ import { getIntl } from '@lucca-front/ng/core';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { CheckboxInputComponent } from '@lucca-front/ng/forms';
 import { LU_CORE_SELECT_USER_TRANSLATIONS } from './user.translate';
-import { ɵCoreSelectPanelElement } from '../panel';
 import { outputToObservable, takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { CoreSelectPanelElement } from '../panel/selectable-item';
 
@@ -18,9 +17,10 @@ export const FORMER_EMPLOYEES_CONTEXT = new InjectionToken<FormerEmployeesContex
 	selector: 'lu-core-select-former-employees',
 	styleUrl: './former-employees.component.scss',
 	standalone: true,
-	imports: [FormsModule, CheckboxInputComponent, FormFieldComponent, CoreSelectPanelElement],
+	imports: [FormsModule, CheckboxInputComponent, FormFieldComponent],
+	hostDirectives: [CoreSelectPanelElement],
 	template: `
-		<div class="formerEmployeeDisplayer" luCoreSelectPanelElement elementId="select-former-employees">
+		<div class="formerEmployeeDisplayer">
 			<lu-form-field [label]="intl.includeFormerEmployees">
 				<lu-checkbox-input class="formerEmployeeDisplayer-checkbox" [(ngModel)]="context.includeFormerEmployees" [ngModelOptions]="{ standalone: true }" />
 			</lu-form-field>
@@ -30,9 +30,10 @@ export const FORMER_EMPLOYEES_CONTEXT = new InjectionToken<FormerEmployeesContex
 export class LuCoreSelectFormerEmployeesComponent {
 	readonly intl = getIntl(LU_CORE_SELECT_USER_TRANSLATIONS);
 	readonly context = inject(FORMER_EMPLOYEES_CONTEXT);
-	readonly #selectableItem = inject(ɵCoreSelectPanelElement);
+	readonly #selectableItem = inject(CoreSelectPanelElement);
 
 	constructor() {
+		this.#selectableItem.id.set('select-former-employees');
 		outputToObservable(this.#selectableItem.selected)
 			.pipe(takeUntilDestroyed())
 			.subscribe(() => {
