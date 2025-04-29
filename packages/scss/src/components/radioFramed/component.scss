@@ -3,9 +3,9 @@
 @mixin component($atRoot: namespace.$defaultAtRoot) {
 	position: relative;
 	overflow: hidden;
-	border: solid 1px var(--components-inputCard-borderColor);
+	border: solid 1px var(--components-radioFramed-borderColor);
 	border-radius: var(--commons-borderRadius-L);
-	box-shadow: var(--components-inputCard-boxShadow);
+	box-shadow: var(--components-radioFramed-boxShadow);
 	background-color: var(--palettes-neutral-0);
 
 	& + & {
@@ -13,18 +13,18 @@
 	}
 
 	@at-root ($atRoot) {
-		.inputCard-header {
+		.radioFramed-header {
 			margin: 0 !important;
-			padding-inline: var(--components-inputCard-paddingInline);
-			padding-block: var(--components-inputCard-paddingBlock);
-			background-color: var(--components-inputCardHeader-backgroundColor);
+			padding-inline: var(--components-radioFramed-paddingInline);
+			padding-block: var(--components-radioFramed-paddingBlock);
+			background-color: var(--components-radioFramedHeader-backgroundColor);
 		}
 
-		.inputCard-content {
-			display: var(--components-inputCard-content-display);
-			padding-inline: var(--components-inputCard-paddingInline);
-			padding-block: var(--components-inputCard-paddingBlock);
-			padding-inline-start: var(--components-inputCardContent-paddingInlineStart);
+		.radioFramed-content {
+			display: var(--components-radioFramed-content-display);
+			padding-inline: var(--components-radioFramed-paddingInline);
+			padding-block: var(--components-radioFramed-paddingBlock);
+			padding-inline-start: var(--components-radioFramedContent-paddingInlineStart);
 			border-top: solid 1px var(--palettes-product-100);
 		}
 
@@ -33,14 +33,14 @@
 			outline: none;
 		}
 
-		.inputCard-header-input {
+		.radioFramed-header-input {
 			// TODO: Add `noOutline` to radioField component.
 			//@include radioField.noOutline;
 
 			outline: none !important;
 		}
 
-		.inputCard-header-label {
+		.radioFramed-header-label {
 			position: static !important;
 			font-weight: 600 !important;
 

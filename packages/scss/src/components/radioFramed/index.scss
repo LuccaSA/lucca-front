@@ -1,32 +1,32 @@
 @use 'exports' as *;
 @use '@lucca-front/scss/src/commons/utils/a11y';
 
-.inputCard {
+.radioFramed {
 	@include vars;
 	@include component;
 
-	&:has(.inputCard-header-input:checked) {
+	&:has(.radioFramed-header-input:checked) {
 		@include checked;
 	}
 
-	&:has(.inputCard-header-input:checked),
+	&:has(.radioFramed-header-input:checked),
 	&.is-open {
 		@include open;
 	}
 
-	&:not(:has(.inputCard-header-input:checked), .is-open) {
+	&:not(:has(.radioFramed-header-input:checked), .is-open) {
 		@include collapsed;
 	}
 
-	&:not(:has(.inputCard-header-input:disabled)):hover {
+	&:not(:has(.radioFramed-header-input:disabled)):hover {
 		@include hover;
 	}
 
-	&:has(.inputCard-header-input:focus-visible) {
+	&:has(.radioFramed-header-input:focus-visible) {
 		@include a11y.focusVisible;
 	}
 
-	&:has(.inputCard-header-input:disabled) {
+	&:has(.radioFramed-header-input:disabled) {
 		@include disabled;
 	}
 

@@ -1,0 +1,16 @@
+@mixin vars {
+	--components-radioFramed-content-display: block;
+	--components-radioFramed-borderColor: var(--palettes-neutral-300);
+	--components-radioFramed-boxShadow: none;
+	--components-radioFramed-paddingInline: var(--pr-t-spacings-200);
+	--components-radioFramed-paddingBlock: var(--pr-t-spacings-200);
+	--components-radioFramedHeader-backgroundColor: transparent;
+
+	// 1.25rem = radio field input size
+	// var(--pr-t-spacings-100) = radio field gap
+	--components-radioFramedContent-paddingInlineStart: calc(
+		var(--components-radioFramed-paddingInline)
+		+ 1.25rem
+		+ var(--pr-t-spacings-100)
+	);
+}

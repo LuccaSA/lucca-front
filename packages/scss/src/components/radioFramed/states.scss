@@ -1,0 +1,20 @@
+@mixin collapsed {
+	--components-radioFramed-content-display: none;
+}
+
+@mixin open {
+	--components-radioFramedHeader-backgroundColor: var(--palettes-product-50);
+}
+
+@mixin hover {
+	--components-radioFramed-boxShadow: var(--pr-t-elevation-shadow-raised);
+}
+
+@mixin disabled {
+	--components-radioFramedHeader-backgroundColor: var(--palettes-neutral-25);
+	--components-radioFramedHeader-borderColor: var(--palettes-neutral-50);
+}
+
+@mixin checked {
+	--components-radioFramed-borderColor: var(--palettes-product-300);
+}
