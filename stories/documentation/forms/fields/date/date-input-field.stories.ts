@@ -105,8 +105,27 @@ export default {
 			await expectNgModelDisplay(canvasElement, 'Invalid Date');
 			await expect(input).toHaveAttribute('aria-invalid', 'true');
 		});
+
+		await context.step('Select today after another date', async () => {
+			await userEvent.clear(input);
+			const yesterday = today.getDate() <= 1 ? 2 : today.getDate() - 1;
+			await pickDay(input, yesterday);
+			await expectNgModelDisplay(canvasElement, new Date(today.getFullYear(), today.getMonth(), yesterday).toString());
+
+			await pickDay(input, today.getDate());
+			await expectNgModelDisplay(canvasElement, new Date(today.getFullYear(), today.getMonth(), today.getDate()).toString());
+		});
 	},
 } as Meta;
+
+async function pickDay(input: HTMLElement, targetDay: number) {
+	await userEvent.click(input);
+	await waitForAngular();
+	const table = screen.getByRole('grid');
+	const calendarComponent = table.parentElement.parentElement;
+	const calendar = within(calendarComponent);
+	await userEvent.click(calendar.getByText(targetDay.toString()));
+}
 
 export const Basic: StoryObj<DateInputComponent & FormFieldComponent> = {
 	args: {

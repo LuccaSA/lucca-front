@@ -8,15 +8,15 @@ import { LuCoreSelectJobQualificationsDirective } from '@lucca-front/ng/core-sel
 import { LuCoreSelectUserOptionDirective, LuCoreSelectUsersDirective, provideCoreSelectCurrentUserId } from '@lucca-front/ng/core-select/user';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 import { LuUserDisplayPipe } from '@lucca-front/ng/user';
-import { Meta, applicationConfig, moduleMetadata } from '@storybook/angular';
+import { applicationConfig, Meta, moduleMetadata } from '@storybook/angular';
+import { expect, screen, userEvent, within } from '@storybook/test';
 import { HiddenArgType } from 'stories/helpers/common-arg-types';
 import { getStoryGenerator, useDocumentationStory } from 'stories/helpers/stories';
+import { waitForAngular } from '../../../helpers/test';
 import { LuCoreSelectLegumesDirective } from './custom-api-example.component';
 import { LuCoreSelectCustomEstablishmentsDirective } from './custom-establishment-example.component';
 import { LuCoreSelectCustomUsersDirective } from './custom-user-example.component';
-import { FilterLegumesPipe, ILegume, LuCoreSelectInputStoryComponent, SortLegumesPipe, allLegumes, colorNameByColor, coreSelectStory } from './select.utils';
-import { screen, userEvent, within, expect } from '@storybook/test';
-import { waitForAngular } from '../../../helpers/test';
+import { allLegumes, colorNameByColor, coreSelectStory, FilterLegumesPipe, ILegume, LuCoreSelectInputStoryComponent, SortLegumesPipe } from './select.utils';
 
 export type LuSimpleSelectInputStoryComponent = LuCoreSelectInputStoryComponent & {
 	selectedLegume: ILegume | null;
@@ -316,21 +316,20 @@ export const CustomApiV4 = generateStory({
 	description: `Pour récupérer automatiquement les options depuis une api V4 avec pagination et recherche, il suffit d'utiliser la directive \`apiV4\`.
 
 Plus d'informations sur les directives API personnalisée sur la [documentation dédiée](https://github.com/LuccaSA/lucca-front/blob/master/docs/core-select-api-directive.md).`,
-	template: `
-		<lu-simple-select
-			placeholder="Placeholder…"
-			luLegumes
-			#legumeRef="luLegumes"
-		>
-			<ng-container *luDisplayer="let legume; select: legumeRef.select">
-				<span [style.background-color]="legume.color" style="${inlineStyle(displayerStyle)}"></span>
-			</ng-container>
+	template: `<lu-simple-select
+	placeholder="Placeholder…"
+	luLegumes
+	#legumeRef="luLegumes"
+>
+	<ng-container *luDisplayer="let legume; select: legumeRef.select">
+		<span [style.background-color]="legume.color" style="${inlineStyle(displayerStyle)}"></span>
+	</ng-container>
 
-			<ng-container *luOption="let legume; select: legumeRef.select">
-				{{ legume.name }}
-				<span [style.background-color]="legume.color" style="${inlineStyle(optionStyle)}"></span>
-			</ng-container>
-		</lu-simple-select>`,
+	<ng-container *luOption="let legume; select: legumeRef.select">
+		{{ legume.name }}
+		<span [style.background-color]="legume.color" style="${inlineStyle(optionStyle)}"></span>
+	</ng-container>
+</lu-simple-select>`,
 	neededImports: {
 		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent'],
 		'@lucca-front/ng/core-select/api': ['LuCoreSelectApiV4Directive'],
@@ -348,12 +347,11 @@ Pour saisir un utilisateur, il suffit d'utiliser la directive \`users\`.
 La première fois que cette directive est utilisée, il faut ajouter \`provideCoreSelectCurrentUserId(() => inject(PRINCIPAL).id)\` dans votre AppModule ou dans le app.config.ts
 
 Plus d'informations sur les directives users personnalisée sur la [documentation dédiée](https://github.com/LuccaSA/lucca-front/blob/master/docs/core-select-users-directive.md).`,
-	template: `
-	<lu-simple-select
-		placeholder="Placeholder…"
-		users
-		[(ngModel)]="selectedUser"
-	></lu-simple-select>
+	template: `<lu-simple-select
+	placeholder="Placeholder…"
+	users
+	[(ngModel)]="selectedUser"
+></lu-simple-select>
 	`,
 	neededImports: {
 		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent'],
@@ -397,15 +395,14 @@ export const UserCustom = generateStory({
 export const UserCustomTemplate = generateStory({
 	name: 'User Select (custom template)',
 	description: `Pour personnaliser l'affichage de l'option sélectionnée, il est conseillé de ne pas écraser le template à l'aide de *luOption. La directive \`luUserOption\` permet de garder la gestion des homonymes et de l'utilisateur courant.`,
-	template: `
-	<lu-simple-select
-		placeholder="Placeholder…"
-		users
-		#usersRef="luUsers"
-		[(ngModel)]="selectedUser"
-	>
-		<span *luUserOption="let user; usersRef: usersRef">👉👉👉 {{ user | luUserDisplay }} 👈👈👈</span>
-	</lu-simple-select>
+	template: `<lu-simple-select
+	placeholder="Placeholder…"
+	users
+	#usersRef="luUsers"
+	[(ngModel)]="selectedUser"
+>
+	<span *luUserOption="let user; usersRef: usersRef">👉👉👉 {{ user | luUserDisplay }} 👈👈👈</span>
+</lu-simple-select>
 	`,
 	neededImports: {
 		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent'],
