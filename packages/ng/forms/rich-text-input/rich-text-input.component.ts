@@ -27,6 +27,8 @@ import { FormFieldComponent, InputDirective } from '@lucca-front/ng/form-field';
 import { $getRoot, createEditor, Klass, LexicalEditor, LexicalNode } from 'lexical';
 import { RICH_TEXT_FORMATTER, RichTextFormatter } from './formatters';
 
+const INITIAL_UPDATE_TAG = 'initial-update';
+
 export interface RichTextPluginComponent {
 	setEditorInstance(editor: LexicalEditor): void;
 	getLexicalNodes?(): Klass<LexicalNode>[];
@@ -106,8 +108,8 @@ export class RichTextInputComponent implements OnInit, OnDestroy, ControlValueAc
 		this.#cleanup = mergeRegister(
 			registerRichText(this.#editor),
 			registerHistory(this.#editor, createEmptyHistoryState(), 300),
-			this.#editor.registerUpdateListener((changes) => {
-				if (changes.dirtyElements.size) {
+			this.#editor.registerUpdateListener(({ tags, dirtyElements }) => {
+				if (!tags.has(INITIAL_UPDATE_TAG) && dirtyElements.size) {
 					const result = this.#richTextFormatter.format(this.#editor);
 					this.touch();
 					this.#onChange?.(result);
@@ -129,12 +131,13 @@ export class RichTextInputComponent implements OnInit, OnDestroy, ControlValueAc
 	}
 
 	writeValue(markdown: string | null): void {
+		const updateTags = ['skip-dom-selection', INITIAL_UPDATE_TAG];
 		if (markdown) {
 			this.#editor?.update(
 				() => {
 					this.#richTextFormatter.parse(this.#editor, markdown);
 				},
-				{ tag: 'skip-dom-selection' },
+				{ tag: updateTags },
 			);
 		} else if (!this.#editor?.getEditorState().isEmpty()) {
 			this.#editor.update(
@@ -142,7 +145,7 @@ export class RichTextInputComponent implements OnInit, OnDestroy, ControlValueAc
 					const root = $getRoot();
 					root.clear();
 				},
-				{ tag: 'skip-dom-selection' },
+				{ tag: updateTags },
 			);
 		}
 	}
