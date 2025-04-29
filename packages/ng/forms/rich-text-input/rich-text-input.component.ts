@@ -24,7 +24,7 @@ import { mergeRegister } from '@lexical/utils';
 
 import { $canShowPlaceholderCurry } from '@lexical/text';
 import { FormFieldComponent, InputDirective } from '@lucca-front/ng/form-field';
-import { $addUpdateTag, $getRoot, createEditor, Klass, LexicalEditor, LexicalNode } from 'lexical';
+import { $getRoot, createEditor, Klass, LexicalEditor, LexicalNode } from 'lexical';
 import { RICH_TEXT_FORMATTER, RichTextFormatter } from './formatters';
 
 const INITIAL_UPDATE_TAG = 'initial-update';
@@ -131,22 +131,21 @@ export class RichTextInputComponent implements OnInit, OnDestroy, ControlValueAc
 	}
 
 	writeValue(markdown: string | null): void {
+		const updateTags = ['skip-dom-selection', INITIAL_UPDATE_TAG];
 		if (markdown) {
 			this.#editor?.update(
 				() => {
-					$addUpdateTag(INITIAL_UPDATE_TAG);
 					this.#richTextFormatter.parse(this.#editor, markdown);
 				},
-				{ tag: ['skip-dom-selection', INITIAL_UPDATE_TAG] },
+				{ tag: updateTags },
 			);
 		} else if (!this.#editor?.getEditorState().isEmpty()) {
 			this.#editor.update(
 				() => {
-					$addUpdateTag(INITIAL_UPDATE_TAG);
 					const root = $getRoot();
 					root.clear();
 				},
-				{ tag: ['skip-dom-selection', INITIAL_UPDATE_TAG] },
+				{ tag: updateTags },
 			);
 		}
 	}
