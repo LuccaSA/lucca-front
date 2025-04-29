@@ -18,6 +18,11 @@
 	inline-size: var(--commons-navSide-width);
 	scroll-margin-block-start: var(--commons-banner-height);
 
+	.pageLayout-navSide & {
+		position: static;
+		height: 100%;
+	}
+
 	.numericBadge {
 		@include numericBadge.S;
 		@include numericBadge.brand;
@@ -178,6 +183,10 @@
 			block-size: var(--components-navSide-bottom-section-height);
 			inline-size: var(--commons-navSide-width);
 			z-index: 1;
+
+			&:empty {
+				display: none;
+			}
 
 			.navSide-item,
 			.navSide-item-link {

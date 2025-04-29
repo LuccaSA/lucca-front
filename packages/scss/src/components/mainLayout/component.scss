@@ -3,18 +3,17 @@
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
 	display: grid;
-	align-self: stretch;
 	grid-template: var(--components-mainLayoutGridTemplate);
+	height: 100%;
 
 	@at-root ($atRoot) {
 		.mainLayout-header {
 			grid-area: header;
-			inset-block-start: var(--components-mainLayout-headerInsetBlockStart);
-			position: var(--components-mainLayout-headerPosition);
 		}
 
 		.mainLayout-content {
 			grid-area: content;
+			overflow: auto;
 		}
 
 		.mainLayout-header,
@@ -26,8 +25,6 @@
 
 		.mainLayout-footer {
 			grid-area: footer;
-			position: var(--components-mainLayout-footerPosition);
-			inset-block-end: var(--components-mainLayout-footerInsetBlockEnd);
 		}
 	}
 }

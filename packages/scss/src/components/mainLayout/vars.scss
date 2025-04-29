@@ -1,8 +1,4 @@
 @mixin vars {
-	--components-mainLayout-headerPosition: static;
-	--components-mainLayout-footerPosition: static;
-	--components-mainLayout-headerInsetBlockStart: var(--components-bodyLayoutStartBlockSize);
-	--components-mainLayout-footerInsetBlockEnd: var(--components-bodyLayoutEndBlockSize);
 	--components-mainLayoutGridTemplate: "header " auto
 																			 "content" 1fr
 																			 "footer"  auto;

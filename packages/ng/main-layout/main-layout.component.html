@@ -1,0 +1,18 @@
+<div class="mainLayout-header">@if (headerSticky()) { <ng-container *ngTemplateOutlet="header"></ng-container> }</div>
+<div class="mainLayout-content">
+	@if (!headerSticky()) {
+	<ng-container *ngTemplateOutlet="header"></ng-container>
+	}
+	<ng-content />
+	@if (!footerSticky()) {
+	<ng-container *ngTemplateOutlet="footer"></ng-container>
+	}
+</div>
+<div class="mainLayout-footer">
+	@if (footerSticky()) {
+	<ng-container *ngTemplateOutlet="footer"></ng-container>
+	}
+</div>
+
+<ng-template #header><ng-content select="[mainLayoutHeader]" /></ng-template>
+<ng-template #footer><ng-content select="[mainLayoutFooter]" /></ng-template>

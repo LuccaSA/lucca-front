@@ -1,18 +1,12 @@
-
-
 @use 'exports' as *;
 @use '@lucca-front/scss/src/commons/utils/media';
 
-body:has(.bodyLayout) {
+.pageLayout {
 	@include vars;
 	@include component;
 
-	&:has(.bodyLayout-navSide) {
-		@include navSide;
-
-		@include media.min('S') {
-			@include wide;
-		}
+	@include media.min('S') {
+		@include wide;
 	}
 
 	@include media.max('S') {

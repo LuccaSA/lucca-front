@@ -1,0 +1,13 @@
+
+@mixin wide {
+	--components-pageLayout-gridTemplate: "banner  banner" auto
+																				"navSide main  " 1fr
+																			 / auto    1fr;
+
+}
+
+@mixin mobileNavSideBottom {
+	--components-pageLayout-gridTemplate: "banner " auto
+																				"main"    1fr
+																				"navSide" auto;
+}
