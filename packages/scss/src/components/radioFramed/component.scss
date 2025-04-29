@@ -7,6 +7,8 @@
 	border-radius: var(--commons-borderRadius-L);
 	box-shadow: var(--components-radioFramed-boxShadow);
 	background-color: var(--palettes-neutral-0);
+	transition-property: box-shadow, border-color;
+	transition-duration: var(--commons-animations-durations-fast);
 
 	& + & {
 		margin-block-start: var(--pr-t-spacings-200);
@@ -18,6 +20,8 @@
 			padding-inline: var(--components-radioFramed-paddingInline);
 			padding-block: var(--components-radioFramed-paddingBlock);
 			background-color: var(--components-radioFramedHeader-backgroundColor);
+			transition-property: background-color;
+			transition-duration: var(--commons-animations-durations-fast);
 		}
 
 		.radioFramed-content {
