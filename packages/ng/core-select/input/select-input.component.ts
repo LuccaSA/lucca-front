@@ -390,6 +390,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 			this.isPanelOpen$.next(false);
 			this.panelRef.close();
 			this._panelRef = undefined;
+			this.focusInput();
 		}
 		this.afterCloseFn?.();
 	}
