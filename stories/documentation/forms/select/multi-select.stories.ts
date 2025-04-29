@@ -25,7 +25,7 @@ import {
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 import { applicationConfig, Meta, moduleMetadata } from '@storybook/angular';
 import { interval, map } from 'rxjs';
-import { startWith } from 'rxjs/operators';
+import { first, startWith } from 'rxjs/operators';
 import { HiddenArgType } from 'stories/helpers/common-arg-types';
 import { getStoryGenerator } from 'stories/helpers/stories';
 import { allLegumes, colorNameByColor, coreSelectStory, FilterLegumesPipe, ILegume, LuCoreSelectInputStoryComponent, SortLegumesPipe } from './select.utils';
@@ -81,7 +81,7 @@ const basePlay = async ({ canvasElement, step }) => {
 	await userEvent.click(input);
 	await waitForAngular();
 	const panel = within(screen.getByRole('listbox'));
-	const options = await panel.findAllByRole('option');
+	const options = await panel.findAllByRole('option').then((options) => options.filter((el) => !el.id.includes('select-all')));
 	const optionValues = options.slice(0, 4).map((option) => option.textContent);
 	await userEvent.click(options[0]);
 	await userEvent.click(options[1]);
@@ -136,13 +136,20 @@ const basePlay = async ({ canvasElement, step }) => {
 		await userEvent.keyboard('{Enter}');
 		// Because of the arrowDown issue, we'll select more using mouse in order to be able to test more stuff
 		const panel = within(screen.getByRole('listbox'));
-		const options = await panel.findAllByRole('option');
+		const options = await panel.findAllByRole('option').then((options) => options.filter((el) => !el.id.includes('select-all')));
 		const optionValues = options.slice(0, 4).map((option) => option.textContent);
 		await userEvent.click(options[1]);
 		await userEvent.click(options[2]);
 		await userEvent.click(options[3]);
 		await userEvent.keyboard('{Escape}');
-		await checkValues(input, optionValues);
+		const firstOption = await panel.findAllByRole('option').then((opt) => opt[0]);
+		if (firstOption.id.includes('select-all')) {
+			const valuesWithSelectAll = options.map((opt) => opt.textContent);
+			valuesWithSelectAll.splice(1, 3);
+			await checkValues(input, valuesWithSelectAll);
+		} else {
+			await checkValues(input, optionValues);
+		}
 		if (isBadgeDisplayer) {
 			input.focus();
 			await userEvent.tab();
@@ -205,9 +212,18 @@ export const SelectAll = generateStory({
 			const panel = within(screen.getByRole('listbox'));
 			const selectAllCheckbox = panel.getByLabelText('Tout sélectionner');
 			await userEvent.click(selectAllCheckbox);
-			const options = await panel.findAllByRole('option');
+			const options = await panel.findAllByRole('option').then((options) => options.filter((el) => !el.id.includes('select-all')));
 			const optionValues = options.map((option) => option.textContent);
 			await checkValues(input, optionValues);
+			await userEvent.keyboard('{Escape}');
+			context.step('Select all keyboard interactions', async () => {
+				input.focus();
+				await userEvent.keyboard('{ArrowDown}');
+				await waitForAngular();
+				await userEvent.keyboard('{Enter}');
+				// We should have unselected everything with this keyboard input sequence
+				await checkValues(input, []);
+			});
 		},
 	},
 });
