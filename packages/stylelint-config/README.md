@@ -96,7 +96,7 @@ The cause can be the request to the Github API is blocked because of rate limits
 ## Testing locally
 
 1. From the root of this package, run `npm pack`. This will generate a _.tgz_ file.
-2. From the root of the project you want to lint, run `npm i PATH_TO_LUCCA_FRONT_REPOSITORY/packages/stylelint-config/lucca-front-stylelint-config-0.0.0.tgz`.
+2. From the root of the project you want to lint, run `npm i PATH_TO_LUCCA_FRONT_REPOSITORY/packages/stylelint-config/lucca-stylelint-config-prisme-0.0.0.tgz`.
 
 The configuration from your local repository should be applied right away. _If in doubt, restart your editor._
 
