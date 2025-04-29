@@ -16,7 +16,7 @@
 
 	@at-root ($atRoot) {
 		.filterBar-divider.divider {
-			&:not(:has(~ .filterPill:not(.is-hidden))) {
+			&:not(:has(~ .form-field, ~ .filterPill:not(.is-hidden))) {
 				display: none;
 			}
 		}
