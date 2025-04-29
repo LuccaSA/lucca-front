@@ -47,8 +47,6 @@ function getTemplate(args: FilterBarBasicStory): string {
 	<form>
 		<div class="filterBar" [ngModel]="group" [ngModelOptions]="{standalone: true}">
 			<lu-scroll-box class="filterBar-scrollBox">
-				<div class="filterBar-scrollBox-first"></div>
-
 				<div class="filterBar-scrollBox-group">
 					<ul class="segmentedControl filterBar-segmentedControl" role="presentation">
 						<li class="segmentedControl-item">
@@ -121,8 +119,6 @@ function getTemplate(args: FilterBarBasicStory): string {
 				<div class="filterBar-scrollBox-export">
 					<button type="submit" size="S" luButton="outlined">Exporter</button>
 				</div>
-
-				<div class="filterBar-scrollBox-last"></div>
 			</lu-scroll-box>
 		</div>
 
