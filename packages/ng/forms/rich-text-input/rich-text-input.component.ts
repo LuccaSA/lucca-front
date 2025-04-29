@@ -24,8 +24,10 @@ import { mergeRegister } from '@lexical/utils';
 
 import { $canShowPlaceholderCurry } from '@lexical/text';
 import { FormFieldComponent, InputDirective } from '@lucca-front/ng/form-field';
-import { $getRoot, createEditor, Klass, LexicalEditor, LexicalNode } from 'lexical';
+import { $addUpdateTag, $getRoot, createEditor, Klass, LexicalEditor, LexicalNode } from 'lexical';
 import { RICH_TEXT_FORMATTER, RichTextFormatter } from './formatters';
+
+const INITIAL_UPDATE_TAG = 'initial-update';
 
 export interface RichTextPluginComponent {
 	setEditorInstance(editor: LexicalEditor): void;
@@ -106,8 +108,8 @@ export class RichTextInputComponent implements OnInit, OnDestroy, ControlValueAc
 		this.#cleanup = mergeRegister(
 			registerRichText(this.#editor),
 			registerHistory(this.#editor, createEmptyHistoryState(), 300),
-			this.#editor.registerUpdateListener((changes) => {
-				if (changes.dirtyElements.size) {
+			this.#editor.registerUpdateListener(({ tags, dirtyElements }) => {
+				if (!tags.has(INITIAL_UPDATE_TAG) && dirtyElements.size) {
 					const result = this.#richTextFormatter.format(this.#editor);
 					this.touch();
 					this.#onChange?.(result);
@@ -132,17 +134,19 @@ export class RichTextInputComponent implements OnInit, OnDestroy, ControlValueAc
 		if (markdown) {
 			this.#editor?.update(
 				() => {
+					$addUpdateTag(INITIAL_UPDATE_TAG);
 					this.#richTextFormatter.parse(this.#editor, markdown);
 				},
-				{ tag: 'skip-dom-selection' },
+				{ tag: ['skip-dom-selection', INITIAL_UPDATE_TAG] },
 			);
 		} else if (!this.#editor?.getEditorState().isEmpty()) {
 			this.#editor.update(
 				() => {
+					$addUpdateTag(INITIAL_UPDATE_TAG);
 					const root = $getRoot();
 					root.clear();
 				},
-				{ tag: 'skip-dom-selection' },
+				{ tag: ['skip-dom-selection', INITIAL_UPDATE_TAG] },
 			);
 		}
 	}
