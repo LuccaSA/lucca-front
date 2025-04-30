@@ -41,11 +41,12 @@
 	.indexTable-body-row-cell {
 		// because we can't set an individual spacing for each row, transparent border are used for this
 		border-block-end: var(--components-indexTable-row-stack-border-bottom) solid transparent;
+
 		// stack apparence
-		background-image:
-			var(--components-indexTable-row-stack2-background-image, none), var(--components-indexTable-row-stack3-background-image, none);
-		background-position:
-			var(--components-indexTable-row-stack2-background-position, 0 0), var(--components-indexTable-row-stack3-background-position, 0 0);
+		background-image: var(--components-indexTable-row-stack2-background-image, none),
+			var(--components-indexTable-row-stack3-background-image, none);
+		background-position: var(--components-indexTable-row-stack2-background-position, 0 0),
+			var(--components-indexTable-row-stack3-background-position, 0 0);
 		background-repeat: no-repeat, no-repeat;
 		transition-property: background-image, background-position;
 		transition-duration: var(--commons-animations-durations-fast);
@@ -80,9 +81,10 @@
 		z-index: 3;
 	}
 
-	//hide box-shadow from underneath rows that slighly appear on edges of the sticky header when scrolling
+	// hide box-shadow from underneath rows that slighly appear on edges of the sticky header when scrolling
 	.indexTable-head-row-cell {
 		position: relative;
+
 		&::before,
 		&::after {
 			content: '';
@@ -90,15 +92,19 @@
 			inset: calc(var(--components-indexTable-row-spacing) * -1) calc(var(--components-indexTable-padding) * -1) 0;
 			z-index: -1;
 		}
+
 		&::before {
 			background-color: var(--commons-background-base);
 		}
+
 		&::after {
 			background-color: var(--components-indexTable-background-color);
 		}
+
 		&:first-child::after {
 			border-start-start-radius: var(--components-indexTable-border-radius);
 		}
+
 		&:last-child::after {
 			border-start-end-radius: var(--components-indexTable-border-radius);
 		}
@@ -124,6 +130,7 @@
 	.indexTable-foot-row {
 		position: relative;
 		display: grid;
+
 		// Grid layout by default is a basic one column template.
 		// The user can override this and build a specific layout by using --components-indexTable-row-responsive-grid-template-columns, --components-indexTable-row-responsive-grid-template-rows and --components-indexTable-row-responsive-grid-template-areas
 		grid-template-columns: var(--components-indexTable-row-responsive-grid-template-columns, 1fr);
@@ -134,11 +141,13 @@
 		padding-block: var(--components-indexTable-row-spacing-responsive);
 		padding-inline: 0;
 		margin-block-end: var(--components-indexTable-row-spacing-responsive);
+
 		// "Title" lines that do not contain "card" cells are smaller
 		&:not(:has(.indexTable-body-row-cell)) {
 			padding: 0;
 			margin-block-end: 0;
 		}
+
 		&:last-child {
 			margin-block-end: 0;
 		}
@@ -160,12 +169,14 @@
 			--components-indexTable-cell-border-radius-left: var(--components-indexTable-cell-border-radius);
 			--components-indexTable-cell-border-radius-right: var(--components-indexTable-cell-border-radius);
 		}
+
 		&::after {
 			--components-indexTable-outline-border-width-left: var(--components-indexTable-outline-border-width);
 			--components-indexTable-outline-border-width-right: var(--components-indexTable-outline-border-width);
 			--components-indexTable-outline-border-radius-left: var(--components-indexTable-outline-border-radius);
 			--components-indexTable-outline-border-radius-right: var(--components-indexTable-outline-border-radius);
 		}
+
 		~ .indexTable-body-row-cell {
 			&::before,
 			&::after {
@@ -198,15 +209,19 @@
 				1fr
 			);
 	}
+
 	.indexTable-body-row-transparentCell {
 		inline-size: auto;
+
 		// we add a padding-inline-start to keep a correct indent between lvl 1 and lvl 2 titles in nested tables. * .75 is just for cosmetic
 		&:first-child[colspan='2'] + .indexTable-body-row-transparentCell {
 			padding-inline-start: calc(var(--components-indexTable-row-cell-transparent-width) * 0.75);
 		}
 	}
+
 	.indexTable-body-row-cell {
 		--components-indexTable-cell-inset-x-left: var(--components-indexTable-row-cell-transparent-width);
+
 		grid-column-start: 2;
 	}
 }
@@ -224,33 +239,39 @@
 		border-block-end-width: var(--components-indexTable-row-stack-border-bottom);
 		border-style: solid;
 		border-color: transparent;
+
 		&::before,
 		&::after {
 			content: '';
 			position: absolute;
 			inset-block-start: 0;
 			inset-block-end: calc((var(--components-indexTable-row-spacing-responsive) + var(--components-indexTable-stack3-row-spacing)) * -1);
-			background-image:
-				var(--components-indexTable-row-stack2-background-image, none), var(--components-indexTable-row-stack3-background-image, none);
-			background-position:
-				var(--components-indexTable-row-stack2-background-position, 0 0), var(--components-indexTable-row-stack3-background-position, 0 0);
+			background-image: var(--components-indexTable-row-stack2-background-image, none),
+				var(--components-indexTable-row-stack3-background-image, none);
+			background-position: var(--components-indexTable-row-stack2-background-position, 0 0),
+				var(--components-indexTable-row-stack3-background-position, 0 0);
 			background-repeat: no-repeat, no-repeat;
 			transition-property: background-image, background-position;
 			transition-duration: var(--commons-animations-durations-fast);
 		}
+
 		&::before {
 			inset-inline-start: var(--components-indexTable-cell-inset-x-left, 0);
 			inset-inline-end: 50%;
+
 			--components-indexTable-row-stack2-background-position: left -2px bottom 6px;
 			--components-indexTable-row-stack3-background-position: left 1px bottom 2px;
 		}
+
 		&::after {
 			inset-inline-start: 50%;
 			inset-inline-end: 0;
+
 			--components-indexTable-row-stack2-background-position: right -2px bottom 6px;
 			--components-indexTable-row-stack3-background-position: right 1px bottom 2px;
 		}
 	}
+
 	.indexTable-body-row-cell {
 		border-block-end: 0;
 		background-image: none;
@@ -267,6 +288,11 @@
 		@include button.S;
 		@include button.text;
 		@include button.onlyIconS;
+
+		&.mod-delete {
+			// For specificity purpose. Could be removed if we decide to remove automatic CSS imports in Angular components 
+			@include button.delete;
+		}
 	}
 
 	// All devices expect touch ones : subActions are hidden and appears when their row is hover or selected
@@ -277,7 +303,7 @@
 			transition: opacity ease var(--commons-animations-durations-fast);
 		}
 
-		//If there are 4 actions or more, the buttons are hidden (not on touch device) and replaced should be replaced with a dropdown
+		// If there are 4 actions or more, the buttons are hidden (not on touch device) and replaced should be replaced with a dropdown
 		&:has(.indexTable-body-row-cell-subActionDropdownTrigger) {
 			.indexTable-body-row-cell-subAction {
 				display: none;
@@ -294,21 +320,24 @@
 }
 
 @mixin layoutFixed {
-	table-layout: fixed;
-
 	[class*='row-cell'] {
 		--cell-width: calc(var(--components-indexTable-cell-fixed-width, var(--components-index-table-cell-fixed-width)) * 1rem);
 	}
 
-	&.mod-layoutFixed [class*='row-cell'] {
-		@include cellFixedWidth;
+	&.mod-layoutFixed {
+		table-layout: fixed;
+
+		[class*='row-cell'] {
+			@include cellFixedWidth;
+		}
 	}
 
-	//Layout fixed at breakpoint
+	// Layout fixed at breakpoint
 	@each $breakpoint, $value in config.$breakpoints {
 		@include media.min($breakpoint) {
 			&.mod-layoutFixedAtMediaMin#{$breakpoint} {
 				table-layout: fixed;
+
 				[class*='row-cell'] {
 					@include cellFixedWidth;
 				}
@@ -327,6 +356,7 @@
 	.indexTable-head-row-cell {
 		padding: 0;
 	}
+
 	.indexTable-head-row-cell-massSelection {
 		display: flex;
 		align-items: center;

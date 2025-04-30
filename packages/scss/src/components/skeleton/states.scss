@@ -73,6 +73,7 @@
 		0% {
 			background-position: 150% 50%;
 		}
+
 		100% {
 			background-position: -150% 50%;
 		}
@@ -83,9 +84,11 @@
 		0% {
 			opacity: 0.9;
 		}
+
 		50% {
 			opacity: 1;
 		}
+
 		100% {
 			opacity: 0.9;
 		}

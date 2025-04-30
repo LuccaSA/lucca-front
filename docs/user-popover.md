@@ -3,7 +3,7 @@
 Afin de pouvoir installer la UserPopover, vous devez appeler la fonction `provideLuUserPopover` dans votre module racine.
 
 ```typescript
-import { provideLuUserPopover } from '@lucca-front/ng/user-popover';
+import { provideLuUserPopover } from '@lucca-front/ng/popup-employee';
 
 @NgModule({
   providers: [
@@ -24,7 +24,7 @@ Pour utiliser la UserPopover, il vous suffit d'utiliser la directive `[luUserPop
 ```
 
 ```typescript
-import { LuUserPopoverDirective } from '@lucca-front/ng/user-popover';
+import { LuUserPopoverDirective } from '@lucca-front/ng/popup-employee';
 
 @Composant({
 	...,
@@ -78,7 +78,7 @@ Il est donc nécessaire de l'activer dans votre application pour pouvoir l'utili
 Si vous souhaitez override ce feature flag, vous pouvez le faire écrasant vous-même l'InjectionToken `USER_POPOVER_IS_ACTIVATED`
 
 ```typescript
-import { USER_POPOVER_IS_ACTIVATED } from '@lucca-front/ng/user-popover';
+import { USER_POPOVER_IS_ACTIVATED } from '@lucca-front/ng/popup-employee';
 
 @NgModule({
   providers: [
@@ -99,7 +99,7 @@ Il est possible de fournir un autre service qui implémente l'interface `ILuUser
 
 ```typescript
 // app.module.ts
-import { ILuUserPopoverStore } from '@lucca-front/ng/user-popover';
+import { ILuUserPopoverStore } from '@lucca-front/ng/popup-employee';
 
 @NgModule({
   providers: [
@@ -110,7 +110,7 @@ import { ILuUserPopoverStore } from '@lucca-front/ng/user-popover';
 export class AppModule { }
 
 // my-custom-employee-card-store.service.ts
-import { ILuUserPopoverStore } from '@lucca-front/ng/user-popover';
+import { ILuUserPopoverStore } from '@lucca-front/ng/popup-employee';
 
 @Injectable()
 export class MyCustomEmployeeCardStore implements ILuUserPopoverStore {

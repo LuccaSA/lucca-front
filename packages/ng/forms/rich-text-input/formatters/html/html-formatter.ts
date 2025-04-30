@@ -1,5 +1,5 @@
 import { $getRoot, $insertNodes, LexicalEditor } from 'lexical';
-import { RICH_TEXT_FORMATTER, RichTextFormatter } from './rich-text-formatter';
+import { RICH_TEXT_FORMATTER, RichTextFormatter } from '@lucca-front/ng/forms/rich-text-input';
 import { sanitize } from 'isomorphic-dompurify';
 import { $generateHtmlFromNodes, $generateNodesFromDOM } from '@lexical/html';
 import { Provider } from '@angular/core';

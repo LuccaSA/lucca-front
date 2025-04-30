@@ -108,6 +108,11 @@ export class FormFieldComponent implements OnDestroy, DoCheck {
 
 	size = input<FormFieldSize | null>(null);
 
+	/**
+	 * Extra aria-describedby attribute
+	 */
+	extraDescribedBy = input<string>('');
+
 	layout = model<'default' | 'checkable' | 'fieldset'>('default');
 
 	hasArrow = false;
@@ -148,7 +153,7 @@ export class FormFieldComponent implements OnDestroy, DoCheck {
 	#ariaLabelledBy: string[] = [];
 
 	constructor() {
-		ɵeffectWithDeps([this.isInputRequired, this.invalidStatus], () => {
+		ɵeffectWithDeps([this.isInputRequired, this.invalidStatus, this.extraDescribedBy], () => {
 			this.updateAria();
 		});
 
@@ -200,7 +205,11 @@ export class FormFieldComponent implements OnDestroy, DoCheck {
 			this.#renderer.setAttribute(input.host.nativeElement, 'aria-invalid', this.invalidStatus()?.toString());
 			this.#renderer.setAttribute(input.host.nativeElement, 'aria-required', this.isInputRequired()?.toString());
 			if (!input.standalone) {
-				this.#renderer.setAttribute(input.host.nativeElement, 'aria-describedby', `${input.host.nativeElement.id}-message`);
+				let ariaDescribedBy = `${input.host.nativeElement.id}-message`;
+				if (this.extraDescribedBy()) {
+					ariaDescribedBy += ` ${this.extraDescribedBy()}`;
+				}
+				this.#renderer.setAttribute(input.host.nativeElement, 'aria-describedby', ariaDescribedBy);
 			}
 		});
 		if (this.id() && !this.#ariaLabelledBy.includes(`${this.id()}-label`)) {

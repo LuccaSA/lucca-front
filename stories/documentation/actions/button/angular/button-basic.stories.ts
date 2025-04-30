@@ -1,15 +1,22 @@
 import { ButtonComponent } from '@lucca-front/ng/button';
-import { Meta, StoryObj } from '@storybook/angular';
-import { generateInputs } from 'stories/helpers/stories';
+import { IconComponent } from '@lucca-front/ng/icon';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { expect, within } from '@storybook/test';
+import { generateInputs } from 'stories/helpers/stories';
 
 export default {
 	title: 'Documentation/Actions/Button/Angular/Basic',
 	component: ButtonComponent,
+	decorators: [
+		moduleMetadata({
+			imports: [IconComponent],
+		}),
+	],
 	render: ({ luButton, ...inputs }, { argTypes }) => {
+		const disclosureIcon = '<lu-icon icon="arrowChevronBottom"/>';
 		return {
 			template: `<button type="button" luButton${luButton !== '' ? `="${luButton}"` : ''}${generateInputs(inputs, argTypes)}
->Button</button>`,
+>Button${inputs['disclosure'] ? disclosureIcon : ''}</button>`,
 		};
 	},
 } as Meta;
@@ -42,5 +49,6 @@ export const Basic: StoryObj<ButtonComponent> = {
 		state: 'default',
 		luButton: '',
 		delete: false,
+		disclosure: false,
 	},
 };

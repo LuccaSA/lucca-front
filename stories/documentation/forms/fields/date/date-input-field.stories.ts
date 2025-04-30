@@ -90,7 +90,7 @@ export default {
 		const calendar = within(calendarComponent);
 		// We can at least check for this year, checking for the month would be harder due to locale considerations
 		await expect(calendar.getByText(today.getFullYear())).toBeInTheDocument();
-		await expect(calendar.getByText(today.getDate()).parentElement).toHaveAttribute('aria-selected', 'true');
+		await expect(calendar.getAllByText(today.getDate()).find((el) => !el.parentElement.className.includes('is-overflow')).parentElement).toHaveAttribute('aria-selected', 'true');
 		// We pick 15 because it should show only once
 		// Fallback if we're the 15th, pick 16
 		const targetDay = today.getDate() === 15 ? 16 : 15;
@@ -105,8 +105,27 @@ export default {
 			await expectNgModelDisplay(canvasElement, 'Invalid Date');
 			await expect(input).toHaveAttribute('aria-invalid', 'true');
 		});
+
+		await context.step('Select today after another date', async () => {
+			await userEvent.clear(input);
+			const yesterday = today.getDate() <= 1 ? 2 : today.getDate() - 1;
+			await pickDay(input, yesterday);
+			await expectNgModelDisplay(canvasElement, new Date(today.getFullYear(), today.getMonth(), yesterday).toString());
+
+			await pickDay(input, today.getDate());
+			await expectNgModelDisplay(canvasElement, new Date(today.getFullYear(), today.getMonth(), today.getDate()).toString());
+		});
 	},
 } as Meta;
+
+async function pickDay(input: HTMLElement, targetDay: number) {
+	await userEvent.click(input);
+	await waitForAngular();
+	const table = screen.getByRole('grid');
+	const calendarComponent = table.parentElement.parentElement;
+	const calendar = within(calendarComponent);
+	await userEvent.click(calendar.getByText(targetDay.toString()));
+}
 
 export const Basic: StoryObj<DateInputComponent & FormFieldComponent> = {
 	args: {
