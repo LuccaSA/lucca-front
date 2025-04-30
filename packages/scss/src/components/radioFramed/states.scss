@@ -1,8 +1,5 @@
-@mixin collapsed {
-	--components-radioFramed-content-display: none;
-}
-
 @mixin open {
+	--components-radioFramed-content-display: block;
 	--components-radioFramedHeader-backgroundColor: var(--palettes-product-50);
 }
 
@@ -13,6 +10,7 @@
 @mixin disabled {
 	--components-radioFramedHeader-backgroundColor: var(--palettes-neutral-25);
 	--components-radioFramedHeader-borderColor: var(--palettes-neutral-50);
+	--components-radioFramed-boxShadow: none;
 }
 
 @mixin checked {

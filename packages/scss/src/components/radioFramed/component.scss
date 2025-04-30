@@ -3,6 +3,7 @@
 @mixin component($atRoot: namespace.$defaultAtRoot) {
 	position: relative;
 	overflow: hidden;
+	padding: var(--pr-t-spacings-50);
 	border: solid 1px var(--components-radioFramed-borderColor);
 	border-radius: var(--commons-borderRadius-L);
 	box-shadow: var(--components-radioFramed-boxShadow);
@@ -10,15 +11,12 @@
 	transition-property: box-shadow, border-color;
 	transition-duration: var(--commons-animations-durations-fast);
 
-	& + & {
-		margin-block-start: var(--pr-t-spacings-200);
-	}
-
 	@at-root ($atRoot) {
 		.radioFramed-header {
 			margin: 0 !important;
 			padding-inline: var(--components-radioFramed-paddingInline);
 			padding-block: var(--components-radioFramed-paddingBlock);
+			border-radius: var(--commons-borderRadius-L);
 			background-color: var(--components-radioFramedHeader-backgroundColor);
 			transition-property: background-color;
 			transition-duration: var(--commons-animations-durations-fast);
@@ -29,7 +27,6 @@
 			padding-inline: var(--components-radioFramed-paddingInline);
 			padding-block: var(--components-radioFramed-paddingBlock);
 			padding-inline-start: var(--components-radioFramedContent-paddingInlineStart);
-			border-top: solid 1px var(--palettes-product-100);
 		}
 
 		// TODO: Add `noOutline` to radioField component.
@@ -40,11 +37,12 @@
 		.radioFramed-header-input {
 			// TODO: Add `noOutline` to radioField component.
 			//@include radioField.noOutline;
-
 			outline: none !important;
 		}
 
 		.radioFramed-header-label {
+			// TODO: Why this position? Stray code?
+			// SEE https://github.com/LuccaSA/lucca-front/commit/2fffee9c2b2c4da66382dd402cb06f07c1d697cc#diff-14a4b831ffa478216ee60d6b62e3fe0424e83c9237b7b5331ea050af93d18d7bR9-R16
 			position: static !important;
 			font-weight: 600 !important;
 
@@ -55,6 +53,18 @@
 				width: 100%;
 				height: 100%;
 			}
+		}
+
+		// Grow cards when in a flex utility.
+		// TODO: This could be a mod instead.
+		.u-displayFlex & {
+			flex-grow: 1;
+		}
+
+		// Make sure to take the grid-column’s height.
+		// TODO: Decide if the component always takes the whole height, or only when checked.
+		.grid-column & {
+			// height: 100%;
 		}
 	}
 }

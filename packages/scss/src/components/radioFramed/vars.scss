@@ -1,5 +1,5 @@
 @mixin vars {
-	--components-radioFramed-content-display: block;
+	--components-radioFramed-content-display: none;
 	--components-radioFramed-borderColor: var(--palettes-neutral-300);
 	--components-radioFramed-boxShadow: none;
 	--components-radioFramed-paddingInline: var(--pr-t-spacings-200);
