@@ -502,6 +502,7 @@ export const GroupBy = generateStory({
 	[options]="legumes | filterLegumes:clue | sortLegumes:(clue ? ['name', legumeColor] : [legumeColor])"
 	(clueChange)="clue = $event"
 	[maxValuesShown]="maxValuesShown"
+	clearable
 >
 	<ng-container *luOptionGroup="let group by legumeColor; select: selectRef">
 		Légume {{colorNameByColor[group.key]}}{{group.options.length > 1 ? 's' : ''}}
@@ -513,6 +514,22 @@ export const GroupBy = generateStory({
 		'@lucca-front/ng/multi-select': ['LuMultiSelectInputComponent'],
 	},
 	storyPartial: {
+		play: async (context) => {
+			await basePlay(context);
+			context.step('Group select all keyboard interactions', async () => {
+				const input = within(context.canvasElement).getByRole('combobox');
+				input.focus();
+				await waitForAngular();
+				await userEvent.keyboard('{ArrowDown}');
+				await waitForAngular();
+				await userEvent.keyboard('{Enter}');
+				const panel = within(screen.getByRole('listbox'));
+				const options = await panel.findAllByRole('option');
+				const optionValues = options.map((option) => option.textContent);
+				// We should have unselected everything with this keyboard input sequence
+				await checkValues(input, optionValues.slice(1, 3));
+			});
+		},
 		args: {
 			legumeColor: (legume: ILegume) => legume.color,
 			colorNameByColor,
