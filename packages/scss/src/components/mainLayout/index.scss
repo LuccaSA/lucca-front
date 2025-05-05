@@ -4,7 +4,7 @@
 	@include vars;
 	@include component;
 
-	&.mod-withAside {
+	&:has(.mainLayout-aside:not(:empty)) {
 		@include aside;
 	}
 }

@@ -1,5 +1,5 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { booleanAttribute, Component, HostBinding, input, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, Component, input, ViewEncapsulation } from '@angular/core';
 
 @Component({
 	selector: 'lu-main-layout',
@@ -16,10 +16,4 @@ import { booleanAttribute, Component, HostBinding, input, ViewEncapsulation } fr
 export class MainLayoutComponent {
 	headerSticky = input(false, { transform: booleanAttribute });
 	footerSticky = input(false, { transform: booleanAttribute });
-	withAside = input(false, { transform: booleanAttribute });
-
-	@HostBinding('class.mod-withAside')
-	get withAsideInput() {
-		return this.withAside();
-	}
 }

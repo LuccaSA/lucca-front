@@ -22,7 +22,8 @@
 
 		.pageLayout-navSide {
 			grid-area: navSide;
-			overflow: auto;
+			overflow-y: auto;
+			overflow-x: hidden;
 		}
 
 		.pageLayout-main {

@@ -29,7 +29,6 @@ export default {
 	],
 	render: (args: MainLayoutAngularBasicStory) => {
 		const asideContainer = args.aside ? `<ng-container mainLayoutAside>aside</ng-container>` : ``;
-		const asideParam = args.aside ? `withAside` : ``;
 		const headerContainer = args.header ? `<ng-container mainLayoutHeader><div>header</div></ng-container>` : ``;
 		const footerContainer = args.footer ? `<ng-container mainLayoutFooter><div>footer</div></ng-container>` : ``;
 		const headerStickyParam = args.headerSticky ? `headerSticky` : ``;
@@ -55,7 +54,7 @@ export default {
 			template: cleanupTemplate(`<lu-page-layout>
 	<ng-container pageLayoutBanner>banner</ng-container>
 	<ng-container pageLayoutNavSide>navSide</ng-container>
-	<lu-main-layout ${headerStickyParam} ${footerStickyParam} ${asideParam}>
+	<lu-main-layout ${headerStickyParam} ${footerStickyParam}>
 		${asideContainer}
 		${headerContainer}
 		content

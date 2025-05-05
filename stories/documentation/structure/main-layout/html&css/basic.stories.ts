@@ -8,6 +8,7 @@ interface MainLayoutHTMLBasicStory {
 	footer: boolean;
 	footerSticky: boolean;
 	contentWithScroll: boolean;
+	asideWithScroll: boolean;
 }
 
 export default {
@@ -19,15 +20,18 @@ export default {
 		footerSticky: {
 			if: { arg: 'footer', truthy: true },
 		},
+		asideWithScroll: {
+			if: { arg: 'aside', truthy: true },
+		},
 	},
 	render: (args: MainLayoutHTMLBasicStory) => {
 		const headerContent = args.header && !args.headerSticky ? `<div>header</div>` : ``;
 		const footerContent = args.footer && !args.footerSticky ? `<div>footer</div>` : ``;
-		const asideContainer = args.aside ? `<div class="mainLayout-aside">aside</div>` : ``;
-		const asideParam = args.aside ? `mod-withAside` : ``;
 		const headerContainer = args.header && args.headerSticky ? `<div class="mainLayout-header"><div>header</div></div>` : ``;
 		const footerContainer = args.footer && args.footerSticky ? `<div class="mainLayout-footer"><div>footer</div></div>` : ``;
-		const img = args.contentWithScroll ? `<img src="https://dummyimage.com/200x1000" class="u-displayBlock" alt="" />` : ``;
+		const imgAside = args.asideWithScroll ? `<img src="https://dummyimage.com/200x1000" class="u-displayBlock" alt="" />` : ``;
+		const imgContent = args.contentWithScroll ? `<img src="https://dummyimage.com/200x1000" class="u-displayBlock" alt="" />` : ``;
+		const asideContainer = args.aside ? `<div class="mainLayout-aside">aside${imgAside}</div>` : ``;
 		return {
 			styles: [
 				`
@@ -48,13 +52,13 @@ export default {
 	<div class="pageLayout-banner">banner</div>
 	<div class="pageLayout-navSide">navSide</div>
 	<div class="pageLayout-main">
-		<main role="main" class="mainLayout ${asideParam}">
+		<main role="main" class="mainLayout">
 			${headerContainer}
 			${asideContainer}
 			<div class="mainLayout-content">
 				${headerContent}
 				content
-				${img}
+				${imgContent}
 				${footerContent}
 			</div>
 			${footerContainer}
@@ -68,11 +72,12 @@ export default {
 
 export const Basic = {
 	args: {
-		contentWithScroll: false,
 		header: false,
 		headerSticky: false,
 		footer: false,
 		footerSticky: false,
 		aside: false,
+		asideWithScroll: false,
+		contentWithScroll: false,
 	},
 };

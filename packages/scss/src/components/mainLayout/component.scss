@@ -18,7 +18,8 @@
 
 		.mainLayout-aside {
 			grid-area: aside;
-			overflow: auto;
+			overflow-y: auto;
+			overflow-x: hidden;
 		}
 
 		.mainLayout-footer {
