@@ -205,9 +205,9 @@
 @mixin selectableResponsiveCardList {
 	.indexTable-body-row {
 		grid-template-columns: var(--components-indexTable-row-cell-transparent-width) var(
-				--components-indexTable-row-responsive-grid-template-columns,
-				1fr
-			);
+			--components-indexTable-row-responsive-grid-template-columns,
+			1fr
+		);
 	}
 
 	.indexTable-body-row-transparentCell {
@@ -294,40 +294,21 @@
 			@include button.delete;
 		}
 	}
-
-	// All devices expect touch ones : subActions are hidden and appears when their row is hover or selected
-	// see mixin visibleSubActions() in states.scss
-	@include media.isNotTouchDevice {
-		.indexTable-body-row-cell-subAction {
-			opacity: var(--components-indexTable-cell-subAction-opacity, 0);
-			transition: opacity ease var(--commons-animations-durations-fast);
-		}
-
-		// If there are 4 actions or more, the buttons are hidden (not on touch device) and replaced should be replaced with a dropdown
-		&:has(.indexTable-body-row-cell-subActionDropdownTrigger) {
-			.indexTable-body-row-cell-subAction {
-				display: none;
-			}
-		}
-	}
-
-	// All touch devices : subActions are always visibles, subActionDropdownTrigger is hidden
-	@include media.isTouchDevice {
-		.indexTable-body-row-cell-subActionDropdownTrigger {
-			display: none;
-		}
-	}
 }
 
 @mixin layoutFixed {
-	[class*='row-cell'] {
+	.indexTable-head-row-cell,
+	.indexTable-body-row-cell,
+	.indexTable-foot-row-cell {
 		--cell-width: calc(var(--components-indexTable-cell-fixed-width, var(--components-index-table-cell-fixed-width)) * 1rem);
 	}
 
 	&.mod-layoutFixed {
 		table-layout: fixed;
 
-		[class*='row-cell'] {
+		.indexTable-head-row-cell,
+		.indexTable-body-row-cell,
+		.indexTable-foot-row-cell {
 			@include cellFixedWidth;
 		}
 	}
@@ -338,7 +319,9 @@
 			&.mod-layoutFixedAtMediaMin#{$breakpoint} {
 				table-layout: fixed;
 
-				[class*='row-cell'] {
+				.indexTable-head-row-cell,
+				.indexTable-body-row-cell,
+				.indexTable-foot-row-cell {
 					@include cellFixedWidth;
 				}
 			}
