@@ -5,6 +5,7 @@
 
 $isNamespaced: false !default;
 $deprecatedSpacings: false !default;
+$prefersContrast: 'no-preference' !default;
 
 $fontFamily: 'SourceSans' !default;
 $fontWeights: (
@@ -480,6 +481,15 @@ $colorInput: (
 	border-hover: var(--palettes-neutral-400),
 	border-critical: var(--palettes-critical-400),
 	border-critical-hover: var(--palettes-critical-600),
+);
+
+$colorInputContrasted: (
+	text-placeholder: var(--palettes-neutral-700),
+	text-placeholder-critical: var(--palettes-critical-700),
+	border: var(--palettes-neutral-600),
+	border-hover: var(--palettes-neutral-700),
+	border-critical: var(--palettes-critical-700),
+	border-critical-hover: var(--palettes-critical-800),
 );
 
 $breakpoints: (
