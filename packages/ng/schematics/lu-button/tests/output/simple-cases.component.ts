@@ -1,0 +1,32 @@
+import { Component } from '@angular/core';
+import { ButtonComponent } from '@lucca-front/ng/button';
+import { IconComponent } from '@lucca-front/ng/icon';
+
+@Component({
+	selector: 'lu-test',
+	standalone: true,
+	template: `
+		<button
+			luButton="outlined"
+			block
+			class="u-textCenter u-textNeutral"
+			data-testid="open-expense-form"
+			type="button"
+			(click)="createExpenseFromForm()"
+		>
+			{{ 'Cla_Expense_Create_From_Form' | tr }}
+		</button>
+		<a luButton="text" [routerLink]="['.']">
+			<lu-icon icon="arrowLeft" />
+			<span class="u-mask">{{ 'dependencies.GO_BACK_TO_LIST' | transloco }}</span>
+		</a>
+		<button luButton palette="primary" [class.is-loading]="saving$ | async" (click)="save()">
+			{{translations.ADMIN_SAVE}}
+		</button>
+	`,
+	imports: [
+		ButtonComponent, IconComponent
+	]
+})
+export class SimpleCasesComponent {
+}
