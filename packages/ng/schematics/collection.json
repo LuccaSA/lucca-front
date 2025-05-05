@@ -40,6 +40,11 @@
       "description": "Migrate HTML icons to the new lu-icon component",
       "factory": "./lu-icon/index",
       "schema": "./lu-icon/schema.json"
+    },
+    "lu-button": {
+      "description": "Migrate CSS-only buttons to the new luButton component",
+      "factory": "./lu-button/index",
+      "schema": "./lu-button/schema.json"
     }
   }
 }
