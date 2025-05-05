@@ -1,4 +1,5 @@
 @use 'popover';
+@use '@lucca-front/scss/src/commons/utils/a11y';
 
 .lu-picker-panel {
 	@extend %popover-panel;
@@ -52,14 +53,10 @@
 	justify-content: space-between;
 	box-shadow: calc(var(--pr-t-spacings-50) * -0.5) calc(var(--pr-t-spacings-50) * -0.5) 0 2px var(--pr-t-elevation-surface-raised); // Mask background options scrolling behind
 
-	.link {
-		text-decoration: none;
-	}
-
 	&.is-highlighted {
-		.link {
-			text-decoration: underline;
-		}
+		background-color: var(--palettes-neutral-50);
+		border-radius: var(--commons-borderRadius-M);
+		outline: 4px solid var(--palettes-neutral-0);
 	}
 }
 
@@ -131,4 +128,10 @@
 	display: flex;
 	flex-direction: column;
 	gap: var(--pr-t-spacings-50);
+
+	&:not(:hover, :has(.is-highlighted)) {
+		.link {
+			@include a11y.mask;
+		}
+	}
 }
