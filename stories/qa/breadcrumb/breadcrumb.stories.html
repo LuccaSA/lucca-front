@@ -1,6 +1,15 @@
 <table class="demo-QAtable">
 	<tbody>
 		<tr>
+			<td></td>
+			<td>
+				<div class="demo-QAtable-list">HTML</div>
+			</td>
+			<td>
+				<div class="demo-QAtable-list">Angular</div>
+			</td>
+		</tr>
+		<tr>
 			<td>Default</td>
 			<td>
 				<div class="demo-QAtable-list">
@@ -14,9 +23,16 @@
 					</nav>
 				</div>
 			</td>
+			<td>
+				<lu-breadcrumbs >
+					<a *luBreadcrumbsLink class="breadcrumbs-list-item-action" routerLink="/" ariaCurrentWhenActive="page">You</a>
+					<a *luBreadcrumbsLink class="breadcrumbs-list-item-action" ariaCurrentWhenActive="page" href="#2">are</a>
+					<a *luBreadcrumbsLink class="breadcrumbs-list-item-action" aria-current="page">here</a>
+				</lu-breadcrumbs>
+			</td>
 		</tr>
 		<tr>
-			<td>Compact</td>
+			<td>Compact (deprecated)</td>
 			<td>
 				<div class="demo-QAtable-list">
 					<nav class="breadcrumbs mod-compact" aria-describedby="breadcrumbs-title">
@@ -27,6 +43,12 @@
 						</ol>
 					</nav>
 				</div>
+			</td>
+			<td>
+				<lu-breadcrumbs >
+					<a *luBreadcrumbsLink class="breadcrumbs-list-item-action" ariaCurrentWhenActive="page" href="#2">Previous page</a>
+					<a *luBreadcrumbsLink class="breadcrumbs-list-item-action" aria-current="page">mode</a>
+				</lu-breadcrumbs>
 			</td>
 		</tr>
 	</tbody>
