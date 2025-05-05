@@ -136,20 +136,6 @@
 	}
 }
 
-@mixin noOffset {
-	.table-head-row-cell,
-	.table-body-row-cell,
-	.table-foot-row-cell {
-		&:first-child {
-			padding-inline-start: 0;
-		}
-
-		&:last-child {
-			padding-inline-end: 0;
-		}
-	}
-}
-
 @mixin header {
 	vertical-align: bottom;
 }

@@ -24,9 +24,9 @@ const importSource: Record<string, string> = {
 	LuDisplayerDirective: '@lucca-front/ng/core-select',
 	LuOptionDirective: '@lucca-front/ng/core-select',
 	LuInputClearerComponent: '@lucca-front/ng/input',
-	LuCoreSelectEstablishmentsDirective: '@lucca-front/ng/core-select',
-	LuCoreSelectJobQualificationsDirective: '@lucca-front/ng/core-select',
-	LuCoreSelectUsersDirective: '@lucca-front/ng/core-select',
+	LuCoreSelectEstablishmentsDirective: '@lucca-front/ng/core-select/establishment',
+	LuCoreSelectJobQualificationsDirective: '@lucca-front/ng/core-select/job-qualification',
+	LuCoreSelectUsersDirective: '@lucca-front/ng/core-select/user',
 	LuCoreSelectApiV3Directive: '@lucca-front/ng/core-select/api',
 	LuCoreSelectApiV4Directive: '@lucca-front/ng/core-select/api'
 };

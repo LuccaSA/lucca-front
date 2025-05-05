@@ -79,6 +79,7 @@
 
 		&::before {
 			@include icon.generate('people_person');
+
 			color: var(--palettes-neutral-600);
 			font-weight: 400;
 			font-size: var(--components-avatar-placeholder-size);

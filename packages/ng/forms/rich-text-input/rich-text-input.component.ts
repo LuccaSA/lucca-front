@@ -1,5 +1,4 @@
 import {
-	AfterViewInit,
 	booleanAttribute,
 	ChangeDetectionStrategy,
 	Component,
@@ -9,7 +8,6 @@ import {
 	forwardRef,
 	inject,
 	InjectionToken,
-	Injector,
 	input,
 	OnDestroy,
 	OnInit,
@@ -19,7 +17,7 @@ import {
 	ViewEncapsulation,
 	WritableSignal,
 } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR, NgControl } from '@angular/forms';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { createEmptyHistoryState, registerHistory } from '@lexical/history';
 import { registerRichText } from '@lexical/rich-text';
 import { mergeRegister } from '@lexical/utils';
@@ -28,8 +26,8 @@ import { $canShowPlaceholderCurry } from '@lexical/text';
 import { FormFieldComponent, InputDirective } from '@lucca-front/ng/form-field';
 import { $getRoot, createEditor, Klass, LexicalEditor, LexicalNode } from 'lexical';
 import { RICH_TEXT_FORMATTER, RichTextFormatter } from './formatters';
-import { toSignal } from '@angular/core/rxjs-interop';
-import { map } from 'rxjs';
+
+const INITIAL_UPDATE_TAG = 'initial-update';
 
 export interface RichTextPluginComponent {
 	setEditorInstance(editor: LexicalEditor): void;
@@ -62,10 +60,9 @@ export const RICH_TEXT_PLUGIN_COMPONENT = new InjectionToken<RichTextPluginCompo
 	],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class RichTextInputComponent implements OnInit, AfterViewInit, OnDestroy, ControlValueAccessor {
+export class RichTextInputComponent implements OnInit, OnDestroy, ControlValueAccessor {
 	readonly #richTextFormatter = inject<RichTextFormatter>(RICH_TEXT_FORMATTER);
 	readonly #formField = inject(FormFieldComponent, { optional: true });
-	readonly #injector = inject(Injector);
 
 	readonly placeholder = input<string>('');
 	readonly disableSpellcheck = input<boolean, boolean>(false, { transform: booleanAttribute });
@@ -79,7 +76,6 @@ export class RichTextInputComponent implements OnInit, AfterViewInit, OnDestroy,
 	readonly currentCanShowPlaceholder = signal(false);
 	readonly isDisabled = signal(false);
 	readonly formFieldId = computed(() => this.#formField?.id());
-	readonly isError = computed(() => this.#isInvalid() && this.#isTouched());
 
 	readonly #customNodes = computed(() =>
 		this.pluginComponents()
@@ -88,8 +84,6 @@ export class RichTextInputComponent implements OnInit, AfterViewInit, OnDestroy,
 	);
 	readonly #allPlugins = computed(() => this.#flattenPlugins(this.pluginComponents()));
 	readonly #isTouched = signal(false);
-
-	#isInvalid: Signal<boolean> = signal(false);
 
 	#onChange?: (markdown: string | null) => void;
 	#onTouch?: () => void;
@@ -114,8 +108,8 @@ export class RichTextInputComponent implements OnInit, AfterViewInit, OnDestroy,
 		this.#cleanup = mergeRegister(
 			registerRichText(this.#editor),
 			registerHistory(this.#editor, createEmptyHistoryState(), 300),
-			this.#editor.registerUpdateListener((changes) => {
-				if (changes.dirtyElements.size) {
+			this.#editor.registerUpdateListener(({ tags, dirtyElements }) => {
+				if (!tags.has(INITIAL_UPDATE_TAG) && dirtyElements.size) {
 					const result = this.#richTextFormatter.format(this.#editor);
 					this.touch();
 					this.#onChange?.(result);
@@ -132,31 +126,27 @@ export class RichTextInputComponent implements OnInit, AfterViewInit, OnDestroy,
 		}
 	}
 
-	ngAfterViewInit() {
-		const ngControl = this.#injector.get(NgControl);
-
-		if (ngControl.statusChanges) {
-			this.#isInvalid = toSignal(ngControl.statusChanges.pipe(map(() => ngControl.invalid)), {
-				injector: this.#injector,
-				initialValue: ngControl.invalid,
-			});
-		}
-	}
-
 	ngOnDestroy(): void {
 		this.#cleanup?.();
 	}
 
 	writeValue(markdown: string | null): void {
+		const updateTags = ['skip-dom-selection', INITIAL_UPDATE_TAG];
 		if (markdown) {
-			this.#editor?.update(() => {
-				this.#richTextFormatter.parse(this.#editor, markdown);
-			});
+			this.#editor?.update(
+				() => {
+					this.#richTextFormatter.parse(this.#editor, markdown);
+				},
+				{ tag: updateTags },
+			);
 		} else if (!this.#editor?.getEditorState().isEmpty()) {
-			this.#editor.update(() => {
-				const root = $getRoot();
-				root.clear();
-			});
+			this.#editor.update(
+				() => {
+					const root = $getRoot();
+					root.clear();
+				},
+				{ tag: updateTags },
+			);
 		}
 	}
 

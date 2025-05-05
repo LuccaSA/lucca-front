@@ -6,7 +6,6 @@
 	position: relative;
 	inline-size: fit-content;
 	block-size: fit-content;
-
 	display: grid;
 	grid-template-areas: 'checkbox';
 	grid-template-columns: var(--component-checkboxField-size);
@@ -56,6 +55,8 @@
 				font-weight: 400;
 				font-size: var(--component-checkboxField-icon-fontSize);
 				direction: ltr;
+
+				// stylelint-disable-next-line font-family-no-missing-generic-family-keyword -- This font is for icons and should not have fallback.
 				font-family: 'Lucca icons';
 				font-feature-settings: 'liga';
 				font-style: normal;

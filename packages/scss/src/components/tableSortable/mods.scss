@@ -42,7 +42,8 @@
 		&::after {
 			transform: translateY(0);
 			opacity: 1;
-			@include a11y.focusVisible();
+
+			@include a11y.focusVisible;
 		}
 	}
 
@@ -113,7 +114,8 @@
 		&::before {
 			transform: translateY(0);
 			opacity: 1;
-			@include a11y.focusVisible();
+
+			@include a11y.focusVisible;
 		}
 	}
 

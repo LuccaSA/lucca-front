@@ -1,0 +1,22 @@
+@use '@lucca-front/scss/src/components/loading/exports' as loading;
+
+@mixin error {
+	--components-fileEntry-borderColor: var(--palettes-critical-600);
+	--components-fileEntry-gridTemplateAreas: 'picture title toolbar' 'picture description toolbar';
+	--components-fileEntry-status-content-inside-backgroundColor: var(--palettes-critical-50);
+	--components-fileEntry-minHeight: 3.75rem;
+}
+
+@mixin loading {
+	--components-fileEntry-status-content-img-opacity: 0.08;
+}
+
+@mixin loadingS {
+	.fileEntry-status-content-inside-loading.loading {
+		@include loading.S;
+	}
+}
+
+@mixin errorS {
+	--components-fileEntry-status-blockSize: 100%;
+}

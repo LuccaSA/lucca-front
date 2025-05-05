@@ -1,8 +1,8 @@
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { IconComponent } from '@lucca-front/ng/icon';
-import { generateInputs } from 'stories/helpers/stories';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { expect, within } from '@storybook/test';
+import { generateInputs } from 'stories/helpers/stories';
 import { Basic as ButtonBasic } from './button-basic.stories';
 
 export default {
@@ -14,11 +14,17 @@ export default {
 		}),
 	],
 	render: ({ luButton, label, ...inputs }, { argTypes }) => {
+		let iconSign = "signInfo";
+		const labelCopy = label;
+		if(inputs['disclosure'] === true ) {
+			iconSign = "arrowChevronBottom";
+			label = "";
+		}
 		return {
 			template: `<button type="button" luButton${luButton !== '' ? `="${luButton}"` : ''}${generateInputs(
 				inputs,
 				argTypes,
-			)}><lu-icon icon="signInfo"></lu-icon><span class="u-mask">Alt text</span>${label}</button>`,
+			)}>${inputs['disclosure'] ? labelCopy : ''}<lu-icon icon="${iconSign}" alt="Alt text" />${label}</button>`,
 		};
 	},
 } as Meta;
@@ -58,7 +64,8 @@ export const Basic: StoryObj<ButtonComponent & { label: string }> = {
 		palette: 'none',
 		state: 'default',
 		luButton: '',
-		label: '',
+		label: 'Label',
 		delete: false,
+		disclosure: false,
 	},
 };

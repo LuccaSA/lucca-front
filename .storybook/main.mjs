@@ -16,18 +16,34 @@ export default {
 		getAbsolutePath('@storybook/addon-essentials'),
 		getAbsolutePath('@storybook/addon-a11y'),
 		getAbsolutePath('@storybook/addon-interactions'),
+		getAbsolutePath('@storybook/addon-coverage'),
 	],
-	webpackFinal: (config) => ({
-		...config,
-		resolve: {
-			...config.resolve,
-			alias: {
-				...config.resolve.alias,
-				'@storybook/blocks': fileURLToPath(new URL('../node_modules/@storybook/blocks', import.meta.url)),
-				'@storybook/docs-tools': fileURLToPath(new URL('../node_modules/@storybook/docs-tools', import.meta.url)),
+	webpackFinal: (config) => {
+		return {
+			...config,
+			module: {
+				...(config.module || {}),
+				rules: [
+					...(config.module.rules || []),
+					{
+						test: /\.(js|ts)$/,
+						loader: '@jsdevtools/coverage-istanbul-loader',
+						enforce: 'post',
+						include: fileURLToPath(new URL('../', import.meta.url)),
+						exclude: [/\.(e2e|spec)\.ts$/, /node_modules/, /(ngfactory|ngstyle)\.js/, /polyfills.ts/],
+					},
+				],
 			},
-		},
-	}),
+			resolve: {
+				...config.resolve,
+				alias: {
+					...config.resolve.alias,
+					'@storybook/blocks': fileURLToPath(new URL('../node_modules/@storybook/blocks', import.meta.url)),
+					'@storybook/docs-tools': fileURLToPath(new URL('../node_modules/@storybook/docs-tools', import.meta.url)),
+				},
+			},
+		};
+	},
 };
 
 function getAbsolutePath(value) {

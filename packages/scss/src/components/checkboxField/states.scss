@@ -31,13 +31,6 @@
 	}
 }
 
-@mixin checkedHover {
-	~ .checkboxField-icon {
-		background-color: var(--palettes-product-600);
-		border-color: var(--palettes-product-600);
-	}
-}
-
 @mixin checkedActive {
 	~ .checkboxField-icon {
 		background-color: var(--palettes-product-800);
@@ -84,7 +77,7 @@
 @mixin focusVisible {
 	~ .checkboxField-icon {
 		&::after {
-			@include a11y.focusVisible();
+			@include a11y.focusVisible;
 		}
 	}
 }

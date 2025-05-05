@@ -45,6 +45,7 @@
 			transform: scale(0);
 			transition-property: transform;
 			transition-duration: var(--commons-animations-durations-fast);
+
 			// transition-timing-function: cubic-bezier(0.5, -0.5, 0.5, 0);
 
 			@media (prefers-reduced-motion: reduce) {
