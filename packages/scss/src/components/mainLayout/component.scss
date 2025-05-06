@@ -1,0 +1,37 @@
+
+@use '@lucca-front/scss/src/commons/utils/namespace';
+
+@mixin component($atRoot: namespace.$defaultAtRoot) {
+	display: grid;
+	grid-template: var(--components-mainLayoutGridTemplate);
+	height: 100%;
+
+	@at-root ($atRoot) {
+		.mainLayout-header {
+			grid-area: header;
+		}
+
+		.mainLayout-content {
+			grid-area: content;
+			overflow: auto;
+		}
+
+		.mainLayout-aside {
+			grid-area: aside;
+			overflow-y: auto;
+			overflow-x: hidden;
+		}
+
+		.mainLayout-footer {
+			grid-area: footer;
+		}
+
+		.mainLayout-header,
+		.mainLayout-footer,
+		.mainLayout-aside {
+			&:empty {
+				display: none;
+			}
+		}
+	}
+}

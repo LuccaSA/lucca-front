@@ -1,0 +1,83 @@
+import { Meta } from '@storybook/angular';
+import { cleanupTemplate } from 'stories/helpers/stories';
+
+interface MainLayoutHTMLBasicStory {
+	header: boolean;
+	headerSticky: boolean;
+	aside: boolean;
+	footer: boolean;
+	footerSticky: boolean;
+	contentWithScroll: boolean;
+	asideWithScroll: boolean;
+}
+
+export default {
+	title: 'Documentation/Structure/Main Layout/HTML&CSS/Basic',
+	argTypes: {
+		headerSticky: {
+			if: { arg: 'header', truthy: true },
+		},
+		footerSticky: {
+			if: { arg: 'footer', truthy: true },
+		},
+		asideWithScroll: {
+			if: { arg: 'aside', truthy: true },
+		},
+	},
+	render: (args: MainLayoutHTMLBasicStory) => {
+		const headerContent = args.header && !args.headerSticky ? `<div>header</div>` : ``;
+		const footerContent = args.footer && !args.footerSticky ? `<div>footer</div>` : ``;
+		const headerContainer = args.header && args.headerSticky ? `<div class="mainLayout-header"><div>header</div></div>` : ``;
+		const footerContainer = args.footer && args.footerSticky ? `<div class="mainLayout-footer"><div>footer</div></div>` : ``;
+		const imgAside = args.asideWithScroll ? `<img src="https://dummyimage.com/200x1000" class="u-displayBlock" alt="" />` : ``;
+		const imgContent = args.contentWithScroll ? `<img src="https://dummyimage.com/200x1000" class="u-displayBlock" alt="" />` : ``;
+		const asideContainer = args.aside ? `<div class="mainLayout-aside">aside${imgAside}</div>` : ``;
+		return {
+			styles: [
+				`
+.pageLayout {
+	block-size: 25rem;
+}
+.pageLayout-banner {
+	background-color: var(--palettes-neutral-0)
+}
+.pageLayout-navSide {
+	background-color: var(--palettes-navigation-800);
+	color: var(--palettes-neutral-0)
+}
+				`,
+			],
+			template: cleanupTemplate(`
+<div class="pageLayout">
+	<div class="pageLayout-banner">banner</div>
+	<div class="pageLayout-navSide">navSide</div>
+	<div class="pageLayout-main">
+		<main role="main" class="mainLayout">
+			${headerContainer}
+			${asideContainer}
+			<div class="mainLayout-content">
+				${headerContent}
+				content
+				${imgContent}
+				${footerContent}
+			</div>
+			${footerContainer}
+		</main>
+	</div>
+</div>
+`),
+		};
+	},
+} as Meta;
+
+export const Basic = {
+	args: {
+		header: false,
+		headerSticky: false,
+		footer: false,
+		footerSticky: false,
+		aside: false,
+		asideWithScroll: false,
+		contentWithScroll: false,
+	},
+};
