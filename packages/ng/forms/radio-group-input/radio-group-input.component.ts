@@ -1,8 +1,8 @@
-import { ChangeDetectionStrategy, Component, forwardRef, inject, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, forwardRef, HostBinding, inject, input, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
 import { FORM_FIELD_INSTANCE, FormFieldComponent } from '@lucca-front/ng/form-field';
 import { injectNgControl } from '../inject-ng-control';
 import { NoopValueAccessorDirective } from '../noop-value-accessor.directive';
-import { ReactiveFormsModule } from '@angular/forms';
 import { RADIO_GROUP_INSTANCE } from './radio-group-token';
 
 let nextId = 0;
@@ -31,10 +31,17 @@ export class RadioGroupInputComponent implements OnInit {
 	@Input()
 	size: 'S' | 'M';
 
+	framed = input(false, { transform: booleanAttribute });
+
 	name = `radio-group-${nextId++}`;
 
 	@Input()
 	arrow?: 'neutral' | 'default';
+
+	@HostBinding('class.radioFramedWrapper')
+	public get isFramed() {
+		return this.framed();
+	}
 
 	constructor() {
 		if (this.formField) {

@@ -10,61 +10,67 @@
 	background-color: var(--palettes-neutral-0);
 	transition-property: box-shadow, border-color;
 	transition-duration: var(--commons-animations-durations-fast);
+	block-size: 100%;
+	display: flex;
+	flex-direction: column;
 
 	@at-root ($atRoot) {
-		.radioFramed-header {
-			margin: 0 !important;
-			padding-inline: var(--components-radioFramed-paddingInline);
-			padding-block: var(--components-radioFramed-paddingBlock);
-			border-radius: var(--commons-borderRadius-L);
-			background-color: var(--components-radioFramedHeader-backgroundColor);
-			transition-property: background-color;
-			transition-duration: var(--commons-animations-durations-fast);
-		}
-
-		.radioFramed-content {
-			display: var(--components-radioFramed-content-display);
-			padding-inline: var(--components-radioFramed-paddingInline);
-			padding-block: var(--components-radioFramed-paddingBlock);
-			padding-inline-start: var(--components-radioFramedContent-paddingInlineStart);
-		}
-
-		// TODO: Add `noOutline` to radioField component.
-		.radioField-input:focus-visible ~ .radioField-icon::after {
-			outline: none;
-		}
-
-		.radioFramed-header-input {
-			// TODO: Add `noOutline` to radioField component.
-			//@include radioField.noOutline;
-			outline: none !important;
-		}
-
 		.radioFramed-header-label {
-			// TODO: Why this position? Stray code?
-			// SEE https://github.com/LuccaSA/lucca-front/commit/2fffee9c2b2c4da66382dd402cb06f07c1d697cc#diff-14a4b831ffa478216ee60d6b62e3fe0424e83c9237b7b5331ea050af93d18d7bR9-R16
 			position: static !important;
 			font-weight: 600 !important;
 
 			&::after {
 				content: '';
 				position: absolute;
-				inset: 0;
-				width: 100%;
-				height: 100%;
+				inset: calc(var(--pr-t-spacings-50) * -1);
 			}
 		}
 
-		// Grow cards when in a flex utility.
-		// TODO: This could be a mod instead.
-		.u-displayFlex & {
-			flex-grow: 1;
+		.radioFramed-header-field {
+			position: static !important;
 		}
 
-		// Make sure to take the grid-column’s height.
-		// TODO: Decide if the component always takes the whole height, or only when checked.
-		.grid-column & {
-			// height: 100%;
+		// TODO
+		.radioFramed-header-input {
+			&:focus-visible {
+				~ .radioField-icon {
+					&::after {
+						outline: none !important;
+					}
+				}
+			}
+		}
+
+		.radioFramed-header {
+			padding: var(--components-radioFramed-padding);
+			border-radius: var(--commons-borderRadius-L);
+			background-color: var(--components-radioFramed-header-backgroundColor);
+			transition-property: background-color;
+			transition-duration: var(--commons-animations-durations-fast);
+			position: relative;
+			flex-grow: 1;
+			display: flex;
+			justify-content: space-between;
+			gap: var(--pr-t-spacings-100);
+		}
+
+		.radioFramed-header-illustration {
+			&:empty {
+				display: none;
+			}
+		}
+
+		.radioFramed-content {
+			display: var(--components-radioFramed-content-display);
+			padding: var(--components-radioFramed-padding);
+			margin-inline-start: var(--components-radioFramed-content-marginInlineStart);
 		}
 	}
+}
+
+@mixin wrapper($atRoot: namespace.$defaultAtRoot) {
+	display: flex;
+	flex-direction: column;
+	gap: var(--pr-t-spacings-150);
+	margin-block-start: var(--pr-t-spacings-50);
 }

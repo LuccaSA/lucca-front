@@ -1,12 +1,3 @@
-// TODO:
-//
-// - icon: https://www.figma.com/design/Dyq7o94fPxF7xfmPGVw7wv/Radio-framed-%E2%9C%85?node-id=1436-74974
-// - tag: https://www.figma.com/design/Dyq7o94fPxF7xfmPGVw7wv/Radio-framed-%E2%9C%85?node-id=1436-74979
-// - grid: https://www.figma.com/design/Dyq7o94fPxF7xfmPGVw7wv?node-id=1436-74952#1238462088
-// - error: https://www.figma.com/design/Dyq7o94fPxF7xfmPGVw7wv/Radio-framed-%E2%9C%85?node-id=1448-170081
-// - mod-maximised: https://www.figma.com/design/Dyq7o94fPxF7xfmPGVw7wv?node-id=1436-74952#1238418174
-// - angular component
-
 @use 'exports' as *;
 @use '@lucca-front/scss/src/commons/utils/a11y';
 
@@ -14,17 +5,17 @@
 	@include vars;
 	@include component;
 
-	&:has(.radioFramed-header-input:checked) {
-		@include open;
-		@include checked;
-	}
-
 	&.is-open {
 		@include open;
 	}
 
 	&:hover {
 		@include hover;
+	}
+
+	&:has(.radioFramed-header-input:checked) {
+		@include open;
+		@include checked;
 	}
 
 	&:has(.radioFramed-header-input:focus-visible) {
@@ -35,7 +26,20 @@
 		@include disabled;
 	}
 
+	&:has(.radioFramed-header-input[aria-invalid="true"]) {
+		@include critical;
+
+		&:hover {
+			@include criticalHover;
+		}
+	}
+
 	&.mod-maximized {
 		@include modMaximized;
 	}
+}
+
+.radioFramedWrapper {
+	@include vars;
+	@include wrapper;
 }
