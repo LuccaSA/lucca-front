@@ -30,6 +30,7 @@ export default {
 		}),
 	],
 	render: (args, { argTypes }) => {
+		const clearableProperty = args['clearable'] ? "" : 'clearable="false" ';
 		return {
 			props: {
 				simpleSelect: null,
@@ -43,16 +44,16 @@ export default {
 	<lu-checkbox-input [ngModel]="false"></lu-checkbox-input>
 </lu-filter-pill>
 <lu-filter-pill label="Légume" name="legume">
-		<lu-simple-select [(ngModel)]="simpleSelect" [options]="legumes | filterLegumes:clue" (clueChange)="clue = $event" />
+		<lu-simple-select ${clearableProperty}[(ngModel)]="simpleSelect" [options]="legumes | filterLegumes:clue" (clueChange)="clue = $event" />
 </lu-filter-pill>
 <lu-filter-pill label="Légume" name="legume">
-	<lu-multi-select [(ngModel)]="multiSelect" [clearable]="false"	[options]="legumes | filterLegumes:clue" (clueChange)="clue = $event" filterPillLabelPlural="légumes" />
+	<lu-multi-select ${clearableProperty}[(ngModel)]="multiSelect"	[options]="legumes | filterLegumes:clue" (clueChange)="clue = $event" filterPillLabelPlural="légumes" />
 </lu-filter-pill>
 <lu-filter-pill label="Date de début">
-	<lu-date-input [(ngModel)]="date" />
+	<lu-date-input ${clearableProperty}[(ngModel)]="date" />
 </lu-filter-pill>
 <lu-filter-pill label="Période">
-	<lu-date-range-input [(ngModel)]="dateRange"/>
+	<lu-date-range-input ${clearableProperty}[(ngModel)]="dateRange"/>
 </lu-filter-pill>`,
 			styles: [
 				`
@@ -66,6 +67,8 @@ export default {
 	},
 } as Meta;
 
-export const Basic: StoryObj<FilterPillComponent> = {
-	args: {},
+export const Basic: StoryObj<FilterPillComponent & {clearable: boolean}> = {
+	args: {
+		clearable: true,
+	},
 };
