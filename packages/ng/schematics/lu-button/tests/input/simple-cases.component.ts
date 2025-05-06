@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ButtonComponent } from '@lucca-front/ng/button';
+import { IconComponent } from '@lucca-front/ng/icon';
 
 @Component({
 	selector: 'lu-test',
@@ -22,7 +22,7 @@ import { ButtonComponent } from '@lucca-front/ng/button';
 		</button>
 	`,
 	imports: [
-		ButtonComponent
+		IconComponent
 	]
 })
 export class SimpleCasesComponent {
