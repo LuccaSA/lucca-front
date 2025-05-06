@@ -147,7 +147,6 @@ const basePlay = async ({ canvasElement, step }) => {
 		const allOptions = await panel.findAllByRole('option');
 		await userEvent.keyboard('{Escape}');
 		if (allOptions.some((opt) => opt.id.includes('select-all'))) {
-			console.log('WE ARE WITH SELECT ALL');
 			const valuesWithSelectAll = options.map((opt) => opt.textContent);
 			valuesWithSelectAll.splice(1, 3);
 			await checkValues(input, valuesWithSelectAll);
@@ -528,7 +527,6 @@ export const GroupByTEST = createTestStory(GroupBy, async (context) => {
 	context.step('Group select all keyboard interactions', async () => {
 		const input = within(context.canvasElement).getByRole('combobox');
 		input.focus();
-		await waitForAngular();
 		await userEvent.keyboard('{ArrowDown}');
 		await waitForAngular();
 		await userEvent.keyboard('{Enter}');

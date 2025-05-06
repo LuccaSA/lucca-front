@@ -22,6 +22,10 @@
 		&.withAddOption {
 			scroll-margin-block-end: var(--pr-t-spacings-600);
 		}
+
+		.lu-picker-content-group & {
+			scroll-margin-block-start: var(--pr-t-spacings-400);
+		}
 	}
 
 	.optionItem {
