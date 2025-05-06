@@ -77,8 +77,6 @@ export default {
 	},
 } as Meta;
 
-
-
 export const Basic: StoryObj<DateInputComponent & FormFieldComponent> = {
 	args: {
 		// FormField
@@ -121,23 +119,23 @@ export const BasicTEST = createTestStory(Basic, async ({ canvasElement, args, co
 	await waitForAngular();
 	await expectNgModelDisplay(canvasElement, new Date(today.getFullYear(), today.getMonth(), targetDay).toString());
 
-		await context.step('Invalid date', async () => {
-			await userEvent.clear(input);
-			await userEvent.type(input, 'not a date');
-			await userEvent.keyboard('{Escape}');
-			await expectNgModelDisplay(canvasElement, 'Invalid Date');
-			await expect(input).toHaveAttribute('aria-invalid', 'true');
-		});
+	await context.step('Invalid date', async () => {
+		await userEvent.clear(input);
+		await userEvent.type(input, 'not a date');
+		await userEvent.keyboard('{Escape}');
+		await expectNgModelDisplay(canvasElement, 'Invalid Date');
+		await expect(input).toHaveAttribute('aria-invalid', 'true');
+	});
 
-		await context.step('Select today after another date', async () => {
-			await userEvent.clear(input);
-			const yesterday = today.getDate() <= 1 ? 2 : today.getDate() - 1;
-			await pickDay(input, yesterday);
-			await expectNgModelDisplay(canvasElement, new Date(today.getFullYear(), today.getMonth(), yesterday).toString());
+	await context.step('Select today after another date', async () => {
+		await userEvent.clear(input);
+		const yesterday = today.getDate() <= 1 ? 2 : today.getDate() - 1;
+		await pickDay(input, yesterday);
+		await expectNgModelDisplay(canvasElement, new Date(today.getFullYear(), today.getMonth(), yesterday).toString());
 
-			await pickDay(input, today.getDate());
-			await expectNgModelDisplay(canvasElement, new Date(today.getFullYear(), today.getMonth(), today.getDate()).toString());
-		});
+		await pickDay(input, today.getDate());
+		await expectNgModelDisplay(canvasElement, new Date(today.getFullYear(), today.getMonth(), today.getDate()).toString());
+	});
 });
 
 async function pickDay(input: HTMLElement, targetDay: number) {
