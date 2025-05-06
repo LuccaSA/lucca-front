@@ -1,0 +1,27 @@
+@use 'exports' as *;
+@use '@lucca-front/scss/src/commons/utils/container';
+
+.highlightSection {
+	@include vars;
+	@include component;
+
+	&.mod-light {
+		@include light;
+	}
+
+	&.mod-dark {
+		@include dark;
+	}
+
+	&.mod-S {
+		@include S;
+	}
+
+	&.mod-XS {
+		@include XS;
+	}
+
+	@include container.max('XXXS', $name: 'highlightSection') {
+		@include narrow;
+	}
+}
