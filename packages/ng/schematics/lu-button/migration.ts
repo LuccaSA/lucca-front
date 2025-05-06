@@ -28,42 +28,67 @@ interface CssButton {
 
 export function migrateComponent(sourceFile: SourceFile, path: string, tree: Tree): string {
 	const cssButtons = findCssButtons(sourceFile, path, tree);
-	if(cssButtons.length > 0){
+	if(cssButtons.length > 0) {
 		const tsUpdate = tree.beginUpdate(path);
 		const isInlineTemplate = cssButtons[0].filePath === path;
 		const templateUpdate = isInlineTemplate ? tsUpdate : tree.beginUpdate(cssButtons[0].filePath);
-		cssButtons.forEach((icon) => {
-			/**
-			 * Remove stuff
-			 */
-			const endSpanOffset = icon.node.endSourceSpan?.start.offset || -1;
-			// Remove content if there's any (content in icon, wtf?)
-			templateUpdate.remove(icon.nodeOffset + icon.node.startSourceSpan.end.offset, endSpanOffset - icon.node.startSourceSpan.end.offset);
-			// Remove icon classes
-			templateUpdate.remove(icon.nodeOffset + icon.node.startSourceSpan.start.offset + 1, icon.node.name.length);
+		cssButtons.forEach((button) => {
+			const classesNode = button.node.attributes.find(attr => attr.name === 'class');
+			// A button without a class cannot exist so we're getting rid of that for the rest of the logic.
+			if(classesNode && classesNode.keySpan) {
+				/**
+				 * Add directive and inputs
+				 */
 
-			/**
-			 * Add stuff
-			 */
-
-			/**
-			 * Modify classes
-			 */
-			const classesNode = icon.node.attributes.find(attr => attr.name === 'class');
-			if(classesNode && classesNode.keySpan){
-				const classes = classesNode.value;
-				const cleanedClasses = classes.split(' ').filter(c => {
-					return !['lucca-icon', `icon-`, `mod-${icon.size}`].includes(c);
-				}).join(' ');
-				templateUpdate.remove(icon.nodeOffset + classesNode.keySpan.start.offset - 1, classesNode.sourceSpan.toString().length + 1);
-				if(cleanedClasses) {
-					templateUpdate.insertRight(icon.nodeOffset + classesNode.keySpan.start.offset, `class="${cleanedClasses}"`);
+				let thingsToAdd = ` luButton${button.type ? `="${button.type}"` : ""} `;
+				// Converting inputs
+				if (button.inputs.size) {
+					thingsToAdd += `size="${button.inputs.size} `;
 				}
-			}
+				if (button.inputs.state) {
+					thingsToAdd += `state="${button.inputs.state} `;
+				}
+				if (button.inputs.palette) {
+					thingsToAdd += `palette="${button.inputs.palette}" `;
+				}
+				if (button.inputs.block) {
+					thingsToAdd += "block ";
+				}
+				if (button.inputs.disclosure) {
+					thingsToAdd += "disclosure ";
+				}
 
+				// Finally, add the string to the host
+				templateUpdate.insertLeft(button.nodeOffset + classesNode.keySpan.start.offset - 1, thingsToAdd)
+
+				/**
+				 * Modify classes
+				 */
+					const classes = classesNode.value;
+					const cleanedClasses = classes.split(' ').filter(c => {
+						return ![
+							'button',
+							`mod-block`,
+							`mod-disclosure`,
+							`palette-${button.inputs.palette}`,
+							`mod-text`,
+							`mod-outlined`,
+							`mod-inverted`,
+							`mod-onlyIcon`,
+							`mod-withIcon`,
+							`is-${button.inputs.state}`,
+							`mod-delete`,
+							`mod-${button.size}`
+						].includes(c);
+					}).join(' ');
+					templateUpdate.remove(button.nodeOffset + classesNode.keySpan.start.offset - 1, classesNode.sourceSpan.toString().length + 1);
+					if (cleanedClasses) {
+						templateUpdate.insertRight(button.nodeOffset + classesNode.keySpan.start.offset,`class="${cleanedClasses}"`);
+					}
+			}
 		});
 		// Add import if needed
-		applyToUpdateRecorder(tsUpdate, [insertTSImportIfNeeded(sourceFile, path, 'IconComponent', '@lucca-front/ng/icon'), insertAngularImportIfNeeded(sourceFile, path, 'IconComponent')]);
+		applyToUpdateRecorder(tsUpdate, [insertTSImportIfNeeded(sourceFile, path, 'ButtonComponent', '@lucca-front/ng/button'), insertAngularImportIfNeeded(sourceFile, path, 'ButtonComponent')]);
 		tree.commitUpdate(tsUpdate);
 		if (!isInlineTemplate) {
 			tree.commitUpdate(templateUpdate);
@@ -82,14 +107,13 @@ function findCssButtons(sourceFile: SourceFile, basePath: string, tree: Tree): C
 			if (isInterestingNode(node) && ["button", "a"].includes(node.name)) {
 				const classes = node.attributes.find(attr => attr.name === 'class')?.value;
 				if (classes?.includes("button")) {
-						const buttonSize = classes.split(' ').find(c => /mod-(XS|S|M|L|XL|XXL)/.test(c));
 						const inputs = {
-							size: buttonSize?.replace('mod-', ''),
+							size: classes.split(' ').find(c => /mod-(XS|S|M|L|XL|XXL)/.test(c))?.replace('mod-', ''),
 							block: classes.includes(`mod-block`),
 							delete: classes.includes(`mod-delete`),
 							disclosure: classes.includes(`mod-disclosure`),
-							palette: classes.split(' ').find(c => /palette-(\w+)/.test(c)),
-							state: classes.split(' ').find(c => /is-(\w+)/.test(c)),
+							palette: classes.split(' ').find(c => /palette-(\w+)/.test(c))?.replace('palette-', ''),
+							state: classes.split(' ').find(c => /is-(\w+)/.test(c))?.replace('is-', ''),
 						};
 						const button: CssButton = {
 							node: node,
