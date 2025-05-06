@@ -5,9 +5,11 @@ import { FormsModule } from '@angular/forms';
 import { getIntl, PortalDirective } from '@lucca-front/ng/core';
 import {
 	CoreSelectKeyManager,
+	CoreSelectPanelInstance,
 	LuOptionGroup,
 	LuSelectPanelRef,
 	SELECT_ID,
+	SELECT_PANEL_INSTANCE,
 	ɵCoreSelectPanelElement,
 	ɵgetGroupTemplateLocation,
 	ɵLuOptionComponent,
@@ -19,7 +21,6 @@ import { SIMPLE_SELECT_INPUT } from '../select.model';
 import { LU_SIMPLE_SELECT_TRANSLATIONS } from '../select.translate';
 import { LuIsOptionSelectedPipe } from './option-selected.pipe';
 import { IconComponent } from '@lucca-front/ng/icon';
-import { CoreSelectPanelInstance, SELECT_PANEL_INSTANCE } from '../../core-select/panel/panel.instance';
 
 @Component({
 	selector: 'lu-select-panel',
