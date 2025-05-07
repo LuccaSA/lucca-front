@@ -1,0 +1,48 @@
+@use 'exports' as *;
+@use '@lucca-front/scss/src/commons/utils/a11y';
+
+.radioFramed {
+	@include vars;
+	@include component;
+
+	&.is-open {
+		@include open;
+	}
+
+	&:hover {
+		@include hover;
+	}
+
+	&:has(.radioFramed-header-input:checked) {
+		@include open;
+		@include checked;
+	}
+
+	&:has(.radioFramed-header-input:focus-visible) {
+		@include a11y.focusVisible;
+	}
+
+	&:has(.radioFramed-header-input[aria-invalid="true"]) {
+		@include critical;
+
+		&:hover {
+			@include criticalHover;
+		}
+	}
+
+	&:has(.radioFramed-header-input:disabled) {
+		&,
+		&:hover {
+			@include disabled;
+		}
+	}
+
+	&.mod-maximized {
+		@include modMaximized;
+	}
+}
+
+.radioFramedWrapper {
+	@include vars;
+	@include wrapper;
+}

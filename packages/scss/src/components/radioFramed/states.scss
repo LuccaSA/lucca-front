@@ -1,0 +1,27 @@
+@mixin open {
+	--components-radioFramed-content-display: block;
+	--components-radioFramed-header-backgroundColor: var(--palettes-product-50);
+}
+
+@mixin hover {
+	--components-radioFramed-boxShadow: var(--pr-t-elevation-shadow-raised);
+}
+
+@mixin disabled {
+	--components-radioFramed-header-backgroundColor: var(--palettes-neutral-25);
+	--components-radioFramed-header-borderColor: var(--palettes-neutral-50);
+	--components-radioFramed-boxShadow: none;
+	--components-radioFramed-borderColor: var(--palettes-neutral-300);
+}
+
+@mixin checked {
+	--components-radioFramed-borderColor: var(--palettes-product-300);
+}
+
+@mixin critical {
+	--components-radioFramed-borderColor: var(--pr-t-color-input-border-critical);
+}
+
+@mixin criticalHover {
+	--components-radioFramed-borderColor: var(--pr-t-color-input-border-critical-hover);
+}

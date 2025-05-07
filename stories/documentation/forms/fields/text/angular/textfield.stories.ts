@@ -17,6 +17,9 @@ export default {
 		tooltip: {
 			type: 'string',
 		},
+		tag: {
+			type: 'string',
+		},
 		size: {
 			options: ['M', 'S', 'XS'],
 			control: {
@@ -60,13 +63,14 @@ export default {
 
 export const Basic: StoryObj<TextInputComponent & { disabled: boolean; required: boolean } & FormFieldComponent> = {
 	render: (args, { argTypes }) => {
-		const { counter, label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, width, ...inputArgs } = args;
+		const { counter, label, hiddenLabel, tooltip, tag, inlineMessage, inlineMessageState, size, width, ...inputArgs } = args;
 		return {
 			template: cleanupTemplate(`<lu-form-field ${generateInputs(
 				{
 					label,
 					hiddenLabel,
 					tooltip,
+					tag,
 					inlineMessage,
 					inlineMessageState,
 					size,
@@ -100,6 +104,7 @@ export const Basic: StoryObj<TextInputComponent & { disabled: boolean; required:
 		type: 'text',
 		placeholder: 'Placeholder',
 		tooltip: 'Je suis un message d’aide',
+		tag: '',
 		counter: 0,
 		valueAlignRight: false,
 	},
