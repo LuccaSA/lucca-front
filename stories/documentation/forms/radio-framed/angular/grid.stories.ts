@@ -32,7 +32,7 @@ export default {
 			<lu-radio class="grid-column" value="A" [attr.style]="'--grid-colspanAtMediaMinXXS: 1'">Option A</lu-radio>
 			<lu-radio class="grid-column" value="B" [attr.style]="'--grid-colspanAtMediaMinXXS: 1'">Option B</lu-radio>
 			<lu-radio class="grid-column" value="C" [attr.style]="'--grid-colspanAtMediaMinXXS: 1'">Option C</lu-radio>
-			<lu-radio class="grid-column" value="D" [attr.style]="'--grid-colspanAtMediaMinXXS: 1'">Option D</lu-radio>
+			<lu-radio class="grid-column" value="D" [attr.style]="'--grid-colspanAtMediaMinXXS: 1'">Option D<br />Option D</lu-radio>
 		</div>
 	</lu-radio-group-input>
 </lu-form-field>

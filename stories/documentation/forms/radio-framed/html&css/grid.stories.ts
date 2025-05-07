@@ -106,6 +106,7 @@ export default {
 				<div class="radioFramed-header">
 					<div class="form-field radioFramed-header-field">
 						<label class="formLabel radioFramed-header-label" id="radioDlabel" for="optionD">
+							Option D<br />
 							Option D
 						</label>
 						<span class="radioField">
