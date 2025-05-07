@@ -15,9 +15,9 @@
 	flex-direction: column;
 
 	@at-root ($atRoot) {
-		.radioFramed-header-label {
-			position: static !important;
-			font-weight: 600 !important;
+		.radioFramed-header-label.formLabel {
+			position: static;
+			font-weight: 600;
 
 			&::after {
 				content: '';
@@ -26,17 +26,14 @@
 			}
 		}
 
-		.radioFramed-header-field {
-			position: static !important;
+		.radioFramed-header-field.form-field {
+			position: static;
 		}
 
-		// TODO
-		.radioFramed-header-input {
-			&:focus-visible {
-				~ .radioField-icon {
-					&::after {
-						outline: none !important;
-					}
+		.radioFramed-header-input.radioField-input {
+			~ .radioFramed-header-icon.radioField-icon {
+				&::after {
+					outline: none;
 				}
 			}
 		}

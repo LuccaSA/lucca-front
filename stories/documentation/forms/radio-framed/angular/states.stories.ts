@@ -17,15 +17,18 @@ export default {
 	render: (args: RadioFramedBasicStory) => {
 		return {
 			template: cleanupTemplate(`
-<lu-form-field label="Label">
-	<lu-radio-group-input [(ngModel)]="example" framed required>
-		<lu-radio value="A">Option A</lu-radio>
-		<lu-radio value="B" disabled>Option B</lu-radio>
-	</lu-radio-group-input>
-</lu-form-field>
+	<lu-form-field label="Label">
+		<lu-radio-group-input [(ngModel)]="example" framed required>
+			<lu-radio value="A">Option A</lu-radio>
+			<lu-radio value="B" disabled>Option B</lu-radio>
+			<lu-radio value="C">Option C</lu-radio>
+		</lu-radio-group-input>
+	</lu-form-field>
 `),
 		};
 	},
 } as Meta;
 
-export const Basic = {};
+export const Basic = {
+	args: {},
+};

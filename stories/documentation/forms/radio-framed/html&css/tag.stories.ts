@@ -30,4 +30,6 @@ export default {
 	},
 } as Meta;
 
-export const Basic = {};
+export const Basic = {
+	args: {},
+};
