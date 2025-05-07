@@ -22,15 +22,18 @@
 		@include a11y.focusVisible;
 	}
 
-	&:has(.radioFramed-header-input:disabled) {
-		@include disabled;
-	}
-
 	&:has(.radioFramed-header-input[aria-invalid="true"]) {
 		@include critical;
 
 		&:hover {
 			@include criticalHover;
+		}
+	}
+
+	&:has(.radioFramed-header-input:disabled) {
+		&,
+		&:hover {
+			@include disabled;
 		}
 	}
 

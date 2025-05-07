@@ -1,6 +1,3 @@
-
-@use '@lucca-front/scss/src/components/formLabel/exports' as formLabel;
-
 @mixin open {
 	--components-radioFramed-content-display: block;
 	--components-radioFramed-header-backgroundColor: var(--palettes-product-50);
@@ -14,6 +11,7 @@
 	--components-radioFramed-header-backgroundColor: var(--palettes-neutral-25);
 	--components-radioFramed-header-borderColor: var(--palettes-neutral-50);
 	--components-radioFramed-boxShadow: none;
+	--components-radioFramed-borderColor: var(--palettes-neutral-300);
 }
 
 @mixin checked {
@@ -22,10 +20,6 @@
 
 @mixin critical {
 	--components-radioFramed-borderColor: var(--pr-t-color-input-border-critical);
-
-	.formLabel {
-		@include formLabel.error;
-	}
 }
 
 @mixin criticalHover {
