@@ -40,7 +40,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 
 	protected coreIntl = getIntl(LU_CORE_SELECT_TRANSLATIONS);
 
-	protected filterPillHost = inject(FILTER_PILL_HOST_COMPONENT);
+	protected filterPillHost = inject(FILTER_PILL_HOST_COMPONENT, { optional: true });
 	protected afterCloseFn?: () => void;
 	protected updatePositionFn?: () => void;
 	protected filterPillMode = false;
