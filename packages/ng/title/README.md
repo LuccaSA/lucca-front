@@ -1,6 +1,4 @@
-# Page titles
-
-## Usage
+### Usage
 
 Add `title` properties in your routes config:
 
@@ -49,7 +47,7 @@ const selectedUser$ = this.userStore.selected$;
 this.luTitleStrategy.prependTitle(selectedUser$);
 ```
 
-## Quickstart
+### Quickstart
 
 You will need to:
 
@@ -64,7 +62,7 @@ provideLuTitleStrategy({
 }),
 ```
 
-### Let's start by creating the service
+#### Let's start by creating the service
 
 `YourAppNameTranslateService` be used in combination with the token `LU_TITLE_TRANSLATE_SERVICE`.
 
@@ -94,7 +92,7 @@ export class CoreRhTranslateService implements ILuTitleTranslateService {
 }
 ```
 
-### Adapt `app.module.ts` config
+#### Adapt `app.module.ts` config
 
 In the `app.module.ts`, you need to call `provideLuTitleStrategy` in the `providers` array:
 
