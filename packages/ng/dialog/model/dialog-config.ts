@@ -16,7 +16,7 @@ export type LuDialogData<T> = {
 type DialogRefProps<C> = { [K in keyof C]: C[K] extends ɵDialogResultFlag<unknown> ? K : never }[keyof C] & keyof C;
 export type LuDialogResult<C> = DialogRefProps<C> extends never ? void : C[DialogRefProps<C>] extends ɵDialogResultFlag<infer T> ? T : void;
 
-interface BaseLuDialogConfig<C> {
+interface BaseLuDialogConfig<C, TData = LuDialogData<C>> {
 	/**
 	 * The component or template to put inside the dialog container
 	 */
@@ -25,7 +25,7 @@ interface BaseLuDialogConfig<C> {
 	/**
 	 * Data to pass to the component, will be required if the component used `injectDialogData` in a field, specifying the data that's needed.
 	 */
-	data: LuDialogData<C>;
+	data: TData;
 
 	/**
 	 * Should we put a backdrop? Defaults to true
@@ -90,4 +90,4 @@ interface BaseLuDialogConfig<C> {
 	panelClasses?: string[];
 }
 
-export type LuDialogConfig<T> = LuDialogData<T> extends never ? Omit<BaseLuDialogConfig<T>, 'data'> : BaseLuDialogConfig<T>;
+export type LuDialogConfig<T, TData = LuDialogData<T>> = TData extends never ? Omit<BaseLuDialogConfig<T, TData>, 'data'> : BaseLuDialogConfig<T, TData>;
