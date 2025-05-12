@@ -1,12 +1,12 @@
 import { Meta } from '@storybook/angular';
 import { cleanupTemplate } from 'stories/helpers/stories';
 
-interface RadioFramedPanelsStory {}
+interface RadioFramedInfosStory {}
 
 export default {
-	title: 'Documentation/Forms/Radio Framed/HTML&CSS/Panels',
+	title: 'Documentation/Forms/Radio Framed/HTML&CSS/Infos',
 	argTypes: {},
-	render: (args: RadioFramedPanelsStory) => {
+	render: (args: RadioFramedInfosStory) => {
 		return {
 			template: cleanupTemplate(`
 <div class="radioFramedWrapper">
@@ -23,8 +23,8 @@ export default {
 					</span>
 				</span>
 			</div>
+			<div class="radioFramed-header-info">Lorem ipsum dolor</div>
 		</div>
-		<div class="radioFramed-content">Lorem ipsum dolor</div>
 	</div>
 	<div class="radioFramed">
 		<div class="radioFramed-header">
@@ -39,8 +39,8 @@ export default {
 					</span>
 				</span>
 			</div>
+			<div class="radioFramed-header-info">Lorem ipsum dolor</div>
 		</div>
-		<div class="radioFramed-content">Lorem <strong>ipsum</strong> dolor</div>
 	</div>
 </div>
 `),

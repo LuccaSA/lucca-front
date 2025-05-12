@@ -17,12 +17,14 @@ export default {
 	argTypes: {},
 	render: (args: RadioFramedBasicStory) => {
 		return {
+			props: { example: 'B' },
 			template: cleanupTemplate(`
 	<lu-form-field label="Label" errorInlineMessage="Error inline message">
 		<lu-radio-group-input [(ngModel)]="example" framed required>
-			<lu-radio [value]="1">Option A</lu-radio>
-			<lu-radio [value]="2" disabled>Option B</lu-radio>
-			<lu-radio [value]="3">Option C</lu-radio>
+			<lu-radio [value]="'A'">Option A</lu-radio>
+			<lu-radio [value]="'B'">Option B</lu-radio>
+			<lu-radio [value]="'C'" disabled>Option C</lu-radio>
+			<lu-radio [value]="'D'">Option D</lu-radio>
 		</lu-radio-group-input>
 	</lu-form-field>
 `),

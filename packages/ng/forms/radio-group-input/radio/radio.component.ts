@@ -38,12 +38,6 @@ export class RadioComponent<T = unknown> implements OnChanges {
 	@Input()
 	framedPortal: PortalContent;
 
-	@Input({ transform: booleanAttribute })
-	framedOpen = false;
-
-	@Input({ transform: booleanAttribute })
-	framedMaximized = false;
-
 	public get arrow() {
 		return this.#parentGroup.arrow;
 	}

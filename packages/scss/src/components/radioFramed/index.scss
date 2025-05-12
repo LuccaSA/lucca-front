@@ -5,17 +5,16 @@
 	@include vars;
 	@include component;
 
-	&.is-open {
-		@include open;
-	}
-
 	&:hover {
 		@include hover;
 	}
 
 	&:has(.radioFramed-header-input:checked) {
-		@include open;
 		@include checked;
+
+		&:hover {
+			@include checkedHover;
+		}
 	}
 
 	&:has(.radioFramed-header-input:focus-visible) {
@@ -35,10 +34,6 @@
 		&:hover {
 			@include disabled;
 		}
-	}
-
-	&.mod-maximized {
-		@include modMaximized;
 	}
 }
 

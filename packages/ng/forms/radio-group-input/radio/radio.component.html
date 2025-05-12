@@ -31,12 +31,13 @@
 	}
 </ng-template>
 @if (framed) {
-<div class="radioFramed" [class.is-open]="framedOpen" [class.mod-maximized]="framedMaximized">
+<div class="radioFramed">
 	<div class="radioFramed-header">
 		<div class="form-field radioFramed-header-field">
 			<ng-container *ngTemplateOutlet="radioContent" />
 		</div>
 		<div class="radioFramed-header-illustration"><ng-content select="[illustration]" /></div>
+		<div class="radioFramed-header-info"><ng-content select="[info]" /></div>
 	</div>
 	@if (framedPortal) {
 	<div class="radioFramed-content"><ng-container *luPortal="framedPortal" /></div>

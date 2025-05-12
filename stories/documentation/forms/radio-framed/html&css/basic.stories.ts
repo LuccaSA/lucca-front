@@ -22,6 +22,9 @@ export default {
 						<span class="radioField-icon-check"></span>
 					</span>
 				</span>
+				<div class="inlineMessage">
+					<p class="inlineMessage-content">Lorem ipsum dolor</p>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -37,6 +40,9 @@ export default {
 						<span class="radioField-icon-check"></span>
 					</span>
 				</span>
+				<div class="inlineMessage">
+					<p class="inlineMessage-content">Lorem ipsum dolor</p>
+				</div>
 			</div>
 		</div>
 	</div>

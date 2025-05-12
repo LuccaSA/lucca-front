@@ -5,10 +5,7 @@ import { IconComponent } from '@lucca-front/ng/icon';
 import { Meta, moduleMetadata } from '@storybook/angular';
 import { cleanupTemplate } from 'stories/helpers/stories';
 
-interface RadioFramedPanelsStory {
-	panelAforced: boolean;
-	panelAmaximized: boolean;
-}
+interface RadioFramedPanelsStory {}
 
 export default {
 	title: 'Documentation/Forms/Radio Framed/Angular/Panels',
@@ -19,14 +16,12 @@ export default {
 	],
 	argTypes: {},
 	render: (args: RadioFramedPanelsStory) => {
-		const openPanelForced = args.panelAforced ? `framedOpen` : ``;
-		const maximizedPanel = args.panelAmaximized ? `framedMaximized` : ``;
 		return {
 			template: cleanupTemplate(`
 <ng-template #optionBportal>Lorem <strong>ipsum</strong> dolor</ng-template>
 <lu-form-field label="Label">
 	<lu-radio-group-input [(ngModel)]="example" framed>
-		<lu-radio value="A" ${openPanelForced} ${maximizedPanel} framedPortal="Lorem ipsum dolor">Option A</lu-radio>
+		<lu-radio value="A" framedPortal="Lorem ipsum dolor">Option A</lu-radio>
 		<lu-radio value="B" [framedPortal]="optionBportal">Option B</lu-radio>
 	</lu-radio-group-input>
 </lu-form-field>
@@ -36,8 +31,5 @@ export default {
 } as Meta;
 
 export const Basic = {
-	args: {
-		panelAforced: false,
-		panelAmaximized: false,
-	},
+	args: {},
 };

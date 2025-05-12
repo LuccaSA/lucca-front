@@ -17,7 +17,7 @@ export default {
 					Option A
 				</label>
 				<span class="radioField">
-					<input type="radio" class="radioField-input radioFramed-header-input" aria-labelledby="radioAlabel" id="optionA" name="radioGroup" />
+					<input checked="checked" type="radio" class="radioField-input radioFramed-header-input" aria-labelledby="radioAlabel" id="optionA" name="radioGroup" />
 					<span aria-hidden="true" class="radioField-icon">
 						<span class="radioField-icon-check"></span>
 					</span>
@@ -32,7 +32,7 @@ export default {
 					Option B
 				</label>
 				<span class="radioField">
-					<input disabled="disabled" type="radio" class="radioField-input radioFramed-header-input" aria-labelledby="radioBlabel" id="optionB" name="radioGroup" />
+					<input checked="checked" type="radio" class="radioField-input radioFramed-header-input" aria-labelledby="radioBlabel" id="optionB" name="radioGroup" />
 					<span aria-hidden="true" class="radioField-icon">
 						<span class="radioField-icon-check"></span>
 					</span>
@@ -47,7 +47,22 @@ export default {
 					Option C
 				</label>
 				<span class="radioField">
-					<input aria-invalid="true" type="radio" class="radioField-input radioFramed-header-input" aria-labelledby="radioClabel" id="optionC" name="radioGroup" />
+					<input disabled="disabled" type="radio" class="radioField-input radioFramed-header-input" aria-labelledby="radioClabel" id="optionC" name="radioGroup" />
+					<span aria-hidden="true" class="radioField-icon">
+						<span class="radioField-icon-check"></span>
+					</span>
+				</span>
+			</div>
+		</div>
+	</div>
+	<div class="radioFramed">
+		<div class="radioFramed-header">
+			<div class="form-field radioFramed-header-field">
+				<label class="formLabel radioFramed-header-label" id="radioDlabel" for="optionD">
+					Option D
+				</label>
+				<span class="radioField">
+					<input aria-invalid="true" type="radio" class="radioField-input radioFramed-header-input" aria-labelledby="radioDlabel" id="optionD" name="radioGroup" />
 					<span aria-hidden="true" class="radioField-icon">
 						<span class="radioField-icon-check"></span>
 					</span>

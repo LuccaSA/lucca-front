@@ -1,26 +1,33 @@
 import { FormsModule } from '@angular/forms';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { RadioComponent, RadioGroupInputComponent } from '@lucca-front/ng/forms';
+import { IconComponent } from '@lucca-front/ng/icon';
 import { Meta, moduleMetadata } from '@storybook/angular';
 import { cleanupTemplate } from 'stories/helpers/stories';
 
-interface RadioFramedBasicStory {}
+interface RadioFramedInfosStory {}
 
 export default {
-	title: 'Documentation/Forms/Radio Framed/Angular/Basic',
+	title: 'Documentation/Forms/Radio Framed/Angular/Infos',
 	decorators: [
 		moduleMetadata({
-			imports: [FormFieldComponent, RadioGroupInputComponent, RadioComponent, FormsModule],
+			imports: [FormFieldComponent, RadioGroupInputComponent, RadioComponent, FormsModule, IconComponent],
 		}),
 	],
 	argTypes: {},
-	render: (args: RadioFramedBasicStory) => {
+	render: (args: RadioFramedInfosStory) => {
 		return {
 			template: cleanupTemplate(`
 <lu-form-field label="Label">
 	<lu-radio-group-input [(ngModel)]="example" framed>
-		<lu-radio value="A" inlineMessage="Lorem ipsum dolor">Option A</lu-radio>
-		<lu-radio value="B" inlineMessage="Lorem ipsum dolor">Option B</lu-radio>
+		<lu-radio value="A">
+			Option A
+			<ng-container info>Lorem ipsum dolor</ng-container>
+		</lu-radio>
+		<lu-radio value="B">
+			Option B
+			<ng-container info>Lorem ipsum dolor</ng-container>
+		</lu-radio>
 	</lu-radio-group-input>
 </lu-form-field>
 `),
