@@ -3,7 +3,7 @@
 @mixin component($atRoot: namespace.$defaultAtRoot) {
 	display: flex;
 	align-items: center;
-	gap: var(--pr-t-spacings-150);
+	gap: var(--components-userTile-gap);
 	overflow-wrap: break-word;
 
 	.avatar {
