@@ -90,4 +90,4 @@ interface BaseLuDialogConfig<C, TData = LuDialogData<C>> {
 	panelClasses?: string[];
 }
 
-export type LuDialogConfig<T, TData = LuDialogData<T>> = TData extends never ? Omit<BaseLuDialogConfig<T, TData>, 'data'> : BaseLuDialogConfig<T, TData>;
+export type LuDialogConfig<T, TData = LuDialogData<T>> = [TData] extends [never] ? Omit<BaseLuDialogConfig<T, TData>, 'data'> : BaseLuDialogConfig<T, TData>;
