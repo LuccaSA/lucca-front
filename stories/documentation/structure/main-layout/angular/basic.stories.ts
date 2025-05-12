@@ -9,6 +9,8 @@ interface MainLayoutAngularBasicStory {
 	headerSticky: boolean;
 	footerSticky: boolean;
 	contentWithScroll: boolean;
+	asideWithScroll: boolean;
+	navSideWithScroll: boolean;
 	aside: boolean;
 }
 
@@ -21,6 +23,9 @@ export default {
 		footerSticky: {
 			if: { arg: 'footer', truthy: true },
 		},
+		asideWithScroll: {
+			if: { arg: 'aside', truthy: true },
+		},
 	},
 	decorators: [
 		moduleMetadata({
@@ -28,12 +33,15 @@ export default {
 		}),
 	],
 	render: (args: MainLayoutAngularBasicStory) => {
-		const asideContainer = args.aside ? `<ng-container mainLayoutAside>aside</ng-container>` : ``;
 		const headerContainer = args.header ? `<ng-container mainLayoutHeader><div>header</div></ng-container>` : ``;
 		const footerContainer = args.footer ? `<ng-container mainLayoutFooter><div>footer</div></ng-container>` : ``;
 		const headerStickyParam = args.headerSticky ? `headerSticky` : ``;
 		const footerStickyParam = args.footerSticky ? `footerSticky` : ``;
-		const img = args.contentWithScroll ? `<img src="https://dummyimage.com/200x1000" class="u-displayBlock" alt="" />` : ``;
+		const img = `<img src="https://dummyimage.com/200x1000" class="u-displayBlock" alt="" />`;
+		const contentImg = args.contentWithScroll ? img : ``;
+		const asideImg = args.asideWithScroll ? img : ``;
+		const navSideImg = args.navSideWithScroll ? img : ``;
+		const asideContainer = args.aside ? `<ng-container mainLayoutAside>aside${asideImg}</ng-container>` : ``;
 		return {
 			styles: [
 				`
@@ -53,12 +61,15 @@ export default {
 			],
 			template: cleanupTemplate(`<lu-page-layout>
 	<ng-container pageLayoutBanner>banner</ng-container>
-	<ng-container pageLayoutNavSide>navSide</ng-container>
+	<ng-container pageLayoutNavSide>
+		navSide
+		${navSideImg}
+	</ng-container>
 	<lu-main-layout ${headerStickyParam} ${footerStickyParam}>
 		${asideContainer}
 		${headerContainer}
 		content
-		${img}
+		${contentImg}
 		${footerContainer}
 	</lu-main-layout>
 </lu-page-layout>`),
@@ -68,11 +79,13 @@ export default {
 
 export const Basic = {
 	args: {
-		contentWithScroll: false,
 		header: false,
 		headerSticky: false,
 		footer: false,
 		footerSticky: false,
 		aside: false,
+		asideWithScroll: false,
+		contentWithScroll: false,
+		navSideWithScroll: false,
 	},
 };

@@ -9,6 +9,7 @@ interface MainLayoutHTMLBasicStory {
 	footerSticky: boolean;
 	contentWithScroll: boolean;
 	asideWithScroll: boolean;
+	navSideWithScroll: boolean;
 }
 
 export default {
@@ -29,8 +30,10 @@ export default {
 		const footerContent = args.footer && !args.footerSticky ? `<div>footer</div>` : ``;
 		const headerContainer = args.header && args.headerSticky ? `<div class="mainLayout-header"><div>header</div></div>` : ``;
 		const footerContainer = args.footer && args.footerSticky ? `<div class="mainLayout-footer"><div>footer</div></div>` : ``;
-		const imgAside = args.asideWithScroll ? `<img src="https://dummyimage.com/200x1000" class="u-displayBlock" alt="" />` : ``;
-		const imgContent = args.contentWithScroll ? `<img src="https://dummyimage.com/200x1000" class="u-displayBlock" alt="" />` : ``;
+		const img = `<img src="https://dummyimage.com/200x1000" class="u-displayBlock" alt="" />`;
+		const imgAside = args.asideWithScroll ? img : ``;
+		const imgContent = args.contentWithScroll ? img : ``;
+		const imgNavSide = args.navSideWithScroll ? img : ``;
 		const asideContainer = args.aside ? `<div class="mainLayout-aside">aside${imgAside}</div>` : ``;
 		return {
 			styles: [
@@ -50,7 +53,10 @@ export default {
 			template: cleanupTemplate(`
 <div class="pageLayout">
 	<div class="pageLayout-banner">banner</div>
-	<div class="pageLayout-navSide">navSide</div>
+	<div class="pageLayout-navSide">
+		navSide
+		${imgNavSide}
+	</div>
 	<div class="pageLayout-main">
 		<main role="main" class="mainLayout">
 			${headerContainer}
@@ -79,5 +85,6 @@ export const Basic = {
 		aside: false,
 		asideWithScroll: false,
 		contentWithScroll: false,
+		navSideWithScroll: false,
 	},
 };
