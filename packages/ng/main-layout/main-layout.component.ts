@@ -1,4 +1,3 @@
-import { NgTemplateOutlet } from '@angular/common';
 import { booleanAttribute, Component, input, ViewEncapsulation } from '@angular/core';
 
 @Component({
@@ -7,7 +6,6 @@ import { booleanAttribute, Component, input, ViewEncapsulation } from '@angular/
 	styleUrls: ['./main-layout.component.scss'],
 	templateUrl: './main-layout.component.html',
 	encapsulation: ViewEncapsulation.None,
-	imports: [NgTemplateOutlet],
 	host: {
 		class: 'mainLayout',
 		role: 'main',

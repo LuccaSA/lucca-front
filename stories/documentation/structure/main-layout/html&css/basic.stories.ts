@@ -26,46 +26,52 @@ export default {
 		},
 	},
 	render: (args: MainLayoutHTMLBasicStory) => {
-		const headerContent = args.header && !args.headerSticky ? `<div>header</div>` : ``;
-		const footerContent = args.footer && !args.footerSticky ? `<div>footer</div>` : ``;
-		const headerContainer = args.header && args.headerSticky ? `<div class="mainLayout-header"><div>header</div></div>` : ``;
-		const footerContainer = args.footer && args.footerSticky ? `<div class="mainLayout-footer"><div>footer</div></div>` : ``;
+		const stickyHeader = args.headerSticky ? `mod-sticky` : ``;
+		const stickyFooter = args.footerSticky ? `mod-sticky` : ``;
 		const img = `<img src="https://dummyimage.com/200x1000" class="u-displayBlock" alt="" />`;
 		const imgAside = args.asideWithScroll ? img : ``;
 		const imgContent = args.contentWithScroll ? img : ``;
 		const imgNavSide = args.navSideWithScroll ? img : ``;
+		const headerContainer = args.header ? `<div class="mainLayout-header ${stickyHeader}">header</div>` : ``;
+		const footerContainer = args.footer ? `<div class="mainLayout-footer ${stickyFooter}">footer</div>` : ``;
 		const asideContainer = args.aside ? `<div class="mainLayout-aside">aside${imgAside}</div>` : ``;
 		return {
 			styles: [
 				`
-.pageLayout {
-	block-size: 25rem;
+.bodyLayout {
+	--components-bodyLayout-minBlockSize: 25rem;
+	block-size: var(--components-bodyLayout-minBlockSize);
+	overflow: auto;
+	border: 1px dashed;
+	box-sizing: content-box;
 }
-.pageLayout-banner {
+.bodyLayout-banner {
 	background-color: var(--palettes-neutral-0)
 }
-.pageLayout-navSide {
+.bodyLayout-navSide {
 	background-color: var(--palettes-navigation-800);
 	color: var(--palettes-neutral-0)
+}
+.mainLayout-header,
+.mainLayout-footer {
+	background-color: var(--pr-t-elevation-surface-default);
 }
 				`,
 			],
 			template: cleanupTemplate(`
-<div class="pageLayout">
-	<div class="pageLayout-banner">banner</div>
-	<div class="pageLayout-navSide">
+<div class="bodyLayout">
+	<div class="bodyLayout-banner">banner</div>
+	<div class="bodyLayout-navSide">
 		navSide
 		${imgNavSide}
 	</div>
-	<div class="pageLayout-main">
+	<div class="bodyLayout-main">
 		<main role="main" class="mainLayout">
 			${headerContainer}
 			${asideContainer}
 			<div class="mainLayout-content">
-				${headerContent}
 				content
 				${imgContent}
-				${footerContent}
 			</div>
 			${footerContainer}
 		</main>

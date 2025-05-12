@@ -3,12 +3,21 @@
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
 	display: grid;
-	grid-template: var(--components-mainLayoutGridTemplate);
+	grid-template: var(--components-mainLayout-gridTemplate);
 	height: 100%;
 
 	@at-root ($atRoot) {
 		.mainLayout-header {
 			grid-area: header;
+
+			&.mod-sticky {
+				position: sticky;
+				inset-block-start: var(--components-mainLayout-header-insetBlockStart);
+			}
+
+			&:empty {
+				display: none;
+			}
 		}
 
 		.mainLayout-content {
@@ -18,19 +27,27 @@
 
 		.mainLayout-aside {
 			grid-area: aside;
-			overflow-y: auto;
 			overflow-x: hidden;
+			overflow-y: auto;
+			position: sticky;
+			block-size: var(--components-mainLayout-aside-blockSize);
+			inset-block-start: var(--components-mainLayout-header-insetBlockStart);
+
+			&:empty {
+				display: none;
+			}
 		}
 
 		.mainLayout-footer {
 			grid-area: footer;
-		}
 
-		.mainLayout-header,
-		.mainLayout-footer,
-		.mainLayout-aside {
 			&:empty {
 				display: none;
+			}
+
+			&.mod-sticky {
+				position: sticky;
+				inset-block-end: var(--components-bodyLayout-after);
 			}
 		}
 	}

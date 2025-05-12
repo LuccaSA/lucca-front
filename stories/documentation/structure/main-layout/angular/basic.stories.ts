@@ -1,5 +1,5 @@
+import { BodyLayoutComponent } from '@lucca-front/ng/body-layout';
 import { MainLayoutComponent } from '@lucca-front/ng/main-layout';
-import { PageLayoutComponent } from '@lucca-front/ng/page-layout';
 import { Meta, moduleMetadata } from '@storybook/angular';
 import { cleanupTemplate } from 'stories/helpers/stories';
 
@@ -29,12 +29,12 @@ export default {
 	},
 	decorators: [
 		moduleMetadata({
-			imports: [MainLayoutComponent, PageLayoutComponent],
+			imports: [MainLayoutComponent, BodyLayoutComponent],
 		}),
 	],
 	render: (args: MainLayoutAngularBasicStory) => {
-		const headerContainer = args.header ? `<ng-container mainLayoutHeader><div>header</div></ng-container>` : ``;
-		const footerContainer = args.footer ? `<ng-container mainLayoutFooter><div>footer</div></ng-container>` : ``;
+		const headerContainer = args.header ? `<ng-container mainLayoutHeader>header</ng-container>` : ``;
+		const footerContainer = args.footer ? `<ng-container mainLayoutFooter>footer</ng-container>` : ``;
 		const headerStickyParam = args.headerSticky ? `headerSticky` : ``;
 		const footerStickyParam = args.footerSticky ? `footerSticky` : ``;
 		const img = `<img src="https://dummyimage.com/200x1000" class="u-displayBlock" alt="" />`;
@@ -46,22 +46,30 @@ export default {
 			styles: [
 				`
 :host ::ng-deep {
-	.pageLayout {
-		block-size: 25rem;
+	.bodyLayout {
+		--components-bodyLayout-minBlockSize: 25rem;
+		block-size: var(--components-bodyLayout-minBlockSize);
+		overflow: auto;
+		border: 1px dashed;
+		box-sizing: content-box;
 	}
-	.pageLayout-banner {
+	.bodyLayout-banner {
 		background-color: var(--palettes-neutral-0)
 	}
-	.pageLayout-navSide {
+	.bodyLayout-navSide {
 		background-color: var(--palettes-navigation-800);
 		color: var(--palettes-neutral-0)
+	}
+	.mainLayout-header,
+	.mainLayout-footer {
+		background-color: var(--pr-t-elevation-surface-default);
 	}
 }
 				`,
 			],
-			template: cleanupTemplate(`<lu-page-layout>
-	<ng-container pageLayoutBanner>banner</ng-container>
-	<ng-container pageLayoutNavSide>
+			template: cleanupTemplate(`<lu-body-layout>
+	<ng-container bodyLayoutBanner>banner</ng-container>
+	<ng-container bodyLayoutNavSide>
 		navSide
 		${navSideImg}
 	</ng-container>
@@ -72,7 +80,7 @@ export default {
 		${contentImg}
 		${footerContainer}
 	</lu-main-layout>
-</lu-page-layout>`),
+</lu-body-layout>`),
 		};
 	},
 } as Meta;

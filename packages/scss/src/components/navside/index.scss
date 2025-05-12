@@ -6,6 +6,8 @@
 	@include vars;
 	@include component;
 
+	outline: 5px solid orange !important;
+
 	&.mod-withBanner {
 		@include banner;
 	}

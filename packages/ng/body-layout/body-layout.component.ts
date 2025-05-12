@@ -1,16 +1,16 @@
 import { booleanAttribute, Component, HostBinding, input, ViewEncapsulation } from '@angular/core';
 
 @Component({
-	selector: 'lu-page-layout',
+	selector: 'lu-body-layout',
 	standalone: true,
-	styleUrls: ['./page-layout.component.scss'],
-	templateUrl: './page-layout.component.html',
+	styleUrls: ['./body-layout.component.scss'],
+	templateUrl: './body-layout.component.html',
 	encapsulation: ViewEncapsulation.None,
 	host: {
-		class: 'pageLayout',
+		class: 'bodyLayout',
 	},
 })
-export class PageLayoutComponent {
+export class BodyLayoutComponent {
 	mobileNavSideBottom = input(false, { transform: booleanAttribute });
 
 	@HostBinding('class.mod-mobileNavSideBottom')

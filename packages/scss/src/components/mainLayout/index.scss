@@ -1,4 +1,5 @@
 @use 'exports' as *;
+@use '@lucca-front/scss/src/commons/utils/media';
 
 .mainLayout {
 	@include vars;
@@ -6,5 +7,13 @@
 
 	&:has(.mainLayout-aside:not(:empty)) {
 		@include aside;
+	}
+
+	@include media.min('S') {
+		@include wide;
+
+		&:has(.mainLayout-aside:not(:empty)) {
+			@include asideWide;
+		}
 	}
 }
