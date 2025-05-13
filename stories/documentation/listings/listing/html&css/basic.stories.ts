@@ -66,7 +66,7 @@ export default {
 			<span class="listing-item-icon lucca-icon mod-S" aria-hidden="true"></span>
 			<div class="listing-item-content">
 				item
-				<ul class="listing mod-checklist">
+				<ul class="listing mod-checklist palette-pagga">
 					<li class="listing-item">
 							<span class="listing-item-icon lucca-icon mod-S" aria-hidden="true"></span>
 							<div class="listing-item-content">
@@ -85,7 +85,7 @@ export default {
 							item
 							<ul class="listing mod-icons">
 								<li class="listing-item">
-										<span class="listing-item-icon lucca-icon mod-S" aria-hidden="true"></span>
+										<span class="listing-item-icon lucca-icon mod-S palette-success" aria-hidden="true"></span>
 										<span class="u-mask">Validé</span>
 										<div class="listing-item-content">
 											item
