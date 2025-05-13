@@ -9,6 +9,10 @@
 	@at-root ($atRoot) {
 		.mainLayout-header {
 			grid-area: header;
+
+			&:empty {
+				display: none;
+			}
 		}
 
 		.mainLayout-content {
@@ -20,15 +24,15 @@
 			grid-area: aside;
 			overflow-y: auto;
 			overflow-x: hidden;
+
+			&:empty {
+				display: none;
+			}
 		}
 
 		.mainLayout-footer {
 			grid-area: footer;
-		}
 
-		.mainLayout-header,
-		.mainLayout-footer,
-		.mainLayout-aside {
 			&:empty {
 				display: none;
 			}

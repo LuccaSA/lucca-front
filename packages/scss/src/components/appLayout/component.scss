@@ -6,27 +6,28 @@
 	block-size: 100dvh;
 	overflow: auto;
 	display: grid;
-	grid-template: var(--components-pageLayout-gridTemplate);
+	grid-template: var(--components-appLayout-gridTemplate);
 
 	@at-root ($atRoot) {
-		.pageLayout-banner,
-		.pageLayout-navSide {
+		.appLayout-banner {
+			grid-area: banner;
+
 			&:empty {
 				display: none;
 			}
 		}
 
-		.pageLayout-banner {
-			grid-area: banner;
-		}
-
-		.pageLayout-navSide {
+		.appLayout-navSide {
 			grid-area: navSide;
 			overflow-y: auto;
 			overflow-x: hidden;
+
+			&:empty {
+				display: none;
+			}
 		}
 
-		.pageLayout-main {
+		.appLayout-main {
 			grid-area: main;
 			overflow: auto;
 		}

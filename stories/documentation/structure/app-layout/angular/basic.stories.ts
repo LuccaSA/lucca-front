@@ -1,15 +1,15 @@
-import { PageLayoutComponent } from '@lucca-front/ng/page-layout';
+import { AppLayoutComponent } from '@lucca-front/ng/app-layout';
 import { Meta, moduleMetadata } from '@storybook/angular';
 import { cleanupTemplate } from 'stories/helpers/stories';
 
-interface PageLayoutAngularBasicStory {
+interface AppLayoutAngularBasicStory {
 	banner: boolean;
 	navSide: boolean;
 	mobileNavSideBottom: boolean;
 }
 
 export default {
-	title: 'Documentation/Structure/Page Layout/Angular/Basic',
+	title: 'Documentation/Structure/App Layout/Angular/Basic',
 	argTypes: {
 		mobileNavSideBottom: {
 			if: { arg: 'navSide', truthy: true },
@@ -17,36 +17,36 @@ export default {
 	},
 	decorators: [
 		moduleMetadata({
-			imports: [PageLayoutComponent],
+			imports: [AppLayoutComponent],
 		}),
 	],
-	render: (args: PageLayoutAngularBasicStory) => {
-		const bannerContainer = args.banner ? `<ng-container pageLayoutBanner>banner</ng-container>` : ``;
-		const navSideContainer = args.navSide ? `<ng-container pageLayoutNavSide>navSide</ng-container>` : ``;
+	render: (args: AppLayoutAngularBasicStory) => {
+		const bannerContainer = args.banner ? `<ng-container appLayoutBanner>banner</ng-container>` : ``;
+		const navSideContainer = args.navSide ? `<ng-container appLayoutNavSide>navSide</ng-container>` : ``;
 		const mobileNavSideBottomAttribute = args.mobileNavSideBottom ? `mobileNavSideBottom` : ``;
 
 		return {
 			styles: [
 				`
 :host ::ng-deep {
-	.pageLayout {
+	.appLayout {
 		block-size: 25rem;
 	}
-	.pageLayout-banner {
+	.appLayout-banner {
 		background-color: var(--palettes-neutral-0)
 	}
-	.pageLayout-navSide {
+	.appLayout-navSide {
 		background-color: var(--palettes-navigation-800);
 		color: var(--palettes-neutral-0)
 	}
 }
 				`,
 			],
-			template: cleanupTemplate(`<lu-page-layout ${mobileNavSideBottomAttribute}>
+			template: cleanupTemplate(`<lu-app-layout ${mobileNavSideBottomAttribute}>
 	${bannerContainer}
 	${navSideContainer}
 	main
-</lu-page-layout>`),
+</lu-app-layout>`),
 		};
 	},
 } as Meta;

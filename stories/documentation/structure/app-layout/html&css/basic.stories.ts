@@ -1,44 +1,44 @@
 import { Meta } from '@storybook/angular';
 import { cleanupTemplate } from 'stories/helpers/stories';
 
-interface PageLayoutHTMLBasicStory {
+interface AppLayoutHTMLBasicStory {
 	banner: boolean;
 	navSide: boolean;
 	mobileNavSideBottom: boolean;
 }
 
 export default {
-	title: 'Documentation/Structure/Page Layout/HTML&CSS/Basic',
+	title: 'Documentation/Structure/App Layout/HTML&CSS/Basic',
 	argTypes: {
 		mobileNavSideBottom: {
 			if: { arg: 'navSide', truthy: true },
 		},
 	},
-	render: (args: PageLayoutHTMLBasicStory) => {
-		const bannerContainer = args.banner ? `<div class="pageLayout-banner">banner</div>` : ``;
-		const navSideContainer = args.navSide ? `<div class="pageLayout-navSide">navSide</div>` : ``;
+	render: (args: AppLayoutHTMLBasicStory) => {
+		const bannerContainer = args.banner ? `<div class="appLayout-banner">banner</div>` : ``;
+		const navSideContainer = args.navSide ? `<div class="appLayout-navSide">navSide</div>` : ``;
 		const mobileNavSideBottomAttribute = args.mobileNavSideBottom ? `mod-mobileNavSideBottom` : ``;
 
 		return {
 			styles: [
 				`
-.pageLayout {
+.appLayout {
 	block-size: 25rem;
 }
-.pageLayout-banner {
+.appLayout-banner {
 	background-color: var(--palettes-neutral-0)
 }
-.pageLayout-navSide {
+.appLayout-navSide {
 	background-color: var(--palettes-navigation-800);
 	color: var(--palettes-neutral-0)
 }
 				`,
 			],
 			template: cleanupTemplate(`
-<div class="pageLayout ${mobileNavSideBottomAttribute}">
+<div class="appLayout ${mobileNavSideBottomAttribute}">
 	${bannerContainer}
 	${navSideContainer}
-	<div class="pageLayout-main">
+	<div class="appLayout-main">
     main
 	</div>
 </div>

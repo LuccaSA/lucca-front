@@ -8,9 +8,6 @@
 @use '../packages/scss/src/main-all' as scss;
 @use '../packages/ng/styles/main' as ng;
 
-// @use '../packages/scss/src/components/pageLayout/exports' as pageLayout;
-@use '../packages/scss/src/commons/utils/media';
-
 storybook-root,
 [ng-version] {
 	// Apply block display by default to story root for @container purposes

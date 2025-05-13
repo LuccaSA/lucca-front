@@ -38,26 +38,26 @@ export default {
 		return {
 			styles: [
 				`
-.pageLayout {
+.appLayout {
 	block-size: 25rem;
 }
-.pageLayout-banner {
+.appLayout-banner {
 	background-color: var(--palettes-neutral-0)
 }
-.pageLayout-navSide {
+.appLayout-navSide {
 	background-color: var(--palettes-navigation-800);
 	color: var(--palettes-neutral-0)
 }
 				`,
 			],
 			template: cleanupTemplate(`
-<div class="pageLayout">
-	<div class="pageLayout-banner">banner</div>
-	<div class="pageLayout-navSide">
+<div class="appLayout">
+	<div class="appLayout-banner">banner</div>
+	<div class="appLayout-navSide">
 		navSide
 		${imgNavSide}
 	</div>
-	<div class="pageLayout-main">
+	<div class="appLayout-main">
 		<main role="main" class="mainLayout">
 			${headerContainer}
 			${asideContainer}
