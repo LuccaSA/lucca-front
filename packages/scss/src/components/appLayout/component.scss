@@ -22,6 +22,10 @@
 			overflow-y: auto;
 			overflow-x: hidden;
 
+			&:focus-visible {
+				@include a11y.focusVisible(-4px);
+			}
+
 			&:empty {
 				display: none;
 			}
@@ -30,6 +34,10 @@
 		.appLayout-main {
 			grid-area: main;
 			overflow: auto;
+
+			&:focus-visible {
+				@include a11y.focusVisible(-4px);
+			}
 		}
 	}
 }

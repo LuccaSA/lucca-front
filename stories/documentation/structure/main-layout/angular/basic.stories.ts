@@ -34,10 +34,10 @@ export default {
 	],
 	render: (args: MainLayoutAngularBasicStory) => {
 		const headerContainer = args.header ? `<ng-container mainLayoutHeader><div>header</div></ng-container>` : ``;
-		const footerContainer = args.footer ? `<ng-container mainLayoutFooter><div>footer</div></ng-container>` : ``;
+		const footerContainer = args.footer ? `<ng-container mainLayoutFooter><div class="pr-u-marginBlockStartAuto">footer</div></ng-container>` : ``;
 		const headerStickyParam = args.headerSticky ? `headerSticky` : ``;
 		const footerStickyParam = args.footerSticky ? `footerSticky` : ``;
-		const img = `<img src="https://dummyimage.com/200x1000" class="u-displayBlock" alt="" />`;
+		const img = `<img src="https://dummyimage.com/200x1000" class="u-displayBlock u-alignSelfFlexStart" alt="" />`;
 		const contentImg = args.contentWithScroll ? img : ``;
 		const sidebarImg = args.sidebarWithScroll ? img : ``;
 		const navSideImg = args.navSideWithScroll ? img : ``;
@@ -48,6 +48,8 @@ export default {
 :host ::ng-deep {
 	.appLayout {
 		block-size: 25rem;
+		border: 1px dashed;
+		box-sizing: content-box;
 	}
 	.appLayout-banner {
 		background-color: var(--palettes-neutral-0)

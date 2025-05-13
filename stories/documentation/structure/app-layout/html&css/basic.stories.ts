@@ -5,6 +5,8 @@ interface AppLayoutHTMLBasicStory {
 	banner: boolean;
 	navSide: boolean;
 	mobileNavSideBottom: boolean;
+	mainWithScroll: boolean;
+	navSideWithScroll: boolean;
 }
 
 export default {
@@ -13,10 +15,16 @@ export default {
 		mobileNavSideBottom: {
 			if: { arg: 'navSide', truthy: true },
 		},
+		navSideWithScroll: {
+			if: { arg: 'navSide', truthy: true },
+		},
 	},
 	render: (args: AppLayoutHTMLBasicStory) => {
+		const img = `<img src="https://dummyimage.com/200x1000" class="u-displayBlock u-alignSelfFlexStart" alt="" />`;
+		const mainImg = args.mainWithScroll ? img : ``;
+		const navSideImg = args.navSideWithScroll ? img : ``;
 		const bannerContainer = args.banner ? `<div class="appLayout-banner">banner</div>` : ``;
-		const navSideContainer = args.navSide ? `<div class="appLayout-navSide">navSide</div>` : ``;
+		const navSideContainer = args.navSide ? `<div class="appLayout-navSide">navSide${navSideImg}</div>` : ``;
 		const mobileNavSideBottomAttribute = args.mobileNavSideBottom ? `mod-mobileNavSideBottom` : ``;
 
 		return {
@@ -24,6 +32,8 @@ export default {
 				`
 .appLayout {
 	block-size: 25rem;
+	border: 1px dashed;
+	box-sizing: content-box;
 }
 .appLayout-banner {
 	background-color: var(--palettes-neutral-0)
@@ -39,7 +49,7 @@ export default {
 	${bannerContainer}
 	${navSideContainer}
 	<div class="appLayout-main">
-    main
+    main${mainImg}
 	</div>
 </div>
 `),
@@ -47,4 +57,12 @@ export default {
 	},
 } as Meta;
 
-export const Basic = { args: { banner: true, navSide: true, mobileNavSideBottom: false } };
+export const Basic = {
+	args: {
+		banner: true,
+		navSide: true,
+		mobileNavSideBottom: false,
+		navSideWithScroll: false,
+		mainWithScroll: false,
+	},
+};

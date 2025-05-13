@@ -26,11 +26,13 @@ export default {
 		},
 	},
 	render: (args: MainLayoutHTMLBasicStory) => {
-		const headerContent = args.header && !args.headerSticky ? `<div>header</div>` : ``;
-		const footerContent = args.footer && !args.footerSticky ? `<div>footer</div>` : ``;
-		const headerContainer = args.header && args.headerSticky ? `<div class="mainLayout-header"><div>header</div></div>` : ``;
-		const footerContainer = args.footer && args.footerSticky ? `<div class="mainLayout-footer"><div>footer</div></div>` : ``;
-		const img = `<img src="https://dummyimage.com/200x1000" class="u-displayBlock" alt="" />`;
+		const header = `<div>header</div>`;
+		const footer = `<div class="pr-u-marginBlockStartAuto">footer</div>`;
+		const headerContent = args.header && !args.headerSticky ? header : ``;
+		const footerContent = args.footer && !args.footerSticky ? footer : ``;
+		const headerContainer = args.header && args.headerSticky ? `<div class="mainLayout-header">${header}</div>` : ``;
+		const footerContainer = args.footer && args.footerSticky ? `<div class="mainLayout-footer">${footer}</div>` : ``;
+		const img = `<img src="https://dummyimage.com/200x1000" class="u-displayBlock u-alignSelfFlexStart" alt="" />`;
 		const imgSidebar = args.sidebarWithScroll ? img : ``;
 		const imgContent = args.contentWithScroll ? img : ``;
 		const imgNavSide = args.navSideWithScroll ? img : ``;
@@ -40,6 +42,8 @@ export default {
 				`
 .appLayout {
 	block-size: 25rem;
+	border: 1px dashed;
+	box-sizing: content-box;
 }
 .appLayout-banner {
 	background-color: var(--palettes-neutral-0)
@@ -59,8 +63,8 @@ export default {
 	</div>
 	<div class="appLayout-main">
 		<main role="main" class="mainLayout">
-			${headerContainer}
 			${sidebarContainer}
+			${headerContainer}
 			<div class="mainLayout-content">
 				${headerContent}
 				content
