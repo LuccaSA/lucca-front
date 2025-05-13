@@ -258,11 +258,11 @@
 .u-noSpinButtons {
 	&::-webkit-outer-spin-button,
 	&::-webkit-inner-spin-button {
-		-webkit-appearance: none !important;
+		appearance: none !important;
 	}
 
 	&[type='number'] {
-		-moz-appearance: textfield !important;
+		appearance: textfield !important;
 	}
 }
 
@@ -308,11 +308,13 @@
 @include core.classes('block-size', core.$contents);
 @include core.classes('min-inline-size', '0');
 @include core.classes('min-block-size', '0');
+@include core.classes('max-inline-size', core.$contents);
 
 @include core.classes('visibility', core.$visibility);
 @include core.classes('font-weight', core.$fontWeight);
 @include core.classes('font-style', core.$fontStyle);
 @include core.classes('pointer-events', core.$pointerEvents);
+@include core.classes('cursor', core.$cursor);
 @include core.classes('text-align', core.$textAlign);
 @include core.classes('text-decoration', core.$decoration);
 @include core.classes('overflow', core.$overflow);

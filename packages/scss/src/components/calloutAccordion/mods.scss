@@ -20,10 +20,6 @@
 		@include icon.S;
 	}
 
-	.calloutAccordion-details {
-		margin-inline-start: 2.75rem;
-	}
-
 	.calloutFeedbackList {
 		@include calloutFeedbackList.S;
 	}

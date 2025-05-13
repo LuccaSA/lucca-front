@@ -74,6 +74,8 @@
 		.comment-content-text {
 			margin-block-end: 0;
 			overflow-wrap: break-word;
+			font-size: var(--components-comment-text-fontSize);
+			line-height: var(--components-comment-text-lineHeight);
 		}
 
 		// .comment-content-textContainer is deprecated
@@ -88,11 +90,6 @@
 			> * {
 				margin: 0;
 			}
-		}
-
-		.comment-content-text {
-			font-size: var(--components-comment-text-fontSize);
-			line-height: var(--components-comment-text-lineHeight);
 		}
 	}
 }

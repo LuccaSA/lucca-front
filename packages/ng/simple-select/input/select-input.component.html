@@ -16,14 +16,14 @@
 		(keyup.space)="inputSpace($event)"
 		luInput
 		#inputElement
-		[attr.autocomplete]="autocomplete"
+		[attr.autocomplete]="autocomplete()"
 		[attr.tabindex]="inputTabindex()"
 	/>
 	<div class="simpleSelect-field-value">
 		<ng-container *ngTemplateOutlet="currentValueDisplayerTpl"></ng-container>
 	</div>
+	@if (!filterPillMode) { @if (clearable && hasValue() && (disabled$ | async) === false) {
 	<button
-		*ngIf="clearable && hasValue() && (disabled$ | async) === false"
 		class="simpleSelect-field-clear clear"
 		role="button"
 		type="button"
@@ -32,7 +32,7 @@
 	>
 		<span class="u-mask">{{ intl.clear }}</span>
 	</button>
-	@if (!filterPillMode) {
+	}
 	<lu-icon icon="arrowChevronBottom" class="simpleSelect-field-icon" />
 	<lu-icon icon="searchMagnifyingGlass" class="simpleSelect-field-icon mod-search" />
 	}

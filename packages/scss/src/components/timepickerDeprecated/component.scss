@@ -12,6 +12,7 @@
 
 	&:focus-within {
 		@include a11y.focusVisible($offset: 3px);
+
 		background-color: transparent;
 	}
 
@@ -30,11 +31,11 @@
 			block-size: var(--components-timepicker-input-height);
 			border: 0;
 			padding: 0;
-			-moz-appearance: textfield;
+			appearance: textfield;
 
 			&::-webkit-outer-spin-button,
 			&::-webkit-inner-spin-button {
-				-webkit-appearance: none;
+				appearance: none;
 				margin: 0;
 			}
 

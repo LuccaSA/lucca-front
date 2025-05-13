@@ -5,7 +5,7 @@
 .table {
 	@include vars;
 
-	//For both mod-stickyColumn + responsive variant
+	// For both mod-stickyColumn + responsive variant
 	&[class*='mod-stickyColumn'] {
 		@include stickyColumn;
 	}
@@ -22,7 +22,7 @@
 		}
 	}
 
-	//For both stickyHeader + -withBanner variant
+	// For both stickyHeader + -withBanner variant
 	&[class*='mod-stickyHeader'] {
 		@include stickyHeaderCommon;
 

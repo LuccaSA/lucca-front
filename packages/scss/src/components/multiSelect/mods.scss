@@ -16,6 +16,10 @@
 		@include icon.S;
 	}
 
+	.multipleSelect-searchIcon {
+		@include icon.S;
+	}
+
 	.multipleSelect-clear {
 		// :not(.class) is only there to increase specificity when the class isn’t present
 		// but the class should be present, and this code is temporary
@@ -67,7 +71,6 @@
 	box-shadow: none;
 	padding: 0;
 	gap: 0;
-
 	width: 21rem;
 	max-inline-size: calc(100vw - 2.5rem);
 

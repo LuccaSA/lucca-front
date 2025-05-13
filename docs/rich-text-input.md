@@ -1,15 +1,9 @@
-RichTextInput (`lu-rich-text-input`) permet l'édition de texte riche depuis un formulaire (WYSIWYG). Il est basé sur [Lexical](https://lexical.dev/).
-
-### Utilisation
-
-Le composant s'utilise via la balise `lu-form-field` et supporte `ngModel` ainsi que `formControl` comme tous les composants d'input nouvelle génération au sein de lucca-front.
-
 ### Configuration
 
 Avant toute utilisation de `lu-rich-text-input`, il est nécessaire d'ajouter les `peerDependencies` suivantes à votre projet :
 
 ```sh
-npm i @lexical/history @lexical/link @lexical/rich-text @lexical/selection @lexical/utils
+npm i lexical @lexical/history @lexical/link @lexical/rich-text @lexical/selection @lexical/utils
 ```
 
 En fonction du format désiré en entrée / sortie du composant, les dépendances suivantes doivent être installées:
@@ -32,12 +26,14 @@ Deux formateurs par défaut sont disponibles, à provide au niveau du composant 
 - HTML
 
 ```ts
+import { provideLuRichTextHTMLFormatter } from '@lucca-front/ng/forms/rich-text-input/formatters/html';
 provideLuRichTextHTMLFormatter();
 ```
 
 - Markdown (avec une liste optionnelle de `Transformer` markdown pour les noeuds custom)
 
 ```ts
+import { provideLuRichTextMarkdownFormatter } from '@lucca-front/ng/forms/rich-text-input/formatters/markdown';
 provideLuRichTextMarkdownFormatter(transformers);
 ```
 

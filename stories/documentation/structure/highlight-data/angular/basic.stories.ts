@@ -51,6 +51,7 @@ export const Template: StoryObj<HighlightDataComponent & { action: string }> = {
 			control: {
 				type: 'select',
 			},
+			description: 'Il est également possible de renseigner une URL.'
 		},
 		valueFirst: {
 			type: 'boolean',
@@ -72,6 +73,7 @@ export const Template: StoryObj<HighlightDataComponent & { action: string }> = {
 			control: {
 				type: 'select',
 			},
+			description: 'La palette influençant également la couleur du SVG des bubbles et donc l’URL associée, il est nécessaire de renseigner la gamme.'
 		},
 		action: {
 			options: [null, 'button', 'link'],

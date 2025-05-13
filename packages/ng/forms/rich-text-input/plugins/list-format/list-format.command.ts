@@ -1,5 +1,5 @@
 import { $getSelection, $isRangeSelection, COMMAND_PRIORITY_NORMAL, createCommand, INSERT_PARAGRAPH_COMMAND, LexicalEditor, SELECTION_CHANGE_COMMAND } from 'lexical';
-import { $handleListInsertParagraph, insertList, ListNode, ListType, removeList } from '@lexical/list';
+import { $handleListInsertParagraph, $insertList, $removeList, ListNode, ListType } from '@lexical/list';
 import { $getNearestNodeOfType, mergeRegister } from '@lexical/utils';
 import { getSelectedNode } from '../../utils';
 
@@ -15,11 +15,11 @@ export function registerListsGlobal(editor: LexicalEditor) {
 					const node = getSelectedNode(selection);
 					const parent = $getNearestNodeOfType(node, ListNode);
 					if (parent && parent.getListType() === type) {
-						removeList(editor);
+						$removeList();
 					} else if (parent) {
 						parent.setListType(type);
 					} else {
-						insertList(editor, type);
+						$insertList(type);
 					}
 				}
 				return true;

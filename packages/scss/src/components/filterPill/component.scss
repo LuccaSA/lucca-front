@@ -121,7 +121,6 @@
 			overflow: hidden;
 			text-overflow: ellipsis;
 			cursor: var(--components-filterPill-label-cursor);
-
 			display: flex;
 			align-items: center;
 			gap: var(--pr-t-spacings-50);
@@ -183,6 +182,8 @@
 				font-weight: 400;
 				font-size: 1rem;
 				direction: ltr;
+
+				// stylelint-disable-next-line font-family-no-missing-generic-family-keyword -- This font is for icons and should not have fallback.
 				font-family: 'Lucca icons';
 				font-feature-settings: 'liga';
 				font-style: normal;

@@ -8,7 +8,7 @@
 	font-size: var(--components-statusBadge-fontSize);
 	gap: var(--pr-t-spacings-50);
 	line-height: var(--components-statusBadge-lineHeight);
-	padding-block: calc(var(--pr-t-spacings-50) / 2) calc(var(--pr-t-spacings-50) / 2);
+	padding-block: calc(var(--pr-t-spacings-50) / 2);
 	padding-inline: var(--pr-t-spacings-75) var(--pr-t-spacings-100);
 	white-space: nowrap;
 	font-weight: normal;

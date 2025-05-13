@@ -3,13 +3,13 @@ import { NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, Component, computed, forwardRef, inject, input, LOCALE_ID, signal, ViewEncapsulation, WritableSignal } from '@angular/core';
 import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
 import { getIntl, IntlParamsPipe } from '@lucca-front/ng/core';
-import { FormFieldComponent, InputDirective } from '@lucca-front/ng/form-field';
+import { FORM_FIELD_INSTANCE, FormFieldComponent, InputDirective } from '@lucca-front/ng/form-field';
 import { PopoverDirective } from '@lucca-front/ng/popover2';
+import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
 import { FormFieldIdDirective } from '../form-field-id.directive';
 import { TextInputComponent } from '../text-input/text-input.component';
-import { LU_MULTILANGUAGE_INPUT_TRANSLATIONS } from './multilanguage-input.translate';
 import { MultilanguageTranslation } from './model/multilanguage-translation';
-import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
+import { LU_MULTILANGUAGE_INPUT_TRANSLATIONS } from './multilanguage-input.translate';
 
 @Component({
 	selector: 'lu-multilanguage-input',
@@ -45,6 +45,10 @@ export class MultilanguageInputComponent implements ControlValueAccessor {
 	#intlDisplay = new Intl.DisplayNames([this.#localeId], { type: 'language' });
 
 	intl = getIntl(LU_MULTILANGUAGE_INPUT_TRANSLATIONS);
+
+	#formFieldRef = inject(FORM_FIELD_INSTANCE);
+
+	formFieldSize = this.#formFieldRef.size;
 
 	protected onTouched = () => {};
 

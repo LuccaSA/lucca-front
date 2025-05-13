@@ -25,9 +25,9 @@
 					(click)="editedField.set(0);openPopover(popoverRef, 'start')"
 					(keydown.arrowDown)="arrowDown(popoverRef, 'start')"
 					(keydown.escape)="popoverRef.close()"
-					[disabled]="disabled"
+					[disabled]="disabled()"
 					[attr.placeholder]="dateFormatLocalized()"
-					[attr.autocomplete]="autocomplete"
+					[attr.autocomplete]="autocomplete()"
 				/>
 			</div>
 			<div class="dateRangeField-fieldset-content mod-end" [class.is-highlighted]="highlightedField() === 1">
@@ -49,22 +49,22 @@
 					(click)="editedField.set(1);openPopover(popoverRef, 'end')"
 					(keydown.arrowDown)="arrowDown(popoverRef, 'end')"
 					(keydown.escape)="popoverRef.close()"
-					[disabled]="disabled"
+					[disabled]="disabled()"
 					[attr.placeholder]="dateFormatLocalized()"
-					[attr.autocomplete]="autocomplete"
+					[attr.autocomplete]="autocomplete()"
 				/>
 			</div>
 			<lu-icon [icon]="'arrowRight'" [alt]="''" class="dateRangeField-fieldset-arrow" />
 			<div class="textField-input-affix">
-				@if (clearable() && (start.value !== '' || end.value !== '')) {
+				@if (!isFilterPill) { @if (clearable() && (start.value !== '' || end.value !== '')) {
 				<button class="textField-input-affix-clear clear" type="button" (click)="clear(start, end)">
 					<span aria-hidden="true" class="lucca-icon icon-signClose"></span>
 					<span class="u-mask">{{ intl.clear }}</span>
 				</button>
-				}
+				} }
 				<button
 					[luPopover2]="calendar"
-					[disabled]="disabled"
+					[disabled]="disabled()"
 					[luPopoverNoCloseButton]="true"
 					[luPopoverAnchor]="popoverAnchor"
 					#popoverRef="luPopover2"
