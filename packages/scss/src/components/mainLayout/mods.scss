@@ -1,7 +1,7 @@
-@mixin aside {
-	--components-mainLayoutGridTemplate: "aside header "  auto
-																			 "aside content"  1fr
-																			 "aside footer "  auto
-																			/ auto  1fr;
+@mixin sidebar {
+	--components-mainLayoutGridTemplate: "sidebar header "  auto
+																			 "sidebar content"  1fr
+																			 "sidebar footer "  auto
+																			/ auto    1fr;
 }
 

@@ -4,7 +4,7 @@
 	@include vars;
 	@include component;
 
-	&:has(.mainLayout-aside:not(:empty)) {
-		@include aside;
+	&:has(.mainLayout-sidebar:not(:empty)) {
+		@include sidebar;
 	}
 }

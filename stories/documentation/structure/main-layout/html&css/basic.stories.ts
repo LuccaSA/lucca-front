@@ -4,11 +4,11 @@ import { cleanupTemplate } from 'stories/helpers/stories';
 interface MainLayoutHTMLBasicStory {
 	header: boolean;
 	headerSticky: boolean;
-	aside: boolean;
+	sidebar: boolean;
 	footer: boolean;
 	footerSticky: boolean;
 	contentWithScroll: boolean;
-	asideWithScroll: boolean;
+	sidebarWithScroll: boolean;
 	navSideWithScroll: boolean;
 }
 
@@ -21,8 +21,8 @@ export default {
 		footerSticky: {
 			if: { arg: 'footer', truthy: true },
 		},
-		asideWithScroll: {
-			if: { arg: 'aside', truthy: true },
+		sidebarWithScroll: {
+			if: { arg: 'sidebar', truthy: true },
 		},
 	},
 	render: (args: MainLayoutHTMLBasicStory) => {
@@ -31,10 +31,10 @@ export default {
 		const headerContainer = args.header && args.headerSticky ? `<div class="mainLayout-header"><div>header</div></div>` : ``;
 		const footerContainer = args.footer && args.footerSticky ? `<div class="mainLayout-footer"><div>footer</div></div>` : ``;
 		const img = `<img src="https://dummyimage.com/200x1000" class="u-displayBlock" alt="" />`;
-		const imgAside = args.asideWithScroll ? img : ``;
+		const imgSidebar = args.sidebarWithScroll ? img : ``;
 		const imgContent = args.contentWithScroll ? img : ``;
 		const imgNavSide = args.navSideWithScroll ? img : ``;
-		const asideContainer = args.aside ? `<div class="mainLayout-aside">aside${imgAside}</div>` : ``;
+		const sidebarContainer = args.sidebar ? `<div class="mainLayout-sidebar">sidebar${imgSidebar}</div>` : ``;
 		return {
 			styles: [
 				`
@@ -60,7 +60,7 @@ export default {
 	<div class="appLayout-main">
 		<main role="main" class="mainLayout">
 			${headerContainer}
-			${asideContainer}
+			${sidebarContainer}
 			<div class="mainLayout-content">
 				${headerContent}
 				content
@@ -82,8 +82,8 @@ export const Basic = {
 		headerSticky: false,
 		footer: false,
 		footerSticky: false,
-		aside: false,
-		asideWithScroll: false,
+		sidebar: false,
+		sidebarWithScroll: false,
 		contentWithScroll: false,
 		navSideWithScroll: false,
 	},
