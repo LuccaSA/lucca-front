@@ -1,5 +1,5 @@
 @mixin ellipsis {
 	&::after {
-		content: '…';
+		content: '…' / '';
 	}
 }

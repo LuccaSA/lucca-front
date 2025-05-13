@@ -23,7 +23,7 @@
 
 	&:empty {
 		&::before {
-			content: ' ';
+			content: ' ' / '';
 		}
 	}
 

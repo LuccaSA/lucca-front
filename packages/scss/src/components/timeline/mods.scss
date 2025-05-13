@@ -160,7 +160,7 @@
 			counter-increment: timeline;
 
 			&::before {
-				content: counter(timeline);
+				content: counter(timeline) / '';
 				font-size: var(--sizes-XS-fontSize);
 				line-height: 1;
 			}
