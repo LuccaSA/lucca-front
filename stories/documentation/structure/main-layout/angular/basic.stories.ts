@@ -9,9 +9,9 @@ interface MainLayoutAngularBasicStory {
 	headerSticky: boolean;
 	footerSticky: boolean;
 	contentWithScroll: boolean;
-	asideWithScroll: boolean;
+	sidebarWithScroll: boolean;
 	navSideWithScroll: boolean;
-	aside: boolean;
+	sidebar: boolean;
 }
 
 export default {
@@ -23,8 +23,8 @@ export default {
 		footerSticky: {
 			if: { arg: 'footer', truthy: true },
 		},
-		asideWithScroll: {
-			if: { arg: 'aside', truthy: true },
+		sidebarWithScroll: {
+			if: { arg: 'sidebar', truthy: true },
 		},
 	},
 	decorators: [
@@ -39,9 +39,9 @@ export default {
 		const footerStickyParam = args.footerSticky ? `footerSticky` : ``;
 		const img = `<img src="https://dummyimage.com/200x1000" class="u-displayBlock" alt="" />`;
 		const contentImg = args.contentWithScroll ? img : ``;
-		const asideImg = args.asideWithScroll ? img : ``;
+		const sidebarImg = args.sidebarWithScroll ? img : ``;
 		const navSideImg = args.navSideWithScroll ? img : ``;
-		const asideContainer = args.aside ? `<ng-container mainLayoutAside>aside${asideImg}</ng-container>` : ``;
+		const sidebarContainer = args.sidebar ? `<ng-container mainLayoutSidebar>sidebar${sidebarImg}</ng-container>` : ``;
 		return {
 			styles: [
 				`
@@ -74,7 +74,7 @@ export default {
 		${navSideImg}
 	</ng-container>
 	<lu-main-layout ${headerStickyParam} ${footerStickyParam}>
-		${asideContainer}
+		${sidebarContainer}
 		${headerContainer}
 		content
 		${contentImg}
@@ -91,8 +91,8 @@ export const Basic = {
 		headerSticky: false,
 		footer: false,
 		footerSticky: false,
-		aside: false,
-		asideWithScroll: false,
+		sidebar: false,
+		sidebarWithScroll: false,
 		contentWithScroll: false,
 		navSideWithScroll: false,
 	},

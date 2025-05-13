@@ -4,11 +4,11 @@ import { cleanupTemplate } from 'stories/helpers/stories';
 interface MainLayoutHTMLBasicStory {
 	header: boolean;
 	headerSticky: boolean;
-	aside: boolean;
+	sidebar: boolean;
 	footer: boolean;
 	footerSticky: boolean;
 	contentWithScroll: boolean;
-	asideWithScroll: boolean;
+	sidebarWithScroll: boolean;
 	navSideWithScroll: boolean;
 }
 
@@ -21,20 +21,20 @@ export default {
 		footerSticky: {
 			if: { arg: 'footer', truthy: true },
 		},
-		asideWithScroll: {
-			if: { arg: 'aside', truthy: true },
+		sidebarWithScroll: {
+			if: { arg: 'sidebar', truthy: true },
 		},
 	},
 	render: (args: MainLayoutHTMLBasicStory) => {
 		const stickyHeader = args.headerSticky ? `mod-sticky` : ``;
 		const stickyFooter = args.footerSticky ? `mod-sticky` : ``;
 		const img = `<img src="https://dummyimage.com/200x1000" class="u-displayBlock" alt="" />`;
-		const imgAside = args.asideWithScroll ? img : ``;
+		const imgSidebar = args.sidebarWithScroll ? img : ``;
 		const imgContent = args.contentWithScroll ? img : ``;
 		const imgNavSide = args.navSideWithScroll ? img : ``;
 		const headerContainer = args.header ? `<div class="mainLayout-header ${stickyHeader}">header</div>` : ``;
 		const footerContainer = args.footer ? `<div class="mainLayout-footer ${stickyFooter}">footer</div>` : ``;
-		const asideContainer = args.aside ? `<div class="mainLayout-aside">aside${imgAside}</div>` : ``;
+		const sidebarContainer = args.sidebar ? `<div class="mainLayout-sidebar">sidebar${imgSidebar}</div>` : ``;
 		return {
 			styles: [
 				`
@@ -68,7 +68,7 @@ export default {
 	<div class="bodyLayout-main">
 		<main role="main" class="mainLayout">
 			${headerContainer}
-			${asideContainer}
+			${sidebarContainer}
 			<div class="mainLayout-content">
 				content
 				${imgContent}
@@ -88,8 +88,8 @@ export const Basic = {
 		headerSticky: false,
 		footer: false,
 		footerSticky: false,
-		aside: false,
-		asideWithScroll: false,
+		sidebar: false,
+		sidebarWithScroll: false,
 		contentWithScroll: false,
 		navSideWithScroll: false,
 	},

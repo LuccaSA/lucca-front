@@ -25,12 +25,12 @@
 			overflow: auto;
 		}
 
-		.mainLayout-aside {
-			grid-area: aside;
+		.mainLayout-sidebar {
+			grid-area: sidebar;
 			overflow-x: hidden;
 			overflow-y: auto;
 			position: sticky;
-			block-size: var(--components-mainLayout-aside-blockSize);
+			block-size: var(--components-mainLayout-sidebar-blockSize);
 			inset-block-start: var(--components-mainLayout-header-insetBlockStart);
 
 			&:empty {

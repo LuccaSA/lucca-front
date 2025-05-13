@@ -1,21 +1,21 @@
-@mixin aside {
-	--components-mainLayout-aside-blockSize: auto;
-	--components-mainLayout-gridTemplate: "aside  "  auto
+@mixin sidebar {
+	--components-mainLayout-sidebar-blockSize: auto;
+	--components-mainLayout-gridTemplate: "sidebar"  auto
 																				"header "  auto
 																				"content"  1fr
 																				"footer "  auto
 																			 / 1fr;
 }
 
-@mixin asideWide {
-	--components-mainLayout-aside-blockSize: calc(var(--components-bodyLayout-minBlockSize) - var(--components-bodyLayout-before));
-	--components-mainLayout-gridTemplate: "aside header "  auto
-																			  "aside content"  1fr
-																			  "aside footer "  auto
-																			 / auto  1fr;
+@mixin sidebarWide {
+	--components-mainLayout-sidebar-blockSize: calc(var(--components-bodyLayout-minBlockSize) - var(--components-bodyLayout-before));
+	--components-mainLayout-gridTemplate: "sidebar header "  auto
+																			  "sidebar content"  1fr
+																			  "sidebar footer "  auto
+																			 / auto    1fr;
 }
 
 @mixin wide {
-	--components-mainLayout-aside-blockSize: var(--components-bodyLayout-navSide-blockSize);
+	--components-mainLayout-sidebar-blockSize: var(--components-bodyLayout-navSide-blockSize);
 }
 

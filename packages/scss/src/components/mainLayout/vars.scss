@@ -1,5 +1,5 @@
 @mixin vars {
-	--components-mainLayout-aside-blockSize: auto;
+	--components-mainLayout-sidebar-blockSize: auto;
 	--components-mainLayout-header-insetBlockStart: var(--components-bodyLayout-before);
 	--components-mainLayout-gridTemplate: "header " auto
 																			  "content" 1fr
