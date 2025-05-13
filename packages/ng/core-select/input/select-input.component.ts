@@ -23,7 +23,7 @@ import {
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ControlValueAccessor } from '@angular/forms';
 import { getIntl, PortalContent } from '@lucca-front/ng/core';
-import { FilterPillInputComponent } from '@lucca-front/ng/filter-pills';
+import { FILTER_PILL_HOST_COMPONENT, FilterPillInputComponent } from '@lucca-front/ng/filter-pills';
 import { BehaviorSubject, defer, map, Observable, of, ReplaySubject, startWith, Subject, switchMap, take } from 'rxjs';
 import { LuOptionGrouping, LuSimpleSelectDefaultOptionComponent } from '../option';
 import { LuSelectPanelRef } from '../panel';
@@ -40,6 +40,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 
 	protected coreIntl = getIntl(LU_CORE_SELECT_TRANSLATIONS);
 
+	protected filterPillHost = inject(FILTER_PILL_HOST_COMPONENT, { optional: true });
 	protected afterCloseFn?: () => void;
 	protected updatePositionFn?: () => void;
 	protected filterPillMode = false;
@@ -219,6 +220,12 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	protected _panelRef?: LuSelectPanelRef<TOption, TValue>;
 
 	protected destroyed$ = new Subject<void>();
+
+	constructor() {
+		if (this.filterPillHost) {
+			this.filterPillHost.registerInput(this);
+		}
+	}
 
 	@HostListener('click', ['$event'])
 	onClickOpenPanel($event: KeyboardEvent) {
