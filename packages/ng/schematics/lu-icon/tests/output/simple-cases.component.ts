@@ -6,7 +6,7 @@ import { IconComponent } from '@lucca-front/ng/icon';
 	selector: 'lu-test',
 	standalone: true,
 	template: `
-		<button luButton>
+		<button luButton type="button">
 			<lu-icon icon="signClose" alt="Close" />
 		</button>
 		<lu-icon icon="signClose" size="S" />

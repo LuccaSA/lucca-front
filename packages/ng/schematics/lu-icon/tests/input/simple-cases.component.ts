@@ -5,7 +5,7 @@ import { ButtonComponent } from '@lucca-front/ng/button';
 	selector: 'lu-test',
 	standalone: true,
 	template: `
-		<button luButton>
+		<button luButton type="button">
 			<span aria-hidden="true" class="lucca-icon icon-signClose"></span>
 			<span class="u-mask">Close</span>
 		</button>
