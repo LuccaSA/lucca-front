@@ -68,7 +68,8 @@ export class FormFieldComponent implements OnDestroy, DoCheck {
 	ownControls = computed(() => this.ngControls().filter((c) => !this.ignoredControls().has(c)));
 
 	#hasInputRequired = signal(false);
-	isInputRequired = this.#hasInputRequired.asReadonly();
+	forceInputRequired = signal(false);
+	isInputRequired = computed(() => this.forceInputRequired() || this.#hasInputRequired());
 
 	label = input.required<PortalContent>();
 
