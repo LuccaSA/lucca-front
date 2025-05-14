@@ -3,6 +3,7 @@ import { IconComponent } from '@lucca-front/ng/icon';
 import { LuTooltipModule, LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { generateInputs } from '../../../helpers/stories';
+import { ButtonComponent } from '../../../../packages/ng/button/button.component';
 
 export default {
 	title: 'Documentation/Overlays/Tooltip/Basic',
@@ -45,7 +46,7 @@ export default {
 	decorators: [
 		applicationConfig({ providers: [provideAnimations()] }),
 		moduleMetadata({
-			imports: [LuTooltipModule, IconComponent],
+			imports: [LuTooltipModule, IconComponent, ButtonComponent],
 		}),
 	],
 	render: (args, { argTypes }) => {
@@ -64,7 +65,7 @@ export default {
 			template: `<h3>Tooltip simple</h3>
 <button
 	type="button"
-	class="button"
+	luButton
 	luTooltip="👋 Hello"
 	${generateInputs(args, argTypes)}
 >Tooltip au survol</button>
@@ -84,6 +85,9 @@ export default {
 >Ce texte est affiché entièrement. Le tooltip n'apparait pas au survol.</div>
 <h3>Tooltip et icône (avec alternative)</h3>
 <lu-icon icon="star" alt="Favoris" luTooltip="Favoris" luTooltipOnlyForDisplay="true" />
+
+<h3 #tooltipTarget>Tooltip affiché avec un host séparé</h3>
+<p luTooltip="Tooltip déclenché depuis le paragraphe" [luTooltipAnchor]="tooltipTarget">Ce tooltip est déclenchée au hover de ce texte mais sa référence est le titre de cette section.</p>
 `,
 		};
 	},
