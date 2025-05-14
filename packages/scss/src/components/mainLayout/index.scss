@@ -1,0 +1,19 @@
+@use 'exports' as *;
+@use '@lucca-front/scss/src/commons/utils/media';
+
+.mainLayout {
+	@include vars;
+	@include component;
+
+	&:has(.mainLayout-sidebar:not(:empty)) {
+		@include sidebar;
+	}
+
+	@include media.min('S') {
+		@include wide;
+
+		&:has(.mainLayout-sidebar:not(:empty)) {
+			@include sidebarWide;
+		}
+	}
+}
