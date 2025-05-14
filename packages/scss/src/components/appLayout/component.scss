@@ -1,0 +1,43 @@
+
+@use '@lucca-front/scss/src/commons/utils/namespace';
+@use '@lucca-front/scss/src/commons/utils/a11y';
+
+@mixin component($atRoot: namespace.$defaultAtRoot) {
+	block-size: 100dvh;
+	overflow: auto;
+	display: grid;
+	grid-template: var(--components-appLayout-gridTemplate);
+
+	@at-root ($atRoot) {
+		.appLayout-banner {
+			grid-area: banner;
+
+			&:empty {
+				display: none;
+			}
+		}
+
+		.appLayout-navSide {
+			grid-area: navSide;
+			overflow-y: auto;
+			overflow-x: hidden;
+
+			&:focus-visible {
+				@include a11y.focusVisible(-4px);
+			}
+
+			&:empty {
+				display: none;
+			}
+		}
+
+		.appLayout-main {
+			grid-area: main;
+			overflow: auto;
+
+			&:focus-visible {
+				@include a11y.focusVisible(-4px);
+			}
+		}
+	}
+}
