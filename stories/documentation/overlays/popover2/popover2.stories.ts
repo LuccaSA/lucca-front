@@ -2,8 +2,10 @@ import { ButtonComponent } from '@lucca-front/ng/button';
 import { configureLuPopover, PopoverDirective } from '@lucca-front/ng/popover2';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { HiddenArgType } from '../../../helpers/common-arg-types';
-import { cleanupTemplate, generateInputs } from '../../../helpers/stories';
+import { cleanupTemplate, createTestStory, generateInputs } from '../../../helpers/stories';
 import { ConnectionPositionPair } from '@angular/cdk/overlay';
+import { screen, userEvent, within, expect } from '@storybook/test';
+import { sleep, waitForAngular } from 'stories/helpers/test';
 
 export default {
 	title: 'Documentation/Overlays/Popover2/Angular',
@@ -38,7 +40,7 @@ export const Basic: StoryObj<PopoverDirective> = {
 		}
 		return {
 			template: cleanupTemplate(`<div class="demo">
-	<button luButton [luPopover2]="contentRef" ${generateInputs(args, argTypes)}>${action}${openDelay} !</button>
+	<button luButton type="button" [luPopover2]="contentRef" ${generateInputs(args, argTypes)}>${action}${openDelay} !</button>
 	<ng-template #contentRef>
 		<div class="popover-contentOptional">
 			<div class="verticalNavigation mod-iconless">
@@ -72,6 +74,35 @@ export const Basic: StoryObj<PopoverDirective> = {
 		luPopoverNoCloseButton: false,
 	},
 };
+
+export const BasicTEST = createTestStory(Basic, async (context) => {
+	const canvas = within(context.canvasElement);
+	const action = (context.args as any).luPopoverTrigger === 'click' ? 'Cliquez-moi' : 'Cliquez ou survolez-moi';
+	let openDelay = '';
+	if ((context.args as any).luPopoverTrigger !== 'click') {
+		openDelay = ' ' + (context.args as any).luPopoverOpenDelay + 'ms';
+	}
+	const trigger = canvas.getByText(`${action}${openDelay} !`);
+
+	// Testing open with keyboard first
+	trigger.focus();
+	await expect(trigger).toHaveFocus();
+	await userEvent.keyboard('{Enter}');
+	await waitForAngular();
+	// Check aria-expanded
+	await expect(trigger.getAttribute('aria-expanded'), 'aria-expanded').toBe('true');
+	await expect(screen.getByText('Item B')).toBeVisible();
+	await userEvent.keyboard('{Escape}');
+	// Query won't fail when it finds nothing, which is what we want to expect here
+	await expect(screen.queryByText('Item B')).toBeNull();
+	await expect(trigger.getAttribute('aria-expanded'), 'aria-expanded').toBe('false');
+	// Then mouse
+	await userEvent.click(trigger);
+	await waitForAngular();
+	await expect(screen.getByText('Item B')).toBeVisible();
+	await userEvent.keyboard('{Escape}');
+});
+
 export const CustomPosition: StoryObj<PopoverDirective> = {
 	render: (_args, { argTypes }) => {
 		const { luPopoverPosition, ...args } = _args;
