@@ -1,4 +1,5 @@
 @use '@lucca-front/scss/src/commons/utils/namespace';
+@use '@lucca-front/icons/src/icon/exports' as icon;
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
 	padding: 0;
@@ -28,6 +29,8 @@
 			color: var(--palettes-700, var(--palettes-neutral-700));
 			border-radius: var(--commons-borderRadius-XL);
 			display: flex;
+
+			@include icon.S;
 		}
 	}
 }

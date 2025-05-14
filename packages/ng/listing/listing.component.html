@@ -1,0 +1,11 @@
+@if (!ordered()) {
+<ul class="listing" [class.mod-icons]="icons()" [class.mod-checklist]="checklist()" [class]="paletteClass">
+	<ng-container *ngTemplateOutlet="content"></ng-container>
+</ul>
+} @else {
+<ol class="listing" [class.mod-icons]="icons()" [class.mod-checklist]="checklist()" [class]="paletteClass">
+	<ng-container *ngTemplateOutlet="content"></ng-container>
+</ol>
+}
+
+<ng-template #content><ng-content /></ng-template>

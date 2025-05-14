@@ -1,5 +1,7 @@
 @use '@lucca-front/icons/src/commons/utils/icon';
 
+@use '@lucca-front/icons/src/icon/exports' as icons;
+
 @mixin ordered {
 	--components-listing-listStyleType: decimal;
 }
@@ -7,6 +9,14 @@
 @mixin icons {
 	--components-listing-paddingInlineStart: 0;
 	--components-listing-item-display: flex;
+
+	.listing-item-icon.lucca-icon {
+		&:not([class*='icon-']) {
+			&::before {
+				--icon-content: var(--components-listing-item-icon-before-content);
+			}
+		}
+	}
 }
 
 @mixin checklist {
@@ -15,9 +25,7 @@
 	--components-listing-item-icon-backgroundColor: var(--palettes-100, var(--palettes-neutral-100));
 
 	.listing-item-icon.lucca-icon {
-		&:not([class*='icon-']) {
-			@include icon.generate('sign_confirm');
-		}
+		@include icon.generate('sign_confirm');
 	}
 }
 
