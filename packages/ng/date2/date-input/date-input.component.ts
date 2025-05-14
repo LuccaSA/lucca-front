@@ -294,7 +294,7 @@ export class DateInputComponent extends AbstractDateComponent implements Control
 			this.selectedDate.set(start);
 			this.currentDate.set(start);
 		} else {
-			this.clear();
+			this.reset();
 		}
 	}
 
@@ -309,9 +309,14 @@ export class DateInputComponent extends AbstractDateComponent implements Control
 		super.setDisabledState(isDisabled);
 	}
 
-	clear() {
+	reset() {
 		this.inputRef().nativeElement.value = '';
+		this.dateFromWriteValue.set(null);
 		this.selectedDate.set(null);
+	}
+
+	clear() {
+		this.reset();
 		this.#onChange?.(null);
 		this.onTouched?.();
 	}
