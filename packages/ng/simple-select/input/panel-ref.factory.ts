@@ -13,7 +13,10 @@ abstract class BaseSelectPanelRef<T> extends LuSelectPanelRef<T, T> {
 
 	protected panelRef: ComponentRef<LuSelectPanelComponent<T>>;
 
-	protected constructor(parentInjector: Injector, selectInput: LuSimpleSelectInputComponent<T>) {
+	protected constructor(
+		parentInjector: Injector,
+		protected selectInput: LuSimpleSelectInputComponent<T>,
+	) {
 		super();
 
 		this.portalRef = new ComponentPortal<LuSelectPanelComponent<T>>(LuSelectPanelComponent, undefined, this.createInjector(selectInput, parentInjector));
@@ -66,6 +69,7 @@ class SelectPanelRef<T> extends BaseSelectPanelRef<T> {
 		super.close();
 		this.panelRef.destroy();
 		this.overlayRef.detach();
+		this.selectInput.focusInput();
 	}
 
 	updatePosition(): void {
