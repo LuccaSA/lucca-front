@@ -27,7 +27,7 @@
 			white-space: nowrap;
 
 			&::before {
-				content: '\a0';
+				content: ' ' / '';
 			}
 		}
 	}
