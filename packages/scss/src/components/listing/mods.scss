@@ -20,8 +20,8 @@
 }
 
 @mixin checklist {
-	@include icons;
-
+	--components-listing-paddingInlineStart: 0;
+	--components-listing-item-display: flex;
 	--components-listing-item-icon-backgroundColor: var(--palettes-100, var(--palettes-neutral-100));
 
 	.listing-item-icon.lucca-icon {
