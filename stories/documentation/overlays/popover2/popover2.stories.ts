@@ -99,8 +99,15 @@ export const BasicTEST = createTestStory(Basic, async (context) => {
 	// Then mouse
 	await userEvent.click(trigger);
 	await waitForAngular();
+	await expect(trigger.getAttribute('aria-expanded'), 'aria-expanded').toBe('true');
 	await expect(screen.getByText('Item B')).toBeVisible();
-	await userEvent.keyboard('{Escape}');
+	const backdrop = screen.getByText((content, element) => {
+		return element.className.includes('cdk-overlay-backdrop');
+	});
+	await userEvent.click(backdrop);
+	// Query won't fail when it finds nothing, which is what we want to expect here
+	await expect(screen.queryByText('Item B')).toBeNull();
+	await expect(trigger.getAttribute('aria-expanded'), 'aria-expanded').toBe('false');
 });
 
 export const CustomPosition: StoryObj<PopoverDirective> = {
