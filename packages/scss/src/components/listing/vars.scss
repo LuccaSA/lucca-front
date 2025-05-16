@@ -1,0 +1,7 @@
+@mixin vars {
+	--components-listing-item-display: list-item;
+	--components-listing-paddingInlineStart: calc(var(--pr-t-spacings-300) + var(--pr-t-spacings-50));
+	--components-listing-listStyleType: disc;
+	--components-listing-item-icon-backgroundColor: transparent;
+	--components-listing-item-icon-before-content: none;
+}
