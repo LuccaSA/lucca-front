@@ -1,7 +1,7 @@
 import { NgIf } from '@angular/common';
 import { booleanAttribute, ChangeDetectionStrategy, Component, HostBinding, inject, Input, OnChanges, ViewEncapsulation } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { LuClass } from '@lucca-front/ng/core';
+import { LuClass, PortalContent } from '@lucca-front/ng/core';
 import { InputDirective } from '@lucca-front/ng/form-field';
 import { InlineMessageComponent } from '@lucca-front/ng/inline-message';
 import { RADIO_GROUP_INSTANCE } from '../radio-group-token';
@@ -33,7 +33,7 @@ export class RadioComponent<T = unknown> implements OnChanges {
 	disabled: boolean;
 
 	@Input()
-	inlineMessage: string;
+	inlineMessage: PortalContent;
 
 	public get arrow() {
 		return this.#parentGroup.arrow;

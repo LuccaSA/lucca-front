@@ -54,10 +54,10 @@ export const Basic: StoryObj<RadioGroupInputComponent & FormFieldComponent & { r
 	[(ngModel)]="example">
 		<lu-radio [value]="1" inlineMessage="Option text">Option A</lu-radio>
 		<lu-radio [value]="2" inlineMessage="Option text">Option B</lu-radio>
-		<lu-radio [value]="3" inlineMessage="Option text" disabled>Option C</lu-radio>
+		<lu-radio [value]="3" [inlineMessage]="template" disabled>Option C</lu-radio>
 	</lu-radio-group-input>
 </lu-form-field>
-
+<ng-template #template><strong>Option</strong> text</ng-template>
 {{example}}`),
 		};
 	},
