@@ -8,7 +8,7 @@ import { PageTitle, TitleSeparator } from './title.model';
 
 export const ɵAPP_TITLE = new InjectionToken<string | Observable<string>>('APP_TITLE');
 export type LuTitleNamingStrategy = 'product' | 'other';
-export const ɵNAMING_STRATEGY = new InjectionToken<LuTitleNamingStrategy>('NAMING_STRATEGY');
+export const ɵNAMING_STRATEGY = new InjectionToken<LuTitleNamingStrategy>('NAMING_STRATEGY', { factory: () => 'product' });
 
 /**
  * @deprecated Use `provideLuTitleStrategy` instead.
@@ -95,9 +95,9 @@ export function provideLuTitleStrategy(options: LuTitleStrategyOptions): Provide
 	if (options.translateService) {
 		providers.push({ provide: LU_TITLE_TRANSLATE_SERVICE, useFactory: options.translateService });
 	}
-
-	const namingStrategy = options.namingStrategy ?? 'product';
-	providers.push({ provide: ɵNAMING_STRATEGY, useValue: namingStrategy });
+	if (options.namingStrategy) {
+		providers.push({ provide: ɵNAMING_STRATEGY, useValue: options.namingStrategy });
+	}
 
 	return providers;
 }
