@@ -2,6 +2,7 @@ import { BreakpointObserver, LayoutModule } from '@angular/cdk/layout';
 import { ConnectionPositionPair } from '@angular/cdk/overlay';
 import { NgTemplateOutlet } from '@angular/common';
 import {
+	booleanAttribute,
 	ChangeDetectionStrategy,
 	Component,
 	computed,
@@ -91,6 +92,8 @@ export class DateRangeInputComponent extends AbstractDateComponent implements Co
 	dateHovered = signal<Date | null>(null);
 
 	placeholder = input<string>();
+
+	widthAuto = input(false, { transform: booleanAttribute });
 
 	label: PortalContent;
 
@@ -192,6 +195,11 @@ export class DateRangeInputComponent extends AbstractDateComponent implements Co
 
 	@HostBinding('class.mod-filterPill')
 	isFilterPill = false;
+
+	@HostBinding('class.mod-auto')
+	get isWidthAuto() {
+		return this.widthAuto();
+	}
 
 	isFilterPillEmpty = computed(() => this.selectedRange() === null);
 	isFilterPillClearable = computed(() => this.clearable() ?? this.#defaultFilterPillClearable() ?? this.#defaultClearable);

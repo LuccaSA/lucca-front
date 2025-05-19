@@ -41,6 +41,9 @@ export default {
 		focusedDate: {
 			control: 'date',
 		},
+		widthAuto: {
+			control: 'boolean',
+		},
 	},
 	render: (args, { argTypes }) => {
 		const { selected, min, max, focusedDate, ...flags } = args;
@@ -67,6 +70,7 @@ export const Basic: StoryObj<DateRangeInputComponent> = {
 		hideToday: false,
 		hideWeekend: false,
 		clearable: false,
+		widthAuto: false,
 		mode: 'day',
 		format: 'date',
 	},
@@ -109,9 +113,9 @@ export const WithShortcuts: StoryObj<DateRangeInputComponent> = {
 	},
 	args: {
 		hideToday: false,
-
 		hideWeekend: false,
 		clearable: false,
+		widthAuto: false,
 		mode: 'day',
 	},
 };
