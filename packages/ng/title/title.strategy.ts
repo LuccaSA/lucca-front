@@ -66,8 +66,11 @@ export class LuTitleStrategy extends TitleStrategy {
 	}
 
 	#luccaTitle(appTitle: string) {
+		if (appTitle.includes(Lucca)) {
+			return appTitle;
+		}
 		if (this.namingStrategy === 'product') {
-			return appTitle.includes(Lucca) ? appTitle : `${Lucca} ${appTitle}`;
+			return `${Lucca} ${appTitle}`;
 		}
 		return `${appTitle}${TitleSeparator}${Lucca}`;
 	}
