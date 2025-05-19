@@ -74,7 +74,7 @@ export class OverrideTitlePartComponent implements OnInit {
 	}
 }
 
-describe('TitleService', () => {
+describe('TitleStrategy', () => {
 	let spectator: SpectatorRouting<AppComponent>;
 	let pageTitleService: LuTitleStrategy;
 
@@ -156,7 +156,7 @@ describe('TitleService', () => {
 
 		await spectator.fixture.whenStable();
 		expect(spectator.inject(Location).path()).toBe('/');
-		expect(resultTitle).toEqual(`Stub${TitleSeparator}BU${TitleSeparator}Lucca`);
+		expect(resultTitle).toEqual(`Stub${TitleSeparator}Lucca BU`);
 	});
 
 	it('should ignore empty or absent titles', async () => {
@@ -165,7 +165,7 @@ describe('TitleService', () => {
 
 		spectator.click('.link-2');
 		await spectator.fixture.whenStable();
-		expect(resultTitle).toEqual(`Stub${TitleSeparator}BU${TitleSeparator}Lucca`);
+		expect(resultTitle).toEqual(`Stub${TitleSeparator}Lucca BU`);
 	});
 
 	it('should include named params in title', async () => {
@@ -174,7 +174,7 @@ describe('TitleService', () => {
 
 		spectator.click('.link-3');
 		await spectator.fixture.whenStable();
-		expect(resultTitle).toEqual(`Stubs' child 1${TitleSeparator}Stub${TitleSeparator}BU${TitleSeparator}Lucca`);
+		expect(resultTitle).toEqual(`Stubs' child 1${TitleSeparator}Stub${TitleSeparator}Lucca BU`);
 	});
 
 	it('should prepend title when a component forces its own title', async () => {
@@ -185,7 +185,7 @@ describe('TitleService', () => {
 
 		spectator.click('.link-4');
 		await spectator.fixture.whenStable();
-		expect(resultTitle).toEqual(`Overridden title${TitleSeparator}Stubs' child 1${TitleSeparator}Stub${TitleSeparator}BU${TitleSeparator}Lucca`);
+		expect(resultTitle).toEqual(`Overridden title${TitleSeparator}Stubs' child 1${TitleSeparator}Stub${TitleSeparator}Lucca BU`);
 	});
 
 	it('should override title part when a component forces its own title part', async () => {
@@ -195,7 +195,7 @@ describe('TitleService', () => {
 
 		spectator.click('.link-5');
 		await spectator.fixture.whenStable();
-		expect(resultTitle).toEqual(`New title part${TitleSeparator}Stubs' child 1${TitleSeparator}Stub${TitleSeparator}BU${TitleSeparator}Lucca`);
+		expect(resultTitle).toEqual(`New title part${TitleSeparator}Stubs' child 1${TitleSeparator}Stub${TitleSeparator}Lucca BU`);
 	});
 
 	it('should handle observable inputs', async () => {
@@ -205,7 +205,7 @@ describe('TitleService', () => {
 
 		spectator.click('.link-6');
 		await spectator.fixture.whenStable();
-		expect(resultTitle).toEqual(`Overridden title${TitleSeparator}Delayed part${TitleSeparator}Stubs' child 1${TitleSeparator}Stub${TitleSeparator}BU${TitleSeparator}Lucca`);
+		expect(resultTitle).toEqual(`Overridden title${TitleSeparator}Delayed part${TitleSeparator}Stubs' child 1${TitleSeparator}Stub${TitleSeparator}Lucca BU`);
 	});
 
 	it('should include named params in title', async () => {
@@ -214,6 +214,6 @@ describe('TitleService', () => {
 
 		spectator.click('.link-7');
 		await spectator.fixture.whenStable();
-		expect(resultTitle).toEqual(`Stubs' child Name 1${TitleSeparator}Stub${TitleSeparator}BU${TitleSeparator}Lucca`);
+		expect(resultTitle).toEqual(`Stubs' child Name 1${TitleSeparator}Stub${TitleSeparator}Lucca BU`);
 	});
 });
