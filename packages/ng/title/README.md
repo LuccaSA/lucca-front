@@ -121,3 +121,18 @@ In the `app.module.ts`, you need to call `provideLuTitleStrategy` in the `provid
 })
 export class AppModule {}
 ```
+
+### Example with lucca-cdk
+
+lucca-cdk provides a `getStoreModuleName(moduleId)` function that will fetch the name of your module from the Lucca Store API.
+
+Use it like this in your `app.config.ts` / `main.ts` file:
+
+```ts
+import { provideLuTitleStrategy } from '@lucca-front/ng/title';
+import { getStoreModuleName } from '@lucca/cdk/remote-entity';
+
+provideLuTitleStrategy({
+  appTitle: () => getStoreModuleName('my-module-id'),
+}),
+```
