@@ -1,7 +1,13 @@
 @use '@lucca-front/scss/src/commons/utils/media';
 
 @mixin horizontalNavigation {
-	padding-block-end: 0;
+	--components-pageHeader-paddingBlockEnd: 0;
+
+	// .menu is deprecated
+	.horizontalNavigation,
+	.menu {
+		margin-block-start: var(--pr-t-spacings-50);
+	}
 }
 
 @mixin breadcrumbs {
