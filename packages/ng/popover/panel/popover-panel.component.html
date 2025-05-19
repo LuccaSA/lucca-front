@@ -1,7 +1,7 @@
 <ng-template>
 	<div
 		class="lu-popover-panel"
-		[ngClass]="panelClassesMap"
+		[class]="panelClassesMap"
 		(keydown)="_handleKeydown($event)"
 		(click)="onClick()"
 		(mouseover)="onMouseOver()"
@@ -11,7 +11,7 @@
 		[attr.aria-labelledby]="triggerId"
 		[@transformPopover]="'enter'"
 	>
-		<div class="lu-popover-content" [ngClass]="contentClassesMap" [cdkTrapFocus]="trapFocus">
+		<div class="lu-popover-content" [class]="contentClassesMap" [cdkTrapFocus]="trapFocus">
 			<ng-content></ng-content><ng-container *ngTemplateOutlet="template; context: templateContext"></ng-container>
 		</div>
 	</div>
