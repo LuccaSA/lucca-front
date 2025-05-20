@@ -8,6 +8,7 @@ $deprecatedSpacings: false !default;
 $prefersContrast: 'no-preference' !default;
 
 $fontFamily: 'SourceSans' !default;
+$fontFamilyBrand: 'LuccaSans' !default;
 $fontWeights: (
 	'regular': 400,
 	'semibold': 600,
@@ -16,7 +17,7 @@ $fontWeights: (
 ) !default;
 $fontStyles: ('normal') !default;
 
-$fontFamilyBrand: false !default;
+
 $fontWeightsBrand: (
 	'regular': 400,
 	'bold': 700,

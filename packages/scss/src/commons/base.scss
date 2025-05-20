@@ -8,7 +8,7 @@
 @mixin body {
 	background-color: var(--pr-t-elevation-surface-default);
 	color: var(--palettes-neutral-800);
-	font-family: var(--commons-font-family);
+	font-family: var(--pr-t-font-family);
 	font-size: var(--sizes-M-fontSize);
 	line-height: var(--sizes-M-lineHeight);
 
@@ -27,13 +27,15 @@
 			@include core.fontFace(config.$fontFamily, config.$fontWeights, config.$fontStyles);
 		}
 
+		@if config.$fontFamilyBrand {
+			@include core.fontFace(config.$fontFamilyBrand, config.$fontWeightsBrand, config.$fontStylesBrand);
+		}
+
 		@if config.$fontFamilyCursive {
 			@include core.fontFace(config.$fontFamilyCursive, config.$fontWeightsCursive, config.$fontStylesCursive);
 		}
 
-		@if config.$fontFamilyBrand {
-			@include core.fontFace(config.$fontFamilyBrand, config.$fontWeightsBrand, config.$fontStylesBrand);
-		}
+
 
 		*,
 		::after,

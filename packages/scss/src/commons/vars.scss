@@ -6,7 +6,16 @@
 @use '@lucca-front/scss/src/commons/function';
 
 @mixin vars {
-	// TOKENS
+	// TOKENS : TYPO
+
+	--pr-t-font-family: '#{config.$fontFamily}', Tahoma, sans-serif;
+	--pr-t-font-family-brand: '#{config.$fontFamilyBrand}', sans-serif;
+
+	@if (config.$fontFamilyCursive) {
+		--pr-t-font-family-cursive: '#{config.$fontFamilyCursive}', cursive;
+	}
+
+	// TOKENS : ELEVATION
 
 	@each $key, $map in config.$elevation {
 		@include core.cssvars('pr-t-elevation-#{$key}', $map);
@@ -40,26 +49,28 @@
 	@include core.cssvars('colors', config.$colorsRgb, '-rgb');
 
 	--commons-banner-height: 50px;
-	--commons-font-family: '#{config.$fontFamily}', Tahoma, sans-serif;
+
 	--commons-divider-width: 1px;
 	--commons-divider-style: solid;
 	--commons-divider-border: var(--commons-divider-width) var(--commons-divider-style) var(--commons-divider-color);
 	--commons-border-100: var(--palettes-neutral-100);
 	--commons-border-200: var(--palettes-neutral-200);
 
+	// Deprecated
+	--commons-font-family: '#{config.$fontFamily}', Tahoma, sans-serif;
+
 	@if (config.$fontFamily) {
 		--commons-font-family: '#{config.$fontFamily}', Tahoma, sans-serif;
-	}
-
-	@if (config.$fontFamilyCursive) {
-		--commons-font-family-cursive: '#{config.$fontFamilyCursive}', cursive;
 	}
 
 	@if (config.$fontFamilyBrand) {
 		--commons-font-family-brand: '#{config.$fontFamilyBrand}', sans-serif;
 	}
 
-	// Deprecated
+	@if (config.$fontFamilyCursive) {
+		--commons-font-family-cursive: '#{config.$fontFamilyCursive}', cursive;
+	}
+
 	--commons-background-base: var(--palettes-neutral-25);
 	--commons-divider-color: var(--palettes-neutral-200);
 
