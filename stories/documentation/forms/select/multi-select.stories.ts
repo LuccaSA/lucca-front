@@ -25,9 +25,9 @@ import {
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 import { applicationConfig, Meta, moduleMetadata } from '@storybook/angular';
 import { interval, map } from 'rxjs';
-import { startWith } from 'rxjs/operators';
+import { first, startWith } from 'rxjs/operators';
 import { HiddenArgType } from 'stories/helpers/common-arg-types';
-import { getStoryGenerator } from 'stories/helpers/stories';
+import { createTestStory, getStoryGenerator } from 'stories/helpers/stories';
 import { allLegumes, colorNameByColor, coreSelectStory, FilterLegumesPipe, ILegume, LuCoreSelectInputStoryComponent, SortLegumesPipe } from './select.utils';
 import { expect, fireEvent, screen, userEvent, within } from '@storybook/test';
 import { sleep, waitForAngular } from '../../../helpers/test';
@@ -55,6 +55,9 @@ const generateStory = getStoryGenerator<LuMultiSelectInputStoryComponent>({
 });
 
 async function checkValues(input: HTMLElement, values: string[]) {
+	if (values.length === 0) {
+		await expect(input.parentElement.getElementsByTagName('lu-numeric-badge').length).toBe(0);
+	}
 	// If it's a counter displayer
 	if (input.parentElement.getElementsByTagName('lu-numeric-badge').length > 0) {
 		const counter = input.parentElement.getElementsByTagName('lu-numeric-badge')[0];
@@ -81,7 +84,7 @@ const basePlay = async ({ canvasElement, step }) => {
 	await userEvent.click(input);
 	await waitForAngular();
 	const panel = within(screen.getByRole('listbox'));
-	const options = await panel.findAllByRole('option');
+	const options = await panel.findAllByRole('option').then((options) => options.filter((el) => !el.id.includes('select-all')));
 	const optionValues = options.slice(0, 4).map((option) => option.textContent);
 	await userEvent.click(options[0]);
 	await userEvent.click(options[1]);
@@ -136,13 +139,20 @@ const basePlay = async ({ canvasElement, step }) => {
 		await userEvent.keyboard('{Enter}');
 		// Because of the arrowDown issue, we'll select more using mouse in order to be able to test more stuff
 		const panel = within(screen.getByRole('listbox'));
-		const options = await panel.findAllByRole('option');
+		const options = await panel.findAllByRole('option').then((options) => options.filter((el) => !el.id.includes('select-all')));
 		const optionValues = options.slice(0, 4).map((option) => option.textContent);
 		await userEvent.click(options[1]);
 		await userEvent.click(options[2]);
 		await userEvent.click(options[3]);
+		const allOptions = await panel.findAllByRole('option');
 		await userEvent.keyboard('{Escape}');
-		await checkValues(input, optionValues);
+		if (allOptions.some((opt) => opt.id.includes('select-all'))) {
+			const valuesWithSelectAll = options.map((opt) => opt.textContent);
+			valuesWithSelectAll.splice(1, 3);
+			await checkValues(input, valuesWithSelectAll);
+		} else {
+			await checkValues(input, optionValues);
+		}
 		if (isBadgeDisplayer) {
 			input.focus();
 			await userEvent.tab();
@@ -190,26 +200,36 @@ export const SelectAll = generateStory({
 			legumeSelection: { mode: 'none' },
 			keepSearchAfterSelection: false,
 		},
-		play: async (context) => {
-			await basePlay(context);
-			const input = within(context.canvasElement).getByRole('combobox');
-			const buttons = within(context.canvasElement).queryAllByRole('button');
-			if (buttons.length > 0) {
-				const clearButton = buttons.find((button) => button.className.includes('multipleSelect-clear'));
-				if (clearButton) {
-					await userEvent.click(clearButton);
-				}
-			}
-			await userEvent.click(input);
-			await waitForAngular();
-			const panel = within(screen.getByRole('listbox'));
-			const selectAllCheckbox = panel.getByLabelText('Tout sélectionner');
-			await userEvent.click(selectAllCheckbox);
-			const options = await panel.findAllByRole('option');
-			const optionValues = options.map((option) => option.textContent);
-			await checkValues(input, optionValues);
-		},
 	},
+});
+
+export const SelectAllTEST = createTestStory(SelectAll, async (context) => {
+	await basePlay(context);
+	const input = within(context.canvasElement).getByRole('combobox');
+	const buttons = within(context.canvasElement).queryAllByRole('button');
+	if (buttons.length > 0) {
+		const clearButton = buttons.find((button) => button.className.includes('multipleSelect-clear'));
+		if (clearButton) {
+			await userEvent.click(clearButton);
+		}
+	}
+	await userEvent.click(input);
+	await waitForAngular();
+	const panel = within(screen.getByRole('listbox'));
+	const selectAllCheckbox = panel.getByLabelText('Tout sélectionner');
+	await userEvent.click(selectAllCheckbox);
+	const options = await panel.findAllByRole('option').then((options) => options.filter((el) => !el.id.includes('select-all')));
+	const optionValues = options.map((option) => option.textContent);
+	await checkValues(input, optionValues);
+	await userEvent.keyboard('{Escape}');
+	context.step('Select all keyboard interactions', async () => {
+		input.focus();
+		await userEvent.keyboard('{ArrowDown}');
+		await waitForAngular();
+		await userEvent.keyboard('{Enter}');
+		// We should have unselected everything with this keyboard input sequence
+		await checkValues(input, []);
+	});
 });
 
 export const Basic = generateStory({
@@ -231,7 +251,6 @@ export const Basic = generateStory({
 		'@lucca-front/ng/multi-select': ['LuMultiSelectInputComponent'],
 	},
 	storyPartial: {
-		play: basePlay,
 		args: {
 			selectedLegumes: allLegumes.slice(0, 15),
 			keepSearchAfterSelection: false,
@@ -243,6 +262,8 @@ export const Basic = generateStory({
 		},
 	},
 });
+
+export const BasicTEST = createTestStory(Basic, basePlay);
 
 export const WithMultiDisplayer = generateStory({
 	name: 'With MultiDisplayer',
@@ -482,6 +503,7 @@ export const GroupBy = generateStory({
 	[options]="legumes | filterLegumes:clue | sortLegumes:(clue ? ['name', legumeColor] : [legumeColor])"
 	(clueChange)="clue = $event"
 	[maxValuesShown]="maxValuesShown"
+	clearable
 >
 	<ng-container *luOptionGroup="let group by legumeColor; select: selectRef">
 		Légume {{colorNameByColor[group.key]}}{{group.options.length > 1 ? 's' : ''}}
@@ -498,6 +520,22 @@ export const GroupBy = generateStory({
 			colorNameByColor,
 		},
 	},
+});
+
+export const GroupByTEST = createTestStory(GroupBy, async (context) => {
+	await basePlay(context);
+	context.step('Group select all keyboard interactions', async () => {
+		const input = within(context.canvasElement).getByRole('combobox');
+		input.focus();
+		await userEvent.keyboard('{ArrowDown}');
+		await waitForAngular();
+		await userEvent.keyboard('{Enter}');
+		const panel = within(screen.getByRole('listbox'));
+		const options = await panel.findAllByRole('option');
+		const optionValues = options.map((option) => option.textContent);
+		// We should have unselected everything with this keyboard input sequence
+		await checkValues(input, optionValues.slice(1, 3));
+	});
 });
 
 export const GroupBySelectAll = generateStory({
