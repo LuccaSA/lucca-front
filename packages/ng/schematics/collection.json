@@ -35,6 +35,11 @@
       "description": "Replace cdn urls with their new location",
       "factory": "./cdn-urls/index",
       "schema": "./cdn-urls/schema.json"
+    },
+    "lu-icon": {
+      "description": "Migrate HTML icons to the new lu-icon component",
+      "factory": "./lu-icon/index",
+      "schema": "./lu-icon/schema.json"
     }
   }
 }

@@ -6,8 +6,8 @@
 	"overrides": [
 		{
 			"files": [
-				".component.html",
-				".page.html"
+				"*.component.html",
+				"*.page.html"
 			],
 			"options": {
 				"parser": "angular"

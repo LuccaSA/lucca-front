@@ -102,6 +102,7 @@
 
 			&::before {
 				@include icon.generate('people_person');
+
 				color: var(--palettes-neutral-600);
 				font-weight: 400;
 				font-size: var(--components-user-picture-placeholder, var(--components-userPicture-M-placeholder));

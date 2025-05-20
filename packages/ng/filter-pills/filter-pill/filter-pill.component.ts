@@ -27,7 +27,7 @@ import { getIntl } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { PopoverDirective } from '@lucca-front/ng/popover2';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
-import { FILTER_PILL_HOST_COMPONENT, FILTER_PILL_INPUT_COMPONENT } from '../core';
+import { FILTER_PILL_HOST_COMPONENT, FILTER_PILL_INPUT_COMPONENT, FilterPillInputComponent } from '../core';
 import { LU_FILTER_PILLS_TRANSLATIONS } from '../filter-pills.translate';
 
 let nextId = 0;
@@ -61,7 +61,14 @@ export class FilterPillComponent {
 
 	layout = computed(() => this.inputComponentRef()?.filterPillLayout?.() || 'default');
 
-	inputComponentRef = contentChild(FILTER_PILL_INPUT_COMPONENT);
+	// The easy way to grab input component, will work in most cases
+	childInputComponentRef = contentChild(FILTER_PILL_INPUT_COMPONENT);
+
+	// The harder way, because child has to register itself to the host, might become the default approach if this is required too much
+	// (like when child isn't created when component inits or it's too deep)
+	registeredInputComponentRef = signal<FilterPillInputComponent | null>(null);
+
+	inputComponentRef = computed(() => this.registeredInputComponentRef() || this.childInputComponentRef());
 
 	popoverRef = viewChild(PopoverDirective);
 
@@ -122,6 +129,7 @@ export class FilterPillComponent {
 	shouldHideCombobox = computed(() => this.inputComponentRef()?.hideCombobox?.() || false);
 
 	inputIsEmpty = computed(() => this.inputComponentRef()?.isFilterPillEmpty());
+	inputIsClearable = computed(() => this.inputComponentRef()?.isFilterPillClearable());
 
 	shouldShowColon = computed(() => this.inputComponentRef()?.showColon?.() || !this.inputIsEmpty());
 
@@ -185,5 +193,9 @@ export class FilterPillComponent {
 
 	clear(): void {
 		this.inputComponentRef()?.clearFilterPillValue();
+	}
+
+	registerInput(input: FilterPillInputComponent): void {
+		this.registeredInputComponentRef.set(input);
 	}
 }

@@ -5,6 +5,7 @@
 
 $isNamespaced: false !default;
 $deprecatedSpacings: false !default;
+$prefersContrast: 'no-preference' !default;
 
 $fontFamily: 'SourceSans' !default;
 $fontWeights: (
@@ -13,12 +14,22 @@ $fontWeights: (
 	'bold': 700,
 	'black': 800,
 ) !default;
+$fontStyles: ('normal') !default;
+
+$fontFamilyBrand: false !default;
+$fontWeightsBrand: (
+	'regular': 400,
+	'bold': 700,
+	'black': 800,
+) !default;
+$fontStylesBrand: ('normal', 'italic') !default;
 
 $fontFamilyCursive: false !default;
 $fontWeightsCursive: (
 	'regular': 400,
 	'bold': 700,
 ) !default;
+$fontStylesCursive: ('normal') !default;
 
 $product: 'brand' !default;
 $palettesShades: text, 0, 25, 50, 100, 200, 300, 400, 500, 600, 700, 800, 900; // text is deprecated
@@ -472,6 +483,15 @@ $colorInput: (
 	border-critical-hover: var(--palettes-critical-600),
 );
 
+$colorInputContrasted: (
+	text-placeholder: var(--palettes-neutral-700),
+	text-placeholder-critical: var(--palettes-critical-700),
+	border: var(--palettes-neutral-600),
+	border-hover: var(--palettes-neutral-700),
+	border-critical: var(--palettes-critical-700),
+	border-critical-hover: var(--palettes-critical-800),
+);
+
 $breakpoints: (
 	XXXS: 320px,
 	XXS: 480px,
@@ -573,7 +593,7 @@ $loading: (
 
 $textLink: (
 	color: var(--palettes-product-700),
-	hover: var(--palettes-product-600),
+	hover: var(--palettes-product-800),
 	disabled: var(--palettes-neutral-500), // disabled token candidate
 );
 

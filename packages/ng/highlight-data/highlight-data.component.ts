@@ -1,8 +1,5 @@
-import { NgClass } from '@angular/common';
 import { booleanAttribute, ChangeDetectionStrategy, Component, computed, effect, HostBinding, inject, input, ViewEncapsulation } from '@angular/core';
-import { RouterLink } from '@angular/router';
 import { LuClass } from '@lucca-front/ng/core';
-import { IconComponent } from '@lucca-front/ng/icon';
 @Component({
 	selector: 'lu-highlight-data',
 	standalone: true,
@@ -10,7 +7,6 @@ import { IconComponent } from '@lucca-front/ng/icon';
 	styleUrls: ['./highlight-data.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	encapsulation: ViewEncapsulation.None,
-	imports: [IconComponent, NgClass, RouterLink],
 	providers: [LuClass],
 	host: {
 		class: 'highlightData',
@@ -57,7 +53,7 @@ export class HighlightDataComponent {
 		'calculator' | 'calendar' | 'cleemy-card' | 'coffee' | 'headphone' | 'mail' | 'manifying-glass' | 'medallon' | 'piggy-bank' | 'polaroid-female' | 'polaroid-male' | 'polaroids' | string
 	>();
 	illustrationSrc = computed(() => {
-		if (this.illustration().includes('://')) {
+		if (this.illustration().includes('/')) {
 			return this.illustration();
 		}
 		return `https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/generic/${this.illustration()}.svg`;

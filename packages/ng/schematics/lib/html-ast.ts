@@ -11,7 +11,7 @@ import { currentSchematicContext } from './lf-schematic-context';
 export type TemplateNode = ParsedTemplate['nodes'] extends Array<infer S> ? S : never;
 
 export class HtmlAstVisitor<TNode extends TemplateNode> {
-	private nodes: TNode[];
+	public readonly nodes: TNode[];
 
 	public constructor(
 		nodes: TNode[] | TNode
@@ -67,33 +67,33 @@ export class HtmlAstVisitor<TNode extends TemplateNode> {
 		});
 	}
 
-	public visitNodes(cb: (node: TemplateNode) => void): void {
+	public visitNodes(cb: (node: TemplateNode, parent?: TemplateNode) => void): void {
 		this.visit(cb, this.nodes);
 	}
 
-	private visit(cb: (node: TemplateNode) => void, nodes: TemplateNode[]): void {
+	private visit(cb: (node: TemplateNode, parent?: TemplateNode) => void, nodes: TemplateNode[], parent?: TemplateNode): void {
 		for (const node of nodes) {
-			cb(node);
+			cb(node, parent);
 			if (node instanceof currentSchematicContext.angularCompiler.TmplAstIfBlock) {
 				// Visit @if branches
 				node.branches.forEach((branch) => {
-					this.visit(cb, branch.children);
+					this.visit(cb, branch.children, node);
 				});
 			} else if (node instanceof currentSchematicContext.angularCompiler.TmplAstForLoopBlock) {
 				// Visit @for's children
-				this.visit(cb, node.children);
+				this.visit(cb, node.children, node);
 
 				if (node.empty) {
 					// If we have an @empty block, visit its children too
-					this.visit(cb, node.empty.children);
+					this.visit(cb, node.empty.children, node);
 				}
 			} else if (node instanceof currentSchematicContext.angularCompiler.TmplAstSwitchBlock) {
 				node.cases.forEach((caseNode) => {
-					this.visit(cb, caseNode.children);
+					this.visit(cb, caseNode.children, node);
 				});
 			} else if (node instanceof currentSchematicContext.angularCompiler.TmplAstDeferredBlock || node instanceof currentSchematicContext.angularCompiler.TmplAstElement || node instanceof currentSchematicContext.angularCompiler.TmplAstTemplate) {
 				// Visit @defer and classic AST elements
-				this.visit(cb, node.children);
+				this.visit(cb, node.children, node);
 			}
 		}
 	}

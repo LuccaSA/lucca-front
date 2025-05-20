@@ -28,6 +28,7 @@
 		$breakpoint: pxToEm(map.get(config.$breakpoints, $breakpoint));
 	}
 
+	// stylelint-disable-next-line scss/at-rule-no-unknown
 	@#{$at} #{$name} #{$reversed} (min-#{$property}: #{$breakpoint}) {
 		@content;
 	}
@@ -55,11 +56,13 @@
 		$breakpoint1: $breakpointTmp;
 	}
 
+	// stylelint-disable scss/at-rule-no-unknown
 	@#{$at} #{$name} (min-#{$property}: #{$breakpoint1}) {
 		@#{$at} #{$name} #{$reversed} (min-#{$property}: #{$breakpoint2}) {
 			@content;
 		}
 	}
+	// stylelint-enable
 }
 
 // les raccourcis vers les requêtes pour min/max/between
@@ -123,6 +126,7 @@
 }
 
 @mixin pointer($query, $any: false, $reversed: false) {
+	// stylelint-disable-next-line scss/at-rule-no-unknown
 	@#{if($reversed, 'media not', 'media')} (#{if($any, 'any-', '')}pointer: #{$query}) {
 		@content;
 	}

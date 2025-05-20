@@ -32,6 +32,11 @@ export class ButtonComponent implements OnChanges {
 	})
 	delete = false;
 
+	@Input({
+		transform: booleanAttribute,
+	})
+	disclosure = false;
+
 	@Input()
 	palette: Palette = 'none';
 
@@ -75,8 +80,9 @@ export class ButtonComponent implements OnChanges {
 			[`palette-${this.palette}`]: !!this.palette,
 			[`is-${this.state}`]: !!this.state,
 			['mod-onlyIcon']: this.iconOnly,
-			['mod-withIcon']: this.#iconComponentRef !== undefined,
+			['mod-withIcon']: this.#iconComponentRef !== undefined && !this.disclosure && !this.iconOnly,
 			['mod-delete']: this.delete,
+			['mod-disclosure']: this.disclosure,
 		};
 
 		if (this.luButton !== '') {

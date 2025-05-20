@@ -1,4 +1,5 @@
-@use '_definitions';
+@use 'definitions';
+
 @include definitions.optionItemStyle;
 
 :host {
@@ -91,124 +92,41 @@
 	}
 }
 
-:host-context(.lu-picker-panel lu-tree-option) {
-	.optionItem-value {
-		padding-inline-start: var(--pr-t-spacings-100);
+@function repeat($repeat, $selector) {
+	$result: '';
+
+	@for $i from 1 through $repeat {
+		$result: $result + ' ' + $selector;
 	}
+
+	@return $result;
 }
 
-:host-context(.lu-picker-panel lu-tree-option lu-tree-option) {
-	.optionItem-value {
-		padding-inline-start: calc(var(--pr-t-spacings-100) + var(--components-options-tree-padding-child));
-	}
-}
+@for $i from 1 through 10 {
+	// Single
+	:host-context(.lu-picker-panel #{repeat($i, 'lu-tree-option')}) {
+		.optionItem-value {
+			@if ($i == 1) {
+				padding-inline-start: calc(var(--pr-t-spacings-100) + (var(--components-options-tree-padding-child) * var(--nesting)));
+			}
 
-:host-context(.lu-picker-panel lu-tree-option lu-tree-option lu-tree-option) {
-	.optionItem-value {
-		padding-inline-start: calc(var(--pr-t-spacings-100) + var(--components-options-tree-padding-child) * 2);
-	}
-}
-
-:host-context(.lu-picker-panel lu-tree-option lu-tree-option lu-tree-option lu-tree-option) {
-	.optionItem-value {
-		padding-inline-start: calc(var(--pr-t-spacings-100) + var(--components-options-tree-padding-child) * 3);
-	}
-}
-
-:host-context(.lu-picker-panel lu-tree-option lu-tree-option lu-tree-option lu-tree-option lu-tree-option) {
-	.optionItem-value {
-		padding-inline-start: calc(var(--pr-t-spacings-100) + var(--components-options-tree-padding-child) * 4);
-	}
-}
-
-:host-context(.lu-picker-panel lu-tree-option lu-tree-option lu-tree-option lu-tree-option lu-tree-option lu-tree-option) {
-	.optionItem-value {
-		padding-inline-start: calc(var(--pr-t-spacings-100) + var(--components-options-tree-padding-child) * 5);
-	}
-}
-
-// Multiple
-
-:host-context(.lu-picker-panel.mod-multiple lu-tree-option) {
-	.optionItem-value {
-		padding-inline-start: var(--components-options-tree-multiple-padding);
-
-		&::before {
-			inset-inline-start: var(--pr-t-spacings-100);
-		}
-
-		&::after {
-			inset-inline-start: var(--pr-t-spacings-100);
+			--nesting: #{$i - 1};
 		}
 	}
-}
 
-:host-context(.lu-picker-panel.mod-multiple lu-tree-option lu-tree-option) {
-	.optionItem-value {
-		padding-inline-start: calc(var(--components-options-tree-multiple-padding) + var(--components-options-tree-padding-child));
+	// Multiple
+	:host-context(.lu-picker-panel.mod-multiple #{repeat($i, 'lu-tree-option')}) {
+		.optionItem-value {
+			@if ($i == 1) {
+				padding-inline-start: calc(var(--components-options-tree-multiple-padding) + (var(--components-options-tree-padding-child) * var(--nesting)));
 
-		&::before {
-			inset-inline-start: calc(var(--pr-t-spacings-100) + var(--components-options-tree-padding-child));
-		}
+				&::before,
+				&::after {
+					inset-inline-start: calc(var(--pr-t-spacings-100) + (var(--components-options-tree-padding-child) * var(--nesting)));
+				}
+			}
 
-		&::after {
-			inset-inline-start: calc(var(--pr-t-spacings-100) + var(--components-options-tree-padding-child));
-		}
-	}
-}
-
-:host-context(.lu-picker-panel.mod-multiple lu-tree-option lu-tree-option lu-tree-option) {
-	.optionItem-value {
-		padding-inline-start: calc(var(--components-options-tree-multiple-padding) + var(--components-options-tree-padding-child) * 2);
-
-		&::before {
-			inset-inline-start: calc(var(--pr-t-spacings-100) + var(--components-options-tree-padding-child) * 2);
-		}
-
-		&::after {
-			inset-inline-start: calc(var(--pr-t-spacings-100) + var(--components-options-tree-padding-child) * 2);
-		}
-	}
-}
-
-:host-context(.lu-picker-panel.mod-multiple lu-tree-option lu-tree-option lu-tree-option lu-tree-option) {
-	.optionItem-value {
-		padding-inline-start: calc(var(--components-options-tree-multiple-padding) + var(--components-options-tree-padding-child) * 3);
-
-		&::before {
-			inset-inline-start: calc(var(--pr-t-spacings-100) + var(--components-options-tree-padding-child) * 3);
-		}
-
-		&::after {
-			inset-inline-start: calc(var(--pr-t-spacings-100) + var(--components-options-tree-padding-child) * 3);
-		}
-	}
-}
-
-:host-context(.lu-picker-panel.mod-multiple lu-tree-option lu-tree-option lu-tree-option lu-tree-option lu-tree-option) {
-	.optionItem-value {
-		padding-inline-start: calc(var(--components-options-tree-multiple-padding) + var(--components-options-tree-padding-child) * 4);
-
-		&::before {
-			inset-inline-start: calc(var(--pr-t-spacings-100) + var(--components-options-tree-padding-child) * 4);
-		}
-
-		&::after {
-			inset-inline-start: calc(var(--pr-t-spacings-100) + var(--components-options-tree-padding-child) * 4);
-		}
-	}
-}
-
-:host-context(.lu-picker-panel.mod-multiple lu-tree-option lu-tree-option lu-tree-option lu-tree-option lu-tree-option lu-tree-option) {
-	.optionItem-value {
-		padding-inline-start: calc(var(--components-options-tree-multiple-padding) + var(--components-options-tree-padding-child) * 5);
-
-		&::before {
-			inset-inline-start: calc(var(--pr-t-spacings-100) + var(--components-options-tree-padding-child) * 5);
-		}
-
-		&::after {
-			inset-inline-start: calc(var(--pr-t-spacings-100) + var(--components-options-tree-padding-child) * 5);
+			--nesting: #{$i - 1};
 		}
 	}
 }

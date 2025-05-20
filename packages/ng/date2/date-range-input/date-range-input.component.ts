@@ -10,7 +10,6 @@ import {
 	forwardRef,
 	HostBinding,
 	inject,
-	Input,
 	input,
 	Signal,
 	signal,
@@ -115,8 +114,7 @@ export class DateRangeInputComponent extends AbstractDateComponent implements Co
 
 	shortcuts = input<readonly CalendarShortcut[]>();
 
-	@Input()
-	autocomplete: string;
+	autocomplete = input<string>('');
 
 	protected currentRightDate = computed(() => {
 		return this.hasTwoCalendars() ? this.getNextCalendarDate(this.currentDate()) : this.currentDate();
@@ -194,6 +192,9 @@ export class DateRangeInputComponent extends AbstractDateComponent implements Co
 	isFilterPill = false;
 
 	isFilterPillEmpty = computed(() => this.selectedRange() === null);
+	isFilterPillClearable = computed(() => this.clearable() ?? this.#defaultFilterPillClearable() ?? this.#defaultClearable);
+	#defaultClearable = false;
+	#defaultFilterPillClearable = signal<boolean | null>(null);
 
 	filterPillPopoverCloseFn?: () => void;
 
@@ -445,6 +446,8 @@ export class DateRangeInputComponent extends AbstractDateComponent implements Co
 			const _dateRange = transformDateRangeInputToDateRange(dateRange);
 			this.selectedRange.set(_dateRange);
 			this.currentDate.set(startOfDay(dateRange.start));
+		} else {
+			this.clear(this.startTextInputRef().nativeElement, this.endTextInputRef().nativeElement);
 		}
 	}
 
@@ -456,6 +459,7 @@ export class DateRangeInputComponent extends AbstractDateComponent implements Co
 
 	override setDisabledState(isDisabled: boolean) {
 		this.filterPillDisabled.set(isDisabled);
+		super.setDisabledState(isDisabled);
 	}
 
 	clear(start: HTMLInputElement, end: HTMLInputElement) {
@@ -494,6 +498,7 @@ export class DateRangeInputComponent extends AbstractDateComponent implements Co
 
 	enableFilterPillMode(): void {
 		this.isFilterPill = true;
+		this.#defaultFilterPillClearable.set(true);
 	}
 
 	clearFilterPillValue(): void {
