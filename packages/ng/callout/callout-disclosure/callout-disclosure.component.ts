@@ -1,4 +1,4 @@
-import { CommonModule, NgClass } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, ViewEncapsulation, booleanAttribute } from '@angular/core';
 import { LuccaIcon } from '@lucca-front/icons';
 import { Palette, PortalContent, PortalDirective } from '@lucca-front/ng/core';
@@ -10,7 +10,7 @@ import { getCalloutPalette } from '../callout.utils';
 @Component({
 	selector: 'lu-callout-disclosure',
 	standalone: true,
-	imports: [CommonModule, IconComponent, NgClass, PortalDirective, CalloutIconPipe],
+	imports: [CommonModule, IconComponent, PortalDirective, CalloutIconPipe],
 	templateUrl: './callout-disclosure.component.html',
 	styleUrls: ['./callout-disclosure.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,

@@ -1,4 +1,3 @@
-import { NgClass } from '@angular/common';
 import { booleanAttribute, ChangeDetectionStrategy, Component, EventEmitter, HostBinding, Input, Output, ViewEncapsulation } from '@angular/core';
 import { LuccaIcon } from '@lucca-front/icons';
 import { getIntl, Palette, PortalContent, PortalDirective } from '@lucca-front/ng/core';
@@ -10,7 +9,7 @@ import { getCalloutPalette } from '../callout.utils';
 @Component({
 	selector: 'lu-callout',
 	standalone: true,
-	imports: [NgClass, PortalDirective, CalloutIconPipe],
+	imports: [PortalDirective, CalloutIconPipe],
 	templateUrl: './callout.component.html',
 	styleUrls: ['./callout.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,

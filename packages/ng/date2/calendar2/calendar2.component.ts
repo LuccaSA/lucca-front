@@ -1,4 +1,3 @@
-import { NgClass } from '@angular/common';
 import { booleanAttribute, ChangeDetectionStrategy, Component, computed, effect, ElementRef, inject, input, LOCALE_ID, model, OnInit, output, viewChildren, ViewEncapsulation } from '@angular/core';
 import { getIntl } from '@lucca-front/ng/core';
 import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
@@ -46,7 +45,7 @@ const MODE_HIERARCHY: CalendarMode[] = ['day', 'month', 'year'];
 @Component({
 	selector: 'lu-calendar2',
 	standalone: true,
-	imports: [RepeatTimesDirective, Calendar2CellDirective, NgClass, LuTooltipTriggerDirective],
+	imports: [RepeatTimesDirective, Calendar2CellDirective, LuTooltipTriggerDirective],
 	templateUrl: './calendar2.component.html',
 	styleUrl: './calendar2.component.scss',
 	encapsulation: ViewEncapsulation.None,
@@ -399,7 +398,7 @@ export class Calendar2Component implements OnInit {
 			noButton: isOverflow && !this.showOverflow(),
 			disabled: status?.disabled || (isOverflow && !this.enableOverflow()),
 			// Compile everything into a list of classes for CSS
-			ngClasses: {
+			classes: {
 				'is-daysOff': isWeekend,
 				'is-overflow': isOverflow,
 				'is-current': isCurrent,
