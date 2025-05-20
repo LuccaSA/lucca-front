@@ -2,13 +2,7 @@
 @use '@lucca-front/scss/src/commons/utils/namespace';
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
-	padding: var(--components-pageHeader-padding);
-
-	// .menu is deprecated
-	.horizontalNavigation,
-	.menu {
-		margin-block-start: var(--pr-t-spacings-100);
-	}
+	padding-block: var(--components-pageHeader-paddingBlock);
 
 	@at-root ($atRoot) {
 		.pageHeader-content {
