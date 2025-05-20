@@ -24,7 +24,7 @@
 	--components-button-color: transparent;
 	--components-button-userSelect: none;
 
-	@include loading.spinner(var(--components-button-font-size));
+	@include loading.spinner(var(--pr-t-font-fontSize-200));
 }
 
 @mixin loadingS {
@@ -38,8 +38,8 @@
 
 	&::after {
 		color: var(--palettes-neutral-0);
-		font-size: calc(1.5 * var(--components-button-font-size));
-		block-size: var(--components-button-line-height);
+		font-size: calc(1.5 * var(--pr-t-font-fontSize-200));
+		block-size: var(--pr-t-font-lineHeight-300);
 		inset: 0;
 		margin: auto;
 		position: absolute;

@@ -8,20 +8,19 @@
 	background-color: var(--components-button-backgroundColor);
 	box-shadow: var(--components-button-boxShadow);
 	border-radius: var(--commons-borderRadius-M);
-	line-height: var(--components-button-line-height);
+	font: var(--components-button-font);
+	font-weight: 600;
 	padding: var(--components-button-padding);
 	transition-property: background-color, color, border-color, box-shadow;
 	transition-duration: var(--commons-animations-durations-fast);
 	inline-size: var(--components-button-width);
 	min-inline-size: var(--components-button-minWidth);
-	font-size: var(--components-button-font-size);
 	gap: var(--components-button-gap);
 	pointer-events: var(--components-button-pointerEvents);
 	user-select: var(--components-button-userSelect);
 	opacity: var(--components-button-opacity);
 	cursor: var(--components-button-cursor);
 	transition-timing-function: ease;
-	font-family: inherit;
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
@@ -30,7 +29,6 @@
 	vertical-align: middle;
 	text-wrap: balance;
 	text-align: center;
-	font-weight: 600;
 	border: 0;
 
 	&,
