@@ -17,7 +17,6 @@ $fontWeights: (
 ) !default;
 $fontStyles: ('normal') !default;
 
-
 $fontWeightsBrand: (
 	'regular': 400,
 	'bold': 700,
@@ -31,6 +30,26 @@ $fontWeightsCursive: (
 	'bold': 700,
 ) !default;
 $fontStylesCursive: ('normal') !default;
+
+$fontSize: (
+	'150': 0.75rem,
+	'175': 0.875rem,
+	'200': 1rem,
+	'225': 1.125rem,
+	'250': 1.25rem,
+	'275': 1.375rem,
+	'300': 1.5rem,
+	'325': 1.625rem,
+	'350': 1.75rem,
+) !default;
+
+$lineHeight: (
+	'200': 1rem,
+	'250': 1.25rem,
+	'300': 1.5rem,
+	'350': 1.75rem,
+	'400': 2rem,
+) !default;
 
 $product: 'brand' !default;
 $palettesShades: text, 0, 25, 50, 100, 200, 300, 400, 500, 600, 700, 800, 900; // text is deprecated

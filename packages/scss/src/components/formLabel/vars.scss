@@ -1,9 +1,9 @@
 @mixin vars {
-	--components-formLabel-fontSize: var(--sizes-M-fontSize);
-	--components-formLabel-lineHeight: var(--sizes-M-lineHeight);
+	--components-formLabel-fontSize: var(--pr-t-font-fontSize-200);
+	--components-formLabel-lineHeight: var(--pr-t-font-lineHeight-300);
 	--components-formLabel-color: var(--palettes-neutral-800);
-	--components-formLabel-help-fontSize: var(--sizes-XS-lineHeight);
-	--components-formLabel-help-lineHeight: var(--sizes-M-lineHeight);
+	--components-formLabel-help-fontSize: var(--pr-t-font-lineHeight-200);
+	--components-formLabel-help-lineHeight: var(--pr-t-font-lineHeight-300);
 	--components-formLabel-paddingRight: 0;
 	--components-formLabel-width: fit-content;
 	--components-formLabel-cursor: default;

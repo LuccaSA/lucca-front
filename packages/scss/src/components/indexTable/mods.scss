@@ -290,7 +290,7 @@
 		@include button.onlyIconS;
 
 		&.mod-delete {
-			// For specificity purpose. Could be removed if we decide to remove automatic CSS imports in Angular components 
+			// For specificity purpose. Could be removed if we decide to remove automatic CSS imports in Angular components
 			@include button.delete;
 		}
 	}
@@ -347,8 +347,8 @@
 		gap: var(--pr-t-spacings-100);
 		padding: var(--pr-t-spacings-50);
 		border-radius: var(--commons-borderRadius-L);
-		font-size: var(--sizes-S-fontSize);
-		line-height: var(--sizes-S-lineHeight);
+		font-size: var(--pr-t-font-fontSize-175);
+		line-height: var(--pr-t-font-lineHeight-250);
 		color: var(--palettes-neutral-800);
 		background-color: var(--pr-t-elevation-surface-default);
 

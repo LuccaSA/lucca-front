@@ -15,6 +15,10 @@
 		--pr-t-font-family-cursive: '#{config.$fontFamilyCursive}', cursive;
 	}
 
+	@include core.cssvars('pr-t-font-fontSize', config.$fontSize);
+	@include core.cssvars('pr-t-font-lineHeight', config.$lineHeight);
+	@include core.cssvars('pr-t-font-fontWeight', config.$fontWeights);
+
 	// TOKENS : ELEVATION
 
 	@each $key, $map in config.$elevation {
@@ -41,10 +45,6 @@
 		@include core.cssvars('palettes-#{$palette}', map.get(config.$palettesInterpolation, $palette));
 	}
 
-	@each $key, $map in config.$sizes {
-		@include core.cssvars('sizes-#{$key}', $map);
-	}
-
 	@include core.cssvars('colors', config.$colors, '-color');
 	@include core.cssvars('colors', config.$colorsRgb, '-rgb');
 
@@ -69,6 +69,10 @@
 
 	@if (config.$fontFamilyCursive) {
 		--commons-font-family-cursive: '#{config.$fontFamilyCursive}', cursive;
+	}
+
+	@each $key, $map in config.$sizes {
+		@include core.cssvars('sizes-#{$key}', $map);
 	}
 
 	--commons-background-base: var(--palettes-neutral-25);

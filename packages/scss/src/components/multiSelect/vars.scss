@@ -1,6 +1,6 @@
 @mixin vars {
-	--components-multiSelect-fontSize: var(--sizes-M-fontSize);
-	--components-multiSelect-lineHeight: var(--sizes-M-lineHeight);
+	--components-multiSelect-fontSize: var(--pr-t-font-fontSize-200);
+	--components-multiSelect-lineHeight: var(--pr-t-font-lineHeight-300);
 	--components-multiSelect-padding: var(--pr-t-spacings-100);
 	--components-multiSelect-gap: var(--pr-t-spacings-100);
 	--components-multiSelect-background: var(--pr-t-color-input-background);

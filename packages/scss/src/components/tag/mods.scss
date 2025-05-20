@@ -21,8 +21,8 @@
 }
 
 @mixin L {
-	--components-tag-fontSize: var(--sizes-M-fontSize);
-	--components-tag-lineHeight: var(--sizes-M-lineHeight);
+	--components-tag-fontSize: var(--pr-t-font-fontSize-200);
+	--components-tag-lineHeight: var(--pr-t-font-lineHeight-300);
 	--components-tag-iconBottom: 0;
 
 	.lucca-icon {

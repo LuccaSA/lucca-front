@@ -2,8 +2,8 @@
 @use '@lucca-front/scss/src/components/clear/exports' as clear;
 
 @mixin S {
-	--components-simpleSelect-fontSize: var(--sizes-S-fontSize);
-	--components-simpleSelect-lineHeight: var(--sizes-S-lineHeight);
+	--components-simpleSelect-fontSize: var(--pr-t-font-fontSize-175);
+	--components-simpleSelect-lineHeight: var(--pr-t-font-lineHeight-250);
 	--components-simpleSelect-padding: var(--pr-t-spacings-75);
 	--components-simpleSelect-gap: var(--pr-t-spacings-75);
 
@@ -24,8 +24,8 @@
 }
 
 @mixin XS {
-	--components-simpleSelect-fontSize: var(--sizes-XS-fontSize);
-	--components-simpleSelect-lineHeight: var(--sizes-XS-lineHeight);
+	--components-simpleSelect-fontSize: var(--pr-t-font-fontSize-150);
+	--components-simpleSelect-lineHeight: var(--pr-t-font-lineHeight-200);
 	--components-simpleSelect-padding: var(--pr-t-spacings-50);
 	--components-simpleSelect-gap: var(--pr-t-spacings-50);
 

@@ -51,8 +51,8 @@
 
 	.radio-label {
 		color: var(--palettes-neutral-800);
-		line-height: var(--sizes-M-lineHeight);
-		min-block-size: var(--sizes-M-lineHeight);
+		line-height: var(--pr-t-font-lineHeight-300);
+		min-block-size: var(--pr-t-font-lineHeight-300);
 		padding: var(--components-radio-label-padding);
 		transition-duration: var(--commons-animations-durations-fast);
 		transition-property: color;
@@ -87,7 +87,7 @@
 
 	.radio-label-helper {
 		color: var(--palettes-neutral-700);
-		font-size: var(--sizes-S-fontSize);
-		line-height: var(--sizes-S-lineHeight);
+		font-size: var(--pr-t-font-fontSize-175);
+		line-height: var(--pr-t-font-lineHeight-250);
 	}
 }

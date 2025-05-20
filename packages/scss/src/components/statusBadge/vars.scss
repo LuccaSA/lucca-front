@@ -1,6 +1,6 @@
 @mixin vars {
-	--components-statusBadge-fontSize: var(--sizes-S-fontSize);
-	--components-statusBadge-lineHeight: var(--sizes-XS-lineHeight);
+	--components-statusBadge-fontSize: var(--pr-t-font-fontSize-175);
+	--components-statusBadge-lineHeight: var(--pr-t-font-lineHeight-200);
 	--components-statusBadge-dot-size: 0.5rem;
 	--components-statusBadge-dot-top: var(--pr-t-spacings-50);
 }

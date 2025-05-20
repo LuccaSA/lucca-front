@@ -7,8 +7,8 @@
 @use '@lucca-front/scss/src/components/numericBadge/exports' as numericBadge;
 
 @mixin S {
-	--components-multiSelect-fontSize: var(--sizes-S-fontSize);
-	--components-multiSelect-lineHeight: var(--sizes-S-lineHeight);
+	--components-multiSelect-fontSize: var(--pr-t-font-fontSize-175);
+	--components-multiSelect-lineHeight: var(--pr-t-font-lineHeight-250);
 	--components-multiSelect-padding: var(--pr-t-spacings-75);
 	--components-multiSelect-gap: var(--pr-t-spacings-75);
 

@@ -7,42 +7,42 @@
 
 @mixin h1 {
 	--sizes-verticalPadding: var(--sizes-XXL-verticalPadding);
-	--sizes-fontSize: var(--sizes-XXL-fontSize);
-	--sizes-lineHeight: var(--sizes-XXL-lineHeight);
+	--sizes-fontSize: var(--pr-t-font-fontSize-350);
+	--sizes-lineHeight: var(--pr-t-font-lineHeight-400);
 	--components-title-weight: 900;
 }
 
 @mixin h2 {
 	--sizes-verticalPadding: var(--sizes-XL-verticalPadding);
-	--sizes-fontSize: var(--sizes-XL-fontSize);
-	--sizes-lineHeight: var(--sizes-XL-lineHeight);
+	--sizes-fontSize: var(--pr-t-font-fontSize-275);
+	--sizes-lineHeight: var(--pr-t-font-lineHeight-350);
 	--components-title-weight: 700;
 }
 
 @mixin h3 {
 	--sizes-verticalPadding: var(--sizes-L-verticalPadding);
-	--sizes-fontSize: var(--sizes-L-fontSize);
-	--sizes-lineHeight: var(--sizes-L-lineHeight);
+	--sizes-fontSize: var(--pr-t-font-fontSize-225);
+	--sizes-lineHeight: var(--pr-t-font-lineHeight-300);
 	--components-title-weight: 700;
 }
 
 @mixin h4 {
 	--sizes-verticalPadding: var(--sizes-M-verticalPadding);
-	--sizes-fontSize: var(--sizes-M-fontSize);
-	--sizes-lineHeight: var(--sizes-M-lineHeight);
+	--sizes-fontSize: var(--pr-t-font-fontSize-200);
+	--sizes-lineHeight: var(--pr-t-font-lineHeight-300);
 	--components-title-weight: 600;
 }
 
 @mixin h5 {
 	--sizes-verticalPadding: var(--sizes-S-verticalPadding);
-	--sizes-fontSize: var(--sizes-S-fontSize);
-	--sizes-lineHeight: var(--sizes-S-lineHeight);
+	--sizes-fontSize: var(--pr-t-font-fontSize-175);
+	--sizes-lineHeight: var(--pr-t-font-lineHeight-250);
 	--components-title-weight: 600;
 }
 
 @mixin h6 {
 	--sizes-verticalPadding: var(--sizes-XS-verticalPadding);
-	--sizes-fontSize: var(--sizes-XS-fontSize);
-	--sizes-lineHeight: var(--sizes-XS-lineHeight);
+	--sizes-fontSize: var(--pr-t-font-fontSize-150);
+	--sizes-lineHeight: var(--pr-t-font-lineHeight-200);
 	--components-title-weight: 600;
 }

@@ -65,13 +65,13 @@
 			flex-direction: column;
 			align-items: var(--components-fileUpload-instruction-alignItems);
 			max-inline-size: var(--components-fileUpload-instruction-maxWidth);
-			line-height: var(--sizes-S-lineHeight);
+			line-height: var(--pr-t-font-lineHeight-250);
 		}
 
 		.fileUpload-instruction-action {
 			display: block;
 			margin-bottom: var(--fileUpload-instruction-action-marginBottom);
-			line-height: var(--sizes-M-lineHeight);
+			line-height: var(--pr-t-font-lineHeight-300);
 
 			span {
 				color: var(--components-fileUpload-instruction-action-color);
@@ -82,7 +82,7 @@
 		.fileUpload-instruction-size,
 		.fileUpload-instruction-formats {
 			color: var(--palettes-neutral-600);
-			font-size: var(--sizes-S-fontSize);
+			font-size: var(--pr-t-font-fontSize-175);
 			vertical-align: top;
 		}
 

@@ -10,10 +10,10 @@
 
 @mixin XS {
   --components-userTile-gap: var(--pr-t-spacings-100);
-  --components-userTile-title-fontSize: var(--sizes-S-fontSize);
-  --components-userTile-title-lineHeight: var(--sizes-S-lineHeight);
-  --components-userTile-info-fontSize: var(--sizes-XS-fontSize);
-  --components-userTile-info-lineHeight: var(--sizes-XS-lineHeight);
+  --components-userTile-title-fontSize: var(--pr-t-font-fontSize-175);
+  --components-userTile-title-lineHeight: var(--pr-t-font-lineHeight-250);
+  --components-userTile-info-fontSize: var(--pr-t-font-fontSize-150);
+  --components-userTile-info-lineHeight: var(--pr-t-font-lineHeight-200);
 
   .avatar {
     @include avatar.XS;

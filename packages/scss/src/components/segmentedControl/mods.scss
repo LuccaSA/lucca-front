@@ -2,8 +2,8 @@
 
 @mixin S {
 	--components-segmentedControl-padding: var(--pr-t-spacings-75) var(--pr-t-spacings-150);
-	--components-segmentedControl-fontSize: var(--sizes-S-fontSize);
-	--components-segmentedControl-lineHeight: var(--sizes-S-lineHeight);
+	--components-segmentedControl-fontSize: var(--pr-t-font-fontSize-175);
+	--components-segmentedControl-lineHeight: var(--pr-t-font-lineHeight-250);
 	--components-segmentedControl-dividerInset: var(--pr-t-spacings-75);
 
 	.numericBadge {

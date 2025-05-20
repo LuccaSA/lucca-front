@@ -3,15 +3,15 @@
 @mixin S {
 	--components-numericBadge-size: 1.25rem;
 	--components-numericBadge-borderRadius: 6px;
-	--components-numericBadge-fontSize: var(--sizes-XS-fontSize);
-	--components-numericBadge-lineHeight: var(--sizes-XS-lineHeight);
+	--components-numericBadge-fontSize: var(--pr-t-font-fontSize-150);
+	--components-numericBadge-lineHeight: var(--pr-t-font-lineHeight-200);
 }
 
 @mixin XS {
 	--components-numericBadge-size: 1rem;
 	--components-numericBadge-borderRadius: var(--commons-borderRadius-M);
-	--components-numericBadge-fontSize: var(--sizes-XS-fontSize);
-	--components-numericBadge-lineHeight: var(--sizes-XS-lineHeight);
+	--components-numericBadge-fontSize: var(--pr-t-font-fontSize-150);
+	--components-numericBadge-lineHeight: var(--pr-t-font-lineHeight-200);
 }
 
 @mixin inherit {

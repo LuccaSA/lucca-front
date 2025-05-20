@@ -15,8 +15,8 @@
 		}
 
 		.breadcrumbs-list-item {
-			font-size: var(--sizes-S-fontSize);
-			line-height: var(--sizes-S-lineHeight);
+			font-size: var(--pr-t-font-fontSize-175);
+			line-height: var(--pr-t-font-lineHeight-250);
 			align-items: center;
 			display: flex;
 
@@ -25,7 +25,7 @@
 					@include icon.generate('arrow_chevron_right');
 
 					color: var(--palettes-neutral-700);
-					font-size: var(--sizes-XS-lineHeight);
+					font-size: var(--pr-t-font-lineHeight-200);
 					padding-block: 0;
 					padding-inline: var(--pr-t-spacings-50);
 				}

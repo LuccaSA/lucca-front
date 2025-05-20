@@ -1,6 +1,6 @@
 @mixin vars {
-	--components-simpleSelect-fontSize: var(--sizes-M-fontSize);
-	--components-simpleSelect-lineHeight: var(--sizes-M-lineHeight);
+	--components-simpleSelect-fontSize: var(--pr-t-font-fontSize-200);
+	--components-simpleSelect-lineHeight: var(--pr-t-font-lineHeight-300);
 	--components-simpleSelect-padding: var(--pr-t-spacings-100);
 	--components-simpleSelect-gap: var(--pr-t-spacings-100);
 	--components-simpleSelect-background: var(--pr-t-color-input-background);

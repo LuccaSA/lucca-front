@@ -7,21 +7,21 @@
 	gap: var(--pr-t-spacings-100);
 
 	.user-tile-title {
-		font-size: var(--sizes-M-fontSize);
-		line-height: var(--sizes-M-lineHeight);
+		font-size: var(--pr-t-font-fontSize-200);
+		line-height: var(--pr-t-font-lineHeight-300);
 		font-weight: 600;
 		margin: 0;
 	}
 
 	.user-tile-label {
-		font-size: var(--sizes-S-fontSize);
-		line-height: var(--sizes-XS-lineHeight);
+		font-size: var(--pr-t-font-fontSize-175);
+		line-height: var(--pr-t-font-lineHeight-200);
 		color: var(--palettes-neutral-600);
 	}
 
 	.user-tile-footnote {
-		font-size: var(--sizes-S-fontSize);
-		line-height: var(--sizes-S-lineHeight);
+		font-size: var(--pr-t-font-fontSize-175);
+		line-height: var(--pr-t-font-lineHeight-250);
 	}
 
 	.user-info {
