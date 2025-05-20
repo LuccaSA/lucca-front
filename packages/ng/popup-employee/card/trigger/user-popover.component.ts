@@ -1,6 +1,6 @@
 import { OverlayModule } from '@angular/cdk/overlay';
 import { Component, effect, inject, input, TemplateRef, viewChild } from '@angular/core';
-import { ILuUser, LuUserPictureModule } from '@lucca-front/ng/user';
+import { ILuUser } from '@lucca-front/ng/user';
 import { USER_POPOVER_IS_ACTIVATED } from '../../user-popover.providers';
 import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 import { PopoverDirective } from '@lucca-front/ng/popover2';
@@ -13,6 +13,7 @@ import { LU_POPUP_EMPLOYEE_TRANSLATIONS } from '../../popup-employee.translate';
 import { AsyncPipe, DatePipe, NgTemplateOutlet } from '@angular/common';
 import { IsFutureOrTodayPipe, IsFuturePipe } from '../pipe/is-future.pipe';
 import { LeaveEndsDisplayPipe } from '../pipe/leave-ends-display.pipe';
+import { IconComponent } from '@lucca-front/ng/icon';
 
 @Component({
 	// eslint-disable-next-line @angular-eslint/component-selector
@@ -27,7 +28,7 @@ import { LeaveEndsDisplayPipe } from '../pipe/leave-ends-display.pipe';
 			inputs: ['luPopoverOpenDelay: luUserPopoverEnterDelay', 'luPopoverCloseDelay: luUserPopoverLeaveDelay', 'luPopoverDisabled: luUserPopoverDisabled'],
 		},
 	],
-	imports: [LuUserPictureModule, OverlayModule, AsyncPipe, NgTemplateOutlet, DatePipe, IntlParamsPipe, IsFuturePipe, IsFutureOrTodayPipe, LeaveEndsDisplayPipe],
+	imports: [OverlayModule, AsyncPipe, NgTemplateOutlet, DatePipe, IntlParamsPipe, IsFuturePipe, IsFutureOrTodayPipe, LeaveEndsDisplayPipe, IconComponent],
 })
 export class LuUserPopoverComponent {
 	content = viewChild<TemplateRef<unknown>>('popoverContent');

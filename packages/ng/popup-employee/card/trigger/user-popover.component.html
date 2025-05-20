@@ -33,7 +33,7 @@
 					<!-- HORS CONTRAT-->
 					@if (employee.dtContractStart | isFuture) {
 					<span class="userPopover-details-info-detail-workplace">
-						<span aria-hidden="true" class="lucca-icon icon-calendarPlanning mod-S"></span>
+						<lu-icon icon="calendarPlanning" size="S"></lu-icon>
 						<span class="userPopover-details-info-detail-link-state">
 							{{ intl.EMPLOYEE_CARD_PANEL_COMING_ON_LABEL | intlParams: { date: (employee.dtContractStart | date: 'shortDate') } }}
 						</span>
@@ -42,7 +42,7 @@
 					<!-- Contrat terminé -->
 					@if (!(employee.dtContractStart | isFuture) && !(employee.dtContractEnd | isFutureOrToday)) {
 					<span class="userPopover-details-info-detail-workplace">
-						<span aria-hidden="true" class="lucca-icon icon-calendarStrikethrough mod-S"></span>
+						<lu-icon icon="calendarStrikethrough" size="S"></lu-icon>
 						<span class="userPopover-details-info-detail-link-state"> {{ intl.EMPLOYEE_CARD_PANEL_EMPLOYEE_HAS_LEAVED_LABEL }} </span>
 					</span>
 					}
@@ -50,12 +50,11 @@
 					<!-- EN CONTRAT-->
 					@if (employee._links?.schedule && !(employee.dtContractStart | isFuture) && (employee.dtContractEnd | isFutureOrToday)) {
 					<a class="userPopover-details-info-detail-workplace" [href]="employee._links?.schedule?.href">
-						<span
-							aria-hidden="true"
-							class="lucca-icon mod-S"
-							[class.icon-mapPin]="employee.isWorkingNow && employee.currentWorkLocation"
-							[class.icon-calendarPlanning]="!employee.isWorkingNow || !employee.currentWorkLocation"
-						></span>
+						@if(employee.isWorkingNow && employee.currentWorkLocation) {
+						<lu-icon icon="mapPin" size="S"></lu-icon>
+						} @if(!employee.isWorkingNow || !employee.currentWorkLocation) {
+						<lu-icon icon="calendarPlanning" size="S"></lu-icon>
+						}
 						<span class="userPopover-details-info-detail-workplace-state">
 							@if (employee.isWorkingNow) { @if (employee.currentWorkLocation) { {{ employee.currentWorkLocation?.name }} @if
 							(employee.currentWorkLocation?.area) {
