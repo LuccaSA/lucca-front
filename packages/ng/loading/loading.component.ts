@@ -1,4 +1,4 @@
-import { booleanAttribute, Component, effect, HostBinding, inject, input, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, Component, effect, inject, input, ViewEncapsulation } from '@angular/core';
 import { LuClass } from '@lucca-front/ng/core';
 
 @Component({
@@ -10,6 +10,9 @@ import { LuClass } from '@lucca-front/ng/core';
 	encapsulation: ViewEncapsulation.None,
 	host: {
 		class: 'loading',
+		'[class.mod-block]': 'block()',
+		'[class.mod-invert]': 'invert()',
+		'[class.mod-L]': 'size() === "L"',
 	},
 })
 export class LoadingComponent {
@@ -19,21 +22,6 @@ export class LoadingComponent {
 	invert = input(false, { transform: booleanAttribute });
 	block = input(false, { transform: booleanAttribute });
 	template = input<'popin' | 'drawer' | 'fullpage' | null>(null);
-
-	@HostBinding('class.mod-L')
-	get sizeInput(): boolean {
-		return this.size() === 'L';
-	}
-
-	@HostBinding('class.mod-invert')
-	get invertInput(): boolean {
-		return this.invert();
-	}
-
-	@HostBinding('class.mod-block')
-	get blockInput(): boolean {
-		return this.block();
-	}
 
 	constructor() {
 		effect(() => {
