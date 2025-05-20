@@ -19,6 +19,17 @@
 	@include core.cssvars('pr-t-font-lineHeight', config.$lineHeight);
 	@include core.cssvars('pr-t-font-fontWeight', config.$fontWeights);
 
+	--pr-t-font-heading-1: var(--pr-t-font-fontWeight-black) var(--pr-t-font-fontSize-350)/var(--pr-t-font-lineHeight-400) var(--pr-t-font-family-brand);
+	--pr-t-font-heading-2: var(--pr-t-font-fontWeight-bold) var(--pr-t-font-fontSize-275)/var(--pr-t-font-lineHeight-350) var(--pr-t-font-family-brand);
+	--pr-t-font-heading-3: var(--pr-t-font-fontWeight-bold) var(--pr-t-font-fontSize-225)/var(--pr-t-font-lineHeight-300) var(--pr-t-font-family);
+	--pr-t-font-heading-4: var(--pr-t-font-fontWeight-semibold) var(--pr-t-font-fontSize-200)/var(--pr-t-font-lineHeight-300) var(--pr-t-font-family);
+	--pr-t-font-highlight-XXL: var(--pr-t-font-fontWeight-black) var(--pr-t-font-fontSize-350)/var(--pr-t-font-lineHeight-400) var(--pr-t-font-family-brand);
+	--pr-t-font-highlight-XL: var(--pr-t-font-fontWeight-bold) var(--pr-t-font-fontSize-275)/var(--pr-t-font-lineHeight-350) var(--pr-t-font-family-brand);
+	--pr-t-font-highlight-L: var(--pr-t-font-fontWeight-bold) var(--pr-t-font-fontSize-225)/var(--pr-t-font-lineHeight-300) var(--pr-t-font-family);
+	--pr-t-font-body-1: var(--pr-t-font-fontSize-200)/var(--pr-t-font-lineHeight-300) var(--pr-t-font-family);
+	--pr-t-font-body-2: var(--pr-t-font-fontSize-175)/var(--pr-t-font-lineHeight-250) var(--pr-t-font-family);
+	--pr-t-font-body-3: var(--pr-t-font-fontSize-150)/var(--pr-t-font-lineHeight-200) var(--pr-t-font-family);
+
 	// TOKENS : ELEVATION
 
 	@each $key, $map in config.$elevation {

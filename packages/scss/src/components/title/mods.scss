@@ -1,48 +1,35 @@
 @mixin XXXL {
+	--components-title-font: 900 var(--sizes-XXXL-fontSize)/var(--sizes-XXXL-lineHeight) var(--pr-t-font-family-brand);
 	--sizes-verticalPadding: var(--sizes-XXXL-verticalPadding);
-	--sizes-fontSize: var(--sizes-XXXL-fontSize);
-	--sizes-lineHeight: var(--sizes-XXXL-lineHeight);
-	--components-title-weight: 900;
 }
 
 @mixin h1 {
-	--sizes-verticalPadding: var(--sizes-XXL-verticalPadding);
-	--sizes-fontSize: var(--pr-t-font-fontSize-350);
-	--sizes-lineHeight: var(--pr-t-font-lineHeight-400);
-	--components-title-weight: 900;
+	--components-title-font: var(--pr-t-font-heading-1);
+	--sizes-verticalPadding: var(--sizes-XXL-verticalPadding); // Deprecated
 }
 
 @mixin h2 {
-	--sizes-verticalPadding: var(--sizes-XL-verticalPadding);
-	--sizes-fontSize: var(--pr-t-font-fontSize-275);
-	--sizes-lineHeight: var(--pr-t-font-lineHeight-350);
-	--components-title-weight: 700;
+	--components-title-font: var(--pr-t-font-heading-2);
+	--sizes-verticalPadding: var(--sizes-XL-verticalPadding); // Deprecated
 }
 
 @mixin h3 {
-	--sizes-verticalPadding: var(--sizes-L-verticalPadding);
-	--sizes-fontSize: var(--pr-t-font-fontSize-225);
-	--sizes-lineHeight: var(--pr-t-font-lineHeight-300);
-	--components-title-weight: 700;
+	--components-title-font: var(--pr-t-font-heading-3);
+	--sizes-verticalPadding: var(--sizes-L-verticalPadding); // Deprecated
 }
 
 @mixin h4 {
-	--sizes-verticalPadding: var(--sizes-M-verticalPadding);
-	--sizes-fontSize: var(--pr-t-font-fontSize-200);
-	--sizes-lineHeight: var(--pr-t-font-lineHeight-300);
-	--components-title-weight: 600;
+	--components-title-font: var(--pr-t-font-heading-4);
+	--sizes-verticalPadding: var(--sizes-M-verticalPadding); // Deprecated
 }
 
+/* Deprecated */
 @mixin h5 {
+	--components-title-font: 600 var(--pr-t-font-fontSize-175)/var(--pr-t-font-lineHeight-250) var(--pr-t-font-family);
 	--sizes-verticalPadding: var(--sizes-S-verticalPadding);
-	--sizes-fontSize: var(--pr-t-font-fontSize-175);
-	--sizes-lineHeight: var(--pr-t-font-lineHeight-250);
-	--components-title-weight: 600;
 }
 
 @mixin h6 {
+	--components-title-font: 600 var(--pr-t-font-fontSize-150)/var(--pr-t-font-lineHeight-200) var(--pr-t-font-family);
 	--sizes-verticalPadding: var(--sizes-XS-verticalPadding);
-	--sizes-fontSize: var(--pr-t-font-fontSize-150);
-	--sizes-lineHeight: var(--pr-t-font-lineHeight-200);
-	--components-title-weight: 600;
 }
