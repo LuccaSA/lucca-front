@@ -78,7 +78,7 @@
 		visibility: hidden;
 
 		&::after {
-			content: ' ';
+			content: ' ' / '';
 		}
 	}
 }
