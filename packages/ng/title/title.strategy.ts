@@ -1,25 +1,32 @@
 import { inject, Injectable, InjectionToken, Provider } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRouteSnapshot, RouterStateSnapshot, TitleStrategy } from '@angular/router';
-import { BehaviorSubject, combineLatest, Observable, ObservableInput, of } from 'rxjs';
+import { BehaviorSubject, combineLatest, isObservable, Observable, ObservableInput, of } from 'rxjs';
 import { distinctUntilChanged, map, switchMap, tap } from 'rxjs/operators';
 import { ILuTitleTranslateService, LU_TITLE_TRANSLATE_SERVICE } from './title-translate.service';
 import { PageTitle, TitleSeparator } from './title.model';
 
 export const ɵAPP_TITLE = new InjectionToken<string | Observable<string>>('APP_TITLE');
+export type LuTitleNamingStrategy = 'product' | 'other';
+export const ɵNAMING_STRATEGY = new InjectionToken<LuTitleNamingStrategy>('NAMING_STRATEGY', { factory: () => 'product' });
 
 /**
  * @deprecated Use `provideLuTitleStrategy` instead.
  */
 export const APP_TITLE = ɵAPP_TITLE;
 
+const Lucca = 'Lucca';
+
 @Injectable({ providedIn: 'root' })
 export class LuTitleStrategy extends TitleStrategy {
 	private title = inject(Title);
 	private translateService = inject<ILuTitleTranslateService>(LU_TITLE_TRANSLATE_SERVICE, { optional: true });
 	private appTitle = inject(ɵAPP_TITLE);
+	private namingStrategy = inject(ɵNAMING_STRATEGY);
 
-	private titlePartsSubject = new BehaviorSubject<Array<string | ObservableInput<string>>>(['Lucca']);
+	private luccaTitle$ = isObservable(this.appTitle) ? this.appTitle.pipe(map((title) => this.#luccaTitle(title))) : of(this.#luccaTitle(this.appTitle));
+
+	private titlePartsSubject = new BehaviorSubject<Array<string | ObservableInput<string>>>([Lucca]);
 	titleParts$ = this.titlePartsSubject.asObservable();
 	title$ = this.titleParts$.pipe(
 		switchMap((titleParts) => combineLatest(titleParts.map((part) => (typeof part === 'string' ? of(part) : part)))),
@@ -37,8 +44,8 @@ export class LuTitleStrategy extends TitleStrategy {
 		const translatedPageTitles = uniqTitle(pageTitles)
 			.filter(({ title }) => title !== '')
 			.map(({ title, params }) => (this.translateService ? this.translateService.translate(title, params) : title));
-		// Add the name app and 'Lucca' at the end of the title
-		const titleParts = [...translatedPageTitles, this.appTitle, 'Lucca'].filter((x) => !!x);
+		// Add the name app
+		const titleParts = [...translatedPageTitles, this.luccaTitle$].filter((x) => !!x);
 		this.titlePartsSubject.next(titleParts);
 	}
 
@@ -57,6 +64,16 @@ export class LuTitleStrategy extends TitleStrategy {
 		};
 		return snapshot.firstChild ? [pageTitle, ...this.#getPageTitleParts(snapshot.firstChild)] : [pageTitle];
 	}
+
+	#luccaTitle(appTitle: string) {
+		if (appTitle.includes(Lucca)) {
+			return appTitle;
+		}
+		if (this.namingStrategy === 'product') {
+			return `${Lucca} ${appTitle}`;
+		}
+		return `${appTitle}${TitleSeparator}${Lucca}`;
+	}
 }
 
 function uniqTitle(titleParts: Array<PageTitle>): Array<PageTitle> {
@@ -66,6 +83,7 @@ function uniqTitle(titleParts: Array<PageTitle>): Array<PageTitle> {
 export interface LuTitleStrategyOptions {
 	appTitle?: () => string | Observable<string>;
 	translateService?: () => ILuTitleTranslateService;
+	namingStrategy?: LuTitleNamingStrategy;
 }
 
 export function provideLuTitleStrategy(options: LuTitleStrategyOptions): Provider[] {
@@ -76,6 +94,9 @@ export function provideLuTitleStrategy(options: LuTitleStrategyOptions): Provide
 	}
 	if (options.translateService) {
 		providers.push({ provide: LU_TITLE_TRANSLATE_SERVICE, useFactory: options.translateService });
+	}
+	if (options.namingStrategy) {
+		providers.push({ provide: ɵNAMING_STRATEGY, useValue: options.namingStrategy });
 	}
 
 	return providers;

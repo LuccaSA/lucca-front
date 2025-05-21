@@ -1,4 +1,4 @@
-# Page titles
+# LuTitleStrategy
 
 ## Usage
 
@@ -23,9 +23,9 @@ const routes: Routes = [
 ];
 ```
 
-The service should now be able to collect all `title` properties defined for the current url. Each time a new `title` is found for a child, it will be translated and prepended, ending with `YourAppName - Lucca`.
+The service should now be able to collect all `title` properties defined for the current url. Each time a new `title` is found for a child, it will be translated and prepended, ending with `– Lucca YourAppName`.
 
-ex: `Sub route title - Parent title - YourAppName - Lucca`
+ex: `Sub route title – Parent title – Lucca YourAppName`
 
 For dynamic titles, the `prependTitle` method from `LuTitleStrategy` enables you to add a custom title.
 In a component, you could do the following:
@@ -60,11 +60,28 @@ You will need to:
 ```ts
 provideLuTitleStrategy({
   appName: () => 'YourAppName',
-  translateService: () => inject(YourAppNameTranslateService),
+  translateService: () => inject(YourAppNameTranslateService), // optional
 }),
 ```
 
-### Let's start by creating the service
+### Naming Strategy
+
+Two naming strategies are available:
+
+- The app is a product (default: `'product'`), the title must end with `– Lucca YourAppName`
+- The app is something else (`'other'`), the title must end with `– YourAppName – Lucca`
+
+In this case, you must provide the optional parameter `namingStrategy: 'other'` like so:
+
+```ts
+provideLuTitleStrategy({
+  appName: () => 'YourAppName',
+  translateService: () => inject(YourAppNameTranslateService), // optional
+  namingStrategy: 'other',
+}),
+```
+
+### Handling translations
 
 `YourAppNameTranslateService` be used in combination with the token `LU_TITLE_TRANSLATE_SERVICE`.
 
@@ -74,7 +91,7 @@ You should end up with the following if you are using `ngx-translate`:
 
 ```typescript
 @Injectable({ providedIn: 'root' })
-export class CoreRhTranslateService implements ILuTitleTranslateService {
+export class CoreHRTranslateService implements ILuTitleTranslateService {
   constructor(private translateService: TranslateService) {}
   translate(key: string, args: unknown): string {
     return this.translateService.instant(key, args);
@@ -86,7 +103,7 @@ or if you are using `transloco`:
 
 ```typescript
 @Injectable({ providedIn: 'root' })
-export class CoreRhTranslateService implements ILuTitleTranslateService {
+export class CoreHRTranslateService implements ILuTitleTranslateService {
   constructor(private translateService: TranslocoService) {}
   translate(key: string, args: HashMap): string {
     return this.translateService.translate(key, args);
@@ -100,9 +117,22 @@ In the `app.module.ts`, you need to call `provideLuTitleStrategy` in the `provid
 
 ```typescript
 @NgModule({
-  providers: [
-    provideLuTitleStrategy({ translateService: () => inject(YourAppNameTranslateService) }),
-  ]
+  providers: [provideLuTitleStrategy({ translateService: () => inject(YourAppNameTranslateService) })],
 })
 export class AppModule {}
+```
+
+### Example with lucca-cdk
+
+lucca-cdk provides a `getStoreModuleName(moduleId)` function that will fetch the name of your module from the Lucca Store API.
+
+Use it like this in your `app.config.ts` / `main.ts` file:
+
+```ts
+import { provideLuTitleStrategy } from '@lucca-front/ng/title';
+import { getStoreModuleName } from '@lucca/cdk/remote-entity';
+
+provideLuTitleStrategy({
+  appTitle: () => getStoreModuleName('my-module-id'),
+}),
 ```
