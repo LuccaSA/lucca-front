@@ -1,0 +1,6 @@
+@mixin vars {
+	--components-mainLayoutGridTemplate: "sidebar" auto
+																			 "header " auto
+																			 "content" 1fr
+																			 "footer"  auto;
+}
