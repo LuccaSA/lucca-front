@@ -28,10 +28,10 @@ export abstract class ALuCoreSelectApiDirective<TOption, TParams = Record<string
 	/**
 	 * Compare two options to know if they are the same. For example, compare by id or by JSON
 	 */
-	protected abstract optionComparer: LuOptionComparer<TOption>;
+	protected optionComparer: LuOptionComparer<TOption> = (a, b) => this.optionKey(a) === this.optionKey(b);
 
 	/**
-	 * Return a key to identify the option in for-of loops
+	 * Return a unique key to identify the option in for-of loops
 	 */
 	protected abstract optionKey: (option: TOption) => unknown;
 
