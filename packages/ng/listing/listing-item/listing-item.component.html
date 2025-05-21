@@ -1,0 +1,6 @@
+@if (listingRef.checklist() || listingRef.icons()) {
+<lu-icon class="listing-item-icon" size="S" [icon]="listingRef.defaultIcon() || icon()" />
+}
+<div class="listing-item-content">
+	<ng-content />
+</div>
