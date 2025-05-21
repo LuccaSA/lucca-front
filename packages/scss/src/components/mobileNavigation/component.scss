@@ -26,9 +26,9 @@
 			color: var(--palettes-neutral-700);
 			display: flex;
 			flex-direction: column;
-			font-size: var(--sizes-XS-fontSize);
+			font-size: var(--pr-t-font-fontSize-150);
 			gap: var(--pr-t-spacings-50);
-			line-height: var(--sizes-XS-lineHeight);
+			line-height: var(--pr-t-font-lineHeight-200);
 			padding-block: var(--pr-t-spacings-100);
 			padding-inline: var(--pr-t-spacings-50);
 			position: relative;
@@ -39,7 +39,7 @@
 			}
 
 			.lucca-icon {
-				font-size: var(--sizes-M-lineHeight);
+				font-size: var(--pr-t-font-lineHeight-300);
 			}
 
 			&[aria-current='page'] {

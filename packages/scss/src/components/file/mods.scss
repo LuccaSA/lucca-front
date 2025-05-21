@@ -27,13 +27,13 @@
 
 	.file-name {
 		margin-block-end: 0;
-		font-size: var(--sizes-XS-fontSize);
-		line-height: var(--sizes-XS-lineHeight);
+		font-size: var(--pr-t-font-fontSize-150);
+		line-height: var(--pr-t-font-lineHeight-200);
 	}
 
 	.file-formats {
-		font-size: var(--sizes-XS-fontSize);
-		line-height: var(--sizes-XS-lineHeight);
+		font-size: var(--pr-t-font-fontSize-150);
+		line-height: var(--pr-t-font-lineHeight-200);
 	}
 
 	.file-or {
@@ -49,15 +49,15 @@
 	}
 
 	.file-icon {
-		font-size: var(--sizes-S-lineHeight);
-		line-height: var(--sizes-S-lineHeight);
+		font-size: var(--pr-t-font-lineHeight-250);
+		line-height: var(--pr-t-font-lineHeight-250);
 		margin: 0;
 		align-self: start;
 	}
 
 	.file-title {
-		font-size: var(--sizes-S-fontSize);
-		line-height: var(--sizes-S-lineHeight);
+		font-size: var(--pr-t-font-fontSize-175);
+		line-height: var(--pr-t-font-lineHeight-250);
 		padding-inline-end: var(--pr-t-spacings-100);
 		margin: 0;
 	}

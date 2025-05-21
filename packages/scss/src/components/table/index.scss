@@ -42,8 +42,8 @@
 
 	.tableSortable {
 		--components-sortable-fontWeight: 600;
-		--components-sortable-fontSize: var(--sizes-S-fontSize);
-		--components-sortable-lineHeight: var(--sizes-S-lineHeight);
+		--components-sortable-fontSize: var(--pr-t-font-fontSize-175);
+		--components-sortable-lineHeight: var(--pr-t-font-lineHeight-250);
 		--components-sortable-arrowsOffset: var(--pr-t-spacings-25);
 	}
 }

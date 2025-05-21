@@ -22,7 +22,7 @@
 		}
 
 		.verticalNavigation-list-item-link-icon {
-			font-size: var(--sizes-M-lineHeight);
+			font-size: var(--pr-t-font-lineHeight-300);
 			margin-inline-end: var(--pr-t-spacings-100);
 		}
 
@@ -55,7 +55,7 @@
 		}
 
 		.verticalNavigation-list-item-link-arrow {
-			font-size: var(--sizes-M-lineHeight);
+			font-size: var(--pr-t-font-lineHeight-300);
 			margin-inline-start: auto;
 			transition: transform var(--commons-animations-durations-standard) ease;
 		}

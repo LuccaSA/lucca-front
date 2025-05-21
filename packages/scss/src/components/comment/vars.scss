@@ -1,7 +1,7 @@
 @mixin vars {
 	--components-comment-max-width: 66ch;
-	--components-comment-text-fontSize: var(--sizes-M-fontSize);
-	--components-comment-text-lineHeight: var(--sizes-M-lineHeight);
+	--components-comment-text-fontSize: var(--pr-t-font-fontSize-200);
+	--components-comment-text-lineHeight: var(--pr-t-font-lineHeight-300);
 	--components-comment-margin: 0;
 	--components-comment-content-margin: calc(1.5rem + var(--pr-t-spacings-100)); // 1.5rem for the width of the avatar and 0.5rem for the gap
 	--components-comment-info-separator: '•';

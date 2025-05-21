@@ -1,8 +1,8 @@
 @use '@lucca-front/scss/src/commons/utils/a11y';
 
 @mixin S {
-	--components-chip-fontSize: var(--sizes-XS-fontSize);
-	--components-chip-lineHeight: var(--sizes-XS-lineHeight);
+	--components-chip-fontSize: var(--pr-t-font-fontSize-150);
+	--components-chip-lineHeight: var(--pr-t-font-lineHeight-200);
 }
 
 @mixin product {

@@ -11,15 +11,15 @@
 	text-align: center;
 
 	.file-icon {
-		font-size: var(--sizes-M-lineHeight);
+		font-size: var(--pr-t-font-lineHeight-300);
 		margin-block: 0;
 		margin-inline: var(--pr-t-spacings-50);
 		display: none;
 	}
 
 	.file-title {
-		font-size: var(--sizes-M-fontSize);
-		line-height: var(--sizes-M-lineHeight);
+		font-size: var(--pr-t-font-fontSize-200);
+		line-height: var(--pr-t-font-lineHeight-300);
 		margin-block-end: 0;
 		font-weight: 600;
 		display: block;
@@ -28,8 +28,8 @@
 	}
 
 	.file-or {
-		font-size: var(--sizes-S-fontSize);
-		line-height: var(--sizes-S-lineHeight);
+		font-size: var(--pr-t-font-fontSize-175);
+		line-height: var(--pr-t-font-lineHeight-250);
 		margin-block-end: var(--pr-t-spacings-50);
 		display: block;
 		position: relative;
@@ -49,8 +49,8 @@
 
 	.file-name {
 		&:not(:empty) {
-			font-size: var(--sizes-S-fontSize);
-			line-height: var(--sizes-S-lineHeight);
+			font-size: var(--pr-t-font-fontSize-175);
+			line-height: var(--pr-t-font-lineHeight-250);
 			margin-block-end: var(--pr-t-spacings-200);
 			color: var(--palettes-neutral-600);
 			display: block;
@@ -58,8 +58,8 @@
 	}
 
 	.file-formats {
-		font-size: var(--sizes-S-fontSize);
-		line-height: var(--sizes-S-lineHeight);
+		font-size: var(--pr-t-font-fontSize-175);
+		line-height: var(--pr-t-font-lineHeight-250);
 		color: var(--palettes-neutral-600);
 		position: relative;
 		display: block;

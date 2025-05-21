@@ -1,8 +1,8 @@
 @use '@lucca-front/icons/src/icon/exports' as icon;
 
 @mixin S {
-	--components-inlineMessage-fontSize: var(--sizes-XS-fontSize);
-	--components-inlineMessage-lineHeight: var(--sizes-XS-lineHeight);
+	--components-inlineMessage-fontSize: var(--pr-t-font-fontSize-150);
+	--components-inlineMessage-lineHeight: var(--pr-t-font-lineHeight-200);
 
 	// .lucca-icon:first-child is deprecated
 	.inlineMessage-statusIcon,

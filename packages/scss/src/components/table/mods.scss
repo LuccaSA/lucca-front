@@ -2,8 +2,8 @@
 @use '@lucca-front/scss/src/commons/utils/namespace';
 
 @mixin S {
-	font-size: var(--sizes-S-fontSize);
-	line-height: var(--sizes-S-lineHeight);
+	font-size: var(--pr-t-font-fontSize-175);
+	line-height: var(--pr-t-font-lineHeight-250);
 }
 
 @mixin zebra {
@@ -145,8 +145,8 @@
 	.table-foot-row-cell {
 		color: var(--palettes-neutral-700);
 		background-color: var(--palettes-neutral-50);
-		font-size: var(--sizes-S-fontSize);
-		line-height: var(--sizes-S-lineHeight);
+		font-size: var(--pr-t-font-fontSize-175);
+		line-height: var(--pr-t-font-lineHeight-250);
 		font-weight: 600;
 	}
 }
@@ -170,7 +170,7 @@
 		&::before {
 			@include icon.generate('arrow_chevron_top');
 
-			font-size: var(--sizes-M-lineHeight);
+			font-size: var(--pr-t-font-lineHeight-300);
 			font-weight: 400;
 			margin-inline-end: var(--pr-t-spacings-100);
 			transition-duration: var(--commons-animations-durations-fast);
@@ -212,7 +212,7 @@
 				@include icon.generate('dots_drag');
 
 				color: var(--palettes-neutral-600);
-				font-size: var(--sizes-M-lineHeight);
+				font-size: var(--pr-t-font-lineHeight-300);
 				block-size: 100%;
 				margin: auto;
 				display: flex;

@@ -127,7 +127,7 @@
 				display: block;
 				margin: auto;
 				padding: var(--pr-t-spacings-100);
-				line-height: var(--sizes-M-lineHeight);
+				line-height: var(--pr-t-font-lineHeight-300);
 
 				@include link.decorationHover;
 
@@ -142,10 +142,10 @@
 		}
 
 		.calendar-name {
-			line-height: var(--sizes-L-lineHeight);
+			line-height: var(--pr-t-font-lineHeight-300);
 			padding-block: var(--pr-t-spacings-50);
 			padding-inline: calc(var(--pr-t-spacings-300) + var(--pr-t-spacings-100));
-			font-size: var(--sizes-L-fontSize);
+			font-size: var(--pr-t-font-fontSize-225);
 			font-weight: 700;
 			border: var(--pr-t-spacings-150) solid transparent;
 			border-block-end: var(--pr-t-spacings-100) solid transparent;
@@ -188,8 +188,8 @@
 
 		.calendar-table-head-row-cell {
 			font-weight: 400;
-			line-height: var(--sizes-S-lineHeight);
-			font-size: var(--sizes-S-fontSize);
+			line-height: var(--pr-t-font-lineHeight-250);
+			font-size: var(--pr-t-font-fontSize-175);
 			color: var(--palettes-neutral-700);
 			text-transform: uppercase;
 			border-block-end: var(--pr-t-spacings-50) solid transparent;

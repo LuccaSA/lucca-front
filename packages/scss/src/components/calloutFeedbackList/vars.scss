@@ -1,5 +1,5 @@
 @mixin vars {
-  --components-calloutFeedbackList-fontSize: var(--sizes-M-fontSize);
-  --components-calloutFeedbackList-lineHeight: var(--sizes-M-lineHeight);
+  --components-calloutFeedbackList-fontSize: var(--pr-t-font-fontSize-200);
+  --components-calloutFeedbackList-lineHeight: var(--pr-t-font-lineHeight-300);
   --components-calloutFeedbackList-gap: var(--pr-t-spacings-150);
 }

@@ -88,8 +88,8 @@
 
 	.optionItem-value-group {
 		color: var(--palettes-neutral-600);
-		font-size: var(--sizes-S-fontSize);
-		line-height: var(--sizes-S-lineHeight);
+		font-size: var(--pr-t-font-fontSize-175);
+		line-height: var(--pr-t-font-lineHeight-250);
 	}
 
 	:host-context(.lu-select-value) {
@@ -135,7 +135,7 @@
 				@include icon.generate('sign_confirm');
 
 				color: transparent;
-				font-size: var(--sizes-S-lineHeight);
+				font-size: var(--pr-t-font-lineHeight-250);
 				line-height: var(--components-options-checkbox-size);
 				position: absolute;
 				text-align: center;
