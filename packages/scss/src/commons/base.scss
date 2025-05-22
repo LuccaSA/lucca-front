@@ -27,12 +27,12 @@
 			@include core.fontFace(config.$fontFamily, config.$fontWeights, config.$fontStyles);
 		}
 
-		@if config.$fontFamilyCursive {
-			@include core.fontFace(config.$fontFamilyCursive, config.$fontWeightsCursive, config.$fontStylesCursive);
-		}
-
 		@if config.$fontFamilyBrand {
 			@include core.fontFace(config.$fontFamilyBrand, config.$fontWeightsBrand, config.$fontStylesBrand);
+		}
+
+		@if config.$fontFamilyCursive {
+			@include core.fontFace(config.$fontFamilyCursive, config.$fontWeightsCursive, config.$fontStylesCursive);
 		}
 
 		*,

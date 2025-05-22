@@ -8,6 +8,7 @@ $deprecatedSpacings: false !default;
 $prefersContrast: 'no-preference' !default;
 
 $fontFamily: 'SourceSans' !default;
+$fontFamilyBrand: 'LuccaSans' !default;
 $fontWeights: (
 	'regular': 400,
 	'semibold': 600,
@@ -16,7 +17,6 @@ $fontWeights: (
 ) !default;
 $fontStyles: ('normal') !default;
 
-$fontFamilyBrand: false !default;
 $fontWeightsBrand: (
 	'regular': 400,
 	'bold': 700,
@@ -30,6 +30,59 @@ $fontWeightsCursive: (
 	'bold': 700,
 ) !default;
 $fontStylesCursive: ('normal') !default;
+
+$fontSizeVars: (
+	'150': 0.75rem,
+	'175': 0.875rem,
+	'200': 1rem,
+	'225': 1.125rem,
+	'250': 1.25rem,
+	'275': 1.375rem,
+	'300': 1.5rem,
+	'325': 1.625rem,
+	'350': 1.75rem,
+) !default;
+
+$lineHeight: (
+	'200': 1rem,
+	'250': 1.25rem,
+	'300': 1.5rem,
+	'350': 1.75rem,
+	'400': 2rem,
+) !default;
+
+$fontTokens: (
+	heading-1-fontSize: var(--pr-t-font-fontSize-350),
+	heading-1-lineHeight: var(--pr-t-font-lineHeight-400),
+	heading-1-fontWeight: var(--pr-t-font-fontWeight-black),
+	heading-2-fontSize: var(--pr-t-font-fontSize-275),
+	heading-2-lineHeight: var(--pr-t-font-lineHeight-350),
+	heading-2-fontWeight: var(--pr-t-font-fontWeight-bold),
+	heading-3-fontSize: var(--pr-t-font-fontSize-225),
+	heading-3-lineHeight: var(--pr-t-font-lineHeight-300),
+	heading-3-fontWeight: var(--pr-t-font-fontWeight-bold),
+	heading-4-fontSize: var(--pr-t-font-fontSize-200),
+	heading-4-lineHeight: var(--pr-t-font-lineHeight-300),
+	heading-4-fontWeight: var(--pr-t-font-fontWeight-semibold),
+	highlight-XXL-fontSize: var(--pr-t-font-fontSize-350),
+	highlight-XXL-lineHeight: var(--pr-t-font-lineHeight-400),
+	highlight-XXL-fontWeight: var(--pr-t-font-fontWeight-black),
+	highlight-XL-fontSize: var(--pr-t-font-fontSize-275),
+	highlight-XL-lineHeight: var(--pr-t-font-lineHeight-350),
+	highlight-XL-fontWeight: var(--pr-t-font-fontWeight-bold),
+	highlight-L-fontSize: var(--pr-t-font-fontSize-225),
+	highlight-L-lineHeight: var(--pr-t-font-lineHeight-300),
+	highlight-L-fontWeight: var(--pr-t-font-fontWeight-bold),
+	body-1-fontSize: var(--pr-t-font-fontSize-200),
+	body-1-lineHeight: var(--pr-t-font-lineHeight-300),
+	body-1-fontWeight: var(--pr-t-font-fontWeight-regular),
+	body-2-fontSize: var(--pr-t-font-fontSize-175),
+	body-2-lineHeight: var(--pr-t-font-lineHeight-250),
+	body-2-fontWeight: var(--pr-t-font-fontWeight-regular),
+	body-3-fontSize: var(--pr-t-font-fontSize-150),
+	body-3-lineHeight: var(--pr-t-font-lineHeight-200),
+	body-3-fontWeight: var(--pr-t-font-fontWeight-regular),
+);
 
 $product: 'brand' !default;
 $palettesShades: text, 0, 25, 50, 100, 200, 300, 400, 500, 600, 700, 800, 900; // text is deprecated
