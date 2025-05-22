@@ -9,20 +9,20 @@
 @use '../packages/ng/styles/main' as ng;
 
 @use '../packages/scss/src/commons/utils/media';
-@use '../packages/scss/src/components/bodyLayout/exports' as bodyLayout;
+@use '../packages/scss/src/components/appLayout/exports' as appLayout;
 
-.bodyLayout.bodyLayout {
-	@include bodyLayout.component;
+.appLayout.appLayout {
+	@include appLayout.component;
 
 	--commons-navSide-width: calc(15rem / 2);
 
 	@include media.min('S') {
-		@include bodyLayout.wide;
+		@include appLayout.wide;
 	}
 
 	@include media.max('S') {
 		&.mod-mobileNavSideBottom {
-			@include bodyLayout.mobileNavSideBottom;
+			@include appLayout.mobileNavSideBottom;
 		}
 	}
 }

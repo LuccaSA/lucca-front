@@ -1,4 +1,4 @@
-import { BodyLayoutComponent } from '@lucca-front/ng/body-layout';
+import { AppLayoutComponent } from '@lucca-front/ng/app-layout';
 import { MainLayoutComponent } from '@lucca-front/ng/main-layout';
 import { Meta, moduleMetadata } from '@storybook/angular';
 import { cleanupTemplate } from 'stories/helpers/stories';
@@ -29,7 +29,7 @@ export default {
 	},
 	decorators: [
 		moduleMetadata({
-			imports: [MainLayoutComponent, BodyLayoutComponent],
+			imports: [MainLayoutComponent, AppLayoutComponent],
 		}),
 	],
 	render: (args: MainLayoutAngularBasicStory) => {
@@ -46,17 +46,17 @@ export default {
 			styles: [
 				`
 :host ::ng-deep {
-	.bodyLayout {
-		--components-bodyLayout-minBlockSize: 25rem;
-		block-size: var(--components-bodyLayout-minBlockSize);
+	.appLayout {
+		--components-appLayout-minBlockSize: 25rem;
+		block-size: var(--components-appLayout-minBlockSize);
 		overflow: auto;
 		border: 1px dashed;
 		box-sizing: content-box;
 	}
-	.bodyLayout-banner {
+	.appLayout-banner {
 		background-color: var(--palettes-neutral-0)
 	}
-	.bodyLayout-navSide {
+	.appLayout-navSide {
 		background-color: var(--palettes-navigation-800);
 		color: var(--palettes-neutral-0)
 	}
@@ -67,9 +67,9 @@ export default {
 }
 				`,
 			],
-			template: cleanupTemplate(`<lu-body-layout>
-	<ng-container bodyLayoutBanner>banner</ng-container>
-	<ng-container bodyLayoutNavSide>
+			template: cleanupTemplate(`<lu-app-layout>
+	<ng-container appLayoutBanner>banner</ng-container>
+	<ng-container appLayoutNavSide>
 		navSide
 		${navSideImg}
 	</ng-container>
@@ -80,7 +80,7 @@ export default {
 		${contentImg}
 		${footerContainer}
 	</lu-main-layout>
-</lu-body-layout>`),
+</lu-app-layout>`),
 		};
 	},
 } as Meta;

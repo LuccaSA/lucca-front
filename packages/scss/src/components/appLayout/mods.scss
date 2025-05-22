@@ -1,0 +1,17 @@
+
+@mixin wide {
+	--components-appLayout-navSide-blockSize: calc(var(--components-appLayout-minBlockSize) - var(--components-appLayout-banner-blockSize));
+	--components-appLayout-gridTemplate: "banner  banner" auto
+																				"navSide main  " 1fr
+																			 / auto    1fr;
+	--components-appLayout-before: var(--components-appLayout-banner-blockSize);
+}
+
+@mixin mobileNavSideBottom {
+	--components-appLayout-gridTemplate: "banner " auto
+																				"main"    1fr
+																				"navSide" auto;
+	--components-appLayout-navSide-insetBlock: auto 0;
+	--components-appLayout-before: var(--components-appLayout-banner-blockSize);
+	--components-appLayout-after: var(--components-appLayout-navSide-blockSize);
+}

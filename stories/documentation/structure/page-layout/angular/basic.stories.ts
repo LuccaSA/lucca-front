@@ -1,8 +1,8 @@
-import { BodyLayoutComponent } from '@lucca-front/ng/body-layout';
 import { Meta, moduleMetadata } from '@storybook/angular';
+import { AppLayoutComponent } from 'packages/ng/app-layout/app-layout.component';
 import { cleanupTemplate } from 'stories/helpers/stories';
 
-interface BodyLayoutAngularBasicStory {
+interface AppLayoutAngularBasicStory {
 	banner: boolean;
 	navSide: boolean;
 	mobileNavSideBottom: boolean;
@@ -11,7 +11,7 @@ interface BodyLayoutAngularBasicStory {
 }
 
 export default {
-	title: 'Documentation/Structure/Body Layout/Angular/Basic',
+	title: 'Documentation/Structure/App Layout/Angular/Basic',
 	argTypes: {
 		mobileNavSideBottom: {
 			if: { arg: 'navSide', truthy: true },
@@ -22,44 +22,44 @@ export default {
 	},
 	decorators: [
 		moduleMetadata({
-			imports: [BodyLayoutComponent],
+			imports: [AppLayoutComponent],
 		}),
 	],
-	render: (args: BodyLayoutAngularBasicStory) => {
-		const bannerContainer = args.banner ? `<ng-container bodyLayoutBanner>banner</ng-container>` : ``;
+	render: (args: AppLayoutAngularBasicStory) => {
+		const bannerContainer = args.banner ? `<ng-container appLayoutBanner>banner</ng-container>` : ``;
 		const mobileNavSideBottomAttribute = args.mobileNavSideBottom ? `mobileNavSideBottom` : ``;
 		const img = `<img src="https://dummyimage.com/200x1000" class="u-displayBlock" alt="" />`;
 		const mainImg = args.mainWithScroll ? img : ``;
 		const navSideImg = args.navSideWithScroll ? img : ``;
-		const navSideContainer = args.navSide ? `<ng-container bodyLayoutNavSide>navSide${navSideImg}</ng-container>` : ``;
+		const navSideContainer = args.navSide ? `<ng-container appLayoutNavSide>navSide${navSideImg}</ng-container>` : ``;
 
 		return {
 			styles: [
 				`
 :host ::ng-deep {
-	.bodyLayout {
-		--components-bodyLayout-minBlockSize: 25rem;
-		block-size: var(--components-bodyLayout-minBlockSize);
+	.appLayout {
+		--components-appLayout-minBlockSize: 25rem;
+		block-size: var(--components-appLayout-minBlockSize);
 		overflow: auto;
 		border: 1px dashed;
 		box-sizing: content-box;
 	}
-	.bodyLayout-banner {
+	.appLayout-banner {
 		background-color: var(--palettes-neutral-0)
 	}
-	.bodyLayout-navSide {
+	.appLayout-navSide {
 		background-color: var(--palettes-navigation-800);
 		color: var(--palettes-neutral-0)
 	}
 }
 				`,
 			],
-			template: cleanupTemplate(`<lu-body-layout ${mobileNavSideBottomAttribute}>
+			template: cleanupTemplate(`<lu-app-layout ${mobileNavSideBottomAttribute}>
 	${bannerContainer}
 	${navSideContainer}
 	main
 	${mainImg}
-</lu-body-layout>`),
+</lu-app-layout>`),
 		};
 	},
 } as Meta;

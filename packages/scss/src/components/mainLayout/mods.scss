@@ -8,7 +8,7 @@
 }
 
 @mixin sidebarWide {
-	--components-mainLayout-sidebar-blockSize: calc(var(--components-bodyLayout-minBlockSize) - var(--components-bodyLayout-before));
+	--components-mainLayout-sidebar-blockSize: calc(var(--components-appLayout-minBlockSize) - var(--components-appLayout-before));
 	--components-mainLayout-gridTemplate: "sidebar header "  auto
 																			  "sidebar content"  1fr
 																			  "sidebar footer "  auto
@@ -16,6 +16,6 @@
 }
 
 @mixin wide {
-	--components-mainLayout-sidebar-blockSize: var(--components-bodyLayout-navSide-blockSize);
+	--components-mainLayout-sidebar-blockSize: var(--components-appLayout-navSide-blockSize);
 }
 

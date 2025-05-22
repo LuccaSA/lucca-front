@@ -3,36 +3,36 @@
 @use '@lucca-front/scss/src/commons/utils/a11y';
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
-	min-block-size: var(--components-bodyLayout-minBlockSize);
+	min-block-size: var(--components-appLayout-minBlockSize);
 	display: grid;
-	grid-template: var(--components-bodyLayout-gridTemplate);
+	grid-template: var(--components-appLayout-gridTemplate);
 
-	&:has(.bodyLayout-banner:not(:empty)) {
-		--components-bodyLayout-banner-blockSize: var(--commons-banner-height);
+	&:has(.appLayout-banner:not(:empty)) {
+		--components-appLayout-banner-blockSize: var(--commons-banner-height);
 	}
 
 	@at-root ($atRoot) {
-		.bodyLayout {
+		.appLayout {
 			display: contents;
 		}
 
-		.bodyLayout-banner {
+		.appLayout-banner {
 			grid-area: banner;
 			position: sticky;
 			inset-block-start: 0;
 			z-index: 2;
-			block-size: var(--components-bodyLayout-banner-blockSize);
+			block-size: var(--components-appLayout-banner-blockSize);
 
 			&:empty {
 				display: none;
 			}
 		}
 
-		.bodyLayout-navSide {
+		.appLayout-navSide {
 			grid-area: navSide;
 			position: sticky;
-			inset-block: var(--components-bodyLayout-navSide-insetBlock);
-			block-size: var(--components-bodyLayout-navSide-blockSize);
+			inset-block: var(--components-appLayout-navSide-insetBlock);
+			block-size: var(--components-appLayout-navSide-blockSize);
 			overflow-x: hidden;
 			overflow-y: auto;
 			z-index: 1;
@@ -42,7 +42,7 @@
 			}
 		}
 
-		.bodyLayout-main {
+		.appLayout-main {
 			grid-area: main;
 		}
 	}

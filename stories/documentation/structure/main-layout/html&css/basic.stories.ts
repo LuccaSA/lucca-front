@@ -38,17 +38,17 @@ export default {
 		return {
 			styles: [
 				`
-.bodyLayout {
-	--components-bodyLayout-minBlockSize: 25rem;
-	block-size: var(--components-bodyLayout-minBlockSize);
+.appLayout {
+	--components-appLayout-minBlockSize: 25rem;
+	block-size: var(--components-appLayout-minBlockSize);
 	overflow: auto;
 	border: 1px dashed;
 	box-sizing: content-box;
 }
-.bodyLayout-banner {
+.appLayout-banner {
 	background-color: var(--palettes-neutral-0)
 }
-.bodyLayout-navSide {
+.appLayout-navSide {
 	background-color: var(--palettes-navigation-800);
 	color: var(--palettes-neutral-0)
 }
@@ -59,13 +59,13 @@ export default {
 				`,
 			],
 			template: cleanupTemplate(`
-<div class="bodyLayout">
-	<div class="bodyLayout-banner">banner</div>
-	<div class="bodyLayout-navSide">
+<div class="appLayout">
+	<div class="appLayout-banner">banner</div>
+	<div class="appLayout-navSide">
 		navSide
 		${imgNavSide}
 	</div>
-	<div class="bodyLayout-main">
+	<div class="appLayout-main">
 		<main role="main" class="mainLayout">
 			${headerContainer}
 			${sidebarContainer}
