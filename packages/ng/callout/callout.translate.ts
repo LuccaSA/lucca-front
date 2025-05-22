@@ -8,6 +8,10 @@ export const LU_CALLOUT_TRANSLATIONS = new InjectionToken('LuCalloutTranslations
 
 export interface LuCalloutLabel {
 	close: string;
+	warnings: string;
+	errors: string;
+	successes: string;
+	information: string;
 }
 
 export const luCalloutTranslations: LuTranslation<LuCalloutLabel> = Translations;

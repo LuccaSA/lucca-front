@@ -1,20 +1,21 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { TemplatePortal } from '@angular/cdk/portal';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgClass } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ElementRef, inject, Input, numberAttribute, OnDestroy, TemplateRef, ViewChild, ViewContainerRef, ViewEncapsulation } from '@angular/core';
 import { LuccaIcon } from '@lucca-front/icons';
 import { ButtonComponent } from '@lucca-front/ng/button';
-import { Palette, PortalContent, PortalDirective } from '@lucca-front/ng/core';
+import { getIntl, Palette, PortalContent, PortalDirective } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { CalloutIconPipe } from '../callout-icon.pipe';
 import { CalloutState } from '../callout-state';
 import { getCalloutPalette } from '../callout.utils';
+import { LU_CALLOUT_TRANSLATIONS } from '../callout.translate';
 
 @Component({
 	selector: 'lu-callout-popover',
 	standalone: true,
-	imports: [CommonModule, IconComponent, ButtonComponent, PortalDirective, CalloutIconPipe],
+	imports: [IconComponent, PortalDirective, CalloutIconPipe, NgClass],
 	animations: [
 		trigger('tooltip', [
 			state(
@@ -43,6 +44,8 @@ export class CalloutPopoverComponent implements OnDestroy {
 	#overlay = inject(Overlay);
 	#viewContainerRef = inject(ViewContainerRef);
 	#elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
+
+	protected intl = getIntl(LU_CALLOUT_TRANSLATIONS);
 
 	@ViewChild('overlayOriginRef')
 	overlayOrigin: ElementRef;
@@ -109,13 +112,6 @@ export class CalloutPopoverComponent implements OnDestroy {
 	 */
 	@Input({ required: true })
 	heading: PortalContent;
-
-	get contentSize(): 'S' | 'M' | undefined {
-		if (this.size === 'XS') {
-			return 'S';
-		}
-		return this.size;
-	}
 
 	get calloutClasses() {
 		const palette = getCalloutPalette(this.state, this.palette);

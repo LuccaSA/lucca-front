@@ -1,26 +1,58 @@
 ﻿export const Translations = {
 	en: {
 		close: 'Close',
+		warnings: 'Warnings',
+		errors: 'Errors',
+		successes: 'Successes',
+		information: 'Information',
 	},
 	de: {
 		close: 'Schließen',
+		warnings: 'Warnings',
+		errors: 'Errors',
+		successes: 'Successes',
+		information: 'Information',
 	},
 	fr: {
 		close: 'Fermer',
+		warnings: 'Avertissements',
+		errors: 'Erreurs',
+		successes: 'Succès',
+		information: 'Informations',
 	},
 	it: {
 		close: 'Chiudere',
+		warnings: 'Warnings',
+		errors: 'Errors',
+		successes: 'Successes',
+		information: 'Information',
 	},
 	nl: {
 		close: 'Sluiten',
+		warnings: 'Warnings',
+		errors: 'Errors',
+		successes: 'Successes',
+		information: 'Information',
 	},
 	'nl-BE': {
 		close: 'Sluiten',
+		warnings: 'Warnings',
+		errors: 'Errors',
+		successes: 'Successes',
+		information: 'Information',
 	},
 	es: {
 		close: 'Cerrar',
+		warnings: 'Warnings',
+		errors: 'Errors',
+		successes: 'Successes',
+		information: 'Information',
 	},
 	pt: {
 		close: 'Fechar',
+		warnings: 'Warnings',
+		errors: 'Errors',
+		successes: 'Successes',
+		information: 'Information',
 	},
 };
