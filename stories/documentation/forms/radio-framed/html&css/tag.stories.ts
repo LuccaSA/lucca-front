@@ -1,23 +1,23 @@
 import { Meta } from '@storybook/angular';
 import { cleanupTemplate } from 'stories/helpers/stories';
 
-interface RadioFramedTagStory {}
+interface InputFramedTagStory {}
 
 export default {
-	title: 'Documentation/Forms/Radio Framed/HTML&CSS/Tag',
+	title: 'Documentation/Forms/Input Framed/HTML&CSS/Tag',
 	argTypes: {},
-	render: (args: RadioFramedTagStory) => {
+	render: (args: InputFramedTagStory) => {
 		return {
 			template: cleanupTemplate(`
-<div class="radioFramed">
-	<div class="radioFramed-header">
-		<div class="form-field radioFramed-header-field">
-			<label class="formLabel radioFramed-header-label" id="radioAlabel" for="optionA">
+<div class="inputFramed">
+	<div class="inputFramed-header">
+		<div class="form-field inputFramed-header-field">
+			<label class="formLabel inputFramed-header-label" id="radioAlabel" for="optionA">
 				Option A
 				<span class="formLabel-tag tag">Tag</span>
 			</label>
 			<span class="radioField">
-				<input type="radio" class="radioField-input radioFramed-header-input" aria-labelledby="radioAlabel" id="optionA" name="radioGroup" />
+				<input type="radio" class="radioField-input inputFramed-header-input" aria-labelledby="radioAlabel" id="optionA" name="radioGroup" />
 				<span aria-hidden="true" class="radioField-icon">
 					<span class="radioField-icon-check"></span>
 				</span>

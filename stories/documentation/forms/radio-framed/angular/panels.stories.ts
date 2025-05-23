@@ -5,17 +5,17 @@ import { IconComponent } from '@lucca-front/ng/icon';
 import { Meta, moduleMetadata } from '@storybook/angular';
 import { cleanupTemplate } from 'stories/helpers/stories';
 
-interface RadioFramedPanelsStory {}
+interface InputFramedPanelsStory {}
 
 export default {
-	title: 'Documentation/Forms/Radio Framed/Angular/Panels',
+	title: 'Documentation/Forms/Input Framed/Angular/Panels',
 	decorators: [
 		moduleMetadata({
 			imports: [FormFieldComponent, RadioGroupInputComponent, RadioComponent, FormsModule, IconComponent],
 		}),
 	],
 	argTypes: {},
-	render: (args: RadioFramedPanelsStory) => {
+	render: (args: InputFramedPanelsStory) => {
 		return {
 			template: cleanupTemplate(`
 <ng-template #optionBportal>Lorem <strong>ipsum</strong> dolor</ng-template>

@@ -1,5 +1,5 @@
 <ng-template #radioContent>
-	<label class="formLabel" [class.radioFramed-header-label]="framed" id="{{id}}-label" for="{{id}}-input">
+	<label class="formLabel" [class.inputFramed-header-label]="framed" id="{{id}}-label" for="{{id}}-input">
 		<ng-content></ng-content>
 		@if (tag) {
 		<span class="formLabel-tag tag">{{ tag }}</span>
@@ -11,7 +11,7 @@
 			[attr.disabled]="(formControl.disabled || disabled) ? 'disabled' : null"
 			type="radio"
 			class="radioField-input"
-			[class.radioFramed-header-input]="framed"
+			[class.inputFramed-header-input]="framed"
 			id="{{id}}-input"
 			[attr.name]="name"
 			[name]="name"
@@ -21,7 +21,7 @@
 			attr.aria-labelledby="{{id}}-label"
 			attr.aria-describedby="{{id}}-message"
 		/>
-		<span class="radioField-icon" [class.radioFramed-header-icon]="framed" aria-hidden="true">
+		<span class="radioField-icon" [class.inputFramed-header-icon]="framed" aria-hidden="true">
 			<span class="radioField-icon-check"></span>
 		</span>
 	</span>
@@ -31,18 +31,11 @@
 	}
 </ng-template>
 @if (framed) {
-<div class="radioFramed">
-	<div class="radioFramed-header">
-		<div class="form-field radioFramed-header-field">
-			<ng-container *ngTemplateOutlet="radioContent" />
-		</div>
-		<div class="radioFramed-header-illustration"><ng-content select="[illustration]" /></div>
-		<div class="radioFramed-header-info"><ng-content select="[info]" /></div>
-	</div>
-	@if (framedPortal) {
-	<div class="radioFramed-content"><ng-container *luPortal="framedPortal" /></div>
-	}
-</div>
+<lu-framed-input [framedPortal]="framedPortal">
+	<ng-container *ngTemplateOutlet="radioContent" />
+	<ng-container illustration><ng-content select="[illustration]" /></ng-container>
+	<ng-container info><ng-content select="[info]" /></ng-container>
+</lu-framed-input>
 } @else {
 <ng-container *ngTemplateOutlet="radioContent" />
 }

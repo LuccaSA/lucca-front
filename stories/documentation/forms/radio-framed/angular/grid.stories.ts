@@ -4,17 +4,17 @@ import { RadioComponent, RadioGroupInputComponent } from '@lucca-front/ng/forms'
 import { Meta, moduleMetadata } from '@storybook/angular';
 import { cleanupTemplate } from 'stories/helpers/stories';
 
-interface RadioFramedBasicStory {}
+interface InputFramedBasicStory {}
 
 export default {
-	title: 'Documentation/Forms/Radio Framed/Angular/Grid',
+	title: 'Documentation/Forms/Input Framed/Angular/Grid',
 	decorators: [
 		moduleMetadata({
 			imports: [FormFieldComponent, RadioGroupInputComponent, RadioComponent, FormsModule],
 		}),
 	],
 	argTypes: {},
-	render: (args: RadioFramedBasicStory) => {
+	render: (args: InputFramedBasicStory) => {
 		return {
 			template: cleanupTemplate(`
 <lu-form-field label="Label">

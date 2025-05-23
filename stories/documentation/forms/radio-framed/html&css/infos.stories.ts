@@ -1,45 +1,45 @@
 import { Meta } from '@storybook/angular';
 import { cleanupTemplate } from 'stories/helpers/stories';
 
-interface RadioFramedInfosStory {}
+interface InputFramedInfosStory {}
 
 export default {
-	title: 'Documentation/Forms/Radio Framed/HTML&CSS/Infos',
+	title: 'Documentation/Forms/Input Framed/HTML&CSS/Infos',
 	argTypes: {},
-	render: (args: RadioFramedInfosStory) => {
+	render: (args: InputFramedInfosStory) => {
 		return {
 			template: cleanupTemplate(`
-<div class="radioFramedWrapper">
-	<div class="radioFramed">
-		<div class="radioFramed-header">
-			<div class="form-field radioFramed-header-field">
-				<label class="formLabel radioFramed-header-label" id="radioAlabel" for="optionA">
+<div class="inputFramedWrapper">
+	<div class="inputFramed">
+		<div class="inputFramed-header">
+			<div class="form-field inputFramed-header-field">
+				<label class="formLabel inputFramed-header-label" id="radioAlabel" for="optionA">
 					Option A
 				</label>
 				<span class="radioField">
-					<input type="radio" class="radioField-input radioFramed-header-input" aria-labelledby="radioAlabel" id="optionA" name="radioGroup" />
+					<input type="radio" class="radioField-input inputFramed-header-input" aria-labelledby="radioAlabel" id="optionA" name="radioGroup" />
 					<span aria-hidden="true" class="radioField-icon">
 						<span class="radioField-icon-check"></span>
 					</span>
 				</span>
 			</div>
-			<div class="radioFramed-header-info">Lorem ipsum dolor</div>
+			<div class="inputFramed-header-info">Lorem ipsum dolor</div>
 		</div>
 	</div>
-	<div class="radioFramed">
-		<div class="radioFramed-header">
-			<div class="form-field radioFramed-header-field">
-				<label class="formLabel radioFramed-header-label" id="radioBlabel" for="optionB">
+	<div class="inputFramed">
+		<div class="inputFramed-header">
+			<div class="form-field inputFramed-header-field">
+				<label class="formLabel inputFramed-header-label" id="radioBlabel" for="optionB">
 					Option B
 				</label>
 				<span class="radioField">
-					<input type="radio" class="radioField-input radioFramed-header-input" aria-labelledby="radioBlabel" id="optionB" name="radioGroup" />
+					<input type="radio" class="radioField-input inputFramed-header-input" aria-labelledby="radioBlabel" id="optionB" name="radioGroup" />
 					<span aria-hidden="true" class="radioField-icon">
 						<span class="radioField-icon-check"></span>
 					</span>
 				</span>
 			</div>
-			<div class="radioFramed-header-info">Lorem ipsum dolor</div>
+			<div class="inputFramed-header-info">Lorem ipsum dolor</div>
 		</div>
 	</div>
 </div>

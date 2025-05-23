@@ -38,7 +38,7 @@ export class RadioGroupInputComponent implements OnInit {
 	@Input()
 	arrow?: 'neutral' | 'default';
 
-	@HostBinding('class.radioFramedWrapper')
+	@HostBinding('class.inputFramedWrapper')
 	public get isFramed() {
 		return this.framed();
 	}

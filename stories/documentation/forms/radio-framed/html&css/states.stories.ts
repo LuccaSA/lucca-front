@@ -1,23 +1,23 @@
 import { Meta } from '@storybook/angular';
 import { cleanupTemplate } from 'stories/helpers/stories';
 
-interface RadioFramedTagStory {}
+interface InputFramedTagStory {}
 
 export default {
-	title: 'Documentation/Forms/Radio Framed/HTML&CSS/States',
+	title: 'Documentation/Forms/Input Framed/HTML&CSS/States',
 	argTypes: {},
-	render: (args: RadioFramedTagStory) => {
+	render: (args: InputFramedTagStory) => {
 		return {
 			template: cleanupTemplate(`
-<div class="radioFramedWrapper">
-	<div class="radioFramed">
-		<div class="radioFramed-header">
-			<div class="form-field radioFramed-header-field">
-				<label class="formLabel radioFramed-header-label" id="radioAlabel" for="optionA">
+<div class="inputFramed">
+	<div class="inputFramed">
+		<div class="inputFramed-header">
+			<div class="form-field inputFramed-header-field">
+				<label class="formLabel inputFramed-header-label" id="radioAlabel" for="optionA">
 					Option A
 				</label>
 				<span class="radioField">
-					<input checked="checked" type="radio" class="radioField-input radioFramed-header-input" aria-labelledby="radioAlabel" id="optionA" name="radioGroup" />
+					<input checked="checked" type="radio" class="radioField-input inputFramed-header-input" aria-labelledby="radioAlabel" id="optionA" name="radioGroup" />
 					<span aria-hidden="true" class="radioField-icon">
 						<span class="radioField-icon-check"></span>
 					</span>
@@ -25,14 +25,14 @@ export default {
 			</div>
 		</div>
 	</div>
-	<div class="radioFramed">
-		<div class="radioFramed-header">
-			<div class="form-field radioFramed-header-field">
-				<label class="formLabel radioFramed-header-label" id="radioBlabel" for="optionB">
+	<div class="inputFramed">
+		<div class="inputFramed-header">
+			<div class="form-field inputFramed-header-field">
+				<label class="formLabel inputFramed-header-label" id="radioBlabel" for="optionB">
 					Option B
 				</label>
 				<span class="radioField">
-					<input checked="checked" type="radio" class="radioField-input radioFramed-header-input" aria-labelledby="radioBlabel" id="optionB" name="radioGroup" />
+					<input checked="checked" type="radio" class="radioField-input inputFramed-header-input" aria-labelledby="radioBlabel" id="optionB" name="radioGroup" />
 					<span aria-hidden="true" class="radioField-icon">
 						<span class="radioField-icon-check"></span>
 					</span>
@@ -40,14 +40,14 @@ export default {
 			</div>
 		</div>
 	</div>
-	<div class="radioFramed">
-		<div class="radioFramed-header">
-			<div class="form-field radioFramed-header-field">
-				<label class="formLabel radioFramed-header-label" id="radioClabel" for="optionC">
+	<div class="inputFramed">
+		<div class="inputFramed-header">
+			<div class="form-field inputFramed-header-field">
+				<label class="formLabel inputFramed-header-label" id="radioClabel" for="optionC">
 					Option C
 				</label>
 				<span class="radioField">
-					<input disabled="disabled" type="radio" class="radioField-input radioFramed-header-input" aria-labelledby="radioClabel" id="optionC" name="radioGroup" />
+					<input disabled="disabled" type="radio" class="radioField-input inputFramed-header-input" aria-labelledby="radioClabel" id="optionC" name="radioGroup" />
 					<span aria-hidden="true" class="radioField-icon">
 						<span class="radioField-icon-check"></span>
 					</span>
@@ -55,14 +55,14 @@ export default {
 			</div>
 		</div>
 	</div>
-	<div class="radioFramed">
-		<div class="radioFramed-header">
-			<div class="form-field radioFramed-header-field">
-				<label class="formLabel radioFramed-header-label" id="radioDlabel" for="optionD">
+	<div class="inputFramed">
+		<div class="inputFramed-header">
+			<div class="form-field inputFramed-header-field">
+				<label class="formLabel inputFramed-header-label" id="radioDlabel" for="optionD">
 					Option D
 				</label>
 				<span class="radioField">
-					<input aria-invalid="true" type="radio" class="radioField-input radioFramed-header-input" aria-labelledby="radioDlabel" id="optionD" name="radioGroup" />
+					<input aria-invalid="true" type="radio" class="radioField-input inputFramed-header-input" aria-labelledby="radioDlabel" id="optionD" name="radioGroup" />
 					<span aria-hidden="true" class="radioField-icon">
 						<span class="radioField-icon-check"></span>
 					</span>

@@ -1,0 +1,29 @@
+
+@mixin hover {
+	--components-inputFramed-borderColor: var(--pr-t-color-input-border-hover);
+}
+
+@mixin disabled {
+	--components-inputFramed-header-backgroundColor: var(--palettes-neutral-25);
+	--components-inputFramed-header-borderColor: var(--palettes-neutral-50);
+	--components-inputFramed-borderColor: var(--palettes-neutral-300);
+}
+
+@mixin checked {
+	--components-inputFramed-content-display: block;
+	--components-inputFramed-header-backgroundColor: var(--palettes-product-50);
+	--components-inputFramed-borderColor: var(--pr-t-color-input-border-selected);
+	--components-inputFramed-header-info-borderColor: var(--pr-t-color-input-border-selected);
+}
+
+@mixin checkedHover {
+	--components-inputFramed-borderColor: var(--pr-t-color-input-border-selected-hover);
+}
+
+@mixin critical {
+	--components-inputFramed-borderColor: var(--pr-t-color-input-border-critical);
+}
+
+@mixin criticalHover {
+	--components-inputFramed-borderColor: var(--pr-t-color-input-border-critical-hover);
+}

@@ -4,7 +4,7 @@
 	position: relative;
 	overflow: hidden;
 	padding: var(--pr-t-spacings-50);
-	border: solid 1px var(--components-radioFramed-borderColor);
+	border: solid 1px var(--components-inputFramed-borderColor);
 	border-radius: var(--commons-borderRadius-L);
 	background-color: var(--palettes-neutral-0);
 	transition-property: box-shadow, border-color;
@@ -14,9 +14,10 @@
 	flex-direction: column;
 
 	@at-root ($atRoot) {
-		.radioFramed-header-label.formLabel {
+		.inputFramed-header-label.formLabel {
 			position: static;
 			font-weight: 600;
+
 
 			&::after {
 				content: '';
@@ -25,22 +26,24 @@
 			}
 		}
 
-		.radioFramed-header-field.form-field {
+		.inputFramed-header-field.form-field {
 			position: static;
 		}
 
-		.radioFramed-header-input.radioField-input {
-			~ .radioFramed-header-icon.radioField-icon {
+		.inputFramed-header-input.radioField-input,
+		.inputFramed-header-input.checkboxField-input {
+			~ .inputFramed-header-icon.radioField-icon,
+			~ .inputFramed-header-icon.checkboxField-icon {
 				&::after {
 					outline: none;
 				}
 			}
 		}
 
-		.radioFramed-header {
-			padding: var(--components-radioFramed-padding);
+		.inputFramed-header {
+			padding: var(--components-inputFramed-padding);
 			border-radius: var(--commons-borderRadius-M);
-			background-color: var(--components-radioFramed-header-backgroundColor);
+			background-color: var(--components-inputFramed-header-backgroundColor);
 			transition-property: background-color;
 			transition-duration: var(--commons-animations-durations-fast);
 			position: relative;
@@ -51,26 +54,26 @@
 			gap: var(--pr-t-spacings-100);
 		}
 
-		.radioFramed-header-illustration {
+		.inputFramed-header-illustration {
 			&:empty {
 				display: none;
 			}
 		}
 
-		.radioFramed-header-info {
+		.inputFramed-header-info {
 			flex-basis: 100%;
-			border-top: 1px solid var(--components-radioFramed-header-info-borderColor);
-			margin-top: var(--pr-t-spacings-100);
-			padding-top: var(--pr-t-spacings-200);
+			border-block-start: 1px solid var(--components-inputFramed-header-info-borderColor);
+			margin-block-start: var(--pr-t-spacings-100);
+			padding-block-start: var(--pr-t-spacings-200);
 
 			&:empty {
 				display: none;
 			}
 		}
 
-		.radioFramed-content {
-			display: var(--components-radioFramed-content-display);
-			padding: var(--components-radioFramed-padding);
+		.inputFramed-content {
+			display: var(--components-inputFramed-content-display);
+			padding: var(--components-inputFramed-padding);
 			margin-block-start: var(--pr-t-spacings-50);
 		}
 	}

@@ -4,6 +4,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { LuClass, PortalContent, PortalDirective } from '@lucca-front/ng/core';
 import { InputDirective } from '@lucca-front/ng/form-field';
 import { InlineMessageComponent } from '@lucca-front/ng/inline-message';
+import { FramedInputComponent } from '../../framed-input/framed-input.component';
 import { RADIO_GROUP_INSTANCE } from '../radio-group-token';
 
 let nextId = 0;
@@ -11,7 +12,7 @@ let nextId = 0;
 @Component({
 	selector: 'lu-radio',
 	standalone: true,
-	imports: [ReactiveFormsModule, InlineMessageComponent, NgIf, NgTemplateOutlet, PortalDirective, InputDirective],
+	imports: [ReactiveFormsModule, InlineMessageComponent, NgIf, NgTemplateOutlet, PortalDirective, InputDirective, FramedInputComponent],
 	templateUrl: './radio.component.html',
 	styleUrl: './radio.component.scss',
 	encapsulation: ViewEncapsulation.None,

@@ -25,6 +25,7 @@ import { IconComponent } from '@lucca-front/ng/icon';
 import { InlineMessageComponent, InlineMessageState } from '@lucca-front/ng/inline-message';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 import { BehaviorSubject } from 'rxjs';
+import { FRAMED_INPUT_INSTANCE } from '../forms/framed-input/framed-input-token';
 import { FormFieldSize } from './form-field-size';
 import { FORM_FIELD_INSTANCE } from './form-field.token';
 import { LU_FORM_FIELD_TRANSLATIONS } from './form-field.translate';
@@ -47,6 +48,9 @@ type FormFieldWidth = 20 | 30 | 40 | 50 | 60;
 			useExisting: forwardRef(() => FormFieldComponent),
 		},
 	],
+	host: {
+		'[class.inputFramed-header-field]': 'framed',
+	},
 	encapsulation: ViewEncapsulation.None,
 })
 export class FormFieldComponent implements OnDestroy, DoCheck {
@@ -55,6 +59,8 @@ export class FormFieldComponent implements OnDestroy, DoCheck {
 	#luClass = inject(LuClass);
 	#injector = inject(Injector);
 	#renderer = inject(Renderer2);
+
+	framed = inject(FRAMED_INPUT_INSTANCE, { optional: true }) !== null;
 
 	formFieldChildren = contentChildren(FormFieldComponent, { descendants: true });
 

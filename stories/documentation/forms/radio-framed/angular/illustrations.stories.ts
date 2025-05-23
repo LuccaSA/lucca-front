@@ -5,17 +5,17 @@ import { IconComponent } from '@lucca-front/ng/icon';
 import { Meta, moduleMetadata } from '@storybook/angular';
 import { cleanupTemplate } from 'stories/helpers/stories';
 
-interface RadioFramedIllustrationsStory {}
+interface InputFramedIllustrationsStory {}
 
 export default {
-	title: 'Documentation/Forms/Radio Framed/Angular/Illustrations',
+	title: 'Documentation/Forms/Input Framed/Angular/Illustrations',
 	decorators: [
 		moduleMetadata({
 			imports: [FormFieldComponent, RadioGroupInputComponent, RadioComponent, FormsModule, IconComponent],
 		}),
 	],
 	argTypes: {},
-	render: (args: RadioFramedIllustrationsStory) => {
+	render: (args: InputFramedIllustrationsStory) => {
 		return {
 			template: cleanupTemplate(`
 <lu-form-field label="Label">

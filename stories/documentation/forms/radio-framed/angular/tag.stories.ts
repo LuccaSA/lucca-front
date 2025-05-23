@@ -4,17 +4,17 @@ import { RadioComponent, RadioGroupInputComponent } from '@lucca-front/ng/forms'
 import { Meta, moduleMetadata } from '@storybook/angular';
 import { cleanupTemplate } from 'stories/helpers/stories';
 
-interface RadioFramedTagStory {}
+interface InputFramedTagStory {}
 
 export default {
-	title: 'Documentation/Forms/Radio Framed/Angular/Tag',
+	title: 'Documentation/Forms/Input Framed/Angular/Tag',
 	decorators: [
 		moduleMetadata({
 			imports: [FormFieldComponent, RadioGroupInputComponent, RadioComponent, FormsModule],
 		}),
 	],
 	argTypes: {},
-	render: (args: RadioFramedTagStory) => {
+	render: (args: InputFramedTagStory) => {
 		return {
 			template: cleanupTemplate(`
 <lu-form-field label="Label">

@@ -20,6 +20,7 @@
 } @else {
 <label
 	class="formLabel"
+	[class.inputFramed-header-label]="framed"
 	[class.is-error]="invalidStatus()"
 	[class.mod-counter]="counter() > 0"
 	id="{{id()}}-label"

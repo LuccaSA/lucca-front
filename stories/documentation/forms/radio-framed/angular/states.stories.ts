@@ -5,17 +5,17 @@ import { Meta, moduleMetadata } from '@storybook/angular';
 import { cleanupTemplate } from 'stories/helpers/stories';
 import { StoryModelDisplayComponent } from 'stories/helpers/story-model-display.component';
 
-interface RadioFramedBasicStory {}
+interface InputFramedBasicStory {}
 
 export default {
-	title: 'Documentation/Forms/Radio Framed/Angular/States',
+	title: 'Documentation/Forms/Input Framed/Angular/States',
 	decorators: [
 		moduleMetadata({
 			imports: [FormFieldComponent, RadioGroupInputComponent, RadioComponent, FormsModule, ReactiveFormsModule, StoryModelDisplayComponent],
 		}),
 	],
 	argTypes: {},
-	render: (args: RadioFramedBasicStory) => {
+	render: (args: InputFramedBasicStory) => {
 		return {
 			props: { example: 'B' },
 			template: cleanupTemplate(`
