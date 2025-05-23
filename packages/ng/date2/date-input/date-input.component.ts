@@ -77,6 +77,7 @@ export class DateInputComponent extends AbstractDateComponent implements Control
 
 	disableOverflow = input(false, { transform: booleanAttribute });
 	hideOverflow = input(false, { transform: booleanAttribute });
+	widthAuto = input(false, { transform: booleanAttribute });
 
 	filterPillDisabled = signal(false);
 
@@ -146,6 +147,11 @@ export class DateInputComponent extends AbstractDateComponent implements Control
 
 	@HostBinding('class.mod-filterPill')
 	isFilterPill = false;
+
+	@HostBinding('class.mod-auto')
+	get isWidthAuto() {
+		return this.widthAuto();
+	}
 
 	isFilterPillEmpty = computed(() => !this.selectedDate());
 	isFilterPillClearable = computed(() => this.clearable() ?? this.#defaultFilterPillClearable() ?? this.#defaultClearable);
