@@ -71,34 +71,41 @@ export abstract class AbstractDateComponent {
 	}
 
 	isInMinMax(date: Date, mode: CalendarMode): boolean {
-		let result = true;
-		if (this.min()) {
-			switch (mode) {
-				case 'day':
-					result = result && this.min().getTime() <= date.getTime();
-					break;
-				case 'month':
-					result = (result && isBefore(startOfMonth(this.min()), startOfMonth(date))) || isSameMonth(this.min(), date);
-					break;
-				case 'year':
-					result = result && this.min().getFullYear() <= date.getFullYear();
-					break;
-			}
+		return this.isAfterMin(date, mode) && this.isBeforeMax(date, mode);
+	}
+
+	isAfterMin(date: Date, mode: CalendarMode): boolean {
+		if (!this.min()) {
+			return true;
 		}
-		if (this.max()) {
-			switch (mode) {
-				case 'day':
-					result = result && this.max().getTime() >= date.getTime();
-					break;
-				case 'month':
-					result = (result && isAfter(startOfMonth(this.max()), startOfMonth(date))) || isSameMonth(this.max(), date);
-					break;
-				case 'year':
-					result = result && this.max().getFullYear() >= date.getFullYear();
-					break;
-			}
+
+		switch (mode) {
+			case 'day':
+				return this.min().getTime() <= date.getTime();
+			case 'month':
+				return isBefore(startOfMonth(this.min()), startOfMonth(date)) || isSameMonth(this.min(), date);
+			case 'year':
+				return this.min().getFullYear() <= date.getFullYear();
+			default:
+				return true;
 		}
-		return result;
+	}
+
+	isBeforeMax(date: Date, mode: CalendarMode): boolean {
+		if (!this.max()) {
+			return true;
+		}
+
+		switch (mode) {
+			case 'day':
+				return this.max().getTime() >= date.getTime();
+			case 'month':
+				return isAfter(startOfMonth(this.max()), startOfMonth(date)) || isSameMonth(this.max(), date);
+			case 'year':
+				return this.max().getFullYear() >= date.getFullYear();
+			default:
+				return true;
+		}
 	}
 
 	isValidDate(date: Date): boolean {

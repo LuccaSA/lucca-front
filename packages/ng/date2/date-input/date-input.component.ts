@@ -16,7 +16,7 @@ import {
 	viewChild,
 	ViewEncapsulation,
 } from '@angular/core';
-import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors, Validator } from '@angular/forms';
+import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validator } from '@angular/forms';
 import { LuccaIcon } from '@lucca-front/icons';
 import { LuClass, ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { FILTER_PILL_INPUT_COMPONENT, FilterPillDisplayerDirective, FilterPillInputComponent } from '@lucca-front/ng/filter-pills';
@@ -29,6 +29,12 @@ import { CalendarMode } from '../calendar2/calendar-mode';
 import { Calendar2Component } from '../calendar2/calendar2.component';
 import { CellStatus } from '../calendar2/cell-status';
 import { comparePeriods, startOfPeriod, transformDateInputToDate, transformDateToDateISO } from '../utils';
+
+export type DateInputValidatorErrorType = {
+	min: true;
+	max: true;
+	date: true;
+};
 
 @Component({
 	selector: 'lu-date-input',
@@ -260,7 +266,7 @@ export class DateInputComponent extends AbstractDateComponent implements Control
 		}
 	}
 
-	validate(control: AbstractControl<Date | string | null>): ValidationErrors | null {
+	validate(control: AbstractControl<Date | string | null>): Partial<DateInputValidatorErrorType> | null {
 		// null is not an error but means we'll skip everything else, we'll let the presence of a
 		// Validators.required (or not) decide if it's an error.
 		if (control.value === null || control.value === undefined) {
@@ -279,8 +285,10 @@ export class DateInputComponent extends AbstractDateComponent implements Control
 			return { date: true };
 		}
 		// Check min and max
-		if (!this.isInMinMax(date, this.mode())) {
-			return { minMax: true };
+		if (this.min() && !this.isAfterMin(date, this.mode())) {
+			return { min: true };
+		} else if (this.max() && !this.isBeforeMax(date, this.mode())) {
+			return { max: true };
 		}
 		// Everything is valid
 		return null;
