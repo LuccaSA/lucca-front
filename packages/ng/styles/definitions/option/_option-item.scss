@@ -106,7 +106,7 @@
 		}
 	}
 
-	:host-context(.mod-multiple) {
+	:host-context(.mod-multiple), .formerEmployeeDisplayer {
 		.optionItem-value {
 			position: relative;
 			padding-inline-start: var(--components-options-item-multiple-padding);
