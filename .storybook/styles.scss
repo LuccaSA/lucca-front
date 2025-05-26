@@ -11,10 +11,12 @@
 @use '../packages/scss/src/commons/utils/media';
 @use '../packages/scss/src/components/appLayout/exports' as appLayout;
 
+body:has(.appLayout) {
+	--commons-navSide-width: calc(15rem / 2);
+}
+
 .appLayout.appLayout {
 	@include appLayout.component;
-
-	--commons-navSide-width: calc(15rem / 2);
 
 	@include media.min('S') {
 		@include appLayout.wide;

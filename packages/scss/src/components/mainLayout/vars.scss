@@ -1,7 +1,9 @@
 @mixin vars {
-	--components-mainLayout-sidebar-blockSize: auto;
-	--components-mainLayout-header-insetBlockStart: var(--components-appLayout-before);
 	--components-mainLayout-gridTemplate: "header " auto
 																			  "content" 1fr
 																			  "footer"  auto;
+	--components-mainLayout-sidebar-blockSize: auto;
+	--components-mainLayout-header-insetBlockStart: var(--components-appLayout-before);
+	--components-mainLayout-before: calc(var(--components-appLayout-before) + 0px);
+	--components-mainLayout-after: calc(var(--components-appLayout-after) + 0px);
 }

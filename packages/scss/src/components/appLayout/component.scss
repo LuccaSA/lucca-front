@@ -7,10 +7,6 @@
 	display: grid;
 	grid-template: var(--components-appLayout-gridTemplate);
 
-	&:has(.appLayout-banner:not(:empty)) {
-		--components-appLayout-banner-blockSize: var(--commons-banner-height);
-	}
-
 	@at-root ($atRoot) {
 		.appLayout {
 			display: contents;
@@ -20,8 +16,10 @@
 			grid-area: banner;
 			position: sticky;
 			inset-block-start: 0;
+			inset-inline-start: 0;
 			z-index: 2;
 			block-size: var(--components-appLayout-banner-blockSize);
+			inline-size: var(--components-appLayout-banner-inlineSize);
 
 			&:empty {
 				display: none;
@@ -32,10 +30,13 @@
 			grid-area: navSide;
 			position: sticky;
 			inset-block: var(--components-appLayout-navSide-insetBlock);
-			block-size: var(--components-appLayout-navSide-blockSize);
-			overflow-x: hidden;
-			overflow-y: auto;
+			inset-inline-start: 0;
 			z-index: 1;
+			block-size: var(--components-appLayout-navSide-blockSize);
+			inline-size: var(--components-appLayout-navSide-inlineSize);
+			overflow-x: hidden;
+			overflow-y: visible;
+			display: grid;
 
 			&:empty {
 				display: none;
@@ -44,6 +45,11 @@
 
 		.appLayout-main {
 			grid-area: main;
+			display: grid;
+
+			&:empty {
+				display: none;
+			}
 		}
 	}
 }

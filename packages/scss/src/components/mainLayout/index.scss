@@ -10,8 +10,6 @@
 	}
 
 	@include media.min('S') {
-		@include wide;
-
 		&:has(.mainLayout-sidebar:not(:empty)) {
 			@include sidebarWide;
 		}

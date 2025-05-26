@@ -1,11 +1,13 @@
 @mixin vars {
-	--components-appLayout-minBlockSize: 100dvh;
-	--components-appLayout-banner-blockSize: 0px;
-	--components-appLayout-navSide-blockSize: 3rem;
 	--components-appLayout-gridTemplate: "banner " auto
-																				"navSide" auto
-																				"main   " 1fr;
-	--components-appLayout-after: 0px;
-	--components-appLayout-before: calc(var(--components-appLayout-banner-blockSize) + var(--components-appLayout-navSide-blockSize));
+																			 "navSide" auto
+																			 "main   " 1fr;
+	--components-appLayout-minBlockSize: 100dvh;
+	--components-appLayout-banner-inlineSize: 100dvw;
+	--components-appLayout-banner-blockSize: var(--commons-banner-height);
+	--components-appLayout-navSide-blockSize: 3rem;
+	--components-appLayout-navSide-inlineSize: var(--commons-navSide-width);
 	--components-appLayout-navSide-insetBlock: var(--components-appLayout-banner-blockSize) auto;
+	--components-appLayout-before: calc(var(--components-appLayout-banner-blockSize) + var(--components-appLayout-navSide-blockSize));
+	--components-appLayout-after: 0px;
 }

@@ -40,13 +40,14 @@ export default {
 				`
 .appLayout {
 	--components-appLayout-minBlockSize: 25rem;
+	--components-appLayout-banner-inlineSize: 100%;
 	block-size: var(--components-appLayout-minBlockSize);
 	overflow: auto;
-	border: 1px dashed;
+	outline: 1px dashed;
 	box-sizing: content-box;
 }
 .appLayout-banner {
-	background-color: var(--palettes-neutral-0)
+	background-color: var(--palettes-neutral-0);
 }
 .appLayout-navSide {
 	background-color: var(--palettes-navigation-800);
