@@ -23,7 +23,7 @@
 			&::before {
 				@include icon.generate('arrow_chevron_right');
 
-				font-size: var(--sizes-XS-fontSize);
+				font-size: var(--pr-t-font-body-XS-fontSize);
 				margin-inline-end: var(--pr-t-spacings-50);
 				transition-duration: var(--commons-animations-durations-fast);
 				transition-property: transform;

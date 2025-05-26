@@ -1,8 +1,8 @@
 @mixin vars {
 	--components-tag-background: var(--palettes-100, var(--palettes-neutral-100));
 	--components-tag-shadow: transparent;
-	--components-tag-fontSize: var(--sizes-S-fontSize);
-	--components-tag-lineHeight: var(--sizes-S-lineHeight);
+	--components-tag-fontSize: var(--pr-t-font-body-S-fontSize);
+	--components-tag-lineHeight: var(--pr-t-font-body-S-lineHeight);
 	--components-tag-decoration: none;
 	--components-tag-cursor: inherit;
 }

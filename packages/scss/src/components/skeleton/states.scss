@@ -63,7 +63,7 @@
 				calc(var(--components-skeleton-text-offset) + 1px) calc(100% - var(--components-skeleton-text-width, 100%))
 					calc(var(--components-skeleton-text-offset) - 1px) 0 var(--components-skeleton-text-clipPathRound)
 			);
-			block-size: var(--sizes-M-lineHeight);
+			block-size: var(--pr-t-font-body-M-lineHeight);
 			inline-size: 100%;
 		}
 	}

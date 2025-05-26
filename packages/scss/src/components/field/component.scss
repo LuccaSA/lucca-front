@@ -52,8 +52,8 @@
 		.radiosfield-label,
 		.checkboxesfield-label {
 			color: var(--components-field-label-color);
-			font-size: var(--sizes-M-fontSize);
-			line-height: var(--sizes-M-lineHeight);
+			font-size: var(--pr-t-font-body-M-fontSize);
+			line-height: var(--pr-t-font-body-M-lineHeight);
 			min-block-size: var(--pr-t-spacings-200);
 			margin-block-end: var(--components-field-label-margin-bottom);
 			transition-duration: var(--commons-animations-durations-fast);
@@ -69,8 +69,8 @@
 		.textfield-messages,
 		.radiosfield-messages,
 		.checkboxesfield-messages {
-			font-size: var(--sizes-S-fontSize);
-			line-height: var(--sizes-S-lineHeight);
+			font-size: var(--pr-t-font-body-S-fontSize);
+			line-height: var(--pr-t-font-body-S-lineHeight);
 			margin-block-start: var(--components-field-message-margin-top);
 
 			> * {
@@ -84,8 +84,8 @@
 			color: var(--palettes-error-700);
 
 			.lucca-icon {
-				font-size: var(--sizes-XS-lineHeight);
-				line-height: var(--sizes-S-lineHeight);
+				font-size: var(--pr-t-font-body-XS-lineHeight);
+				line-height: var(--pr-t-font-body-S-lineHeight);
 				vertical-align: top;
 			}
 		}

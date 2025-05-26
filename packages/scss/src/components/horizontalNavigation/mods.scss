@@ -10,8 +10,8 @@
 	.horizontalNavigation-list-item-action,
 	.menu-list-item-action,
 	.menu-link {
-		--components-horizontalNavigation-listItemActionFontSize: var(--sizes-S-fontSize);
-		--components-horizontalNavigation-listItemActionLineHeight: var(--sizes-S-lineHeight);
+		--components-horizontalNavigation-listItemActionFontSize: var(--pr-t-font-body-S-fontSize);
+		--components-horizontalNavigation-listItemActionLineHeight: var(--pr-t-font-body-S-lineHeight);
 		--components-horizontalNavigation-listItemActionPadding: var(--pr-t-spacings-150) 0;
 
 		&::before {
@@ -27,9 +27,9 @@
 
 	// .label is deprecated
 	.label {
-		block-size: var(--sizes-S-lineHeight);
-		min-inline-size: var(--sizes-S-lineHeight);
-		line-height: var(--sizes-S-lineHeight);
+		block-size: var(--pr-t-font-body-S-lineHeight);
+		min-inline-size: var(--pr-t-font-body-S-lineHeight);
+		line-height: var(--pr-t-font-body-S-lineHeight);
 		padding: 0;
 	}
 

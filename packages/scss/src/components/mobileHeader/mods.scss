@@ -12,12 +12,11 @@
 	}
 
 	.mobileHeader-title-main {
-		font-size: var(--sizes-XXL-fontSize);
-		line-height: var(--sizes-XXL-lineHeight);
+		font: var(--pr-t-font-heading-1);
 	}
 
 	.mobileHeader-title-sub {
-		font-size: var(--sizes-M-fontSize);
-		line-height: var(--sizes-M-lineHeight);
+		font-size: var(--pr-t-font-body-M-fontSize);
+		line-height: var(--pr-t-font-body-M-lineHeight);
 	}
 }

@@ -3,8 +3,8 @@
 
 @mixin S {
 	--components-callout-gap: var(--pr-t-spacings-100);
-	--components-callout-fontSize: var(--sizes-S-fontSize);
-	--components-callout-lineHeight: var(--sizes-S-lineHeight);
+	--components-callout-fontSize: var(--pr-t-font-body-S-fontSize);
+	--components-callout-lineHeight: var(--pr-t-font-body-S-lineHeight);
 	--components-callout-kill-size: 1.25rem;
 
 	.callout-icon {

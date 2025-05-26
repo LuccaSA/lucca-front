@@ -1,6 +1,6 @@
 @mixin vars {
-	--components-inlineMessage-fontSize: var(--sizes-S-fontSize);
-	--components-inlineMessage-lineHeight: var(--sizes-S-lineHeight);
+	--components-inlineMessage-fontSize: var(--pr-t-font-body-S-fontSize);
+	--components-inlineMessage-lineHeight: var(--pr-t-font-body-S-lineHeight);
 	--components-inlineMessage-color: var(--palettes-neutral-700);
 	--components-inlineMessage-icon-color: var(--palettes-neutral-600);
 }

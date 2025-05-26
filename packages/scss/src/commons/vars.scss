@@ -27,9 +27,9 @@
 	--pr-t-font-highlight-XXL: var(--pr-t-font-highlight-XXL-fontWeight) var(--pr-t-font-highlight-XXL-fontSize)/var(--pr-t-font-highlight-XXL-lineHeight) var(--pr-t-font-family-brand);
 	--pr-t-font-highlight-XL: var(--pr-t-font-highlight-XL-fontWeight) var(--pr-t-font-highlight-XL-fontSize)/var(--pr-t-font-highlight-XL-lineHeight) var(--pr-t-font-family-brand);
 	--pr-t-font-highlight-L: var(--pr-t-font-highlight-L-fontWeight) var(--pr-t-font-highlight-L-fontSize)/var(--pr-t-font-highlight-L-lineHeight) var(--pr-t-font-family-brand);
-	--pr-t-font-body-1: var(--pr-t-font-body-1-fontWeight)/var(--pr-t-font-body-1-lineHeight) var(--pr-t-font-family);
-	--pr-t-font-body-2: var(--pr-t-font-body-2-fontWeight)/var(--pr-t-font-body-2-lineHeight) var(--pr-t-font-family);
-	--pr-t-font-body-3: var(--pr-t-font-body-3-fontWeight)/var(--pr-t-font-body-3-lineHeight) var(--pr-t-font-family);
+	--pr-t-font-body-M: var(--pr-t-font-body-M-fontSize)/var(--pr-t-font-body-M-lineHeight) var(--pr-t-font-family);
+	--pr-t-font-body-S: var(--pr-t-font-body-S-fontSize)/var(--pr-t-font-body-S-lineHeight) var(--pr-t-font-family);
+	--pr-t-font-body-XS: var(--pr-t-font-body-XS-fontSize)/var(--pr-t-font-body-XS-lineHeight) var(--pr-t-font-family);
 
 	// TOKENS : ELEVATION
 
@@ -80,6 +80,10 @@
 
 	@if (config.$fontFamilyCursive) {
 		--commons-font-family-cursive: '#{config.$fontFamilyCursive}', cursive;
+	}
+
+	@each $key, $map in config.$sizes {
+		@include core.cssvars('sizes-#{$key}', $map);
 	}
 
 	--commons-background-base: var(--palettes-neutral-25);

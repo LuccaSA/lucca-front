@@ -28,7 +28,7 @@
 }
 
 @mixin loadingS {
-	@include loading.spinner(var(--sizes-S-fontSize));
+	@include loading.spinner(var(--pr-t-font-body-S-fontSize));
 }
 
 @mixin state {

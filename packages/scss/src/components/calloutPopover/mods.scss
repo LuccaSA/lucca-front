@@ -3,8 +3,8 @@
 @use '@lucca-front/icons/src/icon/exports' as icon;
 
 @mixin S {
-	font-size: var(--sizes-S-fontSize);
-	line-height: var(--sizes-S-lineHeight);
+	font-size: var(--pr-t-font-body-S-fontSize);
+	line-height: var(--pr-t-font-body-S-lineHeight);
 	padding: var(--pr-t-spacings-75);
 
 	.calloutPopover-icon {
@@ -13,8 +13,8 @@
 }
 
 @mixin XS {
-	font-size: var(--sizes-XS-fontSize);
-	line-height: var(--sizes-XS-lineHeight);
+	font-size: var(--pr-t-font-body-XS-fontSize);
+	line-height: var(--pr-t-font-body-XS-lineHeight);
 	padding-block: var(--pr-t-spacings-25);
 	padding-inline: var(--pr-t-spacings-50);
 	gap: var(--pr-t-spacings-50);

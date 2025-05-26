@@ -8,9 +8,9 @@
 @mixin body {
 	background-color: var(--pr-t-elevation-surface-default);
 	color: var(--palettes-neutral-800);
-	font-family: var(--commons-font-family);
-	font-size: var(--sizes-M-fontSize);
-	line-height: var(--sizes-M-lineHeight);
+	font-family: var(--pr-t-font-family);
+	font-size: var(--pr-t-font-body-M-fontSize);
+	line-height: var(--pr-t-font-body-M-lineHeight);
 
 	@supports (-webkit-touch-callout: none) {
 		min-block-size: -webkit-fill-available;

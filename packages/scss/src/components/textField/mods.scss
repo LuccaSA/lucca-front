@@ -2,8 +2,8 @@
 @use '@lucca-front/icons/src/icon/exports' as icon;
 
 @mixin S {
-	--component-textField-fontSize: var(--sizes-S-fontSize);
-	--component-textField-lineHeight: var(--sizes-S-lineHeight);
+	--component-textField-fontSize: var(--pr-t-font-body-S-fontSize);
+	--component-textField-lineHeight: var(--pr-t-font-body-S-lineHeight);
 	--component-textField-padding: var(--pr-t-spacings-75);
 	--component-textField-affix-size: 1.5rem;
 
@@ -26,8 +26,8 @@
 }
 
 @mixin XS {
-	--component-textField-fontSize: var(--sizes-XS-fontSize);
-	--component-textField-lineHeight: var(--sizes-XS-lineHeight);
+	--component-textField-fontSize: var(--pr-t-font-body-XS-fontSize);
+	--component-textField-lineHeight: var(--pr-t-font-body-XS-lineHeight);
 	--component-textField-padding: var(--pr-t-spacings-50);
 
 	.textField-prefix,
