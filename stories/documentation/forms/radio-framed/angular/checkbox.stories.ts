@@ -1,8 +1,8 @@
 import { FormsModule } from '@angular/forms';
-import { FormFieldComponent } from '@lucca-front/ng/form-field';
+import { FormFieldComponent, FramedInputComponent } from '@lucca-front/ng/form-field';
 import { CheckboxInputComponent, RadioGroupInputComponent } from '@lucca-front/ng/forms';
 import { Meta, moduleMetadata } from '@storybook/angular';
-import { FramedInputComponent } from 'packages/ng/forms/framed-input/framed-input.component';
+
 import { cleanupTemplate } from 'stories/helpers/stories';
 
 interface InputFramedCheckboxStory {}

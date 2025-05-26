@@ -25,11 +25,11 @@ import { IconComponent } from '@lucca-front/ng/icon';
 import { InlineMessageComponent, InlineMessageState } from '@lucca-front/ng/inline-message';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 import { BehaviorSubject } from 'rxjs';
-import { FRAMED_INPUT_INSTANCE } from '../forms/framed-input/framed-input-token';
 import { FormFieldSize } from './form-field-size';
 import { FORM_FIELD_INSTANCE } from './form-field.token';
 import { LU_FORM_FIELD_TRANSLATIONS } from './form-field.translate';
 import { InputDirective } from './input.directive';
+import { FRAMED_INPUT_INSTANCE } from './framed-input/framed-input-token';
 
 let nextId = 0;
 
