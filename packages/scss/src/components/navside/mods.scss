@@ -75,15 +75,10 @@
 		.navSide-item-link {
 			background-color: var(--components-navSide-bottom-section-palette-bg-color);
 			color: var(--components-navSide-bottom-section-palette-text);
-			flex-direction: row;
 
 			&:hover {
 				background-color: var(--components-navSide-bottom-section-palette-hovered-bg);
 				color: var(--components-navSide-bottom-section-palette-hovered-text);
-			}
-
-			.navSide-item-link-title {
-				@include a11y.mask;
 			}
 		}
 	}
