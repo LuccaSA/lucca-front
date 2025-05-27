@@ -7,8 +7,7 @@
 	block-size: var(--components-numericBadge-size);
 	min-inline-size: var(--components-numericBadge-size);
 	padding: var(--pr-t-spacings-50);
-	font-size: var(--components-numericBadge-fontSize);
-	line-height: var(--components-numericBadge-lineHeight);
+	font: var(--components-numericBadge-font);
 	font-weight: 600;
 	background-color: var(--components-numericBadge-background);
 	color: var(--components-numericBadge-color);

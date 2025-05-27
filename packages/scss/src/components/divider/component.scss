@@ -24,8 +24,7 @@
 		align-items: center;
 		text-wrap: balance;
 		text-align: center;
-		font-size: var(--components-divider-fontSize);
-		line-height: var(--components-divider-lineHeight);
+		font: var(--components-divider-font);
 		color: var(--palettes-neutral-600);
 		gap: var(--pr-t-spacings-100);
 		justify-content: var(--components-divider-justify);

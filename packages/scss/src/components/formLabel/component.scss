@@ -5,9 +5,7 @@
 	display: block;
 	position: relative;
 	color: var(--components-formLabel-color);
-	font-size: var(--components-formLabel-fontSize);
-	font-weight: 400;
-	line-height: var(--components-formLabel-lineHeight);
+	font: var(--components-formLabel-font);
 	inline-size: var(--components-formLabel-width);
 	padding-inline-end: var(--components-formLabel-paddingRight);
 	cursor: var(--components-formLabel-cursor);

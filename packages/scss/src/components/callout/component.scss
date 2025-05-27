@@ -14,8 +14,7 @@
 	box-shadow: 0 0 0 var(--commons-divider-width) var(--palettes-300, var(--palettes-neutral-300));
 	gap: var(--components-callout-gap);
 	padding: var(--components-callout-padding);
-	font-size: var(--components-callout-fontSize);
-	line-height: var(--components-callout-lineHeight);
+	font: var(--components-callout-font);
 
 	&:not([hidden]) {
 		display: var(--components-callout-display);

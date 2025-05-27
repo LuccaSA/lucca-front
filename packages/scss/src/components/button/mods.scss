@@ -6,8 +6,7 @@
 @mixin S {
 	@include icons.S;
 
-	--components-button-font-size: var(--pr-t-font-body-S-fontSize);
-	--components-button-line-height: var(--pr-t-font-body-S-lineHeight);
+	--components-button-font: var(--pr-t-font-body-S);
 	--components-button-padding: var(--pr-t-spacings-75) var(--pr-t-spacings-150);
 	--components-button-gap: var(--pr-t-spacings-75);
 
@@ -19,8 +18,7 @@
 @mixin XS {
 	@include icons.XS;
 
-	--components-button-font-size: var(--pr-t-font-body-XS-fontSize);
-	--components-button-line-height: var(--pr-t-font-body-XS-lineHeight);
+	--components-button-font: var(--pr-t-font-body-XS);
 	--components-button-padding: var(--pr-t-spacings-50) var(--pr-t-spacings-100);
 	--components-button-gap: var(--pr-t-spacings-50);
 

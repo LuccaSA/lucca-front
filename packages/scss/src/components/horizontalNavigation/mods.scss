@@ -10,8 +10,7 @@
 	.horizontalNavigation-list-item-action,
 	.menu-list-item-action,
 	.menu-link {
-		--components-horizontalNavigation-listItemActionFontSize: var(--pr-t-font-body-S-fontSize);
-		--components-horizontalNavigation-listItemActionLineHeight: var(--pr-t-font-body-S-lineHeight);
+		--components-horizontalNavigation-listItemActionFont: var(--pr-t-font-body-S);
 		--components-horizontalNavigation-listItemActionPadding: var(--pr-t-spacings-150) 0;
 
 		&::before {

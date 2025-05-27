@@ -26,8 +26,7 @@
 
 		.highlightData-content-title {
 			grid-area: title;
-			font-size: var(--pr-t-font-body-S-fontSize);
-			line-height: var(--pr-t-font-body-S-lineHeight);
+			font: var(--pr-t-font-body-S);
 			color: var(--palettes-neutral-700);
 		}
 
@@ -39,8 +38,7 @@
 		}
 
 		.highlightData-content-subText {
-			font-size: var(--pr-t-font-body-XS-fontSize);
-			line-height: var(--pr-t-font-body-XS-lineHeight);
+			font: var(--pr-t-font-body-XS);
 			color: var(--palettes-neutral-700);
 			margin-block-start: var(--pr-t-spacings-100) !important; // Override list reset
 		}

@@ -14,8 +14,7 @@
 	vertical-align: middle;
 	padding-block: calc(var(--pr-t-spacings-50) / 2);
 	padding-inline: var(--pr-t-spacings-100);
-	font-size: var(--components-chip-fontSize);
-	line-height: var(--components-chip-lineHeight);
+	font: var(--components-chip-font);
 
 	@at-root ($atRoot) {
 		.chip-kill {

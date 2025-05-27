@@ -33,15 +33,13 @@
 
 		.sortableList-item-content-description {
 			margin: 0;
-			font-size: var(--components-sortableList-description-fontSize);
-			line-height: var(--components-sortableList-description-lineHeight);
+			font: var(--components-sortableList-description-font);
 		}
 
 		.sortableList-item-content-helper {
 			margin: 0;
 			color: var(--palettes-neutral-600);
-			font-size: var(--components-sortableList-helper-fontSize);
-			line-height: var(--components-sortableList-helper-lineHeight);
+			font: var(--components-sortableList-helper-font);
 		}
 
 		.sortableList-item-actions {

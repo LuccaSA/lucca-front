@@ -37,8 +37,7 @@
 }
 
 .lu-picker-content-option-group-title {
-	font-size: var(--pr-t-font-body-S-fontSize);
-	line-height: var(--pr-t-font-body-S-lineHeight);
+	font: var(--pr-t-font-body-S);
 	font-weight: 600;
 	padding-block: var(--components-options-item-padding-vertical);
 	padding-inline: var(--components-options-item-padding-horizontal);

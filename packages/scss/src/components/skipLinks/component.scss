@@ -15,10 +15,9 @@
 		.skipLinks-action {
 			border: 0;
 			margin: 0;
-			font-weight: 600;
 			border-radius: var(--commons-borderRadius-M);
-			font-size: var(--pr-t-font-body-XS-fontSize);
-			line-height: var(--pr-t-font-body-XS-lineHeight);
+			font: var(--pr-t-font-body-XS);
+			font-weight: 600;
 			padding-block: var(--pr-t-spacings-50);
 			padding-inline: var(--pr-t-spacings-100);
 			transition: all var(--commons-animations-durations-fast);

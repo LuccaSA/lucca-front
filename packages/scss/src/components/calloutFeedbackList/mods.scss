@@ -2,8 +2,7 @@
 
 @mixin S {
 	--components-calloutFeedbackList-gap: var(--pr-t-spacings-100);
-	--components-calloutFeedbackList-fontSize: var(--pr-t-font-body-S-fontSize);
-	--components-calloutFeedbackList-lineHeight: var(--pr-t-font-body-S-lineHeight);
+	--components-calloutFeedbackList-font: var(--pr-t-font-body-S);
 
 	.button {
 		@include button.XS;

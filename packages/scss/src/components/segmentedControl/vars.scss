@@ -1,8 +1,7 @@
 @mixin vars {
 	--components-segmentedControl-borderRadius: var(--commons-borderRadius-L);
 	--components-segmentedControl-padding: var(--pr-t-spacings-100) var(--pr-t-spacings-200);
-	--components-segmentedControl-fontSize: var(--pr-t-font-body-M-fontSize);
-	--components-segmentedControl-lineHeight: var(--pr-t-font-body-M-lineHeight);
+	--components-segmentedControl-font: var(--pr-t-font-body-M);
 	--components-segmentedControl-background: transparent;
 	--components-segmentedControl-shadow: none;
 	--components-segmentedControl-color: var(--palettes-neutral-700);

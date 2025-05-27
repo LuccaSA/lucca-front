@@ -1,15 +1,13 @@
 @use '@lucca-front/icons/src/icon/exports' as icons;
 
 @mixin S {
-	--components-formLabel-fontSize: var(--pr-t-font-body-S-fontSize);
-	--components-formLabel-lineHeight: var(--pr-t-font-body-S-lineHeight);
+	--components-formLabel-font: var(--pr-t-font-body-S);
 	--components-formLabel-help-fontSize: var(--pr-t-font-body-XS-lineHeight);
 	--components-formLabel-help-lineHeight: var(--pr-t-font-body-S-lineHeight);
 }
 
 @mixin XS {
-	--components-formLabel-fontSize: var(--pr-t-font-body-XS-fontSize);
-	--components-formLabel-lineHeight: var(--pr-t-font-body-XS-lineHeight);
+	--components-formLabel-font: var(--pr-t-font-body-XS);
 	--components-formLabel-help-fontSize: 0.75rem;
 	--components-formLabel-help-lineHeight: var(--pr-t-font-body-XS-lineHeight);
 }

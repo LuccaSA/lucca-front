@@ -40,10 +40,9 @@
 		}
 
 		.fieldset-title-content-text-helper {
-			font-size: var(--pr-t-font-body-S-fontSize);
-			line-height: var(--pr-t-font-body-S-lineHeight);
-			color: var(--palettes-neutral-700);
+			font: var(--pr-t-font-body-S);
 			font-weight: 400;
+			color: var(--palettes-neutral-700);
 			display: block;
 		}
 

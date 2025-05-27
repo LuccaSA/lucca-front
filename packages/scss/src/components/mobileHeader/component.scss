@@ -20,12 +20,12 @@
 			margin: 0;
 			padding: 0;
 			font: var(--pr-t-font-heading-4);
+			font-weight: var(--pr-t-font-fontWeight-bold);
 			color: var(--pr-t-color-text-heading);
 		}
 
 		.mobileHeader-title-sub {
-			font-size: var(--pr-t-font-body-S-fontSize);
-			line-height: var(--pr-t-font-body-S-lineHeight);
+			font: var(--pr-t-font-body-S);
 			color: var(--palettes-neutral-700);
 		}
 	}

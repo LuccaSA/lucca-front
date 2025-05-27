@@ -1,8 +1,7 @@
 .optionItem-groupKey {
 	padding-block: var(--components-options-item-padding-vertical) var(--pr-t-spacings-50);
 	padding-inline: var(--components-options-item-padding-horizontal);
-	font-size: var(--pr-t-font-body-S-fontSize);
-	line-height: var(--pr-t-font-body-S-lineHeight);
+	font: var(--pr-t-font-body-S);
 	inline-size: 100%;
 	text-align: start;
 	color: var(--palettes-neutral-600);

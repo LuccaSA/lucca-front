@@ -1,6 +1,5 @@
 @mixin vars {
-	--component-textField-lineHeight: var(--pr-t-font-body-M-lineHeight);
-	--component-textField-fontSize: var(--pr-t-font-body-M-fontSize);
+	--component-textField-font: var(--pr-t-font-body-M);
 	--component-textField-placeholder: var(--pr-t-color-input-text-placeholder);
 	--component-textField-background: var(--pr-t-color-input-background);
 	--component-textField-border: var(--pr-t-color-input-border);

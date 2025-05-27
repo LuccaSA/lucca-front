@@ -88,8 +88,7 @@
 
 	.optionItem-value-group {
 		color: var(--palettes-neutral-600);
-		font-size: var(--pr-t-font-body-S-fontSize);
-		line-height: var(--pr-t-font-body-S-lineHeight);
+		font: var(--pr-t-font-body-S);
 	}
 
 	:host-context(.lu-select-value) {

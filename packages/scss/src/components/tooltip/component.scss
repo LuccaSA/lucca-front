@@ -8,8 +8,7 @@
 	padding-inline: var(--pr-t-spacings-100);
 	max-inline-size: var(--components-tooltip-max-width);
 	border-radius: var(--commons-borderRadius-M);
-	font-size: var(--pr-t-font-body-XS-fontSize);
-	line-height: var(--pr-t-font-body-XS-lineHeight);
+	font: var(--pr-t-font-body-XS);
 	transform-origin: var(--components-tooltip-transformOrigin);
 	margin: var(--components-tooltip-margin);
 	text-align: center;
