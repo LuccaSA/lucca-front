@@ -7,8 +7,6 @@
 	@include component;
 
 	.appLayout-navSide & {
-		@include inAppLayout;
-
 		@include media.min('S') {
 			@include inAppLayoutWide;
 		}
