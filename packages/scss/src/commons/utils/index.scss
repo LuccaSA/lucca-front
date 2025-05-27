@@ -183,40 +183,34 @@
 	@include text.ellipsis('!important');
 }
 
-.u-h1,
-.u-h2,
-.u-h3,
-.u-h4,
-.u-h5,
-.u-h6 {
-	@include title.component;
-}
-
 .u-h1 {
-	@include title.h1;
+	font: var(--pr-t-font-heading-1);
 
 	&.mod-XXXL {
+		// Deprecated
 		@include title.XXXL;
 	}
 }
 
 .u-h2 {
-	@include title.h2;
+	font: var(--pr-t-font-heading-2);
 }
 
 .u-h3 {
-	@include title.h3;
+	font: var(--pr-t-font-heading-3);
 }
 
 .u-h4 {
-	@include title.h4;
+	font: var(--pr-t-font-heading-4);
 }
 
 .u-h5 {
+	// Deprecated
 	@include title.h5;
 }
 
 .u-h6 {
+	// Deprecated
 	@include title.h6;
 }
 
