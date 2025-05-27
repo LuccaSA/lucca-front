@@ -8,7 +8,7 @@
 	display: table;
 	text-align: start;
 	inline-size: 100%;
-	color: var(--palettes-neutral-800);
+	color: var(--pr-t-color-text);
 
 	@at-root ($atRoot) {
 		.table-head {

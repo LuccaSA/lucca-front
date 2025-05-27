@@ -7,7 +7,7 @@
 
 @mixin body {
 	background-color: var(--pr-t-elevation-surface-default);
-	color: var(--palettes-neutral-800);
+	color: var(--pr-t-color-text);
 	font-family: var(--pr-t-font-family);
 	font-size: var(--pr-t-font-body-M-fontSize);
 	line-height: var(--pr-t-font-body-M-lineHeight);

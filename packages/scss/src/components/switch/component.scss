@@ -15,7 +15,7 @@
 		.switch-label {
 			padding: 0;
 			padding-inline-start: calc(var(--components-switch-width) + var(--pr-t-spacings-100));
-			color: var(--palettes-neutral-800);
+			color: var(--pr-t-color-text);
 			transition: color var(--commons-animations-durations-fast);
 			display: inline-block;
 			font-size: var(--components-switch-fontSize);

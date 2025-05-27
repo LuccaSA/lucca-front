@@ -545,6 +545,16 @@ $colorInputContrasted: (
 	border-critical-hover: var(--palettes-critical-800),
 );
 
+$colorText: (
+	heading: var(--palettes-neutral-900),
+	highlight: var(--palettes-neutral-900),
+	subtle: var(--palettes-neutral-600),
+	reverse: var(--palettes-neutral-0),
+	success: var(--palettes-success-700),
+	warning: var(--palettes-warning-700),
+	critical: var(--palettes-critical-700),
+);
+
 $breakpoints: (
 	XXXS: 320px,
 	XXS: 480px,

@@ -9,7 +9,7 @@
 		--components-select-framed-color: var(--palettes-neutral-500);
 		--components-select-framed-color50: var(--palettes-neutral-50);
 		--components-select-framed-see-through: var(--palettes-neutral-50);
-		--components-select-framed-text: var(--palettes-neutral-800);
+		--components-select-framed-text: var(--pr-t-color-text);
 		--components-select-framed-placeholder: #cccccc;
 		--components-select-framed-side-padding: var(--pr-t-spacings-200);
 		--components-select-framed-top-padding: var(--pr-t-spacings-400);
@@ -170,7 +170,7 @@
 			padding: 0;
 			block-size: auto;
 			padding-block-start: var(--pr-t-spacings-200);
-			color: var(--palettes-neutral-800);
+			color: var(--pr-t-color-text);
 		}
 	}
 

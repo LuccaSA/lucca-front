@@ -22,7 +22,7 @@
 
 	&,
 	&:is(a, button) {
-		color: var(--palettes-800, var(--palettes-neutral-800));
+		color: var(--palettes-800, var(--pr-t-color-text));
 	}
 
 	.lucca-icon {

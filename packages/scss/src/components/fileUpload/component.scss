@@ -16,7 +16,7 @@
 	align-items: var(--components-fileUpload-alignItems);
 	justify-content: var(--components-fileUpload-justifyContent);
 	gap: var(--pr-t-spacings-200);
-	color: var(--palettes-neutral-800);
+	color: var(--pr-t-color-text);
 	min-block-size: var(--components-fileUpload-minHeight);
 
 	&:has(.fileUpload-input:focus-visible) {
