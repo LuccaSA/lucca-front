@@ -12,6 +12,7 @@
 
 			&.mod-sticky {
 				position: sticky;
+				z-index: 1;
 				inset-block-start: var(--components-mainLayout-header-insetBlockStart);
 			}
 
