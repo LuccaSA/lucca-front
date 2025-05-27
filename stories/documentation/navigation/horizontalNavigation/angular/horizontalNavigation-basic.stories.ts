@@ -1,10 +1,8 @@
 import { provideRouter } from '@angular/router';
-import { HorizontalNavigationComponent } from '@lucca-front/ng/horizontal-navigation';
+import { HorizontalNavigationComponent, HorizontalNavigationLinkDirective } from '@lucca-front/ng/horizontal-navigation';
 import { NumericBadgeComponent } from '@lucca-front/ng/numeric-badge';
 import { applicationConfig, Meta, moduleMetadata } from '@storybook/angular';
-import { HorizontalNavigationLinkDirective } from 'packages/ng/horizontal-navigation/horizontal-navigation-link.directive';
 import { generateInputs } from 'stories/helpers/stories';
-
 
 export default {
 	title: 'Documentation/Navigation/HorizontalNavigation/Angular',
