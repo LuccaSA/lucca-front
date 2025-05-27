@@ -150,3 +150,39 @@
 		block-size: auto;
 	}
 }
+
+@mixin inAppLayout {
+	position: static;
+	padding-block-start: 0;
+	overflow: visible !important;
+
+	.navSide-item.mod-mobileToggle {
+		position: static;
+	}
+
+	.navSide-bottomSection {
+		block-size: var(--components-navSide-bottom-section-height);
+	}
+}
+
+@mixin inAppLayoutWide {
+	block-size: 100%;
+}
+
+@mixin inAppLayoutNarrow {
+	&:has(.navSide-bottomSection:empty),
+	&:not(:has(.navSide-bottomSection)) {
+		--components-navSide-bottom-section-height: 0px;
+	}
+
+	&.is-open {
+		.navSide-scrollWrapper {
+			block-size: calc(var(--components-appLayout-minBlockSize) - var(--components-appLayout-banner-blockSize) - var(--components-appLayout-navSide-blockSize) - var(--components-navSide-bottom-section-height));
+			overflow: auto;
+		}
+	}
+
+	.navSide-mainSection {
+		overflow: visible;
+	}
+}

@@ -4,6 +4,9 @@
 }
 
 @mixin wide {
+	--components-appLayout-navSide-inlineSize: var(--commons-navSide-width);
+	--components-appLayout-navSide-overflowX: hidden;
+	--components-appLayout-navSide-overflowY: auto;
 	--components-appLayout-navSide-blockSize: calc(var(--components-appLayout-minBlockSize) - var(--components-appLayout-banner-blockSize));
 	--components-appLayout-gridTemplate: "banner  banner" auto
 																			 "navSide main  " 1fr

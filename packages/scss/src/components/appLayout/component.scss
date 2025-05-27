@@ -34,9 +34,10 @@
 			z-index: 1;
 			block-size: var(--components-appLayout-navSide-blockSize);
 			inline-size: var(--components-appLayout-navSide-inlineSize);
-			overflow-x: hidden;
-			overflow-y: visible;
-			display: grid;
+			overflow-x: var(--components-appLayout-navSide-overflowX);
+			overflow-y: var(--components-appLayout-navSide-overflowY);
+			display: flex;
+			flex-direction: column;
 
 			&:empty {
 				display: none;
@@ -45,7 +46,6 @@
 
 		.appLayout-main {
 			grid-area: main;
-			display: grid;
 
 			&:empty {
 				display: none;

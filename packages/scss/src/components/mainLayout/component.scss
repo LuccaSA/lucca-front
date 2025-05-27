@@ -2,7 +2,7 @@
 @use '@lucca-front/scss/src/commons/utils/namespace';
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
-	align-self: stretch;
+	height: 100%;
 	display: grid;
 	grid-template: var(--components-mainLayout-gridTemplate);
 

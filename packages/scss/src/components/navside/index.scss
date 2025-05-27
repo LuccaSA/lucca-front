@@ -6,6 +6,18 @@
 	@include vars;
 	@include component;
 
+	.appLayout-navSide & {
+		@include inAppLayout;
+
+		@include media.min('S') {
+			@include inAppLayoutWide;
+		}
+
+		@include media.max('S') {
+			@include inAppLayoutNarrow;
+		}
+	}
+
 	&.mod-withBanner {
 		@include banner;
 	}
