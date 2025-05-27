@@ -1,0 +1,16 @@
+@mixin vars {
+	--components-appLayout-gridTemplate: "banner " auto
+																			 "navSide" auto
+																			 "main   " 1fr;
+	--components-appLayout-minBlockSize: 100dvh;
+	--components-appLayout-banner-inlineSize: 100dvw;
+	--components-appLayout-banner-blockSize: var(--commons-banner-height);
+	--components-appLayout-navSide-blockSize: 3.5rem;
+	--components-appLayout-navSide-inlineSize: 100%;
+	--components-appLayout-navSide-insetBlock: var(--components-appLayout-banner-blockSize) auto;
+	--components-appLayout-navSide-overflowX: visible;
+	--components-appLayout-navSide-overflowY: visible;
+	--components-appLayout-before: calc(var(--components-appLayout-banner-blockSize) + var(--components-appLayout-navSide-blockSize));
+	--components-appLayout-after: 0px;
+
+}
