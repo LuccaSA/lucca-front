@@ -1,4 +1,3 @@
-@use '@lucca-front/scss/src/components/title/exports' as title;
 @use '@lucca-front/scss/src/components/calloutFeedbackList/exports' as calloutFeedbackList;
 @use '@lucca-front/icons/src/icon/exports' as icon;
 
@@ -34,7 +33,8 @@
 	}
 
 	.calloutPopover-overlay-head-title {
-		@include title.h5;
+		font: var(--pr-t-font-body-S);
+		font-weight: var(--pr-t-font-fontWeight-semibold);
 	}
 
 	.calloutFeedbackList {

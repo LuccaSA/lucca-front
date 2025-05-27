@@ -1,5 +1,3 @@
-@use '@lucca-front/scss/src/components/title/exports' as title;
-
 @mixin component {
 	background-color: var(--components-errorPage-background);
 	block-size: 100vh;
@@ -28,15 +26,13 @@
 	}
 
 	.errorPage-section-info-title {
-		@include title.component;
-		@include title.XXXL;
-
+		font: var(--pr-t-font-heading-1);
 		margin-block-end: var(--pr-t-spacings-50);
 	}
 
 	.errorPage-section-info-text {
-		font-size: var(--pr-t-font-heading-3-fontSize);
-		line-height: var(--pr-t-font-heading-3-lineHeight);
+		font-size: var(--pr-t-font-body-1-fontSize);
+		line-height: var(--pr-t-font-body-1-lineHeight);
 		margin-block-end: var(--pr-t-spacings-150);
 	}
 

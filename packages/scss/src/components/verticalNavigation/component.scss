@@ -6,8 +6,8 @@
 @mixin component($atRoot: namespace.$defaultAtRoot) {
 	@at-root ($atRoot) {
 		.verticalNavigation-sectionTitle {
-			@include title.h5;
-
+			font: var(--pr-t-font-body-S);
+			font-weight: var(--pr-t-font-fontWeight-semibold);
 			color: var(--palettes-neutral-600);
 			padding-block: 0;
 			padding-inline: var(--components-verticalNavigation-horizontalPadding);
