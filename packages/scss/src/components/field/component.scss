@@ -81,7 +81,7 @@
 		.textfield-messages-error,
 		.radiosfield-messages-error,
 		.checkboxesfield-messages-error {
-			color: var(--palettes-error-700);
+			color: var(--pr-t-color-text-critical);
 
 			.lucca-icon {
 				font-size: var(--pr-t-font-body-XS-lineHeight);
@@ -93,7 +93,7 @@
 		.textfield-messages-warning,
 		.radiosfield-messages-warning,
 		.checkboxesfield-messages-warning {
-			color: var(--palettes-warning-700);
+			color: var(--pr-t-color-text-warning);
 		}
 
 		.textfield-messages-valid,
@@ -102,7 +102,7 @@
 		.textfield-messages-success,
 		.radiosfield-messages-success,
 		.checkboxesfield-messages-success {
-			color: var(--palettes-success-700);
+			color: var(--pr-t-color-text-success);
 		}
 
 		.textfield-messages-helper,
