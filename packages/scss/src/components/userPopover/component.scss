@@ -20,9 +20,7 @@
 		.userPopover-details-info-name {
 			margin: calc(var(--pr-t-spacings-50) * -1);
 			padding: var(--pr-t-spacings-50);
-			font-size: var(--sizes-L-fontSize);
-			line-height: var(--sizes-L-lineHeight);
-			font-weight: 700;
+			font: var(--pr-t-font-highlight-L);
 			color: currentColor;
 		}
 
@@ -40,8 +38,7 @@
 
 		.userPopover-details-info-detail {
 			margin-block-end: 0;
-			font-size: var(--sizes-S-fontSize);
-			line-height: var(--sizes-S-lineHeight);
+			font: var(--pr-t-font-body-S);
 		}
 
 		.userPopover-details-info-detail-workplace {

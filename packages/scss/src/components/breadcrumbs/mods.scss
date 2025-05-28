@@ -15,8 +15,8 @@
 						@include icon.generate('arrow_left');
 
 						padding-inline-end: var(--pr-t-spacings-50);
-						font-size: var(--sizes-XS-lineHeight);
-						line-height: var(--sizes-S-lineHeight);
+						font-size: var(--pr-t-font-body-XS-lineHeight);
+						line-height: var(--pr-t-font-body-S-lineHeight);
 						text-decoration: none;
 						vertical-align: top;
 					}

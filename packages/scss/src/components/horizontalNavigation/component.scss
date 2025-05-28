@@ -59,8 +59,7 @@
 		.menu-link {
 			@include reset.button;
 
-			font-size: var(--components-horizontalNavigation-listItemActionFontSize);
-			line-height: var(--components-horizontalNavigation-listItemActionLineHeight);
+			font: var(--components-horizontalNavigation-listItemActionFont);
 			padding: var(--components-horizontalNavigation-listItemActionPadding);
 			border-radius: var(--commons-borderRadius-M);
 			color: var(--components-horizontalNavigation-listItemActionColor);

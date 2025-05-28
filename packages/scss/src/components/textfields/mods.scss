@@ -62,55 +62,55 @@
 
 @mixin S {
 	.textfield-label {
-		line-height: var(--sizes-S-lineHeight);
-		font-size: var(--sizes-S-fontSize);
+		line-height: var(--pr-t-font-body-S-lineHeight);
+		font-size: var(--pr-t-font-body-S-fontSize);
 	}
 
 	.textfield-input {
-		line-height: var(--sizes-S-lineHeight);
-		font-size: var(--sizes-S-fontSize);
+		line-height: var(--pr-t-font-body-S-lineHeight);
+		font-size: var(--pr-t-font-body-S-fontSize);
 		padding: var(--pr-t-spacings-75);
 	}
 
 	.textfield-suffix {
-		line-height: calc(var(--sizes-S-fontSize) * 1.25);
-		font-size: var(--sizes-S-fontSize);
+		line-height: calc(var(--pr-t-font-body-S-fontSize) * 1.25);
+		font-size: var(--pr-t-font-body-S-fontSize);
 
 		.lucca-icon {
-			font-size: calc(var(--sizes-S-fontSize) * 1.25);
+			font-size: calc(var(--pr-t-font-body-S-fontSize) * 1.25);
 		}
 	}
 }
 
 @mixin XS {
 	.textfield-label {
-		line-height: var(--sizes-XS-lineHeight);
-		font-size: var(--sizes-XS-fontSize);
+		line-height: var(--pr-t-font-body-XS-lineHeight);
+		font-size: var(--pr-t-font-body-XS-fontSize);
 	}
 
 	.textfield-input {
-		line-height: var(--sizes-XS-lineHeight);
-		font-size: var(--sizes-XS-fontSize);
+		line-height: var(--pr-t-font-body-XS-lineHeight);
+		font-size: var(--pr-t-font-body-XS-fontSize);
 		padding: var(--pr-t-spacings-50);
 	}
 
 	.textfield-suffix {
-		line-height: calc(var(--sizes-XS-fontSize) * 1.25);
-		font-size: var(--sizes-XS-fontSize);
+		line-height: calc(var(--pr-t-font-body-XS-fontSize) * 1.25);
+		font-size: var(--pr-t-font-body-XS-fontSize);
 		inset-block-start: calc(var(--components-textfield-suffix-top) + var(--pr-t-spacings-50));
 
 		.lucca-icon {
-			font-size: calc(var(--sizes-XS-fontSize) * 1.25);
+			font-size: calc(var(--pr-t-font-body-XS-fontSize) * 1.25);
 		}
 	}
 
 	.textfield-messages {
-		font-size: var(--sizes-XS-fontSize);
-		line-height: var(--sizes-XS-lineHeight);
+		font-size: var(--pr-t-font-body-XS-fontSize);
+		line-height: var(--pr-t-font-body-XS-lineHeight);
 
 		.lucca-icon {
 			font-size: 0.75rem;
-			line-height: var(--sizes-XS-lineHeight);
+			line-height: var(--pr-t-font-body-XS-lineHeight);
 		}
 	}
 }
@@ -122,13 +122,13 @@
 }
 
 @mixin inputIconS {
-	line-height: var(--sizes-XS-lineHeight);
-	font-size: var(--sizes-S-fontSize);
+	line-height: var(--pr-t-font-body-XS-lineHeight);
+	font-size: var(--pr-t-font-body-S-fontSize);
 }
 
 @mixin inputIconXS {
-	line-height: var(--sizes-XS-lineHeight);
-	font-size: var(--sizes-S-fontSize);
+	line-height: var(--pr-t-font-body-XS-lineHeight);
+	font-size: var(--pr-t-font-body-S-fontSize);
 }
 
 @mixin size($size) {
@@ -137,8 +137,8 @@
 
 @mixin multiline {
 	.textfield-input {
-		line-height: var(--sizes-M-lineHeight);
-		font-size: var(--sizes-M-fontSize);
+		line-height: var(--pr-t-font-body-M-lineHeight);
+		font-size: var(--pr-t-font-body-M-fontSize);
 		resize: block;
 		block-size: 5rem;
 	}
@@ -146,15 +146,15 @@
 
 @mixin multilineS {
 	.textfield-input {
-		line-height: var(--sizes-XS-lineHeight);
-		font-size: var(--sizes-S-fontSize);
+		line-height: var(--pr-t-font-body-XS-lineHeight);
+		font-size: var(--pr-t-font-body-S-fontSize);
 		block-size: 4rem;
 	}
 }
 
 @mixin invert {
 	.textfield-label {
-		color: var(--palettes-neutral-0);
+		color: var(--pr-t-color-text-reverse);
 	}
 }
 
@@ -176,8 +176,8 @@
 		position: absolute;
 		pointer-events: none;
 		inset-block-end: var(--pr-t-spacings-100);
-		font-size: var(--sizes-M-lineHeight);
-		line-height: var(--sizes-M-lineHeight);
+		font-size: var(--pr-t-font-body-M-lineHeight);
+		line-height: var(--pr-t-font-body-M-lineHeight);
 		inset-inline-end: var(--pr-t-spacings-100);
 	}
 
@@ -204,8 +204,8 @@
 
 @mixin searchS {
 	&::after {
-		line-height: var(--sizes-S-lineHeight);
-		font-size: var(--sizes-S-lineHeight);
+		line-height: var(--pr-t-font-body-S-lineHeight);
+		font-size: var(--pr-t-font-body-S-lineHeight);
 		inset-block-end: var(--pr-t-spacings-75);
 		inset-inline-end: var(--pr-t-spacings-75);
 	}
@@ -235,8 +235,8 @@
 
 @mixin searchXS {
 	&::after {
-		line-height: var(--sizes-XS-lineHeight);
-		font-size: var(--sizes-XS-lineHeight);
+		line-height: var(--pr-t-font-body-XS-lineHeight);
+		font-size: var(--pr-t-font-body-XS-lineHeight);
 		inset-block-end: var(--pr-t-spacings-50);
 		inset-inline-end: var(--pr-t-spacings-50);
 	}
@@ -287,9 +287,9 @@
 	.textfield-label {
 		color: var(--palettes-neutral-600);
 		inset-inline-start: var(--pr-t-spacings-200);
-		font-size: var(--sizes-S-fontSize);
+		font-size: var(--pr-t-font-body-S-fontSize);
 		font-weight: 400;
-		line-height: var(--sizes-S-lineHeight);
+		line-height: var(--pr-t-font-body-S-lineHeight);
 		pointer-events: none;
 		position: absolute;
 		inset-block-start: var(--pr-t-spacings-100);
@@ -315,7 +315,7 @@
 
 @mixin suffixIcon {
 	color: var(--palettes-neutral-600);
-	line-height: var(--sizes-M-lineHeight);
+	line-height: var(--pr-t-font-body-M-lineHeight);
 }
 
 @mixin compact {
@@ -375,7 +375,7 @@
 		box-shadow: form.fakeBorderOverlay(var(--components-field-framed-border));
 		padding-block: var(--components-field-framed-top-padding) var(--components-field-framed-bottom-padding);
 		padding-inline: var(--components-field-framed-side-padding);
-		line-height: var(--sizes-M-lineHeight);
+		line-height: var(--pr-t-font-body-M-lineHeight);
 		outline: none;
 
 		&:not(:disabled, .is-error, .is-success, .is-valid, .is-warning, .is-invalid) {
@@ -391,8 +391,8 @@
 		inset-inline-start: 0;
 		inset-block-start: 0;
 		z-index: 10;
-		line-height: var(--sizes-M-lineHeight);
-		font-size: var(--sizes-S-fontSize);
+		line-height: var(--pr-t-font-body-M-lineHeight);
+		font-size: var(--pr-t-font-body-S-fontSize);
 		color: var(--palettes-neutral-600);
 	}
 
@@ -501,7 +501,7 @@
 		position: absolute;
 		pointer-events: none;
 		font-weight: 400;
-		line-height: var(--sizes-M-lineHeight);
+		line-height: var(--pr-t-font-body-M-lineHeight);
 		inline-size: 100%;
 		inset-block-start: var(--pr-t-spacings-300);
 		inset-inline-start: 0;
@@ -516,8 +516,8 @@
 
 @mixin materialS {
 	.textfield-label {
-		line-height: var(--sizes-S-lineHeight);
-		font-size: var(--sizes-S-fontSize);
+		line-height: var(--pr-t-font-body-S-lineHeight);
+		font-size: var(--pr-t-font-body-S-fontSize);
 	}
 }
 

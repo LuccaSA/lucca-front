@@ -1,6 +1,5 @@
 @use '@lucca-front/scss/src/commons/utils/namespace';
 @use '@lucca-front/scss/src/commons/utils/media';
-@use '@lucca-front/scss/src/components/title/exports' as title;
 
 @include namespace.appendRootVars {
 	--components-popup-XS: 25rem;
@@ -51,8 +50,8 @@
 		}
 
 		.lu-modal-content-title {
-			color: var(--palettes-neutral-800);
-			font-size: var(--sizes-XL-fontSize);
+			color: var(--pr-t-color-text-heading);
+			font-size: var(--pr-t-font-heading-2-fontSize);
 			margin-block-start: 2.5rem;
 		}
 
@@ -98,8 +97,7 @@
 }
 
 .lu-modal-header-title {
-	@include title.h2;
-
+	font: var(--pr-t-font-heading-2);
 	margin: 0;
 	padding: 0;
 }

@@ -6,8 +6,8 @@
 @mixin component($atRoot: namespace.$defaultAtRoot) {
 	@at-root ($atRoot) {
 		.verticalNavigation-sectionTitle {
-			@include title.h5;
-
+			font: var(--pr-t-font-body-S);
+			font-weight: var(--pr-t-font-fontWeight-semibold);
 			color: var(--palettes-neutral-600);
 			padding-block: 0;
 			padding-inline: var(--components-verticalNavigation-horizontalPadding);
@@ -22,7 +22,7 @@
 		}
 
 		.verticalNavigation-list-item-link-icon {
-			font-size: var(--sizes-M-lineHeight);
+			font-size: var(--pr-t-font-body-M-lineHeight);
 			margin-inline-end: var(--pr-t-spacings-100);
 		}
 
@@ -55,7 +55,7 @@
 		}
 
 		.verticalNavigation-list-item-link-arrow {
-			font-size: var(--sizes-M-lineHeight);
+			font-size: var(--pr-t-font-body-M-lineHeight);
 			margin-inline-start: auto;
 			transition: transform var(--commons-animations-durations-standard) ease;
 		}

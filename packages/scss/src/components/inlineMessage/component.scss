@@ -7,8 +7,7 @@
 	display: flex;
 	gap: var(--components-inlineMessage-gap);
 	grid-column: 2;
-	font-size: var(--components-inlineMessage-fontSize);
-	line-height: var(--components-inlineMessage-lineHeight);
+	font: var(--components-inlineMessage-font);
 	color: var(--components-inlineMessage-color);
 	border-radius: var(--commons-borderRadius-M);
 
