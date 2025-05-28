@@ -13,7 +13,7 @@ let nextId = 0;
 	imports: [PortalDirective, NgTemplateOutlet],
 })
 export class FieldsetComponent {
-	title = input<PortalContent | null>(null);
+	heading = input<PortalContent | null>(null);
 	helper = input<PortalContent | null>(null);
 	size = input<'S' | null>(null);
 	horizontal = input(false, { transform: booleanAttribute });

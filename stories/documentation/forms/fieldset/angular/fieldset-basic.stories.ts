@@ -7,7 +7,7 @@ interface FieldsetBasicStory {
 	expandable: boolean;
 	expanded: boolean;
 	helper: string;
-	title: string;
+	heading: string;
 	size: string;
 	content: string;
 }
@@ -52,7 +52,7 @@ export default {
 		const sizeParam = args.size === 'S' ? `size="S"` : ``;
 		return {
 			template: cleanupTemplate(`
-<lu-fieldset title="${args.title}" helper="${args.helper}" ${horizontalParam} ${expandableParam} ${expandedParam} ${sizeParam}>
+<lu-fieldset heading="${args.heading}" helper="${args.helper}" ${horizontalParam} ${expandableParam} ${expandedParam} ${sizeParam}>
 	${args.content}
 </lu-fieldset>`),
 		};
@@ -62,7 +62,7 @@ export default {
 export const Basic = {
 	args: {
 		content: '<div class="grid mod-form" style="background-color: var(--palettes-neutral-50)"><div class="grid-column" style="--grid-colspan: 4">Lorem ipsum dolor sit amet.</div></div>',
-		title: 'Title',
+		heading: 'Title',
 		helper: '',
 		size: null,
 		expandable: false,
