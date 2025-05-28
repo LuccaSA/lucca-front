@@ -57,6 +57,11 @@ export class LuNativeDateAdapter extends ALuDateAdapter<Date> implements ILuDate
 				month = parseInt(groups[this._order.month], 10);
 				year = parseInt(groups[this._order.year], 10) || new Date().getFullYear();
 		}
+
+		if (year.toString().length < 4) {
+			year += 2000;
+		}
+
 		return { date, month, year };
 	}
 	isParsable(text: string, granularity: LuDateGranularity = ELuDateGranularity.day): boolean {
