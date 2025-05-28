@@ -27,7 +27,7 @@
 		.highlightData-content-title {
 			grid-area: title;
 			font: var(--pr-t-font-body-S);
-			color: var(--palettes-neutral-700);
+			color: var(--pr-t-color-text-subtle);
 		}
 
 		.highlightData-content-value {
@@ -39,7 +39,7 @@
 
 		.highlightData-content-subText {
 			font: var(--pr-t-font-body-XS);
-			color: var(--palettes-neutral-700);
+			color: var(--pr-t-color-text-subtle);
 			margin-block-start: var(--pr-t-spacings-100) !important; // Override list reset
 		}
 

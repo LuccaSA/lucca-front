@@ -1,5 +1,5 @@
 @mixin disabled {
-	--components-dropdown-option-actionColor: var(--commons-disabled-placeholder);
+	--components-dropdown-option-actionColor: var(--pr-t-color-text-disabled);
 	--components-dropdown-option-actionEvents: none;
 
 	&,
