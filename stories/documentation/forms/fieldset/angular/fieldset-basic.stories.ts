@@ -1,16 +1,6 @@
 import { FieldsetComponent } from '@lucca-front/ng/forms';
-import { Meta, moduleMetadata } from '@storybook/angular';
-import { cleanupTemplate } from 'stories/helpers/stories';
-
-interface FieldsetBasicStory {
-	horizontal: boolean;
-	expandable: boolean;
-	expanded: boolean;
-	helper: string;
-	heading: string;
-	size: string;
-	content: string;
-}
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { cleanupTemplate, generateInputs } from 'stories/helpers/stories';
 
 export default {
 	title: 'Documentation/Forms/Fieldset/Angular/Basic',
@@ -45,21 +35,17 @@ export default {
 			imports: [FieldsetComponent],
 		}),
 	],
-	render: (args: FieldsetBasicStory) => {
-		const horizontalParam = args.horizontal ? `horizontal` : ``;
-		const expandableParam = args.expandable ? `expandable` : ``;
-		const expandedParam = args.expanded ? `expanded="true"` : ``;
-		const sizeParam = args.size === 'S' ? `size="S"` : ``;
+	render: ({ content, ...args }, { argTypes }) => {
 		return {
 			template: cleanupTemplate(`
-<lu-fieldset heading="${args.heading}" helper="${args.helper}" ${horizontalParam} ${expandableParam} ${expandedParam} ${sizeParam}>
-	${args.content}
+<lu-fieldset ${generateInputs(args, argTypes)}>
+	${content}
 </lu-fieldset>`),
 		};
 	},
 } as Meta;
 
-export const Basic = {
+export const Basic: StoryObj<FieldsetComponent & { content: string }> = {
 	args: {
 		content: '<div class="grid mod-form" style="background-color: var(--palettes-neutral-50)"><div class="grid-column" style="--grid-colspan: 4">Lorem ipsum dolor sit amet.</div></div>',
 		heading: 'Title',

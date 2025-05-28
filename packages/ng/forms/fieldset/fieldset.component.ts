@@ -1,6 +1,7 @@
 import { NgTemplateOutlet } from '@angular/common';
 import { booleanAttribute, Component, input, model, ViewEncapsulation } from '@angular/core';
 import { PortalContent, PortalDirective } from '@lucca-front/ng/core';
+import { IconComponent } from '@lucca-front/ng/icon';
 
 let nextId = 0;
 
@@ -10,7 +11,7 @@ let nextId = 0;
 	templateUrl: './fieldset.component.html',
 	styleUrl: './fieldset.component.scss',
 	encapsulation: ViewEncapsulation.None,
-	imports: [PortalDirective, NgTemplateOutlet],
+	imports: [PortalDirective, NgTemplateOutlet, IconComponent],
 })
 export class FieldsetComponent {
 	heading = input<PortalContent | null>(null);
@@ -20,5 +21,5 @@ export class FieldsetComponent {
 	expandable = input(false, { transform: booleanAttribute });
 	expanded = model(false);
 
-	id = `fieldsetTitleContent${nextId++}` ;
+	id = `fieldsetTitleContent${nextId++}`;
 }
