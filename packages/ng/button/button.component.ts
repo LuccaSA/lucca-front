@@ -74,7 +74,7 @@ export class ButtonComponent implements OnChanges {
 	}
 
 	updateClasses(): void {
-		const ngClassConfig = {
+		const classesConfig = {
 			[`mod-${this.size}`]: !!this.size,
 			[`mod-block`]: this.block,
 			[`palette-${this.palette}`]: !!this.palette,
@@ -87,12 +87,12 @@ export class ButtonComponent implements OnChanges {
 
 		if (this.luButton !== '') {
 			if (this.luButton === 'text-invert') {
-				ngClassConfig['mod-text'] = true;
-				ngClassConfig['mod-invert'] = true;
+				classesConfig['mod-text'] = true;
+				classesConfig['mod-invert'] = true;
 			} else {
-				ngClassConfig[`mod-${this.luButton}`] = true;
+				classesConfig[`mod-${this.luButton}`] = true;
 			}
 		}
-		this.#luClass.setState(ngClassConfig);
+		this.#luClass.setState(classesConfig);
 	}
 }
