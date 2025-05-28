@@ -81,19 +81,19 @@ export class Calendar2Component implements OnInit {
 
 	intl = getIntl(LU_DATE2_TRANSLATIONS);
 
-	showOverflow = input<boolean, boolean>(false, { transform: booleanAttribute });
+	showOverflow = input(false, { transform: booleanAttribute });
 
-	enableOverflow = input<boolean, boolean>(false, { transform: booleanAttribute });
+	enableOverflow = input(false, { transform: booleanAttribute });
 
-	removeYearOverflow = input<boolean, boolean>(false, { transform: booleanAttribute });
+	removeYearOverflow = input(false, { transform: booleanAttribute });
 
-	hideToday = input<boolean, boolean>(false, { transform: booleanAttribute });
+	hideToday = input(false, { transform: booleanAttribute });
 
-	hasTodayButton = input<boolean, boolean>(false, { transform: booleanAttribute });
+	hasTodayButton = input(false, { transform: booleanAttribute });
 
-	hideWeekend = input<boolean, boolean>(false, { transform: booleanAttribute });
+	hideWeekend = input(false, { transform: booleanAttribute });
 
-	disableModeChange = input<boolean, boolean>(false, { transform: booleanAttribute });
+	disableModeChange = input(false, { transform: booleanAttribute });
 
 	// Date used to init the component and as internal focus model
 	date = model.required<Date>();

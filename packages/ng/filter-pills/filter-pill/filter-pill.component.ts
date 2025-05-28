@@ -82,7 +82,7 @@ export class FilterPillComponent {
 
 	name = input<string>();
 
-	optional = input<boolean, boolean>(false, { transform: booleanAttribute });
+	optional = input(false, { transform: booleanAttribute });
 
 	disabled = computed(() => this.inputComponentRef()?.filterPillDisabled?.() || false);
 

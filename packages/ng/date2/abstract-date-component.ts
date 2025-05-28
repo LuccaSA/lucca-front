@@ -32,12 +32,12 @@ export abstract class AbstractDateComponent {
 	protected inDateISOFormat = computed(() => this.format() === DATE_FORMAT.DATE_ISO);
 
 	ranges = input([], { transform: (v: readonly DateRange[] | readonly DateRangeInput[]) => v.map(transformDateRangeInputToDateRange) });
-	hideToday = input<boolean, boolean>(false, { transform: booleanAttribute });
-	hasTodayButton = input<boolean, boolean>(false, { transform: booleanAttribute });
-	clearable = input<boolean, boolean>(null, { transform: booleanAttribute });
+	hideToday = input(false, { transform: booleanAttribute });
+	hasTodayButton = input(false, { transform: booleanAttribute });
+	clearable = input(null, { transform: booleanAttribute });
 
 	mode = input<CalendarMode>('day');
-	hideWeekend = input<boolean, boolean>(false, { transform: booleanAttribute });
+	hideWeekend = input(false, { transform: booleanAttribute });
 
 	getCellInfo = input<((day: Date, mode: CalendarMode) => CellStatus) | null>();
 

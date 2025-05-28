@@ -65,8 +65,8 @@ export class RichTextInputComponent implements OnInit, OnDestroy, ControlValueAc
 	readonly #formField = inject(FormFieldComponent, { optional: true });
 
 	readonly placeholder = input<string>('');
-	readonly disableSpellcheck = input<boolean, boolean>(false, { transform: booleanAttribute });
-	readonly autoResize = input<boolean, boolean>(false, { transform: booleanAttribute });
+	readonly disableSpellcheck = input(false, { transform: booleanAttribute });
+	readonly autoResize = input(false, { transform: booleanAttribute });
 
 	readonly content = viewChild.required<string, ElementRef<HTMLElement>>('content', {
 		read: ElementRef,
