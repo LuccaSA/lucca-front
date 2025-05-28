@@ -1,7 +1,7 @@
 import { bob } from '@/stories/users/user.mocks';
 import { provideHttpClient } from '@angular/common/http';
 import { provideAnimations } from '@angular/platform-browser/animations';
-import { LuUserPopoverDirective, provideLuUserPopover } from '@lucca-front/ng/popup-employee';
+import { LuUserPopoverComponent, provideLuUserPopover } from '@lucca-front/ng/popup-employee';
 import { LuUserDisplayModule, LuUserPictureComponent } from '@lucca-front/ng/user';
 import { applicationConfig, Meta, moduleMetadata, StoryFn } from '@storybook/angular';
 
@@ -12,7 +12,7 @@ export default {
 	argTypes: {},
 	decorators: [
 		moduleMetadata({
-			imports: [LuUserPopoverDirective, LuUserDisplayModule, LuUserPictureComponent],
+			imports: [LuUserPopoverComponent, LuUserDisplayModule, LuUserPictureComponent],
 		}),
 		applicationConfig({
 			providers: [provideAnimations(), provideLuUserPopover(), provideHttpClient()],

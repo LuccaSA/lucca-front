@@ -5,6 +5,11 @@
       "version": "18.2.0-alpha",
       "description": "Change title input to heading input in empty state component.",
       "factory": "./empty-state-title/index"
+    },
+    "user-popover-import": {
+      "version": "20.1.0",
+      "description": "Change title input to heading input in empty state component.",
+      "factory": "./user-popover-to-component/index"
     }
   }
 }

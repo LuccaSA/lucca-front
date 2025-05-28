@@ -1,6 +1,6 @@
 import { provideHttpClient } from '@angular/common/http';
 import { provideAnimations } from '@angular/platform-browser/animations';
-import { LuUserPopoverDirective, provideLuUserPopover } from '@lucca-front/ng/popup-employee';
+import { LuUserPopoverComponent, provideLuUserPopover } from '@lucca-front/ng/popup-employee';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 import { LuUserDisplayModule, LuUserPictureComponent } from '@lucca-front/ng/user';
 import { applicationConfig, Meta, moduleMetadata, StoryFn } from '@storybook/angular';
@@ -12,7 +12,7 @@ export default {
 	argTypes: {},
 	decorators: [
 		moduleMetadata({
-			imports: [LuTooltipModule, LuUserPopoverDirective, LuUserDisplayModule, LuUserPictureComponent],
+			imports: [LuTooltipModule, LuUserPopoverComponent, LuUserDisplayModule, LuUserPictureComponent],
 		}),
 		applicationConfig({
 			providers: [provideAnimations(), provideLuUserPopover(), provideHttpClient()],
