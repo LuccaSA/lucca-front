@@ -35,10 +35,11 @@ export default {
 			imports: [FieldsetComponent],
 		}),
 	],
-	render: ({ content, ...args }, { argTypes }) => {
+	render: ({ content, expanded, ...args }, { argTypes }) => {
+		const expandedParam = expanded ? `[expanded]="true"` : ``;
 		return {
 			template: cleanupTemplate(`
-<lu-fieldset ${generateInputs(args, argTypes)}>
+<lu-fieldset ${expandedParam} ${generateInputs(args, argTypes)}>
 	${content}
 </lu-fieldset>`),
 		};
