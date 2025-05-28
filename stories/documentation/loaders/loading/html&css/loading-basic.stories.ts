@@ -9,7 +9,7 @@ interface LoadingsBasicStory {
 }
 
 export default {
-	title: 'Documentation/Loaders/Loadings/Basic',
+	title: 'Documentation/Loaders/Loading/HTML&CSS/Basic',
 	argTypes: {
 		label: {
 			control: {
@@ -26,7 +26,6 @@ export default {
 			control: {
 				type: 'boolean',
 			},
-			if: { arg: 'template', truthy: false },
 		},
 		invert: {
 			control: {
