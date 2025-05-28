@@ -1,0 +1,7 @@
+@mixin vars {
+	--components-inputFramed-content-display: none;
+	--components-inputFramed-borderColor: var(--palettes-neutral-300);
+	--components-inputFramed-header-info-borderColor: var(--palettes-neutral-200);
+	--components-inputFramed-padding: var(--pr-t-spacings-150);
+	--components-inputFramed-header-backgroundColor: transparent;
+}
