@@ -20,5 +20,5 @@ export class FieldsetComponent {
 	expandable = input(false, { transform: booleanAttribute });
 	expanded = model(false);
 
-	id = 'fieldsetTitleContent' + nextId++;
+	id = `fieldsetTitleContent${nextId++}` ;
 }
