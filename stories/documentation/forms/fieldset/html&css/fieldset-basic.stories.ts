@@ -3,29 +3,38 @@ import { Meta, StoryFn } from '@storybook/angular';
 interface FieldsetBasicStory {
 	horizontal: boolean;
 	expandable: boolean;
-	s: boolean;
-	helper?: string;
+	expanded: boolean;
+	helper: string;
 	title: string;
+	size: string;
 	content: string;
 }
 
 export default {
-	title: 'Documentation/Forms/Fieldset/Basic',
+	title: 'Documentation/Forms/Fieldset/HTML&CSS/Basic',
 	argTypes: {
 		horizontal: {
-			description: 'Incompatible avec les mod expandable.',
 			control: {
 				type: 'boolean',
 			},
+			if: { arg: 'expandable', truthy: false },
 		},
 		expandable: {
 			control: {
 				type: 'boolean',
 			},
+			if: { arg: 'horizontal', truthy: false },
 		},
-		s: {
+		expanded: {
 			control: {
 				type: 'boolean',
+			},
+			if: { arg: 'expandable', truthy: true },
+		},
+		size: {
+			options: ['S', null],
+			control: {
+				type: 'select',
 			},
 		},
 		helper: {
@@ -47,15 +56,14 @@ export default {
 } as Meta;
 
 function getTemplate(args: FieldsetBasicStory): string {
-	const horizontal = args.horizontal ? ' mod-horizontal' : '';
-	const expandable = args.expandable ? 'mod-expandable' : '';
-	const s = args.s ? ' mod-S' : '';
+	const horizontal = args.horizontal ? 'mod-horizontal' : '';
+	const s = args.size === 'S' ? 'mod-S' : '';
 	const helper = args.helper ? '<span class="fieldset-title-content-text-helper">{{ helper }}</span>' : '';
 	const title = args.title;
 	const content = args.content;
 
 	if (args.expandable === true)
-		return `<fieldset class="fieldset mod-expandable${s}" aria-labelledby="fieldsetTitleContent1">
+		return `<fieldset class="fieldset mod-expandable ${s}" aria-labelledby="fieldsetTitleContent1">
 	<legend class="fieldset-title">
 		<button type="button" class="fieldset-title-content" id="fieldsetTitleContent1" [attr.aria-expanded]="expanded" (click)="expanded = !expanded">
 			<span class="fieldset-title-content-text">
@@ -70,7 +78,7 @@ function getTemplate(args: FieldsetBasicStory): string {
 	</div>
 </fieldset>`;
 	else
-		return `<fieldset class="fieldset${horizontal}${s}" aria-labelledby="fieldsetTitleContent1">
+		return `<fieldset class="fieldset ${horizontal} ${s}" aria-labelledby="fieldsetTitleContent1">
 	<legend class="fieldset-title">
 		<span class="fieldset-title-content" id="fieldsetTitleContent1">
 			<span class="fieldset-title-content-text">
@@ -92,10 +100,11 @@ const Template: StoryFn<FieldsetBasicStory> = (args) => ({
 
 export const Basic = Template.bind({});
 Basic.args = {
-	horizontal: false,
-	expandable: false,
-	s: false,
-	helper: '',
-	title: 'Title',
 	content: '<div class="grid mod-form" style="background-color: var(--palettes-neutral-50)"><div class="grid-column" style="--grid-colspan: 4">Lorem ipsum dolor sit amet.</div></div>',
+	title: 'Title',
+	helper: '',
+	size: null,
+	expandable: false,
+	expanded: false,
+	horizontal: false,
 };

@@ -1,0 +1,24 @@
+import { NgTemplateOutlet } from '@angular/common';
+import { booleanAttribute, Component, input, model, ViewEncapsulation } from '@angular/core';
+import { PortalContent, PortalDirective } from '@lucca-front/ng/core';
+
+let nextId = 0;
+
+@Component({
+	selector: 'lu-fieldset',
+	standalone: true,
+	templateUrl: './fieldset.component.html',
+	styleUrl: './fieldset.component.scss',
+	encapsulation: ViewEncapsulation.None,
+	imports: [PortalDirective, NgTemplateOutlet],
+})
+export class FieldsetComponent {
+	title = input<PortalContent | null>(null);
+	helper = input<PortalContent | null>(null);
+	size = input<'S' | null>(null);
+	horizontal = input(false, { transform: booleanAttribute });
+	expandable = input(false, { transform: booleanAttribute });
+	expanded = model(false);
+
+	id = 'fieldsetTitleContent' + nextId++;
+}
