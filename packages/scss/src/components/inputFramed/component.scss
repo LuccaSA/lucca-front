@@ -26,8 +26,11 @@
 			}
 		}
 
-		.inputFramed-header-field.form-field {
-			position: static;
+		.inputFramed-header-field {
+			&.form-field {
+				position: static;
+				margin-block: 0;
+			}
 		}
 
 		.inputFramed-header-input.radioField-input,
