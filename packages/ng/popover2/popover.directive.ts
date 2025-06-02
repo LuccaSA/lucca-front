@@ -13,6 +13,7 @@ import {
 	model,
 	OnDestroy,
 	output,
+	Provider,
 	Renderer2,
 	signal,
 	TemplateRef,
@@ -143,6 +144,9 @@ export class PopoverDirective implements OnDestroy {
 
 	#screenReaderDescription?: HTMLSpanElement;
 
+	// For when we need to extend this popover and add some extra providers to the panel
+	protected additionalProviders: Provider[] = [];
+
 	constructor() {
 		combineLatest([toObservable(this.luPopoverOpenDelay), toObservable(this.luPopoverCloseDelay), toObservable(this.luPopoverTrigger)])
 			.pipe(
@@ -257,7 +261,7 @@ export class PopoverDirective implements OnDestroy {
 					PopoverContentComponent,
 					this.#vcr,
 					Injector.create({
-						providers: [{ provide: POPOVER_CONFIG, useValue: config }],
+						providers: [{ provide: POPOVER_CONFIG, useValue: config }, ...this.additionalProviders],
 					}),
 				),
 			).instance;

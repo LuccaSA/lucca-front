@@ -1,7 +1,7 @@
 import { LuDisplayInitials, LuUserPictureComponent } from '@lucca-front/ng/user';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { bob, georges, squidwards } from '../../user.mocks';
-import { LuUserPopoverComponent, provideLuUserPopover } from '@lucca-front/ng/popup-employee';
+import { provideLuUserPopover, LuUserPopoverDirective } from '@lucca-front/ng/popup-employee';
 import { provideHttpClient } from '@angular/common/http';
 import { provideAnimations } from '@angular/platform-browser/animations';
 
@@ -9,7 +9,7 @@ export default {
 	title: 'Documentation/Users/Avatar/Angular/Basic',
 	decorators: [
 		moduleMetadata({
-			imports: [LuUserPictureComponent, LuUserPopoverComponent],
+			imports: [LuUserPictureComponent, LuUserPopoverDirective],
 		}),
 		applicationConfig({
 			providers: [provideAnimations(), provideHttpClient(), provideLuUserPopover()],

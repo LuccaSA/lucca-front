@@ -1,7 +1,7 @@
 import { provideHttpClient } from '@angular/common/http';
 import { Component, Input } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
-import { LuUserPopoverComponent, provideLuUserPopover } from '@lucca-front/ng/popup-employee';
+import { LuUserPopoverDirective, provideLuUserPopover } from '@lucca-front/ng/popup-employee';
 import { Meta, StoryFn, applicationConfig } from '@storybook/angular';
 import { ILuUser } from '@lucca-front/ng/user';
 
@@ -9,7 +9,7 @@ import { ILuUser } from '@lucca-front/ng/user';
 	selector: 'user-popover-story',
 	standalone: true,
 	template: '<div [luUserPopover]="luUserPopover" [luUserPopoverDisabled]="luUserPopoverDisabled">Survolez-moi !</div>',
-	imports: [LuUserPopoverComponent],
+	imports: [LuUserPopoverDirective],
 })
 class UserPopoverStory {
 	@Input() luUserPopover: ILuUser;

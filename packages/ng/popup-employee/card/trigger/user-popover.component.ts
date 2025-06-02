@@ -1,9 +1,5 @@
-import { OverlayModule } from '@angular/cdk/overlay';
-import { Component, effect, inject, input, TemplateRef, viewChild } from '@angular/core';
-import { ILuUser } from '@lucca-front/ng/user';
-import { USER_POPOVER_IS_ACTIVATED } from '../../user-popover.providers';
-import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
-import { PopoverDirective } from '@lucca-front/ng/popover2';
+import { Component, inject } from '@angular/core';
+import { toObservable } from '@angular/core/rxjs-interop';
 import { BehaviorSubject, catchError, combineLatest, Observable, of, switchMap, tap } from 'rxjs';
 import { LuUserPopover } from '../../user-popover.model';
 import { LuUserPopoverStore } from '../../service/user-popover.store';
@@ -14,28 +10,20 @@ import { AsyncPipe, DatePipe, NgTemplateOutlet } from '@angular/common';
 import { IsFutureOrTodayPipe, IsFuturePipe } from '../pipe/is-future.pipe';
 import { LeaveEndsDisplayPipe } from '../pipe/leave-ends-display.pipe';
 import { IconComponent } from '@lucca-front/ng/icon';
+import { POPOVER_CONFIG } from '@lucca-front/ng/popover2';
+import { LU_USER_POPOVER_USER } from '../../user-popover.providers';
 
 @Component({
-	// eslint-disable-next-line @angular-eslint/component-selector
-	selector: '[luUserPopover]',
+	selector: 'lu-user-popover-content',
 	templateUrl: './user-popover.component.html',
 	styleUrl: './user-popover.component.scss',
 	standalone: true,
-	exportAs: 'LuUserPopoverDirective',
-	hostDirectives: [
-		{
-			directive: PopoverDirective,
-			inputs: ['luPopoverOpenDelay: luUserPopoverEnterDelay', 'luPopoverCloseDelay: luUserPopoverLeaveDelay', 'luPopoverDisabled: luUserPopoverDisabled'],
-		},
-	],
-	imports: [OverlayModule, AsyncPipe, NgTemplateOutlet, DatePipe, IntlParamsPipe, IsFuturePipe, IsFutureOrTodayPipe, LeaveEndsDisplayPipe, IconComponent],
+	imports: [AsyncPipe, NgTemplateOutlet, DatePipe, IntlParamsPipe, IsFuturePipe, IsFutureOrTodayPipe, LeaveEndsDisplayPipe, IconComponent],
 })
 export class LuUserPopoverComponent {
-	content = viewChild<TemplateRef<unknown>>('popoverContent');
+	luUser = inject(LU_USER_POPOVER_USER);
 
-	luUserPopover = input.required<ILuUser>();
-
-	#popoverRef = inject(PopoverDirective);
+	#popoverRef = inject(POPOVER_CONFIG).ref;
 
 	#service = inject(LuUserPopoverStore);
 
@@ -43,7 +31,7 @@ export class LuUserPopoverComponent {
 
 	#errorImage$ = new BehaviorSubject<boolean>(false);
 
-	public employee$: Observable<LuUserPopover> = toObservable(this.luUserPopover).pipe(
+	public employee$: Observable<LuUserPopover> = toObservable(this.luUser).pipe(
 		switchMap((user) =>
 			this.#service.get(user.id).pipe(
 				catchError(() =>
@@ -81,30 +69,6 @@ export class LuUserPopoverComponent {
 			};
 		}),
 	);
-
-	constructor() {
-		// Default to disabled to avoid having it flicker or something
-		this.#popoverRef.luPopoverDisabled = false;
-
-		// Connect to feature flag
-		inject(USER_POPOVER_IS_ACTIVATED)
-			.pipe(takeUntilDestroyed())
-			.subscribe((isActivated) => {
-				this.#popoverRef.luPopoverDisabled = !isActivated;
-			});
-
-		this.#popoverRef.customPositions = [
-			{ overlayX: 'start', overlayY: 'bottom', originX: 'start', originY: 'top' },
-			{ overlayX: 'start', overlayY: 'top', originX: 'start', originY: 'bottom' },
-		];
-
-		this.#popoverRef.luPopoverTrigger.set('hover+focus');
-		this.#popoverRef.luPopoverNoCloseButton = true;
-
-		effect(() => {
-			this.#popoverRef.content = this.content();
-		});
-	}
 
 	pictureError() {
 		this.#errorImage$.next(true);
