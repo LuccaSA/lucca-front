@@ -12,12 +12,12 @@
 @mixin checked {
 	--components-inputFramed-content-display: block;
 	--components-inputFramed-header-backgroundColor: var(--palettes-product-50);
-	--components-inputFramed-borderColor: var(--pr-t-color-input-border-selected);
-	--components-inputFramed-header-info-borderColor: var(--pr-t-color-input-border-selected);
+	--components-inputFramed-borderColor: var(--pr-t-color-input-border-checked);
+	--components-inputFramed-header-info-borderColor: var(--pr-t-color-input-border-checked);
 }
 
 @mixin checkedHover {
-	--components-inputFramed-borderColor: var(--pr-t-color-input-border-selected-hover);
+	--components-inputFramed-borderColor: var(--pr-t-color-input-border-checked-hover);
 }
 
 @mixin critical {
