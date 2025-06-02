@@ -44,7 +44,7 @@ export default {
 		}),
 	],
 	render: (args, { argTypes }) => {
-		const { breadcrumbs, actions, navigation, backAction, titleActions, ...otherArgs } = args;
+		const { breadcrumbs, actions, navigation, backAction, titleActions, leading, trailing, ...otherArgs } = args;
 		const titleActionsContainer = titleActions
 			? `<ng-container pageHeaderTitleActions>
 	<button type="button" luButton="text" luTooltip="Modifier" luTooltipOnlyForDisplay><lu-icon icon="officePen" alt="Modifier" /></button>
@@ -95,13 +95,17 @@ export default {
 		</lu-breadcrumbs>
 	</ng-container>`
 			: ``;
+		const leadingContainer = leading ? `<ng-container pageHeaderLeading>${leading}</ng-container>` : ``;
+		const trailingContainer = trailing ? `<ng-container pageHeaderTrainling>${trailing}</ng-container>` : ``;
 
 		return {
 			template: `
 <lu-page-header ${generateInputs(otherArgs, argTypes)}>
 	${breadcrumbsContainer}
 	${backActionContainer}
+	${leadingContainer}
 	${titleActionsContainer}
+	${trailingContainer}
 	${actionsContainer}
 	${navigationContainer}
 </lu-page-header>
@@ -119,5 +123,7 @@ export const Basic = {
 		titleActions: false,
 		navigation: false,
 		backAction: false,
+		leading: '',
+		trailing: '',
 	},
 };

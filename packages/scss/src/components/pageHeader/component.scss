@@ -23,7 +23,9 @@
 
 		.pageHeader-content-actions,
 		.pageHeader-content-title-back,
-		.pageHeader-content-title-actions {
+		.pageHeader-content-title-actions,
+		.pageHeader-content-title-leading,
+		.pageHeader-content-title-trailing {
 			&:empty {
 				display: none;
 			}
