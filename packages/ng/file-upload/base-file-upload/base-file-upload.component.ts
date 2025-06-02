@@ -50,7 +50,7 @@ export abstract class BaseFileUploadComponent {
 
 	size = input<'S' | null>(null);
 
-	password = input<boolean, boolean>(false, { transform: booleanAttribute });
+	password = input(false, { transform: booleanAttribute });
 
 	illustration = input<'picture' | 'paper'>('paper');
 

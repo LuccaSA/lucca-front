@@ -29,7 +29,7 @@ export class LinkComponent implements OnDestroy {
 
 	routerLinkCommands = input<RouterLink['routerLink'] | null>(null, { alias: 'luLink' });
 
-	disabled = input<boolean, boolean>(false, { transform: booleanAttribute });
+	disabled = input(false, { transform: booleanAttribute });
 
 	@Input({
 		transform: booleanAttribute,
