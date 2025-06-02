@@ -67,8 +67,8 @@ export default [
 		versionDeleted: '21.1.0',
 	},
 	{
-		// SEE https://regex101.com/r/1Nv5vW.
-		objectPattern: /\.filterBar(?!Deprecated)-?/,
+		// SEE https://regex101.com/r/VqPdDw/2.
+		objectPattern: /\.filterBarDeprecated-?/,
 		versionDeprecated: '19.2.0',
 		versionDeleted: '21.1.0',
 	},
