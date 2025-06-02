@@ -1,8 +1,8 @@
 import { bob } from '@/stories/users/user.mocks';
 import { provideHttpClient } from '@angular/common/http';
 import { provideAnimations } from '@angular/platform-browser/animations';
-import { LuUserPopoverDirective, provideLuUserPopover } from '@lucca-front/ng/popup-employee';
 import { LuUserDisplayModule, LuUserPictureComponent } from '@lucca-front/ng/user';
+import { LuUserPopoverDirective, provideLuUserPopover } from '@lucca-front/ng/user-popover';
 import { applicationConfig, Meta, moduleMetadata, StoryFn } from '@storybook/angular';
 
 interface IndexTableActionsUserPopoverCellStory {}
