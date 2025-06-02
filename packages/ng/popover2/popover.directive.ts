@@ -16,6 +16,7 @@ import {
 	Renderer2,
 	signal,
 	TemplateRef,
+	Type,
 	ViewContainerRef,
 } from '@angular/core';
 import { ConnectedPosition, ConnectionPositionPair, FlexibleConnectedPositionStrategyOrigin, Overlay, OverlayRef } from '@angular/cdk/overlay';
@@ -86,7 +87,7 @@ export class PopoverDirective implements OnDestroy {
 	@Input({
 		alias: 'luPopover2',
 	})
-	content: TemplateRef<unknown>;
+	content: TemplateRef<unknown> | Type<unknown>;
 
 	@Input()
 	luPopoverPosition: PopoverPosition = 'above';
