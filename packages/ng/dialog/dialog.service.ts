@@ -71,17 +71,11 @@ export class LuDialogService {
 				)
 				.subscribe((canClose) => {
 					if (canClose) {
+						luDialogRef.detachSubscription?.unsubscribe();
 						cdkRef.close(DISMISSED_VALUE);
 					}
 				});
 		}
-
-		cdkRef.overlayRef
-			.detachments()
-			.pipe(takeUntil(luDialogRef.closed$))
-			.subscribe(() => {
-				cdkRef.close(DISMISSED_VALUE);
-			});
 
 		return luDialogRef;
 	}
