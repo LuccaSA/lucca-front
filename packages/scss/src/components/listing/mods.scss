@@ -33,6 +33,7 @@
 	@if $level == 1 {
 		--components-listing-listStyleType: circle;
 	}
+
 	@if $level == 2 {
 		--components-listing-listStyleType: square;
 	}
@@ -42,6 +43,7 @@
 	@if $level == 1 {
 		--components-listing-listStyleType: lower-alpha;
 	}
+
 	@if $level == 2 {
 		--components-listing-listStyleType: lower-roman;
 	}
