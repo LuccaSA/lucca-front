@@ -2,7 +2,7 @@
 @use '@lucca-front/scss/src/commons/utils/namespace';
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
-	padding-block: var(--components-pageHeader-paddingBlock);
+	padding: var(--components-pageHeader-padding);
 
 	@at-root ($atRoot) {
 		.pageHeader-content {

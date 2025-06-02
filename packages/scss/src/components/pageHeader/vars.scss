@@ -1,6 +1,4 @@
 @mixin vars {
 	--components-pageHeader-description-max-width: 50rem;
-	--components-pageHeader-paddingBlockStart: var(--pr-t-spacings-300);
-	--components-pageHeader-paddingBlockEnd: var(--pr-t-spacings-400);
-	--components-pageHeader-paddingBlock: var(--components-pageHeader-paddingBlockStart) var(--components-pageHeader-paddingBlockEnd) ;
+	--components-pageHeader-padding: var(--pr-t-spacings-300) var(--pr-t-spacings-400)
 }
