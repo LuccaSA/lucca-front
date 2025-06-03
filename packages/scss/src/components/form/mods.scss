@@ -281,6 +281,7 @@
 
 	&::before,
 	&::after {
+		/* stylelint-disable-next-line no-irregular-whitespace */
 		content: ' ' / '';
 		display: table;
 	}

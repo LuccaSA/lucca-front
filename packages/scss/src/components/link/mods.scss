@@ -27,6 +27,7 @@
 			white-space: nowrap;
 
 			&::before {
+				/* stylelint-disable-next-line no-irregular-whitespace */
 				content: ' ' / '';
 			}
 		}
