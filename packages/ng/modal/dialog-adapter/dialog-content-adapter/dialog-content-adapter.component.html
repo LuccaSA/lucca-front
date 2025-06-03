@@ -13,7 +13,7 @@
 				*ngIf="hasSubmit$ | async"
 				[palette]="submitPalette"
 				[disabled]="submitDisabled$ | async"
-				[ngClass]="submitClass()"
+				[class]="submitClass()"
 				(click)="submit()"
 			>
 				{{ submitLabel$ | async }}

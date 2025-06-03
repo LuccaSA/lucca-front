@@ -19,7 +19,8 @@
 			[customPositions]="popoverPositions"
 			[luPopoverAnchor]="elementRef"
 			(luPopoverOpened)="popoverOpened()"
-			#popoverRef="luPopover2"
+			luTooltip
+	luTooltipWhenEllipsis#popoverRef="luPopover2"
 			#comboboxRef
 			[attr.aria-expanded]="popoverRef.opened()"
 			(keydown.arrowDown)="$event.preventDefault(); popoverRef.openPopover(true)"

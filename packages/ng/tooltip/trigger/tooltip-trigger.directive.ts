@@ -1,4 +1,13 @@
-import { FlexibleConnectedPositionStrategy, HorizontalConnectionPos, OriginConnectionPosition, Overlay, OverlayConnectionPosition, OverlayRef, VerticalConnectionPos } from '@angular/cdk/overlay';
+import {
+	FlexibleConnectedPositionStrategy,
+	FlexibleConnectedPositionStrategyOrigin,
+	HorizontalConnectionPos,
+	OriginConnectionPosition,
+	Overlay,
+	OverlayConnectionPosition,
+	OverlayRef,
+	VerticalConnectionPos,
+} from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
 import {
 	AfterContentInit,
@@ -70,6 +79,8 @@ export class LuTooltipTriggerDirective implements AfterContentInit, OnDestroy {
 	luTooltipPosition: LuPopoverPosition = 'above';
 
 	luTooltipWhenEllipsis = input(false, { transform: booleanAttribute });
+
+	luTooltipAnchor = input<FlexibleConnectedPositionStrategyOrigin>(this.#host);
 
 	resize$ = new Observable((observer) => {
 		const resizeObserver = new ResizeObserver(() => {
@@ -301,7 +312,7 @@ export class LuTooltipTriggerDirective implements AfterContentInit, OnDestroy {
 
 		return this.#overlay
 			.position()
-			.flexibleConnectedTo(this.#host)
+			.flexibleConnectedTo(this.luTooltipAnchor())
 			.withPositions([
 				{
 					originX: connectionPosition.originX,

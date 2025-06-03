@@ -1,8 +1,8 @@
 import { provideHttpClient } from '@angular/common/http';
 import { provideAnimations } from '@angular/platform-browser/animations';
-import { LuUserPopoverComponent, provideLuUserPopover } from '@lucca-front/ng/popup-employee';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 import { LuUserDisplayModule, LuUserPictureComponent } from '@lucca-front/ng/user';
+import { LuUserPopoverDirective, provideLuUserPopover } from '@lucca-front/ng/user-popover';
 import { applicationConfig, Meta, moduleMetadata, StoryFn } from '@storybook/angular';
 
 interface IndexTableActionsTooltipsRowStory {}
@@ -12,7 +12,7 @@ export default {
 	argTypes: {},
 	decorators: [
 		moduleMetadata({
-			imports: [LuTooltipModule, LuUserPopoverComponent, LuUserDisplayModule, LuUserPictureComponent],
+			imports: [LuTooltipModule, LuUserPopoverDirective, LuUserDisplayModule, LuUserPictureComponent],
 		}),
 		applicationConfig({
 			providers: [provideAnimations(), provideLuUserPopover(), provideHttpClient()],

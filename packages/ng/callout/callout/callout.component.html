@@ -1,5 +1,5 @@
 @if (!removed) {
-	<div class="callout" [ngClass]="calloutClasses">
+	<div class="callout" [class]="calloutClasses">
 		@if (state | luCalloutIcon: icon; as calloutIcon) {
 			<div class="callout-icon">
 				<span aria-hidden="true" class="lucca-icon icon-{{ calloutIcon }}"></span>

@@ -1,9 +1,9 @@
+import { bob } from '@/stories/users/user.mocks';
+import { provideHttpClient } from '@angular/common/http';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { LuUserTileComponent } from '@lucca-front/ng/user';
+import { LuUserPopoverDirective, provideLuUserPopover } from '@lucca-front/ng/user-popover';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { provideHttpClient } from '@angular/common/http';
-import { provideLuUserPopover, LuUserPopoverDirective } from '@lucca-front/ng/popup-employee';
-import { bob } from '@/stories/users/user.mocks';
 
 export default {
 	title: 'Documentation/Users/Tile/Angular/Basic',
