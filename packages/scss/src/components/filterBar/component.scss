@@ -10,6 +10,8 @@
 @use '@lucca-front/scss/src/components/textField/exports' as textField;
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
+	display: block;
+	
 	.textField {
 		@include textField.filterPill;
 	}
