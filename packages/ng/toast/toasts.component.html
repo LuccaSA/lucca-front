@@ -2,19 +2,21 @@
 	<div *ngFor="let toast of toasts$ | async; trackBy: trackToast" class="toasts-item" [ngClass]="paletteClassByToastType[toast.type]">
 		<span *ngIf="toast.type" class="toast-item-icon lucca-icon" aria-hidden="true" [ngClass]="iconClassByToastType[toast.type]"></span>
 		<div class="toast-item-content">
-			<div *ngIf="toast.title"><strong>{{ toast.title }}</strong></div>
+			<div *ngIf="toast.title">
+				<strong>{{ toast.title }}</strong>
+			</div>
 			@if (isStringPortalContent(toast.message)) {
-			<p class="toast-item-content-description" [innerHtml]="toast.message"></p>
+				<p class="toast-item-content-description" [innerHtml]="toast.message"></p>
 			} @else {
-			<ng-container *luPortal="toast.message"></ng-container>
+				<ng-container *luPortal="toast.message"></ng-container>
 			}
 		</div>
 		<button
 			type="button"
 			class="toasts-item-kill button"
 			(click)="removeToast(toast)"
-			(animationend)="(!isOnlyDismissibleManually(toast) && toast.duration > 0) ? removeToast(toast) : null"
-			[style.animation-duration]="(!isOnlyDismissibleManually(toast) && toast.duration > 0) ? toast.duration + 'ms' : null"
+			(animationend)="!isOnlyDismissibleManually(toast) && toast.duration > 0 ? removeToast(toast) : null"
+			[style.animation-duration]="!isOnlyDismissibleManually(toast) && toast.duration > 0 ? toast.duration + 'ms' : null"
 		>
 			<span class="lucca-icon icon-signClose" aria-hidden="true"></span>
 			<span class="u-mask">{{ intl.close }}</span>

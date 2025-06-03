@@ -3,7 +3,7 @@ import { importProvidersFrom, inject, InjectionToken, makeEnvironmentProviders, 
 import { HttpClient } from '@angular/common/http';
 import { catchError, map, shareReplay } from 'rxjs/operators';
 import { OverlayModule } from '@angular/cdk/overlay';
-import { ILuUser } from '../user/user.model';
+import { ILuUser } from '@lucca-front/ng/user';
 
 export const LU_USER_POPOVER_USER = new InjectionToken<Signal<ILuUser>>('user-popover-user');
 

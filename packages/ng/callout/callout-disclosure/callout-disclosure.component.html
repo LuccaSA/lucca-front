@@ -1,7 +1,7 @@
 <details class="calloutDisclosure" [ngClass]="calloutClasses" [class.mod-iconless]="!icon" [open]="open" (toggle)="onToggle($event)">
 	<summary class="calloutDisclosure-summary">
 		@if (state | luCalloutIcon: icon; as calloutIcon) {
-		<lu-icon class="calloutDisclosure-summary-icon" [icon]="calloutIcon" />
+			<lu-icon class="calloutDisclosure-summary-icon" [icon]="calloutIcon" />
 		}
 		<span class="calloutDisclosure-summary-title">
 			<ng-container *luPortal="heading"></ng-container>

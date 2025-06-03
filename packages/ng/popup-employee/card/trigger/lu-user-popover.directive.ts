@@ -1,6 +1,6 @@
 import { Directive, inject, Input, input } from '@angular/core';
-import { ILuUser } from '../../../user/user.model';
-import { PopoverDirective } from '../../../popover2/popover.directive';
+import { ILuUser } from '@lucca-front/ng/user';
+import { PopoverDirective } from '@lucca-front/ng/popover2';
 import { LU_USER_POPOVER_USER, USER_POPOVER_IS_ACTIVATED } from '../../user-popover.providers';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { LuUserPopoverComponent } from './user-popover.component';
