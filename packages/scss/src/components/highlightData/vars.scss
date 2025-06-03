@@ -1,5 +1,7 @@
 @mixin vars {
 	--components-highlightData-display: grid;
+	--components-highlightData-grid: 'title action'
+	                                 'value action';
 	--components-highlightData-alignItem: center;
 	--components-highlightData-background: var(--pr-t-elevation-surface-raised);
 	--components-highlightData-padding-inline: var(--pr-t-spacings-200);
