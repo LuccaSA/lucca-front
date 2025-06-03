@@ -6,8 +6,8 @@ import { LuSelectInputComponent } from '@lucca-front/ng/select';
 import { LuOptionItemComponent, LuOptionSelectAllComponent } from '@lucca-front/ng/option';
 import { EstablishmentServiceOverride } from '../establishment-service-override';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
-import { LuCoreSelectJobQualificationsDirective } from '@lucca-front/ng/core-select';
-import { LuCoreSelectUsersDirective } from '@lucca-front/ng/core-select';
+import { LuCoreSelectJobQualificationsDirective } from '@lucca-front/ng/core-select/job-qualification';
+import { LuCoreSelectUsersDirective } from '@lucca-front/ng/core-select/user';
 
 @Component({
 	selector: 'lu-select-schematic-api-selects',
@@ -56,9 +56,7 @@ import { LuCoreSelectUsersDirective } from '@lucca-front/ng/core-select';
 			useClass: EstablishmentServiceOverride
 		}
 	],
-	imports: [
-		
-		LuEstablishmentSelectInputComponent,
+	imports: [LuEstablishmentSelectInputComponent,
 		LuUserSelectModule,
 		LuSelectInputComponent,
 		LuOptionSelectAllComponent,

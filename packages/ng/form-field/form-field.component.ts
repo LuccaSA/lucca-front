@@ -29,6 +29,7 @@ import { FormFieldSize } from './form-field-size';
 import { FORM_FIELD_INSTANCE } from './form-field.token';
 import { LU_FORM_FIELD_TRANSLATIONS } from './form-field.translate';
 import { InputDirective } from './input.directive';
+import { FRAMED_INPUT_INSTANCE } from './framed-input/framed-input-token';
 
 let nextId = 0;
 
@@ -47,6 +48,9 @@ type FormFieldWidth = 20 | 30 | 40 | 50 | 60;
 			useExisting: forwardRef(() => FormFieldComponent),
 		},
 	],
+	host: {
+		'[class.inputFramed-header-field]': 'framed',
+	},
 	encapsulation: ViewEncapsulation.None,
 })
 export class FormFieldComponent implements OnDestroy, DoCheck {
@@ -55,6 +59,8 @@ export class FormFieldComponent implements OnDestroy, DoCheck {
 	#luClass = inject(LuClass);
 	#injector = inject(Injector);
 	#renderer = inject(Renderer2);
+
+	framed = inject(FRAMED_INPUT_INSTANCE, { optional: true }) !== null;
 
 	formFieldChildren = contentChildren(FormFieldComponent, { descendants: true });
 
@@ -85,6 +91,8 @@ export class FormFieldComponent implements OnDestroy, DoCheck {
 
 	tooltip = input<string | SafeHtml | null>(null);
 
+	tag = input<string | null>(null);
+
 	width = input<FormFieldWidth, FormFieldWidth | `${FormFieldWidth}`>(null, {
 		transform: numberAttribute as (value: FormFieldWidth | `${FormFieldWidth}`) => FormFieldWidth,
 	});
@@ -107,6 +115,11 @@ export class FormFieldComponent implements OnDestroy, DoCheck {
 	inlineMessageState = input<InlineMessageState | null>(null);
 
 	size = input<FormFieldSize | null>(null);
+
+	/**
+	 * Extra aria-describedby attribute
+	 */
+	extraDescribedBy = input<string>('');
 
 	layout = model<'default' | 'checkable' | 'fieldset'>('default');
 
@@ -148,7 +161,7 @@ export class FormFieldComponent implements OnDestroy, DoCheck {
 	#ariaLabelledBy: string[] = [];
 
 	constructor() {
-		ɵeffectWithDeps([this.isInputRequired, this.invalidStatus], () => {
+		ɵeffectWithDeps([this.isInputRequired, this.invalidStatus, this.extraDescribedBy], () => {
 			this.updateAria();
 		});
 
@@ -200,7 +213,11 @@ export class FormFieldComponent implements OnDestroy, DoCheck {
 			this.#renderer.setAttribute(input.host.nativeElement, 'aria-invalid', this.invalidStatus()?.toString());
 			this.#renderer.setAttribute(input.host.nativeElement, 'aria-required', this.isInputRequired()?.toString());
 			if (!input.standalone) {
-				this.#renderer.setAttribute(input.host.nativeElement, 'aria-describedby', `${input.host.nativeElement.id}-message`);
+				let ariaDescribedBy = `${input.host.nativeElement.id}-message`;
+				if (this.extraDescribedBy()) {
+					ariaDescribedBy += ` ${this.extraDescribedBy()}`;
+				}
+				this.#renderer.setAttribute(input.host.nativeElement, 'aria-describedby', ariaDescribedBy);
 			}
 		});
 		if (this.id() && !this.#ariaLabelledBy.includes(`${this.id()}-label`)) {

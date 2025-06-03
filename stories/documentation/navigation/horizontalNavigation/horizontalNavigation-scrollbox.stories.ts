@@ -34,9 +34,9 @@ export default {
 } as Meta;
 
 function getTemplate(args: HorizontalNavigationScrollboxStory): string {
-	const noBorder = args.noBorder ? `mod-noBorder` : ``;
-	const header = args.header ? `mod-header` : ``;
-	const s = args.s ? `mod-S` : ``;
+	const noBorder = args.noBorder ? ` mod-noBorder` : ``;
+	const header = args.header ? ` mod-header` : ``;
+	const s = args.s ? ` mod-S` : ``;
 	return `<lu-scroll-box [attr.style]="'--components-scrollBox-gap: 0px; --components-scrollBox-paddingInline: 0px; --components-scrollBox-marginInline: calc(var(--pr-t-spacings-200) * -1)'">
 	<div class="horizontalNavigation ${s} ${noBorder} ${header}">
 		<ul class="horizontalNavigation-list">

@@ -1,7 +1,7 @@
 import { Component as AngularComponent } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { LuDropdownModule } from '@lucca-front/ng/dropdown';
-import { Meta, StoryFn, applicationConfig } from '@storybook/angular';
+import { applicationConfig, Meta, StoryFn } from '@storybook/angular';
 
 @AngularComponent({
 	selector: 'dropdown-component-stories',
@@ -26,7 +26,7 @@ const Template: StoryFn<DropdownComponentStories> = (args) => ({
 const code = `
 <lu-dropdown #dropdown>
 
-  /* Ajouter la directive luDropdownItem pour lié le parent luDropdown à ses enfants */
+  /* Ajouter la directive luDropdownItem pour lier le parent luDropdown à ses enfants */
   <li class="dropdown-list-option">
     <a luDropdownItem routerLink="." fragment="link2" class="dropdown-list-option-action">Link 2</a>
   </li>

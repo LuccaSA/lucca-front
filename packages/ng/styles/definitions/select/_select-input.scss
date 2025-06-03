@@ -239,6 +239,7 @@
 				color: var(--palettes-neutral-400);
 			}
 		}
+
 		// Error
 		:host-context(.textfield-input.is-error) {
 			&::after {

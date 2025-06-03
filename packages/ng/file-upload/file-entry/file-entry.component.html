@@ -1,0 +1,110 @@
+<dl class="fileEntry" [class.mod-media]="media()" [class]="dlClasses()">
+	@if (!media()) {
+	<dt class="fileEntry-filename">
+		<div class="fileEntry-filename-tooltip" luTooltip luTooltipWhenEllipsis>{{ fileName() }}</div>
+	</dt>
+	@if (state() === 'error' && inlineMessageError()) {
+	<dd class="fileEntry-inlineMessage">
+		<lu-inline-message withTooltip [label]="inlineMessageError()" [state]="'error'" />
+	</dd>
+	} @else {
+	<dd class="fileEntry-description">
+		<span class="fileEntry-description-format" luTooltip luTooltipWhenEllipsis>{{ fileTypeDisplay() }}</span><span class="u-mask"> – </span>
+		<lu-divider vertical />
+		<span class="fileEntry-description-size">{{ fileSizeDisplay() }}</span>
+	</dd>
+	} }
+	<dd class="fileEntry-status">
+		<div class="fileEntry-status-content" [luTooltip]="tooltip()">
+			@if (state() === 'error' && inlineMessageError()) { @if (media()) {
+			<div class="fileEntry-status-content-inside">
+				<lu-inline-message class="fileEntry-status-content-inlineMessage" [label]="inlineMessageError()" [state]="'error'" />
+			</div>
+			} @else {
+			<div class="fileEntry-status-content-inside">
+				<lu-icon class="fileEntry-status-content-inside-icon" icon="signError" />
+			</div>
+			} } @else { @if (previewUrl() && state() !== 'error') {
+			<div class="fileEntry-status-content-inside">
+				<img class="fileEntry-status-content-inside-img" [src]="previewUrl()" alt="" loading="lazy" />
+			</div>
+			} @if (state() === 'loading') {
+			<div class="fileEntry-status-content-inside">
+				<div class="fileEntry-status-content-inside-loading loading"></div>
+			</div>
+			} @if (!previewUrl() && state() !== 'loading') {
+			<div class="fileEntry-status-content-inside">
+				<img class="fileEntry-status-content-inside-svg" [attr.src]="iconOverride() || fileEntryIconSrc()" alt="" width="32" height="32" />
+			</div>
+			} } @if (displayFileName() && media()) {
+			<div class="fileEntry-status-content-fileName" aria-hidden="true">{{ fileName() }}</div>
+			}
+		</div>
+	</dd>
+	@if (downloadURL() || deletable) {
+	<dd class="fileEntry-toolbar">
+		<div class="fileToolbar" [class.mod-disablePositioning]="!media()" [class.mod-S]="size() === 'S'">
+			<ul class="fileToolbar-list">
+				@if (downloadURL()) {
+				<li class="fileToolbar-list-item">
+					<a
+						[href]="downloadURL()"
+						target="_blank"
+						rel="noopener noreferrer"
+						download="download"
+						class="fileToolbar-list-item-button"
+						type="button"
+						luButton
+						[luTooltip]="intl.download"
+						luTooltipOnlyForDisplay
+					>
+						<lu-icon
+							class="fileToolbar-list-item-button-icon"
+							icon="arrowDownload"
+							[alt]="intl.downloadFile | intlParams: {fileName: fileName()}"
+						/>
+					</a>
+				</li>
+				} @if (deletable) {
+				<li class="fileToolbar-list-item">
+					<button
+						class="fileToolbar-list-item-button"
+						[class.palette-critical]="state() === 'error'"
+						type="button"
+						luButton
+						[luTooltip]="intl.delete"
+						luTooltipOnlyForDisplay
+						(click)="deleteFile$.next()"
+					>
+						<lu-icon
+							class="fileToolbar-list-item-button-icon"
+							icon="trashDelete"
+							[alt]="intl.deleteFile | intlParams: {fileName: fileName()}"
+						/>
+					</button>
+				</li>
+				}
+			</ul>
+		</div>
+	</dd>
+	}
+</dl>
+@if (withPassword) {
+<div class="fileEntry_box box mod-withArrow mod-neutral">
+	<div class="box-arrow mod-neutral"></div>
+	<lu-form-field [label]="intl.password">
+		<div class="fileEntry_box-field">
+			<lu-text-input
+				class="fileEntry_box-field-textField"
+				required
+				hasClearer
+				searchIcon="searchMagnifyingGlass"
+				type="password"
+				[ngModel]="password()"
+				(ngModelChange)="passwordChange$.next($event)"
+			/>
+			<button class="fileEntry_box-field-button" luButton type="button">{{ intl.confirmPassword }}</button>
+		</div>
+	</lu-form-field>
+</div>
+}

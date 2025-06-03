@@ -1,6 +1,13 @@
 @use '@lucca-front/scss/src/commons/utils/namespace';
 
 @mixin icon($atRoot: namespace.$defaultAtRoot) {
+	.lucca-icon {
+		text-decoration: none;
+		font-size: 1em;
+		line-height: 1lh;
+		vertical-align: bottom;
+	}
+
 	&:has(.link-text) {
 		text-decoration: none;
 	}
@@ -9,13 +16,6 @@
 		.lucca-icon {
 			margin-inline-start: 0.2em;
 		}
-	}
-
-	.lucca-icon {
-		text-decoration: none;
-		font-size: 1em;
-		line-height: 1lh;
-		vertical-align: bottom;
 	}
 
 	@at-root ($atRoot) {
@@ -56,5 +56,5 @@
 
 @mixin brand {
 	--commons-text-link-color: var(--palettes-brand-700);
-	--commons-text-link-hover: var(--palettes-brand-600);
+	--commons-text-link-hover: var(--palettes-brand-800);
 }

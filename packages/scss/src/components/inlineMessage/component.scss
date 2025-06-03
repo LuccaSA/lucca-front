@@ -1,6 +1,8 @@
 @use '@lucca-front/icons/src/icon/exports' as icon;
 @use '@lucca-front/scss/src/commons/utils/namespace';
 
+@use '@lucca-front/scss/src/commons/utils/a11y';
+
 @mixin component($atRoot: namespace.$defaultAtRoot) {
 	display: flex;
 	gap: var(--components-inlineMessage-gap);
@@ -8,12 +10,23 @@
 	font-size: var(--components-inlineMessage-fontSize);
 	line-height: var(--components-inlineMessage-lineHeight);
 	color: var(--components-inlineMessage-color);
+	border-radius: var(--commons-borderRadius-M);
+
+	&:has(.inlineMessage-content:focus-visible) {
+		@include a11y.focusVisible;
+	}
 
 	@at-root ($atRoot) {
 		.inlineMessage-content {
-			display: flex;
-			gap: var(--components-inlineMessage-gap);
-			margin: 0;
+			&:not(p) {
+				display: flex;
+				gap: var(--components-inlineMessage-gap);
+				margin: 0;
+			}
+
+			&:is(p) {
+				outline: none;
+			}
 		}
 
 		// .lucca-icon:first-child is deprecated

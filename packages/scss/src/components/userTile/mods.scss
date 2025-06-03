@@ -9,6 +9,7 @@
 }
 
 @mixin XS {
+  --components-userTile-gap: var(--pr-t-spacings-100);
   --components-userTile-title-fontSize: var(--sizes-S-fontSize);
   --components-userTile-title-lineHeight: var(--sizes-S-lineHeight);
   --components-userTile-info-fontSize: var(--sizes-XS-fontSize);
@@ -20,6 +21,8 @@
 }
 
 @mixin S {
+  --components-userTile-gap: var(--pr-t-spacings-100);
+
   .avatar {
     @include avatar.S;
   }

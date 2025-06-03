@@ -50,6 +50,7 @@
 @forward 'calendar';
 @forward 'skipLinks';
 @forward 'fancyBox';
+@forward 'inputFramed';
 
 // caution: the two components cannot be loaded at the same time
 @forward 'grid';
@@ -98,6 +99,10 @@
 @forward 'richText';
 @forward 'readMore';
 @forward 'highlightData';
+@forward 'listing';
+@forward 'fileUpload';
+@forward 'fileEntry';
+@forward 'fileToolbar';
 
 // Deprecated CSS components
 // @forward 'tableFixedDeprecated'; // 33 Ko

@@ -87,13 +87,6 @@
 	text-align: end;
 	white-space: nowrap;
 
-	&:is(.dataTable-head-row-cell) {
-		.button {
-			position: relative;
-			inset-block-end: var(--pr-t-spacings-50);
-		}
-	}
-
 	.button {
 		@include button.S;
 		@include button.onlyIcon;

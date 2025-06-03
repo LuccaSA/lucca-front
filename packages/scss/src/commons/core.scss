@@ -6,10 +6,8 @@
 
 $contents: '100\\%', 'fit-content';
 $boxModel: 'margin', 'padding', 'border';
-$boxDirection:
-	'', 'top', 'bottom', 'left', 'right', 'inline', 'block', 'block-start', 'block-end', 'inline-start', 'inline-end'; // top, bottom, left and right are deprecated
-$corners:
-	'', 'top-left-', 'top-right-', 'bottom-left-', 'bottom-right-', 'start-start-', 'start-end-', 'end-start-', 'end-end-'; // top-left, top-right, bottom-left and bottom-right are deprecated
+$boxDirection: '', 'top', 'bottom', 'left', 'right', 'inline', 'block', 'block-start', 'block-end', 'inline-start', 'inline-end'; // top, bottom, left and right are deprecated
+$corners: '', 'top-left-', 'top-right-', 'bottom-left-', 'bottom-right-', 'start-start-', 'start-end-', 'end-start-', 'end-end-'; // top-left, top-right, bottom-left and bottom-right are deprecated
 $gaps: 'column-gap', 'row-gap', 'gap';
 $displays: 'block', 'flex', 'grid', 'inline', 'inline-flex', 'inline-block', 'inline-grid', 'contents', 'none';
 $direction: 'column', 'column-reverse', 'row', 'row-reverse';
@@ -31,6 +29,7 @@ $verticalAlign: 'baseline', 'sub', 'super', 'text-top', 'text-bottom', 'middle',
 $position: 'absolute', 'relative', 'static', 'fixed', 'sticky';
 $decoration: 'underline', 'line-through', 'none';
 $overflow: 'hidden', 'auto', 'visible', 'scroll';
+$cursor: 'pointer', 'auto';
 
 /* Tokens */
 
@@ -127,16 +126,30 @@ $overflow: 'hidden', 'auto', 'visible', 'scroll';
 	}
 }
 
-@mixin fontFace($family, $weights, $path: '//cdn.lucca.fr/transverse/fonts', $style: normal) {
+@mixin fontFace($family, $weights, $styles, $path: '//cdn.lucca.fr/transverse/fonts') {
 	@each $keyword, $number in $weights {
-		@font-face {
-			font-family: '#{$family}';
-			src:
-				url('#{$path}/#{$family}/#{$keyword}.woff2') format('woff2'),
-				url('#{$path}/#{$family}/#{$keyword}.woff') format('woff');
-			font-weight: #{$number};
-			font-style: #{$style};
-			font-display: swap;
+		@each $style in $styles {
+			@if $style == 'normal' {
+				@font-face {
+					font-family: '#{$family}';
+					src:
+						url('#{$path}/#{$family}/#{$keyword}.woff2') format('woff2'),
+						url('#{$path}/#{$family}/#{$keyword}.woff') format('woff');
+					font-weight: #{$number};
+					font-style: #{$style};
+					font-display: swap;
+				}
+			} @else {
+				@font-face {
+					font-family: '#{$family}';
+					src:
+						url('#{$path}/#{$family}/#{$keyword}-#{$style}.woff2') format('woff2'),
+						url('#{$path}/#{$family}/#{$keyword}-#{$style}.woff') format('woff');
+					font-weight: #{$number};
+					font-style: #{$style};
+					font-display: swap;
+				}
+			}
 		}
 	}
 }

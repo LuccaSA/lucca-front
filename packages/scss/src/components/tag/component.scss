@@ -4,8 +4,6 @@
 @mixin component($atRoot: namespace.$defaultAtRoot) {
 	background-color: var(--components-tag-background);
 	border-radius: var(--commons-borderRadius-M);
-	font-size: var(--components-tag-fontSize);
-	line-height: var(--components-tag-lineHeight);
 	padding-block: 0;
 	padding-inline: var(--pr-t-spacings-50);
 	text-decoration: var(--components-tag-decoration);
@@ -24,7 +22,7 @@
 
 	&,
 	&:is(a, button) {
-		color: var(--palettes-800, var(--palettes-neutral-800));
+		color: var(--components-tag-color);
 	}
 
 	.lucca-icon {

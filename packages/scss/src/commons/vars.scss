@@ -47,8 +47,16 @@
 	--commons-border-100: var(--palettes-neutral-100);
 	--commons-border-200: var(--palettes-neutral-200);
 
+	@if (config.$fontFamily) {
+		--commons-font-family: '#{config.$fontFamily}', Tahoma, sans-serif;
+	}
+
 	@if (config.$fontFamilyCursive) {
 		--commons-font-family-cursive: '#{config.$fontFamilyCursive}', cursive;
+	}
+
+	@if (config.$fontFamilyBrand) {
+		--commons-font-family-brand: '#{config.$fontFamilyBrand}', sans-serif;
 	}
 
 	// Deprecated
@@ -65,4 +73,22 @@
 	--commons-navSide-width: 0rem; // unit is required for calc
 	--commons-navSide-compact-width: 7.5rem;
 	--commons-navSide-mobile-toggle-height: 3.5rem;
+
+	@media (prefers-contrast: more) {
+		@media (forced-colors: none) {
+			@include core.cssvars('pr-t-color-input', config.$colorInputContrasted);
+		}
+	}
+
+	@if (config.$prefersContrast == 'more') {
+		@media (forced-colors: none) {
+			@include core.cssvars('pr-t-color-input', config.$colorInputContrasted);
+		}
+	}
+
+	.u-prefersContrastMore {
+		@media (forced-colors: none) {
+			@include core.cssvars('pr-t-color-input', config.$colorInputContrasted);
+		}
+	}
 }

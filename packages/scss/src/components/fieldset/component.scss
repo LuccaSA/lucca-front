@@ -29,6 +29,7 @@
 			background-color: transparent;
 			text-align: start;
 			display: flex;
+			align-items: flex-start;
 			justify-content: space-between;
 			gap: var(--components-fieldset-gap);
 			max-inline-size: var(--components-fieldset-contentMaxWidth);

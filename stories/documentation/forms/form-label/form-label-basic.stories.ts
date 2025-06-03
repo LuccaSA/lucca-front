@@ -8,7 +8,14 @@ export default {
 } as Meta;
 
 function getTemplate(args: FormLabelBasicStory): string {
-	return `<label class="formLabel">Label<sup class="formLabel-required" aria-hidden="true">*</sup><span class="formLabel-info"><span aria-hidden="true" class="lucca-icon icon-signHelp"></span><span class="u-mask">?</span></span></label>`;
+	return `<label class="formLabel">
+	Label<sup class="formLabel-required" aria-hidden="true">*</sup>
+	<span class="formLabel-info">
+		<span aria-hidden="true" class="lucca-icon icon-signHelp"></span>
+		<span class="u-mask">?</span>
+	</span>
+	<span class="pr-u-marginInlineStart50 tag palette-product">Tag</span>
+</label>`;
 }
 
 const Template: StoryFn<FormLabelBasicStory> = (args) => ({

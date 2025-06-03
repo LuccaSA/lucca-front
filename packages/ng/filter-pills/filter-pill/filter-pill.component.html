@@ -15,6 +15,8 @@
 	[customPositions]="popoverPositions"
 	[luPopoverAnchor]="elementRef"
 	(luPopoverOpened)="popoverOpened()"
+	luTooltip
+	luTooltipWhenEllipsis
 	#popoverRef="luPopover2"
 	#comboboxRef
 	[attr.aria-expanded]="popoverRef.opened()"
@@ -24,9 +26,11 @@
 	<ng-container *ngTemplateOutlet="pillTpl; context:{label: label(), isEmpty: inputIsEmpty()}"></ng-container>
 	@if (inputIsEmpty() && !disabled()) { {{ placeholder() }} }
 </button>
+@if (inputIsClearable()) {
 <button type="button" class="filterPill-clear clear" (click)="$event.stopPropagation(); clear(); comboboxRef.focus()">
 	<span class="u-mask">{{ intl.clear }}</span>
 </button>
+}
 <button
 	type="button"
 	aria-hidden="true"
@@ -35,7 +39,7 @@
 	[attr.disabled]="disabled() ? 'disabled' : null"
 	(click)="popoverRef.openPopover(true)"
 >
-	<lu-icon [icon]="displayedIcon()" size="S"></lu-icon>
+	<lu-icon [icon]="displayedIcon()" size="S" />
 </button>
 } @else {
 <ng-container
