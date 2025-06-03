@@ -8,7 +8,7 @@ interface ArrowBasicStory {
 }
 
 export default {
-	title: 'Documentation/Structure/Box/Arrow',
+	title: 'Documentation/Structure/Box/HTML&CSS/Arrow',
 	argTypes: {
 		checked: {
 			control: {

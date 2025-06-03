@@ -52,6 +52,7 @@
 		.filterBar-scrollBox-export {
 			margin-inline-start: auto;
 			padding-inline-start: var(--pr-t-spacings-200);
+			flex-shrink: 0;
 		}
 	}
 }
