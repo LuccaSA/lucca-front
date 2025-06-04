@@ -2,7 +2,7 @@
 	<label class="formLabel" [class.inputFramed-header-label]="framed" id="{{ id }}-label" for="{{ id }}-input">
 		<ng-content></ng-content>
 		@if (tag) {
-		<span class="formLabel-tag tag">{{ tag }}</span>
+			<span class="formLabel-tag tag">{{ tag }}</span>
 		}
 	</label>
 	<span class="radioField">
@@ -27,15 +27,15 @@
 	</span>
 	<lu-inline-message *ngIf="inlineMessage" [label]="inlineMessage" id="{{ id }}-message" />
 	@if (arrow) {
-	<div class="form-field-arrow{{ arrow === 'neutral' ? ' mod-neutral' : '' }}"></div>
+		<div class="form-field-arrow{{ arrow === 'neutral' ? ' mod-neutral' : '' }}"></div>
 	}
 </ng-template>
 @if (framed) {
-<lu-framed-input [framedPortal]="framedPortal">
-	<ng-container *ngTemplateOutlet="radioContent" />
-	<ng-container illustration><ng-content select="[illustration]" /></ng-container>
-	<ng-container info><ng-content select="[info]" /></ng-container>
-</lu-framed-input>
+	<lu-framed-input [framedPortal]="framedPortal">
+		<ng-container *ngTemplateOutlet="radioContent" />
+		<ng-container illustration><ng-content select="[illustration]" /></ng-container>
+		<ng-container info><ng-content select="[info]" /></ng-container>
+	</lu-framed-input>
 } @else {
-<ng-container *ngTemplateOutlet="radioContent" />
+	<ng-container *ngTemplateOutlet="radioContent" />
 }

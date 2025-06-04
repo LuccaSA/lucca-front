@@ -12,7 +12,10 @@
 					[luTooltip]="tooltip()"
 					[color]="invalidStatus() ? 'error' : 'inherit'"
 				/>
-			} @if (tag()) {<span class="pr-u-marginInlineStart50 tag palette-product">{{ tag() }}</span>}
+			}
+			@if (tag()) {
+				<span class="pr-u-marginInlineStart50 tag palette-product">{{ tag() }}</span>
+			}
 		</legend>
 		<ng-container *ngTemplateOutlet="projectionTpl"></ng-container>
 		@if (inlineMessage() || (invalidStatus() ? errorInlineMessage() : false)) {
@@ -27,7 +30,7 @@
 	<label
 		class="formLabel"
 		[class.inputFramed-header-label]="framed"
-	[class.is-error]="invalidStatus()"
+		[class.is-error]="invalidStatus()"
 		[class.mod-counter]="counter() > 0"
 		id="{{ id() }}-label"
 		for="{{ id() }}"
@@ -40,7 +43,10 @@
 		@if (tooltip()) {
 			<lu-icon class="formLabel-info" icon="signHelp" [alt]="'?'" [luTooltip]="tooltip()" [color]="invalidStatus() ? 'error' : 'inherit'" />
 		}
-		@if (tag()) {<span class="pr-u-marginInlineStart50 tag palette-product">{{ tag() }}</span>} @if (counter() > 0) {
+		@if (tag()) {
+			<span class="pr-u-marginInlineStart50 tag palette-product">{{ tag() }}</span>
+		}
+		@if (counter() > 0) {
 			<span class="formLabel-counter" [class.u-textError]="contentLength > counter()" id="{{ id() }}-counter" aria-live="polite">
 				<span aria-hidden="true">{{ contentLength }}/{{ counter() }}</span>
 				<span class="u-mask">{{ intl.counter | intlParams: { current: contentLength, max: counter() } }}</span>
