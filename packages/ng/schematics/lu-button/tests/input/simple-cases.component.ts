@@ -17,7 +17,7 @@ import { IconComponent } from '@lucca-front/ng/icon';
 			<lu-icon icon="arrowLeft" />
 			<span class="u-mask">{{ 'dependencies.GO_BACK_TO_LIST' | transloco }}</span>
 		</a>
-		<button class="button palette-primary" [class.is-loading]="saving$ | async" (click)="save()">
+		<button class="button palette-primary" type="button" [class.is-loading]="saving$ | async" (click)="save()">
 			{{translations.ADMIN_SAVE}}
 		</button>
 	`,
