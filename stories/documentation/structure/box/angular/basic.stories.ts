@@ -1,13 +1,6 @@
 import { BoxComponent } from '@lucca-front/ng/box';
-import { Meta, moduleMetadata } from '@storybook/angular';
-import { cleanupTemplate } from 'stories/helpers/stories';
-
-interface BoxBasicStory {
-	content: string;
-	toggle: boolean;
-	neutral: boolean;
-	killable: boolean;
-}
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { cleanupTemplate, generateInputs } from 'stories/helpers/stories';
 
 export default {
 	title: 'Documentation/Structure/Box/Angular/Basic',
@@ -17,17 +10,14 @@ export default {
 			imports: [BoxComponent],
 		}),
 	],
-	render: (args: BoxBasicStory) => {
-		const toggleParam = args.toggle ? `toggle` : ``;
-		const neutralParam = args.neutral ? `neutral` : ``;
-		const killableParam = args.killable ? `killable` : ``;
+	render: ({ content, ...args }, { argTypes }) => {
 		return {
-			template: cleanupTemplate(`<lu-box ${toggleParam} ${neutralParam} ${killableParam}>${args.content}</lu-box>`),
+			template: cleanupTemplate(`<lu-box ${generateInputs(args, argTypes)}>${content}</lu-box>`),
 		};
 	},
 } as Meta;
 
-export const Basic = {
+export const Basic: StoryObj<BoxComponent & { content: string }> = {
 	args: {
 		content: 'Lorem ipsum dolor sit amet.',
 		toggle: false,
