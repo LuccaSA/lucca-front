@@ -1,8 +1,8 @@
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { Meta, moduleMetadata, StoryFn } from '@storybook/angular';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { RadioComponent, RadioGroupInputComponent } from '@lucca-front/ng/forms';
+import { Meta, moduleMetadata, StoryFn } from '@storybook/angular';
 
 interface ArrowBasicStory {
 	s: boolean;
@@ -12,7 +12,7 @@ interface ArrowBasicStory {
 }
 
 export default {
-	title: 'Documentation/Structure/Box/Arrow/Angular',
+	title: 'Documentation/Structure/Box/HTML&CSS/Arrow/Angular',
 	decorators: [
 		moduleMetadata({
 			imports: [RadioGroupInputComponent, RadioComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule],
