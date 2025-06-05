@@ -31,8 +31,7 @@
 			gap: var(--pr-t-spacings-100);
 			background-color: var(--palettes-neutral-0);
 			padding: var(--components-radioButtons-padding);
-			font-size: var(--components-radioButtons-font-size);
-			line-height: var(--components-radioButtons-line-height);
+			font: var(--components-radioButtons-font);
 			color: var(--palettes-neutral-700);
 			box-shadow: 0 0 0 var(--commons-divider-width) var(--palettes-neutral-300);
 			transition-duration: var(--commons-animations-durations-fast);

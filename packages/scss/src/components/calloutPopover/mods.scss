@@ -1,10 +1,8 @@
-@use '@lucca-front/scss/src/components/title/exports' as title;
 @use '@lucca-front/scss/src/components/calloutFeedbackList/exports' as calloutFeedbackList;
 @use '@lucca-front/icons/src/icon/exports' as icon;
 
 @mixin S {
-	font-size: var(--sizes-S-fontSize);
-	line-height: var(--sizes-S-lineHeight);
+	font: var(--pr-t-font-body-S);
 	padding: var(--pr-t-spacings-75);
 
 	.calloutPopover-icon {
@@ -13,8 +11,7 @@
 }
 
 @mixin XS {
-	font-size: var(--sizes-XS-fontSize);
-	line-height: var(--sizes-XS-lineHeight);
+	font: var(--pr-t-font-body-XS);
 	padding-block: var(--pr-t-spacings-25);
 	padding-inline: var(--pr-t-spacings-50);
 	gap: var(--pr-t-spacings-50);
@@ -34,7 +31,8 @@
 	}
 
 	.calloutPopover-overlay-head-title {
-		@include title.h5;
+		font: var(--pr-t-font-body-S);
+		font-weight: var(--pr-t-font-fontWeight-semibold);
 	}
 
 	.calloutFeedbackList {

@@ -3,14 +3,11 @@
 @mixin component($suffix: '') {
 	// no suffix here
 	margin-block-start: 0;
-	color: var(--palettes-neutral-900);
-	text-rendering: geometricPrecision;
+	color: var(--pr-t-color-text-heading);
 	text-wrap: pretty;
 
 	// suffix here
-	font-weight: var(--components-title-weight, 600) #{$suffix};
-	font-size: var(--sizes-fontSize) #{$suffix};
-	line-height: var(--sizes-lineHeight) #{$suffix};
+	font: var(--components-title-font) #{$suffix};
 
 	@if config.$deprecatedSpacings {
 		// no suffix here

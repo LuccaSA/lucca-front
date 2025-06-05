@@ -1,5 +1,4 @@
 @use '@lucca-front/scss/src/commons/utils/media';
-@use '@lucca-front/scss/src/components/title/exports' as title;
 
 @mixin page {
 	--components-emptyState-container-maxWidth: var(--commons-container-maxWidth);
@@ -33,10 +32,10 @@
 	}
 
 	.emptyState-content-heading {
-		@include title.h1;
+		font: var(--pr-t-font-heading-1);
 
 		@include media.max('XXS') {
-			@include title.h2;
+			font: var(--pr-t-font-heading-2);
 		}
 	}
 

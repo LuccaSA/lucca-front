@@ -95,14 +95,14 @@
 	.textfield-messages-error,
 	.radiosfield-messages-error,
 	.checkboxesfield-messages-error {
-		background-color: var(--palettes-error-700);
+		background-color: var(--pr-t-color-text-critical);
 		color: var(--palettes-neutral-0);
 	}
 
 	.textfield-messages-warning,
 	.radiosfield-messages-warning,
 	.checkboxesfield-messages-warning {
-		background-color: var(--palettes-warning-700);
+		background-color: var(--pr-t-color-text-warning);
 		color: var(--palettes-neutral-0);
 	}
 
@@ -112,7 +112,7 @@
 	.textfield-messages-success,
 	.radiosfield-messages-success,
 	.checkboxesfield-messages-success {
-		background-color: var(--palettes-success-700);
+		background-color: var(--pr-t-color-text-success);
 		color: var(--palettes-neutral-0);
 	}
 

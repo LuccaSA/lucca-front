@@ -6,12 +6,12 @@
 @mixin component($atRoot: namespace.$defaultAtRoot) {
 	border-radius: var(--commons-borderRadius-L);
 	background-color: var(--palettes-50, var(--palettes-neutral-50));
-	color: var(--palettes-neutral-800);
+	color: var(--pr-t-color-text);
 	box-shadow: 0 0 0 var(--commons-divider-width) var(--palettes-300, var(--palettes-neutral-300));
 
 	a,
 	.link {
-		--commons-text-link-color: var(--palettes-neutral-800);
+		--commons-text-link-color: var(--pr-t-color-text);
 		--commons-text-link-hover: var(--palettes-neutral-900);
 	}
 

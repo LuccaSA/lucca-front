@@ -1,10 +1,13 @@
 @mixin vars {
-	--components-formLabel-fontSize: var(--sizes-M-fontSize);
-	--components-formLabel-lineHeight: var(--sizes-M-lineHeight);
-	--components-formLabel-color: var(--palettes-neutral-800);
-	--components-formLabel-help-fontSize: var(--sizes-XS-lineHeight);
-	--components-formLabel-help-lineHeight: var(--sizes-M-lineHeight);
+	--components-formLabel-font: var(--pr-t-font-body-M);
+	--components-formLabel-color: var(--pr-t-color-text);
+	--components-formLabel-help-fontSize: var(--pr-t-font-body-XS-lineHeight);
+	--components-formLabel-help-lineHeight: var(--pr-t-font-body-M-lineHeight);
 	--components-formLabel-paddingRight: 0;
 	--components-formLabel-width: fit-content;
 	--components-formLabel-cursor: default;
+
+	// Deprecated
+	--components-formLabel-fontSize: var(--pr-t-font-body-M-fontSize);
+	--components-formLabel-lineHeight: var(--pr-t-font-body-M-lineHeight);
 }

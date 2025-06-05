@@ -3,8 +3,7 @@
 
 @mixin S {
 	.calloutDisclosure-summary-title {
-		font-size: var(--sizes-S-fontSize);
-		line-height: var(--sizes-S-lineHeight);
+		font: var(--pr-t-font-body-S);
 	}
 
 	.calloutDisclosure-summary-icon {

@@ -1,7 +1,6 @@
 @use '@lucca-front/scss/src/commons/config' with (
 	$palettesOtherProduct: 'all',
 	$fontFamilyCursive: 'Caveat',
-	$fontFamilyBrand: 'LuccaSans'
 );
 
 @use '../packages/icons/src/main' as icons;

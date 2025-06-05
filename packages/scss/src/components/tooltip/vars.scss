@@ -1,6 +1,6 @@
 @mixin vars {
 	--components-tooltip-background-color: var(--palettes-neutral-900);
-	--components-tooltip-color: var(--palettes-neutral-0);
+	--components-tooltip-color: var(--pr-t-color-text-reverse);
 	--components-tooltip-max-width: 15rem;
 	--components-tooltip-transformOrigin: center;
 	--components-tooltip-margin: 0;
