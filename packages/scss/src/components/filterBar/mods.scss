@@ -29,7 +29,8 @@
 }
 
 @mixin touch {
-	--components-filterBar-extremitiesDisplay: block;
+	--components-filterBar-scrollBox-flexGrow: 1;
+	--components-filterBar-scrollBox-group-flexWrap: nowrap;
 
 	.filterBar-segmentedControl.segmentedControl {
 		--components-segmentedControl-whiteSpace: nowrap;
@@ -39,10 +40,6 @@
 
 	.filterBar-scrollBox.scrollBox {
 		@include overflow.hide;
-	}
-
-	.filterBar-scrollBox-group {
-		display: contents;
 	}
 }
 
