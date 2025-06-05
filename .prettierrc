@@ -6,20 +6,20 @@
 	"overrides": [
 		{
 			"files": [
-				"*.component.html",
-				"*.page.html"
-			],
-			"options": {
-				"parser": "angular"
-			}
-		},
-		{
-			"files": [
 				"*.html"
 			],
 			"options": {
 				"parser": "html",
 				"singleQuote": false
+			}
+		},
+		{
+			"files": [
+				"*.component.html",
+				"*.page.html"
+			],
+			"options": {
+				"parser": "angular"
 			}
 		},
 		{

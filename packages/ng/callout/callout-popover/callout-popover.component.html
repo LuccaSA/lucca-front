@@ -9,8 +9,9 @@
 	(blur)="hideContent(null)"
 >
 	@if (state | luCalloutIcon: icon; as calloutIcon) {
-	<lu-icon class="calloutPopover-icon" [icon]="calloutIcon" />
-	} {{buttonLabel}}
+		<lu-icon class="calloutPopover-icon" [icon]="calloutIcon" />
+	}
+	{{ buttonLabel }}
 </button>
 <ng-template #overlayContentRef>
 	<div

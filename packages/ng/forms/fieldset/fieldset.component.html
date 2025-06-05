@@ -7,30 +7,30 @@
 >
 	<legend class="fieldset-title">
 		@if (expandable()) {
-		<button
-			type="button"
-			class="fieldset-title-content"
-			[attr.id]="id"
-			[attr.aria-expanded]="expanded()"
-			(click)="expanded.set(!expanded())"
-		>
-			<ng-container *ngTemplateOutlet="titleContent"></ng-container>
-			<lu-icon icon="arrowChevronBottom" />
-		</button>
+			<button
+				type="button"
+				class="fieldset-title-content"
+				[attr.id]="id"
+				[attr.aria-expanded]="expanded()"
+				(click)="expanded.set(!expanded())"
+			>
+				<ng-container *ngTemplateOutlet="titleContent"></ng-container>
+				<lu-icon icon="arrowChevronBottom" />
+			</button>
 		} @else {
-		<span class="fieldset-title-content" [attr.id]="id">
-			<ng-container *ngTemplateOutlet="titleContent"></ng-container>
-		</span>
+			<span class="fieldset-title-content" [attr.id]="id">
+				<ng-container *ngTemplateOutlet="titleContent"></ng-container>
+			</span>
 		}
 	</legend>
-	<div class="fieldset-content" [attr.hidden]="(!expandable() || expanded()) ? null : 'hidden'"><ng-content /></div>
+	<div class="fieldset-content" [attr.hidden]="!expandable() || expanded() ? null : 'hidden'"><ng-content /></div>
 </fieldset>
 
 <ng-template #titleContent>
 	<span class="fieldset-title-content-text">
 		<ng-container *luPortal="heading()" />
 		@if (helper()) {
-		<span class="fieldset-title-content-text-helper"><ng-container *luPortal="helper()" /></span>
+			<span class="fieldset-title-content-text-helper"><ng-container *luPortal="helper()" /></span>
 		}
 	</span>
 </ng-template>

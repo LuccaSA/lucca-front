@@ -8,6 +8,6 @@
 	<ng-container *luOptionOutlet="optionTpl; value: option" />
 
 	<div *ngIf="groupTemplateLocation() === 'option'" class="optionItem-value-group">
-		<ng-container *luPortal="grouping.content; context: { $implicit: option | luOptionGroup:grouping.selector }" />
+		<ng-container *luPortal="grouping.content; context: { $implicit: option | luOptionGroup: grouping.selector }" />
 	</div>
 </div>

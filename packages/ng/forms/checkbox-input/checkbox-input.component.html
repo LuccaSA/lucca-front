@@ -1,18 +1,18 @@
 @if (!isFilterPill) {
-<input
-	luInput
-	type="checkbox"
-	class="checkboxField-input"
-	[class.inputFramed-header-input]="framed"
-	[formControl]="ngControl.control"
-	[attr.aria-checked]="mixed ? 'mixed' : null"
-/>
-<span class="checkboxField-icon" [class.inputFramed-header-icon]="framed" aria-hidden="true"
-	><span class="checkboxField-icon-check"></span
-></span>
+	<input
+		luInput
+		type="checkbox"
+		class="checkboxField-input"
+		[class.inputFramed-header-input]="framed"
+		[formControl]="ngControl.control"
+		[attr.aria-checked]="mixed ? 'mixed' : null"
+	/>
+	<span class="checkboxField-icon" [class.inputFramed-header-icon]="framed" aria-hidden="true"
+		><span class="checkboxField-icon-check"></span
+	></span>
 }
 
-<ng-container *luFilterPillLabel="let label=label">
+<ng-container *luFilterPillLabel="let label = label">
 	<label class="filterPill-label" [attr.for]="filterPillInputId" luTooltip luTooltipWhenEllipsis="true">
 		{{ label }}
 		<span class="filterPill-label-placeholder" aria-hidden="true" [attr.data-content-before]="label"></span>

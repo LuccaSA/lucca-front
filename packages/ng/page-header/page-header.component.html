@@ -6,9 +6,9 @@
 				<ng-content select="[pageHeaderBackAction]" />
 			</div>
 			@if (labelIsString()) {
-			<h1 class="pageHeader-content-title-content"><ng-container *luPortal="label()" /></h1>
+				<h1 class="pageHeader-content-title-content"><ng-container *luPortal="label()" /></h1>
 			} @else {
-			<ng-container *luPortal="label()" />
+				<ng-container *luPortal="label()" />
 			}
 			<div class="pageHeader-content-title-actions">
 				<ng-content select="[pageHeaderTitleActions]" />
@@ -20,9 +20,9 @@
 	</div>
 	<div class="pageHeader-description">
 		@if (descriptionIsString()) {
-		<p class="pageHeader-description-paragraph">{{description()}}</p>
+			<p class="pageHeader-description-paragraph">{{ description() }}</p>
 		} @else {
-		<ng-container *luPortal="description()" />
+			<ng-container *luPortal="description()" />
 		}
 	</div>
 	<ng-content select="[pageHeaderNavigation]" />

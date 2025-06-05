@@ -2,7 +2,7 @@
 <div class="userTile-content">
 	<div class="userTile-content-name">{{ user | luUserDisplay: displayFormat }}</div>
 	@if (role || user?.jobTitle) {
-	<div class="userTile-content-info">{{ role ? role : user?.jobTitle }}</div>
+		<div class="userTile-content-info">{{ role ? role : user?.jobTitle }}</div>
 	}
 	<div class="user-tile-footnote"><ng-content></ng-content></div>
 </div>

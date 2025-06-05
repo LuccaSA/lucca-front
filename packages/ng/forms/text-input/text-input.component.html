@@ -1,31 +1,37 @@
 <div class="textField" [class.mod-valueAlignRight]="valueAlignRight">
 	<ng-template #textfieldAddon let-addon="addon" let-type="type">
-		<span class="textField-{{type}}" luFormFieldId="{{type}}" *ngIf="addon.content">
-			<span class="textField-label-{{type}}-item" aria-hidden="true">{{ addon.content }}</span>
+		<span class="textField-{{ type }}" luFormFieldId="{{ type }}" *ngIf="addon.content">
+			<span class="textField-label-{{ type }}-item" aria-hidden="true">{{ addon.content }}</span>
 			<span class="u-mask">{{ addon.ariaLabel }}</span>
 		</span>
-		<span class="textField-{{type}}" luFormFieldId="{{type}}" *ngIf="addon.icon">
-			<span class="textField-label-{{type}}-item" [attr.aria-label]="addon.ariaLabel"
-				><span class="lucca-icon icon-{{addon.icon}}"></span
+		<span class="textField-{{ type }}" luFormFieldId="{{ type }}" *ngIf="addon.icon">
+			<span class="textField-label-{{ type }}-item" [attr.aria-label]="addon.ariaLabel"
+				><span class="lucca-icon icon-{{ addon.icon }}"></span
 			></span>
 		</span>
 	</ng-template>
 
 	<ng-container *ngIf="prefix">
 		<ng-container
-			*ngTemplateOutlet="textfieldAddon; context:{
-			type: 'prefix',
-			addon: prefix
-     }"
+			*ngTemplateOutlet="
+				textfieldAddon;
+				context: {
+					type: 'prefix',
+					addon: prefix,
+				}
+			"
 		>
 		</ng-container>
 	</ng-container>
 	<ng-container *ngIf="suffix">
 		<ng-container
-			*ngTemplateOutlet="textfieldAddon; context:{
-			type: 'suffix',
-			addon: suffix
-     }"
+			*ngTemplateOutlet="
+				textfieldAddon;
+				context: {
+					type: 'suffix',
+					addon: suffix,
+				}
+			"
 		>
 		</ng-container>
 	</ng-container>
@@ -46,7 +52,7 @@
 				<span aria-hidden="true" class="lucca-icon icon-signClose"></span>
 				<span class="u-mask">{{ intl.clear }}</span>
 			</button>
-			<span aria-hidden="true" class="textField-input-affix-icon lucca-icon icon-{{searchIcon}}" *ngIf="hasSearchIcon"></span>
+			<span aria-hidden="true" class="textField-input-affix-icon lucca-icon icon-{{ searchIcon }}" *ngIf="hasSearchIcon"></span>
 			<button
 				[attr.aria-pressed]="showPassword"
 				type="button"
@@ -54,7 +60,7 @@
 				(click)="togglePasswordVisibility()"
 				*ngIf="hasTogglePasswordVisibilityIcon()"
 			>
-				<span aria-hidden="true" class="lucca-icon icon-{{showPassword ? 'unwatch' : 'watch'}}"></span>
+				<span aria-hidden="true" class="lucca-icon icon-{{ showPassword ? 'unwatch' : 'watch' }}"></span>
 				<span class="u-mask">{{ intl.togglePasswordVisibility }}</span>
 			</button>
 		</div>

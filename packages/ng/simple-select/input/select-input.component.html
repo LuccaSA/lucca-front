@@ -7,7 +7,7 @@
 		[attr.aria-activedescendant]="activeDescendant$ | async"
 		[attr.aria-expanded]="isPanelOpen"
 		[attr.aria-controls]="ariaControls"
-		placeholder="{{inputPlaceholder}}"
+		placeholder="{{ inputPlaceholder }}"
 		[ngModel]="clue"
 		(ngModelChange)="clueChanged($event)"
 		[ngModelOptions]="{ standalone: true }"
@@ -22,19 +22,20 @@
 	<div class="simpleSelect-field-value">
 		<ng-container *ngTemplateOutlet="currentValueDisplayerTpl"></ng-container>
 	</div>
-	@if (!filterPillMode) { @if (clearable && hasValue() && (disabled$ | async) === false) {
-	<button
-		class="simpleSelect-field-clear clear"
-		role="button"
-		type="button"
-		(click)="clearValue($event)"
-		(keydown.space)="clearValue($event)"
-	>
-		<span class="u-mask">{{ intl.clear }}</span>
-	</button>
-	}
-	<lu-icon icon="arrowChevronBottom" class="simpleSelect-field-icon" />
-	<lu-icon icon="searchMagnifyingGlass" class="simpleSelect-field-icon mod-search" />
+	@if (!filterPillMode) {
+		@if (clearable && hasValue() && (disabled$ | async) === false) {
+			<button
+				class="simpleSelect-field-clear clear"
+				role="button"
+				type="button"
+				(click)="clearValue($event)"
+				(keydown.space)="clearValue($event)"
+			>
+				<span class="u-mask">{{ intl.clear }}</span>
+			</button>
+		}
+		<lu-icon icon="arrowChevronBottom" class="simpleSelect-field-icon" />
+		<lu-icon icon="searchMagnifyingGlass" class="simpleSelect-field-icon mod-search" />
 	}
 </div>
 <ng-container #filterPillPanelAnchor></ng-container>
