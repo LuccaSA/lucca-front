@@ -35,6 +35,7 @@ export abstract class AbstractDateComponent {
 	hideToday = input(false, { transform: booleanAttribute });
 	hasTodayButton = input(false, { transform: booleanAttribute });
 	clearable = input(null, { transform: booleanAttribute });
+	clearBehavior = input<'clear' | 'reset'>('clear');
 
 	mode = input<CalendarMode>('day');
 	hideWeekend = input(false, { transform: booleanAttribute });
