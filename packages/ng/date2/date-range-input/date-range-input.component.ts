@@ -87,6 +87,7 @@ export class DateRangeInputComponent extends AbstractDateComponent implements Co
 	// CVA stuff
 	#onChange?: (value: DateRange) => void;
 
+	initialValue = signal<DateRange | null>(undefined);
 	selectedRange = signal<DateRange | null>(null);
 
 	dateHovered = signal<Date | null>(null);
@@ -452,8 +453,13 @@ export class DateRangeInputComponent extends AbstractDateComponent implements Co
 	}
 
 	writeValue(dateRange: DateRange | DateRangeInput | null): void {
+		const _dateRange = transformDateRangeInputToDateRange(dateRange);
+
+		if (this.initialValue() === undefined) {
+			this.initialValue.set(_dateRange);
+		}
+
 		if (dateRange != null) {
-			const _dateRange = transformDateRangeInputToDateRange(dateRange);
 			this.selectedRange.set(_dateRange);
 			this.currentDate.set(startOfDay(dateRange.start));
 		} else {
@@ -473,9 +479,10 @@ export class DateRangeInputComponent extends AbstractDateComponent implements Co
 	}
 
 	clear(start: HTMLInputElement, end: HTMLInputElement) {
+		const newValue = this.clearBehavior() === 'reset' ? this.initialValue() : null;
 		start.value = '';
 		end.value = '';
-		this.selectedRange.set(null);
+		this.selectedRange.set(newValue);
 		this.onTouched?.();
 		this.startTextInputRef().nativeElement.focus();
 	}

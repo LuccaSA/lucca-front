@@ -98,6 +98,7 @@ export class DateInputComponent extends AbstractDateComponent implements Control
 
 	selectedDate = signal<Date | null>(null);
 
+	initialValue = signal<Date | null>(undefined);
 	dateFromWriteValue = signal<Date | null>(null);
 
 	calendar = viewChild(Calendar2Component);
@@ -301,8 +302,13 @@ export class DateInputComponent extends AbstractDateComponent implements Control
 	}
 
 	writeValue(date: Date | string | null): void {
+		const _date = transformDateInputToDate(date);
+
+		if (this.initialValue() === undefined) {
+			this.initialValue.set(_date);
+		}
+
 		if (date != null) {
-			const _date = transformDateInputToDate(date);
 			const start = startOfDay(_date);
 			this.dateFromWriteValue.set(start);
 			this.selectedDate.set(start);
@@ -323,15 +329,17 @@ export class DateInputComponent extends AbstractDateComponent implements Control
 		super.setDisabledState(isDisabled);
 	}
 
-	reset() {
+	reset(): Date | null {
+		const newValue = this.clearBehavior() === 'reset' ? this.initialValue() : null;
 		this.inputRef().nativeElement.value = '';
-		this.dateFromWriteValue.set(null);
-		this.selectedDate.set(null);
+		this.dateFromWriteValue.set(newValue);
+		this.selectedDate.set(newValue);
+		return newValue;
 	}
 
 	clear() {
-		this.reset();
-		this.#onChange?.(null);
+		const newValue = this.reset();
+		this.#onChange?.(newValue);
 		this.onTouched?.();
 	}
 
