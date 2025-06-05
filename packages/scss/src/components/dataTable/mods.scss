@@ -6,13 +6,10 @@
 @use '@lucca-front/scss/src/components/title/exports' as title;
 
 @mixin cellBorder {
-	--components-dataTable-cell-shadow: 0 1px inset var(--commons-border-200), 1px 0 inset var(--commons-border-200);
-
-	.dataTable-head-row {
-		&:first-child {
-			.dataTable-head-row-cell {
-				--components-dataTable-cell-shadow: 1px 0 inset var(--commons-border-200);
-			}
+	.dataTable-head-row-cell,
+	.dataTable-body-row-cell {
+		&:not(:first-child) {
+			--components-dataTable-cell-shadow: 0 1px inset var(--commons-border-200), 1px 0 inset var(--commons-border-200);
 		}
 	}
 }
