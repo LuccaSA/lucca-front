@@ -50,13 +50,9 @@
 
 			& + .comment-infos-date {
 				&::before {
-					content: var(--components-comment-info-separator);
 					color: var(--palettes-neutral-400);
 					padding-inline: 1ch;
-
-					@supports (content: '*' / '') {
-						content: var(--components-comment-info-separator) / '';
-					}
+					content: var(--components-comment-info-separator) / '';
 				}
 			}
 		}

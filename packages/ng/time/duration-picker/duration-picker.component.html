@@ -1,4 +1,4 @@
-<div [ngClass]="pickerClasses()" (copy)="copyHandler($event)" (paste)="pasteHandler($event)">
+<div [class]="pickerClasses()" (copy)="copyHandler($event)" (paste)="pasteHandler($event)">
 	<fieldset class="timePicker-fieldset" [disabled]="disabled()">
 		<legend><span class="u-mask">{{ label }}</span></legend>
 		<lu-time-picker-part
@@ -14,7 +14,7 @@
 			(nextRequest)="focusPart('minutes')"
 			(inputControlClick)="inputControlClickHandler('hours', $event)"
 		/>
-		<div aria-hidden="true" [ngClass]="fieldsetSuffixClasses()">{{ separator }}</div>
+		<div aria-hidden="true" [class]="fieldsetSuffixClasses()">{{ separator }}</div>
 		<lu-time-picker-part
 			#minutesPart
 			class="timePicker-fieldset-group"

@@ -33,3 +33,8 @@
 	--components-tag-shadow: var(--palettes-300, var(--palettes-neutral-300));
 	--components-tag-background: transparent;
 }
+
+@mixin product {
+	--components-tag-background: var(--palettes-100, var(--palettes-product-100));
+	--components-tag-color: var(--palettes-800, var(--palettes-product-800));
+}

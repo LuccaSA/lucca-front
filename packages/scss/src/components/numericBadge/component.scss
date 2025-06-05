@@ -21,7 +21,7 @@
 	&:empty {
 		&::before {
 			// stylelint-disable-next-line no-irregular-whitespace -- Don’t wrap content because of a space.
-			content: ' ';
+			content: ' ' / '';
 		}
 	}
 

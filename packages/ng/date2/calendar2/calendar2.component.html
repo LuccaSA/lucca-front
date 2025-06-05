@@ -26,7 +26,7 @@
 					(mouseenter)="day.isOverflow ? null : dateHovered.set(day.date)"
 					(mouseleave)="day.isOverflow ? null : dateHovered.set(null)"
 					[attr.aria-selected]="day.isSelected && !day.isOverflow"
-					[ngClass]="day.ngClasses"
+					[class]="day.classes"
 				>
 					@if (!day.noButton) {
 					<button
@@ -100,7 +100,7 @@
 					[attr.aria-selected]="month.status.selected || !!month.rangeInfo?.range"
 					(mouseenter)="dateHovered.set(month.date)"
 					(mouseleave)="dateHovered.set(null)"
-					[ngClass]="month.ngClasses"
+					[class]="month.classes"
 				>
 					<button
 						class="calendar-table-body-row-cell-action"
@@ -141,7 +141,7 @@
 					[attr.aria-selected]="year.status.selected || !!year.rangeInfo?.range"
 					(mouseenter)="dateHovered.set(year.date)"
 					(mouseleave)="dateHovered.set(null)"
-					[ngClass]="year.ngClasses"
+					[class]="year.classes"
 				>
 					<button
 						class="calendar-table-body-row-cell-action"

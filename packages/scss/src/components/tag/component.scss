@@ -20,7 +20,7 @@
 
 	&,
 	&:is(a, button) {
-		color: var(--palettes-800, var(--pr-t-color-text));
+		color: var(--components-tag-color);
 	}
 
 	.lucca-icon {

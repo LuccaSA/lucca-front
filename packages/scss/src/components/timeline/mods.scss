@@ -165,8 +165,8 @@
 			counter-increment: timeline;
 
 			&::before {
-				content: counter(timeline);
-				font-size: var(--pr-t-font-body-XS-fontSize);
+				content: counter(timeline) / '';
+        font-size: var(--pr-t-font-body-XS-fontSize);
 				line-height: 1;
 			}
 		}

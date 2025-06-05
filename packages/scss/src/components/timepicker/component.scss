@@ -156,13 +156,13 @@
 
 			&:has(.timePicker-fieldset-meridiem-ante-input:checked) {
 				&::after {
-					content: 'AM';
+					content: 'AM' / '';
 				}
 			}
 
 			&:has(.timePicker-fieldset-meridiem-post-input:checked) {
 				&::after {
-					content: 'PM';
+					content: 'PM' / '';
 				}
 			}
 		}

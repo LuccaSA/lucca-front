@@ -76,7 +76,8 @@
 		visibility: hidden;
 
 		&::after {
-			content: ' ';
+			/* stylelint-disable-next-line no-irregular-whitespace */
+			content: ' ' / '';
 		}
 	}
 }

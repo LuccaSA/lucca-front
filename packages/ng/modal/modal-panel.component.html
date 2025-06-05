@@ -4,9 +4,9 @@
 	role="dialog"
 	aria-modal="true"
 	[attr.aria-labelledby]="'luModalTitle' + modalId"
-	[ngClass]="modalClasses.panelInner"
+	[class]="modalClasses.panelInner"
 >
-	<div [ngClass]="modalClasses.panelContainer" role="document">
+	<div [class]="modalClasses.panelContainer" role="document">
 		<div class="lu-modal-header" tabindex="-1" cdkFocusInitial>
 			<button type="button" class="button mod-onlyIcon mod-text mod-S lu-modal-header-close" (click)="dismiss()" [luTooltip]="closeLabel">
 				<span aria-hidden="true" class="lucca-icon icon-signClose"></span>
@@ -23,7 +23,7 @@
 				*ngIf="!isSubmitHidden"
 				class="button palette-{{ submitPalette }}"
 				[disabled]="submitDisabled$ | async"
-				[ngClass]="submitClass$ | async"
+				[class]="submitClass$ | async"
 				(click)="submit()"
 			>
 				{{ submitLabel$ | async }}
