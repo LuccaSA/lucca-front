@@ -3,9 +3,9 @@ import { FormsModule } from '@angular/forms';
 import { DateInputComponent } from '@lucca-front/ng/date2';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { expect, screen, userEvent, within } from '@storybook/test';
 import { cleanupTemplate, generateInputs } from '../../../../helpers/stories';
 import { StoryModelDisplayComponent } from '../../../../helpers/story-model-display.component';
-import { expect, within, screen, userEvent } from '@storybook/test';
 import { expectNgModelDisplay, waitForAngular } from '../../../../helpers/test';
 
 export default {
@@ -46,6 +46,10 @@ export default {
 		clearable: {
 			control: 'boolean',
 		},
+		clearBehavior: {
+			control: 'select',
+			options: ['clear', 'reset'],
+		},
 		mode: {
 			control: 'select',
 			options: ['day', 'month', 'year'],
@@ -55,7 +59,7 @@ export default {
 		const { label, hiddenLabel, tooltip, inlineMessage, inlineMessageState, size, min, max, selected, ...flags } = args;
 		return {
 			props: {
-				selected: selected || new Date(),
+				selected,
 				min: min ? new Date(min) : null,
 				max: max ? new Date(max) : null,
 			},
@@ -70,7 +74,7 @@ export default {
 				},
 				argTypes,
 			)}>
-<lu-date-input [(ngModel)]="selected" [min]="min" [max]="max" ${generateInputs(flags, argTypes)}></lu-date-input>
+<lu-date-input [(ngModel)]="selected" [min]="min" [max]="max" autocomplete="false" ${generateInputs(flags, argTypes)}></lu-date-input>
 </lu-form-field>
 <pr-story-model-display>{{selected}}</pr-story-model-display>`),
 		};
@@ -127,7 +131,7 @@ async function pickDay(input: HTMLElement, targetDay: number) {
 	await userEvent.click(calendar.getByText(targetDay.toString()));
 }
 
-export const Basic: StoryObj<DateInputComponent & FormFieldComponent> = {
+export const Basic: StoryObj<DateInputComponent & FormFieldComponent & { selected: Date }> = {
 	args: {
 		// FormField
 		label: 'Label',
@@ -142,6 +146,9 @@ export const Basic: StoryObj<DateInputComponent & FormFieldComponent> = {
 		hasTodayButton: false,
 		hideWeekend: false,
 		clearable: false,
+		clearBehavior: 'clear',
 		mode: 'day',
+		// Underlying ngModel
+		selected: new Date(),
 	},
 };
