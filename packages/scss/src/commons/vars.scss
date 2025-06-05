@@ -37,7 +37,7 @@
 		@include core.cssvars('pr-t-elevation-#{$key}', $map);
 	}
 
-		// TOKENS : SPACINGS
+	// TOKENS : SPACINGS
 
 	@include core.cssvars('pr-t-spacings', config.$spacings);
 	--pr-t-spacings-auto: auto;
@@ -46,6 +46,7 @@
 
 	@include core.cssvars('pr-t-color-input', config.$colorInput);
 	--pr-t-color-text: var(--palettes-neutral-800);
+
 	@include core.cssvars('pr-t-color-text', config.$colorText);
 	--pr-t-radius-input: var(--commons-borderRadius-M);
 

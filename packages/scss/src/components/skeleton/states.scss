@@ -37,7 +37,7 @@
 				min-block-size: 1.25rem;
 			}
 
-			@elseif ($title == '6') {
+			@else if ($title == '6') {
 				line-height: 1rem;
 				min-block-size: 1rem;
 			}
