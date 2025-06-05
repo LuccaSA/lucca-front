@@ -331,7 +331,6 @@ export class DateInputComponent extends AbstractDateComponent implements Control
 
 	reset(): Date | null {
 		const newValue = this.clearBehavior() === 'reset' ? this.initialValue() : null;
-		this.inputRef().nativeElement.value = '';
 		this.dateFromWriteValue.set(newValue);
 		this.selectedDate.set(newValue);
 		return newValue;
