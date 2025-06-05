@@ -2,5 +2,6 @@
 	padding: var(--commons-container-padding);
 	max-inline-size: var(--commons-container-maxWidth);
 	margin-inline: var(--commons-container-marginInline);
-	position: relative;
+	position: var(--components-container-position);
+	inset-inline-start: var(--components-container-insetInlineStart);
 }

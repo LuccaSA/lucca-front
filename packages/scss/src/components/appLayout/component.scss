@@ -3,14 +3,15 @@
 @use '@lucca-front/scss/src/commons/utils/a11y';
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
-	block-size: 100dvh;
-	overflow: auto;
-	display: grid;
+	block-size: var(--components-appLayout-blockSize);
+	inline-size: var(--components-appLayout-inlineSize);
 	grid-template: var(--components-appLayout-gridTemplate);
+	display: grid;
 
 	@at-root ($atRoot) {
 		.appLayout-banner {
 			grid-area: banner;
+			block-size: var(--components-appLayout-banner-blockSize);
 
 			&:empty {
 				display: none;
@@ -21,6 +22,7 @@
 			grid-area: navSide;
 			overflow-y: auto;
 			overflow-x: hidden;
+			inline-size: var(--components-appLayout-navSide-inlineSize);
 
 			&:focus-visible {
 				@include a11y.focusVisible(-4px);
@@ -37,6 +39,10 @@
 
 			&:focus-visible {
 				@include a11y.focusVisible(-4px);
+			}
+
+			&:has(.mainLayout) {
+				display: contents;
 			}
 		}
 	}

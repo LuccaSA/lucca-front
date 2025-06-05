@@ -31,4 +31,16 @@
 	&.mod-maxXXXL {
 		@include maxXXXL;
 	}
+
+	&.mod-sticky {
+		@include sticky;
+	}
+
+	&.mod-overflow {
+		@include overflow;
+	}
+
+	&.mod-siblings {
+		@include siblings;
+	}
 }

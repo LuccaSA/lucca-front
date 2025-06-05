@@ -1,4 +1,7 @@
 @mixin vars {
+	--components-container-position: relative;
+	--components-container-insetInlineStart: auto;
+
 	// for this component some variables are placed in common
 
 	// --components-container-max-width is deprecated

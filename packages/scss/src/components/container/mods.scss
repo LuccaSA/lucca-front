@@ -25,3 +25,19 @@
 @mixin maxXXXL {
 	--commons-container-maxWidth: var(--commons-container-maxWidthXXXL);
 }
+
+@mixin sticky {
+	--components-container-position: sticky;
+	--components-container-insetInlineStart: 0px;
+}
+
+@mixin overflow {
+	--components-container-position: relative;
+	--commons-container-maxWidth: none;
+}
+
+@mixin siblings {
+	& + & {
+		padding-block-start: 0;
+	}
+}

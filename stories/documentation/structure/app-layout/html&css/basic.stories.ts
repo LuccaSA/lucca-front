@@ -2,36 +2,23 @@ import { Meta } from '@storybook/angular';
 import { cleanupTemplate } from 'stories/helpers/stories';
 
 interface AppLayoutHTMLBasicStory {
-	banner: boolean;
-	navSide: boolean;
 	mobileNavSideBottom: boolean;
-	mainWithScroll: boolean;
-	navSideWithScroll: boolean;
 }
 
 export default {
 	title: 'Documentation/Structure/App Layout/HTML&CSS/Basic',
-	argTypes: {
-		mobileNavSideBottom: {
-			if: { arg: 'navSide', truthy: true },
-		},
-		navSideWithScroll: {
-			if: { arg: 'navSide', truthy: true },
-		},
-	},
+	argTypes: {},
 	render: (args: AppLayoutHTMLBasicStory) => {
-		const img = `<img src="https://dummyimage.com/200x1000" class="u-displayBlock u-alignSelfFlexStart" alt="" />`;
-		const mainImg = args.mainWithScroll ? img : ``;
-		const navSideImg = args.navSideWithScroll ? img : ``;
-		const bannerContainer = args.banner ? `<div class="appLayout-banner">banner</div>` : ``;
-		const navSideContainer = args.navSide ? `<div class="appLayout-navSide">navSide${navSideImg}</div>` : ``;
 		const mobileNavSideBottomAttribute = args.mobileNavSideBottom ? `mod-mobileNavSideBottom` : ``;
 
 		return {
 			styles: [
 				`
 .appLayout {
-	block-size: 25rem;
+	--components-appLayout-blockSize: 28.125rem;
+	--components-appLayout-inlineSize: 50rem;
+	--components-appLayout-navSide-inlineSize: 7.5rem;
+
 	border: 1px dashed;
 	box-sizing: content-box;
 }
@@ -46,10 +33,10 @@ export default {
 			],
 			template: cleanupTemplate(`
 <div class="appLayout ${mobileNavSideBottomAttribute}">
-	${bannerContainer}
-	${navSideContainer}
+	<div class="appLayout-banner">banner</div>
+	<div class="appLayout-navSide">navSide</div>
 	<div class="appLayout-main">
-    main${mainImg}
+    main
 	</div>
 </div>
 `),
@@ -59,10 +46,6 @@ export default {
 
 export const Basic = {
 	args: {
-		banner: true,
-		navSide: true,
 		mobileNavSideBottom: false,
-		navSideWithScroll: false,
-		mainWithScroll: false,
 	},
 };

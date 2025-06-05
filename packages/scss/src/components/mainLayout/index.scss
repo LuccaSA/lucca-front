@@ -5,6 +5,10 @@
 	@include vars;
 	@include component;
 
+	&:has(.container.mod-overflow) {
+		@include hasContainerWithOverflow;
+	}
+
 	@include media.min('S') {
 		&:has(.mainLayout-sidebar:not(:empty)) {
 			@include sidebarWide;

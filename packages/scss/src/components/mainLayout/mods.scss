@@ -1,7 +1,11 @@
 @mixin sidebarWide {
+	--components-mainLayout-sidebar-inlineSize: 10rem;
 	--components-mainLayoutGridTemplate: "sidebar header "  auto
 																			 "sidebar content"  1fr
 																			 "sidebar footer "  auto
 																			/ auto    1fr;
 }
 
+@mixin hasContainerWithOverflow {
+	--components-mainLayout-headerFooter-inlineSize: var(--components-mainLayout-widthCalculated, calc(var(--components-appLayout-inlineSize, 100dvw) - var(--components-appLayout-navSide-inlineSize, 0px) - var(--components-mainLayout-scrollbar-sizeFallBack)));
+}

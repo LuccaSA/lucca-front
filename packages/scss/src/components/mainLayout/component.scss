@@ -1,49 +1,83 @@
 
 @use '@lucca-front/scss/src/commons/utils/namespace';
 @use '@lucca-front/scss/src/commons/utils/a11y';
+@use '@lucca-front/scss/src/components/container/exports' as container;
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
 	display: grid;
 	grid-template: var(--components-mainLayoutGridTemplate);
-	height: 100%;
+	overflow: auto;
+
+	.appLayout-main & {
+		grid-area: main;
+		overflow: auto;
+
+		&:focus-visible {
+			@include a11y.focusVisible(-4px);
+		}
+	}
 
 	@at-root ($atRoot) {
+		.mainLayout-header,
+		.mainLayout-footer {
+			inset-inline-start: var(--components-mainLayout-sidebar-inlineSize);
+			z-index: 1;
+			position: sticky;
+			inline-size: calc(var(--components-mainLayout-headerFooter-inlineSize) - var(--components-mainLayout-sidebar-inlineSize));
+		}
+
 		.mainLayout-header {
 			grid-area: header;
 
 			&:empty {
 				display: none;
 			}
+
+			&.mod-sticky {
+				inset-block-start: 0;
+			}
+		}
+
+		.mainLayout-footer {
+			grid-area: footer;
+
+			&:empty {
+				display: none;
+			}
+
+			&.mod-sticky {
+				inset-block-end: 0;
+			}
 		}
 
 		.mainLayout-content {
 			grid-area: content;
-			overflow: auto;
-			display: flex;
-			flex-direction: column;
-			position: relative;
 
-			&:focus-visible {
-				@include a11y.focusVisible(-4px);
-			}
+
+		}
+
+		.mainLayout-content-container.container {
+			@include container.S;
+			@include container.sticky;
+			@include container.siblings;
+
+			--components-container-insetInlineStart: var(--components-mainLayout-sidebar-inlineSize);
 		}
 
 		.mainLayout-sidebar {
 			grid-area: sidebar;
 			overflow-y: auto;
 			overflow-x: hidden;
+			block-size: calc(var(--components-appLayout-blockSize) - 50px);
+			inline-size: var(--components-mainLayout-sidebar-inlineSize);
+			position: sticky;
+			inset-block-start: 0;
+			inset-inline-start: 0;
+			z-index: 2;
 
 			&:focus-visible {
 				@include a11y.focusVisible(-4px);
 			}
-
-			&:empty {
-				display: none;
-			}
-		}
-
-		.mainLayout-footer {
-			grid-area: footer;
 
 			&:empty {
 				display: none;

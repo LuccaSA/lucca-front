@@ -1,6 +1,12 @@
 @mixin vars {
+	--components-appLayout-blockSize: 100dvh;
+	--components-appLayout-inlineSize: 100dvw;
+
+	--components-appLayout-banner-blockSize: var(--commons-banner-height);
+	--components-appLayout-navSide-inlineSize: var(--commons-navSide-width);
+
 	--components-appLayout-gridTemplate: "banner " auto
-																				"navSide" auto
-																				"main   " 1fr;
+																			 "navSide" auto
+																			 "main   " 1fr;
 
 }
