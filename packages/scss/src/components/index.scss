@@ -103,6 +103,8 @@
 @forward 'fileUpload';
 @forward 'fileEntry';
 @forward 'fileToolbar';
+@forward 'appLayout';
+@forward 'mainLayout';
 
 // Deprecated CSS components
 // @forward 'tableFixedDeprecated'; // 33 Ko

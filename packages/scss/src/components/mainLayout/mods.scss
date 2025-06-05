@@ -1,0 +1,17 @@
+@mixin sidebar {
+	--components-mainLayout-sidebar-blockSize: auto;
+	--components-mainLayout-gridTemplate: "sidebar"  auto
+																				"header "  auto
+																				"content"  1fr
+																				"footer "  auto
+																			 / 1fr;
+}
+
+@mixin sidebarWide {
+	--components-mainLayout-sidebar-blockSize: calc(var(--components-appLayout-minBlockSize) - var(--components-appLayout-before));
+	--components-mainLayout-gridTemplate: "sidebar header "  auto
+																			  "sidebar content"  1fr
+																			  "sidebar footer "  auto
+																			 / auto    1fr;
+}
+

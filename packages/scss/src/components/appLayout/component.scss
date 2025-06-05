@@ -1,0 +1,55 @@
+
+@use '@lucca-front/scss/src/commons/utils/namespace';
+@use '@lucca-front/scss/src/commons/utils/a11y';
+
+@mixin component($atRoot: namespace.$defaultAtRoot) {
+	min-block-size: var(--components-appLayout-minBlockSize);
+	display: grid;
+	grid-template: var(--components-appLayout-gridTemplate);
+
+	@at-root ($atRoot) {
+		.appLayout {
+			display: contents;
+		}
+
+		.appLayout-banner {
+			grid-area: banner;
+			position: sticky;
+			inset-block-start: 0;
+			inset-inline-start: 0;
+			z-index: 9000;
+			block-size: var(--components-appLayout-banner-blockSize);
+			inline-size: var(--components-appLayout-banner-inlineSize);
+
+			&:empty {
+				display: none;
+			}
+		}
+
+		.appLayout-navSide {
+			grid-area: navSide;
+			position: sticky;
+			inset-block: var(--components-appLayout-navSide-insetBlock);
+			inset-inline-start: 0;
+			z-index: 100;
+			block-size: var(--components-appLayout-navSide-blockSize);
+			inline-size: var(--components-appLayout-navSide-inlineSize);
+			overflow-x: var(--components-appLayout-navSide-overflowX);
+			overflow-y: var(--components-appLayout-navSide-overflowY);
+			display: flex;
+			flex-direction: column;
+
+			&:empty {
+				display: none;
+			}
+		}
+
+		.appLayout-main {
+			grid-area: main;
+
+			&:empty {
+				display: none;
+			}
+		}
+	}
+}
