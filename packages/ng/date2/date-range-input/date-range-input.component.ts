@@ -463,7 +463,7 @@ export class DateRangeInputComponent extends AbstractDateComponent implements Co
 			this.selectedRange.set(_dateRange);
 			this.currentDate.set(startOfDay(dateRange.start));
 		} else {
-			this.clear(this.startTextInputRef().nativeElement, this.endTextInputRef().nativeElement);
+			this.clear();
 		}
 	}
 
@@ -478,10 +478,8 @@ export class DateRangeInputComponent extends AbstractDateComponent implements Co
 		super.setDisabledState(isDisabled);
 	}
 
-	clear(start: HTMLInputElement, end: HTMLInputElement) {
+	clear() {
 		const newValue = this.clearBehavior() === 'reset' ? this.initialValue() : null;
-		start.value = '';
-		end.value = '';
 		this.selectedRange.set(newValue);
 		this.onTouched?.();
 		this.startTextInputRef().nativeElement.focus();
@@ -519,7 +517,7 @@ export class DateRangeInputComponent extends AbstractDateComponent implements Co
 	}
 
 	clearFilterPillValue(): void {
-		this.clear(this.startTextInputRef().nativeElement, this.endTextInputRef().nativeElement);
+		this.clear();
 	}
 
 	getDefaultFilterPillIcon(): LuccaIcon {
