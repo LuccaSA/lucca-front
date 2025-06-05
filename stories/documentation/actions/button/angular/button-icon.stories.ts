@@ -2,8 +2,8 @@ import { ButtonComponent } from '@lucca-front/ng/button';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { expect, within } from '@storybook/test';
-import { generateInputs } from 'stories/helpers/stories';
-import { Basic as ButtonBasic } from './button-basic.stories';
+import { createTestStory, generateInputs } from 'stories/helpers/stories';
+import { BasicTEST as ButtonBasic } from './button-basic.stories';
 
 export default {
 	title: 'Documentation/Actions/Button/Angular/Icon',
@@ -49,16 +49,6 @@ export const Basic: StoryObj<ButtonComponent & { label: string }> = {
 			},
 		},
 	},
-	play: async (context) => {
-		const canvas = within(context.canvasElement);
-		await ButtonBasic.play(context);
-		const button = await canvas.findByRole('button');
-		if (context.args.label) {
-			await expect(button).toHaveClass('mod-withIcon');
-		} else {
-			await expect(button).toHaveClass('mod-onlyIcon');
-		}
-	},
 	args: {
 		block: false,
 		palette: 'none',
@@ -69,3 +59,14 @@ export const Basic: StoryObj<ButtonComponent & { label: string }> = {
 		disclosure: false,
 	},
 };
+
+export const BasicTEST = createTestStory(Basic, async (context) => {
+	const canvas = within(context.canvasElement);
+	await ButtonBasic.play(context);
+	const button = await canvas.findByRole('button');
+	if (context.args.label) {
+		await expect(button).toHaveClass('mod-withIcon');
+	} else {
+		await expect(button).toHaveClass('mod-onlyIcon');
+	}
+});
