@@ -14,6 +14,8 @@
 	inline-size: var(--components-button-width);
 	min-inline-size: var(--components-button-minWidth);
 	font: var(--components-button-font);
+	font-size: var(--components-button-font-size); // Deprecated
+	line-height: var(--components-button-line-height); // Deprecated
 	font-weight: var(--pr-t-font-fontWeight-semibold);
 	gap: var(--components-button-gap);
 	pointer-events: var(--components-button-pointerEvents);

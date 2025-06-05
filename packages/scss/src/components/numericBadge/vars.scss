@@ -5,4 +5,8 @@
 	--components-numericBadge-size: 1.5rem;
 	--components-numericBadge-font: var(--pr-t-font-body-S);
 	--components-numericBadge-borderRadius: var(--commons-borderRadius-L);
+
+	// Deprecated
+	--components-numericBadge-fontSize: var(--pr-t-font-body-S-fontSize);
+	--components-numericBadge-lineHeight: var(--pr-t-font-body-S-lineHeight);
 }

@@ -1,4 +1,8 @@
 @mixin vars {
 	--components-radioButtons-padding: var(--pr-t-spacings-100) var(--pr-t-spacings-200);
 	--components-radioButtons-font: var(--pr-t-font-body-M);
+
+	// Depracated
+	--components-radioButtons-font-size: var(--pr-t-font-body-M-fontSize);
+	--components-radioButtons-line-height: var(--pr-t-font-body-M-lineHeight);
 }

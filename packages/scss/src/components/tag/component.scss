@@ -17,6 +17,8 @@
 	white-space: nowrap;
 	border: 0;
 	font: var(--components-tag-font);
+	font-size: var(--components-tag-fontSize); // Deprecated
+	line-height: var(--components-tag-lineHeight); // Deprecated
 
 	&,
 	&:is(a, button) {

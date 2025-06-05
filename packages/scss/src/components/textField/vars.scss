@@ -13,4 +13,8 @@
 	--component-textField-maxHeightFallback: 90vh;
 	--component-textField-borderRadius: var(--commons-borderRadius-M);
 	--component-textField-width: auto;
+
+	// Deprecated
+	--component-textField-fontSize: var(--pr-t-font-body-M-fontSize);
+	--component-textField-lineHeight: var(--pr-t-font-body-M-lineHeight);
 }

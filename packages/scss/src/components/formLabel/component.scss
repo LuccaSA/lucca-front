@@ -8,6 +8,8 @@
 	position: relative;
 	color: var(--components-formLabel-color);
 	font: var(--components-formLabel-font);
+	font-size: var(--components-formLabel-fontSize); // Deprecated
+	line-height: var(--components-formLabel-lineHeight); // Deprecated
 	inline-size: var(--components-formLabel-width);
 	padding-inline-end: var(--components-formLabel-paddingRight);
 	cursor: var(--components-formLabel-cursor);

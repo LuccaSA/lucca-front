@@ -9,6 +9,8 @@
 	display: flex;
 	flex-direction: column;
 	font: var(--components-calloutFeedbackList-font);
+	font-size: var(--components-calloutFeedbackList-fontSize); // Deprecated
+	line-height: var(--components-calloutFeedbackList-lineHeight); // Deprecated
 	gap: var(--components-calloutFeedbackList-gap);
 
 	.button {

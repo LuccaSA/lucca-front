@@ -6,4 +6,8 @@
 	--components-formLabel-paddingRight: 0;
 	--components-formLabel-width: fit-content;
 	--components-formLabel-cursor: default;
+
+	// Deprecated
+	--components-formLabel-fontSize: var(--pr-t-font-body-M-fontSize);
+	--components-formLabel-lineHeight: var(--pr-t-font-body-M-lineHeight);
 }

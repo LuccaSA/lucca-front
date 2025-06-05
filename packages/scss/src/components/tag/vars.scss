@@ -5,4 +5,8 @@
 	--components-tag-font: var(--pr-t-font-body-S);
 	--components-tag-decoration: none;
 	--components-tag-cursor: inherit;
+
+	// Deprecated
+	--components-tag-fontSize: var(--pr-t-font-body-S-fontSize);
+	--components-tag-lineHeight: var(--pr-t-font-body-S-lineHeight);
 }
