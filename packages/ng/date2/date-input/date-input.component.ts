@@ -10,15 +10,17 @@ import {
 	forwardRef,
 	HostBinding,
 	inject,
+	Injector,
 	input,
+	OnInit,
 	signal,
 	untracked,
 	viewChild,
 	ViewEncapsulation,
 } from '@angular/core';
-import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validator } from '@angular/forms';
+import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, NgControl, NgModel, Validator } from '@angular/forms';
 import { LuccaIcon } from '@lucca-front/icons';
-import { LuClass, ɵeffectWithDeps } from '@lucca-front/ng/core';
+import { isNil, LuClass, ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { FILTER_PILL_INPUT_COMPONENT, FilterPillDisplayerDirective, FilterPillInputComponent } from '@lucca-front/ng/filter-pills';
 import { InputDirective } from '@lucca-front/ng/form-field';
 import { IconComponent } from '@lucca-front/ng/icon';
@@ -65,7 +67,10 @@ export type DateInputValidatorErrorType = {
 		LuClass,
 	],
 })
-export class DateInputComponent extends AbstractDateComponent implements ControlValueAccessor, Validator, FilterPillInputComponent {
+export class DateInputComponent extends AbstractDateComponent implements OnInit, ControlValueAccessor, Validator, FilterPillInputComponent {
+	#injector = inject(Injector);
+	#ngControl: NgControl; // Initialized in ngOnInit
+
 	// CVA stuff
 	#onChange?: (value: Date | null) => void;
 
@@ -222,6 +227,10 @@ export class DateInputComponent extends AbstractDateComponent implements Control
 		});
 	}
 
+	ngOnInit() {
+		this.#ngControl = this.#injector.get(NgControl);
+	}
+
 	#safeCompareDate(a: Date, b: Date): boolean {
 		return a === b || (!!a && !!b && isSameDay(a, b));
 	}
@@ -302,6 +311,12 @@ export class DateInputComponent extends AbstractDateComponent implements Control
 	}
 
 	writeValue(date: Date | string | null): void {
+		if (this.#ngControl instanceof NgModel && isNil(this.#onChange)) {
+			// avoid phantom call for ngModel
+			// https://github.com/angular/angular/issues/14988#issuecomment-1310420293
+			return;
+		}
+
 		const _date = transformDateInputToDate(date);
 
 		if (this.initialValue() === undefined) {

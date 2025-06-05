@@ -11,8 +11,10 @@ import {
 	forwardRef,
 	HostBinding,
 	inject,
+	Injector,
 	Input,
 	input,
+	OnInit,
 	Signal,
 	signal,
 	untracked,
@@ -21,9 +23,9 @@ import {
 	ViewEncapsulation,
 } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors, Validator } from '@angular/forms';
+import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, NgControl, NgModel, ValidationErrors, Validator } from '@angular/forms';
 import { LuccaIcon } from '@lucca-front/icons';
-import { LuClass, PortalContent, PortalDirective, ɵeffectWithDeps } from '@lucca-front/ng/core';
+import { isNil, LuClass, PortalContent, PortalDirective, ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { FILTER_PILL_INPUT_COMPONENT, FilterPillDisplayerDirective, FilterPillInputComponent } from '@lucca-front/ng/filter-pills';
 import { FORM_FIELD_INSTANCE, InputDirective } from '@lucca-front/ng/form-field';
 import { IconComponent } from '@lucca-front/ng/icon';
@@ -69,7 +71,9 @@ let nextId = 0;
 		LuClass,
 	],
 })
-export class DateRangeInputComponent extends AbstractDateComponent implements ControlValueAccessor, Validator, FilterPillInputComponent {
+export class DateRangeInputComponent extends AbstractDateComponent implements OnInit, ControlValueAccessor, Validator, FilterPillInputComponent {
+	#injector = inject(Injector);
+	#ngControl: NgControl; // Initialized in ngOnInit
 	#luClass = inject(LuClass);
 
 	#formFieldRef = inject(FORM_FIELD_INSTANCE, { optional: true });
@@ -275,6 +279,10 @@ export class DateRangeInputComponent extends AbstractDateComponent implements Co
 		});
 	}
 
+	ngOnInit() {
+		this.#ngControl = this.#injector.get(NgControl);
+	}
+
 	getNextCalendarDate(date: Date): Date {
 		switch (this.mode()) {
 			case 'day':
@@ -453,6 +461,11 @@ export class DateRangeInputComponent extends AbstractDateComponent implements Co
 	}
 
 	writeValue(dateRange: DateRange | DateRangeInput | null): void {
+		if (this.#ngControl instanceof NgModel && isNil(this.#onChange)) {
+			// avoid phantom call for ngModel
+			// https://github.com/angular/angular/issues/14988#issuecomment-1310420293
+			return;
+		}
 		const _dateRange = transformDateRangeInputToDateRange(dateRange);
 
 		if (this.initialValue() === undefined) {
