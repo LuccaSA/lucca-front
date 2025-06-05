@@ -31,7 +31,7 @@ const icons = selection.icons
 
 const type = `${generatedWarning}export type LuccaIcon =\n\t| ${icons.map((icon) => `'${icon.camelCase}'`).join('\n\t| ')};\n`;
 
-writeFileSync(join(__dirname, './index.d.ts'), type);
+writeFileSync(join(__dirname, '../prisme/icon/icons.ts'), type);
 
 const list = `${generatedWarning}export const IconsList = [\n\t${icons
 	.map((icon) => `{ icon: '${icon.camelCase}', deprecated: ${icon.deprecated} }`)
