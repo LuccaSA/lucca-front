@@ -57,9 +57,7 @@
 		}
 
 		.mainLayout-content-container.container {
-			@include container.S;
-			@include container.sticky;
-			@include container.siblings;
+			@include container.stickyInline;
 
 			--components-container-insetInlineStart: var(--components-mainLayout-sidebar-inlineSize);
 		}

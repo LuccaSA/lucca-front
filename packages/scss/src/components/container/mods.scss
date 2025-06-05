@@ -26,7 +26,7 @@
 	--commons-container-maxWidth: var(--commons-container-maxWidthXXXL);
 }
 
-@mixin sticky {
+@mixin stickyInline {
 	--components-container-position: sticky;
 	--components-container-insetInlineStart: 0px;
 }
@@ -36,8 +36,3 @@
 	--commons-container-maxWidth: none;
 }
 
-@mixin siblings {
-	& + & {
-		padding-block-start: 0;
-	}
-}

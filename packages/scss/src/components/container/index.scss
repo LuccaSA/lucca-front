@@ -32,15 +32,11 @@
 		@include maxXXXL;
 	}
 
-	&.mod-sticky {
-		@include sticky;
+	&.mod-stickyInline {
+		@include stickyInline;
 	}
 
 	&.mod-overflow {
 		@include overflow;
-	}
-
-	&.mod-siblings {
-		@include siblings;
 	}
 }
