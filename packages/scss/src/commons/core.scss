@@ -33,8 +33,10 @@ $overflow: 'hidden', 'auto', 'visible', 'scroll';
 /* Tokens */
 
 @mixin spacing($boxModel, $boxDirection, $key, $value, $suffix: '!important') {
-	.pr-u-#{transform.camelize($boxModel)}#{transform.capitalize(transform.camelize($boxDirection))}#{transform.capitalize($key)} {
-		#{$boxModel}#{if($boxDirection == '', '', '-')}#{$boxDirection}: var(--pr-t-spacings-#{$key}) #{$suffix};
+	@if $boxModel != 'inset' or ($boxDirection != 'top' and $boxDirection != 'bottom' and $boxDirection != 'left' and $boxDirection != 'right') {
+		.pr-u-#{transform.camelize($boxModel)}#{transform.capitalize(transform.camelize($boxDirection))}#{transform.capitalize($key)} {
+			#{$boxModel}#{if($boxDirection == '', '', '-')}#{$boxDirection}: var(--pr-t-spacings-#{$key}) #{$suffix};
+		}
 	}
 }
 
