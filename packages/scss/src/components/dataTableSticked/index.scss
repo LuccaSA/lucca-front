@@ -40,4 +40,8 @@
 			@include stickyColumnBorder;
 		}
 	}
+
+	&:has(.mod-stickyHeader, .mod-stickyColumn) {
+		@include stickyShadowAnimated;
+	}
 }

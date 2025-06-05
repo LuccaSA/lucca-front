@@ -16,6 +16,7 @@
 			background-image: linear-gradient(#{color.transparentize(var(--palettes-neutral-400), 0.24)}, transparent);
 			pointer-events: none;
 			box-shadow: 0 1px var(--commons-border-200) inset;
+			opacity: var(--components-dataTable-shadow-headerOpacity, 1);
 		}
 	}
 }
@@ -96,19 +97,24 @@
 		background-image: linear-gradient(to right, #{color.transparentize(var(--palettes-neutral-400), 0.24)}, transparent);
 	}
 
-	%removeShadow {
-		content: none;
-	}
-
-	.dataTable-head-row-cell {
-		&.mod-stickyColumn {
-			&:first-child {
-				z-index: 1;
+	:is(.dataTable-head-row-cell, .dataTable-body-row-cell, .dataTable-foot-row-cell) {
+		&:nth-last-child(1 of .mod-stickyColumn:has(~ :not(.mod-stickyColumn))) {
+			&::after {
+				@extend %addShadow;
+				opacity: var(--components-dataTable-shadow-leftColumnOpacity, 1);
 			}
 		}
-	}
 
-	:is(.dataTable-head-row-cell, .dataTable-body-row-cell, .dataTable-foot-row-cell) {
+		&:nth-last-child(1 of :not(.mod-stickyColumn)) + .mod-stickyColumn {
+			&::after {
+				@extend %addShadow;
+				inset-inline-start: auto;
+				inset-inline-end: 100%;
+				transform: scaleX(-1);
+				opacity: var(--components-dataTable-shadow-rightColumnOpacity, 1);
+			}
+		}
+
 		&.mod-stickyColumn {
 			position: sticky;
 
@@ -117,56 +123,55 @@
 			}
 
 			&:last-child {
-				inset-inline-end: 0;
-
 				--components-dataTable-cell-shadow: 0 1px inset var(--commons-border-200), 1px 0 var(--palettes-neutral-0); // white shadow is for Chrome
-			}
-
-			&:has(~ :is(.dataTable-body-row-cell, .dataTable-head-row-cell, .dataTable-foot-row-cell):not(.mod-stickyColumn)) {
-				transform: translateX(-1px);
-
-				&:not(:has(+ :is(.dataTable-head-row-cell, .dataTable-body-row-cell, .dataTable-foot-row-cell).mod-stickyColumn)) {
-					&::after {
-						@extend %addShadow;
-					}
-				}
-			}
-		}
-
-		&:not(.mod-stickyColumn) {
-			~ :is(.dataTable-head-row-cell, .dataTable-body-row-cell, .dataTable-foot-row-cell).mod-stickyColumn {
-				&::after {
-					@extend %addShadow;
-
-					inset-inline-start: auto;
-					inset-inline-end: 100%;
-					transform: scaleX(-1);
-				}
-
-				& ~ :is(.dataTable-head-row-cell, .dataTable-body-row-cell, .dataTable-foot-row-cell).mod-stickyColumn {
-					&::after {
-						@extend %removeShadow;
-					}
-				}
+				inset-inline-end: 0;
 			}
 		}
 	}
 }
 
+
 @mixin stickyColumnBorder {
 	:is(.dataTable-head-row-cell, .dataTable-body-row-cell, .dataTable-foot-row-cell) {
 		&.mod-stickyColumn {
-			&:has(~ :is(.dataTable-body-row-cell, .dataTable-head-row-cell, .dataTable-foot-row-cell):not(.mod-stickyColumn)) {
-				&:not(:has(+ :is(.dataTable-body-row-cell, .dataTable-head-row-cell, .dataTable-foot-row-cell).mod-stickyColumn)) {
-					&::after {
-						--components-dataTable-cell-shadow: 1px 0 var(--commons-border-200) inset;
-					}
-				}
+			&:nth-last-child(1 of .mod-stickyColumn:has(~ :not(.mod-stickyColumn))) {
+				transform: translateX(-1px);
 			}
 
 			&:last-child {
 				--components-dataTable-cell-shadow: 0 1px inset var(--commons-border-200), 1px 0 inset var(--commons-border-200),
 					1px 0 var(--palettes-neutral-0); // white shadow is for Chrome
+			}
+		}
+	}
+}
+
+@mixin stickyShadowAnimated {
+	@supports(animation-timeline: --stickyColumnShadow) {
+		animation: stickyColumnShadow, stickyHeaderShadow;
+		animation-timeline: --stickyColumnShadow, --stickyHeaderShadow;
+		scroll-timeline: --stickyColumnShadow x, --stickyHeaderShadow y;
+
+		@keyframes stickyColumnShadow {
+			0% {
+				--components-dataTable-shadow-leftColumnOpacity: 0;
+			}
+			10%, 100% {
+				--components-dataTable-shadow-leftColumnOpacity: 100;
+			}
+			0%, 90% {
+				--components-dataTable-shadow-rightColumnOpacity: 100;
+			}
+			100% {
+				--components-dataTable-shadow-rightColumnOpacity: 0;
+			}
+		}
+		@keyframes stickyHeaderShadow {
+			0% {
+				--components-dataTable-shadow-headerOpacity: 0;
+			}
+			10%, 100% {
+				--components-dataTable-shadow-headerOpacity: 100;
 			}
 		}
 	}
