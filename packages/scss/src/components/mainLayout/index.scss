@@ -5,12 +5,20 @@
 	@include vars;
 	@include component;
 
+	.appLayout-main & {
+		@include inAppLayout;
+	}
+
 	&:has(.container.mod-overflow) {
 		@include hasContainerWithOverflow;
 	}
 
-	@include media.min('S') {
-		&:has(.mainLayout-sidebar:not(:empty)) {
+	&:has(.mainLayout-sidebar:not(:empty)) {
+		@include media.max('S') {
+			@include sidebarNarrow;
+		}
+
+		@include media.min('S') {
 			@include sidebarWide;
 		}
 	}

@@ -1,9 +1,11 @@
 @mixin vars {
-	--components-mainLayoutGridTemplate: "sidebar" auto
+	--components-mainLayoutGridTemplate: "sidebar" min-content
 																			 "header " auto
 																			 "content" 1fr
 																			 "footer"  auto;
 	--components-mainLayout-scrollbar-sizeFallBack: 1rem;
-	--components-mainLayout-headerFooter-inlineSize: auto;
-	--components-mainLayout-sidebar-inlineSize: auto;
+	--components-mainLayout-headerFooter-inlineSize: 0px;
+	--components-mainLayout-sidebar-inlineSize: 0px;
+	--components-mainLayout-sidebar-blockSize: auto;
+	--components-mainLayout-blockSize: auto;
 }

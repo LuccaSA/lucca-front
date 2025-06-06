@@ -1,5 +1,14 @@
+@use '@lucca-front/scss/src/commons/utils/a11y';
+
+@mixin sidebarNarrow {
+	.mainLayout-sidebar {
+		inline-size: var(--components-mainLayout-headerFooter-inlineSize);
+	}
+}
+
 @mixin sidebarWide {
-	--components-mainLayout-sidebar-inlineSize: 10rem;
+	--components-mainLayout-sidebar-blockSize: var(--components-mainLayout-blockSize);
+	--components-mainLayout-sidebar-inlineSize: 20rem;
 	--components-mainLayoutGridTemplate: "sidebar header "  auto
 																			 "sidebar content"  1fr
 																			 "sidebar footer "  auto
@@ -7,5 +16,16 @@
 }
 
 @mixin hasContainerWithOverflow {
-	--components-mainLayout-headerFooter-inlineSize: var(--components-mainLayout-widthCalculated, calc(var(--components-appLayout-inlineSize, 100dvw) - var(--components-appLayout-navSide-inlineSize, 0px) - var(--components-mainLayout-scrollbar-sizeFallBack)));
+	--components-mainLayout-headerFooter-inlineSize: calc(var(--components-mainLayout-widthCalculated, calc(var(--components-appLayout-inlineSize, 100dvw) - var(--components-appLayout-navSide-inlineSize, 0px) - var(--components-mainLayout-scrollbar-sizeFallBack))) - var(--components-mainLayout-sidebar-inlineSize));
+}
+
+@mixin inAppLayout {
+	--component-mainLayout-blockSize: calc(var(--components-appLayout-blockSize) - var(--components-appLayout-banner-blockSize));
+
+	grid-area: main;
+	overflow: auto;
+
+	&:focus-visible {
+		@include a11y.focusVisible(-4px);
+	}
 }

@@ -39,6 +39,14 @@ export default {
 	.mainLayout {
 		border: 1px dashed;
 		box-sizing: content-box;
+
+		--components-mainLayout-blockSize: 20rem;
+
+		&:has(.mainLayout-sidebar:not(:empty)) {
+			@media (width >= 50rem) {
+				--components-mainLayout-sidebar-inlineSize: 10rem !important;
+			}
+		}
 	}
 
 	.fakeContent {

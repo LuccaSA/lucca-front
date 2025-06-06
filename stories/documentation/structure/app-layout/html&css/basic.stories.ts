@@ -17,7 +17,11 @@ export default {
 .appLayout {
 	--components-appLayout-blockSize: 28.125rem;
 	--components-appLayout-inlineSize: 50rem;
-	--components-appLayout-navSide-inlineSize: 7.5rem;
+	--components-appLayout-navSide-inlineSize: auto;
+
+	@media (width > 50em) {
+		--components-appLayout-navSide-inlineSize: 7.5rem;
+	}
 
 	border: 1px dashed;
 	box-sizing: content-box;

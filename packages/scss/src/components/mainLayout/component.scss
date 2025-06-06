@@ -1,29 +1,20 @@
-
-@use '@lucca-front/scss/src/commons/utils/namespace';
 @use '@lucca-front/scss/src/commons/utils/a11y';
+@use '@lucca-front/scss/src/commons/utils/namespace';
 @use '@lucca-front/scss/src/components/container/exports' as container;
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
 	display: grid;
 	grid-template: var(--components-mainLayoutGridTemplate);
 	overflow: auto;
-
-	.appLayout-main & {
-		grid-area: main;
-		overflow: auto;
-
-		&:focus-visible {
-			@include a11y.focusVisible(-4px);
-		}
-	}
+	block-size: var(--components-mainLayout-blockSize);
 
 	@at-root ($atRoot) {
 		.mainLayout-header,
 		.mainLayout-footer {
 			inset-inline-start: var(--components-mainLayout-sidebar-inlineSize);
+			inline-size: var(--components-mainLayout-headerFooter-inlineSize);
 			z-index: 1;
 			position: sticky;
-			inline-size: calc(var(--components-mainLayout-headerFooter-inlineSize) - var(--components-mainLayout-sidebar-inlineSize));
 		}
 
 		.mainLayout-header {
@@ -52,8 +43,6 @@
 
 		.mainLayout-content {
 			grid-area: content;
-
-
 		}
 
 		.mainLayout-content-container.container {
@@ -66,12 +55,12 @@
 			grid-area: sidebar;
 			overflow-y: auto;
 			overflow-x: hidden;
-			block-size: calc(var(--components-appLayout-blockSize) - 50px);
-			inline-size: var(--components-mainLayout-sidebar-inlineSize);
-			position: sticky;
+			block-size: var(--components-mainLayout-sidebar-blockSize);
 			inset-block-start: 0;
 			inset-inline-start: 0;
 			z-index: 2;
+			position: sticky;
+			inline-size: var(--components-mainLayout-sidebar-inlineSize);
 
 			&:focus-visible {
 				@include a11y.focusVisible(-4px);

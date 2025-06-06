@@ -42,9 +42,9 @@ export default {
 .mainLayout {
 		border: 1px dashed;
 		box-sizing: content-box;
-		inline-size: 50rem;
+		inline-size: 40rem;
 
-		--components-appLayout-inlineSize: 50rem;
+		--components-appLayout-inlineSize: 40rem;
 	}
 
 	.mainLayout-sidebar {
