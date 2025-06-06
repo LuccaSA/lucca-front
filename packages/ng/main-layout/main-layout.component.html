@@ -1,0 +1,12 @@
+<div class="mainLayout-sidebar">
+	<ng-content select="[mainLayoutSidebar]" />
+</div>
+<div class="mainLayout-content">
+	<div class="mainLayout-content-header" [class.mod-sticky]="headerSticky()">
+		<ng-content select="[mainLayoutHeader]" />
+	</div>
+	<ng-content />
+	<div class="mainLayout-content-footer" [class.mod-sticky]="footerSticky()">
+		<ng-content select="[mainLayoutFooter]" />
+	</div>
+</div>
