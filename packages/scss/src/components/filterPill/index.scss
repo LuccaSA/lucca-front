@@ -80,4 +80,12 @@
 	&.is-hidden {
 		@include hidden;
 	}
+
+	&.mod-period {
+		@include period;
+	}
+
+	&.mod-date {
+		@include date;
+	}
 }

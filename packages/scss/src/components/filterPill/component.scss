@@ -22,10 +22,11 @@
 	line-height: var(--sizes-S-lineHeight);
 	box-shadow: var(--components-filterPill-shadow);
 	position: relative;
-	max-inline-size: 18rem;
+	max-inline-size: var(--components-filterPill-maxInlineSize);
 	white-space: nowrap;
 	transition-property: box-shadow;
 	transition-duration: var(--commons-animations-durations-fast);
+
 
 	@at-root ($atRoot) {
 		.filterPill_popover-content.popover-contentOptional {

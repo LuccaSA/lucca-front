@@ -144,10 +144,22 @@ export class FilterPillComponent {
 	});
 
 	modCheckbox = computed(() => this.layout() === 'checkable');
+	modPeriod = computed(() => this.layout() === 'period');
+	modDate = computed(() => this.layout() === 'date');
 
 	@HostBinding('class.mod-checkbox')
 	get isModCheckbox() {
 		return this.modCheckbox();
+	}
+
+	@HostBinding('class.mod-period')
+	get isModPeriod() {
+		return this.modPeriod();
+	}
+
+	@HostBinding('class.mod-date')
+	get isModDate() {
+		return this.modDate();
 	}
 
 	@HostBinding('class.is-filled')
