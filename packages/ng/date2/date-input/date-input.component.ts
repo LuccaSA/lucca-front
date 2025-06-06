@@ -11,6 +11,7 @@ import {
 	HostBinding,
 	inject,
 	input,
+	Signal,
 	signal,
 	untracked,
 	viewChild,
@@ -19,7 +20,7 @@ import {
 import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validator } from '@angular/forms';
 import { LuccaIcon } from '@lucca-front/icons';
 import { LuClass, ɵeffectWithDeps } from '@lucca-front/ng/core';
-import { FILTER_PILL_INPUT_COMPONENT, FilterPillDisplayerDirective, FilterPillInputComponent } from '@lucca-front/ng/filter-pills';
+import { FILTER_PILL_INPUT_COMPONENT, FilterPillDisplayerDirective, FilterPillInputComponent, FilterPillLayout } from '@lucca-front/ng/filter-pills';
 import { InputDirective } from '@lucca-front/ng/form-field';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { PopoverDirective } from '@lucca-front/ng/popover2';
@@ -80,6 +81,7 @@ export class DateInputComponent extends AbstractDateComponent implements Control
 	widthAuto = input(false, { transform: booleanAttribute });
 
 	filterPillDisabled = signal(false);
+	filterPillLayout: Signal<FilterPillLayout> = signal('date');
 
 	popoverPositions: ConnectionPositionPair[] = [
 		new ConnectionPositionPair({ originX: 'start', originY: 'bottom' }, { overlayX: 'start', overlayY: 'top' }, -8, 0),

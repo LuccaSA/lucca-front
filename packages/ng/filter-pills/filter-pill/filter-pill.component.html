@@ -1,4 +1,4 @@
-@if (!isHidden()) { @if (layout() === 'default') {
+@if (!isHidden()) { @if (layout() !== 'checkable') {
 <label [attr.for]="id" class="filterPill-label">
 	<ng-container
 		*ngTemplateOutlet="labelTpl(); context:{label: label(), isEmpty: inputIsEmpty(), placeholder: placeholder(), colon: colonDisplay()}"

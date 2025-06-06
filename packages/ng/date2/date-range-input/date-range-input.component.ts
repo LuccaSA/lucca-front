@@ -24,7 +24,7 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors, Validator } from '@angular/forms';
 import { LuccaIcon } from '@lucca-front/icons';
 import { LuClass, PortalContent, PortalDirective, ɵeffectWithDeps } from '@lucca-front/ng/core';
-import { FILTER_PILL_INPUT_COMPONENT, FilterPillDisplayerDirective, FilterPillInputComponent } from '@lucca-front/ng/filter-pills';
+import { FILTER_PILL_INPUT_COMPONENT, FilterPillDisplayerDirective, FilterPillInputComponent, FilterPillLayout } from '@lucca-front/ng/filter-pills';
 import { FORM_FIELD_INSTANCE, InputDirective } from '@lucca-front/ng/form-field';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { PopoverDirective } from '@lucca-front/ng/popover2';
@@ -209,6 +209,8 @@ export class DateRangeInputComponent extends AbstractDateComponent implements Co
 	filterPillPopoverCloseFn?: () => void;
 
 	filterPillDisabled = signal(false);
+
+	filterPillLayout: Signal<FilterPillLayout> = signal('period');
 
 	get isNavigationButtonFocused(): boolean {
 		return [this.previousButton()?.nativeElement, this.nextButton()?.nativeElement].includes(document.activeElement);

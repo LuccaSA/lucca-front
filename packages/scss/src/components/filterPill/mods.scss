@@ -9,6 +9,14 @@
 	--components-filterPill-padding: var(--pr-t-spacings-75) var(--pr-t-spacings-150);
 }
 
+@mixin period {
+	--components-filterPill-maxInlineSize: none;
+}
+
+@mixin date {
+	--components-filterPill-maxInlineSize: none;
+}
+
 @mixin compact {
 	.filterBar-segmentedControl.segmentedControl {
 		--components-segmentedControl-direction: row;

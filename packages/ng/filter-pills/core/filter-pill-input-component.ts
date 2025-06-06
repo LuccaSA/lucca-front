@@ -1,7 +1,7 @@
 import { Signal } from '@angular/core';
 import { LuccaIcon } from '@lucca-front/icons';
 
-export type FilterPillLayout = 'checkable';
+export type FilterPillLayout = 'checkable' | 'date' | 'period';
 
 export interface FilterPillInputComponent {
 	isFilterPillEmpty: Signal<boolean>;
