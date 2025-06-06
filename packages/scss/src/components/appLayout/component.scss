@@ -38,10 +38,6 @@
 			&:focus-visible {
 				@include a11y.focusVisible(-4px);
 			}
-
-			&:has(.mainLayout) {
-				display: contents;
-			}
 		}
 	}
 }

@@ -1,0 +1,19 @@
+@use 'exports' as *;
+@use '@lucca-front/scss/src/commons/utils/media';
+
+.mainLayout {
+	@include vars;
+	@include component;
+
+	@include media.min('S') {
+		@include wide;
+	}
+
+	&:has(.mainLayout-content-header.mod-sticky) {
+		@include headerStickyBlock;
+	}
+
+	&:has(.mainLayout-content-footer.mod-sticky) {
+		@include footerStickyBlock;
+	}
+}

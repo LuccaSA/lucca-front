@@ -1,0 +1,52 @@
+@use '@lucca-front/scss/src/commons/utils/a11y';
+@use '@lucca-front/scss/src/commons/utils/namespace';
+@use '@lucca-front/scss/src/components/container/exports' as container;
+
+@mixin component($atRoot: namespace.$defaultAtRoot) {
+	display: flex;
+	flex-direction: var(--components-mainLayout-flexDirection);
+	block-size: 100%;
+
+	@at-root ($atRoot) {
+		.mainLayout-sidebar {
+			overflow-x: hidden;
+			overflow-y: auto;
+			flex-shrink: 0;
+
+			&:focus-visible {
+				@include a11y.focusVisible(-4px);
+			}
+		}
+
+		.mainLayout-content {
+			flex-grow: 1;
+			display: flex;
+			flex-direction: column;
+			overflow: auto;
+			position: relative;
+
+			&:focus-visible {
+				@include a11y.focusVisible(-4px);
+			}
+		}
+
+		.mainLayout-content-block:not(.mod-overflow) {
+			position: sticky;
+			inset-inline-start: 0;
+		}
+
+		.mainLayout-content-header {
+			position: sticky;
+			z-index: 1;
+			inset-inline-start: 0;
+			inset-block-start: var(--components-mainLayout-content-header-insetBlockStart);
+		}
+
+		.mainLayout-content-footer {
+			position: sticky;
+			inset-inline-start: 0;
+			inset-block-end: var(--components-mainLayout-content-footer-insetBlockEnd);
+			margin-block-start: auto;
+		}
+	}
+}

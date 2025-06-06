@@ -16,10 +16,11 @@ export default {
 				`
 :host ::ng-deep {
 	.appLayout {
-		--components-appLayout-blockSize: 27rem;
-		--components-appLayout-inlineSize: 48rem;
-		resize: both;
+		--components-appLayout-blockSize: 100%;
+		--components-appLayout-inlineSize: 100%;
+		resize: vertical;
 		overflow: hidden;
+		min-height: 10rem;
 	}
 	.appLayout-banner {
 		background-color: var(--palettes-neutral-0);
