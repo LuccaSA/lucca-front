@@ -67,10 +67,16 @@
 		--commons-container-maxWidth#{$breakpoint}: #{function.pxToRem($value)};
 	}
 
-	--commons-container-maxWidth: var(--commons-container-maxWidthXXL);
-	--commons-container-padding: 3.5rem;
+	--commons-container-maxWidth: 75rem;
 
-	--commons-navSide-width: 0rem; // unit is required for calc
+	&:has(.navSide.mod-compact, .mod-withMenuCompact) {
+		--commons-container-maxWidth: 82.5rem;
+	}
+
+	--commons-container-padding: 0 2rem;
+
+	--commons-navSide-width: 0px;
+	/* stylelint-disable-next-line property-disallowed-list */
 	--commons-navSide-compact-width: 7.5rem;
 	--commons-navSide-mobile-toggle-height: 3.5rem;
 
