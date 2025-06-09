@@ -9,7 +9,7 @@
 	// TOKENS : TYPO
 
 	--pr-t-font-family: '#{config.$fontFamily}', Tahoma, sans-serif;
-	--pr-t-font-family-brand: '#{config.$fontFamilyBrand}', sans-serif;
+	--pr-t-font-family-brand: '#{config.$fontFamilyBrand}', Tahoma, sans-serif;
 
 	@if (config.$fontFamilyCursive) {
 		--pr-t-font-family-cursive: '#{config.$fontFamilyCursive}', cursive;
@@ -45,8 +45,6 @@
 	// TOKENS : COLORS
 
 	@include core.cssvars('pr-t-color-input', config.$colorInput);
-	--pr-t-color-text: var(--palettes-neutral-800);
-
 	@include core.cssvars('pr-t-color-text', config.$colorText);
 	--pr-t-radius-input: var(--commons-borderRadius-M);
 
@@ -76,14 +74,7 @@
 
 	// Deprecated
 	--commons-font-family: '#{config.$fontFamily}', Tahoma, sans-serif;
-
-	@if (config.$fontFamily) {
-		--commons-font-family: '#{config.$fontFamily}', Tahoma, sans-serif;
-	}
-
-	@if (config.$fontFamilyBrand) {
-		--commons-font-family-brand: '#{config.$fontFamilyBrand}', sans-serif;
-	}
+	--commons-font-family-brand: '#{config.$fontFamilyBrand}', sans-serif;
 
 	@if (config.$fontFamilyCursive) {
 		--commons-font-family-cursive: '#{config.$fontFamilyCursive}', cursive;

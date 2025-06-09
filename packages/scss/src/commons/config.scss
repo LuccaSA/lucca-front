@@ -41,7 +41,7 @@ $fontSizeVars: (
 	'300': 1.5rem,
 	'325': 1.625rem,
 	'350': 1.75rem,
-) !default;
+);
 
 $lineHeight: (
 	'200': 1rem,
@@ -49,7 +49,7 @@ $lineHeight: (
 	'300': 1.5rem,
 	'350': 1.75rem,
 	'400': 2rem,
-) !default;
+);
 
 $fontTokens: (
 	heading-1-fontSize: var(--pr-t-font-fontSize-350),
@@ -548,6 +548,7 @@ $colorInputContrasted: (
 );
 
 $colorText: (
+	'': var(--palettes-neutral-800),
 	heading: var(--palettes-neutral-900),
 	highlight: var(--palettes-neutral-900),
 	subtle: var(--palettes-neutral-600),
