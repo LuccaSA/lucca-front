@@ -1,5 +1,5 @@
 import { Highlightable } from '@angular/cdk/a11y';
-import { computed, Directive, ElementRef, inject, input, model, output, signal } from '@angular/core';
+import { computed, Directive, ElementRef, inject, input, model, OnDestroy, output, signal } from '@angular/core';
 import { CoreSelectPanelInstance, SELECT_PANEL_INSTANCE } from './panel.instance';
 
 @Directive({
@@ -13,7 +13,7 @@ import { CoreSelectPanelInstance, SELECT_PANEL_INSTANCE } from './panel.instance
 	},
 })
 // eslint-disable-next-line @angular-eslint/directive-class-suffix
-export class CoreSelectPanelElement<T> implements Highlightable {
+export class CoreSelectPanelElement<T> implements Highlightable, OnDestroy {
 	readonly elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
 
 	readonly #panelRef = inject<CoreSelectPanelInstance<T>>(SELECT_PANEL_INSTANCE);
@@ -34,6 +34,10 @@ export class CoreSelectPanelElement<T> implements Highlightable {
 
 	constructor() {
 		this.#panelRef.options.set([...this.#panelRef.options(), this]);
+	}
+
+	ngOnDestroy(): void {
+		this.#panelRef.options.set(this.#panelRef.options().filter((opt) => opt !== this));
 	}
 
 	setActiveStyles(): void {
