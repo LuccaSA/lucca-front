@@ -15,6 +15,10 @@
 			@include button.XS;
 		}
 	}
+
+	// Deprecated
+	--components-callout-fontSize: var(--pr-t-font-body-S-fontSize);
+	--components-callout-lineHeight: var(--pr-t-font-body-S-lineHeight);
 }
 
 @mixin tiny {

@@ -14,4 +14,8 @@
 	--components-sortableList-handler-size: var(--pr-t-font-body-S-lineHeight);
 	--components-sortableList-description-font: var(--pr-t-font-body-S);
 	--components-sortableList-helper-font: var(--pr-t-font-body-XS);
+
+	// Deprecated
+	--components-sortableList-description-fontSize: var(--pr-t-font-body-S-fontSize);
+	--components-sortableList-description-lineHeight: var(--pr-t-font-body-S-lineHeight);
 }

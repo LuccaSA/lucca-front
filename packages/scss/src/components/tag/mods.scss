@@ -27,6 +27,10 @@
 	.lucca-icon {
 		@include icon.S;
 	}
+
+	// Deprecated
+	--components-tag-fontSize: var(--pr-t-font-body-M-fontSize);
+	--components-tag-lineHeight: var(--pr-t-font-body-M-lineHeight);
 }
 
 @mixin outlined {

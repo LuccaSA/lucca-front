@@ -13,6 +13,10 @@
 	.numericBadge {
 		@include numericBadge.S;
 	}
+
+	// Deprecated
+	--components-button-font-size: var(--pr-t-font-body-S-fontSize);
+	--components-button-line-height: var(--pr-t-font-body-S-lineHeight);
 }
 
 @mixin XS {
@@ -25,6 +29,10 @@
 	.numericBadge {
 		@include numericBadge.XS;
 	}
+
+	// Deprecated
+	--components-button-font-size: var(--pr-t-font-body-XS-fontSize);
+	--components-button-line-height: var(--pr-t-font-body-XS-lineHeight);
 }
 
 @mixin onlyIcon {
