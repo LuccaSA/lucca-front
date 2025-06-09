@@ -150,3 +150,30 @@
 		block-size: auto;
 	}
 }
+
+@mixin inAppLayoutWide {
+	position: static;
+	block-size: 100%;
+}
+
+@mixin inAppLayoutNarrow {
+	.navSide-item.mod-mobileToggle {
+		position: sticky;
+	}
+
+	&:not(.is-open) {
+		.navSide-bottomSection {
+			display: none;
+		}
+	}
+
+	&.is-open {
+		padding-block-start: 0;
+		block-size: calc(var(--components-appLayout-blockSize) - var(--commons-banner-height));
+	}
+
+	.navSide-bottomSection {
+		position: sticky;
+		inset-block-end: 0;
+	}
+}

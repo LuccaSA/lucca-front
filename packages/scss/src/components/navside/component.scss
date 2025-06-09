@@ -20,7 +20,8 @@
 
 	.appLayout-navSide & {
 		position: static;
-		height: 100%;
+		height: var(--commons-navSide-mobile-toggle-height);
+		padding-block-start: 0;
 	}
 
 	.numericBadge {

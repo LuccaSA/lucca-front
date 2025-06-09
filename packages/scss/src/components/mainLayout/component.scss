@@ -16,6 +16,10 @@
 			&:focus-visible {
 				@include a11y.focusVisible(-4px);
 			}
+
+			&:empty {
+				display: none;
+			}
 		}
 
 		.mainLayout-content {
@@ -40,6 +44,10 @@
 			z-index: 1;
 			inset-inline-start: 0;
 			inset-block-start: var(--components-mainLayout-content-header-insetBlockStart);
+
+			&:empty {
+				display: none;
+			}
 		}
 
 		.mainLayout-content-footer {
@@ -47,6 +55,10 @@
 			inset-inline-start: 0;
 			inset-block-end: var(--components-mainLayout-content-footer-insetBlockEnd);
 			margin-block-start: auto;
+
+			&:empty {
+				display: none;
+			}
 		}
 	}
 }
