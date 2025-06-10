@@ -154,11 +154,15 @@
 @mixin inAppLayoutWide {
 	position: static;
 	block-size: 100%;
+	display: block;
 }
 
 @mixin inAppLayoutNarrow {
+	display: block;
+
 	.navSide-item.mod-mobileToggle {
 		position: sticky;
+		inset-block-start: 0 !important;
 	}
 
 	&:not(.is-open) {

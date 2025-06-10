@@ -19,8 +19,8 @@
 
 		.appLayout-navSide {
 			grid-area: navSide;
-			overflow-y: auto;
-			overflow-x: hidden;
+			overflow-y: var(--components-appLayout-navSide-overflowX);
+			overflow-x: var(--components-appLayout-navSide-overflowY);
 
 			&:focus-visible {
 				@include a11y.focusVisible(-4px);
