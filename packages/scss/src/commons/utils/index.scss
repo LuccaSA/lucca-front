@@ -218,6 +218,18 @@
 	@include title.h6;
 }
 
+.u-bodyM {
+	font: var(--pr-t-font-body-M);
+}
+
+.u-bodyS {
+	font: var(--pr-t-font-body-S);
+}
+
+.u-bodyXS {
+	font: var(--pr-t-font-body-XS);
+}
+
 // .u-textLeft is deprecated
 .u-textLeft {
 	text-align: start !important;
