@@ -5,7 +5,7 @@ interface BoxBasicStory {
 }
 
 export default {
-	title: 'Documentation/Structure/Box/Basic',
+	title: 'Documentation/Structure/Box/HTML&CSS/Basic',
 	argTypes: {
 		neutral: {
 			control: {
@@ -28,13 +28,6 @@ function getTemplate(args: BoxBasicStory): string {
 const Template: StoryFn<BoxBasicStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
-	styles: [
-		`
-		:host {
-			display: block;
-		}`,
-		args.neutral === false ? ':host { background-color: var(--palettes-neutral-0); margin: -15px; padding: 15px; }' : '',
-	],
 });
 
 export const Basic = Template.bind({});
