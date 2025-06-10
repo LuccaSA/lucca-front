@@ -14,7 +14,7 @@
 			flex-shrink: 0;
 
 			&:focus-visible {
-				@include a11y.focusVisible(-4px);
+				@include a11y.focusVisible($offset: -4px);
 			}
 
 			&:empty {
@@ -26,34 +26,48 @@
 			flex-grow: 1;
 			display: flex;
 			flex-direction: column;
-			overflow: auto;
 			position: relative;
 
-			&:focus-visible {
-				@include a11y.focusVisible(-4px);
+			&:has(> .mainLayout-content-inside:focus-visible) {
+				&::after {
+					content: '';
+					pointer-events: none;
+					inset: 0;
+					position: absolute;
+
+					@include a11y.focusVisible($offset: -4px);
+				}
 			}
 		}
 
-		.mainLayout-content-block:not(.mod-overflow) {
+		.mainLayout-content-inside {
+			flex-grow: 1;
+			display: flex;
+			flex-direction: column;
+			overflow: auto;
+			outline: none;
+		}
+
+		.mainLayout-content-inside-block:not(.mod-overflow) {
 			position: sticky;
 			inset-inline-start: 0;
 		}
 
-		.mainLayout-content-header {
+		.mainLayout-content-inside-header {
 			position: sticky;
 			z-index: 1;
 			inset-inline-start: 0;
-			inset-block-start: var(--components-mainLayout-content-header-insetBlockStart);
+			inset-block-start: var(--components-mainLayout-content-inside-header-insetBlockStart);
 
 			&:empty {
 				display: none;
 			}
 		}
 
-		.mainLayout-content-footer {
+		.mainLayout-content-inside-footer {
 			position: sticky;
 			inset-inline-start: 0;
-			inset-block-end: var(--components-mainLayout-content-footer-insetBlockEnd);
+			inset-block-end: var(--components-mainLayout-content-inside-footer-insetBlockEnd);
 			margin-block-start: auto;
 
 			&:empty {

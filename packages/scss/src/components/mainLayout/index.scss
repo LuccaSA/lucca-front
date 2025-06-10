@@ -9,11 +9,11 @@
 		@include wide;
 	}
 
-	&:has(.mainLayout-content-header.mod-sticky) {
+	&:has(.mainLayout-content-inside-header.mod-sticky) {
 		@include headerStickyBlock;
 	}
 
-	&:has(.mainLayout-content-footer.mod-sticky) {
+	&:has(.mainLayout-content-inside-footer.mod-sticky) {
 		@include footerStickyBlock;
 	}
 }

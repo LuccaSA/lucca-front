@@ -3,9 +3,9 @@
 }
 
 @mixin headerStickyBlock {
-	--components-mainLayout-content-header-insetBlockStart: 0;
+	--components-mainLayout-content-inside-header-insetBlockStart: 0;
 }
 
 @mixin footerStickyBlock {
-	--components-mainLayout-content-footer-insetBlockEnd: 0;
+	--components-mainLayout-content-inside-footer-insetBlockEnd: 0;
 }

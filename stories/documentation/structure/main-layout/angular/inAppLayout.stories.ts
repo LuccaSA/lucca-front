@@ -33,14 +33,14 @@ export default {
 		const headerStickyParam = args.headerSticky ? `headerSticky` : ``;
 		const footerStickyParam = args.footerSticky ? `footerSticky` : ``;
 		const sidebarContainer = args.sidebar ? `<ng-container mainLayoutSidebar>sidebar</ng-container>` : ``;
-		const content = `<div class="mainLayout-content-block">
+		const content = `<div class="mainLayout-content-inside-block">
 	<div class="fakeContent">
 		<div class="container">
 			content
 		</div>
 	</div>
 </div>`;
-		const contentOverflow = `<div class="mainLayout-content-block mod-overflow">
+		const contentOverflow = `<div class="mainLayout-content-inside-block mod-overflow">
 	<div class="fakeContent" style="width: 80rem">
 		<div class="container">
 			content overflowing
@@ -73,8 +73,8 @@ export default {
 		background-color: var(--palettes-neutral-200);
 		border-radius: var(--commons-borderRadius-L);
 	}
-	.mainLayout-content-header,
-	.mainLayout-content-footer {
+	.mainLayout-content-inside-header,
+	.mainLayout-content-inside-footer {
 		&.mod-sticky {
 			border-radius: var(--commons-borderRadius-L);
 			background-color: var(--palettes-neutral-0);

@@ -24,16 +24,16 @@ export default {
 		const sidebarContainer = args.sidebar ? `<div class="mainLayout-sidebar">sidebar</div>` : ``;
 		const headerStickyParam = args.headerSticky ? `mod-sticky` : ``;
 		const footerStickyParam = args.footerSticky ? `mod-sticky` : ``;
-		const headerContainer = args.header ? `<div class="mainLayout-content-header ${headerStickyParam}">header</div>` : ``;
-		const footerContainer = args.footer ? `<div class="mainLayout-content-footer ${footerStickyParam}">footer</div>` : ``;
-		const content = `<div class="mainLayout-content-block">
+		const headerContainer = args.header ? `<div class="mainLayout-content-inside-header ${headerStickyParam}">header</div>` : ``;
+		const footerContainer = args.footer ? `<div class="mainLayout-content-inside-footer ${footerStickyParam}">footer</div>` : ``;
+		const content = `<div class="mainLayout-content-inside-block">
 	<div class="fakeContent">
 		<div class="container">
 			content
 		</div>
 	</div>
 </div>`;
-		const contentOverflow = `<div class="mainLayout-content-block mod-overflow">
+		const contentOverflow = `<div class="mainLayout-content-inside-block mod-overflow">
 	<div class="fakeContent" style="width: 80rem">
 		<div class="container">
 			content overflowing
@@ -55,8 +55,8 @@ export default {
 	background-color: var(--palettes-neutral-200);
 	border-radius: var(--commons-borderRadius-L);
 }
-.mainLayout-content-header,
-.mainLayout-content-footer {
+.mainLayout-content-inside-header,
+.mainLayout-content-inside-footer {
 	background-color: var(--palettes-neutral-0);
 	border-radius: var(--commons-borderRadius-L);
 }
@@ -87,10 +87,12 @@ export default {
 		<main role="main" class="mainLayout">
 			${sidebarContainer}
 			<div class="mainLayout-content">
-				${headerContainer}
-				${content}
-				${lastContent}
-				${footerContainer}
+				<div class="mainLayout-content-inside">
+					${headerContainer}
+					${content}
+					${lastContent}
+					${footerContainer}
+				</div>
 			</div>
 		</main>
 `),

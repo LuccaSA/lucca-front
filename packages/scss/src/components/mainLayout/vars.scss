@@ -1,5 +1,5 @@
 @mixin vars {
 	--components-mainLayout-flexDirection: column;
-	--components-mainLayout-content-header-insetBlockStart: auto;
-	--components-mainLayout-content-footer-insetBlockEnd: auto;
+	--components-mainLayout-content-inside-header-insetBlockStart: auto;
+	--components-mainLayout-content-inside-footer-insetBlockEnd: auto;
 }
