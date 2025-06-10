@@ -1,11 +1,12 @@
 import { ChangeDetectionStrategy, Component, effect, input, output } from '@angular/core';
-import { getIntl, IntlParamsPipe } from '../core/translate';
+import { getIntl, IntlParamsPipe } from '@lucca-front/ng/core';
+import { IconComponent } from '@lucca-front/ng/icon';
 import { LU_PAGINATION_TRANSLATIONS } from './pagination.translate';
 
 @Component({
 	selector: 'lu-pagination',
 	templateUrl: './pagination.component.html',
-	imports: [IntlParamsPipe],
+	imports: [IconComponent, IntlParamsPipe],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PaginationComponent {
@@ -14,9 +15,9 @@ export class PaginationComponent {
 	readonly isFirstPage = input.required<boolean>();
 	readonly isLastPage = input.required<boolean>();
 
-	readonly from = input<number>();
-	readonly to = input<number>();
-	readonly itemsCount = input<number>();
+	readonly from = input<number | null>();
+	readonly to = input<number | null>();
+	readonly itemsCount = input<number | null>();
 	readonly mod = input<'default' | 'compact'>('default');
 
 	readonly previousPage = output<void>();
