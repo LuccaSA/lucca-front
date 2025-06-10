@@ -1,8 +1,10 @@
 @mixin vars {
   --components-sortableList-padding: var(--pr-t-spacings-100) var(--pr-t-spacings-150);
-  --components-sortableList-handler-size: var(--sizes-M-lineHeight);
-  --components-sortableList-description-fontSize: var(--sizes-M-fontSize);
-  --components-sortableList-description-lineHeight: var(--sizes-M-lineHeight);
-  --components-sortableList-helper-fontSize: var(--sizes-S-fontSize);
-  --components-sortableList-helper-lineHeight: var(--sizes-S-lineHeight);
+  --components-sortableList-handler-size: var(--pr-t-font-body-M-lineHeight);
+  --components-sortableList-description-font: var(--pr-t-font-body-M);
+  --components-sortableList-helper-font: var(--pr-t-font-body-S);
+
+	// Deprecated
+	--components-sortableList-description-fontSize: var(--pr-t-font-body-M-fontSize);
+	--components-sortableList-description-lineHeight: var(--pr-t-font-body-M-lineHeight);
 }

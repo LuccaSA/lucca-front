@@ -2,8 +2,7 @@
 @use '@lucca-front/scss/src/commons/utils/namespace';
 
 @mixin S {
-	--components-comment-text-fontSize: var(--sizes-S-fontSize);
-	--components-comment-text-lineHeight: var(--sizes-S-lineHeight);
+	--components-comment-text-font: var(--pr-t-font-body-S);
 }
 
 @mixin wrapperS {

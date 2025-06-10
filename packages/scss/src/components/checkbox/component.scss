@@ -5,7 +5,7 @@
 @mixin component($atRoot: namespace.$defaultAtRoot) {
 	display: block;
 	position: relative;
-	line-height: var(--sizes-M-lineHeight);
+	line-height: var(--pr-t-font-body-M-lineHeight);
 
 	@at-root ($atRoot) {
 		.checkbox-label {
@@ -55,8 +55,8 @@
 
 		.checkbox-label-helper {
 			color: var(--palettes-neutral-600);
-			font-size: var(--sizes-S-fontSize);
-			line-height: var(--sizes-S-lineHeight);
+			font-size: var(--pr-t-font-body-S-fontSize);
+			line-height: var(--pr-t-font-body-S-lineHeight);
 		}
 
 		.checkbox-input {

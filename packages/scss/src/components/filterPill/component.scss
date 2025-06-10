@@ -18,8 +18,7 @@
 	padding: var(--components-filterPill-padding);
 	border-radius: var(--commons-borderRadius-L);
 	color: var(--components-filterPill-color);
-	font-size: var(--sizes-S-fontSize);
-	line-height: var(--sizes-S-lineHeight);
+	font: var(--pr-t-font-body-S);
 	box-shadow: var(--components-filterPill-shadow);
 	position: relative;
 	white-space: nowrap;
@@ -193,8 +192,7 @@
 				text-transform: none;
 				white-space: nowrap;
 				word-wrap: normal;
-				content: '\e97d'; // Remove when content alternative will have a good support
-				content: '\e97d'/ '';
+				content: '\e97d' / '';
 			}
 		}
 

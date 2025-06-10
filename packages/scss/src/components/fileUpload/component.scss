@@ -16,7 +16,7 @@
 	align-items: var(--components-fileUpload-alignItems);
 	justify-content: var(--components-fileUpload-justifyContent);
 	gap: var(--pr-t-spacings-200);
-	color: var(--palettes-neutral-800);
+	color: var(--pr-t-color-text);
 	min-block-size: var(--components-fileUpload-minHeight);
 
 	&:has(.fileUpload-input:focus-visible) {
@@ -65,13 +65,13 @@
 			flex-direction: column;
 			align-items: var(--components-fileUpload-instruction-alignItems);
 			max-inline-size: var(--components-fileUpload-instruction-maxWidth);
-			line-height: var(--sizes-S-lineHeight);
+			line-height: var(--pr-t-font-body-S-lineHeight);
 		}
 
 		.fileUpload-instruction-action {
 			display: block;
 			margin-bottom: var(--fileUpload-instruction-action-marginBottom);
-			line-height: var(--sizes-M-lineHeight);
+			line-height: var(--pr-t-font-body-M-lineHeight);
 
 			span {
 				color: var(--components-fileUpload-instruction-action-color);
@@ -82,7 +82,7 @@
 		.fileUpload-instruction-size,
 		.fileUpload-instruction-formats {
 			color: var(--palettes-neutral-600);
-			font-size: var(--sizes-S-fontSize);
+			font-size: var(--pr-t-font-body-S-fontSize);
 			vertical-align: top;
 		}
 

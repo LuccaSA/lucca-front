@@ -5,7 +5,7 @@ interface BoxToggleStory {
 }
 
 export default {
-	title: 'Documentation/Structure/Box/Toggle',
+	title: 'Documentation/Structure/Box/HTML&CSS/Toggle',
 	argTypes: {
 		neutral: {
 			control: {

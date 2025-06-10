@@ -2,38 +2,38 @@
 
 @mixin XS {
 	--components-avatar-size: 1.5rem;
-	--components-avatar-fontSize: var(--sizes-XS-fontSize);
+	--components-avatar-fontSize: var(--pr-t-font-fontSize-150);
 	--components-avatar-placeholder-size: 0.75rem;
 	--components-avatar-border: 1px;
 }
 
 @mixin S {
 	--components-avatar-size: 2rem;
-	--components-avatar-fontSize: var(--sizes-S-fontSize);
+	--components-avatar-fontSize: var(--pr-t-font-fontSize-175);
 	--components-avatar-placeholder-size: 1rem;
 }
 
 @mixin L {
 	--components-avatar-size: 3rem;
-	--components-avatar-fontSize: var(--sizes-L-fontSize);
+	--components-avatar-fontSize: var(--pr-t-font-fontSize-225);
 	--components-avatar-placeholder-size: 1.75rem;
 }
 
 @mixin XL {
 	--components-avatar-size: 4rem;
-	--components-avatar-fontSize: var(--sizes-XL-fontSize);
+	--components-avatar-fontSize: var(--pr-t-font-fontSize-275);
 	--components-avatar-placeholder-size: 2rem;
 }
 
 @mixin XXL {
 	--components-avatar-size: 5rem;
-	--components-avatar-fontSize: var(--sizes-XXL-fontSize);
+	--components-avatar-fontSize: var(--pr-t-font-fontSize-350);
 	--components-avatar-placeholder-size: 2.25rem;
 }
 
 @mixin XXXL {
 	--components-avatar-size: 6rem;
-	--components-avatar-fontSize: var(--sizes-XXXL-fontSize);
+	--components-avatar-fontSize: 2.25rem;
 	--components-avatar-placeholder-size: 2.5rem;
 }
 
