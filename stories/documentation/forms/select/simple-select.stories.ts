@@ -11,7 +11,7 @@ import { LuUserDisplayPipe } from '@lucca-front/ng/user';
 import { applicationConfig, Meta, moduleMetadata } from '@storybook/angular';
 import { expect, screen, userEvent, within } from '@storybook/test';
 import { HiddenArgType } from 'stories/helpers/common-arg-types';
-import { getStoryGenerator, useDocumentationStory } from 'stories/helpers/stories';
+import { createTestStory, getStoryGenerator, useDocumentationStory } from 'stories/helpers/stories';
 import { waitForAngular } from '../../../helpers/test';
 import { LuCoreSelectLegumesDirective } from './custom-api-example.component';
 import { LuCoreSelectCustomEstablishmentsDirective } from './custom-establishment-example.component';
@@ -28,39 +28,40 @@ const generateStory = getStoryGenerator<LuSimpleSelectInputStoryComponent>({
 		...coreSelectStory.argTypes,
 		selectedLegume: HiddenArgType,
 	},
-	play: async ({ canvasElement, step }) => {
-		// Mouse interactions
-		const input = within(canvasElement).getByRole('combobox');
-		await userEvent.click(input);
+});
+
+const basePlay = async ({ canvasElement, step }) => {
+	// Mouse interactions
+	const input = within(canvasElement).getByRole('combobox');
+	await userEvent.click(input);
+	await waitForAngular();
+	await expect(screen.getByRole('listbox')).toBeVisible();
+	const panel = within(screen.getByRole('listbox'));
+	const options = await panel.findAllByRole('option');
+	const optionText = options[0].innerText;
+	await userEvent.click(options[0]);
+	await waitForAngular();
+	await expect(input).toHaveFocus();
+	await expect(input.parentElement).toHaveTextContent(optionText);
+
+	await step('Keyboard interactions', async () => {
+		input.focus();
+		await expect(input).toHaveFocus();
+		await userEvent.keyboard('{ArrowDown}');
 		await waitForAngular();
 		await expect(screen.getByRole('listbox')).toBeVisible();
-		const panel = within(screen.getByRole('listbox'));
-		const options = await panel.findAllByRole('option');
-		const optionText = options[0].innerText;
-		await userEvent.click(options[0]);
+		await userEvent.keyboard('{Escape}');
 		await waitForAngular();
+		await expect(screen.queryByText('listbox')).toBeNull();
 		await expect(input).toHaveFocus();
-		await expect(input.parentElement).toHaveTextContent(optionText);
-
-		await step('Keyboard interactions', async () => {
-			input.focus();
-			await expect(input).toHaveFocus();
-			await userEvent.keyboard('{ArrowDown}');
-			await waitForAngular();
-			await expect(screen.getByRole('listbox')).toBeVisible();
-			await userEvent.keyboard('{Escape}');
-			await waitForAngular();
-			await expect(screen.queryByText('listbox')).toBeNull();
-			await expect(input).toHaveFocus();
-			// await userEvent.keyboard('{Space}');
-			// await waitForAngular();
-			// await expect(screen.getByRole('listbox')).toBeVisible();
-			// await userEvent.keyboard('{Escape}');
-			// await waitForAngular();
-			await waitForAngular();
-		});
-	},
-});
+		// await userEvent.keyboard('{Space}');
+		// await waitForAngular();
+		// await expect(screen.getByRole('listbox')).toBeVisible();
+		// await userEvent.keyboard('{Escape}');
+		// await waitForAngular();
+		await waitForAngular();
+	});
+};
 
 export const Basic = generateStory({
 	name: 'Basic',
@@ -88,6 +89,8 @@ export const Basic = generateStory({
 	},
 });
 
+export const BasicTEST = createTestStory(Basic, basePlay);
+
 export const Minimal = generateStory({
 	name: 'Minimal',
 	description: "Pas besoin systématiquement de `*luOption`, le simple-select affiche par défaut la propriété `name` ou l'option elle-même.",
@@ -101,6 +104,8 @@ export const Minimal = generateStory({
 		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent'],
 	},
 });
+
+export const MinimalTEST = createTestStory(Minimal, basePlay);
 
 export const WithDisplayer = generateStory({
 	name: 'Displayer',
@@ -120,15 +125,16 @@ export const WithDisplayer = generateStory({
 		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent', 'LuDisplayerDirective'],
 	},
 	storyPartial: {
-		play: async (context) => {
-			Basic.play(context);
-			const input = within(context.canvasElement).getByRole('combobox');
-			await expect(input.parentElement).toHaveTextContent(new RegExp(`🥗🥗.+`));
-		},
 		args: {
 			selectedLegume: allLegumes[4],
 		},
 	},
+});
+
+export const WithDisplayerTEST = createTestStory(WithDisplayer, async (context) => {
+	await basePlay(context);
+	const input = within(context.canvasElement).getByRole('combobox');
+	await expect(input.parentElement).toHaveTextContent(new RegExp(`🥗🥗.+`));
 });
 
 export const WithClue = generateStory({
@@ -147,22 +153,21 @@ export const WithClue = generateStory({
 		'@lucca-front/ng/core-select': ['LuOptionDirective'],
 		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent'],
 	},
-	storyPartial: {
-		play: async (context) => {
-			await Basic.play(context);
-			const canvas = within(context.canvasElement);
-			const input = canvas.getByRole('combobox');
-			await userEvent.tab();
-			await userEvent.type(input, 'artichaut');
-			await waitForAngular();
-			await expect(screen.getByRole('listbox')).toBeVisible();
-			const panel = within(screen.getByRole('listbox'));
-			const options = await panel.findAllByRole('option');
-			await expect(options.length).toBe(1);
-			await userEvent.keyboard('{Enter}');
-			await expect(input.parentElement).toHaveTextContent('Artichaut');
-		},
-	},
+});
+
+export const WithClueTEST = createTestStory(WithClue, async (context) => {
+	await basePlay(context);
+	const canvas = within(context.canvasElement);
+	const input = canvas.getByRole('combobox');
+	await userEvent.tab();
+	await userEvent.type(input, 'artichaut');
+	await waitForAngular();
+	await expect(screen.getByRole('listbox')).toBeVisible();
+	const panel = within(screen.getByRole('listbox'));
+	const options = await panel.findAllByRole('option');
+	await expect(options.length).toBe(1);
+	await userEvent.keyboard('{Enter}');
+	await expect(input.parentElement).toHaveTextContent('Artichaut');
 });
 
 export const WithPagination = generateStory({
@@ -183,6 +188,8 @@ export const WithPagination = generateStory({
 	},
 });
 
+export const WithPaginationTEST = createTestStory(WithPagination, basePlay);
+
 export const WithClearer = generateStory({
 	name: 'Clearer',
 	description: "Il est possible vider le contenu du select via l'input clearable",
@@ -197,18 +204,19 @@ export const WithClearer = generateStory({
 		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent'],
 	},
 	storyPartial: {
-		play: async (context) => {
-			await Basic.play(context);
-			const canvas = within(context.canvasElement);
-			const inputContentElement = canvas.getByRole('combobox').parentElement;
-			const input = within(inputContentElement);
-			await userEvent.click(input.getByRole('button'));
-			await expect(inputContentElement).toHaveTextContent('');
-		},
 		args: {
 			selectedLegume: allLegumes[15],
 		},
 	},
+});
+
+export const WithClearerTEST = createTestStory(WithClearer, async (context) => {
+	await basePlay(context);
+	const canvas = within(context.canvasElement);
+	const inputContentElement = canvas.getByRole('combobox').parentElement;
+	const input = within(inputContentElement);
+	await userEvent.click(input.getByRole('button'));
+	await expect(inputContentElement).toHaveTextContent('');
 });
 
 export const WithDisabledOptions = generateStory({
@@ -226,17 +234,16 @@ export const WithDisabledOptions = generateStory({
 		'@lucca-front/ng/core-select': ['LuOptionDirective'],
 		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent', 'LuDisabledOptionDirective'],
 	},
-	storyPartial: {
-		play: async (context) => {
-			await Basic.play(context);
-			const input = within(context.canvasElement).getByRole('combobox');
-			await userEvent.click(input);
-			await waitForAngular();
-			const panel = within(screen.getByRole('listbox'));
-			const options = await panel.findAllByRole('option');
-			await expect(options[1].firstChild).toHaveClass('is-disabled');
-		},
-	},
+});
+
+export const WithDisabledOptionsTEST = createTestStory(WithDisabledOptions, async (context) => {
+	await basePlay(context);
+	const input = within(context.canvasElement).getByRole('combobox');
+	await userEvent.click(input);
+	await waitForAngular();
+	const panel = within(screen.getByRole('listbox'));
+	const options = await panel.findAllByRole('option');
+	await expect(options[1].firstChild).toHaveClass('is-disabled');
 });
 
 export const ApiV3 = generateStory({
@@ -387,9 +394,6 @@ export const UserCustom = generateStory({
 		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent'],
 		'@lucca-front/ng/core-select': ['LuDisplayerDirective', 'LuOptionDirective'],
 	},
-	storyPartial: {
-		play: null,
-	},
 });
 
 export const UserCustomTemplate = generateStory({
@@ -408,9 +412,6 @@ export const UserCustomTemplate = generateStory({
 		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent'],
 		'@lucca-front/ng/core-select/user': ['LuCoreSelectUserOptionDirective', 'LuCoreSelectUsersDirective', 'provideCoreSelectCurrentUserId'],
 	},
-	storyPartial: {
-		play: null,
-	},
 });
 
 export const FormerUser = generateStory({
@@ -426,9 +427,6 @@ export const FormerUser = generateStory({
 		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent'],
 		'@lucca-front/ng/core-select/user': ['LuCoreSelectUsersDirective'],
 	},
-	storyPartial: {
-		play: null,
-	},
 });
 
 export const Establishment = generateStory({
@@ -442,9 +440,6 @@ export const Establishment = generateStory({
 	neededImports: {
 		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent'],
 		'@lucca-front/ng/core-select/establishment': ['LuCoreSelectEstablishmentsDirective'],
-	},
-	storyPartial: {
-		play: null,
 	},
 });
 
@@ -469,7 +464,6 @@ export const EstablishmentCustom = generateStory({
 		'@lucca-front/ng/core-select': ['LuDisplayerDirective', 'LuOptionDirective'],
 	},
 	storyPartial: {
-		play: null,
 		args: {
 			selectedLegume: allLegumes[4],
 		},
@@ -487,9 +481,6 @@ export const JobQualification = generateStory({
 	neededImports: {
 		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent'],
 		'@lucca-front/ng/core-select/establishment': ['LuCoreSelectJobQualificationsDirective'],
-	},
-	storyPartial: {
-		play: null,
 	},
 });
 
@@ -537,20 +528,6 @@ export const AddOption = generateStory({
 		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent'],
 	},
 	storyPartial: {
-		play: async (context) => {
-			await Basic.play(context);
-			const story = within(context.canvasElement);
-			const input = within(context.canvasElement).getByRole('combobox');
-			const count = story.getByTestId('legumes-count');
-			const previousTotal = +count.innerText;
-			await userEvent.click(input);
-			await waitForAngular();
-			await expect(screen.getByRole('listbox')).toBeVisible();
-			const panel = within(screen.getByRole('listbox').parentElement);
-			const addOptionButton = panel.getByRole('button', { name: /ajouter/i });
-			await userEvent.click(addOptionButton);
-			await expect(+count.innerText).toBe(previousTotal + 1);
-		},
 		argTypes: {
 			addOptionLabel: { control: { type: 'text' } },
 			addOptionStrategy: {
@@ -575,6 +552,21 @@ export const AddOption = generateStory({
 	},
 });
 
+export const AddOptionTEST = createTestStory(AddOption, async (context) => {
+	await basePlay(context);
+	const story = within(context.canvasElement);
+	const input = within(context.canvasElement).getByRole('combobox');
+	const count = story.getByTestId('legumes-count');
+	const previousTotal = +count.innerText;
+	await userEvent.click(input);
+	await waitForAngular();
+	await expect(screen.getByRole('listbox')).toBeVisible();
+	const panel = within(screen.getByRole('listbox').parentElement);
+	const addOptionButton = panel.getByRole('button', { name: /ajouter/i });
+	await userEvent.click(addOptionButton);
+	await expect(+count.innerText).toBe(previousTotal + 1);
+});
+
 export const CustomPanelHeader = generateStory({
 	name: 'Custom Panel Header',
 	description: "Pour customiser l'en-tête du panel, il suffit d'utiliser la directive `luCoreSelectPanelHeader`.",
@@ -591,17 +583,16 @@ export const CustomPanelHeader = generateStory({
 		'@lucca-front/ng/core-select': ['LuCoreSelectPanelHeaderDirective'],
 		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent'],
 	},
-	storyPartial: {
-		play: async (context) => {
-			await Basic.play(context);
-			const input = within(context.canvasElement).getByRole('combobox');
-			await userEvent.click(input);
-			await waitForAngular();
-			await expect(screen.getByRole('listbox')).toBeVisible();
-			const panel = within(screen.getByRole('listbox').parentElement);
-			await expect(panel.getByTestId('custom-header')).toBeInTheDocument();
-		},
-	},
+});
+
+export const CustomPanelHeaderTEST = createTestStory(CustomPanelHeader, async (context) => {
+	await basePlay(context);
+	const input = within(context.canvasElement).getByRole('combobox');
+	await userEvent.click(input);
+	await waitForAngular();
+	await expect(screen.getByRole('listbox')).toBeVisible();
+	const panel = within(screen.getByRole('listbox').parentElement);
+	await expect(panel.getByTestId('custom-header')).toBeInTheDocument();
 });
 
 const meta: Meta<LuSimpleSelectInputStoryComponent> = {

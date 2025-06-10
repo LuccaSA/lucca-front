@@ -1,4 +1,6 @@
-import { ArgTypes, StoryObj } from '@storybook/angular';
+import { Args, ArgTypes, StoryObj } from '@storybook/angular';
+import { PlayFunction } from '@storybook/core/csf';
+import { Renderer } from '@storybook/core/types';
 
 export interface StoryGeneratorArgs<TComponent> {
 	name: string;
@@ -109,4 +111,12 @@ export function generateInputs(inputs: Record<string, unknown>, argTypes: ArgTyp
 		}
 		return `${acc} ${name}="${value.toString()}"`;
 	}, '');
+}
+
+export function createTestStory<TRenderer extends Renderer, TArgs = Args>(story: StoryObj<TArgs>, test: PlayFunction<TRenderer, TArgs>): StoryObj {
+	return {
+		...story,
+		name: `${story.name} TEST`,
+		play: test,
+	};
 }
