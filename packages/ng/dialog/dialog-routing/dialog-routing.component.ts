@@ -127,7 +127,7 @@ export class DialogRoutingComponent<C> implements OnInit {
 		}
 
 		if (this.#config.canDeactivate) {
-			canCloseFns.push(this.#getCanCloseFromGuardDialogFn(this.#config.canDeactivate));
+			canCloseFns.push(this.#getCanCloseFromGuardDialogFn(this.#config.canDeactivate as CanDeactivateFn<C>[]));
 		}
 
 		return canCloseFns.length ? (c: C) => combineLatest(canCloseFns.map((fn) => fn(c))).pipe(map((results) => results.every((r) => r))) : undefined;
