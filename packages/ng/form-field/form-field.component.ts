@@ -126,7 +126,7 @@ export class FormFieldComponent implements OnDestroy, DoCheck {
 	counter = input<number>(0);
 
 	get contentLength(): number {
-		return (this.#inputs[0]?.host?.nativeElement as HTMLInputElement)?.value.length || 0;
+		return (this.#inputs[0]?.host?.nativeElement as HTMLInputElement)?.value?.length || 0;
 	}
 
 	public addInput(input: InputDirective) {
