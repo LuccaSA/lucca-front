@@ -1,5 +1,5 @@
 import { AppLayoutComponent } from '@lucca-front/ng/app-layout';
-import { MainLayoutComponent } from '@lucca-front/ng/main-layout';
+import { MainLayoutBlockComponent, MainLayoutComponent } from '@lucca-front/ng/main-layout';
 import { Meta, moduleMetadata } from '@storybook/angular';
 import { cleanupTemplate } from 'stories/helpers/stories';
 
@@ -24,7 +24,7 @@ export default {
 	},
 	decorators: [
 		moduleMetadata({
-			imports: [MainLayoutComponent, AppLayoutComponent],
+			imports: [MainLayoutComponent, AppLayoutComponent, MainLayoutBlockComponent],
 		}),
 	],
 	render: (args: MainLayoutAngularInAppLayoutStory) => {
@@ -33,20 +33,20 @@ export default {
 		const headerStickyParam = args.headerSticky ? `headerSticky` : ``;
 		const footerStickyParam = args.footerSticky ? `footerSticky` : ``;
 		const sidebarContainer = args.sidebar ? `<ng-container mainLayoutSidebar>sidebar</ng-container>` : ``;
-		const content = `<div class="mainLayout-content-inside-block">
+		const content = `<lu-main-layout-block>
 	<div class="fakeContent">
 		<div class="container">
 			content
 		</div>
 	</div>
-</div>`;
-		const contentOverflow = `<div class="mainLayout-content-inside-block mod-overflow">
+</lu-main-layout-block>`;
+		const contentOverflow = `<lu-main-layout-block overflow>
 	<div class="fakeContent" style="width: 80rem">
 		<div class="container">
 			content overflowing
 		</div>
 	</div>
-</div>`;
+</lu-main-layout-block>`;
 		const lastContent = args.contentOverflowing ? contentOverflow : content;
 		return {
 			styles: [

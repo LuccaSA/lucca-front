@@ -25,3 +25,8 @@
 @mixin maxXXXL {
 	--commons-container-maxWidth: var(--commons-container-maxWidthXXXL);
 }
+
+@mixin overflow {
+	--commons-container-maxWidth: none;
+	--commons-container-inlineSize: fit-content;
+}

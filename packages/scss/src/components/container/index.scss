@@ -31,4 +31,8 @@
 	&.mod-maxXXXL {
 		@include maxXXXL;
 	}
+
+	&.mod-overflow {
+		@include overflow;
+	}
 }

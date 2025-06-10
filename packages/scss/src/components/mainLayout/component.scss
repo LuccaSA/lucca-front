@@ -12,6 +12,7 @@
 			overflow-x: hidden;
 			overflow-y: auto;
 			flex-shrink: 0;
+			inline-size: var(--components-mainLayout-sidebar-inlineSize);
 
 			&:focus-visible {
 				@include a11y.focusVisible($offset: -4px);
@@ -27,6 +28,7 @@
 			display: flex;
 			flex-direction: column;
 			position: relative;
+			min-inline-size: 0;
 
 			&:has(> .mainLayout-content-inside:focus-visible) {
 				&::after {
@@ -34,6 +36,7 @@
 					pointer-events: none;
 					inset: 0;
 					position: absolute;
+					z-index: 1;
 
 					@include a11y.focusVisible($offset: -4px);
 				}
@@ -51,6 +54,12 @@
 		.mainLayout-content-inside-block:not(.mod-overflow) {
 			position: sticky;
 			inset-inline-start: 0;
+		}
+
+		.mainLayout-content-inside-block.mod-overflow {
+			.container {
+				@include container.overflow;
+			}
 		}
 
 		.mainLayout-content-inside-header {
