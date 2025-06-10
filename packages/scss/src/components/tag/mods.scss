@@ -21,13 +21,16 @@
 }
 
 @mixin L {
-	--components-tag-fontSize: var(--sizes-M-fontSize);
-	--components-tag-lineHeight: var(--sizes-M-lineHeight);
+	--components-tag-font: var(--pr-t-font-body-M);
 	--components-tag-iconBottom: 0;
 
 	.lucca-icon {
 		@include icon.S;
 	}
+
+	// Deprecated
+	--components-tag-fontSize: var(--pr-t-font-body-M-fontSize);
+	--components-tag-lineHeight: var(--pr-t-font-body-M-lineHeight);
 }
 
 @mixin outlined {

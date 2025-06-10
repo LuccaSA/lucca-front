@@ -1,5 +1,5 @@
 @mixin delete {
-	--components-dropdown-option-actionColor: var(--palettes-error-800);
+	--components-dropdown-option-actionColor: var(--pr-t-color-text-critical);
 
 	&:hover,
 	&:focus-visible {

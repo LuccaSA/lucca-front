@@ -11,7 +11,7 @@
 	@at-root ($atRoot) {
 		.box-close {
 			position: absolute;
-			font-size: var(--sizes-M-fontSize);
+			font-size: var(--pr-t-font-body-M-fontSize);
 			inset-inline-end: var(--pr-t-spacings-50);
 			inset-block-start: var(--pr-t-spacings-50);
 			z-index: 1;

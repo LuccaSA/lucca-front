@@ -15,10 +15,10 @@
 	text-align: center;
 	vertical-align: baseline;
 	white-space: nowrap;
-	font-weight: normal;
 	border: 0;
-	font-size: var(--components-tag-fontSize);
-	line-height: var(--components-tag-lineHeight);
+	font: var(--components-tag-font);
+	font-size: var(--components-tag-fontSize); // Deprecated
+	line-height: var(--components-tag-lineHeight); // Deprecated
 
 	&,
 	&:is(a, button) {

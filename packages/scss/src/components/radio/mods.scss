@@ -6,9 +6,9 @@
 
 @mixin S {
 	.radio-label {
-		line-height: var(--sizes-S-lineHeight);
-		min-block-size: var(--sizes-S-lineHeight);
-		font-size: var(--sizes-S-fontSize);
+		line-height: var(--pr-t-font-body-S-lineHeight);
+		min-block-size: var(--pr-t-font-body-S-lineHeight);
+		font-size: var(--pr-t-font-body-S-fontSize);
 		padding: var(--components-radio-S-label-padding);
 
 		&::before,
@@ -19,8 +19,8 @@
 	}
 
 	.radio-label-helper {
-		line-height: var(--sizes-XS-lineHeight);
-		font-size: var(--sizes-XS-fontSize);
+		line-height: var(--pr-t-font-body-XS-lineHeight);
+		font-size: var(--pr-t-font-body-XS-fontSize);
 	}
 
 	.radio-input:checked ~ .radio-label {

@@ -25,8 +25,7 @@
 		.simpleSelect-field-input {
 			grid-column-start: 1;
 			grid-row-start: 1;
-			font-size: var(--components-simpleSelect-fontSize);
-			line-height: var(--components-simpleSelect-lineHeight);
+			font: var(--components-simpleSelect-font);
 			padding: 0;
 			background-color: transparent;
 			color: var(--components-simpleSelect-value-color);
@@ -46,8 +45,7 @@
 			grid-column-start: 1;
 			grid-row-start: 1;
 			inline-size: 100%;
-			font-size: var(--components-simpleSelect-fontSize);
-			line-height: var(--components-simpleSelect-lineHeight);
+			font: var(--components-simpleSelect-font);
 			color: var(--components-simpleSelect-value-color);
 			white-space: nowrap;
 			overflow: hidden;

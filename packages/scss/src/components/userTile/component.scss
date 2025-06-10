@@ -35,7 +35,7 @@
 		.user-tile-title {
 			font-size: var(--components-userTile-title-fontSize);
 			line-height: var(--components-userTile-title-lineHeight);
-			color: var(--palettes-neutral-800);
+			color: var(--pr-t-color-text);
 			margin: 0;
 		}
 
@@ -50,8 +50,8 @@
 
 		// .user-tile-footnote deprecated
 		.user-tile-footnote {
-			font-size: var(--sizes-S-fontSize);
-			line-height: var(--sizes-S-lineHeight);
+			font-size: var(--pr-t-font-body-S-fontSize);
+			line-height: var(--pr-t-font-body-S-lineHeight);
 		}
 	}
 }
