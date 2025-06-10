@@ -52,6 +52,36 @@ export const Basic: StoryObj<RichTextInputComponent & { value: string; disabled:
 	},
 };
 
+
+export const WithNoInitialValue: StoryObj<RichTextInputComponent & { value: string; disabled: boolean; required: boolean } & FormFieldComponent> = {
+	render: (args, { argTypes }) => {
+		const { value, disabled, required, ...inputArgs } = args;
+		return {
+			props: { value, disabled, required },
+			template: cleanupTemplate(`<lu-form-field label="Label">
+	<lu-rich-text-input
+	${generateInputs(inputArgs, argTypes)}
+		[(ngModel)]="value" [disabled]="disabled" [required]="required">
+			<lu-rich-text-input-toolbar />
+	</lu-rich-text-input>
+</lu-form-field>
+<pr-story-model-display>{{value}}</pr-story-model-display>`),
+			moduleMetadata: {
+				imports: [RichTextInputComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule],
+				providers: [provideLuRichTextMarkdownFormatter()],
+			},
+		};
+	},
+	args: {
+		value: '',
+		placeholder: 'Placeholder…',
+		disabled: false,
+		required: false,
+		disableSpellcheck: false,
+		autoResize: true,
+	},
+};
+
 export const WithHtmlFormatter: StoryObj<RichTextInputComponent & { value: string; disabled: boolean; required: boolean } & FormFieldComponent> = {
 	render: (args, { argTypes }) => {
 		const { value, disabled, required, ...inputArgs } = args;

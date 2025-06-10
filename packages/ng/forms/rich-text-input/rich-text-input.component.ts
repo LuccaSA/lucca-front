@@ -104,7 +104,6 @@ export class RichTextInputComponent implements OnInit, OnDestroy, ControlValueAc
 			nodes: [...this.#customNodes()],
 		});
 
-		this.#editor.setRootElement(this.content().nativeElement);
 		this.#cleanup = mergeRegister(
 			registerRichText(this.#editor),
 			registerHistory(this.#editor, createEmptyHistoryState(), 300),
@@ -118,6 +117,7 @@ export class RichTextInputComponent implements OnInit, OnDestroy, ControlValueAc
 				this.currentCanShowPlaceholder.set(currentCanShowPlaceholder);
 			}),
 		);
+		this.#editor.setRootElement(this.content().nativeElement);
 
 		this.pluginComponents().forEach((plugin) => plugin.setEditorInstance(this.#editor));
 
