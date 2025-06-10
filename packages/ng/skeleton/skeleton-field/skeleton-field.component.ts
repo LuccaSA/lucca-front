@@ -1,4 +1,4 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, input } from '@angular/core';
 
 @Component({
 	selector: 'lu-skeleton-field',
@@ -8,6 +8,7 @@ import { booleanAttribute, ChangeDetectionStrategy, Component, Input } from '@an
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SkeletonFieldComponent {
-	@Input({ transform: booleanAttribute })
-	dark = false;
+	readonly dark = input(false, { transform: booleanAttribute });
+
+	readonly hiddenLabel = input(false, { transform: booleanAttribute });
 }

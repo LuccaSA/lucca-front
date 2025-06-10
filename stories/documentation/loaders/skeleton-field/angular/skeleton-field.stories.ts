@@ -13,9 +13,15 @@ export const Template: StoryObj<SkeletonFieldComponent> = {
 				type: 'boolean',
 			},
 		},
+		hiddenLabel: {
+			control: {
+				type: 'boolean',
+			},
+		},
 	},
 
 	args: {
 		dark: false,
+		hiddenLabel: false,
 	},
 };
