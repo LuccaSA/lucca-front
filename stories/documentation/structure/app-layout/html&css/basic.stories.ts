@@ -24,12 +24,10 @@ export default {
 	}
 	.appLayout-banner {
 		background-color: var(--palettes-neutral-0);
-		border-radius: var(--commons-borderRadius-L);
 	}
 	.appLayout-navSide {
 		background-color: var(--palettes-navigation-800);
 		color: var(--palettes-neutral-0);
-		border-radius: var(--commons-borderRadius-L);
 	}
 }
 				`,

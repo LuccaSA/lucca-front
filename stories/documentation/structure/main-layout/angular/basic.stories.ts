@@ -81,7 +81,6 @@ export default {
 	}
 	.mainLayout-sidebar {
 		background-color: var(--palettes-neutral-200);
-		border-radius: var(--commons-borderRadius-L);
 	}
 	.mainLayout-content-inside-header,
 	.mainLayout-content-inside-footer {
@@ -109,7 +108,6 @@ export default {
 	}
 	.fakeContent {
 		background-color: var(--palettes-neutral-0);
-		border-radius: var(--commons-borderRadius-L);
 		overflow: hidden;
 		min-height: 1.5rem;
 		white-space: nowrap;
