@@ -27,6 +27,5 @@
 }
 
 @mixin overflow {
-	--commons-container-maxWidth: none;
-	--commons-container-inlineSize: fit-content;
+	--components-container-minInlineSize: fit-content;
 }

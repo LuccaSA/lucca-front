@@ -29,6 +29,7 @@
 			flex-direction: column;
 			position: relative;
 			min-inline-size: 0;
+			block-size: 100%;
 
 			&:has(> .mainLayout-content-inside:focus-visible) {
 				&::after {

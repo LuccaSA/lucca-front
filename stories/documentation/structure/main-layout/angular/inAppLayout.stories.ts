@@ -10,6 +10,8 @@ interface MainLayoutAngularInAppLayoutStory {
 	footerSticky: boolean;
 	sidebar: boolean;
 	contentOverflowing: boolean;
+	repeatContent: number;
+	repeatOverflow: number;
 }
 
 export default {
@@ -21,6 +23,13 @@ export default {
 		footerSticky: {
 			if: { arg: 'footer', truthy: true },
 		},
+		repeatContent: {
+			control: { type: 'range', min: 1, max: 10 },
+		},
+		repeatOverflow: {
+			control: { type: 'range', min: 2, max: 10 },
+			if: { arg: 'contentOverflowing', truthy: true },
+		},
 	},
 	decorators: [
 		moduleMetadata({
@@ -28,26 +37,39 @@ export default {
 		}),
 	],
 	render: (args: MainLayoutAngularInAppLayoutStory) => {
-		const headerContainer = args.header ? `<ng-container mainLayoutHeader>header</ng-container>` : ``;
-		const footerContainer = args.footer ? `<ng-container mainLayoutFooter>footer</ng-container>` : ``;
+		const headerContainer = args.header ? `<ng-container mainLayoutHeader><div class="container">header</div></ng-container>` : ``;
+		const footerContainer = args.footer ? `<ng-container mainLayoutFooter><div class="container">footer</div></ng-container>` : ``;
 		const headerStickyParam = args.headerSticky ? `headerSticky` : ``;
 		const footerStickyParam = args.footerSticky ? `footerSticky` : ``;
 		const sidebarContainer = args.sidebar ? `<ng-container mainLayoutSidebar>sidebar</ng-container>` : ``;
-		const content = `<lu-main-layout-block>
-	<div class="fakeContent">
-		<div class="container">
+		const template = `<lu-main-layout-block>
+	<div class="container">
+		<div class="fakeContent">
 			content
 		</div>
 	</div>
 </lu-main-layout-block>`;
-		const contentOverflow = `<lu-main-layout-block overflow>
-	<div class="fakeContent" style="width: 80rem">
-		<div class="container">
-			content overflowing
-		</div>
-	</div>
-</lu-main-layout-block>`;
-		const lastContent = args.contentOverflowing ? contentOverflow : content;
+		const contentOverflow = ` content overflowing`;
+		let overflow = ``;
+		for (let i = 1; i <= args.repeatOverflow; i++) {
+			overflow = overflow + contentOverflow;
+		}
+		const templateOverflow = `<lu-main-layout-block overflow>
+			<div class="container">
+				<div class="fakeContent">
+					${overflow}
+				</div>
+			</div>
+		</lu-main-layout-block>`;
+		let content = ``;
+		for (let i = 1; i <= args.repeatContent; i++) {
+			if (i === args.repeatContent && args.contentOverflowing) {
+				content = content + templateOverflow;
+			} else {
+				content = content + template;
+			}
+		}
+
 		return {
 			styles: [
 				`
@@ -57,7 +79,7 @@ export default {
 		--components-appLayout-inlineSize: 100%;
 		resize: vertical;
 		overflow: hidden;
-		min-height: 10rem;
+		min-height: calc(var(--commons-banner-height) + 3lh);
 	}
 	.appLayout-banner {
 		background-color: var(--palettes-neutral-0);
@@ -76,30 +98,44 @@ export default {
 	.mainLayout-content-inside-header,
 	.mainLayout-content-inside-footer {
 		&.mod-sticky {
-			border-radius: var(--commons-borderRadius-L);
-			background-color: var(--palettes-neutral-0);
+			box-shadow: 0 1px 0 0 var(--palettes-neutral-400);
+			background-color: rgba(256, 256, 256, 0.75);
+		}
+
+		.container {
+			display: flex;
+			justify-content: space-between;
+
+			&::after {
+				content: 'end';
+			}
+		}
+	}
+	.mainLayout-content-inside-footer {
+		&.mod-sticky {
+			box-shadow: 0 -1px 0 0 var(--palettes-neutral-400);
 		}
 	}
 	.container {
 		--commons-container-maxWidth: 40rem;
+	}
+	.fakeContent {
+		background-color: var(--palettes-neutral-0);
+		border-radius: var(--commons-borderRadius-L);
+		overflow: hidden;
+		min-height: 1.5rem;
+		white-space: nowrap;
+		background-image: linear-gradient(to right, currentColor, transparent);
+		background-clip: text;
+  	-webkit-text-fill-color: transparent;
+
 		display: flex;
 		justify-content: space-between;
 
-		.mod-overflow & {
-				--commons-container-maxWidth: none;
-		}
-
 		&::after {
-			content: 'end'
+			content: ' end';
+			-webkit-text-fill-color: currentColor;
 		}
-	}
-	.fakeContent {
-		background-color: var(--palettes-neutral-700);
-		color: var(--palettes-neutral-0);
-		border-radius: var(--commons-borderRadius-L);
-		resize: vertical;
-		overflow: hidden;
-		min-height: 1.5rem;
 	}
 }
 				`,
@@ -114,7 +150,6 @@ export default {
 		${headerContainer}
 		<ng-container mainLayoutContent>
 			${content}
-			${lastContent}
 		</ng-container>
 		${footerContainer}
 	</lu-main-layout>
@@ -131,5 +166,7 @@ export const Basic = {
 		footerSticky: true,
 		sidebar: false,
 		contentOverflowing: false,
+		repeatOverflow: 5,
+		repeatContent: 1,
 	},
 };

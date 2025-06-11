@@ -8,6 +8,8 @@ interface MainLayoutHTMLInAppLayoutStory {
 	footer: boolean;
 	footerSticky: boolean;
 	contentOverflowing: boolean;
+	repeatContent: number;
+	repeatOverflow: number;
 }
 
 export default {
@@ -19,28 +21,47 @@ export default {
 		footerSticky: {
 			if: { arg: 'footer', truthy: true },
 		},
+		repeatContent: {
+			control: { type: 'range', min: 1, max: 10 },
+		},
+		repeatOverflow: {
+			control: { type: 'range', min: 2, max: 10 },
+			if: { arg: 'contentOverflowing', truthy: true },
+		},
 	},
 	render: (args: MainLayoutHTMLInAppLayoutStory) => {
 		const sidebarContainer = args.sidebar ? `<div class="mainLayout-sidebar">sidebar</div>` : ``;
 		const headerStickyParam = args.headerSticky ? `mod-sticky` : ``;
 		const footerStickyParam = args.footerSticky ? `mod-sticky` : ``;
-		const headerContainer = args.header ? `<div class="mainLayout-content-inside-header ${headerStickyParam}">header</div>` : ``;
-		const footerContainer = args.footer ? `<div class="mainLayout-content-inside-footer ${footerStickyParam}">footer</div>` : ``;
-		const content = `<div class="mainLayout-content-inside-block">
-	<div class="fakeContent">
-		<div class="container">
+		const headerContainer = args.header ? `<div class="mainLayout-content-inside-header ${headerStickyParam}"><div class="container">header</div></div>` : ``;
+		const footerContainer = args.footer ? `<div class="mainLayout-content-inside-footer ${footerStickyParam}"><div class="container">footer</div></div>` : ``;
+		const template = `<div class="mainLayout-content-inside-block">
+	<div class="container">
+		<div class="fakeContent">
 			content
 		</div>
 	</div>
 </div>`;
-		const contentOverflow = `<div class="mainLayout-content-inside-block mod-overflow">
-	<div class="fakeContent" style="width: 80rem">
-		<div class="container">
-			content overflowing
-		</div>
-	</div>
-</div>`;
-		const lastContent = args.contentOverflowing ? contentOverflow : content;
+		const contentOverflow = ` content overflowing`;
+		let overflow = ``;
+		for (let i = 1; i <= args.repeatOverflow; i++) {
+			overflow = overflow + contentOverflow;
+		}
+		const templateOverflow = `<div class="mainLayout-content-inside-block mod-overflow">
+			<div class="container">
+				<div class="fakeContent">
+					${overflow}
+				</div>
+			</div>
+		</div>`;
+		let content = ``;
+		for (let i = 1; i <= args.repeatContent; i++) {
+			if (i === args.repeatContent && args.contentOverflowing) {
+				content = content + templateOverflow;
+			} else {
+				content = content + template;
+			}
+		}
 		return {
 			styles: [
 				`
@@ -49,7 +70,7 @@ export default {
 	--components-appLayout-inlineSize: 100%;
 	resize: vertical;
 	overflow: hidden;
-	min-height: 10rem;
+	min-height: calc(var(--commons-banner-height) + 3lh);
 }
 .appLayout-banner {
 	background-color: var(--palettes-neutral-0);
@@ -60,35 +81,52 @@ export default {
 	color: var(--palettes-neutral-0);
 	border-radius: var(--commons-borderRadius-L);
 }
+
 .mainLayout-sidebar {
 	background-color: var(--palettes-neutral-200);
 	border-radius: var(--commons-borderRadius-L);
 }
 .mainLayout-content-inside-header,
 .mainLayout-content-inside-footer {
-	background-color: var(--palettes-neutral-0);
-	border-radius: var(--commons-borderRadius-L);
-}
-.container {
-		--commons-container-maxWidth: 40rem;
+	&.mod-sticky {
+		box-shadow: 0 1px 0 0 var(--palettes-neutral-400);
+		background-color: rgba(256, 256, 256, 0.75);
+	}
+
+	.container {
 		display: flex;
 		justify-content: space-between;
 
-		.mod-overflow & {
-				--commons-container-maxWidth: none;
-		}
-
 		&::after {
-			content: 'end'
+			content: 'end';
 		}
 	}
+}
+.mainLayout-content-inside-footer {
+	&.mod-sticky {
+		box-shadow: 0 -1px 0 0 var(--palettes-neutral-400);
+	}
+}
+.container {
+	--commons-container-maxWidth: 40rem;
+}
 .fakeContent {
-	background-color: var(--palettes-neutral-700);
-	color: var(--palettes-neutral-0);
+	background-color: var(--palettes-neutral-0);
 	border-radius: var(--commons-borderRadius-L);
-	resize: vertical;
 	overflow: hidden;
 	min-height: 1.5rem;
+	white-space: nowrap;
+	background-image: linear-gradient(to right, currentColor, transparent);
+	background-clip: text;
+	-webkit-text-fill-color: transparent;
+
+	display: flex;
+	justify-content: space-between;
+
+	&::after {
+		content: ' end';
+		-webkit-text-fill-color: currentColor;
+	}
 }
 				`,
 			],
@@ -105,7 +143,6 @@ export default {
 				<div class="mainLayout-content-inside">
 					${headerContainer}
 					${content}
-					${lastContent}
 					${footerContainer}
 				</div>
 			</div>
@@ -125,5 +162,7 @@ export const Basic = {
 		footerSticky: true,
 		sidebar: false,
 		contentOverflowing: false,
+		repeatOverflow: 5,
+		repeatContent: 1,
 	},
 };
