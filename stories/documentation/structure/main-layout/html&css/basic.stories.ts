@@ -69,7 +69,7 @@ export default {
 .mainLayout {
 		resize: vertical;
 		overflow: auto;
-		min-height: 3lh;
+		min-block-size: 3lh;
 	}
 	.mainLayout-sidebar {
 		background-color: var(--palettes-neutral-200);
@@ -100,8 +100,6 @@ export default {
 	}
 	.fakeContent {
 		background-color: var(--palettes-neutral-0);
-		overflow: hidden;
-		min-height: 1.5rem;
 		white-space: nowrap;
 		background-image: linear-gradient(to right, currentColor, transparent);
 		background-clip: text;

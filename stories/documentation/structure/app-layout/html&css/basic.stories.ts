@@ -20,7 +20,7 @@ export default {
 		--components-appLayout-inlineSize: 100%;
 		resize: vertical;
 		overflow: hidden;
-		min-height: 10rem;
+		min-block-size: 10rem;
 	}
 	.appLayout-banner {
 		background-color: var(--palettes-neutral-0);

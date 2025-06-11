@@ -70,7 +70,7 @@ export default {
 	--components-appLayout-inlineSize: 100%;
 	resize: vertical;
 	overflow: hidden;
-	min-height: calc(var(--commons-banner-height) + 3lh);
+	min-block-size: calc(var(--commons-banner-height) + 3lh);
 }
 .appLayout-banner {
 	background-color: var(--palettes-neutral-0);
@@ -109,8 +109,6 @@ export default {
 }
 .fakeContent {
 	background-color: var(--palettes-neutral-0);
-	overflow: hidden;
-	min-height: 1.5rem;
 	white-space: nowrap;
 	background-image: linear-gradient(to right, currentColor, transparent);
 	background-clip: text;
