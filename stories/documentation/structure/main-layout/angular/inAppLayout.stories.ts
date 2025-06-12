@@ -27,7 +27,7 @@ export default {
 			control: { type: 'range', min: 1, max: 10 },
 		},
 		repeatOverflow: {
-			control: { type: 'range', min: 2, max: 10 },
+			control: { type: 'range', min: 1, max: 10 },
 			if: { arg: 'contentOverflowing', truthy: true },
 		},
 	},
@@ -37,8 +37,8 @@ export default {
 		}),
 	],
 	render: (args: MainLayoutAngularInAppLayoutStory) => {
-		const headerContainer = args.header ? `<ng-container mainLayoutHeader><div class="container">header</div></ng-container>` : ``;
-		const footerContainer = args.footer ? `<ng-container mainLayoutFooter><div class="container">footer</div></ng-container>` : ``;
+		const headerContainer = args.header ? `<ng-container mainLayoutHeader><div class="container"><div class="fakeContent">header</div></div></ng-container>` : ``;
+		const footerContainer = args.footer ? `<ng-container mainLayoutFooter><div class="container"><div class="fakeContent">footer</div></div></ng-container>` : ``;
 		const headerStickyParam = args.headerSticky ? `headerSticky` : ``;
 		const footerStickyParam = args.footerSticky ? `footerSticky` : ``;
 		const sidebarContainer = args.sidebar ? `<ng-container mainLayoutSidebar>sidebar</ng-container>` : ``;
@@ -79,57 +79,109 @@ export default {
 		--components-appLayout-inlineSize: 100%;
 		resize: vertical;
 		overflow: hidden;
-		min-block-size: calc(var(--commons-banner-height) + 3lh);
-	}
-	.appLayout-banner {
-		background-color: var(--palettes-neutral-0);
+		min-block-size: 298px;
+		border-radius: var(--commons-borderRadius-L);
+		border: 1px solid var(--palettes-neutral-200);
 
-	}
-	.appLayout-navSide {
-		background-color: var(--palettes-navigation-800);
-		color: var(--palettes-neutral-0);
-	}
+		> * {
+			font-family: monospace;
+			padding-block: var(--pr-t-spacings-300);
 
-	.mainLayout-sidebar {
-		background-color: var(--palettes-neutral-200);
-	}
-	.mainLayout-content-inside-header,
-	.mainLayout-content-inside-footer {
-		&.mod-sticky {
-			box-shadow: 0 1px 0 0 var(--palettes-neutral-400);
-			background-color: rgba(256, 256, 256, 0.75);
-		}
+			&:not(.appLayout-main) {
+				display: grid;
+				place-items: center;
+			}
 
-		.container {
-			display: flex;
-			justify-content: space-between;
+			&.appLayout-banner {
+				padding-block: 0;
+			}
 
-			&::after {
-				content: 'end';
+			&.appLayout-navSide {
+				padding-inline: var(--pr-t-spacings-400);
 			}
 		}
 	}
-	.mainLayout-content-inside-footer {
-		&.mod-sticky {
-			box-shadow: 0 -1px 0 0 var(--palettes-neutral-400);
+
+	.appLayout-banner {
+		background-color: var(--pr-t-elevation-surface-raised);
+		box-shadow: var(--pr-t-elevation-shadow-overflow);
+		position: relative;
+
+		&::before {
+			content: '';
+			position: absolute;
+			inset-inline-start: var(--pr-t-spacings-100);
+			width: 122px;
+			height: 32px;
+			background-color: var(--palettes-neutral-50);
+			border-radius: var(--commons-borderRadius-M);
 		}
-	}
-	.container {
-		--commons-container-maxWidth: 40rem;
-	}
-	.fakeContent {
-		background-color: var(--palettes-neutral-0);
-		white-space: nowrap;
-		background-image: linear-gradient(to right, currentColor, transparent);
-		background-clip: text;
-  	-webkit-text-fill-color: transparent;
-		display: flex;
-		justify-content: space-between;
 
 		&::after {
-			content: ' end';
-			-webkit-text-fill-color: currentColor;
+			content: '';
+			position: absolute;
+			inset-inline-end: var(--pr-t-spacings-100);
+			width: 32px;
+			height: 32px;
+			background-color: var(--palettes-neutral-200);
+			border-radius: var(--commons-borderRadius-full);
 		}
+	}
+
+	.appLayout-navSide {
+		background-color: var(--palettes-neutral-500);
+	}
+
+	.mainLayout {
+		@media (width < 50em) {
+			gap: var(--pr-t-spacings-300);
+		}
+	}
+
+	.mainLayout-sidebar {
+		background-color: var(--pr-t-elevation-surface-raised);
+		border: 1px solid var(--palettes-neutral-50);
+		padding: var(--pr-t-spacings-150);
+		align-items: center;
+		justify-content: center;
+		display: flex;
+		flex-direction: column;
+		color: var(--palettes-brand-700);
+		font-family: monospace;
+
+		@media (width >= 50em) {
+				margin-left: var(--pr-t-spacings-400);
+		}
+
+		@media (width < 50em) {
+			max-width: 46rem;
+			margin-inline: 2rem;
+		}
+
+		@media (width < 40em) {
+			margin-inline: 1rem;
+		}
+	}
+
+	.mainLayout-content-inside {
+		gap: var(--pr-t-spacings-300);
+	}
+
+	.container {
+		--commons-container-maxWidth: 50rem;
+	}
+
+	.fakeContent {
+		background-color: var(--pr-t-elevation-surface-raised);
+		border: 1px solid var(--palettes-neutral-50);
+		padding: var(--pr-t-spacings-150);
+		align-items: center;
+		justify-content: center;
+		display: flex;
+		flex-direction: column;
+		color: var(--palettes-brand-700);
+		font-family: monospace;
+		white-space: nowrap;
 	}
 }
 				`,

@@ -27,7 +27,7 @@ export default {
 			control: { type: 'range', min: 1, max: 10 },
 		},
 		repeatOverflow: {
-			control: { type: 'range', min: 2, max: 10 },
+			control: { type: 'range', min: 1, max: 10 },
 			if: { arg: 'contentOverflowing', truthy: true },
 		},
 	},
@@ -37,8 +37,8 @@ export default {
 		}),
 	],
 	render: (args: MainLayoutAngularBasicStory) => {
-		const headerContainer = args.header ? `<ng-container mainLayoutHeader><div class="container">header</div></ng-container>` : ``;
-		const footerContainer = args.footer ? `<ng-container mainLayoutFooter><div class="container">footer</div></ng-container>` : ``;
+		const headerContainer = args.header ? `<ng-container mainLayoutHeader><div class="container"><div class="fakeContent">header</div></div></ng-container>` : ``;
+		const footerContainer = args.footer ? `<ng-container mainLayoutFooter><div class="container"><div class="fakeContent">footer</div></div></ng-container>` : ``;
 		const headerStickyParam = args.headerSticky ? `headerSticky` : ``;
 		const footerStickyParam = args.footerSticky ? `footerSticky` : ``;
 		const sidebarContainer = args.sidebar ? `<ng-container mainLayoutSidebar>sidebar</ng-container>` : ``;
@@ -77,49 +77,53 @@ export default {
   .mainLayout {
 		resize: vertical;
 		overflow: auto;
-		min-block-size: 3lh;
+		min-block-size: 198px;
+
+		@media (width < 50em) {
+			gap: var(--pr-t-spacings-300);
+		}
 	}
+
 	.mainLayout-sidebar {
-		background-color: var(--palettes-neutral-200);
-	}
-	.mainLayout-content-inside-header,
-	.mainLayout-content-inside-footer {
-		&.mod-sticky {
-			box-shadow: 0 1px 0 0 var(--palettes-neutral-400);
-			background-color: rgba(256, 256, 256, 0.75);
-		}
-
-		.container {
-			display: flex;
-			justify-content: space-between;
-
-			&::after {
-				content: 'end';
-			}
-		}
-	}
-	.mainLayout-content-inside-footer {
-		&.mod-sticky {
-			box-shadow: 0 -1px 0 0 var(--palettes-neutral-400);
-		}
-	}
-	.container {
-		--commons-container-maxWidth: 40rem;
-	}
-	.fakeContent {
-		background-color: var(--palettes-neutral-0);
-		white-space: nowrap;
-		background-image: linear-gradient(to right, currentColor, transparent);
-		background-clip: text;
-  	-webkit-text-fill-color: transparent;
-
+		background-color: var(--pr-t-elevation-surface-raised);
+		border: 1px solid var(--palettes-neutral-50);
+		padding: var(--pr-t-spacings-150);
+		align-items: center;
+		justify-content: center;
 		display: flex;
-		justify-content: space-between;
+		flex-direction: column;
+		color: var(--palettes-brand-700);
+		font-family: monospace;
 
-		&::after {
-			content: ' end';
-			-webkit-text-fill-color: currentColor;
+		@media (width < 50em) {
+			max-width: 46rem;
+			margin-inline: 2rem;
 		}
+
+		@media (width < 40em) {
+			margin-inline: 1rem;
+		}
+	}
+
+	.mainLayout-content-inside {
+		gap: var(--pr-t-spacings-300);
+	}
+
+	.container {
+		--commons-container-maxWidth: 50rem;
+	}
+
+	.fakeContent {
+		background-color: var(--pr-t-elevation-surface-raised);
+		border: 1px solid var(--palettes-neutral-50);
+		padding: var(--pr-t-spacings-150);
+		align-items: center;
+		justify-content: center;
+		display: flex;
+		flex-direction: column;
+		color: var(--palettes-brand-700);
+		font-family: monospace;
+		white-space: nowrap;
 	}
 }
 				`,
