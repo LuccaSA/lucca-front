@@ -6,6 +6,7 @@
 	background-color: var(--components-filterBar-backgroundColor);
 	border-radius: var(--commons-borderRadius-L);
 	border: var(--commons-divider-width) solid var(--commons-border-200);
+	/* stylelint-disable-next-line container-name-pattern */
 	container-name: filterBar;
 	container-type: inline-size;
 	padding: var(--pr-t-spacings-200);
