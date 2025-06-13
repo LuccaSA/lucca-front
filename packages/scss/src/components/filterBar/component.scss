@@ -10,6 +10,11 @@
 @use '@lucca-front/scss/src/components/textField/exports' as textField;
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
+	display: flex;
+	align-items: flex-start;
+	flex-wrap: wrap;
+	gap: var(--pr-t-spacings-100);
+
 	.textField {
 		@include textField.filterPill;
 	}
@@ -21,32 +26,19 @@
 			}
 		}
 
+		.filterBar-scrollBox {
+			flex-grow: var(--components-filterBar-scrollBox-flexGrow);
+		}
+
 		.filterBar-segmentedControl.segmentedControl {
 			@include segmentedControl.S;
 		}
 
-		.filterBar-scrollBox.scrollBox {
-			align-items: flex-start;
-		}
-
-		.filterBar-scrollBox-first {
-			display: var(--components-filterBar-extremitiesDisplay);
-			margin-inline-end: calc(var(--components-scrollBox-gap) * -1);
-		}
-
-		.filterBar-scrollBox-last {
-			display: var(--components-filterBar-extremitiesDisplay);
-			margin-inline-start: calc(var(--components-scrollBox-gap) * -1);
-		}
-
 		.filterBar-scrollBox-group {
 			display: flex;
-			gap: var(--components-scrollBox-gap);
-			flex-wrap: wrap;
-
-			&:has(+ .filterBar-scrollBox-last) {
-				flex-grow: 1;
-			}
+			gap: var(--pr-t-spacings-100);
+			flex-wrap: var(--components-filterBar-scrollBox-group-flexWrap);
+			flex-grow: 1;
 		}
 
 		.filterBar-scrollBox-export {
