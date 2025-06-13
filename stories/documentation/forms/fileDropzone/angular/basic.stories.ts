@@ -14,7 +14,7 @@ export default {
 	render: (args, { argTypes }) => {
 		return {
 			template: `<lu-file-dropzone />`,
-			styles: [`:host { display: block; min-height: 23rem }`],
+			styles: [`:host { display: block; min-block-size: 23rem }`],
 		};
 	},
 } as Meta;

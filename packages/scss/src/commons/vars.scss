@@ -87,14 +87,8 @@
 	--commons-background-base: var(--palettes-neutral-25);
 	--commons-divider-color: var(--palettes-neutral-200);
 
-	@each $breakpoint, $value in config.$breakpoints {
-		--commons-container-maxWidth#{$breakpoint}: #{function.pxToRem($value)};
-	}
-
-	--commons-container-maxWidth: var(--commons-container-maxWidthXXL);
-	--commons-container-padding: 3.5rem;
-
-	--commons-navSide-width: 0rem; // unit is required for calc
+	--commons-navSide-width: 0px;
+	/* stylelint-disable-next-line property-disallowed-list */
 	--commons-navSide-compact-width: 7.5rem;
 	--commons-navSide-mobile-toggle-height: 3.5rem;
 

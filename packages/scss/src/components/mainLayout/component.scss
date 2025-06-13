@@ -1,0 +1,88 @@
+@use '@lucca-front/scss/src/commons/utils/a11y';
+@use '@lucca-front/scss/src/commons/utils/namespace';
+@use '@lucca-front/scss/src/components/container/exports' as container;
+
+@mixin component($atRoot: namespace.$defaultAtRoot) {
+	display: flex;
+	flex-direction: var(--components-mainLayout-flexDirection);
+	block-size: 100%;
+
+	@at-root ($atRoot) {
+		.mainLayout-sidebar {
+			overflow-x: hidden;
+			overflow-y: auto;
+			flex-shrink: 0;
+			inline-size: var(--components-mainLayout-sidebar-inlineSize);
+
+			&:focus-visible {
+				@include a11y.focusVisible($offset: -4px);
+			}
+
+			&:empty {
+				display: none;
+			}
+		}
+
+		.mainLayout-content {
+			flex-grow: 1;
+			display: flex;
+			flex-direction: column;
+			position: relative;
+			min-inline-size: 0;
+			min-block-size: 0;
+
+			&:has(> .mainLayout-content-inside:focus-visible) {
+				&::after {
+					content: '';
+					pointer-events: none;
+					inset: 0;
+					position: absolute;
+					z-index: 1;
+
+					@include a11y.focusVisible($offset: -4px);
+				}
+			}
+		}
+
+		.mainLayout-content-inside {
+			flex-grow: 1;
+			display: flex;
+			flex-direction: column;
+			overflow: auto;
+			outline: none;
+		}
+
+		.mainLayout-content-inside-block {
+			inset-inline-start: 0;
+			position: var(--components-mainLayout-content-inside-block-position);
+
+			&.mod-overflow {
+				.container {
+					@include container.overflow;
+				}
+			}
+		}
+
+		.mainLayout-content-inside-header {
+			position: var(--components-mainLayout-content-inside-header-position);
+			z-index: 1;
+			inset-block-start: var(--components-mainLayout-content-inside-header-insetBlockStart);
+			inset-inline-start: 0;
+
+			&:empty {
+				display: none;
+			}
+		}
+
+		.mainLayout-content-inside-footer {
+			position: var(--components-mainLayout-content-inside-footer-position);
+			inset-block-end: var(--components-mainLayout-content-inside-footer-insetBlockEnd);
+			inset-inline-start: 0;
+			margin-block-start: auto;
+
+			&:empty {
+				display: none;
+			}
+		}
+	}
+}
