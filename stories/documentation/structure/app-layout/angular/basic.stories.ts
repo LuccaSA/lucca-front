@@ -26,7 +26,7 @@ export default {
 		--components-appLayout-inlineSize: 100%;
 		resize: vertical;
 		overflow: hidden;
-		min-block-size: 298px;
+		min-block-size: 394px;
 		border-radius: var(--commons-borderRadius-L);
 		border: 1px solid var(--palettes-neutral-200);
 

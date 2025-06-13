@@ -2,10 +2,22 @@
 	--components-mainLayout-flexDirection: row;
 }
 
-@mixin headerStickyBlock {
+@mixin stickyHeader {
+	--components-mainLayout-content-inside-header-position: sticky;
+}
+
+@mixin stickyFooter {
+	--components-mainLayout-content-inside-footer-position: sticky;
+}
+
+@mixin stickyBlock {
+	--components-mainLayout-content-inside-block-position: sticky;
+}
+
+@mixin stickyTop {
 	--components-mainLayout-content-inside-header-insetBlockStart: 0;
 }
 
-@mixin footerStickyBlock {
+@mixin stickyBottom {
 	--components-mainLayout-content-inside-footer-insetBlockEnd: 0;
 }

@@ -79,13 +79,12 @@ export default {
 		--components-appLayout-inlineSize: 100%;
 		resize: vertical;
 		overflow: hidden;
-		min-block-size: 298px;
+		min-block-size: 394px;
 		border-radius: var(--commons-borderRadius-L);
 		border: 1px solid var(--palettes-neutral-200);
 
 		> * {
 			font-family: monospace;
-			padding-block: var(--pr-t-spacings-300);
 
 			&:not(.appLayout-main) {
 				display: grid;
@@ -97,7 +96,7 @@ export default {
 			}
 
 			&.appLayout-navSide {
-				padding-inline: var(--pr-t-spacings-400);
+				padding: var(--pr-t-spacings-150) var(--pr-t-spacings-400);
 			}
 		}
 	}
@@ -132,15 +131,8 @@ export default {
 		background-color: var(--palettes-neutral-500);
 	}
 
-	.mainLayout {
-		@media (width < 50em) {
-			gap: var(--pr-t-spacings-300);
-		}
-	}
-
 	.mainLayout-sidebar {
-		background-color: var(--pr-t-elevation-surface-raised);
-		border: 1px solid var(--palettes-neutral-50);
+		background-color: var(--palettes-neutral-50);
 		padding: var(--pr-t-spacings-150);
 		align-items: center;
 		justify-content: center;
@@ -148,23 +140,11 @@ export default {
 		flex-direction: column;
 		color: var(--palettes-brand-700);
 		font-family: monospace;
-
-		@media (width >= 50em) {
-				margin-left: var(--pr-t-spacings-400);
-		}
-
-		@media (width < 50em) {
-			max-width: 46rem;
-			margin-inline: 2rem;
-		}
-
-		@media (width < 40em) {
-			margin-inline: 1rem;
-		}
 	}
 
 	.mainLayout-content-inside {
 		gap: var(--pr-t-spacings-300);
+		padding-block: var(--pr-t-spacings-300);
 	}
 
 	.container {

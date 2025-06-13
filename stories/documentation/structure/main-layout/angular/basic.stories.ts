@@ -76,17 +76,12 @@ export default {
 :host {
   .mainLayout {
 		resize: vertical;
-		overflow: auto;
-		min-block-size: 198px;
-
-		@media (width < 50em) {
-			gap: var(--pr-t-spacings-300);
-		}
+		overflow: hidden;
+		min-block-size: 296px;
 	}
 
 	.mainLayout-sidebar {
-		background-color: var(--pr-t-elevation-surface-raised);
-		border: 1px solid var(--palettes-neutral-50);
+		background-color: var(--palettes-neutral-50);
 		padding: var(--pr-t-spacings-150);
 		align-items: center;
 		justify-content: center;
@@ -94,19 +89,11 @@ export default {
 		flex-direction: column;
 		color: var(--palettes-brand-700);
 		font-family: monospace;
-
-		@media (width < 50em) {
-			max-width: 46rem;
-			margin-inline: 2rem;
-		}
-
-		@media (width < 40em) {
-			margin-inline: 1rem;
-		}
 	}
 
 	.mainLayout-content-inside {
 		gap: var(--pr-t-spacings-300);
+		padding-block: var(--pr-t-spacings-300);
 	}
 
 	.container {
