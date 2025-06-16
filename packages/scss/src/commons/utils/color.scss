@@ -27,4 +27,6 @@
 @mixin contrasted {
 	@include core.cssvars('pr-t-color-input', config.$colorInputContrasted);
 	@include core.rosetta('--palettes-brand', '--palettes-brandContrasted', config.$palettesShades);
+	@include core.rosetta('--palettes-success', '--palettes-successContrasted', config.$palettesShades);
+	@include core.rosetta('--palettes-warning', '--palettes-warningContrasted', config.$palettesShades);
 }
