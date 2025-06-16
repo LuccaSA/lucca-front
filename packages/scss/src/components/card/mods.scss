@@ -5,7 +5,7 @@
 }
 
 @mixin clickable {
-	color: var(--palettes-neutral-800);
+	color: var(--pr-t-color-text);
 	text-decoration: none;
 	cursor: pointer;
 

@@ -14,15 +14,13 @@
 	gap: var(--components-filterPill-gap);
 	align-items: center;
 	background-color: var(--components-filterPill-backgroundColor);
-	width: fit-content;
+	inline-size: fit-content;
 	padding: var(--components-filterPill-padding);
 	border-radius: var(--commons-borderRadius-L);
 	color: var(--components-filterPill-color);
-	font-size: var(--sizes-S-fontSize);
-	line-height: var(--sizes-S-lineHeight);
+	font: var(--pr-t-font-body-S);
 	box-shadow: var(--components-filterPill-shadow);
 	position: relative;
-	max-inline-size: 18rem;
 	white-space: nowrap;
 	transition-property: box-shadow;
 	transition-duration: var(--commons-animations-durations-fast);
@@ -72,6 +70,7 @@
 			outline: none;
 			text-align: center;
 			flex-shrink: 0;
+			max-inline-size: var(--components-filterPill-label-maxInlineSize);
 
 			&::before {
 				content: '';
@@ -117,13 +116,14 @@
 			width: auto;
 			z-index: 1;
 			margin-inline-start: 0.5ch;
-			min-width: 0;
+			min-inline-size: 0;
 			overflow: hidden;
 			text-overflow: ellipsis;
 			cursor: var(--components-filterPill-label-cursor);
 			display: flex;
 			align-items: center;
 			gap: var(--pr-t-spacings-50);
+			max-inline-size: 15rem;
 
 			&:focus-visible {
 				outline: none;
@@ -192,8 +192,7 @@
 				text-transform: none;
 				white-space: nowrap;
 				word-wrap: normal;
-				content: '\e97d'; // Remove when content alternative will have a good support
-				content: '\e97d'/ '';
+				content: '\e97d' / '';
 			}
 		}
 

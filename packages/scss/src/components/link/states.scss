@@ -1,4 +1,4 @@
 @mixin disabled {
-	color: var(--commons-text-link-disabled);
-	cursor: not-allowed; // disabled token candidate
+	color: var(--pr-t-color-text-disabled);
+	cursor: not-allowed;
 }

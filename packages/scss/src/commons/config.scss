@@ -8,6 +8,7 @@ $deprecatedSpacings: false !default;
 $prefersContrast: 'no-preference' !default;
 
 $fontFamily: 'SourceSans' !default;
+$fontFamilyBrand: 'LuccaSans' !default;
 $fontWeights: (
 	'regular': 400,
 	'semibold': 600,
@@ -16,7 +17,6 @@ $fontWeights: (
 ) !default;
 $fontStyles: ('normal') !default;
 
-$fontFamilyBrand: false !default;
 $fontWeightsBrand: (
 	'regular': 400,
 	'bold': 700,
@@ -30,6 +30,59 @@ $fontWeightsCursive: (
 	'bold': 700,
 ) !default;
 $fontStylesCursive: ('normal') !default;
+
+$fontSizeVars: (
+	'150': 0.75rem,
+	'175': 0.875rem,
+	'200': 1rem,
+	'225': 1.125rem,
+	'250': 1.25rem,
+	'275': 1.375rem,
+	'300': 1.5rem,
+	'325': 1.625rem,
+	'350': 1.75rem,
+);
+
+$lineHeight: (
+	'200': 1rem,
+	'250': 1.25rem,
+	'300': 1.5rem,
+	'350': 1.75rem,
+	'400': 2rem,
+);
+
+$fontTokens: (
+	heading-1-fontSize: var(--pr-t-font-fontSize-350),
+	heading-1-lineHeight: var(--pr-t-font-lineHeight-400),
+	heading-1-fontWeight: var(--pr-t-font-fontWeight-black),
+	heading-2-fontSize: var(--pr-t-font-fontSize-275),
+	heading-2-lineHeight: var(--pr-t-font-lineHeight-350),
+	heading-2-fontWeight: var(--pr-t-font-fontWeight-bold),
+	heading-3-fontSize: var(--pr-t-font-fontSize-225),
+	heading-3-lineHeight: var(--pr-t-font-lineHeight-300),
+	heading-3-fontWeight: var(--pr-t-font-fontWeight-bold),
+	heading-4-fontSize: var(--pr-t-font-fontSize-200),
+	heading-4-lineHeight: var(--pr-t-font-lineHeight-300),
+	heading-4-fontWeight: var(--pr-t-font-fontWeight-semibold),
+	highlight-XXL-fontSize: var(--pr-t-font-fontSize-350),
+	highlight-XXL-lineHeight: var(--pr-t-font-lineHeight-400),
+	highlight-XXL-fontWeight: var(--pr-t-font-fontWeight-black),
+	highlight-XL-fontSize: var(--pr-t-font-fontSize-275),
+	highlight-XL-lineHeight: var(--pr-t-font-lineHeight-350),
+	highlight-XL-fontWeight: var(--pr-t-font-fontWeight-bold),
+	highlight-L-fontSize: var(--pr-t-font-fontSize-225),
+	highlight-L-lineHeight: var(--pr-t-font-lineHeight-300),
+	highlight-L-fontWeight: var(--pr-t-font-fontWeight-bold),
+	body-M-fontSize: var(--pr-t-font-fontSize-200),
+	body-M-lineHeight: var(--pr-t-font-lineHeight-300),
+	body-M-fontWeight: var(--pr-t-font-fontWeight-regular),
+	body-S-fontSize: var(--pr-t-font-fontSize-175),
+	body-S-lineHeight: var(--pr-t-font-lineHeight-250),
+	body-S-fontWeight: var(--pr-t-font-fontWeight-regular),
+	body-XS-fontSize: var(--pr-t-font-fontSize-150),
+	body-XS-lineHeight: var(--pr-t-font-lineHeight-200),
+	body-XS-fontWeight: var(--pr-t-font-fontWeight-regular),
+);
 
 $product: 'brand' !default;
 $palettesShades: text, 0, 25, 50, 100, 200, 300, 400, 500, 600, 700, 800, 900; // text is deprecated
@@ -179,8 +232,8 @@ $neutral: (
 	200: #ced9ee,
 	300: #becbe4,
 	400: #acbbd7,
-	500: #96a6c5,
-	600: #667799,
+	500: #8396b9,
+	600: #586a8d,
 	700: #445473,
 	800: #2a3551,
 	900: #0b1732
@@ -471,7 +524,7 @@ $colorInput: (
 	text-placeholder: var(--palettes-neutral-400),
 	text-placeholder-critical: var(--palettes-critical-400),
 	text-suffix: var(--palettes-neutral-600),
-	text-disabled: var(--palettes-neutral-700),
+	text-disabled: var(--palettes-neutral-600),
 	icon: var(--palettes-neutral-600),
 	icon-disabled: var(--palettes-neutral-500),
 	background: var(--palettes-neutral-0),
@@ -479,6 +532,8 @@ $colorInput: (
 	background-disabled: var(--palettes-neutral-100),
 	border: var(--palettes-neutral-300),
 	border-hover: var(--palettes-neutral-400),
+	border-checked: var(--palettes-product-400),
+	border-checked-hover: var(--palettes-product-600),
 	border-critical: var(--palettes-critical-400),
 	border-critical-hover: var(--palettes-critical-600),
 );
@@ -490,6 +545,18 @@ $colorInputContrasted: (
 	border-hover: var(--palettes-neutral-700),
 	border-critical: var(--palettes-critical-700),
 	border-critical-hover: var(--palettes-critical-800),
+);
+
+$colorText: (
+	'': var(--palettes-neutral-800),
+	heading: var(--palettes-neutral-900),
+	highlight: var(--palettes-neutral-900),
+	subtle: var(--palettes-neutral-600),
+	disabled: var(--palettes-neutral-500),
+	reverse: var(--palettes-neutral-0),
+	success: var(--palettes-success-700),
+	warning: var(--palettes-warning-700),
+	critical: var(--palettes-critical-700),
 );
 
 $breakpoints: (

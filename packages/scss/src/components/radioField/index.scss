@@ -22,10 +22,6 @@
 		@include active;
 	}
 
-	&:disabled {
-		@include disabled;
-	}
-
 	&[aria-invalid='true'] {
 		@include invalid;
 
@@ -35,6 +31,13 @@
 
 		&:active {
 			@include invalidActive;
+		}
+	}
+
+	&:disabled {
+		&,
+		&:hover {
+			@include disabled;
 		}
 	}
 

@@ -30,7 +30,7 @@
 					role="group"
 					attr.aria-labelledby="lu-select-{{selectId}}-group-{{groupIndex}}"
 				>
-					@let groupCtx = group.options | luOptionsGroupContext:selectedOptions:optionComparer;
+        @let groupCtx = group.options | luOptionsGroupContext:selectedOptions:optionComparer;
 					<div
 						luCoreSelectPanelElement
 						elementId="lu-select-{{selectId}}-group-{{groupIndex}}"
@@ -41,7 +41,7 @@
 						<span #groupingTitleRef>
 							<ng-container *luPortal="grouping.content; context: { $implicit: group }" />
 						</span>
-						<button type="button" class="link" (click)="toggleOptions(groupCtx.notSelectedOptions, group.options)">
+						<button type="button" class="link" (click)="toggleOptions(groupCtx.notSelectedOptions, group.options)" [id]="selectId + '-group-' + group.key">
 							<span class="u-mask">{{ groupingTitleRef.innerText }}&nbsp;– </span>{{ groupCtx.isGroupSelected ? intl.unselectAll :
 							intl.selectAll }}
 						</button>
@@ -65,7 +65,7 @@
 					[groupTemplateLocation]="ctx.groupTemplateLocation"
 					[scrollIntoViewOptions]="{ block: 'nearest' }"
 					[isSelected]="option | luIsOptionSelected:optionComparer:selectedOptions"
-					(selected)="toggleOption(option)"
+					(selected)="toggleOption(option)
 					(click)="toggleOption(option)"
 					[class.withAddOption]="ctx.shouldDisplayAddOption"
 				/>

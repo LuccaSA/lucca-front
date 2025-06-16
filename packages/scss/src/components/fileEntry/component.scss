@@ -146,8 +146,7 @@
 			grid-area: description;
 			align-self: start;
 			color: var(--palettes-neutral-600);
-			font-size: var(--sizes-S-fontSize);
-			line-height: var(--sizes-S-lineHeight);
+			font: var(--pr-t-font-body-S);
 			display: var(--components-fileEntry-description-display);
 			margin: 0;
 			gap: var(--pr-t-spacings-100);

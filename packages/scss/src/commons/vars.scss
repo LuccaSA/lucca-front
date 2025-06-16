@@ -6,16 +6,46 @@
 @use '@lucca-front/scss/src/commons/function';
 
 @mixin vars {
-	// TOKENS
+	// TOKENS : TYPO
+
+	--pr-t-font-family: '#{config.$fontFamily}', Tahoma, sans-serif;
+	--pr-t-font-family-brand: '#{config.$fontFamilyBrand}', Tahoma, sans-serif;
+
+	@if (config.$fontFamilyCursive) {
+		--pr-t-font-family-cursive: '#{config.$fontFamilyCursive}', cursive;
+	}
+
+	@include core.cssvars('pr-t-font-fontSize', config.$fontSizeVars);
+	@include core.cssvars('pr-t-font-lineHeight', config.$lineHeight);
+	@include core.cssvars('pr-t-font-fontWeight', config.$fontWeights);
+	@include core.cssvars('pr-t-font', config.$fontTokens);
+
+	--pr-t-font-heading-1: var(--pr-t-font-heading-1-fontWeight) var(--pr-t-font-heading-1-fontSize)/var(--pr-t-font-heading-1-lineHeight) var(--pr-t-font-family-brand);
+	--pr-t-font-heading-2: var(--pr-t-font-heading-2-fontWeight) var(--pr-t-font-heading-2-fontSize)/var(--pr-t-font-heading-2-lineHeight) var(--pr-t-font-family-brand);
+	--pr-t-font-heading-3: var(--pr-t-font-heading-3-fontWeight) var(--pr-t-font-heading-3-fontSize)/var(--pr-t-font-heading-3-lineHeight) var(--pr-t-font-family);
+	--pr-t-font-heading-4: var(--pr-t-font-heading-4-fontWeight) var(--pr-t-font-heading-4-fontSize)/var(--pr-t-font-heading-4-lineHeight) var(--pr-t-font-family);
+	--pr-t-font-highlight-XXL: var(--pr-t-font-highlight-XXL-fontWeight) var(--pr-t-font-highlight-XXL-fontSize)/var(--pr-t-font-highlight-XXL-lineHeight) var(--pr-t-font-family-brand);
+	--pr-t-font-highlight-XL: var(--pr-t-font-highlight-XL-fontWeight) var(--pr-t-font-highlight-XL-fontSize)/var(--pr-t-font-highlight-XL-lineHeight) var(--pr-t-font-family-brand);
+	--pr-t-font-highlight-L: var(--pr-t-font-highlight-L-fontWeight) var(--pr-t-font-highlight-L-fontSize)/var(--pr-t-font-highlight-L-lineHeight) var(--pr-t-font-family-brand);
+	--pr-t-font-body-M: var(--pr-t-font-body-M-fontSize)/var(--pr-t-font-body-M-lineHeight) var(--pr-t-font-family);
+	--pr-t-font-body-S: var(--pr-t-font-body-S-fontSize)/var(--pr-t-font-body-S-lineHeight) var(--pr-t-font-family);
+	--pr-t-font-body-XS: var(--pr-t-font-body-XS-fontSize)/var(--pr-t-font-body-XS-lineHeight) var(--pr-t-font-family);
+
+	// TOKENS : ELEVATION
 
 	@each $key, $map in config.$elevation {
 		@include core.cssvars('pr-t-elevation-#{$key}', $map);
 	}
 
+	// TOKENS : SPACINGS
+
 	@include core.cssvars('pr-t-spacings', config.$spacings);
 	--pr-t-spacings-auto: auto;
 
+	// TOKENS : COLORS
+
 	@include core.cssvars('pr-t-color-input', config.$colorInput);
+	@include core.cssvars('pr-t-color-text', config.$colorText);
 	--pr-t-radius-input: var(--commons-borderRadius-M);
 
 	// VARIABLES
@@ -32,34 +62,28 @@
 		@include core.cssvars('palettes-#{$palette}', map.get(config.$palettesInterpolation, $palette));
 	}
 
-	@each $key, $map in config.$sizes {
-		@include core.cssvars('sizes-#{$key}', $map);
-	}
-
 	@include core.cssvars('colors', config.$colors, '-color');
 	@include core.cssvars('colors', config.$colorsRgb, '-rgb');
 
 	--commons-banner-height: 50px;
-	--commons-font-family: '#{config.$fontFamily}', Tahoma, sans-serif;
 	--commons-divider-width: 1px;
 	--commons-divider-style: solid;
 	--commons-divider-border: var(--commons-divider-width) var(--commons-divider-style) var(--commons-divider-color);
 	--commons-border-100: var(--palettes-neutral-100);
 	--commons-border-200: var(--palettes-neutral-200);
 
-	@if (config.$fontFamily) {
-		--commons-font-family: '#{config.$fontFamily}', Tahoma, sans-serif;
-	}
+	// Deprecated
+	--commons-font-family: '#{config.$fontFamily}', Tahoma, sans-serif;
+	--commons-font-family-brand: '#{config.$fontFamilyBrand}', sans-serif;
 
 	@if (config.$fontFamilyCursive) {
 		--commons-font-family-cursive: '#{config.$fontFamilyCursive}', cursive;
 	}
 
-	@if (config.$fontFamilyBrand) {
-		--commons-font-family-brand: '#{config.$fontFamilyBrand}', sans-serif;
+	@each $key, $map in config.$sizes {
+		@include core.cssvars('sizes-#{$key}', $map);
 	}
 
-	// Deprecated
 	--commons-background-base: var(--palettes-neutral-25);
 	--commons-divider-color: var(--palettes-neutral-200);
 

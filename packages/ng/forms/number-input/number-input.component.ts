@@ -1,13 +1,13 @@
+import { NgTemplateOutlet } from '@angular/common';
 import { booleanAttribute, Component, ElementRef, input, numberAttribute, viewChild, ViewEncapsulation } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { InputDirective } from '@lucca-front/ng/form-field';
-import { NoopValueAccessorDirective } from '../noop-value-accessor.directive';
-import { NgTemplateOutlet } from '@angular/common';
-import { FormFieldIdDirective } from '../form-field-id.directive';
-import { TextInputAddon } from '../text-input/text-input-addon';
 import { getIntl } from '@lucca-front/ng/core';
-import { LU_NUMBERFIELD_TRANSLATIONS } from './number-input.translate';
+import { InputDirective } from '@lucca-front/ng/form-field';
+import { FormFieldIdDirective } from '../form-field-id.directive';
 import { injectNgControl } from '../inject-ng-control';
+import { NoopValueAccessorDirective } from '../noop-value-accessor.directive';
+import { TextInputAddon } from '../text-input/text-input-addon';
+import { LU_NUMBERFIELD_TRANSLATIONS } from './number-input.translate';
 
 @Component({
 	selector: 'lu-number-input',

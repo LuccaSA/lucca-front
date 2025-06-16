@@ -9,10 +9,11 @@
 }
 
 @mixin XS {
-  --components-userTile-title-fontSize: var(--sizes-S-fontSize);
-  --components-userTile-title-lineHeight: var(--sizes-S-lineHeight);
-  --components-userTile-info-fontSize: var(--sizes-XS-fontSize);
-  --components-userTile-info-lineHeight: var(--sizes-XS-lineHeight);
+  --components-userTile-gap: var(--pr-t-spacings-100);
+  --components-userTile-title-fontSize: var(--pr-t-font-body-S-fontSize);
+  --components-userTile-title-lineHeight: var(--pr-t-font-body-S-lineHeight);
+  --components-userTile-info-fontSize: var(--pr-t-font-body-XS-fontSize);
+  --components-userTile-info-lineHeight: var(--pr-t-font-body-XS-lineHeight);
 
   .avatar {
     @include avatar.XS;
@@ -20,6 +21,8 @@
 }
 
 @mixin S {
+  --components-userTile-gap: var(--pr-t-spacings-100);
+
   .avatar {
     @include avatar.S;
   }

@@ -48,7 +48,7 @@ export default {
 	render: (args, { argTypes }) => {
 		const { min, max, focusedDate, ...flags } = args;
 		const selected = args['selected'] ? new Date(args['selected']) : null;
-		const defaultDate = args['format'] === 'date' ? selected : selected.toISOString().substring(0, 10);
+		const defaultDate = args['format'] === 'date' ? selected : selected?.toISOString().substring(0, 10);
 		const minValue = args['format'] === 'date' ? new Date(args['min']) : new Date(args['min'] ?? 0)?.toISOString().substring(0, 10);
 		const maxValue = args['format'] === 'date' ? new Date(args['max']) : new Date(args['max'] ?? 0)?.toISOString().substring(0, 10);
 		const focusedDateValue = args['format'] === 'date' ? new Date(args['focusedDate']) : new Date(args['focusedDate'] ?? 0)?.toISOString().substring(0, 10);

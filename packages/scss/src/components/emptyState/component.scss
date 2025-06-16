@@ -1,7 +1,6 @@
 @use '@lucca-front/scss/src/commons/config';
 @use '@lucca-front/scss/src/commons/utils/media';
 @use '@lucca-front/scss/src/commons/utils/namespace';
-@use '@lucca-front/scss/src/components/title/exports' as title;
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
 	display: flex;
@@ -44,9 +43,7 @@
 		}
 
 		.emptyState-content-heading {
-			@include title.component;
-			@include title.h3;
-
+			font: var(--pr-t-font-heading-3);
 			margin-block-end: var(--pr-t-spacings-50);
 
 			@if config.$deprecatedSpacings {

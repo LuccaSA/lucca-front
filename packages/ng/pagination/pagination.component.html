@@ -1,0 +1,19 @@
+<nav class="pagination" role="navigation" aria-label="pagination-count" [class.mod-compact]="mod() === 'compact'">
+	@if (mod() === 'default') {
+	<div class="pagination-count">
+		<span class="u-mask"> {{ intl.resultsA11y | intlParams: { from: from(), to: to(), itemsCount: itemsCount() } }} </span>
+		<span aria-hidden="true"> {{ intl.results | intlParams: {from: from(), to: to(), itemsCount: itemsCount()} }} </span>
+	</div>
+	}
+
+	<div class="pagination-scrolling">
+		<button type="button" class="button mod-onlyIcon mod-text mod-S" [disabled]="isFirstPage()" (click)="previousPage.emit()">
+			<lu-icon icon="arrowChevronLeft" />
+			<span class="u-mask">{{ intl.previous }}</span>
+		</button>
+		<button type="button" class="button mod-onlyIcon mod-text mod-S" [disabled]="isLastPage()" (click)="nextPage.emit()">
+			<lu-icon icon="arrowChevronRight" />
+			<span class="u-mask">{{ intl.next }}</span>
+		</button>
+	</div>
+</nav>

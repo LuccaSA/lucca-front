@@ -1,7 +1,7 @@
 <ng-template>
 	<div
 		class="lu-dropdown-panel lu-popover-panel"
-		[ngClass]="panelClassesMap"
+		[class]="panelClassesMap"
 		(keydown)="_handleKeydown($event)"
 		(click)="onClick()"
 		(mouseover)="onMouseOver()"
@@ -11,7 +11,7 @@
 		[attr.aria-labelledby]="triggerId"
 		[@transformPopover]="'enter'"
 	>
-		<div class="lu-popover-content dropdown" [ngClass]="contentClassesMap">
+		<div class="lu-popover-content dropdown" [class]="contentClassesMap">
 			<ul class="dropdown-list">
 				<ng-content></ng-content>
 			</ul>

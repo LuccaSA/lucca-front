@@ -83,15 +83,6 @@ $cursor: 'pointer', 'auto';
 	}
 }
 
-@mixin sizes($suffix: '!important') {
-	@each $key, $value in config.$sizes {
-		.u-text#{transform.capitalize($key)} {
-			font-size: var(--sizes-#{$key}-fontSize) #{$suffix};
-			line-height: var(--sizes-#{$key}-lineHeight) #{$suffix};
-		}
-	}
-}
-
 @mixin palettes($suffix: '!important') {
 	@each $palette in config.$palettesAll {
 		.u-text#{transform.capitalize($palette)} {
@@ -150,6 +141,17 @@ $cursor: 'pointer', 'auto';
 					font-display: swap;
 				}
 			}
+		}
+	}
+}
+
+/* DEPRECATED */
+
+@mixin sizes($suffix: '!important') {
+	@each $key, $value in config.$sizes {
+		.u-text#{transform.capitalize($key)} {
+			font-size: var(--sizes-#{$key}-fontSize) #{$suffix};
+			line-height: var(--sizes-#{$key}-lineHeight) #{$suffix};
 		}
 	}
 }

@@ -1,4 +1,3 @@
-@use '@lucca-front/scss/src/components/title/exports' as title;
 @use '@lucca-front/scss/src/components/button/exports' as button;
 @use '@lucca-front/scss/src/components/footer/exports' as footer;
 @use '@lucca-front/scss/src/commons/utils/keyframe';
@@ -126,8 +125,7 @@
 		}
 
 		.dialog-inside-header-container-title {
-			@include title.h2;
-
+			font: var(--pr-t-font-heading-2);
 			padding: var(--components-dialog-insideHeaderTitlePadding);
 			text-align: var(--components-dialog-insideHeaderTitleAlign);
 			margin: 0;
