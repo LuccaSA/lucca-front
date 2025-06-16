@@ -1,4 +1,4 @@
-import { booleanAttribute, Component, HostBinding, input, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, Component, input, ViewEncapsulation } from '@angular/core';
 
 @Component({
 	selector: 'lu-app-layout',
@@ -8,13 +8,9 @@ import { booleanAttribute, Component, HostBinding, input, ViewEncapsulation } fr
 	encapsulation: ViewEncapsulation.None,
 	host: {
 		class: 'appLayout',
+		'[class.mod-mobileNavSideBottom]': 'mobileNavSideBottom()',
 	},
 })
 export class AppLayoutComponent {
 	mobileNavSideBottom = input(false, { transform: booleanAttribute });
-
-	@HostBinding('class.mod-mobileNavSideBottom')
-	get mobileNavSideBottomInput() {
-		return this.mobileNavSideBottom();
-	}
 }
