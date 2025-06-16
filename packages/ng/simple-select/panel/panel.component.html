@@ -9,9 +9,9 @@
 >
 	<div class="lu-picker-content" [class.is-loading]="loading$ | async" (scroll)="onScroll($event)">
 		@if (selectInput.panelHeaderTpl(); as tpl) {
-		<div luCoreSelectPanelElement>
-			<ng-container *luPortal="tpl" />
-		</div>
+			<div>
+				<ng-container *luPortal="tpl" />
+			</div>
 		}
 		<div role="listbox">
 			<ng-container *ngIf="grouping && ctx.groupTemplateLocation === 'group-header'">
@@ -42,7 +42,7 @@
 					[groupIndex]="groupIndex"
 					[grouping]="grouping"
 					[scrollIntoViewOptions]="{ block: 'center' }"
-					[isSelected]="option | luIsOptionSelected:optionComparer:selected()"
+					[isSelected]="option | luIsOptionSelected: optionComparer : selected()"
 					[class.withAddOption]="ctx.shouldDisplayAddOption"
 					(selected)="panelRef.emitValue(option)"
 					(click)="panelRef.emitValue(option)"
@@ -56,16 +56,16 @@
 			<div class="loading">{{ intl.loading }}</div>
 		</div>
 		@if (ctx.shouldDisplayAddOption) {
-		<div
-			class="addOption palette-product"
-			(click)="selectInput.emitAddOption()"
-			(selected)="selectInput.emitAddOption()"
-			elementId="picker-content-add"
-			luCoreSelectPanelElement
-		>
-			<lu-icon icon="mathsPlus" />
-			<ng-container *luPortal="selectInput.addOptionLabel" />
-		</div>
+			<div
+				class="addOption palette-product"
+				(click)="selectInput.emitAddOption()"
+				(selected)="selectInput.emitAddOption()"
+				elementId="picker-content-add"
+				luCoreSelectPanelElement
+			>
+				<lu-icon icon="mathsPlus" />
+				<ng-container *luPortal="selectInput.addOptionLabel" />
+			</div>
 		}
 	</div>
 </div>
