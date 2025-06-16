@@ -60,11 +60,6 @@ export class ScrollBoxComponent implements OnInit {
 
 	ngOnInit() {
 		this.observeFirstAndLastElement();
-
-		const target = this.#elementRef.nativeElement;
-		const config = { childList: true };
-		const observer = new MutationObserver(this.observeFirstAndLastElement);
-
-		observer.observe(target, config);
+		new MutationObserver(this.observeFirstAndLastElement).observe(this.#elementRef.nativeElement, { childList: true });
 	}
 }
