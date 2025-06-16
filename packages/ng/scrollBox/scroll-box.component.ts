@@ -44,7 +44,7 @@ export class ScrollBoxComponent implements OnInit {
 		).observe(element);
 	}
 
-	ngOnInit() {
+	observeFirstAndLastElement = () => {
 		const children = this.#elementRef.nativeElement.children;
 
 		[].forEach.call(children, (child, index) => {
@@ -56,5 +56,15 @@ export class ScrollBoxComponent implements OnInit {
 				this.initObserver(child as Element, false);
 			}
 		});
+	};
+
+	ngOnInit() {
+		this.observeFirstAndLastElement();
+
+		const target = this.#elementRef.nativeElement;
+		const config = { childList: true };
+		const observer = new MutationObserver(this.observeFirstAndLastElement);
+
+		observer.observe(target, config);
 	}
 }
