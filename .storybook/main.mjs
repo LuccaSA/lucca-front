@@ -13,11 +13,7 @@ export default {
 	stories: ['../stories/**/*.stories.@(js|jsx|ts|tsx)', '../stories/**/*.mdx'],
 	features: { buildStoriesJson: true },
 	staticDirs: ['./public'],
-	addons: [
-		getAbsolutePath('@storybook/addon-essentials'),
-		getAbsolutePath('@storybook/addon-a11y'),
-		getAbsolutePath('@storybook/addon-interactions'),
-	],
+	addons: [getAbsolutePath('@storybook/addon-a11y')],
 	webpackFinal: (config) => {
 		const { module } = config;
 		const { rules } = module;
