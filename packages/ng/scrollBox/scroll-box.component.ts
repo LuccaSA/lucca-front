@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ElementRef, HostBinding, inject, OnInit, signal, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, HostBinding, inject, OnDestroy, OnInit, signal, ViewEncapsulation } from '@angular/core';
 
 @Component({
 	selector: 'lu-scroll-box',
@@ -12,7 +12,7 @@ import { ChangeDetectionStrategy, Component, ElementRef, HostBinding, inject, On
 		class: 'scrollBox',
 	},
 })
-export class ScrollBoxComponent implements OnInit {
+export class ScrollBoxComponent implements OnInit, OnDestroy {
 	#elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
 
 	@HostBinding('class.is-firstVisible')
@@ -58,8 +58,14 @@ export class ScrollBoxComponent implements OnInit {
 		});
 	};
 
+	observer = new MutationObserver(this.observeFirstAndLastElement);
+
 	ngOnInit() {
 		this.observeFirstAndLastElement();
-		new MutationObserver(this.observeFirstAndLastElement).observe(this.#elementRef.nativeElement, { childList: true });
+		this.observer.observe(this.#elementRef.nativeElement, { childList: true });
+	}
+
+	ngOnDestroy() {
+		this.observer.disconnect();
 	}
 }
