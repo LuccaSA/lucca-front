@@ -58,11 +58,6 @@ export class LuOptionComponent<T> implements AfterViewInit, OnDestroy, OnInit {
 
 	groupTemplateLocation = input<GroupTemplateLocation>();
 
-	/**
-	 * Whether option is disabled. Used by ListKeyManager.
-	 */
-	disabled = false;
-
 	@ViewChild(LuOptionOutletDirective, { read: LU_OPTION_CONTEXT, static: true })
 	private optionContext?: ILuOptionContext<T>;
 
@@ -98,13 +93,13 @@ export class LuOptionComponent<T> implements AfterViewInit, OnDestroy, OnInit {
 
 	ngAfterViewInit(): void {
 		this.subscription = this.optionContext.isDisabled$.pipe(observeOn(asyncScheduler)).subscribe((isDisabled) => {
-			this.disabled = isDisabled;
+			this.selectableItem.disabled = isDisabled;
 			this.cdr.markForCheck();
 		});
 	}
 
 	selectOption($event: Event): void {
-		if (this.disabled) {
+		if (this.selectableItem.disabled) {
 			$event.stopPropagation();
 		}
 	}
