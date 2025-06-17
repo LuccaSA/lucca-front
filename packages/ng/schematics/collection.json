@@ -21,6 +21,11 @@
       "factory": "./tokens-spacing/index",
       "schema": "./tokens-spacing/schema.json"
     },
+    "tokens-typo": {
+      "description": "Replace typography tokens with new names.",
+      "factory": "./tokens-typo/index",
+      "schema": "./tokens-typo/schema.json"
+    },
     "palettes": {
       "description": "Replace palettes with new names.",
       "factory": "./palettes/index",
