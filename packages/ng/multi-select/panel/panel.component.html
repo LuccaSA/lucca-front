@@ -71,6 +71,7 @@
 					[scrollIntoViewOptions]="{ block: 'nearest' }"
 					[isSelected]="option | luIsOptionSelected: optionComparer : selectedOptions"
 					(selected)="toggleOption(option)"
+					(click)="toggleOption(option)"
 					[class.withAddOption]="ctx.shouldDisplayAddOption"
 				/>
 			</ng-template>
