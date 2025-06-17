@@ -19,7 +19,9 @@
   "private": true,
   "workspaces": [
     "packages/icons",
-    "packages/scss"
+    "packages/scss",
+    "packages/prisme",
+    "packages/ng"
   ],
   "scripts": {
     "build": "npm run build:ng && npm run build:remaining",
