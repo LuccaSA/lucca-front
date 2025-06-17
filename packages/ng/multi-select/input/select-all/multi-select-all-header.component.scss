@@ -19,7 +19,7 @@
 	&:has(.checkboxField-input:checked) {
 		background-color: var(--palettes-product-50);
 
-		&:hover {
+		&:hover, :host-context(.is-highlighted) & {
 			background-color: var(--palettes-product-100);
 		}
 	}
