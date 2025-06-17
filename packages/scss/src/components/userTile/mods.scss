@@ -2,7 +2,6 @@
 
 // nameOnly is deprecated
 @mixin nameOnly {
-  .user-tile-label,
   .user-tile-footnote {
     display: none;
   }
