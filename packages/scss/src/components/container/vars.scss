@@ -1,6 +1,4 @@
 @use '@lucca-front/scss/src/commons/utils/namespace';
-@use '@lucca-front/scss/src/commons/config';
-@use '@lucca-front/scss/src/commons/function';
 
 @mixin vars($atRoot: namespace.$defaultAtRoot) {
 	--components-container-minInlineSize: 0;
@@ -11,19 +9,4 @@
 	// --components-container-padding is deprecated
 	--components-container-max-width: var(--commons-container-maxWidth);
 	--components-container-padding: var(--commons-container-padding);
-
-	@at-root ($atRoot) {
-		@include namespace.appendRootVars {
-			@each $breakpoint, $value in config.$breakpoints {
-				--commons-container-maxWidth#{$breakpoint}: #{function.pxToRem($value)};
-			}
-
-			--commons-container-padding: 0 var(--pr-t-spacings-200);
-			--commons-container-maxWidth: 75rem;
-
-			&:has(.navSide.mod-compact, .mod-withMenuCompact) {
-				--commons-container-maxWidth: 82.5rem;
-			}
-		}
-	}
 }
