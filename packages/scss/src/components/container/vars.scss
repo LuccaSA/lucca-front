@@ -1,5 +1,9 @@
-@mixin vars {
-	// for this component some variables are placed in common
+@use '@lucca-front/scss/src/commons/utils/namespace';
+
+@mixin vars($atRoot: namespace.$defaultAtRoot) {
+	--components-container-minInlineSize: 0;
+
+	// for this component some variables are placed in root
 
 	// --components-container-max-width is deprecated
 	// --components-container-padding is deprecated

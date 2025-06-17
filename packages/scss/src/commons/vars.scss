@@ -91,10 +91,19 @@
 		--commons-container-maxWidth#{$breakpoint}: #{function.pxToRem($value)};
 	}
 
-	--commons-container-maxWidth: var(--commons-container-maxWidthXXL);
-	--commons-container-padding: 3.5rem;
+	--commons-container-padding: 0 var(--pr-t-spacings-200);
+	--commons-container-maxWidth: 90rem; // 90 + 0 = 90
 
-	--commons-navSide-width: 0rem; // unit is required for calc
+	&:has(.navSide) {
+		--commons-container-maxWidth: 75rem; // 75 + 15 = 90
+	}
+
+	&:has(.navSide.mod-compact, .mod-withMenuCompact) {
+		--commons-container-maxWidth: 82.5rem; // 82.5 + 7.5 = 90
+	}
+
+	--commons-navSide-width: 0px;
+	/* stylelint-disable-next-line property-disallowed-list */
 	--commons-navSide-compact-width: 7.5rem;
 	--commons-navSide-mobile-toggle-height: 3.5rem;
 

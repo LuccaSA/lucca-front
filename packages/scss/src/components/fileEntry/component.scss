@@ -14,7 +14,7 @@
 	gap: 0 var(--components-fileEntry-gapInline);
 	position: relative;
 	grid-column: var(--components-fileEntry-gridColumn);
-	min-height: var(--components-fileEntry-minHeight);
+	min-block-size: var(--components-fileEntry-minHeight);
 	display: var(--components-fileEntry-display);
 	align-items: center;
 	grid-template-columns: auto 1fr auto;
@@ -75,7 +75,7 @@
 			text-align: center;
 			padding: var(--pr-t-spacings-100);
 			padding-block-end: var(--pr-t-spacings-25);
-			width: 100%;
+			inline-size: 100%;
 		}
 
 		.fileEntry-status-content-inside-icon {
@@ -133,7 +133,7 @@
 		.fileEntry-filename {
 			grid-area: title;
 			align-self: var(--components-fileEntry-filename-alignSelf);
-			min-width: 0;
+			min-inline-size: 0;
 		}
 
 		.fileEntry-filename-tooltip {
@@ -150,14 +150,14 @@
 			display: var(--components-fileEntry-description-display);
 			margin: 0;
 			gap: var(--pr-t-spacings-100);
-			min-width: 0;
+			min-inline-size: 0;
 		}
 
 		.fileEntry-description-format {
 			@include text.ellipsis;
 
 			border-radius: var(--commons-borderRadius-M);
-			max-width: 20ch;
+			max-inline-size: 20ch;
 
 			&:focus-visible {
 				@include a11y.focusVisible;
@@ -168,7 +168,7 @@
 			grid-area: description;
 			margin: 0;
 			align-self: start;
-			min-width: 0;
+			min-inline-size: 0;
 
 			.inlineMessage-statusIcon {
 				display: none;
@@ -192,7 +192,7 @@
 		.fileEntry_box-field-button.button {
 			flex-grow: 1;
 			flex-basis: 0;
-			min-width: fit-content;
+			min-inline-size: fit-content;
 		}
 	}
 }

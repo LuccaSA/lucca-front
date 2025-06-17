@@ -1,4 +1,5 @@
 @use 'exports' as *;
+@use '@lucca-front/scss/src/commons/utils/media';
 
 .container {
 	@include vars;
@@ -30,5 +31,13 @@
 
 	&.mod-maxXXXL {
 		@include maxXXXL;
+	}
+
+	&.mod-overflow {
+		@include overflow;
+	}
+
+	@include media.min('XS') {
+		@include wide;
 	}
 }
