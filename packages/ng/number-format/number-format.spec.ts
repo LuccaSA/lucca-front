@@ -320,15 +320,19 @@ const focusFormatTestsForCurrency: FormatTestData[] = [
 	},
 	{
 		value: 123245.5,
-		formatted: '123245.50',
+		formatted: '123245.5',
 	},
 	{
 		value: -123245.5,
-		formatted: '-123245.50',
+		formatted: '-123245.5',
 	},
 	{
 		value: 123245.12345,
-		formatted: '123245.12345',
+		formatted: '123245.12',
+	},
+	{
+		value: 123245.12789,
+		formatted: '123245.13',
 	},
 ];
 
@@ -339,11 +343,11 @@ const blurFormatTestsForCurrency: FormatTestData[] = [
 	},
 	{
 		value: 0,
-		formatted: '0',
+		formatted: '0,00',
 	},
 	{
 		value: 1.0,
-		formatted: '1',
+		formatted: '1,00',
 	},
 	{
 		value: 123245.5,
@@ -355,7 +359,11 @@ const blurFormatTestsForCurrency: FormatTestData[] = [
 	},
 	{
 		value: 123245.12345,
-		formatted: '123 245,12345',
+		formatted: '123 245,12',
+	},
+	{
+		value: 123245.12789,
+		formatted: '123 245,13',
 	},
 ];
 
