@@ -41,10 +41,12 @@
 			margin: 0;
 		}
 
-		// .user-tile-footnote deprecated
-		.user-tile-footnote {
-			font-size: var(--pr-t-font-body-S-fontSize);
-			line-height: var(--pr-t-font-body-S-lineHeight);
+		.userTile-content-slotBottom {
+			font: var(--pr-t-font-body-S);
+
+			&:empty {
+				display: none;
+			}
 		}
 	}
 }
