@@ -24,14 +24,13 @@
 	.indexTable-body-row {
 		// We can't use focus-within because it would show actions when focusing checkboxs
 		&:has(
-				.indexTable-body-row-cell-action:focus-visible,
 				.indexTable-body-row-cell-link:focus-visible,
 				.indexTable-body-row-cell.mod-actions:focus-within
 			) {
 			--components-indexTable-cell-subAction-opacity: 1;
 		}
 
-		&:has(.indexTable-body-row-cell-action:focus-visible, .indexTable-body-row-cell-link:focus-visible) {
+		&:has(.indexTable-body-row-cell-link:focus-visible) {
 			--components-indexTable-outline-opacity: 1;
 		}
 	}

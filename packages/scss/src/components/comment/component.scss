@@ -76,9 +76,7 @@
 			font: var(--components-comment-text-font);
 		}
 
-		// .comment-content-textContainer is deprecated
-		.comment-content-textContainerOptional,
-		.comment-content-textContainer {
+		.comment-content-textContainerOptional {
 			display: flex;
 			flex-direction: column;
 			gap: var(--pr-t-spacings-100);

@@ -53,12 +53,6 @@ function getTemplate(args: UserPopoverStory): string {
 const Template: StoryFn<UserPopoverStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
-	styles: [
-		`.picture {
-			border-radius: 50%;
-			display: block;
-		}`,
-	],
 });
 
 export const Basic = Template.bind({});

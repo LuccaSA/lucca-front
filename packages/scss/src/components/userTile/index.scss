@@ -4,10 +4,6 @@
 	@include vars;
 	@include component;
 
-	&.mod-nameOnly {
-		@include nameOnly;
-	}
-
 	&.mod-XS {
 		@include XS;
 	}

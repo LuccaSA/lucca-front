@@ -72,9 +72,7 @@
 }
 
 @mixin placeholder {
-	// .picture is deprecated
-	.avatar-picture,
-	.picture {
+	.avatar-picture {
 		background-color: var(--palettes-neutral-200) !important;
 
 		&::before {
@@ -86,9 +84,7 @@
 		}
 	}
 
-	// .userPicture-initials is deprecated
-	.avatar-picture-initials,
-	.userPicture-initials {
+	.avatar-picture-initials {
 		display: none;
 	}
 }

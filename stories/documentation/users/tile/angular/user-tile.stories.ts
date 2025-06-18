@@ -21,13 +21,13 @@ export default {
 				bob,
 			},
 			template: `<div class="u-displayFlex">
-				<div>
-					<lu-user-tile [user]="bob" [luUserPopover]="bob"></lu-user-tile>
-				</div>
-				<div class="pr-u-marginInlineStart300">
-					<lu-user-tile [user]="bob" displayFormat="LF" role="Administrateur" [luUserPopover]="bob"></lu-user-tile>
-				</div>
-			</div>`,
+	<div>
+		<lu-user-tile [user]="bob" />
+	</div>
+	<div class="pr-u-marginInlineStart300">
+		<lu-user-tile [user]="bob" displayFormat="LF" role="Administrateur" />
+	</div>
+</div>`,
 		};
 	},
 } as Meta;

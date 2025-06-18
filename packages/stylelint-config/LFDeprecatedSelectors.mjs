@@ -27,32 +27,7 @@ export default [
 		versionDeleted: '19.1.0',
 	},
 	{
-		objectPattern: [
-			'.columnSticky',
-			'.table-head-row-cell-sortableButton',
-			'.indexTable-head-row-cell-sortableButton',
-			'.table-head-row-cell.mod-sortable',
-			'.table-head-row-cell.sortedAscending',
-			'.table-head-row-cell.sortedDescending',
-			'.u-textLeft',
-			'.u-textCenter',
-			'.u-textRight',
-		],
-		versionDeprecated: '18.1.0',
-		versionDeleted: '20.1.0',
-	},
-	{
-		objectPattern: /\.user-info/,
-		versionDeprecated: '18.1.0',
-		versionDeleted: '20.1.0',
-	},
-	{
-		objectPattern: /\.user-tile-(title|label|footnote)/,
-		versionDeprecated: '18.1.0',
-		versionDeleted: '20.1.0',
-	},
-	{
-		objectPattern: ['.picture', '.indexTable-body-row-cell-action'],
+		objectPattern: ['.u-textLeft', '.u-textCenter', '.u-textRight'],
 		versionDeprecated: '18.1.0',
 		versionDeleted: '20.1.0',
 	},
