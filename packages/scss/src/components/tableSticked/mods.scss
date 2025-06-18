@@ -151,7 +151,10 @@
 @mixin stickyHeaderShadow {
 	.indexTable-head-row-cell,
 	.indexTable-body-row-cell,
-	.indexTable-foot-row-cell {
+	.indexTable-foot-row-cell,
+	.table-head-row-cell,
+	.table-body-row-cell,
+	.table-foot-row-cell {
 		position: sticky;
 		inset-block-start: var(--table-stickyHeader-shadow-offset);
 		z-index: 4;
@@ -179,8 +182,8 @@
 
 	+ .table-body-row,
 	+ .table-foot-row {
-		.indexTable-body-row-cell,
-		.indexTable-foot-row-cell {
+		.table-body-row-cell,
+		.table-foot-row-cell {
 			border-block-start: 0;
 		}
 	}
