@@ -144,7 +144,6 @@ export class NumberFormat {
 				return this.#parseAndSplitInput(this.getFocusFormat(valueInRange));
 			}
 		}
-
 		return splittedInput;
 	}
 
@@ -188,7 +187,7 @@ export class NumberFormat {
 		const decimal = parts.find((p) => p.type === 'decimal') ? '.' : '';
 		const fractionPart = parts
 			.filter((p) => p.type === 'fraction')
-			.map((p) => p.value)
+			.map((p) => (this.options.style === 'currency' && p.value.length === 1 ? p.value + '0' : p.value))
 			.join('');
 
 		return `${minusSign}${integerPart}${decimal}${fractionPart}`;
@@ -204,6 +203,10 @@ export class NumberFormat {
 			.map((p) => {
 				if (p.type === 'minusSign') {
 					return '−';
+				} else if (this.options.style === 'currency' && p.type === 'fraction') {
+					if (p.value.length === 1) {
+						return p.value + '0';
+					}
 				}
 				return p.value;
 			})
