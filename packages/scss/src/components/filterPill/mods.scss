@@ -1,8 +1,4 @@
-@use '@lucca-front/scss/src/commons/utils/overflow';
 @use '@lucca-front/scss/src/commons/utils/a11y';
-
-@use '@lucca-front/scss/src/components/divider/exports' as divider;
-@use '@lucca-front/scss/src/components/scrollBox/exports' as scrollBox;
 
 @mixin checkbox {
 	--components-filterPill-gap: var(--pr-t-spacings-100);
@@ -18,44 +14,6 @@
 
 	.filterBar-divider.divider {
 		inline-size: 100%;
-	}
-}
-
-@mixin notCompact {
-	.filterBar-divider.divider {
-		@include divider.vertical;
-
-		margin-inline: var(--pr-t-spacings-50);
-	}
-
-	.filterBar-scrollBox.scrollBox {
-		&:has(.filterBar-scrollBox-export) {
-			flex-wrap: nowrap;
-		}
-	}
-}
-
-@mixin touch {
-	--components-filterBar-extremitiesDisplay: block;
-
-	.filterBar-segmentedControl.segmentedControl {
-		--components-segmentedControl-whiteSpace: nowrap;
-		--components-segmentedControl-width: auto;
-		--components-segmentedControl-wrap: nowrap;
-	}
-
-	.filterBar-scrollBox.scrollBox {
-		@include overflow.hide;
-	}
-
-	.filterBar-scrollBox-group {
-		display: contents;
-	}
-}
-
-@mixin noTouch {
-	.filterBar-scrollBox.scrollBox {
-		@include scrollBox.disabled;
 	}
 }
 

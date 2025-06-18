@@ -78,7 +78,7 @@
 			align-items: center;
 			row-gap: var(--pr-t-spacings-100);
 			padding: var(--pr-t-spacings-100);
-			margin-left: calc(var(--pr-t-spacings-400) * -1);
+			margin-inline-start: calc(var(--pr-t-spacings-400) * -1);
 		}
 
 		.richTextField-toolbar-col-group {
@@ -88,7 +88,7 @@
 
 			&:not(:only-child) {
 				position: relative;
-				margin-left: var(--pr-t-spacings-400);
+				margin-inline-start: var(--pr-t-spacings-400);
 
 				&::before {
 					content: '';
