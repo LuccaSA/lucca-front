@@ -1,10 +1,7 @@
 @use 'exports' as *;
 
-.tableSortable {
-	@include vars;
-}
-
 .tableSortable.button {
+	@include vars;
 	@include component;
 }
 
