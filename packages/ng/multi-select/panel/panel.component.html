@@ -16,46 +16,63 @@
 		aria-multiselectable="true"
 		(scroll)="onScroll($event)"
 	>
-		<ng-container *luPortal="selectInput.panelHeaderTpl()" />
+		@if (selectInput.panelHeaderTpl(); as tpl) {
+			<div>
+				<ng-container *luPortal="tpl" />
+			</div>
+		}
 
 		<div class="lu-picker-content-option">
 			<ng-container *ngIf="grouping && ctx.groupTemplateLocation === 'group-header'">
 				<div
-					*ngFor="let group of ctx.options | luOptionGroup: grouping.selector; trackBy: trackGroupsBy"
+					*ngFor="let group of ctx.options | luOptionGroup: grouping.selector; trackBy: trackGroupsBy; let groupIndex = index"
 					class="lu-picker-content-group"
 					role="group"
-					[attr.aria-labelledby]="selectId + '-group-' + group.key"
+					attr.aria-labelledby="lu-select-{{ selectId }}-group-{{ groupIndex }}"
 				>
-					<div class="lu-picker-content-option-group-title" role="presentation">
-						<ng-container *luPortal="grouping.content; context: { $implicit: group }" />
+					@let groupCtx = group.options | luOptionsGroupContext: selectedOptions : optionComparer;
+					<div
+						luCoreSelectPanelElement
+						elementId="lu-select-{{ selectId }}-group-{{ groupIndex }}"
+						class="lu-picker-content-option-group-title"
+						role="presentation"
+						(selected)="toggleOptions(groupCtx.notSelectedOptions, group.options)"
+					>
+						<span #groupingTitleRef>
+							<ng-container *luPortal="grouping.content; context: { $implicit: group }" />
+						</span>
 						<button
-							*ngIf="group.options | luOptionsGroupContext: selectedOptions : optionComparer as groupCtx"
 							type="button"
 							class="link"
-							[id]="selectId + '-group-' + group.key"
 							(click)="toggleOptions(groupCtx.notSelectedOptions, group.options)"
+							[id]="selectId + '-group-' + group.key"
 						>
-							{{ groupCtx.isGroupSelected ? intl.unselectAll : intl.selectAll }}
+							<span class="u-mask">{{ groupingTitleRef.innerText }}&nbsp;– </span
+							>{{ groupCtx.isGroupSelected ? intl.unselectAll : intl.selectAll }}
 						</button>
 					</div>
-					<ng-template [ngTemplateOutlet]="optionsList" [ngTemplateOutletContext]="{ $implicit: group.options }" />
+					<ng-template [ngTemplateOutlet]="optionsList" [ngTemplateOutletContext]="{ $implicit: group.options, groupIndex: groupIndex }" />
 				</div>
 			</ng-container>
 			<ng-container *ngIf="!grouping || ctx.groupTemplateLocation !== 'group-header'">
 				<ng-template [ngTemplateOutlet]="optionsList" [ngTemplateOutletContext]="{ $implicit: ctx.options }" />
 			</ng-container>
 
-			<ng-template #optionsList let-options>
+			<ng-template #optionsList let-options let-groupIndex="groupIndex">
 				<lu-select-option
 					*ngFor="let option of options; let index = index; trackBy: trackOptionsBy"
+					luCoreSelectPanelElement
 					[option]="option"
 					[optionTpl]="optionTpl()"
 					[optionIndex]="index"
 					[grouping]="ctx.groupTemplateLocation === 'option' ? grouping : undefined"
+					[groupIndex]="groupIndex"
 					[groupTemplateLocation]="ctx.groupTemplateLocation"
 					[scrollIntoViewOptions]="{ block: 'nearest' }"
 					[isSelected]="option | luIsOptionSelected: optionComparer : selectedOptions"
+					(selected)="toggleOption(option)"
 					(click)="toggleOption(option)"
+					[class.withAddOption]="ctx.shouldDisplayAddOption"
 				/>
 			</ng-template>
 			<div class="lu-picker-content-option-emptyState" *ngIf="ctx.options.length === 0 && (loading$ | async) === false">
@@ -65,11 +82,17 @@
 		<div *ngIf="loading$ | async" class="lu-picker-content-loading">
 			<div class="loading">{{ intl.loading }}</div>
 		</div>
-		<div class="lu-picker-content-add" *ngIf="ctx.shouldDisplayAddOption">
-			<button class="button mod-text mod-withIcon palette-product" type="button" (click)="selectInput.emitAddOption()">
-				<span aria-hidden="true" class="lucca-icon icon-mathsPlus"></span>
+		@if (ctx.shouldDisplayAddOption) {
+			<div
+				class="addOption palette-product"
+				(click)="selectInput.emitAddOption()"
+				(selected)="selectInput.emitAddOption()"
+				elementId="picker-content-add"
+				luCoreSelectPanelElement
+			>
+				<lu-icon icon="mathsPlus" />
 				<ng-container *luPortal="selectInput.addOptionLabel" />
-			</button>
-		</div>
+			</div>
+		}
 	</div>
 </div>

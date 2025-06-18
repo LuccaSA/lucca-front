@@ -12,14 +12,14 @@
 	border-radius: var(--commons-borderRadius-M);
 	cursor: pointer;
 
-	&:hover {
+	&:hover, :host-context(.is-highlighted) & {
 		background-color: var(--palettes-neutral-50);
 	}
 
 	&:has(.checkboxField-input:checked) {
 		background-color: var(--palettes-product-50);
 
-		&:hover {
+		&:hover, :host-context(.is-highlighted) & {
 			background-color: var(--palettes-product-100);
 		}
 	}

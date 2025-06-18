@@ -43,7 +43,7 @@ export default {
 		},
 		focusedDate: {
 			control: 'date',
-		}
+		},
 	},
 	render: (args, { argTypes }) => {
 		const { min, max, focusedDate, ...flags } = args;

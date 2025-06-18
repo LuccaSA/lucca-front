@@ -18,6 +18,14 @@
 	:host {
 		display: block;
 		scroll-margin: var(--pr-t-spacings-50);
+
+		&.withAddOption {
+			scroll-margin-block-end: var(--pr-t-spacings-600);
+		}
+
+		.lu-picker-content-group & {
+			scroll-margin-block-start: var(--pr-t-spacings-400);
+		}
 	}
 
 	.optionItem {
@@ -33,7 +41,7 @@
 		transition: background-color 50ms;
 		cursor: pointer;
 
-		&.is-selected {
+		&.is-selected, :host-context([aria-selected="true"]) & {
 			background-color: var(--palettes-product-50);
 
 			&::before {
@@ -55,7 +63,7 @@
 				background-color: var(--palettes-product-200);
 			}
 
-			&.is-highlighted {
+			:host-context(.is-highlighted) & {
 				background-color: var(--palettes-product-100);
 
 				&:hover {
@@ -68,8 +76,7 @@
 			background-color: var(--palettes-neutral-50);
 		}
 
-		&.is-highlighted,
-		&.is-focus {
+		:host-context(.is-highlighted) & {
 			background-color: var(--palettes-neutral-50);
 
 			&:hover {
@@ -98,8 +105,7 @@
 			text-overflow: ellipsis;
 
 			&:hover,
-			&.is-focus,
-			&.is-highlighted {
+			:host-context(.is-highlighted) & {
 				background-color: inherit;
 			}
 		}
@@ -143,7 +149,7 @@
 				inline-size: var(--components-options-checkbox-size);
 			}
 
-			&.is-selected {
+			&.is-selected, :host-context([aria-selected="true"]) & {
 				&::before {
 					background-color: var(--components-options-checkbox-color);
 					box-shadow: inset 0 0 0 2px var(--components-options-checkbox-color);
