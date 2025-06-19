@@ -1,0 +1,10 @@
+@use '@lucca-front/scss/src/commons/utils/namespace';
+
+@mixin narrow {
+	.mobilePushContainer {
+		--components-mobilePush-flex-direction: column;
+		--components-mobilePush-content-align-items: flex-start;
+		--components-mobilePush-icon-content-align-items: flex-start;
+		--components-mobilePush-align-gap: var(--pr-t-spacings-100);
+	}
+}

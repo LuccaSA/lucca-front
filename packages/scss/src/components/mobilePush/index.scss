@@ -1,0 +1,12 @@
+@use '@lucca-front/scss/src/commons/utils/container';
+
+@use 'exports' as *;
+
+.mobilePush {
+	@include vars;
+	@include component;
+
+	@include container.max('S', $name: 'mobilePush') {
+		@include narrow;
+	}
+}
