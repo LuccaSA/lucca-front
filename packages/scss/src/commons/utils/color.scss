@@ -1,5 +1,6 @@
 @use 'sass:map';
 @use 'sass:math';
+@use '@lucca-front/scss/src/commons/core';
 @use '@lucca-front/scss/src/commons/config';
 
 // stylelint-disable-next-line scss/no-global-function-names -- This is a redefinition of a deprecated SCSS function.
@@ -21,4 +22,11 @@
 			--palettes-#{$shade}: var(--palettes-#{$name}-#{$shade});
 		}
 	}
+}
+
+@mixin contrasted {
+	@include core.cssvars('pr-t-color-input', config.$colorInputContrasted);
+	@include core.rosetta('--palettes-brand', '--palettes-brandContrasted', config.$palettesShades);
+	@include core.rosetta('--palettes-success', '--palettes-successContrasted', config.$palettesShades);
+	@include core.rosetta('--palettes-warning', '--palettes-warningContrasted', config.$palettesShades);
 }
