@@ -17,7 +17,7 @@ export default {
 	],
 	render: ({ user, sizes, placeholder, displayFormat }) => {
 		return {
-			template: `<button class="u-buttonReset u-inlineSizeFitContent pr-u-focusVisible u-borderRadiusFull" type="button" [luUserPopover]="user">
+			template: `<button class="userPopover_trigger" type="button" [luUserPopover]="user">
 			<lu-user-picture
 		[user]="user"
 		[displayFormat]="displayFormat"

@@ -21,7 +21,7 @@ export default {
 			props: {
 				finn: bob,
 			},
-			template: `<button type="button" class="u-buttonReset u-inlineSizeFitContent pr-u-focusVisible u-borderRadiusM" [luUserPopover]="finn">{{ finn | luUserDisplay : 'lf' }}</button>`,
+			template: `<button type="button" class="userPopover_trigger" [luUserPopover]="finn">{{ finn | luUserDisplay : 'lf' }}</button>`,
 		};
 	},
 } as Meta;

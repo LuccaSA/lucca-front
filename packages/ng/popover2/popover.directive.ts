@@ -1,3 +1,5 @@
+import { ConnectedPosition, ConnectionPositionPair, FlexibleConnectedPositionStrategyOrigin, Overlay, OverlayRef } from '@angular/cdk/overlay';
+import { ComponentPortal } from '@angular/cdk/portal';
 import {
 	booleanAttribute,
 	DestroyRef,
@@ -20,14 +22,12 @@ import {
 	Type,
 	ViewContainerRef,
 } from '@angular/core';
-import { ConnectedPosition, ConnectionPositionPair, FlexibleConnectedPositionStrategyOrigin, Overlay, OverlayRef } from '@angular/cdk/overlay';
-import { ComponentPortal } from '@angular/cdk/portal';
+import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
+import { getIntl } from '@lucca-front/ng/core';
+import { combineLatest, debounce, filter, map, merge, Subject, switchMap, timer } from 'rxjs';
 import { PopoverContentComponent } from './content/popover-content/popover-content.component';
 import { POPOVER_CONFIG, PopoverConfig } from './popover-tokens';
-import { combineLatest, debounce, filter, map, merge, Subject, switchMap, timer } from 'rxjs';
-import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 import { LU_POPOVER2_TRANSLATIONS } from './popover2.translate';
-import { getIntl } from '@lucca-front/ng/core';
 
 export type PopoverPosition = 'above' | 'below' | 'before' | 'after';
 

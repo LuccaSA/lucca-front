@@ -8,8 +8,7 @@ import { applicationConfig, Meta, StoryFn } from '@storybook/angular';
 @Component({
 	selector: 'user-popover-story',
 	standalone: true,
-	template:
-		'<button class="u-buttonReset u-inlineSizeFitContent pr-u-focusVisible u-borderRadiusM" type="button" [luUserPopover]="luUserPopover" [luUserPopoverDisabled]="luUserPopoverDisabled">Survolez-moi !</button>',
+	template: '<button type="button" class="userPopover_trigger" [luUserPopover]="luUserPopover" [luUserPopoverDisabled]="luUserPopoverDisabled">Survolez-moi !</button>',
 	imports: [LuUserPopoverDirective],
 })
 class UserPopoverStory {

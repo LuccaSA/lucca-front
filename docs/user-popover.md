@@ -16,8 +16,8 @@ export class AppModule {}
 Pour utiliser la UserPopover, il vous suffit d'utiliser la directive `[luUserPopover]` et de lui fournir un LuUser
 
 ```html
-<button type="button" [luUserPopover]="user">User</button>
-<button type="button" [luUserPopover]="{id: 1, firstName: 'Brian', lastName: 'Philibert'}">User</button>
+<button type="button" class="userPopover_trigger" [luUserPopover]="user">User</button>
+<button type="button" class="userPopover_trigger" [luUserPopover]="{id: 1, firstName: 'Brian', lastName: 'Philibert'}">User</button>
 ```
 
 ```typescript
@@ -38,7 +38,7 @@ export class MyComponent { }
 #### luEmployeeCard
 
 ```html
-<button type="button" [luUserPopover]="user">User</button>
+<button type="button" class="userPopover_trigger" [luUserPopover]="user">User</button>
 ```
 
 Permet de fournir un utilisateur à la UserPopover.
@@ -46,7 +46,7 @@ Permet de fournir un utilisateur à la UserPopover.
 #### luUserPopoverEnterDelay
 
 ```html
-<button type="button" [luUserPopover]="user" [luUserPopoverEnterDelay]="200">User</button>
+<button type="button" class="userPopover_trigger" [luUserPopover]="user" [luUserPopoverEnterDelay]="200">User</button>
 ```
 
 Permet de définir le délai avant l'affichage du UserPopover en millisecondes. Par défaut 300
@@ -54,7 +54,7 @@ Permet de définir le délai avant l'affichage du UserPopover en millisecondes. 
 #### luUserPopoverLeaveDelay
 
 ```html
-<button type="button" [luUserPopover]="user" [luUserPopoverLeaveDelay]="200">User</button>
+<button type="button" class="userPopover_trigger" [luUserPopover]="user" [luUserPopoverLeaveDelay]="200">User</button>
 ```
 
 Permet de définir le délai avant la disparition du UserPopover en millisecondes. Par défaut 100
@@ -62,7 +62,7 @@ Permet de définir le délai avant la disparition du UserPopover en milliseconde
 #### luUserPopoverDisabled
 
 ```html
-<button type="button" [luUserPopover]="user" [luUserPopoverDisabled]="true"></button>
+<button type="button" class="userPopover_trigger" [luUserPopover]="user" [luUserPopoverDisabled]="true"></button>
 ```
 
 Permet de désactiver le UserPopover

@@ -21,12 +21,10 @@ export default {
 				bob,
 			},
 			template: `<div class="u-displayFlex pr-u-gap300">
-				<button [luUserPopover]="bob" type="button" class="u-buttonReset u-inlineSizeFitContent pr-u-focusVisible u-borderRadiusM">
+				<button [luUserPopover]="bob" type="button" class="userPopover_trigger">
 					<lu-user-tile [user]="bob" />
 				</button>
-				<button [luUserPopover]="bob" type="button" class="u-buttonReset u-inlineSizeFitContent pr-u-focusVisible u-borderRadiusM">
-					<lu-user-tile [user]="bob" displayFormat="LF" role="Administrateur" />
-				</button>
+				<lu-user-tile [user]="bob" displayFormat="LF" role="Administrateur" />
 			</div>`,
 		};
 	},
