@@ -17,14 +17,14 @@ export default {
 	],
 	render: ({ user, sizes, placeholder, displayFormat }) => {
 		return {
-			template: `<lu-user-picture
+			template: `<button class="userPopover_trigger" type="button" [luUserPopover]="user">
+			<lu-user-picture
 		[user]="user"
 		[displayFormat]="displayFormat"
 		data-testid="lu-user-picture"
 		[class]="sizes"
 		[class.mod-placeholder]="placeholder"
-		[luUserPopover]="user"
-	></lu-user-picture>`,
+		 /></button>`,
 			props: {
 				user,
 				sizes,
