@@ -61,7 +61,7 @@
 			overflow: hidden;
 			position: relative;
 			text-overflow: ellipsis;
-			word-break: break-word;
+			overflow-wrap: anywhere;
 			white-space: nowrap;
 			order: -1;
 		}
