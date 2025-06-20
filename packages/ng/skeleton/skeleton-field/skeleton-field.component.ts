@@ -1,4 +1,4 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 
 @Component({
 	selector: 'lu-skeleton-field',
@@ -11,4 +11,10 @@ export class SkeletonFieldComponent {
 	readonly dark = input(false, { transform: booleanAttribute });
 
 	readonly hiddenLabel = input(false, { transform: booleanAttribute });
+
+	rows = input<number>(1);
+
+	lines = computed(() => Array.from(Array(this.rows()).keys()));
+
+	getRandomPercent = (min: number = 33, max: number = 66): string => `${Math.floor(Math.random() * (max - min) + min).toString()}%`;
 }

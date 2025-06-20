@@ -18,10 +18,16 @@ export const Template: StoryObj<SkeletonFieldComponent> = {
 				type: 'boolean',
 			},
 		},
+		rows: {
+			control: {
+				type: 'number',
+			},
+		},
 	},
 
 	args: {
 		dark: false,
 		hiddenLabel: false,
+		rows: 1,
 	},
 };
