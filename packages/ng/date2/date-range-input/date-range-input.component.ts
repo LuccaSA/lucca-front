@@ -176,16 +176,12 @@ export class DateRangeInputComponent extends AbstractDateComponent implements On
 		return '';
 	});
 
-	startTextInput = signal<string | null>(null);
-
 	endLabel = computed(() => {
 		if (this.selectedRange()?.end && this.isValidDate(this.selectedRange()?.end)) {
 			return this.getDateLabelForInput(this.selectedRange()?.end);
 		}
 		return '';
 	});
-
-	endTextInput = signal<string | null>(null);
 
 	previousButton = viewChild<ElementRef<Element>>('previousButtonRef');
 
@@ -224,13 +220,6 @@ export class DateRangeInputComponent extends AbstractDateComponent implements On
 			this.#formFieldRef.rolePresentationLabel.set(true);
 			this.label = this.#formFieldRef.label();
 		}
-
-		this.setupInputEffect(this.startTextInput, 'start');
-		this.setupInputEffect(this.endTextInput, 'end');
-
-		effect(() => {
-			this.#onChange?.(this.selectedRange());
-		});
 
 		effect(() => {
 			this.#luClass.setState({
@@ -300,42 +289,6 @@ export class DateRangeInputComponent extends AbstractDateComponent implements On
 		}
 	}
 
-	setupInputEffect(inputSignal: Signal<string | null>, rangeProperty: 'start' | 'end'): void {
-		effect(() => {
-			const inputValue = inputSignal();
-			let currentRange: DateRange = untracked(this.selectedRange) || ({} as DateRange);
-			if (inputValue?.length > 0) {
-				const parsed = parse(inputValue, this.dateFormat, startOfDay(new Date()));
-				if (parsed.getFullYear() > 999) {
-					currentRange = {
-						...currentRange,
-						scope: this.mode(),
-						[rangeProperty]: parsed,
-					};
-					this.currentDate.set(startOfDay(parsed));
-					this.tabbableDate.set(startOfDay(parsed));
-				} else if (this.isValidDate(parsed)) {
-					currentRange = {
-						...currentRange,
-						scope: this.mode(),
-						[rangeProperty]: parsed,
-					};
-				}
-			} else if (inputValue !== null) {
-				currentRange = {
-					...currentRange,
-					scope: this.mode(),
-					[rangeProperty]: undefined,
-				};
-			}
-			if (!currentRange.start && !currentRange.end) {
-				this.selectedRange.set(null);
-			} else {
-				this.selectedRange.set(currentRange);
-			}
-		});
-	}
-
 	inputBlur(): void {
 		this.onTouched?.();
 		this.inputFocused.set(false);
@@ -350,6 +303,7 @@ export class DateRangeInputComponent extends AbstractDateComponent implements On
 				end: range.start,
 				start: range.end,
 			});
+			this.#onChange?.(this.selectedRange());
 		}
 	}
 
@@ -438,6 +392,8 @@ export class DateRangeInputComponent extends AbstractDateComponent implements On
 				this.dateHovered.set(null);
 			}
 		}
+
+		this.#onChange?.(this.selectedRange());
 	}
 
 	arrowDown(popoverRef: PopoverDirective, fieldToFocus: 'start' | 'end'): void {
@@ -492,6 +448,7 @@ export class DateRangeInputComponent extends AbstractDateComponent implements On
 	clear() {
 		const newValue = this.clearBehavior() === 'reset' ? this.initialValue() : null;
 		this.selectedRange.set(newValue);
+		this.#onChange?.(this.selectedRange());
 		this.onTouched?.();
 		this.startTextInputRef().nativeElement.focus();
 	}
@@ -514,6 +471,7 @@ export class DateRangeInputComponent extends AbstractDateComponent implements On
 
 	selectShortcut(shortcut: CalendarShortcut, popover: PopoverDirective): void {
 		this.selectedRange.set(shortcut.range);
+		this.#onChange?.(this.selectedRange());
 		popover?.close();
 		this.filterPillPopoverCloseFn?.();
 	}
@@ -533,5 +491,39 @@ export class DateRangeInputComponent extends AbstractDateComponent implements On
 
 	getDefaultFilterPillIcon(): LuccaIcon {
 		return 'calendarPlanning';
+	}
+
+	textInputChange(inputValue: string, rangeProperty: 'start' | 'end'): void {
+		let currentRange: DateRange = this.selectedRange() || ({} as DateRange);
+		if (inputValue?.length > 0) {
+			const parsed = parse(inputValue, this.dateFormat, startOfDay(new Date()));
+			if (parsed.getFullYear() > 999) {
+				currentRange = {
+					...currentRange,
+					scope: this.mode(),
+					[rangeProperty]: parsed,
+				};
+				this.currentDate.set(startOfDay(parsed));
+				this.tabbableDate.set(startOfDay(parsed));
+			} else if (this.isValidDate(parsed)) {
+				currentRange = {
+					...currentRange,
+					scope: this.mode(),
+					[rangeProperty]: parsed,
+				};
+			}
+		} else if (inputValue !== null) {
+			currentRange = {
+				...currentRange,
+				scope: this.mode(),
+				[rangeProperty]: undefined,
+			};
+		}
+		if (!currentRange.start && !currentRange.end) {
+			this.selectedRange.set(null);
+		} else {
+			this.selectedRange.set(currentRange);
+		}
+		this.#onChange?.(this.selectedRange());
 	}
 }
