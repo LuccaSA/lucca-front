@@ -314,7 +314,7 @@ export class DateInputComponent extends AbstractDateComponent implements Control
 
 	registerOnChange(fn: (value: Date | string | null) => void): void {
 		this.#onChange = (date: Date | null) => {
-			fn(date && this.inDateISOFormat() ? transformDateToDateISO(date) : date);
+			fn(date && this.inDateISOFormat() && this.isValidDate(date) ? transformDateToDateISO(date) : date);
 		};
 	}
 
