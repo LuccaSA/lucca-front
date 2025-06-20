@@ -461,6 +461,7 @@ export type LuccaIcon =
 	| 'forbidden'
 	| 'signCancel'
 	| 'cancel'
+	| 'signCheckbox'
 	| 'signClose'
 	| 'signConfirm'
 	| 'confirm'

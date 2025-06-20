@@ -461,6 +461,7 @@ export const IconsList = [
 	{ icon: 'forbidden', deprecated: true },
 	{ icon: 'signCancel', deprecated: false },
 	{ icon: 'cancel', deprecated: true },
+	{ icon: 'signCheckbox', deprecated: false },
 	{ icon: 'signClose', deprecated: false },
 	{ icon: 'signConfirm', deprecated: false },
 	{ icon: 'confirm', deprecated: true },
