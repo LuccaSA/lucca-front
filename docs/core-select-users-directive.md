@@ -19,11 +19,13 @@ Il est possible de modifier l'affichage d'une option en fournissant un template 
 ```html
 <lu-simple-select #usersRef="luUsers" placeholder="Placeholder..." users>
   <!-- Il est possible de modifier le rendu de l'utilisateur sélectionné avec *luDisplayer -->
-  <ng-container *luDisplayer="let user; select: usersRef.select"> 👉👉👉 {{ user | luUserDisplay }} 👈👈👈 </ng-container>
+  <ng-container *luDisplayer="let user; select: usersRef.select">
+    👉👉👉 <span translate="no">{{ user | luUserDisplay }}</span> 👈👈👈
+  </ng-container>
 
   <!-- Il est possible de modifier le rendu de chaque option avec *luOption -->
   <ng-container *luOption="let user; select: usersRef.select">
-    <div>🚀 {{ user | luUserDisplay }} 🚀</div>
+    <div translate="no">🚀 {{ user | luUserDisplay }} 🚀</div>
 
     <!-- Ne pas oublier la gestion des homonymes en affichant `additionalInformation` -->
     <div *ngIf="user.additionalInformation">({{ user.additionalInformation }})</div>
@@ -71,10 +73,10 @@ Il est ensuite possible de modifier le rendu des options en utilisant des propri
 ```html
 <lu-simple-select #appPersonsRef="appPersons" appPersons>
   <ng-container *luDisplayer="let person; select: appPersonsRef.select">
-    <div>{{ person.firstName }} {{ person.lastName }} {{ person.myCustomProperty }}</div>
+    <div><span translate="no">{{ person.firstName }} {{ person.lastName }}</span> {{ person.myCustomProperty }}</div>
   </ng-container>
   <ng-container *luOption="let person; select: appPersonsRef.select">
-    <div>{{ person.firstName }} {{ person.lastName }}</div>
+    <div translate="no">{{ person.firstName }} {{ person.lastName }}</div>
     <div>{{ person.myCustomProperty }}</div>
   </ng-container>
 </lu-simple-select>

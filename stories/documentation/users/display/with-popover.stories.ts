@@ -20,7 +20,7 @@ export default {
 			props: {
 				finn: bob,
 			},
-			template: `<div [luUserPopover]="finn">{{ finn | luUserDisplay : 'lf' }}</div>`,
+			template: `<div [luUserPopover]="finn" translate="no">{{ finn | luUserDisplay : 'lf' }}</div>`,
 		};
 	},
 } as Meta;
