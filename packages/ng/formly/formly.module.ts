@@ -7,7 +7,6 @@ import { LuDepartmentModule } from '@lucca-front/ng/department';
 import { LuEstablishmentModule } from '@lucca-front/ng/establishment';
 import { LuInputModule } from '@lucca-front/ng/input';
 import { LuOptionModule } from '@lucca-front/ng/option';
-import { LuQualificationModule } from '@lucca-front/ng/qualification';
 import { LuSelectModule } from '@lucca-front/ng/select';
 import { LuUserModule } from '@lucca-front/ng/user';
 import { FormlyModule } from '@ngx-formly/core';
@@ -23,7 +22,6 @@ import {
 	LuFormlyFieldSelect,
 	LuFormlyFieldTextarea,
 	LuFormlyFieldUser,
-	LuFormlyFieldQualification,
 } from './types/index';
 import {
 	LuFormlyErrorMessage,
@@ -51,7 +49,6 @@ export const LuFormlyChild = FormlyModule.forChild(LU_FORMLY_CONFIG);
 		LuFormlyFieldApi,
 		LuFormlyFieldDepartment,
 		LuFormlyFieldEstablishment,
-		LuFormlyFieldQualification,
 		LuFormlyFieldRadios,
 		LuFormlyFieldCheckbox,
 
@@ -75,7 +72,6 @@ export const LuFormlyChild = FormlyModule.forChild(LU_FORMLY_CONFIG);
 		LuApiModule,
 		LuDepartmentModule,
 		LuEstablishmentModule,
-		LuQualificationModule,
 		LuDateModule,
 
 		LuFormlyChild,
