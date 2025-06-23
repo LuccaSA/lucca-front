@@ -46,7 +46,7 @@ const code = `
 /* Ajouter un lu-select ainsi qu'un lu-option-picker-advanced */
 <label class="textfield mod-block pr-u-marginBlockStart400">
   <lu-select class="textfield-input">
-    <span *luDisplayer="let user">{{ user | luUserDisplay }}</span>
+    <span *luDisplayer="let user" translate="no">{{ user | luUserDisplay }}</span>
 
     <lu-option-picker-advanced>
       <lu-api-paged-searcher
@@ -61,7 +61,7 @@ const code = `
 
       <div class="lu-picker-content-option">
         <lu-option *luForOptions="let user" [value]="user">
-          {{ user | luUserDisplay }}
+					<span translate="no">{{ user | luUserDisplay }}</span>
 
           /* Ajouter une information additionnelle en pilotant la propriété ajoutée précedemment */
           /* Par défault, additionalInformation équivaut au nom du département de l'utilisateur */
