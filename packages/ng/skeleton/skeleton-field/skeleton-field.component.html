@@ -8,7 +8,7 @@
 				@for (line of lines(); track $index) {
 					<span
 						class="skeleton-item"
-						[style.--components-skeleton-text-width]="$index === lines().length - 1 ? getRandomPercent() : getRandomPercent(98, 100)"
+						[style.--components-skeleton-text-width]="$last ? getRandomPercent() : getRandomPercent(98, 100)"
 					></span>
 				}
 			</span>
