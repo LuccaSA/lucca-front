@@ -10,7 +10,7 @@ import { LuCoreSelectUsersDirective } from './users.directive';
 	imports: [NgIf, AsyncPipe, LuUserDisplayPipe],
 	template: `
 		<ng-container *ngIf="context.option$ | async as user">
-			{{ user | luUserDisplay: userDirective.displayFormat() }}
+			<span translate="no">{{ user | luUserDisplay: userDirective.displayFormat() }}</span>
 		</ng-container>
 	`,
 	standalone: true,

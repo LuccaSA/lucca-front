@@ -1,12 +1,18 @@
 <section class="contentSection">
 	<h4>Un utilisateur</h4>
-	<div>{{ users[0] | luUserDisplay : displayFormat }}</div>
+	<div translate="no">{{ users[0] | luUserDisplay : displayFormat }}</div>
 </section>
 
 <section class="contentSection">
 	<h4>Plusieurs utilisateurs</h4>
 	<div class="u-displayFlex u-flexDirectionColumn">
-		<div><label>Avec un séparateur : </label>{{ users | luUserDisplay : { format: displayFormat, separator } }}</div>
-		<div><label>Avec un formatter : </label>{{ users | luUserDisplay : { format: displayFormat, formatter } }}</div>
+		<div>
+			<label>Avec un séparateur : </label>
+			<span translate="no">{{ users | luUserDisplay : { format: displayFormat, separator } }}</span>
+		</div>
+		<div>
+			<label>Avec un formatter : </label>
+			<span translate="no">{{ users | luUserDisplay : { format: displayFormat, formatter } }}</span>
+		</div>
 	</div>
 </section>

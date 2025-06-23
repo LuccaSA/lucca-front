@@ -14,7 +14,9 @@ import { LuCoreSelectUsersDirective } from './users.directive';
 	template: `
 		<ng-container *ngIf="context.option$ | async as user">
 			<div *ngIf="userDirective.displayMeOption() && user.id === userDirective.currentUserId && hasEmptyClue$ | async; else notMe">
-				<b>{{ intl.me }} <ng-container *luOptionOutlet="customUserOptionTpl() || defaultUserTpl; value: user" /></b>
+				<strong>{{ intl.me }}</strong
+				>&ngsp;
+				<strong translate="no"><ng-container *luOptionOutlet="customUserOptionTpl() || defaultUserTpl; value: user" /></strong>
 			</div>
 
 			<ng-template #notMe>
@@ -24,7 +26,7 @@ import { LuCoreSelectUsersDirective } from './users.directive';
 		</ng-container>
 
 		<ng-template #defaultUserTpl let-user>
-			{{ user | luUserDisplay: userDirective.displayFormat() }}
+			<span translate="no">{{ user | luUserDisplay: userDirective.displayFormat() }}</span>
 		</ng-template>
 	`,
 	standalone: true,
