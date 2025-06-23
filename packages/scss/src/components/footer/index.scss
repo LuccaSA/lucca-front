@@ -38,4 +38,9 @@
 			@include narrow;
 		}
 	}
+
+	.dialog &,
+	.lu-modal-panel & {
+		@include insideDialog;
+	}
 }

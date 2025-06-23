@@ -1,4 +1,5 @@
 @use 'exports' as *;
+@use '@lucca-front/scss/src/commons/utils/media';
 
 .pageHeader {
 	@include vars;
@@ -18,5 +19,17 @@
 
 	&.mod-sticky {
 		@include sticky;
+
+		@include media.min('S') {
+			@include stickyWide;
+		}
+	}
+
+	&:has(.pageHeader-containerOptional) {
+		@include withContainer;
+	}
+
+	@include media.min('XS') {
+		@include wide;
 	}
 }

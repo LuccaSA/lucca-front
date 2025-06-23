@@ -11,6 +11,11 @@
 	}
 
 	@at-root ($atRoot) {
+		.pageHeader-containerOptional {
+			padding: var(--commons-container-padding);
+			max-inline-size: var(--commons-container-maxWidth);
+		}
+
 		.pageHeader-content {
 			display: flex;
 			justify-content: space-between;

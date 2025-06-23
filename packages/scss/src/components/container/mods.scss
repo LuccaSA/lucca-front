@@ -29,7 +29,3 @@
 @mixin overflow {
 	--components-container-minInlineSize: fit-content;
 }
-
-@mixin wide {
-	--commons-container-padding: 0 var(--pr-t-spacings-400);
-}

@@ -1,4 +1,14 @@
 <header class="pageHeader">
+	@if (container()) {
+		<div class="pageHeader-containerOptional">
+			<ng-container *ngTemplateOutlet="content"></ng-container>
+		</div>
+	} @else {
+		<ng-container *ngTemplateOutlet="content"></ng-container>
+	}
+</header>
+
+<ng-template #content>
 	<ng-content select="[pageHeaderBreadcrumbs]" />
 	<div class="pageHeader-content">
 		<div class="pageHeader-content-title">
@@ -26,4 +36,4 @@
 		}
 	</div>
 	<ng-content select="[pageHeaderNavigation]" />
-</header>
+</ng-template>

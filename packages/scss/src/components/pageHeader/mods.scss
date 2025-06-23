@@ -1,5 +1,3 @@
-@use '@lucca-front/scss/src/commons/utils/media';
-
 @mixin horizontalNavigation {
 	padding-block-end: 0;
 }
@@ -18,9 +16,17 @@
 	position: sticky;
 	inset-inline: 0;
 	z-index: 99;
+}
 
-	@include media.max('S') {
-		inset-block-start: calc(var(--commons-banner-height) + var(--commons-navSide-mobile-toggle-height));
-		inset-inline-start: 0 !important;
-	}
+@mixin stickyWide {
+	inset-block-start: calc(var(--commons-banner-height) + var(--commons-navSide-mobile-toggle-height));
+	inset-inline-start: 0 !important;
+}
+
+@mixin withContainer {
+	--components-pageHeader-padding: var(--pr-t-spacings-300) 0;
+}
+
+@mixin wide {
+	--components-pageHeader-padding: var(--pr-t-spacings-300) var(--pr-t-spacings-400);
 }
