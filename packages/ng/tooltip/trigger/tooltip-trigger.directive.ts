@@ -71,7 +71,7 @@ export class LuTooltipTriggerDirective implements AfterContentInit, OnDestroy {
 
 	luTooltipWhenEllipsis = input(false, { transform: booleanAttribute });
 
-	resize$ = new Observable((observer) => {
+	resize$ = new Observable<void>((observer) => {
 		const resizeObserver = new ResizeObserver(() => {
 			observer.next();
 		});
