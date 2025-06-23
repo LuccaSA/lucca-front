@@ -1,13 +1,5 @@
 @use '@lucca-front/scss/src/components/avatar/exports' as avatar;
 
-// nameOnly is deprecated
-@mixin nameOnly {
-  .user-tile-label,
-  .user-tile-footnote {
-    display: none;
-  }
-}
-
 @mixin XS {
   --components-userTile-gap: var(--pr-t-spacings-100);
   --components-userTile-title-fontSize: var(--pr-t-font-body-S-fontSize);

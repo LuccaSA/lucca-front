@@ -13,8 +13,7 @@
 		min-block-size: var(--components-avatar-size);
 	}
 
-	// .user-tile-label is deprecated
-	&:has(.userTile-content-info, .user-tile-label) {
+	&:has(.userTile-content-info) {
 		// Apply height to avatar (calculed on title & info height) to avoid img overflow
 		.avatar {
 			block-size: calc(var(--components-userTile-title-lineHeight) + var(--components-userTile-info-lineHeight));
@@ -22,36 +21,32 @@
 	}
 
 	@at-root ($atRoot) {
-		// .user-info is deprecated
-		.userTile-content,
-		.user-info {
+		.userTile-content {
 			display: flex;
 			flex-direction: column;
 			margin: 0;
 		}
 
-		// .user-tile-title is deprecated
-		.userTile-content-name,
-		.user-tile-title {
+		.userTile-content-name {
 			font-size: var(--components-userTile-title-fontSize);
 			line-height: var(--components-userTile-title-lineHeight);
 			color: var(--pr-t-color-text);
 			margin: 0;
 		}
 
-		// .user-tile-label is deprecated
-		.userTile-content-info,
-		.user-tile-label {
+		.userTile-content-info {
 			font-size: var(--components-userTile-info-fontSize);
 			line-height: var(--components-userTile-info-lineHeight);
 			color: var(--palettes-neutral-600);
 			margin: 0;
 		}
 
-		// .user-tile-footnote deprecated
-		.user-tile-footnote {
-			font-size: var(--pr-t-font-body-S-fontSize);
-			line-height: var(--pr-t-font-body-S-lineHeight);
+		.userTile-content-slotBottom {
+			font: var(--pr-t-font-body-S);
+
+			&:empty {
+				display: none;
+			}
 		}
 	}
 }

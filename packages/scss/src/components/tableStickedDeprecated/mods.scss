@@ -62,9 +62,7 @@
 					}
 				}
 
-				// .mod-columnSticky-shadowMask is deprecated
-				&.mod-stickyColumn-shadowMask,
-				&.mod-columnSticky-shadowMask {
+				&.mod-stickyColumn-shadowMask {
 					&::before {
 						inline-size: var(--components-tableFixed-column-sticky-shadow-width);
 						inset-inline-start: calc(var(--components-tableFixed-column-sticky-shadow-width) * -1);
@@ -76,13 +74,9 @@
 					}
 				}
 
-				// .mod-columnSticky-shadowMask is deprecated
-				&:not(.mod-stickyColumn-shadowMask),
-				&:not(.mod-columnSticky-shadowMask) {
+				&:not(.mod-stickyColumn-shadowMask) {
 					&:not(.mod-stickyColumn-shadow) {
-						// .mod-columnSticky-shadowMask is deprecated
-						+ .mod-stickyColumn-shadowMask,
-						+ .mod-columnSticky-shadowMask {
+						+ .mod-stickyColumn-shadowMask {
 							&::before {
 								inset-inline-start: auto;
 								inset-inline-end: calc(var(--components-tableFixed-column-sticky-shadow-width) * -1);
