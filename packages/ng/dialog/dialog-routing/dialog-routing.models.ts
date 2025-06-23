@@ -1,4 +1,4 @@
-import { CanDeactivateFn, DeprecatedGuard, Route } from '@angular/router';
+import { CanDeactivateFn, Route } from '@angular/router';
 import { LuDialogConfig, LuDialogResult } from '../model';
 import { Deferrable } from './dialog-routing.utils';
 
@@ -18,5 +18,5 @@ export type DialogRouteConfig<C> = {
 	/**
 	 * Override canDeactivate to have a stricter type
 	 */
-	canDeactivate?: (CanDeactivateFn<C> | DeprecatedGuard)[];
+	canDeactivate?: CanDeactivateFn<C>[];
 } & Omit<Route, 'component' | 'canDeactivate'>;
