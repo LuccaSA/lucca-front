@@ -72,7 +72,7 @@ function getTemplate(args: HorizontalNavigationScrollboxStory): string {
 				</a>
 			</li>
 		</ul>
-	</nav>
+	</div>
 	<div style="margin-left: -1px"></div>
 </lu-scroll-box>`;
 }
