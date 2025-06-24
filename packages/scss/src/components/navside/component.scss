@@ -190,10 +190,6 @@
 			padding: var(--pr-t-spacings-100);
 			z-index: 1;
 
-			&:empty {
-				display: none;
-			}
-
 			.navSide-item-link {
 				background-color: var(--components-navSide-bottom-section-palette-bg-color);
 				color: var(--components-navSide-bottom-section-palette-text);

@@ -12,7 +12,6 @@ import { CoreSelectPanelInstance, SELECT_PANEL_INSTANCE } from './panel.instance
 		role: 'option',
 	},
 })
-// eslint-disable-next-line @angular-eslint/directive-class-suffix
 export class CoreSelectPanelElement<T> implements Highlightable, OnDestroy {
 	readonly elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
 

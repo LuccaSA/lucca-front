@@ -35,13 +35,13 @@
 		</div>
 	</div>
 	@if (description()) {
-	<div class="pageHeader-description">
-		@if (descriptionIsString()) {
-			<p class="pageHeader-description-paragraph">{{ description() }}</p>
-		} @else {
-			<ng-container *luPortal="description()" />
-		}
-	</div>
+		<div class="pageHeader-description">
+			@if (descriptionIsString()) {
+				<p class="pageHeader-description-paragraph">{{ description() }}</p>
+			} @else {
+				<ng-container *luPortal="description()" />
+			}
+		</div>
 	}
 	<ng-content select="[pageHeaderNavigation]" />
 </ng-template>
