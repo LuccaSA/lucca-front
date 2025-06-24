@@ -31,9 +31,9 @@ function getTemplate(args: BasicStory): string {
 		</tbody>
 		<tfoot class="dataTable-foot">
 			<tr class="dataTable-foot-row">
-				<th class="dataTable-foot-row-cell">Text</th>
-				<th class="dataTable-foot-row-cell">Text</th>
-				<th class="dataTable-foot-row-cell">Text</th>
+				<td class="dataTable-foot-row-cell">Text</td>
+				<td class="dataTable-foot-row-cell">Text</td>
+				<td class="dataTable-foot-row-cell">Text</td>
 			</tr>
 		</tfoot>
 	</table>
