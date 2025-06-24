@@ -36,8 +36,4 @@
 	&.mod-overflow {
 		@include overflow;
 	}
-
-	@include media.min('XS') {
-		@include wide;
-	}
 }

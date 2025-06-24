@@ -4,6 +4,7 @@
 @use '@lucca-front/scss/src/commons/config';
 @use '@lucca-front/scss/src/commons/core';
 @use '@lucca-front/scss/src/commons/function';
+@use '@lucca-front/scss/src/commons/utils/media';
 
 @mixin vars {
 	// TOKENS : TYPO
@@ -92,6 +93,11 @@
 	}
 
 	--commons-container-padding: 0 var(--pr-t-spacings-200);
+
+	@include media.min('S') {
+		--commons-container-padding: 0 var(--pr-t-spacings-400);
+	}
+
 	--commons-container-maxWidth: 90rem; // 90 + 0 = 90
 
 	&:has(.navSide) {
