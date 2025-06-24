@@ -2,8 +2,8 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { LuTooltipModule, LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { generateInputs } from '../../../helpers/stories';
 import { ButtonComponent } from '../../../../packages/ng/button/button.component';
+import { generateInputs } from '../../../helpers/stories';
 
 export default {
 	title: 'Documentation/Overlays/Tooltip/Basic',
@@ -69,6 +69,12 @@ export default {
 	luTooltip="👋 Hello"
 	${generateInputs(args, argTypes)}
 >Tooltip au survol</button>
+<h3>Tooltip sur un texte</h3>
+<span
+
+	luTooltip="👋 Hello"
+	${generateInputs(args, argTypes)}
+>Tooltip au survol</span>
 <h3>Tooltip et ellipse</h3>
 <div
 	class="u-ellipsis"
