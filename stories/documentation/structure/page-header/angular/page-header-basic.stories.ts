@@ -1,6 +1,6 @@
 import { FormsModule } from '@angular/forms';
 import { provideRouter } from '@angular/router';
-import { BreadcrumbsComponent } from '@lucca-front/ng/breadcrumbs';
+import { BreadcrumbsComponent, BreadcrumbsLinkDirective } from '@lucca-front/ng/breadcrumbs';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { TextInputComponent } from '@lucca-front/ng/forms';
@@ -10,7 +10,6 @@ import { LinkComponent } from '@lucca-front/ng/link';
 import { PageHeaderComponent } from '@lucca-front/ng/page-header';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 import { applicationConfig, Meta, moduleMetadata } from '@storybook/angular';
-import { BreadcrumbsLinkDirective } from 'packages/ng/breadcrumbs/breadcrumbs-link.directive';
 import { generateInputs } from 'stories/helpers/stories';
 
 export default {
@@ -45,7 +44,7 @@ export default {
 		}),
 	],
 	render: (args, { argTypes }) => {
-		const { breadcrumbs, actions, navigation, backAction, titleActions, ...otherArgs } = args;
+		const { breadcrumbs, actions, navigation, backAction, titleActions, leading, trailing, ...otherArgs } = args;
 		const titleActionsContainer = titleActions
 			? `<ng-container pageHeaderTitleActions>
 	<button type="button" luButton="text" luTooltip="Modifier" luTooltipOnlyForDisplay><lu-icon icon="officePen" alt="Modifier" /></button>
@@ -96,13 +95,17 @@ export default {
 		</lu-breadcrumbs>
 	</ng-container>`
 			: ``;
+		const leadingContainer = leading ? `<ng-container pageHeaderLeading>${leading}</ng-container>` : ``;
+		const trailingContainer = trailing ? `<ng-container pageHeaderTrainling>${trailing}</ng-container>` : ``;
 
 		return {
 			template: `
 <lu-page-header ${generateInputs(otherArgs, argTypes)}>
 	${breadcrumbsContainer}
 	${backActionContainer}
+	${leadingContainer}
 	${titleActionsContainer}
+	${trailingContainer}
 	${actionsContainer}
 	${navigationContainer}
 </lu-page-header>
@@ -121,5 +124,7 @@ export const Basic = {
 		navigation: false,
 		backAction: false,
 		container: false,
+		leading: '',
+		trailing: '',
 	},
 };

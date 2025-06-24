@@ -82,7 +82,7 @@ export class LuTooltipTriggerDirective implements AfterContentInit, OnDestroy {
 
 	luTooltipAnchor = input<FlexibleConnectedPositionStrategyOrigin>(this.#host);
 
-	resize$ = new Observable((observer) => {
+	resize$ = new Observable<void>((observer) => {
 		const resizeObserver = new ResizeObserver(() => {
 			observer.next();
 		});

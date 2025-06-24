@@ -16,9 +16,7 @@
 
 			display: var(--components-highlightData-display);
 			grid-template-columns: 1fr auto;
-			grid-template-areas:
-				'title action'
-				'value action';
+			grid-template-areas: var(--components-highlightData-grid);
 			align-items: var(--components-highlightData-alignItem);
 			flex-direction: column;
 			column-gap: var(--components-highlightData-gap);

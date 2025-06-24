@@ -30,7 +30,7 @@ export class RadioComponent<T = unknown> implements OnChanges {
 	disabled: boolean;
 
 	@Input()
-	inlineMessage: string;
+	inlineMessage: PortalContent;
 
 	@Input()
 	tag: string;

@@ -30,6 +30,9 @@ import { LuSelectPanelRef } from '../panel';
 import { CoreSelectAddOptionStrategy, LuOptionComparer, LuOptionContext, SELECT_LABEL, SELECT_LABEL_ID } from '../select.model';
 import { LU_CORE_SELECT_TRANSLATIONS } from '../select.translate';
 
+export const coreSelectDefaultOptionComparer: LuOptionComparer<unknown> = (option1, option2) => JSON.stringify(option1) === JSON.stringify(option2);
+export const coreSelectDefaultOptionKey: (option: unknown) => unknown = (option) => option;
+
 @Directive()
 export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDestroy, OnInit, ControlValueAccessor, FilterPillInputComponent {
 	protected changeDetectorRef = inject(ChangeDetectorRef);
@@ -131,8 +134,8 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 		}
 	}
 
-	@Input() optionComparer: LuOptionComparer<TOption> = (option1, option2) => JSON.stringify(option1) === JSON.stringify(option2);
-	@Input() optionKey: (option: TOption) => unknown = (option) => option;
+	@Input() optionComparer: LuOptionComparer<TOption> = coreSelectDefaultOptionComparer;
+	@Input() optionKey: (option: TOption) => unknown = coreSelectDefaultOptionKey;
 
 	noClueIcon = input(false, { transform: booleanAttribute });
 	inputTabindex = input<number>(0);

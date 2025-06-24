@@ -16,7 +16,7 @@ import {
 	viewChild,
 	ViewEncapsulation,
 } from '@angular/core';
-import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors, Validator } from '@angular/forms';
+import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validator } from '@angular/forms';
 import { LuccaIcon } from '@lucca-front/icons';
 import { LuClass, ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { FILTER_PILL_INPUT_COMPONENT, FilterPillDisplayerDirective, FilterPillInputComponent } from '@lucca-front/ng/filter-pills';
@@ -29,6 +29,12 @@ import { CalendarMode } from '../calendar2/calendar-mode';
 import { Calendar2Component } from '../calendar2/calendar2.component';
 import { CellStatus } from '../calendar2/cell-status';
 import { comparePeriods, startOfPeriod, transformDateInputToDate, transformDateToDateISO } from '../utils';
+
+export type DateInputValidatorErrorType = {
+	min: true;
+	max: true;
+	date: true;
+};
 
 @Component({
 	selector: 'lu-date-input',
@@ -71,6 +77,7 @@ export class DateInputComponent extends AbstractDateComponent implements Control
 
 	disableOverflow = input(false, { transform: booleanAttribute });
 	hideOverflow = input(false, { transform: booleanAttribute });
+	widthAuto = input(false, { transform: booleanAttribute });
 
 	filterPillDisabled = signal(false);
 
@@ -140,6 +147,11 @@ export class DateInputComponent extends AbstractDateComponent implements Control
 
 	@HostBinding('class.mod-filterPill')
 	isFilterPill = false;
+
+	@HostBinding('class.mod-auto')
+	get isWidthAuto() {
+		return this.widthAuto();
+	}
 
 	isFilterPillEmpty = computed(() => !this.selectedDate());
 	isFilterPillClearable = computed(() => this.clearable() ?? this.#defaultFilterPillClearable() ?? this.#defaultClearable);
@@ -260,7 +272,7 @@ export class DateInputComponent extends AbstractDateComponent implements Control
 		}
 	}
 
-	validate(control: AbstractControl<Date | string | null>): ValidationErrors | null {
+	validate(control: AbstractControl<Date | string | null>): Partial<DateInputValidatorErrorType> | null {
 		// null is not an error but means we'll skip everything else, we'll let the presence of a
 		// Validators.required (or not) decide if it's an error.
 		if (control.value === null || control.value === undefined) {
@@ -279,8 +291,10 @@ export class DateInputComponent extends AbstractDateComponent implements Control
 			return { date: true };
 		}
 		// Check min and max
-		if (!this.isInMinMax(date, this.mode())) {
-			return { minMax: true };
+		if (this.min() && !this.isAfterMin(date, this.mode())) {
+			return { min: true };
+		} else if (this.max() && !this.isBeforeMax(date, this.mode())) {
+			return { max: true };
 		}
 		// Everything is valid
 		return null;
@@ -294,13 +308,13 @@ export class DateInputComponent extends AbstractDateComponent implements Control
 			this.selectedDate.set(start);
 			this.currentDate.set(start);
 		} else {
-			this.clear();
+			this.reset();
 		}
 	}
 
 	registerOnChange(fn: (value: Date | string | null) => void): void {
 		this.#onChange = (date: Date | null) => {
-			fn(date && this.inDateISOFormat() ? transformDateToDateISO(date) : date);
+			fn(date && this.inDateISOFormat() && this.isValidDate(date) ? transformDateToDateISO(date) : date);
 		};
 	}
 
@@ -309,9 +323,14 @@ export class DateInputComponent extends AbstractDateComponent implements Control
 		super.setDisabledState(isDisabled);
 	}
 
-	clear() {
+	reset() {
 		this.inputRef().nativeElement.value = '';
+		this.dateFromWriteValue.set(null);
 		this.selectedDate.set(null);
+	}
+
+	clear() {
+		this.reset();
 		this.#onChange?.(null);
 		this.onTouched?.();
 	}

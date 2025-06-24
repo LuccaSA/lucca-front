@@ -40,7 +40,7 @@ export class TextareaInputComponent implements OnInit {
 	})
 	autoResizeScrollIntoView = false;
 
-	disableSpeelcheck = input<boolean, boolean>(false, { transform: booleanAttribute });
+	disableSpeelcheck = input(false, { transform: booleanAttribute });
 
 	cloneValue = '';
 

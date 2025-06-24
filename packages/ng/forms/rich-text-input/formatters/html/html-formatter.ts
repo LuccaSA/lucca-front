@@ -31,7 +31,7 @@ export class HtmlFormatter extends RichTextFormatter {
 		let result = '';
 		editor.getEditorState().read(() => (result = $generateHtmlFromNodes(editor)));
 		return sanitize(result, {
-			FORBID_ATTR: ['style'],
+			FORBID_ATTR: ['style', 'class'],
 		});
 	}
 }

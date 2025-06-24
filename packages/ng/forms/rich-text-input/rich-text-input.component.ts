@@ -65,8 +65,8 @@ export class RichTextInputComponent implements OnInit, OnDestroy, ControlValueAc
 	readonly #formField = inject(FormFieldComponent, { optional: true });
 
 	readonly placeholder = input<string>('');
-	readonly disableSpellcheck = input<boolean, boolean>(false, { transform: booleanAttribute });
-	readonly autoResize = input<boolean, boolean>(false, { transform: booleanAttribute });
+	readonly disableSpellcheck = input(false, { transform: booleanAttribute });
+	readonly autoResize = input(false, { transform: booleanAttribute });
 
 	readonly content = viewChild.required<string, ElementRef<HTMLElement>>('content', {
 		read: ElementRef,
@@ -104,7 +104,6 @@ export class RichTextInputComponent implements OnInit, OnDestroy, ControlValueAc
 			nodes: [...this.#customNodes()],
 		});
 
-		this.#editor.setRootElement(this.content().nativeElement);
 		this.#cleanup = mergeRegister(
 			registerRichText(this.#editor),
 			registerHistory(this.#editor, createEmptyHistoryState(), 300),
@@ -118,6 +117,7 @@ export class RichTextInputComponent implements OnInit, OnDestroy, ControlValueAc
 				this.currentCanShowPlaceholder.set(currentCanShowPlaceholder);
 			}),
 		);
+		this.#editor.setRootElement(this.content().nativeElement);
 
 		this.pluginComponents().forEach((plugin) => plugin.setEditorInstance(this.#editor));
 
