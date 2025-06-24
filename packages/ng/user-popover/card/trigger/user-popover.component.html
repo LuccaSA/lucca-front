@@ -1,5 +1,5 @@
 @if (employee$ | async; as employee) {
-	<div class="userPopover">
+	<div class="userPopover u-animatedFadeIn">
 		<section class="userPopover-details">
 			<div class="userPopover-details-avatar avatar">
 				@switch (userPictureDisplay$ | async) {
@@ -91,4 +91,6 @@
 			</div>
 		</section>
 	</div>
+} @else {
+	<lu-loading class="pr-u-margin200"></lu-loading>
 }
