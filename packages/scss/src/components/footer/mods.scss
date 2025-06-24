@@ -12,3 +12,11 @@
 	--components-footer-paddingInline: var(--pr-t-spacings-300);
 	--commons-container-padding: 0;
 }
+
+@mixin wide {
+	--components-footer-paddingInline: var(--pr-t-spacings-400);
+}
+
+@mixin withContainer {
+	--components-footer-paddingInline: 0;
+}

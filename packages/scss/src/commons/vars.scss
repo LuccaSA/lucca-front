@@ -94,15 +94,11 @@
 
 	--commons-container-padding: 0 var(--pr-t-spacings-200);
 
-	@include media.min('XS') {
+	@include media.min('S') {
 		--commons-container-padding: 0 var(--pr-t-spacings-400);
 	}
 
 	--commons-container-maxWidth: 90rem; // 90 + 0 = 90
-
-	@include media.min('XS') {
-		--commons-container-padding: 0 var(--pr-t-spacings-400);
-	}
 
 	&:has(.navSide) {
 		--commons-container-maxWidth: 75rem; // 75 + 15 = 90

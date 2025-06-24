@@ -25,11 +25,11 @@
 		}
 	}
 
-	&:has(.pageHeader-containerOptional) {
-		@include withContainer;
+	@include media.min('S') {
+		@include wide;
 	}
 
-	@include media.min('XS') {
-		@include wide;
+	&:has(.pageHeader-containerOptional) {
+		@include withContainer;
 	}
 }
