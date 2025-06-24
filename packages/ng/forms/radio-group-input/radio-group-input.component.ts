@@ -1,4 +1,4 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, forwardRef, HostBinding, inject, input, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, forwardRef, HostBinding, inject, input, Input, ViewEncapsulation } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FORM_FIELD_INSTANCE, FormFieldComponent } from '@lucca-front/ng/form-field';
 import { injectNgControl } from '../inject-ng-control';
@@ -23,7 +23,7 @@ let nextId = 0;
 		},
 	],
 })
-export class RadioGroupInputComponent implements OnInit {
+export class RadioGroupInputComponent {
 	formField = inject<FormFieldComponent>(FORM_FIELD_INSTANCE, { optional: true });
 
 	ngControl = injectNgControl();
@@ -46,12 +46,6 @@ export class RadioGroupInputComponent implements OnInit {
 	constructor() {
 		if (this.formField) {
 			this.formField.layout.set('fieldset');
-		}
-	}
-
-	ngOnInit(): void {
-		if (this.formField) {
-			this.formField.hasArrow = this.arrow !== undefined;
 		}
 	}
 }

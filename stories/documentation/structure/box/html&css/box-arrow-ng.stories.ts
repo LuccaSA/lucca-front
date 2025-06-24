@@ -51,7 +51,7 @@ function getTemplate(args: ArrowBasicStory): string {
 	const checked = args.checked ? ' checked' : '';
 
 	if (args.field === 'radio') {
-		return `<lu-form-field label="Légende" hiddenLabel>
+		return `<lu-form-field label="Légende" hiddenLabel inline>
 	<lu-radio-group-input [(ngModel)]="example" arrow="neutral">
 		<lu-radio [value]="1">Option A</lu-radio>
 		<lu-radio [value]="2">Option B</lu-radio>
