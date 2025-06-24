@@ -6,7 +6,7 @@
 	@include vars;
 	@include component;
 
-	@include container.max('S', $name: 'mobilePush') {
+	@include container.max(30rem, $name: 'mobilePush') {
 		@include narrow;
 	}
 }
