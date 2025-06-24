@@ -1,12 +1,16 @@
+@use '@lucca-front/scss/src/commons/config';
 @use '@lucca-front/scss/src/commons/utils/namespace';
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
 	border-radius: var(--components-box-border-radius);
-	margin: var(--components-box-margin);
 	padding: var(--components-box-padding);
 	background-color: var(--components-box-background, var(--pr-t-elevation-surface-raised));
 	display: block;
 	position: relative;
+
+	@if config.$deprecatedCardBoxMargin {
+		margin: var(--components-box-margin);
+	}
 
 	@at-root ($atRoot) {
 		.box-close {

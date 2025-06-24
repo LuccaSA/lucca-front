@@ -1,3 +1,4 @@
+@use '@lucca-front/scss/src/commons/config';
 @use '@lucca-front/scss/src/commons/utils/namespace';
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
@@ -6,11 +7,14 @@
 	border-color: var(--components-card-border-color);
 	border-width: 1px;
 	display: block;
-	margin-block-end: var(--pr-t-spacings-200);
 	border-style: solid;
 	position: relative;
 	transition-duration: var(--commons-animations-durations-fast);
 	transition-property: background-color, box-shadow, color;
+
+	@if config.$deprecatedCardBoxMargin {
+		margin-block-end: var(--pr-t-spacings-200);
+	}
 
 	@at-root ($atRoot) {
 		.card-content {
