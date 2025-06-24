@@ -22,8 +22,8 @@
 				type="button"
 				*ngIf="!isSubmitHidden"
 				class="button palette-{{ submitPalette }}"
+				[ngClass]="submitClass$ | async"
 				[disabled]="submitDisabled$ | async"
-				[class]="submitClass$ | async"
 				(click)="submit()"
 			>
 				{{ submitLabel$ | async }}
