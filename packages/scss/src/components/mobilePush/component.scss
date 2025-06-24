@@ -8,7 +8,7 @@
 	container: mobilePush / inline-size;
 
 	@at-root ($atRoot) {
-		.mobilePushContainer {
+		.mobilePush {
 			display: flex;
 			align-items: var(--components-mobilePush-icon-content-align-items);
 			gap: var(--pr-t-spacings-100);
@@ -30,6 +30,8 @@
 			grid-area: 1 / 1 ;
 			color: var(--palettes-brand-600);
 			z-index: 1;
+			padding-inline-start: 0.0625rem;
+			padding-block-end: var(--pr-t-spacings-25);
 		}
 
 		.mobilePush-icons-back {

@@ -2,7 +2,7 @@
 
 @use 'exports' as *;
 
-.mobilePush {
+.mobilePush-containerWrapper {
 	@include vars;
 	@include component;
 

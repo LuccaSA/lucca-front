@@ -1,7 +1,7 @@
 @use '@lucca-front/scss/src/commons/utils/namespace';
 
 @mixin narrow {
-	.mobilePushContainer {
+	.mobilePush {
 		--components-mobilePush-flex-direction: column;
 		--components-mobilePush-content-align-items: flex-start;
 		--components-mobilePush-icon-content-align-items: flex-start;
