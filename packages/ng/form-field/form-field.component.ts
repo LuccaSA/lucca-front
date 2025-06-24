@@ -28,8 +28,8 @@ import { BehaviorSubject } from 'rxjs';
 import { FormFieldSize } from './form-field-size';
 import { FORM_FIELD_INSTANCE } from './form-field.token';
 import { LU_FORM_FIELD_TRANSLATIONS } from './form-field.translate';
-import { InputDirective } from './input.directive';
 import { FRAMED_INPUT_INSTANCE } from './framed-input/framed-input-token';
+import { InputDirective } from './input.directive';
 
 let nextId = 0;
 
@@ -122,8 +122,6 @@ export class FormFieldComponent implements OnDestroy, DoCheck {
 	extraDescribedBy = input<string>('');
 
 	layout = model<'default' | 'checkable' | 'fieldset'>('default');
-
-	hasArrow = false;
 
 	#inputs: InputDirective[] = [];
 
