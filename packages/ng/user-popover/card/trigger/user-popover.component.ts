@@ -12,13 +12,14 @@ import { LeaveEndsDisplayPipe } from '../pipe/leave-ends-display.pipe';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { POPOVER_CONFIG } from '@lucca-front/ng/popover2';
 import { LU_USER_POPOVER_USER } from '../../user-popover.providers';
+import { LoadingComponent } from '@lucca-front/ng/loading';
 
 @Component({
 	selector: 'lu-user-popover-content',
 	templateUrl: './user-popover.component.html',
 	styleUrl: './user-popover.component.scss',
 	standalone: true,
-	imports: [AsyncPipe, NgTemplateOutlet, DatePipe, IntlParamsPipe, IsFuturePipe, IsFutureOrTodayPipe, LeaveEndsDisplayPipe, IconComponent],
+	imports: [AsyncPipe, NgTemplateOutlet, DatePipe, IntlParamsPipe, IsFuturePipe, IsFutureOrTodayPipe, LeaveEndsDisplayPipe, IconComponent, LoadingComponent],
 })
 export class LuUserPopoverComponent {
 	luUser = inject(LU_USER_POPOVER_USER);
