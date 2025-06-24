@@ -26,5 +26,9 @@
 
 	&:has(.highlightData-illustrations) {
 		@include illustrations;
+
+		&.mod-valueFirst {
+			@include valueFirstIllustrations;
+		}
 	}
 }

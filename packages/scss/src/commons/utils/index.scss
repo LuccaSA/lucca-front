@@ -356,7 +356,7 @@
 		.u-insetReset {
 			inset: 0 !important;
 		}
-	} @else if $direction != 'block' and $direction != 'inline' {
+	} @else if $direction == 'top' or $direction == 'bottom' or $direction == 'left' or $direction == 'right' {
 		// .u-#{$direction}Reset is deprecated
 		.u-#{$direction}0,
 		.u-#{$direction}Reset {

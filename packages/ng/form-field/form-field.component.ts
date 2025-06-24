@@ -74,7 +74,8 @@ export class FormFieldComponent implements OnDestroy, DoCheck {
 	ownControls = computed(() => this.ngControls().filter((c) => !this.ignoredControls().has(c)));
 
 	#hasInputRequired = signal(false);
-	isInputRequired = this.#hasInputRequired.asReadonly();
+	forceInputRequired = signal(false);
+	isInputRequired = computed(() => this.forceInputRequired() || this.#hasInputRequired());
 
 	label = input.required<PortalContent>();
 
@@ -131,7 +132,7 @@ export class FormFieldComponent implements OnDestroy, DoCheck {
 	counter = input<number>(0);
 
 	get contentLength(): number {
-		return (this.#inputs[0]?.host?.nativeElement as HTMLInputElement)?.value.length || 0;
+		return (this.#inputs[0]?.host?.nativeElement as HTMLInputElement)?.value?.length || 0;
 	}
 
 	public addInput(input: InputDirective) {

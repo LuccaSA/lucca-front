@@ -11,7 +11,6 @@ import { buildAddWrapperExtension } from '../formly.utils';
 	// eslint-disable-next-line @angular-eslint/prefer-standalone
 	standalone: false,
 })
-// eslint-disable-next-line @angular-eslint/component-class-suffix
 export class LuFormlyWrapperIcon extends FieldWrapper {
 	@ViewChild('fieldComponent', { read: ViewContainerRef, static: true })
 	override fieldComponent: ViewContainerRef;

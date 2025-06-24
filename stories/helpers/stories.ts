@@ -1,6 +1,5 @@
 import { Args, ArgTypes, StoryObj } from '@storybook/angular';
-import { PlayFunction } from '@storybook/core/csf';
-import { Renderer } from '@storybook/core/types';
+import { PlayFunction, Renderer } from 'storybook/internal/types';
 
 export interface StoryGeneratorArgs<TComponent> {
 	name: string;

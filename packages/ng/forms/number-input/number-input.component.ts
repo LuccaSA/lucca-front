@@ -24,9 +24,9 @@ export class NumberInputComponent {
 
 	step = input<number, number>(1, { transform: numberAttribute });
 
-	noSpinButtons = input<boolean, boolean>(false, { transform: booleanAttribute });
+	noSpinButtons = input(false, { transform: booleanAttribute });
 
-	hasClearer = input<boolean, boolean>(false, { transform: booleanAttribute });
+	hasClearer = input(false, { transform: booleanAttribute });
 
 	inputElementRef = viewChild.required<ElementRef<HTMLInputElement>>('inputElement');
 

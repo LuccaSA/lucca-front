@@ -10,7 +10,6 @@ import { FieldWrapper } from '@ngx-formly/core';
 	// eslint-disable-next-line @angular-eslint/prefer-standalone
 	standalone: false,
 })
-// eslint-disable-next-line @angular-eslint/component-class-suffix
 export class LuFormlyWrapperCheckboxLayout extends FieldWrapper {
 	@ViewChild('fieldComponent', { read: ViewContainerRef, static: true })
 	override fieldComponent: ViewContainerRef;

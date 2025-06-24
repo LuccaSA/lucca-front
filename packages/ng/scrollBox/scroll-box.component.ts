@@ -1,9 +1,9 @@
-import { ChangeDetectionStrategy, Component, ElementRef, HostBinding, OnInit, signal, viewChild, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, HostBinding, inject, OnDestroy, OnInit, signal, ViewEncapsulation } from '@angular/core';
 
 @Component({
 	selector: 'lu-scroll-box',
 	standalone: true,
-	templateUrl: './scroll-box.component.html',
+	template: '<ng-content />',
 	styleUrls: ['./scroll-box.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	encapsulation: ViewEncapsulation.None,
@@ -12,9 +12,8 @@ import { ChangeDetectionStrategy, Component, ElementRef, HostBinding, OnInit, si
 		class: 'scrollBox',
 	},
 })
-export class ScrollBoxComponent implements OnInit {
-	firstRef = viewChild<ElementRef<HTMLElement>>('first');
-	lastRef = viewChild<ElementRef<HTMLElement>>('last');
+export class ScrollBoxComponent implements OnInit, OnDestroy {
+	#elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
 
 	@HostBinding('class.is-firstVisible')
 	get isFirstVisibleClass() {
@@ -45,8 +44,28 @@ export class ScrollBoxComponent implements OnInit {
 		).observe(element);
 	}
 
+	observeFirstAndLastElement = () => {
+		const children = this.#elementRef.nativeElement.children;
+
+		[].forEach.call(children, (child, index) => {
+			if (index === 0) {
+				this.initObserver(child as Element, true);
+			}
+
+			if (index === children.length - 1) {
+				this.initObserver(child as Element, false);
+			}
+		});
+	};
+
+	observer = new MutationObserver(this.observeFirstAndLastElement);
+
 	ngOnInit() {
-		this.initObserver(this.firstRef().nativeElement, true);
-		this.initObserver(this.lastRef().nativeElement, false);
+		this.observeFirstAndLastElement();
+		this.observer.observe(this.#elementRef.nativeElement, { childList: true });
+	}
+
+	ngOnDestroy() {
+		this.observer.disconnect();
 	}
 }

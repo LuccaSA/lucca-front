@@ -15,11 +15,17 @@
 			<div class="pageHeader-content-title-back">
 				<ng-content select="[pageHeaderBackAction]" />
 			</div>
+			<div class="pageHeader-content-title-leading">
+				<ng-content select="[pageHeaderLeading]" />
+			</div>
 			@if (labelIsString()) {
 				<h1 class="pageHeader-content-title-content"><ng-container *luPortal="label()" /></h1>
 			} @else {
 				<ng-container *luPortal="label()" />
 			}
+			<div class="pageHeader-content-title-trailing">
+				<ng-content select="[pageHeaderTrainling]" />
+			</div>
 			<div class="pageHeader-content-title-actions">
 				<ng-content select="[pageHeaderTitleActions]" />
 			</div>
@@ -28,12 +34,14 @@
 			<ng-content select="[pageHeaderActions]" />
 		</div>
 	</div>
-	<div class="pageHeader-description">
-		@if (descriptionIsString()) {
-			<p class="pageHeader-description-paragraph">{{ description() }}</p>
-		} @else {
-			<ng-container *luPortal="description()" />
-		}
-	</div>
+	@if (description()) {
+		<div class="pageHeader-description">
+			@if (descriptionIsString()) {
+				<p class="pageHeader-description-paragraph">{{ description() }}</p>
+			} @else {
+				<ng-container *luPortal="description()" />
+			}
+		</div>
+	}
 	<ng-content select="[pageHeaderNavigation]" />
 </ng-template>

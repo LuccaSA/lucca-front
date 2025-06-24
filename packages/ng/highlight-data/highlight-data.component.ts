@@ -1,5 +1,6 @@
 import { booleanAttribute, ChangeDetectionStrategy, Component, computed, effect, HostBinding, inject, input, ViewEncapsulation } from '@angular/core';
-import { LuClass } from '@lucca-front/ng/core';
+import { LuClass, PortalContent, PortalDirective } from '@lucca-front/ng/core';
+
 @Component({
 	selector: 'lu-highlight-data',
 	standalone: true,
@@ -11,12 +12,13 @@ import { LuClass } from '@lucca-front/ng/core';
 	host: {
 		class: 'highlightData',
 	},
+	imports: [PortalDirective],
 })
 export class HighlightDataComponent {
 	#luClass = inject(LuClass);
-	heading = input.required<string>();
-	value = input.required<string>();
-	subText = input<string>();
+	heading = input.required<PortalContent>();
+	value = input.required<PortalContent>();
+	subText = input<PortalContent>();
 	bubble = input<1 | 2 | 3 | 4 | number>();
 	bubbleSrc = computed(() => {
 		return `https://cdn.lucca.fr/transverse/prisme/visuals/highlight-data/${this.palette()}/bubbles-${this.bubbleTheme()}-${this.bubble()}.svg`;

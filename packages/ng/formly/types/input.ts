@@ -9,7 +9,6 @@ import { FieldType, FieldTypeConfig } from '@ngx-formly/core';
 	// eslint-disable-next-line @angular-eslint/prefer-standalone
 	standalone: false,
 })
-// eslint-disable-next-line @angular-eslint/component-class-suffix
 export class LuFormlyFieldInput extends FieldType<FieldTypeConfig> {
 	get type() {
 		return this.props.type || 'text';
