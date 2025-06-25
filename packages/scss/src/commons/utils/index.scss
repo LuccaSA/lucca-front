@@ -10,370 +10,372 @@
 
 @use '@lucca-front/scss/src/components/title/exports' as title;
 
-[data-content-before] {
-	&::before {
-		content: attr(data-content-before);
-	}
-}
-
-[data-content-after] {
-	&::after {
-		content: attr(data-content-after);
-	}
-}
-
-[class*='u-animated'] {
-	animation-duration: var(--commons-animations-duration, var(--commons-animations-durations-standard));
-	animation-timing-function: var(--commons-animations-function);
-
-	&.mod-animation-duration-fast {
-		--commons-animations-duration: var(--commons-animations-durations-fast);
+@layer utils {
+	[data-content-before] {
+		&::before {
+			content: attr(data-content-before);
+		}
 	}
 
-	&.mod-animation-duration-slow {
-		--commons-animations-duration: var(--commons-animations-durations-slow);
-	}
-}
-
-.u-animated {
-	&FadeIn,
-	&FadeOut {
-		animation-name: fadeIn;
-
-		@include keyframe.fadeIn;
+	[data-content-after] {
+		&::after {
+			content: attr(data-content-after);
+		}
 	}
 
-	&ScaleIn,
-	&ScaleOut {
-		animation-name: scaleIn;
+	[class*='u-animated'] {
+		animation-duration: var(--commons-animations-duration, var(--commons-animations-durations-standard));
+		animation-timing-function: var(--commons-animations-function);
 
-		@include keyframe.scaleIn;
+		&.mod-animation-duration-fast {
+			--commons-animations-duration: var(--commons-animations-durations-fast);
+		}
+
+		&.mod-animation-duration-slow {
+			--commons-animations-duration: var(--commons-animations-durations-slow);
+		}
 	}
 
-	&ScaleInTop,
-	&ScaleOutTop {
-		animation-name: scaleInTop;
+	.u-animated {
+		&FadeIn,
+		&FadeOut {
+			animation-name: fadeIn;
 
-		@include keyframe.scaleIn;
+			@include keyframe.fadeIn;
+		}
+
+		&ScaleIn,
+		&ScaleOut {
+			animation-name: scaleIn;
+
+			@include keyframe.scaleIn;
+		}
+
+		&ScaleInTop,
+		&ScaleOutTop {
+			animation-name: scaleInTop;
+
+			@include keyframe.scaleIn;
+		}
+
+		&ScaleInRight,
+		&ScaleOutRight {
+			animation-name: scaleInRight;
+
+			@include keyframe.scaleInRight;
+		}
+
+		&ScaleInBottom,
+		&ScaleOutBottom {
+			animation-name: scaleInBottom;
+
+			@include keyframe.scaleInBottom;
+		}
+
+		&ScaleInLeft,
+		&ScaleOutLeft {
+			animation-name: scaleInLeft;
+
+			@include keyframe.scaleInLeft;
+		}
+
+		&SlideIn,
+		&SlideInTop,
+		&SlideOut,
+		&SlideOutTop {
+			animation-name: slideIn;
+
+			@include keyframe.slideIn;
+		}
+
+		&SlideInRight,
+		&SlideOutRight {
+			animation-name: slideInRight;
+
+			@include keyframe.slideInRight;
+		}
+
+		&SlideInBottom,
+		&SlideOutBottom {
+			animation-name: slideInBottom;
+
+			@include keyframe.slideInBottom;
+		}
+
+		&SlideInLeft,
+		&SlideOutLeft {
+			animation-name: slideInLeft;
+
+			@include keyframe.slideInLeft;
+		}
+
+		&Shake {
+			animation-name: shake;
+
+			@include keyframe.shake;
+		}
+
+		&Pulse {
+			animation-name: pulse;
+			animation-direction: alternate;
+			animation-iteration-count: var(--commons-animations-iteration-count);
+
+			@include keyframe.pulse;
+		}
+
+		&FadeOut,
+		&SlideOut,
+		&SlideOutTop,
+		&SlideOutRight,
+		&SlideOutBottom,
+		&SlideOutLeft,
+		&ScaleOut,
+		&ScaleOutTop,
+		&ScaleOutRight,
+		&ScaleOutBottom,
+		&ScaleOutLeft {
+			animation-direction: reverse;
+		}
 	}
 
-	&ScaleInRight,
-	&ScaleOutRight {
-		animation-name: scaleInRight;
-
-		@include keyframe.scaleInRight;
+	.u-mask {
+		@include a11y.mask('!important');
 	}
 
-	&ScaleInBottom,
-	&ScaleOutBottom {
-		animation-name: scaleInBottom;
-
-		@include keyframe.scaleInBottom;
+	.u-clearfix {
+		@include reset.clearfix('!important');
 	}
 
-	&ScaleInLeft,
-	&ScaleOutLeft {
-		animation-name: scaleInLeft;
-
-		@include keyframe.scaleInLeft;
+	// .u-clear is deprecated
+	.u-clearBoth,
+	.u-clear {
+		@include reset.clear('both', '!important');
 	}
 
-	&SlideIn,
-	&SlideInTop,
-	&SlideOut,
-	&SlideOutTop {
-		animation-name: slideIn;
-
-		@include keyframe.slideIn;
+	// .u-clearLeft is deprecated
+	.u-clearInlineStart,
+	.u-clearLeft {
+		@include reset.clear('inline-start', '!important');
 	}
 
-	&SlideInRight,
-	&SlideOutRight {
-		animation-name: slideInRight;
-
-		@include keyframe.slideInRight;
+	// .u-clearRight is deprecated
+	.u-clearInlineEnd,
+	.u-clearRight {
+		@include reset.clear('inline-end', '!important');
 	}
 
-	&SlideInBottom,
-	&SlideOutBottom {
-		animation-name: slideInBottom;
-
-		@include keyframe.slideInBottom;
+	.u-listReset {
+		@include reset.list('!important');
 	}
 
-	&SlideInLeft,
-	&SlideOutLeft {
-		animation-name: slideInLeft;
-
-		@include keyframe.slideInLeft;
+	.u-descriptionListReset {
+		@include reset.list($list: 'dl', $suffix: '!important');
 	}
 
-	&Shake {
-		animation-name: shake;
-
-		@include keyframe.shake;
+	.u-summaryReset {
+		@include reset.summary('!important');
 	}
 
-	&Pulse {
-		animation-name: pulse;
-		animation-direction: alternate;
-		animation-iteration-count: var(--commons-animations-iteration-count);
-
-		@include keyframe.pulse;
+	.u-buttonReset {
+		@include reset.button('!important');
 	}
 
-	&FadeOut,
-	&SlideOut,
-	&SlideOutTop,
-	&SlideOutRight,
-	&SlideOutBottom,
-	&SlideOutLeft,
-	&ScaleOut,
-	&ScaleOutTop,
-	&ScaleOutRight,
-	&ScaleOutBottom,
-	&ScaleOutLeft {
-		animation-direction: reverse;
+	.u-ellipsis {
+		@include text.ellipsis('!important');
 	}
-}
 
-.u-mask {
-	@include a11y.mask('!important');
-}
+	.u-h1 {
+		font: var(--pr-t-font-heading-1);
+		color: var(--pr-t-font-color-heading);
 
-.u-clearfix {
-	@include reset.clearfix('!important');
-}
+		&.mod-XXXL {
+			// Deprecated
+			@include title.XXXL;
+		}
+	}
 
-// .u-clear is deprecated
-.u-clearBoth,
-.u-clear {
-	@include reset.clear('both', '!important');
-}
+	.u-h2 {
+		font: var(--pr-t-font-heading-2);
+		color: var(--pr-t-font-color-heading);
+	}
 
-// .u-clearLeft is deprecated
-.u-clearInlineStart,
-.u-clearLeft {
-	@include reset.clear('inline-start', '!important');
-}
+	.u-h3 {
+		font: var(--pr-t-font-heading-3);
+		color: var(--pr-t-font-color-heading);
+	}
 
-// .u-clearRight is deprecated
-.u-clearInlineEnd,
-.u-clearRight {
-	@include reset.clear('inline-end', '!important');
-}
+	.u-h4 {
+		font: var(--pr-t-font-heading-4);
+		color: var(--pr-t-font-color-heading);
+	}
 
-.u-listReset {
-	@include reset.list('!important');
-}
-
-.u-descriptionListReset {
-	@include reset.list($list: 'dl', $suffix: '!important');
-}
-
-.u-summaryReset {
-	@include reset.summary('!important');
-}
-
-.u-buttonReset {
-	@include reset.button('!important');
-}
-
-.u-ellipsis {
-	@include text.ellipsis('!important');
-}
-
-.u-h1 {
-	font: var(--pr-t-font-heading-1);
-	color: var(--pr-t-font-color-heading);
-
-	&.mod-XXXL {
+	.u-h5 {
 		// Deprecated
-		@include title.XXXL;
-	}
-}
-
-.u-h2 {
-	font: var(--pr-t-font-heading-2);
-	color: var(--pr-t-font-color-heading);
-}
-
-.u-h3 {
-	font: var(--pr-t-font-heading-3);
-	color: var(--pr-t-font-color-heading);
-}
-
-.u-h4 {
-	font: var(--pr-t-font-heading-4);
-	color: var(--pr-t-font-color-heading);
-}
-
-.u-h5 {
-	// Deprecated
-	@include title.h5;
-}
-
-.u-h6 {
-	// Deprecated
-	@include title.h6;
-}
-
-.u-bodyM {
-	font: var(--pr-t-font-body-M);
-}
-
-.u-bodyS {
-	font: var(--pr-t-font-body-S);
-}
-
-.u-bodyXS {
-	font: var(--pr-t-font-body-XS);
-}
-
-// .u-textLeft is deprecated
-.u-textLeft {
-	text-align: start !important;
-}
-
-// .u-textRight is deprecated
-.u-textRight {
-	text-align: end !important;
-}
-
-// .u-textCenter is deprecated
-.u-textCenter {
-	text-align: center !important;
-}
-
-.u-textLight {
-	color: var(--palettes-neutral-600) !important;
-}
-
-.u-textPlaceholder {
-	color: var(--palettes-neutral-400) !important;
-}
-
-.u-textDefault {
-	color: var(--palettes-neutral-700) !important;
-}
-
-.u-fontWeightRegular {
-	font-weight: 400 !important;
-}
-
-.u-fontWeightSemiBold {
-	font-weight: 600 !important;
-}
-
-.u-noSpinButtons {
-	&::-webkit-outer-spin-button,
-	&::-webkit-inner-spin-button {
-		appearance: none !important;
+		@include title.h5;
 	}
 
-	&[type='number'] {
-		appearance: textfield !important;
+	.u-h6 {
+		// Deprecated
+		@include title.h6;
 	}
-}
 
-.u-fontFamily {
-	font-family: var(--pr-t-font-family) !important;
-}
-
-.u-fontFamilyCursive {
-	font-family: var(--pr-t-font-family-cursive) !important;
-}
-
-.u-fontFamilyBrand {
-	font-family: var(--pr-t-font-family-brand) !important;
-}
-
-.pr-u-focusVisible {
-	&:focus-visible {
-		@include a11y.focusVisible;
+	.u-bodyM {
+		font: var(--pr-t-font-body-M);
 	}
-}
 
-@include core.classes('float', core.$float);
-@include core.classes('vertical-align', core.$verticalAlign);
-@include core.classes('white-space', core.$whiteSpace);
-@include core.classes('display', core.$displays);
-@include core.classes('flex-direction', core.$direction);
-@include core.classes('flex-wrap', core.$wrap);
-@include core.classes('justify-content', core.$justify);
-@include core.classes('align-items', core.$align);
-@include core.classes('flex-grow', core.$flex);
-@include core.classes('flex-shrink', core.$flex);
-@include core.classes('flex-basis', core.$basis);
-@include core.classes('order', core.$order);
-@include core.classes('align-self', core.$align);
-@include core.classes('position', core.$position);
+	.u-bodyS {
+		font: var(--pr-t-font-body-S);
+	}
 
-@include core.classes('width', core.$contents);
-@include core.classes('height', core.$contents);
-@include core.classes('min-width', '0');
-@include core.classes('min-height', '0');
+	.u-bodyXS {
+		font: var(--pr-t-font-body-XS);
+	}
 
-@include core.classes('inline-size', core.$contents);
-@include core.classes('block-size', core.$contents);
-@include core.classes('min-inline-size', '0');
-@include core.classes('min-block-size', '0');
-@include core.classes('max-inline-size', core.$contents);
+	// .u-textLeft is deprecated
+	.u-textLeft {
+		text-align: start !important;
+	}
 
-@include core.classes('visibility', core.$visibility);
-@include core.classes('font-weight', core.$fontWeight);
-@include core.classes('font-style', core.$fontStyle);
-@include core.classes('pointer-events', core.$pointerEvents);
-@include core.classes('cursor', core.$cursor);
-@include core.classes('text-align', core.$textAlign);
-@include core.classes('text-decoration', core.$decoration);
-@include core.classes('overflow', core.$overflow);
+	// .u-textRight is deprecated
+	.u-textRight {
+		text-align: end !important;
+	}
 
-@media (prefers-reduced-motion: no-preference) {
-	@include core.classes('scroll-behavior', core.$scrollBehavior);
-}
+	// .u-textCenter is deprecated
+	.u-textCenter {
+		text-align: center !important;
+	}
 
-@media only print {
-	@include core.classes('display', core.$displays, $prefix: 'onlyPrint');
-}
+	.u-textLight {
+		color: var(--palettes-neutral-600) !important;
+	}
 
-%displayNone {
-	display: none;
-}
+	.u-textPlaceholder {
+		color: var(--palettes-neutral-400) !important;
+	}
 
-@each $display in core.$displays {
-	@if $display != 'none' {
-		.u-onlyPrintDisplay#{transform.capitalize(transform.camelize($display))} {
-			@extend %displayNone;
+	.u-textDefault {
+		color: var(--palettes-neutral-700) !important;
+	}
+
+	.u-fontWeightRegular {
+		font-weight: 400 !important;
+	}
+
+	.u-fontWeightSemiBold {
+		font-weight: 600 !important;
+	}
+
+	.u-noSpinButtons {
+		&::-webkit-outer-spin-button,
+		&::-webkit-inner-spin-button {
+			appearance: none !important;
+		}
+
+		&[type='number'] {
+			appearance: textfield !important;
 		}
 	}
-}
 
-@each $direction in core.$boxDirection {
-	@if $direction == '' {
-		// .u-insetReset is deprecated
-		.u-inset0,
-		.u-insetReset {
-			inset: 0 !important;
+	.u-fontFamily {
+		font-family: var(--pr-t-font-family) !important;
+	}
+
+	.u-fontFamilyCursive {
+		font-family: var(--pr-t-font-family-cursive) !important;
+	}
+
+	.u-fontFamilyBrand {
+		font-family: var(--pr-t-font-family-brand) !important;
+	}
+
+	.pr-u-focusVisible {
+		&:focus-visible {
+			@include a11y.focusVisible;
 		}
-	} @else if $direction == 'top' or $direction == 'bottom' or $direction == 'left' or $direction == 'right' {
-		// .u-#{$direction}Reset is deprecated
-		.u-#{$direction}0,
-		.u-#{$direction}Reset {
-			#{$direction}: 0 !important;
+	}
+
+	@include core.classes('float', core.$float);
+	@include core.classes('vertical-align', core.$verticalAlign);
+	@include core.classes('white-space', core.$whiteSpace);
+	@include core.classes('display', core.$displays);
+	@include core.classes('flex-direction', core.$direction);
+	@include core.classes('flex-wrap', core.$wrap);
+	@include core.classes('justify-content', core.$justify);
+	@include core.classes('align-items', core.$align);
+	@include core.classes('flex-grow', core.$flex);
+	@include core.classes('flex-shrink', core.$flex);
+	@include core.classes('flex-basis', core.$basis);
+	@include core.classes('order', core.$order);
+	@include core.classes('align-self', core.$align);
+	@include core.classes('position', core.$position);
+
+	@include core.classes('width', core.$contents);
+	@include core.classes('height', core.$contents);
+	@include core.classes('min-width', '0');
+	@include core.classes('min-height', '0');
+
+	@include core.classes('inline-size', core.$contents);
+	@include core.classes('block-size', core.$contents);
+	@include core.classes('min-inline-size', '0');
+	@include core.classes('min-block-size', '0');
+	@include core.classes('max-inline-size', core.$contents);
+
+	@include core.classes('visibility', core.$visibility);
+	@include core.classes('font-weight', core.$fontWeight);
+	@include core.classes('font-style', core.$fontStyle);
+	@include core.classes('pointer-events', core.$pointerEvents);
+	@include core.classes('cursor', core.$cursor);
+	@include core.classes('text-align', core.$textAlign);
+	@include core.classes('text-decoration', core.$decoration);
+	@include core.classes('overflow', core.$overflow);
+
+	@media (prefers-reduced-motion: no-preference) {
+		@include core.classes('scroll-behavior', core.$scrollBehavior);
+	}
+
+	@media only print {
+		@include core.classes('display', core.$displays, $prefix: 'onlyPrint');
+	}
+
+	%displayNone {
+		display: none;
+	}
+
+	@each $display in core.$displays {
+		@if $display != 'none' {
+			.u-onlyPrintDisplay#{transform.capitalize(transform.camelize($display))} {
+				@extend %displayNone;
+			}
 		}
-	} @else {
-		@each $boxModel in core.$boxModel {
-			@if $boxModel != 'border' {
-				.u-#{$boxModel}#{transform.capitalize($direction)}0 {
-					#{$boxModel}-#{$direction}: 0 !important;
+	}
+
+	@each $direction in core.$boxDirection {
+		@if $direction == '' {
+			// .u-insetReset is deprecated
+			.u-inset0,
+			.u-insetReset {
+				inset: 0 !important;
+			}
+		} @else if $direction == 'top' or $direction == 'bottom' or $direction == 'left' or $direction == 'right' {
+			// .u-#{$direction}Reset is deprecated
+			.u-#{$direction}0,
+			.u-#{$direction}Reset {
+				#{$direction}: 0 !important;
+			}
+		} @else {
+			@each $boxModel in core.$boxModel {
+				@if $boxModel != 'border' {
+					.u-#{$boxModel}#{transform.capitalize($direction)}0 {
+						#{$boxModel}-#{$direction}: 0 !important;
+					}
 				}
 			}
 		}
 	}
-}
 
-@include core.spacings;
-@include core.sizes;
-@include core.borderRadius;
-@include core.palettes;
+	@include core.spacings;
+	@include core.sizes;
+	@include core.borderRadius;
+	@include core.palettes;
+}

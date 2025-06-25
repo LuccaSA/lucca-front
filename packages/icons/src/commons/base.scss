@@ -1,12 +1,14 @@
 @use '@lucca-front/icons/src/commons/config';
 
-@if config.$isNamespaced {
-	& {
-		-moz-osx-font-smoothing: grayscale;
-	}
-} @else {
-	body {
-		-moz-osx-font-smoothing: grayscale;
+@layer base {
+	@if config.$isNamespaced {
+		& {
+			-moz-osx-font-smoothing: grayscale;
+		}
+	} @else {
+		body {
+			-moz-osx-font-smoothing: grayscale;
+		}
 	}
 }
 
