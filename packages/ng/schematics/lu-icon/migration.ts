@@ -57,7 +57,7 @@ export function migrateComponent(sourceFile: SourceFile, path: string, tree: Tre
 			 * Add stuff
 			 */
 			// First of all, add opening tag, icon name and alt if it's here
-			let openingTag = `lu-icon icon="${icon.icon}"`;
+			let openingTag = `lu-icon icon="${icon.icon}"${ariaHidden ? '' : ' '}`;
 			if (icon.alt) {
 				openingTag += ` alt="${icon.alt}"`;
 			}
@@ -119,17 +119,16 @@ function findHTMLIcons(sourceFile: SourceFile, basePath: string, tree: Tree): Ht
 						}
 						const siblings = isInterestingNode(parent) ? parent?.children : htmlAst.nodes;
 						if(siblings.length > 0) {
-							const altSpan= siblings.find(child => {
-								if(isInterestingNode(child)) {
-									const childClasses = child.attributes.find(attr => attr.name === 'class')?.value;
-									return childClasses === 'u-mask';
-								}
-								return false;
+							const possibleAltSpan= siblings.find(child => {
+								return isInterestingNode(child) && child !== node;
 							});
-							// We know it's one of these types but TS doesn't find that info from the above call so here we go again
-							if (isInterestingNode(altSpan)) {
-								icon.alt = altSpan.children.find(c => c instanceof currentSchematicContext.angularCompiler.TmplAstText)?.value;
-								icon.altSpan = altSpan;
+							if (possibleAltSpan && isInterestingNode(possibleAltSpan)) {
+								const childClasses = possibleAltSpan.attributes.find(attr => attr.name === 'class')?.value;
+								// We know it's one of these types but TS doesn't find that info from the above call so here we go again
+								if (childClasses === 'u-mask') {
+									icon.alt = template.content.slice(possibleAltSpan.startSourceSpan.end.offset, possibleAltSpan.endSourceSpan?.start?.offset)
+									icon.altSpan = possibleAltSpan;
+								}
 							}
 						}
 						htmlIcons.push(icon);
