@@ -5,7 +5,7 @@ import typescript from 'typescript-eslint';
 
 export default typescript.config(
 	{
-		ignores: ['**/*.stories.ts', '**/schematics/**/tests/output'],
+		ignores: ['**/*.stories.ts', '**/schematics/**/tests/output', '**/schematics/**/tests/input'],
 	},
 	{
 		linterOptions: {
@@ -43,6 +43,9 @@ export default typescript.config(
 			'@typescript-eslint/no-redundant-type-constituents': 'off',
 			'@typescript-eslint/no-base-to-string': 'off',
 			'@typescript-eslint/no-unsafe-enum-comparison': 'off',
+
+			// This one is from Angular 20, we'll remove it eventually but legacy code makes it hard to do
+			'@angular-eslint/prefer-inject': 'off',
 
 			'@typescript-eslint/explicit-function-return-type': 'off',
 			'@typescript-eslint/explicit-module-boundary-types': 'off', // on aimerait bien dire oui sauf pour void

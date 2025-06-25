@@ -49,7 +49,7 @@ To avoid hitting Github’s rate limit, the script caches Milestones versions in
 Webstorm has an [issue with outputting the information during the linting](https://youtrack.jetbrains.com/issue/WEB-71871/stylelint-console.log-written-in-the-linted-file-instead-of-console), so outputting the path is optional with a parameter:
 
 ```sh
-npx stylelint \"./**/*.scss\" showCachePath
+npx stylelint "./**/*.scss" showCachePath
 ```
 
 ### Breaking the rules
@@ -79,12 +79,24 @@ module.exports = {
 
 If needed, each rule can be ignored with [stylelint-(dis|en)able](https://stylelint.io/user-guide/ignore-code).
 
-Please explain why with a comment if you're doing so. Use `styleling-disable[-*] -- Comment` and enable stylelint back as soon as possible: `styleling-enable`.
+Please explain why with a comment if you’re doing so. Use `stylelint-disable[-*] -- Comment` and enable stylelint back as soon as possible: `stylelint-enable`.
+
+## LF versions and Github rate limit
+
+Dates or versions from LF might not show in Stylelint messages.
+
+The cause can be the request to the Github API is blocked because of rate limits on your current IP, resulting in an empty file.
+
+### Workaround
+
+1. Delete the cache file ([showCachePath](#user-content-showcachepath-parameter) tells you where).
+2. Change the IP used to connect to Github (enable or disable your VPN, for example).
+3. Launch linting again: `npx stylelint "./**/*.scss"`.
 
 ## Testing locally
 
 1. From the root of this package, run `npm pack`. This will generate a _.tgz_ file.
-2. From the root of the project you want to lint, run `npm i PATH_TO_LUCCA_FRONT_REPOSITORY/packages/stylelint-config/lucca-front-stylelint-config-0.0.0.tgz`.
+2. From the root of the project you want to lint, run `npm i PATH_TO_LUCCA_FRONT_REPOSITORY/packages/stylelint-config/lucca-stylelint-config-prisme-0.0.0.tgz`.
 
 The configuration from your local repository should be applied right away. _If in doubt, restart your editor._
 

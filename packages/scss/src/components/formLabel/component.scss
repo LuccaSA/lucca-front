@@ -1,13 +1,15 @@
 @use '@lucca-front/scss/src/commons/utils/a11y';
 @use '@lucca-front/scss/src/commons/utils/namespace';
 
+@use '@lucca-front/scss/src/components/tag/exports' as tag;
+
 @mixin component($atRoot: namespace.$defaultAtRoot) {
 	display: block;
 	position: relative;
 	color: var(--components-formLabel-color);
-	font-size: var(--components-formLabel-fontSize);
-	font-weight: 400;
-	line-height: var(--components-formLabel-lineHeight);
+	font: var(--components-formLabel-font);
+	font-size: var(--components-formLabel-fontSize); // Deprecated
+	line-height: var(--components-formLabel-lineHeight); // Deprecated
 	inline-size: var(--components-formLabel-width);
 	padding-inline-end: var(--components-formLabel-paddingRight);
 	cursor: var(--components-formLabel-cursor);
@@ -26,7 +28,6 @@
 			font-size: inherit;
 			line-height: inherit;
 			font-weight: 600;
-			text-rendering: geometricPrecision;
 			margin-inline-start: var(--pr-t-spacings-25);
 			inset-block-start: 0; // Reset sup HTML element
 		}
@@ -48,11 +49,19 @@
 		}
 
 		.formLabel-counter {
-			font-size: var(--sizes-XS-fontSize);
+			font-size: var(--pr-t-font-body-XS-fontSize);
 			color: var(--palettes-neutral-600);
 			position: absolute;
 			inset-inline-end: 0;
 			inset-block-start: 0;
+		}
+
+		.formLabel-tag {
+			margin-inline-start: var(--pr-t-spacings-50);
+			inset-block-start: calc(var(--pr-t-spacings-25) / -2);
+			position: relative;
+
+			@include tag.product;
 		}
 	}
 }

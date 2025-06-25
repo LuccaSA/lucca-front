@@ -1,5 +1,3 @@
-@use '@lucca-front/scss/src/components/title/exports' as title;
-
 @mixin light {
 	--components-highlightData-background: var(--palettes-50, var(--palettes-product-50));
 }
@@ -18,19 +16,13 @@
 }
 
 @mixin S {
-	.highlightData-content-value {
-		@include title.h2;
-	}
-
+	--components-highlightData-value-font: var(--pr-t-font-highlight-XL);
 	--components-highlightData-illustrations-width: 82px;
 	--components-highlightData-illustrations-height: 68px;
 }
 
 @mixin XS {
-	.highlightData-content-value {
-		@include title.h3;
-	}
-
+	--components-highlightData-value-font: var(--pr-t-font-highlight-L);
 	--components-highlightData-illustrations-width: 77px;
 	--components-highlightData-illustrations-height: 64px;
 }

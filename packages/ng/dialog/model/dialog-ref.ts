@@ -1,7 +1,7 @@
 import { DialogRef } from '@angular/cdk/dialog';
 import { isObservable, Observable, of, Subscription, take } from 'rxjs';
 import { filter, map, takeUntil } from 'rxjs/operators';
-import { LuDialogConfig, LuDialogResult } from './dialog-config';
+import { LuDialogConfig, LuDialogData, LuDialogResult } from './dialog-config';
 
 export const DISMISSED_VALUE = {} as const;
 
@@ -9,7 +9,7 @@ function isDismissed(v: unknown): v is typeof DISMISSED_VALUE {
 	return v === DISMISSED_VALUE;
 }
 
-export class LuDialogRef<C = unknown> {
+export class LuDialogRef<C = unknown, TData = LuDialogData<C>> {
 	/**
 	 * Instance of the component that's inside the dialog
 	 */
@@ -45,7 +45,7 @@ export class LuDialogRef<C = unknown> {
 
 	constructor(
 		public readonly cdkRef: DialogRef<LuDialogResult<C> | typeof DISMISSED_VALUE, C>,
-		public readonly config: LuDialogConfig<C>,
+		public readonly config: LuDialogConfig<C, TData>,
 	) {
 		this.detachSubscription = cdkRef.overlayRef
 			.detachments()

@@ -1,4 +1,4 @@
-import { Directive, computed, forwardRef, inject, input, signal } from '@angular/core';
+import { computed, Directive, forwardRef, inject, input, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { CORE_SELECT_API_TOTAL_COUNT_PROVIDER } from '@lucca-front/ng/core-select';
 import { LuOptionComparer } from '@lucca-front/ng/option';

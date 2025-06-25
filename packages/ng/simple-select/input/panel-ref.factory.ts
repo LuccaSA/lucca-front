@@ -42,10 +42,7 @@ abstract class BaseSelectPanelRef<T> extends LuSelectPanelRef<T, T> {
 	}
 
 	selectCurrentlyHighlightedValue(): void {
-		if (this.instance.keyManager.activeItem) {
-			this.emitValue(this.instance.keyManager.activeItem.option);
-		}
-		this.close();
+		this.instance.keyManager.activeItem?.selected.emit();
 	}
 }
 

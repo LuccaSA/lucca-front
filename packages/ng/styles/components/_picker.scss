@@ -1,4 +1,5 @@
 @use 'popover';
+@use '@lucca-front/scss/src/commons/utils/a11y';
 
 .lu-picker-panel {
 	@extend %popover-panel;
@@ -37,8 +38,7 @@
 }
 
 .lu-picker-content-option-group-title {
-	font-size: var(--sizes-S-fontSize);
-	line-height: var(--sizes-S-lineHeight);
+	font: var(--pr-t-font-body-S);
 	font-weight: 600;
 	padding-block: var(--components-options-item-padding-vertical);
 	padding-inline: var(--components-options-item-padding-horizontal);
@@ -51,10 +51,17 @@
 	gap: var(--pr-t-spacings-100);
 	justify-content: space-between;
 	box-shadow: calc(var(--pr-t-spacings-50) * -0.5) calc(var(--pr-t-spacings-50) * -0.5) 0 2px var(--pr-t-elevation-surface-raised); // Mask background options scrolling behind
+
+	&.is-highlighted {
+		background-color: var(--palettes-neutral-50);
+		border-radius: var(--commons-borderRadius-M);
+		outline: 4px solid var(--palettes-neutral-0);
+	}
 }
 
 .lu-picker-content-add {
 	position: sticky;
+	display: block;
 	inset-block-end: 0;
 	background-color: var(--palettes-neutral-0);
 	box-shadow: var(--pr-t-elevation-shadow-overflow);
@@ -62,11 +69,6 @@
 	margin-block: 0;
 	margin-inline: calc(var(--pr-t-spacings-50) * -1);
 	transform: translateY(var(--pr-t-spacings-50));
-
-	.button {
-		inline-size: 100%;
-		justify-content: left;
-	}
 }
 
 .lu-picker-content-loading {
@@ -125,4 +127,10 @@
 	display: flex;
 	flex-direction: column;
 	gap: var(--pr-t-spacings-50);
+
+	&:not(:hover, :has(.is-highlighted)) {
+		.link {
+			@include a11y.mask;
+		}
+	}
 }

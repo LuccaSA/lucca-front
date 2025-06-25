@@ -1,4 +1,14 @@
 <header class="pageHeader">
+	@if (container()) {
+		<div class="pageHeader-containerOptional">
+			<ng-container *ngTemplateOutlet="content"></ng-container>
+		</div>
+	} @else {
+		<ng-container *ngTemplateOutlet="content"></ng-container>
+	}
+</header>
+
+<ng-template #content>
 	<ng-content select="[pageHeaderBreadcrumbs]" />
 	<div class="pageHeader-content">
 		<div class="pageHeader-content-title">
@@ -9,9 +19,9 @@
 				<ng-content select="[pageHeaderLeading]" />
 			</div>
 			@if (labelIsString()) {
-			<h1 class="pageHeader-content-title-content"><ng-container *luPortal="label()" /></h1>
+				<h1 class="pageHeader-content-title-content"><ng-container *luPortal="label()" /></h1>
 			} @else {
-			<ng-container *luPortal="label()" />
+				<ng-container *luPortal="label()" />
 			}
 			<div class="pageHeader-content-title-trailing">
 				<ng-content select="[pageHeaderTrainling]" />
@@ -25,13 +35,13 @@
 		</div>
 	</div>
 	@if (description()) {
-	<div class="pageHeader-description">
-		@if (descriptionIsString()) {
-		<p class="pageHeader-description-paragraph">{{description()}}</p>
-		} @else {
-		<ng-container *luPortal="description()" />
-		}
-	</div>
+		<div class="pageHeader-description">
+			@if (descriptionIsString()) {
+				<p class="pageHeader-description-paragraph">{{ description() }}</p>
+			} @else {
+				<ng-container *luPortal="description()" />
+			}
+		</div>
 	}
 	<ng-content select="[pageHeaderNavigation]" />
-</header>
+</ng-template>

@@ -1,6 +1,6 @@
 import { LOCALE_ID } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { CalendarShortcut, DateRangeInputComponent, PremadeShortcuts } from '@lucca-front/ng/date2';
+import { CalendarShortcut, DateRange, DateRangeInputComponent, PremadeShortcuts } from '@lucca-front/ng/date2';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { cleanupTemplate, generateInputs } from '../../../helpers/stories';
@@ -30,6 +30,10 @@ export default {
 		clearable: {
 			control: 'boolean',
 		},
+		clearBehavior: {
+			control: 'select',
+			options: ['clear', 'reset'],
+		},
 		format: {
 			control: 'select',
 			options: ['date', 'date-iso'],
@@ -52,6 +56,7 @@ export default {
 		const focusedDateValue = args['format'] === 'date' ? new Date(args['focusedDate']) : new Date(args['focusedDate'] ?? 0)?.toISOString().substring(0, 10);
 		return {
 			props: {
+				selected,
 				min: args['min'] ? minValue : null,
 				max: args['max'] ? maxValue : null,
 				focusedDate: args['focusedDate'] ? focusedDateValue : null,
@@ -65,25 +70,28 @@ export default {
 	},
 } as Meta;
 
-export const Basic: StoryObj<DateRangeInputComponent> = {
+export const Basic: StoryObj<DateRangeInputComponent & { selected: DateRange }> = {
 	args: {
 		hideToday: false,
 		hideWeekend: false,
 		clearable: false,
+		clearBehavior: 'clear',
 		widthAuto: false,
 		mode: 'day',
 		format: 'date',
+		selected: { start: new Date(), end: null },
 	},
 };
 
 const shortcutsStr =
 	"[\n	{\n		label: 'Since start of week',\n		range: PremadeShortcuts['SinceStartOfWeek']('fr'),\n	},\n	{\n		label: 'Last week',\n		range: PremadeShortcuts['LastWeek']('fr'),\n	},\n	{\n		label: 'Last month',\n		range: PremadeShortcuts['LastMonth']('fr'),\n	},\n]";
 
-export const WithShortcuts: StoryObj<DateRangeInputComponent> = {
+export const WithShortcuts: StoryObj<DateRangeInputComponent & { selected: DateRange }> = {
 	render: (args: any, { argTypes }) => {
 		const { min, max, selected, ...flags } = args;
 		return {
 			props: {
+				selected,
 				min: min ? new Date(min) : null,
 				max: max ? new Date(max) : null,
 				shortcuts: [
@@ -115,7 +123,9 @@ export const WithShortcuts: StoryObj<DateRangeInputComponent> = {
 		hideToday: false,
 		hideWeekend: false,
 		clearable: false,
+		clearBehavior: 'clear',
 		widthAuto: false,
 		mode: 'day',
+		selected: { start: new Date(), end: null },
 	},
 };

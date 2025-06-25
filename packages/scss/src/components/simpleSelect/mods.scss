@@ -2,8 +2,7 @@
 @use '@lucca-front/scss/src/components/clear/exports' as clear;
 
 @mixin S {
-	--components-simpleSelect-fontSize: var(--sizes-S-fontSize);
-	--components-simpleSelect-lineHeight: var(--sizes-S-lineHeight);
+	--components-simpleSelect-font: var(--pr-t-font-body-S);
 	--components-simpleSelect-padding: var(--pr-t-spacings-75);
 	--components-simpleSelect-gap: var(--pr-t-spacings-75);
 
@@ -24,8 +23,7 @@
 }
 
 @mixin XS {
-	--components-simpleSelect-fontSize: var(--sizes-XS-fontSize);
-	--components-simpleSelect-lineHeight: var(--sizes-XS-lineHeight);
+	--components-simpleSelect-font: var(--pr-t-font-body-XS);
 	--components-simpleSelect-padding: var(--pr-t-spacings-50);
 	--components-simpleSelect-gap: var(--pr-t-spacings-50);
 
@@ -46,7 +44,7 @@
 }
 
 @mixin filterPill {
-	width: 21rem;
+	inline-size: 21rem;
 	max-inline-size: calc(100vw - 2.5rem);
 
 	.simpleSelect-field {

@@ -1,5 +1,7 @@
 <lu-dialog>
-	<lu-dialog-header><h1>{{ title$ | async }}</h1></lu-dialog-header>
+	<lu-dialog-header
+		><h1>{{ title$ | async }}</h1></lu-dialog-header
+	>
 	<lu-dialog-content>
 		<ng-container #contentProjectionRef></ng-container>
 	</lu-dialog-content>
@@ -11,7 +13,7 @@
 				*ngIf="hasSubmit$ | async"
 				[palette]="submitPalette"
 				[disabled]="submitDisabled$ | async"
-				[ngClass]="submitClass()"
+				[class]="submitClass()"
 				(click)="submit()"
 			>
 				{{ submitLabel$ | async }}

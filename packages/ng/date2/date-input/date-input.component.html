@@ -1,5 +1,5 @@
 @if (isFilterPill) {
-<label for="dateInput" class="u-mask">{{ intl.pickDate }}</label>
+	<label for="dateInput" class="u-mask">{{ intl.pickDate }}</label>
 }
 <div class="textField dateField-textField" #popoverAnchor>
 	<div class="textField-input">
@@ -11,7 +11,7 @@
 			class="textField-input-value"
 			[value]="displayValue()"
 			(input)="userTextInput.set(date.value)"
-			(blur)="onTouched?.();inputFocused.set(false)"
+			(blur)="onTouched?.(); inputFocused.set(false)"
 			(focus)="inputFocused.set(true)"
 			aria-haspopup="true"
 			role="combobox"
@@ -25,16 +25,17 @@
 		/>
 
 		<div class="textField-input-affix">
-			@if (clearable() && !disabled() && date.value !== '') {
-			<button class="textField-input-affix-clear clear" type="button" (click)="clear()">
-				<span aria-hidden="true" class="lucca-icon icon-signClose"></span>
-				<span class="u-mask">{{ intl.clear }}</span>
-			</button>
-			} @if (isFilterPill && !isFilterPillEmpty()) {
-			<button class="textField-input-affix-clear clear" type="button" (click)="clear()">
-				<span aria-hidden="true" class="lucca-icon icon-signClose"></span>
-				<span class="u-mask">{{ intl.clear }}</span>
-			</button>
+			@if (clearable() && !disabled() && (clearBehavior() === "clear" ? date.value !== "" : selectedDate() !== initialValue())) {
+				<button class="textField-input-affix-clear clear" type="button" (click)="clear()">
+					<span aria-hidden="true" class="lucca-icon icon-signClose"></span>
+					<span class="u-mask">{{ intl.clear }}</span>
+				</button>
+			}
+			@if (isFilterPill && !isFilterPillEmpty()) {
+				<button class="textField-input-affix-clear clear" type="button" (click)="clear()">
+					<span aria-hidden="true" class="lucca-icon icon-signClose"></span>
+					<span class="u-mask">{{ intl.clear }}</span>
+				</button>
 			}
 			<button
 				[luPopover2]="calendar"
@@ -55,7 +56,7 @@
 </div>
 
 @if (isFilterPill) {
-<ng-container *ngTemplateOutlet="calendar"></ng-container>
+	<ng-container *ngTemplateOutlet="calendar"></ng-container>
 }
 
 <div *luFilterPillDisplayer>{{ displayValue() }}</div>

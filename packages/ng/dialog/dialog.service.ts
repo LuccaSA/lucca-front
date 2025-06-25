@@ -2,7 +2,7 @@ import { Dialog, DialogRef } from '@angular/cdk/dialog';
 import { inject, Injectable, Injector, Renderer2 } from '@angular/core';
 import { isObservable, merge, of, take } from 'rxjs';
 import { filter, switchMap, takeUntil } from 'rxjs/operators';
-import { LuDialogConfig, LuDialogRef, LuDialogResult } from './model';
+import { LuDialogConfig, LuDialogData, LuDialogRef, LuDialogResult } from './model';
 import { DISMISSED_VALUE } from './model/dialog-ref';
 
 @Injectable()
@@ -11,8 +11,8 @@ export class LuDialogService {
 
 	#injector = inject(Injector);
 
-	open<C>(config: LuDialogConfig<C>): LuDialogRef<C> {
-		let luDialogRef: LuDialogRef<C>;
+	open<C, TData = LuDialogData<C>>(config: LuDialogConfig<C, TData>): LuDialogRef<C, TData> {
+		let luDialogRef: LuDialogRef<C, TData>;
 		let modeClasses: string[] = [];
 		switch (config.mode) {
 			case 'drawer':

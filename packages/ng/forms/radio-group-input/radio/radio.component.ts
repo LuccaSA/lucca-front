@@ -1,8 +1,8 @@
-import { NgIf } from '@angular/common';
+import { NgIf, NgTemplateOutlet } from '@angular/common';
 import { booleanAttribute, ChangeDetectionStrategy, Component, HostBinding, inject, Input, OnChanges, ViewEncapsulation } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LuClass, PortalContent } from '@lucca-front/ng/core';
-import { InputDirective } from '@lucca-front/ng/form-field';
+import { FramedInputComponent, InputDirective } from '@lucca-front/ng/form-field';
 import { InlineMessageComponent } from '@lucca-front/ng/inline-message';
 import { RADIO_GROUP_INSTANCE } from '../radio-group-token';
 
@@ -11,14 +11,11 @@ let nextId = 0;
 @Component({
 	selector: 'lu-radio',
 	standalone: true,
-	imports: [ReactiveFormsModule, InputDirective, InlineMessageComponent, NgIf],
+	imports: [ReactiveFormsModule, InlineMessageComponent, NgIf, NgTemplateOutlet, InputDirective, FramedInputComponent],
 	templateUrl: './radio.component.html',
 	styleUrl: './radio.component.scss',
 	encapsulation: ViewEncapsulation.None,
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	host: {
-		class: 'form-field',
-	},
 	providers: [LuClass],
 })
 export class RadioComponent<T = unknown> implements OnChanges {
@@ -35,8 +32,23 @@ export class RadioComponent<T = unknown> implements OnChanges {
 	@Input()
 	inlineMessage: PortalContent;
 
+	@Input()
+	tag: string;
+
+	@Input()
+	framedPortal: PortalContent;
+
 	public get arrow() {
 		return this.#parentGroup.arrow;
+	}
+
+	public get framed() {
+		return this.#parentGroup.framed();
+	}
+
+	@HostBinding('class.form-field')
+	public get notFramed() {
+		return !this.framed;
 	}
 
 	public get formControl() {

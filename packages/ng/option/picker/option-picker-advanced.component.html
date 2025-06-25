@@ -2,7 +2,7 @@
 	<div
 		class="lu-picker-panel lu-option-picker-panel"
 		role="dialog"
-		[ngClass]="panelClassesMap"
+		[class]="panelClassesMap"
 		[class.mod-multiple]="multiple"
 		(click)="onClick()"
 		(mouseover)="onMouseOver()"
@@ -12,7 +12,7 @@
 		<div
 			[class.is-loading]="loading$ | async"
 			class="lu-picker-content"
-			[ngClass]="contentClassesMap"
+			[class]="contentClassesMap"
 			[cdkTrapFocus]="trapFocus"
 			luScroll
 			(onScrollBottom)="onScrollBottom()"

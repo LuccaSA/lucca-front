@@ -2,13 +2,13 @@
 	<div
 		class="lu-picker-panel lu-date-picker-panel"
 		role="dialog"
-		[ngClass]="panelClassesMap"
+		[class]="panelClassesMap"
 		(click)="onClick()"
 		(mouseover)="onMouseOver()"
 		(mouseleave)="onMouseLeave()"
 		(mousedown)="onMouseDown()"
 	>
-		<div class="lu-picker-content" [ngClass]="contentClassesMap" cdkTrapFocus="false" cdkTrapFocusAutoCapture="true">
+		<div class="lu-picker-content" [class]="contentClassesMap" cdkTrapFocus="false" cdkTrapFocusAutoCapture="true">
 			<label class="textfield lu-picker-textfield">
 				<input
 					luDateInput

@@ -123,6 +123,7 @@ export const Basic = {
 		titleActions: false,
 		navigation: false,
 		backAction: false,
+		container: false,
 		leading: '',
 		trailing: '',
 	},

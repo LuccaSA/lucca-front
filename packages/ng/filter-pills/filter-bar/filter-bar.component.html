@@ -1,53 +1,50 @@
 <lu-scroll-box class="filterBar-scrollBox">
-	<div class="filterBar-scrollBox-first"></div>
-
 	<div class="filterBar-scrollBox-group">
 		@if (addonBefore()) {
-		<ng-container *ngTemplateOutlet="addonBefore()"></ng-container>
+			<ng-container *ngTemplateOutlet="addonBefore()"></ng-container>
 
-		<lu-divider class="filterBar-divider" />
-		} @if (optionalPills().length > 0) {
-		<button
-			class="filterPill mod-button"
-			type="button"
-			[luTooltip]="intl.additionalFilters"
-			luTooltipOnlyForDisplay
-			[luPopover2]="contentOptionsTpl"
-			luPopoverNoCloseButton
-			[customPositions]="popoverPositions"
-		>
-			<lu-icon class="filterPill-icon" icon="filtersDescending" [attr.alt]="intl.additionalFilters" />
-		</button>
+			<lu-divider class="filterBar-divider" />
+		}
+		@if (optionalPills().length > 0) {
+			<button
+				class="filterPill mod-button"
+				type="button"
+				[luTooltip]="intl.additionalFilters"
+				luTooltipOnlyForDisplay
+				[luPopover2]="contentOptionsTpl"
+				luPopoverNoCloseButton
+				[customPositions]="popoverPositions"
+			>
+				<lu-icon class="filterPill-icon" icon="filtersDescending" [attr.alt]="intl.additionalFilters" />
+			</button>
 		}
 
 		<ng-content></ng-content>
 	</div>
 
 	@if (addonAfter()) {
-	<div class="filterBar-scrollBox-export">
-		<ng-container *ngTemplateOutlet="addonAfter()"></ng-container>
-	</div>
+		<div class="filterBar-scrollBox-export">
+			<ng-container *ngTemplateOutlet="addonAfter()"></ng-container>
+		</div>
 	}
-
-	<div class="filterBar-scrollBox-last"></div>
 </lu-scroll-box>
 
 <ng-template #contentOptionsTpl>
 	<form class="filterPill_popover-content popover-contentOptional">
 		@for (pill of optionalPills(); track pill.name(); let index = $index) {
-		<div class="form-field mod-selectOption filterPill_popover-content-option">
-			<label class="formLabel" [attr.for]="'filterPillOptions' + index">{{ pill.label() }}</label>
-			<span class="checkboxField">
-				<input
-					type="checkbox"
-					class="checkboxField-input"
-					[name]="pill.name()"
-					[attr.id]="'filterPillOptions' + index"
-					[(ngModel)]="pill.displayed"
-				/>
-				<span class="checkboxField-icon" aria-hidden="true"><span class="checkboxField-icon-check"></span></span>
-			</span>
-		</div>
+			<div class="form-field mod-selectOption filterPill_popover-content-option">
+				<label class="formLabel" [attr.for]="'filterPillOptions' + index">{{ pill.label() }}</label>
+				<span class="checkboxField">
+					<input
+						type="checkbox"
+						class="checkboxField-input"
+						[name]="pill.name()"
+						[attr.id]="'filterPillOptions' + index"
+						[(ngModel)]="pill.displayed"
+					/>
+					<span class="checkboxField-icon" aria-hidden="true"><span class="checkboxField-icon-check"></span></span>
+				</span>
+			</div>
 		}
 	</form>
 </ng-template>

@@ -10,15 +10,17 @@ import {
 	forwardRef,
 	HostBinding,
 	inject,
+	Injector,
 	input,
+	OnInit,
 	signal,
 	untracked,
 	viewChild,
 	ViewEncapsulation,
 } from '@angular/core';
-import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validator } from '@angular/forms';
+import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, NgControl, NgModel, Validator } from '@angular/forms';
 import { LuccaIcon } from '@lucca-front/icons';
-import { LuClass, ɵeffectWithDeps } from '@lucca-front/ng/core';
+import { isNil, LuClass, ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { FILTER_PILL_INPUT_COMPONENT, FilterPillDisplayerDirective, FilterPillInputComponent } from '@lucca-front/ng/filter-pills';
 import { InputDirective } from '@lucca-front/ng/form-field';
 import { IconComponent } from '@lucca-front/ng/icon';
@@ -65,7 +67,10 @@ export type DateInputValidatorErrorType = {
 		LuClass,
 	],
 })
-export class DateInputComponent extends AbstractDateComponent implements ControlValueAccessor, Validator, FilterPillInputComponent {
+export class DateInputComponent extends AbstractDateComponent implements OnInit, ControlValueAccessor, Validator, FilterPillInputComponent {
+	#injector = inject(Injector);
+	#ngControl: NgControl; // Initialized in ngOnInit
+
 	// CVA stuff
 	#onChange?: (value: Date | null) => void;
 
@@ -98,6 +103,7 @@ export class DateInputComponent extends AbstractDateComponent implements Control
 
 	selectedDate = signal<Date | null>(null);
 
+	initialValue = signal<Date | null>(undefined);
 	dateFromWriteValue = signal<Date | null>(null);
 
 	calendar = viewChild(Calendar2Component);
@@ -221,6 +227,10 @@ export class DateInputComponent extends AbstractDateComponent implements Control
 		});
 	}
 
+	ngOnInit() {
+		this.#ngControl = this.#injector.get(NgControl);
+	}
+
 	#safeCompareDate(a: Date, b: Date): boolean {
 		return a === b || (!!a && !!b && isSameDay(a, b));
 	}
@@ -301,8 +311,19 @@ export class DateInputComponent extends AbstractDateComponent implements Control
 	}
 
 	writeValue(date: Date | string | null): void {
+		if (this.#ngControl instanceof NgModel && isNil(this.#onChange)) {
+			// avoid phantom call for ngModel
+			// https://github.com/angular/angular/issues/14988#issuecomment-1310420293
+			return;
+		}
+
+		const _date = transformDateInputToDate(date);
+
+		if (this.initialValue() === undefined) {
+			this.initialValue.set(_date);
+		}
+
 		if (date != null) {
-			const _date = transformDateInputToDate(date);
 			const start = startOfDay(_date);
 			this.dateFromWriteValue.set(start);
 			this.selectedDate.set(start);
@@ -314,7 +335,7 @@ export class DateInputComponent extends AbstractDateComponent implements Control
 
 	registerOnChange(fn: (value: Date | string | null) => void): void {
 		this.#onChange = (date: Date | null) => {
-			fn(date && this.inDateISOFormat() ? transformDateToDateISO(date) : date);
+			fn(date && this.inDateISOFormat() && this.isValidDate(date) ? transformDateToDateISO(date) : date);
 		};
 	}
 
@@ -323,15 +344,16 @@ export class DateInputComponent extends AbstractDateComponent implements Control
 		super.setDisabledState(isDisabled);
 	}
 
-	reset() {
-		this.inputRef().nativeElement.value = '';
-		this.dateFromWriteValue.set(null);
-		this.selectedDate.set(null);
+	reset(): Date | null {
+		const newValue = this.clearBehavior() === 'reset' ? this.initialValue() : null;
+		this.dateFromWriteValue.set(newValue);
+		this.selectedDate.set(newValue);
+		return newValue;
 	}
 
 	clear() {
-		this.reset();
-		this.#onChange?.(null);
+		const newValue = this.reset();
+		this.#onChange?.(newValue);
 		this.onTouched?.();
 	}
 

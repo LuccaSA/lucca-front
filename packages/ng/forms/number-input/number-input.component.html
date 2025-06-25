@@ -1,34 +1,42 @@
 <div class="textField">
 	<ng-template #addon let-addon="addon" let-type="type">
 		@if (addon.content) {
-		<span class="textField-{{type}}" luFormFieldId="{{type}}">
-			<span class="textField-label-{{type}}-item" [attr.aria-label]="addon.ariaLabel">{{ addon.content }}</span>
-		</span>
-		} @if (addon.icon) {
-		<span class="textField-{{type}}" luFormFieldId="{{type}}">
-			<span class="textField-label-{{type}}-item" [attr.aria-label]="addon.ariaLabel"
-				><span class="lucca-icon icon-{{addon.icon}}"></span
-			></span>
-		</span>
+			<span class="textField-{{ type }}" luFormFieldId="{{ type }}">
+				<span class="textField-label-{{ type }}-item" [attr.aria-label]="addon.ariaLabel">{{ addon.content }}</span>
+			</span>
+		}
+		@if (addon.icon) {
+			<span class="textField-{{ type }}" luFormFieldId="{{ type }}">
+				<span class="textField-label-{{ type }}-item" [attr.aria-label]="addon.ariaLabel"
+					><span class="lucca-icon icon-{{ addon.icon }}"></span
+				></span>
+			</span>
 		}
 	</ng-template>
 
 	@if (prefix()) {
-	<ng-container
-		*ngTemplateOutlet="addon; context:{
-			type: 'prefix',
-			addon: prefix()
-     }"
-	>
-	</ng-container>
-	} @if (suffix()) {
-	<ng-container
-		*ngTemplateOutlet="addon; context:{
-			type: 'suffix',
-			addon: suffix()
-     }"
-	>
-	</ng-container>
+		<ng-container
+			*ngTemplateOutlet="
+				addon;
+				context: {
+					type: 'prefix',
+					addon: prefix(),
+				}
+			"
+		>
+		</ng-container>
+	}
+	@if (suffix()) {
+		<ng-container
+			*ngTemplateOutlet="
+				addon;
+				context: {
+					type: 'suffix',
+					addon: suffix(),
+				}
+			"
+		>
+		</ng-container>
 	}
 
 	<div class="textField-input">
@@ -46,10 +54,10 @@
 		/>
 		<div class="textField-input-affix">
 			@if (hasClearer() && inputElement.value) {
-			<button class="textField-input-affix-clear clear" type="button" (click)="clearValue()">
-				<span aria-hidden="true" class="lucca-icon icon-signClose"></span>
-				<span class="u-mask">{{ intl.clear }}</span>
-			</button>
+				<button class="textField-input-affix-clear clear" type="button" (click)="clearValue()">
+					<span aria-hidden="true" class="lucca-icon icon-signClose"></span>
+					<span class="u-mask">{{ intl.clear }}</span>
+				</button>
 			}
 		</div>
 	</div>

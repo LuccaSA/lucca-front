@@ -183,41 +183,51 @@
 	@include text.ellipsis('!important');
 }
 
-.u-h1,
-.u-h2,
-.u-h3,
-.u-h4,
-.u-h5,
-.u-h6 {
-	@include title.component;
-}
-
 .u-h1 {
-	@include title.h1;
+	font: var(--pr-t-font-heading-1);
+	color: var(--pr-t-font-color-heading);
 
 	&.mod-XXXL {
+		// Deprecated
 		@include title.XXXL;
 	}
 }
 
 .u-h2 {
-	@include title.h2;
+	font: var(--pr-t-font-heading-2);
+	color: var(--pr-t-font-color-heading);
 }
 
 .u-h3 {
-	@include title.h3;
+	font: var(--pr-t-font-heading-3);
+	color: var(--pr-t-font-color-heading);
 }
 
 .u-h4 {
-	@include title.h4;
+	font: var(--pr-t-font-heading-4);
+	color: var(--pr-t-font-color-heading);
 }
 
 .u-h5 {
+	// Deprecated
 	@include title.h5;
 }
 
 .u-h6 {
+	// Deprecated
 	@include title.h6;
+}
+
+.u-bodyM {
+	font: var(--pr-t-font-body-M);
+}
+
+.u-bodyS {
+	font: var(--pr-t-font-body-S);
+}
+
+.u-bodyXS {
+	font: var(--pr-t-font-body-XS);
 }
 
 // .u-textLeft is deprecated
@@ -267,15 +277,15 @@
 }
 
 .u-fontFamily {
-	font-family: var(--commons-font-family) !important;
+	font-family: var(--pr-t-font-family) !important;
 }
 
 .u-fontFamilyCursive {
-	font-family: var(--commons-font-family-cursive) !important;
+	font-family: var(--pr-t-font-family-cursive) !important;
 }
 
 .u-fontFamilyBrand {
-	font-family: var(--commons-font-family-brand) !important;
+	font-family: var(--pr-t-font-family-brand) !important;
 }
 
 .pr-u-focusVisible {
@@ -308,11 +318,13 @@
 @include core.classes('block-size', core.$contents);
 @include core.classes('min-inline-size', '0');
 @include core.classes('min-block-size', '0');
+@include core.classes('max-inline-size', core.$contents);
 
 @include core.classes('visibility', core.$visibility);
 @include core.classes('font-weight', core.$fontWeight);
 @include core.classes('font-style', core.$fontStyle);
 @include core.classes('pointer-events', core.$pointerEvents);
+@include core.classes('cursor', core.$cursor);
 @include core.classes('text-align', core.$textAlign);
 @include core.classes('text-decoration', core.$decoration);
 @include core.classes('overflow', core.$overflow);
@@ -344,7 +356,7 @@
 		.u-insetReset {
 			inset: 0 !important;
 		}
-	} @else if $direction != 'block' and $direction != 'inline' {
+	} @else if $direction == 'top' or $direction == 'bottom' or $direction == 'left' or $direction == 'right' {
 		// .u-#{$direction}Reset is deprecated
 		.u-#{$direction}0,
 		.u-#{$direction}Reset {

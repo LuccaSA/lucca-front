@@ -1,15 +1,14 @@
 import { provideHttpClient } from '@angular/common/http';
 import { Component, Input } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
-import { LuUserPopoverDirective, provideLuUserPopover } from '@lucca-front/ng/popup-employee';
-import { Meta, StoryFn, applicationConfig } from '@storybook/angular';
 import { ILuUser } from '@lucca-front/ng/user';
+import { LuUserPopoverDirective, provideLuUserPopover } from '@lucca-front/ng/user-popover';
+import { applicationConfig, Meta, StoryFn } from '@storybook/angular';
 
 @Component({
 	selector: 'user-popover-story',
 	standalone: true,
-	template:
-		'<div [luUserPopover]="luUserPopover" [luUserPopoverEnterDelay]="luUserPopoverEnterDelay" [luUserPopoverLeaveDelay]="luUserPopoverLeaveDelay" [luUserPopoverDisabled]="luUserPopoverDisabled">Survolez-moi !</div>',
+	template: '<div [luUserPopover]="luUserPopover" [luUserPopoverDisabled]="luUserPopoverDisabled">Survolez-moi !</div>',
 	imports: [LuUserPopoverDirective],
 })
 class UserPopoverStory {

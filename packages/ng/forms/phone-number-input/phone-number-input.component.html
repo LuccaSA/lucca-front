@@ -1,5 +1,7 @@
 <fieldset [disabled]="disabled" class="phoneNumber-fieldset">
-	<legend><span class="u-mask">{{ label }}</span></legend>
+	<legend>
+		<span class="u-mask">{{ label }}</span>
+	</legend>
 	<label>
 		<span class="u-mask">Prefix</span>
 		<lu-simple-select
@@ -13,16 +15,18 @@
 			noClueIcon
 			#selectRef
 			class="phoneNumber-fieldset-select"
-			[autocomplete]="autocomplete ? autocomplete === 'off' ? 'off' : 'tel-country-code'  : null"
+			[autocomplete]="autocomplete ? (autocomplete === 'off' ? 'off' : 'tel-country-code') : null"
 		>
 			<ng-container *luOption="let prefixOption; select: selectRef"
-				><img class="phoneNumber-option-flag" src="https://cdn.lucca.fr/assets/misc/flags/{{prefixOption.country}}.svg" alt="" />{{
-				prefixOption.name }} (+{{ prefixOption.prefix }})
+				><img class="phoneNumber-option-flag" src="https://cdn.lucca.fr/assets/misc/flags/{{ prefixOption.country }}.svg" alt="" />{{
+					prefixOption.name
+				}}
+				(+{{ prefixOption.prefix }})
 			</ng-container>
 			<ng-container *luDisplayer="let prefixOption; select: selectRef"
 				><img
-					src="https://cdn.lucca.fr/assets/misc/flags/{{prefixOption.country}}.svg"
-					alt="{{prefixOption.country}} +{{ prefixOption.prefix }}"
+					src="https://cdn.lucca.fr/assets/misc/flags/{{ prefixOption.country }}.svg"
+					alt="{{ prefixOption.country }} +{{ prefixOption.prefix }}"
 					class="phoneNumber-countryCode-flag"
 				/>
 			</ng-container>
@@ -37,11 +41,11 @@
 				[ngModel]="displayedNumber()"
 				(ngModelChange)="updateNumber($event)"
 				[ngModelOptions]="{ standalone: true }"
-				(blur)="touched();formatNationalNumber()"
+				(blur)="touched(); formatNationalNumber()"
 				luInput
 				luInputStandalone
 				class="textField-input-value"
-				[attr.autocomplete]="autocomplete ? autocomplete === 'off' ? 'off' : 'tel-national'  : null"
+				[attr.autocomplete]="autocomplete ? (autocomplete === 'off' ? 'off' : 'tel-national') : null"
 				[placeholder]="placeholder()"
 			/>
 		</div>

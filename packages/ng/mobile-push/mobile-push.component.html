@@ -1,0 +1,19 @@
+<div class="mobilePush-containerWrapper">
+	<div class="mobilePush">
+		<div class="mobilePush-icons">
+			<lu-icon class="mobilePush-icons-front" icon="deviceMobile" size="S" />
+			<img class="mobilePush-icons-back" alt="" src="https://cdn.lucca.fr/transverse/prisme/visuals/plg-push/shape.svg" />
+		</div>
+		<div class="mobilePush-content">
+			<div class="mobilePush-content-description"><ng-content /></div>
+			<div class="mobilePush-content-downloadApps">
+				<a [attr.href]="intl.urlAppStore" class="mobilePush-content-downloadApps-link">
+					<img class="mobilePush-content-downloadApps-link-badge" [attr.alt]="intl.altAppStore" [attr.src]="intl.srcAppStore" />
+				</a>
+				<a [attr.href]="intl.urlGooglePlay" class="mobilePush-content-downloadApps-link">
+					<img class="mobilePush-content-downloadApps-link-badge" [attr.alt]="intl.altGooglePlay" [attr.src]="intl.srcGooglePlay" />
+				</a>
+			</div>
+		</div>
+	</div>
+</div>

@@ -12,7 +12,6 @@ import { buildAddWrapperExtension } from '../formly.utils';
 	// eslint-disable-next-line @angular-eslint/prefer-standalone
 	standalone: false,
 })
-// eslint-disable-next-line @angular-eslint/component-class-suffix
 export class LuFormlyWrapperError extends FieldWrapper<FieldTypeConfig> {
 	@ViewChild('fieldComponent', { read: ViewContainerRef, static: true })
 	override fieldComponent: ViewContainerRef;
@@ -32,7 +31,6 @@ export class LuFormlyWrapperError extends FieldWrapper<FieldTypeConfig> {
 	// eslint-disable-next-line @angular-eslint/prefer-standalone
 	standalone: false,
 })
-// eslint-disable-next-line @angular-eslint/component-class-suffix
 export class LuFormlyErrorMessage {
 	@Input() formControl?: FormControl;
 	@Input() field: FormlyFieldConfig;

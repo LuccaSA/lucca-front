@@ -1,4 +1,3 @@
-@use '@lucca-front/scss/src/components/title/exports' as title;
 @use '@lucca-front/scss/src/commons/utils/namespace';
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
@@ -11,9 +10,8 @@
 
 	@at-root ($atRoot) {
 		.fieldset-title {
-			@include title.component;
-			@include title.h3;
-
+			font: var(--components-fieldset-title);
+			color: var(--pr-t-color-text-heading);
 			padding: 0;
 			margin: 0;
 			inline-size: 100%;
@@ -29,6 +27,7 @@
 			background-color: transparent;
 			text-align: start;
 			display: flex;
+			align-items: flex-start;
 			justify-content: space-between;
 			gap: var(--components-fieldset-gap);
 			max-inline-size: var(--components-fieldset-contentMaxWidth);
@@ -42,10 +41,9 @@
 		}
 
 		.fieldset-title-content-text-helper {
-			font-size: var(--sizes-S-fontSize);
-			line-height: var(--sizes-S-lineHeight);
-			color: var(--palettes-neutral-700);
+			font: var(--pr-t-font-body-S);
 			font-weight: 400;
+			color: var(--palettes-neutral-700);
 			display: block;
 		}
 

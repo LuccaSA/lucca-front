@@ -50,6 +50,7 @@
 @forward 'calendar';
 @forward 'skipLinks';
 @forward 'fancyBox';
+@forward 'inputFramed';
 
 // caution: the two components cannot be loaded at the same time
 @forward 'grid';
@@ -86,6 +87,7 @@
 @forward 'toast'; // 5 Ko
 @forward 'popover';
 @forward 'userTile';
+@forward 'mobilePush';
 @forward 'plgPush';
 @forward 'dateField';
 @forward 'dateRangeField';
@@ -98,9 +100,12 @@
 @forward 'richText';
 @forward 'readMore';
 @forward 'highlightData';
+@forward 'listing';
 @forward 'fileUpload';
 @forward 'fileEntry';
 @forward 'fileToolbar';
+@forward 'appLayout';
+@forward 'mainLayout';
 
 // Deprecated CSS components
 // @forward 'tableFixedDeprecated'; // 33 Ko

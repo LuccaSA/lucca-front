@@ -10,9 +10,7 @@
 	aspect-ratio: 1;
 
 	@at-root ($atRoot) {
-		// .picture is deprecated
-		.avatar-picture,
-		.picture {
+		.avatar-picture {
 			background-color: var(--palettes-neutral-200);
 			border-radius: var(--commons-borderRadius-full);
 			background-position: center;
@@ -27,13 +25,12 @@
 			align-items: center;
 		}
 
-		// .picture is deprecated
-		.avatar-picture-initials,
-		.picture {
+		.avatar-picture-initials {
 			font-size: var(--components-avatar-fontSize);
-			font-weight: 600;
+			font-weight: var(--pr-t-font-fontWeight-bold);
+			font-family: var(--pr-t-font-family-brand);
 			line-height: 1;
-			color: var(--palettes-neutral-0);
+			color: var(--pr-t-color-text-reverse);
 		}
 
 		.avatarWrapper {

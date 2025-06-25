@@ -1,17 +1,21 @@
+@use '@lucca-front/scss/src/commons/config';
 @use '@lucca-front/scss/src/commons/utils/namespace';
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
 	border-radius: var(--components-box-border-radius);
-	margin: var(--components-box-margin);
 	padding: var(--components-box-padding);
 	background-color: var(--components-box-background, var(--pr-t-elevation-surface-raised));
 	display: block;
 	position: relative;
 
+	@if config.$deprecatedCardBoxMargin {
+		margin: var(--components-box-margin);
+	}
+
 	@at-root ($atRoot) {
 		.box-close {
 			position: absolute;
-			font-size: var(--sizes-M-fontSize);
+			font-size: var(--pr-t-font-body-M-fontSize);
 			inset-inline-end: var(--pr-t-spacings-50);
 			inset-block-start: var(--pr-t-spacings-50);
 			z-index: 1;
