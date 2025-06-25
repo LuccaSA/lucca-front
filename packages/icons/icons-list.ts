@@ -362,6 +362,7 @@ export const IconsList = [
 	{ icon: 'euro', deprecated: true },
 	{ icon: 'moneyPaymentCard', deprecated: false },
 	{ icon: 'bankingCard', deprecated: true },
+	{ icon: 'moneyPaymentCards', deprecated: false },
 	{ icon: 'moneyPiggyBank', deprecated: false },
 	{ icon: 'piggyBank', deprecated: true },
 	{ icon: 'moneyWallet', deprecated: false },
