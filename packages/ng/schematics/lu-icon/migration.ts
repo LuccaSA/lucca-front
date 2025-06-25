@@ -57,7 +57,7 @@ export function migrateComponent(sourceFile: SourceFile, path: string, tree: Tre
 			 * Add stuff
 			 */
 			// First of all, add opening tag, icon name and alt if it's here
-			let openingTag = `lu-icon icon="${icon.icon}"`;
+			let openingTag = `lu-icon icon="${icon.icon}"${ariaHidden ? '' : ' '}`;
 			if (icon.alt) {
 				openingTag += ` alt="${icon.alt}"`;
 			}
