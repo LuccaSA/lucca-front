@@ -1,5 +1,7 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { getIntl } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
+import { LU_MOBILE_PUSH_TRANSLATIONS } from './mobile-push.translate';
 
 @Component({
 	selector: 'lu-mobile-push',
@@ -10,4 +12,6 @@ import { IconComponent } from '@lucca-front/ng/icon';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	encapsulation: ViewEncapsulation.None,
 })
-export class MobilePushComponent {}
+export class MobilePushComponent {
+	intl = getIntl(LU_MOBILE_PUSH_TRANSLATIONS);
+}

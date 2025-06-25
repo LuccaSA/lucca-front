@@ -11,7 +11,7 @@ export default {
 			imports: [IconComponent],
 		}),
 	],
-	render: (args: MobilePushComponent & { description: string; }, context) => {
+	render: (args: MobilePushComponent & { description: string }, context) => {
 		const { description, ...inputs } = args;
 		return {
 			template: `<lu-mobile-push ${generateInputs(inputs, context.argTypes)}>
@@ -26,8 +26,8 @@ export default {
 	},
 } as Meta;
 
-export const Template: StoryObj<MobilePushComponent & { description: string;}> = {
+export const Template: StoryObj<MobilePushComponent & { description: string }> = {
 	args: {
-		description: `Bénéficiez de toutes les options liées au télétravail avec Timmi Office.`,
+		description: `Posez une absence depuis n’importe où avec l’application Lucca.`,
 	},
 };
