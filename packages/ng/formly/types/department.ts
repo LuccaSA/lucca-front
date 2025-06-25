@@ -9,7 +9,6 @@ import { FieldType, FieldTypeConfig } from '@ngx-formly/core';
 	// eslint-disable-next-line @angular-eslint/prefer-standalone
 	standalone: false,
 })
-// eslint-disable-next-line @angular-eslint/component-class-suffix
 export class LuFormlyFieldDepartment extends FieldType<FieldTypeConfig> {
 	focus() {
 		this.props['_isFocused'] = true;

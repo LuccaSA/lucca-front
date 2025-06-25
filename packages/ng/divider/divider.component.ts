@@ -31,10 +31,10 @@ export class DividerComponent implements OnChanges {
 	}
 
 	updateClasses(): void {
-		const ngClassConfig = {
+		const classesConfig = {
 			[`mod-${this.size()}`]: !!this.size(),
 		};
 
-		this.#luClass.setState(ngClassConfig);
+		this.#luClass.setState(classesConfig);
 	}
 }

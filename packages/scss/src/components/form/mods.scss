@@ -281,7 +281,8 @@
 
 	&::before,
 	&::after {
-		content: ' ';
+		/* stylelint-disable-next-line no-irregular-whitespace */
+		content: ' ' / '';
 		display: table;
 	}
 
@@ -355,7 +356,7 @@
 
 @mixin fieldMaterialFilled($fieldname) {
 	~ .#{$fieldname}-label {
-		font-size: var(--sizes-S-fontSize);
+		font-size: var(--pr-t-font-body-S-fontSize);
 		inset-block-start: 0;
 	}
 }
@@ -364,6 +365,5 @@
 	color: var(--palettes-error-700);
 	display: inline-block;
 	margin-inline-start: 0.2em;
-	content: '*';
 	content: '*' / '';
 }

@@ -10,7 +10,7 @@
 	border-radius: var(--component-textField-borderRadius);
 	background-color: var(--component-textField-background);
 	box-shadow: 0 0 0 1px var(--component-textField-border);
-	width: var(--component-textField-width);
+	inline-size: var(--component-textField-width);
 
 	&:hover {
 		box-shadow: 0 0 0 1px var(--component-textField-borderHover);
@@ -61,8 +61,7 @@
 		.textField-input-value {
 			border: 0;
 			outline: none;
-			line-height: var(--component-textField-lineHeight);
-			font-size: var(--component-textField-fontSize);
+			font: var(--component-textField-font);
 			inline-size: 100%;
 			padding-block: var(--component-textField-padding) var(--component-textField-padding);
 			padding-inline: var(--component-textField-padding) var(--component-textField-affix-padding);
@@ -120,8 +119,7 @@
 			padding-inline-start: var(--component-textField-padding);
 			align-items: center;
 			color: var(--pr-t-color-input-text-suffix);
-			line-height: var(--component-textField-lineHeight);
-			font-size: var(--component-textField-fontSize);
+			font: var(--component-textField-font);
 			border-start-start-radius: var(--commons-borderRadius-M);
 			border-end-start-radius: var(--commons-borderRadius-M);
 			flex-shrink: 0;
@@ -137,8 +135,7 @@
 			padding-inline-end: var(--component-textField-padding);
 			align-items: center;
 			color: var(--pr-t-color-input-text-suffix);
-			line-height: var(--component-textField-lineHeight);
-			font-size: var(--component-textField-fontSize);
+			font: var(--component-textField-font);
 			border-start-end-radius: var(--commons-borderRadius-M);
 			border-end-end-radius: var(--commons-borderRadius-M);
 			order: 1;

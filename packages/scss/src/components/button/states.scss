@@ -24,11 +24,11 @@
 	--components-button-color: transparent;
 	--components-button-userSelect: none;
 
-	@include loading.spinner(var(--components-button-font-size));
+	@include loading.spinner(var(--pr-t-font-body-M-fontSize));
 }
 
 @mixin loadingS {
-	@include loading.spinner(var(--sizes-S-fontSize));
+	@include loading.spinner(var(--pr-t-font-body-S-fontSize));
 }
 
 @mixin state {
@@ -38,8 +38,8 @@
 
 	&::after {
 		color: var(--palettes-neutral-0);
-		font-size: calc(1.5 * var(--components-button-font-size));
-		block-size: var(--components-button-line-height);
+		font-size: calc(1.5 * var(--pr-t-font-body-M-fontSize));
+		block-size: var(--pr-t-font-body-M-lineHeight);
 		inset: 0;
 		margin: auto;
 		position: absolute;

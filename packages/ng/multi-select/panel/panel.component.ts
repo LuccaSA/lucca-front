@@ -1,9 +1,19 @@
 import { A11yModule } from '@angular/cdk/a11y';
 import { AsyncPipe, NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
-import { AfterViewInit, ChangeDetectionStrategy, Component, QueryList, TrackByFunction, ViewChildren, inject } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, forwardRef, inject, signal, TrackByFunction } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { PortalDirective, getIntl } from '@lucca-front/ng/core';
-import { CoreSelectKeyManager, LuOptionGroup, SELECT_ID, ɵLuOptionComponent, ɵLuOptionGroupPipe, ɵLuOptionOutletDirective, ɵgetGroupTemplateLocation } from '@lucca-front/ng/core-select';
+import { getIntl, PortalDirective } from '@lucca-front/ng/core';
+import {
+	CoreSelectKeyManager,
+	CoreSelectPanelInstance,
+	LuOptionGroup,
+	SELECT_ID,
+	SELECT_PANEL_INSTANCE,
+	ɵCoreSelectPanelElement,
+	ɵgetGroupTemplateLocation,
+	ɵLuOptionComponent,
+	ɵLuOptionGroupPipe,
+} from '@lucca-front/ng/core-select';
 import { EMPTY } from 'rxjs';
 import { LuMultiSelectInputComponent } from '../input';
 import { LuMultiSelectPanelRef } from '../input/panel.model';
@@ -11,7 +21,7 @@ import { MULTI_SELECT_INPUT } from '../select.model';
 import { LU_MULTI_SELECT_TRANSLATIONS } from '../select.translate';
 import { LuOptionsGroupContextPipe } from './option-group-context.pipe';
 import { LuIsOptionSelectedPipe } from './option-selected.pipe';
-import { ɵLuMultiSelectSelectedChipDirective } from './selected-chip.directive';
+import { IconComponent } from '@lucca-front/ng/icon';
 
 @Component({
 	selector: 'lu-select-panel',
@@ -28,15 +38,21 @@ import { ɵLuMultiSelectSelectedChipDirective } from './selected-chip.directive'
 		NgFor,
 		ɵLuOptionComponent,
 		ɵLuOptionGroupPipe,
-		ɵLuOptionOutletDirective,
-		ɵLuMultiSelectSelectedChipDirective,
 		NgTemplateOutlet,
 		PortalDirective,
 		LuOptionsGroupContextPipe,
+		ɵCoreSelectPanelElement,
+		IconComponent,
 	],
-	providers: [CoreSelectKeyManager],
+	providers: [
+		CoreSelectKeyManager,
+		{
+			provide: SELECT_PANEL_INSTANCE,
+			useExisting: forwardRef(() => LuMultiSelectPanelComponent),
+		},
+	],
 })
-export class LuMultiSelectPanelComponent<T> implements AfterViewInit {
+export class LuMultiSelectPanelComponent<T> implements AfterViewInit, CoreSelectPanelInstance {
 	protected selectInput = inject<LuMultiSelectInputComponent<T>>(MULTI_SELECT_INPUT);
 	panelRef = inject<LuMultiSelectPanelRef<T>>(LuMultiSelectPanelRef);
 	selectId = inject(SELECT_ID);
@@ -55,7 +71,8 @@ export class LuMultiSelectPanelComponent<T> implements AfterViewInit {
 	selectedOptions: T[] = this.selectInput.value || [];
 	optionTpl = this.selectInput.optionTpl;
 
-	@ViewChildren(ɵLuOptionComponent) optionsQL: QueryList<ɵLuOptionComponent<T>>;
+	options = signal<ɵCoreSelectPanelElement<T>[]>([]);
+
 	keyManager = inject<CoreSelectKeyManager<T>>(CoreSelectKeyManager);
 
 	public clueChange$ = this.selectInput.clue$;
@@ -78,7 +95,7 @@ export class LuMultiSelectPanelComponent<T> implements AfterViewInit {
 	}
 
 	ngAfterViewInit(): void {
-		if (!this.optionsQL) {
+		if (!this.options()) {
 			return;
 		}
 
@@ -88,10 +105,9 @@ export class LuMultiSelectPanelComponent<T> implements AfterViewInit {
 
 	toggleOption(option: T): void {
 		const matchingOption = this.selectedOptions.find((o) => this.optionComparer(o, option));
-		this.selectedOptions = matchingOption ? this.selectedOptions.filter((o) => o !== matchingOption) : [...this.selectedOptions, option];
+		this.selectedOptions = matchingOption && option ? this.selectedOptions.filter((o) => o !== matchingOption) : [...this.selectedOptions, option];
 		this.panelRef.emitValue(this.selectedOptions);
 		setTimeout(() => this.panelRef.updatePosition());
-		this.keyManager.setActiveItem(this.optionsQL.toArray().findIndex((o) => o.option === option));
 	}
 
 	toggleOptions(notSelectedOptions: T[], groupOptions: T[]): void {
@@ -109,7 +125,7 @@ export class LuMultiSelectPanelComponent<T> implements AfterViewInit {
 
 	protected initKeyManager(): void {
 		this.keyManager.init({
-			queryList: this.optionsQL,
+			queryList: this.options,
 			options$: this.options$,
 			optionComparer: this.optionComparer,
 			activeOptionIdChanged$: this.panelRef.activeOptionIdChanged,

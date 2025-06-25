@@ -21,16 +21,24 @@
 }
 
 @mixin L {
-	--components-tag-fontSize: var(--sizes-M-fontSize);
-	--components-tag-lineHeight: var(--sizes-M-lineHeight);
+	--components-tag-font: var(--pr-t-font-body-M);
 	--components-tag-iconBottom: 0;
 
 	.lucca-icon {
 		@include icon.S;
 	}
+
+	// Deprecated
+	--components-tag-fontSize: var(--pr-t-font-body-M-fontSize);
+	--components-tag-lineHeight: var(--pr-t-font-body-M-lineHeight);
 }
 
 @mixin outlined {
 	--components-tag-shadow: var(--palettes-300, var(--palettes-neutral-300));
 	--components-tag-background: transparent;
+}
+
+@mixin product {
+	--components-tag-background: var(--palettes-100, var(--palettes-product-100));
+	--components-tag-color: var(--palettes-800, var(--palettes-product-800));
 }

@@ -1,29 +1,36 @@
 <div class="textField">
 	<ng-template #addon let-addon="addon" let-type="type">
-		<span class="textField-{{type}}" luFormFieldId="{{type}}" *ngIf="addon.content">
-			<span class="textField-label-{{type}}-item" [attr.aria-label]="addon.ariaLabel">{{ addon.content }}</span>
+		<span class="textField-{{ type }}" luFormFieldId="{{ type }}" *ngIf="addon.content">
+			<span class="textField-label-{{ type }}-item" [attr.aria-label]="addon.ariaLabel">{{ addon.content }}</span>
 		</span>
-		<span class="textField-{{type}}" luFormFieldId="{{type}}" *ngIf="addon.icon">
-			<span class="textField-label-{{type}}-item" [attr.aria-label]="addon.ariaLabel"
-				><span class="lucca-icon icon-{{addon.icon}}"></span
+		<span class="textField-{{ type }}" luFormFieldId="{{ type }}" *ngIf="addon.icon">
+			<span class="textField-label-{{ type }}-item" [attr.aria-label]="addon.ariaLabel"
+				><span class="lucca-icon icon-{{ addon.icon }}"></span
 			></span>
 		</span>
 	</ng-template>
 
 	@if (prefixAddon()) {
-	<ng-container
-		*ngTemplateOutlet="addon; context:{
-			type: 'prefix',
-			addon: prefixAddon()
-     }"
-	/>
-	} @if(suffixAddon()) {
-	<ng-container
-		*ngTemplateOutlet="addon; context:{
-			type: 'suffix',
-			addon: suffixAddon()
-     }"
-	/>
+		<ng-container
+			*ngTemplateOutlet="
+				addon;
+				context: {
+					type: 'prefix',
+					addon: prefixAddon(),
+				}
+			"
+		/>
+	}
+	@if (suffixAddon()) {
+		<ng-container
+			*ngTemplateOutlet="
+				addon;
+				context: {
+					type: 'suffix',
+					addon: suffixAddon(),
+				}
+			"
+		/>
 	}
 
 	<div class="textField-input">

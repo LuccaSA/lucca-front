@@ -10,15 +10,15 @@
 			<span class="u-mask">{{ intl.next }}</span>
 		</button>
 	</header>
-	<section class="calendar-labels" [ngClass]="mod">
+	<section class="calendar-labels" [class]="mod">
 		<div class="calendar-labels-item" *ngFor="let label of labels">{{ label }}</div>
 	</section>
-	<section class="calendar-grid" [ngClass]="mod">
+	<section class="calendar-grid" [class]="mod">
 		<button
 			type="button"
 			*ngFor="let item of items; trackBy: trackBy"
 			class="calendar-grid-item"
-			[ngClass]="item.mods"
+			[class]="item.mods"
 			[disabled]="item.isDisabled"
 			(click)="select(item)"
 		>

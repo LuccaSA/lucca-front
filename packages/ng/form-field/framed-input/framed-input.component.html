@@ -1,0 +1,12 @@
+<div class="inputFramed">
+	<div class="inputFramed-header">
+		<div class="form-field inputFramed-header-field">
+			<ng-content />
+		</div>
+		<div class="inputFramed-header-illustration"><ng-content select="[illustration]" /></div>
+		<div class="inputFramed-header-info"><ng-content select="[info]" /></div>
+	</div>
+	@if (framedPortal()) {
+		<div class="inputFramed-content"><ng-container *luPortal="framedPortal()" /></div>
+	}
+</div>

@@ -21,6 +21,11 @@
       "factory": "./tokens-spacing/index",
       "schema": "./tokens-spacing/schema.json"
     },
+    "tokens-typo": {
+      "description": "Replace typography tokens with new names.",
+      "factory": "./tokens-typo/index",
+      "schema": "./tokens-typo/schema.json"
+    },
     "palettes": {
       "description": "Replace palettes with new names.",
       "factory": "./palettes/index",
@@ -35,6 +40,16 @@
       "description": "Replace cdn urls with their new location",
       "factory": "./cdn-urls/index",
       "schema": "./cdn-urls/schema.json"
+    },
+    "lu-icon": {
+      "description": "Migrate HTML icons to the new lu-icon component",
+      "factory": "./lu-icon/index",
+      "schema": "./lu-icon/schema.json"
+    },
+    "lu-button": {
+      "description": "Migrate CSS-only buttons to the new luButton component",
+      "factory": "./lu-button/index",
+      "schema": "./lu-button/schema.json"
     }
   }
 }

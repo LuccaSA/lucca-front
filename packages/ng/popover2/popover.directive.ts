@@ -10,11 +10,14 @@ import {
 	input,
 	Input,
 	InputSignal,
+	model,
 	OnDestroy,
 	output,
+	Provider,
 	Renderer2,
 	signal,
 	TemplateRef,
+	Type,
 	ViewContainerRef,
 } from '@angular/core';
 import { ConnectedPosition, ConnectionPositionPair, FlexibleConnectedPositionStrategyOrigin, Overlay, OverlayRef } from '@angular/cdk/overlay';
@@ -85,7 +88,7 @@ export class PopoverDirective implements OnDestroy {
 	@Input({
 		alias: 'luPopover2',
 	})
-	content: TemplateRef<unknown>;
+	content: TemplateRef<unknown> | Type<unknown>;
 
 	@Input()
 	luPopoverPosition: PopoverPosition = 'above';
@@ -95,7 +98,7 @@ export class PopoverDirective implements OnDestroy {
 	})
 	luPopoverDisabled = false;
 
-	luPopoverTrigger = input<'click' | 'click+hover' | 'hover+focus'>('click');
+	luPopoverTrigger = model<'click' | 'click+hover' | 'hover+focus'>('click');
 
 	@Input()
 	customPositions?: ConnectionPositionPair[];
@@ -140,6 +143,9 @@ export class PopoverDirective implements OnDestroy {
 	ariaControls = `popover-content-${nextId++}`;
 
 	#screenReaderDescription?: HTMLSpanElement;
+
+	// For when we need to extend this popover and add some extra providers to the panel
+	protected additionalProviders: Provider[] = [];
 
 	constructor() {
 		combineLatest([toObservable(this.luPopoverOpenDelay), toObservable(this.luPopoverCloseDelay), toObservable(this.luPopoverTrigger)])
@@ -255,7 +261,7 @@ export class PopoverDirective implements OnDestroy {
 					PopoverContentComponent,
 					this.#vcr,
 					Injector.create({
-						providers: [{ provide: POPOVER_CONFIG, useValue: config }],
+						providers: [{ provide: POPOVER_CONFIG, useValue: config }, ...this.additionalProviders],
 					}),
 				),
 			).instance;

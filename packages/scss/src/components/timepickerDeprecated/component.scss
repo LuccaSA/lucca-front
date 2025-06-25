@@ -26,7 +26,7 @@
 			background-color: transparent;
 			border-radius: var(--commons-borderRadius-M);
 			text-align: center;
-			color: var(--palettes-neutral-800);
+			color: var(--pr-t-color-text);
 			inline-size: var(--components-timepicker-input-width);
 			block-size: var(--components-timepicker-input-height);
 			border: 0;
@@ -70,12 +70,12 @@
 
 			&:hover {
 				background-color: var(--palettes-neutral-50);
-				color: var(--palettes-neutral-800);
+				color: var(--pr-t-color-text);
 			}
 
 			&:focus {
 				background-color: var(--palettes-neutral-100);
-				color: var(--palettes-neutral-800);
+				color: var(--pr-t-color-text);
 			}
 
 			.lucca-icon {

@@ -184,18 +184,6 @@ class FormlyStory {
 				placeholder: 'Establishment placeholder',
 			},
 		},
-		{
-			type: 'qualification',
-			key: 'qualification',
-			templateOptions: {
-				appInstanceId: null,
-				operations: null,
-				label: 'Qualification',
-				mod: 'mod-long',
-				multiple: true,
-				placeholder: 'Qualification placeholder',
-			},
-		},
 	];
 }
 

@@ -13,25 +13,32 @@ export default {
 	stories: ['../stories/**/*.stories.@(js|jsx|ts|tsx)', '../stories/**/*.mdx'],
 	features: { buildStoriesJson: true },
 	staticDirs: ['./public'],
-	addons: [getAbsolutePath('@storybook/addon-a11y')],
+	addons: [getAbsolutePath('@storybook/addon-a11y'), getAbsolutePath('@storybook/addon-coverage')],
 	webpackFinal: (config) => {
-		const { module } = config;
-		const { rules } = module;
-		const customRules = [
-			...rules,
-			{
-				test: /\.mdx?$/,
-				use: [
+		return {
+			...config,
+			module: {
+				...(config.module || {}),
+				rules: [
+					...(config.module.rules || []),
 					{
-						loader: '@mdx-js/loader',
-						options: {},
+						test: /\.(js|ts)$/,
+						loader: '@jsdevtools/coverage-istanbul-loader',
+						enforce: 'post',
+						include: fileURLToPath(new URL('../', import.meta.url)),
+						exclude: [/\.(e2e|spec)\.ts$/, /node_modules/, /(ngfactory|ngstyle)\.js/, /polyfills.ts/],
+					},
+					{
+						test: /\.mdx?$/,
+						use: [
+							{
+								loader: '@mdx-js/loader',
+								options: {},
+							},
+						],
 					},
 				],
 			},
-		];
-		return {
-			...config,
-			module: { ...config.module, rules: customRules },
 			resolve: {
 				...config.resolve,
 				alias: {

@@ -1,9 +1,9 @@
+import { bob } from '@/stories/users/user.mocks';
+import { provideHttpClient } from '@angular/common/http';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { LuUserTileComponent } from '@lucca-front/ng/user';
+import { LuUserPopoverDirective, provideLuUserPopover } from '@lucca-front/ng/user-popover';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { provideHttpClient } from '@angular/common/http';
-import { LuUserPopoverDirective, provideLuUserPopover } from '@lucca-front/ng/popup-employee';
-import { bob } from '@/stories/users/user.mocks';
 
 export default {
 	title: 'Documentation/Users/Tile/Angular/Basic',
@@ -21,13 +21,13 @@ export default {
 				bob,
 			},
 			template: `<div class="u-displayFlex">
-				<div>
-					<lu-user-tile [user]="bob" [luUserPopover]="bob"></lu-user-tile>
-				</div>
-				<div class="pr-u-marginInlineStart300">
-					<lu-user-tile [user]="bob" displayFormat="LF" role="Administrateur" [luUserPopover]="bob"></lu-user-tile>
-				</div>
-			</div>`,
+	<div>
+		<lu-user-tile [user]="bob" />
+	</div>
+	<div class="pr-u-marginInlineStart300">
+		<lu-user-tile [user]="bob" displayFormat="LF" role="Administrateur" />
+	</div>
+</div>`,
 		};
 	},
 } as Meta;

@@ -38,4 +38,17 @@
 			@include narrow;
 		}
 	}
+
+	@include media.min('S') {
+		@include wide;
+	}
+
+	.dialog &,
+	.lu-modal-panel & {
+		@include insideDialog;
+	}
+
+	&:has(.footer-containerOptional) {
+		@include withContainer;
+	}
 }

@@ -11,7 +11,7 @@
 		vertical-align: text-bottom;
 		font-style: normal;
 		font-family: config.$font-name;
-		content: var(--icon-content);
+		content: var(--icon-content) / '';
 		-webkit-font-smoothing: antialiased;
 		text-transform: none;
 	} @else {

@@ -1,9 +1,9 @@
-import { LuUserDisplayModule } from '@lucca-front/ng/user';
-import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { LuUserPopoverDirective, provideLuUserPopover } from '@lucca-front/ng/popup-employee';
+import { bob } from '@/stories/users/user.mocks';
 import { provideHttpClient } from '@angular/common/http';
 import { provideAnimations } from '@angular/platform-browser/animations';
-import { bob } from '@/stories/users/user.mocks';
+import { LuUserDisplayModule } from '@lucca-front/ng/user';
+import { LuUserPopoverDirective, provideLuUserPopover } from '@lucca-front/ng/user-popover';
+import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 
 export default {
 	title: 'Documentation/Users/Display/UserPopover',

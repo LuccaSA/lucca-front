@@ -11,7 +11,6 @@ import {
 	forwardRef,
 	HostBinding,
 	inject,
-	Input,
 	input,
 	Signal,
 	signal,
@@ -118,8 +117,7 @@ export class DateRangeInputComponent extends AbstractDateComponent implements Co
 
 	shortcuts = input<readonly CalendarShortcut[]>();
 
-	@Input()
-	autocomplete: string;
+	autocomplete = input<string>('');
 
 	protected currentRightDate = computed(() => {
 		return this.hasTwoCalendars() ? this.getNextCalendarDate(this.currentDate()) : this.currentDate();
