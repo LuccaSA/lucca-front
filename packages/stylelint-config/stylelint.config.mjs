@@ -70,6 +70,12 @@ export default {
 		],
 		'block-no-empty': null,
 		'color-hex-length': null,
+		'container-name-pattern': [
+			'^(([a-z][a-zA-Z0-9]*)((-(([a-z0-9]+[a-zA-Z0-9]*)|([A-Z]+))+)*)|[A-Z]+)$',
+			{
+				message: (containerName) => `Expected "${containerName}" to match pattern foo(-bar(Baz)*)*`,
+			},
+		],
 		'custom-property-empty-line-before': [
 			'always',
 			{
