@@ -7,8 +7,7 @@
 @use '@lucca-front/scss/src/components/numericBadge/exports' as numericBadge;
 
 @mixin S {
-	--components-multiSelect-fontSize: var(--sizes-S-fontSize);
-	--components-multiSelect-lineHeight: var(--sizes-S-lineHeight);
+	--components-multiSelect-font: var(--pr-t-font-body-S);
 	--components-multiSelect-padding: var(--pr-t-spacings-75);
 	--components-multiSelect-gap: var(--pr-t-spacings-75);
 
@@ -71,7 +70,7 @@
 	box-shadow: none;
 	padding: 0;
 	gap: 0;
-	width: 21rem;
+	inline-size: 21rem;
 	max-inline-size: calc(100vw - 2.5rem);
 
 	&:has(.multipleSelect-displayer-search:focus-visible) {

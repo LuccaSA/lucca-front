@@ -15,8 +15,7 @@
 		}
 
 		.breadcrumbs-list-item {
-			font-size: var(--sizes-S-fontSize);
-			line-height: var(--sizes-S-lineHeight);
+			font: var(--pr-t-font-body-S);
 			align-items: center;
 			display: flex;
 
@@ -25,7 +24,7 @@
 					@include icon.generate('arrow_chevron_right');
 
 					color: var(--palettes-neutral-700);
-					font-size: var(--sizes-XS-lineHeight);
+					font-size: var(--pr-t-font-body-XS-lineHeight);
 					padding-block: 0;
 					padding-inline: var(--pr-t-spacings-50);
 				}
@@ -33,7 +32,7 @@
 		}
 
 		.breadcrumbs-list-item-action {
-			color: var(--palettes-neutral-700);
+			color: var(--pr-t-color-text-subtle);
 			transition-duration: var(--commons-animations-durations-fast);
 			transition-property: color;
 			text-decoration: none;
@@ -43,8 +42,12 @@
 			border: 0;
 			cursor: pointer;
 
-			&:hover {
+			&::before {
 				color: var(--palettes-neutral-700);
+			}
+
+			&:hover {
+				color: var(--pr-t-color-text-subtle);
 				text-decoration: underline;
 			}
 

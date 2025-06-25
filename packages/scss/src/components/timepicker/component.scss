@@ -17,8 +17,7 @@
 			margin: 0;
 			background-color: var(--components-timepicker-background);
 			color: var(--components-timepicker-color);
-			font-size: var(--components-timepicker-fontSize);
-			line-height: var(--components-timepicker-lineHeight);
+			font: var(--components-timepicker-font);
 			position: relative;
 			cursor: text;
 
@@ -157,13 +156,13 @@
 
 			&:has(.timePicker-fieldset-meridiem-ante-input:checked) {
 				&::after {
-					content: 'AM';
+					content: 'AM' / '';
 				}
 			}
 
 			&:has(.timePicker-fieldset-meridiem-post-input:checked) {
 				&::after {
-					content: 'PM';
+					content: 'PM' / '';
 				}
 			}
 		}

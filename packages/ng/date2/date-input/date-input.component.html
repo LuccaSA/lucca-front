@@ -1,5 +1,5 @@
 @if (isFilterPill) {
-<label for="dateInput" class="u-mask">{{ intl.pickDate }}</label>
+	<label for="dateInput" class="u-mask">{{ intl.pickDate }}</label>
 }
 <div class="textField dateField-textField" #popoverAnchor>
 	<div class="textField-input">
@@ -11,7 +11,7 @@
 			class="textField-input-value"
 			[value]="displayValue()"
 			(input)="userTextInput.set(date.value)"
-			(blur)="onTouched?.();inputFocused.set(false)"
+			(blur)="onTouched?.(); inputFocused.set(false)"
 			(focus)="inputFocused.set(true)"
 			aria-haspopup="true"
 			role="combobox"
@@ -55,7 +55,7 @@
 </div>
 
 @if (isFilterPill) {
-<ng-container *ngTemplateOutlet="calendar"></ng-container>
+	<ng-container *ngTemplateOutlet="calendar"></ng-container>
 }
 
 <div *luFilterPillDisplayer>{{ displayValue() }}</div>

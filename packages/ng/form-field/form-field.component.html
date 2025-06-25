@@ -1,52 +1,67 @@
-@if (layout() === 'fieldset') {
-<fieldset class="form-fieldset" [class.mod-inline]="inline() || hasArrow" [class.mod-S]="size() === 'S'">
-	<legend class="formLabel" [class.u-mask]="hiddenLabel()" attr.aria-hidden="{{hiddenLabel()}}">
+@if (layout() === "fieldset") {
+	<fieldset class="form-fieldset" [class.mod-inline]="inline()" [class.mod-S]="size() === 'S'">
+		<legend class="formLabel" [class.u-mask]="hiddenLabel()" attr.aria-hidden="{{ hiddenLabel() }}">
+			<ng-container *luPortal="label()"></ng-container
+			><!--
+	--><sup class="formLabel-required" aria-hidden="true" *ngIf="isInputRequired()">*</sup>
+			@if (tooltip()) {
+				<lu-icon
+					class="formLabel-info"
+					icon="signHelp"
+					[alt]="'?'"
+					[luTooltip]="tooltip()"
+					[color]="invalidStatus() ? 'error' : 'inherit'"
+				/>
+			}
+			@if (tag()) {
+				<span class="pr-u-marginInlineStart50 tag palette-product">{{ tag() }}</span>
+			}
+		</legend>
+		<ng-container *ngTemplateOutlet="projectionTpl"></ng-container>
+		@if (inlineMessage() || (invalidStatus() ? errorInlineMessage() : false)) {
+			<lu-inline-message
+				id="{{ id() }}-message"
+				[label]="invalidStatus() && errorInlineMessage() ? errorInlineMessage() : inlineMessage()"
+				[state]="invalidStatus() ? 'error' : inlineMessageState()"
+			></lu-inline-message>
+		}
+	</fieldset>
+} @else {
+	<label
+		class="formLabel"
+		[class.inputFramed-header-label]="framed"
+		[class.is-error]="invalidStatus()"
+		[class.mod-counter]="counter() > 0"
+		id="{{ id() }}-label"
+		for="{{ id() }}"
+		[class.u-mask]="hiddenLabel()"
+		attr.role="{{ rolePresentationLabel() ? 'presentation' : null }}"
+	>
 		<ng-container *luPortal="label()"></ng-container
 		><!--
 	--><sup class="formLabel-required" aria-hidden="true" *ngIf="isInputRequired()">*</sup>
 		@if (tooltip()) {
-		<lu-icon class="formLabel-info" icon="signHelp" [alt]="'?'" [luTooltip]="tooltip()" [color]="invalidStatus() ? 'error' : 'inherit'" />
+			<lu-icon class="formLabel-info" icon="signHelp" [alt]="'?'" [luTooltip]="tooltip()" [color]="invalidStatus() ? 'error' : 'inherit'" />
 		}
-	</legend>
+		@if (tag()) {
+			<span class="pr-u-marginInlineStart50 tag palette-product">{{ tag() }}</span>
+		}
+		@if (counter() > 0) {
+			<span class="formLabel-counter" [class.u-textError]="contentLength > counter()" id="{{ id() }}-counter" aria-live="polite">
+				<span aria-hidden="true">{{ contentLength }}/{{ counter() }}</span>
+				<span class="u-mask">{{ intl.counter | intlParams: { current: contentLength, max: counter() } }}</span>
+			</span>
+		}
+	</label>
 	<ng-container *ngTemplateOutlet="projectionTpl"></ng-container>
 	@if (inlineMessage() || (invalidStatus() ? errorInlineMessage() : false)) {
-	<lu-inline-message
-		id="{{id()}}-message"
-		[label]="(invalidStatus() && errorInlineMessage()) ? errorInlineMessage() : inlineMessage()"
-		[state]="invalidStatus() ? 'error' : inlineMessageState()"
-	></lu-inline-message>
+		<lu-inline-message
+			id="{{ id() }}-message"
+			[label]="invalidStatus() && errorInlineMessage() ? errorInlineMessage() : inlineMessage()"
+			[state]="invalidStatus() ? 'error' : inlineMessageState()"
+		></lu-inline-message>
 	}
-</fieldset>
-} @else {
-<label
-	class="formLabel"
-	[class.is-error]="invalidStatus()"
-	[class.mod-counter]="counter() > 0"
-	id="{{id()}}-label"
-	for="{{id()}}"
-	[class.u-mask]="hiddenLabel()"
-	attr.role="{{rolePresentationLabel() ? 'presentation' : null}}"
->
-	<ng-container *luPortal="label()"></ng-container
-	><!--
-	--><sup class="formLabel-required" aria-hidden="true" *ngIf="isInputRequired()">*</sup>
-	@if (tooltip()) {
-	<lu-icon class="formLabel-info" icon="signHelp" [alt]="'?'" [luTooltip]="tooltip()" [color]="invalidStatus() ? 'error' : 'inherit'" />
-	} @if (counter() > 0) {
-	<span class="formLabel-counter" [class.u-textError]="contentLength > counter()" id="{{id()}}-counter" aria-live="polite">
-		<span aria-hidden="true">{{ contentLength }}/{{ counter() }}</span>
-		<span class="u-mask">{{ intl.counter | intlParams: { current: contentLength, max: counter() } }}</span>
-	</span>
-	}
-</label>
-<ng-container *ngTemplateOutlet="projectionTpl"></ng-container>
-@if (inlineMessage() || (invalidStatus() ? errorInlineMessage() : false)) {
-<lu-inline-message
-	id="{{id()}}-message"
-	[label]="(invalidStatus() && errorInlineMessage()) ? errorInlineMessage() : inlineMessage()"
-	[state]="invalidStatus() ? 'error' : inlineMessageState()"
-></lu-inline-message>
-} }
+}
 
 <ng-template #projectionTpl>
 	<ng-content></ng-content>

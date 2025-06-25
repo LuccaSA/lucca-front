@@ -1,9 +1,6 @@
 @use '@lucca-front/scss/src/commons/config';
-
 @use '@lucca-front/scss/src/commons/utils/media';
-
 @use '@lucca-front/scss/src/components/button/exports' as button;
-@use '@lucca-front/scss/src/components/title/exports' as title;
 
 @mixin cellBorder {
 	--components-dataTable-cell-shadow: 0 1px inset var(--commons-border-200), 1px 0 inset var(--commons-border-200);
@@ -41,9 +38,7 @@
 @mixin group {
 	@include buttonExpand;
 
-	@include title.component;
-	@include title.h4;
-
+	font: var(--pr-t-font-heading-4);
 	--components-dataTable-cell-background: var(--palettes-neutral-25);
 }
 

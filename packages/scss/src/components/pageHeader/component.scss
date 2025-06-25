@@ -5,6 +5,11 @@
 	padding: var(--components-pageHeader-padding);
 
 	@at-root ($atRoot) {
+		.pageHeader-containerOptional {
+			padding: var(--commons-container-padding);
+			max-inline-size: var(--commons-container-maxWidth);
+		}
+
 		.pageHeader-content {
 			display: flex;
 			justify-content: space-between;
@@ -18,7 +23,7 @@
 			column-gap: var(--pr-t-spacings-100);
 			align-items: center;
 			flex-wrap: wrap;
-			min-height: var(--pr-t-spacings-500);
+			min-block-size: var(--pr-t-spacings-500);
 		}
 
 		.pageHeader-content-actions,

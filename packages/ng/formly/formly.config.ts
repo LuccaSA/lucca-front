@@ -7,7 +7,6 @@ import {
 	LuFormlyFieldDepartment,
 	LuFormlyFieldEstablishment,
 	LuFormlyFieldInput,
-	LuFormlyFieldQualification,
 	LuFormlyFieldRadios,
 	LuFormlyFieldSelect,
 	LuFormlyFieldTextarea,
@@ -78,11 +77,6 @@ export const LU_FORMLY_CONFIG: ConfigOption = {
 		{
 			name: 'establishment',
 			component: LuFormlyFieldEstablishment,
-			wrappers: ['textfield-layout'],
-		},
-		{
-			name: 'qualification',
-			component: LuFormlyFieldQualification,
 			wrappers: ['textfield-layout'],
 		},
 	],

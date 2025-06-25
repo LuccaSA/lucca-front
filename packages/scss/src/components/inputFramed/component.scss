@@ -1,0 +1,90 @@
+@use '@lucca-front/scss/src/commons/utils/namespace';
+
+@mixin component($atRoot: namespace.$defaultAtRoot) {
+	position: relative;
+	overflow: hidden;
+	padding: var(--pr-t-spacings-50);
+	border: solid 1px var(--components-inputFramed-borderColor);
+	border-radius: var(--commons-borderRadius-L);
+	background-color: var(--palettes-neutral-0);
+	transition-property: box-shadow, border-color;
+	transition-duration: var(--commons-animations-durations-fast);
+	block-size: 100%;
+	display: flex;
+	flex-direction: column;
+
+	@at-root ($atRoot) {
+		.inputFramed-header-label.formLabel {
+			position: static;
+			font-weight: 600;
+
+
+			&::after {
+				content: '';
+				position: absolute;
+				inset: calc(var(--pr-t-spacings-50) * -1);
+			}
+		}
+
+		.inputFramed-header-field {
+			&.form-field {
+				position: static;
+				margin-block: 0;
+			}
+		}
+
+		.inputFramed-header-input.radioField-input,
+		.inputFramed-header-input.checkboxField-input {
+			~ .inputFramed-header-icon.radioField-icon,
+			~ .inputFramed-header-icon.checkboxField-icon {
+				&::after {
+					outline: none;
+				}
+			}
+		}
+
+		.inputFramed-header {
+			padding: var(--components-inputFramed-padding);
+			border-radius: var(--commons-borderRadius-M);
+			background-color: var(--components-inputFramed-header-backgroundColor);
+			transition-property: background-color;
+			transition-duration: var(--commons-animations-durations-fast);
+			position: relative;
+			flex-grow: 1;
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: space-between;
+			gap: var(--pr-t-spacings-100);
+		}
+
+		.inputFramed-header-illustration {
+			&:empty {
+				display: none;
+			}
+		}
+
+		.inputFramed-header-info {
+			flex-basis: 100%;
+			border-block-start: 1px solid var(--components-inputFramed-header-info-borderColor);
+			margin-block-start: var(--pr-t-spacings-100);
+			padding-block-start: var(--pr-t-spacings-200);
+
+			&:empty {
+				display: none;
+			}
+		}
+
+		.inputFramed-content {
+			display: var(--components-inputFramed-content-display);
+			padding: var(--components-inputFramed-padding);
+			margin-block-start: var(--pr-t-spacings-50);
+		}
+	}
+}
+
+@mixin wrapper($atRoot: namespace.$defaultAtRoot) {
+	display: flex;
+	flex-direction: column;
+	gap: var(--pr-t-spacings-150);
+	margin-block: var(--pr-t-spacings-50);
+}

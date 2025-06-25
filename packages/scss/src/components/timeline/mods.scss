@@ -4,8 +4,8 @@
 
 @mixin S {
 	.timeline-step-title {
-		--components-timeline-title-fontSize: var(--sizes-S-fontSize);
-		--components-timeline-title-lineHeight: var(--sizes-M-lineHeight);
+		--components-timeline-title-fontSize: var(--pr-t-font-body-S-fontSize);
+		--components-timeline-title-lineHeight: var(--pr-t-font-body-M-lineHeight);
 
 		padding-inline-start: 1.25rem;
 
@@ -165,8 +165,8 @@
 			counter-increment: timeline;
 
 			&::before {
-				content: counter(timeline);
-				font-size: var(--sizes-XS-fontSize);
+				content: counter(timeline) / '';
+        font-size: var(--pr-t-font-body-XS-fontSize);
 				line-height: 1;
 			}
 		}
@@ -175,7 +175,7 @@
 
 @mixin numberL {
 	.timeline-step-title::after {
-		font-size: var(--sizes-S-fontSize);
+		font-size: var(--pr-t-font-body-S-fontSize);
 	}
 }
 
@@ -206,7 +206,7 @@
 }
 
 @mixin checkedPastStepL {
-	--components-timeline-icon-size: var(--sizes-S-lineHeight);
+	--components-timeline-icon-size: var(--pr-t-font-body-S-lineHeight);
 }
 
 @mixin checkedPastStepVerticalNotL {

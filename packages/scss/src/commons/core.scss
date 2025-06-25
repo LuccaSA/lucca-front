@@ -29,6 +29,7 @@ $verticalAlign: 'baseline', 'sub', 'super', 'text-top', 'text-bottom', 'middle',
 $position: 'absolute', 'relative', 'static', 'fixed', 'sticky';
 $decoration: 'underline', 'line-through', 'none';
 $overflow: 'hidden', 'auto', 'visible', 'scroll';
+$cursor: 'pointer', 'auto';
 
 /* Tokens */
 
@@ -80,15 +81,6 @@ $overflow: 'hidden', 'auto', 'visible', 'scroll';
 			.u-#{$prefix}#{transform.capitalize(transform.camelize($name))}#{if(string.slice($property, 1, 1) == '-', 'Minus', '')}#{transform.capitalize(transform.camelize($property))} {
 				#{$name}: #{transform.replace($property, '\\', '')} #{$suffix};
 			}
-		}
-	}
-}
-
-@mixin sizes($suffix: '!important') {
-	@each $key, $value in config.$sizes {
-		.u-text#{transform.capitalize($key)} {
-			font-size: var(--sizes-#{$key}-fontSize) #{$suffix};
-			line-height: var(--sizes-#{$key}-lineHeight) #{$suffix};
 		}
 	}
 }
@@ -151,6 +143,17 @@ $overflow: 'hidden', 'auto', 'visible', 'scroll';
 					font-display: swap;
 				}
 			}
+		}
+	}
+}
+
+/* DEPRECATED */
+
+@mixin sizes($suffix: '!important') {
+	@each $key, $value in config.$sizes {
+		.u-text#{transform.capitalize($key)} {
+			font-size: var(--sizes-#{$key}-fontSize) #{$suffix};
+			line-height: var(--sizes-#{$key}-lineHeight) #{$suffix};
 		}
 	}
 }

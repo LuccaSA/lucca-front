@@ -51,8 +51,7 @@
 			padding: 0;
 			outline: none;
 			color: var(--pr-t-color-input-text);
-			font-size: var(--components-multiSelect-fontSize);
-			line-height: var(--components-multiSelect-lineHeight);
+			font: var(--components-multiSelect-font);
 			background-color: transparent;
 			cursor: pointer;
 
@@ -62,8 +61,7 @@
 		}
 
 		.multipleSelect-displayer-label {
-			font-size: var(--components-multiSelect-fontSize);
-			line-height: var(--components-multiSelect-lineHeight);
+			font: var(--components-multiSelect-font);
 		}
 
 		.multipleSelect-clear {

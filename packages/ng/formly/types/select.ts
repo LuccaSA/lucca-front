@@ -9,7 +9,6 @@ import { FieldType, FieldTypeConfig } from '@ngx-formly/core';
 	// eslint-disable-next-line @angular-eslint/prefer-standalone
 	standalone: false,
 })
-// eslint-disable-next-line @angular-eslint/component-class-suffix
 export class LuFormlyFieldSelect extends FieldType<FieldTypeConfig> {
 	get _options() {
 		return (this.props.options || []) as { value: unknown; label: unknown; name: string }[];

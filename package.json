@@ -31,6 +31,7 @@
     "build-compodoc": "compodoc -p ./tsconfig.compodoc-html.json -d compodoc-static",
     "build-storybook": "ng run ng:build-storybook",
     "test-storybook": "test-storybook --url http://localhost:6006",
+    "test-storybook:coverage": "test-storybook --url http://localhost:6006 --coverage",
     "nglint": "ng lint",
     "stylelint": "stylelint \"./packages/**/*.scss\"",
     "lint": "npm run nglint && npm run stylelint",
@@ -75,10 +76,12 @@
     "@angular/cli": "^20.0.1",
     "@angular/compiler-cli": "^20.0.2",
     "@compodoc/compodoc": "^1.1.24",
+    "@jsdevtools/coverage-istanbul-loader": "^3.0.5",
     "@lucca/stylelint-config-prisme": "file:packages/stylelint-config",
     "@mdx-js/loader": "^3.1.0",
     "@ngneat/spectator": "^19.1.2",
     "@storybook/addon-a11y": "^9.0.6",
+    "@storybook/addon-coverage": "^2.0.0",
     "@storybook/addon-docs": "^9.0.6",
     "@storybook/angular": "^9.0.6",
     "@storybook/blocks": "^9.0.0-alpha.17",
@@ -103,9 +106,9 @@
     "mdx-loader": "^3.0.2",
     "msw": "^2.3.0",
     "ng-packagr": "^20.0.0",
-    "postcss": "^8.4.23",
+    "postcss": "8.5.3",
     "postcss-scss": "^4.0.6",
-    "postcss-selector-parser": "^7.0.0",
+    "postcss-selector-parser": "7.1.0",
     "postcss-value-parser": "^4.2.0",
     "prettier": "^3.5.1",
     "sass": "^1.62.1",
@@ -116,10 +119,10 @@
     "typescript-eslint": "^8.33.1"
   },
   "optionalDependencies": {
-    "@nx/nx-darwin-arm64": "^19.1.0",
-    "@nx/nx-darwin-x64": "^19.1.0",
-    "@nx/nx-linux-x64-gnu": "^19.1.0",
-    "@nx/nx-win32-x64-msvc": "^19.1.0"
+    "@nx/nx-darwin-arm64": "^21.2.0",
+    "@nx/nx-darwin-x64": "^21.2.0",
+    "@nx/nx-linux-x64-gnu": "^21.2.0",
+    "@nx/nx-win32-x64-msvc": "^21.2.0"
   },
   "volta": {
     "node": "22.14.0"

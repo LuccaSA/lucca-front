@@ -3,6 +3,6 @@
 }
 
 @mixin disabled {
-	--components-formLabel-color: var(--palettes-neutral-600); // disabled token candidate
+	--components-formLabel-color: var(--pr-t-color-input-text-disabled);
 	--components-formLabel-cursor: default;
 }

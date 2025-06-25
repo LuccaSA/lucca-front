@@ -140,6 +140,10 @@ function getSeverity(objectData) {
 		return 'warning';
 	}
 
+	if (!objectData.versionDeleted) {
+		return 'warning';
+	}
+
 	if (currentLFVersion < objectData.versionDeleted) {
 		return 'warning';
 	}

@@ -1,7 +1,6 @@
 @use '@lucca-front/scss/src/commons/utils/namespace';
 @use '@lucca-front/scss/src/commons/utils/reset';
 @use '@lucca-front/scss/src/commons/utils/color';
-@use '@lucca-front/scss/src/components/title/exports' as title;
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
 	display: block;
@@ -25,24 +24,20 @@
 
 		.highlightData-content-title {
 			grid-area: title;
-			font-size: var(--sizes-S-fontSize);
-			line-height: var(--sizes-S-lineHeight);
-			color: var(--palettes-neutral-700);
+			font: var(--pr-t-font-body-S);
+			color: var(--pr-t-color-text-subtle);
 		}
 
 		.highlightData-content-value {
 			grid-area: value;
-
-			@include title.component;
-			@include title.h1;
+			font: var(--components-highlightData-value-font);
 
 			order: var(--components-highlightData-value-order);
 		}
 
 		.highlightData-content-subText {
-			font-size: var(--sizes-XS-fontSize);
-			line-height: var(--sizes-XS-lineHeight);
-			color: var(--palettes-neutral-700);
+			font: var(--pr-t-font-body-XS);
+			color: var(--pr-t-color-text-subtle);
 			margin-block-start: var(--pr-t-spacings-100) !important; // Override list reset
 		}
 
