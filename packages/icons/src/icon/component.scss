@@ -20,9 +20,11 @@ $defaultAtRoot: config.$isNamespaced and 'with: rule' or 'without: rule';
 	word-wrap: normal;
 
 	@at-root ($atRoot) {
-		@each $name, $value in config.$icons {
-			.icon-#{core.camelize($name)} {
-				--icon-content: '#{$value}';
+		@layer icons.components {
+			@each $name, $value in config.$icons {
+				.icon-#{core.camelize($name)} {
+					--icon-content: '#{$value}';
+				}
 			}
 		}
 	}

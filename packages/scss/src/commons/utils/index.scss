@@ -10,7 +10,9 @@
 
 @use '@lucca-front/scss/src/components/title/exports' as title;
 
-@layer utils {
+@layer scss.reset, scss.base, scss.components, scss.mods, scss.states, scss.utils;
+
+@layer scss.utils {
 	[data-content-before] {
 		&::before {
 			content: attr(data-content-before);
