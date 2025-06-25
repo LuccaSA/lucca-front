@@ -81,15 +81,6 @@ export default {
 	},
 } as Meta;
 
-async function pickDay(input: HTMLElement, targetDay: number) {
-	await userEvent.click(input);
-	await waitForAngular();
-	const table = screen.getByRole('grid');
-	const calendarComponent = table.parentElement.parentElement;
-	const calendar = within(calendarComponent);
-	await userEvent.click(calendar.getByText(targetDay.toString()));
-}
-
 export const Basic: StoryObj<DateInputComponent & FormFieldComponent & { selected: Date }> = {
 	args: {
 		// FormField

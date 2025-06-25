@@ -12,7 +12,6 @@ import {
 	HostBinding,
 	inject,
 	Injector,
-	Input,
 	input,
 	OnInit,
 	Signal,

@@ -71,7 +71,7 @@ function mergeRouteConfig(config1: Partial<Route>, config2: Partial<Route>): Par
 	);
 
 	for (const key of mergedArrays) {
-		// eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-assignment
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		result[key] = [...(config1[key] ?? []), ...(config2[key] ?? [])] as any[];
 	}
 
