@@ -6,6 +6,7 @@
 	padding-inline: var(--components-options-item-padding-vertical);
 	margin-block: 0 var(--components-options-item-padding-vertical);
 	margin-inline: calc(-1 * var(--pr-t-spacings-50));
+	scroll-margin-block-start: var(--pr-t-spacings-50);
 }
 
 .multiSelectAllDisplayer {

@@ -159,12 +159,8 @@
 					color: var(--palettes-neutral-0);
 					transform: scale(1);
 				}
-			}
 
-			&.is-disabled {
-				--components-options-checkbox-border-color: var(--palettes-neutral-500); // disabled token candidate
-
-				&.is-selected {
+				&.is-disabled {
 					--components-options-checkbox-color: var(--commons-disabled-background);
 
 					background-color: transparent;
@@ -173,6 +169,11 @@
 						color: var(--palettes-neutral-500); // disabled token candidate
 					}
 				}
+
+			}
+
+			&.is-disabled {
+				--components-options-checkbox-border-color: var(--palettes-neutral-500); // disabled token candidate
 			}
 
 			&:not(.is-disabled):hover {

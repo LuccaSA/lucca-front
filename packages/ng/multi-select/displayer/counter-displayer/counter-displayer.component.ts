@@ -14,7 +14,7 @@ import { LuMultiSelectDisplayerInputDirective } from '../displayer-input.directi
 	imports: [AsyncPipe, LuTooltipModule, NgIf, NgFor, NgPlural, NgPluralCase, ɵLuOptionOutletDirective, FormsModule, LuMultiSelectDisplayerInputDirective],
 	template: `
 		<div class="multipleSelect-displayer mod-filter" [class.is-filled]="(selectedOptions$ | async)?.length > 0">
-			<input type="text" #inputElement luMultiSelectDisplayerInput />
+			<input type="text" autocomplete="off" #inputElement luMultiSelectDisplayerInput />
 			<div class="multipleSelect-displayer-filter" *ngIf="selectedOptions$ | async as selectedOptions">
 				<div class="multipleSelect-displayer-chip chip mod-unkillable" *ngIf="selectedOptions?.length === 1">
 					<ng-container *luOptionOutlet="select.displayerTpl(); value: selectedOptions[0]"></ng-container>
