@@ -21,6 +21,9 @@ export default {
 		description: {
 			description: 'PortalContent',
 		},
+		container: {
+			description: '[v20.1] Applique un container autour du contenu de Page Header.',
+		},
 	},
 	decorators: [
 		moduleMetadata({
@@ -54,9 +57,9 @@ export default {
 			: ``;
 		const backActionContainer = backAction
 			? `<ng-container pageHeaderBackAction>
-		<a href="#" luButton="text">
-			<lu-icon icon="arrowLeft" alt="Retour" />
-		</a>
+	<a href="#" luButton="text">
+		<lu-icon icon="arrowLeft" alt="Retour" />
+	</a>
 </ng-container>`
 			: ``;
 		const navigationContainer = navigation
@@ -70,46 +73,34 @@ export default {
 			: ``;
 		const actionsContainer = actions
 			? `<ng-container pageHeaderActions>
-		<lu-form-field
-			label="Label"
-			hiddenLabel
-		>
-			<lu-text-input
-				hasSearchIcon
-				type="text"
-				placeholder="ex : Mon précieux"
-				[(ngModel)]="example"
-			></lu-text-input>
-		</lu-form-field>
-		<button type="button" luButton>Button</button>
-		<button type="button" luButton="outline">Button</button>
-		<button type="button" luButton="text"><lu-icon icon="menuDots" alt="Voir plus d’options" /></button>
-	</ng-container>`
+	<lu-form-field label="Label" hiddenLabel>
+		<lu-text-input
+			hasSearchIcon
+			type="text"
+			placeholder="ex : Mon précieux"
+			[(ngModel)]="example"
+		></lu-text-input>
+	</lu-form-field>
+	<button type="button" luButton>Button</button>
+	<button type="button" luButton="outline">Button</button>
+	<button type="button" luButton="text"><lu-icon icon="menuDots" alt="Voir plus d’options" /></button>
+</ng-container>`
 			: ``;
 		const breadcrumbsContainer = breadcrumbs
 			? `<ng-container pageHeaderBreadcrumbs>
-		<lu-breadcrumbs>
-			<a *luBreadcrumbsLink class="breadcrumbs-list-item-action" routerLink="/" ariaCurrentWhenActive="page">Page 0</a>
-			<a *luBreadcrumbsLink class="breadcrumbs-list-item-action" ariaCurrentWhenActive="page" href="#2">Page 1</a>
-			<a *luBreadcrumbsLink class="breadcrumbs-list-item-action" aria-current="page">Page 2</a>
-		</lu-breadcrumbs>
-	</ng-container>`
+	<lu-breadcrumbs>
+		<a *luBreadcrumbsLink class="breadcrumbs-list-item-action" routerLink="/" ariaCurrentWhenActive="page">Page 0</a>
+		<a *luBreadcrumbsLink class="breadcrumbs-list-item-action" ariaCurrentWhenActive="page" href="#2">Page 1</a>
+		<a *luBreadcrumbsLink class="breadcrumbs-list-item-action" aria-current="page">Page 2</a>
+	</lu-breadcrumbs>
+</ng-container>`
 			: ``;
 		const leadingContainer = leading ? `<ng-container pageHeaderLeading>${leading}</ng-container>` : ``;
 		const trailingContainer = trailing ? `<ng-container pageHeaderTrainling>${trailing}</ng-container>` : ``;
-
 		return {
-			template: `
-<lu-page-header ${generateInputs(otherArgs, argTypes)}>
-	${breadcrumbsContainer}
-	${backActionContainer}
-	${leadingContainer}
-	${titleActionsContainer}
-	${trailingContainer}
-	${actionsContainer}
-	${navigationContainer}
-</lu-page-header>
-			`,
+			template: `<lu-page-header ${generateInputs(otherArgs, argTypes)}>
+${breadcrumbsContainer}${backActionContainer}${leadingContainer}${titleActionsContainer}${trailingContainer}${actionsContainer}${navigationContainer}
+</lu-page-header>`,
 		};
 	},
 } as Meta;

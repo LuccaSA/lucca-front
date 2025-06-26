@@ -33,7 +33,7 @@ function getTemplate(args: FooterBasicStory): string {
 	const responsive = args.responsive;
 	const container = args.container;
 	if (container) {
-		return `<footer class="footer${sticky} ${responsive}">
+		return `<footer class="footer${sticky}${responsive}">
 	<div class="footer-containerOptional">
 		<div class="footer-content">Content</div>
 		<div class="footer-actions">
@@ -44,7 +44,7 @@ function getTemplate(args: FooterBasicStory): string {
 </footer>
 `;
 	} else {
-		return `<footer class="footer${sticky} ${responsive}">
+		return `<footer class="footer${sticky}${responsive}">
 	<div class="footer-content">Content</div>
 	<div class="footer-actions">
 		<button type="button" class="button">Button</button>
