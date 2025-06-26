@@ -1,0 +1,7 @@
+<div class="editor-tagContainer">
+	<!-- TODO Translate -->
+	<span>Insert</span>
+	@for (tag of tags(); track tag) {
+		<span class="editor-tag" (click)="insertTag(tag)">{{ tag.description }}</span>
+	}
+</div>
