@@ -2,20 +2,24 @@
 @use 'exports' as *;
 
 .section {
-	@include vars;
-	@include component;
-
-	// .mod-grey is deprecated
-	&.mod-neutral,
-	&.mod-grey {
-		@include neutral;
+	@layer components {
+		@include vars;
+		@include component;
 	}
 
-	@include media.max('S') {
-		@include S;
-	}
+	@layer mods {
+		// .mod-grey is deprecated
+		&.mod-neutral,
+		&.mod-grey {
+			@include neutral;
+		}
 
-	@include media.max('XS') {
-		@include XS;
+		@include media.max('S') {
+			@include S;
+		}
+
+		@include media.max('XS') {
+			@include XS;
+		}
 	}
 }

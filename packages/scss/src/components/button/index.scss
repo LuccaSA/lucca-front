@@ -1,12 +1,12 @@
 @use 'exports' as *;
 
 .button {
-	@layer scss.components {
+	@layer components {
 		@include vars;
 		@include component;
 	}
 
-	@layer scss.mods {
+	@layer mods {
 		&.mod-block {
 			@include block;
 		}
@@ -118,7 +118,7 @@
 		}
 	}
 
-	@layer scss.states {
+	@layer states {
 		// .loading is deprecated
 		&.is-loading,
 		&.loading {

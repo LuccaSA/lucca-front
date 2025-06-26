@@ -1,8 +1,8 @@
 @use '@lucca-front/icons/src/commons/config';
 
-@layer icons.base, icons.components, icons.mods;
+@layer base, components, mods;
 
-@layer icons.base {
+@layer base {
 	@if config.$isNamespaced {
 		& {
 			-moz-osx-font-smoothing: grayscale;
@@ -15,7 +15,7 @@
 }
 
 @at-root {
-	@layer icons.base {
+	@layer base {
 		@font-face {
 			font-family: config.$font-name;
 			font-style: normal;

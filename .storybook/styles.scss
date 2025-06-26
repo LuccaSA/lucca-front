@@ -7,7 +7,7 @@
 @use '../packages/scss/src/main-all' as scss;
 @use '../packages/ng/styles/main' as ng;
 
-@layer storyBook {
+@layer storybook {
 	storybook-root,
 	[ng-version] {
 		// Apply block display by default to story root for @container purposes

@@ -1,12 +1,12 @@
 @use 'exports' as *;
 
 .lucca-icon {
-	@layer icons.components {
+	@layer components {
 		@include vars;
 		@include component;
 	}
 
-	@layer icons.mods {
+	@layer mods {
 		&.mod-XXS {
 			@include XXS;
 		}

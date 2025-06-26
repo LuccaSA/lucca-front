@@ -2,12 +2,12 @@
 @use '@lucca-front/scss/src/commons/utils/namespace';
 @use 'exports' as *;
 
-@layer scss.reset {
+@layer reset {
 	@include meta.load-css('normalize.css/normalize');
 }
 
 @include namespace.appendRootVars {
-	@layer scss.base {
+	@layer base {
 		@include vars;
 		@include base;
 	}
