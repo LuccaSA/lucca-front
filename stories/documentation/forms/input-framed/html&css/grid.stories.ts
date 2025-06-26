@@ -8,8 +8,7 @@ export default {
 	argTypes: {},
 	render: (args: InputFramedBasicStory) => {
 		return {
-			template: cleanupTemplate(`
-<div class="inputFramedWrapper">
+			template: cleanupTemplate(`<div class="inputFramedWrapper">
 	<div class="grid mod-autoAtMediaMinXXS">
 		<div class="grid-column">
 			<div class="inputFramed">
@@ -120,8 +119,7 @@ export default {
 			</div>
 		</div>
 	</div>
-</div>
-`),
+</div>`),
 		};
 	},
 } as Meta;

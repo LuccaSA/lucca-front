@@ -17,15 +17,13 @@ export default {
 	argTypes: {},
 	render: (args: InputFramedPanelsStory) => {
 		return {
-			template: cleanupTemplate(`
-<ng-template #optionBportal>Lorem <strong>ipsum</strong> dolor</ng-template>
+			template: cleanupTemplate(`<ng-template #optionBportal>Lorem <strong>ipsum</strong> dolor</ng-template>
 <lu-form-field label="Label">
 	<lu-radio-group-input [(ngModel)]="example" framed>
 		<lu-radio value="A" framedPortal="Lorem ipsum dolor">Option A</lu-radio>
 		<lu-radio value="B" [framedPortal]="optionBportal">Option B</lu-radio>
 	</lu-radio-group-input>
-</lu-form-field>
-`),
+</lu-form-field>`),
 		};
 	},
 } as Meta;
