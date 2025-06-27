@@ -2,6 +2,8 @@
 	<!-- TODO Translate -->
 	<span>Insert</span>
 	@for (tag of tags(); track tag) {
-		<span class="editor-tag" (click)="insertTag(tag)">{{ tag.description }}</span>
+		<lu-chip [unkillable]="true" (click)="insertTag(tag)">{{ tag.description }}</lu-chip>
 	}
 </div>
+<!-- Hidden container for dynamic component creation -->
+<ng-container #container></ng-container>

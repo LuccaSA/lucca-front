@@ -1,10 +1,18 @@
 import { COMMAND_PRIORITY_NORMAL, type DOMConversion, type DOMConversionMap, type DOMExportOutput, type EditorConfig, type LexicalEditor, type LexicalNode, type NodeKey, TextNode } from 'lexical';
 
+import { ComponentRef, ViewContainerRef } from '@angular/core';
+import { ChipComponent } from '../../../../chip/chip.component';
 import type { Tag } from './tag.model';
 
 export class TagNode extends TextNode {
 	tag: Tag;
+	// Store the component reference on the node instance
+	#componentRef?: ComponentRef<ChipComponent>;
 	static #currentAvailableTags: Tag[] = [];
+	static #viewContainerRef: ViewContainerRef;
+	static setViewContainerRef(vcr: ViewContainerRef): void {
+		TagNode.#viewContainerRef = vcr;
+	}
 
 	static setAvailableTags(tags: Tag[]): void {
 		TagNode.#currentAvailableTags = tags;
@@ -25,25 +33,64 @@ export class TagNode extends TextNode {
 	}
 
 	override createDOM(config: EditorConfig, editor: LexicalEditor): HTMLElement {
-		const element = super.createDOM(config);
-		element.className = 'chip';
+		if (TagNode.#viewContainerRef) {
+			// Create the component
+			this.#componentRef = TagNode.#viewContainerRef.createComponent(ChipComponent);
 
-		const button = document.createElement('button');
-		button.onclick = (event: MouseEvent) => {
-			event.stopPropagation();
-			editor.update(() => {
-				this.remove(); // Remove the node from the editor
-			});
-		};
-		button.className = 'chip-kill';
+			// Set inputs on the component instance
+			this.#componentRef.instance.unkillable = false;
 
-		const span = document.createElement('span');
-		span.className = 'u-mask';
-		span.textContent = 'delete';
-		button.appendChild(span);
-		element.appendChild(button);
+			// Get the component's DOM element
+			const componentElement = this.#componentRef.location.nativeElement as HTMLElement;
 
-		return element;
+			// Add our text as the first child - it will be projected via <ng-content />
+			const textNode = document.createTextNode(this.getTextContent());
+			componentElement.insertBefore(textNode, componentElement.firstChild);
+
+			// Trigger change detection to apply the input changes and render the template
+			this.#componentRef.hostView.detectChanges();
+
+			// Add click handler ONLY to the delete button, not the whole chip
+			const deleteButton = componentElement.querySelector('.chip-kill');
+			if (deleteButton) {
+				deleteButton.addEventListener('click', (event: MouseEvent) => {
+					event.stopPropagation();
+					editor.update(() => {
+						this.remove();
+					});
+				});
+			}
+
+			// Return the component's DOM element
+			return componentElement;
+		} else {
+			// Fallback for safety - create a simple span
+			const element = super.createDOM(config);
+			element.className = 'chip';
+			element.textContent = this.getTextContent();
+
+			const button = document.createElement('button');
+			button.onclick = (event: MouseEvent) => {
+				event.stopPropagation();
+				editor.update(() => {
+					this.remove(); // Remove the node from the editor
+				});
+			};
+			button.className = 'chip-kill';
+
+			const span = document.createElement('span');
+			span.className = 'u-mask';
+			span.textContent = 'delete';
+			button.appendChild(span);
+			element.appendChild(button);
+
+			return element;
+		}
+	}
+
+	override remove(preserveEmptyParent?: boolean): void {
+		super.remove(preserveEmptyParent);
+		this.#componentRef?.destroy();
 	}
 
 	override exportDOM(): DOMExportOutput {

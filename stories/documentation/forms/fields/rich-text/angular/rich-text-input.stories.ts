@@ -149,7 +149,7 @@ export const WithTagPlugin: StoryObj<RichTextInputComponent & { value: string; d
 		};
 	},
 	args: {
-		value: 'Lorem <b>ipsum</b> dolor',
+		value: 'Lorem <b>ipsum</b> dolor {{tag1}}',
 		placeholder: 'Placeholder…',
 		disabled: false,
 		required: false,

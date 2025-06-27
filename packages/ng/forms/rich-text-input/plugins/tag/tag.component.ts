@@ -1,7 +1,8 @@
-import { ChangeDetectionStrategy, Component, forwardRef, inject, signal } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, forwardRef, inject, signal, ViewChild, ViewContainerRef } from '@angular/core';
 import { $createTextNode, $getSelection, type Klass, type LexicalEditor, type LexicalNode } from 'lexical';
 import { RICH_TEXT_PLUGIN_COMPONENT, RichTextPluginComponent } from '../../rich-text-input.component';
 
+import { ChipComponent } from '../../../../chip/chip.component';
 import { TagNode } from './tag-node';
 import type { Tag } from './tag.model';
 import { TAGS } from './tag.provider';
@@ -12,6 +13,7 @@ import { TAGS } from './tag.provider';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	templateUrl: './tag.component.html',
 	styleUrl: 'tag.component.scss',
+	imports: [ChipComponent],
 	providers: [
 		{
 			provide: RICH_TEXT_PLUGIN_COMPONENT,
@@ -19,9 +21,11 @@ import { TAGS } from './tag.provider';
 		},
 	],
 })
-export class TagComponent implements RichTextPluginComponent {
+export class TagComponent implements RichTextPluginComponent, AfterViewInit {
 	readonly isDisabled = signal(false);
 	readonly tags = inject(TAGS);
+
+	@ViewChild('container', { read: ViewContainerRef, static: true }) container: ViewContainerRef;
 
 	editor: LexicalEditor | null = null;
 
@@ -41,6 +45,10 @@ export class TagComponent implements RichTextPluginComponent {
 			selection?.insertNodes([node]);
 			node.insertAfter($createTextNode(' ')).selectEnd();
 		});
+	}
+
+	ngAfterViewInit() {
+		TagNode.setViewContainerRef(this.container);
 	}
 
 	setDisabledState(isDisabled: boolean): void {
