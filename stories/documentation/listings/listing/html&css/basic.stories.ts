@@ -18,7 +18,7 @@ export default {
 	<li class="listing-item">
 		<div class="listing-item-content">
 			item
-			<ol class="listing">
+			<ul class="listing">
 				<li class="listing-item">
 					<div class="listing-item-content">item</div>
 				</li>
@@ -28,7 +28,7 @@ export default {
 				<li class="listing-item">
 					<div class="listing-item-content">item</div>
 				</li>
-			</ol>
+			</ul>
 		</div>
 	</li>
 </ul>`),
