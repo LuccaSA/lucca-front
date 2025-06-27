@@ -49,6 +49,7 @@ export default {
 		clearBehavior: {
 			control: 'select',
 			options: ['clear', 'reset'],
+			description: '[v20.1] Change le comportement au clic sur la croix de suppression',
 		},
 		mode: {
 			control: 'select',
