@@ -1,4 +1,4 @@
-// @forward 'field';
+@forward 'field';
 
 @forward 'box';
 @forward 'tag';
@@ -16,21 +16,22 @@
 @forward 'collapse';
 @forward 'container';
 
-// @forward 'errorPage';
-// @forward 'pageHeader';
-// @forward 'pagination';
-// @forward 'titleSection';
-// @forward 'contentSection';
-// @forward 'tableOfContent';
-// @forward 'list';
-// @forward 'card';
-// @forward 'gauge';
-// @forward 'callout';
-// @forward 'loading';
-// @forward 'progress';
-// @forward 'breadcrumbs';
-// @forward 'buttonGroup';
-// @forward 'header';
+@forward 'errorPage';
+@forward 'pageHeader';
+@forward 'pagination';
+@forward 'titleSection';
+@forward 'contentSection';
+@forward 'tableOfContent';
+@forward 'list';
+@forward 'card';
+@forward 'gauge';
+@forward 'callout';
+@forward 'loading';
+@forward 'progress';
+@forward 'breadcrumbs';
+@forward 'buttonGroup';
+@forward 'header';
+
 // @forward 'horizontalNavigation';
 // @forward 'textfields';
 // @forward 'checkbox';
