@@ -44,7 +44,7 @@ export class TagComponent implements RichTextPluginComponent, AfterViewInit {
 	insertTag(tag: Tag): void {
 		this.editor?.update(() => {
 			const selection = $getSelection();
-			const node = new TagNode(tag);
+			const node = new TagNode(tag.key);
 			selection?.insertNodes([node]);
 			node.insertAfter($createTextNode(' ')).selectEnd();
 		});

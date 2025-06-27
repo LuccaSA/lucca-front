@@ -3,7 +3,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DividerComponent } from '@lucca-front/ng/divider';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
-import { provideLuRichTextTags, RichTextInputComponent, RichTextInputToolbarComponent, TagComponent } from '@lucca-front/ng/forms/rich-text-input';
+import { provideLuRichTextTags, RichTextInputComponent, RichTextInputToolbarComponent, TAG, TagComponent } from '@lucca-front/ng/forms/rich-text-input';
 import { provideLuRichTextHTMLFormatter } from '@lucca-front/ng/forms/rich-text-input/formatters/html';
 import { provideLuRichTextMarkdownFormatter } from '@lucca-front/ng/forms/rich-text-input/formatters/markdown';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
@@ -150,6 +150,54 @@ export const WithTagPlugin: StoryObj<RichTextInputComponent & { value: string; d
 	},
 	args: {
 		value: 'Lorem <b>ipsum</b> dolor {{tag1}}',
+		placeholder: 'Placeholder…',
+		disabled: false,
+		required: false,
+		disableSpellcheck: false,
+		autoResize: true,
+	},
+};
+
+export const WithTagPluginMarkdown: StoryObj<RichTextInputComponent & { value: string; disabled: boolean; required: boolean } & FormFieldComponent> = {
+	render: (args, { argTypes }) => {
+		const { value, disabled, required, ...inputArgs } = args;
+		return {
+			props: { value, disabled, required },
+			template: cleanupTemplate(`<lu-form-field label="Label">
+	<lu-rich-text-input
+	${generateInputs(inputArgs, argTypes)}
+		[(ngModel)]="value" [disabled]="disabled" [required]="required">
+			<lu-rich-text-input-toolbar />
+			<lu-rich-text-plugin-tag></lu-rich-text-plugin-tag>
+	</lu-rich-text-input>
+</lu-form-field>
+<pr-story-model-display>{{value}}</pr-story-model-display>`),
+			moduleMetadata: {
+				imports: [RichTextInputComponent, TagComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule],
+				providers: [
+					provideLuRichTextMarkdownFormatter([TAG]),
+					provideLuRichTextTags(
+						signal([
+							{
+								key: 'tag1',
+								description: 'Tag 1',
+							},
+							{
+								key: 'tag2',
+								description: 'Tag 2',
+							},
+							{
+								key: 'tag3',
+								description: 'Tag 3',
+							},
+						]),
+					),
+				],
+			},
+		};
+	},
+	args: {
+		value: 'Lorem **ipsum** dolor {{tag1}}',
 		placeholder: 'Placeholder…',
 		disabled: false,
 		required: false,
