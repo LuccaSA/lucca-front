@@ -5,7 +5,7 @@ import { cleanupTemplate } from 'stories/helpers/stories';
 interface ListingChecklistStory {}
 
 export default {
-	title: 'Documentation/Listing/Listing/Angular/Checklist',
+	title: 'Documentation/Listings/Listing/Angular/Checklist',
 	argTypes: {},
 	decorators: [
 		moduleMetadata({

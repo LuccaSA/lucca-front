@@ -5,32 +5,30 @@ import { IconComponent } from '@lucca-front/ng/icon';
 import { Meta, moduleMetadata } from '@storybook/angular';
 import { cleanupTemplate } from 'stories/helpers/stories';
 
-interface InputFramedIllustrationsStory {}
+interface InputFramedInfosStory {}
 
 export default {
-	title: 'Documentation/Forms/Input Framed/Angular/Illustrations',
+	title: 'Documentation/Forms/Input Framed/Angular/Infos',
 	decorators: [
 		moduleMetadata({
 			imports: [FormFieldComponent, RadioGroupInputComponent, RadioComponent, FormsModule, IconComponent],
 		}),
 	],
 	argTypes: {},
-	render: (args: InputFramedIllustrationsStory) => {
+	render: (args: InputFramedInfosStory) => {
 		return {
-			template: cleanupTemplate(`
-<lu-form-field label="Label">
+			template: cleanupTemplate(`<lu-form-field label="Label">
 	<lu-radio-group-input [(ngModel)]="example" framed>
-		<lu-radio value="A" inlineMessage="Helper text">
+		<lu-radio value="A">
 			Option A
-			<ng-container illustration>
-				<div style="background-color: var(--palettes-product-100); color: var(--palettes-product-700)" class="pr-u-padding150 u-borderRadiusXL u-displayFlex">
-					<lu-icon icon="moneyBag" />
-				</div>
-			</ng-container>
+			<ng-container info>Lorem ipsum dolor</ng-container>
+		</lu-radio>
+		<lu-radio value="B">
+			Option B
+			<ng-container info>Lorem ipsum dolor</ng-container>
 		</lu-radio>
 	</lu-radio-group-input>
-</lu-form-field>
-`),
+</lu-form-field>`),
 		};
 	},
 } as Meta;

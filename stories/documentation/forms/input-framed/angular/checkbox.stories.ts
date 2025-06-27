@@ -17,8 +17,7 @@ export default {
 	argTypes: {},
 	render: (args: InputFramedCheckboxStory) => {
 		return {
-			template: cleanupTemplate(`
-<div class="inputFramedWrapper">
+			template: cleanupTemplate(`<div class="inputFramedWrapper">
 	<lu-framed-input>
 		<lu-form-field label="Option A" inlineMessage="Lorem ipsum dolor">
 			<lu-checkbox-input [ngModel]="false" />
@@ -29,8 +28,7 @@ export default {
 			<lu-checkbox-input [ngModel]="false" />
 		</lu-form-field>
 	</lu-framed-input>
-</div>
-`),
+</div>`),
 		};
 	},
 } as Meta;

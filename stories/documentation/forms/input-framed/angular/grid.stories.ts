@@ -16,8 +16,7 @@ export default {
 	argTypes: {},
 	render: (args: InputFramedBasicStory) => {
 		return {
-			template: cleanupTemplate(`
-<lu-form-field label="Label">
+			template: cleanupTemplate(`<lu-form-field label="Label">
 	<lu-radio-group-input [(ngModel)]="example" framed>
 		<div class="grid mod-autoAtMediaMinXXS">
 			<lu-radio class="grid-column" value="A">Option A</lu-radio>
@@ -35,8 +34,7 @@ export default {
 			<lu-radio class="grid-column" value="D" [attr.style]="'--grid-colspanAtMediaMinXXS: 1'">Option D<br />Option D</lu-radio>
 		</div>
 	</lu-radio-group-input>
-</lu-form-field>
-`),
+</lu-form-field>`),
 		};
 	},
 } as Meta;

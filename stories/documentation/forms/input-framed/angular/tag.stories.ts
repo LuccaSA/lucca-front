@@ -16,15 +16,13 @@ export default {
 	argTypes: {},
 	render: (args: InputFramedTagStory) => {
 		return {
-			template: cleanupTemplate(`
-<lu-form-field label="Label">
+			template: cleanupTemplate(`<lu-form-field label="Label">
 	<lu-radio-group-input [(ngModel)]="example" framed>
 		<lu-radio value="A" tag="Tag">
 			Option A
 		</lu-radio>
 	</lu-radio-group-input>
-</lu-form-field>
-`),
+</lu-form-field>`),
 		};
 	},
 } as Meta;

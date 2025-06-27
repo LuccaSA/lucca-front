@@ -18,16 +18,14 @@ export default {
 	render: (args: InputFramedBasicStory) => {
 		return {
 			props: { example: 'B' },
-			template: cleanupTemplate(`
-	<lu-form-field label="Label" errorInlineMessage="Error inline message">
-		<lu-radio-group-input [(ngModel)]="example" framed required>
-			<lu-radio [value]="'A'">Option A</lu-radio>
-			<lu-radio [value]="'B'">Option B</lu-radio>
-			<lu-radio [value]="'C'" disabled>Option C</lu-radio>
-			<lu-radio [value]="'D'">Option D</lu-radio>
-		</lu-radio-group-input>
-	</lu-form-field>
-`),
+			template: cleanupTemplate(`<lu-form-field label="Label" errorInlineMessage="Error inline message">
+	<lu-radio-group-input [(ngModel)]="example" framed required>
+		<lu-radio [value]="'A'">Option A</lu-radio>
+		<lu-radio [value]="'B'">Option B</lu-radio>
+		<lu-radio [value]="'C'" disabled>Option C</lu-radio>
+		<lu-radio [value]="'D'">Option D</lu-radio>
+	</lu-radio-group-input>
+</lu-form-field>`),
 		};
 	},
 } as Meta;

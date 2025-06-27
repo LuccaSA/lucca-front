@@ -1,15 +1,14 @@
 import { Meta } from '@storybook/angular';
 import { cleanupTemplate } from 'stories/helpers/stories';
 
-interface InputFramedPanelsStory {}
+interface InputFramedInfosStory {}
 
 export default {
-	title: 'Documentation/Forms/Input Framed/HTML&CSS/Panels',
+	title: 'Documentation/Forms/Input Framed/HTML&CSS/Infos',
 	argTypes: {},
-	render: (args: InputFramedPanelsStory) => {
+	render: (args: InputFramedInfosStory) => {
 		return {
-			template: cleanupTemplate(`
-<div class="inputFramedWrapper">
+			template: cleanupTemplate(`<div class="inputFramedWrapper">
 	<div class="inputFramed">
 		<div class="inputFramed-header">
 			<div class="form-field inputFramed-header-field">
@@ -23,8 +22,8 @@ export default {
 					</span>
 				</span>
 			</div>
+			<div class="inputFramed-header-info">Lorem ipsum dolor</div>
 		</div>
-		<div class="inputFramed-content">Lorem ipsum dolor</div>
 	</div>
 	<div class="inputFramed">
 		<div class="inputFramed-header">
@@ -39,11 +38,10 @@ export default {
 					</span>
 				</span>
 			</div>
+			<div class="inputFramed-header-info">Lorem ipsum dolor</div>
 		</div>
-		<div class="inputFramed-content">Lorem <strong>ipsum</strong> dolor</div>
 	</div>
-</div>
-`),
+</div>`),
 		};
 	},
 } as Meta;
