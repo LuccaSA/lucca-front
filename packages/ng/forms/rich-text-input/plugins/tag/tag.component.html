@@ -1,6 +1,6 @@
 <div class="editor-tagContainer">
 	<!-- TODO Translate -->
-	<span>Insert</span>
+	<span>{{ intl.insertTag }}</span>
 	@for (tag of tags(); track tag) {
 		<lu-chip [unkillable]="true" (click)="insertTag(tag)">{{ tag.description }}</lu-chip>
 	}

@@ -1,7 +1,7 @@
 import { COMMAND_PRIORITY_NORMAL, type DOMConversion, type DOMConversionMap, type DOMExportOutput, type EditorConfig, type LexicalEditor, type LexicalNode, type NodeKey, TextNode } from 'lexical';
 
 import { ComponentRef, ViewContainerRef } from '@angular/core';
-import { ChipComponent } from '../../../../chip/chip.component';
+import { ChipComponent } from '@lucca-front/ng/chip';
 import type { Tag } from './tag.model';
 
 export class TagNode extends TextNode {
@@ -10,6 +10,7 @@ export class TagNode extends TextNode {
 	#componentRef?: ComponentRef<ChipComponent>;
 	static #currentAvailableTags: Tag[] = [];
 	static #viewContainerRef: ViewContainerRef;
+
 	static setViewContainerRef(vcr: ViewContainerRef): void {
 		TagNode.#viewContainerRef = vcr;
 	}
