@@ -48,16 +48,14 @@ function getTemplate(args: FancyBoxBasicStory): string {
 	const fg = args.foreground ? `\n--components-fancyBox-foreground: url(${args.foreground});` : ``;
 	const style = args.backgroundLeft || args.backgroundRight || args.foreground ? `[attr.style]="'${bgLeft}${bgRight}${fg}'"` : ``;
 
-	return `
-	<div class="fancyBox" ${style}>
-		<div class="fancyBox-content">
-			<div class="fancyBox-content-box">
-				${args.content}
-				<div class="fancyBox-content-box-foreground"></div>
-			</div>
+	return `<div class="fancyBox" ${style}>
+	<div class="fancyBox-content">
+		<div class="fancyBox-content-box">
+			${args.content}
+			<div class="fancyBox-content-box-foreground"></div>
 		</div>
 	</div>
-	`;
+</div>`;
 }
 
 const Template: StoryFn<FancyBoxBasicStory> = (args) => ({

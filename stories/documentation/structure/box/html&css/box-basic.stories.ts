@@ -18,11 +18,9 @@ export default {
 function getTemplate(args: BoxBasicStory): string {
 	const neutral = args.neutral ? `mod-neutral` : '';
 
-	return `
-	<div class="box ${neutral}">
-	    Jujubes toppin gvueoat cake cake lemon drops chupa chups sweet roll. Macaroon icing tootsie roll bonbon dragée carrot cake sweet roll. Pie gingerbread jelly beans cotton candy tart lollipop bonbon candy. Bonbon chocolate gingerbread pastry.
-	</div>
-	`;
+	return `<div class="box ${neutral}">
+		Jujubes toppin gvueoat cake cake lemon drops chupa chups sweet roll. Macaroon icing tootsie roll bonbon dragée carrot cake sweet roll. Pie gingerbread jelly beans cotton candy tart lollipop bonbon candy. Bonbon chocolate gingerbread pastry.
+</div>`;
 }
 
 const Template: StoryFn<BoxBasicStory> = (args) => ({
