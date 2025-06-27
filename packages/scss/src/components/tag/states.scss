@@ -1,0 +1,4 @@
+@mixin disabled {
+	--components-tag-background: var(--commons-disabled-background);
+	--components-tag-color: var(--commons-disabled-color);
+}
