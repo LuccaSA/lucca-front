@@ -35,14 +35,9 @@ export default {
 	argTypes: {},
 	render: (args: InputFramedBasicStory) => {
 		const column = args.grid ? ` class="grid-column" [attr.style]="'--grid-colspanAtMediaMinXS: 1'"` : ``;
-		const panelTemplate = args.panel ? `framedPortal="Lorem ipsum dolor"` : ``;
+		const panelTemplate = args.panel ? ` framedPortal="Lorem ipsum dolor"` : ``;
 		const tagTemplate = args.tag ? ` tag="Tag"` : ``;
-		const infoTemplate = args.info
-			? `<ng-container info>Lorem ipsum dolor</ng-container>
-<ng-container info>Lorem ipsum dolor</ng-container>
-<ng-container info>Lorem ipsum dolor</ng-container>
-<ng-container info>Lorem ipsum dolor</ng-container>`
-			: ``;
+		const infoTemplate = args.info ? `<ng-container info>Lorem ipsum dolor</ng-container>` : ``;
 		const illustrationTemplate = args.illustration
 			? `<ng-container illustration>
 					<div style="background-color: var(--palettes-product-100); color: var(--palettes-product-700)" class="pr-u-padding100 u-borderRadiusXL u-displayFlex">
@@ -57,25 +52,33 @@ export default {
 					</div>
 				</ng-container>`
 			: ``;
-		const templateCheckbox = `<lu-framed-input${column}>
+		const templateCheckbox = `<lu-framed-input${column}${panelTemplate}>
 				<lu-form-field label="Option A" inlineMessage="Lorem ipsum dolor"${tagTemplate}>
-					<lu-checkbox-input [ngModel]="false" />
+					<lu-checkbox-input [(ngModel)]="exampleA" required />
 				</lu-form-field>
+				${infoTemplate}
+				${illustrationTemplate}
 			</lu-framed-input>
-			<lu-framed-input${column}>
+			<lu-framed-input${column}${panelTemplate}>
 				<lu-form-field label="Option B" inlineMessage="Lorem ipsum dolor"${tagTemplate}>
-					<lu-checkbox-input [ngModel]="false" />
+					<lu-checkbox-input [(ngModel)]="exampleB" required />
 				</lu-form-field>
+				${infoTemplate}
+				${illustrationTemplate}
 			</lu-framed-input>
-			<lu-framed-input${column}>
+			<lu-framed-input${column}${panelTemplate}>
 				<lu-form-field label="Option C" inlineMessage="Lorem ipsum dolor"${tagTemplate}>
-					<lu-checkbox-input disabled [ngModel]="false" />
+					<lu-checkbox-input disabled [(ngModel)]="exampleC" required />
 				</lu-form-field>
+				${infoTemplate}
+				${illustrationTemplateDisabled}
 			</lu-framed-input>
-			<lu-framed-input${column}>
+			<lu-framed-input${column}${panelTemplate}>
 				<lu-form-field label="Option D" inlineMessage="Lorem ipsum dolor"${tagTemplate}>
-					<lu-checkbox-input [ngModel]="false" />
+					<lu-checkbox-input [(ngModel)]="exampleD" required />
 				</lu-form-field>
+				${infoTemplate}
+				${illustrationTemplate}
 			</lu-framed-input>`;
 		const template = `<lu-radio${column} value="A"${panelTemplate}${tagTemplate} inlineMessage="Lorem ipsum dolor">
 				Option A
@@ -100,17 +103,25 @@ export default {
 		if (args.checkbox) {
 			if (args.grid) {
 				return {
-					template: cleanupTemplate(`<div class="inputFramedWrapper">
-		<div class="grid" [attr.style]="'--grid-columns: 2; --grid-colspan: 2'">
-			${templateCheckbox}
-		</div>
-	</div>`),
+					props: { exampleB: true },
+					template: cleanupTemplate(`
+	<lu-form-field label="Label" layout="fieldset">
+		<div class="inputFramedWrapper">
+			<div class="grid" [attr.style]="'--grid-columns: 2; --grid-colspan: 2'">
+				${templateCheckbox}
+			</div>
+	</div>
+	</lu-form-field>`),
 				};
 			} else {
 				return {
-					template: cleanupTemplate(`<div class="inputFramedWrapper">
-		${templateCheckbox}
-	</div>`),
+					props: { exampleB: true },
+					template: cleanupTemplate(`
+	<lu-form-field label="Label" layout="fieldset">
+		<div class="inputFramedWrapper">
+			${templateCheckbox}
+		</div>
+	</lu-form-field>`),
 				};
 			}
 		} else {
