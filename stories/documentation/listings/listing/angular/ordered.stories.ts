@@ -5,7 +5,7 @@ import { cleanupTemplate } from 'stories/helpers/stories';
 interface ListingOrderedStory {}
 
 export default {
-	title: 'Documentation/Listing/Listing/Angular/Ordrered',
+	title: 'Documentation/Listings/Listing/Angular/Ordrered',
 	argTypes: {},
 	decorators: [
 		moduleMetadata({
@@ -14,8 +14,7 @@ export default {
 	],
 	render: (args: ListingOrderedStory) => {
 		return {
-			template: cleanupTemplate(`
-<lu-listing ordered>
+			template: cleanupTemplate(`<lu-listing ordered>
 	<lu-listing-item>item</lu-listing-item>
 	<lu-listing-item>item</lu-listing-item>
 	<lu-listing-item>
@@ -26,8 +25,7 @@ export default {
 			<lu-listing-item>item</lu-listing-item>
 		</lu-listing>
 	</lu-listing-item>
-</lu-listing>
-`),
+</lu-listing>`),
 		};
 	},
 } as Meta;

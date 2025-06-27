@@ -4,12 +4,11 @@ import { cleanupTemplate } from 'stories/helpers/stories';
 interface ListingBasicStory {}
 
 export default {
-	title: 'Documentation/Listing/Listing/HTML&CSS/Basic',
+	title: 'Documentation/Listings/Listing/HTML&CSS/Basic',
 	argTypes: {},
 	render: (args: ListingBasicStory) => {
 		return {
-			template: cleanupTemplate(`
-<ul class="listing">
+			template: cleanupTemplate(`<ul class="listing">
 	<li class="listing-item">
 		<div class="listing-item-content">item</div>
 	</li>
@@ -32,8 +31,7 @@ export default {
 			</ol>
 		</div>
 	</li>
-</ul>
-`),
+</ul>`),
 		};
 	},
 } as Meta;

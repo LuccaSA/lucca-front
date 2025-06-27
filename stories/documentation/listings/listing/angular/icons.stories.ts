@@ -5,7 +5,7 @@ import { cleanupTemplate } from 'stories/helpers/stories';
 interface ListingIconsStory {}
 
 export default {
-	title: 'Documentation/Listing/Listing/Angular/Icons',
+	title: 'Documentation/Listings/Listing/Angular/Icons',
 	argTypes: {},
 	decorators: [
 		moduleMetadata({
@@ -14,8 +14,7 @@ export default {
 	],
 	render: (args: ListingIconsStory) => {
 		return {
-			template: cleanupTemplate(`
-<lu-listing icons>
+			template: cleanupTemplate(`<lu-listing icons>
 	<lu-listing-item icon="foodCroissant">item</lu-listing-item>
 	<lu-listing-item icon="foodBurger">item</lu-listing-item>
 	<lu-listing-item icon="foodCoffee">
@@ -26,8 +25,7 @@ export default {
 			<lu-listing-item>item</lu-listing-item>
 		</lu-listing>
 	</lu-listing-item>
-</lu-listing>
-`),
+</lu-listing>`),
 		};
 	},
 } as Meta;

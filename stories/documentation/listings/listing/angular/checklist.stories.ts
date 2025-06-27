@@ -5,7 +5,7 @@ import { cleanupTemplate } from 'stories/helpers/stories';
 interface ListingChecklistStory {}
 
 export default {
-	title: 'Documentation/Listing/Listing/Angular/Checklist',
+	title: 'Documentation/Listings/Listing/Angular/Checklist',
 	argTypes: {},
 	decorators: [
 		moduleMetadata({
@@ -14,8 +14,7 @@ export default {
 	],
 	render: (args: ListingChecklistStory) => {
 		return {
-			template: cleanupTemplate(`
-<lu-listing checklist>
+			template: cleanupTemplate(`<lu-listing checklist>
 	<lu-listing-item>item</lu-listing-item>
 	<lu-listing-item>item</lu-listing-item>
 	<lu-listing-item>
@@ -26,8 +25,7 @@ export default {
 			<lu-listing-item>item</lu-listing-item>
 		</lu-listing>
 	</lu-listing-item>
-</lu-listing>
-`),
+</lu-listing>`),
 		};
 	},
 } as Meta;
