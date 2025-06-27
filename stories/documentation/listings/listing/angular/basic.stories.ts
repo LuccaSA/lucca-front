@@ -1,25 +1,40 @@
+import { IconsList } from '@lucca-front/icons/icons-list';
 import { ListingComponent, ListingItemComponent } from '@lucca-front/ng/listing';
-import { Meta, moduleMetadata } from '@storybook/angular';
-import { cleanupTemplate } from 'stories/helpers/stories';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { PaletteAllArgType } from 'stories/helpers/common-arg-types';
+import { cleanupTemplate, generateInputs } from 'stories/helpers/stories';
 
-interface ListingBasicStory {}
+interface ListingBasicStory {
+	checklist: boolean;
+	ordered: boolean;
+	icons: boolean;
+	type: string;
+	palette: string;
+}
 
 export default {
 	title: 'Documentation/Listings/Listing/Angular/Basic',
-	argTypes: {},
+	component: ListingComponent,
+
 	decorators: [
 		moduleMetadata({
 			imports: [ListingComponent, ListingItemComponent],
 		}),
 	],
-	render: (args: ListingBasicStory) => {
+
+	render: (args: ListingBasicStory, context) => {
+		const { type, checklist, ordered, icons, ...inputs } = args;
+		const checklistParam = args.type === 'checklist' ? ' checklist' : '';
+		const orderedParam = args.type === 'ordered' ? ' ordered' : '';
+		const iconsParam = args.type === 'icons' ? ' icons' : '';
+		const iconParam = args.type === 'icons' ? ' icon="foodCroissant"' : '';
 		return {
-			template: cleanupTemplate(`<lu-listing>
-	<lu-listing-item>item</lu-listing-item>
-	<lu-listing-item>item</lu-listing-item>
+			template: cleanupTemplate(`<lu-listing${checklistParam}${orderedParam}${iconsParam} ${generateInputs(inputs, context.argTypes)}>
+	<lu-listing-item${iconParam}>item</lu-listing-item>
+	<lu-listing-item${iconParam}>item</lu-listing-item>
 	<lu-listing-item>
 		item
-		<lu-listing>
+		<lu-listing${checklistParam}${orderedParam}${iconsParam} ${generateInputs(inputs, context.argTypes)}>
 			<lu-listing-item>item</lu-listing-item>
 			<lu-listing-item>item</lu-listing-item>
 			<lu-listing-item>item</lu-listing-item>
@@ -30,4 +45,26 @@ export default {
 	},
 } as Meta;
 
-export const Basic = {};
+export const Template: StoryObj<ListingComponent & { type: string }> = {
+	argTypes: {
+		type: {
+			options: ['', 'checklist', 'ordered', 'icons'],
+			control: {
+				type: 'select',
+			},
+		},
+		defaultIcon: {
+			options: IconsList.map((i) => i.icon),
+			control: {
+				type: 'select',
+			},
+		},
+		palette: PaletteAllArgType,
+	},
+
+	args: {
+		type: '',
+		defaultIcon: 'heart',
+		palette: 'none',
+	},
+};

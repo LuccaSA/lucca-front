@@ -14,7 +14,8 @@ export default {
 	],
 	render: (args: ListingChecklistStory) => {
 		return {
-			template: cleanupTemplate(`<lu-listing checklist>
+			template: cleanupTemplate(`
+<lu-listing checklist>
 	<lu-listing-item>item</lu-listing-item>
 	<lu-listing-item>item</lu-listing-item>
 	<lu-listing-item>
@@ -25,7 +26,8 @@ export default {
 			<lu-listing-item>item</lu-listing-item>
 		</lu-listing>
 	</lu-listing-item>
-</lu-listing>`),
+</lu-listing>
+`),
 		};
 	},
 } as Meta;
