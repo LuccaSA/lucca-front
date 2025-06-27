@@ -32,7 +32,11 @@ export default {
 			],
 		}),
 	],
-	argTypes: {},
+	argTypes: {
+		grid: {
+			if: { arg: 'panel', truthy: false },
+		},
+	},
 	render: (args: InputFramedBasicStory) => {
 		const column = args.grid ? ` class="grid-column" [attr.style]="'--grid-colspanAtMediaMinXS: 1'"` : ``;
 		const panelTemplate = args.panel ? ` framedPortal="Lorem ipsum dolor"` : ``;
@@ -156,10 +160,10 @@ export default {
 
 export const Basic = {
 	args: {
+		panel: false,
 		grid: false,
 		illustration: false,
 		info: false,
-		panel: false,
 		tag: false,
 		checkbox: false,
 	},
