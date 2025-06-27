@@ -2,7 +2,9 @@ import { AfterViewInit, ChangeDetectionStrategy, Component, forwardRef, inject, 
 import { $createTextNode, $getSelection, type Klass, type LexicalEditor, type LexicalNode } from 'lexical';
 import { RICH_TEXT_PLUGIN_COMPONENT, RichTextPluginComponent } from '../../rich-text-input.component';
 
-import { ChipComponent } from '../../../../chip/chip.component';
+import { ChipComponent } from '@lucca-front/ng/chip';
+import { getIntl } from '@lucca-front/ng/core';
+import { LU_RICH_TEXT_INPUT_TRANSLATIONS } from '../../rich-text-input.translate';
 import { TagNode } from './tag-node';
 import type { Tag } from './tag.model';
 import { TAGS } from './tag.provider';
@@ -24,6 +26,7 @@ import { TAGS } from './tag.provider';
 export class TagComponent implements RichTextPluginComponent, AfterViewInit {
 	readonly isDisabled = signal(false);
 	readonly tags = inject(TAGS);
+	readonly intl = getIntl(LU_RICH_TEXT_INPUT_TRANSLATIONS);
 
 	@ViewChild('container', { read: ViewContainerRef, static: true }) container: ViewContainerRef;
 
