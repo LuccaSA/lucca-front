@@ -1,0 +1,9 @@
+<div class="editor-tagContainer">
+	<!-- TODO Translate -->
+	<span>{{ intl.insertTag }}</span>
+	@for (tag of tags(); track tag) {
+		<lu-chip [unkillable]="true" (click)="insertTag(tag)">{{ tag.description }}</lu-chip>
+	}
+</div>
+<!-- Hidden container for dynamic component creation -->
+<ng-container #container></ng-container>
