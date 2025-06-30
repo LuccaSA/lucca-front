@@ -66,7 +66,7 @@ describe('DateRangeInputComponent', () => {
 
 		expect(ngModelChangeCallback).toBeCalledTimes(1);
 		expect(ngModelChangeCallback).toHaveBeenCalledWith({
-			start: new Date('2025-06-17T22:00:00.000Z'),
+			start: new Date('2025-06-18T00:00:00.000Z'),
 			scope: 'day',
 		});
 	});
