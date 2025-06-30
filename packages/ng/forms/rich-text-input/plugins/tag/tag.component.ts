@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectionStrategy, Component, forwardRef, inject, Signal, signal, ViewChild, ViewContainerRef, WritableSignal } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, forwardRef, inject, signal, ViewContainerRef } from '@angular/core';
 import { $createTextNode, $getSelection, type Klass, type LexicalEditor, type LexicalNode } from 'lexical';
 import { RICH_TEXT_PLUGIN_COMPONENT, RichTextPluginComponent } from '../../rich-text-input.component';
 
@@ -24,16 +24,11 @@ import { TAGS } from './tag.provider';
 	],
 })
 export class TagComponent implements RichTextPluginComponent, AfterViewInit {
-	pluginComponents?: Signal<readonly RichTextPluginComponent[]>;
-	tabindex?: WritableSignal<number>;
-	focus?(): void {
-		throw new Error('Method not implemented.');
-	}
 	readonly isDisabled = signal(false);
 	readonly tags = inject(TAGS);
 	readonly intl = getIntl(LU_RICH_TEXT_INPUT_TRANSLATIONS);
 
-	@ViewChild('container', { read: ViewContainerRef, static: true }) container: ViewContainerRef;
+	readonly viewContainerRef = inject(ViewContainerRef);
 
 	editor: LexicalEditor | null = null;
 
@@ -59,7 +54,7 @@ export class TagComponent implements RichTextPluginComponent, AfterViewInit {
 	}
 
 	ngAfterViewInit() {
-		TagNode.setViewContainerRef(this.container);
+		TagNode.setViewContainerRef(this.viewContainerRef);
 	}
 
 	setDisabledState(isDisabled: boolean): void {
