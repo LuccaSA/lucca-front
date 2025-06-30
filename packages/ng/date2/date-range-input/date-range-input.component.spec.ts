@@ -59,7 +59,7 @@ describe('DateRangeInputComponent', () => {
 			},
 		});
 
-		const input = spectator.query('input#range-input-start-2'); // 2 because nextId is incremented outside the component
+		const input = spectator.query('.mod-start > input');
 		expect(input).toBeTruthy();
 
 		spectator.typeInElement('18/06/2025', input);
