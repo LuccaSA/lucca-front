@@ -14,9 +14,7 @@ import {
 	Injector,
 	input,
 	OnInit,
-	Signal,
 	signal,
-	untracked,
 	viewChild,
 	viewChildren,
 	ViewEncapsulation,
@@ -429,8 +427,6 @@ export class DateRangeInputComponent extends AbstractDateComponent implements On
 		if (dateRange != null) {
 			this.selectedRange.set(_dateRange);
 			this.currentDate.set(startOfDay(dateRange.start));
-		} else {
-			this.clear();
 		}
 	}
 
