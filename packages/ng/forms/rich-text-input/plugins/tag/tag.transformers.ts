@@ -1,5 +1,6 @@
-import { Transformer } from '@lexical/markdown';
+import { TextMatchTransformer } from '@lexical/markdown';
 import { TagNode } from './tag-node';
+import { Tag } from './tag.model';
 
 /**
  * Transformer for tag nodes
@@ -8,15 +9,19 @@ import { TagNode } from './tag-node';
  *
  * @docs https://github.com/facebook/lexical/tree/main/packages/lexical-markdown#transformers
  */
-export const TAG: Transformer = {
-	dependencies: [TagNode],
-	export: (node) => (node instanceof TagNode ? node.exportMarkdown() : null),
-	importRegExp: /{{(\w+)}}/,
-	regExp: /{{(\w+)}}/,
-	replace: (textNode, match) => {
-		const [, key] = match;
-		textNode.replace(new TagNode(key));
-	},
-	type: 'text-match',
-	trigger: '{{',
-};
+export function createTagsTransformer(tags: Tag[]): TextMatchTransformer {
+	return {
+		dependencies: [TagNode],
+		export: (node) => (node instanceof TagNode ? `{{${node.tag.key}}}` : null),
+		importRegExp: /{{(\w+)}}/,
+		regExp: /{{(\w+)}}/,
+		replace: (textNode, match) => {
+			const tag = tags.find((t) => t.key === match[1]);
+			if (tag) {
+				textNode.replace(new TagNode(tag));
+			}
+		},
+		type: 'text-match',
+		trigger: '{{',
+	};
+}

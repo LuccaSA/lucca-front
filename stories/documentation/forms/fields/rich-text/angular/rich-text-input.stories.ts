@@ -3,9 +3,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DividerComponent } from '@lucca-front/ng/divider';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
-import { provideLuRichTextTags, RichTextInputComponent, RichTextInputToolbarComponent, TAG, TagComponent } from '@lucca-front/ng/forms/rich-text-input';
+import { createTagsTransformer, provideLuRichTextTags, RichTextInputComponent, RichTextInputToolbarComponent, TagComponent } from '@lucca-front/ng/forms/rich-text-input';
 import { provideLuRichTextHTMLFormatter } from '@lucca-front/ng/forms/rich-text-input/formatters/html';
-import { provideLuRichTextMarkdownFormatter } from '@lucca-front/ng/forms/rich-text-input/formatters/markdown';
+import { DEFAULT_MARKDOWN_TRANSFORMERS, provideLuRichTextMarkdownFormatter } from '@lucca-front/ng/forms/rich-text-input/formatters/markdown';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { cleanupTemplate, generateInputs } from 'stories/helpers/stories';
 import { StoryModelDisplayComponent } from 'stories/helpers/story-model-display.component';
@@ -175,7 +175,23 @@ export const WithTagPluginMarkdown: StoryObj<RichTextInputComponent & { value: s
 			moduleMetadata: {
 				imports: [RichTextInputComponent, TagComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule],
 				providers: [
-					provideLuRichTextMarkdownFormatter([TAG]),
+					provideLuRichTextMarkdownFormatter([
+						...DEFAULT_MARKDOWN_TRANSFORMERS,
+						createTagsTransformer([
+							{
+								key: 'tag1',
+								description: 'Tag 1',
+							},
+							{
+								key: 'tag2',
+								description: 'Tag 2',
+							},
+							{
+								key: 'tag3',
+								description: 'Tag 3',
+							},
+						]),
+					]),
 					provideLuRichTextTags(
 						signal([
 							{

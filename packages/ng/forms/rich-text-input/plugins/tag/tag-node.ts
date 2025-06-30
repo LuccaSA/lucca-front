@@ -5,7 +5,7 @@ import { ChipComponent } from '@lucca-front/ng/chip';
 import type { Tag } from './tag.model';
 
 export class TagNode extends TextNode {
-	key: string;
+	tag: Tag;
 	// Store the component reference on the node instance
 	#componentRef?: ComponentRef<ChipComponent>;
 	static #currentAvailableTags: Tag[] = [];
@@ -19,9 +19,9 @@ export class TagNode extends TextNode {
 		TagNode.#currentAvailableTags = tags;
 	}
 
-	constructor(key: string, nodeKey?: NodeKey) {
-		super(key, nodeKey);
-		this.key = key;
+	constructor(tag: Tag, key?: NodeKey) {
+		super(tag.description, key);
+		this.tag = tag;
 		this.__mode = 1; // TextModeType.Token (it cannot be edited by the user)
 	}
 
@@ -30,7 +30,7 @@ export class TagNode extends TextNode {
 	}
 
 	static override clone(node: TagNode): TagNode {
-		return new TagNode(node.key, node.__key);
+		return new TagNode(node.tag, node.__key);
 	}
 
 	override createDOM(config: EditorConfig, editor: LexicalEditor): HTMLElement {
@@ -96,12 +96,8 @@ export class TagNode extends TextNode {
 
 	override exportDOM(): DOMExportOutput {
 		const element = document.createElement('span');
-		element.textContent = `{{${this.key}}}`;
+		element.textContent = `{{${this.tag.key}}}`;
 		return { element };
-	}
-
-	exportMarkdown(): string {
-		return `{{${this.key}}}`;
 	}
 
 	static override importDOM(): DOMConversionMap {
@@ -132,7 +128,7 @@ function domConversionFunction(domNode: Node, availableTags: Tag[]): DOMConversi
 		const tag = availableTags.find((t) => t.key === tagContent);
 
 		if (tag) {
-			convertedParts.push(new TagNode(tag.key));
+			convertedParts.push(new TagNode(tag));
 		} else {
 			convertedParts.push(new TextNode(match[0])); // Garder {{tag}} tel quel
 		}
