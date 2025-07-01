@@ -38,7 +38,9 @@ export interface RichTextPluginComponent {
 	pluginComponents?: Signal<readonly RichTextPluginComponent[]>;
 
 	// accessibility
+	// Rich Text Input sets tabindex to -1 on all plugins except the first one
 	tabindex?: WritableSignal<number>;
+	// What to do in the plugin when it receives focus from the editor
 	focus?(): void;
 }
 
@@ -164,7 +166,8 @@ export class RichTextInputComponent implements OnInit, OnDestroy, ControlValueAc
 		this.pluginComponents().forEach((c) => c.setDisabledState(isDisabled));
 	}
 
-	focusSiblingPlugin(direction: -1 | 1) {
+	focusSiblingPlugin(event: Event, direction: -1 | 1) {
+		event.preventDefault();
 		const plugins = this.#allPlugins();
 
 		plugins[this.#focusedPlugin].tabindex.set(-1);

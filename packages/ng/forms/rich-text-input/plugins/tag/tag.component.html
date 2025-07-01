@@ -1,7 +1,16 @@
-<div class="editor-tagContainer">
-	<!-- TODO Translate -->
+<div class="editor-tagContainer" (keydown.arrowleft)="focusTag($event, -1)" (keydown.arrowRight)="focusTag($event, 1)">
 	<span>{{ intl.insertTag }}</span>
 	@for (tag of tags(); track tag) {
-		<lu-chip [unkillable]="true" (click)="insertTag(tag)">{{ tag.description }}</lu-chip>
+		<button
+			type="button"
+			luButton
+			size="S"
+			class="editor-tag"
+			(click)="insertTag(tag)"
+			[attr.tabindex]="tabindex()"
+			[disabled]="isDisabled()"
+		>
+			{{ tag.description }}
+		</button>
 	}
 </div>

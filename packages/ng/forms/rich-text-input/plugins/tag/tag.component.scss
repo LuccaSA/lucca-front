@@ -2,50 +2,11 @@
   display: flex;
   flex-wrap: wrap;
   gap: var(--pr-t-spacings-100);
-  margin-top: var(--pr-t-spacings-200);
   align-items: center;
 }
 
 .editor-tag {
-  cursor: pointer;
-  border-radius: var(--pr-t-spacings-50);
-  padding: var(--pr-t-spacings-25) var(--pr-t-spacings-100);
-  color: var(--palettes-neutral-800);
-  background-color: var(--palettes-neutral-200);
-}
-
-::ng-deep .richTextField {
-  .chip {
-    position: relative;
-    gap: 0;
-    padding-block: var(--pr-t-spacings-25);
-    background-color: var(--palettes-product-700);
-    color: var(--palettes-neutral-0);
-    font-size: var(--sizes-S-fontSize);
-    line-height: var(--sizes-S-lineHeight);
-
-    & > span {
-      display: contents;
-    }
-  }
-
-  .chip-kill {
-    --components-chip-kill-cross-color: var(--palettes-product-700);
-    --components-chip-kill-disk-color: var(--palettes-neutral-0);
-
-    margin-left: var(--pr-t-spacings-25);
-    cursor: pointer;
-
-    &:hover,
-    &:focus {
-      --components-chip-kill-cross-color: var(--palettes-product-0);
-      --components-chip-kill-disk-color: var(--palettes-neutral-700);
-    }
-
-    &::before,
-    &::after {
-      transition-property: background-color, color;
-      transition-duration: 0.25s;
-    }
-  }
+	font-weight: var(--pr-t-font-fontWeight-regular);
+	padding-block: calc(var(--pr-t-spacings-50) / 2);
+	padding-inline: var(--pr-t-spacings-100);
 }
