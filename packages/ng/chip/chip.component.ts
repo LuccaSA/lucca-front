@@ -1,4 +1,4 @@
-import { booleanAttribute, Component, HostBinding, Input, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, Component, computed, input, output, ViewEncapsulation } from '@angular/core';
 import { getIntl } from '@lucca-front/ng/core';
 import { LU_CHIP_TRANSLATIONS } from './chip.translate';
 
@@ -10,23 +10,20 @@ import { LU_CHIP_TRANSLATIONS } from './chip.translate';
 	encapsulation: ViewEncapsulation.None,
 	host: {
 		class: 'chip',
+		'[class.is-disabled]': 'disabled()',
+		'[class.palette-product]': 'classPalette()',
 	},
 })
 export class ChipComponent {
 	intl = getIntl(LU_CHIP_TRANSLATIONS);
 
-	@Input({ transform: booleanAttribute })
-	unkillable = false;
+	readonly unkillable = input(false, { transform: booleanAttribute });
 
-	@Input()
-	palette?: string;
+	readonly palette = input<string>();
 
-	@Input({ transform: booleanAttribute })
-	@HostBinding('class.is-disabled')
-	disabled = false;
+	readonly disabled = input(false, { transform: booleanAttribute });
 
-	@HostBinding('class.palette-product')
-	get classPalette() {
-		return this.palette === 'product';
-	}
+	readonly classPalette = computed(() => this.palette() === 'product');
+
+	readonly kill = output();
 }
