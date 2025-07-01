@@ -14,7 +14,7 @@ function getTemplate(args: FormLabelBasicStory): string {
 		<span aria-hidden="true" class="lucca-icon icon-signHelp"></span>
 		<span class="u-mask">?</span>
 	</span>
-	<span class="pr-u-marginInlineStart50 tag palette-product">Tag</span>
+	<span class="formLabel-tag tag">Tag</span>
 </label>`;
 }
 
