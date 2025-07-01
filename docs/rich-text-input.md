@@ -119,6 +119,18 @@ Il est aussi possible de créer une barre d'outil personnalisée en assemblant l
 <lu-rich-text-plugin-clear-format />
 ```
 
+#### Tag
+
+- Outil individuel
+
+L'outil prend en paramètre une liste de tag personnalisés, qu'il est possible d'insérer dans le contenu de l'éditeur, sous forme de chips.
+
+Chaque tag est un objet avec une clé et une description. La clé est utilisée pour l'insertion dans le contenu réel de l'éditeur, la description est uniquement utilisée pour la représentation visuelle de la balise.
+
+```angular2html
+<lu-rich-text-plugin-tag [tags]="[{ key: 'tag1', description: 'Premier tag'}, { key: 'tag2', description: 'Second tag'}]"/>
+```
+
 ### Ajout d'outils personnalisés
 
 Les outils sont des composants implémentant l'interface `RichTextPluginComponent`. Cette interface est utilisée pour les outils et les barres d'outils.

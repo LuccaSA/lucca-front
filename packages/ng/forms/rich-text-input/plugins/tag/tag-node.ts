@@ -40,6 +40,7 @@ export class TagNode extends TextNode {
 
 			// Set inputs on the component instance
 			this.#componentRef.instance.unkillable = false;
+			this.#componentRef.instance.palette = 'product';
 
 			// Get the component's DOM element
 			const componentElement = this.#componentRef.location.nativeElement as HTMLElement;

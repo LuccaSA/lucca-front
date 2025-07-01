@@ -1,9 +1,9 @@
-import { LOCALE_ID, signal } from '@angular/core';
+import { LOCALE_ID } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DividerComponent } from '@lucca-front/ng/divider';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
-import { createTagsTransformer, provideLuRichTextTags, RichTextInputComponent, RichTextInputToolbarComponent, TagComponent } from '@lucca-front/ng/forms/rich-text-input';
+import { createTagsTransformer, RichTextInputComponent, RichTextInputToolbarComponent, TagComponent } from '@lucca-front/ng/forms/rich-text-input';
 import { provideLuRichTextHTMLFormatter } from '@lucca-front/ng/forms/rich-text-input/formatters/html';
 import { DEFAULT_MARKDOWN_TRANSFORMERS, provideLuRichTextMarkdownFormatter } from '@lucca-front/ng/forms/rich-text-input/formatters/markdown';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
@@ -119,32 +119,27 @@ export const WithTagPlugin: StoryObj<RichTextInputComponent & { value: string; d
 	<lu-rich-text-input
 	${generateInputs(inputArgs, argTypes)}
 		[(ngModel)]="value" [disabled]="disabled" [required]="required">
-			<lu-rich-text-input-toolbar />
-			<lu-rich-text-plugin-tag></lu-rich-text-plugin-tag>
-	</lu-rich-text-input>
+				<lu-rich-text-input-toolbar />
+				<lu-rich-text-plugin-tag [tags]="[
+																				{
+																					key: 'tag1',
+																					description: 'Tag 1',
+																				},
+																				{
+																					key: 'tag2',
+																					description: 'Tag 2',
+																				},
+																				{
+																					key: 'tag3',
+																					description: 'Tag 3',
+																				},
+																			]"/>
+			</lu-rich-text-input>
 </lu-form-field>
 <pr-story-model-display>{{value}}</pr-story-model-display>`),
 			moduleMetadata: {
 				imports: [RichTextInputComponent, TagComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule],
-				providers: [
-					provideLuRichTextHTMLFormatter(),
-					provideLuRichTextTags(
-						signal([
-							{
-								key: 'tag1',
-								description: 'Tag 1',
-							},
-							{
-								key: 'tag2',
-								description: 'Tag 2',
-							},
-							{
-								key: 'tag3',
-								description: 'Tag 3',
-							},
-						]),
-					),
-				],
+				providers: [provideLuRichTextHTMLFormatter()],
 			},
 		};
 	},
@@ -168,7 +163,20 @@ export const WithTagPluginMarkdown: StoryObj<RichTextInputComponent & { value: s
 	${generateInputs(inputArgs, argTypes)}
 		[(ngModel)]="value" [disabled]="disabled" [required]="required">
 			<lu-rich-text-input-toolbar />
-			<lu-rich-text-plugin-tag></lu-rich-text-plugin-tag>
+			<lu-rich-text-plugin-tag class="richTextField-toolbar-col" [tags]="[
+																	{
+																		key: 'tag1',
+																		description: 'Tag 1',
+																	},
+																	{
+																		key: 'tag2',
+																		description: 'Tag 2',
+																	},
+																	{
+																		key: 'tag3',
+																		description: 'Tag 3',
+																	},
+																]"/>
 	</lu-rich-text-input>
 </lu-form-field>
 <pr-story-model-display>{{value}}</pr-story-model-display>`),
@@ -192,22 +200,6 @@ export const WithTagPluginMarkdown: StoryObj<RichTextInputComponent & { value: s
 							},
 						]),
 					]),
-					provideLuRichTextTags(
-						signal([
-							{
-								key: 'tag1',
-								description: 'Tag 1',
-							},
-							{
-								key: 'tag2',
-								description: 'Tag 2',
-							},
-							{
-								key: 'tag3',
-								description: 'Tag 3',
-							},
-						]),
-					),
 				],
 			},
 		};
