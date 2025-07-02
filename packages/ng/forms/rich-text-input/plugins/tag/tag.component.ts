@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, effect, ElementRef, forwardRef, inject, input, signal, viewChildren, ViewContainerRef } from '@angular/core';
-import { $createTextNode, $getSelection, type Klass, type LexicalEditor, type LexicalNode } from 'lexical';
+import { $getRoot, $getSelection, type Klass, type LexicalEditor, type LexicalNode } from 'lexical';
 import { RICH_TEXT_PLUGIN_COMPONENT, RichTextPluginComponent } from '../../rich-text-input.component';
 import { getIntl } from '@lucca-front/ng/core';
 import { LU_RICH_TEXT_INPUT_TRANSLATIONS } from '../../rich-text-input.translate';
@@ -51,14 +51,12 @@ export class TagComponent implements RichTextPluginComponent {
 
 	insertTag(tag: Tag): void {
 		this.editor?.update(() => {
-			const selection = $getSelection();
-			const node = new TagNode(tag);
-
-			if (selection) {
-				selection.insertNodes([node]);
-				// Move the cursor after the inserted tag node
-				node.insertAfter($createTextNode('')).selectEnd();
+			let selection = $getSelection();
+			if (!selection) {
+				selection = $getRoot().selectEnd();
 			}
+			const node = new TagNode(tag);
+			selection.insertNodes([node]);
 		});
 	}
 
