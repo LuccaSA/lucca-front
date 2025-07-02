@@ -3,7 +3,7 @@
 Avant toute utilisation de `lu-rich-text-input`, il est nécessaire d'ajouter les `peerDependencies` suivantes à votre projet :
 
 ```sh
-npm i lexical @lexical/history @lexical/link @lexical/rich-text @lexical/selection @lexical/utils
+npm i lexical @lexical/history @lexical/link @lexical/text @lexical/rich-text @lexical/selection @lexical/utils
 ```
 
 En fonction du format désiré en entrée / sortie du composant, les dépendances suivantes doivent être installées:
@@ -125,7 +125,10 @@ Il est aussi possible de créer une barre d'outil personnalisée en assemblant l
 
 L'outil prend en paramètre une liste de tag personnalisés, qu'il est possible d'insérer dans le contenu de l'éditeur, sous forme de chips.
 
-Chaque tag est un objet avec une clé et une description. La clé est utilisée pour l'insertion dans le contenu réel de l'éditeur, la description est uniquement utilisée pour la représentation visuelle de la balise.
+Chaque tag est un objet avec une clé et une description optionnelle. La clé est utilisée pour l'insertion dans le contenu réel de l'éditeur, la description est uniquement utilisée pour la représentation visuelle de la balise. 
+Si la description n'est pas fournie, la clé sera utilisée à la place.
+
+```ts
 
 ```angular2html
 <lu-rich-text-plugin-tag [tags]="[{ key: 'tag1', description: 'Premier tag'}, { key: 'tag2', description: 'Second tag'}]"/>

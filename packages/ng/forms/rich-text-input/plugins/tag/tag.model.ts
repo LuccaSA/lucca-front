@@ -1,4 +1,4 @@
 export type Tag = {
 	key: string;
-	description: string;
+	description?: string;
 };
