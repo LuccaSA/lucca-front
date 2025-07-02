@@ -1,13 +1,25 @@
-import { COMMAND_PRIORITY_NORMAL, type DOMConversion, type DOMConversionMap, type DOMExportOutput, type EditorConfig, type LexicalEditor, type LexicalNode, type NodeKey, TextNode } from 'lexical';
+import {
+	COMMAND_PRIORITY_NORMAL,
+	DecoratorNode,
+	type DOMConversion,
+	type DOMConversionMap,
+	type DOMExportOutput,
+	type EditorConfig,
+	type LexicalEditor,
+	type LexicalNode,
+	type NodeKey,
+	TextNode,
+} from 'lexical';
 
 import { ComponentRef, ViewContainerRef } from '@angular/core';
 import { ChipComponent } from '@lucca-front/ng/chip';
 import type { Tag } from './tag.model';
 
-export class TagNode extends TextNode {
+export class TagNode extends DecoratorNode<string> {
 	tag: Tag;
 	// Store the component reference on the node instance
 	#componentRef?: ComponentRef<ChipComponent>;
+	#deleteButton?: HTMLButtonElement;
 	static #currentAvailableTags: Tag[] = [];
 	static #viewContainerRef: ViewContainerRef;
 
@@ -20,9 +32,8 @@ export class TagNode extends TextNode {
 	}
 
 	constructor(tag: Tag, key?: NodeKey) {
-		super(tag.description, key);
+		super(key);
 		this.tag = tag;
-		this.__mode = 1; // TextModeType.Token (it cannot be edited by the user)
 	}
 
 	static override getType(): string {
@@ -33,7 +44,14 @@ export class TagNode extends TextNode {
 		return new TagNode(node.tag, node.__key);
 	}
 
-	override createDOM(config: EditorConfig, editor: LexicalEditor): HTMLElement {
+	/**
+	 * This method must be implemented but has no purpose outside of react
+	 */
+	override decorate(): string {
+		return `{{${this.tag.key}}}`;
+	}
+
+	override createDOM(_config: EditorConfig, editor: LexicalEditor): HTMLElement {
 		if (TagNode.#viewContainerRef) {
 			// Create the component
 			this.#componentRef = TagNode.#viewContainerRef.createComponent(ChipComponent);
@@ -46,52 +64,38 @@ export class TagNode extends TextNode {
 			const componentElement = this.#componentRef.location.nativeElement as HTMLElement;
 
 			// Add our text as the first child - it will be projected via <ng-content />
-			const textNode = document.createTextNode(this.getTextContent());
+			const textNode = document.createTextNode(this.tag.description);
 			componentElement.insertBefore(textNode, componentElement.firstChild);
 
 			// Trigger change detection to apply the input changes and render the template
 			this.#componentRef.hostView.detectChanges();
 
 			// Add click handler ONLY to the delete button, not the whole chip
-			const deleteButton = componentElement.querySelector('.chip-kill');
-			if (deleteButton) {
-				deleteButton.addEventListener('click', (event: MouseEvent) => {
+			this.#deleteButton = componentElement.querySelector<HTMLButtonElement>('.chip-kill');
+			if (this.#deleteButton) {
+				this.#deleteButton.onclick = (event: MouseEvent) => {
 					event.stopPropagation();
 					editor.update(() => {
 						this.remove();
 					});
-				});
+				};
 			}
 
 			// Return the component's DOM element
 			return componentElement;
-		} else {
-			// Fallback for safety - create a simple span
-			const element = super.createDOM(config);
-			element.className = 'chip';
-			element.textContent = this.getTextContent();
-
-			const button = document.createElement('button');
-			button.onclick = (event: MouseEvent) => {
-				event.stopPropagation();
-				editor.update(() => {
-					this.remove(); // Remove the node from the editor
-				});
-			};
-			button.className = 'chip-kill';
-
-			const span = document.createElement('span');
-			span.className = 'u-mask';
-			span.textContent = 'delete';
-			button.appendChild(span);
-			element.appendChild(button);
-
-			return element;
 		}
+		throw new Error('ViewContainerRef is not set for TagNode. Ensure it is initialized before creating TagNode instances.');
+	}
+
+	override updateDOM(_prevNode: unknown, _dom: HTMLElement, _config: EditorConfig): boolean {
+		return false;
 	}
 
 	override remove(preserveEmptyParent?: boolean): void {
 		super.remove(preserveEmptyParent);
+		if (this.#deleteButton) {
+			this.#deleteButton.onclick = null;
+		}
 		this.#componentRef?.destroy();
 	}
 
