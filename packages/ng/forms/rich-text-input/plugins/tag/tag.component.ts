@@ -5,7 +5,7 @@ import { getIntl } from '@lucca-front/ng/core';
 import { LU_RICH_TEXT_INPUT_TRANSLATIONS } from '../../rich-text-input.translate';
 import { TagNode } from './tag-node';
 import type { Tag } from './tag.model';
-import { ButtonComponent } from '../../../../button/button.component';
+import { ButtonComponent } from '@lucca-front/ng/button';
 
 @Component({
 	selector: 'lu-rich-text-plugin-tag',
