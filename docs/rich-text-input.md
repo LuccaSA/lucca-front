@@ -128,10 +128,18 @@ L'outil prend en paramètre une liste de tag personnalisés, qu'il est possible 
 Chaque tag est un objet avec une clé et une description optionnelle. La clé est utilisée pour l'insertion dans le contenu réel de l'éditeur, la description est uniquement utilisée pour la représentation visuelle de la balise. 
 Si la description n'est pas fournie, la clé sera utilisée à la place.
 
+Les tags ont la forme `{{tag.key}}` dans le contenu brut en entrée/sortie de l'éditeur.
+
 ```ts
 
 ```angular2html
 <lu-rich-text-plugin-tag [tags]="[{ key: 'tag1', description: 'Premier tag'}, { key: 'tag2', description: 'Second tag'}]"/>
+```
+
+Pour gérer les tags en markdown, il est nécessaire de fournir le transformer `TAGS` au formateur.
+
+```ts
+provideLuRichTextMarkdownFormatter([...DEFAULT_MARKDOWN_TRANSFORMERS, TAGS])
 ```
 
 ### Ajout d'outils personnalisés
