@@ -64,7 +64,7 @@ export class TagNode extends DecoratorNode<string> {
 			const componentElement = this.#componentRef.location.nativeElement as HTMLElement;
 
 			// Add our text as the first child - it will be projected via <ng-content />
-			const textNode = document.createTextNode(this.tag.description);
+			const textNode = document.createTextNode(this.tag.description ?? this.tag.key);
 			componentElement.insertBefore(textNode, componentElement.firstChild);
 
 			// Trigger change detection to apply the input changes and render the template
@@ -100,8 +100,7 @@ export class TagNode extends DecoratorNode<string> {
 	}
 
 	override exportDOM(): DOMExportOutput {
-		const element = document.createElement('span');
-		element.textContent = `{{${this.tag.key}}}`;
+		const element = document.createTextNode(`{{${this.tag.key}}}`);
 		return { element };
 	}
 
