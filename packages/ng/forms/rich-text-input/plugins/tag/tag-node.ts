@@ -31,6 +31,10 @@ export class TagNode extends DecoratorNode<string> {
 		TagNode.#currentAvailableTags = tags;
 	}
 
+	static getAvailableTags(): Tag[] {
+		return TagNode.#currentAvailableTags;
+	}
+
 	constructor(tag: Tag, key?: NodeKey) {
 		super(key);
 		this.tag = tag;
