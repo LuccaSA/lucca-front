@@ -1,5 +1,5 @@
 import { isNil } from '@lucca-front/ng/core';
-import { Day, format, isSameDay, isSameMonth, isSameYear, parse, startOfDecade, startOfMonth, startOfYear } from 'date-fns';
+import { Day, format, isSameDay, isSameMonth, isSameYear, parse, parseISO, startOfDecade, startOfMonth, startOfYear } from 'date-fns';
 import { CalendarWeekDay, CalendarWeekInfo } from './calendar.token';
 import { CalendarMode } from './calendar2/calendar-mode';
 import { DateRange, DateRangeInput } from './calendar2/date-range';
@@ -59,6 +59,24 @@ export function transformDateInputToDate(value: Date | null | undefined | string
 		return value;
 	}
 	return stringToDateISO(value);
+}
+
+function stringToDatetimeISO(value: string): Date {
+	const res = parseISO(value);
+	if (isNaN(+res)) {
+		throw new Error('Invalid datetime: your input should be a valid iso8601 datetime string, received: ' + value);
+	}
+	return res;
+}
+
+export function transformDatetimeInputToDate(value: Date | null | undefined | string): Date | null {
+	if (isNil(value)) {
+		return null;
+	}
+	if (value instanceof Date) {
+		return value;
+	}
+	return stringToDatetimeISO(value);
 }
 
 export function transformDateToDateISO(value: Date | null): string | null {
