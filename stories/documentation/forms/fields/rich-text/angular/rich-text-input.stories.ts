@@ -144,7 +144,7 @@ export const WithTagPlugin: StoryObj<RichTextInputComponent & { value: string; d
 		};
 	},
 	args: {
-		value: 'Lorem <b>ipsum</b> dolor {{tag1}}',
+		value: 'Lorem <b>ipsum</b> dolor {{tag1}} <i>italic</i> {{unregisteredTag}} and regular {{tag2}} trailing text',
 		placeholder: 'Placeholder…',
 		disabled: false,
 		required: false,
@@ -187,7 +187,7 @@ export const WithTagPluginMarkdown: StoryObj<RichTextInputComponent & { value: s
 		};
 	},
 	args: {
-		value: 'Lorem **ipsum** dolor {{tag1}}',
+		value: 'Lorem **ipsum** dolor {{tag1}} *italic* {{unregisteredTag}} and regular {{tag2}} trailing text',
 		placeholder: 'Placeholder…',
 		disabled: false,
 		required: false,
