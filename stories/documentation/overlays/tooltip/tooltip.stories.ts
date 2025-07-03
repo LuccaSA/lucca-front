@@ -87,7 +87,7 @@ export default {
 <lu-icon icon="star" alt="Favoris" luTooltip="Favoris" luTooltipOnlyForDisplay="true" />
 
 <h3>Tooltip affiché avec un host séparé</h3>
-<span class="pr-u-marginInlineEnd800" luTooltip="… mais apparait là !" [luTooltipAnchor]="target">Tooltip déclanché ici…</span><span aria-hidden="true" #target class="lucca-icon icon-target">
+<span class="pr-u-marginInlineEnd800" luTooltip="… mais apparait là !" [luTooltipAnchor]="target">Tooltip déclenché ici…</span><span aria-hidden="true" #target class="lucca-icon icon-target">
 `,
 		};
 	},
