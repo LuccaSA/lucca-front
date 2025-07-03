@@ -129,6 +129,7 @@ Chaque tag est un objet avec une clé et une description optionnelle. La clé es
 Si la description n'est pas fournie, la clé sera utilisée à la place.
 
 Les tags ont la forme `{{tag.key}}` dans le contenu brut en entrée/sortie de l'éditeur.
+Si le contenu en entrée de l'éditeur contient des tags non reconnus par l'outil, ils seront automatiquement supprimés.
 
 ```ts
 
