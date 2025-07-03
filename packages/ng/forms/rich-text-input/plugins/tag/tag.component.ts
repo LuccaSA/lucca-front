@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, effect, ElementRef, forwardRef, inject, input, OnDestroy, signal, viewChildren, ViewContainerRef } from '@angular/core';
-import { $getRoot, $getSelection, $nodesOfType, type Klass, type LexicalEditor, type LexicalNode, NodeKey } from 'lexical';
+import { $getNodeByKey, $getRoot, $getSelection, type Klass, type LexicalEditor, type LexicalNode } from 'lexical';
 import { RICH_TEXT_PLUGIN_COMPONENT, RichTextPluginComponent } from '../../rich-text-input.component';
 import { getIntl } from '@lucca-front/ng/core';
 import { LU_RICH_TEXT_INPUT_TRANSLATIONS } from '../../rich-text-input.translate';
@@ -34,22 +34,25 @@ export class TagComponent implements RichTextPluginComponent, OnDestroy {
 
 	editor: LexicalEditor | null = null;
 
-	#registeredNodeKeys: NodeKey[] = [];
+	#newPartialTagNodes = signal<TagNode[]>([]);
 
-	#mutationListener = () => {};
+	#registeredCommands = () => {};
 
 	constructor() {
 		TagNode.setViewContainerRef(this.#viewContainerRef);
+
+		// Listen for new partial tag nodes and update their descriptions
 		effect(() => {
 			const tags = this.tags();
+			// filter out previously recorded nodes
+			const nodes = this.#newPartialTagNodes();
+
 			this.editor.update(() => {
-				console.log($nodesOfType(TagNode));
-				$nodesOfType(TagNode).forEach((node) => {
-					console.log('BBBBBBBBBBBB');
-					console.log(node.getTagKey());
+				nodes.forEach((node) => {
 					const tag = tags.find((t) => t.key === node.getTagKey());
 					if (tag) {
-						node.setTagDescription(tag.description);
+						// mark node as updated
+						node.setTagDescription(tag.description).setPartial(false);
 					} else {
 						node.remove();
 					}
@@ -61,16 +64,26 @@ export class TagComponent implements RichTextPluginComponent, OnDestroy {
 	setEditorInstance(editor: LexicalEditor): void {
 		this.editor = editor;
 
-		this.#mutationListener = this.editor.registerMutationListener(
+		// listen for new partial tag nodes (coming from formatters)
+		this.#registeredCommands = this.editor.registerMutationListener(
 			TagNode,
 			(mutations) => {
-				mutations.forEach((m, k) => {
-					if (m === 'created') {
-						this.#registeredNodeKeys.push(k);
+				const newPartialNodes: TagNode[] = [];
+				this.editor.read(() => {
+					mutations.forEach((m, k) => {
+						if (m === 'created') {
+							const node = $getNodeByKey<TagNode>(k);
+							if (node.isPartial()) {
+								newPartialNodes.push(node);
+							}
+						}
+					});
+					if (newPartialNodes.length > 0) {
+						this.#newPartialTagNodes.set(newPartialNodes);
 					}
 				});
 			},
-			{ skipInitialization: false },
+			{ skipInitialization: true },
 		);
 	}
 
@@ -111,6 +124,6 @@ export class TagComponent implements RichTextPluginComponent, OnDestroy {
 	}
 
 	ngOnDestroy() {
-		this.#mutationListener();
+		this.#registeredCommands();
 	}
 }

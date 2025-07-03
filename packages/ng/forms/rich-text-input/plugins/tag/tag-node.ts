@@ -1,4 +1,5 @@
 import {
+	$createTextNode,
 	COMMAND_PRIORITY_NORMAL,
 	DecoratorNode,
 	type DOMConversion,
@@ -28,6 +29,7 @@ export type SerializedTagNode = Spread<
 export class TagNode extends DecoratorNode<string> {
 	#tagKey: string;
 	#tagDescription?: string;
+	#partial: boolean; // Indicates if the tag is a partial tag (not fully defined)
 	// Store the component reference on the node instance
 	#componentRef?: ComponentRef<ChipComponent>;
 	#deleteButton?: HTMLButtonElement;
@@ -37,10 +39,21 @@ export class TagNode extends DecoratorNode<string> {
 		TagNode.#viewContainerRef = vcr;
 	}
 
-	constructor(tagKey = '', tagDescription?: string, key?: NodeKey) {
+	constructor(tagKey = '', tagDescription?: string, partial = false, key?: NodeKey) {
 		super(key);
 		this.#tagKey = tagKey;
 		this.#tagDescription = tagDescription;
+		this.#partial = partial;
+	}
+
+	getTagKey(): string {
+		return this.#tagKey;
+	}
+
+	setTagKey(tagKey: string): this {
+		const self = this.getWritable();
+		self.#tagKey = tagKey;
+		return self;
 	}
 
 	getTagDescription(): string {
@@ -53,13 +66,13 @@ export class TagNode extends DecoratorNode<string> {
 		return self;
 	}
 
-	getTagKey(): string {
-		return this.#tagDescription;
+	isPartial(): boolean {
+		return this.#partial;
 	}
 
-	setTagKey(tagKey: string): this {
+	setPartial(partial: boolean): this {
 		const self = this.getWritable();
-		self.#tagKey = tagKey;
+		self.#partial = partial;
 		return self;
 	}
 
@@ -68,7 +81,7 @@ export class TagNode extends DecoratorNode<string> {
 	}
 
 	static override clone(node: TagNode): TagNode {
-		return new TagNode(node.#tagKey, node.#tagDescription, node.__key);
+		return new TagNode(node.#tagKey, node.#tagDescription, node.#partial, node.__key);
 	}
 
 	/**
@@ -158,27 +171,25 @@ export class TagNode extends DecoratorNode<string> {
 function domConversionFunction(domNode: Node): DOMConversion {
 	const html = domNode.textContent ?? '';
 
-	const regex = /\{\{(?:.*?)\}\}/u;
+	const regex = /\{\{(?:.*?)\}\}/gu;
 	const convertedParts: LexicalNode[] = [];
-	const match = regex.exec(html);
+	const matches = html.match(regex);
 
-	if (match) {
+	if (matches) {
 		// Diviser le contenu en parties de texte et de balises
-		const beforeTag = html.slice(0, match.index);
-		if (beforeTag) {
-			convertedParts.push(new TextNode(beforeTag));
-		}
+		const otherText = html.split(regex);
+		matches.forEach((match, index) => {
+			convertedParts.push($createTextNode(otherText[index]));
+			// Traiter le tag
+			const tagContent = match.replace(/\{\{|\}\}/gu, '').trim();
+			convertedParts.push($createTagNode(tagContent, undefined, true)); // Créer un TagNode partiel avec la clé
 
-		// Traiter le tag
-		const tagContent = match[0].replace(/\{\{|\}\}/gu, '').trim();
-		convertedParts.push($createTagNode(tagContent)); // Créer un TagNode avec la clé
-
-		const afterTag = html.slice(match.index + match[0].length);
-		if (afterTag) {
-			convertedParts.push(new TextNode(afterTag));
-		}
+			if (index === matches.length - 1) {
+				convertedParts.push($createTextNode(otherText[index + 1]));
+			}
+		});
 	} else {
-		convertedParts.push(new TextNode(html));
+		convertedParts.push($createTextNode(html));
 	}
 
 	return {
@@ -192,8 +203,8 @@ function domConversionFunction(domNode: Node): DOMConversion {
 	};
 }
 
-export function $createTagNode(key = '', description?: string): TagNode {
-	return new TagNode(key, description);
+export function $createTagNode(key = '', description?: string, partial = false): TagNode {
+	return new TagNode(key, description, partial);
 }
 
 export function $isTagNode(node: LexicalNode | null | undefined): node is TagNode {
