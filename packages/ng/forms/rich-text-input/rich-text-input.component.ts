@@ -132,12 +132,12 @@ export class RichTextInputComponent implements OnInit, OnDestroy, ControlValueAc
 		this.#cleanup?.();
 	}
 
-	writeValue(markdown: string | null): void {
+	writeValue(value: string | null): void {
 		const updateTags = ['skip-dom-selection', INITIAL_UPDATE_TAG];
-		if (markdown) {
+		if (value) {
 			this.#editor?.update(
 				() => {
-					this.#richTextFormatter.parse(this.#editor, markdown);
+					this.#richTextFormatter.parse(this.#editor, value);
 				},
 				{ tag: updateTags },
 			);

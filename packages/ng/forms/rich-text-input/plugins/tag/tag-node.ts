@@ -7,37 +7,60 @@ import {
 	type EditorConfig,
 	type LexicalEditor,
 	type LexicalNode,
+	LexicalUpdateJSON,
 	type NodeKey,
+	SerializedLexicalNode,
+	Spread,
 	TextNode,
 } from 'lexical';
 
 import { ComponentRef, ViewContainerRef } from '@angular/core';
 import { ChipComponent } from '@lucca-front/ng/chip';
-import type { Tag } from './tag.model';
+
+export type SerializedTagNode = Spread<
+	{
+		tagKey?: string;
+		tagDescription?: string;
+	},
+	SerializedLexicalNode
+>;
 
 export class TagNode extends DecoratorNode<string> {
-	tag: Tag;
+	#tagKey: string;
+	#tagDescription?: string;
 	// Store the component reference on the node instance
 	#componentRef?: ComponentRef<ChipComponent>;
 	#deleteButton?: HTMLButtonElement;
-	static #currentAvailableTags: Tag[] = [];
 	static #viewContainerRef: ViewContainerRef;
 
 	static setViewContainerRef(vcr: ViewContainerRef): void {
 		TagNode.#viewContainerRef = vcr;
 	}
 
-	static setAvailableTags(tags: Tag[]): void {
-		TagNode.#currentAvailableTags = tags;
-	}
-
-	static getAvailableTags(): Tag[] {
-		return TagNode.#currentAvailableTags;
-	}
-
-	constructor(tag: Tag, key?: NodeKey) {
+	constructor(tagKey = '', tagDescription?: string, key?: NodeKey) {
 		super(key);
-		this.tag = tag;
+		this.#tagKey = tagKey;
+		this.#tagDescription = tagDescription;
+	}
+
+	getTagDescription(): string {
+		return this.#tagDescription;
+	}
+
+	setTagDescription(description: string): this {
+		const self = this.getWritable();
+		self.#tagDescription = description;
+		return self;
+	}
+
+	getTagKey(): string {
+		return this.#tagDescription;
+	}
+
+	setTagKey(tagKey: string): this {
+		const self = this.getWritable();
+		self.#tagKey = tagKey;
+		return self;
 	}
 
 	static override getType(): string {
@@ -45,14 +68,14 @@ export class TagNode extends DecoratorNode<string> {
 	}
 
 	static override clone(node: TagNode): TagNode {
-		return new TagNode(node.tag, node.__key);
+		return new TagNode(node.#tagKey, node.#tagDescription, node.__key);
 	}
 
 	/**
 	 * This method must be implemented but has no purpose outside of react
 	 */
 	override decorate(): string {
-		return `{{${this.tag.key}}}`;
+		return `{{${this.getKey()}}}`;
 	}
 
 	override createDOM(_config: EditorConfig, editor: LexicalEditor): HTMLElement {
@@ -68,7 +91,7 @@ export class TagNode extends DecoratorNode<string> {
 			const componentElement = this.#componentRef.location.nativeElement as HTMLElement;
 
 			// Add our text as the first child - it will be projected via <ng-content />
-			const textNode = document.createTextNode(this.tag.description ?? this.tag.key);
+			const textNode = document.createTextNode(this.#tagDescription ?? this.#tagKey);
 			componentElement.insertBefore(textNode, componentElement.firstChild);
 
 			// Trigger change detection to apply the input changes and render the template
@@ -91,8 +114,8 @@ export class TagNode extends DecoratorNode<string> {
 		throw new Error('ViewContainerRef is not set for TagNode. Ensure it is initialized before creating TagNode instances.');
 	}
 
-	override updateDOM(_prevNode: unknown, _dom: HTMLElement, _config: EditorConfig): boolean {
-		return false;
+	override updateDOM(prevNode: TagNode, _dom: HTMLElement, _config: EditorConfig): boolean {
+		return this.#tagDescription !== prevNode.#tagDescription || this.#tagKey !== prevNode.#tagKey;
 	}
 
 	override remove(preserveEmptyParent?: boolean): void {
@@ -104,7 +127,7 @@ export class TagNode extends DecoratorNode<string> {
 	}
 
 	override exportDOM(): DOMExportOutput {
-		const element = document.createTextNode(`{{${this.tag.key}}}`);
+		const element = document.createTextNode(`{{${this.#tagKey}}}`);
 		return { element };
 	}
 
@@ -112,12 +135,27 @@ export class TagNode extends DecoratorNode<string> {
 		const importers = TextNode.importDOM();
 		return {
 			...importers,
-			'#text': (domNode: Node) => domConversionFunction(domNode, TagNode.#currentAvailableTags),
+			'#text': (domNode: Node) => domConversionFunction(domNode),
+		};
+	}
+
+	static override importJSON(serializedNode: SerializedTagNode): TagNode {
+		return $createTagNode().updateFromJSON(serializedNode);
+	}
+
+	override updateFromJSON(serializedNode: LexicalUpdateJSON<SerializedTagNode>): this {
+		return super.updateFromJSON(serializedNode).setTagDescription(serializedNode.tagDescription).setTagKey(serializedNode.tagKey);
+	}
+
+	override exportJSON(): SerializedTagNode {
+		return {
+			...super.exportJSON(),
+			...{ tagDescription: this.#tagDescription, tagKey: this.#tagKey },
 		};
 	}
 }
 
-function domConversionFunction(domNode: Node, availableTags: Tag[]): DOMConversion {
+function domConversionFunction(domNode: Node): DOMConversion {
 	const html = domNode.textContent ?? '';
 
 	const regex = /\{\{(?:.*?)\}\}/u;
@@ -133,13 +171,7 @@ function domConversionFunction(domNode: Node, availableTags: Tag[]): DOMConversi
 
 		// Traiter le tag
 		const tagContent = match[0].replace(/\{\{|\}\}/gu, '').trim();
-		const tag = availableTags.find((t) => t.key === tagContent);
-
-		if (tag) {
-			convertedParts.push(new TagNode(tag));
-		} else {
-			convertedParts.push(new TextNode(match[0])); // Garder {{tag}} tel quel
-		}
+		convertedParts.push($createTagNode(tagContent)); // Créer un TagNode avec la clé
 
 		const afterTag = html.slice(match.index + match[0].length);
 		if (afterTag) {
@@ -158,4 +190,12 @@ function domConversionFunction(domNode: Node, availableTags: Tag[]): DOMConversi
 		// Priorité (plus le nombre est élevé, plus la conversion est prioritaire)
 		priority: COMMAND_PRIORITY_NORMAL,
 	};
+}
+
+export function $createTagNode(key = '', description?: string): TagNode {
+	return new TagNode(key, description);
+}
+
+export function $isTagNode(node: LexicalNode | null | undefined): node is TagNode {
+	return node instanceof TagNode;
 }

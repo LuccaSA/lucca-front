@@ -1,9 +1,9 @@
-import { ChangeDetectionStrategy, Component, effect, ElementRef, forwardRef, inject, input, signal, viewChildren, ViewContainerRef } from '@angular/core';
-import { $getRoot, $getSelection, type Klass, type LexicalEditor, type LexicalNode } from 'lexical';
+import { ChangeDetectionStrategy, Component, effect, ElementRef, forwardRef, inject, input, OnDestroy, signal, viewChildren, ViewContainerRef } from '@angular/core';
+import { $getRoot, $getSelection, $nodesOfType, type Klass, type LexicalEditor, type LexicalNode, NodeKey } from 'lexical';
 import { RICH_TEXT_PLUGIN_COMPONENT, RichTextPluginComponent } from '../../rich-text-input.component';
 import { getIntl } from '@lucca-front/ng/core';
 import { LU_RICH_TEXT_INPUT_TRANSLATIONS } from '../../rich-text-input.translate';
-import { TagNode } from './tag-node';
+import { $createTagNode, TagNode } from './tag-node';
 import type { Tag } from './tag.model';
 import { ButtonComponent } from '@lucca-front/ng/button';
 
@@ -21,7 +21,7 @@ import { ButtonComponent } from '@lucca-front/ng/button';
 		},
 	],
 })
-export class TagComponent implements RichTextPluginComponent {
+export class TagComponent implements RichTextPluginComponent, OnDestroy {
 	readonly #viewContainerRef = inject(ViewContainerRef);
 	readonly intl = getIntl(LU_RICH_TEXT_INPUT_TRANSLATIONS);
 
@@ -34,15 +34,44 @@ export class TagComponent implements RichTextPluginComponent {
 
 	editor: LexicalEditor | null = null;
 
+	#registeredNodeKeys: NodeKey[] = [];
+
+	#mutationListener = () => {};
+
 	constructor() {
 		TagNode.setViewContainerRef(this.#viewContainerRef);
 		effect(() => {
-			TagNode.setAvailableTags(this.tags());
+			const tags = this.tags();
+			this.editor.update(() => {
+				console.log($nodesOfType(TagNode));
+				$nodesOfType(TagNode).forEach((node) => {
+					console.log('BBBBBBBBBBBB');
+					console.log(node.getTagKey());
+					const tag = tags.find((t) => t.key === node.getTagKey());
+					if (tag) {
+						node.setTagDescription(tag.description);
+					} else {
+						node.remove();
+					}
+				});
+			});
 		});
 	}
 
 	setEditorInstance(editor: LexicalEditor): void {
 		this.editor = editor;
+
+		this.#mutationListener = this.editor.registerMutationListener(
+			TagNode,
+			(mutations) => {
+				mutations.forEach((m, k) => {
+					if (m === 'created') {
+						this.#registeredNodeKeys.push(k);
+					}
+				});
+			},
+			{ skipInitialization: false },
+		);
 	}
 
 	getLexicalNodes(): Klass<LexicalNode>[] {
@@ -55,7 +84,7 @@ export class TagComponent implements RichTextPluginComponent {
 			if (!selection) {
 				selection = $getRoot().selectEnd();
 			}
-			const node = new TagNode(tag);
+			const node = $createTagNode(tag.key, tag.description);
 			selection.insertNodes([node]);
 		});
 	}
@@ -79,5 +108,9 @@ export class TagComponent implements RichTextPluginComponent {
 
 			(this.focusableElements().at(this.focusIndex()) as ElementRef<HTMLButtonElement>).nativeElement.focus();
 		}
+	}
+
+	ngOnDestroy() {
+		this.#mutationListener();
 	}
 }
