@@ -4,36 +4,40 @@
 @use 'exports' as *;
 
 .grid {
-	@include vars;
-	@include component;
-
-	&.mod-auto {
-		@include auto;
+	@layer components {
+		@include vars;
+		@include component;
 	}
 
-	@each $breakpoint, $value in config.$breakpoints {
-		&.mod-autoAtMediaMin#{$breakpoint} {
-			@include autoAt;
+	@layer mods {
+		&.mod-auto {
+			@include auto;
+		}
 
-			@include media.min($breakpoint) {
-				@include auto;
+		@each $breakpoint, $value in config.$breakpoints {
+			&.mod-autoAtMediaMin#{$breakpoint} {
+				@include autoAt;
+
+				@include media.min($breakpoint) {
+					@include auto;
+				}
+			}
+
+			&.mod-autoAtContainerMin#{$breakpoint} {
+				@include autoAt;
+
+				@include container.min($breakpoint, $name: grid) {
+					@include auto;
+				}
 			}
 		}
 
-		&.mod-autoAtContainerMin#{$breakpoint} {
-			@include autoAt;
-
-			@include container.min($breakpoint, $name: grid) {
-				@include auto;
-			}
+		&.mod-form {
+			@include form;
 		}
-	}
 
-	&.mod-form {
-		@include form;
-	}
-
-	&.mod-dense {
-		@include dense;
+		&.mod-dense {
+			@include dense;
+		}
 	}
 }

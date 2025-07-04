@@ -2,22 +2,26 @@
 @use '@lucca-front/scss/src/commons/utils/media';
 
 .filterBar {
-	@include vars;
-	@include component;
-
-	@include media.max(XXS) {
-		@include compact;
+	@layer components {
+		@include vars;
+		@include component;
 	}
 
-	@include media.min(XXS) {
-		@include notCompact;
-	}
+	@layer mods {
+		@include media.max(XXS) {
+			@include compact;
+		}
 
-	@include media.pointer(coarse) {
-		@include touch;
-	}
+		@include media.min(XXS) {
+			@include notCompact;
+		}
 
-	@include media.pointer(coarse, $reversed: true) {
-		@include notTouch;
+		@include media.pointer(coarse) {
+			@include touch;
+		}
+
+		@include media.pointer(coarse, $reversed: true) {
+			@include notTouch;
+		}
 	}
 }

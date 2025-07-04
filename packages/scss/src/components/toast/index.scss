@@ -1,10 +1,14 @@
 @use 'exports' as *;
 
 .toasts {
-	@include vars;
-	@include component;
+	@layer components {
+		@include vars;
+		@include component;
+	}
 
-	&.mod-bottom {
-		@include bottom;
+	@layer mods {
+		&.mod-bottom {
+			@include bottom;
+		}
 	}
 }
