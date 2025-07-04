@@ -103,7 +103,6 @@ export class TagNode extends DecoratorNode<string> {
 			// Get the component's DOM element
 			const componentElement = this.#componentRef.location.nativeElement as HTMLElement;
 
-			// Add our text as the first child - it will be projected via <ng-content />
 			const textNode = document.createTextNode(this.#tagDescription ?? this.#tagKey);
 			componentElement.insertBefore(textNode, componentElement.firstChild);
 
