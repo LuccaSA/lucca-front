@@ -2,36 +2,42 @@
 @use '@lucca-front/scss/src/commons/utils/media';
 
 .mainLayout {
-	@include vars;
-	@include component;
+	@layer components {
+		@include vars;
+		@include component;
 
-	@include media.min('S') {
-		@include wide;
+		@include media.min('S') {
+			@include wide;
+		}
 	}
 
-	&:has(.mainLayout-content-inside-header.mod-sticky) {
-		@include stickyHeader;
-		@include stickyTop;
-	}
+	@layer mods {
+		&:has(.mainLayout-content-inside-header.mod-sticky) {
+			@include stickyHeader;
+			@include stickyTop;
+		}
 
-	&:has(.mainLayout-content-inside-footer.mod-sticky) {
-		@include stickyFooter;
-		@include stickyBottom;
+		&:has(.mainLayout-content-inside-footer.mod-sticky) {
+			@include stickyFooter;
+			@include stickyBottom;
+		}
 	}
 }
 
 .mainLayout-content-inside {
-	&:has(.mainLayout-content-inside-block.mod-overflow) {
-		.mainLayout-content-inside-header {
-			@include stickyHeader;
-		}
+	@layer mods {
+		&:has(.mainLayout-content-inside-block.mod-overflow) {
+			.mainLayout-content-inside-header {
+				@include stickyHeader;
+			}
 
-		.mainLayout-content-inside-footer {
-			@include stickyFooter;
-		}
+			.mainLayout-content-inside-footer {
+				@include stickyFooter;
+			}
 
-		.mainLayout-content-inside-block:not(.mod-overflow) {
-			@include stickyBlock;
+			.mainLayout-content-inside-block:not(.mod-overflow) {
+				@include stickyBlock;
+			}
 		}
 	}
 }

@@ -7,77 +7,79 @@
 @use '../packages/scss/src/main-all' as scss;
 @use '../packages/ng/styles/main' as ng;
 
-storybook-root,
-[ng-version] {
-	// Apply block display by default to story root for @container purposes
-	display: block;
-}
-
-.demo-utilityWrapper {
-	display: flex;
-	gap: var(--pr-t-spacings-100);
-	flex-wrap: wrap;
-	align-items: flex-start;
-}
-
-.demo-utility {
-	background-color: var(--pr-t-elevation-surface-raised);
-	padding: var(--pr-t-spacings-100);
-	border: 1px solid var(--palettes-neutral-300);
-
-	.code {
-		margin: 0;
+@layer product {
+	storybook-root,
+	[ng-version] {
+		// Apply block display by default to story root for @container purposes
 		display: block;
 	}
-}
 
-.demo-icon {
-	.deprecated {
-		&,
-		& + code {
-			opacity: 0.25;
+	.demo-utilityWrapper {
+		display: flex;
+		gap: var(--pr-t-spacings-100);
+		flex-wrap: wrap;
+		align-items: flex-start;
+	}
 
-			.showDeprecated:not(:checked) ~ .icons & {
-				display: none;
+	.demo-utility {
+		background-color: var(--pr-t-elevation-surface-raised);
+		padding: var(--pr-t-spacings-100);
+		border: 1px solid var(--palettes-neutral-300);
+
+		.code {
+			margin: 0;
+			display: block;
+		}
+	}
+
+	.demo-icon {
+		.deprecated {
+			&,
+			& + code {
+				opacity: 0.25;
+
+				.showDeprecated:not(:checked) ~ .icons & {
+					display: none;
+				}
 			}
 		}
 	}
-}
 
-.demo-QAtable {
-	border: 1px solid var(--commons-border-200);
-	border-collapse: collapse;
-
-	td {
+	.demo-QAtable {
 		border: 1px solid var(--commons-border-200);
-		padding: var(--pr-t-spacings-100) var(--pr-t-spacings-100);
+		border-collapse: collapse;
 
-		&:first-child {
-			white-space: nowrap;
+		td {
+			border: 1px solid var(--commons-border-200);
+			padding: var(--pr-t-spacings-100) var(--pr-t-spacings-100);
+
+			&:first-child {
+				white-space: nowrap;
+			}
+
+			&:has(.demo-QAtable-list.mod-white) {
+				background-color: white;
+			}
+
+			&:has(.demo-QAtable-list.mod-black) {
+				background-color: #333333;
+			}
 		}
+	}
 
-		&:has(.demo-QAtable-list.mod-white) {
+	.demo-QAtable-list {
+		display: flex;
+		gap: var(--pr-t-spacings-100);
+		align-items: center;
+		flex-wrap: wrap;
+
+		&.mod-white {
 			background-color: white;
 		}
 
-		&:has(.demo-QAtable-list.mod-black) {
-			background-color: #333333;
+		&.mod-column {
+			flex-direction: column;
+			align-items: flex-start;
 		}
-	}
-}
-
-.demo-QAtable-list {
-	display: flex;
-	gap: var(--pr-t-spacings-100);
-	align-items: center;
-	flex-wrap: wrap;
-
-	&.mod-white {
-		background-color: white;
-	}
-
-	&.mod-column {
-		flex-direction: column;
-		align-items: flex-start;
 	}
 }
