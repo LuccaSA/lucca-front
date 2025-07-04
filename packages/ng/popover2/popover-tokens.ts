@@ -6,7 +6,8 @@ export interface PopoverConfig {
 	content: TemplateRef<unknown> | Type<unknown>;
 	ref: OverlayRef;
 	contentId: string;
-	disableFocusManipulation: boolean;
+	disableCloseButtonFocus: boolean;
+	disableInitialTriggerFocus: boolean;
 	noCloseButton: boolean;
 }
 
