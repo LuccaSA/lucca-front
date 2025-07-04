@@ -18,6 +18,7 @@ export function registerListsGlobal(editor: LexicalEditor) {
 						$removeList();
 					} else if (parent) {
 						parent.setListType(type);
+						editor.dispatchCommand(SELECTION_CHANGE_COMMAND, undefined);
 					} else {
 						$insertList(type);
 					}
