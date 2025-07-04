@@ -18,10 +18,10 @@
 	}
 
 	&:has(.checkboxField-input:checked) {
-		background-color: var(--palettes-product-50);
+		background-color: var(--palettes-50, var(--palettes-product-50));
 
 		&:hover, :host-context(.is-highlighted) & {
-			background-color: var(--palettes-product-100);
+			background-color: var(--palettes-100, var(--palettes-product-100));
 		}
 	}
 
