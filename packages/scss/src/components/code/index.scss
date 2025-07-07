@@ -1,10 +1,14 @@
 @use 'exports' as *;
 
 .code {
-	@include vars;
-	@include component;
+	@layer components {
+		@include vars;
+		@include component;
+	}
 
-	&.mod-block {
-		@include block;
+	@layer mods {
+		&.mod-block {
+			@include block;
+		}
 	}
 }

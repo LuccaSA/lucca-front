@@ -1,39 +1,45 @@
 @use 'exports' as *;
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-	@include vars;
-	@include component;
-}
+@layer base {
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		@include vars;
+		@include component;
+	}
 
-h1 {
-	@include h1;
+	h1 {
+		@include h1;
+	}
 
-	&.mod-XXXL {
-		@include XXXL;
+	h2 {
+		@include h2;
+	}
+
+	h3 {
+		@include h3;
+	}
+
+	h4 {
+		@include h4;
+	}
+
+	h5 {
+		@include h5;
+	}
+
+	h6 {
+		@include h6;
 	}
 }
 
-h2 {
-	@include h2;
-}
-
-h3 {
-	@include h3;
-}
-
-h4 {
-	@include h4;
-}
-
-h5 {
-	@include h5;
-}
-
-h6 {
-	@include h6;
+@layer mods {
+	h1 {
+		&.mod-XXXL {
+			@include XXXL;
+		}
+	}
 }

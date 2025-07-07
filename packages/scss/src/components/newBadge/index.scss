@@ -1,10 +1,14 @@
 @use 'exports' as *;
 
 .newBadge {
-	@include vars;
-	@include component;
+	@layer components {
+		@include vars;
+		@include component;
+	}
 
-	&.mod-inverted {
-		@include inverted;
+	@layer mods {
+		&.mod-inverted {
+			@include inverted;
+		}
 	}
 }
