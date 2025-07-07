@@ -1,7 +1,5 @@
 import { CdkDialogContainer } from '@angular/cdk/dialog';
-import { NgIf } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ElementRef, inject, OnInit, Renderer2, ViewEncapsulation } from '@angular/core';
-import { ButtonComponent } from '@lucca-front/ng/button';
 import { getIntl } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { LuDialogRef } from '../model';
@@ -12,7 +10,7 @@ let nextId = 0;
 @Component({
 	selector: 'lu-dialog-header',
 	standalone: true,
-	imports: [IconComponent, ButtonComponent, NgIf],
+	imports: [IconComponent],
 	templateUrl: './dialog-header.component.html',
 	styleUrl: './dialog-header.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,

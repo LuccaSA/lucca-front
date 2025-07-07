@@ -12,6 +12,7 @@ import {
 } from '@lucca-front/ng/dialog';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { CheckboxInputComponent, TextInputComponent } from '@lucca-front/ng/forms';
+import { IconComponent } from '@lucca-front/ng/icon';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 
 export default {
@@ -35,6 +36,7 @@ export default {
 				TextInputComponent,
 				FormsModule,
 				ReactiveFormsModule,
+				IconComponent,
 			],
 		}),
 	],
@@ -49,7 +51,9 @@ export default {
 
 <ng-template #dialogTpl>
 	<lu-dialog #dialog>
-		<lu-dialog-header><h1>Template driven header</h1> You can also add more content in header</lu-dialog-header>
+		<lu-dialog-header>
+			<h1>Template driven header</h1> You can also add more content in header
+		</lu-dialog-header>
 
 		<lu-dialog-content>Template-driven content</lu-dialog-content>
 
@@ -182,5 +186,43 @@ export const WithForm: StoryObj = {
 		alert: false,
 		mode: 'default',
 		autoFocus: 'first-tabbable',
+	},
+};
+
+export const withAction: StoryObj = {
+	render: (args) => {
+		return {
+			props: {
+				config: args,
+			},
+			template: `
+<button luButton [luDialogOpen]="dialogTpl" [luDialogConfig]="config">Open Template-driven Dialog with action</button>
+
+<ng-template #dialogTpl>
+	<lu-dialog #dialog>
+		<lu-dialog-header>
+			Template driven header
+			<ng-container dialogHeaderAction>
+				<button luButton="text" size="S"><lu-icon icon="menuDots" alt="More options" /></button>
+			</ng-container>
+		</lu-dialog-header>
+
+		<lu-dialog-content>Template-driven content</lu-dialog-content>
+
+		<lu-dialog-footer>
+			<div class="footer-content">Optional footer text</div>
+			<div class="footer-actions">
+				<button type="button" luButton luDialogClose>Confirm</button>
+				<button type="button" luButton="text" luDialogDismiss>Cancel</button>
+			</div>
+		</lu-dialog-footer>
+	</lu-dialog>
+</ng-template>`,
+		};
+	},
+	args: {
+		size: 'S',
+		alert: false,
+		mode: 'default',
 	},
 };
