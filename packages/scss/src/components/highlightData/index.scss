@@ -1,34 +1,38 @@
 @use 'exports' as *;
 
 .highlightData {
-	@include vars;
-	@include component;
-
-	&.mod-light {
-		@include light;
+	@layer components {
+		@include vars;
+		@include component;
 	}
 
-	&.mod-dark {
-		@include dark;
-	}
+	@layer mods {
+		&.mod-light {
+			@include light;
+		}
 
-	&.mod-valueFirst {
-		@include valueFirst;
-	}
-
-	&.mod-S {
-		@include S;
-	}
-
-	&.mod-XS {
-		@include XS;
-	}
-
-	&:has(.highlightData-illustrations) {
-		@include illustrations;
+		&.mod-dark {
+			@include dark;
+		}
 
 		&.mod-valueFirst {
-			@include valueFirstIllustrations;
+			@include valueFirst;
+		}
+
+		&.mod-S {
+			@include S;
+		}
+
+		&.mod-XS {
+			@include XS;
+		}
+
+		&:has(.highlightData-illustrations) {
+			@include illustrations;
+
+			&.mod-valueFirst {
+				@include valueFirstIllustrations;
+			}
 		}
 	}
 }

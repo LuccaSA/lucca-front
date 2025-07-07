@@ -1,35 +1,45 @@
 @use 'exports' as *;
 
 .verticalNavigation {
-	@include vars;
-	@include component;
+	@layer components {
+		@include vars;
+		@include component;
+	}
 
-	&.mod-iconless {
-		@include iconless;
+	@layer mods {
+		&.mod-iconless {
+			@include iconless;
+		}
 	}
 }
 
 .verticalNavigation-list {
-	&.mod-child {
-		@include child;
+	@layer mods {
+		&.mod-child {
+			@include child;
+		}
 	}
 }
 
 .verticalNavigation-list-item-link {
-	&[aria-expanded='true'] {
-		@include expanded;
-	}
+	@layer states {
+		&[aria-expanded='true'] {
+			@include expanded;
+		}
 
-	&[aria-current='page'] {
-		@include active;
-	}
+		&[aria-current='page'] {
+			@include active;
+		}
 
-	&[disabled],
-	&.is-disabled {
-		@include disabled;
+		&[disabled],
+		&.is-disabled {
+			@include disabled;
+		}
 	}
 }
 
 span.verticalNavigation-list-item-link {
-	@include disabled;
+	@layer states {
+		@include disabled;
+	}
 }

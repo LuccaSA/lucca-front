@@ -67,7 +67,7 @@
 	);
 	--component-notchbox-notch-gradient9-y: var(--component-notchbox-notch-gradient8-y);
 
-	/** badge */
+	// badge
 	--component-notchbox-badge-actualWidth: var(--component-notchbox-badge-width);
 	--component-notchbox-badge-actualHeight: var(--component-notchbox-badge-height);
 	--component-notchbox-badge-left: calc(var(--component-notchbox-notch-position) - var(--component-notchbox-badge-width) / 2);
@@ -127,7 +127,7 @@
 			var(--smooth) * 2
 	);
 
-	/** badge */
+	// badge
 	--component-notchbox-badge-actualWidth: var(--component-notchbox-badge-height);
 	--component-notchbox-badge-actualHeight: var(--component-notchbox-badge-width);
 	--component-notchbox-badge-top: calc(var(--component-notchbox-notch-position) - var(--component-notchbox-badge-width) / 2);
@@ -188,7 +188,7 @@
 	--component-notchbox-box-padding-right: var(--component-notchbox-notch-padding);
 }
 
-/** pre configured with DS parameters **/
+// pre configured with DS parameters
 @mixin notchTop {
 	@include top;
 }

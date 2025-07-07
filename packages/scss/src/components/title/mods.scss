@@ -23,7 +23,7 @@
 	--sizes-verticalPadding: var(--sizes-M-verticalPadding); // Deprecated
 }
 
-/* Deprecated */
+// Deprecated
 @mixin h5 {
 	--components-title-font: 600 var(--pr-t-font-fontSize-175)/var(--pr-t-font-lineHeight-250) var(--pr-t-font-family);
 	--sizes-verticalPadding: var(--sizes-S-verticalPadding);

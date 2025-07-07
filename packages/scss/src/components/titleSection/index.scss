@@ -2,24 +2,28 @@
 @use 'exports' as *;
 
 .titleSection {
-	@include vars;
-	@include component;
+	@layer components {
+		@include vars;
+		@include component;
+	}
 }
 
 .titleSection-sub {
-	:is(h1, h1.mod-XXXL) ~ & {
-		@include XXXL;
-	}
+	@layer components {
+		:is(h1, h1.mod-XXXL) ~ & {
+			@include XXXL;
+		}
 
-	:is(.u-h1, .u-h1.mod-XXXL) ~ & {
-		@include XXXL('!important');
-	}
+		:is(.u-h1, .u-h1.mod-XXXL) ~ & {
+			@include XXXL('!important');
+		}
 
-	:is(h2, h3, h4, h5, h6) ~ & {
-		@include title;
-	}
+		:is(h2, h3, h4, h5, h6) ~ & {
+			@include title;
+		}
 
-	:is(.u-h2, .u-h3, .u-h4, .u-h5, .u-h6) ~ & {
-		@include title('!important');
+		:is(.u-h2, .u-h3, .u-h4, .u-h5, .u-h6) ~ & {
+			@include title('!important');
+		}
 	}
 }

@@ -38,8 +38,9 @@
 @mixin group {
 	@include buttonExpand;
 
-	font: var(--pr-t-font-heading-4);
 	--components-dataTable-cell-background: var(--palettes-neutral-25);
+
+	font: var(--pr-t-font-heading-4);
 }
 
 @mixin selectable {

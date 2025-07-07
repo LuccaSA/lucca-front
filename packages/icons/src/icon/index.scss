@@ -1,34 +1,38 @@
 @use 'exports' as *;
 
 .lucca-icon {
-	@include vars;
-	@include component;
-
-	&.mod-XXS {
-		@include XXS;
+	@layer components {
+		@include vars;
+		@include component;
 	}
 
-	&.mod-XS {
-		@include XS;
-	}
+	@layer mods {
+		&.mod-XXS {
+			@include XXS;
+		}
 
-	&.mod-S {
-		@include S;
-	}
+		&.mod-XS {
+			@include XS;
+		}
 
-	&.mod-M {
-		@include M;
-	}
+		&.mod-S {
+			@include S;
+		}
 
-	&.mod-L {
-		@include L;
-	}
+		&.mod-M {
+			@include M;
+		}
 
-	&.mod-XL {
-		@include XL;
-	}
+		&.mod-L {
+			@include L;
+		}
 
-	&.mod-XXL {
-		@include XXL;
+		&.mod-XL {
+			@include XL;
+		}
+
+		&.mod-XXL {
+			@include XXL;
+		}
 	}
 }

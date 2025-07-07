@@ -1,23 +1,29 @@
 @use 'exports' as *;
 
 .formLabel {
-	@include vars;
-	@include component;
-
-	&.mod-S {
-		@include S;
+	@layer components {
+		@include vars;
+		@include component;
 	}
 
-	&.mod-XS {
-		@include XS;
+	@layer mods {
+		&.mod-S {
+			@include S;
+		}
+
+		&.mod-XS {
+			@include XS;
+		}
+
+		&.mod-counter {
+			@include counter;
+		}
 	}
 
-	&.mod-counter {
-		@include counter;
-	}
-
-	&.is-error {
-		// To replace by :has as soon as it is implemented in Firefox to cover usage as legend for checkboxes and radio states.
-		@include error;
+	@layer states {
+		&.is-error {
+			// To replace by :has as soon as it is implemented in Firefox to cover usage as legend for checkboxes and radio states.
+			@include error;
+		}
 	}
 }

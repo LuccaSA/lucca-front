@@ -1,27 +1,33 @@
 @use 'exports' as *;
 
 .main {
-	&:is(.is-notScrollable, .notScrollable) {
-		@include notScrollable;
+	@layer states {
+		&:is(.is-notScrollable, .notScrollable) {
+			@include notScrollable;
+		}
 	}
 }
 
 .main-content {
-	@include vars;
-	@include component;
-
-	&.mod-withStickyHeader {
-		@include stickyHeader;
+	@layer components {
+		@include vars;
+		@include component;
 	}
 
-	&.mod-withBanner,
-	.navSide.mod-withBanner ~ &,
-	.mod-withBanner & {
-		@include banner;
-	}
+	@layer mods {
+		&.mod-withStickyHeader {
+			@include stickyHeader;
+		}
 
-	.navSide ~ &,
-	.mod-withMenu & {
-		@include menu;
+		&.mod-withBanner,
+		.navSide.mod-withBanner ~ &,
+		.mod-withBanner & {
+			@include banner;
+		}
+
+		.navSide ~ &,
+		.mod-withMenu & {
+			@include menu;
+		}
 	}
 }

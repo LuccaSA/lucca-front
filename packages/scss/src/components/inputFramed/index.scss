@@ -2,42 +2,48 @@
 @use '@lucca-front/scss/src/commons/utils/a11y';
 
 .inputFramed {
-	@include vars;
-	@include component;
-
-	&:hover {
-		@include hover;
+	@layer components {
+		@include vars;
+		@include component;
 	}
 
-	&:has(.inputFramed-header-input:checked) {
-		@include checked;
-
+	@layer states {
 		&:hover {
-			@include checkedHover;
+			@include hover;
 		}
-	}
 
-	&:has(.inputFramed-header-input:focus-visible) {
-		@include a11y.focusVisible;
-	}
+		&:has(.inputFramed-header-input:checked) {
+			@include checked;
 
-	&:has(.inputFramed-header-input[aria-invalid="true"]) {
-		@include critical;
-
-		&:hover {
-			@include criticalHover;
+			&:hover {
+				@include checkedHover;
+			}
 		}
-	}
 
-	&:has(.inputFramed-header-input:disabled) {
-		&,
-		&:hover {
-			@include disabled;
+		&:has(.inputFramed-header-input:focus-visible) {
+			@include a11y.focusVisible;
+		}
+
+		&:has(.inputFramed-header-input[aria-invalid="true"]) {
+			@include critical;
+
+			&:hover {
+				@include criticalHover;
+			}
+		}
+
+		&:has(.inputFramed-header-input:disabled) {
+			&,
+			&:hover {
+				@include disabled;
+			}
 		}
 	}
 }
 
 .inputFramedWrapper {
-	@include vars;
-	@include wrapper;
+	@layer components {
+		@include vars;
+		@include wrapper;
+	}
 }

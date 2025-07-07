@@ -4,35 +4,43 @@
 // .viewTabs is deprecated
 .segmentedControl,
 .viewTabs {
-	@include vars;
-	@include component;
-
-	&.mod-S {
-		@include S;
+	@layer components {
+		@include vars;
+		@include component;
 	}
 
-	&.mod-vertical {
-		@include vertical;
-	}
+	@layer mods {
+		&.mod-S {
+			@include S;
+		}
 
-	@include media.max('XXS') {
-		@include vertical;
+		&.mod-vertical {
+			@include vertical;
+		}
+
+		@include media.max('XXS') {
+			@include vertical;
+		}
 	}
 }
 
 // .viewTabs-item-tab is deprecated
 .segmentedControl-item-action,
 .viewTabs-item-tab {
-	.segmentedControl-item-input:checked + &,
-	&[aria-selected='true'] {
-		@include selected;
+	@layer states {
+		.segmentedControl-item-input:checked + &,
+		&[aria-selected='true'] {
+			@include selected;
+		}
 	}
 }
 
 // .viewTabs_panel is deprecated
 .segmentedControl_panel,
 .viewTabs_panel {
-	&:not(.is-active, .active) {
-		@include panelInactive;
+	@layer states {
+		&:not(.is-active, .active) {
+			@include panelInactive;
+		}
 	}
 }

@@ -3,87 +3,105 @@
 @use 'exports' as *;
 
 .navSide {
-	@include vars;
-	@include component;
+	@layer components {
+		@include vars;
+		@include component;
 
-	.appLayout-navSide & {
-		@include media.min('S') {
-			@include inAppLayoutWide;
-		}
+		.appLayout-navSide & {
+			@include media.min('S') {
+				@include inAppLayoutWide;
+			}
 
-		@include media.max('S') {
-			@include inAppLayoutNarrow;
-		}
-	}
-
-	&.mod-withBanner {
-		@include banner;
-	}
-
-	&.mod-compact {
-		@include media.min('S') {
-			@include compact;
-
-			.navSide-item-link {
-				&:hover {
-					@include compactHover;
-				}
-
-				&:is(.is-active, .active) {
-					@include compactActive;
-				}
+			@include media.max('S') {
+				@include inAppLayoutNarrow;
 			}
 		}
 	}
 
-	@include media.max('S') {
-		@include mobile;
-
-		&:not(.is-open, .open) {
-			.navSide-item {
-				&:not(.mod-mobileToggle) {
-					@include mobileHidden;
-				}
-			}
-		}
-
+	@layer mods {
 		&.mod-withBanner {
-			.navSide-item {
-				&.mod-mobileToggle {
-					@include banner;
+			@include banner;
+		}
+
+		&.mod-compact {
+			@include media.min('S') {
+				@include compact;
+
+				.navSide-item-link {
+					&:hover {
+						@include compactHover;
+					}
+
+					&:is(.is-active, .active) {
+						@include compactActive;
+					}
 				}
 			}
 		}
+	}
 
-		&:is(.is-open, .open) {
-			@include mobileOpen;
+	@layer mods {
+		@include media.max('S') {
+			@include mobile;
+		}
+	}
 
+	@layer states {
+		@include media.max('S') {
+			&:not(.is-open, .open) {
+				.navSide-item {
+					&:not(.mod-mobileToggle) {
+						@include mobileHidden;
+					}
+				}
+			}
+
+			&:is(.is-open, .open) {
+				@include mobileOpen;
+
+				&.mod-withBanner {
+					@include mobileOpenBanner;
+				}
+			}
+		}
+	}
+
+	@layer mods {
+		@include media.max('S') {
 			&.mod-withBanner {
-				@include mobileOpenBanner;
+				.navSide-item {
+					&.mod-mobileToggle {
+						@include banner;
+					}
+				}
 			}
 		}
 	}
 }
 
 .navSide-item {
-	&:not(.is-open) {
-		@include notOpen;
+	@layer mods {
+		&.mod-mobileToggle {
+			@include mobileToggle;
+		}
 	}
 
-	&.mod-mobileToggle {
-		@include mobileToggle;
-	}
+	@layer states {
+		&:not(.is-open) {
+			@include notOpen;
+		}
 
-	&:is(.is-open, .open) {
-		@include expanded;
+		&:is(.is-open, .open) {
+			@include expanded;
 
-		.navSide-item-subMenu-link {
-			&:is(:hover) {
-				@include sublinkHover;
-			}
+			.navSide-item-subMenu-link {
+				&:is(:hover) {
+					@include sublinkHover;
+				}
 
-			&:is(.is-active, .active) {
-				@include sublinkActive;
+				&:is(.is-active, .active) {
+					@include sublinkActive;
+				}
 			}
 		}
 	}
@@ -91,19 +109,23 @@
 
 .navSide-item-subMenu-link,
 .navSide-item-link {
-	&:is(.is-active, .active) {
-		@include active;
-	}
+	@layer states {
+		&:is(.is-active, .active) {
+			@include active;
+		}
 
-	&:is([aria-expanded='true']) {
-		@include expanded;
+		&:is([aria-expanded='true']) {
+			@include expanded;
+		}
 	}
 }
 
 html {
-	&:is(.hasMenu, .withMenu) {
-		@include media.max('S') {
-			@include overlay;
+	@layer states {
+		&:is(.hasMenu, .withMenu) {
+			@include media.max('S') {
+				@include overlay;
+			}
 		}
 	}
 }

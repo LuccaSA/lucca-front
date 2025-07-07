@@ -6,14 +6,22 @@
 @use 'exports' as *;
 
 .sample {
-	@include vars;
-	@include component;
-
-	&.mod-sampleModifierA {
-		@include sampleModifierA;
+	@layer components {
+		@include vars;
+		@include component;
 	}
 
-	&.is-sampleStateA {
-		@include sampleStateA;
+	@layer mods {
+		&.mod-sampleModifierA {
+			@include sampleModifierA;
+		}
 	}
+
+	@layer states {
+		&.is-sampleStateA {
+			@include sampleStateA;
+		}
+	}
+
+	color: blue;
 }
