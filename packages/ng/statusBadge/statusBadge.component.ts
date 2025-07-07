@@ -17,13 +17,11 @@ export class StatusBadgeComponent implements OnChanges {
 
 	label = input.required<string>();
 
-	size = input<'L' | 'M' | null>(null);
+	size = input<'L' | 'M'>('M');
 
 	palette = input<Palette | null>(null);
 
 	ngOnChanges(): void {
-		const size = this.size() ?? 'M';
-
-		this.#luClass.setState({ [`palette-${this.palette()}`]: !!this.palette(), [`mod-${size}`]: true });
+		this.#luClass.setState({ [`palette-${this.palette()}`]: !!this.palette(), [`mod-${this.size()}`]: true });
 	}
 }
