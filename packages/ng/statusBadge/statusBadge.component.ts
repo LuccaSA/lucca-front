@@ -22,6 +22,6 @@ export class StatusBadgeComponent implements OnChanges {
 	palette = input<Palette | null>(null);
 
 	ngOnChanges(): void {
-		this.#luClass.setState({ [`palette-${this.palette()}`]: !!this.palette(), [`mod-${this.size()}`]: !!this.size && this.size() !== 'M' });
+		this.#luClass.setState({ [`palette-${this.palette()}`]: !!this.palette(), [`mod-${this.size()}`]: !!this.size() && this.size() !== 'M' });
 	}
 }
