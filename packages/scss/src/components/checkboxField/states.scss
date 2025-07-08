@@ -27,6 +27,7 @@
 @mixin hover {
 	~ .checkboxField-icon {
 		border-color: var(--palettes-neutral-600);
+
 	}
 }
 

@@ -1,0 +1,87 @@
+@use 'exports' as *;
+
+.option {
+	@include component;
+
+	&.mod-add {
+
+	}
+
+	&.mod-title {
+
+	}
+
+	&.is-focused {
+		@include focused;
+	}
+
+	&[aria-selected="true"] {
+		@include selected;
+
+		.option-content {
+			&:hover {
+				@include selectedHover;
+			}
+
+			&:active {
+				@include selectedActive;
+			}
+		}
+	}
+
+	&[aria-disabled="true"] {
+		@include disabled;
+	}
+}
+
+.option-content {
+	&.is-hovered,
+	&:hover {
+		@include hover;
+	}
+
+	&:active {
+		@include active;
+	}
+}
+
+.optionWrapper {
+	@include vars;
+
+	.optionWrapper {
+		@include nested;
+	}
+
+	&.mod-multiple {
+		&,
+		.optionWrapper {
+			.option-content {
+				@include multiple;
+			}
+
+			.option {
+				&[aria-selected="true"] {
+					@include selectedMultiple;
+
+					&:hover,
+					&.is-hovered {
+						@include selectedMultipleHover;
+					}
+
+					&:active {
+						@include selectedMultipleActive;
+					}
+				}
+
+				&:hover,
+				&.is-hovered {
+					@include multipleHover;
+				}
+
+				&:active {
+					@include multipleActive;
+				}
+			}
+		}
+	}
+}
