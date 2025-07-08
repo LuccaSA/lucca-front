@@ -3,7 +3,7 @@ import { NumericBadgeComponent } from '@lucca-front/ng/numeric-badge';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { createTestStory, generateInputs } from 'stories/helpers/stories';
 import { BasicTEST as ButtonBasic } from './button-basic.stories';
-import { within, expect } from '@storybook/test';
+import { within, expect } from 'storybook/test';
 
 export default {
 	title: 'Documentation/Actions/Button/Angular/Counter',
