@@ -12,8 +12,13 @@ function getTemplate(args: ErrorBasicStory): string {
 		<section class="errorPage-section">
 			<div class="errorPage-section-info">
 				<h1 class="errorPage-section-info-title">Titre de l’erreur</h1>
+<<<<<<<< HEAD:stories/documentation/feedback/error-page/basic.stories.ts
+				<p class="errorPage-section-info-text">Vous n’êtes pas autorisé à consulter cette page ou cette ressource.</p>
+				<p><a href="#" class="errorPage-section-info-link">Revenir à la page précédente</a></p>
+========
 				<p class="errorPage-section-info-text">Vous n’êtes pas autorisé à consulter cette page ou cette ressource</p>
 				<a href="#">Revenir à la page précédente</a>
+>>>>>>>> 405a5f0d2 (feat(errorPage): add angular ErrorPageComponent):stories/documentation/feedback/error-page/html&css/error-page-basic.stories.ts
 			</div>
 			<img src="https://cdn.lucca.fr/errors/svg/403-lucca.svg" alt="Erreur 403" class="errorPage-section-image">
 		</section>

@@ -1,0 +1,23 @@
+<section class="errorPage-section">
+	<div class="errorPage-section-info">
+		<h1 class="errorPage-section-info-title">
+			<ng-container *luPortal="heading()" />
+		</h1>
+
+		@if (description(); as description) {
+			<p class="errorPage-section-info-text">
+				<ng-container *luPortal="description" />
+			</p>
+		}
+
+		@if (link(); as link) {
+			<a [href]="link">{{ linkLabel() }}</a>
+		} @else {
+			<button type="button" luLink (click)="backToPreviousUrl()">{{ linkLabel() }}</button>
+		}
+	</div>
+
+	@let imgSrc = `https://cdn.lucca.fr/assets/lucca/errors/${this.img()}.svg`;
+
+	<img class="errorPage-section-image" [ngSrc]="imgSrc" [width]="600" [height]="400" [alt]="imgAlt()" />
+</section>
