@@ -5,21 +5,25 @@
 	display: flex;
 	flex-direction: column;
 	gap: var(--pr-t-spacings-25);
+	scroll-margin-block: var(--pr-t-spacings-25);
 
 	@at-root ($atRoot) {
 		.option-content {
 			background-color: var(--components-option-content-backgroundColor);
 			color: var(--components-option-content-color);
-			border-radius: var(--commons-borderRadius-M);
-			padding: var(--pr-t-spacings-50) var(--pr-t-spacings-100);
-			padding-inline-start: var(--components-option-content-paddingInlineStart);
+			border-radius: var(--components-option-content-borderRadius);
+			padding: var(--components-option-content-padding);
 			transition-property: background-color;
 			transition-duration: var(--commons-animations-durations-fast);
-			position: relative;
 			display: flex;
 			align-items: flex-start;
 			gap: var(--pr-t-spacings-100);
+			font: var(--components-option-content-font);
+			font-weight: var(--components-option-content-fontWeight);
 			cursor: var(--components-option-content-cursor);
+			position: var(--components-option-content-position);
+			inset-block-start: 0;
+			z-index: 2;
 
 			&::before {
 				content: '';
@@ -43,6 +47,8 @@
 			flex-direction: column;
 			gap: var(--pr-t-spacings-25);
 			background-color: var(--palettes-neutral-0);
+			position: relative;
+			z-index: 1;
 
 			@include reset.list;
 

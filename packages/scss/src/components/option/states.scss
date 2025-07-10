@@ -1,13 +1,13 @@
 @use "@lucca-front/scss/src/components/checkboxField/exports" as checkboxField;
 
 @mixin disabled {
-	--components-option-content-backgroundColor: var(--palettes-neutral-0);
+	--components-option-content-backgroundColor: var(--pr-t-elevation-surface-raised);
 	--components-option-content-color: var(--palettes-neutral-500);
 	--components-option-content-cursor: default;
 }
 
 @mixin disabledHover {
-	--components-option-content-backgroundColor: var(--palettes-neutral-0);
+	--components-option-content-backgroundColor: var(--pr-t-elevation-surface-raised);
 }
 
 @mixin selectedDisabled {
@@ -16,6 +16,21 @@
 
 @mixin mixed {
 
+}
+
+@mixin loading {
+
+}
+
+@mixin empty {
+
+}
+
+@mixin groupByHover {
+	> .option-content {
+		--components-option-content-cursor: default;
+		--components-option-content-backgroundColor: var(--pr-t-elevation-surface-raised);
+	}
 }
 
 @mixin selected {
@@ -40,31 +55,43 @@
 }
 
 @mixin selectedMultiple {
-	.checkboxField-input {
+	.option-content-checkboxField-input  {
 		@include checkboxField.checked;
 	}
 }
 
 @mixin multipleHover {
-	.checkboxField-input {
+	.option-content-checkboxField-input  {
 		@include checkboxField.hover;
 	}
 }
 
 @mixin multipleActive {
-	.checkboxField-input {
+	.option-content-checkboxField-input  {
 		@include checkboxField.active;
 	}
 }
 
 @mixin selectedMultipleHover {
-	.checkboxField-input {
+	.option-content-checkboxField-input  {
 		@include checkboxField.checkedHover;
 	}
 }
 
 @mixin selectedMultipleActive {
-	.checkboxField-input {
+	.option-content-checkboxField-input  {
 		@include checkboxField.checkedActive;
+	}
+}
+
+@mixin multipleDisabled {
+	.option-content-checkboxField-input  {
+		@include checkboxField.disabled;
+	}
+}
+
+@mixin multipleSelectedDisabled {
+	.option-content-checkboxField-input  {
+		@include checkboxField.checkedDisabled;
 	}
 }

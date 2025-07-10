@@ -1,10 +1,22 @@
 @mixin vars {
-	--components-option-content-paddingInlineStart: var(--pr-t-spacings-100);
+	--components-option-content-paddingBlock: var(--pr-t-spacings-50);
+	--components-option-content-paddingInline: var(--pr-t-spacings-100);
+	--components-option-content-paddingBlockStart: var(--components-option-content-paddingBlock);
+	--components-option-content-paddingBlockEnd: var(--components-option-content-paddingBlock);
+	--components-option-content-paddingInlineStart: var(--components-option-content-paddingInline);
+	--components-option-content-paddingInlineEnd: var(--components-option-content-paddingInline);
+	--components-option-content-padding: var(--components-option-content-paddingBlockStart) var(--components-option-content-paddingInlineEnd) var(--components-option-content-paddingBlockEnd) var(--components-option-content-paddingInlineStart);
 	--components-option-content-checkboxField-display: none;
-	--components-option-content-backgroundColor: transparent;
+	--components-option-content-backgroundColor: var(--pr-t-elevation-surface-raised);
 	--components-option-content-color: inherit;
 	--components-option-content-cursor: pointer;
 	--components-option-content-before-backgroundColor: transparent;
 	--components-optionWrapper-padding: var(--pr-t-spacings-50);
 	--components-optionWrapper-level: 0;
+	--components-option-content-fontWeight: 400;
+	--components-option-content-font: var(--pr-t-font-body-M);
+	--components-option-content-position: relative;
+	--components-option-content-borderRadius: var(--commons-borderRadius-M);
 }
+
+
