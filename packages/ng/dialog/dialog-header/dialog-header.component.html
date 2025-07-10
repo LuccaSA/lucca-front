@@ -3,7 +3,9 @@
 		<lu-icon icon="signClose" [alt]="intl.close" />
 	</button>
 }
-<div class="dialog-inside-header-actionOptional"><ng-content select="[dialogHeaderAction]" /></div>
+@if (optionalAction()) {
+	<div class="dialog-inside-header-actionOptional"><ng-content select="[dialogHeaderAction]" /></div>
+}
 
 <div class="dialog-inside-header-container">
 	<ng-content />

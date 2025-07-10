@@ -7,6 +7,7 @@ import {
 	DialogContentComponent,
 	DialogDismissDirective,
 	DialogFooterComponent,
+	DialogHeaderAction,
 	DialogHeaderComponent,
 	DialogOpenDirective,
 } from '@lucca-front/ng/dialog';
@@ -37,6 +38,7 @@ export default {
 				FormsModule,
 				ReactiveFormsModule,
 				IconComponent,
+				DialogHeaderAction,
 			],
 		}),
 	],
