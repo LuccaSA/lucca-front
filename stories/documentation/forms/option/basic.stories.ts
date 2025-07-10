@@ -85,6 +85,15 @@ export default {
 			option
 		</div>
 	</li>
+	<li role="option" class="option" aria-disabled="true" aria-selected="true">
+		<div class="option-content">
+			<span class="option-content-checkboxField checkboxField" aria-hidden="true">
+				<span class="checkboxField-input"></span>
+				<span class="checkboxField-icon"><span class="checkboxField-icon-check"></span></span>
+			</span>
+			option
+		</div>
+	</li>
 </ul>`),
 		};
 	},

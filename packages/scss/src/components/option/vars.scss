@@ -1,8 +1,10 @@
 @mixin vars {
+	--components-option-content-paddingInlineStart: var(--pr-t-spacings-100);
 	--components-option-content-checkboxField-display: none;
 	--components-option-content-backgroundColor: transparent;
+	--components-option-content-color: inherit;
+	--components-option-content-cursor: pointer;
 	--components-option-content-before-backgroundColor: transparent;
-	--components-option-content-before-borderRadius: 0 var(--commons-borderRadius-M) var(--commons-borderRadius-M) 0;
-	--components-optionWrapper-marginInlineStart: 0;
 	--components-optionWrapper-padding: var(--pr-t-spacings-50);
+	--components-optionWrapper-level: 0;
 }

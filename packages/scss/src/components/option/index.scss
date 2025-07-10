@@ -11,10 +11,6 @@
 
 	}
 
-	&.is-focused {
-		@include focused;
-	}
-
 	&[aria-selected="true"] {
 		@include selected;
 
@@ -31,6 +27,16 @@
 
 	&[aria-disabled="true"] {
 		@include disabled;
+
+		&[aria-selected="true"] {
+			@include selectedDisabled;
+		}
+
+		.option-content {
+			&:hover {
+				@include disabledHover;
+			}
+		}
 	}
 }
 
@@ -49,7 +55,17 @@
 	@include vars;
 
 	.optionWrapper {
-		@include nested;
+		@include nestedWrapper;
+
+		.option {
+			@include nested;
+		}
+
+		.optionWrapper {
+			.option {
+				@include nested(2);
+			}
+		}
 	}
 
 	&.mod-multiple {
@@ -60,6 +76,15 @@
 			}
 
 			.option {
+				&:hover,
+				&.is-hovered {
+					@include multipleHover;
+				}
+
+				&:active {
+					@include multipleActive;
+				}
+
 				&[aria-selected="true"] {
 					@include selectedMultiple;
 
@@ -71,15 +96,6 @@
 					&:active {
 						@include selectedMultipleActive;
 					}
-				}
-
-				&:hover,
-				&.is-hovered {
-					@include multipleHover;
-				}
-
-				&:active {
-					@include multipleActive;
 				}
 			}
 		}

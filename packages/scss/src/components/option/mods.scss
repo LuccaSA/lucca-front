@@ -1,6 +1,9 @@
-@mixin nested {
-	--components-optionWrapper-marginInlineStart: var(--pr-t-spacings-200);
-	--components-option-content-before-borderRadius: var(--commons-borderRadius-full);
+@mixin nested($level: 1) {
+	--components-option-content-paddingInlineStart: calc(var(--pr-t-spacings-300) * var(--components-optionWrapper-level));
+	--components-optionWrapper-level: #{$level};
+}
+
+@mixin nestedWrapper {
 	--components-optionWrapper-padding: 0;
 }
 

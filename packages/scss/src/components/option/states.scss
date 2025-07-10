@@ -1,6 +1,20 @@
 @use "@lucca-front/scss/src/components/checkboxField/exports" as checkboxField;
 
 @mixin disabled {
+	--components-option-content-backgroundColor: var(--palettes-neutral-0);
+	--components-option-content-color: var(--palettes-neutral-500);
+	--components-option-content-cursor: default;
+}
+
+@mixin disabledHover {
+	--components-option-content-backgroundColor: var(--palettes-neutral-0);
+}
+
+@mixin selectedDisabled {
+	--components-option-content-before-backgroundColor: var(--palettes-neutral-500);
+}
+
+@mixin mixed {
 
 }
 
@@ -23,10 +37,6 @@
 
 @mixin selectedActive {
 	--components-option-content-backgroundColor: var(--palettes-product-200);
-}
-
-@mixin focused {
-
 }
 
 @mixin selectedMultiple {
