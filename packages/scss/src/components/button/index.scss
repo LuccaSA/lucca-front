@@ -51,20 +51,32 @@
 	&.mod-withIcon {
 		@include withIcon;
 
-		&.mod-S {
-			@include withIconS;
-		}
-
 		&.mod-XS {
 			@include withIconXS;
 		}
 
 		&.mod-iconOnLeft {
 			@include iconOnLeft;
+
+			&.mod-S {
+				@include iconOnLeftS;
+			}
+
+			&.mod-XS {
+				@include iconOnLeftXS;
+			}
 		}
 
 		&.mod-iconOnRight {
 			@include iconOnRight;
+
+			&.mod-S {
+				@include iconOnRightS;
+			}
+
+			&.mod-XS {
+				@include iconOnRightXS;
+			}
 		}
 	}
 
