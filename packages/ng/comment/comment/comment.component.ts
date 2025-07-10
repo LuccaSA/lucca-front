@@ -3,6 +3,7 @@ import { ChangeDetectionStrategy, Component, computed, HostBinding, inject, inpu
 import { PortalDirective } from '@lucca-front/ng/core';
 import { LuUserPictureModule } from '@lucca-front/ng/user';
 import { COMMENT_BLOCK_INSTANCE } from '../token';
+import { transformDatetimeInputToDate } from '../../date2/utils';
 
 @Component({
 	selector: 'lu-comment',
@@ -36,7 +37,7 @@ export class CommentComponent {
 
 	size = computed(() => this.#parentBlock.size());
 
-	date = input<Date>();
+	date = input<Date, Date | string>(undefined, { transform: transformDatetimeInputToDate });
 
 	content = input<string>();
 
@@ -45,7 +46,11 @@ export class CommentComponent {
 	});
 
 	dateDisplay = computed(() => {
-		const formatted = this.#intlDateTimeFormat.format(this.date());
+		const date = this.date();
+		if (!date) {
+			return '';
+		}
+		const formatted = this.#intlDateTimeFormat.format(date);
 		return `${formatted[0].toUpperCase()}${formatted.slice(1)}`;
 	});
 
