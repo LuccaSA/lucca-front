@@ -9,6 +9,7 @@ import { COMMENT_BLOCK_INSTANCE } from '../token';
 	standalone: true,
 	imports: [PortalDirective, DatePipe, LuUserPictureModule, NgTemplateOutlet],
 	templateUrl: './comment.component.html',
+	styleUrls: ['./comment.component.scss'],
 	encapsulation: ViewEncapsulation.None,
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	host: {
