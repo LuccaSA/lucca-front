@@ -68,7 +68,7 @@ export default {
 	</li>
 </ul>
 <hr class="divider pr-u-marginBlock200" />
-<ul role="tree" class="optionWrapper mod-multiple">
+<ul role="tree" class="optionWrapper -mod-multiple">
 	<li role="treeitem" class="option">
 		<div class="option-content">
 			<span class="option-content-checkboxField checkboxField" aria-hidden="true">
