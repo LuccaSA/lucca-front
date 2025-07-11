@@ -1,0 +1,121 @@
+@use 'exports' as *;
+
+.option {
+	@include vars;
+	@include component;
+
+	&.mod-add {
+		@include add;
+	}
+
+	&.mod-groupBy {
+		@include groupBy;
+
+		> .option-content:hover {
+			@include groupByHover;
+		}
+	}
+
+	&[aria-selected="true"] {
+		@include selected;
+
+		.option-content {
+			&:hover {
+				@include selectedHover;
+			}
+
+			&:active {
+				@include selectedActive;
+			}
+		}
+	}
+
+	&[aria-disabled="true"] {
+		@include disabled;
+
+		&[aria-selected="true"] {
+			@include selectedDisabled;
+		}
+
+		.option-content {
+			&:hover {
+				@include disabledHover;
+			}
+		}
+	}
+}
+
+.option-content {
+	&.is-hovered,
+	&:hover {
+		@include hover;
+	}
+
+	&:active {
+		@include active;
+	}
+}
+
+.optionWrapper {
+	@include varsWrapper;
+
+	.optionWrapper {
+		@include nestedWrapper;
+		@include nested;
+
+		.optionWrapper {
+			@include nested(2);
+
+			.optionWrapper {
+				@include nested(3);
+			}
+		}
+	}
+
+	&.mod-loading {
+		@include loading;
+	}
+
+	&.mod-empty {
+		@include empty;
+	}
+
+	&.mod-multiple {
+		&,
+		.optionWrapper {
+			@include multiple;
+
+			.option {
+				&:hover,
+				&.is-hovered {
+					@include multipleHover;
+				}
+
+				&:active {
+					@include multipleActive;
+				}
+
+				&[aria-selected="true"] {
+					@include multipleSelected;
+
+					&:hover,
+					&.is-hovered {
+						@include multipleSelectedHover;
+					}
+
+					&:active {
+						@include multipleSelectedActive;
+					}
+				}
+
+				&[aria-disabled="true"] {
+					@include multipleDisabled;
+
+					&[aria-selected="true"] {
+						@include multipleSelectedDisabled;
+					}
+				}
+			}
+		}
+	}
+}
