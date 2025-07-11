@@ -26,7 +26,7 @@
 			z-index: 2;
 
 			&::before {
-				content: '';
+				content: var(--components-option-content-before-content);
 				position: absolute;
 				inset-block: 0;
 				inset-inline-start: calc(var(--pr-t-spacings-50) * -1);

@@ -27,10 +27,8 @@
 }
 
 @mixin groupByHover {
-	> .option-content {
-		--components-option-content-cursor: default;
-		--components-option-content-backgroundColor: var(--pr-t-elevation-surface-raised);
-	}
+	--components-option-content-cursor: default;
+	--components-option-content-backgroundColor: var(--pr-t-elevation-surface-raised);
 }
 
 @mixin selected {
@@ -54,7 +52,7 @@
 	--components-option-content-backgroundColor: var(--palettes-product-200);
 }
 
-@mixin selectedMultiple {
+@mixin multipleSelected {
 	.option-content-checkboxField-input  {
 		@include checkboxField.checked;
 	}
@@ -72,13 +70,13 @@
 	}
 }
 
-@mixin selectedMultipleHover {
+@mixin multipleSelectedHover {
 	.option-content-checkboxField-input  {
 		@include checkboxField.checkedHover;
 	}
 }
 
-@mixin selectedMultipleActive {
+@mixin multipleSelectedActive {
 	.option-content-checkboxField-input  {
 		@include checkboxField.checkedActive;
 	}

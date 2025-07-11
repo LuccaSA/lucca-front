@@ -1,6 +1,6 @@
 @mixin nested($level: 1) {
 	--components-optionWrapper-level: #{$level};
-	--components-option-content-paddingInlineStart: calc(var(--pr-t-spacings-300) * var(--components-optionWrapper-level));
+	--components-optionWrapper-childrenPaddingInlineStart: calc(var(--pr-t-spacings-300) * var(--components-optionWrapper-level));
 }
 
 @mixin nestedWrapper {
@@ -8,8 +8,8 @@
 }
 
 @mixin multiple {
-	--components-option-content-before-backgroundColor: transparent;
-	--components-option-content-checkboxField-display: grid;
+	--components-optionWrapper-childrenBefore-content: none;
+	--components-optionWrapper-childrenCheckboxField-display: grid;
 }
 
 @mixin groupBy {
@@ -18,14 +18,10 @@
 	--components-option-content-position: sticky;
 	--components-option-content-borderRadius: 0;
 	--components-option-content-paddingBlockStart: var(--pr-t-spacings-100);
-	--components-option-content-padding: var(--components-option-content-paddingBlockStart) var(--components-option-content-paddingInlineEnd) var(--components-option-content-paddingBlockEnd) var(--components-option-content-paddingInlineStart);
-
-	> .option-content {
-		--components-option-content-checkboxField-display: none !important;
-	}
+	--components-option-content-checkboxField-display: none;
 
 	.optionWrapper {
-		--components-option-content-paddingInlineStart: var(--pr-t-spacings-100);
+		--components-optionWrapper-childrenPaddingInlineStart: var(--pr-t-spacings-100);
 	}
 }
 

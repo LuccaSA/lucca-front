@@ -1,6 +1,7 @@
 @use 'exports' as *;
 
 .option {
+	@include vars;
 	@include component;
 
 	&.mod-add {
@@ -10,8 +11,7 @@
 	&.mod-groupBy {
 		@include groupBy;
 
-
-		&:hover {
+		> .option-content:hover {
 			@include groupByHover;
 		}
 	}
@@ -57,7 +57,7 @@
 }
 
 .optionWrapper {
-	@include vars;
+	@include varsWrapper;
 
 	.optionWrapper {
 		@include nestedWrapper;
@@ -65,6 +65,10 @@
 
 		.optionWrapper {
 			@include nested(2);
+
+			.optionWrapper {
+				@include nested(3);
+			}
 		}
 	}
 
@@ -79,9 +83,7 @@
 	&.mod-multiple {
 		&,
 		.optionWrapper {
-			.option-content {
-				@include multiple;
-			}
+			@include multiple;
 
 			.option {
 				&:hover,
@@ -94,15 +96,15 @@
 				}
 
 				&[aria-selected="true"] {
-					@include selectedMultiple;
+					@include multipleSelected;
 
 					&:hover,
 					&.is-hovered {
-						@include selectedMultipleHover;
+						@include multipleSelectedHover;
 					}
 
 					&:active {
-						@include selectedMultipleActive;
+						@include multipleSelectedActive;
 					}
 				}
 
