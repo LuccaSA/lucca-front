@@ -9,12 +9,14 @@
 	(click)="toggleOption.emit(branch().value)"
 />
 @for (child of branch().children; track $index) {
-	<lu-tree-branch
-		[branch]="child"
-		[optionTpl]="optionTpl()"
-		[optionIndex]="optionIndex() * 1000"
-		[optionComparer]="optionComparer()"
-		[selectedOptions]="selectedOptions()"
-		(toggleOption)="toggleOption.emit($event)"
-	/>
+	<div style="padding-left: 1rem">
+		<lu-tree-branch
+			[branch]="child"
+			[optionTpl]="optionTpl()"
+			[optionIndex]="optionIndex() * 1000"
+			[optionComparer]="optionComparer()"
+			[selectedOptions]="selectedOptions()"
+			(toggleOption)="toggleOption.emit($event)"
+		/>
+	</div>
 }
