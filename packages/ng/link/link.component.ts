@@ -1,7 +1,7 @@
-import { booleanAttribute, Component, effect, ElementRef, HostBinding, inject, input, Input, OnDestroy, Renderer2, signal, ViewEncapsulation } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { booleanAttribute, Component, effect, ElementRef, HostBinding, inject, input, Input, Renderer2, ViewEncapsulation } from '@angular/core';
 import { getIntl } from '@lucca-front/ng/core';
 import { LU_LINK_TRANSLATIONS } from './link.translate';
+import { LuRouterLink } from './lu-router-link';
 
 @Component({
 	// eslint-disable-next-line @angular-eslint/component-selector
@@ -13,21 +13,19 @@ import { LU_LINK_TRANSLATIONS } from './link.translate';
 	host: { class: 'link' },
 	hostDirectives: [
 		{
-			directive: RouterLink,
+			directive: LuRouterLink,
 			inputs: ['preserveFragment', 'skipLocationChange', 'replaceUrl', 'queryParams', 'fragment', 'queryParamsHandling', 'state', 'info', 'relativeTo'],
 		},
 	],
 })
-export class LinkComponent implements OnDestroy {
+export class LinkComponent {
 	intl = getIntl(LU_LINK_TRANSLATIONS);
 
 	#elementRef = inject<ElementRef<HTMLLinkElement>>(ElementRef);
 	#renderer = inject(Renderer2);
-	#routerLink = inject(RouterLink);
+	#routerLink = inject(LuRouterLink);
 
-	#observer: MutationObserver;
-
-	routerLinkCommands = input<RouterLink['routerLink'] | null>(null, { alias: 'luLink' });
+	routerLinkCommands = input<LuRouterLink['routerLink'] | null>(null, { alias: 'luLink' });
 
 	disabled = input(false, { transform: booleanAttribute });
 
@@ -66,13 +64,7 @@ export class LinkComponent implements OnDestroy {
 	hrefBackup: string;
 
 	constructor() {
-		const href = signal<string>(this.#elementRef.nativeElement.href);
-
-		this.#observer = new MutationObserver(() => {
-			href.set(this.#elementRef.nativeElement.href);
-		});
-
-		this.#observer.observe(this.#elementRef.nativeElement, { attributes: true, attributeFilter: ['href'] });
+		const href = this.#routerLink.publicReactiveHref;
 
 		effect(() => {
 			if (href()) {
@@ -94,9 +86,5 @@ export class LinkComponent implements OnDestroy {
 				this.#renderer.setAttribute(this.#elementRef.nativeElement, 'href', this.hrefBackup);
 			}
 		});
-	}
-
-	ngOnDestroy(): void {
-		this.#observer.disconnect();
 	}
 }
