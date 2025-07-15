@@ -58,7 +58,7 @@ export class PopoverContentComponent implements AfterViewInit {
 
 	ngAfterViewInit(): void {
 		this.#focusManager.attachAnchors();
-		if (!this.config.disableFocusManipulation) {
+		if (!this.config.disableCloseButtonFocus) {
 			void this.#focusManager.focusInitialElementWhenReady();
 		}
 	}
@@ -69,7 +69,7 @@ export class PopoverContentComponent implements AfterViewInit {
 
 	@HostListener('window:keydown.escape')
 	close(): void {
-		if (!this.config.disableFocusManipulation) {
+		if (!this.config.disableInitialTriggerFocus) {
 			// Focus initial trigger element
 			this.config.triggerElement.focus();
 		}
