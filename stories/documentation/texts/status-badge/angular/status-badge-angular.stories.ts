@@ -23,7 +23,7 @@ export default {
 			description: '[v19.2] Neutral',
 		},
 		size: {
-			options: ['', 'L'],
+			options: ['', 'M', 'L'],
 			control: {
 				type: 'select',
 			},
