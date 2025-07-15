@@ -10,7 +10,10 @@ import { LuRouterLink } from './lu-router-link';
 	templateUrl: './link.component.html',
 	styleUrls: ['./link.component.scss'],
 	encapsulation: ViewEncapsulation.None,
-	host: { class: 'link' },
+	host: {
+		class: 'link',
+		'[attr.href]': 'routerLink.publicReactiveHref()',
+	},
 	hostDirectives: [
 		{
 			directive: LuRouterLink,
@@ -20,7 +23,9 @@ import { LuRouterLink } from './lu-router-link';
 })
 export class LinkComponent {
 	intl = getIntl(LU_LINK_TRANSLATIONS);
-	#routerLink = inject(LuRouterLink);
+	routerLink = inject(LuRouterLink);
+
+	luHref = input('', { alias: 'href' });
 
 	routerLinkCommands = input<LuRouterLink['routerLink'] | null>(null, { alias: 'luLink' });
 
@@ -61,29 +66,25 @@ export class LinkComponent {
 	hrefBackup: string;
 
 	constructor() {
-		const href = this.#routerLink.luHref;
+		const href = this.luHref;
 
 		effect(() => {
 			if (href()) {
 				this.hrefBackup = href();
+				this.routerLink.publicReactiveHref.set(this.hrefBackup);
 			}
 			if (this.disabled()) {
 				if (this.routerLinkCommands()) {
-					this.#routerLink.routerLink = null;
-					this.#routerLink.publicReactiveHref.set(null);
-					// this.#renderer.removeAttribute(this.#elementRef.nativeElement, 'href');
-				} else {
-					this.#routerLink.publicReactiveHref.set(null);
-					// this.#renderer.removeAttribute(this.#elementRef.nativeElement, 'href');
+					this.routerLink.routerLink = null;
 				}
+				this.routerLink.publicReactiveHref.set(null);
 			} else if (this.routerLinkCommands()) {
-				this.#routerLink.routerLink = this.routerLinkCommands();
+				this.routerLink.routerLink = this.routerLinkCommands();
 				// We need to do this in order to have `routerLink` update the value for `href`:
 				// See https://github.com/angular/angular/blob/main/packages/router/src/directives/router_link.ts#L281
-				this.#routerLink.ngOnChanges({});
+				this.routerLink.ngOnChanges({});
 			} else if (!href() && this.hrefBackup) {
-				this.#routerLink.publicReactiveHref.set(this.hrefBackup);
-				// this.#renderer.setAttribute(this.#elementRef.nativeElement, 'href', this.hrefBackup);
+				this.routerLink.publicReactiveHref.set(this.hrefBackup);
 			}
 		});
 	}
