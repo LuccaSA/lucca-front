@@ -1,0 +1,30 @@
+@mixin nested($level: 1) {
+	--components-optionWrapper-level: #{$level};
+	--components-optionWrapper-childrenPaddingInlineStart: calc(var(--pr-t-spacings-300) * var(--components-optionWrapper-level));
+}
+
+@mixin nestedWrapper {
+	--components-optionWrapper-padding: 0;
+}
+
+@mixin multiple {
+	--components-optionWrapper-childrenBefore-content: none;
+	--components-optionWrapper-childrenCheckboxField-display: grid;
+}
+
+@mixin groupBy {
+	--components-option-content-fontWeight: var(--pr-t-font-fontWeight-semibold);
+	--components-option-content-font: var(--pr-t-font-body-S);
+	--components-option-content-position: sticky;
+	--components-option-content-borderRadius: 0;
+	--components-option-content-paddingBlockStart: var(--pr-t-spacings-100);
+	--components-option-content-checkboxField-display: none;
+
+	.optionWrapper {
+		--components-optionWrapper-childrenPaddingInlineStart: var(--pr-t-spacings-100);
+	}
+}
+
+@mixin add {
+
+}
