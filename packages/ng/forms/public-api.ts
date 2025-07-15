@@ -11,6 +11,7 @@ export * from './number-input/number-input.component';
 export * from './radio-group-input/radio-group-input.component';
 export * from './radio-group-input/radio/radio.component';
 export * from './switch-input/switch-input.component';
+export * from './text-input/text-input-addon';
 export * from './text-input/text-input.component';
 export * from './textarea-input/textarea-input.component';
 
