@@ -26,6 +26,7 @@ class SecondPageComponent {}
 		<br />
 		<a luLink [href]="url" target="_blank" external>Go to external page</a>
 		<br />
+		<a [luLink]="url" target="_blank" external>Go to external page as luLink input</a>
 		<router-outlet></router-outlet>
 	`,
 	imports: [LinkComponent, RouterOutlet],
