@@ -256,6 +256,10 @@ export class LuTooltipTriggerDirective implements AfterContentInit, OnDestroy {
 		if (!isNativelyFocusableTag && !hasATabIndex) {
 			this.#renderer.setAttribute(this.#host.nativeElement, 'tabindex', tabindex.toString());
 		}
+
+		if (!isNativelyFocusableTag && !this.luTooltipWhenEllipsis() && !this.luTooltipOnlyForDisplay) {
+			this.#renderer.setAttribute(this.#host.nativeElement, 'role', 'button');
+		}
 	}
 
 	ngAfterContentInit(): void {

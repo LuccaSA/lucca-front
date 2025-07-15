@@ -69,6 +69,12 @@ export default {
 	luTooltip="👋 Hello"
 	${generateInputs(args, argTypes)}
 >Tooltip au survol</button>
+<h3>Tooltip sur un texte</h3>
+<span
+
+	luTooltip="👋 Hello"
+	${generateInputs(args, argTypes)}
+>Tooltip au survol</span>
 <h3>Tooltip et ellipse</h3>
 <div
 	class="u-ellipsis"
