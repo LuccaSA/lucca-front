@@ -21,9 +21,8 @@ export default {
 
 export const Basic: StoryObj<PaginationComponent & { isFirstPage: boolean; isLastPage: boolean; from: number; to: number; itemsCount: number; mod: string }> = {
 	render: (args, { argTypes }) => {
-		const { isFirstPage, isLastPage, ...inputArgs } = args;
 		return {
-			template: cleanupTemplate(`<lu-pagination [isFirstPage]="${isFirstPage}" [isLastPage]="${isLastPage}" ${generateInputs(inputArgs, argTypes)} />`),
+			template: cleanupTemplate(`<lu-pagination ${generateInputs(args, argTypes)} />`),
 		};
 	},
 	args: {

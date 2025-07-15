@@ -17,4 +17,8 @@
 	&.mod-outlined {
 		@include outlined;
 	}
+
+	&.mod-disabled {
+		@include disabled;
+	}
 }

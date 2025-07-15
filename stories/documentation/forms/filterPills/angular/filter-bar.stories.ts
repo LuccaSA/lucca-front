@@ -1,17 +1,17 @@
 import { allLegumes, FilterLegumesPipe } from '@/stories/forms/select/select.utils';
+import { provideHttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { ButtonComponent } from '@lucca-front/ng/button';
+import { LuCoreSelectApiV4Directive } from '@lucca-front/ng/core-select/api';
 import { DateInputComponent, DateRangeInputComponent } from '@lucca-front/ng/date2';
 import { FilterBarComponent, FilterPillAddonAfterDirective, FilterPillAddonBeforeDirective, FilterPillComponent } from '@lucca-front/ng/filter-pills';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { CheckboxInputComponent, TextInputComponent } from '@lucca-front/ng/forms';
+import { LuMultiSelectInputComponent } from '@lucca-front/ng/multi-select';
 import { NumericBadgeComponent } from '@lucca-front/ng/numeric-badge';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { StoryModelDisplayComponent } from '../../../../helpers/story-model-display.component';
-import { provideHttpClient } from '@angular/common/http';
-import { LuCoreSelectApiV4Directive } from '@lucca-front/ng/core-select/api';
-import { LuMultiSelectInputComponent } from '@lucca-front/ng/multi-select';
 
 export default {
 	title: 'Documentation/Forms/FiltersPills/FilterBar/Angular',
@@ -42,7 +42,7 @@ export default {
 	render: (args, { argTypes }) => {
 		return {
 			props: {
-				example1: null,
+				example1: new Date(),
 				examplePeriod: null,
 				legumes: allLegumes,
 			},
@@ -83,7 +83,7 @@ export default {
 		<lu-date-range-input [(ngModel)]="examplePeriod"/>
 	</lu-filter-pill>
 	<lu-filter-pill label="Multi ApiV4" optional name="multiv4">
-		<lu-multi-select [ngModel]="[]" apiV4="/organization/structure/api/establishments"	filterPillLabelPlural="établissements" />
+		<lu-multi-select [ngModel]="[]" apiV4="/organization/structure/api/establishments" filterPillLabelPlural="établissements" />
 	</lu-filter-pill>
 	<lu-form-field label="Test" hiddenLabel>
 		<lu-text-input [ngModel]="example2" [ngModelOptions]="{standalone: true}" hasSearchIcon hasClearer />

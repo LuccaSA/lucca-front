@@ -14,7 +14,7 @@
 				/>
 			}
 			@if (tag()) {
-				<span class="pr-u-marginInlineStart50 tag palette-product">{{ tag() }}</span>
+				<span class="tag formLabel-tag">{{ tag() }}</span>
 			}
 		</legend>
 		<ng-container *ngTemplateOutlet="projectionTpl"></ng-container>
@@ -44,7 +44,7 @@
 			<lu-icon class="formLabel-info" icon="signHelp" [alt]="'?'" [luTooltip]="tooltip()" [color]="invalidStatus() ? 'error' : 'inherit'" />
 		}
 		@if (tag()) {
-			<span class="pr-u-marginInlineStart50 tag palette-product">{{ tag() }}</span>
+			<span class="formLabel-tag tag">{{ tag() }}</span>
 		}
 		@if (counter() > 0) {
 			<span class="formLabel-counter" [class.u-textError]="contentLength > counter()" id="{{ id() }}-counter" aria-live="polite">
