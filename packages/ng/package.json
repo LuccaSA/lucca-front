@@ -38,7 +38,8 @@
     "@lexical/rich-text": "^0.30.0",
     "@lexical/selection": "^0.30.0",
     "@lexical/utils": "^0.30.0",
-    "lexical": "^0.30.0"
+    "lexical": "^0.30.0",
+    "@ngx-formly/core": "^6.3.11"
   },
   "peerDependenciesMeta": {
     "lexical": {
@@ -63,6 +64,9 @@
       "optional": true
     },
     "@lexical/utils": {
+      "optional": true
+    },
+    "@ngx-formly/core": {
       "optional": true
     }
   },
