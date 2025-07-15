@@ -178,6 +178,13 @@ export class FilterPillComponent {
 				this.displayed.set(true);
 			}
 		});
+
+		effect(() => {
+			// When an optional filter pill is hidden, its value must be clear
+			if (this.optional() && !this.displayed() && !untracked(this.inputIsEmpty)) {
+				this.clear();
+			}
+		});
 	}
 
 	@HostListener('click')
