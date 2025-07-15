@@ -24,8 +24,11 @@ export default {
 			props: {
 				tick$: timer(0, 1000),
 			},
-			template: `<a href="${href}" luLink${externe}${disable}>${label}</a><br />
-<a luLink="${routerLink}"${externe}${disable}>${label}</a>`,
+			template: `
+Internal link: <a luLink="${routerLink}"${externe}${disable}>${label}</a>
+<br>
+External link: <a href="${href}" luLink${externe}${disable}>${label}</a>
+`,
 		};
 	},
 	argTypes: {

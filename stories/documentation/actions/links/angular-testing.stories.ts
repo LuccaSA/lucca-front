@@ -1,9 +1,7 @@
-import { AsyncPipe } from '@angular/common';
-import { provideRouter, RouterLink, RouterOutlet, Routes } from '@angular/router';
-import { LinkComponent } from '@lucca-front/ng/link';
-import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { timer } from 'rxjs';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { provideRouter, RouterOutlet, Routes } from '@angular/router';
+import { LinkComponent } from '@lucca-front/ng/link';
+import { applicationConfig, Meta, StoryObj } from '@storybook/angular';
 
 @Component({
 	selector: 'first-page',
@@ -20,13 +18,13 @@ class SecondPageComponent {}
 @Component({
 	selector: 'base-component',
 	template: `
-		<a luLink="/first">Go to first page</a>
-		<br />
-		<a luLink="/second">Go to second page</a>
-		<br />
-		<a luLink [href]="url" target="_blank" external>Go to external page</a>
-		<br />
-		<a [luLink]="url" target="_blank" external>Go to external page as luLink input</a>
+		<div>
+			<a luLink="/first">Go to /first</a>
+			<br />
+			<a luLink="/second">Go to /second</a>
+			<br />
+			<a luLink [href]="url" target="_blank" external>Go to https://example.org</a>
+		</div>
 		<router-outlet></router-outlet>
 	`,
 	imports: [LinkComponent, RouterOutlet],
