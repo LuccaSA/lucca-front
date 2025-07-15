@@ -1,5 +1,5 @@
 import { A11yModule } from '@angular/cdk/a11y';
-import { AsyncPipe, NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
+import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
 import { AfterViewInit, ChangeDetectionStrategy, Component, forwardRef, inject, signal, TrackByFunction } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { getIntl, PortalDirective } from '@lucca-front/ng/core';
@@ -22,6 +22,8 @@ import { LU_MULTI_SELECT_TRANSLATIONS } from '../select.translate';
 import { LuOptionsGroupContextPipe } from './option-group-context.pipe';
 import { LuIsOptionSelectedPipe } from './option-selected.pipe';
 import { IconComponent } from '@lucca-front/ng/icon';
+import { TreeDisplayPipe } from '../../core-select/tree/tree-display.pipe';
+import { TreeBranchComponent } from '../../core-select/tree/tree-branch/tree-branch.component';
 
 @Component({
 	selector: 'lu-select-panel',
@@ -34,8 +36,6 @@ import { IconComponent } from '@lucca-front/ng/icon';
 		AsyncPipe,
 		FormsModule,
 		LuIsOptionSelectedPipe,
-		NgIf,
-		NgFor,
 		ɵLuOptionComponent,
 		ɵLuOptionGroupPipe,
 		NgTemplateOutlet,
@@ -43,6 +43,8 @@ import { IconComponent } from '@lucca-front/ng/icon';
 		LuOptionsGroupContextPipe,
 		ɵCoreSelectPanelElement,
 		IconComponent,
+		TreeDisplayPipe,
+		TreeBranchComponent,
 	],
 	providers: [
 		CoreSelectKeyManager,
@@ -60,6 +62,7 @@ export class LuMultiSelectPanelComponent<T> implements AfterViewInit, CoreSelect
 
 	options$ = this.selectInput.options$;
 	grouping = this.selectInput.grouping;
+	tree = this.selectInput.tree;
 	loading$ = this.selectInput.loading$;
 	searchable = this.selectInput.searchable;
 	optionComparer = this.selectInput.optionComparer;
