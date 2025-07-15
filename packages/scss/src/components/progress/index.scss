@@ -1,18 +1,24 @@
 @use 'exports' as *;
 
 .progress {
-	@include vars;
-	@include component;
-
-	&.mod-indeterminate {
-		@include indeterminate;
+	@layer components {
+		@include vars;
+		@include component;
 	}
 
-	&:is(.is-success, .success, .palette-success) {
-		@include success;
+	@layer mods {
+		&.mod-indeterminate {
+			@include indeterminate;
+		}
 	}
 
-	&:is(.is-error, .error, .palette-error) {
-		@include error;
+	@layer states {
+		&:is(.is-success, .success, .palette-success) {
+			@include success;
+		}
+
+		&:is(.is-error, .error, .palette-error) {
+			@include error;
+		}
 	}
 }

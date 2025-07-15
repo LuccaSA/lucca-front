@@ -1,9 +1,12 @@
 @use 'exports' as *;
 
 .box {
-	@include vars;
-	@include component;
+	@layer components {
+		@include vars;
+		@include component;
+	}
 
+	@layer mods {
 	// .mod-grey is deprecated
 	&.mod-neutral,
 	&.mod-grey {
@@ -18,8 +21,11 @@
 	&.mod-toggle {
 		@include toggle;
 	}
+	}
 }
 
 .box-arrow {
-	@include arrow;
+	@layer components {
+		@include arrow;
+	}
 }

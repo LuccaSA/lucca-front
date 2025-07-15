@@ -6,13 +6,13 @@
 
 
 .addOption {
+	justify-content: left;
+
 	@include button.vars;
 	@include button.component;
 	@include button.block;
 	@include button.withIcon;
 	@include button.text;
-
-	justify-content: left;
 
 	&.is-highlighted {
 		--components-button-color: var(--palettes-700, var(--palettes-neutral-700));
