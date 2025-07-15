@@ -171,6 +171,13 @@ export class FilterPillComponent {
 				});
 			}
 		});
+
+		effect(() => {
+			// When an optional filter pill has a value, it must be displayed
+			if (this.optional() && !this.inputIsEmpty() && !untracked(this.displayed)) {
+				this.displayed.set(true);
+			}
+		});
 	}
 
 	@HostListener('click')
