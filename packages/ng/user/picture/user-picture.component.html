@@ -2,6 +2,6 @@
 	<img class="avatar-picture" [src]="pictureHref" alt="" (error)="pictureError()" [loading]="imageLoadingAttribute" />
 } @else {
 	<div class="avatar-picture" [ngStyle]="style">
-		<span class="avatar-picture-initials">{{ initials }}</span>
+		<span class="avatar-picture-initials" translate="no">{{ initials }}</span>
 	</div>
 }

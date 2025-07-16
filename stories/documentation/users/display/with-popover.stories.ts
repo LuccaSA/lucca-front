@@ -21,7 +21,7 @@ export default {
 			props: {
 				finn: bob,
 			},
-			template: `<button type="button" class="userPopover_trigger" [luUserPopover]="finn">{{ finn | luUserDisplay : 'lf' }}</button>`,
+			template: `<button type="button" class="userPopover_trigger" [luUserPopover]="finn" translate="no">{{ finn | luUserDisplay : 'lf' }}</button>`,
 		};
 	},
 } as Meta;
