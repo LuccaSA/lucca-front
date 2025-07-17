@@ -1,4 +1,4 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, HostBinding, inject, input, Input, OnChanges, SimpleChanges, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, inject, input, Input, OnChanges, SimpleChanges, ViewEncapsulation } from '@angular/core';
 import { LuClass, Palette } from '@lucca-front/ng/core';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 
@@ -12,6 +12,8 @@ import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 	providers: [LuClass],
 	host: {
 		class: 'numericBadge',
+		'[class.is-loading]': 'loading()',
+		'[attr.aria-hidden]': 'loading()',
 	},
 	encapsulation: ViewEncapsulation.None,
 })
@@ -30,14 +32,7 @@ export class NumericBadgeComponent implements OnChanges {
 	 */
 	size: 'XS' | 'S' | 'M';
 
-	@HostBinding('class.is-loading')
-	@Input()
-	loading: boolean = false;
-
-	@HostBinding('attr.aria-hidden')
-	get ariaHidden() {
-		return this.loading;
-	}
+	loading = input(false, { transform: booleanAttribute });
 
 	@Input()
 	maxValue: number = 999;
