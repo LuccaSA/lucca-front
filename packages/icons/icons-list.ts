@@ -4,6 +4,9 @@
  ***********************************************/
 
 export const IconsList = [
+	{ icon: 'mapTripStep', deprecated: false },
+	{ icon: 'officeMicrophone', deprecated: false },
+	{ icon: 'playerRecording', deprecated: false },
 	{ icon: 'app', deprecated: false },
 	{ icon: 'apps', deprecated: true },
 	{ icon: 'nineTiles', deprecated: true },
