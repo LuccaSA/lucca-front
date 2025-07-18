@@ -4,6 +4,9 @@
  ***********************************************/
 
 export type LuccaIcon =
+	| 'mapTripStep'
+	| 'officeMicrophone'
+	| 'playerRecording'
 	| 'app'
 	| 'apps'
 	| 'nineTiles'
