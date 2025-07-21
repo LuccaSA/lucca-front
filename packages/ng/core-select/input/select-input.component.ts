@@ -30,6 +30,8 @@ import { LuSelectPanelRef } from '../panel';
 import { CoreSelectAddOptionStrategy, LuOptionComparer, LuOptionContext, SELECT_LABEL, SELECT_LABEL_ID } from '../select.model';
 import { LU_CORE_SELECT_TRANSLATIONS } from '../select.translate';
 import { TreeSelectDirective } from '../tree/tree-select.directive';
+import { TreeGenerator } from '../tree/tree-generator';
+import { TreeNode } from '../tree/model';
 
 export const coreSelectDefaultOptionComparer: LuOptionComparer<unknown> = (option1, option2) => JSON.stringify(option1) === JSON.stringify(option2);
 export const coreSelectDefaultOptionKey: (option: unknown) => unknown = (option) => option;
@@ -153,7 +155,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	displayerTpl = computed(() => this.valueTpl() || this.optionTpl());
 
 	grouping?: LuOptionGrouping<TOption, unknown>;
-	tree?: TreeSelectDirective<TOption, unknown>;
+	treeGenerator?: TreeGenerator<TOption, TreeNode<TOption>>;
 
 	@Output() clueChange = new EventEmitter<string>();
 	@Output() nextPage = new EventEmitter<void>();

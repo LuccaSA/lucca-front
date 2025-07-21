@@ -57,14 +57,17 @@
 					<ng-template [ngTemplateOutlet]="optionsList" [ngTemplateOutletContext]="{ $implicit: ctx.options }" />
 				}
 				<ng-template #optionsList let-options let-groupIndex="groupIndex">
-					@if (tree) {
-						@for (branch of options | luTreeDisplay: tree.groupingFn(); let index = $index; track trackOptionsBy(index, branch.value)) {
+					@if (treeGenerator) {
+						@for (branch of options | luTreeDisplay: treeGenerator; let index = $index; track trackOptionsBy(index, branch.value)) {
 							<lu-tree-branch
 								[branch]="branch"
 								[optionTpl]="optionTpl()"
 								[selectedOptions]="selectedOptions"
 								[optionComparer]="optionComparer"
 								[optionIndex]="index"
+								(toggleOne)="toggleOption($event)"
+								(selectMany)="toggleOptions($event, [])"
+								(unselectMany)="toggleOptions([], $event)"
 							></lu-tree-branch>
 						}
 					} @else {

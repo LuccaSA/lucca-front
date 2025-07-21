@@ -50,8 +50,7 @@ export class LuOptionComponent<T> implements AfterViewInit, OnDestroy, OnInit {
 
 	groupIndex = input<number>();
 
-	@Input()
-	public optionIndex = 0;
+	public optionIndex = input.required({ transform: (value: string | number) => `${value}` });
 
 	@Input()
 	scrollIntoViewOptions: ScrollIntoViewOptions = {};
@@ -67,7 +66,7 @@ export class LuOptionComponent<T> implements AfterViewInit, OnDestroy, OnInit {
 	get id(): string {
 		const groupPart = this.groupIndex() === undefined ? `` : `-group-${this.groupIndex()}`;
 
-		return `lu-select-${this.selectId}${groupPart}-option-${this.optionIndex}`;
+		return `lu-select-${this.selectId}${groupPart}-option-${this.optionIndex()}`;
 	}
 
 	protected elementRef = inject<ElementRef<HTMLElement>>(ElementRef);

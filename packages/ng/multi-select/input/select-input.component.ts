@@ -83,7 +83,7 @@ export class LuMultiSelectInputComponent<T> extends ALuSelectInputComponent<T, T
 
 	filterPillPanelAnchorRef = viewChild('filterPillPanelAnchor', { read: ViewContainerRef });
 
-	override isFilterPillEmpty = computed(() => this.valueSignal()?.length === 0);
+	override isFilterPillEmpty = computed(() => !this.valueSignal() || this.valueSignal()?.length === 0);
 
 	override _value: T[] = [];
 
