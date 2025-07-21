@@ -1,22 +1,24 @@
 <lu-select-option
 	luCoreSelectPanelElement
-	[option]="branch().value"
+	[option]="branch().node"
 	[optionTpl]="optionTpl()"
 	[optionIndex]="optionIndex()"
 	[scrollIntoViewOptions]="{ block: 'nearest' }"
-	[isSelected]="branch().value | luIsOptionSelected: optionComparer() : selectedOptions()"
-	(selected)="toggleOption.emit(branch().value)"
-	(click)="toggleOption.emit(branch().value)"
+	[isSelected]="branch().node | luIsOptionSelected: optionComparer() : selectedOptions()"
+	(selected)="toggle(branch())"
+	(click)="toggle(branch())"
 />
 @for (child of branch().children; track $index) {
 	<div style="padding-left: 1rem">
 		<lu-tree-branch
 			[branch]="child"
 			[optionTpl]="optionTpl()"
-			[optionIndex]="optionIndex() * 1000"
+			[optionIndex]="optionIndex() + '-' + $index"
 			[optionComparer]="optionComparer()"
 			[selectedOptions]="selectedOptions()"
-			(toggleOption)="toggleOption.emit($event)"
+			(toggleOne)="toggleOne.emit($event)"
+			(selectMany)="selectMany.emit($event)"
+			(unselectMany)="unselectMany.emit($event)"
 		/>
 	</div>
 }

@@ -1,5 +1,5 @@
 import { OverlayModule } from '@angular/cdk/overlay';
-import { AsyncPipe, NgIf, NgTemplateOutlet } from '@angular/common';
+import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, Component, forwardRef, HostBinding, inject, input, viewChild, ViewContainerRef, ViewEncapsulation } from '@angular/core';
 import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { getIntl } from '@lucca-front/ng/core';
@@ -17,7 +17,7 @@ import { LuSimpleSelectPanelRefFactory } from './panel-ref.factory';
 	host: { class: 'simpleSelect' },
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	standalone: true,
-	imports: [AsyncPipe, ɵLuOptionOutletDirective, NgIf, OverlayModule, FormsModule, InputDirective, FilterPillDisplayerDirective, NgTemplateOutlet, IconComponent],
+	imports: [AsyncPipe, ɵLuOptionOutletDirective, OverlayModule, FormsModule, InputDirective, FilterPillDisplayerDirective, NgTemplateOutlet, IconComponent],
 	providers: [
 		{
 			provide: NG_VALUE_ACCESSOR,
