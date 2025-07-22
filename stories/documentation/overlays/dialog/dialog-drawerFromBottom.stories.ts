@@ -23,7 +23,7 @@ function getTemplate(args: DialogDrawerFromBottomStory): string {
 			<footer class="dialog-inside-footer footer">
 				<div class="footer-actions">
 					<button type="submit" class="button">Action</button>
-					<button type="button" class="button mod-text">Action</button>
+					<button type="button" class="button mod-ghost">Action</button>
 				</div>
 			</footer>
 		</form>

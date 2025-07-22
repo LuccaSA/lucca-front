@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { IconComponent } from '@lucca-front/ng/icon';
 import { ButtonComponent } from '@lucca-front/ng/button';
+import { IconComponent } from '@lucca-front/ng/icon';
 
 @Component({
 	selector: 'lu-test',

@@ -31,9 +31,10 @@
 	}
 }
 
-@mixin text {
+@mixin ghost {
 	.button {
-		&:is(.mod-text, .mod-link) {
+		// .mod-text, .mod-link deprecated
+		&:is(.mod-ghost, .mod-text, .mod-link) {
 			box-shadow: none;
 
 			&:hover {
