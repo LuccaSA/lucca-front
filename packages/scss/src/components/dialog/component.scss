@@ -88,6 +88,12 @@
 			}
 		}
 
+		.dialog-inside-header-actionOptional {
+			&:empty {
+				display: none;
+			}
+		}
+
 		.dialog-inside-footer {
 			grid-area: footer;
 
