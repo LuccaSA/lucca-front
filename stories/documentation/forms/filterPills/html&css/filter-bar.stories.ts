@@ -113,7 +113,7 @@ function getTemplate(args: FilterBarBasicStory): string {
 						<lu-text-input [ngModel]="example10" [ngModelOptions]="{standalone: true}" hasSearchIcon hasClearer />
 					</lu-form-field>
 
-					<button type="submit" size="S" luButton="text" palette="product">Appliquer les filtres</button>
+					<button type="submit" size="S" luButton="ghost" palette="product">Appliquer les filtres</button>
 
 				</div>
 				<div class="filterBar-scrollBox-export">

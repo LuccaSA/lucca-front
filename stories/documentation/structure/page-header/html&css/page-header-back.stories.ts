@@ -14,22 +14,22 @@ function getTemplate(args: PageHeaderBackStory): string {
 	<div class="pageHeader-content">
 		<div class="pageHeader-content-title">
 			<nav role="presentation" class="pageHeader-content-title-back">
-				<a href="#" class="button mod-onlyIcon mod-text">
+				<a href="#" class="button mod-onlyIcon mod-ghost">
 					<span class="lucca-icon icon-arrowLeft" aria-hidden="true"></span>
 					<span class="u-mask">Page parente</span>
 				</a>
 			</nav>
 			<h1 class="pr-u-margin0">Page courante</h1>
 			<div>
-				<button type="button" class="button mod-onlyIcon mod-text" luTooltip="Modifier">
+				<button type="button" class="button mod-onlyIcon mod-ghost" luTooltip="Modifier">
 					<span aria-hidden="true" class="lucca-icon icon-officePen"></span>
 					<span class="u-mask">Modifier</span>
 				</button>
-				<button type="button" class="button mod-onlyIcon mod-text" luTooltip="Copier">
+				<button type="button" class="button mod-onlyIcon mod-ghost" luTooltip="Copier">
 					<span aria-hidden="true" class="lucca-icon icon-fileCopy"></span>
 					<span class="u-mask">Copier</span>
 				</button>
-				<button type="button" class="button mod-onlyIcon mod-text" luTooltip="Supprimer">
+				<button type="button" class="button mod-onlyIcon mod-ghost" luTooltip="Supprimer">
 					<span aria-hidden="true" class="lucca-icon icon-trashDelete"></span>
 					<span class="u-mask">Supprimer</span>
 				</button>
@@ -42,7 +42,7 @@ function getTemplate(args: PageHeaderBackStory): string {
 			</label>
 			<button type="button" class="button">Button</button>
 			<button type="button" class="button mod-outline">Button</button>
-			<button type="button" class="button mod-onlyIcon mod-text">
+			<button type="button" class="button mod-onlyIcon mod-ghost">
 				<span aria-hidden="true" class="lucca-icon icon-menuDots"></span>
 				<span class="u-mask">Voir plus</span>
 			</button>

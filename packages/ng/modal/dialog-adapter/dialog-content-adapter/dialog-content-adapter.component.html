@@ -24,7 +24,7 @@
 					[value]="submitCounter$ | async"
 				></lu-numeric-badge>
 			</button>
-			<button luButton type="button" class="button mod-text" (click)="dismiss()">{{ cancelLabel$ | async }}</button>
+			<button luButton type="button" class="button mod-ghost" (click)="dismiss()">{{ cancelLabel$ | async }}</button>
 		</div>
 	</lu-dialog-footer>
 </lu-dialog>

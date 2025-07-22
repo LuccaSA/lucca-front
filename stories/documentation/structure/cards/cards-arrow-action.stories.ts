@@ -13,7 +13,7 @@ function getTemplate(args: CardsArrowActionStory): string {
 		<p>Contenu de la carte</p>
 	</div>
 	<div class="card-action">
-		<button type="button" class="button mod-onlyIcon mod-text" luTooltip="Modifier">
+		<button type="button" class="button mod-onlyIcon mod-ghost" luTooltip="Modifier">
 			<span aria-hidden="true" class="lucca-icon icon-arrowRight"></span>
 			<span class="u-mask">Accéder</span>
 		</button>
