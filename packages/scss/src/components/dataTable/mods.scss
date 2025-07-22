@@ -28,7 +28,7 @@
 	.dataTable-body-row-cell-expand-button.button {
 		@include button.S;
 		@include button.onlyIconS;
-		@include button.text;
+		@include button.ghost;
 
 		--components-button-padding: var(--pr-t-spacings-25);
 		--components-button-color: var(--palettes-neutral-800);
@@ -86,7 +86,7 @@
 		@include button.S;
 		@include button.onlyIcon;
 		@include button.onlyIconS;
-		@include button.text;
+		@include button.ghost;
 	}
 
 	&:is(.dataTable-head-row-cell) {

@@ -26,25 +26,14 @@
 		&:where(:not(.is-success, .is-error)) {
 			@include outlined;
 		}
-
-		// .disabled is deprecated
-		&.is-disabled,
-		&.disabled {
-			@include outlinedDisabled;
-		}
 	}
 
-	// .mod-link deprecated
+	// .mod-link .mod-text deprecated
 	&.mod-text,
-	&.mod-link {
+	&.mod-link,
+	&.mod-ghost {
 		&:where(:not(.is-success, .is-error)) {
-			@include text;
-		}
-
-		// .disabled is deprecated
-		&.is-disabled,
-		&.disabled {
-			@include textDisabled;
+			@include ghost;
 		}
 	}
 
@@ -80,19 +69,32 @@
 		}
 	}
 
-	&.mod-delete {
-		@include delete;
+	&:has(.numericBadge) {
+		@include counter;
+
+		&.mod-S {
+			@include counterS;
+		}
+
+		&.mod-XS {
+			@include counterXS;
+		}
+	}
+
+	// .mod-delete is deprecated
+	&.mod-critical, &.mod-delete {
+		@include critical;
 
 		// .mod-link is deprecated
 		&.mod-text,
 		&.mod-link {
-			@include deleteText;
+			@include criticalGhost;
 		}
 
 		// .mod-outline is deprecated
 		&.mod-outlined,
 		&.mod-outline {
-			@include deleteOutlined;
+			@include criticalOutlined;
 		}
 	}
 
@@ -122,6 +124,14 @@
 		&.mod-S {
 			@include loadingS;
 		}
+
+		&.mod-outlined {
+			@include loadingOutlined;
+		}
+
+		&.mod-ghost {
+			@include loadingGhost;
+		}
 	}
 
 	// .error is deprecated
@@ -134,6 +144,14 @@
 	&.is-success,
 	&.success {
 		@include success;
+
+		&.mod-outlined {
+			@include successOutlined;
+		}
+
+		&.mod-ghost {
+			@include successGhost;
+		}
 	}
 
 	// .disabled is deprecated

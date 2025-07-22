@@ -286,12 +286,13 @@
 
 	.button {
 		@include button.S;
-		@include button.text;
+		@include button.ghost;
 		@include button.onlyIconS;
 
-		&.mod-delete {
+		// .mod-delete is deprecated
+		&.mod-critical, &.mod-delete {
 			// For specificity purpose. Could be removed if we decide to remove automatic CSS imports in Angular components
-			@include button.delete;
+			@include button.critical;
 		}
 	}
 }
@@ -352,7 +353,7 @@
 		background-color: var(--pr-t-elevation-surface-default);
 
 		.button {
-			@include button.text;
+			@include button.ghost;
 			@include button.S;
 		}
 	}

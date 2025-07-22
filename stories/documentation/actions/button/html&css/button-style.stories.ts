@@ -11,7 +11,7 @@ function getTemplate(args: ButtonStyleStory): string {
 	return `<div class="u-displayFlex pr-u-gap100 u-alignItemsCenter">
 	<button type="button" class="button">Button</button>
 	<button type="button" class="button mod-outlined">Button</button>
-	<button type="button" class="button mod-text">Button</button>
+	<button type="button" class="button mod-ghost">Button</button>
 </div>`;
 }
 

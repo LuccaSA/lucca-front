@@ -26,7 +26,7 @@ function getTemplate(args: IndexTableActionsDropdownStory): string {
 			<td class="indexTable-body-row-cell">Content</td>
 			<td class="indexTable-body-row-cell">Content</td>
 			<td class="indexTable-body-row-cell mod-actions">
-				<button type="button" class="button indexTable-body-row-cell-subActionDropdownTrigger mod-text mod-onlyIcon mod-S">
+				<button type="button" class="button indexTable-body-row-cell-subActionDropdownTrigger mod-ghost mod-onlyIcon mod-S">
 					<span aria-hidden="true" class="lucca-icon icon-ellipsis"></span>
 				</button>
 			</td>

@@ -26,7 +26,7 @@
 		}
 
 		.fileToolbar-list-item-button.button {
-			@include button.text;
+			@include button.ghost;
 			@include button.S;
 
 			--components-button-padding: var(--pr-t-spacings-75) !important;
