@@ -14,8 +14,8 @@
 
 @mixin checked {
 	~ .checkboxField-icon {
-		background-color: var(--palettes-product-700);
-		border-color: var(--palettes-product-700);
+		background-color: var(--palettes-700, var(--palettes-product-700));
+		border-color: var(--palettes-700, var(--palettes-product-700));
 
 		.checkboxField-icon-check {
 			transform: scale(1);
@@ -32,8 +32,8 @@
 
 @mixin checkedActive {
 	~ .checkboxField-icon {
-		background-color: var(--palettes-product-800);
-		border-color: var(--palettes-product-800);
+		background-color: var(--palettes-800, var(--palettes-product-800));
+		border-color: var(--palettes-800, var(--palettes-product-800));
 	}
 }
 
@@ -47,8 +47,8 @@
 
 @mixin checkedHover {
 	~ .checkboxField-icon {
-		background-color: var(--palettes-product-600);
-		border-color: var(--palettes-product-600);
+		background-color: var(--palettes-600, var(--palettes-product-600));
+		border-color: var(--palettes-600, var(--palettes-product-600));
 	}
 }
 

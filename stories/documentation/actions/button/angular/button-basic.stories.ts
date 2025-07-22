@@ -2,7 +2,7 @@ import { ButtonComponent } from '@lucca-front/ng/button';
 import { createTestStory, generateInputs } from 'stories/helpers/stories';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { expect, within } from '@storybook/test';
+import { expect, within } from 'storybook/test';
 
 export default {
 	title: 'Documentation/Actions/Button/Angular/Basic',

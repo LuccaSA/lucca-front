@@ -23,7 +23,7 @@ export class ListingComponent {
 	ordered = input(false, { transform: booleanAttribute });
 	checklist = input(false, { transform: booleanAttribute });
 	icons = input(false, { transform: booleanAttribute });
-	defaultIcon = input<LuccaIcon>(null);
+	defaultIcon = input<LuccaIcon>('signConfirm');
 	palette = input<Palette>('none');
 
 	get paletteClass() {

@@ -6,6 +6,7 @@
 	padding-inline: var(--components-options-item-padding-vertical);
 	margin-block: 0 var(--components-options-item-padding-vertical);
 	margin-inline: calc(-1 * var(--pr-t-spacings-50));
+	scroll-margin-block-start: var(--pr-t-spacings-50);
 }
 
 .multiSelectAllDisplayer {
@@ -17,10 +18,10 @@
 	}
 
 	&:has(.checkboxField-input:checked) {
-		background-color: var(--palettes-product-50);
+		background-color: var(--palettes-50, var(--palettes-product-50));
 
 		&:hover, :host-context(.is-highlighted) & {
-			background-color: var(--palettes-product-100);
+			background-color: var(--palettes-100, var(--palettes-product-100));
 		}
 	}
 

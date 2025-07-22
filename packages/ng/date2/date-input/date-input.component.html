@@ -25,7 +25,7 @@
 		/>
 
 		<div class="textField-input-affix">
-			@if (clearable() && !disabled() && date.value !== "") {
+			@if (clearable() && !disabled() && (clearBehavior() === "clear" ? date.value !== "" : selectedDate() !== initialValue())) {
 				<button class="textField-input-affix-clear clear" type="button" (click)="clear()">
 					<span aria-hidden="true" class="lucca-icon icon-signClose"></span>
 					<span class="u-mask">{{ intl.clear }}</span>

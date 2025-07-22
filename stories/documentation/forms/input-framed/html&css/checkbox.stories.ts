@@ -8,8 +8,7 @@ export default {
 	argTypes: {},
 	render: (args: InputFramedCheckboxStory) => {
 		return {
-			template: cleanupTemplate(`
-<div class="inputFramedWrapper">
+			template: cleanupTemplate(`<div class="inputFramedWrapper">
 	<div class="inputFramed">
 		<div class="inputFramed-header">
 			<div class="form-field inputFramed-header-field">
@@ -46,8 +45,7 @@ export default {
 			</div>
 		</div>
 	</div>
-</div>
-`),
+</div>`),
 		};
 	},
 } as Meta;

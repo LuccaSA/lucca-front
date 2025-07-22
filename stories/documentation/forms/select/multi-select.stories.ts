@@ -25,12 +25,12 @@ import {
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 import { applicationConfig, Meta, moduleMetadata } from '@storybook/angular';
 import { interval, map } from 'rxjs';
-import { first, startWith } from 'rxjs/operators';
+import { startWith } from 'rxjs/operators';
 import { HiddenArgType } from 'stories/helpers/common-arg-types';
 import { createTestStory, getStoryGenerator } from 'stories/helpers/stories';
+import { expect, screen, userEvent, within } from 'storybook/test';
+import { waitForAngular } from '../../../helpers/test';
 import { allLegumes, colorNameByColor, coreSelectStory, FilterLegumesPipe, ILegume, LuCoreSelectInputStoryComponent, SortLegumesPipe } from './select.utils';
-import { expect, fireEvent, screen, userEvent, within } from '@storybook/test';
-import { sleep, waitForAngular } from '../../../helpers/test';
 
 type LuMultiSelectInputStoryComponent = LuCoreSelectInputStoryComponent & {
 	selectedLegumes: ILegume[] | LuMultiSelection<ILegume>;

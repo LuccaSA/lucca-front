@@ -4,6 +4,9 @@
  ***********************************************/
 
 export type LuccaIcon =
+	| 'mapTripStep'
+	| 'officeMicrophone'
+	| 'playerRecording'
 	| 'app'
 	| 'apps'
 	| 'nineTiles'
@@ -362,6 +365,7 @@ export type LuccaIcon =
 	| 'euro'
 	| 'moneyPaymentCard'
 	| 'bankingCard'
+	| 'moneyPaymentCards'
 	| 'moneyPiggyBank'
 	| 'piggyBank'
 	| 'moneyWallet'
