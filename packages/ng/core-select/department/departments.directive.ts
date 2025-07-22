@@ -87,5 +87,5 @@ export class LuCoreSelectDepartmentsDirective<T extends ILuDepartment = ILuDepar
 
 	public totalCount$ = this.select.options$.pipe(map((opts) => opts.length));
 
-	protected override optionKey = (option: TreeNode<T>) => option?.node.id;
+	protected override optionKey = (option: TreeNode<T>) => (option as unknown as T)?.id;
 }
