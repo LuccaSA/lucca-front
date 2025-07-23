@@ -1,7 +1,7 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, computed, input, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, computed, effect, inject, input, ViewEncapsulation } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { LuccaIcon } from '@lucca-front/icons';
-import { DecorativePalette, Palette } from '@lucca-front/ng/core';
+import { DecorativePalette, LuClass, Palette } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
 
 @Component({
@@ -12,11 +12,14 @@ import { IconComponent } from '@lucca-front/ng/icon';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	encapsulation: ViewEncapsulation.None,
 	imports: [IconComponent, RouterLink],
+	providers: [LuClass],
 	host: {
 		class: 'tag',
 	},
 })
 export class TagComponent {
+	#luClass = inject(LuClass);
+
 	label = input.required<string>();
 
 	/**
@@ -46,10 +49,13 @@ export class TagComponent {
 	 */
 	icon = input<LuccaIcon | null>(null);
 
-	tagClasses = computed(() => {
-		return {
-			[`mod-${this.size()}`]: !!this.size(),
-			[`palette-${this.palette()}`]: !!this.palette(),
-		};
-	});
+	constructor() {
+		effect(() => {
+			this.#luClass.setState({
+				[`mod-${this.size()}`]: !!this.size(),
+				[`palette-${this.palette()}`]: !!this.palette(),
+				'mod-outlined': this.outlined(),
+			});
+		});
+	}
 }
