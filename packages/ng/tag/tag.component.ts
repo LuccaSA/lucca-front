@@ -1,4 +1,4 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, computed, effect, inject, input, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, effect, inject, input, ViewEncapsulation } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { LuccaIcon } from '@lucca-front/icons';
 import { DecorativePalette, LuClass, Palette } from '@lucca-front/ng/core';

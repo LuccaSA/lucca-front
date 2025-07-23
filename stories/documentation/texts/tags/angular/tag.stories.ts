@@ -1,12 +1,18 @@
-import { TagComponent } from '@lucca-front/ng/tag';
-import { Meta, StoryObj } from '@storybook/angular';
+import { provideRouter } from '@angular/router';
 import { IconsList } from '@lucca-front/icons/icons-list';
+import { TagComponent } from '@lucca-front/ng/tag';
+import { applicationConfig, Meta, StoryObj } from '@storybook/angular';
 import { HiddenArgType, PaletteAllArgType } from 'stories/helpers/common-arg-types';
 import { generateInputs } from 'stories/helpers/stories';
 
 export default {
 	title: 'Documentation/Texts/Tags/Angular/Basic',
 	component: TagComponent,
+	decorators: [
+		applicationConfig({
+			providers: [provideRouter([{ path: 'iframe.html', redirectTo: '', pathMatch: 'full' }])],
+		}),
+	],
 	render: (args, context) => {
 		return {
 			template: `<lu-tag ${generateInputs(args, context.argTypes)}></lu-tag>`,
