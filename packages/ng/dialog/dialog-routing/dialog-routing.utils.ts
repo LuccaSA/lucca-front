@@ -1,7 +1,7 @@
-import { ComponentType } from '@angular/cdk/portal';
+import { ComponentType } from '@angular/cdk/overlay';
 import { InjectionToken } from '@angular/core';
 import { Route } from '@angular/router';
-import { Observable, firstValueFrom, from, isObservable, of } from 'rxjs';
+import { firstValueFrom, from, isObservable, Observable, of } from 'rxjs';
 import { LuDialogConfig, LuDialogData } from '../model';
 import { DialogRoutingComponent } from './dialog-routing.component';
 import { DialogRouteConfig } from './dialog-routing.models';

@@ -10,6 +10,7 @@ import { LuDialogConfig, LuDialogRef } from '../model';
 import { DialogRouteConfig } from './dialog-routing.models';
 import { deferrableToObservable, deferrableToPromise, DIALOG_ROUTE_CONFIG } from './dialog-routing.utils';
 import { OutletComponentInstanceDirective } from './outlet-component-instance.directive';
+import { ComponentType } from '@angular/cdk/overlay';
 
 export const defaultOnClosedFn = <C>(router = inject(Router), route = inject(ActivatedRoute), config = inject<DialogRouteConfig<C>>(DIALOG_ROUTE_CONFIG)): void =>
 	void router.navigate(
@@ -64,7 +65,7 @@ export class DialogRoutingComponent<C> implements OnInit {
 		const config = this.dialogConfig();
 		return config && config.content instanceof TemplateRef ? config.content : null;
 	});
-	readonly dialogComponentContent = computed(() => {
+	readonly dialogComponentContent = computed<ComponentType<C>>(() => {
 		const config = this.dialogConfig();
 		return config && !(config.content instanceof TemplateRef) ? config.content : null;
 	});
