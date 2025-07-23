@@ -38,6 +38,8 @@ export class NumberInputComponent {
 
 	max = input<number>();
 
+	valueAlignRight = input(false, { transform: booleanAttribute });
+
 	intl = getIntl(LU_NUMBERFIELD_TRANSLATIONS);
 
 	clearValue(): void {
