@@ -25,6 +25,9 @@ export default {
 				type: 'select',
 			},
 		},
+		tooltip: {
+			if: { arg: 'hiddenLabel', truthy: false },
+		},
 		hiddenLabel: {
 			description: "Masque le label en le conservant dans le DOM pour les lecteurs d'écrans",
 		},
@@ -54,9 +57,9 @@ export const Basic: StoryObj<TimePickerComponent & FormFieldComponent & { requir
 		};
 	},
 	args: {
+		hiddenLabel: false,
 		label: 'Label',
 		tooltip: 'Tooltip message',
-		hiddenLabel: false,
 		required: true,
 		inlineMessage: 'Helper message',
 		inlineMessageState: 'default',
