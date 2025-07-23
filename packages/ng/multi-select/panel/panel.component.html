@@ -58,7 +58,7 @@
 				}
 				<ng-template #optionsList let-options let-groupIndex="groupIndex">
 					@if (treeGenerator) {
-						@for (branch of options | luTreeDisplay: treeGenerator; let index = $index; track trackOptionsBy(index, branch.value)) {
+						@for (branch of options | luTreeDisplay: treeGenerator; let index = $index; track trackBranchesBy(index, branch)) {
 							<lu-tree-branch
 								[branch]="branch"
 								[optionTpl]="optionTpl()"

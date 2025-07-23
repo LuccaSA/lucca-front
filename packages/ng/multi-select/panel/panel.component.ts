@@ -14,16 +14,17 @@ import {
 	ɵLuOptionComponent,
 	ɵLuOptionGroupPipe,
 } from '@lucca-front/ng/core-select';
+import { IconComponent } from '@lucca-front/ng/icon';
+import { TreeNode } from 'packages/ng/core-select/tree/model';
 import { EMPTY } from 'rxjs';
+import { TreeBranchComponent } from '../../core-select/tree/tree-branch/tree-branch.component';
+import { TreeDisplayPipe } from '../../core-select/tree/tree-display.pipe';
 import { LuMultiSelectInputComponent } from '../input';
 import { LuMultiSelectPanelRef } from '../input/panel.model';
 import { MULTI_SELECT_INPUT } from '../select.model';
 import { LU_MULTI_SELECT_TRANSLATIONS } from '../select.translate';
 import { LuOptionsGroupContextPipe } from './option-group-context.pipe';
 import { LuIsOptionSelectedPipe } from './option-selected.pipe';
-import { IconComponent } from '@lucca-front/ng/icon';
-import { TreeDisplayPipe } from '../../core-select/tree/tree-display.pipe';
-import { TreeBranchComponent } from '../../core-select/tree/tree-branch/tree-branch.component';
 
 @Component({
 	selector: 'lu-select-panel',
@@ -70,6 +71,7 @@ export class LuMultiSelectPanelComponent<T> implements AfterViewInit, CoreSelect
 
 	trackOptionsBy: TrackByFunction<T> = (_, option) => this.optionKey(option);
 	trackGroupsBy: TrackByFunction<LuOptionGroup<T, unknown>> = (_, group) => group.key;
+	trackBranchesBy: TrackByFunction<TreeNode<T>> = (_, option) => this.optionKey(option.node);
 
 	selectedOptions: T[] = this.selectInput.value || [];
 	optionTpl = this.selectInput.optionTpl;
