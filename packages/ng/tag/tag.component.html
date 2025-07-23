@@ -1,15 +1,15 @@
-@if (link) {
-	<a [routerLink]="link" class="tag" [class]="tagClasses" [class.mod-outlined]="outlined">
-		@if (icon) {
-			<lu-icon [icon]="icon" />
+@if (link()) {
+	<a [routerLink]="link()" class="tag" [class]="tagClasses()" [class.mod-outlined]="outlined()">
+		@if (icon()) {
+			<lu-icon [icon]="icon()" />
 		}
 		<span class="tag-content">{{ label }}</span>
 	</a>
 } @else {
-	<span class="tag" [class]="tagClasses" [class.mod-outlined]="outlined">
-		@if (icon) {
-			<lu-icon [icon]="icon" />
+	<span class="tag" [class]="tagClasses()" [class.mod-outlined]="outlined()">
+		@if (icon()) {
+			<lu-icon [icon]="icon()" />
 		}
-		<span class="tag-content">{{ label }}</span>
+		<span class="tag-content">{{ label() }}</span>
 	</span>
 }

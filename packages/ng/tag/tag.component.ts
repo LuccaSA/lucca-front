@@ -1,5 +1,4 @@
-import { NgClass } from '@angular/common';
-import { booleanAttribute, ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, computed, input, ViewEncapsulation } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { LuccaIcon } from '@lucca-front/icons';
 import { DecorativePalette, Palette } from '@lucca-front/ng/core';
@@ -12,48 +11,45 @@ import { IconComponent } from '@lucca-front/ng/icon';
 	styleUrls: ['./tag.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	encapsulation: ViewEncapsulation.None,
-	imports: [IconComponent, NgClass, RouterLink],
+	imports: [IconComponent, RouterLink],
+	host: {
+		class: 'tag',
+	},
 })
 export class TagComponent {
-	@Input({ required: true })
-	label: string;
+	label = input.required<string>();
 
-	@Input()
 	/**
 	 * Which size should the callout be? Defaults to medium
 	 */
-	size: 'M' | 'L' = 'M';
+	size = input<'M' | 'L'>('M');
 
-	@Input()
 	/**
 	 * Which palette should be used for the entire callout.
 	 * Defaults to none (inherits parent palette)
 	 */
-	palette: Palette | DecorativePalette = 'none';
+	palette = input<Palette | DecorativePalette>('none');
 
-	@Input({ transform: booleanAttribute })
 	/**
 	 * Should display be outlined?
 	 */
-	outlined = false;
+	outlined = input(false, { transform: booleanAttribute });
 
-	@Input()
 	/**
 	 * For routerLink usage
 	 */
-	link: string;
+	link = input<string | null>(null);
 
-	@Input()
 	/**
 	 * Which icon should we display in the callout if any?
 	 * Defaults to no icon.
 	 */
-	icon: LuccaIcon | undefined;
+	icon = input<LuccaIcon | null>(null);
 
-	get tagClasses() {
+	tagClasses = computed(() => {
 		return {
-			[`mod-${this.size}`]: !!this.size,
-			[`palette-${this.palette}`]: !!this.palette,
+			[`mod-${this.size()}`]: !!this.size(),
+			[`palette-${this.palette()}`]: !!this.palette(),
 		};
-	}
+	});
 }
