@@ -1,9 +1,9 @@
 import { booleanAttribute, ChangeDetectionStrategy, Component, input, output, TemplateRef, Type, ViewEncapsulation } from '@angular/core';
-import { TreeNode } from '../model';
-import { CoreSelectPanelElement } from '../../panel/selectable-item';
 import { LuIsOptionSelectedPipe } from '../../../multi-select/panel/option-selected.pipe';
 import { LuOptionComponent } from '../../option/option.component';
+import { CoreSelectPanelElement } from '../../panel/selectable-item';
 import { LuOptionComparer, LuOptionContext } from '../../select.model';
+import { TreeNode } from '../model';
 
 @Component({
 	selector: 'lu-tree-branch',
@@ -20,7 +20,7 @@ export class TreeBranchComponent<T> {
 
 	optionIndex = input.required({ transform: (value: string | number) => `${value}` });
 
-	optionComparer = input.required<LuOptionComparer<TreeNode<T>>>();
+	optionComparer = input.required<LuOptionComparer<T>>();
 
 	selectedOptions = input<T[]>([]);
 
@@ -37,7 +37,7 @@ export class TreeBranchComponent<T> {
 			this.toggleOne.emit(branchData.node);
 		} else {
 			const flatOptions = this.flattenTree(branchData);
-			const options = flatOptions.filter((option) => !this.selectedOptions().some((so) => this.optionComparer()({ node: so }, { node: option })));
+			const options = flatOptions.filter((option) => !this.selectedOptions().some((so) => this.optionComparer()(so, option)));
 			if (options.length > 0) {
 				this.selectMany.emit(options);
 			} else {

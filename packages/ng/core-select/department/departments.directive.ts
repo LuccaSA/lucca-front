@@ -5,8 +5,8 @@ import { CORE_SELECT_API_TOTAL_COUNT_PROVIDER, CoreSelectApiTotalCountProvider }
 import { ALuCoreSelectApiDirective } from '@lucca-front/ng/core-select/api';
 import { combineLatest, map, Observable } from 'rxjs';
 import { ILuDepartment } from '../../department/department.model';
-import { NoopTreeSelectDirective } from '../tree/noop-tree-select.directive';
 import { TreeNode } from '../tree/model';
+import { NoopTreeSelectDirective } from '../tree/noop-tree-select.directive';
 
 @Directive({
 	// The attribute is already prefixed with "lu-simple-select" / "lu-multi-select"
@@ -87,5 +87,7 @@ export class LuCoreSelectDepartmentsDirective<T extends ILuDepartment = ILuDepar
 
 	public totalCount$ = this.select.options$.pipe(map((opts) => opts.length));
 
-	protected override optionKey = (option: TreeNode<T>) => (option as unknown as T)?.id;
+	protected override optionKey = (option: TreeNode<T> | T) => {
+		return 'node' in option ? option.node.id : option.id;
+	};
 }

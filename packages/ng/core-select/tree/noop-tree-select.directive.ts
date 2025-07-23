@@ -12,7 +12,7 @@ import { TreeGenerator } from './tree-generator';
 export class NoopTreeSelectDirective<T extends TreeNode<any>, V> implements TreeGenerator<T, T> {
 	#select = inject<ALuSelectInputComponent<T, V>>(ALuSelectInputComponent);
 
-	groupingFnInput = input.required<TreeGroupingFn<T>>({ alias: 'noopTreeSelect' });
+	groupingFnInput = input<TreeGroupingFn<T>>(() => null, { alias: 'noopTreeSelect' });
 
 	groupingFn = linkedSignal(() => this.groupingFnInput());
 
