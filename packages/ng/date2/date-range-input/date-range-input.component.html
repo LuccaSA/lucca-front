@@ -58,7 +58,7 @@
 			<div class="textField-input-affix">
 				@if (!isFilterPill) {
 					@if (clearable() && (start.value !== "" || end.value !== "")) {
-						<button class="textField-input-affix-clear clear" type="button" (click)="clear(start, end)">
+						<button class="textField-input-affix-clear clear" type="button" (click)="clear()">
 							<span aria-hidden="true" class="lucca-icon icon-signClose"></span>
 							<span class="u-mask">{{ intl.clear }}</span>
 						</button>

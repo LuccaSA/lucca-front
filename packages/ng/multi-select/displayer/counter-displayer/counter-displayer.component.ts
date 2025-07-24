@@ -14,7 +14,7 @@ import { LuMultiSelectDisplayerInputDirective } from '../displayer-input.directi
 	imports: [AsyncPipe, LuTooltipModule, NgPlural, NgPluralCase, ɵLuOptionOutletDirective, FormsModule, LuMultiSelectDisplayerInputDirective],
 	template: `
 		<div class="multipleSelect-displayer mod-filter" [class.is-filled]="(selectedOptions$ | async)?.length > 0">
-		  <input type="text" #inputElement luMultiSelectDisplayerInput />
+		  <input type="text" autocomplete="off" #inputElement luMultiSelectDisplayerInput />
 		  @if (selectedOptions$ | async; as selectedOptions) {
 		    <div class="multipleSelect-displayer-filter">
 		      @if (selectedOptions?.length === 1) {

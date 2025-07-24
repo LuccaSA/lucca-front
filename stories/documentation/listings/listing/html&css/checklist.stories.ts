@@ -4,12 +4,11 @@ import { cleanupTemplate } from 'stories/helpers/stories';
 interface ListingChecklistStory {}
 
 export default {
-	title: 'Documentation/Listing/Listing/HTML&CSS/Checklist',
+	title: 'Documentation/Listings/Listing/HTML&CSS/Checklist',
 	argTypes: {},
 	render: (args: ListingChecklistStory) => {
 		return {
-			template: cleanupTemplate(`
-<ul class="listing mod-checklist">
+			template: cleanupTemplate(`<ul class="listing mod-checklist">
 	<li class="listing-item">
 		<span class="listing-item-icon lucca-icon" aria-hidden="true"></span>
 		<div class="listing-item-content">
@@ -48,8 +47,7 @@ export default {
 			</ul>
 		</div>
 	</li>
-</ul>
-`),
+</ul>`),
 		};
 	},
 } as Meta;

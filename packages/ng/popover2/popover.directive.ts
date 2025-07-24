@@ -1,3 +1,5 @@
+import { ConnectedPosition, ConnectionPositionPair, FlexibleConnectedPositionStrategyOrigin, Overlay, OverlayRef } from '@angular/cdk/overlay';
+import { ComponentPortal } from '@angular/cdk/portal';
 import {
 	booleanAttribute,
 	DestroyRef,
@@ -20,14 +22,12 @@ import {
 	Type,
 	ViewContainerRef,
 } from '@angular/core';
-import { ConnectedPosition, ConnectionPositionPair, FlexibleConnectedPositionStrategyOrigin, Overlay, OverlayRef } from '@angular/cdk/overlay';
-import { ComponentPortal } from '@angular/cdk/portal';
+import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
+import { getIntl } from '@lucca-front/ng/core';
+import { combineLatest, debounce, filter, map, merge, Subject, switchMap, timer } from 'rxjs';
 import { PopoverContentComponent } from './content/popover-content/popover-content.component';
 import { POPOVER_CONFIG, PopoverConfig } from './popover-tokens';
-import { combineLatest, debounce, filter, map, merge, Subject, switchMap, timer } from 'rxjs';
-import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 import { LU_POPOVER2_TRANSLATIONS } from './popover2.translate';
-import { getIntl } from '@lucca-front/ng/core';
 
 export type PopoverPosition = 'above' | 'below' | 'before' | 'after';
 
@@ -130,6 +130,7 @@ export class PopoverDirective implements OnDestroy {
 
 	#listenToMouseLeave = false;
 	#listenToMouseEnter = true;
+	#skipNextFocus = false;
 
 	#overlayRef: OverlayRef;
 
@@ -164,7 +165,7 @@ export class PopoverDirective implements OnDestroy {
 			)
 			.subscribe(([event, type]: ['open' | 'close', 'focus' | 'click' | 'hover']) => {
 				if (event === 'open') {
-					this.openPopover(type === 'focus', true);
+					this.openPopover(type === 'focus', true, type === 'hover');
 					this.#listenToMouseLeave = type !== 'click';
 					if (type === 'focus' && !this.#screenReaderDescription) {
 						this.#screenReaderDescription = this.#renderer.createElement('span') as HTMLSpanElement;
@@ -194,8 +195,13 @@ export class PopoverDirective implements OnDestroy {
 	@HostListener('focus')
 	onFocus() {
 		if (this.luPopoverTrigger().includes('focus')) {
-			this.open$.next('focus');
-			this.#listenToMouseLeave = true;
+			if (this.#skipNextFocus) {
+				this.#skipNextFocus = false;
+			} else {
+				this.open$.next('focus');
+				this.#listenToMouseLeave = true;
+				this.#skipNextFocus = true;
+			}
 		}
 	}
 
@@ -226,7 +232,7 @@ export class PopoverDirective implements OnDestroy {
 		}
 	}
 
-	openPopover(withBackdrop = false, disableFocusHandler = false): void {
+	openPopover(withBackdrop = false, disableCloseButtonFocus = false, disableInitialTriggerFocus = false): void {
 		if (!this.opened() && !this.luPopoverDisabled) {
 			this.opened.set(true);
 			this.luPopoverOpened.emit();
@@ -253,7 +259,8 @@ export class PopoverDirective implements OnDestroy {
 				ref: this.#overlayRef,
 				contentId: this.ariaControls,
 				triggerElement: this.#elementRef.nativeElement,
-				disableFocusManipulation: disableFocusHandler,
+				disableCloseButtonFocus: disableCloseButtonFocus,
+				disableInitialTriggerFocus: disableInitialTriggerFocus,
 				noCloseButton: this.luPopoverNoCloseButton,
 			};
 			this.#componentRef = this.#overlayRef.attach(
@@ -271,6 +278,7 @@ export class PopoverDirective implements OnDestroy {
 			this.#componentRef.mouseEnter$.pipe(takeUntilDestroyed(this.#componentRef.destroyRef), takeUntilDestroyed(this.#destroyRef)).subscribe(() => this.open$.next('hover'));
 			this.#componentRef.closed$.pipe(takeUntilDestroyed(this.#componentRef.destroyRef), takeUntilDestroyed(this.#destroyRef)).subscribe(() => {
 				this.opened.set(false);
+				this.#skipNextFocus = false;
 				this.luPopoverClosed.emit();
 				this.#listenToMouseLeave = false;
 				if (this.#screenReaderDescription) {
