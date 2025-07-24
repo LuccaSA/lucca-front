@@ -16,14 +16,13 @@ import {
 	ɵLuOptionGroupPipe,
 } from '@lucca-front/ng/core-select';
 import { IconComponent } from '@lucca-front/ng/icon';
-import { TreeNode } from 'packages/ng/core-select/tree/model';
 import { EMPTY } from 'rxjs';
-import { TreeBranchComponent } from '../../core-select/tree/tree-branch/tree-branch.component';
-import { TreeDisplayPipe } from '../../core-select/tree/tree-display.pipe';
 import { LuSimpleSelectInputComponent } from '../input/select-input.component';
 import { SIMPLE_SELECT_INPUT } from '../select.model';
 import { LU_SIMPLE_SELECT_TRANSLATIONS } from '../select.translate';
 import { LuIsOptionSelectedPipe } from './option-selected.pipe';
+import { TreeBranchComponent } from '@lucca-front/ng/tree-select';
+import { TreeDisplayPipe, TreeNode } from '@lucca-front/ng/core-select';
 
 @Component({
 	selector: 'lu-select-panel',

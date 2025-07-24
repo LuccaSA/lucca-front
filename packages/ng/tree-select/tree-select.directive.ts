@@ -1,7 +1,5 @@
 import { Directive, inject, input, linkedSignal } from '@angular/core';
-import { ALuSelectInputComponent } from '@lucca-front/ng/core-select';
-import { TreeGroupingFn, TreeNode } from './model';
-import { TreeGenerator } from './tree-generator';
+import { ALuSelectInputComponent, TreeGenerator, TreeGroupingFn, TreeNode } from '@lucca-front/ng/core-select';
 
 @Directive({
 	// eslint-disable-next-line @angular-eslint/directive-selector
