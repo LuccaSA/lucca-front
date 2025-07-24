@@ -1,12 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { computed, Directive, forwardRef, inject, input, OnInit } from '@angular/core';
 import { toObservable } from '@angular/core/rxjs-interop';
-import { CORE_SELECT_API_TOTAL_COUNT_PROVIDER, CoreSelectApiTotalCountProvider } from '@lucca-front/ng/core-select';
+import { CORE_SELECT_API_TOTAL_COUNT_PROVIDER, CoreSelectApiTotalCountProvider, TreeNode } from '@lucca-front/ng/core-select';
 import { ALuCoreSelectApiDirective } from '@lucca-front/ng/core-select/api';
 import { combineLatest, map, Observable } from 'rxjs';
-import { ILuDepartment } from '../../department/department.model';
-import { TreeNode } from '../tree/model';
-import { NoopTreeSelectDirective } from '../tree/noop-tree-select.directive';
+import { NoopTreeSelectDirective } from './noop-tree-select.directive';
+import { ILuDepartment } from '@lucca-front/ng/department';
 
 @Directive({
 	// The attribute is already prefixed with "lu-simple-select" / "lu-multi-select"

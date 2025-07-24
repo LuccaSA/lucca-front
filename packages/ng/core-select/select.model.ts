@@ -1,4 +1,4 @@
-import { InjectionToken } from '@angular/core';
+import { Injectable, InjectionToken } from '@angular/core';
 import { Observable } from 'rxjs';
 
 export interface LuOptionContext<T> {
@@ -27,3 +27,22 @@ export interface CoreSelectApiTotalCountProvider {
 }
 
 export const CORE_SELECT_API_TOTAL_COUNT_PROVIDER = new InjectionToken<CoreSelectApiTotalCountProvider>('CoreSelectApiTotalCountProvider');
+
+@Injectable({
+	providedIn: 'root',
+	useFactory: () => new DefaultIsSelectedStrategy(),
+})
+export abstract class ɵIsSelectedStrategy<TOption> {
+	abstract isSelected(option: TOption, selectedOptions: TOption[], optionComparer: LuOptionComparer<TOption>): boolean;
+	abstract isGroupSelected(options: TOption[], notSelectedOptions: TOption[]): boolean;
+}
+
+class DefaultIsSelectedStrategy<TOption> extends ɵIsSelectedStrategy<TOption> {
+	isSelected(option: TOption, selectedOptions: TOption[], optionComparer: LuOptionComparer<TOption>): boolean {
+		return selectedOptions.some((o) => optionComparer(o, option));
+	}
+
+	isGroupSelected(options: TOption[], notSelectedOptions: TOption[]): boolean {
+		return !notSelectedOptions.length && notSelectedOptions.length !== options.length;
+	}
+}

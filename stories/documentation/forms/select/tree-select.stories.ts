@@ -1,21 +1,18 @@
 import { LOCALE_ID } from '@angular/core';
-import { Calendar2Component } from '@lucca-front/ng/date2';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { allLegumes, ILegume } from '@/stories/forms/select/select.utils';
 import { LuMultiSelectInputComponent } from '@lucca-front/ng/multi-select';
-import { TreeSelectDirective } from '@lucca-front/ng/core-select/tree';
-import { FilterPillComponent } from '../../../../packages/ng/filter-pills/filter-pill/filter-pill.component';
-import { LuCoreSelectDepartmentsDirective } from '../../../../packages/ng/core-select/department/departments.directive';
+import { TreeSelectDirective } from '@lucca-front/ng/tree-select';
 import { provideHttpClient } from '@angular/common/http';
 import { provideAnimations } from '@angular/platform-browser/animations';
-import { FormFieldComponent } from '../../../../packages/ng/form-field/form-field.component';
-import { FilterBarComponent } from '../../../../packages/ng/filter-pills/filter-bar/filter-bar.component';
-import { LuSimpleSelectInputComponent } from '../../../../packages/ng/simple-select/input';
-import { DividerComponent } from '../../../../packages/ng/divider/divider.component';
+import { expect, screen, userEvent, within } from 'storybook/test';
 import { createTestStory } from '../../../helpers/stories';
-import { expect, screen, userEvent, within } from '@storybook/test';
-import { BasicTEST as ButtonBasic } from '@/stories/actions/button/angular/button-basic.stories';
 import { waitForAngular } from '../../../helpers/test';
+import { FilterBarComponent, FilterPillComponent } from '@lucca-front/ng/filter-pills';
+import { LuCoreSelectDepartmentsDirective } from '@lucca-front/ng/core-select/department';
+import { FormFieldComponent } from '@lucca-front/ng/form-field';
+import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
+import { DividerComponent } from '@lucca-front/ng/divider';
 
 export default {
 	title: 'Documentation/Forms/TreeSelect',

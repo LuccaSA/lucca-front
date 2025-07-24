@@ -6,25 +6,25 @@ import { getIntl, PortalDirective } from '@lucca-front/ng/core';
 import {
 	CoreSelectKeyManager,
 	CoreSelectPanelInstance,
+	LuIsOptionSelectedPipe,
 	LuOptionGroup,
 	SELECT_ID,
 	SELECT_PANEL_INSTANCE,
+	TreeDisplayPipe,
+	TreeNode,
 	ɵCoreSelectPanelElement,
 	ɵgetGroupTemplateLocation,
 	ɵLuOptionComponent,
 	ɵLuOptionGroupPipe,
 } from '@lucca-front/ng/core-select';
 import { IconComponent } from '@lucca-front/ng/icon';
-import { TreeNode } from 'packages/ng/core-select/tree/model';
+import { TreeBranchComponent } from '@lucca-front/ng/tree-select';
 import { EMPTY } from 'rxjs';
-import { TreeBranchComponent } from '../../core-select/tree/tree-branch/tree-branch.component';
-import { TreeDisplayPipe } from '../../core-select/tree/tree-display.pipe';
 import { LuMultiSelectInputComponent } from '../input';
 import { LuMultiSelectPanelRef } from '../input/panel.model';
 import { MULTI_SELECT_INPUT } from '../select.model';
 import { LU_MULTI_SELECT_TRANSLATIONS } from '../select.translate';
 import { LuOptionsGroupContextPipe } from './option-group-context.pipe';
-import { LuIsOptionSelectedPipe } from './option-selected.pipe';
 
 @Component({
 	selector: 'lu-select-panel',

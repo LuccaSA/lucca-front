@@ -1,13 +1,9 @@
 import { booleanAttribute, ChangeDetectionStrategy, Component, input, output, TemplateRef, Type, ViewEncapsulation } from '@angular/core';
-import { LuIsOptionSelectedPipe } from '../../../multi-select/panel/option-selected.pipe';
-import { LuOptionComponent } from '../../option/option.component';
-import { CoreSelectPanelElement } from '../../panel/selectable-item';
-import { LuOptionComparer, LuOptionContext } from '../../select.model';
-import { TreeNode } from '../model';
+import { LuIsOptionSelectedPipe, LuOptionComparer, LuOptionContext, TreeNode, ɵCoreSelectPanelElement, ɵLuOptionComponent } from '@lucca-front/ng/core-select';
 
 @Component({
 	selector: 'lu-tree-branch',
-	imports: [CoreSelectPanelElement, LuIsOptionSelectedPipe, LuOptionComponent],
+	imports: [ɵCoreSelectPanelElement, LuIsOptionSelectedPipe, ɵLuOptionComponent],
 	templateUrl: './tree-branch.component.html',
 	styleUrl: './tree-branch.component.scss',
 	encapsulation: ViewEncapsulation.None,

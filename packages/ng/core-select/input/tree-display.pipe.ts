@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { TreeNode } from './model';
 import { TreeGenerator } from './tree-generator';
+import { TreeNode } from './model';
 
 @Pipe({
 	name: 'luTreeDisplay',
