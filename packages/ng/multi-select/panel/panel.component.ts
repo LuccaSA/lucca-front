@@ -1,27 +1,30 @@
 import { A11yModule } from '@angular/cdk/a11y';
-import { AsyncPipe, NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
+import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
 import { AfterViewInit, ChangeDetectionStrategy, Component, forwardRef, inject, signal, TrackByFunction } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { getIntl, PortalDirective } from '@lucca-front/ng/core';
 import {
 	CoreSelectKeyManager,
 	CoreSelectPanelInstance,
+	LuIsOptionSelectedPipe,
 	LuOptionGroup,
 	SELECT_ID,
 	SELECT_PANEL_INSTANCE,
+	TreeDisplayPipe,
+	TreeNode,
 	ɵCoreSelectPanelElement,
 	ɵgetGroupTemplateLocation,
 	ɵLuOptionComponent,
 	ɵLuOptionGroupPipe,
 } from '@lucca-front/ng/core-select';
+import { IconComponent } from '@lucca-front/ng/icon';
+import { TreeBranchComponent } from '@lucca-front/ng/tree-select';
 import { EMPTY } from 'rxjs';
 import { LuMultiSelectInputComponent } from '../input';
 import { LuMultiSelectPanelRef } from '../input/panel.model';
 import { MULTI_SELECT_INPUT } from '../select.model';
 import { LU_MULTI_SELECT_TRANSLATIONS } from '../select.translate';
 import { LuOptionsGroupContextPipe } from './option-group-context.pipe';
-import { LuIsOptionSelectedPipe } from './option-selected.pipe';
-import { IconComponent } from '@lucca-front/ng/icon';
 
 @Component({
 	selector: 'lu-select-panel',
@@ -34,8 +37,6 @@ import { IconComponent } from '@lucca-front/ng/icon';
 		AsyncPipe,
 		FormsModule,
 		LuIsOptionSelectedPipe,
-		NgIf,
-		NgFor,
 		ɵLuOptionComponent,
 		ɵLuOptionGroupPipe,
 		NgTemplateOutlet,
@@ -43,6 +44,8 @@ import { IconComponent } from '@lucca-front/ng/icon';
 		LuOptionsGroupContextPipe,
 		ɵCoreSelectPanelElement,
 		IconComponent,
+		TreeDisplayPipe,
+		TreeBranchComponent,
 	],
 	providers: [
 		CoreSelectKeyManager,
@@ -60,6 +63,7 @@ export class LuMultiSelectPanelComponent<T> implements AfterViewInit, CoreSelect
 
 	options$ = this.selectInput.options$;
 	grouping = this.selectInput.grouping;
+	treeGenerator = this.selectInput.treeGenerator;
 	loading$ = this.selectInput.loading$;
 	searchable = this.selectInput.searchable;
 	optionComparer = this.selectInput.optionComparer;
@@ -67,6 +71,7 @@ export class LuMultiSelectPanelComponent<T> implements AfterViewInit, CoreSelect
 
 	trackOptionsBy: TrackByFunction<T> = (_, option) => this.optionKey(option);
 	trackGroupsBy: TrackByFunction<LuOptionGroup<T, unknown>> = (_, group) => group.key;
+	trackBranchesBy: TrackByFunction<TreeNode<T>> = (_, option) => this.optionKey(option.node);
 
 	selectedOptions: T[] = this.selectInput.value || [];
 	optionTpl = this.selectInput.optionTpl;

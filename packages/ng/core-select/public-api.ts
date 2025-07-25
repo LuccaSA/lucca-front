@@ -6,3 +6,4 @@ export * from './panel/index';
 export * from './select.model';
 export * from './select.translate';
 export * from './select.utils';
+export * from './option-selected.pipe';
