@@ -10,6 +10,9 @@ import { ALuTreeOptionOperator, ILuTreeOptionOperator } from '../operator/index'
 import { ALuTreeOptionSelector, ILuTreeOptionSelector } from '../selector/index';
 import { ALuTreeOptionPickerComponent } from './tree-option-picker.component';
 
+/**
+ * @deprecated
+ */
 @Directive()
 export abstract class ALuTreeOptionPickerAdvancedComponent<T, O extends import('../item/tree-option-item.model').ILuTreeOptionItem<T> = import('../item/tree-option-item.model').ILuTreeOptionItem<T>>
 	extends ALuTreeOptionPickerComponent<T, O>
@@ -110,6 +113,7 @@ export abstract class ALuTreeOptionPickerAdvancedComponent<T, O extends import('
 
 /**
  * advanced option picker panel
+ * @deprecated
  */
 @Component({
 	selector: 'lu-tree-option-picker-advanced',
