@@ -16,22 +16,22 @@ import { LuMultiSelectDisplayerInputDirective } from './displayer-input.directiv
 	imports: [AsyncPipe, LuTooltipModule, ɵLuOptionOutletDirective, FormsModule, LuMultiSelectDisplayerInputDirective],
 	template: `
 		<div class="multipleSelect-displayer">
-		  <input autocomplete="off" #inputElement (keydown.backspace)="inputBackspace()" (keydown.space)="inputSpace($event)" luMultiSelectDisplayerInput />
-		  @for (option of displayedOptions$ | async; track option; let index = $index) {
-		    <div class="multipleSelect-displayer-chip chip" [class.mod-unkillable]="select.disabled$ | async">
-		      <span class="multipleSelect-displayer-chip-value"><ng-container *luOptionOutlet="select.displayerTpl(); value: option"></ng-container></span>
-		      @if ((select.disabled$ | async) === false) {
-		        <button type="button" class="chip-kill" (click)="unselectOption(option, $event)">
-		          <span class="u-mask">{{ intl.removeOption }}</span>
-		        </button>
-		      }
-		    </div>
-		  }
-		  @if (overflowOptions$ | async; as overflow) {
-		    <div class="multipleSelect-displayer-chip chip">+ {{ overflow }}</div>
-		  }
+			<input autocomplete="off" #inputElement (keydown.backspace)="inputBackspace()" (keydown.space)="inputSpace($event)" luMultiSelectDisplayerInput />
+			@for (option of displayedOptions$ | async; track option; let index = $index) {
+				<div class="multipleSelect-displayer-chip chip" [class.mod-unkillable]="select.disabled$ | async">
+					<span class="multipleSelect-displayer-chip-value"><ng-container *luOptionOutlet="select.displayerTpl(); value: option"></ng-container></span>
+					@if ((select.disabled$ | async) === false) {
+						<button type="button" class="chip-kill" (click)="unselectOption(option, $event)">
+							<span class="u-mask">{{ intl.removeOption }}</span>
+						</button>
+					}
+				</div>
+			}
+			@if (overflowOptions$ | async; as overflow) {
+				<div class="multipleSelect-displayer-chip chip">+ {{ overflow }}</div>
+			}
 		</div>
-		`,
+	`,
 	styleUrls: ['./default-displayer.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
