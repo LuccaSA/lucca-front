@@ -1,0 +1,35 @@
+@use 'exports' as *;
+
+.checkboxField.mod-checklist {
+	@include checklist;
+
+	.checkboxField-input:hover {
+		@include checklistHover;
+	}
+
+	&:has(.checkboxField-input:focus-visible) {
+		.checkboxField-input {
+			@include checklistHover;
+		}
+	}
+	@supports not selector(:has(*)) {
+		&:focus-within .checkboxField-input {
+			@include checklistHover;
+		}
+	}
+
+	.checkboxField-input:not(:disabled) {
+        &:checked {
+            @include checklistChecked;
+        }
+        &:active {
+            @include checklistActive;
+        }
+	}
+
+	.checkboxField-input:disabled {
+		@include checklistDisabled;
+	}
+
+}
+

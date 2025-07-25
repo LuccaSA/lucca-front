@@ -7,10 +7,6 @@
 	&.mod-S {
 		@include S;
 	}
-
-	&.mod-checklist {
-		@include checklist;
-	}
 }
 
 .checkboxField-input {
