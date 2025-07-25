@@ -14,22 +14,22 @@ import { LuMultiSelectDisplayerInputDirective } from '../displayer-input.directi
 	imports: [AsyncPipe, LuTooltipModule, NgPlural, NgPluralCase, ɵLuOptionOutletDirective, FormsModule, LuMultiSelectDisplayerInputDirective],
 	template: `
 		<div class="multipleSelect-displayer mod-filter" [class.is-filled]="(selectedOptions$ | async)?.length > 0">
-		  <input type="text" autocomplete="off" #inputElement luMultiSelectDisplayerInput />
-		  @if (selectedOptions$ | async; as selectedOptions) {
-		    <div class="multipleSelect-displayer-filter">
-		      @if (selectedOptions?.length === 1) {
-		        <div class="multipleSelect-displayer-chip chip mod-unkillable">
-		          <ng-container *luOptionOutlet="select.displayerTpl(); value: selectedOptions[0]"></ng-container>
-		        </div>
-		      }
-		      @if (selectedOptions?.length > 1) {
-		        <span class="multipleSelect-displayer-numericBadge numericBadge">{{ selectedOptions?.length }}</span
-		          ><span class="multipleSelect-displayer-label">{{ label }}</span>
-		        }
-		      </div>
-		    }
-		  </div>
-		`,
+			<input type="text" autocomplete="off" #inputElement luMultiSelectDisplayerInput />
+			@if (selectedOptions$ | async; as selectedOptions) {
+				<div class="multipleSelect-displayer-filter">
+					@if (selectedOptions?.length === 1) {
+						<div class="multipleSelect-displayer-chip chip mod-unkillable">
+							<ng-container *luOptionOutlet="select.displayerTpl(); value: selectedOptions[0]"></ng-container>
+						</div>
+					}
+					@if (selectedOptions?.length > 1) {
+						<span class="multipleSelect-displayer-numericBadge numericBadge">{{ selectedOptions?.length }}</span
+						><span class="multipleSelect-displayer-label">{{ label }}</span>
+					}
+				</div>
+			}
+		</div>
+	`,
 	styleUrls: ['./counter-displayer.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
