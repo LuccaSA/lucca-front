@@ -32,7 +32,7 @@ export class CheckboxInputComponent implements FilterPillInputComponent {
 
 	isFilterPill = false;
 	filterPillInputId = `lu-checkbox-pill-input-${nextId++}`;
-	isChecklist = input<boolean, boolean>(false, { transform: booleanAttribute });
+	isChecklist = input(false, { transform: booleanAttribute });
 
 	filterPillLayout: Signal<FilterPillLayout> = signal('checkable');
 	isFilterPillEmpty: Signal<boolean> = signal(true);
