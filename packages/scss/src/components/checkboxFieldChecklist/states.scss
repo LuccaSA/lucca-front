@@ -1,20 +1,18 @@
 @mixin checklistHover {
-	&:not(:disabled) {
-		& ~ .checkboxField-icon {
-			background-color: var(--palettes-success-50);
-			border-color: var(--palettes-success-600);
-			.checkboxField-icon-check {
-				color: var(--palettes-success-600);
-			}
-		}
-		&:checked ~ .checkboxField-icon {
-			background-color: var(--palettes-success-800);
-			border-color: var(--palettes-success-800);
-			.checkboxField-icon-check {
-				color: var(--palettes-neutral-0);
-			}
-		}
-	}
+    & ~ .checkboxField-icon {
+        background-color: var(--palettes-success-50);
+        border-color: var(--palettes-success-600);
+        .checkboxField-icon-check {
+            color: var(--palettes-success-600);
+        }
+    }
+    &:checked ~ .checkboxField-icon {
+        background-color: var(--palettes-success-800);
+        border-color: var(--palettes-success-800);
+        .checkboxField-icon-check {
+            color: var(--palettes-neutral-0);
+        }
+    }
 }
 
 @mixin checklistChecked {

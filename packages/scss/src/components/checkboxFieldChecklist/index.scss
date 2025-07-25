@@ -3,8 +3,16 @@
 .checkboxField.mod-checklist {
 	@include checklist;
 
-	.checkboxField-input:hover {
-		@include checklistHover;
+	.checkboxField-input:not(:disabled) {
+        &:hover {
+    		@include checklistHover;
+        }
+        &:checked {
+            @include checklistChecked;
+        }
+        &:active {
+            @include checklistActive;
+        }
 	}
 
 	&:has(.checkboxField-input:focus-visible) {
@@ -16,15 +24,6 @@
 		&:focus-within .checkboxField-input {
 			@include checklistHover;
 		}
-	}
-
-	.checkboxField-input:not(:disabled) {
-        &:checked {
-            @include checklistChecked;
-        }
-        &:active {
-            @include checklistActive;
-        }
 	}
 
 	.checkboxField-input:disabled {
