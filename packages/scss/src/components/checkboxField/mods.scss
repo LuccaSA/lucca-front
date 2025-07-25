@@ -5,3 +5,111 @@
 	--component-checkboxField-label-fontSize: var(--pr-t-font-body-S-fontSize);
 	--component-checkboxField-label-lineHeight: var(--pr-t-font-body-S-lineHeight);
 }
+
+@mixin checklist {
+	// default state
+	.checkboxField-icon {
+		--component-checkboxField-borderRadius: var(--commons-borderRadius-full);
+		border-color: var(--palettes-neutral-300);
+	}
+	.checkboxField-icon-check {
+		color: var(--palettes-neutral-300);
+		transform: scale(1);
+	}
+
+	// hover
+	.checkboxField-input:hover {
+		@include checklistHover;
+	}
+
+	// focus
+	&:has(.checkboxField-input:focus-visible) {
+		.checkboxField-input {
+			@include checklistHover;
+		}
+	}
+	@supports not selector(:has(*)) {
+		&:focus-within .checkboxField-input {
+			@include checklistHover;
+		}
+	}
+
+	// active
+	.checkboxField-input:not(:disabled):active {
+		& ~ .checkboxField-icon {
+			background-color: var(--palettes-success-100);
+		}
+		&:checked ~ .checkboxField-icon {
+			background-color: var(--palettes-success-900);
+			border-color: var(--palettes-success-900);
+		}
+	}
+
+	// checked
+	.checkboxField-input:not(:disabled):checked {
+		~ .checkboxField-icon {
+			background-color: var(--palettes-success-700);
+			border-color: var(--palettes-success-700);
+			.checkboxField-icon-check {
+				animation: var(--commons-animations-durations-standard) ease-in-out checklist-bounce;
+				color: var(--palettes-neutral-0);
+				transform-origin: center;
+			}
+		}
+	}
+
+	// disabled
+	.checkboxField-input:disabled {
+		&:not(:checked) ~ .checkboxField-icon {
+			border-color: var(--palettes-neutral-300);
+			.checkboxField-icon-check {
+				transform: scale(0);
+			}
+		}
+		&:checked {
+			~ .checkboxField-icon {
+				background-color: var(--palettes-neutral-100);
+				border-color: var(--palettes-neutral-100);
+				.checkboxField-icon-check {
+					color: var(--palettes-neutral-600);
+				}
+			}
+		}
+	}
+
+	// progressive enhancement => label color for items marked as checked on modern browsers
+	.formLabel:has(~ & > .checkboxField-input:not(:disabled):checked) {
+		--components-formLabel-color: var(--pr-t-color-text-subtle);
+	}
+}
+
+@mixin checklistHover {
+	&:not(:disabled) {
+		& ~ .checkboxField-icon {
+			background-color: var(--palettes-success-50);
+			border-color: var(--palettes-success-600);
+			.checkboxField-icon-check {
+				color: var(--palettes-success-600);
+			}
+		}
+		&:checked ~ .checkboxField-icon {
+			background-color: var(--palettes-success-800);
+			border-color: var(--palettes-success-800);
+			.checkboxField-icon-check {
+				color: var(--palettes-neutral-0);
+			}
+		}
+	}
+}
+
+@keyframes checklist-bounce {
+	0% {
+		transform: scale(1);
+	}
+	55% {
+		transform: scale(1.3);
+	}
+	100% {
+		transform: scale(1);
+	}
+}
