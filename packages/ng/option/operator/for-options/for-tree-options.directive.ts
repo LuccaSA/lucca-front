@@ -3,7 +3,9 @@ import { Directive, forwardRef, OnDestroy } from '@angular/core';
 import { ILuTree } from '@lucca-front/ng/core';
 import { ALuTreeOptionOperator, ILuTreeOptionOperator } from '../tree-option-operator.model';
 import { LuForOptionsDirective } from './for-options.directive';
-
+/**
+ * @deprecated
+ */
 @Directive({
 	selector: '[luForTreeOptions]',
 	standalone: true,
