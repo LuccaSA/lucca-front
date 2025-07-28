@@ -39,6 +39,7 @@
 
 @mixin checklistDisabled {
     &:not(:checked) ~ .checkboxField-icon {
+        background-color: var(--palettes-neutral-0);
         border-color: var(--palettes-neutral-300);
         .checkboxField-icon-check {
             transform: scale(0);

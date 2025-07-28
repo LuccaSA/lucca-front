@@ -3,7 +3,7 @@
 .checkboxField.mod-checklist {
 	@include checklist;
 
-	.checkboxField-input:not(:disabled) {
+	.checkboxField-input {
 		&:hover {
 			@include checklistHover;
 		}
