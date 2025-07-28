@@ -10,15 +10,15 @@
 
 	&:hover {
 		~ .switchField-icon {
-			background-color: var(--palettes-product-600);
-			border-color: var(--palettes-product-600);
+			background-color: var(--palettes-product-800);
+			border-color: var(--palettes-product-800);
 		}
 	}
 
 	&:active {
 		~ .switchField-icon {
-			background-color: var(--palettes-product-800);
-			border-color: var(--palettes-product-800);
+			background-color: var(--palettes-product-900);
+			border-color: var(--palettes-product-900);
 		}
 	}
 }
@@ -57,15 +57,15 @@
 
 	&:hover {
 		~ .switchField-icon {
-			background-color: var(--palettes-error-600);
-			border-color: var(--palettes-error-600);
+			background-color: var(--palettes-error-800);
+			border-color: var(--palettes-error-800);
 		}
 	}
 
 	&:active {
 		~ .switchField-icon {
-			background-color: var(--palettes-error-800);
-			border-color: var(--palettes-error-800);
+			background-color: var(--palettes-error-900);
+			border-color: var(--palettes-error-900);
 		}
 	}
 }

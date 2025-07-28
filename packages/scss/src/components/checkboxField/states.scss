@@ -32,8 +32,8 @@
 
 @mixin checkedActive {
 	~ .checkboxField-icon {
-		background-color: var(--palettes-800, var(--palettes-product-800));
-		border-color: var(--palettes-800, var(--palettes-product-800));
+		background-color: var(--palettes-900, var(--palettes-product-900));
+		border-color: var(--palettes-900, var(--palettes-product-900));
 	}
 }
 
@@ -47,8 +47,8 @@
 
 @mixin checkedHover {
 	~ .checkboxField-icon {
-		background-color: var(--palettes-600, var(--palettes-product-600));
-		border-color: var(--palettes-600, var(--palettes-product-600));
+		background-color: var(--palettes-800, var(--palettes-product-800));
+		border-color: var(--palettes-800, var(--palettes-product-800));
 	}
 }
 
@@ -61,7 +61,7 @@
 
 @mixin active {
 	~ .checkboxField-icon {
-		border-color: var(--palettes-neutral-800);
+		border-color: var(--palettes-neutral-900);
 	}
 }
 
@@ -89,26 +89,26 @@
 
 @mixin invalidHover {
 	~ .checkboxField-icon {
-		border-color: var(--palettes-error-600);
+		border-color: var(--palettes-error-800);
 	}
 }
 
 @mixin invalidActive {
 	~ .checkboxField-icon {
-		border-color: var(--palettes-error-800);
+		border-color: var(--palettes-error-900);
 	}
 }
 
 @mixin checkedInvalidHover {
 	~ .checkboxField-icon {
-		background-color: var(--palettes-error-600);
-		border-color: var(--palettes-error-600);
+		background-color: var(--palettes-error-800);
+		border-color: var(--palettes-error-800);
 	}
 }
 
 @mixin checkedInvalidActive {
 	~ .checkboxField-icon {
-		background-color: var(--palettes-error-800);
-		border-color: var(--palettes-error-800);
+		background-color: var(--palettes-error-900);
+		border-color: var(--palettes-error-900);
 	}
 }

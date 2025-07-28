@@ -23,7 +23,7 @@
 	&:not([disabled], [readonly]) {
 		~ .switch-label {
 			&::before {
-				background-color: var(--palettes-600, var(--palettes-product-600));
+				background-color: var(--palettes-800, var(--palettes-product-800));
 			}
 		}
 	}
@@ -33,7 +33,7 @@
 	&:not([disabled], [readonly]) {
 		~ .switch-label {
 			&::before {
-				background-color: var(--palettes-800, var(--palettes-product-800));
+				background-color: var(--palettes-900, var(--palettes-product-900));
 			}
 		}
 	}
@@ -42,7 +42,7 @@
 @mixin hover {
 	~ .switch-label {
 		&::before {
-			background-color: var(--palettes-neutral-400);
+			background-color: var(--palettes-neutral-600);
 		}
 	}
 }
@@ -51,7 +51,7 @@
 	&:not([disabled], [readonly]) {
 		~ .switch-label {
 			&::before {
-				background-color: var(--palettes-neutral-600);
+				background-color: var(--palettes-neutral-800);
 			}
 		}
 	}
