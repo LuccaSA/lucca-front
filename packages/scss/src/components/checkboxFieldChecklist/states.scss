@@ -1,5 +1,5 @@
 @mixin checklistHover {
-    & ~ .checkboxField-icon {
+    ~ .checkboxField-icon {
         background-color: var(--palettes-success-50);
         border-color: var(--palettes-success-600);
         .checkboxField-icon-check {

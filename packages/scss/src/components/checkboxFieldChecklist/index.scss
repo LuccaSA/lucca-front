@@ -4,15 +4,15 @@
 	@include checklist;
 
 	.checkboxField-input:not(:disabled) {
-        &:hover {
-    		@include checklistHover;
-        }
-        &:checked {
-            @include checklistChecked;
-        }
-        &:active {
-            @include checklistActive;
-        }
+		&:hover {
+			@include checklistHover;
+		}
+		&:checked {
+			@include checklistChecked;
+		}
+		&:active {
+			@include checklistActive;
+		}
 	}
 
 	&:has(.checkboxField-input:focus-visible) {
