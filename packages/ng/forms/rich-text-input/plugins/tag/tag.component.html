@@ -1,11 +1,9 @@
-<div class="editor-tagContainer" (keydown.arrowleft)="focusTag($event, -1)" (keydown.arrowRight)="focusTag($event, 1)">
-	<span>{{ intl.insertTag }}</span>
+<div class="richTextField-toolbar-chips" (keydown.arrowleft)="focusTag($event, -1)" (keydown.arrowRight)="focusTag($event, 1)">
+	<span>{{ intl.insertTag }} :</span>
 	@for (tag of tags(); track tag) {
 		<button
 			type="button"
-			luButton
-			size="S"
-			class="editor-tag"
+			class="chip richTextField-toolbar-chips-item"
 			(click)="insertTag(tag)"
 			[attr.tabindex]="tabindex()"
 			[disabled]="isDisabled()"

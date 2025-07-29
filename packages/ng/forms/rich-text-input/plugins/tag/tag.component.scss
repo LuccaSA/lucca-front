@@ -1,12 +1,3 @@
-.editor-tagContainer {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--pr-t-spacings-100);
-  align-items: center;
-}
-
-.editor-tag {
-	font-weight: var(--pr-t-font-fontWeight-regular);
-	padding-block: calc(var(--pr-t-spacings-50) / 2);
-	padding-inline: var(--pr-t-spacings-100);
+lu-rich-text-plugin-tag {
+	display: contents;
 }
