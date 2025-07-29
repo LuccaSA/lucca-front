@@ -73,15 +73,15 @@
 			&:not(:disabled):checked ~ .checkbox-label {
 				&:hover {
 					&::before {
-						background-color: var(--palettes-600, var(--palettes-product-600));
-						border-color: var(--palettes-600, var(--palettes-product-600));
+						background-color: var(--palettes-800, var(--palettes-product-800));
+						border-color: var(--palettes-800, var(--palettes-product-800));
 					}
 				}
 
 				&:active {
 					&::before {
-						background-color: var(--palettes-800, var(--palettes-product-800));
-						border-color: var(--palettes-800, var(--palettes-product-800));
+						background-color: var(--palettes-900, var(--palettes-product-900));
+						border-color: var(--palettes-900, var(--palettes-product-900));
 					}
 				}
 			}

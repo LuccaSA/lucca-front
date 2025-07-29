@@ -31,6 +31,11 @@ export default {
 		hiddenLabel: {
 			description: "Masque le label en le conservant dans le DOM pour les lecteurs d'écrans",
 		},
+		checklist: {
+			control: {
+				type: 'boolean',
+			},
+		},
 	},
 } as Meta;
 
@@ -70,5 +75,6 @@ export const Basic: StoryObj<CheckboxInputComponent & FormFieldComponent & { req
 		mixed: false,
 		inlineMessage: 'Helper text',
 		inlineMessageState: 'default',
+		checklist: false,
 	},
 };
