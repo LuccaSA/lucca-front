@@ -28,6 +28,9 @@ export default {
 		hiddenLabel: {
 			description: "Masque le label en le conservant dans le DOM pour les lecteurs d'écrans",
 		},
+		tooltip: {
+			if: { arg: 'hiddenLabel', truthy: false },
+		},
 	},
 } as Meta;
 
@@ -62,9 +65,9 @@ export const Basic: StoryObj<RadioGroupInputComponent & FormFieldComponent & { r
 		};
 	},
 	args: {
+		hiddenLabel: false,
 		label: 'Label',
 		tooltip: 'Tooltip message',
-		hiddenLabel: false,
 		required: true,
 		inlineMessage: 'Helper message',
 		inlineMessageState: 'default',
