@@ -23,7 +23,9 @@
 						<button class="segmentedControl-item-action" type="button" role="tab" id="tab1" aria-selected="false">Dolor sit</button>
 					</li>
 					<li class="segmentedControl-item" role="presentation">
-						<button class="segmentedControl-item-action" type="button" role="tab" id="tab1" aria-selected="false">Lorem Consectetur</button>
+						<button class="segmentedControl-item-action" type="button" role="tab" id="tab1" aria-selected="false" disabled>
+							Lorem Consectetur
+						</button>
 					</li>
 				</ul>
 			</td>
@@ -51,7 +53,7 @@
 						</button>
 					</li>
 					<li class="segmentedControl-item" role="presentation">
-						<button class="segmentedControl-item-action" type="button" role="tab" id="tab1" aria-selected="false">
+						<button class="segmentedControl-item-action" type="button" role="tab" id="tab1" aria-selected="false" disabled>
 							Lorem Consectetur <span class="numericBadge">567</span>
 						</button>
 					</li>
@@ -81,8 +83,38 @@
 						</button>
 					</li>
 					<li class="segmentedControl-item" role="presentation">
-						<button class="segmentedControl-item-action" type="button" role="tab" id="tab1" aria-selected="false">
+						<button class="segmentedControl-item-action" type="button" role="tab" id="tab1" aria-selected="false" disabled>
 							Lorem Consectetur <span class="numericBadge is-loading">567</span>
+						</button>
+					</li>
+				</ul>
+			</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>Tabs + S</td>
+			<td>
+				<ul class="segmentedControl mod-S" role="tablist">
+					<li class="segmentedControl-item" role="presentation">
+						<button class="segmentedControl-item-action" type="button" role="tab" id="tab1" aria-selected="true">
+							Lorem <span class="numericBadge">1</span>
+						</button>
+					</li>
+					<li class="segmentedControl-item" role="presentation">
+						<button class="segmentedControl-item-action" type="button" role="tab" id="tab1" aria-selected="false">
+							Ipsum
+							<span class="numericBadge">2</span>
+						</button>
+					</li>
+					<li class="segmentedControl-item" role="presentation">
+						<button class="segmentedControl-item-action" type="button" role="tab" id="tab1" aria-selected="false">
+							Dolor sit
+							<span class="numericBadge is-loading">34</span>
+						</button>
+					</li>
+					<li class="segmentedControl-item" role="presentation">
+						<button class="segmentedControl-item-action" type="button" role="tab" id="tab1" aria-selected="false" disabled>
+							Lorem Consectetur <span class="numericBadge">567</span>
 						</button>
 					</li>
 				</ul>
@@ -106,7 +138,7 @@
 						<label for="tab3" class="segmentedControl-item-action"> Dolor sit </label>
 					</li>
 					<li class="segmentedControl-item">
-						<input type="radio" class="segmentedControl-item-input" name="tabA" id="tab4" />
+						<input type="radio" class="segmentedControl-item-input" name="tabA" id="tab4" disabled />
 						<label for="tab4" class="segmentedControl-item-action">Lorem Consectetur</label>
 					</li>
 				</ul>
@@ -136,15 +168,15 @@
 						</label>
 					</li>
 					<li class="segmentedControl-item">
-						<input type="radio" class="segmentedControl-item-input" name="tabB" id="tab4" />
-						<label for="tab4" class="segmentedControl-item-action">Lorem Consectetur <span class="numericBadge">56</span></label>
+						<input type="radio" class="segmentedControl-item-input" name="tabB" id="tab4" disabled />
+						<label for="tab4" class="segmentedControl-item-action">Lorem Consectetur <span class="numericBadge">567</span></label>
 					</li>
 				</ul>
 			</td>
 			<td></td>
 		</tr>
 		<tr>
-			<td>Filtres + Numeric</td>
+			<td>Filtres + Numeric + Loading</td>
 			<td>
 				<ul class="segmentedControl" role="presentation">
 					<li class="segmentedControl-item">
@@ -166,8 +198,40 @@
 						</label>
 					</li>
 					<li class="segmentedControl-item">
-						<input type="radio" class="segmentedControl-item-input" name="tabC" id="tab4" />
-						<label for="tab4" class="segmentedControl-item-action">Lorem Consectetur <span class="numericBadge is-loading">56</span></label>
+						<input type="radio" class="segmentedControl-item-input" name="tabC" id="tab4" disabled />
+						<label for="tab4" class="segmentedControl-item-action"
+							>Lorem Consectetur <span class="numericBadge is-loading">567</span></label
+						>
+					</li>
+				</ul>
+			</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>Filtres + S</td>
+			<td>
+				<ul class="segmentedControl mod-S" role="presentation">
+					<li class="segmentedControl-item">
+						<input type="radio" class="segmentedControl-item-input" name="tabD" id="tab1" checked />
+						<label for="tab1" class="segmentedControl-item-action">Lorem <span class="numericBadge">1</span></label>
+					</li>
+					<li class="segmentedControl-item">
+						<input type="radio" class="segmentedControl-item-input" name="tabD" id="tab2" />
+						<label for="tab2" class="segmentedControl-item-action">
+							Ipsum
+							<span class="numericBadge">2</span>
+						</label>
+					</li>
+					<li class="segmentedControl-item">
+						<input type="radio" class="segmentedControl-item-input" name="tabD" id="tab3" />
+						<label for="tab3" class="segmentedControl-item-action">
+							Dolor sit
+							<span class="numericBadge is-loading">34</span>
+						</label>
+					</li>
+					<li class="segmentedControl-item">
+						<input type="radio" class="segmentedControl-item-input" name="tabD" id="tab4" disabled />
+						<label for="tab4" class="segmentedControl-item-action">Lorem Consectetur <span class="numericBadge">567</span></label>
 					</li>
 				</ul>
 			</td>
