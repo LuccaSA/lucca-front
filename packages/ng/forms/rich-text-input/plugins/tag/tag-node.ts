@@ -22,6 +22,7 @@ export type SerializedTagNode = Spread<
 	{
 		tagKey?: string;
 		tagDescription?: string;
+		disabled?: boolean;
 	},
 	SerializedLexicalNode
 >;
@@ -29,7 +30,7 @@ export type SerializedTagNode = Spread<
 export class TagNode extends DecoratorNode<string> {
 	#tagKey: string;
 	#tagDescription?: string;
-	#partial: boolean; // Indicates if the tag is a partial tag (not fully defined)
+	#disabled: boolean;
 	// Store the component reference on the node instance
 	#componentRef?: ComponentRef<ChipComponent>;
 	#deleteButton?: HTMLButtonElement;
@@ -39,11 +40,21 @@ export class TagNode extends DecoratorNode<string> {
 		TagNode.#viewContainerRef = vcr;
 	}
 
-	constructor(tagKey = '', tagDescription?: string, partial = false, key?: NodeKey) {
+	constructor(tagKey = '', tagDescription?: string, disabled = false, key?: NodeKey) {
 		super(key);
 		this.#tagKey = tagKey;
 		this.#tagDescription = tagDescription;
-		this.#partial = partial;
+		this.#disabled = disabled;
+	}
+
+	isDisabled(): boolean {
+		return this.#disabled;
+	}
+
+	setDisabled(disabled: boolean): this {
+		const self = this.getWritable();
+		self.#disabled = disabled;
+		return self;
 	}
 
 	getTagKey(): string {
@@ -66,22 +77,12 @@ export class TagNode extends DecoratorNode<string> {
 		return self;
 	}
 
-	isPartial(): boolean {
-		return this.#partial;
-	}
-
-	setPartial(partial: boolean): this {
-		const self = this.getWritable();
-		self.#partial = partial;
-		return self;
-	}
-
 	static override getType(): string {
 		return 'tag';
 	}
 
 	static override clone(node: TagNode): TagNode {
-		return new TagNode(node.#tagKey, node.#tagDescription, node.#partial, node.__key);
+		return new TagNode(node.#tagKey, node.#tagDescription, node.#disabled, node.__key);
 	}
 
 	/**
@@ -99,6 +100,7 @@ export class TagNode extends DecoratorNode<string> {
 			// Set inputs on the component instance
 			this.#componentRef.setInput('unkillable', false);
 			this.#componentRef.setInput('palette', 'product');
+			this.#componentRef.setInput('disabled', this.#disabled);
 
 			// Get the component's DOM element
 			const componentElement = this.#componentRef.location.nativeElement as HTMLElement;
@@ -123,7 +125,7 @@ export class TagNode extends DecoratorNode<string> {
 	}
 
 	override updateDOM(prevNode: TagNode, _dom: HTMLElement, _config: EditorConfig): boolean {
-		return this.#tagDescription !== prevNode.#tagDescription || this.#tagKey !== prevNode.#tagKey;
+		return this.#tagDescription !== prevNode.#tagDescription || this.#tagKey !== prevNode.#tagKey || this.#disabled !== prevNode.#disabled;
 	}
 
 	override remove(preserveEmptyParent?: boolean): void {
@@ -152,13 +154,13 @@ export class TagNode extends DecoratorNode<string> {
 	}
 
 	override updateFromJSON(serializedNode: LexicalUpdateJSON<SerializedTagNode>): this {
-		return super.updateFromJSON(serializedNode).setTagDescription(serializedNode.tagDescription).setTagKey(serializedNode.tagKey);
+		return super.updateFromJSON(serializedNode).setTagDescription(serializedNode.tagDescription).setTagKey(serializedNode.tagKey).setDisabled(serializedNode.disabled);
 	}
 
 	override exportJSON(): SerializedTagNode {
 		return {
 			...super.exportJSON(),
-			...{ tagDescription: this.#tagDescription, tagKey: this.#tagKey },
+			...{ tagDescription: this.#tagDescription, tagKey: this.#tagKey, disabled: this.#disabled },
 		};
 	}
 }

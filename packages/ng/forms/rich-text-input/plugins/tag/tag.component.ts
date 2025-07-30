@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, effect, ElementRef, forwardRef, inject, input, OnDestroy, signal, viewChildren, ViewContainerRef } from '@angular/core';
-import { $getNodeByKey, $getRoot, $getSelection, type Klass, type LexicalEditor, type LexicalNode } from 'lexical';
+import { $getNodeByKey, $getRoot, $getSelection, type Klass, type LexicalEditor, type LexicalNode, type NodeKey } from 'lexical';
 import { RICH_TEXT_PLUGIN_COMPONENT, RichTextPluginComponent } from '../../rich-text-input.component';
 import { getIntl } from '@lucca-front/ng/core';
 import { LU_RICH_TEXT_INPUT_TRANSLATIONS } from '../../rich-text-input.translate';
@@ -9,11 +9,9 @@ import { ButtonComponent } from '@lucca-front/ng/button';
 
 @Component({
 	selector: 'lu-rich-text-plugin-tag',
-	standalone: true,
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	templateUrl: './tag.component.html',
 	styleUrl: 'tag.component.scss',
-	imports: [ButtonComponent],
 	providers: [
 		{
 			provide: RICH_TEXT_PLUGIN_COMPONENT,
@@ -34,7 +32,7 @@ export class TagComponent implements RichTextPluginComponent, OnDestroy {
 
 	editor: LexicalEditor | null = null;
 
-	#newPartialTagNodes = signal<TagNode[]>([]);
+	#tagNodeKeys = signal(new Set<NodeKey>());
 
 	#registeredCommands = () => {};
 
@@ -45,16 +43,20 @@ export class TagComponent implements RichTextPluginComponent, OnDestroy {
 		effect(() => {
 			const tags = this.tags();
 			// filter out previously recorded nodes
-			const nodes = this.#newPartialTagNodes();
+			const nodes = this.#tagNodeKeys();
+			const isDisabled = this.isDisabled();
 
 			this.editor.update(() => {
 				nodes.forEach((node) => {
-					const tag = tags.find((t) => t.key === node.getTagKey());
+					const tagNode = $getNodeByKey<TagNode>(node);
+					if (!tagNode) {
+						return;
+					}
+					const tag = tags.find((t) => t.key === tagNode.getTagKey());
 					if (tag) {
-						// mark node as updated
-						node.setTagDescription(tag.description).setPartial(false);
+						tagNode.setTagDescription(tag.description).setDisabled(isDisabled);
 					} else {
-						node.remove();
+						tagNode.remove();
 					}
 				});
 			});
@@ -68,18 +70,17 @@ export class TagComponent implements RichTextPluginComponent, OnDestroy {
 		this.#registeredCommands = this.editor.registerMutationListener(
 			TagNode,
 			(mutations) => {
-				const newPartialNodes: TagNode[] = [];
+				const newNodes = new Set<NodeKey>(this.#tagNodeKeys());
 				this.editor.read(() => {
 					mutations.forEach((m, k) => {
 						if (m === 'created') {
-							const node = $getNodeByKey<TagNode>(k);
-							if (node.isPartial()) {
-								newPartialNodes.push(node);
-							}
+							newNodes.add(k);
+						} else if (m === 'destroyed') {
+							newNodes.delete(k);
 						}
 					});
-					if (newPartialNodes.length > 0) {
-						this.#newPartialTagNodes.set(newPartialNodes);
+					if (newNodes.size !== this.#tagNodeKeys().size) {
+						this.#tagNodeKeys.set(newNodes);
 					}
 				});
 			},
