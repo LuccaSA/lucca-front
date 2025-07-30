@@ -33,7 +33,6 @@ export class TagNode extends DecoratorNode<string> {
 	#disabled: boolean;
 	// Store the component reference on the node instance
 	#componentRef?: ComponentRef<ChipComponent>;
-	#deleteButton?: HTMLButtonElement;
 	static #viewContainerRef: ViewContainerRef;
 
 	static setViewContainerRef(vcr: ViewContainerRef): void {
@@ -107,9 +106,7 @@ export class TagNode extends DecoratorNode<string> {
 
 			const textNode = document.createTextNode(this.#tagDescription ?? this.#tagKey);
 			componentElement.insertBefore(textNode, componentElement.firstChild);
-
-			// Trigger change detection to apply the input changes and render the template
-			this.#componentRef.hostView.detectChanges();
+			componentElement.classList.add('mod-S');
 
 			// Add click handler ONLY to the delete button, not the whole chip
 			this.#componentRef.instance.kill.subscribe(() => {
@@ -130,9 +127,6 @@ export class TagNode extends DecoratorNode<string> {
 
 	override remove(preserveEmptyParent?: boolean): void {
 		super.remove(preserveEmptyParent);
-		if (this.#deleteButton) {
-			this.#deleteButton.onclick = null;
-		}
 		this.#componentRef?.destroy();
 	}
 
