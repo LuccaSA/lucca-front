@@ -5,7 +5,6 @@ import { getIntl } from '@lucca-front/ng/core';
 import { LU_RICH_TEXT_INPUT_TRANSLATIONS } from '../../rich-text-input.translate';
 import { $createTagNode, TagNode } from './tag-node';
 import type { Tag } from './tag.model';
-import { ButtonComponent } from '@lucca-front/ng/button';
 
 @Component({
 	selector: 'lu-rich-text-plugin-tag',
@@ -28,7 +27,7 @@ export class TagComponent implements RichTextPluginComponent, OnDestroy {
 	readonly tabindex = signal<number>(-1);
 	readonly focusIndex = signal<number>(0);
 
-	readonly focusableElements = viewChildren(ButtonComponent, { read: ElementRef });
+	readonly focusableElements = viewChildren('tagButton', { read: ElementRef });
 
 	editor: LexicalEditor | null = null;
 
