@@ -97,8 +97,8 @@ export class TagNode extends DecoratorNode<string> {
 			this.#componentRef = TagNode.#viewContainerRef.createComponent(ChipComponent);
 
 			// Set inputs on the component instance
-			this.#componentRef.instance.unkillable = false;
-			this.#componentRef.instance.palette = 'product';
+			this.#componentRef.setInput('unkillable', false);
+			this.#componentRef.setInput('palette', 'product');
 
 			// Get the component's DOM element
 			const componentElement = this.#componentRef.location.nativeElement as HTMLElement;
@@ -110,15 +110,11 @@ export class TagNode extends DecoratorNode<string> {
 			this.#componentRef.hostView.detectChanges();
 
 			// Add click handler ONLY to the delete button, not the whole chip
-			this.#deleteButton = componentElement.querySelector<HTMLButtonElement>('.chip-kill');
-			if (this.#deleteButton) {
-				this.#deleteButton.onclick = (event: MouseEvent) => {
-					event.stopPropagation();
-					editor.update(() => {
-						this.remove();
-					});
-				};
-			}
+			this.#componentRef.instance.kill.subscribe(() => {
+				editor.update(() => {
+					this.remove();
+				});
+			});
 
 			// Return the component's DOM element
 			return componentElement;
