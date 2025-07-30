@@ -2,7 +2,9 @@ import { ChangeDetectionStrategy, Component, forwardRef, Input } from '@angular/
 import { ILuTree } from '@lucca-front/ng/core';
 import { BehaviorSubject } from 'rxjs';
 import { ALuTreeOptionOperator, ILuTreeOptionOperator } from '../tree-option-operator.model';
-
+/**
+ * @deprecated
+ */
 @Component({
 	selector: 'lu-tree-option-feeder',
 	template: '',

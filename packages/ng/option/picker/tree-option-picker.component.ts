@@ -16,6 +16,9 @@ enum ToggleMode {
 	children,
 }
 
+/**
+ * @deprecated
+ */
 @Directive()
 export abstract class ALuTreeOptionPickerComponent<T, O extends import('../item/tree-option-item.model').ILuTreeOptionItem<T> = import('../item/tree-option-item.model').ILuTreeOptionItem<T>>
 	extends ALuOptionPickerComponent<T, O>
@@ -153,6 +156,7 @@ export abstract class ALuTreeOptionPickerComponent<T, O extends import('../item/
 
 /**
  * basic tree option picker panel
+ * @deprecated
  */
 @Component({
 	selector: 'lu-tree-option-picker',
