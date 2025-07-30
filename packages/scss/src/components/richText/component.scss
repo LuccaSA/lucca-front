@@ -23,6 +23,17 @@
 		@include a11y.focusVisible;
 	}
 
+	&:has(.richTextField-toolbar-formatting):has(.richTextField-toolbar-chips) {
+		.richTextField-toolbar-chips {
+			border-block-start: 1px solid var(--palettes-neutral-200);
+			padding-block-start: var(--pr-t-spacings-100);
+		}
+
+		.richTextField-toolbar-formatting {
+			padding-block-end: var(--pr-t-spacings-100);
+		}
+	}
+
 	// specificity must be higher here
 	.richTextField-toolbar-button.button {
 		&[aria-pressed='true'] {
@@ -70,7 +81,6 @@
 			justify-content: space-between;
 			gap: var(--pr-t-spacings-400);
 			flex-shrink: 0;
-			padding-block-end: var(--pr-t-spacings-100);
 
 			&:empty {
 				display: none;
@@ -114,8 +124,8 @@
 			display: flex;
 			flex-wrap: wrap;
 			gap: var(--pr-t-spacings-50);
-			padding-block-start: var(--pr-t-spacings-100);
-			border-block-start: 1px solid var(--palettes-neutral-200);
+			padding-block-start: 0;
+			border-block-start: 0;
 		}
 
 		.richTextField-toolbar-chips-item {

@@ -118,23 +118,23 @@ export const WithTagPlugin: StoryObj<RichTextInputComponent & { value: string; d
 			template: cleanupTemplate(`<lu-form-field label="Label">
 	<lu-rich-text-input
 	${generateInputs(inputArgs, argTypes)}
-		[(ngModel)]="value" [disabled]="disabled" [required]="required">
-				<lu-rich-text-input-toolbar />
-				<lu-rich-text-plugin-tag [tags]="[
-																				{
-																					key: 'tag1',
-																					description: 'Tag 1',
-																				},
-																				{
-																					key: 'tag2',
-																					description: 'Tag 2',
-																				},
-																				{
-																					key: 'tag3',
-																					description: 'Tag 3',
-																				},
-																			]"/>
-			</lu-rich-text-input>
+	[(ngModel)]="value" [disabled]="disabled" [required]="required">
+		<lu-rich-text-input-toolbar />
+		<lu-rich-text-plugin-tag [tags]="[
+																		{
+																			key: 'tag1',
+																			description: 'Tag 1',
+																		},
+																		{
+																			key: 'tag2',
+																			description: 'Tag 2',
+																		},
+																		{
+																			key: 'tag3',
+																			description: 'Tag 3',
+																		},
+																	]"/>
+		</lu-rich-text-input>
 </lu-form-field>
 <pr-story-model-display>{{value}}</pr-story-model-display>`),
 			moduleMetadata: {
