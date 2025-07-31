@@ -139,6 +139,10 @@
 			outline: none;
 			overflow: auto;
 			flex-grow: 1;
+
+			.chip {
+				vertical-align: text-bottom;
+			}
 		}
 
 		.richTextField-content-placeholder {
