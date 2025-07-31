@@ -5,7 +5,7 @@
 @mixin component($atRoot: namespace.$defaultAtRoot) {
 	display: block;
 	background-color: var(--components-highlightData-background);
-	border-radius: var(--commons-borderRadius-L);
+	border-radius: var(--pr-t-border-radius-structure);
 	overflow: hidden;
 	padding: var(--components-highlightData-padding);
 	position: relative;

@@ -25,6 +25,7 @@
 	--components-button-font: var(--pr-t-font-body-XS);
 	--components-button-padding: var(--pr-t-spacings-50) var(--pr-t-spacings-100);
 	--components-button-gap: var(--pr-t-spacings-50);
+	--components-button-borderRadius: var(--pr-t-border-radius-small);
 
 	.numericBadge {
 		@include numericBadge.XS;

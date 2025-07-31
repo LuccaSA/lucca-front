@@ -5,14 +5,14 @@
 @mixin component($atRoot: namespace.$defaultAtRoot) {
 	display: inline-block;
 	vertical-align: middle;
-	border-radius: var(--commons-borderRadius-full);
+	border-radius: var(--pr-t-border-radius-full);
 	inline-size: var(--components-avatar-size);
 	aspect-ratio: 1;
 
 	@at-root ($atRoot) {
 		.avatar-picture {
 			background-color: var(--palettes-neutral-200);
-			border-radius: var(--commons-borderRadius-full);
+			border-radius: var(--pr-t-border-radius-full);
 			background-position: center;
 			background-size: cover;
 			background-repeat: no-repeat;
@@ -67,13 +67,13 @@
 			}
 
 			&:focus-visible {
-				@include a11y.focusVisible($borderRadius: var(--commons-borderRadius-full));
+				@include a11y.focusVisible($borderRadius: var(--pr-t-border-radius-full));
 			}
 		}
 
 		.avatarWrapper-item-action-more {
 			box-shadow: 0 0 0 var(--components-avatar-border) var(--components-avatar-background);
-			border-radius: var(--commons-borderRadius-full);
+			border-radius: var(--pr-t-border-radius-full);
 			display: flex;
 			align-items: center;
 			justify-content: center;
