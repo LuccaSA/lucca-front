@@ -24,7 +24,6 @@ export class TagComponent implements RichTextPluginComponent, OnDestroy {
 
 	readonly tags = input.required<Tag[]>();
 	readonly isDisabled = signal(false);
-	readonly tabindex = signal<number>(-1);
 	readonly focusIndex = signal<number>(0);
 
 	readonly focusableElements = viewChildren('tagButton', { read: ElementRef });
@@ -113,14 +112,10 @@ export class TagComponent implements RichTextPluginComponent, OnDestroy {
 	}
 
 	focusTag(event: Event, direction: -1 | 1) {
-		// When using left/right keyboard navigation within this tool,
-		// cancel rich text input focus handling and focus the next/previous tag button if available
-		if (this.focusIndex() >= 0 && this.focusIndex() < this.focusableElements().length - 1) {
-			event.stopPropagation();
-			this.focusIndex.update((v) => v + direction);
+		event.stopPropagation();
 
-			(this.focusableElements().at(this.focusIndex()) as ElementRef<HTMLButtonElement>).nativeElement.focus();
-		}
+		this.focusIndex.update((v) => (v + direction) % this.focusableElements().length);
+		(this.focusableElements().at(this.focusIndex()) as ElementRef<HTMLButtonElement>).nativeElement.focus();
 	}
 
 	ngOnDestroy() {

@@ -5,7 +5,7 @@
 			type="button"
 			class="chip richTextField-toolbar-chips-item"
 			(click)="insertTag(tag)"
-			[attr.tabindex]="tabindex()"
+			[attr.tabindex]="$first ? 0 : -1"
 			[disabled]="isDisabled()"
 			[class.is-disabled]="isDisabled()"
 			#tagButton
