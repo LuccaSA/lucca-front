@@ -93,16 +93,6 @@ $cursor: 'pointer', 'auto';
 	}
 }
 
-@mixin borderRadius($suffix: '!important') {
-	@each $corner in $corners {
-		@each $key, $value in config.$borderRadius {
-			.u-border#{transform.capitalize(transform.camelize($corner))}Radius#{transform.capitalize($key)} {
-				border-#{$corner}radius: var(--commons-borderRadius-#{$key}) #{$suffix};
-			}
-		}
-	}
-}
-
 @mixin rosetta($before, $after, $iterations) {
 	@if meta.type-of($iterations) == map {
 		@each $iterationBefore, $iterationAfter in $iterations {
@@ -154,6 +144,16 @@ $cursor: 'pointer', 'auto';
 		.u-text#{transform.capitalize($key)} {
 			font-size: var(--sizes-#{$key}-fontSize) #{$suffix};
 			line-height: var(--sizes-#{$key}-lineHeight) #{$suffix};
+		}
+	}
+}
+
+@mixin borderRadius($suffix: '!important') {
+	@each $corner in $corners {
+		@each $key, $value in config.$borderRadius {
+			.u-border#{transform.capitalize(transform.camelize($corner))}Radius#{transform.capitalize($key)} {
+				border-#{$corner}radius: var(--commons-borderRadius-#{$key}) #{$suffix};
+			}
 		}
 	}
 }
