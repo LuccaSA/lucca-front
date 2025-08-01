@@ -27,8 +27,8 @@ function getTemplate(args: TableSortableStory): string {
 				<button type="button" class="tableSortable button">
 					Triable
 					<span class="tableSortable-arrows">
-						<span class="lucca-icon icon-chevronTop tableSortable-arrows-ascending"></span>
-						<span class="lucca-icon icon-chevronBottom tableSortable-arrows-descending"></span>
+						<span class="lucca-icon icon-arrowChevronTop tableSortable-arrows-ascending"></span>
+						<span class="lucca-icon icon-arrowChevronBottom tableSortable-arrows-descending"></span>
 					</span>
 				</button>
 			</th>
@@ -36,8 +36,8 @@ function getTemplate(args: TableSortableStory): string {
 				<button type="button" class="tableSortable button">
 					Trié ascendant
 					<span class="tableSortable-arrows">
-						<span class="lucca-icon icon-chevronTop tableSortable-arrows-ascending"></span>
-						<span class="lucca-icon icon-chevronBottom tableSortable-arrows-descending"></span>
+						<span class="lucca-icon icon-arrowChevronTop tableSortable-arrows-ascending"></span>
+						<span class="lucca-icon icon-arrowChevronBottom tableSortable-arrows-descending"></span>
 					</span>
 				</button>
 			</th>
@@ -45,8 +45,8 @@ function getTemplate(args: TableSortableStory): string {
 				<button type="button" class="tableSortable button">
 					Trié descendant
 					<span class="tableSortable-arrows">
-						<span class="lucca-icon icon-chevronTop tableSortable-arrows-ascending"></span>
-						<span class="lucca-icon icon-chevronBottom tableSortable-arrows-descending"></span>
+						<span class="lucca-icon icon-arrowChevronTop tableSortable-arrows-ascending"></span>
+						<span class="lucca-icon icon-arrowChevronBottom tableSortable-arrows-descending"></span>
 					</span>
 				</button>
 			</th>
@@ -54,8 +54,8 @@ function getTemplate(args: TableSortableStory): string {
 				<button type="button" class="tableSortable button" onclick="switch (this.parentNode.getAttribute('aria-sort')) { case 'ascending': this.parentNode.setAttribute('aria-sort', 'descending'); break; case 'descending': this.parentNode.setAttribute('aria-sort', 'none'); break; default: this.parentNode.setAttribute('aria-sort', 'ascending'); }">
 					Interactif
 					<span class="tableSortable-arrows">
-						<span class="lucca-icon icon-chevronTop tableSortable-arrows-ascending"></span>
-						<span class="lucca-icon icon-chevronBottom tableSortable-arrows-descending"></span>
+						<span class="lucca-icon icon-arrowChevronTop tableSortable-arrows-ascending"></span>
+						<span class="lucca-icon icon-arrowChevronBottom tableSortable-arrows-descending"></span>
 					</span>
 				</button>
 			</th>

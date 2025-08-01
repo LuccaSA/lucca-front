@@ -16,8 +16,8 @@ function getTemplate(args: SortStory): string {
 					<button type="button" class="tableSortable button">
 						Label
 						<span class="tableSortable-arrows">
-							<span class="lucca-icon icon-chevronTop tableSortable-arrows-ascending"></span>
-							<span class="lucca-icon icon-chevronBottom tableSortable-arrows-descending"></span>
+							<span class="lucca-icon icon-arrowChevronTop tableSortable-arrows-ascending"></span>
+							<span class="lucca-icon icon-arrowChevronBottom tableSortable-arrows-descending"></span>
 						</span>
 					</button>
 				</th>
@@ -25,8 +25,8 @@ function getTemplate(args: SortStory): string {
 					<button type="button" class="tableSortable button">
 						Label
 						<span class="tableSortable-arrows">
-							<span class="lucca-icon icon-chevronTop tableSortable-arrows-ascending"></span>
-							<span class="lucca-icon icon-chevronBottom tableSortable-arrows-descending"></span>
+							<span class="lucca-icon icon-arrowChevronTop tableSortable-arrows-ascending"></span>
+							<span class="lucca-icon icon-arrowChevronBottom tableSortable-arrows-descending"></span>
 						</span>
 					</button>
 				</th>
@@ -34,8 +34,8 @@ function getTemplate(args: SortStory): string {
 					<button type="button" class="tableSortable button">
 						Label
 						<span class="tableSortable-arrows">
-							<span class="lucca-icon icon-chevronTop tableSortable-arrows-ascending"></span>
-							<span class="lucca-icon icon-chevronBottom tableSortable-arrows-descending"></span>
+							<span class="lucca-icon icon-arrowChevronTop tableSortable-arrows-ascending"></span>
+							<span class="lucca-icon icon-arrowChevronBottom tableSortable-arrows-descending"></span>
 						</span>
 					</button>
 				</th>
