@@ -10,7 +10,7 @@
 
 @mixin expandable {
 	.fieldset-title-content {
-		border-radius: var(--commons-borderRadius-M);
+		border-radius: var(--pr-t-border-radius-default);
 		cursor: pointer;
 		font: inherit;
 

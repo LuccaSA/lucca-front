@@ -5,7 +5,7 @@
 	overflow: hidden;
 	padding: var(--pr-t-spacings-50);
 	border: solid 1px var(--components-inputFramed-borderColor);
-	border-radius: var(--commons-borderRadius-L);
+	border-radius: var(--pr-t-border-radius-default);
 	background-color: var(--palettes-neutral-0);
 	transition-property: box-shadow, border-color;
 	transition-duration: var(--commons-animations-durations-fast);
@@ -45,7 +45,7 @@
 
 		.inputFramed-header {
 			padding: var(--components-inputFramed-padding);
-			border-radius: var(--commons-borderRadius-M);
+			border-radius: var(--pr-t-border-radius-50);
 			background-color: var(--components-inputFramed-header-backgroundColor);
 			transition-property: background-color;
 			transition-duration: var(--commons-animations-durations-fast);

@@ -114,7 +114,7 @@
 	}
 
 	&:focus-visible {
-		@include a11y.focusVisible($borderRadius: var(--commons-borderRadius-L));
+		@include a11y.focusVisible($borderRadius: var(--pr-t-border-radius-default));
 
 		z-index: 1;
 	}
@@ -149,7 +149,7 @@
 	block-size: var(--components-calendar-day-size);
 	inline-size: var(--components-calendar-day-size);
 	line-height: var(--components-calendar-day-size);
-	border-radius: var(--commons-borderRadius-L);
+	border-radius: var(--pr-t-border-radius-default);
 	transition-duration: var(--commons-animations-durations-fast);
 	transition-property: background-color, color;
 }

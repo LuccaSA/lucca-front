@@ -10,7 +10,7 @@
 }
 
 .multiSelectAllDisplayer {
-	border-radius: var(--commons-borderRadius-M);
+	border-radius: var(--pr-t-border-radius-default);
 	cursor: pointer;
 
 	&:hover, :host-context(.is-highlighted) & {

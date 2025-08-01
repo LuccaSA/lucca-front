@@ -3,7 +3,7 @@
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
 	background-color: var(--components-progress-background);
-	border-radius: var(--commons-borderRadius-full);
+	border-radius: var(--pr-t-border-radius-full);
 	block-size: var(--components-progress-height);
 	margin-block: var(--components-progress-margin-vertical);
 	margin-inline: var(--components-progress-margin-horizontal);

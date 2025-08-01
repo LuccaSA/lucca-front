@@ -32,6 +32,11 @@
 	--pr-t-font-body-S: var(--pr-t-font-body-S-fontSize)/var(--pr-t-font-body-S-lineHeight) var(--pr-t-font-family);
 	--pr-t-font-body-XS: var(--pr-t-font-body-XS-fontSize)/var(--pr-t-font-body-XS-lineHeight) var(--pr-t-font-family);
 
+	// TOKENS : RADIUS
+
+	@include core.cssvars('pr-t-border-radius', config.$borderRadiusVars);
+	@include core.cssvars('pr-t-border-radius', config.$borderRadiusTokens);
+
 	// TOKENS : ELEVATION
 
 	@each $key, $map in config.$elevation {
@@ -47,7 +52,6 @@
 
 	@include core.cssvars('pr-t-color-input', config.$colorInput);
 	@include core.cssvars('pr-t-color-text', config.$colorText);
-	--pr-t-radius-input: var(--commons-borderRadius-M);
 
 	// VARIABLES
 

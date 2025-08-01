@@ -9,7 +9,7 @@ import { Meta, StoryFn } from '@storybook/angular';
 		`
 			.gridDemo {
 				background-color: var(--pr-t-elevation-surface-sunken);
-				border-radius: 3px;
+				border-radius: var(--pr-t-border-radius-50);
 				min-block-size: 2.7rem;
 				padding-block: 0.6rem;
 				padding-inline: var(--pr-t-spacings-200);

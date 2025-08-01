@@ -2,7 +2,7 @@
 
 @mixin vars {
 	/** notch */
-	--component-notchbox-notch-radius: var(--commons-borderRadius-M);
+	--component-notchbox-notch-radius: var(--pr-t-border-radius-structure);
 	--component-notchbox-notch-radius-inner: 18px;
 	--component-notchbox-notch-width: 56px;
 	--component-notchbox-notch-height: 24px;
@@ -10,7 +10,7 @@
 	--component-notchbox-notch-percent: 0.5;
 
 	/** box */
-	--component-notchbox-box-radius: 16px;
+	--component-notchbox-box-radius: var(--pr-t-border-radius-structure);
 	--component-notchbox-box-padding: var(--pr-t-spacings-200);
 	--component-notchbox-box-background-color: var(--pr-t-elevation-surface-raised);
 	--component-notchbox-box-shadow: 0 1px 2px #{color.transparentize(var(--palettes-neutral-400), 0.6)};

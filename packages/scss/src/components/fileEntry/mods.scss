@@ -6,7 +6,6 @@
 	--components-fileEntry-description-display: none;
 	--components-fileEntry-gridTemplateAreas: 'picture title title toolbar';
 	--components-fileEntry-filename-alignSelf: center;
-	--components-fileEntry-status-borderRadius: var(--commons-borderRadius-M);
 	--components-fileEntry-gapInline: var(--pr-t-spacings-75);
 	--components-fileEntry-status-content-svg-margin: calc(var(--pr-t-spacings-100) * -1);
 
@@ -16,7 +15,6 @@
 }
 
 @mixin media {
-	--components-fileEntry-status-borderRadius: var(--commons-borderRadius-M);
 	--components-fileEntry-padding: var(--pr-t-spacings-75);
 	--components-fileEntry-status-aspectRatio: auto;
 	--components-fileEntry-status-inlineSize: 100%;

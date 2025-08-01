@@ -28,7 +28,7 @@
 
 				align-items: center;
 				background-color: var(--palettes-neutral-500);
-				border-radius: var(--commons-borderRadius-full);
+				border-radius: var(--pr-t-border-radius-full);
 				color: var(--palettes-neutral-0);
 				display: flex;
 				font-size: var(--components-switch-icon-size);
@@ -47,7 +47,7 @@
 			&::after {
 				background-color: var(--palettes-neutral-0);
 				box-shadow: var(--pr-t-elevation-shadow-overflow);
-				border-radius: var(--commons-borderRadius-full);
+				border-radius: var(--pr-t-border-radius-full);
 				content: '';
 				display: block;
 				block-size: var(--components-switch-slider-size);

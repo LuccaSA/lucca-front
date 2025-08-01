@@ -1,5 +1,5 @@
 @mixin vars {
-	--components-textfield-border-radius: 4px;
+	--components-textfield-border-radius: var(--pr-t-border-radius-input);
 	--components-textfield-input-padding-horizontal: var(--pr-t-spacings-100);
 	--components-textfield-input-padding-vertical: var(--pr-t-spacings-100);
 	--components-textfield-disabled-background: var(--commons-disabled-background);

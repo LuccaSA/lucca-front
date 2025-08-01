@@ -59,6 +59,29 @@
 				</div>
 			</td>
 		</tr>
+		<tr>
+			<td>Radius</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<div class="demo-radius"><div style="border-radius: var(--pr-t-border-radius-0)">0</div></div>
+					<div class="demo-radius"><div style="border-radius: var(--pr-t-border-radius-50)">25</div></div>
+					<div class="demo-radius"><div style="border-radius: var(--pr-t-border-radius-50)">50</div></div>
+					<div class="demo-radius"><div style="border-radius: var(--pr-t-border-radius-75)">75</div></div>
+					<div class="demo-radius"><div style="border-radius: var(--pr-t-border-radius-100)">100</div></div>
+					<div class="demo-radius"><div style="border-radius: var(--pr-t-border-radius-150)">150</div></div>
+					<div class="demo-radius"><div style="border-radius: var(--pr-t-border-radius-200)">200</div></div>
+					<div class="demo-radius"><div style="border-radius: var(--pr-t-border-radius-300)">300</div></div>
+					<div class="demo-radius"><div style="border-radius: var(--pr-t-border-radius-400)">400</div></div>
+				</div>
+				<div class="demo-QAtable-list pr-u-marginBlockStart100">
+					<div class="demo-radius"><div style="border-radius: var(--pr-t-border-radius-structure)">Structure</div></div>
+					<div class="demo-radius"><div style="border-radius: var(--pr-t-border-radius-default)">Default</div></div>
+					<div class="demo-radius"><div style="border-radius: var(--pr-t-border-radius-small)">Small</div></div>
+					<div class="demo-radius"><div style="border-radius: var(--pr-t-border-radius-full)">Full</div></div>
+					<div class="demo-radius"><div style="border-radius: var(--pr-t-border-radius-input)">Input</div></div>
+				</div>
+			</td>
+		</tr>
 	</tbody>
 </table>
 
@@ -71,7 +94,7 @@
 		justify-content: center;
 		inline-size: 5rem;
 		block-size: 5rem;
-		border-radius: var(--commons-borderRadius-L);
+		border-radius: var(--pr-t-border-radius-100);
 	}
 
 	.demo-surface {
@@ -85,18 +108,12 @@
 		inset-block-start: -1rem;
 		inset-inline-end: -1rem;
 		background-color: var(--palettes-neutral-0);
-		border-radius: var(--commons-borderRadius-full);
-	}
-
-	.demo-spacings {
-		display: inline-flex;
-		align-items: flex-start;
-		gap: 1rem;
+		border-radius: var(--pr-t-border-radius-full);
 	}
 
 	.demo-spacing {
 		background-color: var(--pr-t-elevation-surface-sunken);
-		border-radius: var(--commons-borderRadius-M);
+		border-radius: var(--pr-t-border-radius-50);
 	}
 
 	.demo-spacing div {
@@ -106,7 +123,22 @@
 		display: inline-flex;
 		align-items: center;
 		justify-content: center;
-		border-radius: var(--commons-borderRadius-M);
+		border-radius: var(--pr-t-border-radius-50);
+	}
+
+	.demo-radius {
+		display: inline-flex;
+		align-items: flex-start;
+		gap: 1rem;
+	}
+
+	.demo-radius div {
+		background-color: var(--pr-t-elevation-surface-sunken);
+		inline-size: 4rem;
+		block-size: 4rem;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
 	}
 </style>
 
