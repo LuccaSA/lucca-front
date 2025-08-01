@@ -44,7 +44,7 @@ import { Meta, StoryObj, applicationConfig } from '@storybook/angular';
 				<div class="footer-content">Optional footer text</div>
 				<div class="footer-actions">
 					<button type="button" luButton (click)="close()">Confirm</button>
-					<button type="button" luButton="text" luDialogDismiss>Cancel</button>
+					<button type="button" luButton="ghost" luDialogDismiss>Cancel</button>
 				</div>
 			</lu-dialog-footer>
 		</lu-dialog>

@@ -1,12 +1,12 @@
-import { HtmlAst } from '../lib/html-ast.js';
-import { SourceFile } from 'typescript';
-import { extractNgTemplatesIncludingHtml } from '../lib/angular-template';
 import { Tree } from '@angular-devkit/schematics';
-import { currentSchematicContext } from '../lib/lf-schematic-context';
 import type { TmplAstElement } from '@angular/compiler';
-import { insertAngularImportIfNeeded,insertTSImportIfNeeded } from '../lib/angular-component-ast';
-import { applyToUpdateRecorder } from '@schematics/angular/utility/change';
 import { ButtonComponent } from '@lucca-front/ng/button';
+import { applyToUpdateRecorder } from '@schematics/angular/utility/change';
+import { SourceFile } from 'typescript';
+import { insertAngularImportIfNeeded, insertTSImportIfNeeded } from '../lib/angular-component-ast';
+import { extractNgTemplatesIncludingHtml } from '../lib/angular-template';
+import { HtmlAst } from '../lib/html-ast.js';
+import { currentSchematicContext } from '../lib/lf-schematic-context';
 
 
 interface CssButton {

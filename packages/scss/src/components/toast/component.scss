@@ -82,7 +82,7 @@
 				animation-name: timer;
 
 				@include button.onlyIcon;
-				@include button.text;
+				@include button.ghost;
 				@include button.inverted;
 
 				@keyframes timer {

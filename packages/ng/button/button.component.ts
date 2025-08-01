@@ -30,6 +30,11 @@ export class ButtonComponent implements OnChanges {
 	@Input({
 		transform: booleanAttribute,
 	})
+	critical = false;
+
+	@Input({
+		transform: booleanAttribute,
+	})
 	delete = false;
 
 	@Input({
@@ -48,7 +53,7 @@ export class ButtonComponent implements OnChanges {
 	 * '' is the default value when you just set the `luButton` directive without a value attached to it.
 	 * We just make this explicit here.
 	 */
-	luButton: '' | 'outlined' | 'text' | 'text-invert' = '';
+	luButton: '' | 'outlined' | 'ghost' | 'ghost-invert' | 'text' | 'text-invert' = '';
 
 	#iconComponentRef?: ElementRef<HTMLElement>;
 
@@ -81,13 +86,13 @@ export class ButtonComponent implements OnChanges {
 			[`is-${this.state}`]: !!this.state,
 			['mod-onlyIcon']: this.iconOnly,
 			['mod-withIcon']: this.#iconComponentRef !== undefined && !this.disclosure && !this.iconOnly,
-			['mod-delete']: this.delete,
+			['mod-critical']: this.critical || this.delete,
 			['mod-disclosure']: this.disclosure,
 		};
 
 		if (this.luButton !== '') {
-			if (this.luButton === 'text-invert') {
-				classesConfig['mod-text'] = true;
+			if (this.luButton === 'ghost-invert') {
+				classesConfig['mod-ghost'] = true;
 				classesConfig['mod-invert'] = true;
 			} else {
 				classesConfig[`mod-${this.luButton}`] = true;

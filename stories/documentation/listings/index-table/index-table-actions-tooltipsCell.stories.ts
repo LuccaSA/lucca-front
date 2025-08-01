@@ -44,7 +44,7 @@ function getTemplate(args: IndexTableActionsTooltipsCellStory): string {
 			</td>
 			<td class="indexTable-body-row-cell u-cursorPointer u-whiteSpaceNowrap">Content</td>
 			<td class="indexTable-body-row-cell mod-alignRight mod-actions" (click)="$event.stopPropagation()">
-				<button luTooltip="Secondary action (you can click)" luTooltipOnlyForDisplay (click)="message('Secondary action')" type="button" class="button mod-delete indexTable-body-row-cell-subAction">
+				<button luTooltip="Secondary action (you can click)" luTooltipOnlyForDisplay (click)="message('Secondary action')" type="button" class="button mod-critical indexTable-body-row-cell-subAction">
 					<span aria-hidden="true" class="lucca-icon icon-trashDelete"></span>
 				</button>
 			</td>
@@ -66,7 +66,7 @@ function getTemplate(args: IndexTableActionsTooltipsCellStory): string {
 			</td>
 			<td class="indexTable-body-row-cell u-cursorPointer u-whiteSpaceNowrap">Content</td>
 			<td class="indexTable-body-row-cell mod-alignRight mod-actions">
-				<button luTooltip="Secondary action (you can click)" luTooltipOnlyForDisplay (click)="message('Secondary action')" type="button" class="button mod-delete indexTable-body-row-cell-subAction">
+				<button luTooltip="Secondary action (you can click)" luTooltipOnlyForDisplay (click)="message('Secondary action')" type="button" class="button mod-critical indexTable-body-row-cell-subAction">
 					<span aria-hidden="true" class="lucca-icon icon-trashDelete"></span>
 				</button>
 			</td>
