@@ -4,3 +4,12 @@
 	--components-fancyBox-offsetInline: -8.75rem;
 	--components-fancyBox-offsetBlock: -0.5rem;
 }
+
+@mixin paddingS {
+	--components-fancyBox-contentPaddingBlock: var(--pr-t-spacings-150);
+	--components-fancyBox-contentPaddingInline: var(--pr-t-spacings-200);
+}
+
+@mixin fitContentBlock {
+  --components-fancyBox-contentMinBlockSize: fit-content;
+}

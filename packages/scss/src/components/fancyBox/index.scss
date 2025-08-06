@@ -8,4 +8,12 @@
 	@include media.max('XS') {
 		@include narrow;
 	}
+
+	&.mod-paddingS {
+		@include paddingS;
+	}
+
+	&.mod-fitContentBlock {
+		@include fitContentBlock;
+	}
 }
