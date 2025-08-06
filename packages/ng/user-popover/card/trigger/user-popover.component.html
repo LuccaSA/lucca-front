@@ -1,5 +1,5 @@
 @if (employee$ | async; as employee) {
-	<div class="userPopover">
+	<div class="userPopover u-animatedFadeIn">
 		<section class="userPopover-details">
 			<div class="userPopover-details-avatar avatar">
 				@switch (userPictureDisplay$ | async) {
@@ -9,12 +9,13 @@
 							[src]="userPictureHref$ | async"
 							[alt]="(userInitials$ | async)?.initials"
 							(error)="pictureError()"
+							translate="no"
 						/>
 					}
 					@case ("initials") {
 						@if (userInitials$ | async; as initials) {
 							<div class="avatar-picture" style.background-color="hsl({{ initials.color }}, 60%, 60%)">
-								<span class="avatar-picture-initials">{{ initials.initials }}</span>
+								<span class="avatar-picture-initials" translate="no">{{ initials.initials }}</span>
 							</div>
 						}
 					}
@@ -30,7 +31,9 @@
 						</a>
 					}
 				</h1>
-				<ng-template #fullNameDisplay> {{ employee.firstName }} {{ employee.lastName }}</ng-template>
+				<ng-template #fullNameDisplay
+					><span translate="no">{{ employee.firstName }} {{ employee.lastName }}</span></ng-template
+				>
 				@if (employee.jobTitle) {
 					<p class="userPopover-details-info-detail u-ellipsis">{{ employee.jobTitle }}</p>
 				}
@@ -91,4 +94,6 @@
 			</div>
 		</section>
 	</div>
+} @else {
+	<lu-loading class="pr-u-margin200"></lu-loading>
 }

@@ -28,8 +28,8 @@ import { BehaviorSubject } from 'rxjs';
 import { FormFieldSize } from './form-field-size';
 import { FORM_FIELD_INSTANCE } from './form-field.token';
 import { LU_FORM_FIELD_TRANSLATIONS } from './form-field.translate';
-import { InputDirective } from './input.directive';
 import { FRAMED_INPUT_INSTANCE } from './framed-input/framed-input-token';
+import { InputDirective } from './input.directive';
 
 let nextId = 0;
 
@@ -74,7 +74,8 @@ export class FormFieldComponent implements OnDestroy, DoCheck {
 	ownControls = computed(() => this.ngControls().filter((c) => !this.ignoredControls().has(c)));
 
 	#hasInputRequired = signal(false);
-	isInputRequired = this.#hasInputRequired.asReadonly();
+	forceInputRequired = signal(false);
+	isInputRequired = computed(() => this.forceInputRequired() || this.#hasInputRequired());
 
 	label = input.required<PortalContent>();
 
@@ -123,8 +124,6 @@ export class FormFieldComponent implements OnDestroy, DoCheck {
 
 	layout = model<'default' | 'checkable' | 'fieldset'>('default');
 
-	hasArrow = false;
-
 	#inputs: InputDirective[] = [];
 
 	/**
@@ -133,7 +132,7 @@ export class FormFieldComponent implements OnDestroy, DoCheck {
 	counter = input<number>(0);
 
 	get contentLength(): number {
-		return (this.#inputs[0]?.host?.nativeElement as HTMLInputElement)?.value.length || 0;
+		return (this.#inputs[0]?.host?.nativeElement as HTMLInputElement)?.value?.length || 0;
 	}
 
 	public addInput(input: InputDirective) {

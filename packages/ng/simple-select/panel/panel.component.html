@@ -8,7 +8,11 @@
 	} as ctx"
 >
 	<div class="lu-picker-content" [class.is-loading]="loading$ | async" (scroll)="onScroll($event)">
-		<ng-container *luPortal="selectInput.panelHeaderTpl()" />
+		@if (selectInput.panelHeaderTpl(); as tpl) {
+			<div>
+				<ng-container *luPortal="tpl" />
+			</div>
+		}
 		<div role="listbox">
 			<ng-container *ngIf="grouping && ctx.groupTemplateLocation === 'group-header'">
 				<div
@@ -30,6 +34,7 @@
 			<ng-template #optionsList let-options let-groupIndex="groupIndex">
 				<lu-select-option
 					*ngFor="let option of options; let index = index; trackBy: trackOptionsBy"
+					luCoreSelectPanelElement
 					[option]="option"
 					[optionTpl]="optionTpl()"
 					[optionIndex]="index"
@@ -38,6 +43,8 @@
 					[grouping]="grouping"
 					[scrollIntoViewOptions]="{ block: 'center' }"
 					[isSelected]="option | luIsOptionSelected: optionComparer : selected()"
+					[class.withAddOption]="ctx.shouldDisplayAddOption"
+					(selected)="panelRef.emitValue(option)"
 					(click)="panelRef.emitValue(option)"
 				/>
 			</ng-template>
@@ -48,11 +55,17 @@
 		<div *ngIf="loading$ | async" class="lu-picker-content-loading">
 			<div class="loading">{{ intl.loading }}</div>
 		</div>
-		<div class="lu-picker-content-add" *ngIf="ctx.shouldDisplayAddOption">
-			<button class="button mod-text mod-withIcon palette-product" type="button" (click)="selectInput.emitAddOption()">
-				<span aria-hidden="true" class="lucca-icon icon-mathsPlus"></span>
+		@if (ctx.shouldDisplayAddOption) {
+			<div
+				class="addOption palette-product"
+				(click)="selectInput.emitAddOption()"
+				(selected)="selectInput.emitAddOption()"
+				elementId="picker-content-add"
+				luCoreSelectPanelElement
+			>
+				<lu-icon icon="mathsPlus" />
 				<ng-container *luPortal="selectInput.addOptionLabel" />
-			</button>
-		</div>
+			</div>
+		}
 	</div>
 </div>

@@ -22,7 +22,7 @@
 		}
 
 		.listing-item-icon {
-			width: calc(var(--pr-t-spacings-200) + var(--pr-t-spacings-50));
+			inline-size: calc(var(--pr-t-spacings-200) + var(--pr-t-spacings-50));
 			aspect-ratio: 1;
 			margin-top: var(--pr-t-spacings-25);
 			background-color: var(--components-listing-item-icon-backgroundColor);

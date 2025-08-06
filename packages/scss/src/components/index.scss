@@ -87,6 +87,7 @@
 @forward 'toast'; // 5 Ko
 @forward 'popover';
 @forward 'userTile';
+@forward 'mobilePush';
 @forward 'plgPush';
 @forward 'dateField';
 @forward 'dateRangeField';
@@ -103,6 +104,8 @@
 @forward 'fileUpload';
 @forward 'fileEntry';
 @forward 'fileToolbar';
+@forward 'appLayout';
+@forward 'mainLayout';
 
 // Deprecated CSS components
 // @forward 'tableFixedDeprecated'; // 33 Ko

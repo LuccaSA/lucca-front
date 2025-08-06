@@ -12,7 +12,7 @@ function getTemplate(args: UserPopoverStory): string {
 		<div class="userPopover-details">
 			<div class="userPopover-details-avatar avatar">
 				<div class="avatar-picture" style="background-color: rgb(92,214,153);">
-					<span class="avatar-picture-initials">CA</span>
+					<span class="avatar-picture-initials" translate="no">CA</span>
 				</div>
 			</div>
 			<div class="userPopover-details-info">
@@ -53,12 +53,6 @@ function getTemplate(args: UserPopoverStory): string {
 const Template: StoryFn<UserPopoverStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
-	styles: [
-		`.picture {
-			border-radius: 50%;
-			display: block;
-		}`,
-	],
 });
 
 export const Basic = Template.bind({});

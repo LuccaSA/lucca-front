@@ -130,7 +130,6 @@ export class LuModalPanelComponent<T extends ILuModalContent = ILuModalContent> 
 	styleUrls: ['./modal-panel.component.scss'],
 	changeDetection: ChangeDetectionStrategy.Default,
 })
-// eslint-disable-next-line @angular-eslint/component-class-suffix
 export class LuModalPanelComponentDefaultCD<T extends ILuModalContent = ILuModalContent> extends ALuModalPanelComponent<T> {
 	@HostBinding('class.lu-modal-panel') class = true;
 	constructor(_ref: ALuModalRef<T>, _elementRef: ElementRef<HTMLElement>, _renderer: Renderer2) {

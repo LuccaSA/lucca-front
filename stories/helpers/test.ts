@@ -1,4 +1,4 @@
-import { within, expect } from '@storybook/test';
+import { within, expect } from 'storybook/test';
 
 export async function sleep(ms: number) {
 	await new Promise((resolve) => setTimeout(resolve, ms));

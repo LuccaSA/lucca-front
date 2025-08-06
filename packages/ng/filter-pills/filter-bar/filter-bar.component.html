@@ -1,6 +1,4 @@
 <lu-scroll-box class="filterBar-scrollBox">
-	<div class="filterBar-scrollBox-first"></div>
-
 	<div class="filterBar-scrollBox-group">
 		@if (addonBefore()) {
 			<ng-container *ngTemplateOutlet="addonBefore()"></ng-container>
@@ -29,8 +27,6 @@
 			<ng-container *ngTemplateOutlet="addonAfter()"></ng-container>
 		</div>
 	}
-
-	<div class="filterBar-scrollBox-last"></div>
 </lu-scroll-box>
 
 <ng-template #contentOptionsTpl>

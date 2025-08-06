@@ -33,10 +33,12 @@ function getTemplate(args: IndexTableActionsUserPopoverCellStory): string {
 		<tr class="indexTable-body-row">
 			<td class="indexTable-body-row-cell">
 				<button class="indexTable-body-row-cell-link" type="button"><span class="u-mask">See details</span></button>
-				<div class="u-displayFlex u-widthFitContent pr-u-gap50 pr-u-focusVisible u-borderRadiusM" [luUserPopover]="bob">
-					<lu-user-picture class="mod-XS" [user]="bob" />
-					{{ bob | luUserDisplay:'lf' }} with userPopover
-				</div>
+				<button class="userPopover_trigger" [luUserPopover]="bob">
+					<span>
+						<lu-user-picture class="mod-XS" [user]="bob" />
+						<span translate="no" class="pr-u-marginInlineStart100">{{ bob | luUserDisplay:'lf' }}</span> with userPopover
+					</span>
+				</button>
 			</td>
 			<td class="indexTable-body-row-cell">Content</td>
 			<td class="indexTable-body-row-cell">Content</td>

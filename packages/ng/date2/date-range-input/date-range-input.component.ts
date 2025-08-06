@@ -2,6 +2,7 @@ import { BreakpointObserver, LayoutModule } from '@angular/cdk/layout';
 import { ConnectionPositionPair } from '@angular/cdk/overlay';
 import { NgTemplateOutlet } from '@angular/common';
 import {
+	booleanAttribute,
 	ChangeDetectionStrategy,
 	Component,
 	computed,
@@ -10,7 +11,9 @@ import {
 	forwardRef,
 	HostBinding,
 	inject,
+	Injector,
 	input,
+	OnInit,
 	Signal,
 	signal,
 	untracked,
@@ -19,9 +22,9 @@ import {
 	ViewEncapsulation,
 } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors, Validator } from '@angular/forms';
+import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, NgControl, NgModel, ValidationErrors, Validator } from '@angular/forms';
 import { LuccaIcon } from '@lucca-front/icons';
-import { LuClass, PortalContent, PortalDirective, ɵeffectWithDeps } from '@lucca-front/ng/core';
+import { isNil, LuClass, PortalContent, PortalDirective, ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { FILTER_PILL_INPUT_COMPONENT, FilterPillDisplayerDirective, FilterPillInputComponent } from '@lucca-front/ng/filter-pills';
 import { FORM_FIELD_INSTANCE, InputDirective } from '@lucca-front/ng/form-field';
 import { IconComponent } from '@lucca-front/ng/icon';
@@ -67,7 +70,9 @@ let nextId = 0;
 		LuClass,
 	],
 })
-export class DateRangeInputComponent extends AbstractDateComponent implements ControlValueAccessor, Validator, FilterPillInputComponent {
+export class DateRangeInputComponent extends AbstractDateComponent implements OnInit, ControlValueAccessor, Validator, FilterPillInputComponent {
+	#injector = inject(Injector);
+	#ngControl: NgControl; // Initialized in ngOnInit
 	#luClass = inject(LuClass);
 
 	#formFieldRef = inject(FORM_FIELD_INSTANCE, { optional: true });
@@ -85,11 +90,14 @@ export class DateRangeInputComponent extends AbstractDateComponent implements Co
 	// CVA stuff
 	#onChange?: (value: DateRange) => void;
 
+	initialValue = signal<DateRange | null>(undefined);
 	selectedRange = signal<DateRange | null>(null);
 
 	dateHovered = signal<Date | null>(null);
 
 	placeholder = input<string>();
+
+	widthAuto = input(false, { transform: booleanAttribute });
 
 	label: PortalContent;
 
@@ -191,6 +199,11 @@ export class DateRangeInputComponent extends AbstractDateComponent implements Co
 	@HostBinding('class.mod-filterPill')
 	isFilterPill = false;
 
+	@HostBinding('class.mod-auto')
+	get isWidthAuto() {
+		return this.widthAuto();
+	}
+
 	isFilterPillEmpty = computed(() => this.selectedRange() === null);
 	isFilterPillClearable = computed(() => this.clearable() ?? this.#defaultFilterPillClearable() ?? this.#defaultClearable);
 	#defaultClearable = false;
@@ -262,6 +275,10 @@ export class DateRangeInputComponent extends AbstractDateComponent implements Co
 				});
 			}
 		});
+	}
+
+	ngOnInit() {
+		this.#ngControl = this.#injector.get(NgControl);
 	}
 
 	getNextCalendarDate(date: Date): Date {
@@ -442,12 +459,22 @@ export class DateRangeInputComponent extends AbstractDateComponent implements Co
 	}
 
 	writeValue(dateRange: DateRange | DateRangeInput | null): void {
+		if (this.#ngControl instanceof NgModel && isNil(this.#onChange)) {
+			// avoid phantom call for ngModel
+			// https://github.com/angular/angular/issues/14988#issuecomment-1310420293
+			return;
+		}
+		const _dateRange = transformDateRangeInputToDateRange(dateRange);
+
+		if (this.initialValue() === undefined) {
+			this.initialValue.set(_dateRange);
+		}
+
 		if (dateRange != null) {
-			const _dateRange = transformDateRangeInputToDateRange(dateRange);
 			this.selectedRange.set(_dateRange);
 			this.currentDate.set(startOfDay(dateRange.start));
 		} else {
-			this.clear(this.startTextInputRef().nativeElement, this.endTextInputRef().nativeElement);
+			this.clear();
 		}
 	}
 
@@ -462,10 +489,9 @@ export class DateRangeInputComponent extends AbstractDateComponent implements Co
 		super.setDisabledState(isDisabled);
 	}
 
-	clear(start: HTMLInputElement, end: HTMLInputElement) {
-		start.value = '';
-		end.value = '';
-		this.selectedRange.set(null);
+	clear() {
+		const newValue = this.clearBehavior() === 'reset' ? this.initialValue() : null;
+		this.selectedRange.set(newValue);
 		this.onTouched?.();
 		this.startTextInputRef().nativeElement.focus();
 	}
@@ -502,7 +528,7 @@ export class DateRangeInputComponent extends AbstractDateComponent implements Co
 	}
 
 	clearFilterPillValue(): void {
-		this.clear(this.startTextInputRef().nativeElement, this.endTextInputRef().nativeElement);
+		this.clear();
 	}
 
 	getDefaultFilterPillIcon(): LuccaIcon {

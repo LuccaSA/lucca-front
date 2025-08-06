@@ -1,0 +1,9 @@
+@mixin vars {
+	--components-mainLayout-flexDirection: column;
+	--components-mainLayout-sidebar-inlineSize: auto;
+	--components-mainLayout-content-inside-header-position: static;
+	--components-mainLayout-content-inside-footer-position: static;
+	--components-mainLayout-content-inside-block-position: static;
+	--components-mainLayout-content-inside-header-insetBlockStart: auto;
+	--components-mainLayout-content-inside-footer-insetBlockEnd: auto;
+}

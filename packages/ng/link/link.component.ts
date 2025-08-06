@@ -1,7 +1,7 @@
-import { booleanAttribute, Component, effect, ElementRef, HostBinding, inject, input, Input, OnDestroy, Renderer2, signal, ViewEncapsulation } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { booleanAttribute, Component, effect, HostBinding, inject, input, Input, ViewEncapsulation } from '@angular/core';
 import { getIntl } from '@lucca-front/ng/core';
 import { LU_LINK_TRANSLATIONS } from './link.translate';
+import { LuRouterLink } from './lu-router-link';
 
 @Component({
 	// eslint-disable-next-line @angular-eslint/component-selector
@@ -10,26 +10,26 @@ import { LU_LINK_TRANSLATIONS } from './link.translate';
 	templateUrl: './link.component.html',
 	styleUrls: ['./link.component.scss'],
 	encapsulation: ViewEncapsulation.None,
-	host: { class: 'link' },
+	host: {
+		class: 'link',
+		'[attr.href]': 'routerLink.publicReactiveHref()',
+	},
 	hostDirectives: [
 		{
-			directive: RouterLink,
+			directive: LuRouterLink,
 			inputs: ['preserveFragment', 'skipLocationChange', 'replaceUrl', 'queryParams', 'fragment', 'queryParamsHandling', 'state', 'info', 'relativeTo'],
 		},
 	],
 })
-export class LinkComponent implements OnDestroy {
+export class LinkComponent {
 	intl = getIntl(LU_LINK_TRANSLATIONS);
+	routerLink = inject(LuRouterLink);
 
-	#elementRef = inject<ElementRef<HTMLLinkElement>>(ElementRef);
-	#renderer = inject(Renderer2);
-	#routerLink = inject(RouterLink);
+	luHref = input('', { alias: 'href' });
 
-	#observer: MutationObserver;
+	routerLinkCommands = input<LuRouterLink['routerLink'] | null>(null, { alias: 'luLink' });
 
-	routerLinkCommands = input<RouterLink['routerLink'] | null>(null, { alias: 'luLink' });
-
-	disabled = input<boolean, boolean>(false, { transform: booleanAttribute });
+	disabled = input(false, { transform: booleanAttribute });
 
 	@Input({
 		transform: booleanAttribute,
@@ -66,37 +66,26 @@ export class LinkComponent implements OnDestroy {
 	hrefBackup: string;
 
 	constructor() {
-		const href = signal<string>(this.#elementRef.nativeElement.href);
-
-		this.#observer = new MutationObserver(() => {
-			href.set(this.#elementRef.nativeElement.href);
-		});
-
-		this.#observer.observe(this.#elementRef.nativeElement, { attributes: true, attributeFilter: ['href'] });
+		const href = this.luHref;
 
 		effect(() => {
 			if (href()) {
 				this.hrefBackup = href();
+				this.routerLink.publicReactiveHref.set(this.hrefBackup);
 			}
 			if (this.disabled()) {
 				if (this.routerLinkCommands()) {
-					this.#routerLink.routerLink = null;
-					this.#renderer.removeAttribute(this.#elementRef.nativeElement, 'href');
-				} else {
-					this.#renderer.removeAttribute(this.#elementRef.nativeElement, 'href');
+					this.routerLink.routerLink = null;
 				}
+				this.routerLink.publicReactiveHref.set(null);
 			} else if (this.routerLinkCommands()) {
-				this.#routerLink.routerLink = this.routerLinkCommands();
+				this.routerLink.routerLink = this.routerLinkCommands();
 				// We need to do this in order to have `routerLink` update the value for `href`:
 				// See https://github.com/angular/angular/blob/main/packages/router/src/directives/router_link.ts#L281
-				this.#routerLink.ngOnChanges({});
+				this.routerLink.ngOnChanges({});
 			} else if (!href() && this.hrefBackup) {
-				this.#renderer.setAttribute(this.#elementRef.nativeElement, 'href', this.hrefBackup);
+				this.routerLink.publicReactiveHref.set(this.hrefBackup);
 			}
 		});
-	}
-
-	ngOnDestroy(): void {
-		this.#observer.disconnect();
 	}
 }

@@ -15,9 +15,9 @@
 	border-width: 1px;
 	border-radius: var(--pr-t-radius-input);
 	resize: var(--components-richTextField-resize);
-	min-height: calc(var(--components-richTextField-minHeight) + var(--pr-t-spacings-800) + var(--pr-t-spacings-25));
-	max-height: var(--components-richTextField-maxHeight);
-	height: calc(var(--components-richTextField-height) + var(--pr-t-spacings-800) + var(--pr-t-spacings-25));
+	min-block-size: calc(var(--components-richTextField-minHeight) + var(--pr-t-spacings-800) + var(--pr-t-spacings-25));
+	max-block-size: var(--components-richTextField-maxHeight);
+	block-size: calc(var(--components-richTextField-height) + var(--pr-t-spacings-800) + var(--pr-t-spacings-25));
 
 	&:has(.richTextField-content:focus-visible) {
 		@include a11y.focusVisible;
@@ -78,7 +78,7 @@
 			align-items: center;
 			row-gap: var(--pr-t-spacings-100);
 			padding: var(--pr-t-spacings-100);
-			margin-left: calc(var(--pr-t-spacings-400) * -1);
+			margin-inline-start: calc(var(--pr-t-spacings-400) * -1);
 		}
 
 		.richTextField-toolbar-col-group {
@@ -88,13 +88,13 @@
 
 			&:not(:only-child) {
 				position: relative;
-				margin-left: var(--pr-t-spacings-400);
+				margin-inline-start: var(--pr-t-spacings-400);
 
 				&::before {
 					content: '';
 					position: absolute;
 					inset: var(--pr-t-spacings-100) auto var(--pr-t-spacings-100) calc(var(--pr-t-spacings-400) / -2);
-					width: 2px;
+					inline-size: 2px;
 					border-radius: var(--commons-borderRadius-full);
 					background-color: var(--palettes-neutral-300);
 				}

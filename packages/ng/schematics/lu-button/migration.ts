@@ -105,8 +105,8 @@ function findCssButtons(sourceFile: SourceFile, basePath: string, tree: Tree): C
 		const htmlAst = new HtmlAst(template.content);
 		htmlAst.visitNodes((node) => {
 			if (isInterestingNode(node) && ["button", "a"].includes(node.name)) {
-				const classes = node.attributes.find(attr => attr.name === 'class')?.value;
-				if (classes?.includes("button")) {
+				const classes = node.attributes.find(attr => attr.name === 'class')?.value || "";
+				if (classes.split(" ").includes("button")) {
 						const inputs = {
 							size: classes.split(' ').find(c => /mod-(XS|S|M|L|XL|XXL)/.test(c))?.replace('mod-', ''),
 							block: classes.includes(`mod-block`),

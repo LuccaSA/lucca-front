@@ -7,6 +7,11 @@
 }
 
 @mixin valueFirst {
+	--components-highlightData-grid : 'value action'
+	                                  'title action';
+}
+
+@mixin valueFirstIllustrations {
 	--components-highlightData-value-order: -1;
 }
 

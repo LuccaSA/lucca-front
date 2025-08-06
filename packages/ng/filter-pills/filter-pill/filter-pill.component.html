@@ -21,6 +21,7 @@
 			(luPopoverOpened)="popoverOpened()"
 			luTooltip
 			luTooltipWhenEllipsis
+			[luTooltipDisabled]="inputIsEmpty()"
 			#comboboxRef
 			#popoverRef="luPopover2"
 			[attr.aria-expanded]="popoverRef.opened()"

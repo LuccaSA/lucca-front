@@ -1,14 +1,30 @@
-import { Highlightable } from '@angular/cdk/a11y';
-import { AsyncPipe, NgIf } from '@angular/common';
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, HostBinding, Input, OnDestroy, TemplateRef, Type, ViewChild, inject, input } from '@angular/core';
+import { NgIf } from '@angular/common';
+import {
+	AfterViewInit,
+	ChangeDetectionStrategy,
+	ChangeDetectorRef,
+	Component,
+	effect,
+	ElementRef,
+	HostBinding,
+	inject,
+	Input,
+	input,
+	OnDestroy,
+	OnInit,
+	TemplateRef,
+	Type,
+	ViewChild,
+} from '@angular/core';
 import { PortalDirective } from '@lucca-front/ng/core';
-import { BehaviorSubject, Subscription, asyncScheduler, observeOn } from 'rxjs';
+import { asyncScheduler, observeOn, Subscription } from 'rxjs';
 import { GroupTemplateLocation } from '../panel/panel.utils';
 import { LuOptionContext, SELECT_ID } from '../select.model';
 import { LuOptionGrouping } from './group.directive';
 import { LuOptionGroupPipe } from './group.pipe';
 import { LuOptionOutletDirective } from './option-outlet.directive';
 import { ILuOptionContext, LU_OPTION_CONTEXT } from './option.token';
+import { CoreSelectPanelElement } from '../panel/selectable-item';
 
 export const MAGIC_OPTION_SCROLL_DELAY = 15;
 
@@ -18,18 +34,16 @@ export const MAGIC_OPTION_SCROLL_DELAY = 15;
 	styleUrls: ['./option.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	standalone: true,
-	imports: [AsyncPipe, LuOptionOutletDirective, NgIf, PortalDirective, LuOptionGroupPipe],
+	imports: [LuOptionOutletDirective, NgIf, PortalDirective, LuOptionGroupPipe],
 })
-export class LuOptionComponent<T> implements Highlightable, AfterViewInit, OnDestroy {
+export class LuOptionComponent<T> implements AfterViewInit, OnDestroy, OnInit {
+	protected selectableItem = inject(CoreSelectPanelElement);
+
 	@HostBinding('class.optionItem')
 	public hasOptionItemClass = true;
 
 	@Input()
 	public optionTpl: TemplateRef<LuOptionContext<T>> | Type<unknown> | undefined;
-
-	@Input()
-	@HostBinding('attr.aria-selected')
-	isSelected = false;
 
 	@Input() option?: T;
 	@Input() grouping?: LuOptionGrouping<T, unknown>;
@@ -44,24 +58,13 @@ export class LuOptionComponent<T> implements Highlightable, AfterViewInit, OnDes
 
 	groupTemplateLocation = input<GroupTemplateLocation>();
 
-	isHighlighted$ = new BehaviorSubject(false);
-
-	/**
-	 * Whether option is disabled. Used by ListKeyManager.
-	 */
-	disabled = false;
-
 	@ViewChild(LuOptionOutletDirective, { read: LU_OPTION_CONTEXT, static: true })
 	private optionContext?: ILuOptionContext<T>;
 
 	private cdr = inject(ChangeDetectorRef);
 	private subscription?: Subscription;
 
-	@HostBinding('attr.role')
-	public role = 'option';
-
-	@HostBinding('attr.id')
-	public get id(): string {
+	get id(): string {
 		const groupPart = this.groupIndex() === undefined ? `` : `-group-${this.groupIndex()}`;
 
 		return `lu-select-${this.selectId}${groupPart}-option-${this.optionIndex}`;
@@ -70,32 +73,33 @@ export class LuOptionComponent<T> implements Highlightable, AfterViewInit, OnDes
 	protected elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
 	protected selectId = inject(SELECT_ID);
 
+	constructor() {
+		effect(() => {
+			if (this.selectableItem.isHighlighted()) {
+				setTimeout(() => {
+					this.elementRef.nativeElement.scrollIntoView(this.scrollIntoViewOptions);
+				}, MAGIC_OPTION_SCROLL_DELAY);
+			}
+		});
+	}
+
+	ngOnInit(): void {
+		this.selectableItem.id.set(this.id);
+	}
+
 	ngOnDestroy(): void {
 		this.subscription?.unsubscribe();
 	}
 
 	ngAfterViewInit(): void {
 		this.subscription = this.optionContext.isDisabled$.pipe(observeOn(asyncScheduler)).subscribe((isDisabled) => {
-			this.disabled = isDisabled;
+			this.selectableItem.disabled = isDisabled;
 			this.cdr.markForCheck();
 		});
 	}
 
-	setActiveStyles(): void {
-		this.isHighlighted$.next(true);
-		// Somehow, adding this small delay works, even tho 0ms delay doesn't, I think there's
-		// a race condition somewhere that I can't find so this will just fix it for now.
-		setTimeout(() => {
-			this.elementRef.nativeElement.scrollIntoView(this.scrollIntoViewOptions);
-		}, MAGIC_OPTION_SCROLL_DELAY);
-	}
-
-	setInactiveStyles(): void {
-		this.isHighlighted$.next(false);
-	}
-
 	selectOption($event: Event): void {
-		if (this.disabled) {
+		if (this.selectableItem.disabled) {
 			$event.stopPropagation();
 		}
 	}

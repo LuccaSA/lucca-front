@@ -1,9 +1,9 @@
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { NumericBadgeComponent } from '@lucca-front/ng/numeric-badge';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { generateInputs } from 'stories/helpers/stories';
-import { Basic as ButtonBasic } from './button-basic.stories';
-import { within, expect } from '@storybook/test';
+import { createTestStory, generateInputs } from 'stories/helpers/stories';
+import { BasicTEST as ButtonBasic } from './button-basic.stories';
+import { within, expect } from 'storybook/test';
 
 export default {
 	title: 'Documentation/Actions/Button/Angular/Counter',
@@ -37,13 +37,6 @@ export const Basic: StoryObj<ButtonComponent> = {
 			},
 		},
 	},
-	play: async (context) => {
-		const canvas = within(context.canvasElement);
-		await ButtonBasic.play(context);
-		const button = await canvas.findByRole('button');
-		const counter = await within(button).findByText('999+');
-		await expect(counter).toBeInTheDocument();
-	},
 	args: {
 		block: false,
 		palette: 'none',
@@ -52,3 +45,11 @@ export const Basic: StoryObj<ButtonComponent> = {
 		delete: false,
 	},
 };
+
+export const BasicTEST = createTestStory(Basic, async (context) => {
+	const canvas = within(context.canvasElement);
+	await ButtonBasic.play(context);
+	const button = await canvas.findByRole('button');
+	const counter = await within(button).findByText('999+');
+	await expect(counter).toBeInTheDocument();
+});

@@ -8,7 +8,7 @@
 	--components-options-item-multiple-padding: 2.25rem;
 	--components-options-item-icon-color: var(--palettes-neutral-800);
 	--components-options-checkbox-size: 1.25rem;
-	--components-options-checkbox-color: var(--palettes-product-700);
+	--components-options-checkbox-color: var(--palettes-700, var(--palettes-product-700));
 	--components-options-checkbox-border-radius: 6px;
 	--components-options-checkbox-border-color: var(--palettes-neutral-700);
 	--components-options-establishment-multiple-padding: 2rem;
@@ -16,8 +16,17 @@
 
 @mixin optionItemStyle {
 	:host {
+		--components-options-checkbox-color: var(--palettes-700, var(--palettes-product-700)); // Allow palette override
 		display: block;
 		scroll-margin: var(--pr-t-spacings-50);
+
+		&.withAddOption {
+			scroll-margin-block-end: var(--pr-t-spacings-600);
+		}
+
+		.lu-picker-content-group & {
+			scroll-margin-block-start: var(--pr-t-spacings-400);
+		}
 	}
 
 	.optionItem {
@@ -33,8 +42,8 @@
 		transition: background-color 50ms;
 		cursor: pointer;
 
-		&.is-selected {
-			background-color: var(--palettes-product-50);
+		&.is-selected, :host-context([aria-selected="true"]) & {
+			background-color: var(--palettes-50, var(--palettes-product-50));
 
 			&::before {
 				content: '';
@@ -42,24 +51,24 @@
 				inset-block: 0;
 				inset-inline-start: calc(var(--pr-t-spacings-50) * -1);
 				inline-size: 2px;
-				background-color: var(--palettes-product-700);
+				background-color: var(--palettes-700, var(--palettes-product-700));
 				border-start-end-radius: var(--commons-borderRadius-M);
 				border-end-end-radius: var(--commons-borderRadius-M);
 			}
 
 			&:hover {
-				background-color: var(--palettes-product-100);
+				background-color: var(--palettes-100, var(--palettes-product-100));
 			}
 
 			&:active {
-				background-color: var(--palettes-product-200);
+				background-color: var(--palettes-200, var(--palettes-product-200));
 			}
 
-			&.is-highlighted {
-				background-color: var(--palettes-product-100);
+			:host-context(.is-highlighted) & {
+				background-color: var(--palettes-100, var(--palettes-product-100));
 
 				&:hover {
-					background-color: var(--palettes-product-200);
+					background-color: var(--palettes-200, var(--palettes-product-200));
 				}
 			}
 		}
@@ -68,8 +77,7 @@
 			background-color: var(--palettes-neutral-50);
 		}
 
-		&.is-highlighted,
-		&.is-focus {
+		:host-context(.is-highlighted) & {
 			background-color: var(--palettes-neutral-50);
 
 			&:hover {
@@ -98,14 +106,13 @@
 			text-overflow: ellipsis;
 
 			&:hover,
-			&.is-focus,
-			&.is-highlighted {
+			:host-context(.is-highlighted) & {
 				background-color: inherit;
 			}
 		}
 	}
 
-	:host-context(.mod-multiple) {
+	:host-context(.mod-multiple), .formerEmployeeDisplayer {
 		.optionItem-value {
 			position: relative;
 			padding-inline-start: var(--components-options-item-multiple-padding);
@@ -143,7 +150,7 @@
 				inline-size: var(--components-options-checkbox-size);
 			}
 
-			&.is-selected {
+			&.is-selected, :host-context([aria-selected="true"]) & {
 				&::before {
 					background-color: var(--components-options-checkbox-color);
 					box-shadow: inset 0 0 0 2px var(--components-options-checkbox-color);
@@ -153,12 +160,8 @@
 					color: var(--palettes-neutral-0);
 					transform: scale(1);
 				}
-			}
 
-			&.is-disabled {
-				--components-options-checkbox-border-color: var(--palettes-neutral-500); // disabled token candidate
-
-				&.is-selected {
+				&.is-disabled {
 					--components-options-checkbox-color: var(--commons-disabled-background);
 
 					background-color: transparent;
@@ -167,6 +170,11 @@
 						color: var(--palettes-neutral-500); // disabled token candidate
 					}
 				}
+
+			}
+
+			&.is-disabled {
+				--components-options-checkbox-border-color: var(--palettes-neutral-500); // disabled token candidate
 			}
 
 			&:not(.is-disabled):hover {

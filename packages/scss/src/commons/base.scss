@@ -109,6 +109,11 @@
 			font-weight: 600;
 		}
 
+		mark {
+			background-color: var(--palettes-100, var(--palettes-product-100));
+			border-radius: var(--commons-borderRadius-M);
+		}
+
 		@each $palette in config.$palettesAll {
 			$paletteExists: map.get(config.$palettesInterpolation, $palette);
 

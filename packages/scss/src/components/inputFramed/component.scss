@@ -27,7 +27,7 @@
 		}
 
 		.inputFramed-header-field {
-			&.form-field {
+			&.form-field.form-field {
 				position: static;
 				margin-block: 0;
 			}
@@ -54,6 +54,7 @@
 			display: flex;
 			flex-wrap: wrap;
 			justify-content: space-between;
+			align-content: flex-start;
 			gap: var(--pr-t-spacings-100);
 		}
 
@@ -68,6 +69,7 @@
 			border-block-start: 1px solid var(--components-inputFramed-header-info-borderColor);
 			margin-block-start: var(--pr-t-spacings-100);
 			padding-block-start: var(--pr-t-spacings-200);
+			color: var(--components-inputFramed-header-info-color);
 
 			&:empty {
 				display: none;

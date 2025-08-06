@@ -1,6 +1,5 @@
-import { BreadcrumbsComponent } from '@lucca-front/ng/breadcrumbs';
+import { BreadcrumbsComponent, BreadcrumbsLinkDirective } from '@lucca-front/ng/breadcrumbs';
 import { Meta, moduleMetadata } from '@storybook/angular';
-import { BreadcrumbsLinkDirective } from 'packages/ng/breadcrumbs/breadcrumbs-link.directive';
 import { generateInputs } from 'stories/helpers/stories';
 
 export default {
@@ -25,6 +24,5 @@ export default {
 } as Meta;
 
 export const Basic = {
-	args: {
-	},
+	args: {},
 };

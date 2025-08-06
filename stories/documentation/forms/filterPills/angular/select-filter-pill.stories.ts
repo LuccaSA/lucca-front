@@ -3,15 +3,20 @@ import { JsonPipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { FilterPillComponent } from '@lucca-front/ng/filter-pills';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { LuMultiSelectInputComponent } from '../../../../../packages/ng/multi-select/input';
+import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { LuMultiSelectInputComponent } from '@lucca-front/ng/multi-select';
 import { StoryModelDisplayComponent } from '../../../../helpers/story-model-display.component';
+import { LuCoreSelectUsersDirective, provideCoreSelectCurrentUserId } from '@lucca-front/ng/core-select/user';
+import { provideAnimations } from '@angular/platform-browser/animations';
+import { provideHttpClient } from '@angular/common/http';
 
 export default {
 	title: 'Documentation/Forms/FiltersPills/Select/Angular',
 	decorators: [
+		applicationConfig({ providers: [provideAnimations(), provideHttpClient()] }),
 		moduleMetadata({
-			imports: [FilterPillComponent, LuSimpleSelectInputComponent, LuMultiSelectInputComponent, FormsModule, StoryModelDisplayComponent, JsonPipe, FilterLegumesPipe],
+			imports: [FilterPillComponent, LuSimpleSelectInputComponent, LuMultiSelectInputComponent, FormsModule, StoryModelDisplayComponent, JsonPipe, FilterLegumesPipe, LuCoreSelectUsersDirective],
+			providers: [provideCoreSelectCurrentUserId(() => 66)],
 		}),
 	],
 	render: (args, context) => {
@@ -19,6 +24,7 @@ export default {
 			props: {
 				example: null,
 				examples: [],
+				user: null,
 				legumes: allLegumes,
 			},
 			template: `<lu-filter-pill label="Légume" name="legume">
@@ -34,6 +40,14 @@ export default {
 </lu-filter-pill>
 
 <pr-story-model-display>{{examples | json}}</pr-story-model-display>
+
+<hr class="divider pr-u-marginBlock400" />
+
+<lu-filter-pill label="Utilisateur" name="user">
+	<lu-simple-select [(ngModel)]="user"	users enableFormerEmployees/>
+</lu-filter-pill>
+
+<pr-story-model-display>{{user | json}}</pr-story-model-display>
 `,
 		};
 	},

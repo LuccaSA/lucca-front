@@ -8,14 +8,12 @@ export default {
 } as Meta;
 
 function getTemplate(args: CardsClickableStory): string {
-	return `
-	<div class="card mod-clickable">
-		<div class="card-content">
-			<h2 class="card-title">Titre de la carte</h2>
-			<p>Contenu de la carte</p>
-		</div>
+	return `<div class="card mod-clickable">
+	<div class="card-content">
+		<h2 class="card-title">Titre de la carte</h2>
+		<p>Contenu de la carte</p>
 	</div>
-	`;
+</div>`;
 }
 
 const Template: StoryFn<CardsClickableStory> = (args) => ({

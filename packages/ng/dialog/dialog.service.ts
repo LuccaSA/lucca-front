@@ -33,6 +33,8 @@ export class LuDialogService {
 			backdropClass: 'dialog_backdrop',
 			panelClass: ['dialog', `mod-${config.size || 'M'}`, ...modeClasses, ...(config.panelClasses || [])],
 			ariaLabel: config.ariaLabel,
+			// Handle manually
+			closeOnOverlayDetachments: false,
 			// If focus is first-input, focus dialog and let the component do the rest
 			// Else, just set it to config value or default to first-tabbable
 			autoFocus: config.autoFocus === 'first-input' ? 'dialog' : (config.autoFocus ?? 'first-tabbable'),
@@ -69,10 +71,12 @@ export class LuDialogService {
 				)
 				.subscribe((canClose) => {
 					if (canClose) {
+						luDialogRef.detachSubscription?.unsubscribe();
 						cdkRef.close(DISMISSED_VALUE);
 					}
 				});
 		}
+
 		return luDialogRef;
 	}
 }

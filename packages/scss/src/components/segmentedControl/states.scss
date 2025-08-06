@@ -8,8 +8,14 @@
 	--components-segmentedControl-backgroundContent: none;
 	--components-segmentedControl-zIndex: 1;
 
+
+
 	.numericBadge {
 		@include numericBadge.inherit;
+
+		// Might be deletable after layers implementation
+		--components-numericBadge-loadingColor: var(--palettes-product-500);
+		--components-numericBadge-color: transparent;
 	}
 }
 
