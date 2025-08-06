@@ -12,7 +12,7 @@ function getTemplate(args: UserPopoverStory): string {
 		<div class="userPopover-details">
 			<div class="userPopover-details-avatar avatar">
 				<div class="avatar-picture" style="background-color: rgb(92,214,153);">
-					<span class="avatar-picture-initials">CA</span>
+					<span class="avatar-picture-initials" translate="no">CA</span>
 				</div>
 			</div>
 			<div class="userPopover-details-info">

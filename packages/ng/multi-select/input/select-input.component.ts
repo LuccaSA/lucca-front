@@ -21,7 +21,7 @@ import {
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { getIntl } from '@lucca-front/ng/core';
 import { ALuSelectInputComponent, LuOptionContext, provideLuSelectLabelsAndIds, ɵLuOptionOutletDirective } from '@lucca-front/ng/core-select';
-import { FilterPillDisplayerDirective, FilterPillLabelDirective, FILTER_PILL_INPUT_COMPONENT } from '@lucca-front/ng/filter-pills';
+import { FILTER_PILL_INPUT_COMPONENT, FilterPillDisplayerDirective, FilterPillLabelDirective } from '@lucca-front/ng/filter-pills';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 import { Subject } from 'rxjs';
 import { LuMultiSelectDefaultDisplayerComponent } from '../displayer/index';
@@ -83,7 +83,10 @@ export class LuMultiSelectInputComponent<T> extends ALuSelectInputComponent<T, T
 
 	filterPillPanelAnchorRef = viewChild('filterPillPanelAnchor', { read: ViewContainerRef });
 
-	override isFilterPillEmpty = computed(() => this.valueSignal()?.length === 0);
+	override isFilterPillEmpty = computed(() => {
+		const valueSignal = this.valueSignal();
+		return !valueSignal || valueSignal.length === 0;
+	});
 
 	override _value: T[] = [];
 

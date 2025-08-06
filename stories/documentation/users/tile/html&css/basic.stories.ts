@@ -13,7 +13,7 @@ function getTemplate(args: UserTileBasicStory): string {
 		<img alt="" class="avatar-picture" loading="lazy" src="https://cdn.lucca.fr/lucca-front/avatars/finn.png" />
 	</div>
 	<dl class="userTile-content">
-		<dt class="userTile-content-name">Mertens Finn</dt>
+		<dt class="userTile-content-name" translate="no">Mertens Finn</dt>
 		<dd class="userTile-content-info">Hero</dd>
 	</dl>
 </div>`;

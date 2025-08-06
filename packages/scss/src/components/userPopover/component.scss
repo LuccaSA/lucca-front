@@ -1,4 +1,6 @@
 @use '@lucca-front/scss/src/components/avatar/exports' as avatar;
+@use '@lucca-front/scss/src/commons/utils/reset';
+@use '@lucca-front/scss/src/commons/utils/a11y';
 @use '@lucca-front/scss/src/commons/utils/namespace';
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
@@ -7,6 +9,20 @@
 	padding: var(--pr-t-spacings-200);
 
 	@at-root ($atRoot) {
+		.userPopover_trigger {
+			@include reset.button;
+
+			inline-size: fit-content;
+
+			&:focus-visible {
+				@include a11y.focusVisible($borderRadius: var(--commons-borderRadius-M));
+
+				&:has(> .avatar) {
+					@include a11y.focusVisible($borderRadius: var(--commons-borderRadius-full));
+				}
+			}
+		}
+
 		.userPopover-details {
 			display: flex;
 			align-items: flex-start;

@@ -21,4 +21,8 @@
 			@include outlined;
 		}
 	}
+
+	&.mod-disabled {
+		@include disabled;
+	}
 }

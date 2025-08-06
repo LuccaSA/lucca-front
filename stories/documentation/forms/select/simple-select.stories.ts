@@ -9,7 +9,7 @@ import { LuCoreSelectUserOptionDirective, LuCoreSelectUsersDirective, provideCor
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 import { LuUserDisplayPipe } from '@lucca-front/ng/user';
 import { applicationConfig, Meta, moduleMetadata } from '@storybook/angular';
-import { expect, screen, userEvent, within } from '@storybook/test';
+import { expect, screen, userEvent, within } from 'storybook/test';
 import { HiddenArgType } from 'stories/helpers/common-arg-types';
 import { createTestStory, getStoryGenerator, useDocumentationStory } from 'stories/helpers/stories';
 import { waitForAngular } from '../../../helpers/test';
@@ -381,10 +381,10 @@ export const UserCustom = generateStory({
 	[(ngModel)]="selectedUser"
 >
 	<ng-container *luDisplayer="let user; select: usersRef.select">
-		👉👉👉 {{ user | luUserDisplay }} 👈👈👈
+		👉👉👉 <span translate="no">{{ user | luUserDisplay }}</span> 👈👈👈
 	</ng-container>
 	<ng-container *luOption="let user; select: usersRef.select">
-		{{ user | luUserDisplay }} <span class="u-textLight">(Random {{ user.myCustomProperty }})</span>
+		<span translate="no">{{ user | luUserDisplay }}</span>&ngsp;<span class="u-textLight">(Random {{ user.myCustomProperty }})</span>
 
 		<!-- Handle homonyms -->
 		<div *ngIf="user.additionalInformation">({{ user.additionalInformation }})</div>
@@ -405,7 +405,7 @@ export const UserCustomTemplate = generateStory({
 	#usersRef="luUsers"
 	[(ngModel)]="selectedUser"
 >
-	<span *luUserOption="let user; usersRef: usersRef">👉👉👉 {{ user | luUserDisplay }} 👈👈👈</span>
+	<span translate="no" *luUserOption="let user; usersRef: usersRef">👉👉👉 {{ user | luUserDisplay }} 👈👈👈</span>
 </lu-simple-select>
 	`,
 	neededImports: {
@@ -453,10 +453,10 @@ export const EstablishmentCustom = generateStory({
 	[(ngModel)]="selectedEstablishment"
 >
 	<ng-container *luDisplayer="let establishment; select: establishmentsRef.select">
-		👉👉👉 {{ establishment.name }} 👈👈👈
+		👉👉👉 <span translate="no">{{ establishment.name }}</span> 👈👈👈
 	</ng-container>
 	<ng-container *luOption="let establishment; select: establishmentsRef.select">
-		{{ establishment.name }} <span class="u-textLight">(Random {{ establishment.myCustomProperty }})</span>
+		<span translate="no">{{ establishment.name }}</span> <span class="u-textLight">(Random {{ establishment.myCustomProperty }})</span>
 	</ng-container>
 </lu-simple-select>`,
 	neededImports: {

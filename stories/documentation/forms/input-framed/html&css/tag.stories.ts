@@ -8,8 +8,7 @@ export default {
 	argTypes: {},
 	render: (args: InputFramedTagStory) => {
 		return {
-			template: cleanupTemplate(`
-<div class="inputFramed">
+			template: cleanupTemplate(`<div class="inputFramed">
 	<div class="inputFramed-header">
 		<div class="form-field inputFramed-header-field">
 			<label class="formLabel inputFramed-header-label" id="radioAlabel" for="optionA">
@@ -24,8 +23,7 @@ export default {
 			</span>
 		</div>
 	</div>
-</div>
-`),
+</div>`),
 		};
 	},
 } as Meta;

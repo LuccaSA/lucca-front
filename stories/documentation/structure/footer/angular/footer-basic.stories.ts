@@ -12,6 +12,9 @@ export default {
 				type: 'select',
 			},
 		},
+		container: {
+			description: 'Applique un container autour du contenu de Page Header.',
+		},
 	},
 	decorators: [
 		moduleMetadata({

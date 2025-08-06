@@ -4,12 +4,11 @@ import { cleanupTemplate } from 'stories/helpers/stories';
 interface ListingOrderedStory {}
 
 export default {
-	title: 'Documentation/Listing/Listing/HTML&CSS/Ordered',
+	title: 'Documentation/Listings/Listing/HTML&CSS/Ordered',
 	argTypes: {},
 	render: (args: ListingOrderedStory) => {
 		return {
-			template: cleanupTemplate(`
-<ol class="listing">
+			template: cleanupTemplate(`<ol class="listing">
 	<li class="listing-item">
 		<div class="listing-item-content">item</div>
 	</li>
@@ -32,8 +31,7 @@ export default {
 			</ol>
 		</div>
 	</li>
-</ol>
-`),
+</ol>`),
 		};
 	},
 } as Meta;

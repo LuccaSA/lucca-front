@@ -23,9 +23,9 @@
   ],
   "author": "Guilde Front Lucca <guilde-front@lucca.fr>",
   "peerDependencies": {
-    "@angular/common": "^19.0.0",
-    "@angular/core": "^19.0.0",
-    "@angular/cdk": "^19.0.0",
+    "@angular/common": "^20.0.0",
+    "@angular/core": "^20.0.0",
+    "@angular/cdk": "^20.0.0",
     "@lucca-front/icons": "*",
     "@lucca-front/scss": "*",
     "isomorphic-dompurify": "^2.17.0",
@@ -38,7 +38,8 @@
     "@lexical/rich-text": "^0.30.0",
     "@lexical/selection": "^0.30.0",
     "@lexical/utils": "^0.30.0",
-    "lexical": "^0.30.0"
+    "lexical": "^0.30.0",
+    "@ngx-formly/core": "^6.3.11"
   },
   "peerDependenciesMeta": {
     "lexical": {
@@ -63,6 +64,9 @@
       "optional": true
     },
     "@lexical/utils": {
+      "optional": true
+    },
+    "@ngx-formly/core": {
       "optional": true
     }
   },
