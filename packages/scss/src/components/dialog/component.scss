@@ -89,6 +89,8 @@
 		}
 
 		.dialog-inside-header-actionOptional {
+			margin-right: calc(var(--pr-t-spacings-100) * -1);
+
 			&:empty {
 				display: none;
 			}
