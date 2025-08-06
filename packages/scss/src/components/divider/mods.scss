@@ -15,7 +15,7 @@
 
 @mixin vertical {
 	--components-divider-marginBlock: 0;
-	--components-divider-marginInline: var(--components-divider-margin-value);
+	--components-divider-marginInline: var(--pr-t-spacings-50);
 	--components-divider-alignSelf: stretch;
 
 	&:where(:empty) {
