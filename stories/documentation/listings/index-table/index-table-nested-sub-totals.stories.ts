@@ -36,35 +36,35 @@ function getTemplate(args: IndexTableNestedSubTotalsStory): string {
 			</th>
 		</tr>
 		<tr class="indexTable-body-row" id="r1">
-			<td class="indexTable-body-row-cell" header="y2021">
+			<td class="indexTable-body-row-cell" headers="y2021">
 				<a href="#" class="indexTable-body-row-cell-link">Content</a>
 
 			</td>
-			<td class="indexTable-body-row-cell" header="y2021">Content</td>
-			<td class="indexTable-body-row-cell mod-alignRight" header="y2021">
+			<td class="indexTable-body-row-cell" headers="y2021">Content</td>
+			<td class="indexTable-body-row-cell mod-alignRight" headers="y2021">
 				<strong>170.00 €</strong>
 			</td>
 		</tr>
 		<tr class="indexTable-body-row" id="r2">
-			<td class="indexTable-body-row-cell" header="y2021">
+			<td class="indexTable-body-row-cell" headers="y2021">
 				<a href="#" class="indexTable-body-row-cell-link">Content</a>
 			</td>
-			<td class="indexTable-body-row-cell" header="y2021">Content</td>
-			<td class="indexTable-body-row-cell mod-alignRight" header="y2021">
+			<td class="indexTable-body-row-cell" headers="y2021">Content</td>
+			<td class="indexTable-body-row-cell mod-alignRight" headers="y2021">
 				<strong>50.30 €</strong>
 			</td>
 		</tr>
 		<tr class="indexTable-body-row" id="r3">
-			<td class="indexTable-body-row-cell" header="y2021">
+			<td class="indexTable-body-row-cell" headers="y2021">
 				<a href="#" class="indexTable-body-row-cell-link">Content</a>
 			</td>
-			<td class="indexTable-body-row-cell" header="y2021">Content</td>
-			<td class="indexTable-body-row-cell mod-alignRight" header="y2021">
+			<td class="indexTable-body-row-cell" headers="y2021">Content</td>
+			<td class="indexTable-body-row-cell mod-alignRight" headers="y2021">
 				<strong>7778.80 €</strong>
 			</td>
 		</tr>
 		<tr class="indexTable-foot-row" id="r4">
-			<td class="indexTable-foot-row-cell" header="y2021" colspan="3">
+			<td class="indexTable-foot-row-cell" headers="y2021" colspan="3">
 				<span class="u-bodyS">Sub total : </span>
 				<strong>7999.10 €</strong>
 			</td>
@@ -90,16 +90,16 @@ function getTemplate(args: IndexTableNestedSubTotalsStory): string {
 			</th>
 		</tr>
 		<tr class="indexTable-body-row" id="r6">
-			<td class="indexTable-body-row-cell" header="y2022">
+			<td class="indexTable-body-row-cell" headers="y2022">
 				<a href="#" class="indexTable-body-row-cell-link">Content</a>
 			</td>
-			<td class="indexTable-body-row-cell" header="y2022">Content</td>
-			<td class="indexTable-body-row-cell mod-alignRight" header="y2022">
+			<td class="indexTable-body-row-cell" headers="y2022">Content</td>
+			<td class="indexTable-body-row-cell mod-alignRight" headers="y2022">
 				<strong>200.00 €</strong>
 			</td>
 		</tr>
 		<tr class="indexTable-foot-row" id="r7">
-			<td class="indexTable-foot-row-cell" header="y2022" colspan="3">
+			<td class="indexTable-foot-row-cell" headers="y2022" colspan="3">
 				<span class="u-bodyS">Sub total : </span>
 				<strong>200.00 €</strong>
 			</td>
@@ -125,16 +125,16 @@ function getTemplate(args: IndexTableNestedSubTotalsStory): string {
 			</th>
 		</tr>
 		<tr class="indexTable-body-row is-closed" id="r9">
-			<td class="indexTable-body-row-cell" header="y2023">
+			<td class="indexTable-body-row-cell" headers="y2023">
 				<a href="#" class="indexTable-body-row-cell-link">Content</a>
 			</td>
-			<td class="indexTable-body-row-cell" header="y2023">Content</td>
-			<td class="indexTable-body-row-cell mod-alignRight" header="y2023">
+			<td class="indexTable-body-row-cell" headers="y2023">Content</td>
+			<td class="indexTable-body-row-cell mod-alignRight" headers="y2023">
 				<strong>212.25 €</strong>
 			</td>
 		</tr>
 		<tr class="indexTable-foot-row is-closed" id="r10">
-			<td class="indexTable-foot-row-cell" header="y2023" colspan="3">
+			<td class="indexTable-foot-row-cell" headers="y2023" colspan="3">
 				<span class="u-bodyS">Sub total : </span>
 				<strong>212.25 €</strong>
 			</td>

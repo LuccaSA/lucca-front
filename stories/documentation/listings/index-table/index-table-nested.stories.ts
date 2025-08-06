@@ -30,25 +30,25 @@ function getTemplate(args: IndexTableNestedStory): string {
 			</th>
 		</tr>
 		<tr class="indexTable-body-row" id="r1">
-			<td class="indexTable-body-row-cell" header="y2021">
+			<td class="indexTable-body-row-cell" headers="y2021">
 				<a href="#" class="indexTable-body-row-cell-link">Content</a>
 			</td>
-			<td class="indexTable-body-row-cell" header="y2021">Content</td>
-			<td class="indexTable-body-row-cell" header="y2021">Content</td>
+			<td class="indexTable-body-row-cell" headers="y2021">Content</td>
+			<td class="indexTable-body-row-cell" headers="y2021">Content</td>
 		</tr>
 		<tr class="indexTable-body-row" id="r2">
-			<td class="indexTable-body-row-cell" header="y2021">
+			<td class="indexTable-body-row-cell" headers="y2021">
 				<a href="#" class="indexTable-body-row-cell-link">Content</a>
 			</td>
-			<td class="indexTable-body-row-cell" header="y2021">Content</td>
-			<td class="indexTable-body-row-cell" header="y2021">Content</td>
+			<td class="indexTable-body-row-cell" headers="y2021">Content</td>
+			<td class="indexTable-body-row-cell" headers="y2021">Content</td>
 		</tr>
 		<tr class="indexTable-body-row" id="r3">
-			<td class="indexTable-body-row-cell" header="y2021">
+			<td class="indexTable-body-row-cell" headers="y2021">
 				<a href="#" class="indexTable-body-row-cell-link">Content</a>
 			</td>
-			<td class="indexTable-body-row-cell" header="y2021">Content</td>
-			<td class="indexTable-body-row-cell" header="y2021">Content</td>
+			<td class="indexTable-body-row-cell" headers="y2021">Content</td>
+			<td class="indexTable-body-row-cell" headers="y2021">Content</td>
 		</tr>
 	</tbody>
 	<tbody class="indexTable-body">
@@ -65,11 +65,11 @@ function getTemplate(args: IndexTableNestedStory): string {
 			</th>
 		</tr>
 		<tr class="indexTable-body-row" id="r5">
-			<td class="indexTable-body-row-cell" header="y2022">
+			<td class="indexTable-body-row-cell" headers="y2022">
 				<a href="#" class="indexTable-body-row-cell-link">Content</a>
 			</td>
-			<td class="indexTable-body-row-cell" header="y2022">Content</td>
-			<td class="indexTable-body-row-cell" header="y2022">Content</td>
+			<td class="indexTable-body-row-cell" headers="y2022">Content</td>
+			<td class="indexTable-body-row-cell" headers="y2022">Content</td>
 		</tr>
 	</tbody>
 </table>`;
