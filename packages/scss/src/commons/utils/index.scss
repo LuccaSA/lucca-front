@@ -377,23 +377,4 @@
 @include core.sizes;
 @include core.borderRadius;
 @include core.palettes;
-
-.pr-u-borderRadiusStructure {
-	border-radius: var(--pr-t-border-radius-structure) !important;
-}
-
-.pr-u-borderRadiusDefault {
-	border-radius: var(--pr-t-border-radius-default) !important;
-}
-
-.pr-u-borderRadiusSmall {
-	border-radius: var(--pr-t-border-radius-small) !important;
-}
-
-.pr-u-borderRadiusFull {
-	border-radius: var(--pr-t-border-radius-full) !important;
-}
-
-.pr-u-borderRadiusInput {
-	border-radius: var(--pr-t-border-radius-input) !important;
-}
+@include core.borderRadiusTokens;
