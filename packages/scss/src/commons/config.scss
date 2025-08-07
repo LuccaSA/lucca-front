@@ -87,8 +87,8 @@ $fontTokens: (
 
 $product: 'brand' !default;
 $palettesShades: text, 0, 25, 50, 100, 200, 300, 400, 500, 600, 700, 800, 900; // text is deprecated
-$palettesStates: 'critical', 'error', 'warning', 'success';
-$palettesDefault: 'brand', 'neutral', 'navigation';
+$palettesStates: 'critical', 'error', 'warning', 'success', 'successContrasted', 'warningContrasted';
+$palettesDefault: 'brand', 'brandContrasted', 'neutral', 'navigation';
 $palettesProduct: 'product';
 $palettesOtherProduct: () !default;
 $palettesDecorative: 'kiwi', 'lime', 'cucumber', 'mint', 'glacier', 'lagoon', 'blueberry', 'lavender', 'grape', 'watermelon', 'pumpkin',
@@ -126,6 +126,22 @@ $brand: (
 	700: #e06029,
 	800: #ae2e03,
 	900: #611405
+);
+
+$brandContrasted: (
+	// text is deprecated
+	text: #ffffff,
+	0: #ffffff,
+	50: #fff1eb,
+	100: #ffe0d1,
+	200: #ffccb3,
+	300: #ffbe9e,
+	400: #ffaa80,
+	500: #ff9361,
+	600: #d76133,
+	700: #ae2e04,
+	800: #882105,
+	900: #611405,
 );
 
 $cleemy: (
@@ -204,7 +220,7 @@ $coreHR: (
 	600: #3387db,
 	700: #0c63bb,
 	800: #004285,
-	900: #002e5c,
+	900: #002e5c
 ) !default;
 
 $cc: (
@@ -267,6 +283,22 @@ $success: (
 	900: #004d20
 );
 
+$successContrasted: (
+	// text is deprecated
+	text: #ffffff,
+	0: #ffffff,
+	50: #dbfae0,
+	100: #bef3c7,
+	200: #a2ebaf,
+	300: #84e695,
+	400: #68d97b,
+	500: #57c769,
+	600: #319f4c,
+	700: #0a762f,
+	800: #056228,
+	900: #004d20
+);
+
 $warning: (
 	// text is deprecated
 	text: #ffffff,
@@ -281,6 +313,22 @@ $warning: (
 	700: #f08800,
 	800: #c25100,
 	900: #802a00
+);
+
+$warningContrasted: (
+	// text is deprecated
+	text: #ffffff,
+	0: #FFFFFF,
+	50: #FFF2DB,
+	100: #FFE9C2,
+	200: #FFDB9E,
+	300: #FFD080,
+	400: #FFC35C,
+	500: #FFB13D,
+	600: #d97e26,
+	700: #B34B0F,
+	800: #9A3B08,
+	900: #802A00
 );
 
 $critical: (
@@ -471,6 +519,7 @@ $productsInterpolation: (
 $palettesInterpolation: (
 	'lucca': $brand,
 	'brand': $brand,
+	'brandContrasted': $brandContrasted,
 	'grey': $neutral,
 	'neutral': $neutral,
 	'primary': map.get($productsInterpolation, $product),
@@ -478,9 +527,11 @@ $palettesInterpolation: (
 	'product': map.get($productsInterpolation, $product),
 	'navigation': $navigation,
 	'success': $success,
+	'successContrasted': $successContrasted,
 	'error': $critical,
 	'critical': $critical,
 	'warning': $warning,
+	'warningContrasted': $warningContrasted,
 	'kiwi': $kiwi,
 	'lime': $lime,
 	'cucumber': $cucumber,

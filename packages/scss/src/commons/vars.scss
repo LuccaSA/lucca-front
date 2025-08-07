@@ -4,6 +4,7 @@
 @use '@lucca-front/scss/src/commons/config';
 @use '@lucca-front/scss/src/commons/core';
 @use '@lucca-front/scss/src/commons/function';
+@use '@lucca-front/scss/src/commons/utils/color';
 @use '@lucca-front/scss/src/commons/utils/media';
 
 @mixin vars {
@@ -115,19 +116,19 @@
 
 	@media (prefers-contrast: more) {
 		@media (forced-colors: none) {
-			@include core.cssvars('pr-t-color-input', config.$colorInputContrasted);
+			@include color.contrasted;
 		}
 	}
 
 	@if (config.$prefersContrast == 'more') {
 		@media (forced-colors: none) {
-			@include core.cssvars('pr-t-color-input', config.$colorInputContrasted);
+			@include color.contrasted;
 		}
 	}
 
 	.u-prefersContrastMore {
 		@media (forced-colors: none) {
-			@include core.cssvars('pr-t-color-input', config.$colorInputContrasted);
+			@include color.contrasted;
 		}
 	}
 }
