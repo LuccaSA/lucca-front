@@ -4,6 +4,10 @@ import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { ALuTreeOptionOperator, ILuTreeOptionOperator } from '../tree-option-operator.model';
 const MAGIC_STEP = 10;
+
+/**
+ * @deprecated
+ */
 @Component({
 	selector: 'lu-tree-option-pager',
 	template: '',

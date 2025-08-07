@@ -6,6 +6,9 @@ import { ALuOptionOperator } from '../../operator/option-operator.model';
 import { ALuOptionSelector, ILuOptionSelector } from '../option-selector.model';
 import { LU_OPTION_SELECT_ALL_TRANSLATIONS } from './select-all.translate';
 
+/**
+ * @deprecated
+ */
 @Component({
 	selector: 'lu-option-select-all',
 	templateUrl: './select-all.component.html',

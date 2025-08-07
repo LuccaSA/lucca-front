@@ -3,6 +3,9 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, EventEmitter, forwardRef, Input, Output, ViewChild } from '@angular/core';
 import { ALuOptionItem, ILuOptionItem } from './option-item.model';
 
+/**
+ * @deprecated
+ */
 @Component({
 	selector: 'lu-option',
 	templateUrl: './option-item.component.html',

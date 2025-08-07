@@ -30,6 +30,9 @@ import { ALuOptionItem } from '../item/option-item.model';
 import { ALuOptionPicker, ILuOptionPickerPanel, LuOptionComparer } from './option-picker.model';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
+/**
+ * @deprecated
+ */
 @Directive()
 export abstract class ALuOptionPickerComponent<T, O extends import('../item/option-item.model').ILuOptionItem<T> = import('../item/option-item.model').ILuOptionItem<T>>
 	extends ALuOptionPicker<T, O>
@@ -328,6 +331,7 @@ export abstract class ALuOptionPickerComponent<T, O extends import('../item/opti
 
 /**
  * basic option picker panel
+ * @deprecated
  */
 @Component({
 	selector: 'lu-option-picker',

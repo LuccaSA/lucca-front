@@ -7,6 +7,9 @@ import { map } from 'rxjs/operators';
 import { LuOptionPlaceholderComponent } from '../../placeholder';
 import { ALuTreeOptionOperator, ILuTreeOptionOperator } from '../tree-option-operator.model';
 
+/**
+ * @deprecated
+ */
 @Component({
 	selector: 'lu-tree-option-searcher',
 	templateUrl: './option-searcher.component.html',
