@@ -69,7 +69,7 @@ export default {
 			},
 			template: `
 			<lu-form-field label="Date input example" inlineMessage="Inline message example">
-				<lu-date-input [(ngModel)]="selected" [min]="min" [max]="max" [focusedDate]="focusedDate" autocomplete="false" ${generateInputs(flags, argTypes)}></lu-date-input>
+				<lu-date-input [(ngModel)]="selected" [min]="min" [max]="max" [focusedDate]="focusedDate" autocomplete="off" ${generateInputs(flags, argTypes)}></lu-date-input>
 			</lu-form-field>
 
 			<pr-story-model-display>{{selected}}</pr-story-model-display>
