@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, effect, ElementRef, forwardRef, inject, input, OnDestroy, signal, viewChildren, ViewContainerRef } from '@angular/core';
+import { getIntl } from '@lucca-front/ng/core';
 import { $getNodeByKey, $getRoot, $getSelection, type Klass, type LexicalEditor, type LexicalNode, type NodeKey } from 'lexical';
 import { RICH_TEXT_PLUGIN_COMPONENT, RichTextPluginComponent } from '../../rich-text-input.component';
-import { getIntl } from '@lucca-front/ng/core';
 import { LU_RICH_TEXT_INPUT_TRANSLATIONS } from '../../rich-text-input.translate';
 import { $createTagNode, TagNode } from './tag-node';
 import type { Tag } from './tag.model';
@@ -10,7 +10,6 @@ import type { Tag } from './tag.model';
 	selector: 'lu-rich-text-plugin-tag',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	templateUrl: './tag.component.html',
-	styleUrl: 'tag.component.scss',
 	providers: [
 		{
 			provide: RICH_TEXT_PLUGIN_COMPONENT,

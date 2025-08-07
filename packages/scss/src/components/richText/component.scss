@@ -24,6 +24,8 @@
 	}
 
 	&:has(.richTextField-toolbar-formatting):has(.richTextField-toolbar-chips) {
+		min-block-size: calc(var(--components-richTextField-minHeight) + var(--pr-t-spacings-800) + var(--pr-t-spacings-25) + var(--pr-t-spacings-600));
+
 		.richTextField-toolbar-chips {
 			border-block-start: 1px solid var(--palettes-neutral-200);
 			padding-block-start: var(--pr-t-spacings-100);
@@ -35,7 +37,7 @@
 	}
 
 	// specificity must be higher here
-	.richTextField-toolbar-button.button {
+	.richTextField-toolbar-button.button.button {
 		&[aria-pressed='true'] {
 			--components-button-color: var(--palettes-0, var(--palettes-text, var(--palettes-product-0)));
 			--components-button-backgroundColor: var(--palettes-700, var(--palettes-product-700));
@@ -139,9 +141,13 @@
 			outline: none;
 			overflow: auto;
 			flex-grow: 1;
+		}
 
-			.chip {
-				vertical-align: text-bottom;
+		.richTextField-content-chip {
+			vertical-align: middle;
+
+			&:focus-visible {
+				@include a11y.focusVisible;
 			}
 		}
 

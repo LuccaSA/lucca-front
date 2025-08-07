@@ -123,15 +123,15 @@ export const WithTagPlugin: StoryObj<RichTextInputComponent & { value: string; d
 		<lu-rich-text-plugin-tag [tags]="[
 																		{
 																			key: 'tag1',
-																			description: 'Tag 1',
+																			description: 'Tag 1',
 																		},
 																		{
 																			key: 'tag2',
-																			description: 'Tag 2',
+																			description: 'Tag 2',
 																		},
 																		{
 																			key: 'tag3',
-																			description: 'Tag 3',
+																			description: 'Tag 3',
 																		},
 																	]"/>
 		</lu-rich-text-input>
@@ -163,7 +163,7 @@ export const WithTagPluginMarkdown: StoryObj<RichTextInputComponent & { value: s
 	${generateInputs(inputArgs, argTypes)}
 		[(ngModel)]="value" [disabled]="disabled" [required]="required">
 			<lu-rich-text-input-toolbar />
-			<lu-rich-text-plugin-tag class="richTextField-toolbar-col" [tags]="[
+			<lu-rich-text-plugin-tag [tags]="[
 																	{
 																		key: 'tag1',
 																		description: 'Tag 1',
