@@ -63,6 +63,14 @@ $cursor: 'pointer', 'auto';
 	}
 }
 
+@mixin borderRadiusTokens($suffix: '!important') {
+	@each $key, $value in config.$borderRadiusTokens {
+		.pr-u-borderRadius#{transform.capitalize($key)} {
+			border-radius: var(--pr-t-border-radius-#{$key}) #{$suffix};
+		}
+	}
+}
+
 /* Variables */
 
 @mixin cssvars($name, $properties, $after: '') {
