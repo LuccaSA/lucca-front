@@ -26,5 +26,7 @@
 }
 
 @mixin add {
-
+	--components-option-content-color: var(--palettes-product-700);
+	--components-option-content-fontWeight: var(--pr-t-font-fontWeight-semibold);
+	--components-option-position: sticky;
 }

@@ -2,10 +2,17 @@
 @use '@lucca-front/scss/src/commons/utils/reset';
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
-	display: flex;
+	display: var(--components-option-display);
 	flex-direction: column;
 	gap: var(--pr-t-spacings-25);
 	scroll-margin-block: var(--pr-t-spacings-25);
+	position: var(--components-option-position);
+	inset-block-end: 0;
+	z-index: 1;
+
+	&:has(.option-content-loading.loading) {
+		--components-option-display: none;
+	}
 
 	@at-root ($atRoot) {
 		.option-content {

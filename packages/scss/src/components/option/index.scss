@@ -6,20 +6,28 @@
 
 	&.mod-add {
 		@include add;
+
+		// TODO option
 	}
 
 	&.mod-groupBy {
 		@include groupBy;
 
-		> .option-content:hover {
-			@include groupByHover;
+		> .option-content {
+			&:hover {
+				@include groupByHover;
+			}
 		}
 	}
 
-	&[aria-selected="true"] {
-		@include selected;
+	&[aria-hidden="true"] {
+		@include empty;
+	}
 
-		.option-content {
+	&[aria-selected="true"] {
+		> .option-content {
+			@include selected;
+
 			&:hover {
 				@include selectedHover;
 			}
@@ -31,15 +39,17 @@
 	}
 
 	&[aria-disabled="true"] {
-		@include disabled;
+		> .option-content {
+			@include disabled;
 
-		&[aria-selected="true"] {
-			@include selectedDisabled;
-		}
-
-		.option-content {
 			&:hover {
 				@include disabledHover;
+			}
+		}
+
+		&[aria-selected="true"] {
+			> .option-content {
+				@include selectedDisabled;
 			}
 		}
 	}
@@ -65,14 +75,10 @@
 
 		.optionWrapper {
 			@include nested(2);
-
-			.optionWrapper {
-				@include nested(3);
-			}
 		}
 	}
 
-	&.mod-loading {
+	&[aria-busy="true"] {
 		@include loading;
 	}
 
@@ -96,23 +102,29 @@
 				}
 
 				&[aria-selected="true"] {
-					@include multipleSelected;
+					> .option-content {
+						@include multipleSelected;
 
-					&:hover,
-					&.is-hovered {
-						@include multipleSelectedHover;
-					}
+						&:hover,
+						&.is-hovered {
+							@include multipleSelectedHover;
+						}
 
-					&:active {
-						@include multipleSelectedActive;
+						&:active {
+							@include multipleSelectedActive;
+						}
 					}
 				}
 
 				&[aria-disabled="true"] {
-					@include multipleDisabled;
+					> .option-content {
+						@include multipleDisabled;
+					}
 
 					&[aria-selected="true"] {
-						@include multipleSelectedDisabled;
+						> .option-content {
+							@include multipleSelectedDisabled;
+						}
 					}
 				}
 			}

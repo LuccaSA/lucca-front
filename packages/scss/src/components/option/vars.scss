@@ -1,4 +1,7 @@
 @mixin vars {
+	--components-option-display: flex;
+	--components-option-position: static;
+
 	--components-option-content-paddingBlock: var(--pr-t-spacings-50);
 	--components-option-content-paddingInline: var(--pr-t-spacings-100);
 	--components-option-content-paddingBlockStart: var(--components-option-content-paddingBlock);
@@ -11,7 +14,7 @@
 	--components-option-content-color: inherit;
 	--components-option-content-cursor: pointer;
 	--components-option-content-before-backgroundColor: transparent;
-	--components-option-content-fontWeight: 400;
+	--components-option-content-fontWeight: var(--pr-t-font-fontWeight-regular);
 	--components-option-content-font: var(--pr-t-font-body-M);
 	--components-option-content-position: relative;
 	--components-option-content-borderRadius: var(--commons-borderRadius-M);
