@@ -1,34 +1,38 @@
 @use 'exports' as *;
 
 .loading {
-	@include vars;
-	@include component;
-
-	&.mod-L {
-		@include L;
+	@layer components {
+		@include vars;
+		@include component;
 	}
 
-	&.mod-block {
-		@include block;
-	}
+	@layer mods {
+		&.mod-L {
+			@include L;
+		}
 
-	&[class~='mod-fullPage' i] {
-		@include fullPage;
-	}
+		&.mod-block {
+			@include block;
+		}
 
-	// .mod-dialog is deprecated
-	&.mod-popin,
-	&.mod-dialog {
-		@include popin;
-	}
+		&[class~='mod-fullPage' i] {
+			@include fullPage;
+		}
 
-	// .mod-sidePanel is deprecated
-	&.mod-drawer,
-	&.mod-sidePanel {
-		@include drawer;
-	}
+		// .mod-dialog is deprecated
+		&.mod-popin,
+		&.mod-dialog {
+			@include popin;
+		}
 
-	&.mod-invert {
-		@include invert;
+		// .mod-sidePanel is deprecated
+		&.mod-drawer,
+		&.mod-sidePanel {
+			@include drawer;
+		}
+
+		&.mod-invert {
+			@include invert;
+		}
 	}
 }
