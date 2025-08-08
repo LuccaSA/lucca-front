@@ -30,7 +30,7 @@
 @mixin selectOption {
 	padding: var(--pr-t-spacings-50) var(--pr-t-spacings-100);
 	position: relative;
-	border-radius: var(--commons-borderRadius-M);
+	border-radius: var(--pr-t-border-radius-default);
 
 	.formLabel {
 		@include formLabel.widthAuto;

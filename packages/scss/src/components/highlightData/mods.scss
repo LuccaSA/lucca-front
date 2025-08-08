@@ -38,3 +38,7 @@
 @mixin narrow {
 	--components-highlightData-illustrations-display: none;
 }
+
+@mixin nested {
+	--components-highlightData-borderRadius: var(--pr-t-border-radius-default);
+}

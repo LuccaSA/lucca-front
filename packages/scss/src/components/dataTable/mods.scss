@@ -145,3 +145,7 @@
 		}
 	}
 }
+
+@mixin nested {
+	--components-dataTable-borderRadius: var(--pr-t-border-radius-default);
+}

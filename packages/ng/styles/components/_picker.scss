@@ -54,7 +54,7 @@
 
 	&.is-highlighted {
 		background-color: var(--palettes-neutral-50);
-		border-radius: var(--commons-borderRadius-M);
+		border-radius: var(--pr-t-border-radius-default);
 		outline: 4px solid var(--palettes-neutral-0);
 	}
 }

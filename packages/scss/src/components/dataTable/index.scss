@@ -2,6 +2,10 @@
 
 .dataTableWrapper {
 	@include vars;
+
+	&.mod-nested {
+		@include nested;
+	}
 }
 
 .dataTable {

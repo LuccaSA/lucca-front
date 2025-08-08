@@ -28,7 +28,7 @@
 				position: absolute;
 				inset: 0;
 				inset-inline-start: var(--components-readMore-link-paddingInlineStart);
-				border-radius: var(--commons-borderRadius-M);
+				border-radius: var(--pr-t-border-radius-default);
 			}
 
 			&:focus-visible {

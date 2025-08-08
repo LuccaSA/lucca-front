@@ -12,6 +12,10 @@
 		@include dropzone;
 	}
 
+	&.mod-structure {
+		@include structure;
+	}
+
 	&.mod-S {
 		@include S;
 

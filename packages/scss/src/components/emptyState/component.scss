@@ -27,7 +27,7 @@
 		}
 
 		.emptyState-content {
-			border-radius: var(--commons-borderRadius-L);
+			border-radius: var(--pr-t-border-radius-structure);
 			max-inline-size: 100%;
 			padding: var(--pr-t-spacings-50);
 			inline-size: calc(25rem + var(--pr-t-spacings-50) * 2); // content max width

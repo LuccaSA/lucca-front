@@ -9,7 +9,7 @@
 	border: 1px solid var(--components-fileEntry-borderColor);
 	padding: var(--components-fileEntry-padding);
 	margin: 0;
-	border-radius: var(--commons-borderRadius-L);
+	border-radius: var(--pr-t-border-radius-default);
 	background-color: var(--pr-t-elevation-surface-raised);
 	gap: 0 var(--components-fileEntry-gapInline);
 	position: relative;
@@ -96,7 +96,7 @@
 			position: relative;
 			flex-grow: 1;
 			inline-size: 100%;
-			border-radius: var(--commons-borderRadius-M);
+			border-radius: var(--pr-t-border-radius-50);
 			overflow: hidden;
 			display: flex;
 			align-items: center;
@@ -156,7 +156,7 @@
 		.fileEntry-description-format {
 			@include text.ellipsis;
 
-			border-radius: var(--commons-borderRadius-M);
+			border-radius: var(--pr-t-border-radius-50);
 			max-inline-size: 20ch;
 
 			&:focus-visible {

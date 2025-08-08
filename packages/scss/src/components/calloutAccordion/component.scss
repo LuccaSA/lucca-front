@@ -4,7 +4,7 @@
 @use '@lucca-front/scss/src/commons/utils/namespace';
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
-	border-radius: var(--commons-borderRadius-L);
+	border-radius: var(--pr-t-border-radius-default);
 	background-color: var(--palettes-50, var(--palettes-neutral-50));
 	color: var(--pr-t-color-text);
 	border-color: var(--palettes-300, var(--palettes-neutral-300));

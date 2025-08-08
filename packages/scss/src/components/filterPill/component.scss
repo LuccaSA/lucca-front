@@ -16,7 +16,7 @@
 	background-color: var(--components-filterPill-backgroundColor);
 	inline-size: fit-content;
 	padding: var(--components-filterPill-padding);
-	border-radius: var(--commons-borderRadius-L);
+	border-radius: var(--pr-t-border-radius-default);
 	color: var(--components-filterPill-color);
 	font: var(--pr-t-font-body-S);
 	box-shadow: var(--components-filterPill-shadow);
@@ -40,7 +40,7 @@
 
 		.filterPill_popover-content-option {
 			padding: var(--pr-t-spacings-50) var(--pr-t-spacings-100);
-			border-radius: 4px;
+			border-radius: var(--pr-t-border-radius-50);
 
 			&:hover {
 				background-color: var(--palettes-neutral-50);
@@ -144,7 +144,7 @@
 
 		.filterPill-checkbox {
 			border: 2px solid var(--components-filterPill-checkbox-borderColor);
-			border-radius: 4px;
+			border-radius: var(--pr-t-border-radius-50);
 			color: var(--components-filterPill-checkbox-color);
 			transition-property: color, border-color, background-color;
 			transition-duration: var(--commons-animations-durations-fast);

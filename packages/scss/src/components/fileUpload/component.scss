@@ -7,7 +7,7 @@
 	position: relative;
 	border: 1px var(--components-fileUpload-borderStyle) var(--components-fileUpload-borderColor);
 	overflow: hidden;
-	border-radius: var(--commons-borderRadius-L);
+	border-radius: var(--components-fileUpload-borderRadius);
 	background-color: var(--components-fileUpload-backgroundColor);
 	padding: var(--components-fileUpload-padding);
 	text-align: var(--components-fileUpload-textAlign);
@@ -39,7 +39,7 @@
 			inset: var(--components-fileUpload-status-img-inset);
 			inline-size: var(--components-fileUpload-status-img-size);
 			block-size: var(--components-fileUpload-status-img-size);
-			border-radius: var(--commons-borderRadius-M);
+			border-radius: var(--pr-t-border-radius-50);
 			background-color: var(--palettes-neutral-25);
 			display: flex;
 			overflow: hidden;

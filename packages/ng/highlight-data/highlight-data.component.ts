@@ -66,11 +66,14 @@ export class HighlightDataComponent {
 	 */
 	valueFirst = input(false, { transform: booleanAttribute });
 
+	nested = input(false, { transform: booleanAttribute });
+
 	constructor() {
 		effect(() => {
 			this.#luClass.setState({
 				[`mod-${this.size()}`]: !!this.size(),
 				'mod-valueFirst': this.valueFirst(),
+				'mod-nested': this.nested(),
 				[`palette-${this.palette()}`]: !!this.palette(),
 			});
 		});

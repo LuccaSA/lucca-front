@@ -4,7 +4,7 @@
 @mixin component($atRoot: namespace.$defaultAtRoot) {
 	background-color: var(--pr-t-elevation-surface-raised);
 	border: var(--commons-divider-width) solid var(--commons-divider-color);
-	border-radius: var(--commons-borderRadius-M);
+	border-radius: var(--pr-t-border-radius-default);
 	list-style: none;
 	padding: 0;
 

@@ -61,7 +61,7 @@
 
 			font: var(--components-horizontalNavigation-listItemActionFont);
 			padding: var(--components-horizontalNavigation-listItemActionPadding);
-			border-radius: var(--commons-borderRadius-M);
+			border-radius: var(--pr-t-border-radius-small);
 			color: var(--components-horizontalNavigation-listItemActionColor);
 			display: inline-flex;
 			text-align: var(--components-horizontalNavigation-listItemActionAlign);
@@ -80,7 +80,7 @@
 				position: absolute;
 				inset-block: calc(var(--components-horizontalNavigation-listItemActionPaddingBlock) - var(--pr-t-spacings-25));
 				inset-inline: calc(var(--components-horizontalNavigation-listItemActionPaddingInline) - var(--pr-t-spacings-25));
-				border-radius: var(--commons-borderRadius-L);
+				border-radius: var(--pr-t-border-radius-small);
 			}
 
 			&::after {

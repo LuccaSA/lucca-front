@@ -55,3 +55,7 @@
 		padding: 0;
 	}
 }
+
+@mixin nested {
+	--components-card-border-radius: var(--pr-t-border-radius-default);
+}

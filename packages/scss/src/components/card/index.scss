@@ -22,6 +22,10 @@
 		@include action;
 	}
 
+	&.mod-nested {
+		@include nested;
+	}
+
 	&:is(.is-disabled, .disabled) {
 		@include disabled;
 	}
