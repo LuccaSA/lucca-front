@@ -38,12 +38,6 @@
 	}
 
 	&.mod-withIcon {
-		@include withIcon;
-
-		&.mod-XS {
-			@include withIconXS;
-		}
-
 		&.mod-iconOnLeft {
 			@include iconOnLeft;
 

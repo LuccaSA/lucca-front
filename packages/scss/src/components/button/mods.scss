@@ -8,7 +8,7 @@
 
 	--components-button-font: var(--pr-t-font-body-S);
 	--components-button-paddingBlock: var(--pr-t-spacings-75);
-	--components-button-paddingInline: var(--pr-t-spacings-150);
+	--components-button-paddingInline: var(--pr-t-spacings-100);
 	--components-button-gap: var(--pr-t-spacings-75);
 
 	.numericBadge {
@@ -25,7 +25,7 @@
 
 	--components-button-font: var(--pr-t-font-body-XS);
 	--components-button-paddingBlock: var(--pr-t-spacings-50);
-	--components-button-paddingInline: var(--pr-t-spacings-100);
+	--components-button-paddingInline: var(--pr-t-spacings-75);
 	--components-button-gap: var(--pr-t-spacings-50);
 	--components-button-borderRadius: 6px;
 
@@ -52,15 +52,6 @@
 
 @mixin block {
 	--components-button-width: 100%;
-}
-
-@mixin withIcon {
-	--components-button-paddingInline: var(--pr-t-spacings-150);
-}
-
-
-@mixin withIconXS {
-	--components-button-paddingInline: var(--pr-t-spacings-100);
 }
 
 @mixin outlined {
@@ -94,7 +85,7 @@
 
 	&:hover,
 	&:focus-visible {
-		-components-button-color: var(--palettes-700, var(--pr-t-color-text-subtle));
+		--components-button-color: var(--palettes-700, var(--pr-t-color-text-subtle));
 		--components-button-backgroundColor: var(--palettes-50, var(--palettes-neutral-50));
 	}
 
@@ -186,33 +177,27 @@
 }
 
 @mixin iconOnLeft {
-	--components-button-paddingInlineEnd: var(--pr-t-spacings-200);
-	--components-button-paddingInlineStart: var(--pr-t-spacings-150);
+	--components-button-paddingInlineStart: var(--pr-t-spacings-100);
 }
 
 @mixin iconOnRight {
-	--components-button-paddingInlineStart: var(--pr-t-spacings-200);
-	--components-button-paddingInlineEnd: var(--pr-t-spacings-150);
+	--components-button-paddingInlineEnd: var(--pr-t-spacings-100);
 }
 
 @mixin iconOnLeftS {
-	--components-button-paddingInlineEnd: var(--pr-t-spacings-150);
-	--components-button-paddingInlineStart: var(--pr-t-spacings-100);
+	--components-button-paddingInlineStart: var(--pr-t-spacings-75);
 }
 
 @mixin iconOnRightS {
-	--components-button-paddingInlineStart: var(--pr-t-spacings-150);
-	--components-button-paddingInlineEnd: var(--pr-t-spacings-100);
+	--components-button-paddingInlineEnd: var(--pr-t-spacings-75);
 }
 
 @mixin iconOnLeftXS {
-	--components-button-paddingInlineStart: var(--pr-t-spacings-75);
-	--components-button-paddingInlineEnd: var(--pr-t-spacings-100);
+	--components-button-paddingInlineStart: var(--pr-t-spacings-50);
 }
 
 @mixin iconOnRightXS {
-	--components-button-paddingInlineEnd: var(--pr-t-spacings-75);
-	--components-button-paddingInlineStart: var(--pr-t-spacings-100);
+	--components-button-paddingInlineEnd: var(--pr-t-spacings-50);
 }
 
 @mixin disclosure {
@@ -230,13 +215,13 @@
 }
 
 @mixin counter {
-	padding-inline-end: var(--pr-t-spacings-100);
+	--components-button-paddingInlineEnd: var(--pr-t-spacings-100);
 }
 
 @mixin counterS {
-	padding-inline-end: var(--pr-t-spacings-75);
+	--components-button-paddingInlineEnd: var(--pr-t-spacings-75);
 }
 
 @mixin counterXS {
-	padding-inline-end: var(--pr-t-spacings-50);
+	--components-button-paddingInlineEnd: var(--pr-t-spacings-50);
 }
