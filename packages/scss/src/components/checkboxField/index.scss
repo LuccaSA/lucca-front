@@ -50,16 +50,6 @@
 				}
 			}
 		}
-
-		@supports not selector(:has(*)) {
-			&:focus-within .checkboxField-input {
-				@include checklistHover;
-
-				&:checked {
-					@include checklistCheckedHover;
-				}
-			}
-		}
 	}
 }
 
