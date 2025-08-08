@@ -7,7 +7,7 @@
 	position: relative;
 	border: 1px var(--components-fileUpload-borderStyle) var(--components-fileUpload-borderColor);
 	overflow: hidden;
-	border-radius: var(--pr-t-border-radius-default);
+	border-radius: var(--components-fileUpload-borderRadius);
 	background-color: var(--components-fileUpload-backgroundColor);
 	padding: var(--components-fileUpload-padding);
 	text-align: var(--components-fileUpload-textAlign);
