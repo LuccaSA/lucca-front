@@ -53,7 +53,7 @@ export default {
 					option 2.1
 				</div>
 			</li>
-			<li role="treeitem" class="option">
+			<li role="treeitem" class="option" aria-checked="mixed">
 				<div class="option-content">
 					<span class="option-content-checkboxField checkboxField" aria-hidden="true">
 						<span class="option-content-checkboxField-input checkboxField-input"></span>
@@ -71,7 +71,7 @@ export default {
 							option 2.2.1
 						</div>
 					</li>
-					<li role="treeitem" class="option" aria-selected="true">
+					<li role="treeitem" class="option" aria-checked="true">
 						<div class="option-content">
 							<span class="option-content-checkboxField checkboxField" aria-hidden="true">
 								<span class="option-content-checkboxField-input checkboxField-input"></span>
@@ -91,7 +91,7 @@ export default {
 						</div>
 						${deepNestingItem}
 					</li>
-					<li role="treeitem" class="option" aria-selected="true" aria-disabled="true">
+					<li role="treeitem" class="option" aria-checked="true" aria-disabled="true">
 						<div class="option-content">
 							<span class="option-content-checkboxField checkboxField" aria-hidden="true">
 								<span class="option-content-checkboxField-input checkboxField-input"></span>

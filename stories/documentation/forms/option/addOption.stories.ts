@@ -58,7 +58,7 @@ export default {
 	<li role="option" class="option mod-add">
 		<div class="option-content">
 			<lu-icon icon="mathsPlus" />
-			add option
+			Add option
 		</div>
 	</li>
 </ul>`),

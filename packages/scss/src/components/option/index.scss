@@ -7,7 +7,13 @@
 	&.mod-add {
 		@include add;
 
-		// TODO option
+		&:hover {
+			@include addHover;
+		}
+
+		&:active {
+			@include addActive;
+		}
 	}
 
 	&.mod-groupBy {
@@ -24,7 +30,8 @@
 		@include empty;
 	}
 
-	&[aria-selected="true"] {
+	&[aria-selected="true"],
+	&[aria-checked="true"] {
 		> .option-content {
 			@include selected;
 
@@ -47,7 +54,8 @@
 			}
 		}
 
-		&[aria-selected="true"] {
+		&[aria-selected="true"],
+		&[aria-checked="true"] {
 			> .option-content {
 				@include selectedDisabled;
 			}
@@ -101,7 +109,8 @@
 					@include multipleActive;
 				}
 
-				&[aria-selected="true"] {
+				&[aria-selected="true"],
+				&[aria-checked="true"] {
 					> .option-content {
 						@include multipleSelected;
 
@@ -116,14 +125,36 @@
 					}
 				}
 
-				&[aria-disabled="true"] {
+				&[aria-checked="mixed"] {
+					> .option-content {
+						@include multipleMixed;
+
+						&:hover,
+						&.is-hovered {
+							@include multipleMixedHover;
+						}
+
+						&:active {
+							@include multipleMixedActive;
+						}
+					}
+				}
+
+				&[aria-disabled="true"], {
 					> .option-content {
 						@include multipleDisabled;
 					}
 
-					&[aria-selected="true"] {
+					&[aria-selected="true"],
+					&[aria-checked="true"] {
 						> .option-content {
 							@include multipleSelectedDisabled;
+						}
+					}
+
+					&[aria-checked="mixed"] {
+						> .option-content {
+							@include multipleMixedDisabled;
 						}
 					}
 				}
