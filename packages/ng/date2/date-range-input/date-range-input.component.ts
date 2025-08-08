@@ -122,7 +122,7 @@ export class DateRangeInputComponent extends AbstractDateComponent implements On
 
 	shortcuts = input<readonly CalendarShortcut[]>();
 
-	autocomplete = input<string>('');
+	autocomplete = input<AutoFill>('off');
 
 	protected currentRightDate = computed(() => {
 		return this.hasTwoCalendars() ? this.getNextCalendarDate(this.currentDate()) : this.currentDate();

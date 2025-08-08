@@ -76,7 +76,7 @@ export class DateInputComponent extends AbstractDateComponent implements OnInit,
 
 	#luClass = inject(LuClass);
 
-	autocomplete = input<string>('');
+	autocomplete = input<AutoFill>('off');
 
 	placeholder = input<string>();
 
