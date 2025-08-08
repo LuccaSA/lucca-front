@@ -1,7 +1,5 @@
 import { CdkDialogContainer } from '@angular/cdk/dialog';
-import { NgIf } from '@angular/common';
-import { ChangeDetectionStrategy, Component, ElementRef, inject, OnInit, Renderer2, ViewEncapsulation } from '@angular/core';
-import { ButtonComponent } from '@lucca-front/ng/button';
+import { ChangeDetectionStrategy, Component, contentChild, Directive, ElementRef, inject, OnInit, Renderer2, ViewEncapsulation } from '@angular/core';
 import { getIntl } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { LuDialogRef } from '../model';
@@ -9,10 +7,16 @@ import { LU_DIALOG_HEADER_TRANSLATIONS } from './dialog-header.translate';
 
 let nextId = 0;
 
+@Directive({
+	// eslint-disable-next-line @angular-eslint/directive-selector
+	selector: '[dialogHeaderAction]',
+})
+export class DialogHeaderAction {}
+
 @Component({
 	selector: 'lu-dialog-header',
 	standalone: true,
-	imports: [IconComponent, ButtonComponent, NgIf],
+	imports: [IconComponent],
 	templateUrl: './dialog-header.component.html',
 	styleUrl: './dialog-header.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
@@ -35,6 +39,8 @@ export class DialogHeaderComponent implements OnInit {
 	close(): void {
 		this.#ref.dismiss();
 	}
+
+	optionalAction = contentChild(DialogHeaderAction);
 
 	ngOnInit(): void {
 		// Using setTimeout here to make sure this will be handled in the next Cd cycle, not the current one.
