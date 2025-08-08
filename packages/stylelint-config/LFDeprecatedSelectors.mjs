@@ -14,7 +14,7 @@ export default [
 	{
 		objectPattern: /\.palette-(grey|primary|secondary|lucca)/,
 		versionDeprecated: '17.3.0',
-		versionDeleted: '20.1.0',
+		versionDeleted: '21.1.0',
 	},
 	{
 		objectPattern: /\.u-(padding|margin|gap)X*(S|M|L)/,
@@ -29,12 +29,12 @@ export default [
 	{
 		objectPattern: ['.u-textLeft', '.u-textCenter', '.u-textRight'],
 		versionDeprecated: '18.1.0',
-		versionDeleted: '20.1.0',
+		versionDeleted: '21.1.0',
 	},
 	{
 		objectPattern: ['.comment-content-textContainer', '.dialog-form', '.dialog-formOptional', '.mod-withMenuCompact'],
 		versionDeprecated: '18.3.0',
-		versionDeleted: '20.1.0',
+		versionDeleted: '21.1.0',
 	},
 	{
 		objectPattern: /\.lu-dropdown-(content|options|options-item|options-item-action)/,
@@ -50,5 +50,6 @@ export default [
 	{
 		objectPattern: /\.menu-?/,
 		versionDeprecated: '19.3.0',
+		versionDeleted: '21.1.0',
 	},
 ];
