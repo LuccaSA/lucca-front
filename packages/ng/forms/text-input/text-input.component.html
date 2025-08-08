@@ -23,18 +23,6 @@
 		>
 		</ng-container>
 	</ng-container>
-	<ng-container *ngIf="suffix">
-		<ng-container
-			*ngTemplateOutlet="
-				textfieldAddon;
-				context: {
-					type: 'suffix',
-					addon: suffix,
-				}
-			"
-		>
-		</ng-container>
-	</ng-container>
 
 	<div class="textField-input">
 		<input
@@ -65,4 +53,16 @@
 			</button>
 		</div>
 	</div>
+	<ng-container *ngIf="suffix">
+		<ng-container
+			*ngTemplateOutlet="
+				textfieldAddon;
+				context: {
+					type: 'suffix',
+					addon: suffix,
+				}
+			"
+		>
+		</ng-container>
+	</ng-container>
 </div>
