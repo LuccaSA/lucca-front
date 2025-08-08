@@ -224,7 +224,7 @@
 			// but the class should be present, and this code is temporary
 			&.button,
 			&:not(.button) {
-				@include button.text;
+				@include button.ghost;
 				@include button.S;
 				@include button.onlyIconS;
 

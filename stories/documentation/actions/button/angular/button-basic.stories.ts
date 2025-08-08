@@ -1,7 +1,7 @@
 import { ButtonComponent } from '@lucca-front/ng/button';
-import { createTestStory, generateInputs } from 'stories/helpers/stories';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { createTestStory, generateInputs } from 'stories/helpers/stories';
 import { expect, within } from 'storybook/test';
 
 export default {
@@ -24,12 +24,12 @@ export default {
 export const Basic: StoryObj<ButtonComponent> = {
 	argTypes: {
 		luButton: {
-			options: ['', 'outlined', 'text', 'text-invert'],
+			options: ['', 'outlined', 'text', 'ghost-invert'],
 			control: {
 				type: 'select',
 			},
 		},
-		delete: {
+		critical: {
 			description: '[v18.1] Couleur critical au hover / focus',
 		},
 		size: {
@@ -43,7 +43,7 @@ export const Basic: StoryObj<ButtonComponent> = {
 		palette: 'none',
 		state: 'default',
 		luButton: '',
-		delete: false,
+		critical: false,
 		disclosure: false,
 	},
 };

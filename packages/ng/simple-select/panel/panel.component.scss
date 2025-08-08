@@ -9,8 +9,7 @@
 	@include button.vars;
 	@include button.component;
 	@include button.block;
-	@include button.withIcon;
-	@include button.text;
+	@include button.ghost;
 
 	justify-content: left;
 

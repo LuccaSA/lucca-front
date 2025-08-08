@@ -7,11 +7,11 @@
 	}
 
 	<div class="pagination-scrolling">
-		<button type="button" class="button mod-onlyIcon mod-text mod-S" [disabled]="isFirstPage()" (click)="previousPage.emit()">
+		<button type="button" class="button mod-onlyIcon mod-ghost mod-S" [disabled]="isFirstPage()" (click)="previousPage.emit()">
 			<lu-icon icon="arrowChevronLeft" />
 			<span class="u-mask">{{ intl.previous }}</span>
 		</button>
-		<button type="button" class="button mod-onlyIcon mod-text mod-S" [disabled]="isLastPage()" (click)="nextPage.emit()">
+		<button type="button" class="button mod-onlyIcon mod-ghost mod-S" [disabled]="isLastPage()" (click)="nextPage.emit()">
 			<lu-icon icon="arrowChevronRight" />
 			<span class="u-mask">{{ intl.next }}</span>
 		</button>

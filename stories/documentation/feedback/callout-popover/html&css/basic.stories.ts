@@ -4,14 +4,16 @@ export default {
 	title: 'Documentation/Feedback/Callout Popover/HTML&CSS',
 	render: () => {
 		return {
-			styles: [`
+			styles: [
+				`
 				:host {
 					display: flex;
 					flex-direction: column;
 					align-items: flex-start;
 					gap: var(--pr-t-spacings-50);
 				}
-			`],
+			`,
+			],
 			template: `<button type="button" class="calloutPopover"><span aria-hidden="true" class="calloutPopover-icon lucca-icon icon-signInfo"></span>1</button>
 <div class="lu-popover-content calloutPopover-overlay">
   <div class="calloutPopover-overlay-head">
@@ -27,21 +29,21 @@ export default {
         <span class="calloutFeedbackList-item-description">Feedback description.</span>
         <div class="calloutFeedbackList-item-actions">
           <a href class="button mod-outlined">Button</a>
-          <button type="button" class="button mod-text">Button</button>
+          <button type="button" class="button mod-ghost">Button</button>
         </div>
       </li>
       <li class="calloutFeedbackList-item">
         <span class="calloutFeedbackList-item-description">Feedback description.</span>
         <div class="calloutFeedbackList-item-actions">
           <a href class="button mod-outlined">Button</a>
-          <button type="button" class="button mod-text">Button</button>
+          <button type="button" class="button mod-ghost">Button</button>
         </div>
       </li>
     </ul>
   </div>
-</div>`
-		}
-	}
+</div>`,
+		};
+	},
 } as Meta;
 
 export const Basic: StoryObj = {};

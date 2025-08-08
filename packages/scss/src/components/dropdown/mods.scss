@@ -1,4 +1,4 @@
-@mixin delete {
+@mixin critical {
 	--components-dropdown-option-actionColor: var(--pr-t-color-text-critical);
 
 	&:hover,

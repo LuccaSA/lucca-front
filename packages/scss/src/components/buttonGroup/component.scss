@@ -1,7 +1,7 @@
 @use '@lucca-front/scss/src/commons/utils/a11y';
 
 @mixin component {
-	border-radius: var(--commons-borderRadius-M);
+	border-radius: var(--commons-borderRadius-L);
 	gap: var(--commons-divider-width);
 	display: inline-flex;
 	list-style-type: none;
@@ -17,12 +17,12 @@
 		white-space: normal;
 
 		&:first-child {
-			border-radius: var(--commons-borderRadius-M) 0 0 var(--commons-borderRadius-M);
+			border-radius: var(--commons-borderRadius-L) 0 0 var(--commons-borderRadius-L);
 		}
 
 		&:last-child,
 		&.mod-more {
-			border-radius: 0 var(--commons-borderRadius-M) var(--commons-borderRadius-M) 0;
+			border-radius: 0 var(--commons-borderRadius-L) var(--commons-borderRadius-L) 0;
 		}
 
 		&:not(:first-child) {
@@ -53,13 +53,13 @@
 
 		&:first-child {
 			.button {
-				border-radius: var(--commons-borderRadius-M) 0 0 var(--commons-borderRadius-M);
+				border-radius: var(--commons-borderRadius-L) 0 0 var(--commons-borderRadius-L);
 			}
 		}
 
 		&:last-child {
 			.button {
-				border-radius: 0 var(--commons-borderRadius-M) var(--commons-borderRadius-M) 0;
+				border-radius: 0 var(--commons-borderRadius-L) var(--commons-borderRadius-L) 0;
 			}
 		}
 	}
