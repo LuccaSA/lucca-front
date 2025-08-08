@@ -28,7 +28,7 @@ Voici un exemple d'utilisation de `LuPagination` en mode `default` :
   [itemsCount]="27"
   [isFirstPage]="true"
   [isLastPage]="false"
-  (previousPage)="prevPage()"
+  (previousPage)="previouPage()"
   (nextPage)="nextPage()"
 />
 ```
