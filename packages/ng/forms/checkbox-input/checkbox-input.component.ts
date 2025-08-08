@@ -1,4 +1,4 @@
-import { booleanAttribute, Component, forwardRef, inject, Input, signal, Signal, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, Component, forwardRef, inject, input, Input, signal, Signal, ViewEncapsulation } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FILTER_PILL_INPUT_COMPONENT, FilterPillInputComponent, FilterPillLabelDirective, FilterPillLayout } from '@lucca-front/ng/filter-pills';
 import { FORM_FIELD_INSTANCE, FormFieldComponent, FRAMED_INPUT_INSTANCE, InputDirective } from '@lucca-front/ng/form-field';
@@ -23,7 +23,8 @@ let nextId = 0;
 		},
 	],
 	host: {
-		class: 'checkboxField',
+		'[class.checkboxField]': 'true',
+		'[class.mod-checklist]': 'checklist()',
 	},
 })
 export class CheckboxInputComponent implements FilterPillInputComponent {
@@ -31,6 +32,7 @@ export class CheckboxInputComponent implements FilterPillInputComponent {
 
 	isFilterPill = false;
 	filterPillInputId = `lu-checkbox-pill-input-${nextId++}`;
+	checklist = input(false, { transform: booleanAttribute });
 
 	filterPillLayout: Signal<FilterPillLayout> = signal('checkable');
 	isFilterPillEmpty: Signal<boolean> = signal(true);

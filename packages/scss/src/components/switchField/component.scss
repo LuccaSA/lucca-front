@@ -74,15 +74,15 @@
 
 			&:hover {
 				~ .switchField-icon {
-					border-color: var(--palettes-neutral-400);
-					background-color: var(--palettes-neutral-400);
+					border-color: var(--palettes-neutral-600);
+					background-color: var(--palettes-neutral-600);
 				}
 			}
 
 			&:active {
 				~ .switchField-icon {
-					border-color: var(--palettes-neutral-600);
-					background-color: var(--palettes-neutral-600);
+					border-color: var(--palettes-neutral-800);
+					background-color: var(--palettes-neutral-800);
 				}
 			}
 
