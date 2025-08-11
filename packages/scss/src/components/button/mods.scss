@@ -7,7 +7,8 @@
 	@include icons.S;
 
 	--components-button-font: var(--pr-t-font-body-S);
-	--components-button-padding: var(--pr-t-spacings-75) var(--pr-t-spacings-150);
+	--components-button-paddingBlock: var(--pr-t-spacings-75);
+	--components-button-paddingInline: var(--pr-t-spacings-150);
 	--components-button-gap: var(--pr-t-spacings-75);
 
 	.numericBadge {
@@ -23,7 +24,8 @@
 	@include icons.XS;
 
 	--components-button-font: var(--pr-t-font-body-XS);
-	--components-button-padding: var(--pr-t-spacings-50) var(--pr-t-spacings-100);
+	--components-button-paddingBlock: var(--pr-t-spacings-50);
+	--components-button-paddingInline: var(--pr-t-spacings-100);
 	--components-button-gap: var(--pr-t-spacings-50);
 	--components-button-borderRadius: var(--pr-t-border-radius-small);
 
@@ -53,15 +55,12 @@
 }
 
 @mixin withIcon {
-	--components-button-padding: var(--pr-t-spacings-100) var(--pr-t-spacings-150);
+	--components-button-paddingInline: var(--pr-t-spacings-150);
 }
 
-@mixin withIconS {
-	--components-button-padding: var(--pr-t-spacings-75) var(--pr-t-spacings-150);
-}
 
 @mixin withIconXS {
-	--components-button-padding: var(--pr-t-spacings-50) var(--pr-t-spacings-100);
+	--components-button-paddingInline: var(--pr-t-spacings-100);
 }
 
 @mixin textDisabled {
@@ -194,12 +193,34 @@
 	}
 }
 
-@mixin iconOnRight {
-	padding-inline-end: var(--pr-t-spacings-150);
+@mixin iconOnLeft {
+	--components-button-paddingInlineEnd: var(--pr-t-spacings-200);
+	--components-button-paddingInlineStart: var(--pr-t-spacings-150);
 }
 
-@mixin iconOnLeft {
-	padding-inline-start: var(--pr-t-spacings-150);
+@mixin iconOnRight {
+	--components-button-paddingInlineStart: var(--pr-t-spacings-200);
+	--components-button-paddingInlineEnd: var(--pr-t-spacings-150);
+}
+
+@mixin iconOnLeftS {
+	--components-button-paddingInlineEnd: var(--pr-t-spacings-150);
+	--components-button-paddingInlineStart: var(--pr-t-spacings-100);
+}
+
+@mixin iconOnRightS {
+	--components-button-paddingInlineStart: var(--pr-t-spacings-150);
+	--components-button-paddingInlineEnd: var(--pr-t-spacings-100);
+}
+
+@mixin iconOnLeftXS {
+	--components-button-paddingInlineStart: var(--pr-t-spacings-75);
+	--components-button-paddingInlineEnd: var(--pr-t-spacings-100);
+}
+
+@mixin iconOnRightXS {
+	--components-button-paddingInlineEnd: var(--pr-t-spacings-75);
+	--components-button-paddingInlineStart: var(--pr-t-spacings-100);
 }
 
 @mixin disclosure {
@@ -215,3 +236,4 @@
 		--components-button-arrow-transform: rotate(-180deg);
 	}
 }
+
