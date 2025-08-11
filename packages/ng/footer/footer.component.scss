@@ -2,7 +2,7 @@
 
 lu-footer:has(.footer.mod-sticky) {
 	inset-block-end: 0;
-	position: var(--components-footer-position);
+	position: sticky;
 
 	.footer.mod-sticky {
 		--components-footer-position: static;
