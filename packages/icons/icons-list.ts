@@ -4,6 +4,9 @@
  ***********************************************/
 
 export const IconsList = [
+	{ icon: 'mapTripStep', deprecated: false },
+	{ icon: 'officeMicrophone', deprecated: false },
+	{ icon: 'playerRecording', deprecated: false },
 	{ icon: 'app', deprecated: false },
 	{ icon: 'apps', deprecated: true },
 	{ icon: 'nineTiles', deprecated: true },
@@ -362,6 +365,7 @@ export const IconsList = [
 	{ icon: 'euro', deprecated: true },
 	{ icon: 'moneyPaymentCard', deprecated: false },
 	{ icon: 'bankingCard', deprecated: true },
+	{ icon: 'moneyPaymentCards', deprecated: false },
 	{ icon: 'moneyPiggyBank', deprecated: false },
 	{ icon: 'piggyBank', deprecated: true },
 	{ icon: 'moneyWallet', deprecated: false },

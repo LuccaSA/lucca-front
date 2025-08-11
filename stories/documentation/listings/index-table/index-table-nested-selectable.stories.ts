@@ -50,7 +50,7 @@ function getTemplate(args: IndexTableNestedSelectableStory): string {
 			</th>
 		</tr>
 		<tr class="indexTable-body-row" id="r1">
-			<th class="indexTable-body-row-transparentCell" header="y2021" colspan="2">
+			<th class="indexTable-body-row-transparentCell" headers="y2021" colspan="2">
 				<label class="formLabel u-mask" for="r1chbx">Select all items for september 2021</label>
 				<span class="checkboxField indexTable-body-row-cell-checkbox">
 					<input class="checkboxField-input" type="checkbox" id="r1chbx" aria-controls="r2chbx"/>
@@ -58,7 +58,7 @@ function getTemplate(args: IndexTableNestedSelectableStory): string {
 							class="checkboxField-icon-check"></span></span>
 				</span>
 			</th>
-			<th class="indexTable-body-row-transparentCell" colspan="3" id="september" header="y2021">
+			<th class="indexTable-body-row-transparentCell" colspan="3" id="september" headers="y2021">
 				<div class="indexTable-body-row-cellTitle">
 					<button class="indexTable-body-row-cellTitle-button button"
 						aria-expanded="true" aria-controls="r2" type="button" id="r1btn">
@@ -71,7 +71,7 @@ function getTemplate(args: IndexTableNestedSelectableStory): string {
 			</th>
 		</tr>
 		<tr class="indexTable-body-row" id="r2">
-			<td class="indexTable-body-row-transparentCell" header="y2021 september" colspan="2">
+			<td class="indexTable-body-row-transparentCell" headers="y2021 september" colspan="2">
 				<label class="formLabel u-mask" for="r2chbx">Select this item</label>
 				<span class="checkboxField indexTable-body-row-cell-checkbox">
 					<input class="checkboxField-input" type="checkbox" id="r2chbx"/>
@@ -79,14 +79,14 @@ function getTemplate(args: IndexTableNestedSelectableStory): string {
 							class="checkboxField-icon-check"></span></span>
 				</span>
 			</td>
-			<td class="indexTable-body-row-cell" header="y2021 september">
+			<td class="indexTable-body-row-cell" headers="y2021 september">
 				<a href="#" class="indexTable-body-row-cell-link">Content</a>
 			</td>
-			<td class="indexTable-body-row-cell" header="y2021 september">Content</td>
-			<td class="indexTable-body-row-cell" header="y2021 september">Content</td>
+			<td class="indexTable-body-row-cell" headers="y2021 september">Content</td>
+			<td class="indexTable-body-row-cell" headers="y2021 september">Content</td>
 		</tr>
 		<tr class="indexTable-body-row" id="r3">
-			<th class="indexTable-body-row-transparentCell" header="y2021" colspan="2">
+			<th class="indexTable-body-row-transparentCell" headers="y2021" colspan="2">
 				<label class="formLabel u-mask" for="r3chbx">Select all items for october 2021</label>
 				<span class="checkboxField indexTable-body-row-cell-checkbox">
 					<input class="checkboxField-input" type="checkbox" id="r3chbx" aria-controls="r4chbx r5chbx" checked aria-checked="mixed" />
@@ -94,7 +94,7 @@ function getTemplate(args: IndexTableNestedSelectableStory): string {
 							class="checkboxField-icon-check"></span></span>
 				</span>
 			</th>
-			<th class="indexTable-body-row-transparentCell" colspan="3" id="october" header="y2021">
+			<th class="indexTable-body-row-transparentCell" colspan="3" id="october" headers="y2021">
 				<div class="indexTable-body-row-cellTitle">
 					<button class="indexTable-body-row-cellTitle-button button"
 						aria-expanded="true" aria-controls="r4 r5" type="button" id="r3btn">
@@ -107,7 +107,7 @@ function getTemplate(args: IndexTableNestedSelectableStory): string {
 			</th>
 		</tr>
 		<tr class="indexTable-body-row" id="r4">
-			<td class="indexTable-body-row-transparentCell" header="y2021 october" colspan="2">
+			<td class="indexTable-body-row-transparentCell" headers="y2021 october" colspan="2">
 				<label class="formLabel u-mask" for="r4chbx">Select this item</label>
 				<span class="checkboxField indexTable-body-row-cell-checkbox">
 					<input class="checkboxField-input" type="checkbox" checked id="r4chbx"/>
@@ -115,14 +115,14 @@ function getTemplate(args: IndexTableNestedSelectableStory): string {
 							class="checkboxField-icon-check"></span></span>
 				</span>
 			</td>
-			<td class="indexTable-body-row-cell" header="y2021 october">
+			<td class="indexTable-body-row-cell" headers="y2021 october">
 				<a href="#" class="indexTable-body-row-cell-link">Content</a>
 			</td>
-			<td class="indexTable-body-row-cell" header="y2021 october">Content</td>
-			<td class="indexTable-body-row-cell" header="y2021 october">Content</td>
+			<td class="indexTable-body-row-cell" headers="y2021 october">Content</td>
+			<td class="indexTable-body-row-cell" headers="y2021 october">Content</td>
 		</tr>
 		<tr class="indexTable-body-row" id="r5">
-			<td class="indexTable-body-row-transparentCell" header="y2021 october" colspan="2">
+			<td class="indexTable-body-row-transparentCell" headers="y2021 october" colspan="2">
 				<label class="formLabel u-mask" for="r5chbx">Select this item</label>
 				<span class="checkboxField indexTable-body-row-cell-checkbox">
 					<input class="checkboxField-input" type="checkbox" id="r5chbx"/>
@@ -130,11 +130,11 @@ function getTemplate(args: IndexTableNestedSelectableStory): string {
 							class="checkboxField-icon-check"></span></span>
 				</span>
 			</td>
-			<td class="indexTable-body-row-cell" header="y2021 october">
+			<td class="indexTable-body-row-cell" headers="y2021 october">
 				<a href="#" class="indexTable-body-row-cell-link">Content</a>
 			</td>
-			<td class="indexTable-body-row-cell" header="y2021 october">Content</td>
-			<td class="indexTable-body-row-cell" header="y2021 october">Content</td>
+			<td class="indexTable-body-row-cell" headers="y2021 october">Content</td>
+			<td class="indexTable-body-row-cell" headers="y2021 october">Content</td>
 		</tr>
 	</tbody>
 	<tbody class="indexTable-body">
@@ -160,7 +160,7 @@ function getTemplate(args: IndexTableNestedSelectableStory): string {
 			</th>
 		</tr>
 		<tr class="indexTable-body-row" id="r7">
-			<th class="indexTable-body-row-transparentCell" header="y2022" colspan="2">
+			<th class="indexTable-body-row-transparentCell" headers="y2022" colspan="2">
 				<label class="formLabel u-mask" for="r7chbx">Select all items for january 2022</label>
 				<span class="checkboxField indexTable-body-row-cell-checkbox">
 					<input class="checkboxField-input" type="checkbox" id="r7chbx" aria-controls="r8chbx"/>
@@ -168,7 +168,7 @@ function getTemplate(args: IndexTableNestedSelectableStory): string {
 							class="checkboxField-icon-check"></span></span>
 				</span>
 			</th>
-			<th class="indexTable-body-row-transparentCell" colspan="3" id="january" header="y2022">
+			<th class="indexTable-body-row-transparentCell" colspan="3" id="january" headers="y2022">
 				<div class="indexTable-body-row-cellTitle">
 					<button class="indexTable-body-row-cellTitle-button button"
 						aria-expanded="true" aria-controls="r8" type="button" id="r7btn">
@@ -181,7 +181,7 @@ function getTemplate(args: IndexTableNestedSelectableStory): string {
 			</th>
 		</tr>
 		<tr class="indexTable-body-row" id="r8">
-			<td class="indexTable-body-row-transparentCell" header="y2022 january" colspan="2">
+			<td class="indexTable-body-row-transparentCell" headers="y2022 january" colspan="2">
 				<label class="formLabel u-mask" for="r8chbx">Select this item</label>
 				<span class="checkboxField indexTable-body-row-cell-checkbox">
 					<input class="checkboxField-input" type="checkbox" id="r8chbx"/>
@@ -189,11 +189,11 @@ function getTemplate(args: IndexTableNestedSelectableStory): string {
 							class="checkboxField-icon-check"></span></span>
 				</span>
 			</td>
-			<td class="indexTable-body-row-cell" header="y2022 january">
+			<td class="indexTable-body-row-cell" headers="y2022 january">
 				<a href="#" class="indexTable-body-row-cell-link">Content</a>
 			</td>
-			<td class="indexTable-body-row-cell" header="y2022 january">Content</td>
-			<td class="indexTable-body-row-cell" header="y2022 january">Content</td>
+			<td class="indexTable-body-row-cell" headers="y2022 january">Content</td>
+			<td class="indexTable-body-row-cell" headers="y2022 january">Content</td>
 		</tr>
 	</tbody>
 </table>

@@ -2,8 +2,8 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { LuTooltipModule, LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { generateInputs } from '../../../helpers/stories';
 import { ButtonComponent } from '../../../../packages/ng/button/button.component';
+import { generateInputs } from '../../../helpers/stories';
 
 export default {
 	title: 'Documentation/Overlays/Tooltip/Basic',
@@ -69,6 +69,12 @@ export default {
 	luTooltip="👋 Hello"
 	${generateInputs(args, argTypes)}
 >Tooltip au survol</button>
+<h3>Tooltip sur un texte</h3>
+<span
+
+	luTooltip="👋 Hello"
+	${generateInputs(args, argTypes)}
+>Tooltip au survol</span>
 <h3>Tooltip et ellipse</h3>
 <div
 	class="u-ellipsis"
@@ -86,8 +92,8 @@ export default {
 <h3>Tooltip et icône (avec alternative)</h3>
 <lu-icon icon="star" alt="Favoris" luTooltip="Favoris" luTooltipOnlyForDisplay="true" />
 
-<h3 #tooltipTarget>Tooltip affiché avec un host séparé</h3>
-<p luTooltip="Tooltip déclenché depuis le paragraphe" [luTooltipAnchor]="tooltipTarget">Ce tooltip est déclenchée au hover de ce texte mais sa référence est le titre de cette section.</p>
+<h3>Tooltip affiché avec un host séparé</h3>
+<span class="pr-u-marginInlineEnd800" luTooltip="… mais apparait là !" [luTooltipAnchor]="target">Tooltip déclenché ici…</span><span aria-hidden="true" #target class="lucca-icon icon-target">
 `,
 		};
 	},

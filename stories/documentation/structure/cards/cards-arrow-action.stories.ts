@@ -7,20 +7,18 @@ export default {
 } as Meta;
 
 function getTemplate(args: CardsArrowActionStory): string {
-	return `
-	<div class="card mod-action">
-		<div class="card-content">
-			<h2 class="card-title">Titre de la carte</h2>
-			<p>Contenu de la carte</p>
-		</div>
-		<div class="card-action">
-			<button type="button" class="button mod-onlyIcon mod-text" luTooltip="Modifier">
-			  <span aria-hidden="true" class="lucca-icon icon-arrowRight"></span>
-			  <span class="u-mask">Accéder</span>
-			</button>
-		</div>
+	return `<div class="card mod-action">
+	<div class="card-content">
+		<h2 class="card-title">Titre de la carte</h2>
+		<p>Contenu de la carte</p>
 	</div>
-	`;
+	<div class="card-action">
+		<button type="button" class="button mod-onlyIcon mod-text" luTooltip="Modifier">
+			<span aria-hidden="true" class="lucca-icon icon-arrowRight"></span>
+			<span class="u-mask">Accéder</span>
+		</button>
+	</div>
+</div>`;
 }
 
 const Template: StoryFn<CardsArrowActionStory> = (args) => ({

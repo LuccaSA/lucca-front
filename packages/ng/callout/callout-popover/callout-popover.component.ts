@@ -1,7 +1,6 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { TemplatePortal } from '@angular/cdk/portal';
-import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ElementRef, inject, Input, numberAttribute, OnDestroy, TemplateRef, ViewChild, ViewContainerRef, ViewEncapsulation } from '@angular/core';
 import { LuccaIcon } from '@lucca-front/icons';
 import { Palette, PortalContent, PortalDirective } from '@lucca-front/ng/core';
@@ -13,7 +12,7 @@ import { getCalloutPalette } from '../callout.utils';
 @Component({
 	selector: 'lu-callout-popover',
 	standalone: true,
-	imports: [CommonModule, IconComponent, PortalDirective, CalloutIconPipe],
+	imports: [IconComponent, PortalDirective, CalloutIconPipe],
 	animations: [
 		trigger('tooltip', [
 			state(
