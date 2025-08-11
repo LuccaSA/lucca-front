@@ -44,6 +44,8 @@ export abstract class BaseFileUploadComponent {
 		return this.acceptAttribute().some((str) => str.includes('*'));
 	});
 
+	structure = input(false, { transform: booleanAttribute });
+
 	fileMaxSize = input<number>(80 * MEGA_BYTE);
 
 	maxSizeDisplay = computed(() => formatSize(this.locale, this.fileMaxSize()));
