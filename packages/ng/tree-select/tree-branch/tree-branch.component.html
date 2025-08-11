@@ -1,5 +1,6 @@
 <lu-select-option
 	luCoreSelectPanelElement
+	#rootOption="luCoreSelectPanelElement"
 	[option]="branch().node"
 	[optionTpl]="optionTpl()"
 	[optionIndex]="optionIndex()"
@@ -7,6 +8,9 @@
 	[isSelected]="branch().node | luIsOptionSelected: optionComparer() : selectedOptions()"
 	(selected)="toggle(branch())"
 	(click)="toggle(branch())"
+	(onlyParent)="toggleOne.emit(branch().node)"
+	(onlyChildren)="selectOnlyChildren(branch())"
+	[hasChildren]="branch().children?.length > 0"
 />
 @for (child of branch().children; track $index) {
 	<div style="padding-left: 1rem">

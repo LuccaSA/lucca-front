@@ -6,6 +6,7 @@ import {
 	computed,
 	forwardRef,
 	HostBinding,
+	HostListener,
 	inject,
 	Input,
 	model,
@@ -74,6 +75,9 @@ export class LuMultiSelectInputComponent<T> extends ALuSelectInputComponent<T, T
 	@Input()
 	filterPillLabelPlural: string;
 
+	selectParent$ = new Subject<void>();
+	selectChildren$ = new Subject<void>();
+
 	@HostBinding('class.mod-filterPill')
 	public get filterPillClass() {
 		return this.filterPillMode;
@@ -106,6 +110,16 @@ export class LuMultiSelectInputComponent<T> extends ALuSelectInputComponent<T, T
 	public readonly focusInput$ = new Subject<void | { keepClue: boolean }>();
 
 	public readonly emptyClue$ = new Subject<void>();
+
+	@HostListener('keydown.control.enter')
+	public selectParentOnly() {
+		this.selectParent$.next();
+	}
+
+	@HostListener('keydown.shift.enter')
+	public selectChildrenOnly() {
+		this.selectChildren$.next();
+	}
 
 	public override focusInput(): void {
 		this.focusInput$.next({ keepClue: true });
