@@ -64,6 +64,8 @@
 
 @mixin busy {
 	.option {
+		--components-option-display: none;
+
 		&:has(.option-content-loading.loading) {
 			--components-option-display: flex;
 		}
@@ -79,6 +81,8 @@
 @mixin empty {
 	.option-content {
 		--components-option-content-checkboxField-display: none;
+
+	.option-content {
 		--components-option-content-cursor: default;
 		--components-option-content-backgroundColor: var(--pr-t-elevation-surface-raised);
 	}

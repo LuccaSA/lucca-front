@@ -7,7 +7,7 @@
 	gap: var(--pr-t-spacings-25);
 	scroll-margin-block: var(--components-option-scrollMarginBlock);
 	position: var(--components-option-position);
-	inset-block-end: 0;
+	inset-block-end: var(--pr-t-spacings-50);
 	z-index: 1;
 
 	&:has(.option-content-loading.loading) {
@@ -32,6 +32,7 @@
 			cursor: var(--components-option-content-cursor);
 			position: var(--components-option-content-position);
 			z-index: 2;
+			box-shadow: var(--components-option-content-boxShadow);
 			flex-wrap: var(--components-option-content-flexWrap);
 			inset-block-start: var(--components-option-content-insetBlockStart);
 			justify-content: var(--components-option-content-justifyContent);
