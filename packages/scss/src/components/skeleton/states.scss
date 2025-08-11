@@ -1,6 +1,8 @@
+@use '@lucca-front/scss/src/commons/config';
+
 @mixin skeletonBodySizing($sizes...) {
 	@each $size in $sizes {
-		&.u-body#{$size} {
+		&.#{config.$utilityPrefix}-body#{$size} {
 			@if ($size == 'XS') {
 				--components-skeleton-text-offset: 0.25rem;
 				block-size: var(--pr-t-font-body-XS-lineHeight);
@@ -16,7 +18,7 @@
 
 @mixin skeletonTitleSizing($titles...) {
 	@each $title in $titles {
-		&:is(.u-h#{$title}, h#{$title}) {
+		&:is(.#{config.$utilityPrefix}-h#{$title}, h#{$title}) {
 			block-size: auto;
 
 			@if ($title == '5') {
@@ -108,7 +110,7 @@
 // Deprecated
 @mixin skeletonTextSizing($sizes...) {
 	@each $size in $sizes {
-		&.u-text#{$size} {
+		&.#{config.$utilityPrefix}-text#{$size} {
 			@if ($size == 'XS') {
 				--components-skeleton-text-offset: 0.25rem;
 				block-size: var(--pr-t-font-body-XS-lineHeight);

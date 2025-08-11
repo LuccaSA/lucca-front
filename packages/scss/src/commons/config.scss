@@ -6,6 +6,13 @@
 $isNamespaced: false !default;
 $deprecatedSpacings: false !default;
 $deprecatedCardBoxMargin: false !default;
+$deprecatedUtilityPrefix: false !default;
+$utilityPrefix: 'pr-u';
+
+@if ($deprecatedUtilityPrefix) {
+	$utilityPrefix: 'u';
+}
+
 $prefersContrast: 'no-preference' !default;
 
 $fontFamily: 'SourceSans' !default;

@@ -1,5 +1,6 @@
 @use 'sass:list';
 
+@use '@lucca-front/scss/src/commons/config';
 @use '@lucca-front/icons/src/commons/core' as transform;
 @use '@lucca-front/scss/src/commons/core';
 
@@ -35,7 +36,7 @@
 	}
 }
 
-.u-animated {
+.#{config.$utilityPrefix}-animated {
 	&FadeIn,
 	&FadeOut {
 		animation-name: fadeIn;
@@ -137,53 +138,53 @@
 	}
 }
 
-.u-mask {
+.#{config.$utilityPrefix}-mask {
 	@include a11y.mask('!important');
 }
 
-.u-clearfix {
+.#{config.$utilityPrefix}-clearfix {
 	@include reset.clearfix('!important');
 }
 
-// .u-clear is deprecated
-.u-clearBoth,
-.u-clear {
+// clear is deprecated
+.#{config.$utilityPrefix}-clearBoth,
+.#{config.$utilityPrefix}-clear {
 	@include reset.clear('both', '!important');
 }
 
-// .u-clearLeft is deprecated
-.u-clearInlineStart,
-.u-clearLeft {
+// clearLeft is deprecated
+.#{config.$utilityPrefix}-clearInlineStart,
+.#{config.$utilityPrefix}-clearLeft {
 	@include reset.clear('inline-start', '!important');
 }
 
-// .u-clearRight is deprecated
-.u-clearInlineEnd,
-.u-clearRight {
+// clearRight is deprecated
+.#{config.$utilityPrefix}-clearInlineEnd,
+.#{config.$utilityPrefix}-clearRight {
 	@include reset.clear('inline-end', '!important');
 }
 
-.u-listReset {
+.#{config.$utilityPrefix}-listReset {
 	@include reset.list('!important');
 }
 
-.u-descriptionListReset {
+.#{config.$utilityPrefix}-descriptionListReset {
 	@include reset.list($list: 'dl', $suffix: '!important');
 }
 
-.u-summaryReset {
+.#{config.$utilityPrefix}-summaryReset {
 	@include reset.summary('!important');
 }
 
-.u-buttonReset {
+.#{config.$utilityPrefix}-buttonReset {
 	@include reset.button('!important');
 }
 
-.u-ellipsis {
+.#{config.$utilityPrefix}-ellipsis {
 	@include text.ellipsis('!important');
 }
 
-.u-h1 {
+.#{config.$utilityPrefix}-h1 {
 	font: var(--pr-t-font-heading-1);
 	color: var(--pr-t-color-text-heading);
 
@@ -193,79 +194,79 @@
 	}
 }
 
-.u-h2 {
+.#{config.$utilityPrefix}-h2 {
 	font: var(--pr-t-font-heading-2);
 	color: var(--pr-t-color-text-heading);
 }
 
-.u-h3 {
+.#{config.$utilityPrefix}-h3 {
 	font: var(--pr-t-font-heading-3);
 	color: var(--pr-t-color-text-heading);
 }
 
-.u-h4 {
+.#{config.$utilityPrefix}-h4 {
 	font: var(--pr-t-font-heading-4);
 	color: var(--pr-t-color-text-heading);
 }
 
-.u-h5 {
+.#{config.$utilityPrefix}-h5 {
 	// Deprecated
 	@include title.h5;
 }
 
-.u-h6 {
+.#{config.$utilityPrefix}-h6 {
 	// Deprecated
 	@include title.h6;
 }
 
-.u-bodyM {
+.#{config.$utilityPrefix}-bodyM {
 	font: var(--pr-t-font-body-M);
 }
 
-.u-bodyS {
+.#{config.$utilityPrefix}-bodyS {
 	font: var(--pr-t-font-body-S);
 }
 
-.u-bodyXS {
+.#{config.$utilityPrefix}-bodyXS {
 	font: var(--pr-t-font-body-XS);
 }
 
-// .u-textLeft is deprecated
-.u-textLeft {
+// textLeft is deprecated
+.#{config.$utilityPrefix}-textLeft {
 	text-align: start !important;
 }
 
-// .u-textRight is deprecated
-.u-textRight {
+// textRight is deprecated
+.#{config.$utilityPrefix}-textRight {
 	text-align: end !important;
 }
 
-// .u-textCenter is deprecated
-.u-textCenter {
+// textCenter is deprecated
+.#{config.$utilityPrefix}-textCenter {
 	text-align: center !important;
 }
 
-.u-textLight {
+.#{config.$utilityPrefix}-textLight {
 	color: var(--palettes-neutral-600) !important;
 }
 
-.u-textPlaceholder {
+.#{config.$utilityPrefix}-textPlaceholder {
 	color: var(--palettes-neutral-400) !important;
 }
 
-.u-textDefault {
+.#{config.$utilityPrefix}-textDefault {
 	color: var(--palettes-neutral-700) !important;
 }
 
-.u-fontWeightRegular {
+.#{config.$utilityPrefix}-fontWeightRegular {
 	font-weight: 400 !important;
 }
 
-.u-fontWeightSemiBold {
+.#{config.$utilityPrefix}-fontWeightSemiBold {
 	font-weight: 600 !important;
 }
 
-.u-noSpinButtons {
+.#{config.$utilityPrefix}-noSpinButtons {
 	&::-webkit-outer-spin-button,
 	&::-webkit-inner-spin-button {
 		appearance: none !important;
@@ -276,15 +277,15 @@
 	}
 }
 
-.u-fontFamily {
+.#{config.$utilityPrefix}-fontFamily {
 	font-family: var(--pr-t-font-family) !important;
 }
 
-.u-fontFamilyCursive {
+.#{config.$utilityPrefix}-fontFamilyCursive {
 	font-family: var(--pr-t-font-family-cursive) !important;
 }
 
-.u-fontFamilyBrand {
+.#{config.$utilityPrefix}-fontFamilyBrand {
 	font-family: var(--pr-t-font-family-brand) !important;
 }
 
@@ -343,7 +344,7 @@
 
 @each $display in core.$displays {
 	@if $display != 'none' {
-		.u-onlyPrintDisplay#{transform.capitalize(transform.camelize($display))} {
+		.#{config.$utilityPrefix}-onlyPrintDisplay#{transform.capitalize(transform.camelize($display))} {
 			@extend %displayNone;
 		}
 	}
@@ -351,21 +352,21 @@
 
 @each $direction in core.$boxDirection {
 	@if $direction == '' {
-		// .u-insetReset is deprecated
-		.u-inset0,
-		.u-insetReset {
+		// insetReset is deprecated
+		.#{config.$utilityPrefix}-inset0,
+		.#{config.$utilityPrefix}-insetReset {
 			inset: 0 !important;
 		}
 	} @else if $direction == 'top' or $direction == 'bottom' or $direction == 'left' or $direction == 'right' {
-		// .u-#{$direction}Reset is deprecated
-		.u-#{$direction}0,
-		.u-#{$direction}Reset {
+		// Reset is deprecated
+		.#{config.$utilityPrefix}-#{$direction}0,
+		.#{config.$utilityPrefix}-#{$direction}Reset {
 			#{$direction}: 0 !important;
 		}
 	} @else {
 		@each $boxModel in core.$boxModel {
 			@if $boxModel != 'border' {
-				.u-#{$boxModel}#{transform.capitalize($direction)}0 {
+				.#{config.$utilityPrefix}-#{$boxModel}#{transform.capitalize($direction)}0 {
 					#{$boxModel}-#{$direction}: 0 !important;
 				}
 			}

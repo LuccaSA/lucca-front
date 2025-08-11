@@ -11,7 +11,7 @@ function getTemplate(args: SpinStory): string {
 	<input class="textfield-input" type="number" placeholder="Avec spin" />
 </label>
 <label class="textfield">
-	<input class="textfield-input u-noSpinButtons" type="number" placeholder="Sans spin" />
+	<input class="textfield-input pr-u-noSpinButtons" type="number" placeholder="Sans spin" />
 </label>`;
 }
 

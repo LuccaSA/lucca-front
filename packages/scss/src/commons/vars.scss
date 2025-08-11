@@ -126,7 +126,7 @@
 		}
 	}
 
-	.u-prefersContrastMore {
+	.#{config.$utilityPrefix}-prefersContrastMore {
 		@media (forced-colors: none) {
 			@include color.contrasted;
 		}

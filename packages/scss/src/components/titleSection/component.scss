@@ -14,12 +14,12 @@
 		margin-block-end: 0;
 	}
 
-	.u-h1,
-	.u-h2,
-	.u-h3,
-	.u-h4,
-	.u-h5,
-	.u-h6 {
+	.#{config.$utilityPrefix}-h1,
+	.#{config.$utilityPrefix}-h2,
+	.#{config.$utilityPrefix}-h3,
+	.#{config.$utilityPrefix}-h4,
+	.#{config.$utilityPrefix}-h5,
+	.#{config.$utilityPrefix}-h6 {
 		margin-block-end: 0 !important;
 	}
 
