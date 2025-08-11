@@ -43,10 +43,10 @@ export function migrateComponent(sourceFile: SourceFile, path: string, tree: Tre
 				let thingsToAdd = ` luButton${button.type ? `="${button.type}"` : ""} `;
 				// Converting inputs
 				if (button.inputs.size) {
-					thingsToAdd += `size="${button.inputs.size} `;
+					thingsToAdd += `size="${button.inputs.size}" `;
 				}
 				if (button.inputs.state) {
-					thingsToAdd += `state="${button.inputs.state} `;
+					thingsToAdd += `state="${button.inputs.state}" `;
 				}
 				if (button.inputs.palette) {
 					thingsToAdd += `palette="${button.inputs.palette}" `;
@@ -78,7 +78,7 @@ export function migrateComponent(sourceFile: SourceFile, path: string, tree: Tre
 							`mod-withIcon`,
 							`is-${button.inputs.state}`,
 							`mod-delete`,
-							`mod-${button.size}`
+							`mod-${button.inputs.size}`
 						].includes(c);
 					}).join(' ');
 					templateUpdate.remove(button.nodeOffset + classesNode.keySpan.start.offset - 1, classesNode.sourceSpan.toString().length + 1);

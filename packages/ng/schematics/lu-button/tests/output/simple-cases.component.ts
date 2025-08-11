@@ -24,6 +24,9 @@ import { ButtonComponent } from '@lucca-front/ng/button';
 		<button luButton class="something-but-already-button" type="button" [class.is-loading]="saving$ | async" (click)="save()">
 			{{translations.ADMIN_SAVE}}
 		</button>
+		<button luButton size="S" palette="primary"  type="button" [class.is-loading]="saving$ | async" (click)="save()">
+			{{translations.ADMIN_SAVE}}
+		</button>
 	`,
 	imports: [
 		IconComponent, ButtonComponent
