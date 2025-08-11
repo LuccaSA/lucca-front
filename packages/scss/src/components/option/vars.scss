@@ -1,0 +1,37 @@
+@mixin vars {
+	--components-option-display: flex;
+	--components-option-position: static;
+	--components-option-scrollMarginBlock: var(--pr-t-spacings-50);
+}
+
+@mixin varsContent {
+	--components-option-content-paddingBlock: var(--pr-t-spacings-50);
+	--components-option-content-paddingInline: var(--pr-t-spacings-100);
+	--components-option-content-marginBlockStart: 0;
+	--components-option-content-paddingBlockStart: var(--components-option-content-paddingBlock);
+	--components-option-content-paddingBlockEnd: var(--components-option-content-paddingBlock);
+	--components-option-content-paddingInlineStart: var(--components-optionWrapper-childrenPaddingInlineStart, var(--components-option-content-paddingInline));
+	--components-option-content-paddingInlineEnd: var(--components-option-content-paddingInline);
+	--components-option-content-padding: var(--components-option-content-paddingBlockStart) var(--components-option-content-paddingInlineEnd) var(--components-option-content-paddingBlockEnd) var(--components-option-content-paddingInlineStart);
+	--components-option-content-checkboxField-display: var(--components-optionWrapper-childrenCheckboxField-display, none);
+	--components-option-content-backgroundColor: var(--pr-t-elevation-surface-raised);
+	--components-option-content-color: inherit;
+	--components-option-content-cursor: pointer;
+	--components-option-content-before-backgroundColor: transparent;
+	--components-option-content-fontWeight: var(--pr-t-font-fontWeight-regular);
+	--components-option-content-font: var(--pr-t-font-body-M);
+	--components-option-content-position: relative;
+	--components-option-content-before-content: var(--components-optionWrapper-childrenBefore-content, '');
+	--components-option-content-opacity: 1;
+	--components-option-content-boxShadow: none;
+	--components-option-content-flexWrap: nowrap;
+	--components-option-content-justifyContent: normal;
+}
+
+@mixin varsWrapper {
+	--components-optionWrapper-padding: var(--pr-t-spacings-50);
+	--components-optionWrapper-level: 0;
+	--components-optionWrapper-childrenPaddingInlineStart: var(--pr-t-spacings-100);
+	--components-optionWrapper-childrenCheckboxField-display: none;
+	--components-optionWrapper-childrenBefore-content: '';
+}

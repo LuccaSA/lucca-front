@@ -1,0 +1,179 @@
+@use 'exports' as *;
+
+.option {
+	@include vars;
+	@include component;
+
+	&.mod-add {
+		@include add;
+
+		&:hover {
+			@include addHover;
+		}
+
+		&:active {
+			@include addActive;
+		}
+	}
+
+	&.mod-select {
+		@include select;
+
+		&:hover {
+			@include selectHover;
+		}
+	}
+
+	&[role="group"] {
+		@include group;
+
+		&:hover,
+		&:has(.is-hovered) {
+			@include groupHover;
+		}
+
+		&:not(:has(.option.mod-select)) {
+			> .option-content {
+				@include groupHoverWithoutSelect;
+			}
+		}
+	}
+
+	&[aria-hidden="true"] {
+		@include empty;
+	}
+
+	&[aria-selected="true"],
+	&[aria-checked="true"] {
+		> .option-content {
+			@include selected;
+
+			&:hover {
+				@include selectedHover;
+			}
+
+			&:active {
+				@include selectedActive;
+			}
+		}
+	}
+
+	&[aria-disabled="true"] {
+		> .option-content {
+			@include disabled;
+
+			&:hover {
+				@include disabledHover;
+			}
+		}
+
+		&[aria-selected="true"],
+		&[aria-checked="true"] {
+			> .option-content {
+				@include selectedDisabled;
+			}
+		}
+	}
+}
+
+.option-content {
+	@include varsContent;
+
+	&.is-hovered,
+	&:hover {
+		@include hover;
+	}
+
+	&:active {
+		@include active;
+	}
+}
+
+.optionWrapper {
+	@include varsWrapper;
+
+	.optionWrapper {
+		@include nestedWrapper;
+		@include nested;
+
+		.optionWrapper {
+			@include nested(2);
+		}
+	}
+
+	&[aria-busy="true"] {
+		@include busy;
+	}
+
+	&.mod-empty {
+		@include empty;
+	}
+
+	&.mod-multiple {
+		&,
+		.optionWrapper {
+			@include multiple;
+
+			.option {
+				&:hover,
+				&.is-hovered {
+					@include multipleHover;
+				}
+
+				&:active {
+					@include multipleActive;
+				}
+
+				&[aria-selected="true"],
+				&[aria-checked="true"] {
+					> .option-content {
+						@include multipleSelected;
+
+						&:hover,
+						&.is-hovered {
+							@include multipleSelectedHover;
+						}
+
+						&:active {
+							@include multipleSelectedActive;
+						}
+					}
+				}
+
+				&[aria-checked="mixed"] {
+					> .option-content {
+						@include multipleMixed;
+
+						&:hover,
+						&.is-hovered {
+							@include multipleMixedHover;
+						}
+
+						&:active {
+							@include multipleMixedActive;
+						}
+					}
+				}
+
+				&[aria-disabled="true"], {
+					> .option-content {
+						@include multipleDisabled;
+					}
+
+					&[aria-selected="true"],
+					&[aria-checked="true"] {
+						> .option-content {
+							@include multipleSelectedDisabled;
+						}
+					}
+
+					&[aria-checked="mixed"] {
+						> .option-content {
+							@include multipleMixedDisabled;
+						}
+					}
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,169 @@
+@use "@lucca-front/scss/src/components/checkboxField/exports" as checkboxField;
+
+@mixin disabled {
+	--components-option-content-backgroundColor: var(--pr-t-elevation-surface-raised);
+	--components-option-content-color: var(--palettes-neutral-500);
+	--components-option-content-cursor: default;
+}
+
+@mixin disabledHover {
+	--components-option-content-backgroundColor: var(--pr-t-elevation-surface-raised);
+}
+
+@mixin selectedDisabled {
+	--components-option-content-before-backgroundColor: var(--palettes-neutral-500);
+}
+
+@mixin addHover {
+	> .option-content {
+		--components-option-content-backgroundColor: var(--palettes-product-100);
+	}
+}
+
+@mixin addActive {
+	> .option-content {
+		--components-option-content-backgroundColor: var(--palettes-product-200);
+	}
+}
+
+@mixin multipleMixed {
+	--components-option-content-backgroundColor: var(--palettes-product-50);
+	--components-option-content-before-backgroundColor: var(--palettes-product-700);
+
+	.option-content-checkboxField-input  {
+		@include checkboxField.checked;
+		@include checkboxField.mixed;
+	}
+}
+
+@mixin multipleMixedHover {
+	--components-option-content-backgroundColor: var(--palettes-product-100);
+
+	.option-content-checkboxField-input  {
+		@include checkboxField.checkedHover;
+	}
+}
+
+@mixin multipleMixedActive {
+	--components-option-content-backgroundColor: var(--palettes-product-200);
+
+	.option-content-checkboxField-input  {
+		@include checkboxField.checkedActive;
+	}
+}
+
+@mixin multipleMixedDisabled {
+	--components-option-content-backgroundColor: var(--pr-t-elevation-surface-raised);
+	--components-option-content-color: var(--palettes-neutral-500);
+	--components-option-content-cursor: default;
+
+	.option-content-checkboxField-input  {
+		@include checkboxField.checkedDisabled;
+	}
+}
+
+@mixin busy {
+	.option {
+		--components-option-display: none;
+
+		&:has(.option-content-loading.loading) {
+			--components-option-display: flex;
+		}
+	}
+
+	.option-content {
+		--components-option-content-checkboxField-display: none;
+		--components-option-content-cursor: default;
+		--components-option-content-backgroundColor: var(--pr-t-elevation-surface-raised);
+	}
+}
+
+@mixin empty {
+	--components-option-content-checkboxField-display: none;
+
+	.option-content {
+		--components-option-content-cursor: default;
+		--components-option-content-backgroundColor: var(--pr-t-elevation-surface-raised);
+	}
+}
+
+@mixin groupHoverWithoutSelect {
+	--components-option-content-cursor: default;
+	--components-option-content-backgroundColor: var(--pr-t-elevation-surface-raised);
+}
+
+@mixin groupHover {
+	.option-content {
+		--components-option-content-opacity: 1;
+	}
+}
+
+@mixin selected {
+	--components-option-content-backgroundColor: var(--palettes-product-50);
+	--components-option-content-before-backgroundColor: var(--palettes-product-700);
+}
+
+@mixin selectedHover {
+	--components-option-content-backgroundColor: var(--palettes-product-100);
+}
+
+@mixin hover {
+	--components-option-content-backgroundColor: var(--palettes-neutral-50);
+}
+
+@mixin active {
+	--components-option-content-backgroundColor: var(--palettes-neutral-100);
+}
+
+@mixin selectedActive {
+	--components-option-content-backgroundColor: var(--palettes-product-200);
+}
+
+@mixin multipleSelected {
+	.option-content-checkboxField-input  {
+		@include checkboxField.checked;
+	}
+}
+
+@mixin multipleHover {
+	.option-content-checkboxField-input  {
+		@include checkboxField.hover;
+	}
+}
+
+@mixin multipleActive {
+	.option-content-checkboxField-input  {
+		@include checkboxField.active;
+	}
+}
+
+@mixin multipleSelectedHover {
+	.option-content-checkboxField-input  {
+		@include checkboxField.checkedHover;
+	}
+}
+
+@mixin multipleSelectedActive {
+	.option-content-checkboxField-input  {
+		@include checkboxField.checkedActive;
+	}
+}
+
+@mixin multipleDisabled {
+	.option-content-checkboxField-input  {
+		@include checkboxField.disabled;
+	}
+}
+
+@mixin multipleSelectedDisabled {
+	.option-content-checkboxField-input  {
+		@include checkboxField.checkedDisabled;
+	}
+}
+
+@mixin selectHover {
+	> .option-content {
+		--components-option-content-color: var(--palettes-product-800);
+	}
+}
+
