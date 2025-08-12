@@ -28,6 +28,10 @@
 		.calloutFeedbackList-item-actions {
 			display: inline-flex;
 			gap: var(--pr-t-spacings-100);
+
+			&:empty {
+				display: none;
+			}
 		}
 	}
 }
