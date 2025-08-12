@@ -131,6 +131,7 @@
 			@include color.contrasted;
 		}
 	}
+
 	// Deprecated .u- utilities
 	@if config.$deprecatedUtilityPrefix {
 		.u-prefersContrastMore {
@@ -139,5 +140,4 @@
 			}
 		}
 	}
-
 }
