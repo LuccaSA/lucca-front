@@ -31,7 +31,7 @@ export default {
 
 function getTemplate(args: ButtonGroupStory): string {
 	const classes = [args.size].filter(Boolean).join(' ');
-	const noFlexWrap = args.noFlexWrap ? `u-flexWrapNowrap` : '';
+	const noFlexWrap = args.noFlexWrap ? `pr-u-flexWrapNowrap` : '';
 	const outlined = args.outlined ? `mod-outlined` : '';
 
 	return `<ul class="button-group ${outlined} ${noFlexWrap}">

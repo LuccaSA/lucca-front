@@ -23,7 +23,7 @@
 	}
 }
 
-[class*='pr-u-animated'] {
+[class*='#{config.$utilityPrefix}-animated'] {
 	animation-duration: var(--commons-animations-duration, var(--commons-animations-durations-standard));
 	animation-timing-function: var(--commons-animations-function);
 
