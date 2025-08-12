@@ -1,6 +1,5 @@
 @use '@lucca-front/icons/src/icon/exports' as icon;
 
-@use '@lucca-front/scss/src/commons/config';
 @use '@lucca-front/scss/src/commons/utils/a11y';
 
 @use '@lucca-front/scss/src/components/clear/exports' as clear;
@@ -98,7 +97,7 @@
 		padding: var(--pr-t-spacings-50);
 		margin: var(--pr-t-spacings-50) calc(var(--pr-t-spacings-100) * -1) calc(var(--pr-t-spacings-100) * -1);
 
-		lu-simple-select-default-option.#{config.$utilityPrefix}-ellipsis {
+		lu-simple-select-default-option.pr-u-ellipsis {
 			white-space: normal !important;
 		}
 	}

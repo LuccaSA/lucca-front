@@ -1,5 +1,4 @@
 @use '@lucca-front/icons/src/icon/exports' as icon;
-@use '@lucca-front/scss/src/commons/config';
 @use '@lucca-front/scss/src/components/clear/exports' as clear;
 
 @mixin S {
@@ -53,7 +52,7 @@
 		z-index: 1;
 	}
 
-	lu-simple-select-default-option.#{config.$utilityPrefix}-ellipsis {
+	lu-simple-select-default-option.pr-u-ellipsis {
 		white-space: normal !important;
 	}
 

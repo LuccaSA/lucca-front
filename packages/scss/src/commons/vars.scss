@@ -126,9 +126,18 @@
 		}
 	}
 
-	.#{config.$utilityPrefix}-prefersContrastMore {
+	.pr-u-prefersContrastMore {
 		@media (forced-colors: none) {
 			@include color.contrasted;
 		}
 	}
+	// Deprecated .u- utilities
+	@if config.$deprecatedUtilityPrefix {
+		.u-prefersContrastMore {
+			@media (forced-colors: none) {
+				@include color.contrasted;
+			}
+		}
+	}
+
 }

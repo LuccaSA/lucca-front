@@ -23,7 +23,7 @@
 	}
 }
 
-[class*='#{config.$utilityPrefix}-animated'] {
+[class*='pr-u-animated'] {
 	animation-duration: var(--commons-animations-duration, var(--commons-animations-durations-standard));
 	animation-timing-function: var(--commons-animations-function);
 
@@ -36,7 +36,7 @@
 	}
 }
 
-.#{config.$utilityPrefix}-animated {
+.pr-u-animated {
 	&FadeIn,
 	&FadeOut {
 		animation-name: fadeIn;
@@ -138,53 +138,53 @@
 	}
 }
 
-.#{config.$utilityPrefix}-mask {
+.pr-u-mask {
 	@include a11y.mask('!important');
 }
 
-.#{config.$utilityPrefix}-clearfix {
+.pr-u-clearfix {
 	@include reset.clearfix('!important');
 }
 
 // clear is deprecated
-.#{config.$utilityPrefix}-clearBoth,
-.#{config.$utilityPrefix}-clear {
+.pr-u-clearBoth,
+.pr-u-clear {
 	@include reset.clear('both', '!important');
 }
 
 // clearLeft is deprecated
-.#{config.$utilityPrefix}-clearInlineStart,
-.#{config.$utilityPrefix}-clearLeft {
+.pr-u-clearInlineStart,
+.pr-u-clearLeft {
 	@include reset.clear('inline-start', '!important');
 }
 
 // clearRight is deprecated
-.#{config.$utilityPrefix}-clearInlineEnd,
-.#{config.$utilityPrefix}-clearRight {
+.pr-u-clearInlineEnd,
+.pr-u-clearRight {
 	@include reset.clear('inline-end', '!important');
 }
 
-.#{config.$utilityPrefix}-listReset {
+.pr-u-listReset {
 	@include reset.list('!important');
 }
 
-.#{config.$utilityPrefix}-descriptionListReset {
+.pr-u-descriptionListReset {
 	@include reset.list($list: 'dl', $suffix: '!important');
 }
 
-.#{config.$utilityPrefix}-summaryReset {
+.pr-u-summaryReset {
 	@include reset.summary('!important');
 }
 
-.#{config.$utilityPrefix}-buttonReset {
+.pr-u-buttonReset {
 	@include reset.button('!important');
 }
 
-.#{config.$utilityPrefix}-ellipsis {
+.pr-u-ellipsis {
 	@include text.ellipsis('!important');
 }
 
-.#{config.$utilityPrefix}-h1 {
+.pr-u-h1 {
 	font: var(--pr-t-font-heading-1);
 	color: var(--pr-t-color-text-heading);
 
@@ -194,79 +194,79 @@
 	}
 }
 
-.#{config.$utilityPrefix}-h2 {
+.pr-u-h2 {
 	font: var(--pr-t-font-heading-2);
 	color: var(--pr-t-color-text-heading);
 }
 
-.#{config.$utilityPrefix}-h3 {
+.pr-u-h3 {
 	font: var(--pr-t-font-heading-3);
 	color: var(--pr-t-color-text-heading);
 }
 
-.#{config.$utilityPrefix}-h4 {
+.pr-u-h4 {
 	font: var(--pr-t-font-heading-4);
 	color: var(--pr-t-color-text-heading);
 }
 
-.#{config.$utilityPrefix}-h5 {
+.pr-u-h5 {
 	// Deprecated
 	@include title.h5;
 }
 
-.#{config.$utilityPrefix}-h6 {
+.pr-u-h6 {
 	// Deprecated
 	@include title.h6;
 }
 
-.#{config.$utilityPrefix}-bodyM {
+.pr-u-bodyM {
 	font: var(--pr-t-font-body-M);
 }
 
-.#{config.$utilityPrefix}-bodyS {
+.pr-u-bodyS {
 	font: var(--pr-t-font-body-S);
 }
 
-.#{config.$utilityPrefix}-bodyXS {
+.pr-u-bodyXS {
 	font: var(--pr-t-font-body-XS);
 }
 
 // textLeft is deprecated
-.#{config.$utilityPrefix}-textLeft {
+.pr-u-textLeft {
 	text-align: start !important;
 }
 
 // textRight is deprecated
-.#{config.$utilityPrefix}-textRight {
+.pr-u-textRight {
 	text-align: end !important;
 }
 
 // textCenter is deprecated
-.#{config.$utilityPrefix}-textCenter {
+.pr-u-textCenter {
 	text-align: center !important;
 }
 
-.#{config.$utilityPrefix}-textLight {
+.pr-u-textLight {
 	color: var(--palettes-neutral-600) !important;
 }
 
-.#{config.$utilityPrefix}-textPlaceholder {
+.pr-u-textPlaceholder {
 	color: var(--palettes-neutral-400) !important;
 }
 
-.#{config.$utilityPrefix}-textDefault {
+.pr-u-textDefault {
 	color: var(--palettes-neutral-700) !important;
 }
 
-.#{config.$utilityPrefix}-fontWeightRegular {
+.pr-u-fontWeightRegular {
 	font-weight: 400 !important;
 }
 
-.#{config.$utilityPrefix}-fontWeightSemiBold {
+.pr-u-fontWeightSemiBold {
 	font-weight: 600 !important;
 }
 
-.#{config.$utilityPrefix}-noSpinButtons {
+.pr-u-noSpinButtons {
 	&::-webkit-outer-spin-button,
 	&::-webkit-inner-spin-button {
 		appearance: none !important;
@@ -277,15 +277,15 @@
 	}
 }
 
-.#{config.$utilityPrefix}-fontFamily {
+.pr-u-fontFamily {
 	font-family: var(--pr-t-font-family) !important;
 }
 
-.#{config.$utilityPrefix}-fontFamilyCursive {
+.pr-u-fontFamilyCursive {
 	font-family: var(--pr-t-font-family-cursive) !important;
 }
 
-.#{config.$utilityPrefix}-fontFamilyBrand {
+.pr-u-fontFamilyBrand {
 	font-family: var(--pr-t-font-family-brand) !important;
 }
 
@@ -344,7 +344,7 @@
 
 @each $display in core.$displays {
 	@if $display != 'none' {
-		.#{config.$utilityPrefix}-onlyPrintDisplay#{transform.capitalize(transform.camelize($display))} {
+		.pr-u-onlyPrintDisplay#{transform.capitalize(transform.camelize($display))} {
 			@extend %displayNone;
 		}
 	}
@@ -353,20 +353,20 @@
 @each $direction in core.$boxDirection {
 	@if $direction == '' {
 		// insetReset is deprecated
-		.#{config.$utilityPrefix}-inset0,
-		.#{config.$utilityPrefix}-insetReset {
+		.pr-u-inset0,
+		.pr-u-insetReset {
 			inset: 0 !important;
 		}
 	} @else if $direction == 'top' or $direction == 'bottom' or $direction == 'left' or $direction == 'right' {
 		// Reset is deprecated
-		.#{config.$utilityPrefix}-#{$direction}0,
-		.#{config.$utilityPrefix}-#{$direction}Reset {
+		.pr-u-#{$direction}0,
+		.pr-u-#{$direction}Reset {
 			#{$direction}: 0 !important;
 		}
 	} @else {
 		@each $boxModel in core.$boxModel {
 			@if $boxModel != 'border' {
-				.#{config.$utilityPrefix}-#{$boxModel}#{transform.capitalize($direction)}0 {
+				.pr-u-#{$boxModel}#{transform.capitalize($direction)}0 {
 					#{$boxModel}-#{$direction}: 0 !important;
 				}
 			}
@@ -378,3 +378,307 @@
 @include core.sizes;
 @include core.borderRadius;
 @include core.palettes;
+
+
+// Deprecated .u- utilities
+// Delete when all utilities are prefixed in .pr-u-
+@if config.$deprecatedUtilityPrefix {
+	[class*='u-animated'] {
+		animation-duration: var(--commons-animations-duration, var(--commons-animations-durations-standard));
+		animation-timing-function: var(--commons-animations-function);
+
+		&.mod-animation-duration-fast {
+			--commons-animations-duration: var(--commons-animations-durations-fast);
+		}
+
+		&.mod-animation-duration-slow {
+			--commons-animations-duration: var(--commons-animations-durations-slow);
+		}
+	}
+
+	.u-animated {
+		&FadeIn,
+		&FadeOut {
+			animation-name: fadeIn;
+
+			@include keyframe.fadeIn;
+		}
+
+		&ScaleIn,
+		&ScaleOut {
+			animation-name: scaleIn;
+
+			@include keyframe.scaleIn;
+		}
+
+		&ScaleInTop,
+		&ScaleOutTop {
+			animation-name: scaleInTop;
+
+			@include keyframe.scaleIn;
+		}
+
+		&ScaleInRight,
+		&ScaleOutRight {
+			animation-name: scaleInRight;
+
+			@include keyframe.scaleInRight;
+		}
+
+		&ScaleInBottom,
+		&ScaleOutBottom {
+			animation-name: scaleInBottom;
+
+			@include keyframe.scaleInBottom;
+		}
+
+		&ScaleInLeft,
+		&ScaleOutLeft {
+			animation-name: scaleInLeft;
+
+			@include keyframe.scaleInLeft;
+		}
+
+		&SlideIn,
+		&SlideInTop,
+		&SlideOut,
+		&SlideOutTop {
+			animation-name: slideIn;
+
+			@include keyframe.slideIn;
+		}
+
+		&SlideInRight,
+		&SlideOutRight {
+			animation-name: slideInRight;
+
+			@include keyframe.slideInRight;
+		}
+
+		&SlideInBottom,
+		&SlideOutBottom {
+			animation-name: slideInBottom;
+
+			@include keyframe.slideInBottom;
+		}
+
+		&SlideInLeft,
+		&SlideOutLeft {
+			animation-name: slideInLeft;
+
+			@include keyframe.slideInLeft;
+		}
+
+		&Shake {
+			animation-name: shake;
+
+			@include keyframe.shake;
+		}
+
+		&Pulse {
+			animation-name: pulse;
+			animation-direction: alternate;
+			animation-iteration-count: var(--commons-animations-iteration-count);
+
+			@include keyframe.pulse;
+		}
+
+		&FadeOut,
+		&SlideOut,
+		&SlideOutTop,
+		&SlideOutRight,
+		&SlideOutBottom,
+		&SlideOutLeft,
+		&ScaleOut,
+		&ScaleOutTop,
+		&ScaleOutRight,
+		&ScaleOutBottom,
+		&ScaleOutLeft {
+			animation-direction: reverse;
+		}
+	}
+
+	.u-mask {
+		@include a11y.mask('!important');
+	}
+
+	.u-clearfix {
+		@include reset.clearfix('!important');
+	}
+
+	// clear is deprecated
+	.u-clearBoth,
+	.u-clear {
+		@include reset.clear('both', '!important');
+	}
+
+	// clearLeft is deprecated
+	.u-clearInlineStart,
+	.u-clearLeft {
+		@include reset.clear('inline-start', '!important');
+	}
+
+	// clearRight is deprecated
+	.u-clearInlineEnd,
+	.u-clearRight {
+		@include reset.clear('inline-end', '!important');
+	}
+
+	.u-listReset {
+		@include reset.list('!important');
+	}
+
+	.u-descriptionListReset {
+		@include reset.list($list: 'dl', $suffix: '!important');
+	}
+
+	.u-summaryReset {
+		@include reset.summary('!important');
+	}
+
+	.u-buttonReset {
+		@include reset.button('!important');
+	}
+
+	.u-ellipsis {
+		@include text.ellipsis('!important');
+	}
+
+	.u-h1 {
+		font: var(--pr-t-font-heading-1);
+		color: var(--pr-t-color-text-heading);
+
+		&.mod-XXXL {
+			// Deprecated
+			@include title.XXXL;
+		}
+	}
+
+	.u-h2 {
+		font: var(--pr-t-font-heading-2);
+		color: var(--pr-t-color-text-heading);
+	}
+
+	.u-h3 {
+		font: var(--pr-t-font-heading-3);
+		color: var(--pr-t-color-text-heading);
+	}
+
+	.u-h4 {
+		font: var(--pr-t-font-heading-4);
+		color: var(--pr-t-color-text-heading);
+	}
+
+	.u-h5 {
+		// Deprecated
+		@include title.h5;
+	}
+
+	.u-h6 {
+		// Deprecated
+		@include title.h6;
+	}
+
+	.u-bodyM {
+		font: var(--pr-t-font-body-M);
+	}
+
+	.u-bodyS {
+		font: var(--pr-t-font-body-S);
+	}
+
+	.u-bodyXS {
+		font: var(--pr-t-font-body-XS);
+	}
+
+	// textLeft is deprecated
+	.u-textLeft {
+		text-align: start !important;
+	}
+
+	// textRight is deprecated
+	.u-textRight {
+		text-align: end !important;
+	}
+
+	// textCenter is deprecated
+	.u-textCenter {
+		text-align: center !important;
+	}
+
+	.u-textLight {
+		color: var(--palettes-neutral-600) !important;
+	}
+
+	.u-textPlaceholder {
+		color: var(--palettes-neutral-400) !important;
+	}
+
+	.u-textDefault {
+		color: var(--palettes-neutral-700) !important;
+	}
+
+	.u-fontWeightRegular {
+		font-weight: 400 !important;
+	}
+
+	.u-fontWeightSemiBold {
+		font-weight: 600 !important;
+	}
+
+	.u-noSpinButtons {
+		&::-webkit-outer-spin-button,
+		&::-webkit-inner-spin-button {
+			appearance: none !important;
+		}
+
+		&[type='number'] {
+			appearance: textfield !important;
+		}
+	}
+
+	.u-fontFamily {
+		font-family: var(--pr-t-font-family) !important;
+	}
+
+	.u-fontFamilyCursive {
+		font-family: var(--pr-t-font-family-cursive) !important;
+	}
+
+	.u-fontFamilyBrand {
+		font-family: var(--pr-t-font-family-brand) !important;
+	}
+
+
+	@each $display in core.$displays {
+		@if $display != 'none' {
+			.u-onlyPrintDisplay#{transform.capitalize(transform.camelize($display))} {
+				@extend %displayNone;
+			}
+		}
+	}
+
+	@each $direction in core.$boxDirection {
+		@if $direction == '' {
+			// insetReset is deprecated
+			.u-inset0,
+			.u-insetReset {
+				inset: 0 !important;
+			}
+		} @else if $direction == 'top' or $direction == 'bottom' or $direction == 'left' or $direction == 'right' {
+			// Reset is deprecated
+			.u-#{$direction}0,
+			.u-#{$direction}Reset {
+				#{$direction}: 0 !important;
+			}
+		} @else {
+			@each $boxModel in core.$boxModel {
+				@if $boxModel != 'border' {
+					.u-#{$boxModel}#{transform.capitalize($direction)}0 {
+						#{$boxModel}-#{$direction}: 0 !important;
+					}
+				}
+			}
+		}
+	}
+}

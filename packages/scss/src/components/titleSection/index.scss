@@ -11,7 +11,7 @@
 		@include XXXL;
 	}
 
-	:is(.#{config.$utilityPrefix}-h1, .#{config.$utilityPrefix}-h1.mod-XXXL) ~ & {
+	:is(.pr-u-h1, .pr-u-h1.mod-XXXL) ~ & {
 		@include XXXL('!important');
 	}
 
@@ -19,7 +19,18 @@
 		@include title;
 	}
 
-	:is(.#{config.$utilityPrefix}-h2, .#{config.$utilityPrefix}-h3, .#{config.$utilityPrefix}-h4, .#{config.$utilityPrefix}-h5, .#{config.$utilityPrefix}-h6) ~ & {
+	:is(.pr-u-h2, .pr-u-h3, .pr-u-h4, .pr-u-h5, .pr-u-h6) ~ & {
 		@include title('!important');
+	}
+
+	// Deprecated .u- utilities
+	@if config.$deprecatedUtilityPrefix {
+		:is(.u-h1, .u-h1.mod-XXXL) ~ & {
+			@include XXXL('!important');
+		}
+
+		:is(.u-h2, .u-h3, .u-h4, .u-h5, .u-h6) ~ & {
+			@include title('!important');
+		}
 	}
 }
