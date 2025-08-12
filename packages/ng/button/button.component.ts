@@ -1,4 +1,4 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, ContentChild, ElementRef, inject, Input, OnChanges, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, ContentChild, ElementRef, HostListener, inject, Input, OnChanges, signal, ViewEncapsulation } from '@angular/core';
 import { LuClass, Palette } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
 
@@ -13,11 +13,14 @@ import { IconComponent } from '@lucca-front/ng/icon';
 	encapsulation: ViewEncapsulation.None,
 	host: {
 		class: 'button',
+		'[class.is-error]': 'notifyError()',
 	},
 })
 export class ButtonComponent implements OnChanges {
 	#luClass = inject(LuClass);
 	#elementRef = inject<ElementRef<HTMLButtonElement>>(ElementRef);
+
+	notifyError = signal(false);
 
 	@Input()
 	size: 'M' | 'S' | 'XS';
@@ -86,12 +89,24 @@ export class ButtonComponent implements OnChanges {
 		this.updateClasses();
 	}
 
+	@HostListener('animationend')
+	animationEnd() {
+		this.notifyError.set(false);
+	}
+
+	@HostListener('click')
+	triggerErrorIfNeeded() {
+		if (this.state === 'error') {
+			this.notifyError.set(true);
+		}
+	}
+
 	updateClasses(): void {
 		const classesConfig = {
 			[`mod-${this.size}`]: !!this.size,
 			[`mod-block`]: this.block,
 			[`palette-${this.palette}`]: !!this.palette,
-			[`is-${this.state}`]: !!this.state,
+			[`is-${this.state}`]: !!this.state && this.state !== 'error',
 			['mod-onlyIcon']: this.iconOnly,
 			['mod-iconOnLeft']: this.iconOnLeft,
 			['mod-iconOnRight']: this.iconOnRight,
