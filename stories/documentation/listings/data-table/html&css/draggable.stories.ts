@@ -22,7 +22,7 @@ function getTemplate(args: DraggableStory): string {
 			<tr class="dataTable-body-row mod-draggable">
 				<td class="dataTable-body-row-cell mod-draggable">
 					<button type="button" class="button dataTable-body-row-cell-drag">
-						<span aria-hidden="true" class="lucca-icon icon-dotsDrag"></span><span class="u-mask">Déplacer</span>
+						<span aria-hidden="true" class="lucca-icon icon-dotsDrag"></span><span class="pr-u-mask">Déplacer</span>
 					</button>
 				</td>
 				<td class="dataTable-body-row-cell">Table cell</td>
@@ -32,7 +32,7 @@ function getTemplate(args: DraggableStory): string {
 			<tr class="dataTable-body-row mod-draggable">
 				<td class="dataTable-body-row-cell mod-draggable">
 					<button type="button" class="button dataTable-body-row-cell-drag">
-						<span aria-hidden="true" class="lucca-icon icon-dotsDrag"></span><span class="u-mask">Déplacer</span>
+						<span aria-hidden="true" class="lucca-icon icon-dotsDrag"></span><span class="pr-u-mask">Déplacer</span>
 					</button>
 				</td>
 				<td class="dataTable-body-row-cell">Table cell</td>
@@ -42,7 +42,7 @@ function getTemplate(args: DraggableStory): string {
 			<tr class="dataTable-body-row mod-draggable">
 				<td class="dataTable-body-row-cell mod-draggable">
 					<button type="button" class="button dataTable-body-row-cell-drag">
-						<span aria-hidden="true" class="lucca-icon icon-dotsDrag"></span><span class="u-mask">Déplacer</span>
+						<span aria-hidden="true" class="lucca-icon icon-dotsDrag"></span><span class="pr-u-mask">Déplacer</span>
 					</button>
 				</td>
 				<td class="dataTable-body-row-cell">Table cell</td>

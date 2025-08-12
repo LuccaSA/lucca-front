@@ -24,7 +24,7 @@ function getTemplate(args: EditableStory): string {
 					<td class="dataTable-body-row-cell">Text</td>
 					<td class="dataTable-body-row-cell mod-editable">
 						<div class="form-field">
-							<label class="formLabel u-mask" id="IDlabel1" for="ID1">Label</label>
+							<label class="formLabel pr-u-mask" id="IDlabel1" for="ID1">Label</label>
 							<div class="textField">
 								<span class="textField-suffix" id="IDsuffix1">
 									<span class="textField-label-suffix-item">€</span>
@@ -41,7 +41,7 @@ function getTemplate(args: EditableStory): string {
 					<td class="dataTable-body-row-cell">Text</td>
 					<td class="dataTable-body-row-cell mod-editable">
 						<div class="form-field">
-							<label class="formLabel u-mask" id="IDlabel2" for="ID2">Label</label>
+							<label class="formLabel pr-u-mask" id="IDlabel2" for="ID2">Label</label>
 							<div class="textField">
 								<span class="textField-suffix" id="IDsuffix2">
 									<span class="textField-label-suffix-item">€</span>

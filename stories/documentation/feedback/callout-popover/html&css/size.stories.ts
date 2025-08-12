@@ -4,20 +4,22 @@ export default {
 	title: 'Documentation/Feedback/Callout Popover/HTML&CSS',
 	render: () => {
 		return {
-			styles: [`
+			styles: [
+				`
 				:host {
 					display: flex;
 					flex-direction: column;
 					align-items: flex-start;
 					gap: var(--pr-t-spacings-50);
 				}
-			`],
+			`,
+			],
 			template: `<button type="button" class="calloutPopover mod-S"><span aria-hidden="true" class="calloutPopover-icon lucca-icon icon-signInfo"></span>1</button>
 <button type="button" class="calloutPopover mod-XS"><span aria-hidden="true" class="calloutPopover-icon lucca-icon icon-signInfo"></span>1</button>
 <div class="lu-popover-content calloutPopover-overlay mod-S">
 	<div class="calloutPopover-overlay-head">
 		<span aria-hidden="true" class="calloutPopover-overlay-head-icon lucca-icon icon-signInfo"></span>
-		<span class="u-mask">Information</span>
+		<span class="pr-u-mask">Information</span>
 		<strong class="calloutPopover-overlay-head-title">
 			Titre
 		</strong>
@@ -41,9 +43,9 @@ export default {
 		</ul>
 	</div>
 </div>
-`
-		}
-	}
+`,
+		};
+	},
 } as Meta;
 
 export const Size: StoryObj = {};

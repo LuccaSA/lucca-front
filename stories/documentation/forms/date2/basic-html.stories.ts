@@ -9,18 +9,18 @@ export default {
 	<div id="calendar-name" aria-live="polite" class="calendar-name">
 		<button type="button" class="calendar-name-button">octobre</button>&ngsp;
 		<button type="button" class="calendar-name-button">2024</button>
-		<span class="u-mask">Les touches directionnelles servent à parcourir les dates. </span>
+		<span class="pr-u-mask">Les touches directionnelles servent à parcourir les dates. </span>
 	</div>
 	<table role="grid" aria-labelledby="calendar-name" class="calendar-table">
 		<thead class="calendar-table-head">
 			<tr class="calendar-table-head-row">
-				<th scope="col" class="calendar-table-head-row-cell" data-content-after="l"><span class="u-mask">lundi</span></th>
-				<th scope="col" class="calendar-table-head-row-cell" data-content-after="m"><span class="u-mask">mardi</span></th>
-				<th scope="col" class="calendar-table-head-row-cell" data-content-after="m"><span class="u-mask">mercredi</span></th>
-				<th scope="col" class="calendar-table-head-row-cell" data-content-after="j"><span class="u-mask">jeudi</span></th>
-				<th scope="col" class="calendar-table-head-row-cell" data-content-after="v"><span class="u-mask">vendredi</span></th>
-				<th scope="col" class="calendar-table-head-row-cell" data-content-after="s"><span class="u-mask">samedi</span></th>
-				<th scope="col" class="calendar-table-head-row-cell" data-content-after="d"><span class="u-mask">dimanche</span></th>
+				<th scope="col" class="calendar-table-head-row-cell" data-content-after="l"><span class="pr-u-mask">lundi</span></th>
+				<th scope="col" class="calendar-table-head-row-cell" data-content-after="m"><span class="pr-u-mask">mardi</span></th>
+				<th scope="col" class="calendar-table-head-row-cell" data-content-after="m"><span class="pr-u-mask">mercredi</span></th>
+				<th scope="col" class="calendar-table-head-row-cell" data-content-after="j"><span class="pr-u-mask">jeudi</span></th>
+				<th scope="col" class="calendar-table-head-row-cell" data-content-after="v"><span class="pr-u-mask">vendredi</span></th>
+				<th scope="col" class="calendar-table-head-row-cell" data-content-after="s"><span class="pr-u-mask">samedi</span></th>
+				<th scope="col" class="calendar-table-head-row-cell" data-content-after="d"><span class="pr-u-mask">dimanche</span></th>
 			</tr>
 		</thead>
 		<tbody class="calendar-table-body">
@@ -164,7 +164,7 @@ export default {
 				</td>
 				<td class="calendar-table-body-row-cell is-current" aria-selected="false">
 					<button type="button" class="calendar-table-body-row-cell-action" tabindex="0">
-						25 <span class="u-mask">(aujourd’hui)</span>
+						25 <span class="pr-u-mask">(aujourd’hui)</span>
 					</button>
 				</td>
 				<td class="calendar-table-body-row-cell is-daysOff" aria-selected="false">

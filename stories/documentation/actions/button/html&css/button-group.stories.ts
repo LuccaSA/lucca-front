@@ -41,7 +41,7 @@ function getTemplate(args: ButtonGroupStory): string {
 	<li class="button-group-item">
 		<button type="button" class="button ${outlined} ${classes} mod-more">
 			<span class="lucca-icon icon-arrowChevronBottom" aria-hidden="true"></span>
-			<span class="u-mask">Plus d'actions</span>
+			<span class="pr-u-mask">Plus d'actions</span>
 		</button>
 	</li>
 </ul>`;
