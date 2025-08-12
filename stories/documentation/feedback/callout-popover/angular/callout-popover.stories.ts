@@ -46,11 +46,11 @@ export default {
 				type: 'select',
 			},
 		},
-		buttonLabel : {
+		buttonLabel: {
 			control: {
 				type: 'number',
-			}
-		}
+			},
+		},
 	},
 } as Meta;
 
