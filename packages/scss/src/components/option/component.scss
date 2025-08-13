@@ -7,7 +7,7 @@
 	gap: var(--pr-t-spacings-25);
 	scroll-margin-block: var(--components-option-scrollMarginBlock);
 	position: var(--components-option-position);
-	inset-block-end: var(--pr-t-spacings-50);
+	inset-block-end: 0;
 	z-index: 1;
 
 	&:has(.option-content-loading.loading) {
@@ -32,10 +32,10 @@
 			cursor: var(--components-option-content-cursor);
 			position: var(--components-option-content-position);
 			z-index: 2;
-			box-shadow: var(--components-option-content-boxShadow);
 			flex-wrap: var(--components-option-content-flexWrap);
 			inset-block-start: var(--components-option-content-insetBlockStart);
 			justify-content: var(--components-option-content-justifyContent);
+			box-shadow: var(--components-option-content-boxShadow);
 
 			&::before {
 				content: var(--components-option-content-before-content);
@@ -61,10 +61,19 @@
 			background-color: var(--palettes-neutral-0);
 			position: relative;
 			z-index: 1;
+			overflow: var(--components-optionWrapper-overflow);
+
+			&:empty {
+				display: none;
+			}
 
 			@include reset.list;
 
 			padding: var(--components-optionWrapper-padding);
+
+			.optionWrapper {
+				--components-optionWrapper-overflow: visible;
+			}
 		}
 	}
 }

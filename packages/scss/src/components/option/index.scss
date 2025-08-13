@@ -32,9 +32,15 @@
 			@include groupHover;
 		}
 
+		> .option-content {
+			&:hover {
+				@include groupHoverReset;
+			}
+		}
+
 		&:not(:has(.option.mod-select)) {
 			> .option-content {
-				@include groupHoverWithoutSelect;
+				@include groupHoverReset;
 			}
 		}
 	}
@@ -48,6 +54,7 @@
 		> .option-content {
 			@include selected;
 
+			&.is-hovered,
 			&:hover {
 				@include selectedHover;
 			}

@@ -7,7 +7,7 @@ interface OptionBasicStory {
 }
 
 export default {
-	title: 'Documentation/Forms/Option/Group',
+	title: 'Documentation/Forms/Option/HTML & CSS/Group',
 	argTypes: {},
 	render: (args: OptionBasicStory) => {
 		const modMultiple = args.multiple ? ` mod-multiple` : ``;
@@ -18,7 +18,7 @@ export default {
 			<span class="option-content-checkboxField-input checkboxField-input"></span>
 			<span class="checkboxField-icon"><span class="checkboxField-icon-check"></span></span>
 		</span>
-		Group 3
+		Group 4
 	</div>
 	<ul role="presentation" class="optionWrapper">
 		<li role="option" class="option">
@@ -27,7 +27,7 @@ export default {
 					<span class="option-content-checkboxField-input checkboxField-input"></span>
 					<span class="checkboxField-icon"><span class="checkboxField-icon-check"></span></span>
 				</span>
-				option 3.1
+				option 4.1
 			</div>
 		</li>
 		<li role="option" class="option">
@@ -36,7 +36,7 @@ export default {
 					<span class="option-content-checkboxField-input checkboxField-input"></span>
 					<span class="checkboxField-icon"><span class="checkboxField-icon-check"></span></span>
 				</span>
-				option 3.2
+				option 4.2
 			</div>
 		</li>
 		<li role="option" class="option">
@@ -45,7 +45,7 @@ export default {
 					<span class="option-content-checkboxField-input checkboxField-input"></span>
 					<span class="checkboxField-icon"><span class="checkboxField-icon-check"></span></span>
 				</span>
-				option 3.3
+				option 4.3
 			</div>
 		</li>
 		<li role="option" class="option">
@@ -54,7 +54,7 @@ export default {
 					<span class="option-content-checkboxField-input checkboxField-input"></span>
 					<span class="checkboxField-icon"><span class="checkboxField-icon-check"></span></span>
 				</span>
-				option 3.4
+				option 4.4
 			</div>
 		</li>
 		<li role="option" class="option">
@@ -63,7 +63,7 @@ export default {
 					<span class="option-content-checkboxField-input checkboxField-input"></span>
 					<span class="checkboxField-icon"><span class="checkboxField-icon-check"></span></span>
 				</span>
-				option 3.5
+				option 4.5
 			</div>
 		</li>
 		<li role="option" class="option">
@@ -72,7 +72,7 @@ export default {
 					<span class="option-content-checkboxField-input checkboxField-input"></span>
 					<span class="checkboxField-icon"><span class="checkboxField-icon-check"></span></span>
 				</span>
-				option 3.6
+				option 4.6
 			</div>
 		</li>
 		<li role="option" class="option">
@@ -81,7 +81,7 @@ export default {
 					<span class="option-content-checkboxField-input checkboxField-input"></span>
 					<span class="checkboxField-icon"><span class="checkboxField-icon-check"></span></span>
 				</span>
-				option 3.7
+				option 4.7
 			</div>
 		</li>
 		<li role="option" class="option">
@@ -90,7 +90,7 @@ export default {
 					<span class="option-content-checkboxField-input checkboxField-input"></span>
 					<span class="checkboxField-icon"><span class="checkboxField-icon-check"></span></span>
 				</span>
-				option 3.8
+				option 4.8
 			</div>
 		</li>
 		<li role="option" class="option">
@@ -99,13 +99,23 @@ export default {
 					<span class="option-content-checkboxField-input checkboxField-input"></span>
 					<span class="checkboxField-icon"><span class="checkboxField-icon-check"></span></span>
 				</span>
-				option 3.9
+				option 4.9
 			</div>
 		</li>
 	</ul>
 </li>`
 			: ``;
-		const template = `<ul role="listbox" class="optionWrapper${modMultiple}">
+		return {
+			styles: [
+				args.withScroll
+					? `
+				[role="listbox"] {
+					block-size: 15rem;
+				}
+			`
+					: ``,
+			],
+			template: cleanupTemplate(`<ul role="listbox" class="optionWrapper${modMultiple}">
 	<li role="group" class="option" aria-labelledby="group1">
 		<div class="option-content" id="group1">
 			<span class="option-content-checkboxField checkboxField" aria-hidden="true">
@@ -119,7 +129,7 @@ export default {
 						<span class="option-content-checkboxField-input checkboxField-input"></span>
 						<span class="checkboxField-icon"><span class="checkboxField-icon-check"></span></span>
 					</span>
-					Select all
+					Tout sélectionner
 				</div>
 			</div>
 		</div>
@@ -157,7 +167,7 @@ export default {
 						<span class="option-content-checkboxField-input checkboxField-input"></span>
 						<span class="checkboxField-icon"><span class="checkboxField-icon-check"></span></span>
 					</span>
-					Select all
+					Tout sélectionner
 				</div>
 			</div>
 		</div>
@@ -171,31 +181,13 @@ export default {
 					option 2.1
 				</div>
 			</li>
-			<li role="option" class="option" aria-checked="true">
+			<li role="option" class="option">
 				<div class="option-content">
 					<span class="option-content-checkboxField checkboxField" aria-hidden="true">
 						<span class="option-content-checkboxField-input checkboxField-input"></span>
 						<span class="checkboxField-icon"><span class="checkboxField-icon-check"></span></span>
 					</span>
 					option 2.2
-				</div>
-			</li>
-			<li role="option" class="option" aria-disabled="true">
-				<div class="option-content">
-					<span class="option-content-checkboxField checkboxField" aria-hidden="true">
-						<span class="option-content-checkboxField-input checkboxField-input"></span>
-						<span class="checkboxField-icon"><span class="checkboxField-icon-check"></span></span>
-					</span>
-					option 2.3
-				</div>
-			</li>
-			<li role="option" class="option" aria-checked="true" aria-disabled="true">
-				<div class="option-content">
-					<span class="option-content-checkboxField checkboxField" aria-hidden="true">
-						<span class="option-content-checkboxField-input checkboxField-input"></span>
-						<span class="checkboxField-icon"><span class="checkboxField-icon-check"></span></span>
-					</span>
-					option 2.4
 				</div>
 			</li>
 		</ul>
@@ -213,7 +205,7 @@ export default {
 						<span class="option-content-checkboxField-input checkboxField-input"></span>
 						<span class="checkboxField-icon"><span class="checkboxField-icon-check"></span></span>
 					</span>
-					Select all
+					Tout sélectionner
 				</div>
 			</div>
 		</div>
@@ -239,29 +231,8 @@ export default {
 		</ul>
 	</li>
 	${withScrollElements}
-</ul>`;
-		if (args.withScroll) {
-			return {
-				styles: [
-					`
-					.demo {
-						overflow: auto;
-						block-size: 15rem;
-						border-radius: var(--commons-borderRadius-M);
-
-						&:focus-visible {
-							outline: 2px solid var(--palettes-product-700);
-						}
-					}
-					`,
-				],
-				template: cleanupTemplate(`<div class="demo">${template}</div>`),
-			};
-		} else {
-			return {
-				template: cleanupTemplate(`${template}`),
-			};
-		}
+</ul>`),
+		};
 	},
 } as Meta;
 

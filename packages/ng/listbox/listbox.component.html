@@ -1,0 +1,10 @@
+@if (state() !== "empty") {
+	<ng-content />
+}
+@if (state() === "empty") {
+	<lu-listbox-option>{{ statusMsg() }}</lu-listbox-option>
+} @else if (state() === "loading") {
+	<lu-listbox-option>
+		<lu-loading class="option-content-loading">{{ statusMsg() }}</lu-loading>
+	</lu-listbox-option>
+}

@@ -64,14 +64,12 @@
 
 @mixin busy {
 	.option {
-		--components-option-display: none;
-
 		&:has(.option-content-loading.loading) {
 			--components-option-display: flex;
 		}
 	}
 
-	.option-content {
+	.option-content:has(.option-content-loading.loading) {
 		--components-option-content-checkboxField-display: none;
 		--components-option-content-cursor: default;
 		--components-option-content-backgroundColor: var(--pr-t-elevation-surface-raised);
@@ -79,15 +77,14 @@
 }
 
 @mixin empty {
-	--components-option-content-checkboxField-display: none;
-
 	.option-content {
+		--components-option-content-checkboxField-display: none;
 		--components-option-content-cursor: default;
 		--components-option-content-backgroundColor: var(--pr-t-elevation-surface-raised);
 	}
 }
 
-@mixin groupHoverWithoutSelect {
+@mixin groupHoverReset {
 	--components-option-content-cursor: default;
 	--components-option-content-backgroundColor: var(--pr-t-elevation-surface-raised);
 }

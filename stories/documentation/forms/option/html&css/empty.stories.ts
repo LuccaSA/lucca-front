@@ -3,26 +3,23 @@ import { cleanupTemplate } from 'stories/helpers/stories';
 
 interface OptionBasicStory {
 	multiple: boolean;
-	empty: boolean;
 }
 
 export default {
-	title: 'Documentation/Forms/Option/Empty',
+	title: 'Documentation/Forms/Option/HTML & CSS/Empty',
 	argTypes: {},
 	render: (args: OptionBasicStory) => {
 		const modMultiple = args.multiple ? ` mod-multiple` : ``;
-		const modEmpty = args.empty ? ` aria-hidden="true" id="emptyMsgListbox1"` : ``;
-		const describedby = args.empty ? ` aria-describedby="emptyMsgListbox1"` : ``;
 		return {
 			template: cleanupTemplate(`
-<ul role="listbox" class="optionWrapper${modMultiple}" ${describedby}>
-	<li class="option"${modEmpty}>
+<ul role="listbox" class="optionWrapper${modMultiple}" aria-describedby="emptyMsgListbox1">
+	<li class="option" aria-hidden="true" id="emptyMsgListbox1">
 		<div class="option-content">
 			<span class="option-content-checkboxField checkboxField" aria-hidden="true">
 				<span class="option-content-checkboxField-input checkboxField-input"></span>
 				<span class="checkboxField-icon"><span class="checkboxField-icon-check"></span></span>
 			</span>
-			No match found
+			 Aucun résultat pour votre recherche
 		</div>
 	</li>
 </ul>`),
@@ -33,6 +30,5 @@ export default {
 export const Basic = {
 	args: {
 		multiple: false,
-		empty: true,
 	},
 };

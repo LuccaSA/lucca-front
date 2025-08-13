@@ -7,7 +7,7 @@ import { IconComponent } from '@lucca-front/ng/icon';
 	selector: 'button[luButton],a[luButton]',
 	standalone: true,
 	providers: [LuClass],
-	template: '<ng-content></ng-content>',
+	template: '<ng-content />',
 	styleUrls: ['./button.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	encapsulation: ViewEncapsulation.None,

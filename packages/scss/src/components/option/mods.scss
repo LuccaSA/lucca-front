@@ -25,7 +25,7 @@
 		--components-option-content-checkboxField-display: none;
 		--components-option-content-flexWrap: wrap;
 		--components-option-content-justifyContent: space-between;
-		--components-option-content-insetBlockStart: var(--pr-t-spacings-100);
+		--components-option-content-insetBlockStart: var(--pr-t-spacings-50);
 		--components-option-content-boxShadow:
 			calc(var(--pr-t-spacings-100) * -1) 0 0 0 var(--pr-t-elevation-surface-raised),
 			calc(var(--pr-t-spacings-100) * +1) 0 0 0 var(--pr-t-elevation-surface-raised),
@@ -44,8 +44,7 @@
 
 	.option-content {
 		--components-option-content-fontWeight: var(--pr-t-font-fontWeight-semibold);
-		box-shadow:
-			calc(var(--pr-t-spacings-100) * -1) var(--pr-t-spacings-100) 0 0 var(--pr-t-elevation-surface-raised),
+		--components-option-content-boxShadow: calc(var(--pr-t-spacings-100) * -1) var(--pr-t-spacings-100) 0 0 var(--pr-t-elevation-surface-raised),
 			calc(var(--pr-t-spacings-100) * +1) var(--pr-t-spacings-100) 0 0 var(--pr-t-elevation-surface-raised),
 			calc(var(--pr-t-spacings-100) * -1) 0 0 0 var(--pr-t-elevation-surface-raised),
 			calc(var(--pr-t-spacings-100) * +1) 0 0 0 var(--pr-t-elevation-surface-raised);
