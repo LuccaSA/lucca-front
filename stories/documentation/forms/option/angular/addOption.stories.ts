@@ -19,7 +19,7 @@ export default {
 		const multiple = args.multiple ? ` multiple` : ``;
 		return {
 			styles: [`lu-listbox { block-size: 15rem }`],
-			template: cleanupTemplate(`<lu-listbox>
+			template: cleanupTemplate(`<lu-listbox${multiple}>
 	<lu-listbox-option>option 1</lu-listbox-option>
 	<lu-listbox-option>option 2</lu-listbox-option>
 	<lu-listbox-option>option 3</lu-listbox-option>

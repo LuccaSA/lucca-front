@@ -43,11 +43,14 @@
 	--components-option-position: sticky;
 
 	.option-content {
+		--components-option-content-after-content: '';
+		--components-option-content-checkboxField-display: none;
 		--components-option-content-fontWeight: var(--pr-t-font-fontWeight-semibold);
-		--components-option-content-boxShadow: calc(var(--pr-t-spacings-100) * -1) var(--pr-t-spacings-100) 0 0 var(--pr-t-elevation-surface-raised),
-			calc(var(--pr-t-spacings-100) * +1) var(--pr-t-spacings-100) 0 0 var(--pr-t-elevation-surface-raised),
-			calc(var(--pr-t-spacings-100) * -1) 0 0 0 var(--pr-t-elevation-surface-raised),
-			calc(var(--pr-t-spacings-100) * +1) 0 0 0 var(--pr-t-elevation-surface-raised);
+		--components-option-content-marginBlockStart: var(--pr-t-spacings-100);
+		--components-option-content-boxShadow:
+			calc(var(--pr-t-spacings-50) * +1) 0 0 var(--pr-t-spacings-50) var(--pr-t-elevation-surface-raised),
+			calc(var(--pr-t-spacings-50) * -1) 0 0 var(--pr-t-spacings-50) var(--pr-t-elevation-surface-raised);
+
 	}
 }
 
