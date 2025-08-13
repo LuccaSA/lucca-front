@@ -2,7 +2,7 @@
 	<ng-content />
 }
 @if (state() === "empty") {
-	<lu-listbox-option>{{ statusMsg() }}</lu-listbox-option>
+	<lu-listbox-option empty>{{ statusMsg() }}</lu-listbox-option>
 } @else if (state() === "loading") {
 	<lu-listbox-option>
 		<lu-loading class="option-content-loading">{{ statusMsg() }}</lu-loading>

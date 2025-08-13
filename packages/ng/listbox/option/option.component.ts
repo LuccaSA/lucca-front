@@ -1,6 +1,6 @@
-import { booleanAttribute, Component, computed, contentChild, Directive, inject, input, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, Component, computed, contentChild, Directive, forwardRef, inject, input, ViewEncapsulation } from '@angular/core';
 import { IconComponent } from '@lucca-front/ng/icon';
-import { LISTBOX_INSTANCE } from '../tokens';
+import { LISTBOX_INSTANCE, OPTION_INSTANCE } from '../tokens';
 
 let nextId = 0;
 
@@ -18,19 +18,25 @@ export class Treeitem {}
 	host: {
 		class: 'option',
 		'[attr.role]': 'group() ? "group" : tree() ? "treeitem" : "option"',
+		'[attr.aria-labelledby]': 'group() ? groupId : null',
 		'[attr.aria-checked]': 'checked()',
 		'[attr.aria-disabled]': 'disabled()',
+		'[attr.aria-hidden]': 'empty()',
+		'[attr.id]': 'empty() ? id() : null',
 		'[class.mod-add]': 'add()',
 		'[class.mod-select]': 'select()',
-		'[attr.aria-labelledby]': 'groupId',
 	},
 	imports: [IconComponent],
+	providers: [{ provide: OPTION_INSTANCE, useExisting: forwardRef(() => OptionComponent) }],
 })
 export class OptionComponent {
 	#listboxRef = inject(LISTBOX_INSTANCE);
+	#parentOptionRef = inject(OPTION_INSTANCE, { skipSelf: true, optional: true });
 
 	multiple = computed(() => this.#listboxRef.multiple());
 	tree = computed(() => this.#listboxRef.tree());
+	empty = computed(() => this.#listboxRef.state() === 'empty');
+	id = computed(() => this.#listboxRef.listboxId);
 
 	checked = input(false, { transform: booleanAttribute });
 	disabled = input(false, { transform: booleanAttribute });
@@ -44,5 +50,5 @@ export class OptionComponent {
 
 	treeitemContent = contentChild(Treeitem);
 
-	level = input<number | null>(null);
+	level: number = (this.#parentOptionRef?.level || 0) + 1;
 }

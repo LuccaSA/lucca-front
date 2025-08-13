@@ -18,18 +18,6 @@ export default {
 	argTypes: {},
 	render: (args: OptionBasicStory) => {
 		const multiple = args.multiple ? ` multiple` : ``;
-		const level = args.deepNesting ? ` level="3"` : ``;
-		const deepNestingItem = args.deepNesting
-			? `
-						<ng-container treeitem>
-							<lu-listbox-option level="4">
-								option 2.2.2.1
-								<ng-container treeitem>
-									<lu-listbox-option level="5">option 2.2.2.1.1</lu-listbox-option>
-								</ng-container>
-							</lu-listbox-option>
-						</ng-container>`
-			: ``;
 		return {
 			template: cleanupTemplate(`<lu-listbox tree${multiple}>
 	<lu-listbox-option>option 1</lu-listbox-option>
@@ -41,8 +29,8 @@ export default {
 				option 2.2
 				<ng-container treeitem>
 					<lu-listbox-option>option 2.2.1</lu-listbox-option>
-					<lu-listbox-option${level}>
-						option 2.2.2${deepNestingItem}
+					<lu-listbox-option>
+						option 2.2.2
 					</lu-listbox-option>
 				</ng-container>
 			</lu-listbox-option>
@@ -56,6 +44,5 @@ export default {
 export const Basic = {
 	args: {
 		multiple: false,
-		deepNesting: false,
 	},
 };
