@@ -12,7 +12,7 @@ let nextId = 0;
 	standalone: true,
 	imports: [ReactiveFormsModule],
 	hostDirectives: [NoopValueAccessorDirective],
-	template: '<ng-content></ng-content>',
+	template: '<ng-content />',
 	styleUrl: './radio-group-input.component.scss',
 	encapsulation: ViewEncapsulation.None,
 	changeDetection: ChangeDetectionStrategy.OnPush,

@@ -8,7 +8,7 @@ import { CalloutComponent } from '@lucca-front/ng/callout';
 	imports: [CalloutComponent],
 	template: ` <lu-callout icon="settingsGear" size="S" heading="NgModel value">
 		<pre class="code" data-testid="pr-ng-model">
-			<ng-content></ng-content>
+			<ng-content />
 		</pre>
 	</lu-callout>`,
 	styles: `
