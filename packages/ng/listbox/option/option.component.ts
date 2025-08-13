@@ -19,7 +19,7 @@ export class Treeitem {}
 		class: 'option',
 		'[attr.role]': 'group() ? "group" : tree() ? "treeitem" : "option"',
 		'[attr.aria-labelledby]': 'group() ? groupId : null',
-		'[attr.aria-checked]': 'checked()',
+		'[attr.aria-checked]': 'mixed() ? "mixed" : checked()',
 		'[attr.aria-disabled]': 'disabled()',
 		'[attr.aria-hidden]': 'empty()',
 		'[attr.id]': 'empty() ? id() : null',
@@ -39,6 +39,7 @@ export class OptionComponent {
 	id = computed(() => this.#listboxRef.listboxId);
 
 	checked = input(false, { transform: booleanAttribute });
+	mixed = input(false, { transform: booleanAttribute });
 	disabled = input(false, { transform: booleanAttribute });
 	hovered = input(false, { transform: booleanAttribute });
 	add = input(false, { transform: booleanAttribute });
