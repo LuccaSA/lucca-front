@@ -20,6 +20,7 @@
 			[optionIndex]="optionIndex() + '-' + $index"
 			[optionComparer]="optionComparer()"
 			[selectedOptions]="selectedOptions()"
+			[simpleMode]="simpleMode()"
 			(toggleOne)="toggleOne.emit($event)"
 			(selectMany)="selectMany.emit($event)"
 			(unselectMany)="unselectMany.emit($event)"
