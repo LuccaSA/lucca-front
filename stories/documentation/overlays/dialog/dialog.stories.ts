@@ -64,7 +64,7 @@ export default {
 			<div class="footer-content">Optional footer text</div>
 
 			<button type="button" luButton luDialogClose>Confirm</button>
-			<button type="button" luButton="text" luDialogDismiss>Cancel</button>
+			<button type="button" luButton="ghost" luDialogDismiss>Cancel</button>
 		</lu-dialog-footer>
 	</lu-dialog>
 </ng-template>`,
@@ -129,7 +129,7 @@ export const Focus: StoryObj = {
 			<div class="footer-content">Optional footer text</div>
 			<div class="footer-actions">
 				<button type="button" luButton luDialogClose>Confirm</button>
-				<button type="button" luButton="text" luDialogDismiss>Cancel</button>
+				<button type="button" luButton="ghost" luDialogDismiss>Cancel</button>
 			</div>
 		</lu-dialog-footer>
 	</lu-dialog>
@@ -175,7 +175,7 @@ export const WithForm: StoryObj = {
 				<div class="footer-content">Optional footer text</div>
 				<div class="footer-actions">
 					<button type="submit" luButton [disabled]="!form.valid" luDialogClose>Submit</button>
-					<button type="button" luButton="text" luDialogDismiss>Cancel</button>
+					<button type="button" luButton="ghost" luDialogDismiss>Cancel</button>
 				</div>
 			</lu-dialog-footer>
 		</form>

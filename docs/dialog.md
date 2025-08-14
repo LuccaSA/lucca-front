@@ -160,7 +160,7 @@ Pour créer et ouvrir une dialog depuis le template, vous pouvez utiliser les di
         <!-- Cliquer ici va déclencher une méthode avec comme paramètre la référence de la dialog, de type LuDialogRef -->
         <button type="button" luButton (click)="doSomethingWithRef(dialog.dialogRef)">Do something with ref</button>
         <!-- Cliquer ici va fermer la dialog avec la méthode dismiss -->
-        <button type="button" luButton="text" luDialogDismiss>Dismiss</button>
+        <button type="button" luButton="ghost" luDialogDismiss>Dismiss</button>
       </div>
     </lu-dialog-footer>
   </lu-dialog>
@@ -195,7 +195,7 @@ Dans le cas où vous souhaitez utiliser un formulaire au sein d’une [dialog bo
       <div class="footer-content">Optional footer text</div>
       <div class="footer-actions">
         <button type="submit" luButton [disabled]="!form.valid" luDialogClose>Submit</button>
-        <button type="button" luButton="text" luDialogDismiss>Cancel</button>
+        <button type="button" luButton="ghost" luDialogDismiss>Cancel</button>
       </div>
     </lu-dialog-footer>
   </form>
