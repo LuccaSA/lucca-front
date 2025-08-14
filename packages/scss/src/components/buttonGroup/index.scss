@@ -1,14 +1,26 @@
 @use 'exports' as *;
 
 .button-group {
-	@include vars;
-	@include component;
-
-	&.mod-outlined {
-		@include outlined;
+	@layer components {
+		@include vars;
+		@include component;
 	}
 
-	&.mod-text {
-		@include text;
+	@layer mods {
+		&.mod-outlined {
+			@include outlined;
+		}
+
+		&.mod-text {
+			@include text;
+		}
+	}
+
+	@layer mods {
+		&:is(ul) {
+			.button.mod-more {
+				@include more;
+			}
+		}
 	}
 }

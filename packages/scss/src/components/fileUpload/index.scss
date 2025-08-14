@@ -1,46 +1,52 @@
 @use 'exports' as *;
 
 .fileUpload {
-	@include vars;
-	@include component;
-
-	&:hover {
-		@include hover;
+	@layer components {
+		@include vars;
+		@include component;
 	}
 
-	&.mod-dropzone {
-		@include dropzone;
-	}
-
-	&.mod-S {
-		@include S;
-
-		&.is-loading {
-			@include loadingS;
-		}
-	}
-
-	&.is-loading {
-		@include loading;
-	}
-
-	&.is-hidden {
-		@include hidden;
-	}
-
-	&.is-success {
-		@include success;
-	}
-
-	&.is-error {
-		@include error;
-
+	@layer mods {
 		&:hover {
-			@include errorHover;
+			@include hover;
+		}
+
+		&.mod-dropzone {
+			@include dropzone;
+		}
+
+		&.mod-S {
+			@include S;
+
+			&.is-loading {
+				@include loadingS;
+			}
 		}
 	}
 
-	&.is-droppable {
-		@include droppable;
+	@layer states {
+		&.is-loading {
+			@include loading;
+		}
+
+		&.is-hidden {
+			@include hidden;
+		}
+
+		&.is-success {
+			@include success;
+		}
+
+		&.is-error {
+			@include error;
+
+			&:hover {
+				@include errorHover;
+			}
+		}
+
+		&.is-droppable {
+			@include droppable;
+		}
 	}
 }

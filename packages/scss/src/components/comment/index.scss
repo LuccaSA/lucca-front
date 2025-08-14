@@ -3,38 +3,48 @@
 @use 'exports' as *;
 
 .comment {
-	@include vars;
-	@include component;
-
-	&.mod-S {
-		@include S;
+	@layer components {
+		@include vars;
+		@include component;
 	}
 
-	&.mod-noAvatar {
-		@include noAvatar;
-	}
+	@layer mods {
+		&.mod-S {
+			@include S;
+		}
 
-	@include container.max(25rem, $name: 'comment') {
-		@include narrow;
+		&.mod-noAvatar {
+			@include noAvatar;
+		}
+
+		@include container.max(25rem, $name: 'comment') {
+			@include narrow;
+		}
 	}
 }
 
 .commentWrapper {
-	@include vars;
-
-	&.mod-S {
-		@include wrapperS;
+	@layer components {
+		@include vars;
 	}
 
-	&.mod-compact {
-		@include wrapperCompact;
-	}
+	@layer mods {
+		&.mod-S {
+			@include wrapperS;
+		}
 
-	&.mod-chatAnswer {
-		@include chatAnswer;
+		&.mod-compact {
+			@include wrapperCompact;
+		}
+
+		&.mod-chatAnswer {
+			@include chatAnswer;
+		}
 	}
 }
 
 .commentWrapperChat {
-	@include chat;
+	@layer components {
+		@include chat;
+	}
 }
