@@ -15,3 +15,22 @@
 		background-color: inherit;
 	}
 }
+
+.optionItem-value:has(.optionItem-icon) {
+	display: flex;
+	justify-content: space-between;
+}
+
+.optionItem-icons {
+	display: flex;
+	gap: var(-pr-t-spacings-100);
+}
+
+.optionItem-icon-shape {
+	display: block;
+	fill: var(--palettes-neutral-500);
+
+	&:hover {
+		fill: var(--palettes-neutral-800);
+	}
+}

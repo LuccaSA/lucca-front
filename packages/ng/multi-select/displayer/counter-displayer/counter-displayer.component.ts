@@ -1,4 +1,4 @@
-import { AsyncPipe, NgFor, NgIf, NgPlural, NgPluralCase } from '@angular/common';
+import { AsyncPipe, NgPlural, NgPluralCase } from '@angular/common';
 import { ChangeDetectionStrategy, Component, DestroyRef, ElementRef, Input, OnInit, ViewChild, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
@@ -11,19 +11,23 @@ import { LuMultiSelectDisplayerInputDirective } from '../displayer-input.directi
 @Component({
 	selector: 'lu-multi-select-counter-displayer',
 	standalone: true,
-	imports: [AsyncPipe, LuTooltipModule, NgIf, NgFor, NgPlural, NgPluralCase, ɵLuOptionOutletDirective, FormsModule, LuMultiSelectDisplayerInputDirective],
+	imports: [AsyncPipe, LuTooltipModule, NgPlural, NgPluralCase, ɵLuOptionOutletDirective, FormsModule, LuMultiSelectDisplayerInputDirective],
 	template: `
 		<div class="multipleSelect-displayer mod-filter" [class.is-filled]="(selectedOptions$ | async)?.length > 0">
 			<input type="text" autocomplete="off" #inputElement luMultiSelectDisplayerInput />
-			<div class="multipleSelect-displayer-filter" *ngIf="selectedOptions$ | async as selectedOptions">
-				<div class="multipleSelect-displayer-chip chip mod-unkillable" *ngIf="selectedOptions?.length === 1">
-					<ng-container *luOptionOutlet="select.displayerTpl(); value: selectedOptions[0]"></ng-container>
+			@if (selectedOptions$ | async; as selectedOptions) {
+				<div class="multipleSelect-displayer-filter">
+					@if (selectedOptions?.length === 1) {
+						<div class="multipleSelect-displayer-chip chip mod-unkillable">
+							<ng-container *luOptionOutlet="select.displayerTpl(); value: selectedOptions[0]"></ng-container>
+						</div>
+					}
+					@if (selectedOptions?.length > 1) {
+						<span class="multipleSelect-displayer-numericBadge numericBadge">{{ selectedOptions?.length }}</span
+						><span class="multipleSelect-displayer-label">{{ label }}</span>
+					}
 				</div>
-				<ng-container *ngIf="selectedOptions?.length > 1"
-					><span class="multipleSelect-displayer-numericBadge numericBadge">{{ selectedOptions?.length }}</span
-					><span class="multipleSelect-displayer-label">{{ label }}</span></ng-container
-				>
-			</div>
+			}
 		</div>
 	`,
 	styleUrls: ['./counter-displayer.component.scss'],

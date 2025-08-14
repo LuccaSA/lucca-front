@@ -5,6 +5,7 @@ import { CoreSelectPanelInstance, SELECT_PANEL_INSTANCE } from './panel.instance
 @Directive({
 	standalone: true,
 	selector: '[luCoreSelectPanelElement]',
+	exportAs: 'luCoreSelectPanelElement',
 	host: {
 		'[attr.id]': 'idAttribute()',
 		'[attr.aria-selected]': 'isSelected()',

@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform, inject } from '@angular/core';
-import { ɵIsSelectedStrategy } from '../select.model';
+import { ɵIsSelectedStrategy } from '@lucca-front/ng/core-select';
 
 @Pipe({
 	name: 'luOptionsGroupContext',

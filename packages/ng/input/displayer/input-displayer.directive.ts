@@ -1,6 +1,9 @@
 import { Directive, forwardRef, Input, TemplateRef, ViewRef } from '@angular/core';
 import { ALuInputDisplayer, ILuInputDisplayer } from './input-displayer.model';
 
+/**
+ * @deprecated
+ */
 @Directive({
 	selector: '[luDisplayer]',
 	standalone: true,
