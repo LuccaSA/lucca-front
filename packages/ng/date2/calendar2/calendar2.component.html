@@ -14,7 +14,8 @@
 				<thead class="calendar-table-head">
 					<tr class="calendar-table-head-row">
 						@for (day of daysOfWeek; track day.long) {
-							<th class="calendar-table-head-row-cell" scope="col" [attr.data-content-after]="day.short.substring(0, 1)">
+							<th class="calendar-table-head-row-cell" scope="col">
+								<span [attr.data-content-after]="day.short.substring(0, 1)" aria-hidden="true"></span>
 								<span class="pr-u-mask">{{ day.long }}</span>
 							</th>
 						}

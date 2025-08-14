@@ -37,7 +37,7 @@ describe('lu-api-select', () => {
 
 		const luSelectElement = screen.getByTestId('lu-select');
 		await userEvent.click(luSelectElement);
-		const dial = screen.getByRole('dialog');
+		const dial = screen.getByTestId('dialog-panel');
 
 		expect(dial).toBeInTheDocument();
 	});

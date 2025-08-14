@@ -14,13 +14,13 @@ export default {
 	<table role="grid" aria-labelledby="calendar-name" class="calendar-table">
 		<thead class="calendar-table-head">
 			<tr class="calendar-table-head-row">
-				<th scope="col" class="calendar-table-head-row-cell" data-content-after="l"><span class="pr-u-mask">lundi</span></th>
-				<th scope="col" class="calendar-table-head-row-cell" data-content-after="m"><span class="pr-u-mask">mardi</span></th>
-				<th scope="col" class="calendar-table-head-row-cell" data-content-after="m"><span class="pr-u-mask">mercredi</span></th>
-				<th scope="col" class="calendar-table-head-row-cell" data-content-after="j"><span class="pr-u-mask">jeudi</span></th>
-				<th scope="col" class="calendar-table-head-row-cell" data-content-after="v"><span class="pr-u-mask">vendredi</span></th>
-				<th scope="col" class="calendar-table-head-row-cell" data-content-after="s"><span class="pr-u-mask">samedi</span></th>
-				<th scope="col" class="calendar-table-head-row-cell" data-content-after="d"><span class="pr-u-mask">dimanche</span></th>
+				<th scope="col" class="calendar-table-head-row-cell"><span aria-hidden="true" data-content-after="l"></span><span class="pr-u-mask">lundi</span></th>
+				<th scope="col" class="calendar-table-head-row-cell"><span aria-hidden="true" data-content-after="m"></span><span class="pr-u-mask">mardi</span></th>
+				<th scope="col" class="calendar-table-head-row-cell"><span aria-hidden="true" data-content-after="m"></span><span class="pr-u-mask">mercredi</span></th>
+				<th scope="col" class="calendar-table-head-row-cell"><span aria-hidden="true" data-content-after="j"></span><span class="pr-u-mask">jeudi</span></th>
+				<th scope="col" class="calendar-table-head-row-cell"><span aria-hidden="true" data-content-after="v"></span><span class="pr-u-mask">vendredi</span></th>
+				<th scope="col" class="calendar-table-head-row-cell"><span aria-hidden="true" data-content-after="s"></span><span class="pr-u-mask">samedi</span></th>
+				<th scope="col" class="calendar-table-head-row-cell"><span aria-hidden="true" data-content-after="d"></span><span class="pr-u-mask">dimanche</span></th>
 			</tr>
 		</thead>
 		<tbody class="calendar-table-body">
