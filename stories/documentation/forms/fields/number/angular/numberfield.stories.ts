@@ -77,6 +77,7 @@ export const Basic: StoryObj<NumberInputComponent & { disabled: boolean; require
 		min: 0,
 		max: 999,
 		noSpinButtons: false,
+		valueAlignRight: false,
 	},
 };
 
@@ -139,5 +140,6 @@ export const WithPrefixAndSuffix: StoryObj<
 		min: 0,
 		max: 999,
 		noSpinButtons: false,
+		valueAlignRight: false,
 	},
 };

@@ -38,7 +38,9 @@ export interface RichTextPluginComponent {
 	pluginComponents?: Signal<readonly RichTextPluginComponent[]>;
 
 	// accessibility
+	// Rich Text Input sets tabindex to -1 on all plugins except the first one
 	tabindex?: WritableSignal<number>;
+	// What to do in the plugin when it receives focus from the editor
 	focus?(): void;
 }
 
@@ -130,12 +132,12 @@ export class RichTextInputComponent implements OnInit, OnDestroy, ControlValueAc
 		this.#cleanup?.();
 	}
 
-	writeValue(markdown: string | null): void {
+	writeValue(value: string | null): void {
 		const updateTags = ['skip-dom-selection', INITIAL_UPDATE_TAG];
-		if (markdown) {
+		if (value) {
 			this.#editor?.update(
 				() => {
-					this.#richTextFormatter.parse(this.#editor, markdown);
+					this.#richTextFormatter.parse(this.#editor, value);
 				},
 				{ tag: updateTags },
 			);
@@ -164,12 +166,16 @@ export class RichTextInputComponent implements OnInit, OnDestroy, ControlValueAc
 		this.pluginComponents().forEach((c) => c.setDisabledState(isDisabled));
 	}
 
-	focusSiblingPlugin(direction: -1 | 1) {
+	focusSiblingPlugin(event: Event, direction: -1 | 1) {
+		event.preventDefault();
 		const plugins = this.#allPlugins();
 
-		plugins[this.#focusedPlugin].tabindex.set(-1);
-		this.#focusedPlugin = this.#focusedPlugin + direction < 0 ? plugins.length - 1 : (this.#focusedPlugin + direction) % plugins.length;
-		plugins[this.#focusedPlugin].tabindex.set(0);
+		const nextFocusedPlugin = this.#focusedPlugin + direction < 0 ? plugins.length - 1 : (this.#focusedPlugin + direction) % plugins.length;
+		if (plugins[nextFocusedPlugin].tabindex) {
+			plugins[this.#focusedPlugin].tabindex?.set(-1);
+			plugins[nextFocusedPlugin].tabindex.set(0);
+		}
+		this.#focusedPlugin = nextFocusedPlugin;
 		plugins[this.#focusedPlugin].focus();
 	}
 

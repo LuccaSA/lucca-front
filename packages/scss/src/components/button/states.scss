@@ -47,7 +47,7 @@
 }
 
 @mixin success {
-	@include core.cssvars('palettes', config.$success);
+	@include core.rosetta('--palettes', '--palettes-success', config.$palettesShades);
 
 	@include state;
 
@@ -57,7 +57,7 @@
 }
 
 @mixin error {
-	@include core.cssvars('palettes', config.$critical);
+	@include core.rosetta('--palettes', '--palettes-critical', config.$palettesShades);
 
 	@include state;
 

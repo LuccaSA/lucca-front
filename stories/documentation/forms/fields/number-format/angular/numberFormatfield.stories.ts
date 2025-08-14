@@ -121,6 +121,7 @@ export const Basic: StoryObj<
 		formatStyle: 'decimal',
 		currency: 'EUR',
 		useAutoPrefixSuffix: true,
+		valueAlignRight: false,
 	},
 };
 
@@ -170,6 +171,7 @@ export const WithCurrency: StoryObj<
 		useAutoPrefixSuffix: true,
 		currency: 'EUR',
 		currencyDisplay: 'name',
+		valueAlignRight: false,
 	},
 };
 
@@ -219,6 +221,7 @@ export const WithUnitKm: StoryObj<
 		useAutoPrefixSuffix: true,
 		unit: 'kilometer',
 		unitDisplay: 'long',
+		valueAlignRight: false,
 	},
 };
 
@@ -266,5 +269,6 @@ export const WithPercent: StoryObj<
 		tooltip: 'Je suis un message d’aide',
 		formatStyle: 'percent',
 		useAutoPrefixSuffix: true,
+		valueAlignRight: false,
 	},
 };

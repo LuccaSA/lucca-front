@@ -35,6 +35,11 @@
 	}
 }
 
+.segmentedControl-item-action:disabled,
+.segmentedControl-item-input:disabled ~ .segmentedControl-item-action {
+		@include disabled;
+}
+
 // .viewTabs_panel is deprecated
 .segmentedControl_panel,
 .viewTabs_panel {

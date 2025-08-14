@@ -1,4 +1,4 @@
-<div class="textField">
+<div class="textField" [class.mod-valueAlignRight]="valueAlignRight()">
 	<ng-template #addon let-addon="addon" let-type="type">
 		@if (addon.content) {
 			<span class="textField-{{ type }}" luFormFieldId="{{ type }}">

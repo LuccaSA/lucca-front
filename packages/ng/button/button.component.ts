@@ -69,6 +69,14 @@ export class ButtonComponent implements OnChanges {
 		return !!this.#iconComponentRef && noSpan && noText;
 	}
 
+	private get iconOnLeft(): boolean {
+		return this.#iconComponentRef?.nativeElement === this.#elementRef?.nativeElement?.firstChild;
+	}
+
+	private get iconOnRight(): boolean {
+		return this.#iconComponentRef?.nativeElement === this.#elementRef?.nativeElement?.lastChild;
+	}
+
 	ngOnChanges(): void {
 		this.updateClasses();
 	}
@@ -80,6 +88,8 @@ export class ButtonComponent implements OnChanges {
 			[`palette-${this.palette}`]: !!this.palette,
 			[`is-${this.state}`]: !!this.state,
 			['mod-onlyIcon']: this.iconOnly,
+			['mod-iconOnLeft']: this.iconOnLeft,
+			['mod-iconOnRight']: this.iconOnRight,
 			['mod-withIcon']: this.#iconComponentRef !== undefined && !this.disclosure && !this.iconOnly,
 			['mod-delete']: this.delete,
 			['mod-disclosure']: this.disclosure,
