@@ -43,10 +43,10 @@ export function migrateComponent(sourceFile: SourceFile, path: string, tree: Tre
 				let thingsToAdd = ` luButton${button.type ? `="${button.type}"` : ""} `;
 				// Converting inputs
 				if (button.inputs.size) {
-					thingsToAdd += `size="${button.inputs.size} `;
+					thingsToAdd += `size="${button.inputs.size}" `;
 				}
 				if (button.inputs.state) {
-					thingsToAdd += `state="${button.inputs.state} `;
+					thingsToAdd += `state="${button.inputs.state}" `;
 				}
 				if (button.inputs.palette) {
 					thingsToAdd += `palette="${button.inputs.palette}" `;
