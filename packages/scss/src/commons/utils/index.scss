@@ -11,19 +11,7 @@
 
 @use '@lucca-front/scss/src/components/title/exports' as title;
 
-[data-content-before] {
-	&::before {
-		content: attr(data-content-before);
-	}
-}
-
-[data-content-after] {
-	&::after {
-		content: attr(data-content-after);
-	}
-}
-
-[class*='pr-u-animated'] {
+%animatedAll {
 	animation-duration: var(--commons-animations-duration, var(--commons-animations-durations-standard));
 	animation-timing-function: var(--commons-animations-function);
 
@@ -36,7 +24,7 @@
 	}
 }
 
-.pr-u-animated {
+%animated {
 	&FadeIn,
 	&FadeOut {
 		animation-name: fadeIn;
@@ -138,53 +126,47 @@
 	}
 }
 
-.pr-u-mask {
+%mask {
 	@include a11y.mask('!important');
 }
 
-.pr-u-clearfix {
+%clearfix {
 	@include reset.clearfix('!important');
 }
 
-// clear is deprecated
-.pr-u-clearBoth,
-.pr-u-clear {
+%clearBoth {
 	@include reset.clear('both', '!important');
 }
 
-// clearLeft is deprecated
-.pr-u-clearInlineStart,
-.pr-u-clearLeft {
-	@include reset.clear('inline-start', '!important');
+%clearInlineStart {
+	@include reset.clear('both', '!important');
 }
 
-// clearRight is deprecated
-.pr-u-clearInlineEnd,
-.pr-u-clearRight {
+%clearInlineEnd {
 	@include reset.clear('inline-end', '!important');
 }
 
-.pr-u-listReset {
+%listReset {
 	@include reset.list('!important');
 }
 
-.pr-u-descriptionListReset {
+%descriptionListReset {
 	@include reset.list($list: 'dl', $suffix: '!important');
 }
 
-.pr-u-summaryReset {
+%summaryReset {
 	@include reset.summary('!important');
 }
 
-.pr-u-buttonReset {
+%buttonReset {
 	@include reset.button('!important');
 }
 
-.pr-u-ellipsis {
+%ellipsis {
 	@include text.ellipsis('!important');
 }
 
-.pr-u-h1 {
+%h1 {
 	font: var(--pr-t-font-heading-1);
 	color: var(--pr-t-color-text-heading);
 
@@ -194,79 +176,74 @@
 	}
 }
 
-.pr-u-h2 {
+%h2 {
 	font: var(--pr-t-font-heading-2);
 	color: var(--pr-t-color-text-heading);
 }
 
-.pr-u-h3 {
+%h3 {
 	font: var(--pr-t-font-heading-3);
 	color: var(--pr-t-color-text-heading);
 }
 
-.pr-u-h4 {
+%h4 {
 	font: var(--pr-t-font-heading-4);
 	color: var(--pr-t-color-text-heading);
 }
 
-.pr-u-h5 {
-	// Deprecated
+%h5 {
 	@include title.h5;
 }
 
-.pr-u-h6 {
-	// Deprecated
+%h6 {
 	@include title.h6;
 }
 
-.pr-u-bodyM {
+%bodyM {
 	font: var(--pr-t-font-body-M);
 }
 
-.pr-u-bodyS {
+%bodyS {
 	font: var(--pr-t-font-body-S);
 }
 
-.pr-u-bodyXS {
+%bodyXS {
 	font: var(--pr-t-font-body-XS);
 }
 
-// textLeft is deprecated
-.pr-u-textLeft {
+%textLeft {
 	text-align: start !important;
 }
 
-// textRight is deprecated
-.pr-u-textRight {
+%textRight {
 	text-align: end !important;
 }
 
-// textCenter is deprecated
-.pr-u-textCenter {
+%textCenter {
 	text-align: center !important;
 }
 
-.pr-u-textLight {
+%textLight {
 	color: var(--palettes-neutral-600) !important;
 }
 
-.pr-u-textPlaceholder {
+%textPlaceholder {
 	color: var(--palettes-neutral-400) !important;
 }
 
-.pr-u-textDefault {
+%textDefault {
 	color: var(--palettes-neutral-700) !important;
 }
 
-.pr-u-fontWeightRegular {
+%fontWeightRegular {
 	font-weight: 400 !important;
 }
 
-.pr-u-fontWeightSemiBold {
+%fontWeightSemiBold {
 	font-weight: 600 !important;
 }
 
-.pr-u-noSpinButtons {
+%noSpinButtons {
 	&::-webkit-outer-spin-button,
 	&::-webkit-inner-spin-button {
 		appearance: none !important;
@@ -277,22 +254,183 @@
 	}
 }
 
-.pr-u-fontFamily {
+%fontFamily {
 	font-family: var(--pr-t-font-family) !important;
 }
 
-.pr-u-fontFamilyCursive {
+%fontFamilyCursive {
 	font-family: var(--pr-t-font-family-cursive) !important;
 }
 
-.pr-u-fontFamilyBrand {
+%fontFamilyBrand {
 	font-family: var(--pr-t-font-family-brand) !important;
 }
 
-.pr-u-focusVisible {
+%focusVisible {
 	&:focus-visible {
 		@include a11y.focusVisible;
 	}
+}
+
+
+
+[data-content-before] {
+	&::before {
+		content: attr(data-content-before);
+	}
+}
+
+[data-content-after] {
+	&::after {
+		content: attr(data-content-after);
+	}
+}
+
+[class*='pr-u-animated'] {
+	@extend %animatedAll;
+}
+
+.pr-u-animated {
+	@extend %animated;
+}
+
+.pr-u-mask {
+	@extend %mask;
+}
+
+.pr-u-clearfix {
+	@extend %clearfix;
+}
+
+// clear is deprecated
+.pr-u-clearBoth,
+.pr-u-clear {
+	@extend %clearBoth;
+}
+
+// clearLeft is deprecated
+.pr-u-clearInlineStart,
+.pr-u-clearLeft {
+	@extend %clearInlineStart;
+}
+
+// clearRight is deprecated
+.pr-u-clearInlineEnd,
+.pr-u-clearRight {
+	@extend %clearInlineEnd;
+}
+
+.pr-u-listReset {
+	@extend %listReset;
+}
+
+.pr-u-descriptionListReset {
+	@extend %descriptionListReset;
+}
+
+.pr-u-summaryReset {
+	@extend %summaryReset;
+}
+
+.pr-u-buttonReset {
+	@extend %buttonReset;
+}
+
+.pr-u-ellipsis {
+	@extend %ellipsis;
+}
+
+.pr-u-h1 {
+	@extend %h1;
+}
+
+.pr-u-h2 {
+	@extend %h2;
+}
+
+.pr-u-h3 {
+	@extend %h3;
+}
+
+.pr-u-h4 {
+	@extend %h4;
+}
+
+.pr-u-h5 {
+	// Deprecated
+	@extend %h5;
+}
+
+.pr-u-h6 {
+	// Deprecated
+	@extend %h6;
+}
+
+.pr-u-bodyM {
+	@extend %bodyM;
+}
+
+.pr-u-bodyS {
+	@extend %bodyS;
+}
+
+.pr-u-bodyXS {
+	@extend %bodyXS;
+}
+
+// textLeft is deprecated
+.pr-u-textLeft {
+	@extend %textLeft;
+}
+
+// textRight is deprecated
+.pr-u-textRight {
+	@extend %textRight;
+}
+
+// textCenter is deprecated
+.pr-u-textCenter {
+	@extend %textCenter;
+}
+
+.pr-u-textLight {
+	@extend %textLight;
+}
+
+.pr-u-textPlaceholder {
+	@extend %textPlaceholder;
+}
+
+.pr-u-textDefault {
+	@extend %textDefault;
+}
+
+.pr-u-fontWeightRegular {
+	@extend %fontWeightRegular;
+}
+
+.pr-u-fontWeightSemiBold {
+	@extend %fontWeightSemiBold;
+}
+
+.pr-u-noSpinButtons {
+	@extend %noSpinButtons;
+}
+
+.pr-u-fontFamily {
+	@extend %fontFamily;
+}
+
+.pr-u-fontFamilyCursive {
+	@extend %fontFamilyCursive;
+}
+
+.pr-u-fontFamilyBrand {
+	@extend %fontFamilyBrand;
+}
+
+.pr-u-focusVisible {
+	@extend %focusVisible;
 }
 
 @include core.classes('float', core.$float);
@@ -350,12 +488,16 @@
 	}
 }
 
+%inset0 {
+	inset: 0 !important;
+}
+
 @each $direction in core.$boxDirection {
 	@if $direction == '' {
 		// insetReset is deprecated
 		.pr-u-inset0,
 		.pr-u-insetReset {
-			inset: 0 !important;
+			@extend %inset0;
 		}
 	} @else if $direction == 'top' or $direction == 'bottom' or $direction == 'left' or $direction == 'right' {
 		// Reset is deprecated
@@ -384,269 +526,146 @@
 // Delete when all utilities are prefixed in .pr-u-
 @if config.$deprecatedUtilityPrefix {
 	[class*='u-animated'] {
-		animation-duration: var(--commons-animations-duration, var(--commons-animations-durations-standard));
-		animation-timing-function: var(--commons-animations-function);
-
-		&.mod-animation-duration-fast {
-			--commons-animations-duration: var(--commons-animations-durations-fast);
-		}
-
-		&.mod-animation-duration-slow {
-			--commons-animations-duration: var(--commons-animations-durations-slow);
-		}
+		@extend %animatedAll;
 	}
 
 	.u-animated {
-		&FadeIn,
-		&FadeOut {
-			animation-name: fadeIn;
-
-			@include keyframe.fadeIn;
-		}
-
-		&ScaleIn,
-		&ScaleOut {
-			animation-name: scaleIn;
-
-			@include keyframe.scaleIn;
-		}
-
-		&ScaleInTop,
-		&ScaleOutTop {
-			animation-name: scaleInTop;
-
-			@include keyframe.scaleIn;
-		}
-
-		&ScaleInRight,
-		&ScaleOutRight {
-			animation-name: scaleInRight;
-
-			@include keyframe.scaleInRight;
-		}
-
-		&ScaleInBottom,
-		&ScaleOutBottom {
-			animation-name: scaleInBottom;
-
-			@include keyframe.scaleInBottom;
-		}
-
-		&ScaleInLeft,
-		&ScaleOutLeft {
-			animation-name: scaleInLeft;
-
-			@include keyframe.scaleInLeft;
-		}
-
-		&SlideIn,
-		&SlideInTop,
-		&SlideOut,
-		&SlideOutTop {
-			animation-name: slideIn;
-
-			@include keyframe.slideIn;
-		}
-
-		&SlideInRight,
-		&SlideOutRight {
-			animation-name: slideInRight;
-
-			@include keyframe.slideInRight;
-		}
-
-		&SlideInBottom,
-		&SlideOutBottom {
-			animation-name: slideInBottom;
-
-			@include keyframe.slideInBottom;
-		}
-
-		&SlideInLeft,
-		&SlideOutLeft {
-			animation-name: slideInLeft;
-
-			@include keyframe.slideInLeft;
-		}
-
-		&Shake {
-			animation-name: shake;
-
-			@include keyframe.shake;
-		}
-
-		&Pulse {
-			animation-name: pulse;
-			animation-direction: alternate;
-			animation-iteration-count: var(--commons-animations-iteration-count);
-
-			@include keyframe.pulse;
-		}
-
-		&FadeOut,
-		&SlideOut,
-		&SlideOutTop,
-		&SlideOutRight,
-		&SlideOutBottom,
-		&SlideOutLeft,
-		&ScaleOut,
-		&ScaleOutTop,
-		&ScaleOutRight,
-		&ScaleOutBottom,
-		&ScaleOutLeft {
-			animation-direction: reverse;
-		}
+		@extend %animated;
 	}
 
 	.u-mask {
-		@include a11y.mask('!important');
+		@extend %mask;
 	}
 
 	.u-clearfix {
-		@include reset.clearfix('!important');
+		@extend %clearfix;
 	}
 
 	// clear is deprecated
 	.u-clearBoth,
 	.u-clear {
-		@include reset.clear('both', '!important');
+		@extend %clearBoth;
 	}
 
 	// clearLeft is deprecated
 	.u-clearInlineStart,
 	.u-clearLeft {
-		@include reset.clear('inline-start', '!important');
+		@extend %clearInlineStart;
 	}
 
 	// clearRight is deprecated
 	.u-clearInlineEnd,
 	.u-clearRight {
-		@include reset.clear('inline-end', '!important');
+		@extend %clearInlineEnd;
 	}
 
 	.u-listReset {
-		@include reset.list('!important');
+		@extend %listReset;
 	}
 
 	.u-descriptionListReset {
-		@include reset.list($list: 'dl', $suffix: '!important');
+		@extend %descriptionListReset;
 	}
 
 	.u-summaryReset {
-		@include reset.summary('!important');
+		@extend %summaryReset;
 	}
 
 	.u-buttonReset {
-		@include reset.button('!important');
+		@extend %buttonReset;
 	}
 
 	.u-ellipsis {
-		@include text.ellipsis('!important');
+		@extend %ellipsis;
 	}
 
 	.u-h1 {
-		font: var(--pr-t-font-heading-1);
-		color: var(--pr-t-color-text-heading);
-
-		&.mod-XXXL {
-			// Deprecated
-			@include title.XXXL;
-		}
+		@extend %h1;
 	}
 
 	.u-h2 {
-		font: var(--pr-t-font-heading-2);
-		color: var(--pr-t-color-text-heading);
+		@extend %h2;
 	}
 
 	.u-h3 {
-		font: var(--pr-t-font-heading-3);
-		color: var(--pr-t-color-text-heading);
+		@extend %h3;
 	}
 
 	.u-h4 {
-		font: var(--pr-t-font-heading-4);
-		color: var(--pr-t-color-text-heading);
+		@extend %h4;
 	}
 
 	.u-h5 {
 		// Deprecated
-		@include title.h5;
+		@extend %h5;
 	}
 
 	.u-h6 {
 		// Deprecated
-		@include title.h6;
+		@extend %h6;
 	}
 
 	.u-bodyM {
-		font: var(--pr-t-font-body-M);
+		@extend %bodyM;
 	}
 
 	.u-bodyS {
-		font: var(--pr-t-font-body-S);
+		@extend %bodyS;
 	}
 
 	.u-bodyXS {
-		font: var(--pr-t-font-body-XS);
+		@extend %bodyXS;
 	}
 
 	// textLeft is deprecated
 	.u-textLeft {
-		text-align: start !important;
+		@extend %textLeft;
 	}
 
 	// textRight is deprecated
 	.u-textRight {
-		text-align: end !important;
+		@extend %textRight;
 	}
 
 	// textCenter is deprecated
 	.u-textCenter {
-		text-align: center !important;
+		@extend %textCenter;
 	}
 
 	.u-textLight {
-		color: var(--palettes-neutral-600) !important;
+		@extend %textLight;
 	}
 
 	.u-textPlaceholder {
-		color: var(--palettes-neutral-400) !important;
+		@extend %textPlaceholder;
 	}
 
 	.u-textDefault {
-		color: var(--palettes-neutral-700) !important;
+		@extend %textDefault;
 	}
 
 	.u-fontWeightRegular {
-		font-weight: 400 !important;
+		@extend %fontWeightRegular;
 	}
 
 	.u-fontWeightSemiBold {
-		font-weight: 600 !important;
+		@extend %fontWeightSemiBold;
 	}
 
 	.u-noSpinButtons {
-		&::-webkit-outer-spin-button,
-		&::-webkit-inner-spin-button {
-			appearance: none !important;
-		}
-
-		&[type='number'] {
-			appearance: textfield !important;
-		}
+		@extend %noSpinButtons;
 	}
 
 	.u-fontFamily {
-		font-family: var(--pr-t-font-family) !important;
+		@extend %fontFamily;
 	}
 
 	.u-fontFamilyCursive {
-		font-family: var(--pr-t-font-family-cursive) !important;
+		@extend %fontFamilyCursive;
 	}
 
 	.u-fontFamilyBrand {
-		font-family: var(--pr-t-font-family-brand) !important;
+		@extend %fontFamilyBrand;
 	}
 
 
@@ -663,7 +682,7 @@
 			// insetReset is deprecated
 			.u-inset0,
 			.u-insetReset {
-				inset: 0 !important;
+				@extend %inset0;
 			}
 		} @else if $direction == 'top' or $direction == 'bottom' or $direction == 'left' or $direction == 'right' {
 			// Reset is deprecated
