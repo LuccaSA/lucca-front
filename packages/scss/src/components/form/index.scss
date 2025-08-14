@@ -94,12 +94,10 @@
 			.inlineMessage {
 				@include inlineMessage.disabled;
 			}
-		.formLabel-tag {
-			@include tag.disabled;
-		}
 
-		.inlineMessage {
-			@include inlineMessage.disabled;
+			.formLabel-tag {
+				@include tag.disabled;
+			}
 		}
 	}
 

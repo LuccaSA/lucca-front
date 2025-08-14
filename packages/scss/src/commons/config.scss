@@ -5,6 +5,7 @@
 
 $layers: 'reset, base, components, mods, states, product, utils' !default;
 
+/* stylelint-disable-next-line layer-name-pattern */
 @layer #{$layers};
 
 $isNamespaced: false !default;
