@@ -78,7 +78,7 @@ export function migrateComponent(sourceFile: SourceFile, path: string, tree: Tre
 							`mod-withIcon`,
 							`is-${button.inputs.state}`,
 							`mod-delete`,
-							`mod-${button.size}`
+							`mod-${button.inputs.size}`
 						].includes(c);
 					}).join(' ');
 					templateUpdate.remove(button.nodeOffset + classesNode.keySpan.start.offset - 1, classesNode.sourceSpan.toString().length + 1);
