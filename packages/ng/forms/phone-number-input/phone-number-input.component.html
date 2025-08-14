@@ -1,9 +1,9 @@
 <fieldset [disabled]="disabled" class="phoneNumber-fieldset">
 	<legend>
-		<span class="u-mask">{{ label }}</span>
+		<span class="pr-u-mask">{{ label }}</span>
 	</legend>
 	<label>
-		<span class="u-mask">Prefix</span>
+		<span class="pr-u-mask">Prefix</span>
 		<lu-simple-select
 			[options]="prefixesDisplay()"
 			[ngModel]="prefixEntry()"
@@ -32,7 +32,7 @@
 			</ng-container>
 		</lu-simple-select>
 	</label>
-	<label for="phoneNumberFieldsetTextfieldInput" class="u-mask">Number</label>
+	<label for="phoneNumberFieldsetTextfieldInput" class="pr-u-mask">Number</label>
 	<div class="textField phoneNumber-fieldset-textfield">
 		<div class="textField-input">
 			<input

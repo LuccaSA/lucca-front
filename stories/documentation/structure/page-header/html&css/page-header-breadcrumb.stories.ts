@@ -20,7 +20,7 @@ function getTemplate(args: PageHeaderBreadcrumbStory): string {
 
 	return `<header class="pageHeader mod-withBreadcrumbs ${sticky}">
 	<nav class="breadcrumbs" aria-describedby="breadcrumbs-title">
-		<p id="breadcrumbs-title" class="u-mask">Breadcrumbs</p>
+		<p id="breadcrumbs-title" class="pr-u-mask">Breadcrumbs</p>
 		<ol class="breadcrumbs-list">
 			<li class="breadcrumbs-list-item"><a class="breadcrumbs-list-item-action">Page 0</a></li>
 			<li class="breadcrumbs-list-item"><a class="breadcrumbs-list-item-action">Page 1</a></li>
@@ -33,28 +33,28 @@ function getTemplate(args: PageHeaderBreadcrumbStory): string {
 			<div>
 				<button type="button" class="button mod-onlyIcon mod-text" luTooltip="Modifier">
 					<span aria-hidden="true" class="lucca-icon icon-officePen"></span>
-					<span class="u-mask">Modifier</span>
+					<span class="pr-u-mask">Modifier</span>
 				</button>
 				<button type="button" class="button mod-onlyIcon mod-text" luTooltip="Copier">
 					<span aria-hidden="true" class="lucca-icon icon-fileCopy"></span>
-					<span class="u-mask">Copier</span>
+					<span class="pr-u-mask">Copier</span>
 				</button>
 				<button type="button" class="button mod-onlyIcon mod-text" luTooltip="Supprimer">
 					<span aria-hidden="true" class="lucca-icon icon-trashDelete"></span>
-					<span class="u-mask">Supprimer</span>
+					<span class="pr-u-mask">Supprimer</span>
 				</button>
 			</div>
 		</div>
 		<div class="pageHeader-content-actions">
 			<label class="textfield mod-search">
 				<input class="textfield-input" type="text" placeholder="ex : Mon précieux">
-				<span class="textfield-label u-mask">Rechercher</span>
+				<span class="textfield-label pr-u-mask">Rechercher</span>
 			</label>
 			<button type="button" class="button">Button</button>
 			<button type="button" class="button mod-outline">Button</button>
 			<button type="button" class="button mod-onlyIcon mod-text">
 				<span aria-hidden="true" class="lucca-icon icon-menuDots"></span>
-				<span class="u-mask">voir plus</span>
+				<span class="pr-u-mask">voir plus</span>
 			</button>
 		</div>
 	</div>

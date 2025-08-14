@@ -1,5 +1,5 @@
 @if (employee$ | async; as employee) {
-	<div class="userPopover u-animatedFadeIn">
+	<div class="userPopover pr-u-animatedFadeIn">
 		<section class="userPopover-details">
 			<div class="userPopover-details-avatar avatar">
 				@switch (userPictureDisplay$ | async) {
@@ -22,7 +22,7 @@
 				}
 			</div>
 			<div class="userPopover-details-info">
-				<h1 class="userPopover-details-info-name u-ellipsis">
+				<h1 class="userPopover-details-info-name pr-u-ellipsis">
 					@if (!employee._links?.hrCard?.href) {
 						<ng-container *ngTemplateOutlet="fullNameDisplay" />
 					} @else {
@@ -35,13 +35,13 @@
 					><span translate="no">{{ employee.firstName }} {{ employee.lastName }}</span></ng-template
 				>
 				@if (employee.jobTitle) {
-					<p class="userPopover-details-info-detail u-ellipsis">{{ employee.jobTitle }}</p>
+					<p class="userPopover-details-info-detail pr-u-ellipsis">{{ employee.jobTitle }}</p>
 				}
 				@if (employee.userDepartment?.name) {
-					<p class="userPopover-details-info-detail u-ellipsis">{{ employee.userDepartment?.name }}</p>
+					<p class="userPopover-details-info-detail pr-u-ellipsis">{{ employee.userDepartment?.name }}</p>
 				}
 
-				<p class="userPopover-details-info-detail u-marginTopXS">
+				<p class="userPopover-details-info-detail pr-u-marginTopXS">
 					<!-- HORS CONTRAT-->
 					@if (employee.dtContractStart | isFuture) {
 						<span class="userPopover-details-info-detail-workplace">
@@ -73,7 +73,7 @@
 									@if (employee.currentWorkLocation) {
 										{{ employee.currentWorkLocation?.name }}
 										@if (employee.currentWorkLocation?.area) {
-											<span class="u-textLight"> – {{ employee.currentWorkLocation?.area?.name }}</span>
+											<span class="pr-u-textLight"> – {{ employee.currentWorkLocation?.area?.name }}</span>
 										}
 									}
 									@if (!employee.currentWorkLocation) {
@@ -83,7 +83,7 @@
 									@if (!(employee.dtContractStart | isFuture) && (employee.dtContractEnd | isFutureOrToday)) {
 										{{ intl.EMPLOYEE_CARD_PANEL_ABSENCE_LABEL }}
 										@if (employee.leaveEndsOn) {
-											<span class="u-textLight"> – {{ employee.leaveEndsOn | leaveEndsDisplay: employee.leaveEndIsFirstHalfDay }} </span>
+											<span class="pr-u-textLight"> – {{ employee.leaveEndsOn | leaveEndsDisplay: employee.leaveEndIsFirstHalfDay }} </span>
 										}
 									}
 								}

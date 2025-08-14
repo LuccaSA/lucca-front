@@ -23,7 +23,7 @@ function getTemplate(args: TreeStory): string {
 					<div class="dataTable-body-row-cell-expand">
 						<button type="button" class="dataTable-body-row-cell-expand-button button" aria-expanded="true">
 							<span aria-hidden="true" class="lucca-icon icon-arrowChevronTop"></span
-							><span class="u-mask">Afficher 2 lignes supplémentaires</span>
+							><span class="pr-u-mask">Afficher 2 lignes supplémentaires</span>
 						</button>
 						Text
 					</div>
@@ -36,7 +36,7 @@ function getTemplate(args: TreeStory): string {
 					<div class="dataTable-body-row-cell-expand">
 						<button type="button" class="dataTable-body-row-cell-expand-button button" aria-expanded="false">
 							<span aria-hidden="true" class="lucca-icon icon-arrowChevronTop"></span
-							><span class="u-mask">Afficher 1 ligne supplémentaire</span>
+							><span class="pr-u-mask">Afficher 1 ligne supplémentaire</span>
 						</button>
 						Text
 					</div>
@@ -56,7 +56,7 @@ function getTemplate(args: TreeStory): string {
 					<div class="dataTable-body-row-cell-expand">
 						<button type="button" class="dataTable-body-row-cell-expand-button button" aria-expanded="false">
 							<span aria-hidden="true" class="lucca-icon icon-arrowChevronTop"></span
-							><span class="u-mask">Afficher 1 ligne supplémentaire</span>
+							><span class="pr-u-mask">Afficher 1 ligne supplémentaire</span>
 						</button>
 						Text
 					</div>

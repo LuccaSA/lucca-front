@@ -26,7 +26,7 @@ function getTemplate(args: GaugeVerticalStory): string {
 	const classes = [args.palette].filter(Boolean).join(' ');
 	const thin = args.thin ? `mod-thin` : '';
 	return `
-	<div class="u-displayFlex" style="height: 100px">
+	<div class="pr-u-displayFlex" style="height: 100px">
 		<div class="gauge mod-vertical ${classes} ${thin}">
 			<div class="gauge-bar" style="height:50%"></div>
 		</div>

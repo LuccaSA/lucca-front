@@ -132,7 +132,7 @@ export const CustomPosition: StoryObj<PopoverDirective> = {
 	<ng-template #contentRef>
 		<div class="popover-contentOptional">
 			<div class="verticalNavigation mod-iconless">
-				<ul class="verticalNavigation-list u-listReset">
+				<ul class="verticalNavigation-list pr-u-listReset">
 					<li class="verticalNavigation-list-item"><a href="#" class="verticalNavigation-list-item-link">Item A</a></li>
 					<li class="verticalNavigation-list-item"><a href="#" class="verticalNavigation-list-item-link">Item B</a></li>
 					<li class="verticalNavigation-list-item"><a href="#" class="verticalNavigation-list-item-link">Item C</a></li>

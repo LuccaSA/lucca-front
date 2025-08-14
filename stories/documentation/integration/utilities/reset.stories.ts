@@ -9,28 +9,28 @@ export default {
 function getTemplate(args: ResetStory): string {
 	return `<div class="demo-utilityWrapper">
 	<div class="demo-utility">
-		<code class="code">u-buttonReset</code>
-		<button class="u-buttonReset">Button</button>
+		<code class="code">pr-u-buttonReset</code>
+		<button class="pr-u-buttonReset">Button</button>
 	</div>
 	<div class="demo-utility">
-		<code class="code">u-listReset</code>
-		<ul class="u-listReset">
+		<code class="code">pr-u-listReset</code>
+		<ul class="pr-u-listReset">
 			<li>List item</li>
 			<li>List item</li>
 			<li>List item</li>
 		</ul>
 	</div>
 	<div class="demo-utility">
-		<code class="code">u-descriptionListReset</code>
-		<dl class="u-descriptionListReset">
+		<code class="code">pr-u-descriptionListReset</code>
+		<dl class="pr-u-descriptionListReset">
 			<dt>Term</dt>
 			<dd>Description</dd>
 		</dl>
 	</div>
 	<div class="demo-utility">
-		<code class="code">u-summaryReset</code>
+		<code class="code">pr-u-summaryReset</code>
 		<details>
-			<summary class="u-summaryReset"><span class="tag">v19.1</span><br>Summary</summary>
+			<summary class="pr-u-summaryReset"><span class="tag">v19.1</span><br>Summary</summary>
 			Details
 		</details>
 	</div>

@@ -57,7 +57,7 @@ function getTemplate(args: FramedBasicStory): string {
 						<select>
 							<option>Option 1</option>
 						</select>
-						<span class="select-label u-mask">Select label</span>
+						<span class="select-label pr-u-mask">Select label</span>
 					</label>
 				</div>
 			</div>
@@ -77,7 +77,7 @@ function getTemplate(args: FramedBasicStory): string {
 						<select>
 							<option>Option 1</option>
 						</select>
-						<span class="select-label u-mask">Select label</span>
+						<span class="select-label pr-u-mask">Select label</span>
 					</label>
 				</div>
 			</div>

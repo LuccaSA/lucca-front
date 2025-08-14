@@ -97,10 +97,10 @@ export class RichTextInputComponent implements OnInit, OnDestroy, ControlValueAc
 		this.#editor = createEditor({
 			theme: {
 				text: {
-					strikethrough: 'u-textDecorationLineThrough',
-					bold: 'u-fontWeightBold',
-					italic: 'u-fontStyleItalic',
-					underline: 'u-textDecorationUnderline',
+					strikethrough: 'pr-u-textDecorationLineThrough',
+					bold: 'pr-u-fontWeightBold',
+					italic: 'pr-u-fontStyleItalic',
+					underline: 'pr-u-textDecorationUnderline',
 				},
 			},
 			nodes: [...this.#customNodes()],

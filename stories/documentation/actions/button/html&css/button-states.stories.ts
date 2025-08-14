@@ -7,7 +7,7 @@ export default {
 } as Meta;
 
 function getTemplate(args: ButtonStatesStory): string {
-	return `<div class="u-displayFlex pr-u-gap100 u-alignItemsCenter">
+	return `<div class="pr-u-displayFlex pr-u-gap100 pr-u-alignItemsCenter">
 	<button type="button" class="button is-loading">Button</button>
 	<button type="button" class="button is-success">Button</button>
 	<button type="button" class="button is-error">Button</button>

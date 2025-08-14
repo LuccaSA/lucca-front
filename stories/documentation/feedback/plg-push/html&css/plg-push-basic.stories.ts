@@ -18,7 +18,7 @@ function getTemplate(args: PLGPushBasicStory): string {
 			Bénéficiez de toutes les options liées au télétravail avec Timmi Office.
 			<a class="link mod-icon" href="#" target="_blank" rel="noopener noreferrer">
 				<span class="link-text">Demander un essai gratuit</span><!-- no text node here --><span class="link-icon"><span aria-hidden="true" class="lucca-icon icon-arrowExternal"></span></span>
-				<span class="u-mask">Ouvrir dans une nouvelle fenêtre</span>
+				<span class="pr-u-mask">Ouvrir dans une nouvelle fenêtre</span>
 			</a>
 		</div>
 	</div>

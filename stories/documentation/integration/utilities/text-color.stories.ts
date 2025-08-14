@@ -8,32 +8,32 @@ export default {
 
 function getTemplate(args: TextColorStory): string {
 	return `<div class="demo-utilityWrapper">
-	<div class="u-textNeutral demo-utility"><code class="code">u-textNeutral</code> Lorem ipsum</div>
-	<div class="u-textProduct demo-utility"><code class="code">u-textProduct</code> Lorem ipsum</div>
-	<div class="u-textBrand demo-utility"><code class="code">u-textBrand</code> Lorem ipsum</div>
+	<div class="pr-u-textNeutral demo-utility"><code class="code">pr-u-textNeutral</code> Lorem ipsum</div>
+	<div class="pr-u-textProduct demo-utility"><code class="code">pr-u-textProduct</code> Lorem ipsum</div>
+	<div class="pr-u-textBrand demo-utility"><code class="code">pr-u-textBrand</code> Lorem ipsum</div>
 </div>
 <div class="demo-utilityWrapper">
-	<div class="u-textSuccess demo-utility"><code class="code">u-textSuccess</code> Lorem ipsum</div>
-	<div class="u-textWarning demo-utility"><code class="code">u-textWarning</code> Lorem ipsum</div>
-	<div class="u-textCritical demo-utility"><code class="code">u-textCritical</code> Lorem ipsum</div>
+	<div class="pr-u-textSuccess demo-utility"><code class="code">pr-u-textSuccess</code> Lorem ipsum</div>
+	<div class="pr-u-textWarning demo-utility"><code class="code">pr-u-textWarning</code> Lorem ipsum</div>
+	<div class="pr-u-textCritical demo-utility"><code class="code">pr-u-textCritical</code> Lorem ipsum</div>
 </div>
 <div class="demo-utilityWrapper">
-	<div class="u-textKiwi demo-utility"><code class="code">u-textKiwi</code> Lorem ipsum</div>
-	<div class="u-textLime demo-utility"><code class="code">u-textLime</code> Lorem ipsum</div>
-	<div class="u-textCucumber demo-utility"><code class="code">u-textCucumber</code> Lorem ipsum</div>
-	<div class="u-textMint demo-utility"><code class="code">u-textMint</code> Lorem ipsum</div>
-	<div class="u-textGlacier demo-utility"><code class="code">u-textGlacier</code> Lorem ipsum</div>
-	<div class="u-textLagoon demo-utility"><code class="code">u-textLagoon</code> Lorem ipsum</div>
-	<div class="u-textBlueberry demo-utility"><code class="code">u-textBlueberry</code> Lorem ipsum</div>
-	<div class="u-textLavender demo-utility"><code class="code">u-textLavender</code> Lorem ipsum</div>
-	<div class="u-textGrape demo-utility"><code class="code">u-textGrape</code> Lorem ipsum</div>
-	<div class="u-textWatermelon demo-utility"><code class="code">u-textWatermelon</code> Lorem ipsum</div>
-	<div class="u-textPumpkin demo-utility"><code class="code">u-textPumpkin</code> Lorem ipsum</div>
-	<div class="u-textPineapple demo-utility"><code class="code">u-textPineapple</code> Lorem ipsum</div>
+	<div class="pr-u-textKiwi demo-utility"><code class="code">pr-u-textKiwi</code> Lorem ipsum</div>
+	<div class="pr-u-textLime demo-utility"><code class="code">pr-u-textLime</code> Lorem ipsum</div>
+	<div class="pr-u-textCucumber demo-utility"><code class="code">pr-u-textCucumber</code> Lorem ipsum</div>
+	<div class="pr-u-textMint demo-utility"><code class="code">pr-u-textMint</code> Lorem ipsum</div>
+	<div class="pr-u-textGlacier demo-utility"><code class="code">pr-u-textGlacier</code> Lorem ipsum</div>
+	<div class="pr-u-textLagoon demo-utility"><code class="code">pr-u-textLagoon</code> Lorem ipsum</div>
+	<div class="pr-u-textBlueberry demo-utility"><code class="code">pr-u-textBlueberry</code> Lorem ipsum</div>
+	<div class="pr-u-textLavender demo-utility"><code class="code">pr-u-textLavender</code> Lorem ipsum</div>
+	<div class="pr-u-textGrape demo-utility"><code class="code">pr-u-textGrape</code> Lorem ipsum</div>
+	<div class="pr-u-textWatermelon demo-utility"><code class="code">pr-u-textWatermelon</code> Lorem ipsum</div>
+	<div class="pr-u-textPumpkin demo-utility"><code class="code">pr-u-textPumpkin</code> Lorem ipsum</div>
+	<div class="pr-u-textPineapple demo-utility"><code class="code">pr-u-textPineapple</code> Lorem ipsum</div>
 </div>
 <div class="demo-utilityWrapper">
-	<div class="u-textLight demo-utility"><code class="code">u-textLight</code> Lorem ipsum</div>
-	<div class="u-textPlaceholder demo-utility"><code class="code">u-textPlaceholder</code> Lorem ipsum</div>
+	<div class="pr-u-textLight demo-utility"><code class="code">pr-u-textLight</code> Lorem ipsum</div>
+	<div class="pr-u-textPlaceholder demo-utility"><code class="code">pr-u-textPlaceholder</code> Lorem ipsum</div>
 </div>`;
 }
 

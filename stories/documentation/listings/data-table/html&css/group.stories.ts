@@ -23,7 +23,7 @@ function getTemplate(args: GroupStory): string {
 					<div class="dataTable-body-row-cell-expand">
 						<button type="button" class="dataTable-body-row-cell-expand-button button" aria-expanded="false">
 							<span aria-hidden="true" class="lucca-icon icon-arrowChevronTop"></span
-							><span class="u-mask">Afficher 2 lignes supplémentaires</span>
+							><span class="pr-u-mask">Afficher 2 lignes supplémentaires</span>
 						</button>
 						<span class="dataTable-body-row-cell-expand-label">Text</span>
 						<span class="numericBadge">7</span>
@@ -47,7 +47,7 @@ function getTemplate(args: GroupStory): string {
 					<div class="dataTable-body-row-cell-expand">
 						<button type="button" class="dataTable-body-row-cell-expand-button button" aria-expanded="true">
 							<span aria-hidden="true" class="lucca-icon icon-arrowChevronTop"></span
-							><span class="u-mask">Afficher 2 lignes supplémentaires</span>
+							><span class="pr-u-mask">Afficher 2 lignes supplémentaires</span>
 						</button>
 						<span class="dataTable-body-row-cell-expand-label">Text</span>
 						<span class="numericBadge">7</span>

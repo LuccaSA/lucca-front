@@ -8,8 +8,8 @@ export default {
 
 function getTemplate(args: VisibilityStory): string {
 	return `<div class="demo-utilityWrapper">
-	<div class="demo-utility"><code class="code">u-visibilityHidden</code> <span class="u-visibilityHidden">Lorem ipsum</span></div>
-	<div class="demo-utility"><code class="code">u-visibilityVisible</code> <span class="u-visibilityVisible">Lorem ipsum</span></div>
+	<div class="demo-utility"><code class="code">pr-u-visibilityHidden</code> <span class="pr-u-visibilityHidden">Lorem ipsum</span></div>
+	<div class="demo-utility"><code class="code">pr-u-visibilityVisible</code> <span class="pr-u-visibilityVisible">Lorem ipsum</span></div>
 </div>
 `;
 }

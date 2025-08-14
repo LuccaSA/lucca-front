@@ -16,7 +16,7 @@ export class LuNumberPipe implements PipeTransform {
 		const decimal = split[1];
 		const hideDecimal = Math.round(number) === number;
 		if (precision > 0) {
-			return `${integral}<span class="decimal-part${hideDecimal ? ' u-hidden' : ''}">${separator}${decimal}</span>`;
+			return `${integral}<span class="decimal-part${hideDecimal ? ' pr-u-hidden' : ''}">${separator}${decimal}</span>`;
 		} else {
 			return integral;
 		}

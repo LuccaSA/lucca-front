@@ -43,7 +43,7 @@ function getTemplate(args: ArrowBasicStory): string {
 
 	if (args.field === 'radio') {
 		return `<fieldset class="form-fieldset mod-inline">
-	<legend class="formLabel u-mask">
+	<legend class="formLabel pr-u-mask">
 		Label
 		<sup class="formLabel-required" aria-hidden="true">*</sup>
 	</legend>

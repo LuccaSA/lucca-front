@@ -17,6 +17,7 @@
 @mixin optionItemStyle {
 	:host {
 		--components-options-checkbox-color: var(--palettes-700, var(--palettes-product-700)); // Allow palette override
+
 		display: block;
 		scroll-margin: var(--pr-t-spacings-50);
 

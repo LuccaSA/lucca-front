@@ -1,6 +1,6 @@
 @if (layout() === "fieldset") {
 	<fieldset class="form-fieldset" [class.mod-inline]="inline()" [class.mod-S]="size() === 'S'">
-		<legend class="formLabel" [class.u-mask]="hiddenLabel()" attr.aria-hidden="{{ hiddenLabel() }}">
+		<legend class="formLabel" [class.pr-u-mask]="hiddenLabel()" attr.aria-hidden="{{ hiddenLabel() }}">
 			<ng-container *luPortal="label()"></ng-container
 			><!--
 	--><sup class="formLabel-required" aria-hidden="true" *ngIf="isInputRequired()">*</sup>
@@ -34,7 +34,7 @@
 		[class.mod-counter]="counter() > 0"
 		id="{{ id() }}-label"
 		for="{{ id() }}"
-		[class.u-mask]="hiddenLabel()"
+		[class.pr-u-mask]="hiddenLabel()"
 		attr.role="{{ rolePresentationLabel() ? 'presentation' : null }}"
 	>
 		<ng-container *luPortal="label()"></ng-container
@@ -47,9 +47,9 @@
 			<span class="formLabel-tag tag">{{ tag() }}</span>
 		}
 		@if (counter() > 0) {
-			<span class="formLabel-counter" [class.u-textError]="contentLength > counter()" id="{{ id() }}-counter" aria-live="polite">
+			<span class="formLabel-counter" [class.pr-u-textError]="contentLength > counter()" id="{{ id() }}-counter" aria-live="polite">
 				<span aria-hidden="true">{{ contentLength }}/{{ counter() }}</span>
-				<span class="u-mask">{{ intl.counter | intlParams: { current: contentLength, max: counter() } }}</span>
+				<span class="pr-u-mask">{{ intl.counter | intlParams: { current: contentLength, max: counter() } }}</span>
 			</span>
 		}
 	</label>

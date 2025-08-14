@@ -16,35 +16,35 @@ function getTemplate(args: PageHeaderBackStory): string {
 			<nav role="presentation" class="pageHeader-content-title-back">
 				<a href="#" class="button mod-onlyIcon mod-text">
 					<span class="lucca-icon icon-arrowLeft" aria-hidden="true"></span>
-					<span class="u-mask">Page parente</span>
+					<span class="pr-u-mask">Page parente</span>
 				</a>
 			</nav>
 			<h1 class="pr-u-margin0">Page courante</h1>
 			<div>
 				<button type="button" class="button mod-onlyIcon mod-text" luTooltip="Modifier">
 					<span aria-hidden="true" class="lucca-icon icon-officePen"></span>
-					<span class="u-mask">Modifier</span>
+					<span class="pr-u-mask">Modifier</span>
 				</button>
 				<button type="button" class="button mod-onlyIcon mod-text" luTooltip="Copier">
 					<span aria-hidden="true" class="lucca-icon icon-fileCopy"></span>
-					<span class="u-mask">Copier</span>
+					<span class="pr-u-mask">Copier</span>
 				</button>
 				<button type="button" class="button mod-onlyIcon mod-text" luTooltip="Supprimer">
 					<span aria-hidden="true" class="lucca-icon icon-trashDelete"></span>
-					<span class="u-mask">Supprimer</span>
+					<span class="pr-u-mask">Supprimer</span>
 				</button>
 			</div>
 		</div>
 		<div class="pageHeader-content-actions">
 			<label class="textfield mod-search">
 				<input class="textfield-input" type="text" placeholder="ex : Mon précieux">
-				<span class="textfield-label u-mask">Rechercher</span>
+				<span class="textfield-label pr-u-mask">Rechercher</span>
 			</label>
 			<button type="button" class="button">Button</button>
 			<button type="button" class="button mod-outline">Button</button>
 			<button type="button" class="button mod-onlyIcon mod-text">
 				<span aria-hidden="true" class="lucca-icon icon-menuDots"></span>
-				<span class="u-mask">Voir plus</span>
+				<span class="pr-u-mask">Voir plus</span>
 			</button>
 		</div>
 	</div>

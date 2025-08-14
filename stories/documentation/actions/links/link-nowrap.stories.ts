@@ -9,7 +9,7 @@ export default {
 
 function getTemplate(args: LinkNoWrapStory): string {
 	return `<a class="link mod-icon" href="#" target="_blank">
-	<span class="link-text">Text link (without icon wrap)</span><!-- no text node here --><span class="link-icon"><span aria-hidden="true" class="lucca-icon icon-arrowExternal"></span></span><span class="u-mask">Open in a new window</span>
+	<span class="link-text">Text link (without icon wrap)</span><!-- no text node here --><span class="link-icon"><span aria-hidden="true" class="lucca-icon icon-arrowExternal"></span></span><span class="pr-u-mask">Open in a new window</span>
 </a>`;
 }
 

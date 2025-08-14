@@ -22,7 +22,7 @@ function getTemplate(args: TimelinesAddBetweenVerticalStory): string {
 			<div class="timeline-step-title">
 				<button type="button" class="timeline-stepAddBetweenStep-title">
 					<span class="timeline-step-title-icon" aria-hidden="true"></span>
-					<span class="u-mask">
+					<span class="pr-u-mask">
 						Ajouter une étape intermédiaire entre l’étape 1 et l’étape 2
 					</span>
 				</button>

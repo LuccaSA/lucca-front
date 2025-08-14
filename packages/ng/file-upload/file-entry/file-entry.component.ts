@@ -23,7 +23,7 @@ import { formatSize } from '../formatter';
 	encapsulation: ViewEncapsulation.None,
 	imports: [IconComponent, LuTooltipModule, ButtonComponent, InlineMessageComponent, DividerComponent, NgClass, FormFieldComponent, TextInputComponent, FormsModule, IntlParamsPipe],
 	host: {
-		class: 'u-displayContents',
+		class: 'pr-u-displayContents',
 	},
 })
 export class FileEntryComponent {

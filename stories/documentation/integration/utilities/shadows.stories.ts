@@ -8,12 +8,12 @@ export default {
 
 function getTemplate(args: ShadowsStory): string {
 	return `<div>
-	<div class="u-elevate1"><code class="code">u-elevate1</code></div>
-	<div class="u-elevate2"><code class="code">u-elevate2</code></div>
-	<div class="u-elevate3"><code class="code">u-elevate3</code></div>
-	<div class="u-elevate4"><code class="code">u-elevate4</code></div>
-	<div class="u-elevate5"><code class="code">u-elevate5</code></div>
-	<div class="u-elevate6"><code class="code">u-elevate6</code></div>
+	<div class="pr-u-elevate1"><code class="code">pr-u-elevate1</code></div>
+	<div class="pr-u-elevate2"><code class="code">pr-u-elevate2</code></div>
+	<div class="pr-u-elevate3"><code class="code">pr-u-elevate3</code></div>
+	<div class="pr-u-elevate4"><code class="code">pr-u-elevate4</code></div>
+	<div class="pr-u-elevate5"><code class="code">pr-u-elevate5</code></div>
+	<div class="pr-u-elevate6"><code class="code">pr-u-elevate6</code></div>
 </div>`;
 }
 

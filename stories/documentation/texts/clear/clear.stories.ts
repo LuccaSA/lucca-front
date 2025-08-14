@@ -38,7 +38,7 @@ function getTemplate(args: ClearBasicStory): string {
 	const product = args.product ? `palette-product` : '';
 	const disabled = args.disabled ? `disabled` : '';
 	const inverted = args.inverted ? `mod-inverted` : '';
-	return `<a href="#" class="clear ${s} ${inverted} ${product}" ${disabled}><span class="u-mask">Clear</span></a>`;
+	return `<a href="#" class="clear ${s} ${inverted} ${product}" ${disabled}><span class="pr-u-mask">Clear</span></a>`;
 }
 
 const Template: StoryFn<ClearBasicStory> = (args) => ({

@@ -57,7 +57,7 @@ export class DurationPickerComponent extends BasePickerComponent {
 	protected fieldsetSuffixClasses = computed(() => {
 		return {
 			'timePicker-fieldset-groupSeparator': true,
-			'u-visibilityHidden': this.shouldHideValue(),
+			'pr-u-visibilityHidden': this.shouldHideValue(),
 		};
 	});
 	protected separator = this.intl.timePickerTimeSeparator;
