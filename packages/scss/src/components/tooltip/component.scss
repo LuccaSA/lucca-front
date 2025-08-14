@@ -17,7 +17,7 @@
 	animation-duration: var(--commons-animations-durations-fast);
 	animation-iteration-count: 1;
 	hyphens: auto;
-	word-break: break-word;
+	overflow-wrap: break-word;
 
 	@include keyframe.scaleIn;
 
