@@ -17,7 +17,7 @@
 
 	@at-root ($atRoot) {
 		.dataTableWrapper {
-			border-radius: var(--commons-borderRadius-L);
+			border-radius: var(--components-dataTable-borderRadius);
 			border: 1px solid var(--commons-border-200);
 			overflow: var(--components-dataTable-overflow);
 			background-color: var(--components-dataTable-cell-background);

@@ -13,6 +13,9 @@ import { FileEntry } from '../file-upload-entry';
 	templateUrl: './single-file-upload.component.html',
 	styleUrls: ['./single-file-upload.component.scss'],
 	encapsulation: ViewEncapsulation.None,
+	host: {
+		'[class.mod-structure]': 'structure()',
+	},
 	imports: [LuSafeExternalSvgPipe, InputDirective, LuTooltipModule, FileEntryComponent, IntlParamsPipe],
 })
 export class SingleFileUploadComponent extends BaseFileUploadComponent {

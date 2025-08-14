@@ -63,6 +63,14 @@ $cursor: 'pointer', 'auto';
 	}
 }
 
+@mixin borderRadiusTokens($suffix: '!important') {
+	@each $key, $value in config.$borderRadiusTokens {
+		.pr-u-borderRadius#{transform.capitalize($key)} {
+			border-radius: var(--pr-t-border-radius-#{$key}) #{$suffix};
+		}
+	}
+}
+
 /* Variables */
 
 @mixin cssvars($name, $properties, $after: '') {
@@ -109,23 +117,6 @@ $cursor: 'pointer', 'auto';
 		@if config.$deprecatedUtilityPrefix {
 			.u-text#{transform.capitalize($palette)} {
 				color: var(--palettes-#{$palette}-700) #{$suffix};
-			}
-		}
-	}
-}
-
-@mixin borderRadius($suffix: '!important') {
-	@each $corner in $corners {
-		@each $key, $value in config.$borderRadius {
-			.pr-u-border#{transform.capitalize(transform.camelize($corner))}Radius#{transform.capitalize($key)} {
-				border-#{$corner}radius: var(--commons-borderRadius-#{$key}) #{$suffix};
-			}
-
-			// Deprecated .u- utilities
-			@if config.$deprecatedUtilityPrefix {
-				.u-border#{transform.capitalize(transform.camelize($corner))}Radius#{transform.capitalize($key)} {
-					border-#{$corner}radius: var(--commons-borderRadius-#{$key}) #{$suffix};
-				}
 			}
 		}
 	}
@@ -189,6 +180,23 @@ $cursor: 'pointer', 'auto';
 			.u-text#{transform.capitalize($key)} {
 				font-size: var(--sizes-#{$key}-fontSize) #{$suffix};
 				line-height: var(--sizes-#{$key}-lineHeight) #{$suffix};
+			}
+		}
+	}
+}
+
+@mixin borderRadius($suffix: '!important') {
+	@each $corner in $corners {
+		@each $key, $value in config.$borderRadius {
+			.pr-u-border#{transform.capitalize(transform.camelize($corner))}Radius#{transform.capitalize($key)} {
+				border-#{$corner}radius: var(--commons-borderRadius-#{$key}) #{$suffix};
+			}
+
+			// Deprecated .u- utilities
+			@if config.$deprecatedUtilityPrefix {
+				.u-border#{transform.capitalize(transform.camelize($corner))}Radius#{transform.capitalize($key)} {
+					border-#{$corner}radius: var(--commons-borderRadius-#{$key}) #{$suffix};
+				}
 			}
 		}
 	}

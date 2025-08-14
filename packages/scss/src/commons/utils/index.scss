@@ -378,7 +378,7 @@
 @include core.sizes;
 @include core.borderRadius;
 @include core.palettes;
-
+@include core.borderRadiusTokens;
 
 // Deprecated .u- utilities
 // Delete when all utilities are prefixed in .pr-u-

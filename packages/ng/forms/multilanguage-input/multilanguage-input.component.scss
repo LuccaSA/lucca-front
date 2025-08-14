@@ -7,6 +7,6 @@
 	&:focus-visible {
 		@include a11y.focusVisible;
 
-		border-radius: var(--commons-borderRadius-L);
+		border-radius: var(--pr-t-border-radius-structure);
 	}
 }
