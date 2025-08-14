@@ -21,7 +21,7 @@ export default {
 		resize: vertical;
 		overflow: hidden;
 		min-block-size: 394px;
-		border-radius: var(--commons-borderRadius-L);
+		border-radius: var(--pr-t-border-radius-100);
 		border: 1px solid var(--palettes-neutral-200);
 
 		> * {
@@ -52,7 +52,7 @@ export default {
 			width: 122px;
 			height: 32px;
 			background-color: var(--palettes-neutral-50);
-			border-radius: var(--commons-borderRadius-M);
+			border-radius: var(--pr-t-border-radius-50);
 		}
 
 		&::after {
@@ -62,7 +62,7 @@ export default {
 			width: 32px;
 			height: 32px;
 			background-color: var(--palettes-neutral-200);
-			border-radius: var(--commons-borderRadius-full);
+			border-radius: var(--pr-t-border-radius-full);
 		}
 	}
 	.appLayout-navSide {

@@ -13,7 +13,7 @@
 	flex-shrink: 0;
 	inline-size: var(--components-clear-size);
 	block-size: var(--components-clear-size);
-	border-radius: var(--commons-borderRadius-full);
+	border-radius: var(--pr-t-border-radius-full);
 
 	&::before,
 	&::after {
@@ -22,7 +22,7 @@
 	}
 
 	&::before {
-		border-radius: var(--commons-borderRadius-full);
+		border-radius: var(--pr-t-border-radius-full);
 		background-color: var(--components-clear-background);
 	}
 

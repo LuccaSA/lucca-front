@@ -40,7 +40,7 @@
 %popover-content {
 	background-color: var(--pr-t-elevation-surface-raised);
 	box-shadow: var(--pr-t-elevation-shadow-overlay);
-	border-radius: var(--commons-borderRadius-M);
+	border-radius: var(--pr-t-border-radius-structure);
 
 	&:focus-within {
 		outline: none;

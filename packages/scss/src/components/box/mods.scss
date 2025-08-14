@@ -22,13 +22,12 @@
 
 @mixin arrow {
 	--components-box-arrow-background: var(--pr-t-elevation-surface-raised);
-	--components-box-arrow-horizontalMargin: var(--commons-borderRadius-M);
 	--components-box-arrow-left: 0;
 	--components-box-arrow-bottom: 0;
 
 	background-color: var(--components-box-arrow-background);
 	margin-block: 0;
-	margin-inline: var(--components-box-arrow-horizontalMargin);
+	margin-inline: var(--pr-t-spacings-50);
 	inline-size: 12px;
 	block-size: 8px;
 	clip-path: path('M4.66415 0.494638C5.43093 -0.164881 6.56907 -0.164879 7.33586 0.49464L12 8H0L4.66415 0.494638Z');
@@ -44,7 +43,6 @@
 }
 
 @mixin withArrow {
-	--components-box-border-radius: var(--commons-borderRadius-M);
 	--components-box-padding: var(--pr-t-spacings-200);
 
 	.box-arrow {
