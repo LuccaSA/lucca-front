@@ -44,14 +44,14 @@ export default {
 		const infoTemplate = args.info ? `<ng-container info>Lorem ipsum dolor</ng-container>` : ``;
 		const illustrationTemplate = args.illustration
 			? `<ng-container illustration>
-					<div style="background-color: var(--palettes-product-100); color: var(--palettes-product-700)" class="pr-u-padding100 u-borderRadiusXL u-displayFlex">
+					<div style="background-color: var(--palettes-product-100); color: var(--palettes-product-700)" class="pr-u-padding100 pr-u-borderRadiusXL pr-u-displayFlex">
 						<lu-icon icon="moneyBag" />
 					</div>
 				</ng-container>`
 			: ``;
 		const illustrationTemplateDisabled = args.illustration
 			? `<ng-container illustration>
-					<div style="background-color: var(--palettes-neutral-50); color: var(--pr-t-color-input-text-disabled)" class="pr-u-padding100 u-borderRadiusXL u-displayFlex">
+					<div style="background-color: var(--palettes-neutral-50); color: var(--pr-t-color-input-text-disabled)" class="pr-u-padding100 pr-u-borderRadiusXL pr-u-displayFlex">
 						<lu-icon icon="moneyBag" />
 					</div>
 				</ng-container>`

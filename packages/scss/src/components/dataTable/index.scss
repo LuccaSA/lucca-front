@@ -4,6 +4,12 @@
 	@layer components {
 		@include vars;
 	}
+
+	@layer mods {
+		&.mod-nested {
+			@include nested;
+		}
+	}
 }
 
 .dataTable {

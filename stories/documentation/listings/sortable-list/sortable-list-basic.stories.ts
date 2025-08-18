@@ -33,7 +33,7 @@ function getTemplate(args: SortableListBasicStory): string {
 		</div>
 		<button class="clear sortableList-clear" type="button">
 		  <span aria-hidden="true" class="lucca-icon icon-signClose"></span>
-			<span class="u-mask">Delete</span>
+			<span class="pr-u-mask">Delete</span>
 		</button>
 	</li>
 	<li class="sortableList-item ${clickable}">
@@ -44,7 +44,7 @@ function getTemplate(args: SortableListBasicStory): string {
 		</div>
 		<button class="clear sortableList-clear" type="button">
 		  <span aria-hidden="true" class="lucca-icon icon-signClose"></span>
-			<span class="u-mask">Delete</span>
+			<span class="pr-u-mask">Delete</span>
 		</button>
 	</li>
 	<li class="sortableList-item ${clickable}">
@@ -55,7 +55,7 @@ function getTemplate(args: SortableListBasicStory): string {
 		</div>
 		<button class="clear sortableList-clear" type="button">
 		  <span aria-hidden="true" class="lucca-icon icon-signClose"></span>
-			<span class="u-mask">Delete</span>
+			<span class="pr-u-mask">Delete</span>
 		</button>
 	</li>
 </ul>`;

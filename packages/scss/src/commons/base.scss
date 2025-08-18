@@ -94,7 +94,7 @@
 			}
 
 			&:focus-visible {
-				@include a11y.focusVisible($borderRadius: var(--commons-borderRadius-M));
+				@include a11y.focusVisible($borderRadius: var(--pr-t-border-radius-small));
 			}
 		}
 
@@ -111,7 +111,7 @@
 
 		mark {
 			background-color: var(--palettes-100, var(--palettes-product-100));
-			border-radius: var(--commons-borderRadius-M);
+			border-radius: var(--pr-t-border-radius-default);
 		}
 
 		@each $palette in config.$palettesAll {

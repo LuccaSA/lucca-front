@@ -98,7 +98,7 @@
 			color: var(--components-navSide-fullwidth-palette-text);
 			transition-property: background-color, color;
 			transition-duration: var(--commons-animations-durations-fast);
-			border-radius: var(--commons-borderRadius-M);
+			border-radius: var(--pr-t-border-radius-default);
 
 			&:focus-visible {
 				@include a11y.focusVisible;
@@ -228,7 +228,7 @@
 			}
 
 			&::after {
-				border-radius: var(--commons-borderRadius-M);
+				border-radius: var(--pr-t-border-radius-default);
 				flex: 1 1 auto;
 				block-size: 0.9em;
 				margin-inline-start: 1em;

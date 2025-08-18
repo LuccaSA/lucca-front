@@ -22,3 +22,7 @@
 	position: fixed;
 	inset: var(--pr-t-spacings-200);
 }
+
+@mixin structure {
+	--components-fileUpload-borderRadius: var(--pr-t-border-radius-structure);
+}

@@ -14,7 +14,7 @@
 	padding-inline: var(--components-scrollBox-paddingInline);
 	padding-block: var(--components-scrollBox-paddingBlock);
 	margin-block: var(--components-scrollBox-marginBlock);
-	border-radius: var(--commons-borderRadius-M);
+	border-radius: var(--pr-t-border-radius-default);
 
 	&:focus-visible {
 		@include a11y.focusVisible($offset: 0);

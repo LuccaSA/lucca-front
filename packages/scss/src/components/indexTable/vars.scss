@@ -1,6 +1,6 @@
 @mixin vars {
 	--components-indexTable-padding: var(--pr-t-spacings-100);
-	--components-indexTable-border-radius: 12px;
+	--components-indexTable-border-radius: var(--pr-t-border-radius-structure);
 	--components-indexTable-background-color: var(--palettes-neutral-50);
 	--components-indexTable-row-spacing: 4px;
 
@@ -9,7 +9,7 @@
 
 	--components-indexTable-cell-paddingInline: var(--pr-t-spacings-150);
 	--components-indexTable-cell-paddingBlock: var(--pr-t-spacings-100);
-	--components-indexTable-cell-border-radius: var(--commons-borderRadius-L);
+	--components-indexTable-cell-border-radius: var(--pr-t-border-radius-default);
 	--components-indexTable-cell-background-color-default: var(--palettes-neutral-0);
 
 	// shadows

@@ -12,8 +12,8 @@
 
 <ng-template #argumentTemplate let-imgSrc="imgSrc" let-title="title" let-message="message" let-displayPay="displayPay">
   <div class="grid-column" style="--grid-colspanAtMediaMinS: 4">
-    <img class="u-displayBlock pr-u-marginBottom100" alt="" width="48" height="48" [src]="imgSrc" />
-    <h2 class="u-h3 pr-u-paddingBlock0 pr-u-marginBottom100">{{ title | tr }}</h2>
+    <img class="pr-u-displayBlock pr-u-marginBottom100" alt="" width="48" height="48" [src]="imgSrc" />
+    <h2 class="pr-u-h3 pr-u-paddingBlock0 pr-u-marginBottom100">{{ title | tr }}</h2>
     <p class="pr-u-marginBottom0">
       {{ message | tr }}<br />
       @if (displayPay) {

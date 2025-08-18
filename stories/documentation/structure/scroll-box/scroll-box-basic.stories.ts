@@ -67,31 +67,31 @@ function getTemplate(args: ScrollBoxBasicStory): string {
 		<div class="chip">
 			Label
 			<button type="button" class="chip-kill">
-					<span class="u-mask">Supprimer</span>
+					<span class="pr-u-mask">Supprimer</span>
 			</button>
 		</div>
 		<div class="chip">
 			Label
 			<button type="button" class="chip-kill">
-					<span class="u-mask">Supprimer</span>
+					<span class="pr-u-mask">Supprimer</span>
 			</button>
 		</div>
 		<div class="chip">
 			Label
 			<button type="button" class="chip-kill">
-					<span class="u-mask">Supprimer</span>
+					<span class="pr-u-mask">Supprimer</span>
 			</button>
 		</div>
 		<div class="chip">
 			Label
 			<button type="button" class="chip-kill">
-					<span class="u-mask">Supprimer</span>
+					<span class="pr-u-mask">Supprimer</span>
 			</button>
 		</div>
 		<div class="chip">
 			Label
 			<button type="button" class="chip-kill">
-					<span class="u-mask">Supprimer</span>
+					<span class="pr-u-mask">Supprimer</span>
 			</button>
 		</div>
 	</lu-scroll-box>

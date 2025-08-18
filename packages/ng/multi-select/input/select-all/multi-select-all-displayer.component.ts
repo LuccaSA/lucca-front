@@ -25,7 +25,7 @@ import { MULTI_SELECT_WITH_SELECT_ALL_CONTEXT } from './select-all.models';
 
 							@if (!disabled()) {
 								<button type="button" class="chip-kill" (click)="unselectOption(select.value[0], $event)">
-									<span class="u-mask">{{ intl.removeOption }}</span>
+									<span class="pr-u-mask">{{ intl.removeOption }}</span>
 								</button>
 							}
 						</div>

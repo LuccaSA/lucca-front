@@ -16,7 +16,7 @@ function getTemplate(args: TextfieldSearchClearStory): string {
 			<div class="textField-input-affix">
 				<button class="textField-input-affix-clear clear">
 					<span aria-hidden="true" class="lucca-icon icon-signClose"></span>
-					<span class="u-mask">Vider ce champ</span>
+					<span class="pr-u-mask">Vider ce champ</span>
 				</button>
 				<span aria-hidden="true" class="textField-input-affix-icon lucca-icon icon-searchMagnifyingGlass"></span>
 			</div>

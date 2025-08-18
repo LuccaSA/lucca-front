@@ -14,7 +14,7 @@ function getTemplate(args: IndexTableActionsSubActionStory): string {
 			<th class="indexTable-head-row-cell" scope="col">Label</th>
 			<th class="indexTable-head-row-cell" scope="col">Label</th>
 			<th class="indexTable-head-row-cell" scope="col">
-				<span class="u-mask">Actions</span>
+				<span class="pr-u-mask">Actions</span>
 			</th>
 		</tr>
 	</thead>
@@ -28,12 +28,15 @@ function getTemplate(args: IndexTableActionsSubActionStory): string {
 			<td class="indexTable-body-row-cell mod-actions">
 				<button type="button" class="button indexTable-body-row-cell-subAction">
 					<span aria-hidden="true" class="lucca-icon icon-copy"></span>
+					<span class="pr-u-mask">Copy</span>
 				</button>
 				<button type="button" class="button indexTable-body-row-cell-subAction">
 					<span aria-hidden="true" class="lucca-icon icon-officePen"></span>
+					<span class="pr-u-mask">Edit</span>
 				</button>
 				<button type="button" class="button mod-delete indexTable-body-row-cell-subAction">
 					<span aria-hidden="true" class="lucca-icon icon-trashDelete"></span>
+					<span class="pr-u-mask">Delete</span>
 				</button>
 			</td>
 		</tr>

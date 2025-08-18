@@ -15,6 +15,7 @@ export default {
 	argTypes: {
 		tooltip: {
 			type: 'string',
+			if: { arg: 'hiddenLabel', truthy: false },
 		},
 		size: {
 			options: ['M', 'S', 'XS'],
@@ -64,9 +65,9 @@ export const Basic: StoryObj<NumberInputComponent & { disabled: boolean; require
 		};
 	},
 	args: {
+		hiddenLabel: false,
 		label: 'Label',
 		required: true,
-		hiddenLabel: false,
 		hasClearer: true,
 		disabled: false,
 		inlineMessage: 'Helper text',
@@ -119,9 +120,9 @@ export const WithPrefixAndSuffix: StoryObj<
 		};
 	},
 	args: {
+		hiddenLabel: false,
 		label: 'Label',
 		tooltip: 'Tooltip message',
-		hiddenLabel: false,
 		required: true,
 		placeholder: 'Placeholder',
 		disabled: false,

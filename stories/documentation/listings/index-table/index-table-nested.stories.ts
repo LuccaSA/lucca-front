@@ -22,10 +22,10 @@ function getTemplate(args: IndexTableNestedStory): string {
 				<div class="indexTable-body-row-cellTitle">
 					<button class="indexTable-body-row-cellTitle-button button" aria-expanded="true" aria-controls="r1 r2 r3" type="button">
 						<span class="lucca-icon icon-arrowChevronTop" aria-hidden="true"></span>
-						<span class="u-mask">Hide details</span>
+						<span class="pr-u-mask">Hide details</span>
 					</button>
 					<span class="indexTable-body-row-cellTitle-title">2021</span>
-					<span class="numericBadge">3</span>
+					<span class="numericBadge">3<span class="pr-u-mask"> lines</span></span>
 				</div>
 			</th>
 		</tr>
@@ -57,10 +57,10 @@ function getTemplate(args: IndexTableNestedStory): string {
 				<div class="indexTable-body-row-cellTitle">
 					<button class="indexTable-body-row-cellTitle-button button" aria-expanded="true" aria-controls="r5" type="button">
 						<span class="lucca-icon icon-arrowChevronTop" aria-hidden="true"></span>
-						<span class="u-mask">Hide details</span>
+						<span class="pr-u-mask">Hide details</span>
 					</button>
 					<span class="indexTable-body-row-cellTitle-title">2022</span>
-					<span class="numericBadge">1</span>
+					<span class="numericBadge">1<span class="pr-u-mask"> line</span></span>
 				</div>
 			</th>
 		</tr>

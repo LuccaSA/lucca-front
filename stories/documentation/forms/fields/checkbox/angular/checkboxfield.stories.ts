@@ -31,6 +31,9 @@ export default {
 		hiddenLabel: {
 			description: "Masque le label en le conservant dans le DOM pour les lecteurs d'écrans",
 		},
+		tooltip: {
+			if: { arg: 'hiddenLabel', truthy: false },
+		},
 		checklist: {
 			control: {
 				type: 'boolean',
@@ -68,9 +71,9 @@ export const Basic: StoryObj<CheckboxInputComponent & FormFieldComponent & { req
 		};
 	},
 	args: {
+		hiddenLabel: false,
 		label: 'Label',
 		tooltip: 'Tooltip message',
-		hiddenLabel: false,
 		required: true,
 		mixed: false,
 		inlineMessage: 'Helper text',

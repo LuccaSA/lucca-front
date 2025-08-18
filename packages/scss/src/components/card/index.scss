@@ -24,6 +24,10 @@
 		&.mod-action {
 			@include action;
 		}
+
+		&.mod-nested {
+			@include nested;
+		}
 	}
 
 	@layer states {

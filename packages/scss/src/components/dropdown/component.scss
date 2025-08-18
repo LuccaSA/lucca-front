@@ -6,7 +6,7 @@
 @mixin component($atRoot: namespace.$defaultAtRoot) {
 	margin: calc(var(--pr-t-spacings-100) * -1);
 	padding: 0 !important;
-	border-radius: var(--commons-borderRadius-M);
+	border-radius: var(--pr-t-border-radius-structure);
 	max-inline-size: 90vw;
 	max-block-size: var(--components-dropdown-max-height);
 	overflow-x: hidden;
@@ -40,7 +40,7 @@
 		.lu-dropdown-options-item-action {
 			align-items: flex-start;
 			border: 0;
-			border-radius: var(--commons-borderRadius-M);
+			border-radius: var(--pr-t-border-radius-default);
 			color: var(--components-dropdown-optionColor);
 			background-color: var(--components-dropdown-option-actionBackground);
 			display: flex;

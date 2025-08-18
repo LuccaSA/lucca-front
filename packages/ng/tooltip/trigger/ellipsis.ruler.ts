@@ -14,7 +14,7 @@ export class EllipsisRuler {
 	readonly parentMasked = this.#document.createElement('div');
 
 	constructor() {
-		this.parentMasked.classList.add('u-mask');
+		this.parentMasked.classList.add('pr-u-mask');
 		this.parentMasked.setAttribute('aria-hidden', 'true');
 		this.#document.body.appendChild(this.parentMasked);
 	}

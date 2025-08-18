@@ -7,7 +7,7 @@
 
 	background-color: var(--components-button-backgroundColor);
 	box-shadow: var(--components-button-boxShadow);
-	border-radius: var(--commons-borderRadius-M);
+	border-radius: var(--components-button-borderRadius);
 	padding: var(--components-button-padding);
 	transition-property: background-color, color, border-color, box-shadow;
 	transition-duration: var(--commons-animations-durations-fast);
@@ -60,7 +60,8 @@
 	}
 
 	&:focus-visible {
-		@include a11y.focusVisible;
+		// Radius needed to override focused link / a
+		@include a11y.focusVisible($borderRadius: var(--components-button-borderRadius));
 	}
 
 	&:active {
