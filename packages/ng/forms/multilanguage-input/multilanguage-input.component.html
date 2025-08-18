@@ -25,7 +25,7 @@
 			</button>
 			<ng-template #popoverMultilanguage>
 				<div class="popover-contentOptional multilanguage_popover-content" [style.width.px]="inputElement.clientWidth + 16">
-					<div class="u-displayFlex pr-u-gap100 u-flexDirectionColumn">
+					<div class="pr-u-displayFlex pr-u-gap100 pr-u-flexDirectionColumn">
 						@for (row of panelInputs(); track row.cultureCode) {
 							<lu-form-field
 								[size]="formFieldSize()"

@@ -25,7 +25,7 @@ function getTemplate(args: IndexTableInputStory): string {
 					id="myInput"
 					type="file"
 					accept=".pdf, .jpg, .jpeg, .png"
-					class="indexTable-body-row-cell-link u-mask"
+					class="indexTable-body-row-cell-link pr-u-mask"
 				/>
 			</td>
 			<td class="indexTable-body-row-cell">Content</td>

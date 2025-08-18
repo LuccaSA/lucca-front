@@ -16,13 +16,13 @@ function getTemplate(args: UserPopoverStory): string {
 				</div>
 			</div>
 			<div class="userPopover-details-info">
-				<h1 class="userPopover-details-info-name u-ellipsis">
+				<h1 class="userPopover-details-info-name pr-u-ellipsis">
 					<a class="userPopover-details-info-name-linkOptional" href="#">
 						Chloé Alibert
 					</a>
 				</h1>
-				<p class="userPopover-details-info-detail u-ellipsis">Technicienne</p>
-				<p class="userPopover-details-info-detail u-ellipsis">SAV</p>
+				<p class="userPopover-details-info-detail pr-u-ellipsis">Technicienne</p>
+				<p class="userPopover-details-info-detail pr-u-ellipsis">SAV</p>
 				<p class="userPopover-details-info-detail">
 					<!--
 					<span class="userPopover-details-info-detail-workplace">
@@ -40,7 +40,7 @@ function getTemplate(args: UserPopoverStory): string {
 							class="lucca-icon icon-calendarPlanning mod-S"
 						></span>
 						<span class="userPopover-details-info-detail-workplace-state">
-							Absent(e) – <span class="u-textLight">Jusqu’au 28/02/2024 inclus</span>
+							Absent(e) – <span class="pr-u-textLight">Jusqu’au 28/02/2024 inclus</span>
 						</span>
 					</a>
 				</p>

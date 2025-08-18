@@ -77,14 +77,14 @@ export default {
 >Tooltip au survol</span>
 <h3>Tooltip et ellipse</h3>
 <div
-	class="u-ellipsis"
+	class="pr-u-ellipsis"
 	style="width: 10rem;"
 	luTooltip="Ce texte est trop long pour être affiché entièrement. Le tooltip apparait au survol."
 	${generateInputs(args, argTypes)}
 	luTooltipWhenEllipsis
 >Ce texte est trop long pour être affiché entièrement. Le tooltip apparait au survol.</div>
 <div
-	class="u-ellipsis"
+	class="pr-u-ellipsis"
 	luTooltip="Ce texte est affiché entièrement. Le tooltip n'apparait pas au survol."
 	${generateInputs(args, argTypes)}
 	luTooltipWhenEllipsis

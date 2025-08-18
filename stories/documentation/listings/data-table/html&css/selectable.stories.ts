@@ -18,7 +18,7 @@ function getTemplate(args: SelectableStory): string {
 							<input type="checkbox" class="checkboxField-input" id="CBall" />
 							<span class="checkboxField-icon" aria-hidden="true"><span class="checkboxField-icon-check"></span></span>
 						</span>
-						<label class="u-mask" for="CBall">Label</label>
+						<label class="pr-u-mask" for="CBall">Label</label>
 					</th>
 					<th class="dataTable-head-row-cell">Label</th>
 					<th class="dataTable-head-row-cell">Label</th>
@@ -32,7 +32,7 @@ function getTemplate(args: SelectableStory): string {
 							<input type="checkbox" class="checkboxField-input" id="CB1" checked />
 							<span class="checkboxField-icon" aria-hidden="true"><span class="checkboxField-icon-check"></span></span>
 						</span>
-						<label class="u-mask" for="CB1">Label</label>
+						<label class="pr-u-mask" for="CB1">Label</label>
 					</td>
 					<td class="dataTable-body-row-cell">Text</td>
 					<td class="dataTable-body-row-cell">Text</td>
@@ -44,7 +44,7 @@ function getTemplate(args: SelectableStory): string {
 							<input type="checkbox" class="checkboxField-input" id="CB2" />
 							<span class="checkboxField-icon" aria-hidden="true"><span class="checkboxField-icon-check"></span></span>
 						</span>
-						<label class="u-mask" for="CB2">Label</label>
+						<label class="pr-u-mask" for="CB2">Label</label>
 					</td>
 					<td class="dataTable-body-row-cell">Text</td>
 					<td class="dataTable-body-row-cell">Text</td>
