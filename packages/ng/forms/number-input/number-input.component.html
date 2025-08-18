@@ -1,4 +1,4 @@
-<div class="textField">
+<div class="textField" [class.mod-valueAlignRight]="valueAlignRight()">
 	<ng-template #addon let-addon="addon" let-type="type">
 		@if (addon.content) {
 			<span class="textField-{{ type }}" luFormFieldId="{{ type }}">
@@ -49,14 +49,14 @@
 			[step]="step()"
 			[min]="min()"
 			[max]="max()"
-			[class.u-noSpinButtons]="noSpinButtons()"
+			[class.pr-u-noSpinButtons]="noSpinButtons()"
 			#inputElement
 		/>
 		<div class="textField-input-affix">
 			@if (hasClearer() && inputElement.value) {
 				<button class="textField-input-affix-clear clear" type="button" (click)="clearValue()">
 					<span aria-hidden="true" class="lucca-icon icon-signClose"></span>
-					<span class="u-mask">{{ intl.clear }}</span>
+					<span class="pr-u-mask">{{ intl.clear }}</span>
 				</button>
 			}
 		</div>

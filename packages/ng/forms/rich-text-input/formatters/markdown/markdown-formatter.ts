@@ -1,5 +1,4 @@
-import { LexicalEditor } from 'lexical';
-import { RICH_TEXT_FORMATTER, RichTextFormatter } from '@lucca-front/ng/forms/rich-text-input';
+import { Provider } from '@angular/core';
 import {
 	$convertFromMarkdownString,
 	$convertToMarkdownString,
@@ -17,23 +16,25 @@ import {
 	Transformer,
 	UNORDERED_LIST,
 } from '@lexical/markdown';
-import { Provider } from '@angular/core';
+import { RICH_TEXT_FORMATTER, RichTextFormatter } from '@lucca-front/ng/forms/rich-text-input';
+import { LexicalEditor } from 'lexical';
 
+export const DEFAULT_MARKDOWN_TRANSFORMERS: Transformer[] = [
+	UNORDERED_LIST,
+	HEADING,
+	ORDERED_LIST,
+	BOLD_ITALIC_STAR,
+	BOLD_ITALIC_UNDERSCORE,
+	BOLD_STAR,
+	BOLD_UNDERSCORE,
+	INLINE_CODE,
+	ITALIC_STAR,
+	ITALIC_UNDERSCORE,
+	STRIKETHROUGH,
+	LINK,
+];
 export class MarkdownFormatter extends RichTextFormatter {
-	#transformers: Transformer[] = [
-		UNORDERED_LIST,
-		HEADING,
-		ORDERED_LIST,
-		BOLD_ITALIC_STAR,
-		BOLD_ITALIC_UNDERSCORE,
-		BOLD_STAR,
-		BOLD_UNDERSCORE,
-		INLINE_CODE,
-		ITALIC_STAR,
-		ITALIC_UNDERSCORE,
-		STRIKETHROUGH,
-		LINK,
-	];
+	#transformers: Transformer[] = DEFAULT_MARKDOWN_TRANSFORMERS;
 
 	constructor(transformers?: Transformer[]) {
 		super();

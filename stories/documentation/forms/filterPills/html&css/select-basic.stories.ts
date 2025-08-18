@@ -42,7 +42,7 @@ function getTemplate(args: SelectBasicStory): string {
 	<button ${disabled} class="filterPill-combobox" type="button" id="input1" role="combobox" aria-expanded="${args.expanded}" ${tooltip} luTooltipWhenEllipsis="true">
 		${args.value ? args.value : 'Aucune valeur sélectionnée'}
 	</button>
-	<button type="button" class="filterPill-clear clear"><span class="u-mask">Vider ce champ</span></button>
+	<button type="button" class="filterPill-clear clear"><span class="pr-u-mask">Vider ce champ</span></button>
 	<button type="button" aria-hidden="true" tabindex="-1" class="filterPill-toggle">
 		<lu-icon icon="arrowChevronBottom" size="S" />
 	</button>

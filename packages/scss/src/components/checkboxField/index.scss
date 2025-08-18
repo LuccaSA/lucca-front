@@ -7,6 +7,50 @@
 	&.mod-S {
 		@include S;
 	}
+
+	&.mod-checklist {
+		@include checklist;
+
+		.checkboxField-input {
+			&:hover {
+				@include checklistHover;
+			}
+
+			&:active {
+				@include checklistActive;
+			}
+
+			&:disabled {
+				@include checklistDisabled;
+			}
+
+			&:checked {
+				@include checklistChecked;
+
+				&:hover {
+					@include checklistCheckedHover;
+				}
+
+				&:active {
+					@include checklistCheckedActive;
+				}
+
+				&:disabled {
+					@include checklistCheckedDisabled;
+				}
+			}
+		}
+
+		&:has(.checkboxField-input:focus-visible) {
+			.checkboxField-input {
+				@include checklistHover;
+
+				&:checked {
+					@include checklistCheckedHover;
+				}
+			}
+		}
+	}
 }
 
 .checkboxField-input {

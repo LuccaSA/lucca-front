@@ -20,7 +20,7 @@
 				content: '';
 				position: absolute;
 				background-color: var(--components-dateRangeField-content-background);
-				border-radius: var(--commons-borderRadius-M);
+				border-radius: var(--pr-t-border-radius-50);
 				pointer-events: none;
 				inset: var(--pr-t-spacings-50);
 				inset-inline-end: calc(var(--components-dateRangeField-content-inlineEnd) - var(--pr-t-spacings-50));
@@ -66,7 +66,7 @@
 			inset-inline-start: calc(50% - calc(var(--pr-t-spacings-400) + var(--pr-t-spacings-150)));
 			color: var(--palettes-neutral-700);
 			pointer-events: none;
-			border-radius: var(--commons-borderRadius-M);
+			border-radius: var(--pr-t-border-radius-default);
 
 			@include icon.S;
 		}

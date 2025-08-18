@@ -1,5 +1,5 @@
 @use '@lucca-front/scss/src/commons/utils/namespace';
-
+@use '@lucca-front/scss/src/commons/utils/reset';
 @use '@lucca-front/scss/src/commons/utils/keyframe';
 @use '@lucca-front/scss/src/commons/utils/a11y';
 
@@ -13,7 +13,7 @@
 	border-color: var(--components-richTextField-borderColor);
 	border-style: solid;
 	border-width: 1px;
-	border-radius: var(--pr-t-radius-input);
+	border-radius: var(--pr-t-border-radius-input);
 	resize: var(--components-richTextField-resize);
 	min-block-size: calc(var(--components-richTextField-minHeight) + var(--pr-t-spacings-800) + var(--pr-t-spacings-25));
 	max-block-size: var(--components-richTextField-maxHeight);
@@ -23,8 +23,21 @@
 		@include a11y.focusVisible;
 	}
 
+	&:has(.richTextField-toolbar-formatting):has(.richTextField-toolbar-chips) {
+		min-block-size: calc(var(--components-richTextField-minHeight) + var(--pr-t-spacings-800) + var(--pr-t-spacings-25) + var(--pr-t-spacings-600));
+
+		.richTextField-toolbar-chips {
+			border-block-start: 1px solid var(--palettes-neutral-200);
+			padding-block-start: var(--pr-t-spacings-100);
+		}
+
+		.richTextField-toolbar-formatting {
+			padding-block-end: var(--pr-t-spacings-100);
+		}
+	}
+
 	// specificity must be higher here
-	.richTextField-toolbar-button.button {
+	.richTextField-toolbar-button.button.button {
 		&[aria-pressed='true'] {
 			--components-button-color: var(--palettes-0, var(--palettes-text, var(--palettes-product-0)));
 			--components-button-backgroundColor: var(--palettes-700, var(--palettes-product-700));
@@ -51,14 +64,10 @@
 
 	@at-root ($atRoot) {
 		.richTextField-toolbar {
-			display: flex;
-			align-items: flex-end;
-			justify-content: space-between;
-			gap: var(--pr-t-spacings-400);
 			background-color: var(--components-richTextField-toolbar-backgroundColor);
-			border-radius: 0 0 var(--commons-borderRadius-M) var(--commons-borderRadius-M);
+			border-radius: 0 0 var(--pr-t-border-radius-input) var(--pr-t-border-radius-input);
+			padding: var(--pr-t-spacings-100);
 			overflow: hidden;
-			flex-shrink: 0;
 			animation-name: fadeIn;
 			animation-duration: var(--commons-animations-durations-fast);
 			animation-delay: var(--commons-animations-durations-fast);
@@ -66,6 +75,14 @@
 			animation-fill-mode: forwards;
 
 			@include keyframe.fadeIn;
+		}
+
+		.richTextField-toolbar-formatting {
+			display: flex;
+			align-items: flex-end;
+			justify-content: space-between;
+			gap: var(--pr-t-spacings-400);
+			flex-shrink: 0;
 
 			&:empty {
 				display: none;
@@ -77,7 +94,6 @@
 			flex-wrap: wrap;
 			align-items: center;
 			row-gap: var(--pr-t-spacings-100);
-			padding: var(--pr-t-spacings-100);
 			margin-inline-start: calc(var(--pr-t-spacings-400) * -1);
 		}
 
@@ -95,7 +111,7 @@
 					position: absolute;
 					inset: var(--pr-t-spacings-100) auto var(--pr-t-spacings-100) calc(var(--pr-t-spacings-400) / -2);
 					inline-size: 2px;
-					border-radius: var(--commons-borderRadius-full);
+					border-radius: var(--pr-t-border-radius-full);
 					background-color: var(--palettes-neutral-300);
 				}
 			}
@@ -106,11 +122,33 @@
 			}
 		}
 
+		.richTextField-toolbar-chips {
+			display: flex;
+			flex-wrap: wrap;
+			gap: var(--pr-t-spacings-50);
+			padding-block-start: 0;
+			border-block-start: 0;
+		}
+
+		.richTextField-toolbar-chips-item {
+			@include reset.button;
+
+			width: auto;
+		}
+
 		.richTextField-content {
 			padding: var(--pr-t-spacings-100);
 			outline: none;
 			overflow: auto;
 			flex-grow: 1;
+		}
+
+		.richTextField-content-chip {
+			vertical-align: middle;
+
+			&:focus-visible {
+				@include a11y.focusVisible;
+			}
 		}
 
 		.richTextField-content-placeholder {

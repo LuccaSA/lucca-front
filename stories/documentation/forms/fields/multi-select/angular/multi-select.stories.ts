@@ -18,6 +18,7 @@ export default {
 	argTypes: {
 		tooltip: {
 			type: 'string',
+			if: { arg: 'hiddenLabel', truthy: false },
 		},
 		size: {
 			options: ['M', 'S'],
@@ -83,9 +84,9 @@ export const Basic: StoryObj<LuMultiSelectInputComponent<unknown> & FormFieldCom
 		};
 	},
 	args: {
+		hiddenLabel: false,
 		label: 'Label',
 		tooltip: 'Tooltip message',
-		hiddenLabel: false,
 		required: false,
 		placeholder: 'Placeholder',
 		clearable: true,
