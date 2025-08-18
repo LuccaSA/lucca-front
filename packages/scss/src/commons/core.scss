@@ -82,12 +82,26 @@ $cursor: 'pointer', 'auto';
 @mixin classes($name, $properties, $suffix: '!important', $prefix: '') {
 	@each $property in $properties {
 		@if $prefix == '' {
-			.u-#{transform.camelize($name)}#{if(string.slice($property, 1, 1) == '-', 'Minus', '')}#{transform.capitalize(transform.camelize($property))} {
+			.pr-u-#{transform.camelize($name)}#{if(string.slice($property, 1, 1) == '-', 'Minus', '')}#{transform.capitalize(transform.camelize($property))} {
 				#{$name}: #{transform.replace($property, '\\', '')} #{$suffix};
 			}
+
+			// Deprecated .u- utilities
+			@if config.$deprecatedUtilityPrefix {
+				.u-#{transform.camelize($name)}#{if(string.slice($property, 1, 1) == '-', 'Minus', '')}#{transform.capitalize(transform.camelize($property))} {
+					#{$name}: #{transform.replace($property, '\\', '')} #{$suffix};
+				}
+			}
 		} @else {
-			.u-#{$prefix}#{transform.capitalize(transform.camelize($name))}#{if(string.slice($property, 1, 1) == '-', 'Minus', '')}#{transform.capitalize(transform.camelize($property))} {
+			.pr-u-#{$prefix}#{transform.capitalize(transform.camelize($name))}#{if(string.slice($property, 1, 1) == '-', 'Minus', '')}#{transform.capitalize(transform.camelize($property))} {
 				#{$name}: #{transform.replace($property, '\\', '')} #{$suffix};
+			}
+
+			// Deprecated .u- utilities
+			@if config.$deprecatedUtilityPrefix {
+				.u-#{$prefix}#{transform.capitalize(transform.camelize($name))}#{if(string.slice($property, 1, 1) == '-', 'Minus', '')}#{transform.capitalize(transform.camelize($property))} {
+					#{$name}: #{transform.replace($property, '\\', '')} #{$suffix};
+				}
 			}
 		}
 	}
@@ -95,8 +109,15 @@ $cursor: 'pointer', 'auto';
 
 @mixin palettes($suffix: '!important') {
 	@each $palette in config.$palettesAll {
-		.u-text#{transform.capitalize($palette)} {
+		.pr-u-text#{transform.capitalize($palette)} {
 			color: var(--palettes-#{$palette}-700) #{$suffix};
+		}
+
+		// Deprecated .u- utilities
+		@if config.$deprecatedUtilityPrefix {
+			.u-text#{transform.capitalize($palette)} {
+				color: var(--palettes-#{$palette}-700) #{$suffix};
+			}
 		}
 	}
 }
@@ -149,9 +170,17 @@ $cursor: 'pointer', 'auto';
 
 @mixin sizes($suffix: '!important') {
 	@each $key, $value in config.$sizes {
-		.u-text#{transform.capitalize($key)} {
+		.pr-u-text#{transform.capitalize($key)} {
 			font-size: var(--sizes-#{$key}-fontSize) #{$suffix};
 			line-height: var(--sizes-#{$key}-lineHeight) #{$suffix};
+		}
+
+		// Deprecated .u- utilities
+		@if config.$deprecatedUtilityPrefix {
+			.u-text#{transform.capitalize($key)} {
+				font-size: var(--sizes-#{$key}-fontSize) #{$suffix};
+				line-height: var(--sizes-#{$key}-lineHeight) #{$suffix};
+			}
 		}
 	}
 }
@@ -159,8 +188,15 @@ $cursor: 'pointer', 'auto';
 @mixin borderRadius($suffix: '!important') {
 	@each $corner in $corners {
 		@each $key, $value in config.$borderRadius {
-			.u-border#{transform.capitalize(transform.camelize($corner))}Radius#{transform.capitalize($key)} {
+			.pr-u-border#{transform.capitalize(transform.camelize($corner))}Radius#{transform.capitalize($key)} {
 				border-#{$corner}radius: var(--commons-borderRadius-#{$key}) #{$suffix};
+			}
+
+			// Deprecated .u- utilities
+			@if config.$deprecatedUtilityPrefix {
+				.u-border#{transform.capitalize(transform.camelize($corner))}Radius#{transform.capitalize($key)} {
+					border-#{$corner}radius: var(--commons-borderRadius-#{$key}) #{$suffix};
+				}
 			}
 		}
 	}

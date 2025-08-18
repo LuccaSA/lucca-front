@@ -23,10 +23,10 @@ function getTemplate(args: QuickActionsStory): string {
 				<td class="dataTable-body-row-cell">Table cell</td>
 				<td class="dataTable-body-row-cell mod-actions">
 					<button type="button" class="button">
-						<span aria-hidden="true" class="lucca-icon icon-officePen"></span><span class="u-mask">Edit</span>
+						<span aria-hidden="true" class="lucca-icon icon-officePen"></span><span class="pr-u-mask">Edit</span>
 					</button>
 					<button type="button" class="button">
-						<span aria-hidden="true" class="lucca-icon icon-trashDelete"></span><span class="u-mask">Delete</span>
+						<span aria-hidden="true" class="lucca-icon icon-trashDelete"></span><span class="pr-u-mask">Delete</span>
 					</button>
 				</td>
 			</tr>
@@ -35,10 +35,10 @@ function getTemplate(args: QuickActionsStory): string {
 				<td class="dataTable-body-row-cell">Table cell</td>
 				<td class="dataTable-body-row-cell mod-actions">
 					<button type="button" class="button">
-						<span aria-hidden="true" class="lucca-icon icon-officePen"></span><span class="u-mask">Edit</span>
+						<span aria-hidden="true" class="lucca-icon icon-officePen"></span><span class="pr-u-mask">Edit</span>
 					</button>
 					<button type="button" class="button">
-						<span aria-hidden="true" class="lucca-icon icon-trashDelete"></span><span class="u-mask">Delete</span>
+						<span aria-hidden="true" class="lucca-icon icon-trashDelete"></span><span class="pr-u-mask">Delete</span>
 					</button>
 				</td>
 			</tr>

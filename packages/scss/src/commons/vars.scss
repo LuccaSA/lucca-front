@@ -130,9 +130,20 @@
 		}
 	}
 
-	.u-prefersContrastMore {
+	%prefersContrastMore {
 		@media (forced-colors: none) {
 			@include color.contrasted;
+		}
+	}
+
+	.pr-u-prefersContrastMore {
+		@extend %prefersContrastMore;
+	}
+
+	// Deprecated .u- utilities
+	@if config.$deprecatedUtilityPrefix {
+		.u-prefersContrastMore {
+			@extend %prefersContrastMore;
 		}
 	}
 }

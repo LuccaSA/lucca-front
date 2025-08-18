@@ -12,7 +12,7 @@ function getTemplate(args: IndexTableStackableStory): string {
 	<thead class="indexTable-head">
 		<tr class="indexTable-head-row">
 			<th class="indexTable-head-row-transparentCell" scope="col">
-				<label class="formLabel u-mask" for="allchbx">Select all items</label>
+				<label class="formLabel pr-u-mask" for="allchbx">Select all items</label>
 				<span class="checkboxField indexTable-head-row-cell-checkbox">
 					<input class="checkboxField-input" type="checkbox" id="allchbx"
 						aria-controls="r0chbx r1chbx r2chbx" checked aria-checked="mixed" />
@@ -28,7 +28,7 @@ function getTemplate(args: IndexTableStackableStory): string {
 	<tbody class="indexTable-body">
 		<tr class="indexTable-body-row">
 			<td class="indexTable-body-row-transparentCell">
-				<label class="formLabel u-mask" for="r1chbx">Select this item</label>
+				<label class="formLabel pr-u-mask" for="r1chbx">Select this item</label>
 				<span class="checkboxField indexTable-body-row-cell-checkbox">
 					<input class="checkboxField-input" type="checkbox" id="r0chbx" />
 					<span class="checkboxField-icon" aria-hidden="true"><span
@@ -43,7 +43,7 @@ function getTemplate(args: IndexTableStackableStory): string {
 		</tr>
 		<tr class="indexTable-body-row mod-stack2">
 			<td class="indexTable-body-row-transparentCell">
-				<label class="formLabel u-mask" for="r0chbx">Select this item</label>
+				<label class="formLabel pr-u-mask" for="r0chbx">Select this item</label>
 				<span class="checkboxField indexTable-body-row-cell-checkbox">
 					<input class="checkboxField-input" type="checkbox" id="r1chbx" />
 					<span class="checkboxField-icon" aria-hidden="true"><span
@@ -58,7 +58,7 @@ function getTemplate(args: IndexTableStackableStory): string {
 		</tr>
 		<tr class="indexTable-body-row mod-stack3">
 			<td class="indexTable-body-row-transparentCell">
-				<label class="formLabel u-mask" for="r2chbx">Select this item</label>
+				<label class="formLabel pr-u-mask" for="r2chbx">Select this item</label>
 				<span class="checkboxField indexTable-body-row-cell-checkbox">
 					<input class="checkboxField-input" type="checkbox" id="r2chbx" />
 					<span class="checkboxField-icon" aria-hidden="true"><span

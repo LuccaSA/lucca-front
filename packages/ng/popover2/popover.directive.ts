@@ -170,7 +170,7 @@ export class PopoverDirective implements OnDestroy {
 					if (type === 'focus' && !this.#screenReaderDescription) {
 						this.#screenReaderDescription = this.#renderer.createElement('span') as HTMLSpanElement;
 						this.#screenReaderDescription.innerText = this.intl.screenReaderDescription;
-						this.#renderer.addClass(this.#screenReaderDescription, 'u-mask');
+						this.#renderer.addClass(this.#screenReaderDescription, 'pr-u-mask');
 						this.#renderer.appendChild(this.#elementRef.nativeElement, this.#screenReaderDescription);
 					}
 				} else if (this.opened()) {
