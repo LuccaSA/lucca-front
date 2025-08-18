@@ -101,7 +101,7 @@ function getTemplate(args: FilterBarBasicStory): string {
 						<button class="filterPill-combobox" type="button" id="input1" role="combobox" aria-expanded="false" luTooltipWhenEllipsis="true">
 							Finance
 						</button>
-						<button type="button" class="filterPill-clear clear"><span class="u-mask">Vider ce champ</span></button>
+						<button type="button" class="filterPill-clear clear"><span class="pr-u-mask">Vider ce champ</span></button>
 						<button type="button" aria-hidden="true" tabindex="-1" class="filterPill-toggle">
 							<lu-icon icon="arrowChevronBottom" size="S" />
 						</button>

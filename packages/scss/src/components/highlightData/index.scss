@@ -24,6 +24,10 @@
 		@include XS;
 	}
 
+	&.mod-nested {
+		@include nested;
+	}
+
 	&:has(.highlightData-illustrations) {
 		@include illustrations;
 

@@ -17,9 +17,14 @@
       "schema": "./lu-select/schema.json"
     },
     "tokens-spacings": {
-      "description": "Replace tokens with new names.",
+      "description": "Replace spacing tokens with new names.",
       "factory": "./tokens-spacing/index",
       "schema": "./tokens-spacing/schema.json"
+    },
+    "tokens-radius": {
+      "description": "Replace radius tokens with new names.",
+      "factory": "./tokens-radius/index",
+      "schema": "./tokens-radius/schema.json"
     },
     "tokens-typo": {
       "description": "Replace typography tokens with new names.",

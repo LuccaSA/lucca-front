@@ -14,7 +14,7 @@ function getTemplate(args: UserAvatarGroupClickableStory): string {
 			<span class="avatar">
 				<img alt="" class="avatar-picture" loading="lazy" src="https://cdn.lucca.fr/lucca-front/avatars/finn.png" />
 			</span>
-			<span class="u-mask">Finn Mertens</span>
+			<span class="pr-u-mask">Finn Mertens</span>
 		</a>
 	</li>
 	<li class="avatarWrapper-item" translate="no">
@@ -22,7 +22,7 @@ function getTemplate(args: UserAvatarGroupClickableStory): string {
 			<span class="avatar">
 				<img alt="" class="avatar-picture" loading="lazy" src="https://cdn.lucca.fr/lucca-front/avatars/finn.png" />
 			</span>
-			<span class="u-mask">Finn Mertens</span>
+			<span class="pr-u-mask">Finn Mertens</span>
 		</a>
 	</li>
 	<li class="avatarWrapper-item" translate="no">
@@ -30,7 +30,7 @@ function getTemplate(args: UserAvatarGroupClickableStory): string {
 			<span class="avatar">
 				<img alt="" class="avatar-picture" loading="lazy" src="https://cdn.lucca.fr/lucca-front/avatars/finn.png" />
 			</span>
-			<span class="u-mask">Finn Mertens</span>
+			<span class="pr-u-mask">Finn Mertens</span>
 		</a>
 	</li>
 </ul>`;

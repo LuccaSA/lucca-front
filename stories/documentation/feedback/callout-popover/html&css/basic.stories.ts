@@ -18,7 +18,7 @@ export default {
 <div class="lu-popover-content calloutPopover-overlay">
   <div class="calloutPopover-overlay-head">
     <span aria-hidden="true" class="calloutPopover-overlay-head-icon lucca-icon icon-signInfo"></span>
-    <span class="u-mask">Information</span>
+    <span class="pr-u-mask">Information</span>
     <strong class="calloutPopover-overlay-head-title">
       Titre
     </strong>

@@ -1,9 +1,12 @@
+import { ConnectionPositionPair } from '@angular/cdk/overlay';
 import { ButtonComponent } from '@lucca-front/ng/button';
+import { DividerComponent } from '@lucca-front/ng/divider';
+import { IconComponent } from '@lucca-front/ng/icon';
+import { ListingComponent, ListingItemComponent } from '@lucca-front/ng/listing';
 import { configureLuPopover, PopoverDirective } from '@lucca-front/ng/popover2';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { HiddenArgType } from '../../../helpers/common-arg-types';
 import { cleanupTemplate, generateInputs } from '../../../helpers/stories';
-import { ConnectionPositionPair } from '@angular/cdk/overlay';
 
 export default {
 	title: 'Documentation/Overlays/Popover2/Angular',
@@ -13,7 +16,7 @@ export default {
 			providers: [configureLuPopover()],
 		}),
 		moduleMetadata({
-			imports: [ButtonComponent, PopoverDirective],
+			imports: [ButtonComponent, PopoverDirective, DividerComponent, ListingComponent, ListingItemComponent, IconComponent],
 		}),
 	],
 	argTypes: {
@@ -41,13 +44,13 @@ export const Basic: StoryObj<PopoverDirective> = {
 	<button luButton [luPopover2]="contentRef" ${generateInputs(args, argTypes)}>${action}${openDelay} !</button>
 	<ng-template #contentRef>
 		<div class="popover-contentOptional">
-			<div class="verticalNavigation mod-iconless">
-				<ul class="verticalNavigation-list u-listReset">
-					<li class="verticalNavigation-list-item"><a href="#" class="verticalNavigation-list-item-link">Item A</a></li>
-					<li class="verticalNavigation-list-item"><a href="#" class="verticalNavigation-list-item-link">Item B</a></li>
-					<li class="verticalNavigation-list-item"><a href="#" class="verticalNavigation-list-item-link">Item C</a></li>
-				</ul>
-			</div>
+			<h3>Titre</h3>
+			<lu-divider />
+			<lu-listing checklist palette="success">
+				<lu-listing-item>Élement de liste</lu-listing-item>
+				<lu-listing-item>Élement de liste</lu-listing-item>
+				<lu-listing-item>Élement de liste</lu-listing-item>
+			</lu-listing>
 		</div>
 	</ng-template>
 </div>
@@ -129,7 +132,7 @@ export const CustomPosition: StoryObj<PopoverDirective> = {
 	<ng-template #contentRef>
 		<div class="popover-contentOptional">
 			<div class="verticalNavigation mod-iconless">
-				<ul class="verticalNavigation-list u-listReset">
+				<ul class="verticalNavigation-list pr-u-listReset">
 					<li class="verticalNavigation-list-item"><a href="#" class="verticalNavigation-list-item-link">Item A</a></li>
 					<li class="verticalNavigation-list-item"><a href="#" class="verticalNavigation-list-item-link">Item B</a></li>
 					<li class="verticalNavigation-list-item"><a href="#" class="verticalNavigation-list-item-link">Item C</a></li>

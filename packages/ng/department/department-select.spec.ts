@@ -42,7 +42,7 @@ describe('department select', () => {
 
 		const luSelectElement = screen.getByTestId('lu-select');
 		await userEvent.click(luSelectElement);
-		const dial = screen.getByRole('dialog');
+		const dial = screen.getByTestId('dialog-panel');
 
 		expect(dial).toBeInTheDocument();
 	});
@@ -63,11 +63,11 @@ describe('department select', () => {
 		expect(luSelectElement).toBeInTheDocument();
 		fireEvent.click(luSelectElement);
 		expect(mock.getTrees).toHaveBeenCalled();
-		const items = screen.getByRole('dialog').getElementsByClassName('optionItem');
+		const items = screen.getByTestId('dialog-panel').getElementsByClassName('optionItem');
 		expect(items.length).toEqual(5);
 		const input: HTMLInputElement = await screen.findByRole('textbox');
 		fireEvent.input(input, { target: { value: 'Tech' } });
-		const searchItems = screen.getByRole('dialog').getElementsByClassName('optionItem');
+		const searchItems = screen.getByTestId('dialog-panel').getElementsByClassName('optionItem');
 		expect(searchItems.length).toEqual(2);
 	});
 

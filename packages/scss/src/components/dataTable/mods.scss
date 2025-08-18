@@ -39,6 +39,7 @@
 	@include buttonExpand;
 
 	font: var(--pr-t-font-heading-4);
+
 	--components-dataTable-cell-background: var(--palettes-neutral-25);
 }
 
@@ -144,4 +145,8 @@
 			}
 		}
 	}
+}
+
+@mixin nested {
+	--components-dataTable-borderRadius: var(--pr-t-border-radius-default);
 }

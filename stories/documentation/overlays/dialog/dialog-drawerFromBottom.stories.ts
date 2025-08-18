@@ -13,7 +13,7 @@ function getTemplate(args: DialogDrawerFromBottomStory): string {
 			<header class="dialog-inside-header">
 				<button type="button" class="dialog-inside-header-button button">
 					<span class="lucca-icon icon-signClose" aria-hidden="true"></span>
-					<span class="u-mask">Fermer</span>
+					<span class="pr-u-mask">Fermer</span>
 				</button>
 				<div class="dialog-inside-header-container">
 					<h1 class="dialog-inside-header-container-title" id="dialogInsideHeaderTitle1">Title</h1>

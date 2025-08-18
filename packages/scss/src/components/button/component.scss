@@ -61,7 +61,8 @@
 	}
 
 	&:focus-visible {
-		@include a11y.focusVisible;
+		// Radius needed to override focused link / a
+		@include a11y.focusVisible($borderRadius: var(--components-button-borderRadius));
 	}
 
 	&:active {
