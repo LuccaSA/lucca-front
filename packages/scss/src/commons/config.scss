@@ -6,6 +6,8 @@
 $isNamespaced: false !default;
 $deprecatedSpacings: false !default;
 $deprecatedCardBoxMargin: false !default;
+$deprecatedUtilityPrefix: false !default;
+
 $prefersContrast: 'no-preference' !default;
 
 $fontFamily: 'SourceSans' !default;
@@ -84,6 +86,27 @@ $fontTokens: (
 	body-XS-lineHeight: var(--pr-t-font-lineHeight-200),
 	body-XS-fontWeight: var(--pr-t-font-fontWeight-regular),
 );
+
+$borderRadiusVars: (
+	'0': 0px,
+	'25': 2px,
+	'50': 4px,
+	'75': 6px,
+	'100': 8px,
+	'150': 12px,
+	'200': 16px,
+	'300': 24px,
+	'400': 32px,
+);
+
+$borderRadiusTokens: (
+	'structure': var(--pr-t-border-radius-150),
+	'default': var(--pr-t-border-radius-100),
+	'small': var(--pr-t-border-radius-75),
+	'full': '9999px',
+	'input': var(--pr-t-border-radius-default),
+);
+
 
 $product: 'brand' !default;
 $palettesShades: text, 0, 25, 50, 100, 200, 300, 400, 500, 600, 700, 800, 900; // text is deprecated
@@ -563,6 +586,7 @@ $elevation: (
 	shadow: (
 		'raised':
 			'0 0 0 1px color-mix(in srgb, var(--palettes-neutral-400) 8%, transparent), 0 1px 2px color-mix(in srgb, var(--palettes-neutral-400) 40%, transparent), 0 2px 4px color-mix(in srgb, var(--palettes-neutral-400) 20%, transparent)',
+		'button': '0 2px 2px 0 color-mix(in srgb, var(--palettes-neutral-900) 4%, transparent)',
 		'overflow':
 			'0 0 0 1px color-mix(in srgb, var(--palettes-neutral-400) 8%, transparent), 0 0 4px color-mix(in srgb, var(--palettes-neutral-400) 32%, transparent), 0 0 8px color-mix(in srgb, var(--palettes-neutral-400) 24%, transparent)',
 		'overlay':
@@ -677,13 +701,6 @@ $sizes: (
 	),
 );
 
-$borderRadius: (
-	'M': 4px,
-	'L': 8px,
-	'XL': 12px,
-	'full': 9999px,
-) !default;
-
 // opacity is deprecated
 $disabled: (
 	'opacity': 0.4,
@@ -731,4 +748,12 @@ $colorsRgb: (
 	'neutral-900': '19, 29, 53',
 	'grey-400': '172, 187, 215',
 	'grey-900': '19, 29, 53',
+) !default;
+
+// $borderRadius are deprecated
+$borderRadius: (
+	'M': 4px,
+	'L': 8px,
+	'XL': 12px,
+	'full': 9999px,
 ) !default;

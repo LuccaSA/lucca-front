@@ -4,23 +4,23 @@
 @mixin component($atRoot: namespace.$defaultAtRoot) {
 	margin-block-end: 1.2rem;
 
-	.titleSection-title,
-	h1,
-	h2,
-	h3,
-	h4,
-	h5,
-	h6 {
+	%marginBlockEnd0important {
+		margin-block-end: 0 !important;
+	}
+
+	:is(.titleSection-title, h1, h2, h3, h4, h5, h6) {
 		margin-block-end: 0;
 	}
 
-	.u-h1,
-	.u-h2,
-	.u-h3,
-	.u-h4,
-	.u-h5,
-	.u-h6 {
-		margin-block-end: 0 !important;
+	:is(.pr-u-h1, .pr-u-h2, .pr-u-h3, .pr-u-h4, .pr-u-h5, .pr-u-h6) {
+		@extend %marginBlockEnd0important
+	}
+
+	// Deprecated .u- utilities
+	@if config.$deprecatedUtilityPrefix {
+		:is(.u-h1, .u-h2, .u-h3, .u-h4, .u-h5, .u-h6) {
+			@extend %marginBlockEnd0important
+		}
 	}
 
 	@at-root ($atRoot) {

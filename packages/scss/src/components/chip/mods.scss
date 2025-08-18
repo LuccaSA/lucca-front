@@ -2,6 +2,7 @@
 
 @mixin S {
 	--components-chip-font: var(--pr-t-font-body-XS);
+	--components-chip-borderRadius: var(--pr-t-border-radius-small);
 }
 
 @mixin product {
@@ -18,7 +19,7 @@
 		}
 
 		&:focus-visible {
-			@include a11y.focusVisible($color: var(--palettes-neutral-0), $offset: -4px, $borderRadius: var(--commons-borderRadius-full));
+			@include a11y.focusVisible($color: var(--palettes-neutral-0), $offset: -4px, $borderRadius: var(--pr-t-border-radius-full));
 		}
 	}
 }

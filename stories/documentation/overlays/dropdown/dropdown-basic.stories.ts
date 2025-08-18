@@ -41,7 +41,7 @@ const code = `/* 1. Ajouter un bouton détenant la directive [luDropdown]="dropd
 		</a>
 	</li>
 	<li class="dropdown-list-option">
-		<button type="button" class="dropdown-list-option-action mod-delete" luDropdownItem>
+		<button type="button" class="dropdown-list-option-action mod-critical" luDropdownItem>
 			<span aria-hidden="true" class="lucca-icon icon-trashDelete"></span>
 			Supprimer
 		</button>

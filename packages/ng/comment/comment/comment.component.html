@@ -1,7 +1,7 @@
 <div class="comment" [class.mod-noAvatar]="noAvatar()" [class.mod-S]="size() === 'S'">
 	<div class="comment-infos">
 		@if (!noAvatar()) {
-			<div class="u-displayContents" aria-hidden="true">
+			<div class="pr-u-displayContents" aria-hidden="true">
 				<ng-container *ngTemplateOutlet="avatar()"></ng-container>
 			</div>
 		}

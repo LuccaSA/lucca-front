@@ -18,7 +18,7 @@
 @mixin hover {
 	--components-filterPill-borderColor: var(--palettes-product-400);
 	--components-filterPill-checkbox-borderColor: var(--palettes-neutral-600);
-	--components-filterPill-shadow: 0 0 0 1px var(--components-filterPill-borderColor), var(--pr-t-elevation-shadow-raised);
+	--components-filterPill-shadow: 0 0 0 1px var(--components-filterPill-borderColor), var(--pr-t-elevation-shadow-button);
 }
 
 @mixin active {
@@ -26,7 +26,7 @@
 
 	box-shadow:
 		0 0 0 1px var(--palettes-product-500),
-		var(--pr-t-elevation-shadow-raised);
+		var(--pr-t-elevation-shadow-button);
 }
 
 @mixin filledHover {

@@ -6,7 +6,7 @@ import { IconComponent } from '@lucca-front/ng/icon';
 	standalone: true,
 	template: `
 		<button
-			class="button mod-block u-textCenter mod-outlined u-textNeutral"
+			class="button mod-block pr-u-textCenter mod-outlined pr-u-textNeutral"
 			data-testid="open-expense-form"
 			type="button"
 			(click)="createExpenseFromForm()"
@@ -15,7 +15,7 @@ import { IconComponent } from '@lucca-front/ng/icon';
 		</button>
 		<a class="button mod-onlyIcon mod-text" [routerLink]="['.']">
 			<lu-icon icon="arrowLeft" />
-			<span class="u-mask">{{ 'dependencies.GO_BACK_TO_LIST' | transloco }}</span>
+			<span class="pr-u-mask">{{ 'dependencies.GO_BACK_TO_LIST' | transloco }}</span>
 		</a>
 		<button class="button palette-primary" type="button" [class.is-loading]="saving$ | async" (click)="save()">
 			{{translations.ADMIN_SAVE}}

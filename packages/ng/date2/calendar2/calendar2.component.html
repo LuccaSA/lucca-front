@@ -8,14 +8,15 @@
 					<button type="button" class="calendar-name-button" (click)="displayMode.set('month')">{{ currentMonthLabel() }}</button>&ngsp;
 					<button type="button" class="calendar-name-button" (click)="displayMode.set('year')">{{ currentYearLabel() }}</button>
 				}
-				<span class="u-mask">{{ intl.directionKeysTip }} </span>
+				<span class="pr-u-mask">{{ intl.directionKeysTip }} </span>
 			</div>
 			<table class="calendar-table" role="grid" aria-labelledby="calendar-name">
 				<thead class="calendar-table-head">
 					<tr class="calendar-table-head-row">
 						@for (day of daysOfWeek; track day.long) {
-							<th class="calendar-table-head-row-cell" scope="col" [attr.data-content-after]="day.short.substring(0, 1)">
-								<span class="u-mask">{{ day.long }}</span>
+							<th class="calendar-table-head-row-cell" scope="col">
+								<span [attr.data-content-after]="day.short.substring(0, 1)" aria-hidden="true"></span>
+								<span class="pr-u-mask">{{ day.long }}</span>
 							</th>
 						}
 					</tr>
@@ -47,7 +48,7 @@
 										>
 											{{ day.day }}
 											@if (day.isCurrent) {
-												<span class="u-mask">({{ todayLabel }})</span>
+												<span class="pr-u-mask">({{ todayLabel }})</span>
 											}
 											@if (day.isWeekend) {
 												<svg class="calendar-table-body-row-cell-action-stripes">
@@ -96,7 +97,7 @@
 				} @else {
 					<button type="button" class="calendar-name-button" (click)="displayMode.set('year')">{{ currentYearLabel() }}</button>
 				}
-				<span class="u-mask">{{ intl.directionKeysTip }} </span>
+				<span class="pr-u-mask">{{ intl.directionKeysTip }} </span>
 			</div>
 			<table class="calendar-table" role="grid" aria-labelledby="calendar-year-name">
 				<tbody class="calendar-table-body">
@@ -123,9 +124,9 @@
 										(keydown.space)="onCellClicked(month.date)"
 										luCalendar2Mode="month"
 									>
-										<span class="u-mask">{{ month.long }}</span>
+										<span class="pr-u-mask">{{ month.long }}</span>
 										@if (month.isCurrent) {
-											<span class="u-mask">({{ thisMonthLabel }})</span>
+											<span class="pr-u-mask">({{ thisMonthLabel }})</span>
 										}
 									</button>
 								</td>
@@ -138,7 +139,7 @@
 		@case ("year") {
 			<div class="calendar-name" id="calendar-decade-name">
 				{{ currentDecadeLabel() }}
-				<span class="u-mask">{{ intl.directionKeysTip }} </span>
+				<span class="pr-u-mask">{{ intl.directionKeysTip }} </span>
 			</div>
 			<table class="calendar-table" role="grid" aria-labelledby="calendar-decade-name">
 				<tbody class="calendar-table-body">
@@ -166,7 +167,7 @@
 									>
 										{{ year.name }}
 										@if (year.isCurrent) {
-											<span class="u-mask">({{ thisYearLabel }})</span>
+											<span class="pr-u-mask">({{ thisYearLabel }})</span>
 										}
 									</button>
 								</td>
