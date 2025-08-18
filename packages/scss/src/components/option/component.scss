@@ -19,7 +19,7 @@
 			opacity: var(--components-option-content-opacity);
 			background-color: var(--components-option-content-backgroundColor);
 			color: var(--components-option-content-color);
-			border-radius: var(--commons-borderRadius-M);
+			border-radius: var(--pr-t-border-radius-default);
 			margin-block-start: var(--components-option-content-marginBlockStart);
 			padding: var(--components-option-content-padding);
 			transition-property: background-color, opacity;
@@ -44,7 +44,7 @@
 				inset-inline-start: calc(var(--pr-t-spacings-50) * -1);
 				inline-size: 2px;
 				background-color: var(--components-option-content-before-backgroundColor);
-				border-radius: 0 var(--commons-borderRadius-M) var(--commons-borderRadius-M) 0;
+				border-radius: 0 var(--pr-t-border-radius-50) var(--pr-t-border-radius-50) 0;
 			}
 
 			&::after {
