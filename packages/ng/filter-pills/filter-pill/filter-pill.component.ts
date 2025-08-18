@@ -128,8 +128,8 @@ export class FilterPillComponent {
 
 	shouldHideCombobox = computed(() => this.inputComponentRef()?.hideCombobox?.() || false);
 
-	inputIsEmpty = computed(() => this.inputComponentRef()?.isFilterPillEmpty());
-	inputIsClearable = computed(() => this.inputComponentRef()?.isFilterPillClearable());
+	inputIsEmpty = computed(() => this.inputComponentRef()?.isFilterPillEmpty() || true);
+	inputIsClearable = computed(() => this.inputComponentRef()?.isFilterPillClearable() || false);
 
 	shouldShowColon = computed(() => this.inputComponentRef()?.showColon?.() || !this.inputIsEmpty());
 
