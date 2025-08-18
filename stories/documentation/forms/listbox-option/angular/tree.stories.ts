@@ -9,7 +9,7 @@ interface OptionBasicStory {
 }
 
 export default {
-	title: 'Documentation/FormsListbox Option/Angular/Tree',
+	title: 'Documentation/Forms/Listbox Option/Angular/Tree',
 	decorators: [
 		moduleMetadata({
 			imports: [ListboxComponent, OptionComponent, IconComponent, Treeitem],

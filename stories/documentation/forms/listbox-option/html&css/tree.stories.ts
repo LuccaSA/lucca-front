@@ -13,7 +13,7 @@ export default {
 		const modMultiple = args.multiple ? ` mod-multiple` : ``;
 		const deepNestingItem = args.deepNesting
 			? `
-<ul class="listboxOptionWrapper" role="group" [attr.style]="'--components-optionWrapper-level: 3'">
+<ul class="listboxOptionWrapper" role="group" [attr.style]="'--components-listboxOptionWrapper-level: 3'">
 	<li role="treeitem" class="listboxOption">
 		<div class="listboxOption-content">
 			<span class="listboxOption-content-checkboxField checkboxField" aria-hidden="true">
@@ -22,7 +22,7 @@ export default {
 			</span>
 			option 2.2.4.1
 		</div>
-		<ul class="listboxOptionWrapper" role="group" [attr.style]="'--components-optionWrapper-level: 4'">
+		<ul class="listboxOptionWrapper" role="group" [attr.style]="'--components-listboxOptionWrapper-level: 4'">
 			<li role="treeitem" class="listboxOption">
 				<div class="listboxOption-content">
 					<span class="listboxOption-content-checkboxField checkboxField" aria-hidden="true">
