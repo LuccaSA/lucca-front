@@ -1,11 +1,13 @@
 import { NgClass } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
+import { ChangeDetectionStrategy, Component, computed, Input, ViewEncapsulation } from '@angular/core';
 import { LuccaIcon } from '@lucca-front/icons';
+import { LuSafeExternalSvgPipe } from '@lucca-front/ng/safe-content';
 
 @Component({
 	selector: 'lu-icon',
 	standalone: true,
-	imports: [NgClass],
+	imports: [NgClass, LuSafeExternalSvgPipe, HttpClientModule],
 	templateUrl: './icon.component.html',
 	styleUrls: ['./icon.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
@@ -29,4 +31,8 @@ export class IconComponent {
 			[`mod-${this.size}`]: !!this.size,
 		};
 	}
+
+	// iconUrl = computed(() => `https://cdn.lucca.fr/transverse/prisme/icons/svg/${this.icon}.svg`);
+
+	iconUrl = computed(() => 'https://cdn.lucca.fr/transverse/prisme/visuals/empty-states/icons/iconpictureAction.svg');
 }
