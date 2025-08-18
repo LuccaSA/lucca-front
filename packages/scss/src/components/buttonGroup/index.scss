@@ -8,7 +8,8 @@
 		@include outlined;
 	}
 
-	&.mod-text {
-		@include text;
+	// .mod-text deprecated
+	&.mod-text, .mod-ghost {
+		@include ghost;
 	}
 }
