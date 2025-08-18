@@ -1,6 +1,6 @@
 @use 'exports' as *;
 
-.option {
+.listboxOption {
 	@include vars;
 	@include component;
 
@@ -32,14 +32,14 @@
 			@include groupHover;
 		}
 
-		> .option-content {
+		> .listboxOption-content {
 			&:hover {
 				@include groupHoverReset;
 			}
 		}
 
-		&:not(:has(.option.mod-select)) {
-			> .option-content {
+		&:not(:has(.listboxOption.mod-select)) {
+			> .listboxOption-content {
 				@include groupHoverReset;
 			}
 		}
@@ -51,7 +51,7 @@
 
 	&[aria-selected="true"],
 	&[aria-checked="true"] {
-		> .option-content {
+		> .listboxOption-content {
 			@include selected;
 
 			&.is-hovered,
@@ -66,7 +66,7 @@
 	}
 
 	&[aria-disabled="true"] {
-		> .option-content {
+		> .listboxOption-content {
 			@include disabled;
 
 			&:hover {
@@ -76,14 +76,14 @@
 
 		&[aria-selected="true"],
 		&[aria-checked="true"] {
-			> .option-content {
+			> .listboxOption-content {
 				@include selectedDisabled;
 			}
 		}
 	}
 }
 
-.option-content {
+.listboxOption-content {
 	@include varsContent;
 
 	&.is-hovered,
@@ -96,14 +96,14 @@
 	}
 }
 
-.optionWrapper {
+.listboxOptionWrapper {
 	@include varsWrapper;
 
-	.optionWrapper {
+	.listboxOptionWrapper {
 		@include nestedWrapper;
 		@include nested;
 
-		.optionWrapper {
+		.listboxOptionWrapper {
 			@include nested(2);
 		}
 	}
@@ -118,10 +118,10 @@
 
 	&.mod-multiple {
 		&,
-		.optionWrapper {
+		.listboxOptionWrapper {
 			@include multiple;
 
-			.option {
+			.listboxOption {
 				&:hover,
 				&.is-hovered {
 					@include multipleHover;
@@ -133,7 +133,7 @@
 
 				&[aria-selected="true"],
 				&[aria-checked="true"] {
-					> .option-content {
+					> .listboxOption-content {
 						@include multipleSelected;
 
 						&:hover,
@@ -148,7 +148,7 @@
 				}
 
 				&[aria-checked="mixed"] {
-					> .option-content {
+					> .listboxOption-content {
 						@include multipleMixed;
 
 						&:hover,
@@ -163,19 +163,19 @@
 				}
 
 				&[aria-disabled="true"], {
-					> .option-content {
+					> .listboxOption-content {
 						@include multipleDisabled;
 					}
 
 					&[aria-selected="true"],
 					&[aria-checked="true"] {
-						> .option-content {
+						> .listboxOption-content {
 							@include multipleSelectedDisabled;
 						}
 					}
 
 					&[aria-checked="mixed"] {
-						> .option-content {
+						> .listboxOption-content {
 							@include multipleMixedDisabled;
 						}
 					}

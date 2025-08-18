@@ -6,17 +6,17 @@ interface OptionBasicStory {
 }
 
 export default {
-	title: 'Documentation/Forms/Option/HTML & CSS/Empty',
+	title: 'Documentation/Forms/Listbox Option/HTML & CSS/Empty',
 	argTypes: {},
 	render: (args: OptionBasicStory) => {
 		const modMultiple = args.multiple ? ` mod-multiple` : ``;
 		return {
 			template: cleanupTemplate(`
-<ul role="listbox" class="optionWrapper${modMultiple}" aria-describedby="emptyMsgListbox1">
-	<li class="option" aria-hidden="true" id="emptyMsgListbox1">
-		<div class="option-content">
-			<span class="option-content-checkboxField checkboxField" aria-hidden="true">
-				<span class="option-content-checkboxField-input checkboxField-input"></span>
+<ul role="listbox" class="listboxOptionWrapper${modMultiple}" aria-describedby="emptyMsgListbox1">
+	<li class="listboxOption" aria-hidden="true" id="emptyMsgListbox1">
+		<div class="listboxOption-content">
+			<span class="listboxOption-content-checkboxField checkboxField" aria-hidden="true">
+				<span class="listboxOption-content-checkboxField-input checkboxField-input"></span>
 				<span class="checkboxField-icon"><span class="checkboxField-icon-check"></span></span>
 			</span>
 			 Aucun résultat pour votre recherche

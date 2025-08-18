@@ -8,7 +8,7 @@ interface OptionBasicStory {
 }
 
 export default {
-	title: 'Documentation/Forms/Option/Angular/Add option',
+	title: 'Documentation/Forms/Listbox Option/Angular/Add option',
 	decorators: [
 		moduleMetadata({
 			imports: [ListboxComponent, OptionComponent, IconComponent],

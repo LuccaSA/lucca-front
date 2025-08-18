@@ -12,7 +12,7 @@ let nextId = 0;
 	templateUrl: './listbox.component.html',
 	encapsulation: ViewEncapsulation.None,
 	host: {
-		class: 'optionWrapper',
+		class: 'listboxOptionWrapper',
 		'[role]': 'tree() ? "tree" : "listbox"',
 		'[class.mod-multiple]': 'multiple()',
 		'[attr.aria-busy]': 'state() === "loading"',

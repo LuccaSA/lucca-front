@@ -1,7 +1,7 @@
-<div class="option-content" [class.is-hovered]="hovered()" [attr.id]="group() ? groupId : null">
+<div class="listboxOption-content" [class.is-hovered]="hovered()" [attr.id]="group() ? groupId : null">
 	@if (multiple() && !add() && !selectAll() && !select()) {
-		<span class="option-content-checkboxField checkboxField" aria-hidden="true">
-			<span class="option-content-checkboxField-input checkboxField-input"></span>
+		<span class="listboxOption-content-checkboxField checkboxField" aria-hidden="true">
+			<span class="listboxOption-content-checkboxField-input checkboxField-input"></span>
 			<span class="checkboxField-icon"><span class="checkboxField-icon-check"></span></span>
 		</span>
 	}
@@ -16,7 +16,7 @@
 <ng-content select="[optgroup]" />
 
 @if (treeitemContent()) {
-	<div class="optionWrapper" role="group" [attr.style]="level ? '--components-optionWrapper-level: ' + level : null">
+	<div class="listboxOptionWrapper" role="group" [attr.style]="level ? '--components-optionWrapper-level: ' + level : null">
 		<ng-content select="[treeitem]" />
 	</div>
 }

@@ -9,7 +9,7 @@ interface OptionBasicStory {
 }
 
 export default {
-	title: 'Documentation/Forms/Option/Angular/Basic',
+	title: 'Documentation/Forms/Listbox Option/Angular/Basic',
 	decorators: [
 		moduleMetadata({
 			imports: [ListboxComponent, OptionComponent],

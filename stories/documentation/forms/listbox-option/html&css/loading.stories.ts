@@ -8,7 +8,7 @@ interface OptionBasicStory {
 }
 
 export default {
-	title: 'Documentation/Forms/Option/HTML & CSS/Loading',
+	title: 'Documentation/Forms/Listbox Option/HTML & CSS/Loading',
 	decorators: [
 		moduleMetadata({
 			imports: [LoadingComponent],
@@ -20,32 +20,32 @@ export default {
 		const modLoading = args.loading ? ` aria-busy="true"` : ``;
 		return {
 			template: cleanupTemplate(`
-<ul role="listbox" class="optionWrapper${modMultiple}"${modLoading}>
-	<li role="option" class="option">
-		<div class="option-content">
-			<span class="option-content-checkboxField checkboxField" aria-hidden="true">
-				<span class="option-content-checkboxField-input checkboxField-input"></span>
+<ul role="listbox" class="listboxOptionWrapper${modMultiple}"${modLoading}>
+	<li role="option" class="listboxOption">
+		<div class="listboxOption-content">
+			<span class="listboxOption-content-checkboxField checkboxField" aria-hidden="true">
+				<span class="listboxOption-content-checkboxField-input checkboxField-input"></span>
 				<span class="checkboxField-icon"><span class="checkboxField-icon-check"></span></span>
 			</span>
 			option 1
 		</div>
 	</li>
-	<li role="option" class="option">
-		<div class="option-content">
-			<span class="option-content-checkboxField checkboxField" aria-hidden="true">
-				<span class="option-content-checkboxField-input checkboxField-input"></span>
+	<li role="option" class="listboxOption">
+		<div class="listboxOption-content">
+			<span class="listboxOption-content-checkboxField checkboxField" aria-hidden="true">
+				<span class="listboxOption-content-checkboxField-input checkboxField-input"></span>
 				<span class="checkboxField-icon"><span class="checkboxField-icon-check"></span></span>
 			</span>
 			option 2
 		</div>
 	</li>
-	<li role="option" class="option">
-		<div class="option-content">
-			<span class="option-content-checkboxField checkboxField" aria-hidden="true">
-				<span class="option-content-checkboxField-input checkboxField-input"></span>
+	<li role="option" class="listboxOption">
+		<div class="listboxOption-content">
+			<span class="listboxOption-content-checkboxField checkboxField" aria-hidden="true">
+				<span class="listboxOption-content-checkboxField-input checkboxField-input"></span>
 				<span class="checkboxField-icon"><span class="checkboxField-icon-check"></span></span>
 			</span>
-			<lu-loading class="option-content-loading">Chargement…</lu-loading>
+			<lu-loading class="listboxOption-content-loading">Chargement…</lu-loading>
 		</div>
 	</li>
 </ul>`),

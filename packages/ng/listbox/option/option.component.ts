@@ -16,7 +16,7 @@ export class Treeitem {}
 	templateUrl: './option.component.html',
 	encapsulation: ViewEncapsulation.None,
 	host: {
-		class: 'option',
+		class: 'listboxOption',
 		'[attr.role]': 'group() ? "group" : tree() ? "treeitem" : "option"',
 		'[attr.aria-labelledby]': 'group() ? groupId : null',
 		'[attr.aria-checked]': 'mixed() ? "mixed" : checked()',
