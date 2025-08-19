@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, effect, input, output } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, effect, input, output } from '@angular/core';
 import { getIntl, IntlParamsPipe } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { LU_PAGINATION_TRANSLATIONS } from './pagination.translate';
@@ -12,8 +12,8 @@ import { LU_PAGINATION_TRANSLATIONS } from './pagination.translate';
 export class PaginationComponent {
 	protected intl = getIntl(LU_PAGINATION_TRANSLATIONS);
 
-	readonly isFirstPage = input.required<boolean>();
-	readonly isLastPage = input.required<boolean>();
+	readonly isFirstPage = input(false, { transform: booleanAttribute });
+	readonly isLastPage = input(false, { transform: booleanAttribute });
 
 	readonly from = input<number | null>();
 	readonly to = input<number | null>();

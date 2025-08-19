@@ -413,6 +413,7 @@ export const IconsList = [
 	{ icon: 'peopleSwitch', deprecated: false },
 	{ icon: 'send2user', deprecated: true },
 	{ icon: 'userSendTo', deprecated: true },
+	{ icon: 'peopleFolder', deprecated: false },
 	{ icon: 'peopleTeacher', deprecated: false },
 	{ icon: 'teacher', deprecated: true },
 	{ icon: 'pictureGallery', deprecated: false },

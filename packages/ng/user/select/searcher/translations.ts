@@ -3,13 +3,13 @@
 		includeFormerEmployees: 'Include former employees',
 	},
 	de: {
-		includeFormerEmployees: 'Ausgeschiedene Mitarbeitende einbeziehen ',
+		includeFormerEmployees: 'Ausgeschiedene Mitarbeitende einbeziehen',
 	},
 	fr: {
-		includeFormerEmployees: 'Inclure les salariés partis',
+		includeFormerEmployees: 'Inclure les collaborateurs partis',
 	},
 	it: {
-		includeFormerEmployees: 'Includere gli ex dipendenti',
+		includeFormerEmployees: 'Includere gli ex collaboratori',
 	},
 	nl: {
 		includeFormerEmployees: 'Inclusief medewerkers die zijn vertrokken',
@@ -18,7 +18,7 @@
 		includeFormerEmployees: 'Inclusief medewerkers die zijn vertrokken',
 	},
 	es: {
-		includeFormerEmployees: 'Incluir a los antiguos empleados',
+		includeFormerEmployees: 'Incluir a los empleados inactivos',
 	},
 	pt: {
 		includeFormerEmployees: 'Incluir os trabalhadores que saíram',

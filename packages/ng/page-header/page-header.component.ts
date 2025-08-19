@@ -13,7 +13,7 @@ import { PortalContent, PortalDirective } from '@lucca-front/ng/core';
 export class PageHeaderComponent {
 	description = input<PortalContent | null>(null);
 	label = input<PortalContent | null>(null);
-	container = input<boolean, boolean>(false, { transform: booleanAttribute });
+	container = input(false, { transform: booleanAttribute });
 
 	descriptionIsString = computed(() => this.isStringPortalContent(this.description()));
 	labelIsString = computed(() => this.isStringPortalContent(this.label()));

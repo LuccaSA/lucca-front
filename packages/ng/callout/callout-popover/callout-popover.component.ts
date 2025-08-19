@@ -125,7 +125,7 @@ export class CalloutPopoverComponent implements OnDestroy {
 
 	get calloutOverlayClasses() {
 		return {
-			[`mod-${this.size}`]: !!this.size,
+			[`mod-${this.contentSize}`]: !!this.contentSize,
 		};
 	}
 
