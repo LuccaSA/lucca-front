@@ -1,0 +1,39 @@
+@mixin XXL {
+	--components-icon-svg-size: 2.5rem;
+}
+
+@mixin XL {
+	--components-icon-svg-size: 2rem;
+}
+
+@mixin L {
+	--components-icon-svg-size: 1.75rem;
+}
+
+@mixin M {
+	--components-icon-svg-size: 1.5rem;
+}
+
+@mixin S {
+	--components-icon-svg-size: 1.25rem;
+}
+
+@mixin XS {
+	--components-icon-svg-size: 1rem;
+}
+
+@mixin XXS {
+	--components-icon-svg-size: 0.75rem;
+}
+
+@mixin placeholder {
+	--components-icon-svg-fill: var(--palettes-neutral-400);
+}
+
+@mixin inherit {
+	--components-icon-svg-fill: currentColor;
+}
+
+@mixin light {
+	--components-icon-svg-fill: var(--palettes-neutral-600);
+}

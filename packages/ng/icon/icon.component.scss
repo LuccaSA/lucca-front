@@ -1,5 +1,3 @@
-// @use '@lucca-front/icons/src/main';
-
 lu-icon {
 	display: inline-flex;
 }
@@ -32,42 +30,3 @@ lu-icon {
 	color: var(--palettes-neutral-400);
 }
 
-.icon {
-	--components-icon-svg-size: 1.5rem;
-
-	display: inline-flex;
-
-	svg {
-		width: var(--components-icon-svg-size);
-		height: var(--components-icon-svg-size);
-		color: var(--palettes-700, var(--palettes-neutral-700));
-	}
-
-	&.mod-XXL {
-		--components-icon-svg-size: 2.5rem;
-	}
-
-	&.mod-XL {
-		--components-icon-svg-size: 2rem;
-	}
-
-	&.mod-L {
-		--components-icon-svg-size: 1.75rem;
-	}
-
-	&.mod-M {
-		--components-icon-svg-size: 1.5rem;
-	}
-
-	&.mod-S {
-		--components-icon-svg-size: 1.25rem;
-	}
-
-	&.mod-XS {
-		--components-icon-svg-size: 1rem;
-	}
-
-	&.mod-XXS {
-		--components-icon-svg-size: 0.75rem;
-	}
-}

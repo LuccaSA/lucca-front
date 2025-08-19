@@ -1,0 +1,4 @@
+@mixin vars {
+	--components-icon-svg-size: 1.5rem;
+	--components-icon-svg-fill: var(--palettes-700, var(--palettes-neutral-700));
+}

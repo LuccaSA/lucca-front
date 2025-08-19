@@ -1,6 +1,6 @@
 import { NgClass } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
-import { ChangeDetectionStrategy, Component, computed, Input, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, ViewEncapsulation } from '@angular/core';
 import { LuccaIcon } from '@lucca-front/icons';
 import { LuSafeExternalSvgPipe } from '@lucca-front/ng/safe-content';
 
@@ -14,25 +14,14 @@ import { LuSafeExternalSvgPipe } from '@lucca-front/ng/safe-content';
 	encapsulation: ViewEncapsulation.None,
 })
 export class IconComponent {
-	@Input({ required: true })
-	icon: LuccaIcon;
-
-	@Input()
-	alt: string;
-
-	@Input()
-	size: 'XXS' | 'XS' | 'S' | 'M' | 'L' | 'XL' | 'XXL';
-
-	@Input()
-	color: 'primary' | 'secondary' | 'product' | 'error' | 'warning' | 'success' | 'light' | 'placeholder' | 'inherit' = 'inherit';
+	icon = input<LuccaIcon>();
+	alt = input<string | null>(null);
+	size = input<'XXS' | 'XS' | 'S' | 'M' | 'L' | 'XL' | 'XXL' | null>(null);
+	color = input<'primary' | 'secondary' | 'product' | 'error' | 'warning' | 'success' | 'light' | 'placeholder' | 'inherit'>('inherit');
 
 	get iconClasses() {
 		return {
-			[`mod-${this.size}`]: !!this.size,
+			[`mod-${this.size()}`]: !!this.size(),
 		};
 	}
-
-	// iconUrl = computed(() => `https://cdn.lucca.fr/transverse/prisme/icons/svg/${this.icon}.svg`);
-
-	iconUrl = computed(() => 'https://cdn.lucca.fr/transverse/prisme/visuals/empty-states/icons/iconpictureAction.svg');
 }

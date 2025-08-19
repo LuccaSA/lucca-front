@@ -1,7 +1,9 @@
-<span aria-hidden="true" class="lucca-icon icon-{{ icon }} icon-color-{{ color }}" [ngClass]="iconClasses"></span>
-
-<span class="icon mod-{{ icon }} mod-S palette-critical" [innerHtml]="iconUrl() | luSafeExternalSvg"></span>
-
-@if (alt) {
-	<span class="pr-u-mask">{{ alt }}</span>
+<span
+	aria-hidden="true"
+	class="icon mod-{{ icon() }} palette-{{ color() }}"
+	[ngClass]="iconClasses"
+	[innerHtml]="`https://cdn.lucca.fr/transverse/prisme/icons/svg/${this.icon()}.svg` | luSafeExternalSvg"
+></span>
+@if (alt()) {
+	<span class="pr-u-mask">{{ alt() }}</span>
 }

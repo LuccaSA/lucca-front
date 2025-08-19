@@ -1,0 +1,12 @@
+@use '@lucca-front/scss/src/commons/utils/namespace';
+
+@mixin component($atRoot: namespace.$defaultAtRoot) {
+	display: inline-flex;
+
+	svg {
+		width: var(--components-icon-svg-size);
+		height: var(--components-icon-svg-size);
+		fill: var(--components-icon-svg-fill);
+	}
+}
+

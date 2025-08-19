@@ -1,0 +1,46 @@
+@use 'exports' as *;
+
+.icon {
+	@include vars;
+	@include component;
+
+	&.mod-XXL {
+		@include XXL;
+	}
+
+	&.mod-XL {
+		@include XL;
+	}
+
+	&.mod-L {
+		@include L;
+	}
+
+	&.mod-M {
+		@include M;
+	}
+
+	&.mod-S {
+		@include S;
+	}
+
+	&.mod-XS {
+		@include XS;
+	}
+
+	&.mod-XXS {
+		@include XXS;
+	}
+
+	&.palette-placeholder {
+		@include placeholder;
+	}
+
+	&.palette-inherit {
+		@include inherit;
+	}
+
+	&.palette-light {
+		@include light;
+	}
+}
