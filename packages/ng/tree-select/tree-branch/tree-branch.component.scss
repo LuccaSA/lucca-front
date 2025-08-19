@@ -1,0 +1,69 @@
+@mixin nestedSimple($level: 1) {
+	--components-treeBranch-level: #{$level};
+	--components-options-item-padding-horizontal: calc(var(--pr-t-spacings-100) + var(--pr-t-spacings-100) * var(--components-treeBranch-level)) var(--pr-t-spacings-100);
+}
+
+lu-tree-branch {
+	lu-tree-branch {
+		lu-select-option {
+			@include nestedSimple($level: 1);
+		}
+
+		lu-tree-branch {
+			lu-select-option {
+				@include nestedSimple($level: 2);
+			}
+
+			lu-tree-branch {
+				lu-select-option {
+					@include nestedSimple($level: 3);
+				}
+			}
+		}
+	}
+}
+
+@mixin nestedMulti($level: 1) {
+	--components-treeBranch-level: #{$level};
+	--components-options-item-multiple-padding: calc(1.75rem + var(--pr-t-spacings-100) * var(--components-treeBranch-level));
+
+	.optionItem-value {
+		&::before, &::after {
+			inset-inline-start: calc(var(--pr-t-spacings-100) * var(--components-treeBranch-level));
+		}
+	}
+}
+
+.lu-picker-panel.lu-option-picker-panel.mod-multiple {
+	.lu-picker-content-option {
+		gap: 0;
+	}
+
+	lu-tree-branch {
+		lu-select-option {
+			@include nestedMulti($level: 1);
+
+			margin-top: var(--pr-t-spacings-50);
+		}
+
+		lu-tree-branch {
+			lu-select-option {
+				@include nestedMulti($level: 2);
+			}
+
+			lu-tree-branch {
+				lu-select-option {
+					@include nestedMulti($level: 3);
+				}
+			}
+		}
+	}
+
+	.lu-picker-content-option {
+		> lu-tree-branch:first-of-type {
+			> lu-select-option:first-of-type {
+				margin-top: 0;
+			}
+		}
+	}
+}

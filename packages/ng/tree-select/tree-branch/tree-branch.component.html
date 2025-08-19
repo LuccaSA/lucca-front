@@ -13,17 +13,16 @@
 	[hasChildren]="branch().children?.length > 0"
 />
 @for (child of branch().children; track $index) {
-	<div style="padding-left: 1rem">
-		<lu-tree-branch
-			[branch]="child"
-			[optionTpl]="optionTpl()"
-			[optionIndex]="optionIndex() + '-' + $index"
-			[optionComparer]="optionComparer()"
-			[selectedOptions]="selectedOptions()"
-			[simpleMode]="simpleMode()"
-			(toggleOne)="toggleOne.emit($event)"
-			(selectMany)="selectMany.emit($event)"
-			(unselectMany)="unselectMany.emit($event)"
-		/>
-	</div>
+	<lu-tree-branch
+		[branch]="child"
+		[optionTpl]="optionTpl()"
+		[optionIndex]="optionIndex() + '-' + $index"
+		[optionComparer]="optionComparer()"
+		[selectedOptions]="selectedOptions()"
+		[simpleMode]="simpleMode()"
+		(toggleOne)="toggleOne.emit($event)"
+		(selectMany)="selectMany.emit($event)"
+		(unselectMany)="unselectMany.emit($event)"
+	/>
+	<!-- use --components-treeBranch-level to apply specific child level-->
 }
