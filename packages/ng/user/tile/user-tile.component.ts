@@ -75,7 +75,7 @@ export class LuUserTileComponent {
 	}
 
 	/**
-	 * Which size should the callout be? Defaults to medium
+	 * Which size should the user tile be? Defaults to medium
 	 */
 	size = input<'L' | 'M' | 'S' | 'XS'>();
 
