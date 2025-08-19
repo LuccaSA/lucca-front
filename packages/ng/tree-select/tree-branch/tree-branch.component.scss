@@ -43,7 +43,7 @@ lu-tree-branch {
 		lu-select-option {
 			@include nestedMulti($level: 1);
 
-			margin-top: var(--pr-t-spacings-50);
+			margin-block-start: var(--pr-t-spacings-50);
 		}
 
 		lu-tree-branch {
@@ -62,7 +62,7 @@ lu-tree-branch {
 	.lu-picker-content-option {
 		> lu-tree-branch:first-of-type {
 			> lu-select-option:first-of-type {
-				margin-top: 0;
+				margin-block-start: 0;
 			}
 		}
 	}
