@@ -10,7 +10,7 @@
 	(click)="toggle(branch())"
 	(onlyParent)="toggleOne.emit(branch().node)"
 	(onlyChildren)="selectOnlyChildren(branch())"
-	[hasChildren]="branch().children?.length > 0"
+	[hasChildren]="!simpleMode() && branch().children?.length > 0"
 />
 @for (child of branch().children; track $index) {
 	<lu-tree-branch

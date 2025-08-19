@@ -3,7 +3,6 @@ import { ALuSelectInputComponent, LuIsOptionSelectedPipe, LuOptionComparer, LuOp
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { LuMultiSelectPanelComponent } from '../../multi-select/panel';
 import { LuMultiSelectInputComponent } from '../../multi-select/input';
-import { LuOptionComponent } from '../../core-select/option/option.component';
 import { CoreSelectPanelElement } from '../../core-select/panel/selectable-item';
 
 @Component({
