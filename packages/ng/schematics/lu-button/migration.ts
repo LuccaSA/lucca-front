@@ -1,12 +1,12 @@
-import { HtmlAst } from '../lib/html-ast.js';
-import { SourceFile } from 'typescript';
-import { extractNgTemplatesIncludingHtml } from '../lib/angular-template';
 import { Tree } from '@angular-devkit/schematics';
-import { currentSchematicContext } from '../lib/lf-schematic-context';
 import type { TmplAstElement } from '@angular/compiler';
-import { insertAngularImportIfNeeded,insertTSImportIfNeeded } from '../lib/angular-component-ast';
-import { applyToUpdateRecorder } from '@schematics/angular/utility/change';
 import { ButtonComponent } from '@lucca-front/ng/button';
+import { applyToUpdateRecorder } from '@schematics/angular/utility/change';
+import { SourceFile } from 'typescript';
+import { insertAngularImportIfNeeded, insertTSImportIfNeeded } from '../lib/angular-component-ast';
+import { extractNgTemplatesIncludingHtml } from '../lib/angular-template';
+import { HtmlAst } from '../lib/html-ast.js';
+import { currentSchematicContext } from '../lib/lf-schematic-context';
 
 
 interface CssButton {
@@ -43,10 +43,10 @@ export function migrateComponent(sourceFile: SourceFile, path: string, tree: Tre
 				let thingsToAdd = ` luButton${button.type ? `="${button.type}"` : ""} `;
 				// Converting inputs
 				if (button.inputs.size) {
-					thingsToAdd += `size="${button.inputs.size} `;
+					thingsToAdd += `size="${button.inputs.size}" `;
 				}
 				if (button.inputs.state) {
-					thingsToAdd += `state="${button.inputs.state} `;
+					thingsToAdd += `state="${button.inputs.state}" `;
 				}
 				if (button.inputs.palette) {
 					thingsToAdd += `palette="${button.inputs.palette}" `;
@@ -78,7 +78,7 @@ export function migrateComponent(sourceFile: SourceFile, path: string, tree: Tre
 							`mod-withIcon`,
 							`is-${button.inputs.state}`,
 							`mod-delete`,
-							`mod-${button.size}`
+							`mod-${button.inputs.size}`
 						].includes(c);
 					}).join(' ');
 					templateUpdate.remove(button.nodeOffset + classesNode.keySpan.start.offset - 1, classesNode.sourceSpan.toString().length + 1);

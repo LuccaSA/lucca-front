@@ -1,65 +1,49 @@
 @use '@lucca-front/scss/src/commons/utils/a11y';
 
 @mixin outlined {
-background-color: var(--palettes-400, var(--palettes-neutral-400));
-box-shadow: 0 0 0 1px var(--palettes-400, var(--palettes-neutral-400));
+	background-color: var(--palettes-400, var(--palettes-neutral-400));
+	box-shadow: 0 0 0 1px var(--palettes-400, var(--palettes-neutral-400));
 
-&:is(.is-disabled, .disabled) {
-	box-shadow: 0 0 0 1px var(--palettes-neutral-200); // disabled token candidate
-}
+	&:is(.is-disabled, .disabled) {
+		box-shadow: 0 0 0 1px var(--palettes-neutral-200); // disabled token candidate
+	}
 
-.button {
-	&:is(.mod-outline, .mod-outlined) {
-		box-shadow: none;
-
-		&:hover {
+	.button {
+		&:is(.mod-outline, .mod-outlined) {
 			box-shadow: none;
-		}
 
-		&:focus-within {
-			box-shadow: none;
-		}
+			&:hover {
+				box-shadow: none;
+			}
 
-		&:focus-visible {
-			@include a11y.focusVisible($offset: 3px);
-		}
+			&:focus-within {
+				box-shadow: none;
+			}
 
-		&:is([disabled], .is-disabled) {
-			box-shadow: 0 0 0 1px var(--palettes-neutral-200); // disabled token candidate
+			&:focus-visible {
+				@include a11y.focusVisible($offset: 3px);
+			}
+
+			&:is([disabled], .is-disabled) {
+				box-shadow: 0 0 0 1px var(--palettes-neutral-200); // disabled token candidate
+			}
 		}
 	}
 }
-}
 
-@mixin text {
-.button {
-	&:is(.mod-text, .mod-link) {
-		box-shadow: none;
-
-		&:hover {
+@mixin ghost {
+	.button {
+		// .mod-text, .mod-link deprecated
+		&:is(.mod-ghost, .mod-text, .mod-link) {
 			box-shadow: none;
+
+			&:hover {
+				box-shadow: none;
+			}
+
+			&:focus-within {
+				box-shadow: none;
+			}
 		}
-
-		&:focus-within {
-			box-shadow: none;
-		}
-	}
-}
-}
-
-@mixin more {
-	block-size: 100%;
-	min-block-size: 2.25rem;
-
-	&.mod-S {
-		min-block-size: 2rem;
-	}
-
-	&.mod-XS {
-		min-block-size: 1.5rem;
-	}
-
-	&::before {
-		content: none;
 	}
 }

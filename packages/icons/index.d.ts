@@ -413,6 +413,7 @@ export type LuccaIcon =
 	| 'peopleSwitch'
 	| 'send2user'
 	| 'userSendTo'
+	| 'peopleFolder'
 	| 'peopleTeacher'
 	| 'teacher'
 	| 'pictureGallery'

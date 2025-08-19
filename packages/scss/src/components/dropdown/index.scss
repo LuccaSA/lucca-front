@@ -18,8 +18,8 @@
 	}
 
 	@layer mods {
-		&.mod-delete {
-			@include delete;
+		&.mod-critical, &.mod-delete {
+			@include critical;
 		}
 	}
 }

@@ -5,15 +5,15 @@
 	},
 	de: {
 		me: 'Ich:',
-		includeFormerEmployees: 'Ausgeschiedene Mitarbeitende einbeziehen ',
+		includeFormerEmployees: 'Ausgeschiedene Mitarbeitende einbeziehen',
 	},
 	fr: {
 		me: 'Moi :',
-		includeFormerEmployees: 'Inclure les salariés partis',
+		includeFormerEmployees: 'Inclure les collaborateurs partis',
 	},
 	it: {
 		me: 'Io:',
-		includeFormerEmployees: 'Includere gli ex dipendenti',
+		includeFormerEmployees: 'Includere gli ex collaboratori',
 	},
 	nl: {
 		me: 'Ik:',
@@ -25,7 +25,7 @@
 	},
 	es: {
 		me: 'Yo:',
-		includeFormerEmployees: 'Incluir a los antiguos empleados',
+		includeFormerEmployees: 'Incluir a los empleados inactivos',
 	},
 	pt: {
 		me: 'Eu:',

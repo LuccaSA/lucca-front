@@ -30,7 +30,7 @@ const Template: StoryFn = (args) => ({
 		</a>
 	</li>
 	<li class="dropdown-list-option">
-		<button type="button" class="dropdown-list-option-action mod-delete" luDropdownItem>
+		<button type="button" class="dropdown-list-option-action mod-critical" luDropdownItem>
 			<lu-icon icon="trashDelete" />
 			Supprimer
 		</button>

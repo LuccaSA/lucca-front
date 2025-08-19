@@ -25,6 +25,7 @@ export default {
 					<lu-user-tile [user]="bob" />
 				</button>
 				<lu-user-tile [user]="bob" displayFormat="LF" role="Administrateur" />
+				<lu-user-tile [user]="bob" size="L" />
 			</div>`,
 		};
 	},

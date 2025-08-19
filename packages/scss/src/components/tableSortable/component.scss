@@ -17,7 +17,7 @@
 	line-height: var(--components-sortable-lineHeight);
 	color: currentColor;
 
-	@include button.text;
+	@include button.ghost;
 
 	@at-root ($atRoot) {
 		.tableSortable-arrows {

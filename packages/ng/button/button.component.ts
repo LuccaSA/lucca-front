@@ -1,4 +1,4 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, ContentChild, ElementRef, inject, Input, OnChanges, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, ContentChild, ElementRef, HostListener, inject, Input, OnChanges, signal, ViewEncapsulation } from '@angular/core';
 import { LuClass, Palette } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
 
@@ -7,17 +7,20 @@ import { IconComponent } from '@lucca-front/ng/icon';
 	selector: 'button[luButton],a[luButton]',
 	standalone: true,
 	providers: [LuClass],
-	template: '<ng-content></ng-content>',
+	template: '<ng-content />',
 	styleUrls: ['./button.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	encapsulation: ViewEncapsulation.None,
 	host: {
 		class: 'button',
+		'[class.is-error]': 'notifyError()',
 	},
 })
 export class ButtonComponent implements OnChanges {
 	#luClass = inject(LuClass);
 	#elementRef = inject<ElementRef<HTMLButtonElement>>(ElementRef);
+
+	notifyError = signal(false);
 
 	@Input()
 	size: 'M' | 'S' | 'XS';
@@ -26,6 +29,11 @@ export class ButtonComponent implements OnChanges {
 		transform: booleanAttribute,
 	})
 	block = false;
+
+	@Input({
+		transform: booleanAttribute,
+	})
+	critical = false;
 
 	@Input({
 		transform: booleanAttribute,
@@ -48,7 +56,7 @@ export class ButtonComponent implements OnChanges {
 	 * '' is the default value when you just set the `luButton` directive without a value attached to it.
 	 * We just make this explicit here.
 	 */
-	luButton: '' | 'outlined' | 'text' | 'text-invert' = '';
+	luButton: '' | 'outlined' | 'ghost' | 'ghost-invert' | 'text' | 'text-invert' = '';
 
 	#iconComponentRef?: ElementRef<HTMLElement>;
 
@@ -81,23 +89,35 @@ export class ButtonComponent implements OnChanges {
 		this.updateClasses();
 	}
 
+	@HostListener('animationend')
+	animationEnd() {
+		this.notifyError.set(false);
+	}
+
+	@HostListener('click')
+	triggerErrorIfNeeded() {
+		if (this.state === 'error') {
+			this.notifyError.set(true);
+		}
+	}
+
 	updateClasses(): void {
 		const classesConfig = {
 			[`mod-${this.size}`]: !!this.size,
 			[`mod-block`]: this.block,
 			[`palette-${this.palette}`]: !!this.palette,
-			[`is-${this.state}`]: !!this.state,
+			[`is-${this.state}`]: !!this.state && this.state !== 'error',
 			['mod-onlyIcon']: this.iconOnly,
 			['mod-iconOnLeft']: this.iconOnLeft,
 			['mod-iconOnRight']: this.iconOnRight,
 			['mod-withIcon']: this.#iconComponentRef !== undefined && !this.disclosure && !this.iconOnly,
-			['mod-delete']: this.delete,
+			['mod-critical']: this.critical || this.delete,
 			['mod-disclosure']: this.disclosure,
 		};
 
 		if (this.luButton !== '') {
-			if (this.luButton === 'text-invert') {
-				classesConfig['mod-text'] = true;
+			if (this.luButton === 'ghost-invert') {
+				classesConfig['mod-ghost'] = true;
 				classesConfig['mod-invert'] = true;
 			} else {
 				classesConfig[`mod-${this.luButton}`] = true;

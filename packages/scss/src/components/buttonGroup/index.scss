@@ -11,16 +11,10 @@
 			@include outlined;
 		}
 
-		&.mod-text {
-			@include text;
-		}
-	}
-
-	@layer mods {
-		&:is(ul) {
-			.button.mod-more {
-				@include more;
-			}
+		// .mod-text deprecated
+		&.mod-text,
+		&.mod-ghost {
+			@include ghost;
 		}
 	}
 }
