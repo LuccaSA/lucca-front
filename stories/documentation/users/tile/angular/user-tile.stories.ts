@@ -20,11 +20,12 @@ export default {
 			props: {
 				bob,
 			},
-			template: `<div class="u-displayFlex pr-u-gap300">
+			template: `<div class="pr-u-displayFlex pr-u-gap300">
 				<button [luUserPopover]="bob" type="button" class="userPopover_trigger">
 					<lu-user-tile [user]="bob" />
 				</button>
 				<lu-user-tile [user]="bob" displayFormat="LF" role="Administrateur" />
+				<lu-user-tile [user]="bob" size="L" />
 			</div>`,
 		};
 	},

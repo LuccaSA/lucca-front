@@ -1,5 +1,6 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, Input, ViewEncapsulation } from '@angular/core';
-import { LuDisplayFormat, LuUserDisplayPipe, LU_DEFAULT_DISPLAY_POLICY } from '../display/index';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, effect, inject, input, Input, ViewEncapsulation } from '@angular/core';
+import { LuClass } from '@lucca-front/ng/core';
+import { LU_DEFAULT_DISPLAY_POLICY, LuDisplayFormat, LuUserDisplayPipe } from '../display/index';
 import { displayPictureFormatRecord, LuUserPictureComponent } from '../picture/user-picture.component';
 
 export interface LuUserTileUserInput {
@@ -21,9 +22,11 @@ export interface LuUserTileUserInput {
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	host: { class: 'userTile' },
 	encapsulation: ViewEncapsulation.None,
+	providers: [LuClass],
 	standalone: true,
 })
 export class LuUserTileComponent {
+	#luClass = inject(LuClass);
 	readonly #defaultFormat = inject(LU_DEFAULT_DISPLAY_POLICY);
 	readonly #changeDetector = inject(ChangeDetectorRef);
 	displayPictureFormat = displayPictureFormatRecord[this.#defaultFormat];
@@ -69,5 +72,18 @@ export class LuUserTileComponent {
 
 	get role(): string {
 		return this._role;
+	}
+
+	/**
+	 * Which size should the callout be? Defaults to medium
+	 */
+	size = input<'L' | 'M' | 'S' | 'XS'>();
+
+	constructor() {
+		effect(() => {
+			this.#luClass.setState({
+				[`mod-${this.size()}`]: !!this.size(),
+			});
+		});
 	}
 }
