@@ -21,6 +21,16 @@ lu-tree-branch {
 			}
 		}
 	}
+
+	.optionItem-icons {
+		opacity: 0;
+	}
+
+	.optionItem.is-highlighted, .optionItem-value:hover {
+		.optionItem-icons {
+			opacity: 1;
+		}
+	}
 }
 
 @mixin nestedMulti($level: 1) {
@@ -67,3 +77,4 @@ lu-tree-branch {
 		}
 	}
 }
+
