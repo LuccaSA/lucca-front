@@ -122,14 +122,14 @@ export class FilterPillComponent {
 
 	icon = input<LuccaIcon>();
 
-	defaultIcon = computed<LuccaIcon>(() => this.inputComponentRef()?.getDefaultFilterPillIcon?.() || 'arrowChevronBottom');
+	defaultIcon = computed<LuccaIcon>(() => this.inputComponentRef()?.getDefaultFilterPillIcon?.() ?? 'arrowChevronBottom');
 
 	displayedIcon = computed(() => this.icon() || this.defaultIcon());
 
-	shouldHideCombobox = computed(() => this.inputComponentRef()?.hideCombobox?.() || false);
+	shouldHideCombobox = computed(() => this.inputComponentRef()?.hideCombobox?.() ?? false);
 
-	inputIsEmpty = computed(() => this.inputComponentRef()?.isFilterPillEmpty());
-	inputIsClearable = computed(() => this.inputComponentRef()?.isFilterPillClearable());
+	inputIsEmpty = computed(() => this.inputComponentRef()?.isFilterPillEmpty() ?? true);
+	inputIsClearable = computed(() => this.inputComponentRef()?.isFilterPillClearable() ?? false);
 
 	shouldShowColon = computed(() => this.inputComponentRef()?.showColon?.() || !this.inputIsEmpty());
 
