@@ -18,14 +18,14 @@
 
 @mixin sticky {
 	background-color: var(--pr-t-elevation-surface-default);
-	inset-block-start: var(--commons-banner-height);
+	inset-block-start: calc(var(--commons-banner-height) + var(--commons-navSide-mobile-toggle-height));
 	position: sticky;
 	inset-inline: 0;
 	z-index: 99;
 }
 
 @mixin stickyWide {
-	inset-block-start: calc(var(--commons-banner-height) + var(--commons-navSide-mobile-toggle-height));
+	inset-block-start: var(--commons-banner-height);
 	inset-inline-start: 0 !important;
 }
 

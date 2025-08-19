@@ -8,16 +8,16 @@ export default {
 
 function getTemplate(args: FloatStory): string {
 	return `<div>
-	<div class="u-floatInlineStart demo-utility"><code class="code">u-floatInlineStart</code></div>
-	<div class="u-floatInlineEnd demo-utility"><code class="code">u-floatInlineEnd</code></div>
-	<div class="u-clearBoth demo-utility"><code class="code">u-clearBoth</code></div>
+	<div class="pr-u-floatInlineStart demo-utility"><code class="code">pr-u-floatInlineStart</code></div>
+	<div class="pr-u-floatInlineEnd demo-utility"><code class="code">pr-u-floatInlineEnd</code></div>
+	<div class="pr-u-clearBoth demo-utility"><code class="code">pr-u-clearBoth</code></div>
 </div>
 <div>
-	<div class="u-clearfix">
-		<div class="u-floatInlineStart demo-utility"><code class="code">u-floatInlineStart</code></div>
-		<div class="u-floatInlineEnd demo-utility"><code class="code">u-floatInlineEnd</code></div>
+	<div class="pr-u-clearfix">
+		<div class="pr-u-floatInlineStart demo-utility"><code class="code">pr-u-floatInlineStart</code></div>
+		<div class="pr-u-floatInlineEnd demo-utility"><code class="code">pr-u-floatInlineEnd</code></div>
 	</div>
-	<div class="demo-utility"><code class="code">u-clearfix</code></div>
+	<div class="demo-utility"><code class="code">pr-u-clearfix</code></div>
 </div>`;
 }
 

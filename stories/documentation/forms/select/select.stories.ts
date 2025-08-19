@@ -11,7 +11,7 @@ import { Meta, StoryFn, applicationConfig } from '@storybook/angular';
 	standalone: true,
 	imports: [LuSelectInputComponent, LuOptionItemComponent, LuOptionPickerComponent, LuInputDisplayerDirective, FormsModule],
 	template: `
-		<div class="u-displayFlex">
+		<div class="pr-u-displayFlex">
 			<label class="textfield pr-u-marginInlineEnd200">
 				<lu-select class="textfield-input" placeholder="Select an item">
 					<ng-container *luDisplayer="let value">{{ value }}</ng-container>

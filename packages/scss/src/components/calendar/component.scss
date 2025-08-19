@@ -20,7 +20,7 @@
 			overflow: auto;
 			position: relative;
 			z-index: 1;
-			border-radius: var(--commons-borderRadius-M) 0 0 var(--commons-borderRadius-M);
+			border-radius: var(--pr-t-border-radius-default) 0 0 var(--pr-t-border-radius-default);
 
 			&:focus-visible {
 				@include a11y.focusVisible;
@@ -42,7 +42,7 @@
 
 		.calendarShortcutsButton-item-button.button {
 			@include button.block;
-			@include button.text;
+			@include button.ghost;
 			@include button.S;
 
 			justify-content: flex-start;
@@ -101,12 +101,12 @@
 			border-width: var(--pr-t-spacings-150);
 			border-style: solid;
 			border-color: var(--components-calendarWrapper-navigationBackground);
-			border-radius: var(--commons-borderRadius-L);
+			border-radius: var(--pr-t-border-radius-default);
 		}
 
 		.calendarWrapper-navigation-button {
 			&.button {
-				@include button.text;
+				@include button.ghost;
 				@include button.onlyIconXS;
 			}
 		}
@@ -155,7 +155,7 @@
 		.calendar-name-button {
 			@include reset.button;
 
-			border-radius: var(--commons-borderRadius-L);
+			border-radius: var(--pr-t-border-radius-default);
 			text-align: inherit;
 			inline-size: fit-content;
 			display: inline-block;
@@ -207,7 +207,7 @@
 		.calendar-table-body-row-cell-action {
 			@include reset.button;
 
-			border-radius: var(--commons-borderRadius-L);
+			border-radius: var(--pr-t-border-radius-default);
 			position: relative;
 			z-index: 1;
 			text-align: center;

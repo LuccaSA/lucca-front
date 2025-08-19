@@ -50,14 +50,14 @@ export default {
 		const { breadcrumbs, actions, navigation, backAction, titleActions, leading, trailing, ...otherArgs } = args;
 		const titleActionsContainer = titleActions
 			? `<ng-container pageHeaderTitleActions>
-	<button type="button" luButton="text" luTooltip="Modifier" luTooltipOnlyForDisplay><lu-icon icon="officePen" alt="Modifier" /></button>
-	<button type="button" luButton="text" luTooltip="Copier" luTooltipOnlyForDisplay><lu-icon icon="fileCopy" alt="Copier" /></button>
-	<button type="button" luButton="text" luTooltip="Supprimer" luTooltipOnlyForDisplay><lu-icon icon="trashDelete" alt="Supprimer" /></button>
+	<button type="button" luButton="ghost" luTooltip="Modifier" luTooltipOnlyForDisplay><lu-icon icon="officePen" alt="Modifier" /></button>
+	<button type="button" luButton="ghost" luTooltip="Copier" luTooltipOnlyForDisplay><lu-icon icon="fileCopy" alt="Copier" /></button>
+	<button type="button" luButton="ghost" luTooltip="Supprimer" luTooltipOnlyForDisplay><lu-icon icon="trashDelete" alt="Supprimer" /></button>
 </ng-container>`
 			: ``;
 		const backActionContainer = backAction
 			? `<ng-container pageHeaderBackAction>
-	<a href="#" luButton="text">
+	<a href="#" luButton="ghost">
 		<lu-icon icon="arrowLeft" alt="Retour" />
 	</a>
 </ng-container>`
@@ -83,7 +83,7 @@ export default {
 	</lu-form-field>
 	<button type="button" luButton>Button</button>
 	<button type="button" luButton="outline">Button</button>
-	<button type="button" luButton="text"><lu-icon icon="menuDots" alt="Voir plus d’options" /></button>
+	<button type="button" luButton="ghost"><lu-icon icon="menuDots" alt="Voir plus d’options" /></button>
 </ng-container>`
 			: ``;
 		const breadcrumbsContainer = breadcrumbs

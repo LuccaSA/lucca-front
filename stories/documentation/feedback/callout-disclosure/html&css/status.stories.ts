@@ -23,14 +23,14 @@ export default {
 				<span class="calloutFeedbackList-item-description">Feedback description.</span>
 				<div class="calloutFeedbackList-item-actions">
 					<a href class="button mod-outlined">Button</a>
-					<button type="button" class="button mod-text">Button</button>
+					<button type="button" class="button mod-ghost">Button</button>
 				</div>
 			</li>
 			<li class="calloutFeedbackList-item">
 				<span class="calloutFeedbackList-item-description">Feedback description.</span>
 				<div class="calloutFeedbackList-item-actions">
 					<a href class="button mod-outlined">Button</a>
-					<button type="button" class="button mod-text">Button</button>
+					<button type="button" class="button mod-ghost">Button</button>
 				</div>
 			</li>
 		</ul>
@@ -49,14 +49,14 @@ export default {
 				<span class="calloutFeedbackList-item-description">Feedback description.</span>
 				<div class="calloutFeedbackList-item-actions">
 					<a href class="button mod-outlined">Button</a>
-					<button type="button" class="button mod-text">Button</button>
+					<button type="button" class="button mod-ghost">Button</button>
 				</div>
 			</li>
 			<li class="calloutFeedbackList-item">
 				<span class="calloutFeedbackList-item-description">Feedback description.</span>
 				<div class="calloutFeedbackList-item-actions">
 					<a href class="button mod-outlined">Button</a>
-					<button type="button" class="button mod-text">Button</button>
+					<button type="button" class="button mod-ghost">Button</button>
 				</div>
 			</li>
 		</ul>
@@ -75,14 +75,14 @@ export default {
 				<span class="calloutFeedbackList-item-description">Feedback description.</span>
 				<div class="calloutFeedbackList-item-actions">
 					<a href class="button mod-outlined">Button</a>
-					<button type="button" class="button mod-text">Button</button>
+					<button type="button" class="button mod-ghost">Button</button>
 				</div>
 			</li>
 			<li class="calloutFeedbackList-item">
 				<span class="calloutFeedbackList-item-description">Feedback description.</span>
 				<div class="calloutFeedbackList-item-actions">
 					<a href class="button mod-outlined">Button</a>
-					<button type="button" class="button mod-text">Button</button>
+					<button type="button" class="button mod-ghost">Button</button>
 				</div>
 			</li>
 		</ul>

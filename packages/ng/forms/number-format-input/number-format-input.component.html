@@ -1,4 +1,4 @@
-<div class="textField">
+<div class="textField" [class.mod-valueAlignRight]="valueAlignRight()">
 	<ng-template #addon let-addon="addon" let-type="type">
 		<span class="textField-{{ type }}" luFormFieldId="{{ type }}" *ngIf="addon.content">
 			<span class="textField-label-{{ type }}-item" [attr.aria-label]="addon.ariaLabel">{{ addon.content }}</span>
@@ -50,7 +50,7 @@
 		<div class="textField-input-affix">
 			<button class="textField-input-affix-clear clear" type="button" (click)="clearValue()" *ngIf="hasClearer() && inputElement.value">
 				<span aria-hidden="true" class="lucca-icon icon-signClose"></span>
-				<span class="u-mask">{{ intl.clear }}</span>
+				<span class="pr-u-mask">{{ intl.clear }}</span>
 			</button>
 		</div>
 	</div>

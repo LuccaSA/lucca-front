@@ -77,7 +77,7 @@
 
 		.dialog-inside-header-button {
 			&.button {
-				@include button.text;
+				@include button.ghost;
 				@include button.S;
 				@include button.onlyIconS;
 
@@ -85,6 +85,14 @@
 				justify-self: end;
 				grid-area: close;
 				display: var(--components-dialog-insideHeaderButtonDisplay);
+			}
+		}
+
+		.dialog-inside-header-actionOptional {
+			margin-right: calc(var(--pr-t-spacings-100) * -1);
+
+			&:empty {
+				display: none;
 			}
 		}
 

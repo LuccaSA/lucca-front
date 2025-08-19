@@ -1,0 +1,17 @@
+<div class="richTextField-toolbar-chips" (keydown.arrowleft)="focusTag($event, -1)" (keydown.arrowRight)="focusTag($event, 1)">
+	<span aria-hidden="true">{{ intl.insertTag }}</span>
+	@for (tag of tags(); track tag) {
+		<button
+			type="button"
+			class="chip richTextField-content-chip richTextField-toolbar-chips-item"
+			(click)="insertTag(tag)"
+			[attr.tabindex]="$first ? 0 : -1"
+			[disabled]="isDisabled()"
+			[class.is-disabled]="isDisabled()"
+			#tagButton
+		>
+			<span class="pr-u-mask">{{ intl.insertTag }}</span>
+			{{ tag.description }}
+		</button>
+	}
+</div>

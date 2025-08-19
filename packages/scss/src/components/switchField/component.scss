@@ -34,7 +34,7 @@
 				inline-size: 50%;
 				aspect-ratio: 1;
 				background-color: var(--palettes-neutral-0);
-				border-radius: var(--commons-borderRadius-full);
+				border-radius: var(--pr-t-border-radius-full);
 				inset-inline-start: 0;
 				inset-block-start: 0;
 				transition-property: left;
@@ -74,15 +74,15 @@
 
 			&:hover {
 				~ .switchField-icon {
-					border-color: var(--palettes-neutral-400);
-					background-color: var(--palettes-neutral-400);
+					border-color: var(--palettes-neutral-600);
+					background-color: var(--palettes-neutral-600);
 				}
 			}
 
 			&:active {
 				~ .switchField-icon {
-					border-color: var(--palettes-neutral-600);
-					background-color: var(--palettes-neutral-600);
+					border-color: var(--palettes-neutral-800);
+					background-color: var(--palettes-neutral-800);
 				}
 			}
 

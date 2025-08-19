@@ -14,7 +14,7 @@ function getTemplate(args: CalloutActionStory): string {
 			Feedback description
 			<div class="callout-content-description-actions">
 				<button class="button mod-outlined" type="button">Button</button>
-				<button class="button mod-text" type="button">Button</button>
+				<button class="button mod-ghost" type="button">Button</button>
 			</div>
 		</div>
 	</div>

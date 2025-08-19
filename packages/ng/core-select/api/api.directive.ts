@@ -1,6 +1,6 @@
 import { Directive, inject, OnDestroy, OnInit } from '@angular/core';
 import { ALuSelectInputComponent, coreSelectDefaultOptionComparer, coreSelectDefaultOptionKey, LuOptionComparer } from '@lucca-front/ng/core-select';
-import { catchError, combineLatest, concatMap, debounceTime, distinctUntilChanged, map, merge, Observable, of, pairwise, scan, startWith, Subject, switchMap, takeUntil, takeWhile, tap } from 'rxjs';
+import { catchError, combineLatest, concatMap, debounceTime, distinctUntilChanged, map, merge, Observable, of, pairwise, scan, startWith, Subject, switchMap, takeUntil, tap } from 'rxjs';
 
 export const LU_SELECT_MAGIC_PAGE_SIZE = 20;
 export const MAGIC_DEBOUNCE_DURATION = 250;
@@ -72,11 +72,21 @@ export abstract class ALuCoreSelectApiDirective<TOption, TParams = Record<string
 		);
 
 		return combineLatest([this.params$, isOpen$]).pipe(
-			switchMap(([params, isOpened]) =>
-				isOpened
+			switchMap(([params, isOpened]) => {
+				const hasNextPage$ = new Subject<void>();
+
+				return isOpened
 					? this.page$.pipe(
+							takeUntil(hasNextPage$),
 							concatMap((page) => this.getOptionsPage(params, page).pipe(map(({ items, isLastPage }) => ({ items, isLastPage, page })))),
-							takeWhile(({ isLastPage }) => !isLastPage, true),
+							tap(({ isLastPage }) => {
+								if (isLastPage) {
+									// `getOptionsPage` can emit multiple times (for example, when adding homonyms additional information),
+									// so we cannot use takeWhile here.
+									hasNextPage$.next();
+									hasNextPage$.complete();
+								}
+							}),
 							scan(
 								(acc, { items, page }) => {
 									acc[page] = items;
@@ -86,8 +96,8 @@ export abstract class ALuCoreSelectApiDirective<TOption, TParams = Record<string
 							),
 							map((pages) => Object.values(pages).flat()),
 						)
-					: of([] as TOption[]),
-			),
+					: of([] as TOption[]);
+			}),
 		);
 	}
 

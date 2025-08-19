@@ -216,6 +216,7 @@ export const Multi = {
 		displayFileName: false,
 		fileMaxSize: 5000000,
 		illustration: 'paper',
+		structure: false,
 	},
 };
 
@@ -243,5 +244,6 @@ export const Single = {
 		fileMaxSize: 5000000,
 		illustration: 'paper',
 		displayFileName: false,
+		structure: false,
 	},
 };

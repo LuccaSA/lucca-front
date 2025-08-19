@@ -2,7 +2,7 @@
 
 @mixin S {
 	--components-numericBadge-size: 1.25rem;
-	--components-numericBadge-borderRadius: 6px;
+	--components-numericBadge-borderRadius: var(--pr-t-border-radius-small);
 	--components-numericBadge-font: var(--pr-t-font-body-XS);
 
 	// Deprecated
@@ -12,7 +12,7 @@
 
 @mixin XS {
 	--components-numericBadge-size: 1rem;
-	--components-numericBadge-borderRadius: var(--commons-borderRadius-M);
+	--components-numericBadge-borderRadius: var(--pr-t-border-radius-small);
 	--components-numericBadge-font: var(--pr-t-font-body-XS);
 
 	// Deprecated

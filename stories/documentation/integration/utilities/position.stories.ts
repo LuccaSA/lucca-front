@@ -9,23 +9,23 @@ export default {
 function getTemplate(args: PositionStory): string {
 	return `<div class="demo-utilityWrapper">
 	<div class="demo-utility">
-		<div class="u-positionFixed"><code class="code">u-positionFixed</code></div>
+		<div class="pr-u-positionFixed"><code class="code">pr-u-positionFixed</code></div>
 	</div>
 </div>
 <div class="demo-utilityWrapper">
 	<div class="demo-utility">
-		<div class="u-positionAbsolute"><code class="code">u-positionAbsolute</code></div>
+		<div class="pr-u-positionAbsolute"><code class="code">pr-u-positionAbsolute</code></div>
 	</div>
 </div>
 <div class="demo-utilityWrapper">
 	<div>
-		<div class="u-positionStatic demo-utility"><code class="code">u-positionStatic</code></div>
+		<div class="pr-u-positionStatic demo-utility"><code class="code">pr-u-positionStatic</code></div>
 	</div>
 	<div>
-		<div class="u-positionRelative demo-utility"><code class="code">u-positionRelative</code></div>
+		<div class="pr-u-positionRelative demo-utility"><code class="code">pr-u-positionRelative</code></div>
 	</div>
 	<div>
-		<div class="u-positionSticky demo-utility"><code class="code">u-positionSticky</code></div>
+		<div class="pr-u-positionSticky demo-utility"><code class="code">pr-u-positionSticky</code></div>
 	</div>
 </div>`;
 }

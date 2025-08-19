@@ -9,8 +9,8 @@ export default {
 function getTemplate(args: SkeletonTextsStory): string {
 	return `<div class="skeleton is-loading">
 	<span class="skeleton-item"></span>
-	<span class="skeleton-item u-bodyS"></span>
-	<span class="skeleton-item u-bodyXS"></span>
+	<span class="skeleton-item pr-u-bodyS"></span>
+	<span class="skeleton-item pr-u-bodyXS"></span>
 </div>`;
 }
 
