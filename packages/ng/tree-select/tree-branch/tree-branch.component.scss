@@ -45,10 +45,6 @@ lu-tree-branch {
 }
 
 .lu-picker-panel.lu-option-picker-panel.mod-multiple {
-	.lu-picker-content-option {
-		gap: 0;
-	}
-
 	lu-tree-branch {
 		lu-select-option {
 			@include nestedMulti($level: 1);
@@ -70,6 +66,8 @@ lu-tree-branch {
 	}
 
 	.lu-picker-content-option {
+		gap: 0;
+
 		> lu-tree-branch:first-of-type {
 			> lu-select-option:first-of-type {
 				margin-block-start: 0;
@@ -77,4 +75,3 @@ lu-tree-branch {
 		}
 	}
 }
-
