@@ -1,4 +1,5 @@
 @use 'exports' as *;
+@use '@lucca-front/scss/src/components/button/exports' as button;
 
 .button-group {
 	@layer components {
@@ -15,6 +16,12 @@
 		&.mod-text,
 		&.mod-ghost {
 			@include ghost;
+		}
+
+		&:is(ul) {
+			.button.mod-more {
+				@include button.moreInsideUl;
+			}
 		}
 	}
 }
