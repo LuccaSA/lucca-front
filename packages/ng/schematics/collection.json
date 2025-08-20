@@ -26,6 +26,11 @@
       "factory": "./tokens-radius/index",
       "schema": "./tokens-radius/schema.json"
     },
+    "class-prefix": {
+      "description": "Add pr- prefix to all utility classes",
+      "factory": "./class-prefix/index",
+      "schema": "./class-prefix/schema.json"
+    },
     "tokens-typo": {
       "description": "Replace typography tokens with new names.",
       "factory": "./tokens-typo/index",
