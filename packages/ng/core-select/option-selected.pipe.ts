@@ -1,6 +1,5 @@
 import { Pipe, PipeTransform, inject } from '@angular/core';
-import { LuOptionComparer } from '@lucca-front/ng/core-select';
-import { ɵIsSelectedStrategy } from '../select.model';
+import { LuOptionComparer, ɵIsSelectedStrategy } from './select.model';
 
 @Pipe({
 	name: 'luIsOptionSelected',

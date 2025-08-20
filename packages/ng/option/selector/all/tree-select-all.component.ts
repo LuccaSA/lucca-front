@@ -6,6 +6,9 @@ import { ALuTreeOptionOperator } from '../../operator/index';
 import { ALuTreeOptionSelector, ILuTreeOptionSelector } from '../tree-option-selector.model';
 import { LU_OPTION_SELECT_ALL_TRANSLATIONS } from './select-all.translate';
 
+/**
+ * @deprecated
+ */
 @Component({
 	selector: 'lu-tree-option-select-all',
 	templateUrl: './select-all.component.html',

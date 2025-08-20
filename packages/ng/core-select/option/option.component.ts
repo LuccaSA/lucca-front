@@ -1,6 +1,6 @@
-import { NgIf } from '@angular/common';
 import {
 	AfterViewInit,
+	booleanAttribute,
 	ChangeDetectionStrategy,
 	ChangeDetectorRef,
 	Component,
@@ -12,11 +12,12 @@ import {
 	input,
 	OnDestroy,
 	OnInit,
+	output,
 	TemplateRef,
 	Type,
 	ViewChild,
 } from '@angular/core';
-import { PortalDirective } from '@lucca-front/ng/core';
+import { getIntl, PortalDirective } from '@lucca-front/ng/core';
 import { asyncScheduler, observeOn, Subscription } from 'rxjs';
 import { GroupTemplateLocation } from '../panel/panel.utils';
 import { LuOptionContext, SELECT_ID } from '../select.model';
@@ -25,6 +26,8 @@ import { LuOptionGroupPipe } from './group.pipe';
 import { LuOptionOutletDirective } from './option-outlet.directive';
 import { ILuOptionContext, LU_OPTION_CONTEXT } from './option.token';
 import { CoreSelectPanelElement } from '../panel/selectable-item';
+import { LU_OPTION_TRANSLATIONS } from './option.translate';
+import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
 
 export const MAGIC_OPTION_SCROLL_DELAY = 15;
 
@@ -34,10 +37,11 @@ export const MAGIC_OPTION_SCROLL_DELAY = 15;
 	styleUrls: ['./option.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	standalone: true,
-	imports: [LuOptionOutletDirective, NgIf, PortalDirective, LuOptionGroupPipe],
+	imports: [LuOptionOutletDirective, PortalDirective, LuOptionGroupPipe, LuTooltipTriggerDirective],
 })
 export class LuOptionComponent<T> implements AfterViewInit, OnDestroy, OnInit {
 	protected selectableItem = inject(CoreSelectPanelElement);
+	protected intl = getIntl(LU_OPTION_TRANSLATIONS);
 
 	@HostBinding('class.optionItem')
 	public hasOptionItemClass = true;
@@ -48,10 +52,13 @@ export class LuOptionComponent<T> implements AfterViewInit, OnDestroy, OnInit {
 	@Input() option?: T;
 	@Input() grouping?: LuOptionGrouping<T, unknown>;
 
+	hasChildren = input(false, { transform: booleanAttribute });
+	onlyParent = output<void>();
+	onlyChildren = output<void>();
+
 	groupIndex = input<number>();
 
-	@Input()
-	public optionIndex = 0;
+	public optionIndex = input.required({ transform: (value: string | number) => `${value}` });
 
 	@Input()
 	scrollIntoViewOptions: ScrollIntoViewOptions = {};
@@ -67,7 +74,7 @@ export class LuOptionComponent<T> implements AfterViewInit, OnDestroy, OnInit {
 	get id(): string {
 		const groupPart = this.groupIndex() === undefined ? `` : `-group-${this.groupIndex()}`;
 
-		return `lu-select-${this.selectId}${groupPart}-option-${this.optionIndex}`;
+		return `lu-select-${this.selectId}${groupPart}-option-${this.optionIndex()}`;
 	}
 
 	protected elementRef = inject<ElementRef<HTMLElement>>(ElementRef);

@@ -42,6 +42,7 @@
 
 		::placeholder {
 			opacity: 1;
+			text-rendering: geometricPrecision;
 		}
 
 		@if config.$isNamespaced {
