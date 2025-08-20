@@ -6,6 +6,7 @@ import {
 	computed,
 	forwardRef,
 	HostBinding,
+	HostListener,
 	inject,
 	Input,
 	model,
@@ -24,7 +25,7 @@ import { ALuSelectInputComponent, LuOptionContext, provideLuSelectLabelsAndIds, 
 import { FILTER_PILL_INPUT_COMPONENT, FilterPillDisplayerDirective, FilterPillLabelDirective } from '@lucca-front/ng/filter-pills';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 import { Subject } from 'rxjs';
-import { LuMultiSelectDefaultDisplayerComponent } from '../displayer/index';
+import { LuMultiSelectDefaultDisplayerComponent } from '../displayer';
 import { LU_MULTI_SELECT_TRANSLATIONS } from '../select.translate';
 import { LuMultiSelectPanelRefFactory } from './panel-ref.factory';
 import { LuMultiSelectPanelRef } from './panel.model';
@@ -74,6 +75,9 @@ export class LuMultiSelectInputComponent<T> extends ALuSelectInputComponent<T, T
 	@Input()
 	filterPillLabelPlural: string;
 
+	override selectParent$ = new Subject<void>();
+	override selectChildren$ = new Subject<void>();
+
 	@HostBinding('class.mod-filterPill')
 	public get filterPillClass() {
 		return this.filterPillMode;
@@ -106,6 +110,16 @@ export class LuMultiSelectInputComponent<T> extends ALuSelectInputComponent<T, T
 	public readonly focusInput$ = new Subject<void | { keepClue: boolean }>();
 
 	public readonly emptyClue$ = new Subject<void>();
+
+	@HostListener('keydown.control.enter')
+	public selectParentOnly() {
+		this.selectParent$.next();
+	}
+
+	@HostListener('keydown.shift.enter')
+	public selectChildrenOnly() {
+		this.selectChildren$.next();
+	}
 
 	public override focusInput(): void {
 		this.focusInput$.next({ keepClue: true });

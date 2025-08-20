@@ -1,4 +1,4 @@
-import { AsyncPipe, NgFor, NgIf } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, DestroyRef, ElementRef, inject, OnInit, ViewChild } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
@@ -13,17 +13,23 @@ import { LuMultiSelectDisplayerInputDirective } from './displayer-input.directiv
 @Component({
 	selector: 'lu-multi-select-default-displayer',
 	standalone: true,
-	imports: [AsyncPipe, LuTooltipModule, NgIf, NgFor, ɵLuOptionOutletDirective, FormsModule, LuMultiSelectDisplayerInputDirective],
+	imports: [AsyncPipe, LuTooltipModule, ɵLuOptionOutletDirective, FormsModule, LuMultiSelectDisplayerInputDirective],
 	template: `
 		<div class="multipleSelect-displayer">
 			<input autocomplete="off" #inputElement (keydown.backspace)="inputBackspace()" (keydown.space)="inputSpace($event)" luMultiSelectDisplayerInput />
-			<div *ngFor="let option of displayedOptions$ | async; let index = index" class="multipleSelect-displayer-chip chip" [class.mod-unkillable]="select.disabled$ | async">
-				<span class="multipleSelect-displayer-chip-value"><ng-container *luOptionOutlet="select.displayerTpl(); value: option"></ng-container></span>
-				<button *ngIf="(select.disabled$ | async) === false" type="button" class="chip-kill" (click)="unselectOption(option, $event)">
-					<span class="pr-u-mask">{{ intl.removeOption }}</span>
-				</button>
-			</div>
-			<div class="multipleSelect-displayer-chip chip" *ngIf="overflowOptions$ | async as overflow">+ {{ overflow }}</div>
+			@for (option of displayedOptions$ | async; track option; let index = $index) {
+				<div class="multipleSelect-displayer-chip chip" [class.mod-unkillable]="select.disabled$ | async">
+					<span class="multipleSelect-displayer-chip-value"><ng-container *luOptionOutlet="select.displayerTpl(); value: option"></ng-container></span>
+					@if ((select.disabled$ | async) === false) {
+						<button type="button" class="chip-kill" (click)="unselectOption(option, $event)">
+							<span class="pr-u-mask">{{ intl.removeOption }}</span>
+						</button>
+					}
+				</div>
+			}
+			@if (overflowOptions$ | async; as overflow) {
+				<div class="multipleSelect-displayer-chip chip">+ {{ overflow }}</div>
+			}
 		</div>
 	`,
 	styleUrls: ['./default-displayer.component.scss'],

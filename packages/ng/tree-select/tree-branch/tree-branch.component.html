@@ -1,0 +1,28 @@
+<lu-select-option
+	luCoreSelectPanelElement
+	#rootOption="luCoreSelectPanelElement"
+	[option]="branch().node"
+	[optionTpl]="optionTpl()"
+	[optionIndex]="optionIndex()"
+	[scrollIntoViewOptions]="{ block: 'nearest' }"
+	[isSelected]="branch().node | luIsOptionSelected: optionComparer() : selectedOptions()"
+	(selected)="toggle(branch())"
+	(click)="toggle(branch())"
+	(onlyParent)="toggleOne.emit(branch().node)"
+	(onlyChildren)="selectOnlyChildren(branch())"
+	[hasChildren]="!simpleMode() && branch().children?.length > 0"
+/>
+@for (child of branch().children; track $index) {
+	<lu-tree-branch
+		[branch]="child"
+		[optionTpl]="optionTpl()"
+		[optionIndex]="optionIndex() + '-' + $index"
+		[optionComparer]="optionComparer()"
+		[selectedOptions]="selectedOptions()"
+		[simpleMode]="simpleMode()"
+		(toggleOne)="toggleOne.emit($event)"
+		(selectMany)="selectMany.emit($event)"
+		(unselectMany)="unselectMany.emit($event)"
+	/>
+	<!-- use --components-treeBranch-level to apply specific child level-->
+}

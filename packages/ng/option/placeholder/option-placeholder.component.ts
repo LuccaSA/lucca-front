@@ -2,6 +2,9 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { getIntl } from '@lucca-front/ng/core';
 import { LU_OPTION_PLACEHOLDER_TRANSLATIONS } from './option-placeholder.translate';
 
+/**
+ * @deprecated
+ */
 @Component({
 	selector: 'lu-option-placeholder',
 	templateUrl: './option-placeholder.component.html',
