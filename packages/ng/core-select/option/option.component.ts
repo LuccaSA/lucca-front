@@ -27,7 +27,7 @@ import { LuOptionOutletDirective } from './option-outlet.directive';
 import { ILuOptionContext, LU_OPTION_CONTEXT } from './option.token';
 import { CoreSelectPanelElement } from '../panel/selectable-item';
 import { LU_OPTION_TRANSLATIONS } from './option.translate';
-import { LuTooltipTriggerDirective } from '../../tooltip/trigger';
+import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
 
 export const MAGIC_OPTION_SCROLL_DELAY = 15;
 

@@ -1,9 +1,6 @@
 import { booleanAttribute, ChangeDetectionStrategy, Component, inject, input, output, TemplateRef, Type, viewChild, ViewEncapsulation } from '@angular/core';
 import { ALuSelectInputComponent, LuIsOptionSelectedPipe, LuOptionComparer, LuOptionContext, TreeNode, ɵCoreSelectPanelElement, ɵLuOptionComponent } from '@lucca-front/ng/core-select';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { LuMultiSelectPanelComponent } from '../../multi-select/panel';
-import { LuMultiSelectInputComponent } from '../../multi-select/input';
-import { CoreSelectPanelElement } from '../../core-select/panel/selectable-item';
 
 @Component({
 	selector: 'lu-tree-branch',
@@ -16,7 +13,7 @@ import { CoreSelectPanelElement } from '../../core-select/panel/selectable-item'
 export class TreeBranchComponent<T> {
 	selectInputComponent = inject(ALuSelectInputComponent);
 
-	rootOptionRef = viewChild<CoreSelectPanelElement<T>>('rootOption');
+	rootOptionRef = viewChild<ɵCoreSelectPanelElement<T>>('rootOption');
 
 	branch = input.required<TreeNode<T>>();
 
@@ -25,8 +22,6 @@ export class TreeBranchComponent<T> {
 	optionIndex = input.required({ transform: (value: string | number) => `${value}` });
 
 	optionComparer = input.required<LuOptionComparer<T>>();
-
-	panelRef = input<LuMultiSelectPanelComponent<T>>(null);
 
 	selectedOptions = input<T[]>([]);
 
@@ -39,14 +34,13 @@ export class TreeBranchComponent<T> {
 	simpleMode = input(false, { transform: booleanAttribute });
 
 	constructor() {
-		if ((this.selectInputComponent as LuMultiSelectInputComponent<T>).selectChildren$) {
-			const multiSelect = this.selectInputComponent as LuMultiSelectInputComponent<T>;
-			multiSelect.selectChildren$.pipe(takeUntilDestroyed()).subscribe(() => {
+		if (this.selectInputComponent.selectChildren$) {
+			this.selectInputComponent.selectChildren$.pipe(takeUntilDestroyed()).subscribe(() => {
 				if (this.rootOptionRef().isHighlighted()) {
 					this.selectOnlyChildren(this.branch());
 				}
 			});
-			multiSelect.selectParent$.pipe(takeUntilDestroyed()).subscribe(() => {
+			this.selectInputComponent.selectParent$.pipe(takeUntilDestroyed()).subscribe(() => {
 				if (this.rootOptionRef().isHighlighted()) {
 					this.toggleOne.emit(this.branch().node);
 				}
