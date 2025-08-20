@@ -1,0 +1,18 @@
+@if (tabs()) {
+	<ul class="segmentedControl" role="tablist">
+		<li class="segmentedControl-item" role="presentation">
+			<button
+				class="segmentedControl-item-action"
+				type="button"
+				role="tab"
+				id="tab1"
+				aria-controls="panel1"
+				[attr.aria-selected]="false"
+				[attr.tabindex]="null"
+			>
+				Lorem
+			</button>
+		</li>
+	</ul>
+}
+<ng-content />

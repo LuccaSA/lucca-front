@@ -7,7 +7,7 @@ interface segmentedControlFilterStory {
 }
 
 export default {
-	title: 'Documentation/Navigation/segmentedControl/Filter',
+	title: 'Documentation/Navigation/segmentedControl/HTML&CSS/Filter',
 	argTypes: {
 		S: {
 			control: {

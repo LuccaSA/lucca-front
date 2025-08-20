@@ -7,7 +7,7 @@ interface segmentedControlTabsStory {
 }
 
 export default {
-	title: 'Documentation/Navigation/segmentedControl/Tabs',
+	title: 'Documentation/Navigation/segmentedControl/HTML&CSS/Tabs',
 	argTypes: {
 		S: {
 			control: {

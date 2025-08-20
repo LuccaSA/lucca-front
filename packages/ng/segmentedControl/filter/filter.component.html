@@ -1,0 +1,11 @@
+<input
+	type="radio"
+	class="segmentedControl-item-input"
+	name="tab"
+	[attr.id]="id"
+	[attr.checked]="checked() ? 'checked' : null"
+	[attr.disabled]="disabled() ? 'disabled' : null"
+/>
+<label [attr.for]="id" class="segmentedControl-item-action">
+	{{ label() }}
+</label>
