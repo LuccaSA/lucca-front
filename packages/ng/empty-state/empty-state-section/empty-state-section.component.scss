@@ -1,5 +1,7 @@
 @use '@lucca-front/scss/src/components/emptyState';
 
 lu-empty-state-section {
-	inline-size: 100%;
+	@layer ng {
+		inline-size: 100%;
+	}
 }

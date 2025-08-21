@@ -3,7 +3,7 @@
 
 @use '@lucca-front/scss/src/commons/function';
 
-$layers: 'reset, base, components, mods, states, product, utils' !default;
+$layers: 'reset, base, ng, components, mods, states, product, utils' !default;
 
 /* stylelint-disable-next-line layer-name-pattern */
 @layer #{$layers};

@@ -1,5 +1,7 @@
 @use '@lucca-front/scss/src/components/calloutDisclosure';
 
 lu-callout-disclosure {
-  display: block;
+	@layer ng {
+		display: block;
+	}
 }

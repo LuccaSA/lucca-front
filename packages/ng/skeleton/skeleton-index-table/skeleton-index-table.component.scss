@@ -2,5 +2,7 @@
 @use '@lucca-front/scss/src/components/skeleton';
 
 :host {
-	display: contents;
+	@layer ng {
+		display: contents;
+	}
 }

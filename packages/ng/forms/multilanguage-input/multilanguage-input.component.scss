@@ -1,12 +1,16 @@
 @use '@lucca-front/scss/src/commons/utils/a11y';
 
 .multilanguage_popover-content.popover-contentOptional {
-	max-block-size: 20rem;
-	overflow: auto;
+	@layer ng {
+		max-block-size: 20rem;
+		overflow: auto;
+	}
 
-	&:focus-visible {
-		@include a11y.focusVisible;
+	@layer states {
+		&:focus-visible {
+			@include a11y.focusVisible;
 
-		border-radius: var(--pr-t-border-radius-structure);
+			border-radius: var(--pr-t-border-radius-structure);
+		}
 	}
 }

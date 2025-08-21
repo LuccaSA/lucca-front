@@ -1,7 +1,9 @@
 @use '@lucca-front/scss/src/components/emptyState';
 
 .emptyState-wrapper {
-	display: flex;
-	flex-direction: column;
-	flex-grow: 1;
+	@layer ng {
+		display: flex;
+		flex-direction: column;
+		flex-grow: 1;
+	}
 }

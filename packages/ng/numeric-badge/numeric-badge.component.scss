@@ -1,5 +1,7 @@
 @use "@lucca-front/scss/src/components/numericBadge";
 
 lu-numeric-badge {
-  display: inline-flex;
+	@layer ng {
+  	display: inline-flex;
+	}
 }
