@@ -37,10 +37,7 @@
 			--components-emptyState-icon-background-color: var(--palettes-100, var(--palettes-product-100));
 			--components-emptyState-icon-action-color: var(--palettes-600, var(--palettes-brand-600));
 			margin-block-end: var(--pr-t-spacings-200);
-
-			svg {
-				display: block;
-			}
+			display: flex;
 		}
 
 		.emptyState-content-text {
