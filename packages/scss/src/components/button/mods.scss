@@ -95,7 +95,7 @@
 	}
 
 	&:disabled {
-		--components-button-backgroundColor: var(--palettes-neutral-0);
+		--components-button-backgroundColor: transparent;
 		--components-button-color: var(--pr-t-color-text-disabled);
 	}
 }
