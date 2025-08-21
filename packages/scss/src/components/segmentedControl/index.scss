@@ -37,7 +37,9 @@
 
 .segmentedControl-item-action:disabled,
 .segmentedControl-item-input:disabled ~ .segmentedControl-item-action {
+	@layer states {
 		@include disabled;
+	}
 }
 
 // .viewTabs_panel is deprecated

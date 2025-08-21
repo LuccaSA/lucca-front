@@ -1,7 +1,7 @@
 @use '@lucca-front/scss/src/components/newBadge';
 
 lu-new-badge {
-	@layer ng {
+	@layer base {
 		display: inline-flex;
 	}
 }

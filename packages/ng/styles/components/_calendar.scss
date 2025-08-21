@@ -1,9 +1,7 @@
-// TODO layers
-
 @use '@lucca-front/scss/src/commons/utils/namespace';
 
 @include namespace.appendRootVars {
-	@layer ng {
+	@layer components {
 		--components-calendar-width: 17.5rem;
 		--components-calendar-day-size: 2.5rem;
 	}

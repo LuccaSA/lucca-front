@@ -1,21 +1,21 @@
-// TODO layers
-
 @use '@lucca-front/scss/src/commons/utils/overflow';
 
-.cdk-global-overlay-wrapper {
-	block-size: 100%;
-	inset-inline-start: 0;
-	inset-block-start: 0;
-	pointer-events: none;
-	inline-size: 100%;
-	display: flex;
-	position: absolute;
-	z-index: 1000;
-}
+@layer components {
+	.cdk-global-overlay-wrapper {
+		block-size: 100%;
+		inset-inline-start: 0;
+		inset-block-start: 0;
+		pointer-events: none;
+		inline-size: 100%;
+		display: flex;
+		position: absolute;
+		z-index: 1000;
+	}
 
-.cdk-global-scrollblock {
-	position: static !important;
-	inline-size: auto !important;
+	.cdk-global-scrollblock {
+		position: static !important;
+		inline-size: auto !important;
 
-	@include overflow.scrollblock('!important');
+		@include overflow.scrollblock('!important');
+	}
 }

@@ -1,5 +1,5 @@
-// TODO layers
-
 :host {
-	inline-size: 100%;
+	@layer base {
+		inline-size: 100%;
+	}
 }

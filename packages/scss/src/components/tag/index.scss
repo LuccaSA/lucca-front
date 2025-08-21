@@ -22,7 +22,9 @@
 		}
 	}
 
-	&.mod-disabled {
-		@include disabled;
+	@layer states {
+		&.mod-disabled {
+			@include disabled;
+		}
 	}
 }

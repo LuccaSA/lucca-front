@@ -1,5 +1,5 @@
-:host-context(.mod-framed) {
-	@layer mods {
+@layer mods {
+	:host-context(.mod-framed) {
 		lu-select {
 			display: block;
 		}

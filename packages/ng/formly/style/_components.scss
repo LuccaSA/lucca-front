@@ -1,17 +1,19 @@
-// TODO layers
-
-formly-form,
-formly-group,
-formly-field {
-	display: inherit;
-	flex-wrap: inherit;
-	flex-direction: inherit;
-	inline-size: 100%;
+@layer base {
+	formly-form,
+	formly-group,
+	formly-field {
+		display: inherit;
+		flex-wrap: inherit;
+		flex-direction: inherit;
+		inline-size: 100%;
+	}
 }
 
-formly-form .checkboxesfield:not(fieldset),
-formly-form .radiosfield:not(fieldset) {
-	margin-block-start: 0 !important;
-	padding-block: var(--components-field-framed-side-padding) var(--components-field-framed-bottom-padding) !important;
-	padding-inline: var(--components-field-framed-side-padding) !important;
+@layer components {
+	formly-form .checkboxesfield:not(fieldset),
+	formly-form .radiosfield:not(fieldset) {
+		margin-block-start: 0 !important;
+		padding-block: var(--components-field-framed-side-padding) var(--components-field-framed-bottom-padding) !important;
+		padding-inline: var(--components-field-framed-side-padding) !important;
+	}
 }

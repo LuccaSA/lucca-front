@@ -1,22 +1,23 @@
-// TODO layers
-
 @use "@lucca-front/scss/src/components/button/exports" as button;
 @use 'definitions';
 
 @include definitions.optionSearcherStyle;
 @include definitions.optionPlaceholderStyle;
 
-
 .addOption {
-	justify-content: left;
+	@layer components {
+		justify-content: left;
 
-	@include button.vars;
-	@include button.component;
-	@include button.block;
-	@include button.ghost;
+		@include button.vars;
+		@include button.component;
+		@include button.block;
+		@include button.ghost;
+	}
 
-	&.is-highlighted {
-		--components-button-color: var(--palettes-700, var(--palettes-neutral-700));
-		--components-button-backgroundColor: var(--palettes-100, var(--palettes-neutral-100));
+	@layer states {
+		&.is-highlighted {
+			--components-button-color: var(--palettes-700, var(--palettes-neutral-700));
+			--components-button-backgroundColor: var(--palettes-100, var(--palettes-neutral-100));
+		}
 	}
 }

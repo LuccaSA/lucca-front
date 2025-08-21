@@ -1,8 +1,13 @@
-// TODO layers
-
-:host {
-	display: inherit;
-	flex-direction: inherit;
-	flex: 1 1 auto;
-	inline-size: 100%;
+@layer base {
+	lu-formly-wrapper-checkbox-layout,
+	lu-formly-wrapper-error,
+	lu-formly-wrapper-helper,
+	lu-formly-wrapper-suffix,
+	lu-formly-wrapper-radiosfield-layout,
+	lu-formly-wrapper-layout {
+		display: inherit;
+		flex-direction: inherit;
+		flex: 1 1 auto;
+		inline-size: 100%;
+	}
 }

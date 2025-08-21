@@ -1,5 +1,14 @@
-:host {
-	@layer ng {
+@layer base {
+	lu-formly-field-api,
+	lu-formly-field-checkbox,
+	lu-formly-field-date,
+	lu-formly-field-department,
+	lu-formly-field-establishment,
+	lu-formly-field-input,
+	lu-formly-field-radioslu-formly-field-api,
+	lu-formly-field-radios,
+	lu-formly-field-select,
+	lu-formly-field-user {
 		inline-size: 100%;
 		display: inherit;
 		align-items: inherit;

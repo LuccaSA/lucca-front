@@ -1,96 +1,104 @@
-// TODO layers
-
 @use 'definitions';
 
 @include definitions.optionItemStyle;
 
-:host {
-	--components-options-tree-multiple-padding: 2.25rem;
-	--components-options-tree-padding-child: var(--pr-t-spacings-150);
-}
-
-.is-disabled {
-	color: var(--palettes-neutral-500); // disabled token candidate
-	user-select: none;
-	cursor: default;
-
-	&.is-selected {
-		background-color: var(--commons-disabled-background);
-	}
-
-	&:hover {
-		background-color: inherit;
+@layer components {
+	lu-tree-option {
+		--components-options-tree-multiple-padding: 2.25rem;
+		--components-options-tree-padding-child: var(--pr-t-spacings-150);
 	}
 }
 
-.optionItem {
-	&:not(:last-child) {
-		margin-block-end: var(--pr-t-spacings-50);
-	}
+@layer states {
+	.is-disabled {
+		color: var(--palettes-neutral-500); // disabled token candidate
+		user-select: none;
+		cursor: default;
 
-	&:hover {
-		.optionItem-value {
-			background: var(--palettes-neutral-50);
+		&.is-selected {
+			background-color: var(--commons-disabled-background);
 		}
 
-		.optionItem-icons {
+		&:hover {
+			background-color: inherit;
+		}
+	}
+}
+
+@layer components {
+	.optionItem {
+		&:not(:last-child) {
+			margin-block-end: var(--pr-t-spacings-50);
+		}
+
+		&:hover {
+			.optionItem-value {
+				background: var(--palettes-neutral-50);
+			}
+
+			.optionItem-icons {
+				opacity: 1;
+			}
+		}
+	}
+
+	.optionItem-value {
+		padding-block: var(--components-options-item-padding-vertical);
+		padding-inline: var(--components-options-item-padding-horizontal);
+	}
+
+	.optionItem-icons {
+		display: none;
+		position: absolute;
+		inset-block-start: var(--pr-t-spacings-50);
+		inset-inline-end: var(--pr-t-spacings-100);
+		opacity: 0;
+		transition: all var(--commons-animations-durations-fast) ease;
+	}
+
+	.optionItem-icon {
+		cursor: pointer;
+		opacity: 0.66;
+		margin-inline-start: var(--pr-t-spacings-100);
+		transition: all var(--commons-animations-durations-fast) ease;
+
+		&:hover {
 			opacity: 1;
 		}
 	}
-}
 
-.optionItem-value {
-	padding-block: var(--components-options-item-padding-vertical);
-	padding-inline: var(--components-options-item-padding-horizontal);
-}
-
-.optionItem-icons {
-	display: none;
-	position: absolute;
-	inset-block-start: var(--pr-t-spacings-50);
-	inset-inline-end: var(--pr-t-spacings-100);
-	opacity: 0;
-	transition: all var(--commons-animations-durations-fast) ease;
-}
-
-.optionItem-icon {
-	cursor: pointer;
-	opacity: 0.66;
-	margin-inline-start: var(--pr-t-spacings-100);
-	transition: all var(--commons-animations-durations-fast) ease;
-
-	&:hover {
-		opacity: 1;
+	.optionItem-icon-shape {
+		fill: var(--components-options-item-icon-color);
+		inline-size: 1.4rem;
+		block-size: 1.4rem;
 	}
 }
 
-.optionItem-icon-shape {
-	fill: var(--components-options-item-icon-color);
-	inline-size: 1.4rem;
-	block-size: 1.4rem;
-}
+@layer components {
+	:host-context(.lu-picker-panel) {
+		padding: 0;
 
-:host-context(.lu-picker-panel) {
-	padding: 0;
+		.optionItem-value {
+			&::before {
+				pointer-events: none;
+			}
 
-	.optionItem-value {
-		&::before {
-			pointer-events: none;
-		}
-
-		&::after {
-			pointer-events: none;
+			&::after {
+				pointer-events: none;
+			}
 		}
 	}
 }
 
-:host-context(.lu-picker-panel.mod-multiple) {
-	.optionItem-icons {
-		display: block;
-	}
+@layer mods {
+	:host-context(.lu-picker-panel.mod-multiple) {
+		.optionItem-icons {
+			display: block;
+		}
 
-	.optionItem-value {
-		padding-inline-end: 4rem;
+		.optionItem-value {
+			padding-inline-end: 4rem;
+		}
 	}
 }
 
@@ -104,31 +112,33 @@
 	@return $result;
 }
 
-@for $i from 1 through 10 {
-	// Single
-	:host-context(.lu-picker-panel #{repeat($i, 'lu-tree-option')}) {
-		.optionItem-value {
-			@if ($i == 1) {
-				padding-inline-start: calc(var(--pr-t-spacings-100) + (var(--components-options-tree-padding-child) * var(--nesting)));
-			}
-
-			--nesting: #{$i - 1};
-		}
-	}
-
-	// Multiple
-	:host-context(.lu-picker-panel.mod-multiple #{repeat($i, 'lu-tree-option')}) {
-		.optionItem-value {
-			@if ($i == 1) {
-				padding-inline-start: calc(var(--components-options-tree-multiple-padding) + (var(--components-options-tree-padding-child) * var(--nesting)));
-
-				&::before,
-				&::after {
-					inset-inline-start: calc(var(--pr-t-spacings-100) + (var(--components-options-tree-padding-child) * var(--nesting)));
+@layer mods {
+	@for $i from 1 through 10 {
+		// Single
+		:host-context(.lu-picker-panel #{repeat($i, 'lu-tree-option')}) {
+			.optionItem-value {
+				@if ($i == 1) {
+					padding-inline-start: calc(var(--pr-t-spacings-100) + (var(--components-options-tree-padding-child) * var(--nesting)));
 				}
-			}
 
-			--nesting: #{$i - 1};
+				--nesting: #{$i - 1};
+			}
+		}
+
+		// Multiple
+		:host-context(.lu-picker-panel.mod-multiple #{repeat($i, 'lu-tree-option')}) {
+			.optionItem-value {
+				@if ($i == 1) {
+					padding-inline-start: calc(var(--components-options-tree-multiple-padding) + (var(--components-options-tree-padding-child) * var(--nesting)));
+
+					&::before,
+					&::after {
+						inset-inline-start: calc(var(--pr-t-spacings-100) + (var(--components-options-tree-padding-child) * var(--nesting)));
+					}
+				}
+
+				--nesting: #{$i - 1};
+			}
 		}
 	}
 }

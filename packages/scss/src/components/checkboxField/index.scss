@@ -10,47 +10,47 @@
 		&.mod-S {
 			@include S;
 		}
-	}
 
-	&.mod-checklist {
-		@include checklist;
+		&.mod-checklist {
+			@include checklist;
 
-		.checkboxField-input {
-			&:hover {
-				@include checklistHover;
-			}
-
-			&:active {
-				@include checklistActive;
-			}
-
-			&:disabled {
-				@include checklistDisabled;
-			}
-
-			&:checked {
-				@include checklistChecked;
-
+			.checkboxField-input {
 				&:hover {
-					@include checklistCheckedHover;
+					@include checklistHover;
 				}
 
 				&:active {
-					@include checklistCheckedActive;
+					@include checklistActive;
 				}
 
 				&:disabled {
-					@include checklistCheckedDisabled;
+					@include checklistDisabled;
 				}
-			}
-		}
-
-		&:has(.checkboxField-input:focus-visible) {
-			.checkboxField-input {
-				@include checklistHover;
 
 				&:checked {
-					@include checklistCheckedHover;
+					@include checklistChecked;
+
+					&:hover {
+						@include checklistCheckedHover;
+					}
+
+					&:active {
+						@include checklistCheckedActive;
+					}
+
+					&:disabled {
+						@include checklistCheckedDisabled;
+					}
+				}
+			}
+
+			&:has(.checkboxField-input:focus-visible) {
+				.checkboxField-input {
+					@include checklistHover;
+
+					&:checked {
+						@include checklistCheckedHover;
+					}
 				}
 			}
 		}

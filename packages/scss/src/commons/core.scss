@@ -71,7 +71,7 @@ $cursor: 'pointer', 'auto';
 	}
 }
 
-/* Variables */
+// Variables
 
 @mixin cssvars($name, $properties, $after: '') {
 	@each $key, $value in $properties {

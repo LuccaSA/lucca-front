@@ -1,49 +1,55 @@
-// TODO layers
-
 @use 'definitions';
 
 @include definitions.selectInputStyle;
 
-.lu-picker-header {
-	.option-selector {
-		display: none;
-	}
-
-	&.mod-multiple {
+@layer components {
+	.lu-picker-header {
 		.option-selector {
-			display: inherit;
+			display: none;
+		}
+
+		&.mod-multiple {
+			.option-selector {
+				display: inherit;
+			}
 		}
 	}
 }
 
 .optionGroupName {
-	padding-block: var(--components-options-item-padding-vertical) var(--pr-t-spacings-50);
-	padding-inline: var(--components-options-item-padding-horizontal);
-	border-radius: 0;
-	font: var(--pr-t-font-body-S);
-	inline-size: 100%;
-	justify-content: flex-start;
-	font-weight: 600;
-	color: var(--palettes-neutral-600);
-	text-decoration: underline;
-
-	&.mod-readonly {
-		text-decoration: none;
+	@layer components {
+		padding-block: var(--components-options-item-padding-vertical) var(--pr-t-spacings-50);
+		padding-inline: var(--components-options-item-padding-horizontal);
+		border-radius: 0;
+		font: var(--pr-t-font-body-S);
+		inline-size: 100%;
+		justify-content: flex-start;
+		font-weight: 600;
+		color: var(--palettes-neutral-600);
+		text-decoration: underline;
 	}
 
-	&.button {
-		text-decoration: underline;
-		margin: 0;
+	@layer mods {
+		&.mod-readonly {
+			text-decoration: none;
+		}
+	}
 
-		&:active,
-		&:focus,
-		&:hover {
-			box-shadow: none;
-			background-color: transparent;
+	@layer states {
+		&.button {
+			text-decoration: underline;
+			margin: 0;
 
-			~ .lu-picker-content-option lu-option {
-				background-color: var(--palettes-neutral-50);
-				border-radius: var(--pr-t-border-radius-default);
+			&:active,
+			&:focus,
+			&:hover {
+				box-shadow: none;
+				background-color: transparent;
+
+				~ .lu-picker-content-option lu-option {
+					background-color: var(--palettes-neutral-50);
+					border-radius: var(--pr-t-border-radius-default);
+				}
 			}
 		}
 	}

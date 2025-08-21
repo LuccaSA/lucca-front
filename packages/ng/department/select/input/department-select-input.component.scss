@@ -1,17 +1,19 @@
-// TODO layers
-
 @use 'definitions';
 
 @include definitions.selectInputStyle;
 
 .lu-picker-header {
-	.option-selector {
-		display: none;
+	@layer components {
+		.option-selector {
+			display: none;
+		}
 	}
 
-	&.mod-multiple {
-		.option-selector {
-			display: inherit;
+	@layer mods {
+		&.mod-multiple {
+			.option-selector {
+				display: inherit;
+			}
 		}
 	}
 }

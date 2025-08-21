@@ -1,8 +1,8 @@
 @use '@lucca-front/scss/src/components/table';
 @use '@lucca-front/scss/src/components/skeleton';
 
-:host {
-	@layer ng {
+@layer base {
+	lu-skeleton-table {
 		display: contents;
 	}
 }

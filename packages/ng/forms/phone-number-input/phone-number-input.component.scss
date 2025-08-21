@@ -1,31 +1,31 @@
-// TODO layers
-
 lu-phone-number-input {
-	.phoneNumber-fieldset {
-		border: 0;
-		padding: 0;
-		gap: var(--pr-t-spacings-100);
-		inline-size: 17.5rem;
-		display: flex;
-	}
+	@layer components {
+		.phoneNumber-fieldset {
+			border: 0;
+			padding: 0;
+			gap: var(--pr-t-spacings-100);
+			inline-size: 17.5rem;
+			display: flex;
+		}
 
-	.phoneNumber-fieldset-select {
-		.simpleSelect-field-input {
-			inline-size: 21px;
+		.phoneNumber-fieldset-select {
+			.simpleSelect-field-input {
+				inline-size: 21px;
+			}
+		}
+
+		.phoneNumber-fieldset-textfield {
+			flex-grow: 1;
 		}
 	}
 
-	.phoneNumber-fieldset-textfield {
-		flex-grow: 1;
+	.phoneNumber-option-flag {
+		vertical-align: top;
+		margin-block-start: var(--pr-t-spacings-50);
+		margin-inline-end: var(--pr-t-spacings-100);
 	}
-}
 
-.phoneNumber-option-flag {
-	vertical-align: top;
-	margin-block-start: var(--pr-t-spacings-50);
-	margin-inline-end: var(--pr-t-spacings-100);
-}
-
-.phoneNumber-countryCode-flag {
-	display: block;
+	.phoneNumber-countryCode-flag {
+		display: block;
+	}
 }

@@ -90,6 +90,7 @@
 
 @mixin error {
 	@include keyframe.shake;
+
 	animation-name: shake;
 	animation-iteration-count: 1;
 	animation-duration: var(--commons-animations-durations-standard);

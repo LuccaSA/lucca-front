@@ -9,11 +9,15 @@
 }
 
 %titleXXXL {
-	@include XXXL('!important');
+	@layer components {
+		@include XXXL('!important');
+	}
 }
 
 %titleImportant {
-	@include title('!important');
+	@layer components {
+		@include title('!important');
+	}
 }
 
 .titleSection-sub {

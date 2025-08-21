@@ -1,7 +1,7 @@
-// TODO layers
-
-:host {
-	display: block;
-	inline-size: 100%;
-	min-inline-size: 0;
+@layer base {
+	lu-multi-select-default-displayer {
+		display: block;
+		inline-size: 100%;
+		min-inline-size: 0;
+	}
 }
