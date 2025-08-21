@@ -29,6 +29,8 @@ import { LuOptionGrouping, LuSimpleSelectDefaultOptionComponent } from '../optio
 import { LuSelectPanelRef } from '../panel';
 import { CoreSelectAddOptionStrategy, LuOptionComparer, LuOptionContext, SELECT_LABEL, SELECT_LABEL_ID } from '../select.model';
 import { LU_CORE_SELECT_TRANSLATIONS } from '../select.translate';
+import { TreeGenerator } from './tree-generator';
+import { TreeNode } from './model';
 
 export const coreSelectDefaultOptionComparer: LuOptionComparer<unknown> = (option1, option2) => JSON.stringify(option1) === JSON.stringify(option2);
 export const coreSelectDefaultOptionKey: (option: unknown) => unknown = (option) => option;
@@ -47,6 +49,9 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	protected afterCloseFn?: () => void;
 	protected updatePositionFn?: () => void;
 	protected filterPillMode = false;
+
+	public selectParent$?: Subject<void>;
+	public selectChildren$?: Subject<void>;
 
 	@ViewChild('inputElement')
 	private inputElementRef: ElementRef<HTMLInputElement>;
@@ -152,6 +157,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 	displayerTpl = computed(() => this.valueTpl() || this.optionTpl());
 
 	grouping?: LuOptionGrouping<TOption, unknown>;
+	treeGenerator?: TreeGenerator<TOption, TreeNode<TOption>>;
 
 	@Output() clueChange = new EventEmitter<string>();
 	@Output() nextPage = new EventEmitter<void>();
@@ -254,6 +260,9 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 				this.panelRef?.close();
 				break;
 			case 'Enter':
+				if ($event.ctrlKey || $event.shiftKey) {
+					return;
+				}
 				if (this.isPanelOpen) {
 					// Prevent form submission when selecting a value with Enter
 					$event.preventDefault();

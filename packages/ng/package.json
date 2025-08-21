@@ -32,13 +32,15 @@
     "date-fns": "^3.6.0",
     "rxjs": "^7.8.0",
     "@lexical/html": "^0.30.0",
+    "@lexical/text": "^0.30.0",
     "@lexical/markdown": "^0.30.0",
     "@lexical/history": "^0.30.0",
     "@lexical/link": "^0.30.0",
     "@lexical/rich-text": "^0.30.0",
     "@lexical/selection": "^0.30.0",
     "@lexical/utils": "^0.30.0",
-    "lexical": "^0.30.0"
+    "lexical": "^0.30.0",
+    "@ngx-formly/core": "^6.3.11"
   },
   "peerDependenciesMeta": {
     "lexical": {
@@ -63,6 +65,9 @@
       "optional": true
     },
     "@lexical/utils": {
+      "optional": true
+    },
+    "@ngx-formly/core": {
       "optional": true
     }
   },

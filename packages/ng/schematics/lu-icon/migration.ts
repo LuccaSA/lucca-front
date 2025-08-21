@@ -1,11 +1,11 @@
-import { HtmlAst } from '../lib/html-ast.js';
-import { SourceFile } from 'typescript';
-import { extractNgTemplatesIncludingHtml } from '../lib/angular-template';
 import { Tree } from '@angular-devkit/schematics';
-import { currentSchematicContext } from '../lib/lf-schematic-context';
 import type { TmplAstElement } from '@angular/compiler';
-import { insertAngularImportIfNeeded,insertTSImportIfNeeded } from '../lib/angular-component-ast';
 import { applyToUpdateRecorder } from '@schematics/angular/utility/change';
+import { SourceFile } from 'typescript';
+import { insertAngularImportIfNeeded, insertTSImportIfNeeded } from '../lib/angular-component-ast';
+import { extractNgTemplatesIncludingHtml } from '../lib/angular-template';
+import { HtmlAst } from '../lib/html-ast.js';
+import { currentSchematicContext } from '../lib/lf-schematic-context';
 
 
 interface HtmlIcon {
@@ -125,7 +125,7 @@ function findHTMLIcons(sourceFile: SourceFile, basePath: string, tree: Tree): Ht
 							if (possibleAltSpan && isInterestingNode(possibleAltSpan)) {
 								const childClasses = possibleAltSpan.attributes.find(attr => attr.name === 'class')?.value;
 								// We know it's one of these types but TS doesn't find that info from the above call so here we go again
-								if (childClasses === 'u-mask') {
+								if (childClasses === 'pr-u-mask') {
 									icon.alt = template.content.slice(possibleAltSpan.startSourceSpan.end.offset, possibleAltSpan.endSourceSpan?.start?.offset)
 									icon.altSpan = possibleAltSpan;
 								}

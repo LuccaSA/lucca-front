@@ -76,6 +76,8 @@ export default {
 				'generic/polaroids-01',
 				'generic/post-its-01',
 				'generic/success-01',
+				'generic/error-01',
+				'generic/plug-01',
 			],
 			control: 'select',
 		},

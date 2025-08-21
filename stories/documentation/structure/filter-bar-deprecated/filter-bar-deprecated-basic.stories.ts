@@ -93,14 +93,14 @@ function getTemplate(args: FilterBarDeprecatedBasicStory): string {
 		</div>
 	</div>
 	<div class="filterBarDeprecated-footer">
-		<button type="button" class="button mod-text mod-withIcon filterBarDeprecated-footer-toggleButton" aria-expanded="true">
+		<button type="button" class="button mod-ghost mod-withIcon filterBarDeprecated-footer-toggleButton" aria-expanded="true">
 			<span aria-hidden="true" class="lucca-icon icon-arrowChevronBottom"></span>
 			<span class="filterBarDeprecated-footer-toggleButton-labelAlternative" data-content-before="Moins de filtres" aria-hidden="true"></span>
 			<span class="filterBarDeprecated-footer-toggleButton-label">Plus de filtres</span>
 		</button>
 		<div class="filterBarDeprecated-footer-actions">
 			<span>8 résultats sur 88</span>
-			<button type="reset" class="button mod-text palette-product">Réinitialiser les filtres</button>
+			<button type="reset" class="button mod-ghost palette-product">Réinitialiser les filtres</button>
 			<button type="submit" class="button">Appliquer les filtres</button>
 		</div>
 	</div>

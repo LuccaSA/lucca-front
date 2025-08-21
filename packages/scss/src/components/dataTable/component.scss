@@ -17,7 +17,7 @@
 
 	@at-root ($atRoot) {
 		.dataTableWrapper {
-			border-radius: var(--commons-borderRadius-L);
+			border-radius: var(--components-dataTable-borderRadius);
 			border: 1px solid var(--commons-border-200);
 			overflow: var(--components-dataTable-overflow);
 			background-color: var(--components-dataTable-cell-background);
@@ -113,7 +113,7 @@
 		.dataTable-body-row-cell-drag.button {
 			@include button.S;
 			@include button.onlyIcon;
-			@include button.text;
+			@include button.ghost;
 
 			--components-button-padding: var(--pr-t-spacings-50);
 			--components-button-color: var(--palettes-neutral-700);

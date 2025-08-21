@@ -1,0 +1,186 @@
+@use 'exports' as *;
+
+.listboxOption {
+	@include vars;
+	@include component;
+
+	&.mod-add {
+		@include add;
+
+		&:hover {
+			@include addHover;
+		}
+
+		&:active {
+			@include addActive;
+		}
+	}
+
+	&.mod-select {
+		@include select;
+
+		&:hover {
+			@include selectHover;
+		}
+	}
+
+	&[role="group"] {
+		@include group;
+
+		&:hover,
+		&:has(.is-hovered) {
+			@include groupHover;
+		}
+
+		> .listboxOption-content {
+			&:hover {
+				@include groupHoverReset;
+			}
+		}
+
+		&:not(:has(.listboxOption.mod-select)) {
+			> .listboxOption-content {
+				@include groupHoverReset;
+			}
+		}
+	}
+
+	&[aria-hidden="true"] {
+		@include empty;
+	}
+
+	&[aria-selected="true"],
+	&[aria-checked="true"] {
+		> .listboxOption-content {
+			@include selected;
+
+			&.is-hovered,
+			&:hover {
+				@include selectedHover;
+			}
+
+			&:active {
+				@include selectedActive;
+			}
+		}
+	}
+
+	&[aria-disabled="true"] {
+		> .listboxOption-content {
+			@include disabled;
+
+			&:hover {
+				@include disabledHover;
+			}
+		}
+
+		&[aria-selected="true"],
+		&[aria-checked="true"] {
+			> .listboxOption-content {
+				@include selectedDisabled;
+			}
+		}
+	}
+}
+
+.listboxOption-content {
+	@include varsContent;
+
+	&.is-hovered,
+	&:hover {
+		@include hover;
+	}
+
+	&:active {
+		@include active;
+	}
+}
+
+.listboxOptionWrapper {
+	@include varsWrapper;
+
+	.listboxOptionWrapper {
+		@include nestedWrapper;
+		@include nested;
+
+		.listboxOptionWrapper {
+			@include nested(2);
+		}
+	}
+
+	&[aria-busy="true"] {
+		@include busy;
+	}
+
+	&.mod-empty {
+		@include empty;
+	}
+
+	&.mod-multiple {
+		&,
+		.listboxOptionWrapper {
+			@include multiple;
+
+			.listboxOption {
+				&:hover,
+				&.is-hovered {
+					@include multipleHover;
+				}
+
+				&:active {
+					@include multipleActive;
+				}
+
+				&[aria-selected="true"],
+				&[aria-checked="true"] {
+					> .listboxOption-content {
+						@include multipleSelected;
+
+						&:hover,
+						&.is-hovered {
+							@include multipleSelectedHover;
+						}
+
+						&:active {
+							@include multipleSelectedActive;
+						}
+					}
+				}
+
+				&[aria-checked="mixed"] {
+					> .listboxOption-content {
+						@include multipleMixed;
+
+						&:hover,
+						&.is-hovered {
+							@include multipleMixedHover;
+						}
+
+						&:active {
+							@include multipleMixedActive;
+						}
+					}
+				}
+
+				&[aria-disabled="true"], {
+					> .listboxOption-content {
+						@include multipleDisabled;
+					}
+
+					&[aria-selected="true"],
+					&[aria-checked="true"] {
+						> .listboxOption-content {
+							@include multipleSelectedDisabled;
+						}
+					}
+
+					&[aria-checked="mixed"] {
+						> .listboxOption-content {
+							@include multipleMixedDisabled;
+						}
+					}
+				}
+			}
+		}
+	}
+}

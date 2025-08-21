@@ -1,4 +1,4 @@
-<div class="u-displayFlex">
+<div class="pr-u-displayFlex">
 	<label class="textfield">
 		<lu-select class="textfield-input">
 			<span *luDisplayer="let user">{{ user | luUserDisplay }}</span>
@@ -38,7 +38,7 @@
 				<div class="lu-picker-content-option">
 					<lu-option *luForOptions="let user" [value]="user">
 						<span translate="no">{{ user | luUserDisplay }}</span>
-						<div *ngIf="user.additionalInformation" class="u-fontStyleItalic u-bodyS">({{ user.additionalInformation }})</div>
+						<div *ngIf="user.additionalInformation" class="pr-u-fontStyleItalic pr-u-bodyS">({{ user.additionalInformation }})</div>
 					</lu-option>
 				</div>
 			</lu-option-picker-advanced>

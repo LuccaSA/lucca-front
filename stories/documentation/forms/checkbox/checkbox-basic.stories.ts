@@ -12,6 +12,7 @@ interface CheckboxBasicStory {
 	invalid: false;
 	help: false;
 	messageState: '';
+	checklist: boolean;
 }
 
 export default {
@@ -74,6 +75,11 @@ export default {
 				type: 'select',
 			},
 		},
+		checklist: {
+			control: {
+				type: 'boolean',
+			},
+		},
 	},
 } as Meta;
 
@@ -89,12 +95,13 @@ function getTemplate(args: CheckboxBasicStory): string {
 	const invalid = args.invalid ? ` aria-invalid="true"` : '';
 	const help = args.help;
 	const messageState = args.messageState ? ' is-' + args.messageState : '';
+	const checklist = args.checklist ? ' mod-checklist' : '';
 
 	return `<div class="form-field${s} pr-u-marginBlockEnd200">
 	<label class="formLabel" for="${id}">
-		Label<sup class="formLabel-required" *ngIf="required" aria-hidden="true">*</sup><span *ngIf="help" class="formLabel-info"><span aria-hidden="true" class="lucca-icon icon-signHelp"></span><span class="u-mask">?</span></span>
+		Label<sup class="formLabel-required" *ngIf="required" aria-hidden="true">*</sup><span *ngIf="help" class="formLabel-info"><span aria-hidden="true" class="lucca-icon icon-signHelp"></span><span class="pr-u-mask">?</span></span>
 	</label>
-	<span class="checkboxField">
+	<span class="checkboxField ${checklist}">
 		<input type="checkbox" class="checkboxField-input" id="${id}" aria-labelledby="${id}label" aria-describedby="${id}message"${checked}${mixed}${disabled}${required}${invalid} />
 		<span class="checkboxField-icon" aria-hidden="true"><span class="checkboxField-icon-check"></span></span>
 	</span>
@@ -113,4 +120,17 @@ const Template: StoryFn<CheckboxBasicStory> = (args) => ({
 });
 
 export const Basic = Template.bind({});
-Basic.args = { checked: false, s: false, disabled: false, required: false, mixed: false, invalid: false, help: false, messageState: '', id: 'field1', label: 'Label', message: 'Helper text' };
+Basic.args = {
+	checked: false,
+	s: false,
+	disabled: false,
+	required: false,
+	mixed: false,
+	invalid: false,
+	help: false,
+	messageState: '',
+	id: 'field1',
+	label: 'Label',
+	message: 'Helper text',
+	checklist: false,
+};

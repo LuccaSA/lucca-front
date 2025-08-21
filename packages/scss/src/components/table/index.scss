@@ -40,7 +40,7 @@
 		@include borderless;
 	}
 
-	.tableSortable {
+	button.tableSortable {
 		--components-sortable-fontWeight: 600;
 		--components-sortable-fontSize: var(--pr-t-font-body-S-fontSize);
 		--components-sortable-lineHeight: var(--pr-t-font-body-S-lineHeight);

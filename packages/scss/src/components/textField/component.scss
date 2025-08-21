@@ -67,6 +67,7 @@
 			padding-inline: var(--component-textField-padding) var(--component-textField-affix-padding);
 			background-color: transparent;
 			color: var(--component-textField-color);
+			text-overflow: ellipsis;
 
 			&:is(textarea, div) {
 				max-block-size: var(--component-textField-maxHeight);
@@ -120,8 +121,8 @@
 			align-items: center;
 			color: var(--pr-t-color-input-text-suffix);
 			font: var(--component-textField-font);
-			border-start-start-radius: var(--commons-borderRadius-M);
-			border-end-start-radius: var(--commons-borderRadius-M);
+			border-start-start-radius: var(--pr-t-border-radius-input);
+			border-end-start-radius: var(--pr-t-border-radius-input);
 			flex-shrink: 0;
 
 			~ .textField-input {
@@ -136,8 +137,8 @@
 			align-items: center;
 			color: var(--pr-t-color-input-text-suffix);
 			font: var(--component-textField-font);
-			border-start-end-radius: var(--commons-borderRadius-M);
-			border-end-end-radius: var(--commons-borderRadius-M);
+			border-start-end-radius: var(--pr-t-border-radius-input);
+			border-end-end-radius: var(--pr-t-border-radius-input);
 			order: 1;
 			flex-shrink: 0;
 

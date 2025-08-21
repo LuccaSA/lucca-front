@@ -11,6 +11,9 @@ import { TextStyleToolbarComponent } from '../text-style';
 	selector: 'lu-rich-text-input-toolbar',
 	templateUrl: 'toolbar.component.html',
 	styleUrl: 'toolbar.component.scss',
+	host: {
+		class: 'richTextField-toolbar-formatting',
+	},
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	standalone: true,
 	imports: [TextStyleToolbarComponent, ListStyleToolbarComponent, HeadingsComponent, LinkComponent, ClearFormatComponent],

@@ -6,6 +6,9 @@ import { LuScrollDirective } from '@lucca-front/ng/scroll';
 import { LuTreeOptionPickerAdvancedComponent } from './tree-option-picker-advanced.component';
 import { LuTreeOptionPickerComponent } from './tree-option-picker.component';
 
+/**
+ * @deprecated
+ */
 @NgModule({
 	imports: [CommonModule, OverlayModule, LuScrollDirective, A11yModule, LuTreeOptionPickerAdvancedComponent, LuTreeOptionPickerComponent],
 	exports: [LuTreeOptionPickerComponent, LuTreeOptionPickerAdvancedComponent],

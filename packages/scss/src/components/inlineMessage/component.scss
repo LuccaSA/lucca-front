@@ -9,7 +9,7 @@
 	grid-column: 2;
 	font: var(--components-inlineMessage-font);
 	color: var(--components-inlineMessage-color);
-	border-radius: var(--commons-borderRadius-M);
+	border-radius: var(--pr-t-border-radius-50);
 
 	&:has(.inlineMessage-content:focus-visible) {
 		@include a11y.focusVisible;

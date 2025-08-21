@@ -1,0 +1,67 @@
+@mixin nested($level: 1) {
+	--components-listboxOptionWrapper-level: #{$level};
+	--components-listboxOptionWrapper-childrenPaddingInlineStart: calc(var(--pr-t-spacings-100) + var(--pr-t-spacings-100) * var(--components-listboxOptionWrapper-level));
+}
+
+@mixin nestedWrapper {
+	--components-listboxOptionWrapper-padding: 0;
+}
+
+@mixin multiple {
+	--components-listboxOptionWrapper-childrenBefore-content: none;
+	--components-listboxOptionWrapper-childrenCheckboxField-display: grid;
+}
+
+@mixin group {
+	.listboxOption {
+		--components-listboxOption-scrollMarginBlock: calc(var(--pr-t-spacings-50) + var(--pr-t-spacings-400));
+	}
+
+	> .listboxOption-content {
+		--components-listboxOption-content-fontWeight: var(--pr-t-font-fontWeight-semibold);
+		--components-listboxOption-content-font: var(--pr-t-font-body-S);
+		--components-listboxOption-content-position: sticky;
+		--components-listboxOption-content-marginBlockStart: var(--pr-t-spacings-50);
+		--components-listboxOption-content-checkboxField-display: none;
+		--components-listboxOption-content-flexWrap: wrap;
+		--components-listboxOption-content-justifyContent: space-between;
+		--components-listboxOption-content-insetBlockStart: var(--pr-t-spacings-50);
+		--components-listboxOption-content-boxShadow:
+			calc(var(--pr-t-spacings-100) * -1) 0 0 0 var(--pr-t-elevation-surface-raised),
+			calc(var(--pr-t-spacings-100) * +1) 0 0 0 var(--pr-t-elevation-surface-raised),
+			calc(var(--pr-t-spacings-100) * -1) calc(var(--pr-t-spacings-100) * -1) 0 0 var(--pr-t-elevation-surface-raised),
+			calc(var(--pr-t-spacings-100) * +1) calc(var(--pr-t-spacings-100) * -1) 0 0 var(--pr-t-elevation-surface-raised);
+	}
+
+	.listboxOptionWrapper {
+		--components-listboxOptionWrapper-childrenPaddingInlineStart: var(--pr-t-spacings-100);
+	}
+}
+
+@mixin add {
+	--components-listboxOption-content-color: var(--palettes-product-700);
+	--components-listboxOption-position: sticky;
+
+	.listboxOption-content {
+		--components-listboxOption-content-after-content: '';
+		--components-listboxOption-content-checkboxField-display: none;
+		--components-listboxOption-content-fontWeight: var(--pr-t-font-fontWeight-semibold);
+		--components-listboxOption-content-marginBlockStart: var(--pr-t-spacings-100);
+		--components-listboxOption-content-boxShadow:
+			calc(var(--pr-t-spacings-50) * +1) 0 0 var(--pr-t-spacings-50) var(--pr-t-elevation-surface-raised),
+			calc(var(--pr-t-spacings-50) * -1) 0 0 var(--pr-t-spacings-50) var(--pr-t-elevation-surface-raised);
+
+	}
+}
+
+@mixin select {
+	> .listboxOption-content {
+		--components-listboxOption-content-opacity: 0;
+		--components-listboxOption-content-position: static;
+		--components-listboxOption-content-font: var(--pr-t-font-body-S);
+		--components-listboxOption-content-padding: 0;
+		--components-listboxOption-content-color: var(--palettes-product-700);
+		--components-listboxOption-content-backgroundColor: transparent;
+		--components-listboxOption-content-checkboxField-display: none;
+	}
+}

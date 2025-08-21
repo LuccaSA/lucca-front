@@ -65,7 +65,7 @@ const code = `
 
           /* Ajouter une information additionnelle en pilotant la propriété ajoutée précedemment */
           /* Par défault, additionalInformation équivaut au nom du département de l'utilisateur */
-          <div *ngIf="user.additionalInformation" class="u-fontStyleItalic u-bodyS">
+          <div *ngIf="user.additionalInformation" class="pr-u-fontStyleItalic pr-u-bodyS">
             ({{ user.additionalInformation }})
           </div>
         </lu-option>

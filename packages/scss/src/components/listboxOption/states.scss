@@ -1,0 +1,166 @@
+@use "@lucca-front/scss/src/components/checkboxField/exports" as checkboxField;
+
+@mixin disabled {
+	--components-listboxOption-content-backgroundColor: var(--pr-t-elevation-surface-raised);
+	--components-listboxOption-content-color: var(--palettes-neutral-500);
+	--components-listboxOption-content-cursor: default;
+}
+
+@mixin disabledHover {
+	--components-listboxOption-content-backgroundColor: var(--pr-t-elevation-surface-raised);
+}
+
+@mixin selectedDisabled {
+	--components-listboxOption-content-before-backgroundColor: var(--palettes-neutral-500);
+}
+
+@mixin addHover {
+	> .listboxOption-content {
+		--components-listboxOption-content-backgroundColor: var(--palettes-product-100);
+	}
+}
+
+@mixin addActive {
+	> .listboxOption-content {
+		--components-listboxOption-content-backgroundColor: var(--palettes-product-200);
+	}
+}
+
+@mixin multipleMixed {
+	--components-listboxOption-content-backgroundColor: var(--palettes-product-50);
+	--components-listboxOption-content-before-backgroundColor: var(--palettes-product-700);
+
+	.listboxOption-content-checkboxField-input  {
+		@include checkboxField.checked;
+		@include checkboxField.mixed;
+	}
+}
+
+@mixin multipleMixedHover {
+	--components-listboxOption-content-backgroundColor: var(--palettes-product-100);
+
+	.listboxOption-content-checkboxField-input  {
+		@include checkboxField.checkedHover;
+	}
+}
+
+@mixin multipleMixedActive {
+	--components-listboxOption-content-backgroundColor: var(--palettes-product-200);
+
+	.listboxOption-content-checkboxField-input  {
+		@include checkboxField.checkedActive;
+	}
+}
+
+@mixin multipleMixedDisabled {
+	--components-listboxOption-content-backgroundColor: var(--pr-t-elevation-surface-raised);
+	--components-listboxOption-content-color: var(--palettes-neutral-500);
+	--components-listboxOption-content-cursor: default;
+
+	.listboxOption-content-checkboxField-input  {
+		@include checkboxField.checkedDisabled;
+	}
+}
+
+@mixin busy {
+	.listboxOption {
+		&:has(.listboxOption-content-loading.loading) {
+			--components-listboxOption-display: flex;
+		}
+	}
+
+	.listboxOption-content:has(.listboxOption-content-loading.loading) {
+		--components-listboxOption-content-checkboxField-display: none;
+		--components-listboxOption-content-cursor: default;
+		--components-listboxOption-content-backgroundColor: var(--pr-t-elevation-surface-raised);
+	}
+}
+
+@mixin empty {
+	.listboxOption-content {
+		--components-listboxOption-content-checkboxField-display: none;
+		--components-listboxOption-content-cursor: default;
+		--components-listboxOption-content-backgroundColor: var(--pr-t-elevation-surface-raised);
+	}
+}
+
+@mixin groupHoverReset {
+	--components-listboxOption-content-cursor: default;
+	--components-listboxOption-content-backgroundColor: var(--pr-t-elevation-surface-raised);
+}
+
+@mixin groupHover {
+	.listboxOption-content {
+		--components-listboxOption-content-opacity: 1;
+	}
+}
+
+@mixin selected {
+	--components-listboxOption-content-backgroundColor: var(--palettes-product-50);
+	--components-listboxOption-content-before-backgroundColor: var(--palettes-product-700);
+}
+
+@mixin selectedHover {
+	--components-listboxOption-content-backgroundColor: var(--palettes-product-100);
+}
+
+@mixin hover {
+	--components-listboxOption-content-backgroundColor: var(--palettes-neutral-50);
+}
+
+@mixin active {
+	--components-listboxOption-content-backgroundColor: var(--palettes-neutral-100);
+}
+
+@mixin selectedActive {
+	--components-listboxOption-content-backgroundColor: var(--palettes-product-200);
+}
+
+@mixin multipleSelected {
+	.listboxOption-content-checkboxField-input  {
+		@include checkboxField.checked;
+	}
+}
+
+@mixin multipleHover {
+	.listboxOption-content-checkboxField-input  {
+		@include checkboxField.hover;
+	}
+}
+
+@mixin multipleActive {
+	.listboxOption-content-checkboxField-input  {
+		@include checkboxField.active;
+	}
+}
+
+@mixin multipleSelectedHover {
+	.listboxOption-content-checkboxField-input  {
+		@include checkboxField.checkedHover;
+	}
+}
+
+@mixin multipleSelectedActive {
+	.listboxOption-content-checkboxField-input  {
+		@include checkboxField.checkedActive;
+	}
+}
+
+@mixin multipleDisabled {
+	.listboxOption-content-checkboxField-input  {
+		@include checkboxField.disabled;
+	}
+}
+
+@mixin multipleSelectedDisabled {
+	.listboxOption-content-checkboxField-input  {
+		@include checkboxField.checkedDisabled;
+	}
+}
+
+@mixin selectHover {
+	> .listboxOption-content {
+		--components-listboxOption-content-color: var(--palettes-product-800);
+	}
+}
+

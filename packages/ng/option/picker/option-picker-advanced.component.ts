@@ -13,6 +13,9 @@ import { ALuOptionOperator, ILuOptionOperator } from '../operator/index';
 import { ALuOptionSelector, ILuOptionSelector } from '../selector/index';
 import { ALuOptionPickerComponent } from './option-picker.component';
 
+/**
+ * @deprecated
+ */
 @Directive()
 export abstract class ALuOptionPickerAdvancedComponent<T, O extends import('../item/option-item.model').ILuOptionItem<T> = import('../item/option-item.model').ILuOptionItem<T>>
 	extends ALuOptionPickerComponent<T, O>
@@ -118,6 +121,7 @@ export abstract class ALuOptionPickerAdvancedComponent<T, O extends import('../i
 
 /**
  * advanced option picker panel
+ * @deprecated
  */
 @Component({
 	selector: 'lu-option-picker-advanced',

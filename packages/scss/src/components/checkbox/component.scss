@@ -22,7 +22,7 @@
 				background-color: var(--palettes-neutral-0);
 				inline-size: var(--components-checkbox-input-size);
 				block-size: var(--components-checkbox-input-size);
-				border-radius: 6px;
+				border-radius: var(--pr-t-border-radius-small);
 				transition-duration: var(--commons-animations-durations-fast);
 				transition-property: border-color, color, background-color;
 				border: var(--components-checkbox-input-border-width) solid var(--palettes-neutral-700);
@@ -73,15 +73,15 @@
 			&:not(:disabled):checked ~ .checkbox-label {
 				&:hover {
 					&::before {
-						background-color: var(--palettes-600, var(--palettes-product-600));
-						border-color: var(--palettes-600, var(--palettes-product-600));
+						background-color: var(--palettes-800, var(--palettes-product-800));
+						border-color: var(--palettes-800, var(--palettes-product-800));
 					}
 				}
 
 				&:active {
 					&::before {
-						background-color: var(--palettes-800, var(--palettes-product-800));
-						border-color: var(--palettes-800, var(--palettes-product-800));
+						background-color: var(--palettes-900, var(--palettes-product-900));
+						border-color: var(--palettes-900, var(--palettes-product-900));
 					}
 				}
 			}

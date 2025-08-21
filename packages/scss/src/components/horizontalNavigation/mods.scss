@@ -72,7 +72,7 @@
 		&::after {
 			--components-horizontalNavigation-listItemActionTransform: scale(1, 0);
 			--components-horizontalNavigation-listItemActionInset: 0 auto 0 0;
-			--components-horizontalNavigation-listItemActionRadius: 0 var(--commons-borderRadius-M) var(--commons-borderRadius-M) 0;
+			--components-horizontalNavigation-listItemActionRadius: 0 var(--pr-t-border-radius-default) var(--pr-t-border-radius-default) 0;
 			--components-horizontalNavigation-listItemActionRadiusWidth: var(--components-horizontalNavigation-listItemActionSize);
 			--components-horizontalNavigation-listItemActionRadiusHeight: auto;
 		}

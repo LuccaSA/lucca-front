@@ -21,7 +21,7 @@ export default {
 					 Feedback description.
 				</lu-feedback-item-description>
 				<button lu-feedback-item-action luButton="outlined">Click me !</button>
-				<button lu-feedback-item-action luButton="text">Click me but inverted !</button>
+				<button lu-feedback-item-action luButton="ghost">Click me but inverted !</button>
 			</li>
 			<li lu-callout-feedback-item>
 				<lu-feedback-item-description>

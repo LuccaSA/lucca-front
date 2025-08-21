@@ -1,5 +1,6 @@
 @use 'sass:list';
 
+@use '@lucca-front/scss/src/commons/config';
 @use '@lucca-front/icons/src/commons/core' as transform;
 @use '@lucca-front/scss/src/commons/core';
 
@@ -10,19 +11,7 @@
 
 @use '@lucca-front/scss/src/components/title/exports' as title;
 
-[data-content-before] {
-	&::before {
-		content: attr(data-content-before);
-	}
-}
-
-[data-content-after] {
-	&::after {
-		content: attr(data-content-after);
-	}
-}
-
-[class*='u-animated'] {
+%animatedAll {
 	animation-duration: var(--commons-animations-duration, var(--commons-animations-durations-standard));
 	animation-timing-function: var(--commons-animations-function);
 
@@ -35,7 +24,7 @@
 	}
 }
 
-.u-animated {
+%animated {
 	&FadeIn,
 	&FadeOut {
 		animation-name: fadeIn;
@@ -137,53 +126,47 @@
 	}
 }
 
-.u-mask {
+%mask {
 	@include a11y.mask('!important');
 }
 
-.u-clearfix {
+%clearfix {
 	@include reset.clearfix('!important');
 }
 
-// .u-clear is deprecated
-.u-clearBoth,
-.u-clear {
+%clearBoth {
 	@include reset.clear('both', '!important');
 }
 
-// .u-clearLeft is deprecated
-.u-clearInlineStart,
-.u-clearLeft {
-	@include reset.clear('inline-start', '!important');
+%clearInlineStart {
+	@include reset.clear('both', '!important');
 }
 
-// .u-clearRight is deprecated
-.u-clearInlineEnd,
-.u-clearRight {
+%clearInlineEnd {
 	@include reset.clear('inline-end', '!important');
 }
 
-.u-listReset {
+%listReset {
 	@include reset.list('!important');
 }
 
-.u-descriptionListReset {
+%descriptionListReset {
 	@include reset.list($list: 'dl', $suffix: '!important');
 }
 
-.u-summaryReset {
+%summaryReset {
 	@include reset.summary('!important');
 }
 
-.u-buttonReset {
+%buttonReset {
 	@include reset.button('!important');
 }
 
-.u-ellipsis {
+%ellipsis {
 	@include text.ellipsis('!important');
 }
 
-.u-h1 {
+%h1 {
 	font: var(--pr-t-font-heading-1);
 	color: var(--pr-t-color-text-heading);
 
@@ -193,79 +176,74 @@
 	}
 }
 
-.u-h2 {
+%h2 {
 	font: var(--pr-t-font-heading-2);
 	color: var(--pr-t-color-text-heading);
 }
 
-.u-h3 {
+%h3 {
 	font: var(--pr-t-font-heading-3);
 	color: var(--pr-t-color-text-heading);
 }
 
-.u-h4 {
+%h4 {
 	font: var(--pr-t-font-heading-4);
 	color: var(--pr-t-color-text-heading);
 }
 
-.u-h5 {
-	// Deprecated
+%h5 {
 	@include title.h5;
 }
 
-.u-h6 {
-	// Deprecated
+%h6 {
 	@include title.h6;
 }
 
-.u-bodyM {
+%bodyM {
 	font: var(--pr-t-font-body-M);
 }
 
-.u-bodyS {
+%bodyS {
 	font: var(--pr-t-font-body-S);
 }
 
-.u-bodyXS {
+%bodyXS {
 	font: var(--pr-t-font-body-XS);
 }
 
-// .u-textLeft is deprecated
-.u-textLeft {
+%textLeft {
 	text-align: start !important;
 }
 
-// .u-textRight is deprecated
-.u-textRight {
+%textRight {
 	text-align: end !important;
 }
 
-// .u-textCenter is deprecated
-.u-textCenter {
+%textCenter {
 	text-align: center !important;
 }
 
-.u-textLight {
+%textLight {
 	color: var(--palettes-neutral-600) !important;
 }
 
-.u-textPlaceholder {
+%textPlaceholder {
 	color: var(--palettes-neutral-400) !important;
 }
 
-.u-textDefault {
+%textDefault {
 	color: var(--palettes-neutral-700) !important;
 }
 
-.u-fontWeightRegular {
+%fontWeightRegular {
 	font-weight: 400 !important;
 }
 
-.u-fontWeightSemiBold {
+%fontWeightSemiBold {
 	font-weight: 600 !important;
 }
 
-.u-noSpinButtons {
+%noSpinButtons {
 	&::-webkit-outer-spin-button,
 	&::-webkit-inner-spin-button {
 		appearance: none !important;
@@ -276,22 +254,183 @@
 	}
 }
 
-.u-fontFamily {
+%fontFamily {
 	font-family: var(--pr-t-font-family) !important;
 }
 
-.u-fontFamilyCursive {
+%fontFamilyCursive {
 	font-family: var(--pr-t-font-family-cursive) !important;
 }
 
-.u-fontFamilyBrand {
+%fontFamilyBrand {
 	font-family: var(--pr-t-font-family-brand) !important;
 }
 
-.pr-u-focusVisible {
+%focusVisible {
 	&:focus-visible {
 		@include a11y.focusVisible;
 	}
+}
+
+
+
+[data-content-before] {
+	&::before {
+		content: attr(data-content-before);
+	}
+}
+
+[data-content-after] {
+	&::after {
+		content: attr(data-content-after);
+	}
+}
+
+[class*='pr-u-animated'] {
+	@extend %animatedAll;
+}
+
+.pr-u-animated {
+	@extend %animated;
+}
+
+.pr-u-mask {
+	@extend %mask;
+}
+
+.pr-u-clearfix {
+	@extend %clearfix;
+}
+
+// clear is deprecated
+.pr-u-clearBoth,
+.pr-u-clear {
+	@extend %clearBoth;
+}
+
+// clearLeft is deprecated
+.pr-u-clearInlineStart,
+.pr-u-clearLeft {
+	@extend %clearInlineStart;
+}
+
+// clearRight is deprecated
+.pr-u-clearInlineEnd,
+.pr-u-clearRight {
+	@extend %clearInlineEnd;
+}
+
+.pr-u-listReset {
+	@extend %listReset;
+}
+
+.pr-u-descriptionListReset {
+	@extend %descriptionListReset;
+}
+
+.pr-u-summaryReset {
+	@extend %summaryReset;
+}
+
+.pr-u-buttonReset {
+	@extend %buttonReset;
+}
+
+.pr-u-ellipsis {
+	@extend %ellipsis;
+}
+
+.pr-u-h1 {
+	@extend %h1;
+}
+
+.pr-u-h2 {
+	@extend %h2;
+}
+
+.pr-u-h3 {
+	@extend %h3;
+}
+
+.pr-u-h4 {
+	@extend %h4;
+}
+
+.pr-u-h5 {
+	// Deprecated
+	@extend %h5;
+}
+
+.pr-u-h6 {
+	// Deprecated
+	@extend %h6;
+}
+
+.pr-u-bodyM {
+	@extend %bodyM;
+}
+
+.pr-u-bodyS {
+	@extend %bodyS;
+}
+
+.pr-u-bodyXS {
+	@extend %bodyXS;
+}
+
+// textLeft is deprecated
+.pr-u-textLeft {
+	@extend %textLeft;
+}
+
+// textRight is deprecated
+.pr-u-textRight {
+	@extend %textRight;
+}
+
+// textCenter is deprecated
+.pr-u-textCenter {
+	@extend %textCenter;
+}
+
+.pr-u-textLight {
+	@extend %textLight;
+}
+
+.pr-u-textPlaceholder {
+	@extend %textPlaceholder;
+}
+
+.pr-u-textDefault {
+	@extend %textDefault;
+}
+
+.pr-u-fontWeightRegular {
+	@extend %fontWeightRegular;
+}
+
+.pr-u-fontWeightSemiBold {
+	@extend %fontWeightSemiBold;
+}
+
+.pr-u-noSpinButtons {
+	@extend %noSpinButtons;
+}
+
+.pr-u-fontFamily {
+	@extend %fontFamily;
+}
+
+.pr-u-fontFamilyCursive {
+	@extend %fontFamilyCursive;
+}
+
+.pr-u-fontFamilyBrand {
+	@extend %fontFamilyBrand;
+}
+
+.pr-u-focusVisible {
+	@extend %focusVisible;
 }
 
 @include core.classes('float', core.$float);
@@ -343,29 +482,33 @@
 
 @each $display in core.$displays {
 	@if $display != 'none' {
-		.u-onlyPrintDisplay#{transform.capitalize(transform.camelize($display))} {
+		.pr-u-onlyPrintDisplay#{transform.capitalize(transform.camelize($display))} {
 			@extend %displayNone;
 		}
 	}
 }
 
+%inset0 {
+	inset: 0 !important;
+}
+
 @each $direction in core.$boxDirection {
 	@if $direction == '' {
-		// .u-insetReset is deprecated
-		.u-inset0,
-		.u-insetReset {
-			inset: 0 !important;
+		// insetReset is deprecated
+		.pr-u-inset0,
+		.pr-u-insetReset {
+			@extend %inset0;
 		}
 	} @else if $direction == 'top' or $direction == 'bottom' or $direction == 'left' or $direction == 'right' {
-		// .u-#{$direction}Reset is deprecated
-		.u-#{$direction}0,
-		.u-#{$direction}Reset {
+		// Reset is deprecated
+		.pr-u-#{$direction}0,
+		.pr-u-#{$direction}Reset {
 			#{$direction}: 0 !important;
 		}
 	} @else {
 		@each $boxModel in core.$boxModel {
 			@if $boxModel != 'border' {
-				.u-#{$boxModel}#{transform.capitalize($direction)}0 {
+				.pr-u-#{$boxModel}#{transform.capitalize($direction)}0 {
 					#{$boxModel}-#{$direction}: 0 !important;
 				}
 			}
@@ -377,3 +520,184 @@
 @include core.sizes;
 @include core.borderRadius;
 @include core.palettes;
+@include core.borderRadiusTokens;
+
+// Deprecated .u- utilities
+// Delete when all utilities are prefixed in .pr-u-
+@if config.$deprecatedUtilityPrefix {
+	[class*='u-animated'] {
+		@extend %animatedAll;
+	}
+
+	.u-animated {
+		@extend %animated;
+	}
+
+	.u-mask {
+		@extend %mask;
+	}
+
+	.u-clearfix {
+		@extend %clearfix;
+	}
+
+	// clear is deprecated
+	.u-clearBoth,
+	.u-clear {
+		@extend %clearBoth;
+	}
+
+	// clearLeft is deprecated
+	.u-clearInlineStart,
+	.u-clearLeft {
+		@extend %clearInlineStart;
+	}
+
+	// clearRight is deprecated
+	.u-clearInlineEnd,
+	.u-clearRight {
+		@extend %clearInlineEnd;
+	}
+
+	.u-listReset {
+		@extend %listReset;
+	}
+
+	.u-descriptionListReset {
+		@extend %descriptionListReset;
+	}
+
+	.u-summaryReset {
+		@extend %summaryReset;
+	}
+
+	.u-buttonReset {
+		@extend %buttonReset;
+	}
+
+	.u-ellipsis {
+		@extend %ellipsis;
+	}
+
+	.u-h1 {
+		@extend %h1;
+	}
+
+	.u-h2 {
+		@extend %h2;
+	}
+
+	.u-h3 {
+		@extend %h3;
+	}
+
+	.u-h4 {
+		@extend %h4;
+	}
+
+	.u-h5 {
+		// Deprecated
+		@extend %h5;
+	}
+
+	.u-h6 {
+		// Deprecated
+		@extend %h6;
+	}
+
+	.u-bodyM {
+		@extend %bodyM;
+	}
+
+	.u-bodyS {
+		@extend %bodyS;
+	}
+
+	.u-bodyXS {
+		@extend %bodyXS;
+	}
+
+	// textLeft is deprecated
+	.u-textLeft {
+		@extend %textLeft;
+	}
+
+	// textRight is deprecated
+	.u-textRight {
+		@extend %textRight;
+	}
+
+	// textCenter is deprecated
+	.u-textCenter {
+		@extend %textCenter;
+	}
+
+	.u-textLight {
+		@extend %textLight;
+	}
+
+	.u-textPlaceholder {
+		@extend %textPlaceholder;
+	}
+
+	.u-textDefault {
+		@extend %textDefault;
+	}
+
+	.u-fontWeightRegular {
+		@extend %fontWeightRegular;
+	}
+
+	.u-fontWeightSemiBold {
+		@extend %fontWeightSemiBold;
+	}
+
+	.u-noSpinButtons {
+		@extend %noSpinButtons;
+	}
+
+	.u-fontFamily {
+		@extend %fontFamily;
+	}
+
+	.u-fontFamilyCursive {
+		@extend %fontFamilyCursive;
+	}
+
+	.u-fontFamilyBrand {
+		@extend %fontFamilyBrand;
+	}
+
+
+	@each $display in core.$displays {
+		@if $display != 'none' {
+			.u-onlyPrintDisplay#{transform.capitalize(transform.camelize($display))} {
+				@extend %displayNone;
+			}
+		}
+	}
+
+	@each $direction in core.$boxDirection {
+		@if $direction == '' {
+			// insetReset is deprecated
+			.u-inset0,
+			.u-insetReset {
+				@extend %inset0;
+			}
+		} @else if $direction == 'top' or $direction == 'bottom' or $direction == 'left' or $direction == 'right' {
+			// Reset is deprecated
+			.u-#{$direction}0,
+			.u-#{$direction}Reset {
+				#{$direction}: 0 !important;
+			}
+		} @else {
+			@each $boxModel in core.$boxModel {
+				@if $boxModel != 'border' {
+					.u-#{$boxModel}#{transform.capitalize($direction)}0 {
+						#{$boxModel}-#{$direction}: 0 !important;
+					}
+				}
+			}
+		}
+	}
+}

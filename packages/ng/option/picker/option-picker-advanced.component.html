@@ -1,7 +1,7 @@
 <ng-template>
 	<div
 		class="lu-picker-panel lu-option-picker-panel"
-		role="dialog"
+		data-testid="dialog-panel"
 		[class]="panelClassesMap"
 		[class.mod-multiple]="multiple"
 		(click)="onClick()"
@@ -17,7 +17,7 @@
 			luScroll
 			(onScrollBottom)="onScrollBottom()"
 		>
-			<ng-content></ng-content>
+			<ng-content />
 			<div *ngIf="loading$ | async" class="loading lu-picker-loading"></div>
 		</div>
 	</div>

@@ -18,6 +18,7 @@ export default {
 	argTypes: {
 		tooltip: {
 			type: 'string',
+			if: { arg: 'hiddenLabel', truthy: false },
 		},
 		size: {
 			options: ['M', 'S', 'XS'],
@@ -88,9 +89,9 @@ export const Basic: StoryObj<
 		};
 	},
 	args: {
+		hiddenLabel: false,
 		label: 'Label',
 		tooltip: 'Tooltip message',
-		hiddenLabel: false,
 		placeholder: 'Placeholder',
 		clearable: true,
 		inlineMessage: 'Helper text',

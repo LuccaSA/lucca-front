@@ -18,7 +18,7 @@ function getTemplate(args: TextfieldRadioStory): string {
 		<span class="radio-label">Or</span>
 	</label>
 	<label class="textfield mod-radio">
-		<span class="textfield-label u-mask">Option</span>
+		<span class="textfield-label pr-u-mask">Option</span>
 		<input class="textfield-input" type="text">
 	</label>
 </span>`;

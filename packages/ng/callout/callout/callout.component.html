@@ -12,12 +12,12 @@
 				</strong>
 			}
 			<div class="callout-content-description">
-				<ng-content></ng-content>
+				<ng-content />
 			</div>
 		</div>
 		@if (removable) {
 			<button type="button" class="callout-kill" (click)="removed = true; removedChange.emit(true)">
-				<span class="u-mask">{{ intl.close }}</span>
+				<span class="pr-u-mask">{{ intl.close }}</span>
 			</button>
 		}
 	</div>

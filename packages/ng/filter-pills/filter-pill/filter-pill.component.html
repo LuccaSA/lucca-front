@@ -35,7 +35,7 @@
 		</button>
 		@if (inputIsClearable()) {
 			<button type="button" class="filterPill-clear clear" (click)="$event.stopPropagation(); clear(); comboboxRef.focus()">
-				<span class="u-mask">{{ intl.clear }}</span>
+				<span class="pr-u-mask">{{ intl.clear }}</span>
 			</button>
 		}
 		<button
@@ -59,7 +59,7 @@
 }
 <ng-template #pillContent>
 	<div class="filterPill_popover-content popover-contentOptional">
-		<ng-content></ng-content>
+		<ng-content />
 	</div>
 </ng-template>
 <ng-template #defaultLabel>{{ label() }}{{ colonDisplay() }}</ng-template>

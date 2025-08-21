@@ -7,7 +7,8 @@
 	@include icons.S;
 
 	--components-button-font: var(--pr-t-font-body-S);
-	--components-button-padding: var(--pr-t-spacings-75) var(--pr-t-spacings-150);
+	--components-button-paddingBlock: var(--pr-t-spacings-75);
+	--components-button-paddingInline: var(--pr-t-spacings-100);
 	--components-button-gap: var(--pr-t-spacings-75);
 
 	.numericBadge {
@@ -23,8 +24,10 @@
 	@include icons.XS;
 
 	--components-button-font: var(--pr-t-font-body-XS);
-	--components-button-padding: var(--pr-t-spacings-50) var(--pr-t-spacings-100);
+	--components-button-paddingBlock: var(--pr-t-spacings-50);
+	--components-button-paddingInline: var(--pr-t-spacings-75);
 	--components-button-gap: var(--pr-t-spacings-50);
+	--components-button-borderRadius: var(--pr-t-border-radius-small);
 
 	.numericBadge {
 		@include numericBadge.XS;
@@ -51,60 +54,19 @@
 	--components-button-width: 100%;
 }
 
-@mixin withIcon {
-	--components-button-padding: var(--pr-t-spacings-100) var(--pr-t-spacings-150);
-}
-
-@mixin withIconS {
-	--components-button-padding: var(--pr-t-spacings-75) var(--pr-t-spacings-150);
-}
-
-@mixin withIconXS {
-	--components-button-padding: var(--pr-t-spacings-50) var(--pr-t-spacings-100);
-}
-
-@mixin textDisabled {
-	--components-button-backgroundColor: transparent;
-	--components-button-color: var(--palettes-neutral-500); // disabled token candidate
-}
-
-@mixin text {
-	--components-button-backgroundColor: transparent;
-	--components-button-color: var(--palettes-700, var(--palettes-neutral-700));
-
-	&:hover,
-	&:focus-visible {
-		--components-button-color: var(--palettes-700, var(--palettes-neutral-700));
-		--components-button-backgroundColor: var(--palettes-100, var(--palettes-neutral-100));
-	}
-
-	&:active {
-		--components-button-backgroundColor: var(--palettes-200, var(--palettes-neutral-200));
-	}
-
-	&:disabled {
-		@include textDisabled;
-	}
-}
-
-@mixin outlinedDisabled {
-	--components-button-backgroundColor: var(--palettes-neutral-0);
-	--components-button-boxShadow: 0 0 0 1px var(--commons-disabled-placeholder);
-	--components-button-color: var(--palettes-neutral-500); // disabled token candidate
-}
-
 @mixin outlined {
 	--components-button-backgroundColor: var(--palettes-neutral-0);
 	--components-button-color: var(--palettes-700, var(--palettes-neutral-700));
-	--components-button-boxShadow: 0 0 0 var(--commons-divider-width) var(--palettes-400, var(--palettes-neutral-400));
+	--components-button-boxShadow: var(--pr-t-elevation-shadow-button), 0 0 0 var(--commons-divider-width) var(--palettes-neutral-200);
 
 	&:hover {
+		--components-button-boxShadow: var(--pr-t-elevation-shadow-button), 0 0 0 var(--commons-divider-width) var(--palettes-300, var(--palettes-neutral-300));
 		--components-button-color: var(--palettes-700, var(--palettes-neutral-700));
-		--components-button-backgroundColor: var(--palettes-100, var(--palettes-neutral-100));
+		--components-button-backgroundColor: var(--palettes-50, var(--palettes-neutral-50))
 	}
 
 	&:active {
-		--components-button-backgroundColor: var(--palettes-200, var(--palettes-neutral-200));
+		--components-button-backgroundColor: var(--palettes-100, var(--palettes-neutral-100));
 	}
 
 	&:focus-visible {
@@ -112,7 +74,29 @@
 	}
 
 	&:disabled {
-		@include outlinedDisabled;
+		--components-button-backgroundColor: var(--palettes-neutral-0);
+		--components-button-boxShadow: 0 0 0 1px var(--palettes-neutral-100);
+		--components-button-color: var(--pr-t-color-text-disabled);
+	}
+}
+
+@mixin ghost {
+	--components-button-backgroundColor: transparent;
+	--components-button-color: var(--palettes-700, var(--pr-t-color-text-subtle));
+
+	&:hover,
+	&:focus-visible {
+		--components-button-color: var(--palettes-700, var(--pr-t-color-text-subtle));
+		--components-button-backgroundColor: var(--palettes-50, var(--palettes-neutral-50));
+	}
+
+	&:active {
+		--components-button-backgroundColor: var(--palettes-100, var(--palettes-neutral-100));
+	}
+
+	&:disabled {
+		--components-button-backgroundColor: transparent;
+		--components-button-color: var(--pr-t-color-text-disabled);
 	}
 }
 
@@ -150,7 +134,7 @@
 	--components-button-minWidth: 1.5rem;
 }
 
-@mixin delete {
+@mixin critical {
 	&:hover {
 		--components-button-color: var(--palettes-error-700);
 		--components-button-backgroundColor: var(--palettes-error-100);
@@ -162,7 +146,7 @@
 	}
 }
 
-@mixin deleteText {
+@mixin criticalGhost {
 	&:hover,
 	&:focus-visible {
 		--components-button-color: var(--palettes-error-700);
@@ -175,9 +159,9 @@
 	}
 }
 
-@mixin deleteOutlined {
+@mixin criticalOutlined {
 	&:hover {
-		--components-button-boxShadow: 0 0 0 var(--commons-divider-width) var(--palettes-error-400);
+		--components-button-boxShadow: var(--pr-t-elevation-shadow-button), 0 0 0 var(--commons-divider-width) var(--palettes-error-400);
 		--components-button-color: var(--palettes-error-700);
 		--components-button-backgroundColor: var(--palettes-error-100);
 	}
@@ -193,12 +177,28 @@
 	}
 }
 
-@mixin iconOnRight {
-	padding-inline-end: var(--pr-t-spacings-150);
+@mixin iconOnLeft {
+	--components-button-paddingInlineStart: var(--pr-t-spacings-100);
 }
 
-@mixin iconOnLeft {
-	padding-inline-start: var(--pr-t-spacings-150);
+@mixin iconOnRight {
+	--components-button-paddingInlineEnd: var(--pr-t-spacings-100);
+}
+
+@mixin iconOnLeftS {
+	--components-button-paddingInlineStart: var(--pr-t-spacings-75);
+}
+
+@mixin iconOnRightS {
+	--components-button-paddingInlineEnd: var(--pr-t-spacings-75);
+}
+
+@mixin iconOnLeftXS {
+	--components-button-paddingInlineStart: var(--pr-t-spacings-50);
+}
+
+@mixin iconOnRightXS {
+	--components-button-paddingInlineEnd: var(--pr-t-spacings-50);
 }
 
 @mixin disclosure {
@@ -213,4 +213,16 @@
 	&[aria-expanded='true'] {
 		--components-button-arrow-transform: rotate(-180deg);
 	}
+}
+
+@mixin counter {
+	--components-button-paddingInlineEnd: var(--pr-t-spacings-100);
+}
+
+@mixin counterS {
+	--components-button-paddingInlineEnd: var(--pr-t-spacings-75);
+}
+
+@mixin counterXS {
+	--components-button-paddingInlineEnd: var(--pr-t-spacings-50);
 }
