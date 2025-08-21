@@ -9,6 +9,7 @@ import {
 	LuDisplayerDirective,
 	LuOptionDirective,
 	LuOptionGroupDirective,
+	TreeGroupingFn,
 } from '@lucca-front/ng/core-select';
 import { LuCoreSelectApiV3Directive, LuCoreSelectApiV4Directive } from '@lucca-front/ng/core-select/api';
 import { LuCoreSelectDepartmentsDirective } from '@lucca-front/ng/core-select/department';
@@ -32,6 +33,7 @@ import { createTestStory, getStoryGenerator } from 'stories/helpers/stories';
 import { expect, screen, userEvent, within } from 'storybook/test';
 import { waitForAngular } from '../../../helpers/test';
 import { allLegumes, colorNameByColor, coreSelectStory, FilterLegumesPipe, ILegume, LuCoreSelectInputStoryComponent, SortLegumesPipe } from './select.utils';
+import { TreeSelectDirective } from '../../../../packages/ng/tree-select/tree-select.directive';
 
 type LuMultiSelectInputStoryComponent = LuCoreSelectInputStoryComponent & {
 	selectedLegumes: ILegume[] | LuMultiSelection<ILegume>;
@@ -41,6 +43,7 @@ type LuMultiSelectInputStoryComponent = LuCoreSelectInputStoryComponent & {
 	selectedEstablishment: LuMultiSelection<{ id: number; name: string }>;
 	selectedDepartments: LuMultiSelection<{ id: number; name: string }>;
 	selectLegume(legume: ILegume, legumes: ILegume[]): ILegume[];
+	groupingFn?: TreeGroupingFn<ILegume>;
 } & LuMultiSelectInputComponent<ILegume>;
 
 const generateStory = getStoryGenerator<LuMultiSelectInputStoryComponent>({
@@ -461,17 +464,23 @@ export const Tree = generateStory({
 	description: '',
 	template: `<lu-multi-select
 	placeholder="Placeholder..."
-	withSelectAll
-	withSelectAllDisplayerLabel="départements"
-	treeSelect="groupingFn"
+	[options]="legumes"
+	[treeSelect]="groupingFn"
 	[(ngModel)]="selectedTree"
 />{{ selectedTree | json }}`,
 	neededImports: {
 		'@lucca-front/ng/multi-select': ['LuMultiSelectInputComponent', 'LuMultiSelectWithSelectAllDirective'],
+		'@lucca-front/ng/tree-select': ['TreeSelectDirective'],
 	},
 	storyPartial: {
 		args: {
-			selectedDepartments: { mode: 'none' },
+			groupingFn: (legume: ILegume) => {
+				const parent = allLegumes.find((l) => l.color === legume.color);
+				if (parent === legume) {
+					return null;
+				}
+				return parent;
+			},
 		},
 	},
 });
@@ -739,6 +748,7 @@ const meta: Meta<LuMultiSelectInputStoryComponent> = {
 				LuMultiSelectCounterDisplayerComponent,
 				CommonModule,
 				AsyncPipe,
+				TreeSelectDirective,
 			],
 		}),
 		applicationConfig({

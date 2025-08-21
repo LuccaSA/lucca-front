@@ -1,7 +1,15 @@
 import { I18nPluralPipe, SlicePipe } from '@angular/common';
 import { provideHttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-import { LuCoreSelectNoClueDirective, LuCoreSelectPanelHeaderDirective, LuDisabledOptionDirective, LuDisplayerDirective, LuOptionDirective, LuOptionGroupDirective } from '@lucca-front/ng/core-select';
+import {
+	LuCoreSelectNoClueDirective,
+	LuCoreSelectPanelHeaderDirective,
+	LuDisabledOptionDirective,
+	LuDisplayerDirective,
+	LuOptionDirective,
+	LuOptionGroupDirective,
+	TreeGroupingFn,
+} from '@lucca-front/ng/core-select';
 import { LuCoreSelectApiV3Directive, LuCoreSelectApiV4Directive } from '@lucca-front/ng/core-select/api';
 import { LuCoreSelectDepartmentsDirective } from '@lucca-front/ng/core-select/department';
 import { LuCoreSelectEstablishmentsDirective } from '@lucca-front/ng/core-select/establishment';
@@ -22,6 +30,7 @@ import { allLegumes, colorNameByColor, coreSelectStory, FilterLegumesPipe, ILegu
 
 export type LuSimpleSelectInputStoryComponent = LuCoreSelectInputStoryComponent & {
 	selectedLegume: ILegume | null;
+	groupingFn?: TreeGroupingFn<ILegume>;
 } & LuSimpleSelectInputComponent<ILegume>;
 
 const generateStory = getStoryGenerator<LuSimpleSelectInputStoryComponent>({
@@ -477,12 +486,24 @@ export const Tree = generateStory({
 	description: '',
 	template: `<lu-simple-select
 	placeholder="Placeholder…"
-	treeSelect="groupingFn"
-	[options]="allLegumes"
+	[treeSelect]="groupingFn"
+	[options]="legumes"
 	[(ngModel)]="selectedTree"
 ></lu-simple-select>`,
 	neededImports: {
 		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent'],
+		'@lucca-front/ng/tree-select': ['TreeSelectDirective'],
+	},
+	storyPartial: {
+		args: {
+			groupingFn: (legume: ILegume) => {
+				const parent = allLegumes.find((l) => l.color === legume.color);
+				if (parent === legume) {
+					return null;
+				}
+				return parent;
+			},
+		},
 	},
 });
 
