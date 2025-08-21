@@ -3,10 +3,12 @@ import { provideHttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { LuCoreSelectNoClueDirective, LuCoreSelectPanelHeaderDirective, LuDisabledOptionDirective, LuDisplayerDirective, LuOptionDirective, LuOptionGroupDirective } from '@lucca-front/ng/core-select';
 import { LuCoreSelectApiV3Directive, LuCoreSelectApiV4Directive } from '@lucca-front/ng/core-select/api';
+import { LuCoreSelectDepartmentsDirective } from '@lucca-front/ng/core-select/department';
 import { LuCoreSelectEstablishmentsDirective } from '@lucca-front/ng/core-select/establishment';
 import { LuCoreSelectJobQualificationsDirective } from '@lucca-front/ng/core-select/job-qualification';
 import { LuCoreSelectUserOptionDirective, LuCoreSelectUsersDirective, provideCoreSelectCurrentUserId } from '@lucca-front/ng/core-select/user';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
+import { TreeSelectDirective } from '@lucca-front/ng/tree-select';
 import { LuUserDisplayPipe } from '@lucca-front/ng/user';
 import { applicationConfig, Meta, moduleMetadata } from '@storybook/angular';
 import { HiddenArgType } from 'stories/helpers/common-arg-types';
@@ -470,6 +472,34 @@ export const EstablishmentCustom = generateStory({
 	},
 });
 
+export const Tree = generateStory({
+	name: 'Tree Select',
+	description: '',
+	template: `<lu-simple-select
+	placeholder="Placeholder…"
+	treeSelect="groupingFn"
+	[options]="allLegumes"
+	[(ngModel)]="selectedTree"
+></lu-simple-select>`,
+	neededImports: {
+		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent'],
+	},
+});
+
+export const Department = generateStory({
+	name: 'Department Select',
+	description: "Pour saisir un département, il suffit d'utiliser la directive `departments`",
+	template: `<lu-simple-select
+	placeholder="Placeholder…"
+	departments
+	[(ngModel)]="selectedDepartment"
+></lu-simple-select>`,
+	neededImports: {
+		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent'],
+		'@lucca-front/ng/core-select/department': ['LuCoreSelectDepartmentsDirective'],
+	},
+});
+
 export const JobQualification = generateStory({
 	name: 'JobQualification Select',
 	description: "Pour saisir une qualification, il suffit d'utiliser la directive `jobQualifications`",
@@ -614,6 +644,7 @@ const meta: Meta<LuSimpleSelectInputStoryComponent> = {
 				LuCoreSelectNoClueDirective,
 				LuCoreSelectEstablishmentsDirective,
 				LuCoreSelectCustomEstablishmentsDirective,
+				LuCoreSelectDepartmentsDirective,
 				LuCoreSelectCustomUsersDirective,
 				LuCoreSelectLegumesDirective,
 				LuCoreSelectUsersDirective,
@@ -622,6 +653,7 @@ const meta: Meta<LuSimpleSelectInputStoryComponent> = {
 				LuCoreSelectPanelHeaderDirective,
 				LuDisabledOptionDirective,
 				LuOptionGroupDirective,
+				TreeSelectDirective,
 			],
 		}),
 		applicationConfig({ providers: [provideHttpClient(), provideCoreSelectCurrentUserId(() => 66)] }),

@@ -11,6 +11,7 @@ import {
 	LuOptionGroupDirective,
 } from '@lucca-front/ng/core-select';
 import { LuCoreSelectApiV3Directive, LuCoreSelectApiV4Directive } from '@lucca-front/ng/core-select/api';
+import { LuCoreSelectDepartmentsDirective } from '@lucca-front/ng/core-select/department';
 import { LuCoreSelectEstablishmentsDirective } from '@lucca-front/ng/core-select/establishment';
 import { LuCoreSelectJobQualificationsDirective } from '@lucca-front/ng/core-select/job-qualification';
 import { LuCoreSelectUsersDirective, provideCoreSelectCurrentUserId } from '@lucca-front/ng/core-select/user';
@@ -38,6 +39,7 @@ type LuMultiSelectInputStoryComponent = LuCoreSelectInputStoryComponent & {
 	maxValuesShown: number;
 	selectedAxisSection: LuMultiSelection<{ id: number; name: string }>;
 	selectedEstablishment: LuMultiSelection<{ id: number; name: string }>;
+	selectedDepartments: LuMultiSelection<{ id: number; name: string }>;
 	selectLegume(legume: ILegume, legumes: ILegume[]): ILegume[];
 } & LuMultiSelectInputComponent<ILegume>;
 
@@ -433,6 +435,47 @@ export const Establishment = generateStory({
 	},
 });
 
+export const Department = generateStory({
+	name: 'Departement Select',
+	description: "Pour saisir un département, il suffit d'utiliser la directive `departments`",
+	template: `<lu-multi-select
+	placeholder="Placeholder..."
+	withSelectAll
+	withSelectAllDisplayerLabel="départements"
+	departments
+	[(ngModel)]="selectedDepartements"
+/>{{ selectedDepartements | json }}`,
+	neededImports: {
+		'@lucca-front/ng/multi-select': ['LuMultiSelectInputComponent', 'LuMultiSelectWithSelectAllDirective'],
+		'@lucca-front/ng/core-select/departments': ['LuCoreSelectDepartmentsDirective'],
+	},
+	storyPartial: {
+		args: {
+			selectedDepartments: { mode: 'none' },
+		},
+	},
+});
+
+export const Tree = generateStory({
+	name: 'Tree Select',
+	description: '',
+	template: `<lu-multi-select
+	placeholder="Placeholder..."
+	withSelectAll
+	withSelectAllDisplayerLabel="départements"
+	treeSelect="groupingFn"
+	[(ngModel)]="selectedTree"
+/>{{ selectedTree | json }}`,
+	neededImports: {
+		'@lucca-front/ng/multi-select': ['LuMultiSelectInputComponent', 'LuMultiSelectWithSelectAllDirective'],
+	},
+	storyPartial: {
+		args: {
+			selectedDepartments: { mode: 'none' },
+		},
+	},
+});
+
 export const User = generateStory({
 	name: 'User Select',
 	description: "Pour saisir des utilisateurs, il suffit d'utiliser la directive `users`",
@@ -687,6 +730,7 @@ const meta: Meta<LuMultiSelectInputStoryComponent> = {
 				LuCoreSelectApiV4Directive,
 				LuCoreSelectTotalCountDirective,
 				LuCoreSelectEstablishmentsDirective,
+				LuCoreSelectDepartmentsDirective,
 				LuCoreSelectUsersDirective,
 				LuCoreSelectJobQualificationsDirective,
 				LuCoreSelectPanelHeaderDirective,

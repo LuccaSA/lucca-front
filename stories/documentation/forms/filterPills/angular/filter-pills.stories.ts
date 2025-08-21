@@ -1,5 +1,6 @@
 import { allLegumes, FilterLegumesPipe } from '@/stories/forms/select/select.utils';
 import { FormsModule } from '@angular/forms';
+import { LuCoreSelectDepartmentsDirective } from '@lucca-front/ng/core-select/department';
 import { DateInputComponent, DateRangeInputComponent } from '@lucca-front/ng/date2';
 import { FilterPillComponent } from '@lucca-front/ng/filter-pills';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
@@ -22,6 +23,7 @@ export default {
 				StoryModelDisplayComponent,
 				LuSimpleSelectInputComponent,
 				LuMultiSelectInputComponent,
+				LuCoreSelectDepartmentsDirective,
 				FilterLegumesPipe,
 				FormFieldComponent,
 				TextInputComponent,
@@ -30,7 +32,7 @@ export default {
 		}),
 	],
 	render: (args, { argTypes }) => {
-		const clearableProperty = args['clearable'] ? "" : 'clearable="false" ';
+		const clearableProperty = args['clearable'] ? '' : 'clearable="false" ';
 		return {
 			props: {
 				simpleSelect: null,
@@ -48,6 +50,12 @@ export default {
 </lu-filter-pill>
 <lu-filter-pill label="Légume" name="legume">
 	<lu-multi-select ${clearableProperty}[(ngModel)]="multiSelect"	[options]="legumes | filterLegumes:clue" (clueChange)="clue = $event" filterPillLabelPlural="légumes" />
+</lu-filter-pill>
+<lu-filter-pill label="Département" name="department">
+	<lu-simple-select ${clearableProperty}[(ngModel)]="SimpleSelectDepartements" departments />
+</lu-filter-pill>
+<lu-filter-pill label="Départements" name="departments">
+	<lu-multi-select ${clearableProperty}[(ngModel)]="multiSelectDepartements" filterPillLabelPlural="départements" departments />
 </lu-filter-pill>
 <lu-filter-pill label="Date de début">
 	<lu-date-input ${clearableProperty}[(ngModel)]="date" />
@@ -67,7 +75,7 @@ export default {
 	},
 } as Meta;
 
-export const Basic: StoryObj<FilterPillComponent & {clearable: boolean}> = {
+export const Basic: StoryObj<FilterPillComponent & { clearable: boolean }> = {
 	args: {
 		clearable: true,
 	},
