@@ -7,20 +7,20 @@
 	}
 
 	@layer mods {
-	// .mod-grey is deprecated
-	&.mod-neutral,
-	&.mod-grey {
-		@include neutral;
-	}
+		// .mod-grey is deprecated
+		&.mod-neutral,
+		&.mod-grey {
+			@include neutral;
+		}
 
-	&.mod-withArrow {
-		@include withArrow;
-	}
+		&.mod-withArrow {
+			@include withArrow;
+		}
 
-	// .mod-toggle is deprecated
-	&.mod-toggle {
-		@include toggle;
-	}
+		// .mod-toggle is deprecated
+		&.mod-toggle {
+			@include toggle;
+		}
 	}
 }
 

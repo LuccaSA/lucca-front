@@ -6,7 +6,7 @@
 		@include component;
 	}
 
-	@layer components {
+	@layer mods {
 		&.mod-block {
 			@include block;
 		}
