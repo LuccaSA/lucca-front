@@ -1,5 +1,5 @@
 @layer base {
-	lu-multi-select-default-displayer {
+	:host {
 		display: block;
 		inline-size: 100%;
 		min-inline-size: 0;
