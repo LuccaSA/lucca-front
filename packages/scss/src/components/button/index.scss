@@ -6,7 +6,7 @@
 		@include component;
 	}
 
-	@layer mods {
+	@layer components {
 		&.mod-block {
 			@include block;
 		}
@@ -136,6 +136,10 @@
 				@include loadingS;
 			}
 
+			&.mod-XS {
+				@include loadingXS;
+			}
+
 			&.mod-outlined {
 				@include loadingOutlined;
 			}
@@ -162,6 +166,14 @@
 
 			&.mod-ghost {
 				@include successGhost;
+			}
+
+			&.mod-S {
+				@include successS;
+			}
+
+			&.mod-XS {
+				@include successXS;
 			}
 		}
 

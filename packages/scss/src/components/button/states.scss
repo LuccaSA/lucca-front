@@ -32,6 +32,12 @@
 	@include loading.spinner(var(--pr-t-font-body-S-lineHeight));
 }
 
+@mixin loadingXS {
+	@include loading.spinner(var(--pr-t-font-body-XS-lineHeight));
+
+	--commons-loading-borderWidth: 2px;
+}
+
 @mixin loadingOutlined {
 	--components-button-backgroundColor: var(--palettes-neutral-0);
 	--commons-loading-frontground: var(--palettes-neutral-300);
@@ -68,6 +74,19 @@
 	}
 }
 
+@mixin successS {
+	&::after {
+		font-size: var(--pr-t-font-body-S-lineHeight);
+		block-size: var(--pr-t-font-body-S-lineHeight);
+	}
+}
+
+@mixin successXS {
+	&::after {
+		font-size: var(--pr-t-font-body-XS-lineHeight);
+		block-size: var(--pr-t-font-body-XS-lineHeight);
+	}
+}
 
 @mixin successOutlined {
 	--components-button-backgroundColor: var(--palettes-neutral-0);
