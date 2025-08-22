@@ -4,7 +4,7 @@
 @include definitions.selectInputStyle;
 
 @layer components {
-	lu-date-select {
+	:host {
 		&::after {
 			@include icon.generate('calendar_date');
 

@@ -2,8 +2,8 @@
 
 @include definitions.optionItemStyle;
 
-@layer base {
-	lu-core-select-former-employees {
+@layer components {
+	:host {
 		display: block;
 		background-color: var(--palettes-neutral-0);
 		border-block-end: 1px solid var(--commons-border-200);

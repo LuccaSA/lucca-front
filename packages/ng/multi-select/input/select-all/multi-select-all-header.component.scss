@@ -1,5 +1,5 @@
-@layer base {
-	lu-multi-select-all-displayer {
+@layer components {
+	:host {
 		display: block;
 		background-color: var(--palettes-neutral-0);
 		border-block-end: 1px solid var(--commons-border-200);

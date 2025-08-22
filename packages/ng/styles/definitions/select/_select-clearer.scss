@@ -1,6 +1,6 @@
 @mixin selectClearerStyle {
-	@layer base {
-		lu-input-clearer {
+	@layer components {
+		:host {
 			display: none;
 		}
 	}
