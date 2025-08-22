@@ -1,5 +1,8 @@
 import { allLegumes, FilterLegumesPipe, ILegume } from '@/stories/forms/select/select.utils';
+import { provideHttpClient } from '@angular/common/http';
+import { LOCALE_ID } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { provideAnimations } from '@angular/platform-browser/animations';
 import { LuCoreSelectDepartmentsDirective } from '@lucca-front/ng/core-select/department';
 import { DateInputComponent, DateRangeInputComponent } from '@lucca-front/ng/date2';
 import { FilterPillComponent } from '@lucca-front/ng/filter-pills';
@@ -8,11 +11,8 @@ import { CheckboxInputComponent, TextInputComponent } from '@lucca-front/ng/form
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { LuMultiSelectInputComponent } from '../../../../../packages/ng/multi-select/input';
-import { StoryModelDisplayComponent } from '../../../../helpers/story-model-display.component';
 import { TreeSelectDirective } from '../../../../../packages/ng/tree-select/tree-select.directive';
-import { LOCALE_ID } from '@angular/core';
-import { provideAnimations } from '@angular/platform-browser/animations';
-import { provideHttpClient } from '@angular/common/http';
+import { StoryModelDisplayComponent } from '../../../../helpers/story-model-display.component';
 
 export default {
 	title: 'Documentation/Forms/FiltersPills/FilterPills/Angular',
@@ -60,37 +60,30 @@ export default {
 			template: `<lu-filter-pill label="Inclure les collaborateurs partis">
 	<lu-checkbox-input [ngModel]="false"></lu-checkbox-input>
 </lu-filter-pill>
-<lu-filter-pill label="Légume" name="legume">
-		<lu-simple-select ${clearableProperty}[(ngModel)]="simpleSelect" [options]="legumes | filterLegumes:clue" (clueChange)="clue = $event" />
+<lu-filter-pill label="Simple" name="legume">
+		<lu-simple-select ${clearableProperty}[options]="legumes | filterLegumes:clue" (clueChange)="clue = $event" />
 </lu-filter-pill>
-<lu-filter-pill label="Légume" name="legume">
-	<lu-multi-select ${clearableProperty}[(ngModel)]="multiSelect"	[options]="legumes | filterLegumes:clue" (clueChange)="clue = $event" filterPillLabelPlural="légumes" />
+<lu-filter-pill label="Multi" name="legume">
+	<lu-multi-select ${clearableProperty}	[options]="legumes | filterLegumes:clue" (clueChange)="clue = $event" filterPillLabelPlural="légumes" />
 </lu-filter-pill>
 <lu-filter-pill label="Département" name="department">
-	<lu-simple-select ${clearableProperty}[(ngModel)]="SimpleSelectDepartements" departments />
+	<lu-simple-select ${clearableProperty} departments></lu-simple-select>
 </lu-filter-pill>
 <lu-filter-pill label="Départements" name="departments">
-	<lu-multi-select ${clearableProperty}[(ngModel)]="multiSelectDepartements" filterPillLabelPlural="départements" departments />
+	<lu-multi-select ${clearableProperty}filterPillLabelPlural="départements" departments />
+</lu-filter-pill>
+<lu-filter-pill label="Tree simple">
+	<lu-simple-select ${clearableProperty}[treeSelect]="groupingFn" [options]="legumes"></lu-simple-select>
+</lu-filter-pill>
+<lu-filter-pill label="Tree multi">
+	<lu-multi-select ${clearableProperty}filterPillLabelPlural="légumes" [treeSelect]="groupingFn" [options]="legumes" ></lu-multi-select>
 </lu-filter-pill>
 <lu-filter-pill label="Date de début">
-	<lu-date-input ${clearableProperty}[(ngModel)]="date" />
+	<lu-date-input ${clearableProperty}/>
 </lu-filter-pill>
 <lu-filter-pill label="Période">
-	<lu-date-range-input ${clearableProperty}[(ngModel)]="dateRange"/>
-</lu-filter-pill>
-<lu-filter-pill label="Légumes">
-		<lu-multi-select filterPillLabelPlural="légumes" [treeSelect]="groupingFn" [options]="legumes" ></lu-multi-select>
-	</lu-filter-pill>
-	<lu-filter-pill label="Départements">
-		<lu-multi-select departments filterPillLabelPlural="départements"></lu-multi-select>
-	</lu-filter-pill>
-	<lu-filter-pill label="Légume">
-		<lu-simple-select [treeSelect]="groupingFn" [options]="legumes"></lu-simple-select>
-	</lu-filter-pill>
-	<lu-filter-pill label="Département">
-		<lu-simple-select departments></lu-simple-select>
-	</lu-filter-pill>
-`,
+	<lu-date-range-input ${clearableProperty}/>
+</lu-filter-pill>`,
 			styles: [
 				`
 	:host {
