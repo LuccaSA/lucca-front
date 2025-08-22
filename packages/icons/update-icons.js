@@ -2,10 +2,10 @@ const selection = require('./selection.json');
 const { writeFileSync } = require('fs');
 const { join } = require('path');
 
-const generatedWarning = `/***********************************************
- ***		THIS FILE IS GENERATED, DO NOT EDIT		***
- ***		The generator is update-icons.js			***
- ***********************************************/\n\n`;
+const generatedWarning = `// *******************************************
+// *** THIS FILE IS GENERATED, DO NOT EDIT ***
+// *** The generator is update-icons.js		 ***
+// *******************************************\n\n`;
 
 const icons = selection.icons
 	.map((icon) => {

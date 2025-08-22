@@ -2,11 +2,13 @@
 @use '@lucca-front/scss/src/components/skeleton';
 
 .skeleton.is-loading {
-	.button {
-		background-color: transparent;
+	@layer states {
+		.button {
+			background-color: transparent;
 
-		.skeleton-item {
-			inline-size: 4rem;
+			.skeleton-item {
+				inline-size: 4rem;
+			}
 		}
 	}
 }

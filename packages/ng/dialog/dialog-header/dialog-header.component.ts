@@ -18,7 +18,6 @@ export class DialogHeaderAction {}
 	standalone: true,
 	imports: [IconComponent],
 	templateUrl: './dialog-header.component.html',
-	styleUrl: './dialog-header.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	encapsulation: ViewEncapsulation.None,
 	host: {
