@@ -9,6 +9,12 @@
 		@include hover;
 	}
 
+	&:has(.inputFramed-header-illustration) {
+		&:not(:has(.inlineMessage)) {
+			@include withIllustrationAndNoInlineMessage;
+		}
+	}
+
 	&:has(.inputFramed-header-input:checked) {
 		@include checked;
 
