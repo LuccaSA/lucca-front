@@ -1,0 +1,7 @@
+@if (circular()) {
+	<svg class="gauge" width="220" height="220" viewBox="0 0 220 220" style="--gauge-progress-value: 0; --gauge-progress-color: gainsboro">
+		<circle cx="110" cy="110" r="100" class="gauge-background" />
+		<circle cx="110" cy="110" r="100" class="gauge-progress" />
+	</svg>
+}
+<span class="pr-u-mask">{{ alt() || defaultAlt() }}</span>

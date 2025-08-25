@@ -4,7 +4,9 @@ import { Meta, moduleMetadata, StoryFn } from '@storybook/angular';
 interface GaugeBasicStory {
 	palette: string;
 	thin: boolean;
+	circular: boolean;
 	value: number;
+	alt: string;
 }
 
 export default {
@@ -31,9 +33,9 @@ function getTemplate(args: GaugeBasicStory): string {
 	const thin = args.thin ? ` thin` : ``;
 	const palette = args.palette ? ` palette="${args.palette}"` : ``;
 	const value = args.value !== 0 ? ` value="${args.value}"` : ``;
-	return `
-	<lu-gauge${thin}${palette}${value} />
-	`;
+	const circular = args.circular ? ` circular` : ``;
+	const alt = args.alt !== '' ? ` alt="${args.alt}"` : ``;
+	return `<lu-gauge${thin}${circular}${palette}${value}${alt} />`;
 }
 
 const Template: StoryFn<GaugeBasicStory> = (args) => ({
@@ -42,4 +44,4 @@ const Template: StoryFn<GaugeBasicStory> = (args) => ({
 });
 
 export const Basic = Template.bind({});
-Basic.args = { palette: '', thin: false, value: 33 };
+Basic.args = { palette: '', thin: false, circular: false, value: 33, alt: '' };
