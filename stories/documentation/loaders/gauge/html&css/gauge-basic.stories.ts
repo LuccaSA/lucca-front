@@ -8,7 +8,7 @@ interface GaugeBasicStory {
 }
 
 export default {
-	title: 'Documentation/Loaders/Gauge/Basic',
+	title: 'Documentation/Loaders/Gauge/HTML&CSS/Basic',
 	argTypes: {
 		palette: {
 			options: ['', 'palette-product', 'palette-neutral', 'palette-success', 'palette-warning', 'palette-error'],
@@ -26,13 +26,12 @@ export default {
 } as Meta;
 
 function getTemplate(args: GaugeBasicStory): string {
-	const classes = ' ' + [args.palette].filter(Boolean).join(' ');
-	const thin = args.thin ? ` mod-thin` : '';
-	const vertical = args.vertical ? ` mod-vertical` : '';
+	const thin = args.thin ? ` mod-thin` : ``;
+	const vertical = args.vertical ? ` mod-vertical` : ``;
+	const palette = args.palette ? ` ${args.palette}` : ``;
+	const value = args.value !== 0 ? ` [attr.style]="'--components-gauge-value: ${args.value}%'"` : ``;
 	return `
-	<div class="gauge${classes}${thin}${vertical}" [attr.style]="'--components-gauge-value: ${args.value}%'">
-		<div class="gauge-bar"></div>
-	</div>
+	<div class="gauge${thin}${vertical}${palette}"${value}></div>
 	`;
 }
 

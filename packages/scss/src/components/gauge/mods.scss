@@ -4,13 +4,13 @@
 
 // @mixin vertical is deprecated
 @mixin vertical {
-	inline-size: var(--components-gauge-blockSize);
-	block-size: 100%;
+	--components-gauge-blockSize: 100%;
+	--components-gauge-inlineSize: var(--components-gauge-height, 0.5rem);
+	--components-gauge-before-minInlineSize: var(--components-gauge-inlineSize);
 
-	.gauge-bar {
-		border-inline-start-width: var(--components-gauge-blockSize);
-		border-inline-start-style: solid;
-		border-block-end-width: 0;
+	.gauge-bar,
+	&::before {
+		inline-size: 100%;
 		block-size: var(--components-gauge-value);
 	}
 }

@@ -7,22 +7,36 @@
 	overflow: hidden;
 	position: relative;
 	background-color: var(--components-gauge-background);
+	display: block;
+
+	&::before {
+		content: '';
+		display: block;
+
+		@extend %gaugeBar;
+	}
+
+	&:has(.gauge-bar) {
+		&::before {
+			content: none;
+		}
+	}
 
 	@at-root ($atRoot) {
 		.gauge-bar {
-			color: var(--palettes-700, var(--palettes-product-700));
-			border-block-end-width: var(--components-gauge-blockSize);
-			transition-duration: var(--commons-animations-durations-standard);
-			transition-property: border-color, inline-size, block-size;
-			inset-block-start: 0;
-			inset-inline-start: 0;
-			position: absolute;
-			border-block-end-style: solid;
-			border-color: currentColor;
-			border-radius: var(--pr-t-border-radius-full);
-			min-inline-size: var(--components-gauge-bar-minInlineSize);
-			min-block-size: var(--components-gauge-bar-minInlineSize);
-			inline-size: var(--components-gauge-value);
+			@extend %gaugeBar;
 		}
 	}
+}
+
+%gaugeBar {
+	color: var(--palettes-700, var(--palettes-product-700));
+	transition-duration: var(--commons-animations-durations-standard);
+	transition-property: background-color, inline-size, block-size;
+	block-size: var(--components-gauge-blockSize);
+	inline-size: var(--components-gauge-value);
+	background-color: currentColor;
+	border-radius: var(--pr-t-border-radius-full);
+	min-inline-size: var(--components-gauge-before-minInlineSize);
+	min-block-size: var(--components-gauge-before-minInlineSize);
 }
