@@ -1,4 +1,8 @@
+// --components-gauge-height is deprecated
 @mixin vars {
-	--components-gauge-height: 0.5rem;
+	--components-gauge-blockSize: var(--components-gauge-height, 0.5rem);
+	--components-gauge-inlineSize: auto;
 	--components-gauge-background: var(--palettes-neutral-100);
+	--components-gauge-bar-minInlineSize: var(--components-gauge-blockSize);
+	--components-gauge-value: 0;
 }

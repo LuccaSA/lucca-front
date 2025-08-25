@@ -1,14 +1,16 @@
 @mixin thin {
-	--components-gauge-height: var(--pr-t-spacings-50);
+	--components-gauge-blockSize: var(--pr-t-spacings-50);
 }
 
+// @mixin vertical is deprecated
 @mixin vertical {
-	inline-size: var(--components-gauge-height);
+	inline-size: var(--components-gauge-blockSize);
 	block-size: 100%;
 
 	.gauge-bar {
-		border-inline-start-width: var(--components-gauge-height);
+		border-inline-start-width: var(--components-gauge-blockSize);
 		border-inline-start-style: solid;
 		border-block-end-width: 0;
+		block-size: var(--components-gauge-value);
 	}
 }

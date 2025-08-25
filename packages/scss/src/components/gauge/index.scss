@@ -8,7 +8,13 @@
 		@include thin;
 	}
 
+	// .mod-vertical is deprecated
 	&.mod-vertical {
 		@include vertical;
+	}
+
+	&:not([style]),
+	&[style*='--components-gauge-value: 0%'] {
+		@include zero;
 	}
 }
