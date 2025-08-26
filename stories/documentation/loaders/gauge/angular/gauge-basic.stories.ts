@@ -7,6 +7,7 @@ interface GaugeBasicStory {
 	circular: boolean;
 	value: number;
 	alt: string;
+	size: number;
 }
 
 export default {
@@ -20,6 +21,9 @@ export default {
 		},
 		value: {
 			control: { type: 'range', min: 0, max: 100, step: 1 },
+		},
+		size: {
+			control: { type: 'range', min: 32, max: 160, step: 16 },
 		},
 	},
 	decorators: [
@@ -35,7 +39,9 @@ function getTemplate(args: GaugeBasicStory): string {
 	const value = args.value !== 0 ? ` value="${args.value}"` : ``;
 	const circular = args.circular ? ` circular` : ``;
 	const alt = args.alt !== '' ? ` alt="${args.alt}"` : ``;
-	return `<lu-gauge${thin}${circular}${palette}${value}${alt} />`;
+	const size = args.size !== 80 ? ` size="${args.size}"` : ``;
+
+	return `<lu-gauge${thin}${circular}${palette}${value}${size}${alt} />`;
 }
 
 const Template: StoryFn<GaugeBasicStory> = (args) => ({
@@ -44,4 +50,4 @@ const Template: StoryFn<GaugeBasicStory> = (args) => ({
 });
 
 export const Basic = Template.bind({});
-Basic.args = { palette: '', thin: false, circular: false, value: 33, alt: '' };
+Basic.args = { palette: '', thin: false, circular: false, value: 33, alt: '', size: 80 };

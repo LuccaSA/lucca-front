@@ -1,4 +1,4 @@
-import { booleanAttribute, Component, computed, inject, input, LOCALE_ID, numberAttribute, OnChanges, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, Component, computed, inject, input, LOCALE_ID, numberAttribute, ViewEncapsulation } from '@angular/core';
 import { LuClass, Palette } from '@lucca-front/ng/core';
 
 @Component({
@@ -8,13 +8,10 @@ import { LuClass, Palette } from '@lucca-front/ng/core';
 	encapsulation: ViewEncapsulation.None,
 	providers: [LuClass],
 	host: {
-		'[class.gauge]': '!circular()',
-		'[attr.style]': '`--components-gauge-value: ${value()}%`',
-		'[class.mod-thin]': 'thin()',
+		class: 'u-displayContents',
 	},
 })
-export class GaugeComponent implements OnChanges {
-	#luClass = inject(LuClass);
+export class GaugeComponent {
 	#locale = inject(LOCALE_ID);
 
 	value = input(0, { transform: numberAttribute });
@@ -22,10 +19,15 @@ export class GaugeComponent implements OnChanges {
 	circular = input(false, { transform: booleanAttribute });
 	palette = input<Palette>('none');
 	alt = input<string>('');
+	size = input(80, { transform: numberAttribute });
+
+	thickness = computed(() => (this.thin() ? 4 : 8));
 
 	defaultAlt = computed(() => new Intl.NumberFormat(this.#locale, { style: 'percent' }).format(this.value() / 100));
 
-	ngOnChanges(): void {
-		this.#luClass.setState({ [`palette-${this.palette()}`]: !!this.palette() });
+	get paletteClass() {
+		return {
+			[`palette-${this.palette()}`]: !!this.palette(),
+		};
 	}
 }

@@ -1,8 +1,16 @@
 // --components-gauge-height is deprecated
 @mixin vars {
-	--components-gauge-blockSize: var(--components-gauge-height, 0.5rem);
+	--components-gauge-blockSize: var(--components-gauge-height, var(--pr-t-spacings-100));
 	--components-gauge-inlineSize: auto;
 	--components-gauge-background: var(--palettes-neutral-100);
 	--components-gauge-before-minInlineSize: var(--components-gauge-blockSize);
 	--components-gauge-value: 0;
+	--components-gauge-borderRadius: var(--pr-t-border-radius-full);
+	--components-gauge-color:	var(--palettes-700, var(--palettes-product-700));
+
+	--components-gauge-circle-background: var(--palettes-neutral-100);
+	--components-gauge-circle-strokeWidth: var(--pr-t-spacings-100);
+	--components-gauge-circleR: 76px;
+	--components-gauge-circleP: calc(2 * pi * var(--components-gauge-circleR));
+
 }

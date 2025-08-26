@@ -1,11 +1,12 @@
 @mixin thin {
 	--components-gauge-blockSize: var(--pr-t-spacings-50);
+	--components-gauge-circle-strokeWidth: var(--pr-t-spacings-50);
 }
 
 // @mixin vertical is deprecated
 @mixin vertical {
 	--components-gauge-blockSize: 100%;
-	--components-gauge-inlineSize: var(--components-gauge-height, 0.5rem);
+	--components-gauge-inlineSize: var(--components-gauge-height, var(--pr-t-spacings-100));
 	--components-gauge-before-minInlineSize: var(--components-gauge-inlineSize);
 
 	.gauge-bar,
@@ -13,4 +14,10 @@
 		inline-size: 100%;
 		block-size: var(--components-gauge-value);
 	}
+}
+
+@mixin circular {
+	--components-gauge-borderRadius: 0;
+	--components-gauge-blockSize: auto;
+	--components-gauge-background: transparent;
 }

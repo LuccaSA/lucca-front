@@ -1,13 +1,12 @@
 @use '@lucca-front/scss/src/commons/utils/namespace';
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
-	border-radius: var(--pr-t-border-radius-full);
+	border-radius: var(--components-gauge-borderRadius);
 	block-size: var(--components-gauge-blockSize);
 	inline-size: var(--components-gauge-inlineSize);
-	overflow: hidden;
-	position: relative;
 	background-color: var(--components-gauge-background);
 	display: block;
+	color: var(--components-gauge-color);
 
 	&::before {
 		content: '';
@@ -26,11 +25,28 @@
 		.gauge-bar {
 			@extend %gaugeBar;
 		}
+
+		.gauge-circleBackground {
+			fill: transparent;
+			stroke-width: var(--components-gauge-circle-strokeWidth);
+			stroke: var(--components-gauge-circle-background);
+		}
+
+		.gauge-circleBar {
+			fill: transparent;
+			stroke-width: var(--components-gauge-circle-strokeWidth);
+			stroke-linecap: round;
+			stroke-dashoffset: 0;
+			transform: rotate(-1/4 * 1turn);
+			transform-origin: 50% 50%;
+			stroke-dasharray: calc(var(--components-gauge-circleP) / 100 * var(--components-gauge-value)), 9999;
+			stroke: currentColor;
+		}
 	}
 }
 
 %gaugeBar {
-	color: var(--palettes-700, var(--palettes-product-700));
+	color: currentColor;
 	transition-duration: var(--commons-animations-durations-standard);
 	transition-property: background-color, inline-size, block-size;
 	block-size: var(--components-gauge-blockSize);
