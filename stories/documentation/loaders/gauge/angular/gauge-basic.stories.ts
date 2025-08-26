@@ -25,10 +25,13 @@ export default {
 		}),
 	],
 	render: (args: GaugeComponent, { argTypes }) => {
-		const { ...inputs } = args;
+		const { alt, value, palette, ...inputs } = args;
+		const alternative = alt ? ` alt="${alt}"` : ``;
+		const val = value ? ` value="${value}"` : ``;
+		const pal = palette ? ` palette="${palette}"` : ``;
 
 		return {
-			template: `<lu-gauge ${generateInputs(inputs, argTypes)} />`,
+			template: `<lu-gauge${generateInputs(inputs, argTypes)}${alternative}${val}${pal} />`,
 		};
 	},
 } as Meta;

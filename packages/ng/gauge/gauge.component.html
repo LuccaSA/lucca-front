@@ -8,7 +8,7 @@
 		[attr.width]="size()"
 		[attr.height]="size()"
 		[attr.viewBox]="`0 0 ${size()} ${size()}`"
-		[attr.style]="`--components-gauge-value: ${value()}; --components-gauge-circleR: ${(size() - thickness()) / 2}px`"
+		[attr.style]="`--components-gauge-value: ${displayValue()}; --components-gauge-circleR: ${(size() - thickness()) / 2}px`"
 	>
 		<circle [attr.cx]="size() / 2" [attr.cy]="size() / 2" [attr.r]="(size() - thickness()) / 2" class="gauge-circleBackground" />
 		<circle [attr.cx]="size() / 2" [attr.cy]="size() / 2" [attr.r]="(size() - thickness()) / 2" class="gauge-circleBar" />

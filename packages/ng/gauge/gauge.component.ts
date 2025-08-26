@@ -24,6 +24,21 @@ export class GaugeComponent {
 
 	thickness = computed(() => (this.thin() ? 4 : 8));
 
+	perimeter = computed(() => (2 * Math.PI * (this.size() - this.thickness())) / 2);
+
+	fullThreshold = computed(() => this.perimeter() - this.thickness());
+
+	full = computed<boolean>(() => this.fullThreshold() < (this.perimeter() / 100) * this.value());
+
+	fullThresholdValue = computed(() => Math.floor((this.fullThreshold() / this.perimeter()) * 100));
+
+	displayValue = computed(() => {
+		if (this.value() >= 100) {
+			return this.value();
+		}
+		return this.full() ? this.fullThresholdValue() : this.value();
+	});
+
 	defaultAlt = computed(() => new Intl.NumberFormat(this.#locale, { style: 'percent' }).format(this.value() / 100));
 
 	get paletteClass() {
