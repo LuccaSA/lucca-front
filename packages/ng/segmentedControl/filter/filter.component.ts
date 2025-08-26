@@ -1,4 +1,5 @@
 import { booleanAttribute, Component, inject, input, ViewEncapsulation } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
 import { PortalContent } from '@lucca-front/ng/core';
 import { LU_SEGMENTEDCONTROL_INSTANCE } from '../segmented-control.token';
 
@@ -9,18 +10,29 @@ let nextId = 0;
 	standalone: true,
 	templateUrl: './filter.component.html',
 	encapsulation: ViewEncapsulation.None,
+	imports: [ReactiveFormsModule],
 	host: {
 		class: 'segmentedControl-item',
 		role: 'listitem',
 	},
 })
-export class SegmentedControlFilterComponent {
+export class SegmentedControlFilterComponent<T = unknown> {
 	protected segmentedControlRef = inject(LU_SEGMENTEDCONTROL_INSTANCE);
 
-	checked = input(false, { transform: booleanAttribute });
 	disabled = input(false, { transform: booleanAttribute });
 
+	value = input.required<T>();
+
 	id = `${this.segmentedControlRef.id}item${nextId++}`;
+	name = this.segmentedControlRef.id;
 
 	label = input<PortalContent>();
+
+	public get formControl() {
+		return this.segmentedControlRef.ngControl.control;
+	}
+
+	constructor() {
+		this.segmentedControlRef.segmentedControlFilters.set([...this.segmentedControlRef.segmentedControlFilters(), this]);
+	}
 }

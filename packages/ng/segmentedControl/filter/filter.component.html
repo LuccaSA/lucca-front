@@ -1,10 +1,12 @@
 <input
 	type="radio"
 	class="segmentedControl-item-input"
-	name="tab"
+	[name]="name"
+	[attr.name]="name"
+	[formControl]="formControl"
+	[value]="value()"
 	[attr.id]="id"
-	[attr.checked]="checked() ? 'checked' : null"
-	[attr.disabled]="disabled() ? 'disabled' : null"
+	[attr.disabled]="formControl.disabled || disabled() ? 'disabled' : null"
 />
 <label [attr.for]="id" class="segmentedControl-item-action">
 	{{ label() }}
