@@ -22,4 +22,6 @@
 		[class.is-animated]="animated()"
 	></div>
 }
-<span class="pr-u-mask">{{ alt() || defaultAlt() }}</span>
+@if (!noAlt()) {
+	<span class="pr-u-mask">{{ alt() || defaultAlt() }}</span>
+}

@@ -42,8 +42,13 @@
 			stroke-dasharray: calc(var(--components-gauge-circleP) / 100 * var(--components-gauge-value)), 9999;
 			stroke: currentColor;
 			animation-name: var(--components-gauge-animationName);
-			animation-duration: var(--commons-animations-durations-slow);
-			animation-timing-function: cubic-bezier(.9,.9,.9,1.1);
+			animation-duration: var(--components-gauge-animationDuration);
+			animation-timing-function: var(--components-gauge-animationTimingFunction);
+
+			@media (prefers-reduced-motion: reduce) {
+				--components-gauge-animationDuration: var(--commons-animations-durations-fast);
+				--components-gauge-animationTimingFunction: ease;
+			}
 		}
 
 		@keyframes gauge-fill {
@@ -66,6 +71,11 @@
 	min-inline-size: var(--components-gauge-before-minInlineSize);
 	min-block-size: var(--components-gauge-before-minInlineSize);
 	animation-name: var(--components-gauge-animationName);
-	animation-duration: var(--commons-animations-durations-slow);
-	animation-timing-function: cubic-bezier(.9,.9,.9,1.1);
+	animation-duration: var(--components-gauge-animationDuration);
+	animation-timing-function: var(--components-gauge-animationTimingFunction);
+
+	@media (prefers-reduced-motion: reduce) {
+		--components-gauge-animationDuration: var(--commons-animations-durations-fast);
+		--components-gauge-animationTimingFunction: ease;
+	}
 }

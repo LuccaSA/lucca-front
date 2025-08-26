@@ -43,6 +43,7 @@ export const Basic: StoryObj<GaugeComponent> = {
 		circular: false,
 		value: 33,
 		alt: '',
+		noAlt: false,
 		size: 80,
 	},
 };
