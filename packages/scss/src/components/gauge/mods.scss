@@ -16,6 +16,11 @@
 	}
 }
 
+// @mixin verticalThin is deprecated
+@mixin verticalThin {
+	--components-gauge-inlineSize: var(--pr-t-spacings-50);
+}
+
 @mixin circular {
 	--components-gauge-borderRadius: 0;
 	--components-gauge-blockSize: auto;

@@ -41,6 +41,16 @@
 			transform-origin: 50% 50%;
 			stroke-dasharray: calc(var(--components-gauge-circleP) / 100 * var(--components-gauge-value)), 9999;
 			stroke: currentColor;
+			animation-name: var(--components-gauge-animationName);
+			animation-duration: var(--commons-animations-durations-slow);
+			animation-timing-function: cubic-bezier(.9,.9,.9,1.1);
+		}
+
+		@keyframes gauge-fill {
+			from {
+				stroke-dasharray: 0, 9999;
+				inline-size: 0;
+			}
 		}
 	}
 }
@@ -55,4 +65,7 @@
 	border-radius: var(--pr-t-border-radius-full);
 	min-inline-size: var(--components-gauge-before-minInlineSize);
 	min-block-size: var(--components-gauge-before-minInlineSize);
+	animation-name: var(--components-gauge-animationName);
+	animation-duration: var(--commons-animations-durations-slow);
+	animation-timing-function: cubic-bezier(.9,.9,.9,1.1);
 }

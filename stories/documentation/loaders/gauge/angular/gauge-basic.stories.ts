@@ -1,14 +1,6 @@
 import { GaugeComponent } from '@lucca-front/ng/gauge';
-import { Meta, moduleMetadata, StoryFn } from '@storybook/angular';
-
-interface GaugeBasicStory {
-	palette: string;
-	thin: boolean;
-	circular: boolean;
-	value: number;
-	alt: string;
-	size: number;
-}
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { generateInputs } from 'stories/helpers/stories';
 
 export default {
 	title: 'Documentation/Loaders/Gauge/Angular/Basic',
@@ -24,6 +16,7 @@ export default {
 		},
 		size: {
 			control: { type: 'range', min: 32, max: 160, step: 16 },
+			if: { arg: 'circular', truthy: true },
 		},
 	},
 	decorators: [
@@ -31,23 +24,22 @@ export default {
 			imports: [GaugeComponent],
 		}),
 	],
+	render: (args: GaugeComponent, { argTypes }) => {
+		const { ...inputs } = args;
+
+		return {
+			template: `<lu-gauge ${generateInputs(inputs, argTypes)} />`,
+		};
+	},
 } as Meta;
 
-function getTemplate(args: GaugeBasicStory): string {
-	const thin = args.thin ? ` thin` : ``;
-	const palette = args.palette ? ` palette="${args.palette}"` : ``;
-	const value = args.value !== 0 ? ` value="${args.value}"` : ``;
-	const circular = args.circular ? ` circular` : ``;
-	const alt = args.alt !== '' ? ` alt="${args.alt}"` : ``;
-	const size = args.size !== 80 ? ` size="${args.size}"` : ``;
-
-	return `<lu-gauge${thin}${circular}${palette}${value}${size}${alt} />`;
-}
-
-const Template: StoryFn<GaugeBasicStory> = (args) => ({
-	props: args,
-	template: getTemplate(args),
-});
-
-export const Basic = Template.bind({});
-Basic.args = { palette: '', thin: false, circular: false, value: 33, alt: '', size: 80 };
+export const Basic: StoryObj<GaugeComponent> = {
+	args: {
+		thin: false,
+		animated: false,
+		circular: false,
+		value: 33,
+		alt: '',
+		size: 80,
+	},
+};

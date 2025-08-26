@@ -17,6 +17,7 @@ export class GaugeComponent {
 	value = input(0, { transform: numberAttribute });
 	thin = input(false, { transform: booleanAttribute });
 	circular = input(false, { transform: booleanAttribute });
+	animated = input(false, { transform: booleanAttribute });
 	palette = input<Palette>('none');
 	alt = input<string>('');
 	size = input(80, { transform: numberAttribute });
