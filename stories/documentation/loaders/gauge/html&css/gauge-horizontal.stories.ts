@@ -8,10 +8,10 @@ interface GaugeBasicStory {
 }
 
 export default {
-	title: 'Documentation/Loaders/Gauge/HTML&CSS/Basic',
+	title: 'Documentation/Loaders/Gauge/HTML&CSS/Horizontal',
 	argTypes: {
 		palette: {
-			options: ['', 'palette-product', 'palette-neutral', 'palette-success', 'palette-warning', 'palette-error'],
+			options: ['', 'product', 'neutral', 'success', 'warning', 'error'],
 			control: {
 				type: 'select',
 			},
@@ -28,7 +28,7 @@ export default {
 function getTemplate(args: GaugeBasicStory): string {
 	const thin = args.thin ? ` mod-thin` : ``;
 	const vertical = args.vertical ? ` mod-vertical` : ``;
-	const palette = args.palette ? ` ${args.palette}` : ``;
+	const palette = args.palette ? ` palette-${args.palette}` : ``;
 	const value = args.value !== 0 ? ` [attr.style]="'--components-gauge-value: ${args.value}%'"` : ``;
 	return `
 	<div class="gauge${thin}${vertical}${palette}"${value}></div>
