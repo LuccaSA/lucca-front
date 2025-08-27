@@ -32,7 +32,12 @@ export default [
 		versionDeleted: '21.1.0',
 	},
 	{
-		objectPattern: ['.comment-content-textContainer', '.dialog-form', '.dialog-formOptional', '.mod-withMenuCompact'],
+		objectPattern: ['.comment-content-textContainer', '.mod-withMenuCompact'],
+		versionDeprecated: '18.3.0',
+		versionDeleted: '20.1.0',
+	},
+	{
+		objectPattern: ['.dialog-form', '.dialog-formOptional'],
 		versionDeprecated: '18.3.0',
 		versionDeleted: '21.1.0',
 	},
