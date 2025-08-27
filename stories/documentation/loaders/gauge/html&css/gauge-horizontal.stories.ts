@@ -4,6 +4,7 @@ interface GaugeBasicStory {
 	palette: string;
 	thin: boolean;
 	vertical: boolean;
+	animated: boolean;
 	value: number;
 }
 
@@ -28,10 +29,11 @@ export default {
 function getTemplate(args: GaugeBasicStory): string {
 	const thin = args.thin ? ` mod-thin` : ``;
 	const vertical = args.vertical ? ` mod-vertical` : ``;
+	const animated = args.animated ? ` is-animated` : ``;
 	const palette = args.palette ? ` palette-${args.palette}` : ``;
 	const value = args.value !== 0 ? ` [attr.style]="'--components-gauge-value: ${args.value}%'"` : ``;
 	return `
-	<div class="gauge${thin}${vertical}${palette}"${value}></div>
+	<div class="gauge${thin}${vertical}${palette}${animated}"${value}></div>
 	`;
 }
 
@@ -48,4 +50,4 @@ const Template: StoryFn<GaugeBasicStory> = (args) => ({
 });
 
 export const Basic = Template.bind({});
-Basic.args = { palette: '', thin: false, vertical: false, value: 33 };
+Basic.args = { palette: '', thin: false, vertical: false, animated: false, value: 33 };
