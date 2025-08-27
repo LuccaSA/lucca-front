@@ -110,6 +110,55 @@ export const Basic: StoryObj<TextInputComponent & { disabled: boolean; required:
 	},
 };
 
+export const IBANFormat: StoryObj<TextInputComponent & { disabled: boolean; required: boolean } & FormFieldComponent> = {
+	render: (args, { argTypes }) => {
+		const { counter, label, hiddenLabel, tooltip, tag, inlineMessage, inlineMessageState, size, width, ...inputArgs } = args;
+		return {
+			template: cleanupTemplate(`<lu-form-field ${generateInputs(
+				{
+					label,
+					hiddenLabel,
+					tooltip,
+					tag,
+					inlineMessage,
+					inlineMessageState,
+					size,
+					counter,
+					width,
+				},
+				argTypes,
+			)}>
+	<lu-text-input
+	${generateInputs(inputArgs, argTypes)}
+		[(ngModel)]="example" mask="SS00 AAAA 0000 0000 0000 9999 9999 9999 99">
+	</lu-text-input>
+</lu-form-field>
+{{example}}`),
+			moduleMetadata: {
+				imports: [TextInputComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule],
+			},
+		};
+	},
+	args: {
+		label: 'Label',
+		required: true,
+		hiddenLabel: false,
+		hasClearer: false,
+		hasSearchIcon: false,
+		autocomplete: '',
+		searchIcon: 'searchMagnifyingGlass',
+		disabled: false,
+		inlineMessage: 'Helper text',
+		inlineMessageState: 'default',
+		type: 'text',
+		placeholder: 'Placeholder',
+		tooltip: 'Je suis un message d’aide',
+		tag: '',
+		counter: 0,
+		valueAlignRight: false,
+	},
+};
+
 export const PasswordVisiblity: StoryObj<
 	TextInputComponent & {
 		disabled: boolean;
