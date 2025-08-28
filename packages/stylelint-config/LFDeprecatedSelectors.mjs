@@ -16,6 +16,14 @@ export default [
 		versionDeleted: '18.1.0',
 	},
 	{
+		objectPattern: ['.user-info', /\.user-tile-(title|label|footnote)/],
+		versionDeleted: '20.1.0',
+	},
+	{
+		objectPattern: ['.user-info', 'user-tile', '.picture'],
+		versionDeleted: '20.1.0',
+	},
+	{
 		// Any combination of .button and .mod-icon with any non-whitespace character between
 		// SEE https://regex101.com/r/6yQzje.
 		objectPattern: /(\.button|\.mod-icon)[\S]*(\.button|\.mod-icon)/,
@@ -38,14 +46,31 @@ export default [
 		versionDeleted: '19.1.0',
 	},
 	{
-		objectPattern: /\.u-elevate.*/,
-		versionDeprecated: '19.1.0',
-		versionDeleted: '19.1.0',
-	},
-	{
 		objectPattern: ['.u-textLeft', '.u-textCenter', '.u-textRight'],
 		versionDeprecated: '18.1.0',
 		versionDeleted: '21.1.0',
+	},
+	{
+		objectPattern: '.mod-columnSticky',
+		versionDeprecated: '18.2.0',
+		versionDeleted: '20.1.0',
+	},
+	{
+		objectPattern: ['.table-head-row-cell-sortableButton', '.indexTable-head-row-cell-sortableButton'],
+		versionDeprecated: '18.2.0',
+		versionDeleted: '20.1.0',
+	},
+	{
+		// Any combination of .table-head-row-cell, .mod-sortable, .sortedAscending or .sortedAscending with any non-whitespace character between
+		// SEE https://regex101.com/r/NFrjBF.
+		objectPattern:
+			/(\.table-head-row-cell|\.mod-sortable|\.sortedAscending|\.sortedDescending)[\S]*(\.table-head-row-cell|\.mod-sortable|\.sortedAscending|\.sortedDescending)/,
+		versionDeprecated: '18.2.0',
+		versionDeprecated: '20.1.0',
+	},
+	{
+		objectPattern: /\.u-text(Left|Center|Right)/,
+		versionDeprecated: '18.2.0',
 	},
 	{
 		objectPattern: ['.comment-content-textContainer', '.mod-withMenuCompact'],
@@ -53,21 +78,14 @@ export default [
 		versionDeleted: '20.1.0',
 	},
 	{
-		objectPattern: ['.user-info', /\.user-tile-(title|label|footnote)/],
-		versionDeleted: '20.1.0',
-	},
-	{
-		objectPattern: ['.user-info', 'user-tile', '.picture'],
-		versionDeleted: '20.1.0',
-	},
-	{
-		objectPattern: '.mod-columnSticky',
-		versionDeleted: '20.1.0',
-	},
-	{
 		objectPattern: ['.dialog-form', '.dialog-formOptional'],
 		versionDeprecated: '18.3.0',
 		versionDeleted: '21.1.0',
+	},
+	{
+		objectPattern: /\.u-elevate.*/,
+		versionDeprecated: '19.1.0',
+		versionDeleted: '19.1.0',
 	},
 	{
 		objectPattern: /\.lu-dropdown-(content|options|options-item|options-item-action)/,
@@ -84,13 +102,6 @@ export default [
 		objectPattern: /\.menu-?/,
 		versionDeprecated: '19.3.0',
 		versionDeleted: '21.1.0',
-	},
-	{
-		// Any combination of .table-head-row-cell, .sortedAscending or .sortedAscending with any non-whitespace character between
-		// SEE https://regex101.com/r/NFrjBF.
-		objectPattern:
-			/(\.table-head-row-cell|\.sortedAscending|\.sortedDescending)[\S]*(\.table-head-row-cell|\.sortedAscending|\.sortedAscending)/,
-		versionDeprecated: '20.1.0',
 	},
 	{
 		// Any combination of .button, .mod-text or .mod-deleted with any non-whitespace character between
