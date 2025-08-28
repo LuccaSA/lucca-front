@@ -63,12 +63,26 @@ Il est aussi possible de créer une barre d'outil personnalisée en assemblant l
 
 ```angular2html
 <lu-rich-text-input placeholder="Enter some text..." [(ngModel)]="example">
-  <div class="richTextField-toolbar-col">
-    <lu-rich-text-toolbar-list-style />
-    <lu-rich-text-plugin-headings />
-  </div>
-  <div class="richTextField-toolbar-col">
-    <lu-rich-text-plugin-link />
+  <div class="richTextField-toolbar-formatting">
+    <div class="richTextField-toolbar-col">
+      <div class="richTextField-toolbar-col-group">
+        <lu-rich-text-plugin-text-style
+          icon="formatTextBold"
+          tooltip="Bold"
+          format="bold"
+        />
+        <lu-rich-text-plugin-text-style
+          icon="formatTextItalic"
+          tooltip="Italic"
+          format="italic"
+        />
+      </div>
+      <lu-rich-text-toolbar-list-style />
+      <lu-rich-text-plugin-link />
+    </div>
+    <div class="richTextField-toolbar-col">
+      <lu-rich-text-plugin-clear-format />
+    </div>
   </div>
 </lu-rich-text-input>
 ```
