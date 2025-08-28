@@ -92,4 +92,10 @@ export default [
 			/(\.table-head-row-cell|\.sortedAscending|\.sortedDescending)[\S]*(\.table-head-row-cell|\.sortedAscending|\.sortedAscending)/,
 		versionDeprecated: '20.1.0',
 	},
+	{
+		// Any combination of .button, .mod-text or .mod-deleted with any non-whitespace character between
+		// SEE https://regex101.com/r/5qB2gm.
+		objectPattern: /(\.button|\.mod-text|\.mod-deleted)[\S]*(\.button|\.mod-text|\.mod-deleted)/,
+		versionDeprecated: '20.2.0',
+	},
 ];
