@@ -1,5 +1,21 @@
 export default [
 	{
+		// Any combination of .button and .mod-counter with any non-whitespace character between
+		// SEE https://regex101.com/r/9WOlXc.
+		objectPattern: /(\.button|\.mod-counter)[\S]*(\.button|\.mod-counter)/,
+		versionDeleted: '18.1.0',
+	},
+	{
+		objectPattern: ['.button-counter', '.navSide-item-alert', '.textfield-actionClear', '.lu-select-value .label'],
+		versionDeleted: '18.1.0',
+	},
+	{
+		// Any combination of .callout and .mod-tiny with any non-whitespace character between
+		// SEE https://regex101.com/r/rW039S.
+		objectPattern: /(\.callout|\.mod-tiny)[\S]*(\.callout|\.mod-tiny)/,
+		versionDeleted: '18.1.0',
+	},
+	{
 		// Any combination of .button and .mod-icon with any non-whitespace character between
 		// SEE https://regex101.com/r/6yQzje.
 		objectPattern: /(\.button|\.mod-icon)[\S]*(\.button|\.mod-icon)/,
