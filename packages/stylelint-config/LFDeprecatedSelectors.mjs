@@ -53,6 +53,18 @@ export default [
 		versionDeleted: '20.1.0',
 	},
 	{
+		objectPattern: ['.user-info', /\.user-tile-(title|label|footnote)/],
+		versionDeleted: '20.1.0',
+	},
+	{
+		objectPattern: ['.user-info', 'user-tile', '.picture'],
+		versionDeleted: '20.1.0',
+	},
+	{
+		objectPattern: '.mod-columnSticky',
+		versionDeleted: '20.1.0',
+	},
+	{
 		objectPattern: ['.dialog-form', '.dialog-formOptional'],
 		versionDeprecated: '18.3.0',
 		versionDeleted: '21.1.0',
@@ -63,7 +75,7 @@ export default [
 		versionDeleted: '21.1.0',
 	},
 	{
-		// SEE https://regex101.com/r/VqPdDw/2.
+		// SEE https://regex101.com/r/VqPdDw.
 		objectPattern: /\.filterBarDeprecated-?/,
 		versionDeprecated: '19.2.0',
 		versionDeleted: '21.1.0',
@@ -72,5 +84,12 @@ export default [
 		objectPattern: /\.menu-?/,
 		versionDeprecated: '19.3.0',
 		versionDeleted: '21.1.0',
+	},
+	{
+		// Any combination of .table-head-row-cell, .sortedAscending or .sortedAscending with any non-whitespace character between
+		// SEE https://regex101.com/r/NFrjBF.
+		objectPattern:
+			/(\.table-head-row-cell|\.sortedAscending|\.sortedDescending)[\S]*(\.table-head-row-cell|\.sortedAscending|\.sortedAscending)/,
+		versionDeprecated: '20.1.0',
 	},
 ];
