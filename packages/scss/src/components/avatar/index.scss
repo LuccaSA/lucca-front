@@ -33,6 +33,10 @@
 	&.mod-placeholder {
 		@include placeholder;
 	}
+
+	&.mod-ia {
+		@include ia;
+	}
 }
 
 .avatarWrapper {

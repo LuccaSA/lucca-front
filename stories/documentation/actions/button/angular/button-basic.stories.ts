@@ -24,7 +24,7 @@ export default {
 export const Basic: StoryObj<ButtonComponent> = {
 	argTypes: {
 		luButton: {
-			options: ['', 'outlined', 'text', 'ghost-invert'],
+			options: ['', 'outlined', 'text', 'ghost', 'ghost-invert', 'ia'],
 			control: {
 				type: 'select',
 			},

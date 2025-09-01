@@ -7,4 +7,8 @@
 	&.mod-S {
 		@include S;
 	}
+
+	&.palette-ia {
+		@include ia;
+	}
 }

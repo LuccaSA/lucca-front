@@ -9,7 +9,7 @@ export default {
 	title: 'Documentation/Feedback/Callout/HTML & CSS/Basic',
 	argTypes: {
 		palette: {
-			options: ['', 'palette-product', 'palette-neutral', 'palette-success', 'palette-warning', 'palette-error'],
+			options: ['', 'product', 'neutral', 'success', 'warning', 'error', 'ia'],
 			control: {
 				type: 'select',
 			},
@@ -24,10 +24,9 @@ export default {
 } as Meta;
 
 function getTemplate(args: CalloutBasicStory): string {
-	let classes = [args.palette].filter(Boolean).join(' ');
-	classes = classes ? ' ' + classes : classes;
-	const s = args.s ? ` mod-S` : '';
-	return `<div class="callout${classes}${s}">
+	let palette = args.palette ? ` palette-${args.palette}` : ``;
+	const s = args.s ? ` mod-S` : ``;
+	return `<div class="callout${palette}${s}">
 	<div class="callout-content">
 		<div class="callout-content-description">Feedback description</div>
 	</div>

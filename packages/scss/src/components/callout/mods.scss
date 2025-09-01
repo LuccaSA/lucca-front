@@ -1,4 +1,5 @@
-@use '@lucca-front/icons/src/icon/exports' as icon;
+@use '@lucca-front/icons/src/icon/exports' as icons;
+@use '@lucca-front/scss/src/commons/utils/color';
 @use '@lucca-front/scss/src/components/button/exports' as button;
 
 @mixin S {
@@ -7,7 +8,7 @@
 	--components-callout-kill-size: 1.25rem;
 
 	.callout-icon {
-		@include icon.S;
+		@include icons.S;
 	}
 
 	.callout-content-description-actions {
@@ -25,4 +26,15 @@
 	--components-callout-gap: var(--pr-t-spacings-75);
 	--components-callout-display: inline-flex;
 	--components-callout-padding: var(--pr-t-spacings-100);
+}
+
+@mixin ia {
+	--components-callout-boxShadow: var(--pr-t-elevation-shadow-button);
+	--components-callout-backgroundColor: var(--pr-t-elevation-surface-raised);
+
+	@include color.borderGradient(135deg, var(--palettes-brand-400), var(--palettes-ia-400));
+
+	.lucca-icon {
+		@include icons.ia;
+	}
 }

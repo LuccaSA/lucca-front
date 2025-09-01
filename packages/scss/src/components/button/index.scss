@@ -4,6 +4,10 @@
 	@include vars;
 	@include component;
 
+	&.mod-ia {
+		@include ia;
+	}
+
 	&.mod-block {
 		@include block;
 	}
@@ -135,6 +139,7 @@
 			@include loadingXS;
 		}
 
+		&.mod-ia,
 		&.mod-outlined {
 			@include loadingOutlined;
 		}
@@ -155,6 +160,7 @@
 	&.success {
 		@include success;
 
+		&.mod-ia,
 		&.mod-outlined {
 			@include successOutlined;
 		}

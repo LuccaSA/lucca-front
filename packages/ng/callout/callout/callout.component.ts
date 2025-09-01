@@ -27,7 +27,7 @@ export class CalloutComponent {
 	 * Which palette should be used for the entire callout.
 	 * Defaults to none (inherits parent palette)
 	 */
-	palette: Palette = 'none';
+	palette: Palette | 'ia' = 'none';
 
 	@Input()
 	/**

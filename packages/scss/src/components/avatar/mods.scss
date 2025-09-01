@@ -88,3 +88,18 @@
 		display: none;
 	}
 }
+
+@mixin ia {
+	// .avatar-picture {
+	// 	border-radius: 12px;
+	// 	background-image: linear-gradient(135deg, var(--palettes-ia-500), var(--palettes-brand-500));
+
+	// 	&::before {
+	// 		@include icon.generate('lucca');
+
+	// 		color: var(--palettes-neutral-0);
+	// 		font-weight: 400;
+	// 		font-size: var(--components-avatar-ia-size);
+	// 	}
+	// }
+}

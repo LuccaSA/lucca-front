@@ -9,9 +9,9 @@
 	align-items: flex-start;
 	position: relative;
 	border-radius: var(--pr-t-border-radius-default);
-	background-color: var(--palettes-50, var(--palettes-neutral-50));
+	background-color: var(--components-callout-backgroundColor);
 	color: var(--pr-t-color-text);
-	box-shadow: 0 0 0 var(--commons-divider-width) var(--palettes-300, var(--palettes-neutral-300));
+	box-shadow: var(--components-callout-boxShadow);
 	gap: var(--components-callout-gap);
 	padding: var(--components-callout-padding);
 	font: var(--components-callout-font);

@@ -17,7 +17,7 @@ export function getCalloutIcon(state: CalloutState | undefined, icon: LuccaIcon 
  *
  * If the palette is different from "none" then it takes priority over the callout state palette
  */
-export function getCalloutPalette(state: CalloutState | undefined, palette: Palette): string {
+export function getCalloutPalette(state: CalloutState | undefined, palette: Palette | 'ia'): string {
 	const stateMap = CalloutStateMap[state] ?? { palette };
 	return palette !== 'none' ? palette : stateMap.palette;
 }

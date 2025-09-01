@@ -1,12 +1,10 @@
 import { Meta, StoryFn } from '@storybook/angular';
 
-interface TagsPalettesStory {
-}
+interface TagsPalettesStory {}
 
 export default {
 	title: 'Documentation/Texts/Tags/HTML&CSS/Palettes',
-	argTypes: {
-	},
+	argTypes: {},
 } as Meta;
 
 function getTemplate(args: TagsPalettesStory): string {
@@ -25,7 +23,9 @@ function getTemplate(args: TagsPalettesStory): string {
 <span class="tag palette-grape">Text</span>
 <span class="tag palette-watermelon">Text</span>
 <span class="tag palette-pumpkin">Text</span>
-<span class="tag palette-pineapple">Text</span>`;
+<span class="tag palette-pineapple">Text</span>
+<span class="tag palette-ia">Text</span>
+`;
 }
 
 const Template: StoryFn<TagsPalettesStory> = (args) => ({
@@ -40,4 +40,4 @@ const Template: StoryFn<TagsPalettesStory> = (args) => ({
 });
 
 export const Palettes = Template.bind({});
-Palettes.args = { };
+Palettes.args = {};

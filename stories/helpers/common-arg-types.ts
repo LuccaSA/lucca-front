@@ -1,5 +1,5 @@
 export const PaletteArgType = {
-	options: ['none', 'product', 'neutral', 'success', 'warning', 'error'],
+	options: ['none', 'product', 'neutral', 'success', 'warning', 'error', 'ia'],
 	control: {
 		type: 'select',
 	},
@@ -13,6 +13,7 @@ export const PaletteAllArgType = {
 		'success',
 		'warning',
 		'error',
+		'ia',
 		'kiwi',
 		'lime',
 		'cucumber',

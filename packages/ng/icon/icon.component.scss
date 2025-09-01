@@ -1,4 +1,4 @@
-// @use '@lucca-front/icons/src/main';
+@use '@lucca-front/icons/src/icon/exports' as icons;
 
 lu-icon {
 	display: inline-flex;
@@ -30,4 +30,8 @@ lu-icon {
 
 .icon-color-placeholder {
 	color: var(--palettes-neutral-400);
+}
+
+.icon-color-ia {
+	@include icons.ia;
 }

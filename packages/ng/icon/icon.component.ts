@@ -22,7 +22,7 @@ export class IconComponent {
 	size: 'XXS' | 'XS' | 'S' | 'M' | 'L' | 'XL' | 'XXL';
 
 	@Input()
-	color: 'primary' | 'secondary' | 'product' | 'error' | 'warning' | 'success' | 'light' | 'placeholder' | 'inherit' = 'inherit';
+	color: 'primary' | 'secondary' | 'ia' | 'product' | 'error' | 'warning' | 'success' | 'light' | 'placeholder' | 'inherit' = 'inherit';
 
 	get iconClasses() {
 		return {
