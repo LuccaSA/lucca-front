@@ -35,6 +35,10 @@
 			@include disabled;
 		}
 	}
+
+	&.mod-alignCenter {
+		@include alignCenter;
+	}
 }
 
 .inputFramedWrapper {

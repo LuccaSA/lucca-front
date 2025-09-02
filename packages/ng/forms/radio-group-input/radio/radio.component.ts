@@ -46,6 +46,10 @@ export class RadioComponent<T = unknown> implements OnChanges {
 		return this.#parentGroup.framed();
 	}
 
+	public get framedAlign() {
+		return this.#parentGroup.framedAlign();
+	}
+
 	@HostBinding('class.form-field')
 	public get notFramed() {
 		return !this.framed;

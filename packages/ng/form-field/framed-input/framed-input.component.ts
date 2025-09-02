@@ -18,4 +18,5 @@ import { FRAMED_INPUT_INSTANCE } from './framed-input-token';
 })
 export class FramedInputComponent {
 	framedPortal = input<PortalContent | null>(null);
+	align = input<'top' | 'center'>('top');
 }
