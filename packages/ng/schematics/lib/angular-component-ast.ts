@@ -137,6 +137,7 @@ export function insertAngularImportIfNeeded(sourceFile: SourceFile, fileToEdit: 
 	}
 	let insertPos = 0;
 	let needsComma = true;
+	let insertContent = symbolName;
 	forEachChild(
 		sourceFile,
 		createVisitor(isDecorator, (decorator) => {
@@ -167,11 +168,19 @@ export function insertAngularImportIfNeeded(sourceFile: SourceFile, fileToEdit: 
 					insertPos = imports.elements.pos;
 					needsComma = false;
 				}
+			} else {
+				// There is no imports at all, add them !
+				const allParams = argument.properties
+					.filter(isPropertyAssignment)
+				insertPos = allParams[allParams.length - 1].pos;
+				needsComma = false;
+				insertContent = `
+	imports: [${insertContent}],`;
 			}
 		})
 	);
 	if (insertPos > 0) {
-		return new InsertChange(fileToEdit, insertPos, needsComma ? `, ${symbolName}` : symbolName);
+		return new InsertChange(fileToEdit, insertPos, needsComma ? `, ${insertContent}` : insertContent);
 	}
 	return new NoopChange();
 }
