@@ -1,12 +1,12 @@
 @if (link) {
-	<a [routerLink]="link" class="tag" [class]="tagClasses" [class.mod-outlined]="outlined">
+	<a [routerLink]="link" class="tag" [class]="tagClasses" [class.mod-outlined]="!IA() && outlined" [class.mod-IA]="IA()">
 		@if (icon) {
 			<lu-icon [icon]="icon" />
 		}
 		<span class="tag-content">{{ label }}</span>
 	</a>
 } @else {
-	<span class="tag" [class]="tagClasses" [class.mod-outlined]="outlined">
+	<span class="tag" [class]="tagClasses" [class.mod-outlined]="!IA() && outlined" [class.mod-IA]="IA()">
 		@if (icon) {
 			<lu-icon [icon]="icon" />
 		}
