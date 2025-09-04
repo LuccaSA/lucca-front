@@ -13,7 +13,8 @@ function getTemplate(args: IconColorStory): string {
 <span aria-hidden="true" class="lucca-icon icon-heart pr-u-textProduct"></span>
 <span aria-hidden="true" class="lucca-icon icon-heart pr-u-textError"></span>
 <span aria-hidden="true" class="lucca-icon icon-heart pr-u-textWarning"></span>
-<span aria-hidden="true" class="lucca-icon icon-heart pr-u-textSuccess"></span>`;
+<span aria-hidden="true" class="lucca-icon icon-heart pr-u-textSuccess"></span>
+<span aria-hidden="true" class="lucca-icon icon-heart mod-IA"></span>`;
 }
 
 const Template: StoryFn<IconColorStory> = (args) => ({

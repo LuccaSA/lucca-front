@@ -31,4 +31,8 @@
 	&.mod-XXL {
 		@include XXL;
 	}
+
+	&.mod-IA {
+		@include IA;
+	}
 }
