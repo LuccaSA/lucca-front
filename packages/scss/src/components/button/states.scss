@@ -22,8 +22,8 @@
 	--components-button-pointerEvents: none;
 	--components-button-color: transparent;
 	--components-button-userSelect: none;
-	--components-button-backgroundColor: var(--palettes-product-500);
-	--commons-loading-frontground: var(--palettes-product-50);
+	--components-button-backgroundColor: var(--palettes-500, var(--palettes-product-500));
+	--commons-loading-frontground: var(--palettes-50, var(--palettes-product-50));
 
 	@include loading.spinner(var(--pr-t-font-body-M-lineHeight));
 }
@@ -65,7 +65,7 @@
 }
 
 @mixin success {
-	--components-button-backgroundColor: var(--palettes-product-500);
+	--components-button-backgroundColor: var(--palettes-500, var(--palettes-product-500));
 
 	@include state;
 
@@ -93,7 +93,7 @@
 	--components-button-boxShadow: 0 0 0 var(--commons-divider-width) var(--palettes-neutral-100);
 
 	&::after {
-		color: var(--palettes-product-700);
+		color: var(--palettes-700, var(--palettes-product-700));
 	}
 }
 
@@ -102,7 +102,7 @@
 	--components-button-boxShadow: none;
 
 	&::after {
-		color: var(--palettes-product-700);
+		color: var(--palettes-700, var(--palettes-product-700));
 	}
 }
 
