@@ -49,12 +49,12 @@ export class TagComponent {
 	 */
 	icon: LuccaIcon | undefined;
 
-	IA = input(false, { transform: booleanAttribute });
+	AI = input(false, { transform: booleanAttribute });
 
 	get tagClasses() {
 		return {
 			[`mod-${this.size}`]: !!this.size,
-			[`palette-${this.palette}`]: !this.IA() && !!this.palette,
+			[`palette-${this.palette}`]: !this.AI() && !!this.palette,
 		};
 	}
 }

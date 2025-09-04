@@ -11,7 +11,7 @@ export default {
 			control: 'select',
 		},
 		color: {
-			if: { arg: 'IA', truthy: false },
+			if: { arg: 'AI', truthy: false },
 		},
 	},
 } as Meta;
@@ -21,6 +21,6 @@ export const Template: StoryObj<IconComponent> = {
 		alt: 'Texte alternatif',
 		color: 'inherit',
 		icon: 'heart',
-		IA: false,
+		AI: false,
 	},
 };

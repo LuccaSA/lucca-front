@@ -72,7 +72,7 @@ export class CalloutComponent {
 	@Output()
 	removedChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-	IA = input(false, { transform: booleanAttribute });
+	AI = input(false, { transform: booleanAttribute });
 
 	public intl = getIntl(LU_CALLOUT_TRANSLATIONS);
 
@@ -80,7 +80,7 @@ export class CalloutComponent {
 		const palette = getCalloutPalette(this.state, this.palette);
 		return {
 			[`mod-${this.size}`]: !!this.size,
-			[`palette-${palette}`]: !this.IA() && !!palette,
+			[`palette-${palette}`]: !this.AI() && !!palette,
 		};
 	}
 }

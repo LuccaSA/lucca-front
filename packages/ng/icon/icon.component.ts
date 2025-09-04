@@ -24,7 +24,7 @@ export class IconComponent {
 	@Input()
 	color: 'primary' | 'secondary' | 'product' | 'error' | 'warning' | 'success' | 'light' | 'placeholder' | 'inherit' = 'inherit';
 
-	IA = input(false, { transform: booleanAttribute });
+	AI = input(false, { transform: booleanAttribute });
 
 	get iconClasses() {
 		return {

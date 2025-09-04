@@ -16,7 +16,7 @@ export default {
 			description: 'Taille : Small',
 		},
 		palette: {
-			options: ['', 'success', 'warning', 'error', 'IA'],
+			options: ['', 'success', 'warning', 'error', 'AI'],
 			control: {
 				type: 'select',
 			},

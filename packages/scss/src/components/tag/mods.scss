@@ -44,7 +44,7 @@
 	--components-tag-color: var(--palettes-800, var(--palettes-product-800));
 }
 
-@mixin IA {
+@mixin AI {
 	@include outlined;
 
 	&:not(:disabled) {
@@ -53,7 +53,7 @@
 		@include color.borderGradient(135deg, var(--palettes-brand-400), var(--palettes-ia-500), var(--pr-t-border-radius-small));
 
 		.lucca-icon {
-			@include icons.IA;
+			@include icons.AI;
 		}
 	}
 }

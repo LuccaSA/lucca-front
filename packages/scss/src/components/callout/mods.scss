@@ -28,7 +28,7 @@
 	--components-callout-padding: var(--pr-t-spacings-100);
 }
 
-@mixin IA {
+@mixin AI {
 	--components-callout-boxShadow: var(--pr-t-elevation-shadow-button);
 	--components-callout-backgroundColor: var(--pr-t-elevation-surface-raised);
 
@@ -36,7 +36,7 @@
 
 	.callout-icon {
 		.lucca-icon {
-			@include icons.IA;
+			@include icons.AI;
 		}
 	}
 }

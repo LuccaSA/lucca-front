@@ -1,20 +1,20 @@
 import { Meta, StoryFn } from '@storybook/angular';
 
-interface TagsIAStory {}
+interface TagsAIStory {}
 
 export default {
-	title: 'Documentation/Texts/Tags/HTML&CSS/IA',
+	title: 'Documentation/Texts/Tags/HTML&CSS/AI',
 	argTypes: {},
 } as Meta;
 
-function getTemplate(args: TagsIAStory): string {
-	return '<span class="tag mod-IA">Text</span>';
+function getTemplate(args: TagsAIStory): string {
+	return '<span class="tag mod-AI">Text</span>';
 }
 
-const Template: StoryFn<TagsIAStory> = (args) => ({
+const Template: StoryFn<TagsAIStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
 });
 
-export const IA = Template.bind({});
-IA.args = {};
+export const AI = Template.bind({});
+AI.args = {};

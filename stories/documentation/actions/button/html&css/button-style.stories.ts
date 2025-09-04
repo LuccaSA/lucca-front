@@ -18,7 +18,7 @@ function getTemplate(args: ButtonStyleStory): string {
 	<button type="button" class="button">Button</button>
 	<button type="button" class="button mod-outlined">Button</button>
 	<button type="button" class="button mod-ghost">Button</button>
-	<button type="button" class="button mod-IA">Button</button>
+	<button type="button" class="button mod-AI">Button</button>
 </div>`;
 }
 

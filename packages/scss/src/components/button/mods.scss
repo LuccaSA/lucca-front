@@ -230,14 +230,14 @@
 	--components-button-paddingInlineEnd: var(--pr-t-spacings-50);
 }
 
-@mixin IA {
+@mixin AI {
 	@include outlined;
 
 	&:not(:disabled) {
 		@include color.borderGradient(135deg, var(--palettes-brand-400), var(--palettes-ia-500));
 
 		.lucca-icon {
-			@include icons.IA;
+			@include icons.AI;
 		}
 	}
 }

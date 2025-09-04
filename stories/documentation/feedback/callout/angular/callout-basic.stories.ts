@@ -42,7 +42,7 @@ export default {
 			control: {
 				type: 'select',
 			},
-			if: { arg: 'IA', truthy: false },
+			if: { arg: 'AI', truthy: false },
 		},
 		icon: {
 			options: [null, 'signInfo', 'signSuccess', 'signWarning', 'signError', 'signHelp', 'weatherStars', 'officePenStar'],
@@ -84,7 +84,7 @@ export const Template: StoryObj<CalloutComponent & { description: string; action
 		palette: 'none',
 		removable: false,
 		removed: false,
-		IA: false,
+		AI: false,
 		actions: false,
 		actionsInline: false,
 	},

@@ -6,7 +6,7 @@ interface CalloutBasicStory {
 }
 
 export default {
-	title: 'Documentation/Feedback/Callout/HTML & CSS/IA',
+	title: 'Documentation/Feedback/Callout/HTML & CSS/AI',
 	argTypes: {
 		s: {
 			control: {
@@ -19,7 +19,7 @@ export default {
 
 function getTemplate(args: CalloutBasicStory): string {
 	const s = args.s ? ` mod-S` : ``;
-	return `<div class="callout mod-IA${s}">
+	return `<div class="callout mod-AI${s}">
 	<div class="callout-content">
 		<div class="callout-content-description">Feedback description</div>
 	</div>

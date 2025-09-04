@@ -8,8 +8,8 @@
 		@include S;
 	}
 
-	&.mod-IA {
-		@include IA;
+	&.mod-AI {
+		@include AI;
 	}
 
 	&:has(.callout-content-description-actions.mod-inline) {
