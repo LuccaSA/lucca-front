@@ -4,7 +4,7 @@
 }
 
 @mixin square {
-	border-radius: var(--pr-t-border-radius-structure);
+	border-radius: var(--pr-t-border-radius-small);
 	block-size: var(--components-skeleton-shape-height);
 	inline-size: var(--components-skeleton-shape-width);
 }
