@@ -6,14 +6,8 @@ interface CalloutBasicStory {
 }
 
 export default {
-	title: 'Documentation/Feedback/Callout/HTML & CSS/Basic',
+	title: 'Documentation/Feedback/Callout/HTML & CSS/IA',
 	argTypes: {
-		palette: {
-			options: ['', 'product', 'neutral', 'success', 'warning', 'error'],
-			control: {
-				type: 'select',
-			},
-		},
 		s: {
 			control: {
 				type: 'boolean',
@@ -24,9 +18,8 @@ export default {
 } as Meta;
 
 function getTemplate(args: CalloutBasicStory): string {
-	let palette = args.palette ? ` palette-${args.palette}` : ``;
 	const s = args.s ? ` mod-S` : ``;
-	return `<div class="callout${palette}${s}">
+	return `<div class="callout mod-IA${s}">
 	<div class="callout-content">
 		<div class="callout-content-description">Feedback description</div>
 	</div>
@@ -39,4 +32,4 @@ const Template: StoryFn<CalloutBasicStory> = (args) => ({
 });
 
 export const Basic = Template.bind({});
-Basic.args = { palette: '', s: false };
+Basic.args = { s: false };

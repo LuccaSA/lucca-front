@@ -7,4 +7,12 @@
 	&.mod-S {
 		@include S;
 	}
+
+	&.mod-IA {
+		@include IA;
+	}
+
+	&:has(.callout-content-description-actions.mod-inline) {
+		@include actionsInline;
+	}
 }
