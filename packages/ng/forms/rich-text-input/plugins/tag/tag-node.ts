@@ -107,6 +107,7 @@ export class TagNode extends DecoratorNode<string> {
 			const textNode = document.createTextNode(this.#tagDescription ?? this.#tagKey);
 			componentElement.insertBefore(textNode, componentElement.firstChild);
 			componentElement.classList.add('mod-S');
+			componentElement.classList.add('richTextField-content-chip');
 
 			// Add click handler ONLY to the delete button, not the whole chip
 			this.#componentRef.instance.kill.subscribe(() => {
