@@ -234,7 +234,7 @@
 	@include outlined;
 
 	&:not(:disabled) {
-		@include color.borderGradient(135deg, var(--palettes-brand-400), var(--palettes-ia-500));
+		@include color.borderGradient(135deg, var(--palettes-brand-400), var(--palettes-AI-500));
 
 		.lucca-icon {
 			@include icons.AI;
