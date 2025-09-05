@@ -1,5 +1,4 @@
 @use 'popover';
-@use '@lucca-front/scss/src/commons/utils/a11y';
 
 .lu-picker-panel {
 	@extend %popover-panel;
@@ -51,6 +50,7 @@
 	gap: var(--pr-t-spacings-100);
 	justify-content: space-between;
 	box-shadow: calc(var(--pr-t-spacings-50) * -0.5) calc(var(--pr-t-spacings-50) * -0.5) 0 2px var(--pr-t-elevation-surface-raised); // Mask background options scrolling behind
+	white-space: nowrap;
 
 	&.is-highlighted {
 		background-color: var(--palettes-neutral-50);
@@ -130,7 +130,7 @@
 
 	&:not(:hover, :has(.is-highlighted)) {
 		.link {
-			@include a11y.mask;
+			opacity: 0.0001;
 		}
 	}
 }
