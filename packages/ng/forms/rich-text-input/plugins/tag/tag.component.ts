@@ -6,7 +6,7 @@ import { LU_RICH_TEXT_INPUT_TRANSLATIONS } from '../../rich-text-input.translate
 import { $createTagNode, TagNode } from './tag-node';
 import type { Tag } from './tag.model';
 
-const areSetsEqual = (a: Set<unknown>, b: Set<unknown>): boolean => a.size === b.size && [...a].every((value) => b.has(value));
+const areSetsEqual = (a: Set<string>, b: Set<string>): boolean => a.size === b.size && [...a].every((value) => b.has(value));
 
 @Component({
 	selector: 'lu-rich-text-plugin-tag',

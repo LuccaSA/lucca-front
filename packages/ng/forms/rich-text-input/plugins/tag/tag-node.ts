@@ -199,8 +199,8 @@ function domConversionFunction(domNode: Node): DOMConversion {
 	};
 }
 
-export function $createTagNode(key = '', description?: string, disabled = false): TagNode {
-	return new TagNode(key, description, disabled);
+export function $createTagNode(key = '', description?: string): TagNode {
+	return new TagNode(key, description);
 }
 
 export function $isTagNode(node: LexicalNode | null | undefined): node is TagNode {
