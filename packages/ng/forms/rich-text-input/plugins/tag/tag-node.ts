@@ -174,7 +174,7 @@ function domConversionFunction(domNode: Node): DOMConversion {
 			convertedParts.push($createTextNode(otherText[index]));
 			// Traiter le tag
 			const tagContent = match.replace(/\{\{|\}\}/gu, '').trim();
-			convertedParts.push($createTagNode(tagContent, undefined, true)); // Créer un TagNode partiel avec la clé
+			convertedParts.push($createTagNode(tagContent));
 
 			if (index === matches.length - 1) {
 				convertedParts.push($createTextNode(otherText[index + 1]));
@@ -195,8 +195,8 @@ function domConversionFunction(domNode: Node): DOMConversion {
 	};
 }
 
-export function $createTagNode(key = '', description?: string, partial = false): TagNode {
-	return new TagNode(key, description, partial);
+export function $createTagNode(key = '', description?: string, disabled = false): TagNode {
+	return new TagNode(key, description, disabled);
 }
 
 export function $isTagNode(node: LexicalNode | null | undefined): node is TagNode {
