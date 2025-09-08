@@ -6,6 +6,8 @@ import { LU_RICH_TEXT_INPUT_TRANSLATIONS } from '../../rich-text-input.translate
 import { $createTagNode, TagNode } from './tag-node';
 import type { Tag } from './tag.model';
 
+const areSetsEqual = (a: Set<unknown>, b: Set<unknown>): boolean => a.size === b.size && [...a].every((value) => b.has(value));
+
 @Component({
 	selector: 'lu-rich-text-plugin-tag',
 	changeDetection: ChangeDetectionStrategy.OnPush,
@@ -76,7 +78,7 @@ export class TagComponent implements RichTextPluginComponent, OnDestroy {
 							newNodes.delete(k);
 						}
 					});
-					if (newNodes.size !== this.#tagNodeKeys().size) {
+					if (!areSetsEqual(newNodes, this.#tagNodeKeys())) {
 						this.#tagNodeKeys.set(newNodes);
 					}
 				});
