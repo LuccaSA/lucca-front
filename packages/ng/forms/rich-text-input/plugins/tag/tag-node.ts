@@ -149,7 +149,11 @@ export class TagNode extends DecoratorNode<string> {
 	}
 
 	override updateFromJSON(serializedNode: LexicalUpdateJSON<SerializedTagNode>): this {
-		return super.updateFromJSON(serializedNode).setTagDescription(serializedNode.tagDescription).setTagKey(serializedNode.tagKey).setDisabled(serializedNode.disabled);
+		return super
+			.updateFromJSON(serializedNode)
+			.setTagDescription(serializedNode.tagDescription ?? '')
+			.setTagKey(serializedNode.tagKey ?? '')
+			.setDisabled(serializedNode.disabled ?? false);
 	}
 
 	override exportJSON(): SerializedTagNode {

@@ -31,7 +31,7 @@ export class TagComponent implements RichTextPluginComponent, OnDestroy {
 
 	editor: LexicalEditor | null = null;
 
-	#tagNodeKeys = signal(new Set<NodeKey>());
+	readonly #tagNodeKeys = signal(new Set<NodeKey>());
 
 	#registeredCommands = () => {};
 
@@ -45,7 +45,7 @@ export class TagComponent implements RichTextPluginComponent, OnDestroy {
 			const nodes = this.#tagNodeKeys();
 			const isDisabled = this.isDisabled();
 
-			this.editor.update(() => {
+			this.editor?.update(() => {
 				nodes.forEach((node) => {
 					const tagNode = $getNodeByKey<TagNode>(node);
 					if (!tagNode) {
@@ -53,7 +53,7 @@ export class TagComponent implements RichTextPluginComponent, OnDestroy {
 					}
 					const tag = tags.find((t) => t.key === tagNode.getTagKey());
 					if (tag) {
-						tagNode.setTagDescription(tag.description).setDisabled(isDisabled);
+						tagNode.setTagDescription(tag.description ?? '').setDisabled(isDisabled);
 					} else {
 						tagNode.remove();
 					}
@@ -70,7 +70,7 @@ export class TagComponent implements RichTextPluginComponent, OnDestroy {
 			TagNode,
 			(mutations) => {
 				const newNodes = new Set<NodeKey>(this.#tagNodeKeys());
-				this.editor.read(() => {
+				this.editor?.read(() => {
 					mutations.forEach((m, k) => {
 						if (m === 'created') {
 							newNodes.add(k);
