@@ -27,6 +27,6 @@
 }
 
 @mixin state {
-	color: transparent;
-	background-color: transparent;
+	--components-numericBadge-background: transparent;
+	--components-numericBadge-color: transparent;
 }
