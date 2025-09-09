@@ -1,16 +1,22 @@
 @use 'exports' as *;
 
 .sortableList {
-	@include vars;
-	@include component;
+	@layer components {
+		@include vars;
+		@include component;
+	}
 
-	&.mod-S {
-		@include S;
+	@layer mods {
+		&.mod-S {
+			@include S;
+		}
 	}
 }
 
 .sortableList-item {
-	&.mod-clickable {
-		@include clickable;
+	@layer mods {
+		&.mod-clickable {
+			@include clickable;
+		}
 	}
 }

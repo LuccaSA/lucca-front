@@ -1,28 +1,34 @@
 @use 'exports' as *;
 
 .chip {
-	@include vars;
-	@include component;
-
-	&.mod-S {
-		@include S;
+	@layer components {
+		@include vars;
+		@include component;
 	}
 
-	// .palette-primary is deprecated
-	&.palette-product,
-	&.palette-primary {
-		@include product;
+	@layer mods {
+		&.mod-S {
+			@include S;
+		}
+
+		// .palette-primary is deprecated
+		&.palette-product,
+		&.palette-primary {
+			@include product;
+		}
+
+		&.mod-unkillable {
+			@include unkillable;
+		}
+
+		&.mod-clickable {
+			@include clickable;
+		}
 	}
 
-	&.mod-unkillable {
-		@include unkillable;
-	}
-
-	&.mod-clickable {
-		@include clickable;
-	}
-
-	&.is-disabled {
-		@include disabled;
+	@layer states {
+		&.is-disabled {
+			@include disabled;
+		}
 	}
 }

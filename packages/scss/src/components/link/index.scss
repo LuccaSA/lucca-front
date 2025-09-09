@@ -1,18 +1,24 @@
 @use 'exports' as *;
 
 .link {
-	@include vars;
-	@include component;
-
-	&.mod-icon {
-		@include icon;
+	@layer components {
+		@include vars;
+		@include component;
 	}
 
-	&.mod-decorationHover {
-		@include decorationHover;
+	@layer mods {
+		&.mod-icon {
+			@include icon;
+		}
+
+		&.mod-decorationHover {
+			@include decorationHover;
+		}
 	}
 
-	&:is(:disabled, .is-disabled) {
+	@layer states {
+		&:is(:disabled, .is-disabled) {
 		@include disabled;
+	}
 	}
 }

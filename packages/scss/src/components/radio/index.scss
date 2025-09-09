@@ -1,25 +1,31 @@
 @use 'exports' as *;
 
 .radio {
-	@include vars;
-	@include component;
-
-	&.mod-inline {
-		@include inline;
+	@layer components {
+		@include vars;
+		@include component;
 	}
 
-	&.mod-S {
-		@include S;
+	@layer mods {
+		&.mod-inline {
+			@include inline;
+		}
+
+		&.mod-S {
+			@include S;
+		}
 	}
 }
 
 .radio-input {
-	&[disabled],
-	&[read-only] {
-		@include disabled;
+	@layer states {
+		&[disabled],
+		&[read-only] {
+			@include disabled;
 
-		&:checked {
-			@include disabledChecked;
+			&:checked {
+				@include disabledChecked;
+			}
 		}
 	}
 }

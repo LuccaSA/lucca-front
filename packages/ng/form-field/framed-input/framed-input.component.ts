@@ -7,7 +7,6 @@ import { FRAMED_INPUT_INSTANCE } from './framed-input-token';
 	standalone: true,
 	imports: [PortalDirective],
 	templateUrl: './framed-input.component.html',
-	styleUrl: './framed-input.component.scss',
 	encapsulation: ViewEncapsulation.None,
 	providers: [
 		{

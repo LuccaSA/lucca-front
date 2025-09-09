@@ -2,16 +2,20 @@
 @use '@lucca-front/scss/src/commons/utils/media';
 
 .appLayout {
-	@include vars;
-	@include component;
+	@layer components {
+		@include vars;
+		@include component;
 
-	@include media.min('S') {
-		@include wide;
+		@include media.min('S') {
+			@include wide;
+		}
 	}
 
-	@include media.max('S') {
-		&.mod-mobileNavSideBottom {
-			@include mobileNavSideBottom;
+	@layer mods {
+		@include media.max('S') {
+			&.mod-mobileNavSideBottom {
+				@include mobileNavSideBottom;
+			}
 		}
 	}
 }
