@@ -14,7 +14,7 @@
 	--components-button-pointerEvents: none;
 
 	.numericBadge {
-		// @include numericBadge.disabled;
+		@include numericBadge.disabled;
 	}
 }
 
