@@ -1,4 +1,4 @@
-import { CommentBlockComponent, CommentComponent, CommentChatComponent } from '@lucca-front/ng/comment';
+import { CommentBlockComponent, CommentChatComponent, CommentComponent } from '@lucca-front/ng/comment';
 import { LuUserPictureModule } from '@lucca-front/ng/user';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { generateInputs } from '../../../../helpers/stories';

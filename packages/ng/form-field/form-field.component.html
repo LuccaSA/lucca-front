@@ -17,7 +17,7 @@
 				<span class="tag formLabel-tag">{{ tag() }}</span>
 			}
 		</legend>
-		<ng-container *ngTemplateOutlet="projectionTpl"></ng-container>
+		<ng-container *ngTemplateOutlet="projectionTpl" />
 		@if (inlineMessage() || (invalidStatus() ? errorInlineMessage() : false)) {
 			<lu-inline-message
 				id="{{ id() }}-message"
@@ -53,7 +53,7 @@
 			</span>
 		}
 	</label>
-	<ng-container *ngTemplateOutlet="projectionTpl"></ng-container>
+	<ng-container *ngTemplateOutlet="projectionTpl" />
 	@if (inlineMessage() || (invalidStatus() ? errorInlineMessage() : false)) {
 		<lu-inline-message
 			id="{{ id() }}-message"
@@ -64,5 +64,19 @@
 }
 
 <ng-template #projectionTpl>
-	<ng-content />
+	<div class="pr-u-displayFlex pr-u-gap100 pr-u-alignItemsCenter">
+		<div class="pr-u-flexGrow1">
+			<ng-content />
+		</div>
+		@if (AI()) {
+			<lu-icon
+				class="pr-u-focusVisible pr-u-borderRadiusSmall"
+				[luTooltip]="iconAItooltip()"
+				size="S"
+				AI
+				icon="weatherStars"
+				[alt]="iconAIalt()"
+			/>
+		}
+	</div>
 </ng-template>

@@ -1,6 +1,7 @@
 import { booleanAttribute, ChangeDetectionStrategy, Component, EventEmitter, HostBinding, input, Input, Output, ViewEncapsulation } from '@angular/core';
 import { LuccaIcon } from '@lucca-front/icons';
 import { getIntl, Palette, PortalContent, PortalDirective } from '@lucca-front/ng/core';
+import { IconComponent } from '@lucca-front/ng/icon';
 import { CalloutIconPipe } from '../callout-icon.pipe';
 import { CalloutState } from '../callout-state';
 import { LU_CALLOUT_TRANSLATIONS } from '../callout.translate';
@@ -9,7 +10,7 @@ import { getCalloutPalette } from '../callout.utils';
 @Component({
 	selector: 'lu-callout',
 	standalone: true,
-	imports: [PortalDirective, CalloutIconPipe],
+	imports: [PortalDirective, CalloutIconPipe, IconComponent],
 	templateUrl: './callout.component.html',
 	styleUrls: ['./callout.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
@@ -73,6 +74,8 @@ export class CalloutComponent {
 	removedChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
 	AI = input(false, { transform: booleanAttribute });
+
+	iconAlt = input<string | null>(null);
 
 	public intl = getIntl(LU_CALLOUT_TRANSLATIONS);
 
