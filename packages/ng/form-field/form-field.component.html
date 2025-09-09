@@ -53,20 +53,9 @@
 			</span>
 		}
 	</label>
-	<ng-container *ngTemplateOutlet="projectionTpl" />
-	@if (inlineMessage() || (invalidStatus() ? errorInlineMessage() : false)) {
-		<lu-inline-message
-			id="{{ id() }}-message"
-			[label]="invalidStatus() && errorInlineMessage() ? errorInlineMessage() : inlineMessage()"
-			[state]="invalidStatus() ? 'error' : inlineMessageState()"
-		></lu-inline-message>
-	}
-}
-
-<ng-template #projectionTpl>
 	<div class="pr-u-displayFlex pr-u-gap100 pr-u-alignItemsCenter">
 		<div class="pr-u-flexGrow1">
-			<ng-content />
+			<ng-container *ngTemplateOutlet="projectionTpl" />
 		</div>
 		@if (AI()) {
 			<lu-icon
@@ -79,4 +68,15 @@
 			/>
 		}
 	</div>
+	@if (inlineMessage() || (invalidStatus() ? errorInlineMessage() : false)) {
+		<lu-inline-message
+			id="{{ id() }}-message"
+			[label]="invalidStatus() && errorInlineMessage() ? errorInlineMessage() : inlineMessage()"
+			[state]="invalidStatus() ? 'error' : inlineMessageState()"
+		/>
+	}
+}
+
+<ng-template #projectionTpl>
+	<ng-content />
 </ng-template>
