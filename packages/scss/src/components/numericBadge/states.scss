@@ -25,3 +25,8 @@
 @mixin focusVisible {
 	@include a11y.focusVisible;
 }
+
+@mixin state {
+	color: transparent;
+	background-color: transparent;
+}
