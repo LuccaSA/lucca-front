@@ -24,7 +24,7 @@ export default {
 			if: { arg: 'expandable', truthy: true },
 		},
 		size: {
-			options: ['S', null],
+			options: ['', 'S'],
 			control: {
 				type: 'select',
 			},
@@ -35,11 +35,13 @@ export default {
 			imports: [FieldsetComponent],
 		}),
 	],
-	render: ({ content, expanded, ...args }, { argTypes }) => {
-		const expandedParam = expanded ? `[expanded]="true"` : ``;
+	render: ({ content, expanded, size, helper, ...args }, { argTypes }) => {
+		const expandedParam = expanded ? ` [expanded]="true"` : ``;
+		const helperParam = helper ? ` helper="${helper}"` : ``;
+		const sizeParam = size ? ` size="S"` : ``;
 		return {
 			template: cleanupTemplate(`
-<lu-fieldset ${expandedParam} ${generateInputs(args, argTypes)}>
+<lu-fieldset${helperParam}${expandedParam}${sizeParam}${generateInputs(args, argTypes)}>
 	${content}
 </lu-fieldset>`),
 		};
