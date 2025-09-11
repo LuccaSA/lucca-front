@@ -5,7 +5,7 @@ import { getIntl, IntlParamsPipe } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { POPOVER_CONFIG } from '@lucca-front/ng/popover2';
 import { BehaviorSubject, catchError, combineLatest, Observable, of, switchMap, tap } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, shareReplay } from 'rxjs/operators';
 import { LU_POPUP_EMPLOYEE_TRANSLATIONS } from '../../popup-employee.translate';
 import { LuUserPopoverStore } from '../../service/user-popover.store';
 import { LuUserPopover } from '../../user-popover.model';
@@ -31,6 +31,8 @@ export class LuUserPopoverComponent {
 
 	#errorImage$ = new BehaviorSubject<boolean>(false);
 
+	skeletonWidths = [this.getRandomPercent(), this.getRandomPercent(), this.getRandomPercent(), this.getRandomPercent()];
+
 	public employee$: Observable<LuUserPopover> = toObservable(this.luUser).pipe(
 		switchMap((user) =>
 			this.#service.get(user.id).pipe(
@@ -45,6 +47,7 @@ export class LuUserPopoverComponent {
 			),
 		),
 		tap(() => this.#popoverRef.updatePosition()),
+		shareReplay(1),
 	);
 
 	public userPictureDisplay$ = combineLatest([this.employee$, this.#errorImage$]).pipe(
@@ -74,5 +77,7 @@ export class LuUserPopoverComponent {
 		this.#errorImage$.next(true);
 	}
 
-	getRandomPercent = (min: number = 33, max: number = 66): string => `${Math.floor(Math.random() * (max - min) + min).toString()}%`;
+	getRandomPercent(min: number = 33, max: number = 66): string {
+		return `${Math.floor(Math.random() * (max - min) + min).toString()}%`;
+	}
 }
