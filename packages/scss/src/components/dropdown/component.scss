@@ -7,8 +7,8 @@
 	margin: calc(var(--pr-t-spacings-100) * -1);
 	padding: 0 !important;
 	border-radius: var(--pr-t-border-radius-structure);
-	max-inline-size: 90vw;
-	max-block-size: var(--components-dropdown-max-height);
+	max-inline-size: var(--components-dropdown-maxWidth);
+	max-block-size: var(--components-dropdown-maxHeight);
 	overflow-x: hidden;
 	overflow-y: auto;
 
@@ -20,8 +20,11 @@
 			padding-block: var(--pr-t-spacings-50);
 			padding-inline: 0;
 			margin: 0;
-			min-inline-size: var(--components-dropdown-min-width);
-			max-inline-size: var(--components-dropdown-max-width);
+			min-inline-size: var(--components-dropdown-list-minWidth);
+			max-inline-size: var(--components-dropdown-list-maxWidth);
+			display: flex;
+			flex-direction: column;
+			gap: var(--pr-t-spacings-25);
 		}
 
 		// .lu-dropdown-options-item is deprecated
@@ -30,7 +33,7 @@
 			padding-block: 0;
 			padding-inline: var(--pr-t-spacings-50);
 
-			&.mod-divider {
+			&:has(.dropdown-list-option-divider) {
 				padding: 0;
 			}
 		}
@@ -38,12 +41,11 @@
 		// .lu-dropdown-options-item-action is deprecated
 		.dropdown-list-option-action,
 		.lu-dropdown-options-item-action {
-			align-items: flex-start;
 			border: 0;
 			border-radius: var(--pr-t-border-radius-default);
-			color: var(--components-dropdown-optionColor);
-			background-color: var(--components-dropdown-option-actionBackground);
+			background-color: var(--components-dropdown-list-option-action-backgroundColor);
 			display: flex;
+			align-items: flex-start;
 			gap: var(--pr-t-spacings-100);
 			line-height: var(--pr-t-font-body-M-lineHeight);
 			padding: var(--pr-t-spacings-50) var(--pr-t-spacings-100);
@@ -51,31 +53,33 @@
 			transition: background-color var(--commons-animations-durations-fast);
 			text-decoration: none;
 			inline-size: 100%;
-			pointer-events: var(--components-dropdown-option-actionEvents);
+			pointer-events: var(--components-dropdown-list-option-action-pointerEvents);
 			cursor: pointer;
 
 			.lucca-icon {
 				@include icon.S;
 
-				margin-block-start: var(--pr-t-spacings-25);
+				margin-block: var(--pr-t-spacings-25);
 			}
 
 			&,
 			&:hover {
-				color: var(--components-dropdown-option-actionColor);
+				color: var(--components-dropdown-list-option-action-color);
 			}
 
-			&:hover,
-			&:focus-visible {
-				--components-dropdown-option-actionBackground: var(--palettes-neutral-25);
+			&:hover {
+				--components-dropdown-list-option-action-backgroundColor: var(--palettes-neutral-50);
 			}
 
 			&:active {
-				--components-dropdown-option-actionBackground: var(--palettes-neutral-50);
+				--components-dropdown-list-option-action-backgroundColor: var(--palettes-neutral-100);
 			}
 
 			&:focus-visible {
 				@include a11y.focusVisible;
+
+				z-index: 1;
+				position: relative;
 			}
 		}
 	}

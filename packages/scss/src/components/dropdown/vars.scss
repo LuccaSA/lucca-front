@@ -1,8 +1,11 @@
 @mixin vars {
-	--components-dropdown-min-width: 10rem;
-	--components-dropdown-max-width: 30rem;
-	--components-dropdown-max-height: 60vh;
-	--components-dropdown-option-actionColor: currentColor;
-	--components-dropdown-option-actionBackground: transparent;
-	--components-dropdown-option-actionEvents: auto;
+	--components-dropdown-maxWidth: 90vw;
+	--components-dropdown-maxHeight: 60vh;
+
+	--components-dropdown-list-minWidth: 10rem;
+	--components-dropdown-list-maxWidth: 30rem;
+
+	--components-dropdown-list-option-action-color: currentColor;
+	--components-dropdown-list-option-action-backgroundColor: transparent;
+	--components-dropdown-list-option-action-pointerEvents: auto;
 }
