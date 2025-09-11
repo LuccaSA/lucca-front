@@ -42,6 +42,13 @@ let nextId = 0;
 	selector: '[luTooltip]',
 	exportAs: 'luTooltip',
 	standalone: true,
+	host: {
+		'(mouseenter)': 'open$.next()',
+		'(mouseleave)': 'close$.next()',
+		'(blur)': 'close$.next()',
+		'(focus)': 'onFocus()',
+		'(window:keydown.escape)': 'globalEscape($event)',
+	},
 })
 export class LuTooltipTriggerDirective implements AfterContentInit, OnDestroy {
 	#overlay = inject(Overlay);
@@ -112,26 +119,10 @@ export class LuTooltipTriggerDirective implements AfterContentInit, OnDestroy {
 
 	close$ = new Subject<void>();
 
-	@HostListener('mouseenter')
-	onMouseEnter() {
-		this.open$.next();
-	}
-
-	@HostListener('mouseleave')
-	onMouseLeave() {
-		this.close$.next();
-	}
-
-	@HostListener('focus')
 	onFocus() {
 		if (this.#host.nativeElement.getAttribute('aria-expanded') !== 'true') {
 			this.open$.next();
 		}
-	}
-
-	@HostListener('blur')
-	onBlur() {
-		this.close$.next();
 	}
 
 	#generatedId = `${this.#host.nativeElement.tagName.toLowerCase()}-tooltip-${nextId++}`;
@@ -196,6 +187,14 @@ export class LuTooltipTriggerDirective implements AfterContentInit, OnDestroy {
 
 	ngOnDestroy(): void {
 		this.closeTooltip();
+	}
+
+	globalEscape($event: KeyboardEvent): void {
+		if ($event.key == 'Escape' && this.overlayRef) {
+			$event.preventDefault();
+			$event.stopPropagation();
+			this.closeTooltip();
+		}
 	}
 
 	private openTooltip(): void {
