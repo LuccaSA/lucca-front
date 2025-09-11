@@ -14,7 +14,7 @@ class DropdownBasicStory {
 }
 
 export default {
-	title: 'Documentation/Overlays/Dropdown/Basic',
+	title: 'Documentation/Overlays/Dropdown/Angular/Basic',
 	component: DropdownBasicStory,
 	decorators: [applicationConfig({ providers: [provideAnimations()] })],
 } as Meta;

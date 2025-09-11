@@ -4,7 +4,7 @@ import { IconComponent } from '@lucca-front/ng/icon';
 import { Meta, StoryFn, applicationConfig } from '@storybook/angular';
 
 export default {
-	title: 'Documentation/Overlays/Dropdown/Directive',
+	title: 'Documentation/Overlays/Dropdown/Angular/Directive',
 	component: LuDropdownTriggerDirective,
 	decorators: [applicationConfig({ providers: [provideAnimations()] })],
 } as Meta;
