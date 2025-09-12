@@ -23,7 +23,7 @@ class TranslateService implements ILuTitleTranslateService {
 @Component({
 	selector: 'lu-app',
 	imports: [RouterOutlet, RouterLink],
-	template: `<router-outlet></router-outlet>
+	template: `<router-outlet />
 		<a class="link-2" [routerLink]="['/first']">Stub</a>
 		<a class="link-3" [routerLink]="['/first/1']">Stub</a>
 		<a class="link-4" [routerLink]="['/first/1/last']">Stub</a>
@@ -47,7 +47,7 @@ export class TestNameResolver implements Resolve<string> {
 @Component({
 	selector: 'lu-stub',
 	imports: [RouterOutlet],
-	template: `<router-outlet></router-outlet>`,
+	template: `<router-outlet />`,
 })
 export class StubComponent {}
 
@@ -65,7 +65,7 @@ export class OverrideTitleComponent implements OnInit {
 @Component({
 	selector: 'lu-delayed-override-title',
 	imports: [RouterOutlet],
-	template: `<router-outlet></router-outlet>`,
+	template: `<router-outlet />`,
 })
 export class DelayedOverrideTitleComponent implements OnInit {
 	constructor(private titleService: LuTitleService) {}

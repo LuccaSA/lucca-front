@@ -78,7 +78,7 @@ Il est aussi possible de créer une barre d'outil personnalisée en assemblant l
 - Bouton de style individuel
 
 ```angular2html
-<lu-rich-text-plugin-text-style style="bold" icon="formatTextBold" tooltip="Gras"/>
+<lu-rich-text-plugin-text-style style="bold" icon="formatTextBold" tooltip="Gras" />
 ```
 
 - Barre préconfigurée (Gras, Italique, Souligné)
@@ -133,13 +133,13 @@ Les tags ont la forme `{{tag.key}}` dans le contenu brut en entrée/sortie de l'
 Si le contenu en entrée de l'éditeur contient des tags non reconnus par l'outil, ils seront automatiquement supprimés.
 
 ```angular2html
-<lu-rich-text-plugin-tag [tags]="[{ key: 'tag1', description: 'Premier tag'}, { key: 'tag2', description: 'Second tag'}]"/>
+<lu-rich-text-plugin-tag [tags]="[{ key: 'tag1', description: 'Premier tag'}, { key: 'tag2', description: 'Second tag'}]" />
 ```
 
 Pour gérer les tags en markdown, il est nécessaire de fournir le transformer `TAGS` au formateur.
 
 ```ts
-provideLuRichTextMarkdownFormatter([...DEFAULT_MARKDOWN_TRANSFORMERS, TAGS])
+provideLuRichTextMarkdownFormatter([...DEFAULT_MARKDOWN_TRANSFORMERS, TAGS]);
 ```
 
 ### Ajout d'outils personnalisés

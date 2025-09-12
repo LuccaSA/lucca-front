@@ -13,7 +13,7 @@ import { Meta, StoryObj, applicationConfig } from '@storybook/angular';
 	imports: [LuFormlyModule, FormlyModule, ReactiveFormsModule, JsonPipe],
 	template: `
 		<form [formGroup]="form" role="form" autocomplete="off" (ngSubmit)="submit()">
-			<formly-form class="form" [form]="form" [fields]="fields" [model]="model"></formly-form>
+			<formly-form class="form" [form]="form" [fields]="fields" [model]="model" />
 		</form>
 
 		<pre>{{ model | json }}</pre>

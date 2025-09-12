@@ -54,7 +54,7 @@ export const Basic: StoryObj<SwitchInputComponent & FormFieldComponent & { requi
 			)}>
 
 	<lu-switch-input ${generateInputs(inputArgs, argTypes)}
-	[(ngModel)]="example"/>
+	[(ngModel)]="example" />
 
 </lu-form-field>
 

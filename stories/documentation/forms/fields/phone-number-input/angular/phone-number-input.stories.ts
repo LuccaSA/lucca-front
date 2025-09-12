@@ -39,7 +39,7 @@ export const Basic: StoryObj<PhoneNumberInputComponent & FormFieldComponent & { 
 				},
 				argTypes,
 			)}>
-	<lu-phone-number-input label="${label}" [country]="country" [(ngModel)]="example" #result="ngModel" ${generateInputs(inputArgs, argTypes)}></lu-phone-number-input>
+	<lu-phone-number-input label="${label}" [country]="country" [(ngModel)]="example" #result="ngModel" ${generateInputs(inputArgs, argTypes)} />
 </lu-form-field>
 @if(result.invalid && result.errors.validPhoneNumber){
   <div>{{result.errors.validPhoneNumber}}</div>

@@ -121,7 +121,7 @@ export const Focus: StoryObj = {
 
 		<lu-dialog-content>
 			<lu-form-field label="Example input">
-				<lu-text-input [ngModel]="example" placeholder="This will be focused if autoFocus is set to first-input"></lu-text-input>
+				<lu-text-input [ngModel]="example" placeholder="This will be focused if autoFocus is set to first-input" />
 			</lu-form-field>
 		</lu-dialog-content>
 
@@ -167,7 +167,7 @@ export const WithForm: StoryObj = {
 
 			<lu-dialog-content>
 				<lu-form-field label="Example input">
-					<lu-text-input formControlName="example" placeholder="This will be focused if autoFocus is set to first-input"></lu-text-input>
+					<lu-text-input formControlName="example" placeholder="This will be focused if autoFocus is set to first-input" />
 				</lu-form-field>
 			</lu-dialog-content>
 

@@ -61,7 +61,7 @@ export const Basic: StoryObj<CheckboxInputComponent & FormFieldComponent & { req
 				argTypes,
 			)}>
 	<lu-checkbox-input ${generateInputs(inputArgs, argTypes)}
-	[(ngModel)]="example"/>
+	[(ngModel)]="example" />
 </lu-form-field>
 
 {{example}}`),

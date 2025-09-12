@@ -28,7 +28,7 @@
 			(keydown.arrowDown)="$event.preventDefault(); popoverRef.openPopover(true)"
 			(keydown.arrowUp)="$event.preventDefault(); popoverRef.openPopover(true)"
 		>
-			<ng-container *ngTemplateOutlet="pillTpl; context: { label: label(), isEmpty: inputIsEmpty() }"></ng-container>
+			<ng-container *ngTemplateOutlet="pillTpl; context: { label: label(), isEmpty: inputIsEmpty() }" />
 			@if (inputIsEmpty() && !disabled()) {
 				{{ placeholder() }}
 			}

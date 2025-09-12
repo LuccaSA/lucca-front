@@ -30,7 +30,7 @@ export default {
 		}),
 	],
 	render: (args, { argTypes }) => {
-		const clearableProperty = args['clearable'] ? "" : 'clearable="false" ';
+		const clearableProperty = args['clearable'] ? '' : 'clearable="false" ';
 		return {
 			props: {
 				simpleSelect: null,
@@ -53,7 +53,7 @@ export default {
 	<lu-date-input ${clearableProperty}[(ngModel)]="date" />
 </lu-filter-pill>
 <lu-filter-pill label="Période">
-	<lu-date-range-input ${clearableProperty}[(ngModel)]="dateRange"/>
+	<lu-date-range-input ${clearableProperty}[(ngModel)]="dateRange" />
 </lu-filter-pill>`,
 			styles: [
 				`
@@ -67,7 +67,7 @@ export default {
 	},
 } as Meta;
 
-export const Basic: StoryObj<FilterPillComponent & {clearable: boolean}> = {
+export const Basic: StoryObj<FilterPillComponent & { clearable: boolean }> = {
 	args: {
 		clearable: true,
 	},

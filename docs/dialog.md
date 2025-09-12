@@ -4,14 +4,14 @@ Il peut être utilisé de deux manières principales: via le service ou via les 
 
 ### Imports et providers
 
-Afin de pouvoir utiliser `LuDialogService` , vous devez appeler la fonction `configureLuDialog`  en tant qu’`EnvironmentProvider` , idéalement dans `bootstrapApplication`:
+Afin de pouvoir utiliser `LuDialogService` , vous devez appeler la fonction `configureLuDialog` en tant qu’`EnvironmentProvider` , idéalement dans `bootstrapApplication`:
 
 ```tsx
 import { configureLuDialog } from '@lucca-front/ng/dialog';
 
 bootstrapApplication(App, {
   providers: [configureLuDialog()],
-})
+});
 ```
 
 Puis dans le composant qui va ouvrir votre dialog box, appelez `provideLuDialog` dans les providers:
@@ -53,7 +53,7 @@ La fonction `injectDialogData` sert à récupérer les données et sert au servi
 ```tsx
 @Component({
   selector: 'my-dialog',
-  template: `...`
+  template: `...`,
 })
 export class MyDialogComponent {
   /**
@@ -61,16 +61,16 @@ export class MyDialogComponent {
    *
    *  Cependant, il doit obligatoirement être public.
    */
-  myData = injectDialogData<{ name: string, height?: number }>();
+  myData = injectDialogData<{ name: string; height?: number }>();
 
   /**
    * Ici on récupère la référence au dialog ouvert et on en profite pour déclarer que ce dialog retourne un `boolean`
    *
    * Tout comme pour `injectDialogData`, le nom du champ importe peu, du moment qu'il est public.
    */
-  ref = injectDialogRef<boolean>()
+  ref = injectDialogRef<boolean>();
 
-  close():void{
+  close(): void {
     /**
      *  Le type de données passé à la méthode close doit correspondre au type passe à `injectDialogRef`
      *
@@ -79,7 +79,6 @@ export class MyDialogComponent {
     this.ref.close(true);
   }
 }
-
 ```
 
 Une fois le composant créé, la méthode `LuDialogService.open(options: LuDialogConfig)` vérifiera à la compilation que les options sont conformes:
@@ -87,19 +86,18 @@ Une fois le composant créé, la méthode `LuDialogService.open(options: LuDialo
 ```tsx
 this.#dialog.open({
   content: MyDialogComponent,
-  data: { name: 'toto' } // Fonctionne, seul name est required
-});
-
-this.#dialog.open({
-    content: MyDialogComponent,
-    // Erreur: aucun data fourni alors que le composant en a besoin
+  data: { name: 'toto' }, // Fonctionne, seul name est required
 });
 
 this.#dialog.open({
   content: MyDialogComponent,
-  data: 25 // Erreur: data non conforme à l'interface demandée
+  // Erreur: aucun data fourni alors que le composant en a besoin
 });
 
+this.#dialog.open({
+  content: MyDialogComponent,
+  data: 25, // Erreur: data non conforme à l'interface demandée
+});
 ```
 
 #### Récupérer le résultat du dialog
@@ -115,18 +113,19 @@ Gardons `MyDialogComponent` comme exemple:
 ```tsx
 const dialogRef = this.#dialog.open({
   content: MyDialogComponent,
-  data: { name: 'toto' } // On passe des data pour que ça fonctionne
+  data: { name: 'toto' }, // On passe des data pour que ça fonctionne
 });
 
 // Cette logique ne sera pas déclenchée si l'utilisateur ferme la dialog via la touche Echap., la croix de fermeture ou un click sur le backdrop.
-dialogRef.result$.pipe(
-  switchMap((res: boolean) => {
-    return this.serviceMetier.modifierTruc(res);
-  })
-).subscribe(() => {
-  this.notification.success("Opération réussie");
-});
-
+dialogRef.result$
+  .pipe(
+    switchMap((res: boolean) => {
+      return this.serviceMetier.modifierTruc(res);
+    }),
+  )
+  .subscribe(() => {
+    this.notification.success('Opération réussie');
+  });
 ```
 
 ### Via le template
@@ -149,9 +148,7 @@ Pour créer et ouvrir une dialog depuis le template, vous pouvez utiliser les di
     <!--Tout comme pour les dialog component-based, vous avez les composants de structure à disposition-->
     <lu-dialog-header>Informations à propos de ...</lu-dialog-header>
 
-    <lu-dialog-content>
-      Contenu de la dialog
-    </lu-dialog-content>
+    <lu-dialog-content> Contenu de la dialog </lu-dialog-content>
 
     <lu-dialog-footer>
       <div class="footer-actions">
@@ -165,7 +162,6 @@ Pour créer et ouvrir une dialog depuis le template, vous pouvez utiliser les di
     </lu-dialog-footer>
   </lu-dialog>
 </ng-template>
-
 ```
 
 #### Envoyer et reçevoir des données en Template-driven
@@ -187,7 +183,7 @@ Dans le cas où vous souhaitez utiliser un formulaire au sein d’une [dialog bo
 
     <lu-dialog-content>
       <lu-form-field label="Example input">
-        <lu-text-input formControlName="example" placeholder="This will be focused if autoFocus is set to first-input"></lu-text-input>
+        <lu-text-input formControlName="example" placeholder="This will be focused if autoFocus is set to first-input" />
       </lu-form-field>
     </lu-dialog-content>
 

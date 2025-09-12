@@ -45,7 +45,7 @@ class TestDirective extends ALuCoreSelectApiDirective<TestEntity> {
 }
 
 @Component({
-	template: ` <lu-simple-select testApi></lu-simple-select> `,
+	template: ` <lu-simple-select testApi />`,
 	standalone: true,
 	imports: [TestDirective, LuSimpleSelectInputComponent],
 })

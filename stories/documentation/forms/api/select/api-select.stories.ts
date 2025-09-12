@@ -10,17 +10,17 @@ import { Meta, StoryFn, applicationConfig } from '@storybook/angular';
 	imports: [LuApiSelectInputComponent],
 	template: `
 		<label class="textfield">
-			<lu-api-select data-testid="lu-select" class="textfield-input" [api]="apiV3"></lu-api-select>
+			<lu-api-select data-testid="lu-select" class="textfield-input" [api]="apiV3" />
 			<span class="textfield-label">Api V3 Select</span>
 		</label>
 
 		<label class="textfield pr-u-marginBlockStart300">
-			<lu-api-select class="textfield-input" standard="v4" [api]="apiV4" sort="job.name,level.position"> </lu-api-select>
+			<lu-api-select class="textfield-input" standard="v4" [api]="apiV4" sort="job.name,level.position" />
 			<span class="textfield-label">Api V4 Select</span>
 		</label>
 
 		<label class="textfield pr-u-marginBlockStart300">
-			<lu-api-select class="textfield-input" [disabled]="true" standard="v4" [api]="apiV4" sort="job.name,level.position"> </lu-api-select>
+			<lu-api-select class="textfield-input" [disabled]="true" standard="v4" [api]="apiV4" sort="job.name,level.position" />
 			<span class="textfield-label">Api V4 Select</span>
 		</label>
 	`,
@@ -49,7 +49,7 @@ import { LuApiSelectInputComponent } from '@lucca-front/ng/api';
 	imports: [LuApiSelectInputComponent],
 	template: \`
 		<label class="textfield">
-			<lu-api-select class="textfield-input" [api]="apiV3"></lu-api-select>
+			<lu-api-select class="textfield-input" [api]="apiV3" />
 			<span class="textfield-label">Api V3 Select</span>
 		</label>
 

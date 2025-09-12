@@ -29,6 +29,7 @@ import { startWith } from 'rxjs/operators';
 import { HiddenArgType } from 'stories/helpers/common-arg-types';
 import { createTestStory, getStoryGenerator } from 'stories/helpers/stories';
 import { expect, screen, userEvent, within } from 'storybook/test';
+import { TreeSelectDirective } from '../../../../packages/ng/tree-select/tree-select.directive';
 import { waitForAngular } from '../../../helpers/test';
 import { allLegumes, colorNameByColor, coreSelectStory, FilterLegumesPipe, ILegume, LuCoreSelectInputStoryComponent, SortLegumesPipe } from './select.utils';
 
@@ -280,7 +281,7 @@ export const WithMultiDisplayer = generateStory({
 	(clueChange)="clue = $event"
 >
 	<ng-container *luMultiDisplayer="let values; select: selectRef">
-		<lu-multi-select-counter-displayer [selected]="values" label="légumes sélectionnés"></lu-multi-select-counter-displayer>
+		<lu-multi-select-counter-displayer [selected]="values" label="légumes sélectionnés" />
 	</ng-container>
 </lu-multi-select>`,
 	neededImports: {

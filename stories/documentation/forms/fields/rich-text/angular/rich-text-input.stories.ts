@@ -133,7 +133,7 @@ export const WithTagPlugin: StoryObj<RichTextInputComponent & { value: string; d
 																			key: 'tag3',
 																			description: 'Tag 3',
 																		},
-																	]"/>
+																	]" />
 		</lu-rich-text-input>
 </lu-form-field>
 <pr-story-model-display>{{value}}</pr-story-model-display>`),
@@ -176,7 +176,7 @@ export const WithTagPluginMarkdown: StoryObj<RichTextInputComponent & { value: s
 																		key: 'tag3',
 																		description: 'Tag 3',
 																	},
-																]"/>
+																]" />
 	</lu-rich-text-input>
 </lu-form-field>
 <pr-story-model-display>{{value}}</pr-story-model-display>`),

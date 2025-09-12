@@ -17,7 +17,7 @@
 				<span class="tag formLabel-tag">{{ tag() }}</span>
 			}
 		</legend>
-		<ng-container *ngTemplateOutlet="projectionTpl"></ng-container>
+		<ng-container *ngTemplateOutlet="projectionTpl" />
 		@if (inlineMessage() || (invalidStatus() ? errorInlineMessage() : false)) {
 			<lu-inline-message
 				id="{{ id() }}-message"
@@ -53,7 +53,7 @@
 			</span>
 		}
 	</label>
-	<ng-container *ngTemplateOutlet="projectionTpl"></ng-container>
+	<ng-container *ngTemplateOutlet="projectionTpl" />
 	@if (inlineMessage() || (invalidStatus() ? errorInlineMessage() : false)) {
 		<lu-inline-message
 			id="{{ id() }}-message"

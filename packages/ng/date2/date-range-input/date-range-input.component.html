@@ -1,7 +1,7 @@
 <fieldset class="dateRangeField-fieldset">
 	<legend>
 		<span class="pr-u-mask">
-			<ng-container *luPortal="label"></ng-container>
+			<ng-container *luPortal="label" />
 		</span>
 	</legend>
 	<div class="dateRangeField-fieldset-textField textField" #popoverAnchor>
@@ -156,7 +156,7 @@
 </ng-template>
 
 @if (isFilterPill) {
-	<ng-container *ngTemplateOutlet="calendar"></ng-container>
+	<ng-container *ngTemplateOutlet="calendar" />
 }
 
 <ng-container *luFilterPillDisplayer="let empty = isEmpty">
