@@ -35,7 +35,9 @@
 @mixin loadingXS {
 	@include loading.spinner(var(--pr-t-font-body-XS-lineHeight));
 
-	--commons-loading-borderWidth: 2px;
+	& {
+		--commons-loading-borderWidth: 2px;
+	}
 }
 
 @mixin loadingOutlined {
@@ -108,9 +110,9 @@
 
 
 @mixin error {
-	@include keyframe.shake;
-
 	animation-name: shake;
 	animation-iteration-count: 1;
 	animation-duration: var(--commons-animations-durations-standard);
+
+	@include keyframe.shake;
 }
