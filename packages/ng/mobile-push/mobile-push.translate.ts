@@ -13,6 +13,7 @@ export interface MobilePushTranslate {
 	altGooglePlay: string;
 	srcAppStore: string;
 	srcGooglePlay: string;
+	newTab: string;
 }
 
 export const luMobilePushTranslations: LuTranslation<MobilePushTranslate> = Translations;
