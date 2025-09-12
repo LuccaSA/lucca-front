@@ -18,6 +18,7 @@ import {
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { CheckboxInputComponent, NumberInputComponent, TextInputComponent } from '@lucca-front/ng/forms';
 import { applicationConfig, Meta, StoryFn } from '@storybook/angular';
+import { StoryModelDisplayComponent } from 'stories/helpers/story-model-display.component';
 
 @Injectable()
 class DataProvider {
@@ -60,6 +61,7 @@ class DismissedComponent {}
 		FormFieldComponent,
 		CheckboxInputComponent,
 		FormsModule,
+		StoryModelDisplayComponent,
 	],
 	template: `
 		<lu-dialog>
@@ -111,25 +113,15 @@ class TestDialogComponent {
 	selector: 'dialog-routing-stories',
 	standalone: true,
 	template: `
-		<div class="pr-u-marginBlockEnd200">
-			<button luButton type="button" routerLink="/dialog">Navigate to /dialog</button>
-		</div>
+		<button luButton type="button" routerLink="/dialog">Navigate to /dialog</button>
 
-		<div class="card">
-			<div class="card-content">
-				<h2 class="card-title">Dialog data out</h2>
-				<p>{{ service.dialogOut() | json }}</p>
-			</div>
-		</div>
+		<p class="pr-u-marginBlockStart200">Dialog data out</p>
+		<pr-story-model-display class="pr-u-marginBlockStart0">{{ service.dialogOut() | json }}</pr-story-model-display>
 
-		<div class="card">
-			<div class="card-content">
-				<h2 class="card-title">Outlet</h2>
-				<router-outlet></router-outlet>
-			</div>
-		</div>
+		<p class="pr-u-marginBlockStart200">Outlet</p>
+		<router-outlet></router-outlet>
 	`,
-	imports: [RouterOutlet, RouterLink, JsonPipe, ButtonComponent],
+	imports: [RouterOutlet, RouterLink, JsonPipe, ButtonComponent, StoryModelDisplayComponent],
 })
 class DialogRoutingStory {
 	service = inject(DataProvider);
@@ -234,23 +226,7 @@ class DismissedComponent {}
 	selector: 'dialog-routing-stories',
 	standalone: true,
 	template: \`
-	<div class="pr-u-marginBlockEnd200">
-		<button luButton type="button" routerLink="/dialog">Navigate to /dialog</button>
-	</div>
-
-	<div class="card">
-		<div class="card-content">
-			<h2 class="card-title">Dialog data out</h2>
-			<p>{{ service.dialogOut() | json }}</p>
-		</div>
-	</div>
-
-	<div class="card">
-		<div class="card-content">
-			<h2 class="card-title">Outlet</h2>
-			<router-outlet></router-outlet>
-		</div>
-	</div>
+	<button luButton type="button" routerLink="/dialog">Navigate to /dialog</button>
 \`,
 	imports: [RouterOutlet, RouterLink, JsonPipe, ButtonComponent],
 })
