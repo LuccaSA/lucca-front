@@ -148,7 +148,7 @@ Pour créer et ouvrir une dialog depuis le template, vous pouvez utiliser les di
     <!--Tout comme pour les dialog component-based, vous avez les composants de structure à disposition-->
     <lu-dialog-header>Informations à propos de ...</lu-dialog-header>
 
-    <lu-dialog-content> Contenu de la dialog </lu-dialog-content>
+    <lu-dialog-content>Contenu de la dialog</lu-dialog-content>
 
     <lu-dialog-footer>
       <div class="footer-actions">
