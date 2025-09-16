@@ -1,10 +1,9 @@
 import { ComponentType } from '@angular/cdk/overlay';
-import { InjectionToken } from '@angular/core';
-import { Route } from '@angular/router';
+import { CanDeactivateFn, defaultUrlMatcher, Route } from '@angular/router';
 import { firstValueFrom, from, isObservable, Observable, of } from 'rxjs';
 import { LuDialogConfig, LuDialogData } from '../model';
-import { DialogRoutingComponent } from './dialog-routing.component';
-import { DialogRouteConfig } from './dialog-routing.models';
+import { DialogRoutingContainerComponent } from './dialog-routing.component';
+import { DialogRouteConfig, DialogRouteResolveConfig, DialogRouteStaticData } from './dialog-routing.models';
 
 export type Deferrable<T> = Promise<T> | Observable<T> | T;
 
@@ -16,19 +15,48 @@ export function deferrableToObservable<T>(deferrable: Promise<T> | Observable<T>
 	return isObservable(deferrable) ? deferrable : deferrable instanceof Promise ? from(deferrable) : of(deferrable);
 }
 
-export const DIALOG_ROUTE_CONFIG = new InjectionToken<DialogRouteConfig<unknown>>('DIALOG_ROUTE_CONFIG');
+export function createDialogRoute<C>(dialogRouteConfig: DialogRouteConfig<C>): Route {
+	const data: DialogRouteStaticData<C> = { dialogRouteConfig };
+	const resolve: DialogRouteResolveConfig<C> = {
+		dialogConfig: () => dialogRouteConfig.dialogConfigFactory(),
+		dialogData: () => dialogRouteConfig.dataFactory?.(),
+	};
 
-export function createDialogRoute<C>(config: DialogRouteConfig<C>): Route {
-	// Remove `canDeactivate` from the route config and handle it in the dialog component
-	const { canDeactivate, ...rest } = config;
 	return {
-		...rest,
-		component: DialogRoutingComponent,
-		providers: [{ provide: DIALOG_ROUTE_CONFIG, useValue: config }, ...(config.providers ?? [])],
+		// Check that child route matches without consuming any URL segments
+		matcher: (segments, group, route) => {
+			const result = defaultUrlMatcher(segments, group, { path: dialogRouteConfig.path });
+			return result
+				? {
+						consumed: [],
+						posParams: result.posParams,
+					}
+				: null;
+		},
+		component: DialogRoutingContainerComponent,
+		resolve,
+		data,
+		children: [
+			{
+				...dialogRouteConfig,
+				canDeactivate: dialogRouteConfig.canDeactivate?.map((guard) => (dialogComponentInstance, route, state, nextState) => {
+					// If dialogComponentInstance is null, it means the dialog is already closed. We allow deactivation in this case.
+					if (!dialogComponentInstance) {
+						return true;
+					}
+
+					// Do not support DeprecatedGuard here
+					return (guard as CanDeactivateFn<C>)(dialogComponentInstance, route, state, nextState);
+				}),
+			},
+		],
 	};
 }
 
-export type DialogFactoryResultOptions<C> = { path: string; dialogRouteConfig?: Partial<Omit<DialogRouteConfig<C>, 'path'>> } & (LuDialogData<C> extends never
+export type DialogFactoryResultOptions<C> = {
+	path: string;
+	dialogRouteConfig?: Partial<Omit<DialogRouteConfig<C>, 'path' | 'component' | 'dataFactory'>>;
+} & (LuDialogData<C> extends never
 	? { dataFactory?: never }
 	: {
 			dataFactory: () => Deferrable<LuDialogData<C>>;
@@ -45,11 +73,9 @@ export function dialogRouteFactory<C>(component: ComponentType<C>, config?: Dial
 	return ({ path, dataFactory, dialogRouteConfig }) =>
 		createDialogRoute({
 			path,
-			dialogConfigFactory: async () => ({
-				...config?.dialogConfig,
-				content: component,
-				data: dataFactory ? await deferrableToPromise(dataFactory()) : undefined,
-			}),
+			component,
+			dataFactory,
+			dialogConfigFactory: () => config?.dialogConfig ?? {},
 			...mergeRouteConfig(config?.dialogRouteConfig, dialogRouteConfig),
 		});
 }
@@ -78,6 +104,11 @@ function mergeRouteConfig(config1: Partial<Route>, config2: Partial<Route>): Par
 	// If both configs have the same data key, we merge the objects
 	if (config1.data && config2.data) {
 		result.data = { ...config1.data, ...config2.data };
+	}
+
+	// If both configs have the same resolve key, we merge the objects
+	if (config1.resolve && config2.resolve) {
+		result.resolve = { ...config1.resolve, ...config2.resolve };
 	}
 
 	return result;

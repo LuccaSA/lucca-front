@@ -1,9 +1,12 @@
+import { ComponentType } from '@angular/cdk/overlay';
 import { CanDeactivateFn, DeprecatedGuard, Route } from '@angular/router';
-import { LuDialogConfig, LuDialogResult } from '../model';
+import { LuDialogConfig, LuDialogData, LuDialogResult } from '../model';
 import { Deferrable } from './dialog-routing.utils';
 
 export type DialogRouteConfig<C> = {
-	dialogConfigFactory: () => Deferrable<LuDialogConfig<C>>;
+	component: ComponentType<C>;
+	dialogConfigFactory: () => Deferrable<DialogRouteDialogConfig<C>>;
+	dataFactory: LuDialogData<C> extends never ? undefined : () => Deferrable<LuDialogData<C>>;
 	/**
 	 * When the dialog is closed, this callback is called with the result of the dialog.
 	 * This callback is called within injection context, so you can inject services in it.
@@ -20,3 +23,19 @@ export type DialogRouteConfig<C> = {
 	 */
 	canDeactivate?: (CanDeactivateFn<C> | DeprecatedGuard)[];
 } & Omit<Route, 'component' | 'canDeactivate'>;
+
+export type DialogRouteDialogConfig<C> = Omit<LuDialogConfig<C>, 'data' | 'content'>;
+
+export interface DialogRouteResolvedData<C> {
+	dialogConfig: DialogRouteDialogConfig<C>;
+	dialogData: LuDialogData<C>;
+}
+
+export interface DialogRouteStaticData<C> {
+	dialogRouteConfig: DialogRouteConfig<C>;
+}
+
+export type DialogRouteData<C> = DialogRouteResolvedData<C> & DialogRouteStaticData<C>;
+export type DialogRouteResolveConfig<C> = {
+	[key in keyof DialogRouteResolvedData<C>]: () => Deferrable<DialogRouteResolvedData<C>[key]>;
+};
