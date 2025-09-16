@@ -66,7 +66,7 @@ export default [
 		objectPattern:
 			/(\.table-head-row-cell|\.mod-sortable|\.sortedAscending|\.sortedDescending)[\S]*(\.table-head-row-cell|\.mod-sortable|\.sortedAscending|\.sortedDescending)/,
 		versionDeprecated: '18.2.0',
-		versionDeprecated: '20.1.0',
+		versionDeleted: '20.1.0',
 	},
 	{
 		objectPattern: /\.u-text(Left|Center|Right)/,
