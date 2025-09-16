@@ -5,7 +5,7 @@ interface GridsAlignmentsStory {
 }
 
 export default {
-	title: 'Documentation/Structure/Grids/Alignments',
+	title: 'Documentation/Structure/Grids/HTML & CSS/Alignments',
 	argTypes: {},
 } as Meta;
 
