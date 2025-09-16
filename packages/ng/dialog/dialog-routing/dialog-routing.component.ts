@@ -1,45 +1,34 @@
-import { DIALOG_DATA } from '@angular/cdk/dialog';
-import { NgComponentOutlet, NgTemplateOutlet } from '@angular/common';
-import { Component, computed, DestroyRef, inject, Injector, OnInit, runInInjectionContext, signal, TemplateRef, viewChild } from '@angular/core';
-import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
-import { ActivatedRoute, CanDeactivateFn, GuardResult, Router } from '@angular/router';
-import { combineLatest, concat, from, map, Observable } from 'rxjs';
+import { ChangeDetectionStrategy, Component, DestroyRef, inject, Injector, OnDestroy, runInInjectionContext, signal, TemplateRef, viewChild } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { ActivatedRoute, CanDeactivateFn, GuardResult, Router, RouterOutlet } from '@angular/router';
+import { combineLatest, concat, map, Observable, of } from 'rxjs';
 import { provideLuDialog } from '../dialog.providers';
 import { LuDialogService } from '../dialog.service';
-import { LuDialogConfig, LuDialogRef } from '../model';
-import { DialogRouteConfig } from './dialog-routing.models';
-import { deferrableToObservable, deferrableToPromise, DIALOG_ROUTE_CONFIG } from './dialog-routing.utils';
-import { OutletComponentInstanceDirective } from './outlet-component-instance.directive';
-import { ComponentType } from '@angular/cdk/overlay';
+import { LuDialogRef } from '../model';
+import { DialogRouteData, DialogRouteDialogConfig } from './dialog-routing.models';
+import { deferrableToObservable } from './dialog-routing.utils';
 
-export const defaultOnClosedFn = <C>(router = inject(Router), route = inject(ActivatedRoute), config = inject<DialogRouteConfig<C>>(DIALOG_ROUTE_CONFIG)): void =>
-	void router.navigate(
-		[
-			config.path
-				.split('/')
-				.map(() => '..')
-				.join('/'),
-		],
-		{
-			relativeTo: route,
-			queryParamsHandling: 'preserve',
-		},
-	);
+export const defaultOnClosedFn = <C>(router = inject(Router), route = inject(ActivatedRoute)): void => {
+	const routeData = route.snapshot.data as DialogRouteData<C>;
+	const next = routeData.dialogRouteConfig.path
+		.split('/')
+		.map(() => '..')
+		.join('/');
+
+	return void router.navigate([next], {
+		relativeTo: route.children[0],
+		queryParamsHandling: 'preserve',
+	});
+};
 
 @Component({
-	selector: 'lu-dialog-routing',
+	selector: 'lu-dialog-routing-container',
+	imports: [RouterOutlet],
 	template: `
 		<ng-template>
-			@if (dialogComponentContent(); as componentType) {
-				<ng-container luOutletComponentInstance [ngComponentOutlet]="componentType" [ngComponentOutletInjector]="customInjector" (instanceCreated)="componentInstance.set($event)" />
-			}
-			@if (dialogTemplateContent(); as templateRef) {
-				<ng-container [ngTemplateOutlet]="templateRef" [ngTemplateOutletInjector]="customInjector" />
-			}
+			<router-outlet (activate)="dialogComponentInstance.set($event)" (deactivate)="dialogComponentInstance.set(null)" />
 		</ng-template>
 	`,
-	standalone: true,
-	imports: [NgComponentOutlet, NgTemplateOutlet, OutletComponentInstanceDirective],
 	styles: [
 		`
 			:host {
@@ -47,62 +36,40 @@ export const defaultOnClosedFn = <C>(router = inject(Router), route = inject(Act
 			}
 		`,
 	],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 	providers: [provideLuDialog()],
 })
-export class DialogRoutingComponent<C> implements OnInit {
+export class DialogRoutingContainerComponent<C> implements OnDestroy {
 	readonly #route = inject(ActivatedRoute);
 	readonly #router = inject(Router);
 	readonly #destroyRef = inject(DestroyRef);
 	readonly #dialog = inject(LuDialogService);
 	readonly injector = inject(Injector);
-	readonly #config = inject<DialogRouteConfig<C>>(DIALOG_ROUTE_CONFIG);
-	readonly #dialogConfig = deferrableToPromise(this.#config.dialogConfigFactory());
-
-	readonly dialogConfig = toSignal(from(this.#dialogConfig), {
-		initialValue: null,
-	});
-	readonly dialogTemplateContent = computed(() => {
-		const config = this.dialogConfig();
-		return config && config.content instanceof TemplateRef ? config.content : null;
-	});
-	readonly dialogComponentContent = computed<ComponentType<C>>(() => {
-		const config = this.dialogConfig();
-		return config && !(config.content instanceof TemplateRef) ? config.content : null;
-	});
-
+	readonly #config = this.#routeData.dialogRouteConfig;
+	readonly #dialogConfig = this.#routeData.dialogConfig;
+	protected readonly dialogComponentInstance = signal<C | null>(null);
 	protected readonly dialogTemplate = viewChild.required(TemplateRef);
-
-	readonly customInjector = Injector.create({
-		parent: this.injector,
-		providers: [
-			{
-				provide: DIALOG_DATA,
-				useFactory: () => {
-					const config = this.dialogConfig();
-					return config && 'data' in config ? config.data : null;
-				},
-			},
-			{
-				provide: LuDialogRef,
-				useFactory: () => this.#ref,
-			},
-		],
-	});
-
-	readonly componentInstance = signal<C | null>(null);
 
 	#ref?: LuDialogRef<C>;
 
-	ngOnInit(): void {
-		void this.#openDialog();
+	get #routeData(): DialogRouteData<C> {
+		return this.#route.snapshot.data as DialogRouteData<C>;
 	}
 
-	async #openDialog(): Promise<void> {
-		const dialogConfig = await this.#dialogConfig;
+	ngOnInit(): void {
+		this.openDialog();
+	}
+
+	ngOnDestroy(): void {
+		this.#ref?.dismiss();
+	}
+
+	openDialog(): void {
 		this.#ref = this.#dialog.open<C>({
-			...dialogConfig,
+			...this.#dialogConfig,
 			content: this.dialogTemplate(),
-			canClose: this.#getCanCloseFn(dialogConfig),
+			data: this.#routeData.dialogData,
+			canClose: this.#getCanCloseFn(this.#dialogConfig),
 		});
 
 		this.#ref.result$.pipe(takeUntilDestroyed(this.#destroyRef)).subscribe((result) =>
@@ -120,7 +87,7 @@ export class DialogRoutingComponent<C> implements OnInit {
 			.subscribe(() => runInInjectionContext(this.injector, () => (this.#config.onDismissed ? this.#config.onDismissed() : defaultOnClosedFn())));
 	}
 
-	#getCanCloseFn(config: LuDialogConfig<C>): ((c: C) => Observable<boolean>) | undefined {
+	#getCanCloseFn(config: DialogRouteDialogConfig<C>): ((c: C) => Observable<boolean>) | undefined {
 		const canCloseFns: ((c: C) => Observable<boolean>)[] = [];
 
 		if (config.canClose) {
@@ -151,8 +118,14 @@ export class DialogRoutingComponent<C> implements OnInit {
 	}
 
 	#callCanDeactivateFn(canDeactivateFn: CanDeactivateFn<C>): Observable<GuardResult> {
-		const args = [this.componentInstance(), this.#route.snapshot, this.#router.routerState.snapshot, this.#router.routerState.snapshot] as const;
-		const maybeAsyncResult = runInInjectionContext(this.injector, () => canDeactivateFn(...args));
+		const instance = this.dialogComponentInstance();
+
+		if (!instance) {
+			// If instance is null, it means the dialog is already closed. We allow deactivation in this case.
+			return of(true);
+		}
+
+		const maybeAsyncResult = runInInjectionContext(this.injector, () => canDeactivateFn(instance, this.#route.snapshot, this.#router.routerState.snapshot, this.#router.routerState.snapshot));
 		return deferrableToObservable(maybeAsyncResult);
 	}
 }
