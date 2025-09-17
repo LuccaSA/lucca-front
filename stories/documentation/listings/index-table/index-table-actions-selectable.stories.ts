@@ -35,8 +35,7 @@ function getTemplate(args: IndexTableActionsSelectableStory): string {
 			<td class="indexTable-body-row-cell">Content</td>
 		</tr>
 	</tbody>
-</table>
-`;
+</table>`;
 }
 
 const Template: StoryFn<IndexTableActionsSelectableStory> = (args) => ({
