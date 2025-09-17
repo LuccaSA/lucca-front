@@ -7,7 +7,6 @@ interface FieldsetBasicStory {
 	helper: string;
 	heading: string;
 	size: string;
-	content: string;
 }
 
 export default {
@@ -47,11 +46,6 @@ export default {
 				type: 'text',
 			},
 		},
-		content: {
-			control: {
-				type: 'text',
-			},
-		},
 	},
 } as Meta;
 
@@ -60,7 +54,8 @@ function getTemplate(args: FieldsetBasicStory): string {
 	const s = args.size === 'S' ? 'mod-S' : '';
 	const helper = args.helper ? '<span class="fieldset-title-content-text-helper">{{ helper }}</span>' : '';
 	const heading = args.heading;
-	const content = args.content;
+	const content =
+		'<div class="grid mod-form"><div class="grid-column" style="--grid-colspanAtMediaMinXXS: 2"><div class="form-field"><label class="formLabel" id="IDlabel1" for="ID1">Label</label><div class="textField"><div class="textField-input"><input type="text" id="ID1" class="textField-input-value" aria-labelledby="IDlabel1" /></div></div></div></div><div class="grid-column" style="--grid-colspanAtMediaMinXXS: 2"><div class="form-field"><label class="formLabel" id="IDlabel2" for="ID2">Label</label><div class="textField"><div class="textField-input"><input type="text" id="ID2" class="textField-input-value" aria-labelledby="IDlabel2" /></div></div></div></div></div>';
 
 	if (args.expandable === true)
 		return `<fieldset class="fieldset mod-expandable ${s}" aria-labelledby="fieldsetTitleContent1">
@@ -100,7 +95,6 @@ const Template: StoryFn<FieldsetBasicStory> = (args) => ({
 
 export const Basic = Template.bind({});
 Basic.args = {
-	content: '<div class="grid mod-form" style="background-color: var(--palettes-neutral-50)"><div class="grid-column" style="--grid-colspan: 4">Lorem ipsum dolor sit amet.</div></div>',
 	heading: 'Title',
 	helper: '',
 	size: null,
