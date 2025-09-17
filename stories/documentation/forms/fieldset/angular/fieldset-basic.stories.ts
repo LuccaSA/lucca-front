@@ -24,7 +24,7 @@ export default {
 			if: { arg: 'expandable', truthy: true },
 		},
 		size: {
-			options: ['S', null],
+			options: ['', 'S'],
 			control: {
 				type: 'select',
 			},
@@ -35,11 +35,13 @@ export default {
 			imports: [FieldsetComponent],
 		}),
 	],
-	render: ({ expanded, ...args }, { argTypes }) => {
-		const expandedParam = expanded ? `[expanded]="true"` : ``;
+	render: ({ expanded, size, helper, ...args }, { argTypes }) => {
+		const expandedParam = expanded ? ` [expanded]="true"` : ``;
+		const helperParam = helper ? ` helper="${helper}"` : ``;
+		const sizeParam = size ? ` size="S"` : ``;
 		return {
 			template: cleanupTemplate(`
-<lu-fieldset ${expandedParam} ${generateInputs(args, argTypes)}>
+<lu-fieldset${helperParam}${expandedParam}${sizeParam}${generateInputs(args, argTypes)}>
 	<div class="grid mod-form">
 		<div class="grid-column" style="--grid-colspanAtMediaMinXXS: 2">
 			<div class="form-field"><label class="formLabel" id="IDlabel1" for="ID1">Label</label><div class="textField"><div class="textField-input"><input type="text" id="ID1" class="textField-input-value" aria-labelledby="IDlabel1" /></div></div></div>
