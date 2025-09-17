@@ -1,5 +1,8 @@
-import { Component, forwardRef, input, numberAttribute, ViewEncapsulation } from '@angular/core';
+import { NgTemplateOutlet } from '@angular/common';
+import { booleanAttribute, Component, computed, forwardRef, input, numberAttribute, ViewEncapsulation } from '@angular/core';
 import { LU_GRID_INSTANCE } from './grid.token';
+
+const spacingRegexp = /.*(\d)$/g;
 
 @Component({
 	selector: 'lu-grid',
@@ -7,40 +10,62 @@ import { LU_GRID_INSTANCE } from './grid.token';
 	templateUrl: './grid.component.html',
 	styleUrls: ['./grid.component.scss'],
 	encapsulation: ViewEncapsulation.None,
+	imports: [NgTemplateOutlet],
 	providers: [
 		{
 			provide: LU_GRID_INSTANCE,
 			useExisting: forwardRef(() => GridComponent),
 		},
 	],
-	host: {
-		class: 'grid',
-		'[class.mod-auto]': 'mode() === `auto`',
-		'[class.mod-form]': 'mode() === `form`',
-		'[style.--grid-columns]': 'mode() === null ? columns() : null',
-		'[style.--grid-gap]': 'gap()',
-		'[style.--grid-column-gap]': 'columnGap()',
-		'[style.--grid-row-gap]': 'rowGap()',
-	},
 })
 export class GridComponent {
+	container = input(false, { transform: booleanAttribute });
 	columns = input(null, { transform: numberAttribute });
 
-	mode = input<'form' | 'auto' | null>(null);
+	mode = input<
+		| 'form'
+		| 'auto'
+		| 'autoAtMediaMinXXXS'
+		| 'autoAtMediaMinXXS'
+		| 'autoAtMediaMinXS'
+		| 'autoAtMediaMinS'
+		| 'autoAtMediaMinM'
+		| 'autoAtMediaMinL'
+		| 'autoAtMediaMinXL'
+		| 'autoAtMediaMinXXL'
+		| 'autoAtMediaMinXXXL'
+		| 'autoAtContainerMinXXXS'
+		| 'autoAtContainerMinXXS'
+		| 'autoAtContainerMinXS'
+		| 'autoAtContainerMinS'
+		| 'autoAtContainerMinM'
+		| 'autoAtContainerMinL'
+		| 'autoAtContainerMinXL'
+		| 'autoAtContainerMinXXL'
+		| 'autoAtContainerMinXXXL'
+		| null
+	>(null);
 
-	gapTransform = (gap: Gap | null): string | null => {
+	#gapTransform = (gap: Gap | null): string | null => {
 		if (!gap) {
 			return null;
 		}
-		if (gap.startsWith('spacings-')) {
-			return `var(--pr-t-${gap})`;
+		if (spacingRegexp.test(gap)) {
+			return `var(--pr-t-spacings-${gap})`;
 		}
 		return gap;
 	};
 
-	gap = input(null, { transform: this.gapTransform });
-	columnGap = input(null, { transform: this.gapTransform });
-	rowGap = input(null, { transform: this.gapTransform });
+	gap = input<Gap | null>(null);
+	columnGap = input<Gap | null>(null);
+	rowGap = input<Gap | null>(null);
+
+	protected gridStyle = computed(() => ({
+		'--grid-columns': this.mode() === null ? this.columns() : null,
+		'--grid-gap': this.#gapTransform(this.gap()),
+		'--grid-column-gap': this.#gapTransform(this.columnGap()),
+		'--grid-row-gap': this.#gapTransform(this.rowGap()),
+	}));
 }
 
 export type Gap =

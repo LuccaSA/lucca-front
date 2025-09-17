@@ -1,1 +1,13 @@
-<ng-content />
+@if (container()) {
+	<div class="grid-containerWrapper">
+		<ng-container *ngTemplateOutlet="content" />
+	</div>
+} @else {
+	<ng-container *ngTemplateOutlet="content" />
+}
+
+<ng-template #content>
+	<div class="grid" [class]="mode() !== null && `mod-${mode()}`" [style]="gridStyle()">
+		<ng-content />
+	</div>
+</ng-template>
