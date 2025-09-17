@@ -91,7 +91,7 @@
 				</ng-template>
 				@if (ctx.options.length === 0 && (loading$ | async) === false) {
 					<div class="lu-picker-content-option-emptyState">
-						{{ intl.emptyResults }}
+						{{ emptyMessage() ? emptyMessage() : intl.emptyResults }}
 					</div>
 				}
 			</div>

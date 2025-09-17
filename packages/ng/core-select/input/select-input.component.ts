@@ -29,8 +29,8 @@ import { LuOptionGrouping, LuSimpleSelectDefaultOptionComponent } from '../optio
 import { LuSelectPanelRef } from '../panel';
 import { CoreSelectAddOptionStrategy, LuOptionComparer, LuOptionContext, SELECT_LABEL, SELECT_LABEL_ID } from '../select.model';
 import { LU_CORE_SELECT_TRANSLATIONS } from '../select.translate';
-import { TreeGenerator } from './tree-generator';
 import { TreeNode } from './model';
+import { TreeGenerator } from './tree-generator';
 
 export const coreSelectDefaultOptionComparer: LuOptionComparer<unknown> = (option1, option2) => JSON.stringify(option1) === JSON.stringify(option2);
 export const coreSelectDefaultOptionKey: (option: unknown) => unknown = (option) => option;
@@ -144,6 +144,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 
 	noClueIcon = input(false, { transform: booleanAttribute });
 	inputTabindex = input<number>(0);
+	emptyMessage = input<string | null>();
 
 	@HostBinding('class.mod-noClueIcon')
 	protected get isNoClueIconClass(): boolean {
