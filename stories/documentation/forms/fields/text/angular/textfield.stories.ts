@@ -5,12 +5,13 @@ import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { TextInputComponent } from '@lucca-front/ng/forms';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { cleanupTemplate, generateInputs } from 'stories/helpers/stories';
+import { StoryModelDisplayComponent } from 'stories/helpers/story-model-display.component';
 
 export default {
 	title: 'Documentation/Forms/Fields/TextField/Angular',
 	decorators: [
 		moduleMetadata({
-			imports: [TextInputComponent, FormFieldComponent, FormsModule, ReactiveFormsModule, BrowserAnimationsModule, AsyncPipe],
+			imports: [TextInputComponent, FormFieldComponent, FormsModule, ReactiveFormsModule, BrowserAnimationsModule, AsyncPipe, StoryModelDisplayComponent],
 		}),
 	],
 	argTypes: {
@@ -84,7 +85,7 @@ export const Basic: StoryObj<TextInputComponent & { disabled: boolean; required:
 		[(ngModel)]="example">
 	</lu-text-input>
 </lu-form-field>
-{{example}}`),
+<pr-story-model-display>{{ example }}</pr-story-model-display>`),
 			moduleMetadata: {
 				imports: [TextInputComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule],
 			},
@@ -136,7 +137,7 @@ export const PasswordVisiblity: StoryObj<
 		[(ngModel)]="example">
 	</lu-text-input>
 </lu-form-field>
-{{example}}`,
+<pr-story-model-display>{{ example }}</pr-story-model-display>`,
 			moduleMetadata: {
 				imports: [TextInputComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule],
 			},
@@ -190,7 +191,7 @@ export const WithPrefixAndSuffix: StoryObj<
 		[(ngModel)]="example">
 	</lu-text-input>
 </lu-form-field>
-{{example}}`),
+<pr-story-model-display>{{ example }}</pr-story-model-display>`),
 			moduleMetadata: {
 				imports: [TextInputComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule],
 			},
