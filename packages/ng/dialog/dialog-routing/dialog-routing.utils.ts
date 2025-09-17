@@ -1,9 +1,9 @@
 import { ComponentType } from '@angular/cdk/overlay';
 import { CanDeactivateFn, defaultUrlMatcher, ResolveFn, Route } from '@angular/router';
 import { firstValueFrom, from, isObservable, Observable, of } from 'rxjs';
-import { LuDialogConfig, LuDialogData } from '../model';
+import { LuDialogData } from '../model';
 import { DialogRoutingContainerComponent } from './dialog-routing.component';
-import { DialogRouteConfig, DialogRouteResolveConfig, DialogRouteStaticData } from './dialog-routing.models';
+import { DialogRouteConfig, DialogRouteDialogConfig, DialogRouteResolveConfig, DialogRouteStaticData } from './dialog-routing.models';
 
 export type Deferrable<T> = Promise<T> | Observable<T> | T;
 
@@ -16,10 +16,12 @@ export function deferrableToObservable<T>(deferrable: Promise<T> | Observable<T>
 }
 
 export function createDialogRoute<C>(dialogRouteConfig: DialogRouteConfig<C>): Route {
+	const { dialogConfigFactory, dataFactory, ...baseRoute } = dialogRouteConfig;
+
 	const data: DialogRouteStaticData<C> = { dialogRouteConfig };
 	const resolve: DialogRouteResolveConfig<C> = {
-		dialogConfig: (route, state) => dialogRouteConfig.dialogConfigFactory(route, state),
-		dialogData: (route, state) => dialogRouteConfig.dataFactory?.(route, state),
+		dialogConfig: (route, state) => dialogConfigFactory(route, state),
+		dialogData: (route, state) => dataFactory?.(route, state),
 	};
 
 	return {
@@ -38,7 +40,7 @@ export function createDialogRoute<C>(dialogRouteConfig: DialogRouteConfig<C>): R
 		data,
 		children: [
 			{
-				...dialogRouteConfig,
+				...baseRoute,
 				canDeactivate: dialogRouteConfig.canDeactivate?.map((guard) => (dialogComponentInstance, route, state, nextState) => {
 					// If dialogComponentInstance is null, it means the dialog is already closed. We allow deactivation in this case.
 					if (!dialogComponentInstance) {
@@ -65,17 +67,17 @@ export type DialogFactoryResultOptions<C> = {
 export type DialogFactoryResult<C> = (options: DialogFactoryResultOptions<C>) => Route;
 
 export type DialogFactoryConfig<C> = Partial<{
-	dialogConfig: Omit<LuDialogConfig<C>, 'data' | 'content'>;
+	dialogConfig: DialogRouteDialogConfig<C>;
 	dialogRouteConfig: Partial<DialogRouteConfig<C>>;
 }>;
 
 export function dialogRouteFactory<C>(component: ComponentType<C>, config?: DialogFactoryConfig<C>): DialogFactoryResult<C> {
 	return ({ path, dataFactory, dialogRouteConfig }) =>
-		createDialogRoute({
+		createDialogRoute<C>({
 			path,
 			component,
-			dataFactory,
-			dialogConfigFactory: () => config?.dialogConfig ?? {},
+			dataFactory: dataFactory as LuDialogData<C> extends never ? undefined : ResolveFn<LuDialogData<C>>,
+			dialogConfigFactory: () => config?.dialogConfig ?? ({} as DialogRouteDialogConfig<C>),
 			...mergeRouteConfig(config?.dialogRouteConfig, dialogRouteConfig),
 		});
 }
