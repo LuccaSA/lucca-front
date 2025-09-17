@@ -35,12 +35,19 @@ export default {
 			imports: [FieldsetComponent],
 		}),
 	],
-	render: ({ content, expanded, ...args }, { argTypes }) => {
+	render: ({ expanded, ...args }, { argTypes }) => {
 		const expandedParam = expanded ? `[expanded]="true"` : ``;
 		return {
 			template: cleanupTemplate(`
 <lu-fieldset ${expandedParam} ${generateInputs(args, argTypes)}>
-	${content}
+	<div class="grid mod-form">
+		<div class="grid-column" style="--grid-colspanAtMediaMinXXS: 2">
+			<div class="form-field"><label class="formLabel" id="IDlabel1" for="ID1">Label</label><div class="textField"><div class="textField-input"><input type="text" id="ID1" class="textField-input-value" aria-labelledby="IDlabel1" /></div></div></div>
+		</div>
+		<div class="grid-column" style="--grid-colspanAtMediaMinXXS: 2">
+			<div class="form-field"><label class="formLabel" id="IDlabel2" for="ID2">Label</label><div class="textField"><div class="textField-input"><input type="text" id="ID2" class="textField-input-value" aria-labelledby="IDlabel2" /></div></div></div>
+		</div>
+	</div>
 </lu-fieldset>`),
 		};
 	},
@@ -48,7 +55,6 @@ export default {
 
 export const Basic: StoryObj<FieldsetComponent & { content: string }> = {
 	args: {
-		content: '<div class="grid mod-form" style="background-color: var(--palettes-neutral-50)"><div class="grid-column" style="--grid-colspan: 4">Lorem ipsum dolor sit amet.</div></div>',
 		heading: 'Title',
 		helper: '',
 		size: null,
