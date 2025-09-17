@@ -11,7 +11,7 @@ export class LuDialogService {
 
 	#injector = inject(Injector);
 
-	open<C, TData = LuDialogData<C>>(config: LuDialogConfig<C, TData>): LuDialogRef<C, TData> {
+	open<C, TData = LuDialogData<C>>(config: LuDialogConfig<C, NoInfer<TData>>): LuDialogRef<C, TData> {
 		let luDialogRef: LuDialogRef<C, TData>;
 		let modeClasses: string[] = [];
 		switch (config.mode) {

@@ -9,8 +9,10 @@ import {
 	LuDisplayerDirective,
 	LuOptionDirective,
 	LuOptionGroupDirective,
+	TreeGroupingFn,
 } from '@lucca-front/ng/core-select';
 import { LuCoreSelectApiV3Directive, LuCoreSelectApiV4Directive } from '@lucca-front/ng/core-select/api';
+import { LuCoreSelectDepartmentsDirective } from '@lucca-front/ng/core-select/department';
 import { LuCoreSelectEstablishmentsDirective } from '@lucca-front/ng/core-select/establishment';
 import { LuCoreSelectJobQualificationsDirective } from '@lucca-front/ng/core-select/job-qualification';
 import { LuCoreSelectUsersDirective, provideCoreSelectCurrentUserId } from '@lucca-front/ng/core-select/user';
@@ -32,6 +34,7 @@ import { StoryModelDisplayComponent } from 'stories/helpers/story-model-display.
 import { expect, screen, userEvent, within } from 'storybook/test';
 import { waitForAngular } from '../../../helpers/test';
 import { allLegumes, colorNameByColor, coreSelectStory, FilterLegumesPipe, ILegume, LuCoreSelectInputStoryComponent, SortLegumesPipe } from './select.utils';
+import { TreeSelectDirective } from '../../../../packages/ng/tree-select/tree-select.directive';
 
 type LuMultiSelectInputStoryComponent = LuCoreSelectInputStoryComponent & {
 	selectedLegumes: ILegume[] | LuMultiSelection<ILegume>;
@@ -39,7 +42,9 @@ type LuMultiSelectInputStoryComponent = LuCoreSelectInputStoryComponent & {
 	maxValuesShown: number;
 	selectedAxisSection: LuMultiSelection<{ id: number; name: string }>;
 	selectedEstablishment: LuMultiSelection<{ id: number; name: string }>;
+	selectedDepartments: LuMultiSelection<{ id: number; name: string }>;
 	selectLegume(legume: ILegume, legumes: ILegume[]): ILegume[];
+	groupingFn?: TreeGroupingFn<ILegume>;
 } & LuMultiSelectInputComponent<ILegume>;
 
 const generateStory = getStoryGenerator<LuMultiSelectInputStoryComponent>({
@@ -436,6 +441,53 @@ export const Establishment = generateStory({
 	},
 });
 
+export const Department = generateStory({
+	name: 'Departement Select',
+	description: "Pour saisir un département, il suffit d'utiliser la directive `departments`",
+	template: `<lu-multi-select
+	placeholder="Placeholder..."
+	withSelectAll
+	withSelectAllDisplayerLabel="départements"
+	departments
+	[(ngModel)]="selectedDepartements"
+/>{{ selectedDepartements | json }}`,
+	neededImports: {
+		'@lucca-front/ng/multi-select': ['LuMultiSelectInputComponent', 'LuMultiSelectWithSelectAllDirective'],
+		'@lucca-front/ng/core-select/departments': ['LuCoreSelectDepartmentsDirective'],
+	},
+	storyPartial: {
+		args: {
+			selectedDepartments: { mode: 'none' },
+		},
+	},
+});
+
+export const Tree = generateStory({
+	name: 'Tree Select',
+	description: '',
+	template: `<lu-multi-select
+	placeholder="Placeholder..."
+	[options]="legumes"
+	[treeSelect]="groupingFn"
+	[(ngModel)]="selectedTree"
+/>{{ selectedTree | json }}`,
+	neededImports: {
+		'@lucca-front/ng/multi-select': ['LuMultiSelectInputComponent', 'LuMultiSelectWithSelectAllDirective'],
+		'@lucca-front/ng/tree-select': ['TreeSelectDirective'],
+	},
+	storyPartial: {
+		args: {
+			groupingFn: (legume: ILegume) => {
+				const parent = allLegumes.find((l) => l.color === legume.color);
+				if (parent === legume) {
+					return null;
+				}
+				return parent;
+			},
+		},
+	},
+});
+
 export const User = generateStory({
 	name: 'User Select',
 	description: "Pour saisir des utilisateurs, il suffit d'utiliser la directive `users`",
@@ -689,6 +741,7 @@ const meta: Meta<LuMultiSelectInputStoryComponent> = {
 				LuCoreSelectApiV4Directive,
 				LuCoreSelectTotalCountDirective,
 				LuCoreSelectEstablishmentsDirective,
+				LuCoreSelectDepartmentsDirective,
 				LuCoreSelectUsersDirective,
 				LuCoreSelectJobQualificationsDirective,
 				LuCoreSelectPanelHeaderDirective,
@@ -697,6 +750,7 @@ const meta: Meta<LuMultiSelectInputStoryComponent> = {
 				LuMultiSelectCounterDisplayerComponent,
 				CommonModule,
 				AsyncPipe,
+				TreeSelectDirective,
 				StoryModelDisplayComponent,
 			],
 		}),
