@@ -26,6 +26,10 @@
 	--commons-loading-frontground: var(--palettes-50, var(--palettes-product-50));
 
 	@include loading.spinner(var(--pr-t-font-body-M-lineHeight));
+
+	.numericBadge {
+		@include numericBadge.state;
+	}
 }
 
 @mixin loadingS {
@@ -51,12 +55,15 @@
 	--commons-loading-frontground: var(--palettes-neutral-400);
 }
 
-@mixin state {
+@mixin success {
+	--components-button-backgroundColor: var(--palettes-500, var(--palettes-product-500));
 	--components-button-color: transparent;
 	--components-button-pointerEvents: none;
 	--components-button-userSelect: none;
 
 	&::after {
+		@include icon.generate('sign_confirm');
+
 		color: var(--palettes-neutral-0);
 		font-size: calc(1.5 * var(--pr-t-font-body-M-fontSize));
 		block-size: var(--pr-t-font-body-M-lineHeight);
@@ -64,15 +71,9 @@
 		margin: auto;
 		position: absolute;
 	}
-}
 
-@mixin success {
-	--components-button-backgroundColor: var(--palettes-500, var(--palettes-product-500));
-
-	@include state;
-
-	&::after {
-		@include icon.generate('sign_confirm');
+	.numericBadge {
+		@include numericBadge.state;
 	}
 }
 
