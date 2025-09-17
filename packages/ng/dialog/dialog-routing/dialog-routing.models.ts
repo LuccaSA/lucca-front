@@ -2,8 +2,15 @@ import { ComponentType } from '@angular/cdk/overlay';
 import { CanDeactivateFn, DeprecatedGuard, ResolveFn, Route } from '@angular/router';
 import { LuDialogConfig, LuDialogData, LuDialogResult } from '../model';
 
-export type DialogRouteConfig<C> = {
-	component: ComponentType<C>;
+export type DialogRouteComponentLoader<C> =
+	| {
+			component: ComponentType<C>;
+	  }
+	| {
+			loadComponent: () => Promise<ComponentType<C>>;
+	  };
+
+export type DialogRouteConfig<C> = DialogRouteComponentLoader<C> & {
 	dialogConfigFactory: ResolveFn<DialogRouteDialogConfig<C>>;
 	dataFactory: LuDialogData<C> extends never ? undefined : ResolveFn<LuDialogData<C>>;
 	/**
