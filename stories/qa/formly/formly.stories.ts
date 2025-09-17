@@ -6,17 +6,18 @@ import { ALuDateAdapter, LuNativeDateAdapter } from '@lucca-front/ng/core';
 import { LuFormlyModule } from '@lucca-front/ng/formly';
 import { FormlyFieldConfig, FormlyModule } from '@ngx-formly/core';
 import { Meta, StoryObj, applicationConfig } from '@storybook/angular';
+import { StoryModelDisplayComponent } from 'stories/helpers/story-model-display.component';
 
 @Component({
 	selector: 'formly-stories',
 	standalone: true,
-	imports: [LuFormlyModule, FormlyModule, ReactiveFormsModule, JsonPipe],
+	imports: [LuFormlyModule, FormlyModule, ReactiveFormsModule, JsonPipe, StoryModelDisplayComponent],
 	template: `
 		<form [formGroup]="form" role="form" autocomplete="off" (ngSubmit)="submit()">
 			<formly-form class="form" [form]="form" [fields]="fields" [model]="model"></formly-form>
 		</form>
 
-		<pre>{{ model | json }}</pre>
+		<pr-story-model-display>{{ model | json }}</pr-story-model-display>
 	`,
 })
 class FormlyStory {

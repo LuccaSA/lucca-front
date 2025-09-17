@@ -66,7 +66,7 @@ export default {
 				<lu-date-range-input [(ngModel)]="selected" [min]="min" [max]="max" [focusedDate]="focusedDate" ${generateInputs(flags, argTypes)}></lu-date-range-input>
 			</lu-form-field>
 
-			<pr-story-model-display>{{selected | json}}</pr-story-model-display>`),
+			<pr-story-model-display>{{ selected | json }}</pr-story-model-display>`),
 		};
 	},
 } as Meta;
@@ -117,7 +117,7 @@ export const WithShortcuts: StoryObj<DateRangeInputComponent & { selected: DateR
 				<lu-date-range-input [(ngModel)]="selected" [min]="min" [max]="max" [shortcuts]="shortcuts" ${generateInputs(flags, argTypes)}></lu-date-range-input>
 			</lu-form-field>
 
-			<pr-story-model-display>{{selected | json}}</pr-story-model-display>`),
+			<pr-story-model-display>{{ selected | json }}</pr-story-model-display>`),
 		};
 	},
 	args: {
