@@ -1,5 +1,5 @@
 import { ComponentType } from '@angular/cdk/overlay';
-import { CanDeactivateFn, defaultUrlMatcher, Route } from '@angular/router';
+import { CanDeactivateFn, defaultUrlMatcher, ResolveFn, Route } from '@angular/router';
 import { firstValueFrom, from, isObservable, Observable, of } from 'rxjs';
 import { LuDialogConfig, LuDialogData } from '../model';
 import { DialogRoutingContainerComponent } from './dialog-routing.component';
@@ -18,8 +18,8 @@ export function deferrableToObservable<T>(deferrable: Promise<T> | Observable<T>
 export function createDialogRoute<C>(dialogRouteConfig: DialogRouteConfig<C>): Route {
 	const data: DialogRouteStaticData<C> = { dialogRouteConfig };
 	const resolve: DialogRouteResolveConfig<C> = {
-		dialogConfig: () => dialogRouteConfig.dialogConfigFactory(),
-		dialogData: () => dialogRouteConfig.dataFactory?.(),
+		dialogConfig: (route, state) => dialogRouteConfig.dialogConfigFactory(route, state),
+		dialogData: (route, state) => dialogRouteConfig.dataFactory?.(route, state),
 	};
 
 	return {
@@ -59,7 +59,7 @@ export type DialogFactoryResultOptions<C> = {
 } & (LuDialogData<C> extends never
 	? { dataFactory?: never }
 	: {
-			dataFactory: () => Deferrable<LuDialogData<C>>;
+			dataFactory: ResolveFn<LuDialogData<C>>;
 		});
 
 export type DialogFactoryResult<C> = (options: DialogFactoryResultOptions<C>) => Route;
