@@ -368,6 +368,38 @@ export const WithDisabledOptions = generateStory({
 	},
 });
 
+export const WithCustomEmptyResults = generateStory({
+	name: 'CustomEmptyResults Select',
+	description: "Pour modifier le texte des résultats vides, il suffit d'utiliser l'input `emptyTranslation`.",
+	template: `<lu-multi-select
+	placeholder="Placeholder…"
+	emptyMessage="Il n'y a aucun légume qui correspond à votre recherche"
+	[(ngModel)]="selectedLegumes"
+	[options]="legumes | filterLegumes:clue"
+	(clueChange)="clue = $event"
+></lu-multi-select>`,
+	neededImports: {
+		'@lucca-front/ng/simple-select': ['LuMultiSelectInputComponent'],
+	},
+});
+
+export const WithCustomEmptyResultsTEST = createTestStory(WithCustomEmptyResults, async ({ canvasElement, step }) => {
+	// Mouse interactions
+	const input = within(canvasElement).getByRole('combobox');
+	await userEvent.click(input);
+	await waitForAngular();
+	step('Empty search with empty result', async () => {
+		const canvas = within(canvasElement);
+		const input = canvas.getByRole('combobox');
+		await userEvent.tab();
+		await userEvent.type(input, 'toto');
+		await waitForAngular();
+		await expect(screen.getByRole('listbox')).toBeVisible();
+		const panel = within(screen.getByRole('listbox'));
+		await expect(panel.getByText("Il n'y a aucun légume qui correspond à votre recherche")).toBeVisible();
+	});
+});
+
 export const ApiV3 = generateStory({
 	name: 'Api V3',
 	description: "Pour récupérer automatiquement les options depuis une api V3 avec pagination et recherche, il suffit d'utiliser la directive `apiV3`.",
