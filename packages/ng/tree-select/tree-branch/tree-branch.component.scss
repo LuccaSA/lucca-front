@@ -18,6 +18,24 @@ lu-tree-branch {
 				lu-select-option {
 					@include nestedSimple($level: 3);
 				}
+
+				lu-tree-branch {
+					lu-select-option {
+						@include nestedSimple($level: 4);
+					}
+
+					lu-tree-branch {
+						lu-select-option {
+							@include nestedSimple($level: 5);
+						}
+
+						lu-tree-branch {
+							lu-select-option {
+								@include nestedSimple($level: 6);
+							}
+						}
+					}
+				}
 			}
 		}
 	}
@@ -60,6 +78,24 @@ lu-tree-branch {
 			lu-tree-branch {
 				lu-select-option {
 					@include nestedMulti($level: 3);
+				}
+
+				lu-tree-branch {
+					lu-select-option {
+						@include nestedMulti($level: 4);
+					}
+
+					lu-tree-branch {
+						lu-select-option {
+							@include nestedMulti($level: 5);
+						}
+
+						lu-tree-branch {
+							lu-select-option {
+								@include nestedMulti($level: 6);
+							}
+						}
+					}
 				}
 			}
 		}
