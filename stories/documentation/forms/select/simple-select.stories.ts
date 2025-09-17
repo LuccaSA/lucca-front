@@ -495,7 +495,7 @@ export const GroupBy = generateStory({
 	(clueChange)="clue = $event"
 >
 	<ng-container *luOptionGroup="let group by legumeColor; select: selectRef">
-		Légume {{colorNameByColor[group.key]}}{{group.options.length > 1 ? 's' : ''}}
+		Légume {{colorNameByColor[group.key]}}{{ group.options.length > 1 ? 's' : '' }}
 	</ng-container>
 </lu-simple-select>`,
 	neededImports: {

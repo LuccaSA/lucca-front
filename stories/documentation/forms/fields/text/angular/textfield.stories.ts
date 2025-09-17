@@ -89,7 +89,7 @@ export const Basic: StoryObj<TextInputComponent & { disabled: boolean; required:
 		[(ngModel)]="example">
 	</lu-text-input>
 </lu-form-field>
-<pr-story-model-display>{{example}}</pr-story-model-display>`),
+<pr-story-model-display>{{ example }}</pr-story-model-display>`),
 			moduleMetadata: {
 				imports: [TextInputComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule],
 			},
@@ -144,7 +144,7 @@ export const PasswordVisiblity: StoryObj<
 		[(ngModel)]="example">
 	</lu-text-input>
 </lu-form-field>
-<pr-story-model-display>{{example}}</pr-story-model-display>`,
+<pr-story-model-display>{{ example }}</pr-story-model-display>`,
 			moduleMetadata: {
 				imports: [TextInputComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule],
 			},
@@ -198,7 +198,7 @@ export const WithPrefixAndSuffix: StoryObj<
 		[(ngModel)]="example">
 	</lu-text-input>
 </lu-form-field>
-<pr-story-model-display>{{example}}</pr-story-model-display>`),
+<pr-story-model-display>{{ example }}</pr-story-model-display>`),
 			moduleMetadata: {
 				imports: [TextInputComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule],
 			},
