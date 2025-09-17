@@ -11,6 +11,8 @@ import { dialogRouteFactory } from './dialog-routing.utils';
 let dialogService: LuDialogService;
 let dialogRef: LuDialogRef<any>;
 
+let openDialogs = 0;
+
 jest.mock('../dialog.providers', () => {
 	const { LuDialogService } = jest.requireActual('../dialog.service');
 	return {
@@ -20,6 +22,7 @@ jest.mock('../dialog.providers', () => {
 				dialogService = new LuDialogService();
 				const originalOpen = dialogService.open.bind(dialogService);
 				jest.spyOn(dialogService, 'open').mockImplementation((config) => {
+					openDialogs++;
 					dialogRef = originalOpen(config);
 					jest.spyOn(dialogRef, 'close');
 					jest.spyOn(dialogRef, 'dismiss');
@@ -93,6 +96,7 @@ describe('dialog-routing.utils', () => {
 		beforeEach(() => {
 			guard1.mockReset();
 			guard2.mockReset();
+			openDialogs = 0;
 		});
 
 		const addTestRoute = dialogRouteFactory(DialogRoutingTestComponent, {
@@ -323,6 +327,55 @@ describe('dialog-routing.utils', () => {
 			expect(dialogComponent).toBeTruthy();
 			expect(dialogComponent.componentInstance.parentService.value).toBe('provided-in-parent');
 			expect(dialogComponent.componentInstance.routeService.value).toBe('provided-in-parent-route');
+		});
+
+		it('should handle nested dialogs', async () => {
+			// Arrange
+			const createParentDialogRoute = dialogRouteFactory(ParentComponent);
+			const createNestedDialogRoute = dialogRouteFactory(DialogRoutingTestWithParentDIComponent);
+
+			const { router, fixture } = initTest(
+				createParentDialogRoute({
+					path: 'dialog-parent',
+					dialogRouteConfig: {
+						providers: [ProvidedInParentRouteService],
+						children: [createNestedDialogRoute({ path: 'dialog-nested' })],
+					},
+				}),
+			);
+
+			// Act
+			await router.navigateByUrl('/dialog-parent/dialog-nested');
+			fixture.detectChanges();
+			await fixture.whenStable();
+
+			const parentDialog = fixture.debugElement.parent.query(By.directive(ParentComponent));
+			const nestedDialog = fixture.debugElement.parent.query(By.directive(DialogRoutingTestWithParentDIComponent));
+
+			// Assert
+			expect(openDialogs).toBe(2);
+			expect(parentDialog).toBeTruthy();
+			expect(nestedDialog).toBeTruthy();
+		});
+
+		it('should allow path param reading in dataFactory', async () => {
+			// Arrange
+			const route = addTestRoute({
+				path: 'test/:name',
+				dataFactory: (route) => ({ foo: route.params['name'] }),
+			});
+
+			const { router, fixture } = initTest(route);
+
+			// Act
+			await router.navigateByUrl('/test/BAR');
+			fixture.detectChanges();
+			await fixture.whenStable();
+
+			// Assert
+			const dialogComponent = fixture.debugElement.parent.query(By.directive(DialogRoutingTestComponent));
+			expect(dialogComponent).toBeTruthy();
+			expect(dialogComponent.componentInstance.dialogData.foo).toBe('BAR');
 		});
 
 		function initTest(route: Route, features: RouterFeatures[] = []) {
