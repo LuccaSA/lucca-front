@@ -13,8 +13,11 @@ export default {
 			},
 			if: { arg: 'mode', truthy: false },
 		},
-		container: {
-			if: { arg: 'responsiveSample', truthy: true },
+		responsiveMediaConfig: {
+			if: { arg: 'container', truthy: true },
+		},
+		responsiveContainerConfig: {
+			if: { arg: 'container', truthy: false },
 		},
 		colspan: {
 			control: {
@@ -117,7 +120,7 @@ export default {
 			imports: [GridComponent, GridColumnComponent],
 		}),
 	],
-	render: ({ colspan, rowspan, column, row, align, justify, repeatCols, container, responsiveSample, ...args }, { argTypes }) => {
+	render: ({ colspan, rowspan, column, row, align, justify, repeatCols, container, rwd, responsiveMediaConfig, responsiveContainerConfig, ...args }, { argTypes }) => {
 		const content = `col`;
 		const columnArgs = {
 			colspan: colspan === 1 ? null : colspan,
@@ -129,30 +132,16 @@ export default {
 		};
 		const cols = `\n <lu-grid-column>${content}</lu-grid-column>`.repeat(repeatCols);
 		const containerArg = container ? ` container` : ``;
-		const rwdArg = responsiveSample ? ` [responsive]="responsiveSample"` : ``;
-		const rwdContent = responsiveSample ? `rwd` : `col`;
-		const rwdStyle = responsiveSample
+		const responsiveConfig = rwd ? (container ? responsiveMediaConfig : responsiveContainerConfig) : ``;
+		const rwdArg = rwd ? ` [responsive]="rwd"` : ``;
+		const rwdContent = rwd ? `rwd` : `col`;
+		const rwdStyle = rwd
 			? `.grid-column {
 	&:last-child {
 		background-color: var(--palettes-neutral-700);
 		color: var(--palettes-neutral-0);
 	}
 }`
-			: ``;
-		const responsiveLet = responsiveSample
-			? container
-				? `@let responsiveSample = {
-					colspanAtContainerMinXXS: 3,
-					rowAtContainerMinXXS: 1,
-					rowspanAtContainerMinXS: 2,
-					columnAtContainerMinS: 2,
-				};`
-				: `@let responsiveSample = {
-					colspanAtMediaMinXXS: 3,
-					rowAtMediaMinXXS: 1,
-					rowspanAtMediaMinXS: 2,
-					columnAtMediaMinS: 2,
-				};`
 			: ``;
 
 		return {
@@ -182,7 +171,7 @@ export default {
 		}
 		`,
 			],
-			template: cleanupTemplate(`${responsiveLet}
+			template: cleanupTemplate(`${responsiveConfig}
 <lu-grid${containerArg}${generateInputs(args, argTypes)}>
 	<lu-grid-column${generateInputs(columnArgs, argTypes)}>story</lu-grid-column>${cols}
 	<lu-grid-column${rwdArg}>${rwdContent}</lu-grid-column>
@@ -191,10 +180,24 @@ export default {
 	},
 } as Meta;
 
-export const Basic: StoryObj<GridComponent & GridColumnComponent & { repeatCols: number; responsiveSample: boolean }> = {
+export const Basic: StoryObj<GridComponent & GridColumnComponent & { repeatCols: number; rwd: boolean; responsiveMediaConfig: string; responsiveContainerConfig: string }> = {
 	args: {
-		responsiveSample: false,
+		rwd: false,
 		container: false,
+		responsiveMediaConfig: `@let rwd = {
+	colspanAtMediaMinXXS: 3,
+	rowAtMediaMinXXS: 1,
+	rowspanAtMediaMinXS: 2,
+	columnAtMediaMinS: 2,
+};
+`,
+		responsiveContainerConfig: `@let rwd = {
+	colspanAtContainerMinXXS: 3,
+	rowAtContainerMinXXS: 1,
+	rowspanAtContainerMinXS: 2,
+	columnAtContainerMinS: 2,
+};
+`,
 		mode: null,
 		columns: 6,
 		repeatCols: 10,
