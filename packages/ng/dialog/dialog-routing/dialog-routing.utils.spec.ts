@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, Injectable } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, Injectable, Type } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { provideRouter, Route, Router, RouterFeatures, RouterOutlet } from '@angular/router';
 import { injectDialogData, LuDialogRef } from '../model';
@@ -9,18 +9,18 @@ import type { LuDialogService } from '../dialog.service';
 import { dialogRouteFactory } from './dialog-routing.utils';
 
 let dialogService: LuDialogService;
-let dialogRef: LuDialogRef<any>;
+let dialogRef: LuDialogRef<unknown, unknown>;
 
 let openDialogs = 0;
 
 jest.mock('../dialog.providers', () => {
-	const { LuDialogService } = jest.requireActual('../dialog.service');
+	const { LuDialogService } = jest.requireActual<{ LuDialogService: Type<LuDialogService> }>('../dialog.service');
 	return {
 		provideLuDialog: () => ({
 			provide: LuDialogService,
 			useFactory: () => {
 				dialogService = new LuDialogService();
-				const originalOpen = dialogService.open.bind(dialogService);
+				const originalOpen = dialogService.open.bind(dialogService) as LuDialogService['open'];
 				jest.spyOn(dialogService, 'open').mockImplementation((config) => {
 					openDialogs++;
 					dialogRef = originalOpen(config);
@@ -39,7 +39,7 @@ interface DialogRoutingTestDialogData {
 }
 
 @Component({
-	selector: 'pr-dialog-routing-test',
+	selector: 'lu-dialog-routing-test',
 	template: '',
 })
 class DialogRoutingTestComponent {
@@ -57,7 +57,7 @@ class ProvidedInParentRouteService {
 }
 
 @Component({
-	selector: 'pr-parent',
+	selector: 'lu-parent',
 	imports: [RouterOutlet],
 	providers: [ProvidedInParentComponentService],
 	template: '<router-outlet></router-outlet>',
@@ -65,7 +65,7 @@ class ProvidedInParentRouteService {
 class ParentComponent {}
 
 @Component({
-	selector: 'pr-dialog-routing-test',
+	selector: 'lu-dialog-routing-test',
 	template: '',
 })
 class DialogRoutingTestWithParentDIComponent {
@@ -74,14 +74,14 @@ class DialogRoutingTestWithParentDIComponent {
 }
 
 @Component({
-	selector: 'pr-dialog-routing-with-router-outlet-test',
+	selector: 'lu-dialog-routing-with-router-outlet-test',
 	imports: [RouterOutlet],
 	template: '<router-outlet />',
 })
 class DialogRoutingWithRouterOutletTestComponent {}
 
 @Component({
-	selector: 'pr-app-test',
+	selector: 'lu-app-test',
 	standalone: true,
 	imports: [RouterOutlet],
 	template: '<router-outlet />',
@@ -320,13 +320,13 @@ describe('dialog-routing.utils', () => {
 			fixture.detectChanges();
 			await fixture.whenStable();
 
-			const dialogComponent = fixture.debugElement.parent.query(By.directive(DialogRoutingTestWithParentDIComponent));
+			const dialogComponent = fixture.debugElement.parent.query(By.directive(DialogRoutingTestWithParentDIComponent)).componentInstance as DialogRoutingTestWithParentDIComponent;
 
 			// Assert
 			expect(dialogService.open).toHaveBeenCalledTimes(1);
 			expect(dialogComponent).toBeTruthy();
-			expect(dialogComponent.componentInstance.parentService.value).toBe('provided-in-parent');
-			expect(dialogComponent.componentInstance.routeService.value).toBe('provided-in-parent-route');
+			expect(dialogComponent.parentService.value).toBe('provided-in-parent');
+			expect(dialogComponent.routeService.value).toBe('provided-in-parent-route');
 		});
 
 		it('should handle nested dialogs', async () => {
@@ -362,7 +362,7 @@ describe('dialog-routing.utils', () => {
 			// Arrange
 			const route = addTestRoute({
 				path: 'test/:name',
-				dataFactory: (route) => ({ foo: route.params['name'] }),
+				dataFactory: (route) => ({ foo: '' + route.params['name'] }),
 			});
 
 			const { router, fixture } = initTest(route);
@@ -373,9 +373,9 @@ describe('dialog-routing.utils', () => {
 			await fixture.whenStable();
 
 			// Assert
-			const dialogComponent = fixture.debugElement.parent.query(By.directive(DialogRoutingTestComponent));
+			const dialogComponent = fixture.debugElement.parent.query(By.directive(DialogRoutingTestComponent)).componentInstance as DialogRoutingTestComponent;
 			expect(dialogComponent).toBeTruthy();
-			expect(dialogComponent.componentInstance.dialogData.foo).toBe('BAR');
+			expect(dialogComponent.dialogData.foo).toBe('BAR');
 		});
 
 		function initTest(route: Route, features: RouterFeatures[] = []) {

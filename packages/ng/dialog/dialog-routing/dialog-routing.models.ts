@@ -1,5 +1,5 @@
 import { ComponentType } from '@angular/cdk/overlay';
-import { CanDeactivateFn, DeprecatedGuard, ResolveFn, Route } from '@angular/router';
+import { CanDeactivateFn, ResolveFn, Route } from '@angular/router';
 import { LuDialogConfig, LuDialogData, LuDialogResult } from '../model';
 
 export type DialogRouteComponentLoader<C> =
@@ -27,8 +27,8 @@ export type DialogRouteConfig<C> = DialogRouteComponentLoader<C> & {
 	/**
 	 * Override canDeactivate to have a stricter type
 	 */
-	canDeactivate?: (CanDeactivateFn<C> | DeprecatedGuard)[];
-} & Omit<Route, 'component' | 'canDeactivate'>;
+	canDeactivate?: CanDeactivateFn<C>[];
+} & Omit<Route, 'component' | 'loadComponent' | 'canDeactivate'>;
 
 export type DialogRouteDialogConfig<C> = Omit<LuDialogConfig<C>, 'data' | 'content'>;
 

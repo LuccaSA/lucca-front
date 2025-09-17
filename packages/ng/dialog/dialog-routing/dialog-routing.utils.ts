@@ -26,7 +26,7 @@ export function createDialogRoute<C>(dialogRouteConfig: DialogRouteConfig<C>): R
 
 	return {
 		// Check that child route matches without consuming any URL segments
-		matcher: (segments, group, route) => {
+		matcher: (segments, group) => {
 			const result = defaultUrlMatcher(segments, group, { path: dialogRouteConfig.path });
 			return result
 				? {
@@ -41,15 +41,17 @@ export function createDialogRoute<C>(dialogRouteConfig: DialogRouteConfig<C>): R
 		children: [
 			{
 				...baseRoute,
-				canDeactivate: dialogRouteConfig.canDeactivate?.map((guard) => (dialogComponentInstance, route, state, nextState) => {
-					// If dialogComponentInstance is null, it means the dialog is already closed. We allow deactivation in this case.
-					if (!dialogComponentInstance) {
-						return true;
-					}
+				canDeactivate: dialogRouteConfig.canDeactivate?.map(
+					(guard): CanDeactivateFn<C> =>
+						(dialogComponentInstance, route, state, nextState) => {
+							// If dialogComponentInstance is null, it means the dialog is already closed. We allow deactivation in this case.
+							if (!dialogComponentInstance) {
+								return true;
+							}
 
-					// Do not support DeprecatedGuard here
-					return (guard as CanDeactivateFn<C>)(dialogComponentInstance, route, state, nextState);
-				}),
+							return guard(dialogComponentInstance, route, state, nextState);
+						},
+				),
 			},
 		],
 	};
@@ -57,7 +59,7 @@ export function createDialogRoute<C>(dialogRouteConfig: DialogRouteConfig<C>): R
 
 export type DialogFactoryResultOptions<C> = {
 	path: string;
-	dialogRouteConfig?: Partial<Omit<DialogRouteConfig<C>, 'path' | 'component' | 'dataFactory'>>;
+	dialogRouteConfig?: Partial<Omit<DialogRouteConfig<C>, 'path' | 'component' | 'loadComponent' | 'dataFactory'>>;
 } & (LuDialogData<C> extends never
 	? { dataFactory?: never }
 	: {
@@ -82,7 +84,7 @@ export function dialogRouteFactory<C>(component: ComponentType<C>, config?: Dial
 		});
 }
 
-function mergeRouteConfig(config1: Partial<Route>, config2: Partial<Route>): Partial<Route> {
+function mergeRouteConfig<C>(config1: Partial<DialogRouteConfig<C>>, config2: Partial<DialogRouteConfig<C>>): Partial<DialogRouteConfig<C>> {
 	if (!config1) {
 		return config2;
 	}
@@ -91,7 +93,7 @@ function mergeRouteConfig(config1: Partial<Route>, config2: Partial<Route>): Par
 		return config1;
 	}
 
-	const result: Partial<Route> = { ...config1, ...config2 };
+	const result: Partial<DialogRouteConfig<C>> = { ...config1, ...config2 };
 
 	// If both configs have the same key, we merge the arrays
 	const mergedArrays = (['providers', 'canActivate', 'children', 'canDeactivate', 'canLoad', 'canActivateChild'] as const satisfies Array<keyof Route>).filter(
