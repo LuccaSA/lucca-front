@@ -33,6 +33,8 @@ export class TreeBranchComponent<T> {
 
 	simpleMode = input(false, { transform: booleanAttribute });
 
+	depth = input(1);
+
 	constructor() {
 		if (this.selectInputComponent.selectChildren$) {
 			this.selectInputComponent.selectChildren$.pipe(takeUntilDestroyed()).subscribe(() => {
