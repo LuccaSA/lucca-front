@@ -14,10 +14,10 @@ export default {
 			if: { arg: 'mode', truthy: false },
 		},
 		responsiveMediaConfig: {
-			if: { arg: 'container', truthy: true },
+			if: { arg: 'container', eq: false },
 		},
 		responsiveContainerConfig: {
-			if: { arg: 'container', truthy: false },
+			if: { arg: 'container', eq: true },
 		},
 		colspan: {
 			control: {
@@ -132,8 +132,8 @@ export default {
 		};
 		const cols = `\n <lu-grid-column>${content}</lu-grid-column>`.repeat(repeatCols);
 		const containerArg = container ? ` container` : ``;
-		const responsiveConfig = rwd ? (container ? responsiveMediaConfig : responsiveContainerConfig) : ``;
-		const rwdArg = rwd ? ` [responsive]="rwd"` : ``;
+		const responsiveConfig = rwd ? (container ? responsiveContainerConfig : responsiveMediaConfig) : ``;
+		const rwdArg = rwd ? ` [responsive]="responsiveSample"` : ``;
 		const rwdContent = rwd ? `rwd` : `col`;
 		const rwdStyle = rwd
 			? `.grid-column {
@@ -184,14 +184,14 @@ export const Basic: StoryObj<GridComponent & GridColumnComponent & { repeatCols:
 	args: {
 		rwd: false,
 		container: false,
-		responsiveMediaConfig: `@let rwd = {
+		responsiveMediaConfig: `@let responsiveSample = {
 	colspanAtMediaMinXXS: 3,
 	rowAtMediaMinXXS: 1,
 	rowspanAtMediaMinXS: 2,
 	columnAtMediaMinS: 2,
 };
 `,
-		responsiveContainerConfig: `@let rwd = {
+		responsiveContainerConfig: `@let responsiveSample = {
 	colspanAtContainerMinXXS: 3,
 	rowAtContainerMinXXS: 1,
 	rowspanAtContainerMinXS: 2,
