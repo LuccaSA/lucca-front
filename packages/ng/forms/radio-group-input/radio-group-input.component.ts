@@ -32,7 +32,7 @@ export class RadioGroupInputComponent {
 	size: 'S' | 'M';
 
 	framed = input(false, { transform: booleanAttribute });
-	framedAlign = input<'top' | 'center'>('top');
+	framedCenter = input(false, { transform: booleanAttribute });
 
 	name = `radio-group-${nextId++}`;
 
