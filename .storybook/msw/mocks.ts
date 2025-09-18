@@ -142,7 +142,13 @@ export const mockDepartmentsTree = [
 				node: { id: 14, name: 'Administration' },
 				children: [
 					{ node: { id: 8, name: 'Comptabilité / Finances' }, children: [] },
-					{ node: { id: 11, name: 'Secrétariat' }, children: [] },
+					{
+						node: { id: 11, name: 'Secrétariat' },
+						children: [
+							{ node: { id: 19, name: 'Sous secrétariat' }, children: [] },
+							{ node: { id: 20, name: 'Sous secrétariat 2' }, children: [] },
+						],
+					},
 				],
 			},
 			{ node: { id: 13, name: 'Direction commerciale' }, children: [] },
