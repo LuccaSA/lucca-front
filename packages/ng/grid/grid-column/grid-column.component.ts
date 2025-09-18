@@ -1,5 +1,4 @@
-import { Component, computed, inject, input, numberAttribute, ViewEncapsulation } from '@angular/core';
-import { LU_GRID_INSTANCE } from '../grid.token';
+import { Component, computed, input, numberAttribute, ViewEncapsulation } from '@angular/core';
 
 type Property = 'row' | 'col' | 'rowspan' | 'colspan';
 type At = 'media' | 'container';
@@ -11,7 +10,7 @@ type ResponsiveConfig = Partial<Record<ResponsiveOptionKey, number>>;
 @Component({
 	selector: 'lu-grid-column',
 	standalone: true,
-	templateUrl: './grid-column.component.html',
+	template: '<ng-content />',
 	encapsulation: ViewEncapsulation.None,
 	host: {
 		class: 'grid-column',
@@ -19,8 +18,6 @@ type ResponsiveConfig = Partial<Record<ResponsiveOptionKey, number>>;
 	},
 })
 export class GridColumnComponent {
-	protected gridRef = inject(LU_GRID_INSTANCE);
-
 	colspan = input(null, { transform: numberAttribute });
 	rowspan = input(null, { transform: numberAttribute });
 	column = input(null, { transform: numberAttribute });

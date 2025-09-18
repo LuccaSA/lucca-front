@@ -1,6 +1,5 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { booleanAttribute, Component, computed, forwardRef, input, numberAttribute, ViewEncapsulation } from '@angular/core';
-import { LU_GRID_INSTANCE } from './grid.token';
+import { booleanAttribute, Component, computed, input, numberAttribute, ViewEncapsulation } from '@angular/core';
 
 const spacingRegexp = /.*(\d)$/g;
 
@@ -11,12 +10,6 @@ const spacingRegexp = /.*(\d)$/g;
 	styleUrls: ['./grid.component.scss'],
 	encapsulation: ViewEncapsulation.None,
 	imports: [NgTemplateOutlet],
-	providers: [
-		{
-			provide: LU_GRID_INSTANCE,
-			useExisting: forwardRef(() => GridComponent),
-		},
-	],
 })
 export class GridComponent {
 	container = input(false, { transform: booleanAttribute });

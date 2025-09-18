@@ -21,7 +21,7 @@ function getTemplate(args: DialogBasicStory): string {
 					<h1 class="dialog-inside-header-container-title" id="dialogInsideHeaderTitle1">Title</h1>
 				</div>
 			</header>
-			<div class="dialog-inside-content">dialog<br />dialog<br />dialog<br />dialog<br />dialog<br />dialog<br />dialog<br />dialog<br />dialog<br />dialog<br />dialog<br />dialog<br />dialog<br />dialog<br />dialog<br />dialog<br />dialog<br />dialog<br />dialog<br />dialog<br />dialog<br />dialog<br />dialog<br />dialog<br />dialog<br />dialog<br />dialog<br />dialog<br />dialog<br />dialog<br />dialog<br />dialog<br />dialog<br />dialog<br />dialog<br />dialog<br />dialog<br />dialog<br />dialog<br />dialog<br />dialog<br />dialog<br />dialog<br />dialog<br />dialog<br /></div>
+			<div class="dialog-inside-content">dialog</div>
 			<footer class="dialog-inside-footer footer">
 				<div class="footer-actions">
 					<button type="submit" class="button">Action</button>
