@@ -1,4 +1,4 @@
-import { booleanAttribute, Component, computed, effect, inject, input, LOCALE_ID, signal } from '@angular/core';
+import { booleanAttribute, Component, computed, effect, inject, input, LOCALE_ID, model, signal } from '@angular/core';
 import { getIntl } from '@lucca-front/ng/core';
 import { addMonths, addYears, isAfter, isBefore, isSameMonth, startOfDay, startOfMonth } from 'date-fns';
 import { CalendarMode } from './calendar2/calendar-mode';
@@ -52,7 +52,7 @@ export abstract class AbstractDateComponent {
 		transform: transformDateInputToDate,
 	});
 
-	calendarMode = signal<CalendarMode>('day');
+	calendarMode = model<CalendarMode>('day');
 
 	dateFormatLocalized = computed(() => {
 		return getLocalizedDateFormat(this.locale, this.mode());
