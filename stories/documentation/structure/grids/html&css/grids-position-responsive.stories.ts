@@ -5,7 +5,7 @@ interface GridsPositionStory {
 }
 
 export default {
-	title: 'Documentation/Structure/Grids/ResponsivePosition',
+	title: 'Documentation/Structure/Grids/HTML & CSS/ResponsivePosition',
 	argTypes: {},
 } as Meta;
 
