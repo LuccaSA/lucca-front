@@ -1,8 +1,6 @@
 import { NgTemplateOutlet } from '@angular/common';
 import { booleanAttribute, Component, computed, input, numberAttribute, ViewEncapsulation } from '@angular/core';
 
-const spacingRegexp = /.*(\d)$/g;
-
 @Component({
 	selector: 'lu-grid',
 	standalone: true,
@@ -40,6 +38,8 @@ export class GridComponent {
 	>(null);
 
 	#gapTransform = (gap: Gap | null): string | null => {
+		const spacingRegexp = /.*(\d)$/g;
+
 		if (!gap) {
 			return null;
 		}
@@ -61,18 +61,4 @@ export class GridComponent {
 	}));
 }
 
-export type Gap =
-	| 'spacings-0'
-	| 'spacings-25'
-	| 'spacings-50'
-	| 'spacings-75'
-	| 'spacings-100'
-	| 'spacings-150'
-	| 'spacings-200'
-	| 'spacings-300'
-	| 'spacings-400'
-	| 'spacings-500'
-	| 'spacings-600'
-	| 'spacings-700'
-	| 'spacings-800'
-	| `${number}${string}`;
+export type Gap = '0' | '25' | '50' | '75' | '100' | '150' | '200' | '300' | '400' | '500' | '600' | '700' | '800' | `${number}${string}`;
