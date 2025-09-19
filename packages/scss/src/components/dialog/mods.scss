@@ -22,6 +22,10 @@
 	--components-dialog-size: 60rem;
 }
 
+@mixin XXL {
+	--components-dialog-size: 100rem;
+}
+
 @mixin drawer {
 	--components-dialog-animationOpening: slideFromRight;
 	--components-dialog-maxHeight: none;
