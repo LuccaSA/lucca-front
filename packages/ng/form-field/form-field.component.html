@@ -1,8 +1,7 @@
 @if (layout() === "fieldset") {
 	<fieldset class="form-fieldset" [class.mod-inline]="inline()" [class.mod-S]="size() === 'S'">
 		<legend class="formLabel" [class.pr-u-mask]="hiddenLabel()" attr.aria-hidden="{{ hiddenLabel() }}">
-			<ng-container *luPortal="label()"></ng-container
-			><!--
+			<ng-container *luPortal="label()" /><!--
 	--><sup class="formLabel-required" aria-hidden="true" *ngIf="isInputRequired()">*</sup>
 			@if (tooltip()) {
 				<lu-icon
@@ -23,7 +22,7 @@
 				id="{{ id() }}-message"
 				[label]="invalidStatus() && errorInlineMessage() ? errorInlineMessage() : inlineMessage()"
 				[state]="invalidStatus() ? 'error' : inlineMessageState()"
-			></lu-inline-message>
+			/>
 		}
 	</fieldset>
 } @else {
@@ -37,8 +36,7 @@
 		[class.pr-u-mask]="hiddenLabel()"
 		attr.role="{{ rolePresentationLabel() ? 'presentation' : null }}"
 	>
-		<ng-container *luPortal="label()"></ng-container
-		><!--
+		<ng-container *luPortal="label()" /><!--
 	--><sup class="formLabel-required" aria-hidden="true" *ngIf="isInputRequired()">*</sup>
 		@if (tooltip()) {
 			<lu-icon class="formLabel-info" icon="signHelp" [alt]="'?'" [luTooltip]="tooltip()" [color]="invalidStatus() ? 'error' : 'inherit'" />
@@ -59,7 +57,7 @@
 			id="{{ id() }}-message"
 			[label]="invalidStatus() && errorInlineMessage() ? errorInlineMessage() : inlineMessage()"
 			[state]="invalidStatus() ? 'error' : inlineMessageState()"
-		></lu-inline-message>
+		/>
 	}
 }
 
