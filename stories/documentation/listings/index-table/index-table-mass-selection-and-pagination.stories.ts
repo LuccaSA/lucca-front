@@ -98,5 +98,5 @@ const Template: StoryFn<IndexTableMassSelectionAndPaginationStory> = (args) => (
 	template: getTemplate(args),
 });
 
-export const Pagination = Template.bind({});
-Pagination.args = {};
+export const MassSelectionAndPagination = Template.bind({});
+MassSelectionAndPagination.args = {};

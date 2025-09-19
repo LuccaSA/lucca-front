@@ -4,12 +4,13 @@ import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { CheckboxInputComponent } from '@lucca-front/ng/forms';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { cleanupTemplate, generateInputs } from 'stories/helpers/stories';
+import { StoryModelDisplayComponent } from 'stories/helpers/story-model-display.component';
 
 export default {
 	title: 'Documentation/Forms/Fields/CheckboxField/Angular',
 	decorators: [
 		moduleMetadata({
-			imports: [CheckboxInputComponent, FormFieldComponent, FormsModule],
+			imports: [CheckboxInputComponent, FormFieldComponent, FormsModule, StoryModelDisplayComponent],
 		}),
 	],
 	argTypes: {
@@ -25,9 +26,6 @@ export default {
 				type: 'select',
 			},
 		},
-		mixed: {
-			description: '[v17.4]',
-		},
 		hiddenLabel: {
 			description: "Masque le label en le conservant dans le DOM pour les lecteurs d'écrans",
 		},
@@ -38,6 +36,7 @@ export default {
 			control: {
 				type: 'boolean',
 			},
+			description: '[v20.2]',
 		},
 	},
 } as Meta;
@@ -60,11 +59,9 @@ export const Basic: StoryObj<CheckboxInputComponent & FormFieldComponent & { req
 				},
 				argTypes,
 			)}>
-	<lu-checkbox-input ${generateInputs(inputArgs, argTypes)}
-	[(ngModel)]="example" />
+	<lu-checkbox-input [(ngModel)]="example"${generateInputs(inputArgs, argTypes)} />
 </lu-form-field>
-
-{{example}}`),
+<pr-story-model-display>{{ example }}</pr-story-model-display>`),
 			moduleMetadata: {
 				imports: [CheckboxInputComponent, FormsModule, BrowserAnimationsModule],
 			},

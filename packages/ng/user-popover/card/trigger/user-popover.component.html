@@ -95,5 +95,30 @@
 		</section>
 	</div>
 } @else {
-	<lu-loading class="pr-u-margin200" />
+	<section class="userPopover skeleton is-loading" aria-busy="true">
+		<div class="userPopover-details">
+			<div
+				class="userPopover-details-avatar avatar skeleton-item mod-circle"
+				style="--components-skeleton-shape-width: 96px; --components-skeleton-shape-height: 96px"
+			></div>
+			<div class="userPopover-details-info">
+				<h1
+					class="userPopover-details-info-name skeleton-item pr-u-margin0"
+					[style.--components-skeleton-text-width]="skeletonWidths[0]"
+				></h1>
+				<p
+					class="userPopover-details-info-detail skeleton-item pr-u-bodyS"
+					[style.--components-skeleton-text-width]="skeletonWidths[1]"
+				></p>
+				<p
+					class="userPopover-details-info-detail skeleton-item pr-u-bodyS"
+					[style.--components-skeleton-text-width]="skeletonWidths[2]"
+				></p>
+				<p
+					class="userPopover-details-info-detail skeleton-item pr-u-bodyS"
+					[style.--components-skeleton-text-width]="skeletonWidths[3]"
+				></p>
+			</div>
+		</div>
+	</section>
 }

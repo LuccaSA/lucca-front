@@ -77,7 +77,7 @@ export default {
 			)}>
 <lu-date-input [(ngModel)]="selected" [min]="min" [max]="max" autocomplete="off" ${generateInputs(flags, argTypes)} />
 </lu-form-field>
-<pr-story-model-display>{{selected}}</pr-story-model-display>`),
+<pr-story-model-display>{{ selected }}</pr-story-model-display>`),
 		};
 	},
 } as Meta;

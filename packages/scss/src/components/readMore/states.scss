@@ -6,6 +6,8 @@
 }
 
 @mixin disabled {
+	--components-readMore-content-lastChild-content: none !important;
+
 	.readMore-link.link {
 		@include a11y.mask;
 	}

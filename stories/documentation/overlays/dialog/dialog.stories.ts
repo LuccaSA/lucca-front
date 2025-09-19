@@ -60,11 +60,11 @@ export default {
 		<lu-dialog-content>Template-driven content</lu-dialog-content>
 
 		<lu-dialog-footer>
-
 			<div class="footer-content">Optional footer text</div>
-
-			<button type="button" luButton luDialogClose>Confirm</button>
-			<button type="button" luButton="ghost" luDialogDismiss>Cancel</button>
+			<div class="footer-actions">
+				<button type="button" luButton luDialogClose>Confirm</button>
+				<button type="button" luButton="ghost" luDialogDismiss>Cancel</button>
+			</div>
 		</lu-dialog-footer>
 	</lu-dialog>
 </ng-template>`,

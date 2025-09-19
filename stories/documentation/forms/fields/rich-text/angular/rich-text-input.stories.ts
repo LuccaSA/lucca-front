@@ -35,7 +35,7 @@ export const Basic: StoryObj<RichTextInputComponent & { value: string; disabled:
 			<lu-rich-text-input-toolbar />
 	</lu-rich-text-input>
 </lu-form-field>
-<pr-story-model-display>{{value}}</pr-story-model-display>`),
+<pr-story-model-display>{{ value }}</pr-story-model-display>`),
 			moduleMetadata: {
 				imports: [RichTextInputComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule],
 				providers: [provideLuRichTextMarkdownFormatter()],
@@ -64,7 +64,7 @@ export const WithNoInitialValue: StoryObj<RichTextInputComponent & { value: stri
 			<lu-rich-text-input-toolbar />
 	</lu-rich-text-input>
 </lu-form-field>
-<pr-story-model-display>{{value}}</pr-story-model-display>`),
+<pr-story-model-display>{{ value }}</pr-story-model-display>`),
 			moduleMetadata: {
 				imports: [RichTextInputComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule],
 				providers: [provideLuRichTextMarkdownFormatter()],
@@ -93,7 +93,7 @@ export const WithHtmlFormatter: StoryObj<RichTextInputComponent & { value: strin
 			<lu-rich-text-input-toolbar />
 	</lu-rich-text-input>
 </lu-form-field>
-<pr-story-model-display>{{value}}</pr-story-model-display>`),
+<pr-story-model-display>{{ value }}</pr-story-model-display>`),
 			moduleMetadata: {
 				imports: [RichTextInputComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule],
 				providers: [provideLuRichTextHTMLFormatter()],
@@ -136,7 +136,7 @@ export const WithTagPlugin: StoryObj<RichTextInputComponent & { value: string; d
 																	]" />
 		</lu-rich-text-input>
 </lu-form-field>
-<pr-story-model-display>{{value}}</pr-story-model-display>`),
+<pr-story-model-display>{{ value }}</pr-story-model-display>`),
 			moduleMetadata: {
 				imports: [RichTextInputComponent, RichTextPluginTagComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule],
 				providers: [provideLuRichTextHTMLFormatter()],
@@ -179,7 +179,7 @@ export const WithTagPluginMarkdown: StoryObj<RichTextInputComponent & { value: s
 																]" />
 	</lu-rich-text-input>
 </lu-form-field>
-<pr-story-model-display>{{value}}</pr-story-model-display>`),
+<pr-story-model-display>{{ value }}</pr-story-model-display>`),
 			moduleMetadata: {
 				imports: [RichTextInputComponent, RichTextPluginTagComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule],
 				providers: [provideLuRichTextMarkdownFormatter([...DEFAULT_MARKDOWN_TRANSFORMERS, TAGS])],

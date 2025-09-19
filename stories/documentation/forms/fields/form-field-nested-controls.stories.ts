@@ -52,11 +52,7 @@ export default {
 					</lu-radio-group-input>
 				</lu-form-field>
 			</form>
-
-			<pr-story-model-display>
-				{{form.value | json}}
-	</pr-story-model-display>
-
+			<pr-story-model-display>{{ form.value | json }}</pr-story-model-display>
 			`,
 		};
 	},

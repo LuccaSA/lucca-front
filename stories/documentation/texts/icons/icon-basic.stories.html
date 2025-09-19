@@ -8,8 +8,8 @@
 
 <div class="icons">
 	<div class="demo-icon" *ngFor="let icon of icons" (click)="copyIcon(icon.icon)">
-		<span aria-hidden="true" class="lucca-icon icon-{{icon.icon}}" [class.deprecated]="icon.deprecated"></span>
-		<code class="code">icon-{{icon.icon}}</code>
+		<span aria-hidden="true" class="lucca-icon icon-{{ icon.icon }}" [class.deprecated]="icon.deprecated"></span>
+		<code class="code">icon-{{ icon.icon }}</code>
 	</div>
 </div>
 

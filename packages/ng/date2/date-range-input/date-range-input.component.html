@@ -72,6 +72,7 @@
 					#popoverRef="luPopover2"
 					[customPositions]="popoverPositions"
 					(luPopoverClosed)="popoverClosed()"
+					(luPopoverOpened)="panelOpened.emit()"
 					tabindex="-1"
 					type="button"
 					class="button mod-onlyIcon mod-ghost textField-input-affix-toggle"

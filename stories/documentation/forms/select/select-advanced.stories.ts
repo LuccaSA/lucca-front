@@ -94,7 +94,7 @@ import { LuSelectInputComponent } from '@lucca-front/ng/select';
 					<ng-template ngPluralCase="0" />
 					<ng-template ngPluralCase="one">{{ colors[0].name }}</ng-template>
 					<ng-template ngPluralCase="other">
-						<span class="chip mod-unkillable">{{colors.length}}</span>
+						<span class="chip mod-unkillable">{{ colors.length }}</span>
 						couleurs
 					</ng-template>
 				</ng-container>
