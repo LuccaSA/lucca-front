@@ -38,8 +38,7 @@ function getTemplate(args: IndexTableBasicStory): string {
 			<td class="indexTable-body-row-cell">Content</td>
 		</tr>
 	</tbody>
-</table>
-`;
+</table>`;
 }
 
 const Template: StoryFn<IndexTableBasicStory> = (args) => ({

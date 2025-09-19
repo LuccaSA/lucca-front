@@ -33,9 +33,6 @@ export default {
 			control: { type: 'number' },
 			description: '[v18.1]',
 		},
-		counter: {
-			description: '[v17.4]',
-		},
 		autoResize: {
 			type: 'boolean',
 			description: '[v18.3]',

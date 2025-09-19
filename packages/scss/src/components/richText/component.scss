@@ -131,9 +131,7 @@
 		}
 
 		.richTextField-toolbar-chips-item {
-			@include reset.button;
-
-			width: auto;
+			border: 0;
 		}
 
 		.richTextField-content {

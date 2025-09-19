@@ -1,4 +1,4 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, ContentChild, ElementRef, HostListener, inject, Input, OnChanges, signal, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, ContentChild, ElementRef, inject, Input, OnChanges, signal, SimpleChanges, ViewEncapsulation } from '@angular/core';
 import { LuClass, Palette } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
 
@@ -14,6 +14,8 @@ import { IconComponent } from '@lucca-front/ng/icon';
 	host: {
 		class: 'button',
 		'[class.is-error]': 'notifyError()',
+		'(click)': 'triggerErrorIfNeeded()',
+		'(animationend)': 'notifyError.set(false)',
 	},
 })
 export class ButtonComponent implements OnChanges {
@@ -85,17 +87,14 @@ export class ButtonComponent implements OnChanges {
 		return this.#iconComponentRef?.nativeElement === this.#elementRef?.nativeElement?.lastChild;
 	}
 
-	ngOnChanges(): void {
+	ngOnChanges({ state }: SimpleChanges): void {
 		this.updateClasses();
+		if (state) {
+			this.triggerErrorIfNeeded();
+		}
 	}
 
-	@HostListener('animationend')
-	animationEnd() {
-		this.notifyError.set(false);
-	}
-
-	@HostListener('click')
-	triggerErrorIfNeeded() {
+	triggerErrorIfNeeded(): void {
 		if (this.state === 'error') {
 			this.notifyError.set(true);
 		}

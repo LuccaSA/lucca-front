@@ -2,7 +2,7 @@
 @use '@lucca-front/scss/src/commons/utils/namespace';
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
-	border-radius: var(--pr-t-border-radius-default);
+	border-radius: var(--components-box-borderRadius);
 	padding: var(--components-box-padding);
 	background-color: var(--components-box-background, var(--pr-t-elevation-surface-raised));
 	display: block;

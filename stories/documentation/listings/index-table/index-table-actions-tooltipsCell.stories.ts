@@ -72,8 +72,7 @@ function getTemplate(args: IndexTableActionsTooltipsCellStory): string {
 			</td>
 		</tr>
 	</tbody>
-</table>
-`;
+</table>`;
 }
 
 const Template: StoryFn<IndexTableActionsTooltipsCellStory> = (args) => ({

@@ -26,9 +26,6 @@ export default {
 				type: 'select',
 			},
 		},
-		mixed: {
-			description: '[v17.4]',
-		},
 		hiddenLabel: {
 			description: "Masque le label en le conservant dans le DOM pour les lecteurs d'écrans",
 		},
@@ -39,6 +36,7 @@ export default {
 			control: {
 				type: 'boolean',
 			},
+			description: '[v20.2]',
 		},
 	},
 } as Meta;

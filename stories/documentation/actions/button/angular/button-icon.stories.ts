@@ -44,12 +44,15 @@ export const Basic: StoryObj<ButtonComponent & { label: string }> = {
 			if: { arg: 'luButton', neq: 'AI' },
 		},
 		critical: {
-			description: '[v18.1] Couleur critical au hover / focus',
+			description: '[v20.2] Couleur critical au hover / focus',
 		},
 		size: {
 			control: {
 				type: 'select',
 			},
+		},
+		delete: {
+			description: 'Deprecated 💀, use critical instead',
 		},
 	},
 	args: {

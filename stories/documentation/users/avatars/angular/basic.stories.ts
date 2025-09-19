@@ -56,7 +56,6 @@ export default {
 			control: {
 				type: 'boolean',
 			},
-			description: '[v16.1]',
 		},
 		AI: {
 			control: {
