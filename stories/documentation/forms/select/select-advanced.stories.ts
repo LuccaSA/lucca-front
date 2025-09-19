@@ -16,7 +16,7 @@ import { Meta, StoryFn, applicationConfig } from '@storybook/angular';
 			<lu-select class="textfield-input" placeholder="Select advanced" [(ngModel)]="model" multiple>
 				<ng-template luDisplayer let-colors [luDisplayerMultiple]="true">
 					<ng-container [ngPlural]="colors.length">
-						<ng-template ngPluralCase="0"></ng-template>
+						<ng-template ngPluralCase="0" />
 						<ng-template ngPluralCase="one">{{ colors[0].name }}</ng-template>
 						<ng-template ngPluralCase="other">
 							<span class="numericBadge">{{ colors.length }}</span>
@@ -26,16 +26,16 @@ import { Meta, StoryFn, applicationConfig } from '@storybook/angular';
 				</ng-template>
 				<lu-option-picker-advanced>
 					<header class="lu-picker-header">
-						<lu-option-feeder [options]="options"></lu-option-feeder>
-						<lu-option-searcher [searchFn]="searchFn"></lu-option-searcher>
-						<lu-option-select-all class="pr-u-displayBlock pr-u-margin100"></lu-option-select-all>
-						<lu-option-pager></lu-option-pager>
+						<lu-option-feeder [options]="options" />
+						<lu-option-searcher [searchFn]="searchFn" />
+						<lu-option-select-all class="pr-u-displayBlock pr-u-margin100" />
+						<lu-option-pager />
 					</header>
 					<div class="lu-picker-content-option">
 						<lu-option *luForOptions="let option" [value]="option">{{ option.name }}</lu-option>
 					</div>
 				</lu-option-picker-advanced>
-				<lu-input-clearer></lu-input-clearer>
+				<lu-input-clearer />
 			</lu-select>
 			<span class="textfield-label">Choisissez une couleur</span>
 		</label>
@@ -91,7 +91,7 @@ import { LuSelectInputComponent } from '@lucca-front/ng/select';
 		>
 			<ng-template luDisplayer let-colors [luDisplayerMultiple]="true">
 				<ng-container [ngPlural]="colors.length">
-					<ng-template ngPluralCase="0"></ng-template>
+					<ng-template ngPluralCase="0" />
 					<ng-template ngPluralCase="one">{{ colors[0].name }}</ng-template>
 					<ng-template ngPluralCase="other">
 						<span class="chip mod-unkillable">{{ colors.length }}</span>
@@ -101,14 +101,14 @@ import { LuSelectInputComponent } from '@lucca-front/ng/select';
 			</ng-template>
 			<lu-option-picker-advanced>
 				<header class="lu-picker-header">
-					<lu-option-feeder [options]="options"></lu-option-feeder>
-					<lu-option-searcher [searchFn]="searchFn"></lu-option-searcher>
-					<lu-option-select-all></lu-option-select-all>
-					<lu-option-pager></lu-option-pager>
+					<lu-option-feeder [options]="options" />
+					<lu-option-searcher [searchFn]="searchFn" />
+					<lu-option-select-all />
+					<lu-option-pager />
 				</header>
 				<lu-option *luForOptions="let option" [value]="option">{{ option.name }}</lu-option>
 			</lu-option-picker-advanced>
-			<lu-input-clearer></lu-input-clearer>
+			<lu-input-clearer />
 		</lu-select>
 		<span class="textfield-label">Choisissez une couleur</span>
 	</label>

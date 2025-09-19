@@ -26,7 +26,7 @@ const Template: StoryFn<DropdownBasicStory> = (args) => ({
 const code = `/* 1. Ajouter un bouton détenant la directive [luDropdown]="dropdown" */
 <button type="button" class="button" [luDropdown]="dropdown">Open dropdown</button>
 
-/* 2. Ajouter le composant <lu-dropdown #dropdown></lu-dropdown> avec la référence de la directive */
+/* 2. Ajouter le composant <lu-dropdown #dropdown /> avec la référence de la directive */
 <lu-dropdown #dropdown>
 	<li class="dropdown-list-option">
 		<span class="dropdown-list-option-action is-disabled" luDropdownItem>

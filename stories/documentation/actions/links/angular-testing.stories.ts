@@ -25,7 +25,7 @@ class SecondPageComponent {}
 			<br />
 			<a luLink [href]="url" target="_blank" external>Go to https://example.org</a>
 		</div>
-		<router-outlet></router-outlet>
+		<router-outlet />
 	`,
 	imports: [LinkComponent, RouterOutlet],
 	changeDetection: ChangeDetectionStrategy.OnPush,

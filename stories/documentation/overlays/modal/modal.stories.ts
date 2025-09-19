@@ -1,7 +1,7 @@
 import { Component, inject, Input, Type } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { ButtonComponent } from '@lucca-front/ng/button';
-import { ILuModalContent, LuModal, LuModalConfig, LuModalModule, LU_MODAL_DATA } from '@lucca-front/ng/modal';
+import { ILuModalContent, LU_MODAL_DATA, LuModal, LuModalConfig, LuModalModule } from '@lucca-front/ng/modal';
 import { LuToastsModule, LuToastsService } from '@lucca-front/ng/toast';
 import { applicationConfig, Meta, moduleMetadata } from '@storybook/angular';
 import { map, shareReplay, timer } from 'rxjs';
@@ -84,7 +84,7 @@ class ModalDynamicContentComponent implements ILuModalContent {
 	selector: 'modal-stories',
 	standalone: true,
 	template: `
-		<lu-toasts [sources]="[]"></lu-toasts>
+		<lu-toasts [sources]="[]" />
 		<button type="button" luButton (click)="openModal()">Open</button>
 	`,
 	imports: [LuToastsModule, ButtonComponent],
@@ -135,7 +135,7 @@ class ModalStories {
 	}
 }
 
-const template = `<modal-stories [mode]="mode" [position]="position" [panelClass]="panelClass" [undismissable]="undismissable" [size]="size" [noBackdrop]="noBackdrop" [useDynamicContent]="useDynamicContent" [message]="message"></modal-stories>`;
+const template = `<modal-stories [mode]="mode" [position]="position" [panelClass]="panelClass" [undismissable]="undismissable" [size]="size" [noBackdrop]="noBackdrop" [useDynamicContent]="useDynamicContent" [message]="message" />`;
 
 export const Modal = generateStory({
 	name: 'Basic',

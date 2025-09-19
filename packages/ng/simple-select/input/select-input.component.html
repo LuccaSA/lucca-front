@@ -20,7 +20,7 @@
 		[attr.tabindex]="inputTabindex()"
 	/>
 	<div class="simpleSelect-field-value">
-		<ng-container *ngTemplateOutlet="currentValueDisplayerTpl"></ng-container>
+		<ng-container *ngTemplateOutlet="currentValueDisplayerTpl" />
 	</div>
 	@if (!filterPillMode) {
 		@if (clearable && hasValue() && (disabled$ | async) === false) {
@@ -38,11 +38,11 @@
 		<lu-icon icon="searchMagnifyingGlass" class="simpleSelect-field-icon mod-search" />
 	}
 </div>
-<ng-container #filterPillPanelAnchor></ng-container>
+<ng-container #filterPillPanelAnchor />
 <ng-container *luFilterPillDisplayer>
-	<ng-container *ngTemplateOutlet="currentValueDisplayerTpl"></ng-container>
+	<ng-container *ngTemplateOutlet="currentValueDisplayerTpl" />
 </ng-container>
 
 <ng-template #currentValueDisplayerTpl>
-	<ng-container *luOptionOutlet="displayerTpl(); value: value"></ng-container>
+	<ng-container *luOptionOutlet="displayerTpl(); value: value" />
 </ng-template>

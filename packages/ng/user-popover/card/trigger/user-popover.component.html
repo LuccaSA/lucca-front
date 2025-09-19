@@ -45,7 +45,7 @@
 					<!-- HORS CONTRAT-->
 					@if (employee.dtContractStart | isFuture) {
 						<span class="userPopover-details-info-detail-workplace">
-							<lu-icon icon="calendarPlanning" size="S"></lu-icon>
+							<lu-icon icon="calendarPlanning" size="S" />
 							<span class="userPopover-details-info-detail-link-state">
 								{{ intl.EMPLOYEE_CARD_PANEL_COMING_ON_LABEL | intlParams: { date: (employee.dtContractStart | date: "shortDate") } }}
 							</span>
@@ -54,7 +54,7 @@
 					<!-- Contrat terminé -->
 					@if (!(employee.dtContractStart | isFuture) && !(employee.dtContractEnd | isFutureOrToday)) {
 						<span class="userPopover-details-info-detail-workplace">
-							<lu-icon icon="calendarStrikethrough" size="S"></lu-icon>
+							<lu-icon icon="calendarStrikethrough" size="S" />
 							<span class="userPopover-details-info-detail-link-state"> {{ intl.EMPLOYEE_CARD_PANEL_EMPLOYEE_HAS_LEAVED_LABEL }} </span>
 						</span>
 					}
@@ -63,10 +63,10 @@
 					@if (employee._links?.schedule && !(employee.dtContractStart | isFuture) && (employee.dtContractEnd | isFutureOrToday)) {
 						<a class="userPopover-details-info-detail-workplace" [href]="employee._links?.schedule?.href">
 							@if (employee.isWorkingNow && employee.currentWorkLocation) {
-								<lu-icon icon="mapPin" size="S"></lu-icon>
+								<lu-icon icon="mapPin" size="S" />
 							}
 							@if (!employee.isWorkingNow || !employee.currentWorkLocation) {
-								<lu-icon icon="calendarPlanning" size="S"></lu-icon>
+								<lu-icon icon="calendarPlanning" size="S" />
 							}
 							<span class="userPopover-details-info-detail-workplace-state">
 								@if (employee.isWorkingNow) {

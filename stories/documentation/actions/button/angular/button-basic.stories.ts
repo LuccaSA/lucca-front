@@ -13,7 +13,7 @@ export default {
 		}),
 	],
 	render: ({ luButton, ...inputs }, { argTypes }) => {
-		const disclosureIcon = '<lu-icon icon="arrowChevronBottom"/>';
+		const disclosureIcon = '<lu-icon icon="arrowChevronBottom" />';
 		return {
 			template: `<button type="button" luButton${luButton !== '' ? `="${luButton}"` : ''}${generateInputs(inputs, argTypes)}
 >Button${inputs['disclosure'] ? disclosureIcon : ''}</button>`,

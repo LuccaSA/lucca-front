@@ -81,8 +81,8 @@ const template: StoryFn<ToastsStory> = (args) => ({
 });
 
 const code = `
-/* Ajouter l'encre <lu-toasts></lu-toasts> dans le app.component.html */
-<lu-toasts [bottom]="true" [sources]="[]"></lu-toasts>
+/* Ajouter l'encre <lu-toasts /> dans le app.component.html */
+<lu-toasts [bottom]="true" [sources]="[]" />
 
 /* Ajouter un toast avec la méthode addToast(..) du LuToastsService */
 @Component({

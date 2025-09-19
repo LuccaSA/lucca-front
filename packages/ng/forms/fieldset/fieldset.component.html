@@ -14,12 +14,12 @@
 				[attr.aria-expanded]="expanded()"
 				(click)="expanded.set(!expanded())"
 			>
-				<ng-container *ngTemplateOutlet="titleContent"></ng-container>
+				<ng-container *ngTemplateOutlet="titleContent" />
 				<lu-icon icon="arrowChevronBottom" />
 			</button>
 		} @else {
 			<span class="fieldset-title-content" [attr.id]="id">
-				<ng-container *ngTemplateOutlet="titleContent"></ng-container>
+				<ng-container *ngTemplateOutlet="titleContent" />
 			</span>
 		}
 	</legend>

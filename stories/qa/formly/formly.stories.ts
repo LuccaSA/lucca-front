@@ -14,7 +14,7 @@ import { StoryModelDisplayComponent } from 'stories/helpers/story-model-display.
 	imports: [LuFormlyModule, FormlyModule, ReactiveFormsModule, JsonPipe, StoryModelDisplayComponent],
 	template: `
 		<form [formGroup]="form" role="form" autocomplete="off" (ngSubmit)="submit()">
-			<formly-form class="form" [form]="form" [fields]="fields" [model]="model"></formly-form>
+			<formly-form class="form" [form]="form" [fields]="fields" [model]="model" />
 		</form>
 
 		<pr-story-model-display>{{ model | json }}</pr-story-model-display>

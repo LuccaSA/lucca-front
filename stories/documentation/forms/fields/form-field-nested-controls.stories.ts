@@ -45,7 +45,7 @@ export default {
 							Coucou
 							@if(form.value.foo === 1) {
 								<lu-form-field label="Level 2">
-									<lu-text-input formControlName="bar"></lu-text-input>
+									<lu-text-input formControlName="bar" />
 								</lu-form-field>
 							}
 						</lu-radio>

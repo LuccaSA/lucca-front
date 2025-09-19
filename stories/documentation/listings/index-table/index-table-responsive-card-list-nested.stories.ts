@@ -53,7 +53,7 @@ function getTemplate(args: IndexTableResponsiveCardListNestedStory): string {
 			<th class="indexTable-body-row-transparentCell" headers="y2021" colspan="2">
 				<label class="formLabel pr-u-mask" for="r1chbx">Select all items for september 2021</label>
 				<span class="checkboxField indexTable-body-row-cell-checkbox">
-					<input class="checkboxField-input" type="checkbox" id="r1chbx" aria-controls="r2chbx"/>
+					<input class="checkboxField-input" type="checkbox" id="r1chbx" aria-controls="r2chbx" />
 					<span class="checkboxField-icon" aria-hidden="true"><span
 							class="checkboxField-icon-check"></span></span>
 				</span>
@@ -74,7 +74,7 @@ function getTemplate(args: IndexTableResponsiveCardListNestedStory): string {
 			<td class="indexTable-body-row-transparentCell" headers="y2021 september" colspan="2">
 				<label class="formLabel pr-u-mask" for="r2chbx">Select this item</label>
 				<span class="checkboxField indexTable-body-row-cell-checkbox">
-					<input class="checkboxField-input" type="checkbox" id="r2chbx"/>
+					<input class="checkboxField-input" type="checkbox" id="r2chbx" />
 					<span class="checkboxField-icon" aria-hidden="true"><span
 							class="checkboxField-icon-check"></span></span>
 				</span>
@@ -110,7 +110,7 @@ function getTemplate(args: IndexTableResponsiveCardListNestedStory): string {
 			<td class="indexTable-body-row-transparentCell" headers="y2021 october" colspan="2">
 				<label class="formLabel pr-u-mask" for="r4chbx">Select this item</label>
 				<span class="checkboxField indexTable-body-row-cell-checkbox">
-					<input class="checkboxField-input" type="checkbox" checked id="r4chbx"/>
+					<input class="checkboxField-input" type="checkbox" checked id="r4chbx" />
 					<span class="checkboxField-icon" aria-hidden="true"><span
 							class="checkboxField-icon-check"></span></span>
 				</span>
@@ -125,7 +125,7 @@ function getTemplate(args: IndexTableResponsiveCardListNestedStory): string {
 			<td class="indexTable-body-row-transparentCell" headers="y2021 october" colspan="2">
 				<label class="formLabel pr-u-mask" for="r5chbx">Select this item</label>
 				<span class="checkboxField indexTable-body-row-cell-checkbox">
-					<input class="checkboxField-input" type="checkbox" id="r5chbx"/>
+					<input class="checkboxField-input" type="checkbox" id="r5chbx" />
 					<span class="checkboxField-icon" aria-hidden="true"><span
 							class="checkboxField-icon-check"></span></span>
 				</span>
@@ -142,7 +142,7 @@ function getTemplate(args: IndexTableResponsiveCardListNestedStory): string {
 			<th class="indexTable-body-row-transparentCell">
 				<label class="formLabel pr-u-mask" for="r6chbx">Select all items for 2022</label>
 				<span class="checkboxField indexTable-body-row-cell-checkbox">
-					<input class="checkboxField-input" type="checkbox" id="r6chbx" aria-controls="r7chbx r8chbx"/>
+					<input class="checkboxField-input" type="checkbox" id="r6chbx" aria-controls="r7chbx r8chbx" />
 					<span class="checkboxField-icon" aria-hidden="true"><span
 							class="checkboxField-icon-check"></span></span>
 				</span>
@@ -163,7 +163,7 @@ function getTemplate(args: IndexTableResponsiveCardListNestedStory): string {
 			<th class="indexTable-body-row-transparentCell" headers="y2022" colspan="2">
 				<label class="formLabel pr-u-mask" for="r7chbx">Select all items for january 2022</label>
 				<span class="checkboxField indexTable-body-row-cell-checkbox">
-					<input class="checkboxField-input" type="checkbox" id="r7chbx" aria-controls="r8chbx"/>
+					<input class="checkboxField-input" type="checkbox" id="r7chbx" aria-controls="r8chbx" />
 					<span class="checkboxField-icon" aria-hidden="true"><span
 							class="checkboxField-icon-check"></span></span>
 				</span>
@@ -184,7 +184,7 @@ function getTemplate(args: IndexTableResponsiveCardListNestedStory): string {
 			<td class="indexTable-body-row-transparentCell" headers="y2022 january" colspan="2">
 				<label class="formLabel pr-u-mask" for="r8chbx">Select this item</label>
 				<span class="checkboxField indexTable-body-row-cell-checkbox">
-					<input class="checkboxField-input" type="checkbox" id="r8chbx"/>
+					<input class="checkboxField-input" type="checkbox" id="r8chbx" />
 					<span class="checkboxField-icon" aria-hidden="true"><span
 							class="checkboxField-icon-check"></span></span>
 				</span>

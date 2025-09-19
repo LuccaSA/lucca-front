@@ -33,43 +33,43 @@ function getTemplate(): string {
 				<div class="grid-column">
 					<lu-form-field label="Label" inlineMessage="Helper text">
 						<!-- In real cases, you'll most likely use formControlName here or have a name attribute, standalone: true is just for this example -->
-						<lu-text-input ngModel [ngModelOptions]="{standalone: true}" placeholder="Placeholder"></lu-text-input>
+						<lu-text-input ngModel [ngModelOptions]="{standalone: true}" placeholder="Placeholder" />
 					</lu-form-field>
 				</div>
 				<div class="grid-column" style="--grid-colspanAtMediaMinXXS: 2">
 					<lu-form-field label="Label">
 						<!-- In real cases, you'll most likely use formControlName here or have a name attribute, standalone: true is just for this example -->
-						<lu-text-input ngModel [ngModelOptions]="{standalone: true}" placeholder="Placeholder"></lu-text-input>
+						<lu-text-input ngModel [ngModelOptions]="{standalone: true}" placeholder="Placeholder" />
 					</lu-form-field>
 				</div>
 				<div class="grid-column" style="--grid-colspanAtMediaMinXXS: 2">
 					<lu-form-field label="Label">
 						<!-- In real cases, you'll most likely use formControlName here or have a name attribute, standalone: true is just for this example -->
-						<lu-text-input ngModel [ngModelOptions]="{standalone: true}" placeholder="Placeholder"></lu-text-input>
+						<lu-text-input ngModel [ngModelOptions]="{standalone: true}" placeholder="Placeholder" />
 					</lu-form-field>
 				</div>
 				<div class="grid-column" style="--grid-colspanAtMediaMinXXS: 1">
 					<lu-form-field label="Label">
 						<!-- In real cases, you'll most likely use formControlName here or have a name attribute, standalone: true is just for this example -->
-						<lu-text-input ngModel [ngModelOptions]="{standalone: true}" placeholder="Placeholder"></lu-text-input>
+						<lu-text-input ngModel [ngModelOptions]="{standalone: true}" placeholder="Placeholder" />
 					</lu-form-field>
 				</div>
 				<div class="grid-column" style="--grid-colspanAtMediaMinXXS: 1">
 					<lu-form-field label="Label">
 						<!-- In real cases, you'll most likely use formControlName here or have a name attribute, standalone: true is just for this example -->
-						<lu-text-input ngModel [ngModelOptions]="{standalone: true}" placeholder="Placeholder"></lu-text-input>
+						<lu-text-input ngModel [ngModelOptions]="{standalone: true}" placeholder="Placeholder" />
 					</lu-form-field>
 				</div>
 				<div class="grid-column" style="--grid-colspanAtMediaMinXXS: 1">
 					<lu-form-field label="Label">
 						<!-- In real cases, you'll most likely use formControlName here or have a name attribute, standalone: true is just for this example -->
-						<lu-text-input ngModel [ngModelOptions]="{standalone: true}" placeholder="Placeholder"></lu-text-input>
+						<lu-text-input ngModel [ngModelOptions]="{standalone: true}" placeholder="Placeholder" />
 					</lu-form-field>
 				</div>
 				<div class="grid-column" style="--grid-colspanAtMediaMinXXS: 1">
 					<lu-form-field label="Label">
 						<!-- In real cases, you'll most likely use formControlName here or have a name attribute, standalone: true is just for this example -->
-						<lu-text-input ngModel [ngModelOptions]="{standalone: true}" placeholder="Placeholder"></lu-text-input>
+						<lu-text-input ngModel [ngModelOptions]="{standalone: true}" placeholder="Placeholder" />
 					</lu-form-field>
 				</div>
 			</div>
@@ -90,19 +90,19 @@ function getTemplate(): string {
 				<div class="grid-column">
 					<lu-form-field label="Label" inlineMessage="Helper text">
 						<!-- In real cases, you'll most likely use formControlName here or have a name attribute, standalone: true is just for this example -->
-						<lu-text-input ngModel [ngModelOptions]="{standalone: true}" placeholder="Placeholder"></lu-text-input>
+						<lu-text-input ngModel [ngModelOptions]="{standalone: true}" placeholder="Placeholder" />
 					</lu-form-field>
 				</div>
 				<div class="grid-column" style="--grid-colspanAtMediaMinXXS: 2">
 					<lu-form-field label="Label">
 						<!-- In real cases, you'll most likely use formControlName here or have a name attribute, standalone: true is just for this example -->
-						<lu-text-input ngModel [ngModelOptions]="{standalone: true}" placeholder="Placeholder"></lu-text-input>
+						<lu-text-input ngModel [ngModelOptions]="{standalone: true}" placeholder="Placeholder" />
 					</lu-form-field>
 				</div>
 				<div class="grid-column" style="--grid-colspanAtMediaMinXXS: 2">
 					<lu-form-field label="Label">
 						<!-- In real cases, you'll most likely use formControlName here or have a name attribute, standalone: true is just for this example -->
-						<lu-text-input ngModel [ngModelOptions]="{standalone: true}" placeholder="Placeholder"></lu-text-input>
+						<lu-text-input ngModel [ngModelOptions]="{standalone: true}" placeholder="Placeholder" />
 					</lu-form-field>
 				</div>
 			</div>

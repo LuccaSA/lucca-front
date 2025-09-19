@@ -38,13 +38,13 @@ class UserSelectStoriesModule {}
 
 /* 2. (Exemple n° 1) Utiliser le lu-user-select */
 <label class="textfield">
-  <lu-user-select class="textfield-input" [ngModel]="model"></lu-user-select>
+  <lu-user-select class="textfield-input" [ngModel]="model" />
   <span class="textfield-label">Utilisateurs</span>
 </label>
 
 /* 3. (Exemple n° 2) Utiliser le lu-user-select avec <code class="code">enableFormerEmployees</code> */
 <label class="textfield pr-u-marginBlockStart300">
-  <lu-user-select class="textfield-input" [ngModel]="model" [enableFormerEmployees]="true"></lu-user-select>
+  <lu-user-select class="textfield-input" [ngModel]="model" [enableFormerEmployees]="true" />
   <span class="textfield-label">Utilisateurs avec <code class="code">enableFormerEmployees</code></span>
 </label>
 
