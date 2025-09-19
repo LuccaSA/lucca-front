@@ -13,7 +13,7 @@ export default {
 	render: (args, { argTypes }) => {
 		return {
 			template: `<div class="box">
-	<h3 class="pr-u-h3 pr-u-marginBlockEnd150 pr-u-displayFlex pr-u-flexWrapWrap pr-u-columnGap100">
+	<h3 class="mod-elementAfterText pr-u-marginBlockEnd150">
 		Ce qu’il faut retenir
 		<lu-tag AI label="Généré par IA" icon="weatherStars" />
 	</h3>

@@ -53,11 +53,9 @@
 			</span>
 		}
 	</label>
-	<div class="pr-u-displayFlex pr-u-gap100 pr-u-alignItemsCenter">
-		<div class="pr-u-flexGrow1">
+	@if (AI()) {
+		<div class="form-field-contentOptional">
 			<ng-container *ngTemplateOutlet="projectionTpl" />
-		</div>
-		@if (AI()) {
 			<lu-icon
 				class="pr-u-focusVisible pr-u-borderRadiusSmall"
 				[luTooltip]="iconAItooltip()"
@@ -66,8 +64,11 @@
 				icon="weatherStars"
 				[alt]="iconAIalt()"
 			/>
-		}
-	</div>
+		</div>
+	} @else {
+		<ng-container *ngTemplateOutlet="projectionTpl" />
+	}
+
 	@if (inlineMessage() || (invalidStatus() ? errorInlineMessage() : false)) {
 		<lu-inline-message
 			id="{{ id() }}-message"
