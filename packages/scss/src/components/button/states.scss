@@ -1,3 +1,4 @@
+@use '@lucca-front/icons/src/icon/exports' as icons;
 @use '@lucca-front/scss/src/commons/config';
 @use '@lucca-front/scss/src/commons/core';
 @use '@lucca-front/scss/src/commons/utils/keyframe';
@@ -73,6 +74,30 @@
 
 	.numericBadge {
 		@include numericBadge.state;
+	}
+}
+
+@mixin loadingAI {
+	.lucca-icon {
+		@include icons.transparent;
+	}
+
+	&::before {
+		content: none;
+	}
+}
+
+@mixin successAI {
+	.lucca-icon {
+		@include icons.transparent;
+	}
+
+	&::before {
+		content: none;
+	}
+
+	&::after {
+		@include icons.AI;
 	}
 }
 

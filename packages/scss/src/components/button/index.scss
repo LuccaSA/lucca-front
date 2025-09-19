@@ -6,6 +6,14 @@
 
 	&.mod-AI {
 		@include AI;
+
+		&.is-success {
+			@include successAI;
+		}
+
+		&.is-loading {
+			@include loadingAI;
+		}
 	}
 
 	&.mod-block {

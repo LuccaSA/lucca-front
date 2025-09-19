@@ -30,16 +30,18 @@ export default {
 
 		return {
 			props: { example: 'Formulaires : utiliser le bon composant pour le bon besoin' },
-			template: `<lu-form-field label="Intitulé">
-	<lu-text-input required type="text" [(ngModel)]="example" />
-</lu-form-field>
-<lu-callout AI iconAlt="${iconAlt}"${generateInputs(inputs, context.argTypes)}>
-	<div class="callout-content-description-text">${description}</div>
-	<lu-callout-actions inline>
-		<button luButton="outlined" class="callout-content-description-actions-accept"><lu-icon icon="signConfirm" alt="Accepter" /></button>
-		<button luButton="outlined" class="callout-content-description-actions-reject"><lu-icon icon="signClose" alt="Refuser" /></button>
-	</lu-callout-actions>
-</lu-callout>`,
+			template: `<div class="suggestion">
+	<lu-form-field label="Intitulé" class="suggestion-form-field">
+		<lu-text-input required type="text" [(ngModel)]="example" />
+	</lu-form-field>
+	<lu-callout AI iconAlt="${iconAlt}"${generateInputs(inputs, context.argTypes)} class="suggestion-callout">
+		<div class="suggestion-callout-text">${description}</div>
+		<lu-callout-actions inline>
+			<button luButton="outlined" class="suggestion-callout-accept"><lu-icon icon="signConfirm" alt="Accepter" /></button>
+			<button luButton="outlined" class="suggestion-callout-reject"><lu-icon icon="signClose" alt="Refuser" /></button>
+		</lu-callout-actions>
+	</lu-callout>
+</div>`,
 		};
 	},
 	argTypes: {

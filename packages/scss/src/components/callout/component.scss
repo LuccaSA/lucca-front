@@ -45,13 +45,9 @@
 			justify-content: space-between;
 			gap: var(--pr-t-spacings-150);
 			align-items: flex-start;
-			
+
 		}
 
-		.callout-content-description-text {
-			text-decoration: var(--components-callout-content-description-text-textDecoration);
-			color: var(--components-callout-content-description-text-color);
-		}
 
 		.callout-content-description-actions {
 			display: flex;
