@@ -7,9 +7,7 @@ import { CalloutComponent } from '@lucca-front/ng/callout';
 	standalone: true,
 	imports: [CalloutComponent],
 	template: ` <lu-callout icon="settingsGear" size="S" heading="NgModel value">
-		<pre class="code" data-testid="pr-ng-model">
-			<ng-content />
-		</pre>
+		<pre class="code" data-testid="pr-ng-model"><ng-content /></pre>
 	</lu-callout>`,
 	styles: `
 		pr-story-model-display {
@@ -28,6 +26,12 @@ import { CalloutComponent } from '@lucca-front/ng/callout';
 		pr-story-model-display pre:focus-visible {
 			outline: 2px solid var(--palettes-brand-700);
 			outline-offset: 2px;
+		}
+
+		pr-story-model-display:has(.code:empty) {
+			.callout-content-description {
+				display: none;
+			}
 		}
 	`,
 	encapsulation: ViewEncapsulation.None,

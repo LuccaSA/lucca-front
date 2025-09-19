@@ -21,4 +21,8 @@
 	&.mod-disabled {
 		@include disabled;
 	}
+
+	&.mod-AI {
+		@include AI;
+	}
 }

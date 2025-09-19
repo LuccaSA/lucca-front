@@ -1,3 +1,4 @@
+export * from './callout-actions/callout-actions.component';
 export * from './callout-disclosure/callout-disclosure.component';
 export * from './callout-feedback-item/callout-feedback-item.component';
 export * from './callout-feedback-list/callout-feedback-list.component';

@@ -13,13 +13,14 @@ function getTemplate(args: UserAvatarDisplayStory): string {
 </span>
 <span class="avatar" translate="no">
 	<span class="avatar-picture" style="background-color: rgb(202, 92, 214)">
-		<span class="avatar-picture-initials" translate="no">FM</span>
+		<span class="avatar-picture-initials">FM</span>
 	</span>
 </span>
 <span class="avatar mod-placeholder" translate="no">
-	<span class="avatar-picture">
-		<span class="avatar-picture-initials" translate="no">JT</span>
-	</span>
+	<span class="avatar-picture"></span>
+</span>
+<span class="avatar mod-AI" translate="no">
+	<span class="avatar-picture"></span>
 </span>`;
 }
 

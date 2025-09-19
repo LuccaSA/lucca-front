@@ -8,6 +8,10 @@ h5,
 h6 {
 	@include vars;
 	@include component;
+
+	&.mod-elementAfterText {
+		@include elementAfterText;
+	}
 }
 
 h1 {

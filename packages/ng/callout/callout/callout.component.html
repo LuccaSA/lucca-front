@@ -1,8 +1,8 @@
 @if (!removed) {
-	<div class="callout" [class]="calloutClasses">
+	<div class="callout" [class]="calloutClasses" [class.mod-AI]="AI()">
 		@if (state | luCalloutIcon: icon; as calloutIcon) {
 			<div class="callout-icon">
-				<span aria-hidden="true" class="lucca-icon icon-{{ calloutIcon }}"></span>
+				<lu-icon [icon]="calloutIcon" [alt]="iconAlt()" />
 			</div>
 		}
 		<div class="callout-content">

@@ -65,6 +65,16 @@
 			}
 		}
 
+		.form-field-contentOptional {
+			display: flex;
+			gap: var(--pr-t-spacings-100);
+			align-items: center;
+
+			> :first-child {
+				flex-grow: 1;
+			}
+		}
+
 		// deprecated
 
 		.form-group-label,

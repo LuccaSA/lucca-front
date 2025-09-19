@@ -29,6 +29,7 @@ export const PaletteAllArgType = {
 	control: {
 		type: 'select',
 	},
+	if: { arg: 'AI', truthy: false },
 } as const;
 
 export const HiddenArgType = {
