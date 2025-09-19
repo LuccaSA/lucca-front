@@ -1,4 +1,5 @@
 import { FormsModule } from '@angular/forms';
+import { DividerComponent } from '@lucca-front/ng/divider';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { FieldsetComponent, TextInputComponent } from '@lucca-front/ng/forms';
 import { GridColumnComponent, GridComponent } from '@lucca-front/ng/grid';
@@ -8,7 +9,7 @@ export default {
 	title: 'Documentation/Forms/Examples/Angular',
 	decorators: [
 		moduleMetadata({
-			imports: [FormFieldComponent, TextInputComponent, FormsModule, GridColumnComponent, GridComponent, FieldsetComponent],
+			imports: [FormFieldComponent, TextInputComponent, FormsModule, GridColumnComponent, GridComponent, FieldsetComponent, DividerComponent],
 		}),
 	],
 	argTypes: {},
