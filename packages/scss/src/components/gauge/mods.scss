@@ -1,14 +1,28 @@
 @mixin thin {
-	--components-gauge-height: var(--pr-t-spacings-50);
+	--components-gauge-blockSize: var(--pr-t-spacings-50);
+	--components-gauge-circle-strokeWidth: var(--pr-t-spacings-50);
 }
 
+// @mixin vertical is deprecated
 @mixin vertical {
-	inline-size: var(--components-gauge-height);
-	block-size: 100%;
+	--components-gauge-blockSize: 100%;
+	--components-gauge-inlineSize: var(--components-gauge-height, var(--pr-t-spacings-100));
+	--components-gauge-before-minInlineSize: var(--components-gauge-inlineSize);
 
-	.gauge-bar {
-		border-inline-start-width: var(--components-gauge-height);
-		border-inline-start-style: solid;
-		border-block-end-width: 0;
+	.gauge-bar,
+	&::before {
+		inline-size: 100%;
+		block-size: var(--components-gauge-value);
 	}
+}
+
+// @mixin verticalThin is deprecated
+@mixin verticalThin {
+	--components-gauge-inlineSize: var(--pr-t-spacings-50);
+}
+
+@mixin circular {
+	--components-gauge-borderRadius: 0;
+	--components-gauge-blockSize: auto;
+	--components-gauge-background: transparent;
 }
