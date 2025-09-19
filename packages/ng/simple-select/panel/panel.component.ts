@@ -10,19 +10,20 @@ import {
 	LuSelectPanelRef,
 	SELECT_ID,
 	SELECT_PANEL_INSTANCE,
+	TreeDisplayPipe,
+	TreeNode,
 	ɵCoreSelectPanelElement,
 	ɵgetGroupTemplateLocation,
 	ɵLuOptionComponent,
 	ɵLuOptionGroupPipe,
 } from '@lucca-front/ng/core-select';
 import { IconComponent } from '@lucca-front/ng/icon';
+import { TreeBranchComponent } from '@lucca-front/ng/tree-select';
 import { EMPTY } from 'rxjs';
 import { LuSimpleSelectInputComponent } from '../input/select-input.component';
 import { SIMPLE_SELECT_INPUT } from '../select.model';
 import { LU_SIMPLE_SELECT_TRANSLATIONS } from '../select.translate';
 import { LuIsOptionSelectedPipe } from './option-selected.pipe';
-import { TreeBranchComponent } from '@lucca-front/ng/tree-select';
-import { TreeDisplayPipe, TreeNode } from '@lucca-front/ng/core-select';
 
 @Component({
 	selector: 'lu-select-panel',
@@ -63,6 +64,7 @@ export class LuSelectPanelComponent<T> implements AfterViewInit, CoreSelectPanel
 	treeGenerator = this.selectInput.treeGenerator;
 	loading$ = this.selectInput.loading$;
 	searchable = this.selectInput.searchable;
+	emptyMessage = computed(() => this.selectInput.emptyMessage());
 	optionComparer = this.selectInput.optionComparer;
 	optionKey = this.selectInput.optionKey;
 
