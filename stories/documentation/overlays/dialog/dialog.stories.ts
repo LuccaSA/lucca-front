@@ -85,7 +85,7 @@ export default {
 			},
 		},
 		size: {
-			options: ['fitContent', 'XS', 'S', '', 'L', 'XL', 'maxContent', 'fullScreen'],
+			options: ['fitContent', 'XS', 'S', '', 'L', 'XL', 'XXL', 'maxContent', 'fullScreen'],
 			control: {
 				type: 'select',
 			},
