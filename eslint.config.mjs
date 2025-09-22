@@ -8,7 +8,7 @@ import typescript from 'typescript-eslint';
 
 export default typescript.config(
 	{
-		ignores: ['**/*.stories.ts', '**/schematics/**/tests/output', '**/schematics/**/tests/input'],
+		ignores: ['**/*.stories.ts', '**/schematics/**/tests/'],
 	},
 	{
 		linterOptions: {
