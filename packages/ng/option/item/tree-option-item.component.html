@@ -6,7 +6,7 @@
 		[class.is-selected]="selected"
 		[class.is-highlighted]="highlighted"
 	>
-		<ng-container #value></ng-container>
+		<ng-container #value />
 	</div>
 	<div class="optionItem-icons" *ngIf="hasChildren">
 		<span *ngIf="!_tree.disabled" class="optionItem-icon parentOnly" (click)="selectSelf()" [luTooltip]="intl.parentOnly">
@@ -35,5 +35,5 @@
 </div>
 
 <div #children class="children">
-	<ng-container #children></ng-container>
+	<ng-container #children />
 </div>

@@ -9,5 +9,5 @@
 	[attr.disabled]="formControl.disabled || disabled() ? 'disabled' : null"
 />
 <label [attr.for]="id" class="segmentedControl-item-action">
-	<ng-container *luPortal="label()"></ng-container>
+	<ng-container *luPortal="label()" />
 </label>
