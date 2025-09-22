@@ -5,7 +5,7 @@ interface GridsFormStory {
 }
 
 export default {
-	title: 'Documentation/Structure/Grids/Form',
+	title: 'Documentation/Structure/Grids/HTML & CSS/Form',
 	argTypes: {},
 } as Meta;
 

@@ -5,7 +5,7 @@ interface GridsResponsiveStory {
 }
 
 export default {
-	title: 'Documentation/Structure/Grids/Responsive',
+	title: 'Documentation/Structure/Grids/HTML & CSS/Responsive',
 	argTypes: {},
 } as Meta;
 

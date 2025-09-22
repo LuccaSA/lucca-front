@@ -5,7 +5,7 @@ interface GridsGapsStory {
 }
 
 export default {
-	title: 'Documentation/Structure/Grids/Gaps',
+	title: 'Documentation/Structure/Grids/HTML & CSS/Gaps',
 	argTypes: {},
 } as Meta;
 

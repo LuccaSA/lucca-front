@@ -5,7 +5,7 @@ interface GridsAutoStory {
 }
 
 export default {
-	title: 'Documentation/Structure/Grids/Auto',
+	title: 'Documentation/Structure/Grids/HTML & CSS/Auto',
 	argTypes: {},
 } as Meta;
 

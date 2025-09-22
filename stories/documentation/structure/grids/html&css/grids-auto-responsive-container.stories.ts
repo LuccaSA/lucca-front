@@ -5,18 +5,20 @@ interface GridsPositionStory {
 }
 
 export default {
-	title: 'Documentation/Structure/Grids/ResponsiveAuto',
+	title: 'Documentation/Structure/Grids/HTML & CSS/ResponsiveAutoContainer',
 	argTypes: {},
 } as Meta;
 
 function getTemplate(args: GridsPositionStory): string {
-	return `<div class="grid mod-autoAtMediaMinS">
-	<div class="grid-column"><div class="demo">1</div></div>
-	<div class="grid-column"><div class="demo">2</div></div>
-	<div class="grid-column"><div class="demo">3</div></div>
-	<div class="grid-column"><div class="demo">4</div></div>
-	<div class="grid-column"><div class="demo">5</div></div>
-	<div class="grid-column"><div class="demo">6</div></div>
+	return `<div class="grid-containerWrapper">
+	<div class="grid mod-autoAtContainerMinS">
+		<div class="grid-column"><div class="demo">1</div></div>
+		<div class="grid-column"><div class="demo">2</div></div>
+		<div class="grid-column"><div class="demo">3</div></div>
+		<div class="grid-column"><div class="demo">4</div></div>
+		<div class="grid-column"><div class="demo">5</div></div>
+		<div class="grid-column"><div class="demo">6</div></div>
+	</div>
 </div>`;
 }
 
@@ -27,7 +29,7 @@ const Template: StoryFn<GridsPositionStory> = (args: GridsPositionStory) => ({
 		`
 		.demo {
 			background-color: var(--palettes-neutral-0);
-			padding: var(--pr-t-spacings-200);
+			padding: var(--spacings-S);
 			border-radius: 1rem;
 			text-align: center;
 			block-size: 100%;
