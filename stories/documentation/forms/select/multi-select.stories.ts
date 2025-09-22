@@ -35,7 +35,6 @@ import { expect, screen, userEvent, within } from 'storybook/test';
 import { TreeSelectDirective } from '../../../../packages/ng/tree-select/tree-select.directive';
 import { waitForAngular } from '../../../helpers/test';
 import { allLegumes, colorNameByColor, coreSelectStory, FilterLegumesPipe, ILegume, LuCoreSelectInputStoryComponent, SortLegumesPipe } from './select.utils';
-import { TreeSelectDirective } from '../../../../packages/ng/tree-select/tree-select.directive';
 
 type LuMultiSelectInputStoryComponent = LuCoreSelectInputStoryComponent & {
 	selectedLegumes: ILegume[] | LuMultiSelection<ILegume>;
