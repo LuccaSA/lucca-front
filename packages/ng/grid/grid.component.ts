@@ -1,5 +1,6 @@
 import { NgTemplateOutlet } from '@angular/common';
 import { booleanAttribute, Component, computed, input, numberAttribute, ViewEncapsulation } from '@angular/core';
+import { ResponsiveOptionKey } from './types';
 
 @Component({
 	selector: 'lu-grid',
@@ -13,29 +14,7 @@ export class GridComponent {
 	container = input(false, { transform: booleanAttribute });
 	columns = input(null, { transform: numberAttribute });
 
-	mode = input<
-		| 'form'
-		| 'auto'
-		| 'autoAtMediaMinXXXS'
-		| 'autoAtMediaMinXXS'
-		| 'autoAtMediaMinXS'
-		| 'autoAtMediaMinS'
-		| 'autoAtMediaMinM'
-		| 'autoAtMediaMinL'
-		| 'autoAtMediaMinXL'
-		| 'autoAtMediaMinXXL'
-		| 'autoAtMediaMinXXXL'
-		| 'autoAtContainerMinXXXS'
-		| 'autoAtContainerMinXXS'
-		| 'autoAtContainerMinXS'
-		| 'autoAtContainerMinS'
-		| 'autoAtContainerMinM'
-		| 'autoAtContainerMinL'
-		| 'autoAtContainerMinXL'
-		| 'autoAtContainerMinXXL'
-		| 'autoAtContainerMinXXXL'
-		| null
-	>(null);
+	mode = input<'form' | 'auto' | `auto${ResponsiveOptionKey}` | null>(null);
 
 	#gapTransform = (gap: Gap | null): string | null => {
 		const spacingRegexp = /.*(\d)$/g;

@@ -7,7 +7,7 @@
 }
 
 <ng-template #content>
-	<div class="grid" [class]="mode() !== null && `mod-${mode()}`" [style]="gridStyle()">
+	<div class="grid" [class]="mode() && `mod-${mode()}`" [style]="gridStyle()">
 		<ng-content />
 	</div>
 </ng-template>

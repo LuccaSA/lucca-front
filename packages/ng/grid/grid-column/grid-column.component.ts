@@ -1,11 +1,5 @@
 import { Component, computed, input, numberAttribute, ViewEncapsulation } from '@angular/core';
-
-type Property = 'row' | 'col' | 'rowspan' | 'colspan';
-type At = 'media' | 'container';
-type Breakpoint = 'XXXS' | 'XXS' | 'XS' | 'S' | 'M' | 'L' | 'XL' | 'XXL' | 'XXXL';
-
-type ResponsiveOptionKey = `${Property}At${Capitalize<At>}Min${Breakpoint}`;
-type ResponsiveConfig = Partial<Record<ResponsiveOptionKey, number>>;
+import { ResponsiveConfig } from '../types';
 
 @Component({
 	selector: 'lu-grid-column',
