@@ -4,7 +4,6 @@
 @use '@lucca-front/scss/src/components/divider/exports' as divider;
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
-	margin: calc(var(--pr-t-spacings-100) * -1);
 	padding: 0 !important;
 	border-radius: var(--pr-t-border-radius-structure);
 	min-inline-size: var(--components-dropdown-minInlineSize);
