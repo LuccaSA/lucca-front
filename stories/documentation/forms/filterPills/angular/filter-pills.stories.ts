@@ -1,12 +1,17 @@
-import { allLegumes, FilterLegumesPipe } from '@/stories/forms/select/select.utils';
+import { allLegumes, FilterLegumesPipe, ILegume } from '@/stories/forms/select/select.utils';
+import { provideHttpClient } from '@angular/common/http';
+import { LOCALE_ID } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { provideAnimations } from '@angular/platform-browser/animations';
+import { LuCoreSelectDepartmentsDirective } from '@lucca-front/ng/core-select/department';
 import { DateInputComponent, DateRangeInputComponent } from '@lucca-front/ng/date2';
 import { FilterPillComponent } from '@lucca-front/ng/filter-pills';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { CheckboxInputComponent, TextInputComponent } from '@lucca-front/ng/forms';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { LuMultiSelectInputComponent } from '../../../../../packages/ng/multi-select/input';
+import { TreeSelectDirective } from '../../../../../packages/ng/tree-select/tree-select.directive';
 import { StoryModelDisplayComponent } from '../../../../helpers/story-model-display.component';
 
 export default {
@@ -22,15 +27,20 @@ export default {
 				StoryModelDisplayComponent,
 				LuSimpleSelectInputComponent,
 				LuMultiSelectInputComponent,
+				LuCoreSelectDepartmentsDirective,
 				FilterLegumesPipe,
 				FormFieldComponent,
 				TextInputComponent,
 				FilterLegumesPipe,
+				TreeSelectDirective,
 			],
+		}),
+		applicationConfig({
+			providers: [{ provide: LOCALE_ID, useValue: 'fr-FR' }, provideAnimations(), provideHttpClient()],
 		}),
 	],
 	render: (args, { argTypes }) => {
-		const clearableProperty = args['clearable'] ? "" : 'clearable="false" ';
+		const clearableProperty = args['clearable'] ? '' : 'clearable="false" ';
 		return {
 			props: {
 				simpleSelect: null,
@@ -38,22 +48,41 @@ export default {
 				date: null,
 				dateRange: null,
 				legumes: allLegumes,
+				groupingFn: (legume: ILegume) => {
+					const parent = allLegumes.find((l) => l.color === legume.color);
+					if (parent === legume) {
+						return null;
+					}
+					return parent;
+				},
 			},
 
 			template: `<lu-filter-pill label="Inclure les collaborateurs partis">
 	<lu-checkbox-input [ngModel]="false"></lu-checkbox-input>
 </lu-filter-pill>
-<lu-filter-pill label="Légume" name="legume">
-		<lu-simple-select ${clearableProperty}[(ngModel)]="simpleSelect" [options]="legumes | filterLegumes:clue" (clueChange)="clue = $event" />
+<lu-filter-pill label="Simple" name="legume">
+		<lu-simple-select ${clearableProperty}[options]="legumes | filterLegumes:clue" (clueChange)="clue = $event" />
 </lu-filter-pill>
-<lu-filter-pill label="Légume" name="legume">
-	<lu-multi-select ${clearableProperty}[(ngModel)]="multiSelect"	[options]="legumes | filterLegumes:clue" (clueChange)="clue = $event" filterPillLabelPlural="légumes" />
+<lu-filter-pill label="Multi" name="legume">
+	<lu-multi-select ${clearableProperty}	[options]="legumes | filterLegumes:clue" (clueChange)="clue = $event" filterPillLabelPlural="légumes" />
+</lu-filter-pill>
+<lu-filter-pill label="Département" name="department">
+	<lu-simple-select ${clearableProperty} departments></lu-simple-select>
+</lu-filter-pill>
+<lu-filter-pill label="Départements" name="departments">
+	<lu-multi-select ${clearableProperty}filterPillLabelPlural="départements" departments />
+</lu-filter-pill>
+<lu-filter-pill label="Tree simple">
+	<lu-simple-select ${clearableProperty}[treeSelect]="groupingFn" [options]="legumes"></lu-simple-select>
+</lu-filter-pill>
+<lu-filter-pill label="Tree multi">
+	<lu-multi-select ${clearableProperty}filterPillLabelPlural="légumes" [treeSelect]="groupingFn" [options]="legumes" ></lu-multi-select>
 </lu-filter-pill>
 <lu-filter-pill label="Date de début">
-	<lu-date-input ${clearableProperty}[(ngModel)]="date" />
+	<lu-date-input ${clearableProperty}/>
 </lu-filter-pill>
 <lu-filter-pill label="Période">
-	<lu-date-range-input ${clearableProperty}[(ngModel)]="dateRange"/>
+	<lu-date-range-input ${clearableProperty}[(ngModel)]="dateRange" />
 </lu-filter-pill>`,
 			styles: [
 				`
@@ -67,7 +96,7 @@ export default {
 	},
 } as Meta;
 
-export const Basic: StoryObj<FilterPillComponent & {clearable: boolean}> = {
+export const Basic: StoryObj<FilterPillComponent & { clearable: boolean }> = {
 	args: {
 		clearable: true,
 	},

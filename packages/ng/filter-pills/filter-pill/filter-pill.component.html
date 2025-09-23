@@ -6,7 +6,7 @@
 					labelTpl();
 					context: { label: label(), isEmpty: inputIsEmpty(), placeholder: placeholder(), colon: colonDisplay() }
 				"
-			></ng-container>
+			/>
 		</label>
 		<button
 			[attr.id]="id"
@@ -28,7 +28,7 @@
 			(keydown.arrowDown)="$event.preventDefault(); popoverRef.openPopover(true)"
 			(keydown.arrowUp)="$event.preventDefault(); popoverRef.openPopover(true)"
 		>
-			<ng-container *ngTemplateOutlet="pillTpl; context: { label: label(), isEmpty: inputIsEmpty() }"></ng-container>
+			<ng-container *ngTemplateOutlet="pillTpl; context: { label: label(), isEmpty: inputIsEmpty() }" />
 			@if (inputIsEmpty() && !disabled()) {
 				{{ placeholder() }}
 			}
@@ -54,7 +54,7 @@
 				labelTpl();
 				context: { label: label(), isEmpty: inputIsEmpty(), placeholder: placeholder(), colon: colonDisplay() }
 			"
-		></ng-container>
+		/>
 	}
 }
 <ng-template #pillContent>

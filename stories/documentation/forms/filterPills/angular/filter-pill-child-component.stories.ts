@@ -1,16 +1,15 @@
 import { allLegumes, FilterLegumesPipe } from '@/stories/forms/select/select.utils';
+import { Component, input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { LuDisplayerDirective, LuOptionDirective } from '@lucca-front/ng/core-select';
 import { DateInputComponent, DateRangeInputComponent } from '@lucca-front/ng/date2';
 import { FilterPillComponent } from '@lucca-front/ng/filter-pills';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { CheckboxInputComponent, TextInputComponent } from '@lucca-front/ng/forms';
+import { LuMultiDisplayerDirective, LuMultiSelectCounterDisplayerComponent, LuMultiSelectInputComponent } from '@lucca-front/ng/multi-select';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { LuMultiSelectInputComponent } from '@lucca-front/ng/multi-select';
 import { StoryModelDisplayComponent } from '../../../../helpers/story-model-display.component';
-import { Component, input } from '@angular/core';
-import { LuMultiDisplayerDirective, LuMultiSelectCounterDisplayerComponent } from '@lucca-front/ng/multi-select';
-import { LuDisplayerDirective, LuOptionDirective } from '@lucca-front/ng/core-select';
 
 @Component({
 	selector: 'demo-child-component',
@@ -68,7 +67,7 @@ export default {
 			},
 
 			template: `<lu-filter-pill label="Test inner select">
-	<demo-child-component></demo-child-component>
+	<demo-child-component />
 </lu-filter-pill>`,
 		};
 	},
