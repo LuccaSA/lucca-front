@@ -35,7 +35,7 @@
 		.lu-dropdown-options-item {
 			padding-block: 0;
 
-			&:not(:has(.divider.dropdown-list-option-divider, .dropdown-list-option)) {
+			&:not(:has(.divider.dropdown-list-option-divider, .dropdown-list-option), &.mod-divider) {
 				padding-inline: var(--pr-t-spacings-50);
 			}
 
