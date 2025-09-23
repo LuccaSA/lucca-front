@@ -9,7 +9,6 @@
 			#date
 			luInput
 			class="textField-input-value"
-			[value]="displayValue()"
 			(input)="userTextInput.set(date.value)"
 			(blur)="onTouched?.(); inputFocused.set(false)"
 			(focus)="inputFocused.set(true)"

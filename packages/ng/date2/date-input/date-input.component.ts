@@ -111,6 +111,13 @@ export class DateInputComponent extends AbstractDateComponent implements OnInit,
 	inputRef = viewChild<ElementRef<HTMLInputElement>>('date');
 
 	displayValue = computed(() => {
+		const textInput = this.userTextInput();
+		if (textInput !== 'ɵ') {
+			const parsedInput = parse(textInput, this.dateFormat, startOfDay(new Date()));
+			if (this.isValidDate(parsedInput)) {
+				return textInput;
+			}
+		}
 		if (this.selectedDate() && this.isValidDate(this.selectedDate())) {
 			let formatter: Intl.DateTimeFormat;
 			switch (this.mode()) {
@@ -126,7 +133,6 @@ export class DateInputComponent extends AbstractDateComponent implements OnInit,
 			}
 			return formatter.format(this.selectedDate());
 		}
-		const textInput = this.userTextInput();
 		// If we are initializing the component, we don't want to display the value
 		if (textInput === 'ɵ') {
 			return '';
@@ -172,6 +178,18 @@ export class DateInputComponent extends AbstractDateComponent implements OnInit,
 
 	constructor() {
 		super();
+
+		effect(() => {
+			const nativeElement = this.inputRef().nativeElement;
+			const cursorPositionBefore = nativeElement.selectionStart;
+			const displayValue = this.displayValue();
+			nativeElement.value = this.displayValue();
+			if (displayValue.endsWith(this.separator)) {
+				nativeElement.setSelectionRange(cursorPositionBefore + 1, cursorPositionBefore + 1);
+			} else {
+				nativeElement.setSelectionRange(cursorPositionBefore, cursorPositionBefore);
+			}
+		});
 
 		effect(() => {
 			const inputValue = this.userTextInput();
