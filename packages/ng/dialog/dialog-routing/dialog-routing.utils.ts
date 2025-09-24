@@ -1,11 +1,12 @@
 import { ComponentType } from '@angular/cdk/overlay';
-import { CanDeactivateFn, defaultUrlMatcher, ResolveFn, Route } from '@angular/router';
+import { CanDeactivateFn, Route } from '@angular/router';
 import { firstValueFrom, from, isObservable, Observable, of } from 'rxjs';
 import { LuDialogData } from '../model';
 import { DialogRoutingContainerComponent } from './dialog-routing.component';
-import { DialogRouteConfig, DialogRouteDialogConfig, DialogRouteResolveConfig, DialogRouteStaticData } from './dialog-routing.models';
+import { DialogRouteConfig, DialogRouteData, DialogRouteDialogConfig } from './dialog-routing.models';
 
 export type Deferrable<T> = Promise<T> | Observable<T> | T;
+export type DialogResolveFn<T> = () => Deferrable<T>;
 
 export async function deferrableToPromise<T>(deferrable: Promise<T> | Observable<T> | T): Promise<T> {
 	return isObservable(deferrable) ? firstValueFrom(deferrable) : deferrable;
@@ -18,29 +19,16 @@ export function deferrableToObservable<T>(deferrable: Promise<T> | Observable<T>
 export function createDialogRoute<C>(dialogRouteConfig: DialogRouteConfig<C>): Route {
 	const { dialogConfigFactory, dataFactory, ...baseRoute } = dialogRouteConfig;
 
-	const data: DialogRouteStaticData<C> = { dialogRouteConfig };
-	const resolve: DialogRouteResolveConfig<C> = {
-		dialogConfig: (route, state) => dialogConfigFactory(route, state),
-		dialogData: (route, state) => dataFactory?.(route, state),
-	};
+	const data: DialogRouteData<C> = { dialogRouteConfig };
 
 	return {
-		// Check that child route matches without consuming any URL segments
-		matcher: (segments, group) => {
-			const result = defaultUrlMatcher(segments, group, { path: dialogRouteConfig.path });
-			return result
-				? {
-						consumed: [],
-						posParams: result.posParams,
-					}
-				: null;
-		},
+		path: dialogRouteConfig.path,
 		component: DialogRoutingContainerComponent,
-		resolve,
 		data,
 		children: [
 			{
 				...baseRoute,
+				path: '',
 				canDeactivate: dialogRouteConfig.canDeactivate?.map(
 					(guard): CanDeactivateFn<C> =>
 						(dialogComponentInstance, route, state, nextState) => {
@@ -63,7 +51,7 @@ export type DialogFactoryResultOptions<C> = {
 } & (LuDialogData<C> extends never
 	? { dataFactory?: never }
 	: {
-			dataFactory: ResolveFn<LuDialogData<C>>;
+			dataFactory: DialogResolveFn<LuDialogData<C>>;
 		});
 
 export type DialogFactoryResult<C> = (options: DialogFactoryResultOptions<C>) => Route;
@@ -78,7 +66,7 @@ export function dialogRouteFactory<C>(component: ComponentType<C>, config?: Dial
 		createDialogRoute<C>({
 			path,
 			component,
-			dataFactory: dataFactory as LuDialogData<C> extends never ? undefined : ResolveFn<LuDialogData<C>>,
+			dataFactory: dataFactory as LuDialogData<C> extends never ? undefined : DialogResolveFn<LuDialogData<C>>,
 			dialogConfigFactory: () => config?.dialogConfig ?? ({} as DialogRouteDialogConfig<C>),
 			...mergeRouteConfig(config?.dialogRouteConfig, dialogRouteConfig),
 		});

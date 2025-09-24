@@ -1,6 +1,7 @@
 import { ComponentType } from '@angular/cdk/overlay';
-import { CanDeactivateFn, ResolveFn, Route } from '@angular/router';
+import { CanDeactivateFn, Route } from '@angular/router';
 import { LuDialogConfig, LuDialogData, LuDialogResult } from '../model';
+import { DialogResolveFn } from './dialog-routing.utils';
 
 export type DialogRouteComponentLoader<C> =
 	| {
@@ -11,8 +12,8 @@ export type DialogRouteComponentLoader<C> =
 	  };
 
 export type DialogRouteConfig<C> = DialogRouteComponentLoader<C> & {
-	dialogConfigFactory: ResolveFn<DialogRouteDialogConfig<C>>;
-	dataFactory: LuDialogData<C> extends never ? undefined : ResolveFn<LuDialogData<C>>;
+	dialogConfigFactory: DialogResolveFn<DialogRouteDialogConfig<C>>;
+	dataFactory: LuDialogData<C> extends never ? undefined : DialogResolveFn<LuDialogData<C>>;
 	/**
 	 * When the dialog is closed, this callback is called with the result of the dialog.
 	 * This callback is called within injection context, so you can inject services in it.
@@ -32,16 +33,6 @@ export type DialogRouteConfig<C> = DialogRouteComponentLoader<C> & {
 
 export type DialogRouteDialogConfig<C> = Omit<LuDialogConfig<C>, 'data' | 'content'>;
 
-export interface DialogRouteResolvedData<C> {
-	dialogConfig: DialogRouteDialogConfig<C>;
-	dialogData: LuDialogData<C>;
-}
-
-export interface DialogRouteStaticData<C> {
+export interface DialogRouteData<C> {
 	dialogRouteConfig: DialogRouteConfig<C>;
 }
-
-export type DialogRouteData<C> = DialogRouteResolvedData<C> & DialogRouteStaticData<C>;
-export type DialogRouteResolveConfig<C> = {
-	[key in keyof DialogRouteResolvedData<C>]: ResolveFn<DialogRouteResolvedData<C>[key]>;
-};

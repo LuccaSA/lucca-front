@@ -158,7 +158,7 @@ const dialogRoute = dialogRouteFactory(TestDialogComponent, {
 const routes: Routes = [
 	dialogRoute({
 		path: 'dialog',
-		dataFactory: (service = inject(DataProvider)) => service.dummy(),
+		dataFactory: () => inject(DataProvider).dummy(),
 		dialogRouteConfig: {
 			// Can be overridden here
 			canDeactivate: [(c) => c.allowThisDialogToClose()],
