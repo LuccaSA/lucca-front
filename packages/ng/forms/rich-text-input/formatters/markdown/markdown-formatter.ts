@@ -35,31 +35,33 @@ export const DEFAULT_MARKDOWN_TRANSFORMERS: Transformer[] = [
 ];
 export class MarkdownFormatter extends RichTextFormatter {
 	#transformers: Transformer[] = DEFAULT_MARKDOWN_TRANSFORMERS;
+	#shouldPreserveNewLinesInMarkdown = false;
 
-	constructor(transformers?: Transformer[]) {
+	constructor(transformers?: Transformer[], shouldPreserveNewLinesInMarkdown = false) {
 		super();
 		if (transformers) {
 			this.#transformers = transformers;
 		}
+		this.#shouldPreserveNewLinesInMarkdown = shouldPreserveNewLinesInMarkdown;
 	}
 
 	override parse(editor: LexicalEditor, markdown?: string | null): void {
 		editor.update(() => {
-			$convertFromMarkdownString(markdown ?? '', this.#transformers);
+			$convertFromMarkdownString(markdown ?? '', this.#transformers, undefined, this.#shouldPreserveNewLinesInMarkdown);
 		});
-		$convertFromMarkdownString(markdown ?? '', this.#transformers);
+		$convertFromMarkdownString(markdown ?? '', this.#transformers, undefined, this.#shouldPreserveNewLinesInMarkdown);
 	}
 
 	override format(editor: LexicalEditor): string {
 		let result = '';
-		editor.getEditorState().read(() => (result = $convertToMarkdownString(this.#transformers)));
+		editor.getEditorState().read(() => (result = $convertToMarkdownString(this.#transformers, undefined, this.#shouldPreserveNewLinesInMarkdown)));
 		return result;
 	}
 }
 
-export function provideLuRichTextMarkdownFormatter(transformers?: Transformer[]): Provider {
+export function provideLuRichTextMarkdownFormatter(transformers?: Transformer[], shouldPreserveNewLinesInMarkdown = false): Provider {
 	return {
 		provide: RICH_TEXT_FORMATTER,
-		useFactory: () => new MarkdownFormatter(transformers),
+		useFactory: () => new MarkdownFormatter(transformers, shouldPreserveNewLinesInMarkdown),
 	};
 }

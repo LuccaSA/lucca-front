@@ -3,7 +3,7 @@
 Avant toute utilisation de `lu-rich-text-input`, il est nécessaire d'ajouter les `peerDependencies` suivantes à votre projet :
 
 ```sh
-npm i lexical @lexical/history @lexical/link @lexical/text @lexical/rich-text @lexical/selection @lexical/utils
+npm i lexical @lexical/history @lexical/link @lexical/text @lexical/plain-text @lexical/rich-text @lexical/selection @lexical/utils
 ```
 
 En fonction du format désiré en entrée / sortie du composant, les dépendances suivantes doivent être installées:
