@@ -19,6 +19,7 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { createEmptyHistoryState, registerHistory } from '@lexical/history';
+import { registerPlainText } from '@lexical/plain-text';
 import { registerRichText } from '@lexical/rich-text';
 import { mergeRegister } from '@lexical/utils';
 
@@ -66,6 +67,7 @@ export class RichTextInputComponent implements OnInit, OnDestroy, ControlValueAc
 	readonly #richTextFormatter = inject<RichTextFormatter>(RICH_TEXT_FORMATTER);
 	readonly #formField = inject(FormFieldComponent, { optional: true });
 
+	readonly isPlainText = input<boolean>(false);
 	readonly placeholder = input<string>('');
 	readonly disableSpellcheck = input(false, { transform: booleanAttribute });
 	readonly autoResize = input(false, { transform: booleanAttribute });
@@ -107,7 +109,7 @@ export class RichTextInputComponent implements OnInit, OnDestroy, ControlValueAc
 		});
 
 		this.#cleanup = mergeRegister(
-			registerRichText(this.#editor),
+			!this.isPlainText() ? registerRichText(this.#editor) : registerPlainText(this.#editor),
 			registerHistory(this.#editor, createEmptyHistoryState(), 300),
 			this.#editor.registerUpdateListener(({ tags, dirtyElements }) => {
 				if (!tags.has(INITIAL_UPDATE_TAG) && dirtyElements.size) {
