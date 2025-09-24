@@ -1,6 +1,6 @@
 import { A11yModule } from '@angular/cdk/a11y';
 import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
-import { AfterViewInit, ChangeDetectionStrategy, Component, forwardRef, inject, signal, TrackByFunction } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, computed, forwardRef, inject, signal, TrackByFunction } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { getIntl, PortalDirective } from '@lucca-front/ng/core';
 import {
@@ -66,6 +66,7 @@ export class LuMultiSelectPanelComponent<T> implements AfterViewInit, CoreSelect
 	treeGenerator = this.selectInput.treeGenerator;
 	loading$ = this.selectInput.loading$;
 	searchable = this.selectInput.searchable;
+	emptyMessage = computed(() => this.selectInput.emptyMessage());
 	optionComparer = this.selectInput.optionComparer;
 	optionKey = this.selectInput.optionKey;
 
