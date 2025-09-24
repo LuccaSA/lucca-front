@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject, Injectable, Type } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
-import { provideRouter, Route, Router, RouterFeatures, RouterOutlet } from '@angular/router';
+import { ActivatedRoute, provideRouter, Route, Router, RouterFeatures, RouterOutlet } from '@angular/router';
 import { injectDialogData, LuDialogRef } from '../model';
 
 import { By } from '@angular/platform-browser';
@@ -117,6 +117,7 @@ describe('dialog-routing.utils', () => {
 			// Act
 			await router.navigateByUrl('/test/bar');
 			fixture.detectChanges();
+			await fixture.whenStable();
 
 			// Assert
 			expect(dialogService.open).toHaveBeenCalledTimes(1);
@@ -139,6 +140,7 @@ describe('dialog-routing.utils', () => {
 			// Act
 			await router.navigateByUrl('/test/baz');
 			fixture.detectChanges();
+			await fixture.whenStable();
 
 			// Assert
 			expect(dialogService.open).toHaveBeenCalledTimes(1);
@@ -161,10 +163,9 @@ describe('dialog-routing.utils', () => {
 			const { router, fixture } = initTest(route);
 
 			// Act
-			void router.navigateByUrl('/test/bar');
-			await Promise.resolve(); // Wait a tick for router to call dataFactory
-			data$.next({ foo: 'bar' });
+			await router.navigateByUrl('/test/bar');
 			fixture.detectChanges();
+			data$.next({ foo: 'bar' });
 			await fixture.whenStable();
 
 			// Assert
@@ -213,6 +214,7 @@ describe('dialog-routing.utils', () => {
 			// Act
 			await router.navigateByUrl('/test/bar');
 			fixture.detectChanges();
+			await fixture.whenStable();
 
 			// Navigate away to trigger canDeactivate
 			await router.navigateByUrl('/');
@@ -239,6 +241,7 @@ describe('dialog-routing.utils', () => {
 			// Act
 			await router.navigateByUrl('/test/bar');
 			fixture.detectChanges();
+			await fixture.whenStable();
 
 			// Navigate away to trigger canDeactivate
 			await router.navigateByUrl('/');
@@ -358,24 +361,27 @@ describe('dialog-routing.utils', () => {
 			expect(nestedDialog).toBeTruthy();
 		});
 
-		it('should allow path param reading in dataFactory', async () => {
+		it('should read params from ActivatedRoute injection', async () => {
 			// Arrange
 			const route = addTestRoute({
 				path: 'test/:name',
-				dataFactory: (route) => ({ foo: '' + route.params['name'] }),
+				dataFactory: () => ({ foo: '' + inject(ActivatedRoute).snapshot.params['name'] }),
 			});
 
 			const { router, fixture } = initTest(route);
 
 			// Act
-			await router.navigateByUrl('/test/BAR');
+			await router.navigateByUrl('/test/BAZ');
 			fixture.detectChanges();
 			await fixture.whenStable();
 
 			// Assert
-			const dialogComponent = fixture.debugElement.parent.query(By.directive(DialogRoutingTestComponent)).componentInstance as DialogRoutingTestComponent;
-			expect(dialogComponent).toBeTruthy();
-			expect(dialogComponent.dialogData.foo).toBe('BAR');
+			expect(dialogService.open).toHaveBeenCalledTimes(1);
+			expect(dialogService.open).toHaveBeenCalledWith(
+				expect.objectContaining({
+					data: { foo: 'BAZ' },
+				}),
+			);
 		});
 
 		function initTest(route: Route, features: RouterFeatures[] = []) {

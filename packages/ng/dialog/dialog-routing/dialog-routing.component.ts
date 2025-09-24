@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, DestroyRef, inject, Injector, OnDestroy, runInInjectionContext, signal, TemplateRef, viewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, inject, Injector, OnDestroy, OnInit, runInInjectionContext, signal, TemplateRef, viewChild } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, CanDeactivateFn, GuardResult, Router, RouterOutlet } from '@angular/router';
 import { combineLatest, concat, map, Observable, of } from 'rxjs';
@@ -6,7 +6,7 @@ import { provideLuDialog } from '../dialog.providers';
 import { LuDialogService } from '../dialog.service';
 import { LuDialogRef } from '../model';
 import { DialogRouteData, DialogRouteDialogConfig } from './dialog-routing.models';
-import { deferrableToObservable } from './dialog-routing.utils';
+import { deferrableToObservable, deferrableToPromise, DialogResolveFn } from './dialog-routing.utils';
 
 export const defaultOnClosedFn = <C>(router = inject(Router), route = inject(ActivatedRoute)): void => {
 	const routeData = route.snapshot.data as DialogRouteData<C>;
@@ -39,14 +39,13 @@ export const defaultOnClosedFn = <C>(router = inject(Router), route = inject(Act
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	providers: [provideLuDialog()],
 })
-export class DialogRoutingContainerComponent<C> implements OnDestroy {
+export class DialogRoutingContainerComponent<C> implements OnDestroy, OnInit {
 	readonly #route = inject(ActivatedRoute);
 	readonly #router = inject(Router);
 	readonly #destroyRef = inject(DestroyRef);
 	readonly #dialog = inject(LuDialogService);
 	readonly injector = inject(Injector);
 	readonly #config = this.#routeData.dialogRouteConfig;
-	readonly #dialogConfig = this.#routeData.dialogConfig;
 	protected readonly dialogComponentInstance = signal<C | null>(null);
 	protected readonly dialogTemplate = viewChild.required(TemplateRef);
 
@@ -57,19 +56,21 @@ export class DialogRoutingContainerComponent<C> implements OnDestroy {
 	}
 
 	ngOnInit(): void {
-		this.openDialog();
+		void this.#openDialog();
 	}
 
 	ngOnDestroy(): void {
 		this.#ref?.dismiss();
 	}
 
-	openDialog(): void {
+	async #openDialog(): Promise<void> {
+		const [data, dialogConfig] = await Promise.all([this.#resolve(this.#config.dataFactory), this.#resolve(this.#config.dialogConfigFactory)]);
+
 		this.#ref = this.#dialog.open<C>({
-			...this.#dialogConfig,
+			...dialogConfig,
 			content: this.dialogTemplate(),
-			data: this.#routeData.dialogData,
-			canClose: this.#getCanCloseFn(this.#dialogConfig),
+			data,
+			canClose: this.#getCanCloseFn(dialogConfig),
 		});
 
 		this.#ref.result$.pipe(takeUntilDestroyed(this.#destroyRef)).subscribe((result) =>
@@ -95,7 +96,7 @@ export class DialogRoutingContainerComponent<C> implements OnDestroy {
 		}
 
 		if (this.#config.canDeactivate) {
-			canCloseFns.push(this.#getCanCloseFromGuardDialogFn(this.#config.canDeactivate as CanDeactivateFn<C>[]));
+			canCloseFns.push(this.#getCanCloseFromGuardDialogFn(this.#config.canDeactivate));
 		}
 
 		return canCloseFns.length ? (c: C) => combineLatest(canCloseFns.map((fn) => fn(c))).pipe(map((results) => results.every((r) => r))) : undefined;
@@ -127,5 +128,16 @@ export class DialogRoutingContainerComponent<C> implements OnDestroy {
 
 		const maybeAsyncResult = runInInjectionContext(this.injector, () => canDeactivateFn(instance, this.#route.snapshot, this.#router.routerState.snapshot, this.#router.routerState.snapshot));
 		return deferrableToObservable(maybeAsyncResult);
+	}
+
+	async #resolve<T>(resolveFn: DialogResolveFn<T>): Promise<T>;
+	async #resolve<T>(resolveFn?: DialogResolveFn<T>): Promise<T | undefined>;
+	async #resolve<T>(resolveFn: DialogResolveFn<T>): Promise<T | undefined> {
+		if (!resolveFn) {
+			return undefined;
+		}
+
+		const resolved = runInInjectionContext(this.injector, resolveFn);
+		return deferrableToPromise(resolved);
 	}
 }
