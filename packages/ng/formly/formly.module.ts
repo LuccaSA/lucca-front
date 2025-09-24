@@ -1,8 +1,10 @@
-import { importProvidersFrom, NgModule } from '@angular/core';
-import { FormlyModule } from '@ngx-formly/core';
-import { LU_FORMLY_CONFIG } from './formly.config';
+import { NgModule } from '@angular/core';
+import { provideLuFormly } from './formly.providers';
 
+/**
+ * @deprecated use provideLuFormly() in a lazy loaded route (and stop using formly please)
+ * */
 @NgModule({
-	providers: [importProvidersFrom(FormlyModule.forChild(LU_FORMLY_CONFIG))],
+	providers: [provideLuFormly()],
 })
 export class LuFormlyModule {}
