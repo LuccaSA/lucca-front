@@ -1,6 +1,7 @@
-import { Directive, inject, Input, TemplateRef, Type } from '@angular/core';
+import { Directive, inject, Input, OnInit, TemplateRef, Type } from '@angular/core';
 import { ALuPopoverPanel, LuPopoverAlignment } from '@lucca-front/ng/popover';
 import { PopoverDirective } from '@lucca-front/ng/popover2';
+import { ConnectionPositionPair, HorizontalConnectionPos, OriginConnectionPosition, OverlayConnectionPosition, VerticalConnectionPos } from '@angular/cdk/overlay';
 
 @Directive({
 	selector: '[luDropdown]',
@@ -17,7 +18,7 @@ import { PopoverDirective } from '@lucca-front/ng/popover2';
 	],
 	standalone: true,
 })
-export class LuDropdownTriggerDirective<_T> {
+export class LuDropdownTriggerDirective<_T> implements OnInit {
 	protected popover2 = inject(PopoverDirective);
 	// Keeping generic type here just for the sake of backwards compatibility
 	/** References the popover instance that the trigger is associated with. */
@@ -38,6 +39,113 @@ export class LuDropdownTriggerDirective<_T> {
 	/** how the panel will be aligned with the target, allowed values: top, bottom, left, right
 	 * @deprecated prefer using customPositions instead
 	 * */
-	luDropdownAlignment: LuPopoverAlignment;
-	// TODO dropdown positions
+	luDropdownAlignment: LuPopoverAlignment = 'right';
+
+	ngOnInit(): void {
+		if (!this.popover2.customPositions || this.popover2.customPositions.length === 0) {
+			this.popover2.customPositions = this.legacyPositionBuilder();
+		}
+	}
+
+	/**********************
+	 *
+	 * LEGACY STUFF TO HANDLE EXISTING POSITIONS
+	 *
+	 ***********************/
+	private legacyPositionBuilder(): ConnectionPositionPair[] {
+		const connectionPosition: OriginConnectionPosition = {
+			originX: 'start',
+			originY: 'top',
+		};
+
+		// Position
+		const position = this.popover2.luPopoverPosition;
+		if (position === 'above') {
+			connectionPosition.originY = 'top';
+		} else if (position === 'below') {
+			connectionPosition.originY = 'bottom';
+		} else if (position === 'before') {
+			connectionPosition.originX = 'start';
+		} else if (position === 'after') {
+			connectionPosition.originX = 'end';
+		}
+
+		// Alignment
+		const alignment = this.luDropdownAlignment;
+		if (position === 'below' || position === 'above') {
+			if (alignment === 'left') {
+				connectionPosition.originX = 'start';
+			} else if (alignment === 'right') {
+				connectionPosition.originX = 'end';
+			} else {
+				connectionPosition.originX = 'center';
+			}
+		} else {
+			if (alignment === 'top') {
+				connectionPosition.originY = 'top';
+			} else if (alignment === 'bottom') {
+				connectionPosition.originY = 'bottom';
+			} else {
+				connectionPosition.originY = 'center';
+			}
+		}
+
+		const overlayPosition: OverlayConnectionPosition = {
+			overlayX: 'start',
+			overlayY: 'top',
+		};
+
+		if (position === 'above' || position === 'below') {
+			overlayPosition.overlayX = connectionPosition.originX;
+			overlayPosition.overlayY = position === 'above' ? 'bottom' : 'top';
+		} else {
+			overlayPosition.overlayX = position === 'before' ? 'end' : 'start';
+			overlayPosition.overlayY = connectionPosition.originY;
+		}
+
+		return [
+			{
+				originX: connectionPosition.originX,
+				originY: connectionPosition.originY,
+				overlayX: overlayPosition.overlayX,
+				overlayY: overlayPosition.overlayY,
+			},
+			{
+				originX: connectionPosition.originX,
+				originY: this.invertVerticalPos(connectionPosition.originY),
+				overlayX: overlayPosition.overlayX,
+				overlayY: this.invertVerticalPos(overlayPosition.overlayY),
+			},
+			{
+				originX: this.invertHorizontalPos(connectionPosition.originX),
+				originY: connectionPosition.originY,
+				overlayX: this.invertHorizontalPos(overlayPosition.overlayX),
+				overlayY: overlayPosition.overlayY,
+			},
+			{
+				originX: this.invertHorizontalPos(connectionPosition.originX),
+				originY: this.invertVerticalPos(connectionPosition.originY),
+				overlayX: this.invertHorizontalPos(overlayPosition.overlayX),
+				overlayY: this.invertVerticalPos(overlayPosition.overlayY),
+			},
+		];
+	}
+
+	private invertVerticalPos(y: VerticalConnectionPos): VerticalConnectionPos {
+		if (y === 'top') {
+			return 'bottom';
+		} else if (y === 'bottom') {
+			return 'top';
+		}
+		return y;
+	}
+
+	private invertHorizontalPos(x: HorizontalConnectionPos): HorizontalConnectionPos {
+		if (x === 'end') {
+			return 'start';
+		} else if (x === 'start') {
+			return 'end';
+		}
+		return x;
+	}
 }
