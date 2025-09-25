@@ -10,7 +10,7 @@
 			luInput
 			class="textField-input-value"
 			(input)="userTextInput.set(date.value)"
-			(blur)="onTouched?.(); inputFocused.set(false)"
+			(blur)="inputBlurred()"
 			(focus)="inputFocused.set(true)"
 			aria-haspopup="true"
 			role="combobox"

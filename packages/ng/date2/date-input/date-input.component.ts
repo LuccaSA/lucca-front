@@ -114,7 +114,7 @@ export class DateInputComponent extends AbstractDateComponent implements OnInit,
 		const textInput = this.userTextInput();
 		if (textInput !== 'ɵ') {
 			const parsedInput = parse(textInput, this.dateFormat, startOfDay(new Date()));
-			if (this.isValidDate(parsedInput)) {
+			if (this.isValidDate(parsedInput) && this.inputFocused()) {
 				return textInput;
 			}
 		}
@@ -389,5 +389,10 @@ export class DateInputComponent extends AbstractDateComponent implements OnInit,
 			this.inputRef().nativeElement.focus();
 		}
 		this.filterPillPopoverCloseFn?.();
+	}
+
+	inputBlurred(): void {
+		this.onTouched?.();
+		this.inputFocused.set(false);
 	}
 }
