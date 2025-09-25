@@ -14,7 +14,7 @@ class DropdownComponentStories {
 }
 
 export default {
-	title: 'Documentation/Overlays/Dropdown/Component',
+	title: 'Documentation/Overlays/Dropdown/Angular/Component',
 	component: DropdownComponentStories,
 	decorators: [applicationConfig({ providers: [provideAnimations()] })],
 } as Meta;
