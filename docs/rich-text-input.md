@@ -30,12 +30,24 @@ import { provideLuRichTextHTMLFormatter } from '@lucca-front/ng/forms/rich-text-
 provideLuRichTextHTMLFormatter();
 ```
 
-- Markdown (avec une liste optionnelle de `Transformer` markdown pour les noeuds custom)
+- Markdown
+
+Ce formateur accepte en paramètres :
+  - une liste optionnelle de `Transformer` markdown pour les noeuds custom
+  - un boolean pour surcharger l'option `shouldPreserveNewLines` des functions [$convertFromMarkdownString()](https://lexical.dev/docs/api/modules/lexical_markdown#convertfrommarkdownstring) et [$convertToMarkdownString()](https://lexical.dev/docs/api/modules/lexical_markdown#converttomarkdownstring) de `@lexical/markdown` (utile en mode `plain-text` notamment)
 
 ```ts
 import { provideLuRichTextMarkdownFormatter } from '@lucca-front/ng/forms/rich-text-input/formatters/markdown';
 provideLuRichTextMarkdownFormatter(transformers);
+// OR
+provideLuRichTextMarkdownFormatter(transformers, true);
 ```
+
+Deux modes d'utilisation de l'editeur Lexical sont possibles via l'input `isPlainText` :
+- rich-text (par défaut) : charge le plugin [registerRichText](https://lexical.dev/docs/packages/lexical-rich-text), pour gérer titres, formattage, etc
+- plain-text : charge le plugin [registerPlainText](https://lexical.dev/docs/packages/lexical-plain-text), plus basique (text-area like)
+
+> /!\ Limitation : seule la valeur initiale de l'input `isPlainText` est prise en compte pour l'instant
 
 Exemple d'utilisation :
 
