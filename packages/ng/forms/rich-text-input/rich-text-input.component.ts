@@ -4,6 +4,7 @@ import {
 	Component,
 	computed,
 	contentChildren,
+	effect,
 	ElementRef,
 	forwardRef,
 	inject,
@@ -19,13 +20,13 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { createEmptyHistoryState, registerHistory } from '@lexical/history';
-import { registerPlainText } from '@lexical/plain-text';
 import { registerRichText } from '@lexical/rich-text';
 import { mergeRegister } from '@lexical/utils';
 
 import { $canShowPlaceholderCurry } from '@lexical/text';
 import { FormFieldComponent, InputDirective } from '@lucca-front/ng/form-field';
 import { $getRoot, createEditor, Klass, LexicalEditor, LexicalNode } from 'lexical';
+import { PLAIN_TEXT_REGISTERER, PlainTextRegisterer } from './di-tokens';
 import { RICH_TEXT_FORMATTER, RichTextFormatter } from './formatters';
 
 const INITIAL_UPDATE_TAG = 'initial-update';
@@ -65,6 +66,7 @@ export const RICH_TEXT_PLUGIN_COMPONENT = new InjectionToken<RichTextPluginCompo
 })
 export class RichTextInputComponent implements OnInit, OnDestroy, ControlValueAccessor {
 	readonly #richTextFormatter = inject<RichTextFormatter>(RICH_TEXT_FORMATTER);
+	readonly #plainTextRegisterer = inject<PlainTextRegisterer>(PLAIN_TEXT_REGISTERER);
 	readonly #formField = inject(FormFieldComponent, { optional: true });
 
 	readonly placeholder = input<string>('');
@@ -92,8 +94,19 @@ export class RichTextInputComponent implements OnInit, OnDestroy, ControlValueAc
 	#onChange?: (markdown: string | null) => void;
 	#onTouch?: () => void;
 	#cleanup?: () => void;
+	#richOrPlainTextCleanup?: () => void;
 	#focusedPlugin: number = 0;
 	#editor?: LexicalEditor;
+
+	constructor() {
+		effect(() => {
+			const isPlainText = this.isPlainText();
+			if (this.#editor) {
+				this.#richOrPlainTextCleanup?.();
+				this.#richOrPlainTextCleanup = !isPlainText ? registerRichText(this.#editor) : this.#plainTextRegisterer(this.#editor);
+			}
+		});
+	}
 
 	ngOnInit(): void {
 		this.#editor = createEditor({
@@ -108,8 +121,9 @@ export class RichTextInputComponent implements OnInit, OnDestroy, ControlValueAc
 			nodes: [...this.#customNodes()],
 		});
 
+		this.#richOrPlainTextCleanup = !this.isPlainText() ? registerRichText(this.#editor) : this.#plainTextRegisterer(this.#editor);
+
 		this.#cleanup = mergeRegister(
-			!this.isPlainText() ? registerRichText(this.#editor) : registerPlainText(this.#editor),
 			registerHistory(this.#editor, createEmptyHistoryState(), 300),
 			this.#editor.registerUpdateListener(({ tags, dirtyElements }) => {
 				if (!tags.has(INITIAL_UPDATE_TAG) && dirtyElements.size) {
@@ -131,6 +145,7 @@ export class RichTextInputComponent implements OnInit, OnDestroy, ControlValueAc
 	}
 
 	ngOnDestroy(): void {
+		this.#richOrPlainTextCleanup?.();
 		this.#cleanup?.();
 	}
 

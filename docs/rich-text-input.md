@@ -3,7 +3,7 @@
 Avant toute utilisation de `lu-rich-text-input`, il est nécessaire d'ajouter les `peerDependencies` suivantes à votre projet :
 
 ```sh
-npm i lexical @lexical/history @lexical/link @lexical/text @lexical/plain-text @lexical/rich-text @lexical/selection @lexical/utils
+npm i lexical @lexical/history @lexical/link @lexical/text @lexical/rich-text @lexical/selection @lexical/utils
 ```
 
 En fonction du format désiré en entrée / sortie du composant, les dépendances suivantes doivent être installées:
@@ -45,9 +45,28 @@ provideLuRichTextMarkdownFormatter(transformers, true);
 
 Deux modes d'utilisation de l'editeur Lexical sont possibles via l'input `isPlainText` :
 - rich-text (par défaut) : charge le plugin [registerRichText](https://lexical.dev/docs/packages/lexical-rich-text), pour gérer titres, formattage, etc
-- plain-text : charge le plugin [registerPlainText](https://lexical.dev/docs/packages/lexical-plain-text), plus basique (text-area like)
+- plain-text : récupère via la DI puis charge le plugin [registerPlainText](https://lexical.dev/docs/packages/lexical-plain-text), plus basique (text-area like)
 
-> /!\ Limitation : seule la valeur initiale de l'input `isPlainText` est prise en compte pour l'instant
+> /!\ Le package `@lexical/plain-text` n'est pas en dépendance de LF (cas à la marge). Pour utiliser le mode `isPlainText`, le consommateur doit installer cette dépendance et provide le token `PLAIN_TEXT_REGISTERER` au niveau du `RichTextInputComponent`. Sinon, erreur au runtime. Exemple :
+
+```ts
+import { Provider } from '@angular/core';
+import { registerPlainText } from '@lexical/plain-text';
+import { PLAIN_TEXT_REGISTERER } from '@lucca-front/ng/forms/rich-text-input';
+
+export const providePlainTextRegisterer = (): Provider[] => [
+  {
+    provide: PLAIN_TEXT_REGISTERER,
+    useFactory: () => registerPlainText,
+  },
+];
+
+(...)
+
+@Component({
+  providers: [providePlainTextRegisterer()]
+})
+```
 
 Exemple d'utilisation :
 
