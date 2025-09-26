@@ -99,7 +99,7 @@
 			}
 		}
 
-		button {
+		button, button[type] {
 			text-rendering: inherit;
 
 			&:focus-visible {
