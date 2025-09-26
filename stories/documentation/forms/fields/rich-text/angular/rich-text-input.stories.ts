@@ -228,7 +228,7 @@ export const WithTagPluginMarkdownContentChange: StoryObj<RichTextInputComponent
 </lu-form-field>
 <pr-story-model-display>{{value}}</pr-story-model-display>`),
 			moduleMetadata: {
-				imports: [RichTextInputComponent, TagComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule],
+				imports: [RichTextInputComponent, RichTextPluginTagComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule],
 				providers: [provideLuRichTextMarkdownFormatter([...DEFAULT_MARKDOWN_TRANSFORMERS, TAGS])],
 			},
 		};
