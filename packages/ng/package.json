@@ -37,7 +37,6 @@
     "@lexical/markdown": "^0.30.0",
     "@lexical/history": "^0.30.0",
     "@lexical/link": "^0.30.0",
-    "@lexical/plain-text": "^0.30.0",
     "@lexical/rich-text": "^0.30.0",
     "@lexical/selection": "^0.30.0",
     "@lexical/utils": "^0.30.0",
@@ -58,9 +57,6 @@
       "optional": true
     },
     "@lexical/link": {
-      "optional": true
-    },
-    "@lexical/plain-text": {
       "optional": true
     },
     "@lexical/rich-text": {
