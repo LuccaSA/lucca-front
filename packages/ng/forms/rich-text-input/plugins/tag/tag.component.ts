@@ -15,11 +15,11 @@ const areSetsEqual = (a: Set<string>, b: Set<string>): boolean => a.size === b.s
 	providers: [
 		{
 			provide: RICH_TEXT_PLUGIN_COMPONENT,
-			useExisting: forwardRef(() => TagComponent),
+			useExisting: forwardRef(() => RichTextPluginTagComponent),
 		},
 	],
 })
-export class TagComponent implements RichTextPluginComponent, OnDestroy {
+export class RichTextPluginTagComponent implements RichTextPluginComponent, OnDestroy {
 	readonly #viewContainerRef = inject(ViewContainerRef);
 	readonly intl = getIntl(LU_RICH_TEXT_INPUT_TRANSLATIONS);
 

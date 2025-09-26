@@ -1,4 +1,4 @@
-import { booleanAttribute, Component, computed, effect, inject, input, LOCALE_ID, signal } from '@angular/core';
+import { booleanAttribute, Component, computed, effect, inject, input, LOCALE_ID, output, signal } from '@angular/core';
 import { getIntl } from '@lucca-front/ng/core';
 import { addMonths, addYears, isAfter, isBefore, isSameMonth, startOfDay, startOfMonth } from 'date-fns';
 import { CalendarMode } from './calendar2/calendar-mode';
@@ -51,6 +51,10 @@ export abstract class AbstractDateComponent {
 	focusedDate = input(null, {
 		transform: transformDateInputToDate,
 	});
+
+	panelOpened = output<void>();
+
+	panelClosed = output<void>();
 
 	calendarMode = signal<CalendarMode>('day');
 

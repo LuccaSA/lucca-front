@@ -15,7 +15,7 @@ registerLocaleData(localesFr);
 	imports: [LuCalendarInputComponent, LuDateAdapterPipe, FormsModule],
 	providers: [{ provide: ALuDateAdapter, useClass: LuNativeDateAdapter }],
 	template: `
-		<lu-calendar [(ngModel)]="date"></lu-calendar>
+		<lu-calendar [(ngModel)]="date" />
 
 		<button type="button" class="button mod-outlined pr-u-marginInlineEnd200" (click)="random()">Random</button>
 
@@ -66,7 +66,7 @@ import { LuCalendarInputComponent } from '@lucca-front/ng/date';
 	imports: [LuCalendarInputComponent],
 	providers: [{ provide: ALuDateAdapter, useClass: LuNativeDateAdapter }],
 	template: \`
-	<lu-calendar [(ngModel)]="date"></lu-calendar>
+	<lu-calendar [(ngModel)]="date" />
 	\`
 })`;
 

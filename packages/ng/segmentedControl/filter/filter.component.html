@@ -1,0 +1,13 @@
+<input
+	type="radio"
+	class="segmentedControl-item-input"
+	[name]="name"
+	[attr.name]="name"
+	[formControl]="formControl"
+	[value]="value()"
+	[attr.id]="id"
+	[attr.disabled]="formControl.disabled || disabled() ? 'disabled' : null"
+/>
+<label [attr.for]="id" class="segmentedControl-item-action">
+	<ng-container *luPortal="label()" />
+</label>
