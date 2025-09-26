@@ -1,3 +1,4 @@
+export * from './di-tokens';
 export * from './formatters';
 export * from './plugins/clear-format';
 export * from './plugins/headings';

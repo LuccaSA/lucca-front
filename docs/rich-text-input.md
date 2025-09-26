@@ -30,11 +30,42 @@ import { provideLuRichTextHTMLFormatter } from '@lucca-front/ng/forms/rich-text-
 provideLuRichTextHTMLFormatter();
 ```
 
-- Markdown (avec une liste optionnelle de `Transformer` markdown pour les noeuds custom)
+- Markdown
+
+Ce formateur accepte en paramètres :
+  - une liste optionnelle de `Transformer` markdown pour les noeuds custom
+  - un boolean pour surcharger l'option `shouldPreserveNewLines` des functions [$convertFromMarkdownString()](https://lexical.dev/docs/api/modules/lexical_markdown#convertfrommarkdownstring) et [$convertToMarkdownString()](https://lexical.dev/docs/api/modules/lexical_markdown#converttomarkdownstring) de `@lexical/markdown` (utile en mode `plain-text` notamment)
 
 ```ts
 import { provideLuRichTextMarkdownFormatter } from '@lucca-front/ng/forms/rich-text-input/formatters/markdown';
 provideLuRichTextMarkdownFormatter(transformers);
+// OR
+provideLuRichTextMarkdownFormatter(transformers, true);
+```
+
+Deux modes d'utilisation de l'editeur Lexical sont possibles via l'input `isPlainText` :
+- rich-text (par défaut) : charge le plugin [registerRichText](https://lexical.dev/docs/packages/lexical-rich-text), pour gérer titres, formattage, etc
+- plain-text : récupère via la DI puis charge le plugin [registerPlainText](https://lexical.dev/docs/packages/lexical-plain-text), plus basique (text-area like)
+
+> /!\ Le package `@lexical/plain-text` n'est pas en dépendance de LF (cas à la marge). Pour utiliser le mode `isPlainText`, le consommateur doit installer cette dépendance et provide le token `PLAIN_TEXT_REGISTERER` au niveau du `RichTextInputComponent`. Sinon, erreur au runtime. Exemple :
+
+```ts
+import { Provider } from '@angular/core';
+import { registerPlainText } from '@lexical/plain-text';
+import { PLAIN_TEXT_REGISTERER } from '@lucca-front/ng/forms/rich-text-input';
+
+export const providePlainTextRegisterer = (): Provider[] => [
+  {
+    provide: PLAIN_TEXT_REGISTERER,
+    useFactory: () => registerPlainText,
+  },
+];
+
+(...)
+
+@Component({
+  providers: [providePlainTextRegisterer()]
+})
 ```
 
 Exemple d'utilisation :

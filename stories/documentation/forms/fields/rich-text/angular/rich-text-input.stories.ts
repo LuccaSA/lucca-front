@@ -49,6 +49,7 @@ export const Basic: StoryObj<RichTextInputComponent & { value: string; disabled:
 		required: false,
 		disableSpellcheck: false,
 		autoResize: true,
+		isPlainText: false,
 	},
 };
 
@@ -78,6 +79,7 @@ export const WithNoInitialValue: StoryObj<RichTextInputComponent & { value: stri
 		required: false,
 		disableSpellcheck: false,
 		autoResize: true,
+		isPlainText: false,
 	},
 };
 
@@ -107,6 +109,7 @@ export const WithHtmlFormatter: StoryObj<RichTextInputComponent & { value: strin
 		required: false,
 		disableSpellcheck: false,
 		autoResize: true,
+		isPlainText: false,
 	},
 };
 
@@ -150,6 +153,7 @@ export const WithTagPlugin: StoryObj<RichTextInputComponent & { value: string; d
 		required: false,
 		disableSpellcheck: false,
 		autoResize: true,
+		isPlainText: false,
 	},
 };
 
@@ -193,5 +197,6 @@ export const WithTagPluginMarkdown: StoryObj<RichTextInputComponent & { value: s
 		required: false,
 		disableSpellcheck: false,
 		autoResize: true,
+		isPlainText: false,
 	},
 };
