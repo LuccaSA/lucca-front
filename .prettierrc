@@ -5,27 +5,19 @@
 	"endOfLine": "auto",
 	"overrides": [
 		{
-			"files": [
-				"*.html"
-			],
-			"options": {
-				"parser": "html",
-				"singleQuote": false
-			}
-		},
-		{
-			"files": [
-				"*.component.html",
-				"*.page.html"
-			],
+			"files": ["packages/ng/formly/**/*.html", "*.component.html", "*.page.html", "*.stories.html"],
 			"options": {
 				"parser": "angular"
 			}
 		},
 		{
-			"files": [
-				"*.ts"
-			],
+			"files": ["*.html"],
+			"options": {
+				"singleQuote": false
+			}
+		},
+		{
+			"files": ["*.ts"],
 			"options": {
 				"parser": "typescript",
 				"printWidth": 200,

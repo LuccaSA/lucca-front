@@ -26,6 +26,7 @@
     "@angular/common": "^20.0.0",
     "@angular/core": "^20.0.0",
     "@angular/cdk": "^20.0.0",
+    "@angular/animations": "^20.0.0",
     "@lucca-front/icons": "*",
     "@lucca-front/scss": "*",
     "isomorphic-dompurify": "^2.17.0",

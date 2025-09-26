@@ -149,7 +149,11 @@ export class TagNode extends DecoratorNode<string> {
 	}
 
 	override updateFromJSON(serializedNode: LexicalUpdateJSON<SerializedTagNode>): this {
-		return super.updateFromJSON(serializedNode).setTagDescription(serializedNode.tagDescription).setTagKey(serializedNode.tagKey).setDisabled(serializedNode.disabled);
+		return super
+			.updateFromJSON(serializedNode)
+			.setTagDescription(serializedNode.tagDescription ?? '')
+			.setTagKey(serializedNode.tagKey ?? '')
+			.setDisabled(serializedNode.disabled ?? false);
 	}
 
 	override exportJSON(): SerializedTagNode {
@@ -174,7 +178,7 @@ function domConversionFunction(domNode: Node): DOMConversion {
 			convertedParts.push($createTextNode(otherText[index]));
 			// Traiter le tag
 			const tagContent = match.replace(/\{\{|\}\}/gu, '').trim();
-			convertedParts.push($createTagNode(tagContent, undefined, true)); // Créer un TagNode partiel avec la clé
+			convertedParts.push($createTagNode(tagContent));
 
 			if (index === matches.length - 1) {
 				convertedParts.push($createTextNode(otherText[index + 1]));
@@ -195,8 +199,8 @@ function domConversionFunction(domNode: Node): DOMConversion {
 	};
 }
 
-export function $createTagNode(key = '', description?: string, partial = false): TagNode {
-	return new TagNode(key, description, partial);
+export function $createTagNode(key = '', description?: string): TagNode {
+	return new TagNode(key, description);
 }
 
 export function $isTagNode(node: LexicalNode | null | undefined): node is TagNode {

@@ -15,7 +15,7 @@ export const TAGS: TextMatchTransformer = {
 	regExp: /{{(\w+)}}/,
 	replace: (textNode, match) => {
 		if (match[1]) {
-			textNode.replace($createTagNode(match[1].trim(), undefined, true)); // créer un TagNode partiel avec la clé
+			textNode.replace($createTagNode(match[1].trim()));
 		}
 	},
 	type: 'text-match',

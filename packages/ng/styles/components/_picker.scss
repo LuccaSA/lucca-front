@@ -1,5 +1,4 @@
 @use 'popover';
-@use '@lucca-front/scss/src/commons/utils/a11y';
 
 .lu-picker-panel {
 	@extend %popover-panel;
@@ -130,7 +129,7 @@
 
 	&:not(:hover, :has(.is-highlighted)) {
 		.link {
-			@include a11y.mask;
+			opacity: 0.0001;
 		}
 	}
 }

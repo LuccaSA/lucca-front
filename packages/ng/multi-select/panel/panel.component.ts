@@ -1,6 +1,6 @@
 import { A11yModule } from '@angular/cdk/a11y';
 import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
-import { AfterViewInit, ChangeDetectionStrategy, Component, forwardRef, inject, signal, TrackByFunction } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, computed, forwardRef, inject, signal, TrackByFunction } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { getIntl, PortalDirective } from '@lucca-front/ng/core';
 import {
@@ -77,8 +77,16 @@ export class LuMultiSelectPanelComponent<T> implements AfterViewInit, CoreSelect
 	optionTpl = this.selectInput.optionTpl;
 
 	options = signal<ɵCoreSelectPanelElement<T>[]>([]);
-
 	keyManager = inject<CoreSelectKeyManager<T>>(CoreSelectKeyManager);
+
+	someGroupOptionEnabled = computed(() => {
+		return (groupOptions: T[]) => {
+			const disabledOptionIds = this.options()
+				.filter((o) => o.disabled)
+				.map((o) => this.optionKey(o.option()));
+			return groupOptions.some((option) => !disabledOptionIds.includes(this.optionKey(option)));
+		};
+	});
 
 	public clueChange$ = this.selectInput.clue$;
 	public shouldDisplayAddOption$ = this.selectInput.shouldDisplayAddOption$;
@@ -116,12 +124,19 @@ export class LuMultiSelectPanelComponent<T> implements AfterViewInit, CoreSelect
 	}
 
 	toggleOptions(notSelectedOptions: T[], groupOptions: T[]): void {
-		if (notSelectedOptions.length) {
+		// Filter out disabled options
+		const disabledOptionIds = this.options()
+			.filter((o) => o.disabled)
+			.map((o) => this.optionKey(o.option()));
+		const enabledNotSelectedOptions = notSelectedOptions.filter((o) => !disabledOptionIds.includes(this.optionKey(o)));
+		const enabledGroupOptions = groupOptions.filter((o) => !disabledOptionIds.includes(this.optionKey(o)));
+
+		if (enabledNotSelectedOptions.length) {
 			// If some options are not selected, select them all
-			this.selectedOptions = [...this.selectedOptions, ...notSelectedOptions];
+			this.selectedOptions = [...this.selectedOptions, ...enabledNotSelectedOptions];
 		} else {
 			// If all options are already selected, unselect them all
-			this.selectedOptions = this.selectedOptions.filter((o) => !groupOptions.some((so) => this.optionComparer(so, o)));
+			this.selectedOptions = this.selectedOptions.filter((o) => !enabledGroupOptions.some((so) => this.optionComparer(so, o)));
 		}
 
 		this.panelRef.emitValue(this.selectedOptions);
