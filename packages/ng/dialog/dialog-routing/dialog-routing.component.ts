@@ -8,7 +8,16 @@ import { LuDialogRef, LuDialogResult } from '../model';
 import { DialogRouteCloseTrigger, DialogRouteData, DialogRouteDialogConfig, DialogRouteDismissTrigger } from './dialog-routing.models';
 import { deferrableToObservable, deferrableToPromise, DialogResolveFn } from './dialog-routing.utils';
 
-export const defaultOnClosedFn = <C>(trigger?: DialogRouteCloseTrigger | DialogRouteDismissTrigger): void => {
+/**
+ * Default onClosed/onDismissed function that navigates back to the parent route when the dialog is closed or dismissed.
+ * @deprecated Pass the trigger to defaultOnClosedFn when using it in onClosed/onDismissed.
+ */
+export function defaultOnClosedFn<_C>(): void;
+/**
+ * Default onClosed/onDismissed function that navigates back to the parent route when the dialog is closed or dismissed.
+ */
+export function defaultOnClosedFn<_C>(trigger: DialogRouteCloseTrigger | DialogRouteDismissTrigger): void;
+export function defaultOnClosedFn<C>(trigger?: DialogRouteCloseTrigger | DialogRouteDismissTrigger): void {
 	if (trigger === 'navigation') {
 		// If the dialog is closed because of a navigation, we don't need to do anything.
 		// It would cancel the navigation that is already in progress.
@@ -27,7 +36,7 @@ export const defaultOnClosedFn = <C>(trigger?: DialogRouteCloseTrigger | DialogR
 		relativeTo: route.children[0],
 		queryParamsHandling: 'preserve',
 	});
-};
+}
 
 @Component({
 	selector: 'lu-dialog-routing-container',
