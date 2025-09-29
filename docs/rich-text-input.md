@@ -20,8 +20,14 @@ npm i @lexical/html
 npm i @lexical/markdown
 ```
 
+- Plain text (dépendance sur markdown pour les Transformers, dans la version actuelle)
+
+```sh
+npm i @lexical/plain-text @lexical/markdown
+```
+
 Avant toute utilisation du composant, il est nécessaire de définir le formateur à utiliser.
-Deux formateurs par défaut sont disponibles, à provide au niveau du composant parent de l'input :
+Trois formateurs par défaut sont disponibles, à provide au niveau du composant parent de l'input :
 
 - HTML
 
@@ -32,40 +38,21 @@ provideLuRichTextHTMLFormatter();
 
 - Markdown
 
-Ce formateur accepte en paramètres :
-  - une liste optionnelle de `Transformer` markdown pour les noeuds custom
-  - un boolean pour surcharger l'option `shouldPreserveNewLines` des functions [$convertFromMarkdownString()](https://lexical.dev/docs/api/modules/lexical_markdown#convertfrommarkdownstring) et [$convertToMarkdownString()](https://lexical.dev/docs/api/modules/lexical_markdown#converttomarkdownstring) de `@lexical/markdown` (utile en mode `plain-text` notamment)
+Ce formateur accepte en paramètres une liste optionnelle de `Transformer` markdown pour les noeuds custom
 
 ```ts
 import { provideLuRichTextMarkdownFormatter } from '@lucca-front/ng/forms/rich-text-input/formatters/markdown';
 provideLuRichTextMarkdownFormatter(transformers);
-// OR
-provideLuRichTextMarkdownFormatter(transformers, true);
 ```
 
-Deux modes d'utilisation de l'editeur Lexical sont possibles via l'input `isPlainText` :
-- rich-text (par défaut) : charge le plugin [registerRichText](https://lexical.dev/docs/packages/lexical-rich-text), pour gérer titres, formattage, etc
-- plain-text : récupère via la DI puis charge le plugin [registerPlainText](https://lexical.dev/docs/packages/lexical-plain-text), plus basique (text-area like)
+- Plain Text
 
-> /!\ Le package `@lexical/plain-text` n'est pas en dépendance de LF (cas à la marge). Pour utiliser le mode `isPlainText`, le consommateur doit installer cette dépendance et provide le token `PLAIN_TEXT_REGISTERER` au niveau du `RichTextInputComponent`. Sinon, erreur au runtime. Exemple :
+Ce formateur accepte en paramètres une liste optionnelle de `Transformer` markdown pour les noeuds custom
 
 ```ts
-import { Provider } from '@angular/core';
-import { registerPlainText } from '@lexical/plain-text';
-import { PLAIN_TEXT_REGISTERER } from '@lucca-front/ng/forms/rich-text-input';
-
-export const providePlainTextRegisterer = (): Provider[] => [
-  {
-    provide: PLAIN_TEXT_REGISTERER,
-    useFactory: () => registerPlainText,
-  },
-];
-
-(...)
-
-@Component({
-  providers: [providePlainTextRegisterer()]
-})
+import { provideLuRichTextPlainTextFormatter } from '@lucca-front/ng/forms/rich-text-input/formatters/plain-text';
+provideLuRichTextPlainTextFormatter();
+provideLuRichTextPlainTextFormatter([TAGS]);
 ```
 
 Exemple d'utilisation :
