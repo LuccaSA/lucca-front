@@ -94,6 +94,10 @@ export class FormFieldComponent implements OnDestroy, DoCheck {
 
 	tag = input<string | null>(null);
 
+	AI = input(false, { transform: booleanAttribute });
+	iconAItooltip = input<string | null>(null);
+	iconAIalt = input<string | null>(null);
+
 	width = input<FormFieldWidth, FormFieldWidth | `${FormFieldWidth}`>(null, {
 		transform: numberAttribute as (value: FormFieldWidth | `${FormFieldWidth}`) => FormFieldWidth,
 	});

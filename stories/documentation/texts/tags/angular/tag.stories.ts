@@ -9,7 +9,7 @@ export default {
 	component: TagComponent,
 	render: (args, context) => {
 		return {
-			template: `<lu-tag ${generateInputs(args, context.argTypes)} />`,
+			template: `<lu-tag${generateInputs(args, context.argTypes)} />`,
 		};
 	},
 } as Meta;
@@ -30,6 +30,7 @@ export const Template: StoryObj<TagComponent> = {
 			control: {
 				type: 'boolean',
 			},
+			if: { arg: 'AI', truthy: false },
 		},
 		icon: {
 			options: IconsList.map((i) => i.icon),
@@ -45,5 +46,6 @@ export const Template: StoryObj<TagComponent> = {
 		palette: null,
 		outlined: false,
 		icon: null,
+		AI: false,
 	},
 };

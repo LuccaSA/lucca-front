@@ -1,3 +1,4 @@
+@use '@lucca-front/icons/src/icon/exports' as icons;
 @use '@lucca-front/scss/src/commons/config';
 @use '@lucca-front/scss/src/commons/core';
 @use '@lucca-front/scss/src/commons/utils/keyframe';
@@ -22,6 +23,7 @@
 	--components-button-pointerEvents: none;
 	--components-button-color: transparent;
 	--components-button-userSelect: none;
+	--components-button-boxShadow: none;
 	--components-button-backgroundColor: var(--palettes-500, var(--palettes-product-500));
 	--commons-loading-frontground: var(--palettes-50, var(--palettes-product-50));
 
@@ -39,9 +41,7 @@
 @mixin loadingXS {
 	@include loading.spinner(var(--pr-t-font-body-XS-lineHeight));
 
-	& {
-		--commons-loading-borderWidth: 2px;
-	}
+	--commons-loading-borderWidth: 2px;
 }
 
 @mixin loadingOutlined {
@@ -74,6 +74,30 @@
 
 	.numericBadge {
 		@include numericBadge.state;
+	}
+}
+
+@mixin loadingAI {
+	.lucca-icon {
+		@include icons.transparent;
+	}
+
+	&::before {
+		content: none;
+	}
+}
+
+@mixin successAI {
+	.lucca-icon {
+		@include icons.transparent;
+	}
+
+	&::before {
+		content: none;
+	}
+
+	&::after {
+		@include icons.AI;
 	}
 }
 
@@ -111,6 +135,8 @@
 
 
 @mixin error {
+	@include keyframe.shake;
+
 	animation-name: shake;
 	animation-iteration-count: 1;
 	animation-duration: var(--commons-animations-durations-standard);

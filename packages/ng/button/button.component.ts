@@ -58,7 +58,7 @@ export class ButtonComponent implements OnChanges {
 	 * '' is the default value when you just set the `luButton` directive without a value attached to it.
 	 * We just make this explicit here.
 	 */
-	luButton: '' | 'outlined' | 'ghost' | 'ghost-invert' | 'text' | 'text-invert' = '';
+	luButton: '' | 'outlined' | 'AI' | 'ghost' | 'ghost-invert' | 'text' | 'text-invert' = '';
 
 	#iconComponentRef?: ElementRef<HTMLElement>;
 
