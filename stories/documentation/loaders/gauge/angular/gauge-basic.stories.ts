@@ -15,7 +15,7 @@ export default {
 			control: { type: 'range', min: 0, max: 100, step: 1 },
 		},
 		size: {
-			control: { type: 'range', min: 32, max: 160, step: 16 },
+			control: { type: 'range', min: 32, max: 160, step: 8 },
 			if: { arg: 'circular', truthy: true },
 		},
 	},
@@ -44,6 +44,6 @@ export const Basic: StoryObj<GaugeComponent> = {
 		value: 33,
 		alt: '',
 		noAlt: false,
-		size: 80,
+		size: 40,
 	},
 };

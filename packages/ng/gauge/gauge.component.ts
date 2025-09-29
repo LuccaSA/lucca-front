@@ -21,7 +21,7 @@ export class GaugeComponent {
 	noAlt = input(false, { transform: booleanAttribute });
 	palette = input<Palette>('none');
 	alt = input<string>('');
-	size = input(80, { transform: numberAttribute });
+	size = input(40, { transform: numberAttribute });
 
 	thickness = computed(() => (this.thin() ? 4 : 8));
 
