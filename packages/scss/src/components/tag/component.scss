@@ -19,6 +19,7 @@
 	font: var(--components-tag-font);
 	font-size: var(--components-tag-fontSize); // Deprecated
 	line-height: var(--components-tag-lineHeight); // Deprecated
+	max-inline-size: 100%;
 
 	&,
 	&:is(a, button) {
@@ -31,6 +32,7 @@
 
 	@at-root ($atRoot) {
 		.tag-content {
+			outline: none;
 			text-decoration: var(--components-tag-decoration);
 		}
 	}

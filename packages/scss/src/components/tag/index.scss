@@ -21,4 +21,8 @@
 	&.mod-disabled {
 		@include disabled;
 	}
+
+	&:has(.tag-content:focus-visible) {
+		@include focusVisible;
+	}
 }
