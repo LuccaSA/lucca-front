@@ -11,7 +11,7 @@
 			<lu-icon [icon]="icon" />
 		}
 		@if (withEllipis()) {
-			<span class="tag-content" [class.pr-u-ellipsis]="withEllipis()" luTooltip luTooltipWhenEllipsis>{{ label }}</span>
+			<span class="tag-content pr-u-ellipsis" luTooltip luTooltipWhenEllipsis>{{ label }}</span>
 		} @else {
 			<span class="tag-content">{{ label }}</span>
 		}
