@@ -6,6 +6,8 @@ import { LU_RICH_TEXT_INPUT_TRANSLATIONS } from '../../rich-text-input.translate
 import { $createTagNode, TagNode } from './tag-node';
 import type { Tag } from './tag.model';
 
+const areSetsEqual = (a: Set<string>, b: Set<string>): boolean => a.size === b.size && [...a].every((value) => b.has(value));
+
 @Component({
 	selector: 'lu-rich-text-plugin-tag',
 	changeDetection: ChangeDetectionStrategy.OnPush,
@@ -29,7 +31,7 @@ export class RichTextPluginTagComponent implements RichTextPluginComponent, OnDe
 
 	editor: LexicalEditor | null = null;
 
-	#tagNodeKeys = signal(new Set<NodeKey>());
+	readonly #tagNodeKeys = signal(new Set<NodeKey>());
 
 	#registeredCommands = () => {};
 
@@ -43,7 +45,7 @@ export class RichTextPluginTagComponent implements RichTextPluginComponent, OnDe
 			const nodes = this.#tagNodeKeys();
 			const isDisabled = this.isDisabled();
 
-			this.editor.update(() => {
+			this.editor?.update(() => {
 				nodes.forEach((node) => {
 					const tagNode = $getNodeByKey<TagNode>(node);
 					if (!tagNode) {
@@ -51,7 +53,7 @@ export class RichTextPluginTagComponent implements RichTextPluginComponent, OnDe
 					}
 					const tag = tags.find((t) => t.key === tagNode.getTagKey());
 					if (tag) {
-						tagNode.setTagDescription(tag.description).setDisabled(isDisabled);
+						tagNode.setTagDescription(tag.description ?? '').setDisabled(isDisabled);
 					} else {
 						tagNode.remove();
 					}
@@ -68,7 +70,7 @@ export class RichTextPluginTagComponent implements RichTextPluginComponent, OnDe
 			TagNode,
 			(mutations) => {
 				const newNodes = new Set<NodeKey>(this.#tagNodeKeys());
-				this.editor.read(() => {
+				this.editor?.read(() => {
 					mutations.forEach((m, k) => {
 						if (m === 'created') {
 							newNodes.add(k);
@@ -76,7 +78,7 @@ export class RichTextPluginTagComponent implements RichTextPluginComponent, OnDe
 							newNodes.delete(k);
 						}
 					});
-					if (newNodes.size !== this.#tagNodeKeys().size) {
+					if (!areSetsEqual(newNodes, this.#tagNodeKeys())) {
 						this.#tagNodeKeys.set(newNodes);
 					}
 				});

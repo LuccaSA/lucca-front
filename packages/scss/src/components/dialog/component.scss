@@ -43,7 +43,7 @@
 					flex-grow: 1;
 					min-block-size: 0;
 
-					&:has(.dialog-content:focus-visible) {
+					&:has(.dialog-inside-content:focus-visible) {
 						&::after {
 							@include a11y.focusVisible($offset: -4px);
 
@@ -64,7 +64,7 @@
 				flex-grow: 1;
 				min-block-size: 0;
 
-				&:has(.dialog-content:focus-visible) {
+				&:has(.dialog-inside-content:focus-visible) {
 					&::after {
 						@include a11y.focusVisible($offset: -4px);
 

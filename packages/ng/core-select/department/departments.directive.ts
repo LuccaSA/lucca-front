@@ -84,7 +84,19 @@ export class LuCoreSelectDepartmentsDirective<T extends ILuDepartment = ILuDepar
 		}),
 	);
 
-	public totalCount$ = this.select.options$.pipe(map((opts) => opts.length));
+	public totalCount$ = this.select.options$.pipe(
+		map((opts) => {
+			return opts.map((branch) => this.flattenTree(branch)).flat().length;
+		}),
+	);
+
+	protected flattenTree(branch: TreeNode<T>): T[] {
+		const result: T[] = [branch.node];
+		if (branch.children.length > 0) {
+			result.push(...branch.children.map((child) => this.flattenTree(child)).flat());
+		}
+		return result;
+	}
 
 	protected override optionKey = (option: TreeNode<T> | T) => {
 		return 'node' in option ? option.node.id : option.id;
