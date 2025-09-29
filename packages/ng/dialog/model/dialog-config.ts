@@ -77,7 +77,7 @@ interface BaseLuDialogConfig<C, TData = LuDialogData<C>> {
 	/**
 	 * The size of the panel used for the dialog
 	 */
-	size?: 'XS' | 'S' | 'M' | 'L' | 'XL' | 'fitContent' | `maxContent` | 'fullScreen';
+	size?: 'XS' | 'S' | 'M' | 'L' | 'XL' | 'XXL' | 'fitContent' | `maxContent` | 'fullScreen';
 
 	/**
 	 * Should it be a modal (default), a drawer? a drawer from bottom?

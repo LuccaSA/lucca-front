@@ -40,7 +40,7 @@ class SidepanelDynamicContentComponent implements ILuModalContent {
 	standalone: true,
 	imports: [LuSidepanelModule, LuModalModule, LuToastsModule],
 	template: `
-		<lu-toasts [sources]="[]"></lu-toasts>
+		<lu-toasts [sources]="[]" />
 		<div class="pr-u-marginBlockEnd200">
 			<button type="button" class="button" (click)="openSidepanel()">Open</button>
 			<button type="button" class="button" (click)="openDynamicContentSidepanel()">Open (Dynamic)</button>

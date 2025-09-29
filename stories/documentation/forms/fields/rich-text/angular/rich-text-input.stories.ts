@@ -1,6 +1,7 @@
 import { LOCALE_ID } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ButtonComponent } from '@lucca-front/ng/button';
 import { DividerComponent } from '@lucca-front/ng/divider';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { RichTextInputComponent, RichTextInputToolbarComponent, RichTextPluginTagComponent, TAGS } from '@lucca-front/ng/forms/rich-text-input';
@@ -14,7 +15,7 @@ export default {
 	title: 'Documentation/Forms/Fields/RichTextInput/Angular',
 	decorators: [
 		moduleMetadata({
-			imports: [RichTextInputToolbarComponent, FormFieldComponent, FormsModule, ReactiveFormsModule, BrowserAnimationsModule, StoryModelDisplayComponent, DividerComponent],
+			imports: [RichTextInputToolbarComponent, FormFieldComponent, FormsModule, ReactiveFormsModule, BrowserAnimationsModule, StoryModelDisplayComponent, DividerComponent, ButtonComponent],
 		}),
 		applicationConfig({
 			providers: [{ provide: LOCALE_ID, useValue: 'fr' }],
@@ -133,7 +134,7 @@ export const WithTagPlugin: StoryObj<RichTextInputComponent & { value: string; d
 																			key: 'tag3',
 																			description: 'Tag 3',
 																		},
-																	]"/>
+																	]" />
 		</lu-rich-text-input>
 </lu-form-field>
 <pr-story-model-display>{{ value }}</pr-story-model-display>`),
@@ -176,7 +177,7 @@ export const WithTagPluginMarkdown: StoryObj<RichTextInputComponent & { value: s
 																		key: 'tag3',
 																		description: 'Tag 3',
 																	},
-																]"/>
+																]" />
 	</lu-rich-text-input>
 </lu-form-field>
 <pr-story-model-display>{{ value }}</pr-story-model-display>`),
@@ -188,6 +189,53 @@ export const WithTagPluginMarkdown: StoryObj<RichTextInputComponent & { value: s
 	},
 	args: {
 		value: 'Lorem **ipsum** dolor {{tag1}} *italic* {{unregisteredTag}} and regular {{tag2}} trailing text',
+		placeholder: 'Placeholder…',
+		disabled: false,
+		required: false,
+		disableSpellcheck: false,
+		autoResize: true,
+	},
+};
+
+export const WithTagPluginMarkdownContentChange: StoryObj<RichTextInputComponent & { value: string; valueFr: string; disabled: boolean; required: boolean } & FormFieldComponent> = {
+	render: (args, { argTypes }) => {
+		const { value: valueEn, valueFr, disabled, required, ...inputArgs } = args;
+		const value = valueEn;
+		return {
+			props: { value, disabled, required },
+			template: cleanupTemplate(`<button luButton="outlined" size="S" (click)="value='${valueEn}';">EN</button>
+				<button luButton="outlined" size="S" (click)="value='${valueFr}';">FR</button>
+				<lu-form-field label="Label">
+	<lu-rich-text-input
+	${generateInputs(inputArgs, argTypes)}
+		[(ngModel)]="value" [disabled]="disabled" [required]="required">
+			<lu-rich-text-input-toolbar />
+			<lu-rich-text-plugin-tag [tags]="[
+																	{
+																		key: 'tag1',
+																		description: 'Tag 1',
+																	},
+																	{
+																		key: 'tag2',
+																		description: 'Tag 2',
+																	},
+																	{
+																		key: 'tag3',
+																		description: 'Tag 3',
+																	},
+																]"/>
+	</lu-rich-text-input>
+</lu-form-field>
+<pr-story-model-display>{{value}}</pr-story-model-display>`),
+			moduleMetadata: {
+				imports: [RichTextInputComponent, RichTextPluginTagComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule],
+				providers: [provideLuRichTextMarkdownFormatter([...DEFAULT_MARKDOWN_TRANSFORMERS, TAGS])],
+			},
+		};
+	},
+	args: {
+		value: 'This is a **template** with {{tag1}} *and* {{tag2}} in English',
+		valueFr: 'Ceci est un **modèle** avec {{tag1}} *et* {{tag2}} en français',
 		placeholder: 'Placeholder…',
 		disabled: false,
 		required: false,

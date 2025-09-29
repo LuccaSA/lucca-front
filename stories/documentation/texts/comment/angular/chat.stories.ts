@@ -36,7 +36,7 @@ export default {
 				argTypes,
 			)} authorName="${firstName} ${lastName}">
 		<ng-template #avatarTpl>
-			<lu-user-picture [user]="{firstName: 'Marie', lastName: 'Bragoulet'}"></lu-user-picture>
+			<lu-user-picture [user]="{firstName: 'Marie', lastName: 'Bragoulet'}" />
 		</ng-template>
 		<lu-comment [date]="date" content="${content}" />
 		<lu-comment [date]="date" content="Lorem ipsum dolor sit amet." />
@@ -44,7 +44,7 @@ export default {
 	</lu-comment-block>
 	<lu-comment-block [chatAnswer]="true" ${avatar2} ${generateInputs({ compact, small }, argTypes)} authorName="Chloé Alibert">
 		<ng-template #avatarTpl2>
-			<lu-user-picture [user]="{firstName: 'Chloé', lastName: 'Alibert'}"></lu-user-picture>
+			<lu-user-picture [user]="{firstName: 'Chloé', lastName: 'Alibert'}" />
 		</ng-template>
 		<lu-comment [date]="date" content="${content}" />
 	</lu-comment-block>

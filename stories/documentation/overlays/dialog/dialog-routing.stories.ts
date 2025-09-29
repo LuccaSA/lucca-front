@@ -71,10 +71,10 @@ class DismissedComponent {}
 				</lu-dialog-header>
 				<lu-dialog-content>
 					<lu-form-field label="Data received by dialog">
-						<lu-number-input [(ngModel)]="dataNum" name="num"></lu-number-input>
+						<lu-number-input [(ngModel)]="dataNum" name="num" />
 					</lu-form-field>
 					<lu-form-field label="Additionnal data to submit" class="pr-u-marginBlockStart200">
-						<lu-text-input [(ngModel)]="dataString" name="string"></lu-text-input>
+						<lu-text-input [(ngModel)]="dataString" name="string" />
 					</lu-form-field>
 					<lu-form-field label="I agree to allow this dialog to close" class="pr-u-marginBlockStart200">
 						<lu-checkbox-input [(ngModel)]="allowThisDialogToClose" name="canDeactivate" />
