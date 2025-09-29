@@ -45,6 +45,8 @@
 				[luPopoverDisabled]="isFilterPill"
 				#popoverRef="luPopover2"
 				[customPositions]="popoverPositions"
+				(luPopoverClosed)="panelClosed.emit()"
+				(luPopoverOpened)="panelOpened.emit()"
 				tabindex="-1"
 				type="button"
 				class="button mod-onlyIcon mod-ghost textField-input-affix-toggle"
@@ -56,7 +58,7 @@
 </div>
 
 @if (isFilterPill) {
-	<ng-container *ngTemplateOutlet="calendar"></ng-container>
+	<ng-container *ngTemplateOutlet="calendar" />
 }
 
 <div *luFilterPillDisplayer>{{ displayValue() }}</div>
@@ -90,7 +92,7 @@
 				[(displayMode)]="calendarMode"
 				[mode]="mode()"
 				[hideWeekend]="hideWeekend()"
-			></lu-calendar2>
+			/>
 		</div>
 	</div>
 </ng-template>

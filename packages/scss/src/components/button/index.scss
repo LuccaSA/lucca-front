@@ -174,7 +174,8 @@
 
 	// .disabled is deprecated
 	&.is-disabled,
-	&.disabled {
+	&.disabled,
+	&[aria-disabled] {
 		@include disabled;
 	}
 }

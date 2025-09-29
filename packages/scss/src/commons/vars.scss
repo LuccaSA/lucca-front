@@ -82,6 +82,18 @@
 	--commons-font-family: '#{config.$fontFamily}', Tahoma, sans-serif;
 	--commons-font-family-brand: '#{config.$fontFamilyBrand}', sans-serif;
 
+	--commons-background-base: var(--palettes-neutral-25);
+
+	--commons-divider-color: var(--palettes-neutral-200);
+
+	--commons-container-padding: 0 var(--pr-t-spacings-200);
+	--commons-container-maxWidth: 100rem; // 100 + 0 = 100
+
+	--commons-navSide-width: 0px;
+	/* stylelint-disable-next-line property-disallowed-list */
+	--commons-navSide-compact-width: 7.5rem;
+	--commons-navSide-mobile-toggle-height: 3.5rem;
+
 	@if (config.$fontFamilyCursive) {
 		--commons-font-family-cursive: '#{config.$fontFamilyCursive}', cursive;
 	}
@@ -90,20 +102,13 @@
 		@include core.cssvars('sizes-#{$key}', $map);
 	}
 
-	--commons-background-base: var(--palettes-neutral-25);
-	--commons-divider-color: var(--palettes-neutral-200);
-
 	@each $breakpoint, $value in config.$breakpoints {
 		--commons-container-maxWidth#{$breakpoint}: #{function.pxToRem($value)};
 	}
 
-	--commons-container-padding: 0 var(--pr-t-spacings-200);
-
 	@include media.min('S') {
 		--commons-container-padding: 0 var(--pr-t-spacings-400);
 	}
-
-	--commons-container-maxWidth: 100rem; // 100 + 0 = 100
 
 	&:has(.navSide) {
 		--commons-container-maxWidth: 85rem; // 85 + 15 = 100
@@ -112,11 +117,6 @@
 	&:has(.navSide.mod-compact, .mod-withMenuCompact) {
 		--commons-container-maxWidth: 92.5rem; // 92.5 + 7.5 = 100
 	}
-
-	--commons-navSide-width: 0px;
-	/* stylelint-disable-next-line property-disallowed-list */
-	--commons-navSide-compact-width: 7.5rem;
-	--commons-navSide-mobile-toggle-height: 3.5rem;
 
 	@media (prefers-contrast: more) {
 		@media (forced-colors: none) {

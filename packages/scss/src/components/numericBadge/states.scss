@@ -25,3 +25,8 @@
 @mixin focusVisible {
 	@include a11y.focusVisible;
 }
+
+@mixin state {
+	--components-numericBadge-background: transparent;
+	--components-numericBadge-color: transparent;
+}

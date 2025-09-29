@@ -124,7 +124,7 @@ export class RichTextInputComponent implements OnInit, OnDestroy, ControlValueAc
 		this.pluginComponents().forEach((plugin) => plugin.setEditorInstance(this.#editor));
 
 		if (this.#allPlugins().length > 0) {
-			this.#allPlugins()[this.#focusedPlugin].tabindex.set(0);
+			this.#allPlugins()[this.#focusedPlugin].tabindex?.set(0);
 		}
 	}
 

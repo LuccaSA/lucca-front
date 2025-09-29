@@ -53,7 +53,6 @@ export default {
 			control: {
 				type: 'boolean',
 			},
-			description: '[v16.1]',
 		},
 	},
 } as Meta;

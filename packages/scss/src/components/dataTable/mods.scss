@@ -40,15 +40,14 @@
 
 	font: var(--pr-t-font-heading-4);
 
-	--components-dataTable-cell-background: var(--palettes-neutral-25);
+	&,
+	&:hover {
+		--components-dataTable-cell-background: var(--palettes-neutral-50);
+	}
 }
 
 @mixin selectable {
 	--components-dataTable-cellFirst-width: 2.5rem;
-
-	&:has(input:checked) {
-		--components-dataTable-cell-background: var(--palettes-product-50);
-	}
 }
 
 @mixin draggable {

@@ -3,13 +3,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { DurationPickerComponent } from '@lucca-front/ng/time';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { StoryModelDisplayComponent } from 'stories/helpers/story-model-display.component';
 import { cleanupTemplate, generateInputs } from '../../../helpers/stories';
 
 export default {
 	title: 'Documentation/Forms/Time/Duration Picker/Angular Form',
 	decorators: [
 		moduleMetadata({
-			imports: [DurationPickerComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule],
+			imports: [DurationPickerComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule, StoryModelDisplayComponent],
 		}),
 	],
 	argTypes: {
@@ -52,8 +53,7 @@ export const Basic: StoryObj<DurationPickerComponent & FormFieldComponent & { re
 	<lu-duration-picker label="${label}" ${generateInputs(inputArgs, argTypes)} [(ngModel)]="example">
 	</lu-duration-picker>
 </lu-form-field>
-
-{{example}}`),
+<pr-story-model-display>{{ example }}</pr-story-model-display>`),
 		};
 	},
 	args: {

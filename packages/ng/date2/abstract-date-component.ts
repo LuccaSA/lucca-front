@@ -54,6 +54,10 @@ export abstract class AbstractDateComponent {
 
 	calendarMode = model<CalendarMode>('day');
 
+	panelOpened = output<void>();
+
+	panelClosed = output<void>();
+
 	dateFormatLocalized = computed(() => {
 		return getLocalizedDateFormat(this.locale, this.mode());
 	});
