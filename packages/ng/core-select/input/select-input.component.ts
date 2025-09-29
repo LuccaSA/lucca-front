@@ -144,7 +144,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 
 	noClueIcon = input(false, { transform: booleanAttribute });
 	inputTabindex = input<number>(0);
-	emptyMessage = input<string | null>();
+	emptyMessage = input<PortalContent>();
 
 	@HostBinding('class.mod-noClueIcon')
 	protected get isNoClueIconClass(): boolean {
