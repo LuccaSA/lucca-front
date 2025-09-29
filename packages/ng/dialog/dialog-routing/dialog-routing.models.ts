@@ -11,6 +11,9 @@ export type DialogRouteComponentLoader<C> =
 			loadComponent: () => Promise<ComponentType<C>>;
 	  };
 
+export type DialogRouteCloseTrigger = 'navigation' | 'dialog:closed';
+export type DialogRouteDismissTrigger = 'navigation' | 'dialog:dismissed';
+
 export type DialogRouteConfig<C> = DialogRouteComponentLoader<C> & {
 	dialogConfigFactory: DialogResolveFn<DialogRouteDialogConfig<C>>;
 	dataFactory: LuDialogData<C> extends never ? undefined : DialogResolveFn<LuDialogData<C>>;
@@ -18,12 +21,13 @@ export type DialogRouteConfig<C> = DialogRouteComponentLoader<C> & {
 	 * When the dialog is closed, this callback is called with the result of the dialog.
 	 * This callback is called within injection context, so you can inject services in it.
 	 */
-	onClosed?: (res: LuDialogResult<C>) => unknown;
+	onClosed?: (res: LuDialogResult<C>, trigger: DialogRouteCloseTrigger) => unknown;
 	/**
 	 * When the dialog is dismissed, this callback is called.
 	 * This callback is called within injection context, so you can inject services in it.
+	 * The trigger
 	 */
-	onDismissed?: () => unknown;
+	onDismissed?: (trigger: DialogRouteDismissTrigger) => unknown;
 
 	/**
 	 * Override canDeactivate to have a stricter type

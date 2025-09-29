@@ -384,10 +384,39 @@ describe('dialog-routing.utils', () => {
 			);
 		});
 
-		function initTest(route: Route, features: RouterFeatures[] = []) {
+		it('should open one dialog when navigating away from another dialog', async () => {
+			// Arrange
+			const dialogRoute1 = addTestRoute({
+				path: 'test/bar',
+				dataFactory: () => ({ foo: 'bar' }),
+			});
+
+			const dialogRoute2 = addTestRoute({
+				path: 'test/baz',
+				dataFactory: () => ({ foo: 'baz' }),
+			});
+
+			const { router, fixture } = initTest([dialogRoute1, dialogRoute2]);
+
+			// Act
+			await router.navigateByUrl('/test/bar');
+			fixture.detectChanges();
+			await fixture.whenStable();
+			expect(openDialogs).toBe(1);
+
+			await router.navigateByUrl('/test/baz');
+			fixture.detectChanges();
+			await fixture.whenStable();
+
+			// Assert
+			expect(router.url).toBe('/test/baz');
+			expect(openDialogs).toBe(2);
+		});
+
+		function initTest(route: Route | Route[], features: RouterFeatures[] = []) {
 			TestBed.configureTestingModule({
 				imports: [AppTestComponent],
-				providers: [provideRouter([route, { path: '', pathMatch: 'full', component: EmptyComponent }], ...features)],
+				providers: [provideRouter([...(Array.isArray(route) ? route : [route]), { path: '', pathMatch: 'full', component: EmptyComponent }], ...features)],
 			});
 
 			return {

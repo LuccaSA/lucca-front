@@ -4,11 +4,19 @@ import { ActivatedRoute, CanDeactivateFn, GuardResult, Router, RouterOutlet } fr
 import { combineLatest, concat, map, Observable, of } from 'rxjs';
 import { provideLuDialog } from '../dialog.providers';
 import { LuDialogService } from '../dialog.service';
-import { LuDialogRef } from '../model';
-import { DialogRouteData, DialogRouteDialogConfig } from './dialog-routing.models';
+import { LuDialogRef, LuDialogResult } from '../model';
+import { DialogRouteCloseTrigger, DialogRouteData, DialogRouteDialogConfig, DialogRouteDismissTrigger } from './dialog-routing.models';
 import { deferrableToObservable, deferrableToPromise, DialogResolveFn } from './dialog-routing.utils';
 
-export const defaultOnClosedFn = <C>(router = inject(Router), route = inject(ActivatedRoute)): void => {
+export const defaultOnClosedFn = <C>(trigger?: DialogRouteCloseTrigger | DialogRouteDismissTrigger): void => {
+	if (trigger === 'navigation') {
+		// If the dialog is closed because of a navigation, we don't need to do anything.
+		// It would cancel the navigation that is already in progress.
+		return;
+	}
+
+	const router = inject(Router);
+	const route = inject(ActivatedRoute);
 	const routeData = route.snapshot.data as DialogRouteData<C>;
 	const next = routeData.dialogRouteConfig.path
 		.split('/')
@@ -48,6 +56,7 @@ export class DialogRoutingContainerComponent<C> implements OnDestroy, OnInit {
 	readonly #config = this.#routeData.dialogRouteConfig;
 	protected readonly dialogComponentInstance = signal<C | null>(null);
 	protected readonly dialogTemplate = viewChild.required(TemplateRef);
+	#closeTrigger?: DialogRouteCloseTrigger | DialogRouteDismissTrigger;
 
 	#ref?: LuDialogRef<C>;
 
@@ -59,7 +68,14 @@ export class DialogRoutingContainerComponent<C> implements OnDestroy, OnInit {
 		void this.#openDialog();
 	}
 
+	/**
+	 * In this context, ngOnDestroy is called when the user navigates away from the route.
+	 * The navigation can be triggered:
+	 * - from within the dialog (#ref.dismissed => config.onClosed/defaultOnClosedFn/config.onDismissed/defaultOnClosedFn => ngOnDestroy)
+	 * - from router navigation (ngOnDestroy => #ref.dismissed => config.onDismissed/defaultOnClosedFn)
+	 */
 	ngOnDestroy(): void {
+		this.#closeTrigger ??= 'navigation';
 		this.#ref?.dismiss();
 	}
 
@@ -73,19 +89,8 @@ export class DialogRoutingContainerComponent<C> implements OnDestroy, OnInit {
 			canClose: this.#getCanCloseFn(dialogConfig),
 		});
 
-		this.#ref.result$.pipe(takeUntilDestroyed(this.#destroyRef)).subscribe((result) =>
-			runInInjectionContext(this.injector, () => {
-				if (this.#config.onClosed) {
-					this.#config.onClosed(result);
-				} else {
-					defaultOnClosedFn();
-				}
-			}),
-		);
-
-		this.#ref.dismissed$
-			.pipe(takeUntilDestroyed(this.#destroyRef))
-			.subscribe(() => runInInjectionContext(this.injector, () => (this.#config.onDismissed ? this.#config.onDismissed() : defaultOnClosedFn())));
+		this.#ref.result$.pipe(takeUntilDestroyed(this.#destroyRef)).subscribe((result) => this.#onDialogClosed(result));
+		this.#ref.dismissed$.pipe(takeUntilDestroyed(this.#destroyRef)).subscribe(() => this.#onDialogDismissed());
 	}
 
 	#getCanCloseFn(config: DialogRouteDialogConfig<C>): ((c: C) => Observable<boolean>) | undefined {
@@ -128,6 +133,38 @@ export class DialogRoutingContainerComponent<C> implements OnDestroy, OnInit {
 
 		const maybeAsyncResult = runInInjectionContext(this.injector, () => canDeactivateFn(instance, this.#route.snapshot, this.#router.routerState.snapshot, this.#router.routerState.snapshot));
 		return deferrableToObservable(maybeAsyncResult);
+	}
+
+	#onDialogDismissed(): void {
+		runInInjectionContext(this.injector, () => {
+			this.#closeTrigger ??= 'dialog:dismissed';
+
+			if (this.#closeTrigger === 'dialog:closed') {
+				throw new Error('Dialog cannot be both closed and dismissed');
+			}
+
+			if (this.#config.onDismissed) {
+				this.#config.onDismissed(this.#closeTrigger);
+			} else {
+				defaultOnClosedFn(this.#closeTrigger);
+			}
+		});
+	}
+
+	#onDialogClosed(result: LuDialogResult<C>): void {
+		runInInjectionContext(this.injector, () => {
+			this.#closeTrigger ??= 'dialog:closed';
+
+			if (this.#closeTrigger === 'dialog:dismissed') {
+				throw new Error('Dialog cannot be both closed and dismissed');
+			}
+
+			if (this.#config.onClosed) {
+				this.#config.onClosed(result, this.#closeTrigger);
+			} else {
+				defaultOnClosedFn(this.#closeTrigger);
+			}
+		});
 	}
 
 	async #resolve<T>(resolveFn: DialogResolveFn<T>): Promise<T>;
