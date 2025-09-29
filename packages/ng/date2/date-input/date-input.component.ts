@@ -394,5 +394,6 @@ export class DateInputComponent extends AbstractDateComponent implements OnInit,
 	inputBlurred(): void {
 		this.onTouched?.();
 		this.inputFocused.set(false);
+		this.userTextInput.set('ɵ');
 	}
 }
