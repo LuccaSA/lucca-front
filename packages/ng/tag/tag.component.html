@@ -3,13 +3,17 @@
 		@if (icon) {
 			<lu-icon [icon]="icon" />
 		}
-		<span class="tag-content pr-u-ellipsis" luTooltip luTooltipWhenEllipsis>{{ label }}</span>
+		<span class="tag-content">{{ label }}</span>
 	</a>
 } @else {
 	<span class="tag" [class]="tagClasses" [class.mod-outlined]="outlined">
 		@if (icon) {
 			<lu-icon [icon]="icon" />
 		}
-		<span class="tag-content pr-u-ellipsis" luTooltip luTooltipWhenEllipsis>{{ label }}</span>
+		@if (withEllipis()) {
+			<span class="tag-content" [class.pr-u-ellipsis]="withEllipis()" luTooltip luTooltipWhenEllipsis>{{ label }}</span>
+		} @else {
+			<span class="tag-content">{{ label }}</span>
+		}
 	</span>
 }

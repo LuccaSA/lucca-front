@@ -45,5 +45,6 @@ export const Template: StoryObj<TagComponent> = {
 		palette: null,
 		outlined: false,
 		icon: null,
+		withEllipis: false,
 	},
 };

@@ -1,4 +1,4 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, input, Input, ViewEncapsulation } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { LuccaIcon } from '@lucca-front/icons';
 import { DecorativePalette, Palette } from '@lucca-front/ng/core';
@@ -15,6 +15,8 @@ import { LuTooltipModule } from '../tooltip/tooltip.module';
 	imports: [IconComponent, RouterLink, LuTooltipModule],
 })
 export class TagComponent {
+	withEllipis = input(false, { transform: booleanAttribute });
+
 	@Input({ required: true })
 	label: string;
 
