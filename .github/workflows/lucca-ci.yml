@@ -1,0 +1,23 @@
+name: Lucca CI
+run-name: >-
+  ${{ github.event_name == 'release' && format('🏷️ Release: {0}', github.ref_name)
+    || github.event_name == 'pull_request' && format('👷 PR: {0}', github.event.pull_request.title)
+    || github.event_name == 'push' && format('📌 Branch: {0}', github.ref_name)
+    || format('🙈 {0} {1} {2}', github.event_name, github.ref_type, github.ref_name)
+  }}
+on:
+  pull_request:
+  release:
+    types:
+      - released
+  push:
+    tags:
+      - v*
+    branches:
+      - master
+jobs:
+  lf:
+    uses: LuccaSA/actions/.github/workflows/lucca-ci.yml@95574cc2ad542065d4b8eec32aad4be840a59fbd # v1.3.2
+    with:
+      cake-file: build.cake
+    secrets: inherit
