@@ -21,9 +21,21 @@
 	}
 }
 
+@mixin S {
+	--components-tag-font: var(--pr-t-font-body-XS);
+	--components-tag-gap: var(--pr-t-spacings-25);
+
+	.lucca-icon {
+		@include icons.XXS;
+	}
+
+	// Deprecated
+	--components-tag-fontSize: var(--pr-t-font-body-XS-fontSize);
+	--components-tag-lineHeight: var(--pr-t-font-body-XS-lineHeight);
+}
+
 @mixin L {
 	--components-tag-font: var(--pr-t-font-body-M);
-	--components-tag-iconBottom: 0;
 
 	.lucca-icon {
 		@include icons.S;

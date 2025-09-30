@@ -7,8 +7,8 @@
 	padding-block: 0;
 	padding-inline: var(--pr-t-spacings-50);
 	text-decoration: var(--components-tag-decoration);
-	box-shadow: var(--components-tag-boxShadow);
-	gap: var(--pr-t-spacings-50);
+	box-shadow: 0 0 0 1px var(--components-tag-shadow);
+	gap: var(--components-tag-gap);
 	cursor: var(--components-tag-cursor);
 	display: inline-flex;
 	align-items: center;

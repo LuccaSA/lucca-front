@@ -16,11 +16,8 @@ export default {
 
 export const Template: StoryObj<TagComponent> = {
 	argTypes: {
-		label: {
-			type: 'string',
-		},
 		size: {
-			options: ['M', 'L'],
+			options: ['S', 'M', 'L'],
 			control: {
 				type: 'select',
 			},
