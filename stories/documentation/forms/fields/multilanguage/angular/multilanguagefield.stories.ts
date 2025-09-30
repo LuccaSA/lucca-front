@@ -86,5 +86,6 @@ export const Basic: StoryObj<
 		inlineMessageState: 'default',
 		placeholder: 'Placeholder',
 		tooltip: 'Je suis un message d’aide',
+		openOnFocus: false,
 	},
 };
