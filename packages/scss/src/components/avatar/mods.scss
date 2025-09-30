@@ -1,4 +1,5 @@
 @use '@lucca-front/icons/src/commons/utils/icon';
+@use '@lucca-front/icons/src/icon/exports' as icons;
 
 @mixin XS {
 	--components-avatar-size: 1.5rem;
@@ -72,6 +73,8 @@
 }
 
 @mixin placeholder {
+	--components-avatar-picture-initials-display: none;
+
 	.avatar-picture {
 		background-color: var(--palettes-neutral-200) !important;
 
@@ -84,7 +87,19 @@
 		}
 	}
 
-	.avatar-picture-initials {
-		display: none;
+}
+
+@mixin AI {
+	--components-avatar-borderRadius: var(--pr-t-border-radius-default);
+	--components-avatar-picture-background: var(--palettes-neutral-0);
+	--components-avatar-picture-initials-display: none;
+
+	.avatar-picture {
+		&::before {
+			@include icons.AI;
+			@include icon.generate('weather_stars');
+
+			font-size: var(--components-avatar-AI-size);
+		}
 	}
 }

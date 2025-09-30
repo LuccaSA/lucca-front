@@ -8,7 +8,9 @@
 		<div class="comment-infos-content">
 			<span class="comment-infos-name"><ng-container *luPortal="authorName()" /></span>&ngsp;
 			<time class="comment-infos-date" [attr.datetime]="date().toISOString()">
-				@if (dateDisplay()) {
+				@if (datePipeFormat()) {
+					{{ date() | date: datePipeFormat() }}
+				} @else if (dateDisplay()) {
 					<ng-container *luPortal="dateDisplay()" />
 				} @else {
 					{{ date() | date }}

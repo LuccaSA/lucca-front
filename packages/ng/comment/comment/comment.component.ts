@@ -39,6 +39,13 @@ export class CommentComponent {
 
 	date = input<Date>();
 
+	/**
+	 * format given to the date pipe for display.
+	 *
+	 * See https://angular.dev/api/common/DatePipe#custom-format-options
+	 */
+	datePipeFormat = input<string | undefined>(undefined);
+
 	content = input<string>();
 
 	contentIsHTML = computed(() => {

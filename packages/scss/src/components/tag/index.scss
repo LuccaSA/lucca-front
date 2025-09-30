@@ -25,4 +25,8 @@
 	&:has(.tag-content:focus-visible) {
 		@include focusVisible;
 	}
+
+	&.mod-AI {
+		@include AI;
+	}
 }

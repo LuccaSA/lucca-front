@@ -1,0 +1,12 @@
+@use '@lucca-front/scss/src/components/textField/exports' as textField;
+
+@mixin reject {
+	--components-suggestion-textDecoration: line-through;
+	--components-suggestion-color: var(--pr-t-color-text-subtle);
+}
+
+@mixin accept {
+	.textField {
+		@include textField.lineThrough;
+	}
+}

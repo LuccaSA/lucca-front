@@ -1,10 +1,10 @@
-import { booleanAttribute, Component, computed, effect, inject, input, LOCALE_ID, output, signal } from '@angular/core';
+import { booleanAttribute, Component, computed, effect, inject, input, LOCALE_ID, model, output, signal } from '@angular/core';
 import { getIntl } from '@lucca-front/ng/core';
 import { addMonths, addYears, isAfter, isBefore, isSameMonth, startOfDay, startOfMonth } from 'date-fns';
 import { CalendarMode } from './calendar2/calendar-mode';
 import { CellStatus } from './calendar2/cell-status';
 import { DateRange, DateRangeInput } from './calendar2/date-range';
-import { getDateFormat, getLocalizedDateFormat } from './date-format';
+import { getDateFormat, getLocalizedDateFormat, getSeparator } from './date-format';
 import { DATE_FORMAT, DateFormat } from './date.const';
 import { LU_DATE2_TRANSLATIONS } from './date2.translate';
 import { transformDateInputToDate, transformDateRangeInputToDateRange } from './utils';
@@ -18,6 +18,7 @@ export abstract class AbstractDateComponent {
 	protected locale = inject(LOCALE_ID);
 	// Contains the current date format (like dd/mm/yy etc) based on current locale
 	protected dateFormat = getDateFormat(this.locale);
+	protected separator = getSeparator(this.locale);
 	intlDateTimeFormat = new Intl.DateTimeFormat(this.locale);
 
 	intlDateTimeFormatMonth = new Intl.DateTimeFormat(this.locale, { month: 'numeric', year: 'numeric' });
@@ -52,11 +53,11 @@ export abstract class AbstractDateComponent {
 		transform: transformDateInputToDate,
 	});
 
+	calendarMode = model<CalendarMode>('day');
+
 	panelOpened = output<void>();
 
 	panelClosed = output<void>();
-
-	calendarMode = signal<CalendarMode>('day');
 
 	dateFormatLocalized = computed(() => {
 		return getLocalizedDateFormat(this.locale, this.mode());

@@ -101,7 +101,7 @@ export class Calendar2Component implements OnInit {
 
 	mode = model<CalendarMode>('day');
 
-	displayMode = model<CalendarMode>('year');
+	displayMode = model<CalendarMode | null>(null);
 
 	ranges = input<readonly DateRange[]>([]);
 
@@ -273,7 +273,9 @@ export class Calendar2Component implements OnInit {
 
 	ngOnInit(): void {
 		// On init, set display mode to the mode specified by component consumer
-		this.displayMode.set(this.mode());
+		if (this.displayMode() === null) {
+			this.displayMode.set(this.mode());
+		}
 	}
 
 	onCellClicked(date: Date): void {

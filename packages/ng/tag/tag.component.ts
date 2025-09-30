@@ -52,10 +52,12 @@ export class TagComponent {
 	 */
 	icon: LuccaIcon | undefined;
 
+	AI = input(false, { transform: booleanAttribute });
+
 	get tagClasses() {
 		return {
 			[`mod-${this.size}`]: !!this.size,
-			[`palette-${this.palette}`]: !!this.palette,
+			[`palette-${this.palette}`]: !this.AI() && !!this.palette,
 		};
 	}
 }
