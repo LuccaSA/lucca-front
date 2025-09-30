@@ -12,7 +12,7 @@ import { ConnectionPositionPair, HorizontalConnectionPos, OriginConnectionPositi
 	hostDirectives: [
 		{
 			directive: PopoverDirective,
-			inputs: ['luPopoverPosition: luDropdownPosition', 'luPopoverDisabled: luDropdownDisabled', 'customPositions', 'luPopoverNoCloseButton: luDropdownNoCloseButton'],
+			inputs: ['luPopoverPosition: luDropdownPosition', 'luPopoverDisabled: luDropdownDisabled', 'customPositions'],
 			outputs: ['luPopoverOpened: luDropdownOnOpen', 'luPopoverClosed: luDropdownOnClose'],
 		},
 	],
@@ -34,6 +34,7 @@ export class LuDropdownTriggerDirective<_T> implements OnInit {
 		// We're using constructor here to setup default values before inputs are processed
 		// This way, the value will be changed if any input changes it but we can still have separate default values
 		this.popover2.luPopoverPosition = 'below';
+		this.popover2.luPopoverNoCloseButton = true;
 	}
 
 	/** how the panel will be aligned with the target, allowed values: top, bottom, left, right
