@@ -36,7 +36,7 @@ export default {
 				argTypes,
 			)} authorName="${firstName} ${lastName}">
 	<ng-template #avatarTpl>
-		<lu-user-picture [user]="{firstName: 'Marie', lastName: 'Bragoulet'}"></lu-user-picture>
+		<lu-user-picture [user]="{firstName: 'Marie', lastName: 'Bragoulet'}" />
 	</ng-template>
 	<lu-comment [date]="date" ${generateInputs(commentParams, argTypes)} content="${content}" />
 	<lu-comment [date]="date" ${generateInputs(commentParams, argTypes)} content="Lorem ipsum dolor sit amet." />

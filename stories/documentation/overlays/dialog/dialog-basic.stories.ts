@@ -54,7 +54,7 @@ export default {
 	component: DialogBasicStory,
 	argTypes: {
 		size: {
-			options: ['mod-fitContent', 'mod-XS', 'mod-S', '', 'mod-L', 'mod-XL', 'mod-maxContent', 'mod-fullScreen'],
+			options: ['mod-fitContent', 'mod-XS', 'mod-S', '', 'mod-L', 'mod-XL', 'mod-XXL', 'mod-maxContent', 'mod-fullScreen'],
 			control: {
 				type: 'select',
 			},

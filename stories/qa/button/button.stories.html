@@ -25,6 +25,7 @@
 					<button type="button" class="button mod-outlined">Outlined</button>
 					<button type="button" class="button mod-outlined palette-product">Outlined product</button>
 					<button type="button" class="button mod-ghost">Ghost</button>
+					<button type="button" class="button mod-AI">AI</button>
 				</div>
 			</td>
 			<td>
@@ -32,6 +33,7 @@
 					<button type="button" luButton="outlined">Outlined</button>
 					<button type="button" luButton="outlined" palette="product">Outlined product</button>
 					<button type="button" luButton="ghost">Ghost</button>
+					<button type="button" luButton="AI">AI</button>
 				</div>
 			</td>
 		</tr>
@@ -141,9 +143,9 @@
 			</td>
 			<td>
 				<div class="demo-QAtable-list">
-					<button type="button" luButton>Counter<lu-numeric-badge [value]="7"></lu-numeric-badge></button>
-					<button type="button" luButton size="S">Counter S<lu-numeric-badge [value]="7"></lu-numeric-badge></button>
-					<button type="button" luButton size="XS">Counter XS<lu-numeric-badge [value]="7"></lu-numeric-badge></button>
+					<button type="button" luButton>Counter<lu-numeric-badge [value]="7" /></button>
+					<button type="button" luButton size="S">Counter S<lu-numeric-badge [value]="7" /></button>
+					<button type="button" luButton size="XS">Counter XS<lu-numeric-badge [value]="7" /></button>
 				</div>
 			</td>
 		</tr>
@@ -261,6 +263,7 @@
 			<td>
 				<div class="demo-QAtable-list">
 					<button type="button" class="button" disabled>Disabled</button>
+					<button type="button" class="button" aria-disabled>Disabled</button>
 					<button type="button" class="button is-disabled">Disabled</button>
 					<button type="button" class="button palette-product is-disabled">Disabled</button>
 					<button type="button" class="button" disabled>Disabled<span class="numericBadge palette-product">7</span></button>
@@ -272,8 +275,9 @@
 			<td>
 				<div class="demo-QAtable-list">
 					<button type="button" luButton disabled>Disabled</button>
+					<button type="button" luButton aria-disabled>Disabled</button>
 					<button type="button" luButton disabled palette="product">Disabled</button>
-					<button type="button" luButton disabled>Disabled<lu-numeric-badge [value]="7"></lu-numeric-badge></button>
+					<button type="button" luButton disabled>Disabled<lu-numeric-badge [value]="7" /></button>
 					<button type="button" luButton="outlined" disabled>Disabled</button>
 					<button type="button" luButton="ghost" disabled>Disabled</button>
 				</div>

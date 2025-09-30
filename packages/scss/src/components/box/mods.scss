@@ -44,6 +44,7 @@
 
 @mixin withArrow {
 	--components-box-padding: var(--pr-t-spacings-200);
+	--components-box-borderRadius: var(--pr-t-border-radius-small) var(--pr-t-border-radius-structure) var(--pr-t-border-radius-structure);
 
 	.box-arrow {
 		--components-box-arrow-bottom: 100%;

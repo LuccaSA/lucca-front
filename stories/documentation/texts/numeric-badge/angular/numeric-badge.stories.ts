@@ -42,7 +42,7 @@ export default {
 	render: (args, { argTypes }) => {
 		const { value, ...inputs } = args;
 		return {
-			template: `<lu-numeric-badge ${generateInputs(inputs, argTypes)} [value]="${value}"/>`,
+			template: `<lu-numeric-badge ${generateInputs(inputs, argTypes)} [value]="${value}" />`,
 		};
 	},
 } as Meta;

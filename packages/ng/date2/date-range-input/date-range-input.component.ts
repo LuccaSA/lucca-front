@@ -293,6 +293,7 @@ export class DateRangeInputComponent extends AbstractDateComponent implements On
 	}
 
 	popoverClosed(): void {
+		this.panelClosed.emit();
 		if (this.editedField() === 1) {
 			this.endTextInputRef().nativeElement.focus();
 		} else if (this.editedField() === 0) {

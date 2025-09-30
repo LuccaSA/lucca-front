@@ -44,7 +44,8 @@
 			content: var(--components-readMore-content-lastChild-content) / '';
 			visibility: hidden;
 			white-space: nowrap;
-			font-weight: 600;
+			font: var(--pr-t-font-body-M);
+			font-weight: var(--pr-t-font-fontWeight-semibold);
 			padding-inline-start: var(--components-readMore-link-paddingInlineStart);
 		}
 
@@ -56,17 +57,32 @@
 			padding: var(--pr-t-spacings-50);
 			margin: calc(var(--pr-t-spacings-50) * -1);
 
-			&:not(:has(> p)) {
+			$notPlainText: '> p, > ul, > ol, > h1, > h2, > h3, > h4, > h5, > h6';
+			$wrappingElements: 'ol, ul';
+
+			&:not(:has(#{$notPlainText})) {
 				&::after {
 					@extend %after;
 				}
 			}
 
-			&:has(> p) {
+			&:has(#{$notPlainText}) {
 				> * {
 					&:last-child {
-						&::after {
-							@extend %after;
+						&:not(#{$wrappingElements}) {
+							&::after {
+								@extend %after;
+							}
+						}
+
+						&:is(#{$wrappingElements}) {
+							> * {
+								&:last-child {
+									&::after {
+										@extend %after;
+									}
+								}
+							}
 						}
 					}
 				}

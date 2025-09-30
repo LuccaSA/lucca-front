@@ -27,6 +27,7 @@ export default {
 			control: {
 				type: 'select',
 			},
+			description: '[v20.2] M',
 		},
 		label: {
 			control: {

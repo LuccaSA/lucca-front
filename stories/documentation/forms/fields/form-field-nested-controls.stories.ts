@@ -45,18 +45,14 @@ export default {
 							Coucou
 							@if(form.value.foo === 1) {
 								<lu-form-field label="Level 2">
-									<lu-text-input formControlName="bar"></lu-text-input>
+									<lu-text-input formControlName="bar" />
 								</lu-form-field>
 							}
 						</lu-radio>
 					</lu-radio-group-input>
 				</lu-form-field>
 			</form>
-
-			<pr-story-model-display>
-				{{form.value | json}}
-	</pr-story-model-display>
-
+			<pr-story-model-display>{{ form.value | json }}</pr-story-model-display>
 			`,
 		};
 	},

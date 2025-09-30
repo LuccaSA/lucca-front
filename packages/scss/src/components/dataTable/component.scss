@@ -65,6 +65,8 @@
 			box-shadow: var(--components-dataTable-cell-shadow);
 			background-color: var(--components-dataTable-cell-background);
 			text-align: var(--components-dataTable-cell-textAlign);
+			transition-property: background-color;
+			transition-duration: var(--commons-animations-durations-fast);
 
 			&:first-child {
 				inline-size: var(--components-dataTable-cellFirst-width);

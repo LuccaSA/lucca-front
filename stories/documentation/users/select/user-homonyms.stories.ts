@@ -57,7 +57,7 @@ const code = `
 
       /* Ajouter cette ligne dans un lu-option-picker-advanced afin de gérer les homonymes entre utilisateurs*/
       /* Cette ligne permet d'ajouter la propriété 'additionalInformation' aux utilisateurs comportant un homonyme */
-      <lu-user-homonyms></lu-user-homonyms>
+      <lu-user-homonyms />
 
       <div class="lu-picker-content-option">
         <lu-option *luForOptions="let user" [value]="user">

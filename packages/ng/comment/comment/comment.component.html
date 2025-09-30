@@ -2,16 +2,16 @@
 	<div class="comment-infos">
 		@if (!noAvatar()) {
 			<div class="pr-u-displayContents" aria-hidden="true">
-				<ng-container *ngTemplateOutlet="avatar()"></ng-container>
+				<ng-container *ngTemplateOutlet="avatar()" />
 			</div>
 		}
 		<div class="comment-infos-content">
-			<span class="comment-infos-name"><ng-container *luPortal="authorName()"></ng-container></span>&ngsp;
+			<span class="comment-infos-name"><ng-container *luPortal="authorName()" /></span>&ngsp;
 			<time class="comment-infos-date" [attr.datetime]="date().toISOString()">
 				@if (datePipeFormat()) {
 					{{ date() | date: datePipeFormat() }}
 				} @else if (dateDisplay()) {
-					<ng-container *luPortal="dateDisplay()"></ng-container>
+					<ng-container *luPortal="dateDisplay()" />
 				} @else {
 					{{ date() | date }}
 				}

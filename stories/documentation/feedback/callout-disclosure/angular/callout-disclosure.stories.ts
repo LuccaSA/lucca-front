@@ -45,9 +45,6 @@ export default {
 				type: 'select',
 			},
 		},
-		open: {
-			description: '[v17.2]',
-		},
 		size: {
 			control: {
 				type: 'select',
