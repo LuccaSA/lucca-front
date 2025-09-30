@@ -9,12 +9,14 @@
 			(ngModelChange)="valueChange()"
 			[ngModelOptions]="{ standalone: true }"
 			(blur)="onTouched?.()"
+			(focus)="openOnFocus() ? popoverRef.openPopover(true, true, true) : null"
 			[disabled]="disabledInternal()"
 			#inputElement
 		/>
 		<div class="textField-input-affix">
 			<button
 				[luPopover2]="popoverMultilanguage"
+				#popoverRef="luPopover2"
 				luPopoverNoCloseButton
 				[customPositions]="popoverPositions"
 				[luTooltip]="intl.toggleMultilanguage"
