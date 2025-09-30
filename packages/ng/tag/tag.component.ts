@@ -3,6 +3,7 @@ import { RouterLink } from '@angular/router';
 import { LuccaIcon } from '@lucca-front/icons';
 import { DecorativePalette, Palette } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
+import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 
 @Component({
 	selector: 'lu-tag',
@@ -11,9 +12,11 @@ import { IconComponent } from '@lucca-front/ng/icon';
 	styleUrls: ['./tag.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	encapsulation: ViewEncapsulation.None,
-	imports: [IconComponent, RouterLink],
+	imports: [IconComponent, RouterLink, LuTooltipModule],
 })
 export class TagComponent {
+	withEllipis = input(false, { transform: booleanAttribute });
+
 	@Input({ required: true })
 	label: string;
 

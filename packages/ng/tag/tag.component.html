@@ -10,6 +10,10 @@
 		@if (icon) {
 			<lu-icon [icon]="icon" />
 		}
-		<span class="tag-content">{{ label }}</span>
+		@if (withEllipis()) {
+			<span class="tag-content pr-u-ellipsis" luTooltip luTooltipWhenEllipsis>{{ label }}</span>
+		} @else {
+			<span class="tag-content">{{ label }}</span>
+		}
 	</span>
 }
