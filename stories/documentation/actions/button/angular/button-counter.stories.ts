@@ -23,10 +23,13 @@ export default {
 export const Basic: StoryObj<ButtonComponent> = {
 	argTypes: {
 		luButton: {
-			options: ['', 'outlined', 'ghost', 'ghost-invert'],
+			options: ['', 'outlined', 'ghost', 'ghost-invert', 'AI'],
 			control: {
 				type: 'select',
 			},
+		},
+		palette: {
+			if: { arg: 'luButton', neq: 'AI' },
 		},
 		critical: {
 			description: '[v20.2] Couleur critical au hover / focus',

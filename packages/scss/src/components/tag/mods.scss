@@ -1,4 +1,5 @@
-@use '@lucca-front/icons/src/icon/exports' as icon;
+@use '@lucca-front/icons/src/icon/exports' as icons;
+@use '@lucca-front/scss/src/commons/utils/color';
 
 @mixin clickable {
 	--components-tag-cursor: pointer;
@@ -25,7 +26,7 @@
 	--components-tag-gap: var(--pr-t-spacings-25);
 
 	.lucca-icon {
-		@include icon.XXS;
+		@include icons.XXS;
 	}
 
 	// Deprecated
@@ -37,7 +38,7 @@
 	--components-tag-font: var(--pr-t-font-body-M);
 
 	.lucca-icon {
-		@include icon.S;
+		@include icons.S;
 	}
 
 	// Deprecated
@@ -53,4 +54,18 @@
 @mixin product {
 	--components-tag-background: var(--palettes-100, var(--palettes-product-100));
 	--components-tag-color: var(--palettes-800, var(--palettes-product-800));
+}
+
+@mixin AI {
+	@include outlined;
+
+	&:not(:disabled) {
+		--components-tag-boxShadow: none;
+
+		@include color.borderGradient(135deg, var(--palettes-brand-400), var(--palettes-AI-500), var(--pr-t-border-radius-small));
+
+		.lucca-icon {
+			@include icons.AI;
+		}
+	}
 }

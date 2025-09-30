@@ -23,6 +23,12 @@ export const Template: StoryObj<TagComponent> = {
 			},
 		},
 		palette: PaletteAllArgType,
+		outlined: {
+			control: {
+				type: 'boolean',
+			},
+			if: { arg: 'AI', truthy: false },
+		},
 		icon: {
 			options: IconsList.map((i) => i.icon),
 			control: {
@@ -37,5 +43,6 @@ export const Template: StoryObj<TagComponent> = {
 		palette: null,
 		outlined: false,
 		icon: null,
+		AI: false,
 	},
 };

@@ -19,6 +19,7 @@
 	font: var(--components-tag-font);
 	font-size: var(--components-tag-fontSize); // Deprecated
 	line-height: var(--components-tag-lineHeight); // Deprecated
+	position: relative;
 
 	&,
 	&:is(a, button) {

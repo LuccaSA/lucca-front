@@ -15,6 +15,8 @@ export default {
 
 		const { firstName, lastName, compact, small, content } = args;
 
+		const commentParams = { datePipeFormat: args['datePipeFormat'] || undefined };
+
 		const richContent = `<h3>Lorem, ipsum.</h3>
 	<p>
 		Lorem ipsum, dolor sit amet consectetur adipisicing elit. <strong>Facilis voluptates ex</strong> qui iste libero suscipit cum
@@ -36,9 +38,9 @@ export default {
 	<ng-template #avatarTpl>
 		<lu-user-picture [user]="{firstName: 'Marie', lastName: 'Bragoulet'}" />
 	</ng-template>
-	<lu-comment [date]="date" content="${content}" />
-	<lu-comment [date]="date" content="Lorem ipsum dolor sit amet." />
-	<lu-comment [date]="date" content="${richContent}" />
+	<lu-comment [date]="date"${generateInputs(commentParams, argTypes)} content="${content}" />
+	<lu-comment [date]="date"${generateInputs(commentParams, argTypes)} content="Lorem ipsum dolor sit amet." />
+	<lu-comment [date]="date"${generateInputs(commentParams, argTypes)} content="${richContent}" />
 </lu-comment-block>`,
 		};
 	},
@@ -56,6 +58,7 @@ export const Basic: StoryObj = {
 		compact: false,
 		small: false,
 		date: new Date(),
+		datePipeFormat: '',
 		firstName: 'Marie',
 		lastName: 'Bragoulet',
 	},
