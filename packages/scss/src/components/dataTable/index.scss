@@ -33,7 +33,7 @@
 	}
 
 	&.mod-hover {
-		:is(.dataTable-head-row.mod-selectable, .dataTable-body-row) {
+		:is(.mod-selectable, .dataTable-body-row) {
 			&:hover {
 				@include hover;
 			}
@@ -54,6 +54,7 @@
 		@include group;
 	}
 
+	&:has([selectable]),
 	&.mod-selectable {
 		@include selectable;
 
