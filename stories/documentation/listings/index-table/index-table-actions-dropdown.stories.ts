@@ -32,8 +32,7 @@ function getTemplate(args: IndexTableActionsDropdownStory): string {
 			</td>
 		</tr>
 	</tbody>
-</table>
-`;
+</table>`;
 }
 
 const Template: StoryFn<IndexTableActionsDropdownStory> = (args) => ({

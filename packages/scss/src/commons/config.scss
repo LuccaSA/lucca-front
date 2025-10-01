@@ -116,7 +116,7 @@ $borderRadiusTokens: (
 $product: 'brand' !default;
 $palettesShades: text, 0, 25, 50, 100, 200, 300, 400, 500, 600, 700, 800, 900; // text is deprecated
 $palettesStates: 'critical', 'error', 'warning', 'success', 'successContrasted', 'warningContrasted';
-$palettesDefault: 'brand', 'brandContrasted', 'neutral', 'navigation';
+$palettesDefault: 'brand', 'brandContrasted', 'neutral', 'navigation', 'AI';
 $palettesProduct: 'product';
 $palettesOtherProduct: () !default;
 $palettesDecorative: 'kiwi', 'lime', 'cucumber', 'mint', 'glacier', 'lagoon', 'blueberry', 'lavender', 'grape', 'watermelon', 'pumpkin',
@@ -139,6 +139,11 @@ $palettesAll: function.flatMap(
 $fieldsWidth: 20, 30, 40, 50, 60 !default;
 
 // Palettes
+
+$ai: (
+	500: #BC6FDD,
+	600: #A440CF,
+);
 
 $brand: (
 	// text is deprecated
@@ -545,6 +550,7 @@ $productsInterpolation: (
 );
 
 $palettesInterpolation: (
+	'AI': $ai,
 	'lucca': $brand,
 	'brand': $brand,
 	'brandContrasted': $brandContrasted,

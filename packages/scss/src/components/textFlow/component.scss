@@ -36,5 +36,11 @@
 
 	& > :last-child {
 		margin-block-end: 0;
+
+		&:is(ul, ol) {
+			> :last-child {
+				margin-block-end: 0;
+			}
+		}
 	}
 }

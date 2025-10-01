@@ -36,15 +36,18 @@
 								<span #groupingTitleRef>
 									<ng-container *luPortal="grouping.content; context: { $implicit: group }" />
 								</span>
-								<button
-									type="button"
-									class="link"
-									(click)="toggleOptions(groupCtx.notSelectedOptions, group.options)"
-									[id]="selectId + '-group-' + group.key"
-								>
-									<span class="pr-u-mask">{{ groupingTitleRef.innerText }}&nbsp;– </span
-									>{{ groupCtx.isGroupSelected ? intl.unselectAll : intl.selectAll }}
-								</button>
+
+								@if (someGroupOptionEnabled()(group.options)) {
+									<button
+										type="button"
+										class="link"
+										(click)="toggleOptions(groupCtx.notSelectedOptions, group.options)"
+										[id]="selectId + '-group-' + group.key"
+									>
+										<span class="pr-u-mask">{{ groupingTitleRef.innerText }}&nbsp;– </span
+										>{{ groupCtx.isGroupSelected ? intl.unselectAll : intl.selectAll }}
+									</button>
+								}
 							</div>
 							<ng-template
 								[ngTemplateOutlet]="optionsList"
@@ -68,7 +71,7 @@
 								(toggleOne)="toggleOption($event)"
 								(selectMany)="toggleOptions($event, [])"
 								(unselectMany)="toggleOptions([], $event)"
-							></lu-tree-branch>
+							/>
 						}
 					} @else {
 						@for (option of options; track trackOptionsBy(index, option); let index = $index) {

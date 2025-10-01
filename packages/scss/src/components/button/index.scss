@@ -7,6 +7,18 @@
 	}
 
 	@layer mods {
+		&.mod-AI {
+			@include AI;
+
+			&.is-success {
+				@include successAI;
+			}
+
+			&.is-loading {
+				@include loadingAI;
+			}
+		}
+
 		&.mod-block {
 			@include block;
 		}
@@ -140,6 +152,7 @@
 				@include loadingXS;
 			}
 
+			&.mod-AI,
 			&.mod-outlined {
 				@include loadingOutlined;
 			}
@@ -160,6 +173,7 @@
 		&.success {
 			@include success;
 
+			&.mod-AI,
 			&.mod-outlined {
 				@include successOutlined;
 			}
@@ -179,7 +193,8 @@
 
 		// .disabled is deprecated
 		&.is-disabled,
-		&.disabled {
+		&.disabled,
+		&[aria-disabled] {
 			@include disabled;
 		}
 	}

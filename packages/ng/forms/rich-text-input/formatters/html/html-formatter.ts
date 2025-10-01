@@ -1,10 +1,15 @@
-import { $getRoot, $insertNodes, LexicalEditor } from 'lexical';
+import { Provider } from '@angular/core';
+import { $generateHtmlFromNodes, $generateNodesFromDOM } from '@lexical/html';
+import { registerRichText } from '@lexical/rich-text';
 import { RICH_TEXT_FORMATTER, RichTextFormatter } from '@lucca-front/ng/forms/rich-text-input';
 import { sanitize } from 'isomorphic-dompurify';
-import { $generateHtmlFromNodes, $generateNodesFromDOM } from '@lexical/html';
-import { Provider } from '@angular/core';
+import { $getRoot, $insertNodes, LexicalEditor } from 'lexical';
 
 export class HtmlFormatter extends RichTextFormatter {
+	override registerTextPlugin(editor: LexicalEditor) {
+		return registerRichText(editor);
+	}
+
 	override parse(editor: LexicalEditor, htmlString?: string | null): void {
 		const parser = new DOMParser();
 		const dom = parser.parseFromString(

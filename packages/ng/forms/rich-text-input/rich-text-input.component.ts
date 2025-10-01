@@ -19,12 +19,11 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { createEmptyHistoryState, registerHistory } from '@lexical/history';
-import { registerRichText } from '@lexical/rich-text';
-import { mergeRegister } from '@lexical/utils';
-
 import { $canShowPlaceholderCurry } from '@lexical/text';
+import { mergeRegister } from '@lexical/utils';
 import { FormFieldComponent, InputDirective } from '@lucca-front/ng/form-field';
 import { $getRoot, createEditor, Klass, LexicalEditor, LexicalNode } from 'lexical';
+
 import { RICH_TEXT_FORMATTER, RichTextFormatter } from './formatters';
 
 const INITIAL_UPDATE_TAG = 'initial-update';
@@ -107,7 +106,7 @@ export class RichTextInputComponent implements OnInit, OnDestroy, ControlValueAc
 		});
 
 		this.#cleanup = mergeRegister(
-			registerRichText(this.#editor),
+			this.#richTextFormatter.registerTextPlugin(this.#editor),
 			registerHistory(this.#editor, createEmptyHistoryState(), 300),
 			this.#editor.registerUpdateListener(({ tags, dirtyElements }) => {
 				if (!tags.has(INITIAL_UPDATE_TAG) && dirtyElements.size) {
@@ -124,7 +123,7 @@ export class RichTextInputComponent implements OnInit, OnDestroy, ControlValueAc
 		this.pluginComponents().forEach((plugin) => plugin.setEditorInstance(this.#editor));
 
 		if (this.#allPlugins().length > 0) {
-			this.#allPlugins()[this.#focusedPlugin].tabindex.set(0);
+			this.#allPlugins()[this.#focusedPlugin].tabindex?.set(0);
 		}
 	}
 

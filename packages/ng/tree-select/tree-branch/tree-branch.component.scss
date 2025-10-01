@@ -9,18 +9,6 @@
 			lu-select-option {
 				@include nestedSimple($level: 1);
 			}
-
-			lu-tree-branch {
-				lu-select-option {
-					@include nestedSimple($level: 2);
-				}
-
-				lu-tree-branch {
-					lu-select-option {
-						@include nestedSimple($level: 3);
-					}
-				}
-			}
 		}
 
 		.optionItem-icons {
@@ -53,18 +41,6 @@
 				@include nestedMulti($level: 1);
 
 				margin-block-start: var(--pr-t-spacings-50);
-			}
-
-			lu-tree-branch {
-				lu-select-option {
-					@include nestedMulti($level: 2);
-				}
-
-				lu-tree-branch {
-					lu-select-option {
-						@include nestedMulti($level: 3);
-					}
-				}
 			}
 		}
 

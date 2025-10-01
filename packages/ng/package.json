@@ -26,6 +26,7 @@
     "@angular/common": "^20.0.0",
     "@angular/core": "^20.0.0",
     "@angular/cdk": "^20.0.0",
+    "@angular/animations": "^20.0.0",
     "@lucca-front/icons": "*",
     "@lucca-front/scss": "*",
     "isomorphic-dompurify": "^2.17.0",
@@ -36,6 +37,7 @@
     "@lexical/markdown": "^0.30.0",
     "@lexical/history": "^0.30.0",
     "@lexical/link": "^0.30.0",
+    "@lexical/plain-text": "^0.30.0",
     "@lexical/rich-text": "^0.30.0",
     "@lexical/selection": "^0.30.0",
     "@lexical/utils": "^0.30.0",
@@ -56,6 +58,9 @@
       "optional": true
     },
     "@lexical/link": {
+      "optional": true
+    },
+    "@lexical/plain-text": {
       "optional": true
     },
     "@lexical/rich-text": {

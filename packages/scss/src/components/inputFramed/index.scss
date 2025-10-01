@@ -39,6 +39,10 @@
 			}
 		}
 	}
+
+	&.mod-center {
+		@include center;
+	}
 }
 
 .inputFramedWrapper {

@@ -100,6 +100,7 @@
 		.segmentedControl_panel,
 		.viewTabs_panel {
 			display: var(--components-segmentedControl-display, block);
+			border-radius: var(--pr-t-border-radius-default);
 
 			&:focus-visible {
 				@include a11y.focusVisible;

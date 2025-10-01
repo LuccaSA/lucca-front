@@ -7,6 +7,10 @@
 	}
 
 	@layer mods {
+		&.mod-S {
+			@include S;
+		}
+
 		&.mod-L {
 			@include L;
 		}
@@ -20,11 +24,19 @@
 		&.mod-outlined {
 			@include outlined;
 		}
+
+		&.mod-AI {
+			@include AI;
+		}
 	}
 
 	@layer states {
 		&.mod-disabled {
 			@include disabled;
+		}
+
+		&:has(.tag-content:focus-visible) {
+			@include focusVisible;
 		}
 	}
 }

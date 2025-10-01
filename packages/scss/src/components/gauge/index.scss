@@ -11,8 +11,29 @@
 			@include thin;
 		}
 
+		&:has(.gauge-circleBackground) {
+			@include circular;
+		}
+
+		// .mod-vertical is deprecated
 		&.mod-vertical {
 			@include vertical;
+
+			&.mod-thin {
+				@include verticalThin;
+			}
+		}
+	}
+
+	@layer states {
+		&.is-zero,
+		&:not([style]),
+		&[style*='--components-gauge-value: 0%'] {
+			@include zero;
+		}
+
+		&.is-animated {
+			@include animated;
 		}
 	}
 }

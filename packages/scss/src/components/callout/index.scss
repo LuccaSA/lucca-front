@@ -11,4 +11,13 @@
 			@include S;
 		}
 	}
+
+	&.mod-AI {
+		@include AI;
+	}
+
+	&:has(.callout-content-description-actions.mod-inline) {
+		@include actionsInline;
+	}
 }
+

@@ -7,7 +7,7 @@ import { Meta, StoryFn } from '@storybook/angular';
 	standalone: true,
 	imports: [LuSkipLinksComponent],
 	template: `
-		<lu-skip-links></lu-skip-links>
+		<lu-skip-links />
 		<div id="lucca-banner-solutions-container">
 			<button type="button" class="button mod-onlyIcon mod-ghost" luTooltip="Modifier"><span aria-hidden="true" class="lucca-icon icon-app"></span></button>
 			<button type="button" class="button mod-onlyIcon mod-ghost" luTooltip="Modifier"><span aria-hidden="true" class="lucca-icon icon-peopleGroup"></span></button>
@@ -58,7 +58,7 @@ import { LuSkipLinksComponent } from '@lucca-front/ng/a11y';
 	standalone: true,
 	imports: [LuSkipLinksComponent],
 	selector: 'app-component',
-	template: \`<lu-skip-links></lu-skip-links>\`,
+	template: \`<lu-skip-links />\`,
 })
 class AppComponent {
 }`;

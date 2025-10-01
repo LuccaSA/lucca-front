@@ -15,6 +15,6 @@
 	<lu-option-picker>
 		<lu-option *ngFor="let option of _options" [value]="option"> {{ option.name }} </lu-option>
 	</lu-option-picker>
-	<lu-input-clearer *ngIf="!props.required && !props['multiple']"></lu-input-clearer>
+	<lu-input-clearer *ngIf="!props.required && !props['multiple']" />
 </lu-select>
 <span class="textfield-label">{{ props.label }}</span>

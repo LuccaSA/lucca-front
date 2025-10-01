@@ -44,8 +44,7 @@ function getTemplate(args: IndexTableActionsUserPopoverCellStory): string {
 			<td class="indexTable-body-row-cell">Content</td>
 		</tr>
 	</tbody>
-</table>
-`;
+</table>`;
 }
 
 const Template: StoryFn<IndexTableActionsUserPopoverCellStory> = (args) => ({

@@ -41,4 +41,8 @@
 			@include filterPill;
 		}
 	}
+
+	&.is-lineThrough {
+		@include lineThrough;
+	}
 }

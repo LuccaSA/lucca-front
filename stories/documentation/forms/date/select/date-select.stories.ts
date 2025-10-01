@@ -6,7 +6,7 @@ import { LuInputDisplayerDirective } from '@lucca-front/ng/input';
 import { Meta, applicationConfig, moduleMetadata } from '@storybook/angular';
 import { generateMarkdownCodeBlock, getStoryGenerator, useDocumentationStory } from 'stories/helpers/stories';
 
-type StoryComponent = LuDateSelectInputComponent<string> & { selectedDate: string, secondSelectedDate: string };
+type StoryComponent = LuDateSelectInputComponent<string> & { selectedDate: string; secondSelectedDate: string };
 
 const generateStory = getStoryGenerator<StoryComponent>({
 	argTypes: {
@@ -65,7 +65,7 @@ export const Minimal = generateStory({
 	description: '',
 	template: `
 <label class="textfield">
-	<lu-date-select class="textfield-input" [(ngModel)]="selectedDate"></lu-date-select>
+	<lu-date-select class="textfield-input" [(ngModel)]="selectedDate" />
 	<span class="textfield-label">Label</span>
 </label>
 	`,

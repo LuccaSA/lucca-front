@@ -35,4 +35,8 @@
 			@include XXL;
 		}
 	}
+
+	&.mod-AI {
+		@include AI;
+	}
 }

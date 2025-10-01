@@ -14,12 +14,15 @@
 
 .addOption {
 	@layer mods {
-		justify-content: left;
-
 		@include button.vars;
 		@include button.component;
 		@include button.block;
 		@include button.ghost;
+
+		/* stylelint-disable-next-line no-duplicate-selectors */
+		& {
+			justify-content: left;
+		}
 	}
 
 	@layer states {
