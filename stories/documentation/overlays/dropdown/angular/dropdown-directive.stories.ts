@@ -1,6 +1,5 @@
 import { ButtonComponent } from '@lucca-front/ng/button';
-import { DropdownActionComponent, DropdownDividerComponent, DropdownGroupComponent, DropdownItemComponent, LuDropdownTriggerDirective } from '@lucca-front/ng/dropdown';
-import { DropdownMenuComponent } from '@lucca-front/ng/dropdown/dropdown-menu';
+import { DropdownActionComponent, DropdownDividerComponent, DropdownGroupComponent, DropdownItemComponent, DropdownMenuComponent, LuDropdownTriggerDirective } from '@lucca-front/ng/dropdown';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { Meta, StoryFn } from '@storybook/angular';
 
