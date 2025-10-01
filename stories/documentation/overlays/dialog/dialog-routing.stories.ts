@@ -1,7 +1,8 @@
 import { JsonPipe } from '@angular/common';
 import { Component, computed, inject, Injectable, signal } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
-import { provideRouter, Router, RouterLink, RouterOutlet, Routes } from '@angular/router';
+import { ActivatedRoute, provideRouter, Router, RouterLink, RouterOutlet, Routes, withComponentInputBinding } from '@angular/router';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { CalloutComponent } from '@lucca-front/ng/callout';
 import {
@@ -18,17 +19,18 @@ import {
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { CheckboxInputComponent, NumberInputComponent, TextInputComponent } from '@lucca-front/ng/forms';
 import { applicationConfig, Meta, StoryFn } from '@storybook/angular';
+import { map } from 'rxjs';
 import { StoryModelDisplayComponent } from 'stories/helpers/story-model-display.component';
 
 @Injectable()
 class DataProvider {
-	dummy = signal(0);
+	dummy = signal(42);
 	dialogOut = signal<{ dataNum?: number; dataString?: string }>({});
 }
 
 @Component({
 	standalone: true,
-	template: ``,
+	template: `Empty component, no route matched`,
 })
 class EmptyComponent {}
 
@@ -70,6 +72,7 @@ class DismissedComponent {}
 					<h1>Dialog opened by route</h1>
 				</lu-dialog-header>
 				<lu-dialog-content>
+					<button luButton (click)="router.navigateByUrl('/')">Navigate away</button>
 					<lu-form-field label="Data received by dialog">
 						<lu-number-input [(ngModel)]="dataNum" name="num" />
 					</lu-form-field>
@@ -93,6 +96,8 @@ class DismissedComponent {}
 class TestDialogComponent {
 	data = injectDialogData<number>();
 	ref = injectDialogRef<{ dataNum?: number; dataString?: string }>();
+	router = inject(Router);
+	route = inject(ActivatedRoute);
 
 	allowThisDialogToClose = signal(true);
 
@@ -113,7 +118,12 @@ class TestDialogComponent {
 	selector: 'dialog-routing-stories',
 	standalone: true,
 	template: `
-		<button luButton type="button" routerLink="/dialog">Navigate to /dialog</button>
+		<div class="pr-u-marginBlockEnd200">
+			<p>
+				Current URL: <strong>{{ url() }}</strong>
+			</p>
+			<button luButton type="button" routerLink="/dialog" [queryParams]="{ lol: 12 }">Navigate to /dialog</button>
+		</div>
 
 		<p class="pr-u-marginBlockStart200">Dialog data out</p>
 		<pr-story-model-display class="pr-u-marginBlockStart0">{{ service.dialogOut() | json }}</pr-story-model-display>
@@ -125,6 +135,10 @@ class TestDialogComponent {
 })
 class DialogRoutingStory {
 	service = inject(DataProvider);
+
+	router = inject(Router);
+
+	url = toSignal(this.router.events.pipe(map(() => this.router.url)), { initialValue: this.router.url });
 }
 
 const dialogRoute = dialogRouteFactory(TestDialogComponent, {
@@ -133,18 +147,18 @@ const dialogRoute = dialogRouteFactory(TestDialogComponent, {
 		size: 'M',
 	},
 	dialogRouteConfig: {
-		onClosed: (onClosedData, router = inject(Router), service = inject(DataProvider)) => {
-			service.dialogOut.set(onClosedData);
-			return router.navigate(['closed']);
+		onClosed: (onClosedData) => {
+			inject(DataProvider).dialogOut.set(onClosedData);
+			return inject(Router).navigate(['closed']);
 		},
-		onDismissed: (router = inject(Router)) => router.navigate(['dismissed']),
+		onDismissed: () => inject(Router).navigate(['dismissed']),
 	},
 });
 
 const routes: Routes = [
 	dialogRoute({
 		path: 'dialog',
-		dataFactory: (service = inject(DataProvider)) => service.dummy(),
+		dataFactory: () => inject(DataProvider).dummy(),
 		dialogRouteConfig: {
 			// Can be overridden here
 			canDeactivate: [(c) => c.allowThisDialogToClose()],
@@ -158,7 +172,7 @@ const routes: Routes = [
 export default {
 	title: 'Documentation/Overlays/Dialog/Routing',
 	component: DialogRoutingStory,
-	decorators: [applicationConfig({ providers: [provideRouter(routes), DataProvider] })],
+	decorators: [applicationConfig({ providers: [provideRouter(routes, withComponentInputBinding()), DataProvider] })],
 } as Meta;
 
 const Template: StoryFn<DialogRoutingStory> = (args) => ({
