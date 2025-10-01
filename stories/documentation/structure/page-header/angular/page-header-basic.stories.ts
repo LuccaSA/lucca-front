@@ -82,7 +82,7 @@ export default {
 		></lu-text-input>
 	</lu-form-field>
 	<button type="button" luButton>Button</button>
-	<button type="button" luButton="outline">Button</button>
+	<button type="button" luButton="outlined">Button</button>
 	<button type="button" luButton="ghost"><lu-icon icon="menuDots" alt="Voir plus d’options" /></button>
 </ng-container>`
 			: ``;
