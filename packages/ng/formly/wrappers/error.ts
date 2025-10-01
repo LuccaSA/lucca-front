@@ -1,35 +1,21 @@
+import { NgIf } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input, ViewChild, ViewContainerRef } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { FieldTypeConfig, FieldWrapper, FormlyFieldConfig } from '@ngx-formly/core';
 import { buildAddWrapperExtension } from '../formly.utils';
-
-// wrapper
-@Component({
-	selector: 'lu-formly-wrapper-error',
-	styleUrls: ['flex-layout.scss'],
-	templateUrl: './error.html',
-	changeDetection: ChangeDetectionStrategy.OnPush,
-	// eslint-disable-next-line @angular-eslint/prefer-standalone
-	standalone: false,
-})
-export class LuFormlyWrapperError extends FieldWrapper<FieldTypeConfig> {
-	@ViewChild('fieldComponent', { read: ViewContainerRef, static: true })
-	override fieldComponent: ViewContainerRef;
-
-	get validationId() {
-		return this.field.id + '-message';
-	}
-}
 
 // component that display the right error message
 @Component({
 	selector: 'lu-formly-error-message',
-	template: `<div class="textfield-messages-error" *ngFor="let message of errorMessages">
-		{{ message }}
-	</div>`,
+	template: `
+		@for (message of errorMessages; track $index) {
+			<div class="textfield-messages-error">
+				{{ message }}
+			</div>
+		}
+	`,
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	// eslint-disable-next-line @angular-eslint/prefer-standalone
-	standalone: false,
+	standalone: true,
 })
 export class LuFormlyErrorMessage {
 	@Input() formControl?: FormControl;
@@ -45,6 +31,24 @@ export class LuFormlyErrorMessage {
 			});
 		}
 		return messages;
+	}
+}
+
+// wrapper
+@Component({
+	selector: 'lu-formly-wrapper-error',
+	styleUrls: ['flex-layout.scss'],
+	templateUrl: './error.html',
+	changeDetection: ChangeDetectionStrategy.OnPush,
+	standalone: true,
+	imports: [NgIf, ReactiveFormsModule, LuFormlyErrorMessage],
+})
+export class LuFormlyWrapperError extends FieldWrapper<FieldTypeConfig> {
+	@ViewChild('fieldComponent', { read: ViewContainerRef, static: true })
+	override fieldComponent: ViewContainerRef;
+
+	get validationId() {
+		return this.field.id + '-message';
 	}
 }
 

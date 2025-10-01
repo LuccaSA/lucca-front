@@ -1,13 +1,15 @@
+import { NgFor } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { FieldType, FieldTypeConfig } from '@ngx-formly/core';
+import { ReactiveFormsModule } from '@angular/forms';
+import { FieldType, FieldTypeConfig, FormlyModule } from '@ngx-formly/core';
 
 @Component({
 	selector: 'lu-formly-field-radios',
 	styleUrls: ['formly-field.common.scss'],
 	templateUrl: './radios.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	// eslint-disable-next-line @angular-eslint/prefer-standalone
-	standalone: false,
+	standalone: true,
+	imports: [ReactiveFormsModule, FormlyModule, NgFor],
 })
 export class LuFormlyFieldRadios extends FieldType<FieldTypeConfig> {
 	get _options() {
