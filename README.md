@@ -158,6 +158,28 @@ or
 npx ng update @lucca-front/ng@latest
 ```
 
+### How to update in Nx workspace
+
+To update Lucca Front within a Nx workspace, you need to replace the `ng update` previously used by `nx migrate`.
+For instance, if you want the latest version you can run this equivalent functions:
+
+```
+npx nx migrate @lucca-front/ng
+```
+
+or
+
+```
+npx nx migrate @lucca-front/ng@latest
+```
+
+You can run the schematics with `npx nx g <schematics-name>`. 
+For instance:
+
+```
+npx nx g @lucca-front/ng:class-prefix
+```
+
 ## Storybook
 
 In order to work on Lucca Front, we use Storybook to display components.
