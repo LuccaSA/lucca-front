@@ -1,21 +1,21 @@
-import { provideAnimations } from '@angular/platform-browser/animations';
+import { ButtonComponent } from '@lucca-front/ng/button';
 import { LuDropdownModule, LuDropdownTriggerDirective } from '@lucca-front/ng/dropdown';
 import { IconComponent } from '@lucca-front/ng/icon';
-import { Meta, StoryFn, applicationConfig } from '@storybook/angular';
+import { Meta, StoryFn } from '@storybook/angular';
 
 export default {
-	title: 'Documentation/Overlays/Dropdown/Directive',
+	title: 'Documentation/Overlays/Dropdown/Angular/Directive Legacy',
 	component: LuDropdownTriggerDirective,
-	decorators: [applicationConfig({ providers: [provideAnimations()] })],
+	decorators: [],
 } as Meta;
 
 const Template: StoryFn = (args) => ({
 	props: args,
 	moduleMetadata: {
-		imports: [LuDropdownModule, IconComponent],
+		imports: [LuDropdownModule, IconComponent, ButtonComponent],
 	},
-	template: `
-	<button type="button" class="button" [luDropdown]="dropdown">Dropdown with options</button>
+	template: `<button type="button" luButton [luDropdown]="dropdown">Dropdown</button>
+
 <lu-dropdown #dropdown>
 	<li class="dropdown-list-option">
 		<span class="dropdown-list-option-action is-disabled" luDropdownItem>
@@ -35,33 +35,11 @@ const Template: StoryFn = (args) => ({
 			Supprimer
 		</button>
 	</li>
-</lu-dropdown>
-`,
+</lu-dropdown>`,
 });
-
-const code = `
-  <button type="button"
-		class="button"
-    [luDropdown]="dropdown"
-    luDropdownAlignment="top" /* top | bottom | left | right | center */
-    luDropdownPosition="before" /* above | below | before | after */
-    (luDropdownOnClose)="close()"
-    (luDropdownOnOpen)='open()'
-    [luDropdownDisabled]="true"
-    luDropdownOverlap>
-    Open dropdown
-  </button>
-`;
 
 export const Directive = Template.bind({});
 Directive.args = {};
 Directive.parameters = {
-	docs: {
-		source: {
-			language: 'ts',
-			type: 'code',
-			code,
-		},
-	},
 	controls: { include: [] },
 };
