@@ -107,6 +107,7 @@ export default typescript.config(
 		rules: {
 			'@angular-eslint/template/button-has-type': 'error',
 			'@angular-eslint/template/prefer-self-closing-tags': 'error',
+			'@angular-eslint/template/prefer-control-flow': 'error',
 		},
 	},
 	prettier,
