@@ -147,11 +147,11 @@ const dialogRoute = dialogRouteFactory(TestDialogComponent, {
 		size: 'M',
 	},
 	dialogRouteConfig: {
-		onClosed: (onClosedData, router = inject(Router), service = inject(DataProvider)) => {
-			service.dialogOut.set(onClosedData);
-			return router.navigate(['closed']);
+		onClosed: (onClosedData) => {
+			inject(DataProvider).dialogOut.set(onClosedData);
+			return inject(Router).navigate(['closed']);
 		},
-		onDismissed: (router = inject(Router)) => router.navigate(['dismissed']),
+		onDismissed: () => inject(Router).navigate(['dismissed']),
 	},
 });
 
