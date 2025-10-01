@@ -20,8 +20,14 @@ npm i @lexical/html
 npm i @lexical/markdown
 ```
 
+- Plain text (dépendance sur markdown pour les Transformers, dans la version actuelle)
+
+```sh
+npm i @lexical/plain-text @lexical/markdown
+```
+
 Avant toute utilisation du composant, il est nécessaire de définir le formateur à utiliser.
-Deux formateurs par défaut sont disponibles, à provide au niveau du composant parent de l'input :
+Trois formateurs par défaut sont disponibles, à provide au niveau du composant parent de l'input :
 
 - HTML
 
@@ -30,11 +36,23 @@ import { provideLuRichTextHTMLFormatter } from '@lucca-front/ng/forms/rich-text-
 provideLuRichTextHTMLFormatter();
 ```
 
-- Markdown (avec une liste optionnelle de `Transformer` markdown pour les noeuds custom)
+- Markdown
+
+Ce formateur accepte en paramètres une liste optionnelle de `Transformer` markdown pour les noeuds custom
 
 ```ts
 import { provideLuRichTextMarkdownFormatter } from '@lucca-front/ng/forms/rich-text-input/formatters/markdown';
 provideLuRichTextMarkdownFormatter(transformers);
+```
+
+- Plain Text
+
+Ce formateur accepte en paramètres une liste optionnelle de `Transformer` markdown pour les noeuds custom
+
+```ts
+import { provideLuRichTextPlainTextFormatter } from '@lucca-front/ng/forms/rich-text-input/formatters/plain-text';
+provideLuRichTextPlainTextFormatter();
+provideLuRichTextPlainTextFormatter([TAGS]);
 ```
 
 Exemple d'utilisation :

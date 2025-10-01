@@ -9,7 +9,7 @@ export default {
 function getTemplate(args: CardsFooterStory): string {
 	return `<div class="card">
 	<div class="card-content">
-		<h2 class="card-title">Titre de la carte</h2>
+		<h3 class="card-title">Titre de la carte</h3>
 		<p>Contenu de la carte</p>
 	</div>
 	<footer class="card-footer">

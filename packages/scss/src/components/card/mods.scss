@@ -59,3 +59,34 @@
 @mixin nested {
 	--components-card-border-radius: var(--pr-t-border-radius-default);
 }
+
+@mixin expand {
+	border: 0;
+	background-color: transparent;
+	box-shadow: none;
+	cursor: pointer;
+
+	&::before {
+		content: '';
+		position: absolute;
+		inset: 0;
+		background-color: var(--pr-t-elevation-surface-raised);
+		border-radius: var(--components-card-border-radius);
+		box-shadow: var(--pr-t-elevation-shadow-raised);
+		transition-duration: var(--commons-animations-durations-fast);
+		transition-property: inset, box-shadow;
+	}
+
+	&:hover {
+		box-shadow: none;
+
+		&::before {
+			inset: -2px -6px;
+			box-shadow: var(--pr-t-elevation-shadow-overlay);
+		}
+	}
+
+	.card-content {
+		z-index: 1;
+	}
+}

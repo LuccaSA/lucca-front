@@ -26,6 +26,10 @@
 		@include nested;
 	}
 
+	&.mod-expand {
+		@include expand;
+	}
+
 	&:is(.is-disabled, .disabled) {
 		@include disabled;
 	}
