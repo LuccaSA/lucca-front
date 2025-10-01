@@ -102,5 +102,6 @@ export default typescript.config({
     extends: [...angular.configs.templateRecommended],
     rules: {
         '@angular-eslint/template/button-has-type': 'error',
+        '@angular-eslint/template/prefer-control-flow': 'error',
     },
 }, prettier, storybook.configs["flat/recommended"]);
