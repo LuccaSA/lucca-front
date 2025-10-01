@@ -1,4 +1,3 @@
-import { NgIf } from '@angular/common';
 import { provideHttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -15,7 +14,6 @@ import { Meta, StoryFn, applicationConfig } from '@storybook/angular';
 	selector: 'user-select-stories',
 	templateUrl: './user-homonyms.stories.html',
 	imports: [
-		NgIf,
 		LuUserHomonymsComponent,
 		LuSelectInputComponent,
 		LuOptionPickerComponent,
@@ -65,9 +63,9 @@ const code = `
 
           /* Ajouter une information additionnelle en pilotant la propriété ajoutée précedemment */
           /* Par défault, additionalInformation équivaut au nom du département de l'utilisateur */
-          <div *ngIf="user.additionalInformation" class="pr-u-fontStyleItalic pr-u-bodyS">
-            ({{ user.additionalInformation }})
-          </div>
+          @if (user.additionalInformation) {
+						<div class="pr-u-fontStyleItalic pr-u-bodyS">({{ user.additionalInformation }})</div>
+					}
         </lu-option>
       </div>
     </lu-option-picker-advanced>
