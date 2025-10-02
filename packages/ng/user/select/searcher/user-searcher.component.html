@@ -3,10 +3,14 @@
 		<input #searchInput class="textfield-input" formControlName="clue" />
 	</div>
 
-	<label class="checkbox mod-formerEmployee mod-S" *ngIf="enableFormerEmployees">
-		<input class="checkbox-input" type="checkbox" formControlName="formerEmployees" />
-		<span class="checkbox-label">{{ intl.includeFormerEmployees }}</span>
-	</label>
+	@if (enableFormerEmployees) {
+		<label class="checkbox mod-formerEmployee mod-S">
+			<input class="checkbox-input" type="checkbox" formControlName="formerEmployees" />
+			<span class="checkbox-label">{{ intl.includeFormerEmployees }}</span>
+		</label>
+	}
 </form>
 
-<lu-option-placeholder *ngIf="(empty$ | async) && (loading$ | async) === false" (onClear)="reset()" />
+@if ((empty$ | async) && (loading$ | async) === false) {
+	<lu-option-placeholder (onClear)="reset()" />
+}

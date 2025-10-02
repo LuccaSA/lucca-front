@@ -1,5 +1,5 @@
 <ul class="segmentedControl" role="tablist" [class.mod-S]="small()" [class.mod-vertical]="vertical()">
-	@for (panel of tabs(); track $index) {
+	@for (panel of tabs(); track panel.id) {
 		<li class="segmentedControl-item" role="presentation">
 			<button
 				#tabButton

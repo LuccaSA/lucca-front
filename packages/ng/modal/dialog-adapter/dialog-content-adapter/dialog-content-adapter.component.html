@@ -7,18 +7,21 @@
 	</lu-dialog-content>
 	<lu-dialog-footer>
 		<div class="footer-actions">
-			<button
-				luButton
-				type="button"
-				*ngIf="hasSubmit$ | async"
-				[palette]="submitPalette"
-				[disabled]="submitDisabled$ | async"
-				[class]="submitClass()"
-				(click)="submit()"
-			>
-				{{ submitLabel$ | async }}
-				<lu-numeric-badge disableTooltip palette="product" *ngIf="hasSubmitCounter$ | async" [value]="submitCounter$ | async" />
-			</button>
+			@if (hasSubmit$ | async) {
+				<button
+					luButton
+					type="button"
+					[palette]="submitPalette"
+					[disabled]="submitDisabled$ | async"
+					[class]="submitClass()"
+					(click)="submit()"
+				>
+					{{ submitLabel$ | async }}
+					@if (hasSubmitCounter$ | async) {
+						<lu-numeric-badge disableTooltip palette="product" [value]="submitCounter$ | async" />
+					}
+				</button>
+			}
 			<button luButton type="button" class="button mod-ghost" (click)="dismiss()">{{ cancelLabel$ | async }}</button>
 		</div>
 	</lu-dialog-footer>
