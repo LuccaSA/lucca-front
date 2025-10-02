@@ -42,6 +42,8 @@ export class NumberInputComponent {
 
 	intl = getIntl(LU_NUMBERFIELD_TRANSLATIONS);
 
+	pattern = input<string | RegExp>();
+
 	clearValue(): void {
 		this.ngControl.reset();
 		this.inputElementRef().nativeElement.focus();
