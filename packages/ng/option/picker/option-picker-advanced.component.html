@@ -18,7 +18,9 @@
 			(onScrollBottom)="onScrollBottom()"
 		>
 			<ng-content />
-			<div *ngIf="loading$ | async" class="loading lu-picker-loading"></div>
+			@if (loading$ | async) {
+				<div class="loading lu-picker-loading"></div>
+			}
 		</div>
 	</div>
 </ng-template>
