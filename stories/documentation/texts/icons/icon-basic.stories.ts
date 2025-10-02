@@ -1,4 +1,4 @@
-import { NgFor } from '@angular/common';
+
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { IconsList } from '@lucca-front/icons/icons-list';
@@ -8,7 +8,7 @@ import { Meta, StoryObj } from '@storybook/angular';
 @Component({
 	selector: 'icon-basic-stories',
 	standalone: true,
-	imports: [NgFor, FormsModule, IconComponent],
+	imports: [FormsModule, IconComponent],
 	templateUrl: './icon-basic.stories.html',
 })
 class IconStory {

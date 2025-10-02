@@ -1,13 +1,11 @@
-import { NgForOf } from '@angular/common';
 import { Component } from '@angular/core';
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { IconsList } from '@lucca-front/icons/icons-list';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 
 @Component({
 	standalone: true,
 	selector: 'icon-stories',
 	templateUrl: './icon.stories.html',
-	imports: [NgForOf],
 })
 class IconStory {
 	icons = IconsList;
