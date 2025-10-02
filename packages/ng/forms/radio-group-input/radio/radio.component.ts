@@ -1,4 +1,4 @@
-import { NgIf, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import { booleanAttribute, ChangeDetectionStrategy, Component, HostBinding, inject, Input, OnChanges, ViewEncapsulation } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LuClass, PortalContent } from '@lucca-front/ng/core';
@@ -11,7 +11,7 @@ let nextId = 0;
 @Component({
 	selector: 'lu-radio',
 	standalone: true,
-	imports: [ReactiveFormsModule, InlineMessageComponent, NgIf, NgTemplateOutlet, InputDirective, FramedInputComponent],
+	imports: [ReactiveFormsModule, InlineMessageComponent, NgTemplateOutlet, InputDirective, FramedInputComponent],
 	templateUrl: './radio.component.html',
 	styleUrl: './radio.component.scss',
 	encapsulation: ViewEncapsulation.None,
