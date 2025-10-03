@@ -16,16 +16,16 @@
 		@include structure;
 	}
 
-	&.mod-S {
-		@include S;
-
-		&.is-loading {
-			@include loadingS;
-		}
+	&.mod-L {
+		@include L;
 	}
 
 	&.is-loading {
 		@include loading;
+
+		&:not(.mod-L) {
+			@include loadingS;
+		}
 	}
 
 	&.is-hidden {

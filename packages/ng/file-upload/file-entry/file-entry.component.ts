@@ -39,7 +39,7 @@ export class FileEntryComponent {
 
 	entry = input.required<FileEntry>();
 
-	size = input<'S' | null>(null);
+	size = input<'L' | null>(null);
 
 	iconOverride = input('');
 
@@ -108,7 +108,7 @@ export class FileEntryComponent {
 			return null;
 		}
 
-		if (this.size() === 'S' && !this.media()) {
+		if (this.size() === 'L' && !this.media()) {
 			return this.fileTypeDisplay() + ' – ' + this.fileSizeDisplay();
 		}
 

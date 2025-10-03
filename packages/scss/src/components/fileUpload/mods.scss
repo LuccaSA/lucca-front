@@ -1,21 +1,41 @@
-@mixin S {
-	--components-fileUpload-button-display: none;
-	--components-fileUpload-padding: var(--pr-t-spacings-150) var(--pr-t-spacings-200);
-	--components-fileUpload-textAlign: left;
-	--components-fileUpload-flexDirection: row;
-	--components-fileUpload-instruction-alignItems: stretch;
-	--components-fileUpload-instruction-display: block;
-	--components-fileUpload-instruction-maxWidth: none;
-	--components-fileUpload-instruction-action-fontWeight: 600;
-	--fileUpload-instruction-action-marginBottom: 0;
-	--components-fileUpload-instruction-action-color: var(--palettes-product-700);
-	--components-fileUpload-alignItems: flex-start;
-	--components-fileUpload-minHeight: none;
-	--components-fileUpload-instruction-filename-position: static;
-	--components-fileUpload-instruction-filename-marginTop: 0;
-	--components-fileUpload-justifyContent: flex-start;
-	--components-fileUpload-status-img-inset: 0;
-	--components-fileUpload-status-img-size: var(--pr-t-spacings-600);
+// @mixin S {
+// 	--components-fileUpload-button-display: none;
+// 	--components-fileUpload-padding: var(--pr-t-spacings-150) var(--pr-t-spacings-200);
+// 	--components-fileUpload-textAlign: left;
+// 	--components-fileUpload-flexDirection: row;
+// 	--components-fileUpload-instruction-alignItems: stretch;
+// 	--components-fileUpload-instruction-display: block;
+// 	--components-fileUpload-instruction-maxWidth: none;
+// 	--components-fileUpload-instruction-action-fontWeight: 600;
+// 	--fileUpload-instruction-action-marginBottom: 0;
+// 	--components-fileUpload-instruction-action-color: var(--palettes-product-700);
+// 	--components-fileUpload-alignItems: flex-start;
+// 	--components-fileUpload-minHeight: none;
+// 	--components-fileUpload-instruction-filename-position: static;
+// 	--components-fileUpload-instruction-filename-marginTop: 0;
+// 	--components-fileUpload-justifyContent: flex-start;
+// 	--components-fileUpload-status-img-inset: 0;
+// 	--components-fileUpload-status-img-size: var(--pr-t-spacings-600);
+// }
+
+@mixin L {
+	--components-fileUpload-button-display: block;
+	--components-fileUpload-padding: var(--pr-t-spacings-300);
+	--components-fileUpload-textAlign: center;
+	--components-fileUpload-flexDirection: column;
+	--components-fileUpload-instruction-alignItems: center;
+	--components-fileUpload-instruction-display: flex;
+	--components-fileUpload-instruction-maxWidth: 30rem;
+	--components-fileUpload-instruction-action-fontWeight: 400;
+	--fileUpload-instruction-action-marginBottom: var(--pr-t-spacings-50);
+	--components-fileUpload-instruction-action-color: inherit;
+	--components-fileUpload-alignItems: center;
+	--components-fileUpload-minHeight: 21.5rem;
+	--components-fileUpload-instruction-filename-position: relative;
+	--components-fileUpload-instruction-filename-marginTop: calc(var(--pr-t-spacings-300) * -1);
+	--components-fileUpload-justifyContent: center;
+	--components-fileUpload-status-img-inset: var(--pr-t-spacings-75);
+	--components-fileUpload-status-img-size: calc(100% - var(--pr-t-spacings-75) * 2);
 }
 
 @mixin dropzone {

@@ -113,7 +113,7 @@ export default {
 	title: 'Documentation/File/FileUpload/Angular/Basic',
 	argTypes: {
 		size: {
-			options: ['S', null],
+			options: ['L', null],
 			control: {
 				type: 'radio',
 			},
@@ -177,8 +177,8 @@ export const Multi = {
 		const previewCache = new Map<File, string>();
 		const mediaParam = media ? ` media` : ``;
 		const displayFileNameParam = displayFileName && media ? ` displayFileName` : ``;
-		const sizeSFileUploadParam = size ? ` size="S"` : ``;
-		const sizeSFileEntryParam = media ? ` size="S"` : sizeSFileUploadParam;
+		const sizeSFileUploadParam = size ? ` size="L"` : ``;
+		const sizeSFileEntryParam = media ? ` size="L"` : sizeSFileUploadParam;
 
 		return {
 			props: {

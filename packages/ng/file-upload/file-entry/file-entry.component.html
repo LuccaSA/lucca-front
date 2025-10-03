@@ -58,7 +58,7 @@
 	</dd>
 	@if (downloadURL() || deletable) {
 		<dd class="fileEntry-toolbar">
-			<div class="fileToolbar" [class.mod-disablePositioning]="!media()" [class.mod-S]="size() === 'S'">
+			<div class="fileToolbar" [class.mod-disablePositioning]="!media()" [class.mod-L]="size() === 'L'">
 				<ul class="fileToolbar-list">
 					@if (downloadURL()) {
 						<li class="fileToolbar-list-item">
