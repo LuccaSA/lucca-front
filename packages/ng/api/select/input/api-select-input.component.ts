@@ -10,7 +10,7 @@ import { LuApiPagedSearcherComponent } from '../searcher';
 @Component({
 	selector: 'lu-api-select',
 	templateUrl: './api-select-input.component.html',
-	styleUrls: ['./api-select-input.component.scss'],
+	styleUrl: './api-select-input.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	standalone: true,
 	imports: [CommonModule, LuInputClearerComponent, LuOptionPickerAdvancedComponent, LuApiPagedSearcherComponent, LuOptionItemComponent, LuForOptionsDirective, LuInputDisplayerDirective],

@@ -6,7 +6,7 @@ import { IconComponent } from '@lucca-front/ng/icon';
 	selector: 'lu-box',
 	standalone: true,
 	templateUrl: './box.component.html',
-	styleUrls: ['./box.component.scss'],
+	styleUrl: './box.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	encapsulation: ViewEncapsulation.None,
 	imports: [IconComponent, ButtonComponent],

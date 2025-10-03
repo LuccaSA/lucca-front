@@ -18,7 +18,7 @@ export interface LuUserTileUserInput {
 	selector: 'lu-user-tile',
 	imports: [LuUserDisplayPipe, LuUserPictureComponent],
 	templateUrl: './user-tile.component.html',
-	styleUrls: ['./user-tile.component.scss'],
+	styleUrl: './user-tile.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	host: { class: 'userTile' },
 	encapsulation: ViewEncapsulation.None,

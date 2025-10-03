@@ -9,7 +9,7 @@ import { ALuDropdownItem, ILuDropdownItem } from '../item/index';
 	selector: 'lu-dropdown',
 
 	templateUrl: './dropdown-panel.component.html',
-	styleUrls: ['./dropdown-panel.component.scss'],
+	styleUrl: './dropdown-panel.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	animations: [luTransformPopover],
 	exportAs: 'LuDropdownPanel',

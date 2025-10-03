@@ -13,7 +13,7 @@ import { LuSimpleSelectPanelRefFactory } from './panel-ref.factory';
 @Component({
 	selector: 'lu-simple-select',
 	templateUrl: './select-input.component.html',
-	styleUrls: ['./select-input.component.scss'],
+	styleUrl: './select-input.component.scss',
 	host: { class: 'simpleSelect' },
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	standalone: true,

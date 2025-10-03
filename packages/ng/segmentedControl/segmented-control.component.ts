@@ -10,7 +10,7 @@ let nextId = 0;
 	selector: 'lu-segmented-control',
 	standalone: true,
 	template: '<ng-content />',
-	styleUrls: ['./segmented-control.component.scss'],
+	styleUrl: './segmented-control.component.scss',
 	encapsulation: ViewEncapsulation.None,
 	imports: [ReactiveFormsModule, CommonModule],
 	hostDirectives: [NoopValueAccessorDirective],

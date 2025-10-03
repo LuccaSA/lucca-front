@@ -32,7 +32,7 @@ import { LuMultiSelectDisplayerInputDirective } from './displayer-input.directiv
 			}
 		</div>
 	`,
-	styleUrls: ['./default-displayer.component.scss'],
+	styleUrl: './default-displayer.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LuMultiSelectDefaultDisplayerComponent<T> implements OnInit {

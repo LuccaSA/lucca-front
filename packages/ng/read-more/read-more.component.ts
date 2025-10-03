@@ -6,7 +6,7 @@ import { LU_READMORE_TRANSLATIONS } from './read-more.translate';
 	selector: 'lu-read-more',
 	standalone: true,
 	templateUrl: './read-more.component.html',
-	styleUrls: ['./read-more.component.scss'],
+	styleUrl: './read-more.component.scss',
 	encapsulation: ViewEncapsulation.None,
 
 	host: {

@@ -46,7 +46,7 @@ import { applicationConfig, Meta, StoryFn } from '@storybook/angular';
 			</div>
 		</div>
 	`,
-	styleUrls: ['./animations.scss'],
+	styleUrl: './animations.scss',
 	animations: [luScaleAnimationFactory()],
 })
 class ScaleAnimationStory {
@@ -120,7 +120,7 @@ class AppModule {}
 			</div>
 		</div>
 	\`,
-	styleUrls: ['./animations.scss'],
+	styleUrl: './animations.scss',
 	animations: [luScaleAnimationFactory()],
 })
 class ScaleAnimationStory {

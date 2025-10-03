@@ -4,7 +4,7 @@ import { booleanAttribute, Component, input, ViewEncapsulation } from '@angular/
 @Component({
 	selector: 'lu-footer',
 	standalone: true,
-	styleUrls: ['./footer.component.scss'],
+	styleUrl: './footer.component.scss',
 	templateUrl: './footer.component.html',
 	encapsulation: ViewEncapsulation.None,
 	imports: [NgTemplateOutlet],

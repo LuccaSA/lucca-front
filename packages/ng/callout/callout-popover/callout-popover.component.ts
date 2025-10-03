@@ -33,7 +33,7 @@ import { getCalloutPalette } from '../callout.utils';
 		]),
 	],
 	templateUrl: './callout-popover.component.html',
-	styleUrls: ['./callout-popover.component.scss'],
+	styleUrl: './callout-popover.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	encapsulation: ViewEncapsulation.None,
 })

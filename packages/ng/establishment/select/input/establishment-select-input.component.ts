@@ -23,7 +23,7 @@ import { LU_ESTABLISHMENT_SELECT_INPUT_TRANSLATIONS } from './establishment-sele
 @Component({
 	selector: 'lu-establishment-select',
 	templateUrl: './establishment-select-input.component.html',
-	styleUrls: ['./establishment-select-input.component.scss'],
+	styleUrl: './establishment-select-input.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	standalone: true,
 	imports: [

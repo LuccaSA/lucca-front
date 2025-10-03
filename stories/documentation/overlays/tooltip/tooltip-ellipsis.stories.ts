@@ -46,7 +46,7 @@ import { applicationConfig, Meta, StoryFn } from '@storybook/angular';
 			}
 
 			.fontWeight {
-				font-weight: bold;
+				font-weight: var(--pr-t-font-fontWeight-bold);
 			}
 
 			.fontSize2 {

@@ -10,7 +10,7 @@ import { ALuOptionOperator, ILuOptionOperator } from '../option-operator.model';
 @Component({
 	selector: 'lu-option-searcher',
 	templateUrl: 'option-searcher.component.html',
-	styleUrls: ['option-searcher.component.scss'],
+	styleUrl: 'option-searcher.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	standalone: true,
 	imports: [ReactiveFormsModule, CommonModule, LuOptionPlaceholderComponent],

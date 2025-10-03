@@ -12,7 +12,7 @@ import { LU_DATE_SELECT_INPUT_TRANSLATIONS } from './date-select-input.translate
 @Component({
 	selector: 'lu-date-select',
 	templateUrl: './date-select-input.component.html',
-	styleUrls: ['./date-select-input.component.scss'],
+	styleUrl: './date-select-input.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	standalone: true,
 	imports: [LuDateAdapterPipe, LuDatePickerComponent, LuInputDirective, OverlayModule, LuInputClearerComponent, LuInputDisplayerDirective],

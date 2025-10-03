@@ -7,7 +7,7 @@ import { LuccaIcon } from '@lucca-front/icons';
 	standalone: true,
 	imports: [NgClass],
 	templateUrl: './icon.component.html',
-	styleUrls: ['./icon.component.scss'],
+	styleUrl: './icon.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	encapsulation: ViewEncapsulation.None,
 })
