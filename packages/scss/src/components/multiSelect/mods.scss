@@ -73,20 +73,12 @@
 	inline-size: 21rem;
 	max-inline-size: calc(100vw - 2.5rem);
 
-	&:has(.multipleSelect-displayer-search:focus-visible) {
-		outline: none;
-	}
-
 	.multipleSelect-displayer {
 		box-shadow: 0 0 0 1px var(--components-multiSelect-border-color);
 		border-radius: var(--pr-t-border-radius-input);
 		padding: var(--components-multiSelect-padding);
 		z-index: 1;
 		position: relative;
-
-		&:has(.multipleSelect-displayer-search:focus-visible) {
-			@include a11y.focusVisible($offset: 3px);
-		}
 	}
 
 	.lu-picker-content {

@@ -1,20 +1,26 @@
 @use 'exports' as *;
 
 .breadcrumbs {
-	@include vars;
-	@include component;
+	@layer components {
+		@include vars;
+		@include component;
+	}
 
-	// .mod-compact is deprecated
-	&.mod-compact {
-		@include compact;
+	@layer mods {
+		// .mod-compact is deprecated
+		&.mod-compact {
+			@include compact;
+		}
 	}
 }
 
 .breadcrumbs-list-item-action {
-	// .active is deprecated
-	&.is-active,
-	&.active,
-	&[aria-current='page'] {
-		@include active;
+	@layer mods {
+		// .active is deprecated
+		&.is-active,
+		&.active,
+		&[aria-current='page'] {
+			@include active;
+		}
 	}
 }

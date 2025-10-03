@@ -10,7 +10,6 @@ import { TextStyleToolbarComponent } from '../text-style';
 @Component({
 	selector: 'lu-rich-text-input-toolbar',
 	templateUrl: 'toolbar.component.html',
-	styleUrl: 'toolbar.component.scss',
 	host: {
 		class: 'richTextField-toolbar-formatting',
 	},

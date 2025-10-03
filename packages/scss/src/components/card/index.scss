@@ -1,32 +1,38 @@
 @use 'exports' as *;
 
 .card {
-	@include vars;
-	@include component;
-
-	// .mod-grey is deprecated
-	&.mod-neutral,
-	&.mod-grey {
-		@include neutral;
+	@layer components {
+		@include vars;
+		@include component;
 	}
 
-	&.mod-clickable {
-		@include clickable;
+	@layer mods {
+		// .mod-grey is deprecated
+		&.mod-neutral,
+		&.mod-grey {
+			@include neutral;
+		}
+
+		&.mod-clickable {
+			@include clickable;
+		}
+
+		&.mod-elevated {
+			@include elevated;
+		}
+
+		&.mod-action {
+			@include action;
+		}
+
+		&.mod-nested {
+			@include nested;
+		}
 	}
 
-	&.mod-elevated {
-		@include elevated;
-	}
-
-	&.mod-action {
-		@include action;
-	}
-
-	&.mod-nested {
-		@include nested;
-	}
-
-	&:is(.is-disabled, .disabled) {
-		@include disabled;
+	@layer mods {
+		&:is(.is-disabled, .disabled) {
+			@include disabled;
+		}
 	}
 }

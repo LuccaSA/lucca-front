@@ -3,17 +3,23 @@
 // .lu-dropdown-content is deprecated
 .dropdown,
 .lu-dropdown-content.lu-popover-content {
-	@include vars;
-	@include component;
+	@layer components {
+		@include vars;
+		@include component;
+	}
 }
 
 .dropdown-list-option-action,
 .lu-dropdown-options-item-action {
-	&.is-disabled {
-		@include disabled;
+	@layer mods {
+		&.is-disabled {
+			@include disabled;
+		}
 	}
 
-	&.mod-critical, &.mod-delete {
-		@include critical;
+	@layer mods {
+		&.mod-critical, &.mod-delete {
+			@include critical;
+		}
 	}
 }
