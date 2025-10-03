@@ -6,13 +6,27 @@
 		@include component;
 	}
 
-	@layer mods {
-		&.mod-S {
+	&.mod-S {
+		@layer mods {
 			@include S;
 		}
+	}
 
-		&.mod-filterPill {
+	&.mod-filterPill {
+		@layer mods {
 			@include filterPill;
+		}
+
+		@layer states {
+			&:has(.multipleSelect-displayer-search:focus-visible) {
+				@include filterPillFocused;
+			}
+
+			.multipleSelect-displayer {
+				&:has(.multipleSelect-displayer-search:focus-visible) {
+					@include filterPillDisplayerFocused;
+				}
+			}
 		}
 	}
 

@@ -53,7 +53,7 @@
 			cursor: pointer;
 		}
 
-		@layer states {
+		@layer mods {
 			&.is-selected, :host-context([aria-selected="true"]) & {
 				background-color: var(--palettes-50, var(--palettes-product-50));
 
@@ -131,9 +131,10 @@
 		}
 	}
 
-	:host-context(.mod-multiple), .formerEmployeeDisplayer {
+	:host-context(.mod-multiple),
+	.formerEmployeeDisplayer {
 		.optionItem-value {
-			@layer components {
+			@layer mods {
 				position: relative;
 				padding-inline-start: var(--components-options-item-multiple-padding);
 
