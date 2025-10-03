@@ -5,7 +5,7 @@
 .dataTableWrapper {
 	@include vars;
 
-	&:has(.dataTable.mod-stickyHeader) {
+	&:has(.dataTable.mod-stickyHeader, .dataTable-head.mod-sticky) {
 		@include stickyHeader;
 	}
 
@@ -39,5 +39,9 @@
 		&:has(.dataTable.mod-cellBorder) {
 			@include stickyColumnBorder;
 		}
+	}
+
+	&:has(.dataTable-body-row.is-firstBodyRowVisible:first-child) {
+		@include firstBodyRowVisible;
 	}
 }

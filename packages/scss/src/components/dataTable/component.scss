@@ -22,6 +22,7 @@
 			overflow: var(--components-dataTable-overflow);
 			background-color: var(--components-dataTable-cell-background);
 			contain: paint; // Fix overflow on webkit when table has scroll
+			display: block;
 
 			&:focus-visible {
 				@include a11y.focusVisible;
@@ -67,6 +68,7 @@
 			text-align: var(--components-dataTable-cell-textAlign);
 			transition-property: background-color;
 			transition-duration: var(--commons-animations-durations-fast);
+			font-weight: var(--pr-t-font-fontWeight-regular);
 
 			&:first-child {
 				inline-size: var(--components-dataTable-cellFirst-width);

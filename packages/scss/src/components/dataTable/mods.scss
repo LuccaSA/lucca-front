@@ -47,7 +47,16 @@
 }
 
 @mixin selectable {
-	--components-dataTable-cellFirst-width: 2.5rem;
+	--components-dataTable-cellFirst-width: 2.625rem;
+
+	.dataTable-head-row-cell,
+	.dataTable-body-row-cell,
+	.dataTable-foot-row-cell {
+		&:first-child {
+			inline-size: var(--components-dataTable-cellFirst-width);
+			max-inline-size: var(--components-dataTable-cellFirst-width);
+		}
+	}
 }
 
 @mixin draggable {
