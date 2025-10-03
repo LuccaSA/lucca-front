@@ -1,14 +1,13 @@
 .cdk-visually-hidden {
-	@layer utils {
-		border: 0 !important;
-		clip: rect(1px, 1px, 1px, 1px) !important;
-		block-size: 1px !important;
-		inline-size: 1px !important;
-		margin: -1px !important;
-		overflow: hidden !important;
-		padding: 0 !important;
-		position: absolute !important;
-		white-space: nowrap !important;
-		contain: paint !important;
-	}
+	border: 0 !important;
+	clip: rect(1px, 1px, 1px, 1px) !important;
+	block-size: 1px !important;
+	inline-size: 1px !important;
+	margin: -1px !important;
+	overflow: hidden !important;
+	padding: 0 !important;
+	position: absolute !important;
+	white-space: nowrap !important;
+	contain: paint !important;
 }
+

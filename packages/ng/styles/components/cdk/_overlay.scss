@@ -2,70 +2,68 @@
 @use '@lucca-front/scss/src/commons/utils/keyframe';
 @use '@lucca-front/scss/src/commons/utils/color';
 
-@layer components {
-	@include namespace.appendRootVars {
-		--components-cdk-backdrop-opacity: 0.4;
+@include namespace.appendRootVars {
+	--components-cdk-backdrop-opacity: 0.4;
+}
+
+.cdk-overlay-container {
+	position: fixed;
+	z-index: 1000;
+	block-size: 100%;
+	inset-inline-start: 0;
+	pointer-events: none;
+	inset-block-start: 0;
+	inline-size: 100%;
+}
+
+.cdk-overlay-connected-position-bounding-box {
+	position: absolute;
+	z-index: 1000;
+	display: flex;
+	flex-direction: column;
+	min-inline-size: 1px;
+	min-block-size: 1px;
+}
+
+.cdk-overlay-pane {
+	box-sizing: border-box;
+	position: absolute;
+	pointer-events: auto;
+	z-index: 1000;
+
+	> * {
+		flex-grow: 1;
 	}
 
-	.cdk-overlay-container {
-		position: fixed;
-		z-index: 1000;
-		block-size: 100%;
-		inset-inline-start: 0;
-		pointer-events: none;
-		inset-block-start: 0;
-		inline-size: 100%;
+	&.mod-optionPicker {
+		min-inline-size: 13rem;
+		max-inline-size: 30rem;
+	}
+}
+
+.cdk-overlay-backdrop {
+	opacity: 0;
+	pointer-events: auto;
+	position: absolute;
+	inset: 0;
+	transition: opacity var(--commons-animations-durations-fast) ease-in-out;
+	z-index: 1000;
+
+	&.cdk-overlay-backdrop-showing {
+		opacity: 0.4;
 	}
 
-	.cdk-overlay-connected-position-bounding-box {
-		position: absolute;
-		z-index: 1000;
-		display: flex;
-		flex-direction: column;
-		min-inline-size: 1px;
-		min-block-size: 1px;
+	&.cdk-overlay-dark-backdrop {
+		background-color: color.transparentize(var(--palettes-neutral-900), 0.6);
 	}
 
-	.cdk-overlay-pane {
-		box-sizing: border-box;
-		position: absolute;
-		pointer-events: auto;
-		z-index: 1000;
-
-		> * {
-			flex-grow: 1;
-		}
-
-		&.mod-optionPicker {
-			min-inline-size: 13rem;
-			max-inline-size: 30rem;
-		}
+	&.cdk-overlay-transparent-backdrop {
+		background: 0 0;
 	}
+}
 
-	.cdk-overlay-backdrop {
-		opacity: 0;
-		pointer-events: auto;
-		position: absolute;
-		inset: 0;
-		transition: opacity var(--commons-animations-durations-fast) ease-in-out;
-		z-index: 1000;
+.cdk-overlay-backdrop.cdk-overlay-backdrop-showing.lu-popup-backdrop {
+	opacity: var(--pr-t-elevation-surface-backdrop);
 
-		&.cdk-overlay-backdrop-showing {
-			opacity: 0.4;
-		}
-
-		&.cdk-overlay-dark-backdrop {
-			background-color: color.transparentize(var(--palettes-neutral-900), 0.6);
-		}
-
-		&.cdk-overlay-transparent-backdrop {
-			background: 0 0;
-		}
-	}
-
-	.cdk-overlay-backdrop.cdk-overlay-backdrop-showing.lu-popup-backdrop {
-		opacity: var(--pr-t-elevation-surface-backdrop);
-
-		@include keyframe.fadeIn;
-	}
+	@include keyframe.fadeIn;
 }
