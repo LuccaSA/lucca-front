@@ -68,6 +68,7 @@
 			text-align: var(--components-dataTable-cell-textAlign);
 			transition-property: background-color;
 			transition-duration: var(--commons-animations-durations-fast);
+			font-weight: var(--pr-t-font-fontWeight-regular);
 
 			&:first-child {
 				inline-size: var(--components-dataTable-cellFirst-width);
