@@ -3,7 +3,7 @@ import { FieldType, FieldTypeConfig } from '@ngx-formly/core';
 
 @Component({
 	selector: 'lu-formly-field-input',
-	styleUrls: ['formly-field.common.scss'],
+	styleUrl: 'formly-field.common.scss',
 	templateUrl: './input.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	// eslint-disable-next-line @angular-eslint/prefer-standalone

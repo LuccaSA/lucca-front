@@ -6,7 +6,7 @@ import { HorizontalNavigationLinkDirective } from './horizontal-navigation-link.
 	selector: 'lu-horizontal-navigation',
 	standalone: true,
 	templateUrl: './horizontal-navigation.component.html',
-	styleUrls: ['./horizontal-navigation.component.scss'],
+	styleUrl: './horizontal-navigation.component.scss',
 	encapsulation: ViewEncapsulation.None,
 	imports: [NgTemplateOutlet],
 	host: {

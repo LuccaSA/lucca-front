@@ -9,7 +9,7 @@ import { LU_LISTING_INSTANCE } from './listing.token';
 	selector: 'lu-listing',
 	standalone: true,
 	templateUrl: './listing.component.html',
-	styleUrls: ['./listing.component.scss'],
+	styleUrl: './listing.component.scss',
 	imports: [NgTemplateOutlet],
 	encapsulation: ViewEncapsulation.None,
 	providers: [

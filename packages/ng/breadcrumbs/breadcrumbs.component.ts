@@ -9,7 +9,7 @@ let nextId = 0;
 @Component({
 	selector: 'lu-breadcrumbs',
 	standalone: true,
-	styleUrls: ['./breadcrumbs.component.scss'],
+	styleUrl: './breadcrumbs.component.scss',
 	templateUrl: './breadcrumbs.component.html',
 	encapsulation: ViewEncapsulation.None,
 	imports: [NgTemplateOutlet],

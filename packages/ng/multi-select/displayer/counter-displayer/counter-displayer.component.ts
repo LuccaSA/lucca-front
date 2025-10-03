@@ -30,7 +30,7 @@ import { LuMultiSelectDisplayerInputDirective } from '../displayer-input.directi
 			}
 		</div>
 	`,
-	styleUrls: ['./counter-displayer.component.scss'],
+	styleUrl: './counter-displayer.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LuMultiSelectCounterDisplayerComponent<T> implements OnInit {

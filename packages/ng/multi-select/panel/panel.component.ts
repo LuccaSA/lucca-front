@@ -29,7 +29,7 @@ import { LuOptionsGroupContextPipe } from './option-group-context.pipe';
 @Component({
 	selector: 'lu-select-panel',
 	templateUrl: './panel.component.html',
-	styleUrls: ['./panel.component.scss'],
+	styleUrl: './panel.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	standalone: true,
 	imports: [

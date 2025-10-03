@@ -5,7 +5,7 @@ import { LuClass, PortalContent, PortalDirective } from '@lucca-front/ng/core';
 	selector: 'lu-highlight-data',
 	standalone: true,
 	templateUrl: './highlight-data.component.html',
-	styleUrls: ['./highlight-data.component.scss'],
+	styleUrl: './highlight-data.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	encapsulation: ViewEncapsulation.None,
 	providers: [LuClass],
