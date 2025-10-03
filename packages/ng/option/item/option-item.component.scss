@@ -3,7 +3,7 @@
 @include definitions.optionItemStyle;
 
 .is-disabled {
-	@layer states {
+	@layer mods {
 		color: var(--palettes-neutral-500); // disabled token candidate
 		user-select: none;
 		cursor: default;

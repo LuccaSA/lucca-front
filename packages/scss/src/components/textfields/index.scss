@@ -6,7 +6,7 @@
 		@include component;
 	}
 
-	@layer states {
+	@layer mods {
 		.textfield-input {
 			&:is([disabled], .is-disabled, .disabled, [readonly], .is-readonly, .readonly) {
 				@include inputDisabled;
@@ -227,7 +227,7 @@
 		}
 	}
 
-	@layer states {
+	@layer mods {
 		&.mod-material {
 			.textfield-input {
 				&:is(:focus, .is-focused, .focused) {
@@ -266,7 +266,7 @@
 	}
 }
 
-@layer states {
+@layer mods {
 	.textfield-input {
 		&:is(:hover) {
 			@include inputHover;
@@ -311,7 +311,7 @@
 	}
 }
 
-@layer states {
+@layer mods {
 	.textfield.mod-framed,
 	.form.mod-framed .textfield {
 		&:is(.is-error, .error) {

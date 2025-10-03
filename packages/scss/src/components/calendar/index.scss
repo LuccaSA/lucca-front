@@ -40,7 +40,7 @@
 }
 
 .calendar-table-body-row-cell {
-	@layer states {
+	@layer mods {
 		&.is-daysOff {
 			@include daysOff;
 		}

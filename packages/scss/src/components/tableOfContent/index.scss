@@ -8,7 +8,7 @@
 }
 
 .tableOfContent-list-item-action {
-	@layer states {
+	@layer mods {
 		&:not(.disabled, .is-disabled, [disabled]) {
 			&:is(:hover) {
 				@include hover;

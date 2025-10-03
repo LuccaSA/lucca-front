@@ -20,7 +20,7 @@
 		}
 	}
 
-	@layer states {
+	@layer mods {
 		&.is-error {
 			// To replace by :has as soon as it is implemented in Firefox to cover usage as legend for checkboxes and radio states.
 			@include error;

@@ -14,7 +14,7 @@
 }
 
 .radioField-input {
-	@layer states {
+	@layer mods {
 		&:focus-visible {
 			@include focusVisible;
 		}

@@ -11,7 +11,7 @@
 
 .dropdown-list-option-action,
 .lu-dropdown-options-item-action {
-	@layer states {
+	@layer mods {
 		&.is-disabled {
 			@include disabled;
 		}

@@ -14,7 +14,7 @@
 }
 
 .pagination-navigation-item {
-	@layer states {
+	@layer mods {
 		&:is(.is-ellipsis, .ellipsis) {
 			@include ellipsis;
 		}

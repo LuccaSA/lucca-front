@@ -20,7 +20,7 @@
 		}
 	}
 
-	@layer states {
+	@layer mods {
 		&:has(.fieldset-title-content[aria-expanded='true']) {
 			@include expanded;
 		}

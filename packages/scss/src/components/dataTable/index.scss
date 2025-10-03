@@ -102,7 +102,7 @@
 }
 
 .dataTable-body-row {
-	@layer states {
+	@layer mods {
 		&.is-collapsed {
 			@include collapsed;
 		}
@@ -118,7 +118,7 @@
 }
 
 .dataTable-body-row-cell-expand-button {
-	@layer states {
+	@layer mods {
 		&[aria-expanded='true'] {
 			@include expanded;
 		}

@@ -6,7 +6,7 @@
 		@include component;
 	}
 
-	@layer states {
+	@layer mods {
 		&:not(.is-open, .open, [open]) {
 			@include close;
 		}

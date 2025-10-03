@@ -6,7 +6,7 @@
 		@include component;
 	}
 
-	@layer states {
+	@layer mods {
 		&.is-above {
 			@include above;
 		}

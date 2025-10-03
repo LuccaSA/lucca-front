@@ -25,7 +25,7 @@
 		}
 	}
 
-	@layer states {
+	@layer mods {
 		&.is-highlighted {
 			--components-button-color: var(--palettes-700, var(--palettes-neutral-700));
 			--components-button-backgroundColor: var(--palettes-100, var(--palettes-neutral-100));

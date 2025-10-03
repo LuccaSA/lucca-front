@@ -122,7 +122,7 @@
 				text-overflow: ellipsis;
 			}
 
-			@layer states {
+			@layer mods {
 				&:hover,
 				:host-context(.is-highlighted) & {
 					background-color: inherit;
@@ -172,7 +172,7 @@
 				}
 			}
 
-			@layer states {
+			@layer mods {
 				&.is-selected, :host-context([aria-selected="true"]) & {
 					&::before {
 						background-color: var(--components-options-checkbox-color);

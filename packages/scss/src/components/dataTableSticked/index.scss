@@ -21,7 +21,7 @@
 		}
 	}
 
-	@layer states {
+	@layer mods {
 		&:has(.dataTable.is-firstColumnVisible) {
 			@include firstColumnVisible;
 		}

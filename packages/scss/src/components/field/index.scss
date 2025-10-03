@@ -10,7 +10,7 @@
 		}
 	}
 
-	@layer states {
+	@layer mods {
 		.is-error {
 			@include fieldFramedState('error');
 			@include fieldFramedError('textfield');
@@ -47,7 +47,7 @@
 		}
 	}
 
-	@layer states {
+	@layer mods {
 		&:is(.is-required, .required) {
 			@include required;
 		}
@@ -85,7 +85,7 @@
 		}
 	}
 
-	@layer states {
+	@layer mods {
 		&.mod-framed {
 			&.is-error {
 				@include fieldFramedState('error');
@@ -108,7 +108,7 @@
 	.textfield-input,
 	.radiosfield-input,
 	.checkboxesfield-input {
-		@layer states {
+		@layer mods {
 			&:is([disabled], [readonly]) {
 				@include inputDisabled;
 			}
@@ -137,7 +137,7 @@
 .textfield-input,
 .radiosfield-input,
 .checkboxesfield-input {
-	@layer states {
+	@layer mods {
 		&:is([required]),
 		&:is([aria-required='true']) {
 			@include required;

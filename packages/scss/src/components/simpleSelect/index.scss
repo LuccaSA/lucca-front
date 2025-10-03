@@ -6,7 +6,7 @@
 		@include component;
 	}
 
-	@layer states {
+	@layer mods {
 		&:has(.simpleSelect-field-input:focus-visible) {
 			@include focused;
 
@@ -47,7 +47,7 @@
 		}
 	}
 
-	@layer states {
+	@layer mods {
 		&.is-searchFilled {
 			@include searchFilled;
 		}

@@ -20,7 +20,7 @@
 		}
 	}
 
-	@layer states {
+	@layer mods {
 		&:is(.is-required, .required) {
 			@include required;
 		}

@@ -67,7 +67,7 @@
 		}
 	}
 
-	@layer states {
+	@layer mods {
 		&:not(:has(.indexTable-head[inert='inert'])) {
 			@include focusedRow;
 			@include hoveredRow;

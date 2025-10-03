@@ -30,7 +30,7 @@
 		}
 	}
 
-	@layer states {
+	@layer mods {
 		&.mod-disabled {
 			@include disabled;
 		}

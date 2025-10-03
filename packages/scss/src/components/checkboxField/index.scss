@@ -17,7 +17,7 @@
 			@include checklist;
 		}
 
-		@layer states {
+		@layer mods {
 			.checkboxField-input {
 				&:hover {
 					@include checklistHover;
@@ -62,7 +62,7 @@
 }
 
 .checkboxField-input {
-	@layer states {
+	@layer mods {
 		&[aria-checked='mixed'] {
 			@include checked;
 			@include mixed;

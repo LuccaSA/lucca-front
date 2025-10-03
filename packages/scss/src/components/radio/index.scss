@@ -18,7 +18,7 @@
 }
 
 .radio-input {
-	@layer states {
+	@layer mods {
 		&[disabled],
 		&[read-only] {
 			@include disabled;

@@ -22,7 +22,7 @@
 }
 
 .verticalNavigation-list-item-link {
-	@layer states {
+	@layer mods {
 		&[aria-expanded='true'] {
 			@include expanded;
 		}
@@ -39,7 +39,7 @@
 }
 
 span.verticalNavigation-list-item-link {
-	@layer states {
+	@layer mods {
 		@include disabled;
 	}
 }

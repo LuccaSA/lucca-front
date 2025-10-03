@@ -14,7 +14,7 @@
 }
 
 .switchField-input {
-	@layer states {
+	@layer mods {
 		&:checked {
 			@include checked;
 		}

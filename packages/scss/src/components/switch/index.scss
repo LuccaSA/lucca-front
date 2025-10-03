@@ -17,7 +17,7 @@
 	}
 }
 
-@layer states {
+@layer mods {
 	.switch-input {
 		&:is(:checked) {
 			@include checked;

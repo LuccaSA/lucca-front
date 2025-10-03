@@ -20,7 +20,7 @@
 		}
 	}
 
-	@layer states {
+	@layer mods {
 		&.is-invalid,
 		&:has(.textField-input-value[aria-invalid='true']) {
 			@include invalid;

@@ -2,7 +2,7 @@
 @use '@lucca-front/scss/src/components/skeleton';
 
 .skeleton.is-loading {
-	@layer states {
+	@layer mods {
 		.button {
 			background-color: transparent;
 

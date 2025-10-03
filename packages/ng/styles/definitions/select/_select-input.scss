@@ -36,7 +36,7 @@
 			}
 		}
 
-		@layer states {
+		@layer mods {
 			&[disabled],
 			&.is-disabled {
 				cursor: not-allowed; // disabled token candidate
@@ -285,7 +285,7 @@
 
 	// Filled
 	:host-context(.textfield-input.is-filled) {
-		@layer states {
+		@layer mods {
 			.lu-select-placeholder {
 				display: none;
 			}
@@ -299,7 +299,7 @@
 
 	// Focused
 	:host-context(.textfield .textfield-input.is-focused) {
-		@layer states {
+		@layer mods {
 			&::after {
 				transform: rotate(-180deg);
 			}
@@ -308,7 +308,7 @@
 
 	// Clearable
 	:host-context(.textfield-input.is-clearable) {
-		@layer states {
+		@layer mods {
 			.lu-select-value {
 				padding-inline-end: 3.5rem;
 			}
@@ -317,7 +317,7 @@
 
 	// Error
 	:host-context(.textfield-input.is-error, .textfield-input.is-invalid, .textfield-input.ng-invalid.ng-touched) {
-		@layer states {
+		@layer mods {
 			.lu-select-placeholder {
 				color: var(--palettes-error-400);
 			}
@@ -326,7 +326,7 @@
 
 	// Disabled
 	:host-context(.textfield-input.is-disabled, .textfield-input[disabled]) {
-		@layer states {
+		@layer mods {
 			&::after {
 				color: var(--commons-disabled-color);
 			}

@@ -12,7 +12,7 @@
 		}
 	}
 
-	@layer states {
+	@layer mods {
 		&.is-success {
 			@include success;
 		}

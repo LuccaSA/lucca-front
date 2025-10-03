@@ -7,7 +7,7 @@
 		@include component;
 	}
 
-	@layer states {
+	@layer mods {
 		&:hover {
 			@include hover;
 		}

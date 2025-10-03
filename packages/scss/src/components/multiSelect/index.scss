@@ -17,7 +17,7 @@
 			@include filterPill;
 		}
 
-		@layer states {
+		@layer mods {
 			&:has(.multipleSelect-displayer-search:focus-visible) {
 				@include filterPillFocused;
 			}
@@ -30,7 +30,7 @@
 		}
 	}
 
-	@layer states {
+	@layer mods {
 		&.is-selected {
 			@include selected;
 		}

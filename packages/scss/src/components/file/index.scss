@@ -16,7 +16,7 @@
 		}
 	}
 
-	@layer states {
+	@layer mods {
 		&:is(.is-droppable, .droppable) {
 			@include legacyDroppable;
 		}
@@ -28,7 +28,7 @@
 }
 
 .file-input {
-	@layer states {
+	@layer mods {
 		&:is(:disabled) {
 			@include disabled;
 		}

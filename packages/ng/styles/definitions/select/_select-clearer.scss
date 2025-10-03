@@ -5,7 +5,7 @@
 		}
 	}
 
-	@layer states {
+	@layer mods {
 		:host-context(.textfield-input.is-filled) {
 			display: block;
 		}

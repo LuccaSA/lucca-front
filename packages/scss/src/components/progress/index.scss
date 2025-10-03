@@ -12,7 +12,7 @@
 		}
 	}
 
-	@layer states {
+	@layer mods {
 		&:is(.is-success, .success, .palette-success) {
 			@include success;
 		}

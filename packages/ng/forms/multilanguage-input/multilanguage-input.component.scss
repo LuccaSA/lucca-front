@@ -6,7 +6,7 @@
 		overflow: auto;
 	}
 
-	@layer states {
+	@layer mods {
 		&:focus-visible {
 			@include a11y.focusVisible;
 

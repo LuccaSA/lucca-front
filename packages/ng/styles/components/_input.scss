@@ -1,7 +1,7 @@
 @use '@lucca-front/scss/src/components/field/exports' as field;
 @use '@lucca-front/scss/src/components/form/exports' as form;
 
-@layer states {
+@layer mods {
 	.textfield {
 		.textfield-input.ng-invalid.ng-touched {
 			@include field.inputState('error');

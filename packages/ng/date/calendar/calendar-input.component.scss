@@ -35,7 +35,7 @@
 		cursor: pointer;
 	}
 
-	@layer states {
+	@layer mods {
 		&:focus-visible {
 			@include a11y.focusVisible($borderRadius: 4px);
 		}
@@ -123,7 +123,7 @@
 		}
 	}
 
-	@layer states {
+	@layer mods {
 		&:hover {
 			.calendar-grid-item-content {
 				background: var(--palettes-neutral-50);

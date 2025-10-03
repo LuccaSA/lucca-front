@@ -21,7 +21,7 @@
 		}
 	}
 
-	@layer states {
+	@layer mods {
 		&:has([aria-invalid='true']) {
 			@include invalid;
 		}

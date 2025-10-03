@@ -40,7 +40,7 @@
 		}
 	}
 
-	@layer states {
+	@layer mods {
 		&:has(.radioField-input[aria-invalid='true']),
 		&:has(.checkboxField-input[aria-invalid='true']) {
 			@include legendInvalid;
@@ -72,7 +72,7 @@
 		}
 	}
 
-	@layer states {
+	@layer mods {
 		&:not(lu-form-field) {
 			&:has(
 					.textField-input-value[aria-invalid='true'],
@@ -152,7 +152,7 @@
 .radiosfield-label,
 .checkboxesfield-label,
 .textfield-label {
-	@layer states {
+	@layer mods {
 		&:is(.is-required, .required) {
 			@include required;
 		}
@@ -177,7 +177,7 @@
 }
 
 .form-group-label {
-	@layer states {
+	@layer mods {
 		&.is-required {
 			&:not(:empty) {
 				&::after {
@@ -191,7 +191,7 @@
 .radiosfield-label,
 .checkboxesfield-label,
 .textfield-label {
-	@layer states {
+	@layer mods {
 		&.is-required {
 			&:not(:empty) {
 				&::after {

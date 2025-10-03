@@ -16,7 +16,7 @@
 		}
 	}
 
-	@layer states {
+	@layer mods {
 		&:is(:disabled, .is-disabled) {
 		@include disabled;
 	}

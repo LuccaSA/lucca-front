@@ -46,7 +46,7 @@
 		}
 	}
 
-	@layer states {
+	@layer mods {
 		@include media.max('S') {
 			&:not(.is-open, .open) {
 				.navSide-item {
@@ -86,7 +86,7 @@
 		}
 	}
 
-	@layer states {
+	@layer mods {
 		&:not(.is-open) {
 			@include notOpen;
 		}
@@ -109,7 +109,7 @@
 
 .navSide-item-subMenu-link,
 .navSide-item-link {
-	@layer states {
+	@layer mods {
 		&:is(.is-active, .active) {
 			@include active;
 		}
@@ -121,7 +121,7 @@
 }
 
 html {
-	@layer states {
+	@layer mods {
 		&:is(.hasMenu, .withMenu) {
 			@include media.max('S') {
 				@include overlay;

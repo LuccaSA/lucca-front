@@ -25,7 +25,7 @@
 		}
 	}
 
-	@layer states {
+	@layer mods {
 		&.is-zero,
 		&:not([style]),
 		&[style*='--components-gauge-value: 0%'] {

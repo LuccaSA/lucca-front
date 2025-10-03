@@ -15,7 +15,7 @@
 }
 
 .breadcrumbs-list-item-action {
-	@layer states {
+	@layer mods {
 		// .active is deprecated
 		&.is-active,
 		&.active,

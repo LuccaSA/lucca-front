@@ -21,7 +21,7 @@
 		}
 	}
 
-	@layer states {
+	@layer mods {
 		&:is(.is-loading, .loading) {
 			@include loading;
 		}

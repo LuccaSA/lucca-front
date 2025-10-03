@@ -18,7 +18,7 @@
 }
 
 .radioButtons-item-input {
-	@layer states {
+	@layer mods {
 		&:is(:disabled, .is-disabled, .disabled) {
 			@include disabled;
 		}

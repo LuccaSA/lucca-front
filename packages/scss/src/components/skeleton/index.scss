@@ -13,7 +13,7 @@
 		}
 	}
 
-	@layer states {
+	@layer mods {
 		&.is-loading {
 			@include loading;
 

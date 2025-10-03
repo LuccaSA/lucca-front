@@ -12,7 +12,7 @@
 		}
 	}
 
-	@layer states {
+	@layer mods {
 		// .palette-primary is deprecated
 		&.palette-product:not([disabled]),
 		&.palette-primary:not([disabled]) {

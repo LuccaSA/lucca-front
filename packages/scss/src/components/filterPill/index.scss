@@ -6,7 +6,7 @@
 		@include component;
 	}
 
-	@layer states {
+	@layer mods {
 		&:not(.is-filled) {
 			@include notFilled;
 		}
@@ -79,7 +79,7 @@
 		}
 	}
 
-	@layer states {
+	@layer mods {
 		&:has(.filterPill-combobox:disabled) {
 			@include disabled;
 		}

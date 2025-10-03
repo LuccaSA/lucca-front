@@ -20,7 +20,7 @@
 		}
 	}
 
-	@layer states {
+	@layer mods {
 		&.is-error {
 			@include error;
 

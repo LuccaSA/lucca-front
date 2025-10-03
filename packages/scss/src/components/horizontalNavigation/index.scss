@@ -45,7 +45,7 @@
 .horizontalNavigation-list-item-action,
 .menu-link,
 .menu-list-item-action {
-	@layer states {
+	@layer mods {
 		// .active is deprecated
 		&[aria-current='page'],
 		&.is-active,
