@@ -6,6 +6,7 @@ import { LU_DATA_TABLE_HEAD_INSTANCE } from './dataTableHead.token';
 	selector: 'thead[luDataTableHead]',
 	standalone: true,
 	template: '<ng-content />',
+	styleUrl: './dataTableHead.component.scss',
 	encapsulation: ViewEncapsulation.None,
 	host: {
 		class: 'dataTable-head',

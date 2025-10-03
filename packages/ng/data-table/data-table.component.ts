@@ -1,12 +1,12 @@
 import { booleanAttribute, Component, computed, contentChildren, forwardRef, input, ViewEncapsulation } from '@angular/core';
-import { LU_DATA_TABLE_INSTANCE } from './dataTable.token';
+import { LU_DATA_TABLE_INSTANCE } from './data-table.token';
 import { DataTableRowComponent } from './dataTableRow/dataTableRow.component';
 
 @Component({
 	selector: 'lu-data-table',
 	standalone: true,
-	template: '<table class="dataTable" [class.mod-stickyHeader]="stickyHeader()" [class.mod-hover]="hover()"><ng-content /></table>',
-	styleUrls: ['./dataTable.component.scss'],
+	templateUrl: './data-table.component.html',
+	styleUrl: './data-table.component.scss',
 	encapsulation: ViewEncapsulation.None,
 	host: {
 		class: 'dataTableWrapper',
@@ -22,6 +22,8 @@ export class DataTableComponent {
 	stickyHeader = input(false, { transform: booleanAttribute });
 	hover = input(false, { transform: booleanAttribute });
 	selectable = input(false, { transform: booleanAttribute });
+	layoutFixed = input(false, { transform: booleanAttribute });
+	cellBorder = input(false, { transform: booleanAttribute });
 
 	rows = contentChildren(DataTableRowComponent, { descendants: true });
 

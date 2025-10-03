@@ -2,7 +2,7 @@ import { booleanAttribute, Component, inject, input, model, ViewEncapsulation } 
 import { FormsModule } from '@angular/forms';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { CheckboxInputComponent } from '@lucca-front/ng/forms';
-import { LU_DATA_TABLE_INSTANCE } from '../dataTable.token';
+import { LU_DATA_TABLE_INSTANCE } from '../data-table.token';
 import { LU_DATA_TABLE_BODY_INSTANCE } from '../dataTableBody/dataTableBody.token';
 import { LU_DATA_TABLE_FOOT_INSTANCE } from '../dataTableFoot/dataTableFoot.token';
 import { LU_DATA_TABLE_HEAD_INSTANCE } from '../dataTableHead/dataTableHead.token';
