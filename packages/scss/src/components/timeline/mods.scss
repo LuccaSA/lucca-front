@@ -85,7 +85,7 @@
 	}
 
 	.timeline-step-description {
-		padding-inline-start: var(--pr-t-spacings-400);
+		padding-inline-start: calc(var(--pr-t-spacings-300) + var(--pr-t-spacings-50));
 	}
 
 	.timeline-stepAddBetweenStep {
@@ -117,7 +117,7 @@
 	}
 
 	.timeline-step-description {
-		padding-inline-start: var(--pr-t-spacings-300);
+		padding-inline-start: calc(var(--pr-t-spacings-200) + var(--pr-t-spacings-50));
 	}
 }
 
@@ -137,7 +137,7 @@
 	}
 
 	.timeline-step-description {
-		padding-inline-start: 2.5rem;
+		padding-inline-start: calc(var(--pr-t-spacings-400) + var(--pr-t-spacings-50));
 		min-block-size: var(--pr-t-spacings-400);
 	}
 }

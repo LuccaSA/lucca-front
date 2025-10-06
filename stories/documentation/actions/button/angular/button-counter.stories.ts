@@ -15,7 +15,7 @@ export default {
 	],
 	render: ({ luButton, ...inputs }, { argTypes }) => {
 		return {
-			template: `<button type="button" luButton${luButton !== '' ? `="${luButton}"` : ''}${generateInputs(inputs, argTypes)}>Button<lu-numeric-badge disableTooltip [value]="9999"></lu-numeric-badge></button>`,
+			template: `<button type="button" luButton${luButton !== '' ? `="${luButton}"` : ''}${generateInputs(inputs, argTypes)}>Button<lu-numeric-badge disableTooltip [value]="9999" /></button>`,
 		};
 	},
 } as Meta;
@@ -23,18 +23,24 @@ export default {
 export const Basic: StoryObj<ButtonComponent> = {
 	argTypes: {
 		luButton: {
-			options: ['', 'outlined', 'ghost', 'ghost-invert'],
+			options: ['', 'outlined', 'ghost', 'ghost-invert', 'AI'],
 			control: {
 				type: 'select',
 			},
 		},
+		palette: {
+			if: { arg: 'luButton', neq: 'AI' },
+		},
 		critical: {
-			description: '[v18.1] Couleur critical au hover / focus',
+			description: '[v20.2] Couleur critical au hover / focus',
 		},
 		size: {
 			control: {
 				type: 'select',
 			},
+		},
+		delete: {
+			description: 'Deprecated 💀, use critical instead',
 		},
 	},
 	args: {

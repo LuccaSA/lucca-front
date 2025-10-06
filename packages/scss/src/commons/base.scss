@@ -99,7 +99,9 @@
 			}
 		}
 
-		button {
+		button, button[type] {
+			text-rendering: inherit;
+
 			&:focus-visible {
 				@include a11y.focusVisible;
 			}

@@ -1,6 +1,7 @@
 <lu-select-option
 	luCoreSelectPanelElement
 	#rootOption="luCoreSelectPanelElement"
+	[style.--components-treeBranch-level]="depth()"
 	[option]="branch().node"
 	[optionTpl]="optionTpl()"
 	[optionIndex]="optionIndex()"
@@ -14,6 +15,7 @@
 />
 @for (child of branch().children; track $index) {
 	<lu-tree-branch
+		[depth]="depth() + 1"
 		[branch]="child"
 		[optionTpl]="optionTpl()"
 		[optionIndex]="optionIndex() + '-' + $index"
@@ -24,5 +26,4 @@
 		(selectMany)="selectMany.emit($event)"
 		(unselectMany)="unselectMany.emit($event)"
 	/>
-	<!-- use --components-treeBranch-level to apply specific child level-->
 }

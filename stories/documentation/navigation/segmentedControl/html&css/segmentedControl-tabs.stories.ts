@@ -7,7 +7,7 @@ interface segmentedControlTabsStory {
 }
 
 export default {
-	title: 'Documentation/Navigation/segmentedControl/Tabs',
+	title: 'Documentation/Navigation/segmentedControl/HTML&CSS/Tabs',
 	argTypes: {
 		S: {
 			control: {
@@ -35,10 +35,10 @@ export default {
 } as Meta;
 
 function getTemplate(args: segmentedControlTabsStory): string {
-	const size = args.S ? `mod-S` : '';
-	const vertical = args.vertical ? `mod-vertical` : '';
-
-	return `<ul class="segmentedControl ${size} ${vertical}" role="tablist">
+	const size = args.S ? ` mod-S` : ``;
+	const vertical = args.vertical ? ` mod-vertical` : ``;
+	const numericBadge = args.withNumericBadge ? ` <span class="numericBadge">8</span>` : ``;
+	return `<ul class="segmentedControl${size}${vertical}" role="tablist">
 	<li class="segmentedControl-item" role="presentation">
 		<button class="segmentedControl-item-action" type="button" role="tab" id="tab1" aria-controls="panel1" [attr.aria-selected]="tabActive === 1" [attr.tabindex]="tabActive === 1 ? null : '-1'">
 			Lorem
@@ -46,14 +46,12 @@ function getTemplate(args: segmentedControlTabsStory): string {
 	</li>
 	<li class="segmentedControl-item" role="presentation">
 		<button class="segmentedControl-item-action" type="button" role="tab" id="tab2" aria-controls="panel2" [attr.aria-selected]="tabActive === 2" [attr.tabindex]="tabActive === 2 ? null : '-1'">
-			Ipsum
-			<span class="numericBadge" *ngIf="withNumericBadge">8</span>
+			Ipsum${numericBadge}
 		</button>
 	</li>
 	<li class="segmentedControl-item" role="presentation">
 		<button class="segmentedControl-item-action" type="button" role="tab" id="tab3" aria-controls="panel3" [attr.aria-selected]="tabActive === 3" [attr.tabindex]="tabActive === 3 ? null : '-1'">
 			Dolor sit amet
-			<span class="numericBadge" *ngIf="withNumericBadge">88</span>
 		</button>
 	</li>
 	<li class="segmentedControl-item" role="presentation">

@@ -1,3 +1,4 @@
+@use '@lucca-front/icons/src/icon/exports' as icons;
 @use '@lucca-front/scss/src/commons/config';
 @use '@lucca-front/scss/src/commons/core';
 @use '@lucca-front/scss/src/commons/utils/keyframe';
@@ -22,10 +23,15 @@
 	--components-button-pointerEvents: none;
 	--components-button-color: transparent;
 	--components-button-userSelect: none;
-	--components-button-backgroundColor: var(--palettes-product-500);
-	--commons-loading-frontground: var(--palettes-product-50);
+	--components-button-boxShadow: none;
+	--components-button-backgroundColor: var(--palettes-500, var(--palettes-product-500));
+	--commons-loading-frontground: var(--palettes-50, var(--palettes-product-50));
 
 	@include loading.spinner(var(--pr-t-font-body-M-lineHeight));
+
+	.numericBadge {
+		@include numericBadge.state;
+	}
 }
 
 @mixin loadingS {
@@ -34,6 +40,7 @@
 
 @mixin loadingXS {
 	@include loading.spinner(var(--pr-t-font-body-XS-lineHeight));
+
 	--commons-loading-borderWidth: 2px;
 }
 
@@ -48,12 +55,15 @@
 	--commons-loading-frontground: var(--palettes-neutral-400);
 }
 
-@mixin state {
+@mixin success {
+	--components-button-backgroundColor: var(--palettes-500, var(--palettes-product-500));
 	--components-button-color: transparent;
 	--components-button-pointerEvents: none;
 	--components-button-userSelect: none;
 
 	&::after {
+		@include icon.generate('sign_confirm');
+
 		color: var(--palettes-neutral-0);
 		font-size: calc(1.5 * var(--pr-t-font-body-M-fontSize));
 		block-size: var(--pr-t-font-body-M-lineHeight);
@@ -61,15 +71,33 @@
 		margin: auto;
 		position: absolute;
 	}
+
+	.numericBadge {
+		@include numericBadge.state;
+	}
 }
 
-@mixin success {
-	--components-button-backgroundColor: var(--palettes-product-500);
+@mixin loadingAI {
+	.lucca-icon {
+		@include icons.transparent;
+	}
 
-	@include state;
+	&::before {
+		content: none;
+	}
+}
+
+@mixin successAI {
+	.lucca-icon {
+		@include icons.transparent;
+	}
+
+	&::before {
+		content: none;
+	}
 
 	&::after {
-		@include icon.generate('sign_confirm');
+		@include icons.AI;
 	}
 }
 
@@ -92,7 +120,7 @@
 	--components-button-boxShadow: 0 0 0 var(--commons-divider-width) var(--palettes-neutral-100);
 
 	&::after {
-		color: var(--palettes-product-700);
+		color: var(--palettes-700, var(--palettes-product-700));
 	}
 }
 
@@ -101,14 +129,17 @@
 	--components-button-boxShadow: none;
 
 	&::after {
-		color: var(--palettes-product-700);
+		color: var(--palettes-700, var(--palettes-product-700));
 	}
 }
 
 
 @mixin error {
 	@include keyframe.shake;
+
 	animation-name: shake;
 	animation-iteration-count: 1;
 	animation-duration: var(--commons-animations-durations-standard);
+
+	@include keyframe.shake;
 }

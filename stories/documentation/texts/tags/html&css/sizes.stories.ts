@@ -1,16 +1,14 @@
 import { Meta, StoryFn } from '@storybook/angular';
 
-interface TagsSizesStory {
-}
+interface TagsSizesStory {}
 
 export default {
 	title: 'Documentation/Texts/Tags/HTML&CSS/Sizes',
-	argTypes: {
-	},
+	argTypes: {},
 } as Meta;
 
 function getTemplate(args: TagsSizesStory): string {
-	return '<span class="tag mod-L">Text</span>';
+	return '<span class="tag mod-S">Text</span> <span class="tag mod-M">Text</span> <span class="tag mod-L">Text</span>';
 }
 
 const Template: StoryFn<TagsSizesStory> = (args) => ({
@@ -19,4 +17,4 @@ const Template: StoryFn<TagsSizesStory> = (args) => ({
 });
 
 export const Sizes = Template.bind({});
-Sizes.args = { };
+Sizes.args = {};

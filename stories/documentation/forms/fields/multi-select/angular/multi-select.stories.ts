@@ -5,6 +5,7 @@ import { LuOptionDirective } from '@lucca-front/ng/core-select';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { LuMultiSelectInputComponent } from '@lucca-front/ng/multi-select';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { StoryModelDisplayComponent } from 'stories/helpers/story-model-display.component';
 import { HiddenArgType } from '../../../../../helpers/common-arg-types';
 import { generateInputs } from '../../../../../helpers/stories';
 
@@ -12,7 +13,7 @@ export default {
 	title: 'Documentation/Forms/Fields/Multi Select/Angular',
 	decorators: [
 		moduleMetadata({
-			imports: [LuMultiSelectInputComponent, FormsModule, BrowserAnimationsModule, LuOptionDirective, FilterLegumesPipe],
+			imports: [LuMultiSelectInputComponent, FormsModule, BrowserAnimationsModule, LuOptionDirective, FilterLegumesPipe, StoryModelDisplayComponent],
 		}),
 	],
 	argTypes: {
@@ -70,14 +71,9 @@ export const Basic: StoryObj<LuMultiSelectInputComponent<unknown> & FormFieldCom
 				},
 				argTypes,
 			)}>
-	<lu-multi-select ${generateInputs(inputArgs, argTypes)}
-		[options]="legumes | filterLegumes:clue"
-		(clueChange)="clue = $event"
-		[(ngModel)]="example">
-	</lu-multi-select>
+	<lu-multi-select [(ngModel)]="example" [options]="legumes | filterLegumes:clue" (clueChange)="clue = $event"${generateInputs(inputArgs, argTypes)} />
 </lu-form-field>
-
-{{example | json}}`,
+<pr-story-model-display>{{ example | json }}</pr-story-model-display>`,
 			moduleMetadata: {
 				imports: [LuMultiSelectInputComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule],
 			},
