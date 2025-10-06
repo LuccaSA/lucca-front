@@ -60,11 +60,11 @@ export default {
 		<lu-dialog-content>Template-driven content</lu-dialog-content>
 
 		<lu-dialog-footer>
-
 			<div class="footer-content">Optional footer text</div>
-
-			<button type="button" luButton luDialogClose>Confirm</button>
-			<button type="button" luButton="ghost" luDialogDismiss>Cancel</button>
+			<div class="footer-actions">
+				<button type="button" luButton luDialogClose>Confirm</button>
+				<button type="button" luButton="ghost" luDialogDismiss>Cancel</button>
+			</div>
 		</lu-dialog-footer>
 	</lu-dialog>
 </ng-template>`,
@@ -85,7 +85,7 @@ export default {
 			},
 		},
 		size: {
-			options: ['fitContent', 'XS', 'S', '', 'L', 'XL', 'maxContent', 'fullScreen'],
+			options: ['fitContent', 'XS', 'S', '', 'L', 'XL', 'XXL', 'maxContent', 'fullScreen'],
 			control: {
 				type: 'select',
 			},
@@ -121,7 +121,7 @@ export const Focus: StoryObj = {
 
 		<lu-dialog-content>
 			<lu-form-field label="Example input">
-				<lu-text-input [ngModel]="example" placeholder="This will be focused if autoFocus is set to first-input"></lu-text-input>
+				<lu-text-input [ngModel]="example" placeholder="This will be focused if autoFocus is set to first-input" />
 			</lu-form-field>
 		</lu-dialog-content>
 
@@ -167,7 +167,7 @@ export const WithForm: StoryObj = {
 
 			<lu-dialog-content>
 				<lu-form-field label="Example input">
-					<lu-text-input formControlName="example" placeholder="This will be focused if autoFocus is set to first-input"></lu-text-input>
+					<lu-text-input formControlName="example" placeholder="This will be focused if autoFocus is set to first-input" />
 				</lu-form-field>
 			</lu-dialog-content>
 

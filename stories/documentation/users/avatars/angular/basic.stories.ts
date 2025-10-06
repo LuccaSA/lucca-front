@@ -15,21 +15,24 @@ export default {
 			providers: [provideAnimations(), provideHttpClient(), provideLuUserPopover()],
 		}),
 	],
-	render: ({ user, sizes, placeholder, displayFormat }) => {
+	render: ({ user, sizes, placeholder, displayFormat, AI }) => {
+		const AIarg = AI ? ` AI` : ``;
 		return {
 			template: `<button class="userPopover_trigger" type="button" [luUserPopover]="user">
-			<lu-user-picture
+	<lu-user-picture
 		[user]="user"
 		[displayFormat]="displayFormat"
 		data-testid="lu-user-picture"
 		[class]="sizes"
 		[class.mod-placeholder]="placeholder"
-		 /></button>`,
+		${AIarg} />
+</button>`,
 			props: {
 				user,
 				sizes,
 				placeholder,
 				displayFormat,
+				AI,
 			},
 		};
 	},
@@ -53,16 +56,21 @@ export default {
 			control: {
 				type: 'boolean',
 			},
-			description: '[v16.1]',
+		},
+		AI: {
+			control: {
+				type: 'boolean',
+			},
 		},
 	},
 } as Meta;
 
-export const Basic: StoryObj<LuUserPictureComponent & { sizes: string; placeholder: boolean }> = {
+export const Basic: StoryObj<LuUserPictureComponent & { sizes: string; placeholder: boolean; AI: boolean }> = {
 	args: {
 		user: bob,
 		sizes: '',
 		placeholder: false,
 		displayFormat: LuDisplayInitials.firstlast,
+		AI: true,
 	},
 };

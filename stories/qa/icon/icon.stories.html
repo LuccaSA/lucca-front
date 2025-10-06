@@ -36,6 +36,14 @@
 			</td>
 		</tr>
 		<tr>
+			<td>AI</td>
+			<td>
+				<div class="demo-QAtable-list">
+					<span aria-hidden="true" class="lucca-icon icon-heart mod-AI"></span>
+				</div>
+			</td>
+		</tr>
+		<tr>
 			<td>Actions</td>
 			<td>
 				<div class="demo-QAtable-list">
@@ -109,8 +117,8 @@
 			<td>
 				<div class="demo-QAtable-list mod-column">
 					<div *ngFor="let icon of icons">
-						<span aria-hidden="true" class="lucca-icon icon-{{icon.icon}}"></span>
-						<code class="code">icon-{{icon.icon}}</code>
+						<span aria-hidden="true" class="lucca-icon icon-{{ icon.icon }}"></span>
+						<code class="code">icon-{{ icon.icon }}</code>
 					</div>
 				</div>
 			</td>

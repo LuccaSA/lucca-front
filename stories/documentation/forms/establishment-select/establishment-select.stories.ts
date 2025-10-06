@@ -9,11 +9,11 @@ import { Meta, StoryFn, applicationConfig } from '@storybook/angular';
 	imports: [LuEstablishmentSelectInputComponent],
 	template: `
 		<label class="textfield mod-inline pr-u-marginInlineEnd200">
-			<lu-establishment-select class="textfield-input" placeholder="Select an establishment" data-testid="lu-select"></lu-establishment-select>
+			<lu-establishment-select class="textfield-input" placeholder="Select an establishment" data-testid="lu-select" />
 			<span class="textfield-label">Establishment Select</span>
 		</label>
 		<label class="textfield mod-inline">
-			<lu-establishment-select class="textfield-input" placeholder="Select an establishment" [multiple]="multiple" data-testid="lu-select-multiple"></lu-establishment-select>
+			<lu-establishment-select class="textfield-input" placeholder="Select an establishment" [multiple]="multiple" data-testid="lu-select-multiple" />
 			<span class="textfield-label">Establishment Multiple Select</span>
 		</label>
 	`,
@@ -44,7 +44,7 @@ const code = `
 	imports: [LuEstablishmentSelectInputComponent],
 	template: \`
 	<label class="textfield">
-		<lu-establishment-select class="textfield-input" placeholder="Select an establishment" [multiple]="multiple"></lu-establishment-select>
+		<lu-establishment-select class="textfield-input" placeholder="Select an establishment" [multiple]="multiple" />
 		<span class="textfield-label">Establishment Multiple Select</span>
 	</label>
 	\`,

@@ -41,8 +41,7 @@ function getTemplate(args: IndexTableActionsSubActionStory): string {
 			</td>
 		</tr>
 	</tbody>
-</table>
-`;
+</table>`;
 }
 
 const Template: StoryFn<IndexTableActionsSubActionStory> = (args) => ({

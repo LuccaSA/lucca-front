@@ -1,6 +1,6 @@
+import { IconsList } from '@lucca-front/icons/icons-list';
 import { TagComponent } from '@lucca-front/ng/tag';
 import { Meta, StoryObj } from '@storybook/angular';
-import { IconsList } from '@lucca-front/icons/icons-list';
 import { HiddenArgType, PaletteAllArgType } from 'stories/helpers/common-arg-types';
 import { generateInputs } from 'stories/helpers/stories';
 
@@ -9,18 +9,15 @@ export default {
 	component: TagComponent,
 	render: (args, context) => {
 		return {
-			template: `<lu-tag ${generateInputs(args, context.argTypes)}></lu-tag>`,
+			template: `<lu-tag${generateInputs(args, context.argTypes)} />`,
 		};
 	},
 } as Meta;
 
 export const Template: StoryObj<TagComponent> = {
 	argTypes: {
-		label: {
-			type: 'string',
-		},
 		size: {
-			options: ['M', 'L'],
+			options: ['S', 'M', 'L'],
 			control: {
 				type: 'select',
 			},
@@ -30,6 +27,7 @@ export const Template: StoryObj<TagComponent> = {
 			control: {
 				type: 'boolean',
 			},
+			if: { arg: 'AI', truthy: false },
 		},
 		icon: {
 			options: IconsList.map((i) => i.icon),
@@ -45,5 +43,7 @@ export const Template: StoryObj<TagComponent> = {
 		palette: null,
 		outlined: false,
 		icon: null,
+		withEllipis: false,
+		AI: false,
 	},
 };

@@ -20,7 +20,7 @@ export default {
 				currentMonth: new Date(),
 			},
 			template: `
-				<lu-calendar2 [hideToday]="false" [showOverflow]="false" [date]="currentMonth" mode="day" (dateClicked)="selected($event)"></lu-calendar2>
+				<lu-calendar2 [hideToday]="false" [showOverflow]="false" [date]="currentMonth" mode="day" (dateClicked)="selected($event)" />
 			`,
 		};
 	},

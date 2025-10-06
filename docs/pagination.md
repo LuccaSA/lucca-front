@@ -16,7 +16,7 @@ La pagination en mode `default` est le mode par défaut si vous ne précisez rie
      * `isLastPage` : un booléen indiquant si la page courante est la dernière
 
    * récupérer les outputs suivants :
-     * `prevPage` : émis lorsque l'utilisateur clique sur le bouton avec la flèche gauche `<`, correspondant à "précédent"
+     * `previousPage` : émis lorsque l'utilisateur clique sur le bouton avec la flèche gauche `<`, correspondant à "précédent"
      * `nextPage` : émis lorsque l'utilisateur clique sur le bouton avec la flèche droite `>`, correspondant à "suivant"
 
 Voici un exemple d'utilisation de `LuPagination` en mode `default` :
@@ -42,7 +42,7 @@ Le mode `compact` est une version plus simple de la pagination avec uniquement l
      * `isLastPage` : un booléen indiquant si la page courante est la dernière
 
    * récupérer les outputs suivants :
-     * `prevPage` : émis lorsque l'utilisateur clique sur le bouton avec la flèche gauche `<`, correspondant à "précédent"
+     * `previousPage` : émis lorsque l'utilisateur clique sur le bouton avec la flèche gauche `<`, correspondant à "précédent"
      * `nextPage` : émis lorsque l'utilisateur clique sur le bouton avec la flèche droite `>`, correspondant à "suivant"
 
 Voici un exemple d'utilisation de `LuPagination` en mode `compact` :
@@ -52,7 +52,7 @@ Voici un exemple d'utilisation de `LuPagination` en mode `compact` :
   mod="compact"
   [isFirstPage]="true"
   [isLastPage]="false"
-  (previousPage)="prevPage()"
+  (previousPage)="previousPage()"
   (nextPage)="nextPage()"
 />
 ```
