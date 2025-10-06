@@ -26,7 +26,6 @@
 }
 
 @mixin action {
-	box-shadow: var(--pr-t-elevation-shadow-raised);
 	border: 0;
 	cursor: pointer;
 	padding: var(--components-card-content-padding);
@@ -34,8 +33,29 @@
 	flex-direction: row;
 	row-gap: var(--pr-t-spacings-200);
 
+	&::before {
+		padding: 0;
+		content: '';
+		position: absolute;
+		inset: 0;
+		background-color: var(--pr-t-elevation-surface-raised);
+		border-radius: var(--components-card-border-radius);
+		box-shadow: var(--pr-t-elevation-shadow-raised);
+		transition-duration: var(--commons-animations-durations-fast);
+		transition-property: inset, box-shadow;
+	}
+
 	&:hover {
-		box-shadow: var(--pr-t-elevation-shadow-overlay);
+		box-shadow: none;
+
+		&::before {
+			inset: -2px -4px;
+			box-shadow: var(--pr-t-elevation-shadow-overlay);
+		}
+	}
+
+	.card-content, .card-action {
+		z-index: 1;
 	}
 
 	&:has(.card-action .button:focus-visible) {
