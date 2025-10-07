@@ -4,7 +4,7 @@ import { booleanAttribute, Component, input, ViewEncapsulation } from '@angular/
 	// eslint-disable-next-line @angular-eslint/component-selector
 	selector: 'th[luDataTableHeadRowCell], td[luDataTableHeadRowCell]',
 	standalone: true,
-	templateUrl: './dataTableHeadRowCell.component.html',
+	template: `<ng-content />`,
 	encapsulation: ViewEncapsulation.None,
 	host: {
 		class: 'dataTable-head-row-cell',

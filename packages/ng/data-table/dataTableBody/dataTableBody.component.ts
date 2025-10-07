@@ -1,15 +1,19 @@
-import { Component, forwardRef, ViewEncapsulation } from '@angular/core';
+import { Component, computed, forwardRef, inject, input, model, ViewEncapsulation } from '@angular/core';
+import { ButtonComponent } from '@lucca-front/ng/button';
+import { PortalContent } from '@lucca-front/ng/core';
+import { LU_DATA_TABLE_INSTANCE } from '../data-table.token';
 import { LU_DATA_TABLE_BODY_INSTANCE } from './dataTableBody.token';
 
 @Component({
 	// eslint-disable-next-line @angular-eslint/component-selector
 	selector: 'tbody[luDataTableBody]',
 	standalone: true,
-	template: '<ng-content />',
+	templateUrl: `./dataTableBody.component.html`,
 	encapsulation: ViewEncapsulation.None,
 	host: {
 		class: 'dataTable-body',
 	},
+	imports: [ButtonComponent],
 	providers: [
 		{
 			provide: LU_DATA_TABLE_BODY_INSTANCE,
@@ -17,4 +21,17 @@ import { LU_DATA_TABLE_BODY_INSTANCE } from './dataTableBody.token';
 		},
 	],
 })
-export class DataTableBodyComponent {}
+export class DataTableBodyComponent {
+	group = input<PortalContent | null>(null);
+	groupButtonAlt = input<string | null>(null);
+
+	expanded = model(false);
+
+	expandedToggle() {
+		this.expanded.set(!this.expanded());
+	}
+
+	protected tableRef = inject(LU_DATA_TABLE_INSTANCE);
+
+	colspan = computed(() => this.tableRef.cols().length + (this.tableRef.selectable() ? 1 : 0));
+}

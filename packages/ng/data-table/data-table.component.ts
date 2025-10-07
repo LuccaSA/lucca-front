@@ -1,5 +1,7 @@
-import { booleanAttribute, Component, computed, contentChildren, forwardRef, input, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, Component, computed, contentChild, contentChildren, ElementRef, forwardRef, inject, input, viewChild, ViewEncapsulation } from '@angular/core';
+import { ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { LU_DATA_TABLE_INSTANCE } from './data-table.token';
+import { DataTableHeadComponent } from './dataTableHead/dataTableHead.component';
 import { DataTableRowComponent } from './dataTableRow/dataTableRow.component';
 
 @Component({
@@ -10,6 +12,7 @@ import { DataTableRowComponent } from './dataTableRow/dataTableRow.component';
 	encapsulation: ViewEncapsulation.None,
 	host: {
 		class: 'dataTableWrapper',
+		'(scroll)': 'scroll()',
 	},
 	providers: [
 		{
@@ -19,20 +22,26 @@ import { DataTableRowComponent } from './dataTableRow/dataTableRow.component';
 	],
 })
 export class DataTableComponent {
-	stickyHeader = input(false, { transform: booleanAttribute });
+	#elementRef = inject<ElementRef<Element>>(ElementRef);
+	tableRef = viewChild<ElementRef<Element>>('tableRef');
+
 	hover = input(false, { transform: booleanAttribute });
 	selectable = input(false, { transform: booleanAttribute });
 	layoutFixed = input(false, { transform: booleanAttribute });
 	cellBorder = input(false, { transform: booleanAttribute });
 
 	rows = contentChildren(DataTableRowComponent, { descendants: true });
+	header = contentChild(DataTableHeadComponent, { descendants: true });
 
-	firstRow = computed(() => {
-		return this.rows().find((row) => !!row.bodyRef);
-	});
+	stickyHeader = computed(() => this.header().sticky());
 
-	// TODO:
-	// stocker la référence de l’observer en cours
-	// dans un effect faire un intersectionObserver sur firstRow
-	// mettre la classe is-firstBodyRowVisible sur firstRow
+	cols = computed(() => this.header().cols());
+
+	scroll() {
+		this.header().isFirstVisible.set(this.#elementRef.nativeElement.scrollTop === 0);
+	}
+
+	constructor() {
+		ɵeffectWithDeps([this.rows], () => this.scroll());
+	}
 }

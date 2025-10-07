@@ -1,4 +1,6 @@
-import { booleanAttribute, Component, forwardRef, input, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, Component, contentChildren, forwardRef, input, signal, ViewEncapsulation } from '@angular/core';
+
+import { DataTableRowCellHeaderComponent } from '../dataTableCellHeader/dataTableCellHeader.component';
 import { LU_DATA_TABLE_HEAD_INSTANCE } from './dataTableHead.token';
 
 @Component({
@@ -11,6 +13,7 @@ import { LU_DATA_TABLE_HEAD_INSTANCE } from './dataTableHead.token';
 	host: {
 		class: 'dataTable-head',
 		'[class.mod-sticky]': 'sticky()',
+		'[class.is-firstBodyRowVisible]': 'isFirstVisible()',
 	},
 	providers: [
 		{
@@ -21,4 +24,7 @@ import { LU_DATA_TABLE_HEAD_INSTANCE } from './dataTableHead.token';
 })
 export class DataTableHeadComponent {
 	sticky = input(false, { transform: booleanAttribute });
+	isFirstVisible = signal(false);
+
+	cols = contentChildren(DataTableRowCellHeaderComponent, { descendants: true });
 }

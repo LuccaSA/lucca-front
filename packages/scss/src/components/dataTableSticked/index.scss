@@ -41,7 +41,7 @@
 		}
 	}
 
-	&:has(.dataTable-body-row.is-firstBodyRowVisible:first-child) {
+	&:has(.dataTable-head.is-firstBodyRowVisible) {
 		@include firstBodyRowVisible;
 	}
 }

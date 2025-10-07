@@ -24,6 +24,15 @@ export default {
 		fixedWidthValue: {
 			if: { arg: 'fixedWidth', truthy: true },
 		},
+		groupLabel: {
+			if: { arg: 'group', truthy: true },
+		},
+		groupButtonAlt: {
+			if: { arg: 'group', truthy: true },
+		},
+		expanded: {
+			if: { arg: 'group', truthy: true },
+		},
 	},
 	decorators: [
 		moduleMetadata({
@@ -32,7 +41,7 @@ export default {
 	],
 
 	render: (args, { argTypes }) => {
-		const { stickyHeader, tfoot, selected, disabled, layoutFixed, hover, sort, cellBorder, fixedWidth, fixedWidthValue, selectable, ...inputArgs } = args;
+		const { stickyHeader, group, groupLabel, expanded, groupButtonAlt, tfoot, selected, disabled, layoutFixed, hover, sort, cellBorder, fixedWidth, fixedWidthValue, selectable, ...inputArgs } = args;
 
 		const layoutFixedAttr = layoutFixed ? ` layoutFixed` : ``;
 		const hoverAttr = hover ? ` hover` : ``;
@@ -43,6 +52,8 @@ export default {
 		const selectedAttr = selected ? ` [selected]="true"` : ``;
 		const disabledAttr = disabled ? ` disabled` : ``;
 		const stickyHeaderAttr = stickyHeader ? ` sticky` : ``;
+		const groupAttr = group ? ` groupButtonAlt="${groupButtonAlt}" group="${groupLabel}"` : ``;
+		const expandedAttr = expanded ? ` [expanded]="true"` : ``;
 		const tfootTpl = tfoot
 			? `<tfoot luDataTableFoot>
 		<tr luDataTableRow>
@@ -54,6 +65,7 @@ export default {
 			: ``;
 
 		return {
+			styles: stickyHeader ? [`lu-data-table { max-block-size: 7.5rem }`] : [``],
 			template: `<lu-data-table${layoutFixedAttr}${hoverAttr}${cellBorderAttr}${selectableAttr}>
 	<thead luDataTableHead${stickyHeaderAttr}>
 		<tr luDataTableRow>
@@ -62,7 +74,12 @@ export default {
 			<th luDataTableCell${sortAttr}>test</th>
 		</tr>
 	</thead>
-	<tbody luDataTableBody>
+	<tbody luDataTableBody${groupAttr}${expandedAttr}>
+		<tr luDataTableRow>
+			<th luDataTableCell>test</th>
+			<td luDataTableCell>test</td>
+			<td luDataTableCell>test</td>
+		</tr>
 		<tr luDataTableRow>
 			<th luDataTableCell>test</th>
 			<td luDataTableCell>test</td>
@@ -93,5 +110,9 @@ export const Basic: StoryObj = {
 		selectable: false,
 		selected: false,
 		disabled: false,
+		group: false,
+		groupLabel: 'Group',
+		groupButtonAlt: 'Afficher 2 lignes supplémentaires',
+		expanded: false,
 	},
 };
