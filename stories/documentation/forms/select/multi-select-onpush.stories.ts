@@ -1,0 +1,43 @@
+import { applicationConfig, Meta } from '@storybook/angular';
+import { LuMultiSelectInputComponent } from '@lucca-front/ng/multi-select';
+import { ChangeDetectionStrategy, Component, LOCALE_ID } from '@angular/core';
+import { provideAnimations } from '@angular/platform-browser/animations';
+import { provideHttpClient } from '@angular/common/http';
+import { allLegumes } from '@/stories/forms/select/select.utils';
+import { LuCoreSelectApiV4Directive } from '@lucca-front/ng/core-select/api';
+import { FormFieldComponent } from '@lucca-front/ng/form-field';
+
+@Component({
+	selector: 'multi-select-onpush',
+	changeDetection: ChangeDetectionStrategy.OnPush,
+	imports: [LuMultiSelectInputComponent, LuCoreSelectApiV4Directive, FormFieldComponent],
+	styles: [
+		`
+			:host {
+				display: block;
+				padding-top: 400px;
+				padding-bottom: 150px;
+			}
+		`,
+	],
+	template: `
+		<lu-form-field label="Inside an OnPush Component">
+			<lu-multi-select [options]="allLegumes" placeholder="Placeholder text" apiV4="/organization/structure/api/establishments" clearable></lu-multi-select>
+		</lu-form-field>
+	`,
+})
+class MultiSelectOnPush {
+	allLegumes = allLegumes;
+}
+
+export default {
+	title: 'Documentation/Forms/MultiSelect/OnPush TEST',
+	decorators: [
+		applicationConfig({
+			providers: [{ provide: LOCALE_ID, useValue: 'fr-FR' }, provideAnimations(), provideHttpClient()],
+		}),
+	],
+	component: MultiSelectOnPush,
+} as Meta;
+
+export const Basic = {};
