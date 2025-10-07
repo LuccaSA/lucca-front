@@ -7,13 +7,16 @@
 	@include component;
 }
 
+// .lu-dropdown-options-item-action is deprecated
 .dropdown-list-option-action,
 .lu-dropdown-options-item-action {
+	&[disabled],
 	&.is-disabled {
 		@include disabled;
 	}
 
-	&.mod-critical, &.mod-delete {
+	&.mod-critical,
+	&.mod-delete {
 		@include critical;
 	}
 }
