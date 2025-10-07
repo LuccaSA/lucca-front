@@ -5,7 +5,7 @@ interface GridsSpanStory {
 }
 
 export default {
-	title: 'Documentation/Structure/Grids/ResponsiveSpan',
+	title: 'Documentation/Structure/Grids/HTML & CSS/ResponsiveSpan',
 	argTypes: {},
 } as Meta;
 
