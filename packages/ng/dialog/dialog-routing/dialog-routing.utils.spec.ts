@@ -60,7 +60,7 @@ class ProvidedInParentRouteService {
 	selector: 'lu-parent',
 	imports: [RouterOutlet],
 	providers: [ProvidedInParentComponentService],
-	template: '<router-outlet></router-outlet>',
+	template: '<router-outlet />',
 })
 class ParentComponent {}
 

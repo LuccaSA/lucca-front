@@ -72,6 +72,17 @@ export function dialogRouteFactory<C>(component: ComponentType<C>, config?: Dial
 		});
 }
 
+export function dialogLazyRouteFactory<C>(loadComponent: () => Promise<ComponentType<C>>, config?: DialogFactoryConfig<C>): DialogFactoryResult<C> {
+	return ({ path, dataFactory, dialogRouteConfig }) =>
+		createDialogRoute<C>({
+			path,
+			loadComponent,
+			dataFactory: dataFactory as LuDialogData<C> extends never ? undefined : DialogResolveFn<LuDialogData<C>>,
+			dialogConfigFactory: () => config?.dialogConfig ?? ({} as DialogRouteDialogConfig<C>),
+			...mergeRouteConfig(config?.dialogRouteConfig, dialogRouteConfig),
+		});
+}
+
 function mergeRouteConfig<C>(config1: Partial<DialogRouteConfig<C>>, config2: Partial<DialogRouteConfig<C>>): Partial<DialogRouteConfig<C>> {
 	if (!config1) {
 		return config2;
