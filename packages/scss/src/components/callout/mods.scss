@@ -2,6 +2,7 @@
 @use '@lucca-front/scss/src/components/button/exports' as button;
 
 @mixin S {
+	--components-callout-padding: var(--pr-t-spacings-75) var(--pr-t-spacings-100);
 	--components-callout-gap: var(--pr-t-spacings-100);
 	--components-callout-font: var(--pr-t-font-body-S);
 	--components-callout-kill-size: 1.25rem;

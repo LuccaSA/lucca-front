@@ -18,9 +18,8 @@
 	@at-root ($atRoot) {
 		.calloutDisclosure-summary {
 			display: flex;
-			gap: var(--pr-t-spacings-150);
-			padding-block: var(--pr-t-spacings-100);
-			padding-inline: var(--components-calloutDisclosure-paddingHorizontal);
+			gap: var(--components-calloutDisclosure-gap);
+			padding: var(--components-calloutDisclosure-padding);
 			border-radius: var(--pr-t-border-radius-default);
 			transition: background-color var(--commons-animations-durations-fast) ease;
 			cursor: pointer;
@@ -49,7 +48,7 @@
 		}
 
 		.calloutDisclosure-summary-title {
-			font-weight: 600;
+			font-weight: var(--pr-t-font-fontWeight-semibold);
 		}
 
 		.calloutDisclosure-summary-chevron {
