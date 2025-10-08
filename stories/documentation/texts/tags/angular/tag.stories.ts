@@ -9,18 +9,15 @@ export default {
 	component: TagComponent,
 	render: (args, context) => {
 		return {
-			template: `<lu-tag ${generateInputs(args, context.argTypes)} />`,
+			template: `<lu-tag${generateInputs(args, context.argTypes)} />`,
 		};
 	},
 } as Meta;
 
 export const Template: StoryObj<TagComponent> = {
 	argTypes: {
-		label: {
-			type: 'string',
-		},
 		size: {
-			options: ['M', 'L'],
+			options: ['S', 'M', 'L'],
 			control: {
 				type: 'select',
 			},
@@ -30,6 +27,7 @@ export const Template: StoryObj<TagComponent> = {
 			control: {
 				type: 'boolean',
 			},
+			if: { arg: 'AI', truthy: false },
 		},
 		icon: {
 			options: IconsList.map((i) => i.icon),
@@ -45,5 +43,7 @@ export const Template: StoryObj<TagComponent> = {
 		palette: null,
 		outlined: false,
 		icon: null,
+		withEllipis: false,
+		AI: false,
 	},
 };

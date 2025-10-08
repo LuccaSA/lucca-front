@@ -35,10 +35,13 @@ export const Basic: StoryObj<ButtonComponent & { label: string }> = {
 			description: "La présence d'un label augmente le padding horizontal automatiquement via la classe <code>mod-withIcon</code>",
 		},
 		luButton: {
-			options: ['', 'outlined', 'ghost', 'ghost-invert'],
+			options: ['', 'outlined', 'ghost', 'ghost-invert', 'AI'],
 			control: {
 				type: 'select',
 			},
+		},
+		palette: {
+			if: { arg: 'luButton', neq: 'AI' },
 		},
 		critical: {
 			description: '[v20.2] Couleur critical au hover / focus',

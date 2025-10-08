@@ -51,7 +51,21 @@
 			</span>
 		}
 	</label>
-	<ng-container *ngTemplateOutlet="projectionTpl" />
+	@if (AI()) {
+		<div class="form-field-contentOptional">
+			<ng-container *ngTemplateOutlet="projectionTpl" />
+			<lu-icon
+				class="pr-u-focusVisible pr-u-borderRadiusSmall"
+				[luTooltip]="iconAItooltip()"
+				size="S"
+				AI
+				icon="weatherStars"
+				[alt]="iconAIalt()"
+			/>
+		</div>
+	} @else {
+		<ng-container *ngTemplateOutlet="projectionTpl" />
+	}
 	@if (inlineMessage() || (invalidStatus() ? errorInlineMessage() : false)) {
 		<lu-inline-message
 			id="{{ id() }}-message"

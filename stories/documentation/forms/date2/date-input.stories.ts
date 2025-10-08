@@ -93,3 +93,20 @@ export const Basic: StoryObj<DateInputComponent & { selected: Date }> = {
 		selected: new Date(),
 	},
 };
+
+export const StartFromYear: StoryObj<DateInputComponent & { selected: Date }> = {
+	args: {
+		disableOverflow: false,
+		hideOverflow: false,
+		hideToday: false,
+		hideWeekend: false,
+		clearable: false,
+		clearBehavior: 'clear',
+		widthAuto: false,
+		mode: 'day',
+		calendarMode: 'year',
+		format: 'date',
+		// Underlying ngModel
+		selected: null,
+	},
+};

@@ -10,7 +10,7 @@ export default {
 function getTemplate(args: CardsNestedStory): string {
 	return `<div class="card mod-action mod-nested">
 	<div class="card-content">
-		<h2 class="card-title">Titre de la carte</h2>
+		<h3 class="card-title">Titre de la carte</h3>
 		<p>Contenu de la carte</p>
 	</div>
 </div>`;

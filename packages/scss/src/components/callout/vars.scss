@@ -4,6 +4,11 @@
 	--components-callout-padding: var(--pr-t-spacings-100) var(--pr-t-spacings-150);
 	--components-callout-font: inherit;
 	--components-callout-kill-size: 1.5rem;
+	--components-callout-boxShadow: 0 0 0 var(--commons-divider-width) var(--palettes-300, var(--palettes-neutral-300));
+	--components-callout-backgroundColor: var(--palettes-50, var(--palettes-neutral-50));
+	--components-callout-content-description-display: block;
+	--components-callout-content-description-action-marginBlockStart: var(--pr-t-spacings-50);
+	--components-callout-content-description-action-paddingBlock: var(--pr-t-spacings-50);
 
 	// Deprecated
 	--components-callout-fontSize: inherit;
