@@ -53,7 +53,7 @@
 			}
 
 			&::before {
-				font-weight: 400;
+				font-weight: var(--pr-t-font-fontWeight-regular);
 				font-size: var(--component-checkboxField-icon-fontSize);
 				direction: ltr;
 

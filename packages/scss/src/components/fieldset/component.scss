@@ -42,7 +42,7 @@
 
 		.fieldset-title-content-text-helper {
 			font: var(--pr-t-font-body-S);
-			font-weight: 400;
+			font-weight: var(--pr-t-font-fontWeight-regular);
 			color: var(--palettes-neutral-700);
 			display: block;
 		}

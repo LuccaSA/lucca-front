@@ -82,7 +82,7 @@
 			@include icon.generate('people_person');
 
 			color: var(--palettes-neutral-600);
-			font-weight: 400;
+			font-weight: var(--pr-t-font-fontWeight-regular);
 			font-size: var(--components-avatar-placeholder-size);
 		}
 	}

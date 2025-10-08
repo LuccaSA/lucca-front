@@ -236,11 +236,11 @@
 }
 
 %fontWeightRegular {
-	font-weight: 400 !important;
+	font-weight: var(--pr-t-font-fontWeight-regular) !important;
 }
 
 %fontWeightSemiBold {
-	font-weight: 600 !important;
+	font-weight: var(--pr-t-font-fontWeight-semibold) !important;
 }
 
 %noSpinButtons {
