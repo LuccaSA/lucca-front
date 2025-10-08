@@ -90,7 +90,7 @@
 
 @mixin editable {
 	--components-dataTable-cell-padding: var(--pr-t-spacings-100);
-	--components-dataTable-cell-paddingInlineStart: var(--components-dataTable-cell-padding);
+	--components-dataTable-cell-paddingInlineStart: var(--pr-t-spacings-50);
 }
 
 @mixin actions {

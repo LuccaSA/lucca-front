@@ -17,6 +17,7 @@ import { LU_DATA_TABLE_HEAD_INSTANCE } from '../dataTableHead/dataTableHead.toke
 		'[class.mod-alignCenter]': 'align() === "center"',
 		'[class.mod-alignEnd]': 'align() === "end"',
 		'[class.mod-editable]': 'editable()',
+		'[class.mod-actions]': 'actions()',
 	},
 })
 export class DataTableRowCellComponent {
@@ -26,4 +27,5 @@ export class DataTableRowCellComponent {
 
 	align = input<null | 'start' | 'center' | 'end'>(null);
 	editable = input(false, { transform: booleanAttribute });
+	actions = input(false, { transform: booleanAttribute });
 }

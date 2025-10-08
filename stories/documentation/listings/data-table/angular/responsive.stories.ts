@@ -9,7 +9,7 @@ import { IconComponent } from '@lucca-front/ng/icon';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 
 export default {
-	title: 'Documentation/Listings/Data table/Angular/Basic',
+	title: 'Documentation/Listings/Data table/Angular/Responsive',
 	argTypes: {
 		sort: {
 			options: ['', 'null', 'ascending', 'descending'],
@@ -141,7 +141,7 @@ export default {
 		return {
 			styles: stickyHeader ? [`lu-data-table { max-block-size: 7.5rem }`] : [``],
 			props: { example: text },
-			template: `<lu-data-table${layoutFixedAttr}${hoverAttr}${cellBorderAttr}${selectableAttr}${valignAttr}>
+			template: `<lu-data-table${layoutFixedAttr}${hoverAttr}${cellBorderAttr}${selectableAttr}${valignAttr} [responsive]="{ layoutFixedAtMediaMinM: true }">
 	<thead luDataTableHead${stickyHeaderAttr}>
 		<tr luDataTableRow>
 			<th luDataTableCell${fixedWithAttr}>${text}</th>
