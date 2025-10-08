@@ -15,7 +15,7 @@ import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 	imports: [IconComponent, RouterLink, LuTooltipModule],
 })
 export class TagComponent {
-	withEllipis = input(false, { transform: booleanAttribute });
+	withEllipsis = input(false, { transform: booleanAttribute });
 
 	@Input({ required: true })
 	label: string;
