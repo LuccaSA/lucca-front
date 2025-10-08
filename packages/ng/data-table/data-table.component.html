@@ -4,6 +4,9 @@
 	[class.mod-hover]="hover()"
 	[class.mod-layoutFixed]="layoutFixed()"
 	[class.mod-cellBorder]="cellBorder()"
+	[class.mod-valignTop]="valign() === 'top'"
+	[class.mod-valignMiddle]="valign() === 'middle'"
+	[class.mod-valignBottom]="valign() === 'bottom'"
 	#tableRef
 >
 	<ng-content />

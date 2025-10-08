@@ -8,9 +8,17 @@
 .table-head-row-cell,
 .dataTable-head-row-cell,
 .indexTable-head-row-cell {
+	&.mod-alignEnd,
 	&.mod-alignRight {
 		.tableSortable {
-			@include sortAlignRight;
+			@include sortAlignEnd;
+		}
+	}
+
+	&.mod-alignStart,
+	&.mod-alignLeft {
+		.tableSortable {
+			@include sortAlignStart;
 		}
 	}
 

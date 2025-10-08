@@ -15,8 +15,17 @@
 		@include cellBorder;
 	}
 
-	&.mod-alignTop {
-		@include alignTop;
+	&.mod-alignTop,
+	&.mod-valignTop {
+		@include valignTop;
+	}
+
+	&.mod-valignBottom {
+		@include valignBottom;
+	}
+
+	&.mod-valignMiddle {
+		@include valignMiddle;
 	}
 
 	&.mod-layoutFixed {
@@ -77,8 +86,13 @@
 		@include alignCenter;
 	}
 
-	&.mod-alignRight {
-		@include alignRight;
+	&.mod-alignRight,
+	&.mod-alignEnd {
+		@include alignEnd;
+	}
+
+	&.mod-alignStart {
+		@include alignStart;
 	}
 
 	&.mod-editable {

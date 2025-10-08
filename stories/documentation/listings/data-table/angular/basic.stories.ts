@@ -12,6 +12,18 @@ export default {
 				type: 'select',
 			},
 		},
+		align: {
+			options: ['', 'start', 'center', 'end'],
+			control: {
+				type: 'select',
+			},
+		},
+		valign: {
+			options: ['', 'top', 'middle', 'bottom'],
+			control: {
+				type: 'select',
+			},
+		},
 		fixedWidth: {
 			if: { arg: 'layoutFixed', truthy: true },
 		},
@@ -41,7 +53,26 @@ export default {
 	],
 
 	render: (args, { argTypes }) => {
-		const { stickyHeader, group, groupLabel, expanded, groupButtonAlt, tfoot, selected, disabled, layoutFixed, hover, sort, cellBorder, fixedWidth, fixedWidthValue, selectable, ...inputArgs } = args;
+		const {
+			valign,
+			align,
+			stickyHeader,
+			group,
+			groupLabel,
+			expanded,
+			groupButtonAlt,
+			tfoot,
+			selected,
+			disabled,
+			layoutFixed,
+			hover,
+			sort,
+			cellBorder,
+			fixedWidth,
+			fixedWidthValue,
+			selectable,
+			...inputArgs
+		} = args;
 
 		const layoutFixedAttr = layoutFixed ? ` layoutFixed` : ``;
 		const hoverAttr = hover ? ` hover` : ``;
@@ -54,6 +85,9 @@ export default {
 		const stickyHeaderAttr = stickyHeader ? ` sticky` : ``;
 		const groupAttr = group ? ` groupButtonAlt="${groupButtonAlt}" group="${groupLabel}"` : ``;
 		const expandedAttr = expanded ? ` [expanded]="true"` : ``;
+		const alignAttr = align ? ` align="${align}"` : ``;
+		const valignAttr = valign ? ` valign="${valign}"` : ``;
+		const valignContent = valign ? `<br />test` : ``;
 		const tfootTpl = tfoot
 			? `<tfoot luDataTableFoot>
 		<tr luDataTableRow>
@@ -66,29 +100,29 @@ export default {
 
 		return {
 			styles: stickyHeader ? [`lu-data-table { max-block-size: 7.5rem }`] : [``],
-			template: `<lu-data-table${layoutFixedAttr}${hoverAttr}${cellBorderAttr}${selectableAttr}>
+			template: `<lu-data-table${layoutFixedAttr}${hoverAttr}${cellBorderAttr}${selectableAttr}${valignAttr}>
 	<thead luDataTableHead${stickyHeaderAttr}>
 		<tr luDataTableRow>
 			<th luDataTableCell${fixedWithAttr}>test</th>
 			<th luDataTableCell>test</th>
-			<th luDataTableCell${sortAttr}>test</th>
+			<th luDataTableCell${sortAttr}${alignAttr}>test</th>
 		</tr>
 	</thead>
 	<tbody luDataTableBody${groupAttr}${expandedAttr}>
 		<tr luDataTableRow>
 			<th luDataTableCell>test</th>
-			<td luDataTableCell>test</td>
-			<td luDataTableCell>test</td>
+			<td luDataTableCell>test${valignContent}</td>
+			<td luDataTableCell${alignAttr}>test${valignContent}</td>
 		</tr>
 		<tr luDataTableRow>
 			<th luDataTableCell>test</th>
 			<td luDataTableCell>test</td>
-			<td luDataTableCell>test</td>
+			<td luDataTableCell${alignAttr}>test</td>
 		</tr>
 		<tr luDataTableRow${selectedAttr}${disabledAttr}>
 			<th luDataTableCell>test</th>
 			<td luDataTableCell>test</td>
-			<td luDataTableCell>test</td>
+			<td luDataTableCell${alignAttr}>test</td>
 		</tr>
 	</tbody>
 	${tfootTpl}
@@ -100,8 +134,10 @@ export default {
 export const Basic: StoryObj = {
 	args: {
 		tfoot: false,
-		stickyHeader: false,
+		align: undefined,
+		valign: undefined,
 		sort: undefined,
+		stickyHeader: false,
 		hover: false,
 		cellBorder: false,
 		layoutFixed: false,

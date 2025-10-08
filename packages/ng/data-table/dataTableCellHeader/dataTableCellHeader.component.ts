@@ -17,6 +17,9 @@ import { LU_DATA_TABLE_HEAD_INSTANCE } from '../dataTableHead/dataTableHead.toke
 		'[class.dataTable-body-row-cell]': 'bodyRef !== null',
 		'[class.dataTable-head-row-cell]': 'headRef !== null',
 		'[class.dataTable-foot-row-cell]': 'footRef !== null',
+		'[class.mod-alignStart]': 'align() === "start"',
+		'[class.mod-alignCenter]': 'align() === "center"',
+		'[class.mod-alignEnd]': 'align() === "end"',
 		'[attr.aria-sort]': 'sort()',
 		'[style.--dataTable-layoutFixed-width]': 'fixedWidth()',
 	},
@@ -29,4 +32,5 @@ export class DataTableRowCellHeaderComponent {
 
 	sort = input<undefined | null | 'ascending' | 'descending'>(undefined);
 	fixedWidth = input<string | null>(null);
+	align = input<null | 'start' | 'center' | 'end'>(null);
 }

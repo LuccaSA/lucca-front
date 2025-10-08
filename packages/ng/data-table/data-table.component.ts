@@ -30,6 +30,8 @@ export class DataTableComponent {
 	layoutFixed = input(false, { transform: booleanAttribute });
 	cellBorder = input(false, { transform: booleanAttribute });
 
+	valign = input<null | 'top' | 'middle' | 'bottom'>(null);
+
 	rows = contentChildren(DataTableRowComponent, { descendants: true });
 	header = contentChild(DataTableHeadComponent, { descendants: true });
 

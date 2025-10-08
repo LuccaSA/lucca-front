@@ -14,8 +14,16 @@
 	}
 }
 
-@mixin alignTop {
+@mixin valignTop {
 	--components-dataTable-cell-verticalAlign: top;
+}
+
+@mixin valignBottom {
+	--components-dataTable-cell-verticalAlign: bottom;
+}
+
+@mixin valignMiddle {
+	--components-dataTable-cell-verticalAlign: middle;
 }
 
 @mixin buttonExpand {
@@ -110,8 +118,12 @@
 	--components-dataTable-cell-textAlign: center;
 }
 
-@mixin alignRight {
-	--components-dataTable-cell-textAlign: right;
+@mixin alignEnd {
+	--components-dataTable-cell-textAlign: end;
+}
+
+@mixin alignStart {
+	--components-dataTable-cell-textAlign: start;
 }
 
 @mixin layoutFixed {
