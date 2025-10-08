@@ -5,12 +5,13 @@ import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { PhoneNumberInputComponent } from '@lucca-front/ng/forms/phone-number-input';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { cleanupTemplate, generateInputs } from 'stories/helpers/stories';
+import { StoryModelDisplayComponent } from 'stories/helpers/story-model-display.component';
 
 export default {
 	title: 'Documentation/Forms/Fields/PhoneNumberField/Angular',
 	decorators: [
 		moduleMetadata({
-			imports: [PhoneNumberInputComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule],
+			imports: [PhoneNumberInputComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule, StoryModelDisplayComponent],
 		}),
 		applicationConfig({
 			providers: [{ provide: LOCALE_ID, useValue: 'en-US' }],
@@ -39,12 +40,12 @@ export const Basic: StoryObj<PhoneNumberInputComponent & FormFieldComponent & { 
 				},
 				argTypes,
 			)}>
-	<lu-phone-number-input label="${label}" [country]="country" [(ngModel)]="example" #result="ngModel" ${generateInputs(inputArgs, argTypes)}></lu-phone-number-input>
+	<lu-phone-number-input label="${label}" [country]="country" [(ngModel)]="example" #result="ngModel" ${generateInputs(inputArgs, argTypes)} />
 </lu-form-field>
 @if(result.invalid && result.errors.validPhoneNumber){
   <div>{{result.errors.validPhoneNumber}}</div>
 }
-<div>{{example}}</div>
+<pr-story-model-display>{{ example }}</pr-story-model-display>
 `),
 		};
 	},

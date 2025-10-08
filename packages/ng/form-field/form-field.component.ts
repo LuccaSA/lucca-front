@@ -40,7 +40,7 @@ type FormFieldWidth = 20 | 30 | 40 | 50 | 60;
 	standalone: true,
 	imports: [NgIf, NgTemplateOutlet, InlineMessageComponent, LuTooltipModule, ReactiveFormsModule, IconComponent, IntlParamsPipe, PortalDirective],
 	templateUrl: './form-field.component.html',
-	styleUrls: ['./form-field.component.scss'],
+	styleUrl: './form-field.component.scss',
 	providers: [
 		LuClass,
 		{
@@ -93,6 +93,10 @@ export class FormFieldComponent implements OnDestroy, DoCheck {
 	tooltip = input<string | SafeHtml | null>(null);
 
 	tag = input<string | null>(null);
+
+	AI = input(false, { transform: booleanAttribute });
+	iconAItooltip = input<string | null>(null);
+	iconAIalt = input<string | null>(null);
 
 	width = input<FormFieldWidth, FormFieldWidth | `${FormFieldWidth}`>(null, {
 		transform: numberAttribute as (value: FormFieldWidth | `${FormFieldWidth}`) => FormFieldWidth,

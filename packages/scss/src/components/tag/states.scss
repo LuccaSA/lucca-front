@@ -1,4 +1,10 @@
+@use '@lucca-front/scss/src/commons/utils/a11y';
+
 @mixin disabled {
 	--components-tag-background: var(--commons-disabled-background);
 	--components-tag-color: var(--commons-disabled-color);
+}
+
+@mixin focusVisible {
+	@include a11y.focusVisible;
 }

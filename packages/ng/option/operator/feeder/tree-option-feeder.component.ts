@@ -8,7 +8,6 @@ import { ALuTreeOptionOperator, ILuTreeOptionOperator } from '../tree-option-ope
 @Component({
 	selector: 'lu-tree-option-feeder',
 	template: '',
-	styleUrls: [],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	standalone: true,
 	providers: [

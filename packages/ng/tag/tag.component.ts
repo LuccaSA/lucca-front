@@ -1,20 +1,22 @@
-import { NgClass } from '@angular/common';
-import { booleanAttribute, ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, input, Input, ViewEncapsulation } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { LuccaIcon } from '@lucca-front/icons';
 import { DecorativePalette, Palette } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
+import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 
 @Component({
 	selector: 'lu-tag',
 	standalone: true,
 	templateUrl: './tag.component.html',
-	styleUrls: ['./tag.component.scss'],
+	styleUrl: './tag.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	encapsulation: ViewEncapsulation.None,
-	imports: [IconComponent, NgClass, RouterLink],
+	imports: [IconComponent, RouterLink, LuTooltipModule],
 })
 export class TagComponent {
+	withEllipsis = input(false, { transform: booleanAttribute });
+
 	@Input({ required: true })
 	label: string;
 
@@ -22,7 +24,7 @@ export class TagComponent {
 	/**
 	 * Which size should the callout be? Defaults to medium
 	 */
-	size: 'M' | 'L' = 'M';
+	size: 'S' | 'M' | 'L' = 'M';
 
 	@Input()
 	/**
@@ -50,10 +52,12 @@ export class TagComponent {
 	 */
 	icon: LuccaIcon | undefined;
 
+	AI = input(false, { transform: booleanAttribute });
+
 	get tagClasses() {
 		return {
 			[`mod-${this.size}`]: !!this.size,
-			[`palette-${this.palette}`]: !!this.palette,
+			[`palette-${this.palette}`]: !this.AI() && !!this.palette,
 		};
 	}
 }

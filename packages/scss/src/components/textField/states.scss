@@ -12,3 +12,8 @@
 	--component-textField-background: var(--pr-t-color-input-background-disabled);
 	--component-textField-color: var(--pr-t-color-input-text-disabled);
 }
+
+@mixin lineThrough {
+	--component-textField-color: var(--pr-t-color-text-subtle);
+	--component-textField-textDecoration: line-through;
+}

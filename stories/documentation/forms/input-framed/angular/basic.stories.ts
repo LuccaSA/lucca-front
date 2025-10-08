@@ -12,6 +12,8 @@ interface InputFramedBasicStory {
 	panel: boolean;
 	tag: boolean;
 	checkbox: boolean;
+	center: boolean;
+	inlineMessage: string;
 }
 
 export default {
@@ -42,6 +44,10 @@ export default {
 		const panelTemplate = args.panel ? ` framedPortal="Lorem ipsum dolor"` : ``;
 		const tagTemplate = args.tag ? ` tag="Tag"` : ``;
 		const infoTemplate = args.info ? `<ng-container info>Lorem ipsum dolor</ng-container>` : ``;
+		const center = args.center ? ` center` : ``;
+		const framedCenter = args.center ? ` framedCenter` : ``;
+		const inlineMessage = args.inlineMessage ? ` inlineMessage="${args.inlineMessage}"` : ``;
+
 		const illustrationTemplate = args.illustration
 			? `<ng-container illustration>
 					<div style="background-color: var(--palettes-product-100); color: var(--palettes-product-700)" class="pr-u-padding100 pr-u-borderRadiusXL pr-u-displayFlex">
@@ -56,50 +62,50 @@ export default {
 					</div>
 				</ng-container>`
 			: ``;
-		const templateCheckbox = `<lu-framed-input${column}${panelTemplate}>
-				<lu-form-field label="Option A" inlineMessage="Lorem ipsum dolor"${tagTemplate}>
+		const templateCheckbox = `<lu-framed-input${column}${panelTemplate}${center}>
+				<lu-form-field label="Option A"${inlineMessage}${tagTemplate}>
 					<lu-checkbox-input [(ngModel)]="exampleA" required />
 				</lu-form-field>
 				${infoTemplate}
 				${illustrationTemplate}
 			</lu-framed-input>
-			<lu-framed-input${column}${panelTemplate}>
-				<lu-form-field label="Option B" inlineMessage="Lorem ipsum dolor"${tagTemplate}>
+			<lu-framed-input${column}${panelTemplate}${center}>
+				<lu-form-field label="Option B"${inlineMessage}${tagTemplate}>
 					<lu-checkbox-input [(ngModel)]="exampleB" required />
 				</lu-form-field>
 				${infoTemplate}
 				${illustrationTemplate}
 			</lu-framed-input>
-			<lu-framed-input${column}${panelTemplate}>
-				<lu-form-field label="Option C" inlineMessage="Lorem ipsum dolor"${tagTemplate}>
+			<lu-framed-input${column}${panelTemplate}${center}>
+				<lu-form-field label="Option C"${inlineMessage}${tagTemplate}>
 					<lu-checkbox-input disabled [(ngModel)]="exampleC" required />
 				</lu-form-field>
 				${infoTemplate}
 				${illustrationTemplateDisabled}
 			</lu-framed-input>
-			<lu-framed-input${column}${panelTemplate}>
-				<lu-form-field label="Option D" inlineMessage="Lorem ipsum dolor"${tagTemplate}>
+			<lu-framed-input${column}${panelTemplate}${center}>
+				<lu-form-field label="Option D"${inlineMessage}${tagTemplate}>
 					<lu-checkbox-input [(ngModel)]="exampleD" required />
 				</lu-form-field>
 				${infoTemplate}
 				${illustrationTemplate}
 			</lu-framed-input>`;
-		const template = `<lu-radio${column} value="A"${panelTemplate}${tagTemplate} inlineMessage="Lorem ipsum dolor">
+		const template = `<lu-radio${column} value="A"${panelTemplate}${tagTemplate}${inlineMessage}>
 				Option A
 				${infoTemplate}
 				${illustrationTemplate}
 			</lu-radio>
-			<lu-radio ${column}value="B"${panelTemplate}${tagTemplate} inlineMessage="Lorem ipsum dolor">
+			<lu-radio ${column}value="B"${panelTemplate}${tagTemplate}${inlineMessage}>
 				Option B
 				${infoTemplate}
 				${illustrationTemplate}
 			</lu-radio>
-			<lu-radio ${column}value="C"${panelTemplate}${tagTemplate} disabled inlineMessage="Lorem ipsum dolor">
+			<lu-radio ${column}value="C"${panelTemplate}${tagTemplate}${inlineMessage} disabled>
 				Option C
 				${infoTemplate}
 				${illustrationTemplateDisabled}
 			</lu-radio>
-			<lu-radio ${column}value="D"${panelTemplate}${tagTemplate} inlineMessage="Lorem ipsum dolor">
+			<lu-radio ${column}value="D"${panelTemplate}${tagTemplate}${inlineMessage}>
 				Option D
 				${infoTemplate}
 				${illustrationTemplate}
@@ -134,7 +140,7 @@ export default {
 					props: { example: 'B' },
 					template: cleanupTemplate(`
 	<lu-form-field label="Label" errorInlineMessage="Error inline message">
-		<lu-radio-group-input [(ngModel)]="example" framed required>
+		<lu-radio-group-input [(ngModel)]="example" framed required${framedCenter}>
 			<div class="grid" [attr.style]="'--grid-columns: 2; --grid-colspan: 2'">
 				${template}
 			</div>
@@ -147,7 +153,7 @@ export default {
 					props: { example: 'B' },
 					template: cleanupTemplate(`
 	<lu-form-field label="Label" errorInlineMessage="Error inline message">
-		<lu-radio-group-input [(ngModel)]="example" framed required>
+		<lu-radio-group-input [(ngModel)]="example" framed required${framedCenter}>
 			${template}
 		</lu-radio-group-input>
 	</lu-form-field>
@@ -166,5 +172,7 @@ export const Basic = {
 		info: false,
 		tag: false,
 		checkbox: false,
+		center: false,
+		inlineMessage: 'Lorem ipsum dolor',
 	},
 };

@@ -288,7 +288,7 @@
 		color: var(--palettes-neutral-600);
 		inset-inline-start: var(--pr-t-spacings-200);
 		font-size: var(--pr-t-font-body-S-fontSize);
-		font-weight: 400;
+		font-weight: var(--pr-t-font-fontWeight-regular);
 		line-height: var(--pr-t-font-body-S-lineHeight);
 		pointer-events: none;
 		position: absolute;
@@ -308,7 +308,7 @@
 		&::after {
 			inset-block-end: var(--pr-t-spacings-100);
 			color: var(--palettes-neutral-600);
-			font-weight: 400;
+			font-weight: var(--pr-t-font-fontWeight-regular);
 		}
 	}
 }
@@ -500,7 +500,7 @@
 		font-size: var(--components-textfield-material-label-font-size);
 		position: absolute;
 		pointer-events: none;
-		font-weight: 400;
+		font-weight: var(--pr-t-font-fontWeight-regular);
 		line-height: var(--pr-t-font-body-M-lineHeight);
 		inline-size: 100%;
 		inset-block-start: var(--pr-t-spacings-300);

@@ -147,7 +147,7 @@
 		background-color: var(--palettes-neutral-50);
 		font-size: var(--pr-t-font-body-S-fontSize);
 		line-height: var(--pr-t-font-body-S-lineHeight);
-		font-weight: 600;
+		font-weight: var(--pr-t-font-fontWeight-semibold);
 	}
 }
 
@@ -171,7 +171,7 @@
 			@include icon.generate('arrow_chevron_top');
 
 			font-size: var(--pr-t-font-body-M-lineHeight);
-			font-weight: 400;
+			font-weight: var(--pr-t-font-fontWeight-regular);
 			margin-inline-end: var(--pr-t-spacings-100);
 			transition-duration: var(--commons-animations-durations-fast);
 			transition-property: transform;
@@ -267,7 +267,7 @@
 		.table-head-row-cell-secondLine {
 			margin-block-start: var(--pr-t-spacings-50);
 			display: block;
-			font-weight: 400;
+			font-weight: var(--pr-t-font-fontWeight-regular);
 		}
 	}
 
@@ -284,7 +284,7 @@
 	.table-head-row-cell-secondLine {
 		margin-block-start: var(--pr-t-spacings-50);
 		display: block;
-		font-weight: 400;
+		font-weight: var(--pr-t-font-fontWeight-regular);
 	}
 }
 

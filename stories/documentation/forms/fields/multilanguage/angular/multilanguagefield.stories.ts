@@ -4,12 +4,13 @@ import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { MultilanguageInputComponent, MultilanguageTranslation } from '@lucca-front/ng/forms';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { cleanupTemplate, generateInputs } from 'stories/helpers/stories';
+import { StoryModelDisplayComponent } from 'stories/helpers/story-model-display.component';
 
 export default {
 	title: 'Documentation/Forms/Fields/MultilanguageField/Angular',
 	decorators: [
 		moduleMetadata({
-			imports: [MultilanguageInputComponent, FormFieldComponent, FormsModule, ReactiveFormsModule, BrowserAnimationsModule],
+			imports: [MultilanguageInputComponent, FormFieldComponent, FormsModule, ReactiveFormsModule, BrowserAnimationsModule, StoryModelDisplayComponent],
 		}),
 	],
 	argTypes: {
@@ -71,15 +72,9 @@ export const Basic: StoryObj<
 				},
 				argTypes,
 			)}>
-
-	<lu-multilanguage-input
-	${generateInputs(inputArgs, argTypes)}
-		[(ngModel)]="example">
-	</lu-multilanguage-input>
-
+	<lu-multilanguage-input [(ngModel)]="example"${generateInputs(inputArgs, argTypes)} />
 </lu-form-field>
-
-{{example | json}}`),
+<pr-story-model-display>{{ example | json }}</pr-story-model-display>`),
 		};
 	},
 	args: {
@@ -91,5 +86,6 @@ export const Basic: StoryObj<
 		inlineMessageState: 'default',
 		placeholder: 'Placeholder',
 		tooltip: 'Je suis un message d’aide',
+		openOnFocus: false,
 	},
 };

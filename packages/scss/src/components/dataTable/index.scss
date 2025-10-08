@@ -31,6 +31,22 @@
 	&[class*='mod-layoutFixed'] {
 		@include layoutFixedCells;
 	}
+
+	&.mod-hover {
+		:is(.dataTable-head-row.mod-selectable, .dataTable-body-row) {
+			&:hover {
+				@include hover;
+			}
+
+			&.mod-selectable {
+				&:has(input:checked) {
+					&:hover {
+						@include selectedHover;
+					}
+				}
+			}
+		}
+	}
 }
 
 :is(.dataTable-head-row, .dataTable-body-row, .dataTable-foot-row) {
@@ -40,6 +56,10 @@
 
 	&.mod-selectable {
 		@include selectable;
+
+		&:has(input:checked) {
+			@include selected;
+		}
 	}
 
 	&.mod-draggable {

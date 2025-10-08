@@ -4,10 +4,6 @@ import { ILuPopoverPanel } from '../panel/index';
 import { ILuPopoverTarget, LuPopoverAlignment, LuPopoverPosition, LuPopoverTarget } from '../target/index';
 import { ALuPopoverTrigger, ILuPopoverTrigger, LuPopoverTriggerEvent } from './popover-trigger.model';
 
-/**
- * This directive is intended to be used in conjunction with an lu-popover tag.  It is
- * responsible for toggling the display of the provided popover instance.
- */
 @Directive({
 	selector: '[luPopover]',
 	exportAs: 'LuPopoverTrigger',

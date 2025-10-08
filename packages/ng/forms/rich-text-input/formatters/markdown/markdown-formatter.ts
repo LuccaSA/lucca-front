@@ -16,6 +16,7 @@ import {
 	Transformer,
 	UNORDERED_LIST,
 } from '@lexical/markdown';
+import { registerRichText } from '@lexical/rich-text';
 import { RICH_TEXT_FORMATTER, RichTextFormatter } from '@lucca-front/ng/forms/rich-text-input';
 import { LexicalEditor } from 'lexical';
 
@@ -33,6 +34,7 @@ export const DEFAULT_MARKDOWN_TRANSFORMERS: Transformer[] = [
 	STRIKETHROUGH,
 	LINK,
 ];
+
 export class MarkdownFormatter extends RichTextFormatter {
 	#transformers: Transformer[] = DEFAULT_MARKDOWN_TRANSFORMERS;
 
@@ -41,6 +43,10 @@ export class MarkdownFormatter extends RichTextFormatter {
 		if (transformers) {
 			this.#transformers = transformers;
 		}
+	}
+
+	override registerTextPlugin(editor: LexicalEditor) {
+		return registerRichText(editor);
 	}
 
 	override parse(editor: LexicalEditor, markdown?: string | null): void {

@@ -11,7 +11,7 @@
 			<div class="emptyState-content-text">
 				<div role="heading" [attr.aria-level]="hx" class="emptyState-content-heading" *ngIf="heading">{{ heading }}</div>
 				<p class="emptyState-content-description" *ngIf="description">
-					<ng-container *luPortal="description"></ng-container>
+					<ng-container *luPortal="description" />
 				</p>
 				<div class="emptyState-actions">
 					<ng-content />

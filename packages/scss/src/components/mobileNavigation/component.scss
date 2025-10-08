@@ -43,7 +43,7 @@
 
 			&[aria-current='page'] {
 				color: var(--palettes-product-700);
-				font-weight: 600;
+				font-weight: var(--pr-t-font-fontWeight-semibold);
 			}
 		}
 

@@ -4,12 +4,13 @@ import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { NumberInputComponent } from '@lucca-front/ng/forms';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { cleanupTemplate, generateInputs } from 'stories/helpers/stories';
+import { StoryModelDisplayComponent } from 'stories/helpers/story-model-display.component';
 
 export default {
 	title: 'Documentation/Forms/Fields/NumberField/Angular',
 	decorators: [
 		moduleMetadata({
-			imports: [NumberInputComponent, FormFieldComponent, FormsModule, ReactiveFormsModule, BrowserAnimationsModule],
+			imports: [NumberInputComponent, FormFieldComponent, FormsModule, ReactiveFormsModule, BrowserAnimationsModule, StoryModelDisplayComponent],
 		}),
 	],
 	argTypes: {
@@ -53,12 +54,9 @@ export const Basic: StoryObj<NumberInputComponent & { disabled: boolean; require
 				},
 				argTypes,
 			)}>
-	<lu-number-input
-	${generateInputs(inputArgs, argTypes)}
-		[(ngModel)]="example">
-	</lu-number-input>
+	<lu-number-input [(ngModel)]="example"${generateInputs(inputArgs, argTypes)} />
 </lu-form-field>
-{{example}}`),
+<pr-story-model-display>{{ example }}</pr-story-model-display>`),
 			moduleMetadata: {
 				imports: [NumberInputComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule],
 			},
@@ -106,14 +104,9 @@ export const WithPrefixAndSuffix: StoryObj<
 				},
 				argTypes,
 			)}>
-	<lu-number-input
-		${generateInputs(inputArgs, argTypes)}
-		[prefix]="prefix"
-		[suffix]="suffix"
-		[(ngModel)]="example">
-	</lu-number-input>
+	<lu-number-input [(ngModel)]="example" [prefix]="prefix" [suffix]="suffix"${generateInputs(inputArgs, argTypes)} />
 </lu-form-field>
-{{example}}`),
+<pr-story-model-display>{{ example }}</pr-story-model-display>`),
 			moduleMetadata: {
 				imports: [NumberInputComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule],
 			},

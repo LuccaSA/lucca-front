@@ -12,11 +12,11 @@
 			<div *ngIf="icon" class="emptyState-content-icon" aria-hidden="true" [innerHtml]="icon | luSafeExternalSvg"></div>
 			<div class="emptyState-content-text">
 				<div *ngIf="slotTop">
-					<ng-container *luPortal="slotTop"></ng-container>
+					<ng-container *luPortal="slotTop" />
 				</div>
 				<div role="heading" [attr.aria-level]="hx" class="emptyState-content-heading" *ngIf="heading">{{ heading }}</div>
 				<p class="emptyState-content-description" *ngIf="description">
-					<ng-container *luPortal="description"></ng-container>
+					<ng-container *luPortal="description" />
 				</p>
 				<div class="emptyState-actions">
 					<ng-content />

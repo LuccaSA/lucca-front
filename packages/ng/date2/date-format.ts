@@ -14,6 +14,10 @@ export function getDateFormat(locale: string): string {
 	}, '');
 }
 
+export function getSeparator(locale: string): string {
+	return new Intl.DateTimeFormat(locale).formatToParts(new Date('01/01/2024')).find((part) => part.type === 'literal')?.value || '/';
+}
+
 // Warning: it works on Latin languages, but deserves to be tested on non-Latin languages
 export function getLocalizedDateFormat(locale: string, period: 'year' | 'month' | 'day' = 'day'): string {
 	const letterLocalizedForDay = new Intl.RelativeTimeFormat(locale, { numeric: 'auto' }).formatToParts(100, 'day')[2]['value'].charAt(1).toUpperCase();

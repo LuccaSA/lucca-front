@@ -1,12 +1,10 @@
 import { ConnectionPositionPair } from '@angular/cdk/overlay';
-import { NgTemplateOutlet } from '@angular/common';
-import { ChangeDetectionStrategy, Component, computed, forwardRef, inject, input, LOCALE_ID, signal, ViewEncapsulation, WritableSignal } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, computed, forwardRef, inject, input, LOCALE_ID, signal, ViewEncapsulation, WritableSignal } from '@angular/core';
 import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
 import { getIntl, IntlParamsPipe } from '@lucca-front/ng/core';
 import { FORM_FIELD_INSTANCE, FormFieldComponent, InputDirective } from '@lucca-front/ng/form-field';
 import { PopoverDirective } from '@lucca-front/ng/popover2';
 import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
-import { FormFieldIdDirective } from '../form-field-id.directive';
 import { TextInputComponent } from '../text-input/text-input.component';
 import { MultilanguageTranslation } from './model/multilanguage-translation';
 import { LU_MULTILANGUAGE_INPUT_TRANSLATIONS } from './multilanguage-input.translate';
@@ -14,19 +12,7 @@ import { LU_MULTILANGUAGE_INPUT_TRANSLATIONS } from './multilanguage-input.trans
 @Component({
 	selector: 'lu-multilanguage-input',
 	standalone: true,
-	imports: [
-		FormFieldComponent,
-		ReactiveFormsModule,
-		FormFieldIdDirective,
-		NgTemplateOutlet,
-		PopoverDirective,
-		TextInputComponent,
-		FormFieldComponent,
-		FormsModule,
-		InputDirective,
-		IntlParamsPipe,
-		LuTooltipTriggerDirective,
-	],
+	imports: [FormFieldComponent, ReactiveFormsModule, PopoverDirective, TextInputComponent, FormFieldComponent, FormsModule, InputDirective, IntlParamsPipe, LuTooltipTriggerDirective],
 	templateUrl: './multilanguage-input.component.html',
 	styleUrl: './multilanguage-input.component.scss',
 	providers: [
@@ -55,6 +41,8 @@ export class MultilanguageInputComponent implements ControlValueAccessor {
 	protected onChange = (_value: MultilanguageTranslation[]) => {};
 
 	placeholder = input('');
+
+	openOnFocus = input(false, { transform: booleanAttribute });
 
 	// Suffixed with Internal to avoid conflict with NgModel's disabled attribute
 	disabledInternal = signal(false);

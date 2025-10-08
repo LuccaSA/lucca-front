@@ -1,0 +1,16 @@
+@use 'exports' as *;
+
+.suggestion {
+	@include vars;
+	@include component;
+
+	&:has(.suggestion-callout-accept:hover),
+	&:has(.suggestion-callout-accept:focus-visible) {
+		@include accept;
+	}
+
+	&:has(.suggestion-callout-reject:hover),
+	&:has(.suggestion-callout-reject:focus-visible) {
+		@include reject;
+	}
+}

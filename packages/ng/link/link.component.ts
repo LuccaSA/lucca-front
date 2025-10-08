@@ -8,7 +8,7 @@ import { LuRouterLink } from './lu-router-link';
 	selector: 'a[luLink], button[luLink]',
 	standalone: true,
 	templateUrl: './link.component.html',
-	styleUrls: ['./link.component.scss'],
+	styleUrl: './link.component.scss',
 	encapsulation: ViewEncapsulation.None,
 	host: {
 		class: 'link',

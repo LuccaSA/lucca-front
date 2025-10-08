@@ -67,6 +67,7 @@
 			padding-inline: var(--component-textField-padding) var(--component-textField-affix-padding);
 			background-color: transparent;
 			color: var(--component-textField-color);
+			text-decoration: var(--component-textField-textDecoration);
 			text-overflow: ellipsis;
 
 			&:is(textarea, div) {

@@ -193,7 +193,7 @@ export abstract class ALuSelectInputComponent<T, TPicker extends ILuPickerPanel<
 @Component({
 	selector: 'lu-select',
 	templateUrl: './select-input.component.html',
-	styleUrls: ['./select-input.component.scss'],
+	styleUrl: './select-input.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	standalone: true,
 	providers: [

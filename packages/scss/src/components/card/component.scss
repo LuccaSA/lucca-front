@@ -19,6 +19,7 @@
 	@at-root ($atRoot) {
 		.card-content {
 			padding: var(--components-card-content-padding);
+			position: relative;
 		}
 
 		.card-title {

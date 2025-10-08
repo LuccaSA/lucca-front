@@ -4,12 +4,13 @@ import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { RadioComponent, RadioGroupInputComponent } from '@lucca-front/ng/forms';
 import { Meta, StoryObj, moduleMetadata } from '@storybook/angular';
 import { cleanupTemplate, generateInputs } from 'stories/helpers/stories';
+import { StoryModelDisplayComponent } from 'stories/helpers/story-model-display.component';
 
 export default {
 	title: 'Documentation/Forms/Fields/RadioField/Angular',
 	decorators: [
 		moduleMetadata({
-			imports: [RadioGroupInputComponent, RadioComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule],
+			imports: [RadioGroupInputComponent, RadioComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule, StoryModelDisplayComponent],
 		}),
 	],
 	argTypes: {
@@ -61,7 +62,7 @@ export const Basic: StoryObj<RadioGroupInputComponent & FormFieldComponent & { r
 	</lu-radio-group-input>
 </lu-form-field>
 <ng-template #template><strong>Option</strong> text</ng-template>
-{{example}}`),
+<pr-story-model-display>{{ example }}</pr-story-model-display>`),
 		};
 	},
 	args: {

@@ -71,7 +71,7 @@
 								(toggleOne)="toggleOption($event)"
 								(selectMany)="toggleOptions($event, [])"
 								(unselectMany)="toggleOptions([], $event)"
-							></lu-tree-branch>
+							/>
 						}
 					} @else {
 						@for (option of options; track trackOptionsBy(index, option); let index = $index) {

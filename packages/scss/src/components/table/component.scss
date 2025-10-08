@@ -34,7 +34,7 @@
 			border-block-end-style: solid;
 			display: table-cell;
 			text-align: start;
-			font-weight: 600;
+			font-weight: var(--pr-t-font-fontWeight-semibold);
 		}
 
 		.table-body {

@@ -1,7 +1,7 @@
 @mixin component {
 	display: inline-flex;
 	font: var(--pr-t-font-body-XS);
-	font-weight: 600;
+	font-weight: var(--pr-t-font-fontWeight-semibold);
 	background-color: var(--components-newBadge-backgroundColor);
 	color: var(--components-newBadge-color);
 	padding-block: 0;

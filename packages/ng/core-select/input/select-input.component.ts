@@ -14,6 +14,7 @@ import {
 	model,
 	OnDestroy,
 	OnInit,
+	output,
 	Output,
 	signal,
 	TemplateRef,
@@ -52,6 +53,9 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 
 	public selectParent$?: Subject<void>;
 	public selectChildren$?: Subject<void>;
+
+	public panelClosed = output<void>();
+	public panelOpened = output<void>();
 
 	@ViewChild('inputElement')
 	private inputElementRef: ElementRef<HTMLInputElement>;
@@ -350,6 +354,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 			}
 
 			this.isPanelOpen$.next(true);
+			this.panelOpened.emit();
 
 			if (this.searchable) {
 				this.clueChanged(clue);
@@ -401,6 +406,7 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 		if (!this.isPanelOpen) {
 			return;
 		}
+		this.panelClosed.emit();
 		this.emptyClue();
 		this.activeDescendant$.next('');
 		this.changeDetectorRef.markForCheck();

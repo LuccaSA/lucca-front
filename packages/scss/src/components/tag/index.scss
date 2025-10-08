@@ -4,6 +4,10 @@
 	@include vars;
 	@include component;
 
+	&.mod-S {
+		@include S;
+	}
+
 	&.mod-L {
 		@include L;
 	}
@@ -20,5 +24,13 @@
 
 	&.mod-disabled {
 		@include disabled;
+	}
+
+	&:has(.tag-content:focus-visible) {
+		@include focusVisible;
+	}
+
+	&.mod-AI {
+		@include AI;
 	}
 }

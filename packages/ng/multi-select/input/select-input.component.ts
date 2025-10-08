@@ -35,7 +35,7 @@ import { LuMultiSelectPanelRef } from './panel.model';
 	standalone: true,
 	imports: [CommonModule, LuTooltipModule, ɵLuOptionOutletDirective, FilterPillDisplayerDirective, FilterPillLabelDirective],
 	templateUrl: './select-input.component.html',
-	styleUrls: ['./select-input.component.scss'],
+	styleUrl: './select-input.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	providers: [
 		{

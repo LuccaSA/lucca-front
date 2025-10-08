@@ -4,7 +4,7 @@
 $defaultAtRoot: config.$isNamespaced and 'with: rule' or 'without: rule';
 
 @mixin component($atRoot: $defaultAtRoot) {
-	font-weight: 400;
+	font-weight: var(--pr-t-font-fontWeight-regular);
 	font-size: var(--icon-size, var(--icon-sizeDefault));
 	direction: ltr;
 	display: inline-block;

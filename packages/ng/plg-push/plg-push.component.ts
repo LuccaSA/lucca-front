@@ -6,7 +6,7 @@ import { IconComponent } from '@lucca-front/ng/icon';
 	standalone: true,
 	imports: [IconComponent],
 	templateUrl: './plg-push.component.html',
-	styleUrls: ['./plg-push.component.scss'],
+	styleUrl: './plg-push.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	encapsulation: ViewEncapsulation.None,
 })

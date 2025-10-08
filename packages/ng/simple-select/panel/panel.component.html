@@ -41,7 +41,7 @@
 								[optionIndex]="index"
 								(toggleOne)="panelRef.emitValue($event)"
 								simpleMode
-							></lu-tree-branch>
+							/>
 						}
 					} @else {
 						@for (option of options; track trackOptionsBy(index, option); let index = $index) {

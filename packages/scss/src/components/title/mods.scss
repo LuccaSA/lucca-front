@@ -33,3 +33,9 @@
 	--components-title-font: 600 var(--pr-t-font-fontSize-150)/var(--pr-t-font-lineHeight-200) var(--pr-t-font-family);
 	--sizes-verticalPadding: var(--sizes-XS-verticalPadding);
 }
+
+@mixin elementAfterText {
+	display: flex;
+	flex-wrap: wrap;
+	column-gap: var(--pr-t-spacings-100);
+}

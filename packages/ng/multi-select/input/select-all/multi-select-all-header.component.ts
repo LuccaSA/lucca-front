@@ -1,19 +1,19 @@
 import { Component, computed, effect, ElementRef, inject } from '@angular/core';
+import { outputToObservable, takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { getIntl } from '@lucca-front/ng/core';
+import { ɵCoreSelectPanelElement } from '@lucca-front/ng/core-select';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { CheckboxInputComponent } from '@lucca-front/ng/forms';
 import { LU_MULTI_SELECT_TRANSLATIONS } from '../../select.translate';
 import { MULTI_SELECT_WITH_SELECT_ALL_CONTEXT } from './select-all.models';
-import { ɵCoreSelectPanelElement } from '@lucca-front/ng/core-select';
-import { outputToObservable, takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
 	selector: 'lu-multi-select-all-header',
 	standalone: true,
 	imports: [FormsModule, CheckboxInputComponent, FormFieldComponent],
 	hostDirectives: [ɵCoreSelectPanelElement],
-	styleUrls: ['./multi-select-all-header.component.scss'],
+	styleUrl: './multi-select-all-header.component.scss',
 	template: `
 		<div class="multiSelectAllDisplayer">
 			<lu-form-field [label]="intl.selectAll">

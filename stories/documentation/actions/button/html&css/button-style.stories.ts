@@ -1,10 +1,16 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { IconComponent } from '@lucca-front/ng/icon';
+import { Meta, moduleMetadata, StoryFn } from '@storybook/angular';
 
 interface ButtonStyleStory {}
 
 export default {
 	title: 'Documentation/Actions/Button/HTML&CSS/Style',
 	argTypes: {},
+	decorators: [
+		moduleMetadata({
+			imports: [IconComponent],
+		}),
+	],
 } as Meta;
 
 function getTemplate(args: ButtonStyleStory): string {
@@ -12,6 +18,7 @@ function getTemplate(args: ButtonStyleStory): string {
 	<button type="button" class="button">Button</button>
 	<button type="button" class="button mod-outlined">Button</button>
 	<button type="button" class="button mod-ghost">Button</button>
+	<button type="button" class="button mod-AI">Button</button>
 </div>`;
 }
 

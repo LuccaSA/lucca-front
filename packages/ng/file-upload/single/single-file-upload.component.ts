@@ -11,7 +11,7 @@ import { FileEntry } from '../file-upload-entry';
 	selector: 'lu-single-file-upload',
 	standalone: true,
 	templateUrl: './single-file-upload.component.html',
-	styleUrls: ['./single-file-upload.component.scss'],
+	styleUrl: './single-file-upload.component.scss',
 	encapsulation: ViewEncapsulation.None,
 	host: {
 		'[class.mod-structure]': 'structure()',

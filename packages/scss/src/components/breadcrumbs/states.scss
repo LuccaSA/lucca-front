@@ -1,5 +1,5 @@
 @mixin active {
-	font-weight: 600;
+	font-weight: var(--pr-t-font-fontWeight-semibold);
 	text-decoration: none;
 	cursor: default;
 

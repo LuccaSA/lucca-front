@@ -3,7 +3,7 @@
 	margin: 0;
 
 	.verticalNavigation-list-item-link {
-		font-weight: 400;
+		font-weight: var(--pr-t-font-fontWeight-regular);
 		padding-inline-start: calc(2rem + var(--components-verticalNavigation-horizontalPadding));
 	}
 }

@@ -27,7 +27,7 @@ function getTemplate(args: CardsBasicStory): string {
 	const disabled = args.disabled ? ` is-disabled` : '';
 	return `<div class="card mod-action${neutral}${disabled}">
 	<div class="card-content">
-		<h2 class="card-title">Titre de la carte</h2>
+		<h3 class="card-title">Titre de la carte</h3>
 		<p>Contenu de la carte</p>
 	</div>
 </div>`;

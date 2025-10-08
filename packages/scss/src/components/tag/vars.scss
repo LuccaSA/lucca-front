@@ -3,8 +3,10 @@
 	--components-tag-color: var(--palettes-800, var(--palettes-neutral-800));
 	--components-tag-shadow: transparent;
 	--components-tag-font: var(--pr-t-font-body-S);
+	--components-tag-gap: var(--pr-t-spacings-50);
 	--components-tag-decoration: none;
 	--components-tag-cursor: inherit;
+	--components-tag-boxShadow: 0 0 0 1px var(--components-tag-shadow);
 
 	// Deprecated
 	--components-tag-fontSize: var(--pr-t-font-body-S-fontSize);

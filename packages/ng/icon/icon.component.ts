@@ -1,5 +1,5 @@
 import { NgClass } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, input, Input, ViewEncapsulation } from '@angular/core';
 import { LuccaIcon } from '@lucca-front/icons';
 
 @Component({
@@ -7,7 +7,7 @@ import { LuccaIcon } from '@lucca-front/icons';
 	standalone: true,
 	imports: [NgClass],
 	templateUrl: './icon.component.html',
-	styleUrls: ['./icon.component.scss'],
+	styleUrl: './icon.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	encapsulation: ViewEncapsulation.None,
 })
@@ -23,6 +23,8 @@ export class IconComponent {
 
 	@Input()
 	color: 'primary' | 'secondary' | 'product' | 'error' | 'warning' | 'success' | 'light' | 'placeholder' | 'inherit' = 'inherit';
+
+	AI = input(false, { transform: booleanAttribute });
 
 	get iconClasses() {
 		return {

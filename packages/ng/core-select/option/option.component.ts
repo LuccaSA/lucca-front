@@ -18,23 +18,23 @@ import {
 	ViewChild,
 } from '@angular/core';
 import { getIntl, PortalDirective } from '@lucca-front/ng/core';
+import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
 import { asyncScheduler, observeOn, Subscription } from 'rxjs';
 import { GroupTemplateLocation } from '../panel/panel.utils';
+import { CoreSelectPanelElement } from '../panel/selectable-item';
 import { LuOptionContext, SELECT_ID } from '../select.model';
 import { LuOptionGrouping } from './group.directive';
 import { LuOptionGroupPipe } from './group.pipe';
 import { LuOptionOutletDirective } from './option-outlet.directive';
 import { ILuOptionContext, LU_OPTION_CONTEXT } from './option.token';
-import { CoreSelectPanelElement } from '../panel/selectable-item';
 import { LU_OPTION_TRANSLATIONS } from './option.translate';
-import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
 
 export const MAGIC_OPTION_SCROLL_DELAY = 15;
 
 @Component({
 	selector: 'lu-select-option',
 	templateUrl: './option.component.html',
-	styleUrls: ['./option.component.scss'],
+	styleUrl: './option.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	standalone: true,
 	imports: [LuOptionOutletDirective, PortalDirective, LuOptionGroupPipe, LuTooltipTriggerDirective],

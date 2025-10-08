@@ -37,7 +37,7 @@
 			text-decoration: none;
 			background-color: var(--components-verticalNavigation-link-background);
 			transition: background-color var(--commons-animations-durations-fast) ease;
-			font-weight: 600;
+			font-weight: var(--pr-t-font-fontWeight-semibold);
 
 			&:hover {
 				--components-verticalNavigation-link-background: var(--palettes-neutral-50);

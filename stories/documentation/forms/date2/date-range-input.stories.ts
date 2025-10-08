@@ -63,10 +63,10 @@ export default {
 				focusedDate: args['focusedDate'] ? focusedDateValue : null,
 			},
 			template: cleanupTemplate(`<lu-form-field label="Date range input example" inlineMessage="Inline message example">
-				<lu-date-range-input [(ngModel)]="selected" [min]="min" [max]="max" [focusedDate]="focusedDate" ${generateInputs(flags, argTypes)}></lu-date-range-input>
+				<lu-date-range-input [(ngModel)]="selected" [min]="min" [max]="max" [focusedDate]="focusedDate" ${generateInputs(flags, argTypes)} />
 			</lu-form-field>
 
-			<pr-story-model-display>{{selected | json}}</pr-story-model-display>`),
+			<pr-story-model-display>{{ selected | json }}</pr-story-model-display>`),
 		};
 	},
 } as Meta;
@@ -114,10 +114,10 @@ export const WithShortcuts: StoryObj<DateRangeInputComponent & { selected: DateR
 
 			template: cleanupTemplate(`
 			<lu-form-field label="Date range input example" inlineMessage="Inline message example">
-				<lu-date-range-input [(ngModel)]="selected" [min]="min" [max]="max" [shortcuts]="shortcuts" ${generateInputs(flags, argTypes)}></lu-date-range-input>
+				<lu-date-range-input [(ngModel)]="selected" [min]="min" [max]="max" [shortcuts]="shortcuts" ${generateInputs(flags, argTypes)} />
 			</lu-form-field>
 
-			<pr-story-model-display>{{selected | json}}</pr-story-model-display>`),
+			<pr-story-model-display>{{ selected | json }}</pr-story-model-display>`),
 		};
 	},
 	args: {

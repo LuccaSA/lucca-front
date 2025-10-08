@@ -11,7 +11,6 @@ import { ALuDepartmentService, LuDepartmentV4Service } from '../../service/index
 @Component({
 	selector: 'lu-department-feeder',
 	template: '',
-	styleUrls: [],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	standalone: true,
 	providers: [

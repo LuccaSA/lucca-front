@@ -30,6 +30,10 @@
 		@include XL;
 	}
 
+	&.mod-XXL {
+		@include XXL;
+	}
+
 	&.mod-neutralBackground {
 		@include neutralBackground;
 	}

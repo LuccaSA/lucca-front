@@ -3,7 +3,7 @@
 		><h1>{{ title$ | async }}</h1></lu-dialog-header
 	>
 	<lu-dialog-content>
-		<ng-container #contentProjectionRef></ng-container>
+		<ng-container #contentProjectionRef />
 	</lu-dialog-content>
 	<lu-dialog-footer>
 		<div class="footer-actions">
@@ -17,12 +17,7 @@
 				(click)="submit()"
 			>
 				{{ submitLabel$ | async }}
-				<lu-numeric-badge
-					disableTooltip
-					palette="product"
-					*ngIf="hasSubmitCounter$ | async"
-					[value]="submitCounter$ | async"
-				></lu-numeric-badge>
+				<lu-numeric-badge disableTooltip palette="product" *ngIf="hasSubmitCounter$ | async" [value]="submitCounter$ | async" />
 			</button>
 			<button luButton type="button" class="button mod-ghost" (click)="dismiss()">{{ cancelLabel$ | async }}</button>
 		</div>

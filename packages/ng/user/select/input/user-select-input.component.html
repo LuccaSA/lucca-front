@@ -1,11 +1,11 @@
 <div class="lu-select-placeholder">{{ placeholder }}</div>
 <div class="lu-select-value">
 	<div class="lu-select-display-wrapper">
-		<ng-container #display></ng-container>
+		<ng-container #display />
 	</div>
 </div>
 <div class="lu-select-suffix">
-	<lu-input-clearer></lu-input-clearer>
+	<lu-input-clearer />
 </div>
 <ng-template luDisplayer [luDisplayerMultiple]="true" let-values>
 	<span *ngIf="multiple && values?.length > 1; else singleView"
@@ -23,9 +23,9 @@
 			[operations]="operations"
 			[enableFormerEmployees]="enableFormerEmployees"
 			(clueChange)="clue = $event"
-		></lu-user-paged-searcher>
+		/>
 	</header>
-	<lu-user-homonyms></lu-user-homonyms>
+	<lu-user-homonyms />
 	<ng-container *ngIf="!disablePrincipal">
 		<lu-option
 			*luUserMeOption="

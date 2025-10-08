@@ -1,25 +1,24 @@
+import { AsyncPipe, DatePipe, NgTemplateOutlet } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { toObservable } from '@angular/core/rxjs-interop';
-import { BehaviorSubject, catchError, combineLatest, Observable, of, switchMap, tap } from 'rxjs';
-import { LuUserPopover } from '../../user-popover.model';
-import { LuUserPopoverStore } from '../../service/user-popover.store';
-import { map } from 'rxjs/operators';
 import { getIntl, IntlParamsPipe } from '@lucca-front/ng/core';
-import { LU_POPUP_EMPLOYEE_TRANSLATIONS } from '../../popup-employee.translate';
-import { AsyncPipe, DatePipe, NgTemplateOutlet } from '@angular/common';
-import { IsFutureOrTodayPipe, IsFuturePipe } from '../pipe/is-future.pipe';
-import { LeaveEndsDisplayPipe } from '../pipe/leave-ends-display.pipe';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { POPOVER_CONFIG } from '@lucca-front/ng/popover2';
+import { BehaviorSubject, catchError, combineLatest, Observable, of, switchMap, tap } from 'rxjs';
+import { map, shareReplay } from 'rxjs/operators';
+import { LU_POPUP_EMPLOYEE_TRANSLATIONS } from '../../popup-employee.translate';
+import { LuUserPopoverStore } from '../../service/user-popover.store';
+import { LuUserPopover } from '../../user-popover.model';
 import { LU_USER_POPOVER_USER } from '../../user-popover.providers';
-import { LoadingComponent } from '@lucca-front/ng/loading';
+import { IsFutureOrTodayPipe, IsFuturePipe } from '../pipe/is-future.pipe';
+import { LeaveEndsDisplayPipe } from '../pipe/leave-ends-display.pipe';
 
 @Component({
 	selector: 'lu-user-popover-content',
 	templateUrl: './user-popover.component.html',
 	styleUrl: './user-popover.component.scss',
 	standalone: true,
-	imports: [AsyncPipe, NgTemplateOutlet, DatePipe, IntlParamsPipe, IsFuturePipe, IsFutureOrTodayPipe, LeaveEndsDisplayPipe, IconComponent, LoadingComponent],
+	imports: [AsyncPipe, NgTemplateOutlet, DatePipe, IntlParamsPipe, IsFuturePipe, IsFutureOrTodayPipe, LeaveEndsDisplayPipe, IconComponent],
 })
 export class LuUserPopoverComponent {
 	luUser = inject(LU_USER_POPOVER_USER);
@@ -31,6 +30,8 @@ export class LuUserPopoverComponent {
 	intl = getIntl(LU_POPUP_EMPLOYEE_TRANSLATIONS);
 
 	#errorImage$ = new BehaviorSubject<boolean>(false);
+
+	skeletonWidths = [this.getRandomPercent(), this.getRandomPercent(), this.getRandomPercent(), this.getRandomPercent()];
 
 	public employee$: Observable<LuUserPopover> = toObservable(this.luUser).pipe(
 		switchMap((user) =>
@@ -46,6 +47,7 @@ export class LuUserPopoverComponent {
 			),
 		),
 		tap(() => this.#popoverRef.updatePosition()),
+		shareReplay(1),
 	);
 
 	public userPictureDisplay$ = combineLatest([this.employee$, this.#errorImage$]).pipe(
@@ -73,5 +75,9 @@ export class LuUserPopoverComponent {
 
 	pictureError() {
 		this.#errorImage$.next(true);
+	}
+
+	getRandomPercent(min: number = 33, max: number = 66): string {
+		return `${Math.floor(Math.random() * (max - min) + min).toString()}%`;
 	}
 }

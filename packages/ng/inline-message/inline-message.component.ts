@@ -10,7 +10,7 @@ import { InlineMessageState } from './inline-message-state';
 	imports: [NgIf, PortalDirective, LuTooltipModule],
 	providers: [LuClass],
 	templateUrl: './inline-message.component.html',
-	styleUrls: ['./inline-message.component.scss'],
+	styleUrl: './inline-message.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	encapsulation: ViewEncapsulation.None,
 	host: {

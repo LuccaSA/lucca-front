@@ -27,16 +27,16 @@ import { Meta, StoryObj, applicationConfig } from '@storybook/angular';
 
 			<lu-dialog-content>
 				<lu-form-field label="Test">
-					<lu-simple-select ngModel [options]="legumes"></lu-simple-select>
+					<lu-simple-select ngModel [options]="legumes" />
 				</lu-form-field>
 				<lu-form-field label="Test">
-					<lu-simple-select ngModel [options]="legumes"></lu-simple-select>
+					<lu-simple-select ngModel [options]="legumes" />
 				</lu-form-field>
 				<lu-form-field label="Test">
-					<lu-simple-select ngModel [options]="legumes"></lu-simple-select>
+					<lu-simple-select ngModel [options]="legumes" />
 				</lu-form-field>
 				<lu-form-field label="Test">
-					<lu-simple-select ngModel [options]="legumes"></lu-simple-select>
+					<lu-simple-select ngModel [options]="legumes" />
 				</lu-form-field>
 			</lu-dialog-content>
 

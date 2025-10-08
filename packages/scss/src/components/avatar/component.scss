@@ -5,14 +5,14 @@
 @mixin component($atRoot: namespace.$defaultAtRoot) {
 	display: inline-block;
 	vertical-align: middle;
-	border-radius: var(--pr-t-border-radius-full);
+	border-radius: var(--components-avatar-borderRadius);
 	inline-size: var(--components-avatar-size);
 	aspect-ratio: 1;
 
 	@at-root ($atRoot) {
 		.avatar-picture {
-			background-color: var(--palettes-neutral-200);
-			border-radius: var(--pr-t-border-radius-full);
+			background-color: var(--components-avatar-picture-background);
+			border-radius: var(--components-avatar-borderRadius);
 			background-position: center;
 			background-size: cover;
 			background-repeat: no-repeat;
@@ -31,6 +31,7 @@
 			font-family: var(--pr-t-font-family-brand);
 			line-height: 1;
 			color: var(--pr-t-color-text-reverse);
+			display: var(--components-avatar-picture-initials-display);
 		}
 
 		.avatarWrapper {

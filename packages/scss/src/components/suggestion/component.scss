@@ -1,0 +1,19 @@
+@use '@lucca-front/scss/src/commons/utils/namespace';
+
+@mixin component($atRoot: namespace.$defaultAtRoot) {
+	display: flex;
+	flex-direction: column;
+	gap: var(--pr-t-spacings-50);
+
+	@at-root ($atRoot) {
+		.suggestion-form-field {
+			z-index: 1;
+			position: relative;
+		}
+
+		.suggestion-callout-text {
+			text-decoration: var(--components-suggestion-textDecoration);
+			color: var(--components-suggestion-color);
+		}
+	}
+}

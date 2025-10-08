@@ -179,7 +179,7 @@
 			}
 
 			&::before {
-				font-weight: 400;
+				font-weight: var(--pr-t-font-fontWeight-regular);
 				font-size: 1rem;
 				direction: ltr;
 

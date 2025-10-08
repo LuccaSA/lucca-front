@@ -25,3 +25,9 @@
 @mixin XXL {
 	--icon-size: 2.5rem;
 }
+
+@mixin AI {
+	background-image: linear-gradient(135deg, var(--palettes-AI-600), var(--palettes-brand-500));
+	background-clip: text;
+	-webkit-text-fill-color: transparent;
+}
