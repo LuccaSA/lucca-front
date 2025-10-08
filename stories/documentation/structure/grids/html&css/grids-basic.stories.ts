@@ -5,7 +5,7 @@ interface GridsBasicStory {
 }
 
 export default {
-	title: 'Documentation/Structure/Grids/Basic',
+	title: 'Documentation/Structure/Grids/HTML & CSS/Basic',
 	argTypes: {},
 } as Meta;
 

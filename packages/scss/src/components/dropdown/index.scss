@@ -9,16 +9,17 @@
 	}
 }
 
+// .lu-dropdown-options-item-action is deprecated
 .dropdown-list-option-action,
 .lu-dropdown-options-item-action {
 	@layer mods {
+		&[disabled],
 		&.is-disabled {
 			@include disabled;
 		}
-	}
 
-	@layer mods {
-		&.mod-critical, &.mod-delete {
+		&.mod-critical,
+		&.mod-delete {
 			@include critical;
 		}
 	}

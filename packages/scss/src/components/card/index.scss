@@ -28,9 +28,11 @@
 		&.mod-nested {
 			@include nested;
 		}
-	}
 
-	@layer mods {
+		&.mod-expand {
+			@include expand;
+		}
+
 		&:is(.is-disabled, .disabled) {
 			@include disabled;
 		}
