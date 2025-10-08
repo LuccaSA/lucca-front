@@ -7,7 +7,7 @@ import { LU_CLEARER_TRANSLATIONS } from './clearer.translate';
 @Component({
 	selector: 'lu-input-clearer',
 	templateUrl: './clearer.component.html',
-	styleUrls: ['./clearer.component.scss'],
+	styleUrl: './clearer.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	exportAs: 'luClearer',
 	standalone: true,

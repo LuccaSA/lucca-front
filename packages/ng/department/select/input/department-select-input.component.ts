@@ -25,7 +25,7 @@ import { LU_DEPARTMENT_SELECT_INPUT_TRANSLATIONS } from './department-select-inp
 @Component({
 	selector: 'lu-department-select',
 	templateUrl: './department-select-input.component.html',
-	styleUrls: ['./department-select-input.component.scss'],
+	styleUrl: './department-select-input.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	standalone: true,
 	imports: [

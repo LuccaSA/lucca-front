@@ -39,7 +39,7 @@ import { applicationConfig, Meta, StoryFn } from '@storybook/angular';
 			</div>
 		</div>
 	`,
-	styleUrls: ['./animations.scss'],
+	styleUrl: './animations.scss',
 	animations: [luSlideAnimationFactory()],
 })
 class SlideAnimationStory {
@@ -105,7 +105,7 @@ class AppModule {}
 			</div>
 		</div>
 	\`,
-	styleUrls: ['./animations.scss'],
+	styleUrl: './animations.scss',
 	animations: [luSlideAnimationFactory()],
 })
 class SlideAnimationStory {

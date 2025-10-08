@@ -12,7 +12,7 @@ export class CalloutFeedbackItemDescriptionDirective {}
 	standalone: true,
 	imports: [],
 	templateUrl: './callout-feedback-item.component.html',
-	styleUrls: ['./callout-feedback-item.component.scss'],
+	styleUrl: './callout-feedback-item.component.scss',
 	host: {
 		class: 'calloutFeedbackList-item',
 	},

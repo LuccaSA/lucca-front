@@ -12,7 +12,7 @@ import { getCalloutPalette } from '../callout.utils';
 	standalone: true,
 	imports: [PortalDirective, CalloutIconPipe, IconComponent],
 	templateUrl: './callout.component.html',
-	styleUrls: ['./callout.component.scss'],
+	styleUrl: './callout.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	encapsulation: ViewEncapsulation.None,
 })
