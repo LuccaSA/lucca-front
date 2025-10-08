@@ -1,4 +1,4 @@
-import { Component, inject, input, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, Component, inject, input, ViewEncapsulation } from '@angular/core';
 import { LU_DATA_TABLE_BODY_INSTANCE } from '../dataTableBody/dataTableBody.token';
 import { LU_DATA_TABLE_FOOT_INSTANCE } from '../dataTableFoot/dataTableFoot.token';
 import { LU_DATA_TABLE_HEAD_INSTANCE } from '../dataTableHead/dataTableHead.token';
@@ -16,6 +16,7 @@ import { LU_DATA_TABLE_HEAD_INSTANCE } from '../dataTableHead/dataTableHead.toke
 		'[class.mod-alignStart]': 'align() === "start"',
 		'[class.mod-alignCenter]': 'align() === "center"',
 		'[class.mod-alignEnd]': 'align() === "end"',
+		'[class.mod-editable]': 'editable()',
 	},
 })
 export class DataTableRowCellComponent {
@@ -24,4 +25,5 @@ export class DataTableRowCellComponent {
 	footRef = inject(LU_DATA_TABLE_FOOT_INSTANCE, { optional: true });
 
 	align = input<null | 'start' | 'center' | 'end'>(null);
+	editable = input(false, { transform: booleanAttribute });
 }

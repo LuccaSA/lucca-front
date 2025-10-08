@@ -1,13 +1,3 @@
-<table
-	class="dataTable"
-	[class.mod-stickyHeader]="stickyHeader()"
-	[class.mod-hover]="hover()"
-	[class.mod-layoutFixed]="layoutFixed()"
-	[class.mod-cellBorder]="cellBorder()"
-	[class.mod-valignTop]="valign() === 'top'"
-	[class.mod-valignMiddle]="valign() === 'middle'"
-	[class.mod-valignBottom]="valign() === 'bottom'"
-	#tableRef
->
+<table [class]="classMods()" #tableRef>
 	<ng-content />
 </table>

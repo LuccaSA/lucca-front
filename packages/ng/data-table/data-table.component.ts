@@ -1,5 +1,6 @@
+import { CommonModule } from '@angular/common';
 import { booleanAttribute, Component, computed, contentChild, contentChildren, ElementRef, forwardRef, inject, input, viewChild, ViewEncapsulation } from '@angular/core';
-import { ɵeffectWithDeps } from '@lucca-front/ng/core';
+import { ResponsiveConfig, ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { LU_DATA_TABLE_INSTANCE } from './data-table.token';
 import { DataTableHeadComponent } from './dataTableHead/dataTableHead.component';
 import { DataTableRowComponent } from './dataTableRow/dataTableRow.component';
@@ -20,6 +21,7 @@ import { DataTableRowComponent } from './dataTableRow/dataTableRow.component';
 			useExisting: forwardRef(() => DataTableComponent),
 		},
 	],
+	imports: [CommonModule],
 })
 export class DataTableComponent {
 	#elementRef = inject<ElementRef<Element>>(ElementRef);
@@ -30,6 +32,8 @@ export class DataTableComponent {
 	layoutFixed = input(false, { transform: booleanAttribute });
 	cellBorder = input(false, { transform: booleanAttribute });
 
+	responsive = input<ResponsiveConfig<'layoutFixed', true>>({});
+
 	valign = input<null | 'top' | 'middle' | 'bottom'>(null);
 
 	rows = contentChildren(DataTableRowComponent, { descendants: true });
@@ -38,6 +42,25 @@ export class DataTableComponent {
 	stickyHeader = computed(() => this.header().sticky());
 
 	cols = computed(() => this.header().cols());
+
+	classMods = computed(() => {
+		return {
+			dataTable: true,
+			['mod-stickyHeader']: this.stickyHeader(),
+			['mod-hover']: this.hover(),
+			['mod-cellBorder']: this.cellBorder(),
+			['mod-valignTop']: this.valign() === 'top',
+			['mod-valignMiddle']: this.valign() === 'middle',
+			['mod-valignBottom']: this.valign() === 'bottom',
+			['mod-layoutFixed']: this.layoutFixed(),
+			...Object.entries(this.responsive()).reduce((acc, [key, value]) => {
+				return {
+					...acc,
+					[`mod-${key}`]: value,
+				};
+			}, {}),
+		};
+	});
 
 	scroll() {
 		this.header().isFirstVisible.set(this.#elementRef.nativeElement.scrollTop === 0);

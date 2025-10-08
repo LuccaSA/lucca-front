@@ -54,6 +54,7 @@ export default {
 
 	render: (args, { argTypes }) => {
 		const {
+			editable,
 			valign,
 			align,
 			stickyHeader,
@@ -88,19 +89,21 @@ export default {
 		const alignAttr = align ? ` align="${align}"` : ``;
 		const valignAttr = valign ? ` valign="${valign}"` : ``;
 		const valignContent = valign ? `<br />test` : ``;
+		const editableAttr = editable ? ` editable` : ``;
+		const editableContent = editable ? `field` : `test`;
 		const tfootTpl = tfoot
 			? `<tfoot luDataTableFoot>
 		<tr luDataTableRow>
 			<th luDataTableCell>test</th>
 			<td luDataTableCell>test</td>
-			<td luDataTableCell>test</td>
+			<td luDataTableCell${alignAttr}>test</td>
 		</tr>
 	</tfoot>`
 			: ``;
 
 		return {
 			styles: stickyHeader ? [`lu-data-table { max-block-size: 7.5rem }`] : [``],
-			template: `<lu-data-table${layoutFixedAttr}${hoverAttr}${cellBorderAttr}${selectableAttr}${valignAttr}>
+			template: `<lu-data-table${layoutFixedAttr}${hoverAttr}${cellBorderAttr}${selectableAttr}${valignAttr} [responsive]="{ layoutFixedAtMediaMinM: true }">
 	<thead luDataTableHead${stickyHeaderAttr}>
 		<tr luDataTableRow>
 			<th luDataTableCell${fixedWithAttr}>test</th>
@@ -116,7 +119,7 @@ export default {
 		</tr>
 		<tr luDataTableRow>
 			<th luDataTableCell>test</th>
-			<td luDataTableCell>test</td>
+			<td luDataTableCell${editableAttr}>${editableContent}</td>
 			<td luDataTableCell${alignAttr}>test</td>
 		</tr>
 		<tr luDataTableRow${selectedAttr}${disabledAttr}>
@@ -148,7 +151,8 @@ export const Basic: StoryObj = {
 		disabled: false,
 		group: false,
 		groupLabel: 'Group',
-		groupButtonAlt: 'Afficher 2 lignes supplémentaires',
+		groupButtonAlt: 'Afficher 3 lignes supplémentaires',
 		expanded: false,
+		editable: false,
 	},
 };

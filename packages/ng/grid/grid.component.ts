@@ -1,6 +1,6 @@
 import { NgTemplateOutlet } from '@angular/common';
 import { booleanAttribute, Component, computed, input, numberAttribute, ViewEncapsulation } from '@angular/core';
-import { ResponsiveOptionKey } from './types';
+import { ResponsiveProperty } from '@lucca-front/ng/core';
 
 @Component({
 	selector: 'lu-grid',
@@ -14,7 +14,7 @@ export class GridComponent {
 	container = input(false, { transform: booleanAttribute });
 	columns = input(null, { transform: numberAttribute });
 
-	mode = input<'form' | 'auto' | `auto${ResponsiveOptionKey}` | null>(null);
+	mode = input<'form' | 'auto' | ResponsiveProperty<'auto'> | null>(null);
 
 	#gapTransform = (gap: Gap | null): string | null => {
 		const spacingRegexp = /.*(\d)$/g;
