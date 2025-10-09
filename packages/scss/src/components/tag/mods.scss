@@ -42,3 +42,18 @@
 	--components-tag-background: var(--palettes-100, var(--palettes-product-100));
 	--components-tag-color: var(--palettes-800, var(--palettes-product-800));
 }
+
+@mixin AI {
+	@include outlined;
+
+	&:not(:disabled) {
+		--components-tag-boxShadow: none;
+		--components-tag-position: relative;
+
+		@include color.borderGradient(135deg, var(--palettes-brand-400), var(--palettes-AI-500), var(--pr-t-border-radius-small));
+
+		.lucca-icon {
+			@include icons.AI;
+		}
+	}
+}
