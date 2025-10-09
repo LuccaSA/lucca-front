@@ -16,9 +16,7 @@
 			background-color: inherit;
 		}
 	}
-}
 
-@layer mods {
 	.optionItem-value:has(.optionItem-icon) {
 		display: flex;
 		justify-content: space-between;

@@ -170,9 +170,7 @@
 					transition: all 100ms;
 					inline-size: var(--components-options-checkbox-size);
 				}
-			}
 
-			@layer mods {
 				&.is-selected, :host-context([aria-selected="true"]) & {
 					&::before {
 						background-color: var(--components-options-checkbox-color);

@@ -22,9 +22,7 @@
 				@include loadingS;
 			}
 		}
-	}
 
-	@layer mods {
 		&:hover {
 			@include hover;
 		}

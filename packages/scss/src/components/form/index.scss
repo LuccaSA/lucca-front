@@ -17,8 +17,8 @@
 	}
 }
 
-.form-fieldset {
-	@layer mods {
+@layer mods {
+	.form-fieldset {
 		&.mod-inline {
 			@include inline;
 		}
@@ -38,18 +38,14 @@
 				}
 			}
 		}
-	}
 
-	@layer mods {
 		&:has(.radioField-input[aria-invalid='true']),
 		&:has(.checkboxField-input[aria-invalid='true']) {
 			@include legendInvalid;
 		}
 	}
-}
 
-.form-field {
-	@layer mods {
+	.form-field {
 		&.mod-S {
 			@include S;
 		}
@@ -70,9 +66,7 @@
 		&:has(.switchField) {
 			@include checkable;
 		}
-	}
 
-	@layer mods {
 		&:not(lu-form-field) {
 			&:has(
 					.textField-input-value[aria-invalid='true'],
@@ -99,9 +93,7 @@
 				@include tag.disabled;
 			}
 		}
-	}
 
-	@layer mods {
 		&.mod-withArrow {
 			@include withArrow;
 
@@ -128,8 +120,8 @@
 	}
 }
 
-.form-group-line-col {
-	@layer mods {
+@layer mods {
+	.form-group-line-col {
 		&[class*='mod-overlay'] {
 			@include overlay;
 		}
@@ -146,38 +138,30 @@
 			}
 		}
 	}
-}
 
-.form-group-label,
-.radiosfield-label,
-.checkboxesfield-label,
-.textfield-label {
-	@layer mods {
+	.form-group-label,
+	.radiosfield-label,
+	.checkboxesfield-label,
+	.textfield-label {
 		&:is(.is-required, .required) {
 			@include required;
 		}
 	}
-}
 
-.checkboxesfield.mod-framed,
-.radiosfield.mod-framed,
-.form.mod-framed .fieldsetWrapper {
-	@layer mods {
+	.checkboxesfield.mod-framed,
+	.radiosfield.mod-framed,
+	.form.mod-framed .fieldsetWrapper {
 		@include framed;
 	}
-}
 
-.checkboxesfield.mod-framed,
-.radiosfield.mod-framed {
-	@layer mods {
+	.checkboxesfield.mod-framed,
+	.radiosfield.mod-framed {
 		margin-block-start: 0;
 		padding-block: var(--components-field-framed-side-padding) var(--components-field-framed-bottom-padding);
 		padding-inline: var(--components-field-framed-side-padding);
 	}
-}
 
-.form-group-label {
-	@layer mods {
+	.form-group-label {
 		&.is-required {
 			&:not(:empty) {
 				&::after {
@@ -186,12 +170,10 @@
 			}
 		}
 	}
-}
 
-.radiosfield-label,
-.checkboxesfield-label,
-.textfield-label {
-	@layer mods {
+	.radiosfield-label,
+	.checkboxesfield-label,
+	.textfield-label {
 		&.is-required {
 			&:not(:empty) {
 				&::after {

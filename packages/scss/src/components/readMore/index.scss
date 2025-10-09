@@ -14,9 +14,7 @@
 		&.is-disabled {
 			@include disabled;
 		}
-	}
 
-	@layer mods {
 		&.mod-openOnly {
 			&:has(.readMore-link[aria-expanded='true']) {
 				@include disabled;

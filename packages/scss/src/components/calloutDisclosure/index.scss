@@ -10,9 +10,7 @@
 		&[open] {
 			@include open;
 		}
-	}
 
-	@layer mods {
 		&.mod-S {
 			@include S;
 		}

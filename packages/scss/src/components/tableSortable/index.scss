@@ -22,9 +22,7 @@
 				@include sortAlignCenter;
 			}
 		}
-	}
 
-	@layer mods {
 		&[aria-sort='ascending'] {
 			.tableSortable{
 				@include sortAscending;

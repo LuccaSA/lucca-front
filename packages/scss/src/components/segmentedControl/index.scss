@@ -24,28 +24,24 @@
 	}
 }
 
-// .viewTabs-item-tab is deprecated
-.segmentedControl-item-action,
-.viewTabs-item-tab {
-	@layer mods {
+@layer mods {
+	// .viewTabs-item-tab is deprecated
+	.segmentedControl-item-action,
+	.viewTabs-item-tab {
 		.segmentedControl-item-input:checked + &,
 		&[aria-selected='true'] {
 			@include selected;
 		}
 	}
-}
 
-.segmentedControl-item-action:disabled,
-.segmentedControl-item-input:disabled ~ .segmentedControl-item-action {
-	@layer mods {
+	.segmentedControl-item-action:disabled,
+	.segmentedControl-item-input:disabled ~ .segmentedControl-item-action {
 		@include disabled;
 	}
-}
 
-// .viewTabs_panel is deprecated
-.segmentedControl_panel,
-.viewTabs_panel {
-	@layer mods {
+	// .viewTabs_panel is deprecated
+	.segmentedControl_panel,
+	.viewTabs_panel {
 		&:not(.is-active, .active) {
 			@include panelInactive;
 		}

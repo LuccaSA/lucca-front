@@ -22,9 +22,7 @@
 		&.is-disabled {
 			@include disabled;
 		}
-	}
 
-	@layer mods {
 		&.mod-autoResize {
 			@include autoResize;
 		}

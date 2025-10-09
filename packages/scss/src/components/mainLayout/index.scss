@@ -24,8 +24,8 @@
 	}
 }
 
-.mainLayout-content-inside {
-	@layer mods {
+@layer mods {
+	.mainLayout-content-inside {
 		&:has(.mainLayout-content-inside-block.mod-overflow) {
 			.mainLayout-content-inside-header {
 				@include stickyHeader;

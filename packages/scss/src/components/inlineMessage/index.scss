@@ -10,9 +10,7 @@
 		&.mod-S {
 			@include S;
 		}
-	}
 
-	@layer mods {
 		&.is-success {
 			@include success;
 		}

@@ -14,11 +14,9 @@
 		&.mod-decorationHover {
 			@include decorationHover;
 		}
-	}
 
-	@layer mods {
 		&:is(:disabled, .is-disabled) {
-		@include disabled;
-	}
+			@include disabled;
+		}
 	}
 }

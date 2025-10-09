@@ -106,9 +106,9 @@
 	// MODS
 	// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
-	// Small
-	:host-context(.textfield.mod-S) {
-		@layer mods {
+	@layer mods {
+		// Small
+		:host-context(.textfield.mod-S) {
 			padding: 0;
 
 			.lu-select-value,
@@ -146,12 +146,10 @@
 				}
 			}
 		}
-	}
 
-	// Framed
-	:host-context(.textfield.mod-framed),
-	:host-context(.form.mod-framed) {
-		@layer mods {
+		// Framed
+		:host-context(.textfield.mod-framed),
+		:host-context(.form.mod-framed) {
 			&.textfield-input {
 				padding-block: var(--components-select-framed-top-padding) 0;
 				padding-inline: 0;
@@ -179,11 +177,9 @@
 				}
 			}
 		}
-	}
 
-	// Filter
-	:host-context(.textfield.mod-filter) {
-		@layer mods {
+		// Filter
+		:host-context(.textfield.mod-filter) {
 			.lu-select-value,
 			.lu-select-placeholder {
 				padding: 0;
@@ -192,11 +188,9 @@
 				color: var(--pr-t-color-text);
 			}
 		}
-	}
 
-	// Material
-	:host-context(.textfield.mod-material) {
-		@layer mods {
+		// Material
+		:host-context(.textfield.mod-material) {
 			&::after {
 				color: var(--palettes-neutral-500);
 				inset-block-end: 0.6rem;
@@ -228,19 +222,15 @@
 				}
 			}
 		}
-	}
 
-	:host-context(.textfield.mod-material .textfield-input.is-focused) {
-		@layer mods {
+		:host-context(.textfield.mod-material .textfield-input.is-focused) {
 			.lu-select-placeholder {
 				display: none;
 			}
 		}
-	}
 
-	// Multiple
-	:host(.mod-multiple) {
-		@layer mods {
+		// Multiple
+		:host(.mod-multiple) {
 			.lu-select-value {
 				block-size: auto;
 				align-items: center;
@@ -252,11 +242,9 @@
 				margin-block-end: calc(var(--pr-t-spacings-50) * -1);
 			}
 		}
-	}
 
-	// Outlined
-	:host-context(.textfield.mod-outlined) {
-		@layer mods {
+		// Outlined
+		:host-context(.textfield.mod-outlined) {
 			&.textfield-input {
 				&::after {
 					color: var(--palettes-neutral-600);
@@ -278,14 +266,9 @@
 				}
 			}
 		}
-	}
 
-	// STATES
-	// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
-
-	// Filled
-	:host-context(.textfield-input.is-filled) {
-		@layer mods {
+		// Filled
+		:host-context(.textfield-input.is-filled) {
 			.lu-select-placeholder {
 				display: none;
 			}
@@ -295,38 +278,30 @@
 				align-items: flex-start;
 			}
 		}
-	}
 
-	// Focused
-	:host-context(.textfield .textfield-input.is-focused) {
-		@layer mods {
+		// Focused
+		:host-context(.textfield .textfield-input.is-focused) {
 			&::after {
 				transform: rotate(-180deg);
 			}
 		}
-	}
 
-	// Clearable
-	:host-context(.textfield-input.is-clearable) {
-		@layer mods {
+		// Clearable
+		:host-context(.textfield-input.is-clearable) {
 			.lu-select-value {
 				padding-inline-end: 3.5rem;
 			}
 		}
-	}
 
-	// Error
-	:host-context(.textfield-input.is-error, .textfield-input.is-invalid, .textfield-input.ng-invalid.ng-touched) {
-		@layer mods {
+		// Error
+		:host-context(.textfield-input.is-error, .textfield-input.is-invalid, .textfield-input.ng-invalid.ng-touched) {
 			.lu-select-placeholder {
 				color: var(--palettes-error-400);
 			}
 		}
-	}
 
-	// Disabled
-	:host-context(.textfield-input.is-disabled, .textfield-input[disabled]) {
-		@layer mods {
+		// Disabled
+		:host-context(.textfield-input.is-disabled, .textfield-input[disabled]) {
 			&::after {
 				color: var(--commons-disabled-color);
 			}

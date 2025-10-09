@@ -33,9 +33,7 @@
 		&.mod-readonly {
 			text-decoration: none;
 		}
-	}
 
-	@layer mods {
 		&.button {
 			text-decoration: underline;
 			margin: 0;

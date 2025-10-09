@@ -24,9 +24,7 @@
 		&.mod-clickable {
 			@include clickable;
 		}
-	}
 
-	@layer mods {
 		&.is-disabled {
 			@include disabled;
 		}

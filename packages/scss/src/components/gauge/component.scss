@@ -37,7 +37,7 @@
 			stroke-width: var(--components-gauge-circle-strokeWidth);
 			stroke-linecap: round;
 			stroke-dashoffset: 0;
-			transform: rotate(-1/4 * 1turn);
+			transform: rotate(-0.25turn);
 			transform-origin: 50% 50%;
 			stroke-dasharray: calc(var(--components-gauge-circleP) / 100 * var(--components-gauge-value)), 9999;
 			stroke: currentColor;

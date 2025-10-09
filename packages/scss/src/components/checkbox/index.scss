@@ -18,9 +18,7 @@
 		&.mod-noLabel {
 			@include noLabel;
 		}
-	}
 
-	@layer mods {
 		&:is(.is-required, .required) {
 			@include required;
 		}

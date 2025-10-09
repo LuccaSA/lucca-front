@@ -38,15 +38,11 @@
 				}
 			}
 		}
-	}
 
-	@layer mods {
 		@include media.max('S') {
 			@include mobile;
 		}
-	}
 
-	@layer mods {
 		@include media.max('S') {
 			&:not(.is-open, .open) {
 				.navSide-item {
@@ -64,9 +60,7 @@
 				}
 			}
 		}
-	}
 
-	@layer mods {
 		@include media.max('S') {
 			&.mod-withBanner {
 				.navSide-item {
@@ -79,14 +73,12 @@
 	}
 }
 
-.navSide-item {
-	@layer mods {
+@layer mods {
+	.navSide-item {
 		&.mod-mobileToggle {
 			@include mobileToggle;
 		}
-	}
 
-	@layer mods {
 		&:not(.is-open) {
 			@include notOpen;
 		}
@@ -105,11 +97,9 @@
 			}
 		}
 	}
-}
 
-.navSide-item-subMenu-link,
-.navSide-item-link {
-	@layer mods {
+	.navSide-item-subMenu-link,
+	.navSide-item-link {
 		&:is(.is-active, .active) {
 			@include active;
 		}
@@ -118,10 +108,8 @@
 			@include expanded;
 		}
 	}
-}
 
-html {
-	@layer mods {
+	html {
 		&:is(.hasMenu, .withMenu) {
 			@include media.max('S') {
 				@include overlay;

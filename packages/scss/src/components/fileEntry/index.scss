@@ -18,9 +18,7 @@
 				@include mediaS;
 			}
 		}
-	}
 
-	@layer mods {
 		&.is-error {
 			@include error;
 

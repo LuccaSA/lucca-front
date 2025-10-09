@@ -31,9 +31,7 @@
 		&:has(.simpleSelect-field-input:disabled) {
 			@include disabled;
 		}
-	}
 
-	@layer mods {
 		&.mod-S {
 			@include S;
 		}
@@ -45,9 +43,7 @@
 		&.mod-filterPill {
 			@include filterPill;
 		}
-	}
 
-	@layer mods {
 		&.is-searchFilled {
 			@include searchFilled;
 		}

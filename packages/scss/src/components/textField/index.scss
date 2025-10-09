@@ -18,9 +18,7 @@
 		&.mod-valueAlignRight {
 			@include valueAlignRight;
 		}
-	}
 
-	@layer mods {
 		&.is-invalid,
 		&:has(.textField-input-value[aria-invalid='true']) {
 			@include invalid;
@@ -30,9 +28,7 @@
 		&:has(.textField-input-value:disabled) {
 			@include disabled;
 		}
-	}
 
-	@layer mods {
 		&.mod-autoResize {
 			@include autoResize;
 		}

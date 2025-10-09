@@ -17,8 +17,8 @@
 	}
 }
 
-.radioButtons-item-input {
-	@layer mods {
+@layer mods {
+	.radioButtons-item-input {
 		&:is(:disabled, .is-disabled, .disabled) {
 			@include disabled;
 		}

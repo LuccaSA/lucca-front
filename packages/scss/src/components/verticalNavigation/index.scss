@@ -13,16 +13,14 @@
 	}
 }
 
-.verticalNavigation-list {
-	@layer mods {
+@layer mods {
+	.verticalNavigation-list {
 		&.mod-child {
 			@include child;
 		}
 	}
-}
 
-.verticalNavigation-list-item-link {
-	@layer mods {
+	.verticalNavigation-list-item-link {
 		&[aria-expanded='true'] {
 			@include expanded;
 		}
@@ -36,10 +34,8 @@
 			@include disabled;
 		}
 	}
-}
 
-span.verticalNavigation-list-item-link {
-	@layer mods {
+	span.verticalNavigation-list-item-link {
 		@include disabled;
 	}
 }

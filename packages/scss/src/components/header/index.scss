@@ -19,9 +19,7 @@
 		&.mod-nav {
 			@include nav;
 		}
-	}
 
-	@layer mods {
 		&:is(.is-loading, .loading) {
 			@include loading;
 		}

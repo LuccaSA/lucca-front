@@ -14,9 +14,7 @@
 		&.mod-XS {
 			@include XS;
 		}
-	}
 
-	@layer mods {
 		&.is-loading {
 			@include loading;
 

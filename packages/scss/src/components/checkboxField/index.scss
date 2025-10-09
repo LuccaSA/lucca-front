@@ -6,18 +6,14 @@
 		@include component;
 	}
 
-	&.mod-S {
-		@layer mods {
+	@layer mods {
+		&.mod-S {
 			@include S;
 		}
-	}
 
-	&.mod-checklist {
-		@layer mods {
+		&.mod-checklist {
 			@include checklist;
-		}
 
-		@layer mods {
 			.checkboxField-input {
 				&:hover {
 					@include checklistHover;

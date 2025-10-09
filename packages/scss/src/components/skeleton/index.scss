@@ -11,9 +11,7 @@
 		&.mod-dark {
 			@include dark;
 		}
-	}
 
-	@layer mods {
 		&.is-loading {
 			@include loading;
 

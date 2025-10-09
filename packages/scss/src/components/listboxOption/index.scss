@@ -51,9 +51,7 @@
 		&[aria-hidden="true"] {
 			@include empty;
 		}
-	}
 
-	@layer mods {
 		&[aria-selected="true"],
 		&[aria-checked="true"] {
 			> .listboxOption-content {
@@ -124,9 +122,7 @@
 		&[aria-busy="true"] {
 			@include busy;
 		}
-	}
 
-	@layer mods {
 		&.mod-empty {
 			@include empty;
 		}

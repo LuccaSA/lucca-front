@@ -15,9 +15,7 @@
 		&.mod-sampleModifierA {
 			@include sampleModifierA;
 		}
-	}
 
-	@layer mods {
 		&.is-sampleStateA {
 			@include sampleStateA;
 		}

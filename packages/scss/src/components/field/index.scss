@@ -8,9 +8,7 @@
 		.checkboxesfield {
 			@include framed;
 		}
-	}
 
-	@layer mods {
 		.is-error {
 			@include fieldFramedState('error');
 			@include fieldFramedError('textfield');
@@ -45,9 +43,7 @@
 		&.mod-block {
 			@include block;
 		}
-	}
 
-	@layer mods {
 		&:is(.is-required, .required) {
 			@include required;
 		}
@@ -63,9 +59,7 @@
 		&:is(.is-error, .error, .is-invalid, .invalid) {
 			@include error;
 		}
-	}
 
-	@layer mods {
 		&.mod-compact {
 			@include compact;
 
@@ -73,20 +67,14 @@
 				@include compactBlock;
 			}
 		}
-	}
 
-	@layer mods {
 		&.mod-framed {
 			@include framed;
 
 			&.mod-search {
 				@include framedSearch;
 			}
-		}
-	}
 
-	@layer mods {
-		&.mod-framed {
 			&.is-error {
 				@include fieldFramedState('error');
 				@include fieldFramedError('textfield');
@@ -103,12 +91,10 @@
 				@include fieldFramedState('success');
 			}
 		}
-	}
 
-	.textfield-input,
-	.radiosfield-input,
-	.checkboxesfield-input {
-		@layer mods {
+		.textfield-input,
+		.radiosfield-input,
+		.checkboxesfield-input {
 			&:is([disabled], [readonly]) {
 				@include inputDisabled;
 			}
@@ -124,23 +110,15 @@
 			&:is(.is-invalid, .invalid, .is-error, .error) {
 				@include inputState('error');
 			}
-		}
 
-		@layer mods {
-			&.mod-row {
-				@include inputRow;
+			&:is([required]),
+			&:is([aria-required='true']) {
+				@include required;
 			}
 		}
-	}
-}
 
-.textfield-input,
-.radiosfield-input,
-.checkboxesfield-input {
-	@layer mods {
-		&:is([required]),
-		&:is([aria-required='true']) {
-			@include required;
+		&.mod-row {
+			@include inputRow;
 		}
 	}
 }

@@ -14,9 +14,7 @@
 		&.mod-icon {
 			@include icon;
 		}
-	}
 
-	@layer mods {
 		&:is(.is-droppable, .droppable) {
 			@include legacyDroppable;
 		}
@@ -27,8 +25,8 @@
 	}
 }
 
-.file-input {
-	@layer mods {
+@layer mods {
+	.file-input {
 		&:is(:disabled) {
 			@include disabled;
 		}

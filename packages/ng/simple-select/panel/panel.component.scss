@@ -11,7 +11,6 @@
 		@include button.block;
 		@include button.ghost;
 
-		/* stylelint-disable-next-line no-duplicate-selectors */
 		& {
 			justify-content: left;
 		}

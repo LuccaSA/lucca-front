@@ -19,13 +19,10 @@
 		@include button.block;
 		@include button.ghost;
 
-		/* stylelint-disable-next-line no-duplicate-selectors */
 		& {
 			justify-content: left;
 		}
-	}
 
-	@layer mods {
 		&.is-highlighted {
 			--components-button-color: var(--palettes-700, var(--palettes-neutral-700));
 			--components-button-backgroundColor: var(--palettes-100, var(--palettes-neutral-100));

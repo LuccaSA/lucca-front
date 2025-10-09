@@ -121,9 +121,7 @@
 				z-index: 1;
 			}
 		}
-	}
 
-	@layer mods {
 		&:hover {
 			.calendar-grid-item-content {
 				background: var(--palettes-neutral-50);

@@ -17,9 +17,7 @@
 		&:is(.is-open, .open) {
 			@include open;
 		}
-	}
 
-	@layer mods {
 		&.mod-password {
 			@include password;
 
@@ -190,9 +188,7 @@
 				@include compactSize('longest');
 			}
 		}
-	}
 
-	@layer mods {
 		&.mod-material {
 			@include material;
 
@@ -225,9 +221,7 @@
 				@include materialRadio;
 			}
 		}
-	}
 
-	@layer mods {
 		&.mod-material {
 			.textfield-input {
 				&:is(:focus, .is-focused, .focused) {
@@ -282,17 +276,13 @@
 			@include entryHover;
 		}
 	}
-}
 
-@layer mods {
 	.textfield-suffix {
 		&.mod-icon {
 			@include suffixIcon;
 		}
 	}
-}
 
-@layer mods {
 	.textfield.mod-framed,
 	.form.mod-framed .textfield {
 		@include framed;
@@ -308,12 +298,7 @@
 		&.mod-search {
 			@include framedSearch;
 		}
-	}
-}
 
-@layer mods {
-	.textfield.mod-framed,
-	.form.mod-framed .textfield {
 		&:is(.is-error, .error) {
 			@include framedState('error');
 

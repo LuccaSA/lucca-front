@@ -52,9 +52,9 @@
 	}
 }
 
-.table-body-row,
-.table-foot-row {
-	@layer mods {
+@layer mods {
+	.table-body-row,
+	.table-foot-row {
 		&.mod-header {
 			@include header;
 		}
@@ -71,12 +71,10 @@
 			}
 		}
 	}
-}
 
-.table-head-row,
-.table-body-row,
-.table-foot-row {
-	@layer mods {
+	.table-head-row,
+	.table-body-row,
+	.table-foot-row {
 		&.mod-selectable {
 			@include selectable;
 		}
@@ -85,29 +83,23 @@
 			@include draggable;
 		}
 	}
-}
 
-.table-head-row {
-	@layer mods {
+	.table-head-row {
 		&.mod-twoLines {
 			@include twoLines;
 		}
 	}
-}
 
-.table-body-row-cell,
-.table-foot-row-cell {
-	@layer mods {
+	.table-body-row-cell,
+	.table-foot-row-cell {
 		&.mod-avatar {
 			@include avatar;
 		}
 	}
-}
 
-.table-head-row-cell,
-.table-body-row-cell,
-.table-foot-row-cell {
-	@layer mods {
+	.table-head-row-cell,
+	.table-body-row-cell,
+	.table-foot-row-cell {
 		&.mod-actions {
 			@include actions;
 

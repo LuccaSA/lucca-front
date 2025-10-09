@@ -10,9 +10,7 @@
 		&.mod-indeterminate {
 			@include indeterminate;
 		}
-	}
 
-	@layer mods {
 		&:is(.is-success, .success, .palette-success) {
 			@include success;
 		}

@@ -19,9 +19,7 @@
 		&.mod-stepperHover {
 			@include stepperHover;
 		}
-	}
 
-	@layer mods {
 		&:has([aria-invalid='true']) {
 			@include invalid;
 		}

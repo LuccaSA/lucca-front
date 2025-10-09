@@ -38,18 +38,18 @@
 		&[class*='mod-layoutFixed'] {
 			@include layoutFixedCells;
 		}
-	}
 
-	&.mod-hover {
-		:is(.dataTable-head-row.mod-selectable, .dataTable-body-row) {
-			&:hover {
-				@include hover;
-			}
+		&.mod-hover {
+			:is(.dataTable-head-row.mod-selectable, .dataTable-body-row) {
+				&:hover {
+					@include hover;
+				}
 
-			&.mod-selectable {
-				&:has(input:checked) {
-					&:hover {
-						@include selectedHover;
+				&.mod-selectable {
+					&:has(input:checked) {
+						&:hover {
+							@include selectedHover;
+						}
 					}
 				}
 			}
@@ -57,8 +57,8 @@
 	}
 }
 
-:is(.dataTable-head-row, .dataTable-body-row, .dataTable-foot-row) {
-	@layer mods {
+@layer mods {
+	:is(.dataTable-head-row, .dataTable-body-row, .dataTable-foot-row) {
 		&.mod-group {
 			@include group;
 		}
@@ -75,10 +75,8 @@
 			@include draggable;
 		}
 	}
-}
 
-:is(.dataTable-head-row-cell, .dataTable-body-row-cell, .dataTable-foot-row-cell) {
-	@layer mods {
+	:is(.dataTable-head-row-cell, .dataTable-body-row-cell, .dataTable-foot-row-cell) {
 		&.mod-actions {
 			@include actions;
 		}
@@ -99,10 +97,8 @@
 			@include tree;
 		}
 	}
-}
 
-.dataTable-body-row {
-	@layer mods {
+	.dataTable-body-row {
 		&.is-collapsed {
 			@include collapsed;
 		}
@@ -115,10 +111,8 @@
 			}
 		}
 	}
-}
 
-.dataTable-body-row-cell-expand-button {
-	@layer mods {
+	.dataTable-body-row-cell-expand-button {
 		&[aria-expanded='true'] {
 			@include expanded;
 		}

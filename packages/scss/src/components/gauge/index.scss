@@ -23,9 +23,7 @@
 				@include verticalThin;
 			}
 		}
-	}
 
-	@layer mods {
 		&.is-zero,
 		&:not([style]),
 		&[style*='--components-gauge-value: 0%'] {

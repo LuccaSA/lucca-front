@@ -6,18 +6,14 @@
 		@include component;
 	}
 
-	&.mod-S {
-		@layer mods {
+	@layer mods {
+		&.mod-S {
 			@include S;
 		}
-	}
 
-	&.mod-filterPill {
-		@layer mods {
+		&.mod-filterPill {
 			@include filterPill;
-		}
 
-		@layer mods {
 			&:has(.multipleSelect-displayer-search:focus-visible) {
 				@include filterPillFocused;
 			}
@@ -28,9 +24,7 @@
 				}
 			}
 		}
-	}
 
-	@layer mods {
 		&.is-selected {
 			@include selected;
 		}
@@ -62,14 +56,14 @@
 	}
 }
 
-.multipleSelect-displayer-filter {
-	@layer components {
+@layer components {
+	.multipleSelect-displayer-filter {
 		min-inline-size: 0;
 	}
 }
 
-.multipleSelect-displayer {
-	@layer mods {
+@layer mods {
+	.multipleSelect-displayer {
 		&.mod-filter {
 			@include displayerFilter;
 

@@ -19,9 +19,7 @@
 		&:has(.dataTable.mod-rowsOverflow) {
 			@include rowsOverflow;
 		}
-	}
 
-	@layer mods {
 		&:has(.dataTable.is-firstColumnVisible) {
 			@include firstColumnVisible;
 		}
@@ -37,9 +35,7 @@
 		&:has(.dataTable.is-lastRowVisible) {
 			@include lastRowVisible;
 		}
-	}
 
-	@layer mods {
 		&:has(:is(.dataTable-head-row-cell, .dataTable-head-body-cell, .dataTable-foot-row-cell).mod-stickyColumn) {
 			@include stickyColumn;
 

@@ -28,9 +28,7 @@
 		&.mod-AI {
 			@include AI;
 		}
-	}
 
-	@layer mods {
 		&.mod-disabled {
 			@include disabled;
 		}
