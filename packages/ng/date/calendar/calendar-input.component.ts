@@ -10,7 +10,7 @@ import { ICalendarItem } from './calendar-item.interface';
 @Component({
 	selector: 'lu-calendar',
 	templateUrl: './calendar-input.component.html',
-	styleUrls: ['./calendar-input.component.scss'],
+	styleUrl: './calendar-input.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	standalone: true,
 	imports: [FormsModule, CommonModule],

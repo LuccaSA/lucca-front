@@ -16,7 +16,7 @@
 	@at-root ($atRoot) {
 		.inputFramed-header-label.formLabel {
 			position: static;
-			font-weight: 600;
+			font-weight: var(--pr-t-font-fontWeight-semibold);
 
 
 			&::after {

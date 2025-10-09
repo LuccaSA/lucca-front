@@ -3,7 +3,7 @@ import { booleanAttribute, Component, input, ViewEncapsulation } from '@angular/
 @Component({
 	selector: 'lu-app-layout',
 	standalone: true,
-	styleUrls: ['./app-layout.component.scss'],
+	styleUrl: './app-layout.component.scss',
 	templateUrl: './app-layout.component.html',
 	encapsulation: ViewEncapsulation.None,
 	host: {

@@ -12,7 +12,7 @@ import { DEFAULT_ESTABLISHMENT_SERVICE } from '../establishment-select.token';
 @Component({
 	selector: 'lu-establishment-searcher',
 	templateUrl: 'establishment-searcher.component.html',
-	styleUrls: ['establishment-searcher.component.scss'],
+	styleUrl: 'establishment-searcher.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	standalone: true,
 	imports: [ReactiveFormsModule, CommonModule, LuOptionPlaceholderComponent],

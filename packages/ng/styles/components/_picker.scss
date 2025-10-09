@@ -38,7 +38,7 @@
 
 .lu-picker-content-option-group-title {
 	font: var(--pr-t-font-body-S);
-	font-weight: 600;
+	font-weight: var(--pr-t-font-fontWeight-semibold);
 	padding-block: var(--components-options-item-padding-vertical);
 	padding-inline: var(--components-options-item-padding-horizontal);
 	color: var(--palettes-neutral-600);

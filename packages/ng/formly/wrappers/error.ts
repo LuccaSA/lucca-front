@@ -6,7 +6,7 @@ import { buildAddWrapperExtension } from '../formly.utils';
 // wrapper
 @Component({
 	selector: 'lu-formly-wrapper-error',
-	styleUrls: ['flex-layout.scss'],
+	styleUrl: 'flex-layout.scss',
 	templateUrl: './error.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	// eslint-disable-next-line @angular-eslint/prefer-standalone
