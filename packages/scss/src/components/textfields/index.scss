@@ -220,9 +220,7 @@
 			&.mod-radio {
 				@include materialRadio;
 			}
-		}
 
-		&.mod-material {
 			.textfield-input {
 				&:is(:focus, .is-focused, .focused) {
 					@include materialInputFocus;
