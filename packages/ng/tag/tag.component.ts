@@ -9,13 +9,13 @@ import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 	selector: 'lu-tag',
 	standalone: true,
 	templateUrl: './tag.component.html',
-	styleUrls: ['./tag.component.scss'],
+	styleUrl: './tag.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	encapsulation: ViewEncapsulation.None,
 	imports: [IconComponent, RouterLink, LuTooltipModule],
 })
 export class TagComponent {
-	withEllipis = input(false, { transform: booleanAttribute });
+	withEllipsis = input(false, { transform: booleanAttribute });
 
 	@Input({ required: true })
 	label: string;

@@ -13,7 +13,7 @@ import { LU_TREE_OPTION_ITEM_TRANSLATIONS } from './tree-option-item.translate';
 @Component({
 	selector: 'lu-tree-option',
 	templateUrl: './tree-option-item.component.html',
-	styleUrls: ['./tree-option-item.component.scss'],
+	styleUrl: './tree-option-item.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	standalone: true,
 	imports: [CommonModule, LuTooltipTriggerDirective],

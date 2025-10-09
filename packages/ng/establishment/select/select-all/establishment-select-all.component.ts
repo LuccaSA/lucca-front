@@ -8,7 +8,7 @@ import { DEFAULT_ESTABLISHMENT_SERVICE } from '../establishment-select.token';
 @Component({
 	selector: 'lu-establishment-select-all',
 	templateUrl: './establishment-select-all.component.html',
-	styleUrls: ['establishment-select-all.component.scss'],
+	styleUrl: 'establishment-select-all.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	standalone: true,
 	providers: [

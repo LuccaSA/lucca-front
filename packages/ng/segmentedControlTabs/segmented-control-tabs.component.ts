@@ -12,7 +12,7 @@ let nextId = 0;
 	selector: 'lu-segmented-control-tabs',
 	standalone: true,
 	templateUrl: './segmented-control-tabs.component.html',
-	styleUrls: ['./segmented-control-tabs.component.scss'],
+	styleUrl: './segmented-control-tabs.component.scss',
 	encapsulation: ViewEncapsulation.None,
 	imports: [ReactiveFormsModule, CommonModule, PortalDirective],
 	hostDirectives: [NoopValueAccessorDirective],

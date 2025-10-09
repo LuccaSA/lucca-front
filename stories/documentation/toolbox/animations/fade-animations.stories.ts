@@ -17,7 +17,7 @@ import { applicationConfig, Meta, StoryFn } from '@storybook/angular';
 			<div class="animated-block" [@fadeAnimation] *ngIf="!fading">Fade</div>
 		</div>
 	</div>`,
-	styleUrls: ['./animations.scss'],
+	styleUrl: './animations.scss',
 	animations: [luFadeAnimationFactory()],
 })
 class FadeAnimationStory {
@@ -59,7 +59,7 @@ class AppModule {}
 				<div class="animated-block" [@fadeAnimation] *ngIf="!fading">Fade</div>
 			</div>
 		</div>\`,
-	styleUrls: ['./animations.scss'],
+	styleUrl: './animations.scss',
 	animations: [luFadeAnimationFactory()],
 })
 class FadeAnimationStory {

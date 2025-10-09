@@ -10,24 +10,25 @@ import {
 	LuSelectPanelRef,
 	SELECT_ID,
 	SELECT_PANEL_INSTANCE,
+	TreeDisplayPipe,
+	TreeNode,
 	ɵCoreSelectPanelElement,
 	ɵgetGroupTemplateLocation,
 	ɵLuOptionComponent,
 	ɵLuOptionGroupPipe,
 } from '@lucca-front/ng/core-select';
 import { IconComponent } from '@lucca-front/ng/icon';
+import { TreeBranchComponent } from '@lucca-front/ng/tree-select';
 import { EMPTY } from 'rxjs';
 import { LuSimpleSelectInputComponent } from '../input/select-input.component';
 import { SIMPLE_SELECT_INPUT } from '../select.model';
 import { LU_SIMPLE_SELECT_TRANSLATIONS } from '../select.translate';
 import { LuIsOptionSelectedPipe } from './option-selected.pipe';
-import { TreeBranchComponent } from '@lucca-front/ng/tree-select';
-import { TreeDisplayPipe, TreeNode } from '@lucca-front/ng/core-select';
 
 @Component({
 	selector: 'lu-select-panel',
 	templateUrl: './panel.component.html',
-	styleUrls: ['./panel.component.scss'],
+	styleUrl: './panel.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	standalone: true,
 	imports: [

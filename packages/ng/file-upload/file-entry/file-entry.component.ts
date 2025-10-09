@@ -19,7 +19,7 @@ import { formatSize } from '../formatter';
 	selector: 'lu-file-entry',
 	standalone: true,
 	templateUrl: './file-entry.component.html',
-	styleUrls: ['./file-entry.component.scss'],
+	styleUrl: './file-entry.component.scss',
 	encapsulation: ViewEncapsulation.None,
 	imports: [IconComponent, LuTooltipModule, ButtonComponent, InlineMessageComponent, DividerComponent, NgClass, FormFieldComponent, TextInputComponent, FormsModule, IntlParamsPipe],
 	host: {

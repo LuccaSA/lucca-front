@@ -46,7 +46,7 @@
 			@include button.S;
 
 			justify-content: flex-start;
-			font-weight: 400;
+			font-weight: var(--pr-t-font-fontWeight-regular);
 			white-space: wrap;
 			text-align: start;
 		}

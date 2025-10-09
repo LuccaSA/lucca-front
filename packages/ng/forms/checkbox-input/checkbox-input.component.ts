@@ -14,7 +14,7 @@ let nextId = 0;
 	imports: [ReactiveFormsModule, InputDirective, FilterPillLabelDirective, LuTooltipTriggerDirective],
 	hostDirectives: [NoopValueAccessorDirective],
 	templateUrl: './checkbox-input.component.html',
-	styleUrls: ['./checkbox-input.component.scss'],
+	styleUrl: './checkbox-input.component.scss',
 	encapsulation: ViewEncapsulation.None,
 	providers: [
 		{

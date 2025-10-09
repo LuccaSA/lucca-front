@@ -35,7 +35,7 @@ export const displayPictureFormatRecord: Record<LuDisplayFormat, LuDisplayInitia
 	selector: 'lu-user-picture',
 	imports: [NgStyle, IconComponent],
 	templateUrl: './user-picture.component.html',
-	styleUrls: ['./user-picture.component.scss'],
+	styleUrl: './user-picture.component.scss',
 	host: {
 		class: 'avatar',
 		'[class.mod-AI]': 'AI()',

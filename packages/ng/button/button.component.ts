@@ -8,7 +8,7 @@ import { IconComponent } from '@lucca-front/ng/icon';
 	standalone: true,
 	providers: [LuClass],
 	template: '<ng-content />',
-	styleUrls: ['./button.component.scss'],
+	styleUrl: './button.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	encapsulation: ViewEncapsulation.None,
 	host: {
