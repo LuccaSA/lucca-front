@@ -13,17 +13,23 @@ import { FormFieldComponent } from '@lucca-front/ng/form-field';
 	imports: [LuMultiSelectInputComponent, LuCoreSelectApiV4Directive, FormFieldComponent],
 	styles: [
 		`
-			:host {
+			lu-form-field {
 				display: block;
-				padding-top: 400px;
-				padding-bottom: 150px;
+				padding-top: 550px;
+				padding-bottom: 600px;
+			}
+			.scroll-test {
+				overflow: auto;
+				height: 600px;
 			}
 		`,
 	],
 	template: `
-		<lu-form-field label="Inside an OnPush Component">
-			<lu-multi-select [options]="allLegumes" placeholder="Placeholder text" apiV4="/organization/structure/api/establishments" clearable></lu-multi-select>
-		</lu-form-field>
+		<div class="scroll-test">
+			<lu-form-field label="Inside an OnPush Component">
+				<lu-multi-select [options]="allLegumes" placeholder="Placeholder text" apiV4="/organization/structure/api/establishments" clearable></lu-multi-select>
+			</lu-form-field>
+		</div>
 	`,
 })
 class MultiSelectOnPush {
