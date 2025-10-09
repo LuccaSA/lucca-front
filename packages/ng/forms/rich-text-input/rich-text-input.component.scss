@@ -1,1 +1,7 @@
 @use '@lucca-front/scss/src/components/richText';
+
+.richTextLinkPopoverAnchor {
+    top: var(--c-rich-text-editor-link-anchor-top);
+    left: var(--c-rich-text-editor-link-anchor-left);
+    position: fixed;
+}

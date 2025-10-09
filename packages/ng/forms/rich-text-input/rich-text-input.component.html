@@ -1,3 +1,4 @@
+<div [luPopover2]="linkPopover" #popoverRef="luPopover2" class="richTextLinkPopoverAnchor" #popoverAnchor></div>
 <div class="richTextField" [class.is-disabled]="isDisabled()" [class.mod-autoResize]="autoResize()">
 	<div
 		#content
@@ -10,6 +11,7 @@
 		[attr.aria-labelledby]="formFieldId() + '-label'"
 		[attr.spellcheck]="!disableSpellcheck()"
 		(blur)="touch()"
+		(click)="handleLinkClick(popoverRef, $event)"
 	></div>
 	@if (currentCanShowPlaceholder()) {
 		<div aria-hidden="true" class="richTextField-content-placeholder">{{ placeholder() }}</div>
@@ -25,3 +27,9 @@
 		<ng-content />
 	</div>
 </div>
+
+<ng-template #linkPopover>
+	<div class="pr-u-paddingBlock100 pr-u-paddingInline200">
+		<a [href]="visitableLink().path" target="_blank">{{ visitableLink().label }}</a>
+	</div>
+</ng-template>
