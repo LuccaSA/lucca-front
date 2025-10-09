@@ -77,7 +77,7 @@ interface BaseLuDialogConfig<C, TData = LuDialogData<C>> {
 	/**
 	 * The size of the panel used for the dialog
 	 */
-	size?: 'XS' | 'S' | 'M' | 'L' | 'XL' | 'XXL' | 'fitContent' | `maxContent` | 'fullScreen';
+	size?: LuDialogSize;
 
 	/**
 	 * Should it be a modal (default), a drawer? a drawer from bottom?
@@ -88,6 +88,13 @@ interface BaseLuDialogConfig<C, TData = LuDialogData<C>> {
 	 * Classes to add to the panel
 	 */
 	panelClasses?: string[];
+
+	/**
+	 * Should we animate the width of the dialog when resizing?
+	 */
+	resizeAnimated?: boolean;
 }
 
 export type LuDialogConfig<T, TData = LuDialogData<T>> = [TData] extends [never] ? Omit<BaseLuDialogConfig<T, TData>, 'data'> : BaseLuDialogConfig<T, TData>;
+
+export type LuDialogSize = 'XS' | 'S' | 'M' | 'L' | 'XL' | 'XXL' | 'fitContent' | `maxContent` | 'fullScreen';

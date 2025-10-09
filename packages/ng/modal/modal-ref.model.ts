@@ -2,10 +2,12 @@ import { ComponentType } from '@angular/cdk/portal';
 import { ALuPopupRef, ILuPopupRef } from '@lucca-front/ng/popup';
 import { LuModalClasses, luModalClasses, LuModalConfig, LuModalMode } from './modal-config.model';
 import { ILuModalContent, LuModalContentResult } from './modal.model';
+import { LuDialogSize } from '@lucca-front/ng/dialog';
 
 export interface ILuModalRef<D = unknown, R = unknown> extends ILuPopupRef<D, R> {
 	mode: LuModalMode;
 	modalClasses: LuModalClasses;
+	resize(size: LuDialogSize): void;
 }
 
 export interface IModalRefFactory {
@@ -22,5 +24,15 @@ export abstract class ALuModalRef<T extends ILuModalContent = ILuModalContent, D
 
 	public get modalClasses(): LuModalClasses {
 		return luModalClasses[this.mode];
+	}
+
+	public resize(size: LuDialogSize): void {
+		if (this._config.size === size) {
+			return;
+		}
+
+		this._overlayRef.removePanelClass(`mod-${this._config.size || 'M'}`);
+		this._overlayRef.addPanelClass(`mod-${size}`);
+		this._config.size = size;
 	}
 }

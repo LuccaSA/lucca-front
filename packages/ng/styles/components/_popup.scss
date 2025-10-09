@@ -72,6 +72,10 @@
 			display: none;
 		}
 	}
+
+	&.mod-resizeAnimated {
+		transition: inline-size var(--commons-animations-durations-fast);
+	}
 }
 
 .lu-modal-panel-inner {
