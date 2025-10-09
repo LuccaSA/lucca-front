@@ -1,30 +1,24 @@
-import { ChangeDetectionStrategy, Component, ElementRef, HostBinding, inject, OnDestroy, OnInit, signal, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, OnInit, signal, viewChild, ViewEncapsulation } from '@angular/core';
 
 @Component({
 	selector: 'lu-scroll-box',
 	standalone: true,
-	template: '<ng-content />',
-	styleUrls: ['./scroll-box.component.scss'],
+	templateUrl: './scroll-box.component.html',
+	styleUrl: './scroll-box.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	encapsulation: ViewEncapsulation.None,
 	imports: [],
 	host: {
 		class: 'scrollBox',
+		'[class.is-firstVisible]': 'isFirstVisible()',
+		'[class.is-lastVisible]': 'isLastVisible()',
 	},
 })
-export class ScrollBoxComponent implements OnInit, OnDestroy {
-	#elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
+export class ScrollBoxComponent implements OnInit {
+	first = viewChild<ElementRef<HTMLElement>>('first');
+	last = viewChild<ElementRef<HTMLElement>>('last');
 
-	@HostBinding('class.is-firstVisible')
-	get isFirstVisibleClass() {
-		return this.isFirstVisible();
-	}
 	isFirstVisible = signal(false);
-
-	@HostBinding('class.is-lastVisible')
-	get isLastVisibleClass() {
-		return this.isLastVisible();
-	}
 	isLastVisible = signal(false);
 
 	initObserver(element: Element, isFirst: boolean) {
@@ -39,33 +33,13 @@ export class ScrollBoxComponent implements OnInit, OnDestroy {
 				});
 			},
 			{
-				threshold: 1.0,
+				threshold: 1,
 			},
 		).observe(element);
 	}
 
-	observeFirstAndLastElement = () => {
-		const children = this.#elementRef.nativeElement.children;
-
-		[].forEach.call(children, (child, index) => {
-			if (index === 0) {
-				this.initObserver(child as Element, true);
-			}
-
-			if (index === children.length - 1) {
-				this.initObserver(child as Element, false);
-			}
-		});
-	};
-
-	observer = new MutationObserver(this.observeFirstAndLastElement);
-
-	ngOnInit() {
-		this.observeFirstAndLastElement();
-		this.observer.observe(this.#elementRef.nativeElement, { childList: true });
-	}
-
-	ngOnDestroy() {
-		this.observer.disconnect();
+	ngOnInit(): void {
+		this.initObserver(this.first().nativeElement, true);
+		this.initObserver(this.last().nativeElement, false);
 	}
 }
