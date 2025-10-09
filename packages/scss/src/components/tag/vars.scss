@@ -5,6 +5,8 @@
 	--components-tag-font: var(--pr-t-font-body-S);
 	--components-tag-decoration: none;
 	--components-tag-cursor: inherit;
+	--components-tag-boxShadow: 0 0 0 1px var(--components-tag-shadow);
+	--components-tag-position: static;
 
 	// Deprecated
 	--components-tag-fontSize: var(--pr-t-font-body-S-fontSize);
