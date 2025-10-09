@@ -3,14 +3,14 @@ import { provideHttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { AbstractControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { ALuDateAdapter, LuNativeDateAdapter } from '@lucca-front/ng/core';
-import { LuFormlyModule } from '@lucca-front/ng/formly';
+import { provideLuFormly } from '@lucca-front/ng/formly';
 import { FormlyFieldConfig, FormlyModule } from '@ngx-formly/core';
 import { Meta, StoryObj, applicationConfig } from '@storybook/angular';
 
 @Component({
 	selector: 'formly-stories',
 	standalone: true,
-	imports: [LuFormlyModule, FormlyModule, ReactiveFormsModule, JsonPipe],
+	imports: [FormlyModule, ReactiveFormsModule, JsonPipe],
 	template: `
 		<form [formGroup]="form" role="form" autocomplete="off" (ngSubmit)="submit()">
 			<formly-form class="form" [form]="form" [fields]="fields" [model]="model"></formly-form>
@@ -194,6 +194,7 @@ const meta: Meta = {
 		applicationConfig({
 			providers: [
 				provideHttpClient(),
+				provideLuFormly(),
 				FormlyModule.forRoot().providers,
 				{
 					provide: ALuDateAdapter,

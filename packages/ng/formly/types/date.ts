@@ -1,13 +1,15 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { FieldType, FieldTypeConfig } from '@ngx-formly/core';
+import { ReactiveFormsModule } from '@angular/forms';
+import { LuDateSelectInputComponent } from '@lucca-front/ng/date';
+import { FieldType, FieldTypeConfig, FormlyModule } from '@ngx-formly/core';
 
 @Component({
 	selector: 'lu-formly-field-date',
 	styleUrls: ['formly-field.common.scss', 'select.scss'],
 	templateUrl: './date.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	// eslint-disable-next-line @angular-eslint/prefer-standalone
-	standalone: false,
+	standalone: true,
+	imports: [ReactiveFormsModule, FormlyModule, LuDateSelectInputComponent],
 })
 export class LuFormlyFieldDate extends FieldType<FieldTypeConfig> {
 	focus() {
