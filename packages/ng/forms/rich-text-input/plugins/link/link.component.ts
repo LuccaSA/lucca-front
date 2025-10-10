@@ -14,13 +14,14 @@ import { LinkDialogComponent } from './link-dialog';
 import { FORMAT_LINK, registerLink, registerLinkSelectionChange } from './link.command';
 import { PopoverLinkNode } from './popover-link-node';
 import { PopoverDirective } from '@lucca-front/ng/popover2';
+import { LinkComponent as LuLinkComponent } from '@lucca-front/ng/link';
 
 @Component({
 	selector: 'lu-rich-text-plugin-link',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	templateUrl: './link.component.html',
 	styleUrl: 'link.component.scss',
-	imports: [ButtonComponent, IconComponent, LuTooltipTriggerDirective, PopoverDirective],
+	imports: [ButtonComponent, IconComponent, LuTooltipTriggerDirective, PopoverDirective, LuLinkComponent],
 	host: {
 		class: 'richTextField-toolbar-col-group',
 	},

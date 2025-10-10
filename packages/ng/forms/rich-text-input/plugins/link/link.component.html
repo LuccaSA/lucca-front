@@ -18,7 +18,7 @@
 	<a [href]="href" [title]="title" [target]="target" [luPopover2]="popover" #trigger="luPopover2"></a>
 	<ng-template #popover>
 		<div class="popover-contentOptional linkPopover">
-			<a [href]="href" target="_blank" rel="noopener noreferrer" class="pr-u-ellipsis">{{ href }}</a>
+			<a [href]="href" luLink external class="pr-u-ellipsis">{{ href }}</a>
 			<button
 				type="button"
 				luButton="ghost"

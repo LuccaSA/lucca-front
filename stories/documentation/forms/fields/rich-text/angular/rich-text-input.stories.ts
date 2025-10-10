@@ -10,6 +10,7 @@ import { DEFAULT_MARKDOWN_TRANSFORMERS, provideLuRichTextMarkdownFormatter } fro
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { cleanupTemplate, generateInputs } from 'stories/helpers/stories';
 import { StoryModelDisplayComponent } from 'stories/helpers/story-model-display.component';
+import { provideRouter } from '@angular/router';
 
 export default {
 	title: 'Documentation/Forms/Fields/RichTextInput/Angular',
@@ -18,7 +19,7 @@ export default {
 			imports: [RichTextInputToolbarComponent, FormFieldComponent, FormsModule, ReactiveFormsModule, BrowserAnimationsModule, StoryModelDisplayComponent, DividerComponent, ButtonComponent],
 		}),
 		applicationConfig({
-			providers: [{ provide: LOCALE_ID, useValue: 'fr' }],
+			providers: [{ provide: LOCALE_ID, useValue: 'fr' }, provideRouter([])],
 		}),
 	],
 	argTypes: {},
