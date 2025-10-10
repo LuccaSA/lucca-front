@@ -15,12 +15,29 @@
 </button>
 
 <ng-template #linkNodeTemplate let-href="href" let-title="title" let-target="target">
-	<a [href]="href" [title]="title" [target]="target" [luPopover2]="popover"></a>
+	<a [href]="href" [title]="title" [target]="target" [luPopover2]="popover" #trigger="luPopover2"></a>
 	<ng-template #popover>
-		<div class="popover-contentOptional">
-			<a [href]="href" target="_blank" rel="noopener noreferrer">{{ href }}</a>
-			<button type="button" luButton="ghost" size="S" (click)="dispatchCommand()">
-				<lu-icon icon="edit" [alt]="intl.linksLabel" />
+		<div class="popover-contentOptional linkPopover">
+			<a [href]="href" target="_blank" rel="noopener noreferrer" class="pr-u-ellipsis">{{ href }}</a>
+			<button
+				type="button"
+				luButton="ghost"
+				size="XS"
+				(click)="trigger.close(); dispatchCommand()"
+				[luTooltip]="intl.linksLabel"
+				luTooltipOnlyForDisplay
+			>
+				<lu-icon icon="officePen" [alt]="intl.linksLabel" />
+			</button>
+			<button
+				type="button"
+				luButton="ghost"
+				size="XS"
+				(click)="trigger.close(); deleteLink()"
+				[luTooltip]="intl.linksDelete"
+				luTooltipOnlyForDisplay
+			>
+				<lu-icon icon="trashDelete" [alt]="intl.linksDelete" />
 			</button>
 		</div>
 	</ng-template>

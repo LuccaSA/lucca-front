@@ -19,6 +19,7 @@ import { PopoverDirective } from '@lucca-front/ng/popover2';
 	selector: 'lu-rich-text-plugin-link',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	templateUrl: './link.component.html',
+	styleUrl: 'link.component.scss',
 	imports: [ButtonComponent, IconComponent, LuTooltipTriggerDirective, PopoverDirective],
 	host: {
 		class: 'richTextField-toolbar-col-group',
@@ -109,6 +110,11 @@ export class LinkComponent implements OnDestroy, AfterViewInit, RichTextPluginCo
 					this.#editor.dispatchCommand(SELECTION_CHANGE_COMMAND, undefined);
 				});
 		});
+	}
+
+	deleteLink() {
+		this.#editor?.dispatchCommand(FORMAT_LINK, undefined);
+		this.#editor?.dispatchCommand(SELECTION_CHANGE_COMMAND, undefined);
 	}
 
 	focus() {
