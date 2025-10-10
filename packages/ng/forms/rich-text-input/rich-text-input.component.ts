@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
 import {
 	booleanAttribute,
 	ChangeDetectionStrategy,
@@ -24,8 +26,10 @@ import { mergeRegister } from '@lexical/utils';
 
 import { $canShowPlaceholderCurry } from '@lexical/text';
 import { FormFieldComponent, InputDirective } from '@lucca-front/ng/form-field';
+import { PopoverDirective } from '@lucca-front/ng/popover2';
 import { $getRoot, createEditor, Klass, LexicalEditor, LexicalNode } from 'lexical';
 import { RICH_TEXT_FORMATTER, RichTextFormatter } from './formatters';
+import { IRichTextInputLink } from './models';
 
 const INITIAL_UPDATE_TAG = 'initial-update';
 
@@ -49,7 +53,7 @@ export const RICH_TEXT_PLUGIN_COMPONENT = new InjectionToken<RichTextPluginCompo
 @Component({
 	selector: 'lu-rich-text-input',
 	standalone: true,
-	imports: [InputDirective],
+	imports: [InputDirective, PopoverDirective],
 	templateUrl: './rich-text-input.component.html',
 	styleUrl: './rich-text-input.component.scss',
 	encapsulation: ViewEncapsulation.None,
@@ -63,6 +67,7 @@ export const RICH_TEXT_PLUGIN_COMPONENT = new InjectionToken<RichTextPluginCompo
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RichTextInputComponent implements OnInit, OnDestroy, ControlValueAccessor {
+	public popoverAnchor: Signal<ElementRef> = viewChild.required('popoverAnchor', { read: ElementRef });
 	readonly #richTextFormatter = inject<RichTextFormatter>(RICH_TEXT_FORMATTER);
 	readonly #formField = inject(FormFieldComponent, { optional: true });
 
@@ -92,6 +97,11 @@ export class RichTextInputComponent implements OnInit, OnDestroy, ControlValueAc
 	#cleanup?: () => void;
 	#focusedPlugin: number = 0;
 	#editor?: LexicalEditor;
+
+	visitableLink: WritableSignal<IRichTextInputLink> = signal({
+		label: '',
+		path: '',
+	});
 
 	ngOnInit(): void {
 		this.#editor = createEditor({
@@ -182,6 +192,24 @@ export class RichTextInputComponent implements OnInit, OnDestroy, ControlValueAc
 	touch() {
 		this.#isTouched.set(true);
 		this.#onTouch?.();
+	}
+
+	handleLinkClick(ref: PopoverDirective, event: Event) {
+		const targetElement = event.target as HTMLElement;
+		if (targetElement.parentElement.tagName === 'A') {
+			console.log(targetElement.getBoundingClientRect());
+			const anchor: HTMLElement = targetElement.parentElement;
+			const anchorWidth: number = anchor.getBoundingClientRect().width;
+			this.popoverAnchor().nativeElement.style.setProperty('--c-rich-text-editor-link-anchor-top', `${targetElement.getBoundingClientRect().top}px`);
+			this.popoverAnchor().nativeElement.style.setProperty('--c-rich-text-editor-link-anchor-left', `${targetElement.getBoundingClientRect().left + anchorWidth / 2}px`);
+			this.visitableLink.update(() => ({
+				label: anchor.getAttribute('href'),
+				path: anchor.getAttribute('href'),
+			}));
+			setTimeout(() => {
+				ref.openPopover();
+			}, 100);
+		}
 	}
 
 	#flattenPlugins(plugins: readonly RichTextPluginComponent[]): RichTextPluginComponent[] {
