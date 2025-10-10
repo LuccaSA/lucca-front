@@ -41,8 +41,8 @@ export class TreeSelectDirective<T, V> implements TreeGenerator<T, TreeNode<T>> 
 					node: item,
 					children: [],
 				};
-				// Parent null means it's a root element
-				if (parent === null) {
+				// Parent null or undefined means it's a root element
+				if (!parent) {
 					res.push(itemNode);
 					itemToNode.set(item, itemNode);
 					handled.push(item);
