@@ -13,3 +13,12 @@
 >
 	<lu-icon icon="formatLink" [alt]="intl.linksLabel" />
 </button>
+
+<ng-template #linkNodeTemplate let-href="href" let-title="title" let-target="target">
+	<a [href]="href" [title]="title" [target]="target" [luPopover2]="popover"></a>
+	<ng-template #popover>
+		<div class="popover-contentOptional">
+			<a [href]="href" target="_blank" rel="noopener noreferrer">{{ href }}</a>
+		</div>
+	</ng-template>
+</ng-template>

@@ -1,23 +1,25 @@
-import { ChangeDetectionStrategy, Component, ElementRef, forwardRef, inject, OnDestroy, signal, viewChild } from '@angular/core';
-import { AutoLinkNode, LinkNode } from '@lexical/link';
+import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, forwardRef, inject, OnDestroy, signal, TemplateRef, viewChild, ViewContainerRef } from '@angular/core';
+import { LinkNode } from '@lexical/link';
 import { $getNearestNodeOfType, mergeRegister } from '@lexical/utils';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { getIntl } from '@lucca-front/ng/core';
 import { LuDialogService, provideLuDialog } from '@lucca-front/ng/dialog';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { LuTooltipTriggerDirective } from '@lucca-front/ng/tooltip';
-import { $getSelection, $isRangeSelection, Klass, LexicalEditor, LexicalNode, SELECTION_CHANGE_COMMAND } from 'lexical';
+import { $getSelection, $isRangeSelection, LexicalEditor, SELECTION_CHANGE_COMMAND } from 'lexical';
 import { RICH_TEXT_PLUGIN_COMPONENT, RichTextPluginComponent } from '../../rich-text-input.component';
 import { LU_RICH_TEXT_INPUT_TRANSLATIONS } from '../../rich-text-input.translate';
 import { getSelectedNode } from '../../utils';
 import { LinkDialogComponent } from './link-dialog';
 import { FORMAT_LINK, registerLink, registerLinkSelectionChange } from './link.command';
+import { PopoverLinkNode } from './popover-link-node';
+import { PopoverDirective } from '@lucca-front/ng/popover2';
 
 @Component({
 	selector: 'lu-rich-text-plugin-link',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	templateUrl: './link.component.html',
-	imports: [ButtonComponent, IconComponent, LuTooltipTriggerDirective],
+	imports: [ButtonComponent, IconComponent, LuTooltipTriggerDirective, PopoverDirective],
 	host: {
 		class: 'richTextField-toolbar-col-group',
 	},
@@ -29,10 +31,12 @@ import { FORMAT_LINK, registerLink, registerLinkSelectionChange } from './link.c
 		},
 	],
 })
-export class LinkComponent implements OnDestroy, RichTextPluginComponent {
+export class LinkComponent implements OnDestroy, AfterViewInit, RichTextPluginComponent {
 	readonly #luDialogService = inject(LuDialogService);
+	readonly #viewContainerRef = inject(ViewContainerRef);
 
-	readonly element = viewChild('element', { read: ElementRef<HTMLButtonElement> });
+	readonly linkNodeTemplate = viewChild.required('linkNodeTemplate', { read: TemplateRef });
+	readonly element = viewChild.required('element', { read: ElementRef<HTMLButtonElement> });
 
 	readonly tabindex = signal<number>(-1);
 	readonly active = signal(false);
@@ -43,6 +47,14 @@ export class LinkComponent implements OnDestroy, RichTextPluginComponent {
 
 	#registeredCommands: () => void = () => {};
 
+	constructor() {
+		PopoverLinkNode.setViewContainerRef(this.#viewContainerRef);
+	}
+
+	ngAfterViewInit() {
+		PopoverLinkNode.setTemplateRef(this.linkNodeTemplate());
+	}
+
 	setEditorInstance(editor: LexicalEditor) {
 		this.#editor = editor;
 		this.#registeredCommands = mergeRegister(
@@ -51,8 +63,19 @@ export class LinkComponent implements OnDestroy, RichTextPluginComponent {
 		);
 	}
 
-	getLexicalNodes(): Klass<LexicalNode>[] {
-		return [LinkNode, AutoLinkNode];
+	getLexicalNodes() {
+		return [
+			PopoverLinkNode,
+			{
+				replace: LinkNode,
+				with: (node: LinkNode) =>
+					new PopoverLinkNode(node.getURL(), {
+						rel: node.getRel(),
+						target: node.getTarget(),
+						title: node.getTitle(),
+					}),
+			},
+		];
 	}
 
 	ngOnDestroy() {
