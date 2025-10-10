@@ -19,6 +19,9 @@
 	<ng-template #popover>
 		<div class="popover-contentOptional">
 			<a [href]="href" target="_blank" rel="noopener noreferrer">{{ href }}</a>
+			<button type="button" luButton="ghost" size="S" (click)="dispatchCommand()">
+				<lu-icon icon="edit" [alt]="intl.linksLabel" />
+			</button>
 		</div>
 	</ng-template>
 </ng-template>

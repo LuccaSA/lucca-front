@@ -14,7 +14,7 @@ export class PopoverLinkNode extends LinkNode {
 	}
 
 	static override getType(): string {
-		return 'popover-link';
+		return 'popoverlink';
 	}
 
 	override createDOM() {
@@ -36,5 +36,9 @@ export class PopoverLinkNode extends LinkNode {
 		return {
 			element: super.createDOM(editor._config),
 		};
+	}
+
+	static override clone(node: PopoverLinkNode): PopoverLinkNode {
+		return new PopoverLinkNode(node.__url, { target: node.__target, rel: node.__rel, title: node.__title }, node.__key);
 	}
 }
