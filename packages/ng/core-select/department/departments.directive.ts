@@ -99,6 +99,9 @@ export class LuCoreSelectDepartmentsDirective<T extends ILuDepartment = ILuDepar
 	}
 
 	protected override optionKey = (option: TreeNode<T> | T) => {
+		if (!option) {
+			return null;
+		}
 		return 'node' in option ? option.node.id : option.id;
 	};
 }
