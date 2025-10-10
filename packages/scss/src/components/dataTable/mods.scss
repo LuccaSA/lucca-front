@@ -14,15 +14,15 @@
 	}
 }
 
-@mixin valignTop {
+@mixin verticalAlignTop {
 	--components-dataTable-cell-verticalAlign: top;
 }
 
-@mixin valignBottom {
+@mixin verticalAlignBottom {
 	--components-dataTable-cell-verticalAlign: bottom;
 }
 
-@mixin valignMiddle {
+@mixin verticalAlignMiddle {
 	--components-dataTable-cell-verticalAlign: middle;
 }
 
@@ -104,6 +104,8 @@
 		@include button.onlyIcon;
 		@include button.onlyIconS;
 		@include button.ghost;
+
+		transition-property: box-shadow, color;
 	}
 
 	&:is(.dataTable-head-row-cell) {

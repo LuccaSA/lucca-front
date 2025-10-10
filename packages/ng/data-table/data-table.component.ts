@@ -1,9 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { booleanAttribute, Component, computed, contentChild, contentChildren, ElementRef, forwardRef, inject, input, viewChild, ViewEncapsulation } from '@angular/core';
 import { ResponsiveConfig, ɵeffectWithDeps } from '@lucca-front/ng/core';
+import { DataTableHeadComponent } from './data-table-head/data-table-head.component';
+import { DataTableRowComponent } from './data-table-row/data-table-row.component';
 import { LU_DATA_TABLE_INSTANCE } from './data-table.token';
-import { DataTableHeadComponent } from './dataTableHead/dataTableHead.component';
-import { DataTableRowComponent } from './dataTableRow/dataTableRow.component';
 
 @Component({
 	selector: 'lu-data-table',
@@ -13,6 +13,7 @@ import { DataTableRowComponent } from './dataTableRow/dataTableRow.component';
 	encapsulation: ViewEncapsulation.None,
 	host: {
 		class: 'dataTableWrapper',
+		'[class.mod-nested]': 'this.nested()',
 		'(scroll)': 'scroll()',
 	},
 	providers: [
@@ -31,10 +32,11 @@ export class DataTableComponent {
 	selectable = input(false, { transform: booleanAttribute });
 	layoutFixed = input(false, { transform: booleanAttribute });
 	cellBorder = input(false, { transform: booleanAttribute });
+	nested = input(false, { transform: booleanAttribute });
 
 	responsive = input<ResponsiveConfig<'layoutFixed', true>>({});
 
-	valign = input<null | 'top' | 'middle' | 'bottom'>(null);
+	verticalAlign = input<null | 'top' | 'middle' | 'bottom'>(null);
 
 	rows = contentChildren(DataTableRowComponent, { descendants: true });
 	header = contentChild(DataTableHeadComponent, { descendants: true });
@@ -49,9 +51,9 @@ export class DataTableComponent {
 			['mod-stickyHeader']: this.stickyHeader(),
 			['mod-hover']: this.hover(),
 			['mod-cellBorder']: this.cellBorder(),
-			['mod-valignTop']: this.valign() === 'top',
-			['mod-valignMiddle']: this.valign() === 'middle',
-			['mod-valignBottom']: this.valign() === 'bottom',
+			['mod-verticalAlignTop']: this.verticalAlign() === 'top',
+			['mod-verticalAlignMiddle']: this.verticalAlign() === 'middle',
+			['mod-verticalAlignBottom']: this.verticalAlign() === 'bottom',
 			['mod-layoutFixed']: this.layoutFixed(),
 			...Object.entries(this.responsive()).reduce((acc, [key, value]) => {
 				return {

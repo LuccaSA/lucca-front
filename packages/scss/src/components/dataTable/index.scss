@@ -16,16 +16,16 @@
 	}
 
 	&.mod-alignTop,
-	&.mod-valignTop {
-		@include valignTop;
+	&.mod-verticalAlignTop {
+		@include verticalAlignTop;
 	}
 
-	&.mod-valignBottom {
-		@include valignBottom;
+	&.mod-verticalAlignBottom {
+		@include verticalAlignBottom;
 	}
 
-	&.mod-valignMiddle {
-		@include valignMiddle;
+	&.mod-verticalAlignMiddle {
+		@includeverticalAlignMiddle;
 	}
 
 	&.mod-layoutFixed {
@@ -42,7 +42,7 @@
 	}
 
 	&.mod-hover {
-		:is(.mod-selectable, .dataTable-body-row) {
+		:is(.mod-selectable, .dataTable-body-row:not(.mod-group)) {
 			&:hover {
 				@include hover;
 			}

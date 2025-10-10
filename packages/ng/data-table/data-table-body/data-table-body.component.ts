@@ -2,13 +2,13 @@ import { Component, computed, forwardRef, inject, input, model, ViewEncapsulatio
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { PortalContent } from '@lucca-front/ng/core';
 import { LU_DATA_TABLE_INSTANCE } from '../data-table.token';
-import { LU_DATA_TABLE_BODY_INSTANCE } from './dataTableBody.token';
+import { LU_DATA_TABLE_BODY_INSTANCE } from './data-table-body.token';
 
 @Component({
 	// eslint-disable-next-line @angular-eslint/component-selector
 	selector: 'tbody[luDataTableBody]',
 	standalone: true,
-	templateUrl: `./dataTableBody.component.html`,
+	templateUrl: `./data-table-body.component.html`,
 	encapsulation: ViewEncapsulation.None,
 	host: {
 		class: 'dataTable-body',

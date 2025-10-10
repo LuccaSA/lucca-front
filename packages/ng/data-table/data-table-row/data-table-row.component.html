@@ -5,7 +5,7 @@
 		[class.dataTable-foot-row-cell]="footRef !== null"
 	>
 		@if (!footRef) {
-			<lu-form-field label="Sélectionner" hiddenLabel>
+			<lu-form-field [label]="selectedLabel()" hiddenLabel>
 				<lu-checkbox-input [(ngModel)]="selected" [disabled]="disabled()" />
 			</lu-form-field>
 		}

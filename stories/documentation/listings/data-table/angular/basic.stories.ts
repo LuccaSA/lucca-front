@@ -1,7 +1,14 @@
 import { FormsModule } from '@angular/forms';
 import { ButtonComponent } from '@lucca-front/ng/button';
-import { DataTableBodyComponent, DataTableComponent, DataTableHeadComponent, DataTableRowCellComponent, DataTableRowCellHeaderComponent, DataTableRowComponent } from '@lucca-front/ng/data-table';
-import { DataTableFootComponent } from '@lucca-front/ng/data-table/dataTableFoot';
+import {
+	DataTableBodyComponent,
+	DataTableComponent,
+	DataTableFootComponent,
+	DataTableHeadComponent,
+	DataTableRowCellComponent,
+	DataTableRowCellHeaderComponent,
+	DataTableRowComponent,
+} from '@lucca-front/ng/data-table';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { TextInputComponent } from '@lucca-front/ng/forms';
 import { IconComponent } from '@lucca-front/ng/icon';
@@ -23,7 +30,7 @@ export default {
 				type: 'select',
 			},
 		},
-		valign: {
+		verticalAlign: {
 			options: ['', 'top', 'middle', 'bottom'],
 			control: {
 				type: 'select',
@@ -33,6 +40,12 @@ export default {
 			if: { arg: 'layoutFixed', truthy: true },
 		},
 		selected: {
+			if: { arg: 'selectable', truthy: true },
+		},
+		selectedLabel: {
+			if: { arg: 'selectable', truthy: true },
+		},
+		selectedLabelHead: {
 			if: { arg: 'selectable', truthy: true },
 		},
 		disabled: {
@@ -49,6 +62,12 @@ export default {
 		},
 		expanded: {
 			if: { arg: 'group', truthy: true },
+		},
+		cols: {
+			control: { type: 'range', min: 2, max: 6 },
+		},
+		lines: {
+			control: { type: 'range', min: 2, max: 6 },
 		},
 	},
 	decorators: [
@@ -72,9 +91,10 @@ export default {
 
 	render: (args, { argTypes }) => {
 		const {
+			cols,
 			actions,
 			editable,
-			valign,
+			verticalAlign,
 			align,
 			stickyHeader,
 			group,
@@ -91,10 +111,15 @@ export default {
 			fixedWidth,
 			fixedWidthValue,
 			selectable,
+			lines,
+			nested,
+			selectedLabel,
+			selectedLabelHead,
 			...inputArgs
 		} = args;
 
-		const text = 'lorem ipsum';
+		const text = 'cell';
+		const textHeader = 'header';
 		const layoutFixedAttr = layoutFixed ? ` layoutFixed` : ``;
 		const hoverAttr = hover ? ` hover` : ``;
 		const cellBorderAttr = cellBorder ? ` cellBorder` : ``;
@@ -102,15 +127,40 @@ export default {
 		const fixedWithAttr = fixedWidth && fixedWidthValue !== '' ? ` fixedWidth="${fixedWidthValue}"` : ``;
 		const selectableAttr = selectable ? ` selectable` : ``;
 		const selectedAttr = selected ? ` [selected]="true"` : ``;
+		const selectableLabelAttr = selectable ? ` selectedLabel="${selectedLabel}"` : ``;
+		const selectableLabelHeadAttr = selectable ? ` selectedLabel="${selectedLabelHead}"` : ``;
 		const disabledAttr = disabled ? ` disabled` : ``;
 		const stickyHeaderAttr = stickyHeader ? ` sticky` : ``;
 		const groupAttr = group ? ` groupButtonAlt="${groupButtonAlt}" group="${groupLabel}"` : ``;
 		const expandedAttr = expanded ? ` [expanded]="true"` : ``;
 		const alignAttr = align ? ` align="${align}"` : ``;
-		const valignAttr = valign ? ` valign="${valign}"` : ``;
+		const verticalAlignAttr = verticalAlign ? ` verticalAlign="${verticalAlign}"` : ``;
 		const editableAttr = editable ? ` editable` : ``;
 		const actionsAttr = actions ? ` actions` : ``;
-		const valignContent = valign ? `<br />${text}` : ``;
+		const nestedAttr = nested ? ` nested` : ``;
+		const verticalAlignContent = verticalAlign ? `<br />${textHeader}` : ``;
+		let colsContent = ``;
+		let colsHeaderContent = ``;
+		let linesContent = ``;
+		const col = `
+			<td luDataTableCell>${text}</td>`;
+		const header = `
+			<th luDataTableCell>${textHeader}</th>`;
+		for (let i = 1; i <= cols - 2; i++) {
+			colsContent = colsContent + col;
+		}
+		for (let i = 1; i <= cols - 2; i++) {
+			colsHeaderContent = colsHeaderContent + header;
+		}
+		const line = `
+		<tr luDataTableRow${selectableLabelAttr}>
+			<th luDataTableCell>${textHeader}</th>${colsContent}
+			<td luDataTableCell${alignAttr}>${text}</td>
+		</tr>`;
+		for (let i = 1; i <= lines - 2; i++) {
+			linesContent = linesContent + line;
+		}
+
 		const actionsContent = actions
 			? `
 				<button type="button" luButton>
@@ -129,10 +179,10 @@ export default {
 			`
 			: text;
 		const tfootTpl = tfoot
-			? `<tfoot luDataTableFoot>
-		<tr luDataTableRow>
-			<th luDataTableCell>${text}</th>
-			<td luDataTableCell>${text}</td>
+			? `
+	<tfoot luDataTableFoot>
+		<tr luDataTableRow${selectableLabelAttr}>
+			<th luDataTableCell>${textHeader}</th>${colsContent}
 			<td luDataTableCell${alignAttr}>${text}</td>
 		</tr>
 	</tfoot>`
@@ -141,32 +191,23 @@ export default {
 		return {
 			styles: stickyHeader ? [`lu-data-table { max-block-size: 7.5rem }`] : [``],
 			props: { example: text },
-			template: `<lu-data-table${layoutFixedAttr}${hoverAttr}${cellBorderAttr}${selectableAttr}${valignAttr}>
+			template: `<lu-data-table${layoutFixedAttr}${hoverAttr}${cellBorderAttr}${selectableAttr}${verticalAlignAttr}${nestedAttr}>
 	<thead luDataTableHead${stickyHeaderAttr}>
-		<tr luDataTableRow>
-			<th luDataTableCell${fixedWithAttr}>${text}</th>
-			<th luDataTableCell>${text}</th>
-			<th luDataTableCell${sortAttr}${alignAttr}>${text}</th>
+		<tr luDataTableRow${selectableLabelHeadAttr}>
+			<th luDataTableCell>${textHeader}</th>${colsHeaderContent}
+			<th luDataTableCell${fixedWithAttr}${sortAttr}${alignAttr}>${textHeader}</th>
 		</tr>
 	</thead>
-	<tbody luDataTableBody${groupAttr}${expandedAttr}>
-		<tr luDataTableRow>
-			<th luDataTableCell>${text}</th>
-			<td luDataTableCell>${text}${valignContent}</td>
+	<tbody luDataTableBody${groupAttr}${expandedAttr}>${linesContent}
+		<tr luDataTableRow${selectableLabelAttr}>
+			<th luDataTableCell>${textHeader}${verticalAlignContent}</th>${colsContent}
 			<td luDataTableCell${alignAttr}${actionsAttr}>${actionsContent}</td>
 		</tr>
-		<tr luDataTableRow>
-			<th luDataTableCell>${text}</th>
-			<td luDataTableCell${editableAttr}>${editableContent}</td>
-			<td luDataTableCell${alignAttr}${actionsAttr}>${actionsContent}</td>
+		<tr luDataTableRow${selectableLabelAttr}${selectedAttr}${disabledAttr}>
+			<th luDataTableCell>${textHeader}</th>${colsContent}
+			<td luDataTableCell${alignAttr}${editableAttr}>${editableContent}</td>
 		</tr>
-		<tr luDataTableRow${selectedAttr}${disabledAttr}>
-			<th luDataTableCell>${text}</th>
-			<td luDataTableCell>${text}</td>
-			<td luDataTableCell${alignAttr}${actionsAttr}>${actionsContent}</td>
-		</tr>
-	</tbody>
-	${tfootTpl}
+	</tbody>${tfootTpl}
 </lu-data-table>`,
 		};
 	},
@@ -174,24 +215,29 @@ export default {
 
 export const Basic: StoryObj = {
 	args: {
+		cols: 2,
+		lines: 2,
 		tfoot: false,
 		align: undefined,
-		valign: undefined,
+		verticalAlign: undefined,
 		sort: undefined,
 		stickyHeader: false,
 		hover: false,
 		cellBorder: false,
 		layoutFixed: false,
 		fixedWidth: false,
-		fixedWidthValue: '7rem',
+		fixedWidthValue: '6rem',
 		selectable: false,
 		selected: false,
 		disabled: false,
+		selectedLabel: 'Sélectionner cette ligne',
+		selectedLabelHead: 'Sélectionner toutes les lignes',
 		group: false,
 		groupLabel: 'Group',
-		groupButtonAlt: 'Afficher 3 lignes supplémentaires',
+		groupButtonAlt: 'Afficher X lignes supplémentaires',
 		expanded: false,
 		editable: false,
 		actions: false,
+		nested: false,
 	},
 };
