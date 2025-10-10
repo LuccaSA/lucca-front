@@ -11,18 +11,15 @@
 		</button>
 	</header>
 	<section class="calendar-labels" [class]="mod">
-		<div class="calendar-labels-item" *ngFor="let label of labels">{{ label }}</div>
+		@for (label of labels; track label) {
+			<div class="calendar-labels-item">{{ label }}</div>
+		}
 	</section>
 	<section class="calendar-grid" [class]="mod">
-		<button
-			type="button"
-			*ngFor="let item of items; trackBy: trackBy"
-			class="calendar-grid-item"
-			[class]="item.mods"
-			[disabled]="item.isDisabled"
-			(click)="select(item)"
-		>
-			<div class="calendar-grid-item-content">{{ item.label }}</div>
-		</button>
+		@for (item of items; track item.id) {
+			<button type="button" class="calendar-grid-item" [class]="item.mods" [disabled]="item.isDisabled" (click)="select(item)">
+				<div class="calendar-grid-item-content">{{ item.label }}</div>
+			</button>
+		}
 	</section>
 </section>

@@ -1,4 +1,6 @@
-<span *ngIf="state && state !== 'default'" class="lucca-icon inlineMessage-statusIcon" aria-hidden="true"></span>
+@if (state && state !== "default") {
+	<span class="lucca-icon inlineMessage-statusIcon" aria-hidden="true"></span>
+}
 @if (isStringPortalContent(label)) {
 	<p class="inlineMessage-content" [class.pr-u-ellipsis]="withTooltip" luTooltip luTooltipWhenEllipsis [luTooltipDisabled]="!withTooltip">
 		{{ label }}
