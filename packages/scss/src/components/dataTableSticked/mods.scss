@@ -16,6 +16,7 @@
 			background-image: linear-gradient(#{color.transparentize(var(--palettes-neutral-400), 0.24)}, transparent);
 			pointer-events: none;
 			box-shadow: 0 1px var(--commons-border-200) inset;
+			opacity: var(--components-dataTable-header-shadow-opacity);
 		}
 	}
 }

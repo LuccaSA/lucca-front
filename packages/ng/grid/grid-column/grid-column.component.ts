@@ -1,5 +1,5 @@
 import { Component, computed, input, numberAttribute, ViewEncapsulation } from '@angular/core';
-import { ResponsiveConfig } from '../types';
+import { ResponsiveConfig } from '@lucca-front/ng/core';
 
 @Component({
 	selector: 'lu-grid-column',
@@ -19,7 +19,7 @@ export class GridColumnComponent {
 	align = input<'start' | 'center' | 'end' | 'auto' | null>(null);
 	justify = input<'start' | 'center' | 'end' | 'auto' | null>(null);
 
-	responsive = input<ResponsiveConfig>({});
+	responsive = input<ResponsiveConfig<'row' | 'col' | 'rowspan' | 'colspan', number>>({});
 
 	style = computed(() => {
 		return {

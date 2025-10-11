@@ -15,8 +15,17 @@
 		@include cellBorder;
 	}
 
-	&.mod-alignTop {
-		@include alignTop;
+	&.mod-alignTop,
+	&.mod-verticalAlignTop {
+		@include verticalAlignTop;
+	}
+
+	&.mod-verticalAlignBottom {
+		@include verticalAlignBottom;
+	}
+
+	&.mod-verticalAlignMiddle {
+		@includeverticalAlignMiddle;
 	}
 
 	&.mod-layoutFixed {
@@ -33,7 +42,7 @@
 	}
 
 	&.mod-hover {
-		:is(.dataTable-head-row.mod-selectable, .dataTable-body-row) {
+		:is(.mod-selectable, .dataTable-body-row:not(.mod-group)) {
 			&:hover {
 				@include hover;
 			}
@@ -54,6 +63,7 @@
 		@include group;
 	}
 
+	&:has([selectable]),
 	&.mod-selectable {
 		@include selectable;
 
@@ -76,8 +86,13 @@
 		@include alignCenter;
 	}
 
-	&.mod-alignRight {
-		@include alignRight;
+	&.mod-alignRight,
+	&.mod-alignEnd {
+		@include alignEnd;
+	}
+
+	&.mod-alignStart {
+		@include alignStart;
 	}
 
 	&.mod-editable {

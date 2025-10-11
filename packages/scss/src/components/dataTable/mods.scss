@@ -14,8 +14,16 @@
 	}
 }
 
-@mixin alignTop {
+@mixin verticalAlignTop {
 	--components-dataTable-cell-verticalAlign: top;
+}
+
+@mixin verticalAlignBottom {
+	--components-dataTable-cell-verticalAlign: bottom;
+}
+
+@mixin verticalAlignMiddle {
+	--components-dataTable-cell-verticalAlign: middle;
 }
 
 @mixin buttonExpand {
@@ -47,7 +55,16 @@
 }
 
 @mixin selectable {
-	--components-dataTable-cellFirst-width: 2.5rem;
+	--components-dataTable-cellFirst-width: 2.625rem;
+
+	.dataTable-head-row-cell,
+	.dataTable-body-row-cell,
+	.dataTable-foot-row-cell {
+		&:first-child {
+			inline-size: var(--components-dataTable-cellFirst-width);
+			max-inline-size: var(--components-dataTable-cellFirst-width);
+		}
+	}
 }
 
 @mixin draggable {
@@ -73,7 +90,7 @@
 
 @mixin editable {
 	--components-dataTable-cell-padding: var(--pr-t-spacings-100);
-	--components-dataTable-cell-paddingInlineStart: var(--components-dataTable-cell-padding);
+	--components-dataTable-cell-paddingInlineStart: var(--pr-t-spacings-50);
 }
 
 @mixin actions {
@@ -87,6 +104,8 @@
 		@include button.onlyIcon;
 		@include button.onlyIconS;
 		@include button.ghost;
+
+		transition-property: box-shadow, color;
 	}
 
 	&:is(.dataTable-head-row-cell) {
@@ -101,8 +120,12 @@
 	--components-dataTable-cell-textAlign: center;
 }
 
-@mixin alignRight {
-	--components-dataTable-cell-textAlign: right;
+@mixin alignEnd {
+	--components-dataTable-cell-textAlign: end;
+}
+
+@mixin alignStart {
+	--components-dataTable-cell-textAlign: start;
 }
 
 @mixin layoutFixed {
