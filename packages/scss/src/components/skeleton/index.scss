@@ -1,57 +1,61 @@
 @use 'exports' as *;
 
 .skeleton {
-	@include vars;
-	@include component;
-
-	// .mod-dark can be applied to .skeleton or .skeleton-item
-	&.mod-dark {
-		@include dark;
+	@layer components {
+		@include vars;
+		@include component;
 	}
 
-	&.is-loading {
-		@include loading;
+	// .mod-dark can be applied to .skeleton or .skeleton-item
+	@layer mods {
+		&.mod-dark {
+			@include dark;
+		}
 
-		.skeleton-item {
-			// .mod-dark can be applied to .skeleton or .skeleton-item
-			&.mod-dark {
-				@include dark;
-			}
+		&.is-loading {
+			@include loading;
 
-			&.mod-square {
-				@include square;
-			}
+			.skeleton-item {
+				// .mod-dark can be applied to .skeleton or .skeleton-item
+				&.mod-dark {
+					@include dark;
+				}
 
-			&.mod-circle {
-				@include circle;
-			}
+				&.mod-square {
+					@include square;
+				}
 
-			&.mod-XS {
-				@include XS;
-			}
+				&.mod-circle {
+					@include circle;
+				}
 
-			&.mod-S {
-				@include S;
-			}
+				&.mod-XS {
+					@include XS;
+				}
 
-			&.mod-L {
-				@include L;
-			}
+				&.mod-S {
+					@include S;
+				}
 
-			&.mod-XL {
-				@include XL;
-			}
+				&.mod-L {
+					@include L;
+				}
 
-			&.mod-XXL {
-				@include XXL;
-			}
+				&.mod-XL {
+					@include XL;
+				}
 
-			&.mod-alignRight {
-				@include alignRight;
-			}
+				&.mod-XXL {
+					@include XXL;
+				}
 
-			&.mod-alignCenter {
-				@include alignCenter;
+				&.mod-alignRight {
+					@include alignRight;
+				}
+
+				&.mod-alignCenter {
+					@include alignCenter;
+				}
 			}
 		}
 	}

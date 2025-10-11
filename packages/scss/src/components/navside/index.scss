@@ -3,107 +3,117 @@
 @use 'exports' as *;
 
 .navSide {
-	@include vars;
-	@include component;
+	@layer components {
+		@include vars;
+		@include component;
 
-	.appLayout-navSide & {
-		@include media.min('S') {
-			@include inAppLayoutWide;
+		.appLayout-navSide & {
+			@include media.min('S') {
+				@include inAppLayoutWide;
+			}
+
+			@include media.max('S') {
+				@include inAppLayoutNarrow;
+			}
+		}
+	}
+
+	@layer mods {
+		&.mod-withBanner {
+			@include banner;
+		}
+
+		&.mod-compact {
+			@include media.min('S') {
+				@include compact;
+
+				.navSide-item-link {
+					&:hover {
+						@include compactHover;
+					}
+
+					&:is(.is-active, .active) {
+						@include compactActive;
+					}
+				}
+			}
 		}
 
 		@include media.max('S') {
-			@include inAppLayoutNarrow;
+			@include mobile;
 		}
-	}
 
-	&.mod-withBanner {
-		@include banner;
-	}
-
-	&.mod-compact {
-		@include media.min('S') {
-			@include compact;
-
-			.navSide-item-link {
-				&:hover {
-					@include compactHover;
-				}
-
-				&:is(.is-active, .active) {
-					@include compactActive;
+		@include media.max('S') {
+			&:not(.is-open, .open) {
+				.navSide-item {
+					&:not(.mod-mobileToggle) {
+						@include mobileHidden;
+					}
 				}
 			}
-		}
-	}
 
-	@include media.max('S') {
-		@include mobile;
+			&:is(.is-open, .open) {
+				@include mobileOpen;
 
-		&:not(.is-open, .open) {
-			.navSide-item {
-				&:not(.mod-mobileToggle) {
-					@include mobileHidden;
+				&.mod-withBanner {
+					@include mobileOpenBanner;
 				}
 			}
 		}
 
-		&.mod-withBanner {
-			.navSide-item {
-				&.mod-mobileToggle {
-					@include banner;
+		@include media.max('S') {
+			&.mod-withBanner {
+				.navSide-item {
+					&.mod-mobileToggle {
+						@include banner;
+					}
 				}
 			}
+		}
+	}
+}
+
+@layer mods {
+	.navSide-item {
+		&.mod-mobileToggle {
+			@include mobileToggle;
+		}
+
+		&:not(.is-open) {
+			@include notOpen;
 		}
 
 		&:is(.is-open, .open) {
-			@include mobileOpen;
+			@include expanded;
 
-			&.mod-withBanner {
-				@include mobileOpenBanner;
+			.navSide-item-subMenu-link {
+				&:is(:hover) {
+					@include sublinkHover;
+				}
+
+				&:is(.is-active, .active) {
+					@include sublinkActive;
+				}
 			}
 		}
 	}
-}
 
-.navSide-item {
-	&:not(.is-open) {
-		@include notOpen;
-	}
+	.navSide-item-subMenu-link,
+	.navSide-item-link {
+		&:is(.is-active, .active) {
+			@include active;
+		}
 
-	&.mod-mobileToggle {
-		@include mobileToggle;
-	}
-
-	&:is(.is-open, .open) {
-		@include expanded;
-
-		.navSide-item-subMenu-link {
-			&:is(:hover) {
-				@include sublinkHover;
-			}
-
-			&:is(.is-active, .active) {
-				@include sublinkActive;
-			}
+		&:is([aria-expanded='true']) {
+			@include expanded;
 		}
 	}
-}
 
-.navSide-item-subMenu-link,
-.navSide-item-link {
-	&:is(.is-active, .active) {
-		@include active;
-	}
-
-	&:is([aria-expanded='true']) {
-		@include expanded;
-	}
-}
-
-html {
-	&:is(.hasMenu, .withMenu) {
-		@include media.max('S') {
-			@include overlay;
+	html {
+		&:is(.hasMenu, .withMenu) {
+			@include media.max('S') {
+				@include overlay;
+			}
 		}
 	}
 }

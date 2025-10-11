@@ -1,14 +1,16 @@
 @use '@lucca-front/scss/src/components/dialog';
 
-.dialog .cdk-dialog-container {
-	flex-grow: 1;
-	inline-size: auto;
-	block-size: auto;
-	display: flex;
-	flex-direction: column;
-	min-block-size: 0;
+.dialog {
+	.cdk-dialog-container {
+		flex-grow: 1;
+		inline-size: auto;
+		block-size: auto;
+		display: flex;
+		flex-direction: column;
+		min-block-size: 0;
 
-	ng-component {
-		display: contents;
+		ng-component {
+			display: contents;
+		}
 	}
 }

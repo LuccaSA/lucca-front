@@ -2,26 +2,30 @@
 @use '@lucca-front/scss/src/commons/utils/a11y';
 
 .timePicker {
-	@include vars;
-	@include component;
-
-	&.mod-S {
-		@include S;
+	@layer components {
+		@include vars;
+		@include component;
 	}
 
-	&.mod-stepper {
-		@include stepper;
-	}
+	@layer mods {
+		&.mod-S {
+			@include S;
+		}
 
-	&.mod-stepperHover {
-		@include stepperHover;
-	}
+		&.mod-stepper {
+			@include stepper;
+		}
 
-	&:has([aria-invalid='true']) {
-		@include invalid;
-	}
+		&.mod-stepperHover {
+			@include stepperHover;
+		}
 
-	&:has([disabled]) {
-		@include disabled;
+		&:has([aria-invalid='true']) {
+			@include invalid;
+		}
+
+		&:has([disabled]) {
+			@include disabled;
+		}
 	}
 }

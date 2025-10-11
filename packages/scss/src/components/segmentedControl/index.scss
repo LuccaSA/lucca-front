@@ -4,40 +4,46 @@
 // .viewTabs is deprecated
 .segmentedControl,
 .viewTabs {
-	@include vars;
-	@include component;
-
-	&.mod-S {
-		@include S;
+	@layer components {
+		@include vars;
+		@include component;
 	}
 
-	&.mod-vertical {
-		@include vertical;
-	}
+	@layer mods {
+		&.mod-S {
+			@include S;
+		}
 
-	@include media.max('XXS') {
-		@include vertical;
-	}
-}
+		&.mod-vertical {
+			@include vertical;
+		}
 
-// .viewTabs-item-tab is deprecated
-.segmentedControl-item-action,
-.viewTabs-item-tab {
-	.segmentedControl-item-input:checked + &,
-	&[aria-selected='true'] {
-		@include selected;
+		@include media.max('XXS') {
+			@include vertical;
+		}
 	}
 }
 
-.segmentedControl-item-action:disabled,
-.segmentedControl-item-input:disabled ~ .segmentedControl-item-action {
+@layer mods {
+	// .viewTabs-item-tab is deprecated
+	.segmentedControl-item-action,
+	.viewTabs-item-tab {
+		.segmentedControl-item-input:checked + &,
+		&[aria-selected='true'] {
+			@include selected;
+		}
+	}
+
+	.segmentedControl-item-action:disabled,
+	.segmentedControl-item-input:disabled ~ .segmentedControl-item-action {
 		@include disabled;
-}
+	}
 
-// .viewTabs_panel is deprecated
-.segmentedControl_panel,
-.viewTabs_panel {
-	&:not(.is-active, .active) {
-		@include panelInactive;
+	// .viewTabs_panel is deprecated
+	.segmentedControl_panel,
+	.viewTabs_panel {
+		&:not(.is-active, .active) {
+			@include panelInactive;
+		}
 	}
 }

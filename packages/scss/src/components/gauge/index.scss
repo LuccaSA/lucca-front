@@ -1,33 +1,37 @@
 @use 'exports' as *;
 
 .gauge {
-	@include vars;
-	@include component;
-
-	&.mod-thin {
-		@include thin;
+	@layer components {
+		@include vars;
+		@include component;
 	}
 
-	&:has(.gauge-circleBackground) {
-		@include circular;
-	}
-
-	// .mod-vertical is deprecated
-	&.mod-vertical {
-		@include vertical;
-
+	@layer mods {
 		&.mod-thin {
-			@include verticalThin;
+			@include thin;
 		}
-	}
 
-	&.is-zero,
-	&:not([style]),
-	&[style*='--components-gauge-value: 0%'] {
-		@include zero;
-	}
+		&:has(.gauge-circleBackground) {
+			@include circular;
+		}
 
-	&.is-animated {
-		@include animated;
+		// .mod-vertical is deprecated
+		&.mod-vertical {
+			@include vertical;
+
+			&.mod-thin {
+				@include verticalThin;
+			}
+		}
+
+		&.is-zero,
+		&:not([style]),
+		&[style*='--components-gauge-value: 0%'] {
+			@include zero;
+		}
+
+		&.is-animated {
+			@include animated;
+		}
 	}
 }

@@ -1,20 +1,26 @@
 @use 'exports' as *;
 
 .radioButtons {
-	@include vars;
-	@include component;
-
-	&.mod-S {
-		@include S;
+	@layer components {
+		@include vars;
+		@include component;
 	}
 
-	&.mod-XS {
-		@include XS;
+	@layer mods {
+		&.mod-S {
+			@include S;
+		}
+
+		&.mod-XS {
+			@include XS;
+		}
 	}
 }
 
-.radioButtons-item-input {
-	&:is(:disabled, .is-disabled, .disabled) {
-		@include disabled;
+@layer mods {
+	.radioButtons-item-input {
+		&:is(:disabled, .is-disabled, .disabled) {
+			@include disabled;
+		}
 	}
 }

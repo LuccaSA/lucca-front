@@ -1,55 +1,39 @@
 @use 'exports' as *;
 
 .filterPill {
-	@include vars;
-	@include component;
-
-	&:not(.is-filled) {
-		@include notFilled;
+	@layer components {
+		@include vars;
+		@include component;
 	}
 
-	&:hover {
-		@include hover;
-	}
-
-	&:active,
-	&:has(:active) {
-		@include active;
-	}
-
-	&.is-comboboxHidden {
-		@include comboboxHidden;
-	}
-
-	&:has(.filterPill-combobox:focus-visible) {
-		@include focusVisible;
-	}
-
-	&:has(.filterPill-combobox[aria-expanded='true']) {
-		@include opened;
-	}
-
-	&.is-filled {
-		@include filled;
+	@layer mods {
+		&:not(.is-filled) {
+			@include notFilled;
+		}
 
 		&:hover {
-			@include filledHover;
+			@include hover;
 		}
 
-		&:has(.filterPill-combobox:active) {
-			@include filledActive;
+		&:active,
+		&:has(:active) {
+			@include active;
 		}
-	}
 
-	&.mod-checkbox {
-		@include checkbox;
+		&.is-comboboxHidden {
+			@include comboboxHidden;
+		}
 
-		&:has(.filterPill-checkbox-input:focus-visible) {
+		&:has(.filterPill-combobox:focus-visible) {
 			@include focusVisible;
 		}
 
-		&:has(.filterPill-checkbox-input:checked) {
-			@include checkboxChecked;
+		&:has(.filterPill-combobox[aria-expanded='true']) {
+			@include opened;
+		}
+
+		&.is-filled {
+			@include filled;
 
 			&:hover {
 				@include filledHover;
@@ -60,24 +44,44 @@
 			}
 		}
 
-		&:has(.filterPill-checkbox-input:disabled) {
-			@include checkboxDisabled;
+		&.mod-checkbox {
+			@include checkbox;
+
+			&:has(.filterPill-checkbox-input:focus-visible) {
+				@include focusVisible;
+			}
 
 			&:has(.filterPill-checkbox-input:checked) {
-				@include checkboxCheckedDisabled;
+				@include checkboxChecked;
+
+				&:hover {
+					@include filledHover;
+				}
+
+				&:has(.filterPill-combobox:active) {
+					@include filledActive;
+				}
+			}
+
+			&:has(.filterPill-checkbox-input:disabled) {
+				@include checkboxDisabled;
+
+				&:has(.filterPill-checkbox-input:checked) {
+					@include checkboxCheckedDisabled;
+				}
 			}
 		}
-	}
 
-	&.mod-button {
-		@include button;
-	}
+		&.mod-button {
+			@include button;
+		}
 
-	&:has(.filterPill-combobox:disabled) {
-		@include disabled;
-	}
+		&:has(.filterPill-combobox:disabled) {
+			@include disabled;
+		}
 
-	&.is-hidden {
-		@include hidden;
+		&.is-hidden {
+			@include hidden;
+		}
 	}
 }

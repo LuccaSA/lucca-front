@@ -2,12 +2,14 @@
 
 @include definitions.selectInputStyle;
 
-.lu-select-value {
-	padding-inline-end: 3.5rem;
-}
+@layer components {
+	.lu-select-value {
+		padding-inline-end: 3.5rem;
+	}
 
-.lu-select-additionalInformation {
-	font-size: 80%;
-	font-style: italic;
-	margin-block-start: -0.25em;
+	.lu-select-additionalInformation {
+		font-size: 80%;
+		font-style: italic;
+		margin-block-start: -0.25em;
+	}
 }

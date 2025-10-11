@@ -3,23 +3,27 @@
 @use 'exports' as *;
 
 .table {
-	&.mod-layoutFixed {
-		@include layoutFixed;
+	@layer mods {
+		&.mod-layoutFixed {
+			@include layoutFixed;
+		}
 	}
 }
 
 .table-head-row-cell,
 .table-body-row-cell,
 .table-foot-row-cell {
-	@for $i from 2 through 20 {
-		&.mod-layoutFixed-#{$i} {
-			@include layoutFixedCell($i);
-		}
+	@layer mods {
+		@for $i from 2 through 20 {
+			&.mod-layoutFixed-#{$i} {
+				@include layoutFixedCell($i);
+			}
 
-		@each $breakpoint, $value in config.$breakpoints {
-			@include media.min($breakpoint) {
-				&.mod-layoutFixed-#{$i}\@mediaMin#{$breakpoint} {
-					@include layoutFixedCell($i);
+			@each $breakpoint, $value in config.$breakpoints {
+				@include media.min($breakpoint) {
+					&.mod-layoutFixed-#{$i}\@mediaMin#{$breakpoint} {
+						@include layoutFixedCell($i);
+					}
 				}
 			}
 		}

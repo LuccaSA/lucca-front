@@ -3,35 +3,39 @@
 // .menu is deprecated
 .horizontalNavigation,
 .menu {
-	@include vars;
-	@include component;
-
-	&.mod-header {
-		@include header;
+	@layer components {
+		@include vars;
+		@include component;
 	}
 
-	&.mod-S {
-		@include S;
-	}
-
-	&.mod-noBorder {
-		@include noBorder;
-	}
-
-	&.mod-vertical {
-		@include vertical;
-
-		// .menu-list-item-action is deprecated
-		.horizontalNavigation-list-item-action,
-		.menu-list-item-action {
-			&[aria-current='page'],
-			&.is-active {
-				@include activeVertical;
-			}
+	@layer mods {
+		&.mod-header {
+			@include header;
 		}
 
 		&.mod-S {
-			@include verticalS;
+			@include S;
+		}
+
+		&.mod-noBorder {
+			@include noBorder;
+		}
+
+		&.mod-vertical {
+			@include vertical;
+
+			// .menu-list-item-action is deprecated
+			.horizontalNavigation-list-item-action,
+			.menu-list-item-action {
+				&[aria-current='page'],
+				&.is-active {
+					@include activeVertical;
+				}
+			}
+
+			&.mod-S {
+				@include verticalS;
+			}
 		}
 	}
 }
@@ -39,20 +43,22 @@
 // .menu-link is deprecated
 // .menu-list-item-action is deprecated
 .horizontalNavigation-list-item-action,
-.menu-list-item-action,
-.menu-link {
-	// .active is deprecated
-	&[aria-current='page'],
-	&.is-active,
-	&.active {
-		@include active;
-	}
+.menu-link,
+.menu-list-item-action {
+	@layer mods {
+		// .active is deprecated
+		&[aria-current='page'],
+		&.is-active,
+		&.active {
+			@include active;
+		}
 
-	// .disabled is deprecated
-	// [disabled] is deprecated
-	&.is-disabled,
-	&.disabled,
-	&[disabled] {
-		@include disabled;
+		// .disabled is deprecated
+		// [disabled] is deprecated
+		&.is-disabled,
+		&.disabled,
+		&[disabled] {
+			@include disabled;
+		}
 	}
 }

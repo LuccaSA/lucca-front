@@ -19,15 +19,15 @@ $defaultAtRoot: config.$isNamespaced and 'with: rule' or 'without: rule';
 	white-space: nowrap;
 	word-wrap: normal;
 
+	&::before {
+		content: var(--icon-content) / '';
+	}
+
 	@at-root ($atRoot) {
 		@each $name, $value in config.$icons {
 			.icon-#{core.camelize($name)} {
 				--icon-content: '#{$value}';
 			}
 		}
-	}
-
-	&::before {
-		content: var(--icon-content) / '';
 	}
 }
