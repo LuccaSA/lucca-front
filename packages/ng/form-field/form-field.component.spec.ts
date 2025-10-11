@@ -45,7 +45,7 @@ describe('FormFieldComponent', () => {
 		expect(isInputRequired()).toBe(false);
 	});
 
-	it('should detect required validator', () => {
+	it('should detect required validator', (done) => {
 		// Arrange
 		fixture.componentRef.setInput('formControlToUse', 'required');
 
@@ -53,10 +53,14 @@ describe('FormFieldComponent', () => {
 		fixture.detectChanges();
 
 		// Assert
-		expect(isInputRequired()).toBe(true);
+		setTimeout(() => {
+			// For some reason, if not triggered in a timeout, we're getting a cached version of the signal, resulting in this test failing
+			expect(isInputRequired()).toBe(true);
+			done();
+		}, 1);
 	});
 
-	it('should handle required when going from normal to required', () => {
+	it('should handle required when going from normal to required', (done) => {
 		// Arrange
 		fixture.detectChanges();
 
@@ -65,10 +69,14 @@ describe('FormFieldComponent', () => {
 		fixture.detectChanges();
 
 		// Assert
-		expect(isInputRequired()).toBe(true);
+		setTimeout(() => {
+			// For some reason, if not triggered in a timeout, we're getting a cached version of the signal, resulting in this test failing
+			expect(isInputRequired()).toBe(true);
+			done();
+		}, 1);
 	});
 
-	it('should handle required when going from normal to required', () => {
+	it('should handle required when going from normal to required', (done) => {
 		// Arrange
 		fixture.componentRef.setInput('formControlToUse', 'required');
 		fixture.detectChanges();
@@ -78,6 +86,10 @@ describe('FormFieldComponent', () => {
 		fixture.detectChanges();
 
 		// Assert
-		expect(isInputRequired()).toBe(false);
+		setTimeout(() => {
+			// For some reason, if not triggered in a timeout, we're getting a cached version of the signal, resulting in this test failing
+			expect(isInputRequired()).toBe(false);
+			done();
+		}, 1);
 	});
 });
