@@ -1,7 +1,6 @@
 import { AppLayoutComponent } from '@lucca-front/ng/app-layout';
 import { MainLayoutBlockComponent, MainLayoutComponent } from '@lucca-front/ng/main-layout';
 import { Meta, moduleMetadata } from '@storybook/angular';
-import { cleanupTemplate } from 'stories/helpers/stories';
 
 interface MainLayoutAngularBasicStory {
 	header: boolean;
@@ -37,27 +36,43 @@ export default {
 		}),
 	],
 	render: (args: MainLayoutAngularBasicStory) => {
-		const headerContainer = args.header ? `<ng-container mainLayoutHeader><div class="container"><div class="fakeContent">header</div></div></ng-container>` : ``;
-		const footerContainer = args.footer ? `<ng-container mainLayoutFooter><div class="container"><div class="fakeContent">footer</div></div></ng-container>` : ``;
-		const headerStickyParam = args.headerSticky ? `headerSticky` : ``;
-		const footerStickyParam = args.footerSticky ? `footerSticky` : ``;
-		const sidebarContainer = args.sidebar ? `<ng-container mainLayoutSidebar>sidebar</ng-container>` : ``;
-		const template = `<lu-main-layout-block>
-	<div class="container">
-		<div class="fakeContent">
-			content
-		</div>
-	</div>
-</lu-main-layout-block>`;
-		const contentOverflow = ` content overflowing`;
+		const headerContainer = args.header
+			? `
+		<ng-container mainLayoutHeader>
+			<div class="container">
+				<div class="fakeContent">header</div>
+			</div>
+		</ng-container>`
+			: ``;
+		const footerContainer = args.footer
+			? `
+		<ng-container mainLayoutFooter>
+			<div class="container">
+				<div class="fakeContent">footer</div>
+			</div>
+		</ng-container>`
+			: ``;
+		const headerStickyParam = args.headerSticky ? ` headerSticky` : ``;
+		const footerStickyParam = args.footerSticky ? ` footerSticky` : ``;
+		const sidebarContainer = args.sidebar
+			? `
+		<ng-container mainLayoutSidebar>sidebar</ng-container>`
+			: ``;
+		const template = `
+		<lu-main-layout-block>
+			<div class="container">
+				<div class="fakeContent">content</div>
+			</div>
+		</lu-main-layout-block>`;
+		const contentOverflow = `
+					content overflowing`;
 		let overflow = ``;
 		for (let i = 1; i <= args.repeatOverflow; i++) {
 			overflow = overflow + contentOverflow;
 		}
 		const templateOverflow = `<lu-main-layout-block overflow>
 			<div class="container">
-				<div class="fakeContent">
-					${overflow}
+				<div class="fakeContent">${overflow}
 				</div>
 			</div>
 		</lu-main-layout-block>`;
@@ -115,16 +130,11 @@ export default {
 }
 				`,
 			],
-			template: cleanupTemplate(`
-
-	<lu-main-layout ${headerStickyParam} ${footerStickyParam}>
-		${sidebarContainer}
-		${headerContainer}
-		<ng-container mainLayoutContent>
-			${content}
-		</ng-container>
-		${footerContainer}
-	</lu-main-layout>`),
+			template: `
+	<lu-main-layout${headerStickyParam}${footerStickyParam}>${sidebarContainer}${headerContainer}
+		<ng-container mainLayoutContent>${content}
+		</ng-container>${footerContainer}
+	</lu-main-layout>`,
 		};
 	},
 } as Meta;

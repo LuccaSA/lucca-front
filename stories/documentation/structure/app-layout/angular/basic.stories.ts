@@ -15,7 +15,7 @@ export default {
 		}),
 	],
 	render: (args: AppLayoutAngularBasicStory) => {
-		const mobileNavSideBottomAttribute = args.mobileNavSideBottom ? `mobileNavSideBottom` : ``;
+		const mobileNavSideBottomAttribute = args.mobileNavSideBottom ? ` mobileNavSideBottom` : ``;
 
 		return {
 			styles: [
@@ -79,7 +79,7 @@ export default {
 			],
 			template: cleanupTemplate(
 				`
-<lu-app-layout ${mobileNavSideBottomAttribute}>
+<lu-app-layout${mobileNavSideBottomAttribute}>
 	<ng-container appLayoutBanner>banner</ng-container>
 	<ng-container appLayoutNavSide>navSide</ng-container>
 	<ng-container appLayoutMain>main</ng-container>
