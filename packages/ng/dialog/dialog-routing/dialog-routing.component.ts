@@ -1,23 +1,32 @@
-import { ChangeDetectionStrategy, Component, DestroyRef, inject, Injector, OnDestroy, OnInit, runInInjectionContext, signal, TemplateRef, viewChild } from '@angular/core';
+import { assertInInjectionContext, ChangeDetectionStrategy, Component, DestroyRef, inject, Injector, OnDestroy, OnInit, runInInjectionContext, signal, TemplateRef, viewChild } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, CanDeactivateFn, GuardResult, Router, RouterOutlet } from '@angular/router';
 import { combineLatest, concat, map, Observable, of } from 'rxjs';
 import { provideLuDialog } from '../dialog.providers';
 import { LuDialogService } from '../dialog.service';
 import { LuDialogRef, LuDialogResult } from '../model';
-import { DialogRouteCloseTrigger, DialogRouteData, DialogRouteDialogConfig, DialogRouteDismissTrigger } from './dialog-routing.models';
+import { DIALOG_ROUTE_CLOSE_TRIGGER, DIALOG_ROUTE_DISMISS_TRIGGER, DialogRouteCloseTrigger, DialogRouteData, DialogRouteDialogConfig, DialogRouteDismissTrigger } from './dialog-routing.models';
 import { deferrableToObservable, deferrableToPromise, DialogResolveFn } from './dialog-routing.utils';
 
 /**
  * Default onClosed/onDismissed function that navigates back to the parent route when the dialog is closed or dismissed.
- * @deprecated Pass the trigger to defaultOnClosedFn when using it in onClosed/onDismissed.
  */
-export function defaultOnClosedFn<_C>(): void;
+export function defaultOnClosedFn(): void;
 /**
  * Default onClosed/onDismissed function that navigates back to the parent route when the dialog is closed or dismissed.
+ * @deprecated Use non-generic version instead.
  */
-export function defaultOnClosedFn<_C>(trigger: DialogRouteCloseTrigger | DialogRouteDismissTrigger): void;
-export function defaultOnClosedFn<C>(trigger?: DialogRouteCloseTrigger | DialogRouteDismissTrigger): void {
+export function defaultOnClosedFn<_C>(): void;
+export function defaultOnClosedFn<C>(): void {
+	let trigger: DialogRouteCloseTrigger | DialogRouteDismissTrigger | null = null;
+
+	try {
+		assertInInjectionContext(defaultOnClosedFn);
+		trigger = inject(DIALOG_ROUTE_CLOSE_TRIGGER, { optional: true }) ?? inject(DIALOG_ROUTE_DISMISS_TRIGGER, { optional: true });
+	} catch {
+		// Not in injection context, do nothing
+	}
+
 	if (trigger === 'navigation') {
 		// If the dialog is closed because of a navigation, we don't need to do anything.
 		// It would cancel the navigation that is already in progress.
@@ -145,33 +154,43 @@ export class DialogRoutingContainerComponent<C> implements OnDestroy, OnInit {
 	}
 
 	#onDialogDismissed(): void {
-		runInInjectionContext(this.injector, () => {
-			this.#closeTrigger ??= 'dialog:dismissed';
+		this.#closeTrigger ??= 'dialog:dismissed';
 
-			if (this.#closeTrigger === 'dialog:closed') {
-				throw new Error('Dialog cannot be both closed and dismissed');
-			}
+		if (this.#closeTrigger === 'dialog:closed') {
+			throw new Error('Dialog cannot be both closed and dismissed');
+		}
 
+		const injector = Injector.create({
+			parent: this.injector,
+			providers: [{ provide: DIALOG_ROUTE_DISMISS_TRIGGER, useValue: this.#closeTrigger }],
+		});
+
+		runInInjectionContext(injector, () => {
 			if (this.#config.onDismissed) {
-				this.#config.onDismissed(this.#closeTrigger);
+				this.#config.onDismissed();
 			} else {
-				defaultOnClosedFn(this.#closeTrigger);
+				defaultOnClosedFn();
 			}
 		});
 	}
 
 	#onDialogClosed(result: LuDialogResult<C>): void {
-		runInInjectionContext(this.injector, () => {
-			this.#closeTrigger ??= 'dialog:closed';
+		this.#closeTrigger ??= 'dialog:closed';
 
-			if (this.#closeTrigger === 'dialog:dismissed') {
-				throw new Error('Dialog cannot be both closed and dismissed');
-			}
+		if (this.#closeTrigger === 'dialog:dismissed') {
+			throw new Error('Dialog cannot be both closed and dismissed');
+		}
 
+		const injector = Injector.create({
+			parent: this.injector,
+			providers: [{ provide: DIALOG_ROUTE_CLOSE_TRIGGER, useValue: this.#closeTrigger }],
+		});
+
+		runInInjectionContext(injector, () => {
 			if (this.#config.onClosed) {
-				this.#config.onClosed(result, this.#closeTrigger);
+				this.#config.onClosed(result);
 			} else {
-				defaultOnClosedFn(this.#closeTrigger);
+				defaultOnClosedFn();
 			}
 		});
 	}

@@ -1,4 +1,5 @@
 import { ComponentType } from '@angular/cdk/overlay';
+import { InjectionToken } from '@angular/core';
 import { CanDeactivateFn, Route } from '@angular/router';
 import { LuDialogConfig, LuDialogData, LuDialogResult } from '../model';
 import { DialogResolveFn } from './dialog-routing.utils';
@@ -20,14 +21,17 @@ export type DialogRouteConfig<C> = DialogRouteComponentLoader<C> & {
 	/**
 	 * When the dialog is closed, this callback is called with the result of the dialog.
 	 * This callback is called within injection context, so you can inject services in it.
+	 *
+	 * If needed, the reason the dialog was closed can retrieved using `inject(DIALOG_ROUTE_CLOSE_TRIGGER)`
 	 */
-	onClosed?: (res: LuDialogResult<C>, trigger: DialogRouteCloseTrigger) => unknown;
+	onClosed?: (res: LuDialogResult<C>) => unknown;
 	/**
 	 * When the dialog is dismissed, this callback is called.
 	 * This callback is called within injection context, so you can inject services in it.
-	 * The trigger
+	 *
+	 * If needed, the reason the dialog was dismissed can retrieved using `inject(DIALOG_ROUTE_DISMISS_TRIGGER)`
 	 */
-	onDismissed?: (trigger: DialogRouteDismissTrigger) => unknown;
+	onDismissed?: () => unknown;
 
 	/**
 	 * Override canDeactivate to have a stricter type
@@ -40,3 +44,6 @@ export type DialogRouteDialogConfig<C> = Omit<LuDialogConfig<C>, 'data' | 'conte
 export interface DialogRouteData<C> {
 	dialogRouteConfig: DialogRouteConfig<C>;
 }
+
+export const DIALOG_ROUTE_CLOSE_TRIGGER = new InjectionToken<DialogRouteCloseTrigger>('DIALOG_ROUTE_CLOSE_TRIGGER');
+export const DIALOG_ROUTE_DISMISS_TRIGGER = new InjectionToken<DialogRouteDismissTrigger>('DIALOG_ROUTE_DISMISS_TRIGGER');
