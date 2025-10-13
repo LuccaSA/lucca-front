@@ -135,6 +135,8 @@ export abstract class ALuSelectInputComponent<TOption, TValue> implements OnDest
 			setTimeout(() => {
 				this.panelRef?.updatePosition();
 				this.updatePositionFn?.();
+				// If no fixes are found, last resort fix is here
+				// window.dispatchEvent(new Event('resize'));
 			});
 		}
 	}

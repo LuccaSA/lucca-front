@@ -140,7 +140,7 @@ export class LuMultiSelectPanelRefFactory {
 		overlayConfig.positionStrategy = this.positionBuilder
 			.flexibleConnectedTo(this.elementRef)
 			.withGrowAfterOpen(true)
-			.withPush(false)
+			.withLockedPosition(false)
 			.withViewportMargin(10)
 			.withPositions([
 				this.buildPosition('bottom', 'right', config),
