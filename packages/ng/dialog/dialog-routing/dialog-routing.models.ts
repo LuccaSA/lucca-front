@@ -47,3 +47,4 @@ export interface DialogRouteData<C> {
 
 export const DIALOG_ROUTE_CLOSE_TRIGGER = new InjectionToken<DialogRouteCloseTrigger>('DIALOG_ROUTE_CLOSE_TRIGGER');
 export const DIALOG_ROUTE_DISMISS_TRIGGER = new InjectionToken<DialogRouteDismissTrigger>('DIALOG_ROUTE_DISMISS_TRIGGER');
+export const DIALOG_ROUTE_CONFIG = new InjectionToken<DialogRouteConfig<unknown>>('DIALOG_ROUTE_CONFIG');

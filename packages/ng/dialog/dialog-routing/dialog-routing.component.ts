@@ -5,7 +5,15 @@ import { combineLatest, concat, map, Observable, of } from 'rxjs';
 import { provideLuDialog } from '../dialog.providers';
 import { LuDialogService } from '../dialog.service';
 import { LuDialogRef, LuDialogResult } from '../model';
-import { DIALOG_ROUTE_CLOSE_TRIGGER, DIALOG_ROUTE_DISMISS_TRIGGER, DialogRouteCloseTrigger, DialogRouteData, DialogRouteDialogConfig, DialogRouteDismissTrigger } from './dialog-routing.models';
+import {
+	DIALOG_ROUTE_CLOSE_TRIGGER,
+	DIALOG_ROUTE_CONFIG,
+	DIALOG_ROUTE_DISMISS_TRIGGER,
+	DialogRouteCloseTrigger,
+	DialogRouteData,
+	DialogRouteDialogConfig,
+	DialogRouteDismissTrigger,
+} from './dialog-routing.models';
 import { deferrableToObservable, deferrableToPromise, DialogResolveFn } from './dialog-routing.utils';
 
 /**
@@ -63,7 +71,13 @@ export function defaultOnClosedFn<C>(): void {
 		`,
 	],
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	providers: [provideLuDialog()],
+	providers: [
+		provideLuDialog(),
+		{
+			provide: DIALOG_ROUTE_CONFIG,
+			useFactory: () => inject(DialogRoutingContainerComponent).config,
+		},
+	],
 })
 export class DialogRoutingContainerComponent<C> implements OnDestroy, OnInit {
 	readonly #route = inject(ActivatedRoute);
@@ -71,7 +85,7 @@ export class DialogRoutingContainerComponent<C> implements OnDestroy, OnInit {
 	readonly #destroyRef = inject(DestroyRef);
 	readonly #dialog = inject(LuDialogService);
 	readonly injector = inject(Injector);
-	readonly #config = this.#routeData.dialogRouteConfig;
+	readonly config = this.#routeData.dialogRouteConfig;
 	protected readonly dialogComponentInstance = signal<C | null>(null);
 	protected readonly dialogTemplate = viewChild.required(TemplateRef);
 	#closeTrigger?: DialogRouteCloseTrigger | DialogRouteDismissTrigger;
@@ -98,7 +112,7 @@ export class DialogRoutingContainerComponent<C> implements OnDestroy, OnInit {
 	}
 
 	async #openDialog(): Promise<void> {
-		const [data, dialogConfig] = await Promise.all([this.#resolve(this.#config.dataFactory), this.#resolve(this.#config.dialogConfigFactory)]);
+		const [data, dialogConfig] = await Promise.all([this.#resolve(this.config.dataFactory), this.#resolve(this.config.dialogConfigFactory)]);
 
 		this.#ref = this.#dialog.open<C>({
 			...dialogConfig,
@@ -118,8 +132,8 @@ export class DialogRoutingContainerComponent<C> implements OnDestroy, OnInit {
 			canCloseFns.push((c: C) => deferrableToObservable(config.canClose(c)));
 		}
 
-		if (this.#config.canDeactivate) {
-			canCloseFns.push(this.#getCanCloseFromGuardDialogFn(this.#config.canDeactivate));
+		if (this.config.canDeactivate) {
+			canCloseFns.push(this.#getCanCloseFromGuardDialogFn(this.config.canDeactivate));
 		}
 
 		return canCloseFns.length ? (c: C) => combineLatest(canCloseFns.map((fn) => fn(c))).pipe(map((results) => results.every((r) => r))) : undefined;
@@ -166,8 +180,8 @@ export class DialogRoutingContainerComponent<C> implements OnDestroy, OnInit {
 		});
 
 		runInInjectionContext(injector, () => {
-			if (this.#config.onDismissed) {
-				this.#config.onDismissed();
+			if (this.config.onDismissed) {
+				this.config.onDismissed();
 			} else {
 				defaultOnClosedFn();
 			}
@@ -187,16 +201,14 @@ export class DialogRoutingContainerComponent<C> implements OnDestroy, OnInit {
 		});
 
 		runInInjectionContext(injector, () => {
-			if (this.#config.onClosed) {
-				this.#config.onClosed(result);
+			if (this.config.onClosed) {
+				this.config.onClosed(result);
 			} else {
 				defaultOnClosedFn();
 			}
 		});
 	}
 
-	async #resolve<T>(resolveFn: DialogResolveFn<T>): Promise<T>;
-	async #resolve<T>(resolveFn?: DialogResolveFn<T>): Promise<T | undefined>;
 	async #resolve<T>(resolveFn: DialogResolveFn<T>): Promise<T | undefined> {
 		if (!resolveFn) {
 			return undefined;
