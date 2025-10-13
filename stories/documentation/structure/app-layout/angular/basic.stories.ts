@@ -50,6 +50,7 @@ export default {
 		background-color: var(--pr-t-elevation-surface-raised);
 		box-shadow: var(--pr-t-elevation-shadow-overflow);
 		position: relative;
+		z-index: 2;
 
 		&::before {
 			content: '';
@@ -82,7 +83,7 @@ export default {
 <lu-app-layout${mobileNavSideBottomAttribute}>
 	<ng-container appLayoutBanner>banner</ng-container>
 	<ng-container appLayoutNavSide>navSide</ng-container>
-	<ng-container appLayoutMain>main</ng-container>
+	main
 </lu-app-layout>
 `,
 			),

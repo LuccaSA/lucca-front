@@ -11,6 +11,7 @@
 	@at-root ($atRoot) {
 		.appLayout-banner {
 			grid-area: banner;
+			isolation: isolate;
 
 			&:empty {
 				display: none;

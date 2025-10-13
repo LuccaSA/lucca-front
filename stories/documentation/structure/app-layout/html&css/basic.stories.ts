@@ -43,6 +43,7 @@ export default {
 		background-color: var(--pr-t-elevation-surface-raised);
 		box-shadow: var(--pr-t-elevation-shadow-overflow);
 		position: relative;
+		z-index: 2;
 
 		&::before {
 			content: '';
