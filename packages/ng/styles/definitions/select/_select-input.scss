@@ -50,6 +50,7 @@
 	}
 
 	.lu-select-value {
+		font: var(--pr-t-font-body-M);
 		line-height: var(--pr-t-font-body-M-lineHeight);
 		min-block-size: calc(var(--components-select-framed-bottom-padding) + var(--pr-t-font-body-M-lineHeight));
 		padding-block: var(--components-select-input-padding-vertical);
@@ -60,6 +61,7 @@
 
 	.lu-select-placeholder {
 		color: var(--palettes-neutral-400);
+		font: var(--pr-t-font-body-M);
 		line-height: var(--pr-t-font-body-M-lineHeight);
 		min-block-size: calc(var(--components-select-framed-bottom-padding) + var(--pr-t-font-body-M-lineHeight));
 		padding-block: var(--components-select-input-padding-vertical);
