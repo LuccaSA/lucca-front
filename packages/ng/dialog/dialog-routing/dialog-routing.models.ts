@@ -1,6 +1,6 @@
 import { ComponentType } from '@angular/cdk/overlay';
 import { InjectionToken } from '@angular/core';
-import { CanDeactivateFn, Route } from '@angular/router';
+import { Route } from '@angular/router';
 import { LuDialogConfig, LuDialogData, LuDialogResult } from '../model';
 import { DialogResolveFn } from './dialog-routing.utils';
 
@@ -32,12 +32,7 @@ export type DialogRouteConfig<C> = DialogRouteComponentLoader<C> & {
 	 * If needed, the reason the dialog was dismissed can retrieved using `inject(DIALOG_ROUTE_DISMISS_TRIGGER)`
 	 */
 	onDismissed?: () => unknown;
-
-	/**
-	 * Override canDeactivate to have a stricter type
-	 */
-	canDeactivate?: CanDeactivateFn<C>[];
-} & Omit<Route, 'component' | 'loadComponent' | 'canDeactivate'>;
+} & Omit<Route, 'component' | 'loadComponent'>;
 
 export type DialogRouteDialogConfig<C> = Omit<LuDialogConfig<C>, 'data' | 'content'>;
 

@@ -8,4 +8,4 @@ export {
 	DialogRouteDialogConfig,
 	DialogRouteDismissTrigger,
 } from './dialog-routing.models';
-export * from './dialog-routing.utils';
+export { createDialogRoute, DialogFactoryConfig, DialogFactoryResult, DialogFactoryResultOptions, dialogLazyRouteFactory, dialogRouteFactory } from './dialog-routing.utils';

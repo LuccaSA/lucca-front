@@ -1,6 +1,6 @@
 import { assertInInjectionContext, ChangeDetectionStrategy, Component, DestroyRef, inject, Injector, OnDestroy, OnInit, runInInjectionContext, signal, TemplateRef, viewChild } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { ActivatedRoute, CanDeactivateFn, GuardResult, Router, RouterOutlet } from '@angular/router';
+import { ActivatedRoute, CanDeactivateFn, DeprecatedGuard, GuardResult, Router, RouterOutlet } from '@angular/router';
 import { combineLatest, concat, map, Observable, of } from 'rxjs';
 import { provideLuDialog } from '../dialog.providers';
 import { LuDialogService } from '../dialog.service';
@@ -14,7 +14,7 @@ import {
 	DialogRouteDialogConfig,
 	DialogRouteDismissTrigger,
 } from './dialog-routing.models';
-import { deferrableToObservable, deferrableToPromise, DialogResolveFn } from './dialog-routing.utils';
+import { deferrableToObservable, deferrableToPromise, DialogResolveFn, toCanDeactivateFn } from './dialog-routing.utils';
 
 /**
  * Default onClosed/onDismissed function that navigates back to the parent route when the dialog is closed or dismissed.
@@ -139,9 +139,9 @@ export class DialogRoutingContainerComponent<C> implements OnDestroy, OnInit {
 		return canCloseFns.length ? (c: C) => combineLatest(canCloseFns.map((fn) => fn(c))).pipe(map((results) => results.every((r) => r))) : undefined;
 	}
 
-	#getCanCloseFromGuardDialogFn(canDeactivate: CanDeactivateFn<C>[]): () => Observable<boolean> {
+	#getCanCloseFromGuardDialogFn(canDeactivate: (CanDeactivateFn<C> | DeprecatedGuard)[]): () => Observable<boolean> {
 		return () => {
-			const results$ = canDeactivate.map((cD) => this.#callCanDeactivateFn(cD));
+			const results$ = canDeactivate.map((cD) => this.callCanDeactivateFn(cD));
 
 			return concat(...results$).pipe(
 				map((guardResult) => {
@@ -155,7 +155,7 @@ export class DialogRoutingContainerComponent<C> implements OnDestroy, OnInit {
 		};
 	}
 
-	#callCanDeactivateFn(canDeactivateFn: CanDeactivateFn<C>): Observable<GuardResult> {
+	callCanDeactivateFn(canDeactivateFn: CanDeactivateFn<C> | DeprecatedGuard): Observable<GuardResult> {
 		const instance = this.dialogComponentInstance();
 
 		if (!instance) {
@@ -163,7 +163,10 @@ export class DialogRoutingContainerComponent<C> implements OnDestroy, OnInit {
 			return of(true);
 		}
 
-		const maybeAsyncResult = runInInjectionContext(this.injector, () => canDeactivateFn(instance, this.#route.snapshot, this.#router.routerState.snapshot, this.#router.routerState.snapshot));
+		const maybeAsyncResult = runInInjectionContext(this.injector, () => {
+			const canDeactivate = toCanDeactivateFn(canDeactivateFn);
+			return canDeactivate(instance, this.#route.snapshot, this.#router.routerState.snapshot, this.#router.routerState.snapshot);
+		});
 		return deferrableToObservable(maybeAsyncResult);
 	}
 
