@@ -1,4 +1,5 @@
 import { AppLayoutComponent } from '@lucca-front/ng/app-layout';
+import { ContainerComponent } from '@lucca-front/ng/container';
 import { MainLayoutBlockComponent, MainLayoutComponent } from '@lucca-front/ng/main-layout';
 import { Meta, moduleMetadata } from '@storybook/angular';
 
@@ -32,24 +33,24 @@ export default {
 	},
 	decorators: [
 		moduleMetadata({
-			imports: [MainLayoutComponent, AppLayoutComponent, MainLayoutBlockComponent],
+			imports: [MainLayoutComponent, AppLayoutComponent, MainLayoutBlockComponent, ContainerComponent],
 		}),
 	],
 	render: (args: MainLayoutAngularBasicStory) => {
 		const headerContainer = args.header
 			? `
 		<ng-container mainLayoutHeader>
-			<div class="container">
+			<lu-container>
 				<div class="fakeContent">header</div>
-			</div>
+			</lu-container>
 		</ng-container>`
 			: ``;
 		const footerContainer = args.footer
 			? `
 		<ng-container mainLayoutFooter>
-			<div class="container">
+			<lu-container>
 				<div class="fakeContent">footer</div>
-			</div>
+			</lu-container>
 		</ng-container>`
 			: ``;
 		const headerStickyParam = args.headerSticky ? ` headerSticky` : ``;
@@ -60,9 +61,9 @@ export default {
 			: ``;
 		const template = `
 		<lu-main-layout-block>
-			<div class="container">
+			<lu-container>
 				<div class="fakeContent">content</div>
-			</div>
+			</lu-container>
 		</lu-main-layout-block>`;
 		const contentOverflow = `
 					content overflowing`;
@@ -71,10 +72,10 @@ export default {
 			overflow = overflow + contentOverflow;
 		}
 		const templateOverflow = `<lu-main-layout-block overflow>
-			<div class="container">
+			<lu-container>
 				<div class="fakeContent">${overflow}
 				</div>
-			</div>
+			</lu-container>
 		</lu-main-layout-block>`;
 		let content = ``;
 		for (let i = 1; i <= args.repeatContent; i++) {
@@ -107,8 +108,7 @@ export default {
 	}
 
 	.mainLayout-content-inside {
-		gap: var(--pr-t-spacings-300);
-		padding-block: var(--pr-t-spacings-300);
+		gap: var(--pr-t-spacings-100);
 	}
 
 	.container {

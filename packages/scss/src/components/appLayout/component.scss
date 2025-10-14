@@ -7,11 +7,11 @@
 	inline-size: var(--components-appLayout-inlineSize);
 	grid-template: var(--components-appLayout-gridTemplate);
 	display: grid;
+	isolation: isolate;
 
 	@at-root ($atRoot) {
 		.appLayout-banner {
 			grid-area: banner;
-			isolation: isolate;
 
 			&:empty {
 				display: none;

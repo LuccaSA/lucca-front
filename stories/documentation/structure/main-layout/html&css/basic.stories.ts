@@ -100,8 +100,7 @@ export default {
 	}
 
 	.mainLayout-content-inside {
-		gap: var(--pr-t-spacings-300);
-		padding-block: var(--pr-t-spacings-300);
+		gap: var(--pr-t-spacings-100);
 	}
 
 	.container {
