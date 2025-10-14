@@ -613,7 +613,7 @@ export const AddOptionTEST = createTestStory(AddOption, async (context) => {
 	await waitForAngular();
 	await expect(screen.getByRole('listbox')).toBeVisible();
 	const panel = within(screen.getByRole('listbox').parentElement);
-	const addOptionButton = panel.getByRole('button', { name: /ajouter/i });
+	const addOptionButton = panel.getByRole('option', { name: /ajouter un /i });
 	await userEvent.click(addOptionButton);
 	await expect(+count.innerText).toBe(previousTotal + 1);
 });
