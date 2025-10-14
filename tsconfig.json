@@ -43,5 +43,13 @@
 		"strictInjectionParameters": true,
 		"strictInputAccessModifiers": true,
 		"strictTemplates": true
-	}
+  },
+  "references": [
+    {
+      "path": "./packages/ng/sandbox/tsconfig.app.json"
+    },
+    {
+      "path": "./packages/ng/sandbox/tsconfig.spec.json"
+    }
+  ]
 }
