@@ -5,7 +5,7 @@ import { buildAddWrapperExtension } from '../formly.utils';
 // wrapper component
 @Component({
 	selector: 'lu-formly-wrapper-helper',
-	styleUrls: ['flex-layout.scss'],
+	styleUrl: 'flex-layout.scss',
 	templateUrl: './helper.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	standalone: true,

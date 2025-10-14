@@ -93,7 +93,7 @@
 
 		.fileUpload-instruction-filename {
 			display: block;
-			font-weight: 600;
+			font-weight: var(--pr-t-font-fontWeight-semibold);
 			color: var(--components-fileUpload-instruction-filename-color);
 			margin-block-start: var(--components-fileUpload-instruction-filename-marginTop);
 			inset-block-end: var(--pr-t-spacings-100);

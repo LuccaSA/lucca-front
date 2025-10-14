@@ -49,7 +49,7 @@
 		.indexTable-foot-row-cell {
 			display: table-cell;
 			text-align: start;
-			font-weight: 400;
+			font-weight: var(--pr-t-font-fontWeight-regular);
 		}
 
 		.indexTable-head-row-transparentCell,
@@ -244,7 +244,7 @@
 		}
 
 		.indexTable-body-row-cellTitle-title {
-			font-weight: 600;
+			font-weight: var(--pr-t-font-fontWeight-semibold);
 		}
 
 		// A wrapper is needed for pagination

@@ -4,13 +4,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { TextInputComponent } from '@lucca-front/ng/forms';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { HiddenArgType } from 'stories/helpers/common-arg-types';
 import { cleanupTemplate, generateInputs } from 'stories/helpers/stories';
+import { StoryModelDisplayComponent } from 'stories/helpers/story-model-display.component';
 
 export default {
 	title: 'Documentation/Forms/Fields/TextField/Angular',
 	decorators: [
 		moduleMetadata({
-			imports: [TextInputComponent, FormFieldComponent, FormsModule, ReactiveFormsModule, BrowserAnimationsModule, AsyncPipe],
+			imports: [TextInputComponent, FormFieldComponent, FormsModule, ReactiveFormsModule, BrowserAnimationsModule, AsyncPipe, StoryModelDisplayComponent],
 		}),
 	],
 	argTypes: {
@@ -60,7 +62,7 @@ export default {
 
 export const Basic: StoryObj<TextInputComponent & { disabled: boolean; required: boolean } & FormFieldComponent> = {
 	render: (args, { argTypes }) => {
-		const { counter, label, hiddenLabel, tooltip, tag, inlineMessage, inlineMessageState, size, width, ...inputArgs } = args;
+		const { counter, label, hiddenLabel, tooltip, tag, inlineMessage, inlineMessageState, size, width, AI, iconAItooltip, iconAIalt, ...inputArgs } = args;
 		return {
 			template: cleanupTemplate(`<lu-form-field ${generateInputs(
 				{
@@ -73,6 +75,9 @@ export const Basic: StoryObj<TextInputComponent & { disabled: boolean; required:
 					size,
 					counter,
 					width,
+					AI,
+					iconAItooltip,
+					iconAIalt,
 				},
 				argTypes,
 			)}>
@@ -81,7 +86,7 @@ export const Basic: StoryObj<TextInputComponent & { disabled: boolean; required:
 		[(ngModel)]="example">
 	</lu-text-input>
 </lu-form-field>
-{{example}}`),
+<pr-story-model-display>{{ example }}</pr-story-model-display>`),
 			moduleMetadata: {
 				imports: [TextInputComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule],
 			},
@@ -104,6 +109,9 @@ export const Basic: StoryObj<TextInputComponent & { disabled: boolean; required:
 		tag: '',
 		counter: 0,
 		valueAlignRight: false,
+		AI: false,
+		iconAIalt: 'Assistant IA',
+		iconAItooltip: 'Donnée remplie automatiquement',
 	},
 };
 
@@ -133,7 +141,7 @@ export const PasswordVisiblity: StoryObj<
 		[(ngModel)]="example">
 	</lu-text-input>
 </lu-form-field>
-{{example}}`,
+<pr-story-model-display>{{ example }}</pr-story-model-display>`,
 			moduleMetadata: {
 				imports: [TextInputComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule],
 			},
@@ -187,7 +195,7 @@ export const WithPrefixAndSuffix: StoryObj<
 		[(ngModel)]="example">
 	</lu-text-input>
 </lu-form-field>
-{{example}}`),
+<pr-story-model-display>{{ example }}</pr-story-model-display>`),
 			moduleMetadata: {
 				imports: [TextInputComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule],
 			},
@@ -215,5 +223,46 @@ export const WithPrefixAndSuffix: StoryObj<
 		inlineMessage: 'Helper text',
 		inlineMessageState: 'default',
 		counter: 0,
+	},
+};
+
+export const AI: StoryObj<FormFieldComponent & TextInputComponent> = {
+	argTypes: {
+		width: HiddenArgType,
+		hiddenLabel: HiddenArgType,
+		size: HiddenArgType,
+		inlineMessageState: HiddenArgType,
+		counter: HiddenArgType,
+		tag: HiddenArgType,
+		tooltip: HiddenArgType,
+		autocomplete: HiddenArgType,
+		valueAlignRight: HiddenArgType,
+		type: HiddenArgType,
+	},
+	render: (args, { argTypes }) => {
+		const { label, iconAItooltip, iconAIalt, ...inputArgs } = args;
+		return {
+			template: cleanupTemplate(`<lu-form-field AI${generateInputs(
+				{
+					label,
+					iconAItooltip,
+					iconAIalt,
+					inputArgs,
+				},
+				argTypes,
+			)}>
+	<lu-text-input [(ngModel)]="example" />
+</lu-form-field>
+<pr-story-model-display>{{example}}</pr-story-model-display>
+`),
+			moduleMetadata: {
+				imports: [TextInputComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule],
+			},
+		};
+	},
+	args: {
+		label: 'Label',
+		iconAIalt: 'Assistant IA',
+		iconAItooltip: 'Donnée remplie automatiquement',
 	},
 };

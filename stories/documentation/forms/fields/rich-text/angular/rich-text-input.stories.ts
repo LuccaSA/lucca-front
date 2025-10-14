@@ -4,9 +4,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { DividerComponent } from '@lucca-front/ng/divider';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
-import { RichTextInputComponent, RichTextInputToolbarComponent, TagComponent, TAGS } from '@lucca-front/ng/forms/rich-text-input';
+import { RichTextInputComponent, RichTextInputToolbarComponent, RichTextPluginTagComponent, TAGS } from '@lucca-front/ng/forms/rich-text-input';
 import { provideLuRichTextHTMLFormatter } from '@lucca-front/ng/forms/rich-text-input/formatters/html';
 import { DEFAULT_MARKDOWN_TRANSFORMERS, provideLuRichTextMarkdownFormatter } from '@lucca-front/ng/forms/rich-text-input/formatters/markdown';
+import { provideLuRichTextPlainTextFormatter } from '@lucca-front/ng/forms/rich-text-input/formatters/plain-text';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { cleanupTemplate, generateInputs } from 'stories/helpers/stories';
 import { StoryModelDisplayComponent } from 'stories/helpers/story-model-display.component';
@@ -37,7 +38,7 @@ export const Basic: StoryObj<RichTextInputComponent & { value: string; disabled:
 			<lu-rich-text-input-toolbar />
 	</lu-rich-text-input>
 </lu-form-field>
-<pr-story-model-display>{{value}}</pr-story-model-display>`),
+<pr-story-model-display>{{ value }}</pr-story-model-display>`),
 			moduleMetadata: {
 				imports: [RichTextInputComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule],
 				providers: [provideLuRichTextMarkdownFormatter()],
@@ -66,7 +67,7 @@ export const WithNoInitialValue: StoryObj<RichTextInputComponent & { value: stri
 			<lu-rich-text-input-toolbar />
 	</lu-rich-text-input>
 </lu-form-field>
-<pr-story-model-display>{{value}}</pr-story-model-display>`),
+<pr-story-model-display>{{ value }}</pr-story-model-display>`),
 			moduleMetadata: {
 				imports: [RichTextInputComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule],
 				providers: [provideLuRichTextMarkdownFormatter()],
@@ -95,7 +96,7 @@ export const WithHtmlFormatter: StoryObj<RichTextInputComponent & { value: strin
 			<lu-rich-text-input-toolbar />
 	</lu-rich-text-input>
 </lu-form-field>
-<pr-story-model-display>{{value}}</pr-story-model-display>`),
+<pr-story-model-display>{{ value }}</pr-story-model-display>`),
 			moduleMetadata: {
 				imports: [RichTextInputComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule],
 				providers: [provideLuRichTextHTMLFormatter()],
@@ -135,12 +136,12 @@ export const WithTagPlugin: StoryObj<RichTextInputComponent & { value: string; d
 																			key: 'tag3',
 																			description: 'Tag 3',
 																		},
-																	]"/>
+																	]" />
 		</lu-rich-text-input>
 </lu-form-field>
-<pr-story-model-display>{{value}}</pr-story-model-display>`),
+<pr-story-model-display>{{ value }}</pr-story-model-display>`),
 			moduleMetadata: {
-				imports: [RichTextInputComponent, TagComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule],
+				imports: [RichTextInputComponent, RichTextPluginTagComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule],
 				providers: [provideLuRichTextHTMLFormatter()],
 			},
 		};
@@ -178,18 +179,60 @@ export const WithTagPluginMarkdown: StoryObj<RichTextInputComponent & { value: s
 																		key: 'tag3',
 																		description: 'Tag 3',
 																	},
-																]"/>
+																]" />
 	</lu-rich-text-input>
 </lu-form-field>
-<pr-story-model-display>{{value}}</pr-story-model-display>`),
+<pr-story-model-display>{{ value }}</pr-story-model-display>`),
 			moduleMetadata: {
-				imports: [RichTextInputComponent, TagComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule],
+				imports: [RichTextInputComponent, RichTextPluginTagComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule],
 				providers: [provideLuRichTextMarkdownFormatter([...DEFAULT_MARKDOWN_TRANSFORMERS, TAGS])],
 			},
 		};
 	},
 	args: {
-		value: 'Lorem **ipsum** dolor {{tag1}} *italic* {{unregisteredTag}} and regular {{tag2}} trailing text',
+		value: 'Lorem **ipsum** dolor {{tag1}} *italic* {{unregisteredTag}} and regular {{tag2}} trailing text\nLine 2\n\nParagraph 2\n\n\n\nParagraph 3',
+		placeholder: 'Placeholder…',
+		disabled: false,
+		required: false,
+		disableSpellcheck: false,
+		autoResize: true,
+	},
+};
+
+export const WithTagPluginPlainText: StoryObj<RichTextInputComponent & { value: string; disabled: boolean; required: boolean } & FormFieldComponent> = {
+	render: (args, { argTypes }) => {
+		const { value, disabled, required, ...inputArgs } = args;
+		return {
+			props: { value, disabled, required },
+			template: cleanupTemplate(`<lu-form-field label="Label">
+	<lu-rich-text-input
+	${generateInputs(inputArgs, argTypes)}
+		[(ngModel)]="value" [disabled]="disabled" [required]="required">
+			<lu-rich-text-plugin-tag [tags]="[
+																	{
+																		key: 'tag1',
+																		description: 'Tag 1',
+																	},
+																	{
+																		key: 'tag2',
+																		description: 'Tag 2',
+																	},
+																	{
+																		key: 'tag3',
+																		description: 'Tag 3',
+																	},
+																]" />
+	</lu-rich-text-input>
+</lu-form-field>
+<pr-story-model-display>{{ value }}</pr-story-model-display>`),
+			moduleMetadata: {
+				imports: [RichTextInputComponent, RichTextPluginTagComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule],
+				providers: [provideLuRichTextPlainTextFormatter([TAGS])],
+			},
+		};
+	},
+	args: {
+		value: 'Lorem **ipsum** dolor {{tag1}} *italic* {{unregisteredTag}} and regular {{tag2}} trailing text\nLine 2\n\nLine 4\n\n\n\nLine 8',
 		placeholder: 'Placeholder…',
 		disabled: false,
 		required: false,
@@ -229,7 +272,7 @@ export const WithTagPluginMarkdownContentChange: StoryObj<RichTextInputComponent
 </lu-form-field>
 <pr-story-model-display>{{value}}</pr-story-model-display>`),
 			moduleMetadata: {
-				imports: [RichTextInputComponent, TagComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule],
+				imports: [RichTextInputComponent, RichTextPluginTagComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule],
 				providers: [provideLuRichTextMarkdownFormatter([...DEFAULT_MARKDOWN_TRANSFORMERS, TAGS])],
 			},
 		};

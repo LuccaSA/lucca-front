@@ -1,7 +1,7 @@
 <lu-scroll-box class="filterBar-scrollBox">
 	<div class="filterBar-scrollBox-group">
 		@if (addonBefore()) {
-			<ng-container *ngTemplateOutlet="addonBefore()"></ng-container>
+			<ng-container *ngTemplateOutlet="addonBefore()" />
 
 			<lu-divider class="filterBar-divider" />
 		}
@@ -24,7 +24,7 @@
 
 	@if (addonAfter()) {
 		<div class="filterBar-scrollBox-export">
-			<ng-container *ngTemplateOutlet="addonAfter()"></ng-container>
+			<ng-container *ngTemplateOutlet="addonAfter()" />
 		</div>
 	}
 </lu-scroll-box>

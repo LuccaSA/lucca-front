@@ -82,7 +82,7 @@ export default {
 	<lu-date-input ${clearableProperty}/>
 </lu-filter-pill>
 <lu-filter-pill label="Période">
-	<lu-date-range-input ${clearableProperty}/>
+	<lu-date-range-input ${clearableProperty}[(ngModel)]="dateRange" />
 </lu-filter-pill>`,
 			styles: [
 				`

@@ -11,7 +11,6 @@ const MAGIC_STEP = 10;
 @Component({
 	selector: 'lu-tree-option-pager',
 	template: '',
-	styleUrls: [],
 	standalone: true,
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	providers: [

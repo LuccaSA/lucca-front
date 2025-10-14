@@ -8,7 +8,7 @@ import { IconComponent } from '@lucca-front/ng/icon';
 	standalone: true,
 	providers: [LuClass],
 	template: '<ng-content />',
-	styleUrls: ['./button.component.scss'],
+	styleUrl: './button.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	encapsulation: ViewEncapsulation.None,
 	host: {
@@ -58,7 +58,7 @@ export class ButtonComponent implements OnChanges {
 	 * '' is the default value when you just set the `luButton` directive without a value attached to it.
 	 * We just make this explicit here.
 	 */
-	luButton: '' | 'outlined' | 'ghost' | 'ghost-invert' | 'text' | 'text-invert' = '';
+	luButton: '' | 'outlined' | 'AI' | 'ghost' | 'ghost-invert' | 'text' | 'text-invert' = '';
 
 	#iconComponentRef?: ElementRef<HTMLElement>;
 

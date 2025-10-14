@@ -1,6 +1,7 @@
 import { NgStyle } from '@angular/common';
-import { ChangeDetectionStrategy, Component, inject, Input, OnChanges, Optional, ViewEncapsulation } from '@angular/core';
-import { LuDisplayFormat, LuDisplayFullname, LuDisplayHybrid, LuDisplayInitials, luUserDisplay, LU_DEFAULT_DISPLAY_POLICY } from '../display';
+import { booleanAttribute, ChangeDetectionStrategy, Component, inject, input, Input, OnChanges, Optional, ViewEncapsulation } from '@angular/core';
+import { IconComponent } from '@lucca-front/ng/icon';
+import { LU_DEFAULT_DISPLAY_POLICY, LuDisplayFormat, LuDisplayFullname, LuDisplayHybrid, LuDisplayInitials, luUserDisplay } from '../display';
 
 export interface LuUserPictureUserInput {
 	picture?: { href: string } | null;
@@ -32,10 +33,13 @@ export const displayPictureFormatRecord: Record<LuDisplayFormat, LuDisplayInitia
  */
 @Component({
 	selector: 'lu-user-picture',
-	imports: [NgStyle],
+	imports: [NgStyle, IconComponent],
 	templateUrl: './user-picture.component.html',
-	styleUrls: ['./user-picture.component.scss'],
-	host: { class: 'avatar' },
+	styleUrl: './user-picture.component.scss',
+	host: {
+		class: 'avatar',
+		'[class.mod-AI]': 'AI()',
+	},
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	encapsulation: ViewEncapsulation.None,
 	standalone: true,
@@ -82,6 +86,8 @@ export class LuUserPictureComponent implements OnChanges {
 	initials = '';
 	hasPicture = false;
 	pictureHref = '';
+
+	AI = input(false, { transform: booleanAttribute });
 
 	style = {};
 

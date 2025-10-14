@@ -5,7 +5,6 @@ import { ALuOptionOperator, ILuOptionOperator } from '../option-operator.model';
 @Component({
 	selector: 'lu-option-feeder',
 	template: '',
-	styleUrls: [],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	standalone: true,
 	providers: [

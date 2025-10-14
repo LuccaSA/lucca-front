@@ -8,7 +8,7 @@ import { LU_MOBILE_PUSH_TRANSLATIONS } from './mobile-push.translate';
 	standalone: true,
 	imports: [IconComponent],
 	templateUrl: './mobile-push.component.html',
-	styleUrls: ['./mobile-push.component.scss'],
+	styleUrl: './mobile-push.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	encapsulation: ViewEncapsulation.None,
 })

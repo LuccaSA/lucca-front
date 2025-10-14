@@ -4,7 +4,7 @@ import { ChangeDetectionStrategy, Component, HostBinding, Input, ViewEncapsulati
 	selector: 'lu-fancy-box',
 	standalone: true,
 	templateUrl: './fancy-box.component.html',
-	styleUrls: ['./fancy-box.component.scss'],
+	styleUrl: './fancy-box.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	encapsulation: ViewEncapsulation.None,
 	host: {

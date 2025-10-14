@@ -6,7 +6,7 @@ import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 	selector: 'lu-numeric-badge',
 	standalone: true,
 	templateUrl: './numeric-badge.component.html',
-	styleUrls: ['./numeric-badge.component.scss'],
+	styleUrl: './numeric-badge.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	imports: [LuTooltipModule],
 	providers: [LuClass],
