@@ -27,7 +27,6 @@ let nextId = 0;
 
 @Component({
 	selector: 'lu-time-picker',
-	standalone: true,
 	imports: [TimePickerPartComponent, NgClass, FormsModule, RepeatOnHoldDirective],
 	templateUrl: './time-picker.component.html',
 	styleUrl: './time-picker.component.scss',

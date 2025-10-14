@@ -6,7 +6,6 @@ import { applicationConfig, Meta, StoryFn } from '@storybook/angular';
 
 @Component({
 	selector: 'story-slide-animation',
-	standalone: true,
 	imports: [CommonModule],
 	template: `
 		<div class="grid mod-auto">

@@ -12,7 +12,6 @@ import { ALuOptionItem, ILuOptionItem } from './option-item.model';
 	styleUrl: './option-item.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	imports: [CommonModule],
-	standalone: true,
 	providers: [
 		{
 			provide: ALuOptionItem,

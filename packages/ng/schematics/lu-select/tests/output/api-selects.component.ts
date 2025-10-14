@@ -1,14 +1,13 @@
 import { Component } from '@angular/core';
-import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
+import { LuCoreSelectApiV3Directive } from '@lucca-front/ng/core-select/api';
+import { LuCoreSelectEstablishmentsDirective } from '@lucca-front/ng/core-select/establishment';
 import { LuCoreSelectJobQualificationsDirective } from '@lucca-front/ng/core-select/job-qualification';
 import { LuCoreSelectUsersDirective } from '@lucca-front/ng/core-select/user';
-import { LuCoreSelectEstablishmentsDirective } from '@lucca-front/ng/core-select/establishment';
 import { LuMultiSelectInputComponent } from '@lucca-front/ng/multi-select';
-import { LuCoreSelectApiV3Directive } from '@lucca-front/ng/core-select/api';
+import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 
 @Component({
 	selector: 'lu-select-schematic-api-selects',
-	standalone: true,
 	template: `
 		<lu-simple-select jobQualifications placeholder="Select a qualification" class="textfield-input"></lu-simple-select>
 		<lu-simple-select users placeholder="Select a user" class="textfield-input" data-testid="lu-select"></lu-simple-select>

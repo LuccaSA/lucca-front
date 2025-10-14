@@ -3,7 +3,6 @@ import { IconComponent } from '@lucca-front/ng/icon';
 
 @Component({
 	selector: 'lu-test',
-	standalone: true,
 	template: `
 		<lu-icon icon="signClose" />
 	`,

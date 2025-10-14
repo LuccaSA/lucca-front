@@ -9,7 +9,6 @@ import { getCalloutPalette } from '../callout.utils';
 
 @Component({
 	selector: 'lu-callout-disclosure',
-	standalone: true,
 	imports: [CommonModule, IconComponent, PortalDirective, CalloutIconPipe],
 	templateUrl: './callout-disclosure.component.html',
 	styleUrl: './callout-disclosure.component.scss',

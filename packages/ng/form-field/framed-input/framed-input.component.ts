@@ -4,7 +4,6 @@ import { FRAMED_INPUT_INSTANCE } from './framed-input-token';
 
 @Component({
 	selector: 'lu-framed-input',
-	standalone: true,
 	imports: [PortalDirective],
 	templateUrl: './framed-input.component.html',
 	styleUrl: './framed-input.component.scss',

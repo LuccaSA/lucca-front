@@ -6,7 +6,6 @@ import { Hx } from '../empty-state.model';
 
 @Component({
 	selector: 'lu-empty-state-page',
-	standalone: true,
 	imports: [NgIf, LuSafeExternalSvgPipe, PortalDirective],
 	templateUrl: './empty-state-page.component.html',
 	styleUrl: './empty-state-page.component.scss',

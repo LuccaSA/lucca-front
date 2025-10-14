@@ -11,7 +11,6 @@ import { LU_TOAST_TRANSLATIONS } from './toasts.translate';
 	selector: 'lu-toasts',
 	templateUrl: './toasts.component.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	standalone: true,
 	imports: [CommonModule, PortalDirective],
 })
 export class LuToastsComponent implements OnDestroy {

@@ -10,7 +10,6 @@ interface FilterPillLabelContext {
 
 @Directive({
 	selector: '[luFilterPillLabel]',
-	standalone: true,
 })
 export class FilterPillLabelDirective {
 	#filterPillComponentRef = inject(FilterPillComponent, { optional: true });

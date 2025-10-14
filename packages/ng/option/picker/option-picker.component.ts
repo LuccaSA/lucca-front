@@ -21,6 +21,7 @@ import {
 	TemplateRef,
 	ViewChild,
 } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ALuPickerPanel } from '@lucca-front/ng/picker';
 import { luTransformPopover } from '@lucca-front/ng/popover';
 import { merge, of } from 'rxjs';
@@ -28,7 +29,6 @@ import { delay, map, share } from 'rxjs/operators';
 import { LuOptionItemComponent } from '../item';
 import { ALuOptionItem } from '../item/option-item.model';
 import { ALuOptionPicker, ILuOptionPickerPanel, LuOptionComparer } from './option-picker.model';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 /**
  * @deprecated
@@ -339,7 +339,6 @@ export abstract class ALuOptionPickerComponent<T, O extends import('../item/opti
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	animations: [luTransformPopover],
 	exportAs: 'LuOptionPicker',
-	standalone: true,
 	imports: [CommonModule, OverlayModule, LuOptionItemComponent, A11yModule],
 	providers: [
 		{

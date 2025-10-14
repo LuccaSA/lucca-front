@@ -8,7 +8,6 @@ let nextId = 0;
 
 @Component({
 	selector: 'lu-segmented-control',
-	standalone: true,
 	template: '<ng-content />',
 	styleUrl: './segmented-control.component.scss',
 	encapsulation: ViewEncapsulation.None,

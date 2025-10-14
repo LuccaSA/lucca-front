@@ -29,7 +29,6 @@ import { LuCoreSelectUsersDirective } from './users.directive';
 			<span translate="no">{{ user | luUserDisplay: userDirective.displayFormat() }}</span>
 		</ng-template>
 	`,
-	standalone: true,
 	styles: [
 		`
 			.lu-select-additionalInformation {

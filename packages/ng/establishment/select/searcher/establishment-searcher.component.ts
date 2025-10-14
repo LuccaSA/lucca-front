@@ -14,7 +14,6 @@ import { DEFAULT_ESTABLISHMENT_SERVICE } from '../establishment-select.token';
 	templateUrl: 'establishment-searcher.component.html',
 	styleUrl: 'establishment-searcher.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	standalone: true,
 	imports: [ReactiveFormsModule, CommonModule, LuOptionPlaceholderComponent],
 	providers: [
 		{

@@ -23,7 +23,6 @@ export interface LuUserTileUserInput {
 	host: { class: 'userTile' },
 	encapsulation: ViewEncapsulation.None,
 	providers: [LuClass],
-	standalone: true,
 })
 export class LuUserTileComponent {
 	#luClass = inject(LuClass);

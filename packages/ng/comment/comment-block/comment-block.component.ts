@@ -6,7 +6,6 @@ import { COMMENT_BLOCK_INSTANCE, COMMENT_CHAT_INSTANCE } from '../token';
 
 @Component({
 	selector: 'lu-comment-block',
-	standalone: true,
 	imports: [NgTemplateOutlet],
 	templateUrl: './comment-block.component.html',
 

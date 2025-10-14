@@ -110,7 +110,6 @@ const panelImports = [A11yModule, AsyncPipe, LuTooltipModule, NgClass, NgIf];
 
 @Component({
 	selector: 'lu-modal-panel',
-	standalone: true,
 	imports: panelImports,
 	templateUrl: './modal-panel.component.html',
 	styleUrl: './modal-panel.component.scss',
@@ -124,7 +123,6 @@ export class LuModalPanelComponent<T extends ILuModalContent = ILuModalContent> 
 }
 @Component({
 	selector: 'lu-modal-panel-default',
-	standalone: true,
 	imports: panelImports,
 	templateUrl: './modal-panel.component.html',
 	styleUrl: './modal-panel.component.scss',

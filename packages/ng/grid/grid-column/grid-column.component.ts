@@ -3,7 +3,6 @@ import { ResponsiveConfig } from '../types';
 
 @Component({
 	selector: 'lu-grid-column',
-	standalone: true,
 	template: '<ng-content />',
 	encapsulation: ViewEncapsulation.None,
 	host: {

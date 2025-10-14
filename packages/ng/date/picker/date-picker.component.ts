@@ -17,7 +17,6 @@ import { LuDateInputDirective } from '../input';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	exportAs: 'LuDatePicker',
 	animations: [luTransformPopover],
-	standalone: true,
 	imports: [FormsModule, CommonModule, LuCalendarInputComponent, LuDateInputDirective, A11yModule],
 	providers: [
 		{

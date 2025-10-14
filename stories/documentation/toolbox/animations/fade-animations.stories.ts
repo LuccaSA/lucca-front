@@ -6,7 +6,6 @@ import { applicationConfig, Meta, StoryFn } from '@storybook/angular';
 
 @Component({
 	selector: 'story-fade-animation',
-	standalone: true,
 	imports: [CommonModule],
 	template: ` <div class="grid">
 		<div class="grid-column ng-demo-block" style="--grid-colspan: 3">

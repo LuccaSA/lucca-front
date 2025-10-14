@@ -7,7 +7,6 @@ import { LU_LISTING_INSTANCE } from './listing.token';
 
 @Component({
 	selector: 'lu-listing',
-	standalone: true,
 	templateUrl: './listing.component.html',
 	styleUrl: './listing.component.scss',
 	imports: [NgTemplateOutlet],

@@ -15,7 +15,6 @@ import { TextStyleToolbarComponent } from '../text-style';
 		class: 'richTextField-toolbar-formatting',
 	},
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	standalone: true,
 	imports: [TextStyleToolbarComponent, ListStyleToolbarComponent, HeadingsComponent, LinkComponent, ClearFormatComponent],
 	providers: [
 		{

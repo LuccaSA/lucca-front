@@ -42,7 +42,6 @@ export const displayPictureFormatRecord: Record<LuDisplayFormat, LuDisplayInitia
 	},
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	encapsulation: ViewEncapsulation.None,
-	standalone: true,
 })
 export class LuUserPictureComponent implements OnChanges {
 	/**

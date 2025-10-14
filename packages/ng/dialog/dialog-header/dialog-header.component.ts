@@ -15,7 +15,6 @@ export class DialogHeaderAction {}
 
 @Component({
 	selector: 'lu-dialog-header',
-	standalone: true,
 	imports: [IconComponent],
 	templateUrl: './dialog-header.component.html',
 	styleUrl: './dialog-header.component.scss',

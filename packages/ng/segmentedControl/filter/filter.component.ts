@@ -7,7 +7,6 @@ let nextId = 0;
 
 @Component({
 	selector: 'lu-segmented-control-filter',
-	standalone: true,
 	templateUrl: './filter.component.html',
 	encapsulation: ViewEncapsulation.None,
 	imports: [ReactiveFormsModule, PortalDirective],

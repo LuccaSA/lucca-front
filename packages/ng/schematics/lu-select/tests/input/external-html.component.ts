@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
-import { LuSelectInputComponent } from '@lucca-front/ng/select';
-import { LuOptionItemComponent, LuOptionPickerComponent } from '@lucca-front/ng/option';
 import { FormsModule } from '@angular/forms';
+import { LuOptionItemComponent, LuOptionPickerComponent } from '@lucca-front/ng/option';
+import { LuSelectInputComponent } from '@lucca-front/ng/select';
 
 @Component({
 	selector: 'lu-select-schematic-external-html',
-	standalone: true,
 	templateUrl: './external-html.component.html',
 	imports: [LuSelectInputComponent, LuOptionPickerComponent, LuOptionItemComponent, FormsModule]
 })
