@@ -17,7 +17,7 @@
 					luInputStandalone
 					class="textField-input-value dateRangeField-fieldset-input-value"
 					[value]="startLabel()"
-					(input)="startTextInput.set(start.value)"
+					(input)="textInputChange(start.value, 'start')"
 					(blur)="inputBlur()"
 					(focus)="inputFocused.set(true); editedField.set(0); highlightedField.set(0)"
 					aria-haspopup="true"
@@ -41,7 +41,7 @@
 					luInputStandalone
 					class="textField-input-value dateRangeField-fieldset-input-value"
 					[value]="endLabel()"
-					(input)="endTextInput.set(end.value)"
+					(input)="textInputChange(start.value, 'end')"
 					(blur)="inputBlur(); fixOrderIfNeeded()"
 					(focus)="inputFocused.set(true); editedField.set(1); highlightedField.set(1)"
 					aria-haspopup="true"

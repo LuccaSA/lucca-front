@@ -8,8 +8,7 @@ import { buildAddWrapperExtension } from '../formly.utils';
 	styleUrls: ['flex-layout.scss', 'suffixes.common.scss'],
 	templateUrl: './suffix.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	// eslint-disable-next-line @angular-eslint/prefer-standalone
-	standalone: false,
+	standalone: true,
 })
 export class LuFormlyWrapperSuffix extends FieldWrapper {
 	@ViewChild('fieldComponent', { read: ViewContainerRef, static: true })

@@ -7,8 +7,7 @@ import { FieldWrapper } from '@ngx-formly/core';
 	styleUrl: 'flex-layout.scss',
 	templateUrl: './radiosfield-layout.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	// eslint-disable-next-line @angular-eslint/prefer-standalone
-	standalone: false,
+	standalone: true,
 })
 export class LuFormlyWrapperRadiosfieldLayout extends FieldWrapper {
 	@ViewChild('fieldComponent', { read: ViewContainerRef, static: true })

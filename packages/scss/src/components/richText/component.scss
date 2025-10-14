@@ -72,6 +72,7 @@
 			animation-duration: var(--commons-animations-durations-fast);
 			animation-delay: var(--commons-animations-durations-fast);
 			opacity: 0;
+			flex-shrink: 0;
 			animation-fill-mode: forwards;
 
 			@include keyframe.fadeIn;

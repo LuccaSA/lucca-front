@@ -12,6 +12,7 @@ const areSetsEqual = (a: Set<string>, b: Set<string>): boolean => a.size === b.s
 	selector: 'lu-rich-text-plugin-tag',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	templateUrl: './tag.component.html',
+	styleUrl: './tag.component.scss',
 	providers: [
 		{
 			provide: RICH_TEXT_PLUGIN_COMPONENT,
