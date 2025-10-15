@@ -23,6 +23,8 @@
 
 	@at-root ($atRoot) {
 		.gauge-bar {
+			position: absolute;
+
 			@extend %gaugeBar;
 		}
 
