@@ -8,6 +8,20 @@
 	flex-direction: var(--components-mainLayout-flexDirection);
 	block-size: 100%;
 
+	&:target {
+		position: relative;
+
+		&::after {
+			content: '';
+			position: absolute;
+			inset: 0;
+			z-index: 5;
+			pointer-events: none;
+
+			@include a11y.focusVisible($offset: -4px, $borderRadius: var(--pr-t-border-radius-default));
+		}
+	}
+
 	@at-root ($atRoot) {
 		.mainLayout-sidebar {
 			overflow-x: hidden;
