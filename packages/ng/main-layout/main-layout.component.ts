@@ -10,7 +10,6 @@ import { booleanAttribute, Component, input, ViewEncapsulation } from '@angular/
 		class: 'mainLayout',
 		role: 'main',
 		id: 'main-content',
-		tabindex: '0',
 	},
 })
 export class MainLayoutComponent {

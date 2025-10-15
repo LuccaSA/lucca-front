@@ -8,12 +8,6 @@
 	flex-direction: var(--components-mainLayout-flexDirection);
 	block-size: 100%;
 
-	&:focus-visible {
-		scroll-margin-block-start: var(--commons-banner-height);
-
-		@include a11y.focusVisible($offset: -4px);
-	}
-
 	@at-root ($atRoot) {
 		.mainLayout-sidebar {
 			overflow-x: hidden;
