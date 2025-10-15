@@ -1,24 +1,30 @@
 @use 'exports' as *;
 
 .calloutPopover {
-	@include component;
-	@include vars;
-
-	&.mod-S {
-		@include S;
+	@layer components {
+		@include component;
+		@include vars;
 	}
 
-	&.mod-XS {
-		@include XS;
+	@layer mods {
+		&.mod-S {
+			@include S;
+		}
+
+		&.mod-XS {
+			@include XS;
+		}
 	}
 }
 
 .calloutPopover-overlay {
-	&.mod-S {
-		@include overlayS;
-	}
+	@layer mods {
+		&.mod-S {
+			@include overlayS;
+		}
 
-	&.mod-iconless {
-		@include overlayIconless;
+		&.mod-iconless {
+			@include overlayIconless;
+		}
 	}
 }

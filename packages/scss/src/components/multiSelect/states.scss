@@ -59,3 +59,11 @@
 		}
 	}
 }
+
+@mixin filterPillFocused {
+	outline: none;
+}
+
+@mixin filterPillDisplayerFocused {
+	@include a11y.focusVisible($offset: 3px);
+}

@@ -1,25 +1,31 @@
 @use '@lucca-front/icons/src/commons/config';
 
 @if config.$isNamespaced {
-	& {
-		-moz-osx-font-smoothing: grayscale;
+	@layer base {
+		& {
+			-moz-osx-font-smoothing: grayscale;
+		}
 	}
 } @else {
-	body {
-		-moz-osx-font-smoothing: grayscale;
+	@layer base {
+		body {
+			-moz-osx-font-smoothing: grayscale;
+		}
 	}
 }
 
 @at-root {
-	@font-face {
-		font-family: config.$font-name;
-		font-style: normal;
-		font-weight: 400;
-		src:
-			url('#{config.$font-path}.woff2') format('woff2'),
-			url('#{config.$font-path}.woff') format('woff');
-		letter-spacing: normal;
-		font-feature-settings: 'liga';
-		font-variant-ligatures: discretionary-ligatures;
+	@layer base {
+		@font-face {
+			font-family: config.$font-name;
+			font-style: normal;
+			font-weight: 400;
+			src:
+				url('#{config.$font-path}.woff2') format('woff2'),
+				url('#{config.$font-path}.woff') format('woff');
+			letter-spacing: normal;
+			font-feature-settings: 'liga';
+			font-variant-ligatures: discretionary-ligatures;
+		}
 	}
 }

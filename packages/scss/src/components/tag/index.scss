@@ -1,36 +1,40 @@
 @use 'exports' as *;
 
 .tag {
-	@include vars;
-	@include component;
-
-	&.mod-S {
-		@include S;
+	@layer components {
+		@include vars;
+		@include component;
 	}
 
-	&.mod-L {
-		@include L;
-	}
+	@layer mods {
+		&.mod-S {
+			@include S;
+		}
 
-	// .mod-clickable is deprecated
-	&:is(a, button),
-	&.mod-clickable {
-		@include clickable;
-	}
+		&.mod-L {
+			@include L;
+		}
 
-	&.mod-outlined {
-		@include outlined;
-	}
+		// .mod-clickable is deprecated
+		&:is(a, button),
+		&.mod-clickable {
+			@include clickable;
+		}
 
-	&.mod-disabled {
-		@include disabled;
-	}
+		&.mod-outlined {
+			@include outlined;
+		}
 
-	&:has(.tag-content:focus-visible) {
-		@include focusVisible;
-	}
+		&.mod-AI {
+			@include AI;
+		}
 
-	&.mod-AI {
-		@include AI;
+		&.mod-disabled {
+			@include disabled;
+		}
+
+		&:has(.tag-content:focus-visible) {
+			@include focusVisible;
+		}
 	}
 }

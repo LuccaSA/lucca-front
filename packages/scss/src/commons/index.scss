@@ -1,7 +1,14 @@
+@use "sass:meta";
 @use '@lucca-front/scss/src/commons/utils/namespace';
 @use 'exports' as *;
 
+@layer reset {
+	@include meta.load-css('normalize.css/normalize');
+}
+
 @include namespace.appendRootVars {
-	@include vars;
-	@include base;
+	@layer base {
+		@include vars;
+		@include base;
+	}
 }

@@ -39,7 +39,7 @@
 			stroke-width: var(--components-gauge-circle-strokeWidth);
 			stroke-linecap: round;
 			stroke-dashoffset: 0;
-			transform: rotate(-1/4 * 1turn);
+			transform: rotate(-0.25turn);
 			transform-origin: 50% 50%;
 			stroke-dasharray: calc(var(--components-gauge-circleP) / 100 * var(--components-gauge-value)), 9999;
 			stroke: currentColor;
@@ -63,21 +63,23 @@
 }
 
 %gaugeBar {
-	color: currentColor;
-	transition-duration: var(--commons-animations-durations-standard);
-	transition-property: background-color, inline-size, block-size;
-	block-size: var(--components-gauge-blockSize);
-	inline-size: var(--components-gauge-value);
-	background-color: currentColor;
-	border-radius: var(--pr-t-border-radius-full);
-	min-inline-size: var(--components-gauge-before-minInlineSize);
-	min-block-size: var(--components-gauge-before-minInlineSize);
-	animation-name: var(--components-gauge-animationName);
-	animation-duration: var(--components-gauge-animationDuration);
-	animation-timing-function: var(--components-gauge-animationTimingFunction);
+	@layer components {
+		color: currentColor;
+		transition-duration: var(--commons-animations-durations-standard);
+		transition-property: background-color, inline-size, block-size;
+		block-size: var(--components-gauge-blockSize);
+		inline-size: var(--components-gauge-value);
+		background-color: currentColor;
+		border-radius: var(--pr-t-border-radius-full);
+		min-inline-size: var(--components-gauge-before-minInlineSize);
+		min-block-size: var(--components-gauge-before-minInlineSize);
+		animation-name: var(--components-gauge-animationName);
+		animation-duration: var(--components-gauge-animationDuration);
+		animation-timing-function: var(--components-gauge-animationTimingFunction);
 
-	@media (prefers-reduced-motion: reduce) {
-		--components-gauge-animationDuration: var(--commons-animations-durations-fast);
-		--components-gauge-animationTimingFunction: ease;
+		@media (prefers-reduced-motion: reduce) {
+			--components-gauge-animationDuration: var(--commons-animations-durations-fast);
+			--components-gauge-animationTimingFunction: ease;
+		}
 	}
 }
