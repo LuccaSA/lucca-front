@@ -45,31 +45,27 @@
 		}
 	}
 
-	.lu-select-display-wrapper {
-		@layer components {
+	@layer components {
+		.lu-select-display-wrapper {
 			display: block;
 			inline-size: 100%;
 			text-overflow: ellipsis;
 			white-space: nowrap;
 			overflow: hidden;
 		}
-	}
 
-	.lu-select-value {
-		@layer components {
-			line-height: var(--pr-t-font-body-M-lineHeight);
+		.lu-select-value {
+			font: var(--pr-t-font-body-M);
 			min-block-size: calc(var(--components-select-framed-bottom-padding) + var(--pr-t-font-body-M-lineHeight));
 			padding-block: var(--components-select-input-padding-vertical);
 			padding-inline: var(--components-select-input-padding-horizontal) 3.5rem;
 			transition: all var(--commons-animations-durations-standard);
 			display: none;
 		}
-	}
 
-	.lu-select-placeholder {
-		@layer components {
+		.lu-select-placeholder {
 			color: var(--palettes-neutral-400);
-			line-height: var(--pr-t-font-body-M-lineHeight);
+			font: var(--pr-t-font-body-M);
 			min-block-size: calc(var(--components-select-framed-bottom-padding) + var(--pr-t-font-body-M-lineHeight));
 			padding-block: var(--components-select-input-padding-vertical);
 			padding-inline: var(--components-select-input-padding-horizontal) 3.5rem;
@@ -78,19 +74,15 @@
 			text-overflow: ellipsis;
 			white-space: nowrap;
 		}
-	}
 
-	.lu-select-suffix,
-	.lu-select-clearer {
-		@layer components {
+		.lu-select-suffix,
+		.lu-select-clearer {
 			position: absolute;
 			inset-block-end: var(--pr-t-spacings-150);
 			inset-inline-end: 2.5rem;
 		}
-	}
 
-	::ng-deep .lu-select-value {
-		@layer components {
+		::ng-deep .lu-select-value {
 			.chip {
 				display: inline-flex;
 				max-inline-size: 100%;
@@ -107,7 +99,7 @@
 	// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
 	@layer mods {
-		// Small
+	// Small
 		:host-context(.textfield.mod-S) {
 			padding: 0;
 
@@ -266,6 +258,9 @@
 				}
 			}
 		}
+
+		// STATES
+		// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 
 		// Filled
 		:host-context(.textfield-input.is-filled) {

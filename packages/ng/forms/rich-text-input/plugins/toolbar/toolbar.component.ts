@@ -30,7 +30,7 @@ export class RichTextInputToolbarComponent implements RichTextPluginComponent {
 		this.pluginComponents().forEach((plugin) => plugin.setEditorInstance(editor));
 	}
 
-	getLexicalNodes(): Klass<LexicalNode>[] {
+	getLexicalNodes() {
 		return this.pluginComponents().reduce((acc, plugin) => [...acc, ...(plugin.getLexicalNodes?.() || [])], [] as Klass<LexicalNode>[]);
 	}
 

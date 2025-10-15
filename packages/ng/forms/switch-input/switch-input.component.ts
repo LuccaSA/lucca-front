@@ -1,14 +1,15 @@
 import { Component, inject, ViewEncapsulation } from '@angular/core';
-import { FORM_FIELD_INSTANCE, FormFieldComponent, InputDirective } from '@lucca-front/ng/form-field';
-import { NoopValueAccessorDirective } from '../noop-value-accessor.directive';
 import { ReactiveFormsModule } from '@angular/forms';
+import { FORM_FIELD_INSTANCE, FormFieldComponent, InputDirective } from '@lucca-front/ng/form-field';
 import { injectNgControl } from '../inject-ng-control';
+import { NoopValueAccessorDirective } from '../noop-value-accessor.directive';
 
 @Component({
 	selector: 'lu-switch-input',
 	standalone: true,
 	imports: [ReactiveFormsModule, InputDirective],
 	templateUrl: './switch-input.component.html',
+	styleUrl: './switch-input.component.scss',
 	hostDirectives: [NoopValueAccessorDirective],
 	encapsulation: ViewEncapsulation.None,
 	host: {

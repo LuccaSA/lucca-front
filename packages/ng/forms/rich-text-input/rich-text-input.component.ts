@@ -22,15 +22,14 @@ import { createEmptyHistoryState, registerHistory } from '@lexical/history';
 import { $canShowPlaceholderCurry } from '@lexical/text';
 import { mergeRegister } from '@lexical/utils';
 import { FormFieldComponent, InputDirective } from '@lucca-front/ng/form-field';
-import { $getRoot, createEditor, Klass, LexicalEditor, LexicalNode } from 'lexical';
-
+import { $getRoot, createEditor, Klass, LexicalEditor, LexicalNode, LexicalNodeReplacement } from 'lexical';
 import { RICH_TEXT_FORMATTER, RichTextFormatter } from './formatters';
 
 const INITIAL_UPDATE_TAG = 'initial-update';
 
 export interface RichTextPluginComponent {
 	setEditorInstance(editor: LexicalEditor): void;
-	getLexicalNodes?(): Klass<LexicalNode>[];
+	getLexicalNodes?(): (Klass<LexicalNode> | LexicalNodeReplacement)[];
 	setDisabledState(isDisabled: boolean): void;
 
 	//embedded plugins

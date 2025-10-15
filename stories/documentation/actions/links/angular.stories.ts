@@ -16,18 +16,19 @@ export default {
 	],
 
 	render: (args) => {
-		const { label, disabled, external, href, routerLink, ...inputs } = args;
+		const { label, disabled, external, href, routerLink, decorationHover, ...inputs } = args;
 		const disable = disabled ? ' disabled' : '';
 		const externe = external ? ' external' : '';
+		const decoration = decorationHover ? ' decorationHover' : '';
 
 		return {
 			props: {
 				tick$: timer(0, 1000),
 			},
 			template: `
-Internal link: <a luLink="${routerLink}"${externe}${disable}>${label}</a>
+Internal link: <a luLink="${routerLink}"${externe}${disable}${decoration}>${label}</a>
 <br>
-External link: <a href="${href}" luLink${externe}${disable}>${label}</a>
+External link: <a href="${href}" luLink${externe}${disable}${decoration}>${label}</a>
 `,
 		};
 	},
@@ -58,5 +59,6 @@ export const Basic: StoryObj = {
 		routerLink: './#example',
 		disabled: false,
 		external: false,
+		decorationHover: false,
 	},
 };
