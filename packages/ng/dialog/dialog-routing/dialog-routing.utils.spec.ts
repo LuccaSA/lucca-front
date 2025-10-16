@@ -225,6 +225,62 @@ describe('dialog-routing.utils', () => {
 			expect(dialogRef.dismiss).toHaveBeenCalledTimes(1);
 		});
 
+		it('should call canDeactivate once when dialog is dismissed', async () => {
+			// Arrange
+			const canDeactivateGuard = jest.fn(() => true);
+
+			const route = addTestRoute({
+				path: 'test/:name',
+				dataFactory: () => ({ foo: 'bar' }),
+				dialogRouteConfig: {
+					canDeactivate: [canDeactivateGuard],
+				},
+			});
+			const { router, fixture } = initTest(route);
+
+			// Act
+			await router.navigateByUrl('/test/bar');
+			fixture.detectChanges();
+			await fixture.whenStable();
+
+			// Navigate away to trigger canDeactivate
+			dialogRef.dismiss();
+			fixture.detectChanges();
+			await fixture.whenStable();
+
+			// Assert
+			expect(canDeactivateGuard).toHaveBeenCalledTimes(1);
+			expect(dialogRef.dismiss).toHaveBeenCalledTimes(1);
+		});
+
+		it('should not call canDeactivate when dialog is closed', async () => {
+			// Arrange
+			const canDeactivateGuard = jest.fn(() => true);
+
+			const route = addTestRoute({
+				path: 'test/:name',
+				dataFactory: () => ({ foo: 'bar' }),
+				dialogRouteConfig: {
+					canDeactivate: [canDeactivateGuard],
+				},
+			});
+			const { router, fixture } = initTest(route);
+
+			// Act
+			await router.navigateByUrl('/test/bar');
+			fixture.detectChanges();
+			await fixture.whenStable();
+
+			// Navigate away to trigger canDeactivate
+			dialogRef.close();
+			fixture.detectChanges();
+			await fixture.whenStable();
+
+			// Assert
+			expect(canDeactivateGuard).toHaveBeenCalledTimes(0);
+			expect(dialogRef.close).toHaveBeenCalledTimes(1);
+		});
+
 		it('should keep dialog opened when canDeactivate return false', async () => {
 			// Arrange
 			const canDeactivateGuard = jest.fn(() => false);
