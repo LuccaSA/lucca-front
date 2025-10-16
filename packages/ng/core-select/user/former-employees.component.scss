@@ -2,12 +2,14 @@
 
 @include definitions.optionItemStyle;
 
-:host {
-	display: block;
-	background-color: var(--palettes-neutral-0);
-	border-block-end: 1px solid var(--commons-border-200);
-	padding-block: 0 var(--components-options-item-padding-vertical);
-	padding-inline: var(--pr-t-spacings-50);
-	margin-block: 0 var(--components-options-item-padding-vertical);
-	margin-inline: calc(-1 * var(--pr-t-spacings-50));
+@layer components {
+	:host {
+		display: block;
+		background-color: var(--palettes-neutral-0);
+		border-block-end: 1px solid var(--commons-border-200);
+		padding-block: 0 var(--components-options-item-padding-vertical);
+		padding-inline: var(--pr-t-spacings-50);
+		margin-block: 0 var(--components-options-item-padding-vertical);
+		margin-inline: calc(-1 * var(--pr-t-spacings-50));
+	}
 }

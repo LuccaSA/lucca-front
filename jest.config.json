@@ -10,5 +10,6 @@
 		"^@/stories/(.*)$": "<rootDir>/stories/documentation/$1",
 		"^(\\.{1,2}/.*)\\.js$": "$1"
 	},
-	"roots": ["<rootDir>/packages/ng", "<rootDir>/stories/documentation"]
+	"roots": ["<rootDir>/packages/ng", "<rootDir>/stories/documentation"],
+  "globalSetup": "./jest-global-setup.js"
 }

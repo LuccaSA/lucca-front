@@ -5,7 +5,7 @@ import { PortalContent, PortalDirective } from '@lucca-front/ng/core';
 @Component({
 	selector: 'lu-page-header',
 	standalone: true,
-	styleUrls: ['./page-header.component.scss'],
+	styleUrl: './page-header.component.scss',
 	templateUrl: './page-header.component.html',
 	encapsulation: ViewEncapsulation.None,
 	imports: [PortalDirective, NgTemplateOutlet],

@@ -1,13 +1,13 @@
 import { HorizontalConnectionPos, VerticalConnectionPos } from '@angular/cdk/overlay';
+import { NgClass } from '@angular/common';
 import { ChangeDetectionStrategy, Component, DestroyRef, HostBinding, HostListener, inject, Signal } from '@angular/core';
 import { SafeHtml } from '@angular/platform-browser';
 import { Subject } from 'rxjs';
-import { NgClass } from '@angular/common';
 
 @Component({
 	selector: 'lu-tooltip-panel',
 	templateUrl: './tooltip-panel.component.html',
-	styleUrls: ['./tooltip-panel.component.scss'],
+	styleUrl: './tooltip-panel.component.scss',
 	standalone: true,
 	host: {
 		role: 'tooltip',

@@ -13,7 +13,7 @@ import { ALuTreeOptionOperator, ILuTreeOptionOperator } from '../tree-option-ope
 @Component({
 	selector: 'lu-tree-option-searcher',
 	templateUrl: './option-searcher.component.html',
-	styleUrls: ['./option-searcher.component.scss'],
+	styleUrl: './option-searcher.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	imports: [ReactiveFormsModule, CommonModule, LuOptionPlaceholderComponent],
 	standalone: true,

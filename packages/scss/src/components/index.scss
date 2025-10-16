@@ -1,61 +1,62 @@
-@forward 'field'; //
-@forward 'box'; // 1 Ko
-@forward 'tag'; // 1 Ko
-@forward 'main'; // 1 Ko
-@forward 'code'; // 1 Ko
-@forward 'link'; // 1 Ko
-@forward 'chip'; // 1 Ko
-@forward 'title'; // 1 Ko
-@forward 'label'; // 1 Ko
-@forward 'filterBarDeprecated'; // 1 Ko
-@forward 'filters'; // 1 Ko
-@forward 'divider'; // 1 Ko
-@forward 'section'; // 1 Ko
-@forward 'collapse'; // 1 Ko
-@forward 'container'; // 1 Ko
-@forward 'errorPage'; // 1 Ko
-@forward 'pageHeader'; // 1 Ko
-@forward 'pagination'; // 1 Ko
-@forward 'titleSection'; // 1 Ko
-@forward 'contentSection'; // 1 Ko
-@forward 'tableOfContent'; // 1 Ko
-@forward 'list'; // 2 Ko
-@forward 'card'; // 2 Ko
-@forward 'gauge'; // 2 Ko
-@forward 'callout'; // 2 Ko
-@forward 'loading'; // 2 Ko
-@forward 'progress'; // 2 Ko
-@forward 'breadcrumbs'; // 2 Ko
-@forward 'buttonGroup'; // 2 Ko
-@forward 'header'; // 3 Ko
-@forward 'horizontalNavigation'; // 4 Ko
-@forward 'radio'; // 4 Ko
-@forward 'radioField'; // new component for radio
-@forward 'switch'; // 4 Ko
-@forward 'switchField'; // new component for switch
-@forward 'file'; // 5 Ko
-@forward 'layout'; // 5 Ko
-@forward 'radioButtons'; // 5 Ko
-@forward 'table'; // 7 Ko
-@forward 'checkbox'; // 7 Ko
-@forward 'checkboxField'; // new component for checkbox
-@forward 'timeline'; // 10 Ko
-@forward 'button'; // 12 Ko
-@forward 'textfields'; // 13 Ko
+@forward 'field';
+
+@forward 'box';
+@forward 'tag';
+@forward 'main';
+@forward 'code';
+@forward 'link';
+@forward 'chip';
+@forward 'title';
+@forward 'label';
+@forward 'filters';
+@forward 'divider';
+@forward 'section';
+@forward 'collapse';
+@forward 'container';
+@forward 'errorPage';
+@forward 'pageHeader';
+@forward 'pagination';
+@forward 'titleSection';
+@forward 'contentSection';
+@forward 'tableOfContent';
+@forward 'list';
+@forward 'card';
+@forward 'gauge';
+@forward 'callout';
+@forward 'loading';
+@forward 'progress';
+@forward 'breadcrumbs';
+@forward 'buttonGroup';
+@forward 'header';
+@forward 'horizontalNavigation';
+
+@forward 'textfields';
+@forward 'checkbox';
+@forward 'switch';
+@forward 'radio';
+
 @forward 'textField'; // new component for checkbox
-@forward 'navside'; // 15 Ko
-@forward 'form'; // 25 Ko
-@forward 'tableFixed'; // 33 Ko
+@forward 'checkboxField'; // new component for checkbox
+@forward 'switchField'; // new component for switch
+@forward 'radioField'; // new component for radio
+
+@forward 'file';
+@forward 'layout';
+@forward 'radioButtons';
+@forward 'table';
+@forward 'timeline';
+@forward 'button';
+@forward 'navside';
+@forward 'form';
+@forward 'tableFixed';
 @forward 'segmentedControl';
 @forward 'calendar';
 @forward 'skipLinks';
 @forward 'fancyBox';
 @forward 'inputFramed';
-
-// caution: the two components cannot be loaded at the same time
 @forward 'grid';
-@forward 'tableSticked'; // 8 Ko
-@forward 'timepicker'; //
+@forward 'tableSticked';
+@forward 'timepicker';
 @forward 'notchBox';
 @forward 'statusBadge';
 @forward 'mobileHeader';
@@ -84,7 +85,7 @@
 @forward 'userPopover';
 @forward 'scrollBox';
 @forward 'comment';
-@forward 'toast'; // 5 Ko
+@forward 'toast';
 @forward 'popover';
 @forward 'userTile';
 @forward 'mobilePush';
@@ -109,6 +110,7 @@
 @forward 'listboxOption';
 @forward 'suggestion';
 
-// Deprecated CSS components
-// @forward 'tableFixedDeprecated'; // 33 Ko
-// @forward 'tableStickedDeprecated'; // 67 Ko
+@forward 'filterBarDeprecated';
+@forward 'tableFixedDeprecated';
+@forward 'tableStickedDeprecated';
+

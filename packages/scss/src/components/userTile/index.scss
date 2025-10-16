@@ -1,33 +1,37 @@
 @use 'exports' as *;
 
 .userTile {
-	@include vars;
-	@include component;
-
-	&.mod-XS {
-		@include XS;
+	@layer components {
+		@include vars;
+		@include component;
 	}
 
-	&.mod-S {
-		@include S;
-	}
+	@layer mods {
+		&.mod-XS {
+			@include XS;
+		}
 
-	&.mod-L {
-		@include L;
-	}
+		&.mod-S {
+			@include S;
+		}
 
-	// .mod-XL is deprecated
-	&.mod-XL {
-		@include XL;
-	}
+		&.mod-L {
+			@include L;
+		}
 
-	// .mod-XXL is deprecated
-	&.mod-XXL {
-		@include XXL;
-	}
+		// .mod-XL is deprecated
+		&.mod-XL {
+			@include XL;
+		}
 
-	// .mod-XXXL is deprecated
-	&.mod-XXXL {
-		@include XXXL;
+		// .mod-XXL is deprecated
+		&.mod-XXL {
+			@include XXL;
+		}
+
+		// .mod-XXXL is deprecated
+		&.mod-XXXL {
+			@include XXXL;
+		}
 	}
 }

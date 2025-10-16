@@ -4,7 +4,7 @@
 $defaultAtRoot: config.$isNamespaced and 'with: rule' or 'without: rule';
 
 @mixin component($atRoot: $defaultAtRoot) {
-	font-weight: 400;
+	font-weight: var(--pr-t-font-fontWeight-regular);
 	font-size: var(--icon-size, var(--icon-sizeDefault));
 	direction: ltr;
 	display: inline-block;
@@ -19,15 +19,15 @@ $defaultAtRoot: config.$isNamespaced and 'with: rule' or 'without: rule';
 	white-space: nowrap;
 	word-wrap: normal;
 
+	&::before {
+		content: var(--icon-content) / '';
+	}
+
 	@at-root ($atRoot) {
 		@each $name, $value in config.$icons {
 			.icon-#{core.camelize($name)} {
 				--icon-content: '#{$value}';
 			}
 		}
-	}
-
-	&::before {
-		content: var(--icon-content) / '';
 	}
 }

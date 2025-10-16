@@ -6,7 +6,7 @@ import { LU_CHIP_TRANSLATIONS } from './chip.translate';
 	selector: 'lu-chip',
 	standalone: true,
 	templateUrl: './chip.component.html',
-	styleUrls: ['./chip.component.scss'],
+	styleUrl: './chip.component.scss',
 	encapsulation: ViewEncapsulation.None,
 	host: {
 		class: 'chip',

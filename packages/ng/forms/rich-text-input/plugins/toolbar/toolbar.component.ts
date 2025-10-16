@@ -10,7 +10,6 @@ import { TextStyleToolbarComponent } from '../text-style';
 @Component({
 	selector: 'lu-rich-text-input-toolbar',
 	templateUrl: 'toolbar.component.html',
-	styleUrl: 'toolbar.component.scss',
 	host: {
 		class: 'richTextField-toolbar-formatting',
 	},
@@ -31,7 +30,7 @@ export class RichTextInputToolbarComponent implements RichTextPluginComponent {
 		this.pluginComponents().forEach((plugin) => plugin.setEditorInstance(editor));
 	}
 
-	getLexicalNodes(): Klass<LexicalNode>[] {
+	getLexicalNodes() {
 		return this.pluginComponents().reduce((acc, plugin) => [...acc, ...(plugin.getLexicalNodes?.() || [])], [] as Klass<LexicalNode>[]);
 	}
 

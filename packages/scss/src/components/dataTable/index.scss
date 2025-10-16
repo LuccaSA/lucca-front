@@ -1,56 +1,64 @@
 @use 'exports' as *;
 
 .dataTableWrapper {
-	@include vars;
+	@layer components {
+		@include vars;
+	}
 
-	&.mod-nested {
-		@include nested;
+	@layer mods {
+		&.mod-nested {
+			@include nested;
+		}
 	}
 }
 
 .dataTable {
-	@include component;
-
-	&.mod-cellBorder {
-		@include cellBorder;
+	@layer components {
+		@include component;
 	}
 
-	&.mod-alignTop,
-	&.mod-verticalAlignTop {
-		@include verticalAlignTop;
-	}
+	@layer mods {
+		&.mod-cellBorder {
+			@include cellBorder;
+		}
 
-	&.mod-verticalAlignBottom {
-		@include verticalAlignBottom;
-	}
+		&.mod-alignTop,
+		&.mod-verticalAlignTop {
+			@include verticalAlignTop;
+		}
 
-	&.mod-verticalAlignMiddle {
-		@includeverticalAlignMiddle;
-	}
+		&.mod-verticalAlignBottom {
+			@include verticalAlignBottom;
+		}
 
-	&.mod-layoutFixed {
-		@include layoutFixed;
-	}
+		&.mod-verticalAlignMiddle {
+			@includeverticalAlignMiddle;
+		}
 
-	&[class*='mod-layoutFixedAtMediaMin'] {
-		@include layoutFixedWithBreakpoint;
-	}
+		&.mod-layoutFixed {
+			@include layoutFixed;
+		}
 
-	// Allow selection of mod-layoutFixed with or without breakpoints like mod-layoutFixedAtMediaMinXS or mod-layoutFixedAtMediaMaxL
-	&[class*='mod-layoutFixed'] {
-		@include layoutFixedCells;
-	}
+		&[class*='mod-layoutFixedAtMediaMin'] {
+			@include layoutFixedWithBreakpoint;
+		}
 
-	&.mod-hover {
-		:is(.mod-selectable, .dataTable-body-row:not(.mod-group)) {
-			&:hover {
-				@include hover;
-			}
+		// Allow selection of mod-layoutFixed with or without breakpoints like mod-layoutFixedAtMediaMinXS or mod-layoutFixedAtMediaMaxL
+		&[class*='mod-layoutFixed'] {
+			@include layoutFixedCells;
+		}
 
-			&.mod-selectable {
-				&:has(input:checked) {
-					&:hover {
-						@include selectedHover;
+		&.mod-hover {
+			:is(.mod-selectable, .dataTable-body-row:not(.mod-group)) {
+				&:hover {
+					@include hover;
+				}
+
+				&.mod-selectable {
+					&:has(input:checked) {
+						&:hover {
+							@include selectedHover;
+						}
 					}
 				}
 			}
@@ -58,68 +66,70 @@
 	}
 }
 
-:is(.dataTable-head-row, .dataTable-body-row, .dataTable-foot-row) {
-	&.mod-group {
-		@include group;
-	}
+@layer mods {
+	:is(.dataTable-head-row, .dataTable-body-row, .dataTable-foot-row) {
+		&.mod-group {
+			@include group;
+		}
 
-	&:has([selectable]),
-	&.mod-selectable {
-		@include selectable;
+		&:has([selectable]),
+		&.mod-selectable {
+			@include selectable;
 
-		&:has(input:checked) {
-			@include selected;
+			&:has(input:checked) {
+				@include selected;
+			}
+		}
+
+		&.mod-draggable {
+			@include draggable;
 		}
 	}
 
-	&.mod-draggable {
-		@include draggable;
-	}
-}
+	:is(.dataTable-head-row-cell, .dataTable-body-row-cell, .dataTable-foot-row-cell) {
+		&.mod-actions {
+			@include actions;
+		}
 
-:is(.dataTable-head-row-cell, .dataTable-body-row-cell, .dataTable-foot-row-cell) {
-	&.mod-actions {
-		@include actions;
-	}
+		&.mod-alignCenter {
+			@include alignCenter;
+		}
 
-	&.mod-alignCenter {
-		@include alignCenter;
-	}
+		&.mod-alignRight,
+		&.mod-alignEnd {
+			@include alignEnd;
+		}
 
-	&.mod-alignRight,
-	&.mod-alignEnd {
-		@include alignEnd;
-	}
+		&.mod-alignStart {
+			@include alignStart;
+		}
 
-	&.mod-alignStart {
-		@include alignStart;
-	}
+		&.mod-editable {
+			@include editable;
+		}
 
-	&.mod-editable {
-		@include editable;
-	}
-
-	&.mod-tree {
-		@include tree;
-	}
-}
-
-.dataTable-body-row {
-	&.is-collapsed {
-		@include collapsed;
+		&.mod-tree {
+			@include tree;
+		}
 	}
 
-	&:first-child {
-		&:has(.dataTable-body-row-cell-expand-button.button[aria-expanded='false']) {
-			~ .dataTable-body-row {
-				@include collapsed;
+	.dataTable-body-row {
+		&.is-collapsed {
+			@include collapsed;
+		}
+
+		&:first-child {
+			&:has(.dataTable-body-row-cell-expand-button.button[aria-expanded='false']) {
+				~ .dataTable-body-row {
+					@include collapsed;
+				}
 			}
 		}
 	}
-}
 
-.dataTable-body-row-cell-expand-button {
-	&[aria-expanded='true'] {
-		@include expanded;
+	.dataTable-body-row-cell-expand-button {
+		&[aria-expanded='true'] {
+			@include expanded;
+		}
 	}
 }

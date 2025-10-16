@@ -67,24 +67,6 @@ Permet de définir le délai avant la disparition du UserPopover en milliseconde
 
 Permet de désactiver le UserPopover
 
-### Feature Flag
-
-Au moment où sont écrites ces lignes, la UserPopover est branché sur un feature flag de la librairie `Lucca.Core.FeatureFlags`.
-Il est donc nécessaire de l'activer dans votre application pour pouvoir l'utiliser.
-
-Si vous souhaitez override ce feature flag, vous pouvez le faire écrasant vous-même l'InjectionToken `USER_POPOVER_IS_ACTIVATED`
-
-```typescript
-import { USER_POPOVER_IS_ACTIVATED } from '@lucca-front/ng/user-popover';
-
-@NgModule({
-  providers: [...{ provide: USER_POPOVER_IS_ACTIVATED, useValue: of(true) }],
-})
-export class AppModule {}
-```
-
-Ce feature flag est temporaire et sera supprimé dans une prochaine version.
-
 ### Store et Services
 
 Le User popover est fournit avec un service qui gère la récupération des données, mais aussi qui stocke les informations des utilisateurs déjà récupérés, y compris les images.

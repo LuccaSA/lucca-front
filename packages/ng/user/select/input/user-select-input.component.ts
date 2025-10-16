@@ -19,7 +19,7 @@ import { LU_USER_SELECT_INPUT_TRANSLATIONS } from './user-select-input.translate
 @Component({
 	selector: 'lu-user-select',
 	templateUrl: './user-select-input.component.html',
-	styleUrls: ['./user-select-input.component.scss'],
+	styleUrl: './user-select-input.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	standalone: true,
 	imports: [

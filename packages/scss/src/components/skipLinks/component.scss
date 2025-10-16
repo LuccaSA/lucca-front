@@ -17,7 +17,7 @@
 			margin: 0;
 			border-radius: var(--pr-t-border-radius-default);
 			font: var(--pr-t-font-body-XS);
-			font-weight: 600;
+			font-weight: var(--pr-t-font-fontWeight-semibold);
 			padding-block: var(--pr-t-spacings-50);
 			padding-inline: var(--pr-t-spacings-100);
 			transition: all var(--commons-animations-durations-fast);

@@ -9,7 +9,7 @@ import { ALuOptionItem, ILuOptionItem } from './option-item.model';
 @Component({
 	selector: 'lu-option',
 	templateUrl: './option-item.component.html',
-	styleUrls: ['./option-item.component.scss'],
+	styleUrl: './option-item.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	imports: [CommonModule],
 	standalone: true,

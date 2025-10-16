@@ -20,7 +20,7 @@
 				var(--components-readMore-link-backgroudColor) calc(var(--components-readMore-link-paddingInlineStart) - var(--pr-t-spacings-100))
 			);
 			padding-inline-start: var(--components-readMore-link-paddingInlineStart);
-			font-weight: 600;
+			font-weight: var(--pr-t-font-fontWeight-semibold);
 			text-decoration: none;
 
 			&::before {

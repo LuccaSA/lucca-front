@@ -5,11 +5,10 @@ import { buildAddWrapperExtension } from '../formly.utils';
 // wrapper component
 @Component({
 	selector: 'lu-formly-wrapper-helper',
-	styleUrls: ['flex-layout.scss'],
+	styleUrl: 'flex-layout.scss',
 	templateUrl: './helper.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	// eslint-disable-next-line @angular-eslint/prefer-standalone
-	standalone: false,
+	standalone: true,
 })
 export class LuFormlyWrapperHelper extends FieldWrapper {
 	@ViewChild('fieldComponent', { read: ViewContainerRef, static: true })

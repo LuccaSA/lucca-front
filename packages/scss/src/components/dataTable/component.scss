@@ -33,7 +33,7 @@
 			color: var(--pr-t-color-text-subtle);
 			padding: var(--components-dataTable-cell-padding);
 			display: table-cell;
-			font-weight: 400;
+			font-weight: var(--pr-t-font-fontWeight-regular);
 
 			.checkboxField {
 				margin-block-end: 0.125rem;
@@ -101,7 +101,7 @@
 		}
 
 		.dataTable-foot-row-cell {
-			font-weight: 600;
+			font-weight: var(--pr-t-font-fontWeight-semibold);
 		}
 
 		.dataTable-body-row-cell-expand {
