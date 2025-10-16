@@ -1,5 +1,4 @@
 import { Meta } from '@storybook/angular';
-import { cleanupTemplate } from 'stories/helpers/stories';
 
 interface MainLayoutHTMLInAppLayoutStory {
 	header: boolean;
@@ -30,30 +29,49 @@ export default {
 		},
 	},
 	render: (args: MainLayoutHTMLInAppLayoutStory) => {
-		const sidebarContainer = args.sidebar ? `<div class="mainLayout-sidebar">sidebar</div>` : ``;
-		const headerStickyParam = args.headerSticky ? `mod-sticky` : ``;
-		const footerStickyParam = args.footerSticky ? `mod-sticky` : ``;
-		const headerContainer = args.header ? `<div class="mainLayout-content-inside-header ${headerStickyParam}"><div class="container"><div class="fakeContent">header</div></div></div>` : ``;
-		const footerContainer = args.footer ? `<div class="mainLayout-content-inside-footer ${footerStickyParam}"><div class="container"><div class="fakeContent">footer</div></div></div>` : ``;
-		const template = `<div class="mainLayout-content-inside-block">
-	<div class="container">
-		<div class="fakeContent">
-			content
-		</div>
-	</div>
-</div>`;
-		const contentOverflow = ` content overflowing`;
+		const sidebarContainer = args.sidebar
+			? `
+			<div class="mainLayout-sidebar">
+				sidebar
+			</div>`
+			: ``;
+		const headerStickyParam = args.headerSticky ? ` mod-sticky` : ``;
+		const footerStickyParam = args.footerSticky ? ` mod-sticky` : ``;
+		const headerContainer = args.header
+			? `
+					<div class="mainLayout-content-inside-header${headerStickyParam}">
+						<div class="container">
+							<div class="fakeContent">header</div>
+						</div>
+					</div>`
+			: ``;
+		const footerContainer = args.footer
+			? `
+					<div class="mainLayout-content-inside-footer${footerStickyParam}">
+						<div class="container">
+							<div class="fakeContent">footer</div>
+						</div>
+					</div>`
+			: ``;
+		const template = `
+					<div class="mainLayout-content-inside-block">
+						<div class="container">
+							<div class="fakeContent">content</div>
+						</div>
+					</div>`;
+		const contentOverflow = `
+									content overflowing`;
 		let overflow = ``;
 		for (let i = 1; i <= args.repeatOverflow; i++) {
 			overflow = overflow + contentOverflow;
 		}
-		const templateOverflow = `<div class="mainLayout-content-inside-block mod-overflow">
-			<div class="container">
-				<div class="fakeContent">
-					${overflow}
-				</div>
-			</div>
-		</div>`;
+		const templateOverflow = `
+					<div class="mainLayout-content-inside-block mod-overflow">
+						<div class="container">
+							<div class="fakeContent">${overflow}
+							</div>
+						</div>
+					</div>`;
 		let content = ``;
 		for (let i = 1; i <= args.repeatContent; i++) {
 			if (i === args.repeatContent && args.contentOverflowing) {
@@ -96,6 +114,7 @@ export default {
 		background-color: var(--pr-t-elevation-surface-raised);
 		box-shadow: var(--pr-t-elevation-shadow-overflow);
 		position: relative;
+		z-index: 2;
 
 		&::before {
 			content: '';
@@ -134,8 +153,7 @@ export default {
 	}
 
 	.mainLayout-content-inside {
-		gap: var(--pr-t-spacings-300);
-		padding-block: var(--pr-t-spacings-300);
+		gap: var(--pr-t-spacings-100);
 	}
 
 	.container {
@@ -156,26 +174,24 @@ export default {
 	}
 				`,
 			],
-			template: cleanupTemplate(`
+			template: `
 <div class="appLayout">
-	<div class="appLayout-banner">banner</div>
+	<div class="appLayout-banner">
+		banner
+	</div>
 	<div class="appLayout-navSide">
 		navSide
 	</div>
 	<div class="appLayout-main">
-		<main role="main" class="mainLayout">
-			${sidebarContainer}
+		<main role="main" class="mainLayout">${sidebarContainer}
 			<div class="mainLayout-content">
-				<div class="mainLayout-content-inside">
-					${headerContainer}
-					${content}
-					${footerContainer}
+				<div class="mainLayout-content-inside">${headerContainer}${content}${footerContainer}
 				</div>
 			</div>
 		</main>
 	</div>
 </div>
-`),
+`,
 		};
 	},
 } as Meta;

@@ -7,7 +7,7 @@ interface ContainersBasicStory {
 }
 
 export default {
-	title: 'Documentation/Structure/Containers/Basic',
+	title: 'Documentation/Structure/Container/HTML&CSS/Basic',
 	argTypes: {
 		center: {
 			control: {
@@ -21,7 +21,7 @@ export default {
 			},
 		},
 		size: {
-			options: ['', 'mod-maxM', 'mod-maxL', 'mod-maxXL', 'mod-maxXXL', 'mod-maxXXXL'],
+			options: ['', ' mod-maxM', ' mod-maxL', ' mod-maxXL', ' mod-maxXXL', ' mod-maxXXXL'],
 			control: {
 				type: 'select',
 			},
@@ -30,10 +30,10 @@ export default {
 } as Meta;
 
 function getTemplate(args: ContainersBasicStory): string {
-	const center = args.center ? `mod-center` : '';
-	const small = args.small ? `mod-S` : '';
+	const center = args.center ? ` mod-center` : '';
+	const small = args.small ? ` mod-S` : '';
 	return `
-	<div class="container ${center} ${small} ${args.size}">
+	<div class="container${center}${small}${args.size}">
 		Ce container est responsive et sert à placer le contenu de votre page.
 	</div>
 	`;
