@@ -8,7 +8,7 @@
 	}
 
 	@layer mods {
-		&:has(.dataTable.mod-stickyHeader) {
+		&:has(.dataTable.mod-stickyHeader, .dataTable-head.mod-sticky) {
 			@include stickyHeader;
 		}
 
@@ -43,5 +43,9 @@
 				@include stickyColumnBorder;
 			}
 		}
+	}
+
+	&:has(.dataTable-head.is-firstBodyRowVisible) {
+		@include firstBodyRowVisible;
 	}
 }

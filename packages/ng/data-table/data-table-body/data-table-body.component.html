@@ -1,0 +1,21 @@
+@if (group() && groupButtonAlt()) {
+	<tr class="dataTable-body-row mod-group">
+		<td class="dataTable-body-row-cell" [attr.colspan]="colspan()">
+			<div class="dataTable-body-row-cell-expand">
+				<button
+					type="button"
+					class="dataTable-body-row-cell-expand-button"
+					luButton
+					disclosure
+					[attr.aria-expanded]="expanded()"
+					(click)="expandedToggle()"
+				>
+					<span aria-hidden="true" class="lucca-icon icon-arrowChevronTop"></span>
+					<span class="pr-u-mask">{{ groupButtonAlt() }}</span>
+				</button>
+				{{ group() }}
+			</div>
+		</td>
+	</tr>
+}
+<ng-content />
