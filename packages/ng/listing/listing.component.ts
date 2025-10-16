@@ -1,5 +1,5 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { booleanAttribute, Component, forwardRef, input, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, Component, forwardRef, input, numberAttribute, ViewEncapsulation } from '@angular/core';
 import { Palette } from '@lucca-front/ng/core';
 
 import { LuccaIcon } from '@lucca-front/icons';
@@ -20,6 +20,10 @@ import { LU_LISTING_INSTANCE } from './listing.token';
 	],
 })
 export class ListingComponent {
+	inline = input(false, { transform: booleanAttribute });
+	hideFirstItems = input(false, { transform: booleanAttribute });
+	start = input(1, { transform: numberAttribute });
+	marker = input<null | string>(null);
 	ordered = input(false, { transform: booleanAttribute });
 	checklist = input(false, { transform: booleanAttribute });
 	icons = input(false, { transform: booleanAttribute });

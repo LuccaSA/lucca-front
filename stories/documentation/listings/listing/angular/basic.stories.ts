@@ -12,6 +12,7 @@ interface ListingBasicStory {
 	palette: string;
 	defaultIcon: string;
 	icon: string;
+	start: number;
 }
 
 export default {
@@ -25,19 +26,20 @@ export default {
 	],
 
 	render: (args: ListingBasicStory, context) => {
-		const { type, checklist, ordered, icons, defaultIcon, icon, ...inputs } = args;
-		const checklistParam = args.type === 'checklist' ? ' checklist' : '';
-		const orderedParam = args.type === 'ordered' ? ' ordered' : '';
-		const iconsParam = args.type === 'icons' ? ' icons' : '';
-		const iconParam = args.type === 'icons' ? ` icon="${args.icon}"` : '';
-		const defaultIconParam = args.type === 'icons' ? ` defaultIcon="${defaultIcon}"` : '';
+		const { type, checklist, ordered, icons, defaultIcon, icon, start, ...inputs } = args;
+		const checklistParam = args.type === 'checklist' ? ` checklist` : ``;
+		const orderedParam = args.type === 'ordered' ? ` ordered` : ``;
+		const iconsParam = args.type === 'icons' ? ` icons` : ``;
+		const iconParam = args.type === 'icons' ? ` icon="${args.icon}"` : ``;
+		const defaultIconParam = args.type === 'icons' ? ` defaultIcon="${defaultIcon}"` : ``;
+		const startParam = args.start !== 1 ? ` start="${start}"` : ``;
 		return {
-			template: `<lu-listing${checklistParam}${orderedParam}${iconsParam}${defaultIconParam}${generateInputs(inputs, context.argTypes)}>
+			template: `<lu-listing${checklistParam}${orderedParam}${startParam}${iconsParam}${defaultIconParam}${generateInputs(inputs, context.argTypes)}>
 	<lu-listing-item>item</lu-listing-item>
 	<lu-listing-item${iconParam}>item</lu-listing-item>
 	<lu-listing-item>
 		item
-		<lu-listing${checklistParam}${orderedParam}${iconsParam}${defaultIconParam}${generateInputs(inputs, context.argTypes)}>
+		<lu-listing${checklistParam}${orderedParam}${startParam}${iconsParam}${defaultIconParam}${generateInputs(inputs, context.argTypes)}>
 			<lu-listing-item>item</lu-listing-item>
 			<lu-listing-item>item</lu-listing-item>
 			<lu-listing-item>item</lu-listing-item>
@@ -68,6 +70,9 @@ export const Template: StoryObj<ListingComponent & ListingItemComponent & { type
 				type: 'select',
 			},
 		},
+		start: {
+			if: { arg: 'type', eq: 'ordered' },
+		},
 		checklist: HiddenArgType,
 		icons: HiddenArgType,
 		ordered: HiddenArgType,
@@ -79,5 +84,6 @@ export const Template: StoryObj<ListingComponent & ListingItemComponent & { type
 		palette: 'none',
 		defaultIcon: 'heart',
 		icon: 'foodCroissant',
+		start: 1,
 	},
 };

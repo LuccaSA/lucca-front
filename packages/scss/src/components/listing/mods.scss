@@ -8,6 +8,7 @@
 
 @mixin icons {
 	--components-listing-paddingInlineStart: 0;
+	--components-listing-item-marginInlineStart: 0;
 	--components-listing-item-display: flex;
 
 	.listing-item-icon.lucca-icon {
@@ -20,6 +21,7 @@
 }
 
 @mixin checklist {
+	--components-listing-item-marginInlineStart: 0;
 	--components-listing-paddingInlineStart: 0;
 	--components-listing-item-display: flex;
 	--components-listing-item-icon-backgroundColor: var(--palettes-100, var(--palettes-neutral-100));
@@ -47,4 +49,28 @@
 	@if $level == 2 {
 		--components-listing-listStyleType: lower-roman;
 	}
+}
+
+@mixin inline {
+	--components-listing-paddingInlineStart: 0;
+	--components-listing-item-marginInlineStart: var(--components-listing-inlineStart);
+	--components-listing-flexDirection: row;
+}
+
+@mixin inlineMarker {
+	--components-listing-item-marginInlineStart: var(--pr-t-spacings-200);
+}
+
+@mixin hideFirstItems {
+	--components-listing-marginInlineStart: calc(var(--components-listing-inlineFirst) * -1);
+	--components-listing-clipPath: inset(
+		calc(var(--pr-t-spacings-50) * -1)
+		calc(var(--pr-t-spacings-50) * -1)
+		calc(var(--pr-t-spacings-50) * -1)
+		calc(var(--components-listing-inlineFirst) - var(--pr-t-spacings-50))
+	);
+}
+
+@mixin hideFirstItemsMarker {
+	--components-listing-inlineFirst: var(--pr-t-spacings-200);
 }
