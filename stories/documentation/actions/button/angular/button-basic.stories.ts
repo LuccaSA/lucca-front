@@ -13,7 +13,7 @@ export default {
 		}),
 	],
 	render: ({ luButton, ...inputs }, { argTypes }) => {
-		const disclosureIcon = '<lu-icon icon="arrowChevronBottom"/>';
+		const disclosureIcon = '<lu-icon icon="arrowChevronBottom" />';
 		return {
 			template: `<button type="button" luButton${luButton !== '' ? `="${luButton}"` : ''}${generateInputs(inputs, argTypes)}
 >Button${inputs['disclosure'] ? disclosureIcon : ''}</button>`,
@@ -24,10 +24,13 @@ export default {
 export const Basic: StoryObj<ButtonComponent> = {
 	argTypes: {
 		luButton: {
-			options: ['', 'outlined', 'ghost', 'ghost-invert'],
+			options: ['', 'outlined', 'ghost', 'ghost-invert', 'AI'],
 			control: {
 				type: 'select',
 			},
+		},
+		palette: {
+			if: { arg: 'luButton', neq: 'AI' },
 		},
 		critical: {
 			description: '[v20.2] Couleur critical au hover / focus',

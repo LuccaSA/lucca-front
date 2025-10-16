@@ -22,6 +22,7 @@
 			overflow: var(--components-dataTable-overflow);
 			background-color: var(--components-dataTable-cell-background);
 			contain: paint; // Fix overflow on webkit when table has scroll
+			display: block;
 
 			&:focus-visible {
 				@include a11y.focusVisible;
@@ -32,7 +33,7 @@
 			color: var(--pr-t-color-text-subtle);
 			padding: var(--components-dataTable-cell-padding);
 			display: table-cell;
-			font-weight: 400;
+			font-weight: var(--pr-t-font-fontWeight-regular);
 
 			.checkboxField {
 				margin-block-end: 0.125rem;
@@ -65,6 +66,9 @@
 			box-shadow: var(--components-dataTable-cell-shadow);
 			background-color: var(--components-dataTable-cell-background);
 			text-align: var(--components-dataTable-cell-textAlign);
+			transition-property: background-color;
+			transition-duration: var(--commons-animations-durations-fast);
+			font-weight: var(--pr-t-font-fontWeight-regular);
 
 			&:first-child {
 				inline-size: var(--components-dataTable-cellFirst-width);
@@ -88,10 +92,16 @@
 
 		.dataTable-body-row-cell {
 			vertical-align: var(--components-dataTable-cell-verticalAlign);
+
+			&:first-child {
+				&:has(.checkboxField-input) {
+					padding-bottom: var(--pr-t-spacings-150);
+				}
+			}
 		}
 
 		.dataTable-foot-row-cell {
-			font-weight: 600;
+			font-weight: var(--pr-t-font-fontWeight-semibold);
 		}
 
 		.dataTable-body-row-cell-expand {
@@ -102,6 +112,7 @@
 
 		.dataTable-body-row-cell-expand-button.button {
 			vertical-align: top;
+			margin-left: calc(var(--pr-t-spacings-25) * -1);
 
 			.lucca-icon {
 				transform: rotate(var(--components-dataTable-expand-rotation));

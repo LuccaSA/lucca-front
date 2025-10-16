@@ -23,7 +23,7 @@
 	--sizes-verticalPadding: var(--sizes-M-verticalPadding); // Deprecated
 }
 
-/* Deprecated */
+// Deprecated
 @mixin h5 {
 	--components-title-font: 600 var(--pr-t-font-fontSize-175)/var(--pr-t-font-lineHeight-250) var(--pr-t-font-family);
 	--sizes-verticalPadding: var(--sizes-S-verticalPadding);
@@ -32,4 +32,10 @@
 @mixin h6 {
 	--components-title-font: 600 var(--pr-t-font-fontSize-150)/var(--pr-t-font-lineHeight-200) var(--pr-t-font-family);
 	--sizes-verticalPadding: var(--sizes-XS-verticalPadding);
+}
+
+@mixin elementAfterText {
+	display: flex;
+	flex-wrap: wrap;
+	column-gap: var(--pr-t-spacings-100);
 }

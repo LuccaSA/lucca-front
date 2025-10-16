@@ -1,61 +1,40 @@
 @use 'exports' as *;
 
 .card {
-	@include vars;
-	@include component;
-
-	// .mod-grey is deprecated
-	&.mod-neutral,
-	&.mod-grey {
-		@include neutral;
+	@layer components {
+		@include vars;
+		@include component;
 	}
 
-	&.mod-clickable {
-		@include clickable;
+	@layer mods {
+		// .mod-grey is deprecated
+		&.mod-neutral,
+		&.mod-grey {
+			@include neutral;
+		}
+
+		&.mod-clickable {
+			@include clickable;
+		}
+
+		&.mod-elevated {
+			@include elevated;
+		}
+
+		&.mod-action {
+			@include action;
+		}
+
+		&.mod-nested {
+			@include nested;
+		}
+
+		&.mod-expand {
+			@include expand;
+		}
+
+		&:is(.is-disabled, .disabled) {
+			@include disabled;
+		}
 	}
-
-	&.mod-elevated {
-		@include elevated;
-	}
-
-	&.mod-action {
-		@include action;
-	}
-
-	&.mod-nested {
-		@include nested;
-	}
-
-	&:is(.is-disabled, .disabled) {
-		@include disabled;
-	}
-
-	&.mod-expand {
-    background-color: transparent;
-    box-shadow: none;
-
-    &::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background-color: var(--pr-t-elevation-surface-raised);
-      border-radius: var(--components-card-border-radius);
-      box-shadow: var(--pr-t-elevation-shadow-raised);
-      transition-duration: var(--commons-animations-durations-fast);
-      transition-property: inset, box-shadow;
-    }
-
-    &:hover {
-      box-shadow: none;
-
-      &::before {
-        inset: -0.0625rem -0.25rem;
-        box-shadow: var(--pr-t-elevation-shadow-overlay);
-      }
-    }
-
-    .card-content {
-      z-index: 1;
-    }
-  }
 }

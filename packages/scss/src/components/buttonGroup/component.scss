@@ -66,22 +66,5 @@
 
 	&:is(ul) {
 		flex-wrap: wrap;
-
-		.button.mod-more {
-			block-size: 100%;
-			min-block-size: 2.25rem;
-
-			&.mod-S {
-				min-block-size: 2rem;
-			}
-
-			&.mod-XS {
-				min-block-size: 1.5rem;
-			}
-
-			&::before {
-				content: none;
-			}
-		}
 	}
 }

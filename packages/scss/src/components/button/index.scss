@@ -1,181 +1,199 @@
 @use 'exports' as *;
 
 .button {
-	@include vars;
-	@include component;
-
-	&.mod-block {
-		@include block;
+	@layer components {
+		@include vars;
+		@include component;
 	}
 
-	&.mod-S {
-		@include S;
-	}
+	@layer mods {
+		&.mod-AI {
+			@include AI;
 
-	&.mod-XS {
-		@include XS;
-	}
-
-	&.mod-disclosure {
-		@include disclosure;
-	}
-
-	// .mod-outline is deprecated
-	&.mod-outlined,
-	&.mod-outline {
-		&:where(:not(.is-success, .is-error)) {
-			@include outlined;
-		}
-	}
-
-	// .mod-link .mod-text deprecated
-	&.mod-text,
-	&.mod-link,
-	&.mod-ghost {
-		&:where(:not(.is-success, .is-error)) {
-			@include ghost;
-		}
-	}
-
-	&.mod-withIcon {
-		&.mod-iconOnLeft {
-			@include iconOnLeft;
-
-			&.mod-S {
-				@include iconOnLeftS;
+			&.is-success {
+				@include successAI;
 			}
 
-			&.mod-XS {
-				@include iconOnLeftXS;
+			&.is-loading {
+				@include loadingAI;
 			}
 		}
 
-		&.mod-iconOnRight {
-			@include iconOnRight;
-
-			&.mod-S {
-				@include iconOnRightS;
-			}
-
-			&.mod-XS {
-				@include iconOnRightXS;
-			}
+		&.mod-block {
+			@include block;
 		}
-	}
-
-	&.mod-onlyIcon {
-		@include onlyIcon;
 
 		&.mod-S {
-			@include onlyIconS;
+			@include S;
 		}
 
 		&.mod-XS {
-			@include onlyIconXS;
-		}
-	}
-
-	&:has(.numericBadge) {
-		@include counter;
-
-		&.mod-S {
-			@include counterS;
+			@include XS;
 		}
 
-		&.mod-XS {
-			@include counterXS;
-		}
-	}
-
-	// .mod-delete is deprecated
-	&.mod-critical, &.mod-delete {
-		@include critical;
-
-		// .mod-link is deprecated
-		&.mod-text,
-		&.mod-link {
-			@include criticalGhost;
+		&.mod-disclosure {
+			@include disclosure;
 		}
 
 		// .mod-outline is deprecated
 		&.mod-outlined,
 		&.mod-outline {
-			@include criticalOutlined;
-		}
-	}
-
-	// .mod-invert is deprecated
-	&.mod-inverted,
-	&.mod-invert {
-		@include inverted;
-	}
-
-	&.mod-more {
-		@include more;
-
-		&.mod-S {
-			@include moreS;
+			&:where(:not(.is-success, .is-error)) {
+				@include outlined;
+			}
 		}
 
-		&.mod-XS {
-			@include moreXS;
-		}
-	}
-
-	// .loading is deprecated
-	&.is-loading,
-	&.loading {
-		@include loading;
-
-		&.mod-S {
-			@include loadingS;
-		}
-
-		&.mod-XS {
-			@include loadingXS;
-		}
-
-		&.mod-outlined {
-			@include loadingOutlined;
-		}
-
+		// .mod-link .mod-text deprecated
+		&.mod-text,
+		&.mod-link,
 		&.mod-ghost {
-			@include loadingGhost;
-		}
-	}
-
-	// .error is deprecated
-	&.is-error,
-	&.error {
-		@include error;
-	}
-
-	// .success is deprecated
-	&.is-success,
-	&.success {
-		@include success;
-
-		&.mod-outlined {
-			@include successOutlined;
+			&:where(:not(.is-success, .is-error)) {
+				@include ghost;
+			}
 		}
 
-		&.mod-ghost {
-			@include successGhost;
+		&.mod-withIcon {
+			&.mod-iconOnLeft {
+				@include iconOnLeft;
+
+				&.mod-S {
+					@include iconOnLeftS;
+				}
+
+				&.mod-XS {
+					@include iconOnLeftXS;
+				}
+			}
+
+			&.mod-iconOnRight {
+				@include iconOnRight;
+
+				&.mod-S {
+					@include iconOnRightS;
+				}
+
+				&.mod-XS {
+					@include iconOnRightXS;
+				}
+			}
 		}
 
-		&.mod-S {
-			@include successS;
+		&.mod-onlyIcon {
+			@include onlyIcon;
+
+			&.mod-S {
+				@include onlyIconS;
+			}
+
+			&.mod-XS {
+				@include onlyIconXS;
+			}
 		}
 
-		&.mod-XS {
-			@include successXS;
-		}
-	}
+		&:has(.numericBadge) {
+			@include counter;
 
-	// .disabled is deprecated
-	&.is-disabled,
-	&.disabled,
-	&[aria-disabled] {
-		@include disabled;
+			&.mod-S {
+				@include counterS;
+			}
+
+			&.mod-XS {
+				@include counterXS;
+			}
+		}
+
+		// .mod-delete is deprecated
+		&.mod-critical, &.mod-delete {
+			@include critical;
+
+			// .mod-link is deprecated
+			&.mod-text,
+			&.mod-link {
+				@include criticalGhost;
+			}
+
+			// .mod-outline is deprecated
+			&.mod-outlined,
+			&.mod-outline {
+				@include criticalOutlined;
+			}
+		}
+
+		// .mod-invert is deprecated
+		&.mod-inverted,
+		&.mod-invert {
+			@include inverted;
+		}
+
+		&.mod-more {
+			@include more;
+
+			&.mod-S {
+				@include moreS;
+			}
+
+			&.mod-XS {
+				@include moreXS;
+			}
+		}
+
+		// .loading is deprecated
+		&.is-loading,
+		&.loading {
+			@include loading;
+
+			&.mod-S {
+				@include loadingS;
+			}
+
+			&.mod-XS {
+				@include loadingXS;
+			}
+
+			&.mod-AI,
+			&.mod-outlined {
+				@include loadingOutlined;
+			}
+
+			&.mod-ghost {
+				@include loadingGhost;
+			}
+		}
+
+		// .error is deprecated
+		&.is-error,
+		&.error {
+			@include error;
+		}
+
+		// .success is deprecated
+		&.is-success,
+		&.success {
+			@include success;
+
+			&.mod-AI,
+			&.mod-outlined {
+				@include successOutlined;
+			}
+
+			&.mod-ghost {
+				@include successGhost;
+			}
+
+			&.mod-S {
+				@include successS;
+			}
+
+			&.mod-XS {
+				@include successXS;
+			}
+		}
+
+		// .disabled is deprecated
+		&.is-disabled,
+		&.disabled,
+		&[aria-disabled] {
+			@include disabled;
+		}
 	}
 }

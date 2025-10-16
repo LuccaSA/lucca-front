@@ -17,7 +17,7 @@ interface UserPagedSearcherForm {
 @Component({
 	selector: 'lu-user-paged-searcher',
 	templateUrl: 'user-searcher.component.html',
-	styleUrls: ['user-searcher.component.scss'],
+	styleUrl: 'user-searcher.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	standalone: true,
 	imports: [ReactiveFormsModule, CommonModule, LuOptionPlaceholderComponent],

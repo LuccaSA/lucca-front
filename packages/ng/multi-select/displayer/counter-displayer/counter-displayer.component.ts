@@ -19,7 +19,7 @@ import { LuMultiSelectDisplayerInputDirective } from '../displayer-input.directi
 				<div class="multipleSelect-displayer-filter">
 					@if (selectedOptions?.length === 1) {
 						<div class="multipleSelect-displayer-chip chip mod-unkillable">
-							<ng-container *luOptionOutlet="select.displayerTpl(); value: selectedOptions[0]"></ng-container>
+							<ng-container *luOptionOutlet="select.displayerTpl(); value: selectedOptions[0]" />
 						</div>
 					}
 					@if (selectedOptions?.length > 1) {
@@ -30,7 +30,7 @@ import { LuMultiSelectDisplayerInputDirective } from '../displayer-input.directi
 			}
 		</div>
 	`,
-	styleUrls: ['./counter-displayer.component.scss'],
+	styleUrl: './counter-displayer.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LuMultiSelectCounterDisplayerComponent<T> implements OnInit {

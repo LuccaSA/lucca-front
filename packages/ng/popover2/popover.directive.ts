@@ -73,9 +73,9 @@ const defaultPositionPairs: Record<PopoverPosition, ConnectionPositionPair> = {
 	standalone: true,
 })
 export class PopoverDirective implements OnDestroy {
-	#overlay = inject(Overlay);
+	overlay = inject(Overlay);
 
-	#elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
+	elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
 
 	#vcr = inject(ViewContainerRef);
 
@@ -113,7 +113,7 @@ export class PopoverDirective implements OnDestroy {
 	 * Allows to anchor the popover to another element instead of the trigger one
 	 * for placement purpose
 	 */
-	luPopoverAnchor = input<FlexibleConnectedPositionStrategyOrigin>(this.#elementRef);
+	luPopoverAnchor = input<FlexibleConnectedPositionStrategyOrigin>(this.elementRef);
 
 	// We have to type these two for Compodoc to find the right type and tell Storybook these aren't strings
 	luPopoverOpenDelay: InputSignal<number> = input<number>(300);
@@ -171,7 +171,7 @@ export class PopoverDirective implements OnDestroy {
 						this.#screenReaderDescription = this.#renderer.createElement('span') as HTMLSpanElement;
 						this.#screenReaderDescription.innerText = this.intl.screenReaderDescription;
 						this.#renderer.addClass(this.#screenReaderDescription, 'pr-u-mask');
-						this.#renderer.appendChild(this.#elementRef.nativeElement, this.#screenReaderDescription);
+						this.#renderer.appendChild(this.elementRef.nativeElement, this.#screenReaderDescription);
 					}
 				} else if (this.opened()) {
 					this.#componentRef?.close();
@@ -236,12 +236,12 @@ export class PopoverDirective implements OnDestroy {
 		if (!this.opened() && !this.luPopoverDisabled) {
 			this.opened.set(true);
 			this.luPopoverOpened.emit();
-			this.#overlayRef = this.#overlay.create({
-				positionStrategy: this.#overlay
+			this.#overlayRef = this.overlay.create({
+				positionStrategy: this.overlay
 					.position()
 					.flexibleConnectedTo(this.luPopoverAnchor())
 					.withPositions(this.customPositions || this.#buildPositions()),
-				scrollStrategy: this.#overlay.scrollStrategies.reposition(),
+				scrollStrategy: this.overlay.scrollStrategies.reposition(),
 				hasBackdrop: withBackdrop,
 				backdropClass: '',
 				disposeOnNavigation: true,
@@ -258,7 +258,7 @@ export class PopoverDirective implements OnDestroy {
 				content: this.content,
 				ref: this.#overlayRef,
 				contentId: this.ariaControls,
-				triggerElement: this.#elementRef.nativeElement,
+				triggerElement: this.elementRef.nativeElement,
 				disableCloseButtonFocus: disableCloseButtonFocus,
 				disableInitialTriggerFocus: disableInitialTriggerFocus,
 				noCloseButton: this.luPopoverNoCloseButton,

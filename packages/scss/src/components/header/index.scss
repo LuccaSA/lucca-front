@@ -1,23 +1,27 @@
 @use 'exports' as *;
 
 .header {
-	@include vars;
-	@include component;
+	@layer components {
+		@include vars;
+		@include component;
+	}
 
-	&.mod-sticky {
-		@include sticky;
+	@layer mods {
+		&.mod-sticky {
+			@include sticky;
 
-		.navSide ~ .main-content &,
-		.mod-withMenu .main-content & {
-			@include left;
+			.navSide ~ .main-content &,
+			.mod-withMenu .main-content & {
+				@include left;
+			}
 		}
-	}
 
-	&.mod-nav {
-		@include nav;
-	}
+		&.mod-nav {
+			@include nav;
+		}
 
-	&:is(.is-loading, .loading) {
-		@include loading;
+		&:is(.is-loading, .loading) {
+			@include loading;
+		}
 	}
 }

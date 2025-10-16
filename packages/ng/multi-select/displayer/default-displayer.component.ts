@@ -19,7 +19,7 @@ import { LuMultiSelectDisplayerInputDirective } from './displayer-input.directiv
 			<input autocomplete="off" #inputElement (keydown.backspace)="inputBackspace()" (keydown.space)="inputSpace($event)" luMultiSelectDisplayerInput />
 			@for (option of displayedOptions$ | async; track option; let index = $index) {
 				<div class="multipleSelect-displayer-chip chip" [class.mod-unkillable]="select.disabled$ | async">
-					<span class="multipleSelect-displayer-chip-value"><ng-container *luOptionOutlet="select.displayerTpl(); value: option"></ng-container></span>
+					<span class="multipleSelect-displayer-chip-value"><ng-container *luOptionOutlet="select.displayerTpl(); value: option" /></span>
 					@if ((select.disabled$ | async) === false) {
 						<button type="button" class="chip-kill" (click)="unselectOption(option, $event)">
 							<span class="pr-u-mask">{{ intl.removeOption }}</span>
@@ -32,7 +32,7 @@ import { LuMultiSelectDisplayerInputDirective } from './displayer-input.directiv
 			}
 		</div>
 	`,
-	styleUrls: ['./default-displayer.component.scss'],
+	styleUrl: './default-displayer.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LuMultiSelectDefaultDisplayerComponent<T> implements OnInit {

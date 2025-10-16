@@ -5,6 +5,10 @@
 	--components-avatar-scale: 1;
 	--components-avatar-background: var(--pr-t-elevation-surface-default);
 	--components-avatar-placeholder-size: 1.25rem;
+	--components-avatar-AI-size: var(--pr-t-font-fontSize-200);
+	--components-avatar-borderRadius: var(--pr-t-border-radius-full);
+	--components-avatar-picture-background: var(--palettes-neutral-200);
+	--components-avatar-picture-initials-display: block;
 }
 
 @mixin varsWrapper {

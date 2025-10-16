@@ -4,7 +4,7 @@ import { FieldWrapper } from '@ngx-formly/core';
 // wrapper component
 @Component({
 	selector: 'lu-formly-wrapper-layout',
-	styleUrls: ['flex-layout.scss'],
+	styleUrl: 'flex-layout.scss',
 	templateUrl: './textfield-layout.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	standalone: true,

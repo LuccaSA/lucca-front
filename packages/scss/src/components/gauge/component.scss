@@ -1,24 +1,85 @@
 @use '@lucca-front/scss/src/commons/utils/namespace';
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
-	border-radius: var(--pr-t-border-radius-full);
-	block-size: var(--components-gauge-height);
-	overflow: hidden;
-	position: relative;
+	border-radius: var(--components-gauge-borderRadius);
+	block-size: var(--components-gauge-blockSize);
+	inline-size: var(--components-gauge-inlineSize);
 	background-color: var(--components-gauge-background);
+	display: block;
+	color: var(--components-gauge-color);
+
+	&::before {
+		content: '';
+		display: block;
+
+		@extend %gaugeBar;
+	}
+
+	&:has(.gauge-bar) {
+		&::before {
+			content: none;
+		}
+	}
 
 	@at-root ($atRoot) {
 		.gauge-bar {
-			color: var(--palettes-700, var(--palettes-product-700));
-			border-block-end-width: var(--components-gauge-height);
-			transition-duration: var(--commons-animations-durations-standard);
-			transition-property: border-color, width, height;
-			inset-block-start: 0;
-			inset-inline-start: 0;
 			position: absolute;
-			border-block-end-style: solid;
-			border-color: currentColor;
-			border-radius: var(--pr-t-border-radius-full);
+
+			@extend %gaugeBar;
+		}
+
+		.gauge-circleBackground {
+			fill: transparent;
+			stroke-width: var(--components-gauge-circle-strokeWidth);
+			stroke: var(--components-gauge-circle-background);
+		}
+
+		.gauge-circleBar {
+			fill: transparent;
+			stroke-width: var(--components-gauge-circle-strokeWidth);
+			stroke-linecap: round;
+			stroke-dashoffset: 0;
+			transform: rotate(-0.25turn);
+			transform-origin: 50% 50%;
+			stroke-dasharray: calc(var(--components-gauge-circleP) / 100 * var(--components-gauge-value)), 9999;
+			stroke: currentColor;
+			animation-name: var(--components-gauge-animationName);
+			animation-duration: var(--components-gauge-animationDuration);
+			animation-timing-function: var(--components-gauge-animationTimingFunction);
+
+			@media (prefers-reduced-motion: reduce) {
+				--components-gauge-animationDuration: var(--commons-animations-durations-fast);
+				--components-gauge-animationTimingFunction: ease;
+			}
+		}
+
+		@keyframes gauge-fill {
+			from {
+				stroke-dasharray: 0, 9999;
+				inline-size: 0;
+			}
+		}
+	}
+}
+
+%gaugeBar {
+	@layer components {
+		color: currentColor;
+		transition-duration: var(--commons-animations-durations-standard);
+		transition-property: background-color, inline-size, block-size;
+		block-size: var(--components-gauge-blockSize);
+		inline-size: var(--components-gauge-value);
+		background-color: currentColor;
+		border-radius: var(--pr-t-border-radius-full);
+		min-inline-size: var(--components-gauge-before-minInlineSize);
+		min-block-size: var(--components-gauge-before-minInlineSize);
+		animation-name: var(--components-gauge-animationName);
+		animation-duration: var(--components-gauge-animationDuration);
+		animation-timing-function: var(--components-gauge-animationTimingFunction);
+
+		@media (prefers-reduced-motion: reduce) {
+			--components-gauge-animationDuration: var(--commons-animations-durations-fast);
+			--components-gauge-animationTimingFunction: ease;
 		}
 	}
 }

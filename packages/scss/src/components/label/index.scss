@@ -1,18 +1,22 @@
 @use 'exports' as *;
 
 .label {
-	@include vars;
-	@include component;
+	@layer components {
+		@include vars;
+		@include component;
+	}
 
-	&.mod-number {
-		@include number;
+	@layer mods {
+		&.mod-number {
+			@include number;
 
-		&.mod-S {
-			@include numberS;
-		}
+			&.mod-S {
+				@include numberS;
+			}
 
-		&.mod-XS {
-			@include numberXS;
+			&.mod-XS {
+				@include numberXS;
+			}
 		}
 	}
 }

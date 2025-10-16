@@ -1,5 +1,7 @@
 @use '@lucca-front/scss/src/components/listing';
 
-lu-listing {
-	display: contents;
+@layer base {
+	lu-listing {
+		display: contents;
+	}
 }

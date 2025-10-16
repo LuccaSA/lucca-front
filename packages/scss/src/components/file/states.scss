@@ -26,7 +26,7 @@
 @mixin uploading {
 	~ .file-content {
 		.file-title {
-			font-weight: 400;
+			font-weight: var(--pr-t-font-fontWeight-regular);
 			color: var(--palettes-neutral-600);
 			font-size: var(--pr-t-font-body-S-fontSize);
 			line-height: var(--pr-t-font-body-S-lineHeight);
