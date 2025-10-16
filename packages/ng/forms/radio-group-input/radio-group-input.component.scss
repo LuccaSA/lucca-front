@@ -1,3 +1,5 @@
 lu-radio-group-input {
-  display: block;
+	@layer base {
+		display: block;
+	}
 }

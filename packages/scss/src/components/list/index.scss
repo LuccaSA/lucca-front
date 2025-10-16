@@ -1,21 +1,25 @@
 @use 'exports' as *;
 
 .list {
-	@include vars;
-	@include component;
+	@layer components {
+		@include vars;
+		@include component;
+	}
 }
 
 .list-item {
-	&.mod-clickable {
-		@include clickable;
-	}
+	@layer mods {
+		&.mod-clickable {
+			@include clickable;
+		}
 
-	&.mod-draggable {
-		@include draggable;
-	}
+		&.mod-draggable {
+			@include draggable;
+		}
 
-	// .mod-actionsHidden is deprecated
-	&.mod-actionsHidden {
-		@include actionsHidden;
+		// .mod-actionsHidden is deprecated
+		&.mod-actionsHidden {
+			@include actionsHidden;
+		}
 	}
 }

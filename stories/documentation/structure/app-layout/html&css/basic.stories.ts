@@ -1,5 +1,4 @@
 import { Meta } from '@storybook/angular';
-import { cleanupTemplate } from 'stories/helpers/stories';
 
 interface AppLayoutHTMLBasicStory {
 	mobileNavSideBottom: boolean;
@@ -9,7 +8,7 @@ export default {
 	title: 'Documentation/Structure/App Layout/HTML&CSS/Basic',
 	argTypes: {},
 	render: (args: AppLayoutHTMLBasicStory) => {
-		const mobileNavSideBottomAttribute = args.mobileNavSideBottom ? `mod-mobileNavSideBottom` : ``;
+		const mobileNavSideBottomAttribute = args.mobileNavSideBottom ? ` mod-mobileNavSideBottom` : ``;
 
 		return {
 			styles: [
@@ -44,6 +43,7 @@ export default {
 		background-color: var(--pr-t-elevation-surface-raised);
 		box-shadow: var(--pr-t-elevation-shadow-overflow);
 		position: relative;
+		z-index: 2;
 
 		&::before {
 			content: '';
@@ -71,15 +71,19 @@ export default {
 }
 				`,
 			],
-			template: cleanupTemplate(`
-<div class="appLayout ${mobileNavSideBottomAttribute}">
-	<div class="appLayout-banner">banner</div>
-	<div class="appLayout-navSide">navSide</div>
+			template: `
+<div class="appLayout${mobileNavSideBottomAttribute}">
+	<div class="appLayout-banner">
+		banner
+	</div>
+	<div class="appLayout-navSide">
+		navSide
+	</div>
 	<div class="appLayout-main">
-    main
+		main
 	</div>
 </div>
-`),
+`,
 		};
 	},
 } as Meta;

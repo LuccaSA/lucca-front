@@ -2,79 +2,75 @@
 @use '@lucca-front/scss/src/commons/utils/media';
 
 .indexTable {
-	@include vars;
-	@include component;
-
-	&.mod-selectable {
-		@include selectable;
-
-		// Selectable states
-		@include selectableSelectedRow;
-		@include selectableHoveredRow;
+	@layer components {
+		@include vars;
+		@include component;
 	}
 
-	&.mod-stackable {
-		@include stackable;
-	}
-
-	&.mod-stickyHeader {
-		@include stickyHeader;
-	}
-
-	// Allow selection of mod-layoutFixed with or without breakpoints like mod-layoutFixedAtMediaMinXS or mod-layoutFixedAtMediaMaxL
-	&[class*='mod-layoutFixed'] {
-		@include layoutFixed;
-	}
-
-	.indexTable-head-row.mod-massSelection {
-		@include massSelection;
-	}
-
-	.indexTable-body-row-cell.mod-actions {
-		@include actions;
-	}
-
-	.indexTable-head-row-cell,
-	.indexTable-body-row-cell,
-	.indexTable-body-row-transparentCell,
-	.indexTable-foot-row-cell {
-		&.mod-alignRight {
-			@include alignRight;
+	@layer mods {
+		&.mod-selectable {
+			@include selectable;
+			@include selectableSelectedRow;
+			@include selectableHoveredRow;
 		}
 
-		&.mod-alignCenter {
-			@include alignCenter;
+		&.mod-stackable {
+			@include stackable;
 		}
+
+		&.mod-stickyHeader {
+			@include stickyHeader;
+		}
+
+		// Allow selection of mod-layoutFixed with or without breakpoints like mod-layoutFixedAtMediaMinXS or mod-layoutFixedAtMediaMaxL
+		&[class*='mod-layoutFixed'] {
+			@include layoutFixed;
+		}
+
+		.indexTable-head-row.mod-massSelection {
+			@include massSelection;
+		}
+
+		.indexTable-body-row-cell.mod-actions {
+			@include actions;
+		}
+
+		.indexTable-head-row-cell,
+		.indexTable-body-row-cell,
+		.indexTable-body-row-transparentCell,
+		.indexTable-foot-row-cell {
+			&.mod-alignRight {
+				@include alignRight;
+			}
+
+			&.mod-alignCenter {
+				@include alignCenter;
+			}
+		}
+
+		@include media.max('S') {
+			&.mod-responsiveCardList {
+				@include responsiveCardList;
+			}
+
+			&.mod-selectable.mod-responsiveCardList {
+				@include selectableResponsiveCardList;
+			}
+
+			&.mod-stackable.mod-responsiveCardList {
+				@include stackableResponsiveCardList;
+			}
+
+			&.mod-selectable.mod-stackable.mod-responsiveCardList {
+				@include selectableStackableResponsiveCardList;
+			}
+		}
+
+		&:not(:has(.indexTable-head[inert='inert'])) {
+			@include focusedRow;
+			@include hoveredRow;
+		}
+
+		@include openClosedRow;
 	}
-
-	// Responsive
-	@include media.max('S') {
-		&.mod-responsiveCardList {
-			@include responsiveCardList;
-		}
-
-		&.mod-selectable.mod-responsiveCardList {
-			@include selectableResponsiveCardList;
-		}
-
-		&.mod-stackable.mod-responsiveCardList {
-			@include stackableResponsiveCardList;
-		}
-
-		&.mod-selectable.mod-stackable.mod-responsiveCardList {
-			@include selectableStackableResponsiveCardList;
-		}
-	}
-
-	// generic states, non tied to a mod
-	&:not(:has(.indexTable-head[inert='inert'])) {
-		// focus-within
-		@include focusedRow;
-
-		// hover
-		@include hoveredRow;
-	}
-
-	// nested open / closed row
-	@include openClosedRow;
 }

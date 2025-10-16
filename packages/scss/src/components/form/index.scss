@@ -6,94 +6,100 @@
 @use 'exports' as *;
 
 .form {
-	@include component;
+	@layer components {
+		@include component;
+	}
 
-	&.mod-maxWidth {
-		@include maxWidth;
+	@layer mods {
+		&.mod-maxWidth {
+			@include maxWidth;
+		}
 	}
 }
 
-.form-fieldset {
-	&.mod-inline {
-		@include inline;
-	}
+@layer mods {
+	.form-fieldset {
+		&.mod-inline {
+			@include inline;
+		}
 
-	&.mod-S {
-		@include S;
-	}
+		&.mod-S {
+			@include S;
+		}
 
-	&:has(~ .box) {
-		.form-field {
-			&.mod-withArrow {
-				@include withArrow;
+		&:has(~ .box) {
+			.form-field {
+				&.mod-withArrow {
+					@include withArrow;
 
-				&.mod-S {
-					@include withArrowS;
+					&.mod-S {
+						@include withArrowS;
+					}
 				}
 			}
 		}
-	}
 
-	&:has(.radioField-input[aria-invalid='true']),
-	&:has(.checkboxField-input[aria-invalid='true']) {
-		@include legendInvalid;
-	}
-}
-
-.form-field {
-	&.mod-S {
-		@include S;
-	}
-
-	&.mod-XS {
-		@include XS;
-	}
-
-	@each $value in config.$fieldsWidth {
-		&.mod-width#{$value} {
-			@include width($value);
+		&:has(.radioField-input[aria-invalid='true']),
+		&:has(.checkboxField-input[aria-invalid='true']) {
+			@include legendInvalid;
 		}
 	}
 
-	&.mod-checkable,
-	&:has(.radioField),
-	&:has(.checkboxField),
-	&:has(.switchField) {
-		@include checkable;
-	}
-
-	&:not(lu-form-field) {
-		&:has(
-				.textField-input-value[aria-invalid='true'],
-				.timePicker-fieldset-group-textfield-input[aria-invalid='true'],
-				.simpleSelect-field-input[aria-invalid='true'],
-				.multipleSelect-displayer-search[aria-invalid='true']
-			) {
-			@include invalid;
-		}
-	}
-
-	&:has(.radioField-input:disabled),
-	&:has(.checkboxField-input:disabled),
-	&:has(.switchField-input:disabled) {
-		.formLabel {
-			@include formLabel.disabled;
-		}
-
-		.formLabel-tag {
-			@include tag.disabled;
-		}
-
-		.inlineMessage {
-			@include inlineMessage.disabled;
-		}
-	}
-
-	&.mod-withArrow {
-		@include withArrow;
-
+	.form-field {
 		&.mod-S {
-			@include withArrowS;
+			@include S;
+		}
+
+		&.mod-XS {
+			@include XS;
+		}
+
+		@each $value in config.$fieldsWidth {
+			&.mod-width#{$value} {
+				@include width($value);
+			}
+		}
+
+		&.mod-checkable,
+		&:has(.radioField),
+		&:has(.checkboxField),
+		&:has(.switchField) {
+			@include checkable;
+		}
+
+		&:not(lu-form-field) {
+			&:has(
+					.textField-input-value[aria-invalid='true'],
+					.timePicker-fieldset-group-textfield-input[aria-invalid='true'],
+					.simpleSelect-field-input[aria-invalid='true'],
+					.multipleSelect-displayer-search[aria-invalid='true']
+				) {
+				@include invalid;
+			}
+		}
+
+		&:has(.radioField-input:disabled),
+		&:has(.checkboxField-input:disabled),
+		&:has(.switchField-input:disabled) {
+			.formLabel {
+				@include formLabel.disabled;
+			}
+
+			.inlineMessage {
+				@include inlineMessage.disabled;
+			}
+
+			.formLabel-tag {
+				@include tag.disabled;
+			}
+		}
+
+		&.mod-withArrow {
+			@include withArrow;
+
+			&.mod-S {
+				@include withArrowS;
+			}
 		}
 	}
 }
@@ -102,71 +108,77 @@
 
 // stylelint-disable no-duplicate-selectors -- deprecated
 .form {
-	@include vars;
+	@layer components {
+		@include vars;
+	}
 }
 
 .form-group {
-	@include vars;
-	@include componentDeprecated;
+	@layer components {
+		@include vars;
+		@include componentDeprecated;
+	}
 }
 
-.form-group-line-col {
-	&[class*='mod-overlay'] {
-		@include overlay;
-	}
+@layer mods {
+	.form-group-line-col {
+		&[class*='mod-overlay'] {
+			@include overlay;
+		}
 
-	&.mod-overlay-top {
-		@include overlayTop;
-	}
+		&.mod-overlay-top {
+			@include overlayTop;
+		}
 
-	@each $breakpoint, $value in config.$breakpoints {
-		@for $i from 1 through 12 {
-			&.mod-#{$i}\@mediaMin#{$breakpoint} {
-				@include breakpoint($breakpoint, $i);
+		@each $breakpoint, $value in config.$breakpoints {
+			@for $i from 1 through 12 {
+				&.mod-#{$i}\@mediaMin#{$breakpoint} {
+					@include breakpoint($breakpoint, $i);
+				}
 			}
 		}
 	}
-}
 
-.form-group-label,
-.radiosfield-label,
-.checkboxesfield-label,
-.textfield-label {
-	&:is(.is-required, .required) {
-		@include required;
+	.form-group-label,
+	.radiosfield-label,
+	.checkboxesfield-label,
+	.textfield-label {
+		&:is(.is-required, .required) {
+			@include required;
+		}
 	}
-}
 
-.checkboxesfield.mod-framed,
-.radiosfield.mod-framed,
-.form.mod-framed .fieldsetWrapper {
-	@include framed;
-}
+	.checkboxesfield.mod-framed,
+	.radiosfield.mod-framed,
+	.form.mod-framed .fieldsetWrapper {
+		@include framed;
+	}
 
-.checkboxesfield.mod-framed,
-.radiosfield.mod-framed {
-	margin-block-start: 0;
-	padding-block: var(--components-field-framed-side-padding) var(--components-field-framed-bottom-padding);
-	padding-inline: var(--components-field-framed-side-padding);
-}
+	.checkboxesfield.mod-framed,
+	.radiosfield.mod-framed {
+		margin-block-start: 0;
+		padding-block: var(--components-field-framed-side-padding) var(--components-field-framed-bottom-padding);
+		padding-inline: var(--components-field-framed-side-padding);
+	}
 
-.form-group-label {
-	&.is-required {
-		&:not(:empty) {
-			&::after {
-				@extend %isRequired;
+	.form-group-label {
+		&.is-required {
+			&:not(:empty) {
+				&::after {
+					@extend %isRequired;
+				}
 			}
 		}
 	}
-}
 
-.radiosfield-label,
-.checkboxesfield-label,
-.textfield-label {
-	&.is-required {
-		&:not(:empty) {
-			&::after {
-				@extend %isRequired;
+	.radiosfield-label,
+	.checkboxesfield-label,
+	.textfield-label {
+		&.is-required {
+			&:not(:empty) {
+				&::after {
+					@extend %isRequired;
+				}
 			}
 		}
 	}

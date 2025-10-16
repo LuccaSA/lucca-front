@@ -6,7 +6,6 @@ import { FRAMED_INPUT_INSTANCE } from './framed-input-token';
 	selector: 'lu-framed-input',
 	imports: [PortalDirective],
 	templateUrl: './framed-input.component.html',
-	styleUrl: './framed-input.component.scss',
 	encapsulation: ViewEncapsulation.None,
 	providers: [
 		{

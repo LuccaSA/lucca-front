@@ -17,7 +17,6 @@ export class DialogHeaderAction {}
 	selector: 'lu-dialog-header',
 	imports: [IconComponent],
 	templateUrl: './dialog-header.component.html',
-	styleUrl: './dialog-header.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	encapsulation: ViewEncapsulation.None,
 	host: {
