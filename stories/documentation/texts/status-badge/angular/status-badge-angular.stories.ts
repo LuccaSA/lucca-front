@@ -5,6 +5,7 @@ interface StatusBadgeBasicStory {
 	label: string;
 	size: string;
 	palette: string;
+	withEllipsis: boolean;
 }
 
 export default {
@@ -38,9 +39,10 @@ export default {
 } as Meta;
 
 function getTemplate(args: StatusBadgeBasicStory): string {
-	const s = args.size ? `size="${args.size}"` : '';
-	const p = args.palette ? `palette="${args.palette}"` : '';
-	return `<lu-status-badge ${p} ${s} label="${args.label}" />`;
+	const s = args.size ? ` size="${args.size}"` : ``;
+	const p = args.palette ? ` palette="${args.palette}"` : ``;
+	const e = args.withEllipsis ? ` withEllipsis` : ``;
+	return `<lu-status-badge label="${args.label}"${p}${s}${e} />`;
 }
 
 const Template: StoryFn<StatusBadgeBasicStory> = (args) => ({
@@ -49,4 +51,4 @@ const Template: StoryFn<StatusBadgeBasicStory> = (args) => ({
 });
 
 export const Basic = Template.bind({});
-Basic.args = { label: 'Status', palette: '', size: '' };
+Basic.args = { label: 'Status', palette: '', size: '', withEllipsis: false };

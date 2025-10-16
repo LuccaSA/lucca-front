@@ -11,4 +11,8 @@
 			@include L;
 		}
 	}
+
+	&:has(.statusBadge-content:focus-visible) {
+		@include focusVisible;
+	}
 }
