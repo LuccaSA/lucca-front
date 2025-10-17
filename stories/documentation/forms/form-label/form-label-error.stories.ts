@@ -6,7 +6,7 @@ interface FormLabelErrorStory {
 }
 
 export default {
-	title: 'Documentation/Forms/Form Label Error',
+	title: 'Documentation/Forms/Form Label/Error',
 	argTypes: {},
 } as Meta;
 

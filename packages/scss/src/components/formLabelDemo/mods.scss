@@ -1,0 +1,32 @@
+@use '@lucca-front/icons/src/icon/exports' as icons;
+@use '@lucca-front/scss/src/components/tag/exports' as tag;
+
+@mixin S {
+	--components-formLabel-font: var(--pr-t-font-body-S);
+	--components-formLabel-infos-icon-font: var(--pr-t-font-heading-5);
+
+	.tag {
+		@include tag.S;
+	}
+}
+
+@mixin XS {
+	--components-formLabel-font: var(--pr-t-font-body-XS);
+	--components-formLabel-infos-icon-font: var(--pr-t-font-heading-6);
+
+	.tag {
+		@include tag.S;
+	}
+}
+
+@mixin fullSize {
+	--components-formLabel-inlineSize: auto;
+}
+
+@mixin counter {
+	@include fullSize;
+
+	--components-formLabel-paddingInlineEnd: var(--pr-t-spacings-600);
+}
+
+

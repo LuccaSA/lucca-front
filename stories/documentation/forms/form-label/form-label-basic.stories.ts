@@ -3,7 +3,7 @@ import { Meta, StoryFn } from '@storybook/angular';
 interface FormLabelBasicStory {}
 
 export default {
-	title: 'Documentation/Forms/Form Label Basic',
+	title: 'Documentation/Forms/Form Label/Basic',
 	argTypes: {},
 } as Meta;
 

@@ -1,0 +1,12 @@
+@mixin vars {
+	--components-formLabel-font: var(--pr-t-font-body-M);
+	--components-formLabel-color: var(--pr-t-color-text);
+	--components-formLabel-cursor: pointer;
+	--components-formLabel-required-color: var(--palettes-critical-700);
+	--components-formLabel-paddingInlineEnd: 0;
+	--components-formLabel-inlineSize: fit-content;
+	--components-formLabel-infos-icon-before-outlineWidth: 0;
+	--components-formLabel-infos-icon-font: var(--pr-t-font-heading-3);
+	--components-formLabel-infos-color: var(--palettes-neutral-600);
+	--components-formLabel-counter-color: var(--palettes-neutral-600);
+}

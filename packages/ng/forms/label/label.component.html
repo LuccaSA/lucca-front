@@ -1,0 +1,21 @@
+@if (required()) {
+	<ng-container *ngTemplateOutlet="content" /><sup class="formLabelDemo-required" aria-hidden="true">*</sup>
+} @else {
+	<ng-container *ngTemplateOutlet="content" />
+}
+@if (infos()) {
+	<span class="formLabelDemo-infos" [luTooltip]="infos()">
+		<lu-icon icon="signHelp" [alt]="infosIconAlt()" />
+	</span>
+}
+@if (tag()) {
+	<lu-tag withEllipis [label]="tag()" />
+}
+@if (counterMax() > 0) {
+	<span class="formLabelDemo-counter" aria-live="polite" [attr.id]="counterId()">
+		<span aria-hidden="true">{{ count() }}/{{ counterMax() }}</span>
+		<span class="pr-u-mask">{{ counterAltFormatted() }}</span>
+	</span>
+}
+
+<ng-template #content><ng-content /></ng-template>

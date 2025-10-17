@@ -1,0 +1,39 @@
+@use 'exports' as *;
+
+.formLabelDemo {
+	@layer components {
+		@include vars;
+		@include component;
+	}
+
+	@layer mods {
+		&.mod-S {
+			@include S;
+		}
+
+		&.mod-XS {
+			@include XS;
+		}
+
+		&.mod-fullSize {
+			@include fullSize;
+		}
+
+		&:has(.formLabelDemo-counter) {
+			@include counter;
+		}
+
+		&.is-error,
+		&.is-critical {
+			@include critical;
+		}
+
+		&.is-disabled {
+			@include disabled;
+		}
+
+		&:has(.formLabelDemo-infos:focus-visible) {
+			@include iconFocusVisible;
+		}
+	}
+}

@@ -1,0 +1,21 @@
+@use '@lucca-front/scss/src/components/tag/exports' as tag;
+
+@mixin critical {
+	--components-formLabel-color: var(--palettes-critical-700);
+}
+
+@mixin iconFocusVisible {
+	--components-formLabel-infos-icon-before-outlineWidth: 2px;
+}
+
+@mixin disabled {
+	--components-formLabel-color: var(--pr-t-color-input-text-disabled);
+	--components-formLabel-cursor: default;
+	--components-formLabel-required-color: inherit;
+	--components-formLabel-infos-color: inherit;
+	--components-formLabel-counter-color: inherit;
+
+	.tag {
+		@include tag.disabled;
+	}
+}

@@ -1,0 +1,59 @@
+@use '@lucca-front/scss/src/commons/utils/a11y';
+
+@use '@lucca-front/scss/src/commons/utils/namespace';
+@use '@lucca-front/scss/src/components/tag/exports' as tag;
+
+@mixin component($atRoot: namespace.$defaultAtRoot) {
+	font: var(--components-formLabel-font);
+	cursor: var(--components-formLabel-cursor);
+	display: block;
+	inline-size: var(--components-formLabel-inlineSize);
+	position: relative;
+	padding-inline-end: var(--components-formLabel-paddingInlineEnd);
+	color: var(--components-formLabel-color);
+
+	.tag {
+		margin-inline-start: var(--pr-t-spacings-50);
+		inset-block-start: calc(var(--pr-t-spacings-25) / -2);
+		position: relative;
+
+		@include tag.product;
+	}
+
+	@at-root ($atRoot) {
+		.formLabelDemo-required {
+			font: inherit;
+			color: var(--components-formLabel-required-color);
+			font-weight: var(--pr-t-font-fontWeight-semibold);
+			margin-inline-start: var(--pr-t-spacings-25);
+			inset-block-start: 0;
+		}
+
+		.formLabelDemo-infos {
+			margin-inline-start: var(--pr-t-spacings-25);
+			vertical-align: top;
+			color: var(--components-formLabel-infos-color);
+			outline: none;
+
+			.lucca-icon {
+				font: var(--components-formLabel-infos-icon-font);
+				font-family: var(--icon-fontFamily);
+				font-weight: var(--pr-t-font-fontWeight-regular);
+
+				&::before {
+					@include a11y.focusVisible($offset: 0);
+
+					border-radius: var(--pr-t-border-radius-full);
+					outline-width: var(--components-formLabel-infos-icon-before-outlineWidth);
+				}
+			}
+		}
+
+		.formLabelDemo-counter {
+			font-size: var(--pr-t-font-body-XS-fontSize);
+			color: var(--components-formLabel-counter-color);
+			position: absolute;
+			inset: 0 0 auto auto;
+		}
+	}
+}

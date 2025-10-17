@@ -19,3 +19,5 @@ export * from './number-input/number-input.translate';
 export * from './text-input/text-input.translate';
 
 export * from './fieldset/fieldset.component';
+
+export * from './label/label.component';

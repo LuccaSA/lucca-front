@@ -3,7 +3,7 @@ import { Meta, StoryFn } from '@storybook/angular';
 interface FormLabelCounterStory {}
 
 export default {
-	title: 'Documentation/Forms/Form Label Counter',
+	title: 'Documentation/Forms/Form Label/Counter',
 	argTypes: {},
 } as Meta;
 
