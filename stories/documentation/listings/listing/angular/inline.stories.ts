@@ -11,6 +11,7 @@ interface ListingBasicStory {
 	palette: string;
 	defaultIcon: string;
 	icon: string;
+	marker: string;
 }
 
 export default {
@@ -24,13 +25,14 @@ export default {
 	],
 
 	render: (args: ListingBasicStory, context) => {
-		const { type, checklist, ordered, icons, defaultIcon, icon, ...inputs } = args;
-		const checklistParam = args.type === 'checklist' ? ' checklist' : '';
-		const orderedParam = args.type === 'ordered' ? ' ordered' : '';
-		const iconsParam = args.type === 'icons' ? ' icons' : '';
-		const defaultIconParam = args.type === 'icons' ? ` defaultIcon="${defaultIcon}"` : '';
+		const { type, checklist, ordered, icons, defaultIcon, icon, marker, ...inputs } = args;
+		const checklistParam = args.type === 'checklist' ? ` checklist` : ``;
+		const orderedParam = args.type === 'ordered' ? ` ordered` : ``;
+		const iconsParam = args.type === 'icons' ? ` icons` : ``;
+		const defaultIconParam = args.type === 'icons' ? ` defaultIcon="${defaultIcon}"` : ``;
+		const markerParam = args.marker !== '' ? ` marker="${marker}"` : ``;
 		return {
-			template: `<lu-listing marker="–" inline${checklistParam}${orderedParam}${iconsParam}${defaultIconParam}${generateInputs(inputs, context.argTypes)}>
+			template: `<lu-listing inline${markerParam}${checklistParam}${orderedParam}${iconsParam}${defaultIconParam}${generateInputs(inputs, context.argTypes)}>
 	<lu-listing-item><a href="#">lorem ipsum dolor sit amet</a></lu-listing-item>
 	<lu-listing-item><a href="#">lorem ipsum dolor sit amet</a></lu-listing-item>
 	<lu-listing-item><a href="#">lorem ipsum dolor sit amet</a></lu-listing-item>
