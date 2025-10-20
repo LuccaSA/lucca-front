@@ -3,7 +3,6 @@ import { LuOptionComparer, ɵIsSelectedStrategy } from './select.model';
 
 @Pipe({
 	name: 'luIsOptionSelected',
-	standalone: true,
 })
 export class LuIsOptionSelectedPipe<T> implements PipeTransform {
 	#selectionStrategy = inject<ɵIsSelectedStrategy<T>>(ɵIsSelectedStrategy);

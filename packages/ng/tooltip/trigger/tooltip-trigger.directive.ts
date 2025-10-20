@@ -41,7 +41,6 @@ let nextId = 0;
 @Directive({
 	selector: '[luTooltip]',
 	exportAs: 'luTooltip',
-	standalone: true,
 })
 export class LuTooltipTriggerDirective implements AfterContentInit, OnDestroy {
 	#overlay = inject(Overlay);

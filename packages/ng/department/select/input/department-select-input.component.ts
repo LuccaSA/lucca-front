@@ -27,7 +27,6 @@ import { LU_DEPARTMENT_SELECT_INPUT_TRANSLATIONS } from './department-select-inp
 	templateUrl: './department-select-input.component.html',
 	styleUrl: './department-select-input.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	standalone: true,
 	imports: [
 		CommonModule,
 		OverlayModule,

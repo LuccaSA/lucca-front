@@ -6,7 +6,6 @@ let nextId = 0;
 
 @Component({
 	selector: 'lu-segmented-control-tabs-panel',
-	standalone: true,
 	template: '<ng-content />',
 	encapsulation: ViewEncapsulation.None,
 	host: {

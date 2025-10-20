@@ -1,14 +1,13 @@
 import { DestroyRef, Directive, ElementRef, HostBinding, HostListener, inject, OnInit } from '@angular/core';
 import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { ILuOptionContext, LU_OPTION_CONTEXT } from '@lucca-front/ng/core-select';
+import { InputDirective } from '@lucca-front/ng/form-field';
 import { of } from 'rxjs';
 import { startWith, switchMap } from 'rxjs/operators';
 import { LuMultiSelectInputComponent } from '../input';
-import { InputDirective } from '@lucca-front/ng/form-field';
 
 @Directive({
 	selector: '[luMultiSelectDisplayerInput]',
-	standalone: true,
 	host: {
 		'aria-haspopup': 'listbox',
 		role: 'combobox',

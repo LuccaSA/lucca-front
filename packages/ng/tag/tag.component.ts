@@ -7,7 +7,6 @@ import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 
 @Component({
 	selector: 'lu-tag',
-	standalone: true,
 	templateUrl: './tag.component.html',
 	styleUrl: './tag.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,

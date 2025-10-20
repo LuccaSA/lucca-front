@@ -2,7 +2,6 @@ import { booleanAttribute, Component, input, ViewEncapsulation } from '@angular/
 
 @Component({
 	selector: 'lu-main-layout-block',
-	standalone: true,
 	encapsulation: ViewEncapsulation.None,
 	template: `<ng-content />`,
 	host: {

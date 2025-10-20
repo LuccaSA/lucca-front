@@ -12,7 +12,6 @@ import { LuMultiSelectDisplayerInputDirective } from './displayer-input.directiv
 
 @Component({
 	selector: 'lu-multi-select-default-displayer',
-	standalone: true,
 	imports: [AsyncPipe, LuTooltipModule, ɵLuOptionOutletDirective, FormsModule, LuMultiSelectDisplayerInputDirective],
 	template: `
 		<div class="multipleSelect-displayer">

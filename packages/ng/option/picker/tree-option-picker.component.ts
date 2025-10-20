@@ -1,6 +1,7 @@
 import { A11yModule } from '@angular/cdk/a11y';
 import { CommonModule, DOCUMENT } from '@angular/common';
 import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ContentChildren, Directive, forwardRef, Inject, OnDestroy, QueryList, ViewContainerRef } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ALuPickerPanel } from '@lucca-front/ng/picker';
 import { luTransformPopover } from '@lucca-front/ng/popover';
 import { merge, Observable } from 'rxjs';
@@ -8,7 +9,6 @@ import { delay, map, startWith, switchMap } from 'rxjs/operators';
 import { ALuTreeOptionItem } from '../item/index';
 import { ALuOptionPickerComponent } from './option-picker.component';
 import { ILuTreeOptionPickerPanel } from './tree-option-picker.model';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 enum ToggleMode {
 	all,
@@ -164,7 +164,6 @@ export abstract class ALuTreeOptionPickerComponent<T, O extends import('../item/
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	animations: [luTransformPopover],
 	exportAs: 'LuTreeOptionPicker',
-	standalone: true,
 	imports: [CommonModule, A11yModule],
 	providers: [
 		{

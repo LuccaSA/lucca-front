@@ -12,7 +12,6 @@ import { ALuOptionOperator, ILuOptionOperator } from '../option-operator.model';
 	templateUrl: 'option-searcher.component.html',
 	styleUrl: 'option-searcher.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	standalone: true,
 	imports: [ReactiveFormsModule, CommonModule, LuOptionPlaceholderComponent],
 	providers: [
 		{

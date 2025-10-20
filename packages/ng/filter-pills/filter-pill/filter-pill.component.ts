@@ -34,7 +34,6 @@ let nextId = 0;
 
 @Component({
 	selector: 'lu-filter-pill',
-	standalone: true,
 	imports: [PopoverDirective, FormsModule, IconComponent, NgTemplateOutlet, LuTooltipModule],
 	templateUrl: './filter-pill.component.html',
 	styleUrl: './filter-pill.component.scss',

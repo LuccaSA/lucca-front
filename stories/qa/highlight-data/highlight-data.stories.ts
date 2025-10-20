@@ -6,7 +6,6 @@ import { LinkComponent } from '@lucca-front/ng/link';
 import { applicationConfig, Meta, StoryFn } from '@storybook/angular';
 
 @Component({
-	standalone: true,
 	selector: 'highlight-data-stories',
 	templateUrl: './highlight-data.stories.html',
 	imports: [HighlightDataComponent, ButtonComponent, LinkComponent],

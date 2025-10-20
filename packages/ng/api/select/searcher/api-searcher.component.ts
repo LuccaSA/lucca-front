@@ -13,7 +13,6 @@ import { ALuApiOptionPagedSearcher, ALuApiOptionSearcher } from './api-searcher.
 	templateUrl: 'api-searcher.component.html',
 	styleUrl: 'api-searcher.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	standalone: true,
 	imports: [ReactiveFormsModule, CommonModule, LuOptionPlaceholderComponent],
 	providers: [
 		{
@@ -86,7 +85,6 @@ export class LuApiSearcherComponent<T extends import('../../api.model').ILuApiIt
 	templateUrl: 'api-searcher.component.html',
 	styleUrl: 'api-searcher.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	standalone: true,
 	imports: [ReactiveFormsModule, CommonModule, LuOptionPlaceholderComponent],
 	providers: [
 		{

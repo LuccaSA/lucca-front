@@ -11,7 +11,6 @@ registerLocaleData(localesFr);
 
 @Component({
 	selector: 'date-calendar-stories',
-	standalone: true,
 	imports: [LuCalendarInputComponent, LuDateAdapterPipe, FormsModule],
 	providers: [{ provide: ALuDateAdapter, useClass: LuNativeDateAdapter }],
 	template: `
@@ -62,7 +61,6 @@ import { LuCalendarInputComponent } from '@lucca-front/ng/date';
 
 @Component({
 	selector: 'calendar-story',
-	standalone: true,
 	imports: [LuCalendarInputComponent],
 	providers: [{ provide: ALuDateAdapter, useClass: LuNativeDateAdapter }],
 	template: \`

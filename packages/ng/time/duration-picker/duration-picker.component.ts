@@ -14,7 +14,6 @@ import { LU_DURATION_PICKER_TRANSLATIONS } from './duration-picker.translate';
 
 @Component({
 	selector: 'lu-duration-picker',
-	standalone: true,
 	imports: [TimePickerPartComponent, NgClass],
 	templateUrl: './duration-picker.component.html',
 	styleUrl: './duration-picker.component.scss',

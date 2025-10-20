@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { Meta, StoryFn } from '@storybook/angular';
 
 @Component({
-	standalone: true,
 	selector: 'table-of-content-stories',
 	templateUrl: './table-of-content.stories.html',
 })

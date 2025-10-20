@@ -10,7 +10,6 @@ let nextId = 0;
 
 @Component({
 	selector: 'lu-checkbox-input',
-	standalone: true,
 	imports: [ReactiveFormsModule, InputDirective, FilterPillLabelDirective, LuTooltipTriggerDirective],
 	hostDirectives: [NoopValueAccessorDirective],
 	templateUrl: './checkbox-input.component.html',

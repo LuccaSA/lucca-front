@@ -6,7 +6,6 @@ import { LuCoreSelectJobQualification } from './models';
 
 @Component({
 	selector: 'lu-job-qualification-grouping',
-	standalone: true,
 	imports: [AsyncPipe],
 	template: `{{ group.options[0].job.name }}`,
 })

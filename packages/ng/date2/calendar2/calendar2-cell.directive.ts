@@ -1,10 +1,10 @@
 import { computed, Directive, ElementRef, HostBinding, HostListener, inject, input } from '@angular/core';
-import { CALENDAR_TABBABLE_DATE } from './calendar2.tokens';
-import { CalendarMode } from './calendar-mode';
 import { add, addMonths, addYears, endOfWeek, startOfWeek, sub, subMonths, subYears } from 'date-fns';
 import type { Duration } from 'date-fns/types';
 import { WEEK_INFO } from '../calendar.token';
 import { comparePeriods, getJSFirstDayOfWeek } from '../utils';
+import { CalendarMode } from './calendar-mode';
+import { CALENDAR_TABBABLE_DATE } from './calendar2.tokens';
 
 const modeToDurationKey: Record<CalendarMode, keyof Duration> = {
 	day: 'days',
@@ -14,7 +14,6 @@ const modeToDurationKey: Record<CalendarMode, keyof Duration> = {
 
 @Directive({
 	selector: '[luCalendar2Cell]',
-	standalone: true,
 })
 export class Calendar2CellDirective {
 	#host = inject<ElementRef<HTMLButtonElement>>(ElementRef);

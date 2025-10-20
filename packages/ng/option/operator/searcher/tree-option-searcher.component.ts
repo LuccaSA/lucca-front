@@ -16,7 +16,6 @@ import { ALuTreeOptionOperator, ILuTreeOptionOperator } from '../tree-option-ope
 	styleUrl: './option-searcher.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	imports: [ReactiveFormsModule, CommonModule, LuOptionPlaceholderComponent],
-	standalone: true,
 	providers: [
 		{
 			provide: ALuTreeOptionOperator,

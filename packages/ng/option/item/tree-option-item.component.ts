@@ -15,7 +15,6 @@ import { LU_TREE_OPTION_ITEM_TRANSLATIONS } from './tree-option-item.translate';
 	templateUrl: './tree-option-item.component.html',
 	styleUrl: './tree-option-item.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	standalone: true,
 	imports: [CommonModule, LuTooltipTriggerDirective],
 	providers: [
 		{

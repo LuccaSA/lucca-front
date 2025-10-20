@@ -46,7 +46,6 @@ export const RICH_TEXT_PLUGIN_COMPONENT = new InjectionToken<RichTextPluginCompo
 
 @Component({
 	selector: 'lu-rich-text-input',
-	standalone: true,
 	imports: [InputDirective],
 	templateUrl: './rich-text-input.component.html',
 	styleUrl: './rich-text-input.component.scss',

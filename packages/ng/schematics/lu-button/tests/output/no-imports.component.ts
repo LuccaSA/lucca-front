@@ -3,7 +3,6 @@ import { ButtonComponent } from '@lucca-front/ng/button';
 
 @Component({
 	selector: 'lu-test',
-	standalone: true,
 	imports: [ButtonComponent],
 	template: `
 		<button

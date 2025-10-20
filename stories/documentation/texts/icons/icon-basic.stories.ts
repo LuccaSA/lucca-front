@@ -7,7 +7,6 @@ import { Meta, StoryObj } from '@storybook/angular';
 
 @Component({
 	selector: 'icon-basic-stories',
-	standalone: true,
 	imports: [NgFor, FormsModule, IconComponent],
 	templateUrl: './icon-basic.stories.html',
 })

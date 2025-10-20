@@ -1,15 +1,14 @@
 import { Component } from '@angular/core';
-import { LuQualificationSelectInputComponent } from '@lucca-front/ng/qualification';
-import { LuEstablishmentSelectInputComponent, ALuEstablishmentService } from '@lucca-front/ng/establishment';
-import { LuUserSelectModule } from '@lucca-front/ng/user';
 import { LuDepartmentSelectInputComponent } from '@lucca-front/ng/department';
-import { LuSelectInputComponent } from '@lucca-front/ng/select';
+import { ALuEstablishmentService, LuEstablishmentSelectInputComponent } from '@lucca-front/ng/establishment';
 import { LuOptionItemComponent, LuOptionSelectAllComponent } from '@lucca-front/ng/option';
+import { LuQualificationSelectInputComponent } from '@lucca-front/ng/qualification';
+import { LuSelectInputComponent } from '@lucca-front/ng/select';
+import { LuUserSelectModule } from '@lucca-front/ng/user';
 import { EstablishmentServiceOverride } from '../establishment-service-override';
 
 @Component({
 	selector: 'lu-select-schematic-api-selects',
-	standalone: true,
 	template: `
 		<lu-qualification-select placeholder="Select a qualification" class="textfield-input"></lu-qualification-select>
 		<lu-user-select placeholder="Select a user" class="textfield-input" data-testid="lu-select"></lu-user-select>

@@ -9,7 +9,6 @@ import { getCalloutPalette } from '../callout.utils';
 
 @Component({
 	selector: 'lu-callout',
-	standalone: true,
 	imports: [PortalDirective, CalloutIconPipe, IconComponent],
 	templateUrl: './callout.component.html',
 	styleUrl: './callout.component.scss',

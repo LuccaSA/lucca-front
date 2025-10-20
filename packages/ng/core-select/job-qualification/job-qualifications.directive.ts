@@ -11,7 +11,6 @@ import { LuCoreSelectJobQualification } from './models';
 	// The attribute is already prefixed with "lu-simple-select" / "lu-multi-select"
 	// eslint-disable-next-line @angular-eslint/directive-selector
 	selector: 'lu-simple-select[jobQualifications],lu-multi-select[jobQualifications]',
-	standalone: true,
 	exportAs: 'jobQualifications',
 	providers: [
 		{

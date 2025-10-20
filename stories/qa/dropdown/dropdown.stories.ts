@@ -5,7 +5,6 @@ import { IconComponent } from '@lucca-front/ng/icon';
 import { Meta, moduleMetadata, StoryFn } from '@storybook/angular';
 
 @Component({
-	standalone: true,
 	selector: 'dropdown-stories',
 	templateUrl: './dropdown.stories.html',
 	imports: [IconComponent, ButtonComponent, DividerComponent],

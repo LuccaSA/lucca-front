@@ -9,7 +9,6 @@ import { FileEntry } from '../file-upload-entry';
 
 @Component({
 	selector: 'lu-single-file-upload',
-	standalone: true,
 	templateUrl: './single-file-upload.component.html',
 	styleUrl: './single-file-upload.component.scss',
 	encapsulation: ViewEncapsulation.None,

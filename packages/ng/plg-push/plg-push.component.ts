@@ -3,7 +3,6 @@ import { IconComponent } from '@lucca-front/ng/icon';
 
 @Component({
 	selector: 'lu-plg-push',
-	standalone: true,
 	imports: [IconComponent],
 	templateUrl: './plg-push.component.html',
 	styleUrl: './plg-push.component.scss',

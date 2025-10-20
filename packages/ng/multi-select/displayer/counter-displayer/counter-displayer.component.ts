@@ -10,7 +10,6 @@ import { LuMultiSelectDisplayerInputDirective } from '../displayer-input.directi
 
 @Component({
 	selector: 'lu-multi-select-counter-displayer',
-	standalone: true,
 	imports: [AsyncPipe, LuTooltipModule, NgPlural, NgPluralCase, ɵLuOptionOutletDirective, FormsModule, LuMultiSelectDisplayerInputDirective],
 	template: `
 		<div class="multipleSelect-displayer mod-filter" [class.is-filled]="(selectedOptions$ | async)?.length > 0">

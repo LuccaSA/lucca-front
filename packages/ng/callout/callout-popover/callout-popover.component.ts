@@ -11,7 +11,6 @@ import { getCalloutPalette } from '../callout.utils';
 
 @Component({
 	selector: 'lu-callout-popover',
-	standalone: true,
 	imports: [IconComponent, PortalDirective, CalloutIconPipe],
 	animations: [
 		trigger('tooltip', [

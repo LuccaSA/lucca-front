@@ -4,7 +4,6 @@ import { LuOptionContext } from '../select.model';
 
 @Directive({
 	selector: '[luDisplayer]',
-	standalone: true,
 })
 export class LuDisplayerDirective<TOption, TValue> {
 	@Input('luDisplayerSelect') set select(select: ALuSelectInputComponent<TOption, TValue>) {

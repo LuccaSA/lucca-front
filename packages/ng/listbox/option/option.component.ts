@@ -12,7 +12,6 @@ export class Treeitem {}
 
 @Component({
 	selector: 'lu-listbox-option',
-	standalone: true,
 	templateUrl: './option.component.html',
 	encapsulation: ViewEncapsulation.None,
 	host: {

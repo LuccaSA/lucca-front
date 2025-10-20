@@ -6,7 +6,6 @@ import { Meta, StoryFn, applicationConfig } from '@storybook/angular';
 
 @Component({
 	selector: 'department-select-stories',
-	standalone: true,
 	imports: [LuDepartmentSelectInputComponent],
 	template: `
 		<label class="textfield mod-inline">
@@ -61,7 +60,6 @@ import { LuDepartmentSelectInputComponent } from '@lucca-front/ng/department';
 
 @Component({
 	selector: 'department-select-story',
-	standalone: true,
 	imports: [LuDepartmentSelectInputComponent],
 	template: \`
 	<label class="textfield">

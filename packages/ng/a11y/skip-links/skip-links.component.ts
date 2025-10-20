@@ -8,7 +8,6 @@ import { LU_SKIP_LINKS_TRANSLATIONS } from './skip-links.translate';
 	templateUrl: './skip-links.component.html',
 	styleUrl: './skip-links.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	standalone: true,
 	encapsulation: ViewEncapsulation.None,
 })
 export class LuSkipLinksComponent {

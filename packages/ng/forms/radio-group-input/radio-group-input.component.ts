@@ -9,7 +9,6 @@ let nextId = 0;
 
 @Component({
 	selector: 'lu-radio-group-input',
-	standalone: true,
 	imports: [ReactiveFormsModule],
 	hostDirectives: [NoopValueAccessorDirective],
 	template: '<ng-content />',

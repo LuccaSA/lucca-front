@@ -14,7 +14,6 @@ interface TestEntity {
 @Directive({
 	// eslint-disable-next-line @angular-eslint/directive-selector
 	selector: 'lu-simple-select[testApi]',
-	standalone: true,
 })
 class TestDirective extends ALuCoreSelectApiDirective<TestEntity> {
 	protected override params$ = this.clue$.pipe(
@@ -46,7 +45,6 @@ class TestDirective extends ALuCoreSelectApiDirective<TestEntity> {
 
 @Component({
 	template: ` <lu-simple-select testApi />`,
-	standalone: true,
 	imports: [TestDirective, LuSimpleSelectInputComponent],
 })
 class HostComponent {}

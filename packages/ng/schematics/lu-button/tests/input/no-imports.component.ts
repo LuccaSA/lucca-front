@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 
 @Component({
 	selector: 'lu-test',
-	standalone: true,
 	template: `
 		<button
 			class="button mod-block pr-u-textCenter mod-outlined pr-u-textNeutral"

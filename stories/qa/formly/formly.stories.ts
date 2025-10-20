@@ -9,7 +9,6 @@ import { Meta, StoryObj, applicationConfig } from '@storybook/angular';
 
 @Component({
 	selector: 'formly-stories',
-	standalone: true,
 	imports: [FormlyModule, ReactiveFormsModule, JsonPipe],
 	template: `
 		<form [formGroup]="form" role="form" autocomplete="off" (ngSubmit)="submit()">

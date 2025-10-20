@@ -3,7 +3,6 @@ import { booleanAttribute, Component, input, ViewEncapsulation } from '@angular/
 
 @Component({
 	selector: 'lu-footer',
-	standalone: true,
 	styleUrl: './footer.component.scss',
 	templateUrl: './footer.component.html',
 	encapsulation: ViewEncapsulation.None,

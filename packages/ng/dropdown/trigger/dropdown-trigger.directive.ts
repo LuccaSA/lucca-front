@@ -1,7 +1,7 @@
+import { ConnectionPositionPair, HorizontalConnectionPos, OriginConnectionPosition, OverlayConnectionPosition, VerticalConnectionPos } from '@angular/cdk/overlay';
 import { Directive, inject, Input, OnInit, TemplateRef, Type } from '@angular/core';
 import { ALuPopoverPanel, LuPopoverAlignment } from '@lucca-front/ng/popover';
 import { PopoverDirective } from '@lucca-front/ng/popover2';
-import { ConnectionPositionPair, HorizontalConnectionPos, OriginConnectionPosition, OverlayConnectionPosition, VerticalConnectionPos } from '@angular/cdk/overlay';
 
 @Directive({
 	selector: '[luDropdown]',
@@ -16,7 +16,6 @@ import { ConnectionPositionPair, HorizontalConnectionPos, OriginConnectionPositi
 			outputs: ['luPopoverOpened: luDropdownOnOpen', 'luPopoverClosed: luDropdownOnClose'],
 		},
 	],
-	standalone: true,
 })
 export class LuDropdownTriggerDirective<_T> implements OnInit {
 	protected popover2 = inject(PopoverDirective);

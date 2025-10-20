@@ -7,7 +7,6 @@ import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 import { Meta } from '@storybook/angular';
 
 @Component({
-	standalone: true,
 	selector: 'select-stories',
 	templateUrl: './select.stories.html',
 	imports: [

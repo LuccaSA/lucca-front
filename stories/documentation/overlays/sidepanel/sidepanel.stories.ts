@@ -8,7 +8,6 @@ import { map, shareReplay, timer } from 'rxjs';
 
 @Component({
 	selector: 'sidepanel-content',
-	standalone: true,
 	template: '<p>General Kenobi</p>',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -19,7 +18,6 @@ class SidepanelContentComponent implements ILuModalContent {
 
 @Component({
 	selector: 'sidepanel-content',
-	standalone: true,
 	template: '<p>General Kenobi</p>',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -37,7 +35,6 @@ class SidepanelDynamicContentComponent implements ILuModalContent {
 
 @Component({
 	selector: 'sidepanel-stories',
-	standalone: true,
 	imports: [LuSidepanelModule, LuModalModule, LuToastsModule],
 	template: `
 		<lu-toasts [sources]="[]" />

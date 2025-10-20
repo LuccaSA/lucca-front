@@ -5,7 +5,6 @@ import { Meta, StoryFn, applicationConfig } from '@storybook/angular';
 
 @Component({
 	selector: 'popover-story',
-	standalone: true,
 	imports: [LuPopoverModule],
 	template: `
 		<button type="button" class="button" [luPopover]="popover" [luPopoverPosition]="position" [luPopoverAlignment]="alignment" [luPopoverTrigger]="trigger">{{ trigger }} me</button>

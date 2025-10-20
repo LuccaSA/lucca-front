@@ -21,7 +21,6 @@ import { LU_USER_SELECT_INPUT_TRANSLATIONS } from './user-select-input.translate
 	templateUrl: './user-select-input.component.html',
 	styleUrl: './user-select-input.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	standalone: true,
 	imports: [
 		CommonModule,
 		OverlayModule,

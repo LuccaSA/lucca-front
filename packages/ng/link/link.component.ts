@@ -6,7 +6,6 @@ import { LuRouterLink } from './lu-router-link';
 @Component({
 	// eslint-disable-next-line @angular-eslint/component-selector
 	selector: 'a[luLink], button[luLink]',
-	standalone: true,
 	templateUrl: './link.component.html',
 	styleUrl: './link.component.scss',
 	encapsulation: ViewEncapsulation.None,

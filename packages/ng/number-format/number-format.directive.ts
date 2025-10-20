@@ -9,7 +9,6 @@ import { NumberFormatOptions } from './number-format.models';
 
 @Directive({
 	selector: 'input[luNumberFormatInput]',
-	standalone: true,
 	providers: [
 		{
 			provide: NG_VALUE_ACCESSOR,

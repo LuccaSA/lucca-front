@@ -52,7 +52,6 @@ import { PersonService } from '../services';
 @Directive({
   selector: '[appPersons]',
   exportAs: 'appPersons',
-  standalone: true,
   providers: [provideCoreSelectUsersContext(() => PersonsDirective)],
 })
 export class PersonsDirective extends LuCoreSelectUsersDirective<Person> {

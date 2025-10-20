@@ -4,7 +4,6 @@ import { LU_READMORE_TRANSLATIONS } from './read-more.translate';
 
 @Component({
 	selector: 'lu-read-more',
-	standalone: true,
 	templateUrl: './read-more.component.html',
 	styleUrl: './read-more.component.scss',
 	encapsulation: ViewEncapsulation.None,

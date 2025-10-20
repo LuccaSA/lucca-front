@@ -4,7 +4,6 @@ import { HorizontalNavigationLinkDirective } from './horizontal-navigation-link.
 
 @Component({
 	selector: 'lu-horizontal-navigation',
-	standalone: true,
 	templateUrl: './horizontal-navigation.component.html',
 	styleUrl: './horizontal-navigation.component.scss',
 	encapsulation: ViewEncapsulation.None,

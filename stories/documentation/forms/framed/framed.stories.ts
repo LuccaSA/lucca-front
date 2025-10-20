@@ -3,7 +3,6 @@ import { Meta, StoryFn } from '@storybook/angular';
 
 @Component({
 	selector: 'framed-stories',
-	standalone: true,
 	templateUrl: './framed.stories.html',
 })
 class FramedStory {

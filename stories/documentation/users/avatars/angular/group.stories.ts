@@ -5,7 +5,6 @@ import { squidwards } from '../../user.mocks';
 
 @Component({
 	selector: 'avatar-stories',
-	standalone: true,
 	imports: [LuUserPictureModule],
 	template: `
 		<ul class="avatarWrapper" [class]="sizes">

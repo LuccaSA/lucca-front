@@ -14,7 +14,6 @@ import { LU_NUMBERFORMATFIELD_TRANSLATIONS } from './number-format-input.transla
 
 @Component({
 	selector: 'lu-number-format-input',
-	standalone: true,
 	imports: [FormFieldComponent, InputDirective, NgIf, ReactiveFormsModule, FormFieldIdDirective, NumberFormatDirective, NgTemplateOutlet],
 	templateUrl: './number-format-input.component.html',
 	hostDirectives: [NoopValueAccessorDirective],
