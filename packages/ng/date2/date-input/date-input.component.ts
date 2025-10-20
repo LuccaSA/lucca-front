@@ -68,6 +68,7 @@ export type DateInputValidatorErrorType = {
 	],
 })
 export class DateInputComponent extends AbstractDateComponent implements OnInit, ControlValueAccessor, Validator, FilterPillInputComponent {
+	public parentInput = inject(FILTER_PILL_INPUT_COMPONENT, { optional: true, skipSelf: true });
 	#injector = inject(Injector);
 	#ngControl: NgControl; // Initialized in ngOnInit
 
