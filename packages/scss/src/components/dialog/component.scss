@@ -19,6 +19,9 @@
 	position: fixed !important;
 	max-inline-size: var(--components-dialog-maxWidth) !important;
 	max-block-size: var(--components-dialog-maxHeight) !important;
+	transform: translate(var(--components-dialog-translateX), var(--components-dialog-translateY)) scale(var(--components-dialog-scale));
+	transition-property: transform;
+	transition-duration: var(--commons-animations-durations-standard);
 
 	@supports not (height: 1dvh) {
 		--components-dialog-maxHeight: var(--components-dialog-maxHeightFallback);

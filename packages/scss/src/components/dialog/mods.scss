@@ -30,10 +30,13 @@
 	--components-dialog-animationOpening: slideFromRight;
 	--components-dialog-maxHeight: none;
 	--components-dialog-maxHeightFallback: var(--components-dialog-maxHeight);
-	--components-dialog-height: 100%;
+	--components-dialog-height: calc(100% - var(--pr-t-spacings-100) * 2);
 	--components-dialog-maxWidth: calc(100vw - var(--pr-t-spacings-200));
-	--components-dialog-borderRadius: var(--pr-t-border-radius-structure) 0 0 var(--pr-t-border-radius-structure);
-	--components-dialog-inset: 0 0 0 auto;
+	--components-dialog-borderRadius: var(--pr-t-border-radius-structure);
+	--components-dialog-inset: var(--pr-t-spacings-100) var(--pr-t-spacings-100) var(--pr-t-spacings-100) auto;
+	--components-dialog-translateX: var(--components-dialog-translate);
+	--components-dialog-translateY: 0;
+	--components-dialog-translate-spacing: calc(var(--pr-t-spacings-500) * 2);
 
 	@include keyframe.slideFromRight;
 }
@@ -43,26 +46,30 @@
 	--components-dialog-maxHeight: calc(100dvh - var(--pr-t-spacings-200));
 	--components-dialog-maxHeightFallback: calc(100vh - var(--pr-t-spacings-200));
 	--components-dialog-maxWidth: none;
-	--components-dialog-inset: auto 0 0 0;
-	--components-dialog-borderRadius: var(--pr-t-border-radius-structure) var(--pr-t-border-radius-structure) 0 0;
-	--components-dialog-width: 100%;
+	--components-dialog-inset: auto var(--pr-t-spacings-100) var(--pr-t-spacings-100) var(--pr-t-spacings-100);
+	--components-dialog-borderRadius: var(--pr-t-border-radius-structure);
+	--components-dialog-width: calc(100% - var(--pr-t-spacings-100) * 2);
 	--components-dialog-height: fit-content;
+	--components-dialog-translateX: 0;
+	--components-dialog-translateY: var(--components-dialog-translate);
+	--components-dialog-translate-spacing: var(--pr-t-spacings-500);
 
 	@include keyframe.slideFromBottom;
 }
 
 @mixin maxContent {
 	--components-dialog-size: 100%;
-	--components-dialog-height: 100%;
+	--components-dialog-height: calc(100% - var(--pr-t-spacings-100) * 2);
 }
 
 @mixin fullScreen {
 	--components-dialog-height: 100%;
-	--components-dialog-size: 100%;
+	--components-dialog-width: 100%;
 	--components-dialog-maxWidth: none;
 	--components-dialog-maxHeight: none;
 	--components-dialog-maxHeightFallback: var(--components-dialog-maxHeight);
 	--components-dialog-borderRadius: 0;
+	--components-dialog-inset: 0;
 }
 
 @mixin neutralBackground {
