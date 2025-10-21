@@ -27,6 +27,7 @@ import { LuCoreSelectLegumesDirective } from './custom-api-example.component';
 import { LuCoreSelectCustomEstablishmentsDirective } from './custom-establishment-example.component';
 import { LuCoreSelectCustomUsersDirective } from './custom-user-example.component';
 import { allLegumes, colorNameByColor, coreSelectStory, FilterLegumesPipe, ILegume, LuCoreSelectInputStoryComponent, SortLegumesPipe } from './select.utils';
+import { IconComponent } from '../../../../packages/ng/icon/icon.component';
 
 export type LuSimpleSelectInputStoryComponent = LuCoreSelectInputStoryComponent & {
 	selectedLegume: ILegume | null;
@@ -132,6 +133,30 @@ export const WithDisplayer = generateStory({
 	<ng-container *luDisplayer="let legume; select: selectRef">🥗🥗 {{ legume.name }} 🥗🥗</ng-container>
 </lu-simple-select>`,
 	neededImports: {
+		'@lucca-front/ng/core-select': ['LuOptionDirective'],
+		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent', 'LuDisplayerDirective'],
+	},
+	storyPartial: {
+		args: {
+			selectedLegume: allLegumes[4],
+		},
+	},
+});
+
+export const WithIcon = generateStory({
+	name: 'With Icon',
+	description: "Il est possible de customiser l'affichage des options ainsi que de l'option sélectionnée en utilisant `*luOption`.",
+	template: `<lu-simple-select
+	#selectRef
+	placeholder="Placeholder…"
+	[(ngModel)]="selectedLegume"
+	[options]="legumes | filterLegumes:clue"
+	(clueChange)="clue = $event"
+>
+	<ng-container *luOption="let legume; select: selectRef"><lu-icon icon="app"></lu-icon> {{ legume.name }}</ng-container>
+</lu-simple-select>`,
+	neededImports: {
+		'@lucca-front/ng/icon': ['IconComponent'],
 		'@lucca-front/ng/core-select': ['LuOptionDirective'],
 		'@lucca-front/ng/simple-select': ['LuSimpleSelectInputComponent', 'LuDisplayerDirective'],
 	},
@@ -675,6 +700,7 @@ const meta: Meta<LuSimpleSelectInputStoryComponent> = {
 				LuDisabledOptionDirective,
 				LuOptionGroupDirective,
 				TreeSelectDirective,
+				IconComponent,
 			],
 		}),
 		applicationConfig({ providers: [provideHttpClient(), provideCoreSelectCurrentUserId(() => 66)] }),
