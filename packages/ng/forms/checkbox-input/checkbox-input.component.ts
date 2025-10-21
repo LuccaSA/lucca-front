@@ -28,6 +28,7 @@ let nextId = 0;
 	},
 })
 export class CheckboxInputComponent implements FilterPillInputComponent {
+	parentInput = inject(FILTER_PILL_INPUT_COMPONENT, { optional: true, skipSelf: true });
 	formField = inject<FormFieldComponent>(FORM_FIELD_INSTANCE, { optional: true });
 
 	isFilterPill = false;
