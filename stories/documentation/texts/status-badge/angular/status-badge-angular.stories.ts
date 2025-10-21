@@ -35,6 +35,9 @@ export default {
 				type: 'text',
 			},
 		},
+		withEllipsis: {
+			description: '[v20.3]',
+		},
 	},
 } as Meta;
 

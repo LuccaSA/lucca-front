@@ -96,7 +96,7 @@ export default {
 </ng-container>`
 			: ``;
 		const leadingContainer = leading ? `<ng-container pageHeaderLeading>${leading}</ng-container>` : ``;
-		const trailingContainer = trailing ? `<ng-container pageHeaderTrainling>${trailing}</ng-container>` : ``;
+		const trailingContainer = trailing ? `<ng-container pageHeaderTrailing>${trailing}</ng-container>` : ``;
 		return {
 			template: `<lu-page-header ${generateInputs(otherArgs, argTypes)}>
 ${breadcrumbsContainer}${backActionContainer}${leadingContainer}${titleActionsContainer}${trailingContainer}${actionsContainer}${navigationContainer}

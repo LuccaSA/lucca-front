@@ -8,16 +8,22 @@ export default {
 } as Meta;
 
 function getTemplate(args: ButtonSizeStory): string {
-	return `<div class="pr-u-displayFlex pr-u-gap100 pr-u-alignItemsCenter">
-	<button type="button" class="button">Button</button>
-	<button type="button" class="button mod-S">Button</button>
-	<button type="button" class="button mod-XS">Button</button>
-</div>`;
+	return `<button type="button" class="button">Button</button>
+<button type="button" class="button mod-S">Button</button>
+<button type="button" class="button mod-XS">Button</button>`;
 }
 
 const Template: StoryFn<ButtonSizeStory> = (args) => ({
 	props: args,
 	template: getTemplate(args),
+	styles: [
+		`
+		:host {
+			display: flex;
+			gap: 1rem;
+		}
+	`,
+	],
 });
 
 export const SizeButton = Template.bind({});
