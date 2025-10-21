@@ -57,7 +57,7 @@ export default {
 export const Template: StoryObj<CalloutPopoverComponent> = {
 	args: {
 		state: null,
-		buttonLabel: '1',
+		buttonLabel: '',
 		heading: 'List title',
 		icon: 'signInfo',
 		palette: 'none',
