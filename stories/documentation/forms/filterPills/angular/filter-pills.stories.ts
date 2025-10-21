@@ -3,15 +3,16 @@ import { provideHttpClient } from '@angular/common/http';
 import { LOCALE_ID } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { provideAnimations } from '@angular/platform-browser/animations';
+import { LuCoreSelectTotalCountDirective } from '@lucca-front/ng/core-select';
 import { LuCoreSelectDepartmentsDirective } from '@lucca-front/ng/core-select/department';
 import { DateInputComponent, DateRangeInputComponent } from '@lucca-front/ng/date2';
 import { FilterPillComponent } from '@lucca-front/ng/filter-pills';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { CheckboxInputComponent, TextInputComponent } from '@lucca-front/ng/forms';
+import { LuMultiSelectInputComponent, LuMultiSelectWithSelectAllDirective } from '@lucca-front/ng/multi-select';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
+import { TreeSelectDirective } from '@lucca-front/ng/tree-select';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { LuMultiSelectInputComponent } from '../../../../../packages/ng/multi-select/input';
-import { TreeSelectDirective } from '../../../../../packages/ng/tree-select/tree-select.directive';
 import { StoryModelDisplayComponent } from '../../../../helpers/story-model-display.component';
 
 export default {
@@ -33,6 +34,8 @@ export default {
 				TextInputComponent,
 				FilterLegumesPipe,
 				TreeSelectDirective,
+				LuMultiSelectWithSelectAllDirective,
+				LuCoreSelectTotalCountDirective,
 			],
 		}),
 		applicationConfig({
@@ -60,11 +63,8 @@ export default {
 			template: `<lu-filter-pill label="Inclure les collaborateurs partis">
 	<lu-checkbox-input [ngModel]="false"></lu-checkbox-input>
 </lu-filter-pill>
-<lu-filter-pill label="Simple" name="legume">
-		<lu-simple-select ${clearableProperty}[options]="legumes | filterLegumes:clue" (clueChange)="clue = $event" />
-</lu-filter-pill>
-<lu-filter-pill label="Multi" name="legume">
-	<lu-multi-select ${clearableProperty}	[options]="legumes | filterLegumes:clue" (clueChange)="clue = $event" filterPillLabelPlural="légumes" />
+<lu-filter-pill label="With Select all" name="legume">
+	<lu-multi-select ${clearableProperty}	[options]="legumes | filterLegumes:clue" [totalCount]="legumes.length" (clueChange)="clue = $event" filterPillLabelPlural="légumes" withSelectAll withSelectAllDisplayerLabel="Tous les légumés" />
 </lu-filter-pill>
 <lu-filter-pill label="Département" name="department">
 	<lu-simple-select ${clearableProperty} departments></lu-simple-select>
