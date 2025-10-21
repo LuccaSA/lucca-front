@@ -4,11 +4,10 @@ import { IconComponent } from '@lucca-front/ng/icon';
 import { TagComponent } from '@lucca-front/ng/tag';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 
-// eslint-disable-next-line @typescript-eslint/no-unsafe-call
 @Component({
-	// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
 	encapsulation: ViewEncapsulation.None,
-	selector: 'label[lu-label]',
+	// eslint-disable-next-line @angular-eslint/component-selector
+	selector: 'label[luLabel]',
 	templateUrl: './label.component.html',
 	styleUrl: './label.component.scss',
 	host: {
@@ -35,15 +34,10 @@ export class LabelComponent {
 	counterId = input<null | string>(null);
 	size = input<null | 'S' | 'XS'>(null);
 
-	// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 	counterAltFormatted = computed<string>(() => {
-		// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
 		let formatted = this.counterAlt().toString();
-		// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
 		formatted = formatted.replace('#count#', this.count().toString());
-		// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
 		formatted = formatted.replace('#counterMax#', this.counterMax().toString());
-		// eslint-disable-next-line @typescript-eslint/no-unsafe-return
 		return formatted;
 	});
 }

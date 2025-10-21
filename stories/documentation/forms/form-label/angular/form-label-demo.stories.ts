@@ -20,7 +20,7 @@ export default {
 		const forAttr = forArg ? ` for="${forArg}"` : ``;
 
 		return {
-			template: `<label${idAttr}${forAttr} lu-label${generateInputs(inputs, context.argTypes)}${infosAttr}${tagAttr}${counterMaxAttr}>${args.label}</label>`,
+			template: `<label${idAttr}${forAttr} luLabel${generateInputs(inputs, context.argTypes)}${infosAttr}${tagAttr}${counterMaxAttr}>${args.label}</label>`,
 		};
 	},
 } as Meta;
@@ -62,7 +62,7 @@ export const Template: StoryObj = {
 		tag: '',
 		counterMax: 0,
 		count: 8,
-		counterAlt: `Votre message fait #count# caractères de long. #counterMax# maximum sont autorisés.`,
+		counterAlt: `Votre contenu fait #count# caractères de long. #counterMax# maximum sont autorisés.`,
 		counterId: 'idCounter',
 		fullSize: false,
 		disabled: false,

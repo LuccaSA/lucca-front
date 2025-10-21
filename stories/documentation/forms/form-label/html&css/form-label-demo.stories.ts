@@ -103,7 +103,7 @@ export const Template: StoryObj = {
 		tag: '',
 		counterMax: 0,
 		count: 8,
-		counterAlt: `Votre message fait #count# caractères de long. #counterMax# maximum sont autorisés.`,
+		counterAlt: `Votre contenu fait #count# caractères de long. #counterMax# maximum sont autorisés.`,
 		counterId: 'idCounter',
 		fullSize: false,
 		disabled: false,
