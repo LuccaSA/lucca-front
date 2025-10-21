@@ -39,6 +39,9 @@ export const Template: StoryObj<TagComponent> = {
 		AI: {
 			description: '[v20.3]',
 		},
+		withEllipsis: {
+			description: '[v20.3]',
+		},
 	},
 
 	args: {
