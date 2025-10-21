@@ -23,12 +23,12 @@ export class ListingComponent {
 	inline = input(false, { transform: booleanAttribute });
 	hideFirstItems = input(false, { transform: booleanAttribute });
 	start = input(1, { transform: numberAttribute });
-	marker = input<null | string>(null);
 	ordered = input(false, { transform: booleanAttribute });
 	checklist = input(false, { transform: booleanAttribute });
 	icons = input(false, { transform: booleanAttribute });
 	defaultIcon = input<LuccaIcon>('signConfirm');
 	palette = input<Palette>('none');
+	divider = input(false, { transform: booleanAttribute });
 
 	get paletteClass() {
 		return {

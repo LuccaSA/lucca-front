@@ -20,11 +20,6 @@
 			align-items: flex-start;
 			gap: var(--pr-t-spacings-100);
 			margin-inline-start: var(--components-listing-item-marginInlineStart);
-
-			&::marker {
-				line-height: 1;
-				content: var(--components-listing-item-marker) '  ';
-			}
 		}
 
 		.listing-item-icon {
