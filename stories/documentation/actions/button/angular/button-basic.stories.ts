@@ -28,6 +28,7 @@ export const Basic: StoryObj<ButtonComponent> = {
 			control: {
 				type: 'select',
 			},
+			description: '[v20.3] AI',
 		},
 		palette: {
 			if: { arg: 'luButton', neq: 'AI' },
