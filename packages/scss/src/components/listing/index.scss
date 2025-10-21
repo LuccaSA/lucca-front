@@ -18,6 +18,13 @@
 			&.mod-hideFirstItems {
 				@include hideFirstItems;
 			}
+
+			&.mod-divider {
+				@include divider;
+				// &:is(.mod-checklist, .mod-icons){
+				// 	@include inlineFirstSpacing;
+				// }
+			}
 		}
 
 		.listing {

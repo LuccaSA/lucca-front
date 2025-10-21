@@ -20,6 +20,13 @@
 			align-items: flex-start;
 			gap: var(--pr-t-spacings-100);
 			margin-inline-start: var(--components-listing-item-marginInlineStart);
+			// divider pseudo element
+			&::before {
+				content: var(--components-listing-item-before-content);
+				border-inline-start: var(--commons-divider-border);
+				height: 1rem;
+				align-self: center;
+			}
 		}
 
 		.listing-item-icon {

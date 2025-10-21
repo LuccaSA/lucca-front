@@ -9,5 +9,7 @@
 	--components-listing-item-icon-before-content: none;
 	--components-listing-inlineStart: calc(var(--pr-t-spacings-300) + var(--pr-t-spacings-50));
 	--components-listing-clipPath: none;
-	--components-listing-inlineFirst: calc(var(--pr-t-spacings-200) + var(--pr-t-spacings-150));
+	--components-listing-inlineFirst: 0;
+	//for divider mode:
+	--components-listing-item-before-content: unset;
 }
