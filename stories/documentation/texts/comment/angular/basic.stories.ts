@@ -48,6 +48,9 @@ export default {
 		compact: {
 			description: "N'affiche l'auteur que sur le premier commentaire de <code><lu-comment-block></code>",
 		},
+		datePipeFormat: {
+			description: "[v20.3]<br><a href='https://angular.dev/api/common/DatePipe' target='_blank'>Angular DatePipe</a>.<br>Exemples : 'mediumDate', 'YYYY', etc.",
+		},
 	},
 } as Meta;
 

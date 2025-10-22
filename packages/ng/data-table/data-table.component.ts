@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { booleanAttribute, Component, computed, contentChild, contentChildren, ElementRef, forwardRef, inject, input, viewChild, ViewEncapsulation } from '@angular/core';
 import { ResponsiveConfig, ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { DataTableHeadComponent } from './data-table-head/data-table-head.component';
@@ -22,7 +21,6 @@ import { LU_DATA_TABLE_INSTANCE } from './data-table.token';
 			useExisting: forwardRef(() => DataTableComponent),
 		},
 	],
-	imports: [CommonModule],
 })
 export class DataTableComponent {
 	#elementRef = inject<ElementRef<Element>>(ElementRef);

@@ -398,7 +398,9 @@ export const UserCustom = generateStory({
 		<span translate="no">{{ user | luUserDisplay }}</span>&ngsp;<span class="pr-u-textLight">(Random {{ user.myCustomProperty }})</span>
 
 		<!-- Handle homonyms -->
-		<div *ngIf="user.additionalInformation">({{ user.additionalInformation }})</div>
+		@if (user.additionalInformation) {
+			<div>({{ user.additionalInformation }})</div>
+		}
 	</ng-container>
 </lu-simple-select>`,
 	neededImports: {

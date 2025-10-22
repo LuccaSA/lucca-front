@@ -1,4 +1,4 @@
-import { NgIf, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import { AfterViewInit, booleanAttribute, Component, computed, DestroyRef, ElementRef, inject, input, LOCALE_ID, signal, viewChild, ViewEncapsulation } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -15,7 +15,7 @@ import { LU_NUMBERFORMATFIELD_TRANSLATIONS } from './number-format-input.transla
 @Component({
 	selector: 'lu-number-format-input',
 	standalone: true,
-	imports: [FormFieldComponent, InputDirective, NgIf, ReactiveFormsModule, FormFieldIdDirective, NumberFormatDirective, NgTemplateOutlet],
+	imports: [FormFieldComponent, InputDirective, ReactiveFormsModule, FormFieldIdDirective, NumberFormatDirective, NgTemplateOutlet],
 	templateUrl: './number-format-input.component.html',
 	hostDirectives: [NoopValueAccessorDirective],
 	encapsulation: ViewEncapsulation.None,

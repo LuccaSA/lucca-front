@@ -143,7 +143,7 @@
 		.dialog_backdrop {
 			background-color: var(--palettes-neutral-900);
 			position: fixed;
-			opacity: 0.4;
+			opacity: 0.4 !important; // weird bug with Chrome and its inspector open
 			inset: 0;
 		}
 	}
