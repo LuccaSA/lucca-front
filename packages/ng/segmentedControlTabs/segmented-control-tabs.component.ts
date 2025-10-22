@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { AfterContentInit, booleanAttribute, Component, computed, contentChildren, ElementRef, forwardRef, input, model, viewChildren, ViewEncapsulation } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { PortalDirective } from '@lucca-front/ng/core';
@@ -14,7 +13,7 @@ let nextId = 0;
 	templateUrl: './segmented-control-tabs.component.html',
 	styleUrl: './segmented-control-tabs.component.scss',
 	encapsulation: ViewEncapsulation.None,
-	imports: [ReactiveFormsModule, CommonModule, PortalDirective],
+	imports: [ReactiveFormsModule, PortalDirective],
 	hostDirectives: [NoopValueAccessorDirective],
 	providers: [
 		{

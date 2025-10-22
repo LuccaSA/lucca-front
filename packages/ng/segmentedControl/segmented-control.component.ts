@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { booleanAttribute, Component, forwardRef, input, ViewEncapsulation } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { injectNgControl, NoopValueAccessorDirective } from '@lucca-front/ng/forms';
@@ -12,7 +11,7 @@ let nextId = 0;
 	template: '<ng-content />',
 	styleUrl: './segmented-control.component.scss',
 	encapsulation: ViewEncapsulation.None,
-	imports: [ReactiveFormsModule, CommonModule],
+	imports: [ReactiveFormsModule],
 	hostDirectives: [NoopValueAccessorDirective],
 	host: {
 		role: 'presentation',
