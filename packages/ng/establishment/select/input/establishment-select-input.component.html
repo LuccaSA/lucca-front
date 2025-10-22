@@ -9,10 +9,13 @@
 </div>
 
 <ng-template luDisplayer [luDisplayerMultiple]="true" let-values>
-	<span *ngIf="multiple && values?.length > 1; else singleView"
-		><span class="numericBadge">{{ values.length }}</span> {{ intl.establishments }}</span
-	>
-	<ng-template #singleView>{{ (values[0] || values).name }}</ng-template>
+	@if (multiple && values?.length > 1) {
+		<span
+			><span class="numericBadge">{{ values.length }}</span> {{ intl.establishments }}</span
+		>
+	} @else {
+		{{ (values[0] || values).name }}
+	}
 </ng-template>
 
 <lu-option-picker-advanced [option-comparer]="byId">
@@ -24,45 +27,49 @@
 			[sort]="sort"
 			(isSearching)="onIsSearchingChanged($event)"
 		/>
-		<lu-establishment-select-all
-			*ngIf="multiple"
-			class="pr-u-displayBlock"
-			[class.pr-u-displayNone]="isSearching"
-			[filters]="filters"
-			[appInstanceId]="appInstanceId"
-			[operations]="operations"
-		/>
+		@if (multiple) {
+			<lu-establishment-select-all
+				class="pr-u-displayBlock"
+				[class.pr-u-displayNone]="isSearching"
+				[filters]="filters"
+				[appInstanceId]="appInstanceId"
+				[operations]="operations"
+			/>
+		}
 	</header>
 
 	<ng-template luForLegalUnits let-group>
 		<div class="optionGroup">
-			<ng-container *ngIf="groupByLu && !isSearching">
-				<button
-					type="button"
-					*ngIf="multiple; else singleViewGroup"
-					class="optionGroupName button mod-ghost mod-block"
-					[luLegalUnitSelector]="group.key"
-					[luLegalUnitSelectorFilters]="filters"
-					[luLegalUnitSelectorAppInstanceId]="appInstanceId"
-					[luLegalUnitSelectorOperations]="operations"
-				>
-					{{ group.key.name }}
-				</button>
-				<ng-template #singleViewGroup>
+			@if (groupByLu && !isSearching) {
+				@if (multiple) {
+					<button
+						type="button"
+						class="optionGroupName button mod-ghost mod-block"
+						[luLegalUnitSelector]="group.key"
+						[luLegalUnitSelectorFilters]="filters"
+						[luLegalUnitSelectorAppInstanceId]="appInstanceId"
+						[luLegalUnitSelectorOperations]="operations"
+					>
+						{{ group.key.name }}
+					</button>
+				} @else {
 					<h5 class="optionGroupName mod-readonly pr-u-margin0">{{ group.key.name }}</h5>
-				</ng-template>
-			</ng-container>
+				}
+			}
 
 			<div class="lu-picker-content-option">
-				<lu-option *ngFor="let establishment of group.items; trackBy: trackById" [value]="establishment" class="establishmentOption">
-					<ng-container *ngIf="isSearching; else emptySearch">
-						<span class="pr-u-displayBlock" translate="no">{{ establishment.name }}</span>
-						<span *ngIf="groupByLu" class="pr-u-displayBlock pr-u-textLight pr-u-bodyS">{{ group.key.name }}</span>
-					</ng-container>
-					<ng-template #emptySearch>
-						<span translate="no">{{ establishment.name }}</span>
-					</ng-template>
-				</lu-option>
+				@for (establishment of group.items; track establishment.id) {
+					<lu-option [value]="establishment" class="establishmentOption">
+						@if (isSearching) {
+							<span class="pr-u-displayBlock" translate="no">{{ establishment.name }}</span>
+							@if (groupByLu) {
+								<span class="pr-u-displayBlock pr-u-textLight pr-u-bodyS">{{ group.key.name }}</span>
+							}
+						} @else {
+							<span translate="no">{{ establishment.name }}</span>
+						}
+					</lu-option>
+				}
 			</div>
 		</div>
 	</ng-template>

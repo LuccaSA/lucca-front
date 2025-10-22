@@ -1,5 +1,4 @@
 import { Overlay } from '@angular/cdk/overlay';
-import { CommonModule } from '@angular/common';
 import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, forwardRef, Input, Renderer2, ViewContainerRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { LuInputClearerComponent, LuInputDisplayerDirective } from '@lucca-front/ng/input';
@@ -13,7 +12,7 @@ import { LuApiPagedSearcherComponent } from '../searcher';
 	styleUrl: './api-select-input.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	standalone: true,
-	imports: [CommonModule, LuInputClearerComponent, LuOptionPickerAdvancedComponent, LuApiPagedSearcherComponent, LuOptionItemComponent, LuForOptionsDirective, LuInputDisplayerDirective],
+	imports: [LuInputClearerComponent, LuOptionPickerAdvancedComponent, LuApiPagedSearcherComponent, LuOptionItemComponent, LuForOptionsDirective, LuInputDisplayerDirective],
 	providers: [
 		{
 			provide: NG_VALUE_ACCESSOR,

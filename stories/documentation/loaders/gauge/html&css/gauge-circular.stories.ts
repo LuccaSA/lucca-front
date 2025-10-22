@@ -45,4 +45,4 @@ const Template: StoryFn<GaugeBasicStory> = (args) => ({
 });
 
 export const Basic = Template.bind({});
-Basic.args = { palette: '', thin: false, animated: false, value: 33, size: 80 };
+Basic.args = { palette: '', thin: false, animated: false, value: 33, size: 40 };

@@ -4,12 +4,12 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { LuccaIcon } from '@lucca-front/icons';
 import { getIntl } from '@lucca-front/ng/core';
 import { InputDirective } from '@lucca-front/ng/form-field';
+import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 import { FormFieldIdDirective } from '../form-field-id.directive';
 import { injectNgControl } from '../inject-ng-control';
 import { NoopValueAccessorDirective } from '../noop-value-accessor.directive';
 import { TextInputAddon } from './text-input-addon';
 import { LU_TEXTFIELD_TRANSLATIONS } from './text-input.translate';
-import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 
 type TextFieldType = 'text' | 'email' | 'password' | 'url';
 

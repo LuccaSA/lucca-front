@@ -9,10 +9,13 @@
 </div>
 
 <ng-template luDisplayer [luDisplayerMultiple]="true" let-values>
-	<span *ngIf="multiple && values?.length > 1; else singleView"
-		><span class="numericBadge">{{ values.length }}</span> {{ intl.departments }}</span
-	>
-	<ng-template #singleView>{{ (values[0] || values).name }}</ng-template>
+	@if (multiple && values?.length > 1) {
+		<span
+			><span class="numericBadge">{{ values.length }}</span> {{ intl.departments }}</span
+		>
+	} @else {
+		{{ (values[0] || values).name }}
+	}
 </ng-template>
 
 <lu-tree-option-picker-advanced [option-comparer]="byId">
