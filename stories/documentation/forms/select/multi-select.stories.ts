@@ -359,6 +359,7 @@ export const WithDisabledOptions = generateStory({
 	[options]="legumes | filterLegumes:clue"
 	(clueChange)="clue = $event"
 	[maxValuesShown]="maxValuesShown"
+	[keepSearchAfterSelection]="keepSearchAfterSelection"
 >
 	<ng-container *luOption="let legume; select: selectRef" [luDisabledOption]="legume.index % 2 === 0">{{ legume.name }}</ng-container>
 </lu-multi-select>`,
@@ -383,6 +384,7 @@ export const ApiV3 = generateStory({
 	withSelectAllDisplayerLabel="sections"
 	[(ngModel)]="selectedAxisSection"
 	[maxValuesShown]="maxValuesShown"
+	[keepSearchAfterSelection]="keepSearchAfterSelection"
 />
 <pr-story-model-display>{{ selectedAxisSection | json }}</pr-story-model-display>`,
 	neededImports: {
@@ -406,6 +408,7 @@ export const ApiV4 = generateStory({
 	apiV4="/organization/structure/api/establishments"
 	[(ngModel)]="selectedEstablishment"
 	[maxValuesShown]="maxValuesShown"
+	[keepSearchAfterSelection]="keepSearchAfterSelection"
 />
 <pr-story-model-display>{{ selectedEstablishment | json }}</pr-story-model-display>`,
 	neededImports: {
@@ -428,6 +431,7 @@ export const Establishment = generateStory({
 	withSelectAllDisplayerLabel="établissements"
 	establishments
 	[(ngModel)]="selectedEstablishment"
+	[keepSearchAfterSelection]="keepSearchAfterSelection"
 />
 <pr-story-model-display>{{ selectedEstablishment | json }}</pr-story-model-display>`,
 	neededImports: {
@@ -450,6 +454,7 @@ export const Department = generateStory({
 	withSelectAllDisplayerLabel="départements"
 	departments
 	[(ngModel)]="selectedDepartements"
+	[keepSearchAfterSelection]="keepSearchAfterSelection"
 />{{ selectedDepartements | json }}`,
 	neededImports: {
 		'@lucca-front/ng/multi-select': ['LuMultiSelectInputComponent', 'LuMultiSelectWithSelectAllDirective'],
@@ -495,7 +500,13 @@ export const User = generateStory({
 	placeholder="Placeholder..."
 	users
 	[(ngModel)]="selectedUsers"
+	[keepSearchAfterSelection]="keepSearchAfterSelection"
 />`,
+	storyPartial: {
+		args: {
+			keepSearchAfterSelection: false,
+		},
+	},
 	neededImports: {
 		'@lucca-front/ng/multi-select': ['LuMultiSelectInputComponent'],
 		'@lucca-front/ng/core-select/user': ['LuCoreSelectUsersDirective'],
@@ -510,8 +521,14 @@ export const UserWithSelectAll = generateStory({
 	users
 	withSelectAll
 	withSelectAllDisplayerLabel="utilisateurs"
+	[keepSearchAfterSelection]="keepSearchAfterSelection"
 	[(ngModel)]="selectedUsers"
 />`,
+	storyPartial: {
+		args: {
+			keepSearchAfterSelection: false,
+		},
+	},
 	neededImports: {
 		'@lucca-front/ng/multi-select': ['LuMultiSelectInputComponent'],
 		'@lucca-front/ng/core-select/user': ['LuCoreSelectUsersDirective'],
@@ -525,8 +542,14 @@ export const FormerUser = generateStory({
 	placeholder="Placeholder..."
 	users
 	enableFormerEmployees
+	[keepSearchAfterSelection]="keepSearchAfterSelection"
 	[(ngModel)]="selectedUsers"
 />`,
+	storyPartial: {
+		args: {
+			keepSearchAfterSelection: false,
+		},
+	},
 	neededImports: {
 		'@lucca-front/ng/multi-select': ['LuMultiSelectInputComponent'],
 		'@lucca-front/ng/core-select/user': ['LuCoreSelectUsersDirective'],
@@ -539,8 +562,14 @@ export const JobQualification = generateStory({
 	template: `<lu-multi-select
 	placeholder="Placeholder..."
 	jobQualifications
+	[keepSearchAfterSelection]="keepSearchAfterSelection"
 	[(ngModel)]="selectedJobQualifications"
 />`,
+	storyPartial: {
+		args: {
+			keepSearchAfterSelection: false,
+		},
+	},
 	neededImports: {
 		'@lucca-front/ng/multi-select': ['LuMultiSelectInputComponent'],
 		'@lucca-front/ng/core-select/establishment': ['LuCoreSelectJobQualificationsDirective'],
@@ -607,6 +636,7 @@ export const GroupBySelectAll = generateStory({
 	[options]="legumes | filterLegumes:clue | sortLegumes:(clue ? ['name', legumeColor] : [legumeColor])"
 	(clueChange)="clue = $event"
 	[maxValuesShown]="maxValuesShown"
+	[keepSearchAfterSelection]="keepSearchAfterSelection"
 >
 	<ng-container *luOptionGroup="let group by legumeColor; select: selectRef">
 		Légume {{colorNameByColor[group.key]}}{{group.options.length > 1 ? 's' : ''}}
@@ -642,6 +672,7 @@ export const testDynamicDisabled = generateStory({
 	[options]="legumes | filterLegumes:clue"
 	(clueChange)="clue = $event"
 	[maxValuesShown]="maxValuesShown"
+	[keepSearchAfterSelection]="keepSearchAfterSelection"
 />`,
 	storyPartial: {
 		args: {
@@ -671,6 +702,7 @@ export const AddOption = generateStory({
 	[addOptionLabel]="'Ajouter ' + (clue || 'un légume')"
 	[addOptionStrategy]="addOptionStrategy"
 	(clueChange)="clue = $event"
+	[keepSearchAfterSelection]="keepSearchAfterSelection"
 	(addOption)="legumes = addLegume($event, legumes); selectedLegumes = selectLegume(legumes[legumes.length - 1], selectedLegumes)"
 />`,
 	neededImports: {
@@ -711,6 +743,7 @@ export const CustomPanelHeader = generateStory({
 	[(ngModel)]="selectedLegume"
 	[options]="legumes | filterLegumes:clue"
 	(clueChange)="clue = $event"
+	[keepSearchAfterSelection]="keepSearchAfterSelection"
 >
 	<h1 *luSelectPanelHeader="selectRef">Custom Header</h1>
 </lu-multi-select>`,
@@ -762,6 +795,7 @@ const meta: Meta<LuMultiSelectInputStoryComponent> = {
 		placeholder: 'Placeholder...',
 		legumes: allLegumes,
 		clearable: true,
+		keepSearchAfterSelection: false,
 		loading: false,
 		maxValuesShown: 500,
 		selectedLegumes: [],
