@@ -139,6 +139,8 @@ export class LuMultiSelectPanelRefFactory {
 		const config = { overlapInput: false, offsetY: 2 };
 		overlayConfig.positionStrategy = this.positionBuilder
 			.flexibleConnectedTo(this.elementRef)
+			.withGrowAfterOpen(true)
+			.withLockedPosition(false)
 			.withViewportMargin(10)
 			.withPositions([
 				this.buildPosition('bottom', 'right', config),
