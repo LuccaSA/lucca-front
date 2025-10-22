@@ -53,7 +53,7 @@
 
 @mixin inline {
 	--components-listing-paddingInlineStart: 0;
-	// --components-listing-item-marginInlineStart: var(--components-listing-inlineStart);
+	--components-listing-item-marginInlineStart: 0;
 	--components-listing-flexDirection: row;
 	--components-listing-item-display: flex;
 }
@@ -71,9 +71,5 @@
 @mixin divider {
 	--components-listing-item-before-content: "";
 	--components-listing-item-marginInlineStart: 0;
-	--components-listing-inlineFirst: var(--pr-t-spacings-150);
+	--components-listing-inlineFirst: calc(var(--pr-t-spacings-100) + var(--pr-t-spacings-25) - var(--commons-divider-width));
 }
-
-// @mixin inlineFirstSpacing {
-// 	--components-listing-inlineFirst: calc(var(--pr-t-spacings-200) + var(--pr-t-spacings-150) + var(--pr-t-spacings-150));
-// }

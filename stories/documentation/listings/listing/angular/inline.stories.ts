@@ -1,6 +1,7 @@
 import { ListingComponent, ListingItemComponent } from '@lucca-front/ng/listing';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { HiddenArgType } from 'stories/helpers/common-arg-types';
+import { IconsList } from 'packages/icons/icons-list';
+import { HiddenArgType, PaletteAllArgType } from 'stories/helpers/common-arg-types';
 import { generateInputs } from 'stories/helpers/stories';
 
 interface ListingBasicStory {
@@ -46,7 +47,7 @@ export default {
 export const Template: StoryObj<ListingComponent & ListingItemComponent & { type: string }> = {
 	argTypes: {
 		type: {
-			options: ['', 'checklist', 'ordered', 'icons'],
+			options: ['', 'checklist', 'icons'],
 			control: {
 				type: 'select',
 			},
@@ -55,13 +56,18 @@ export const Template: StoryObj<ListingComponent & ListingItemComponent & { type
 		checklist: HiddenArgType,
 		icons: HiddenArgType,
 		ordered: HiddenArgType,
-		palette: HiddenArgType,
-		defaultIcon: HiddenArgType,
+		palette: PaletteAllArgType,
+		defaultIcon: {
+			options: IconsList.map((i) => i.icon),
+			control: {
+				type: 'select',
+			},
+		},
 	},
 
 	args: {
 		type: '',
-		defaultIcon: 'heart',
+		defaultIcon: 'book',
 		hideFirstItems: false,
 		divider: false,
 	},

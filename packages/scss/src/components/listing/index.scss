@@ -21,9 +21,6 @@
 
 			&.mod-divider {
 				@include divider;
-				// &:is(.mod-checklist, .mod-icons){
-				// 	@include inlineFirstSpacing;
-				// }
 			}
 		}
 
