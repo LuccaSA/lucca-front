@@ -59,14 +59,18 @@ function getTemplate(args: FilterBarBasicStory): string {
 							<input type="radio" class="segmentedControl-item-input" name="tab" id="tab2" />
 							<label for="tab2" class="segmentedControl-item-action">
 								En cours d’approbation
-								<span class="numericBadge" *ngIf="withNumericBadge">8</span>
+								@if (withNumericBadge) {
+									<span class="numericBadge">8</span>
+								}
 							</label>
 						</li>
 						<li class="segmentedControl-item">
 							<input type="radio" class="segmentedControl-item-input" name="tab" id="tab3" />
 							<label for="tab3" class="segmentedControl-item-action">
 								Approuvés
-								<span class="numericBadge" *ngIf="withNumericBadge">88</span>
+								@if (withNumericBadge) {
+									<span class="numericBadge">88</span>
+								}
 							</label>
 						</li>
 						<li class="segmentedControl-item">

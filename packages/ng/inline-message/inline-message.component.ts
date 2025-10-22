@@ -1,4 +1,3 @@
-import { NgIf } from '@angular/common';
 import { booleanAttribute, ChangeDetectionStrategy, Component, inject, Input, OnChanges, ViewEncapsulation } from '@angular/core';
 import { LuClass, PortalContent, PortalDirective } from '@lucca-front/ng/core';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
@@ -7,7 +6,7 @@ import { InlineMessageState } from './inline-message-state';
 @Component({
 	selector: 'lu-inline-message',
 	standalone: true,
-	imports: [NgIf, PortalDirective, LuTooltipModule],
+	imports: [PortalDirective, LuTooltipModule],
 	providers: [LuClass],
 	templateUrl: './inline-message.component.html',
 	styleUrl: './inline-message.component.scss',

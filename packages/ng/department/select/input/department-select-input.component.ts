@@ -1,6 +1,5 @@
 import { A11yModule } from '@angular/cdk/a11y';
 import { Overlay, OverlayModule } from '@angular/cdk/overlay';
-import { CommonModule } from '@angular/common';
 import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, forwardRef, Input, Renderer2, ViewContainerRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { getIntl } from '@lucca-front/ng/core';
@@ -29,7 +28,6 @@ import { LU_DEPARTMENT_SELECT_INPUT_TRANSLATIONS } from './department-select-inp
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	standalone: true,
 	imports: [
-		CommonModule,
 		OverlayModule,
 		A11yModule,
 		LuInputClearerComponent,

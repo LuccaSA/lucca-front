@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
 	booleanAttribute,
 	ChangeDetectionStrategy,
@@ -32,11 +32,10 @@ import { LuMultiSelectPanelRef } from './panel.model';
 
 @Component({
 	selector: 'lu-multi-select',
-	standalone: true,
-	imports: [CommonModule, LuTooltipModule, ɵLuOptionOutletDirective, FilterPillDisplayerDirective, FilterPillLabelDirective],
 	templateUrl: './select-input.component.html',
 	styleUrl: './select-input.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
+	imports: [AsyncPipe, LuTooltipModule, ɵLuOptionOutletDirective, FilterPillDisplayerDirective, FilterPillLabelDirective],
 	providers: [
 		{
 			provide: NG_VALUE_ACCESSOR,
