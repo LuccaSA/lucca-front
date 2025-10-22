@@ -29,11 +29,12 @@ export default {
 		const checklistParam = args.type === 'checklist' ? ` checklist` : ``;
 		const orderedParam = args.type === 'ordered' ? ` ordered` : ``;
 		const iconsParam = args.type === 'icons' ? ` icons` : ``;
+		const iconParam = args.type === 'icons' ? ` icon="${args.icon}"` : ``;
 		const defaultIconParam = args.type === 'icons' ? ` defaultIcon="${defaultIcon}"` : ``;
 		return {
-			template: `<lu-listing inline${checklistParam}${orderedParam}${iconsParam}${defaultIconParam}${generateInputs(inputs, context.argTypes)}>
+			template: `<lu-listing inline${checklistParam}${orderedParam}${iconsParam}${iconsParam}${defaultIconParam}${generateInputs(inputs, context.argTypes)}>
 	<lu-listing-item><a href="#">lorem ipsum dolor sit amet</a></lu-listing-item>
-	<lu-listing-item><a href="#">lorem ipsum dolor sit amet</a></lu-listing-item>
+	<lu-listing-item${iconParam}><a href="#">lorem ipsum dolor sit amet</a></lu-listing-item>
 	<lu-listing-item><a href="#">lorem ipsum dolor sit amet</a></lu-listing-item>
 	<lu-listing-item><a href="#">lorem ipsum dolor sit amet</a></lu-listing-item>
 	<lu-listing-item><a href="#">lorem ipsum dolor sit amet</a></lu-listing-item>
@@ -63,12 +64,21 @@ export const Template: StoryObj<ListingComponent & ListingItemComponent & { type
 				type: 'select',
 			},
 		},
+		icon: {
+			if: { arg: 'type', eq: 'icons' },
+			options: IconsList.map((i) => i.icon),
+			control: {
+				type: 'select',
+			},
+		},
 	},
 
 	args: {
 		type: '',
-		defaultIcon: 'book',
-		hideFirstItems: false,
 		divider: false,
+		hideFirstItems: false,
+		defaultIcon: 'book',
+		icon: 'foodCroissant',
+		palette: 'none',
 	},
 };

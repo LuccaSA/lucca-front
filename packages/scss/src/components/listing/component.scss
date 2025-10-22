@@ -19,7 +19,7 @@
 			display: var(--components-listing-item-display);
 			align-items: flex-start;
 			gap: var(--pr-t-spacings-100);
-			margin-inline-start: var(--components-listing-item-marginInlineStart);
+			margin-inline-start: 0;
 			// divider pseudo element
 			&::before {
 				content: var(--components-listing-item-before-content);

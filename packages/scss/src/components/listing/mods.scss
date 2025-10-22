@@ -8,7 +8,7 @@
 
 @mixin icons {
 	--components-listing-paddingInlineStart: 0;
-	--components-listing-item-marginInlineStart: 0;
+	// --components-listing-item-marginInlineStart: 0;
 	--components-listing-item-display: flex;
 
 	.listing-item-icon.lucca-icon {
@@ -21,7 +21,7 @@
 }
 
 @mixin checklist {
-	--components-listing-item-marginInlineStart: 0;
+	// --components-listing-item-marginInlineStart: 0;
 	--components-listing-paddingInlineStart: 0;
 	--components-listing-item-display: flex;
 	--components-listing-item-icon-backgroundColor: var(--palettes-100, var(--palettes-neutral-100));
@@ -53,7 +53,7 @@
 
 @mixin inline {
 	--components-listing-paddingInlineStart: 0;
-	--components-listing-item-marginInlineStart: 0;
+	// --components-listing-item-marginInlineStart: 0;
 	--components-listing-flexDirection: row;
 	--components-listing-item-display: flex;
 }
@@ -70,6 +70,6 @@
 
 @mixin divider {
 	--components-listing-item-before-content: "";
-	--components-listing-item-marginInlineStart: 0;
+	// --components-listing-item-marginInlineStart: 0;
 	--components-listing-inlineFirst: calc(var(--pr-t-spacings-100) + var(--pr-t-spacings-25) - var(--commons-divider-width));
 }
