@@ -1,5 +1,6 @@
-import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, inject, ViewEncapsulation } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, forwardRef, inject, ViewEncapsulation } from '@angular/core';
 import { LuDialogRef } from '../model';
+import { LU_DIALOG_INSTANCE } from './dialog.token';
 
 @Component({
 	selector: 'lu-dialog',
@@ -11,6 +12,12 @@ import { LuDialogRef } from '../model';
 	host: {
 		class: 'dialog-inside',
 	},
+	providers: [
+		{
+			provide: LU_DIALOG_INSTANCE,
+			useExisting: forwardRef(() => DialogComponent),
+		},
+	],
 })
 export class DialogComponent implements AfterViewInit {
 	public readonly dialogRef = inject<LuDialogRef>(LuDialogRef);
@@ -31,5 +38,20 @@ export class DialogComponent implements AfterViewInit {
 				this.#htmlElement.querySelector('.luDialog-autofocus .luNativeInput') || this.#htmlElement.querySelector('.luDialog-autofocus') || this.#htmlElement.querySelector('.luNativeInput');
 			focusable?.focus();
 		}
+	}
+
+	// dialogClass = this.dialogRef.cdkRef.overlayRef.getConfig().panelClass;
+
+	updateMod(size: 'XS' | 'S' | '' | 'L' | 'XL' | 'XXL' | 'fitContent' | 'maxContent' | 'fullScreen') {
+		this.dialogRef.cdkRef.overlayRef.removePanelClass('mod-XS');
+		this.dialogRef.cdkRef.overlayRef.removePanelClass('mod-S');
+		this.dialogRef.cdkRef.overlayRef.removePanelClass('mod-L');
+		this.dialogRef.cdkRef.overlayRef.removePanelClass('mod-XL');
+		this.dialogRef.cdkRef.overlayRef.removePanelClass('mod-XXL');
+		this.dialogRef.cdkRef.overlayRef.removePanelClass('mod-fitContent');
+		this.dialogRef.cdkRef.overlayRef.removePanelClass('mod-maxContent');
+		this.dialogRef.cdkRef.overlayRef.removePanelClass('mod-fullScreen');
+
+		this.dialogRef.cdkRef.overlayRef.addPanelClass(`mod-${size}`);
 	}
 }

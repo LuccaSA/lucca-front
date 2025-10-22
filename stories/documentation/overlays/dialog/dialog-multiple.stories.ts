@@ -14,6 +14,7 @@ import {
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { CheckboxInputComponent, TextInputComponent } from '@lucca-front/ng/forms';
 import { IconComponent } from '@lucca-front/ng/icon';
+import { TestComponent } from '@lucca-front/ng/test';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { HiddenArgType } from 'stories/helpers/common-arg-types';
 
@@ -40,6 +41,7 @@ export default {
 				ReactiveFormsModule,
 				IconComponent,
 				DialogHeaderAction,
+				TestComponent,
 			],
 		}),
 	],
@@ -121,13 +123,15 @@ export default {
 	</lu-dialog>
 </ng-template>
 
+@let test = false;
+
 <ng-template #dialogTpl5>
 	<lu-dialog #dialog>
 		<lu-dialog-header>
 			<h1>Dialog 5</h1>
 		</lu-dialog-header>
 		<lu-dialog-content>
-			<button class="open" luButton="outlined">This is the end</button>
+			<lu-test />
 		</lu-dialog-content>
 		<lu-dialog-footer>
 			<div class="footer-actions">
