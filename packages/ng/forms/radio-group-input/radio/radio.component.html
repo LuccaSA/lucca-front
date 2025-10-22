@@ -31,11 +31,11 @@
 	}
 </ng-template>
 @if (framed) {
-	<lu-framed-input [center]="framedCenter" [framedPortal]="framedPortal">
+	<lu-input-framed [center]="framedCenter" [framedPortal]="framedPortal">
 		<ng-container *ngTemplateOutlet="radioContent" />
 		<ng-container illustration><ng-content select="[illustration]" /></ng-container>
 		<ng-container info><ng-content select="[info]" /></ng-container>
-	</lu-framed-input>
+	</lu-input-framed>
 } @else {
 	<ng-container *ngTemplateOutlet="radioContent" />
 }

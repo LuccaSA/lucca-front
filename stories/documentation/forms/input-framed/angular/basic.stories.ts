@@ -1,5 +1,5 @@
 import { FormsModule } from '@angular/forms';
-import { FormFieldComponent, FramedInputComponent } from '@lucca-front/ng/form-field';
+import { FormFieldComponent, InputFramedComponent } from '@lucca-front/ng/form-field';
 import { CheckboxInputComponent, RadioComponent, RadioGroupInputComponent } from '@lucca-front/ng/forms';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { Meta, moduleMetadata } from '@storybook/angular';
@@ -30,7 +30,7 @@ export default {
 				RadioGroupInputComponent,
 				CheckboxInputComponent,
 				FormsModule,
-				FramedInputComponent,
+				InputFramedComponent,
 			],
 		}),
 	],
@@ -62,34 +62,34 @@ export default {
 					</div>
 				</ng-container>`
 			: ``;
-		const templateCheckbox = `<lu-framed-input${column}${panelTemplate}${center}>
+		const templateCheckbox = `<lu-input-framed${column}${panelTemplate}${center}>
 				<lu-form-field label="Option A"${inlineMessage}${tagTemplate}>
 					<lu-checkbox-input [(ngModel)]="exampleA" required />
 				</lu-form-field>
 				${infoTemplate}
 				${illustrationTemplate}
-			</lu-framed-input>
-			<lu-framed-input${column}${panelTemplate}${center}>
+			</lu-input-framed>
+			<lu-input-framed${column}${panelTemplate}${center}>
 				<lu-form-field label="Option B"${inlineMessage}${tagTemplate}>
 					<lu-checkbox-input [(ngModel)]="exampleB" required />
 				</lu-form-field>
 				${infoTemplate}
 				${illustrationTemplate}
-			</lu-framed-input>
-			<lu-framed-input${column}${panelTemplate}${center}>
+			</lu-input-framed>
+			<lu-input-framed${column}${panelTemplate}${center}>
 				<lu-form-field label="Option C"${inlineMessage}${tagTemplate}>
 					<lu-checkbox-input disabled [(ngModel)]="exampleC" required />
 				</lu-form-field>
 				${infoTemplate}
 				${illustrationTemplateDisabled}
-			</lu-framed-input>
-			<lu-framed-input${column}${panelTemplate}${center}>
+			</lu-input-framed>
+			<lu-input-framed${column}${panelTemplate}${center}>
 				<lu-form-field label="Option D"${inlineMessage}${tagTemplate}>
 					<lu-checkbox-input [(ngModel)]="exampleD" required />
 				</lu-form-field>
 				${infoTemplate}
 				${illustrationTemplate}
-			</lu-framed-input>`;
+			</lu-input-framed>`;
 		const template = `<lu-radio${column} value="A"${panelTemplate}${tagTemplate}${inlineMessage}>
 				Option A
 				${infoTemplate}
