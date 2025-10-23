@@ -8,6 +8,8 @@
 @use '@lucca-front/scss/src/commons/utils/reset';
 @use '@lucca-front/scss/src/commons/utils/text';
 @use '@lucca-front/scss/src/commons/utils/a11y';
+@use '@lucca-front/scss/src/commons/utils/media';
+@use '@lucca-front/scss/src/commons/utils/container';
 
 @use '@lucca-front/scss/src/components/title/exports' as title;
 
@@ -485,6 +487,32 @@
 		@if $display != 'none' {
 			.pr-u-onlyPrintDisplay#{transform.capitalize(transform.camelize($display))} {
 				@extend %displayNone;
+			}
+		}
+	}
+
+	@each $breakpoint, $value in config.$breakpoints {
+		.pr-u-displayNoneAtMediaMin#{$breakpoint} {
+			@include media.min($breakpoint) {
+				display: none;
+			}
+		}
+
+		.pr-u-displayNoneAtContainerMin#{$breakpoint} {
+			@include container.min($breakpoint) {
+				display: none;
+			}
+		}
+
+		.pr-u-displayNoneAtMediaMax#{$breakpoint} {
+			@include media.max($breakpoint) {
+				display: none;
+			}
+		}
+
+		.pr-u-displayNoneAtContainerMax#{$breakpoint} {
+			@include container.max($breakpoint) {
+				display: none;
 			}
 		}
 	}
