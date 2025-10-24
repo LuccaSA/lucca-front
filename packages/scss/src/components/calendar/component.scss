@@ -182,6 +182,8 @@
 		.calendar-table-head-row-cell,
 		.calendar-table-body-row-cell {
 			padding: var(--pr-t-spacings-25);
+			block-size: var(--pr-t-spacings-400);
+			box-sizing: content-box;
 		}
 
 		.calendar-table-head-row-cell {
@@ -216,7 +218,7 @@
 			color: var(--components-calendar-table-body-row-cell-actionColor);
 			background-color: var(--components-calendar-table-body-row-cell-actionHighlight);
 			display: var(--components-calendar-table-body-row-cell-actionDisplay);
-			block-size: var(--pr-t-spacings-400);
+			block-size: 100%;
 			text-transform: lowercase;
 			box-shadow:
 				0 0 0 1px var(--components-calendar-table-body-row-cell-actionHighlight),

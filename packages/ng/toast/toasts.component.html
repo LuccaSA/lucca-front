@@ -1,25 +1,31 @@
 <div class="toasts" aria-live="polite" [class.mod-bottom]="bottom">
-	<div *ngFor="let toast of toasts$ | async; trackBy: trackToast" class="toasts-item" [class]="paletteClassByToastType[toast.type]">
-		<span *ngIf="toast.type" class="toast-item-icon lucca-icon" aria-hidden="true" [class]="iconClassByToastType[toast.type]"></span>
-		<div class="toast-item-content">
-			<div *ngIf="toast.title">
-				<strong>{{ toast.title }}</strong>
-			</div>
-			@if (isStringPortalContent(toast.message)) {
-				<p class="toast-item-content-description" [innerHtml]="toast.message"></p>
-			} @else {
-				<ng-container *luPortal="toast.message" />
+	@for (toast of toasts$ | async; track toast.id) {
+		<div class="toasts-item" [class]="paletteClassByToastType[toast.type]">
+			@if (toast.type) {
+				<span class="toast-item-icon lucca-icon" aria-hidden="true" [class]="iconClassByToastType[toast.type]"></span>
 			}
+			<div class="toast-item-content">
+				@if (toast.title) {
+					<div>
+						<strong>{{ toast.title }}</strong>
+					</div>
+				}
+				@if (isStringPortalContent(toast.message)) {
+					<p class="toast-item-content-description" [innerHtml]="toast.message"></p>
+				} @else {
+					<ng-container *luPortal="toast.message" />
+				}
+			</div>
+			<button
+				type="button"
+				class="toasts-item-kill button"
+				(click)="removeToast(toast)"
+				(animationend)="!isOnlyDismissibleManually(toast) && toast.duration > 0 ? removeToast(toast) : null"
+				[style.animation-duration]="!isOnlyDismissibleManually(toast) && toast.duration > 0 ? toast.duration + 'ms' : null"
+			>
+				<span class="lucca-icon icon-signClose" aria-hidden="true"></span>
+				<span class="pr-u-mask">{{ intl.close }}</span>
+			</button>
 		</div>
-		<button
-			type="button"
-			class="toasts-item-kill button"
-			(click)="removeToast(toast)"
-			(animationend)="!isOnlyDismissibleManually(toast) && toast.duration > 0 ? removeToast(toast) : null"
-			[style.animation-duration]="!isOnlyDismissibleManually(toast) && toast.duration > 0 ? toast.duration + 'ms' : null"
-		>
-			<span class="lucca-icon icon-signClose" aria-hidden="true"></span>
-			<span class="pr-u-mask">{{ intl.close }}</span>
-		</button>
-	</div>
+	}
 </div>

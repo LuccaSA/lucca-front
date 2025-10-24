@@ -57,6 +57,9 @@ export default {
 			},
 			description: '[v19.2]',
 		},
+		AI: {
+			description: '[v20.3]',
+		},
 	},
 } as Meta;
 

@@ -58,6 +58,7 @@ export const Template: StoryObj<CalloutPopoverComponent & { items: number }> = {
 		items: 2,
 		buttonLabel: '2',
 		buttonAlt: '2 errors',
+		state: null,
 		heading: 'List title',
 		headingHiddenIfSingleItem: false,
 		state: null,

@@ -1,4 +1,4 @@
-import { AsyncPipe, CommonModule, I18nPluralPipe } from '@angular/common';
+import { AsyncPipe, I18nPluralPipe } from '@angular/common';
 import { provideHttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { provideAnimations } from '@angular/platform-browser/animations';
@@ -748,7 +748,6 @@ const meta: Meta<LuMultiSelectInputStoryComponent> = {
 				LuDisabledOptionDirective,
 				LuMultiSelectDisplayerInputDirective,
 				LuMultiSelectCounterDisplayerComponent,
-				CommonModule,
 				AsyncPipe,
 				TreeSelectDirective,
 				StoryModelDisplayComponent,
