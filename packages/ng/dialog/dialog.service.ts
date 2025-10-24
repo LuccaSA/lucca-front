@@ -31,7 +31,7 @@ export class LuDialogService {
 			role: config.alert ? 'alertdialog' : 'dialog',
 			restoreFocus: true,
 			backdropClass: 'dialog_backdrop',
-			panelClass: ['dialog', `mod-${config.size || 'M'}`, ...modeClasses, ...(config.panelClasses || [])],
+			panelClass: ['dialog', `mod-${config.size || 'M'}`, ...modeClasses, ...(config.panelClasses || []), config.resizeAnimated ? 'mod-resizeAnimated' : ''],
 			ariaLabel: config.ariaLabel,
 			// Handle manually
 			closeOnOverlayDetachments: false,
