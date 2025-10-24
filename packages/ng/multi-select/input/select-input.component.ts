@@ -13,6 +13,8 @@ import {
 	numberAttribute,
 	OnDestroy,
 	OnInit,
+	Signal,
+	signal,
 	TemplateRef,
 	Type,
 	viewChild,
@@ -91,6 +93,8 @@ export class LuMultiSelectInputComponent<T> extends ALuSelectInputComponent<T, T
 		return !valueSignal || valueSignal.length === 0;
 	});
 
+	public valueLength = computed(() => this.valueSignal()?.length ?? 0);
+	public useSingleOptionDisplayer: Signal<boolean> = signal(true);
 	override _value: T[] = [];
 
 	public override get panelRef(): LuMultiSelectPanelRef<T> | undefined {
