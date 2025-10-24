@@ -23,7 +23,7 @@ function getTemplate(args: SkeletonDataTableStory): string {
 				<th class="dataTable-head-row-cell">Dolor</th>
 			</tr>
 		</thead>
-		<lu-skeleton-data-table dataTableBodyOnly [cols]="3" />
+		<lu-skeleton-data-table dataTableBodyOnly [cols]="3" [rows]="8" />
 	</table>
 </div>`;
 }
