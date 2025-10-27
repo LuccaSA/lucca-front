@@ -208,6 +208,7 @@ export default {
 			<td luDataTableCell${alignAttr}${editableAttr}>${editableContent}</td>
 		</tr>
 	</tbody>${tfootTpl}
+	<ng-container dataTablePagination>test</ng-container>
 </lu-data-table>`,
 		};
 	},
