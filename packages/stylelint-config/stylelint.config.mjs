@@ -166,10 +166,17 @@ export default {
 		'value-keyword-case': null,
 
 		// Formatting with @stylistic
+		// SEE: https://github.com/stylelint-stylistic/stylelint-stylistic/blob/main/docs/user-guide/rules.md
 		// ============================================================================================
 
 		'@stylistic/indentation': 'tab',
 		'@stylistic/max-line-length': null,
+		'@stylistic/named-grid-areas-alignment': [
+			true,
+			{
+				alignQuotes: true,
+			},
+		],
 
 		'@stylistic/block-closing-brace-empty-line-before': null,
 		'@stylistic/block-closing-brace-newline-after': null,
