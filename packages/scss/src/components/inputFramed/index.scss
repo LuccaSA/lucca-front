@@ -43,10 +43,6 @@
 	&.mod-center {
 		@include center;
 	}
-
-	&.mod-S {
-		@include S;
-	}
 }
 
 .inputFramedWrapper {
