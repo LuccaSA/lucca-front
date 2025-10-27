@@ -1,6 +1,7 @@
 @use '@lucca-front/scss/src/commons/utils/form';
 @use '@lucca-front/scss/src/components/formLabel/exports' as formLabel;
 @use '@lucca-front/scss/src/components/inlineMessage/exports' as inlineMessage;
+@use '@lucca-front/scss/src/components/title/exports' as title;
 @use '@lucca-front/scss/src/commons/utils/namespace';
 
 @mixin component($atRoot: namespace.$defaultAtRoot) {
@@ -41,8 +42,8 @@
 		}
 
 		.form-header-title {
-			margin: 0;
-			padding: 0;
+			@include title.component;
+			@include title.h1;
 		}
 
 		.form-header-mandatory {
