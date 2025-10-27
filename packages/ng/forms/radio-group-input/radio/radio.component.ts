@@ -11,11 +11,7 @@ let nextId = 0;
 @Component({
 	selector: 'lu-radio',
 	standalone: true,
-<<<<<<< HEAD
-	imports: [ReactiveFormsModule, InlineMessageComponent, NgIf, NgTemplateOutlet, InputDirective, InputFramedComponent],
-=======
-	imports: [ReactiveFormsModule, InlineMessageComponent, NgTemplateOutlet, InputDirective, FramedInputComponent],
->>>>>>> 528359267 (refactor: control flow migration (#3948))
+	imports: [ReactiveFormsModule, InlineMessageComponent, NgTemplateOutlet, InputDirective, InputFramedComponent],
 	templateUrl: './radio.component.html',
 	styleUrl: './radio.component.scss',
 	encapsulation: ViewEncapsulation.None,
