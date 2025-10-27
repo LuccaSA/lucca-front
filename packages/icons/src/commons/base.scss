@@ -5,6 +5,7 @@
 
 @if config.$isNamespaced {
 	@layer base {
+		// stylelint-disable-next-line nesting-selector-no-missing-scoping-root -- & references the selector calling this mixin.
 		& {
 			-moz-osx-font-smoothing: grayscale;
 
