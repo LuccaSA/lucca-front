@@ -28,7 +28,7 @@ import { BehaviorSubject } from 'rxjs';
 import { FormFieldSize } from './form-field-size';
 import { FORM_FIELD_INSTANCE } from './form-field.token';
 import { LU_FORM_FIELD_TRANSLATIONS } from './form-field.translate';
-import { FRAMED_INPUT_INSTANCE } from './framed-input/framed-input-token';
+import { INPUT_FRAMED_INSTANCE } from './input-framed/input-framed.token';
 import { InputDirective } from './input.directive';
 
 let nextId = 0;
@@ -60,7 +60,7 @@ export class FormFieldComponent implements OnDestroy, DoCheck {
 	#injector = inject(Injector);
 	#renderer = inject(Renderer2);
 
-	framed = inject(FRAMED_INPUT_INSTANCE, { optional: true }) !== null;
+	framed = inject(INPUT_FRAMED_INSTANCE, { optional: true }) !== null;
 
 	formFieldChildren = contentChildren(FormFieldComponent, { descendants: true });
 
