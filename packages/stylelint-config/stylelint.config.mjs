@@ -8,6 +8,14 @@ export default {
 	extends: ['stylelint-config-standard-scss', 'stylelint-config-prettier-scss'],
 	overrides: [
 		{
+			files: ['**/*.scss'],
+			rules: {
+				// Disable for now because of bugs with SCSS files.
+				// SEE https://github.com/stylelint-scss/stylelint-config-standard-scss/issues/252
+				'no-invalid-position-declaration': null,
+			},
+		},
+		{
 			// Allow common component files to be empty.
 			files: ['**/vars.scss'],
 			rules: {
