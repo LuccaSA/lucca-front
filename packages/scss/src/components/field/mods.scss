@@ -14,8 +14,9 @@
 	flex-direction: row;
 	margin-block-end: var(--pr-t-spacings-200);
 	inline-size: calc(
-		var(--components-field-sizes-default) + var(--components-field-compact-label-right-margin) +
-			var(--components-field-compact-label-sizes-default)
+		var(--components-field-sizes-default)
+		+ var(--components-field-compact-label-right-margin)
+		+ var(--components-field-compact-label-sizes-default)
 	);
 
 	.textfield-label,

@@ -36,21 +36,21 @@
 				var(--component-notchbox-notch-gradient7-anchor) / var(--component-notchbox-notch-gradient7-ref1)
 				var(--component-notchbox-notch-gradient7-ref2),
 			radial-gradient(
-					var(--component-notchbox-notch-radius-inner) var(--component-notchbox-notch-radius-inner) at
-						var(--component-notchbox-notch-gradient8-anchor),
-					transparent calc(var(--component-notchbox-notch-radius-inner) - var(--smooth) * 2),
-					var(--component-notchbox-box-background-color) var(--component-notchbox-notch-radius-inner)
-				)
-				var(--component-notchbox-notch-gradient8-x) var(--component-notchbox-notch-gradient8-y) /
-				var(--component-notchbox-notch-radius-inner) calc(var(--component-notchbox-notch-radius-inner) + var(--smooth)),
+				var(--component-notchbox-notch-radius-inner) var(--component-notchbox-notch-radius-inner)
+				at var(--component-notchbox-notch-gradient8-anchor),
+				transparent calc(var(--component-notchbox-notch-radius-inner) - var(--smooth) * 2),
+				var(--component-notchbox-box-background-color) var(--component-notchbox-notch-radius-inner)
+			)
+				var(--component-notchbox-notch-gradient8-x) var(--component-notchbox-notch-gradient8-y)
+				/ var(--component-notchbox-notch-radius-inner) calc(var(--component-notchbox-notch-radius-inner) + var(--smooth)),
 			radial-gradient(
-					var(--component-notchbox-notch-radius-inner) var(--component-notchbox-notch-radius-inner) at
-						var(--component-notchbox-notch-gradient9-anchor),
-					transparent calc(var(--component-notchbox-notch-radius-inner) - var(--smooth) * 2),
-					var(--component-notchbox-box-background-color) var(--component-notchbox-notch-radius-inner)
-				)
-				var(--component-notchbox-notch-gradient9-x) var(--component-notchbox-notch-gradient9-y) /
-				var(--component-notchbox-notch-radius-inner) calc(var(--component-notchbox-notch-radius-inner) + var(--smooth));
+				var(--component-notchbox-notch-radius-inner) var(--component-notchbox-notch-radius-inner)
+				at var(--component-notchbox-notch-gradient9-anchor),
+				transparent calc(var(--component-notchbox-notch-radius-inner) - var(--smooth) * 2),
+				var(--component-notchbox-box-background-color) var(--component-notchbox-notch-radius-inner)
+			)
+				var(--component-notchbox-notch-gradient9-x) var(--component-notchbox-notch-gradient9-y)
+				/ var(--component-notchbox-notch-radius-inner) calc(var(--component-notchbox-notch-radius-inner) + var(--smooth));
 		background-repeat: no-repeat;
 		filter: drop-shadow(var(--component-notchbox-box-shadow));
 	}

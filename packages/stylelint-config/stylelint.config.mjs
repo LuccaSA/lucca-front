@@ -45,6 +45,7 @@ export default {
 				message: (variable) => `Expected "${variable}" to match pattern $foo(-bar(Baz)*)*`,
 			},
 		],
+		'scss/operator-no-newline-before': null,
 		'scss/percent-placeholder-pattern': [
 			'^([a-z][a-zA-Z0-9]*)((-(([a-z0-9]+[a-zA-Z0-9]*)|([A-Z]+))+)*)$',
 			{

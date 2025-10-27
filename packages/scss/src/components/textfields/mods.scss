@@ -339,8 +339,9 @@
 
 @mixin compactSize($size) {
 	inline-size: calc(
-		var(--components-textfield-sizes-#{$size}) + var(--components-textfield-compact-label-right-margin) +
-			var(--components-textfield-compact-label-sizes-default)
+		var(--components-textfield-sizes-#{$size})
+		+ var(--components-textfield-compact-label-right-margin)
+		+ var(--components-textfield-compact-label-sizes-default)
 	);
 
 	.textfield-options {
