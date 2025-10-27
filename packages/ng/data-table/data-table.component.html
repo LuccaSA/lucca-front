@@ -1,4 +1,6 @@
 <table [class]="classMods()" #tableRef>
 	<ng-content />
 </table>
-<ng-content select="[dataTablePagination]" />
+<div class="dataTableWrapper-pagination">
+	<ng-content select="[dataTablePagination]" />
+</div>

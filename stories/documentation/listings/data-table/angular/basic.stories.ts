@@ -12,6 +12,7 @@ import {
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { TextInputComponent } from '@lucca-front/ng/forms';
 import { IconComponent } from '@lucca-front/ng/icon';
+import { PaginationComponent } from '@lucca-front/ng/pagination';
 
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 
@@ -85,6 +86,7 @@ export default {
 				FormsModule,
 				ButtonComponent,
 				IconComponent,
+				PaginationComponent,
 			],
 		}),
 	],
@@ -115,6 +117,7 @@ export default {
 			nested,
 			selectedLabel,
 			selectedLabelHead,
+			pagination,
 			...inputArgs
 		} = args;
 
@@ -160,6 +163,10 @@ export default {
 		for (let i = 1; i <= lines - 2; i++) {
 			linesContent = linesContent + line;
 		}
+		const paginationTpl = pagination
+			? `
+	<lu-pagination dataTablePagination from="1" to="20" itemsCount="27" isFirstPage />`
+			: ``;
 
 		const actionsContent = actions
 			? `
@@ -207,8 +214,7 @@ export default {
 			<th luDataTableCell>${textHeader}</th>${colsContent}
 			<td luDataTableCell${alignAttr}${editableAttr}>${editableContent}</td>
 		</tr>
-	</tbody>${tfootTpl}
-	<ng-container dataTablePagination>test</ng-container>
+	</tbody>${tfootTpl}${paginationTpl}
 </lu-data-table>`,
 		};
 	},
@@ -240,5 +246,6 @@ export const Basic: StoryObj = {
 		editable: false,
 		actions: false,
 		nested: false,
+		pagination: false,
 	},
 };
