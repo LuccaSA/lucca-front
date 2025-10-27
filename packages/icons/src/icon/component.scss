@@ -17,7 +17,7 @@ $defaultAtRoot: config.$isNamespaced and 'with: rule' or 'without: rule';
 	text-transform: none;
 	vertical-align: text-bottom;
 	white-space: nowrap;
-	word-wrap: normal;
+	overflow-wrap: normal;
 
 	&::before {
 		content: var(--icon-content) / '';
