@@ -43,14 +43,10 @@
 			@if ($title == '5') {
 				line-height: 1.25rem;
 				min-block-size: 1.25rem;
-			}
-
-			@else if ($title == '6') {
+			} @else if ($title == '6') {
 				line-height: 1rem;
 				min-block-size: 1rem;
-			}
-
-			@else {
+			} @else {
 				line-height: var(--pr-t-font-heading-#{$title}-lineHeight);
 				min-block-size: var(--pr-t-font-heading-#{$title}-lineHeight);
 			}
@@ -76,14 +72,10 @@
 				@if ($title == '5') {
 					line-height: 1.25rem;
 					min-block-size: 1.25rem;
-				}
-
-				@else if ($title == '6') {
+				} @else if ($title == '6') {
 					line-height: 1rem;
 					min-block-size: 1rem;
-				}
-
-				@else {
+				} @else {
 					line-height: var(--pr-t-font-heading-#{$title}-lineHeight);
 					min-block-size: var(--pr-t-font-heading-#{$title}-lineHeight);
 				}
