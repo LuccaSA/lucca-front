@@ -170,6 +170,12 @@ export default {
 		// SEE: https://github.com/stylelint-stylistic/stylelint-stylistic/blob/main/docs/user-guide/rules.md
 		// ============================================================================================
 
+		'@stylistic/block-closing-brace-newline-after': [
+			'always-multi-line',
+			{
+				ignoreAtRules: ['if', 'else'],
+			},
+		],
 		'@stylistic/indentation': 'tab',
 		'@stylistic/max-line-length': null,
 		'@stylistic/named-grid-areas-alignment': [
@@ -179,10 +185,6 @@ export default {
 			},
 		],
 
-		'@stylistic/block-closing-brace-empty-line-before': null,
-		'@stylistic/block-closing-brace-newline-after': null,
-		'@stylistic/block-closing-brace-newline-before': null,
-		'@stylistic/block-opening-brace-space-before': null,
 		'@stylistic/color-hex-case': null,
 		'@stylistic/declaration-block-semicolon-space-before': null,
 		'@stylistic/declaration-block-trailing-semicolon': null,

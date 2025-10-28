@@ -63,7 +63,7 @@
 	&:hover {
 		--components-button-boxShadow: var(--pr-t-elevation-shadow-button), 0 0 0 var(--commons-divider-width) var(--palettes-300, var(--palettes-neutral-300));
 		--components-button-color: var(--palettes-700, var(--palettes-neutral-700));
-		--components-button-backgroundColor: var(--palettes-50, var(--palettes-neutral-50))
+		--components-button-backgroundColor: var(--palettes-50, var(--palettes-neutral-50));
 	}
 
 	&:active {

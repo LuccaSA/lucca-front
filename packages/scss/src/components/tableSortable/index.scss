@@ -32,7 +32,7 @@
 		}
 
 		&[aria-sort='ascending'] {
-			.tableSortable{
+			.tableSortable {
 				@include sortAscending;
 			}
 		}
