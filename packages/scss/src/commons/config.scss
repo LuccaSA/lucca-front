@@ -109,7 +109,6 @@ $borderRadiusTokens: (
 	'input': var(--pr-t-border-radius-default),
 );
 
-
 $product: 'brand' !default;
 $palettesShades: text, 0, 25, 50, 100, 200, 300, 400, 500, 600, 700, 800, 900; // text is deprecated
 $palettesStates: 'critical', 'error', 'warning', 'success', 'successContrasted', 'warningContrasted';

@@ -19,6 +19,17 @@
 	}
 
 	@at-root ($atRoot) {
+		.inputFramed-header-label.formLabel {
+			position: static;
+			font-weight: var(--pr-t-font-fontWeight-semibold);
+
+			&::after {
+				content: '';
+				position: absolute;
+				inset: calc(var(--pr-t-spacings-50) * -1);
+			}
+		}
+
 		.inputFramed-header-field {
 			flex: 1;
 

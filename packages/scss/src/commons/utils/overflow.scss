@@ -9,7 +9,7 @@
 
 @mixin scrollblock($suffix: '') {
 	overflow: hidden #{$suffix};
-	
+
 	&,
 	body {
 		touch-action: none #{$suffix};
