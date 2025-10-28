@@ -1,5 +1,4 @@
 import { Meta } from '@storybook/angular';
-import { cleanupTemplate } from 'stories/helpers/stories';
 
 interface InputFramedTagStory {}
 
@@ -8,7 +7,7 @@ export default {
 	argTypes: {},
 	render: (args: InputFramedTagStory) => {
 		return {
-			template: cleanupTemplate(`<div class="inputFramedWrapper">
+			template: `<div class="inputFramedWrapper">
 	<div class="inputFramed">
 		<div class="inputFramed-header">
 			<div class="form-field inputFramed-header-field">
@@ -69,7 +68,7 @@ export default {
 			</div>
 		</div>
 	</div>
-</div>`),
+</div>`,
 		};
 	},
 } as Meta;

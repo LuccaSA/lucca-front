@@ -3,7 +3,7 @@
 @mixin component($atRoot: namespace.$defaultAtRoot) {
 	position: relative;
 	overflow: hidden;
-	padding: var(--pr-t-spacings-50);
+	padding: var(--components-inputFramed-padding);
 	border: solid 1px var(--components-inputFramed-borderColor);
 	border-radius: var(--pr-t-border-radius-default);
 	background-color: var(--palettes-neutral-0);
@@ -16,8 +16,7 @@
 	@at-root ($atRoot) {
 		.inputFramed-header-label.formLabel {
 			position: static;
-			font-weight: var(--pr-t-font-fontWeight-semibold);
-
+			font-weight: var(--components-inputFramed-header-label-fontWeight);
 
 			&::after {
 				content: '';
@@ -44,7 +43,7 @@
 		}
 
 		.inputFramed-header {
-			padding: var(--components-inputFramed-padding);
+			padding: var(--components-inputFramed-header-padding);
 			border-radius: var(--pr-t-border-radius-50);
 			background-color: var(--components-inputFramed-header-backgroundColor);
 			transition-property: background-color;
@@ -68,8 +67,8 @@
 		.inputFramed-header-info {
 			flex-basis: 100%;
 			border-block-start: 1px solid var(--components-inputFramed-header-info-borderColor);
-			margin-block-start: var(--pr-t-spacings-100);
-			padding-block-start: var(--pr-t-spacings-200);
+			padding-block-start: var(--components-inputFramed-header-info-paddingBlockStart);
+			margin-block-start: var(--components-inputFramed-header-info-marginBlockStart);
 			color: var(--components-inputFramed-header-info-color);
 
 			&:empty {
@@ -79,8 +78,8 @@
 
 		.inputFramed-content {
 			display: var(--components-inputFramed-content-display);
-			padding: var(--components-inputFramed-padding);
-			margin-block-start: var(--pr-t-spacings-50);
+			padding: var(--components-inputFramed-content-padding);
+			margin-block-start: var(--components-inputFramed-content-marginBlockStart);
 		}
 	}
 }
