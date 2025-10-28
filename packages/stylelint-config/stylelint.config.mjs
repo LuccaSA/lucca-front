@@ -169,6 +169,8 @@ export default {
 		// Formatting with @stylistic
 		// ============================================================================================
 
+		'@stylistic/max-line-length': null,
+
 		'@stylistic/block-closing-brace-empty-line-before': null,
 		'@stylistic/block-closing-brace-newline-after': null,
 		'@stylistic/block-closing-brace-newline-before': null,
@@ -181,11 +183,6 @@ export default {
 		'@stylistic/declaration-colon-space-before': null,
 		'@stylistic/function-comma-space-after': null,
 		'@stylistic/indentation': null,
-		'@stylistic/max-empty-lines': null,
-		'@stylistic/max-line-length': null,
-		'@stylistic/no-empty-first-line': null,
-		'@stylistic/no-eol-whitespace': null,
-		'@stylistic/no-missing-end-of-source-newline': null,
 		'@stylistic/number-leading-zero': null,
 		'@stylistic/selector-list-comma-newline-after': null,
 		'@stylistic/string-quotes': null,
