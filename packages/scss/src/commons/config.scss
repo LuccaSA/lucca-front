@@ -594,13 +594,10 @@ $elevation: (
 		'backdrop': color-mix(in srgb, var(--palettes-neutral-400) 40%, transparent),
 	),
 	shadow: (
-		'raised':
-			'0 0 0 1px color-mix(in srgb, var(--palettes-neutral-400) 8%, transparent), 0 1px 2px color-mix(in srgb, var(--palettes-neutral-400) 40%, transparent), 0 2px 4px color-mix(in srgb, var(--palettes-neutral-400) 20%, transparent)',
+		'raised': '0 0 0 1px color-mix(in srgb, var(--palettes-neutral-400) 8%, transparent), 0 1px 2px color-mix(in srgb, var(--palettes-neutral-400) 40%, transparent), 0 2px 4px color-mix(in srgb, var(--palettes-neutral-400) 20%, transparent)',
 		'button': '0 2px 2px 0 color-mix(in srgb, var(--palettes-neutral-900) 4%, transparent)',
-		'overflow':
-			'0 0 0 1px color-mix(in srgb, var(--palettes-neutral-400) 8%, transparent), 0 0 4px color-mix(in srgb, var(--palettes-neutral-400) 32%, transparent), 0 0 8px color-mix(in srgb, var(--palettes-neutral-400) 24%, transparent)',
-		'overlay':
-			'0 0 0 1px color-mix(in srgb, var(--palettes-neutral-400) 8%, transparent), 0 4px 8px color-mix(in srgb, var(--palettes-neutral-400) 24%, transparent), 0 4px 12px 2px color-mix(in srgb, var(--palettes-neutral-400) 8%, transparent)',
+		'overflow': '0 0 0 1px color-mix(in srgb, var(--palettes-neutral-400) 8%, transparent), 0 0 4px color-mix(in srgb, var(--palettes-neutral-400) 32%, transparent), 0 0 8px color-mix(in srgb, var(--palettes-neutral-400) 24%, transparent)',
+		'overlay': '0 0 0 1px color-mix(in srgb, var(--palettes-neutral-400) 8%, transparent), 0 4px 8px color-mix(in srgb, var(--palettes-neutral-400) 24%, transparent), 0 4px 12px 2px color-mix(in srgb, var(--palettes-neutral-400) 8%, transparent)',
 	),
 );
 

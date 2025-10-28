@@ -166,7 +166,7 @@
 
 			&::before {
 				content: counter(timeline) / '';
-        font-size: var(--pr-t-font-body-XS-fontSize);
+				font-size: var(--pr-t-font-body-XS-fontSize);
 				line-height: 1;
 			}
 		}

@@ -4,7 +4,7 @@
 
 	&::-webkit-scrollbar {
 		display: none #{$suffix};
-  }
+	}
 }
 
 @mixin scrollblock($suffix: '') {

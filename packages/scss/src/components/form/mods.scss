@@ -50,11 +50,13 @@
 		}
 
 		&:has(
-				.checkboxField-input:checked,
-				.checkboxField-input.is-checked,
-				.checkboxField-input[aria-checked='mixed'],
-				.checkboxField-input.is-mixed
-			) {
+			// stylelint-disable @stylistic/indentation
+			.checkboxField-input:checked,
+			.checkboxField-input.is-checked,
+			.checkboxField-input[aria-checked='mixed'],
+			.checkboxField-input.is-mixed
+			// stylelint-enable
+		) {
 			background-color: var(--palettes-product-50);
 
 			&:hover {
@@ -68,11 +70,13 @@
 			}
 
 			&:has(
-					.checkboxField-input:checked,
-					.checkboxField-input.is-checked,
-					.checkboxField-input[aria-checked='mixed'],
-					.checkboxField-input.is-mixed
-				) {
+				// stylelint-disable @stylistic/indentation
+				.checkboxField-input:checked,
+				.checkboxField-input.is-checked,
+				.checkboxField-input[aria-checked='mixed'],
+				.checkboxField-input.is-mixed
+				// stylelint-enable
+			) {
 				background-color: var(--palettes-error-50);
 
 				&:hover {
