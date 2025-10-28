@@ -19,9 +19,7 @@
 		@include button.block;
 		@include button.ghost;
 
-		& {
-			justify-content: left;
-		}
+		justify-content: left;
 
 		&.is-highlighted {
 			--components-button-color: var(--palettes-700, var(--palettes-neutral-700));
