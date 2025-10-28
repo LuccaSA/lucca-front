@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { codeComponent } from '@lucca-front/ng/code';
 import { Meta, StoryFn } from '@storybook/angular';
-//import { SampleComponent } from '@lucca-front/ng/sample';
 
 @Component({
 	standalone: true,
