@@ -186,6 +186,5 @@ export default {
 		'@stylistic/string-quotes': 'single',
 
 		'@stylistic/color-hex-case': null,
-		'@stylistic/function-comma-space-after': null,
 	},
 };
