@@ -286,7 +286,8 @@
 		@include button.onlyIconS;
 
 		// .mod-delete is deprecated
-		&.mod-critical, &.mod-delete {
+		&.mod-critical,
+		&.mod-delete {
 			// For specificity purpose. Could be removed if we decide to remove automatic CSS imports in Angular components
 			@include button.critical;
 		}

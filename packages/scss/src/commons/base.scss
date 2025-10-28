@@ -100,7 +100,8 @@
 			}
 		}
 
-		button, button[type] {
+		button,
+		button[type] {
 			text-rendering: inherit;
 
 			&:focus-visible {

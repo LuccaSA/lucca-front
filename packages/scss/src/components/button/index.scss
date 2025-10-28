@@ -109,7 +109,8 @@
 		}
 
 		// .mod-delete is deprecated
-		&.mod-critical, &.mod-delete {
+		&.mod-critical,
+		&.mod-delete {
 			@include critical;
 
 			// .mod-link is deprecated

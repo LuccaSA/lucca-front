@@ -190,7 +190,6 @@ export default {
 		'@stylistic/declaration-colon-space-before': null,
 		'@stylistic/function-comma-space-after': null,
 		'@stylistic/number-leading-zero': null,
-		'@stylistic/selector-list-comma-newline-after': null,
 		'@stylistic/string-quotes': null,
 		'@stylistic/value-list-comma-newline-after': null,
 	},

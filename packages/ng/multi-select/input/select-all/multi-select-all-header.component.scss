@@ -26,14 +26,16 @@
 	}
 
 	@layer mods {
-		&:hover, :host-context(.is-highlighted) & {
+		&:hover,
+		:host-context(.is-highlighted) & {
 			background-color: var(--palettes-neutral-50);
 		}
 
 		&:has(.checkboxField-input:checked) {
 			background-color: var(--palettes-50, var(--palettes-product-50));
 
-			&:hover, :host-context(.is-highlighted) & {
+			&:hover,
+			:host-context(.is-highlighted) & {
 				background-color: var(--palettes-100, var(--palettes-product-100));
 			}
 		}
