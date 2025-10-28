@@ -43,9 +43,11 @@
 		border-block-end: var(--components-indexTable-row-stack-border-bottom) solid transparent;
 
 		// stack apparence
-		background-image: var(--components-indexTable-row-stack2-background-image, none),
+		background-image:
+			var(--components-indexTable-row-stack2-background-image, none),
 			var(--components-indexTable-row-stack3-background-image, none);
-		background-position: var(--components-indexTable-row-stack2-background-position, 0 0),
+		background-position:
+			var(--components-indexTable-row-stack2-background-position, 0 0),
 			var(--components-indexTable-row-stack3-background-position, 0 0);
 		background-repeat: no-repeat, no-repeat;
 		transition-property: background-image, background-position;
@@ -53,9 +55,11 @@
 
 		// apparence of the first cell with a card apparence.
 		// we do this because there migh be one or two cells before without background and containing a checkbox
-		--components-indexTable-row-stack2-background-position: left calc(-2px + var(--components-indexTable-cell-inset-x-left, 0px))
+		--components-indexTable-row-stack2-background-position:
+			left calc(-2px + var(--components-indexTable-cell-inset-x-left, 0px))
 			bottom -10px;
-		--components-indexTable-row-stack3-background-position: left calc(1px + var(--components-indexTable-cell-inset-x-left, 0px))
+		--components-indexTable-row-stack3-background-position:
+			left calc(1px + var(--components-indexTable-cell-inset-x-left, 0px))
 			bottom -14px;
 
 		// apparence of the nexts cells
@@ -66,9 +70,11 @@
 
 		// apparence of the last cell with a card apparence
 		&:last-child {
-			--components-indexTable-row-stack2-background-position: right calc(-2px + var(--components-indexTable-cell-inset-x-right, 0px))
+			--components-indexTable-row-stack2-background-position:
+				right calc(-2px + var(--components-indexTable-cell-inset-x-right, 0px))
 				bottom -10px;
-			--components-indexTable-row-stack3-background-position: right calc(1px + var(--components-indexTable-cell-inset-x-right, 0px))
+			--components-indexTable-row-stack3-background-position:
+				right calc(1px + var(--components-indexTable-cell-inset-x-right, 0px))
 				bottom -14px;
 		}
 	}
@@ -204,10 +210,9 @@
 
 @mixin selectableResponsiveCardList {
 	.indexTable-body-row {
-		grid-template-columns: var(--components-indexTable-row-cell-transparent-width) var(
-			--components-indexTable-row-responsive-grid-template-columns,
-			1fr
-		);
+		grid-template-columns:
+			var(--components-indexTable-row-cell-transparent-width)
+			var(--components-indexTable-row-responsive-grid-template-columns, 1fr);
 	}
 
 	.indexTable-body-row-transparentCell {
@@ -246,9 +251,11 @@
 			position: absolute;
 			inset-block-start: 0;
 			inset-block-end: calc((var(--components-indexTable-row-spacing-responsive) + var(--components-indexTable-stack3-row-spacing)) * -1);
-			background-image: var(--components-indexTable-row-stack2-background-image, none),
+			background-image:
+				var(--components-indexTable-row-stack2-background-image, none),
 				var(--components-indexTable-row-stack3-background-image, none);
-			background-position: var(--components-indexTable-row-stack2-background-position, 0 0),
+			background-position:
+				var(--components-indexTable-row-stack2-background-position, 0 0),
 				var(--components-indexTable-row-stack3-background-position, 0 0);
 			background-repeat: no-repeat, no-repeat;
 			transition-property: background-image, background-position;

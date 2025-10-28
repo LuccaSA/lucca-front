@@ -148,11 +148,12 @@
 			block-size: unset;
 			inline-size: 2px;
 			border: none;
-			background: linear-gradient(
-				180deg,
-				var(--palettes-700, var(--palettes-product-700)) var(--progress),
-				var(--palettes-neutral-200) var(--progress)
-			);
+			background:
+				linear-gradient(
+					180deg,
+					var(--palettes-700, var(--palettes-product-700)) var(--progress),
+					var(--palettes-neutral-200) var(--progress)
+				);
 		}
 	}
 }
@@ -224,16 +225,17 @@
 	.timeline-step {
 		&:nth-last-child(2)::after {
 			background-color: transparent;
-			background-image: linear-gradient(
-				90deg,
-				transparent 25%,
-				var(--palettes-neutral-200) 25%,
-				var(--palettes-neutral-200) 50%,
-				transparent 50%,
-				transparent 75%,
-				var(--palettes-neutral-200) 75%,
-				var(--palettes-neutral-200) 100%
-			);
+			background-image:
+				linear-gradient(
+					90deg,
+					transparent 25%,
+					var(--palettes-neutral-200) 25%,
+					var(--palettes-neutral-200) 50%,
+					transparent 50%,
+					transparent 75%,
+					var(--palettes-neutral-200) 75%,
+					var(--palettes-neutral-200) 100%
+				);
 			background-size: var(--pr-t-spacings-100) var(--pr-t-spacings-100);
 		}
 
@@ -279,16 +281,17 @@
 	.timeline-step {
 		&:nth-last-child(2)::after {
 			background-color: transparent;
-			background-image: linear-gradient(
-				0deg,
-				transparent 25%,
-				var(--palettes-neutral-200) 25%,
-				var(--palettes-neutral-200) 50%,
-				transparent 50%,
-				transparent 75%,
-				var(--palettes-neutral-200) 75%,
-				var(--palettes-neutral-200) 100%
-			);
+			background-image:
+				linear-gradient(
+					0deg,
+					transparent 25%,
+					var(--palettes-neutral-200) 25%,
+					var(--palettes-neutral-200) 50%,
+					transparent 50%,
+					transparent 75%,
+					var(--palettes-neutral-200) 75%,
+					var(--palettes-neutral-200) 100%
+				);
 			background-size: var(--pr-t-spacings-100) var(--pr-t-spacings-100);
 		}
 	}
@@ -373,11 +376,12 @@
 		&::after {
 			border: none;
 			block-size: 2px;
-			background: linear-gradient(
-				90deg,
-				var(--palettes-700, var(--palettes-product-700)) var(--progress),
-				var(--palettes-neutral-200) var(--progress)
-			);
+			background:
+				linear-gradient(
+					90deg,
+					var(--palettes-700, var(--palettes-product-700)) var(--progress),
+					var(--palettes-neutral-200) var(--progress)
+				);
 		}
 	}
 }

@@ -14,11 +14,12 @@
 			flex-direction: column;
 			z-index: 1;
 			line-height: var(--pr-t-font-body-M-lineHeight);
-			background-image: linear-gradient(
-				to right,
-				transparent,
-				var(--components-readMore-link-backgroudColor) calc(var(--components-readMore-link-paddingInlineStart) - var(--pr-t-spacings-100))
-			);
+			background-image:
+				linear-gradient(
+					to right,
+					transparent,
+					var(--components-readMore-link-backgroudColor) calc(var(--components-readMore-link-paddingInlineStart) - var(--pr-t-spacings-100))
+				);
 			padding-inline-start: var(--components-readMore-link-paddingInlineStart);
 			font-weight: var(--pr-t-font-fontWeight-semibold);
 			text-decoration: none;

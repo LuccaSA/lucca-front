@@ -12,9 +12,12 @@
 		}
 
 		&::after {
-			inset-inline-start: calc(
-				var(--components-switch-width) - var(--components-switch-slider-size) - var(--components-switch-handler-offset)
-			);
+			inset-inline-start:
+				calc(
+					var(--components-switch-width)
+					- var(--components-switch-slider-size)
+					- var(--components-switch-handler-offset)
+				);
 		}
 	}
 }

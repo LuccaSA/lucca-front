@@ -101,12 +101,13 @@
 
 	.skeleton-item {
 		animation: skeletonBackground 1.5s infinite linear;
-		background-image: linear-gradient(
-			90deg,
-			var(--components-skeleton-gradient-step-one, var(--palettes-neutral-50)),
-			var(--components-skeleton-gradient-step-two, var(--palettes-neutral-200)),
-			var(--components-skeleton-gradient-step-one, var(--palettes-neutral-50))
-		);
+		background-image:
+			linear-gradient(
+				90deg,
+				var(--components-skeleton-gradient-step-one, var(--palettes-neutral-50)),
+				var(--components-skeleton-gradient-step-two, var(--palettes-neutral-200)),
+				var(--components-skeleton-gradient-step-one, var(--palettes-neutral-50))
+			);
 		background-size: 150% 100%;
 		background-repeat: repeat-x;
 		display: block;
@@ -116,10 +117,11 @@
 			@include skeletonTextSizing('XS', 'S', 'L', 'XL', 'XXL');
 			@include skeletonTitleSizing('1', '2', '3', '4', '5', '6');
 
-			clip-path: inset(
-				calc(var(--components-skeleton-text-offset) + 1px) calc(100% - var(--components-skeleton-text-width, 100%))
-				calc(var(--components-skeleton-text-offset) - 1px) 0 var(--components-skeleton-text-clipPathRound)
-			);
+			clip-path:
+				inset(
+					calc(var(--components-skeleton-text-offset) + 1px) calc(100% - var(--components-skeleton-text-width, 100%))
+					calc(var(--components-skeleton-text-offset) - 1px) 0 var(--components-skeleton-text-clipPathRound)
+				);
 			block-size: var(--pr-t-font-body-M-lineHeight);
 			inline-size: 100%;
 		}

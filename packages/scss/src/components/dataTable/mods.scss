@@ -82,11 +82,12 @@
 @mixin tree {
 	@include buttonExpand;
 
-	--components-dataTable-cell-paddingInlineStart: calc(
-		var(--components-dataTable-cell-padding-inline)
-		+ var(--pr-t-spacings-300) * calc(var(--components-dataTable-treeLevel) - 1)
-		+ var(--components-dataTable-tree-extraPadding)
-	);
+	--components-dataTable-cell-paddingInlineStart:
+		calc(
+			var(--components-dataTable-cell-padding-inline)
+			+ var(--pr-t-spacings-300) * calc(var(--components-dataTable-treeLevel) - 1)
+			+ var(--components-dataTable-tree-extraPadding)
+		);
 }
 
 @mixin editable {
