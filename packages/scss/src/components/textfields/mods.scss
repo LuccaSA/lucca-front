@@ -320,9 +320,12 @@
 
 @mixin compact {
 	.textfield-options {
-		inline-size: calc(
-			100% - var(--components-textfield-compact-label-right-margin) - var(--components-textfield-compact-label-sizes-default)
-		);
+		inline-size:
+			calc(
+				100%
+				- var(--components-textfield-compact-label-right-margin)
+				- var(--components-textfield-compact-label-sizes-default)
+			);
 		inset-inline-start: auto;
 		inset-inline-end: 0;
 	}
@@ -338,11 +341,12 @@
 }
 
 @mixin compactSize($size) {
-	inline-size: calc(
-		var(--components-textfield-sizes-#{$size})
-		+ var(--components-textfield-compact-label-right-margin)
-		+ var(--components-textfield-compact-label-sizes-default)
-	);
+	inline-size:
+		calc(
+			var(--components-textfield-sizes-#{$size})
+			+ var(--components-textfield-compact-label-right-margin)
+			+ var(--components-textfield-compact-label-sizes-default)
+		);
 
 	.textfield-options {
 		// inline-size: $input-width; // todo: récupérer la bonne taille

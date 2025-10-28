@@ -4,9 +4,11 @@
 	.notchBox-wrapper {
 		inline-size: 100%;
 		min-block-size: var(--component-notchbox-box-min-height);
-		padding-block: var(--component-notchbox-box-padding-top, var(--component-notchbox-box-padding))
+		padding-block:
+			var(--component-notchbox-box-padding-top, var(--component-notchbox-box-padding))
 			var(--component-notchbox-box-padding-bottom, var(--component-notchbox-box-padding));
-		padding-inline: var(--component-notchbox-box-padding-left, var(--component-notchbox-box-padding))
+		padding-inline:
+			var(--component-notchbox-box-padding-left, var(--component-notchbox-box-padding))
 			var(--component-notchbox-box-padding-right, var(--component-notchbox-box-padding));
 		border-radius: var(--component-notchbox-box-radius);
 

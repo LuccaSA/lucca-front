@@ -3,8 +3,10 @@
 @mixin page {
 	--components-emptyState-container-maxWidth: var(--commons-container-maxWidth);
 
-	background-image: var(--components-emptyState-illustration-foreground-bottom-left),
-		var(--components-emptyState-illustration-background-bottom-left), var(--components-emptyState-illustration-foreground-top-right),
+	background-image:
+		var(--components-emptyState-illustration-foreground-bottom-left),
+		var(--components-emptyState-illustration-background-bottom-left),
+		var(--components-emptyState-illustration-foreground-top-right),
 		var(--components-emptyState-illustration-background-top-right);
 	background-repeat: no-repeat;
 	background-position:

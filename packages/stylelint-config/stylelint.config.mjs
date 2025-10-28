@@ -185,11 +185,6 @@ export default {
 		],
 
 		'@stylistic/color-hex-case': null,
-		'@stylistic/declaration-block-semicolon-space-before': null,
-		'@stylistic/declaration-block-trailing-semicolon': null,
-		'@stylistic/declaration-colon-newline-after': null,
-		'@stylistic/declaration-colon-space-after': null,
-		'@stylistic/declaration-colon-space-before': null,
 		'@stylistic/function-comma-space-after': null,
 		'@stylistic/number-leading-zero': null,
 		'@stylistic/string-quotes': null,

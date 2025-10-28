@@ -201,11 +201,12 @@
 }
 
 @mixin materialInputDisabled {
-	background-image: linear-gradient(
-		to right,
-		var(--components-textfield-material-border-color) 33%,
-		color.transparentize(var(--palettes-neutral-0), 0) 0%
-	);
+	background-image:
+		linear-gradient(
+			to right,
+			var(--components-textfield-material-border-color) 33%,
+			color.transparentize(var(--palettes-neutral-0), 0) 0%
+		);
 	background-size: 3px 1px;
 	background-color: transparent;
 	background-position: bottom;
