@@ -5,7 +5,7 @@ import LFDeprecatedSelectors from './LFDeprecatedSelectors.mjs';
 import { getDisallowedObjects, getDisallowedData } from './stylelintForLF.mjs';
 
 export default {
-	extends: ['stylelint-config-standard-scss'],
+	extends: ['@stylistic/stylelint-config', 'stylelint-config-standard-scss'],
 	overrides: [
 		{
 			files: ['**/*.scss'],
@@ -165,5 +165,30 @@ export default {
 			},
 		],
 		'value-keyword-case': null,
+
+		// Formatting with @stylistic
+		// ============================================================================================
+
+		'@stylistic/block-closing-brace-empty-line-before': null,
+		'@stylistic/block-closing-brace-newline-after': null,
+		'@stylistic/block-closing-brace-newline-before': null,
+		'@stylistic/block-opening-brace-space-before': null,
+		'@stylistic/color-hex-case': null,
+		'@stylistic/declaration-block-semicolon-space-before': null,
+		'@stylistic/declaration-block-trailing-semicolon': null,
+		'@stylistic/declaration-colon-newline-after': null,
+		'@stylistic/declaration-colon-space-after': null,
+		'@stylistic/declaration-colon-space-before': null,
+		'@stylistic/function-comma-space-after': null,
+		'@stylistic/indentation': null,
+		'@stylistic/max-empty-lines': null,
+		'@stylistic/max-line-length': null,
+		'@stylistic/no-empty-first-line': null,
+		'@stylistic/no-eol-whitespace': null,
+		'@stylistic/no-missing-end-of-source-newline': null,
+		'@stylistic/number-leading-zero': null,
+		'@stylistic/selector-list-comma-newline-after': null,
+		'@stylistic/string-quotes': null,
+		'@stylistic/value-list-comma-newline-after': null,
 	},
 };
