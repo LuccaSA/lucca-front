@@ -87,6 +87,7 @@
     "@storybook/addon-docs": "^9.0.15",
     "@storybook/angular": "^9.0.15",
     "@storybook/test-runner": "^0.23.0",
+    "@stylistic/stylelint-config": "^3.0.1",
     "@testing-library/angular": "^17.4.0",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.3",
