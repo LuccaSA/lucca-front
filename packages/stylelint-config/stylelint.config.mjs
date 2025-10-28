@@ -185,7 +185,5 @@ export default {
 			},
 		],
 		'@stylistic/string-quotes': 'single',
-
-		'@stylistic/color-hex-case': null,
 	},
 };
