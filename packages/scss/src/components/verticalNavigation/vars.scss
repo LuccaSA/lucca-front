@@ -1,5 +1,5 @@
 @mixin vars {
-  --components-verticalNavigation-link-background: transparent;
-  --components-verticalNavigation-link-color: var(--pr-t-color-text);
-  --components-verticalNavigation-horizontalPadding: var(--pr-t-spacings-150);
+	--components-verticalNavigation-link-background: var(--pr-t-elevation-surface-raised);
+	--components-verticalNavigation-link-color: var(--pr-t-color-text);
+	--components-verticalNavigation-horizontalPadding: var(--pr-t-spacings-150);
 }

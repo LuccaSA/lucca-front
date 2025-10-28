@@ -3,8 +3,8 @@
 	--components-appLayout-inlineSize: 100dvw;
 	--components-appLayout-navSide-overflowX: hidden;
 	--components-appLayout-navSide-overflowY: auto;
-	--components-appLayout-gridTemplate: "banner " var(--commons-banner-height)
-																			 "navSide" auto
-																			 "main   " 1fr;
-
+	--components-appLayout-gridTemplate:
+		"banner " var(--commons-banner-height)
+		"navSide" auto
+		"main   " 1fr;
 }

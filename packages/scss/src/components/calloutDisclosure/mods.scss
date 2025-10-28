@@ -3,7 +3,7 @@
 
 @mixin S {
 	--components-calloutDisclosure-paddingHorizontal: var(--pr-t-spacings-100);
-  --components-calloutDisclosure-paddingVertical: var(--pr-t-spacings-75);
+	--components-calloutDisclosure-paddingVertical: var(--pr-t-spacings-75);
 	--components-calloutDisclosure-gap: var(--pr-t-spacings-100);
 
 	.calloutDisclosure-summary-title {

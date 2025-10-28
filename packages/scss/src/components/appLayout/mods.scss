@@ -1,14 +1,15 @@
 @mixin wide {
-	--components-appLayout-gridTemplate: "banner  banner" var(--commons-banner-height)
-																			 "navSide main  " 1fr
-																			/ auto    1fr;
-
+	--components-appLayout-gridTemplate:
+		"banner  banner" var(--commons-banner-height)
+		"navSide main  " 1fr
+		/ auto    1fr;
 }
 
 @mixin mobileNavSideBottom {
-	--components-appLayout-gridTemplate: "banner " var(--commons-banner-height)
-																			 "main"    1fr
-																			 "navSide" auto;
+	--components-appLayout-gridTemplate:
+		"banner " var(--commons-banner-height)
+		"main"    1fr
+		"navSide" auto;
 	--components-appLayout-navSide-overflowX: visible;
 	--components-appLayout-navSide-overflowY: visible;
 }

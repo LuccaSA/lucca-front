@@ -168,6 +168,7 @@ export default {
 		// Formatting with @stylistic
 		// ============================================================================================
 
+		'@stylistic/indentation': 'tab',
 		'@stylistic/max-line-length': null,
 
 		'@stylistic/block-closing-brace-empty-line-before': null,
@@ -181,7 +182,6 @@ export default {
 		'@stylistic/declaration-colon-space-after': null,
 		'@stylistic/declaration-colon-space-before': null,
 		'@stylistic/function-comma-space-after': null,
-		'@stylistic/indentation': null,
 		'@stylistic/number-leading-zero': null,
 		'@stylistic/selector-list-comma-newline-after': null,
 		'@stylistic/string-quotes': null,

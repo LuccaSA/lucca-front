@@ -24,8 +24,10 @@
 
 		--component-notchbox-notch-gradient2-anchor: left;
 		--component-notchbox-notch-gradient2-ref1: calc(
-			var(--component-notchbox-notch-position) - (var(--component-notchbox-notch-width))
-			/ 2 - var(--component-notchbox-notch-radius-outer) - var(--smooth) * 2
+			var(--component-notchbox-notch-position)
+			- (var(--component-notchbox-notch-width)) / 2
+			- var(--component-notchbox-notch-radius-outer)
+			- var(--smooth) * 2
 		);
 		--component-notchbox-notch-gradient2-ref2: 100%;
 
@@ -33,19 +35,25 @@
 		--component-notchbox-notch-gradient3-ref1: calc(
 			100%
 			- (
-					var(--component-notchbox-notch-position) + var(--component-notchbox-notch-width) / 2
-					+ var(--component-notchbox-notch-radius-outer) + var(--smooth) * 2
-				)
+				var(--component-notchbox-notch-position)
+				+ var(--component-notchbox-notch-width) / 2
+				+ var(--component-notchbox-notch-radius-outer)
+				+ var(--smooth) * 2
+			)
 		);
 		--component-notchbox-notch-gradient3-ref2: 100%;
 
 		--component-notchbox-notch-gradient4-x: calc(
-			var(--component-notchbox-notch-position) - var(--component-notchbox-notch-width)
-			/ 2 - var(--component-notchbox-notch-radius-outer) - var(--smooth)
+			var(--component-notchbox-notch-position)
+			- var(--component-notchbox-notch-width) / 2
+			- var(--component-notchbox-notch-radius-outer)
+			- var(--smooth)
 		);
 
 		--component-notchbox-notch-gradient5-x: calc(
-			var(--component-notchbox-notch-position) + var(--component-notchbox-notch-width) / 2 + var(--component-notchbox-notch-radius-outer)
+			var(--component-notchbox-notch-position)
+			+ var(--component-notchbox-notch-width) / 2
+			+ var(--component-notchbox-notch-radius-outer)
 			+ var(--smooth)
 		);
 		--component-notchbox-notch-gradient5-y: var(--component-notchbox-notch-gradient4-y);
@@ -61,12 +69,16 @@
 		--component-notchbox-notch-gradient7-ref2: calc(100% - var(--component-notchbox-notch-radius-outer) * 2);
 
 		--component-notchbox-notch-gradient8-x: calc(
-			var(--component-notchbox-notch-position) - var(--component-notchbox-notch-width) / 2
-			+ var(--component-notchbox-notch-percent-offset) - var(--smooth) * 2
+			var(--component-notchbox-notch-position)
+			- var(--component-notchbox-notch-width) / 2
+			+ var(--component-notchbox-notch-percent-offset)
+			- var(--smooth) * 2
 		);
 
 		--component-notchbox-notch-gradient9-x: calc(
-			var(--component-notchbox-notch-position) + var(--component-notchbox-notch-width) / 2 - var(--component-notchbox-notch-percent-offset2)
+			var(--component-notchbox-notch-position)
+			+ var(--component-notchbox-notch-width) / 2
+			- var(--component-notchbox-notch-percent-offset2)
 			+ var(--smooth) * 2
 		);
 		--component-notchbox-notch-gradient9-y: var(--component-notchbox-notch-gradient8-y);
@@ -97,19 +109,25 @@
 		--component-notchbox-notch-gradient3-ref2: calc(
 			100%
 			- (
-					var(--component-notchbox-notch-position) + var(--component-notchbox-notch-width) / 2
-					+ var(--component-notchbox-notch-radius-outer) + var(--smooth) * 2
-				)
+				var(--component-notchbox-notch-position)
+				+ var(--component-notchbox-notch-width) / 2
+				+ var(--component-notchbox-notch-radius-outer)
+				+ var(--smooth) * 2
+			)
 		);
 
 		--component-notchbox-notch-gradient4-y: calc(
-			var(--component-notchbox-notch-position) - var(--component-notchbox-notch-width)
-			/ 2 - var(--component-notchbox-notch-radius-outer) - var(--smooth)
+			var(--component-notchbox-notch-position)
+			- var(--component-notchbox-notch-width) / 2
+			- var(--component-notchbox-notch-radius-outer)
+			- var(--smooth)
 		);
 
 		--component-notchbox-notch-gradient5-x: var(--component-notchbox-notch-gradient4-x);
 		--component-notchbox-notch-gradient5-y: calc(
-			var(--component-notchbox-notch-position) + var(--component-notchbox-notch-width) / 2 + var(--component-notchbox-notch-radius-outer)
+			var(--component-notchbox-notch-position)
+			+ var(--component-notchbox-notch-width) / 2
+			+ var(--component-notchbox-notch-radius-outer)
 			+ var(--smooth)
 		);
 
@@ -124,13 +142,17 @@
 		);
 
 		--component-notchbox-notch-gradient8-y: calc(
-			var(--component-notchbox-notch-position) - var(--component-notchbox-notch-width) / 2
-			+ var(--component-notchbox-notch-percent-offset) - var(--smooth) * 2
+			var(--component-notchbox-notch-position)
+			- var(--component-notchbox-notch-width) / 2
+			+ var(--component-notchbox-notch-percent-offset)
+			- var(--smooth) * 2
 		);
 
 		--component-notchbox-notch-gradient9-x: var(--component-notchbox-notch-gradient8-x);
 		--component-notchbox-notch-gradient9-y: calc(
-			var(--component-notchbox-notch-position) + var(--component-notchbox-notch-width) / 2 - var(--component-notchbox-notch-percent-offset2)
+			var(--component-notchbox-notch-position)
+			+ var(--component-notchbox-notch-width) / 2
+			- var(--component-notchbox-notch-percent-offset2)
 			+ var(--smooth) * 2
 		);
 
