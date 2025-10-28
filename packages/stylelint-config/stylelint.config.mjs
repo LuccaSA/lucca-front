@@ -183,11 +183,10 @@ export default {
 				alignQuotes: true,
 			},
 		],
+		'@stylistic/string-quotes': 'single',
 
 		'@stylistic/color-hex-case': null,
 		'@stylistic/function-comma-space-after': null,
 		'@stylistic/number-leading-zero': null,
-		'@stylistic/string-quotes': null,
-		'@stylistic/value-list-comma-newline-after': null,
 	},
 };

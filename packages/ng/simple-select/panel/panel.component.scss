@@ -1,5 +1,5 @@
-@use "@lucca-front/scss/src/components/button/exports" as button;
-@use '../../styles/definitions';
+@use '@lucca-front/scss/src/components/button/exports' as button;
+@use 'definitions';
 
 @include definitions.optionSearcherStyle;
 @include definitions.optionPlaceholderStyle;

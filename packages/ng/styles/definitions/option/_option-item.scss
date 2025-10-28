@@ -62,7 +62,7 @@
 
 		@layer mods {
 			&.is-selected,
-			:host-context([aria-selected="true"]) & {
+			:host-context([aria-selected='true']) & {
 				background-color: var(--palettes-50, var(--palettes-product-50));
 
 				&::before {
@@ -180,7 +180,7 @@
 				}
 
 				&.is-selected,
-				:host-context([aria-selected="true"]) & {
+				:host-context([aria-selected='true']) & {
 					&::before {
 						background-color: var(--components-options-checkbox-color);
 						box-shadow: inset 0 0 0 2px var(--components-options-checkbox-color);
