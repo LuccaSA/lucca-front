@@ -187,6 +187,5 @@ export default {
 
 		'@stylistic/color-hex-case': null,
 		'@stylistic/function-comma-space-after': null,
-		'@stylistic/number-leading-zero': null,
 	},
 };
