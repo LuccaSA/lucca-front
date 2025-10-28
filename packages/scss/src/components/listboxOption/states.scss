@@ -1,4 +1,4 @@
-@use "@lucca-front/scss/src/components/checkboxField/exports" as checkboxField;
+@use '@lucca-front/scss/src/components/checkboxField/exports' as checkboxField;
 
 @mixin disabled {
 	--components-listboxOption-content-backgroundColor: var(--pr-t-elevation-surface-raised);

@@ -24,7 +24,7 @@
 			@include a11y.focusVisible;
 		}
 
-		&:has(.inputFramed-header-input[aria-invalid="true"]) {
+		&:has(.inputFramed-header-input[aria-invalid='true']) {
 			@include critical;
 
 			&:hover {
