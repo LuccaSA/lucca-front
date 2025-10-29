@@ -30,7 +30,7 @@ export default {
 
 	render: (args: FormLabelDemoStory) => {
 		const requiredContent = args.required ? `<sup class="formLabelDemo-required" aria-hidden="true">*</sup>` : ``;
-		const sizeClass = args.size !== '' ? ` mod-${args.size}` : ``;
+		const sizeClass = args.size !== `` ? ` mod-${args.size}` : ``;
 		const infosContent =
 			args.infos !== ''
 				? `
@@ -40,7 +40,7 @@ export default {
 	</span>`
 				: ``;
 		const tagContent =
-			args.tag !== ''
+			args.tag !== ``
 				? `
 	<span class="tag">${args.tag}</span>`
 				: ``;
@@ -59,7 +59,7 @@ export default {
 		const idAttr = args.id ? ` id="${args.id}"` : ``;
 		const forAttr = args.for ? ` for="${args.for}"` : ``;
 		return {
-			template: `<label${idAttr}${forAttr} class="formLabelDemo${criticalClass}${sizeClass}${fullSizeClass}${disabledClass}">
+			template: `<label class="formLabelDemo${criticalClass}${sizeClass}${fullSizeClass}${disabledClass}">
 	${args.label}${requiredContent}${infosContent}${tagContent}${counterContent}
 </label>`,
 		};
