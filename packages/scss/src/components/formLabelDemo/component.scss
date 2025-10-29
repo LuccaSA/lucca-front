@@ -1,9 +1,7 @@
 @use '@lucca-front/scss/src/commons/utils/a11y';
-
-@use '@lucca-front/scss/src/commons/utils/namespace';
 @use '@lucca-front/scss/src/components/tag/exports' as tag;
 
-@mixin component($atRoot: namespace.$defaultAtRoot) {
+@mixin component {
 	font: var(--components-formLabel-font);
 	cursor: var(--components-formLabel-cursor);
 	display: block;
@@ -12,6 +10,7 @@
 	padding-inline-end: var(--components-formLabel-paddingInlineEnd);
 	color: var(--components-formLabel-color);
 
+	// no possibility to add a class when using lu-tag for the moment
 	.tag {
 		margin-inline-start: var(--pr-t-spacings-50);
 		inset-block-start: calc(var(--pr-t-spacings-25) / -2);
@@ -20,7 +19,7 @@
 		@include tag.product;
 	}
 
-	@at-root ($atRoot) {
+	@at-root {
 		.formLabelDemo-required {
 			font: inherit;
 			color: var(--components-formLabel-required-color);
@@ -35,6 +34,7 @@
 			color: var(--components-formLabel-infos-color);
 			outline: none;
 
+			// no possibility to attach the visible focus to lu-icon properly
 			.lucca-icon {
 				font: var(--components-formLabel-infos-icon-font);
 				font-family: var(--icon-fontFamily);
