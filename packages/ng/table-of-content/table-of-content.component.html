@@ -1,0 +1,9 @@
+<nav class="tableOfContent">
+	<ul class="tableOfContent-list">
+		@for (link of links(); track $index) {
+			<li class="tableOfContent-list-item">
+				<ng-container *ngTemplateOutlet="link.template" />
+			</li>
+		}
+	</ul>
+</nav>
