@@ -6,8 +6,12 @@
 	@layer components {
 		@include vars;
 		@include component;
+	}
 
+	@layer mods {
 		.appLayout-navSide & {
+			@include inAppLayout;
+
 			@include media.min('S') {
 				@include inAppLayoutWide;
 			}
@@ -16,9 +20,7 @@
 				@include inAppLayoutNarrow;
 			}
 		}
-	}
 
-	@layer mods {
 		&.mod-withBanner {
 			@include banner;
 		}
