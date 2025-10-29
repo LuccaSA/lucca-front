@@ -147,6 +147,12 @@
 	}
 }
 
+@mixin inAppLayout {
+	position: relative;
+	padding-block-start: 0;
+	block-size: var(--commons-navSide-mobile-toggle-height);
+}
+
 @mixin inAppLayoutWide {
 	position: static;
 	block-size: 100%;
