@@ -1,4 +1,5 @@
 @mixin vars {
+	--components-clear-display: grid;
 	--components-clear-size: 1rem;
 	--components-clear-background: var(--palettes-neutral-700);
 	--components-clear-cross-color: var(--palettes-neutral-0);
