@@ -9,6 +9,10 @@ import { TableOfContentLinkDirective } from './table-of-content-link.directive';
 	styleUrl: './table-of-content.component.scss',
 	encapsulation: ViewEncapsulation.None,
 	imports: [NgTemplateOutlet],
+	host: {
+		class: 'tableOfContent',
+		role: 'navigation',
+	},
 })
 export class TableOfContentComponent {
 	links = contentChildren(TableOfContentLinkDirective);
