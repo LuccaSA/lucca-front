@@ -41,8 +41,8 @@ export class ExampleComponent {
   protected positions: ConnectionPositionPair[] = [
     // En dessous, aligné à gauche
     new ConnectionPositionPair(
-      { originX: "start", originY: "end" },
-      { overlayX: "start", overlayY: "start" }
+      { originX: "start", originY: "bottom" },
+      { overlayX: "start", overlayY: "top" }
     ),
     // Au dessus, aligné à gauche
     new ConnectionPositionPair(
