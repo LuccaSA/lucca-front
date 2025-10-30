@@ -18,4 +18,5 @@ import { INPUT_FRAMED_INSTANCE } from './input-framed.token';
 export class InputFramedComponent {
 	framedPortal = input<PortalContent | null>(null);
 	center = input(false, { transform: booleanAttribute });
+	size = input<'L' | null>(null);
 }

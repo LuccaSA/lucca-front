@@ -1,3 +1,13 @@
 @mixin center {
 	--components-inputFramed-header-alignItems: center;
 }
+
+@mixin L {
+	--components-inputFramed-header-label-fontWeight: var(--pr-t-font-fontWeight-semibold);
+	--components-inputFramed-padding: var(--pr-t-spacings-50);
+	--components-inputFramed-header-padding: var(--pr-t-spacings-150);
+	--components-inputFramed-content-padding: var(--pr-t-spacings-150);
+	--components-inputFramed-content-marginBlockStart: var(--pr-t-spacings-50);
+	--components-inputFramed-header-info-marginBlockStart: var(--pr-t-spacings-100);
+	--components-inputFramed-header-info-paddingBlockStart: var(--pr-t-spacings-200);
+}
