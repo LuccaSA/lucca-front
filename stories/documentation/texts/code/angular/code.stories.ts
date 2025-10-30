@@ -27,7 +27,7 @@ export default {
 	render: (args: CodeBasicStory) => {
 		const blockParam = args.block ? ` block` : ``;
 		return {
-			template: cleanupTemplate(`<lu-code${blockParam}>${args?.content}</lu-code$>`),
+			template: cleanupTemplate(`<lu-code${blockParam}>${args?.content}</lu-code>`),
 		};
 	},
 } as Meta;
