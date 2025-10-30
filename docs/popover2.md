@@ -46,8 +46,8 @@ export class ExampleComponent {
     ),
     // Au dessus, aligné à gauche
     new ConnectionPositionPair(
-      { originX: "start", originY: "start" },
-      { overlayX: "start", overlayY: "end" }
+      { originX: "start", originY: "top" },
+      { overlayX: "start", overlayY: "bottom" }
     )
   ]
 }
