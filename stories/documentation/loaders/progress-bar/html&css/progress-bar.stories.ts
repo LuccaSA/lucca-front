@@ -7,7 +7,7 @@ interface ProgressionBasicStory {
 }
 
 export default {
-	title: 'Documentation/Loaders/Progression/Basic',
+	title: 'Documentation/Loaders/Progress Bar/HTML&CSS/Basic',
 	argTypes: {
 		status: {
 			options: ['', 'is-success', 'is-error'],
@@ -32,10 +32,10 @@ export default {
 } as Meta;
 
 function getTemplate(args: ProgressionBasicStory): string {
-	const classes = [args.status].filter(Boolean).join(' ');
-	const indeterminate = args.indeterminate ? `mod-indeterminate` : '';
+	const classes = args.status ? ` ${args.status}` : '';
+	const indeterminate = args.indeterminate ? ` mod-indeterminate` : '';
 	return `
-	<div class="progress ${classes} ${indeterminate}">
+	<div class="progress${classes}${indeterminate}">
 		<div class="progress-bar" [attr.style]="'width:' + width + '%'"></div>
 	</div>
 	`;
