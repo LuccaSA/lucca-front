@@ -5,6 +5,7 @@
 @mixin disabled {
 	--components-richTextField-backgroundColor: var(--pr-t-color-input-background-disabled);
 	--components-richTextField-toolbar-backgroundColor: var(--pr-t-color-input-background-disabled);
+	--components-richTextField-toolbar-display: none;
 	--components-richTextField-color: var(--pr-t-color-input-text-disabled);
 	--components-richTextField-borderColor: var(--pr-t-color-input-border);
 }
