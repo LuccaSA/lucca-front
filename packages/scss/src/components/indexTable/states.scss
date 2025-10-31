@@ -24,9 +24,11 @@
 	.indexTable-body-row {
 		// We can't use focus-within because it would show actions when focusing checkboxs
 		&:has(
-				.indexTable-body-row-cell-link:focus-visible,
-				.indexTable-body-row-cell.mod-actions:focus-within
-			) {
+			// stylelint-disable @stylistic/indentation
+			.indexTable-body-row-cell-link:focus-visible,
+			.indexTable-body-row-cell.mod-actions:focus-within
+			// stylelint-enable
+		) {
 			--components-indexTable-cell-subAction-opacity: 1;
 		}
 

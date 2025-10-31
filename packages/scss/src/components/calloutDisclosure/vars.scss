@@ -1,6 +1,6 @@
 @mixin vars {
 	--components-calloutDisclosure-padding: var(--components-calloutDisclosure-paddingVertical) var(--components-calloutDisclosure-paddingHorizontal);
-  --components-calloutDisclosure-paddingHorizontal: var(--pr-t-spacings-150);
-  --components-calloutDisclosure-paddingVertical: var(--pr-t-spacings-100);
+	--components-calloutDisclosure-paddingHorizontal: var(--pr-t-spacings-150);
+	--components-calloutDisclosure-paddingVertical: var(--pr-t-spacings-100);
 	--components-calloutDisclosure-gap: var(--pr-t-spacings-150);
 }
