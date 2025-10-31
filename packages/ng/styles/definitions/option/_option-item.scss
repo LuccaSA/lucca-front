@@ -2,22 +2,21 @@
 @use '@lucca-front/icons/src/commons/utils/icon';
 @use '@lucca-front/scss/src/commons/utils/a11y';
 
-@include namespace.appendRootVars {
-	@layer components {
-		--components-options-item-padding-vertical: var(--pr-t-spacings-50);
-		--components-options-item-padding-horizontal: var(--pr-t-spacings-100);
-		--components-options-item-multiple-padding: 2.25rem;
-		--components-options-item-icon-color: var(--palettes-neutral-800);
-		--components-options-checkbox-size: 1.25rem;
-		--components-options-checkbox-color: var(--palettes-700, var(--palettes-product-700));
-		--components-options-checkbox-border-radius: var(--pr-t-border-radius-small);
-		--components-options-checkbox-border-color: var(--palettes-neutral-700);
-		--components-options-establishment-multiple-padding: 2rem;
-	}
-}
-
 @mixin optionItemStyle {
 	:host {
+		@layer components {
+			--components-options-item-padding-vertical: var(--pr-t-spacings-50);
+			--components-options-item-padding-horizontal: var(--pr-t-spacings-100);
+			--components-options-item-multiple-padding: 2.25rem;
+			--components-options-item-icon-color: var(--palettes-neutral-800);
+			--components-options-checkbox-size: 1.25rem;
+			--components-options-checkbox-color: var(--palettes-700, var(--palettes-product-700));
+			--components-options-checkbox-border-radius: var(--pr-t-border-radius-small);
+			--components-options-checkbox-border-color: var(--palettes-neutral-700);
+			--components-options-establishment-multiple-padding: 2rem;
+		}
+
+
 		@layer components {
 			--components-options-checkbox-color: var(--palettes-700, var(--palettes-product-700)); // Allow palette override
 

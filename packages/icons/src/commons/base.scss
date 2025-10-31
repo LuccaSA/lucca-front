@@ -1,5 +1,8 @@
 @use '@lucca-front/icons/src/commons/config';
 
+/* stylelint-disable-next-line layer-name-pattern */
+@layer #{config.$layers};
+
 @if config.$isNamespaced {
 	@layer base {
 		& {
