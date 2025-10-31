@@ -65,12 +65,12 @@
 <ng-template #calendar>
 	<div class="calendarWrapper">
 		<div class="calendarWrapper-navigation pr-u-left0">
-			<button class="calendarWrapper-navigation-button button" type="button" (click)="prev(mode())" #previousButtonRef>
+			<button class="calendarWrapper-navigation-button button" type="button" (click)="prev(calendarMode())" #previousButtonRef>
 				<span aria-hidden="true" class="lucca-icon icon-arrowChevronLeft"></span><span class="pr-u-mask">{{ intl.previous }}</span>
 			</button>
 		</div>
 		<div class="calendarWrapper-navigation pr-u-right0">
-			<button class="calendarWrapper-navigation-button button" type="button" (click)="next(mode())" #nextButtonRef>
+			<button class="calendarWrapper-navigation-button button" type="button" (click)="next(calendarMode())" #nextButtonRef>
 				<span aria-hidden="true" class="lucca-icon icon-arrowChevronRight"></span><span class="pr-u-mask"> {{ intl.next }}</span>
 			</button>
 		</div>
@@ -88,8 +88,8 @@
 				(dateClicked)="dateClicked($event, popoverRef)"
 				(nextPage)="move(1, calendarMode())"
 				(previousPage)="move(-1, calendarMode())"
+				[(displayMode)]="calendarMode"
 				[mode]="mode()"
-				[displayMode]="mode()"
 				[hideWeekend]="hideWeekend()"
 			/>
 		</div>

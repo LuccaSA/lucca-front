@@ -149,7 +149,7 @@ export class DateInputComponent extends AbstractDateComponent implements OnInit,
 		return {
 			classes: [...(infoFromInput?.classes || [])],
 			disabled: infoFromInput?.disabled || !this.isInMinMax(date, mode),
-			selected: this.selectedDate() && this.mode() === mode && comparePeriods(mode, date, this.selectedDate()),
+			selected: this.selectedDate() && this.calendarMode() === mode && comparePeriods(mode, date, this.selectedDate()),
 			label: infoFromInput?.label,
 		};
 	};
@@ -231,6 +231,12 @@ export class DateInputComponent extends AbstractDateComponent implements OnInit,
 				'mod-month': this.mode() === 'month',
 				'mod-year': this.mode() === 'year',
 			});
+		});
+
+		ɵeffectWithDeps([this.mode, this.calendarMode], (mode, calendarMode) => {
+			if (mode && isNil(calendarMode)) {
+				this.calendarMode.set(mode);
+			}
 		});
 
 		ɵeffectWithDeps([this.calendarMode, this.tabbableDate], (calendarMode, tabbableDate) => {
