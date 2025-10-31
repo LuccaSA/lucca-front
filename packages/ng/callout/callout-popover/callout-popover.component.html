@@ -13,7 +13,8 @@
 	@if (calloutIcon) {
 		<lu-icon class="calloutPopover-icon" [icon]="calloutIcon" />
 	}
-	{{ buttonLabel }}
+	<span class="calloutPopover-content" aria-hidden="true">{{ buttonLabel }}</span>
+	<span class="pr-u-mask">{{ buttonAlt() || buttonLabel }}</span>
 </button>
 <ng-template #overlayContentRef>
 	<div
@@ -23,16 +24,24 @@
 		(mouseenter)="showContent()"
 		(mouseleave)="hideContent($event)"
 	>
-		<div class="calloutPopover-overlay-head">
-			@if (calloutIcon) {
-				<lu-icon class="calloutPopover-overlay-head-icon" [class]="calloutOverlayHeadClasses" [icon]="calloutIcon" />
+		@if (calloutIcon) {
+			<div class="pr-u-flexShrink0">
+				<lu-icon class="calloutPopover-overlay-icon" [class]="calloutOverlayHeadClasses" [icon]="calloutIcon" />
+			</div>
+		}
+		<div class="pr-u-flexGrow1">
+			@if (heading) {
+				@if (!headingHiddenIfSingleItem() || feedbackItems().length !== 1) {
+					<div class="calloutPopover-overlay-head">
+						<strong class="calloutPopover-overlay-head-title">
+							<ng-container *luPortal="heading" />
+						</strong>
+					</div>
+				}
 			}
-			<strong class="calloutPopover-overlay-head-title">
-				<ng-container *luPortal="heading" />
-			</strong>
-		</div>
-		<div class="calloutPopover-overlay-content">
-			<ng-content />
+			<div class="calloutPopover-overlay-content">
+				<ng-content />
+			</div>
 		</div>
 	</div>
 </ng-template>
