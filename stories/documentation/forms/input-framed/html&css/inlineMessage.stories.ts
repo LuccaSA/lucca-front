@@ -1,11 +1,11 @@
 import { Meta } from '@storybook/angular';
 
-interface InputFramedInfosStory {}
+interface InputFramedBasicStory {}
 
 export default {
-	title: 'Documentation/Forms/Input Framed/HTML&CSS/Infos',
+	title: 'Documentation/Forms/Input Framed/HTML & CSS/Inline message',
 	argTypes: {},
-	render: (args: InputFramedInfosStory) => {
+	render: (args: InputFramedBasicStory) => {
 		return {
 			template: `<div class="inputFramedWrapper">
 	<div class="inputFramed">
@@ -20,8 +20,10 @@ export default {
 						<span class="radioField-icon-check"></span>
 					</span>
 				</span>
+				<div class="inlineMessage">
+					<p class="inlineMessage-content">Lorem ipsum dolor</p>
+				</div>
 			</div>
-			<div class="inputFramed-header-info">Lorem ipsum dolor</div>
 		</div>
 	</div>
 	<div class="inputFramed">
@@ -36,8 +38,10 @@ export default {
 						<span class="radioField-icon-check"></span>
 					</span>
 				</span>
+				<div class="inlineMessage">
+					<p class="inlineMessage-content">Lorem ipsum dolor</p>
+				</div>
 			</div>
-			<div class="inputFramed-header-info">Lorem ipsum dolor</div>
 		</div>
 	</div>
 </div>`,

@@ -1,14 +1,14 @@
 import { Meta } from '@storybook/angular';
 
-interface InputFramedInfosStory {}
+interface InputFramedBasicStory {}
 
 export default {
-	title: 'Documentation/Forms/Input Framed/HTML&CSS/Infos',
+	title: 'Documentation/Forms/Input Framed/HTML & CSS/SizeL',
 	argTypes: {},
-	render: (args: InputFramedInfosStory) => {
+	render: (args: InputFramedBasicStory) => {
 		return {
 			template: `<div class="inputFramedWrapper">
-	<div class="inputFramed">
+	<div class="inputFramed mod-L">
 		<div class="inputFramed-header">
 			<div class="form-field inputFramed-header-field">
 				<label class="formLabel inputFramed-header-label" id="radioAlabel" for="optionA">
@@ -21,10 +21,9 @@ export default {
 					</span>
 				</span>
 			</div>
-			<div class="inputFramed-header-info">Lorem ipsum dolor</div>
 		</div>
 	</div>
-	<div class="inputFramed">
+	<div class="inputFramed mod-L">
 		<div class="inputFramed-header">
 			<div class="form-field inputFramed-header-field">
 				<label class="formLabel inputFramed-header-label" id="radioBlabel" for="optionB">
@@ -37,7 +36,6 @@ export default {
 					</span>
 				</span>
 			</div>
-			<div class="inputFramed-header-info">Lorem ipsum dolor</div>
 		</div>
 	</div>
 </div>`,

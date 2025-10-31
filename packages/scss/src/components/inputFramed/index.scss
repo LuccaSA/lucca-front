@@ -38,10 +38,14 @@
 				@include disabled;
 			}
 		}
-	}
 
-	&.mod-center {
-		@include center;
+		&.mod-center {
+			@include center;
+		}
+
+		&.mod-L {
+			@include L;
+		}
 	}
 }
 
