@@ -5,7 +5,7 @@ interface TextCodeStory {
 }
 
 export default {
-	title: 'Documentation/Texts/Code/Basic',
+	title: 'Documentation/Texts/Code/HTML&CSS/Basic',
 	argTypes: {
 		block: {
 			control: {
