@@ -72,6 +72,7 @@ export function migrateComponent(sourceFile: SourceFile, path: string, tree: Tre
 							`mod-disclosure`,
 							`palette-${button.inputs.palette}`,
 							`mod-text`,
+							`mod-ghost`,
 							`mod-outlined`,
 							`mod-inverted`,
 							`mod-onlyIcon`,
@@ -136,11 +137,14 @@ function getButtonType(classes: string): ButtonComponent['luButton'] {
 	if(classes.includes('mod-outlined')) {
 		return 'outlined';
 	}
+	if(classes.includes('mod-ghost')) {
+		return 'ghost';
+	}
 	if(classes.includes('mod-text')) {
 		if(classes.includes('mod-invert')) {
-			return 'text-invert';
+			return 'ghost-invert';
 		}
-		return 'text';
+		return 'ghost';
 	}
 	return '';
 }
