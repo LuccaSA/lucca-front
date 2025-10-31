@@ -15,6 +15,7 @@ import { LuCoreSelectApiV3Directive, LuCoreSelectApiV4Directive } from '@lucca-f
 import { LuCoreSelectDepartmentsDirective } from '@lucca-front/ng/core-select/department';
 import { LuCoreSelectEstablishmentsDirective } from '@lucca-front/ng/core-select/establishment';
 import { LuCoreSelectJobQualificationsDirective } from '@lucca-front/ng/core-select/job-qualification';
+import { LuCoreSelectOccupationCategoriesDirective } from '@lucca-front/ng/core-select/occupation-category';
 import { LuCoreSelectUsersDirective, provideCoreSelectCurrentUserId } from '@lucca-front/ng/core-select/user';
 import {
 	LuMultiDisplayerDirective,
@@ -543,7 +544,21 @@ export const JobQualification = generateStory({
 />`,
 	neededImports: {
 		'@lucca-front/ng/multi-select': ['LuMultiSelectInputComponent'],
-		'@lucca-front/ng/core-select/establishment': ['LuCoreSelectJobQualificationsDirective'],
+		'@lucca-front/ng/core-select/job-qualification': ['LuCoreSelectJobQualificationsDirective'],
+	},
+});
+
+export const OccupationCategory = generateStory({
+	name: 'OccupationCategory Select',
+	description: "Pour saisir une catégorie d'occupation, il suffit d'utiliser la directive `occupationCategories`",
+	template: `<lu-multi-select
+	placeholder="Placeholder..."
+	occupationCategories
+	[(ngModel)]="selectedOccupationCategories"
+/>`,
+	neededImports: {
+		'@lucca-front/ng/multi-select': ['LuMultiSelectInputComponent'],
+		'@lucca-front/ng/core-select/occupation-category': ['LuCoreSelectOccupationCategoriesDirective'],
 	},
 });
 
@@ -744,6 +759,7 @@ const meta: Meta<LuMultiSelectInputStoryComponent> = {
 				LuCoreSelectDepartmentsDirective,
 				LuCoreSelectUsersDirective,
 				LuCoreSelectJobQualificationsDirective,
+				LuCoreSelectOccupationCategoriesDirective,
 				LuCoreSelectPanelHeaderDirective,
 				LuDisabledOptionDirective,
 				LuMultiSelectDisplayerInputDirective,
