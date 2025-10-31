@@ -23,6 +23,7 @@ import {
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { LuccaIcon } from '@lucca-front/icons';
+import { ClearComponent } from '@lucca-front/ng/clear';
 import { getIntl } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { PopoverDirective } from '@lucca-front/ng/popover2';
@@ -35,7 +36,7 @@ let nextId = 0;
 @Component({
 	selector: 'lu-filter-pill',
 	standalone: true,
-	imports: [PopoverDirective, FormsModule, IconComponent, NgTemplateOutlet, LuTooltipModule],
+	imports: [PopoverDirective, FormsModule, IconComponent, NgTemplateOutlet, LuTooltipModule, ClearComponent],
 	templateUrl: './filter-pill.component.html',
 	styleUrl: './filter-pill.component.scss',
 	encapsulation: ViewEncapsulation.None,

@@ -5,7 +5,7 @@
 @mixin component {
 	@include reset.button;
 
-	display: grid;
+	display: var(--components-clear-display);
 	grid-template-columns: 1fr;
 	grid-template-rows: 1fr;
 	grid-template-areas: 'main';

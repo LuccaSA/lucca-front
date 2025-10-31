@@ -35,7 +35,7 @@ import { Meta, StoryFn, applicationConfig } from '@storybook/angular';
 						<lu-option *luForOptions="let option" [value]="option">{{ option.name }}</lu-option>
 					</div>
 				</lu-option-picker-advanced>
-				<lu-input-clearer />
+				<lu-clear />
 			</lu-select>
 			<span class="textfield-label">Choisissez une couleur</span>
 		</label>
@@ -108,7 +108,7 @@ import { LuSelectInputComponent } from '@lucca-front/ng/select';
 				</header>
 				<lu-option *luForOptions="let option" [value]="option">{{ option.name }}</lu-option>
 			</lu-option-picker-advanced>
-			<lu-input-clearer />
+			<lu-clear />
 		</lu-select>
 		<span class="textfield-label">Choisissez une couleur</span>
 	</label>

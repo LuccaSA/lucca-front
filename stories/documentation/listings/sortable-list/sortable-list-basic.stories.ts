@@ -32,7 +32,6 @@ function getTemplate(args: SortableListBasicStory): string {
 			<p class="sortableList-item-content-helper">Helper message</p>
 		</div>
 		<button class="clear sortableList-clear" type="button">
-		  <span aria-hidden="true" class="lucca-icon icon-signClose"></span>
 			<span class="pr-u-mask">Delete</span>
 		</button>
 	</li>
@@ -43,7 +42,6 @@ function getTemplate(args: SortableListBasicStory): string {
 			<p class="sortableList-item-content-helper">Helper message</p>
 		</div>
 		<button class="clear sortableList-clear" type="button">
-		  <span aria-hidden="true" class="lucca-icon icon-signClose"></span>
 			<span class="pr-u-mask">Delete</span>
 		</button>
 	</li>
@@ -54,7 +52,6 @@ function getTemplate(args: SortableListBasicStory): string {
 			<p class="sortableList-item-content-helper">Helper message</p>
 		</div>
 		<button class="clear sortableList-clear" type="button">
-		  <span aria-hidden="true" class="lucca-icon icon-signClose"></span>
 			<span class="pr-u-mask">Delete</span>
 		</button>
 	</li>

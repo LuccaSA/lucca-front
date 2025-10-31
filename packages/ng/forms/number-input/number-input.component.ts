@@ -1,6 +1,7 @@
 import { NgTemplateOutlet } from '@angular/common';
 import { booleanAttribute, Component, ElementRef, input, numberAttribute, viewChild, ViewEncapsulation } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ClearComponent } from '@lucca-front/ng/clear';
 import { getIntl } from '@lucca-front/ng/core';
 import { InputDirective } from '@lucca-front/ng/form-field';
 import { FormFieldIdDirective } from '../form-field-id.directive';
@@ -12,7 +13,7 @@ import { LU_NUMBERFIELD_TRANSLATIONS } from './number-input.translate';
 @Component({
 	selector: 'lu-number-input',
 	standalone: true,
-	imports: [InputDirective, ReactiveFormsModule, FormFieldIdDirective, NgTemplateOutlet],
+	imports: [InputDirective, ReactiveFormsModule, FormFieldIdDirective, NgTemplateOutlet, ClearComponent],
 	templateUrl: './number-input.component.html',
 	hostDirectives: [NoopValueAccessorDirective],
 	encapsulation: ViewEncapsulation.None,
