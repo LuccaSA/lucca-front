@@ -38,7 +38,7 @@ export default {
 	<lu-listing-item><a href="#">lorem ipsum dolor sit amet</a></lu-listing-item>
 	<lu-listing-item><a href="#">lorem ipsum dolor sit amet</a></lu-listing-item>
 	<lu-listing-item><a href="#">lorem ipsum dolor sit amet</a></lu-listing-item>
-	<lu-listing-item><a href="#">lorem ipsum dolor sit amet</a></lu-listing-item>
+	<lu-listing-item>lorem ipsum dolor</lu-listing-item>
 	<lu-listing-item><a href="#">lorem ipsum dolor sit amet</a></lu-listing-item>
 </lu-listing>`,
 		};

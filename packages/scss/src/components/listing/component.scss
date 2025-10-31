@@ -24,7 +24,7 @@
 			&::before {
 				content: var(--components-listing-item-before-content);
 				border-inline-start: var(--commons-divider-border);
-				height: 1rem;
+				height: 0.75lh;
 				align-self: center;
 			}
 		}
