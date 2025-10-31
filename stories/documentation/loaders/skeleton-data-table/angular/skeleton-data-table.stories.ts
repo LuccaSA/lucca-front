@@ -20,6 +20,9 @@ export const Template: StoryObj<SkeletonDataTableComponent> = {
 				min: 1,
 			},
 		},
+		dataTableBodyOnly: {
+			control: false,
+		},
 	},
 
 	args: {

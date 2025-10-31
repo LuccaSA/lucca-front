@@ -20,6 +20,9 @@ export const Template: StoryObj<SkeletonIndexTableComponent> = {
 				min: 1,
 			},
 		},
+		tableBodyOnly: {
+			control: false,
+		},
 	},
 
 	args: {

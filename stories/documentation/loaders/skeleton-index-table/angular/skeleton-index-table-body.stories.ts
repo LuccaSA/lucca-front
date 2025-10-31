@@ -22,7 +22,7 @@ function getTemplate(args: SkeletonIndexTableStory): string {
 			<th class="indexTable-head-row-cell">Dolor</th>
 		</tr>
 	</thead>
-	<lu-skeleton-index-table tableBodyOnly [cols]="3" />
+	<lu-skeleton-index-table tableBodyOnly [cols]="3" [rows]="8" />
 </table>
 	`;
 }
