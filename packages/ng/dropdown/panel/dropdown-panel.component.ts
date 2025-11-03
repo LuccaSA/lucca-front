@@ -3,6 +3,7 @@ import { ALuPopoverPanel, ILuPopoverPanel, luTransformPopover } from '@lucca-fro
 import { merge, Observable, Subscription } from 'rxjs';
 import { debounceTime, delay, map, share, startWith, switchMap } from 'rxjs/operators';
 import { ALuDropdownItem, ILuDropdownItem } from '../item/index';
+import { PopoverContentComponent } from '@lucca-front/ng/popover2';
 
 /**
  * @deprecated prefer the new menu approach: https://prisme.lucca.io/94310e217/p/557682-dropdown
@@ -18,6 +19,7 @@ import { ALuDropdownItem, ILuDropdownItem } from '../item/index';
 	encapsulation: ViewEncapsulation.None,
 })
 export class LuDropdownPanelComponent extends ALuPopoverPanel implements ILuPopoverPanel, OnDestroy, AfterViewInit {
+	#popoverContentRef = inject(PopoverContentComponent, { optional: true });
 	/**
 	 * This method takes classes set on the host lu-popover element and applies them on the
 	 * popover template that displays in the overlay container.  Otherwise, it's difficult
@@ -92,6 +94,9 @@ export class LuDropdownPanelComponent extends ALuPopoverPanel implements ILuPopo
 
 	_emitCloseEvent(): void {
 		this.close.emit();
+		if (this.#popoverContentRef) {
+			this.#popoverContentRef.close();
+		}
 	}
 
 	_emitOpenEvent(): void {
