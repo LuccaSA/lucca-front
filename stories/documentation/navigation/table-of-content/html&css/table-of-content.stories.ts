@@ -5,7 +5,7 @@ interface TableOfContentBasicStory {
 }
 
 export default {
-	title: 'Documentation/Navigation/TableOfContent/Basic',
+	title: 'Documentation/Navigation/TableOfContent/HTML&CSS/Basic',
 	argTypes: {
 		disabled: {
 			control: {
