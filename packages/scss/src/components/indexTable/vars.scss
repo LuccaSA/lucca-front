@@ -38,8 +38,9 @@
 	// Selectable specific outline
 	--components-indexTable-outline-offset: 4px;
 	--components-indexTable-outline-border-width: 2px;
-	--components-indexTable-outline-border-radius: calc(
-		var(--components-indexTable-cell-border-radius) + var(--components-indexTable-outline-offset)
-	);
+	--components-indexTable-outline-border-radius:
+		calc(
+			var(--components-indexTable-cell-border-radius) + var(--components-indexTable-outline-offset)
+		);
 	--components-indexTable-outline-color: var(--palettes-product-700);
 }

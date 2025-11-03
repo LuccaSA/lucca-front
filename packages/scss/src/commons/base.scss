@@ -46,6 +46,7 @@
 		}
 
 		@if config.$isNamespaced {
+			// stylelint-disable-next-line block-no-redundant-nested-style-rules -- & references the selector calling this mixin.
 			& {
 				@include body;
 				@include html;
@@ -99,7 +100,8 @@
 			}
 		}
 
-		button, button[type] {
+		button,
+		button[type] {
 			text-rendering: inherit;
 
 			&:focus-visible {

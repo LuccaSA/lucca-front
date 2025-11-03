@@ -114,7 +114,6 @@
 	}
 }
 
-
 @mixin checklistHover {
 	~ .checkboxField-icon {
 		--component-checkboxField-backgroundColor: var(--palettes-success-50);
