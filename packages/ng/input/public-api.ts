@@ -1,3 +1,4 @@
+export * from './clearer/index';
 export * from './displayer/index';
 
 export * from './input.directive';
