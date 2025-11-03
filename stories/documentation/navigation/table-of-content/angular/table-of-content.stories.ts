@@ -24,10 +24,10 @@ export default {
 		const disabled = args.disabled ? ` disabled` : '';
 		return {
 			template: cleanupTemplate(`<lu-table-of-content>
-	<a *luTableOfContentLink class="tableOfContent-list-item-action is-active" href="#">Section 1</a>
-	<a *luTableOfContentLink class="tableOfContent-list-item-action" href="#"${disabled}>Section 2</a>
-	<a *luTableOfContentLink class="tableOfContent-list-item-action" href="#"${disabled}>Section 3</a>
-	<a *luTableOfContentLink class="tableOfContent-list-item-action" href="#"${disabled}>Section 4</a>
+	<a *luTableOfContentLink class="is-active" href="#">Section 1</a>
+	<a *luTableOfContentLink href="#"${disabled}>Section 2</a>
+	<a *luTableOfContentLink href="#"${disabled}>Section 3</a>
+	<a *luTableOfContentLink href="#"${disabled}>Section 4</a>
 </lu-table-of-content>`),
 		};
 	},
