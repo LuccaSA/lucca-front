@@ -4,7 +4,6 @@ import { PortalDirective } from './portal.directive';
 
 @Component({
 	selector: 'lu-portal-test',
-	standalone: true,
 	imports: [PortalDirective],
 	template: `
 		@if (displayed) {
@@ -23,7 +22,6 @@ class PortalTestComponent {
 
 @Component({
 	selector: 'lu-portal-test-content',
-	standalone: true,
 	template: 'Component content',
 })
 class PortalTestContentComponent {}

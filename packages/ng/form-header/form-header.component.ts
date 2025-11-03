@@ -2,7 +2,6 @@ import { Component, input, ViewEncapsulation } from '@angular/core';
 
 @Component({
 	selector: 'lu-form-header]',
-	standalone: true,
 	templateUrl: './form-header.component.html',
 	encapsulation: ViewEncapsulation.None,
 	host: {

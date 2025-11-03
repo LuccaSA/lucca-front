@@ -11,7 +11,6 @@ import { FieldType, FieldTypeConfig, FormlyModule } from '@ngx-formly/core';
 	styleUrls: ['formly-field.common.scss', 'select.scss'],
 	templateUrl: './select.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	standalone: true,
 	imports: [ReactiveFormsModule, FormlyModule, LuSelectInputComponent, LuDisplayerDirective, LuOptionPickerModule, LuInputClearerComponent],
 })
 export class LuFormlyFieldSelect extends FieldType<FieldTypeConfig> {

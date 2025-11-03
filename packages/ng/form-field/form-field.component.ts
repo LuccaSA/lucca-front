@@ -37,7 +37,6 @@ type FormFieldWidth = 20 | 30 | 40 | 50 | 60;
 
 @Component({
 	selector: 'lu-form-field',
-	standalone: true,
 	imports: [NgTemplateOutlet, InlineMessageComponent, LuTooltipModule, ReactiveFormsModule, IconComponent, IntlParamsPipe, PortalDirective],
 	templateUrl: './form-field.component.html',
 	styleUrl: './form-field.component.scss',

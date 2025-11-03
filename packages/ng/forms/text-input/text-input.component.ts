@@ -15,7 +15,6 @@ type TextFieldType = 'text' | 'email' | 'password' | 'url';
 
 @Component({
 	selector: 'lu-text-input',
-	standalone: true,
 	imports: [InputDirective, ReactiveFormsModule, FormFieldIdDirective, NgTemplateOutlet, NgxMaskDirective],
 	templateUrl: './text-input.component.html',
 	hostDirectives: [NoopValueAccessorDirective],

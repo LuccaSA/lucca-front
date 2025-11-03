@@ -13,7 +13,6 @@ import { ALuDropdownItem, ILuDropdownItem } from '../item/index';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	animations: [luTransformPopover],
 	exportAs: 'LuDropdownPanel',
-	standalone: true,
 	encapsulation: ViewEncapsulation.None,
 })
 export class LuDropdownPanelComponent extends ALuPopoverPanel implements ILuPopoverPanel, OnDestroy, AfterViewInit {

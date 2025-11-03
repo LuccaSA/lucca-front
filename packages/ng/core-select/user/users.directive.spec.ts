@@ -11,7 +11,6 @@ import { LuCoreSelectUsersDirective } from './users.directive';
 
 @Directive({
 	selector: '[luTestUsers]',
-	standalone: true,
 	providers: [
 		{
 			provide: LuCoreSelectUsersDirective,
@@ -27,7 +26,6 @@ class TestUsersDirective extends LuCoreSelectUsersDirective {
 
 @Component({
 	selector: 'lu-users-directive-host',
-	standalone: true,
 	imports: [LuSimpleSelectInputComponent, TestUsersDirective],
 	template: `<lu-simple-select luTestUsers />`,
 })

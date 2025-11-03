@@ -16,7 +16,6 @@ import { LuSimpleSelectPanelRefFactory } from './panel-ref.factory';
 	styleUrl: './select-input.component.scss',
 	host: { class: 'simpleSelect' },
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	standalone: true,
 	imports: [AsyncPipe, ɵLuOptionOutletDirective, OverlayModule, FormsModule, InputDirective, FilterPillDisplayerDirective, NgTemplateOutlet, IconComponent],
 	providers: [
 		{

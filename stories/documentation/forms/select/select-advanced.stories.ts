@@ -9,7 +9,6 @@ import { Meta, StoryFn, applicationConfig } from '@storybook/angular';
 
 @Component({
 	selector: 'select-advanced-stories',
-	standalone: true,
 	imports: [LuSelectInputComponent, LuOptionModule, LuInputModule, NgPlural, NgPluralCase, FormsModule],
 	template: `
 		<label class="textfield">
@@ -79,7 +78,6 @@ import { LuSelectInputComponent } from '@lucca-front/ng/select';
 
 @Component({
 	selector: 'select-advanced-story',
-	standalone: true,
 	imports: [LuSelectInputComponent, LuOptionModule, LuInputModule, NgPlural, NgPluralCase, FormsModule],
 	template: \`
 	<label class="textfield">

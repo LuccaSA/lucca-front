@@ -164,7 +164,6 @@ export abstract class ALuTreeOptionPickerComponent<T, O extends import('../item/
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	animations: [luTransformPopover],
 	exportAs: 'LuTreeOptionPicker',
-	standalone: true,
 	imports: [A11yModule],
 	providers: [
 		{

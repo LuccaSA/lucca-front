@@ -11,7 +11,6 @@ import { LuApiPagedSearcherComponent } from '../searcher';
 	templateUrl: './api-select-input.component.html',
 	styleUrl: './api-select-input.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	standalone: true,
 	imports: [LuInputClearerComponent, LuOptionPickerAdvancedComponent, LuApiPagedSearcherComponent, LuOptionItemComponent, LuForOptionsDirective, LuInputDisplayerDirective],
 	providers: [
 		{

@@ -4,7 +4,6 @@ import { ResponsiveProperty } from '@lucca-front/ng/core';
 
 @Component({
 	selector: 'lu-grid',
-	standalone: true,
 	templateUrl: './grid.component.html',
 	styleUrls: ['./grid.component.scss'],
 	encapsulation: ViewEncapsulation.None,

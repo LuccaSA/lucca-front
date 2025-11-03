@@ -1,17 +1,16 @@
 import { Component } from '@angular/core';
-import { LuEstablishmentSelectInputComponent, ALuEstablishmentService } from '@lucca-front/ng/establishment';
-import { LuUserSelectModule } from '@lucca-front/ng/user';
-import { LuDepartmentSelectInputComponent } from '@lucca-front/ng/department';
-import { LuSelectInputComponent } from '@lucca-front/ng/select';
-import { LuOptionItemComponent, LuOptionSelectAllComponent } from '@lucca-front/ng/option';
-import { EstablishmentServiceOverride } from '../establishment-service-override';
-import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 import { LuCoreSelectJobQualificationsDirective } from '@lucca-front/ng/core-select/job-qualification';
 import { LuCoreSelectUsersDirective } from '@lucca-front/ng/core-select/user';
+import { LuDepartmentSelectInputComponent } from '@lucca-front/ng/department';
+import { ALuEstablishmentService, LuEstablishmentSelectInputComponent } from '@lucca-front/ng/establishment';
+import { LuOptionItemComponent, LuOptionSelectAllComponent } from '@lucca-front/ng/option';
+import { LuSelectInputComponent } from '@lucca-front/ng/select';
+import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
+import { LuUserSelectModule } from '@lucca-front/ng/user';
+import { EstablishmentServiceOverride } from '../establishment-service-override';
 
 @Component({
 	selector: 'lu-select-schematic-api-selects',
-	standalone: true,
 	template: `
 		<lu-simple-select jobQualifications placeholder="Select a qualification" class="textfield-input"></lu-simple-select>
 		<lu-simple-select users placeholder="Select a user" class="textfield-input" data-testid="lu-select"></lu-simple-select>
