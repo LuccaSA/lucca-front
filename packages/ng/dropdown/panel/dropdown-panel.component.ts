@@ -1,9 +1,24 @@
 // import { UP_ARROW, DOWN_ARROW, TAB } from '@angular/cdk/keycodes';
-import { AfterViewInit, ChangeDetectionStrategy, Component, ContentChildren, EventEmitter, Input, OnDestroy, Output, QueryList, TemplateRef, ViewChild, ViewEncapsulation } from '@angular/core';
+import {
+	AfterViewInit,
+	ChangeDetectionStrategy,
+	Component,
+	ContentChildren,
+	EventEmitter,
+	inject,
+	Input,
+	OnDestroy,
+	Output,
+	QueryList,
+	TemplateRef,
+	ViewChild,
+	ViewEncapsulation,
+} from '@angular/core';
 import { ALuPopoverPanel, ILuPopoverPanel, luTransformPopover } from '@lucca-front/ng/popover';
 import { merge, Observable, Subscription } from 'rxjs';
 import { debounceTime, delay, map, share, startWith, switchMap } from 'rxjs/operators';
 import { ALuDropdownItem, ILuDropdownItem } from '../item/index';
+import { PopoverContentComponent } from '@lucca-front/ng/popover2';
 
 @Component({
 	selector: 'lu-dropdown',
@@ -17,6 +32,7 @@ import { ALuDropdownItem, ILuDropdownItem } from '../item/index';
 	encapsulation: ViewEncapsulation.None,
 })
 export class LuDropdownPanelComponent extends ALuPopoverPanel implements ILuPopoverPanel, OnDestroy, AfterViewInit {
+	#popoverContentRef = inject(PopoverContentComponent, { optional: true });
 	/**
 	 * This method takes classes set on the host lu-popover element and applies them on the
 	 * popover template that displays in the overlay container.  Otherwise, it's difficult
@@ -82,7 +98,7 @@ export class LuDropdownPanelComponent extends ALuPopoverPanel implements ILuPopo
 			debounceTime(1),
 		);
 
-		const itemSelectSub = singleFlow$.subscribe(() => this.close.emit());
+		const itemSelectSub = singleFlow$.subscribe(() => this._emitCloseEvent());
 		this._subs.add(itemSelectSub);
 	}
 
@@ -98,6 +114,9 @@ export class LuDropdownPanelComponent extends ALuPopoverPanel implements ILuPopo
 
 	_emitCloseEvent(): void {
 		this.close.emit();
+		if (this.#popoverContentRef) {
+			this.#popoverContentRef.close();
+		}
 	}
 
 	_emitOpenEvent(): void {
