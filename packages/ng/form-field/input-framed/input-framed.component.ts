@@ -1,21 +1,21 @@
 import { booleanAttribute, Component, forwardRef, input, ViewEncapsulation } from '@angular/core';
 import { PortalContent, PortalDirective } from '@lucca-front/ng/core';
-import { FRAMED_INPUT_INSTANCE } from './framed-input-token';
+import { INPUT_FRAMED_INSTANCE } from './input-framed.token';
 
 @Component({
-	selector: 'lu-framed-input',
+	selector: 'lu-input-framed',
 	standalone: true,
 	imports: [PortalDirective],
-	templateUrl: './framed-input.component.html',
+	templateUrl: './input-framed.component.html',
 	encapsulation: ViewEncapsulation.None,
 	providers: [
 		{
-			provide: FRAMED_INPUT_INSTANCE,
-			useExisting: forwardRef(() => FramedInputComponent),
+			provide: INPUT_FRAMED_INSTANCE,
+			useExisting: forwardRef(() => InputFramedComponent),
 		},
 	],
 })
-export class FramedInputComponent {
+export class InputFramedComponent {
 	framedPortal = input<PortalContent | null>(null);
 	center = input(false, { transform: booleanAttribute });
 	size = input<'L' | null>(null);
