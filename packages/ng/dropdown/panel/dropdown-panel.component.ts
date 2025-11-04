@@ -1,4 +1,18 @@
-import { AfterViewInit, ChangeDetectionStrategy, Component, ContentChildren, EventEmitter, Input, OnDestroy, Output, QueryList, TemplateRef, ViewChild, ViewEncapsulation } from '@angular/core';
+import {
+	AfterViewInit,
+	ChangeDetectionStrategy,
+	Component,
+	ContentChildren,
+	EventEmitter,
+	inject,
+	Input,
+	OnDestroy,
+	Output,
+	QueryList,
+	TemplateRef,
+	ViewChild,
+	ViewEncapsulation,
+} from '@angular/core';
 import { ALuPopoverPanel, ILuPopoverPanel, luTransformPopover } from '@lucca-front/ng/popover';
 import { merge, Observable, Subscription } from 'rxjs';
 import { debounceTime, delay, map, share, startWith, switchMap } from 'rxjs/operators';
