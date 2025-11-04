@@ -6,7 +6,7 @@ interface SortableListBasicStory {
 }
 
 export default {
-	title: 'Documentation/Listings/Sortable List/Basic',
+	title: 'Documentation/Listings/Sortable List/HTML&CSS/Basic',
 	argTypes: {
 		clickable: {
 			control: {
