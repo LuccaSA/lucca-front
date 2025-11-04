@@ -1,5 +1,4 @@
 import { InjectionToken } from '@angular/core';
-import { DataTableRowCellHeaderComponent } from './data-table-cell-header/data-table-cell-header.component';
-import { DataTableRowCellComponent } from './data-table-cell/data-table-cell.component';
+import { BaseDataTableCell } from './base-data-table-cell';
 
-export const LU_DATA_TABLE_CELL_INSTANCE = new InjectionToken<DataTableRowCellComponent | DataTableRowCellHeaderComponent>('LU_DATA_TABLE_CELL_INSTANCE');
+export const LU_DATA_TABLE_CELL_INSTANCE = new InjectionToken<BaseDataTableCell>('LU_DATA_TABLE_CELL_INSTANCE');
