@@ -1,4 +1,3 @@
-// import { UP_ARROW, DOWN_ARROW, TAB } from '@angular/cdk/keycodes';
 import {
 	AfterViewInit,
 	ChangeDetectionStrategy,
@@ -20,9 +19,11 @@ import { debounceTime, delay, map, share, startWith, switchMap } from 'rxjs/oper
 import { ALuDropdownItem, ILuDropdownItem } from '../item/index';
 import { PopoverContentComponent } from '@lucca-front/ng/popover2';
 
+/**
+ * @deprecated prefer the new menu approach: https://prisme.lucca.io/94310e217/p/557682-dropdown
+ */
 @Component({
 	selector: 'lu-dropdown',
-
 	templateUrl: './dropdown-panel.component.html',
 	styleUrl: './dropdown-panel.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
@@ -65,12 +66,6 @@ export class LuDropdownPanelComponent extends ALuPopoverPanel implements ILuPopo
 		this.templateRef = tr;
 	}
 
-	// protected _highlightIndex = -1;
-	// get highlightIndex() { return this._highlightIndex; }
-	// set highlightIndex(i: number) {
-	// 	this._highlightIndex = i;
-	// 	this._applyHighlight();
-	// }
 	protected _items: ILuDropdownItem[] = [];
 	protected _itemsQL: QueryList<ILuDropdownItem>;
 	@ContentChildren(ALuDropdownItem, { descendants: true }) set optionsQL(ql: QueryList<ILuDropdownItem>) {
@@ -91,7 +86,6 @@ export class LuDropdownPanelComponent extends ALuPopoverPanel implements ILuPopo
 		);
 		const itemsSub = items$.subscribe((i) => (this._items = i || []));
 		this._subs.add(itemsSub);
-		// this.highlightIndex = -1;
 
 		const singleFlow$: Observable<boolean> = items$.pipe(
 			switchMap((items) => merge(...items.map((i) => i.onSelect))),
@@ -137,53 +131,4 @@ export class LuDropdownPanelComponent extends ALuPopoverPanel implements ILuPopo
 			firstItem.focus();
 		}
 	}
-
-	// keydown
-	// _handleKeydown(event: KeyboardEvent) {
-	// 	super._handleKeydown(event);
-	// switch (event.keyCode) {
-	// 	case UP_ARROW:
-	// 		this._decrHighlight();
-	// 		if (!this._highlightOutOfBounds()) {
-	// 			event.preventDefault();
-	// 			event.stopPropagation();
-	// 		}
-	// 		break;
-	// 	case DOWN_ARROW:
-	// 		this._incrHighlight();
-	// 		if (!this._highlightOutOfBounds()) {
-	// 			event.preventDefault();
-	// 			event.stopPropagation();
-	// 		}
-	// 		break;
-	// 	case TAB:
-	// 		if (event.shiftKey) {
-	// 			this._decrHighlight();
-	// 		} else {
-	// 			this._incrHighlight();
-	// 		}
-	// 		if (!this._highlightOutOfBounds()) {
-	// 			event.preventDefault();
-	// 			event.stopPropagation();
-	// 		}
-	// 		break;
-	// }
-	// }
-	// protected _incrHighlight() {
-	// 	this.highlightIndex++;
-	// }
-	// protected _decrHighlight() {
-	// 	this.highlightIndex--;
-	// }
-	// protected _highlightOutOfBounds(): boolean {
-	// 	const itemsCount = this._items.length;
-	// 	return this.highlightIndex < 0 || this.highlightIndex >= itemsCount;
-	// }
-	// protected _applyHighlight() {
-
-	// 	const highlightedItem = this._items[this.highlightIndex];
-	// 	if (highlightedItem) {
-	// 		highlightedItem.focus();
-	// 	}
-	// }
 }
