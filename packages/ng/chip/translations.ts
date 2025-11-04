@@ -1,26 +1,26 @@
 ﻿export const Translations = {
-	en: {
-		delete: 'Delete',
-	},
-	de: {
-		delete: 'Löschen',
-	},
 	fr: {
 		delete: 'Supprimer',
 	},
-	it: {
-		delete: 'Eliminare',
-	},
-	nl: {
-		delete: 'Verwijderen',
-	},
-	'nl-BE': {
-		delete: 'Verwijderen',
+	pt: {
+		delete: 'Eliminar',
 	},
 	es: {
 		delete: 'Eliminar',
 	},
-	pt: {
-		delete: 'Eliminar',
+	'nl-BE': {
+		delete: 'Verwijderen',
+	},
+	nl: {
+		delete: 'Verwijderen',
+	},
+	it: {
+		delete: 'Eliminare',
+	},
+	de: {
+		delete: 'Löschen',
+	},
+	en: {
+		delete: 'Delete',
 	},
 };
