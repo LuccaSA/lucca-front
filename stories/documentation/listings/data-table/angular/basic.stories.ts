@@ -96,7 +96,6 @@ export default {
 			editable,
 			verticalAlign,
 			align,
-			stickyHeader,
 			group,
 			groupLabel,
 			expanded,
@@ -130,7 +129,6 @@ export default {
 		const selectableLabelAttr = selectable ? ` selectedLabel="${selectedLabel}"` : ``;
 		const selectableLabelHeadAttr = selectable ? ` selectedLabel="${selectedLabelHead}"` : ``;
 		const disabledAttr = disabled ? ` disabled` : ``;
-		const stickyHeaderAttr = stickyHeader ? ` sticky` : ``;
 		const groupAttr = group ? ` groupButtonAlt="${groupButtonAlt}" group="${groupLabel}"` : ``;
 		const expandedAttr = expanded ? ` [expanded]="true"` : ``;
 		const alignAttr = align ? ` align="${align}"` : ``;
@@ -189,10 +187,9 @@ export default {
 			: ``;
 
 		return {
-			styles: stickyHeader ? [`lu-data-table { max-block-size: 7.5rem }`] : [``],
 			props: { example: text },
 			template: `<lu-data-table${layoutFixedAttr}${hoverAttr}${cellBorderAttr}${selectableAttr}${verticalAlignAttr}${nestedAttr}>
-	<thead luDataTableHead${stickyHeaderAttr}>
+	<thead luDataTableHead>
 		<tr luDataTableRow${selectableLabelHeadAttr}>
 			<th luDataTableCell>${textHeader}</th>${colsHeaderContent}
 			<th luDataTableCell${fixedWithAttr}${sortAttr}${alignAttr}>${textHeader}</th>
@@ -221,7 +218,6 @@ export const Basic: StoryObj = {
 		align: undefined,
 		verticalAlign: undefined,
 		sort: undefined,
-		stickyHeader: false,
 		hover: false,
 		cellBorder: false,
 		layoutFixed: false,

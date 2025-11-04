@@ -1,11 +1,13 @@
-import { booleanAttribute, Component, ElementRef, inject, input, model, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, Component, contentChildren, ElementRef, forwardRef, inject, input, model, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { CheckboxInputComponent } from '@lucca-front/ng/forms';
 import { LU_DATA_TABLE_BODY_INSTANCE } from '../data-table-body/data-table-body.token';
+import { LU_DATA_TABLE_CELL_INSTANCE } from '../data-table-cell.token';
 import { LU_DATA_TABLE_FOOT_INSTANCE } from '../data-table-foot/data-table-foot.token';
 import { LU_DATA_TABLE_HEAD_INSTANCE } from '../data-table-head/data-table-head.token';
 import { LU_DATA_TABLE_INSTANCE } from '../data-table.token';
+import { LU_DATA_TABLE_ROW_INSTANCE } from './data-table-row.token';
 
 @Component({
 	// eslint-disable-next-line @angular-eslint/component-selector
@@ -20,6 +22,12 @@ import { LU_DATA_TABLE_INSTANCE } from '../data-table.token';
 		'[class.mod-selectable]': 'tableRef.selectable()',
 	},
 	imports: [CheckboxInputComponent, FormFieldComponent, FormsModule],
+	providers: [
+		{
+			provide: LU_DATA_TABLE_ROW_INSTANCE,
+			useExisting: forwardRef(() => DataTableRowComponent),
+		},
+	],
 })
 export class DataTableRowComponent {
 	bodyRef = inject(LU_DATA_TABLE_BODY_INSTANCE, { optional: true });
@@ -27,6 +35,8 @@ export class DataTableRowComponent {
 	footRef = inject(LU_DATA_TABLE_FOOT_INSTANCE, { optional: true });
 
 	elementRef = inject<ElementRef<Element>>(ElementRef);
+
+	public readonly cells = contentChildren(LU_DATA_TABLE_CELL_INSTANCE);
 
 	protected tableRef = inject(LU_DATA_TABLE_INSTANCE);
 
