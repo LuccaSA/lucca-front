@@ -15,7 +15,7 @@ import { booleanAttribute, ChangeDetectionStrategy, Component, input, output, Vi
 })
 export class SortableListItemComponent {
 	label = input.required<string>();
-	helperMessage = input<string | null>();
+	helperMessage = input<string>();
 	clickable = input(false, { transform: booleanAttribute });
 	clearable = input(true, { transform: booleanAttribute });
 

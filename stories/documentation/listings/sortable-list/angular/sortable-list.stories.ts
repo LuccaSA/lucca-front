@@ -49,7 +49,7 @@ export default {
 		const clickable = args.clickable ? ` clickable` : '';
 		const clearable = args.clearable ? '' : ` clearable="false"`;
 		const label = ` label="${args.label}"`;
-		const helperMessage = args.helperMessage.length ? ` helperMessage="${args.helperMessage}"` : '';
+		const helperMessage = args.helperMessage?.length ? ` helperMessage="${args.helperMessage}"` : '';
 		return {
 			template: cleanupTemplate(`<lu-sortable-list${small}>
   <lu-sortable-list-item${label}${helperMessage}${clearable}${clickable} />
