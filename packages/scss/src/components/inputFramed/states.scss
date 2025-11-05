@@ -28,3 +28,11 @@
 @mixin criticalHover {
 	--components-inputFramed-borderColor: var(--pr-t-color-input-border-critical-hover);
 }
+
+@mixin focusVisible {
+	.inputFramed-header-icon {
+		&::after {
+			outline: none;
+		}
+	}
+}

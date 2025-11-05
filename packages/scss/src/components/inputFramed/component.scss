@@ -33,16 +33,6 @@
 			}
 		}
 
-		.inputFramed-header-input.radioField-input,
-		.inputFramed-header-input.checkboxField-input {
-			~ .inputFramed-header-icon.radioField-icon,
-			~ .inputFramed-header-icon.checkboxField-icon {
-				&::after {
-					outline: none;
-				}
-			}
-		}
-
 		.inputFramed-header {
 			padding: var(--components-inputFramed-padding);
 			border-radius: var(--pr-t-border-radius-50);
