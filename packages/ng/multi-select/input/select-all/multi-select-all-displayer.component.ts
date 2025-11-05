@@ -3,6 +3,7 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { ChipComponent } from '@lucca-front/ng/chip';
 import { getIntl } from '@lucca-front/ng/core';
 import { ɵLuOptionOutletDirective } from '@lucca-front/ng/core-select';
+import { InputDirective } from '@lucca-front/ng/form-field';
 import { NumericBadgeComponent } from '@lucca-front/ng/numeric-badge';
 import { LU_MULTI_SELECT_DISPLAYER_TRANSLATIONS } from '../../displayer/default-displayer.translate';
 import { LuMultiSelectDisplayerInputDirective } from '../../displayer/displayer-input.directive';
@@ -12,7 +13,7 @@ import { MULTI_SELECT_WITH_SELECT_ALL_CONTEXT } from './select-all.models';
 @Component({
 	selector: 'lu-multi-select-all-displayer',
 	standalone: true,
-	imports: [NumericBadgeComponent, LuMultiSelectDisplayerInputDirective, ɵLuOptionOutletDirective, ChipComponent],
+	imports: [NumericBadgeComponent, LuMultiSelectDisplayerInputDirective, ɵLuOptionOutletDirective, InputDirective, ChipComponent],
 	template: `
 		<div class="multipleSelect-displayer mod-filter" [class.is-filled]="isFilled()">
 			<input type="text" luMultiSelectDisplayerInput />

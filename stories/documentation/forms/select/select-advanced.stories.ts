@@ -76,13 +76,13 @@ const template: StoryFn<SelectAdvancedStory> = (args) => ({
 const code = `
 import { ChipComponent } from '@lucca-front/ng/chip';
 import { LuInputModule } from '@lucca-front/ng/input';
-import { LuInputDirective } from '@lucca-front/ng/input';
-import { ClearComponent } from '@lucca-front/ng/clear';
-import { FormsModule } from '@angular/forms';
 import { NgPlural, NgPluralCase } from '@angular/common';
 import { LuOptionModule } from '@lucca-front/ng/option';
 import { LuSelectInputComponent } from '@lucca-front/ng/select';
 import { LuInputDisplayerDirective } from './displayer/index';
+import { FormsModule } from '@angular/forms';
+import { ClearComponent } from '@lucca-front/ng/clear';
+import { LuInputDirective } from '@lucca-front/ng/input';
 
 @Component({
 	selector: 'select-advanced-story',
