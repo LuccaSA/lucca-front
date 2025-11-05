@@ -6,6 +6,7 @@ interface VerticalNavigationStories {
 	sectionTitle: string;
 	title: string;
 	disabled: boolean;
+	iconless: boolean;
 }
 
 export default {
@@ -26,6 +27,11 @@ export default {
 				type: 'boolean',
 			},
 		},
+		iconless: {
+			control: {
+				type: 'boolean',
+			},
+		},
 	},
 	decorators: [
 		moduleMetadata({
@@ -35,7 +41,7 @@ export default {
 	render: (args: VerticalNavigationStories) => {
 		const sectionTitle = ` sectionTitle="${args.sectionTitle ? args.sectionTitle : ''}"`;
 		const title = ` title="${args.title ? args.title : ''}"`;
-		const icon = ` icon="heart"`;
+		const icon = args.iconless ? '' : ` icon="heart"`;
 		const disabled = args.disabled ? ` disabled` : '';
 		return {
 			template: cleanupTemplate(`<lu-vertical-navigation${sectionTitle}${title}${icon}>
@@ -53,5 +59,6 @@ export const Basic = {
 		sectionTitle: 'Section',
 		title: 'Item',
 		disabled: false,
+		iconless: false,
 	},
 };
