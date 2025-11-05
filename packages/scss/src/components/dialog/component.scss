@@ -19,6 +19,7 @@
 	position: fixed !important;
 	max-inline-size: var(--components-dialog-maxWidth) !important;
 	max-block-size: var(--components-dialog-maxHeight) !important;
+	overflow: hidden;
 
 	@supports not (height: 1dvh) {
 		--components-dialog-maxHeight: var(--components-dialog-maxHeightFallback);

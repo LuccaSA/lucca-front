@@ -27,7 +27,7 @@ export default {
 			control: {
 				type: 'boolean',
 			},
-			description: 'À préciser que si le divider n’a pas de contenu (le contenu ne sera pas restitué)',
+			description: 'Permet de restituer Divider comme un séparateur natif (hr). Son éventuel contenu textuel ne sera alors plus restitué.',
 		},
 		button: {
 			control: {

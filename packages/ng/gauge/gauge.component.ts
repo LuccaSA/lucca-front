@@ -5,11 +5,9 @@ import { LuClass, Palette } from '@lucca-front/ng/core';
 	selector: 'lu-gauge',
 	standalone: true,
 	templateUrl: './gauge.component.html',
+	styleUrl: './gauge.component.scss',
 	encapsulation: ViewEncapsulation.None,
 	providers: [LuClass],
-	host: {
-		class: 'u-displayContents',
-	},
 })
 export class GaugeComponent {
 	#locale = inject(LOCALE_ID);

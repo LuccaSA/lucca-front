@@ -36,7 +36,7 @@ export const Basic = template.bind({});
 Basic.args = {};
 
 const code = `
-	import { LuEstablishmentSelectInputComponent } from '@lucca-front/ng/establishment';
+import { LuEstablishmentSelectInputComponent } from '@lucca-front/ng/establishment';
 
 @Component({
 	selector: 'establishment-select-stories',
