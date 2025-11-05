@@ -73,6 +73,7 @@ const template: StoryFn<SelectAdvancedStory> = (args) => ({
 });
 
 const code = `
+import { ChipComponent } from '@lucca-front/ng/chip';
 import { LuInputModule } from '@lucca-front/ng/input';
 import { LuOptionModule } from '@lucca-front/ng/option';
 import { LuSelectInputComponent } from '@lucca-front/ng/select';
@@ -80,7 +81,7 @@ import { LuSelectInputComponent } from '@lucca-front/ng/select';
 @Component({
 	selector: 'select-advanced-story',
 	standalone: true,
-	imports: [LuSelectInputComponent, LuOptionModule, LuInputModule, NgPlural, NgPluralCase, FormsModule],
+	imports: [LuSelectInputComponent, LuOptionModule, LuInputModule, NgPlural, NgPluralCase, FormsModule, ChipComponent],
 	template: \`
 	<label class="textfield">
 		<lu-select
@@ -94,7 +95,7 @@ import { LuSelectInputComponent } from '@lucca-front/ng/select';
 					<ng-template ngPluralCase="0" />
 					<ng-template ngPluralCase="one">{{ colors[0].name }}</ng-template>
 					<ng-template ngPluralCase="other">
-						<span class="chip mod-unkillable">{{ colors.length }}</span>
+						<lu-chip withEllipsis unkillable>{{ colors.length }}</lu-chip>
 						couleurs
 					</ng-template>
 				</ng-container>

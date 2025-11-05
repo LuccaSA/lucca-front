@@ -1,5 +1,7 @@
+import { NgTemplateOutlet } from '@angular/common';
 import { booleanAttribute, Component, computed, input, output, ViewEncapsulation } from '@angular/core';
 import { getIntl } from '@lucca-front/ng/core';
+import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 import { LU_CHIP_TRANSLATIONS } from './chip.translate';
 
 @Component({
@@ -8,6 +10,7 @@ import { LU_CHIP_TRANSLATIONS } from './chip.translate';
 	templateUrl: './chip.component.html',
 	styleUrl: './chip.component.scss',
 	encapsulation: ViewEncapsulation.None,
+	imports: [LuTooltipModule, NgTemplateOutlet],
 	host: {
 		class: 'chip',
 		'[class.is-disabled]': 'disabled()',
@@ -17,6 +20,8 @@ import { LU_CHIP_TRANSLATIONS } from './chip.translate';
 export class ChipComponent {
 	intl = getIntl(LU_CHIP_TRANSLATIONS);
 
+	withEllipsis = input(false, { transform: booleanAttribute });
+
 	readonly unkillable = input(false, { transform: booleanAttribute });
 
 	readonly palette = input<string>();
@@ -25,5 +30,5 @@ export class ChipComponent {
 
 	readonly classPalette = computed(() => this.palette() === 'product');
 
-	readonly kill = output();
+	readonly kill = output<Event>();
 }
