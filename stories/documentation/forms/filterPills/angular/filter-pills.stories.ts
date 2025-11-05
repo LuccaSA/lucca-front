@@ -64,25 +64,25 @@ export default {
 	<lu-checkbox-input [ngModel]="false"></lu-checkbox-input>
 </lu-filter-pill>
 <lu-filter-pill label="With Select all" name="legume">
-	<lu-multi-select ${clearableProperty}	[options]="legumes | filterLegumes:clue" [totalCount]="legumes.length" (clueChange)="clue = $event" filterPillLabelPlural="légumes" withSelectAll withSelectAllDisplayerLabel="Tous les légumés" />
+	<lu-multi-select [ngModel]="{ mode: 'none' }" ${clearableProperty}	[options]="legumes | filterLegumes:clue" [totalCount]="legumes.length" (clueChange)="clue = $event" filterPillLabelPlural="légumes" withSelectAll withSelectAllDisplayerLabel="légumes" />
 </lu-filter-pill>
 <lu-filter-pill label="Département" name="department">
-	<lu-simple-select ${clearableProperty} departments></lu-simple-select>
+	<lu-simple-select [ngModel]="null" ${clearableProperty} departments></lu-simple-select>
 </lu-filter-pill>
 <lu-filter-pill label="Départements" name="departments">
-	<lu-multi-select ${clearableProperty}filterPillLabelPlural="départements" departments />
+	<lu-multi-select [ngModel]="[]" ${clearableProperty}filterPillLabelPlural="départements" departments />
 </lu-filter-pill>
 <lu-filter-pill label="Tree simple">
-	<lu-simple-select ${clearableProperty}[treeSelect]="groupingFn" [options]="legumes"></lu-simple-select>
+	<lu-simple-select [ngModel]="null" ${clearableProperty}[treeSelect]="groupingFn" [options]="legumes"></lu-simple-select>
 </lu-filter-pill>
 <lu-filter-pill label="Tree multi">
-	<lu-multi-select ${clearableProperty}filterPillLabelPlural="légumes" [treeSelect]="groupingFn" [options]="legumes" ></lu-multi-select>
+	<lu-multi-select [ngModel]="[]" ${clearableProperty}filterPillLabelPlural="légumes" [treeSelect]="groupingFn" [options]="legumes" ></lu-multi-select>
 </lu-filter-pill>
 <lu-filter-pill label="Date de début">
-	<lu-date-input ${clearableProperty}/>
+	<lu-date-input [ngModel]="null" ${clearableProperty}/>
 </lu-filter-pill>
 <lu-filter-pill label="Période">
-	<lu-date-range-input ${clearableProperty}[(ngModel)]="dateRange" />
+	<lu-date-range-input [ngModel]="null" ${clearableProperty}[(ngModel)]="dateRange" />
 </lu-filter-pill>`,
 			styles: [
 				`

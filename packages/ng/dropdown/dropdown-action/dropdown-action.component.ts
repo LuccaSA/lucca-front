@@ -1,4 +1,5 @@
-import { booleanAttribute, Component, input, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, Component, inject, input, ViewEncapsulation } from '@angular/core';
+import { PopoverContentComponent } from '@lucca-front/ng/popover2';
 
 @Component({
 	selector: '[lu-dropdown-action]',
@@ -8,8 +9,17 @@ import { booleanAttribute, Component, input, ViewEncapsulation } from '@angular/
 	host: {
 		class: 'dropdown-list-option-action',
 		'[class.is-disabled]': 'disabled()',
+		'(click)': 'closePanel()',
 	},
 })
 export class DropdownActionComponent {
+	#popoverContentRef = inject(PopoverContentComponent, { optional: true });
+
 	disabled = input(false, { transform: booleanAttribute });
+
+	closePanel() {
+		if (this.#popoverContentRef) {
+			this.#popoverContentRef.close();
+		}
+	}
 }

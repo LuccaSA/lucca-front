@@ -21,7 +21,7 @@ import { FileEntry } from '../file-upload-entry';
 export class SingleFileUploadComponent extends BaseFileUploadComponent {
 	entry = input<FileEntry | null>(null);
 
-	state = input<'loading' | 'success' | 'error' | null>(null);
+	state = input<'loading' | 'success' | 'error' | 'default'>('default');
 
 	inlineMessageError = input<string | null>(null);
 

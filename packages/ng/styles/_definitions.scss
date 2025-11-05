@@ -4,3 +4,9 @@
 @forward 'definitions/option/option-searcher';
 @forward 'definitions/option/option-selector';
 @forward 'definitions/option/option-placeholder';
+
+@use 'config';
+
+/* stylelint-disable-next-line layer-name-pattern */
+@layer #{config.$layers};
+

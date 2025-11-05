@@ -6,6 +6,7 @@ import { ALuCoreSelectApiDirective } from '@lucca-front/ng/core-select/api';
 import { combineLatest, map, Observable } from 'rxjs';
 import { NoopTreeSelectDirective } from './noop-tree-select.directive';
 import { ILuDepartment } from '@lucca-front/ng/department';
+import { filter } from 'rxjs/operators';
 
 @Directive({
 	// The attribute is already prefixed with "lu-simple-select" / "lu-multi-select"
@@ -85,6 +86,7 @@ export class LuCoreSelectDepartmentsDirective<T extends ILuDepartment = ILuDepar
 	);
 
 	public totalCount$ = this.select.options$.pipe(
+		filter((opts) => opts.length > 0),
 		map((opts) => {
 			return opts.map((branch) => this.flattenTree(branch)).flat().length;
 		}),

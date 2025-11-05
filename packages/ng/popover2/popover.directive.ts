@@ -268,7 +268,7 @@ export class PopoverDirective implements OnDestroy {
 					PopoverContentComponent,
 					this.#vcr,
 					Injector.create({
-						providers: [{ provide: POPOVER_CONFIG, useValue: config }, ...this.additionalProviders],
+						providers: [{ provide: POPOVER_CONFIG, useValue: config }, { provide: PopoverContentComponent, useValue: this.#componentRef }, ...this.additionalProviders],
 					}),
 				),
 			).instance;

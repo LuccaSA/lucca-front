@@ -64,6 +64,7 @@
 
 	@at-root ($atRoot) {
 		.richTextField-toolbar {
+			display: var(--components-richTextField-toolbar-display);
 			background-color: var(--components-richTextField-toolbar-backgroundColor);
 			border-radius: 0 0 var(--pr-t-border-radius-input) var(--pr-t-border-radius-input);
 			padding: var(--pr-t-spacings-100);
@@ -151,6 +152,11 @@
 
 			&:focus-visible {
 				@include a11y.focusVisible;
+			}
+
+			&.is-disabled {
+				--components-chip-backgroundColor: var(--palettes-neutral-200);
+				--components-chip-color: var(--pr-t-color-input-text-disabled);
 			}
 		}
 
