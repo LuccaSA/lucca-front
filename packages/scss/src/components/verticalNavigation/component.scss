@@ -26,7 +26,8 @@
 			margin-inline-end: var(--pr-t-spacings-100);
 		}
 
-		.verticalNavigation-list-item-link {
+		// Second selector to get rid of verticalNavigation-list-item-link on angular component
+		.verticalNavigation-list-item-link, .verticalNavigation-list-item > a {
 			@include reset.button;
 
 			display: flex;
