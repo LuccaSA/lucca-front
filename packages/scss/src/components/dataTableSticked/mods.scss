@@ -130,6 +130,8 @@
 				&:not(:has(+ :is(.dataTable-head-row-cell, .dataTable-body-row-cell, .dataTable-foot-row-cell).mod-stickyColumn)) {
 					&::after {
 						@extend %addShadow;
+
+						opacity: var(--components-dataTable-shadow-colsStart-opacity);
 					}
 				}
 			}
@@ -143,6 +145,7 @@
 					inset-inline-start: auto;
 					inset-inline-end: 100%;
 					transform: scaleX(-1);
+					opacity: var(--components-dataTable-shadow-colsEnd-opacity);
 				}
 
 				& ~ :is(.dataTable-head-row-cell, .dataTable-body-row-cell, .dataTable-foot-row-cell).mod-stickyColumn {

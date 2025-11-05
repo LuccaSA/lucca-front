@@ -43,6 +43,14 @@
 				@include stickyColumnBorder;
 			}
 		}
+
+		&:has(.dataTable.is-firstColumnVisibleAfterColsStart) {
+			@include firstColumnVisibleAfterColsStart;
+		}
+
+		&:has(.dataTable.is-lastColumnVisibleBeforeColsEnd) {
+			@include lastColumnVisibleBeforeColsEnd;
+		}
 	}
 
 	&:has(.dataTable-head.is-firstBodyRowVisible) {

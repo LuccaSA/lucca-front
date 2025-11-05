@@ -55,6 +55,11 @@ export class DataTableComponent {
 			['mod-verticalAlignTop']: this.verticalAlign() === 'top',
 			['mod-verticalAlignMiddle']: this.verticalAlign() === 'middle',
 			['mod-verticalAlignBottom']: this.verticalAlign() === 'bottom',
+			['mod-columnsOverflow']: this.stickyColsStart() || this.stickyColsEnd(),
+			['is-firstColumnVisible']: this.stickyColsStart(),
+			['is-lastColumnVisible']: this.stickyColsEnd(),
+			['is-firstColumnVisibleAfterColsStart']: false,
+			['is-lastColumnVisibleBeforeColsEnd']: false,
 			['mod-layoutFixed']: this.layoutFixed(),
 			...Object.entries(this.responsive()).reduce((acc, [key, value]) => {
 				return {
