@@ -1,3 +1,4 @@
+import { NgTemplateOutlet } from '@angular/common';
 import { booleanAttribute, Component, contentChildren, ElementRef, forwardRef, inject, input, model, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
@@ -21,7 +22,7 @@ import { LU_DATA_TABLE_ROW_INSTANCE } from './data-table-row.token';
 		'[class.dataTable-foot-row]': 'footRef !== null',
 		'[class.mod-selectable]': 'tableRef.selectable()',
 	},
-	imports: [CheckboxInputComponent, FormFieldComponent, FormsModule],
+	imports: [CheckboxInputComponent, FormFieldComponent, FormsModule, NgTemplateOutlet],
 	providers: [
 		{
 			provide: LU_DATA_TABLE_ROW_INSTANCE,
