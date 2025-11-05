@@ -1,4 +1,20 @@
 @use '@lucca-front/scss/src/commons/utils/overflow';
+@use '@lucca-front/scss/src/commons/utils/media';
+
+@mixin depth($level) {
+  $selector: '';
+  $string: '~ .cdk-global-overlay-wrapper';
+
+	@for $i from 1 through $level {
+    $selector: $selector + $string;
+  }
+
+  &:has(#{$selector}) {
+      .dialog {
+          --components-dialog-level: #{$level};
+      }
+  }
+}
 
 .cdk-global-overlay-wrapper {
 	block-size: 100%;
@@ -9,6 +25,10 @@
 	display: flex;
 	position: absolute;
 	z-index: 1000;
+
+	@for $i from 1 through 3 {
+		@include depth($i);
+	}
 }
 
 .cdk-global-scrollblock {
@@ -17,4 +37,3 @@
 
 	@include overflow.scrollblock('!important');
 }
-
