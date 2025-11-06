@@ -24,9 +24,8 @@
 
 @mixin overlayS {
 	--components-calloutPopover-width: 20rem;
-	--components-calloutPopover-content-margin: 1.75rem;
 
-	.calloutPopover-overlay-head-icon {
+	.calloutPopover-overlay-icon {
 		@include icon.S;
 	}
 
@@ -41,9 +40,7 @@
 }
 
 @mixin overlayIconless {
-	--components-calloutPopover-content-margin: 0;
-
-	.calloutPopover-overlay-head-icon {
+	.calloutPopover-overlay-icon {
 		display: none;
 	}
 }
