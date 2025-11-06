@@ -22,7 +22,7 @@ import { VerticalNavigationLinkDirective } from '../vertical-navigation-link.dir
 export class VerticalNavigationListComponent {
 	label = input.required<string>();
 	icon = input<LuccaIcon | null>(null);
-	disabled = input(true, { transform: booleanAttribute });
+	disabled = input(false, { transform: booleanAttribute });
 
 	links = contentChildren(VerticalNavigationLinkDirective);
 

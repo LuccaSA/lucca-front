@@ -20,7 +20,7 @@ import { IconComponent } from '@lucca-front/ng/icon';
 export class VerticalNavigationItemComponent {
 	label = input.required<string>();
 	icon = input<LuccaIcon | null>(null);
-	disabled = input(true, { transform: booleanAttribute });
+	disabled = input(false, { transform: booleanAttribute });
 
 	isIconless = computed(() => isNil(this.icon()));
 	verticalNavigationIconClass = computed(() => (this.isIconless() ? 'verticalNavigation-list-item-link' : 'verticalNavigation-list-item-link-icon'));
