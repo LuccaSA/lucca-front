@@ -1,18 +1,5 @@
-<h3 class="verticalNavigation-sectionTitle">{{ sectionTitle() }}</h3>
+{{ isIconless() }}
+<h3 class="verticalNavigation-sectionTitle">{{ title() }}</h3>
 <ul class="verticalNavigation-list">
-	<li class="verticalNavigation-list-item">
-		<button type="button" class="verticalNavigation-list-item-link" [attr.aria-expanded]="expanded()" (click)="toggleExpanded()">
-			@if (!isIconless()) {
-				<lu-icon [class]="verticalNavigationIconClass()" [icon]="icon()" size="S" />
-			}
-			{{ title() }}<span aria-hidden="true" class="lucca-icon icon-arrowChevronBottom verticalNavigation-list-item-link-arrow"></span>
-		</button>
-		<ul class="verticalNavigation-list mod-child">
-			@for (link of links(); track $index) {
-				<li class="verticalNavigation-list-item">
-					<ng-container *ngTemplateOutlet="link.template" />
-				</li>
-			}
-		</ul>
-	</li>
+	<ng-content />
 </ul>

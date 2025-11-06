@@ -7,8 +7,17 @@ We need 2 Angular components :
 <table class="demo-QAtable">
 	<tbody>
 		<tr>
+			<td></td>
+			<td style="width: 50%">
+				<div class="demo-QAtable-list">HTML</div>
+			</td>
+			<td style="width: 50%">
+				<div class="demo-QAtable-list">Angular</div>
+			</td>
+		</tr>
+		<tr>
 			<td>Default</td>
-			<td style="width: 100%">
+			<td>
 				<div class="verticalNavigation">
 					<h3 class="verticalNavigation-sectionTitle">Section title</h3>
 					<ul class="verticalNavigation-list">
@@ -69,6 +78,22 @@ We need 2 Angular components :
 							</ul>
 						</li>
 					</ul>
+				</div>
+			</td>
+			<td></td>
+		</tr>
+	</tbody>
+</table>
+
+<!-- To tell the ui-diff tool that the page has finished rendering -->
+<span id="ready"></span>
+
+<table class="demo-QAtable">
+	<tbody>
+		<tr>
+			<td>Default</td>
+			<td style="width: 100%">
+				<div class="verticalNavigation">
 					<h3 class="verticalNavigation-sectionTitle">Section title</h3>
 					<ul class="verticalNavigation-list">
 						<li class="verticalNavigation-list-item">

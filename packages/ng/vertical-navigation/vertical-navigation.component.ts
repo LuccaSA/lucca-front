@@ -1,9 +1,7 @@
-import { NgTemplateOutlet } from '@angular/common';
-import { ChangeDetectionStrategy, Component, computed, contentChildren, input, model, ViewEncapsulation } from '@angular/core';
-import { LuccaIcon } from '@lucca-front/icons';
-import { isNil } from '@lucca-front/ng/core';
-import { IconComponent } from '../icon/icon.component';
-import { VerticalNavigationLinkDirective } from './vertical-naviguation-link.directive';
+import { ChangeDetectionStrategy, Component, computed, contentChildren, input, ViewEncapsulation } from '@angular/core';
+import { isNil } from '../core/misc';
+import { VerticalNavigationItemComponent } from './item/vertical-navigation-item.component';
+import { VerticalNavigationListComponent } from './list/vertical-navigation-list.component';
 
 @Component({
 	selector: 'lu-vertical-navigation',
@@ -12,25 +10,16 @@ import { VerticalNavigationLinkDirective } from './vertical-naviguation-link.dir
 	styleUrl: './vertical-navigation.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	encapsulation: ViewEncapsulation.None,
-	imports: [NgTemplateOutlet, IconComponent],
 	host: {
 		class: 'verticalNavigation',
 		'[class.mod-iconless]': 'isIconless()',
 	},
 })
 export class VerticalNavigationComponent {
-	sectionTitle = input.required<string>();
 	title = input.required<string>();
-	icon = input<LuccaIcon | null>(null);
 
-	links = contentChildren(VerticalNavigationLinkDirective);
+	navigationList = contentChildren(VerticalNavigationListComponent);
+	navigationItems = contentChildren(VerticalNavigationItemComponent);
 
-	expanded = model(true);
-
-	isIconless = computed(() => isNil(this.icon()));
-	verticalNavigationIconClass = computed(() => (this.isIconless() ? 'verticalNavigation-list-item-link' : 'verticalNavigation-list-item-link-icon'));
-
-	toggleExpanded() {
-		this.expanded.set(!this.expanded());
-	}
+	isIconless = computed(() => this.navigationItems().some((item) => isNil(item.icon())) || this.navigationList().some((list) => isNil(list.icon())));
 }

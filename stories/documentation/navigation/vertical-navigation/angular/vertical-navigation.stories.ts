@@ -1,10 +1,10 @@
-import { VerticalNavigationComponent, VerticalNavigationLinkDirective } from '@lucca-front/ng/vertical-navigation';
+import { VerticalNavigationComponent, VerticalNavigationItemComponent, VerticalNavigationLinkDirective, VerticalNavigationListComponent } from '@lucca-front/ng/vertical-navigation';
 import { Meta, moduleMetadata } from '@storybook/angular';
 import { cleanupTemplate } from 'stories/helpers/stories';
 
 interface VerticalNavigationStories {
-	sectionTitle: string;
 	title: string;
+	label: string;
 	disabled: boolean;
 	iconless: boolean;
 }
@@ -12,12 +12,12 @@ interface VerticalNavigationStories {
 export default {
 	title: 'Documentation/Navigation/VerticalNavigation/Angular/Basic',
 	argTypes: {
-		sectionTitle: {
+		title: {
 			control: {
 				type: 'text',
 			},
 		},
-		title: {
+		label: {
 			control: {
 				type: 'text',
 			},
@@ -35,20 +35,21 @@ export default {
 	},
 	decorators: [
 		moduleMetadata({
-			imports: [VerticalNavigationComponent, VerticalNavigationLinkDirective],
+			imports: [VerticalNavigationComponent, VerticalNavigationLinkDirective, VerticalNavigationItemComponent, VerticalNavigationListComponent],
 		}),
 	],
 	render: (args: VerticalNavigationStories) => {
-		const sectionTitle = ` sectionTitle="${args.sectionTitle ? args.sectionTitle : ''}"`;
+		const label = ` label="${args.label ? args.label : ''}"`;
 		const title = ` title="${args.title ? args.title : ''}"`;
 		const icon = args.iconless ? '' : ` icon="heart"`;
 		const disabled = args.disabled ? ` disabled` : '';
 		return {
-			template: cleanupTemplate(`<lu-vertical-navigation${sectionTitle}${title}${icon}>
-	<a *luVerticalNavigationLink aria-current="page" href="#">Item 1</a>
-	<a *luVerticalNavigationLink href="#"${disabled}>Item 2</a>
-	<a *luVerticalNavigationLink href="#"${disabled}>Item 3</a>
-	<a *luVerticalNavigationLink href="#"${disabled}>Item 4</a>
+			template: cleanupTemplate(`<lu-vertical-navigation${title}>
+	<lu-vertical-navigation-list${label}${icon}>
+		<a *luVerticalNavigationLink href="#">Item 1</a>
+		<a *luVerticalNavigationLink href="#">Item 2</a>
+	</lu-vertical-navigation-list>
+	<lu-vertical-navigation-item${label}${icon} />
 </lu-vertical-navigation>`),
 		};
 	},
@@ -56,8 +57,8 @@ export default {
 
 export const Basic = {
 	args: {
-		sectionTitle: 'Section',
-		title: 'Item',
+		title: 'Section',
+		label: 'Item',
 		disabled: false,
 		iconless: false,
 	},
