@@ -96,6 +96,9 @@ function getTemplate(args: ScrollBoxBasicStory): string {
 		</div>
 	</lu-scroll-box>
 </div>
+<lu-scroll-box>
+	<div style="width: 110vw" class="box">box</div>
+</lu-scroll-box>
 `;
 }
 
