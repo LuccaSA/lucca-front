@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, input, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, computed, input, ViewEncapsulation } from '@angular/core';
 import { LuccaIcon } from '@lucca-front/icons';
 import { isNil } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
@@ -14,11 +14,13 @@ import { IconComponent } from '@lucca-front/ng/icon';
 	host: {
 		role: 'link',
 		class: 'verticalNavigation-list-item-link',
+		'[class.is-disabled]': 'disabled()',
 	},
 })
 export class VerticalNavigationItemComponent {
 	label = input.required<string>();
 	icon = input<LuccaIcon | null>(null);
+	disabled = input(true, { transform: booleanAttribute });
 
 	isIconless = computed(() => isNil(this.icon()));
 	verticalNavigationIconClass = computed(() => (this.isIconless() ? 'verticalNavigation-list-item-link' : 'verticalNavigation-list-item-link-icon'));

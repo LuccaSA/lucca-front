@@ -1,5 +1,5 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { ChangeDetectionStrategy, Component, computed, contentChildren, input, model, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, computed, contentChildren, input, model, ViewEncapsulation } from '@angular/core';
 import { LuccaIcon } from '@lucca-front/icons';
 import { isNil } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
@@ -16,11 +16,13 @@ import { VerticalNavigationLinkDirective } from '../vertical-navigation-link.dir
 	host: {
 		role: 'listitem',
 		class: 'verticalNavigation-list-item',
+		'[class.is-disabled]': 'disabled()',
 	},
 })
 export class VerticalNavigationListComponent {
 	label = input.required<string>();
 	icon = input<LuccaIcon | null>(null);
+	disabled = input(true, { transform: booleanAttribute });
 
 	links = contentChildren(VerticalNavigationLinkDirective);
 
