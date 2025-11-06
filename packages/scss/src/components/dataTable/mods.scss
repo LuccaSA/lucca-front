@@ -95,7 +95,7 @@
 
 @mixin actions {
 	padding-block: 0;
-	padding-inline: 0 var(--pr-t-spacings-50);
+	padding-inline: var(--pr-t-spacings-50);
 	text-align: end;
 	white-space: nowrap;
 
