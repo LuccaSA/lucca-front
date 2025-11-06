@@ -3,7 +3,7 @@ import { booleanAttribute, Component, computed, input, numberAttribute, ViewEnca
 import { ResponsiveProperty } from '@lucca-front/ng/core';
 
 @Component({
-	selector: 'lu-grid',
+	selector: 'lu-grid, [lu-grid]',
 	standalone: true,
 	templateUrl: './grid.component.html',
 	styleUrls: ['./grid.component.scss'],
