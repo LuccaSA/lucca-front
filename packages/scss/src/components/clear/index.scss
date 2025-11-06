@@ -26,9 +26,9 @@
 		}
 
 		&[disabled] {
-			@include disabled;
-
 			cursor: default;
+
+			@include disabled;
 		}
 
 		&[hidden],
