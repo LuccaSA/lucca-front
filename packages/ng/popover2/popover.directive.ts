@@ -92,6 +92,9 @@ export class PopoverDirective implements OnDestroy {
 	@Input()
 	luPopoverPosition: PopoverPosition = 'above';
 
+	@Input()
+	overlayScrollStrategy: 'reposition' | 'block' | 'close' = 'reposition';
+
 	@Input({
 		transform: booleanAttribute,
 	})
@@ -240,7 +243,7 @@ export class PopoverDirective implements OnDestroy {
 					.position()
 					.flexibleConnectedTo(this.luPopoverAnchor())
 					.withPositions(this.customPositions || this.#buildPositions()),
-				scrollStrategy: this.overlay.scrollStrategies.reposition(),
+				scrollStrategy: this.overlay.scrollStrategies[this.overlayScrollStrategy ?? 'reposition'](),
 				hasBackdrop: withBackdrop,
 				backdropClass: '',
 				disposeOnNavigation: true,
@@ -296,8 +299,8 @@ export class PopoverDirective implements OnDestroy {
 		}
 	}
 
-	@HostListener('keydown.Shift.Tab', ['$event'])
-	focusOutBefore(_event: Event): void {
+	@HostListener('keydown.Shift.Tab')
+	focusOutBefore(): void {
 		if (this.opened() && this.luPopoverTrigger().includes('focus')) {
 			this.#componentRef.close();
 		}
