@@ -21,9 +21,8 @@ import { LU_CLEAR_TRANSLATIONS } from './clear.translate';
 		'[class.mod-inverted]': 'inverted()',
 		'(click)': 'clear($event)',
 		'(keyup.space)': 'clear($event)',
-		'(keyup.enter)': 'clear($event)',
+		'(keydown.enter)': '$event.preventDefault(); $event.stopPropagation(); clear($event)',
 		'(keydown.space)': '$event.preventDefault(); $event.stopPropagation()',
-		'(keydown.enter)': '$event.preventDefault(); $event.stopPropagation()',
 	},
 	providers: [
 		{
