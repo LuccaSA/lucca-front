@@ -42,14 +42,19 @@ export default {
 		const label = ` label="${args.label ? args.label : ''}"`;
 		const title = ` title="${args.title ? args.title : ''}"`;
 		const icon = args.iconless ? '' : ` icon="heart"`;
-		const disabled = args.disabled ? ` disabled` : '';
+		const disabled = args.disabled ? ` disabled="true"` : '';
 		return {
 			template: cleanupTemplate(`<lu-vertical-navigation${title}>
-	<lu-vertical-navigation-list${label}${icon}>
+	<lu-vertical-navigation-list${label}${icon}${disabled}>
 		<a *luVerticalNavigationLink href="#">Item 1</a>
 		<a *luVerticalNavigationLink href="#">Item 2</a>
 	</lu-vertical-navigation-list>
-	<lu-vertical-navigation-item${label}${icon} />
+	<lu-vertical-navigation-item${label}${icon}${disabled} />
+	<lu-vertical-navigation-list expanded="false"${label}${icon}${disabled}>
+		<a *luVerticalNavigationLink href="#">Item 1</a>
+		<a *luVerticalNavigationLink href="#">Item 2</a>
+		<a *luVerticalNavigationLink href="#">Item 3</a>
+	</lu-vertical-navigation-list>
 </lu-vertical-navigation>`),
 		};
 	},
