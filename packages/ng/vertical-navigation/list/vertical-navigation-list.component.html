@@ -1,5 +1,11 @@
 @if (links().length) {
-	<button type="button" class="verticalNavigation-list-item-link" [attr.aria-expanded]="expanded()" (click)="toggleExpanded()">
+	<button
+		type="button"
+		class="verticalNavigation-list-item-link"
+		[attr.aria-expanded]="expanded()"
+		(click)="toggleExpanded()"
+		[disabled]="disabled()"
+	>
 		@if (!isIconless()) {
 			<lu-icon [class]="verticalNavigationIconClass()" [icon]="icon()" size="S" />
 		}
