@@ -4,9 +4,6 @@ import { cleanupTemplate } from 'stories/helpers/stories';
 
 interface VerticalNavigationStories {
 	title: string;
-	label: string;
-	disabled: boolean;
-	iconless: boolean;
 }
 
 export default {
@@ -17,21 +14,6 @@ export default {
 				type: 'text',
 			},
 		},
-		label: {
-			control: {
-				type: 'text',
-			},
-		},
-		disabled: {
-			control: {
-				type: 'boolean',
-			},
-		},
-		iconless: {
-			control: {
-				type: 'boolean',
-			},
-		},
 	},
 	decorators: [
 		moduleMetadata({
@@ -39,32 +21,26 @@ export default {
 		}),
 	],
 	render: (args: VerticalNavigationStories) => {
-		const label = ` label="${args.label ? args.label : ''}"`;
 		const title = ` title="${args.title ? args.title : ''}"`;
-		const icon = args.iconless ? '' : ` icon="heart"`;
-		const disabled = args.disabled ? ` disabled="true"` : '';
 		return {
 			template: cleanupTemplate(`<lu-vertical-navigation${title}>
-	<lu-vertical-navigation-list${label}${icon}${disabled}>
-		<a *luVerticalNavigationLink href="#">Item 1</a>
+	<lu-vertical-navigation-list icon="heart" label="Item Group 1">
+		<a *luVerticalNavigationLink href="#" aria-current="page">Item 1</a>
 		<a *luVerticalNavigationLink href="#">Item 2</a>
 	</lu-vertical-navigation-list>
-	<lu-vertical-navigation-item${label}${icon}${disabled} />
-	<lu-vertical-navigation-list expanded="false"${label}${icon}${disabled}>
+	<lu-vertical-navigation-item icon="heartFilled" label="Item 1" />
+	<lu-vertical-navigation-list icon="star" label="Item Group 2">
 		<a *luVerticalNavigationLink href="#">Item 1</a>
 		<a *luVerticalNavigationLink href="#">Item 2</a>
 		<a *luVerticalNavigationLink href="#">Item 3</a>
 	</lu-vertical-navigation-list>
+	<lu-vertical-navigation-item icon="starFilled" label="Item 2" />
 </lu-vertical-navigation>`),
 		};
 	},
 } as Meta;
-
 export const Basic = {
 	args: {
 		title: 'Section',
-		label: 'Item',
-		disabled: false,
-		iconless: false,
 	},
 };
