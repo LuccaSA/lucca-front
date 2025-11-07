@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, computed, contentChildren, input, ViewEncapsulation } from '@angular/core';
-import { isNil } from '../core/misc';
+import { isNil } from '@lucca-front/ng/core';
 import { VerticalNavigationItemComponent } from './item/vertical-navigation-item.component';
 import { VerticalNavigationListComponent } from './list/vertical-navigation-list.component';
 
