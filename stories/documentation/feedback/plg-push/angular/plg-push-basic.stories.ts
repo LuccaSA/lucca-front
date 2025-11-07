@@ -35,6 +35,9 @@ export default {
 		linkURL: {
 			type: 'string',
 		},
+		removable: {
+			type: 'boolean',
+		},
 	},
 } as Meta;
 
@@ -44,5 +47,6 @@ export const Template: StoryObj<PLGPushComponent & { description: string; linkLa
 		description: `Bénéficiez de toutes les options liées au télétravail avec Timmi Office.`,
 		linkLabel: `Demander un essai gratuit`,
 		linkURL: `#`,
+		removable: false,
 	},
 };

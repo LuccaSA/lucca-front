@@ -22,6 +22,9 @@ function getTemplate(args: PLGPushBasicStory): string {
 			</a>
 		</div>
 	</div>
+	<button type="button" class="plgPush-close button mod-onlyIcon mod-S mod-ghost palette-brand"><span aria-hidden="true" class="lucca-icon icon-signClose"></span>
+		<span class="pr-u-mask">Fermer</span>
+	</button>
 </div>`;
 }
 
