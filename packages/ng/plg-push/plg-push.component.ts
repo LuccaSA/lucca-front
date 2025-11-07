@@ -1,6 +1,8 @@
 import { booleanAttribute, ChangeDetectionStrategy, Component, EventEmitter, HostBinding, Input, Output, ViewEncapsulation } from '@angular/core';
+import { getIntl } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { ButtonComponent } from '../button/button.component';
+import { LU_PLG_PUSH_TRANSLATIONS } from './plg-push.translate';
 
 @Component({
 	selector: 'lu-plg-push',
@@ -12,6 +14,8 @@ import { ButtonComponent } from '../button/button.component';
 	encapsulation: ViewEncapsulation.None,
 })
 export class PLGPushComponent {
+	protected intl = getIntl(LU_PLG_PUSH_TRANSLATIONS);
+
 	@Input() public heading = '';
 
 	@Input({ transform: booleanAttribute })
