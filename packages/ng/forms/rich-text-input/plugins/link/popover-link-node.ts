@@ -1,6 +1,6 @@
-import { LinkNode } from '@lexical/link';
-import { DOMExportOutput, LexicalEditor } from 'lexical';
 import { TemplateRef, ViewContainerRef } from '@angular/core';
+import { LinkNode } from '@lexical/link';
+import { DOMConversionMap, DOMExportOutput, LexicalEditor } from 'lexical';
 
 export class PopoverLinkNode extends LinkNode {
 	static #viewContainerRef: ViewContainerRef;
@@ -30,6 +30,10 @@ export class PopoverLinkNode extends LinkNode {
 			return view.rootNodes[0] as HTMLElement;
 		}
 		throw new Error('ViewContainerRef is not set for PopoverLinkNode. Ensure it is initialized before creating PopoverLinkNode instances.');
+	}
+
+	static override importDOM(): DOMConversionMap {
+		return null;
 	}
 
 	override exportDOM(editor: LexicalEditor): DOMExportOutput {
