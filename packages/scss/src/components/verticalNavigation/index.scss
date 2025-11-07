@@ -20,8 +20,7 @@
 		}
 	}
 
-	// Second selector to get rid of verticalNavigation-list-item-link on angular component
-	.verticalNavigation-list-item-link, .verticalNavigation-list-item > a {
+	.verticalNavigation-list-item-link {
 		&[aria-expanded='true'] {
 			@include expanded;
 		}

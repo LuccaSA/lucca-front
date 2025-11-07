@@ -2,8 +2,7 @@
 	display: none;
 	margin: 0;
 
-	// Second selector to get rid of verticalNavigation-list-item-link on angular component
-	.verticalNavigation-list-item-link, .verticalNavigation-list-item > a {
+	.verticalNavigation-list-item-link {
 		font-weight: var(--pr-t-font-fontWeight-regular);
 		padding-inline-start: calc(2rem + var(--components-verticalNavigation-horizontalPadding));
 	}
@@ -11,8 +10,7 @@
 
 @mixin iconless {
 	.verticalNavigation-list.mod-child {
-		// Second selector to get rid of verticalNavigation-list-item-link on angular component
-		.verticalNavigation-list-item-link, .verticalNavigation-list-item > a {
+		.verticalNavigation-list-item-link {
 			padding-inline-start: var(--components-verticalNavigation-horizontalPadding);
 		}
 	}

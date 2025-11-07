@@ -1,6 +1,4 @@
-import { IconComponent } from '@lucca-front/ng/icon';
-import { LinkComponent } from '@lucca-front/ng/link';
-import { VerticalNavigationComponent, VerticalNavigationItemComponent, VerticalNavigationLinkDirective, VerticalNavigationListComponent } from '@lucca-front/ng/vertical-navigation';
+import { VerticalNavigationComponent, VerticalNavigationGroupComponent, VerticalNavigationItemComponent, VerticalNavigationLinkComponent } from '@lucca-front/ng/vertical-navigation';
 import { Meta, moduleMetadata } from '@storybook/angular';
 
 interface VerticalNavigationStories {
@@ -18,28 +16,24 @@ export default {
 	},
 	decorators: [
 		moduleMetadata({
-			imports: [VerticalNavigationComponent, VerticalNavigationLinkDirective, VerticalNavigationItemComponent, VerticalNavigationListComponent, LinkComponent, IconComponent],
+			imports: [VerticalNavigationComponent, VerticalNavigationLinkComponent, VerticalNavigationItemComponent, VerticalNavigationGroupComponent],
 		}),
 	],
 	render: (args: VerticalNavigationStories) => {
 		const title = ` headingLabel="${args.title ? args.title : ''}"`;
 		return {
 			template: `<lu-vertical-navigation${title}>
-	<ul lu-vertical-navigation-list>
+ 	<lu-vertical-navigation-item>
+		<a luVerticalNavigationLink href="#" icon="heart">Item 1</a>
+	</lu-vertical-navigation-item>
 		<lu-vertical-navigation-item>
-			<a lu-link href="#"><lu-icon icon="heart" />Item</a>
+			<a luVerticalNavigationLink href="#">Item 2</a>
 		</lu-vertical-navigation-item>
-		<lu-vertical-navigation-item>
-			<a lu-link href="#">Item 2</a>
-		</lu-vertical-navigation-item>
-		<lu-vertical-navigation-item label="Group">
-			<ul lu-vertical-navigation-list>
+		<lu-vertical-navigation-group label="Group" icon="heart">
 				<lu-vertical-navigation-item>
-					<a lu-link href="#">Item 3</a>
+					<a luVerticalNavigationLink href="#">Item 3</a>
 				</lu-vertical-navigation-item>
-			</ul>
-		</lu-vertical-navigation-item>
-	</ul>
+		</lu-vertical-navigation-group>
 </lu-vertical-navigation>`,
 		};
 	},

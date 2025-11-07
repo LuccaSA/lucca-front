@@ -1,16 +1,1 @@
-@if (label()) {
-	<button
-		type="button"
-		class="verticalNavigation-list-item-link"
-		[attr.aria-expanded]="expanded()"
-		(click)="toggleExpanded()"
-		[disabled]="disabled()"
-	>
-		@if (icon()) {
-			<lu-icon [icon]="icon()" size="S" />
-		}
-		{{ label() }}<span aria-hidden="true" class="lucca-icon icon-arrowChevronBottom verticalNavigation-list-item-link-arrow"></span>
-	</button>
-}
-
 <ng-content />

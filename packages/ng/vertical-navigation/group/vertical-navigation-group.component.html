@@ -1,0 +1,15 @@
+<button
+	type="button"
+	class="verticalNavigation-list-item-link"
+	[attr.aria-expanded]="expanded()"
+	(click)="toggleExpanded()"
+	[disabled]="disabled()"
+>
+	@if (icon()) {
+		<lu-icon class="verticalNavigation-list-item-link-icon" [icon]="icon()" />
+	}
+	{{ label() }}<span aria-hidden="true" class="lucca-icon icon-arrowChevronBottom verticalNavigation-list-item-link-arrow"></span>
+</button>
+<ul class="verticalNavigation-list mod-child">
+	<ng-content />
+</ul>
