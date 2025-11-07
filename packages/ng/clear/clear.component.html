@@ -1,5 +1,5 @@
 <span class="pr-u-mask">
-	@if (contentRef()) {
+	@if (contentRef().length) {
 		<ng-content />
 	} @else {
 		{{ intl.clear }}
