@@ -1,5 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, contentChildren, input, ViewEncapsulation } from '@angular/core';
-import { isNil } from '@lucca-front/ng/core';
+import { ChangeDetectionStrategy, Component, contentChildren, input, ViewEncapsulation } from '@angular/core';
 import { VerticalNavigationItemComponent } from './item/vertical-navigation-item.component';
 import { VerticalNavigationListComponent } from './list/vertical-navigation-list.component';
 
@@ -12,14 +11,13 @@ import { VerticalNavigationListComponent } from './list/vertical-navigation-list
 	encapsulation: ViewEncapsulation.None,
 	host: {
 		class: 'verticalNavigation',
-		'[class.mod-iconless]': 'isIconless()',
+		'[class.mod-iconless]': 'true',
 	},
 })
 export class VerticalNavigationComponent {
-	title = input.required<string>();
+	headingLabel = input.required<string>();
+	level = input<number>(3);
 
 	navigationList = contentChildren(VerticalNavigationListComponent);
 	navigationItems = contentChildren(VerticalNavigationItemComponent);
-
-	isIconless = computed(() => this.navigationItems().some((item) => isNil(item.icon())) || this.navigationList().some((list) => isNil(list.icon())));
 }

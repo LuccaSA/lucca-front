@@ -1,6 +1,5 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, computed, input, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, input, model, ViewEncapsulation } from '@angular/core';
 import { LuccaIcon } from '@lucca-front/icons';
-import { isNil } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
 
 @Component({
@@ -12,16 +11,19 @@ import { IconComponent } from '@lucca-front/ng/icon';
 	encapsulation: ViewEncapsulation.None,
 	imports: [IconComponent],
 	host: {
-		role: 'link',
-		class: 'verticalNavigation-list-item-link',
+		role: 'listitem',
+		class: 'verticalNavigation-list-item',
 		'[class.is-disabled]': 'disabled()',
 	},
 })
 export class VerticalNavigationItemComponent {
-	label = input.required<string>();
+	label = input<string | null>(null);
 	icon = input<LuccaIcon | null>(null);
 	disabled = input(false, { transform: booleanAttribute });
 
-	isIconless = computed(() => isNil(this.icon()));
-	verticalNavigationIconClass = computed(() => (this.isIconless() ? 'verticalNavigation-list-item-link' : 'verticalNavigation-list-item-link-icon'));
+	expanded = model(true);
+
+	toggleExpanded() {
+		this.expanded.set(!this.expanded());
+	}
 }

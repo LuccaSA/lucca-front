@@ -1,4 +1,2 @@
-<h3 class="verticalNavigation-sectionTitle">{{ title() }}</h3>
-<ul class="verticalNavigation-list">
-	<ng-content />
-</ul>
+<div role="heading" [attr.aria-level]="level()" class="verticalNavigation-sectionTitle">{{ headingLabel() }}</div>
+<ng-content />
