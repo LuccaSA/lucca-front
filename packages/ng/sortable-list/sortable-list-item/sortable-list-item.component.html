@@ -6,9 +6,5 @@
 	}
 </div>
 @if (clearable()) {
-	<!-- TODO use lu-clear component when pr merged -->
-	<button class="clear sortableList-clear" type="button" (click)="delete.emit()">
-		<span aria-hidden="true" class="lucca-icon icon-signClose"></span>
-		<span class="pr-u-mask">Delete</span>
-	</button>
+	<lu-clear class="sortableList-clear" (onClear)="delete.emit()" />
 }

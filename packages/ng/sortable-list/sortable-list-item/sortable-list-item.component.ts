@@ -1,4 +1,5 @@
 import { booleanAttribute, ChangeDetectionStrategy, Component, input, output, ViewEncapsulation } from '@angular/core';
+import { ClearComponent } from '@lucca-front/ng/clear';
 
 @Component({
 	selector: 'lu-sortable-list-item',
@@ -7,6 +8,7 @@ import { booleanAttribute, ChangeDetectionStrategy, Component, input, output, Vi
 	styleUrl: './sortable-list-item.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	encapsulation: ViewEncapsulation.None,
+	imports: [ClearComponent],
 	host: {
 		class: 'sortableList-item',
 		'[class.mod-clickable]': 'clickable()',
