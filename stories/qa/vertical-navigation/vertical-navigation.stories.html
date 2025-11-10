@@ -81,21 +81,29 @@ We need 2 Angular components :
 				</div>
 			</td>
 			<td>
-				<lu-vertical-navigation title="Section title">
-					<lu-vertical-navigation-list label="Item" expanded="false" icon="heart">
-						<a *luVerticalNavigationLink href="#">Item</a>
-						<a *luVerticalNavigationLink href="#">Item</a>
-					</lu-vertical-navigation-list>
-					<lu-vertical-navigation-list label="Item" icon="heart">
-						<a *luVerticalNavigationLink href="#">Item</a>
-						<a *luVerticalNavigationLink href="#" aria-current="page">Item</a>
-						<a *luVerticalNavigationLink href="#" disabled="true">Item</a>
-					</lu-vertical-navigation-list>
-					<lu-vertical-navigation-item href="#" label="Item" icon="heart" />
-					<lu-vertical-navigation-list label="Item" expanded="false" icon="heart">
-						<a *luVerticalNavigationLink href="#">Item</a>
-						<a *luVerticalNavigationLink href="#">Item</a>
-					</lu-vertical-navigation-list>
+				<lu-vertical-navigation headingLabel="Section title">
+					<lu-vertical-navigation-group label="Item" expanded="false" icon="heart">
+						<lu-vertical-navigation-item>
+							<a luVerticalNavigationLink href="#">Item</a>
+							<a luVerticalNavigationLink href="#">Item</a>
+						</lu-vertical-navigation-item>
+					</lu-vertical-navigation-group>
+					<lu-vertical-navigation-group label="Item" icon="heart">
+						<lu-vertical-navigation-item>
+							<a luVerticalNavigationLink href="#">Item</a>
+							<a luVerticalNavigationLink href="#" aria-current="page">Item</a>
+							<a luVerticalNavigationLink href="#" disabled="true">Item</a>
+						</lu-vertical-navigation-item>
+					</lu-vertical-navigation-group>
+					<lu-vertical-navigation-item>
+						<a luVerticalNavigationLink href="#" icon="heart">Item</a>
+					</lu-vertical-navigation-item>
+					<lu-vertical-navigation-group label="Item" expanded="false" icon="heart">
+						<lu-vertical-navigation-item>
+							<a luVerticalNavigationLink href="#">Item</a>
+							<a luVerticalNavigationLink href="#">Item</a>
+						</lu-vertical-navigation-item>
+					</lu-vertical-navigation-group>
 				</lu-vertical-navigation>
 			</td>
 		</tr>
@@ -165,21 +173,29 @@ We need 2 Angular components :
 				</div>
 			</td>
 			<td>
-				<lu-vertical-navigation title="Section title">
-					<lu-vertical-navigation-list label="Item" expanded="false">
-						<a *luVerticalNavigationLink href="#">Item</a>
-						<a *luVerticalNavigationLink href="#">Item</a>
-					</lu-vertical-navigation-list>
-					<lu-vertical-navigation-list label="Item">
-						<a *luVerticalNavigationLink href="#">Item</a>
-						<a *luVerticalNavigationLink href="#" aria-current="page">Item</a>
-						<a *luVerticalNavigationLink href="#" disabled="true">Item</a>
-					</lu-vertical-navigation-list>
-					<lu-vertical-navigation-item href="#" label="Item" />
-					<lu-vertical-navigation-list label="Item" expanded="false">
-						<a *luVerticalNavigationLink href="#">Item</a>
-						<a *luVerticalNavigationLink href="#">Item</a>
-					</lu-vertical-navigation-list>
+				<lu-vertical-navigation headingLabel="Section title">
+					<lu-vertical-navigation-group label="Item" expanded="false">
+						<lu-vertical-navigation-item>
+							<a luVerticalNavigationLink href="#">Item</a>
+							<a luVerticalNavigationLink href="#">Item</a>
+						</lu-vertical-navigation-item>
+					</lu-vertical-navigation-group>
+					<lu-vertical-navigation-group label="Item">
+						<lu-vertical-navigation-item>
+							<a luVerticalNavigationLink href="#">Item</a>
+							<a luVerticalNavigationLink href="#" aria-current="page">Item</a>
+							<a luVerticalNavigationLink href="#" disabled="true">Item</a>
+						</lu-vertical-navigation-item>
+					</lu-vertical-navigation-group>
+					<lu-vertical-navigation-item>
+						<a luVerticalNavigationLink href="#">Item</a>
+					</lu-vertical-navigation-item>
+					<lu-vertical-navigation-group label="Item" expanded="false">
+						<lu-vertical-navigation-item>
+							<a luVerticalNavigationLink href="#">Item</a>
+							<a luVerticalNavigationLink href="#">Item</a>
+						</lu-vertical-navigation-item>
+					</lu-vertical-navigation-group>
 				</lu-vertical-navigation>
 			</td>
 		</tr>
@@ -249,21 +265,29 @@ We need 2 Angular components :
 				</div>
 			</td>
 			<td>
-				<lu-vertical-navigation title="Section title">
-					<lu-vertical-navigation-list label="Item" expanded="false" icon="heart" disabled="true">
-						<a *luVerticalNavigationLink href="#">Item</a>
-						<a *luVerticalNavigationLink href="#">Item</a>
-					</lu-vertical-navigation-list>
-					<lu-vertical-navigation-list label="Item" icon="heart">
-						<a *luVerticalNavigationLink href="#" disabled="true">Item</a>
-						<a *luVerticalNavigationLink href="#" aria-current="page">Item</a>
-						<a *luVerticalNavigationLink href="#" disabled="true">Item</a>
-					</lu-vertical-navigation-list>
-					<lu-vertical-navigation-item href="#" label="Item" icon="heart" disabled="true" />
-					<lu-vertical-navigation-list label="Item" icon="heart" disabled="true">
-						<a *luVerticalNavigationLink href="#" disabled="true">Item</a>
-						<a *luVerticalNavigationLink href="#" disabled="true">Item</a>
-					</lu-vertical-navigation-list>
+				<lu-vertical-navigation headingLabel="Section title">
+					<lu-vertical-navigation-group label="Item" expanded="false" icon="heart" disabled="true">
+						<lu-vertical-navigation-item>
+							<a luVerticalNavigationLink href="#">Item</a>
+							<a luVerticalNavigationLink href="#">Item</a>
+						</lu-vertical-navigation-item>
+					</lu-vertical-navigation-group>
+					<lu-vertical-navigation-group label="Item" icon="heart">
+						<lu-vertical-navigation-item>
+							<a luVerticalNavigationLink href="#" disabled="true">Item</a>
+							<a luVerticalNavigationLink href="#" aria-current="page">Item</a>
+							<a luVerticalNavigationLink href="#" disabled="true">Item</a>
+						</lu-vertical-navigation-item>
+					</lu-vertical-navigation-group>
+					<lu-vertical-navigation-item>
+						<a luVerticalNavigationLink href="#" icon="heart">Item</a>
+					</lu-vertical-navigation-item>
+					<lu-vertical-navigation-group label="Item" icon="heart" disabled="true">
+						<lu-vertical-navigation-item>
+							<a luVerticalNavigationLink href="#" disabled="true">Item</a>
+							<a luVerticalNavigationLink href="#" disabled="true">Item</a>
+						</lu-vertical-navigation-item>
+					</lu-vertical-navigation-group>
 				</lu-vertical-navigation>
 			</td>
 		</tr>
