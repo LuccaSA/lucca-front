@@ -1,1 +1,1 @@
-export * from './scroll-box.component';
+export * from '../scroll-box/scroll-box.component';
