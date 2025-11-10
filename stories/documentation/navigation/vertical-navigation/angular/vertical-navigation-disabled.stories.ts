@@ -22,7 +22,7 @@ export default {
 	render: (args: VerticalNavigationDisabledStories) => {
 		const disabled = args.disabled ? ` disabled="true"` : '';
 		return {
-			template: `<lu-vertical-navigation headingLabel="Section">
+			template: `<lu-vertical-navigation heading="Section">
 	<lu-vertical-navigation-item>
 		<a luVerticalNavigationLink href="#" icon="heart"${disabled}>Item 1</a>
 	</lu-vertical-navigation-item>

@@ -1,5 +1,6 @@
 import { booleanAttribute, ChangeDetectionStrategy, Component, input, model, ViewEncapsulation } from '@angular/core';
 import { LuccaIcon } from '@lucca-front/icons';
+import { PortalContent } from '@lucca-front/ng/core';
 import { IconComponent } from '@lucca-front/ng/icon';
 
 @Component({
@@ -16,7 +17,7 @@ import { IconComponent } from '@lucca-front/ng/icon';
 	},
 })
 export class VerticalNavigationGroupComponent {
-	label = input.required<string>();
+	label = input.required<PortalContent>();
 	icon = input<LuccaIcon | null>(null);
 	disabled = input(false, { transform: booleanAttribute });
 

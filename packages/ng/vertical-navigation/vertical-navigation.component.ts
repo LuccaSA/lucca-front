@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, computed, contentChildren, input, ViewEncapsulation } from '@angular/core';
+import { PortalContent } from '@lucca-front/ng/core';
 import { VerticalNavigationGroupComponent } from './group/vertical-navigation-group.component';
 import { VerticalNavigationLinkComponent } from './link/vertical-navigation-link.component';
 
@@ -15,7 +16,7 @@ import { VerticalNavigationLinkComponent } from './link/vertical-navigation-link
 	},
 })
 export class VerticalNavigationComponent {
-	headingLabel = input.required<string>();
+	heading = input.required<PortalContent>();
 	level = input<number>(3);
 
 	verticalNavigationGroup = contentChildren(VerticalNavigationGroupComponent, { descendants: true });

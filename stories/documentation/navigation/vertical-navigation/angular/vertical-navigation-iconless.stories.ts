@@ -22,7 +22,7 @@ export default {
 	render: (args: VerticalNavigationIconlessStory) => {
 		const icon = args.iconless ? '' : ` icon="heart"`;
 		return {
-			template: `<lu-vertical-navigation headingLabel="Section">
+			template: `<lu-vertical-navigation heading="Section">
 	<lu-vertical-navigation-item>
 		<a luVerticalNavigationLink href="#"${icon}>Item 1</a>
 	</lu-vertical-navigation-item>

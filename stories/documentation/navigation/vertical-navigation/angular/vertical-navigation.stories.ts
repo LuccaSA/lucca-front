@@ -2,7 +2,7 @@ import { VerticalNavigationComponent, VerticalNavigationGroupComponent, Vertical
 import { Meta, moduleMetadata } from '@storybook/angular';
 
 interface VerticalNavigationStories {
-	headingLabel: string;
+	heading: string;
 }
 
 export default {
@@ -20,9 +20,9 @@ export default {
 		}),
 	],
 	render: (args: VerticalNavigationStories) => {
-		const headingLabel = ` headingLabel="${args.headingLabel ? args.headingLabel : ''}"`;
+		const heading = ` headingLabel="${args.heading ? args.heading : ''}"`;
 		return {
-			template: `<lu-vertical-navigation${headingLabel}>
+			template: `<lu-vertical-navigation${heading}>
 	<lu-vertical-navigation-group label="Group 1" icon="heart">
 		<lu-vertical-navigation-item>
 			<a luVerticalNavigationLink href="#">Item 1</a>
@@ -39,6 +39,6 @@ export default {
 } as Meta;
 export const Basic = {
 	args: {
-		headingLabel: 'Section',
+		heading: 'Section',
 	},
 };
