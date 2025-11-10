@@ -1,6 +1,5 @@
-import { VerticalNavigationComponent, VerticalNavigationItemComponent, VerticalNavigationLinkComponent } from '@lucca-front/ng/vertical-navigation';
+import { VerticalNavigationComponent, VerticalNavigationGroupComponent, VerticalNavigationItemComponent, VerticalNavigationLinkComponent } from '@lucca-front/ng/vertical-navigation';
 import { Meta, moduleMetadata } from '@storybook/angular';
-import { cleanupTemplate } from 'stories/helpers/stories';
 
 interface VerticalNavigationIconlessStory {
 	iconless: boolean;
@@ -17,20 +16,22 @@ export default {
 	},
 	decorators: [
 		moduleMetadata({
-			imports: [VerticalNavigationComponent, VerticalNavigationLinkComponent, VerticalNavigationItemComponent],
+			imports: [VerticalNavigationComponent, VerticalNavigationLinkComponent, VerticalNavigationItemComponent, VerticalNavigationGroupComponent],
 		}),
 	],
 	render: (args: VerticalNavigationIconlessStory) => {
 		const icon = args.iconless ? '' : ` icon="heart"`;
 		return {
-			template: cleanupTemplate(`<lu-vertical-navigation title="Section">
-	<lu-vertical-navigation-list label="Item Group 1"${icon}>
-		<a *luVerticalNavigationLink href="#" aria-current="page">Item 1</a>
-		<a *luVerticalNavigationLink href="#">Item 2</a>
-	</lu-vertical-navigation-list>
-	<lu-vertical-navigation-item label="Item 1" ${icon} />
-	<lu-vertical-navigation-item label="Item 2" ${icon} />
-`),
+			template: `<lu-vertical-navigation headingLabel="Section">
+	<lu-vertical-navigation-item>
+		<a luVerticalNavigationLink href="#"${icon}>Item 1</a>
+	</lu-vertical-navigation-item>
+	<lu-vertical-navigation-group label="Group"${icon}>
+		<lu-vertical-navigation-item>
+			<a luVerticalNavigationLink href="#">Item 2</a>
+			<a luVerticalNavigationLink href="#">Item 3</a>
+		</lu-vertical-navigation-item>
+	</lu-vertical-navigation-group>`,
 		};
 	},
 } as Meta;

@@ -2,7 +2,7 @@ import { VerticalNavigationComponent, VerticalNavigationGroupComponent, Vertical
 import { Meta, moduleMetadata } from '@storybook/angular';
 
 interface VerticalNavigationStories {
-	title: string;
+	headingLabel: string;
 }
 
 export default {
@@ -20,26 +20,25 @@ export default {
 		}),
 	],
 	render: (args: VerticalNavigationStories) => {
-		const title = ` headingLabel="${args.title ? args.title : ''}"`;
+		const headingLabel = ` headingLabel="${args.headingLabel ? args.headingLabel : ''}"`;
 		return {
-			template: `<lu-vertical-navigation${title}>
- 	<lu-vertical-navigation-item>
-		<a luVerticalNavigationLink href="#" icon="heart">Item 1</a>
-	</lu-vertical-navigation-item>
+			template: `<lu-vertical-navigation${headingLabel}>
+	<lu-vertical-navigation-group label="Group 1" icon="heart">
 		<lu-vertical-navigation-item>
-			<a luVerticalNavigationLink href="#">Item 2</a>
+			<a luVerticalNavigationLink href="#">Item 1</a>
+			<a luVerticalNavigationLink href="#" aria-current="page">Item 2</a>
+			<a luVerticalNavigationLink href="#">Item 3</a>
 		</lu-vertical-navigation-item>
-		<lu-vertical-navigation-group label="Group" icon="heart">
-				<lu-vertical-navigation-item>
-					<a luVerticalNavigationLink href="#">Item 3</a>
-				</lu-vertical-navigation-item>
-		</lu-vertical-navigation-group>
+	</lu-vertical-navigation-group>
+ 	<lu-vertical-navigation-item>
+		<a luVerticalNavigationLink href="#" icon="heartFilled">Item 4</a>
+	</lu-vertical-navigation-item>
 </lu-vertical-navigation>`,
 		};
 	},
 } as Meta;
 export const Basic = {
 	args: {
-		title: 'Section',
+		headingLabel: 'Section',
 	},
 };
