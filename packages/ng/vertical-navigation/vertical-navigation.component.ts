@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, computed, contentChildren, input, ViewEncapsulation } from '@angular/core';
-import { PortalContent } from '@lucca-front/ng/core';
+import { PortalContent, PortalDirective } from '@lucca-front/ng/core';
 import { VerticalNavigationGroupComponent } from './group/vertical-navigation-group.component';
 import { VerticalNavigationLinkComponent } from './link/vertical-navigation-link.component';
 
@@ -10,6 +10,7 @@ import { VerticalNavigationLinkComponent } from './link/vertical-navigation-link
 	styleUrl: './vertical-navigation.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	encapsulation: ViewEncapsulation.None,
+	imports: [PortalDirective],
 	host: {
 		class: 'verticalNavigation',
 		'[class.mod-iconless]': 'isIconless()',
