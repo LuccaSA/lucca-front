@@ -1,3 +1,4 @@
+import { LOCALE_ID } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { DateInputComponent } from '@lucca-front/ng/date2';
@@ -7,11 +8,10 @@ import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { CheckboxInputComponent, TextInputComponent } from '@lucca-front/ng/forms';
 import { IconComponent } from '@lucca-front/ng/icon';
 import { PopoverDirective } from '@lucca-front/ng/popover2';
-import { ScrollBoxComponent } from '@lucca-front/ng/scrollBox';
+import { ScrollBoxComponent } from '@lucca-front/ng/scroll-box';
 import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 import { applicationConfig, Meta, moduleMetadata, StoryFn } from '@storybook/angular';
 import { StoryModelDisplayComponent } from 'stories/helpers/story-model-display.component';
-import { LOCALE_ID } from '@angular/core';
 
 interface FilterBarBasicStory {
 	label: string;

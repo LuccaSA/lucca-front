@@ -1,4 +1,4 @@
-import { ScrollBoxComponent } from '@lucca-front/ng/scrollBox';
+import { ScrollBoxComponent } from '@lucca-front/ng/scroll-box';
 import { Meta, moduleMetadata, StoryFn } from '@storybook/angular';
 
 interface ScrollBoxBasicStory {}
