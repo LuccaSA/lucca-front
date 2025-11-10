@@ -119,7 +119,9 @@ const basePlay = async ({ canvasElement, step }) => {
 	// Doing the same but with keyboard
 	await step('Keyboard interactions', async () => {
 		const buttons = await within(canvasElement).findAllByRole('button');
-		await userEvent.click(buttons.find((button) => button.className.includes('multipleSelect-clear')));
+		const clearButton = buttons.find((button) => button.className.includes('clear'));
+		await expect(clearButton).not.toBeUndefined();
+		await userEvent.click(clearButton);
 		await waitForAngular();
 		input.focus();
 		await expect(input).toHaveFocus();
@@ -606,22 +608,22 @@ export const GroupBy = generateStory({
 	},
 });
 
-// TODO see why this test failed ?
-// export const GroupByTEST = createTestStory(GroupBy, async (context) => {
-// 	await basePlay(context);
-// 	// context.step('Group select all keyboard interactions', async () => {
-// 	// 	const input = within(context.canvasElement).getByRole('combobox');
-// 	// 	input.focus();
-// 	// 	await userEvent.keyboard('{ArrowDown}');
-// 	// 	await waitForAngular();
-// 	// 	await userEvent.keyboard('{Enter}');
-// 	// 	const panel = within(screen.getByRole('listbox'));
-// 	// 	const options = await panel.findAllByRole('option');
-// 	// 	const optionValues = options.map((option) => option.textContent);
-// 	// 	// We should have unselected everything with this keyboard input sequence
-// 	// 	await checkValues(input, optionValues.slice(1, 3));
-// 	// });
-// });
+// TODO FIX css clearer present in DOM but not visually visible (class : multipleSelect-clear mods ?)
+export const GroupByTEST = createTestStory(GroupBy, async (context) => {
+	await basePlay(context);
+	context.step('Group select all keyboard interactions', async () => {
+		const input = within(context.canvasElement).getByRole('combobox');
+		input.focus();
+		await userEvent.keyboard('{ArrowDown}');
+		await waitForAngular();
+		await userEvent.keyboard('{Enter}');
+		const panel = within(screen.getByRole('listbox'));
+		const options = await panel.findAllByRole('option');
+		const optionValues = options.map((option) => option.textContent);
+		// We should have unselected everything with this keyboard input sequence
+		await checkValues(input, optionValues.slice(1, 3));
+	});
+});
 
 export const GroupBySelectAll = generateStory({
 	name: 'Group options (with selectAll)',
