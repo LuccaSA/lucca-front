@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, input, ViewEncapsulation } from '@angular/core';
 import { LuccaIcon } from '@lucca-front/icons';
-import { IconComponent } from '../../icon/icon.component';
+import { IconComponent } from '@lucca-front/ng/icon';
 
 @Component({
 	// eslint-disable-next-line @angular-eslint/component-selector
