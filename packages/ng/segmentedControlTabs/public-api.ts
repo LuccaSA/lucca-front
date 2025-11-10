@@ -1,2 +1,1 @@
-export * from './panel/panel.component';
-export * from './segmented-control-tabs.component';
+export * from '@lucca-front/ng/segmented-control-tabs';
