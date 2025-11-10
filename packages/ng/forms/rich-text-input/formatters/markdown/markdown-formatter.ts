@@ -12,6 +12,7 @@ import {
 	ITALIC_UNDERSCORE,
 	LINK,
 	ORDERED_LIST,
+	registerMarkdownShortcuts,
 	STRIKETHROUGH,
 	Transformer,
 	UNORDERED_LIST,
@@ -45,7 +46,8 @@ export class MarkdownFormatter extends RichTextFormatter {
 		}
 	}
 
-	override registerTextPlugin(editor: LexicalEditor) {
+	override registerTextPlugin(editor: LexicalEditor): () => void {
+		registerMarkdownShortcuts(editor, this.#transformers);
 		return registerRichText(editor);
 	}
 

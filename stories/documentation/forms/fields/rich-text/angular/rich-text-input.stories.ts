@@ -1,17 +1,17 @@
 import { LOCALE_ID } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { provideRouter } from '@angular/router';
 import { ButtonComponent } from '@lucca-front/ng/button';
 import { DividerComponent } from '@lucca-front/ng/divider';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
-import { RichTextInputComponent, RichTextInputToolbarComponent, RichTextPluginTagComponent, TAGS } from '@lucca-front/ng/forms/rich-text-input';
+import { RichTextInputComponent, RichTextInputToolbarComponent, RichTextPluginsDirective, RichTextPluginTagComponent, TAGS } from '@lucca-front/ng/forms/rich-text-input';
 import { provideLuRichTextHTMLFormatter } from '@lucca-front/ng/forms/rich-text-input/formatters/html';
 import { DEFAULT_MARKDOWN_TRANSFORMERS, provideLuRichTextMarkdownFormatter } from '@lucca-front/ng/forms/rich-text-input/formatters/markdown';
 import { provideLuRichTextPlainTextFormatter } from '@lucca-front/ng/forms/rich-text-input/formatters/plain-text';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { cleanupTemplate, generateInputs } from 'stories/helpers/stories';
 import { StoryModelDisplayComponent } from 'stories/helpers/story-model-display.component';
-import { provideRouter } from '@angular/router';
 
 export default {
 	title: 'Documentation/Forms/Fields/RichTextInput/Angular',
@@ -105,6 +105,35 @@ export const WithHtmlFormatter: StoryObj<RichTextInputComponent & { value: strin
 	},
 	args: {
 		value: 'Lorem <b>ipsum</b> dolor',
+		placeholder: 'Placeholder…',
+		disabled: false,
+		required: false,
+		disableSpellcheck: false,
+		autoResize: true,
+	},
+};
+
+export const WithoutToolbar: StoryObj<RichTextInputComponent & { value: string; disabled: boolean; required: boolean } & FormFieldComponent> = {
+	render: (args, { argTypes }) => {
+		const { value, disabled, required, ...inputArgs } = args;
+		return {
+			props: { value, disabled, required },
+			template: cleanupTemplate(`<lu-form-field label="Label">
+	<lu-rich-text-input
+		luRichTextPlugins
+		${generateInputs(inputArgs, argTypes)}
+		[(ngModel)]="value" [disabled]="disabled" [required]="required">
+	</lu-rich-text-input>
+</lu-form-field>
+<pr-story-model-display>{{ value }}</pr-story-model-display>`),
+			moduleMetadata: {
+				imports: [RichTextInputComponent, RichTextPluginsDirective, FormFieldComponent, FormsModule, BrowserAnimationsModule],
+				providers: [provideLuRichTextMarkdownFormatter()],
+			},
+		};
+	},
+	args: {
+		value: 'Lorem **ipsum** dolor',
 		placeholder: 'Placeholder…',
 		disabled: false,
 		required: false,

@@ -77,11 +77,13 @@ export class RichTextInputComponent implements OnInit, OnDestroy, ControlValueAc
 	readonly isDisabled = signal(false);
 	readonly formFieldId = computed(() => this.#formField?.id());
 
-	readonly #customNodes = computed(() =>
-		this.pluginComponents()
+	readonly #nodesFromDirective = signal<(Klass<LexicalNode> | LexicalNodeReplacement)[]>([]);
+	readonly #customNodes = computed(() => [
+		...this.pluginComponents()
 			.map((c) => c.getLexicalNodes?.() ?? [])
 			.flat(),
-	);
+		...this.#nodesFromDirective(),
+	]);
 	readonly #allPlugins = computed(() => this.#flattenPlugins(this.pluginComponents()));
 	readonly #isTouched = signal(false);
 
@@ -90,6 +92,14 @@ export class RichTextInputComponent implements OnInit, OnDestroy, ControlValueAc
 	#cleanup?: () => void;
 	#focusedPlugin: number = 0;
 	#editor?: LexicalEditor;
+
+	get editor(): LexicalEditor | null {
+		return this.#editor ?? null;
+	}
+
+	set directiveNodes(value: (Klass<LexicalNode> | LexicalNodeReplacement)[]) {
+		this.#nodesFromDirective.set(value);
+	}
 
 	ngOnInit(): void {
 		this.#editor = createEditor({
