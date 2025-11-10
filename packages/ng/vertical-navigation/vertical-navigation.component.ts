@@ -1,4 +1,6 @@
-import { ChangeDetectionStrategy, Component, input, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, contentChildren, input, ViewEncapsulation } from '@angular/core';
+import { VerticalNavigationGroupComponent } from './group/vertical-navigation-group.component';
+import { VerticalNavigationLinkComponent } from './link/vertical-navigation-link.component';
 
 @Component({
 	selector: 'lu-vertical-navigation',
@@ -9,10 +11,17 @@ import { ChangeDetectionStrategy, Component, input, ViewEncapsulation } from '@a
 	encapsulation: ViewEncapsulation.None,
 	host: {
 		class: 'verticalNavigation',
-		'[class.mod-iconless]': 'false',
+		'[class.mod-iconless]': 'isIconless()',
 	},
 })
 export class VerticalNavigationComponent {
 	headingLabel = input.required<string>();
 	level = input<number>(3);
+
+	verticalNavigationGroup = contentChildren(VerticalNavigationGroupComponent, { descendants: true });
+	vertivalNavigationLinks = contentChildren(VerticalNavigationLinkComponent, { descendants: true });
+
+	isIconless = computed(
+		() => !this.verticalNavigationGroup().filter((verticalGroup) => verticalGroup?.icon()).length || !this.vertivalNavigationLinks().filter((verticalLink) => verticalLink?.icon()).length,
+	);
 }
