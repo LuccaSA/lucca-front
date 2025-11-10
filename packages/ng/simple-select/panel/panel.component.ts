@@ -24,6 +24,7 @@ import { LuSimpleSelectInputComponent } from '../input/select-input.component';
 import { SIMPLE_SELECT_INPUT } from '../select.model';
 import { LU_SIMPLE_SELECT_TRANSLATIONS } from '../select.translate';
 import { LuIsOptionSelectedPipe } from './option-selected.pipe';
+import { ListboxComponent } from '../../listbox/listbox.component';
 
 @Component({
 	selector: 'lu-select-panel',
@@ -44,6 +45,7 @@ import { LuIsOptionSelectedPipe } from './option-selected.pipe';
 		IconComponent,
 		TreeBranchComponent,
 		TreeDisplayPipe,
+		ListboxComponent,
 	],
 	providers: [
 		CoreSelectKeyManager,

@@ -4,9 +4,9 @@ import {
 	ChangeDetectionStrategy,
 	ChangeDetectorRef,
 	Component,
+	contentChild,
 	effect,
 	ElementRef,
-	HostBinding,
 	inject,
 	Input,
 	input,
@@ -15,6 +15,7 @@ import {
 	output,
 	TemplateRef,
 	Type,
+	viewChild,
 	ViewChild,
 } from '@angular/core';
 import { getIntl, PortalDirective } from '@lucca-front/ng/core';
@@ -28,6 +29,7 @@ import { LuOptionGroupPipe } from './group.pipe';
 import { LuOptionOutletDirective } from './option-outlet.directive';
 import { ILuOptionContext, LU_OPTION_CONTEXT } from './option.token';
 import { LU_OPTION_TRANSLATIONS } from './option.translate';
+import { OptionComponent } from '../../listbox/option/option.component';
 
 export const MAGIC_OPTION_SCROLL_DELAY = 15;
 
@@ -37,14 +39,14 @@ export const MAGIC_OPTION_SCROLL_DELAY = 15;
 	styleUrl: './option.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	standalone: true,
-	imports: [LuOptionOutletDirective, PortalDirective, LuOptionGroupPipe, LuTooltipTriggerDirective],
+	imports: [LuOptionOutletDirective, PortalDirective, LuOptionGroupPipe, LuTooltipTriggerDirective, OptionComponent, CoreSelectPanelElement],
 })
-export class LuOptionComponent<T> implements AfterViewInit, OnDestroy, OnInit {
-	protected selectableItem = inject(CoreSelectPanelElement);
+export class LuOptionComponent<T> implements AfterViewInit, OnDestroy {
+	protected selectableItem = viewChild('selectableItemRef', { read: CoreSelectPanelElement });
 	protected intl = getIntl(LU_OPTION_TRANSLATIONS);
 
-	@HostBinding('class.optionItem')
-	public hasOptionItemClass = true;
+	public isSelected = input<boolean>(false);
+	public selected = output<void>();
 
 	@Input()
 	public optionTpl: TemplateRef<LuOptionContext<T>> | Type<unknown> | undefined;
@@ -65,7 +67,7 @@ export class LuOptionComponent<T> implements AfterViewInit, OnDestroy, OnInit {
 
 	groupTemplateLocation = input<GroupTemplateLocation>();
 
-	@ViewChild(LuOptionOutletDirective, { read: LU_OPTION_CONTEXT, static: true })
+	@ViewChild(LuOptionOutletDirective, { read: LU_OPTION_CONTEXT, static: false })
 	private optionContext?: ILuOptionContext<T>;
 
 	private cdr = inject(ChangeDetectorRef);
@@ -82,16 +84,12 @@ export class LuOptionComponent<T> implements AfterViewInit, OnDestroy, OnInit {
 
 	constructor() {
 		effect(() => {
-			if (this.selectableItem.isHighlighted()) {
+			if (this.selectableItem()?.isHighlighted()) {
 				setTimeout(() => {
 					this.elementRef.nativeElement.scrollIntoView(this.scrollIntoViewOptions);
 				}, MAGIC_OPTION_SCROLL_DELAY);
 			}
 		});
-	}
-
-	ngOnInit(): void {
-		this.selectableItem.id.set(this.id);
 	}
 
 	ngOnDestroy(): void {
@@ -100,13 +98,13 @@ export class LuOptionComponent<T> implements AfterViewInit, OnDestroy, OnInit {
 
 	ngAfterViewInit(): void {
 		this.subscription = this.optionContext.isDisabled$.pipe(observeOn(asyncScheduler)).subscribe((isDisabled) => {
-			this.selectableItem.disabled = isDisabled;
+			this.selectableItem().disabled = isDisabled;
 			this.cdr.markForCheck();
 		});
 	}
 
 	selectOption($event: Event): void {
-		if (this.selectableItem.disabled) {
+		if (this.selectableItem().disabled) {
 			$event.stopPropagation();
 		}
 	}
