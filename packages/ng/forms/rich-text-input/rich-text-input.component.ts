@@ -177,6 +177,10 @@ export class RichTextInputComponent implements OnInit, OnDestroy, ControlValueAc
 		plugins[this.#focusedPlugin].focus();
 	}
 
+	focus() {
+		this.content().nativeElement.focus();
+	}
+
 	touch() {
 		this.#isTouched.set(true);
 		this.#onTouch?.();
