@@ -36,7 +36,9 @@
 		.filterPill:not(.is-filled) &,
 		.textfield-input[disabled] &,
 		.textfield-input:not(.is-filled) & {
-			@include hidden;
+			.multiSelect:not(.is-clearable) & {
+				@include hidden;
+			}
 		}
 	}
 }

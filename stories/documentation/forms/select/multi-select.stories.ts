@@ -608,7 +608,6 @@ export const GroupBy = generateStory({
 	},
 });
 
-// TODO FIX css clearer present in DOM but not visually visible (class : multipleSelect-clear mods ?)
 export const GroupByTEST = createTestStory(GroupBy, async (context) => {
 	await basePlay(context);
 	context.step('Group select all keyboard interactions', async () => {
