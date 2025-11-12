@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { StatusBadgeComponent } from '@lucca-front/ng/statusBadge';
+import { StatusBadgeComponent } from '@lucca-front/ng/status-badge';
 import { TagComponent } from '@lucca-front/ng/tag';
 import { LuUserPictureComponent } from '@lucca-front/ng/user';
 import { Meta, StoryFn } from '@storybook/angular';
