@@ -1,4 +1,4 @@
-import { booleanAttribute, Component, computed, contentChild, contentChildren, ElementRef, forwardRef, inject, input, viewChild, ViewEncapsulation } from '@angular/core';
+import { booleanAttribute, Component, computed, contentChild, contentChildren, ElementRef, forwardRef, inject, input, numberAttribute, viewChild, ViewEncapsulation } from '@angular/core';
 import { ResponsiveConfig, ɵeffectWithDeps } from '@lucca-front/ng/core';
 import { DataTableHeadComponent } from './data-table-head/data-table-head.component';
 import { DataTableRowComponent } from './data-table-row/data-table-row.component';
@@ -40,6 +40,9 @@ export class DataTableComponent {
 
 	stickyHeader = computed(() => this.header().sticky());
 
+	stickyColsStart = input(0, { transform: numberAttribute });
+	stickyColsEnd = input(0, { transform: numberAttribute });
+
 	cols = computed(() => this.header().cols());
 
 	classMods = computed(() => {
@@ -51,6 +54,11 @@ export class DataTableComponent {
 			['mod-verticalAlignTop']: this.verticalAlign() === 'top',
 			['mod-verticalAlignMiddle']: this.verticalAlign() === 'middle',
 			['mod-verticalAlignBottom']: this.verticalAlign() === 'bottom',
+			['mod-columnsOverflow']: this.stickyColsStart() || this.stickyColsEnd(),
+			['is-firstColumnVisible']: this.stickyColsStart(),
+			['is-lastColumnVisible']: this.stickyColsEnd(),
+			['is-firstColumnVisibleAfterColsStart']: false,
+			['is-lastColumnVisibleBeforeColsEnd']: false,
 			['mod-layoutFixed']: this.layoutFixed(),
 			...Object.entries(this.responsive()).reduce((acc, [key, value]) => {
 				return {
