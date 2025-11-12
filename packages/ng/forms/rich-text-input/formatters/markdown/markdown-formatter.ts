@@ -54,7 +54,6 @@ export class MarkdownFormatter extends RichTextFormatter {
 		editor.update(() => {
 			$convertFromMarkdownString(markdown ?? '', this.#transformers, null, true);
 		});
-		$convertFromMarkdownString(markdown ?? '', this.#transformers, null, true);
 	}
 
 	override format(editor: LexicalEditor): string {
