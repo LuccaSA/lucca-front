@@ -1,4 +1,4 @@
-import { StatusBadgeComponent } from '@lucca-front/ng/statusBadge';
+import { StatusBadgeComponent } from '@lucca-front/ng/status-badge';
 import { Meta, moduleMetadata, StoryFn } from '@storybook/angular';
 
 interface StatusBadgeBasicStory {
