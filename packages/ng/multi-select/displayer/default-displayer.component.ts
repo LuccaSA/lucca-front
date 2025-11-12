@@ -19,7 +19,9 @@ import { LuMultiSelectDisplayerInputDirective } from './displayer-input.directiv
 		<div class="multipleSelect-displayer">
 			<input autocomplete="off" #inputElement (keydown.backspace)="inputBackspace()" (keydown.space)="inputSpace($event)" luMultiSelectDisplayerInput />
 			@for (option of displayedOptions$ | async; track option; let index = $index) {
-				<lu-chip withEllipsis (kill)="unselectOption(option, $event)" [unkillable]="select.disabled$ | async"><ng-container *luOptionOutlet="select.displayerTpl(); value: option" /></lu-chip>
+				<lu-chip withEllipsis (kill)="unselectOption(option, $event)" [unkillable]="select.disabled$ | async">
+					<ng-container *luOptionOutlet="select.displayerTpl(); value: option" />
+				</lu-chip>
 			}
 			@if (overflowOptions$ | async; as overflow) {
 				<lu-chip unkillable>+ {{ overflow }}</lu-chip>

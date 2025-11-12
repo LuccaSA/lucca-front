@@ -1,3 +1,4 @@
+import { NgTemplateOutlet } from '@angular/common';
 import { booleanAttribute, Component, computed, input, output, ViewEncapsulation } from '@angular/core';
 import { getIntl } from '@lucca-front/ng/core';
 import { LU_CHIP_TRANSLATIONS } from './chip.translate';
@@ -8,6 +9,7 @@ import { LU_CHIP_TRANSLATIONS } from './chip.translate';
 	templateUrl: './chip.component.html',
 	styleUrl: './chip.component.scss',
 	encapsulation: ViewEncapsulation.None,
+	imports: [NgTemplateOutlet],
 	host: {
 		class: 'chip',
 		'[class.is-disabled]': 'disabled()',
