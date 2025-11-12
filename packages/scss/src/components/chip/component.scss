@@ -15,8 +15,13 @@
 	padding-block: calc(var(--pr-t-spacings-50) / 2);
 	padding-inline: var(--pr-t-spacings-100);
 	font: var(--components-chip-font);
+	max-inline-size: 100%;
 
 	@at-root ($atRoot) {
+		.chip-content {
+			outline: none;
+		}
+
 		.chip-kill {
 			@include reset.button;
 
