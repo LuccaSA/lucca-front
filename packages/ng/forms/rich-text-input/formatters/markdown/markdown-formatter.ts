@@ -52,8 +52,9 @@ export class MarkdownFormatter extends RichTextFormatter {
 
 	override parse(editor: LexicalEditor, markdown?: string | null): void {
 		editor.update(() => {
-			$convertFromMarkdownString(markdown ?? '', this.#transformers, null, true);
+			$convertFromMarkdownString(sanitize(markdown ?? ''), this.#transformers, null, true);
 		});
+		$convertFromMarkdownString(markdown ?? '', this.#transformers);
 	}
 
 	override format(editor: LexicalEditor): string {
