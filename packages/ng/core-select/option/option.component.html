@@ -6,6 +6,7 @@
 	#selectableItemRef="luCoreSelectPanelElement"
 	[isSelected]="isSelected()"
 	(selected)="selected.emit()"
+	[disabled]="selectableItemRef.disabled"
 >
 	<ng-container *luOptionOutlet="optionTpl; value: option" />
 </lu-listbox-option>

@@ -254,7 +254,7 @@ export const WithDisabledOptionsTEST = createTestStory(WithDisabledOptions, asyn
 	await waitForAngular();
 	const panel = within(screen.getByRole('listbox'));
 	const options = await panel.findAllByRole('option');
-	await expect(options[1].firstChild).toHaveClass('is-disabled');
+	await expect(options[1]).toHaveAttribute('aria-disabled', 'true');
 });
 
 export const ApiV3 = generateStory({
