@@ -42,7 +42,6 @@ let nextId = 0;
 
 @Component({
 	selector: 'lu-date-range-input',
-	standalone: true,
 	imports: [PopoverDirective, Calendar2Component, IconComponent, InputDirective, LayoutModule, PortalDirective, NgTemplateOutlet, FilterPillDisplayerDirective, ClearComponent],
 	templateUrl: './date-range-input.component.html',
 	styleUrl: './date-range-input.component.scss',

@@ -15,7 +15,6 @@ import { LU_DATE_SELECT_INPUT_TRANSLATIONS } from './date-select-input.translate
 	templateUrl: './date-select-input.component.html',
 	styleUrl: './date-select-input.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	standalone: true,
 	imports: [LuDateAdapterPipe, LuDatePickerComponent, LuInputDirective, OverlayModule, ClearComponent, LuInputDisplayerDirective],
 	providers: [
 		{

@@ -9,7 +9,6 @@ import { LuCoreSelectNoClueDirective } from './no-clue.directive';
 
 @Component({
 	selector: 'lu-test-v3-no-clue',
-	standalone: true,
 	imports: [LuSimpleSelectInputComponent, LuCoreSelectNoClueDirective, LuCoreSelectApiV4Directive],
 	template: `<lu-simple-select noClue apiV4="/some/api" />`,
 })
@@ -19,7 +18,6 @@ class TestV3NoClueComponent {
 
 @Component({
 	selector: 'lu-test-v4-no-clue',
-	standalone: true,
 	imports: [LuSimpleSelectInputComponent, LuCoreSelectNoClueDirective, LuCoreSelectApiV3Directive],
 	template: `<lu-simple-select noClue apiV3="/some/api" />`,
 })

@@ -12,7 +12,6 @@ import { LuCoreSelectEstablishment } from './models';
 	// The attribute is already prefixed with "lu-simple-select" / "lu-multi-select"
 	// eslint-disable-next-line @angular-eslint/directive-selector
 	selector: 'lu-simple-select[establishments],lu-multi-select[establishments]',
-	standalone: true,
 	exportAs: 'luEstablishments',
 	providers: [
 		{

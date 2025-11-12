@@ -4,7 +4,6 @@ import { LuTooltipModule } from '@lucca-front/ng/tooltip';
 
 @Component({
 	selector: 'lu-status-badge',
-	standalone: true,
 	templateUrl: './statusBadge.component.html',
 	styleUrl: './statusBadge.component.scss',
 	encapsulation: ViewEncapsulation.None,

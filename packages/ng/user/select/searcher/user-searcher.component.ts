@@ -19,7 +19,6 @@ interface UserPagedSearcherForm {
 	templateUrl: 'user-searcher.component.html',
 	styleUrl: 'user-searcher.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	standalone: true,
 	imports: [AsyncPipe, ReactiveFormsModule, LuOptionPlaceholderComponent],
 	providers: [
 		{

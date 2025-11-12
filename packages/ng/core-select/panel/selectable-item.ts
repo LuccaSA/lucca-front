@@ -3,7 +3,6 @@ import { computed, Directive, ElementRef, inject, Input, input, model, OnDestroy
 import { CoreSelectPanelInstance, SELECT_PANEL_INSTANCE } from './panel.instance';
 
 @Directive({
-	standalone: true,
 	selector: '[luCoreSelectPanelElement]',
 	exportAs: 'luCoreSelectPanelElement',
 	host: {

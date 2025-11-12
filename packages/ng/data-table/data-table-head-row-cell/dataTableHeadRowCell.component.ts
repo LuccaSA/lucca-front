@@ -3,7 +3,6 @@ import { booleanAttribute, Component, input, ViewEncapsulation } from '@angular/
 @Component({
 	// eslint-disable-next-line @angular-eslint/component-selector
 	selector: 'th[luDataTableHeadRowCell], td[luDataTableHeadRowCell]',
-	standalone: true,
 	template: `<ng-content />`,
 	encapsulation: ViewEncapsulation.None,
 	host: {

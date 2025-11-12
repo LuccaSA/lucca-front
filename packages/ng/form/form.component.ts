@@ -3,7 +3,6 @@ import { booleanAttribute, Component, input, ViewEncapsulation } from '@angular/
 @Component({
 	// eslint-disable-next-line @angular-eslint/component-selector
 	selector: 'form[luForm]',
-	standalone: true,
 	template: '<ng-content />',
 	styleUrl: './form.component.scss',
 	encapsulation: ViewEncapsulation.None,

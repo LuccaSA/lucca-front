@@ -10,7 +10,6 @@ let nextId = 0;
 
 @Component({
 	selector: 'lu-radio',
-	standalone: true,
 	imports: [ReactiveFormsModule, InlineMessageComponent, NgTemplateOutlet, InputDirective, InputFramedComponent],
 	templateUrl: './radio.component.html',
 	styleUrl: './radio.component.scss',

@@ -10,7 +10,6 @@ import { MULTI_SELECT_WITH_SELECT_ALL_CONTEXT } from './select-all.models';
 
 @Component({
 	selector: 'lu-multi-select-all-displayer',
-	standalone: true,
 	imports: [NumericBadgeComponent, LuMultiSelectDisplayerInputDirective, ɵLuOptionOutletDirective],
 	template: `
 		<div class="multipleSelect-displayer mod-filter" [class.is-filled]="isFilled()">

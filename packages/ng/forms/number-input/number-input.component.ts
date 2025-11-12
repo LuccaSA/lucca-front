@@ -12,7 +12,6 @@ import { LU_NUMBERFIELD_TRANSLATIONS } from './number-input.translate';
 
 @Component({
 	selector: 'lu-number-input',
-	standalone: true,
 	imports: [InputDirective, ReactiveFormsModule, FormFieldIdDirective, NgTemplateOutlet, ClearComponent],
 	templateUrl: './number-input.component.html',
 	hostDirectives: [NoopValueAccessorDirective],

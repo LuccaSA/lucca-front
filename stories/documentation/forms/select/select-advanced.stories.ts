@@ -10,7 +10,6 @@ import { Meta, StoryFn, applicationConfig } from '@storybook/angular';
 
 @Component({
 	selector: 'select-advanced-stories',
-	standalone: true,
 	imports: [LuSelectInputComponent, LuOptionModule, NgPlural, NgPluralCase, FormsModule, ClearComponent, LuInputDirective, LuInputDisplayerDirective],
 	template: `
 		<label class="textfield">
@@ -84,7 +83,6 @@ import { LuInputDisplayerDirective } from './displayer/index';
 
 @Component({
 	selector: 'select-advanced-story',
-	standalone: true,
 	imports: [LuSelectInputComponent, LuOptionModule, NgPlural, NgPluralCase, FormsModule, ClearComponent, LuInputDirective, LuInputDisplayerDirective],
 	template: \`
 	<label class="textfield">
