@@ -1,5 +1,6 @@
 import { Component, computed, ElementRef, inject, viewChild } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
+import { ChipComponent } from '@lucca-front/ng/chip';
 import { getIntl } from '@lucca-front/ng/core';
 import { ɵLuOptionOutletDirective } from '@lucca-front/ng/core-select';
 import { NumericBadgeComponent } from '@lucca-front/ng/numeric-badge';
@@ -11,7 +12,7 @@ import { MULTI_SELECT_WITH_SELECT_ALL_CONTEXT } from './select-all.models';
 @Component({
 	selector: 'lu-multi-select-all-displayer',
 	standalone: true,
-	imports: [NumericBadgeComponent, LuMultiSelectDisplayerInputDirective, ɵLuOptionOutletDirective],
+	imports: [NumericBadgeComponent, LuMultiSelectDisplayerInputDirective, ɵLuOptionOutletDirective, ChipComponent],
 	template: `
 		<div class="multipleSelect-displayer mod-filter" [class.is-filled]="isFilled()">
 			<input type="text" luMultiSelectDisplayerInput />
@@ -19,15 +20,9 @@ import { MULTI_SELECT_WITH_SELECT_ALL_CONTEXT } from './select-all.models';
 			@if (displayerCount() !== null) {
 				<div class="multipleSelect-displayer-filter">
 					@if (displayerCount() === 1 && isIncludeMode()) {
-						<div class="multipleSelect-displayer-chip chip" [class.mod-unkillable]="disabled()">
-							<span class="multipleSelect-displayer-chip-value" *luOptionOutlet="select.displayerTpl(); value: select.value[0]"></span>
-
-							@if (!disabled()) {
-								<button type="button" class="chip-kill" (click)="unselectOption(select.value[0], $event)">
-									<span class="pr-u-mask">{{ intl.removeOption }}</span>
-								</button>
-							}
-						</div>
+						<lu-chip withEllipsis (kill)="unselectOption(select.value[0], $event)" class="multipleSelect-displayer-chip" [unkillable]="disabled()">
+							<ng-template *luOptionOutlet="select.displayerTpl(); value: select.value[0]" />
+						</lu-chip>
 					} @else {
 						<lu-numeric-badge disableTooltip class="multipleSelect-displayer-numericBadge" [value]="displayerCount()" />
 						<span class="multipleSelect-displayer-label"> {{ displayerLabel() }} </span>
