@@ -29,12 +29,16 @@ export default {
 	<lu-vertical-navigation-group label="Group" icon="star">
 		<lu-vertical-navigation-item>
 			<a luVerticalNavigationLink href="#"${disabled}>Item 2</a>
+		</lu-vertical-navigation-item>
+		<lu-vertical-navigation-item>
 			<a luVerticalNavigationLink href="#"${disabled}>Item 3</a>
 		</lu-vertical-navigation-item>
 	</lu-vertical-navigation-group>
 	<lu-vertical-navigation-group label="Group" expanded="false" icon="heartFilled"${disabled}>
 		<lu-vertical-navigation-item>
 			<a luVerticalNavigationLink href="#">Item 4</a>
+		</lu-vertical-navigation-item>
+		<lu-vertical-navigation-item>
 			<a luVerticalNavigationLink href="#">Item 5</a>
 		</lu-vertical-navigation-item>
 	</lu-vertical-navigation-group>`,

@@ -29,6 +29,8 @@ export default {
 	<lu-vertical-navigation-group label="Group"${icon}>
 		<lu-vertical-navigation-item>
 			<a luVerticalNavigationLink href="#">Item 2</a>
+		</lu-vertical-navigation-item>
+		<lu-vertical-navigation-item>
 			<a luVerticalNavigationLink href="#">Item 3</a>
 		</lu-vertical-navigation-item>
 	</lu-vertical-navigation-group>`,
