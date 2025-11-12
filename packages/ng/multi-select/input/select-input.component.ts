@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
 	booleanAttribute,
 	ChangeDetectionStrategy,
@@ -13,6 +13,8 @@ import {
 	numberAttribute,
 	OnDestroy,
 	OnInit,
+	Signal,
+	signal,
 	TemplateRef,
 	Type,
 	viewChild,
@@ -20,6 +22,7 @@ import {
 	ViewEncapsulation,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { ClearComponent } from '@lucca-front/ng/clear';
 import { getIntl } from '@lucca-front/ng/core';
 import { ALuSelectInputComponent, LuOptionContext, provideLuSelectLabelsAndIds, ɵLuOptionOutletDirective } from '@lucca-front/ng/core-select';
 import { FILTER_PILL_INPUT_COMPONENT, FilterPillDisplayerDirective, FilterPillLabelDirective } from '@lucca-front/ng/filter-pills';
@@ -32,11 +35,10 @@ import { LuMultiSelectPanelRef } from './panel.model';
 
 @Component({
 	selector: 'lu-multi-select',
-	standalone: true,
-	imports: [CommonModule, LuTooltipModule, ɵLuOptionOutletDirective, FilterPillDisplayerDirective, FilterPillLabelDirective],
 	templateUrl: './select-input.component.html',
 	styleUrl: './select-input.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
+	imports: [AsyncPipe, LuTooltipModule, ɵLuOptionOutletDirective, FilterPillDisplayerDirective, FilterPillLabelDirective, ClearComponent],
 	providers: [
 		{
 			provide: NG_VALUE_ACCESSOR,
@@ -92,6 +94,8 @@ export class LuMultiSelectInputComponent<T> extends ALuSelectInputComponent<T, T
 		return !valueSignal || valueSignal.length === 0;
 	});
 
+	public valueLength = computed(() => this.valueSignal()?.length ?? 0);
+	public useSingleOptionDisplayer: Signal<boolean> = signal(true);
 	override _value: T[] = [];
 
 	public override get panelRef(): LuMultiSelectPanelRef<T> | undefined {

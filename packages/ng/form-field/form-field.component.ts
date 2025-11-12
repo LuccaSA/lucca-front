@@ -1,4 +1,4 @@
-import { NgIf, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import {
 	afterNextRender,
 	booleanAttribute,
@@ -28,8 +28,8 @@ import { BehaviorSubject } from 'rxjs';
 import { FormFieldSize } from './form-field-size';
 import { FORM_FIELD_INSTANCE } from './form-field.token';
 import { LU_FORM_FIELD_TRANSLATIONS } from './form-field.translate';
-import { FRAMED_INPUT_INSTANCE } from './framed-input/framed-input-token';
 import { InputDirective } from './input.directive';
+import { INPUT_FRAMED_INSTANCE } from './public-api';
 
 let nextId = 0;
 
@@ -38,7 +38,7 @@ type FormFieldWidth = 20 | 30 | 40 | 50 | 60;
 @Component({
 	selector: 'lu-form-field',
 	standalone: true,
-	imports: [NgIf, NgTemplateOutlet, InlineMessageComponent, LuTooltipModule, ReactiveFormsModule, IconComponent, IntlParamsPipe, PortalDirective],
+	imports: [NgTemplateOutlet, InlineMessageComponent, LuTooltipModule, ReactiveFormsModule, IconComponent, IntlParamsPipe, PortalDirective],
 	templateUrl: './form-field.component.html',
 	styleUrl: './form-field.component.scss',
 	providers: [
@@ -60,7 +60,7 @@ export class FormFieldComponent implements OnDestroy, DoCheck {
 	#injector = inject(Injector);
 	#renderer = inject(Renderer2);
 
-	framed = inject(FRAMED_INPUT_INSTANCE, { optional: true }) !== null;
+	framed = inject(INPUT_FRAMED_INSTANCE, { optional: true }) !== null;
 
 	formFieldChildren = contentChildren(FormFieldComponent, { descendants: true });
 

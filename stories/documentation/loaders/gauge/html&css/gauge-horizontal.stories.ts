@@ -32,9 +32,7 @@ function getTemplate(args: GaugeBasicStory): string {
 	const animated = args.animated ? ` is-animated` : ``;
 	const palette = args.palette ? ` palette-${args.palette}` : ``;
 	const value = args.value !== 0 ? ` [attr.style]="'--components-gauge-value: ${args.value}%'"` : ``;
-	return `
-	<div class="gauge${thin}${vertical}${palette}${animated}"${value}></div>
-	`;
+	return `<div class="gauge${thin}${vertical}${palette}${animated}"${value}></div>`;
 }
 
 const Template: StoryFn<GaugeBasicStory> = (args) => ({

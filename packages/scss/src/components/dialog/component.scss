@@ -10,15 +10,16 @@
 	inset: var(--components-dialog-inset);
 	inline-size: var(--components-dialog-width);
 	block-size: var(--components-dialog-height);
-	max-inline-size: var(--components-dialog-maxWidth);
-	max-block-size: var(--components-dialog-maxHeight);
 	background-color: var(--palettes-neutral-0);
 	border-radius: var(--components-dialog-borderRadius);
 	box-shadow: var(--pr-t-elevation-shadow-overlay);
-	position: fixed !important;
 	margin: auto;
-	display: flex;
 	flex-direction: column;
+	display: flex !important;
+	position: fixed !important;
+	max-inline-size: var(--components-dialog-maxWidth) !important;
+	max-block-size: var(--components-dialog-maxHeight) !important;
+	overflow: hidden;
 
 	@supports not (height: 1dvh) {
 		--components-dialog-maxHeight: var(--components-dialog-maxHeightFallback);
@@ -143,7 +144,7 @@
 		.dialog_backdrop {
 			background-color: var(--palettes-neutral-900);
 			position: fixed;
-			opacity: 0.4;
+			opacity: 0.4 !important; // weird bug with Chrome and its inspector open
 			inset: 0;
 		}
 	}

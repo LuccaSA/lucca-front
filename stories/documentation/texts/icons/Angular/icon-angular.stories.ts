@@ -13,6 +13,9 @@ export default {
 		color: {
 			if: { arg: 'AI', truthy: false },
 		},
+		AI: {
+			description: '[v20.3]',
+		},
 	},
 } as Meta;
 

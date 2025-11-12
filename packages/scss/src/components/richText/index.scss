@@ -1,26 +1,30 @@
 @use 'exports' as *;
 
 .richTextField {
-	@include vars;
-	@include component;
-
-	&:hover {
-		@include hover;
+	@layer components {
+		@include vars;
+		@include component;
 	}
 
-	&.mod-autoResize {
-		@include autoResize;
-	}
-
-	&:has(.richTextField-content[aria-invalid='true']) {
-		@include error;
-
+	@layer mods {
 		&:hover {
-			@include errorHover;
+			@include hover;
 		}
-	}
 
-	&.is-disabled {
-		@include disabled;
+		&:has(.richTextField-content[aria-invalid='true']) {
+			@include error;
+
+			&:hover {
+				@include errorHover;
+			}
+		}
+
+		&.is-disabled {
+			@include disabled;
+		}
+
+		&.mod-autoResize {
+			@include autoResize;
+		}
 	}
 }

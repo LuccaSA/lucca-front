@@ -3,6 +3,8 @@
 
 @use '@lucca-front/scss/src/commons/function';
 
+$layers: 'reset, base, components, mods, product, utils' !default;
+
 $isNamespaced: false !default;
 $deprecatedSpacings: false !default;
 $deprecatedCardBoxMargin: false !default;

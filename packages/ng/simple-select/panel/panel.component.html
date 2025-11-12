@@ -1,6 +1,7 @@
 @if (
 	{
 		options: (options$ | async) || [],
+		clueChange: (clueChange$ | async) || "",
 		groupTemplateLocation: groupTemplateLocation$ | async,
 		shouldDisplayAddOption: shouldDisplayAddOption$ | async,
 	};
@@ -64,7 +65,7 @@
 				</ng-template>
 				@if (ctx.options.length === 0 && (loading$ | async) === false) {
 					<div class="lu-picker-content-option-emptyState">
-						{{ intl.emptyResults }}
+						{{ ctx.clueChange.length ? intl.emptyResults : intl.emptyOptions }}
 					</div>
 				}
 			</div>

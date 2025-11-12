@@ -1,9 +1,9 @@
 import { Component, inject, InjectionToken, WritableSignal } from '@angular/core';
+import { outputToObservable, takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { getIntl } from '@lucca-front/ng/core';
-import { LU_CORE_SELECT_USER_TRANSLATIONS } from './user.translate';
-import { outputToObservable, takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ɵCoreSelectPanelElement } from '@lucca-front/ng/core-select';
+import { LU_CORE_SELECT_USER_TRANSLATIONS } from './user.translate';
 
 export interface FormerEmployeesContext {
 	includeFormerEmployees: WritableSignal<boolean>;

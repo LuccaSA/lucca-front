@@ -9,6 +9,7 @@ import { booleanAttribute, Component, input, ViewEncapsulation } from '@angular/
 	host: {
 		class: 'mainLayout',
 		role: 'main',
+		id: 'main-content',
 	},
 })
 export class MainLayoutComponent {

@@ -1,10 +1,14 @@
 @use 'exports' as *;
 
 .mobileHeader {
-	@include vars;
-	@include component;
+	@layer components {
+		@include vars;
+		@include component;
+	}
 
-	&.mod-largeTitle {
-		@include largeTitle;
+	@layer mods {
+		&.mod-largeTitle {
+			@include largeTitle;
+		}
 	}
 }

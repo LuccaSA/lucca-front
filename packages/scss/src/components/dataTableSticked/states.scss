@@ -13,3 +13,8 @@
 @mixin lastRowVisible {
 	--components-dataTable-shadow-lastRowOpacity: 0;
 }
+
+@mixin firstBodyRowVisible {
+	--components-dataTable-header-shadow-opacity: 0;
+}
+

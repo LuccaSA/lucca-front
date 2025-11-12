@@ -1,13 +1,17 @@
 import { CommentBlockComponent, CommentComponent } from '@lucca-front/ng/comment';
 import { LuUserPictureModule } from '@lucca-front/ng/user';
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { generateInputs } from '../../../../helpers/stories';
+import { LOCALE_ID } from '@angular/core';
 
 export default {
 	title: 'Documentation/Texts/Comment/Angular/Basic',
 	decorators: [
 		moduleMetadata({
 			imports: [CommentComponent, CommentBlockComponent, LuUserPictureModule],
+		}),
+		applicationConfig({
+			providers: [{ provide: LOCALE_ID, useValue: 'fr-FR' }],
 		}),
 	],
 	render: (args, { argTypes }) => {
@@ -47,6 +51,9 @@ export default {
 	argTypes: {
 		compact: {
 			description: "N'affiche l'auteur que sur le premier commentaire de <code><lu-comment-block></code>",
+		},
+		datePipeFormat: {
+			description: "[v20.3]<br><a href='https://angular.dev/api/common/DatePipe' target='_blank'>Angular DatePipe</a>.<br>Exemples : 'mediumDate', 'YYYY', etc.",
 		},
 	},
 } as Meta;

@@ -1,47 +1,64 @@
 @use 'exports' as *;
 
 .dataTableWrapper {
-	@include vars;
+	@layer components {
+		@include vars;
+	}
 
-	&.mod-nested {
-		@include nested;
+	@layer mods {
+		&.mod-nested {
+			@include nested;
+		}
 	}
 }
 
 .dataTable {
-	@include component;
-
-	&.mod-cellBorder {
-		@include cellBorder;
+	@layer components {
+		@include component;
 	}
 
-	&.mod-alignTop {
-		@include alignTop;
-	}
+	@layer mods {
+		&.mod-cellBorder {
+			@include cellBorder;
+		}
 
-	&.mod-layoutFixed {
-		@include layoutFixed;
-	}
+		&.mod-alignTop,
+		&.mod-verticalAlignTop {
+			@include verticalAlignTop;
+		}
 
-	&[class*='mod-layoutFixedAtMediaMin'] {
-		@include layoutFixedWithBreakpoint;
-	}
+		&.mod-verticalAlignBottom {
+			@include verticalAlignBottom;
+		}
 
-	// Allow selection of mod-layoutFixed with or without breakpoints like mod-layoutFixedAtMediaMinXS or mod-layoutFixedAtMediaMaxL
-	&[class*='mod-layoutFixed'] {
-		@include layoutFixedCells;
-	}
+		&.mod-verticalAlignMiddle {
+			@includeverticalAlignMiddle;
+		}
 
-	&.mod-hover {
-		:is(.dataTable-head-row.mod-selectable, .dataTable-body-row) {
-			&:hover {
-				@include hover;
-			}
+		&.mod-layoutFixed {
+			@include layoutFixed;
+		}
 
-			&.mod-selectable {
-				&:has(input:checked) {
-					&:hover {
-						@include selectedHover;
+		&[class*='mod-layoutFixedAtMediaMin'] {
+			@include layoutFixedWithBreakpoint;
+		}
+
+		// Allow selection of mod-layoutFixed with or without breakpoints like mod-layoutFixedAtMediaMinXS or mod-layoutFixedAtMediaMaxL
+		&[class*='mod-layoutFixed'] {
+			@include layoutFixedCells;
+		}
+
+		&.mod-hover {
+			:is(.mod-selectable, .dataTable-body-row:not(.mod-group)) {
+				&:hover {
+					@include hover;
+				}
+
+				&.mod-selectable {
+					&:has(input:checked) {
+						&:hover {
+							@include selectedHover;
+						}
 					}
 				}
 			}
@@ -49,62 +66,70 @@
 	}
 }
 
-:is(.dataTable-head-row, .dataTable-body-row, .dataTable-foot-row) {
-	&.mod-group {
-		@include group;
-	}
+@layer mods {
+	:is(.dataTable-head-row, .dataTable-body-row, .dataTable-foot-row) {
+		&.mod-group {
+			@include group;
+		}
 
-	&.mod-selectable {
-		@include selectable;
+		&:has([selectable]),
+		&.mod-selectable {
+			@include selectable;
 
-		&:has(input:checked) {
-			@include selected;
+			&:has(input:checked) {
+				@include selected;
+			}
+		}
+
+		&.mod-draggable {
+			@include draggable;
 		}
 	}
 
-	&.mod-draggable {
-		@include draggable;
-	}
-}
+	:is(.dataTable-head-row-cell, .dataTable-body-row-cell, .dataTable-foot-row-cell) {
+		&.mod-actions {
+			@include actions;
+		}
 
-:is(.dataTable-head-row-cell, .dataTable-body-row-cell, .dataTable-foot-row-cell) {
-	&.mod-actions {
-		@include actions;
-	}
+		&.mod-alignCenter {
+			@include alignCenter;
+		}
 
-	&.mod-alignCenter {
-		@include alignCenter;
-	}
+		&.mod-alignRight,
+		&.mod-alignEnd {
+			@include alignEnd;
+		}
 
-	&.mod-alignRight {
-		@include alignRight;
-	}
+		&.mod-alignStart {
+			@include alignStart;
+		}
 
-	&.mod-editable {
-		@include editable;
-	}
+		&.mod-editable {
+			@include editable;
+		}
 
-	&.mod-tree {
-		@include tree;
-	}
-}
-
-.dataTable-body-row {
-	&.is-collapsed {
-		@include collapsed;
+		&.mod-tree {
+			@include tree;
+		}
 	}
 
-	&:first-child {
-		&:has(.dataTable-body-row-cell-expand-button.button[aria-expanded='false']) {
-			~ .dataTable-body-row {
-				@include collapsed;
+	.dataTable-body-row {
+		&.is-collapsed {
+			@include collapsed;
+		}
+
+		&:first-child {
+			&:has(.dataTable-body-row-cell-expand-button.button[aria-expanded='false']) {
+				~ .dataTable-body-row {
+					@include collapsed;
+				}
 			}
 		}
 	}
-}
 
-.dataTable-body-row-cell-expand-button {
-	&[aria-expanded='true'] {
-		@include expanded;
+	.dataTable-body-row-cell-expand-button {
+		&[aria-expanded='true'] {
+			@include expanded;
+		}
 	}
 }

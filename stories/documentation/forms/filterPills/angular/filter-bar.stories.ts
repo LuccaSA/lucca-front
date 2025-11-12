@@ -12,6 +12,7 @@ import { NumericBadgeComponent } from '@lucca-front/ng/numeric-badge';
 import { LuSimpleSelectInputComponent } from '@lucca-front/ng/simple-select';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { StoryModelDisplayComponent } from '../../../../helpers/story-model-display.component';
+import { LOCALE_ID } from '@angular/core';
 
 export default {
 	title: 'Documentation/Forms/FiltersPills/FilterBar/Angular',
@@ -37,7 +38,7 @@ export default {
 				LuMultiSelectInputComponent,
 			],
 		}),
-		applicationConfig({ providers: [provideHttpClient()] }),
+		applicationConfig({ providers: [provideHttpClient(), { provide: LOCALE_ID, useValue: 'fr-FR' }] }),
 	],
 	render: (args, { argTypes }) => {
 		return {

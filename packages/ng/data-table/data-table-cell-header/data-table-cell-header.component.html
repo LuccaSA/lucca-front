@@ -1,0 +1,13 @@
+@if (sort()) {
+	<button luButton type="button" class="tableSortable">
+		<ng-container *ngTemplateOutlet="contentTpl" />
+		<span class="tableSortable-arrows">
+			<lu-icon icon="chevronTop" class="tableSortable-arrows-ascending" />
+			<lu-icon icon="chevronBottom" class="tableSortable-arrows-descending" />
+		</span>
+	</button>
+} @else {
+	<ng-container *ngTemplateOutlet="contentTpl" />
+}
+
+<ng-template #contentTpl><ng-content /></ng-template>

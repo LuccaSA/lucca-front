@@ -3,20 +3,22 @@
 	--components-options-item-padding-horizontal: calc(var(--pr-t-spacings-100) + var(--pr-t-spacings-100) * var(--components-treeBranch-level)) var(--pr-t-spacings-100);
 }
 
-lu-tree-branch {
+@layer components {
 	lu-tree-branch {
-		lu-select-option {
-			@include nestedSimple($level: 1);
+		lu-tree-branch {
+			lu-select-option {
+				@include nestedSimple($level: 1);
+			}
 		}
-	}
 
-	.optionItem-icons {
-		opacity: 0;
-	}
-
-	.optionItem.is-highlighted, .optionItem-value:hover {
 		.optionItem-icons {
-			opacity: 1;
+			opacity: 0;
+		}
+
+		.optionItem.is-highlighted, .optionItem-value:hover {
+			.optionItem-icons {
+				opacity: 1;
+			}
 		}
 	}
 }
@@ -32,21 +34,23 @@ lu-tree-branch {
 	}
 }
 
-.lu-picker-panel.lu-option-picker-panel.mod-multiple {
-	lu-tree-branch {
-		lu-select-option {
-			@include nestedMulti($level: 1);
+@layer mods {
+	.lu-picker-panel.lu-option-picker-panel.mod-multiple {
+		lu-tree-branch {
+			lu-select-option {
+				@include nestedMulti($level: 1);
 
-			margin-block-start: var(--pr-t-spacings-50);
+				margin-block-start: var(--pr-t-spacings-50);
+			}
 		}
-	}
 
-	.lu-picker-content-option {
-		gap: 0;
+		.lu-picker-content-option {
+			gap: 0;
 
-		> lu-tree-branch:first-of-type {
-			> lu-select-option:first-of-type {
-				margin-block-start: 0;
+			> lu-tree-branch:first-of-type {
+				> lu-select-option:first-of-type {
+					margin-block-start: 0;
+				}
 			}
 		}
 	}

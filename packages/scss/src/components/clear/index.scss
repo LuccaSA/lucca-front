@@ -1,30 +1,42 @@
 @use 'exports' as *;
 
 .clear {
-	@include vars;
-	@include component;
-
-	&.mod-S {
-		@include S;
+	@layer components {
+		@include vars;
+		@include component;
 	}
 
-	// .palette-primary is deprecated
-	&.palette-product:not([disabled]),
-	&.palette-primary:not([disabled]) {
-		@include product;
-	}
-
-	&.mod-inverted:not([disabled]) {
-		@include inverted;
-
-		&.palette-product:not([disabled]) {
-			@include invertedProduct;
+	@layer mods {
+		&.mod-S {
+			@include S;
 		}
-	}
 
-	&[disabled] {
-		@include disabled;
+		// .palette-primary is deprecated
+		&.palette-product,
+		&.palette-primary {
+			@include product;
+		}
 
-		cursor: default;
+		&.mod-inverted {
+			@include inverted;
+
+			&:where(.palette-product) {
+				@include invertedProduct;
+			}
+		}
+
+		&[disabled] {
+			cursor: default;
+
+			@include disabled;
+		}
+
+		&[hidden],
+		.filterPill[disabled] &,
+		.filterPill:not(.is-filled) &,
+		.textfield-input[disabled] &,
+		.textfield-input:not(.is-filled) & {
+			@include hidden;
+		}
 	}
 }

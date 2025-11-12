@@ -3,16 +3,20 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormFieldComponent } from '@lucca-front/ng/form-field';
 import { TextInputComponent } from '@lucca-front/ng/forms';
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { HiddenArgType } from 'stories/helpers/common-arg-types';
 import { cleanupTemplate, generateInputs } from 'stories/helpers/stories';
 import { StoryModelDisplayComponent } from 'stories/helpers/story-model-display.component';
+import { LOCALE_ID } from '@angular/core';
 
 export default {
 	title: 'Documentation/Forms/Fields/TextField/Angular',
 	decorators: [
 		moduleMetadata({
 			imports: [TextInputComponent, FormFieldComponent, FormsModule, ReactiveFormsModule, BrowserAnimationsModule, AsyncPipe, StoryModelDisplayComponent],
+		}),
+		applicationConfig({
+			providers: [{ provide: LOCALE_ID, useValue: 'fr-FR' }],
 		}),
 	],
 	argTypes: {
@@ -56,6 +60,9 @@ export default {
 				type: 'select',
 			},
 			description: '[v19.2]',
+		},
+		AI: {
+			description: '[v20.3]',
 		},
 	},
 } as Meta;
@@ -112,6 +119,55 @@ export const Basic: StoryObj<TextInputComponent & { disabled: boolean; required:
 		AI: false,
 		iconAIalt: 'Assistant IA',
 		iconAItooltip: 'Donnée remplie automatiquement',
+	},
+};
+
+export const IBANFormat: StoryObj<TextInputComponent & { disabled: boolean; required: boolean } & FormFieldComponent> = {
+	render: (args, { argTypes }) => {
+		const { counter, label, hiddenLabel, tooltip, tag, inlineMessage, inlineMessageState, size, width, ...inputArgs } = args;
+		return {
+			template: cleanupTemplate(`<lu-form-field ${generateInputs(
+				{
+					label,
+					hiddenLabel,
+					tooltip,
+					tag,
+					inlineMessage,
+					inlineMessageState,
+					size,
+					counter,
+					width,
+				},
+				argTypes,
+			)}>
+	<lu-text-input
+	${generateInputs(inputArgs, argTypes)}
+		[(ngModel)]="example" mask="SS00 AAAA 0000 0000 0000 9999 9999 9999 99">
+	</lu-text-input>
+</lu-form-field>
+{{example}}`),
+			moduleMetadata: {
+				imports: [TextInputComponent, FormFieldComponent, FormsModule, BrowserAnimationsModule],
+			},
+		};
+	},
+	args: {
+		label: 'Label',
+		required: true,
+		hiddenLabel: false,
+		hasClearer: false,
+		hasSearchIcon: false,
+		autocomplete: '',
+		searchIcon: 'searchMagnifyingGlass',
+		disabled: false,
+		inlineMessage: 'Helper text',
+		inlineMessageState: 'default',
+		type: 'text',
+		placeholder: 'Placeholder',
+		tooltip: 'Je suis un message d’aide',
+		tag: '',
+		counter: 0,
+		valueAlignRight: false,
 	},
 };
 

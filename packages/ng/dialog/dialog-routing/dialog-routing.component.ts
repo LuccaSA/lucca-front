@@ -189,6 +189,8 @@ export class DialogRoutingContainerComponent<C> implements OnDestroy, OnInit {
 				defaultOnClosedFn();
 			}
 		});
+
+		this.#ref = undefined;
 	}
 
 	#onDialogClosed(result: LuDialogResult<C>): void {
@@ -210,6 +212,8 @@ export class DialogRoutingContainerComponent<C> implements OnDestroy, OnInit {
 				defaultOnClosedFn();
 			}
 		});
+
+		this.#ref = undefined;
 	}
 
 	async #resolve<T>(resolveFn: DialogResolveFn<T>): Promise<T | undefined> {

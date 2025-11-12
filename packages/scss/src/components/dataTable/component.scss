@@ -22,9 +22,18 @@
 			overflow: var(--components-dataTable-overflow);
 			background-color: var(--components-dataTable-cell-background);
 			contain: paint; // Fix overflow on webkit when table has scroll
+			display: block;
 
 			&:focus-visible {
 				@include a11y.focusVisible;
+			}
+		}
+
+		.dataTableWrapper-pagination {
+			border-block-start: 1px solid var(--commons-border-200);
+
+			&:empty {
+				display: none;
 			}
 		}
 
@@ -67,6 +76,7 @@
 			text-align: var(--components-dataTable-cell-textAlign);
 			transition-property: background-color;
 			transition-duration: var(--commons-animations-durations-fast);
+			font-weight: var(--pr-t-font-fontWeight-regular);
 
 			&:first-child {
 				inline-size: var(--components-dataTable-cellFirst-width);
@@ -90,6 +100,12 @@
 
 		.dataTable-body-row-cell {
 			vertical-align: var(--components-dataTable-cell-verticalAlign);
+
+			&:first-child {
+				&:has(.checkboxField-input) {
+					padding-bottom: var(--pr-t-spacings-150);
+				}
+			}
 		}
 
 		.dataTable-foot-row-cell {
@@ -104,6 +120,7 @@
 
 		.dataTable-body-row-cell-expand-button.button {
 			vertical-align: top;
+			margin-left: calc(var(--pr-t-spacings-25) * -1);
 
 			.lucca-icon {
 				transform: rotate(var(--components-dataTable-expand-rotation));

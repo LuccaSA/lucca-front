@@ -2,9 +2,7 @@
 
 @if (!filterPillMode) {
 	@if (hasValue() && clearable && (disabled$ | async) === false) {
-		<button role="button" type="button" class="multipleSelect-clear clear" (click)="clearValue($event)">
-			<span class="pr-u-mask">{{ intl.clear }}</span>
-		</button>
+		<lu-clear class="multipleSelect-clear" (onClear)="clearValue($event)">{{ intl.clear }}</lu-clear>
 	}
 
 	<span aria-hidden="true" class="multipleSelect-arrow lucca-icon icon-arrowChevronBottom"></span>
@@ -14,7 +12,7 @@
 <ng-container #filterPillPanelAnchor />
 <ng-container *luFilterPillDisplayer>
 	<div class="multipleSelect-displayer-filter">
-		@if (value?.length === 1) {
+		@if (useSingleOptionDisplayer() && valueLength() === 1) {
 			<div class="multipleSelect-pill-displayer-chip">
 				<ng-container *luOptionOutlet="displayerTpl(); value: value[0]" />
 			</div>
@@ -22,11 +20,12 @@
 	</div>
 </ng-container>
 <ng-container *luFilterPillLabel="let label = label; let colon = colon">
-	@if (value?.length > 1) {
-		<span class="multipleSelect-pill-displayer-label">{{ value?.length }}&nbsp;{{ filterPillLabelPlural }}</span>
+	@let minCount = useSingleOptionDisplayer() ? 1 : 0;
+	@if (valueLength() > minCount) {
+		<span class="multipleSelect-pill-displayer-label">{{ valueLength() }}&nbsp;{{ filterPillLabelPlural }}</span>
 	} @else {
 		{{ label }}
-		@if (value?.length === 1) {
+		@if (valueLength() === 1) {
 			{{ colon }}
 		}
 	}

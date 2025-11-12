@@ -12,28 +12,27 @@ export default {
 			imports: [CalloutFeedbackItemComponent, CalloutFeedbackListComponent, CalloutFeedbackItemComponent, ButtonComponent, BrowserAnimationsModule],
 		}),
 	],
-	render: (args, { argTypes }) => {
+	render: ({ items, ...args }, { argTypes }) => {
+		const itemsContent = `
+			<li lu-callout-feedback-item>
+				<lu-feedback-item-description>Feedback description</lu-feedback-item-description>
+				<button lu-feedback-item-action luButton>Click me!</button>
+				<button lu-feedback-item-action luButton="outlined">Click me!</button>
+			</li>`.repeat(items);
 		return {
-			template: `<lu-callout-popover ${generateInputs(args, argTypes)}>
-		<ul lu-callout-feedback-list palette="neutral">
-			<li lu-callout-feedback-item>
-				<lu-feedback-item-description>
-					 Feedback description.
-				</lu-feedback-item-description>
-				<button lu-feedback-item-action luButton="outlined">Click me !</button>
-				<button lu-feedback-item-action luButton="ghost">Click me but inverted !</button>
-			</li>
-			<li lu-callout-feedback-item>
-				<lu-feedback-item-description>
-					 Feedback description #2.
-				</lu-feedback-item-description>
-				<button lu-feedback-item-action luButton>Click me !</button>
-			</li>
+			template: `<lu-callout-popover${generateInputs(args, argTypes)}>
+		<ul lu-callout-feedback-list palette="neutral">${itemsContent}
 		</ul>
 	</lu-callout-popover>`,
 		};
 	},
 	argTypes: {
+		items: {
+			control: {
+				type: 'number',
+				min: 1,
+			},
+		},
 		icon: {
 			options: [null, 'info', 'success', 'warning', 'error', 'help'],
 			control: {
@@ -46,19 +45,22 @@ export default {
 				type: 'select',
 			},
 		},
-		buttonLabel: {
+		headingHiddenIfSingleItem: {
 			control: {
-				type: 'number',
+				type: 'boolean',
 			},
 		},
 	},
 } as Meta;
 
-export const Template: StoryObj<CalloutPopoverComponent> = {
+export const Template: StoryObj<CalloutPopoverComponent & { items: number }> = {
 	args: {
+		items: 2,
+		buttonLabel: '2',
+		buttonAlt: '2 errors',
 		state: null,
-		buttonLabel: '1',
-		heading: 'List title',
+		heading: '',
+		headingHiddenIfSingleItem: false,
 		icon: 'signInfo',
 		palette: 'none',
 		closeDelay: 500,

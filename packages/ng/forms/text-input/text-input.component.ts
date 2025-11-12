@@ -1,9 +1,11 @@
-import { NgIf, NgTemplateOutlet } from '@angular/common';
-import { booleanAttribute, Component, ElementRef, EventEmitter, Input, Output, ViewChild, ViewEncapsulation } from '@angular/core';
+import { NgTemplateOutlet } from '@angular/common';
+import { booleanAttribute, Component, ElementRef, EventEmitter, input, Input, Output, ViewChild, ViewEncapsulation } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LuccaIcon } from '@lucca-front/icons';
+import { ClearComponent } from '@lucca-front/ng/clear';
 import { getIntl } from '@lucca-front/ng/core';
-import { FormFieldComponent, InputDirective } from '@lucca-front/ng/form-field';
+import { InputDirective } from '@lucca-front/ng/form-field';
+import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 import { FormFieldIdDirective } from '../form-field-id.directive';
 import { injectNgControl } from '../inject-ng-control';
 import { NoopValueAccessorDirective } from '../noop-value-accessor.directive';
@@ -15,13 +17,16 @@ type TextFieldType = 'text' | 'email' | 'password' | 'url';
 @Component({
 	selector: 'lu-text-input',
 	standalone: true,
-	imports: [FormFieldComponent, InputDirective, NgIf, ReactiveFormsModule, FormFieldIdDirective, NgTemplateOutlet],
+	imports: [InputDirective, ReactiveFormsModule, FormFieldIdDirective, NgTemplateOutlet, NgxMaskDirective, ClearComponent],
 	templateUrl: './text-input.component.html',
 	hostDirectives: [NoopValueAccessorDirective],
 	encapsulation: ViewEncapsulation.None,
+	providers: [provideNgxMask()],
 })
 export class TextInputComponent {
 	ngControl = injectNgControl();
+
+	mask = input<string | null>(null);
 
 	@Input()
 	placeholder: string = '';

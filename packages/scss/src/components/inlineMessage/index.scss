@@ -1,22 +1,26 @@
 @use 'exports' as *;
 
 .inlineMessage {
-	@include vars;
-	@include component;
-
-	&.mod-S {
-		@include S;
+	@layer components {
+		@include vars;
+		@include component;
 	}
 
-	&.is-success {
-		@include success;
-	}
+	@layer mods {
+		&.mod-S {
+			@include S;
+		}
 
-	&.is-warning {
-		@include warning;
-	}
+		&.is-success {
+			@include success;
+		}
 
-	&.is-error {
-		@include error;
+		&.is-warning {
+			@include warning;
+		}
+
+		&.is-error {
+			@include error;
+		}
 	}
 }
