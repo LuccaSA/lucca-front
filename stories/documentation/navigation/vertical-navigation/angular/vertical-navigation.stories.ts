@@ -20,7 +20,7 @@ export default {
 		}),
 	],
 	render: (args: VerticalNavigationStories) => {
-		const heading = ` headingLabel="${args.heading ? args.heading : ''}"`;
+		const heading = ` heading="${args.heading ? args.heading : ''}"`;
 		return {
 			template: `<lu-vertical-navigation${heading}>
 	<lu-vertical-navigation-group label="Group 1" icon="heart">
